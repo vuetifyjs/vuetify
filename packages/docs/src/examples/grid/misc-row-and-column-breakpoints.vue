@@ -21,10 +21,14 @@
 
 <script setup>
   import { computed } from 'vue'
+  import { useDisplay } from 'vuetify'
+
+  const { lg, sm } = useDisplay()
 
   const cols = computed(() => {
-    const { lg, sm } = ctx.root.$vuetify.display
-    return lg ? [3, 9] : sm ? [9, 3] : [6, 6]
+    return lg.value ? [3, 9]
+      : sm.value ? [9, 3]
+        : [6, 6]
   })
 </script>
 
@@ -33,7 +37,9 @@
     computed: {
       cols () {
         const { lg, sm } = this.$vuetify.display
-        return lg ? [3, 9] : sm ? [9, 3] : [6, 6]
+        return lg ? [3, 9]
+          : sm ? [9, 3]
+            : [6, 6]
       },
     },
   }

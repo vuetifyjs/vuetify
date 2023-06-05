@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { nextTick, ref } from 'vue'
 
   const showMenu = ref(false)
   const x = ref(0)
@@ -49,7 +49,7 @@
     showMenu.value = false
     x.value = e.clientX
     y.value = e.clientY
-    ctx.root.$nextTick(() => {
+    nextTick(() => {
       showMenu.value = true
     })
   }

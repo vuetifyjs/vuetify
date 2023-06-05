@@ -151,7 +151,7 @@
 </template>
 
 <script setup>
-  import { computed, ref, watch } from 'vue'
+  import { computed, nextTick, ref, watch } from 'vue'
 
   const dialog = ref(false)
   const dialogDelete = ref(false)
@@ -277,14 +277,14 @@
   }
   function close () {
     dialog.value = false
-    ctx.root.$nextTick(() => {
+    nextTick(() => {
       editedItem.value = Object.assign({}, defaultItem.value)
       editedIndex.value = -1
     })
   }
   function closeDelete () {
     dialogDelete.value = false
-    ctx.root.$nextTick(() => {
+    nextTick(() => {
       editedItem.value = Object.assign({}, defaultItem.value)
       editedIndex.value = -1
     })

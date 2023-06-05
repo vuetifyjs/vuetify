@@ -80,7 +80,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { nextTick, ref } from 'vue'
 
   const currentItem = ref('tab-Web')
   const items = ref([
@@ -101,7 +101,7 @@
     const removed = items.value.splice(0, 1)
     items.value.push(...more.value.splice(more.value.indexOf(item), 1))
     more.value.push(...removed)
-    ctx.root.$nextTick(() => { currentItem.value = 'tab-' + item })
+    nextTick(() => { currentItem.value = 'tab-' + item })
   }
 </script>
 
