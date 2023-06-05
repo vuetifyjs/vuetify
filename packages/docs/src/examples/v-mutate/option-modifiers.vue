@@ -60,17 +60,6 @@
   </div>
 </template>
 
-<script setup>
-  import { ref } from 'vue'
-
-  const content = ref(false)
-  const card1 = ref(0)
-  const card2 = ref(0)
-  function onMutate (card) {
-    this[card]++
-  }
-</script>
-
 <script>
   export default {
     data: () => ({
