@@ -15,16 +15,24 @@
   const value = ref(0)
   const query = ref(false)
   const show = ref(true)
-  const interval = ref(0)
+
+  let interval = -1
+  onMounted(() => {
+    queryAndIndeterminate()
+  })
+  onBeforeUnmount(() => {
+    clearInterval(interval)
+  })
+
   function queryAndIndeterminate () {
     query.value = true
     show.value = true
     value.value = 0
     setTimeout(() => {
       query.value = false
-      interval.value = setInterval(() => {
+      interval = setInterval(() => {
         if (value.value === 100) {
-          clearInterval(interval.value)
+          clearInterval(interval)
           show.value = false
           return setTimeout(queryAndIndeterminate, 2000)
         }
@@ -32,12 +40,6 @@
       }, 1000)
     }, 2500)
   }
-  onMounted(() => {
-    queryAndIndeterminate()
-  })
-  onBeforeUnmount(() => {
-    clearInterval(interval.value)
-  })
 </script>
 
 <script>

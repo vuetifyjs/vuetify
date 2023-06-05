@@ -66,6 +66,7 @@
   const date = ref(format(parseISO(new Date().toISOString()), 'yyyy-MM-dd'))
   const menu1 = ref(false)
   const menu2 = ref(false)
+
   const computedDateFormattedMomentjs = computed(() => {
     return date.value ? moment(date.value).format('dddd, MMMM Do YYYY') : ''
   })

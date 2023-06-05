@@ -20,9 +20,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const items = ref(['Foo', 'Bar', 'Fizz', 'Buzz'])
+  const items = ['Foo', 'Bar', 'Fizz', 'Buzz']
 </script>
 
 <script>

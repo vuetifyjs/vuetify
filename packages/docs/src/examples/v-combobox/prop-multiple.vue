@@ -62,12 +62,13 @@
   import { ref } from 'vue'
 
   const select = ref(['Vuetify', 'Programming'])
-  const items = ref([
+
+  const items = [
     'Programming',
     'Design',
     'Vue',
     'Vuetify',
-  ])
+  ]
 </script>
 
 <script>

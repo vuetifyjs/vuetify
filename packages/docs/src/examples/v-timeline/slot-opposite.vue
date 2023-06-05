@@ -25,9 +25,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const years = ref([
+  const years = [
     {
       color: 'cyan',
       year: '1960',
@@ -48,7 +46,7 @@
       color: 'orange',
       year: '2000',
     },
-  ])
+  ]
 </script>
 
 <script>

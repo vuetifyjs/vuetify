@@ -26,7 +26,6 @@
   import { ref } from 'vue'
 
   const expanded = ref([])
-  const singleExpand = ref(false)
   const dessertHeaders = ref([
     {
       title: 'Dessert (100g serving)',
@@ -130,7 +129,6 @@
     data () {
       return {
         expanded: [],
-        singleExpand: false,
         dessertHeaders: [
           {
             title: 'Dessert (100g serving)',

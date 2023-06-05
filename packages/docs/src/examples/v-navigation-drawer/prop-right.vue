@@ -26,27 +26,3 @@
     </v-layout>
   </v-card>
 </template>
-
-<script setup>
-  import { ref } from 'vue'
-
-  const items = ref([
-    { title: 'Home', icon: 'mdi-home-city' },
-    { title: 'My Account', icon: 'mdi-account' },
-    { title: 'Users', icon: 'mdi-account-group-outline' },
-  ])
-</script>
-
-<script>
-  export default {
-    data () {
-      return {
-        items: [
-          { title: 'Home', icon: 'mdi-home-city' },
-          { title: 'My Account', icon: 'mdi-account' },
-          { title: 'Users', icon: 'mdi-account-group-outline' },
-        ],
-      }
-    },
-  }
-</script>

@@ -23,13 +23,11 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const items = ref([
+  const items = [
     { text: 'Real-Time', icon: 'mdi-clock' },
     { text: 'Audience', icon: 'mdi-account' },
     { text: 'Conversions', icon: 'mdi-flag' },
-  ])
+  ]
 </script>
 
 <script>

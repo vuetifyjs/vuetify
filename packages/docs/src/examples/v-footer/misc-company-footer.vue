@@ -19,16 +19,14 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const links = ref([
+  const links = [
     'Home',
     'About Us',
     'Team',
     'Services',
     'Blog',
     'Contact Us',
-  ])
+  ]
 </script>
 
 <script>

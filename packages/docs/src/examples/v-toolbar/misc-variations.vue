@@ -36,14 +36,12 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const bars = ref([
+  const bars = [
     { class: '' },
     { class: '', dark: true },
     { class: 'primary', dark: true },
     { class: 'elevation-0' },
-  ])
+  ]
 </script>
 
 <script>

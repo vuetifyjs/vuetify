@@ -12,11 +12,9 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const rules = ref({
+  const rules = {
     required: value => !!value || 'Field is required',
-  })
+  }
 </script>
 
 <script>

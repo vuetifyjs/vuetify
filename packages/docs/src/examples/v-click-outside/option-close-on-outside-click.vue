@@ -24,6 +24,7 @@
 
   const active = ref(false)
   const clickOutsideEnabled = ref(false)
+
   function onClickOutside () {
     active.value = false
   }

@@ -2,7 +2,7 @@
   <v-container id="dropdown-example-1">
     <v-overflow-btn
       class="my-2"
-      :items="dropdown_font"
+      :items="dropdownFont"
       menu-props="top"
       label="Overflow Btn w/ hint"
       hint="Select font"
@@ -14,13 +14,13 @@
 <script setup>
   import { ref } from 'vue'
 
-  const dropdown_font = ref(['Arial', 'Calibri', 'Courier', 'Verdana'])
+  const dropdownFont = ref(['Arial', 'Calibri', 'Courier', 'Verdana'])
 </script>
 
 <script>
   export default {
     data: () => ({
-      dropdown_font: ['Arial', 'Calibri', 'Courier', 'Verdana'],
+      dropdownFont: ['Arial', 'Calibri', 'Courier', 'Verdana'],
     }),
   }
 </script>

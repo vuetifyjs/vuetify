@@ -26,9 +26,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const items = ref([
+  const items = [
     {
       color: 'red-lighten-2',
       icon: 'mdi-star',
@@ -45,7 +43,7 @@
       color: 'indigo-lighten-2',
       icon: 'mdi-layers-triple',
     },
-  ])
+  ]
 </script>
 
 <script>

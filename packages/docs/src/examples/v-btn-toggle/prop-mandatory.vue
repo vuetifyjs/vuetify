@@ -17,7 +17,7 @@
 <script setup>
   import { ref } from 'vue'
 
-  const toggle = ref(undefined)
+  const toggle = ref()
 </script>
 
 <script>

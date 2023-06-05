@@ -31,20 +31,21 @@
 <script setup>
   import { ref } from 'vue'
 
-  const items = ref([
+  const location = ref('end')
+
+  const items = [
     { title: 'Click Me' },
     { title: 'Click Me' },
     { title: 'Click Me' },
     { title: 'Click Me 2' },
-  ])
-  const locations = ref([
+  ]
+  const locations = [
     'top',
     'bottom',
     'start',
     'end',
     'center',
-  ])
-  const location = ref('end')
+  ]
 </script>
 
 <script>

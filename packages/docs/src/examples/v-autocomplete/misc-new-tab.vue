@@ -96,8 +96,7 @@
 <script setup>
   import { ref } from 'vue'
 
-  const dialog = ref(false)
-  const items = ref([
+  const items = [
     {
       prependIcon: 'mdi-clock-outline',
       title: 'recipe with chicken',
@@ -118,8 +117,8 @@
       prependIcon: 'mdi-clock-outline',
       title: 'latest fashion trends',
     },
-  ])
-  const shortcuts = ref([
+  ]
+  const shortcuts = [
     {
       icon: 'mdi-github',
       title: 'Master ',
@@ -140,7 +139,9 @@
       title: 'My Pull Requests',
       href: 'https://github.com/vuetifyjs/vuetify/pulls/johnleider',
     },
-  ])
+  ]
+
+  const dialog = ref(false)
 </script>
 
 <script>

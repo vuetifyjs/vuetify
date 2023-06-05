@@ -45,9 +45,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const tags = ref([
+  const tags = [
     'Work',
     'Home Improvement',
     'Vacation',
@@ -57,7 +55,7 @@
     'Art',
     'Tech',
     'Creative Writing',
-  ])
+  ]
 </script>
 
 <script>

@@ -68,7 +68,7 @@
   const border = ref(false)
   const elevation = ref(0)
   const rounded = ref(false)
-  const color = ref(undefined)
+  const color = ref()
   const user = useUserStore()
   const options = []
   const props = computed(() => {

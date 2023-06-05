@@ -86,8 +86,8 @@
   import { computed, ref } from 'vue'
 
   const bpm = ref(40)
-  const interval = ref(null)
   const isPlaying = ref(false)
+
   const color = computed(() => {
     if (bpm.value < 100) { return 'indigo' }
     if (bpm.value < 125) { return 'teal' }
@@ -98,6 +98,7 @@
   const animationDuration = computed(() => {
     return `${60 / bpm.value}s`
   })
+
   function decrement () {
     bpm.value--
   }
@@ -113,7 +114,6 @@
   export default {
     data: () => ({
       bpm: 40,
-      interval: null,
       isPlaying: false,
     }),
 

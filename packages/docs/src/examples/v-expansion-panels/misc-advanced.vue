@@ -165,20 +165,19 @@
 <script setup>
   import { ref } from 'vue'
 
-  const date = ref(null)
+  const locations = ['Australia', 'Barbados', 'Chile', 'Denmark', 'Ecuador', 'France']
+
   const trip = ref({
     name: '',
     location: null,
     start: null,
     end: null,
   })
-  const locations = ref(['Australia', 'Barbados', 'Chile', 'Denmark', 'Ecuador', 'France'])
 </script>
 
 <script>
   export default {
     data: () => ({
-      date: null,
       trip: {
         name: '',
         location: null,

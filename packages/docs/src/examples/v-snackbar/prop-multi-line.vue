@@ -30,7 +30,8 @@
   import { ref } from 'vue'
 
   const snackbar = ref(false)
-  const text = ref(`I am a multi-line snackbar.\nI can have more than one line. This is another line that is quite long.`)
+
+  const text = `I am a multi-line snackbar.\nI can have more than one line. This is another line that is quite long.`
 </script>
 
 <script>

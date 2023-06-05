@@ -15,12 +15,13 @@
   import { ref } from 'vue'
 
   const firstName = ref('')
-  const rules = ref([
+
+  const rules = [
     value => {
-      if (value) { return true }
+      if (value) return true
       return 'You must enter a first name.'
     },
-  ])
+  ]
 </script>
 
 <script>

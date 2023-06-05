@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-  import { computed, ref } from 'vue'
+  import { computed } from 'vue'
 
   const desserts = [
     {
@@ -95,7 +95,7 @@
       iron: 6,
     },
   ]
-  const headers = ref([
+  const headers = [
     {
       title: 'Dessert (100g serving)',
       align: 'start',
@@ -107,7 +107,8 @@
     { title: 'Carbs (g)', key: 'carbs' },
     { title: 'Protein (g)', key: 'protein' },
     { title: 'Iron (%)', key: 'iron' },
-  ])
+  ]
+
   const items = computed(() => {
     return [...new Array(100)].reduce(items => {
       items.push(...desserts)

@@ -13,7 +13,8 @@
 
   const sortBy = ref([{ key: 'name', order: 'asc' }])
   const groupBy = ref([{ key: 'dairy', order: 'asc' }])
-  const headers = ref([
+
+  const headers = [
     {
       title: 'Dessert (100g serving)',
       align: 'start',
@@ -22,8 +23,8 @@
     },
     { title: 'Category', key: 'category', align: 'end' },
     { title: 'Dairy', key: 'dairy', align: 'end' },
-  ])
-  const desserts = ref([
+  ]
+  const desserts = [
     {
       name: 'Frozen Yogurt',
       category: 'Ice cream',
@@ -74,7 +75,7 @@
       category: 'Candy',
       dairy: 'Yes',
     },
-  ])
+  ]
 </script>
 
 <script>

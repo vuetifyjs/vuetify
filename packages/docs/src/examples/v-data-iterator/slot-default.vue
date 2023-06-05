@@ -46,9 +46,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const desserts = ref([
+  const desserts = [
     {
       name: 'Frozen Yogurt',
       calories: 159,
@@ -89,7 +87,7 @@
       calcium: '3%',
       iron: '8%',
     },
-  ])
+  ]
 </script>
 
 <script>

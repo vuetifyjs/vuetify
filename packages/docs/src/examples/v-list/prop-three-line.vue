@@ -26,9 +26,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const items = ref([
+  const items = [
     { type: 'subheader', title: 'Today' },
     {
       prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
@@ -59,7 +57,7 @@
       title: 'Recipe to try',
       subtitle: '<span class="text-primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
     },
-  ])
+  ]
 </script>
 
 <script>

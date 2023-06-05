@@ -15,6 +15,7 @@
   import { ref } from 'vue'
 
   const items = ref(Array.from({ length: 50 }, (k, v) => v + 1))
+
   function load ({ done }) {
     setTimeout(() => {
       items.value.push(...Array.from({ length: 10 }, (k, v) => v + items.value.at(-1) + 1))

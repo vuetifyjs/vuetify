@@ -45,7 +45,7 @@
 <script setup>
   import { computed, ref } from 'vue'
 
-  const fruits = ref([
+  const fruits = [
     'Apples',
     'Apricots',
     'Avocado',
@@ -92,8 +92,10 @@
     'Tomatoes',
     'Watermelons',
     'Zucchini',
-  ])
+  ]
+
   const selectedFruits = ref([])
+
   const likesAllFruit = computed(() => {
     return selectedFruits.value.length === fruits.value.length
   })
@@ -110,6 +112,7 @@
     if (likesSomeFruit.value) { return selectedFruits.value.length }
     return 'Go ahead, make a selection above!'
   })
+
   function toggle () {
     if (likesAllFruit.value) {
       selectedFruits.value = []

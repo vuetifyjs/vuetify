@@ -17,7 +17,8 @@
 <script setup>
   import { ref } from 'vue'
 
-  const colors = ref(['green', 'purple', 'orange', 'indigo', 'red'])
+  const colors = ['green', 'purple', 'orange', 'indigo', 'red']
+
   const rating = ref(4.5)
 </script>
 

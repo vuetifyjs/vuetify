@@ -23,7 +23,8 @@
   import { ref } from 'vue'
 
   const search = ref('')
-  const headers = ref([
+
+  const headers = [
     {
       align: 'start',
       key: 'name',
@@ -35,8 +36,8 @@
     { key: 'carbs', title: 'Carbs (g)' },
     { key: 'protein', title: 'Protein (g)' },
     { key: 'iron', title: 'Iron (%)' },
-  ])
-  const desserts = ref([
+  ]
+  const desserts = [
     {
       name: 'Frozen Yogurt',
       calories: 159,
@@ -117,7 +118,7 @@
       protein: 7,
       iron: 6,
     },
-  ])
+  ]
 </script>
 
 <script>

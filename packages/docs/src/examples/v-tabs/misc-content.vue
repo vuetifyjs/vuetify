@@ -38,7 +38,7 @@
         :value="i"
       >
         <v-card>
-          <v-card-text v-text="text"></v-card-text>
+          <v-card-text>{{ text }}</v-card-text>
         </v-card>
       </v-window-item>
     </v-window>
@@ -48,8 +48,9 @@
 <script setup>
   import { ref } from 'vue'
 
+  const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+
   const model = ref('tab-2')
-  const text = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.')
 </script>
 
 <script>

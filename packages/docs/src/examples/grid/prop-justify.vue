@@ -61,29 +61,3 @@
     </v-row>
   </v-container>
 </template>
-
-<script setup>
-  import { ref } from 'vue'
-
-  const justify = ref([
-    'start',
-    'center',
-    'end',
-    'space-around',
-    'space-between',
-  ])
-</script>
-
-<script>
-  export default {
-    data: () => ({
-      justify: [
-        'start',
-        'center',
-        'end',
-        'space-around',
-        'space-between',
-      ],
-    }),
-  }
-</script>

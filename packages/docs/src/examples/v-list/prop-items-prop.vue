@@ -8,9 +8,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const items = ref([
+  const items = [
     {
       title: 'Item #1',
       value: 1,
@@ -32,7 +30,7 @@
         color: 'primary',
       },
     },
-  ])
+  ]
 </script>
 
 <script>

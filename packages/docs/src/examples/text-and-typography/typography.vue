@@ -11,9 +11,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const classes = ref([
+  const classes = [
     ['Heading 1', 'text-h1'],
     ['Heading 2', 'text-h2'],
     ['Heading 3', 'text-h3'],
@@ -27,7 +25,7 @@
     ['Button', 'text-button'],
     ['Caption', 'text-caption'],
     ['Overline', 'text-overline'],
-  ])
+  ]
 </script>
 
 <script>

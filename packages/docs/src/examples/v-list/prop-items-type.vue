@@ -8,9 +8,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const items = ref([
+  const items = [
     { type: 'subheader', title: 'Group #1' },
     {
       title: 'Item #1',
@@ -38,7 +36,7 @@
       title: 'Item #6',
       value: 6,
     },
-  ])
+  ]
 </script>
 
 <script>

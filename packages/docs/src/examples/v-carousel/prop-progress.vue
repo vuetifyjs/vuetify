@@ -22,15 +22,13 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const slides = ref([
+  const slides = [
     'First',
     'Second',
     'Third',
     'Fourth',
     'Fifth',
-  ])
+  ]
 </script>
 
 <script>

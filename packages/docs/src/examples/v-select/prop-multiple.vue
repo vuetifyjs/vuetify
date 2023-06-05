@@ -13,7 +13,8 @@
   import { ref } from 'vue'
 
   const favorites = ref([])
-  const states = ref([
+
+  const states = [
     'Alabama',
     'Alaska',
     'American Samoa',
@@ -73,7 +74,7 @@
     'West Virginia',
     'Wisconsin',
     'Wyoming',
-  ])
+  ]
 </script>
 
 <script>

@@ -161,9 +161,7 @@
 
   const direction = ref('top')
   const fab = ref(false)
-  const fling = ref(false)
   const hover = ref(false)
-  const tabs = ref(null)
   const top = ref(false)
   const right = ref(true)
   const bottom = ref(true)
@@ -188,9 +186,7 @@
     data: () => ({
       direction: 'top',
       fab: false,
-      fling: false,
       hover: false,
-      tabs: null,
       top: false,
       right: true,
       bottom: true,

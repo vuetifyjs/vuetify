@@ -71,16 +71,17 @@
 <script setup>
   import { ref } from 'vue'
 
-  const hasSaved = ref(false)
-  const isEditing = ref(null)
-  const model = ref(null)
-  const states = ref([
+  const states = [
     { name: 'Florida', abbr: 'FL', id: 1 },
     { name: 'Georgia', abbr: 'GA', id: 2 },
     { name: 'Nebraska', abbr: 'NE', id: 3 },
     { name: 'California', abbr: 'CA', id: 4 },
     { name: 'New York', abbr: 'NY', id: 5 },
-  ])
+  ]
+
+  const hasSaved = ref(false)
+  const isEditing = ref(null)
+
   function customFilter (itemTitle, queryText, item) {
     const textOne = item.raw.name.toLowerCase()
     const textTwo = item.raw.abbr.toLowerCase()
@@ -98,7 +99,6 @@
     data: () => ({
       hasSaved: false,
       isEditing: null,
-      model: null,
       states: [
         { name: 'Florida', abbr: 'FL', id: 1 },
         { name: 'Georgia', abbr: 'GA', id: 2 },

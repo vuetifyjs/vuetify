@@ -101,6 +101,7 @@
     },
   ])
   const newTask = ref(null)
+
   const completedTasks = computed(() => {
     return tasks.value.filter(task => task.done).length
   })
@@ -110,6 +111,7 @@
   const remainingTasks = computed(() => {
     return tasks.value.length - completedTasks.value
   })
+
   function create () {
     tasks.value.push({
       done: false,

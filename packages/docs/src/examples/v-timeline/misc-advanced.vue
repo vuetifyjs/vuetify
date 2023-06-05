@@ -160,6 +160,7 @@
   const timeline = computed(() => {
     return events.value.slice().reverse()
   })
+
   function comment () {
     const time = (new Date()).toTimeString()
     events.value.push({

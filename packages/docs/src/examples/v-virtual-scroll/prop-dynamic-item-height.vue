@@ -18,11 +18,7 @@
 </template>
 
 <script setup>
-  import { computed } from 'vue'
-
-  const items = computed(() => {
-    return Array.from({ length: 1000 }, (k, v) => v + 1)
-  })
+  const items = Array.from({ length: 1000 }, (k, v) => v + 1)
 </script>
 
 <script>

@@ -22,19 +22,20 @@
   import { ref } from 'vue'
 
   const firstName = ref('')
-  const firstNameRules = ref([
+  const firstNameRules = [
     value => {
       if (value?.length > 3) { return true }
       return 'First name must be at least 3 characters.'
     },
-  ])
+  ]
+
   const lastName = ref('123')
-  const lastNameRules = ref([
+  const lastNameRules = [
     value => {
       if (/[^0-9]/.test(value)) { return true }
       return 'Last name can not contain digits.'
     },
-  ])
+  ]
 </script>
 
 <script>

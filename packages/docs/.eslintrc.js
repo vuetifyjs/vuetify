@@ -35,6 +35,7 @@ module.exports = {
         'import/first': 'off',
         'import/no-duplicates': 'off',
         'no-redeclare': 'off',
+        'no-use-before-define': 'off',
       },
     },
     {

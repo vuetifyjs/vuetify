@@ -73,9 +73,7 @@
 
   const alignment = ref(1)
   const formatting = ref([])
-  const numbers = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])
-  const letters = ref('qwertyuiop'.split(''))
-  const value = ref('Toggle button requirements.\r\rHave at least three toggle buttons in a group\rLabel buttons with text, an icon, or')
+  const value = ref('Toggle button requirements.\n\nHave at least three toggle buttons in a group\nLabel buttons with text, an icon, or')
 </script>
 
 <script>
@@ -83,9 +81,7 @@
     data: () => ({
       alignment: 1,
       formatting: [],
-      numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
-      letters: 'qwertyuiop'.split(''),
-      value: 'Toggle button requirements.\r\rHave at least three toggle buttons in a group\rLabel buttons with text, an icon, or',
+      value: 'Toggle button requirements.\n\nHave at least three toggle buttons in a group\nLabel buttons with text, an icon, or',
     }),
   }
 </script>

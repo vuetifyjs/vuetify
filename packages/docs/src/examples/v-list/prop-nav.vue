@@ -49,10 +49,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const selectedItem = ref(0)
-  const items = ref([
+  const items = [
     { text: 'My Files', icon: 'mdi-folder' },
     { text: 'Shared with me', icon: 'mdi-account-multiple' },
     { text: 'Starred', icon: 'mdi-star' },
@@ -60,13 +57,12 @@
     { text: 'Offline', icon: 'mdi-check-circle' },
     { text: 'Uploads', icon: 'mdi-upload' },
     { text: 'Backups', icon: 'mdi-cloud-upload' },
-  ])
+  ]
 </script>
 
 <script>
   export default {
     data: () => ({
-      selectedItem: 0,
       items: [
         { text: 'My Files', icon: 'mdi-folder' },
         { text: 'Shared with me', icon: 'mdi-account-multiple' },

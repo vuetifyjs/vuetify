@@ -42,6 +42,7 @@
   import { ref } from 'vue'
 
   const active = ref(false)
+
   function onClickOutside () {
     active.value = false
   }

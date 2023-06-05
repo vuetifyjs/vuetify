@@ -52,9 +52,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const items = ref([
+  const items = [
     {
       header: 'Today',
     },
@@ -107,7 +105,7 @@
       title: 'Oui oui',
       subtitle: '<span class="font-weight-bold">Nancy</span> &mdash; Do you see what time it is?',
     },
-  ])
+  ]
 </script>
 
 <script>

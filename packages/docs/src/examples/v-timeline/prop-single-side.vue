@@ -18,9 +18,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const items = ref([
+  const items = [
     {
       id: 1,
       color: 'info',
@@ -31,7 +29,7 @@
       color: 'error',
       icon: 'mdi-alert-circle',
     },
-  ])
+  ]
 </script>
 
 <script>

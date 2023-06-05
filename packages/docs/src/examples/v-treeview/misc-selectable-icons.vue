@@ -98,7 +98,6 @@
   import { computed, ref, watch } from 'vue'
 
   const breweries = ref([])
-  const isLoading = ref(false)
   const tree = ref([])
   const types = ref([])
   const items = computed(() => {
@@ -114,7 +113,8 @@
     }]
   })
   function load () {
-    if (breweries.value.length) { return }
+    if (breweries.value.length) return
+
     return fetch('https://api.openbrewerydb.org/breweries').then(res => res.json()).then(data => (breweries.value = data)).catch(err => console.log(err))
   }
   function getChildren (type) {
@@ -146,7 +146,6 @@
   export default {
     data: () => ({
       breweries: [],
-      isLoading: false,
       tree: [],
       types: [],
     }),

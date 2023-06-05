@@ -38,7 +38,8 @@
     { title: 'Protein (g)', key: 'protein', removable: true },
     { title: 'Iron (%)', key: 'iron', removable: true },
   ])
-  const desserts = ref([
+
+  const desserts = [
     {
       name: 'Frozen Yogurt',
       calories: 159,
@@ -119,7 +120,8 @@
       protein: 7,
       iron: 6,
     },
-  ])
+  ]
+
   function remove (key) {
     headers.value = headers.value.filter(header => header.key !== key)
   }

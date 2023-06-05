@@ -46,9 +46,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const items = ref([
+  const items = [
     {
       action: 'mdi-ticket',
       items: [{ title: 'List Item' }],
@@ -89,7 +87,7 @@
       items: [{ title: 'List Item' }],
       title: 'Promotions',
     },
-  ])
+  ]
 </script>
 
 <script>

@@ -10,18 +10,15 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const search = ref('')
-  const headers = ref([
+  const headers = [
     {
       title: 'Operating System',
       align: 'start',
       key: 'name',
     },
     { title: 'Version', align: 'end', key: 'version' },
-  ])
-  const desserts = ref([
+  ]
+  const desserts = [
     {
       name: 'Windows',
       version: '3.11',
@@ -62,14 +59,13 @@
       name: 'Windows',
       version: '11',
     },
-  ])
+  ]
 </script>
 
 <script>
   export default {
     data () {
       return {
-        search: '',
         headers: [
           {
             title: 'Operating System',

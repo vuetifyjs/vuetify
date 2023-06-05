@@ -55,10 +55,8 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const icons = ref(['mdi-rewind', 'mdi-play', 'mdi-fast-forward'])
-  const items = ref([
+  const icons = ['mdi-rewind', 'mdi-play', 'mdi-fast-forward']
+  const items = [
     {
       title: 'New Releases',
       text: `It's New Release Friday`,
@@ -77,8 +75,8 @@
       subtext: 'Chill beats to mellow you out.',
       img: 'https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80',
     },
-  ])
-  const transparent = ref('rgba(255, 255, 255, 0)')
+  ]
+  const transparent = 'rgba(255, 255, 255, 0)'
 </script>
 
 <script>

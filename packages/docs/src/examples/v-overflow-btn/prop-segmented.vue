@@ -2,7 +2,7 @@
   <v-container id="dropdown-example-2">
     <v-overflow-btn
       class="my-2"
-      :items="dropdown_icon"
+      :items="dropdownIcon"
       label="Overflow Btn w/ segmented"
       segmented
       target="#dropdown-example-2"
@@ -13,7 +13,7 @@
 <script setup>
   import { ref } from 'vue'
 
-  const dropdown_icon = ref([
+  const dropdownIcon = ref([
     { text: 'list', callback: () => console.log('list') },
     { text: 'favorite', callback: () => console.log('favorite') },
     { text: 'delete', callback: () => console.log('delete') },
@@ -23,7 +23,7 @@
 <script>
   export default {
     data: () => ({
-      dropdown_icon: [
+      dropdownIcon: [
         { text: 'list', callback: () => console.log('list') },
         { text: 'favorite', callback: () => console.log('favorite') },
         { text: 'delete', callback: () => console.log('delete') },

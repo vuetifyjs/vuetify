@@ -77,6 +77,7 @@
 
   const message = ref('Hey!')
   const loading = ref(false)
+
   function clickMe () {
     loading.value = true
     message.value = 'Wait for it...'

@@ -23,6 +23,7 @@
 
   const otp = ref('')
   const length = ref(7)
+
   const isActive = computed(() => {
     return otp.value.length === length.value
   })

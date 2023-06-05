@@ -48,8 +48,9 @@
   const email = ref(null)
   const password = ref(null)
   const loading = ref(false)
+
   function onSubmit () {
-    if (!form.value) { return }
+    if (!form.value) return
     loading.value = true
     setTimeout(() => (loading.value = false), 2000)
   }

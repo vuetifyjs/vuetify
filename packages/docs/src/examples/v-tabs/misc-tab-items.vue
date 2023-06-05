@@ -28,8 +28,7 @@
 <script setup>
   import { ref } from 'vue'
 
-  const tab = ref(null)
-  const items = ref([
+  const items = [
     { tab: 'One', content: 'Tab 1 Content' },
     { tab: 'Two', content: 'Tab 2 Content' },
     { tab: 'Three', content: 'Tab 3 Content' },
@@ -40,7 +39,9 @@
     { tab: 'Eight', content: 'Tab 8 Content' },
     { tab: 'Nine', content: 'Tab 9 Content' },
     { tab: 'Ten', content: 'Tab 10 Content' },
-  ])
+  ]
+
+  const tab = ref(null)
 </script>
 
 <script>

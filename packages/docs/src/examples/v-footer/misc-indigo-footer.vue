@@ -25,14 +25,12 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const icons = ref([
+  const icons = [
     'mdi-facebook',
     'mdi-twitter',
     'mdi-linkedin',
     'mdi-instagram',
-  ])
+  ]
 </script>
 
 <script>

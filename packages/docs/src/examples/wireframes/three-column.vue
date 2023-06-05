@@ -78,14 +78,12 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const links = ref([
+  const links = [
     'Dashboard',
     'Messages',
     'Profile',
     'Updates',
-  ])
+  ]
 </script>
 
 <script>

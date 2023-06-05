@@ -24,20 +24,16 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const selectedItem = ref(1)
-  const items = ref([
+  const items = [
     { text: 'Real-Time', icon: 'mdi-clock' },
     { text: 'Audience', icon: 'mdi-account' },
     { text: 'Conversions', icon: 'mdi-flag' },
-  ])
+  ]
 </script>
 
 <script>
   export default {
     data: () => ({
-      selectedItem: 1,
       items: [
         { text: 'Real-Time', icon: 'mdi-clock' },
         { text: 'Audience', icon: 'mdi-account' },

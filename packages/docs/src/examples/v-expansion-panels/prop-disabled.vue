@@ -41,7 +41,6 @@
 
   const panel = ref([0, 1])
   const disabled = ref(false)
-  const readonly = ref(false)
 </script>
 
 <script>
@@ -49,7 +48,6 @@
     data: () => ({
       panel: [0, 1],
       disabled: false,
-      readonly: false,
     }),
   }
 </script>

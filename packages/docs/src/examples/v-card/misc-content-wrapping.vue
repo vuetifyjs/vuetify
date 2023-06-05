@@ -53,9 +53,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const messages = ref([
+  const messages = [
     {
       from: 'You',
       message: `Sure, I'll see you later.`,
@@ -74,7 +72,7 @@
       time: '9:47am',
       color: 'deep-purple-lighten-1',
     },
-  ])
+  ]
 </script>
 
 <script>

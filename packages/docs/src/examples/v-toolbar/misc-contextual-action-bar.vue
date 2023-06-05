@@ -60,8 +60,9 @@
 <script setup>
   import { ref } from 'vue'
 
+  const items = ['Foo', 'Bar', 'Fizz', 'Buzz']
+
   const selection = ref([])
-  const items = ref(['Foo', 'Bar', 'Fizz', 'Buzz'])
 </script>
 
 <script>

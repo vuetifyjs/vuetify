@@ -42,9 +42,7 @@
 <script setup>
   import { ref, watch } from 'vue'
 
-  const drawer = ref(false)
-  const group = ref(null)
-  const items = ref([
+  const items = [
     {
       title: 'Foo',
       value: 'foo',
@@ -61,7 +59,11 @@
       title: 'Buzz',
       value: 'buzz',
     },
-  ])
+  ]
+
+  const drawer = ref(false)
+  const group = ref(null)
+
   watch(group, () => {
     drawer.value = false
   })

@@ -66,8 +66,6 @@
 <script setup>
   import { computed, ref } from 'vue'
 
-  const fab = ref(false)
-  const hidden = ref(false)
   const tabs = ref(null)
   const activeFab = computed(() => {
     switch (tabs.value) {
@@ -82,8 +80,6 @@
 <script>
   export default {
     data: () => ({
-      fab: false,
-      hidden: false,
       tabs: null,
     }),
 

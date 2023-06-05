@@ -33,7 +33,8 @@
 <script setup>
   import { ref } from 'vue'
 
-  const items = ref(['foo', 'bar', 'fizz', 'buzz'])
+  const items = ['foo', 'bar', 'fizz', 'buzz']
+
   const value = ref('foo')
 </script>
 

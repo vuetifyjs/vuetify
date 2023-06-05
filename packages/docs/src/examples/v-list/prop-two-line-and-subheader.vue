@@ -68,9 +68,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const files = ref([
+  const files = [
     {
       color: 'blue',
       icon: 'mdi-clipboard-text',
@@ -83,8 +81,8 @@
       subtitle: 'Jan 10, 2014',
       title: 'Kitchen remodel',
     },
-  ])
-  const folders = ref([
+  ]
+  const folders = [
     {
       subtitle: 'Jan 9, 2014',
       title: 'Photos',
@@ -97,7 +95,7 @@
       subtitle: 'Jan 28, 2014',
       title: 'Work',
     },
-  ])
+  ]
 </script>
 
 <script>

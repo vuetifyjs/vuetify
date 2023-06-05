@@ -45,18 +45,19 @@
 <script setup>
   import { onBeforeUnmount, onMounted, ref } from 'vue'
 
-  const interval = ref({})
   const value = ref(0)
-  onBeforeUnmount(() => {
-    clearInterval(interval.value)
-  })
+
+  let interval = -1
   onMounted(() => {
-    interval.value = setInterval(() => {
+    interval = setInterval(() => {
       if (value.value === 100) {
         return (value.value = 0)
       }
       value.value += 10
     }, 1000)
+  })
+  onBeforeUnmount(() => {
+    clearInterval(interval)
   })
 </script>
 

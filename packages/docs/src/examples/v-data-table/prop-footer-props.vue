@@ -16,17 +16,15 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const headers = ref([
+  const headers = [
     {
       title: 'Dessert (100g serving)',
       align: 'start',
       value: 'name',
     },
     { title: 'Category', value: 'category' },
-  ])
-  const desserts = ref([
+  ]
+  const desserts = [
     {
       name: 'Frozen Yogurt',
       category: 'Ice cream',
@@ -67,7 +65,7 @@
       name: 'KitKat',
       category: 'Candy',
     },
-  ])
+  ]
 </script>
 
 <script>

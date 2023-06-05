@@ -35,7 +35,7 @@
 
   const dialog = ref(false)
   watch(dialog, val => {
-    if (!val) { return }
+    if (!val) return
     setTimeout(() => (dialog.value = false), 4000)
   })
 </script>

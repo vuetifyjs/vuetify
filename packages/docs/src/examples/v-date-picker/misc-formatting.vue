@@ -75,12 +75,18 @@
   import { computed, ref, watch } from 'vue'
 
   const date = ref((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10))
-  const dateFormatted = ref(vm.formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)))
+  const dateFormatted = ref(formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)))
   const menu1 = ref(false)
   const menu2 = ref(false)
+
   const computedDateFormatted = computed(() => {
     return formatDate(date.value)
   })
+
+  watch(date, val => {
+    dateFormatted.value = formatDate(val)
+  })
+
   function formatDate (date) {
     if (!date) { return null }
     const [year, month, day] = date.split('-')
@@ -91,9 +97,6 @@
     const [month, day, year] = date.split('/')
     return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
   }
-  watch(date, val => {
-    dateFormatted.value = formatDate(date.value)
-  })
 </script>
 
 <script>

@@ -57,8 +57,9 @@
   import { ref, watch } from 'vue'
 
   const loading = ref(false)
+
   watch(loading, val => {
-    if (!val) { return }
+    if (!val) return
     setTimeout(() => (loading.value = false), 3000)
   })
 </script>

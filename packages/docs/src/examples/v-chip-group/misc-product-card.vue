@@ -49,15 +49,16 @@
 <script setup>
   import { ref } from 'vue'
 
-  const selection = ref('08')
-  const sizes = ref([
+  const sizes = [
     '04',
     '06',
     '08',
     '10',
     '12',
     '14',
-  ])
+  ]
+
+  const selection = ref('08')
 </script>
 
 <script>

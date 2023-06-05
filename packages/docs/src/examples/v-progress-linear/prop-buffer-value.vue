@@ -31,6 +31,21 @@
   const value = ref(10)
   const bufferValue = ref(20)
   const interval = ref(0)
+
+  watch(value, val => {
+    if (val < 100) return
+    value.value = 0
+    bufferValue.value = 10
+    startBuffer()
+  })
+
+  onMounted(() => {
+    startBuffer()
+  })
+  onBeforeUnmount(() => {
+    clearInterval(interval.value)
+  })
+
   function startBuffer () {
     clearInterval(interval.value)
     interval.value = setInterval(() => {
@@ -38,18 +53,6 @@
       bufferValue.value += Math.random() * (15 - 5) + 6
     }, 2000)
   }
-  watch(value, val => {
-    if (val < 100) { return }
-    value.value = 0
-    bufferValue.value = 10
-    startBuffer()
-  })
-  onMounted(() => {
-    startBuffer()
-  })
-  onBeforeUnmount(() => {
-    clearInterval(interval.value)
-  })
 </script>
 
 <script>

@@ -24,6 +24,7 @@
 
   const loaded = ref(false)
   const loading = ref(false)
+
   function onClick () {
     loading.value = true
     setTimeout(() => {

@@ -14,9 +14,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const headers = ref([
+  const headers = [
     {
       title: 'Dessert (100g serving)',
       align: 'start',
@@ -29,8 +27,8 @@
     { title: 'Protein (g)', key: 'protein' },
     { title: 'Iron (%)', key: 'iron' },
     { title: 'Gluten-Free', key: 'glutenfree' },
-  ])
-  const desserts = ref([
+  ]
+  const desserts = [
     {
       name: 'Frozen Yogurt',
       calories: 159,
@@ -85,7 +83,7 @@
       iron: '6%',
       glutenfree: false,
     },
-  ])
+  ]
 </script>
 
 <script>

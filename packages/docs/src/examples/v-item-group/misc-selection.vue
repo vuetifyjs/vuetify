@@ -36,7 +36,7 @@
 <script setup>
   import { ref } from 'vue'
 
-  const items = ref([
+  const items = [
     {
       src: 'backgrounds/bg.jpg',
     },
@@ -49,7 +49,8 @@
     {
       src: 'backgrounds/md2.jpg',
     },
-  ])
+  ]
+
   const selection = ref([])
 </script>
 

@@ -15,9 +15,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const items = ref([
+  const items = [
     {
       title: 'Dashboard',
       disabled: false,
@@ -33,7 +31,7 @@
       disabled: true,
       href: 'breadcrumbs_link_2',
     },
-  ])
+  ]
 </script>
 
 <script>

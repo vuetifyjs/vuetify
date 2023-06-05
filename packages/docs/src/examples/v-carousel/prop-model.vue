@@ -38,13 +38,14 @@
 <script setup>
   import { ref } from 'vue'
 
-  const colors = ref([
+  const colors = [
     'primary',
     'secondary',
     'yellow darken-2',
     'red',
     'orange',
-  ])
+  ]
+
   const model = ref(0)
 </script>
 

@@ -71,7 +71,7 @@
 <script setup>
   import { ref } from 'vue'
 
-  const cards = ref([
+  const cards = [
     {
       title: 'Homemade Dulce de Leche Ice Cream with Chocolate Chips',
       subtitle: 'Happy Foods',
@@ -87,7 +87,8 @@
       subtitle: 'The Sweeter Side',
       src: 'https://cdn.vuetifyjs.com/docs/images/graphics/peanut-butter-ice-cream.png',
     },
-  ])
+  ]
+
   const loading = ref(true)
 </script>
 

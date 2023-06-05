@@ -26,9 +26,11 @@
 <script setup>
   import { nextTick, ref, watch } from 'vue'
 
-  const items = ref(['Gaming', 'Programming', 'Vue', 'Vuetify'])
+  const items = ['Gaming', 'Programming', 'Vue', 'Vuetify']
+
   const model = ref(['Vuetify'])
   const search = ref(null)
+
   watch(model, val => {
     if (val.length > 5) {
       nextTick(() => model.value.pop())

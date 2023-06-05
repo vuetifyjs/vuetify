@@ -37,9 +37,10 @@
   import { ref } from 'vue'
 
   const value = ref(30)
-  const rules = ref([
+
+  const rules = [
     v => v <= 40 || 'Only 40 in stock',
-  ])
+  ]
 </script>
 
 <script>

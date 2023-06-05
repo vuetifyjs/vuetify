@@ -24,22 +24,20 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const colors = ref([
+  const colors = [
     'indigo',
     'warning',
     'pink darken-2',
     'red lighten-1',
     'deep-purple accent-4',
-  ])
-  const slides = ref([
+  ]
+  const slides = [
     'First',
     'Second',
     'Third',
     'Fourth',
     'Fifth',
-  ])
+  ]
 </script>
 
 <script>

@@ -59,6 +59,7 @@
 
   const length = ref(3)
   const onboarding = ref(0)
+
   function next () {
     onboarding.value = onboarding.value + 1 > length.value ? 1 : onboarding.value + 1
   }

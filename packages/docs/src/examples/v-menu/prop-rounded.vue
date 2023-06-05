@@ -30,15 +30,13 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const btns = ref([
+  const btns = [
     ['Removed', '0'],
     ['Large', 'lg'],
     ['Custom', 'b-xl'],
-  ])
-  const colors = ref(['deep-purple accent-4', 'error', 'teal darken-1'])
-  const items = ref([...Array(4)].map((_, i) => `Item ${i}`))
+  ]
+  const colors = ['deep-purple accent-4', 'error', 'teal darken-1']
+  const items = Array.from({ length: 4 }, (_, i) => `Item ${i}`)
 </script>
 
 <script>

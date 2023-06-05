@@ -18,10 +18,11 @@
 </template>
 
 <script setup>
-  import { computed, ref } from 'vue'
+  import { ref } from 'vue'
 
   const search = ref('')
-  const desserts = ref([
+
+  const desserts = [
     {
       name: 'Frozen Yogurt',
       calories: 159,
@@ -102,26 +103,25 @@
       protein: 7,
       iron: '6%',
     },
-  ])
-  const headers = computed(() => {
-    return [
-      {
-        title: 'Dessert (100g serving)',
-        align: 'start',
-        sortable: false,
-        key: 'name',
-      },
-      {
-        title: 'Calories',
-        align: 'end',
-        key: 'calories',
-      },
-      { title: 'Fat (g)', align: 'end', key: 'fat' },
-      { title: 'Carbs (g)', align: 'end', key: 'carbs' },
-      { title: 'Protein (g)', align: 'end', key: 'protein' },
-      { title: 'Iron (%)', align: 'end', key: 'iron' },
-    ]
-  })
+  ]
+  const headers = [
+    {
+      title: 'Dessert (100g serving)',
+      align: 'start',
+      sortable: false,
+      key: 'name',
+    },
+    {
+      title: 'Calories',
+      align: 'end',
+      key: 'calories',
+    },
+    { title: 'Fat (g)', align: 'end', key: 'fat' },
+    { title: 'Carbs (g)', align: 'end', key: 'carbs' },
+    { title: 'Protein (g)', align: 'end', key: 'protein' },
+    { title: 'Iron (%)', align: 'end', key: 'iron' },
+  ]
+
   function filterOnlyCapsText (value, query, item) {
     return value != null && query != null && typeof value === 'string' && value.toString().toLocaleUpperCase().indexOf(query) !== -1
   }

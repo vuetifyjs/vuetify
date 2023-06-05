@@ -27,14 +27,14 @@
 </template>
 
 <script setup>
-  import { mergeProps, ref } from 'vue'
+  import { mergeProps } from 'vue'
 
-  const items = ref([
-    { title: 'Click Me1' },
-    { title: 'Click Me2' },
-    { title: 'Click Me3' },
-    { title: 'Click Me4' },
-  ])
+  const items = [
+    { title: 'Click Me 1' },
+    { title: 'Click Me 2' },
+    { title: 'Click Me 3' },
+    { title: 'Click Me 4' },
+  ]
 </script>
 
 <script>

@@ -30,12 +30,13 @@
   import { ref } from 'vue'
 
   const showMenu = ref(false)
-  const items = ref([
+
+  const items = [
     { title: 'Click Me' },
     { title: 'Click Me' },
     { title: 'Click Me' },
     { title: 'Click Me 2' },
-  ])
+  ]
 </script>
 
 <script>

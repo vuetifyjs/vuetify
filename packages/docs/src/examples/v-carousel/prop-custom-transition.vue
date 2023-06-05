@@ -12,9 +12,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const items = ref([
+  const items = [
     {
       src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
     },
@@ -27,7 +25,7 @@
     {
       src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
     },
-  ])
+  ]
 </script>
 
 <script>

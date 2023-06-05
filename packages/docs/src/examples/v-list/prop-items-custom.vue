@@ -12,9 +12,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const items = ref([
+  const items = [
     {
       name: 'Item #1',
       id: 1,
@@ -27,7 +25,7 @@
       name: 'Item #3',
       id: 3,
     },
-  ])
+  ]
 </script>
 
 <script>

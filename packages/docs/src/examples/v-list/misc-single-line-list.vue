@@ -66,9 +66,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const recent = ref([
+  const recent = [
     {
       active: true,
       avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
@@ -87,11 +85,11 @@
       avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
       title: 'Ali Connors',
     },
-  ])
-  const previous = ref([{
+  ]
+  const previous = [{
     title: 'Travis Howard',
     avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-  }])
+  }]
 </script>
 
 <script>
