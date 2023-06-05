@@ -448,11 +448,11 @@ export const VCombobox = genericComponent<new <
                       onKeydown={ onListKeydown }
                       onScrollPassive={ onListScroll }
                     >
+                      { slots['prepend-item']?.() }
+
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />
                       ))}
-
-                      { slots['prepend-item']?.() }
 
                       <VVirtualScroll renderless items={ displayItems.value }>
                         { ({ item, index, itemRef }) => {

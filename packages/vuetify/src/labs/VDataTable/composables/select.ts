@@ -42,8 +42,8 @@ type SelectionProps = Pick<DataTableItemProps, 'itemValue'> & {
 const singleSelectStrategy: DataTableSelectStrategy = {
   showSelectAll: false,
   allSelected: () => [],
-  select: ({ items }) => {
-    return new Set([items[0]?.value])
+  select: ({ items, value }) => {
+    return new Set(value ? [items[0]?.value] : [])
   },
   selectAll: ({ selected }) => selected,
 }

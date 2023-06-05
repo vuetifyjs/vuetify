@@ -82,7 +82,7 @@ describe('VAutocomplete', () => {
       />
     ))
 
-    cy.get('.mdi-menu-down').click()
+    cy.get('.v-autocomplete__menu-icon').click()
 
     cy.get('.v-list-item--active').should('have.length', 2)
     cy.get('.v-list-item--active input').eq(0).click()
@@ -127,7 +127,7 @@ describe('VAutocomplete', () => {
       />
     ))
 
-    cy.get('.mdi-menu-down').click()
+    cy.get('.v-autocomplete__menu-icon').click()
 
     cy.get('.v-list-item--active').should('have.length', 1)
     cy.get('.v-list-item--active input').click()
@@ -263,7 +263,7 @@ describe('VAutocomplete', () => {
         />
       ))
 
-      cy.get('.mdi-menu-down').click()
+      cy.get('.v-autocomplete__menu-icon').click()
 
       cy.get('.v-overlay__content .v-list-item').should('have.length', 2)
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 3')
