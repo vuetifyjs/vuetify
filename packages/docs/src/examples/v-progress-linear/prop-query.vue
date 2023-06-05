@@ -35,7 +35,7 @@
   onMounted(() => {
     queryAndIndeterminate()
   })
-  onBeforeUnmount(function beforeUnmount () {
+  onBeforeUnmount(() => {
     clearInterval(interval.value)
   })
 </script>

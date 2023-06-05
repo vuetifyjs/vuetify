@@ -47,7 +47,7 @@
   onMounted(() => {
     startBuffer()
   })
-  onBeforeUnmount(function beforeUnmount () {
+  onBeforeUnmount(() => {
     clearInterval(interval.value)
   })
 </script>

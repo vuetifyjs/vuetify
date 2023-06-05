@@ -302,10 +302,8 @@
   })
   watch(dialogDelete, val => {
     val || closeDelete()
-  });
-  (function created () {
-    initialize()
-  })()
+  })
+  initialize()
 </script>
 
 <script>

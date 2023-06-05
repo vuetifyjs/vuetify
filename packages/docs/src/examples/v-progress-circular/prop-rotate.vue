@@ -47,7 +47,7 @@
 
   const interval = ref({})
   const value = ref(0)
-  onBeforeUnmount(function beforeUnmount () {
+  onBeforeUnmount(() => {
     clearInterval(interval.value)
   })
   onMounted(() => {

@@ -72,9 +72,7 @@
     heartbeats.value = Array.from({ length: 20 }, heartbeat)
     checking.value = false
   }
-  (function created () {
-    takePulse(false)
-  })()
+  takePulse(false)
 </script>
 
 <script>
