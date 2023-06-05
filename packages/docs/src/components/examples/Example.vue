@@ -104,6 +104,7 @@
   import { upperFirst } from 'lodash-es'
 
   const { t } = useI18n()
+  const userStore = useUserStore()
 
   const props = defineProps({
     inline: Boolean,
@@ -117,19 +118,13 @@
   })
 
   function parseTemplate (target: string, template: string) {
-    const regexStrings: Record<string, string> = {
-      composition: `(<script setup>[\\w\\W]*?<\\/script>)`,
-      options: `(<script>[\\w\\W]*?<\\/script>)`,
-    }
-    const pattern = regexStrings?.[target] || `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`
-    const regex = new RegExp(pattern, 'g')
-    const parsed = regex.exec(template) || []
+    const pattern = {
+      composition: /(<script setup>[\w\W]*?<\/script>)/g,
+      options: /(<script>[\w\W]*?<\/script>)/g,
+    }[target] || new RegExp(`(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`, 'g')
+    const parsed = pattern.exec(template)
 
-    if (parsed[1] && target === 'composition') {
-      hasComposition.value = true
-    }
-
-    return parsed[1] || ''
+    return parsed?.[1]
   }
 
   const isLoaded = ref(false)
@@ -141,11 +136,33 @@
 
   const component = shallowRef()
   const code = ref<string>()
-  const sections = ref<{ name: string, content: string, language: string }[]>([])
   const ExampleComponent = computed(() => {
     return isError.value ? ExampleMissing : isLoaded.value ? component.value : null
   })
-  const hasComposition = ref(false)
+  const sections = computed(() => {
+    const _code = code.value
+    if (!_code) return []
+    const scriptContent = parseTemplate(userStore.composition, _code) ??
+      parseTemplate({ composition: 'options', options: 'composition' }[userStore.composition], _code)
+
+    return [
+      {
+        name: 'template',
+        language: 'html',
+        content: parseTemplate('template', _code),
+      },
+      {
+        name: 'script',
+        language: 'javascript',
+        content: scriptContent,
+      },
+      {
+        name: 'style',
+        language: 'css',
+        content: parseTemplate('style', _code),
+      },
+    ].filter(v => v.content) as { name: string, content: string, language: string }[]
+  })
 
   onMounted(importExample)
 
@@ -157,28 +174,6 @@
       } = await getExample(props.file)
       component.value = _component
       code.value = _code
-      sections.value = [
-        {
-          name: 'template',
-          language: 'html',
-          content: parseTemplate('template', _code),
-        },
-        {
-          name: 'composition',
-          language: 'javascript',
-          content: parseTemplate('composition', _code),
-        },
-        {
-          name: 'options',
-          language: 'javascript',
-          content: parseTemplate('options', _code),
-        },
-        {
-          name: 'style',
-          language: 'css',
-          content: parseTemplate('style', _code),
-        },
-      ].filter(v => v.content)
       isLoaded.value = true
       isError.value = false
     } catch (e) {
@@ -203,12 +198,10 @@
     if (!isLoaded.value || isError.value) return null
 
     const resources = JSON.parse(component.value.playgroundResources || '{}')
-    const scriptType = useUserStore().composition === 'composition' && hasComposition.value ? 'composition' : 'options'
     return usePlayground(
       sections.value,
       resources.css,
       resources.imports,
-      scriptType,
     )
   })
 

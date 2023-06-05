@@ -14,12 +14,11 @@ function utoa (data: string): string {
 export function usePlayground (
   sections: ({ name: string, content: string, language: string})[] = [],
   css: string[] = [],
-  imports: Record<string, string> = {},
-  scriptType?: ('options' | 'composition'),
+  imports: Record<string, string> = {}
 ) {
   const files = {
     'App.vue': sections
-      .filter(section => [scriptType, 'template', 'style'].includes(section.name))
+      .filter(section => ['script', 'template', 'style'].includes(section.name))
       .map(section => section.content)
       .join('\n\n'),
     'links.json': JSON.stringify({ css }),
