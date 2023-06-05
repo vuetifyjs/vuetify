@@ -49,10 +49,7 @@
 </template>
 
 <script setup>
-  import { computed, ref } from 'vue'
-
-  const itemsPerPageArray = ref([3, 6, 9])
-  const desserts = ref([
+  const desserts = [
     {
       name: 'Frozen Yogurt',
       calories: 159,
@@ -153,22 +150,12 @@
       calcium: '12%',
       iron: '6%',
     },
-  ])
-  const filteredKeys = computed(() => {
-    return keys.filter(key => key !== 'Name')
-  })
-  const sortBy = computed(() => {
-    return [{
-      key: sortKey,
-      order: sortOrder,
-    }]
-  })
+  ]
 </script>
 
 <script>
   export default {
     data: () => ({
-      itemsPerPageArray: [3, 6, 9],
       desserts: [
         {
           name: 'Frozen Yogurt',
@@ -272,16 +259,5 @@
         },
       ],
     }),
-    computed: {
-      filteredKeys () {
-        return this.keys.filter(key => key !== 'Name')
-      },
-      sortBy () {
-        return [{
-          key: this.sortKey,
-          order: this.sortOrder,
-        }]
-      },
-    },
   }
 </script>

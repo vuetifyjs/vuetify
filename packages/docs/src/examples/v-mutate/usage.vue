@@ -11,16 +11,6 @@
   </div>
 </template>
 
-<script setup>
-  import { ref } from 'vue'
-
-  const mutations = ref(0)
-  const content = ref('Hello, world!')
-  function onMutate () {
-    mutations.value++
-  }
-</script>
-
 <script>
   export default {
     data: () => ({

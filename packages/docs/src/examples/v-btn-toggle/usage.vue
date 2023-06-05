@@ -188,17 +188,6 @@
   </v-row>
 </template>
 
-<script setup>
-  import { ref } from 'vue'
-
-  const text = ref('center')
-  const icon = ref('justify')
-  const toggle_none = ref(null)
-  const toggle_one = ref(0)
-  const toggle_exclusive = ref(2)
-  const toggle_multiple = ref([0, 1, 2])
-</script>
-
 <script>
   export default {
     data () {

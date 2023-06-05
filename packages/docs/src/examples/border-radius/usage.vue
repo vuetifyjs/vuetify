@@ -29,12 +29,6 @@
   </div>
 </template>
 
-<script setup>
-  import { ref } from 'vue'
-
-  const model = ref('rounded-0')
-</script>
-
 <script>
   export default {
     data: () => ({

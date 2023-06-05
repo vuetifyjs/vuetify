@@ -4,36 +4,6 @@
   ></v-time-picker>
 </template>
 
-<script setup>
-  import { ref } from 'vue'
-
-  const defaults = ref({
-    'ampm-in-title': false,
-    disabled: false,
-    format: 'ampm',
-    'full-width': false,
-    landscape: false,
-    'no-title': false,
-    readonly: false,
-    scrollable: false,
-    'use-seconds': false,
-  })
-  const options = ref({
-    booleans: [
-      'ampm-in-title',
-      'disabled',
-      'full-width',
-      'no-title',
-      'readonly',
-      'use-seconds',
-    ],
-    btnToggles: {
-      format: ['ampm', '24hr'],
-    },
-  })
-  const tabs = ref(['landscape', 'scrollable'])
-</script>
-
 <script>
   export default {
     name: 'Usage',

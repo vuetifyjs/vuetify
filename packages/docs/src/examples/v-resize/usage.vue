@@ -11,21 +11,6 @@
   </v-row>
 </template>
 
-<script setup>
-  import { onMounted, ref } from 'vue'
-
-  const windowSize = ref({
-    x: 0,
-    y: 0,
-  })
-  function onResize () {
-    windowSize.value = { x: window.innerWidth, y: window.innerHeight }
-  }
-  onMounted(() => {
-    onResize()
-  })
-</script>
-
 <script>
   export default {
     data: () => ({

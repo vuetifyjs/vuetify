@@ -35,15 +35,6 @@
   </div>
 </template>
 
-<script setup>
-  import { ref } from 'vue'
-
-  const isIntersecting = ref(false)
-  function onIntersect (isIntersecting, entries, observer) {
-    isIntersecting.value = isIntersecting
-  }
-</script>
-
 <script>
   export default {
     data: () => ({

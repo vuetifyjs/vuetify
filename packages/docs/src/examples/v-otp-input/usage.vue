@@ -17,29 +17,6 @@
   </v-container>
 </template>
 
-<script setup>
-  import { ref, toRefs } from 'vue'
-
-  const { maxWidth } = toRefs(props)
-  const defaults = ref({
-    disabled: false,
-    length: 6,
-    plain: false,
-  })
-  const otp = ref('')
-  const options = ref({
-    booleans: ['disabled', 'dark', 'plain'],
-    selects: {
-      type: ['text', 'password', 'number'],
-    },
-    sliders: { length: [2, 8, 2] },
-  })
-  const tabs = ref(['default'])
-  function onOtpFinished (rsp) {
-    console.log('Completed input with', rsp)
-  }
-</script>
-
 <script>
   export default {
     name: 'Usage',

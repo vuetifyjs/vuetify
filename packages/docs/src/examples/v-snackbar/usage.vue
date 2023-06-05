@@ -23,13 +23,6 @@
   </div>
 </template>
 
-<script setup>
-  import { ref } from 'vue'
-
-  const snackbar = ref(false)
-  const text = ref(`Hello, I'm a snackbar`)
-</script>
-
 <script>
   export default {
     data: () => ({

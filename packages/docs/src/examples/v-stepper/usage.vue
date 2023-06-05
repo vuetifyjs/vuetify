@@ -85,12 +85,6 @@
   </v-stepper>
 </template>
 
-<script setup>
-  import { ref } from 'vue'
-
-  const e1 = ref(1)
-</script>
-
 <script>
   export default {
     data () {

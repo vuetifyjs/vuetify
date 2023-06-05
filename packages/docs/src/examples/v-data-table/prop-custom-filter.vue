@@ -21,7 +21,6 @@
   import { computed, ref } from 'vue'
 
   const search = ref('')
-  const calories = ref('')
   const desserts = ref([
     {
       name: 'Frozen Yogurt',
@@ -132,7 +131,6 @@
   export default {
     data: () => ({
       search: '',
-      calories: '',
       desserts: [
         {
           name: 'Frozen Yogurt',

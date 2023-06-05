@@ -109,7 +109,7 @@
 </template>
 
 <script setup>
-  import { computed, ref } from 'vue'
+  import { computed, ref, watch } from 'vue'
 
   const avatars = [
     '?accessoriesType=Blank&avatarStyle=Circle&clotheColor=PastelGreen&clotheType=ShirtScoopNeck&eyeType=Wink&eyebrowType=UnibrowNatural&facialHairColor=Black&facialHairType=MoustacheMagnum&hairColor=Platinum&mouthType=Concerned&skinColor=Tanned&topType=Turban',
@@ -119,10 +119,12 @@
     '?accessoriesType=Kurt&avatarStyle=Circle&clotheColor=Gray01&clotheType=BlazerShirt&eyeType=Surprised&eyebrowType=Default&facialHairColor=Red&facialHairType=Blank&graphicType=Selena&hairColor=Red&hatColor=Blue02&mouthType=Twinkle&skinColor=Pale&topType=LongHairCurly',
   ]
   const pause = ms => new Promise(resolve => setTimeout(resolve, ms))
+
   const active = ref([])
   const avatar = ref(null)
   const open = ref([])
   const users = ref([])
+
   const items = computed(() => {
     return [
       {
@@ -136,6 +138,9 @@
     const id = active.value[0]
     return users.value.find(user => user.id === id)
   })
+
+  watch(selected, randomAvatar)
+
   async function fetchUsers (item) {
     await pause(1500)
     return fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json()).then(json => (item.children.push(...json))).catch(err => console.warn(err))

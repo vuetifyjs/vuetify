@@ -18,15 +18,6 @@
   </v-row>
 </template>
 
-<script setup>
-  import { ref } from 'vue'
-
-  const swipeDirection = ref('None')
-  function swipe (direction) {
-    swipeDirection.value = direction
-  }
-</script>
-
 <script>
   export default {
     data: () => ({

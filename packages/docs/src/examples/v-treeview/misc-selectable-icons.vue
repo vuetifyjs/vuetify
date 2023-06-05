@@ -14,7 +14,7 @@
         <v-card-text>
           <v-treeview
             v-model="tree"
-            :load-children="fetch"
+            :load-children="load"
             :items="items"
             selected-color="indigo"
             open-on-click
@@ -113,10 +113,7 @@
       children,
     }]
   })
-  const shouldShowTree = computed(() => {
-    return breweries.value.length > 0 && !isLoading.value
-  })
-  function fetch () {
+  function load () {
     if (breweries.value.length) { return }
     return fetch('https://api.openbrewerydb.org/breweries').then(res => res.json()).then(data => (breweries.value = data)).catch(err => console.log(err))
   }
@@ -168,9 +165,6 @@
           children,
         }]
       },
-      shouldShowTree () {
-        return this.breweries.length > 0 && !this.isLoading
-      },
     },
 
     watch: {
@@ -186,7 +180,7 @@
     },
 
     methods: {
-      fetch () {
+      load () {
         if (this.breweries.length) return
 
         return fetch('https://api.openbrewerydb.org/breweries')

@@ -79,7 +79,6 @@
   const snackColor = ref('')
   const snackText = ref('')
   const max25chars = ref(v => v.length <= 25 || 'Input too long!')
-  const pagination = ref({})
   const headers = ref([
     {
       text: 'Dessert (100g serving)',
@@ -203,7 +202,6 @@
         snackColor: '',
         snackText: '',
         max25chars: v => v.length <= 25 || 'Input too long!',
-        pagination: {},
         headers: [
           {
             text: 'Dessert (100g serving)',

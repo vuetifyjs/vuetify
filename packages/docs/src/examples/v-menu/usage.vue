@@ -59,17 +59,6 @@
   </div>
 </template>
 
-<script setup>
-  import { ref } from 'vue'
-
-  const items = ref([
-    { title: 'Click Me' },
-    { title: 'Click Me' },
-    { title: 'Click Me' },
-    { title: 'Click Me 2' },
-  ])
-</script>
-
 <script>
   export default {
     data: () => ({
