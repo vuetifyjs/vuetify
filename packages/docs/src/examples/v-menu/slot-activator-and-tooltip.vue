@@ -43,7 +43,3 @@
     },
   }
 </script>
-
-<codepen-additional>
-const { mergeProps } = Vue
-</codepen-additional>
