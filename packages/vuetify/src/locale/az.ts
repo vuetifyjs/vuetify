@@ -26,12 +26,28 @@ export default {
     lastPage: 'Son səhifə',
     pageText: '{0} - {1} arası, Cəmi: {2} qeydiyyat',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} element seçildi',
-    nextMonthAriaLabel: 'Növbəti ay',
-    nextYearAriaLabel: 'Növbəti yıl',
-    prevMonthAriaLabel: 'Keçən ay',
-    prevYearAriaLabel: 'Keçən yıl',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: {
+        placeholder: 'Select range',
+        selected: 'Selected range',
+      },
+      header: {
+        placeholder: 'Start - End',
+      },
+    },
+    title: {
+      placeholder: 'Select date',
+      selected: 'Selected date',
+    },
+    header: {
+      placeholder: 'Date',
+    },
   },
   noDataText: 'Bu görüntüdə məlumat yoxdur.',
   carousel: {

@@ -43,7 +43,7 @@ const aliases: IconAliases = {
   file: 'fa-paperclip',
   plus: 'fa-plus',
   minus: 'fa-minus',
-  calendar: 'TODO',
+  calendar: 'fa-calendar',
 }
 
 const fa: IconSet = {

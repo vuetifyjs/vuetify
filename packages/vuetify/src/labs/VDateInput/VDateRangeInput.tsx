@@ -37,7 +37,7 @@ export const VDateRangeInput = genericComponent()({
     toLabel: String,
     dividerText: {
       type: String,
-      default: '$vuetify.dateRangeField.divider',
+      default: '$vuetify.dateRangeInput.divider',
     },
     mobile: Boolean,
     ...makeDateProps(),

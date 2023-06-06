@@ -26,12 +26,28 @@ export default {
     lastPage: 'Utolsó oldal',
     pageText: '{0}-{1} / {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} kiválasztva',
-    nextMonthAriaLabel: 'Következő hónap',
-    nextYearAriaLabel: 'Következő év',
-    prevMonthAriaLabel: 'Előző hónap',
-    prevYearAriaLabel: 'Előző év',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: {
+        placeholder: 'Select range',
+        selected: 'Selected range',
+      },
+      header: {
+        placeholder: 'Start - End',
+      },
+    },
+    title: {
+      placeholder: 'Select date',
+      selected: 'Selected date',
+    },
+    header: {
+      placeholder: 'Date',
+    },
   },
   noDataText: 'Nincs elérhető adat',
   carousel: {

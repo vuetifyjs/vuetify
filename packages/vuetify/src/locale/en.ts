@@ -26,14 +26,7 @@ export default {
     lastPage: 'Last page',
     pageText: '{0}-{1} of {2}',
   },
-  // datePicker: {
-  //   itemsSelected: '{0} selected',
-  //   nextMonthAriaLabel: 'Next month',
-  //   nextYearAriaLabel: 'Next year',
-  //   prevMonthAriaLabel: 'Previous month',
-  //   prevYearAriaLabel: 'Previous year',
-  // },
-  dateRangeField: {
+  dateRangeInput: {
     divider: 'to',
   },
   datePicker: {

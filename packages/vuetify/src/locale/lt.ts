@@ -26,12 +26,28 @@ export default {
     lastPage: 'Paskutinis puslapis',
     pageText: '{0}-{1} iš {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} pasirinkta',
-    nextMonthAriaLabel: 'Kitą mėnesį',
-    nextYearAriaLabel: 'Kitais metais',
-    prevMonthAriaLabel: 'Praeita mėnesį',
-    prevYearAriaLabel: 'Praeiti metai',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: {
+        placeholder: 'Select range',
+        selected: 'Selected range',
+      },
+      header: {
+        placeholder: 'Start - End',
+      },
+    },
+    title: {
+      placeholder: 'Select date',
+      selected: 'Selected date',
+    },
+    header: {
+      placeholder: 'Date',
+    },
   },
   noDataText: 'Nėra duomenų',
   carousel: {

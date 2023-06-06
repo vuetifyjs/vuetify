@@ -26,12 +26,28 @@ export default {
     lastPage: 'Τελευταία σελίδα',
     pageText: '{0}-{1} από {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} επιλεγμένα',
-    nextMonthAriaLabel: 'Τον επόμενο μήνα',
-    nextYearAriaLabel: 'Του χρόνου',
-    prevMonthAriaLabel: 'Προηγούμενος μήνας',
-    prevYearAriaLabel: 'Προηγούμενο έτος',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: {
+        placeholder: 'Select range',
+        selected: 'Selected range',
+      },
+      header: {
+        placeholder: 'Start - End',
+      },
+    },
+    title: {
+      placeholder: 'Select date',
+      selected: 'Selected date',
+    },
+    header: {
+      placeholder: 'Date',
+    },
   },
   noDataText: 'Χωρίς δεδομένα',
   carousel: {

@@ -26,12 +26,28 @@ export default {
     lastPage: 'پەڕەی کۆتایی',
     pageText: '{0}-{1} لە {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} دەسنیشانکراوە',
-    nextMonthAriaLabel: 'مانگی داهاتوو',
-    nextYearAriaLabel: 'ساڵی داهاتوو',
-    prevMonthAriaLabel: 'مانگی پێشوو',
-    prevYearAriaLabel: 'ساڵی پێشوو',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: {
+        placeholder: 'Select range',
+        selected: 'Selected range',
+      },
+      header: {
+        placeholder: 'Start - End',
+      },
+    },
+    title: {
+      placeholder: 'Select date',
+      selected: 'Selected date',
+    },
+    header: {
+      placeholder: 'Date',
+    },
   },
   noDataText: 'هیچ داتایەک بەردەست نیە',
   carousel: {

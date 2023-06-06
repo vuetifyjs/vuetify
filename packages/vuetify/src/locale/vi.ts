@@ -26,12 +26,28 @@ export default {
     lastPage: 'Trang cuối',
     pageText: '{0}-{1} trên {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} được chọn',
-    nextMonthAriaLabel: 'Tháng sau',
-    nextYearAriaLabel: 'Năm sau',
-    prevMonthAriaLabel: 'Tháng trước',
-    prevYearAriaLabel: 'Năm trước',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: {
+        placeholder: 'Select range',
+        selected: 'Selected range',
+      },
+      header: {
+        placeholder: 'Start - End',
+      },
+    },
+    title: {
+      placeholder: 'Select date',
+      selected: 'Selected date',
+    },
+    header: {
+      placeholder: 'Date',
+    },
   },
   noDataText: 'Không có dữ liệu',
   carousel: {

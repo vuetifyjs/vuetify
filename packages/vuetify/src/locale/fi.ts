@@ -26,12 +26,28 @@ export default {
     lastPage: 'Viimeinen sivu',
     pageText: '{0}-{1} ({2})',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} valittu',
-    nextMonthAriaLabel: 'Seuraava kuukausi',
-    nextYearAriaLabel: 'Ensi vuosi',
-    prevMonthAriaLabel: 'Edellinen kuukausi',
-    prevYearAriaLabel: 'Edellinen vuosi',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: {
+        placeholder: 'Select range',
+        selected: 'Selected range',
+      },
+      header: {
+        placeholder: 'Start - End',
+      },
+    },
+    title: {
+      placeholder: 'Select date',
+      selected: 'Selected date',
+    },
+    header: {
+      placeholder: 'Date',
+    },
   },
   noDataText: 'Ei dataa',
   carousel: {

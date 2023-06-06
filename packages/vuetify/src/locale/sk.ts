@@ -26,12 +26,28 @@ export default {
     lastPage: 'Posledná stránka',
     pageText: '{0}–{1} z {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} vybrané',
-    nextMonthAriaLabel: 'Ďalší mesiac',
-    nextYearAriaLabel: 'Ďalší rok',
-    prevMonthAriaLabel: 'Predchádzajúci mesiac',
-    prevYearAriaLabel: 'Predchádzajúci rok',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: {
+        placeholder: 'Select range',
+        selected: 'Selected range',
+      },
+      header: {
+        placeholder: 'Start - End',
+      },
+    },
+    title: {
+      placeholder: 'Select date',
+      selected: 'Selected date',
+    },
+    header: {
+      placeholder: 'Date',
+    },
   },
   noDataText: 'Nie sú dostupné žiadne dáta',
   carousel: {

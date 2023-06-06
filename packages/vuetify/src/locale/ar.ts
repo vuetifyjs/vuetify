@@ -26,12 +26,28 @@ export default {
     lastPage: 'الصفحة الأخيرة',
     pageText: '{0}-{1} من {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: 'تم تحديد {0}',
-    nextMonthAriaLabel: 'الشهر القادم',
-    nextYearAriaLabel: 'العام القادم',
-    prevMonthAriaLabel: 'الشهر الماضى',
-    prevYearAriaLabel: 'السنة الماضية',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: {
+        placeholder: 'Select range',
+        selected: 'Selected range',
+      },
+      header: {
+        placeholder: 'Start - End',
+      },
+    },
+    title: {
+      placeholder: 'Select date',
+      selected: 'Selected date',
+    },
+    header: {
+      placeholder: 'Date',
+    },
   },
   noDataText: 'لا توجد بيانات',
   carousel: {

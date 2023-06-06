@@ -26,12 +26,28 @@ export default {
     lastPage: 'หน้าสุดท้าย',
     pageText: '{0}-{1} จาก {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: 'เลือก {0} วัน',
-    nextMonthAriaLabel: 'เดือนถัดไป',
-    nextYearAriaLabel: 'ปีถัดไป',
-    prevMonthAriaLabel: 'เดือนก่อนหน้า',
-    prevYearAriaLabel: 'ปีก่อนหน้า',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: {
+        placeholder: 'Select range',
+        selected: 'Selected range',
+      },
+      header: {
+        placeholder: 'Start - End',
+      },
+    },
+    title: {
+      placeholder: 'Select date',
+      selected: 'Selected date',
+    },
+    header: {
+      placeholder: 'Date',
+    },
   },
   noDataText: 'ไม่มีข้อมูล',
   carousel: {

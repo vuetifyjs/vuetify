@@ -26,12 +26,28 @@ export default {
     lastPage: 'Siste side',
     pageText: '{0}-{1} av {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} valgt',
-    nextMonthAriaLabel: 'Neste måned',
-    nextYearAriaLabel: 'Neste år',
-    prevMonthAriaLabel: 'Forrige måned',
-    prevYearAriaLabel: 'Forrige år',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: {
+        placeholder: 'Select range',
+        selected: 'Selected range',
+      },
+      header: {
+        placeholder: 'Start - End',
+      },
+    },
+    title: {
+      placeholder: 'Select date',
+      selected: 'Selected date',
+    },
+    header: {
+      placeholder: 'Date',
+    },
   },
   noDataText: 'Ingen data er tilgjengelig',
   carousel: {

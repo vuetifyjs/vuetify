@@ -26,12 +26,28 @@ export default {
     lastPage: 'Ultima pagină',
     pageText: '{0}-{1} din {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} selectate',
-    nextMonthAriaLabel: 'Luna următoare',
-    nextYearAriaLabel: 'Anul următor',
-    prevMonthAriaLabel: 'Luna anterioară',
-    prevYearAriaLabel: 'Anul anterior',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: {
+        placeholder: 'Select range',
+        selected: 'Selected range',
+      },
+      header: {
+        placeholder: 'Start - End',
+      },
+    },
+    title: {
+      placeholder: 'Select date',
+      selected: 'Selected date',
+    },
+    header: {
+      placeholder: 'Date',
+    },
   },
   noDataText: 'Nu există date disponibile',
   carousel: {

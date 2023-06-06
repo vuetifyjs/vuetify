@@ -26,12 +26,28 @@ export default {
     lastPage: 'Laaste bladsy',
     pageText: '{0}-{1} van {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} gekies',
-    nextMonthAriaLabel: 'Volgende maand',
-    nextYearAriaLabel: 'Volgende jaar',
-    prevMonthAriaLabel: 'Vorige maand',
-    prevYearAriaLabel: 'Vorige jaar',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: {
+        placeholder: 'Select range',
+        selected: 'Selected range',
+      },
+      header: {
+        placeholder: 'Start - End',
+      },
+    },
+    title: {
+      placeholder: 'Select date',
+      selected: 'Selected date',
+    },
+    header: {
+      placeholder: 'Date',
+    },
   },
   noDataText: 'Geen data is beskikbaar nie',
   carousel: {

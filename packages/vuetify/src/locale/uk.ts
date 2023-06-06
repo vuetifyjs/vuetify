@@ -26,12 +26,28 @@ export default {
     lastPage: 'Остання сторінка',
     pageText: '{0}-{1} з {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} вибрано',
-    nextMonthAriaLabel: 'Наступного місяця',
-    nextYearAriaLabel: 'Наступного року',
-    prevMonthAriaLabel: 'Попередній місяць',
-    prevYearAriaLabel: 'Попередній рік',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: {
+        placeholder: 'Select range',
+        selected: 'Selected range',
+      },
+      header: {
+        placeholder: 'Start - End',
+      },
+    },
+    title: {
+      placeholder: 'Select date',
+      selected: 'Selected date',
+    },
+    header: {
+      placeholder: 'Date',
+    },
   },
   noDataText: 'Немає даних для відображення',
   carousel: {

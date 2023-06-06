@@ -43,7 +43,7 @@ const aliases: IconAliases = {
   file: 'attach_file',
   plus: 'add',
   minus: 'remove',
-  calendar: 'TODO',
+  calendar: 'event',
 }
 
 const md: IconSet = {

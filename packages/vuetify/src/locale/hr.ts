@@ -26,12 +26,28 @@ export default {
     lastPage: 'Posljednja stranica',
     pageText: '{0}-{1} od {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} odabrano',
-    nextMonthAriaLabel: 'Sljedeći mjesec',
-    nextYearAriaLabel: 'Slijedeće godine',
-    prevMonthAriaLabel: 'Prethodni mjesec',
-    prevYearAriaLabel: 'Prošla godina',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: {
+        placeholder: 'Select range',
+        selected: 'Selected range',
+      },
+      header: {
+        placeholder: 'Start - End',
+      },
+    },
+    title: {
+      placeholder: 'Select date',
+      selected: 'Selected date',
+    },
+    header: {
+      placeholder: 'Date',
+    },
   },
   noDataText: 'Nema dostupnih podataka',
   carousel: {

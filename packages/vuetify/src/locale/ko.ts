@@ -26,12 +26,28 @@ export default {
     lastPage: '마지막 페이지',
     pageText: '{2} 중 {0}-{1}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} 선택됨',
-    nextMonthAriaLabel: '다음 달',
-    nextYearAriaLabel: '내년',
-    prevMonthAriaLabel: '지난달',
-    prevYearAriaLabel: '전년도',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: {
+        placeholder: 'Select range',
+        selected: 'Selected range',
+      },
+      header: {
+        placeholder: 'Start - End',
+      },
+    },
+    title: {
+      placeholder: 'Select date',
+      selected: 'Selected date',
+    },
+    header: {
+      placeholder: 'Date',
+    },
   },
   noDataText: '데이터가 없습니다.',
   carousel: {
