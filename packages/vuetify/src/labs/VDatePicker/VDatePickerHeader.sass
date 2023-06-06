@@ -45,24 +45,47 @@
 // .v-date-picker-header--disabled
 //   pointer-events: none
 
+// .v-date-picker-header
+//   width: 100%
+
+// .v-date-picker-header__wrapper
+//   padding-top: 1rem
+//   padding-left: 1.5rem
+//   padding-right: 1.5rem
+//   display: flex
+//   flex-direction: column
+
+// .v-date-picker-header__title
+//   text-transform: uppercase
+//   font-size: 0.75rem
+//   padding-bottom: 2rem
+
+// .v-date-picker-header__text
+//   font-size: 2rem
+//   display: flex
+//   align-items: center
+//   justify-content: space-between
+//   padding-bottom: 0.5rem
+
 .v-date-picker-header
-  width: 100%
+  display: grid
+  grid-template-areas: "prepend content append"
+  grid-template-columns: min-content minmax(0, 1fr) min-content
+  padding-inline-start: 24px
+  padding-inline-end: 12px
+  padding-bottom: 12px
 
-.v-date-picker-header__wrapper
-  padding-top: 1rem
-  padding-left: 1.5rem
-  padding-right: 1.5rem
-  display: flex
-  flex-direction: column
+.v-date-picker-header__append
+  grid-area: append
 
-.v-date-picker-header__title
-  text-transform: uppercase
-  font-size: 0.75rem
-  padding-bottom: 2rem
+.v-date-picker-header__prepend
+  grid-area: prepend
+  padding-inline-start: 8px
 
-.v-date-picker-header__text
-  font-size: 2rem
-  display: flex
+.v-date-picker-header__content
   align-items: center
+  display: flex
+  font-size: 32px
+  line-height: 40px
+  grid-area: content
   justify-content: space-between
-  padding-bottom: 0.5rem

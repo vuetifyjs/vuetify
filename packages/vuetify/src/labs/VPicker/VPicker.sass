@@ -93,31 +93,52 @@
 // .v-picker--flat
 //   +elevation(0)
 
-.v-picker
+.v-picker.v-sheet
+  border-radius: 4px
   display: grid
-  grid-template-areas: "header" "body"
-  grid-auto-rows: min-content
+  grid-template-areas: "title" "header" "controls" "body" "actions"
 
-.v-picker--with-actions
-  grid-template-areas: "header" "body" "actions"
+// .v-picker--with-actions
+//   grid-template-areas: "header" "body" "actions"
 
 .v-picker__body
   grid-area: body
 
 .v-picker__header
   grid-area: header
-  background: rgb(var(--v-theme-surface-variant))
-  color: rgb(var(--v-theme-on-surface-variant))
 
-.v-picker__actions
-  grid-area: actions
-  padding: 12px
-  display: flex
+.v-picker-title
+  text-transform: uppercase
+  font-size: .75rem
+  grid-area: title
+  color: rgb(var(--v-theme-on-surface), var(--v-disabled-opacity))
+  padding-inline-start: 24px
+  padding-inline-end: 12px
+  padding-top: 16px
+  padding-bottom: 24px
+  font-weight: 600
+  letter-spacing: .1666666667em
+
+.v-picker-actions
   align-items: center
+  display: flex
+  flex: 1 1 auto
+  grid-area: actions
   justify-content: flex-end
+  min-height: 52px
+  padding-inline-start: 12px
+  padding-inline-end: 12px
+  padding-top: 8px
+  padding-bottom: 12px
 
-.v-picker--landscape
-  grid-template-areas: "header body" "header body"
+  .v-btn
+    min-width: 0
 
-.v-picker--landscape.v-picker--with-actions
-  grid-template-areas: "header body" "header actions"
+    &:not(:last-child)
+      margin-inline-end: 8px
+
+// .v-picker--landscape
+//   grid-template-areas: "header body" "header body"
+
+// .v-picker--landscape.v-picker--with-actions
+//   grid-template-areas: "header body" "header actions"

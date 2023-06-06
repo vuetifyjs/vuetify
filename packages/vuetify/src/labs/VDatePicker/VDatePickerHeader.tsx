@@ -2,104 +2,100 @@
 import './VDatePickerHeader.sass'
 
 // Components
-import { VBtn } from '../../components/VBtn'
+import { VBtn } from '@/components/VBtn'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
-import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { computed } from 'vue'
-import { dateEmits, makeDateProps } from '../VDateInput/composables'
-import { useDate } from '@/labs/date'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+// Types
+export type VDatePickerHeaderSlots = {
+  default: never
+  prepend: never
+  append: never
+}
 
 export const makeVDatePickerHeaderProps = propsFactory({
+  prependIcon: String,
+  appendIcon: {
+    type: String,
+    default: '$edit'
+  },
   color: String,
-  title: String,
-  header: String,
-  keyboardIcon: {
-    type: String,
-    default: '$edit',
-  },
-  calendarIcon: {
-    type: String,
-    default: '$calendar',
-  },
-  showInputSwitch: Boolean,
-  range: Boolean,
-
-  ...omit(makeDateProps(), ['displayDate', 'viewMode']),
+  text: String,
 }, 'VDatePickerHeader')
 
-export const VDatePickerHeader = genericComponent()({
+export const VDatePickerHeader = genericComponent<VDatePickerHeaderSlots>()({
   name: 'VDatePickerHeader',
 
   props: makeVDatePickerHeaderProps(),
 
   emits: {
-    ...omit(dateEmits, ['update:modelValue', 'update:viewMode', 'update:modelValue']),
+    'click:prepend': () => true,
+    'click:append': () => true,
   },
 
-  setup (props, { emit }) {
-    const { t } = useLocale()
-    const adapter = useDate()
+  setup (props, { emit, slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
-    const headerText = computed(() => {
-      if (props.header) return props.header
-
-      if (!props.modelValue?.length) return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}header.placeholder`)
-
-      if (props.modelValue.length === 1) return adapter.format(props.modelValue[0], 'normalDateWithWeekday')
-
-      return props.modelValue.map(date => adapter.format(date, 'monthAndDate')).join(' - ')
-    })
-
-    const titleText = computed(() => {
-      if (props.title) return props.title
-
-      if (!props.modelValue?.length) return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}title.placeholder`)
-
-      return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}title.selected`)
-    })
-
-    function handleHeaderClick () {
-      if (!props.modelValue.length) return
-
-      const date = props.modelValue[0]
-
-      emit('update:displayDate', date)
+    function onClickAppend () {
+      emit('click:append')
     }
 
-    useRender(() => (
-      <div
-        class={[
-          'v-date-picker-header',
-          backgroundColorClasses.value,
-        ]}
-        style={ backgroundColorStyles.value }
-      >
-        <div class="v-date-picker-header__wrapper">
-          <div class="v-date-picker-header__title">
-            { titleText.value }
-          </div>
-          <div class="v-date-picker-header__text">
-            <div
-              class="v-date-picker-header__date"
-              onClick={ handleHeaderClick }
-            >
-              { headerText.value }
+    useRender(() => {
+      const hasContent = !!(slots.default || props.text)
+      const hasAppend = !!(slots.append || props.appendIcon)
+
+      return (
+        <div
+          class={[
+            'v-date-picker-header',
+            backgroundColorClasses.value,
+          ]}
+          style={ backgroundColorStyles.value }
+        >
+          { slots.prepend && (
+            <div class="v-date-picker-header__prepend">
+              { slots.prepend() }
             </div>
-            <VBtn
-              variant="text"
-              icon={ props.inputMode === 'keyboard' ? props.calendarIcon : props.keyboardIcon }
-              onClick={ () => emit('update:inputMode', props.inputMode === 'keyboard' ? 'calendar' : 'keyboard') }
-            />
-          </div>
+          )}
+
+          { hasContent && (
+            <div class="v-date-picker-header__content">
+              { slots.default?.() ?? props.text }
+            </div>
+          )}
+
+          { hasAppend && (
+            <div class="v-date-picker-header__append">
+              { !slots.append ? (
+                <VBtn
+                  icon={ props.appendIcon }
+                  variant="text"
+                  onClick={ onClickAppend }
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="append-defaults"
+                  disabled={ !props.appendIcon }
+                  defaults={{
+                    VBtn: {
+                      icon: props.appendIcon,
+                      variant: 'text',
+                    }
+                  }}
+                >
+                  { slots.append?.() }
+                </VDefaultsProvider>
+              )}
+            </div>
+          )}
         </div>
-      </div>
-    ))
+      )
+    })
 
     return {}
   },

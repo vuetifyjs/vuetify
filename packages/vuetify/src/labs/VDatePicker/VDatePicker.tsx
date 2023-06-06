@@ -40,6 +40,34 @@ export const VDatePicker = genericComponent()({
   },
 
   setup (props, { emit }) {
+    // const { t } = useLocale()
+    // const adapter = useDate()
+    // const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
+
+    // const text = computed(() => {
+    //   if (props.text) return props.text
+
+    //   if (!props.modelValue?.length) return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}header.placeholder`)
+
+    //   if (props.modelValue.length === 1) return adapter.format(props.modelValue[0], 'normalDateWithWeekday')
+
+    //   return props.modelValue.map(date => adapter.format(date, 'monthAndDate')).join(' - ')
+    // })
+        // const titleText = computed(() => {
+    //   if (props.title) return props.title
+
+    //   if (!props.modelValue?.length) return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}title.placeholder`)
+
+    //   return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}title.selected`)
+    // })
+
+    // function handleHeaderClick () {
+    //   if (!props.modelValue.length) return
+
+    //   const date = props.modelValue[0]
+
+    //   emit('update:displayDate', date)
+    // }
     const adapter = useDate()
     createDatePicker(props)
 
@@ -75,7 +103,8 @@ export const VDatePicker = genericComponent()({
         <VPicker
           { ...pickerProps }
           class="v-date-picker"
-          v-slots={{
+        >
+          {{
             header: () => (
               <VDatePickerHeader
                 { ...datePickerHeaderProps }
@@ -120,14 +149,14 @@ export const VDatePicker = genericComponent()({
                 />
               </div>
             ),
-            actions: props.showActions && (() => (
+            actions: props.showActions ? (() => (
               <div>
                 <VBtn variant="text" color={ props.color } onClick={ handleCancel }>Cancel</VBtn>
                 <VBtn variant="text" color={ props.color } onClick={ handleSave }>Ok</VBtn>
               </div>
-            )),
+            )) : undefined,
           }}
-        />
+        </VPicker>
       )
     })
 

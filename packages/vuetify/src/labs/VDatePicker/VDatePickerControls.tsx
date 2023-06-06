@@ -6,12 +6,10 @@ import { VBtn } from '@/components/VBtn'
 import { VSpacer } from '@/components/VGrid'
 
 // Composables
-import { useDate } from '@/labs/date'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed } from 'vue'
-import { dateEmits, makeDateProps } from '../VDateInput/composables'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVDatePickerControlsProps = propsFactory({
   nextIcon: {
@@ -30,12 +28,9 @@ export const makeVDatePickerControlsProps = propsFactory({
     type: [String],
     default: '$collapse',
   },
-  range: {
-    default: false,
-    type: [String, Boolean],
-    validator: (v: any) => v === false || ['start', 'end'].includes(v),
-  },
-  ...omit(makeDateProps(), ['modelValue', 'inputMode']),
+  modelValue: Boolean,
+  text: String,
+
 }, 'VDatePickerControls')
 
 export const VDatePickerControls = genericComponent()({
@@ -44,55 +39,51 @@ export const VDatePickerControls = genericComponent()({
   props: makeVDatePickerControlsProps(),
 
   emits: {
-    ...omit(dateEmits, ['update:modelValue', 'update:inputMode']),
+    'click:prev': () => true,
+    'click:next': () => true,
+    'update:modelValue': (val: boolean) => true
   },
 
   setup (props, { emit }) {
-    const adapter = useDate()
-    const monthAndYear = computed(() => {
-      const month = props.range === 'end' ? adapter.addMonths(props.displayDate, 1) : props.displayDate
-      return adapter.format(month, 'monthAndYear')
-    })
+    const model = useProxiedModel(props, 'modelValue')
+
+    function onClickPrev () {
+      emit('click:prev')
+    }
+    function onClickNext () {
+      emit('click:next')
+    }
+    function onClickViewMode (val: boolean) {
+      model.value = !model.value
+    }
 
     useRender(() => {
-      const prevBtn = (
-        <VBtn
-          variant="text"
-          size="small"
-          icon={ props.prevIcon }
-          onClick={ () => emit('update:displayDate', adapter.addMonths(props.displayDate, -1)) }
-        />
-      )
-
-      const nextBtn = (
-        <VBtn
-          variant="text"
-          size="small"
-          icon={ props.nextIcon }
-          onClick={ () => emit('update:displayDate', adapter.addMonths(props.displayDate, 1)) }
-        />
-      )
-
       return (
         <div class="v-date-picker-controls">
-          { props.viewMode === 'month' && props.range === 'start' && prevBtn }
-          { !!props.range && <VSpacer key="range-spacer" /> }
-          <div class="v-date-picker-controls__date">{ monthAndYear.value }</div>
           <VBtn
-            key="expand-btn"
+            appendIcon={ model.value ? props.collapseIcon : props.expandIcon }
+            text={ props.text }
             variant="text"
-            size="small"
-            icon={ props.viewMode === 'month' ? props.expandIcon : props.collapseIcon }
-            onClick={ () => emit('update:viewMode', props.viewMode === 'month' ? 'year' : 'month') }
+            onClick={ onClickViewMode }
           />
+
           <VSpacer />
-          { (props.viewMode === 'month' && !props.range) && (
-            <div key="month-buttons">
-              { prevBtn }
-              { nextBtn }
-            </div>
-          )}
-          { props.viewMode === 'month' && props.range === 'end' && nextBtn }
+
+          <div>
+            <VBtn
+              variant="text"
+              size="small"
+              icon={ props.prevIcon }
+              onClick={ onClickPrev }
+            />
+
+            <VBtn
+              variant="text"
+              size="small"
+              icon={ props.nextIcon }
+              onClick={ onClickNext }
+            />
+          </div>
         </div>
       )
     })

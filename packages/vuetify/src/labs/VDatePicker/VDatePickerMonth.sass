@@ -2,6 +2,8 @@
   display: flex
   justify-content: center
   min-width: 328px
+  padding-inline-start: 8px
+  padding-inline-end: 8px
 
   --v-date-picker-month-day-diff: 4px
 
@@ -13,7 +15,6 @@
 .v-date-picker-month__days
   display: grid
   grid-template-columns: min-content min-content min-content min-content min-content min-content min-content
-  grid-row-gap: 4px
   flex: 1 1
   justify-content: space-around
 
@@ -22,6 +23,14 @@
   display: flex
   align-items: center
   justify-content: center
+  padding: 4px
+
+  .v-btn
+    --v-btn-height: 28px
+
+.v-date-picker-month__weekday
+  height: 48px
+  font-weight: 500
 
 .v-date-picker-month__day--adjacent
   opacity: 0.5
