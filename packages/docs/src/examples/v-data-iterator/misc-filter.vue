@@ -274,10 +274,10 @@
     }]
   })
   function nextPage () {
-    if (page.value + 1 <= numberOfPages.value) { page.value += 1 }
+    if (page.value + 1 <= numberOfPages.value) page.value += 1
   }
   function prevPage () {
-    if (page.value - 1 >= 1) { page.value -= 1 }
+    if (page.value - 1 >= 1) page.value -= 1
   }
 </script>
 

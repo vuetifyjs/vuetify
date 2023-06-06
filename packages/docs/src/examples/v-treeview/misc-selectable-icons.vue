@@ -120,7 +120,7 @@
   function getChildren (type) {
     const breweries = []
     for (const brewery of breweries.value) {
-      if (brewery.brewery_type !== type) { continue }
+      if (brewery.brewery_type !== type) continue
       breweries.push({
         ...brewery,
         name: getName(brewery.name),
@@ -136,7 +136,7 @@
   watch(breweries, val => {
     types.value = val.reduce((acc, cur) => {
       const type = cur.brewery_type
-      if (!acc.includes(type)) { acc.push(type) }
+      if (!acc.includes(type)) acc.push(type)
       return acc
     }, []).sort()
   })

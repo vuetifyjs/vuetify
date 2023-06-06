@@ -136,7 +136,7 @@
   })
   const categories = computed(() => {
     const _search = search.value.toLowerCase()
-    if (!_search) { return items }
+    if (!_search) return items
     return items.filter(item => {
       const text = item.text.toLowerCase()
       return text.indexOf(_search) > -1

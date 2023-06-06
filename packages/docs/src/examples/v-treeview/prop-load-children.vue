@@ -134,7 +134,7 @@
     ]
   })
   const selected = computed(() => {
-    if (!active.value.length) { return undefined }
+    if (!active.value.length) return undefined
     const id = active.value[0]
     return users.value.find(user => user.id === id)
   })

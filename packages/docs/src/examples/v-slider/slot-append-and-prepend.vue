@@ -89,10 +89,10 @@
   const isPlaying = ref(false)
 
   const color = computed(() => {
-    if (bpm.value < 100) { return 'indigo' }
-    if (bpm.value < 125) { return 'teal' }
-    if (bpm.value < 140) { return 'green' }
-    if (bpm.value < 175) { return 'orange' }
+    if (bpm.value < 100) return 'indigo'
+    if (bpm.value < 125) return 'teal'
+    if (bpm.value < 140) return 'green'
+    if (bpm.value < 175) return 'orange'
     return 'red'
   })
   const animationDuration = computed(() => {

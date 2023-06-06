@@ -60,7 +60,7 @@
   const avg = computed(() => {
     const sum = heartbeats.value.reduce((acc, cur) => acc + cur, 0)
     const length = heartbeats.value.length
-    if (!sum && !length) { return 0 }
+    if (!sum && !length) return 0
     return Math.ceil(sum / length)
   })
   function heartbeat () {

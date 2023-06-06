@@ -80,7 +80,7 @@
   async function validate () {
     const { valid } = await form.value.validate()
 
-    if (valid) { alert('Form is valid') }
+    if (valid) alert('Form is valid')
   }
   function reset () {
     form.value.reset()

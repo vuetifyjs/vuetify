@@ -103,13 +103,13 @@
     return selectedFruits.value.length > 0
   })
   const title = computed(() => {
-    if (likesAllFruit.value) { return 'Holy smokes, someone call the fruit police!' }
-    if (likesSomeFruit.value) { return 'Fruit Count' }
+    if (likesAllFruit.value) return 'Holy smokes, someone call the fruit police!'
+    if (likesSomeFruit.value) return 'Fruit Count'
     return 'How could you not like fruit?'
   })
   const subtitle = computed(() => {
-    if (likesAllFruit.value) { return undefined }
-    if (likesSomeFruit.value) { return selectedFruits.value.length }
+    if (likesAllFruit.value) return undefined
+    if (likesSomeFruit.value) return selectedFruits.value.length
     return 'Go ahead, make a selection above!'
   })
 
