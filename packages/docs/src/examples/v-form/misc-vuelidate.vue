@@ -98,16 +98,12 @@
   }
 </script>
 
-<codepen-resources lang="json">
+<playground-resources lang="json">
   {
-    "js": [
-      "https://cdn.jsdelivr.net/npm/@vuelidate/core/dist/index.js",
-      "https://cdn.jsdelivr.net/npm/@vuelidate/validators/dist/index.js"
-    ],
     "imports": {
       "vue-demi": "https://cdn.jsdelivr.net/npm/vue-demi/lib/index.mjs",
       "@vuelidate/core": "https://cdn.jsdelivr.net/npm/@vuelidate/core/dist/index.esm.js",
       "@vuelidate/validators": "https://cdn.jsdelivr.net/npm/@vuelidate/validators/dist/index.esm.js"
     }
   }
-</codepen-resources>
+</playground-resources>

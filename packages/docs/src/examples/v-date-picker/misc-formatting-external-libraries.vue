@@ -81,11 +81,11 @@
   }
 </script>
 
-<codepen-resources lang="json">
+<playground-resources lang="json">
   {
-    "js": [
-      "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js",
-      "https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.min.js"
-    ]
+    "imports": {
+      "moment": "https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js",
+      "date-fns": "https://cdn.jsdelivr.net/npm/date-fns@2.30.0/esm/index.js/+esm"
+    }
   }
-</codepen-resources>
+</playground-resources>
