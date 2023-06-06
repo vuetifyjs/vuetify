@@ -72,11 +72,9 @@ In addition to the _modifier_ syntax, the `v-mutate` directive is configurable v
 </script>
 ```
 
-<alert type="warning">
-
+::: warning
   When using custom options, it's recommended to use the `.sub` modifier. This extends mutation monitoring to all descendants of the target element.
-
-</alert>
+:::
 
 ### Once
 
@@ -149,11 +147,9 @@ Unlike the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/
 </script>
 ```
 
-<alert type="info">
-
+::: info
   The **immediate** callback is not counted as a mutation and does not trigger the observer to disconnect when using **once**.
-
-</alert>
+:::
 
 ## API
 

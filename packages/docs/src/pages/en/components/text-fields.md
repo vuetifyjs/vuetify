@@ -92,11 +92,9 @@ When the user focuses the input, the placeholder fades in as the label translate
 
 <example file="v-text-field/prop-placeholder" />
 
-<alert type="info">
-
+::: info
   Use the **persistent-placeholder** prop to force the **placeholder** to be visible, even when the input is not focused.
-
-</alert>
+:::
 
 #### Hints & messages
 

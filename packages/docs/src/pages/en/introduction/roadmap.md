@@ -21,11 +21,9 @@ Vuetify is always under development. We are constantly working towards improving
 
 The following releases are currently under development:
 
-<alert type="warning">
-
+::: warning
   This is not an exhaustive list and is subject to change at any time without notice
-
-</alert>
+:::
 
 ### v3.4 (Blackguard)
 
@@ -231,11 +229,9 @@ The following releases are old and unsupported **minor** and **major** versions:
 - **Overview:**
   Added new component, `v-calendar`. Improved functionality of `v-sparkline` with new **bar** and **fill** properties. Improved `v-treeview` and prepared for LTS. Navigate to the [Long-term Support Page](/introduction/long-term-support) for more information on LTS.
 
-<alert type="error">
-
+::: error
   v1.5 reached end of life on **July 31st, 2020** and is no longer actively maintained. It is recommended to update to the latest stable version of Vuetify using our [Upgrade guide](/getting-started/upgrade-guide/).
-
-</alert>
+:::
 
 ### v1.4
 

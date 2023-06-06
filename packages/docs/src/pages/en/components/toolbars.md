@@ -39,11 +39,9 @@ A toolbar is a flexible container that can be used in a number of ways. By defau
 
 ## Caveats
 
-<alert type="warning">
-
+::: warning
   When `v-btn`s with the **icon** prop are used inside of `v-toolbar` and `v-app-bar` they will automatically have their size increased and negative margin applied to ensure proper spacing according to the Material Design Specification. If you choose to wrap your buttons in any container, such as a `div`, you will need to apply negative margin to that container in order to properly align them.
-
-</alert>
+:::
 
 ## Examples
 

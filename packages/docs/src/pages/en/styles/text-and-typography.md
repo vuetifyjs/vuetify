@@ -77,11 +77,9 @@ You can prevent wrapping text with the `.text-no-wrap` utility class.
 
 Longer content can be truncated with a text ellipsis using the `.text-truncate` utility class.
 
-<alert type="info">
-
+::: info
   **Requires** `display: inline-block` **or** `display: block`.
-
-</alert>
+:::
 
 <example file="text-and-typography/text-truncate" />
 

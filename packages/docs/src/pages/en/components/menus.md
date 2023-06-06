@@ -90,11 +90,9 @@ Menus can be accessed using hover instead of clicking with the **open-on-hover**
 
 With the new `v-slot` syntax, nested activators such as those seen with a `v-menu` and `v-tooltip` attached to the same activator button, need a particular setup in order to function correctly.
 
-<alert type="info">
-
+::: info
   This same syntax is used for other nested activators such as `v-dialog` with `v-tooltip`
-
-</alert>
+:::
 
 <example file="v-menu/slot-activator-and-tooltip" />
 
