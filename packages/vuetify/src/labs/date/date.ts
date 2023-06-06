@@ -3,7 +3,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { inject, watch } from 'vue'
-import { propsFactory } from '@/util'
+import { mergeDeep, propsFactory } from '@/util'
 
 // Adapters
 import { VuetifyDateAdapter } from './adapters/vuetify'
@@ -31,7 +31,12 @@ export interface DateProps {
 }
 
 export function createDate (options?: DateOptions) {
-  return options ?? { adapter: VuetifyDateAdapter }
+  return mergeDeep({
+    adapter: VuetifyDateAdapter,
+    locale: {
+      en: 'en-US',
+    },
+  }, options)
 }
 
 // TODO: revisit this after it starts being implemented
@@ -55,7 +60,7 @@ export function useDate () {
 
   const instance = typeof date.adapter === 'function'
     // eslint-disable-next-line new-cap
-    ? new date.adapter({ locale: date.locale ? date.locale[locale.current.value] : locale.current.value })
+    ? new date.adapter({ locale: date.locale?.[locale.current.value] ?? locale.current.value })
     : date.adapter
 
   watch(locale.current, value => {
