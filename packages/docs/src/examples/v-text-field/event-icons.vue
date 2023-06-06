@@ -43,7 +43,7 @@
   const iconIndex = ref(0)
 
   const icon = computed(() => {
-    return icons.value[iconIndex.value]
+    return icons[iconIndex.value]
   })
   function toggleMarker () {
     marker.value = !marker.value
@@ -60,7 +60,7 @@
     iconIndex.value = 0
   }
   function changeIcon () {
-    iconIndex.value === icons.value.length - 1
+    iconIndex.value === icons.length - 1
       ? iconIndex.value = 0
       : iconIndex.value++
   }

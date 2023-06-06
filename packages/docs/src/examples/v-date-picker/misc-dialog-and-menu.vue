@@ -7,7 +7,7 @@
     >
       <v-menu
         ref="menu"
-        v-model="menu"
+        v-model="menuActive"
         v-model:return-value="date"
         :close-on-content-click="false"
         transition="scale-transition"
@@ -40,7 +40,7 @@
           <v-btn
             variant="text"
             color="primary"
-            @click="$refs.menu.save(date)"
+            @click="menu.save(date)"
           >
             OK
           </v-btn>
@@ -85,7 +85,7 @@
           <v-btn
             variant="text"
             color="primary"
-            @click="$refs.dialog.save(date)"
+            @click="dialog.save(date)"
           >
             OK
           </v-btn>
@@ -128,8 +128,10 @@
 <script setup>
   import { ref } from 'vue'
 
+  const menu = ref()
+
   const date = ref((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10))
-  const menu = ref(false)
+  const menuActive = ref(false)
   const modal = ref(false)
   const menu2 = ref(false)
 </script>
@@ -138,7 +140,7 @@
   export default {
     data: () => ({
       date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-      menu: false,
+      menuActive: false,
       modal: false,
       menu2: false,
     }),

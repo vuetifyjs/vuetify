@@ -96,7 +96,7 @@
   function querySelections (v) {
     loading.value = true
     setTimeout(() => {
-      items.value = states.value.filter(e => {
+      items.value = states.filter(e => {
         return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
       })
       loading.value = false

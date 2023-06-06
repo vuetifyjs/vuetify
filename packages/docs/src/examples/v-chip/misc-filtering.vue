@@ -116,11 +116,11 @@
     return keywords
   })
   const searching = computed(() => {
-    if (!search.value) return items.value
+    if (!search.value) return items
 
     const _search = search.value.toLowerCase()
 
-    return items.value.filter(item => {
+    return items.filter(item => {
       const text = item.title.toLowerCase()
       return text.indexOf(_search) > -1
     })

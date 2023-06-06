@@ -10,7 +10,7 @@
         v-for="(item, i) in items"
         :key="i"
         :value="item"
-        active-color="primary"
+        color="primary"
         rounded="shaped"
       >
         <template v-slot:prepend>

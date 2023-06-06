@@ -109,7 +109,7 @@
 
   const virtualDesserts = computed(() => {
     return [...Array(10000).keys()].map(i => {
-      const dessert = { ...desserts.value[i % 10] }
+      const dessert = { ...desserts[i % 10] }
       dessert.name = `${dessert.name} #${i}`
       return dessert
     })

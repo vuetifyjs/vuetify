@@ -83,7 +83,6 @@
   })
 
   const isDark = computed(() => {
-    console.log(user.theme === 'dark')
     return user.theme === 'dark'
   })
 

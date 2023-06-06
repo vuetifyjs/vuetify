@@ -80,7 +80,7 @@
           class="pa-4 rounded-b"
           with-background
         >
-          <component :is="ExampleComponent" v-if="isLoaded" :file="file" />
+          <component :is="ExampleComponent" v-if="isLoaded" />
         </v-theme-provider>
       </div>
     </v-sheet>

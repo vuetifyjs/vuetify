@@ -25,7 +25,7 @@
     </v-toolbar>
     <v-form
       ref="form"
-      v-model="form"
+      v-model="isValid"
       class="pa-4 pt-6"
     >
       <v-text-field
@@ -83,13 +83,13 @@
     <v-card-actions>
       <v-btn
         variant="text"
-        @click="$refs.form.reset()"
+        @click="form.reset()"
       >
         Clear
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn
-        :disabled="!form"
+        :disabled="!isValid"
         :loading="isLoading"
         color="deep-purple-accent-4"
       >
@@ -140,11 +140,13 @@
     required: v => !!v || 'This field is required',
   }
 
+  const form = ref()
+
   const agreement = ref(false)
   const bio = ref('Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts')
   const dialog = ref(false)
   const email = ref()
-  const form = ref(false)
+  const isValid = ref(false)
   const isLoading = ref(false)
   const password = ref()
   const phone = ref()
@@ -157,7 +159,7 @@
       bio: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts',
       dialog: false,
       email: undefined,
-      form: false,
+      isValid: false,
       isLoading: false,
       password: undefined,
       phone: undefined,

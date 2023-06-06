@@ -29,7 +29,7 @@
           v-if="menu2"
           v-model="time"
           full-width
-          @click:minute="$refs.menu.save(time)"
+          @click:minute="menu.save(time)"
         ></v-time-picker>
       </v-menu>
     </v-col>
@@ -71,7 +71,7 @@
           <v-btn
             variant="text"
             color="primary"
-            @click="$refs.dialog.save(time)"
+            @click="dialog.save(time)"
           >
             OK
           </v-btn>
@@ -83,6 +83,9 @@
 
 <script setup>
   import { ref } from 'vue'
+
+  const menu = ref()
+  const dialog = ref()
 
   const time = ref(null)
   const menu2 = ref(false)

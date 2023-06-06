@@ -2,9 +2,7 @@
   <v-row class="fill-height">
     <v-col>
       <v-sheet height="64">
-        <v-toolbar
-          flat
-        >
+        <v-toolbar flat>
           <v-btn
             variant="outlined"
             class="me-4"
@@ -35,8 +33,8 @@
               mdi-chevron-right
             </v-icon>
           </v-btn>
-          <v-toolbar-title v-if="$refs.calendar">
-            {{ $refs.calendar.title }}
+          <v-toolbar-title v-if="calendar">
+            {{ calendar.title }}
           </v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
@@ -86,7 +84,7 @@
     calendar.value.next()
   }
   function fetchEvents ({ start, end }) {
-    const events = []
+    const _events = []
     const min = new Date(`${start.date}T00:00:00`)
     const max = new Date(`${end.date}T23:59:59`)
     const days = (max.getTime() - min.getTime()) / 86400000
@@ -97,7 +95,7 @@
       const first = new Date(firstTimestamp - (firstTimestamp % 900000))
       const secondTimestamp = rnd(2, allDay ? 288 : 8) * 900000
       const second = new Date(first.getTime() + secondTimestamp)
-      events.push({
+      _events.push({
         name: names[rnd(0, names.length - 1)],
         start: first,
         end: second,
@@ -106,7 +104,7 @@
         category: categories[rnd(0, categories.length - 1)],
       })
     }
-    events.value = events
+    events.value = _events
   }
   function rnd (a, b) {
     return Math.floor((b - a + 1) * Math.random()) + a

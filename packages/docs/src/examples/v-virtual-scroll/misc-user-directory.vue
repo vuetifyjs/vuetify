@@ -71,16 +71,16 @@
   const surnames = ['Smith', 'Anderson', 'Clark', 'Wright', 'Mitchell', 'Johnson', 'Thomas', 'Rodriguez', 'Lopez', 'Perez', 'Williams', 'Jackson', 'Lewis', 'Hill', 'Roberts', 'Jones', 'White', 'Lee', 'Scott', 'Turner', 'Brown', 'Harris', 'Walker', 'Green', 'Phillips', 'Davis', 'Martin', 'Hall', 'Adams', 'Campbell', 'Miller', 'Thompson', 'Allen', 'Baker', 'Parker', 'Wilson', 'Garcia', 'Young', 'Gonzalez', 'Evans', 'Moore', 'Martinez', 'Hernandez', 'Nelson', 'Edwards', 'Taylor', 'Robinson', 'King', 'Carter', 'Collins']
 
   const items = computed(() => {
-    const namesLength = names.value.length
-    const surnamesLength = surnames.value.length
-    const colorsLength = colors.value.length
+    const namesLength = names.length
+    const surnamesLength = surnames.length
+    const colorsLength = colors.length
 
     return Array.from({ length: 10000 }, () => {
-      const name = names.value[genRandomIndex(namesLength)]
-      const surname = surnames.value[genRandomIndex(surnamesLength)]
+      const name = names[genRandomIndex(namesLength)]
+      const surname = surnames[genRandomIndex(surnamesLength)]
 
       return {
-        color: colors.value[genRandomIndex(colorsLength)],
+        color: colors[genRandomIndex(colorsLength)],
         fullName: `${name} ${surname}`,
         initials: `${name[0]} ${surname[0]}`,
       }

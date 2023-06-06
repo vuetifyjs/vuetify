@@ -133,6 +133,7 @@
     { title: 'Protein (g)', key: 'protein', align: 'end' },
     { title: 'Iron (%)', key: 'iron', align: 'end' },
   ])
+  const search = ref('')
   const serverItems = ref([])
   const loading = ref(true)
   const totalItems = ref(0)
@@ -272,6 +273,7 @@
         { title: 'Protein (g)', key: 'protein', align: 'end' },
         { title: 'Iron (%)', key: 'iron', align: 'end' },
       ],
+      search: '',
       serverItems: [],
       loading: true,
       totalItems: 0,

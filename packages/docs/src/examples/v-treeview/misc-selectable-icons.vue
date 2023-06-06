@@ -118,15 +118,15 @@
     return fetch('https://api.openbrewerydb.org/breweries').then(res => res.json()).then(data => (breweries.value = data)).catch(err => console.log(err))
   }
   function getChildren (type) {
-    const breweries = []
+    const _breweries = []
     for (const brewery of breweries.value) {
       if (brewery.brewery_type !== type) continue
-      breweries.push({
+      _breweries.push({
         ...brewery,
         name: getName(brewery.name),
       })
     }
-    return breweries.sort((a, b) => {
+    return _breweries.sort((a, b) => {
       return a.name > b.name ? 1 : -1
     })
   }

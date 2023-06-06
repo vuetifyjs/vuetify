@@ -97,7 +97,7 @@
   const selectedFruits = ref([])
 
   const likesAllFruit = computed(() => {
-    return selectedFruits.value.length === fruits.value.length
+    return selectedFruits.value.length === fruits.length
   })
   const likesSomeFruit = computed(() => {
     return selectedFruits.value.length > 0
@@ -117,7 +117,7 @@
     if (likesAllFruit.value) {
       selectedFruits.value = []
     } else {
-      selectedFruits.value = fruits.value.slice()
+      selectedFruits.value = fruits.slice()
     }
   }
 </script>
