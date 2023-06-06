@@ -13,7 +13,7 @@
     "eager": "Will force the components content to render on mounted. This is useful if you have content that will not be rendered in the DOM that you want crawled for SEO.",
     "editable": " Creates an editable button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "The function used for filtering items",
-    "hideSelected": "Do not display in the select menu items that are already selected",
+    "hideSelected": "Do not display in the select menu items that are already selected. Also removes checkboxes from the list when multiple",
     "itemColor": "Sets color of selected items",
     "itemDisabled": "Set property of **items**'s disabled value",
     "items": "Can be an array of objects or array of strings. When using objects, will look for a text, value and disabled keys. This can be changed using the **item-text**, **item-value** and **item-disabled** props.  Objects that have a **header** or **divider** property are considered special cases and generate a list header or divider; these items are not selectable.",
@@ -31,7 +31,7 @@
     "segmented": "Creates a segmented button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "smallChips": "Changes display of selections to chips with the **small** property",
     "tags": "Tagging functionality, allows the user to create new values not available from the **items** prop",
-    "valueComparator": "The comparison algorithm used for values. [More info](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts)"
+    "valueComparator": "The comparison algorithm used for values. [More info](https://github.com/vuetifyjs/vuetify/blob/v2-stable/packages/vuetify/src/util/helpers.ts)"
   },
   "slots": {
     "append-item": "Adds an item after menu content",

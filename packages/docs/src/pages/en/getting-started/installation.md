@@ -11,7 +11,7 @@ related:
 
 <alert type="error">
 
-  You are currently on the **Vuetify 2** documentation. For Vuetify 3, please navigate [here](https://next.vuetifyjs.com/)
+  You are viewing documentation for **Vuetify 2**. For instructions on installing **Vuetify 3**, navigate to the [Version 3 Installation Guide](https://vuetifyjs.com/getting-started/installation/)
 
 </alert>
 
@@ -103,9 +103,9 @@ Once installed, update your nuxt.config.js file to include the Vuetify module in
 To install Vuetify into a Webpack project you need to add a few dependencies:
 
 ```bash
-yarn add vuetify
+yarn add vuetify@v2-stable
 # OR
-npm install vuetify
+npm install vuetify@v2-stable
 ```
 
 ```bash

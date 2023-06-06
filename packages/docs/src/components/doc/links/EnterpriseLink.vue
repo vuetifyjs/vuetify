@@ -1,18 +1,10 @@
 <template>
   <app-btn
-    href="https://next.vuetifyjs.com/en/introduction/enterprise-support/"
+    href="https://vuetifyjs.com/en/introduction/enterprise-support/"
     path="enterprise"
     @click="onClick"
   >
-    <v-badge inline color="success">
-      <template #badge>
-        <small>NEW</small>
-      </template>
-
-      <span class="me-1">
-        <i18n path="enterprise" />
-      </span>
-    </v-badge>
+    <i18n path="enterprise" />
   </app-btn>
 </template>
 

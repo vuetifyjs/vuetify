@@ -39,7 +39,7 @@
       <ais-instant-search
         :search-client="searchClient"
         :search-function="searchFunction"
-        index-name="vuetifyjs"
+        index-name="vuetifyjs-v2"
       >
         <ais-configure
           :facetFilters="[`lang:${locale}`]"
@@ -60,7 +60,6 @@
 <script>
   // Utilities
   import { get } from 'vuex-pathify'
-  import { groupItems, sortItems } from 'vuetify/lib/util/helpers'
   import algoliasearch from 'algoliasearch'
   import SearchResults from './SearchResults'
 
@@ -80,8 +79,8 @@
       isFocused: false,
       menuModel: false,
       searchClient: algoliasearch(
-        'BH4D9OD16A', // docsearch app ID
-        '259d4615e283a1bbaa3313b4eff7881c' // vuetify API key
+        'NHT6C0IV19', // docsearch app ID
+        'ffa344297924c76b0f4155384aff7ef2' // vuetify API key
       ),
       searchString: '',
     }),
@@ -139,25 +138,42 @@
         helper.state.query && helper.search()
       },
       transformItems (items) {
-        const sorted = sortItems([...items], ['hierarchy.lvl0', 'hierarchy.lvl1'], [false, false], this.locale)
-          .map(item => {
-            const url = new URL(item.url)
+        items = items.map(item => {
+          const url = new URL(item.url)
 
-            return {
-              ...item,
-              url: url.href.split(url.origin).pop(),
-            }
-          })
-        const groups = groupItems(sorted, ['hierarchy.lvl0'])
+          return {
+            ...item,
+            url: url.href.split(url.origin).pop(),
+          }
+        })
+        const groups = this.groupItems(items, 'lvl0')
 
         groups.forEach(group => {
-          group.items = groupItems(group.items, ['hierarchy.lvl1'])
+          group.items = this.groupItems(group.items, 'lvl1')
         })
 
-        const uiIndex = groups.findIndex(val => val.name === 'UI Components')
-        if (uiIndex > 0) {
-          groups.unshift(groups.splice(uiIndex, 1)[0])
-        }
+        // const uiIndex = groups.findIndex(val => val.name === 'UI Components')
+        // if (uiIndex > 0) {
+        //   groups.unshift(groups.splice(uiIndex, 1)[0])
+        // }
+
+        return groups
+      },
+      groupItems (items, attribute) {
+        const groups = []
+
+        items.forEach(item => {
+          const group = groups.find(val => val.name === item.hierarchy[attribute])
+
+          if (group) {
+            group.items.push(item)
+          } else {
+            groups.push({
+              name: item.hierarchy[attribute],
+              items: [item],
+            })
+          }
+        })
 
         return groups
       },
