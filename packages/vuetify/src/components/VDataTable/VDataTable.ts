@@ -573,7 +573,6 @@ export default mixins(
         height: this.height,
         fixedHeader: this.fixedHeader,
         dense: this.dense,
-        showSelect: this.showSelect,
       }
 
       // if (this.virtualRows) {
