@@ -7,6 +7,7 @@ import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
 import { useFocus } from '@/composables/focus'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed } from 'vue'
@@ -31,10 +32,12 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
   props: makeVCheckboxProps(),
 
   emits: {
+    'update:modelValue': (value: boolean) => true,
     'update:focused': (focused: boolean) => true,
   },
 
   setup (props, { attrs, slots }) {
+    const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
 
     const uid = getUid()
@@ -53,6 +56,7 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
           ]}
           { ...inputAttrs }
           { ...inputProps }
+          v-model={ model.value }
           id={ id.value }
           focused={ isFocused.value }
           style={ props.style }
@@ -72,6 +76,7 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 { ...controlAttrs }
+                v-model={ model.value }
                 onFocus={ focus }
                 onBlur={ blur }
                 v-slots={ slots }
