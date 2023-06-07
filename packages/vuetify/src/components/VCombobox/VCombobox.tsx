@@ -209,9 +209,13 @@ export const VCombobox = genericComponent<new <
         !isPristine.value &&
         !listHasFocus.value
     })
-    const listRef = ref<VList>()
 
-    const shouldSkipMenuToggle = computed(() => (props.hideNoData && !items.value.length) || props.readonly || form?.isReadonly.value)
+    const menuDisabled = computed(() => (
+      (props.hideNoData && !items.value.length) ||
+      props.readonly || form?.isReadonly.value
+    ))
+
+    const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
       cleared = true
@@ -221,12 +225,12 @@ export const VCombobox = genericComponent<new <
       }
     }
     function onMousedownControl () {
-      if (shouldSkipMenuToggle.value) return
+      if (menuDisabled.value) return
 
       menu.value = true
     }
     function onMousedownMenuIcon (e: MouseEvent) {
-      if (shouldSkipMenuToggle.value) return
+      if (menuDisabled.value) return
 
       if (isFocused.value) {
         e.preventDefault()
