@@ -507,10 +507,7 @@ export default mixins(
           { ...classes, 'v-data-table__selected': data.isSelected },
           getPropertyFromItem(item, this.itemClass)
         ),
-        style: mergeStyles(
-          { },
-          getPropertyFromItem(item, this.itemStyle)
-        ),
+        style: mergeStyles({}, getPropertyFromItem(item, this.itemStyle)),
         props: {
           headers: this.computedHeaders,
           hideDefaultHeader: this.hideDefaultHeader,
