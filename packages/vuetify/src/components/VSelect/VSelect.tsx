@@ -154,6 +154,11 @@ export const VSelect = genericComponent<new <
       return items.value
     })
 
+    const menuDisabled = computed(() => (
+      (props.hideNoData && !items.value.length) ||
+      props.readonly || form?.isReadonly.value
+    ))
+
     const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
@@ -162,10 +167,7 @@ export const VSelect = genericComponent<new <
       }
     }
     function onMousedownControl () {
-      if (
-        (props.hideNoData && !items.value.length) ||
-        props.readonly || form?.isReadonly.value
-      ) return
+      if (menuDisabled.value) return
 
       menu.value = !menu.value
     }
