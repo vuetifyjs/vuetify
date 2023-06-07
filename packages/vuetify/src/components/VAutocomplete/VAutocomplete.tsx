@@ -221,13 +221,8 @@ export const VAutocomplete = genericComponent<new <
         isPristine.value = true
       }
 
-      if (e.key === 'ArrowDown') {
+      if (e.key === 'ArrowDown' && highlightFirst.value) {
         listRef.value?.focus('next')
-        if (highlightFirst.value) {
-          listRef.value?.focus('next')
-        }
-      } else if (e.key === 'ArrowUp') {
-        listRef.value?.focus('prev')
       }
 
       if (!props.multiple) return
@@ -274,6 +269,11 @@ export const VAutocomplete = genericComponent<new <
           selectionIndex.value = -1
           vTextFieldRef.value.setSelectionRange(0, 0)
         }
+      }
+    }
+    function onListKeydown (e: KeyboardEvent) {
+      if (e.key === 'Tab') {
+        vTextFieldRef.value?.focus()
       }
     }
 
@@ -422,8 +422,10 @@ export const VAutocomplete = genericComponent<new <
                       selected={ selected.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                      onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
+                      tabindex="-1"
                     >
                       { slots['prepend-item']?.() }
 

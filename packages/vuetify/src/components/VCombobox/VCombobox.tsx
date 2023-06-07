@@ -267,10 +267,8 @@ export const VCombobox = genericComponent<new <
         isPristine.value = true
       }
 
-      if (e.key === 'ArrowDown') {
+      if (e.key === 'ArrowDown' && highlightFirst.value) {
         listRef.value?.focus('next')
-      } else if (e.key === 'ArrowUp') {
-        listRef.value?.focus('prev')
       }
 
       if (!props.multiple) return
@@ -322,6 +320,11 @@ export const VCombobox = genericComponent<new <
       if (e.key === 'Enter' && search.value) {
         select(transformItem(props, search.value))
         search.value = ''
+      }
+    }
+    function onListKeydown (e: KeyboardEvent) {
+      if (e.key === 'Tab') {
+        vTextFieldRef.value?.focus()
       }
     }
     function onAfterLeave () {
@@ -451,8 +454,10 @@ export const VCombobox = genericComponent<new <
                       selected={ selected.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                      onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
+                      tabindex="-1"
                     >
                       { slots['prepend-item']?.() }
 
