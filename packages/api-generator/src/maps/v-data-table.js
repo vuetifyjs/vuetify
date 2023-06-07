@@ -34,14 +34,9 @@ const DataTableEvents = [
     value: `any, ${dataString}, MouseEvent`,
   },
   {
-    name: 'contextmenu:row',
+    name: '<event>:row',
     source: 'v-data-table',
-    value: `MouseEvent, ${dataString}`,
-  },
-  {
-    name: 'dblclick:row',
-    source: 'v-data-table',
-    value: `MouseEvent, ${dataString}`,
+    value: `${dataString}, Event`,
   },
 ].concat(DataIteratorEvents)
 

@@ -31,6 +31,7 @@ import MobileRow from './MobileRow'
 
 // Mixins
 import Loadable from '../../mixins/loadable'
+import Mouse from '../../mixins/mouse'
 
 // Directives
 import ripple from '../../directives/ripple'
@@ -74,6 +75,7 @@ function searchTableItems (
 export default mixins(
   VDataIterator,
   Loadable,
+  Mouse,
 ).extend({
   name: 'v-data-table',
 
@@ -241,11 +243,10 @@ export default mixins(
           },
         },
         on: {
-          // TODO: for click, the first argument should be the event, and the second argument should be data,
+          ...this.getDefaultMouseEventHandlers(':row', () => data, true),
+          // TODO: the first argument should be the event, and the second argument should be data,
           // but this is a breaking change so it's for v3
           click: (event: MouseEvent) => this.$emit('click:row', item, data, event),
-          contextmenu: (event: MouseEvent) => this.$emit('contextmenu:row', event, data),
-          dblclick: (event: MouseEvent) => this.$emit('dblclick:row', event, data),
         },
       }
     },

@@ -3,7 +3,7 @@
 import mixins from '../../../util/mixins'
 import Colorable from '../../../mixins/colorable'
 import Localable from '../../../mixins/localable'
-import Mouse from './mouse'
+import Mouse from '../../../mixins/mouse'
 import Themeable from '../../../mixins/themeable'
 import Times from './times'
 
