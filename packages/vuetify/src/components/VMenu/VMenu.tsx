@@ -15,7 +15,7 @@ import { useScopeId } from '@/composables/scopeId'
 // Utilities
 import { computed, inject, mergeProps, provide, ref, shallowRef, watch } from 'vue'
 import { VMenuSymbol } from './shared'
-import { genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
+import { focusChild, genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Component } from 'vue'
@@ -82,11 +82,40 @@ export const VMenu = genericComponent<OverlaySlots>()({
       parent?.closeParents()
     }
 
+    function onKeydown (e: KeyboardEvent) {
+      if (props.disabled) return
+
+      if (e.key === 'Tab') {
+        isActive.value = false
+        overlay.value?.activatorEl?.focus()
+      }
+    }
+
+    function onActivatorKeydown (e: KeyboardEvent) {
+      if (props.disabled) return
+
+      const el = overlay.value?.contentEl
+      if (el && isActive.value) {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault()
+          focusChild(el, 'next')
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault()
+          focusChild(el, 'prev')
+        }
+      } else if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
+        isActive.value = true
+        e.preventDefault()
+        setTimeout(() => setTimeout(() => onActivatorKeydown(e)))
+      }
+    }
+
     const activatorProps = computed(() =>
       mergeProps({
         'aria-haspopup': 'menu',
         'aria-expanded': String(isActive.value),
         'aria-owns': id.value,
+        onKeydown: onActivatorKeydown,
       }, props.activatorProps)
     )
 
@@ -106,6 +135,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
           absolute
           activatorProps={ activatorProps.value }
           onClick:outside={ onClickOutside }
+          onKeydown={ onKeydown }
           { ...scopeId }
         >
           {{
