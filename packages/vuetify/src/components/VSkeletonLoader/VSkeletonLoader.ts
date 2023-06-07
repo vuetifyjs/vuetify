@@ -49,13 +49,13 @@ export default mixins(
     attrs (): object {
       if (!this.isLoading) return this.$attrs
 
-      return !this.boilerplate ? {
+      return {
         'aria-busy': !this.boilerplate ? true : undefined,
         'aria-live': !this.boilerplate ? 'polite' : undefined,
         'aria-label': !this.boilerplate ? this.$vuetify.lang.t(this.loadingText) : undefined,
         role: !this.boilerplate ? 'alert' : undefined,
         ...this.$attrs,
-      } : {}
+      }
     },
     classes (): object {
       return {
