@@ -8,7 +8,7 @@
       <app-bar-logo />
 
       <v-btn
-        v-if="name !== 'home' && mdAndDown"
+        v-if="route.meta.layout !== 'home' && mdAndDown"
         icon="mdi-menu"
         @click="app.drawer = !app.drawer"
       />
@@ -78,5 +78,5 @@
 
   const app = useAppStore()
   const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
-  const { name } = useRoute()
+  const route = useRoute()
 </script>
