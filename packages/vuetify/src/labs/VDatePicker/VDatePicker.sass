@@ -1,9 +1,15 @@
+@use '../../styles/tools'
+
 .v-date-picker__input
   padding-top: 16px
   padding-left: 24px
   padding-right: 24px
 
 .v-date-picker
+  @include tools.elevation(2)
+  @include tools.rounded(4px)
+
+  overflow: hidden
   width: 328px
 
   .v-date-picker-month
