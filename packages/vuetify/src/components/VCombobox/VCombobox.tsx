@@ -387,7 +387,12 @@ export const VCombobox = genericComponent<new <
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
-      const hasList = !!((!props.hideNoData || displayItems.value.length) || slots.prepend || slots.append || slots['no-data'])
+      const hasList = !!(
+        (!props.hideNoData || displayItems.value.length) ||
+        slots['prepend-item'] ||
+        slots['append-item'] ||
+        slots['no-data']
+      )
       const isDirty = model.value.length > 0
       const [textFieldProps] = VTextField.filterProps(props)
 
