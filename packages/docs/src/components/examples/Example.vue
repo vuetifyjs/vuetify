@@ -44,7 +44,7 @@
           >
             <template #activator="{ props: tooltip }">
               <v-btn
-                class="ms-2 text-medium-emphasis"
+                class="me-2 text-medium-emphasis"
                 density="comfortable"
                 variant="text"
                 v-bind="mergeProps(action as any, tooltip)"
@@ -232,6 +232,15 @@
         path: 'view-in-github',
         href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
         target: '_blank',
+      },
+      {
+        icon: 'mdi-clipboard-multiple-outline',
+        path: 'copy-example-source',
+        onClick: () => {
+          navigator.clipboard.writeText(
+            sections.value.map(section => section.content).join('\n')
+          )
+        },
       },
       {
         icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',
