@@ -408,6 +408,7 @@ export const VAutocomplete = genericComponent<new <
                   v-model={ menu.value }
                   activator="parent"
                   contentClass="v-autocomplete__content"
+                  disabled={ menuDisabled.value }
                   eager={ props.eager }
                   maxHeight={ 310 }
                   openOnClick={ false }

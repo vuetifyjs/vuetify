@@ -83,6 +83,8 @@ export const VMenu = genericComponent<OverlaySlots>()({
     }
 
     function onKeydown (e: KeyboardEvent) {
+      if (props.disabled) return
+
       if (e.key === 'Tab') {
         isActive.value = false
         overlay.value?.activatorEl?.focus()
@@ -90,6 +92,8 @@ export const VMenu = genericComponent<OverlaySlots>()({
     }
 
     function onActivatorKeydown (e: KeyboardEvent) {
+      if (props.disabled) return
+
       const el = overlay.value?.contentEl
       if (el && isActive.value) {
         if (e.key === 'ArrowDown') {

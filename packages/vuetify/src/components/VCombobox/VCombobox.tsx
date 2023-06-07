@@ -440,6 +440,7 @@ export const VCombobox = genericComponent<new <
                   v-model={ menu.value }
                   activator="parent"
                   contentClass="v-combobox__content"
+                  disabled={ menuDisabled.value }
                   eager={ props.eager }
                   maxHeight={ 310 }
                   openOnClick={ false }
