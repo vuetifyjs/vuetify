@@ -2,12 +2,14 @@
 import './VInput.sass'
 
 // Components
-import { VMessages, type VMessageSlot } from '@/components/VMessages/VMessages'
+import { useInputIcon } from '@/components/VInput/InputIcon'
+import { VMessages } from '@/components/VMessages/VMessages'
 
 // Composables
-import { IconValue } from '@/composables/icons'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { IconValue } from '@/composables/icons'
+import { useRtl } from '@/composables/locale'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
@@ -16,7 +18,7 @@ import { EventProp, genericComponent, getUid, propsFactory, useRender } from '@/
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
-import { useInputIcon } from '@/components/VInput/InputIcon'
+import type { VMessageSlot } from '@/components/VMessages/VMessages'
 
 export interface VInputSlot {
   id: ComputedRef<string>
@@ -59,7 +61,7 @@ export const makeVInputProps = propsFactory({
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeValidationProps(),
-}, 'v-input')
+}, 'VInput')
 
 export type VInputSlots = {
   default: VInputSlot
@@ -82,6 +84,7 @@ export const VInput = genericComponent<VInputSlots>()({
 
   setup (props, { attrs, slots, emit }) {
     const { densityClasses } = useDensity(props)
+    const { rtlClasses } = useRtl()
     const { InputIcon } = useInputIcon(props)
 
     const uid = getUid()
@@ -144,6 +147,7 @@ export const VInput = genericComponent<VInputSlots>()({
               'v-input--center-affix': props.centerAffix,
             },
             densityClasses.value,
+            rtlClasses.value,
             validationClasses.value,
             props.class,
           ]}

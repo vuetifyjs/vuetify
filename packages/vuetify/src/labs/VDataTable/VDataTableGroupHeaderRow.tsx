@@ -1,12 +1,12 @@
 // Components
+import { VDataTableColumn } from './VDataTableColumn'
 import { VBtn } from '@/components/VBtn'
 import { VCheckboxBtn } from '@/components/VCheckbox'
-import { VDataTableColumn } from './VDataTableColumn'
 
 // Composables
+import { useGroupBy } from './composables/group'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
-import { useGroupBy } from './composables/group'
 
 // Utilities
 import { computed } from 'vue'
@@ -26,7 +26,7 @@ export const makeVDataTableGroupHeaderRowProps = propsFactory({
     type: Object as PropType<Group>,
     required: true,
   },
-}, 'v-data-table-group-header-row')
+}, 'VDataTableGroupHeaderRow')
 
 export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRowSlots>()({
   name: 'VDataTableGroupHeaderRow',

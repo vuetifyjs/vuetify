@@ -1,6 +1,6 @@
 // Composables
-import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { VItemGroupSymbol } from './VItemGroup'
+import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 
 // Utilities
 import { genericComponent } from '@/util'

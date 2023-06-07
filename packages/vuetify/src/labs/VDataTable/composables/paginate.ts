@@ -18,7 +18,7 @@ export const makeDataTablePaginateProps = propsFactory({
     type: [Number, String],
     default: 10,
   },
-}, 'v-data-table-paginate')
+}, 'DataTable-paginate')
 
 const VDataTablePaginationSymbol: InjectionKey<{
   page: Ref<number>

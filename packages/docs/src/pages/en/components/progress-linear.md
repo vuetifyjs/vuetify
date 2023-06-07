@@ -1,6 +1,6 @@
 ---
-nav: Progress linear
 meta:
+  nav: Progress linear
   title: Progress linear component
   description: The progress-linear component is useful for displaying a visual indicator of numerical data in a straight line.
   keywords: progress linear, vuetify progress linear component, vue progress linear component, linear progress

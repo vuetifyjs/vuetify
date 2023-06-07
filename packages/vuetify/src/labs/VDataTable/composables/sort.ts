@@ -1,6 +1,6 @@
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { useLocale } from '@/composables'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject, provide, toRef } from 'vue'
@@ -18,7 +18,7 @@ export const makeDataTableSortProps = propsFactory({
   customKeySort: Object as PropType<Record<string, DataTableCompareFunction>>,
   multiSort: Boolean,
   mustSort: Boolean,
-}, 'v-data-table-sort')
+}, 'DataTable-sort')
 
 const VDataTableSortSymbol: InjectionKey<{
   sortBy: Ref<readonly SortItem[]>
@@ -136,17 +136,12 @@ export function sortItems<T extends Record<string, any>> (
         return customResult
       }
 
-      // Check if both cannot be evaluated
-      if (sortA == null || sortB == null) {
-        continue
-      }
-
       // Dates should be compared numerically
       if (sortA instanceof Date && sortB instanceof Date) {
         return sortA.getTime() - sortB.getTime()
       }
 
-      [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
+      [sortA, sortB] = [sortA, sortB].map(s => s != null ? s.toString().toLocaleLowerCase() : s)
 
       if (sortA !== sortB) {
         if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)

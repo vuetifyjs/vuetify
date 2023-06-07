@@ -7,27 +7,27 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 import { VProgressCircular } from '@/components/VProgressCircular'
 
-// Directives
-import { Ripple } from '@/directives/ripple'
-
 // Composables
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
-import { IconValue } from '@/composables/icons'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
+import { IconValue } from '@/composables/icons'
 import { makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
+import { useSelectLink } from '@/composables/selectLink'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useSelectLink } from '@/composables/selectLink'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+
+// Directives
+import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed } from 'vue'
@@ -35,6 +35,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 export type VBtnSlots = {
   default: never
@@ -61,7 +62,7 @@ export const makeVBtnProps = propsFactory({
   stacked: Boolean,
 
   ripple: {
-    type: Boolean,
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
 
@@ -82,7 +83,7 @@ export const makeVBtnProps = propsFactory({
   ...makeTagProps({ tag: 'button' }),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'elevated' } as const),
-}, 'v-btn')
+}, 'VBtn')
 
 export const VBtn = genericComponent<VBtnSlots>()({
   name: 'VBtn',

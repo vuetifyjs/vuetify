@@ -2,9 +2,9 @@
 import { VBtn } from '@/components/VBtn'
 
 // Utilities
-import { createVuetify } from '@/framework'
 import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
+import { createVuetify } from '@/framework'
 
 describe('defaults', () => {
   it('applies global default class and style', () => {

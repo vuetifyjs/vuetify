@@ -44,45 +44,56 @@ const validate = ajv.compile({
   type: 'object',
   additionalProperties: false,
   properties: {
-    nav: { type: 'string' },
-    layout: { type: 'string' },
     meta: {
       type: 'object',
       additionalProperties: false,
       properties: {
-        title: { type: 'string' },
-        description: { type: 'string' },
-        keywords: { type: 'string' },
+        nav: { type: 'string' }, // Title used in navigation links
+        title: { type: 'string' }, // SEO title
+        description: { type: 'string' }, // SEO description
+        keywords: { type: 'string' }, // SEO keywords
       },
     },
+    layout: { type: 'string' },
     related: {
       type: 'array',
       maxItems: 3,
       uniqueItems: true,
-      items: { type: 'string' },
+      items: { type: 'string' }, // Absolute paths to related pages
     },
     assets: {
       type: 'array',
       uniqueItems: true,
-      items: { type: 'string' },
+      items: { type: 'string' }, // Additional stylesheets to load
     },
-    disabled: { type: 'boolean' },
-    emphasized: { type: 'boolean' },
+    disabled: { type: 'boolean' }, // The page is not published
+    emphasized: { type: 'boolean' }, // The page is emphasized in the navigation
   },
 })
 
-export const parseMeta = (componentPath: string) => {
+export function parseMeta (componentPath: string, locale: string) {
   const str = fs.readFileSync(path.resolve(componentPath.slice(1)), { encoding: 'utf-8' })
   const { attributes, body } = fm(str)
 
   const valid = validate(attributes)
-  if (!valid) {
+  if (!valid && locale !== 'eo-UY') {
     throw new Error(`\nInvalid frontmatter: ${componentPath}` + validate.errors!.map(error => (
       `\n  | Property ${error.instancePath} ${error.message}`
     )).join())
   }
 
   const { meta, ...rest } = attributes as any
+
+  if (locale !== 'en') {
+    const original = parseMeta(componentPath.replace(`/${locale}/`, '/en/'), 'en')
+    Object.assign(rest, {
+      layout: original.layout,
+      related: original.related,
+      assets: original.assets,
+      disabled: original.disabled,
+      emphasized: original.emphasized,
+    })
+  }
 
   return {
     ...rest,

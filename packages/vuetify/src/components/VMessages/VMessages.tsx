@@ -5,9 +5,9 @@ import './VMessages.sass'
 import { VSlideYTransition } from '@/components/transitions'
 
 // Composables
+import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed } from 'vue'
@@ -40,7 +40,7 @@ export const makeVMessagesProps = propsFactory({
       group: true,
     },
   }),
-}, 'v-messages')
+}, 'VMessages')
 
 export const VMessages = genericComponent<VMessagesSlots>()({
   name: 'VMessages',

@@ -2,37 +2,37 @@
 import './VCombobox.sass'
 
 // Components
-import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
+import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VTextField } from '@/components/VTextField'
+import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Composables
-import { forwardRefs } from '@/composables/forwardRefs'
+import { useTextColor } from '@/composables/color'
 import { makeFilterProps, useFilter } from '@/composables/filter'
-import { makeTransitionProps } from '@/composables/transition'
-import { transformItem, useItems } from '@/composables/list-items'
 import { useForm } from '@/composables/form'
+import { forwardRefs } from '@/composables/forwardRefs'
+import { transformItem, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTextColor } from '@/composables/color'
+import { makeTransitionProps } from '@/composables/transition'
 
-// Utility
+// Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import { genericComponent, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
-import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Types
 import type { PropType } from 'vue'
-import type { GenericProps } from '@/util'
-import type { FilterMatch } from '@/composables/filter'
-import type { ListItem } from '@/composables/list-items'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
+import type { FilterMatch } from '@/composables/filter'
+import type { ListItem } from '@/composables/list-items'
+import type { GenericProps } from '@/util'
 
 function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {
   if (matches == null) return text
@@ -73,7 +73,7 @@ export const makeVComboboxProps = propsFactory({
     modelValue: null,
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
   ...makeTransitionProps({ transition: false }),
-}, 'v-combobox')
+}, 'VCombobox')
 
 export const VCombobox = genericComponent<new <
   T extends readonly any[],
@@ -209,6 +209,12 @@ export const VCombobox = genericComponent<new <
         !isPristine.value &&
         !listHasFocus.value
     })
+
+    const menuDisabled = computed(() => (
+      (props.hideNoData && !items.value.length) ||
+      props.readonly || form?.isReadonly.value
+    ))
+
     const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
@@ -219,14 +225,13 @@ export const VCombobox = genericComponent<new <
       }
     }
     function onMousedownControl () {
-      if (
-        (props.hideNoData && !items.value.length) ||
-        props.readonly || form?.isReadonly.value
-      ) return
+      if (menuDisabled.value) return
 
       menu.value = true
     }
     function onMousedownMenuIcon (e: MouseEvent) {
+      if (menuDisabled.value) return
+
       if (isFocused.value) {
         e.preventDefault()
         e.stopPropagation()
@@ -359,6 +364,9 @@ export const VCombobox = genericComponent<new <
     function onFocusout (e: FocusEvent) {
       listHasFocus.value = false
     }
+    function onUpdateModelValue (v: any) {
+      if (v == null || (v === '' && !props.multiple)) model.value = []
+    }
 
     watch(filteredItems, val => {
       if (!val.length && props.hideNoData) menu.value = false
@@ -384,7 +392,12 @@ export const VCombobox = genericComponent<new <
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
-      const hasList = !!((!props.hideNoData || displayItems.value.length) || slots.prepend || slots.append || slots['no-data'])
+      const hasList = !!(
+        (!props.hideNoData || displayItems.value.length) ||
+        slots['prepend-item'] ||
+        slots['append-item'] ||
+        slots['no-data']
+      )
       const isDirty = model.value.length > 0
       const [textFieldProps] = VTextField.filterProps(props)
 
@@ -393,7 +406,7 @@ export const VCombobox = genericComponent<new <
           ref={ vTextFieldRef }
           { ...textFieldProps }
           v-model={ search.value }
-          onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
           dirty={ isDirty }
@@ -441,11 +454,11 @@ export const VCombobox = genericComponent<new <
                       onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
                     >
+                      { slots['prepend-item']?.() }
+
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />
                       ))}
-
-                      { slots['prepend-item']?.() }
 
                       { displayItems.value.map((item, index) => {
                         const itemProps = mergeProps(item.props, {

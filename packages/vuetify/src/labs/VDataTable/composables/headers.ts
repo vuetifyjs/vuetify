@@ -4,15 +4,15 @@ import { createRange, propsFactory } from '@/util'
 
 // Types
 import type { DeepReadonly, InjectionKey, PropType, Ref } from 'vue'
-import type { DataTableHeader, InternalDataTableHeader } from '../types'
 import type { SortItem } from './sort'
+import type { DataTableHeader, InternalDataTableHeader } from '../types'
 
 export const makeDataTableHeaderProps = propsFactory({
   headers: {
     type: Array as PropType<DeepReadonly<DataTableHeader[] | DataTableHeader[][]>>,
     default: () => ([]),
   },
-}, 'v-data-table-header')
+}, 'DataTable-header')
 
 export const VDataTableHeadersSymbol: InjectionKey<{
   headers: Ref<InternalDataTableHeader[][]>
@@ -77,7 +77,7 @@ export function createHeaders (
           sortable: column.sortable ?? !!column.key,
         })
 
-        fixedOffsets[i] += column.width ?? 0
+        fixedOffsets[i] += Number(column.width ?? 0)
       }
     })
 

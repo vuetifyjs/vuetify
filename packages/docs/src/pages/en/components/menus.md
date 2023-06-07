@@ -1,6 +1,6 @@
 ---
-nav: Menus
 meta:
+  nav: Menus
   title: Menu component
   description: The menu component exposes a dropdown of potential selections or actions that the user can make.
   keywords: menus, vuetify menu component, vue menu component

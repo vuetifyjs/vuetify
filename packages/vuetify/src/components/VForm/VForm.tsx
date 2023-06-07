@@ -1,7 +1,7 @@
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { createForm, makeFormProps } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
-import { makeComponentProps } from '@/composables/component'
 
 // Utilities
 import { ref } from 'vue'
@@ -13,7 +13,7 @@ import type { SubmitEventPromise } from '@/composables/form'
 export const makeVFormProps = propsFactory({
   ...makeComponentProps(),
   ...makeFormProps(),
-}, 'v-form')
+}, 'VForm')
 
 type VFormSlots = {
   default: ReturnType<typeof createForm>

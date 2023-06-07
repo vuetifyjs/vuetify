@@ -7,7 +7,7 @@ import { makeVBtnGroupProps, VBtnGroup } from '@/components/VBtnGroup/VBtnGroup'
 // Composables
 import { makeGroupProps, useGroup } from '@/composables/group'
 
-// Utility
+// Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -26,7 +26,7 @@ type VBtnToggleSlots = {
 export const makeVBtnToggleProps = propsFactory({
   ...makeVBtnGroupProps(),
   ...makeGroupProps(),
-}, 'v-btn-toggle')
+}, 'VBtnToggle')
 
 export const VBtnToggle = genericComponent<VBtnToggleSlots>()({
   name: 'VBtnToggle',

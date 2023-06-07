@@ -2,20 +2,24 @@
 import './VSliderThumb.sass'
 
 // Components
-import { VScaleTransition } from '../transitions'
 import { VSliderSymbol } from './slider'
+import { VScaleTransition } from '../transitions'
+
+// Composables
+import { useTextColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { useElevation } from '@/composables/elevation'
 
 // Directives
 import Ripple from '@/directives/ripple'
 
-// Composables
-import { makeComponentProps } from '@/composables/component'
-import { useElevation } from '@/composables/elevation'
-import { useTextColor } from '@/composables/color'
-
 // Utilities
 import { computed, inject } from 'vue'
 import { convertToUnit, genericComponent, keyValues, propsFactory, useRender } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 export type VSliderThumbSlots = {
   'thumb-label': { modelValue: number }
@@ -40,12 +44,12 @@ export const makeVSliderThumbProps = propsFactory({
     required: true,
   },
   ripple: {
-    type: Boolean,
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
 
   ...makeComponentProps(),
-}, 'v-slider-thumb')
+}, 'VSliderThumb')
 
 export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
   name: 'VSliderThumb',

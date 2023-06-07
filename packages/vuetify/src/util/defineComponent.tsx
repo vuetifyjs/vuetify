@@ -1,11 +1,13 @@
-// Utils
+// Composables
+import { injectDefaults, internalUseDefaults } from '@/composables/defaults'
+
+// Utilities
 import {
   defineComponent as _defineComponent, // eslint-disable-line no-restricted-imports
 } from 'vue'
 import { consoleWarn } from '@/util/console'
-import { pick, toKebabCase } from '@/util/helpers'
+import { pick } from '@/util/helpers'
 import { propsFactory } from '@/util/propsFactory'
-import { injectDefaults, internalUseDefaults } from '@/composables/defaults'
 
 // Types
 import type {
@@ -105,7 +107,7 @@ export function defineComponent (options: ComponentOptions) {
   }
 
   if (options._setup) {
-    options.props = propsFactory(options.props ?? {}, toKebabCase(options.name))()
+    options.props = propsFactory(options.props ?? {}, options.name)()
     const propKeys = Object.keys(options.props)
     options.filterProps = function filterProps (props: Record<string, any>) {
       return pick(props, propKeys, ['class', 'style'])

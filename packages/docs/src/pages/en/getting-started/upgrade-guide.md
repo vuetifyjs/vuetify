@@ -1,6 +1,6 @@
 ---
-nav: Upgrade guide
 meta:
+  nav: Upgrade guide
   title: Upgrade guide
   description: Detailed instruction on how to upgrade Vuetify to 3.0
   keywords: migration, upgrade, releases, upgrading vuetify, alpha, v3

@@ -2,28 +2,37 @@
 import './VOverlay.sass'
 
 // Composables
-import { makeActivatorProps, useActivator } from './useActivator'
-import { makeComponentProps } from '@/composables/component'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { makeLocationStrategyProps, useLocationStrategies } from './locationStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { useBackButton, useRouter } from '@/composables/router'
+import { makeActivatorProps, useActivator } from './useActivator'
 import { useBackgroundColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { useHydration } from '@/composables/hydration'
-import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { useRtl } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { useBackButton, useRouter } from '@/composables/router'
 import { useScopeId } from '@/composables/scopeId'
 import { useStack } from '@/composables/stack'
 import { useTeleport } from '@/composables/teleport'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useToggleScope } from '@/composables/toggleScope'
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Directives
 import { ClickOutside } from '@/directives/click-outside'
 
 // Utilities
+import {
+  computed,
+  mergeProps,
+  ref,
+  Teleport,
+  toRef,
+  Transition,
+  watch,
+} from 'vue'
 import {
   animate,
   convertToUnit,
@@ -34,19 +43,10 @@ import {
   standardEasing,
   useRender,
 } from '@/util'
-import {
-  computed,
-  mergeProps,
-  ref,
-  Teleport,
-  toRef,
-  Transition,
-  watch,
-} from 'vue'
 
 // Types
-import type { BackgroundColorData } from '@/composables/color'
 import type { PropType, Ref } from 'vue'
+import type { BackgroundColorData } from '@/composables/color'
 
 interface ScrimProps {
   [key: string]: unknown
@@ -107,7 +107,7 @@ export const makeVOverlayProps = propsFactory({
   ...makeScrollStrategyProps(),
   ...makeThemeProps(),
   ...makeTransitionProps(),
-}, 'v-overlay')
+}, 'VOverlay')
 
 export const VOverlay = genericComponent<OverlaySlots>()({
   name: 'VOverlay',

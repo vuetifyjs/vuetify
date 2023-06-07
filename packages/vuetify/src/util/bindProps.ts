@@ -1,3 +1,4 @@
+// Utilities
 import { eventName, isOn } from '@/util/helpers'
 
 const handlers = new WeakMap<HTMLElement, Set<[string, () => void]>>()

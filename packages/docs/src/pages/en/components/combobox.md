@@ -1,6 +1,6 @@
 ---
-nav: Combobox
 meta:
+  nav: Combobox
   title: Combobox component
   description: The combobox component provides type-ahead autocomplete functionality and allows users to provide a custom values beyond the provided list of options.
   keywords: combobox, vuetify combobox component, vue combobox component
