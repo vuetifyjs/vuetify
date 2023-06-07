@@ -38,7 +38,9 @@ export const VPicker = genericComponent<VPickerSlots>()({
               'v-picker--landscape': props.landscape,
               'v-picker--with-actions': !!slots.actions,
             },
+            props.class,
           ]}
+          style={ props.style }
         >
           { slots.header && (
             <div class="v-picker__header">
