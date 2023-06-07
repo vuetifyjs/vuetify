@@ -42,6 +42,86 @@
   </v-container>
 </template>
 
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const fruits = [
+    'Apples',
+    'Apricots',
+    'Avocado',
+    'Bananas',
+    'Blueberries',
+    'Blackberries',
+    'Boysenberries',
+    'Bread fruit',
+    'Cantaloupes (cantalope)',
+    'Cherries',
+    'Cranberries',
+    'Cucumbers',
+    'Currants',
+    'Dates',
+    'Eggplant',
+    'Figs',
+    'Grapes',
+    'Grapefruit',
+    'Guava',
+    'Honeydew melons',
+    'Huckleberries',
+    'Kiwis',
+    'Kumquat',
+    'Lemons',
+    'Limes',
+    'Mangos',
+    'Mulberries',
+    'Muskmelon',
+    'Nectarines',
+    'Olives',
+    'Oranges',
+    'Papaya',
+    'Peaches',
+    'Pears',
+    'Persimmon',
+    'Pineapple',
+    'Plums',
+    'Pomegranate',
+    'Raspberries',
+    'Rose Apple',
+    'Starfruit',
+    'Strawberries',
+    'Tangerines',
+    'Tomatoes',
+    'Watermelons',
+    'Zucchini',
+  ]
+
+  const selectedFruits = ref([])
+
+  const likesAllFruit = computed(() => {
+    return selectedFruits.value.length === fruits.length
+  })
+  const likesSomeFruit = computed(() => {
+    return selectedFruits.value.length > 0
+  })
+  const title = computed(() => {
+    if (likesAllFruit.value) return 'Holy smokes, someone call the fruit police!'
+    if (likesSomeFruit.value) return 'Fruit Count'
+    return 'How could you not like fruit?'
+  })
+  const subtitle = computed(() => {
+    if (likesAllFruit.value) return undefined
+    if (likesSomeFruit.value) return selectedFruits.value.length
+    return 'Go ahead, make a selection above!'
+  })
+
+  function toggle () {
+    if (likesAllFruit.value) {
+      selectedFruits.value = []
+    } else {
+      selectedFruits.value = fruits.slice()
+    }
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

@@ -10,6 +10,12 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const date = ref('2018-03-02')
+</script>
+
 <script>
   export default {
     data: () => ({

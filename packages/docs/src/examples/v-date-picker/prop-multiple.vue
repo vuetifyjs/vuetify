@@ -15,7 +15,7 @@
     >
       <v-menu
         ref="menu"
-        v-model="menu"
+        v-model="menuActive"
         v-model:return-value="dates"
         :close-on-content-click="false"
         transition="scale-transition"
@@ -52,7 +52,7 @@
           <v-btn
             variant="text"
             color="primary"
-            @click="$refs.menu.save(dates)"
+            @click="menu.save(dates)"
           >
             OK
           </v-btn>
@@ -62,11 +62,20 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const menu = ref()
+
+  const dates = ref(['2018-09-15', '2018-09-20'])
+  const menuActive = ref(false)
+</script>
+
 <script>
   export default {
     data: () => ({
       dates: ['2018-09-15', '2018-09-20'],
-      menu: false,
+      menuActive: false,
     }),
   }
 </script>
