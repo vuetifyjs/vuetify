@@ -11,7 +11,6 @@ import Dependent from '../../mixins/dependent'
 import Menuable from '../../mixins/menuable'
 import Returnable from '../../mixins/returnable'
 import Roundable from '../../mixins/roundable'
-import Toggleable from '../../mixins/toggleable'
 import Themeable from '../../mixins/themeable'
 
 // Directives
@@ -33,11 +32,10 @@ import { VNode, VNodeDirective, VNodeData, PropType } from 'vue'
 const baseMixins = mixins(
   Dependent,
   Delayable,
-  Menuable,
   Returnable,
   Roundable,
-  Toggleable,
-  Themeable
+  Themeable,
+  Menuable,
 )
 
 /* @vue/component */
@@ -75,10 +73,6 @@ export default baseMixins.extend({
     },
     offsetX: Boolean,
     offsetY: Boolean,
-    openOnClick: {
-      type: Boolean,
-      default: true,
-    },
     openOnHover: Boolean,
     origin: {
       type: String,
@@ -89,7 +83,7 @@ export default baseMixins.extend({
       default: 'v-menu-transition',
     },
     contentProps: {
-      type: Object as PropType<Record<string, string | number>>,
+      type: Object as PropType<Record<string, any>>,
       default: () => ({}),
     },
   },
@@ -408,7 +402,7 @@ export default baseMixins.extend({
     mouseLeaveHandler (e: MouseEvent) {
       // Prevent accidental re-activation
       this.runDelay('close', () => {
-        if (this.$refs.content.contains(e.relatedTarget as HTMLElement)) return
+        if (this.$refs.content?.contains(e.relatedTarget as HTMLElement)) return
 
         requestAnimationFrame(() => {
           this.isActive = false
