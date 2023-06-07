@@ -598,6 +598,7 @@ export default mixins(
         props: simpleProps,
         class: {
           'v-data-table--mobile': this.isMobile,
+          'v-data-table--selectable': this.showSelect,
         },
       }, [
         this.proxySlot('top', getSlot(this, 'top', {
