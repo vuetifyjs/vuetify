@@ -13,6 +13,7 @@ import {
   DataItemsPerPageOption,
   ItemGroup,
   RowClassFunction,
+  RowStyleFunction,
   DataTableItemProps,
 } from 'vuetify/types'
 
@@ -40,7 +41,7 @@ import ripple from '../../directives/ripple'
 import mixins from '../../util/mixins'
 import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, defaultFilter, camelizeObjectKeys, getPropertyFromItem } from '../../util/helpers'
 import { breaking } from '../../util/console'
-import { mergeClasses } from '../../util/mergeData'
+import { mergeClasses, mergeStyles } from '../../util/mergeData'
 
 function filterFn (item: any, search: string | null, filter: DataTableFilterFunction) {
   return (header: DataTableHeader) => {
@@ -115,6 +116,10 @@ export default mixins(
       type: [String, Function],
       default: () => '',
     } as PropValidator<RowClassFunction | string>,
+    itemStyle: {
+      type: [String, Function],
+      default: () => '',
+    } as PropValidator<RowStyleFunction | string>,
     loaderHeight: {
       type: [Number, String],
       default: 4,
@@ -520,6 +525,7 @@ export default mixins(
           { ...classes, 'v-data-table__selected': data.isSelected },
           getPropertyFromItem(item, this.itemClass)
         ),
+        style: mergeStyles({}, getPropertyFromItem(item, this.itemStyle)),
         props: {
           headers: this.computedHeaders,
           hideDefaultHeader: this.hideDefaultHeader,
