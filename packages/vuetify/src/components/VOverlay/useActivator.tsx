@@ -152,7 +152,7 @@ export function useActivator (
   })
 
   const contentEvents = computed(() => {
-    const events: Partial<typeof availableEvents> = {}
+    const events: Record<string, EventListener> = {}
 
     if (props.openOnHover) {
       events.onMouseenter = () => {
@@ -161,6 +161,17 @@ export function useActivator (
       }
       events.onMouseleave = () => {
         isHovered = false
+        runCloseDelay()
+      }
+    }
+
+    if (openOnFocus.value) {
+      events.onFocusin = () => {
+        isFocused = true
+        runOpenDelay()
+      }
+      events.onFocusout = () => {
+        isFocused = false
         runCloseDelay()
       }
     }
@@ -177,7 +188,8 @@ export function useActivator (
   })
 
   const scrimEvents = computed(() => {
-    const events: Partial<typeof availableEvents> = {}
+    const events: Record<string, EventListener> = {}
+
     if (props.openOnHover) {
       events.onMouseenter = () => {
         if (firstEnter) {
