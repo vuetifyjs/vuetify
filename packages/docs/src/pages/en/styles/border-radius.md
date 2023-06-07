@@ -23,7 +23,7 @@ Use border utilities to quickly style the border-radius of any element.
 
 <alert type="info">
 
-  The infixes **sm**, **lg**, and **xl** correlate to the border radius *size* and are not affected by breakpoints.
+  The infixes **sm**, **lg**, **xl**, and **xxl** correlate to the border radius *size* and are not affected by breakpoints.
 
 </alert>
 
@@ -39,7 +39,8 @@ $rounded: (
   'sm': $border-radius-root / 2,
   null: $border-radius-root,
   'lg': $border-radius-root * 2,
-  'xl': $border-radius-root * 6,
+  'xl': $border-radius-root * 4,
+  'xxl': $border-radius-root * 6,
   'pill': 9999px,
   'circle': 50%
 );
@@ -74,7 +75,7 @@ Use the `.rounded-0` helper class to *remove* all of an elements radius or selec
 
 #### Rounding all corners
 
-The **rounded** helper classes allow you to modify the *border radius* of an element. Use the `.rounded-sm`, `.rounded`, `.rounded-lg`, and `.rounded-xl` to add a border radius of varying size.
+The **rounded** helper classes allow you to modify the *border radius* of an element. Use the `.rounded-sm`, `.rounded`, `.rounded-lg`, `.rounded-xl` and `.rounded-xxl` to add a border radius of varying size.
 
 <example file="border-radius/misc-rounding-all-corners" />
 
