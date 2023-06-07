@@ -1,31 +1,79 @@
 ---
-disabled: true
+emphasized: true
 meta:
-  title: Date picker component
+  title: Date pickers
   description: The date picker component is a stand-alone interface that allows the selection of a date, month and year.
   keywords: date pickers, vuetify date picker component, vue date picker component
 related:
   - /components/buttons/
+  - /features/dates/
   - /components/text-fields/
-  - /components/time-pickers/
 ---
 
 # Date pickers
 
 `v-date-picker` is a fully featured date selection component that lets users select a date, or range of dates.
 
-<entry />
+<!-- ![Date picker Entry](https://cdn.vuetifyjs.com/docs/images/components/v-date-picker/v-date-picker-entry.png) -->
+
+---
 
 ## Usage
 
 Date pickers come in two orientation variations, portrait **(default)** and landscape. By default they are emitting `input` event when the day (for date picker) or month (for month picker), but with **reactive** prop they can update the model even after clicking year/month.
 
-<example file="v-date-picker/usage" />
+<usage name="v-date-picker" />
+
+<entry />
+
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-date-picker](/api/v-date-picker/) | Primary Component |
 
+<api-inline hide-links />
+
+## Anatomy
+
+The recommended placement of elements inside of `v-date-picker` is:
+
+* TODO
+
+<!-- ![Date picker Anatomy](https://cdn.vuetifyjs.com/docs/images/components/v-date-picker/v-date-picker-anatomy.png) -->
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The Date picker container holds all `v-date-picker` components |
+
+## Guide
+
+The `v-date-picker` component is a stand-alone interface that allows the selection of a date, month and year. This component is built using the [Date composable](/features/dates/).
+
+The following code snippet is an example of a basic `v-date-picker` component:
+
+```html
+<v-date-picker></v-date-picker>
+```
+
+### Props
+
+TODO
+
+### Slots
+
+TODO
+
+## Examples
+
+TODO
+
+## Defaults Side Effects
+
+TODO
+
+<!--
 ## Caveats
 
 <alert type="warning">
@@ -156,4 +204,4 @@ The date picker supports internationalization through the JavaScript Date object
 
 Date pickers come in two orientation variations, portrait **(default)** and landscape.
 
-<example file="v-date-picker/misc-orientation" />
+<example file="v-date-picker/misc-orientation" /> -->
