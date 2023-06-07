@@ -19,11 +19,9 @@ Skeleton loaders provide a simple way to display loading placeholders in your ap
 
 ----
 
-<alert type="warning">
-
+::: warning
 This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
-
-</alert>
+:::
 
 ## Usage
 

@@ -9,12 +9,6 @@ related:
   - /introduction/why-vuetify/
 ---
 
-<script setup>
-  import { ref } from 'vue'
-
-  const tab = ref('vite')
-</script>
-
 # Treeshaking
 
 Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small bundle size may be a requirement. Treeshaking enables you to drastically lower your build size by only including the components you actually use in the final bundle.
@@ -26,16 +20,9 @@ Being a component framework, Vuetify will always grow horizontally. Depending on
 Vuetify comes with plugins for both webpack and vite that enable automatic treeshaking.  \
 Install [`webpack-plugin-vuetify`](https://www.npmjs.com/package/webpack-plugin-vuetify) or [`vite-plugin-vuetify`](https://www.npmjs.com/package/vite-plugin-vuetify) then enable it in your bundler configuration. Make sure the vuetify plugin comes after the vue plugin or it won't work correctly.
 
-<v-tabs v-model="tab" color="primary">
-  <v-tab value="vite" variant="plain">Vite</v-tab>
-  <v-tab value="webpack" variant="plain">Webpack</v-tab>
-  <v-tab value="vue-cli" variant="plain">Vue CLI</v-tab>
-  <v-tab value="nuxt" variant="plain">Nuxt</v-tab>
-</v-tabs>
-<v-window v-model="tab">
-  <v-window-item value="vite">
+::: tabs
 
-```js { resource="vite.config.js" }
+```js [Vite] { resource="vite.config.js" }
 import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
 
@@ -47,10 +34,7 @@ export default {
 }
 ```
 
-  </v-window-item>
-  <v-window-item value="webpack">
-
-```js { resource="webpack.config.js" }
+```js [Webpack] { resource="webpack.config.js" }
 const { VueLoaderPlugin } = require('vue-loader')
 const { VuetifyPlugin } = require('webpack-plugin-vuetify')
 
@@ -62,10 +46,7 @@ module.exports = {
 }
 ```
 
-  </v-window-item>
-  <v-window-item value="vue-cli">
-
-```js { resource="vue.config.js" }
+```js [Vue CLI] { resource="vue.config.js" }
 const { VuetifyPlugin } = require('webpack-plugin-vuetify')
 
 module.exports = {
@@ -75,9 +56,7 @@ module.exports = {
 }
 ```
 
-  </v-window-item>
-  <v-window-item value="nuxt">
-
+::: tab Nuxt
 <p class="ma-4">Nuxt also uses the vite plugin but needs some extra configuration to load it in the correct order:</p>
 
 ```js { resource="nuxt.config.js" }
@@ -94,8 +73,7 @@ export default defineNuxtConfig({
 })
 ```
 
-  </v-window-item>
-</v-window>
+:::
 
 And that's it! Vuetify components and directives will be automatically imported into your application wherever they are used. If you had any wildcard imports they can now be removed.
 
