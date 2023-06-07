@@ -13,10 +13,10 @@ import { VPicker } from '@/labs/VPicker'
 
 // Composables
 import { createDatePicker } from './composables'
-import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { useDate } from '@/labs/date'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
+import { useDate } from '@/labs/date'
 
 // Utilities
 import { ref, watch } from 'vue'
@@ -34,7 +34,7 @@ export const makeVDatePickerProps = propsFactory({
   color: String,
   inputText: {
     type: String,
-    default: '$vuetify.datePicker.input.placeholder'
+    default: '$vuetify.datePicker.input.placeholder',
   },
   showActions: Boolean,
 
@@ -139,7 +139,7 @@ export const VDatePicker = genericComponent()({
                 />
               </div>
             ),
-            actions: props.showActions ? (() => (
+            actions: props.showActions ? () => (
               <div>
                 <VBtn
                   variant="text"
@@ -155,7 +155,7 @@ export const VDatePicker = genericComponent()({
                   text={ t(props.okText) }
                 />
               </div>
-            )) : undefined,
+            ) : undefined,
           }}
         />
       )

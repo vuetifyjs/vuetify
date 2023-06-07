@@ -46,7 +46,10 @@ export default {
       selected: 'Selected date',
     },
     header: {
-      placeholder: 'Date',
+      placeholder: 'Select a Date',
+    },
+    input: {
+      placeholder: 'Enter date',
     },
   },
   noDataText: 'Não há dados disponíveis',
