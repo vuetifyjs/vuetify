@@ -34,54 +34,9 @@ const DataTableEvents = [
     value: `any, ${dataString}, MouseEvent`,
   },
   {
-    name: 'contextmenu:row',
+    name: '<event>:row',
     source: 'v-data-table',
-    value: `MouseEvent, ${dataString}`,
-  },
-  {
-    name: 'dblclick:row',
-    source: 'v-data-table',
-    value: `MouseEvent, ${dataString}`,
-  },
-  {
-    name: 'mousedown:row',
-    source: 'v-data-table',
-    value: `${dataString}, MouseEvent`,
-  },
-  {
-    name: 'mousemove:row',
-    source: 'v-data-table',
-    value: `${dataString}, MouseEvent`,
-  },
-  {
-    name: 'mouseup:row',
-    source: 'v-data-table',
-    value: `${dataString}, MouseEvent`,
-  },
-  {
-    name: 'mouseenter:row',
-    source: 'v-data-table',
-    value: `${dataString}, MouseEvent`,
-  },
-  {
-    name: 'mouseleave:row',
-    source: 'v-data-table',
-    value: `${dataString}, MouseEvent`,
-  },
-  {
-    name: 'touchstart:row',
-    source: 'v-data-table',
-    value: `${dataString}, TouchEvent`,
-  },
-  {
-    name: 'touchmove:row',
-    source: 'v-data-table',
-    value: `${dataString}, TouchEvent`,
-  },
-  {
-    name: 'touchend:row',
-    source: 'v-data-table',
-    value: `${dataString}, TouchEvent`,
+    value: `${dataString}, Event`,
   },
 ].concat(DataIteratorEvents)
 
