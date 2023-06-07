@@ -1,3 +1,4 @@
+// Utilities
 import { getCurrentInstance } from '@/util'
 
 export function useScopeId () {

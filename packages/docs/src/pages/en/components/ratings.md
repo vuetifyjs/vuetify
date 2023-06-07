@@ -1,6 +1,6 @@
 ---
-nav: Ratings
 meta:
+  nav: Ratings
   title: Rating component
   description: The star rating component is a specialized widget for collecting user feedback via ratings.
   keywords: star ratings, vuetify star rating component, vue star rating component, rating component

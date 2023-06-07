@@ -3,16 +3,16 @@ import { inject, provide, ref, watch } from 'vue'
 import { createRange, propsFactory } from '@/util'
 
 // Types
-import type { InjectionKey, PropType, Ref } from 'vue'
-import type { DataTableHeader, InternalDataTableHeader } from '../types'
+import type { DeepReadonly, InjectionKey, PropType, Ref } from 'vue'
 import type { SortItem } from './sort'
+import type { DataTableHeader, InternalDataTableHeader } from '../types'
 
 export const makeDataTableHeaderProps = propsFactory({
   headers: {
-    type: Array as PropType<DataTableHeader[] | DataTableHeader[][]>,
+    type: Array as PropType<DeepReadonly<DataTableHeader[] | DataTableHeader[][]>>,
     default: () => ([]),
   },
-}, 'v-data-table-header')
+}, 'DataTable-header')
 
 export const VDataTableHeadersSymbol: InjectionKey<{
   headers: Ref<InternalDataTableHeader[][]>
@@ -20,7 +20,7 @@ export const VDataTableHeadersSymbol: InjectionKey<{
 }> = Symbol.for('vuetify:data-table-headers')
 
 type HeaderProps = {
-  headers: DataTableHeader[] | DataTableHeader[][]
+  headers: DeepReadonly<DataTableHeader[] | DataTableHeader[][]>
 }
 
 export function createHeaders (
@@ -67,18 +67,17 @@ export function createHeaders (
     const fixedRows: InternalDataTableHeader[][] = createRange(rowCount).map(() => [])
     const fixedOffsets = createRange(rowCount).fill(0)
 
-    let count = 0
     flat.forEach(({ column, row }) => {
-      const id = column.key ?? `data-table-column-${count++}`
+      const key = column.key
       for (let i = row; i <= row + (column.rowspan ?? 1) - 1; i++) {
         fixedRows[i].push({
           ...column,
-          key: id,
+          key,
           fixedOffset: fixedOffsets[i],
           sortable: column.sortable ?? !!column.key,
         })
 
-        fixedOffsets[i] += column.width ?? 0
+        fixedOffsets[i] += Number(column.width ?? 0)
       }
     })
 

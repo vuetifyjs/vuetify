@@ -1,10 +1,13 @@
 /// <reference types="../../../../types/cypress" />
 
-import { createRouter, createWebHistory } from 'vue-router'
-import { Application } from '../../../../cypress/templates'
+// Components
 import { VBreadcrumbs } from '..'
-import { VBreadcrumbsItem } from '../VBreadcrumbsItem'
+import { Application } from '../../../../cypress/templates'
 import { VBreadcrumbsDivider } from '../VBreadcrumbsDivider'
+import { VBreadcrumbsItem } from '../VBreadcrumbsItem'
+
+// Utilities
+import { createRouter, createWebHistory } from 'vue-router'
 
 describe('VBreadcrumbs', () => {
   it('should use item slot', () => {
@@ -68,7 +71,7 @@ describe('VBreadcrumbs', () => {
   it('should render link if href is set', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={[{ text: 'hello', href: '/hello' }, { text: 'world', href: '/world' }]}></VBreadcrumbs>
+        <VBreadcrumbs items={[{ title: 'hello', href: '/hello' }, { title: 'world', href: '/world' }]}></VBreadcrumbs>
       </Application>
     ))
 
@@ -92,7 +95,7 @@ describe('VBreadcrumbs', () => {
 
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={[{ text: 'about', to: '/about' }, { text: 'something', to: '/something' }]}></VBreadcrumbs>
+        <VBreadcrumbs items={[{ title: 'about', to: '/about' }, { title: 'something', to: '/something' }]}></VBreadcrumbs>
       </Application>
     ), {
       global: {
@@ -159,7 +162,7 @@ describe('VBreadcrumbs', () => {
   it('should be possible to override last item disabled by default', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={['foo', { text: 'bar', disabled: false }]}></VBreadcrumbs>
+        <VBreadcrumbs items={['foo', { title: 'bar', disabled: false }]}></VBreadcrumbs>
       </Application>
     ))
 

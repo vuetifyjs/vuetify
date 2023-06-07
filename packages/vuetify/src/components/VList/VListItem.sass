@@ -20,6 +20,18 @@
   @include tools.rounded($list-item-border-radius)
   @include tools.variant($list-item-variants...)
 
+  @supports selector(:focus-visible)
+    &::after
+      @include tools.absolute(true)
+      pointer-events: none
+      border: 2px solid currentColor
+      border-radius: 4px
+      opacity: 0
+      transition: opacity .2s ease-in-out
+
+    &:focus-visible::after
+      opacity: calc(.15 * var(--v-theme-overlay-multiplier))
+
   &__prepend,
   &__append
     > .v-icon

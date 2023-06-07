@@ -6,13 +6,12 @@
     :items-per-page="itemsPerPage"
     hide-default-footer
     class="elevation-1"
-    @update:options="options = $event"
   >
     <template v-slot:bottom>
       <div class="text-center pt-2">
         <v-pagination
           v-model="page"
-          :length="options.pageCount"
+          :length="pageCount"
         ></v-pagination>
         <v-text-field
           :model-value="itemsPerPage"
@@ -33,9 +32,6 @@
   export default {
     data () {
       return {
-        options: {
-          pageCount: 1,
-        },
         page: 1,
         itemsPerPage: 5,
         headers: [
@@ -134,6 +130,11 @@
           },
         ],
       }
+    },
+    computed: {
+      pageCount () {
+        return Math.ceil(this.desserts.length / this.itemsPerPage)
+      },
     },
   }
 </script>

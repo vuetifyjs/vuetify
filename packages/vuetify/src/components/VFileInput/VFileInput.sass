@@ -16,7 +16,12 @@
     top: 0
     width: 100%
     z-index: 1
-  
+ 
+  &--chips,
+  &--selection-slot
+    .v-field__input
+      min-height: calc(var(--v-field-input-min-height) + var(--file-input-chips-margin-bottom) + $file-input-chips-margin-top)
+
   .v-chip
     margin-top: $file-input-chips-margin-top
     margin-bottom: var(--file-input-chips-margin-bottom)

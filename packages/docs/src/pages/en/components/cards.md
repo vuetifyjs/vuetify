@@ -1,6 +1,6 @@
 ---
-nav: Cards
 meta:
+  nav: Cards
   title: Card component
   description: The v-card component is a versatile and enhanced sheet of paper that provides a simple interface for headings, text, images, and actions.
   keywords: cards, vuetify card component, vue card component, v-card

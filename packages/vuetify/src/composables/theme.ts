@@ -23,8 +23,8 @@ import {
 import { APCAcontrast } from '@/util/color/APCA'
 
 // Types
-import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 import type { HeadClient } from '@vueuse/head'
+import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
@@ -163,9 +163,9 @@ const defaultThemeOptions: Exclude<ThemeOptions, false> = {
       variables: {
         'border-color': '#FFFFFF',
         'border-opacity': 0.12,
-        'high-emphasis-opacity': 0.87,
-        'medium-emphasis-opacity': 0.60,
-        'disabled-opacity': 0.38,
+        'high-emphasis-opacity': 1,
+        'medium-emphasis-opacity': 0.70,
+        'disabled-opacity': 0.50,
         'idle-opacity': 0.10,
         'hover-opacity': 0.04,
         'focus-opacity': 0.12,
@@ -307,6 +307,8 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   }
 
   function install (app: App) {
+    if (parsedOptions.isDisabled) return
+
     const head = app._context.provides.usehead as HeadClient | undefined
     if (head) {
       if (head.push) {
@@ -328,8 +330,6 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       watch(styles, updateStyles, { immediate: true })
 
       function updateStyles () {
-        if (parsedOptions.isDisabled) return
-
         if (typeof document !== 'undefined' && !styleEl) {
           const el = document.createElement('style')
           el.type = 'text/css'

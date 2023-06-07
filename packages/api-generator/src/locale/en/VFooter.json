@@ -1,0 +1,6 @@
+{
+  "props": {
+    "app": "Determines the position of the footer. If true, the footer would be given a fixed position at the bottom of the viewport. If false, the footer is set to the bottom of the page",
+    "height": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-footer.json))"
+  }
+}

@@ -10,6 +10,7 @@ import { reactive, toRefs } from 'vue'
 export type RootState = {
   v: number
   api: 'link-only' | 'inline'
+  composition: ('options' | 'composition')
   pwaRefresh: boolean
   theme: string
   mixedTheme: boolean
@@ -31,6 +32,7 @@ export const useUserStore = defineStore('user', () => {
   const state = reactive<RootState>({
     v: 1,
     api: 'link-only',
+    composition: 'options',
     pwaRefresh: true,
     theme: 'system',
     mixedTheme: true,

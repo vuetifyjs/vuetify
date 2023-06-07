@@ -4,39 +4,43 @@ import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createIcons, IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
+import { createDate, DateAdapterSymbol } from '@/labs/date/date'
 
 // Utilities
-import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
 import { nextTick, reactive } from 'vue'
+import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
 import type { DefaultsOptions } from '@/composables/defaults'
-import type { DisplayOptions } from '@/composables/display'
+import type { DisplayOptions, SSROptions } from '@/composables/display'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
+import type { DateOptions } from '@/labs/date'
 
 export * from './composables'
+export type { DateOptions, DateInstance } from '@/labs/date'
 
 export interface VuetifyOptions {
   aliases?: Record<string, any>
   blueprint?: Blueprint
   components?: Record<string, any>
+  date?: DateOptions
   directives?: Record<string, any>
   defaults?: DefaultsOptions
   display?: DisplayOptions
   theme?: ThemeOptions
   icons?: IconOptions
   locale?: LocaleOptions & RtlOptions
-  ssr?: boolean
+  ssr?: SSROptions
 }
 
 export interface Blueprint extends Omit<VuetifyOptions, 'blueprint'> {}
 
 export function createVuetify (vuetify: VuetifyOptions = {}) {
   const { blueprint, ...rest } = vuetify
-  const options = mergeDeep(blueprint, rest)
+  const options: VuetifyOptions = mergeDeep(blueprint, rest)
   const {
     aliases = {},
     components = {},
@@ -48,6 +52,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
   const theme = createTheme(options.theme)
   const icons = createIcons(options.icons)
   const locale = createLocale(options.locale)
+  const date = createDate(options.date)
 
   const install = (app: App) => {
     for (const key in directives) {
@@ -73,6 +78,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     app.provide(ThemeSymbol, theme)
     app.provide(IconSymbol, icons)
     app.provide(LocaleSymbol, locale)
+    app.provide(DateAdapterSymbol, date)
 
     if (IN_BROWSER && options.ssr) {
       if (app.$nuxt) {
@@ -102,6 +108,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
               theme: inject.call(this, ThemeSymbol),
               icons: inject.call(this, IconSymbol),
               locale: inject.call(this, LocaleSymbol),
+              date: inject.call(this, DateAdapterSymbol),
             })
           },
         },
@@ -116,6 +123,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     theme,
     icons,
     locale,
+    date,
   }
 }
 

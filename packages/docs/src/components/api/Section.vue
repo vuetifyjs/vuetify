@@ -43,7 +43,7 @@
   import { ref, watch } from 'vue'
 
   const getApi = (name: string) => {
-    return import(`../../api/data/${name}.json`)
+    return import(`../../../../api-generator/dist/api/${name}.json`)
   }
 
   const props = defineProps({

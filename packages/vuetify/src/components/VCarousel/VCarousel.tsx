@@ -2,10 +2,10 @@
 import './VCarousel.sass'
 
 // Components
-import { makeVWindowProps, VWindow } from '@/components/VWindow/VWindow'
 import { VBtn } from '@/components/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VProgressLinear } from '@/components/VProgressLinear'
+import { makeVWindowProps, VWindow } from '@/components/VWindow/VWindow'
 
 // Composables
 import { IconValue } from '@/composables/icons'
@@ -13,44 +13,57 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { convertToUnit, genericComponent, useRender } from '@/util'
 import { onMounted, ref, watch } from 'vue'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { GroupProvide } from '@/composables/group'
 import type { PropType } from 'vue'
-import type { VWindowSlots } from '../VWindow/VWindow'
+import type { VWindowSlots } from '@/components/VWindow/VWindow'
+import type { GroupProvide } from '@/composables/group'
 
-export const VCarousel = genericComponent<VWindowSlots>()({
+export const makeVCarouselProps = propsFactory({
+  color: String,
+  cycle: Boolean,
+  delimiterIcon: {
+    type: IconValue,
+    default: '$delimiter',
+  },
+  height: {
+    type: [Number, String],
+    default: 500,
+  },
+  hideDelimiters: Boolean,
+  hideDelimiterBackground: Boolean,
+  interval: {
+    type: [Number, String],
+    default: 6000,
+    validator: (value: string | number) => Number(value) > 0,
+  },
+  progress: [Boolean, String],
+  verticalDelimiters: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
+
+  ...makeVWindowProps({
+    continuous: true,
+    mandatory: 'force' as const,
+    showArrows: true,
+  }),
+}, 'VCarousel')
+
+type VCarouselSlots = VWindowSlots & {
+  item: {
+    props: Record<string, any>
+    item: {
+      id: number
+      value: unknown
+      disabled: boolean | undefined
+    }
+  }
+}
+
+export const VCarousel = genericComponent<VCarouselSlots>()({
   name: 'VCarousel',
 
-  props: {
-    color: String,
-    cycle: Boolean,
-    delimiterIcon: {
-      type: IconValue,
-      default: '$delimiter',
-    },
-    height: {
-      type: [Number, String],
-      default: 500,
-    },
-    hideDelimiters: Boolean,
-    hideDelimiterBackground: Boolean,
-    interval: {
-      type: [Number, String],
-      default: 6000,
-      validator: (value: string | number) => Number(value) > 0,
-    },
-    progress: [Boolean, String],
-    verticalDelimiters: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
-
-    ...makeVWindowProps({
-      continuous: true,
-      mandatory: 'force' as const,
-      showArrows: true,
-    }),
-  },
+  props: makeVCarouselProps(),
 
   emits: {
     'update:modelValue': (val: any) => true,
@@ -92,8 +105,12 @@ export const VCarousel = genericComponent<VWindowSlots>()({
             'v-carousel--hide-delimiter-background': props.hideDelimiterBackground,
             'v-carousel--vertical-delimiters': props.verticalDelimiters,
           },
+          props.class,
         ]}
-        style={{ height: convertToUnit(props.height) }}
+        style={[
+          { height: convertToUnit(props.height) },
+          props.style,
+        ]}
         continuous
         mandatory="force"
         showArrows={ props.showArrows }

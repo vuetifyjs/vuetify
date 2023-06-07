@@ -38,7 +38,7 @@ The following shows how to access the application's display information:
       onMounted(() => {
         console.log(mobile.value) // false
       })
-    }
+    },
   }
 </script>
 ```
@@ -50,7 +50,7 @@ If you are still using the Options API, you can access the display information o
   export default {
     mounted () {
       console.log(this.$vuetify.display.mobile)
-    }
+    },
   }
 </script>
 ```
@@ -128,7 +128,7 @@ In the following example, we use a switch statement and the current breakpoint n
       })
 
       return { height }
-    }
+    },
   }
 </script>
 ```
@@ -240,7 +240,7 @@ Breakpoint and conditional values return a `boolean` that is derived from the cu
       const { xs, mdAndUp } = useDisplay()
 
       return { xs, mdAndUp }
-    }
+    },
   }
 </script>
 ```
@@ -278,7 +278,7 @@ For example, the [v-banner](/components/banners/) component implements different
         console.log(width.value) // 960
         console.log(mobile.value) // true
       })
-    }
+    },
   }
 </script>
 ```

@@ -25,7 +25,7 @@ The issue list of this repo is exclusively for bug reports and feature requests.
 
 - Search for similar [issues], it may have been answered already.
   > If a similar issue already exists, you do not need to open another issue for this, if you want to help with it in any way, you can help by giving appropriate information in the already existing issue.
-- Try to reproduce with the [latest](https://github.com/vuetifyjs/vuetify/releases/latest) version in [🎮 Vuetify Play](https://play.vuetifyjs.com/) or a [codepen](https://v3-template.vuetifyjs.com/) or repository that can be cloned to produce the expected behavior.
+- Try to reproduce with the [latest](https://github.com/vuetifyjs/vuetify/releases/latest) version in [🎮 Vuetify Play](https://play.vuetifyjs.com/) or a repository that can be cloned to produce the expected behavior.
 - Make sure that the reproduction is **MINIMAL** and **CONCISE**
 
 These steps ensure that we have all the information necessary to quickly triage and resolve your issue. Once your reproduction is complete, submit a new issue using the [Vuetify Issue Creator](https://issues.vuetifyjs.com/). Using this issue creator is required, otherwise the issue will be closed automatically.
@@ -126,12 +126,6 @@ The **App.vue** file used for Vuetify development is located in `packages/vuetif
 The documentation is located in `packages/docs` but also uses some files from `packages/api-generator`. A dev server for the documentation can be started by running `yarn dev docs` from the project root and will be available on [localhost:8080](http://localhost:8080/) by default.
 
 If you want to see changes from Vuetify in the documentation you need to run `yarn build:lib` in the vuetify package before starting the documentation server.
-
-<alert type="info">
-
-Please note that Vuetify v3's documentation is located on the `next` branch and not on the `master` branch.
-
-</alert>
 
 ### Submitting Changes / Pull Requests
 

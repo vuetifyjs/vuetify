@@ -1,4 +1,4 @@
-// Components
+// Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -14,7 +14,7 @@ export interface FocusProps {
 // Composables
 export const makeFocusProps = propsFactory({
   focused: Boolean,
-  'onUpdate:focused': EventProp<[FocusEvent]>(),
+  'onUpdate:focused': EventProp<[boolean]>(),
 }, 'focus')
 
 export function useFocus (

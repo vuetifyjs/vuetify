@@ -139,7 +139,7 @@
   text-transform: $card-subtitle-text-transform
   white-space: $card-subtitle-white-space
 
-  @include card-line-height-densities($card-subtitle-densities)
+  @include card-line-height-densities($card-subtitle-density-line-height)
 
   .v-card-item &
     padding: $card-subtitle-header-padding
@@ -152,7 +152,7 @@
   padding: $card-text-padding
   text-transform: $card-text-text-transform
 
-  @include card-line-height-densities($card-text-densities)
+  @include card-line-height-densities($card-text-density-line-height)
 
 .v-card__image
   display: flex
