@@ -6,7 +6,7 @@ import { VPickerTitle } from './VPickerTitle'
 import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 export type VPickerSlots = {
@@ -20,7 +20,7 @@ export const makeVPickerProps = propsFactory({
   landscape: Boolean,
   title: String,
 
-  ...makeVSheetProps(),
+  ...omit(makeVSheetProps(), ['color']),
 }, 'VPicker')
 
 export const VPicker = genericComponent<VPickerSlots>()({

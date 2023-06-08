@@ -44,7 +44,6 @@ export const VDatePickerHeader = genericComponent()({
   setup (props, { emit }) {
     const { t } = useLocale()
     const adapter = useDate()
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
     const headerText = computed(() => {
       if (props.header) return props.header
@@ -68,9 +67,7 @@ export const VDatePickerHeader = genericComponent()({
       <div
         class={[
           'v-date-picker-header',
-          backgroundColorClasses.value,
         ]}
-        style={ backgroundColorStyles.value }
       >
         <div class="v-date-picker-header__wrapper">
           <div class="v-date-picker-header__text">

@@ -59,7 +59,29 @@ The following code snippet is an example of a basic `v-date-picker` component:
 
 ### Props
 
-TODO
+#### Elevation
+
+The `v-date-picker` component supports elevation up to a maximum value of 24. For more information on elevations, visit the official [Material Design elevations](https://material.io/design/environment/elevation.html) page.
+
+<example file="v-date-picker/prop-elevation" />*header-color** props. If **header-color** prop is not provided header will use the **color** prop value.
+
+<example file="v-date-picker/prop-colors" />
+
+#### Width
+
+You can specify the picker's width or make it full width.
+
+<example file="v-date-picker/prop-width" />
+
+#### Show sibling months
+
+By default days from previous and next months are not visible. They can be displayed using the **show-adjacent-months** prop.
+
+<example file="v-date-picker/prop-show-adjacent-months" />
+
+#### Colors
+
+Date picker colors can be set using the **color** and *
 
 ### Slots
 
@@ -139,18 +161,6 @@ Selecting new date could be disabled by adding **readonly** prop.
 By default the current date is displayed using outlined button - **show-current** prop allows you to remove the border or select different date to be displayed as the current one.
 
 <example file="v-date-picker/prop-show-current" />
-
-#### Show sibling months
-
-By default days from previous and next months are not visible. They can be displayed using the **show-adjacent-months** prop.
-
-<example file="v-date-picker/prop-show-adjacent-months" />
-
-#### Width
-
-You can specify the picker's width or make it full width.
-
-<example file="v-date-picker/prop-width" />
 
 ### Events
 

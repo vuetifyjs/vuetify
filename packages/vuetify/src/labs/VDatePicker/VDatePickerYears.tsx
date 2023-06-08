@@ -55,9 +55,10 @@ export const VDatePickerYears = genericComponent()({
           { years.value.map(year => (
             <VBtn
               ref={ year === displayYear.value ? yearRef : undefined }
-              variant="flat"
+              variant={ year === displayYear.value ? 'flat' : 'text' }
               rounded="xl"
               active={ year === displayYear.value }
+              color={ year === displayYear.value ? props.color : undefined }
               onClick={ () => {
                 emit('update:displayDate', adapter.setYear(props.displayDate, year))
                 emit('update:viewMode', 'month')

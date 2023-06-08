@@ -100,7 +100,11 @@ export const VDatePicker = genericComponent()({
       return (
         <VPicker
           { ...pickerProps }
-          class="v-date-picker"
+          class={[
+            'v-date-picker',
+            props.class,
+          ]}
+          style={ props.style }
           title={ title.value }
           v-slots={{
             header: () => (
