@@ -31,15 +31,15 @@ export default {
   },
   datePicker: {
     ok: 'OK',
-    cancel: 'Cancel',
+    cancel: 'Avbryt',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Välj datum',
+      header: 'Välj datum',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Välj datum',
+    header: 'Välj datum',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Välj datum',
     },
   },
   noDataText: 'Ingen data tillgänglig',

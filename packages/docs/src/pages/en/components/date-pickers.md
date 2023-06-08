@@ -35,27 +35,63 @@ Date pickers come in two orientation variations, portrait **(default)** and land
 
 <api-inline hide-links />
 
-## Anatomy
+<!-- ## Anatomy
 
 The recommended placement of elements inside of `v-date-picker` is:
 
 * TODO
 
-<!-- ![Date picker Anatomy](https://cdn.vuetifyjs.com/docs/images/components/v-date-picker/v-date-picker-anatomy.png) -->
+![Date picker Anatomy](https://cdn.vuetifyjs.com/docs/images/components/v-date-picker/v-date-picker-anatomy.png)
 
 | Element / Area | Description |
 | - | - |
-| 1. Container | The Date picker container holds all `v-date-picker` components |
+| 1. Container | The Date picker container holds all `v-date-picker` components | -->
 
 ## Guide
 
 The `v-date-picker` component is a stand-alone interface that allows the selection of a date, month and year. This component is built using the [Date composable](/features/dates/).
 
-The following code snippet is an example of a basic `v-date-picker` component:
+All date components support the [date-io](https://github.com/dmtrKovalenko/date-io) abstraction layer for date management. By default they will use a built-in adapter that uses the native Date object, but it is possible to use any of the date-io adapters. See the [dates](/features/dates/) page for more information.
+
+```js
+import DayJsAdapter from '@date-io/dayjs'
+
+createVuetify({
+  date: {
+    adapter: DayJsAdapter,
+  }
+})
+```
+
+The components also use the [i18n](/features/internationalization) feature to know which locale should be used for dates. If you are using the built-in date adapter, then everything should work automatically.
+
+However if you are not using the build in date adapter, like [date-fns](https://www.npmjs.com/package/@date-io/date-fns), then you will need to set up a mapping from the [i18n](/features/internationalization) locale string to the date library locale in the vuetify options.
+
+```js
+import DateFnsAdapter from '@date-io/date-fns'
+import enUS from 'date-fns/locale/en-US'
+import svSE from 'date-fns/locale/sv'
+
+createVuetify({
+  date: {
+    adapter: DateFnsAdapter,
+    locale: {
+      en: enUS,
+      sv: svSE,
+    },
+  },
+})
+```
+
+Here is an example of switching the locale of the **v-date-picker** component.
+
+<example file="v-date-picker/guide-locale" />
+
+<!-- The following code snippet is an example of a basic `v-date-picker` component:
 
 ```html
 <v-date-picker></v-date-picker>
-```
+``` -->
 
 ### Props
 
@@ -63,9 +99,7 @@ The following code snippet is an example of a basic `v-date-picker` component:
 
 The `v-date-picker` component supports elevation up to a maximum value of 24. For more information on elevations, visit the official [Material Design elevations](https://material.io/design/environment/elevation.html) page.
 
-<example file="v-date-picker/prop-elevation" />*header-color** props. If **header-color** prop is not provided header will use the **color** prop value.
-
-<example file="v-date-picker/prop-colors" />
+<example file="v-date-picker/prop-elevation" />
 
 #### Width
 
@@ -81,19 +115,9 @@ By default days from previous and next months are not visible. They can be displ
 
 #### Colors
 
-Date picker colors can be set using the **color** and *
+Date picker colors can be set using the **color** and **header-color** props. If **header-color** prop is not provided header will use the **color** prop value.
 
-### Slots
-
-TODO
-
-## Examples
-
-TODO
-
-## Defaults Side Effects
-
-TODO
+<example file="v-date-picker/prop-colors" />
 
 <!--
 ## Caveats
