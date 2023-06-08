@@ -33,18 +33,11 @@ export default {
     ok: 'OK',
     cancel: 'Cancel',
     range: {
-      title: {
-        placeholder: 'Select range',
-        selected: 'Selected range',
-      },
-      header: {
-        placeholder: 'Start - End',
-      },
+      title: 'Select dates',
+      header: 'Enter dates',
     },
     title: 'Select date',
-    header: {
-      placeholder: 'Select a Date',
-    },
+    header: 'Enter date',
     input: {
       placeholder: 'Enter date',
     },

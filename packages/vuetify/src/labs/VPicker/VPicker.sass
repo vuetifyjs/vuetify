@@ -4,9 +4,11 @@
   @include tools.elevation(2)
   @include tools.rounded(4px)
 
-  display: grid
-  grid-template-areas: "title" "header" "body"
+  display: inline-grid
   grid-auto-rows: min-content
+  grid-template-areas: "title" "header" "body"
+  overflow: hidden
+  width: 358px
 
   &.v-picker--with-actions
     grid-template-areas: "title" "header" "body" "actions"

@@ -2,8 +2,8 @@
 import './VPicker.sass'
 
 // Components
-import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 import { VPickerTitle } from './VPickerTitle'
+import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
@@ -47,7 +47,7 @@ export const VPicker = genericComponent<VPickerSlots>()({
           style={ props.style }
         >
           { hasTitle && (
-            <VPickerTitle>
+            <VPickerTitle key="picker-title">
               { slots.title?.() ?? props.title }
             </VPickerTitle>
           )}
