@@ -2,10 +2,10 @@
 import './VDatePicker.sass'
 
 // Components
-import { VDatePickerControls } from './VDatePickerControls'
-import { VDatePickerHeader } from './VDatePickerHeader'
-import { VDatePickerMonth } from './VDatePickerMonth'
-import { VDatePickerYears } from './VDatePickerYears'
+import { makeVDatePickerControlsProps, VDatePickerControls } from './VDatePickerControls'
+import { makeVDatePickerHeaderProps, VDatePickerHeader } from './VDatePickerHeader'
+import { makeVDatePickerMonthProps, VDatePickerMonth } from './VDatePickerMonth'
+import { makeVDatePickerYearsProps, VDatePickerYears } from './VDatePickerYears'
 import { VBtn } from '@/components/VBtn'
 import { VTextField } from '@/components/VTextField'
 import { dateEmits, makeDateProps } from '@/labs/VDateInput/composables'
@@ -39,6 +39,10 @@ export const makeVDatePickerProps = propsFactory({
 
   ...makeDateProps(),
   ...makeTransitionProps({ transition: 'fade' }),
+  ...makeVDatePickerControlsProps(),
+  ...makeVDatePickerHeaderProps(),
+  ...makeVDatePickerMonthProps(),
+  ...makeVDatePickerYearsProps(),
   ...makeVPickerProps({ title: '$vuetify.datePicker.title' }),
 }, 'VDatePicker')
 
@@ -116,7 +120,7 @@ export const VDatePicker = genericComponent()({
                 />
 
                 <MaybeTransition transition={ props.transition } mode="out-in">
-                  { props.viewMode === 'month' ? (
+                  { viewMode.value === 'month' ? (
                     <VDatePickerMonth
                       { ...datePickerMonthProps }
                       v-model={ selected.value }

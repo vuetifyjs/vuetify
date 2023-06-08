@@ -19,7 +19,7 @@ import { useDate } from '@/labs/date'
 
 export const makeVDatePickerMonthProps = propsFactory({
   color: String,
-  hideAdjacentMonths: Boolean,
+  showAdjacentMonths: Boolean,
   hideWeekdays: Boolean,
   showWeek: Boolean,
   range: {
@@ -84,7 +84,7 @@ export const VDatePickerMonth = genericComponent()({
       // Make sure there's always 6 weeks in month (6 * 7 days)
       // But only do it if we're not hiding adjacent months?
       const daysInMonth = 6 * 7
-      if (days.length < daysInMonth && !props.hideAdjacentMonths) {
+      if (days.length < daysInMonth && props.showAdjacentMonths) {
         const lastDay = days[days.length - 1]
 
         let week = []
@@ -130,7 +130,7 @@ export const VDatePickerMonth = genericComponent()({
           isEnd,
           isToday: adapter.isSameDay(date, today),
           isAdjacent,
-          isHidden: isAdjacent && props.hideAdjacentMonths,
+          isHidden: isAdjacent && !props.showAdjacentMonths,
           inRange: isRange &&
             !isSame &&
             (isStart || isEnd || (validDates.length === 2 && adapter.isWithinRange(date, validDates as [any, any]))),
@@ -340,7 +340,7 @@ export const VDatePickerMonth = genericComponent()({
                 />
               )}
 
-              { (!props.hideAdjacentMonths || (props.hideAdjacentMonths && !item.isAdjacent)) && (
+              { (props.showAdjacentMonths || !item.isAdjacent) && (
                 <VBtn
                   icon
                   ripple={ false } /* ripple not working correctly since we preventDefault in touchend */

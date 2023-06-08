@@ -58,7 +58,6 @@ export const VDatePickerControls = genericComponent()({
       const prevBtn = (
         <VBtn
           variant="text"
-          size="small"
           icon={ props.prevIcon }
           onClick={ () => emit('update:displayDate', adapter.addMonths(props.displayDate, -1)) }
         />
@@ -67,7 +66,6 @@ export const VDatePickerControls = genericComponent()({
       const nextBtn = (
         <VBtn
           variant="text"
-          size="small"
           icon={ props.nextIcon }
           onClick={ () => emit('update:displayDate', adapter.addMonths(props.displayDate, 1)) }
         />
@@ -81,7 +79,6 @@ export const VDatePickerControls = genericComponent()({
           <VBtn
             key="expand-btn"
             variant="text"
-            size="small"
             icon={ props.viewMode === 'month' ? props.expandIcon : props.collapseIcon }
             onClick={ () => emit('update:viewMode', props.viewMode === 'month' ? 'year' : 'month') }
           />

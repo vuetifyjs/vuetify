@@ -27,7 +27,7 @@ export const makeVDatePickerHeaderProps = propsFactory({
     default: '$calendar',
   },
   showInputSwitch: Boolean,
-  range: Boolean,
+  range: [Boolean, String],
 
   ...omit(makeDateProps(), ['displayDate', 'viewMode']),
 }, 'VDatePickerHeader')
@@ -49,7 +49,7 @@ export const VDatePickerHeader = genericComponent()({
     const headerText = computed(() => {
       if (props.header) return props.header
 
-      if (!props.modelValue?.length) return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}header.placeholder`)
+      if (!props.modelValue?.length) return t(`$vuetify.datePicker.${!!props.range ? 'range.' : ''}header.placeholder`)
 
       if (props.modelValue.length === 1) return adapter.format(props.modelValue[0], 'normalDateWithWeekday')
 

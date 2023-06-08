@@ -14,7 +14,6 @@ import { createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVDateRangePickerMonthProps = propsFactory({
   ...makeVDatePickerMonthProps({
-    hideAdjacentMonths: true,
     hideWeekdays: true,
     multiple: true,
   }),

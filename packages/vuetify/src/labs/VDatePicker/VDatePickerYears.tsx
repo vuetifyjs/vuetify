@@ -12,6 +12,7 @@ import { computed, onMounted, ref } from 'vue'
 import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVDatePickerYearsProps = propsFactory({
+  color: String,
   min: Number,
   max: Number,
   height: [String, Number],
@@ -30,7 +31,7 @@ export const VDatePickerYears = genericComponent()({
 
   setup (props, { emit }) {
     const adapter = useDate()
-    const displayYear = computed(() => adapter.getYear(props.displayDate))
+    const displayYear = computed(() => adapter.getYear(props.displayDate ?? new Date()))
     const years = computed(() => {
       const min = props.min ?? displayYear.value - 50 - 2
       const max = props.max ?? displayYear.value + 50
@@ -56,7 +57,7 @@ export const VDatePickerYears = genericComponent()({
               ref={ year === displayYear.value ? yearRef : undefined }
               variant="flat"
               rounded="xl"
-              color={ year === displayYear.value ? 'primary' : undefined }
+              active={ year === displayYear.value }
               onClick={ () => {
                 emit('update:displayDate', adapter.setYear(props.displayDate, year))
                 emit('update:viewMode', 'month')
