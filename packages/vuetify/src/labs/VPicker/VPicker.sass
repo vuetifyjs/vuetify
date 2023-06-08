@@ -8,8 +8,8 @@
   grid-template-areas: "title" "header" "body"
   grid-auto-rows: min-content
 
-.v-picker--with-actions
-  grid-template-areas: "title" "header" "body" "actions"
+  &.v-picker--with-actions
+    grid-template-areas: "title" "header" "body" "actions"
 
 .v-picker__body
   grid-area: body
@@ -19,16 +19,24 @@
 
 .v-picker__actions
   grid-area: actions
-  padding: 12px
+  padding: 0 12px 12px 12px
   display: flex
   align-items: center
   justify-content: flex-end
 
+  .v-btn
+    padding-inline-start: 8px
+    padding-inline-end: 8px
+    min-width: 48px
+
+    &:not(:last-child)
+      margin-inline-end: 8px
+
 .v-picker--landscape
-  grid-template-areas: "header body" "header body"
+  grid-template-areas: "title" "header body" "header body"
 
 .v-picker--landscape.v-picker--with-actions
-  grid-template-areas: "header body" "header actions"
+  grid-template-areas: "title" "header body" "header actions"
 
 .v-picker-title
   text-transform: uppercase

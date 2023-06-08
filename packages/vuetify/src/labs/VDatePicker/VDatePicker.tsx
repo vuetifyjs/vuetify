@@ -35,7 +35,7 @@ export const makeVDatePickerProps = propsFactory({
     type: String,
     default: '$vuetify.datePicker.input.placeholder',
   },
-  showActions: Boolean,
+  hideActions: Boolean,
 
   ...makeDateProps(),
   ...makeTransitionProps({ transition: 'fade' }),
@@ -73,7 +73,7 @@ export const VDatePicker = genericComponent()({
     })
 
     watch(selected, () => {
-      if (!props.showActions) {
+      if (props.hideActions) {
         emit('update:modelValue', selected.value)
       }
     })
@@ -141,7 +141,7 @@ export const VDatePicker = genericComponent()({
                 />
               </div>
             ),
-            actions: props.showActions ? () => (
+            actions: !props.hideActions ? () => (
               <div>
                 <VBtn
                   variant="text"
