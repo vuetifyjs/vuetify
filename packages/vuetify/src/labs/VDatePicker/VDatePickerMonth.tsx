@@ -16,6 +16,7 @@ import { genericComponent, omit, propsFactory } from '@/util'
 import type { PropType } from 'vue'
 import { dateEmits, makeDateProps } from '../VDateInput/composables'
 import { useDate } from '@/labs/date'
+import { getWeek, toIso } from '../date/date'
 
 export const makeVDatePickerMonthProps = propsFactory({
   color: String,
@@ -119,7 +120,7 @@ export const VDatePickerMonth = genericComponent()({
 
         return {
           date,
-          isoDate: adapter.toIso(date),
+          isoDate: toIso(adapter, date),
           formatted: adapter.format(date, 'keyboardDate'),
           year: adapter.getYear(date),
           month: adapter.getMonth(date),
@@ -145,7 +146,7 @@ export const VDatePickerMonth = genericComponent()({
 
     const weeks = computed(() => {
       return weeksInMonth.value.map(week => {
-        return adapter.getWeek(week[0])
+        return getWeek(adapter, week[0])
       })
     })
 

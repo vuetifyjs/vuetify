@@ -287,32 +287,6 @@ function endOfYear (date: Date) {
   return new Date(date.getFullYear(), 11, 31)
 }
 
-function getMondayOfFirstWeekOfYear (year: number) {
-  return new Date(year, 0, 1)
-}
-
-// https://stackoverflow.com/questions/274861/how-do-i-calculate-the-week-number-given-a-date/275024#275024
-export function getWeek (date: Date) {
-  let year = date.getFullYear()
-  let d1w1 = getMondayOfFirstWeekOfYear(year)
-
-  if (date < d1w1) {
-    year = year - 1
-    d1w1 = getMondayOfFirstWeekOfYear(year)
-  } else {
-    const tv = getMondayOfFirstWeekOfYear(year + 1)
-    if (date >= tv) {
-      year = year + 1
-      d1w1 = tv
-    }
-  }
-
-  const diffTime = Math.abs(date.getTime() - d1w1.getTime())
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-
-  return Math.floor(diffDays / 7) + 1
-}
-
 function isWithinRange (date: Date, range: [Date, Date]) {
   return isAfter(date, range[0]) && isBefore(date, range[1])
 }
@@ -374,8 +348,8 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return date(value)
   }
 
-  toIso (date: Date) {
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+  toJsDate (date: Date) {
+    return date
   }
 
   addDays (date: Date, amount: number) {
@@ -436,10 +410,6 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   getDiff (date: Date, comparing: Date | string, unit?: string) {
     return getDiff(date, comparing, unit)
-  }
-
-  getWeek (date: Date) {
-    return getWeek(date)
   }
 
   getWeekdays () {
