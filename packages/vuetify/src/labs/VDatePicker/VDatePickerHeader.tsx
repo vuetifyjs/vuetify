@@ -5,7 +5,6 @@ import './VDatePickerHeader.sass'
 import { VBtn } from '../../components/VBtn'
 
 // Composables
-import { useBackgroundColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
