@@ -41,10 +41,7 @@ export default {
         placeholder: 'Start - End',
       },
     },
-    title: {
-      placeholder: 'Select date',
-      selected: 'Selected date',
-    },
+    title: 'Select date',
     header: {
       placeholder: 'Select a Date',
     },

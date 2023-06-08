@@ -56,14 +56,6 @@ export const VDatePickerHeader = genericComponent()({
       return props.modelValue.map(date => adapter.format(date, 'monthAndDate')).join(' - ')
     })
 
-    const titleText = computed(() => {
-      if (props.title) return props.title
-
-      if (!props.modelValue?.length) return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}title.placeholder`)
-
-      return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}title.selected`)
-    })
-
     function handleHeaderClick () {
       if (!props.modelValue.length) return
 
@@ -81,9 +73,6 @@ export const VDatePickerHeader = genericComponent()({
         style={ backgroundColorStyles.value }
       >
         <div class="v-date-picker-header__wrapper">
-          <div class="v-date-picker-header__title">
-            { titleText.value }
-          </div>
           <div class="v-date-picker-header__text">
             <div
               class="v-date-picker-header__date"

@@ -3,6 +3,7 @@ import './VPicker.sass'
 
 // Components
 import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
+import { VPickerTitle } from './VPickerTitle'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
@@ -12,10 +13,12 @@ export type VPickerSlots = {
   header: never
   default: never
   actions: never
+  title: never
 }
 
 export const makeVPickerProps = propsFactory({
   landscape: Boolean,
+  title: String,
 
   ...makeVSheetProps(),
 }, 'VPicker')
@@ -28,6 +31,7 @@ export const VPicker = genericComponent<VPickerSlots>()({
   setup (props, { slots }) {
     useRender(() => {
       const [sheetProps] = VSheet.filterProps(props)
+      const hasTitle = !!(props.title || slots.title)
 
       return (
         <VSheet
@@ -42,6 +46,12 @@ export const VPicker = genericComponent<VPickerSlots>()({
           ]}
           style={ props.style }
         >
+          { hasTitle && (
+            <VPickerTitle>
+              { slots.title?.() ?? props.title }
+            </VPickerTitle>
+          )}
+
           { slots.header && (
             <div class="v-picker__header">
               { slots.header() }

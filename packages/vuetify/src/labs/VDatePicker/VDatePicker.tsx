@@ -9,7 +9,7 @@ import { VDatePickerYears } from './VDatePickerYears'
 import { VBtn } from '@/components/VBtn'
 import { VTextField } from '@/components/VTextField'
 import { dateEmits, makeDateProps } from '@/labs/VDateInput/composables'
-import { VPicker } from '@/labs/VPicker'
+import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
 import { createDatePicker } from './composables'
@@ -19,7 +19,7 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useDate } from '@/labs/date'
 
 // Utilities
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVDatePickerProps = propsFactory({
@@ -31,7 +31,6 @@ export const makeVDatePickerProps = propsFactory({
     type: String,
     default: '$vuetify.datePicker.ok',
   },
-  color: String,
   inputText: {
     type: String,
     default: '$vuetify.datePicker.input.placeholder',
@@ -40,6 +39,7 @@ export const makeVDatePickerProps = propsFactory({
 
   ...makeDateProps(),
   ...makeTransitionProps({ transition: 'fade' }),
+  ...makeVPickerProps({ title: '$vuetify.datePicker.title' }),
 }, 'VDatePicker')
 
 export const VDatePicker = genericComponent()({
@@ -64,6 +64,7 @@ export const VDatePicker = genericComponent()({
     const viewMode = useProxiedModel(props, 'viewMode', props.viewMode)
     const inputModel = ref(props.modelValue?.length ? adapter.format(props.modelValue[0], 'keyboardDate') : '')
     const selected = ref<any[]>(props.modelValue ?? [])
+    const title = computed(() => t(props.title))
 
     watch(inputModel, () => {
       const { isValid, date } = adapter
@@ -96,6 +97,7 @@ export const VDatePicker = genericComponent()({
         <VPicker
           { ...pickerProps }
           class="v-date-picker"
+          title={ title.value }
           v-slots={{
             header: () => (
               <VDatePickerHeader
