@@ -330,13 +330,13 @@ These components are used to display data and information in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="Server-side component"  src="data-tables/server-side-tables">
+<components-list-item name="Server-side table component"  src="data-tables/server-side-tables">
 
   Server side data tables are intended to be used with a server side data source
 
 </components-list-item>
 
-<components-list-item name="Virtual Data component"  src="data-tables/virtual-tables">
+<components-list-item name="Virtual Data table component"  src="data-tables/virtual-tables">
 
   The virtual data table component is used to display very large subsets of data
 
