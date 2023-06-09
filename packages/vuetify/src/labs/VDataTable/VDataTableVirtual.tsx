@@ -181,7 +181,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                       {{
                         ...slots,
                         item: itemSlotProps => {
-                          return slots.item?.(itemSlotProps) ?? (
+                          return (
                             <VVirtualScrollItem
                               key={ itemSlotProps.item.index }
                               dynamicHeight
@@ -189,12 +189,14 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                               onUpdate:height={ height => handleItemResize(itemSlotProps.item.index, height) }
                             >
                               { slotProps => (
-                                <VDataTableRow
-                                  { ...itemSlotProps.props }
-                                  { ...slotProps?.props }
-                                  key={ itemSlotProps.item.index }
-                                  v-slots={ slots }
-                                />
+                                slots.item?.({ ...itemSlotProps, props: { ...itemSlotProps.props, ...slotProps?.props } }) ?? (
+                                  <VDataTableRow
+                                    { ...itemSlotProps.props }
+                                    { ...slotProps?.props }
+                                    key={ itemSlotProps.item.index }
+                                    v-slots={ slots }
+                                  />
+                                )
                               )}
                             </VVirtualScrollItem>
                           )
