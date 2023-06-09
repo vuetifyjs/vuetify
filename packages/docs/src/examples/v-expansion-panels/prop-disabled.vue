@@ -36,12 +36,18 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const panel = ref([0, 1])
+  const disabled = ref(false)
+</script>
+
 <script>
   export default {
     data: () => ({
       panel: [0, 1],
       disabled: false,
-      readonly: false,
     }),
   }
 </script>

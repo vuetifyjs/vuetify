@@ -41,6 +41,24 @@
   </v-sheet>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const form = ref(false)
+  const email = ref(null)
+  const password = ref(null)
+  const loading = ref(false)
+
+  function onSubmit () {
+    if (!form.value) return
+    loading.value = true
+    setTimeout(() => (loading.value = false), 2000)
+  }
+  function required (v) {
+    return !!v || 'Field is required'
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

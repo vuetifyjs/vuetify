@@ -32,6 +32,7 @@ import { deprecate, EventProp, genericComponent, propsFactory, useRender } from 
 
 // Types
 import type { PropType } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 type ListItemSlot = {
   isActive: boolean
@@ -77,7 +78,7 @@ export const makeVListItemProps = propsFactory({
   prependAvatar: String,
   prependIcon: IconValue,
   ripple: {
-    type: Boolean,
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
   subtitle: [String, Number, Boolean],

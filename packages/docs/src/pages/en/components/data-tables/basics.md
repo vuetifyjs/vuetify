@@ -16,11 +16,9 @@ The `v-data-table` component is used for displaying tabular data. Features inclu
 
 ----
 
-<alert type="warning">
-
+::: warning
 This feature requires [v3.1.0 (Valkyrie)](/getting-started/release-notes/?version=v3.1.0)
-
-</alert>
+:::
 
 ## Usage
 

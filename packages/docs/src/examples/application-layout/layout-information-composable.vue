@@ -20,6 +20,22 @@
   </v-layout>
 </template>
 
+<script setup>
+  import { useLayout } from 'vuetify'
+
+  const Child = {
+    setup (props, ctx) {
+      const { getLayoutItem } = useLayout()
+
+      function print (key) {
+        alert(JSON.stringify(getLayoutItem(key), null, 2))
+      }
+
+      return () => ctx.slots.default({ print })
+    },
+  }
+</script>
+
 <script>
   import { useLayout } from 'vuetify'
 

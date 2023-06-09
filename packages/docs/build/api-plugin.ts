@@ -79,7 +79,7 @@ async function createMdFile (component: Record<string, any>, locale: string) {
   let str = ''
 
   str += genHeader(component.displayName)
-  str += genApiLinks(component.fileName, messages.links)
+  str += genApiLinks(component.displayName, messages.links)
 
   for (const section of ['props', 'events', 'slots', 'exposed', 'sass', 'options', 'argument', 'modifiers']) {
     if (Object.keys(component[section] ?? {}).length) {

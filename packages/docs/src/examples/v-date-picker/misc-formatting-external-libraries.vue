@@ -58,6 +58,23 @@
   </v-container>
 </template>
 
+<script setup>
+  import { computed, ref } from 'vue'
+  import moment from 'moment'
+  import { format, parseISO } from 'date-fns'
+
+  const date = ref(format(parseISO(new Date().toISOString()), 'yyyy-MM-dd'))
+  const menu1 = ref(false)
+  const menu2 = ref(false)
+
+  const computedDateFormattedMomentjs = computed(() => {
+    return date.value ? moment(date.value).format('dddd, MMMM Do YYYY') : ''
+  })
+  const computedDateFormattedDatefns = computed(() => {
+    return date.value ? format(parseISO(date.value), 'EEEE, MMMM do yyyy') : ''
+  })
+</script>
+
 <script>
   import moment from 'moment'
   import { format, parseISO } from 'date-fns'

@@ -12,6 +12,12 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const value = ref([30, 60])
+</script>
+
 <script>
   export default {
     data () {

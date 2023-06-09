@@ -55,13 +55,11 @@ Some variables are not used by vuetify components and are safe to modify without
 );
 ```
 
-<alert type="warning">
-
+::: warning
 `'vuetify/styles'` should not be used in sass files as it resolves to precompiled css ([vitejs/vite#7809](https://github.com/vitejs/vite/issues/7809))
 
 `'vuetify'` and `'vuetify/settings'` are valid and safe to use
-
-</alert>
+:::
 
 ## Component specific variables
 
@@ -98,11 +96,9 @@ You can keep `main.scss` for other style overrides but don't do both or you'll e
 
 There are many SASS/SCSS variables that can be customized across the entire Vuetify framework. You can browse all the variables using the tool below:
 
-<alert type="info">
-
+::: info
   Some color-related variables for components are defined in the global material-theme variables: `$material-light` / `$material-dark`
-
-</alert>
+:::
 
  <sass-api />
 -->

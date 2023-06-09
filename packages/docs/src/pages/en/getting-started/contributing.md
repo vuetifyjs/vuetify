@@ -34,13 +34,9 @@ When writing an issue please provide as much detail as possible. Note that "repr
 
 Issues that are convoluted and lacking a proper reproduction may be closed by a member of the [Core Team]. For additional questions regarding reporting issues and creating reproductions, join the official Vuetify Discord [community].
 
-<alert type="success">
-
-**TIP**
-
+::: tip
 When you create a reproduction, exclude all **elements, properties, and data variables** that are not needed for the reproduction. This helps drastically reduce the time it takes to triage the issue and ultimately resolve it.
-
-</alert>
+:::
 
 In the next section you will learn step-by-step how to set up your local environment and how to configure Vuetify for development.
 
@@ -68,11 +64,9 @@ git clone https://github.com/vuetifyjs/vuetify.git
 git clone git@github.com:vuetifyjs/vuetify.git
 ```
 
-<alert type="info">
-
+::: info
 [Which remote URL should I use?](https://docs.github.com/en/free-pro-team@latest/github/using-git/which-remote-url-should-i-use)
-
-</alert>
+:::
 
 Then install dependencies and perform an initial build to link all the packages together:
 
@@ -169,15 +163,15 @@ git pull
 git switch --create fix/1234-some-issue
 ```
 
-<alert type="warning">Never commit directly to the base branches, always create a feature branch to work on</alert>
+::: warning
+Never commit directly to the base branches, always create a feature branch to work on
+:::
 
 Commit your changes following [our guidelines](#commit-guidelines), then push the branch to your fork with `git push -u fork` and open a pull request on the Vuetify repository following the provided template.
 
-<alert type="error">
-
+::: error
 Pull requests that include unrelated commits or your local merges will be **CLOSED** without notice
-
-</alert>
+:::
 
 ## Working with GitHub
 

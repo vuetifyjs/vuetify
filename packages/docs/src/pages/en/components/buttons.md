@@ -81,11 +81,9 @@ Block buttons extend the full available width of their container. This is useful
 
 <example file="v-btn/prop-block" />
 
-<alert type="info">
-
+::: info
 Block applies **width: 100%** which can cause overflow issues inside a flex container.
-
-</alert>
+:::
 
 #### Rounded
 

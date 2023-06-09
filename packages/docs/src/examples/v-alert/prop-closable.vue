@@ -18,10 +18,7 @@
       v-if="!alert"
       class="text-center"
     >
-      <v-btn
-
-        @click="alert = true"
-      >
+      <v-btn @click="alert = true">
         Reset
       </v-btn>
     </div>

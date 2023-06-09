@@ -19,11 +19,9 @@ The `v-data-iterator` component is used for displaying arbitrary data, and share
 
 ----
 
-<alert type="warning">
-
+::: warning
 This feature requires [v3.3.0 (Icarus)](/getting-started/release-notes/?version=v3.3.0)
-
-</alert>
+:::
 
 ## Usage
 
