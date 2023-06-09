@@ -236,11 +236,6 @@ export const VSelect = genericComponent<new <
         menu.value = false
       }
     }
-    function onBlur (e: FocusEvent) {
-      if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement)) {
-        menu.value = false
-      }
-    }
     function onAfterLeave () {
       if (isFocused.value) {
         vTextFieldRef.value?.focus()
@@ -292,7 +287,6 @@ export const VSelect = genericComponent<new <
           placeholder={ placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
-          onBlur={ onBlur }
           onKeydown={ onKeydown }
         >
           {{
