@@ -26,12 +26,21 @@ export default {
     lastPage: '最後のページ',
     pageText: '{0}-{1} 件目 / {2}件',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0}日付選択',
-    nextMonthAriaLabel: '来月',
-    nextYearAriaLabel: '来年',
-    prevMonthAriaLabel: '前月',
-    prevYearAriaLabel: '前年',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'データはありません。',
   carousel: {

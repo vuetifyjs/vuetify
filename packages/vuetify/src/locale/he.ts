@@ -26,12 +26,21 @@ export default {
     lastPage: 'עמוד אחרון',
     pageText: '{0}-{1} מתוך {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} נבחרו',
-    nextMonthAriaLabel: 'חודש הבא',
-    nextYearAriaLabel: 'שנה הבאה',
-    prevMonthAriaLabel: 'חודש שעבר',
-    prevYearAriaLabel: 'שנה שעברה',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'אין נתונים זמינים',
   carousel: {

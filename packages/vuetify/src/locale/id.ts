@@ -26,12 +26,21 @@ export default {
     lastPage: 'Halaman terakhir',
     pageText: '{0}-{1} dari {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} dipilih',
-    nextMonthAriaLabel: 'Bulan depan',
-    nextYearAriaLabel: 'Tahun depan',
-    prevMonthAriaLabel: 'Bulan sebelumnya',
-    prevYearAriaLabel: 'Tahun sebelumnya',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Tidak ada data tersedia',
   carousel: {
