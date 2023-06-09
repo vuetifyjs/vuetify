@@ -87,6 +87,40 @@
     </v-card>
   </v-container>
 </template>
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const tasks = ref([
+    {
+      done: false,
+      text: 'Foobar',
+    },
+    {
+      done: false,
+      text: 'Fizzbuzz',
+    },
+  ])
+  const newTask = ref(null)
+
+  const completedTasks = computed(() => {
+    return tasks.value.filter(task => task.done).length
+  })
+  const progress = computed(() => {
+    return completedTasks.value / tasks.value.length * 100
+  })
+  const remainingTasks = computed(() => {
+    return tasks.value.length - completedTasks.value
+  })
+
+  function create () {
+    tasks.value.push({
+      done: false,
+      text: newTask.value,
+    })
+    newTask.value = null
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

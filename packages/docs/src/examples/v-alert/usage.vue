@@ -56,7 +56,7 @@
   const closable = ref(false)
   const icon = ref(false)
   const title = ref(false)
-  const type = ref(undefined)
+  const type = ref()
   const options = ['outlined', 'tonal']
   const props = computed(() => {
     return {

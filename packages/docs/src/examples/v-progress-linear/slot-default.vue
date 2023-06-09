@@ -29,6 +29,14 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const skill = ref(20)
+  const knowledge = ref(33)
+  const power = ref(78)
+</script>
+
 <script>
   export default {
     data: () => ({

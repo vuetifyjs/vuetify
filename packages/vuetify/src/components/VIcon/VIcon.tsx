@@ -11,7 +11,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, ref, Text, toRef } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, flattenFragments, genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVIconProps = propsFactory({
   color: String,
@@ -41,7 +41,7 @@ export const VIcon = genericComponent()({
     useRender(() => {
       const slotValue = slots.default?.()
       if (slotValue) {
-        slotIcon.value = slotValue.filter(node =>
+        slotIcon.value = flattenFragments(slotValue).filter(node =>
           node.type === Text && node.children && typeof node.children === 'string'
         )[0]?.children as string
       }

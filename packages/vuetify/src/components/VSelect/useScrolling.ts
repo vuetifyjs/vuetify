@@ -4,8 +4,9 @@ import { shallowRef, watch } from 'vue'
 // Types
 import type { Ref } from 'vue'
 import type { VList } from '@/components/VList'
+import type { VTextField } from '@/components/VTextField'
 
-export function useScrolling (listRef: Ref<VList | undefined>) {
+export function useScrolling (listRef: Ref<VList | undefined>, textFieldRef: Ref<VTextField | undefined>) {
   const isScrolling = shallowRef(false)
   let scrollTimeout: number
   function onListScroll (e: Event) {
@@ -31,6 +32,10 @@ export function useScrolling (listRef: Ref<VList | undefined>) {
     })
   }
   async function onListKeydown (e: KeyboardEvent) {
+    if (e.key === 'Tab') {
+      textFieldRef.value?.focus()
+    }
+
     if (!['PageDown', 'PageUp', 'Home', 'End'].includes(e.key)) return
     const el: HTMLElement = listRef.value?.$el
     if (!el) return

@@ -10,6 +10,10 @@
   </v-row>
 </template>
 
+<script setup>
+  const items = ['Foo', 'Bar', 'Fizz', 'Buzz']
+</script>
+
 <script>
   export default {
     data: () => ({

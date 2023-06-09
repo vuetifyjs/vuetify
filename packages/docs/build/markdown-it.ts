@@ -68,6 +68,7 @@ const validate = ajv.compile({
     },
     disabled: { type: 'boolean' }, // The page is not published
     emphasized: { type: 'boolean' }, // The page is emphasized in the navigation
+    fluid: { type: 'boolean' }, // The page is emphasized in the navigation
   },
 })
 

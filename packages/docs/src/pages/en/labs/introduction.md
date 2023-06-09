@@ -24,11 +24,9 @@ Experiment and use in-development components before they're released.
 
 Labs is a new way for developers to use unfinished components in an alpha state.
 
-<alert type="error">
-
+::: error
 Components available through Labs are considered **NOT** production ready and only to be used for testing purposes. Breaking changes will be introduced in patch releases and no support will be provided.
-
-</alert>
+:::
 
 ## Usage
 
@@ -106,8 +104,6 @@ The following is a list of available and up-and-coming components for use with L
 
 <small>*Q1 2023 was the original target, but due to the complexity of the component, it has been pushed back to Q2 2023.</small>
 
-<alert type="warning">
-
+::: warning
 Lab component APIs are **NOT** finalized and can and will change. You should **EXPECT** for things to break during the course of development.
-
-</alert>
+:::

@@ -21,6 +21,14 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const items = ['foo', 'bar', 'fizz', 'buzz', 'fizzbuzz', 'foobar']
+
+  const value = ref(['foo', 'bar', 'fizz'])
+</script>
+
 <script>
   export default {
     data: () => ({

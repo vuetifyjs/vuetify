@@ -524,8 +524,6 @@ These components don't fit into a traditional category and are used for a variet
 
 </v-row>
 
-<alert type="info">
-
+::: info
   This page is under **design** construction and will be updated with the missing images over time.
-
-</alert>
+:::

@@ -19,14 +19,11 @@ Many of these changes can be applied automatically by [eslint-plugin-vuetify](ht
 
 <entry />
 
-<alert type="warning">
-
+::: warning
   This page is incomplete. Please check back later for more information, or submit a PR if you notice something missing. If you have additional questions, reach out to us in [Discord](https://community.vuetifyjs.com/)
+:::
 
-</alert>
-
-<alert type="warning">
-
+::: warning
   Not all Vuetify 2 components are currently available in Vuetify 3; These components will be released as their development is completed via [Vuetify Labs](https://vuetifyjs.com/en/labs/introduction/).
 
 - v-calendar
@@ -36,8 +33,7 @@ Many of these changes can be applied automatically by [eslint-plugin-vuetify](ht
 - v-stepper
 - v-time-picker
 - v-treeview
-
-</alert>
+:::
 
 ## Setup
 

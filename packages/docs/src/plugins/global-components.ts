@@ -23,6 +23,7 @@ import BreakpointsTable from '@/components/features/BreakpointsTable.vue'
 import Carbon from '@/components/promoted/Carbon.vue'
 import ColorPalette from '@/components/features/ColorPalette.vue'
 import Discovery from '@/components/promoted/Discovery.vue'
+import DocTabs from '@/components/doc/Tabs.vue'
 import Entry from '@/components/promoted/Entry.vue'
 import Example from '@/components/examples/Example.vue'
 import Inline from '@/components/promoted/Inline.vue'
@@ -67,6 +68,7 @@ export function installGlobalComponents ({ app }: ViteSSGContext) {
     .component('ColorPalette', ColorPalette)
     .component('Carbon', Carbon)
     .component('Discovery', Discovery)
+    .component('DocTabs', DocTabs)
     .component('Entry', Entry)
     .component('Example', Example)
     .component('Inline', Inline)
