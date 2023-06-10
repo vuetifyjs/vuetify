@@ -23,7 +23,7 @@ import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
-import { genericComponent, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -178,12 +178,12 @@ export const VAutocomplete = genericComponent<new <
 
       search.value = ''
     }
-    function onMousedownControl () {
+    function onClickControl () {
       if (menuDisabled.value) return
 
       menu.value = true
     }
-    function onMousedownMenuIcon (e: MouseEvent) {
+    function onClickMenuIcon (e: MouseEvent) {
       if (menuDisabled.value) return
 
       if (isFocused.value) {
@@ -396,7 +396,7 @@ export const VAutocomplete = genericComponent<new <
           readonly={ props.readonly }
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
-          onMousedown:control={ onMousedownControl }
+          onClick:control={ onClickControl }
           onKeydown={ onKeydown }
         >
           {{
@@ -554,8 +554,7 @@ export const VAutocomplete = genericComponent<new <
                   <VIcon
                     class="v-autocomplete__menu-icon"
                     icon={ props.menuIcon }
-                    onMousedown={ onMousedownMenuIcon }
-                    onClick={ noop }
+                    onClick={ onClickMenuIcon }
                   />
                 ) : undefined }
               </>

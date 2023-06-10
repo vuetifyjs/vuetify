@@ -177,7 +177,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     }
 
     function closeConditional () {
-      return isActive.value || globalTop.value
+      return isActive.value && globalTop.value
     }
 
     IN_BROWSER && watch(isActive, val => {
