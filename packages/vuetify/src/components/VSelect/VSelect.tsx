@@ -166,7 +166,7 @@ export const VSelect = genericComponent<new <
         menu.value = true
       }
     }
-    function onMousedownControl () {
+    function onClickControl () {
       if (menuDisabled.value) return
 
       menu.value = !menu.value
@@ -291,8 +291,8 @@ export const VSelect = genericComponent<new <
           readonly
           placeholder={ placeholder }
           onClick:clear={ onClear }
+          onClick:control={ onClickControl }
           onBlur={ onBlur }
-          onMousedown:control={ onMousedownControl }
           onKeydown={ onKeydown }
         >
           {{

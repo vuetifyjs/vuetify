@@ -24,7 +24,7 @@ import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
-import { genericComponent, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -224,12 +224,12 @@ export const VCombobox = genericComponent<new <
         menu.value = true
       }
     }
-    function onMousedownControl () {
+    function onClickControl () {
       if (menuDisabled.value) return
 
       menu.value = true
     }
-    function onMousedownMenuIcon (e: MouseEvent) {
+    function onClickMenuIcon (e: MouseEvent) {
       if (menuDisabled.value) return
 
       if (isFocused.value) {
@@ -428,7 +428,7 @@ export const VCombobox = genericComponent<new <
           readonly={ props.readonly }
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
-          onMousedown:control={ onMousedownControl }
+          onClick:control={ onClickControl }
           onKeydown={ onKeydown }
         >
           {{
@@ -447,6 +447,7 @@ export const VCombobox = genericComponent<new <
                   closeOnContentClick={ false }
                   transition={ props.transition }
                   onAfterLeave={ onAfterLeave }
+                  onClick:outside={ () => { isFocused.value = false } }
                   { ...props.menuProps }
                 >
                   { hasList && (
@@ -586,8 +587,7 @@ export const VCombobox = genericComponent<new <
                   <VIcon
                     class="v-combobox__menu-icon"
                     icon={ props.menuIcon }
-                    onMousedown={ onMousedownMenuIcon }
-                    onClick={ noop }
+                    onClick={ onClickMenuIcon }
                   />
                 ) : undefined }
               </>

@@ -415,6 +415,7 @@ export const VAutocomplete = genericComponent<new <
                   closeOnContentClick={ false }
                   transition={ props.transition }
                   onAfterLeave={ onAfterLeave }
+                  onClick:outside={ () => { isFocused.value = false } }
                   { ...props.menuProps }
                 >
                   { hasList && (
