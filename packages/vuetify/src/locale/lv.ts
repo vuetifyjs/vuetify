@@ -26,12 +26,21 @@ export default {
     lastPage: 'Pēdējā lapa',
     pageText: '{0}-{1} no {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} izvēlēts',
-    nextMonthAriaLabel: 'Nākammēnes',
-    nextYearAriaLabel: 'Nākamgad',
-    prevMonthAriaLabel: 'Iepriekšējais mēnesis',
-    prevYearAriaLabel: 'Iepriekšējais gads',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Nav pieejamu datu',
   carousel: {

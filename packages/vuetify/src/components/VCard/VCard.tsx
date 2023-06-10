@@ -34,8 +34,10 @@ import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import type { VCardItemSlots } from './VCardItem'
 import type { LoaderSlotProps } from '@/composables/loader'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 export const makeVCardProps = propsFactory({
   appendAvatar: String,
@@ -51,7 +53,7 @@ export const makeVCardProps = propsFactory({
   prependAvatar: String,
   prependIcon: IconValue,
   ripple: {
-    type: Boolean,
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
   subtitle: String,

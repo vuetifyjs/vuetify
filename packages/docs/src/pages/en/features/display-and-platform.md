@@ -87,11 +87,9 @@ export default createVuetify({
 })
 ```
 
-<alert type="info">
-
+::: info
   The **mobileBreakpoint** option accepts numbers and breakpoint keys.
-
-</alert>
+:::
 
 ## Examples
 

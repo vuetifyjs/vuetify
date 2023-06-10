@@ -14,6 +14,9 @@ import { md } from 'vuetify/iconsets/md'
 import { mdi } from 'vuetify/iconsets/mdi-svg'
 import * as mdiSvg from './icons'
 
+// Locales
+import { en, sv } from 'vuetify/locale'
+
 // Types
 import type { ViteSSGContext } from '@vuetify/vite-ssg'
 
@@ -24,6 +27,13 @@ export function installVuetify ({ app }: ViteSSGContext) {
       ...labs,
     },
     directives,
+    locale: {
+      locale: 'en',
+      messages: {
+        en,
+        sv,
+      },
+    },
     icons: {
       defaultSet: 'mdi',
       sets: {

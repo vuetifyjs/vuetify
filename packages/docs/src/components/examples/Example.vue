@@ -44,7 +44,7 @@
           >
             <template #activator="{ props: tooltip }">
               <v-btn
-                class="ms-2 text-medium-emphasis"
+                class="me-2 text-medium-emphasis"
                 density="comfortable"
                 variant="text"
                 v-bind="mergeProps(action as any, tooltip)"
@@ -53,8 +53,6 @@
 
             <span>{{ t(path) }}</span>
           </v-tooltip>
-
-          <Codepen v-if="isLoaded" />
         </v-toolbar>
       </v-lazy>
 
@@ -82,7 +80,7 @@
           class="pa-4 rounded-b"
           with-background
         >
-          <component :is="ExampleComponent" v-if="isLoaded" :file="file" />
+          <component :is="ExampleComponent" v-if="isLoaded" />
         </v-theme-provider>
       </div>
     </v-sheet>
@@ -94,10 +92,10 @@
   import ExampleMissing from './ExampleMissing.vue'
 
   // Composables
-  import { useCodepen } from '@/composables/codepen'
   import { useI18n } from 'vue-i18n'
   import { usePlayground } from '@/composables/playground'
   import { useTheme } from 'vuetify'
+  import { useUserStore } from '@/store/user'
 
   // Utilities
   import { computed, mergeProps, onMounted, ref, shallowRef, watch } from 'vue'
@@ -106,6 +104,7 @@
   import { upperFirst } from 'lodash-es'
 
   const { t } = useI18n()
+  const userStore = useUserStore()
 
   const props = defineProps({
     inline: Boolean,
@@ -119,11 +118,13 @@
   })
 
   function parseTemplate (target: string, template: string) {
-    const string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`
-    const regex = new RegExp(string, 'g')
-    const parsed = regex.exec(template) || []
+    const pattern = {
+      composition: /(<script setup>[\w\W]*?<\/script>)/g,
+      options: /(<script>[\w\W]*?<\/script>)/g,
+    }[target] || new RegExp(`(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`, 'g')
+    const parsed = pattern.exec(template)
 
-    return parsed[1] || ''
+    return parsed?.[1]
   }
 
   const isLoaded = ref(false)
@@ -135,9 +136,32 @@
 
   const component = shallowRef()
   const code = ref<string>()
-  const sections = ref<{ name: string, content: string, language: string }[]>([])
   const ExampleComponent = computed(() => {
     return isError.value ? ExampleMissing : isLoaded.value ? component.value : null
+  })
+  const sections = computed(() => {
+    const _code = code.value
+    if (!_code) return []
+    const scriptContent = parseTemplate(userStore.composition, _code) ??
+      parseTemplate({ composition: 'options', options: 'composition' }[userStore.composition], _code)
+
+    return [
+      {
+        name: 'template',
+        language: 'html',
+        content: parseTemplate('template', _code),
+      },
+      {
+        name: 'script',
+        language: 'javascript',
+        content: scriptContent,
+      },
+      {
+        name: 'style',
+        language: 'css',
+        content: parseTemplate('style', _code),
+      },
+    ].filter(v => v.content) as { name: string, content: string, language: string }[]
   })
 
   onMounted(importExample)
@@ -150,23 +174,6 @@
       } = await getExample(props.file)
       component.value = _component
       code.value = _code
-      sections.value = [
-        {
-          name: 'template',
-          language: 'html',
-          content: parseTemplate('template', _code),
-        },
-        {
-          name: 'script',
-          language: 'javascript',
-          content: parseTemplate('script', _code),
-        },
-        {
-          name: 'style',
-          language: 'css',
-          content: parseTemplate('style', _code),
-        },
-      ].filter(v => v.content)
       isLoaded.value = true
       isError.value = false
     } catch (e) {
@@ -187,14 +194,15 @@
     return parentTheme.current.value.dark
   })
 
-  const { Codepen, openCodepen } = useCodepen({ code, sections, component })
-
   const playgroundLink = computed(() => {
     if (!isLoaded.value || isError.value) return null
 
-    const resources = JSON.parse(component.value.codepenResources || '{}')
-
-    return usePlayground(sections.value, resources.css, resources.imports)
+    const resources = JSON.parse(component.value.playgroundResources || '{}')
+    return usePlayground(
+      sections.value,
+      resources.css,
+      resources.imports,
+    )
   })
 
   const actions = computed(() => {
@@ -220,15 +228,19 @@
     return [
       ...array,
       {
-        icon: 'mdi-codepen',
-        path: 'edit-in-codepen',
-        onClick: openCodepen,
-      },
-      {
         icon: 'mdi-github',
         path: 'view-in-github',
         href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
         target: '_blank',
+      },
+      {
+        icon: 'mdi-clipboard-multiple-outline',
+        path: 'copy-example-source',
+        onClick: () => {
+          navigator.clipboard.writeText(
+            sections.value.map(section => section.content).join('\n')
+          )
+        },
       },
       {
         icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',

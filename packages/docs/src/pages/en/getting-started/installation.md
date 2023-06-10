@@ -24,9 +24,21 @@ Get started with Vuetify, the world’s most popular Vue.js framework for buildi
 
 To get started with Vuetify 3, simply paste the following code into your terminal:
 
-```bash
+::: tabs
+
+```bash [yarn]
 yarn create vuetify
 ```
+
+```bash [npm]
+npm create vuetify
+```
+
+```bash [pnpm]
+pnpm create vuetify
+```
+
+:::
 
 This command prompts you with a few options before generating your scaffolded Vue / Vuetify 3 project.
 

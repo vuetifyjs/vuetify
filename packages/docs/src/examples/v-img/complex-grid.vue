@@ -24,21 +24,17 @@
   </v-row>
 </template>
 
-<script>
-  export default {
-    data: () => ({
-      imageLayout: [
-        { cols: 4 },
-        {
-          cols: 8,
-          children: [{ cols: 12 }, { cols: 12 }],
-        },
-        { cols: 6 },
-        { cols: 3 },
-        { cols: 9 },
-        { cols: 4 },
-        { cols: 8 },
-      ],
-    }),
-  }
+<script setup>
+  const imageLayout = [
+    { cols: 4 },
+    {
+      cols: 8,
+      children: [{ cols: 12 }, { cols: 12 }],
+    },
+    { cols: 6 },
+    { cols: 3 },
+    { cols: 9 },
+    { cols: 4 },
+    { cols: 8 },
+  ]
 </script>

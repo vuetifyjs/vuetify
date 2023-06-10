@@ -25,10 +25,6 @@ We understand that many projects that utilize Vuetify have development cycles th
 
 Have questions? Reach out to us in our [Discord community](https://community.vuetifyjs.com).
 
-<alert type="success">
-
-  **TIP:**
-
+::: tip
   Sign-up for Enterprise support and get a personalized service plan from the team behind Vuetify. [Book a consultation](/introduction/enterprise-support/) for your business today!
-
-</alert>
+:::

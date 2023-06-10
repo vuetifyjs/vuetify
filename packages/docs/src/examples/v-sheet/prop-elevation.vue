@@ -23,6 +23,10 @@
   </v-container>
 </template>
 
+<script setup>
+  const elevations = [0, 4, 8, 12, 16, 20]
+</script>
+
 <script>
   export default {
     data: () => ({

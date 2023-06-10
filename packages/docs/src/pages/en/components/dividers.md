@@ -24,11 +24,9 @@ Dividers in their simplest form display a horizontal line.
 
 <usage name="v-divider" />
 
-<alert type="info">
-
+::: info
   This example uses the **border-opacity** utility class and is not available when **$utilities** is set to **false**. More information regarding utility classes is located on the [SASS variables page](features/sass-variables/#basic-usage).
-
-</alert>
+:::
 
 <entry />
 

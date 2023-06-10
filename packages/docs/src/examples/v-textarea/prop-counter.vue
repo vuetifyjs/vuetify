@@ -9,6 +9,14 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const rules = [v => v.length <= 25 || 'Max 25 characters']
+
+  const value = ref('Hello!')
+</script>
+
 <script>
   export default {
     data: () => ({

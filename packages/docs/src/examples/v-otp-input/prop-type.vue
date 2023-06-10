@@ -9,6 +9,12 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const otp = ref('')
+</script>
+
 <script>
   export default {
     data: () => ({

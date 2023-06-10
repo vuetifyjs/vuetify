@@ -14,7 +14,7 @@ related:
 
 This document outlines security procedures and general policies for the Vuetify project.
 
-<entry />
+<vuetify slug="enterprise-support" />
 
 ## Reporting a Bug
 
