@@ -24,7 +24,7 @@ Buttons in their simplest form contain uppercase text, a slight elevation, hover
 
 <usage name="v-btn" />
 
-<entry />
+<vuetify slug="enterprise-support" />
 
 ## API
 

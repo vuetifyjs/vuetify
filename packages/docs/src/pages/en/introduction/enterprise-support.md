@@ -1,4 +1,5 @@
 ---
+emphasized: true
 fluid: true
 meta:
   nav: For Enterprise
