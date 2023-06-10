@@ -26,7 +26,6 @@ Date pickers come in two orientation variations, portrait **(default)** and land
 
 <entry />
 
-
 ## API
 
 | Component | Description |
