@@ -215,6 +215,7 @@ export const VImg = genericComponent<VImgSlots>()({
           alt={ props.alt }
           sizes={ props.sizes }
           ref={ image }
+          style={{ 'aspect-ratio': aspectRatio.value }}
           onLoad={ onLoad }
           onError={ onError }
         />
