@@ -28,6 +28,19 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const items = [
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me 2' },
+  ]
+
+  const closeOnClick = ref(true)
+</script>
+
 <script>
   export default {
     data: () => ({

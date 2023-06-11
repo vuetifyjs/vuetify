@@ -26,12 +26,21 @@ export default {
     lastPage: 'Последња страница',
     pageText: '{0}-{1} од {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} одабрано',
-    nextMonthAriaLabel: 'Следећег месеца',
-    nextYearAriaLabel: 'Следеће године',
-    prevMonthAriaLabel: 'Претходни месец',
-    prevYearAriaLabel: 'Претходна година',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Нема доступних података',
   carousel: {

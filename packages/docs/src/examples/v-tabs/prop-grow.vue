@@ -38,6 +38,20 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const tab = ref('Appetizers')
+
+  const items = [
+    'Appetizers',
+    'Entrees',
+    'Deserts',
+    'Cocktails',
+  ]
+  const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+</script>
+
 <script>
   export default {
     data () {

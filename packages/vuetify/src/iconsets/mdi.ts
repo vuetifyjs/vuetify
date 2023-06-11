@@ -43,6 +43,7 @@ const aliases: IconAliases = {
   file: 'mdi-paperclip',
   plus: 'mdi-plus',
   minus: 'mdi-minus',
+  calendar: 'mdi-calendar',
 }
 
 const mdi: IconSet = {

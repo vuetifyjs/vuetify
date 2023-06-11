@@ -3,7 +3,7 @@ import fs from 'fs'
 import { fileURLToPath } from 'url'
 
 import { defineConfig, loadEnv } from 'vite'
-import Vue from '@vitejs/plugin-vue'
+import Vue, { parseVueRequest } from '@vitejs/plugin-vue'
 import ViteFonts from 'unplugin-fonts/vite'
 import Pages from 'vite-plugin-pages'
 import Layouts from 'vite-plugin-vue-layouts'
@@ -183,6 +183,23 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         },
       }),
 
+      {
+        // Remove options block from examples
+        name: 'vuetify:example-setup',
+        transform (code, id) {
+          const { filename, query } = parseVueRequest(id)
+          if (query.raw || query.url) return
+          if (filename.includes('packages/docs/src/examples')) {
+            const composition = /(<script setup>[\w\W]*?<\/script>)/g.exec(code)
+            const options = /(<script>[\w\W]*?<\/script>)/g.exec(code)
+
+            if (composition && options) {
+              return code.slice(0, options.index) + code.slice(options.index + options[0].length + 1)
+            }
+          }
+        }
+      },
+
       Vue({
         include: [/\.vue$/, /\.md$/],
         // https://github.com/vuejs/vue-next/issues/3298
@@ -209,10 +226,9 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       Examples(),
 
       {
-        name: 'vuetify:codepen-blocks',
+        name: 'vuetify:example-blocks',
         transform (code, id) {
-          const type = id.includes('vue&type=codepen-additional') ? 'codepenAdditional'
-            : id.includes('vue&type=codepen-resources') ? 'codepenResources'
+          const type = id.includes('vue&type=playground-resources') ? 'playgroundResources'
             : null
           if (!type) return
 

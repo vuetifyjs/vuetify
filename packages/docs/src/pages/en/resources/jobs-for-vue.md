@@ -1,4 +1,5 @@
 ---
+fluid: true
 meta:
   nav: Jobs for Vue
   title: Vue & Vuetify jobs

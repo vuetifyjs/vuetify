@@ -19,11 +19,9 @@ The bottom sheet is a modified `v-dialog` that slides from the bottom of the scr
 
 ----
 
-<alert type="warning">
-
+::: warning
 This feature requires [v3.3.0 (Icarus)](/getting-started/release-notes/?version=v3.3.0)
-
-</alert>
+:::
 
 ## Usage
 
@@ -99,11 +97,9 @@ The `v-bottom-sheet` component has access to all of the slots available in [v-di
 | 1. Default   | The default slot                                    |
 | 2. Activator | The activator slot is used to open the bottom sheet |
 
-<alert type="info">
-
+::: info
 The **activator** slot is not required when using the **v-model** prop.
-
-</alert>
+:::
 
 ### Examples
 
