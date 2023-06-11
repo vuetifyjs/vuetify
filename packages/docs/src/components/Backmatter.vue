@@ -29,7 +29,7 @@
 
     <up-next class="mb-5" />
 
-    <vuetify class="mb-6" />
+    <promoted class="mb-6" />
 
     <contribute />
   </section>

@@ -71,7 +71,7 @@ The `v-avatar` default slot allows you to render content such as `v-icon` compon
 
 <example file="v-avatar/slot-default" />
 
-<discovery />
+<promoted />
 
 ### Misc
 

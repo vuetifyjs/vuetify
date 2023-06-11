@@ -17,7 +17,7 @@ related:
 This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
 Many of these changes can be applied automatically by [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)
 
-<vuetify slug="enterprise-support" />
+<entry />
 
 ::: warning
   This page is incomplete. Please check back later for more information, or submit a PR if you notice something missing. If you have additional questions, reach out to us in [Discord](https://community.vuetifyjs.com/)

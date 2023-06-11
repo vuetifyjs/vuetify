@@ -2,12 +2,12 @@
   <app-btn
     :to="rpath('/introduction/enterprise-support/')"
     class="ms-1"
-    color="medium-emphasis"
-    variant="text"
+    color="primary"
+    variant="flat"
     @click="gtagClick('app-bar', 'enterprise', name)"
   >
 
-    {{ t('enterprise') }}
+    {{ t('get-help') }}
 
     <!-- <v-badge
       class="ms-n1 mb-4"

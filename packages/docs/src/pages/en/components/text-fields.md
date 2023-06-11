@@ -282,7 +282,7 @@ The following example uses the **label**, **prepend**, and **prepend-inner** slo
 </script>
 ```
 
-<vuetify />
+<promoted />
 
 #### Icon slots
 
