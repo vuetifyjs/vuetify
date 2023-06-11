@@ -118,7 +118,6 @@ export function toIso (adapter: DateAdapter<any>, value: any) {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
 }
 
-
 function getMondayOfFirstWeekOfYear (year: number) {
   return new Date(year, 0, 1)
 }
