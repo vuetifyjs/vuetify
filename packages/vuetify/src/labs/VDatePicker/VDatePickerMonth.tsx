@@ -1,4 +1,3 @@
-/* eslint-disable local-rules/sort-imports */
 // Styles
 import './VDatePickerMonth.sass'
 
@@ -15,9 +14,9 @@ import { genericComponent, omit, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { getWeek, toIso } from '../date/date'
 import { dateEmits, makeDateProps } from '../VDateInput/composables'
 import { useDate } from '@/labs/date'
-import { getWeek, toIso } from '../date/date'
 
 export const makeVDatePickerMonthProps = propsFactory({
   color: String,
