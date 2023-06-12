@@ -46,6 +46,7 @@ export const makeVCarouselProps = propsFactory({
     continuous: true,
     mandatory: 'force' as const,
     showArrows: true,
+    direction: 'horizontal' as const,
   }),
 }, 'VCarousel')
 
@@ -114,6 +115,7 @@ export const VCarousel = genericComponent<VCarouselSlots>()({
         continuous
         mandatory="force"
         showArrows={ props.showArrows }
+        direction={ props.direction }
       >
         {{
           default: slots.default,
