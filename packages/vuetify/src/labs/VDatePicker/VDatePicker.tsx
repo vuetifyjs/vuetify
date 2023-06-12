@@ -81,13 +81,17 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
     createDatePicker(props)
 
     const model = ref<any[]>(props.modelValue ?? [])
+    const isReversing = ref(false)
+
     const displayDate = useProxiedModel(props, 'displayDate', props.displayDate)
     const inputMode = useProxiedModel(props, 'inputMode', props.inputMode)
     const viewMode = useProxiedModel(props, 'viewMode', props.viewMode)
+
     const inputModel = computed(() => model.value.length ? adapter.format(model.value[0], 'keyboardDate') : '')
     const title = computed(() => t(props.title))
     const header = computed(() => model.value.length ? adapter.format(model.value[0], 'normalDateWithWeekday') : t(props.header))
     const headerIcon = computed(() => inputMode.value === 'calendar' ? props.keyboardIcon : props.calendarIcon)
+    const headerTransition = computed(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
 
     watch(inputModel, () => {
       const { isValid, date } = adapter
@@ -95,10 +99,12 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
       model.value = isValid(inputModel.value) ? [date(inputModel.value)] : []
     })
 
-    watch(model, () => {
+    watch(model, (val, oldVal) => {
       if (props.hideActions) {
-        emit('update:modelValue', model.value)
+        emit('update:modelValue', val)
       }
+
+      isReversing.value = adapter.isBefore(val[0], oldVal[0])
     })
 
     function onClickCancel () {
@@ -115,6 +121,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
     const headerSlotProps = computed(() => ({
       header: header.value,
       appendIcon: headerIcon.value,
+      transition: headerTransition.value,
       'onClick:append': onClickAppend,
     }))
 

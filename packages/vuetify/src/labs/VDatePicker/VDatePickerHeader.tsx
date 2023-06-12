@@ -7,6 +7,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
+import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
@@ -22,6 +23,7 @@ export const makeVDatePickerHeaderProps = propsFactory({
   appendIcon: String,
   color: String,
   header: String,
+  transition: String,
 }, 'VDatePickerHeader')
 
 export const VDatePickerHeader = genericComponent<VDatePickerHeaderSlots>()({
@@ -59,9 +61,11 @@ export const VDatePickerHeader = genericComponent<VDatePickerHeaderSlots>()({
           )}
 
           { hasContent && (
-            <div key="content" class="v-date-picker-header__content">
-              { slots.default?.() ?? props.header }
-            </div>
+            <MaybeTransition key="content" name={ props.transition }>
+              <div key={ props.header } class="v-date-picker-header__content">
+                { slots.default?.() ?? props.header }
+              </div>
+            </MaybeTransition>
           )}
 
           { hasAppend && (
