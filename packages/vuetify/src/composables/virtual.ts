@@ -103,12 +103,13 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     containerRef.value.scrollTop = offset
   }
 
-  const allItems = computed(() => items.value.map((item, index) => ({
-    raw: item,
-    index,
-  })))
   const last = computed(() => Math.min(items.value.length, first.value + visibleItems.value))
-  const computedItems = computed(() => allItems.value.slice(first.value, last.value))
+  const computedItems = computed(() => {
+    return items.value.slice(first.value, last.value).map((item, index) => ({
+      raw: item,
+      index: index + first.value,
+    }))
+  })
   const paddingTop = computed(() => calculateOffset(first.value))
   const paddingBottom = computed(() => calculateOffset(items.value.length) - calculateOffset(last.value))
 

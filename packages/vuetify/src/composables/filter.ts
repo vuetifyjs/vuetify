@@ -143,9 +143,6 @@ export function useFilter <T extends { value: unknown }> (
   const transformedItems = computed(() => options?.transform ? unref(items).map(options?.transform) : unref(items))
 
   watchEffect(() => {
-    filteredItems.value = []
-    filteredMatches.value = new Map()
-
     const results = filterItems(
       transformedItems.value,
       strQuery.value,
@@ -160,11 +157,15 @@ export function useFilter <T extends { value: unknown }> (
 
     const originalItems = unref(items)
 
+    const _filteredItems: typeof filteredItems['value'] = []
+    const _filteredMatches: typeof filteredMatches['value'] = new Map()
     results.forEach(({ index, matches }) => {
       const item = originalItems[index]
-      filteredItems.value.push(item)
-      filteredMatches.value.set(item.value, matches)
+      _filteredItems.push(item)
+      _filteredMatches.set(item.value, matches)
     })
+    filteredItems.value = _filteredItems
+    filteredMatches.value = _filteredMatches
   })
 
   function getMatches (item: T) {
