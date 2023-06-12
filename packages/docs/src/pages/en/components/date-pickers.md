@@ -18,6 +18,10 @@ related:
 
 ---
 
+::: warning
+This feature requires [v3.3.4](/getting-started/release-notes/?version=v3.3.4)
+:::
+
 ## Usage
 
 Date pickers come in two orientation variations, portrait **(default)** and landscape. By default they are emitting `input` event when the day (for date picker) or month (for month picker), but with **reactive** prop they can update the model even after clicking year/month.
