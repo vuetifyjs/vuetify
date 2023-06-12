@@ -111,7 +111,7 @@ export const VCarousel = genericComponent<VCarouselSlots>()({
           { height: convertToUnit(props.height) },
           props.style,
         ]}
-        continuous
+        continuous={ props.continuous }
         mandatory="force"
         showArrows={ props.showArrows }
       >
