@@ -162,7 +162,6 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
                       { ...datePickerYearsProps }
                       v-model:displayDate={ displayDate.value }
                       v-model:viewMode={ viewMode.value }
-                      height="300"
                     />
                   )}
                 </MaybeTransition>
