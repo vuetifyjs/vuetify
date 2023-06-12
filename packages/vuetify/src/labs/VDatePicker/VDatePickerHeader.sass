@@ -1,16 +1,22 @@
 .v-date-picker-header
-  width: 100%
-
-.v-date-picker-header__wrapper
+  display: grid
+  grid-template-areas: "prepend content append"
+  grid-template-columns: min-content minmax(0, 1fr) min-content
   padding-inline-start: 24px
   padding-inline-end: 12px
-  padding-top: 12px
   padding-bottom: 12px
-  display: flex
-  flex-direction: column
 
-.v-date-picker-header__text
-  font-size: 2rem
-  display: flex
+.v-date-picker-header__append
+  grid-area: append
+
+.v-date-picker-header__prepend
+  grid-area: prepend
+  padding-inline-start: 8px
+
+.v-date-picker-header__content
   align-items: center
+  display: flex
+  font-size: 32px
+  line-height: 40px
+  grid-area: content
   justify-content: space-between
