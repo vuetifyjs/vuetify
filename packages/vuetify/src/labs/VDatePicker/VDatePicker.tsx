@@ -3,7 +3,7 @@ import './VDatePicker.sass'
 
 // Components
 import { makeVDatePickerControlsProps, VDatePickerControls } from './VDatePickerControls'
-import { makeVDatePickerHeaderProps, VDatePickerHeader } from './VDatePickerHeader'
+import { VDatePickerHeader } from './VDatePickerHeader'
 import { makeVDatePickerMonthProps, VDatePickerMonth } from './VDatePickerMonth'
 import { makeVDatePickerYearsProps, VDatePickerYears } from './VDatePickerYears'
 import { VBtn } from '@/components/VBtn'
@@ -52,12 +52,15 @@ export const makeVDatePickerProps = propsFactory({
     type: String,
     default: '$vuetify.datePicker.input.placeholder',
   },
+  header: {
+    type: String,
+    default: '$vuetify.datePicker.header',
+  },
   hideActions: Boolean,
 
   ...makeDateProps(),
   ...makeTransitionProps({ transition: 'fade' }),
   ...makeVDatePickerControlsProps(),
-  ...makeVDatePickerHeaderProps({ header: '$vuetify.datePicker.header' }),
   ...makeVDatePickerMonthProps(),
   ...makeVDatePickerYearsProps(),
   ...makeVPickerProps({ title: '$vuetify.datePicker.title' }),
@@ -127,7 +130,6 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
 
     useRender(() => {
       const [pickerProps] = VPicker.filterProps(props)
-      const [datePickerHeaderProps] = VDatePickerHeader.filterProps(props)
       const [datePickerControlsProps] = VDatePickerControls.filterProps(props)
       const [datePickerMonthProps] = VDatePickerMonth.filterProps(props)
       const [datePickerYearsProps] = VDatePickerYears.filterProps(props)
@@ -145,7 +147,6 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
             header: () => slots.header?.(headerSlotProps.value) ?? (
               <VDatePickerHeader
                 key="header"
-                { ...datePickerHeaderProps }
                 { ...headerSlotProps.value }
               />
             ),
