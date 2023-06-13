@@ -6154,7 +6154,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
 `;
 
 exports[`VDataTable.ts should not select item that is not selectable 1`] = `
-<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
+<div class="v-data-table v-data-table--has-bottom v-data-table--selectable theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -10846,7 +10846,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
 `;
 
 exports[`VDataTable.ts should render with showSelect 1`] = `
-<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
+<div class="v-data-table v-data-table--has-bottom v-data-table--selectable theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>

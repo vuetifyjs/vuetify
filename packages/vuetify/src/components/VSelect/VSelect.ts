@@ -263,6 +263,11 @@ export default baseMixins.extend<options>().extend({
           this.$refs.menu?.updateDimensions()
         })
       }
+      if (this.hideSelected) {
+        this.$nextTick(() => {
+          this.onScroll()
+        })
+      }
     },
     isMenuActive (val) {
       window.setTimeout(() => this.onMenuActiveChange(val))
