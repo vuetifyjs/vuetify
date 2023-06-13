@@ -460,9 +460,9 @@ describe('VSelect', () => {
         </VRow> 
       ))
       cy.get('.v-select')
-        .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
-        .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
         .click()
+        .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+        .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
         .get('.v-overlay__content.v-select__content')
         .should('exist')
 
