@@ -6,8 +6,13 @@ import { useToggleScope } from '@/composables/toggleScope'
 // Utilities
 import { onUpdated, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
+import { useVirtualItem } from '@/composables/virtual'
 
 export const makeVVirtualScrollItemProps = propsFactory({
+  virtualKey: {
+    type: [String, Number],
+    required: true,
+  },
   dynamicHeight: Boolean,
   renderless: Boolean,
 
@@ -19,22 +24,19 @@ export const VVirtualScrollItem = genericComponent<{ default: { props: Record<st
 
   props: makeVVirtualScrollItemProps(),
 
-  emits: {
-    'update:height': (height: number) => true,
-  },
-
   setup (props, { emit, slots }) {
+    const { handleItemResize } = useVirtualItem()
     const { resizeRef, contentRect } = useResizeObserver()
 
     useToggleScope(() => props.dynamicHeight, () => {
       watch(() => contentRect.value?.height, height => {
-        if (height != null) emit('update:height', height)
+        if (height != null) handleItemResize(props.virtualKey, height)
       })
     })
 
     function updateHeight () {
       if (props.dynamicHeight && contentRect.value) {
-        emit('update:height', contentRect.value.height)
+        handleItemResize(props.virtualKey, contentRect.value.height)
       }
     }
 
@@ -42,7 +44,7 @@ export const VVirtualScrollItem = genericComponent<{ default: { props: Record<st
 
     useRender(() => props.renderless ? (
       <>
-        { slots.default?.({ props: { ref: props.dynamicHeight ? resizeRef : undefined } }) }
+        { slots.default?.({ props: { ref: props.dynamicHeight ? resizeRef : undefined, key: props.virtualKey } }) }
       </>
     ) : (
       <div

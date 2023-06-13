@@ -27,9 +27,10 @@
 
       > tfoot
         > tr
+          &:not(:last-child)
             > td,
             > th
-              border-top: $table-border
+              border-bottom: $table-border
 
 
   &.v-table--hover

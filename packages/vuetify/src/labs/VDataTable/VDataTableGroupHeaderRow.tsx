@@ -17,8 +17,8 @@ import type { PropType } from 'vue'
 import type { Group } from './composables/group'
 
 export type VDataTableGroupHeaderRowSlots = {
-  'data-table-group': { item: Group, count: number, props: Record<string, unknown> }
-  'data-table-select': { props: Record<string, unknown> }
+  'group.data-table-group': { item: Group, count: number, props: Record<string, unknown> }
+  'group.data-table-select': { props: Record<string, unknown> }
 }
 
 export const makeVDataTableGroupHeaderRowProps = propsFactory({
@@ -54,7 +54,7 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
             const icon = isGroupOpen(props.item) ? '$expand' : '$next'
             const onClick = () => toggleGroup(props.item)
 
-            return slots['data-table-group']?.({ item: props.item, count: rows.value.length, props: { icon, onClick } }) ?? (
+            return slots['group.data-table-group']?.({ item: props.item, count: rows.value.length, props: { icon, onClick } }) ?? (
               <VDataTableColumn class="v-data-table-group-header-row__column">
                 <VBtn
                   size="small"
@@ -72,7 +72,7 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
             const modelValue = isSelected(rows.value)
             const indeterminate = isSomeSelected(rows.value) && !modelValue
             const selectGroup = (v: boolean) => select(rows.value, v)
-            return slots['data-table-select']?.({ props: { modelValue, indeterminate, 'onUpdate:modelValue': selectGroup } }) ?? (
+            return slots['group.data-table-select']?.({ props: { modelValue, indeterminate, 'onUpdate:modelValue': selectGroup } }) ?? (
               <td>
                 <VCheckboxBtn
                   modelValue={ modelValue }

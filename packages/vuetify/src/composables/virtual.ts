@@ -3,11 +3,11 @@ import { useDisplay } from '@/composables/display'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
+import { InjectionKey, computed, inject, onMounted, provide, shallowRef, watch } from 'vue'
 import {
   clamp,
-  createRange,
   propsFactory,
+  refElement,
 } from '@/util'
 
 // Types
@@ -20,11 +20,40 @@ type VirtualProps = {
   itemHeight?: number | string
 }
 
+export interface Virtual {
+  key: string
+}
+
+export type VirtualProvide<T> = {
+  containerRef: Ref<any>
+  virtualItems: Ref<{ key: number | string, item: T }[]>
+  itemHeight: Ref<number>
+  paddingTop: Ref<number>
+  paddingBottom: Ref<number>
+  scrollToIndex: (index: number) => void
+  handleScroll: () => void
+  handleItemResize: (key: string | number, height: number) => void
+}
+
+type KeyFn<T> = (item: T, index: number) => string | number
+
+export const VirtualSymbol: InjectionKey<{ handleItemResize: (id: string | number, height: number) => void }> = Symbol.for('vuetify:virtual')
+
 export const makeVirtualProps = propsFactory({
   itemHeight: [Number, String],
 }, 'virtual')
 
-export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, offset?: Ref<number>) {
+export function useVirtualItem () {
+  const virtual = inject(VirtualSymbol)
+
+  if (!virtual) {
+    throw new Error('VVirtualScrollItem should only be used inside VVirtualScroll')
+  }
+
+  return virtual
+}
+
+export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, offset?: Ref<number>, keyFn: KeyFn<T> = (_, index) => index): VirtualProvide<T> {
   const first = shallowRef(0)
   const baseItemHeight = shallowRef(props.itemHeight)
   const itemHeight = computed({
@@ -33,15 +62,12 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
       baseItemHeight.value = val
     },
   })
-  const containerRef = ref<HTMLDivElement>()
-  const { resizeRef, contentRect } = useResizeObserver()
-  watchEffect(() => {
-    resizeRef.value = containerRef.value
-  })
+  const keyedItems = computed(() => items.value.map((item, index) => ({ key: keyFn(item, index), item })))
+  const { resizeRef: containerRef, contentRect } = useResizeObserver()
   const display = useDisplay()
 
-  const sizeMap = new Map<any, number>()
-  let sizes = createRange(items.value.length).map(() => itemHeight.value)
+  const sizeMap = new Map<string | number, number>()
+
   const visibleItems = computed(() => {
     const height = (contentRect.value?.height ?? display.height.value) - (offset?.value ?? 0)
     return itemHeight.value
@@ -51,23 +77,22 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
       : 12
   })
 
-  function handleItemResize (index: number, height: number) {
+  function handleItemResize (id: number | string, height: number) {
     itemHeight.value = Math.max(itemHeight.value, height)
-    sizes[index] = height
-    sizeMap.set(items.value[index], height)
+    sizeMap.set(id, height)
   }
 
   function calculateOffset (index: number) {
-    return sizes.slice(0, index).reduce((curr, value) => curr + (value || itemHeight.value), 0)
+    return keyedItems.value.slice(0, index).reduce((curr, item, i) => curr + (sizeMap.get(item.key) || itemHeight.value), 0)
   }
 
   function calculateMidPointIndex (scrollTop: number) {
-    const end = items.value.length
+    const end = keyedItems.value.length
 
     let middle = 0
     let middleOffset = 0
     while (middleOffset < scrollTop && middle < end) {
-      middleOffset += sizes[middle++] || itemHeight.value
+      middleOffset += sizeMap.get(keyedItems.value[middle++].key) || itemHeight.value
     }
 
     return middle - 1
@@ -76,9 +101,10 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   let lastScrollTop = 0
   function handleScroll () {
     if (!containerRef.value || !contentRect.value) return
+    const el = refElement(containerRef.value)
 
     const height = contentRect.value.height - 56
-    const scrollTop = containerRef.value.scrollTop
+    const scrollTop = el.scrollTop
     const direction = scrollTop < lastScrollTop ? UP : DOWN
 
     const midPointIndex = calculateMidPointIndex(scrollTop + height / 2)
@@ -89,47 +115,43 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
       first.value = clamp(midPointIndex - buffer, 0, items.value.length - visibleItems.value)
     }
 
-    lastScrollTop = containerRef.value.scrollTop
+    lastScrollTop = el.scrollTop
   }
 
   function scrollToIndex (index: number) {
     if (!containerRef.value) return
+    const el = refElement(containerRef.value)
 
     const offset = calculateOffset(index)
-    containerRef.value.scrollTop = offset
+    el.scrollTop = offset
   }
 
-  const allItems = computed(() => items.value.map((item, index) => ({
-    raw: item,
-    index,
-  })))
-  const last = computed(() => Math.min(items.value.length, first.value + visibleItems.value))
-  const computedItems = computed(() => allItems.value.slice(first.value, last.value))
+  const last = computed(() => Math.min(keyedItems.value.length, first.value + visibleItems.value))
+  const virtualItems = computed(() => keyedItems.value.slice(first.value, last.value))
   const paddingTop = computed(() => calculateOffset(first.value))
-  const paddingBottom = computed(() => calculateOffset(items.value.length) - calculateOffset(last.value))
+  const paddingBottom = computed(() => calculateOffset(keyedItems.value.length) - calculateOffset(last.value))
 
   onMounted(() => {
     if (!itemHeight.value) {
       // If itemHeight prop is not set, then calculate an estimated height from the average of inital items
-      itemHeight.value = sizes.slice(first.value, last.value).reduce((curr, height) => curr + height, 0) / (visibleItems.value)
+      itemHeight.value = virtualItems.value.reduce<number>((curr, item) => curr + (sizeMap.get(item.key) || itemHeight.value), 0) / (visibleItems.value)
     }
   })
 
-  watch(() => items.value.length, () => {
-    sizes = createRange(items.value.length).map(() => itemHeight.value)
-    sizeMap.forEach((height, item) => {
-      const index = items.value.indexOf(item)
+  watch(() => keyedItems.value.length, () => {
+    sizeMap.forEach((_, key) => {
+      const index = keyedItems.value.findIndex(item => item.key === key)
       if (index === -1) {
-        sizeMap.delete(item)
-      } else {
-        sizes[index] = height
+        sizeMap.delete(key)
       }
     })
   })
 
+  provide(VirtualSymbol, { handleItemResize })
+
   return {
     containerRef,
-    computedItems,
+    virtualItems,
     itemHeight,
     paddingTop,
     paddingBottom,
