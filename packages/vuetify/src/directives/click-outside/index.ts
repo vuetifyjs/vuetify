@@ -7,6 +7,7 @@ import type { DirectiveBinding } from 'vue'
 interface ClickOutsideBindingArgs {
   handler: (e: MouseEvent) => void
   closeConditional?: (e: Event) => boolean
+  closeByMousedown?: boolean 
   include?: () => HTMLElement[]
 }
 
@@ -83,6 +84,9 @@ export const ClickOutside = {
     const onClick = (e: Event) => directive(e as MouseEvent, el, binding)
     const onMousedown = (e: Event) => {
       el._clickOutside!.lastMousedownWasOutside = checkEvent(e as MouseEvent, el, binding)
+      if (typeof binding.value === 'object' && binding.value.closeByMousedown) {
+        return directive(e as MouseEvent, el, binding)
+      }
     }
 
     handleShadow(el, (app: HTMLElement) => {
