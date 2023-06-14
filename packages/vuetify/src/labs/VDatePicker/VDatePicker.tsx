@@ -6,6 +6,7 @@ import { makeVDatePickerControlsProps, VDatePickerControls } from './VDatePicker
 import { VDatePickerHeader } from './VDatePickerHeader'
 import { makeVDatePickerMonthProps, VDatePickerMonth } from './VDatePickerMonth'
 import { makeVDatePickerYearsProps, VDatePickerYears } from './VDatePickerYears'
+import { VFadeTransition } from '@/components/transitions'
 import { VBtn } from '@/components/VBtn'
 import { VTextField } from '@/components/VTextField'
 import { dateEmits, makeDateProps } from '@/labs/VDateInput/composables'
@@ -15,7 +16,6 @@ import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 import { createDatePicker } from './composables'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useDate } from '@/labs/date'
 
 // Utilities
@@ -59,7 +59,6 @@ export const makeVDatePickerProps = propsFactory({
   hideActions: Boolean,
 
   ...makeDateProps(),
-  ...makeTransitionProps({ transition: 'fade' }),
   ...makeVDatePickerControlsProps(),
   ...makeVDatePickerMonthProps(),
   ...makeVDatePickerYearsProps(),
@@ -160,21 +159,23 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
                   v-model:viewMode={ viewMode.value }
                 />
 
-                <MaybeTransition transition={ props.transition } mode="out-in">
+                <VFadeTransition hideOnLeave>
                   { viewMode.value === 'month' ? (
                     <VDatePickerMonth
+                      key="date-picker-month"
                       { ...datePickerMonthProps }
                       v-model={ model.value }
                       v-model:displayDate={ displayDate.value }
                     />
                   ) : (
                     <VDatePickerYears
+                      key="date-picker-years"
                       { ...datePickerYearsProps }
                       v-model:displayDate={ displayDate.value }
                       v-model:viewMode={ viewMode.value }
                     />
                   )}
-                </MaybeTransition>
+                </VFadeTransition>
               </>
             ) : (
               <div class="v-date-picker__input">
