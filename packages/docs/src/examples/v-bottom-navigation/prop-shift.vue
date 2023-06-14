@@ -33,6 +33,21 @@
   </v-layout>
 </template>
 
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const value = ref(1)
+  const color = computed(() => {
+    switch (value.value) {
+      case 0: return 'blue-grey'
+      case 1: return 'teal'
+      case 2: return 'brown'
+      case 3: return 'indigo'
+      default: return 'blue-grey'
+    }
+  })
+</script>
+
 <script>
   export default {
     data: () => ({ value: 1 }),

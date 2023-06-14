@@ -66,13 +66,3 @@
     </v-chip>
   </div>
 </template>
-
-<script>
-  export default {
-    methods: {
-      close () {
-        alert('Chip close clicked')
-      },
-    },
-  }
-</script>

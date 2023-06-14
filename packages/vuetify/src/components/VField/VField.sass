@@ -4,6 +4,7 @@
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
+@use './mixins' as *
 
 /* region INPUT */
 .v-field
@@ -68,9 +69,9 @@
     $root: &
 
     @at-root
-      @include tools.density('v-input', $input-density) using ($modifier)
+      @include input-density('v-input', $input-density, $input-chips-margin-bottom) using ($modifier, $chips-modifier)
         @at-root #{selector.nest(&, $root)}
-          --v-input-control-height: #{$field-control-height + $modifier}
+          --v-input-control-height: #{$field-control-height + $modifier - math.div($chips-modifier, 2) - $input-chips-margin-top}
           --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)}
 
   &--variant-outlined,
@@ -96,10 +97,13 @@
       --v-field-padding-top: var(--v-field-padding-top--plain-underlined, 6px)
 
     @at-root
-      @include tools.density('v-input', $input-density) using ($modifier)
+      @include input-density('v-input', $input-density, $input-chips-margin-bottom) using ($modifier, $chips-modifier)
         @at-root #{selector.nest(&, $root)}
-          --v-input-control-height: #{$field-control-underlined-height + $modifier}
+          --v-input-control-height: #{$field-control-underlined-height + $modifier - math.div($chips-modifier, 2) - $input-chips-margin-top}
           --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)}
+
+  &--variant-outlined
+    --v-input-chips-margin-bottom: #{$input-chips-margin-top}
 
   &--flat
     box-shadow: none
@@ -123,7 +127,7 @@
   flex-wrap: wrap
   letter-spacing: $field-letter-spacing
   opacity: $field-input-opacity
-  min-height: var(--v-field-input-min-height)
+  min-height: calc(var(--v-field-input-min-height) + var(--v-input-chips-margin-bottom) + $input-chips-margin-top)
   padding-inline-start: var(--v-field-padding-start)
   padding-inline-end: var(--v-field-padding-end)
   padding-top: var(--v-field-input-padding-top)

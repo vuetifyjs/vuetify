@@ -60,11 +60,9 @@ This is used internally by some components already:
 
 ## Global class and styles
 
-<alert type="success">
-
+::: success
 This feature was introduced in [v3.2.0 (Orion)](https://github.com/vuetifyjs/vuetify/releases/tag/v3.2.0)
-
-</alert>
+:::
 
 Define global classes and styles for all [built-in](/components/all/) components; including [virtual](/features/aliasing/#virtual-component-defaults) ones. This provides an immense amount of utility when building your application's design system and it reduces the amount of duplicated code in your templates.
 
@@ -204,19 +202,15 @@ export default createVuetify({
 
 When `<v-chip-primary>` is used in a template, it will **not** have the `v-chip--custom` class.
 
-<alert type="warning">
-
+::: warning
 There are some cases where a default class or style could be unintentionally passed down to an inner component. This mostly concerns [form inputs and controls](/components/all/#form-inputs-and-controls).
-
-</alert>
+:::
 
 ## Using in custom components
 
-<alert type="success">
-
+::: success
 This feature was introduced in [v3.2.0 (Orion)](https://github.com/vuetifyjs/vuetify/releases/tag/v3.2.0)
-
-</alert>
+:::
 
 Hook into the Vuetify defaults engine and configure your custom components the same way that we do. This feature makes it super easy to homogenize functionality across your application and reduce the amount of duplicated code.
 
@@ -273,11 +267,9 @@ Notice that we have to explicltly use the `props` object in the template. This i
 +<div>I am {{ props.foo }}</div>
 ```
 
-<alert type="info">
-
+::: info
 The **name** argument is optional and is inferred from the component's name if not provided.
-
-</alert>
+:::
 
 When `<MyComponent1>` is used in a template, it uses the default value assigned in the Vuetify config:
 

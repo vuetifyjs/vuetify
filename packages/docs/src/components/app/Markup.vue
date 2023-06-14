@@ -25,12 +25,12 @@
       </v-sheet>
     </v-toolbar>
 
-    <v-tooltip location="bottom">
+    <v-tooltip location="start">
       <template #activator="{ props: activatorProps }">
         <v-btn
-          :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text'"
-          class="me-1 text-disabled me-2 mt-2 app-markup-btn"
-          density="compact"
+          :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text-outline'"
+          class="text-disabled me-3 mt-1 app-markup-btn"
+          density="comfortable"
           style="position: absolute; right: 0; top: 0;"
           v-bind="activatorProps"
           variant="text"
@@ -38,7 +38,7 @@
         />
       </template>
 
-      <span>{{ t('copy-example-source') }}</span>
+      <span>{{ t('copy-source') }}</span>
     </v-tooltip>
 
     <div class="pa-4 pe-12">
@@ -72,7 +72,6 @@
 
   // Utilities
   import { ComponentPublicInstance, computed, ref, watchEffect } from 'vue'
-  import { IN_BROWSER } from '@/util/globals'
   import { wait } from '@/util/helpers'
   import { stripLinks } from '@/components/api/utils'
 
@@ -115,28 +114,14 @@
     highlighted.value = props.code && props.language && Prism.highlight(await props.code, Prism.languages[props.language], props.language)
   })
 
-  const className = computed(() => `langauge-${props.language}`)
+  const className = computed(() => `language-${props.language}`)
 
   async function copy () {
-    if (!IN_BROWSER || !root.value) return
-
-    const el = root.value.$el.querySelector('code')
-
-    if (!el) return
-
-    el.setAttribute('contenteditable', 'true')
-    el.focus()
-
-    document.execCommand('selectAll', false, undefined)
-    document.execCommand('copy')
-
-    el.removeAttribute('contenteditable')
+    navigator.clipboard.writeText(props.code)
 
     clicked.value = true
 
     await wait(500)
-
-    window.getSelection()?.removeAllRanges()
 
     clicked.value = false
   }
@@ -149,7 +134,6 @@
 
 <style lang="sass">
   .v-sheet.app-markup
-    // margin: 16px 0
     position: relative
 
     &:not(:hover)
@@ -158,9 +142,6 @@
 
     &:not(:hover) .v-btn--copy .v-icon
       opacity: .4
-
-    > pre
-      border-radius: inherit
 
     code,
     pre
@@ -190,7 +171,7 @@
         font-weight: 700
         pointer-events: none
         position: absolute
-        right: .5rem
+        right: 1rem
         text-transform: uppercase
 
     pre.language-bash::after
@@ -200,7 +181,7 @@
       content: 'html'
 
     pre.language-js::after
-      content: 'js'
+      content: ' js '
 
     pre.language-json::after
       content: 'json'
@@ -212,7 +193,7 @@
       content: 'scss'
 
     pre.language-ts::after
-      content: 'ts'
+      content: ' ts '
 
     pre.language-vue::after
       content: 'vue'

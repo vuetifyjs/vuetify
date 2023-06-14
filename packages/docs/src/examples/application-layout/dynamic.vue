@@ -12,6 +12,12 @@
   </v-layout>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const order = ref(0)
+</script>
+
 <script>
   export default {
     data: () => ({

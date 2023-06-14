@@ -44,11 +44,9 @@ export default createVuetify({
 
 In the above examples we import the default `mdi` icon set and its corresponding aliases. These aliases reference commonly used types of icons that are utilized by Vuetify components.
 
-<alert type="info">
-
+::: info
   While it is still possible to supply the icon value through the default slot in Vuetify 3.0 (`<v-icon>mdi-home</v-icon>`), we recommend using the `icon` prop instead.
-
-</alert>
+:::
 
 ### Multiple icon sets
 
@@ -78,21 +76,17 @@ export default createVuetify({
 </template>
 ```
 
-<alert type="info">
-
+::: info
   It is not necessary to provide a prefix (such as `mdi:`) for icons from the default icon set
-
-</alert>
+:::
 
 ## Installing icon fonts
 
 You are required to include the specified icon library (even when using the default icons from [Material Design Icons](https://materialdesignicons.com/)). This can be done by including a CDN link or importing the icon library into your application.
 
-<alert type="info">
-
+::: info
   In this page "Material Icons" is used to refer to the [official google icons](https://fonts.google.com/icons) and "Material Design Icons" refers to the [extended third-party library](https://materialdesignicons.com/)
-
-</alert>
+:::
 
 ### Material Design Icons
 
@@ -121,11 +115,9 @@ export default createVuetify({
 })
 ```
 
-<alert type="error">
-
+::: error
   **DO NOT** use a CDN link without specifying a package *version*. Failure to do so can result in unexpected changes to your application with new releases.
-
-</alert>
+:::
 
 Use this tool to search for any Material Design Icons and copy them to your clipboard by clicking the item.
 
@@ -287,11 +279,9 @@ export default createVuetify({
 </template>
 ```
 
-<alert type="error">
-
+::: error
   The JavaScript version (`all.js`) of the FontAwesome icons will **NOT** work with Vue
-
-</alert>
+:::
 
 ### Font Awesome 4 Icons
 

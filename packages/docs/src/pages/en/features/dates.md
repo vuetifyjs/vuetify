@@ -18,11 +18,9 @@ Easily hook up date libraries that are used for components that require date fun
 
 ----
 
-<alert type="warning">
-
+::: warning
 This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
-
-</alert>
+:::
 
 ## Usage
 
@@ -57,11 +55,9 @@ Within your application, import the **useDate** function and use it to access th
 </script>
 ```
 
-<alert type="info">
-
+::: info
 For a list of all supported date adapters, visit the [date-io](https://github.com/dmtrKovalenko/date-io#projects) project repository.
-
-</alert>
+:::
 
 ### Format options
 

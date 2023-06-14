@@ -17,6 +17,10 @@ import Ripple from '@/directives/ripple'
 import { computed, inject } from 'vue'
 import { convertToUnit, genericComponent, keyValues, propsFactory, useRender } from '@/util'
 
+// Types
+import type { PropType } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
+
 export type VSliderThumbSlots = {
   'thumb-label': { modelValue: number }
 }
@@ -40,7 +44,7 @@ export const makeVSliderThumbProps = propsFactory({
     required: true,
   },
   ripple: {
-    type: Boolean,
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
 

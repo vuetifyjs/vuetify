@@ -29,7 +29,6 @@ import {
   mergeProps,
   ref,
   Teleport,
-  toHandlers,
   toRef,
   Transition,
   watch,
@@ -193,6 +192,9 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       if (e.key === 'Escape' && globalTop.value) {
         if (!props.persistent) {
           isActive.value = false
+          if (contentEl.value?.contains(document.activeElement)) {
+            activatorEl.value?.focus()
+          }
         } else animateClick()
       }
     }
@@ -240,7 +242,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
           isActive: isActive.value,
           props: mergeProps({
             ref: activatorRef,
-          }, toHandlers(activatorEvents.value), props.activatorProps),
+          }, activatorEvents.value, props.activatorProps),
         })}
 
         { isMounted.value && (
@@ -273,7 +275,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 <Scrim
                   color={ scrimColor }
                   modelValue={ isActive.value && !!props.scrim }
-                  { ...toHandlers(scrimEvents.value) }
+                  { ...scrimEvents.value }
                 />
                 <MaybeTransition
                   appear
@@ -294,7 +296,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                       dimensionStyles.value,
                       contentStyles.value,
                     ]}
-                    { ...toHandlers(contentEvents.value) }
+                    { ...contentEvents.value }
                     { ...props.contentProps }
                   >
                     { slots.default?.({ isActive }) }

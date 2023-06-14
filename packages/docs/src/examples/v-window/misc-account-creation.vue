@@ -80,6 +80,20 @@
   </v-card>
 </template>
 
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const step = ref(1)
+
+  const currentTitle = computed(() => {
+    switch (step.value) {
+      case 1: return 'Sign-up'
+      case 2: return 'Create a password'
+      default: return 'Account created'
+    }
+  })
+</script>
+
 <script>
   export default {
     data: () => ({

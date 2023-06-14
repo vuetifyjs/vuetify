@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    v-if="!route.meta.fluid"
     id="app-toc"
     v-model="app.toc"
     color="background"

@@ -1,5 +1,6 @@
 <template>
   <promoted-base
+    v-if="!error"
     ref="script"
     :class="[
       isDark ? 'theme--dark' : 'theme--light',
@@ -15,10 +16,13 @@
       @script:error="error = true"
     />
   </promoted-base>
+
+  <promoted v-else />
 </template>
 
 <script setup lang="ts">
   // Components
+  import Promoted from './Promoted.vue'
   import PromotedBase from './Base.vue'
   import PromotedScript from './Script.vue'
 

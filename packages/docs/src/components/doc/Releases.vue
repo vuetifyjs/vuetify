@@ -111,6 +111,7 @@
   // Composables
   import { useDate } from 'vuetify/labs/date'
   import { useI18n } from 'vue-i18n'
+  import { useDisplay, version } from 'vuetify'
   import { useRoute, useRouter } from 'vue-router'
 
   // Stores
@@ -118,7 +119,6 @@
 
   // Utilities
   import { computed, onBeforeMount, ref, watch } from 'vue'
-  import { version } from 'vuetify'
   import { wait } from '@/util/helpers'
 
   const reactions = {
@@ -130,6 +130,7 @@
     eyes: '👀',
   }
 
+  const { smAndUp } = useDisplay()
   const { t } = useI18n()
   const date = useDate()
   const route = useRoute()
@@ -190,7 +191,7 @@
   const publishedOn = computed(() => {
     if (!search.value?.published_at) return undefined
 
-    return date.format(new Date(search.value.published_at), 'fullDateWithWeekday')
+    return date.format(new Date(search.value.published_at), smAndUp.value ? 'fullDateWithWeekday' : 'normalDateWithWeekday')
   })
 
   onBeforeMount(async () => {

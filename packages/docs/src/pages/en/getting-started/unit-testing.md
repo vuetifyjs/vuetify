@@ -16,11 +16,9 @@ Unit tests are an important (and sometimes ignored) part of developing applicati
 
 <entry />
 
-<alert type="warning">
-
+::: warning
   Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning "$attrs is readonly" or "$listeners is readonly". There is currently an ongoing [GitHub discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases. If you have additional questions please join us in our [online community](https://community.vuetifyjs.com)
-
-</alert>
+:::
 
 ## Test runners
 
@@ -43,11 +41,9 @@ import Vuetify from 'vuetify'
 Vue.use(Vuetify)
 ```
 
-<alert type="info">
-
+::: info
   If you are not using a `setup.js` file, you should add `Vue.use(Vuetify)` in the utilities section of your test.
-
-</alert>
+:::
 
 ## Spec Tests
 
@@ -81,11 +77,9 @@ describe('AppBtn.vue', () => {
 
 ```
 
-<alert type="info">
-
+::: info
   In order to have proper **TypeScript** support, Vuetify has to extend the main _Vue_ object. This extension causes issues with Vuetify and multiple Vue instances when it comes to externalization. This caveat will not apply in **Vuetify 3**.
-
-</alert>
+:::
 
 Let's create an example test use-case that we might find in our application.
 
@@ -185,11 +179,9 @@ describe('CustomCard.vue', () => {
 })
 ```
 
-<alert type="info">
-
+::: info
   If you are stuck and have additional questions about testing or need help in general, please join us in our [online community](https://community.vuetifyjs.com).
-
-</alert>
+:::
 
 ### Testing efficiency
 

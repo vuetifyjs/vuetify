@@ -132,7 +132,7 @@ export const VAutocomplete = genericComponent<new <
       props,
       'modelValue',
       [],
-      v => transformIn(wrapInArray(v)),
+      v => transformIn(v === null ? [null] : wrapInArray(v)),
       v => {
         const transformed = transformOut(v)
         return props.multiple ? transformed : (transformed[0] ?? null)
@@ -163,6 +163,12 @@ export const VAutocomplete = genericComponent<new <
         !isPristine.value &&
         !listHasFocus.value
     })
+
+    const menuDisabled = computed(() => (
+      (props.hideNoData && !items.value.length) ||
+      props.readonly || form?.isReadonly.value
+    ))
+
     const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
@@ -173,14 +179,13 @@ export const VAutocomplete = genericComponent<new <
       search.value = ''
     }
     function onMousedownControl () {
-      if (
-        (props.hideNoData && !items.value.length) ||
-        props.readonly || form?.isReadonly.value
-      ) return
+      if (menuDisabled.value) return
 
       menu.value = true
     }
     function onMousedownMenuIcon (e: MouseEvent) {
+      if (menuDisabled.value) return
+
       if (isFocused.value) {
         e.preventDefault()
         e.stopPropagation()
@@ -216,13 +221,8 @@ export const VAutocomplete = genericComponent<new <
         isPristine.value = true
       }
 
-      if (e.key === 'ArrowDown') {
+      if (e.key === 'ArrowDown' && highlightFirst.value) {
         listRef.value?.focus('next')
-        if (highlightFirst.value) {
-          listRef.value?.focus('next')
-        }
-      } else if (e.key === 'ArrowUp') {
-        listRef.value?.focus('prev')
       }
 
       if (!props.multiple) return
@@ -269,6 +269,11 @@ export const VAutocomplete = genericComponent<new <
           selectionIndex.value = -1
           vTextFieldRef.value.setSelectionRange(0, 0)
         }
+      }
+    }
+    function onListKeydown (e: KeyboardEvent) {
+      if (e.key === 'Tab') {
+        vTextFieldRef.value?.focus()
       }
     }
 
@@ -357,7 +362,12 @@ export const VAutocomplete = genericComponent<new <
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
-      const hasList = !!((!props.hideNoData || displayItems.value.length) || slots.prepend || slots.append || slots['no-data'])
+      const hasList = !!(
+        (!props.hideNoData || displayItems.value.length) ||
+        slots['prepend-item'] ||
+        slots['append-item'] ||
+        slots['no-data']
+      )
       const isDirty = model.value.length > 0
       const [textFieldProps] = VTextField.filterProps(props)
 
@@ -398,6 +408,7 @@ export const VAutocomplete = genericComponent<new <
                   v-model={ menu.value }
                   activator="parent"
                   contentClass="v-autocomplete__content"
+                  disabled={ menuDisabled.value }
                   eager={ props.eager }
                   maxHeight={ 310 }
                   openOnClick={ false }
@@ -412,8 +423,10 @@ export const VAutocomplete = genericComponent<new <
                       selected={ selected.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                      onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
+                      tabindex="-1"
                     >
                       { slots['prepend-item']?.() }
 

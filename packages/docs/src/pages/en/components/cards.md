@@ -69,11 +69,9 @@ Use slots if you need to render more complex content. If you need full control o
 
 In some cases it is possible to combine the different options, like the example below where props, slots and markup have all been used.
 
-<alert type="info">
-
+::: info
   In general slots take precedence over props. So if you provide both **text** prop and use **text** slot, then only the slot content will be rendered.
-
-</alert>
+:::
 
 <example file="v-card/basics-combine" />
 

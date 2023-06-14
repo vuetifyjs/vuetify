@@ -97,6 +97,8 @@ export {
   mdiCompassOutline,
   mdiContentSave,
   mdiContentSaveCogOutline,
+  mdiClipboardMultipleOutline,
+  mdiClipboardTextOutline,
   mdiCrosshairsGps,
   mdiDelete,
   mdiDeleteOutline,
