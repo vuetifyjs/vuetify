@@ -107,7 +107,9 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
         emit('update:modelValue', val)
       }
 
-      isReversing.value = adapter.isBefore(val[0], oldVal[0])
+      if (val[0] && oldVal[0]) {
+        isReversing.value = adapter.isBefore(val[0], oldVal[0])
+      }
     })
 
     function onClickCancel () {
