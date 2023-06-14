@@ -2,7 +2,7 @@
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, inject, nextTick, onScopeDispose, provide, reactive, readonly, shallowRef, toRaw, watchEffect } from 'vue'
+import { computed, inject, onScopeDispose, provide, reactive, readonly, shallowRef, toRaw, watchEffect } from 'vue'
 import { getCurrentInstance } from '@/util'
 
 // Types
@@ -55,7 +55,7 @@ export function useStack (
   if (createStackEntry) {
     watchEffect(() => {
       const _isTop = globalStack.at(-1)?.[0] === vm.uid
-      nextTick(() => globalTop.value = _isTop)
+      setTimeout(() => globalTop.value = _isTop)
     })
   }
 
