@@ -1,0 +1,29 @@
+.v-main {
+  flex: 1 0 auto;
+  max-width: 100%;
+  transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding-left: var(--v-layout-left);
+  padding-right: var(--v-layout-right);
+  padding-top: var(--v-layout-top);
+  padding-bottom: var(--v-layout-bottom);
+}
+.v-main__scroller {
+  max-width: 100%;
+  position: relative;
+}
+.v-main--scrollable {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.v-main--scrollable > .v-main__scroller {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  --v-layout-left: 0px;
+  --v-layout-right: 0px;
+  --v-layout-top: 0px;
+  --v-layout-bottom: 0px;
+}

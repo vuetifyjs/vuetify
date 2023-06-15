@@ -1,0 +1,156 @@
+.v-slider-thumb {
+  touch-action: none;
+  color: rgb(var(--v-theme-surface-variant));
+}
+.v-input--error:not(.v-input--disabled) .v-slider-thumb {
+  color: inherit;
+}
+
+.v-slider-thumb__label {
+  background: rgba(var(--v-theme-surface-variant), 0.7);
+  color: rgb(var(--v-theme-on-surface-variant));
+}
+.v-slider-thumb__label::before {
+  color: rgba(var(--v-theme-surface-variant), 0.7);
+}
+
+.v-slider-thumb {
+  outline: none;
+  position: absolute;
+  transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
+}
+
+.v-slider-thumb__surface {
+  cursor: pointer;
+  width: var(--v-slider-thumb-size);
+  height: var(--v-slider-thumb-size);
+  border-radius: 50%;
+  user-select: none;
+  background-color: currentColor;
+}
+.v-slider-thumb__surface::before {
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  content: "";
+  color: inherit;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: currentColor;
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+}
+.v-slider-thumb__surface::after {
+  content: "";
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.v-slider-thumb__label-container {
+  position: absolute;
+  transition: 0.2s cubic-bezier(0.4, 0, 1, 1);
+}
+
+.v-slider-thumb__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  min-width: 35px;
+  height: 25px;
+  border-radius: 4px;
+  padding: 6px;
+  position: absolute;
+  user-select: none;
+  transition: 0.2s cubic-bezier(0.4, 0, 1, 1);
+}
+.v-slider-thumb__label::before {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.v-slider-thumb__ripple {
+  position: absolute;
+  left: calc(var(--v-slider-thumb-size) / -2);
+  top: calc(var(--v-slider-thumb-size) / -2);
+  width: calc(var(--v-slider-thumb-size) * 2);
+  height: calc(var(--v-slider-thumb-size) * 2);
+  background: inherit;
+}
+
+.v-slider.v-input--horizontal .v-slider-thumb {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.v-slider.v-input--horizontal .v-slider-thumb.v-locale--is-ltr, .v-locale--is-ltr .v-slider.v-input--horizontal .v-slider-thumb {
+  left: calc(var(--v-slider-thumb-position) - var(--v-slider-thumb-size) / 2);
+}
+.v-slider.v-input--horizontal .v-slider-thumb.v-locale--is-rtl, .v-locale--is-rtl .v-slider.v-input--horizontal .v-slider-thumb {
+  right: calc(var(--v-slider-thumb-position) - var(--v-slider-thumb-size) / 2);
+}
+.v-slider.v-input--horizontal .v-slider-thumb__label-container {
+  left: calc(var(--v-slider-thumb-size) / 2);
+  top: 0;
+}
+.v-slider.v-input--horizontal .v-slider-thumb__label {
+  bottom: calc(var(--v-slider-thumb-size) / 2);
+}
+.v-slider.v-input--horizontal .v-slider-thumb__label.v-locale--is-ltr, .v-locale--is-ltr .v-slider.v-input--horizontal .v-slider-thumb__label {
+  transform: translateX(-50%);
+}
+.v-slider.v-input--horizontal .v-slider-thumb__label.v-locale--is-rtl, .v-locale--is-rtl .v-slider.v-input--horizontal .v-slider-thumb__label {
+  transform: translateX(50%);
+}
+.v-slider.v-input--horizontal .v-slider-thumb__label::before {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid currentColor;
+  bottom: -6px;
+}
+
+.v-slider.v-input--vertical .v-slider-thumb {
+  top: calc(var(--v-slider-thumb-position) - var(--v-slider-thumb-size) / 2);
+}
+.v-slider.v-input--vertical .v-slider-thumb__label-container {
+  top: calc(var(--v-slider-thumb-size) / 2);
+  right: 0;
+}
+.v-slider.v-input--vertical .v-slider-thumb__label {
+  top: -12.5px;
+  left: calc(var(--v-slider-thumb-size) / 2);
+}
+.v-slider.v-input--vertical .v-slider-thumb__label::before {
+  border-right: 6px solid currentColor;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  left: -6px;
+}
+
+.v-slider-thumb--focused .v-slider-thumb__surface::before {
+  transform: scale(2);
+  opacity: var(--v-focus-opacity);
+}
+
+.v-slider-thumb--pressed {
+  transition: none;
+}
+.v-slider-thumb--pressed .v-slider-thumb__surface::before {
+  opacity: var(--v-pressed-opacity);
+}
+
+@media (hover: hover) {
+  .v-slider-thumb:hover .v-slider-thumb__surface::before {
+    transform: scale(2);
+  }
+  .v-slider-thumb:hover:not(.v-slider-thumb--focused) .v-slider-thumb__surface::before {
+    opacity: var(--v-hover-opacity);
+  }
+}

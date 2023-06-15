@@ -1,0 +1,10 @@
+.v-kbd {
+  background: rgb(var(--v-theme-kbd));
+  color: rgb(var(--v-theme-on-kbd));
+  border-radius: 3px;
+  display: inline;
+  font-size: 85%;
+  font-weight: normal;
+  padding: 0.2em 0.4rem;
+  box-shadow: 0px 3px 1px -2px var(--v-shadow-key-umbra-opacity, rgba(0, 0, 0, 0.2)), 0px 2px 2px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.14)), 0px 1px 5px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.12));
+}

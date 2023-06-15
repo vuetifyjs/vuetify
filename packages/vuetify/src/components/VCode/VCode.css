@@ -1,0 +1,9 @@
+.v-code {
+  background-color: rgb(var(--v-theme-code));
+  color: rgb(var(--v-theme-on-code));
+  border-radius: 4px;
+  line-height: 1.8;
+  font-size: 0.9em;
+  font-weight: normal;
+  padding: 0.2em 0.4em;
+}

@@ -1,0 +1,72 @@
+.v-badge {
+  display: inline-block;
+  line-height: 1;
+}
+
+.v-badge__badge {
+  align-items: center;
+  display: inline-flex;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  height: 1.25rem;
+  justify-content: center;
+  min-width: 20px;
+  padding: 4px 6px;
+  pointer-events: auto;
+  position: absolute;
+  text-align: center;
+  text-indent: 0;
+  transition: 0.225s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  background: rgb(var(--v-theme-surface-variant));
+  color: rgba(var(--v-theme-on-surface-variant), var(--v-high-emphasis-opacity));
+}
+.v-badge--bordered .v-badge__badge::after {
+  border-radius: inherit;
+  border-style: solid;
+  border-width: 2px;
+  bottom: 0;
+  color: rgb(var(--v-theme-background));
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: scale(1.2);
+}
+.v-badge--dot .v-badge__badge {
+  border-radius: 4.5px;
+  height: 9px;
+  min-width: 0;
+  padding: 0;
+  width: 9px;
+}
+.v-badge--dot .v-badge__badge::after {
+  border-width: 1.5px;
+}
+.v-badge--inline .v-badge__badge {
+  position: relative;
+  vertical-align: middle;
+}
+.v-badge__badge .v-icon {
+  color: inherit;
+  font-size: 0.75rem;
+  margin: 0 -2px;
+}
+.v-badge__badge img,
+.v-badge__badge .v-img {
+  height: 100%;
+  width: 100%;
+}
+
+.v-badge__wrapper {
+  display: flex;
+  position: relative;
+}
+.v-badge--inline .v-badge__wrapper {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  margin: 0 4px;
+}

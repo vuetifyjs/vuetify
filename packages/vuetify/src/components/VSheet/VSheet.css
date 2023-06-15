@@ -1,0 +1,29 @@
+.v-sheet {
+  display: block;
+  border-color: rgba(var(--v-border-color), var(--v-border-opacity));
+  border-style: solid;
+  border-width: 0;
+  box-shadow: 0px 0px 0px 0px var(--v-shadow-key-umbra-opacity, rgba(0, 0, 0, 0.2)), 0px 0px 0px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.14)), 0px 0px 0px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.12));
+  border-radius: 0;
+  background: rgb(var(--v-theme-surface));
+  color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity));
+}
+.v-sheet--border {
+  border-width: thin;
+  box-shadow: none;
+}
+.v-sheet--absolute {
+  position: absolute;
+}
+.v-sheet--fixed {
+  position: fixed;
+}
+.v-sheet--relative {
+  position: relative;
+}
+.v-sheet--sticky {
+  position: sticky;
+}
+.v-sheet--rounded {
+  border-radius: 4px;
+}

@@ -1,0 +1,32 @@
+.v-responsive {
+  display: grid;
+  grid-template-rows: minmax(100%, 1fr);
+  grid-template-columns: 1fr;
+  flex: 1 0 auto;
+  max-height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.v-responsive--inline {
+  display: inline-grid;
+  flex: 0 0 auto;
+}
+
+.v-responsive__content {
+  flex: 1 0 0px;
+  max-width: 100%;
+}
+
+.v-responsive__sizer {
+  flex: 1 0 0px;
+  transition: padding-bottom 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.v-responsive__sizer,
+.v-responsive__content {
+  position: relative;
+  grid-row-start: 1;
+  grid-column-start: 1;
+}

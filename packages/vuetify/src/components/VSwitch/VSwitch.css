@@ -1,0 +1,80 @@
+.v-switch .v-label {
+  padding-inline-start: 10px;
+}
+
+.v-switch__loader {
+  display: flex;
+}
+
+.v-switch__track,
+.v-switch__thumb {
+  background-color: currentColor;
+  transition: none;
+}
+.v-selection-control--error:not(.v-selection-control--disabled) .v-switch__track,
+.v-selection-control--error:not(.v-selection-control--disabled) .v-switch__thumb {
+  background-color: rgb(var(--v-theme-error));
+}
+
+.v-selection-control--dirty .v-switch__thumb {
+  color: currentColor;
+}
+
+.v-switch__track {
+  border-radius: 8px;
+  height: 14px;
+  opacity: 0.6;
+  width: 36px;
+  cursor: pointer;
+}
+.v-switch--inset .v-switch__track {
+  border-radius: 14px;
+  height: 28px;
+  width: 48px;
+}
+
+.v-switch__thumb {
+  align-items: center;
+  border-radius: 50%;
+  color: rgb(var(--v-theme-surface));
+  display: flex;
+  height: 20px;
+  justify-content: center;
+  width: 20px;
+  pointer-events: none;
+  transition: 0.15s transform cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0px 2px 4px -1px var(--v-shadow-key-umbra-opacity, rgba(0, 0, 0, 0.2)), 0px 4px 5px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.14)), 0px 1px 10px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.12));
+}
+.v-switch--inset .v-switch__thumb {
+  box-shadow: 0px 0px 0px 0px var(--v-shadow-key-umbra-opacity, rgba(0, 0, 0, 0.2)), 0px 0px 0px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.14)), 0px 0px 0px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.12));
+}
+.v-switch:not(.v-switch--loading) .v-icon ~ .v-switch__thumb {
+  display: none;
+}
+
+.v-switch--loading .v-selection-control__input > .v-icon {
+  display: none;
+}
+
+.v-switch .v-selection-control {
+  min-height: var(--v-input-control-height);
+}
+.v-switch .v-selection-control__input {
+  border-radius: 50%;
+  transition: 0.15s transform cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-10px);
+  position: absolute;
+}
+.v-switch .v-selection-control--dirty .v-selection-control__input {
+  transform: translateX(10px);
+}
+.v-switch.v-switch--indeterminate .v-selection-control__input {
+  transform: scale(0.8);
+}
+.v-switch.v-switch--indeterminate .v-switch__thumb {
+  transform: scale(0.75);
+  box-shadow: none;
+}
+.v-switch.v-switch--inset .v-selection-control__wrapper {
+  width: auto;
+}

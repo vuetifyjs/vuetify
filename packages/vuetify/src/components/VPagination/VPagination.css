@@ -1,0 +1,9 @@
+.v-pagination__list {
+  display: inline-flex;
+  list-style-type: none;
+  justify-content: center;
+  width: 100%;
+}
+.v-pagination__item, .v-pagination__first, .v-pagination__prev, .v-pagination__next, .v-pagination__last {
+  margin: 0.3rem;
+}

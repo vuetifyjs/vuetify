@@ -1,0 +1,16 @@
+.v-application {
+  display: flex;
+  background: rgb(var(--v-theme-background));
+  color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity));
+}
+
+.v-application__wrap {
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  max-width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+}

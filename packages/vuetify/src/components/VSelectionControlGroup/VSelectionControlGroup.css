@@ -1,0 +1,9 @@
+.v-selection-control-group {
+  grid-area: control;
+  display: flex;
+  flex-direction: column;
+}
+.v-selection-control-group--inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+}

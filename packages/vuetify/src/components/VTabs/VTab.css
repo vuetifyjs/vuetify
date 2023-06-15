@@ -1,0 +1,29 @@
+.v-tab.v-tab {
+  --v-btn-height: var(--v-tabs-height);
+  min-width: 90px;
+}
+.v-slide-group--horizontal .v-tab {
+  max-width: 360px;
+}
+.v-slide-group--vertical .v-tab {
+  justify-content: start;
+}
+
+.v-tab__slider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: currentColor;
+  pointer-events: none;
+  opacity: 0;
+}
+.v-tab--selected .v-tab__slider {
+  opacity: 1;
+}
+.v-slide-group--vertical .v-tab__slider {
+  top: 0;
+  height: 100%;
+  width: 2px;
+}

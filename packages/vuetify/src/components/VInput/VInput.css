@@ -1,0 +1,132 @@
+.v-input {
+  display: grid;
+  flex: 1 1 auto;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  --v-input-chips-margin-top: 2px;
+}
+.v-input--disabled {
+  pointer-events: none;
+}
+.v-input--density-default {
+  --v-input-control-height: 56px;
+  --v-input-padding-top: 15px;
+}
+
+.v-input--density-comfortable {
+  --v-input-control-height: 48px;
+  --v-input-padding-top: 11px;
+}
+
+.v-input--density-compact {
+  --v-input-control-height: 40px;
+  --v-input-padding-top: 7px;
+}
+
+.v-input--density-default {
+  --v-input-chips-margin-bottom: 0px;
+}
+
+.v-input--density-comfortable {
+  --v-input-chips-margin-bottom: 2px;
+}
+
+.v-input--density-compact {
+  --v-input-chips-margin-bottom: 4px;
+}
+
+.v-input--vertical {
+  grid-template-areas: "append" "control" "prepend";
+  grid-template-rows: max-content auto max-content;
+  grid-template-columns: min-content;
+}
+.v-input--vertical .v-input__prepend {
+  margin-block-start: 16px;
+}
+.v-input--vertical .v-input__append {
+  margin-block-end: 16px;
+}
+
+.v-input--horizontal {
+  grid-template-areas: "prepend control append" "a messages b";
+  grid-template-columns: max-content minmax(0, 1fr) max-content;
+  grid-template-rows: auto auto;
+}
+.v-input--horizontal .v-input__prepend {
+  margin-inline-end: 16px;
+}
+.v-input--horizontal .v-input__append {
+  margin-inline-start: 16px;
+}
+
+.v-input__details {
+  align-items: flex-end;
+  display: flex;
+  font-size: 0.75rem;
+  font-weight: 400;
+  grid-area: messages;
+  letter-spacing: 0.0333333333em;
+  line-height: normal;
+  min-height: 22px;
+  padding-top: 6px;
+  overflow: hidden;
+  justify-content: space-between;
+}
+
+.v-input__details > .v-icon,
+.v-input__prepend > .v-icon,
+.v-input__append > .v-icon {
+  opacity: var(--v-medium-emphasis-opacity);
+}
+.v-input--disabled .v-input__details > .v-icon,
+.v-input--disabled .v-input__details .v-messages, .v-input--error .v-input__details > .v-icon,
+.v-input--error .v-input__details .v-messages,
+.v-input--disabled .v-input__prepend > .v-icon,
+.v-input--disabled .v-input__prepend .v-messages,
+.v-input--error .v-input__prepend > .v-icon,
+.v-input--error .v-input__prepend .v-messages,
+.v-input--disabled .v-input__append > .v-icon,
+.v-input--disabled .v-input__append .v-messages,
+.v-input--error .v-input__append > .v-icon,
+.v-input--error .v-input__append .v-messages {
+  opacity: 1;
+}
+.v-input--disabled .v-input__details,
+.v-input--disabled .v-input__prepend,
+.v-input--disabled .v-input__append {
+  opacity: var(--v-disabled-opacity);
+}
+.v-input--error:not(.v-input--disabled) .v-input__details > .v-icon,
+.v-input--error:not(.v-input--disabled) .v-input__details .v-messages,
+.v-input--error:not(.v-input--disabled) .v-input__prepend > .v-icon,
+.v-input--error:not(.v-input--disabled) .v-input__prepend .v-messages,
+.v-input--error:not(.v-input--disabled) .v-input__append > .v-icon,
+.v-input--error:not(.v-input--disabled) .v-input__append .v-messages {
+  color: rgb(var(--v-theme-error));
+}
+
+.v-input__prepend,
+.v-input__append {
+  display: flex;
+  align-items: flex-start;
+  padding-top: var(--v-input-padding-top);
+}
+.v-input--center-affix .v-input__prepend,
+.v-input--center-affix .v-input__append {
+  align-items: center;
+  padding-top: 0;
+}
+
+.v-input__prepend {
+  grid-area: prepend;
+}
+
+.v-input__append {
+  grid-area: append;
+}
+
+.v-input__control {
+  display: flex;
+  grid-area: control;
+}

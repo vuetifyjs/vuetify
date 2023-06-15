@@ -1,0 +1,39 @@
+.v-system-bar {
+  align-items: center;
+  display: flex;
+  flex: 1 1 auto;
+  height: 24px;
+  justify-content: flex-end;
+  max-width: 100%;
+  padding-inline-start: 8px;
+  padding-inline-end: 8px;
+  position: relative;
+  text-align: end;
+  width: 100%;
+  box-shadow: 0px 0px 0px 0px var(--v-shadow-key-umbra-opacity, rgba(0, 0, 0, 0.2)), 0px 0px 0px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.14)), 0px 0px 0px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.12));
+  background: rgba(var(--v-theme-on-surface-variant));
+  color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity));
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.0333333333em;
+  line-height: 1.25rem;
+  text-transform: none;
+}
+.v-system-bar .v-icon {
+  opacity: var(--v-medium-emphasis-opacity);
+}
+.v-system-bar--absolute {
+  position: absolute;
+}
+.v-system-bar--fixed {
+  position: fixed;
+}
+.v-system-bar--rounded {
+  border-radius: 0;
+}
+.v-system-bar--window {
+  height: 32px;
+}
+.v-system-bar:not(.v-system-bar--absolute) {
+  padding-inline-end: calc(var(--v-scrollbar-offset) + 8px);
+}

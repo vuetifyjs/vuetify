@@ -1,0 +1,7 @@
+.v-parallax {
+  position: relative;
+  overflow: hidden;
+}
+.v-parallax--active > .v-img__img {
+  will-change: transform;
+}

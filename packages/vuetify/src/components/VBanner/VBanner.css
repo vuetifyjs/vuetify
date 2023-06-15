@@ -1,0 +1,157 @@
+.v-banner {
+  display: grid;
+  flex: 1 1;
+  font-size: 0.875rem;
+  grid-template-areas: "prepend content actions";
+  grid-template-columns: max-content auto max-content;
+  grid-template-rows: max-content max-content;
+  line-height: 1.375rem;
+  overflow: hidden;
+  padding-inline-start: 16px;
+  padding-inline-end: 8px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  position: relative;
+  width: 100%;
+  border-color: rgba(var(--v-border-color), var(--v-border-opacity));
+  border-style: solid;
+  border-width: 0 0 thin 0;
+  box-shadow: 0px 0px 0px 0px var(--v-shadow-key-umbra-opacity, rgba(0, 0, 0, 0.2)), 0px 0px 0px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.14)), 0px 0px 0px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.12));
+  border-radius: 0;
+  background: rgb(var(--v-theme-surface));
+  color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity));
+}
+.v-banner--border {
+  border-width: thin;
+  box-shadow: none;
+}
+.v-banner--absolute {
+  position: absolute;
+}
+.v-banner--fixed {
+  position: fixed;
+}
+.v-banner--sticky {
+  position: sticky;
+}
+.v-banner--rounded {
+  border-radius: 4px;
+}
+.v-banner--stacked:not(.v-banner--one-line) {
+  grid-template-areas: "prepend content" ". actions";
+}
+.v-banner--stacked .v-banner-text {
+  padding-inline-end: 36px;
+}
+.v-banner--density-default .v-banner-actions {
+  margin-bottom: -8px;
+}
+.v-banner--density-default.v-banner--one-line {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.v-banner--density-default.v-banner--one-line .v-banner-actions {
+  margin-bottom: 0;
+}
+.v-banner--density-default.v-banner--one-line {
+  padding-top: 10px;
+}
+.v-banner--density-default.v-banner--two-line {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.v-banner--density-default.v-banner--three-line {
+  padding-top: 24px;
+  padding-bottom: 16px;
+}
+.v-banner--density-default:not(.v-banner--one-line) .v-banner-actions, .v-banner--density-default.v-banner--two-line .v-banner-actions, .v-banner--density-default.v-banner--three-line .v-banner-actions {
+  margin-top: 20px;
+}
+
+.v-banner--density-comfortable .v-banner-actions {
+  margin-bottom: -4px;
+}
+.v-banner--density-comfortable.v-banner--one-line {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.v-banner--density-comfortable.v-banner--one-line .v-banner-actions {
+  margin-bottom: 0;
+}
+.v-banner--density-comfortable.v-banner--two-line {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.v-banner--density-comfortable.v-banner--three-line {
+  padding-top: 20px;
+  padding-bottom: 12px;
+}
+.v-banner--density-comfortable:not(.v-banner--one-line) .v-banner-actions, .v-banner--density-comfortable.v-banner--two-line .v-banner-actions, .v-banner--density-comfortable.v-banner--three-line .v-banner-actions {
+  margin-top: 16px;
+}
+
+.v-banner--density-compact .v-banner-actions {
+  margin-bottom: 0px;
+}
+.v-banner--density-compact.v-banner--one-line {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.v-banner--density-compact.v-banner--one-line .v-banner-actions {
+  margin-bottom: 0;
+}
+.v-banner--density-compact.v-banner--two-line {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.v-banner--density-compact.v-banner--three-line {
+  padding-top: 16px;
+  padding-bottom: 8px;
+}
+.v-banner--density-compact:not(.v-banner--one-line) .v-banner-actions, .v-banner--density-compact.v-banner--two-line .v-banner-actions, .v-banner--density-compact.v-banner--three-line .v-banner-actions {
+  margin-top: 12px;
+}
+
+.v-banner--sticky {
+  top: 0;
+}
+
+.v-banner__content {
+  grid-area: content;
+}
+
+.v-banner__prepend {
+  align-self: flex-start;
+  grid-area: prepend;
+  margin-inline-end: 24px;
+}
+
+.v-banner-actions {
+  align-self: flex-end;
+  display: flex;
+  flex: 0 1;
+  grid-area: actions;
+  justify-content: flex-end;
+}
+.v-banner--two-line .v-banner-actions, .v-banner--three-line .v-banner-actions {
+  margin-top: 20px;
+}
+
+.v-banner-text {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  padding-inline-end: 90px;
+  overflow: hidden;
+}
+.v-banner--one-line .v-banner-text {
+  -webkit-line-clamp: 1;
+}
+.v-banner--two-line .v-banner-text {
+  -webkit-line-clamp: 2;
+}
+.v-banner--three-line .v-banner-text {
+  -webkit-line-clamp: 3;
+}
+.v-banner--two-line .v-banner-text, .v-banner--three-line .v-banner-text {
+  align-self: flex-start;
+}

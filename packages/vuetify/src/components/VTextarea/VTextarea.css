@@ -1,0 +1,43 @@
+.v-textarea .v-field {
+  --v-textarea-control-height: var(--v-input-control-height);
+}
+.v-textarea .v-field__field {
+  --v-input-control-height: var(--v-textarea-control-height);
+}
+.v-textarea .v-field__input {
+  flex: 1 1 auto;
+  outline: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, transparent calc(var(--v-field-padding-top, 0) + var(--v-input-padding-top, 0) - 6px), black calc(var(--v-field-padding-top, 0) + var(--v-input-padding-top, 0) + 4px));
+  mask-image: linear-gradient(to bottom, transparent, transparent calc(var(--v-field-padding-top, 0) + var(--v-input-padding-top, 0) - 6px), black calc(var(--v-field-padding-top, 0) + var(--v-input-padding-top, 0) + 4px));
+}
+.v-textarea .v-field__input.v-textarea__sizer {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0 !important;
+  min-height: 0 !important;
+  pointer-events: none;
+}
+.v-textarea--auto-grow .v-field__input {
+  overflow: hidden;
+}
+.v-textarea--no-resize .v-field__input {
+  resize: none;
+}
+.v-textarea .v-field--no-label textarea,
+.v-textarea .v-field--active textarea {
+  opacity: 1;
+}
+.v-textarea textarea {
+  opacity: 0;
+  flex: 1;
+  min-width: 0;
+  transition: 0.15s opacity cubic-bezier(0.4, 0, 0.2, 1);
+}
+.v-textarea textarea:focus, .v-textarea textarea:active {
+  outline: none;
+}
+.v-textarea textarea:invalid {
+  box-shadow: none;
+}

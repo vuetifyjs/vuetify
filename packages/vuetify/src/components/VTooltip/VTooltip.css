@@ -1,0 +1,22 @@
+.v-tooltip > .v-overlay__content {
+  background: rgba(var(--v-theme-surface-variant), 0.7);
+  color: rgb(var(--v-theme-on-surface-variant));
+  border-radius: 4px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  display: inline-block;
+  padding: 5px 16px;
+  text-transform: initial;
+  width: auto;
+  opacity: 1;
+  pointer-events: none;
+  transition-property: opacity, transform;
+}
+.v-tooltip > .v-overlay__content[class*=enter-active] {
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.v-tooltip > .v-overlay__content[class*=leave-active] {
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+  transition-duration: 75ms;
+}
