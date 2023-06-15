@@ -6,10 +6,11 @@ import { VBtn } from '@/components/VBtn'
 import { VSpacer } from '@/components/VGrid'
 
 // Composables
+import { useLocale } from '@/composables/locale'
 import { useDate } from '@/labs/date'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, shallowRef, Transition, watch } from 'vue'
 import { dateEmits, makeDateProps } from '../VDateInput/composables'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
@@ -48,10 +49,23 @@ export const VDatePickerControls = genericComponent()({
   },
 
   setup (props, { emit }) {
+    const { isRtl } = useLocale()
     const adapter = useDate()
     const monthAndYear = computed(() => {
       const month = props.range === 'end' ? adapter.addMonths(props.displayDate, 1) : props.displayDate
       return adapter.format(month, 'monthAndYear')
+    })
+
+    const isReversed = shallowRef(false)
+    const transition = computed(() => {
+      const reverse = isRtl.value ? !isReversed.value : isReversed.value
+      const direction = reverse ? '-reverse' : ''
+
+      return `v-window-x${direction}-transition`
+    })
+
+    watch(() => props.displayDate, (to, from) => {
+      isReversed.value = adapter.isBefore(to, from)
     })
 
     useRender(() => {
@@ -75,7 +89,11 @@ export const VDatePickerControls = genericComponent()({
         <div class="v-date-picker-controls">
           { props.viewMode === 'month' && props.range === 'start' && prevBtn }
           { !!props.range && <VSpacer key="range-spacer" /> }
-          <div class="v-date-picker-controls__date">{ monthAndYear.value }</div>
+          <div class="v-date-picker-controls__date">
+            <Transition name={ transition.value }>
+              <div key={ monthAndYear.value }>{ monthAndYear.value }</div>
+            </Transition>
+          </div>
           <VBtn
             key="expand-btn"
             variant="text"
