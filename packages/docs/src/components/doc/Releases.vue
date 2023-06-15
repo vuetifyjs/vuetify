@@ -1,6 +1,7 @@
 <template>
   <div class="border rounded my-6">
     <v-autocomplete
+      ref="autocomplete"
       v-model="search"
       :items="releases"
       :loading="store.isLoading"
@@ -137,6 +138,7 @@
   const router = useRouter()
   const store = useReleasesStore()
 
+  const autocomplete = ref()
   const clicked = ref('copy-link')
   const search = ref<Release>()
 
@@ -206,6 +208,8 @@
     if (!version) return
 
     router.push({ query: { version } })
+
+    autocomplete.value?.blur()
   })
 </script>
 
