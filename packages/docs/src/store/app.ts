@@ -6,6 +6,7 @@ import data from '@/data/nav.json'
 
 // Types
 export type RootState = {
+  apiSearch: string
   drawer: boolean | null
   settings: boolean
   settingsCanShow: boolean
@@ -24,6 +25,7 @@ type NavItem = {
 export const useAppStore = defineStore({
   id: 'app',
   state: () => ({
+    apiSearch: '',
     drawer: null,
     toc: null,
     items: Array.from(data),

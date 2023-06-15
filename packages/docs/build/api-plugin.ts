@@ -32,6 +32,7 @@ function genApiLinks (componentName: string, header: string) {
     `## ${header} {#links}`,
     links.join('\n'),
     '<entry />',
+    '<api-search />',
   ]
 
   return `${section.join('\n\n')}\n\n`

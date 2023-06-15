@@ -197,7 +197,8 @@
     "label": "Search",
     "looking": "Looking for",
     "key-hint": "Press /",
-    "results": "Your search results will appear here"
+    "results": "Your search results will appear here",
+    "no-results": "No results found"
   },
   "search-api": "Search API",
   "search-jobs": "Search Jobs",
