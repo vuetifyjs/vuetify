@@ -258,7 +258,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       script: 'sync',
       formatting: 'minify',
       crittersOptions: false,
-      includedRoutes (routes) {
+      includedRoutes (routes: string[]) {
         return routes.filter(route => (route === '/' || route.startsWith('/en/')) &&
           ['/eo-UY/', '/api/', ':', '*'].every(v => !route.includes(v))
         )
