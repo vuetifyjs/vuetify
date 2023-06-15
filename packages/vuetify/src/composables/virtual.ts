@@ -15,6 +15,7 @@ import type { Ref } from 'vue'
 
 const UP = -1
 const DOWN = 1
+const BUFFER_RATIO = 1 / 3
 
 type VirtualProps = {
   itemHeight?: number | string
@@ -51,7 +52,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
         ? display.height.value
         : contentRect.value.height
     ) - (offset?.value ?? 0)
-    return Math.ceil((height / itemHeight.value) * 1.7 + 1)
+    return Math.ceil((height / itemHeight.value) * (1 + BUFFER_RATIO * 2)) + 1
   })
 
   function handleItemResize (index: number, height: number) {
@@ -86,10 +87,11 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     const direction = scrollTop < lastScrollTop ? UP : DOWN
 
     const midPointIndex = calculateMidPointIndex(scrollTop + height / 2)
-    const buffer = Math.round(visibleItems.value / 3)
-    if (direction === UP && midPointIndex <= first.value + (buffer * 2) - 1) {
+    const buffer = Math.ceil(visibleItems.value * BUFFER_RATIO)
+    console.log({ midPointIndex, buffer, first: first.value })
+    if (direction === UP && midPointIndex <= first.value + buffer - 1) {
       first.value = clamp(midPointIndex - buffer, 0, items.value.length)
-    } else if (direction === DOWN && midPointIndex >= first.value + (buffer * 2) - 1) {
+    } else if (direction === DOWN && midPointIndex >= first.value + buffer + 1) {
       first.value = clamp(midPointIndex - buffer, 0, items.value.length - visibleItems.value)
     }
 
