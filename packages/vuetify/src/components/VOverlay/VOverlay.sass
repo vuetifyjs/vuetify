@@ -11,9 +11,6 @@
   display: contents
 
 .v-overlay-scroll-blocked
-  padding-inline-end: var(--v-scrollbar-offset)
-  overflow-y: hidden !important
-
   @at-root #{selector.append(html, &)}
     position: fixed
     top: var(--v-body-scroll-y)
@@ -55,6 +52,3 @@
 
 .v-overlay--contained .v-overlay__scrim
   position: absolute
-
-.v-overlay--scroll-blocked
-  padding-inline-end: var(--v-scrollbar-offset)
