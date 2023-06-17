@@ -77,7 +77,7 @@
         <v-theme-provider
           :class="showCode && 'border-t'"
           :theme="theme"
-          class="pa-4 rounded-b"
+          class="pa-2 rounded-b"
           with-background
         >
           <component :is="ExampleComponent" v-if="isLoaded" />

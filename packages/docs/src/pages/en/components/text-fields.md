@@ -321,3 +321,9 @@ Full width text fields allow you to create boundless inputs. In this example, we
 Using the HTML input **type** [password](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password) can be used with an appended icon and callback to control the visibility.
 
 <example file="v-text-field/misc-password" />
+
+#### Login Form
+
+In this example we use a combination of prepend and append icon to create a custom login form.
+
+<example file="v-text-field/misc-login-form" />

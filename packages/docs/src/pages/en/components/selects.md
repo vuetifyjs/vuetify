@@ -42,39 +42,19 @@ Select fields components are used for collecting user provided information from 
   When using objects for the **items** prop, you must associate **item-title** and **item-value** with existing properties on your objects. These values are defaulted to **title** and **value** and can be changed.
 :::
 
-## Examples
+## Guide
+
+The `v-select` component is meant to be a direct replacement for a standard `<select>` element. It is commonly used with [v-form](/components/forms/) and other inputs & controls.
 
 ### Props
 
-#### Custom title and value
-
-You can specify the specific properties within your items array that correspond to the title and value fields. By default, this is **title** and **value**. In this example we also use the **return-object** prop which will return the entire object of the selected item on selection.
-
-<example file="v-select/prop-custom-title-and-value" />
+All form inputs have a massive API that make it super easy to configure everything just the way you want it.
 
 #### Density
 
 You can use **density** prop to reduce the field height and lower max height of list items.
 
 <example file="v-select/prop-dense" />
-
-#### Disabled
-
-Applying the **disabled** prop to a `v-select` will prevent a user from interacting with the component.
-
-<example file="v-select/prop-disabled" />
-
-#### Icons
-
-Use a custom prepended or appended icon.
-
-<example file="v-select/prop-icons" />
-
-<!-- #### Menu props
-
-Custom props can be passed directly to `v-menu` using **menuProps** prop. In this example menu is force directed to top and shifted to top.
-
-<example file="v-select/prop-menu-props" /> -->
 
 #### Multiple
 
@@ -88,13 +68,33 @@ Display selected items as chips with the **chips** prop.
 
 <example file="v-select/prop-chips" />
 
-<!-- #### Readonly
+#### Readonly
 
 You can use the **readonly** prop on `v-select` which will prevent a user from changing its value.
 
-<example file="v-select/prop-readonly" /> -->
+<example file="v-select/prop-readonly" />
+
+#### Disabled
+
+Applying the **disabled** prop to a `v-select` will prevent a user from interacting with the component.
+
+<example file="v-select/prop-disabled" />
+
+#### Custom title and value
+
+You can specify the specific properties within your items array that correspond to the title and value fields. By default, this is **title** and **value**. In this example we also use the **return-object** prop which will return the entire object of the selected item on selection.
+
+<example file="v-select/prop-custom-title-and-value" />
+
+<!-- #### Menu props
+
+Custom props can be passed directly to `v-menu` using **menuProps** prop. In this example menu is force directed to top and shifted to top.
+
+<example file="v-select/prop-menu-props" /> -->
 
 ### Slots
+
+The `v-select` component offers slots that make it easy to customize the output of certain parts of the component. This includes the **prepend** and **append** slots, the **selection** slot, and the **no-data** slot.
 
 #### Append and prepend item
 
