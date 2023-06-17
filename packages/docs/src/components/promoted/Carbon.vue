@@ -47,6 +47,9 @@
 </script>
 
 <style lang="sass">
+  #carbonads-script
+    width: 100%
+
   #carbonads,
   #carbonads_1,
   #carbonads_2
