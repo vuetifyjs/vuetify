@@ -237,16 +237,19 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                             { props.prefix }
                           </span>
                         )}
-
-                        { slots.default ? (
-                          <div
-                            class={ fieldClass }
-                            data-no-activator=""
-                          >
-                            { slots.default() }
-                            { inputNode }
-                          </div>
-                        ) : cloneVNode(inputNode, { class: fieldClass })}
+                        
+                        <div
+                          class={ fieldClass }
+                          data-no-activator=""
+                        >
+                          { slots.default ? (
+                            <>
+                              { slots.default() }
+                              { inputNode }
+                            </>
+                          ) : cloneVNode(inputNode)
+                        }
+                        </div>
 
                         { props.suffix && (
                           <span class="v-text-field__suffix">
