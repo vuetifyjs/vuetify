@@ -37,9 +37,9 @@
 
       <app-bar-theme-toggle />
 
-      <app-vertical-divider />
+      <app-vertical-divider v-if="lgAndUp" />
 
-      <app-bar-store-link />
+      <app-bar-store-link v-if="lgAndUp" />
 
       <app-bar-jobs-link v-if="lgAndUp" />
 
