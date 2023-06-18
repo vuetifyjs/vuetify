@@ -195,6 +195,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
             props.icon ? ['center'] : null,
           ]}
           onClick={ onClick }
+          tabindex={ props.loading ? -1 : undefined }
           value={ valueAttr.value }
         >
           { genOverlays(true, 'v-btn') }
