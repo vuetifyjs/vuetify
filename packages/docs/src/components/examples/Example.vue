@@ -44,6 +44,7 @@
           >
             <template #activator="{ props: tooltip }">
               <v-btn
+                v-show="!action.hide"
                 class="me-2 text-medium-emphasis"
                 density="comfortable"
                 variant="text"
@@ -92,9 +93,9 @@
   import ExampleMissing from './ExampleMissing.vue'
 
   // Composables
+  import { useDisplay, useTheme } from 'vuetify'
   import { useI18n } from 'vue-i18n'
   import { usePlayground } from '@/composables/playground'
-  import { useTheme } from 'vuetify'
   import { useUserStore } from '@/store/user'
 
   // Utilities
@@ -103,6 +104,7 @@
   import { getExample } from 'virtual:examples'
   import { upperFirst } from 'lodash-es'
 
+  const { xs } = useDisplay()
   const { t } = useI18n()
   const userStore = useUserStore()
 
@@ -205,52 +207,44 @@
     )
   })
 
-  const actions = computed(() => {
-    const array = []
-
-    if (!props.hideInvert) {
-      array.push({
-        icon: 'mdi-theme-light-dark',
-        path: 'invert-example-colors',
-        onClick: toggleTheme,
-      })
-    }
-
-    if (playgroundLink.value) {
-      array.push({
-        icon: '$vuetifyPlay',
-        path: 'edit-in-playground',
-        href: playgroundLink.value,
-        target: '_blank',
-      })
-    }
-
-    return [
-      ...array,
-      {
-        icon: 'mdi-github',
-        path: 'view-in-github',
-        href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
-        target: '_blank',
+  const actions = computed(() => [
+    {
+      icon: 'mdi-theme-light-dark',
+      path: 'invert-example-colors',
+      onClick: toggleTheme,
+    },
+    {
+      icon: '$vuetifyPlay',
+      path: 'edit-in-playground',
+      href: playgroundLink.value,
+      target: '_blank',
+      hide: xs.value,
+    },
+    {
+      icon: 'mdi-github',
+      path: 'view-in-github',
+      href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
+      target: '_blank',
+      hide: xs.value,
+    },
+    {
+      icon: 'mdi-clipboard-multiple-outline',
+      path: 'copy-example-source',
+      onClick: () => {
+        navigator.clipboard.writeText(
+          sections.value.map(section => section.content).join('\n')
+        )
       },
-      {
-        icon: 'mdi-clipboard-multiple-outline',
-        path: 'copy-example-source',
-        onClick: () => {
-          navigator.clipboard.writeText(
-            sections.value.map(section => section.content).join('\n')
-          )
-        },
+      hide: xs.value,
+    },
+    {
+      icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',
+      path: !showCode.value ? 'view-source' : 'hide-source',
+      onClick: () => {
+        showCode.value = !showCode.value
       },
-      {
-        icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',
-        path: !showCode.value ? 'view-source' : 'hide-source',
-        onClick: () => {
-          showCode.value = !showCode.value
-        },
-      },
-    ]
-  })
+    },
+  ])
 
   watch(showCode, val => val && (isEager.value = true))
 </script>
