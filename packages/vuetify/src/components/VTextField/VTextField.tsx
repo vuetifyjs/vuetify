@@ -237,7 +237,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                             { props.prefix }
                           </span>
                         )}
-                        
+
                         <div
                           class={ fieldClass }
                           data-no-activator=""
