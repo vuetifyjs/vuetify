@@ -4,6 +4,7 @@
     ref="script"
     :class="[
       isDark ? 'theme--dark' : 'theme--light',
+      'mb-5',
     ]"
     border
     min-height="118"
