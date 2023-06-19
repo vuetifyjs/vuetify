@@ -38,10 +38,6 @@
       <v-divider class="mt-4 mb-3 mx-n3" />
 
       <app-settings-code />
-
-      <v-divider class="mt-4 mb-3 mx-n3" />
-
-      <app-settings-dev />
     </v-container>
 
     <template #append>
@@ -57,7 +53,6 @@
   import AppSettingsCode from './Code.vue'
   import AppSettingsRtl from './Rtl.vue'
   import AppSettingsTheme from './Theme.vue'
-  import AppSettingsDev from './Dev.vue'
 
   // Composables
   import { useAppStore } from '@/store/app'
