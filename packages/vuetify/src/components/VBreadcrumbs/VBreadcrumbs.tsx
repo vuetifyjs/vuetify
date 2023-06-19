@@ -60,6 +60,7 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
     prepend: []
     title: [{ item: T, index: number }]
     divider: [{ item: T, index: number }]
+    item: [{ item: T, index: number }]
     default: []
   }
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -135,7 +136,7 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
                 <VBreadcrumbsItem
                   key={ index }
                   disabled={ index >= array.length - 1 }
-                  { ...(typeof item === 'string' ? { title: item } : item)}
+                  { ...(typeof item === 'string' ? { title: item } : item) }
                   v-slots={{
                     default: slots.title ? () => slots.title?.({ item, index }) : undefined,
                   }}
