@@ -11,7 +11,9 @@ import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { IconValue } from '@/composables/icons'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
@@ -20,81 +22,101 @@ import { makeRouterProps, useLink } from '@/composables/router'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { IconValue } from '@/composables/icons'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { defineComponent, EventProp } from '@/util'
+import { EventProp, genericComponent, propsFactory } from '@/util'
 import { computed } from 'vue'
 
-export const VChip = defineComponent({
+export type VChipSlots = {
+  default: [{
+    isSelected: boolean | undefined
+    selectedClass: boolean | (string | undefined)[] | undefined
+    select: ((value: boolean) => void) | undefined
+    toggle: (() => void) | undefined
+    value: unknown
+    disabled: boolean
+  }]
+  label: []
+  prepend: []
+  append: []
+  close: []
+  filter: []
+}
+
+export const makeVChipProps = propsFactory({
+  activeClass: String,
+  appendAvatar: String,
+  appendIcon: IconValue,
+  closable: Boolean,
+  closeIcon: {
+    type: IconValue,
+    default: '$delete',
+  },
+  closeLabel: {
+    type: String,
+    default: '$vuetify.close',
+  },
+  draggable: Boolean,
+  filter: Boolean,
+  filterIcon: {
+    type: String,
+    default: '$complete',
+  },
+  label: Boolean,
+  link: {
+    type: Boolean,
+    default: undefined,
+  },
+  pill: Boolean,
+  prependAvatar: String,
+  prependIcon: IconValue,
+  ripple: {
+    type: Boolean,
+    default: true,
+  },
+  text: String,
+  modelValue: {
+    type: Boolean,
+    default: true,
+  },
+
+  onClick: EventProp<[MouseEvent]>(),
+  onClickOnce: EventProp<[MouseEvent]>(),
+
+  ...makeBorderProps(),
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeElevationProps(),
+  ...makeGroupItemProps(),
+  ...makeRoundedProps(),
+  ...makeRouterProps(),
+  ...makeSizeProps(),
+  ...makeTagProps({ tag: 'span' }),
+  ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'tonal' } as const),
+}, 'v-chip')
+
+export const VChip = genericComponent<VChipSlots>()({
   name: 'VChip',
 
   directives: { Ripple },
 
-  props: {
-    activeClass: String,
-    appendAvatar: String,
-    appendIcon: IconValue,
-    closable: Boolean,
-    closeIcon: {
-      type: IconValue,
-      default: '$delete',
-    },
-    closeLabel: {
-      type: String,
-      default: '$vuetify.close',
-    },
-    draggable: Boolean,
-    filter: Boolean,
-    filterIcon: {
-      type: String,
-      default: '$complete',
-    },
-    label: Boolean,
-    link: {
-      type: Boolean,
-      default: undefined,
-    },
-    pill: Boolean,
-    prependAvatar: String,
-    prependIcon: IconValue,
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-    text: String,
-    modelValue: {
-      type: Boolean,
-      default: true,
-    },
-
-    onClick: EventProp,
-    onClickOnce: EventProp,
-
-    ...makeBorderProps(),
-    ...makeDensityProps(),
-    ...makeElevationProps(),
-    ...makeGroupItemProps(),
-    ...makeRoundedProps(),
-    ...makeRouterProps(),
-    ...makeSizeProps(),
-    ...makeTagProps({ tag: 'span' }),
-    ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'tonal' } as const),
-  },
+  props: makeVChipProps(),
 
   emits: {
-    'click:close': (e: Event) => true,
+    'click:close': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
     'group:selected': (val: { value: boolean }) => true,
     click: (e: MouseEvent | KeyboardEvent) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
+    const { t } = useLocale()
     const { borderClasses } = useBorder(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { densityClasses } = useDensity(props)
@@ -112,12 +134,14 @@ export const VChip = defineComponent({
       props.link !== false &&
       (!!group || props.link || link.isClickable.value)
     )
+    const closeProps = computed(() => ({
+      'aria-label': t(props.closeLabel),
+      onClick (e: MouseEvent) {
+        isActive.value = false
 
-    function onCloseClick (e: Event) {
-      isActive.value = false
-
-      emit('click:close', e)
-    }
+        emit('click:close', e)
+      },
+    }))
 
     function onClick (e: MouseEvent) {
       emit('click', e)
@@ -137,10 +161,12 @@ export const VChip = defineComponent({
 
     return () => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
-      const hasAppend = !!(slots.append || props.appendIcon || props.appendAvatar)
+      const hasAppendMedia = !!(props.appendIcon || props.appendAvatar)
+      const hasAppend = !!(hasAppendMedia || slots.append)
       const hasClose = !!(slots.close || props.closable)
       const hasFilter = !!(slots.filter || props.filter) && group
-      const hasPrepend = !!(slots.prepend || props.prependIcon || props.prependAvatar)
+      const hasPrependMedia = !!(props.prependIcon || props.prependAvatar)
+      const hasPrepend = !!(hasPrependMedia || slots.prepend)
       const hasColor = !group || group.isSelected.value
 
       return isActive.value && (
@@ -163,9 +189,11 @@ export const VChip = defineComponent({
             sizeClasses.value,
             variantClasses.value,
             group?.selectedClass.value,
+            props.class,
           ]}
           style={[
             hasColor ? colorStyles.value : undefined,
+            props.style,
           ]}
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }
@@ -173,105 +201,152 @@ export const VChip = defineComponent({
           tabindex={ isClickable.value ? 0 : undefined }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
-          v-ripple={ [isClickable.value && props.ripple, null] }
+          v-ripple={[isClickable.value && props.ripple, null]}
         >
           { genOverlays(isClickable.value, 'v-chip') }
 
           { hasFilter && (
-            <VDefaultsProvider
-              key="filter"
-              defaults={{
-                VIcon: { icon: props.filterIcon },
-              }}
-            >
-              <VExpandXTransition>
-                <div
-                  class="v-chip__filter"
-                  v-show={ group.isSelected.value }
-                >
-                  { slots.filter ? slots.filter() : (<VIcon />) }
-                </div>
-              </VExpandXTransition>
-            </VDefaultsProvider>
-          ) }
+            <VExpandXTransition key="filter">
+              <div
+                class="v-chip__filter"
+                v-show={ group.isSelected.value }
+              >
+                { !slots.filter ? (
+                  <VIcon
+                    key="filter-icon"
+                    icon={ props.filterIcon }
+                  />
+                ) : (
+                  <VDefaultsProvider
+                    key="filter-defaults"
+                    disabled={ !props.filterIcon }
+                    defaults={{
+                      VIcon: { icon: props.filterIcon },
+                    }}
+                    v-slot:default={ slots.filter }
+                  />
+                )}
+              </div>
+            </VExpandXTransition>
+          )}
 
           { hasPrepend && (
-            <VDefaultsProvider
-              key="prepend"
-              defaults={{
-                VAvatar: {
-                  image: props.prependAvatar,
-                },
-                VIcon: {
-                  icon: props.prependIcon,
-                },
-              }}
-            >
-              { slots.prepend
-                ? (
-                  <div class="v-chip__prepend">
-                    { slots.prepend() }
-                  </div>
-                )
-                : props.prependAvatar ? (<VAvatar start />)
-                : props.prependIcon ? (<VIcon start />)
-                : undefined
-              }
-            </VDefaultsProvider>
-          ) }
+            <div key="prepend" class="v-chip__prepend">
+              { !slots.prepend ? (
+                <>
+                  { props.prependIcon && (
+                    <VIcon
+                      key="prepend-icon"
+                      icon={ props.prependIcon }
+                      start
+                    />
+                  )}
 
-          { slots.default?.({
-            isSelected: group?.isSelected.value,
-            selectedClass: group?.selectedClass.value,
-            select: group?.select,
-            toggle: group?.toggle,
-            value: group?.value.value,
-            disabled: props.disabled,
-          }) ?? props.text }
+                  { props.prependAvatar && (
+                    <VAvatar
+                      key="prepend-avatar"
+                      image={ props.prependAvatar }
+                      start
+                    />
+                  )}
+                </>
+              ) : (
+                <VDefaultsProvider
+                  key="prepend-defaults"
+                  disabled={ !hasPrependMedia }
+                  defaults={{
+                    VAvatar: {
+                      image: props.prependAvatar,
+                      start: true,
+                    },
+                    VIcon: {
+                      icon: props.prependIcon,
+                      start: true,
+                    },
+                  }}
+                  v-slots:default={ slots.prepend }
+                />
+              )}
+            </div>
+          )}
+
+          <div class="v-chip__content">
+            { slots.default?.({
+              isSelected: group?.isSelected.value,
+              selectedClass: group?.selectedClass.value,
+              select: group?.select,
+              toggle: group?.toggle,
+              value: group?.value.value,
+              disabled: props.disabled,
+            }) ?? props.text }
+          </div>
 
           { hasAppend && (
-            <VDefaultsProvider
-              key="append"
-              defaults={{
-                VAvatar: {
-                  image: props.appendAvatar,
-                },
-                VIcon: {
-                  icon: props.appendIcon,
-                },
-              }}
-            >
-              { slots.append
-                ? (
-                  <div class="v-chip__append">
-                    { slots.append() }
-                  </div>
-                )
-                : props.appendAvatar ? (<VAvatar end />)
-                : props.appendIcon ? (<VIcon end />)
-                : undefined
-              }
-            </VDefaultsProvider>
-          ) }
+            <div key="append" class="v-chip__append">
+              { !slots.append ? (
+                <>
+                  { props.appendIcon && (
+                    <VIcon
+                      key="append-icon"
+                      end
+                      icon={ props.appendIcon }
+                    />
+                  )}
+
+                  { props.appendAvatar && (
+                    <VAvatar
+                      key="append-avatar"
+                      end
+                      image={ props.appendAvatar }
+                    />
+                  )}
+                </>
+              ) : (
+                <VDefaultsProvider
+                  key="append-defaults"
+                  disabled={ !hasAppendMedia }
+                  defaults={{
+                    VAvatar: {
+                      end: true,
+                      image: props.appendAvatar,
+                    },
+                    VIcon: {
+                      end: true,
+                      icon: props.appendIcon,
+                    },
+                  }}
+                  v-slots:default={ slots.append }
+                />
+              )}
+            </div>
+          )}
 
           { hasClose && (
-            <VDefaultsProvider
+            <div
               key="close"
-              defaults={{
-                VIcon: {
-                  icon: props.closeIcon,
-                  size: 'x-small',
-                },
-              }}
+              class="v-chip__close"
+              { ...closeProps.value }
             >
-              <div
-                class="v-chip__close"
-                onClick={ onCloseClick }
-              >
-                { slots.close ? slots.close() : (<VIcon />) }
-              </div>
-            </VDefaultsProvider>
-          ) }
+              { !slots.close ? (
+                <VIcon
+                  key="close-icon"
+                  icon={ props.closeIcon }
+                  size="x-small"
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="close-defaults"
+                  defaults={{
+                    VIcon: {
+                      icon: props.closeIcon,
+                      size: 'x-small',
+                    },
+                  }}
+                  v-slots:default={ slots.close }
+                />
+              )}
+            </div>
+          )}
         </Tag>
       )
     }

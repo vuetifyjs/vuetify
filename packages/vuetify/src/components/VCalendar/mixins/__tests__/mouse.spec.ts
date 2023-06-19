@@ -38,11 +38,11 @@ describe.skip('mouse.ts', () => {
     const noop = e => e
     const wrapper = mount(Mock, {
       listeners: {
-        click: noop,
+        'click:foo': noop,
       },
     })
 
-    expect(typeof wrapper.vm.getDefaultMouseEventHandlers('', noop).click).toBe('function')
+    expect(typeof wrapper.vm.getDefaultMouseEventHandlers(':foo', noop).click).toBe('function')
     expect(Object.keys(typeof wrapper.vm.getDefaultMouseEventHandlers('', noop))).toHaveLength(6)
   })
 

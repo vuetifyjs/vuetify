@@ -6,7 +6,6 @@
     floating
     location="right"
     sticky
-    touchless
     width="256"
   >
     <template
@@ -74,19 +73,36 @@
           </v-col>
 
           <v-col class="d-inline-flex">
-            <v-card
-              :color="dark ? undefined : 'grey-lighten-5'"
-              :to="rpath('/introduction/sponsors-and-backers/')"
-              class="py-2 px-3 text-center"
-              variant="flat"
-              width="100%"
-            >
-              <small class="text-disabled">Your logo here</small>
-            </v-card>
+
+            <v-hover>
+              <template #default="{ isHovering, props: hoverProps }">
+                <v-card
+                  :color="isHovering ? 'primary' : dark ? undefined : 'grey-lighten-5'"
+                  :to="rpath('/introduction/sponsors-and-backers/')"
+                  v-bind="hoverProps"
+                  class="py-1 px-3 text-center"
+                  variant="tonal"
+                  width="100%"
+                >
+                  <div :class="isHovering ? undefined : 'text-disabled'">
+                    Support
+
+                    <v-icon icon="$vuetify" />
+                  </div>
+                </v-card>
+              </template>
+            </v-hover>
           </v-col>
 
           <v-col cols="12">
-            <carbon />
+            <a
+              href="https://themeselection.com/item/category/vuejs-admin-templates/?utm_source=vuetify&utm_medium=banner&utm_campaign=category_page&utm_id=12"
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              @click="onClickPromotion"
+            >
+              <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/theme-selection-dashboard-2023/themeselection-promotion-banner.png" />
+            </a>
           </v-col>
         </v-row>
       </v-container>
@@ -101,6 +117,7 @@
   // Composables
   import { RouteLocation, Router, useRoute, useRouter } from 'vue-router'
   import { useAppStore } from '@/store/app'
+  import { useGtag } from 'vue-gtag-next'
   import { useSponsorsStore } from '@/store/sponsors'
   import { useTheme } from 'vuetify'
 
@@ -207,6 +224,7 @@
   const route = useRoute()
   const router = useRouter()
   const theme = useTheme()
+  const { event } = useGtag()
 
   const { scrolling } = useUpdateHashOnScroll(route, router)
 
@@ -221,6 +239,14 @@
     // await wait(200)
 
     scrolling.value = false
+  }
+
+  function onClickPromotion () {
+    event('click', {
+      event_category: 'vuetify-toc',
+      event_label: 'promotion',
+      value: 'theme-selection',
+    })
   }
 
   const sponsorStore = useSponsorsStore()
@@ -240,7 +266,7 @@
   const dark = computed(() => theme.current.value.dark)
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
   #app-toc
     ul
       list-style-type: none
@@ -258,7 +284,7 @@
       li:not(.router-link-active)
         border-left-color: rgba(255, 255, 255, 0.5)
 
-    .v-navigation-drawer__content
+    :deep(.v-navigation-drawer__content)
       height: auto
       margin-right: 12px
 </style>

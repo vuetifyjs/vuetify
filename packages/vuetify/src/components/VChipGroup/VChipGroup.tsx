@@ -2,6 +2,7 @@
 import './VChipGroup.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -9,7 +10,7 @@ import { makeVariantProps } from '@/composables/variant'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
-import { deepEqual, defineComponent, useRender } from '@/util'
+import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
 import { toRef } from 'vue'
 
 // Types
@@ -17,22 +18,35 @@ import type { PropType } from 'vue'
 
 export const VChipGroupSymbol = Symbol.for('vuetify:v-chip-group')
 
-export const VChipGroup = defineComponent({
+export const makeVChipGroupProps = propsFactory({
+  column: Boolean,
+  filter: Boolean,
+  valueComparator: {
+    type: Function as PropType<typeof deepEqual>,
+    default: deepEqual,
+  },
+
+  ...makeComponentProps(),
+  ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'tonal' } as const),
+}, 'v-chip-group')
+
+type VChipGroupProps = {
+  default: [{
+    isSelected: (id: number) => boolean
+    select: (id: number, value: boolean) => void
+    next: () => void
+    prev: () => void
+    selected: readonly number[]
+  }]
+}
+
+export const VChipGroup = genericComponent<VChipGroupProps>()({
   name: 'VChipGroup',
 
-  props: {
-    column: Boolean,
-    filter: Boolean,
-    valueComparator: {
-      type: Function as PropType<typeof deepEqual>,
-      default: deepEqual,
-    },
-
-    ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'tonal' } as const),
-  },
+  props: makeVChipGroupProps(),
 
   emits: {
     'update:modelValue': (value: any) => true,
@@ -59,7 +73,9 @@ export const VChipGroup = defineComponent({
             'v-chip-group--column': props.column,
           },
           themeClasses.value,
+          props.class,
         ]}
+        style={ props.style }
       >
         { slots.default?.({
           isSelected,
@@ -67,7 +83,7 @@ export const VChipGroup = defineComponent({
           next,
           prev,
           selected: selected.value,
-        }) }
+        })}
       </props.tag>
     ))
 

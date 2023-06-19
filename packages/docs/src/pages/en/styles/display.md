@@ -1,12 +1,12 @@
 ---
 meta:
-  title: Display helpers
+  title: Display
   description: Display helper classes allow you to control when elements should display based upon viewport.
   keywords: display helper classes, display classes, vuetify display
 related:
   - /styles/text-and-typography/
   - /directives/resize/
-  - /features/breakpoints/
+  - /features/display-and-platform/
 ---
 
 # Display helpers

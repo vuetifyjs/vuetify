@@ -4,6 +4,7 @@ import { VExpansionPanelSymbol } from './VExpansionPanels'
 import { VExpansionPanelText } from './VExpansionPanelText'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { makeLazyProps } from '@/composables/lazy'
@@ -13,23 +14,32 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, provide } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
-export const VExpansionPanel = defineComponent({
+export const makeVExpansionPanelProps = propsFactory({
+  title: String,
+  text: String,
+  bgColor: String,
+
+  ...makeComponentProps(),
+  ...makeElevationProps(),
+  ...makeGroupItemProps(),
+  ...makeLazyProps(),
+  ...makeRoundedProps(),
+  ...makeTagProps(),
+  ...makeVExpansionPanelTitleProps(),
+}, 'v-expansion-panel')
+
+export type VExpansionPanelSlots = {
+  default: []
+  title: []
+  text: []
+}
+
+export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
   name: 'VExpansionPanel',
 
-  props: {
-    title: String,
-    text: String,
-    bgColor: String,
-
-    ...makeElevationProps(),
-    ...makeGroupItemProps(),
-    ...makeLazyProps(),
-    ...makeRoundedProps(),
-    ...makeTagProps(),
-    ...makeVExpansionPanelTitleProps(),
-  },
+  props: makeVExpansionPanelProps(),
 
   emits: {
     'group:selected': (val: { value: boolean }) => true,
@@ -77,9 +87,12 @@ export const VExpansionPanel = defineComponent({
             },
             roundedClasses.value,
             backgroundColorClasses.value,
+            props.class,
           ]}
-          style={ backgroundColorStyles.value }
-          aria-expanded={ groupItem.isSelected.value }
+          style={[
+            backgroundColorStyles.value,
+            props.style,
+          ]}
         >
           <div
             class={[
@@ -99,13 +112,13 @@ export const VExpansionPanel = defineComponent({
             >
               { slots.title ? slots.title() : props.title }
             </VExpansionPanelTitle>
-          ) }
+          )}
 
           { hasText && (
             <VExpansionPanelText key="text" eager={ props.eager }>
               { slots.text ? slots.text() : props.text }
             </VExpansionPanelText>
-          ) }
+          )}
 
           { slots.default?.() }
         </props.tag>

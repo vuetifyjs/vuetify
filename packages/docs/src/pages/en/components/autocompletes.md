@@ -14,17 +14,21 @@ related:
 
 The `v-autocomplete` component offers simple and flexible type-ahead functionality. This is useful when searching large sets of data or even dynamically requesting information from an API.
 
-<entry />
-
 ## Usage
 
 The autocomplete component extends `v-select` and adds the ability to filter items.
 
 <usage name="v-autocomplete" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-autocomplete](/api/v-autocomplete/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Caveats
 
@@ -85,3 +89,15 @@ Sometimes you need to load data externally based upon a search query. Use the `s
 Using a combination of `v-autocomplete` slots and transitions, you can create a stylish toggleable autocomplete field such as this state selector.
 
 <example file="v-autocomplete/misc-state-selector" />
+
+#### New tab
+
+<alert type="success">
+
+This feature was introduced in [v3.3.0 (Icarus)](/getting-started/release-notes/?version=v3.3.0)
+
+</alert>
+
+The **auto-select-first** property highlights the first result when searching, allowing you to press <v-kbd>tab</v-kbd> or <v-kbd>enter</v-kbd> to quickly select it.
+
+<example file="v-autocomplete/misc-new-tab" />

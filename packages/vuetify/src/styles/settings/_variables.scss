@@ -49,12 +49,12 @@ $border-opacities: map-deep-merge(
 $states: () !default;
 $states: map-deep-merge(
     (
-    'hover': 0.04,
-    'focus': 0.12,
-    'selected': 0.08,
-    'activated': 0.12,
-    'pressed': 0.16,
-    'dragged': 0.08
+    'hover': var(--v-hover-opacity),
+    'focus': var(--v-focus-opacity),
+    'selected': var(--v-selected-opacity),
+    'activated': var(--v-activated-opacity),
+    'pressed': var(--v-pressed-opacity),
+    'dragged': var(--v-dragged-opacity)
   ),
   $states
 );
@@ -300,9 +300,9 @@ $flat-typography: () !default;
 // fast-in-fast-out -> accelerated
 // swing -> standard
 
-$standard-easing: cubic-bezier(0.4, 0, 0.2, 1);
-$decelerated-easing: cubic-bezier(0.0, 0, 0.2, 1); // Entering
-$accelerated-easing: cubic-bezier(0.4, 0, 1, 1); // Leaving
+$standard-easing: cubic-bezier(0.4, 0, 0.2, 1) !default;
+$decelerated-easing: cubic-bezier(0.0, 0, 0.2, 1) !default; // Entering
+$accelerated-easing: cubic-bezier(0.4, 0, 1, 1) !default; // Leaving
 
 // Elements
 $bootable-transition: 0.2s $decelerated-easing !default;

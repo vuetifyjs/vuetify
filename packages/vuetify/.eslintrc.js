@@ -6,9 +6,6 @@ module.exports = {
     __VUETIFY_VERSION__: true,
     __REQUIRED_VUE__: true,
   },
-  plugins: [
-    'eslint-plugin-local-rules',
-  ],
   extends: [
     // 'plugin:import/typescript', // slow, only enable if needed
   ],
@@ -19,7 +16,7 @@ module.exports = {
     // 'vue/html-self-closing': 'off',
     // 'vue/html-closing-bracket-spacing': 'off',
     // 'local-rules/no-render-string-reference': 'error',
-    'local-rules/jsx-condition-key': 'error',
+    'local-rules/no-components-index': 'error',
 
     'no-restricted-imports': ['error', {
       paths: [{
@@ -79,6 +76,7 @@ module.exports = {
         'cypress/no-unnecessary-waiting': 'warn',
         'cypress/assertion-before-screenshot': 'warn',
         'cypress/no-async-tests': 'error',
+        'cypress/unsafe-to-chain-command': 'off',
       },
     },
   ],

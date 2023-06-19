@@ -1,6 +1,5 @@
 {
   "props": {
-    "appendIcon": "The icon used in the append slot (if shown)",
     "centerActive": "Forces the selected chip to be centered",
     "column": "Remove horizontal pagination and wrap items as needed",
     "mobileBreakpoint": "Sets the designated mobile breakpoint for the component.",
@@ -8,10 +7,6 @@
     "prependIcon": "This icon used in the prepend slot (if shown)",
     "prevIcon": "Specify the icon to use for the prev icon",
     "showArrows": "Force the display of the pagination arrows",
-    "filter": "Applies an checkmark icon in front of every chip for using it like a filter",
-    "disabled": "Disable the events emitted by the component",
-  },
-  "events": {
-    "update:modelValue": "Emitted when the component value is changed by user interaction"
+    "filter": "Applies an checkmark icon in front of every chip for using it like a filter"
   }
 }

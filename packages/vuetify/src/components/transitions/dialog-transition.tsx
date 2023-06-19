@@ -1,20 +1,28 @@
-import type { PropType } from 'vue'
+// Components
 import { Transition } from 'vue'
+
+// Utilities
 import {
   acceleratedEasing,
   animate,
   deceleratedEasing,
-  defineComponent,
+  genericComponent,
   nullifyTransforms,
+  propsFactory,
   standardEasing,
 } from '@/util'
 
-export const VDialogTransition = defineComponent({
+// Types
+import type { PropType } from 'vue'
+
+export const makeVDialogTransitionProps = propsFactory({
+  target: Object as PropType<HTMLElement>,
+}, 'v-dialog-transition')
+
+export const VDialogTransition = genericComponent()({
   name: 'VDialogTransition',
 
-  props: {
-    target: Object as PropType<HTMLElement>,
-  },
+  props: makeVDialogTransitionProps(),
 
   setup (props, { slots }) {
     const functions = {

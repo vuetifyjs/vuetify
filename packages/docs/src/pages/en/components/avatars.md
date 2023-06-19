@@ -26,6 +26,12 @@ Avatars in their simplest form display content within a circular container.
 
 <entry />
 
+## API
+
+| Component | Description |
+| - | - |
+| [v-avatar](/api/v-avatar/) | Primary Component |
+
 ## Anatomy
 
 The recommended placement of elements inside of `v-avatar` is:
@@ -39,11 +45,7 @@ The recommended placement of elements inside of `v-avatar` is:
 | - | - |
 | 1. Container | The Avatar container that typically holds a [v-icon](/components/icons/) or [v-img](/components/images/) component |
 
-## API
-
-| Component | Description |
-| - | - |
-| [v-avatar](/api/v-avatar/) | Primary Component |
+<api-inline hide-links />
 
 ## Examples
 

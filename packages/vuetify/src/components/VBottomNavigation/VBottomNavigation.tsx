@@ -3,6 +3,7 @@ import './VBottomNavigation.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupProps, useGroup } from '@/composables/group'
@@ -12,46 +13,50 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
+import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import { VBtnToggleSymbol } from '../VBtnToggle/VBtnToggle'
+import { VBtnToggleSymbol } from '@/components/VBtnToggle/VBtnToggle'
 
-export const VBottomNavigation = defineComponent({
+export const makeVBottomNavigationProps = propsFactory({
+  bgColor: String,
+  color: String,
+  grow: Boolean,
+  mode: {
+    type: String,
+    validator: (v: any) => !v || ['horizontal', 'shift'].includes(v),
+  },
+  height: {
+    type: [Number, String],
+    default: 56,
+  },
+  active: {
+    type: Boolean,
+    default: true,
+  },
+
+  ...makeBorderProps(),
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeElevationProps(),
+  ...makeRoundedProps(),
+  ...makeLayoutItemProps({ name: 'bottom-navigation' }),
+  ...makeTagProps({ tag: 'header' }),
+  ...makeGroupProps({
+    modelValue: true,
+    selectedClass: 'v-btn--selected',
+  }),
+  ...makeThemeProps(),
+}, 'v-bottom-navigation')
+
+export const VBottomNavigation = genericComponent()({
   name: 'VBottomNavigation',
 
-  props: {
-    bgColor: String,
-    color: String,
-    grow: Boolean,
-    mode: {
-      type: String,
-      validator: (v: any) => !v || ['horizontal', 'shift'].includes(v),
-    },
-    height: {
-      type: [Number, String],
-      default: 56,
-    },
-    active: {
-      type: Boolean,
-      default: true,
-    },
-
-    ...makeBorderProps(),
-    ...makeDensityProps(),
-    ...makeElevationProps(),
-    ...makeRoundedProps(),
-    ...makeLayoutItemProps({ name: 'bottom-navigation' }),
-    ...makeTagProps({ tag: 'header' }),
-    ...makeGroupProps({
-      modelValue: true,
-      selectedClass: 'v-btn--selected',
-    }),
-    ...makeThemeProps(),
-  },
+  props: makeVBottomNavigationProps(),
 
   emits: {
     'update:modelValue': (value: any) => true,
@@ -64,6 +69,7 @@ export const VBottomNavigation = defineComponent({
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
+    const { ssrBootStyles } = useSsrBoot()
     const height = computed(() => (
       Number(props.height) -
       (props.density === 'comfortable' ? 8 : 0) -
@@ -107,6 +113,7 @@ export const VBottomNavigation = defineComponent({
             densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,
+            props.class,
           ]}
           style={[
             backgroundColorStyles.value,
@@ -115,13 +122,15 @@ export const VBottomNavigation = defineComponent({
               height: convertToUnit(height.value),
               transform: `translateY(${convertToUnit(!isActive.value ? 100 : 0, '%')})`,
             },
+            ssrBootStyles.value,
+            props.style,
           ]}
         >
           { slots.default && (
             <div class="v-bottom-navigation__content">
               { slots.default() }
             </div>
-          ) }
+          )}
         </props.tag>
       )
     })

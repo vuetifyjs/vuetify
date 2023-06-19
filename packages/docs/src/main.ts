@@ -11,6 +11,7 @@ import { setupLayouts } from 'virtual:generated-layouts'
 // Plugins
 import { pinia, usePinia } from '@/plugins/pinia'
 import { useGlobalComponents } from '@/plugins/global-components'
+import { useAuth0 } from '@/plugins/auth'
 import { useGtag } from '@/plugins/gtag'
 import { useI18n } from '@/plugins/i18n'
 import { useLocaleStore } from '@/store/locale'
@@ -20,7 +21,15 @@ import { useVuetify } from '@/plugins/vuetify'
 import { ViteSSG } from '@vuetify/vite-ssg'
 
 // Utilities
-import { fallbackLocale, generatedRoutes, rpath, trailingSlash } from '@/util/routes'
+import {
+  disabledLanguagePattern,
+  generatedRoutes,
+  languagePattern,
+  redirectRoutes,
+  rpath,
+  trailingSlash,
+} from '@/util/routes'
+import { wrapInArray } from '@/util/helpers'
 
 // Globals
 import { IN_BROWSER } from '@/util/globals'
@@ -50,8 +59,15 @@ export const createApp = ViteSSG(
         },
       },
       ...routes,
+      ...redirectRoutes,
       {
-        path: `/:locale(${fallbackLocale})/:pathMatch(.*)*`,
+        path: `/:locale(${disabledLanguagePattern})/:pathMatch(.*)*`,
+        redirect: to => {
+          return rpath(wrapInArray(to.params.pathMatch).join('/'))
+        },
+      },
+      {
+        path: `/:locale(${languagePattern})/:pathMatch(.*)*`,
         component: () => import('@/layouts/404.vue'),
       },
       {
@@ -61,17 +77,30 @@ export const createApp = ViteSSG(
         },
       },
     ],
-    scrollBehavior (to, from, savedPosition) {
-      const main = IN_BROWSER && document.querySelector('main')
+    async scrollBehavior (to, from, savedPosition) {
+      let main = IN_BROWSER && document.querySelector('main')
+      // For default & hash navigation
+      let wait = 0
 
-      if (savedPosition) return savedPosition
+      if (!main) {
+        // For initial page load
+        wait = 1500
+        main = document.querySelector('main')
+      } else if (to.path !== from.path && to.hash) {
+        // For cross page navigation
+        wait = 500
+      }
+
+      await (new Promise(resolve => setTimeout(resolve, wait)))
+
       if (to.hash) {
         return {
           el: to.hash,
           behavior: 'smooth',
           top: main ? parseInt(getComputedStyle(main).getPropertyValue('--v-layout-top')) : 0,
         }
-      } else return { top: 0 }
+      } else if (savedPosition) return savedPosition
+      else return { top: 0 }
     },
   },
   ctx => {
@@ -90,6 +119,7 @@ export const createApp = ViteSSG(
     })
 
     useGlobalComponents(ctx)
+    useAuth0(ctx)
     useGtag(ctx)
     useI18n(ctx)
     usePwa(ctx)

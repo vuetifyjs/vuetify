@@ -1,6 +1,6 @@
 <template>
   <app-sheet>
-    <v-table class="api-table">
+    <v-table class="api-table" density="comfortable">
       <thead>
         <tr>
           <th

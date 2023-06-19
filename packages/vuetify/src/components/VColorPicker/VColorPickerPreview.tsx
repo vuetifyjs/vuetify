@@ -4,24 +4,31 @@ import './VColorPickerPreview.sass'
 // Components
 import { VSlider } from '@/components/VSlider'
 
+// Composables
+import { makeComponentProps } from '@/composables/component'
+
 // Utilities
-import { defineComponent, HSVtoCSS, useRender } from '@/util'
+import { defineComponent, HSVtoCSS, propsFactory, useRender } from '@/util'
 import { nullColor } from './util'
 
 // Types
 import type { PropType } from 'vue'
 import type { HSV } from '@/util'
 
+export const makeVColorPickerPreviewProps = propsFactory({
+  color: {
+    type: Object as PropType<HSV | null>,
+  },
+  disabled: Boolean,
+  hideAlpha: Boolean,
+
+  ...makeComponentProps(),
+}, 'v-color-picker-preview')
+
 export const VColorPickerPreview = defineComponent({
   name: 'VColorPickerPreview',
 
-  props: {
-    color: {
-      type: Object as PropType<HSV | null>,
-    },
-    disabled: Boolean,
-    hideAlpha: Boolean,
-  },
+  props: makeVColorPickerPreviewProps(),
 
   emits: {
     'update:color': (color: HSV) => true,
@@ -35,7 +42,9 @@ export const VColorPickerPreview = defineComponent({
           {
             'v-color-picker-preview--hide-alpha': props.hideAlpha,
           },
+          props.class,
         ]}
+        style={ props.style }
       >
         <div class="v-color-picker-preview__dot">
           <div style={{ background: HSVtoCSS(props.color ?? nullColor) }} />
@@ -59,9 +68,9 @@ export const VColorPickerPreview = defineComponent({
           { !props.hideAlpha && (
             <VSlider
               class="v-color-picker-preview__track v-color-picker-preview__alpha"
-              modelValue={ props.color?.a }
+              modelValue={ props.color?.a ?? 1 }
               onUpdate:modelValue={ a => emit('update:color', { ...(props.color ?? nullColor), a }) }
-              step={ 0 }
+              step={ 1 / 256 }
               min={ 0 }
               max={ 1 }
               disabled={ props.disabled }
@@ -70,7 +79,7 @@ export const VColorPickerPreview = defineComponent({
               trackFillColor="white"
               hideDetails
             />
-          ) }
+          )}
         </div>
       </div>
     ))

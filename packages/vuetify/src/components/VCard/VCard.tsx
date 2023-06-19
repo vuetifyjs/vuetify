@@ -18,6 +18,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -29,48 +30,64 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
 import { computed } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
-export const VCard = defineComponent({
+// Types
+import type { VCardItemSlots } from './VCardItem'
+import type { LoaderSlotProps } from '@/composables/loader'
+
+export const makeVCardProps = propsFactory({
+  appendAvatar: String,
+  appendIcon: IconValue,
+  disabled: Boolean,
+  flat: Boolean,
+  hover: Boolean,
+  image: String,
+  link: {
+    type: Boolean,
+    default: undefined,
+  },
+  prependAvatar: String,
+  prependIcon: IconValue,
+  ripple: {
+    type: Boolean,
+    default: true,
+  },
+  subtitle: String,
+  text: String,
+  title: String,
+
+  ...makeBorderProps(),
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeLoaderProps(),
+  ...makeLocationProps(),
+  ...makePositionProps(),
+  ...makeRoundedProps(),
+  ...makeRouterProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'elevated' } as const),
+}, 'v-card')
+
+export type VCardSlots = VCardItemSlots & {
+  default: []
+  actions: []
+  text: []
+  loader: [LoaderSlotProps]
+  image: []
+  item: []
+}
+
+export const VCard = genericComponent<VCardSlots>()({
   name: 'VCard',
 
   directives: { Ripple },
 
-  props: {
-    appendAvatar: String,
-    appendIcon: IconValue,
-    disabled: Boolean,
-    flat: Boolean,
-    hover: Boolean,
-    image: String,
-    link: {
-      type: Boolean,
-      default: undefined,
-    },
-    prependAvatar: String,
-    prependIcon: IconValue,
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-    subtitle: String,
-    text: String,
-    title: String,
-
-    ...makeThemeProps(),
-    ...makeBorderProps(),
-    ...makeDensityProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeLoaderProps(),
-    ...makeLocationProps(),
-    ...makePositionProps(),
-    ...makeRoundedProps(),
-    ...makeRouterProps(),
-    ...makeTagProps(),
-    ...makeVariantProps({ variant: 'elevated' } as const),
-  },
+  props: makeVCardProps(),
 
   setup (props, { attrs, slots }) {
     const { themeClasses } = provideTheme(props)
@@ -122,11 +139,13 @@ export const VCard = defineComponent({
             positionClasses.value,
             roundedClasses.value,
             variantClasses.value,
+            props.class,
           ]}
           style={[
             colorStyles.value,
             dimensionStyles.value,
             locationStyles.value,
+            props.style,
           ]}
           href={ link.href.value }
           onClick={ isClickable.value && link.navigate }
@@ -134,20 +153,28 @@ export const VCard = defineComponent({
           tabindex={ props.disabled ? -1 : undefined }
         >
           { hasImage && (
-            <VDefaultsProvider
-              key="image"
-              defaults={{
-                VImg: {
-                  cover: true,
-                  src: props.image,
-                },
-              }}
-            >
-              <div class="v-card__image">
-                { slots.image?.() ?? <VImg /> }
-              </div>
-            </VDefaultsProvider>
-          ) }
+            <div key="image" class="v-card__image">
+              { !slots.image ? (
+                <VImg
+                  key="image-img"
+                  cover
+                  src={ props.image }
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="image-defaults"
+                  disabled={ !props.image }
+                  defaults={{
+                    VImg: {
+                      cover: true,
+                      src: props.image,
+                    },
+                  }}
+                  v-slots:default={ slots.image }
+                />
+              )}
+            </div>
+          )}
 
           <LoaderSlot
             name="v-card"
@@ -174,19 +201,19 @@ export const VCard = defineComponent({
                 append: slots.append,
               }}
             </VCardItem>
-          ) }
+          )}
 
           { hasText && (
             <VCardText key="text">
               { slots.text?.() ?? props.text }
             </VCardText>
-          ) }
+          )}
 
           { slots.default?.() }
 
           { slots.actions && (
             <VCardActions v-slots={{ default: slots.actions }} />
-          ) }
+          )}
 
           { genOverlays(isClickable.value, 'v-card') }
         </Tag>

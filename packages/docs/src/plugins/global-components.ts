@@ -15,13 +15,13 @@ import AppMenu from '@/components/app/menu/Menu.vue'
 import AppMarkup from '@/components/app/Markup.vue'
 import AppSheet from '@/components/app/Sheet.vue'
 import AppTable from '@/components/app/Table.vue'
+import AppTextField from '@/components/app/TextField.vue'
 import AppTitle from '@/components/app/Title.vue'
 import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
 import Backmatter from '@/components/Backmatter.vue'
 import BreakpointsTable from '@/components/features/BreakpointsTable.vue'
-import Bsa from '@/components/promoted/Bsa.vue'
 import Carbon from '@/components/promoted/Carbon.vue'
-// import ColorPalette from '@/components/features/ColorPalette.vue'
+import ColorPalette from '@/components/features/ColorPalette.vue'
 import Discovery from '@/components/promoted/Discovery.vue'
 import Entry from '@/components/promoted/Entry.vue'
 import Example from '@/components/examples/Example.vue'
@@ -51,6 +51,7 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
     .component('AppMenu', AppMenu)
     .component('AppSheet', AppSheet)
     .component('AppTable', AppTable)
+    .component('AppTextField', AppTextField)
     .component('AppTitle', AppTitle)
     .component('AppTooltipBtn', AppTooltipBtn)
     .component('UnwrapMarkdown', (props, { slots }) => slots.default?.()?.[0].children)
@@ -63,8 +64,7 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
     .component('ApiSection', ApiSection)
     .component('Backmatter', Backmatter)
     .component('BreakpointsTable', BreakpointsTable)
-    .component('Bsa', Bsa)
-    //  .component('ColorPalette', ColorPalette)
+    .component('ColorPalette', ColorPalette)
     .component('Carbon', Carbon)
     .component('Discovery', Discovery)
     .component('Entry', Entry)

@@ -2,8 +2,8 @@
 import './VMenu.sass'
 
 // Components
-import { VDialogTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VDialogTransition } from '@/components/transitions'
 import { VOverlay } from '@/components/VOverlay'
 
 // Composables
@@ -12,35 +12,34 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { computed, inject, mergeProps, provide, ref, watch } from 'vue'
-import { genericComponent, getUid, omit, useRender } from '@/util'
-import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
+import { type Component, computed, inject, mergeProps, provide, ref, shallowRef, watch } from 'vue'
+import { genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
+import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VMenuSymbol } from './shared'
 
 // Types
-import type { SlotsToProps } from '@/util'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
-export const VMenu = genericComponent<new () => {
-  $props: SlotsToProps<OverlaySlots>
-}>()({
+export const makeVMenuProps = propsFactory({
+  // TODO
+  // disableKeys: Boolean,
+  id: String,
+
+  ...omit(makeVOverlayProps({
+    closeDelay: 250,
+    closeOnContentClick: true,
+    locationStrategy: 'connected' as const,
+    openDelay: 300,
+    scrim: false,
+    scrollStrategy: 'reposition' as const,
+    transition: { component: VDialogTransition as Component },
+  }), ['absolute']),
+}, 'v-menu')
+
+export const VMenu = genericComponent<OverlaySlots>()({
   name: 'VMenu',
 
-  props: {
-    // TODO
-    // disableKeys: Boolean,
-    id: String,
-
-    ...omit(makeVOverlayProps({
-      closeDelay: 250,
-      closeOnContentClick: true,
-      locationStrategy: 'connected' as const,
-      openDelay: 300,
-      scrim: false,
-      scrollStrategy: 'reposition' as const,
-      transition: { component: VDialogTransition },
-    }), ['absolute']),
-  },
+  props: makeVMenuProps(),
 
   emits: {
     'update:modelValue': (value: boolean) => true,
@@ -56,17 +55,17 @@ export const VMenu = genericComponent<new () => {
     const overlay = ref<VOverlay>()
 
     const parent = inject(VMenuSymbol, null)
-    let openChildren = 0
+    const openChildren = shallowRef(0)
     provide(VMenuSymbol, {
       register () {
-        ++openChildren
+        ++openChildren.value
       },
       unregister () {
-        --openChildren
+        --openChildren.value
       },
       closeParents () {
         setTimeout(() => {
-          if (!openChildren) {
+          if (!openChildren.value) {
             isActive.value = false
             parent?.closeParents()
           }
@@ -91,14 +90,16 @@ export const VMenu = genericComponent<new () => {
     )
 
     useRender(() => {
-      const [overlayProps] = filterVOverlayProps(props)
+      const [overlayProps] = VOverlay.filterProps(props)
 
       return (
         <VOverlay
           ref={ overlay }
           class={[
             'v-menu',
+            props.class,
           ]}
+          style={ props.style }
           { ...overlayProps }
           v-model={ isActive.value }
           absolute
@@ -118,7 +119,7 @@ export const VMenu = genericComponent<new () => {
       )
     })
 
-    return forwardRefs({ id }, overlay)
+    return forwardRefs({ id, ΨopenChildren: openChildren }, overlay)
   },
 })
 

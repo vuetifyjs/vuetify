@@ -7,12 +7,12 @@
     width="500"
     @after-leave="searchString = ''"
   >
-    <template #activator="{ props }">
+    <template #activator="{ props: activatorProps }">
       <app-btn
         :active="model"
         :icon="xs ? 'mdi-magnify' : undefined"
         :prepend-icon="smAndUp ? 'mdi-magnify' : undefined"
-        v-bind="props"
+        v-bind="activatorProps"
       >
         <span :class="mdAndUp && 'me-n1'">
           <span v-if="smAndUp">
@@ -21,19 +21,23 @@
 
           <span
             :class="[
-              mdAndDown ? 'border-opacity-0' : 'py-1 px-2 ms-2',
+              smAndDown ? 'border-opacity-0' : 'py-1 px-2 ms-2',
               'border rounded text-disabled text-caption'
             ]"
           >
-            <span v-if="lgAndUp">{{ t('search.key-hint') }}</span>
+            <span v-if="mdAndUp">{{ t('search.key-hint') }}</span>
           </span>
         </span>
       </app-btn>
     </template>
 
     <v-card height="100%">
-      <v-card-title class="bg-primary d-flex align-centen py-4">
-        {{ t('search.label') }} Vuetify
+      <v-toolbar color="primary" class="ps-3 pe-4">
+        <v-icon icon="$vuetify" size="x-large" />
+
+        <v-toolbar-title class="ms-2">
+          {{ t('search.label') }} Vuetify
+        </v-toolbar-title>
 
         <v-spacer />
 
@@ -44,21 +48,15 @@
           variant="text"
           @click="model = false"
         />
-      </v-card-title>
+      </v-toolbar>
 
-      <v-text-field
+      <app-text-field
         v-model="searchString"
         :placeholder="`${t('search.looking') }...`"
         autofocus
-        class="flex-grow-0 mx-2"
-        density="comfortable"
-        hide-details
-        prepend-inner-icon="mdi-magnify"
-        single-line
-        variant="solo"
+        class="flex-grow-0"
+        variant="filled"
       />
-
-      <v-divider />
 
       <v-card-text class="pa-4">
         <div v-if="!searchString" class="mt-16 pt-16 text-center">
@@ -79,7 +77,7 @@
           v-else
           :search-client="searchClient"
           :search-function="searchFunction"
-          index-name="vuetifyjs-next"
+          index-name="vuetifyjs-v3"
         >
           <ais-configure
             :facetFilters="[`lang:${locale}`]"
@@ -105,10 +103,10 @@
   // Composables
   import { useDisplay } from 'vuetify'
   import { useI18n } from 'vue-i18n'
+  import { onBeforeRouteLeave, useRoute } from 'vue-router'
 
   // Utilities
   import { AisConfigure, AisHits, AisInstantSearch, AisPoweredBy } from 'vue-instantsearch/vue3/es/src/instantsearch.js'
-  import { onBeforeRouteLeave } from 'vue-router'
   import { onBeforeUnmount, onMounted, ref } from 'vue'
   import algoliasearch from 'algoliasearch'
 
@@ -116,7 +114,8 @@
   import type { AlgoliaSearchHelper } from 'algoliasearch-helper'
 
   const { t } = useI18n()
-  const { smAndUp, mdAndUp, xs, lgAndUp, mdAndDown } = useDisplay()
+  const { smAndUp, smAndDown, mdAndUp, xs } = useDisplay()
+  const { query } = useRoute()
 
   const list = ref<InstanceType<typeof SearchResults>>()
   const model = ref(false)
@@ -130,6 +129,10 @@
 
   onMounted(() => {
     document.addEventListener('keydown', onDocumentKeydown)
+    if (query?.search) {
+      searchString.value = query.search as string
+      model.value = true
+    }
   })
   onBeforeUnmount(() => {
     document.removeEventListener('keydown', onDocumentKeydown)

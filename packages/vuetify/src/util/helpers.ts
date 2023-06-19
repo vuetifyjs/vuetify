@@ -113,29 +113,6 @@ export function getZIndex (el?: Element | null): number {
   return index
 }
 
-const tagsToReplace: Record<string, string> = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-}
-
-export function escapeHTML (str: string): string {
-  return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
-}
-
-export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { [N in K]: T[N] } {
-  const filtered = {} as { [N in K]: T[N] }
-
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i]
-    if (typeof obj[key] !== 'undefined') {
-      filtered[key] = obj[key]
-    }
-  }
-
-  return filtered
-}
-
 export function convertToUnit (str: number, unit?: string): string
 export function convertToUnit (str: string | number | null | undefined, unit?: string): string | undefined
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
@@ -179,7 +156,7 @@ export const keyCodes = Object.freeze({
   shift: 16,
 })
 
-export const keyValues = Object.freeze({
+export const keyValues: Record<string, string> = Object.freeze({
   enter: 'Enter',
   tab: 'Tab',
   delete: 'Delete',
@@ -199,8 +176,12 @@ export const keyValues = Object.freeze({
   shift: 'Shift',
 })
 
-export function keys<O> (o: O) {
+export function keys<O extends {}> (o: O) {
   return Object.keys(o) as (keyof O)[]
+}
+
+export function has<T extends string> (obj: object, key: T[]): obj is Record<T, unknown> {
+  return key.every(k => obj.hasOwnProperty(k))
 }
 
 type MaybePick<
@@ -208,18 +189,23 @@ type MaybePick<
   U extends Extract<keyof T, string>
 > = Record<string, unknown> extends T ? Partial<Pick<T, U>> : Pick<T, U>
 
+// Array of keys
 export function pick<
   T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: U[]): [yes: MaybePick<T, U>, no: Omit<T, U>]
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: U[], exclude?: E[]): [yes: MaybePick<T, Exclude<U, E>>, no: Omit<T, Exclude<U, E>>]
+// Array of keys or RegExp to test keys against
 export function pick<
   T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>]
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[], exclude?: E[]): [yes: Partial<T>, no: Partial<T>]
 export function pick<
   T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>] {
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[], exclude?: E[]): [yes: Partial<T>, no: Partial<T>] {
   const found = Object.create(null)
   const rest = Object.create(null)
 
@@ -228,7 +214,7 @@ export function pick<
       paths.some(path => path instanceof RegExp
         ? path.test(key)
         : path === key
-      )
+      ) && !exclude?.some(path => path === key)
     ) {
       found[key] = obj[key]
     } else {
@@ -270,39 +256,16 @@ export function arrayDiff (a: any[], b: any[]): any[] {
   return diff
 }
 
-interface ItemGroup<T> {
-  name: string
-  items: T[]
-}
-
-export function groupItems<T extends any = any> (
-  items: T[],
-  groupBy: string[],
-  groupDesc: boolean[]
-): ItemGroup<T>[] {
-  const key = groupBy[0]
-  const groups: ItemGroup<T>[] = []
-  let current
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i]
-    const val = getObjectValueByPath(item, key, null)
-    if (current !== val) {
-      current = val
-      groups.push({
-        name: val ?? '',
-        items: [],
-      })
-    }
-    groups[groups.length - 1].items.push(item)
-  }
-  return groups
-}
-
-export function wrapInArray<T> (v: T | T[] | null | undefined): T[] {
+type IfAny<T, Y, N> = 0 extends (1 & T) ? Y : N;
+export function wrapInArray<T> (
+  v: T | null | undefined
+): T extends readonly any[]
+    ? IfAny<T, T[], T>
+    : NonNullable<T>[] {
   return v == null
     ? []
     : Array.isArray(v)
-      ? v : [v]
+      ? v as any : [v]
 }
 
 export function defaultFilter (value: any, search: string | null, item: any) {
@@ -359,8 +322,19 @@ export function clamp (value: number, min = 0, max = 1) {
   return Math.max(min, Math.min(max, value))
 }
 
+export function getDecimals (value: number) {
+  const trimmedStr = value.toString().trim()
+  return trimmedStr.includes('.')
+    ? (trimmedStr.length - trimmedStr.indexOf('.') - 1)
+    : 0
+}
+
 export function padEnd (str: string, length: number, char = '0') {
   return str + char.repeat(Math.max(0, length - str.length))
+}
+
+export function padStart (str: string, length: number, char = '0') {
+  return char.repeat(Math.max(0, length - str.length)) + str
 }
 
 export function chunk (str: string, size = 1) {
@@ -566,15 +540,15 @@ export function includes (arr: readonly any[], val: any) {
 const onRE = /^on[^a-z]/
 export const isOn = (key: string) => onRE.test(key)
 
-export type EventProp<T = (...args: any[]) => any> = T | T[]
-export const EventProp = [Function, Array] as PropType<EventProp>
+export type EventProp<T extends any[] = any[], F = (...args: T) => any> = F | F[]
+export const EventProp = <T extends any[] = any[]>() => [Function, Array] as PropType<EventProp<T>>
 
 export function hasEvent (props: Record<string, any>, name: string) {
   name = 'on' + capitalize(name)
   return !!(props[name] || props[`${name}Once`] || props[`${name}Capture`] || props[`${name}OnceCapture`] || props[`${name}CaptureOnce`])
 }
 
-export function callEvent (handler: EventProp | undefined, ...args: any[]) {
+export function callEvent<T extends any[]> (handler: EventProp<T> | undefined, ...args: T) {
   if (Array.isArray(handler)) {
     for (const h of handler) {
       h(...args)
@@ -583,3 +557,37 @@ export function callEvent (handler: EventProp | undefined, ...args: any[]) {
     handler(...args)
   }
 }
+
+export function focusableChildren (el: Element) {
+  const targets = ['button', '[href]', 'input:not([type="hidden"])', 'select', 'textarea', '[tabindex]']
+    .map(s => `${s}:not([tabindex="-1"]):not([disabled])`)
+    .join(', ')
+  return [...el.querySelectorAll(targets)] as HTMLElement[]
+}
+
+export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last') {
+  const focusable = focusableChildren(el)
+  const idx = focusable.indexOf(document.activeElement as HTMLElement)
+
+  if (!location) {
+    if (!el.contains(document.activeElement)) {
+      focusable[0]?.focus()
+    }
+  } else if (location === 'first') {
+    focusable[0]?.focus()
+  } else if (location === 'last') {
+    focusable.at(-1)?.focus()
+  } else {
+    let _el
+    let idxx = idx
+    const inc = location === 'next' ? 1 : -1
+    do {
+      idxx += inc
+      _el = focusable[idxx]
+    } while ((!_el || _el.offsetParent == null) && idxx < focusable.length && idxx >= 0)
+    if (_el) _el.focus()
+    else focusChild(el, location === 'next' ? 'first' : 'last')
+  }
+}
+
+export function noop () {}

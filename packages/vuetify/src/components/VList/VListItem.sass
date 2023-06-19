@@ -1,4 +1,5 @@
 @use 'sass:list'
+@use 'sass:math'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -53,7 +54,6 @@
   > .v-icon
     margin-inline-end: $list-item-icon-margin-end
 
-  .v-list-item--two-line &,
   .v-list-item--three-line &
     align-self: start
 
@@ -69,7 +69,6 @@
   > .v-icon
     margin-inline-start: $list-item-icon-margin-start
 
-  .v-list-item--two-line &,
   .v-list-item--three-line &
     align-self: start
 
@@ -179,6 +178,10 @@
         @if ($three-line-padding > 0)
           padding-top: $three-line-padding
           padding-bottom: $three-line-padding
+
+          .v-list-item__prepend,
+          .v-list-item__append
+            padding-top: math.div($three-line-padding, 2)
 
       &:not(.v-list-item--nav)
         &.v-list-item--one-line

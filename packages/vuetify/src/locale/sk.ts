@@ -73,4 +73,9 @@ export default {
       item: 'Hodnotenie {0} z {1}',
     },
   },
+  loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
+  },
 }

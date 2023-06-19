@@ -5,14 +5,20 @@ meta:
   keywords: table, simple table, vuetify table component, vue simple table component, table component
 nav: 'Tables'
 related:
-  - /components/data-iterators/
-  - /components/data-tables/
+  - /components/data-tables/basics/
+  - /components/data-tables/headers/
   - /components/lists/
 ---
 
 # Tables
 
-The `v-table` component is a simple wrapper component around the `<table>` element. Inside the component you can use all the regular table elements such as `<thead>`, `<tbody>`, `<tr>`, etc.
+The simpler of the table components is `v-table`, a basic wrapper component for the HTML `<table>` element. In addition, regular table elements such as `<thead>`, `<tbody>`, `<tr>`, and `<td>` work by default.
+
+<alert type="info">
+
+More advanced tables such as [v-data-table](/components/data-tables/basics/) are available for preview in [Vuetify Labs](/labs/introduction/).
+
+</alert>
 
 <!-- ![Table Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-table/v-table-entry.png) -->
 
@@ -26,7 +32,11 @@ The `v-table` component is a simple wrapper component around the `<table>` eleme
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-table](/api/v-table/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

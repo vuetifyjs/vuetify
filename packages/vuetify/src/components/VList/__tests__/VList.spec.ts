@@ -10,7 +10,7 @@ describe('VList', () => {
   const vuetify = createVuetify()
 
   function mountFunction (options = {}) {
-    return mount(VList, {
+    return mount<any>(VList, {
       global: { plugins: [vuetify] },
       ...options,
     })

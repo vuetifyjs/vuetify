@@ -2,10 +2,10 @@
 import './VCarousel.sass'
 
 // Components
+import { makeVWindowProps, VWindow, type VWindowSlots } from '@/components/VWindow/VWindow'
 import { VBtn } from '@/components/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VProgressLinear } from '@/components/VProgressLinear'
-import { VWindow } from '@/components/VWindow'
 
 // Composables
 import { IconValue } from '@/composables/icons'
@@ -13,43 +13,56 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 import { onMounted, ref, watch } from 'vue'
 
 // Types
 import type { GroupProvide } from '@/composables/group'
 import type { PropType } from 'vue'
 
-export const VCarousel = defineComponent({
+export const makeVCarouselProps = propsFactory({
+  color: String,
+  cycle: Boolean,
+  delimiterIcon: {
+    type: IconValue,
+    default: '$delimiter',
+  },
+  height: {
+    type: [Number, String],
+    default: 500,
+  },
+  hideDelimiters: Boolean,
+  hideDelimiterBackground: Boolean,
+  interval: {
+    type: [Number, String],
+    default: 6000,
+    validator: (value: string | number) => Number(value) > 0,
+  },
+  progress: [Boolean, String],
+  verticalDelimiters: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
+
+  ...makeVWindowProps({
+    continuous: true,
+    mandatory: 'force' as const,
+    showArrows: true,
+  }),
+}, 'v-carousel')
+
+type VCarouselSlots = VWindowSlots & {
+  item: [{
+    props: Record<string, any>
+    item: {
+      id: number
+      value: unknown
+      disabled: boolean | undefined
+    }
+  }]
+}
+
+export const VCarousel = genericComponent<VCarouselSlots>()({
   name: 'VCarousel',
 
-  props: {
-    color: String,
-    cycle: Boolean,
-    delimiterIcon: {
-      type: IconValue,
-      default: '$delimiter',
-    },
-    height: {
-      type: [Number, String],
-      default: 500,
-    },
-    hideDelimiters: Boolean,
-    hideDelimiterBackground: Boolean,
-    interval: {
-      type: [Number, String],
-      default: 6000,
-      validator: (value: string | number) => value > 0,
-    },
-    modelValue: null,
-    progress: [Boolean, String],
-    showArrows: {
-      type: [Boolean, String],
-      default: true,
-      validator: (v: any) => typeof v === 'boolean' || v === 'hover',
-    },
-    verticalDelimiters: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
-  },
+  props: makeVCarouselProps(),
 
   emits: {
     'update:modelValue': (val: any) => true,
@@ -91,8 +104,12 @@ export const VCarousel = defineComponent({
             'v-carousel--hide-delimiter-background': props.hideDelimiterBackground,
             'v-carousel--vertical-delimiters': props.verticalDelimiters,
           },
+          props.class,
         ]}
-        style={{ height: convertToUnit(props.height) }}
+        style={[
+          { height: convertToUnit(props.height) },
+          props.style,
+        ]}
         continuous
         mandatory="force"
         showArrows={ props.showArrows }
@@ -123,6 +140,7 @@ export const VCarousel = defineComponent({
                     >
                       { group.items.value.map((item, index) => {
                         const props = {
+                          id: `carousel-item-${item.id}`,
                           'aria-label': t('$vuetify.carousel.ariaLabel.delimiter', index + 1, group.items.value.length),
                           class: [group.isSelected(item.id) && 'v-btn--active'],
                           onClick: () => group.select(item.id, true),
@@ -131,9 +149,9 @@ export const VCarousel = defineComponent({
                         return slots.item
                           ? slots.item({ props, item })
                           : (<VBtn { ...item } { ...props } />)
-                      }) }
+                      })}
                     </VDefaultsProvider>
-                  ) }
+                  )}
                 </div>
               )}
 

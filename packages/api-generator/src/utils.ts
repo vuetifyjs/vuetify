@@ -1,4 +1,7 @@
+import { fileURLToPath } from 'url'
 import stringifyObject from 'stringify-object'
+import prettier from 'prettier'
+import typescriptParser from 'prettier/esm/parser-typescript.mjs'
 import type { Definition, ObjectDefinition } from './types'
 
 function parseFunctionParams (func: string) {
@@ -95,25 +98,32 @@ export function stringifyProps (props: any) {
   )
 }
 
-const loadLocale = (componentName: string, locale: string, fallback = {}): Record<string, string | Record<string, string>> => {
+async function loadLocale (componentName: string, locale: string, fallback = {}): Promise<Record<string, string | Record<string, string>>> {
   try {
-    const data = require(`./locale/${locale}/${componentName}`)
-    return Object.assign(fallback, data)
+    const data = await import(`../src/locale/${locale}/${componentName}.json`, {
+      assert: { type: 'json' },
+    })
+    return Object.assign(fallback, data.default)
   } catch (err) {
+    if (err.code === 'ERR_MODULE_NOT_FOUND') {
+      console.error(`Missing locale for ${componentName} in ${locale}`)
+    } else {
+      console.error(err.message)
+    }
     return fallback
   }
 }
 
-function getSources (kebabName: string, sources: string[], locale: string) {
-  const arr = [
+async function getSources (kebabName: string, sources: string[], locale: string) {
+  const arr = await Promise.all([
     loadLocale(kebabName, locale),
     ...sources.map(source => loadLocale(source, locale)),
     loadLocale('generic', locale),
-  ]
+  ])
 
   return {
     find: (section: string, key?: string) => {
-      return arr.reduce<string | null>((str, source) => {
+      return arr.reduce((str, source) => {
         if (str) return str
         return key ? source?.[section]?.[key] : source?.[section]
       }, null) ?? 'MISSING DESCRIPTION'
@@ -121,9 +131,9 @@ function getSources (kebabName: string, sources: string[], locale: string) {
   }
 }
 
-export function addDescriptions (kebabName: string, componentData: ComponentData, sources: string[], locales: string[]) {
+export async function addDescriptions (kebabName: string, componentData: ComponentData, sources: string[], locales: string[]) {
   for (const locale of locales) {
-    const descriptions = getSources(kebabName, sources, locale)
+    const descriptions = await getSources(kebabName, sources, locale)
 
     for (const section of ['props', 'slots', 'events', 'exposed'] as const) {
       for (const [propName, propObj] of Object.entries(componentData[section] ?? {})) {
@@ -135,14 +145,14 @@ export function addDescriptions (kebabName: string, componentData: ComponentData
   }
 }
 
-export function addDirectiveDescriptions (
+export async function addDirectiveDescriptions (
   kebabName: string,
   componentData: { argument: { value: Definition }, modifiers: Record<string, Definition> },
   sources: string[],
   locales: string[]
 ) {
   for (const locale of locales) {
-    const descriptions = getSources(kebabName, sources, locale)
+    const descriptions = await getSources(kebabName, sources, locale)
 
     if (componentData.argument) {
       for (const [name, arg] of Object.entries(componentData.argument)) {
@@ -159,5 +169,53 @@ export function addDirectiveDescriptions (
         modifier.description[locale] = descriptions.find('modifiers', name)
       }
     }
+  }
+}
+
+export function stripLinks (str: string): [string, Record<string, string>] {
+  let out = str.slice()
+  const obj: Record<string, string> = {}
+  const regexp = /<a.*?>(.*?)<\/a>/g
+
+  let matches = regexp.exec(str)
+
+  while (matches !== null) {
+    obj[matches[1]] = matches[0]
+    out = out.replace(matches[0], matches[1])
+
+    matches = regexp.exec(str)
+  }
+
+  return [out, obj]
+}
+
+export function insertLinks (str: string, stripped: Record<string, string>) {
+  for (const [key, value] of Object.entries(stripped)) {
+    str = str.replaceAll(new RegExp(`(^|\\W)(${key})(\\W|$)`, 'g'), `$1${value}$3`)
+  }
+  return str
+}
+
+export function prettifyType (name: string, item: Definition) {
+  const prefix = 'type Type = '
+  const [str, stripped] = stripLinks(item.formatted)
+  let formatted
+  try {
+    formatted = prettier.format(prefix + str, {
+      parser: 'typescript',
+      plugins: [typescriptParser],
+      bracketSpacing: true,
+      semi: false,
+      singleQuote: true,
+      trailingComma: 'all',
+    })
+  } catch (err) {
+    console.error(`${name}:`, err.message)
+    return item
+  }
+
+  return {
+    ...item,
+    formatted: insertLinks(formatted, stripped).replace(/type\sType\s=\s+?/m, ''),
   }
 }

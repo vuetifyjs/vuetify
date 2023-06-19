@@ -1,5 +1,10 @@
 import type { Node, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
+import { prettifyType } from './utils'
+
+const project = new Project({
+  tsConfigFilePath: './tsconfig.json',
+})
 
 function inspect (project: Project, node?: Node<ts.Node>) {
   if (!node) return null
@@ -9,9 +14,12 @@ function inspect (project: Project, node?: Node<ts.Node>) {
   if (kind === ts.SyntaxKind.TypeAliasDeclaration) {
     const definition = generateDefinition(node, [], project) as ObjectDefinition
     if (definition.properties) {
-      // Exclude private properties
-      definition.properties = Object.fromEntries(Object.entries(definition.properties)
-        .filter(([name]) => !name.startsWith('_')))
+      definition.properties = Object.fromEntries(
+        Object.entries(definition.properties)
+          // Exclude private properties
+          .filter(([name]) => !name.startsWith('$') && !name.startsWith('_') && !name.startsWith('Ψ'))
+          .map(([name, prop]) => [name, prettifyType(name, prop)])
+      )
     }
     return definition
   }
@@ -20,11 +28,7 @@ function inspect (project: Project, node?: Node<ts.Node>) {
 }
 
 export function generateComposableDataFromTypes () {
-  const project = new Project({
-    tsConfigFilePath: './tsconfig.json',
-  })
-
-  const sourceFile = project.addSourceFileAtPath('./src/composables.d.ts')
+  const sourceFile = project.addSourceFileAtPath('./templates/composables.d.ts')
 
   const composables = inspect(project, sourceFile.getTypeAlias('Composables'))
 
@@ -50,11 +54,7 @@ export function generateComposableDataFromTypes () {
 }
 
 export function generateDirectiveDataFromTypes () {
-  const project = new Project({
-    tsConfigFilePath: './tsconfig.json',
-  })
-
-  const sourceFile = project.addSourceFileAtPath('./src/directives.d.ts')
+  const sourceFile = project.addSourceFileAtPath('./templates/directives.d.ts')
 
   const directives = inspect(project, sourceFile.getTypeAlias('Directives'))
 
@@ -68,11 +68,7 @@ export function generateDirectiveDataFromTypes () {
 }
 
 export async function generateComponentDataFromTypes (component: string) {
-  const project = new Project({
-    tsConfigFilePath: './tsconfig.json',
-  })
-
-  const sourceFile = project.addSourceFileAtPath(`./src/tmp/${component}.d.ts`)
+  const sourceFile = project.addSourceFileAtPath(`./templates/tmp/${component}.d.ts`)
 
   const props = inspect(project, sourceFile.getTypeAlias('ComponentProps'))
   const events = inspect(project, sourceFile.getTypeAlias('ComponentEvents'))
@@ -85,6 +81,12 @@ export async function generateComponentDataFromTypes (component: string) {
     item.text = undefined
     item.source = undefined
   })
+
+  for (const [name, { formatted }] of Object.entries(props.properties)) {
+    if (formatted.length > 400) {
+      console.log(`Long prop type (${formatted.length}): ${component}.${name}`)
+    }
+  }
 
   return {
     props: props.properties,
@@ -243,7 +245,24 @@ const allowedRefs = [
   'SelectStrategyFn',
   'SubmitEventPromise',
   'ValidationRule',
+  'FormValidationResult',
   'SortItem',
+  'ListItem',
+  'Group',
+  'DataTableItem',
+  'DataTableHeader',
+  'InternalDataTableHeader',
+  'FilterFunction',
+  'DataIteratorItem',
+]
+const plainRefs = [
+  'Component',
+  'ComponentPublicInstance',
+  'ComponentInternalInstance',
+  'FunctionalComponent',
+  'DataTableItem',
+  'Group',
+  'DataIteratorItem',
 ]
 
 function formatDefinition (definition: Definition) {
@@ -259,7 +278,7 @@ function formatDefinition (definition: Definition) {
       break
     }
     case 'array': {
-      const formattedItems = definition.items.map(item => ['function', 'constructor'].includes(item.type) ? `(${item.formatted})` : item.formatted)
+      const formattedItems = definition.items.map(item => ['function', 'constructor', 'allOf', 'anyOf'].includes(item.type) ? `(${item.formatted})` : item.formatted)
       if (definition.length) {
         formatted = `[${formattedItems.join(', ')}]`
       } else {
@@ -281,7 +300,7 @@ function formatDefinition (definition: Definition) {
       }, []).join('; ')} }`
       break
     case 'ref':
-      if (['Component', 'ComponentPublicInstance', 'ComponentInternalInstance', 'FunctionalComponent'].includes(definition.ref)) {
+      if (plainRefs.includes(definition.ref)) {
         formatted = definition.ref
       } else {
         formatted = definition.text
@@ -299,8 +318,8 @@ function formatDefinition (definition: Definition) {
 
   definition.formatted = formatted
 
-  if (allowedRefs.includes(definition.text)) {
-    definition.formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/next/packages/${definition.source}" target="_blank">${definition.text}</a>`
+  if (allowedRefs.includes(formatted)) {
+    definition.formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/master/packages/${definition.source}" target="_blank">${formatted}</a>`
   }
 }
 
@@ -327,7 +346,7 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
 
   if (
     count(recursed, type.getText()) > 1 ||
-    allowedRefs.includes(type.getAliasSymbol()?.getName()) ||
+    allowedRefs.includes(symbol?.getName()) ||
     isExternalDeclaration(declaration, definition.text)
   ) {
     definition = definition as RefDefinition
@@ -441,6 +460,14 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
       definition.properties[propertyName] = generateDefinition(node, getRecursiveTypes(recursed, propertyType), project, propertyType)
 
       definition.properties[propertyName].optional = property.isOptional()
+    }
+    if (type.compilerType.indexInfos.length) {
+      for (const index of type.compilerType.indexInfos) {
+        const indexName = '[' + type._context.compilerFactory.getType(index.keyType).getText() + ']'
+        const indexType = type._context.compilerFactory.getType(index.type)
+        definition.properties[indexName] = generateDefinition(node, getRecursiveTypes(recursed, indexType), project, indexType)
+        definition.properties[indexName].optional = true
+      }
     }
   } else if (ts.TypeFlags.Void & type.getFlags()) {
     // @ts-expect-error asd

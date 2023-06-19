@@ -1,0 +1,9 @@
+{
+  "props": {
+    "itemTitle": "Property on supplied `items` that contains its title",
+    "itemValue": "Property on supplied `items` that contains its value",
+    "itemChildren": "Property on supplied `items` that contains its children",
+    "itemProps": "Props object that will be applied to each item component. `true` will treat the original object as raw props and pass it directly to the component.",
+    "returnObject": "Changes the selection behavior to return the object directly rather than the value specified with **item-value**"
+  }
+}

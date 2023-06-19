@@ -49,7 +49,7 @@ setCatchHandler(async ({ url, request }) => {
 
 let previousManifest
 self.addEventListener('message', async event => {
-  if (event.data?.type === 'SKIP_WAITING') {
+  if (event.data === 'sw:update' || event.data?.type === 'SKIP_WAITING') {
     console.log('[SW] Skip waiting')
     self.skipWaiting()
   } else if (event.data?.type === 'GET_MANIFEST') {
@@ -65,6 +65,7 @@ self.addEventListener('message', async event => {
 
 self.addEventListener('activate', event => {
   previousManifest && event.waitUntil(cleanCache(previousManifest))
+  event.waitUntil(self.clients.claim())
 })
 
 function getFallbackDocument (url) {

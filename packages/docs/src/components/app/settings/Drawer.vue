@@ -1,12 +1,13 @@
 <template>
   <v-navigation-drawer
+    v-if="app.settingsCanShow"
     id="settings-drawer"
     v-model="app.settings"
     :location="isRtl ? 'left' : 'right'"
-    :scrim="false"
     disable-route-watcher
     position="fixed"
     temporary
+    touchless
     width="350"
   >
     <v-toolbar flat>
@@ -38,11 +39,16 @@
 
       <app-settings-dev />
     </v-container>
+
+    <template #append>
+      <app-settings-append />
+    </template>
   </v-navigation-drawer>
 </template>
 
 <script setup>
   // Components
+  import AppSettingsAppend from './Append.vue'
   import AppSettingsApi from './Api.vue'
   import AppSettingsRtl from './Rtl.vue'
   import AppSettingsTheme from './Theme.vue'

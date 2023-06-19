@@ -2,8 +2,8 @@
 import './VSwitch.sass'
 
 // Components
-import { filterControlProps, makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
@@ -13,25 +13,37 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
 import { computed, ref } from 'vue'
-import { defineComponent, filterInputAttrs, getUid, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, getUid, propsFactory, useRender } from '@/util'
 
-export const VSwitch = defineComponent({
+// Types
+import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
+import type { LoaderSlotProps } from '@/composables/loader'
+
+export type VSwitchSlots =
+  & VInputSlots
+  & VSelectionControlSlots
+  & { loader: [LoaderSlotProps] }
+
+export const makeVSwitchProps = propsFactory({
+  indeterminate: Boolean,
+  inset: Boolean,
+  flat: Boolean,
+  loading: {
+    type: [Boolean, String],
+    default: false,
+  },
+
+  ...makeVInputProps(),
+  ...makeSelectionControlProps(),
+}, 'v-switch')
+
+export const VSwitch = genericComponent<VSwitchSlots>()({
   name: 'VSwitch',
 
   inheritAttrs: false,
 
-  props: {
-    indeterminate: Boolean,
-    inset: Boolean,
-    flat: Boolean,
-    loading: {
-      type: [Boolean, String],
-      default: false,
-    },
-
-    ...makeVInputProps(),
-    ...makeSelectionControlProps(),
-  },
+  props: makeVSwitchProps(),
 
   emits: {
     'update:focused': (focused: boolean) => true,
@@ -62,11 +74,13 @@ export const VSwitch = defineComponent({
 
     useRender(() => {
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
-      const [inputProps, _1] = filterInputProps(props)
-      const [controlProps, _2] = filterControlProps(props)
+      const [inputProps, _1] = VInput.filterProps(props)
+      const [controlProps, _2] = VSelectionControl.filterProps(props)
       const control = ref<VSelectionControl>()
 
-      function onClick () {
+      function onClick (e: Event) {
+        e.stopPropagation()
+        e.preventDefault()
         control.value?.input?.click()
       }
 
@@ -77,7 +91,9 @@ export const VSwitch = defineComponent({
             { 'v-switch--inset': props.inset },
             { 'v-switch--indeterminate': indeterminate.value },
             loaderClasses.value,
+            props.class,
           ]}
+          style={ props.style }
           { ...inputAttrs }
           { ...inputProps }
           id={ id.value }
@@ -138,7 +154,7 @@ export const VSwitch = defineComponent({
                               )
                           )}
                         </LoaderSlot>
-                      ) }
+                      )}
                     </div>
                   ),
                 }}
