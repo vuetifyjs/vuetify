@@ -4,7 +4,6 @@
     ref="script"
     :class="[
       isDark ? 'theme--dark' : 'theme--light',
-      'mb-5',
     ]"
     border
     min-height="118"
@@ -19,6 +18,8 @@
   </promoted-base>
 
   <promoted v-else />
+
+  <br>
 </template>
 
 <script setup lang="ts">
