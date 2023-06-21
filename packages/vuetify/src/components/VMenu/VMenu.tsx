@@ -15,7 +15,7 @@ import { useScopeId } from '@/composables/scopeId'
 // Utilities
 import { computed, inject, mergeProps, provide, ref, shallowRef, watch } from 'vue'
 import { VMenuSymbol } from './shared'
-import { focusChild, genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
+import { focusChild, focusableChildren, genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Component } from 'vue'
