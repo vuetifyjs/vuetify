@@ -85,7 +85,8 @@ export const VMenu = genericComponent<OverlaySlots>()({
     function onKeydown (e: KeyboardEvent) {
       if (props.disabled) return
 
-      if (e.key === 'Tab' && props.closeOnContentClick) {
+      const el = overlay.value?.contentEl
+      if (e.key === 'Tab' && focusableChildren(el as Element).length === 0) {
         isActive.value = false
         overlay.value?.activatorEl?.focus()
       }
