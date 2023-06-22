@@ -281,6 +281,9 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 
     server: {
       port: +(process.env.PORT ?? 8080),
+      proxy: {
+        '/api': process.env.PROXY ?? 'http://localhost:3005'
+      }
     },
 
     preview: {
