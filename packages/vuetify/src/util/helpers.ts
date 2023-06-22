@@ -596,4 +596,9 @@ export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 
   }
 }
 
+export function tabbableChildren (el: Element) {
+  const focusable = focusableChildren(el)
+  return focusable.filter(el => el.tabIndex >= 0)
+}
+
 export function noop () {}

@@ -15,7 +15,7 @@ import { useScopeId } from '@/composables/scopeId'
 // Utilities
 import { computed, inject, mergeProps, provide, ref, shallowRef, watch } from 'vue'
 import { VMenuSymbol } from './shared'
-import { focusChild, genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
+import { focusChild, genericComponent, getUid, omit, propsFactory, tabbableChildren, useRender } from '@/util'
 
 // Types
 import type { Component } from 'vue'
@@ -85,7 +85,8 @@ export const VMenu = genericComponent<OverlaySlots>()({
     function onKeydown (e: KeyboardEvent) {
       if (props.disabled) return
 
-      if (e.key === 'Tab') {
+      const tabbable = tabbableChildren(overlay.value?.contentEl as Element)
+      if (e.key === 'Tab' && !tabbable.length) {
         isActive.value = false
         overlay.value?.activatorEl?.focus()
       }
