@@ -1,0 +1,43 @@
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+.v-stepper.v-sheet
+  @include tools.elevation(2)
+  @include tools.rounded(4px)
+
+.v-stepper__header
+  @include tools.elevation(2)
+
+  align-items: center
+  display: flex
+  position: relative
+  z-index: 1
+
+.v-stepper__content
+  padding: 1.5rem
+
+.v-stepper-item
+  display: flex
+  align-items: center
+  padding: 1.5rem
+  flex: 1 0 auto
+  color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
+
+  &--selected
+    color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+
+
+.v-stepper-item__avatar.v-avatar
+  margin-inline-end: 8px
+  background: rgba(var(--v-theme-surface-variant), var(--v-medium-emphasis-opacity))
+  color: rgb(var(--v-theme-on-surface-variant))
+
+  .v-stepper-item--selected &
+    background: rgb(var(--v-theme-surface-variant))
+
+.v-stepper__actions
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: 0 1.5rem 1rem
