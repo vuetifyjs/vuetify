@@ -9,7 +9,6 @@ export type RootState = {
   apiSearch: string
   drawer: boolean | null
   settings: boolean
-  settingsCanShow: boolean
   toc: boolean | null
 }
 
@@ -31,7 +30,6 @@ export const useAppStore = defineStore({
     items: Array.from(data),
     pages: getPages(data as NavItem[]),
     settings: false,
-    settingsCanShow: false,
     categories: {
       api: {
         icon: 'mdi-flask-outline',

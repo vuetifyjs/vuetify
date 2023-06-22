@@ -1,6 +1,5 @@
 <template>
   <v-navigation-drawer
-    v-if="app.settingsCanShow"
     id="settings-drawer"
     v-model="app.settings"
     :location="isRtl ? 'left' : 'right'"
