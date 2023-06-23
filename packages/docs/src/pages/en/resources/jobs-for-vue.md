@@ -1,4 +1,5 @@
 ---
+fluid: true
 meta:
   nav: Jobs for Vue
   title: Vue & Vuetify jobs
@@ -17,6 +18,6 @@ related:
 
 Find top Vue.js developers, ready to join your team; or browse available openings and land your next job!
 
-<entry />
+<promoted slug="enterprise-support" />
 
 <vue-jobs />

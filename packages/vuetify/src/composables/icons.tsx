@@ -50,6 +50,7 @@ export interface IconAliases {
   file: IconValue
   plus: IconValue
   minus: IconValue
+  calendar: IconValue
 }
 
 export interface IconProps {

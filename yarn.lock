@@ -1194,6 +1194,18 @@
     debug "^3.1.0"
     lodash.once "^4.1.1"
 
+"@date-io/core@2.14.0", "@date-io/core@^2.14.0":
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/@date-io/core/-/core-2.14.0.tgz#03e9b9b9fc8e4d561c32dd324df0f3ccd967ef14"
+  integrity sha512-qFN64hiFjmlDHJhu+9xMkdfDG2jLsggNxKXglnekUpXSq8faiqZgtHm2lsHCUuaPDTV6wuXHcCl8J1GQ5wLmPw==
+
+"@date-io/date-fns@2.14.0":
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/@date-io/date-fns/-/date-fns-2.14.0.tgz#92ab150f488f294c135c873350d154803cebdbea"
+  integrity sha512-4fJctdVyOd5cKIKGaWUM+s3MUXMuzkZaHuTY15PH70kU1YTMrCoauA7hgQVx9qj0ZEbGrH9VSPYJYnYro7nKiA==
+  dependencies:
+    "@date-io/core" "^2.14.0"
+
 "@emailjs/browser@^3.10.0":
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/@emailjs/browser/-/browser-3.10.0.tgz#74de36d95838e117cf76f7b71b68ffbe5668367d"
@@ -3841,15 +3853,16 @@
     find-cache-dir "^3.3.2"
     upath "^2.0.1"
 
-"@vuetify/vite-ssg@^0.20.2":
-  version "0.20.2"
-  resolved "https://registry.yarnpkg.com/@vuetify/vite-ssg/-/vite-ssg-0.20.2.tgz#a021397a88dd287b9f1332e8e5de75289a5af860"
-  integrity sha512-Mk7cUoxiwiIAEO2AWsu81tFUrh5CGKPoohSA4waCtT77nT33PSEekdNZgWaaw3/bhn8LiLW9jHj2Bf2FfVbpvg==
+"@vuetify/vite-ssg@^0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@vuetify/vite-ssg/-/vite-ssg-0.21.0.tgz#2a32064f7f83c3c03494fb192d6dea2e6fe97157"
+  integrity sha512-jzkKpKCUWqDx1MV7Qy/NCDELLIkl3UETPMM5HAkXDHI5ZrxYyjLl7TdPzIZXEo4FgmwKJkqNp49SstDddHXM5g==
   dependencies:
     chalk "^4.1.2"
     fs-extra "^10.0.0"
     html-minifier "^4.0.0"
     jsdom "^17.0.0"
+    piscina "^3.2.0"
     prettier "^2.4.1"
     yargs "^17.3.0"
 
@@ -5889,7 +5902,7 @@ date-fns@^1.30.1:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
   integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
 
-date-fns@^2.29.3:
+date-fns@^2.28.0, date-fns@^2.29.3:
   version "2.29.3"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.29.3.tgz#27402d2fc67eb442b511b70bbdf98e6411cd68a8"
   integrity sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==

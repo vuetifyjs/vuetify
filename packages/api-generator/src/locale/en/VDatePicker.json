@@ -31,10 +31,17 @@
     "weekdayFormat": "Allows you to customize the format of the weekday string that appears in the body of the calendar. Called with date (ISO 8601 **date** string) arguments.",
     "width": "Width of the picker",
     "yearFormat": "Allows you to customize the format of the year string that appears in the header of the calendar. Called with date (ISO 8601 **date** string) arguments.",
-    "yearIcon": "Sets the icon in the year selection button"
-  },
-  "slots": {
-    "default": "Displayed below the calendar, can be used for example for adding action button (`OK` and `Cancel`)"
+    "yearIcon": "Sets the icon in the year selection button",
+
+    "cancelText": "Text used for the Cancel button.",
+    "okText": "Text used for the Ok button.",
+    "displayDate": "The date displayed in the picker header.",
+    "inputMode": "Toggles between showing dates or inputs.",
+    "calendarIcon": "The icon shown in the header when in 'input' **input-mode**.",
+    "expandIcon": "Icon used for **view-mode** toggle.",
+    "format": "Takes a date object and returns it in a specified format.",
+    "header": "Text shown when no **display-date** is set.",
+    "hideActions": "Hide the picker actions"
   },
   "events": {
     "update:active-picker": "The `.sync` event for `active-picker` prop",

@@ -2,6 +2,7 @@
 import Alert from '@/components/Alert.vue'
 import ApiInline from '@/components/api/Inline.vue'
 import ApiLinks from '@/components/api/Links.vue'
+import ApiSearch from '@/components/api/Search.vue'
 import ApiSection from '@/components/api/Section.vue'
 import AppBtn from '@/components/app/Btn.vue'
 import AppCaption from '@/components/app/Caption.vue'
@@ -63,6 +64,7 @@ export function installGlobalComponents ({ app }: ViteSSGContext) {
     .component('ApiInline', ApiInline)
     .component('ApiLinks', ApiLinks)
     .component('ApiSection', ApiSection)
+    .component('ApiSearch', ApiSearch)
     .component('Backmatter', Backmatter)
     .component('BreakpointsTable', BreakpointsTable)
     .component('ColorPalette', ColorPalette)

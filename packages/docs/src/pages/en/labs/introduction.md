@@ -93,14 +93,14 @@ The following is a list of available and up-and-coming components for use with L
 | [v-infinite-scroll](/api/v-infinite-scroll/) | Primary Component |
 | **Bottom sheet** | [Usage](/components/bottom-sheets/) |
 | [v-bottom-sheet](/api/v-bottom-sheet/) | Primary Component |
+| **Date picker** | [Usage](/components/date-pickers/) |
+| [v-date-picker](/api/v-date-picker/) | Primary Component |
 
 ### Up Next
 
 | Component | Release Target |
 | - | - |
-| v-infinite-scroll | April 2023 |
 | v-calendar | ~~Q1~~* Q2 2023 |
-| v-date-picker | Q2 2023 |
 
 <small>*Q1 2023 was the original target, but due to the complexity of the component, it has been pushed back to Q2 2023.</small>
 

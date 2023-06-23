@@ -16,7 +16,10 @@
           />
         </v-col>
 
-        <v-col cols="12" class="pb-0">
+        <v-col
+          cols="12"
+          class="pb-0"
+        >
           <a
             v-for="(social, i) in socials"
             :key="i"
@@ -27,7 +30,10 @@
             rel="noopener"
             target="_blank"
           >
-            <v-icon :icon="social.icon" color="white" />
+            <v-icon
+              :icon="social.icon"
+              color="white"
+            />
           </a>
         </v-col>
 
@@ -57,7 +63,10 @@
             {{ t('copyright') }} &copy; 2016-{{ (new Date()).getFullYear() }} {{ t('vuetify') }}
           </div>
 
-          <template v-for="(link, i) in links" :key="i">
+          <template
+            v-for="(link, i) in links"
+            :key="i"
+          >
             <a
               :href="link.href"
               class="text-medium-emphasis"
@@ -74,7 +83,7 @@
 </template>
 
 <script setup>
-  // Composables
+// Composables
   import { useI18n } from 'vue-i18n'
 
   const { t } = useI18n()
@@ -88,7 +97,7 @@
       path: 'cookie-policy',
     },
     {
-      href: 'mailto:support@vuetifyjs.com',
+      href: 'mailto:hello@vuetifyjs.com',
       path: 'contact-us',
     },
   ]

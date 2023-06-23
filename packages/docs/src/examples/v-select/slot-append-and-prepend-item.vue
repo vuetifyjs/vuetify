@@ -1,45 +1,43 @@
 <template>
-  <v-container fluid>
-    <v-select
-      v-model="selectedFruits"
-      :items="fruits"
-      label="Favorite Fruits"
-      multiple
-    >
-      <template v-slot:prepend-item>
-        <v-list-item
-          title="Select All"
-          @click="toggle"
-        >
-          <template v-slot:prepend>
-            <v-checkbox-btn
-              :color="likesSomeFruit ? 'indigo-darken-4' : undefined"
-              :indeterminate="likesSomeFruit && !likesAllFruit"
-              :model-value="likesSomeFruit"
-            ></v-checkbox-btn>
-          </template>
-        </v-list-item>
+  <v-select
+    v-model="selectedFruits"
+    :items="fruits"
+    label="Favorite Fruits"
+    multiple
+  >
+    <template v-slot:prepend-item>
+      <v-list-item
+        title="Select All"
+        @click="toggle"
+      >
+        <template v-slot:prepend>
+          <v-checkbox-btn
+            :color="likesSomeFruit ? 'indigo-darken-4' : undefined"
+            :indeterminate="likesSomeFruit && !likesAllFruit"
+            :model-value="likesSomeFruit"
+          ></v-checkbox-btn>
+        </template>
+      </v-list-item>
 
-        <v-divider class="mt-2"></v-divider>
-      </template>
+      <v-divider class="mt-2"></v-divider>
+    </template>
 
-      <template v-slot:append-item>
-        <v-divider class="mb-2"></v-divider>
+    <template v-slot:append-item>
+      <v-divider class="mb-2"></v-divider>
 
-        <v-list-item
-          :subtitle="subtitle"
-          :title="title"
-          disabled
-        >
-          <template v-slot:prepend>
-            <v-avatar icon="mdi-food-apple" color="primary">
-              mdi-food-apple
-            </v-avatar>
-          </template>
-        </v-list-item>
-      </template>
-    </v-select>
-  </v-container>
+      <v-list-item
+        :subtitle="subtitle"
+        :title="title"
+        disabled
+      >
+        <template v-slot:prepend>
+          <v-avatar icon="mdi-food-apple" color="primary">
+            mdi-food-apple
+          </v-avatar>
+        </template>
+      </v-list-item>
+    </template>
+  </v-select>
 </template>
 
 <script setup>

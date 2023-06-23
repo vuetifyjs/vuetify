@@ -17,7 +17,7 @@
       </thead>
 
       <tbody>
-        <template v-for="item in items" :key="item.name">
+        <template v-for="item in filtered" :key="item.name">
           <slot
             name="row"
             v-bind="{
@@ -45,6 +45,12 @@
             </td>
           </tr>
         </template>
+
+        <tr v-if="!filtered.length">
+          <td colspan="4" class="text-center text-disabled text-body-2">
+            {{ t('search.no-results') }}
+          </td>
+        </tr>
       </tbody>
     </v-table>
   </app-sheet>
@@ -52,13 +58,17 @@
 
 <script setup lang="ts">
   // Composables
+  import { useI18n } from 'vue-i18n'
   import { useTheme } from 'vuetify'
 
   // Utilities
-  import { PropType } from 'vue'
+  import { computed, PropType } from 'vue'
+
+  // Stores
+  import { useAppStore } from '@/store/app'
   import { useLocaleStore } from '@/store/locale'
 
-  defineProps({
+  const props = defineProps({
     headers: {
       type: Array as PropType<string[]>,
       default: () => ([]),
@@ -70,7 +80,19 @@
   })
 
   const { current: theme } = useTheme()
+  const { t } = useI18n()
+  const appStore = useAppStore()
   const localeStore = useLocaleStore()
 
   const DEV = import.meta.env.DEV
+
+  const filtered = computed(() => {
+    if (!appStore.apiSearch) return props.items
+
+    const query = appStore.apiSearch.toLowerCase()
+
+    return props.items.filter((item: any) => {
+      return item.name.toLowerCase().includes(query)
+    })
+  })
 </script>

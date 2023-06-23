@@ -62,19 +62,19 @@
       benefits: [
         {
           emoji: '🐛',
-          text: "Together, we'll tackle live debugging, solving real-time issues and bolstering system stability",
+          text: 'Get help debugging your Vue / Vuetify application',
         },
         {
           emoji: '👀',
-          text: "We'll join forces in conducting a comprehensive code review, ensuring efficiency, readability, and best practices",
+          text: 'We can review and provide feedback on how to improve your Vuetify implementation',
         },
         {
           emoji: '🧪',
-          text: "Together, we'll carry out unit tests, verifying the functionality of each individual part of your software",
+          text: 'Get help setting up unit tests that ensure your application continues to run as expected',
         },
         {
           emoji: '🖥️',
-          text: "Through paired programming sessions, we'll collaborate in problem-solving and producing high-quality code",
+          text: 'We can collaborate in problem-solving in a personalized training session with you and your team',
         },
       ],
       href: 'https://l.kintell.com/M9y7D7',

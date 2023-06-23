@@ -1,0 +1,7 @@
+@use '../../styles/settings'
+
+@mixin input-density($name, $input-densities, $input-chips-margin-bottom)
+  @each $input-density, $input-multiplier in $input-densities
+    @each $input-chips-margin-bottom-density, $input-chips-margin-bottom-multiplier in $input-chips-margin-bottom
+      .#{$name}--density-#{$input-density}
+        @content($input-multiplier * settings.$spacer, $input-chips-margin-bottom-multiplier * settings.$spacer)
