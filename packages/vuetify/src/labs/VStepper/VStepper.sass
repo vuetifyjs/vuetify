@@ -6,23 +6,26 @@
   @include tools.elevation(2)
   @include tools.rounded(4px)
 
-.v-stepper__header
+  overflow: hidden
+
+.v-stepper-header
   @include tools.elevation(2)
 
   align-items: center
   display: flex
   position: relative
+  justify-content: space-between
   z-index: 1
 
-.v-stepper__content
-  padding: 1.5rem
+.v-stepper-window
+  margin: 1.5rem
 
 .v-stepper-item
-  display: flex
   align-items: center
-  padding: 1.5rem
-  flex: 1 0 auto
   color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
+  display: inline-flex
+  padding: 1.5rem
+  flex: none
 
   &--selected
     color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))

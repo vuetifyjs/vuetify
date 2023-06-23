@@ -5,9 +5,9 @@ import { VAvatar } from '@/components/VAvatar/VAvatar'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 
 // Utilities
+import { computed } from 'vue'
 import { VStepperSymbol } from './VStepper'
 import { genericComponent, propsFactory, useRender } from '@/util'
-
 
 export const makeVStepperItemProps = propsFactory({
   color: String,
@@ -27,6 +27,7 @@ export const VStepperItem = genericComponent()({
 
   setup (props, { slots }) {
     const group = useGroupItem(props, VStepperSymbol, false)
+    const step = computed(() => group?.value.value ?? props.value)
 
     useRender(() => {
       const hasColor = !group || group.isSelected.value
@@ -43,15 +44,14 @@ export const VStepperItem = genericComponent()({
           ]}
           onClick={ onClick }
         >
-          { !!group?.value.value && (
-            <VAvatar
-              class="v-stepper-item__avatar"
-              color={ hasColor ? props.color : undefined }
-              size={ 24 }
-            >
-              { group?.value.value }
-            </VAvatar>
-          )}
+          <VAvatar
+            class="v-stepper-item__avatar"
+            color={ hasColor ? props.color : undefined }
+            key="stepper-avatar"
+            size={ 24 }
+          >
+            { step.value }
+          </VAvatar>
 
           <div class="v-stepper-item__content">
             { slots.default?.() ?? props.text }
@@ -60,5 +60,5 @@ export const VStepperItem = genericComponent()({
       )
     })
     return {}
-  }
+  },
 })
