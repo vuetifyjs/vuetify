@@ -18,9 +18,12 @@
         align-self: flex-start
         flex: 1 1
 
-  .v-field:not(.v-field--focused)
+  .v-field
     input
-      min-width: 0
+      min-width: 64px 
+    &:not(.v-field--focused)
+      input
+        min-width: 0
 
   .v-field--dirty
     .v-autocomplete__selection
@@ -45,7 +48,7 @@
     display: inline-flex
     letter-spacing: inherit
     line-height: inherit
-    max-width: 100%
+    max-width: 90%
 
   input,
   &__selection
