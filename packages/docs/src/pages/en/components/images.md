@@ -63,6 +63,12 @@ If the provided aspect ratio doesn't match that of the actual image, the default
 
 <example file="v-img/slot-placeholder" />
 
+#### Error
+
+`v-img` has an `error` slot that can be used to display alternative content if an error occurs while loading your source image. A common use for this slot is to load a fallback image if your original image is not available.
+
+<example file="v-img/slot-error" />
+
 ### Misc
 
 #### Future image formats
