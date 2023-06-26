@@ -326,9 +326,9 @@ export default createVuetify({
 Install the following packages.
 
 ```bash
-$ yarn add @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons -D
+$ yarn add @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons -D
 // or
-$ npm install @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons -D
+$ npm install @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons -D
 ```
 
 Then register the global `font-awesome-icon` component and use the pre-defined `fa-svg` icon set. If you have access to Font Awesome Pro icons they can be added to the library in the same way.
@@ -340,11 +340,13 @@ import { aliases, fa } from 'vuetify/iconsets/fa-svg'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
 
 const app = createApp()
 
 app.component('font-awesome-icon', FontAwesomeIcon) // Register component globally
-library.add(fas) // Include needed icons
+library.add(fas) // Include needed solid icons
+library.add(far) // Include needed regular icons
 
 const vuetify = createVuetify({
   icons: {
