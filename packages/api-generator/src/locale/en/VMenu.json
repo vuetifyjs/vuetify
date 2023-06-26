@@ -7,6 +7,7 @@
     "disableKeys": "Removes all keyboard interaction",
     "internalActivator": "Detaches the menu content inside of the component as opposed to the document.",
     "maxHeight": "Sets the max height of the menu content",
+    "maxWidth": "Sets the maximum width for the component. Use '0' to use the width of the activator as the maximum width.",
     "offsetX": "Offset the menu on the x-axis. Works in conjunction with direction left/right",
     "offsetY": "Offset the menu on the y-axis. Works in conjunction with direction top/bottom",
     "openDelay": "Milliseconds to wait before opening component. Only works with the **open-on-hover** prop",
