@@ -43,13 +43,16 @@
             location="top"
           >
             <template #activator="{ props: tooltip }">
-              <v-btn
-                v-show="!action.hide"
-                class="me-2 text-medium-emphasis"
-                density="comfortable"
-                variant="text"
-                v-bind="mergeProps(action as any, tooltip)"
-              />
+              <v-fade-transition hide-on-leave>
+                <v-btn
+                  v-show="!action.hide"
+                  :key="action.icon"
+                  class="me-2 text-medium-emphasis"
+                  density="comfortable"
+                  variant="text"
+                  v-bind="mergeProps(action as any, tooltip)"
+                />
+              </v-fade-transition>
             </template>
 
             <span>{{ t(path) }}</span>
@@ -100,7 +103,7 @@
 
   // Utilities
   import { computed, mergeProps, onMounted, ref, shallowRef, watch } from 'vue'
-  import { getBranch } from '@/util/helpers'
+  import { getBranch, wait } from '@/util/helpers'
   import { getExample } from 'virtual:examples'
   import { upperFirst } from 'lodash-es'
 
@@ -135,6 +138,7 @@
   const template = ref(0)
   const hasRendered = ref(false)
   const isEager = shallowRef(false)
+  const copied = shallowRef(false)
 
   const component = shallowRef()
   const code = ref<string>()
@@ -228,12 +232,18 @@
       hide: xs.value,
     },
     {
-      icon: 'mdi-clipboard-multiple-outline',
+      icon: copied.value ? 'mdi-check' : 'mdi-clipboard-multiple-outline',
       path: 'copy-example-source',
-      onClick: () => {
+      onClick: async () => {
         navigator.clipboard.writeText(
           sections.value.map(section => section.content).join('\n')
         )
+
+        copied.value = true
+
+        await wait(2000)
+
+        copied.value = false
       },
       hide: xs.value,
     },
