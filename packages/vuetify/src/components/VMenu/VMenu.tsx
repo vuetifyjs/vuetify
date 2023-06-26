@@ -85,10 +85,14 @@ export const VMenu = genericComponent<OverlaySlots>()({
     function onKeydown (e: KeyboardEvent) {
       if (props.disabled) return
 
-      const tabbable = tabbableChildren(overlay.value?.contentEl as Element)
-      if (e.key === 'Tab' && !tabbable.length) {
-        isActive.value = false
-        overlay.value?.activatorEl?.focus()
+      if (e.key === 'Tab') {
+        const tabbable = tabbableChildren(overlay.value?.contentEl as Element)
+        const targetIndex = tabbable.indexOf(e.target as HTMLElement)
+        const nextElement = tabbable[targetIndex + (e.shiftKey ? -1 : 1)]
+        if (!nextElement) {
+          isActive.value = false
+          overlay.value?.activatorEl?.focus()
+        }
       }
     }
 
