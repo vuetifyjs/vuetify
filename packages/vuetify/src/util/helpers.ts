@@ -596,4 +596,8 @@ export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 
   }
 }
 
+export function isEmpty (val: any): boolean {
+  return val === null || val === undefined || (typeof val === 'string' && val.trim() === '')
+}
+
 export function noop () {}
