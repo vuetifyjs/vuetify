@@ -60,7 +60,7 @@ export const makeVNavigationDrawerProps = propsFactory({
     default: 56,
   },
   scrim: {
-    type: [String, Boolean],
+    type: [Boolean, String],
     default: true,
   },
   image: String,

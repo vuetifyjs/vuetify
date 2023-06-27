@@ -28,9 +28,15 @@ The following releases are currently under development:
 ### v3.4 (Blackguard)
 
 - **Target Release:** Q3 2023
-- **Overview:** This release will be smaller in scope with a primary focus on expanding our testing coverage and will include 4 new components:
-  - `<v-overflow-btn>`
+- **Overview:** This release will be smaller in scope with a primary focus on expanding our testing coverage and will include 9 new components:
+  - `<v-bottom-sheet>`
+  - `<v-data-iterator>`
+  - `<v-data-table>`
+  - `<v-date-picker>`
+  - `<v-infinite-scroll>`
   - `<v-otp-input>`
+  - `<v-overflow-btn>`
+  - `<v-skeleton-loader>`
   - `<v-speed-dial>`
   - `<v-stepper>`
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/61)
