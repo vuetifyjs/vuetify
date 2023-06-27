@@ -91,7 +91,7 @@ export const makeVOverlayProps = propsFactory({
   modelValue: Boolean,
   persistent: Boolean,
   scrim: {
-    type: [String, Boolean],
+    type: [Boolean, String],
     default: true,
   },
   zIndex: {
