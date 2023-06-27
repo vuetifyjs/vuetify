@@ -75,8 +75,9 @@ export const VFooter = genericComponent()({
         ]}
         style={[
           backgroundColorStyles.value,
-          props.app ? layoutItemStyles.value : undefined,
-          { height: convertToUnit(props.height) },
+          props.app ? layoutItemStyles.value : {
+            height: convertToUnit(props.height),
+          },
           props.style,
         ]}
         v-slots={ slots }
