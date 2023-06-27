@@ -114,7 +114,7 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
     const startStatus = ref<InfiniteScrollStatus>('ok')
     const endStatus = ref<InfiniteScrollStatus>('ok')
     const margin = computed(() => convertToUnit(props.margin))
-    const isIntersecting = ref<boolean>(false)
+    const isIntersecting = ref(false)
 
     function setScrollAmount (amount: number) {
       if (!rootEl.value) return
