@@ -121,7 +121,9 @@
   const icon = computed(() => clicked.value ? 'mdi-check' : 'mdi-clipboard-text-outline')
 
   async function copy () {
-    navigator.clipboard.writeText(props.code)
+    const el = root.value?.$el.querySelector('code')
+
+    navigator.clipboard.writeText(props.code || el?.innerText || '')
 
     clicked.value = true
 
