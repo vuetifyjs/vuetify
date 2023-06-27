@@ -4,7 +4,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject, provide, toRef } from 'vue'
-import { getObjectValueByPath, propsFactory } from '@/util'
+import { getObjectValueByPath, isEmpty, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -144,6 +144,9 @@ export function sortItems<T extends Record<string, any>> (
       [sortA, sortB] = [sortA, sortB].map(s => s != null ? s.toString().toLocaleLowerCase() : s)
 
       if (sortA !== sortB) {
+        if (isEmpty(sortA) && isEmpty(sortB)) return 0
+        if (isEmpty(sortA)) return -1
+        if (isEmpty(sortB)) return 1
         if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
         return stringCollator.compare(sortA, sortB)
       }

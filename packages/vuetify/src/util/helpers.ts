@@ -601,4 +601,8 @@ export function tabbableChildren (el: Element) {
   return focusable.filter(el => el.tabIndex >= 0)
 }
 
+export function isEmpty (val: any): boolean {
+  return val === null || val === undefined || (typeof val === 'string' && val.trim() === '')
+}
+
 export function noop () {}

@@ -13,7 +13,6 @@ import { computed, ref } from 'vue'
 import { genericComponent, omit, propsFactory } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
 import { getWeek, toIso } from '../date/date'
 import { dateEmits, makeDateProps } from '../VDateInput/composables'
 import { useDate } from '@/labs/date'
@@ -23,11 +22,6 @@ export const makeVDatePickerMonthProps = propsFactory({
   showAdjacentMonths: Boolean,
   hideWeekdays: Boolean,
   showWeek: Boolean,
-  range: {
-    default: false,
-    type: [String, Boolean] as PropType<'start' | 'end' | boolean>,
-    validator: (v: any) => typeof v === 'boolean' || ['start', 'end'].includes(v),
-  },
   hoverDate: null,
   multiple: Boolean,
   side: {

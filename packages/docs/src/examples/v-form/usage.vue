@@ -54,7 +54,7 @@
         value => {
           if (value) return true
 
-          return 'Name is requred.'
+          return 'Name is required.'
         },
         value => {
           if (value?.length <= 10) return true
