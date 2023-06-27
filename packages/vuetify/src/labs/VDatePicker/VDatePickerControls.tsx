@@ -32,7 +32,7 @@ export const makeVDatePickerControlsProps = propsFactory({
   },
   range: {
     default: false,
-    type: [String, Boolean],
+    type: [Boolean, String],
     validator: (v: any) => v === false || ['start', 'end'].includes(v),
   },
   ...omit(makeDateProps(), ['modelValue', 'inputMode']),
