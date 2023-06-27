@@ -1,7 +1,7 @@
 <template>
-  <div class="py-4">
+  <div>
     <v-img
-      class="mx-auto mb-10"
+      class="mx-auto my-6"
       max-width="228"
       src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-v3-slim-text-light.svg"
     ></v-img>
@@ -12,7 +12,6 @@
       max-width="448"
       rounded="lg"
     >
-
       <div class="text-subtitle-1 text-medium-emphasis">Account</div>
 
       <v-text-field

@@ -52,7 +52,7 @@ export default createVuetify({
 
 ## Sass color pack
 
-While convenient, the color pack increases the CSS export size by ~30kb. Some projects may only require the classes that are created at runtime from the Vuetify **theme** system. To disable the color pack feature, follow [sass variables](/styles/sass-variables) and set `$color-pack: false`{.text-no-wrap}.
+While convenient, the color pack increases the CSS export size by ~30kb. Some projects may only require the classes that are created at runtime from the Vuetify **theme** system. To disable the color pack feature, follow [sass variables](/features/sass-variables) and set `$color-pack: false`{.text-no-wrap}.
 
 ```scss { resource="main.scss" }
 @use 'vuetify' with (

@@ -3,9 +3,10 @@ import './VDatePicker.sass'
 
 // Components
 import { makeVDatePickerControlsProps, VDatePickerControls } from './VDatePickerControls'
-import { makeVDatePickerHeaderProps, VDatePickerHeader } from './VDatePickerHeader'
+import { VDatePickerHeader } from './VDatePickerHeader'
 import { makeVDatePickerMonthProps, VDatePickerMonth } from './VDatePickerMonth'
 import { makeVDatePickerYearsProps, VDatePickerYears } from './VDatePickerYears'
+import { VFadeTransition } from '@/components/transitions'
 import { VBtn } from '@/components/VBtn'
 import { VTextField } from '@/components/VTextField'
 import { dateEmits, makeDateProps } from '@/labs/VDateInput/composables'
@@ -15,14 +16,30 @@ import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 import { createDatePicker } from './composables'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useDate } from '@/labs/date'
 
 // Utilities
 import { computed, ref, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
+// Types
+export type VDatePickerSlots = {
+  header: {
+    header: string
+    appendIcon: string
+    'onClick:append': () => void
+  }
+}
+
 export const makeVDatePickerProps = propsFactory({
+  calendarIcon: {
+    type: String,
+    default: '$calendar',
+  },
+  keyboardIcon: {
+    type: String,
+    default: '$edit',
+  },
   cancelText: {
     type: String,
     default: '$vuetify.datePicker.cancel',
@@ -35,18 +52,20 @@ export const makeVDatePickerProps = propsFactory({
     type: String,
     default: '$vuetify.datePicker.input.placeholder',
   },
+  header: {
+    type: String,
+    default: '$vuetify.datePicker.header',
+  },
   hideActions: Boolean,
 
   ...makeDateProps(),
-  ...makeTransitionProps({ transition: 'fade' }),
   ...makeVDatePickerControlsProps(),
-  ...makeVDatePickerHeaderProps(),
   ...makeVDatePickerMonthProps(),
   ...makeVDatePickerYearsProps(),
   ...makeVPickerProps({ title: '$vuetify.datePicker.title' }),
 }, 'VDatePicker')
 
-export const VDatePicker = genericComponent()({
+export const VDatePicker = genericComponent<VDatePickerSlots>()({
   name: 'VDatePicker',
 
   props: makeVDatePickerProps(),
@@ -57,28 +76,38 @@ export const VDatePicker = genericComponent()({
     ...dateEmits,
   },
 
-  setup (props, { emit }) {
+  setup (props, { emit, slots }) {
     const adapter = useDate()
     const { t } = useLocale()
 
     createDatePicker(props)
 
+    const model = ref<any[]>(props.modelValue ?? [])
+    const isReversing = ref(false)
+
     const displayDate = useProxiedModel(props, 'displayDate', props.displayDate)
     const inputMode = useProxiedModel(props, 'inputMode', props.inputMode)
     const viewMode = useProxiedModel(props, 'viewMode', props.viewMode)
-    const inputModel = ref(props.modelValue?.length ? adapter.format(props.modelValue[0], 'keyboardDate') : '')
-    const selected = ref<any[]>(props.modelValue ?? [])
+
+    const inputModel = computed(() => model.value.length ? adapter.format(model.value[0], 'keyboardDate') : '')
     const title = computed(() => t(props.title))
+    const header = computed(() => model.value.length ? adapter.format(model.value[0], 'normalDateWithWeekday') : t(props.header))
+    const headerIcon = computed(() => inputMode.value === 'calendar' ? props.keyboardIcon : props.calendarIcon)
+    const headerTransition = computed(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
 
     watch(inputModel, () => {
       const { isValid, date } = adapter
 
-      selected.value = isValid(inputModel.value) ? [date(inputModel.value)] : []
+      model.value = isValid(inputModel.value) ? [date(inputModel.value)] : []
     })
 
-    watch(selected, () => {
+    watch(model, (val, oldVal) => {
       if (props.hideActions) {
-        emit('update:modelValue', selected.value)
+        emit('update:modelValue', val)
+      }
+
+      if (val[0] && oldVal[0]) {
+        isReversing.value = adapter.isBefore(val[0], oldVal[0])
       }
     })
 
@@ -87,12 +116,21 @@ export const VDatePicker = genericComponent()({
     }
     function onClickSave () {
       emit('click:save')
-      emit('update:modelValue', selected.value)
+      emit('update:modelValue', model.value)
     }
+    function onClickAppend () {
+      inputMode.value = inputMode.value === 'calendar' ? 'keyboard' : 'calendar'
+    }
+
+    const headerSlotProps = computed(() => ({
+      header: header.value,
+      appendIcon: headerIcon.value,
+      transition: headerTransition.value,
+      'onClick:append': onClickAppend,
+    }))
 
     useRender(() => {
       const [pickerProps] = VPicker.filterProps(props)
-      const [datePickerHeaderProps] = VDatePickerHeader.filterProps(props)
       const [datePickerControlsProps] = VDatePickerControls.filterProps(props)
       const [datePickerMonthProps] = VDatePickerMonth.filterProps(props)
       const [datePickerYearsProps] = VDatePickerYears.filterProps(props)
@@ -107,12 +145,10 @@ export const VDatePicker = genericComponent()({
           style={ props.style }
           title={ title.value }
           v-slots={{
-            header: () => (
+            header: () => slots.header?.(headerSlotProps.value) ?? (
               <VDatePickerHeader
-                { ...datePickerHeaderProps }
-                v-model:displayDate={ displayDate.value }
-                v-model:inputMode={ inputMode.value }
-                modelValue={ selected.value }
+                key="header"
+                { ...headerSlotProps.value }
               />
             ),
             default: () => inputMode.value === 'calendar' ? (
@@ -123,22 +159,23 @@ export const VDatePicker = genericComponent()({
                   v-model:viewMode={ viewMode.value }
                 />
 
-                <MaybeTransition transition={ props.transition } mode="out-in">
+                <VFadeTransition hideOnLeave>
                   { viewMode.value === 'month' ? (
                     <VDatePickerMonth
+                      key="date-picker-month"
                       { ...datePickerMonthProps }
-                      v-model={ selected.value }
+                      v-model={ model.value }
                       v-model:displayDate={ displayDate.value }
                     />
                   ) : (
                     <VDatePickerYears
+                      key="date-picker-years"
                       { ...datePickerYearsProps }
                       v-model:displayDate={ displayDate.value }
                       v-model:viewMode={ viewMode.value }
-                      height="300"
                     />
                   )}
-                </MaybeTransition>
+                </VFadeTransition>
               </>
             ) : (
               <div class="v-date-picker__input">

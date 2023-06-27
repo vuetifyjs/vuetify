@@ -7,6 +7,7 @@ import {
   getObjectValueByPath,
   getPropertyFromItem,
   humanReadableFileSize,
+  isEmpty,
   mergeDeep,
 } from '../helpers'
 
@@ -317,6 +318,17 @@ describe('helpers', () => {
       val.value = 'bar'
 
       expect(obj.a.value).toBe('bar')
+    })
+  })
+
+  describe('isEmpty', () => {
+    it('should be empty value', () => {
+      expect(isEmpty(null)).toBeTruthy()
+      expect(isEmpty(undefined)).toBeTruthy()
+      expect(isEmpty('')).toBeTruthy()
+      expect(isEmpty(' ')).toBeTruthy()
+      expect(isEmpty('sample text')).toBeFalsy()
+      expect(isEmpty(12345)).toBeFalsy()
     })
   })
 })

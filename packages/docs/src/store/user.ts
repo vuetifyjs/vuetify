@@ -81,6 +81,10 @@ export const useUserStore = defineStore('user', () => {
       data.notifications = { read: data.notifications }
     }
 
+    if (Array.isArray(data.composition)) {
+      data.composition = 'composition'
+    }
+
     Object.assign(state, merge(state, data))
   }
 

@@ -11,7 +11,7 @@ related:
 
 # Text and typography
 
-Control text size, alignment, wrapping, overflow, transforms and more. <inline slug="scrimba-typography" />
+Control text size, alignment, wrapping, overflow, transforms and more.
 
 <entry />
 

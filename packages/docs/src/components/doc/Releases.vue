@@ -1,6 +1,7 @@
 <template>
   <div class="border rounded my-6">
     <v-autocomplete
+      ref="autocomplete"
       v-model="search"
       :items="releases"
       :loading="store.isLoading"
@@ -111,6 +112,7 @@
   // Composables
   import { useDate } from 'vuetify/labs/date'
   import { useI18n } from 'vue-i18n'
+  import { useDisplay, version } from 'vuetify'
   import { useRoute, useRouter } from 'vue-router'
 
   // Stores
@@ -118,7 +120,6 @@
 
   // Utilities
   import { computed, onBeforeMount, ref, watch } from 'vue'
-  import { version } from 'vuetify'
   import { wait } from '@/util/helpers'
 
   const reactions = {
@@ -130,12 +131,14 @@
     eyes: '👀',
   }
 
+  const { smAndUp } = useDisplay()
   const { t } = useI18n()
   const date = useDate()
   const route = useRoute()
   const router = useRouter()
   const store = useReleasesStore()
 
+  const autocomplete = ref()
   const clicked = ref('copy-link')
   const search = ref<Release>()
 
@@ -190,7 +193,7 @@
   const publishedOn = computed(() => {
     if (!search.value?.published_at) return undefined
 
-    return date.format(new Date(search.value.published_at), 'fullDateWithWeekday')
+    return date.format(new Date(search.value.published_at), smAndUp.value ? 'fullDateWithWeekday' : 'normalDateWithWeekday')
   })
 
   onBeforeMount(async () => {
@@ -205,6 +208,8 @@
     if (!version) return
 
     router.push({ query: { version } })
+
+    autocomplete.value?.blur()
   })
 </script>
 

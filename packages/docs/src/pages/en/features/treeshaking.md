@@ -84,7 +84,7 @@ And that's it! Vuetify components and directives will be automatically imported 
 - import * as directives from 'vuetify/directives'
 ```
 
-<discovery />
+<promoted />
 
 ## Manual imports
 

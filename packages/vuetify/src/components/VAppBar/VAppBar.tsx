@@ -12,7 +12,7 @@ import { useSsrBoot } from '@/composables/ssrBoot'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, ref, shallowRef, toRef, watchEffect } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -106,21 +106,19 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
 
       return (height + extensionHeight)
     })
-    function setActive () {
-      if (scrollBehavior.value.hide) {
-        if (scrollBehavior.value.inverted) {
-          isActive.value = currentScroll.value > scrollThreshold.value
-        } else {
-          isActive.value = isScrollingUp.value || (currentScroll.value < scrollThreshold.value)
-        }
-      } else {
-        isActive.value = true
-      }
-    }
 
-    useToggleScope(() => !!props.scrollBehavior, () => {
-      watch(currentScroll, setActive, { immediate: true })
-      watch(scrollBehavior, setActive)
+    useToggleScope(computed(() => !!props.scrollBehavior), () => {
+      watchEffect(() => {
+        if (scrollBehavior.value.hide) {
+          if (scrollBehavior.value.inverted) {
+            isActive.value = currentScroll.value > scrollThreshold.value
+          } else {
+            isActive.value = isScrollingUp.value || (currentScroll.value < scrollThreshold.value)
+          }
+        } else {
+          isActive.value = true
+        }
+      })
     })
 
     const { ssrBootStyles } = useSsrBoot()

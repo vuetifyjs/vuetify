@@ -248,6 +248,48 @@ describe('VAutocomplete', () => {
     cy.get('.v-autocomplete__selection-text').should('have.text', `Item: {"id":1,"name":"a"}`)
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/16442
+  describe('null value', () => {
+    it('should allow null as legit itemValue', () => {
+      const items = [
+        { name: 'Default Language', code: null },
+        { code: 'en-US', name: 'English' },
+        { code: 'de-DE', name: 'German' },
+      ]
+
+      const selectedItems = null
+
+      cy.mount(() => (
+        <VAutocomplete
+          items={ items }
+          modelValue={ selectedItems }
+          itemTitle="name"
+          itemValue="code"
+        />
+      ))
+
+      cy.get('.v-autocomplete__selection').eq(0).invoke('text').should('equal', 'Default Language')
+    })
+    it('should mark input as "not dirty" when the v-model is null, but null is not present in the items', () => {
+      const items = [
+        { code: 'en-US', name: 'English' },
+        { code: 'de-DE', name: 'German' },
+      ]
+
+      cy.mount(() => (
+        <VAutocomplete
+          label="Language"
+          items={ items }
+          modelValue={ null }
+          itemTitle="name"
+          itemValue="code"
+        />
+      ))
+
+      cy.get('.v-field').should('not.have.class', 'v-field--dirty')
+    })
+  })
+
   describe('hide-selected', () => {
     it('should hide selected item(s)', () => {
       const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']

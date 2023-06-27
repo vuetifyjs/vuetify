@@ -113,7 +113,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
   setup (props, { attrs, slots, emit }) {
     const link = useLink(props, attrs)
-    const id = computed(() => props.value ?? link.href.value)
+    const id = computed(() => props.value === undefined ? link.href.value : props.value)
     const { select, isSelected, isIndeterminate, isGroupActivator, root, parent, openOnSelect } = useNestedItem(id, false)
     const list = useList()
     const isActive = computed(() =>

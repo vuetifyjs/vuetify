@@ -3853,15 +3853,16 @@
     find-cache-dir "^3.3.2"
     upath "^2.0.1"
 
-"@vuetify/vite-ssg@^0.20.2":
-  version "0.20.2"
-  resolved "https://registry.yarnpkg.com/@vuetify/vite-ssg/-/vite-ssg-0.20.2.tgz#a021397a88dd287b9f1332e8e5de75289a5af860"
-  integrity sha512-Mk7cUoxiwiIAEO2AWsu81tFUrh5CGKPoohSA4waCtT77nT33PSEekdNZgWaaw3/bhn8LiLW9jHj2Bf2FfVbpvg==
+"@vuetify/vite-ssg@^0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@vuetify/vite-ssg/-/vite-ssg-0.21.0.tgz#2a32064f7f83c3c03494fb192d6dea2e6fe97157"
+  integrity sha512-jzkKpKCUWqDx1MV7Qy/NCDELLIkl3UETPMM5HAkXDHI5ZrxYyjLl7TdPzIZXEo4FgmwKJkqNp49SstDddHXM5g==
   dependencies:
     chalk "^4.1.2"
     fs-extra "^10.0.0"
     html-minifier "^4.0.0"
     jsdom "^17.0.0"
+    piscina "^3.2.0"
     prettier "^2.4.1"
     yargs "^17.3.0"
 

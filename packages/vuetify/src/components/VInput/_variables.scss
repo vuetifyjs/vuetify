@@ -7,7 +7,11 @@ $input-density: ('default': 0, 'comfortable': -2, 'compact': -4) !default;
 $input-control-height: 56px !default;
 $input-font-size: tools.map-deep-get(settings.$typography, 'body-1', 'size') !default;
 $input-font-weight: tools.map-deep-get(settings.$typography, 'body-1', 'weight') !default;
-$input-line-height: 1.625 !default;
+$input-line-height: 1.5;
+
+// CHIPS
+$input-chips-margin-top: 2px !default;
+$input-chips-margin-bottom: ('default': 0, 'comfortable': 1, 'compact': 2) !default;
 
 // DETAILS
 $input-details-font-size: .75rem !default;
