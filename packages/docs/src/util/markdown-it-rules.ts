@@ -4,6 +4,15 @@ import type MarkdownIt from 'markdown-it'
 import type Renderer from 'markdown-it/lib/renderer'
 import type { RenderRule } from 'markdown-it/lib/renderer'
 
+function encodeAttr (value: string) {
+  return value
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/'/g, '&#39;')
+    .replace(/`/g, '&#96;')
+}
+
 function addCodeRules (md: MarkdownIt) {
   const fence = md.renderer.rules.fence
 
@@ -11,7 +20,7 @@ function addCodeRules (md: MarkdownIt) {
     const handler = fence || self.renderToken
     const token = tokens[idx]
 
-    return `<app-markup resource="${token?.attrs?.[0][1] ?? ''}" class="mb-4">${handler(tokens, idx, options, env, self)}</app-markup>`
+    return `<app-markup resource="${token?.attrs?.[0][1] ?? ''}" code="${encodeAttr(token?.content ?? '')}" class="mb-4">${handler(tokens, idx, options, env, self)}</app-markup>`
   }
   md.renderer.rules.code_inline = function (tokens, idx) {
     const token = tokens[idx]
