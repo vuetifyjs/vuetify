@@ -86,10 +86,16 @@ export const VMenu = genericComponent<OverlaySlots>()({
       if (props.disabled) return
 
       if (e.key === 'Tab') {
+        let el = e.target as HTMLElement
+        while (el.tabIndex < 0) {
+          el = el.parentElement as HTMLElement
+          el.focus()
+        }
+
         const tabbable = tabbableChildren(overlay.value?.contentEl as Element)
-        const targetIndex = tabbable.indexOf(e.target as HTMLElement)
+        const targetIndex = tabbable.indexOf(el as HTMLElement)
         const nextElement = tabbable[targetIndex + (e.shiftKey ? -1 : 1)]
-        if (!nextElement) {
+        if (!nextElement || !~targetIndex) {
           isActive.value = false
           overlay.value?.activatorEl?.focus()
         }
