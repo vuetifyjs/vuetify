@@ -68,7 +68,7 @@ export function createHeaders (
     const fixedOffsets = createRange(rowCount).fill(0)
 
     flat.forEach(({ column, row }) => {
-      const key = column.key
+      const key = column.key ?? ''
       for (let i = row; i <= row + (column.rowspan ?? 1) - 1; i++) {
         fixedRows[i].push({
           ...column,
