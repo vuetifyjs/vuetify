@@ -15,7 +15,7 @@ import { useScopeId } from '@/composables/scopeId'
 // Utilities
 import { computed, inject, mergeProps, provide, ref, shallowRef, watch } from 'vue'
 import { VMenuSymbol } from './shared'
-import { focusChild, genericComponent, getUid, omit, propsFactory, tabbableChildren, useRender } from '@/util'
+import { focusChild, genericComponent, getTabbableChild, getUid, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Component } from 'vue'
@@ -86,16 +86,8 @@ export const VMenu = genericComponent<OverlaySlots>()({
       if (props.disabled) return
 
       if (e.key === 'Tab') {
-        let el = e.target as HTMLElement
-        while (el.tabIndex < 0) {
-          el = el.parentElement as HTMLElement
-          el.focus()
-        }
-
-        const tabbable = tabbableChildren(overlay.value?.contentEl as Element)
-        const targetIndex = tabbable.indexOf(el as HTMLElement)
-        const nextElement = tabbable[targetIndex + (e.shiftKey ? -1 : 1)]
-        if (!nextElement || !~targetIndex) {
+        const nextElement = getTabbableChild(overlay.value?.contentEl as Element, e.shiftKey ? 'prev' : 'next')
+        if (!nextElement) {
           isActive.value = false
           overlay.value?.activatorEl?.focus()
         }

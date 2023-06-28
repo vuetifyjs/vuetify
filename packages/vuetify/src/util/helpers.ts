@@ -596,9 +596,20 @@ export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 
   }
 }
 
-export function tabbableChildren (el: Element) {
-  const focusable = focusableChildren(el)
-  return focusable.filter(el => el.tabIndex >= 0)
+export function getTabbableChild (el: Element, location?: 'next' | 'prev') {
+  const targets = ['button', '[href]', 'input:not([type="hidden"])', 'select', 'textarea', '[tabindex]']
+    .map(s => `${s}:not([disabled])`)
+    .join(', ')
+  const children = [...el.querySelectorAll(targets)] as HTMLElement[]
+
+  let _el
+  let idx = children.indexOf(document.activeElement as HTMLElement)
+  const inc = location === 'next' ? 1 : -1
+  do {
+    idx += inc
+    _el = children[idx]
+  } while ((!_el || _el.offsetParent == null || _el.tabIndex < 0) && idx < children.length && idx >= 0)
+  return _el
 }
 
 export function isEmpty (val: any): boolean {
