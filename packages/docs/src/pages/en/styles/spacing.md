@@ -93,13 +93,13 @@ The helper classes apply **margin** or **padding** at a given breakpoint. These 
 
 ### Horizontal
 
-Using the margin helper classes let you easily center content horizontally.
+Margin helper classes let you easily center content horizontally.
 
 <example file="spacing/horizontal" />
 
 ### Gap
 
-Using the gap helper classes let you easily apply a gap between content.
+Use the gap helper classes to easily apply a gap between content.
 
 <example file="spacing/gap" />
 
