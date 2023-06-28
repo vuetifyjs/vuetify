@@ -172,6 +172,26 @@ $utilities: () !default;
         ),
       ),
 
+      // gap utilities
+      "gap": (
+        responsive: true,
+        property: gap,
+        class: ga,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+      "gap-row": (
+        responsive: true,
+        property: row-gap,
+        class: gr,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+      "gap-column": (
+        responsive: true,
+        property: column-gap,
+        class: gc,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+
       // Margin utilities
       "margin": (
         responsive: true,
