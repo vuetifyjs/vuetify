@@ -8,10 +8,8 @@
 
     <app-bar />
 
-    <v-main>
-      <v-container class="px-4 text-center font-weight-light">
-        <router-view />
-      </v-container>
+    <v-main class="text-center font-weight-light">
+      <router-view />
     </v-main>
 
     <home-footer />

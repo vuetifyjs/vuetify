@@ -106,7 +106,7 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
           ]}
         >
           { hasPrepend && (
-            <div key="prepend" class="v-breadcrumbs__prepend">
+            <li key="prepend" class="v-breadcrumbs__prepend">
               { !slots.prepend ? (
                 <VIcon
                   key="prepend-icon"
@@ -126,7 +126,7 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
                   v-slots:default={ slots.prepend }
                 />
               )}
-            </div>
+            </li>
           )}
 
           { items.value.map(({ item, raw }, index, array) => (

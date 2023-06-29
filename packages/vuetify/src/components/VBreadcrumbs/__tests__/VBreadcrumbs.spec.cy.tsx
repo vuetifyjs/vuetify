@@ -75,7 +75,7 @@ describe('VBreadcrumbs', () => {
       </Application>
     ))
 
-    cy.get('a.v-breadcrumbs-item').should('exist').should('have.attr', 'href')
+    cy.get('a.v-breadcrumbs-item--link').should('exist').should('have.attr', 'href')
   })
 
   it('should use router if to is set', () => {
