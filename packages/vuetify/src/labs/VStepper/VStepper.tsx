@@ -2,11 +2,12 @@
 import './VStepper.sass'
 
 // Components
+import { VStepperActions } from './VStepperActions'
+import { VStepperHeader } from './VStepperHeader'
 import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 
 // Composables
 import { makeGroupProps, useGroup } from '@/composables/group'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed } from 'vue'
@@ -14,8 +15,6 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey } from 'vue'
-import { VStepperActions } from './VStepperActions'
-import { VStepperHeader } from './VStepperHeader'
 import type { GroupItemProvide } from '@/composables/group'
 
 export const VStepperSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-stepper')
