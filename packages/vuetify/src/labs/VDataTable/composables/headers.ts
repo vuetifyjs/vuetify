@@ -1,6 +1,6 @@
 // Utilities
 import { inject, provide, ref, watchEffect } from 'vue'
-import { createRange, consoleWarn, propsFactory } from '@/util'
+import { consoleWarn, createRange, propsFactory } from '@/util'
 
 // Types
 import type { DeepReadonly, InjectionKey, PropType, Ref } from 'vue'
