@@ -366,10 +366,16 @@
       border-inline-start-width: var(--v-field-border-width)
 
       @include tools.ltr()
-        border-radius: $field-border-radius 0 0 $field-border-radius
+        border-top-left-radius: inherit
+        border-top-right-radius: 0
+        border-bottom-right-radius: 0
+        border-bottom-left-radius: inherit
 
       @include tools.rtl()
-        border-radius: 0 $field-border-radius $field-border-radius 0
+        border-top-left-radius: 0
+        border-top-right-radius: inherit
+        border-bottom-right-radius: inherit
+        border-bottom-left-radius: 0
 
     &__notch
       flex: none
@@ -400,10 +406,16 @@
       border-inline-end-width: var(--v-field-border-width)
 
       @include tools.ltr()
-        border-radius: 0 $field-border-radius $field-border-radius 0
+        border-top-left-radius: 0
+        border-top-right-radius: inherit
+        border-bottom-right-radius: inherit
+        border-bottom-left-radius: 0
 
       @include tools.rtl()
-        border-radius: $field-border-radius 0 0 $field-border-radius
+        border-top-left-radius: inherit
+        border-top-right-radius: 0
+        border-bottom-right-radius: 0
+        border-bottom-left-radius: inherit
 /* endregion */
 /* region LOADER */
 .v-field__loader
