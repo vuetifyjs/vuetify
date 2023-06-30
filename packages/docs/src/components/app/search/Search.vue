@@ -186,7 +186,7 @@
     return groups
   }
   function onDocumentKeydown (e: KeyboardEvent) {
-    if (!model.value && e.key === '/') {
+    if (!model.value && e.ctrlKey && e.key === 'k') {
       e.preventDefault()
 
       model.value = true

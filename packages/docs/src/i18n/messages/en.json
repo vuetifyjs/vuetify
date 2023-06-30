@@ -196,7 +196,7 @@
   "search": {
     "label": "Search",
     "looking": "Looking for",
-    "key-hint": "Press /",
+    "key-hint": "Ctrl+K",
     "results": "Your search results will appear here",
     "no-results": "No results found"
   },
