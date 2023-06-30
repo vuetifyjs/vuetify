@@ -24,7 +24,7 @@
               :href="item.href"
               target="_blank"
               rel="noopener"
-              class="mb-6"
+              class="mb-6 text-none"
               color="primary"
               block
               text="Book Now"
@@ -61,6 +61,10 @@
       suffix: '/60m',
       benefits: [
         {
+          emoji: '🖥️',
+          text: 'We can collaborate in problem-solving in a personalized training session with you and your team',
+        },
+        {
           emoji: '🐛',
           text: 'Get help debugging your Vue / Vuetify application',
         },
@@ -71,10 +75,6 @@
         {
           emoji: '🧪',
           text: 'Get help setting up unit tests that ensure your application continues to run as expected',
-        },
-        {
-          emoji: '🖥️',
-          text: 'We can collaborate in problem-solving in a personalized training session with you and your team',
         },
       ],
       href: 'https://l.kintell.com/M9y7D7',
@@ -110,6 +110,10 @@
       suffix: '/mo',
       benefits: [
         {
+          emoji: '📝',
+          text: "We work with your company to forge a customized SLA plan, tailored for your development team's productivity and growth",
+        },
+        {
           emoji: '💬',
           text: 'Direct chat access to the Vuetify team through Discord with guaranteed response times',
         },
@@ -120,10 +124,6 @@
         {
           emoji: '🎯',
           text: 'Get priority on reported or identified Vuetify GitHub issues and bugs',
-        },
-        {
-          emoji: '📝',
-          text: "We work with your company to forge a customized SLA plan, tailored for your development team's productivity and growth",
         },
       ],
       href: 'https://l.kintell.com/E7El3W',
