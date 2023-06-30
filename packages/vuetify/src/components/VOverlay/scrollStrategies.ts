@@ -88,7 +88,11 @@ function blockScrollStrategy (data: ScrollStrategyData, props: StrategyProps) {
   scrollElements.forEach((el, i) => {
     el.style.setProperty('--v-body-scroll-x', convertToUnit(-el.scrollLeft))
     el.style.setProperty('--v-body-scroll-y', convertToUnit(-el.scrollTop))
-    el.style.setProperty('--v-scrollbar-offset', convertToUnit(scrollbarWidth))
+
+    if (el !== document.documentElement) {
+      el.style.setProperty('--v-scrollbar-offset', convertToUnit(scrollbarWidth))
+    }
+
     el.classList.add('v-overlay-scroll-blocked')
   })
 
