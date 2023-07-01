@@ -60,7 +60,7 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
     const loaderColor = computed(() => {
       return typeof props.loading === 'string' && props.loading !== ''
         ? props.loading
-        : props.color
+        : (props.color || 'primary')
     })
 
     const uid = getUid()
