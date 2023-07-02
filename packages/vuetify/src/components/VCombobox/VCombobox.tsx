@@ -11,8 +11,10 @@ import { VMenu } from '@/components/VMenu'
 import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VTextField } from '@/components/VTextField'
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
+import { VVirtualScroll } from '@/components/VVirtualScroll'
 
 // Composables
+import { useScrolling } from '../VSelect/useScrolling'
 import { useTextColor } from '@/composables/color'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useForm } from '@/composables/form'
@@ -184,7 +186,7 @@ export const VCombobox = genericComponent<new <
       }
     })
 
-    const { filteredItems, getMatches } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
+    const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
 
     const selections = computed(() => {
       return model.value.map(v => {
@@ -216,7 +218,7 @@ export const VCombobox = genericComponent<new <
     ))
 
     const listRef = ref<VList>()
-
+    const { onListScroll, onListKeydown } = useScrolling(listRef, vTextFieldRef)
     function onClear (e: MouseEvent) {
       cleared = true
 
@@ -320,11 +322,6 @@ export const VCombobox = genericComponent<new <
       if (e.key === 'Enter' && search.value) {
         select(transformItem(props, search.value))
         search.value = ''
-      }
-    }
-    function onListKeydown (e: KeyboardEvent) {
-      if (e.key === 'Tab') {
-        vTextFieldRef.value?.focus()
       }
     }
     function onAfterLeave () {
@@ -458,6 +455,7 @@ export const VCombobox = genericComponent<new <
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
+                      onScrollPassive={ onListScroll }
                       tabindex="-1"
                     >
                       { slots['prepend-item']?.() }
@@ -466,19 +464,21 @@ export const VCombobox = genericComponent<new <
                         <VListItem title={ t(props.noDataText) } />
                       ))}
 
-                      { displayItems.value.map((item, index) => {
-                        const itemProps = mergeProps(item.props, {
-                          key: index,
-                          active: (highlightFirst.value && index === 0) ? true : undefined,
-                          onClick: () => select(item),
-                        })
+                      <VVirtualScroll renderless items={ displayItems.value }>
+                        { ({ item, index, itemRef }) => {
+                          const itemProps = mergeProps(item.props, {
+                            ref: itemRef,
+                            key: index,
+                            active: (highlightFirst.value && index === 0) ? true : undefined,
+                            onClick: () => select(item),
+                          })
 
-                        return slots.item?.({
-                          item,
-                          index,
-                          props: itemProps,
-                        }) ?? (
-                          <VListItem { ...itemProps }>
+                          return slots.item?.({
+                            item,
+                            index,
+                            props: itemProps,
+                          }) ?? (
+                            <VListItem { ...itemProps }>
                             {{
                               prepend: ({ isSelected }) => (
                                 <>
@@ -503,8 +503,9 @@ export const VCombobox = genericComponent<new <
                               },
                             }}
                           </VListItem>
-                        )
-                      })}
+                          )
+                        }}
+                      </VVirtualScroll>
 
                       { slots['append-item']?.() }
                     </VList>

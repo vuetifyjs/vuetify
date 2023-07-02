@@ -9,10 +9,11 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
-import { VTextField } from '@/components/VTextField'
-import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
+import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
+import { VVirtualScroll } from '@/components/VVirtualScroll'
 
 // Composables
+import { useScrolling } from './useScrolling'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
@@ -160,7 +161,7 @@ export const VSelect = genericComponent<new <
     ))
 
     const listRef = ref<VList>()
-
+    const { onListScroll, onListKeydown } = useScrolling(listRef, vTextFieldRef)
     function onClear (e: MouseEvent) {
       if (props.openOnClear) {
         menu.value = true
@@ -213,11 +214,6 @@ export const VSelect = genericComponent<new <
       const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
       if (item !== undefined) {
         model.value = [item]
-      }
-    }
-    function onListKeydown (e: KeyboardEvent) {
-      if (e.key === 'Tab') {
-        vTextFieldRef.value?.focus()
       }
     }
     function select (item: ListItem) {
@@ -321,6 +317,7 @@ export const VSelect = genericComponent<new <
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
+                      onScrollPassive={ onListScroll }
                       tabindex="-1"
                     >
                       { slots['prepend-item']?.() }
@@ -329,39 +326,42 @@ export const VSelect = genericComponent<new <
                         <VListItem title={ t(props.noDataText) } />
                       ))}
 
-                      { displayItems.value.map((item, index) => {
-                        const itemProps = mergeProps(item.props, {
-                          key: index,
-                          onClick: () => select(item),
-                        })
+                      <VVirtualScroll renderless items={ displayItems.value }>
+                        { ({ item, index, itemRef }) => {
+                          const itemProps = mergeProps(item.props, {
+                            ref: itemRef,
+                            key: index,
+                            onClick: () => select(item),
+                          })
 
-                        return slots.item?.({
-                          item,
-                          index,
-                          props: itemProps,
-                        }) ?? (
-                          <VListItem { ...itemProps }>
-                            {{
-                              prepend: ({ isSelected }) => (
-                                <>
-                                  { props.multiple && !props.hideSelected ? (
-                                    <VCheckboxBtn
-                                      key={ item.value }
-                                      modelValue={ isSelected }
-                                      ripple={ false }
-                                      tabindex="-1"
-                                    />
-                                  ) : undefined }
+                          return slots.item?.({
+                            item,
+                            index,
+                            props: itemProps,
+                          }) ?? (
+                            <VListItem { ...itemProps }>
+                              {{
+                                prepend: ({ isSelected }) => (
+                                  <>
+                                    { props.multiple && !props.hideSelected ? (
+                                      <VCheckboxBtn
+                                        key={ item.value }
+                                        modelValue={ isSelected }
+                                        ripple={ false }
+                                        tabindex="-1"
+                                      />
+                                    ) : undefined }
 
-                                  { item.props.prependIcon && (
-                                    <VIcon icon={ item.props.prependIcon } />
-                                  )}
-                                </>
-                              ),
-                            }}
-                          </VListItem>
-                        )
-                      })}
+                                    { item.props.prependIcon && (
+                                      <VIcon icon={ item.props.prependIcon } />
+                                    )}
+                                  </>
+                                ),
+                              }}
+                            </VListItem>
+                          )
+                        }}
+                      </VVirtualScroll>
 
                       { slots['append-item']?.() }
                     </VList>
