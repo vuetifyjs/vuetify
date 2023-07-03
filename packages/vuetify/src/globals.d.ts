@@ -91,7 +91,6 @@ declare module '@vue/runtime-core' {
   }
 
   export interface ComponentInternalInstance {
-    ctx: Record<string, unknown>
     provides: Record<string, unknown>
     setupState: any
   }

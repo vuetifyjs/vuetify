@@ -11,7 +11,7 @@ interface ResizeState {
   contentRect: DeepReadonly<Ref<DOMRectReadOnly | undefined>>
 }
 
-export function useResizeObserver (callback?: ResizeObserverCallback): ResizeState {
+export function useResizeObserver (callback?: ResizeObserverCallback, box: 'content' | 'border' = 'content'): ResizeState {
   const resizeRef = ref<HTMLElement>()
   const contentRect = ref<DOMRectReadOnly>()
 
@@ -21,7 +21,11 @@ export function useResizeObserver (callback?: ResizeObserverCallback): ResizeSta
 
       if (!entries.length) return
 
-      contentRect.value = entries[0].contentRect
+      if (box === 'content') {
+        contentRect.value = entries[0].contentRect
+      } else {
+        contentRect.value = entries[0].target.getBoundingClientRect()
+      }
     })
 
     onBeforeUnmount(() => {

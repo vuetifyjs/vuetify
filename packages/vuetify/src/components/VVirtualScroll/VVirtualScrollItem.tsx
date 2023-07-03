@@ -1,21 +1,34 @@
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { useResizeObserver } from '@/composables/resizeObserver'
-import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { onUpdated, watch } from 'vue'
+import { watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
+// Types
+import type { Ref } from 'vue'
+import type { GenericProps } from '@/util'
+
 export const makeVVirtualScrollItemProps = propsFactory({
-  dynamicHeight: Boolean,
   renderless: Boolean,
 
   ...makeComponentProps(),
 }, 'VVirtualScrollItem')
 
-export const VVirtualScrollItem = genericComponent<{ default: { props: Record<string, any> } | void }>()({
+export const VVirtualScrollItem = genericComponent<new <Renderless extends boolean = false>(
+  props: {
+    renderless?: Renderless
+  },
+  slots: {
+    default: Renderless extends true ? {
+      itemRef: Ref<HTMLElement | undefined>
+    } : never
+  }
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VVirtualScrollItem',
+
+  inheritAttrs: false,
 
   props: makeVVirtualScrollItemProps(),
 
@@ -23,37 +36,28 @@ export const VVirtualScrollItem = genericComponent<{ default: { props: Record<st
     'update:height': (height: number) => true,
   },
 
-  setup (props, { emit, slots }) {
-    const { resizeRef, contentRect } = useResizeObserver()
+  setup (props, { attrs, emit, slots }) {
+    const { resizeRef, contentRect } = useResizeObserver(undefined, 'border')
 
-    useToggleScope(() => props.dynamicHeight, () => {
-      watch(() => contentRect.value?.height, height => {
-        if (height != null) emit('update:height', height)
-      })
+    watch(() => contentRect.value?.height, height => {
+      if (height != null) emit('update:height', height)
     })
-
-    function updateHeight () {
-      if (props.dynamicHeight && contentRect.value) {
-        emit('update:height', contentRect.value.height)
-      }
-    }
-
-    onUpdated(updateHeight)
 
     useRender(() => props.renderless ? (
       <>
-        { slots.default?.({ props: { ref: props.dynamicHeight ? resizeRef : undefined } }) }
+        { slots.default?.({ itemRef: resizeRef }) }
       </>
     ) : (
       <div
-        ref={ props.dynamicHeight ? resizeRef : undefined }
+        ref={ resizeRef }
         class={[
           'v-virtual-scroll__item',
           props.class,
         ]}
         style={ props.style }
+        { ...attrs }
       >
-        { slots.default?.() }
+        { (slots.default as any)?.() }
       </div>
     ))
   },
