@@ -31,15 +31,15 @@ export default {
   },
   datePicker: {
     ok: 'OK',
-    cancel: 'Cancel',
+    cancel: 'لغو',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'تاریخ‌ها را انتخاب کنید',
+      header: 'تاریخ‌ها را وارد کنید',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'تاریخ‌ را انتخاب کنید',
+    header: 'تاریخ را وارد کنید',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'تاریخ را وارد کنید',
     },
   },
   noDataText: 'داده‌ای موجود نیست',
@@ -69,12 +69,12 @@ export default {
   pagination: {
     ariaLabel: {
       root: 'جهت یابی صفحه',
-      next: 'صفحه بعد',
-      previous: 'صفحه قبلی',
+      next: 'صفحه‌ی بعد',
+      previous: 'صفحه‌ی قبلی',
       page: 'برو صفحه {0}',
-      currentPage: '{0} صفحه فعلی ، صفحه',
-      first: 'First page',
-      last: 'Last page',
+      currentPage: '{0} صفحه‌ی فعلی ، صفحه‌ی',
+      first: 'صفحه‌ی اول',
+      last: 'صفحه‌ی آخر',
     },
   },
   rating: {
@@ -82,9 +82,9 @@ export default {
       item: 'Rating {0} of {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'بارگذاری...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'بارگذاری بیشتر',
+    empty: 'چیزی وجود ندارد',
   },
 }
