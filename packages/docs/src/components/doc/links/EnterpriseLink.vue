@@ -1,15 +1,11 @@
 <template>
   <app-btn
-    :to="{
-      name: 'Documentation',
-      params: {
-        category: 'introduction',
-        page: 'enterprise'
-      }
-    }"
+    href="https://vuetifyjs.com/en/introduction/enterprise-support/"
     path="enterprise"
     @click="onClick"
-  />
+  >
+    <i18n path="enterprise" />
+  </app-btn>
 </template>
 
 <script>

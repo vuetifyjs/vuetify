@@ -5,15 +5,9 @@
     :color="dark ? '#272727' : undefined"
     :right="rtl"
     app
-    floating
+    clipped
     width="300"
   >
-    <template #prepend>
-      <default-drawer-prepend />
-    </template>
-
-    <default-become-a-sponsor />
-
     <keep-alive>
       <default-list
         :key="key"
@@ -23,13 +17,35 @@
     </keep-alive>
 
     <div class="pt-12" />
+
+    <template #append>
+      <v-divider />
+
+      <div class="text--secondary text-caption py-2 px-3 d-flex align-center">
+        <div class="d-inline-flex align-center">
+          <v-icon left small>mdi-label</v-icon>
+          Latest release:
+        </div>
+
+        <v-btn
+          :href="`https://github.com/vuetifyjs/vuetify/releases/tag/v${version}`"
+          class="text-none px-2 ms-auto text--secondary"
+          small
+          rel="noopener noreferrer"
+          target="_blank"
+          text
+        >
+          v{{ version }}
+
+          <v-icon small right>mdi-open-in-new</v-icon>
+        </v-btn>
+      </div>
+    </template>
   </v-navigation-drawer>
 </template>
 
 <script>
   // Components
-  import DefaultBecomeASponsor from './BecomeASponsor'
-  import DefaultDrawerPrepend from './DrawerPrepend'
   import DefaultList from './List'
 
   // Utilities
@@ -42,8 +58,6 @@
     name: 'DefaultDrawer',
 
     components: {
-      DefaultBecomeASponsor,
-      DefaultDrawerPrepend,
       DefaultList,
     },
 
@@ -58,6 +72,7 @@
       ]),
       drawer: sync('app/drawer'),
       ualphabetical: get('user/drawer@alphabetical'),
+      version: get('app/version'),
       key () {
         return !this.ualphabetical ? 'simple' : 'alphabetical'
       },

@@ -24,6 +24,7 @@ export { SelectingTimes }
 
 type Period = 'am' | 'pm'
 type AllowFunction = (val: number) => boolean
+type ActivePicker = 'HOUR' | 'MINUTE' | 'SECOND'
 
 export default mixins(
   Picker,
@@ -33,6 +34,7 @@ export default mixins(
   name: 'v-time-picker',
 
   props: {
+    activePicker: String as PropType<ActivePicker>,
     allowedHours: [Function, Array] as PropType<AllowFunction | number[]>,
     allowedMinutes: [Function, Array] as PropType<AllowFunction | number[]>,
     allowedSeconds: [Function, Array] as PropType<AllowFunction | number[]>,
@@ -40,7 +42,7 @@ export default mixins(
     format: {
       type: String as PropType<'ampm' | '24hr'>,
       default: 'ampm',
-      validator (val) {
+      validator (val: any) {
         return ['ampm', '24hr'].includes(val)
       },
     },
@@ -177,6 +179,8 @@ export default mixins(
   },
 
   watch: {
+    activePicker: 'setPicker',
+    selecting: 'emitPicker',
     value: 'setInputData',
   },
 
@@ -196,6 +200,20 @@ export default mixins(
     emitValue () {
       const value = this.genValue()
       if (value !== null) this.$emit('input', value)
+    },
+    emitPicker (value: SelectingTimes) {
+      let activePicker = 'HOUR'
+      if (value === SelectingTimes.Minute) {
+        activePicker = 'MINUTE'
+      } else if (value === SelectingTimes.Second) {
+        activePicker = 'SECOND'
+      }
+      this.$emit('update:active-picker', activePicker)
+    },
+    setPicker (picker: ActivePicker) {
+      if (picker === 'HOUR') this.selecting = SelectingTimes.Hour
+      else if (picker === 'MINUTE') this.selecting = SelectingTimes.Minute
+      else if (picker === 'SECOND' && this.useSeconds) this.selecting = SelectingTimes.Second
     },
     setPeriod (period: Period) {
       this.period = period

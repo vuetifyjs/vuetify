@@ -29,6 +29,8 @@ export default mixins(
   props: {
     circle: Boolean,
     disabled: Boolean,
+    navigationColor: String,
+    navigationTextColor: String,
     length: {
       type: Number,
       default: 0,
@@ -89,7 +91,7 @@ export default mixins(
     items (): (string | number)[] {
       const totalVisible = parseInt(this.totalVisible, 10)
 
-      if (totalVisible === 0) {
+      if (totalVisible === 0 || isNaN(this.length) || this.length > Number.MAX_SAFE_INTEGER) {
         return []
       }
 
@@ -181,18 +183,21 @@ export default mixins(
     },
     genIcon (h: CreateElement, icon: string, disabled: boolean, fn: EventListener, label: String): VNode {
       return h('li', [
-        h('button', {
-          staticClass: 'v-pagination__navigation',
-          class: {
-            'v-pagination__navigation--disabled': disabled,
-          },
-          attrs: {
-            disabled,
-            type: 'button',
-            'aria-label': label,
-          },
-          on: disabled ? {} : { click: fn },
-        }, [h(VIcon, [icon])]),
+        h('button',
+          this.setBackgroundColor(this.navigationColor, {
+            staticClass: 'v-pagination__navigation',
+            class: {
+              'v-pagination__navigation--disabled': disabled,
+            },
+            attrs: {
+              disabled,
+              type: 'button',
+              'aria-label': label,
+            },
+            on: disabled ? {} : { click: fn },
+          }),
+          [h(VIcon, { props: { color: this.navigationTextColor } }, [icon])]
+        ),
       ])
     },
     genItem (h: CreateElement, i: string | number): VNode {

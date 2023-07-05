@@ -52,7 +52,7 @@ Vue.use(Vuetify)
 
 ## Spec Tests
 
-Creating unit tests in Vuetify are similar to **vuex** and **vue-router** in that you will use the Vuetify object in a **localVue** instance and pass an instance to the mount functions options. The difference is that **Vuetify** won't be used by the localVue instance.
+Creating unit tests in Vuetify is similar to **vuex** and **vue-router** in that you will use the Vuetify object in a **localVue** instance and pass an instance to the mount functions options. The difference is that **Vuetify** won't be used by the localVue instance.
 
 ```js
 // Imports
@@ -60,7 +60,7 @@ import AppBtn from '../AppBtn.vue'
 import Vuetify from 'vuetify'
 
 // Utilities
-import { createLocalVue, mount } from '@vue/test-utils'
+import { createLocalVue } from '@vue/test-utils'
 
 describe('AppBtn.vue', () => {
   // DO NOT use Vuetify on the localInstance
@@ -130,7 +130,6 @@ In the example above we have created a custom component with a **title** prop an
 // test/CustomCard.spec.js
 
 // Libraries
-import Vue from 'vue'
 import Vuetify from 'vuetify'
 
 // Components
@@ -241,7 +240,6 @@ Many of Vuetify's components utilize the global `$vuetify` object to derive sett
 // test/CustomAlert.spec.js
 
 // Libraries
-import Vue from 'vue'
 import Vuetify from 'vuetify'
 
 // Components
@@ -284,7 +282,6 @@ Keep in mind, you **only need to stub** the services that are being used. such a
 // test/CustomNavigationDrawer.spec.js
 
 // Libraries
-import Vue from 'vue'
 import Vuetify from 'vuetify'
 
 // Components
@@ -318,12 +315,12 @@ describe('CustomNavigationDrawer.vue', () => {
 
 A complete list of all services available are listed below:
 
-- [application](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/application)
-- [breakpoint](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/breakpoint)
-- [goto](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/goto)
-- [icons](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/icons)
-- [lang](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/lang)
-- [theme](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/theme)
+- [application](https://github.com/vuetifyjs/vuetify/tree/v2-stable/packages/vuetify/src/services/application)
+- [breakpoint](https://github.com/vuetifyjs/vuetify/tree/v2-stable/packages/vuetify/src/services/breakpoint)
+- [goto](https://github.com/vuetifyjs/vuetify/tree/v2-stable/packages/vuetify/src/services/goto)
+- [icons](https://github.com/vuetifyjs/vuetify/tree/v2-stable/packages/vuetify/src/services/icons)
+- [lang](https://github.com/vuetifyjs/vuetify/tree/v2-stable/packages/vuetify/src/services/lang)
+- [theme](https://github.com/vuetifyjs/vuetify/tree/v2-stable/packages/vuetify/src/services/theme)
 
 ## E2E tests
 

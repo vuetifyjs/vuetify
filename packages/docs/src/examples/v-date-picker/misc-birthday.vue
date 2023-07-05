@@ -22,7 +22,7 @@
       <v-date-picker
         v-model="date"
         :active-picker.sync="activePicker"
-        :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
+        :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substring(0, 10)"
         min="1950-01-01"
         @change="save"
       ></v-date-picker>

@@ -8,12 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Files per pàgina:',
     ariaLabel: {
-      sortDescending: 'Ordre descendent. Premi per treure la ordenació.',
-      sortAscending: 'Ordre ascendent. Premi per ordenar descendent.',
-      sortNone: 'Sense ordenar. Premi per ordenar ascendent.',
-      activateNone: 'Activate to remove sorting.',
-      activateDescending: 'Activate to sort descending.',
-      activateAscending: 'Activate to sort ascending.',
+      sortDescending: 'Ordre descendent.',
+      sortAscending: 'Ordre ascendent.',
+      sortNone: 'Sense ordenar.',
+      activateNone: 'Premi per treure la ordenació.',
+      activateDescending: 'Premi per ordenar descendent.',
+      activateAscending: 'Premi per ordenar ascendent.',
     },
     sortBy: 'Ordenat per',
   },
@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '{0} més',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} fitxers',
     counterSize: '{0} fitxers ({1} en total)',
@@ -63,7 +68,8 @@ export default {
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      icon: 'Puntuació {0} de {1}',
     },
   },
+  loading: 'Loading...',
 }

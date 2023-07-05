@@ -53,7 +53,7 @@ function checkIsActive (e: PointerEvent, binding: ClickOutsideDirective): boolea
   return isActive(e)
 }
 
-function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirective, vnode: VNode) {
+function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirective) {
   const handler = typeof binding.value === 'function' ? binding.value : binding.value!.handler
 
   el._clickOutside!.lastMousedownWasOutside && checkEvent(e, el, binding) && setTimeout(() => {
@@ -78,7 +78,7 @@ export const ClickOutside = {
   // available, iOS does not support
   // clicks on body
   inserted (el: HTMLElement, binding: ClickOutsideDirective, vnode: VNode) {
-    const onClick = (e: Event) => directive(e as PointerEvent, el, binding, vnode)
+    const onClick = (e: Event) => directive(e as PointerEvent, el, binding)
     const onMousedown = (e: Event) => {
       el._clickOutside!.lastMousedownWasOutside = checkEvent(e as PointerEvent, el, binding)
     }

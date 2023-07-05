@@ -3,7 +3,6 @@
 +theme(v-select) using ($material)
   .v-select__selections
     color: map-deep-get($material, 'text', 'primary')
-    min-height: $select-selections-min-height
 
   &.v-input--is-disabled
     .v-select__selections
@@ -64,7 +63,6 @@
     input
       flex: 1 1 // Doesn't resize on IE11 with 3rd param
       min-width: 0
-      pointer-events: none
       position: relative
 
     &:not(.v-text-field--single-line) input
@@ -119,6 +117,9 @@
     .v-select__selections
       flex-direction: row-reverse
 
+  &.v-input--is-disabled:not(.v-input--is-readonly):not(.v-autocomplete)
+    pointer-events: none
+
   &__selections
     align-items: center
     display: flex
@@ -133,6 +134,7 @@
 
     &--comma
       margin: $select-selections-margin
+      min-height: $select-selections-min-height
       overflow: hidden
       text-overflow: ellipsis
       white-space: nowrap

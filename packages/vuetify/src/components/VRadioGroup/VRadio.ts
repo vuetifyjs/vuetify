@@ -42,7 +42,10 @@ export default baseMixins.extend<options>().extend({
   inheritAttrs: false,
 
   props: {
-    disabled: Boolean,
+    disabled: {
+      type: Boolean,
+      default: null,
+    },
     id: String,
     label: String,
     name: String,
@@ -54,7 +57,10 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: '$radioOn',
     },
-    readonly: Boolean,
+    readonly: {
+      type: Boolean,
+      default: null,
+    },
     value: {
       default: null,
     },
@@ -74,6 +80,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     computedColor (): string | undefined {
+      if (this.isDisabled) return undefined
       return Selectable.options.computed.computedColor.call(this)
     },
     computedIcon (): string {
@@ -89,13 +96,13 @@ export default baseMixins.extend<options>().extend({
       return (this.radioGroup || {}).hasState
     },
     isDisabled (): boolean {
-      return this.disabled || (
+      return this.disabled ?? (
         !!this.radioGroup &&
         this.radioGroup.isDisabled
       )
     },
     isReadonly (): boolean {
-      return this.readonly || (
+      return this.readonly ?? (
         !!this.radioGroup &&
         this.radioGroup.isReadonly
       )

@@ -13,7 +13,9 @@ import {
   DataItemsPerPageOption,
   ItemGroup,
   RowClassFunction,
+  RowStyleFunction,
   DataTableItemProps,
+  DataTableFilterMode,
 } from 'vuetify/types'
 
 // Components
@@ -31,6 +33,7 @@ import MobileRow from './MobileRow'
 
 // Mixins
 import Loadable from '../../mixins/loadable'
+import Mouse from '../../mixins/mouse'
 
 // Directives
 import ripple from '../../directives/ripple'
@@ -39,7 +42,7 @@ import ripple from '../../directives/ripple'
 import mixins from '../../util/mixins'
 import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, defaultFilter, camelizeObjectKeys, getPropertyFromItem } from '../../util/helpers'
 import { breaking } from '../../util/console'
-import { mergeClasses } from '../../util/mergeData'
+import { mergeClasses, mergeStyles } from '../../util/mergeData'
 
 function filterFn (item: any, search: string | null, filter: DataTableFilterFunction) {
   return (header: DataTableHeader) => {
@@ -53,27 +56,46 @@ function searchTableItems (
   search: string | null,
   headersWithCustomFilters: DataTableHeader[],
   headersWithoutCustomFilters: DataTableHeader[],
-  customFilter: DataTableFilterFunction
+  customFilter: DataTableFilterFunction,
+  filterMode: DataTableFilterMode,
 ) {
   search = typeof search === 'string' ? search.trim() : null
 
-  return items.filter(item => {
-    // Headers with custom filters are evaluated whether or not a search term has been provided.
-    // We need to match every filter to be included in the results.
-    const matchesColumnFilters = headersWithCustomFilters.every(filterFn(item, search, defaultFilter))
+  if (filterMode === 'union') {
+    // If the `search` property is empty and there are no custom filters in use, there is nothing to do.
+    if (!(search && headersWithoutCustomFilters.length) && !headersWithCustomFilters.length) return items
 
-    // Headers without custom filters are only filtered by the `search` property if it is defined.
-    // We only need a single column to match the search term to be included in the results.
-    const matchesSearchTerm = !search || headersWithoutCustomFilters.some(filterFn(item, search, customFilter))
+    return items.filter(item => {
+      // Headers with custom filters are evaluated whether or not a search term has been provided.
+      if (headersWithCustomFilters.length && headersWithCustomFilters.every(filterFn(item, search, defaultFilter))) {
+        return true
+      }
 
-    return matchesColumnFilters && matchesSearchTerm
-  })
+      // Otherwise, the `search` property is used to filter columns without a custom filter.
+      return (search && headersWithoutCustomFilters.some(filterFn(item, search, customFilter)))
+    })
+  } else if (filterMode === 'intersection') {
+    return items.filter(item => {
+      // Headers with custom filters are evaluated whether or not a search term has been provided.
+      // We need to match every filter to be included in the results.
+      const matchesColumnFilters = headersWithCustomFilters.every(filterFn(item, search, defaultFilter))
+
+      // Headers without custom filters are only filtered by the `search` property if it is defined.
+      // We only need a single column to match the search term to be included in the results.
+      const matchesSearchTerm = !search || headersWithoutCustomFilters.some(filterFn(item, search, customFilter))
+
+      return matchesColumnFilters && matchesSearchTerm
+    })
+  } else {
+    return items
+  }
 }
 
 /* @vue/component */
 export default mixins(
   VDataIterator,
   Loadable,
+  Mouse,
 ).extend({
   name: 'v-data-table',
 
@@ -109,10 +131,18 @@ export default mixins(
       type: Function,
       default: defaultFilter,
     } as PropValidator<typeof defaultFilter>,
+    filterMode: {
+      type: String,
+      default: 'intersection',
+    } as PropValidator<DataTableFilterMode>,
     itemClass: {
       type: [String, Function],
       default: () => '',
     } as PropValidator<RowClassFunction | string>,
+    itemStyle: {
+      type: [String, Function],
+      default: () => '',
+    } as PropValidator<RowStyleFunction | string>,
     loaderHeight: {
       type: [Number, String],
       default: 4,
@@ -181,6 +211,9 @@ export default mixins(
 
       return itemsPerPage
     },
+    groupByText (): string {
+      return this.headers?.find(header => header.value === this.internalGroupBy?.[0])?.text ?? ''
+    },
   },
 
   created () {
@@ -219,15 +252,38 @@ export default mixins(
       this.widths = Array.from(this.$el.querySelectorAll('th')).map(e => e.clientWidth)
     },
     customFilterWithColumns (items: any[], search: string) {
-      return searchTableItems(items, search, this.headersWithCustomFilters, this.headersWithoutCustomFilters, this.customFilter)
+      return searchTableItems(
+        items,
+        search,
+        this.headersWithCustomFilters,
+        this.headersWithoutCustomFilters,
+        this.customFilter,
+        this.filterMode
+      )
     },
     customSortWithHeaders (items: any[], sortBy: string[], sortDesc: boolean[], locale: string) {
       return this.customSort(items, sortBy, sortDesc, locale, this.columnSorters)
     },
     createItemProps (item: any, index: number): DataTableItemProps {
-      const props = VDataIterator.options.methods.createItemProps.call(this, item, index)
+      const data = {
+        ...VDataIterator.options.methods.createItemProps.call(this, item, index),
+        headers: this.computedHeaders,
+      }
 
-      return Object.assign(props, { headers: this.computedHeaders })
+      return {
+        ...data,
+        attrs: {
+          class: {
+            'v-data-table__selected': data.isSelected,
+          },
+        },
+        on: {
+          ...this.getDefaultMouseEventHandlers(':row', () => data, true),
+          // TODO: the first argument should be the event, and the second argument should be data,
+          // but this is a breaking change so it's for v3
+          click: (event: MouseEvent) => this.$emit('click:row', item, data, event),
+        },
+      }
     },
     genCaption (props: DataScopeProps) {
       if (this.caption) return [this.$createElement('caption', [this.caption])]
@@ -375,7 +431,7 @@ export default mixins(
         const column = this.$createElement('td', {
           staticClass: 'text-start',
           attrs: this.colspanAttrs,
-        }, [toggle, `${props.options.groupBy[0]}: ${group}`, remove])
+        }, [toggle, `${this.groupByText}: ${group}`, remove])
 
         children.unshift(this.$createElement('template', { slot: 'column.header' }, [column]))
       }
@@ -499,6 +555,7 @@ export default mixins(
           { ...classes, 'v-data-table__selected': data.isSelected },
           getPropertyFromItem(item, this.itemClass)
         ),
+        style: mergeStyles({}, getPropertyFromItem(item, this.itemStyle)),
         props: {
           headers: this.computedHeaders,
           hideDefaultHeader: this.hideDefaultHeader,
@@ -507,13 +564,7 @@ export default mixins(
           rtl: this.$vuetify.rtl,
         },
         scopedSlots,
-        on: {
-          // TODO: for click, the first argument should be the event, and the second argument should be data,
-          // but this is a breaking change so it's for v3
-          click: () => this.$emit('click:row', item, data),
-          contextmenu: (event: MouseEvent) => this.$emit('contextmenu:row', event, data),
-          dblclick: (event: MouseEvent) => this.$emit('dblclick:row', event, data),
-        },
+        on: data.on,
       })
     },
     genBody (props: DataScopeProps): VNode | string | VNodeChildren {
@@ -597,6 +648,7 @@ export default mixins(
         props: simpleProps,
         class: {
           'v-data-table--mobile': this.isMobile,
+          'v-data-table--selectable': this.showSelect,
         },
       }, [
         this.proxySlot('top', getSlot(this, 'top', {

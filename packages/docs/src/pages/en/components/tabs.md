@@ -73,8 +73,6 @@ Make `v-tabs` lined up with the `v-toolbar-title` component using the **align-wi
 
 <example file="v-tabs/prop-align-with-title" />
 
-<promoted-ad slug="vuetify-zero-theme-pro" />
-
 #### Center active
 
 The **center-active** prop will make the active tab always centered

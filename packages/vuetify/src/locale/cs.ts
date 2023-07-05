@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '{0} dalších',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} souborů',
     counterSize: '{0} souborů ({1} celkem)',
@@ -66,4 +71,5 @@ export default {
       icon: 'Hodnocení {0} z {1}',
     },
   },
+  loading: 'Loading...',
 }

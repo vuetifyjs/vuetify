@@ -9,8 +9,9 @@
     width: $inner-dot-size
 
 @mixin timeline-wedge-align($direction)
-  .v-timeline-item__body
-    > .v-card:before, .v-card:after
+  .v-timeline-item__body > .v-card
+    &:not(.v-card--link)::before,
+    &::after
       +ltr()
         transform: rotate(if($direction == right, 180deg, 0))
         #{$direction}: -($timeline-wedge-size)
@@ -32,7 +33,7 @@
       text-align: if($direction == left, left, right)
 
 @mixin timeline-line-align($center, $first, $second)
-  &:before
+  &::before
     +ltr()
       #{$first}: calc(#{$center} - #{$timeline-line-width / 2})
       #{$second}: initial

@@ -149,6 +149,7 @@ export default VWindow.extend({
             small: true,
             value: this.getValue(this.items[i], i),
           },
+          key: i,
         }, [
           this.$createElement(VIcon, {
             props: { size: 18 },

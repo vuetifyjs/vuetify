@@ -7,7 +7,7 @@
     max-height="500"
     offset-y
     open-delay="60"
-    open-on-hover
+    :open-on-hover="openOnHover"
     transition="slide-y-transition"
     v-bind="$attrs"
     v-on="$listeners"
@@ -53,6 +53,10 @@
       items: {
         type: Array,
         default: () => ([]),
+      },
+      openOnHover: {
+        type: Boolean,
+        default: true,
       },
     },
   }

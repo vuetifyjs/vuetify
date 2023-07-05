@@ -125,7 +125,7 @@ To start development, in the command line type <kbd>yarn serve</kbd> or <kbd>npm
 
 ### Merging strategy
 
-Vuetify options are merged from the top down—_Defaults, Preset and User_. The [default](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/presets/default/index.ts) preset is first merged with a provided **preset** property in the Vuetify constructor options. If applicable, user supplied options will then be merged with the global defaults and preset.
+Vuetify options are merged from the top down—_Defaults, Preset and User_. The [default](https://github.com/vuetifyjs/vuetify/blob/v2-stable/packages/vuetify/src/presets/default/index.ts) preset is first merged with a provided **preset** property in the Vuetify constructor options. If applicable, user supplied options will then be merged with the global defaults and preset.
 
 ```js
 // src/plugins/vuetify.js
@@ -188,8 +188,6 @@ import Vuetify, { VRow } from 'vuetify/lib/framework'
 
 export default new Vuetify()
 ```
-
-<vuetify-ad slug="flairo-theme-pro" />
 
 ## Plugin development guide
 

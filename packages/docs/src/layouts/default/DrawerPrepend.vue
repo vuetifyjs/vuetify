@@ -7,8 +7,6 @@
       <vuetify-logo :to="{ name: 'Home' }" />
 
       <v-spacer />
-
-      <releases-menu />
     </v-list-item>
   </v-toolbar>
 </template>

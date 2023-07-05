@@ -23,21 +23,20 @@ export default Vue.extend({
   name: 'mouse',
 
   methods: {
-    getDefaultMouseEventHandlers (suffix: string, getEvent: MouseHandler): MouseEventsMap {
+    getDefaultMouseEventHandlers (suffix: string, getData: MouseHandler, eventFirst = false): MouseEventsMap {
+      const listeners = Object.keys(this.$listeners)
+        .filter(key => key.endsWith(suffix))
+        .reduce((acc, key) => {
+          acc[key] = { event: key.slice(0, -suffix.length) }
+          return acc
+        }, {} as MouseEvents)
+
       return this.getMouseEventHandlers({
-        ['click' + suffix]: { event: 'click' },
+        ...listeners,
         ['contextmenu' + suffix]: { event: 'contextmenu', prevent: true, result: false },
-        ['mousedown' + suffix]: { event: 'mousedown' },
-        ['mousemove' + suffix]: { event: 'mousemove' },
-        ['mouseup' + suffix]: { event: 'mouseup' },
-        ['mouseenter' + suffix]: { event: 'mouseenter' },
-        ['mouseleave' + suffix]: { event: 'mouseleave' },
-        ['touchstart' + suffix]: { event: 'touchstart' },
-        ['touchmove' + suffix]: { event: 'touchmove' },
-        ['touchend' + suffix]: { event: 'touchend' },
-      }, getEvent)
+      }, getData, eventFirst)
     },
-    getMouseEventHandlers (events: MouseEvents, getEvent: MouseHandler): MouseEventsMap {
+    getMouseEventHandlers (events: MouseEvents, getData: MouseHandler, eventFirst = false): MouseEventsMap {
       const on: MouseEventsMap = {}
 
       for (const event in events) {
@@ -86,7 +85,13 @@ export default Vue.extend({
               }
             }
 
-            this.$emit(event, getEvent(e), e)
+            // TODO: VCalendar emits the calendar event as the first argument,
+            // but it really should be the native event instead so modifiers can be used
+            if (eventFirst) {
+              this.$emit(event, e, getData(e))
+            } else {
+              this.$emit(event, getData(e), e)
+            }
           }
 
           return eventOptions.result

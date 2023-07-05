@@ -157,7 +157,7 @@ export default baseMixins.extend<options>().extend({
     computedCounterValue (): number {
       const value = this.multiple
         ? this.selectedItems
-        : (this.getText(this.selectedItems[0]) || '').toString()
+        : (this.getText(this.selectedItems[0]) ?? '').toString()
 
       if (typeof this.counterValue === 'function') {
         return this.counterValue(value)
@@ -261,6 +261,11 @@ export default baseMixins.extend<options>().extend({
       if (this.multiple) {
         this.$nextTick(() => {
           this.$refs.menu?.updateDimensions()
+        })
+      }
+      if (this.hideSelected) {
+        this.$nextTick(() => {
+          this.onScroll()
         })
       }
     },
@@ -519,14 +524,15 @@ export default baseMixins.extend<options>().extend({
       const props = this.$_menuProps as any
       props.activator = this.$refs['input-slot']
 
-      // Attach to root el so that
-      // menu covers prepend/append icons
-      if (
+      if ('attach' in props) void 0
+      else if (
         // TODO: make this a computed property or helper or something
         this.attach === '' || // If used as a boolean prop (<v-menu attach>)
         this.attach === true || // If bound to a boolean (<v-menu :attach="true">)
         this.attach === 'attach' // If bound as boolean prop in pug (v-menu(attach))
       ) {
+        // Attach to root el so that
+        // menu covers prepend/append icons
         props.attach = this.$el
       } else {
         props.attach = this.attach
@@ -638,7 +644,9 @@ export default baseMixins.extend<options>().extend({
       if (
         this.multiple ||
         !this.isInteractive ||
-        this.disableLookup
+        this.disableLookup ||
+        e.key.length > 1 ||
+        e.ctrlKey || e.metaKey || e.altKey
       ) return
 
       const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
@@ -650,7 +658,7 @@ export default baseMixins.extend<options>().extend({
       this.keyboardLookupLastTime = now
 
       const index = this.allItems.findIndex(item => {
-        const text = (this.getText(item) || '').toString()
+        const text = (this.getText(item) ?? '').toString()
 
         return text.toLowerCase().startsWith(this.keyboardLookupPrefix)
       })

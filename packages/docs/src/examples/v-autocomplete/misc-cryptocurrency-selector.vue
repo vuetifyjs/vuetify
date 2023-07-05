@@ -14,7 +14,7 @@
       hide-details
       hide-selected
       item-text="name"
-      item-value="symbol"
+      item-value="id"
       label="Search for a coin..."
       solo
     >

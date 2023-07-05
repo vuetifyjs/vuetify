@@ -3,9 +3,6 @@ meta:
   title: Sponsoring Vuetify
   description: Help support Vuetify by backing the project. This helps with the maintenance of existing features and the development of new ones.
   keywords: sponsor, backer, donations, patron, supporting vuetify, vuetify support
-related:
-  - /introduction/support/
-  - /introduction/enterprise/
 nav: Sponsors and backers
 ---
 
@@ -60,6 +57,6 @@ We thank all of our project sponsors for their continued support of Vuetify. If 
 
 If you run a business and are using Vuetify in a revenue-generating product, it makes business sense to sponsor Vuetify development: *it ensures the project that your product relies on stays healthy and actively maintained*. Vuetify is a **full-time** job for John and Heather; your sponsorship and contributions help support them.
 
-If you have any questions, please reach out to [sponsor@vuetifyjs.com](sponsor@vuetifyjs.com).
+If you have any questions, please reach out to [sponsor@vuetifyjs.com](mailto:sponsor@vuetifyjs.com).
 
 <backmatter />

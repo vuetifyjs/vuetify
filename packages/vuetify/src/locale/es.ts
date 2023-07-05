@@ -12,8 +12,8 @@ export default {
       sortAscending: 'Orden ascendente.',
       sortNone: 'Sin ordenar.',
       activateNone: 'Pulse para quitar orden.',
-      activateDescending: 'Pulse para ordenar descendente.',
-      activateAscending: 'Pulse para ordenar ascendente.',
+      activateDescending: 'Pulse para ordenar de forma descendente.',
+      activateAscending: 'Pulse para ordenar de forma ascendente.',
     },
     sortBy: 'Ordenado por',
   },
@@ -22,7 +22,7 @@ export default {
     itemsPerPageAll: 'Todos',
     nextPage: 'Página siguiente',
     prevPage: 'Página anterior',
-    firstPage: 'Primer página',
+    firstPage: 'Primera página',
     lastPage: 'Última página',
     pageText: '{0}-{1} de {2}',
   },
@@ -43,6 +43,11 @@ export default {
   },
   calendar: {
     moreEvents: '{0} más',
+  },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
   },
   fileInput: {
     counter: '{0} archivos',
@@ -66,4 +71,5 @@ export default {
       icon: 'Puntuación {0} de {1}',
     },
   },
+  loading: 'Loading...',
 }

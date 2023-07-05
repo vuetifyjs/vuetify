@@ -11,6 +11,7 @@ import mixins from '../../util/mixins'
 
 // Helpers
 import { convertToUnit } from '../../util/helpers'
+import mergeData from '../../util/mergeData'
 
 /* @vue/component */
 export default mixins(Themeable).extend({
@@ -39,8 +40,8 @@ export default mixins(Themeable).extend({
   },
 
   render (h, ctx): VNode {
-    const { children, listeners, props } = ctx
-    const data = {
+    const { children, listeners, props, data } = ctx
+    const newData = mergeData({
       staticClass: 'v-label',
       class: {
         'v-label--active': props.value,
@@ -58,8 +59,8 @@ export default mixins(Themeable).extend({
         position: props.absolute ? 'absolute' : 'relative',
       },
       ref: 'label',
-    }
+    }, data)
 
-    return h('label', Colorable.options.methods.setTextColor(props.focused && props.color, data), children)
+    return h('label', Colorable.options.methods.setTextColor(props.focused && props.color, newData), children)
   },
 })

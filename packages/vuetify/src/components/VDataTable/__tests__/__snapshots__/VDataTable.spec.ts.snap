@@ -2874,18 +2874,18 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-747"
+                       aria-owns="list-763"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-747"
+                      <label for="input-763"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-747"
+                        <input id="input-763"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -3424,7 +3424,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-751"
+               aria-owns="list-767"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3433,7 +3433,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
                   10
                 </div>
                 <input aria-label="Rows per page:"
-                       id="input-751"
+                       id="input-767"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -6154,7 +6154,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
 `;
 
 exports[`VDataTable.ts should not select item that is not selectable 1`] = `
-<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile v-data-table--selectable">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6911,7 +6911,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
                 </i>
               </span>
             </button>
-            name: Frozen Yogurt
+            Dessert (100g serving): Frozen Yogurt
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -6941,7 +6941,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
                 </i>
               </span>
             </button>
-            name: Ice cream sandwich
+            Dessert (100g serving): Ice cream sandwich
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8477,7 +8477,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 </i>
               </span>
             </button>
-            calories: 159
+            Calories: 159
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8551,7 +8551,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 </i>
               </span>
             </button>
-            calories: 237
+            Calories: 237
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8625,7 +8625,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 </i>
               </span>
             </button>
-            calories: 262
+            Calories: 262
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8699,7 +8699,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 </i>
               </span>
             </button>
-            calories: 305
+            Calories: 305
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8773,7 +8773,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 </i>
               </span>
             </button>
-            calories: 356
+            Calories: 356
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8988,7 +8988,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 </i>
               </span>
             </button>
-            protein: 0
+            Protein (g): 0
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -9099,7 +9099,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 </i>
               </span>
             </button>
-            protein: 3.9
+            Protein (g): 3.9
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -9168,7 +9168,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 </i>
               </span>
             </button>
-            protein: 4
+            Protein (g): 4
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -9237,7 +9237,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 </i>
               </span>
             </button>
-            protein: 4.3
+            Protein (g): 4.3
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -9436,19 +9436,19 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
       </thead>
       <tbody>
         <div>
-          {"item":{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%","class":"test"},"index":0,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
+          {"item":{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%","class":"test"},"index":0,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"attrs":{"class":{"v-data-table__selected":false}},"on":{}}
         </div>
         <div>
-          {"item":{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%","class":["test","second"]},"index":1,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
+          {"item":{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%","class":["test","second"]},"index":1,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"attrs":{"class":{"v-data-table__selected":false}},"on":{}}
         </div>
         <div>
-          {"item":{"name":"Eclair","calories":262,"fat":16,"carbs":23,"protein":6,"iron":"7%","class":{"test":true,"second":false}},"index":2,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
+          {"item":{"name":"Eclair","calories":262,"fat":16,"carbs":23,"protein":6,"iron":"7%","class":{"test":true,"second":false}},"index":2,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"attrs":{"class":{"v-data-table__selected":false}},"on":{}}
         </div>
         <div>
-          {"item":{"name":"Cupcake","calories":305,"fat":3.7,"carbs":67,"protein":4.3,"iron":"8%"},"index":3,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
+          {"item":{"name":"Cupcake","calories":305,"fat":3.7,"carbs":67,"protein":4.3,"iron":"8%"},"index":3,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"attrs":{"class":{"v-data-table__selected":false}},"on":{}}
         </div>
         <div>
-          {"item":{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"},"index":4,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
+          {"item":{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"},"index":4,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"attrs":{"class":{"v-data-table__selected":false}},"on":{}}
         </div>
       </tbody>
     </table>
@@ -10846,7 +10846,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
 `;
 
 exports[`VDataTable.ts should render with showSelect 1`] = `
-<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile v-data-table--selectable">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -11354,18 +11354,18 @@ exports[`VDataTable.ts should respect mustSort property on options 1`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-731"
+                       aria-owns="list-747"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-731"
+                      <label for="input-747"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-731"
+                        <input id="input-747"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -11504,7 +11504,7 @@ exports[`VDataTable.ts should respect mustSort property on options 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-735"
+               aria-owns="list-751"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -11513,7 +11513,7 @@ exports[`VDataTable.ts should respect mustSort property on options 1`] = `
                   10
                 </div>
                 <input aria-label="Rows per page:"
-                       id="input-735"
+                       id="input-751"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -11644,7 +11644,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
                 </i>
               </span>
             </button>
-            name: Assistance
+            Name: Assistance
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -11681,7 +11681,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
                 </i>
               </span>
             </button>
-            name: Candidat
+            Name: Candidat
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -11856,7 +11856,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
                 </i>
               </span>
             </button>
-            name: Candidat
+            Name: Candidat
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >

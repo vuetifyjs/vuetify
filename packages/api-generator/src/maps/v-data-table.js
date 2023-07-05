@@ -31,17 +31,12 @@ const DataTableEvents = [
   {
     name: 'click:row',
     source: 'v-data-table',
-    value: `any, ${dataString}`,
+    value: `any, ${dataString}, MouseEvent`,
   },
   {
-    name: 'contextmenu:row',
+    name: '<event>:row',
     source: 'v-data-table',
-    value: `MouseEvent, ${dataString}`,
-  },
-  {
-    name: 'dblclick:row',
-    source: 'v-data-table',
-    value: `MouseEvent, ${dataString}`,
+    value: `${dataString}, Event`,
   },
 ].concat(DataIteratorEvents)
 
@@ -81,6 +76,14 @@ const DataTableItemScopedProps = {
   ...DataIteratorItemScopedProps,
   headers: 'DataTableHeader[]',
   isMobile: 'boolean',
+  on: {
+    click: '(event: MouseEvent) => void',
+    contextmenu: '(event: MouseEvent) => void',
+    dblclick: '(event: MouseEvent) => void',
+  },
+  attrs: {
+    class: 'object',
+  },
 }
 
 const DataTableItemColumnScopedProps = {
@@ -88,6 +91,7 @@ const DataTableItemColumnScopedProps = {
   item: 'any',
   header: 'DataTableHeader',
   value: 'any',
+  index: 'number',
 }
 
 const DataTableHeaderSelectScopedProps = {
@@ -122,7 +126,7 @@ const DataGroupScopedProps = {
   options: DataOptions,
   isMobile: 'boolean',
   items: 'any[]',
-  headers: 'i DataTableHeader[]',
+  headers: 'DataTableHeader[]',
 }
 
 const DataGroupHeaderScopedProps = {
