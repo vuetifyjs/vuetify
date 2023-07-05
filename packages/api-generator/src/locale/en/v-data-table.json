@@ -11,6 +11,7 @@
     "disablePagination": "Disables pagination completely",
     "disableSort": "Disables sorting completely",
     "expandIcon": "Icon used for expand toggle button.",
+    "filterMode": "Controls how how custom column filters are combined with the default filtering. Both modes only apply the default filter to columns not specified in `customKeyFilter`.\n\n- **union**: There is at least one match from the default filter, OR all custom column filters match.\n- **intersection**: There is at least one match from the default filter, AND all custom column filters match.",
     "fixedHeader": "Fixed header to top of table. **NOTE:** Does not work in IE11",
     "groupBy": "Changes which item property should be used for grouping items. Currently only supports a single grouping in the format: `group` or `['group']`. When using an array, only the first element is considered. Can be used with `.sync` modifier",
     "groupDesc": "Changes which direction grouping is done. Can be used with `.sync` modifier",
