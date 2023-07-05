@@ -111,6 +111,10 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
       }
     })
 
+    watch(() => props.modelValue, val => {
+      model.value = val ?? []
+    }, { immediate: true })
+
     function onClickCancel () {
       emit('click:cancel')
     }
