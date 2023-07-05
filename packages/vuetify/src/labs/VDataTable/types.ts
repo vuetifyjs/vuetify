@@ -33,4 +33,5 @@ export interface DataTableItem<T = any> extends GroupableItem<T> {
   columns: {
     [key: string]: any
   }
+  key: string
 }

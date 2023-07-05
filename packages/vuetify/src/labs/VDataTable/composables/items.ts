@@ -11,26 +11,30 @@ export interface DataTableItemProps {
   items: any[]
   itemValue: SelectItemKey
   returnObject: boolean
+  itemKey: SelectItemKey
 }
 
 // Composables
-export const makeDataTableItemProps = propsFactory({
-  items: {
-    type: Array as PropType<DataTableItemProps['items']>,
-    default: () => ([]),
+export const makeDataTableItemProps = propsFactory(
+  {
+    items: {
+      type: Array as PropType<DataTableItemProps['items']>,
+      default: () => [],
+    },
+    itemValue: {
+      type: [String, Array, Function] as PropType<SelectItemKey>,
+      default: 'value',
+    },
+    returnObject: Boolean,
+    itemKey: {
+      type: [String, Array, Function] as PropType<SelectItemKey>,
+      default: 'id',
+    },
   },
-  itemValue: {
-    type: [String, Array, Function] as PropType<SelectItemKey>,
-    default: 'value',
-  },
-  returnObject: Boolean,
-}, 'v-data-table-item')
+  'v-data-table-item'
+)
 
-export function transformItem (
-  props: Omit<DataTableItemProps, 'items'>,
-  item: any,
-  columns: InternalDataTableHeader[]
-): DataTableItem {
+export function transformItem (props: Omit<DataTableItemProps, 'items'>, item: any, columns: InternalDataTableHeader[]): DataTableItem {
   const value = props.returnObject ? item : getPropertyFromItem(item, props.itemValue)
   const itemColumns = columns.reduce((obj, column) => {
     obj[column.key] = getPropertyFromItem(item, column.value ?? column.key)
@@ -42,6 +46,7 @@ export function transformItem (
     value,
     columns: itemColumns,
     raw: item,
+    key: getPropertyFromItem(item, props.itemKey),
   }
 }
 

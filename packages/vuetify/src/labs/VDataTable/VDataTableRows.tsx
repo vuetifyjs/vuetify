@@ -51,24 +51,27 @@ export type VDataTableRowsSlots = VDataTableGroupHeaderRowSlots & {
   'item.data-table-expand': [ItemSlot]
 } & { [key: `item.${string}`]: [ItemSlot] }
 
-export const makeVDataTableRowsProps = propsFactory({
-  loading: [Boolean, String],
-  loadingText: {
-    type: String,
-    default: '$vuetify.dataIterator.loadingText',
+export const makeVDataTableRowsProps = propsFactory(
+  {
+    loading: [Boolean, String],
+    loadingText: {
+      type: String,
+      default: '$vuetify.dataIterator.loadingText',
+    },
+    hideNoData: Boolean,
+    items: {
+      type: Array as PropType<readonly (DataTableItem | Group)[]>,
+      default: () => [],
+    },
+    noDataText: {
+      type: String,
+      default: '$vuetify.noDataText',
+    },
+    rowHeight: Number,
+    'onClick:row': Function as PropType<(e: Event, value: { item: DataTableItem }) => void>,
   },
-  hideNoData: Boolean,
-  items: {
-    type: Array as PropType<readonly (DataTableItem | Group)[]>,
-    default: () => ([]),
-  },
-  noDataText: {
-    type: String,
-    default: '$vuetify.noDataText',
-  },
-  rowHeight: Number,
-  'onClick:row': Function as PropType<(e: Event, value: { item: DataTableItem }) => void>,
-}, 'v-data-table-rows')
+  'v-data-table-rows'
+)
 
 export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
   name: 'VDataTableRows',
@@ -85,26 +88,16 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
     useRender(() => {
       if (props.loading && slots.loading) {
         return (
-          <tr
-            class="v-data-table-rows-loading"
-            key="loading"
-          >
-            <td colspan={ columns.value.length }>
-              { slots.loading() }
-            </td>
+          <tr class="v-data-table-rows-loading" key="loading">
+            <td colspan={ columns.value.length }>{ slots.loading() }</td>
           </tr>
         )
       }
 
       if (!props.loading && !props.items.length && !props.hideNoData) {
         return (
-          <tr
-            class="v-data-table-rows-no-data"
-            key="no-data"
-          >
-            <td colspan={ columns.value.length }>
-              { slots['no-data']?.() ?? t(props.noDataText) }
-            </td>
+          <tr class="v-data-table-rows-no-data" key="no-data">
+            <td colspan={ columns.value.length }>{ slots['no-data']?.() ?? t(props.noDataText) }</td>
           </tr>
         )
       }
@@ -113,22 +106,20 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
         <>
           { props.items.map((item, index) => {
             if (item.type === 'group') {
-              return slots['group-header'] ? slots['group-header']({
-                index,
-                item,
-                columns: columns.value,
-                isExpanded,
-                toggleExpand,
-                isSelected,
-                toggleSelect,
-                toggleGroup,
-                isGroupOpen,
-              } as GroupHeaderSlot) : (
-                <VDataTableGroupHeaderRow
-                  key={ `group-header_${item.id}` }
-                  item={ item }
-                  v-slots={ slots }
-                />
+              return slots['group-header'] ? (
+                slots['group-header']({
+                  index,
+                  item,
+                  columns: columns.value,
+                  isExpanded,
+                  toggleExpand,
+                  isSelected,
+                  toggleSelect,
+                  toggleGroup,
+                  isGroupOpen,
+                } as GroupHeaderSlot)
+              ) : (
+                <VDataTableGroupHeaderRow key={ `group-header_${item.id}` } item={ item } v-slots={ slots } />
               )
             }
 
@@ -144,15 +135,21 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
 
             return (
               <>
-                { slots.item ? slots.item(slotProps) : (
+                { slots.item ? (
+                  slots.item(slotProps)
+                ) : (
                   <VDataTableRow
-                    key={ `item_${item.value}` }
-                    onClick={ expandOnClick.value || props['onClick:row'] ? (event: Event) => {
-                      if (expandOnClick.value) {
-                        toggleExpand(item)
-                      }
-                      props['onClick:row']?.(event, { item })
-                    } : undefined }
+                    key={ `item_${item.key}` }
+                    onClick={
+                      expandOnClick.value || props['onClick:row']
+                        ? (event: Event) => {
+                          if (expandOnClick.value) {
+                            toggleExpand(item)
+                          }
+                          props['onClick:row']?.(event, { item })
+                        }
+                        : undefined
+                    }
                     index={ index }
                     item={ item }
                     v-slots={ slots }
