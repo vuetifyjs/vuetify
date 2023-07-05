@@ -133,13 +133,18 @@ export const VBtn = genericComponent<VBtnSlots>()({
     })
 
     function onClick (e: MouseEvent) {
-      if (isDisabled.value) return
+      if (
+        isDisabled.value ||
+        (link.isLink.value && (
+          e.metaKey ||
+          e.ctrlKey ||
+          e.shiftKey ||
+          (e.button !== 0) ||
+          attrs.target === '_blank'
+        ))
+      ) return
 
       link.navigate?.(e)
-
-      const shouldOpenInNewWindow = e.metaKey || attrs.target === '_blank'
-      if (shouldOpenInNewWindow) return
-
       group?.toggle()
     }
 
