@@ -459,6 +459,8 @@ export default baseMixins.extend({
       if (tile.tabIndex === -1) this.nextTile()
     },
     onKeyDown (e: KeyboardEvent) {
+      if (this.disableKeys) return
+
       if (e.keyCode === keyCodes.esc) {
         // Wait for dependent elements to close first
         setTimeout(() => { this.isActive = false })
