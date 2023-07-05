@@ -71,4 +71,5 @@ export default {
       icon: 'Đánh giá {0} trên {1}',
     },
   },
+  loading: 'Loading...',
 }

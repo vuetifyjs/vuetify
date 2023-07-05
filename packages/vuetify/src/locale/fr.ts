@@ -71,4 +71,5 @@ export default {
       icon: 'Note de {0} sur {1}',
     },
   },
+  loading: 'Loading...',
 }

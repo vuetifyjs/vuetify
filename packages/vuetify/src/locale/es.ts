@@ -71,4 +71,5 @@ export default {
       icon: 'Puntuación {0} de {1}',
     },
   },
+  loading: 'Loading...',
 }

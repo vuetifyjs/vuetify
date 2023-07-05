@@ -15,6 +15,13 @@ describe('VSkeletonLoader.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VSkeletonLoader, {
+        mocks: {
+          $vuetify: {
+            lang: {
+              t: (v: string) => v,
+            },
+          },
+        },
         ...options,
       })
     }
