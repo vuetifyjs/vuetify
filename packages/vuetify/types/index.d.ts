@@ -296,6 +296,8 @@ export interface DataTableHeader<T extends any = any> {
   sort?: DataTableCompareFunction<T>
 }
 
+export type DataTableFilterMode = 'union' | 'intersection'
+
 export type DataItemsPerPageOption = (number | {
   text: string
   value: number

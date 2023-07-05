@@ -15,6 +15,7 @@ import {
   RowClassFunction,
   RowStyleFunction,
   DataTableItemProps,
+  DataTableFilterMode,
 } from 'vuetify/types'
 
 // Components
@@ -55,21 +56,39 @@ function searchTableItems (
   search: string | null,
   headersWithCustomFilters: DataTableHeader[],
   headersWithoutCustomFilters: DataTableHeader[],
-  customFilter: DataTableFilterFunction
+  customFilter: DataTableFilterFunction,
+  filterMode: DataTableFilterMode,
 ) {
   search = typeof search === 'string' ? search.trim() : null
 
-  return items.filter(item => {
-    // Headers with custom filters are evaluated whether or not a search term has been provided.
-    // We need to match every filter to be included in the results.
-    const matchesColumnFilters = headersWithCustomFilters.every(filterFn(item, search, defaultFilter))
+  if (filterMode === 'union') {
+    // If the `search` property is empty and there are no custom filters in use, there is nothing to do.
+    if (!(search && headersWithoutCustomFilters.length) && !headersWithCustomFilters.length) return items
 
-    // Headers without custom filters are only filtered by the `search` property if it is defined.
-    // We only need a single column to match the search term to be included in the results.
-    const matchesSearchTerm = !search || headersWithoutCustomFilters.some(filterFn(item, search, customFilter))
+    return items.filter(item => {
+      // Headers with custom filters are evaluated whether or not a search term has been provided.
+      if (headersWithCustomFilters.length && headersWithCustomFilters.every(filterFn(item, search, defaultFilter))) {
+        return true
+      }
 
-    return matchesColumnFilters && matchesSearchTerm
-  })
+      // Otherwise, the `search` property is used to filter columns without a custom filter.
+      return (search && headersWithoutCustomFilters.some(filterFn(item, search, customFilter)))
+    })
+  } else if (filterMode === 'intersection') {
+    return items.filter(item => {
+      // Headers with custom filters are evaluated whether or not a search term has been provided.
+      // We need to match every filter to be included in the results.
+      const matchesColumnFilters = headersWithCustomFilters.every(filterFn(item, search, defaultFilter))
+
+      // Headers without custom filters are only filtered by the `search` property if it is defined.
+      // We only need a single column to match the search term to be included in the results.
+      const matchesSearchTerm = !search || headersWithoutCustomFilters.some(filterFn(item, search, customFilter))
+
+      return matchesColumnFilters && matchesSearchTerm
+    })
+  } else {
+    return items
+  }
 }
 
 /* @vue/component */
@@ -112,6 +131,10 @@ export default mixins(
       type: Function,
       default: defaultFilter,
     } as PropValidator<typeof defaultFilter>,
+    filterMode: {
+      type: String,
+      default: 'intersection',
+    } as PropValidator<DataTableFilterMode>,
     itemClass: {
       type: [String, Function],
       default: () => '',
@@ -229,7 +252,14 @@ export default mixins(
       this.widths = Array.from(this.$el.querySelectorAll('th')).map(e => e.clientWidth)
     },
     customFilterWithColumns (items: any[], search: string) {
-      return searchTableItems(items, search, this.headersWithCustomFilters, this.headersWithoutCustomFilters, this.customFilter)
+      return searchTableItems(
+        items,
+        search,
+        this.headersWithCustomFilters,
+        this.headersWithoutCustomFilters,
+        this.customFilter,
+        this.filterMode
+      )
     },
     customSortWithHeaders (items: any[], sortBy: string[], sortDesc: boolean[], locale: string) {
       return this.customSort(items, sortBy, sortDesc, locale, this.columnSorters)

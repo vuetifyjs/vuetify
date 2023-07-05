@@ -2874,18 +2874,18 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-747"
+                       aria-owns="list-763"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-747"
+                      <label for="input-763"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-747"
+                        <input id="input-763"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -3424,7 +3424,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-751"
+               aria-owns="list-767"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3433,7 +3433,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
                   10
                 </div>
                 <input aria-label="Rows per page:"
-                       id="input-751"
+                       id="input-767"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -11354,18 +11354,18 @@ exports[`VDataTable.ts should respect mustSort property on options 1`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-731"
+                       aria-owns="list-747"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-731"
+                      <label for="input-747"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-731"
+                        <input id="input-747"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -11504,7 +11504,7 @@ exports[`VDataTable.ts should respect mustSort property on options 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-735"
+               aria-owns="list-751"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -11513,7 +11513,7 @@ exports[`VDataTable.ts should respect mustSort property on options 1`] = `
                   10
                 </div>
                 <input aria-label="Rows per page:"
-                       id="input-735"
+                       id="input-751"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
