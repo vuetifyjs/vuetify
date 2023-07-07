@@ -1,9 +1,8 @@
 <template>
   <v-sheet border="t-lg primary opacity-100" elevation="2" max-width="900" rounded>
-    <v-container class="py-9 px-5" fluid>
+    <v-container class="pt-9 px-5" fluid>
       <v-row>
         <template v-for="(item, i) in items" :key="i">
-
           <v-col cols="12" md="4">
             <v-responsive class="mb-4" :min-height="mdAndUp ? 96 : undefined">
               <h3 class="text-h5 font-weight-medium">
@@ -45,10 +44,15 @@
         </template>
       </v-row>
     </v-container>
+
+    <div class="px-4 pb-2 text-medium-emphasis text-caption">
+      *Cost for initial project review. Upgrade quote provided separately.
+    </div>
   </v-sheet>
 </template>
 
 <script setup>
+  // eslint-disable
   import { useDisplay } from 'vuetify'
 
   const { mdAndUp } = useDisplay()
@@ -61,12 +65,12 @@
       suffix: '/60m',
       benefits: [
         {
-          emoji: '🖥️',
-          text: 'We can collaborate in problem-solving in a personalized training session with you and your team',
+          emoji: '🐛',
+          text: 'Get help debugging your Vue / Vuetify application in a live conference call',
         },
         {
-          emoji: '🐛',
-          text: 'Get help debugging your Vue / Vuetify application',
+          emoji: '🖥️',
+          text: 'We can collaborate in problem-solving in a personalized training session with you and your team',
         },
         {
           emoji: '👀',
@@ -81,24 +85,25 @@
     },
     {
       name: 'Project Upgrade',
-      text: "We'll review your project and provide you with a detailed report on how to make the best of your Vuetify upgrade",
+      text: 'Ready to upgrade to Vuetify 3? Let us help you make the transition as smooth as possible',
       price: '2,000',
+      suffix: '*',
       benefits: [
         {
           emoji: '📦',
-          text: "We'll evaluate the project structure, focusing on its scalability and maintainability",
+          text: 'We will conduct a thorough review of your project and provide you with a detailed report of what it would take to upgrade',
         },
         {
           emoji: '⌨️',
-          text: 'A thorough assessment of your code quality will be conducted, focusing on alignment with the best coding practices',
+          text: 'Our team will engage with your developers to help them understand the changes that need to be made',
         },
         {
           emoji: '⚡',
-          text: 'Performance will be scrutinized, with the goal of identifying bottlenecks and proposing efficiency improvements',
+          text: 'Along with the report, we will provide a quote for us to perform the upgrade',
         },
         {
           emoji: '🔐',
-          text: "We'll examine security measures in place, ensuring data integrity and user privacy are safeguarded",
+          text: "Feel secure knowing that you're working with the team that built Vuetify",
         },
       ],
       href: 'https://l.kintell.com/fp7BQm',
