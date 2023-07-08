@@ -2,51 +2,52 @@
 import './VTab.sass'
 
 // Components
-import { VBtn } from '@/components/VBtn'
+import { makeVBtnProps, VBtn } from '@/components/VBtn/VBtn'
 
 // Composables
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, ref } from 'vue'
-import { animate, genericComponent, omit, standardEasing, useRender } from '@/util'
-import { makeVBtnProps } from '@/components/VBtn/VBtn'
+import { computed, ref, shallowRef } from 'vue'
+import { VTabsSymbol } from './shared'
+import { animate, genericComponent, omit, propsFactory, standardEasing, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { VTabsSymbol } from './shared'
+
+export const makeVTabProps = propsFactory({
+  fixed: Boolean,
+
+  sliderColor: String,
+  hideSlider: Boolean,
+
+  direction: {
+    type: String as PropType<'horizontal' | 'vertical'>,
+    default: 'horizontal',
+  },
+
+  ...omit(makeVBtnProps({
+    selectedClass: 'v-tab--selected',
+    variant: 'text' as const,
+  }), [
+    'active',
+    'block',
+    'flat',
+    'location',
+    'position',
+    'symbol',
+  ]),
+}, 'VTab')
 
 export const VTab = genericComponent()({
   name: 'VTab',
 
-  props: {
-    fixed: Boolean,
-
-    sliderColor: String,
-    hideSlider: Boolean,
-
-    direction: {
-      type: String as PropType<'horizontal' | 'vertical'>,
-      default: 'horizontal',
-    },
-
-    ...omit(makeVBtnProps({
-      selectedClass: 'v-tab--selected',
-      variant: 'text' as const,
-    }), [
-      'active',
-      'block',
-      'flat',
-      'location',
-      'position',
-      'symbol',
-    ]),
-  },
+  props: makeVTabProps(),
 
   setup (props, { slots, attrs }) {
     const { textColorClasses: sliderColorClasses, textColorStyles: sliderColorStyles } = useTextColor(props, 'sliderColor')
     const isHorizontal = computed(() => props.direction === 'horizontal')
-    const isSelected = ref(false)
+    const isSelected = shallowRef(false)
 
     const rootEl = ref<VBtn>()
     const sliderEl = ref<HTMLElement>()
@@ -85,11 +86,11 @@ export const VTab = genericComponent()({
 
         const sigma = 1.5
         animate(nextEl, {
-          backgroundColor: [color, ''],
+          backgroundColor: [color, 'currentcolor'],
           transform: [
             `translate${XY}(${delta}px) scale${XY}(${initialScale})`,
             `translate${XY}(${delta / sigma}px) scale${XY}(${(scale - 1) / sigma + 1})`,
-            '',
+            'none',
           ],
           transformOrigin: Array(3).fill(origin),
         }, {

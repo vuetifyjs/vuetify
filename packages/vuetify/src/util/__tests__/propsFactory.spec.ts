@@ -1,4 +1,6 @@
 import { propsFactory } from '../propsFactory'
+
+// Utilities
 import { describe, expect, it } from '@jest/globals'
 
 describe('propsFactory', () => {

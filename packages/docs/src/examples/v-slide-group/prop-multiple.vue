@@ -39,6 +39,12 @@
   </v-sheet>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const model = ref([])
+</script>
+
 <script>
   export default {
     data: () => ({

@@ -1,4 +1,7 @@
+// Composables
 import { makeComponentProps } from '@/composables/component'
+
+// Utilities
 import { camelize, capitalize, h } from 'vue'
 import { genericComponent } from './defineComponent'
 

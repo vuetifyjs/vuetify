@@ -7,18 +7,20 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { genericComponent } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
+
+export const makeVThemeProviderProps = propsFactory({
+  withBackground: Boolean,
+
+  ...makeComponentProps(),
+  ...makeThemeProps(),
+  ...makeTagProps(),
+}, 'VThemeProvider')
 
 export const VThemeProvider = genericComponent()({
   name: 'VThemeProvider',
 
-  props: {
-    withBackground: Boolean,
-
-    ...makeComponentProps(),
-    ...makeThemeProps(),
-    ...makeTagProps(),
-  },
+  props: makeVThemeProviderProps(),
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)

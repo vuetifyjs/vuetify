@@ -5,12 +5,6 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/vuetifyjs/vuetify/actions?query=workflow%3ACI">
-    <img src="https://github.com/vuetifyjs/vuetify/workflows/CI/badge.svg?branch=master&event=push" alt="CI badge">
-  </a>
-  <a href="https://codecov.io/gh/vuetifyjs/vuetify">
-    <img src="https://img.shields.io/codecov/c/github/vuetifyjs/vuetify.svg" alt="Coverage">
-  </a>
   <a href="https://www.npmjs.com/package/vuetify">
     <img src="https://img.shields.io/npm/dt/vuetify.svg" alt="Downloads">
   </a>
@@ -20,9 +14,6 @@
   <br>
   <a href="https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md">
     <img src="https://img.shields.io/npm/l/vuetify.svg" alt="License">
-  </a>
-  <a href="https://app.zenhub.com/workspace/o/vuetifyjs/vuetify/boards">
-    <img src="https://img.shields.io/badge/Managed_with-ZenHub-5e60ba.svg" alt="zenhub">
   </a>
   <a href="https://community.vuetifyjs.com">
     <img src="https://discordapp.com/api/guilds/340160225338195969/widget.png" alt="Chat">
@@ -136,13 +127,13 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
         </a>
       </td>
       <td>
-        <a href="https://www.noneedtostudy.com/take-my-online-class/">
-          <img height="30px" src="https://cdn.cosmicjs.com/215133d0-248a-11ed-b52d-a3f33977cd87-medium-logo-alt.png">
-        </a>
-      </td>
-      <td>
         <a href="https://crosswordanswers911.net/">
           <img height="30px" src="https://cdn.cosmicjs.com/ef6ea2a0-7ee1-11ed-8730-d9eebcd39d9f-crossword-answers-911.jpg">
+        </a>
+      </td>
+      <td style="text-align: center;">
+        <a href="https://www.muenchen.de/">
+          <img height="40px" src="https://imgix.cosmicjs.com/af2ce530-eaa2-11ed-ba82-019c4666da06-itm-logo.png">
         </a>
       </td>
     </tr>

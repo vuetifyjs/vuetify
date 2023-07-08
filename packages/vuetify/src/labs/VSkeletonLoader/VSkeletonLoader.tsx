@@ -2,15 +2,15 @@
 import './VSkeletonLoader.sass'
 
 // Composables
+import { useBackgroundColor } from '@/composables/color'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { genericComponent, useRender, wrapInArray } from '@/util'
+import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -19,9 +19,6 @@ type VSkeletonBone<T> = T | VSkeletonBone<T>[]
 
 export type VSkeletonBones = VSkeletonBone<VNode>
 export type VSkeletonLoaderType = keyof typeof rootTypes
-export type VSkeletonLoaderSlots = {
-  default: []
-}
 
 export const rootTypes = {
   actions: 'button@2',
@@ -108,26 +105,28 @@ function mapBones (bones: string) {
   return bones.replace(/\s/g, '').split(',').map(genStructure)
 }
 
-export const VSkeletonLoader = genericComponent<VSkeletonLoaderSlots>()({
+export const makeVSkeletonLoaderProps = propsFactory({
+  boilerplate: Boolean,
+  color: String,
+  loading: Boolean,
+  loadingText: {
+    type: String,
+    default: '$vuetify.loading',
+  },
+  type: {
+    type: [String, Array] as PropType<string | readonly string[]>,
+    default: 'image',
+  },
+
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeThemeProps(),
+}, 'VSkeletonLoader')
+
+export const VSkeletonLoader = genericComponent()({
   name: 'VSkeletonLoader',
 
-  props: {
-    boilerplate: Boolean,
-    color: String,
-    loading: Boolean,
-    loadingText: {
-      type: String,
-      default: '$vuetify.loading',
-    },
-    type: {
-      type: [String, Array] as PropType<VSkeletonLoaderType | VSkeletonLoaderType[]>,
-      default: 'image',
-    },
-
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVSkeletonLoaderProps(),
 
   setup (props, { slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))

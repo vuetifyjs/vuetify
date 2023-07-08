@@ -2,19 +2,21 @@
 import './VLayout.sass'
 
 // Composables
-import { createLayout, makeLayoutProps } from '@/composables/layout'
 import { makeComponentProps } from '@/composables/component'
+import { createLayout, makeLayoutProps } from '@/composables/layout'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVLayoutProps = propsFactory({
+  ...makeComponentProps(),
+  ...makeLayoutProps(),
+}, 'VLayout')
 
 export const VLayout = genericComponent()({
   name: 'VLayout',
 
-  props: {
-    ...makeComponentProps(),
-    ...makeLayoutProps(),
-  },
+  props: makeVLayoutProps(),
 
   setup (props, { slots }) {
     const { layoutClasses, layoutStyles, getLayoutItem, items, layoutRef } = createLayout(props)

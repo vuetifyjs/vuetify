@@ -1,17 +1,19 @@
 // Composables
 import { makeComponentProps } from '@/composables/component'
 
-// Utility
-import { genericComponent, useRender } from '@/util'
+// Utilities
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVBreadcrumbsDividerProps = propsFactory({
+  divider: [Number, String],
+
+  ...makeComponentProps(),
+}, 'VBreadcrumbsDivider')
 
 export const VBreadcrumbsDivider = genericComponent()({
   name: 'VBreadcrumbsDivider',
 
-  props: {
-    divider: [Number, String],
-
-    ...makeComponentProps(),
-  },
+  props: makeVBreadcrumbsDividerProps(),
 
   setup (props, { slots }) {
     useRender(() => (
@@ -29,3 +31,5 @@ export const VBreadcrumbsDivider = genericComponent()({
     return {}
   },
 })
+
+export type VBreadcrumbsDivider = InstanceType<typeof VBreadcrumbsDivider>

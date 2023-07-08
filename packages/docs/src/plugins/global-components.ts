@@ -2,6 +2,7 @@
 import Alert from '@/components/Alert.vue'
 import ApiInline from '@/components/api/Inline.vue'
 import ApiLinks from '@/components/api/Links.vue'
+import ApiSearch from '@/components/api/Search.vue'
 import ApiSection from '@/components/api/Section.vue'
 import AppBtn from '@/components/app/Btn.vue'
 import AppCaption from '@/components/app/Caption.vue'
@@ -23,6 +24,7 @@ import BreakpointsTable from '@/components/features/BreakpointsTable.vue'
 import Carbon from '@/components/promoted/Carbon.vue'
 import ColorPalette from '@/components/features/ColorPalette.vue'
 import Discovery from '@/components/promoted/Discovery.vue'
+import DocTabs from '@/components/doc/Tabs.vue'
 import Entry from '@/components/promoted/Entry.vue'
 import Example from '@/components/examples/Example.vue'
 import Inline from '@/components/promoted/Inline.vue'
@@ -36,9 +38,9 @@ import VueFile from '@/components/examples/VueFile.vue'
 import Vuetify from '@/components/promoted/Vuetify.vue'
 
 // Types
-import type { GlobalComponentsPlugin } from '@/types'
+import type { ViteSSGContext } from '@vuetify/vite-ssg'
 
-export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
+export function installGlobalComponents ({ app }: ViteSSGContext) {
   app
     .component('AppBtn', AppBtn)
     .component('AppCaption', AppCaption)
@@ -62,11 +64,13 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
     .component('ApiInline', ApiInline)
     .component('ApiLinks', ApiLinks)
     .component('ApiSection', ApiSection)
+    .component('ApiSearch', ApiSearch)
     .component('Backmatter', Backmatter)
     .component('BreakpointsTable', BreakpointsTable)
     .component('ColorPalette', ColorPalette)
     .component('Carbon', Carbon)
     .component('Discovery', Discovery)
+    .component('DocTabs', DocTabs)
     .component('Entry', Entry)
     .component('Example', Example)
     .component('Inline', Inline)

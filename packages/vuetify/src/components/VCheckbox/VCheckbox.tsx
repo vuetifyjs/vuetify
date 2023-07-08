@@ -2,37 +2,42 @@
 import './VCheckbox.sass'
 
 // Components
-import type { VInputSlots } from '@/components/VInput/VInput'
-import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { makeVCheckboxBtnProps, VCheckboxBtn } from './VCheckboxBtn'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
 import { useFocus } from '@/composables/focus'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed } from 'vue'
-import { filterInputAttrs, genericComponent, getUid, omit, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VSelectionControlSlots } from '../VSelectionControl/VSelectionControl'
+import type { VInputSlots } from '@/components/VInput/VInput'
 
 export type VCheckboxSlots = VInputSlots & VSelectionControlSlots
+
+export const makeVCheckboxProps = propsFactory({
+  ...makeVInputProps(),
+  ...omit(makeVCheckboxBtnProps(), ['inline']),
+}, 'VCheckbox')
 
 export const VCheckbox = genericComponent<VCheckboxSlots>()({
   name: 'VCheckbox',
 
   inheritAttrs: false,
 
-  props: {
-    ...makeVInputProps(),
-    ...omit(makeVCheckboxBtnProps(), ['inline']),
-  },
+  props: makeVCheckboxProps(),
 
   emits: {
+    'update:modelValue': (value: boolean) => true,
     'update:focused': (focused: boolean) => true,
   },
 
   setup (props, { attrs, slots }) {
+    const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
 
     const uid = getUid()
@@ -51,6 +56,7 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
           ]}
           { ...inputAttrs }
           { ...inputProps }
+          v-model={ model.value }
           id={ id.value }
           focused={ isFocused.value }
           style={ props.style }
@@ -70,6 +76,7 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 { ...controlAttrs }
+                v-model={ model.value }
                 onFocus={ focus }
                 onBlur={ blur }
                 v-slots={ slots }

@@ -1,6 +1,6 @@
 // Components
-import { VExpandTransition } from '@/components/transitions'
 import { VExpansionPanelSymbol } from './VExpansionPanels'
+import { VExpandTransition } from '@/components/transitions'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
@@ -8,15 +8,17 @@ import { makeLazyProps, useLazy } from '@/composables/lazy'
 
 // Utilities
 import { inject } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVExpansionPanelTextProps = propsFactory({
+  ...makeComponentProps(),
+  ...makeLazyProps(),
+}, 'VExpansionPanelText')
 
 export const VExpansionPanelText = genericComponent()({
   name: 'VExpansionPanelText',
 
-  props: {
-    ...makeComponentProps(),
-    ...makeLazyProps(),
-  },
+  props: makeVExpansionPanelTextProps(),
 
   setup (props, { slots }) {
     const expansionPanel = inject(VExpansionPanelSymbol)

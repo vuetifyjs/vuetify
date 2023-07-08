@@ -6,22 +6,24 @@ import { makeComponentProps } from '@/composables/component'
 import { provideLocale } from '@/composables/locale'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVLocaleProviderProps = propsFactory({
+  locale: String,
+  fallbackLocale: String,
+  messages: Object,
+  rtl: {
+    type: Boolean,
+    default: undefined,
+  },
+
+  ...makeComponentProps(),
+}, 'VLocaleProvider')
 
 export const VLocaleProvider = genericComponent()({
   name: 'VLocaleProvider',
 
-  props: {
-    locale: String,
-    fallbackLocale: String,
-    messages: Object,
-    rtl: {
-      type: Boolean,
-      default: undefined,
-    },
-
-    ...makeComponentProps(),
-  },
+  props: makeVLocaleProviderProps(),
 
   setup (props, { slots }) {
     const { rtlClasses } = provideLocale(props)

@@ -1,6 +1,6 @@
 ---
-nav: Why Vuetify?
 meta:
+  nav: Why Vuetify?
   title: Why you should be using Vuetify
   description: Vuetify has an extremely active community, provides easy to use Material Design components and is consistently updated.
   keywords: why vuetify, best vue framework, best ui framework, best component framework, best ui library, best component library

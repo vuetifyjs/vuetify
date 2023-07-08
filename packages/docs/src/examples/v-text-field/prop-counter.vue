@@ -64,6 +64,16 @@
   </v-form>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const rules = [v => v.length <= 25 || 'Max 25 characters']
+  const wordsRules = [v => v.trim().split(' ').length <= 5 || 'Max 5 words']
+
+  const title = ref('Preliminary report')
+  const description = ref('California is a state in the western United States')
+</script>
+
 <script>
   export default {
     data () {

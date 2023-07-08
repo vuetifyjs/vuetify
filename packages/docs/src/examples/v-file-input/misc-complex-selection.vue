@@ -33,6 +33,12 @@
   </v-file-input>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const files = ref([])
+</script>
+
 <script>
   export default {
     data: () => ({

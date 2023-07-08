@@ -5,16 +5,18 @@ import { VLabel } from '@/components/VLabel'
 import { makeComponentProps } from '@/composables/component'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVFieldLabelProps = propsFactory({
+  floating: Boolean,
+
+  ...makeComponentProps(),
+}, 'VFieldLabel')
 
 export const VFieldLabel = genericComponent()({
   name: 'VFieldLabel',
 
-  props: {
-    floating: Boolean,
-
-    ...makeComponentProps(),
-  },
+  props: makeVFieldLabelProps(),
 
   setup (props, { slots }) {
     useRender(() => (

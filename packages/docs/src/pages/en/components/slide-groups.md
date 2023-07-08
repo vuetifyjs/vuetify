@@ -1,6 +1,6 @@
 ---
-nav: Slide groups
 meta:
+  nav: Slide groups
   title: Slide group component
   description: The slide group component is similar to item groups in that you can make selectable content out of elements but does so in a single line fashion.
   keywords: slide groups, slideable groups, vuetify slide group component, vue slide group component
@@ -27,7 +27,7 @@ Similar to the [v-window](/components/windows) component, `v-slide-group` lets i
 | Component | Description |
 | - | - |
 | [v-slide-group](/api/v-slide-group/) | Primary Component |
-| [v-slide-item](/api/v-slide-item/) | Sub-component used for modifying the `v-slide-group` state |
+| [v-slide-group-item](/api/v-slide-group-item/) | Sub-component used for modifying the `v-slide-group` state |
 
 <api-inline hide-links />
 

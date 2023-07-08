@@ -1,6 +1,6 @@
 ---
-nav: Tabs
 meta:
+  nav: Tabs
   title: Tabs component
   description: The tabs component provides a way to organize and navigate between groups of content that are related at the same level of hierarchy.
   keywords: tabs, vuetify tabs component, vue tabs component

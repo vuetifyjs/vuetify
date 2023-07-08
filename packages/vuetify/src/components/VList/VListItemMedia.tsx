@@ -3,18 +3,20 @@ import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVListItemMediaProps = propsFactory({
+  start: Boolean,
+  end: Boolean,
+
+  ...makeComponentProps(),
+  ...makeTagProps(),
+}, 'VListItemMedia')
 
 export const VListItemMedia = genericComponent()({
   name: 'VListItemMedia',
 
-  props: {
-    start: Boolean,
-    end: Boolean,
-
-    ...makeComponentProps(),
-    ...makeTagProps(),
-  },
+  props: makeVListItemMediaProps(),
 
   setup (props, { slots }) {
     useRender(() => {

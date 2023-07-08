@@ -10,26 +10,41 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
-export const VCounter = genericComponent()({
+// Types
+import type { Component } from 'vue'
+
+export const makeVCounterProps = propsFactory({
+  active: Boolean,
+  max: [Number, String],
+  value: {
+    type: [Number, String],
+    default: 0,
+  },
+
+  ...makeComponentProps(),
+  ...makeTransitionProps({
+    transition: { component: VSlideYTransition as Component },
+  }),
+}, 'VCounter')
+
+export type VCounterSlot = {
+  counter: string
+  max: string | number | undefined
+  value: string | number | undefined
+}
+
+type VCounterSlots = {
+  default: VCounterSlot
+}
+
+export const VCounter = genericComponent<VCounterSlots>()({
   name: 'VCounter',
 
   functional: true,
 
-  props: {
-    active: Boolean,
-    max: [Number, String],
-    value: {
-      type: [Number, String],
-      default: 0,
-    },
-
-    ...makeComponentProps(),
-    ...makeTransitionProps({
-      transition: { component: VSlideYTransition },
-    }),
-  },
+  props: makeVCounterProps(),
 
   setup (props, { slots }) {
     const counter = computed(() => {

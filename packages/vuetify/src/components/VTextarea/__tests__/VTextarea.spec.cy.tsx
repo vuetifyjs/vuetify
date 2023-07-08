@@ -1,6 +1,8 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VTextarea } from '..'
+
+// Utilities
 import { ref } from 'vue'
 
 describe('VTextarea', () => {

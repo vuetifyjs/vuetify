@@ -1,5 +1,9 @@
+// Composables
+import { useToggleScope } from '@/composables/toggleScope'
+
 // Utilities
 import { computed, nextTick, onScopeDispose, ref, watch } from 'vue'
+import { anchorToPoint, getOffset } from './util/point'
 import {
   clamp,
   consoleError,
@@ -17,10 +21,6 @@ import {
   propsFactory,
 } from '@/util'
 import { Box, getOverflow } from '@/util/box'
-import { anchorToPoint, getOffset } from './util/point'
-
-// Composables
-import { useToggleScope } from '@/composables/toggleScope'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -70,7 +70,7 @@ export const makeLocationStrategyProps = propsFactory({
     default: 'auto',
   },
   offset: [Number, String, Array] as PropType<StrategyProps['offset']>,
-}, 'v-overlay-location-strategies')
+}, 'VOverlay-location-strategies')
 
 export function useLocationStrategies (
   props: StrategyProps,
@@ -155,6 +155,8 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
   if (activatorFixed) {
     Object.assign(contentStyles.value, {
       position: 'fixed',
+      top: 0,
+      [data.isRtl.value ? 'right' : 'left']: 0,
     })
   }
 
@@ -235,8 +237,8 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     if (!scrollParents.length) {
       scrollParents.push(document.documentElement)
       if (!(data.contentEl.value.style.top && data.contentEl.value.style.left)) {
-        contentBox.x += parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-x') || 0)
-        contentBox.y += parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-y') || 0)
+        contentBox.x -= parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-x') || 0)
+        contentBox.y -= parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-y') || 0)
       }
     }
 

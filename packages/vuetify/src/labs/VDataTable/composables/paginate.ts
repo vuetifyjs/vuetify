@@ -3,10 +3,11 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject, provide, watchEffect } from 'vue'
-import { propsFactory } from '@/util'
+import { clamp, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
+import type { Group } from './group'
 
 export const makeDataTablePaginateProps = propsFactory({
   page: {
@@ -17,16 +18,19 @@ export const makeDataTablePaginateProps = propsFactory({
     type: [Number, String],
     default: 10,
   },
-}, 'v-data-table-paginate')
+}, 'DataTable-paginate')
 
 const VDataTablePaginationSymbol: InjectionKey<{
   page: Ref<number>
   itemsPerPage: Ref<number>
-  setItemsPerPage: (value: number) => void
   startIndex: Ref<number>
   stopIndex: Ref<number>
   pageCount: Ref<number>
   itemsLength: Ref<number>
+  prevPage: () => void
+  nextPage: () => void
+  setPage: (value: number) => void
+  setItemsPerPage: (value: number) => void
 }> = Symbol.for('vuetify:data-table-pagination')
 
 type PaginationProps = {
@@ -79,7 +83,19 @@ export function providePagination (options: {
     page.value = 1
   }
 
-  const data = { page, itemsPerPage, itemsLength, startIndex, stopIndex, pageCount, setItemsPerPage }
+  function nextPage () {
+    page.value = clamp(page.value + 1, 1, pageCount.value)
+  }
+
+  function prevPage () {
+    page.value = clamp(page.value - 1, 1, pageCount.value)
+  }
+
+  function setPage (value: number) {
+    page.value = clamp(value, 1, pageCount.value)
+  }
+
+  const data = { page, itemsPerPage, startIndex, stopIndex, pageCount, itemsLength, nextPage, prevPage, setPage, setItemsPerPage }
 
   provide(VDataTablePaginationSymbol, data)
 
@@ -94,8 +110,8 @@ export function usePagination () {
   return data
 }
 
-export function usePaginatedItems (options: {
-  items: Ref<any[]>
+export function usePaginatedItems <T> (options: {
+  items: Ref<readonly (T | Group<T>)[]>
   startIndex: Ref<number>
   stopIndex: Ref<number>
   itemsPerPage: Ref<number>

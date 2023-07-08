@@ -1,8 +1,8 @@
 /// <reference types="../../../../types/cypress" />
 
 // Components
-import { VBtn } from '@/components/VBtn'
 import { VBtnGroup } from '..'
+import { VBtn } from '@/components/VBtn'
 
 const colors = ['success', 'info', 'warning', 'error', 'invalid'] as const
 const densities = ['default', 'comfortable', 'compact'] as const

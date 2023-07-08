@@ -2,65 +2,67 @@
 import './VProgressLinear.sass'
 
 // Composables
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { useIntersectionObserver } from '@/composables/intersectionObserver'
+import { useRtl } from '@/composables/locale'
 import { makeLocationProps, useLocation } from '@/composables/location'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, Transition } from 'vue'
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 type VProgressLinearSlots = {
-  default: [{ value: number, buffer: number }]
+  default: { value: number, buffer: number }
 }
+
+export const makeVProgressLinearProps = propsFactory({
+  absolute: Boolean,
+  active: {
+    type: Boolean,
+    default: true,
+  },
+  bgColor: String,
+  bgOpacity: [Number, String],
+  bufferValue: {
+    type: [Number, String],
+    default: 0,
+  },
+  clickable: Boolean,
+  color: String,
+  height: {
+    type: [Number, String],
+    default: 4,
+  },
+  indeterminate: Boolean,
+  max: {
+    type: [Number, String],
+    default: 100,
+  },
+  modelValue: {
+    type: [Number, String],
+    default: 0,
+  },
+  reverse: Boolean,
+  stream: Boolean,
+  striped: Boolean,
+  roundedBar: Boolean,
+
+  ...makeComponentProps(),
+  ...makeLocationProps({ location: 'top' } as const),
+  ...makeRoundedProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'VProgressLinear')
 
 export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
   name: 'VProgressLinear',
 
-  props: {
-    absolute: Boolean,
-    active: {
-      type: Boolean,
-      default: true,
-    },
-    bgColor: String,
-    bgOpacity: [Number, String],
-    bufferValue: {
-      type: [Number, String],
-      default: 0,
-    },
-    clickable: Boolean,
-    color: String,
-    height: {
-      type: [Number, String],
-      default: 4,
-    },
-    indeterminate: Boolean,
-    max: {
-      type: [Number, String],
-      default: 100,
-    },
-    modelValue: {
-      type: [Number, String],
-      default: 0,
-    },
-    reverse: Boolean,
-    stream: Boolean,
-    striped: Boolean,
-    roundedBar: Boolean,
-
-    ...makeComponentProps(),
-    ...makeLocationProps({ location: 'top' } as const),
-    ...makeRoundedProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVProgressLinearProps(),
 
   emits: {
     'update:modelValue': (value: number) => true,
@@ -68,7 +70,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
 
   setup (props, { slots }) {
     const progress = useProxiedModel(props, 'modelValue')
-    const { isRtl } = useRtl()
+    const { isRtl, rtlClasses } = useRtl()
     const { themeClasses } = provideTheme(props)
     const { locationStyles } = useLocation(props)
     const { textColorClasses, textColorStyles } = useTextColor(props, 'color')
@@ -113,6 +115,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           },
           roundedClasses.value,
           themeClasses.value,
+          rtlClasses.value,
           props.class,
         ]}
         style={[

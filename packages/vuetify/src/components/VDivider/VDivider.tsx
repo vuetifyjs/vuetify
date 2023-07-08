@@ -2,30 +2,32 @@
 import './VDivider.sass'
 
 // Composables
+import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'maxHeight' | 'maxWidth'
 type DividerStyles = Partial<Record<DividerKey, string>>
 
+export const makeVDividerProps = propsFactory({
+  color: String,
+  inset: Boolean,
+  length: [Number, String],
+  thickness: [Number, String],
+  vertical: Boolean,
+
+  ...makeComponentProps(),
+  ...makeThemeProps(),
+}, 'VDivider')
+
 export const VDivider = genericComponent()({
   name: 'VDivider',
 
-  props: {
-    color: String,
-    inset: Boolean,
-    length: [Number, String],
-    thickness: [Number, String],
-    vertical: Boolean,
-
-    ...makeComponentProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVDividerProps(),
 
   setup (props, { attrs }) {
     const { themeClasses } = provideTheme(props)
