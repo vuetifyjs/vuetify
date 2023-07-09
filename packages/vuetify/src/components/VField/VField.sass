@@ -69,9 +69,9 @@
     $root: &
 
     @at-root
-      @include input-density('v-input', $input-density, $input-chips-margin-bottom) using ($modifier, $chips-modifier)
+      @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
-          --v-input-control-height: #{$field-control-height + $modifier - math.div($chips-modifier, 2) - $input-chips-margin-top}
+          --v-input-control-height: #{$field-control-height + $modifier}
           --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)}
 
   &--variant-outlined,
@@ -97,9 +97,9 @@
       --v-field-padding-top: var(--v-field-padding-top--plain-underlined, 6px)
 
     @at-root
-      @include input-density('v-input', $input-density, $input-chips-margin-bottom) using ($modifier, $chips-modifier)
+      @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
-          --v-input-control-height: #{$field-control-underlined-height + $modifier - math.div($chips-modifier, 2) - $input-chips-margin-top}
+          --v-input-control-height: #{$field-control-underlined-height + $modifier}
           --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)}
 
   &--flat
