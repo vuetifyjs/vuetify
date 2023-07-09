@@ -8,6 +8,23 @@
     @include tools.theme($app-bar-theme...)
     @include tools.border($app-bar-border...)
 
+    &--border
+      &[style^="top: 0"],
+      &[style*="; top: 0"],
+      &[style*=";top: 0"],
+      &[style^="top:0"],
+      &[style*="; top:0"],
+      &[style*=";top:0"]
+        border-width: 0 0 $app-bar-border-thin-width
+
+      &[style^="bottom: 0"],
+      &[style*="; bottom: 0"],
+      &[style*=";bottom: 0"],
+      &[style^="bottom:0"],
+      &[style*="; bottom:0"],
+      &[style*=";bottom:0"]
+        border-width: $app-bar-border-thin-width 0 0
+
     &:not(.v-toolbar--flat)
       @include tools.elevation($app-bar-elevation)
 

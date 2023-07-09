@@ -7,7 +7,7 @@ $app-bar-background: rgb(var(--v-theme-surface)) !default;
 $app-bar-border-color: variables.$border-color-root !default;
 $app-bar-border-radius: map.get(variables.$rounded, '0') !default;
 $app-bar-border-style: variables.$border-style-root !default;
-$app-bar-border-thin-width: 0 0 thin !default;
+$app-bar-border-thin-width: thin !default;
 $app-bar-border-width: 0 !default;
 $app-bar-collapsed-border-radius: 24px !default;
 $app-bar-collapsed-max-width: 112px !default;
