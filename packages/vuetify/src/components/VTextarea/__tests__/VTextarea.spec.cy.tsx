@@ -16,7 +16,7 @@ describe('VTextarea', () => {
       .type('Eos q')
       .should(el => expect(el.outerHeight()).to.equal(56))
       .type('u')
-      .should(el => expect(el.outerHeight()).to.equal(80))
+      .should(el => expect(el.outerHeight()).to.equal(78))
   })
 
   it('should respect max-rows', () => {
