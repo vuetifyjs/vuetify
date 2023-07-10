@@ -36,6 +36,7 @@ export interface VInputSlot {
 
 export const makeVInputProps = propsFactory({
   id: String,
+  color: String,
   appendIcon: IconValue,
   centerAffix: {
     type: Boolean,
