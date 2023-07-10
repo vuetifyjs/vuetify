@@ -104,6 +104,9 @@ export const VStepper = genericComponent<VStepperSlots>()({
       )
     })
 
-    return {}
+    return {
+      prev,
+      next,
+    }
   },
 })

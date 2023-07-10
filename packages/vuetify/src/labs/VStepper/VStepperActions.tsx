@@ -44,7 +44,7 @@ export const VStepperActions = genericComponent()({
 
     useRender(() => {
       return (
-        <div class="v-stepper__actions">
+        <div class="v-stepper-actions">
           <VBtn
             disabled={['back', true].includes(props.disable)}
             text={ props.backText }

@@ -30,7 +30,6 @@
   &--selected
     color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
 
-
 .v-stepper-item__avatar.v-avatar
   margin-inline-end: 8px
   background: rgba(var(--v-theme-surface-variant), var(--v-medium-emphasis-opacity))
@@ -39,8 +38,11 @@
   .v-stepper-item--selected &
     background: rgb(var(--v-theme-surface-variant))
 
-.v-stepper__actions
+.v-stepper-actions
   display: flex
   align-items: center
   justify-content: space-between
-  padding: 0 1.5rem 1rem
+  padding: 1rem
+
+  .v-stepper &
+    padding: 0 1.5rem 1rem
