@@ -43,10 +43,11 @@ export const VMenu = genericComponent<OverlaySlots>()({
   props: makeVMenuProps(),
 
   emits: {
+    'click:outside': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { slots, emit }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
 
@@ -78,7 +79,8 @@ export const VMenu = genericComponent<OverlaySlots>()({
       val ? parent?.register() : parent?.unregister()
     })
 
-    function onClickOutside () {
+    function onClickOutside (e: MouseEvent) {
+      emit('click:outside', e)
       parent?.closeParents()
     }
 

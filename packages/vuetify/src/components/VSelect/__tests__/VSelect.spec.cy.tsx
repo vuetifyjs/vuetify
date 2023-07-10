@@ -1,9 +1,13 @@
 /// <reference types="../../../../types/cypress" />
 
 // Components
+import { VAutocomplete } from '@/components/VAutocomplete/VAutocomplete'
+import { VCombobox } from '@/components/VCombobox/VCombobox'
+import { VCol } from '@/components/VGrid/VCol'
 import { VSelect } from '../VSelect'
 import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
+import { VRow } from '@/components/VGrid/VRow'
 
 // Utilities
 import { cloneVNode, ref } from 'vue'
@@ -476,6 +480,61 @@ describe('VSelect', () => {
       .should('have.class', 'v-select--active-menu')
       .trigger('keydown', { key: keyValues.esc })
       .should('not.have.class', 'v-select--active-menu')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/17488
+  it('should close its open menu when the menu of another select component is opened via a click', () => {
+    cy
+      .mount(() => (
+        <VRow>
+          <VCol>
+            <VSelect
+              items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+            />
+          </VCol>
+          <VCol>
+            <VAutocomplete
+              items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+            />
+          </VCol>
+          <VCol>
+            <VCombobox
+              items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+            />
+          </VCol>
+        </VRow> 
+      ))
+      cy.get('.v-select')
+        .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+        .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+        .click()
+        .get('.v-overlay__content.v-select__content')
+        .should('exist')
+
+      cy.get('.v-autocomplete')
+        .click()
+        .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+        .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+        .get('.v-overlay__content.v-select__content')
+        .should('not.exist')
+        .get('.v-overlay__content.v-autocomplete__content')
+        .should('exist')
+
+      cy.get('.v-combobox')
+        .click()
+        .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+        .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+        .get('.v-overlay__content.v-autocomplete__content')
+        .should('not.exist')
+        .get('.v-overlay__content.v-combobox__content')
+        .should('exist')
+  
+      cy.get('.v-select')
+        .click()
+        .get('.v-overlay__content.v-combobox__content')
+        .should('not.exist')
+        .get('.v-overlay__content.v-select__content')
+        .should('exist')
   })
 
   describe('Showcase', () => {

@@ -444,6 +444,7 @@ export const VCombobox = genericComponent<new <
                   closeOnContentClick={ false }
                   transition={ props.transition }
                   onAfterLeave={ onAfterLeave }
+                  onClick:outside={ () => { isFocused.value = false } }
                   { ...props.menuProps }
                 >
                   { hasList && (
