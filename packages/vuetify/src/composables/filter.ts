@@ -2,11 +2,11 @@
 /* eslint-disable no-labels */
 
 // Utilities
-import { computed, ref, toValue, unref, watchEffect } from 'vue'
+import { computed, ref, unref, watchEffect } from 'vue'
 import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
 
 // Types
-import type { MaybeRefOrGetter, PropType, Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { MaybeRef } from '@/util'
 
 /**
@@ -128,7 +128,7 @@ export function filterItems (
 export function useFilter <T extends { value: unknown }> (
   props: FilterProps,
   items: MaybeRef<T[]>,
-  query: MaybeRefOrGetter<string | undefined>,
+  query: Ref<string | undefined> | (() => string | undefined),
   options?: {
     transform?: (item: T) => any
   }
@@ -138,10 +138,11 @@ export function useFilter <T extends { value: unknown }> (
   const transformedItems = computed(() => options?.transform ? unref(items).map(options?.transform) : unref(items))
 
   watchEffect(() => {
+    const _query = typeof query === 'function' ? query() : unref(query)
     const strQuery = (
-      typeof toValue(query) !== 'string' &&
-      typeof toValue(query) !== 'number'
-    ) ? '' : String(toValue(query))
+      typeof _query !== 'string' &&
+      typeof _query !== 'number'
+    ) ? '' : String(_query)
 
     const results = filterItems(
       transformedItems.value,
