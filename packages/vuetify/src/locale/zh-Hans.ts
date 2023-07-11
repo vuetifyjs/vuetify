@@ -1,5 +1,6 @@
 export default {
   badge: '徽章',
+  open: 'Open',
   close: '关闭',
   dataIterator: {
     noResultsText: '没有符合条件的结果',

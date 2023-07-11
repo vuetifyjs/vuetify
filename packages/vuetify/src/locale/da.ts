@@ -1,5 +1,6 @@
 export default {
   badge: 'Emblem',
+  open: 'Open',
   close: 'Luk',
   dataIterator: {
     noResultsText: 'Ingen matchende data fundet',

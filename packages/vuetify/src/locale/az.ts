@@ -1,5 +1,6 @@
 export default {
   badge: 'nişan',
+  open: 'Open',
   close: 'Bağla',
   dataIterator: {
     noResultsText: 'Uyğun məlumat tapılmadı',

@@ -1,5 +1,6 @@
 export default {
   badge: 'Σήμα',
+  open: 'Open',
   close: 'Close',
   dataIterator: {
     noResultsText: 'Δε βρέθηκαν αποτελέσματα',

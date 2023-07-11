@@ -1,5 +1,6 @@
 export default {
   badge: 'Insignă',
+  open: 'Open',
   close: 'Închideți',
   dataIterator: {
     noResultsText: 'Nu s-au găsit înregistrări corespunzătoare',

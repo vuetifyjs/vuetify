@@ -1,5 +1,6 @@
 export default {
   badge: 'Bedž',
+  open: 'Open',
   close: 'Zatvori',
   dataIterator: {
     noResultsText: 'Nisu pronađene odgovarajuće stavke',

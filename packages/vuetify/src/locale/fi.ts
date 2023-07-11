@@ -1,5 +1,6 @@
 export default {
   badge: 'Infopiste',
+  open: 'Open',
   close: 'Sulje',
   dataIterator: {
     noResultsText: 'Ei osumia',

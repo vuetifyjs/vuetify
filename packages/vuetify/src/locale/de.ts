@@ -1,5 +1,6 @@
 export default {
   badge: 'Abzeichen',
+  open: 'Open',
   close: 'Schließen',
   dataIterator: {
     noResultsText: 'Keine Elemente gefunden',

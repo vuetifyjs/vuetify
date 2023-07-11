@@ -1,5 +1,6 @@
 export default {
   badge: 'Placa',
+  open: 'Open',
   close: 'Cerrar',
   dataIterator: {
     noResultsText: 'Ningún elemento coincide con la búsqueda',

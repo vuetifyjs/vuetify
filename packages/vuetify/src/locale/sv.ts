@@ -1,5 +1,6 @@
 export default {
   badge: 'Bricka',
+  open: 'Open',
   close: 'Stäng',
   dataIterator: {
     noResultsText: 'Hittade inga poster',

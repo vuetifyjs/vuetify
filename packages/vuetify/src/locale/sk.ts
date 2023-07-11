@@ -1,5 +1,6 @@
 export default {
   badge: 'Odznak',
+  open: 'Open',
   close: 'Zavrieť',
   dataIterator: {
     noResultsText: 'Neboli nájdené žiadne záznamy',

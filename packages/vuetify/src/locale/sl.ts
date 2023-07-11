@@ -1,5 +1,6 @@
 export default {
   badge: 'Značka',
+  open: 'Open',
   close: 'Zapri',
   dataIterator: {
     noResultsText: 'Ni iskanega zapisa',

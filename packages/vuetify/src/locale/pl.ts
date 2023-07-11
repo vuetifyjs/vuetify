@@ -1,5 +1,6 @@
 export default {
   badge: 'Odznaka',
+  open: 'Open',
   close: 'Zamknij',
   dataIterator: {
     noResultsText: 'Nie znaleziono danych odpowiadających wyszukiwaniu',

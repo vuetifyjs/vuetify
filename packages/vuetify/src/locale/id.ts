@@ -1,5 +1,6 @@
 export default {
   badge: 'Lencana',
+  open: 'Open',
   close: 'Tutup',
   dataIterator: {
     noResultsText: 'Tidak ditemukan catatan yang cocok',

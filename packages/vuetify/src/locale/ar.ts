@@ -1,5 +1,6 @@
 export default {
   badge: 'شارة',
+  open: 'Open',
   close: 'إغلاق',
   dataIterator: {
     noResultsText: 'لم يتم إيجاد نتائج',
