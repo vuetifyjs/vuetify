@@ -81,7 +81,7 @@
           text: 'Get help setting up unit tests that ensure your application continues to run as expected',
         },
       ],
-      href: 'https://l.kintell.com/M9y7D7',
+      href: 'https://calendly.com/vuetify/vuetify-direct-support',
     },
     {
       name: 'Project Upgrade',
@@ -106,7 +106,7 @@
           text: "Feel secure knowing that you're working with the team that built Vuetify",
         },
       ],
-      href: 'https://l.kintell.com/fp7BQm',
+      href: 'https://calendly.com/vuetify/project-upgrade-consultation',
     },
     {
       name: 'SLA',
@@ -131,7 +131,7 @@
           text: 'Get priority on reported or identified Vuetify GitHub issues and bugs',
         },
       ],
-      href: 'https://l.kintell.com/E7El3W',
+      href: 'https://calendly.com/vuetify/sla-consultation',
     },
   ]
 
