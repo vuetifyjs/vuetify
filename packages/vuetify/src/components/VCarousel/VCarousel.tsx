@@ -114,6 +114,7 @@ export const VCarousel = genericComponent<VCarouselSlots>()({
         continuous
         mandatory="force"
         showArrows={ props.showArrows }
+        direction={ props.direction ?? undefined }
       >
         {{
           default: slots.default,
