@@ -293,6 +293,7 @@ export {
   mdiSilverwareForkKnife,
   mdiSkipNext,
   mdiSkipPrevious,
+  mdiSourceCommit,
   mdiSnowflake,
   mdiSpeedometer,
   mdiSpeedometerMedium,

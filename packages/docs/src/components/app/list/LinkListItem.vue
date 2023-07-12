@@ -1,5 +1,10 @@
 <template>
-  <div class="text-medium-emphasis text-caption py-2 px-3 d-flex align-center">
+  <div
+    :class="[
+      'text-medium-emphasis text-caption py-2 px-3 d-flex align-center',
+      $attrs.class,
+    ]"
+  >
     <div class="d-inline-flex align-center">
       <v-icon v-if="prependIcon" :icon="prependIcon" start />
 
