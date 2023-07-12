@@ -1,4 +1,3 @@
-/// <reference types="..\..\..\..\types\cypress" />
 /// <reference types="../../../../types/cypress" />
 
 // Components
@@ -167,28 +166,25 @@ describe('VAutocomplete', () => {
 
     cy.mount(() => (
       <VAutocomplete
-        v-model={selectedItems.value}
-        items={items.value}
+        v-model={ selectedItems.value }
+        items={ items.value }
         multiple
-        chips
-        closableChips
         returnObject
         item-title="text"
         item-value="id"
       />
     ))
 
-    cy.get('.mdi-menu-down').click()
+    cy.get('.v-autocomplete').click()
 
     cy.get('.v-list-item--active').should('have.length', 2)
-    cy.get('input').get('.v-chip').should('have.length', 2)
+    cy.get('.v-field__input').should('include.text', 'Item 1')
+    cy.get('.v-field__input').should('include.text', 'Item 2')
 
-    cy.get('.v-chip__close')
+    cy.get('.v-list-item--active input')
       .eq(0)
       .click()
-      .get('input')
-      .get('.v-chip')
-      .should('have.length', 1)
+      .get('.v-field__input')
       .should(() => expect(selectedItems.value).to.deep.equal([{
         text: 'Item 2',
         id: 'item2',
