@@ -24,7 +24,7 @@ import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, ref, shallowRef } from 'vue'
-import { deepEqual, getPropertyFromItem, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { deepEqual, genericComponent, getPropertyFromItem, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { Component, PropType } from 'vue'
@@ -140,10 +140,10 @@ export const VSelect = genericComponent<new <
     const selections = computed(() => {
       return model.value.map(v => {
         return items.value.find(item => {
-          if (props.itemValue !== 'value' && props.returnObject) {
+          if (props.returnObject) {
             return props.valueComparator(
-              getPropertyFromItem(item.value, props.itemValue),
-              getPropertyFromItem(v.value, props.itemValue)
+              getPropertyFromItem(item.raw, props.itemValue),
+              getPropertyFromItem(v.raw, props.itemValue)
             )
           }
           return props.valueComparator(item.value, v.value)

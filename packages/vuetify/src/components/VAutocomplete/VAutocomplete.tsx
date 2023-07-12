@@ -145,10 +145,10 @@ export const VAutocomplete = genericComponent<new <
     const selections = computed(() => {
       return model.value.map(v => {
         return items.value.find(item => {
-          if (props.itemValue !== 'value' && props.returnObject) {
+          if (props.returnObject) {
             return props.valueComparator(
-              getPropertyFromItem(item.value, props.itemValue),
-              getPropertyFromItem(v.value, props.itemValue)
+              getPropertyFromItem(item.raw, props.itemValue),
+              getPropertyFromItem(v.raw, props.itemValue)
             )
           }
           return props.valueComparator(item.value, v.value)
