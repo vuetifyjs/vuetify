@@ -2,61 +2,52 @@
 import './VTab.sass'
 
 // Components
-import { VBtn } from '@/components/VBtn'
+import { makeVBtnProps, VBtn } from '@/components/VBtn/VBtn'
 
 // Composables
-import { IconValue } from '@/composables/icons'
-import { makeGroupItemProps } from '@/composables/group'
-import { makeRouterProps } from '@/composables/router'
-import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps } from '@/composables/theme'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, ref } from 'vue'
-import { animate, genericComponent, pick, standardEasing, useRender } from '@/util'
+import { computed, ref, shallowRef } from 'vue'
+import { VTabsSymbol } from './shared'
+import { animate, genericComponent, omit, propsFactory, standardEasing, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { VTabsSymbol } from './shared'
+
+export const makeVTabProps = propsFactory({
+  fixed: Boolean,
+
+  sliderColor: String,
+  hideSlider: Boolean,
+
+  direction: {
+    type: String as PropType<'horizontal' | 'vertical'>,
+    default: 'horizontal',
+  },
+
+  ...omit(makeVBtnProps({
+    selectedClass: 'v-tab--selected',
+    variant: 'text' as const,
+  }), [
+    'active',
+    'block',
+    'flat',
+    'location',
+    'position',
+    'symbol',
+  ]),
+}, 'VTab')
 
 export const VTab = genericComponent()({
   name: 'VTab',
 
-  props: {
-    fixed: Boolean,
-    icon: [Boolean, String, Function, Object] as PropType<boolean | IconValue>,
-    prependIcon: IconValue,
-    appendIcon: IconValue,
-
-    stacked: Boolean,
-    title: String,
-
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-    color: String,
-    sliderColor: String,
-    hideSlider: Boolean,
-
-    direction: {
-      type: String as PropType<'horizontal' | 'vertical'>,
-      default: 'horizontal',
-    },
-
-    ...makeTagProps(),
-    ...makeRouterProps(),
-    ...makeGroupItemProps({
-      selectedClass: 'v-tab--selected',
-    }),
-    ...makeThemeProps(),
-  },
+  props: makeVTabProps(),
 
   setup (props, { slots, attrs }) {
     const { textColorClasses: sliderColorClasses, textColorStyles: sliderColorStyles } = useTextColor(props, 'sliderColor')
     const isHorizontal = computed(() => props.direction === 'horizontal')
-    const isSelected = ref(false)
+    const isSelected = shallowRef(false)
 
     const rootEl = ref<VBtn>()
     const sliderEl = ref<HTMLElement>()
@@ -95,11 +86,11 @@ export const VTab = genericComponent()({
 
         const sigma = 1.5
         animate(nextEl, {
-          backgroundColor: [color, ''],
+          backgroundColor: [color, 'currentcolor'],
           transform: [
             `translate${XY}(${delta}px) scale${XY}(${initialScale})`,
             `translate${XY}(${delta / sigma}px) scale${XY}(${(scale - 1) / sigma + 1})`,
-            '',
+            'none',
           ],
           transformOrigin: Array(3).fill(origin),
         }, {
@@ -110,43 +101,30 @@ export const VTab = genericComponent()({
     }
 
     useRender(() => {
-      const [btnProps] = pick(props, [
-        'href',
-        'to',
-        'replace',
-        'icon',
-        'stacked',
-        'prependIcon',
-        'appendIcon',
-        'ripple',
-        'theme',
-        'disabled',
-        'selectedClass',
-        'value',
-        'color',
-      ])
+      const [btnProps] = VBtn.filterProps(props)
 
       return (
         <VBtn
-          _as="VTab"
           symbol={ VTabsSymbol }
           ref={ rootEl }
           class={[
             'v-tab',
+            props.class,
           ]}
+          style={ props.style }
           tabindex={ isSelected.value ? 0 : -1 }
           role="tab"
           aria-selected={ String(isSelected.value) }
           active={ false }
           block={ props.fixed }
           maxWidth={ props.fixed ? 300 : undefined }
-          variant="text"
           rounded={ 0 }
           { ...btnProps }
           { ...attrs }
           onGroup:selected={ updateSlider }
         >
-          { slots.default ? slots.default() : props.title }
+          { slots.default?.() ?? props.text }
+
           { !props.hideSlider && (
             <div
               ref={ sliderEl }
@@ -156,7 +134,7 @@ export const VTab = genericComponent()({
               ]}
               style={ sliderColorStyles.value }
             />
-          ) }
+          )}
         </VBtn>
       )
     })

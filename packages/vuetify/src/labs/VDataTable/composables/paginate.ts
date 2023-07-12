@@ -2,11 +2,12 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide } from 'vue'
-import { propsFactory } from '@/util'
+import { computed, inject, provide, watchEffect } from 'vue'
+import { clamp, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
+import type { Group } from './group'
 
 export const makeDataTablePaginateProps = propsFactory({
   page: {
@@ -17,7 +18,7 @@ export const makeDataTablePaginateProps = propsFactory({
     type: [Number, String],
     default: 10,
   },
-}, 'v-data-table-paginate')
+}, 'DataTable-paginate')
 
 const VDataTablePaginationSymbol: InjectionKey<{
   page: Ref<number>
@@ -26,6 +27,10 @@ const VDataTablePaginationSymbol: InjectionKey<{
   stopIndex: Ref<number>
   pageCount: Ref<number>
   itemsLength: Ref<number>
+  prevPage: () => void
+  nextPage: () => void
+  setPage: (value: number) => void
+  setItemsPerPage: (value: number) => void
 }> = Symbol.for('vuetify:data-table-pagination')
 
 type PaginationProps = {
@@ -36,10 +41,19 @@ type PaginationProps = {
   itemsLength?: number | string
 }
 
-export function createPagination (props: PaginationProps, items: Ref<any[]>) {
+export function createPagination (props: PaginationProps) {
   const page = useProxiedModel(props, 'page', undefined, value => +(value ?? 1))
   const itemsPerPage = useProxiedModel(props, 'itemsPerPage', undefined, value => +(value ?? 10))
-  const itemsLength = computed(() => +(props.itemsLength ?? items.value.length))
+
+  return { page, itemsPerPage }
+}
+
+export function providePagination (options: {
+  page: Ref<number>
+  itemsPerPage: Ref<number>
+  itemsLength: Ref<number>
+}) {
+  const { page, itemsPerPage, itemsLength } = options
 
   const startIndex = computed(() => {
     if (itemsPerPage.value === -1) return 0
@@ -58,7 +72,30 @@ export function createPagination (props: PaginationProps, items: Ref<any[]>) {
     return Math.ceil(itemsLength.value / itemsPerPage.value)
   })
 
-  const data = { page, itemsPerPage, startIndex, stopIndex, pageCount, itemsLength }
+  watchEffect(() => {
+    if (page.value > pageCount.value) {
+      page.value = pageCount.value
+    }
+  })
+
+  function setItemsPerPage (value: number) {
+    itemsPerPage.value = value
+    page.value = 1
+  }
+
+  function nextPage () {
+    page.value = clamp(page.value + 1, 1, pageCount.value)
+  }
+
+  function prevPage () {
+    page.value = clamp(page.value - 1, 1, pageCount.value)
+  }
+
+  function setPage (value: number) {
+    page.value = clamp(value, 1, pageCount.value)
+  }
+
+  const data = { page, itemsPerPage, startIndex, stopIndex, pageCount, itemsLength, nextPage, prevPage, setPage, setItemsPerPage }
 
   provide(VDataTablePaginationSymbol, data)
 
@@ -73,12 +110,13 @@ export function usePagination () {
   return data
 }
 
-export function usePaginatedItems (
-  items: Ref<any[]>,
-  startIndex: Ref<number>,
-  stopIndex: Ref<number>,
+export function usePaginatedItems <T> (options: {
+  items: Ref<readonly (T | Group<T>)[]>
+  startIndex: Ref<number>
+  stopIndex: Ref<number>
   itemsPerPage: Ref<number>
-) {
+}) {
+  const { items, startIndex, stopIndex, itemsPerPage } = options
   const paginatedItems = computed(() => {
     if (itemsPerPage.value <= 0) return items.value
 

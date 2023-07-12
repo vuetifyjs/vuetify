@@ -1,6 +1,6 @@
 ---
-nav: Alerts
 meta:
+  nav: Alerts
   title: Alert component
   description: The v-alert component is used to convey information to the user. Designed to stand out, the alerts come in four contextual styles.
   keywords: v-alert, alerts, vue alert component, vuetify alert component
@@ -26,6 +26,13 @@ An alert is a [v-sheet](/components/sheets/) that specializes in getting the use
 
 <entry />
 
+## API
+
+| Component | Description |
+| - | - |
+| [v-alert](/api/v-alert/) | Primary Component |
+| [v-alert-title](/api/v-alert-title/) | Sub-component used to display the `v-alert` title. Wraps the `#title` slot |
+
 ## Anatomy
 
 The recommended placement of elements inside of `v-alert` is:
@@ -44,13 +51,6 @@ The recommended placement of elements inside of `v-alert` is:
 | 3. Title | A heading with increased font-size |
 | 4. Text | A content area for displaying text and other inline elements |
 | 5. Close Icon (optional) | Used to hide the `v-alert` component |
-
-## API
-
-| Component | Description |
-| - | - |
-| [v-alert](/api/v-alert/) | Primary Component |
-| [v-alert-title](/api/v-alert-title/) | Functional Component used to display the `v-alert` title. Wraps the `#title` slot |
 
 <api-inline hide-links />
 
@@ -130,11 +130,9 @@ The **closable** prop adds a [v-icon](/components/icons) on the far right, after
 
 The close icon automatically applies a default `aria-label` and is configurable by using the **close-label** prop or changing **close** value in your locale.
 
-<alert type="info">
-
+::: info
   For more information on how to global modify your locale settings, navigate to the [Internationalization page](/features/internationalization).
-
-</alert>
+:::
 
 ## Additional Examples
 

@@ -20,6 +20,15 @@
     -webkit-mask-image: linear-gradient(to bottom, transparent, transparent $a, black $b)
     mask-image: linear-gradient(to bottom, transparent, transparent $a, black $b)
 
+    &.v-textarea__sizer
+      visibility: hidden
+      position: absolute
+      top: 0
+      left: 0
+      height: 0 !important
+      min-height: 0 !important
+      pointer-events: none
+
   &--auto-grow
     .v-field__input
       overflow: hidden
@@ -27,15 +36,6 @@
   &--no-resize
     .v-field__input
       resize: none
-
-  &__sizer
-    visibility: hidden
-    position: absolute
-    top: 0
-    left: 0
-    height: 0 !important
-    min-height: 0 !important
-    pointer-events: none
 
   .v-field--no-label,
   .v-field--active

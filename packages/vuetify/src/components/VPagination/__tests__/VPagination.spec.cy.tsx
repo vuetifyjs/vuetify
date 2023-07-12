@@ -5,13 +5,13 @@ import { VPagination } from '..'
 import { VLocaleProvider } from '@/components/VLocaleProvider'
 
 // Utilities
-import { keyValues } from '@/util'
 import { defineComponent, ref } from 'vue'
+import { keyValues } from '@/util'
 
 describe('VPagination', () => {
   it('should render set length', () => {
     cy.mount(() => (
-      <VPagination length={3} />
+      <VPagination length={ 3 } />
     ))
 
     cy.get('.v-pagination__item').should('have.length', 3)
@@ -19,7 +19,7 @@ describe('VPagination', () => {
 
   it('should react to mouse navigation', () => {
     cy.mount(() => (
-      <VPagination length={3} />
+      <VPagination length={ 3 } />
     ))
 
     cy.get('.v-pagination__item').eq(1).find('.v-btn').trigger('click')
@@ -39,7 +39,7 @@ describe('VPagination', () => {
   it('should react to keyboard navigation', () => {
     cy.mount(defineComponent(() => {
       const model = ref(2)
-      return () => <VPagination v-model={ model.value } length={3} />
+      return () => <VPagination v-model={ model.value } length={ 3 } />
     }))
 
     cy.get('.v-pagination__item').first().find('.v-btn').focus()

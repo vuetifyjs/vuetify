@@ -26,12 +26,21 @@ export default {
     lastPage: '最後頁',
     pageText: '{2} 條中的 {0}~{1} 條',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '已選擇 {0}',
-    nextMonthAriaLabel: '下個月',
-    nextYearAriaLabel: '明年',
-    prevMonthAriaLabel: '前一個月',
-    prevYearAriaLabel: '前一年',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: '沒有資料',
   carousel: {
@@ -72,5 +81,10 @@ export default {
     ariaLabel: {
       item: 'Rating {0} of {1}',
     },
+  },
+  loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
   },
 }

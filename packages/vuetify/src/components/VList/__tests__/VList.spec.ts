@@ -2,15 +2,15 @@
 import { VList } from '..'
 
 // Utilities
-import { createVuetify } from '@/framework'
-import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
+import { createVuetify } from '@/framework'
 
 describe('VList', () => {
   const vuetify = createVuetify()
 
   function mountFunction (options = {}) {
-    return mount(VList, {
+    return mount<any>(VList, {
       global: { plugins: [vuetify] },
       ...options,
     })

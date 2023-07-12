@@ -1,6 +1,5 @@
 // Components
-import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
-import { makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
+import { makeVSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
 
 // Composables
 import { IconValue } from '@/composables/icons'
@@ -8,10 +7,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, pick, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ExtractPropTypes } from 'vue'
+import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
 
 export const makeVCheckboxBtnProps = propsFactory({
   indeterminate: Boolean,
@@ -20,11 +19,11 @@ export const makeVCheckboxBtnProps = propsFactory({
     default: '$checkboxIndeterminate',
   },
 
-  ...makeSelectionControlProps({
+  ...makeVSelectionControlProps({
     falseIcon: '$checkboxOff',
     trueIcon: '$checkboxOn',
   }),
-}, 'v-checkbox-btn')
+}, 'VCheckboxBtn')
 
 export const VCheckboxBtn = genericComponent<VSelectionControlSlots>()({
   name: 'VCheckboxBtn',
@@ -47,13 +46,13 @@ export const VCheckboxBtn = genericComponent<VSelectionControlSlots>()({
     }
 
     const falseIcon = computed(() => {
-      return props.indeterminate
+      return indeterminate.value
         ? props.indeterminateIcon
         : props.falseIcon
     })
 
     const trueIcon = computed(() => {
-      return props.indeterminate
+      return indeterminate.value
         ? props.indeterminateIcon
         : props.trueIcon
     })
@@ -62,13 +61,16 @@ export const VCheckboxBtn = genericComponent<VSelectionControlSlots>()({
       <VSelectionControl
         { ...props }
         v-model={ model.value }
-        class="v-checkbox-btn"
+        class={[
+          'v-checkbox-btn',
+          props.class,
+        ]}
+        style={ props.style }
         type="checkbox"
-        inline
         onUpdate:modelValue={ onChange }
         falseIcon={ falseIcon.value }
         trueIcon={ trueIcon.value }
-        aria-checked={ props.indeterminate ? 'mixed' : undefined }
+        aria-checked={ indeterminate.value ? 'mixed' : undefined }
         v-slots={ slots }
       />
     ))
@@ -78,7 +80,3 @@ export const VCheckboxBtn = genericComponent<VSelectionControlSlots>()({
 })
 
 export type VCheckboxBtn = InstanceType<typeof VCheckboxBtn>
-
-export function filterCheckboxBtnProps (props: ExtractPropTypes<ReturnType<typeof makeVCheckboxBtnProps>>) {
-  return pick(props, Object.keys(VCheckboxBtn.props) as any)
-}

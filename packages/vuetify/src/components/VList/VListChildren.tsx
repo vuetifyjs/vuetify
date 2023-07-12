@@ -1,35 +1,42 @@
 // Components
-import { VDivider } from '../VDivider'
-import { filterListGroupProps, VListGroup } from './VListGroup'
+import { VListGroup } from './VListGroup'
 import { VListItem } from './VListItem'
 import { VListSubheader } from './VListSubheader'
+import { VDivider } from '../VDivider'
 
 // Utilities
 import { createList } from './list'
-import { genericComponent } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import type { InternalListItem } from './VList'
-import type { ListItemSubtitleSlot, ListItemTitleSlot } from './VListItem'
-import type { SlotsToProps } from '@/util'
-import type { Prop } from 'vue'
+import type { VListItemSlots } from './VListItem'
+import type { GenericProps } from '@/util'
 
-export const VListChildren = genericComponent<new <T extends InternalListItem>() => {
-  $props: {
-    items?: T[]
-  } & SlotsToProps<{
-    default: []
-    header: [{ props: Record<string, unknown> }]
-    item: [T]
-    title: [ListItemTitleSlot]
-    subtitle: [ListItemSubtitleSlot]
-  }>
-}>()({
+export type VListChildrenSlots<T> = {
+  [K in keyof Omit<VListItemSlots, 'default'>]: VListItemSlots[K] & { item: T }
+} & {
+  default: never
+  item: { props: InternalListItem['props'] }
+  divider: { props: InternalListItem['props'] }
+  subheader: { props: InternalListItem['props'] }
+  header: { props: InternalListItem['props'] }
+}
+
+export const makeVListChildrenProps = propsFactory({
+  items: Array as PropType<readonly InternalListItem[]>,
+}, 'VListChildren')
+
+export const VListChildren = genericComponent<new <T extends InternalListItem>(
+  props: {
+    items?: readonly T[]
+  },
+  slots: VListChildrenSlots<T>
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VListChildren',
 
-  props: {
-    items: Array as Prop<InternalListItem[]>,
-  },
+  props: makeVListChildrenProps(),
 
   setup (props, { slots }) {
     createList()
@@ -43,10 +50,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
 
       if (type === 'subheader') {
         return slots.subheader?.({ props: itemProps }) ?? (
-          <VListSubheader
-            { ...itemProps }
-            v-slots={{ default: slots.subheader }}
-          />
+          <VListSubheader { ...itemProps } />
         )
       }
 
@@ -54,11 +58,10 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
         subtitle: slots.subtitle ? (slotProps: any) => slots.subtitle?.({ ...slotProps, item }) : undefined,
         prepend: slots.prepend ? (slotProps: any) => slots.prepend?.({ ...slotProps, item }) : undefined,
         append: slots.append ? (slotProps: any) => slots.append?.({ ...slotProps, item }) : undefined,
-        default: slots.default ? (slotProps: any) => slots.default?.({ ...slotProps, item }) : undefined,
         title: slots.title ? (slotProps: any) => slots.title?.({ ...slotProps, item }) : undefined,
       }
 
-      const [listGroupProps, _1] = filterListGroupProps(itemProps as any)
+      const [listGroupProps, _1] = VListGroup.filterProps(itemProps)
 
       return children ? (
         <VListGroup
@@ -75,7 +78,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
           }}
         </VListGroup>
       ) : (
-        slots.item ? slots.item(itemProps) : (
+        slots.item ? slots.item({ props: itemProps }) : (
           <VListItem
             { ...itemProps }
             v-slots={ slotsWithItem }

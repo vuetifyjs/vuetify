@@ -1,7 +1,0 @@
-{
-  "props": {
-    "locationStrategy": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-overlay-location-strategies.json))",
-    "location": "Aligns the component towards the `top`, `bottom`, `right`, `left`, can be combined like for example `top right`",
-    "offset": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-overlay-location-strategies.json))"
-  }
-}

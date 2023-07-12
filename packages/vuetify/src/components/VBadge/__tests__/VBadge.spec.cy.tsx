@@ -1,7 +1,10 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
 import { VBadge } from '..'
 import { VBtn } from '@/components/VBtn'
+
+// Utilities
 import { generate, gridOn } from '@/../cypress/templates'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
@@ -14,7 +17,7 @@ const props = {
   color: defaultColors,
   content: ['content'],
   dot: true,
-  icon: ['mdi-vuetify'],
+  icon: ['$vuetify'],
   floating: true,
   inline: true,
   location,
@@ -24,9 +27,9 @@ const props = {
 
 const stories = {
   'Default badge': <VBadge />,
-  'Icon badge': <VBadge icon="mdi-vuetify" />,
+  'Icon badge': <VBadge icon="$vuetify" />,
   'Offset badge': gridOn(['offsetX', 'offsetY'], offset, (xy, offset) => (
-      <VBadge {...{ [xy]: offset }} content={ `${offset}` }>
+      <VBadge { ...{ [xy]: offset } } content={ `${offset}` }>
         <VBtn>
           { xy }
         </VBtn>
@@ -47,11 +50,11 @@ describe('VBadge', () => {
     it('supports default color props', () => {
       cy.mount(() => (
         <>
-          {defaultColors.map((color, idx) => (
+          { defaultColors.map((color, idx) => (
             <VBadge color={ color } content={ idx.toString() }>
               { color } badge
             </VBadge>
-          )) }
+          ))}
         </>
       ))
         .get('.v-badge')
@@ -94,11 +97,11 @@ describe('VBadge', () => {
     it('supports default text color props', () => {
       cy.mount(() => (
         <>
-          {defaultColors.map((color, idx) => (
+          { defaultColors.map((color, idx) => (
             <VBadge textColor={ color } content={ idx.toString() }>
               { color } text badge
             </VBadge>
-          )) }
+          ))}
         </>
       ))
         .get('.v-badge')

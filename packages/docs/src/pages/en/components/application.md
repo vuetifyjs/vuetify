@@ -14,11 +14,7 @@ related:
 
 The `v-app` component is an optional feature that serves as the root layout component as well as providing an easy way to control the theme used at the root level.
 
-<!-- ![Application Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-app/v-app.png) -->
-
 <entry />
-
-----
 
 In Vuetify, the `v-app` component is a convenient way to dynamically modify your application's current theme and provide an entry point for your layouts. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. When an application is mounted, each layout child registers itself with the closest layout parent and is then automatically placed in your window.
 
@@ -91,13 +87,9 @@ The following example demonstrates how to use the **theme** prop to toggle the t
 </script>
 ```
 
-<alert type="success">
-
-  **TIP**
-
+::: tip
   All components support to override the currently inherited theme locally using the **theme** prop.
-
-</alert>
+:::
 
 ## API
 
@@ -124,8 +116,6 @@ The following components are compatible with the [Application layout](/features/
 
 <app-figure src="https://cdn.vuetifyjs.com/images/layouts/app.png" alt="Vuetify Application" />
 
-<alert type="info">
-
+::: info
   More information on how to interact with the root sizing and styling is on the [Application](/features/application-layout/) page.
-
-</alert>
+:::

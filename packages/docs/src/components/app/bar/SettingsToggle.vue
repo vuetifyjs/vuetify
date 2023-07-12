@@ -4,7 +4,6 @@
     color="medium-emphasis"
     icon="mdi-cog-outline"
     path="settings"
-    @mouseenter.once="onMouseenter"
     @click="onClick"
   />
 </template>
@@ -24,11 +23,5 @@
     gtagClick('app-bar', 'settings-toggle', name)
 
     app.settings = !app.settings
-  }
-
-  function onMouseenter () {
-    if (app.settingsCanShow) return
-
-    app.settingsCanShow = true
   }
 </script>

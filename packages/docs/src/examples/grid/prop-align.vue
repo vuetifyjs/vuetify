@@ -83,15 +83,3 @@
     </v-container>
   </div>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-      alignments: [
-        'start',
-        'center',
-        'end',
-      ],
-    }),
-  }
-</script>

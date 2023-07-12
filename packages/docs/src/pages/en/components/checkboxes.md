@@ -1,6 +1,6 @@
 ---
-nav: Checkboxes
 meta:
+  nav: Checkboxes
   title: Checkbox component
   description: The checkbox component permits users to select between two values.
   keywords: checkbox, checkbox component, vuetify checkbox component, vue checkbox component
@@ -28,7 +28,11 @@ A `v-checkbox` in its simplest form provides a toggle between 2 values.
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-checkbox](/api/v-checkbox/) | Primary component |
+
+<api-inline hide-links />
 
 ## Examples
 

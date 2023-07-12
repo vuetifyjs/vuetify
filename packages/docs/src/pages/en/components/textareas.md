@@ -1,6 +1,6 @@
 ---
-nav: Textareas
 meta:
+  nav: Textareas
   title: Textarea component
   description: The textarea component is a text field that accepts lengthy textual input from users.
   keywords: textareas, vuetify textarea component, vue textarea component
@@ -14,17 +14,21 @@ related:
 
 Textarea components are used for collecting large amounts of textual data.
 
-<entry />
-
 ## Usage
 
 `v-textarea` in its simplest form is a multi-line text-field, useful for larger amounts of text.
 
 <usage name="v-textarea" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-textarea](/api/v-textarea/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

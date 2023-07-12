@@ -1,0 +1,26 @@
+{
+  "props": {
+    "absolute": "Applies **position: absolute** to the content element.",
+    "attach": "Specifies which DOM element the overlay content should teleport to. Can be a direct element reference, querySelector string, or `true` to disable teleporting. Uses `body` by default.",
+    "closeOnBack": "Closes the overlay content when the browser's back button is pressed or `$router.back()` is called, cancelling the original navigation. `persistent` overlays will cancel navigation and animate as if they were clicked outside instead of closing.",
+    "contained": "Limits the size of the component and scrim to its offset parent. Implies `absolute` and `attach`.",
+    "opacity": "Sets the overlay opacity",
+    "zIndex": "The z-index used for the component",
+    "contentProps": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-overlay.json))",
+    "noClickAnimation": "Disables the bounce effect when clicking outside of the content element when using the persistent prop.",
+    "persistent": "Clicking outside of the element or pressing esc key will not deactivate it.",
+    "scrim": "Accepts true/false to enable background, and string to define color."
+  },
+  "events": {
+    "click:outside": "Event that fires when clicking outside an active overlay.",
+    "afterLeave": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-overlay.json))"
+  },
+  "exposed": {
+    "activatorEl": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-overlay.json))",
+    "animateClick": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-overlay.json))",
+    "contentEl": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-overlay.json))",
+    "globalTop": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-overlay.json))",
+    "localTop": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-overlay.json))",
+    "updateLocation": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-overlay.json))"
+  }
+}

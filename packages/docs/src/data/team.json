@@ -65,19 +65,6 @@
     "name": "Albert Kaaman",
     "team": "core"
   },
-  "jacekkarczmarczyk": {
-    "discord": "jacek#3542",
-    "focus": [
-      "[vuetifyjs](https://github.com/vuetifyjs)"
-    ],
-    "languages": [
-      "Polish",
-      "English"
-    ],
-    "location": "Warsaw, Poland",
-    "name": "Jacek Karczmarczyk",
-    "team": "core"
-  },
   "MajesticPotatoe": {
     "discord": "MajesticPotatoe#4997",
     "focus": [
@@ -108,22 +95,52 @@
     "linkedin": "blalan05",
     "location": "Wisconsin, USA",
     "name": "Blaine Landowski",
-    "team": "core"
+    "team": "core",
+    "work": "CEO at Foundational Technologies LLC"
   },
-  "ElijahKotyluk": {
-    "discord": "edk#4363",
-    "funding": [
-      "[GitHub Sponsors](https://github.com/sponsors/ElijahKotyluk)"
-    ],
+  "": {
+    "discord": "Elvina Garcia#0203",
     "focus": [
-      "[vuetifyjs](https://github.com/vuetifyjs)",
-      "[vuetifyjs/vue-cli-plugins](https://github.com/vuetifyjs/vue-cli-plugins)"
+      "Design/Animations"
     ],
     "languages": [
       "English"
     ],
-    "location": "USA",
-    "name": "Elijah Kotyluk",
+    "location": "Virginia, USA",
+    "name": "Elvina Garcia",
+    "team": "core"
+  },
+  "santiagoaloi": {
+    "discord": "lannister#9474",
+    "focus": [
+      "[vuetifyjs/Community Suppport](https://discord.com/invite/vuetify-340160225338195969)",
+      "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
+    ],
+    "funding": [
+      "[GitHub Sponsors](https://github.com/sponsors/santiagoaloi/)"
+    ],
+    "languages": [
+      "Swedish",
+      "English",
+      "Spanish"
+    ],
+    "linkedin": "santiagoaloi",
+    "location": "Stockholm, Sweden",
+    "name": "Santiago Aloi",
+    "team": "core",
+    "work": "Product Specialist @ DataTalks"
+  },
+  "yuwu9145": {
+    "discord": "yuchao#8454",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English",
+      "Chinese(Mandarin)"
+    ],
+    "location": "Melbourne, Australia",
+    "name": "Yuchao Wu",
     "team": "core"
   }
 }

@@ -1,6 +1,6 @@
 ---
-nav: Installation
 meta:
+  nav: Installation
   title: Get started with Vuetify 3
   description: Details for v3 release - faq, changes, and upgrading.
   keywords: migration, releases, upgrading vuetify, beta, v3
@@ -18,17 +18,27 @@ related:
 
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast applications.
 
-![Installation Entry](https://cdn.vuetifyjs.com/docs/images/entry/installation-entry.png)
-
-----
+<entry />
 
 ## Installation
 
 To get started with Vuetify 3, simply paste the following code into your terminal:
 
-```bash
+::: tabs
+
+```bash [yarn]
 yarn create vuetify
 ```
+
+```bash [npm]
+npm create vuetify
+```
+
+```bash [pnpm]
+pnpm create vuetify
+```
+
+:::
 
 This command prompts you with a few options before generating your scaffolded Vue / Vuetify 3 project.
 
@@ -45,7 +55,7 @@ success Installed "create-vuetify@x.x.x" with binaries:
     none
 ```
 
-After making your selections, [vuetify-create](https://github.com/vuetifyjs/create-vuetify) will generate the structure for your new application.
+After making your selections, [create-vuetify](https://github.com/vuetifyjs/create-vuetify) will generate the structure for your new application.
 
 Once the scaffold is complete, start the vite development server by running the following commands:
 
@@ -125,6 +135,33 @@ const app = createApp()
 app.use(vuetify).mount('#app')
 ```
 
+## Using Laravel Mix
+
+```js
+import { createApp } from 'vue'
+import App from './App.vue'
+
+// Vuetify
+import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+  components,
+  directives
+})
+
+createApp(App).use(vuetify).mount('#app')
+```
+
+To import the fonts you need to add to webpack.mix.js:
+
+```js
+mix.copy('node_modules/@mdi/font/fonts/', 'dist/fonts/')
+```
+
 ## Exposed exports
 
 ### JS
@@ -154,13 +191,20 @@ See [SASS Variables](/features/sass-variables/) for more information.
 
 ## Nightly Builds
 
-The three development branches (`master`, `dev`, and `next`) are automatically published to NPM at 1200 UTC under the [`@vuetify/nightly`](https://www.npmjs.com/package/@vuetify/nightly?activeTab=versions) namespace. They may be outdated or buggy and are therefore not officially supported and are only supplied for testing puposes. These builds can be installed with a [package alias](https://docs.npmjs.com/cli/v8/commands/npm-install#:~:text=Install%20a%20package%20under%20a%20custom%20alias).
+The three development branches (`master`, `dev`, and `next`) are automatically published to NPM at 1200 UTC under the [`@vuetify/nightly`](https://www.npmjs.com/package/@vuetify/nightly?activeTab=versions) namespace. They may be outdated or buggy and are therefore not officially supported and are only supplied for testing purposes. These builds can be installed with a [package alias](https://docs.npmjs.com/cli/v8/commands/npm-install#:~:text=Install%20a%20package%20under%20a%20custom%20alias).
 
 | Branch name | Purpose          | package.json entry                         | Changelog                                                           |
 |-------------|------------------|--------------------------------------------|---------------------------------------------------------------------|
 | `master`    | Bug fixes        | `"vuetify": "npm:@vuetify/nightly@latest"` | [Changelog](https://unpkg.com/@vuetify/nightly@latest/CHANGELOG.md) |
 | `dev`       | New features     | `"vuetify": "npm:@vuetify/nightly@dev"`    | [Changelog](https://unpkg.com/@vuetify/nightly@dev/CHANGELOG.md)    |
 | `next`      | Breaking changes | `"vuetify": "npm:@vuetify/nightly@next"`   | [Changelog](https://unpkg.com/@vuetify/nightly@next/CHANGELOG.md)   |
+
+```diff
+ "devDependencies": {
+-  "vuetify": "^3.3.0"
++  "vuetify": "npm:@vuetify/nightly@3.3.0-master.2023-05-21"
+ }
+```
 
 ## Questions
 

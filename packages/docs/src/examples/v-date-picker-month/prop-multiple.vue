@@ -8,6 +8,12 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const months = ref(['2018-09', '2018-10'])
+</script>
+
 <script>
   export default {
     data: () => ({

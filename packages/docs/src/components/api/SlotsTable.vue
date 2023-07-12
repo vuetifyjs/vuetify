@@ -6,7 +6,7 @@
       </tr>
 
       <tr v-if="item.formatted !== 'never' && item.text !== 'undefined'">
-        <app-markup :code="getType(item)" language="ts" :rounded="false" />
+        <app-markup :code="item.formatted" language="ts" :rounded="false" />
       </tr>
     </template>
   </ApiTable>
@@ -16,7 +16,4 @@
   // Components
   import ApiTable from './ApiTable.vue'
   import NameCell from './NameCell.vue'
-
-  // Utilities
-  import { getType } from './utils'
 </script>

@@ -1,8 +1,8 @@
 /// <reference types="../../../../types/cypress" />
 
 // Components
-import { VBtn } from '@/components/VBtn'
 import { VBtnGroup } from '..'
+import { VBtn } from '@/components/VBtn'
 
 const colors = ['success', 'info', 'warning', 'error', 'invalid'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -20,7 +20,7 @@ describe('VBtnGroup', () => {
               <VBtn>Button 2</VBtn>
               <VBtn>Button 3</VBtn>
             </VBtnGroup>
-          )) }
+          ))}
         </>
       ))
         .get('.v-btn-group')
@@ -38,7 +38,7 @@ describe('VBtnGroup', () => {
               <VBtn>Button 2</VBtn>
               <VBtn>Button 3</VBtn>
             </VBtnGroup>
-          )) }
+          ))}
         </>
       ))
         .get('.v-btn-group')
@@ -56,7 +56,7 @@ describe('VBtnGroup', () => {
               <VBtn>Button 2</VBtn>
               <VBtn>Button 3</VBtn>
             </VBtnGroup>
-          )) }
+          ))}
         </>
       ))
         .get('.v-btn-group')

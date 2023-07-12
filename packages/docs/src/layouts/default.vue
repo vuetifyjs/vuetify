@@ -58,6 +58,6 @@
 
   const route = useRoute()
 
-  const isApi = computed(() => route.name?.toString().startsWith('api-'))
+  const isApi = computed(() => route.meta?.category === 'api')
   const style = computed(() => ({ maxWidth: isApi.value ? '1368px' : '960px' }))
 </script>

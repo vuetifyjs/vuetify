@@ -7,13 +7,13 @@ const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
 
 const props = {
   color: defaultColors,
-  icon: ['mdi-vuetify'],
+  icon: ['$vuetify'],
   modelValue: true,
 }
 
 const stories = {
   'Default alert': <VAlert />,
-  'Icon alert': <VAlert icon="mdi-vuetify" />,
+  'Icon alert': <VAlert icon="$vuetify" />,
 }
 
 // Tests
@@ -22,11 +22,11 @@ describe('VAlert', () => {
     it('supports default color props', () => {
       cy.mount(() => (
         <>
-          {defaultColors.map((color, idx) => (
+          { defaultColors.map((color, idx) => (
             <VAlert color={ color } text={ idx.toString() }>
               { color } alert
             </VAlert>
-          )) }
+          ))}
         </>
       ))
         .get('.v-alert')

@@ -1,6 +1,6 @@
 ---
-nav: Badges
 meta:
+  nav: Badges
   title: Badge component
   description: The badge component is a small status descriptor for elements. This typically contains a small number or short set of characters.
   keywords: badges, vuetify badge component, vue badge component
@@ -28,7 +28,11 @@ Badges in their simplest form display to the upper right of the content that it 
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-badge](/api/v-badge/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

@@ -1,7 +1,9 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
 import { Application } from '../../../../cypress/templates'
 import { VRating } from '../VRating'
+import { VBtn } from '@/components/VBtn'
 
 describe('VRating', () => {
   it('should response to user interaction', () => {
@@ -12,8 +14,7 @@ describe('VRating', () => {
     ))
 
     cy.get('.v-rating__item .v-btn').eq(3).click()
-
-    cy.emitted('.v-rating', 'update:modelValue').should('deep.equal', [[4]])
+      .emitted(VRating, 'update:modelValue').should('deep.equal', [[4]])
   })
 
   it('should respond to prop value changes', () => {
@@ -24,8 +25,11 @@ describe('VRating', () => {
     ))
 
     cy.setProps({ rating: 4 })
-
-    cy.get('.v-rating__item i.mdi-star').should('have.length', 4)
+    cy.get('.v-rating__item .v-icon').then(icons => {
+      icons.each((i, el) => {
+        expect(el.outerHTML).to.equal(icons[i < 4 ? 0 : 4].outerHTML)
+      })
+    })
   })
 
   it('should clear value if using clearable prop', () => {
@@ -36,18 +40,12 @@ describe('VRating', () => {
     ))
 
     cy.get('.v-rating__item .v-btn').eq(1).click()
-
-    cy.emitted('.v-rating', 'update:modelValue').should('deep.equal', [[2]])
-
-    cy.get('.v-rating__item .v-btn').eq(1).click()
-
-    cy.emitted('.v-rating', 'update:modelValue').should('deep.equal', [[2]])
-
-    cy.setProps({ clearable: true })
-
-    cy.get('.v-rating__item .v-btn').eq(1).click()
-
-    cy.emitted('.v-rating', 'update:modelValue').should('deep.equal', [[2], [0]])
+      .emitted(VRating, 'update:modelValue').should('deep.equal', [[2]])
+      .get('.v-rating__item .v-btn').eq(1).click()
+      .emitted(VRating, 'update:modelValue').should('deep.equal', [[2]])
+      .setProps({ clearable: true })
+      .get('.v-rating__item .v-btn').eq(1).click()
+      .emitted(VRating, 'update:modelValue').should('deep.equal', [[2], [0]])
   })
 
   it('should not react to events when readonly', done => {
@@ -79,8 +77,11 @@ describe('VRating', () => {
     ))
 
     cy.get('.v-rating__item .v-btn').eq(2).realHover()
-
-    cy.get('.v-rating__item i.mdi-star').should('have.length', 3)
+    cy.get('.v-rating__item .v-icon').then(icons => {
+      icons.each((i, el) => {
+        expect(el.outerHTML).to.equal(icons[i < 3 ? 0 : 4].outerHTML)
+      })
+    })
   })
 
   it('should show item-labels', () => {
@@ -98,21 +99,26 @@ describe('VRating', () => {
       <Application>
         <VRating>
           {{
-            item: (props: any) => <div class="foo">{ props.value }</div>,
+            item: ({ value, rating }) => (
+              <VBtn variant="tonal" class="mx-1" color={ rating === value ? 'primary' : undefined }>{ value }</VBtn>
+            ),
           }}
         </VRating>
       </Application>
     ))
 
-    cy.get('.v-rating__item .foo').should('have.length', 5)
+    cy.get('.v-btn.mx-1')
+      .eq(2)
+      .click()
+      .should('have.class', 'text-primary')
   })
 
-  it('should support scoped item slot', () => {
+  it('should support scoped item-label slot', () => {
     cy.mount(() => (
       <Application>
         <VRating>
           {{
-            'item-label': (props: any) => <div class="foo">{ props.value }</div>,
+            'item-label': props => <div class="foo">{ props.value }</div>,
           }}
         </VRating>
       </Application>
@@ -129,10 +135,8 @@ describe('VRating', () => {
     ))
 
     cy.get('.v-rating__item input').should('have.length', 10)
-
-    cy.get('.v-rating__item .v-rating__item--half').eq(3).click({ force: true })
-
-    cy.emitted('.v-rating', 'update:modelValue').should('deep.equal', [[3.5]])
+      .get('.v-rating__item .v-rating__item--half').eq(3).click({ force: true })
+      .emitted(VRating, 'update:modelValue').should('deep.equal', [[3.5]])
   })
 
   it('should support half-increments and custom size', () => {
@@ -143,9 +147,29 @@ describe('VRating', () => {
     ))
 
     cy.get('.v-rating__item input').should('have.length', 10)
+      .get('.v-rating__item .v-rating__item--half').eq(3).click({ force: true })
+      .emitted(VRating, 'update:modelValue').should('deep.equal', [[3.5]])
+  })
 
-    cy.get('.v-rating__item .v-rating__item--half').eq(3).click({ force: true })
+  it('should support tabbed navigation', () => {
+    cy.mount(() => (
+      <Application>
+        <VRating />
+      </Application>
+    ))
 
-    cy.emitted('.v-rating', 'update:modelValue').should('deep.equal', [[3.5]])
+    cy.realPress('Tab')
+      .get('.v-btn').eq(0).focused()
+      .realPress('Space')
+      .realPress('Tab')
+      .get('.v-btn').eq(1).focused()
+      .realPress('Tab')
+      .get('.v-btn').eq(2).focused()
+      .realPress('Space')
+      .realPress(['Shift', 'Tab'])
+      .get('.v-btn').eq(1).focused()
+      .realPress('Space')
+      .emitted(VRating, 'update:modelValue')
+      .should('deep.equal', [[1], [3], [2]])
   })
 })

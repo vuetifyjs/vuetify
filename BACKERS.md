@@ -9,7 +9,6 @@ You can join them in supporting Vuetify by [Sponsoring the Project](https://vuet
 ## Palladium
 
 - [QOMPLX](https://www.qomplx.com/)
-- [sanofi](https://www.sanofi.us/en/)
 
 ### Platinum
 
@@ -19,18 +18,17 @@ You can join them in supporting Vuetify by [Sponsoring the Project](https://vuet
 - [Crossword Solver](http://crossword-solver.io/)
 - [slim.ai](https://www.slim.ai/)
 - [HEX Online Casino](https://netticasinohex.com/)
-- [Genius M](https://www.noneedtostudy.com/take-my-online-class/)
+- [Crossword Answers 911](https://crosswordanswers911.net/)
+- [itM](https://www.muenchen.de/)
 
 ### Gold
 
 - [DigitalMaas](https://www.digitalmaas.com/)
 - [Quanted Square](https://quantedsquare.com/)
-- [HYPE](https://www.hypeinnovation.com/home)
-- [PapersOwl](https://papersowl.com/write-my-essay-please)
 - [Cosmic](https://www.cosmicjs.com/)
+- [PapersOwl](https://papersowl.com/write-my-essay-please)
 - [Dealer Desk](https://www.dealerdesk.de/)
 - [Writers per Hour](https://writersperhour.com/buy-essay/)
-- [Top Rated Casino Sites](https://www.topratedcasinosites.co.uk/)
 - [AussieCasinoHex](https://aussiecasinohex.com/)
 - [Goread.io](https://goread.io/buy-instagram-follower)
 - [Casinoonlineaams](https://www.casinoonlineaams.com/)
@@ -38,3 +36,4 @@ You can join them in supporting Vuetify by [Sponsoring the Project](https://vuet
 - [NonGamStopWager](https://www.nongamstopwager.com/casinos-not-on-gamstop/)
 - [Crypto Casinos](https://cryptocasinos.com/)
 - [Buy Instagram Likes](https://www.instafollowers.co/buy-instagram-likes)
+- [VPS](https://www.vpsserver.com)

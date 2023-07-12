@@ -1,4 +1,5 @@
 @use 'sass:list'
+@use 'sass:math'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -18,6 +19,18 @@
   @include tools.states('.v-list-item__overlay')
   @include tools.rounded($list-item-border-radius)
   @include tools.variant($list-item-variants...)
+
+  @supports selector(:focus-visible)
+    &::after
+      @include tools.absolute(true)
+      pointer-events: none
+      border: 2px solid currentColor
+      border-radius: 4px
+      opacity: 0
+      transition: opacity .2s ease-in-out
+
+    &:focus-visible::after
+      opacity: calc(.15 * var(--v-theme-overlay-multiplier))
 
   &__prepend,
   &__append
@@ -177,6 +190,10 @@
         @if ($three-line-padding > 0)
           padding-top: $three-line-padding
           padding-bottom: $three-line-padding
+
+          .v-list-item__prepend,
+          .v-list-item__append
+            padding-top: math.div($three-line-padding, 2)
 
       &:not(.v-list-item--nav)
         &.v-list-item--one-line

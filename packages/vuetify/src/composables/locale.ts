@@ -1,7 +1,9 @@
+// Utilities
 import { computed, inject, provide, ref } from 'vue'
-import { createVuetifyAdapter } from '@/locale/adapters/vuetify'
 import { defaultRtl } from '@/locale'
+import { createVuetifyAdapter } from '@/locale/adapters/vuetify'
 
+// Types
 import type { InjectionKey, Ref } from 'vue'
 
 export interface LocaleMessages {
@@ -80,7 +82,7 @@ export interface RtlInstance {
 export const RtlSymbol: InjectionKey<RtlInstance> = Symbol.for('vuetify:rtl')
 
 export function createRtl (i18n: LocaleInstance, options?: RtlOptions): RtlInstance {
-  const rtl = ref(options?.rtl ?? defaultRtl)
+  const rtl = ref<Record<string, boolean>>(options?.rtl ?? defaultRtl)
   const isRtl = computed(() => rtl.value[i18n.current.value] ?? false)
 
   return {

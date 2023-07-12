@@ -1,4 +1,7 @@
+// Utilities
 import { attachedRoot } from '@/util'
+
+// Types
 import type { DirectiveBinding } from 'vue'
 
 interface ClickOutsideBindingArgs {
@@ -89,7 +92,7 @@ export const ClickOutside = {
 
     if (!el._clickOutside) {
       el._clickOutside = {
-        lastMousedownWasOutside: true,
+        lastMousedownWasOutside: false,
       }
     }
 

@@ -1,6 +1,6 @@
 ---
-nav: Switches
 meta:
+  nav: Switches
   title: Switch component
   description: The switch component is a simple and eloquent toggle used to select between two values.
   keywords: switch, switch component, vuetify switch component, vue switch component
@@ -14,17 +14,21 @@ related:
 
 The `v-switch` component provides users the ability to choose between two distinct values. These are very similar to a toggle, or on/off switch, though aesthetically different than a checkbox.
 
-<entry />
-
 ## Usage
 
 A `v-switch` in its simplest form provides a toggle between 2 values.
 
 <usage name="v-switch" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-switch](/api/v-switch/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

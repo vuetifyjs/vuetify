@@ -1,33 +1,37 @@
 // Components
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { IconValue } from '@/composables/icons'
+import { useBackgroundColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { IconValue } from '@/composables/icons'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeSizeProps, useSize } from '@/composables/size'
-import { provideDefaults } from '@/composables/defaults'
-import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
 import { toRef } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVTimelineDividerProps = propsFactory({
+  dotColor: String,
+  fillDot: Boolean,
+  hideDot: Boolean,
+  icon: IconValue,
+  iconColor: String,
+  lineColor: String,
+
+  ...makeComponentProps(),
+  ...makeRoundedProps(),
+  ...makeSizeProps(),
+  ...makeElevationProps(),
+}, 'VTimelineDivider')
 
 export const VTimelineDivider = genericComponent()({
   name: 'VTimelineDivider',
 
-  props: {
-    dotColor: String,
-    fillDot: Boolean,
-    hideDot: Boolean,
-    icon: IconValue,
-    iconColor: String,
-    lineColor: String,
-
-    ...makeRoundedProps(),
-    ...makeSizeProps(),
-    ...makeElevationProps(),
-  },
+  props: makeVTimelineDividerProps(),
 
   setup (props, { slots }) {
     const { sizeClasses, sizeStyles } = useSize(props, 'v-timeline-divider__dot')
@@ -39,14 +43,6 @@ export const VTimelineDivider = genericComponent()({
       backgroundColorStyles: lineColorStyles,
     } = useBackgroundColor(toRef(props, 'lineColor'))
 
-    provideDefaults({
-      VIcon: {
-        color: toRef(props, 'iconColor'),
-        icon: toRef(props, 'icon'),
-        size: toRef(props, 'size'),
-      },
-    })
-
     useRender(() => (
       <div
         class={[
@@ -54,7 +50,9 @@ export const VTimelineDivider = genericComponent()({
           {
             'v-timeline-divider--fill-dot': props.fillDot,
           },
+          props.class,
         ]}
+        style={ props.style }
       >
         <div
           class={[
@@ -83,10 +81,30 @@ export const VTimelineDivider = genericComponent()({
               ]}
               style={ backgroundColorStyles.value }
             >
-              { slots.default?.() ?? (props.icon ? (<VIcon />) : undefined) }
+              { !slots.default ? (
+                <VIcon
+                  key="icon"
+                  color={ props.iconColor }
+                  icon={ props.icon }
+                  size={ props.size }
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="icon-defaults"
+                  disabled={ !props.icon }
+                  defaults={{
+                    VIcon: {
+                      color: props.iconColor,
+                      icon: props.icon,
+                      size: props.size,
+                    },
+                  }}
+                  v-slots:default={ slots.default }
+                />
+              )}
             </div>
           </div>
-        ) }
+        )}
 
         <div
           class={[

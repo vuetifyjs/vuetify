@@ -1,6 +1,6 @@
 ---
-nav: Touch
 meta:
+  nav: Touch
   title: Touch directive
   description: The touch directive provides an interface for responding to various user touch actions.
   keywords: touch, vuetify touch directive, vue touch directive, mobile touch directive
@@ -24,4 +24,8 @@ On a mobile device, try swiping in various directions.
 
 ## API
 
-<api-inline />
+| Directive | Description |
+| - | - |
+| [v-touch](/api/v-touch/) | The touch directive |
+
+<api-inline hide-links />

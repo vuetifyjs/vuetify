@@ -1,0 +1,14 @@
+{
+  "events": {
+    "change": "Emitted when tab becomes active",
+    "click": "Emitted when the component is clicked",
+    "keydown": "Emitted when **enter** key is pressed"
+  },
+  "props": {
+    "fixed": "Forces component to take up all available space up to their maximum width (300px), and centers it.",
+    "stacked": "Displays the tab as a flex-column.",
+    "sliderColor": "Applies specified color to the slider when active on that component - supports utility colors (for example success or purple) or css color (#033 or rgba(255, 0, 0, 0.5)). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
+    "hideSlider": "Hides the active tab slider component (no exit or enter animation).",
+    "direction": "Changes the direction of the tabs. Can be either `horizontal` or `vertical`."
+  }
+}

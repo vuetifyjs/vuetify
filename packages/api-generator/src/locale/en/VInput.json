@@ -1,0 +1,32 @@
+{
+  "props": {
+    "backgroundColor": "Changes the background-color of the input",
+    "direction": "Changes the direction of the input",
+    "hideDetails": "Hides hint and validation errors. When set to `auto` messages will be rendered only if there's a message (hint, error message, counter value etc) to display",
+    "hideSpinButtons": "Hides spin buttons on the input when type is set to `number`.",
+    "dense": "Reduces the input height",
+    "height": "Sets the height of the input",
+    "hint": "Displays hint text below the input when focused. Force this always open with the [persistent-hint](#props-persistent-hint) property",
+    "loading": "Displays linear progress bar. Can either be a String which specifies which color is applied to the progress bar (any material color or theme color - **primary**, **secondary**, **success**, **info**, **warning**, **error**) or a Boolean which uses the component **color** (set by color prop - if it's supported by the component) or the primary color",
+    "persistentHint": "Forces [hint](#props-hint) to always be visible",
+    "placeholder": "Sets the input's placeholder text",
+    "prependIcon": "Prepends an icon to the component, uses the same syntax as `v-icon`",
+    "required": "Designates the input as required; Adds an asterisk to the end of the label; Does not perform any validation.",
+    "tabindex": "Tab index of input",
+    "toggleKeys": "Array of key codes that will toggle the input (if it supports toggling)",
+    "value": "The input's value"
+  },
+  "events": {
+    "change": "Emitted when the input is changed by user interaction",
+    "click": "Emitted when input is clicked",
+    "click:append": "Emitted when appended icon is clicked",
+    "click:prepend": "Emitted when prepended icon is clicked",
+    "mousedown": "Emitted when click is pressed",
+    "mouseup": "Emitted when click is released"
+  },
+  "exposed": {
+    "reset": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-input.json))",
+    "resetValidation": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-input.json))",
+    "validate": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-input.json))"
+  }
+}

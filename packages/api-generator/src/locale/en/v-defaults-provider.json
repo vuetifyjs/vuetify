@@ -1,8 +1,0 @@
-{
-  "props": {
-    "defaults": "Specify new default prop values for components. Keep in mind that this will be merged with previously defined values",
-    "reset": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-defaults-provider.json))",
-    "root": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-defaults-provider.json))",
-    "scoped": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-defaults-provider.json))"
-  }
-}

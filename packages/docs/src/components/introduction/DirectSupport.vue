@@ -53,13 +53,5 @@
       link: 'https://l.kintell.com/M9y7D7',
       image: 'https://avatars.githubusercontent.com/u/9064066?v=4',
     },
-    {
-      name: 'Elijah ',
-      title: 'Core Team Developer',
-      price: 150,
-      duration: 60,
-      link: 'https://l.kintell.com/07xoVB',
-      image: 'https://avatars.githubusercontent.com/u/24883328?v=4',
-    },
   ]
 </script>
