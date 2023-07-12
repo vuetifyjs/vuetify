@@ -319,6 +319,7 @@ export const VSelect = genericComponent<new <
                       onFocusin={ onFocusin }
                       onScrollPassive={ onListScroll }
                       tabindex="-1"
+                      color= { props.color }
                     >
                       { slots['prepend-item']?.() }
 
