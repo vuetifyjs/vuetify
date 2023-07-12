@@ -35,6 +35,7 @@
     "spec": "Specification"
   },
   "breakpoints": "Breakpoints",
+  "documentation-build": "Documentation Build",
   "business": "Business",
   "cancel": "Cancel",
   "close": "Close",
