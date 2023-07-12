@@ -42,7 +42,7 @@ export function useInputIcon<T extends {}, K extends names = Listeners<T>> (prop
         icon={ props[`${name}Icon`] }
         aria-label={ label }
         onClick={ listener }
-        color={ props.color ?? undefined }
+        color={ props.color }
       />
     )
   }
