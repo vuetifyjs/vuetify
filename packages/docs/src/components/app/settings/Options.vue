@@ -10,6 +10,7 @@
   />
 
   <app-link-list-item
+    v-if="commits.latest"
     :href="`https://github.com/vuetifyjs/vuetify/commit/${commits.latest?.sha}`"
     :title="commits.latest?.sha.slice(0, 7)"
     append-icon="mdi-open-in-new"
@@ -17,6 +18,7 @@
     prepend-icon="mdi-source-commit"
     rel="noopener noreferrer"
     target="_blank"
+    min-width="90"
   />
 
   <documentation-build />
@@ -41,6 +43,7 @@
   import { useI18n } from 'vue-i18n'
 
   // Utilities
+  import { onBeforeMount } from 'vue'
   import { version } from 'vuetify'
 
   // Stores
@@ -49,5 +52,7 @@
   const { t } = useI18n()
   const commits = useCommitsStore()
 
-  commits.fetch()
+  onBeforeMount(() => {
+    if (!commits.latest) commits.fetch()
+  })
 </script>

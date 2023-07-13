@@ -20,6 +20,10 @@
       {{ title }}
 
       <v-icon v-if="appendIcon" :icon="appendIcon" size="xs" end />
+
+      <template #loader>
+        <slot name="loader" />
+      </template>
     </v-btn>
   </div>
 </template>
