@@ -5,7 +5,7 @@
     :href="`https://github.com/vuetifyjs/vuetify/commit/${GITHUB_SHA}`"
     :label="t('documentation-build')"
     :prepend-icon="prependIcon"
-    :title="GITHUB_SHA"
+    :title="GITHUB_SHA.slice(0, 7)"
     rel="noopener noreferrer"
     target="_blank"
   />

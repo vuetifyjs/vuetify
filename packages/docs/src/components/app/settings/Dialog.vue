@@ -1,12 +1,12 @@
 <template>
-  <v-dialog v-model="app.settings">
+  <v-dialog v-model="app.settings" :fullscreen="mobile">
     <v-card
+      :rounded="mobile ? 0 : 'lg'"
       class="mx-auto"
       elevation="24"
       flat
       height="500"
       max-width="800"
-      rounded="lg"
       title="Documentation settings"
       width="100%"
     >
@@ -21,7 +21,14 @@
       <v-divider class="mt-4" />
 
       <v-layout full-height>
-        <v-navigation-drawer permanent width="220" floating>
+        <v-navigation-drawer
+          :location="mobile ? 'bottom' : undefined"
+          permanent
+          width="220"
+          floating
+        >
+          <v-divider v-if="mobile" />
+
           <v-list
             v-model:selected="model"
             :lines="false"
@@ -93,12 +100,14 @@
   import DeveloperMode from '@/components/app/settings/DeveloperMode.vue'
 
   // Composables
+  import { useDisplay } from 'vuetify'
   import { useAppStore } from '@/store/app'
 
   // Utilities
   import { computed, ref } from 'vue'
 
   const app = useAppStore()
+  const { mobile } = useDisplay()
 
   const record = computed(() => items[model.value[0]])
   const items = [
