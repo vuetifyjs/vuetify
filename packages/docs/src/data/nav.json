@@ -9,8 +9,12 @@
       "roadmap",
       "meet-the-team",
       "sponsors-and-backers",
-      { "divider": true },
-      { "subheader": "professional-support" },
+      {
+        "divider": true
+      },
+      {
+        "subheader": "professional-support"
+      },
       "enterprise-support"
     ]
   },
@@ -24,6 +28,7 @@
       "wireframes",
       "browser-support",
       "upgrade-guide",
+      "upgrade-guide-next",
       "release-notes",
       "contributing"
     ]
@@ -53,7 +58,9 @@
       "css-reset",
       "transitions",
       "colors",
-      { "divider": true },
+      {
+        "divider": true
+      },
       {
         "subheader": "utility-classes"
       },
@@ -75,8 +82,12 @@
     "activeIcon": "mdi-view-dashboard",
     "items": [
       "all",
-      { "divider": true },
-      { "subheader": "containment" },
+      {
+        "divider": true
+      },
+      {
+        "subheader": "containment"
+      },
       "buttons",
       "cards",
       "chips",
@@ -89,8 +100,12 @@
       "sheets",
       "toolbars",
       "tooltips",
-      { "divider": true },
-      { "subheader": "navigation" },
+      {
+        "divider": true
+      },
+      {
+        "subheader": "navigation"
+      },
       "app-bars",
       "bottom-navigation",
       "breadcrumbs",
@@ -99,8 +114,12 @@
       "paginations",
       "system-bars",
       "tabs",
-      { "divider": true },
-      { "subheader": "form-inputs-and-controls" },
+      {
+        "divider": true
+      },
+      {
+        "subheader": "form-inputs-and-controls"
+      },
       "autocompletes",
       "checkboxes",
       "combobox",
@@ -114,23 +133,39 @@
       "switches",
       "text-fields",
       "textareas",
-      { "divider": true },
-      { "subheader": "data-and-display" },
+      {
+        "divider": true
+      },
+      {
+        "subheader": "data-and-display"
+      },
       "tables",
       "virtual-scroller",
-      { "divider": true },
-      { "subheader": "grids" },
+      {
+        "divider": true
+      },
+      {
+        "subheader": "grids"
+      },
       "grids",
-      { "divider": true },
-      { "subheader": "selection" },
+      {
+        "divider": true
+      },
+      {
+        "subheader": "selection"
+      },
       "button-groups",
       "carousels",
       "chip-groups",
       "item-groups",
       "slide-groups",
       "windows",
-      { "divider": true },
-      { "subheader": "feedback" },
+      {
+        "divider": true
+      },
+      {
+        "subheader": "feedback"
+      },
       "alerts",
       "badges",
       "banners",
@@ -140,23 +175,39 @@
       "ratings",
       "snackbars",
       "timelines",
-      { "divider": true },
-      { "subheader": "images-and-icons" },
+      {
+        "divider": true
+      },
+      {
+        "subheader": "images-and-icons"
+      },
       "aspect-ratios",
       "avatars",
       "icons",
       "images",
       "parallax",
-      { "divider": true },
-      { "subheader": "pickers" },
+      {
+        "divider": true
+      },
+      {
+        "subheader": "pickers"
+      },
       "color-pickers",
-      { "divider": true },
-      { "subheader": "providers" },
+      {
+        "divider": true
+      },
+      {
+        "subheader": "providers"
+      },
       "defaults-providers",
       "locale-providers",
       "theme-providers",
-      { "divider": true },
-      { "subheader": "miscellaneous" },
+      {
+        "divider": true
+      },
+      {
+        "subheader": "miscellaneous"
+      },
       "lazy",
       "no-ssr"
     ]
