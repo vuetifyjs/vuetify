@@ -55,12 +55,12 @@ export const useBannersStore = defineStore('banners', {
     async fetch () {
       if (this.banners.length) return
 
-      const { bucket } = useCosmic<Banner>()
+      const { bucket } = useCosmic()
 
       const today = (new Date()).toISOString().substring(0, 10)
 
       try {
-        const { objects = [] } = (
+        const { objects = [] }: { objects: Banner[] } = (
           await bucket?.objects
             .find({
               type: 'banners',

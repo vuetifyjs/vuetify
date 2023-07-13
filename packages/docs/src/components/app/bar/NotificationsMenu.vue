@@ -149,7 +149,7 @@
   }
 
   const { t } = useI18n()
-  const { bucket } = useCosmic<Notification>()
+  const { bucket } = useCosmic()
   const { mobile } = useDisplay()
   const date = useDate()
   const user = useUserStore()
@@ -197,7 +197,7 @@
   onMounted(async () => {
     if (all.value.length) return
 
-    const { objects = [] } = (
+    const { objects = [] }: { objects: Notification[] } = (
       await bucket?.objects
         .find({ type: 'notifications' })
         .props('created_at,metadata,slug,title')
