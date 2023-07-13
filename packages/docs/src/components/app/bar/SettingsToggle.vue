@@ -1,8 +1,8 @@
 <template>
   <app-tooltip-btn
     :input-value="app.settings"
+    :icon="app.settings ? 'mdi-cog' : 'mdi-cog-outline'"
     color="medium-emphasis"
-    icon="mdi-cog-outline"
     path="settings"
     @click="onClick"
   />
