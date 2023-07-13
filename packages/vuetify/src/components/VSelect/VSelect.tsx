@@ -68,6 +68,7 @@ export const makeSelectProps = propsFactory({
     type: Function as PropType<typeof deepEqual>,
     default: deepEqual,
   },
+  itemColor: String,
 
   ...makeItemsProps({ itemChildren: false }),
 }, 'Select')
@@ -319,7 +320,7 @@ export const VSelect = genericComponent<new <
                       onFocusin={ onFocusin }
                       onScrollPassive={ onListScroll }
                       tabindex="-1"
-                      color= { props.color }
+                      color={ props.itemColor ? props.itemColor : props.color}
                     >
                       { slots['prepend-item']?.() }
 
