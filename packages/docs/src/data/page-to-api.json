@@ -9,7 +9,7 @@
     "VApp",
     "VLayout",
     "VLayoutItem",
-    "VMain",
+    "VMain"
   ],
   "components/aspect-ratios": ["VResponsive"],
   "components/autocompletes": ["VAutocomplete"],
