@@ -16,6 +16,13 @@ const generateToc = (content: string) => {
   for (let i = 0; i < length; i++) {
     const token = tokens[i]
 
+    if (token.type === 'inline' && token.content.startsWith('<!--') && !token.content.endsWith('-->')) {
+      do {
+        i++
+      } while (i < length && !tokens[i].content.endsWith('-->'))
+      continue
+    }
+
     if (token.type !== 'heading_open') continue
 
     // heading level by hash length '###' === h3
