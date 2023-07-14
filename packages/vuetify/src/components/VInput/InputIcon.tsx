@@ -11,8 +11,8 @@ type names = 'clear' | 'prepend' | 'append' | 'appendInner' | 'prependInner'
 
 type EventProp<T = (...args: any[]) => any> = T | T[]
 type InputIconProps<T extends names> = {
-  label: string | undefined
   color: string | undefined
+  label: string | undefined
 } & {
   [K in `${T}Icon`]: IconValue | undefined
 } & {
