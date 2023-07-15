@@ -59,7 +59,10 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
 
   setup (props, { slots }) {
     const vm = getCurrentInstance('VVirtualScroll')
-    const { dimensionStyles } = useDimension(props)
+    const { dimensionStyles } = useDimension({
+      ...props,
+      height: props.height ?? window.innerHeight
+    })
     const {
       containerRef,
       handleScroll,
