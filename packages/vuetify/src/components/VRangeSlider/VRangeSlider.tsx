@@ -222,6 +222,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                   min={ min.value }
                   max={ model.value[1] }
                   position={ trackStart.value }
+                  ripple={ props.ripple }
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>
@@ -256,6 +257,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                   min={ model.value[0] }
                   max={ max.value }
                   position={ trackStop.value }
+                  ripple={ props.ripple }
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>
