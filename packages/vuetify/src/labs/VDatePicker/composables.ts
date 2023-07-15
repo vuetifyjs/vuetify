@@ -18,7 +18,7 @@ export type DatePickerProvide = {
 
 export const DatePickerSymbol: InjectionKey<DatePickerProvide> = Symbol.for('vuetify:date-picker')
 
-type DateProps = DateInputProps;
+type DateProps = DateInputProps & { multiple?: boolean }
 
 export function createDatePicker (props: DateProps) {
   const hoverDate = ref()
@@ -36,7 +36,7 @@ export function createDatePicker (props: DateProps) {
   })
 
   // TODO: This composable should probably not live in DateInput
-  const { model, displayDate, viewMode, inputMode } = createDateInput(props, false)
+  const { model, displayDate, viewMode, inputMode } = createDateInput(props, !!props.multiple)
 
   return {
     hoverDate,
