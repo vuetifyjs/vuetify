@@ -138,6 +138,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
           ]}
           style={ props.style }
           title={ title.value }
+          width={ props.showWeek ? 408 : 360 }
           v-slots={{
             header: () => slots.header?.(headerSlotProps.value) ?? (
               <VDatePickerHeader
