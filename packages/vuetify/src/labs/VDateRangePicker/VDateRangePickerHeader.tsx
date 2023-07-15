@@ -8,11 +8,11 @@ import { VBtn } from '../../components/VBtn'
 import { useBackgroundColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
 import { useDate } from '@/labs/date'
+import { makeDateProps } from '../VDateInput/composables'
 
 // Utilities
 import { computed } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
-import { makeDateProps } from '../VDateInput/composables'
 
 export const makeVDateRangePickerHeaderProps = propsFactory({
   color: String,

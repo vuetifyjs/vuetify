@@ -1,8 +1,8 @@
-// Utilities
-import { inject, provide, ref } from 'vue'
-
 // Composables
 import { createDateInput } from '../VDateInput/composables'
+
+// Utilities
+import { inject, provide, ref } from 'vue'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
