@@ -3,6 +3,8 @@
 @use '../../styles/settings'
 @use '../../styles/tools'
 
+$prefix: v-
+
 @mixin make-container($padding-x: settings.$container-padding-x)
   width: 100%
   padding: $padding-x
@@ -16,24 +18,38 @@
       max-width: $container-max-width
 
 @mixin make-row($gutter: settings.$grid-gutter)
+  --#{$prefix}gutter-x: #{$gutter}
+  --#{$prefix}gutter-y: #{$gutter}
   display: flex
   flex-wrap: wrap
-  flex: 1 1 auto
-  margin: -$gutter * .5
+  margin-right: calc(-.5 * var(--#{$prefix}gutter-x)) // stylelint-disable-line function-disallowed-list
+  margin-left: calc(-.5 * var(--#{$prefix}gutter-x)) // stylelint-disable-line function-disallowed-list
 
-@mixin make-col-ready($gutter: settings.$grid-gutter)
+@mixin make-col-ready()
+  // Add box sizing if only the grid is loaded
+  //box-sizing: if(variable-exists(include-column-box-sizing) and $include-column-box-sizing, border-box, null)
   // Prevent columns from becoming too narrow when at smaller grid tiers by
-  // always setting `width: 100%;`. This works because we use `flex` values
+  // always setting `width: 100%;`. This works because we set the width
   // later on to override this initial width.
+  flex-shrink: 0
   width: 100%
-  padding: $gutter * .5
+  max-width: 100% // Prevent `.col-auto`, `.col` (& responsive variants) from breaking out the grid
+  padding-right: calc(var(--#{$prefix}gutter-x) * .5) // stylelint-disable-line function-disallowed-list
+  padding-left: calc(var(--#{$prefix}gutter-x) * .5) // stylelint-disable-line function-disallowed-list
+  padding-top: calc(var(--#{$prefix}gutter-y) * .5) // stylelint-disable-line function-disallowed-list
+  padding-bottom: calc(var(--#{$prefix}gutter-y) * .5) // stylelint-disable-line function-disallowed-list
 
-@mixin make-col($size, $columns: settings.$grid-columns)
-  flex: 0 0 math.percentage(math.div($size, $columns))
-  // Add a `max-width` to ensure content within each column does not blow out
-  // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
-  // do not appear to require this.
-  max-width: math.percentage(math.div($size, $columns))
+@mixin make-col($size: false, $columns: settings.$grid-columns)
+  @if $size
+    flex: 0 0 auto
+    width: math.percentage(math.div($size, $columns))
+  @else
+    flex: 1 1 0
+    max-width: 100%
+
+@mixin make-col-auto()
+  flex: 0 0 auto
+  width: auto
 
 @mixin make-col-offset($size, $columns: settings.$grid-columns)
   $num: math.div($size, $columns)
@@ -42,36 +58,46 @@
   +tools.rtl()
     margin-right: if($num == 0, 0, math.percentage($num))
 
+// Row columns
+// Specify on a parent element(e.g., .row) to force immediate children into NN
+// number of columns. Supports wrapping to new lines, but does not do a Masonry
+// style grid.
+@mixin row-cols($count)
+  > *
+    flex: 0 0 auto
+    width: math.div(100%, $count)
+
 @mixin make-grid-columns($columns: settings.$grid-columns, $gutter: settings.$grid-gutter, $breakpoints: settings.$grid-breakpoints)
   // Common properties for all breakpoints
-  %grid-column
-    width: 100%
-    padding: $gutter * .5
   @each $breakpoint in map.keys($breakpoints)
     $infix: tools.breakpoint-infix($breakpoint, $breakpoints)
-    // Allow columns to stretch full width below their breakpoints
-    @for $i from 1 through $columns
-      .v-col#{$infix}-#{$i}
-        @extend %grid-column
-    .v-col#{$infix},
-    .v-col#{$infix}-auto
-      @extend %grid-column
     +tools.media-breakpoint-up($breakpoint, $breakpoints)
-      // Provide basic `.col-{bp}` classes for equal-width flexbox columns
       .v-col#{$infix}
-        flex-basis: 0
-        flex-grow: 1
-        max-width: 100%
-      .v-col#{$infix}-auto
-        flex: 0 0 auto
-        width: auto
-        max-width: 100% // Reset earlier grid tiers
+        flex: 1 0 0 // Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
+      .v-row-cols#{$infix}-auto > *
+        +make-col-auto()
       @for $i from 1 through $columns
-        .v-col#{$infix}-#{$i}
-          +make-col($i, $columns)
-      // `$columns - 1` because offsetting by the width of an entire row isn't possible
-      @for $i from 0 through $columns - 1
-        @if not ($infix == "" and $i == 0)
-          // Avoid emitting useless .offset-0
-          .offset#{$infix}-#{$i}
-            +make-col-offset($i, $columns)
+        .v-row-cols#{$infix}-#{$i}
+          +row-cols($i)
+      .v-col#{$infix}-auto
+        +make-col-auto()
+
+      @if $columns > 0
+        @for $i from 1 through $columns
+          .v-col#{$infix}-#{$i}
+            +make-col($i, $columns)
+
+        // `$columns - 1` because offsetting by the width of an entire row isn't possible
+        @for $i from 0 through $columns - 1
+          @if not ($infix == "" and $i == 0)
+            // Avoid emitting useless .offset-0
+            .offset#{$infix}-#{$i}
+              +make-col-offset($i, $columns)
+
+      @each $key, $value in settings.$gutters
+        .g#{$infix}-#{$key},
+        .gx#{$infix}-#{$key}
+          --#{$prefix}gutter-x: #{$value}
+        .g#{$infix}-#{$key},
+        .gy#{$infix}-#{$key}
+          --#{$prefix}gutter-y: #{$value}

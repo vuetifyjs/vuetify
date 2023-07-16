@@ -7,7 +7,7 @@
 
   &--fluid
     max-width: 100%
-    
+
   &.fill-height
     align-items: center
     display: flex
@@ -19,14 +19,17 @@
 .v-row
   +make-row
 
+  > *
+    +make-col-ready
+
   & + .v-row
-    margin-top: settings.$grid-gutter * .5
+    margin-top: 0
 
     &--dense
       margin-top: settings.$form-grid-gutter * .5
 
   &--dense
-    margin: -(settings.$form-grid-gutter) * .5
+    margin: -(settings.$form-grid-gutter) * .1
 
     > .v-col,
     > [class*="v-col-"]
