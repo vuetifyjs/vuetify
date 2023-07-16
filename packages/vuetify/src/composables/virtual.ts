@@ -23,7 +23,7 @@ type VirtualProps = {
 export const makeVirtualProps = propsFactory({
   itemHeight: {
     type: [Number, String],
-    default: 48,
+    default: 24,
   },
 }, 'virtual')
 
@@ -51,7 +51,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
         ? display.height.value
         : contentRect.value.height
     ) - (offset?.value ?? 0)
-    return Math.ceil((height / itemHeight.value) * 2 + 1)
+    return Math.ceil((height / itemHeight.value) + 1)
   })
 
   function handleItemResize (index: number, height: number) {
