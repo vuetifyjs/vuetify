@@ -39,9 +39,7 @@ export const makeVVirtualScrollProps = propsFactory({
 
   ...makeVirtualProps(),
   ...makeComponentProps(),
-  ...makeDimensionProps({
-    height: window.innerHeight
-  }),
+  ...makeDimensionProps(),
 }, 'VVirtualScroll')
 
 export const VVirtualScroll = genericComponent<new <T, Renderless extends boolean = false>(
