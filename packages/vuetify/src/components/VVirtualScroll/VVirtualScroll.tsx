@@ -39,7 +39,9 @@ export const makeVVirtualScrollProps = propsFactory({
 
   ...makeVirtualProps(),
   ...makeComponentProps(),
-  ...makeDimensionProps(),
+  ...makeDimensionProps({
+    height: window.innerHeight
+  }),
 }, 'VVirtualScroll')
 
 export const VVirtualScroll = genericComponent<new <T, Renderless extends boolean = false>(
@@ -59,10 +61,7 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
 
   setup (props, { slots }) {
     const vm = getCurrentInstance('VVirtualScroll')
-    const { dimensionStyles } = useDimension({
-      ...props,
-      height: props.height ?? window.innerHeight
-    })
+    const { dimensionStyles } = useDimension(props)
     const {
       containerRef,
       handleScroll,
