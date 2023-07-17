@@ -4,7 +4,6 @@
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
-@use './mixins' as *
 
 /* region INPUT */
 .v-field
@@ -69,9 +68,9 @@
     $root: &
 
     @at-root
-      @include input-density('v-input', $input-density, $input-chips-margin-bottom) using ($modifier, $chips-modifier)
+      @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
-          --v-input-control-height: #{$field-control-height + $modifier - math.div($chips-modifier, 2) - $input-chips-margin-top}
+          --v-input-control-height: #{$field-control-height + $modifier}
           --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)}
 
   &--variant-outlined,
@@ -97,13 +96,10 @@
       --v-field-padding-top: var(--v-field-padding-top--plain-underlined, 6px)
 
     @at-root
-      @include input-density('v-input', $input-density, $input-chips-margin-bottom) using ($modifier, $chips-modifier)
+      @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
-          --v-input-control-height: #{$field-control-underlined-height + $modifier - math.div($chips-modifier, 2) - $input-chips-margin-top}
+          --v-input-control-height: #{$field-control-underlined-height + $modifier}
           --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)}
-
-  &--variant-outlined
-    --v-input-chips-margin-bottom: #{$input-chips-margin-top}
 
   &--flat
     box-shadow: none
@@ -127,14 +123,14 @@
   flex-wrap: wrap
   letter-spacing: $field-letter-spacing
   opacity: $field-input-opacity
-  min-height: calc(var(--v-field-input-min-height) + var(--v-input-chips-margin-bottom) + $input-chips-margin-top)
+  min-height: $field-input-min-height
+  min-width: 0
   padding-inline-start: var(--v-field-padding-start)
   padding-inline-end: var(--v-field-padding-end)
   padding-top: var(--v-field-input-padding-top)
   padding-bottom: var(--v-field-input-padding-bottom)
   position: relative 
   width: 100%
-  --v-field-input-min-height: #{$field-input-min-height}
 
   input
     letter-spacing: inherit
@@ -366,10 +362,16 @@
       border-inline-start-width: var(--v-field-border-width)
 
       @include tools.ltr()
-        border-radius: $field-border-radius 0 0 $field-border-radius
+        border-top-left-radius: inherit
+        border-top-right-radius: 0
+        border-bottom-right-radius: 0
+        border-bottom-left-radius: inherit
 
       @include tools.rtl()
-        border-radius: 0 $field-border-radius $field-border-radius 0
+        border-top-left-radius: 0
+        border-top-right-radius: inherit
+        border-bottom-right-radius: inherit
+        border-bottom-left-radius: 0
 
     &__notch
       flex: none
@@ -400,10 +402,16 @@
       border-inline-end-width: var(--v-field-border-width)
 
       @include tools.ltr()
-        border-radius: 0 $field-border-radius $field-border-radius 0
+        border-top-left-radius: 0
+        border-top-right-radius: inherit
+        border-bottom-right-radius: inherit
+        border-bottom-left-radius: 0
 
       @include tools.rtl()
-        border-radius: $field-border-radius 0 0 $field-border-radius
+        border-top-left-radius: inherit
+        border-top-right-radius: 0
+        border-bottom-right-radius: 0
+        border-bottom-left-radius: inherit
 /* endregion */
 /* region LOADER */
 .v-field__loader

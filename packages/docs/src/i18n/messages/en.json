@@ -35,6 +35,7 @@
     "spec": "Specification"
   },
   "breakpoints": "Breakpoints",
+  "documentation-build": "Documentation Build",
   "business": "Business",
   "cancel": "Cancel",
   "close": "Close",
@@ -75,6 +76,7 @@
   "data-and-display": "Data & display",
   "grids": "Grids",
   "details": "Details",
+  "developer-mode": "Developer Mode",
   "device": "Device",
   "direction": "Direction",
   "directive": "Directive",
@@ -196,7 +198,7 @@
   "search": {
     "label": "Search",
     "looking": "Looking for",
-    "key-hint": "Press /",
+    "key-hint": "Ctrl+K",
     "results": "Your search results will appear here",
     "no-results": "No results found"
   },

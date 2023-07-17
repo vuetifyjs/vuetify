@@ -9,6 +9,7 @@ import { VScaleTransition } from '../transitions'
 import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { useElevation } from '@/composables/elevation'
+import { useRtl } from '@/composables/locale'
 
 // Directives
 import Ripple from '@/directives/ripple'
@@ -64,7 +65,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
 
   setup (props, { slots, emit }) {
     const slider = inject(VSliderSymbol)
-
+    const { rtlClasses } = useRtl()
     if (!slider) throw new Error('[Vuetify] v-slider-thumb must be used inside v-slider or v-range-slider')
 
     const {
@@ -137,6 +138,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
               'v-slider-thumb--pressed': props.focused && mousePressed.value,
             },
             props.class,
+            rtlClasses.value,
           ]}
           style={[
             {

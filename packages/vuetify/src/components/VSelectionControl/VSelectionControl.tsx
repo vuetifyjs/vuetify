@@ -239,12 +239,12 @@ export const VSelectionControl = genericComponent<new <T>(
               <input
                 ref={ input }
                 checked={ model.value }
-                disabled={ props.disabled }
+                disabled={ !!(props.readonly || props.disabled) }
                 id={ id.value }
                 onBlur={ onBlur }
                 onFocus={ onFocus }
                 onInput={ onInput }
-                aria-disabled={ props.readonly }
+                aria-disabled={ !!(props.readonly || props.disabled) }
                 type={ props.type }
                 value={ trueValue.value }
                 name={ props.name }

@@ -38,7 +38,7 @@ $field-control-height: 56px !default;
 $field-input-opacity: var(--v-high-emphasis-opacity) !default;
 $field-input-min-height: #{max(
   var(--v-input-control-height, $input-control-height),
-  calc($input-font-size * $input-line-height + var(--v-field-input-padding-top) + var(--v-field-input-padding-bottom))
+  calc($input-font-size * $input-line-height + var(--v-field-input-padding-top) + var(--v-field-input-padding-bottom) + var(--v-input-chips-margin-bottom) + $input-chips-margin-top)
 )} !default;
 $field-input-padding-top: calc(var(--v-field-padding-top, $field-control-padding-top) + var(--v-input-padding-top, 0)) !default;
 $field-input-padding-bottom: var(--v-field-padding-bottom, $field-control-padding-bottom) !default;

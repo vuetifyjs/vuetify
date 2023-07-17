@@ -12,4 +12,5 @@ export function injectSelf (key: InjectionKey<any> | string) {
     // TS doesn't allow symbol as index type
     return provides[key as string]
   }
+  return undefined
 }

@@ -37,7 +37,7 @@ We thank all of our project sponsors for their continued support of Vuetify. If 
 
 ### Special
 
-<sponsors tier="-1" />
+<sponsors tier="-1" width="240" />
 
 ### Palladium
 

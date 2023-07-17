@@ -27,15 +27,18 @@
 
     <v-tooltip location="start">
       <template #activator="{ props: activatorProps }">
-        <v-btn
-          :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text-outline'"
-          class="text-disabled me-3 mt-1 app-markup-btn"
-          density="comfortable"
-          style="position: absolute; right: 0; top: 0;"
-          v-bind="activatorProps"
-          variant="text"
-          @click="copy"
-        />
+        <v-fade-transition hide-on-leave>
+          <v-btn
+            :key="icon"
+            :icon="icon"
+            class="text-disabled me-3 mt-1 app-markup-btn"
+            density="comfortable"
+            style="position: absolute; right: 0; top: 0;"
+            v-bind="activatorProps"
+            variant="text"
+            @click="copy"
+          />
+        </v-fade-transition>
       </template>
 
       <span>{{ t('copy-source') }}</span>
@@ -115,13 +118,16 @@
   })
 
   const className = computed(() => `language-${props.language}`)
+  const icon = computed(() => clicked.value ? 'mdi-check' : 'mdi-clipboard-text-outline')
 
   async function copy () {
-    navigator.clipboard.writeText(props.code)
+    const el = root.value?.$el.querySelector('code')
+
+    navigator.clipboard.writeText(props.code || el?.innerText || '')
 
     clicked.value = true
 
-    await wait(500)
+    await wait(2000)
 
     clicked.value = false
   }

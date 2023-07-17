@@ -9,6 +9,7 @@
         <v-btn
           :min-width="btnWidth"
           v-bind="attrs"
+          class="text-none"
           size="x-large"
         >
           <v-icon :icon="icon" start />

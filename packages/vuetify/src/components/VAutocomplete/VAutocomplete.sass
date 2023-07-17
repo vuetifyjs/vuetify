@@ -18,19 +18,22 @@
         align-self: flex-start
         flex: 1 1
 
-  .v-field:not(.v-field--focused)
+  .v-field
     input
-      min-width: 0
+      min-width: $autocomplete-focused-input
+
+    &:not(.v-field--focused)
+      input
+        min-width: 0
 
   .v-field--dirty
     .v-autocomplete__selection
       margin-inline-end: 2px
 
-  .v-field--single-line
-    .v-autocomplete__selection-text
-      overflow: hidden
-      text-overflow: ellipsis
-      white-space: nowrap
+  .v-autocomplete__selection-text
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
 
 .v-autocomplete
   &__content
@@ -44,11 +47,11 @@
 
   &__selection
     display: inline-flex
+    align-items: center
     letter-spacing: inherit
     line-height: inherit
-    max-width: 100%
+    max-width: 90%
 
-  input,
   &__selection
     margin-top: var(--v-input-chips-margin-top)
     margin-bottom: var(--v-input-chips-margin-bottom)
@@ -75,6 +78,11 @@
       width: 100%
       padding-inline-start: inherit
       padding-inline-end: inherit
+
+    .v-field--variant-outlined
+      input
+        top: 50%
+        transform: translateY(calc(-50% - (var(--v-input-chips-margin-top) + var(--v-input-chips-margin-bottom))/2))
 
     .v-field--active
       input

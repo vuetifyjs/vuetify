@@ -1,6 +1,6 @@
 // Utilities
 import { inject, provide, ref, watchEffect } from 'vue'
-import { createRange, propsFactory } from '@/util'
+import { consoleWarn, createRange, propsFactory } from '@/util'
 
 // Types
 import type { DeepReadonly, InjectionKey, PropType, Ref } from 'vue'
@@ -68,7 +68,11 @@ export function createHeaders (
     const fixedOffsets = createRange(rowCount).fill(0)
 
     flat.forEach(({ column, row }) => {
-      const key = column.key
+      let key = column.key
+      if (key == null) {
+        consoleWarn('The header key value must not be null or undefined')
+        key = ''
+      }
       for (let i = row; i <= row + (column.rowspan ?? 1) - 1; i++) {
         fixedRows[i].push({
           ...column,
