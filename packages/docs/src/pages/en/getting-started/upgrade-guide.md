@@ -1,7 +1,7 @@
 ---
-nav: Upgrade guide
 meta:
-  title: Guide to upgrading Vuetify
+  nav: Upgrade guide
+  title: Upgrade guide
   description: Detailed instruction on how to upgrade Vuetify to 3.0
   keywords: migration, upgrade, releases, upgrading vuetify, alpha, v3
 related:
@@ -19,11 +19,21 @@ Many of these changes can be applied automatically by [eslint-plugin-vuetify](ht
 
 <entry />
 
-<alert type="warning">
-
+::: warning
   This page is incomplete. Please check back later for more information, or submit a PR if you notice something missing. If you have additional questions, reach out to us in [Discord](https://community.vuetifyjs.com/)
+:::
 
-</alert>
+::: warning
+  Not all Vuetify 2 components are currently available in Vuetify 3; These components will be released as their development is completed via [Vuetify Labs](https://vuetifyjs.com/en/labs/introduction/).
+
+- v-calendar
+- v-date-picker
+- [v-data-table](/components/data-tables/basics/)
+- [v-skeleton-loader](/components/skeleton-loaders/)
+- v-stepper
+- v-time-picker
+- v-treeview
+:::
 
 ## Setup
 
@@ -163,7 +173,7 @@ app.use(vuetify)
 - `item-text` has been renamed to `item-title`, and now looks up the `title` property on item objects by default. `value` is unchanged.
 - `item-disabled` has been removed, and `disabled`, `header`, `divider`, and `avatar` properties are ignored on item objects.
   - Additional props to pass to `v-list-item` can be specified with the `item-props` prop. `item-props` can be a function that takes the item object and returns an object of props, or set to boolean `true` to spread item objects directly as props.
-- The `item` object in slots is now an `InternalItem` object, the original item object is available as `item.raw`.
+- The `item` object in slots is now an `ListItem` object, the original item object is available as `item.raw`.
 - The `item` slot will no longer generate a `v-list-item` component automatically, instead a `props` object is supplied with the required event listeners and props:
 
 ```html

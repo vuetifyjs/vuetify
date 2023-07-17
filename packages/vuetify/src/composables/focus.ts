@@ -1,19 +1,20 @@
-// Components
+// Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed } from 'vue'
-import { getCurrentInstanceName, propsFactory } from '@/util'
+import { EventProp, getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
 export interface FocusProps {
   focused: boolean
-  'onUpdate:focused': ((val: boolean) => void) | undefined
+  'onUpdate:focused': ((focused: boolean) => any) | undefined
 }
 
 // Composables
 export const makeFocusProps = propsFactory({
   focused: Boolean,
+  'onUpdate:focused': EventProp<[boolean]>(),
 }, 'focus')
 
 export function useFocus (

@@ -1,6 +1,6 @@
 ---
-nav: Combobox
 meta:
+  nav: Combobox
   title: Combobox component
   description: The combobox component provides type-ahead autocomplete functionality and allows users to provide a custom values beyond the provided list of options.
   keywords: combobox, vuetify combobox component, vue combobox component
@@ -32,23 +32,17 @@ With Combobox, you can allow a user to create new values that may not be present
 
 ## Caveats
 
-<alert type="error">
-
+::: error
   As the Combobox allows user input, it **always** returns the full value provided to it (for example a list of Objects will always return an Object when selected). This is because there's no way to tell if a value is supposed to be user input or an object lookup [GitHub Issue](https://github.com/vuetifyjs/vuetify/issues/5479)
+:::
 
-</alert>
-
-<alert type="warning">
-
+::: warning
   The **auto** property of **menu-props** is only supported for the default input style.
+:::
 
-</alert>
-
-<alert type="info">
-
+::: info
   Browser autocomplete is set to off by default, may vary by browser and may be ignored. [MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)
-
-</alert>
+:::
 
 ## Examples
 

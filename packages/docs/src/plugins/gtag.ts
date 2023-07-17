@@ -5,7 +5,7 @@ import { IN_BROWSER } from '@/util/globals'
 // Types
 import type { ViteSSGContext } from '@vuetify/vite-ssg'
 
-export const useGtag = (ctx: ViteSSGContext) => {
+export function installGtag (ctx: ViteSSGContext) {
   if (!IN_BROWSER) return
 
   // vue-gtag-next doesn't support esm properly

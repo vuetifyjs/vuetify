@@ -7,41 +7,42 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 import { VProgressCircular } from '@/components/VProgressCircular'
 
-// Directives
-import { Ripple } from '@/directives/ripple'
-
 // Composables
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
-import { IconValue } from '@/composables/icons'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
+import { IconValue } from '@/composables/icons'
 import { makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
+import { useSelectLink } from '@/composables/selectLink'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useSelectLink } from '@/composables/selectLink'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+
+// Directives
+import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
 
-export type VBtnSlots = MakeSlots<{
-  default: []
-  prepend: []
-  append: []
-  loader: []
-}>
+export type VBtnSlots = {
+  default: never
+  prepend: never
+  append: never
+  loader: never
+}
 
 export const makeVBtnProps = propsFactory({
   active: {
@@ -61,12 +62,14 @@ export const makeVBtnProps = propsFactory({
   stacked: Boolean,
 
   ripple: {
-    type: Boolean,
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
 
+  text: String,
+
   ...makeBorderProps(),
-  ...makeRoundedProps(),
+  ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeDimensionProps(),
   ...makeElevationProps(),
@@ -74,6 +77,7 @@ export const makeVBtnProps = propsFactory({
   ...makeLoaderProps(),
   ...makeLocationProps(),
   ...makePositionProps(),
+  ...makeRoundedProps(),
   ...makeRouterProps(),
   ...makeSizeProps(),
   ...makeTagProps({ tag: 'button' }),
@@ -129,6 +133,22 @@ export const VBtn = genericComponent<VBtnSlots>()({
         ? JSON.stringify(props.value, null, 0) : props.value
     })
 
+    function onClick (e: MouseEvent) {
+      if (
+        isDisabled.value ||
+        (link.isLink.value && (
+          e.metaKey ||
+          e.ctrlKey ||
+          e.shiftKey ||
+          (e.button !== 0) ||
+          attrs.target === '_blank'
+        ))
+      ) return
+
+      link.navigate?.(e)
+      group?.toggle()
+    }
+
     useSelectLink(link, group?.select)
 
     useRender(() => {
@@ -167,12 +187,14 @@ export const VBtn = genericComponent<VBtnSlots>()({
             roundedClasses.value,
             sizeClasses.value,
             variantClasses.value,
+            props.class,
           ]}
           style={[
             hasColor ? colorStyles.value : undefined,
             dimensionStyles.value,
             locationStyles.value,
             sizeStyles.value,
+            props.style,
           ]}
           disabled={ isDisabled.value || undefined }
           href={ link.href.value }
@@ -181,12 +203,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
             null,
             props.icon ? ['center'] : null,
           ]}
-          onClick={ (e: MouseEvent) => {
-            if (isDisabled.value) return
-
-            link.navigate?.(e)
-            group?.toggle()
-          }}
+          onClick={ onClick }
           value={ valueAttr.value }
         >
           { genOverlays(true, 'v-btn') }
@@ -228,8 +245,9 @@ export const VBtn = genericComponent<VBtnSlots>()({
                     icon: props.icon,
                   },
                 }}
-                v-slots:default={ slots.default }
-              />
+              >
+                { slots.default?.() ?? props.text }
+              </VDefaultsProvider>
             )}
           </span>
 

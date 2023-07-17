@@ -18,15 +18,18 @@
       v-if="!alert"
       class="text-center"
     >
-      <v-btn
-
-        @click="alert = true"
-      >
+      <v-btn @click="alert = true">
         Reset
       </v-btn>
     </div>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const alert = ref(true)
+</script>
 
 <script>
   export default {

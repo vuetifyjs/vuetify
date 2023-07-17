@@ -6,16 +6,17 @@ import { VIcon } from '@/components/VIcon'
 import { VLabel } from '@/components/VLabel'
 import { makeSelectionControlGroupProps, VSelectionControlGroupSymbol } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
+// Composables
+import { useTextColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { useDensity } from '@/composables/density'
+import { useProxiedModel } from '@/composables/proxiedModel'
+
 // Directives
 import { Ripple } from '@/directives/ripple'
 
-// Composables
-import { useDensity } from '@/composables/density'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTextColor } from '@/composables/color'
-
 // Utilities
-import { computed, inject, nextTick, ref } from 'vue'
+import { computed, inject, nextTick, ref, shallowRef } from 'vue'
 import {
   filterInputAttrs,
   genericComponent,
@@ -28,7 +29,7 @@ import {
 
 // Types
 import type { CSSProperties, ExtractPropTypes, Ref, WritableComputedRef } from 'vue'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { GenericProps } from '@/util'
 
 export type SelectionControlSlot = {
   model: WritableComputedRef<any>
@@ -41,23 +42,24 @@ export type SelectionControlSlot = {
   }
 }
 
-export type VSelectionControlSlots = MakeSlots<{
-  default: []
-  label: [{ label: string | undefined, props: Record<string, unknown> }]
-  input: [SelectionControlSlot]
-}>
+export type VSelectionControlSlots = {
+  default: never
+  label: { label: string | undefined, props: Record<string, unknown> }
+  input: SelectionControlSlot
+}
 
-export const makeSelectionControlProps = propsFactory({
+export const makeVSelectionControlProps = propsFactory({
   label: String,
   trueValue: null,
   falseValue: null,
   value: null,
 
+  ...makeComponentProps(),
   ...makeSelectionControlGroupProps(),
-}, 'v-selection-control')
+}, 'VSelectionControl')
 
 export function useSelectionControl (
-  props: ExtractPropTypes<ReturnType<typeof makeSelectionControlProps>> & {
+  props: ExtractPropTypes<ReturnType<typeof makeVSelectionControlProps>> & {
     'onUpdate:modelValue': ((val: any) => void) | undefined
   }
 ) {
@@ -123,19 +125,20 @@ export function useSelectionControl (
   }
 }
 
-export const VSelectionControl = genericComponent<new <T>() => {
-  $props: {
+export const VSelectionControl = genericComponent<new <T>(
+  props: {
     modelValue?: T
     'onUpdate:modelValue'?: (val: T) => any
-  } & SlotsToProps<VSelectionControlSlots>
-}>()({
+  },
+  slots: VSelectionControlSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelectionControl',
 
   directives: { Ripple },
 
   inheritAttrs: false,
 
-  props: makeSelectionControlProps(),
+  props: makeVSelectionControlProps(),
 
   emits: {
     'update:modelValue': (val: any) => true,
@@ -153,8 +156,8 @@ export const VSelectionControl = genericComponent<new <T>() => {
     } = useSelectionControl(props)
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
-    const isFocused = ref(false)
-    const isFocusVisible = ref(false)
+    const isFocused = shallowRef(false)
+    const isFocusVisible = shallowRef(false)
     const input = ref<HTMLInputElement>()
 
     group?.onForceUpdate(() => {
@@ -207,8 +210,10 @@ export const VSelectionControl = genericComponent<new <T>() => {
               'v-selection-control--inline': props.inline,
             },
             densityClasses.value,
+            props.class,
           ]}
           { ...rootAttrs }
+          style={ props.style }
         >
           <div
             class={[
@@ -234,12 +239,12 @@ export const VSelectionControl = genericComponent<new <T>() => {
               <input
                 ref={ input }
                 checked={ model.value }
-                disabled={ props.disabled }
+                disabled={ !!(props.readonly || props.disabled) }
                 id={ id.value }
                 onBlur={ onBlur }
                 onFocus={ onFocus }
                 onInput={ onInput }
-                aria-disabled={ props.readonly }
+                aria-disabled={ !!(props.readonly || props.disabled) }
                 type={ props.type }
                 value={ trueValue.value }
                 name={ props.name }

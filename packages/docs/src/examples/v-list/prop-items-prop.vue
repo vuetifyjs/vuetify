@@ -7,6 +7,32 @@
   </v-card>
 </template>
 
+<script setup>
+  const items = [
+    {
+      title: 'Item #1',
+      value: 1,
+      props: {
+        prependIcon: 'mdi-home',
+      },
+    },
+    {
+      title: 'Item #2',
+      value: 2,
+      props: {
+        appendIcon: 'mdi-close',
+      },
+    },
+    {
+      title: 'Item #3',
+      value: 3,
+      props: {
+        color: 'primary',
+      },
+    },
+  ]
+</script>
+
 <script>
   export default {
     data: () => ({

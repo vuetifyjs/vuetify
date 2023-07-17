@@ -146,9 +146,9 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-on-warning: 255,255,255;
       --v-border-color: 255, 255, 255;
       --v-border-opacity: 0.12;
-      --v-high-emphasis-opacity: 0.87;
-      --v-medium-emphasis-opacity: 0.6;
-      --v-disabled-opacity: 0.38;
+      --v-high-emphasis-opacity: 1;
+      --v-medium-emphasis-opacity: 0.7;
+      --v-disabled-opacity: 0.5;
       --v-idle-opacity: 0.1;
       --v-hover-opacity: 0.04;
       --v-focus-opacity: 0.12;

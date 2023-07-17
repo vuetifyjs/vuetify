@@ -1,0 +1,18 @@
+{
+  "props": {
+    "extensionHeight": "Designate an explicit height for the `extension` slot.",
+    "flat": "Removes the component's **box-shadow**.",
+    "floating": "Applies **display: inline-flex** to the component.",
+    "prominent": "Increases the height of the component content to the value of the **prominentHeight** prop.",
+    "prominentHeight": "Designate an explicit height when using the **prominent** prop.",
+    "collapse": "Morphs the component into a collapsed state, reducing its maximum width.",
+    "scrollBehavior": "Specify an action to take when the scroll position of **scroll-target** reaches **scroll-threshold**. Accepts any combination of hide, inverted, collapse, elevate, and fade-image. Multiple values can be used, separated by a space.",
+    "scrollTarget":  "The element to target for scrolling events. Uses `window` by default.",
+    "scrollThreshold": "The amount of scroll distance down before **scroll-behavior** activates.",
+    "location": "Aligns the component towards the top or bottom."
+  },
+  "slots": {
+    "extension": "Slot positioned directly under the main content of the toolbar. Height of this slot can be set explicitly with the **extension-height** prop.",
+    "image": "Expects the [`v-img`](/components/images/) component."
+  }
+}

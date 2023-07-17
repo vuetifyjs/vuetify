@@ -5,40 +5,12 @@ import {
   HSVtoHex,
   HSVtoHSL,
   HSVtoRGB,
-  parseHex,
   RGBtoHSV,
 } from '@/util/colorUtils'
+import { has } from '@/util/helpers'
 
 // Types
 import type { HSL, HSV, RGB } from '@/util/colorUtils'
-
-function has (obj: object, key: string[]) {
-  return key.every(k => obj.hasOwnProperty(k))
-}
-
-export function parseColor (color: any): HSV | null {
-  if (!color) return null
-
-  let hsva: HSV | null = null
-
-  if (typeof color === 'string') {
-    const hex = parseHex(color)
-
-    hsva = HexToHSV(hex)
-  }
-
-  if (typeof color === 'object') {
-    if (has(color, ['r', 'g', 'b'])) {
-      hsva = RGBtoHSV(color)
-    } else if (has(color, ['h', 's', 'l'])) {
-      hsva = HSLtoHSV(color)
-    } else if (has(color, ['h', 's', 'v'])) {
-      hsva = color
-    }
-  }
-
-  return hsva
-}
 
 function stripAlpha (color: any, stripAlpha: boolean) {
   if (stripAlpha) {
@@ -129,7 +101,7 @@ const rgba: ColorPickerMode = {
       label: 'A',
       max: 1,
       step: 0.01,
-      getValue: ({ a }: RGB) => a ? Math.round(a * 100) / 100 : 1,
+      getValue: ({ a }: RGB) => a != null ? Math.round(a * 100) / 100 : 1,
       getColor: (c: RGB, v: string): RGB => ({ ...c, a: Number(v) }),
     },
   ],
@@ -173,7 +145,7 @@ const hsla: ColorPickerMode = {
       label: 'A',
       max: 1,
       step: 0.01,
-      getValue: ({ a }: HSL) => a ? Math.round(a * 100) / 100 : 1,
+      getValue: ({ a }: HSL) => a != null ? Math.round(a * 100) / 100 : 1,
       getColor: (c: HSL, v: string): HSL => ({ ...c, a: Number(v) }),
     },
   ],
@@ -212,11 +184,11 @@ const hex = {
   ],
 }
 
-export const modes: Record<string, ColorPickerMode> = {
+export const modes = {
   rgb,
   rgba,
   hsl,
   hsla,
   hex,
   hexa,
-}
+} satisfies Record<string, ColorPickerMode>

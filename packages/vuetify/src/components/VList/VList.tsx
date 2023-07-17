@@ -7,79 +7,66 @@ import { VListChildren } from './VListChildren'
 // Composables
 import { createList } from './list'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { useBackgroundColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
-import { makeItemsProps, useItems } from '@/composables/items'
+import { makeItemsProps, useItems } from '@/composables/list-items'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
-import { provideDefaults } from '@/composables/defaults'
-import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { computed, ref, toRef } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { computed, ref, shallowRef, toRef } from 'vue'
+import { focusChild, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { InternalItem } from '@/composables/items'
-import type { SlotsToProps } from '@/util'
+import type { GenericProps } from '@/util'
 import type { PropType } from 'vue'
-import type { VListGroupSlots } from './VListGroup'
-import type { ListItemSlot } from './VListChildren'
-import type { ListItemSubtitleSlot, ListItemTitleSlot } from './VListItem'
+import type { VListChildrenSlots } from './VListChildren'
 
-export interface InternalListItem<T> extends InternalItem<T> {
-  type?: 'item'
-}
+export const makeVListProps = propsFactory({
+  baseColor: String,
+  /* @deprecated */
+  activeColor: String,
+  activeClass: String,
+  bgColor: String,
+  disabled: Boolean,
+  lines: {
+    type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
+    default: 'one',
+  },
+  nav: Boolean,
 
-export const VList = genericComponent<new <T>() => {
-  $props: {
+  ...makeNestedProps({
+    selectStrategy: 'single-leaf' as const,
+    openStrategy: 'list' as const,
+  }),
+  ...makeBorderProps(),
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeItemsProps(),
+  ...makeRoundedProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'text' } as const),
+}, 'VList')
+
+export const VList = genericComponent<new <T>(
+  props: {
     items?: T[]
-  } & SlotsToProps<{
-    'no-data': [{ noDataText: string }]
-    subheader: [{ props: Record<string, unknown> }]
-    divider: [{ props: Record<string, unknown> }]
-    header: [VListGroupSlots['activator']]
-    item: [ListItemSlot<T>]
-    title: [ListItemTitleSlot]
-    subtitle: [ListItemSubtitleSlot]
-  }>
-}>()({
+  },
+  slots: VListChildrenSlots<T>
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VList',
 
-  props: {
-    activeColor: String,
-    activeClass: String,
-    bgColor: String,
-    disabled: Boolean,
-    lines: {
-      type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
-      default: 'one',
-    },
-    nav: Boolean,
-    noDataText: {
-      type: String,
-      default: '$vuetify.noDataText',
-    },
-    hideNoData: Boolean,
-
-    ...makeNestedProps({
-      selectStrategy: 'single-leaf' as const,
-      openStrategy: 'list' as const,
-    }),
-    ...makeBorderProps(),
-    ...makeDensityProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeItemsProps(),
-    ...makeRoundedProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'text' } as const),
-  },
+  props: makeVListProps(),
 
   emits: {
     'update:selected': (val: unknown[]) => true,
@@ -100,6 +87,7 @@ export const VList = genericComponent<new <T>() => {
     const { open, select } = useNested(props)
     const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
     const activeColor = toRef(props, 'activeColor')
+    const baseColor = toRef(props, 'baseColor')
     const color = toRef(props, 'color')
 
     createList()
@@ -107,11 +95,13 @@ export const VList = genericComponent<new <T>() => {
     provideDefaults({
       VListGroup: {
         activeColor,
+        baseColor,
         color,
       },
       VListItem: {
         activeClass: toRef(props, 'activeClass'),
         activeColor,
+        baseColor,
         color,
         density: toRef(props, 'density'),
         disabled: toRef(props, 'disabled'),
@@ -121,7 +111,7 @@ export const VList = genericComponent<new <T>() => {
       },
     })
 
-    const isFocused = ref(false)
+    const isFocused = shallowRef(false)
     const contentRef = ref<HTMLElement>()
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
@@ -157,30 +147,8 @@ export const VList = genericComponent<new <T>() => {
     }
 
     function focus (location?: 'next' | 'prev' | 'first' | 'last') {
-      if (!contentRef.value) return
-
-      const targets = ['button', '[href]', 'input', 'select', 'textarea', '[tabindex]'].map(s => `${s}:not([tabindex="-1"])`).join(', ')
-      const focusable = [...contentRef.value.querySelectorAll(targets)].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
-      const idx = focusable.indexOf(document.activeElement as HTMLElement)
-
-      if (!location) {
-        if (!contentRef.value.contains(document.activeElement)) {
-          focusable[0]?.focus()
-        }
-      } else if (location === 'first') {
-        focusable[0]?.focus()
-      } else if (location === 'last') {
-        focusable.at(-1)?.focus()
-      } else {
-        let el
-        let idxx = idx
-        const inc = location === 'next' ? 1 : -1
-        do {
-          idxx += inc
-          el = focusable[idxx]
-        } while ((!el || el.offsetParent == null) && idxx < focusable.length && idxx >= 0)
-        if (el) el.focus()
-        else focus(location === 'next' ? 'first' : 'last')
+      if (contentRef.value) {
+        return focusChild(contentRef.value, location)
       }
     }
 
@@ -201,11 +169,14 @@ export const VList = genericComponent<new <T>() => {
             elevationClasses.value,
             lineClasses.value,
             roundedClasses.value,
+            props.class,
           ]}
           style={[
             backgroundColorStyles.value,
             dimensionStyles.value,
+            props.style,
           ]}
+          tabindex={ (props.disabled || isFocused.value) ? -1 : 0 }
           role="listbox"
           aria-activedescendant={ undefined }
           onFocusin={ onFocusin }
@@ -215,7 +186,7 @@ export const VList = genericComponent<new <T>() => {
         >
           <VListChildren
             items={ items.value }
-            noDataText={ !props.hideNoData ? props.noDataText : undefined }
+            // noDataText={ !props.hideNoData ? props.noDataText : undefined }
             v-slots={ slots }
           ></VListChildren>
         </props.tag>

@@ -1,0 +1,14 @@
+{
+  "props": {
+    "avatar": "Designates a specific src image to pass to the thumbnail.",
+    "mobile": "Applies the mobile banner styles.",
+    "singleLine": "Forces the banner onto a single line.",
+    "sticky": "Applies **position: sticky** to the component (**Evergreen browsers only**). You can find more information on the [MDN documentation for sticky position](https://developer.mozilla.org/en-US/docs/Web/CSS/position).",
+    "stacked": "Forces the banner actions onto a new line. This is only applicable when the banner is not **single-line** or using the **actions** slot.",
+    "lines": "The amount of visible lines of text before it truncates."
+  },
+  "slots": {
+    "actions": "The slot used for the action's content such as a [v-btn](/components/buttons). The **dismiss** function in this slots scope, when invoked, will close the banner.",
+    "thumbnail": "The slot used for avatars and icon content."
+  }
+}

@@ -1,6 +1,6 @@
 ---
-nav: Parallax
 meta:
+  nav: Parallax
   title: Parallax component
   description: The parallax component creates a 3d effect that makes an image appear to scroll slower than the window.
   keywords: parallax, vuetify parallax component, vue parallax component

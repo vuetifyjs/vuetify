@@ -2,16 +2,21 @@
 import { VExpansionPanelSymbol } from './VExpansionPanels'
 import { VIcon } from '@/components/VIcon'
 
+// Composables
+import { useBackgroundColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { IconValue } from '@/composables/icons'
+
 // Directives
 import { Ripple } from '@/directives/ripple'
-
-// Composables
-import { IconValue } from '@/composables/icons'
-import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, inject } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 interface ExpansionPanelTitleSlot {
   collapseIcon: IconValue
@@ -22,8 +27,8 @@ interface ExpansionPanelTitleSlot {
 }
 
 export type VExpansionPanelTitleSlots = {
-  default: [ExpansionPanelTitleSlot]
-  actions: [ExpansionPanelTitleSlot]
+  default: ExpansionPanelTitleSlot
+  actions: ExpansionPanelTitleSlot
 }
 
 export const makeVExpansionPanelTitleProps = propsFactory({
@@ -38,20 +43,20 @@ export const makeVExpansionPanelTitleProps = propsFactory({
   },
   hideActions: Boolean,
   ripple: {
-    type: [Boolean, Object],
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: false,
   },
   readonly: Boolean,
-}, 'v-expansion-panel-title')
+
+  ...makeComponentProps(),
+}, 'VExpansionPanelTitle')
 
 export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>()({
   name: 'VExpansionPanelTitle',
 
   directives: { Ripple },
 
-  props: {
-    ...makeVExpansionPanelTitleProps(),
-  },
+  props: makeVExpansionPanelTitleProps(),
 
   setup (props, { slots }) {
     const expansionPanel = inject(VExpansionPanelSymbol)
@@ -76,8 +81,12 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
             'v-expansion-panel-title--active': expansionPanel.isSelected.value,
           },
           backgroundColorClasses.value,
+          props.class,
         ]}
-        style={ backgroundColorStyles.value }
+        style={[
+          backgroundColorStyles.value,
+          props.style,
+        ]}
         type="button"
         tabindex={ expansionPanel.disabled.value ? -1 : undefined }
         disabled={ expansionPanel.disabled.value }

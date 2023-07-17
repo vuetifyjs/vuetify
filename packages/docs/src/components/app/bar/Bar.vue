@@ -8,7 +8,7 @@
       <app-bar-logo />
 
       <v-btn
-        v-if="name !== 'home' && mdAndDown"
+        v-if="route.meta.layout !== 'home' && mdAndDown"
         icon="mdi-menu"
         @click="app.drawer = !app.drawer"
       />
@@ -37,9 +37,9 @@
 
       <app-bar-theme-toggle />
 
-      <app-vertical-divider />
+      <app-vertical-divider v-if="lgAndUp" />
 
-      <app-bar-store-link />
+      <app-bar-store-link v-if="lgAndUp" />
 
       <app-bar-jobs-link v-if="lgAndUp" />
 
@@ -78,5 +78,5 @@
 
   const app = useAppStore()
   const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
-  const { name } = useRoute()
+  const route = useRoute()
 </script>
