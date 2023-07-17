@@ -120,3 +120,24 @@ export function useTransformItems <T extends { value: unknown }> (items: Ref<T[]
 
   return { items, transformIn, transformOut }
 }
+
+type FlatListItem = { type: 'divider' } | { type: 'item', item: ListItem } | { type: 'subheader', item: ListItem }
+
+export function flatten (items: ListItem[]): FlatListItem[] {
+  const arr = []
+
+  for (const item of items) {
+    if (item.children?.length) {
+      arr.push({ type: 'subheader' as const, item })
+      arr.push(...flatten(item.children))
+    } else {
+      arr.push({ type: 'item' as const, item })
+    }
+
+    if (item.props.divider) {
+      arr.push({ type: 'divider' as const })
+    }
+  }
+
+  return arr
+}

@@ -271,13 +271,13 @@ export const VListItem = genericComponent<VListItemSlots>()({
           )}
 
           <div class="v-list-item__content" data-no-activator="">
-            { hasTitle && (
+            { hasTitle && !slots.default && (
               <VListItemTitle key="title">
                 { slots.title?.({ title: props.title }) ?? props.title }
               </VListItemTitle>
             )}
 
-            { hasSubtitle && (
+            { hasSubtitle && !slots.default && (
               <VListItemSubtitle key="subtitle">
                 { slots.subtitle?.({ subtitle: props.subtitle }) ?? props.subtitle }
               </VListItemSubtitle>

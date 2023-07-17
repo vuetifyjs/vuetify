@@ -7,17 +7,18 @@ import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
-import { VList, VListItem } from '@/components/VList'
+import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
+import { VDivider } from '../VDivider'
 
 // Composables
 import { useScrolling } from './useScrolling'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
-import { makeItemsProps, useItems } from '@/composables/list-items'
+import { flatten, makeItemsProps, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
@@ -101,6 +102,7 @@ export const VSelect = genericComponent<new <
     item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     chip: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     selection: { item: ListItem<Item>, index: number }
+    subheader: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     'prepend-item': never
     'append-item': never
     'no-data': never
@@ -152,10 +154,7 @@ export const VSelect = genericComponent<new <
     let keyboardLookupLastTime: number
 
     const displayItems = computed(() => {
-      if (props.hideSelected) {
-        return items.value.filter(item => !selections.value.some(s => s === item))
-      }
-      return items.value
+      return flatten(props.hideSelected ? items.value.filter(item => !selections.value.some(s => s === item)) : items.value)
     })
 
     const menuDisabled = computed(() => (
@@ -330,7 +329,17 @@ export const VSelect = genericComponent<new <
                       ))}
 
                       <VVirtualScroll renderless items={ displayItems.value }>
-                        { ({ item, index, itemRef }) => {
+                        { ({ item: virtualItem, index, itemRef }) => {
+                          if (virtualItem.type === 'divider') {
+                            return <VDivider ref={itemRef} key={index} />
+                          }
+
+                          const item = virtualItem.item
+
+                          if (virtualItem.type === 'subheader') {
+                            return slots.subheader?.({ item, index, props: item.props }) ?? <VListSubheader ref={itemRef} key={index}>{item.title}</VListSubheader>
+                          }
+
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: index,

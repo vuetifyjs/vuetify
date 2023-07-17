@@ -6,8 +6,9 @@ import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
-import { VList, VListItem } from '@/components/VList'
+import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
+import { VDivider } from '../VDivider'
 
 // Composables
 import { highlightResult, makeFilterProps } from '@/composables/filter'
@@ -22,7 +23,7 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 // Composables
 import { useScrolling } from '../VSelect/useScrolling'
 import { useTextColor } from '@/composables/color'
-import { useItems } from '@/composables/list-items'
+import { flatten, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { makeTransitionProps } from '@/composables/transition'
 
@@ -80,6 +81,7 @@ export const VAutocomplete = genericComponent<new <
     item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     chip: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     selection: { item: ListItem<Item>, index: number }
+    subheader: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     'prepend-item': never
     'append-item': never
     'no-data': never
@@ -140,6 +142,8 @@ export const VAutocomplete = genericComponent<new <
       }
       return filteredItems.value
     })
+
+    const flatItems = computed(() => flatten(displayItems.value))
 
     const selected = computed(() => selections.value.map(selection => selection.props.value))
     const selection = computed(() => selections.value[selectionIndex.value])
@@ -418,8 +422,18 @@ export const VAutocomplete = genericComponent<new <
                         <VListItem title={ t(props.noDataText) } />
                       ))}
 
-                      <VVirtualScroll renderless items={ displayItems.value }>
-                        { ({ item, index, itemRef }) => {
+                      <VVirtualScroll renderless items={ flatItems.value }>
+                      { ({ item: virtualItem, index, itemRef }) => {
+                          if (virtualItem.type === 'divider') {
+                            return <VDivider ref={itemRef} key={index} />
+                          }
+
+                          const item = virtualItem.item
+
+                          if (virtualItem.type === 'subheader') {
+                            return slots.subheader?.({ item, index, props: item.props }) ?? <VListSubheader ref={itemRef} key={index}>{item.title}</VListSubheader>
+                          }
+
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: index,
