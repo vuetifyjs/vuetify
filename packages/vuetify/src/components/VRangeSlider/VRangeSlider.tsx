@@ -97,8 +97,11 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
           ? [value, model.value[1]]
           : [model.value[0], value]
 
-        model.value = newValue
-        emit('end', newValue)
+        if (!props.strict && newValue[0] < newValue[1]) {
+          model.value = newValue
+        }
+
+        emit('end', model.value)
       },
       onSliderMove: ({ value }) => {
         const [start, stop] = model.value
