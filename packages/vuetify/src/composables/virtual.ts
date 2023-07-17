@@ -86,9 +86,9 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     const direction = scrollTop < lastScrollTop ? UP : DOWN
 
     const midPointIndex = calculateMidPointIndex(scrollTop + height / 2)
-    const buffer = Math.round(visibleItems.value / 2)
-    const firstIndex = midPointIndex - buffer
-    const lastIndex = first.value + (buffer * 2) - 1
+    const buffer = Math.round(visibleItems.value / 3)
+    const firstIndex = midPointIndex - buffer * 3 / 2 
+    const lastIndex = first.value + (buffer * 3) - 1
     if (direction === UP && midPointIndex <= lastIndex) {
       first.value = clamp(firstIndex, 0, items.value.length)
     } else if (direction === DOWN && ((midPointIndex >= lastIndex) || (midPointIndex + visibleItems.value / 2 >= items.value.length))) {
@@ -104,7 +104,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     containerRef.value.scrollTop = offset
   }
 
-  const last = computed(() => Math.min(items.value.length, first.value + visibleItems.value))
+  const last = computed(() => Math.min(items.value.length, Math.ceil(first.value + visibleItems.value)))
   const computedItems = computed(() => {
     return items.value.slice(first.value, last.value).map((item, index) => ({
       raw: item,
