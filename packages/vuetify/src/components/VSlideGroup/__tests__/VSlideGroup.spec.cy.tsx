@@ -1,9 +1,12 @@
 /* eslint-disable sonarjs/no-identical-functions */
 /// <reference types="../../../../types/cypress" />
 
+// Components
+import { VSlideGroup, VSlideGroupItem } from '../'
 import { Application, CenteredGrid } from '../../../../cypress/templates'
 import { VCard } from '@/components/VCard'
-import { VSlideGroup, VSlideGroupItem } from '../'
+
+// Utilities
 import { createRange } from '@/util'
 
 describe('VSlideGroup', () => {
@@ -16,7 +19,7 @@ describe('VSlideGroup', () => {
               <VSlideGroupItem key={ i } value={ i }>
                 { props => (
                   <VCard
-                    class={ ['ma-4', props.selectedClass] }
+                    class={['ma-4', props.selectedClass]}
                     color="grey"
                     width="50"
                     height="100"
@@ -63,8 +66,8 @@ describe('VSlideGroup', () => {
         <CenteredGrid width="400px">
           <VSlideGroup showArrows="always">
             {{
-              prev: props => <div {...props}>prev</div>,
-              next: props => <div {...props}>next</div>,
+              prev: props => <div { ...props }>prev</div>,
+              next: props => <div { ...props }>next</div>,
               default: () => createRange(6).map(i => (
                 <VSlideGroupItem key={ i }>
                   <VCard class="ma-4" color="grey" width="50" height="100">{ i }</VCard>
@@ -190,7 +193,7 @@ describe('VSlideGroup', () => {
           <VSlideGroup modelValue={ 7 } showArrows="always" selectedClass="bg-primary">
             { createRange(10).map(i => (
               <VSlideGroupItem key={ i } value={ i }>
-                { props => <VCard color="grey" width="50" height="100" class={ ['ma-4', props.selectedClass] }>{ i }</VCard> }
+                { props => <VCard color="grey" width="50" height="100" class={['ma-4', props.selectedClass]}>{ i }</VCard> }
               </VSlideGroupItem>
             ))}
           </VSlideGroup>
@@ -208,7 +211,7 @@ describe('VSlideGroup', () => {
           <VSlideGroup selectedClass="bg-primary">
             { createRange(8).map(i => (
               <VSlideGroupItem key={ i } value={ i }>
-                { props => <VCard color="grey" width="50" height="100" class={ ['ma-4', props.selectedClass, `item-${i}`] }>{ i }</VCard> }
+                { props => <VCard color="grey" width="50" height="100" class={['ma-4', props.selectedClass, `item-${i}`]}>{ i }</VCard> }
               </VSlideGroupItem>
             ))}
           </VSlideGroup>
@@ -229,7 +232,7 @@ describe('VSlideGroup', () => {
           <VSlideGroup selectedClass="bg-primary" showArrows>
             { createRange(8).map(i => (
               <VSlideGroupItem key={ i } value={ i }>
-                { props => <VCard color="grey" width="50" height="100" class={ ['ma-4', props.selectedClass, `item-${i}`] }>{ i }</VCard> }
+                { props => <VCard color="grey" width="50" height="100" class={['ma-4', props.selectedClass, `item-${i}`]}>{ i }</VCard> }
               </VSlideGroupItem>
             ))}
           </VSlideGroup>

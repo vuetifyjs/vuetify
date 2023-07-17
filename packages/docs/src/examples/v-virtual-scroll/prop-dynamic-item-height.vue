@@ -17,11 +17,15 @@
   </v-virtual-scroll>
 </template>
 
+<script setup>
+  const items = Array.from({ length: 1000 }, (k, v) => v + 1)
+</script>
+
 <script>
   export default {
     computed: {
       items () {
-        return Array.from({ length: 10000 }, (k, v) => v + 1)
+        return Array.from({ length: 1000 }, (k, v) => v + 1)
       },
     },
   }

@@ -27,7 +27,7 @@
     <v-expand-transition>
       <v-card
         v-if="reveal"
-        class="transition-fast-in-fast-out v-card--reveal"
+        class="v-card--reveal"
         style="height: 100%;"
       >
         <v-card-text class="pb-0">
@@ -49,6 +49,12 @@
     </v-expand-transition>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const reveal = ref(false)
+</script>
 
 <script>
   export default {

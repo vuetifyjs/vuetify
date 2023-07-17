@@ -26,12 +26,21 @@ export default {
     lastPage: 'Última página',
     pageText: '{0}-{1} de {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} selecionado(s)',
-    nextMonthAriaLabel: 'Próximo mês',
-    nextYearAriaLabel: 'Próximo ano',
-    prevMonthAriaLabel: 'Mês anterior',
-    prevYearAriaLabel: 'Ano anterior',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Não há dados disponíveis',
   carousel: {
@@ -72,5 +81,10 @@ export default {
     ariaLabel: {
       item: 'Rating {0} of {1}',
     },
+  },
+  loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
   },
 }

@@ -3,7 +3,6 @@ import {
   computed,
   inject,
   provide,
-  reactive,
   ref,
   watch,
   watchEffect,
@@ -23,8 +22,8 @@ import {
 import { APCAcontrast } from '@/util/color/APCA'
 
 // Types
-import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 import type { HeadClient } from '@vueuse/head'
+import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
@@ -163,9 +162,9 @@ const defaultThemeOptions: Exclude<ThemeOptions, false> = {
       variables: {
         'border-color': '#FFFFFF',
         'border-opacity': 0.12,
-        'high-emphasis-opacity': 0.87,
-        'medium-emphasis-opacity': 0.60,
-        'disabled-opacity': 0.38,
+        'high-emphasis-opacity': 1,
+        'medium-emphasis-opacity': 0.70,
+        'disabled-opacity': 0.50,
         'idle-opacity': 0.10,
         'hover-opacity': 0.04,
         'focus-opacity': 0.12,
@@ -201,7 +200,7 @@ function parseThemeOptions (options: ThemeOptions = defaultThemeOptions): Intern
 
 // Composables
 export function createTheme (options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
-  const parsedOptions = reactive(parseThemeOptions(options))
+  const parsedOptions = parseThemeOptions(options)
   const name = ref(parsedOptions.defaultTheme)
   const themes = ref(parsedOptions.themes)
 
@@ -264,19 +263,12 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       createCssClass(lines, ':root', ['color-scheme: dark'])
     }
 
+    createCssClass(lines, ':root', genCssVariables(current.value))
+
     for (const [themeName, theme] of Object.entries(computedThemes.value)) {
-      const { variables, dark } = theme
-
       createCssClass(lines, `.v-theme--${themeName}`, [
-        `color-scheme: ${dark ? 'dark' : 'normal'}`,
+        `color-scheme: ${theme.dark ? 'dark' : 'normal'}`,
         ...genCssVariables(theme),
-        ...Object.keys(variables).map(key => {
-          const value = variables[key]
-          const color = typeof value === 'string' && value.startsWith('#') ? parseColor(value) : undefined
-          const rgb = color ? `${color.r}, ${color.g}, ${color.b}` : undefined
-
-          return `--v-${key}: ${rgb ?? value}`
-        }),
       ])
     }
 
@@ -290,7 +282,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       } else {
         createCssClass(bgLines, `.bg-${key}`, [
           `--v-theme-overlay-multiplier: var(--v-theme-${key}-overlay-multiplier)`,
-          `background: rgb(var(--v-theme-${key})) !important`,
+          `background-color: rgb(var(--v-theme-${key})) !important`,
           `color: rgb(var(--v-theme-on-${key})) !important`,
         ])
         createCssClass(fgLines, `.text-${key}`, [`color: rgb(var(--v-theme-${key})) !important`])
@@ -314,6 +306,8 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   }
 
   function install (app: App) {
+    if (parsedOptions.isDisabled) return
+
     const head = app._context.provides.usehead as HeadClient | undefined
     if (head) {
       if (head.push) {
@@ -335,8 +329,6 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       watch(styles, updateStyles, { immediate: true })
 
       function updateStyles () {
-        if (parsedOptions.isDisabled) return
-
         if (typeof document !== 'undefined' && !styleEl) {
           const el = document.createElement('style')
           el.type = 'text/css'
@@ -423,6 +415,12 @@ function genCssVariables (theme: InternalThemeDefinition) {
     if (!key.startsWith('on-')) {
       variables.push(`--v-theme-${key}-overlay-multiplier: ${getLuma(value) > 0.18 ? lightOverlay : darkOverlay}`)
     }
+  }
+
+  for (const [key, value] of Object.entries(theme.variables)) {
+    const color = typeof value === 'string' && value.startsWith('#') ? parseColor(value) : undefined
+    const rgb = color ? `${color.r}, ${color.g}, ${color.b}` : undefined
+    variables.push(`--v-${key}: ${rgb ?? value}`)
   }
 
   return variables

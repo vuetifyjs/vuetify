@@ -1,6 +1,6 @@
 ---
-nav: Footers
 meta:
+  nav: Footers
   title: Footer component
   description: The footer component provides a container for displaying additional navigation information about a site.
   keywords: footers, vuetify footer component, vue footer component
@@ -14,17 +14,21 @@ related:
 
 The `v-footer` component is used for displaying general information that a user might want to access from any page within your site.
 
-<entry />
-
 ## Usage
 
 The `v-footer` component in its simplest form is a container.
 
 <usage name="v-footer" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-footer](/api/v-footer/) | The footer component. |
+
+<api-inline hide-links />
 
 ## Examples
 

@@ -1,9 +1,12 @@
 /* eslint-disable sonarjs/no-identical-functions */
 /// <reference types="../../../../types/cypress" />
 
-import { CenteredGrid } from '@/../cypress/templates'
-import { createRouter, createWebHistory } from 'vue-router'
+// Components
 import { VList, VListItem } from '..'
+import { CenteredGrid } from '@/../cypress/templates'
+
+// Utilities
+import { createRouter, createWebHistory } from 'vue-router'
 
 describe('VList', () => {
   function mountFunction (content: JSX.Element) {
@@ -76,7 +79,7 @@ describe('VList', () => {
 
     const wrapper = mountFunction((
       <CenteredGrid width="200px">
-        <VList items={items} opened={['group']} />
+        <VList items={ items } opened={['group']} />
       </CenteredGrid>
     ))
 
@@ -93,7 +96,7 @@ describe('VList', () => {
       {
         title: 'Group',
         value: 'group',
-        $children: [
+        children: [
           {
             title: 'Child',
             subtitle: 'Subtitle',
@@ -107,7 +110,7 @@ describe('VList', () => {
       <CenteredGrid width="400px">
         <VList items={ items } opened={['group']}>
           {{
-            item: item => <VListItem {...item} prependIcon="mdi-home" />,
+            item: item => <VListItem { ...item } prependIcon="mdi-home" />,
           }}
         </VList>
       </CenteredGrid>

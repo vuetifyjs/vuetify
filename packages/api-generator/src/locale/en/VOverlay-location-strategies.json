@@ -1,0 +1,6 @@
+{
+  "props": {
+    "locationStrategy": "A function used to specifies how the component should position relative to its activator",
+    "offset": "A single value that offsets content away from the target based upon what side it is on"
+  }
+}

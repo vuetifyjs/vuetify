@@ -2,8 +2,8 @@
 import { useLocation } from '../location'
 
 // Utilities
-import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
 
 // Types
 import { createVuetify } from '@/framework'

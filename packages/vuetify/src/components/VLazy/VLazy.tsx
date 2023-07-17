@@ -1,40 +1,44 @@
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTagProps } from '@/composables/tag'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
 import intersect from '@/directives/intersect'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+
+export const makeVLazyProps = propsFactory({
+  modelValue: Boolean,
+  options: {
+    type: Object as PropType<IntersectionObserverInit>,
+    // For more information on types, navigate to:
+    // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+    default: () => ({
+      root: undefined,
+      rootMargin: undefined,
+      threshold: undefined,
+    }),
+  },
+
+  ...makeComponentProps(),
+  ...makeDimensionProps(),
+  ...makeTagProps(),
+  ...makeTransitionProps({ transition: 'fade-transition' }),
+}, 'VLazy')
 
 export const VLazy = genericComponent()({
   name: 'VLazy',
 
   directives: { intersect },
 
-  props: {
-    modelValue: Boolean,
-    options: {
-      type: Object as PropType<IntersectionObserverInit>,
-      // For more information on types, navigate to:
-      // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
-      default: () => ({
-        root: undefined,
-        rootMargin: undefined,
-        threshold: undefined,
-      }),
-    },
-
-    ...makeDimensionProps(),
-    ...makeTagProps(),
-    ...makeTransitionProps({ transition: 'fade-transition' }),
-  },
+  props: makeVLazyProps(),
 
   emits: {
     'update:modelValue': (value: boolean) => true,
@@ -53,13 +57,22 @@ export const VLazy = genericComponent()({
 
     useRender(() => (
       <props.tag
-        class="v-lazy"
+        class={[
+          'v-lazy',
+          props.class,
+        ]}
         v-intersect={[
-          onIntersect,
-          props.options,
+          {
+            handler: onIntersect,
+            options: props.options,
+          },
+          null,
           isActive.value ? [] : ['once'],
         ]}
-        style={ dimensionStyles.value }
+        style={[
+          dimensionStyles.value,
+          props.style,
+        ]}
       >
         { isActive.value && (
           <MaybeTransition transition={ props.transition } appear>

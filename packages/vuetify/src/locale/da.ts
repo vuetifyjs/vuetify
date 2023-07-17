@@ -26,12 +26,21 @@ export default {
     lastPage: 'Sidste side',
     pageText: '{0}-{1} af {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} valgt',
-    nextMonthAriaLabel: 'Næste måned',
-    nextYearAriaLabel: 'Næste år',
-    prevMonthAriaLabel: 'Forrige måned',
-    prevYearAriaLabel: 'Forrige år',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Ingen data tilgængelig',
   carousel: {
@@ -72,5 +81,10 @@ export default {
     ariaLabel: {
       item: 'Bedømmelse {0} af {1}',
     },
+  },
+  loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
   },
 }

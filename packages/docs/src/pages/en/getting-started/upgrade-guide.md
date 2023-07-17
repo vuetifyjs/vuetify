@@ -1,7 +1,7 @@
 ---
-nav: Upgrade guide
 meta:
-  title: Guide to upgrading Vuetify
+  nav: Upgrade guide
+  title: Upgrade guide
   description: Detailed instruction on how to upgrade Vuetify to 3.0
   keywords: migration, upgrade, releases, upgrading vuetify, alpha, v3
 related:
@@ -12,16 +12,28 @@ related:
 
 # Upgrade Guide
 
-<alert type="warning">
-
-  This page is incomplete. Please check back later for more information, or submit a PR if you notice something missing. If you have additional questions, reach out to us in [Discord](https://community.vuetifyjs.com/)
-
-</alert>
-
 ## Introduction
 
 This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
-Many of these changes can be applied automatically by [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/v/next)
+Many of these changes can be applied automatically by [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)
+
+<entry />
+
+::: warning
+  This page is incomplete. Please check back later for more information, or submit a PR if you notice something missing. If you have additional questions, reach out to us in [Discord](https://community.vuetifyjs.com/)
+:::
+
+::: warning
+  Not all Vuetify 2 components are currently available in Vuetify 3; These components will be released as their development is completed via [Vuetify Labs](https://vuetifyjs.com/en/labs/introduction/).
+
+- v-calendar
+- v-date-picker
+- [v-data-table](/components/data-tables/basics/)
+- [v-skeleton-loader](/components/skeleton-loaders/)
+- v-stepper
+- v-time-picker
+- v-treeview
+:::
 
 ## Setup
 
@@ -122,12 +134,14 @@ app.use(vuetify)
 
 ### v-btn/v-btn-toggle
 
-- `active-class` prop has been renamed to `selected-class`.
-- `fab` is no longer supported. If you just need a round button, use `icon` prop or apply a `.rounded-circle` class
+- `active-class` prop has been renamed to `selected-class`
+- `fab` is no longer supported. If you just need a round button, use `icon` prop or apply a `.rounded-circle` class.
 - `flat` / `outlined` / `text` / `plain` props have been combined into a single `variant` prop.
-- `depressed` has been renamed to `variant="flat"`.
-- `retain-focus-on-click` has been removed, buttons use `:focus-visible` instead.
-- `v-btn-toggle` needs `mandatory="force"` prop to achieve the same behaviour as `mandatory` prop in v2
+- `depressed` has been renamed to `variant="flat"`
+- `retain-focus-on-click` has been removed, buttons use [`:focus-visible`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible) instead.
+- `v-btn-toggle` needs `mandatory="force"` prop to achieve the same behaviour as `mandatory` prop in v2.
+- Disabled buttons use a faded variant of the specified `color` instead of grey ([#15147](https://github.com/vuetifyjs/vuetify/issues/15147))
+  - The `$button-colored-disabled` sass variable can be set to false to use grey instead.
 
 ### v-checkbox/v-radio/v-switch
 
@@ -159,7 +173,7 @@ app.use(vuetify)
 - `item-text` has been renamed to `item-title`, and now looks up the `title` property on item objects by default. `value` is unchanged.
 - `item-disabled` has been removed, and `disabled`, `header`, `divider`, and `avatar` properties are ignored on item objects.
   - Additional props to pass to `v-list-item` can be specified with the `item-props` prop. `item-props` can be a function that takes the item object and returns an object of props, or set to boolean `true` to spread item objects directly as props.
-- The `item` object in slots is now an `InternalItem` object, the original item object is available as `item.raw`.
+- The `item` object in slots is now an `ListItem` object, the original item object is available as `item.raw`.
 - The `item` slot will no longer generate a `v-list-item` component automatically, instead a `props` object is supplied with the required event listeners and props:
 
 ```html
@@ -204,3 +218,9 @@ app.use(vuetify)
 ### v-snackbar
 
 - `action` slot was renamed to `actions`
+
+### v-expansion-panel
+
+- `v-expansion-panel-header` has been renamed to `v-expansion-panel-title`.
+- `v-expansion-panel-content` has been renamed to `v-expansion-panel-text`.
+- `v-expansion-panel` now has `text` and `title` props that can be used instead of subcomponents.

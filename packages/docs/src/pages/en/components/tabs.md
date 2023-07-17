@@ -1,6 +1,6 @@
 ---
-nav: Tabs
 meta:
+  nav: Tabs
   title: Tabs component
   description: The tabs component provides a way to organize and navigate between groups of content that are related at the same level of hierarchy.
   keywords: tabs, vuetify tabs component, vue tabs component
@@ -14,17 +14,22 @@ related:
 
 The `v-tabs` component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation for a page, where the tabs are links and the tab-items are the content.
 
-<entry />
-
 ## Usage
 
 The `v-tabs` component is a styled extension of [v-slide-group](/components/slide-groups). It provides an easy to use interface for organizing content into separate sections.
 
 <example file="v-tabs/usage" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-tabs](/api/v-tabs/) | Primary Component |
+| [v-tab](/api/v-tab/) | Sub-component used for modifying the `v-tabs` state |
+
+<api-inline hide-links />
 
 ## Examples
 

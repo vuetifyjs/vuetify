@@ -1,6 +1,6 @@
 ---
-nav: Chip groups
 meta:
+  nav: Chip groups
   title: Chip group component
   description: The chip group component combines numerous selectable chips into single or multiple lines.
   keywords: chip groups, vuetify chip group component, vue chip group component
@@ -28,7 +28,11 @@ Chip groups make it easy for users to select filtering options for more complex 
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-chip-group](/api/v-chip-group/) | Primary component |
+
+<api-inline hide-links />
 
 ## Examples
 

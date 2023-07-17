@@ -1,6 +1,6 @@
 ---
-nav: Dialogs
 meta:
+  nav: Dialogs
   title: Dialog component
   description: The dialog component informs a user about a specific task and may contain critical information or require the user to take a specific action.
   keywords: dialogs, vuetify dialog component, vue dialog component
@@ -28,7 +28,11 @@ In this basic example we use the **activator** slot to render a button that is u
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-dialog](/api/v-dialog/) | Primary component |
+
+<api-inline hide-links />
 
 ## Examples
 

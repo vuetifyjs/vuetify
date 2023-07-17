@@ -10,6 +10,8 @@ import { reactive, toRefs } from 'vue'
 export type RootState = {
   v: number
   api: 'link-only' | 'inline'
+  dev: boolean
+  composition: ('options' | 'composition')
   pwaRefresh: boolean
   theme: string
   mixedTheme: boolean
@@ -31,6 +33,8 @@ export const useUserStore = defineStore('user', () => {
   const state = reactive<RootState>({
     v: 1,
     api: 'link-only',
+    dev: false,
+    composition: 'options',
     pwaRefresh: true,
     theme: 'system',
     mixedTheme: true,
@@ -77,6 +81,10 @@ export const useUserStore = defineStore('user', () => {
 
     if (Array.isArray(data.notifications)) {
       data.notifications = { read: data.notifications }
+    }
+
+    if (Array.isArray(data.composition)) {
+      data.composition = 'composition'
     }
 
     Object.assign(state, merge(state, data))

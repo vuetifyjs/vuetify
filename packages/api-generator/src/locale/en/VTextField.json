@@ -1,0 +1,40 @@
+{
+  "props": {
+    "autofocus": "Enables autofocus",
+    "clearIcon": "Applied when using **clearable** and the input is dirty",
+    "flat": "Removes elevation (shadow) added to element when using the **solo** or **solo-inverted** props",
+    "persistentPlaceholder": "Forces placeholder to always be visible",
+    "placeholder": "Sets the input’s placeholder text",
+    "prefix": "Displays prefix text",
+    "prependIcon": "Prepends an icon to the outnside the component's input, uses the same syntax as `v-icon`",
+    "prependInnerIcon": "Prepends an icon inside the component's input, uses the same syntax as `v-icon`",
+    "reverse": "Reverses the input orientation",
+    "rounded": "Adds a border radius to the input",
+    "suffix": "Displays suffix text",
+    "toggleKeys": "Array of key codes that will toggle the input (if it supports toggling)",
+    "type": "Sets input type",
+    "counterValue": "Function returns the counter display text"
+  },
+  "events": {
+    "blur": "Emitted when the input is blurred",
+    "change": "Emitted when the input is changed by user interaction",
+    "click:append-outer": "Emitted when appended outer icon is clicked",
+    "click:clear": "Emitted when clearable icon clicked",
+    "click:prepend-inner": "Emitted when prepended inner icon is clicked",
+    "focus": "Emitted when component is focused",
+    "keydown": "Emitted when **any** key is pressed",
+    "click:prepend": "Emitted when prepended icon is clicked",
+    "click:append": "Emitted when append icon is clicked",
+    "click:appendInner": "Emitted when appended inner icon is clicked",
+    "click:prependInner": "Emitted when prepended inner icon is clicked",
+    "click:control": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-text-field.json))",
+    "click:input": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-text-field.json))",
+    "update:focused": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-text-field.json))"
+  },
+  "exposed": {
+    "reset": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-text-field.json))",
+    "resetValidation": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-text-field.json))",
+    "validate": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-text-field.json))",
+    "controlRef": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-text-field.json))"
+  }
+}

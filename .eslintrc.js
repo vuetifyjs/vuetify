@@ -23,6 +23,7 @@ module.exports = {
     '@typescript-eslint',
     'sonarjs',
     'react',
+    'eslint-plugin-local-rules',
   ],
   rules: {
     'no-var': 'error',
@@ -178,7 +179,12 @@ module.exports = {
         '@typescript-eslint/no-inferrable-types': 'error',
         '@typescript-eslint/unified-signatures': 'error',
         '@typescript-eslint/no-invalid-this': 'error',
-        '@typescript-eslint/consistent-type-imports': 'error',
+        '@typescript-eslint/consistent-type-imports': ['error', {
+          prefer: 'type-imports',
+          fixStyle: 'separate-type-imports',
+        }],
+        'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
+        'import/no-duplicates': ['error', { 'prefer-inline': false }],
         '@typescript-eslint/no-non-null-asserted-optional-chain': 'error',
         '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'error',
         // '@typescript-eslint/no-unnecessary-condition': 'error',
@@ -200,6 +206,16 @@ module.exports = {
 
         // https://github.com/yannickcr/eslint-plugin-react/issues/2415
         // 'react/jsx-curly-spacing': ['error', { when: 'always', spacing: { objectLiterals: 'never' } }],
+        'local-rules/jsx-condition-key': 'error',
+        'local-rules/jsx-curly-spacing': ['error', {
+          when: 'always',
+          spacing: {
+            objectLiterals: 'never',
+            arrayLiterals: 'never',
+            multilineClose: 'never',
+          },
+          children: true,
+        }],
 
         'react/jsx-equals-spacing': 'error',
         'react/jsx-first-prop-new-line': 'error',

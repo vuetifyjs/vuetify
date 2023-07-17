@@ -1,6 +1,6 @@
 ---
-nav: Text fields
 meta:
+  nav: Text fields
   title: Text field component
   description: The text field component accepts textual input from users.
   keywords: text fields, vuetify text field component, vue text field component
@@ -26,6 +26,14 @@ A simple text field with placeholder and/or label.
 
 <entry />
 
+## API
+
+| Component | Description |
+| - | - |
+| [v-text-field](/api/v-text-field/) | Primary Component |
+
+<api-inline hide-links />
+
 ## Anatomy
 
 The recommended placement of elements inside of `v-text-field` is:
@@ -43,14 +51,6 @@ The recommended placement of elements inside of `v-text-field` is:
 | 4. Label | A content area for displaying text to users that correlates to the input |
 | 5. Append-inner icon | A custom icon that is located at the end of `v-field` component |
 | 6. Append icon | A custom icon that is located after `v-field` component |
-
-## API
-
-| Component | Description |
-| - | - |
-| [v-text-field](/api/v-text-field/) | Primary Component |
-
-<api-inline hide-links />
 
 ## Guide
 
@@ -92,11 +92,9 @@ When the user focuses the input, the placeholder fades in as the label translate
 
 <example file="v-text-field/prop-placeholder" />
 
-<alert type="info">
-
+::: info
   Use the **persistent-placeholder** prop to force the **placeholder** to be visible, even when the input is not focused.
-
-</alert>
+:::
 
 #### Hints & messages
 
@@ -258,14 +256,14 @@ The following example uses the **label**, **prepend**, and **prepend-inner** slo
     <template v-slot:prepend>
       <v-icon
         :color="model ? 'primary' : undefined"
-        icon="mdi-vuetify"
+        icon="$vuetify"
       />
     </template>
 
     <template v-slot:append-inner>
       <v-icon
         v-if="model"
-        icon="mdi-success"
+        icon="mdi-check-circle"
       />
     </template>
 
@@ -284,7 +282,7 @@ The following example uses the **label**, **prepend**, and **prepend-inner** slo
 </script>
 ```
 
-<vuetify />
+<promoted />
 
 #### Icon slots
 
@@ -323,3 +321,9 @@ Full width text fields allow you to create boundless inputs. In this example, we
 Using the HTML input **type** [password](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password) can be used with an appended icon and callback to control the visibility.
 
 <example file="v-text-field/misc-password" />
+
+#### Login Form
+
+In this example we use a combination of prepend and append icon to create a custom login form.
+
+<example file="v-text-field/misc-login-form" />

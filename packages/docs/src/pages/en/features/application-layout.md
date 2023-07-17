@@ -13,6 +13,8 @@ related:
 
 Vuetify features an application layout system that allows you to easily create complex website designs.
 
+<entry />
+
 The system is built around an outside-in principle, where each application layout component reserves space for itself in one of four directions (left, right, up, down), leaving the available free space for any subsequent layout component(s) to occupy.
 
 The following components are compatible with the layout system:
@@ -27,11 +29,9 @@ The following components are compatible with the layout system:
 
 The final part of the layout system is the **v-main** component. Inside this is where you place your page content. It will use the remaining free space on the page after all layout components have reserved their space.
 
-<alert type="info">
-
-  In the following examples, **v-app** has been replaced by **v-layout**. This is because **v-app** defaults to a minimum height of `100vh`. In your own application you would always use **v-app** for the root layout.
-
-</alert>
+::: info
+  In the following examples, **v-app** has been replaced by **v-layout**. This is because **v-app** defaults to a minimum height of `100dvh`. In your own application you would always use **v-app** for the root layout.
+:::
 
 ## Placing components
 
@@ -69,11 +69,9 @@ The layout system exposes a function `getLayoutItem` that allows you to get size
 
 <example file="application-layout/layout-information-ref" />
 
-<alert type="warning">
-
+::: warning
   You will not be able to directly use the composable in the same component where you are rendering the **v-app** component. The call to **useLayout** must happen in a child component, so that the layout can be properly injected.
-
-</alert>
+:::
 
 <example file="application-layout/layout-information-composable" />
 

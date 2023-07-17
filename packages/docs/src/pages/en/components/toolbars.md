@@ -1,6 +1,6 @@
 ---
-nav: Toolbars
 meta:
+  nav: Toolbars
   title: Toolbar component
   description: The toolbar component sits above the content that it affects and provides an area for labeling and additional actions.
   keywords: toolbars, vuetify toolbar component, vue toolbar component
@@ -28,25 +28,20 @@ A toolbar is a flexible container that can be used in a number of ways. By defau
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-toolbar](/api/v-toolbar/) | Primary Component |
+| [v-toolbar-items](/api/v-toolbar-items/) | Sub-component used to modify the styling of [v-btn](/components/buttons) |
+| [v-toolbar-title](/api/v-toolbar-title/) | Sub-component used to display the title of the toolbar |
+| [v-btn](/api/v-btn/) | Sub-component commonly used in `v-toolbar` |
 
-<!-- ## Sub-components
-
-### v-toolbar-items
-
-v-toolbar-items description
-
-### v-toolbar-title
-
-v-toolbar-title description -->
+<api-inline hide-links />
 
 ## Caveats
 
-<alert type="warning">
-
+::: warning
   When `v-btn`s with the **icon** prop are used inside of `v-toolbar` and `v-app-bar` they will automatically have their size increased and negative margin applied to ensure proper spacing according to the Material Design Specification. If you choose to wrap your buttons in any container, such as a `div`, you will need to apply negative margin to that container in order to properly align them.
-
-</alert>
+:::
 
 ## Examples
 

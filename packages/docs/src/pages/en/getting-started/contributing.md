@@ -13,6 +13,8 @@ related:
 
 Vuetify is made possible by an amazing community that submits issues, creates pull requests, and provides invaluable feedback.
 
+<entry />
+
 It is our job to enable you to create amazing applications. A lot of the time, you come across something that can be made better. Maybe you find a bug, or you have an idea for additional functionality. That's great! It's as easy as cloning the Vuetify repository to get started working in a development environment.
 
 <promoted slug="vuetify-discord" />
@@ -23,7 +25,7 @@ The issue list of this repo is exclusively for bug reports and feature requests.
 
 - Search for similar [issues], it may have been answered already.
   > If a similar issue already exists, you do not need to open another issue for this, if you want to help with it in any way, you can help by giving appropriate information in the already existing issue.
-- Try to reproduce with the [latest](https://github.com/vuetifyjs/vuetify/releases/latest) version in [🎮 Vuetify Play](https://play.vuetifyjs.com/) or a [codepen](https://v3-template.vuetifyjs.com/) or repository that can be cloned to produce the expected behavior.
+- Try to reproduce with the [latest](https://github.com/vuetifyjs/vuetify/releases/latest) version in [🎮 Vuetify Play](https://play.vuetifyjs.com/) or a repository that can be cloned to produce the expected behavior.
 - Make sure that the reproduction is **MINIMAL** and **CONCISE**
 
 These steps ensure that we have all the information necessary to quickly triage and resolve your issue. Once your reproduction is complete, submit a new issue using the [Vuetify Issue Creator](https://issues.vuetifyjs.com/). Using this issue creator is required, otherwise the issue will be closed automatically.
@@ -32,13 +34,9 @@ When writing an issue please provide as much detail as possible. Note that "repr
 
 Issues that are convoluted and lacking a proper reproduction may be closed by a member of the [Core Team]. For additional questions regarding reporting issues and creating reproductions, join the official Vuetify Discord [community].
 
-<alert type="success">
-
-**TIP**
-
+::: tip
 When you create a reproduction, exclude all **elements, properties, and data variables** that are not needed for the reproduction. This helps drastically reduce the time it takes to triage the issue and ultimately resolve it.
-
-</alert>
+:::
 
 In the next section you will learn step-by-step how to set up your local environment and how to configure Vuetify for development.
 
@@ -66,11 +64,9 @@ git clone https://github.com/vuetifyjs/vuetify.git
 git clone git@github.com:vuetifyjs/vuetify.git
 ```
 
-<alert type="info">
-
+::: info
 [Which remote URL should I use?](https://docs.github.com/en/free-pro-team@latest/github/using-git/which-remote-url-should-i-use)
-
-</alert>
+:::
 
 Then install dependencies and perform an initial build to link all the packages together:
 
@@ -82,14 +78,15 @@ cd vuetify
 yarn
 
 # Build the packages
-yarn build
+yarn build vuetify
+yarn build api
 ```
 
 The build process compiles all the Vuetify packages for development and may take a while (grab some ☕). Once the packages are built, you can start developing.
 
 ### Vuetify
 
-The Vuetify library is located in `packages/vuetify`. In `packages/vuetify/dev` you will find a `Playground.vue` file; running `yarn dev` from the project root will start a dev server on [localhost:5173](http://localhost:5173/) with this file loaded. Test your changes in the Playground.vue file you copied, then paste its contents into your pull request when you're ready.
+The Vuetify library is located in `packages/vuetify`. In `packages/vuetify/dev` you will find a `Playground.vue` file; running `yarn dev` from the project root will start a dev server on **localhost:5173** with this file loaded. Test your changes in the Playground.vue file you copied, then paste its contents into your pull request when you're ready.
 
 You can also test Vuetify in your own project using [`yarn link`](https://classic.yarnpkg.com/en/docs/cli/link/):
 
@@ -123,12 +120,6 @@ The **App.vue** file used for Vuetify development is located in `packages/vuetif
 The documentation is located in `packages/docs` but also uses some files from `packages/api-generator`. A dev server for the documentation can be started by running `yarn dev docs` from the project root and will be available on [localhost:8080](http://localhost:8080/) by default.
 
 If you want to see changes from Vuetify in the documentation you need to run `yarn build:lib` in the vuetify package before starting the documentation server.
-
-<alert type="info">
-
-Please note that Vuetify v3's documentation is located on the `next` branch and not on the `master` branch.
-
-</alert>
 
 ### Submitting Changes / Pull Requests
 
@@ -172,15 +163,15 @@ git pull
 git switch --create fix/1234-some-issue
 ```
 
-<alert type="warning">Never commit directly to the base branches, always create a feature branch to work on</alert>
+::: warning
+Never commit directly to the base branches, always create a feature branch to work on
+:::
 
 Commit your changes following [our guidelines](#commit-guidelines), then push the branch to your fork with `git push -u fork` and open a pull request on the Vuetify repository following the provided template.
 
-<alert type="error">
-
+::: error
 Pull requests that include unrelated commits or your local merges will be **CLOSED** without notice
-
-</alert>
+:::
 
 ## Working with GitHub
 

@@ -68,14 +68,20 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const alignment = ref(1)
+  const formatting = ref([])
+  const value = ref('Toggle button requirements.\n\nHave at least three toggle buttons in a group\nLabel buttons with text, an icon, or')
+</script>
+
 <script>
   export default {
     data: () => ({
       alignment: 1,
       formatting: [],
-      numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
-      letters: 'qwertyuiop'.split(''),
-      value: 'Toggle button requirements.\r\rHave at least three toggle buttons in a group\rLabel buttons with text, an icon, or',
+      value: 'Toggle button requirements.\n\nHave at least three toggle buttons in a group\nLabel buttons with text, an icon, or',
     }),
   }
 </script>

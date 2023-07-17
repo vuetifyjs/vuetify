@@ -1,6 +1,6 @@
 ---
-nav: Grouping
 meta:
+  nav: Grouping
   title: Data table - Grouping
   description: The data table component is used for displaying tabular data in a way that is easy for users to scan. It includes sorting, searching, pagination and selection.
   keywords: data tables, vuetify data table component, vue data table component
@@ -13,9 +13,7 @@ related:
 
 Data table has basic support for grouping rows by a column value.
 
-<v-alert type="info">
-  v-data-table-server does not currently support grouping rows
-</v-alert>
+<entry />
 
 ## Examples
 

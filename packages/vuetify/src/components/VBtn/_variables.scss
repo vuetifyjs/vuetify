@@ -7,7 +7,6 @@
 /** if false, disabled buttons will be greyed out */
 $button-colored-disabled: true !default;
 
-$button-app-bar-elevation: 0 !default;
 $button-background: rgb(var(--v-theme-surface)) !default;
 $button-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $button-banner-actions-padding: 0 8px !default;
@@ -18,7 +17,6 @@ $button-border-radius: settings.$border-radius-root !default;
 $button-border-style: settings.$border-style-root !default;
 $button-border-thin-width: thin !default;
 $button-border-width: 0 !default;
-$button-card-actions-elevation: 0 !default;
 $button-card-actions-margin: .5rem !default;
 $button-card-actions-padding: 0 8px !default;
 $button-content-transition: transform, opacity .2s settings.$standard-easing !default;
@@ -66,24 +64,24 @@ $button-border: (
 
 $button-sizes: () !default;
 $button-sizes: map.merge(
-    (
-      'height': $button-height,
-      'font-size': $button-font-size,
-      'width-ratio': $button-width-ratio,
-      'padding-ratio': $button-padding-ratio
-    ),
-    $button-sizes
+  (
+    'height': $button-height,
+    'font-size': $button-font-size,
+    'width-ratio': $button-width-ratio,
+    'padding-ratio': $button-padding-ratio
+  ),
+  $button-sizes
 );
 
 $button-stacked-sizes: () !default;
 $button-stacked-sizes: map.merge(
-    (
-      'height': $button-stacked-height,
-      'font-size': $button-font-size,
-      'width-ratio': $button-stacked-width-ratio,
-      'padding-ratio': $button-stacked-padding-ratio
-    ),
-    $button-stacked-sizes
+  (
+    'height': $button-stacked-height,
+    'font-size': $button-font-size,
+    'width-ratio': $button-stacked-width-ratio,
+    'padding-ratio': $button-stacked-padding-ratio
+  ),
+  $button-stacked-sizes
 );
 
 $button-variants: (
@@ -92,4 +90,4 @@ $button-variants: (
   map.get($button-elevation, 'default'),
   $button-plain-opacity,
   'v-btn'
-);
+) !default;

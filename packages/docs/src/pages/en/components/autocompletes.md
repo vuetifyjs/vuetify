@@ -1,6 +1,6 @@
 ---
-nav: Autocompletes
 meta:
+  nav: Autocompletes
   title: Autocomplete component
   description: The autocomplete component provides type-ahead autocomplete functionality and provides a list of available options.
   keywords: autocomplete, vuetify autocomplete component, vue autocomplete component
@@ -14,37 +14,35 @@ related:
 
 The `v-autocomplete` component offers simple and flexible type-ahead functionality. This is useful when searching large sets of data or even dynamically requesting information from an API.
 
-<entry />
-
 ## Usage
 
 The autocomplete component extends `v-select` and adds the ability to filter items.
 
 <usage name="v-autocomplete" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-autocomplete](/api/v-autocomplete/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Caveats
 
-<alert type="error">
-
+::: error
   When using objects for the **items** prop, you must associate **item-title** and **item-value** with existing properties on your objects. These values are defaulted to **title** and **value** and can be changed.
+:::
 
-</alert>
-
-<alert type="warning">
-
+::: warning
   The **auto** property of **menu-props** is only supported for the default input style.
+:::
 
-</alert>
-
-<alert type="info">
-
+::: info
   Browser autocomplete is set to off by default, may vary by browser and may be ignored. [MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)
-
-</alert>
+:::
 
 ## Examples
 
@@ -85,3 +83,13 @@ Sometimes you need to load data externally based upon a search query. Use the `s
 Using a combination of `v-autocomplete` slots and transitions, you can create a stylish toggleable autocomplete field such as this state selector.
 
 <example file="v-autocomplete/misc-state-selector" />
+
+#### New tab
+
+::: success
+This feature was introduced in [v3.3.0 (Icarus)](/getting-started/release-notes/?version=v3.3.0)
+:::
+
+The **auto-select-first** property highlights the first result when searching, allowing you to press <v-kbd>tab</v-kbd> or <v-kbd>enter</v-kbd> to quickly select it.
+
+<example file="v-autocomplete/misc-new-tab" />

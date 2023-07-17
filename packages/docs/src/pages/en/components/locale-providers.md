@@ -1,6 +1,6 @@
 ---
-nav: Locale providers
 meta:
+  nav: Locale providers
   title: Locale provider component
   description: The locale provider allows you to modify the application's current language scoped within a template
   keywords: locale provider, vuetify locale provider component, vue locale provider component
@@ -14,9 +14,15 @@ related:
 
 The locale provider allows you to provide specific default prop values to components in a section of your application
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-locale-provider](/api/v-locale-provider/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

@@ -33,6 +33,16 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const value = ref(30)
+
+  const rules = [
+    v => v <= 40 || 'Only 40 in stock',
+  ]
+</script>
+
 <script>
   export default {
     data () {

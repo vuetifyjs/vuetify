@@ -1,6 +1,6 @@
 ---
-nav: Intersection observer
 meta:
+  nav: Intersection observer
   title: Intersection observer directive
   description: The intersection observer directive utilizes the Intersection observer API. It allows you to determine when elements are visible on the screen.
   keywords: intersect, vuetify intersect directive, intersection observer directive
@@ -24,7 +24,11 @@ Scroll the window and watch the colored dot. Notice as the [v-card](/components/
 
 ## API
 
-<api-inline />
+| Directive | Description |
+| - | - |
+| [v-intersect](/api/v-intersect/) | The intersection observer directive |
+
+<api-inline hide-links />
 
 ## Examples
 

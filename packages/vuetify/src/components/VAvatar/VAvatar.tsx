@@ -6,13 +6,14 @@ import { VIcon } from '@/components/VIcon'
 import { VImg } from '@/components/VImg'
 
 // Composables
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
-import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { IconValue } from '@/composables/icons'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
@@ -23,13 +24,14 @@ export const makeVAvatarProps = propsFactory({
   icon: IconValue,
   image: String,
 
+  ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeRoundedProps(),
   ...makeSizeProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'flat' } as const),
-}, 'v-avatar')
+}, 'VAvatar')
 
 export const VAvatar = genericComponent()({
   name: 'VAvatar',
@@ -57,10 +59,12 @@ export const VAvatar = genericComponent()({
           roundedClasses.value,
           sizeClasses.value,
           variantClasses.value,
+          props.class,
         ]}
         style={[
           colorStyles.value,
           sizeStyles.value,
+          props.style,
         ]}
       >
         { props.image

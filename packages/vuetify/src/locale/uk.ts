@@ -26,12 +26,21 @@ export default {
     lastPage: 'Остання сторінка',
     pageText: '{0}-{1} з {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} вибрано',
-    nextMonthAriaLabel: 'Наступного місяця',
-    nextYearAriaLabel: 'Наступного року',
-    prevMonthAriaLabel: 'Попередній місяць',
-    prevYearAriaLabel: 'Попередній рік',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Немає даних для відображення',
   carousel: {
@@ -72,5 +81,10 @@ export default {
     ariaLabel: {
       item: 'Rating {0} of {1}',
     },
+  },
+  loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
   },
 }

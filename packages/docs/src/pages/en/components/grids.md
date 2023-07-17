@@ -1,6 +1,6 @@
 ---
-nav: Grids
 meta:
+  nav: Grids
   title: Grid system
   description: Vuetify supports the 12 point Material Design grid for laying out and controlling breakpoints for your application.
   keywords: grids, vuetify grid component, layout component, flex component
@@ -30,7 +30,14 @@ The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstra
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-container](/api/v-container/) | The container component. |
+| [v-row](/api/v-row/) | Sub-component used to create rows. |
+| [v-col](/api/v-col/) | Sub-component used to create columns. |
+| [v-spacer](/api/v-spacer/) | A component often used in grid scenarios. |
+
+<api-inline hide-links />
 
 ## Sub-components
 
@@ -56,14 +63,12 @@ The class `fill-height` applies `height: 100%` to an element. When applied to `v
 
 ## Caveats
 
-<alert type="info">
-
+::: info
   Breakpoints based props on grid components work in an `andUp` fashion. With this in mind the **xs** breakpoint is assumed and has been removed from the props context. This applies to **offset**, **justify**, **align**, and single breakpoint props on `v-col`
 
 - Props like **justify-sm** and **justify-md** exist, but **justify-xs** does not, it is simply **justify**
 - The **xs** prop does not exist on `v-col`. The equivalent to this is the **cols** prop
-
-</alert>
+:::
 
 ## Examples
 

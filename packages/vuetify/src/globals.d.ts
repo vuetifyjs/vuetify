@@ -1,5 +1,6 @@
-import type { TouchStoredHandlers } from './directives/touch'
+// Types
 import type { Events, VNode } from 'vue'
+import type { TouchStoredHandlers } from './directives/touch'
 
 declare global {
   interface HTMLCollection {
@@ -65,6 +66,10 @@ declare global {
     ): void
   }
 
+  interface MouseEvent {
+    sourceCapabilities?: { firesTouchEvents: boolean }
+  }
+
   function parseInt(s: string | number, radix?: number): number
   function parseFloat(string: string | number): number
 
@@ -86,7 +91,6 @@ declare module '@vue/runtime-core' {
   }
 
   export interface ComponentInternalInstance {
-    ctx: Record<string, unknown>
     provides: Record<string, unknown>
     setupState: any
   }

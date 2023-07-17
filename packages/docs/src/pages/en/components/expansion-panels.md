@@ -1,6 +1,6 @@
 ---
-nav: Expansion panels
 meta:
+  nav: Expansion panels
   title: Expansion panel component
   description: The expansion panel component is a lightweight container that hides information behind expandable and contractable containers.
   keywords: expansion panels, vuetify expansion panel component, vue expansion panel component
@@ -28,7 +28,14 @@ Expansion panels in their simplest form display a list of expandable items. You 
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-expansion-panels](/api/v-expansion-panels/) | Primary component |
+| [v-expansion-panel](/api/v-expansion-panel/) | Sub-component that wraps `v-expansion-panel-text` and `v-expansion-panel-title` |
+| [v-expansion-panel-title](/api/v-expansion-panel-title/) | Sub-component used to display the Expansion Panel's title. Wraps the `#title` slot |
+| [v-expansion-panel-text](/api/v-expansion-panel-text/) | Sub-component used to display the Expanion Panel's text. Wraps the `#text` slot |
+
+<api-inline hide-links />
 
 ## Examples
 

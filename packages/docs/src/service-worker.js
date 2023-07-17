@@ -65,10 +65,11 @@ self.addEventListener('message', async event => {
 
 self.addEventListener('activate', event => {
   previousManifest && event.waitUntil(cleanCache(previousManifest))
+  event.waitUntil(self.clients.claim())
 })
 
 function getFallbackDocument (url) {
-  return matchPrecache(url.pathname.startsWith('/eo-UY/') ? '_crowdin.html' : '/_fallback.html')
+  return matchPrecache('/_fallback.html')
 }
 
 async function cleanCache (manifest) {

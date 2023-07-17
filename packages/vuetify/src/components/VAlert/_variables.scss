@@ -17,7 +17,7 @@ $alert-plain-opacity: .62 !default;
 $alert-plain-transition: .2s opacity settings.$standard-easing !default;
 $alert-positions: absolute fixed sticky !default;
 $alert-prepend-margin-inline-end: 16px !default;
-$alert-append-margin-inline-start: 90px !default;
+$alert-append-margin-inline-start: 16px !default;
 $alert-append-close-margin-inline-start: 16px !default;
 
 // VAlertTitle
@@ -41,7 +41,7 @@ $alert-border: (
   $alert-border-style,
   $alert-border-width,
   $alert-border-thin-width
-);
+) !default;
 
 $alert-variants: (
   $alert-background,
@@ -49,4 +49,4 @@ $alert-variants: (
   $alert-elevation,
   $alert-plain-opacity,
   'v-alert'
-);
+) !default;

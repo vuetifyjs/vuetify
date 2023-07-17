@@ -8,10 +8,8 @@
 
     <app-bar />
 
-    <v-main>
-      <v-container class="px-4 text-center font-weight-light">
-        <router-view />
-      </v-container>
+    <v-main class="text-center font-weight-light">
+      <router-view />
     </v-main>
 
     <home-footer />
@@ -25,6 +23,15 @@
   import AppBar from '@/components/app/bar/Bar.vue'
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
   import HomeFooter from '@/components/home/Footer.vue'
+
+  import { onMounted } from 'vue'
+  import { useShopifyStore } from '@/store/shopify'
+
+  const store = useShopifyStore()
+
+  onMounted(() => {
+    store.fetch()
+  })
 </script>
 
 <style lang="sass">

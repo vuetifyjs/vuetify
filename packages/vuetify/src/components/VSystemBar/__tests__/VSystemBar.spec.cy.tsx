@@ -1,7 +1,8 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VLayout } from '@/components/VLayout'
+// Components
 import { VSystemBar } from '..'
+import { VLayout } from '@/components/VLayout'
 
 // Tests
 describe('VSystemBar', () => {
@@ -13,9 +14,7 @@ describe('VSystemBar', () => {
     ))
       .get('.v-system-bar')
       .should('have.class', 'v-theme--light')
-      .vue().then(({ wrapper }) => {
-        wrapper.setProps({ theme: 'dark' })
-      })
+      .setProps({ theme: 'dark' })
       .get('.v-system-bar')
       .should('have.class', 'v-theme--dark')
   })
