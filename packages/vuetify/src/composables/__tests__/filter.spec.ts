@@ -109,7 +109,6 @@ describe('filter', () => {
 
   describe('useFilter', () => {
     const itemProps = {
-      itemType: 'type',
       itemTitle: 'title',
       itemValue: 'value',
       itemChildren: 'children',

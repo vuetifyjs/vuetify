@@ -6,7 +6,6 @@ import { describe, expect, it } from '@jest/globals'
 
 describe('items', () => {
   const defaults = {
-    itemType: 'type',
     itemTitle: 'title',
     itemValue: 'value',
     itemChildren: 'children',
