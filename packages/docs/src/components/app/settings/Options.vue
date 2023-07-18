@@ -1,12 +1,11 @@
 <template>
   <app-link-list-item
-    :href="`https://github.com/vuetifyjs/vuetify/releases/tag/v${version}`"
+    :to="rpath(`/getting-started/release-notes/?version=v${version}`)"
     :title="`v${version}`"
-    append-icon="mdi-open-in-new"
+    append-icon="mdi-page-next"
     label="Latest release"
     prepend-icon="mdi-github"
-    rel="noopener noreferrer"
-    target="_blank"
+    @click="onClick"
   />
 
   <app-link-list-item
@@ -45,14 +44,21 @@
   // Utilities
   import { onBeforeMount } from 'vue'
   import { version } from 'vuetify'
+  import { rpath } from '@/util/routes'
 
   // Stores
+  import { useAppStore } from '@/store/app'
   import { useCommitsStore } from '@/store/commits'
 
   const { t } = useI18n()
+  const app = useAppStore()
   const commits = useCommitsStore()
 
   onBeforeMount(() => {
     if (!commits.latest) commits.fetch()
   })
+
+  function onClick () {
+    app.settings = false
+  }
 </script>
