@@ -33,7 +33,7 @@
         <app-bar-enterprise-link />
       </template>
 
-      <app-vertical-divider />
+      <app-vertical-divider v-if="mdAndUp" />
 
       <app-bar-theme-toggle />
 
