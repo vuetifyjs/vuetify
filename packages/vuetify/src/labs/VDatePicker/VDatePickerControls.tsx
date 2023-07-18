@@ -84,7 +84,7 @@ export const VDatePickerControls = genericComponent()({
           />
           <VSpacer />
           { (props.viewMode === 'month' && !props.range) && (
-            <div key="month-buttons">
+            <div class="v-date-picker-controls__month" key="month-buttons">
               { prevBtn }
               { nextBtn }
             </div>
