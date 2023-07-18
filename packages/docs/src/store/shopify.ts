@@ -48,7 +48,7 @@ export const useShopifyStore = defineStore('shopify', {
     async fetch () {
       if (this.products.length) return
 
-      const { bucket } = useCosmic<any>(
+      const { bucket } = useCosmic(
         import.meta.env.VITE_COSMIC_BUCKET_SLUG_STORE,
         import.meta.env.VITE_COSMIC_BUCKET_READ_KEY_STORE,
       )
