@@ -7,18 +7,25 @@
       elevation="24"
       flat
       max-width="800"
-      title="Documentation settings"
       width="100%"
     >
-      <template #append>
-        <v-icon
-          size="small"
+      <v-toolbar color="primary" class="ps-3 pe-4">
+        <v-icon icon="$vuetify" size="x-large" />
+
+        <v-toolbar-title class="ms-2">
+          Documentation settings
+        </v-toolbar-title>
+
+        <v-spacer />
+
+        <v-btn
+          class="me-n2"
           icon="$close"
+          size="x-small"
+          variant="text"
           @click="app.settings = false"
         />
-      </template>
-
-      <v-divider class="mt-4" />
+      </v-toolbar>
 
       <v-layout full-height>
         <v-navigation-drawer
