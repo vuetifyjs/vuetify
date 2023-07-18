@@ -204,13 +204,33 @@ function endOfMonth (date: Date) {
   return new Date(date.getFullYear(), date.getMonth() + 1, 0)
 }
 
+function formatYyyyMmDd (value: string): string {
+  const formattedValue = value.split('-')
+    .map(d => d.padStart(2, '0'))
+    .join('-')
+
+  const offsetMin = (new Date().getTimezoneOffset() / -60)
+  const offsetSign = offsetMin < 0 ? '-' : '+'
+  const offsetValue = Math.abs(offsetMin).toString().padStart(2, '0')
+
+  return `${formattedValue}T00:00:00.000${offsetSign}${offsetValue}:00`
+}
+
+const _YYYMMDD = /([12]\d{3}-([1-9]|0[1-9]|1[0-2])-([1-9]|0[1-9]|[12]\d|3[01]))/
+
 function date (value?: any): Date | null {
   if (value == null) return new Date()
 
   if (value instanceof Date) return value
 
   if (typeof value === 'string') {
-    const parsed = Date.parse(value)
+    let parsed
+
+    if (_YYYMMDD.test(value)) {
+      parsed = Date.parse(formatYyyyMmDd(value))
+    } else {
+      parsed = Date.parse(value)
+    }
 
     if (!isNaN(parsed)) return new Date(parsed)
   }
