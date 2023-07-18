@@ -1,11 +1,11 @@
 <template>
   <v-dialog v-model="app.settings" :fullscreen="mobile">
     <v-card
+      :min-height="mobile ? '100%' : 600"
       :rounded="mobile ? 0 : 'lg'"
       class="mx-auto"
       elevation="24"
       flat
-      min-height="600"
       max-width="800"
       title="Documentation settings"
       width="100%"
@@ -74,8 +74,8 @@
               v-if="record.hero"
               :src="`https://cdn.vuetifyjs.com/docs/images/settings/${record?.hero}.svg`"
               class="rounded-lg mb-4"
-              min-height="200"
               cover
+              height="220"
             />
 
             <div class="text-body-2 mb-4">
