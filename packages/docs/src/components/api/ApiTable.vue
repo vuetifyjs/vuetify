@@ -28,7 +28,7 @@
             }"
           />
 
-          <tr v-if="item.description || (DEV && item.source)">
+          <tr v-if="item.description || (user.dev && item.source)">
             <td colspan="3" class="text-mono pt-4">
               <template v-if="item.description">
                 <app-markdown
@@ -39,7 +39,7 @@
                 <span v-else>{{ item.description }}</span>
               </template>
 
-              <p v-if="DEV && item.source">
+              <p v-if="user.dev && item.source">
                 <strong>source: {{ item.source }}</strong>
               </p>
             </td>
@@ -67,6 +67,7 @@
   // Stores
   import { useAppStore } from '@/store/app'
   import { useLocaleStore } from '@/store/locale'
+  import { useUserStore } from '@/store/user'
 
   const props = defineProps({
     headers: {
@@ -83,8 +84,7 @@
   const { t } = useI18n()
   const appStore = useAppStore()
   const localeStore = useLocaleStore()
-
-  const DEV = import.meta.env.DEV
+  const user = useUserStore()
 
   const filtered = computed(() => {
     if (!appStore.apiSearch) return props.items
