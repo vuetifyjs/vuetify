@@ -7,13 +7,13 @@ export function getScrollParent (el?: HTMLElement, includeHidden = false) {
   return document.scrollingElement as HTMLElement
 }
 
-export function getScrollParents (el?: Element | null, stopAt?: Element | null) {
+export function getScrollParents (el?: Element | null, stopAt?: Element | null, includeHidden = false) {
   const elements: HTMLElement[] = []
 
   if (stopAt && el && !stopAt.contains(el)) return elements
 
   while (el) {
-    if (hasScrollbar(el)) elements.push(el as HTMLElement)
+    if (includeHidden ? isPotentiallyScrollable(el) : hasScrollbar(el)) elements.push(el as HTMLElement)
     if (el === stopAt) break
     el = el.parentElement!
   }

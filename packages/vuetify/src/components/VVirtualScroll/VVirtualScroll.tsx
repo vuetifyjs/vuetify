@@ -16,7 +16,7 @@ import {
   convertToUnit,
   genericComponent,
   getCurrentInstance,
-  getScrollParent,
+  getScrollParent, getScrollParents,
   propsFactory,
   useRender,
 } from '@/util'
@@ -70,13 +70,17 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
       computedItems,
     } = useVirtual(props, toRef(props, 'items'))
 
-    useToggleScope(() => props.renderless, () => {
-      onMounted(() => {
-        containerRef.value = getScrollParent(vm.vnode.el as HTMLElement, true)
-        containerRef.value?.addEventListener('scroll', handleScroll)
+    const scrollElements = new Set<Element | Document>()
+    onMounted(() => {
+      [document, ...getScrollParents(vm.vnode.el as HTMLElement, null, true)].forEach(el => {
+        scrollElements.add(el)
+        el.addEventListener('scroll', handleScroll, { passive: true })
       })
-      onScopeDispose(() => {
-        containerRef.value?.removeEventListener('scroll', handleScroll)
+    })
+    onScopeDispose(() => {
+      scrollElements.forEach(el => {
+        el.removeEventListener('scroll', handleScroll)
+        scrollElements.delete(el)
       })
     })
 
