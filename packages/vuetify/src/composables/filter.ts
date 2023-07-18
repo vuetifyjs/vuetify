@@ -135,7 +135,12 @@ export function useFilter <T extends { value: unknown }> (
 ) {
   const filteredItems: Ref<T[]> = ref([])
   const filteredMatches: Ref<Map<unknown, Record<string, FilterMatch>>> = ref(new Map())
-  const transformedItems = computed(() => options?.transform ? unref(items).map(options?.transform) : unref(items))
+  const transformedItems = computed(() => options?.transform
+    ? unref(items).map(item => ({
+      item,
+      ...(options?.transform?.(item) ?? {}),
+    }))
+    : unref(items))
 
   watchEffect(() => {
     const _query = typeof query === 'function' ? query() : unref(query)
