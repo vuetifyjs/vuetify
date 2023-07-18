@@ -5,10 +5,10 @@ import './VDateRangePickerHeader.sass'
 import { VBtn } from '../../components/VBtn'
 
 // Composables
+import { makeDateProps } from '../VDateInput/composables'
 import { useBackgroundColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
 import { useDate } from '@/labs/date'
-import { makeDateProps } from '../VDateInput/composables'
 
 // Utilities
 import { computed } from 'vue'
