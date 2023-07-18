@@ -1,5 +1,10 @@
 <template>
-  <v-defaults-provider scoped>
+  <v-defaults-provider
+    :defaults="{
+      global: { eager: false }
+    }"
+    scoped
+  >
     <v-sheet
       border
       class="mb-9 overflow-hidden"
