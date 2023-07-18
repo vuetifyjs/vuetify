@@ -6,6 +6,7 @@ import { VBtn } from '@/components/VBtn'
 import { VSpacer } from '@/components/VGrid'
 
 // Composables
+import { useRtl } from '@/composables'
 import { useDate } from '@/labs/date'
 
 // Utilities
@@ -49,6 +50,7 @@ export const VDatePickerControls = genericComponent()({
 
   setup (props, { emit }) {
     const adapter = useDate()
+    const { isRtl } = useRtl()
     const monthAndYear = computed(() => {
       const month = props.range === 'end' ? adapter.addMonths(props.displayDate, 1) : props.displayDate
       return adapter.format(month, 'monthAndYear')
@@ -73,7 +75,7 @@ export const VDatePickerControls = genericComponent()({
 
       return (
         <div class="v-date-picker-controls">
-          { props.viewMode === 'month' && props.range === 'start' && prevBtn }
+          { props.viewMode === 'month' && props.range === 'start' && (isRtl.value ? nextBtn : prevBtn) }
           { !!props.range && <VSpacer key="range-spacer" /> }
           <div class="v-date-picker-controls__date">{ monthAndYear.value }</div>
           <VBtn
@@ -85,11 +87,11 @@ export const VDatePickerControls = genericComponent()({
           <VSpacer />
           { (props.viewMode === 'month' && !props.range) && (
             <div key="month-buttons">
-              { prevBtn }
-              { nextBtn }
+              { isRtl.value ? nextBtn : prevBtn }
+              { isRtl.value ? prevBtn : nextBtn }
             </div>
           )}
-          { props.viewMode === 'month' && props.range === 'end' && nextBtn }
+          { props.viewMode === 'month' && props.range === 'end' && (isRtl.value ? prevBtn : nextBtn) }
         </div>
       )
     })
