@@ -1,12 +1,15 @@
 <template>
-  <v-dialog v-model="app.settings" :fullscreen="mobile">
+  <v-dialog
+    v-model="app.settings"
+    :fullscreen="mobile"
+    max-width="800"
+  >
     <v-card
-      :min-height="mobile ? '100%' : 600"
+      :min-height="mobile ? '100%' : 650"
       :rounded="mobile ? 0 : 'lg'"
       class="mx-auto"
       elevation="24"
       flat
-      max-width="800"
       width="100%"
     >
       <v-toolbar color="primary" class="ps-3 pe-4">
@@ -74,15 +77,15 @@
         </v-navigation-drawer>
 
         <v-main>
-          <v-container class="pt-2 h-100">
+          <v-container class="pt-2 h-100 overflow-y-auto">
             <h3 class="text-h6 mb-2">{{ record?.title }}</h3>
 
             <v-img
               v-if="record.hero"
+              :height="mobile ? 100 : 220"
               :src="`https://cdn.vuetifyjs.com/docs/images/settings/${record?.hero}.svg`"
               class="rounded-lg mb-4"
               cover
-              height="220"
             />
 
             <div class="text-body-2 mb-4">
