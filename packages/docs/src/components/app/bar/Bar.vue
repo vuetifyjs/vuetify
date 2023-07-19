@@ -26,9 +26,7 @@
 
         <app-bar-team-link v-if="lgAndUp" />
 
-        <app-bar-playground-link v-if="lgAndUp" />
-
-        <app-bar-sponsor-link />
+        <app-bar-playground-link />
 
         <app-bar-enterprise-link />
       </template>
