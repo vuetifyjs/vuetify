@@ -15,6 +15,8 @@ import type { Ref } from 'vue'
 
 const UP = -1
 const DOWN = 1
+const BUFFER_RATIO_RECEPROCAL = 3 
+const BUFFER_RATIO = 1 / BUFFER_RATIO_RECEPROCAL
 
 type VirtualProps = {
   itemHeight?: number | string
@@ -51,7 +53,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
         ? display.height.value
         : contentRect.value.height
     ) - (offset?.value ?? 0)
-    return Math.ceil((height / itemHeight.value) + 1)
+    return Math.ceil((height / itemHeight.value) * (1 + BUFFER_RATIO * 2) + 1)
   })
 
   function handleItemResize (index: number, height: number) {
@@ -86,12 +88,11 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     const direction = scrollTop < lastScrollTop ? UP : DOWN
 
     const midPointIndex = calculateMidPointIndex(scrollTop + height / 2)
-    const buffer = Math.round(visibleItems.value / 3)
-    const firstIndex = midPointIndex - buffer * 3 / 2 
-    const lastIndex = first.value + (buffer * 3) - 1
-    if (direction === UP && midPointIndex <= lastIndex) {
+    const buffer = Math.ceil(visibleItems.value * BUFFER_RATIO)
+    const firstIndex = Math.ceil(midPointIndex - buffer * BUFFER_RATIO_RECEPROCAL / 2)
+    if (direction === UP && midPointIndex <= first.value + buffer - 1) {
       first.value = clamp(firstIndex, 0, items.value.length)
-    } else if (direction === DOWN && ((midPointIndex >= lastIndex) || (midPointIndex + visibleItems.value / 2 >= items.value.length))) {
+    } else if (direction === DOWN && (midPointIndex >= first.value + buffer + 1)) {
       first.value = clamp(firstIndex, 0, items.value.length - visibleItems.value)
     }
     lastScrollTop = scrollTop
@@ -104,7 +105,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     containerRef.value.scrollTop = offset
   }
 
-  const last = computed(() => Math.min(items.value.length, Math.ceil(first.value + visibleItems.value)))
+  const last = computed(() => Math.min(items.value.length, first.value + visibleItems.value))
   const computedItems = computed(() => {
     return items.value.slice(first.value, last.value).map((item, index) => ({
       raw: item,
