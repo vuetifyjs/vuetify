@@ -33,10 +33,9 @@ export const VStepperWindow = genericComponent()({
 
     const model = computed({
       get () {
-        return group?.selected.value ?? _model.value
+        return _model.value ?? group?.selected.value
       },
       set (val) {
-        group?.select(val[0], true)
         _model.value = val
       },
     })
