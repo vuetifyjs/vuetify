@@ -17,6 +17,13 @@
   justify-content: space-between
   z-index: 1
 
+  .v-stepper--alt-labels &
+    height: auto
+
+    .v-divider
+      margin: $stepper-alt-labels-header-divider
+      align-self: flex-start
+
 .v-stepper-window
   margin: 1.5rem
 
@@ -30,13 +37,35 @@
   &--selected
     color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
 
+  .v-stepper--alt-labels &
+    flex-direction: column
+    justify-content: flex-start
+    align-items: center
+    flex-basis: $stepper-alt-labels-flex-basis
+
 .v-stepper-item__avatar.v-avatar
-  margin-inline-end: 8px
   background: rgba(var(--v-theme-surface-variant), var(--v-medium-emphasis-opacity))
   color: rgb(var(--v-theme-on-surface-variant))
+  font-size: .75rem
+  margin-inline-end: 8px
 
   .v-stepper-item--selected &
     background: rgb(var(--v-theme-surface-variant))
+
+  .v-stepper--alt-labels &
+    margin-bottom: 8px
+    margin-inline-end: 0
+
+.v-stepper-item__title
+  line-height: 1
+
+.v-stepper-item__subtitle
+  font-size: .75rem
+  text-align: left
+  line-height: 1
+
+  .v-stepper--alt-labels &
+    text-align: center
 
 .v-stepper-actions
   display: flex

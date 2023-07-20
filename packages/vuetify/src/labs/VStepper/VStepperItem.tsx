@@ -6,12 +6,15 @@ import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 
 // Utilities
 import { computed } from 'vue'
-import { VStepperSymbol } from './VStepper'
 import { genericComponent, propsFactory, useRender } from '@/util'
+
+// Types
+import { VStepperSymbol } from './VStepper'
 
 export const makeVStepperItemProps = propsFactory({
   color: String,
-  text: String,
+  title: String,
+  subtitle: String,
 
   ...makeGroupItemProps(),
 }, 'VStepperItem')
@@ -54,7 +57,25 @@ export const VStepperItem = genericComponent()({
           </VAvatar>
 
           <div class="v-stepper-item__content">
-            { slots.default?.() ?? props.text }
+            { props.title && (
+              <div
+                key="title"
+                class="v-stepper-item__title"
+              >
+                { props.title }
+              </div>
+            )}
+
+            { props.subtitle && (
+              <div
+                key="subtitle"
+                class="v-stepper-item__subtitle"
+              >
+                { props.subtitle }
+              </div>
+            )}
+
+            { slots.default?.() }
           </div>
         </button>
       )
