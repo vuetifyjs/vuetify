@@ -7,6 +7,7 @@ import { VStepperHeader } from './VStepperHeader'
 import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 
 // Composables
+import { provideDefaults } from '@/composables/defaults'
 import { makeGroupProps, useGroup } from '@/composables/group'
 
 // Utilities
@@ -32,6 +33,8 @@ export type VStepperSlots = {
 
 export const makeVStepperProps = propsFactory({
   altLabels: Boolean,
+  color: String,
+  bgColor: String,
   nonLinear: Boolean,
   flat: Boolean,
   showActions: Boolean,
@@ -43,6 +46,7 @@ export const makeVStepperProps = propsFactory({
     type: String,
     default: 'Continue',
   },
+  editable: Boolean,
   // vertical: Boolean,
 
   ...makeGroupProps({
@@ -66,12 +70,20 @@ export const VStepper = genericComponent<VStepperSlots>()({
 
     const slotProps = computed(() => ({ next, prev }))
 
+    provideDefaults({
+      VStepperItem: {
+        color: computed(() => props.color),
+        editable: computed(() => props.editable),
+      },
+    })
+
     useRender(() => {
       const [sheetProps] = VSheet.filterProps(props)
 
       return (
         <VSheet
           { ...sheetProps }
+          color={ props.bgColor }
           class={[
             'v-stepper',
             {

@@ -17,18 +17,22 @@
   justify-content: space-between
   z-index: 1
 
+  .v-divider
+    margin: 0 -16px
+
   .v-stepper--alt-labels &
     height: auto
 
     .v-divider
-      margin: $stepper-alt-labels-header-divider
       align-self: flex-start
+      margin: $stepper-alt-labels-header-divider
 
 .v-stepper-window
   margin: 1.5rem
 
 .v-stepper-item
   align-items: center
+  align-self: stretch
   color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
   display: inline-flex
   padding: 1.5rem
@@ -36,6 +40,9 @@
 
   &--selected
     color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+
+  &--error
+    color: rgb(var(--v-theme-error))
 
   .v-stepper--alt-labels &
     flex-direction: column
@@ -49,12 +56,23 @@
   font-size: .75rem
   margin-inline-end: 8px
 
-  .v-stepper-item--selected &
+  .v-icon
+    font-size: .875rem
+
+  .v-stepper-item--selected &,
+  .v-stepper-item--complete &
     background: rgb(var(--v-theme-surface-variant))
 
+  .v-stepper-item--error &
+    background: rgb(var(--v-theme-error))
+
   .v-stepper--alt-labels &
-    margin-bottom: 8px
+    margin-bottom: 16px
     margin-inline-end: 0
+
+.v-stepper-item__content
+  .v-stepper--alt-labels &
+    min-height: 28px
 
 .v-stepper-item__title
   line-height: 1
