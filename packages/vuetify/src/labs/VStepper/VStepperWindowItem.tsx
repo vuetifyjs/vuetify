@@ -23,7 +23,7 @@ export const VStepperWindowItem = genericComponent<VImgSlots>()({
       return (
         <VWindowItem
           { ...windowItemProps }
-          class="v-carousel-item"
+          class="v-stepper-window-item"
           v-slots={ slots }
         />
       )
