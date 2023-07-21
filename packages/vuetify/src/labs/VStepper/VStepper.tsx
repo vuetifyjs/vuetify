@@ -57,7 +57,7 @@ export const makeVStepperProps = propsFactory({
   },
   nonLinear: Boolean,
   flat: Boolean,
-  hideActions: Boolean,
+  showActions: Boolean,
   backText: {
     type: String,
     default: 'Back',
@@ -112,7 +112,7 @@ export const VStepper = genericComponent<VStepperSlots>()({
 
       const hasHeader = !!(slots.header || props.items.length)
       const hasWindow = props.items.length > 0
-      const hasActions = !props.hideActions && !!(hasWindow || slots.actions)
+      const hasActions = !!(props.showActions || hasWindow || slots.actions)
 
       return (
         <VSheet
