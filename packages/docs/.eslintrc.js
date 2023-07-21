@@ -8,6 +8,14 @@ module.exports = {
   overrides: [
     {
       files: [
+        'src/components/**/*.vue',
+      ],
+      rules: {
+        'max-len': 'off',
+      },
+    },
+    {
+      files: [
         'src/examples/**/*.vue',
       ],
       rules: {
