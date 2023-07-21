@@ -20,7 +20,6 @@ export const makeVStepperItemProps = propsFactory({
   color: String,
   title: String,
   subtitle: String,
-
   complete: Boolean,
   completeIcon: {
     type: String,
@@ -56,7 +55,7 @@ export const VStepperItem = genericComponent()({
   },
 
   setup (props, { slots }) {
-    const group = useGroupItem(props, VStepperSymbol, false)
+    const group = useGroupItem(props, VStepperSymbol, true)
     const step = computed(() => group?.value.value ?? props.value)
     const canEdit = computed(() => {
       return props.editable

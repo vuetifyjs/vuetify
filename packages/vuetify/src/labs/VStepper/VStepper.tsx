@@ -11,6 +11,7 @@ import { VDivider } from '@/components/VDivider'
 import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 
 // Composables
+import { provideDefaults } from '@/composables/defaults'
 import { makeGroupProps, useGroup } from '@/composables/group'
 
 // Utilities
@@ -99,6 +100,12 @@ export const VStepper = genericComponent<VStepperSlots>()({
 
     const slotProps = computed(() => ({ next, prev }))
 
+    provideDefaults({
+      VStepperItem: {
+        editable: computed(() => props.editable),
+      },
+    })
+
     useRender(() => {
       const [sheetProps] = VSheet.filterProps(props)
       const [stepperActionProps] = VStepperActions.filterProps(props)
@@ -138,7 +145,7 @@ export const VStepper = genericComponent<VStepperSlots>()({
             </VStepperHeader>
           )}
 
-          { slots.default?.(slotProps.value) ?? props.items.length ? (
+          { props.items.length && (
             <VStepperWindow key="stepper-window">
               { items.value.map((item, index) => {
                 return (
@@ -149,7 +156,9 @@ export const VStepper = genericComponent<VStepperSlots>()({
                 )
               })}
             </VStepperWindow>
-          ) : undefined }
+          )}
+
+          { slots.default?.(slotProps.value) }
 
           { !props.hideActions && (
             slots.actions?.(slotProps.value) ?? (
