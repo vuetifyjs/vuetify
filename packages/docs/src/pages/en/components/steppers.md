@@ -1,6 +1,7 @@
 ---
-disabled: true
+emphasized: true
 meta:
+  nav: Steppers
   title: Stepper component
   description: The stepper component provides a linear progression process for gathering and displaying information to a user, similar to a form wizard.
   keywords: steppers, vuetify stepper component, vue stepper component
@@ -14,7 +15,7 @@ related:
 
 The `v-stepper` component displays progress through numbered steps.
 
-<entry />
+---
 
 ## Usage
 
@@ -22,9 +23,19 @@ A stepper can be used for a multitude of scenarios, including shopping carts, re
 
 <example file="v-stepper/usage" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-stepper](/api/v-stepper/) | Primary Component |
+| [v-stepper-header](/api/v-stepper-header/) | Container for stepper items |
+| [v-stepper-item](/api/v-stepper-item/) | Primary Component |
+| [v-stepper-window](/api/v-stepper-window/) | Window container for stepper window items |
+| [v-stepper-window-item](/api/v-stepper-window-item/) | Items for stepper window |
+
+<api-inline hide-links />
 
 <!-- ## Sub-components
 
@@ -44,7 +55,7 @@ v-stepper-header description
 
 v-stepper-step description -->
 
-## Examples
+<!-- ## Examples
 
 ### Props
 
@@ -120,4 +131,4 @@ An optional step can be called out with sub-text.
 
 The same state also applies to Vertical steppers.
 
-<example file="v-stepper/misc-vertical-error" />
+<example file="v-stepper/misc-vertical-error" /> -->

@@ -1,96 +1,72 @@
 <template>
   <v-stepper v-model="e1">
-    <v-stepper-header>
-      <v-stepper-step
-        :complete="e1 > 1"
-        step="1"
-      >
-        Name of step 1
-      </v-stepper-step>
+    <template v-slot:default="{ prev, next }">
+      <v-stepper-header>
+        <v-stepper-item
+          :complete="e1 > 1"
+          :value="1"
+          title="Name of step 1"
+        ></v-stepper-item>
 
-      <v-divider></v-divider>
+        <v-divider></v-divider>
 
-      <v-stepper-step
-        :complete="e1 > 2"
-        step="2"
-      >
-        Name of step 2
-      </v-stepper-step>
+        <v-stepper-item
+          :complete="e1 > 2"
+          :value="2"
+          title="Name of step 2"
+        ></v-stepper-item>
 
-      <v-divider></v-divider>
+        <v-divider></v-divider>
 
-      <v-stepper-step step="3">
-        Name of step 3
-      </v-stepper-step>
-    </v-stepper-header>
+        <v-stepper-item
+          :value="3"
+          title="Name of step 3"
+        ></v-stepper-item>
+      </v-stepper-header>
 
-    <v-stepper-items>
-      <v-stepper-content step="1">
-        <v-card
-          class="mb-12"
-          color="grey-lighten-1"
-          height="200px"
-        ></v-card>
+      <v-stepper-window>
+        <v-stepper-window-item :value="1">
+          <v-sheet
+            color="grey-lighten-1"
+            height="200"
+          ></v-sheet>
 
-        <v-btn
-          color="primary"
-          @click="e1 = 2"
-        >
-          Continue
-        </v-btn>
+          <br>
+          <br>
 
-        <v-btn variant="text">
-          Cancel
-        </v-btn>
-      </v-stepper-content>
+          <v-stepper-actions @click:continue="next" @click:back="prev"></v-stepper-actions>
+        </v-stepper-window-item>
 
-      <v-stepper-content step="2">
-        <v-card
-          class="mb-12"
-          color="grey-lighten-1"
-          height="200px"
-        ></v-card>
+        <v-stepper-window-item :value="2">
+          <v-sheet
+            color="grey-lighten-1"
+            height="250"
+          ></v-sheet>
 
-        <v-btn
-          color="primary"
-          @click="e1 = 3"
-        >
-          Continue
-        </v-btn>
+          <br>
+          <br>
 
-        <v-btn variant="text">
-          Cancel
-        </v-btn>
-      </v-stepper-content>
+          <v-stepper-actions @click:continue="next" @click:back="prev"></v-stepper-actions>
+        </v-stepper-window-item>
 
-      <v-stepper-content step="3">
-        <v-card
-          class="mb-12"
-          color="grey-lighten-1"
-          height="200px"
-        ></v-card>
+        <v-stepper-window-item :value="3">
+          <v-sheet
+            color="grey-lighten-1"
+            height="150"
+          ></v-sheet>
 
-        <v-btn
-          color="primary"
-          @click="e1 = 1"
-        >
-          Continue
-        </v-btn>
+          <br>
+          <br>
 
-        <v-btn variant="text">
-          Cancel
-        </v-btn>
-      </v-stepper-content>
-    </v-stepper-items>
+          <v-stepper-actions @click:continue="next" @click:back="prev"></v-stepper-actions>
+        </v-stepper-window-item>
+      </v-stepper-window>
+    </template>
   </v-stepper>
 </template>
 
-<script>
-  export default {
-    data () {
-      return {
-        e1: 1,
-      }
-    },
-  }
+<script setup>
+  import { ref } from 'vue'
+
+  const e1 = ref(1)
 </script>
