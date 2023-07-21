@@ -110,8 +110,9 @@ export const VStepperItem = genericComponent()({
             color={ hasColor ? props.color : undefined }
             icon={ icon.value }
             size={ 24 }
-            text={ step.value }
-          />
+          >
+            { step.value }
+          </VAvatar>
 
           <div class="v-stepper-item__content">
             { props.title && (

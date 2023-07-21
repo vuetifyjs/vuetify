@@ -56,7 +56,7 @@ export const VStepperActions = genericComponent()({
             disabled={['continue', true].includes(props.disable)}
             color={ props.color }
             text={ props.continueText }
-            variant="text"
+            variant="tonal"
             onClick={ onClickContinue }
           />
         </div>
