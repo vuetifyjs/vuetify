@@ -4,21 +4,26 @@ import './VStepper.sass'
 // Components
 import { VStepperActions } from './VStepperActions'
 import { VStepperHeader } from './VStepperHeader'
+import { VStepperItem } from './VStepperItem'
+import { makeVStepperWindowProps, VStepperWindow } from './VStepperWindow'
+import { VStepperWindowItem } from './VStepperWindowItem'
+import { VDivider } from '@/components/VDivider'
 import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 
 // Composables
-import { provideDefaults } from '@/composables/defaults'
 import { makeGroupProps, useGroup } from '@/composables/group'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { InjectionKey } from 'vue'
+import type { InjectionKey, PropType } from 'vue'
 import type { GroupItemProvide } from '@/composables/group'
 
 export const VStepperSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-stepper')
+
+export type StepperItem = string | Record<string, any>
 
 export type VStepperSlot = {
   prev: () => void
@@ -29,15 +34,29 @@ export type VStepperSlots = {
   default: VStepperSlot
   actions: VStepperSlot
   header: never
-}
+  item: never
+} & { [key: `window-item.${string}`]: never }
 
 export const makeVStepperProps = propsFactory({
   altLabels: Boolean,
   color: String,
   bgColor: String,
+  editable: Boolean,
+  items: {
+    type: Array as PropType<readonly StepperItem[]>,
+    default: () => ([]),
+  },
+  itemTitle: {
+    type: String,
+    default: 'title',
+  },
+  itemValue: {
+    type: String,
+    default: 'value',
+  },
   nonLinear: Boolean,
   flat: Boolean,
-  showActions: Boolean,
+  hideActions: Boolean,
   backText: {
     type: String,
     default: 'Back',
@@ -46,7 +65,6 @@ export const makeVStepperProps = propsFactory({
     type: String,
     default: 'Continue',
   },
-  editable: Boolean,
   // vertical: Boolean,
 
   ...makeGroupProps({
@@ -68,22 +86,28 @@ export const VStepper = genericComponent<VStepperSlots>()({
   setup (props, { slots }) {
     const { next, prev } = useGroup(props, VStepperSymbol)
 
-    const slotProps = computed(() => ({ next, prev }))
+    const items = computed(() => props.items.map((item, index) => {
+      const title = getPropertyFromItem(item, props.itemTitle, item)
+      const value = getPropertyFromItem(item, props.itemValue, index + 1)
 
-    provideDefaults({
-      VStepperItem: {
-        color: computed(() => props.color),
-        editable: computed(() => props.editable),
-      },
-    })
+      return {
+        title,
+        value,
+        raw: item,
+      }
+    }))
+
+    const slotProps = computed(() => ({ next, prev }))
 
     useRender(() => {
       const [sheetProps] = VSheet.filterProps(props)
+      const [stepperActionProps] = VStepperActions.filterProps(props)
+
+      const hasHeader = !!(slots.header || props.items.length)
 
       return (
         <VSheet
           { ...sheetProps }
-          color={ props.bgColor }
           class={[
             'v-stepper',
             {
@@ -96,17 +120,42 @@ export const VStepper = genericComponent<VStepperSlots>()({
           ]}
           style={ props.style }
         >
-          { slots.header && (
-            <VStepperHeader
-              v-slots={{ default: slots.header }}
-            />
+          { hasHeader && (
+            <VStepperHeader key="stepper-header">
+              { items.value.map((item, index) => (
+                <>
+                  { !!index && (<VDivider />) }
+
+                  <VStepperItem
+                    { ...item }
+                    editable={ props.editable }
+                    v-slots={{ default: slots.item }}
+                  />
+                </>
+              ))}
+
+              { slots.header?.() }
+            </VStepperHeader>
           )}
 
-          { slots.default?.(slotProps.value) }
+          { slots.default?.(slotProps.value) ?? props.items.length ? (
+            <VStepperWindow key="stepper-window">
+              { items.value.map((item, index) => {
+                return (
+                  <VStepperWindowItem
+                    value={ item.value }
+                    v-slots={{ default: slots[`window-item.${item.value}`] }}
+                  />
+                )
+              })}
+            </VStepperWindow>
+          ) : undefined }
 
-          { props.showActions && (
+          { !props.hideActions && (
             slots.actions?.(slotProps.value) ?? (
               <VStepperActions
+                key="stepper-actions"
+                { ...stepperActionProps }
                 onClick:back={ prev }
                 onClick:continue={ next }
               />
