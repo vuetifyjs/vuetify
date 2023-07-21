@@ -1,72 +1,59 @@
 <template>
-  <v-stepper v-model="e1">
-    <template v-slot:default="{ prev, next }">
+  <usage-example
+    v-model="model"
+    :code="code"
+    :name="name"
+    :options="options"
+  >
+    <v-stepper v-bind="props" v-model="step" :items="undefined">
       <v-stepper-header>
-        <v-stepper-item
-          :complete="e1 > 1"
-          :value="1"
-          title="Name of step 1"
-        ></v-stepper-item>
+        <v-stepper-item title="Step 1"></v-stepper-item>
 
         <v-divider></v-divider>
 
-        <v-stepper-item
-          :complete="e1 > 2"
-          :value="2"
-          title="Name of step 2"
-        ></v-stepper-item>
-
-        <v-divider></v-divider>
-
-        <v-stepper-item
-          :value="3"
-          title="Name of step 3"
-        ></v-stepper-item>
+        <v-stepper-item title="Step 2"></v-stepper-item>
       </v-stepper-header>
 
-      <v-stepper-window>
-        <v-stepper-window-item :value="1">
-          <v-sheet
-            color="grey-lighten-1"
-            height="200"
-          ></v-sheet>
-
-          <br>
-          <br>
-
-          <v-stepper-actions @click:continue="next" @click:back="prev"></v-stepper-actions>
+      <v-stepper-window v-model="step">
+        <v-stepper-window-item class="pa-4 text-center">
+          Step 1
         </v-stepper-window-item>
 
-        <v-stepper-window-item :value="2">
-          <v-sheet
-            color="grey-lighten-1"
-            height="250"
-          ></v-sheet>
-
-          <br>
-          <br>
-
-          <v-stepper-actions @click:continue="next" @click:back="prev"></v-stepper-actions>
-        </v-stepper-window-item>
-
-        <v-stepper-window-item :value="3">
-          <v-sheet
-            color="grey-lighten-1"
-            height="150"
-          ></v-sheet>
-
-          <br>
-          <br>
-
-          <v-stepper-actions @click:continue="next" @click:back="prev"></v-stepper-actions>
+        <v-stepper-window-item class="pa-4 text-center">
+          Step 2
         </v-stepper-window-item>
       </v-stepper-window>
-    </template>
-  </v-stepper>
+    </v-stepper>
+  </usage-example>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-  const e1 = ref(1)
+  const name = 'v-stepper'
+  const model = ref('default')
+  const options = []
+  const step = ref(1)
+
+  const props = computed(() => {
+    return {
+      // editable: true,
+      items: [
+        'Ad unit details',
+        'Ad sizes',
+        'Ad templates',
+      ],
+      'show-actions': true,
+    }
+  })
+
+  const slots = computed(() => {
+    return ''
+  })
+
+  const code = computed(() => {
+    return `<v-stepper${propsToString(props.value)}>${slots.value}</v-stepper>`
+  })
 </script>

@@ -7,7 +7,7 @@ meta:
   keywords: steppers, vuetify stepper component, vue stepper component
 related:
   - /components/tabs/
-  - /components/buttons/
+  - /components/item-groups/
   - /components/windows/
 ---
 
@@ -15,13 +15,15 @@ related:
 
 The `v-stepper` component displays progress through numbered steps.
 
+![Pending graphic](https://cdn.vuetifyjs.com/docs/images/graphics/img-placeholder.png){ height=300 }
+
 ---
 
 ## Usage
 
 A stepper can be used for a multitude of scenarios, including shopping carts, record creation and more.
 
-<example file="v-stepper/usage" />
+<usage name="v-stepper" />
 
 <entry />
 
@@ -37,33 +39,65 @@ A stepper can be used for a multitude of scenarios, including shopping carts, re
 
 <api-inline hide-links />
 
-<!-- ## Sub-components
+## Anatomy
 
-### v-stepper-content
+The `v-stepper`...
 
-v-stepper-content description
+![Pending graphic](https://cdn.vuetifyjs.com/docs/images/graphics/img-placeholder.png "Stepper Anatomy")
 
-### v-stepper-header
+| Element / Area | Description |
+| - | - |
+| 1. Container | The container is the root element of the component. |
+| 2. Header | The header is the container for the stepper items. |
+| 3. Window | The window is the container for the stepper window items. |
 
-v-stepper-header description
+## Guide
 
-### v-stepper-items
-
-v-stepper-header description
-
-### v-stepper-step
-
-v-stepper-step description -->
-
-<!-- ## Examples
+The `v-stepper`...
 
 ### Props
+
+The `v-stepper`...
 
 #### Alternate label
 
 Steppers also have an alternative label style which places the title under the step itself.
 
 <example file="v-stepper/prop-alternate-label" />
+
+#### Editable steps
+
+An editable step can be selected by a user at any point and will navigate them to that step.
+
+<example file="v-stepper/misc-editable" />
+
+#### Non editable steps
+
+Non-editable steps force a user to process linearly through your process.
+
+<example file="v-stepper/misc-non-editable" />
+
+#### Linear steppers
+
+Linear steppers will always move a user through your defined path.
+
+<example file="v-stepper/misc-linear" />
+
+#### Optional steps
+
+An optional step can be called out with sub-text.
+
+<example file="v-stepper/misc-optional" />
+
+#### Horizontal steps
+
+Horizontal steppers move users along the x-axis through the defined steps.
+
+<example file="v-stepper/misc-horizontal" />
+
+<!-- ## Examples
+
+### Props
 
 #### Non linear
 
@@ -91,11 +125,7 @@ Steppers can have their steps dynamically added or removed. If a currently activ
 
 <example file="v-stepper/misc-dynamic" />
 
-#### Editable steps
 
-An editable step can be selected by a user at any point and will navigate them to that step.
-
-<example file="v-stepper/misc-editable" />
 
 #### Errors
 
@@ -103,29 +133,9 @@ An error state can be displayed to notify the user of some action that must be t
 
 <example file="v-stepper/misc-error" />
 
-#### Horizontal steps
 
-Horizontal steppers move users along the x-axis through the defined steps.
 
-<example file="v-stepper/misc-horizontal" />
 
-#### Linear steppers
-
-Linear steppers will always move a user through your defined path.
-
-<example file="v-stepper/misc-linear" />
-
-#### Non editable steps
-
-Non-editable steps force a user to process linearly through your process.
-
-<example file="v-stepper/misc-non-editable" />
-
-#### Optional steps
-
-An optional step can be called out with sub-text.
-
-<example file="v-stepper/misc-optional" />
 
 #### Vertical errors
 
