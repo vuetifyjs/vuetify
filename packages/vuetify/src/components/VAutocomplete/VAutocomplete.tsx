@@ -147,8 +147,8 @@ export const VAutocomplete = genericComponent<new <
         return items.value.find(item =>
           props.returnObject
             ? props.valueComparator(
-              getPropertyFromItem(item.raw, props.itemValue, item.title),
-              getPropertyFromItem(v.raw, props.itemValue, v.title)
+              getPropertyFromItem(item.raw, props.itemValue),
+              getPropertyFromItem(v.raw, props.itemValue)
             )
             : props.valueComparator(item.value, v.value)
         ) || v
