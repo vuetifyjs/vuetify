@@ -16,6 +16,7 @@ export type RootState = {
   theme: string
   mixedTheme: boolean
   direction: 'rtl' | 'ltr'
+  quickbar: boolean
   notifications: {
     read: string[]
     last: {
@@ -39,6 +40,7 @@ export const useUserStore = defineStore('user', () => {
     theme: 'system',
     mixedTheme: true,
     direction: 'ltr',
+    quickbar: true,
     notifications: {
       read: [],
       last: {

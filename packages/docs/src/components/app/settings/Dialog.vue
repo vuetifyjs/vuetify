@@ -70,10 +70,6 @@
               </v-list-item>
             </template>
           </v-list>
-
-          <template #append>
-            <developer-mode />
-          </template>
         </v-navigation-drawer>
 
         <v-main>
@@ -82,10 +78,10 @@
 
             <v-img
               v-if="record.hero"
-              :height="mobile ? 100 : 220"
               :src="`https://cdn.vuetifyjs.com/docs/images/settings/${record?.hero}.svg`"
               class="rounded-lg mb-4"
               cover
+              height="125"
             />
 
             <div class="text-body-2 mb-4">
@@ -104,12 +100,11 @@
 
 <script setup>
   // Components
-  import AppSettingsApi from '@/components/app/settings/Api.vue'
-  import AppSettingsCode from '@/components/app/settings/Code.vue'
-  // import AppSettingsRtl from '@/components/app/settings/Rtl.vue'
-  import AppOptions from '@/components/app/settings/Options.vue'
-  import AppSettingsTheme from '@/components/app/settings/Theme.vue'
-  import DeveloperMode from '@/components/app/settings/DeveloperMode.vue'
+  import AboutVuetify from '@/components/app/settings/AboutVuetify.vue'
+  import Api from '@/components/app/settings/Api.vue'
+  import Code from '@/components/app/settings/Code.vue'
+  import Options from '@/components/app/settings/Options.vue'
+  import Theme from '@/components/app/settings/Theme.vue'
 
   // Composables
   import { useDisplay } from 'vuetify'
@@ -125,34 +120,35 @@
   const items = [
     {
       hero: 'theme',
-      component: AppSettingsTheme,
+      component: Theme,
       icon: 'mdi-palette-outline',
       title: 'Custom themes',
       text: 'Customize your documentation experience with light and dark themes, as well as a combination of both named "mixed".',
     },
     {
       hero: 'api-tables',
-      component: AppSettingsApi,
+      component: Api,
       icon: 'mdi-table',
       title: 'Inline API tables',
       text: 'Display API tables inline on documentation pages.',
     },
     {
       hero: 'code',
-      component: AppSettingsCode,
+      component: Code,
       icon: 'mdi-puzzle-outline',
       title: 'Code display',
       text: 'Determines the script shown in code examples for components.',
     },
-    // {
-    //   component: AppSettingsRtl,
-    //   icon: 'mdi-translate',
-    //   title: 'Right-to-left orientation',
-    //   text: 'Customize your documentation experience with light and dark themes, as well as a combination of both named "mixed".',
-    // },
+    {
+      hero: 'options',
+      component: Options,
+      icon: 'mdi-cogs',
+      title: 'Advanced options',
+      text: 'Advanced options for customizing your documentation experience.',
+    },
     {
       hero: 'about',
-      component: AppOptions,
+      component: AboutVuetify,
       icon: '$vuetify',
       title: 'About Vuetify',
       text: 'Information regarding Vuetify, including versioning, release notes, and more.',

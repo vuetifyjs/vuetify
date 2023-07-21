@@ -94,6 +94,7 @@ export {
   mdiCodeJson,
   mdiCodeTags,
   mdiCog,
+  mdiCogs,
   mdiCogOutline,
   mdiComment,
   mdiCompassOutline,
