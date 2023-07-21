@@ -15,7 +15,9 @@ import type { GroupProvide } from '@/composables/group'
 export const VStepperSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-stepper')
 
 export const makeVStepperWindowProps = propsFactory({
-  ...makeVWindowProps(),
+  ...makeVWindowProps({
+    mandatory: false as const,
+  }),
 }, 'VStepperWindow')
 
 export const VStepperWindow = genericComponent()({
@@ -33,7 +35,9 @@ export const VStepperWindow = genericComponent()({
 
     const model = computed({
       get () {
-        return _model.value ?? group?.selected.value
+        if (_model.value != null || !group) return _model.value
+
+        return group.items.value.find(item => group.selected.value.includes(item.id))?.value
       },
       set (val) {
         _model.value = val
@@ -46,8 +50,8 @@ export const VStepperWindow = genericComponent()({
       return (
         <VWindow
           { ...windowProps }
-          class="v-stepper-window"
           v-model={ model.value }
+          class="v-stepper-window"
           v-slots={ slots }
         />
       )
