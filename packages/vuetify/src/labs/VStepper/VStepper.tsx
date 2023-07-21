@@ -111,6 +111,8 @@ export const VStepper = genericComponent<VStepperSlots>()({
       const [stepperActionProps] = VStepperActions.filterProps(props)
 
       const hasHeader = !!(slots.header || props.items.length)
+      const hasWindow = props.items.length > 0
+      const hasActions = !props.hideActions && !!(hasWindow || slots.actions)
 
       return (
         <VSheet
@@ -135,7 +137,6 @@ export const VStepper = genericComponent<VStepperSlots>()({
 
                   <VStepperItem
                     { ...item }
-                    editable={ props.editable }
                     v-slots={{ default: slots.item }}
                   />
                 </>
@@ -145,7 +146,7 @@ export const VStepper = genericComponent<VStepperSlots>()({
             </VStepperHeader>
           )}
 
-          { props.items.length && (
+          { hasWindow && (
             <VStepperWindow key="stepper-window">
               { items.value.map((item, index) => {
                 return (
@@ -160,7 +161,7 @@ export const VStepper = genericComponent<VStepperSlots>()({
 
           { slots.default?.(slotProps.value) }
 
-          { !props.hideActions && (
+          { hasActions && (
             slots.actions?.(slotProps.value) ?? (
               <VStepperActions
                 key="stepper-actions"
