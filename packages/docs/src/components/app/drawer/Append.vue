@@ -1,22 +1,17 @@
 <template>
-  <v-divider />
+  <div v-if="user.quickbar">
+    <v-divider />
 
-  <app-link-list-item
-    :label="t('latest-release')"
-    :title="`v${version}`"
-    :to="rpath('/getting-started/release-notes/')"
-    prepend-icon="mdi-label"
-    append-icon="mdi-page-next"
-  />
+    <latest-release />
+  </div>
 </template>
 
 <script setup>
-  // Composables
-  import { version } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
+  // Components
+  import LatestRelease from '@/components/app/settings/LatestRelease.vue'
 
-  // Utilities
-  import { rpath } from '@/util/routes'
+  // Stores
+  import { useUserStore } from '@/store/user'
 
-  const { t } = useI18n()
+  const user = useUserStore()
 </script>
