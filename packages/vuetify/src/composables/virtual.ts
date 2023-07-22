@@ -15,7 +15,7 @@ import type { Ref } from 'vue'
 
 const UP = -1
 const DOWN = 1
-const BUFFER_RATIO_RECEPROCAL = 3 
+const BUFFER_RATIO_RECEPROCAL = 3
 const BUFFER_RATIO = 1 / BUFFER_RATIO_RECEPROCAL
 
 type VirtualProps = {
