@@ -1,14 +1,14 @@
 <template>
   <v-switch
     v-model="user.dev"
-    class="ps-3"
+    class="ps-3 flex-0-0"
     color="error"
     density="comfortable"
-    hide-details
     inset
+    messages="Development mode enables new features and functionality within the documentation that are still in development."
   >
     <template #label>
-      <div class="text-body-2" v-text="t('developer-mode')" />
+      <div v-text="t('developer-mode')" />
     </template>
   </v-switch>
 </template>

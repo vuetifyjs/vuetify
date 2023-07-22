@@ -26,18 +26,14 @@
 
         <app-bar-team-link v-if="lgAndUp" />
 
-        <app-bar-playground-link v-if="lgAndUp" />
-
-        <app-bar-sponsor-link />
+        <app-bar-playground-link />
 
         <app-bar-enterprise-link />
       </template>
 
-      <app-vertical-divider />
+      <app-vertical-divider v-if="mdAndUp" />
 
       <app-bar-theme-toggle />
-
-      <app-vertical-divider v-if="lgAndUp" />
 
       <app-bar-store-link v-if="lgAndUp" />
 
@@ -63,7 +59,6 @@
   import AppBarNotificationsMenu from './NotificationsMenu.vue'
   import AppBarPlaygroundLink from './PlaygroundLink.vue'
   import AppBarSettingsToggle from './SettingsToggle.vue'
-  import AppBarSponsorLink from './SponsorLink.vue'
   import AppBarStoreLink from './StoreLink.vue'
   import AppBarSupportMenu from './SupportMenu.vue'
   import AppBarTeamLink from './TeamLink.vue'

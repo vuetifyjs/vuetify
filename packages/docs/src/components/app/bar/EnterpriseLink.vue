@@ -1,7 +1,7 @@
 <template>
   <app-btn
     :to="rpath('/introduction/enterprise-support/')"
-    class="ms-1"
+    class="ms-1 me-4"
     color="primary"
     variant="flat"
     @click="gtagClick('app-bar', 'enterprise', name)"

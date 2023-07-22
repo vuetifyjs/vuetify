@@ -100,9 +100,9 @@ app.use(vuetify)
 
 ### General changes
 
-- `value` prop has been replaced by `model-value` on components that support `v-model` usage.
+- `value` prop has been replaced by `model-value` on components that support `v-model` usage. (Vue 3 requires this change)
   - Note that this does not apply to `value` used as a *selection value*, for example `v-btn` within `v-btn-toggle`.
-- `@input` event has been replaced by `@update:model-value` on components that support `v-model` usage.
+- `@input` event has been replaced by `@update:model-value` on components that support `v-model` usage. (Vue 3 requires this change)
 - `left` and `right` have been replaced by `start` and `end` respectively. This applies to utility classes too, for example `.border-r` is now `.border-e`.
 - Size props `small` / `medium` / `large` etc. have been combined into a single `size` prop.
 - `absolute` and `fixed` props have been combined into a single `position` prop.
@@ -145,7 +145,7 @@ app.use(vuetify)
 
 ### v-checkbox/v-radio/v-switch
 
-- `input-value` prop has been renamed to `model-value`.
+- `input-value` prop has been renamed to `model-value`. (Vue 3 requires this change)
 - `on-icon` and `off-icon` props have been renamed to `true-icon` and `false-icon`.
 - `on-value` and `off-value` props have been renamed to `true-value` and `false-value`.
 - `v-checkbox`'s label slot should no longer contain a `<label>` as it is already wrapped with one

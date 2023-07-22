@@ -3,7 +3,7 @@
 
   <v-divider />
 
-  <developer-mode />
+  <developer-mode hide-details />
 </template>
 
 <script setup>
