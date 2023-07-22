@@ -72,11 +72,19 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
 
     useToggleScope(() => props.renderless, () => {
       onMounted(() => {
-        containerRef.value = getScrollParent(vm.vnode.el as HTMLElement, true)
-        containerRef.value?.addEventListener('scroll', handleScroll)
+        containerRef.value = getScrollParent(vm.vnode.el as HTMLElement, false)
+        if (containerRef.value === document.documentElement) {
+          document.addEventListener('scroll', handleScroll, { passive: true })
+        } else {
+          containerRef.value?.addEventListener('scroll', handleScroll, { passive: true })
+        }
       })
       onScopeDispose(() => {
-        containerRef.value?.removeEventListener('scroll', handleScroll)
+        if (containerRef.value === document.documentElement) {
+          document.removeEventListener('scroll', handleScroll)
+        } else {
+          containerRef.value?.removeEventListener('scroll', handleScroll)
+        }
       })
     })
 

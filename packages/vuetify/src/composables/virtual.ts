@@ -83,7 +83,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   function handleScroll () {
     if (!containerRef.value || !contentRect.value) return
 
-    const height = contentRect.value.height
+    const height = containerRef.value.clientHeight
     const scrollTop = containerRef.value.scrollTop
     const direction = scrollTop < lastScrollTop ? UP : DOWN
 
