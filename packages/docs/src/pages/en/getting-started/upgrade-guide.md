@@ -27,7 +27,9 @@ Many of these changes can be applied automatically by [eslint-plugin-vuetify](ht
   Not all Vuetify 2 components are currently available in Vuetify 3; These components will be released as their development is completed via [Vuetify Labs](https://vuetifyjs.com/en/labs/introduction/).
 
 - v-calendar
+- [v-date-picker](/components/date-pickers/)
 - [v-data-table](/components/data-tables/basics/)
+- [v-skeleton-loader](/components/skeleton-loaders/)
 - v-stepper
 - v-time-picker
 - v-treeview
