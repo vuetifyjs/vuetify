@@ -35,7 +35,10 @@ export type VStepperSlots = {
   default: VStepperSlot
   actions: VStepperSlot
   header: never
+  icon: never
   item: never
+  title: never
+  subtitle: never
 } & { [key: `window-item.${string}`]: never }
 
 export const makeVStepperProps = propsFactory({
@@ -137,7 +140,12 @@ export const VStepper = genericComponent<VStepperSlots>()({
 
                   <VStepperItem
                     { ...item }
-                    v-slots={{ default: slots.item }}
+                    v-slots={{
+                      default: slots.item,
+                      icon: slots.icon,
+                      title: slots.title,
+                      subtitle: slots.subtitle,
+                    }}
                   />
                 </>
               ))}

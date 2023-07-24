@@ -3,6 +3,7 @@ import './VStepperItem.sass'
 
 // Components
 import { VAvatar } from '@/components/VAvatar/VAvatar'
+import { VIcon } from '@/components/VIcon/VIcon'
 
 // Composables
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
@@ -18,6 +19,22 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
+
+export type StepperItemSlot = {
+  canEdit: boolean
+  hasError: boolean
+  hasCompleted: boolean
+  title?: string
+  subtitle?: string
+  step: any
+}
+
+export type VStepperItemSlots = {
+  default: StepperItemSlot
+  icon: StepperItemSlot
+  title: StepperItemSlot
+  subtitle: StepperItemSlot
+}
 
 export const makeVStepperItemProps = propsFactory({
   color: String,
@@ -47,7 +64,7 @@ export const makeVStepperItemProps = propsFactory({
   ...makeGroupItemProps(),
 }, 'VStepperItem')
 
-export const VStepperItem = genericComponent()({
+export const VStepperItem = genericComponent<VStepperItemSlots>()({
   name: 'VStepperItem',
 
   directives: { Ripple },
@@ -73,6 +90,14 @@ export const VStepperItem = genericComponent()({
 
       return props.icon
     })
+    const slotProps = computed(() => ({
+      canEdit: canEdit.value,
+      hasError: hasError.value,
+      hasCompleted: hasCompleted.value,
+      title: props.title,
+      subtitle: props.subtitle,
+      step: step.value,
+    }))
 
     useRender(() => {
       const hasColor = (
@@ -84,6 +109,8 @@ export const VStepperItem = genericComponent()({
         !hasError.value &&
         !props.disabled
       )
+      const hasTitle = !!(props.title || slots.title)
+      const hasSubtitle = !!(props.subtitle || slots.subtitle)
 
       function onClick () {
         group?.toggle()
@@ -112,34 +139,35 @@ export const VStepperItem = genericComponent()({
             key="stepper-avatar"
             class="v-stepper-item__avatar"
             color={ hasColor ? props.color : undefined }
-            icon={ icon.value }
             size={ 24 }
           >
-            { step.value }
+            { slots.icon?.(slotProps.value) ?? (
+              icon.value ? (
+                <VIcon icon={ icon.value }></VIcon>
+              ) : step.value
+            )}
           </VAvatar>
 
           <div class="v-stepper-item__content">
-            { props.title && (
-              // stepper item title
+            { hasTitle && (
               <div
                 key="title"
                 class="v-stepper-item__title"
               >
-                { props.title }
+                { slots.title?.(slotProps.value) ?? props.title }
               </div>
             )}
 
-            { props.subtitle && (
-              // stepper item subtitle
+            { hasSubtitle && (
               <div
                 key="subtitle"
                 class="v-stepper-item__subtitle"
               >
-                { props.subtitle }
+                { slots.subtitle?.(slotProps.value) ?? props.subtitle }
               </div>
             )}
 
-            { slots.default?.() }
+            { slots.default?.(slotProps.value) }
           </div>
         </button>
       )
