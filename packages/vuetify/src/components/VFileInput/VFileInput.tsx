@@ -223,6 +223,8 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                         onClick={ e => {
                           e.stopPropagation()
 
+                          if (isReadonly.value) e.preventDefault()
+
                           onFocus()
                         }}
                         onChange={ e => {
