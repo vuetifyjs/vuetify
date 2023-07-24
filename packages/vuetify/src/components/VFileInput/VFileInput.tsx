@@ -119,13 +119,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       props.active
     ))
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
-    const isReadOnly = computed(() => inputRef.value?.readOnly)
-    function onFocus (e: Event) {
-      if (isReadOnly.value) {
-        e.preventDefault()
-        return
-      }
-
+    function onFocus () {
       if (inputRef.value !== document.activeElement) {
         inputRef.value?.focus()
       }
@@ -144,13 +138,9 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       emit('click:control', e)
     }
     function onClear (e: MouseEvent) {
-      if (inputRef.value?.readOnly) {
-        e.preventDefault()
-        return
-      }
       e.stopPropagation()
 
-      onFocus(e)
+      onFocus()
 
       nextTick(() => {
         model.value = []
@@ -233,15 +223,17 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                         onClick={ e => {
                           e.stopPropagation()
 
-                          onFocus(e)
+                          if (isReadonly.value) e.preventDefault()
+
+                          onFocus()
                         }}
                         onChange={ e => {
-                          if (!e.target || isReadonly.value) return
+                          if (!e.target) return
 
                           const target = e.target as HTMLInputElement
                           model.value = [...target.files ?? []]
                         }}
-                        onFocus={ e => onFocus(e) }
+                        onFocus={ onFocus }
                         onBlur={ blur }
                         { ...slotProps }
                         { ...inputAttrs }
