@@ -38,6 +38,7 @@ export const makeVStepperItemProps = propsFactory({
     type: String,
     default: '$error',
   },
+  icon: String,
   ripple: {
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
@@ -70,7 +71,7 @@ export const VStepperItem = genericComponent()({
       if (hasCompleted.value) return props.completeIcon
       if (canEdit.value) return props.editIcon
 
-      return undefined
+      return props.icon
     })
 
     useRender(() => {
