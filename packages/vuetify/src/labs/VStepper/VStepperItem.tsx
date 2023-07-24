@@ -1,3 +1,6 @@
+// Styles
+import './VStepperItem.sass'
+
 // Components
 import { VAvatar } from '@/components/VAvatar/VAvatar'
 
