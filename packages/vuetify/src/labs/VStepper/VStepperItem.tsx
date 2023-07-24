@@ -95,6 +95,7 @@ export const VStepperItem = genericComponent()({
             'v-stepper-item',
             {
               'v-stepper-item--complete': hasCompleted.value,
+              'v-stepper-item--disabled': props.disabled,
               'v-stepper-item--error': hasError.value,
             },
             group?.selectedClass.value,
