@@ -2,9 +2,7 @@
   <v-row class="fill-height">
     <v-col>
       <v-sheet height="64">
-        <v-toolbar
-          flat
-        >
+        <v-toolbar flat>
           <v-btn
             variant="outlined"
             class="me-4"
@@ -35,8 +33,8 @@
               mdi-chevron-right
             </v-icon>
           </v-btn>
-          <v-toolbar-title v-if="$refs.calendar">
-            {{ $refs.calendar.title }}
+          <v-toolbar-title v-if="calendar">
+            {{ calendar.title }}
           </v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
@@ -57,6 +55,61 @@
     </v-col>
   </v-row>
 </template>
+
+<script setup>
+  import { onMounted, ref } from 'vue'
+
+  const calendar = ref()
+
+  const focus = ref('')
+  const events = ref([])
+  const colors = ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1']
+  const names = ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party']
+  const categories = ['John Smith', 'Tori Walker']
+
+  onMounted(() => {
+    calendar.value.checkChange()
+  })
+
+  function getEventColor (event) {
+    return event.color
+  }
+  function setToday () {
+    focus.value = ''
+  }
+  function prev () {
+    calendar.value.prev()
+  }
+  function next () {
+    calendar.value.next()
+  }
+  function fetchEvents ({ start, end }) {
+    const _events = []
+    const min = new Date(`${start.date}T00:00:00`)
+    const max = new Date(`${end.date}T23:59:59`)
+    const days = (max.getTime() - min.getTime()) / 86400000
+    const eventCount = rnd(days, days + 20)
+    for (let i = 0; i < eventCount; i++) {
+      const allDay = rnd(0, 3) === 0
+      const firstTimestamp = rnd(min.getTime(), max.getTime())
+      const first = new Date(firstTimestamp - (firstTimestamp % 900000))
+      const secondTimestamp = rnd(2, allDay ? 288 : 8) * 900000
+      const second = new Date(first.getTime() + secondTimestamp)
+      _events.push({
+        name: names[rnd(0, names.length - 1)],
+        start: first,
+        end: second,
+        color: colors[rnd(0, colors.length - 1)],
+        timed: !allDay,
+        category: categories[rnd(0, categories.length - 1)],
+      })
+    }
+    events.value = _events
+  }
+  function rnd (a, b) {
+    return Math.floor((b - a + 1) * Math.random()) + a
+  }
+</script>
 
 <script>
   export default {

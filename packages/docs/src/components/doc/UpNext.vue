@@ -1,7 +1,7 @@
 <template>
   <div
     id="up-next"
-    class="d-flex"
+    class="d-flex mb-5"
   >
     <router-link
       v-if="(prev && prev.name !== 'home')"

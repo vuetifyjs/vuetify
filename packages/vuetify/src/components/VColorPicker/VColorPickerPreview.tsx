@@ -4,24 +4,31 @@ import './VColorPickerPreview.sass'
 // Components
 import { VSlider } from '@/components/VSlider'
 
+// Composables
+import { makeComponentProps } from '@/composables/component'
+
 // Utilities
-import { defineComponent, HSVtoCSS, useRender } from '@/util'
 import { nullColor } from './util'
+import { defineComponent, HSVtoCSS, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { HSV } from '@/util'
 
+export const makeVColorPickerPreviewProps = propsFactory({
+  color: {
+    type: Object as PropType<HSV | null>,
+  },
+  disabled: Boolean,
+  hideAlpha: Boolean,
+
+  ...makeComponentProps(),
+}, 'VColorPickerPreview')
+
 export const VColorPickerPreview = defineComponent({
   name: 'VColorPickerPreview',
 
-  props: {
-    color: {
-      type: Object as PropType<HSV | null>,
-    },
-    disabled: Boolean,
-    hideAlpha: Boolean,
-  },
+  props: makeVColorPickerPreviewProps(),
 
   emits: {
     'update:color': (color: HSV) => true,
@@ -35,7 +42,9 @@ export const VColorPickerPreview = defineComponent({
           {
             'v-color-picker-preview--hide-alpha': props.hideAlpha,
           },
+          props.class,
         ]}
+        style={ props.style }
       >
         <div class="v-color-picker-preview__dot">
           <div style={{ background: HSVtoCSS(props.color ?? nullColor) }} />

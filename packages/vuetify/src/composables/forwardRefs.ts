@@ -1,3 +1,4 @@
+// Types
 import type { ComponentPublicInstance, Ref, UnwrapRef } from 'vue'
 import type { UnionToIntersection } from '@/util'
 
@@ -6,7 +7,7 @@ const Refs = Symbol('Forwarded refs')
 /** Omit properties starting with P */
 type OmitPrefix<T, P extends string> = [Extract<keyof T, `${P}${any}`>] extends [never] ? T : Omit<T, `${P}${any}`>
 
-type OmitProps<T> = T extends { $props: any } ? Omit<T, keyof T['$props']> : never
+type OmitProps<T> = T extends { $props: any } ? Omit<T, keyof T['$props']> : T
 
 function getDescriptor (obj: any, key: PropertyKey) {
   let currentObj = obj
@@ -18,7 +19,7 @@ function getDescriptor (obj: any, key: PropertyKey) {
   return undefined
 }
 
-export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<ComponentPublicInstance, '$emit'> | undefined>[]> (
+export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<ComponentPublicInstance, '$emit' | '$slots'> | undefined>[]> (
   target: T,
   ...refs: U
 ): T & UnionToIntersection<{ [K in keyof U]: OmitPrefix<OmitProps<NonNullable<UnwrapRef<U[K]>>>, '$'> }[number]> {
@@ -55,6 +56,22 @@ export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<Compo
           return true
         }
       }
+      return false
+    },
+    set (target, key, value) {
+      if (Reflect.has(target, key)) {
+        return Reflect.set(target, key, value)
+      }
+
+      // Skip internal properties
+      if (typeof key === 'symbol' || key.startsWith('__')) return false
+
+      for (const ref of refs) {
+        if (ref.value && Reflect.has(ref.value, key)) {
+          return Reflect.set(ref.value, key, value)
+        }
+      }
+
       return false
     },
     getOwnPropertyDescriptor (target, key) {

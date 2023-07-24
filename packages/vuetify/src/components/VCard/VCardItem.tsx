@@ -1,40 +1,41 @@
 // Components
-import { VAvatar } from '@/components/VAvatar'
 import { VCardSubtitle } from './VCardSubtitle'
 import { VCardTitle } from './VCardTitle'
+import { VAvatar } from '@/components/VAvatar'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
-import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps } from '@/composables/density'
+import { IconValue } from '@/composables/icons'
 
-// Utility
-import { genericComponent, useRender } from '@/util'
+// Utilities
+import { genericComponent, propsFactory, useRender } from '@/util'
 
-// Types
-import type { MakeSlots } from '@/util'
+export type VCardItemSlots = {
+  default: never
+  prepend: never
+  append: never
+  title: never
+  subtitle: never
+}
 
-export type VCardItemSlots = MakeSlots<{
-  default: []
-  prepend: []
-  append: []
-  title: []
-  subtitle: []
-}>
+export const makeCardItemProps = propsFactory({
+  appendAvatar: String,
+  appendIcon: IconValue,
+  prependAvatar: String,
+  prependIcon: IconValue,
+  subtitle: String,
+  title: String,
+
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+}, 'VCardItem')
 
 export const VCardItem = genericComponent<VCardItemSlots>()({
   name: 'VCardItem',
 
-  props: {
-    appendAvatar: String,
-    appendIcon: IconValue,
-    prependAvatar: String,
-    prependIcon: IconValue,
-    subtitle: String,
-    title: String,
-
-    ...makeDensityProps(),
-  },
+  props: makeCardItemProps(),
 
   setup (props, { slots }) {
     useRender(() => {
@@ -46,7 +47,13 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
       const hasSubtitle = !!(props.subtitle || slots.subtitle)
 
       return (
-        <div class="v-card-item">
+        <div
+          class={[
+            'v-card-item',
+            props.class,
+          ]}
+          style={ props.style }
+        >
           { hasPrepend && (
             <div key="prepend" class="v-card-item__prepend">
               { !slots.prepend ? (

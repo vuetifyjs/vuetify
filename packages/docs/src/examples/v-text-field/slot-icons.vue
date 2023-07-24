@@ -72,6 +72,22 @@
   </v-form>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const message = ref('Hey!')
+  const loading = ref(false)
+
+  function clickMe () {
+    loading.value = true
+    message.value = 'Wait for it...'
+    setTimeout(() => {
+      loading.value = false
+      message.value = `You've clicked me!`
+    }, 2000)
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

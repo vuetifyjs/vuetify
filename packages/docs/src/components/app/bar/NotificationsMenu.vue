@@ -6,10 +6,7 @@
     :width="width"
   >
     <template #activator="{ props }">
-      <app-tooltip-btn
-        path="notifications"
-        v-bind="props"
-      >
+      <app-tooltip-btn v-bind="props">
         <template #icon>
           <v-badge
             :model-value="unread.length > 0"
@@ -84,23 +81,29 @@
               class="py-2"
             >
               <template #prepend>
-                <div class="pe-4 mt-n2">{{ notification.metadata.emoji }}</div>
+                <div class="pe-4 align-self-start">{{ notification.metadata.emoji }}</div>
               </template>
 
-              <v-list-item-title class="text-wrap text-h6 mb-1">
-                <div> {{ notification.title }}</div>
+              <v-list-item-title class="text-wrap text-h6">
+                <div>{{ notification.title }}</div>
               </v-list-item-title>
 
-              <div class="text-medium-emphasis text-caption">
-                {{ notification.metadata.text }}
+              <div class="text-caption mb-1 font-weight-bold text-medium-emphasis">{{ format(notification.created_at) }}</div>
 
-                <app-link :href="notification.metadata.action">
+              <div class="text-medium-emphasis text-caption">
+                <app-markdown :content="notification.metadata.text" class="mb-n3" />
+
+                <app-link
+                  :href="notification.metadata.action"
+                  class="border px-2 py-1 rounded"
+                  @click="onClick(notification)"
+                >
                   {{ notification.metadata.action_text }}
                 </app-link>
               </div>
 
               <template #append>
-                <div class="ps-4 mt-n2">
+                <div class="ps-4">
                   <v-icon
                     :icon="showArchived ? 'mdi-email-outline' : 'mdi-email-open-outline'"
                     color="medium-emphasis"
@@ -122,8 +125,11 @@
 
   // Composables
   import { useCosmic } from '@/composables/cosmic'
+  import { useDate } from 'vuetify/labs/date'
   import { useDisplay } from 'vuetify'
   import { useI18n } from 'vue-i18n'
+
+  // Stores
   import { useUserStore } from '@/store/user'
 
   // Utilities
@@ -144,9 +150,11 @@
   }
 
   const { t } = useI18n()
-  const { bucket } = useCosmic<Notification>()
+  const { bucket } = useCosmic()
   const { mobile } = useDisplay()
+  const date = useDate()
   const user = useUserStore()
+
   const menu = ref(false)
   const all = ref<Notification[]>([])
   const showArchived = ref(false)
@@ -171,6 +179,13 @@
 
   const width = computed(() => mobile.value ? 420 : 520)
 
+  function format (str: string) {
+    return date.format(new Date(str), 'normalDateWithWeekday')
+  }
+  function onClick (notification: Notification) {
+    toggle(notification)
+    menu.value = false
+  }
   function toggle ({ slug }: Notification) {
     user.notifications.read = user.notifications.read.includes(slug)
       ? user.notifications.read.filter(n => n !== slug)
@@ -183,13 +198,13 @@
   onMounted(async () => {
     if (all.value.length) return
 
-    const { objects = [] } = (
+    const { objects = [] }: { objects: Notification[] } = (
       await bucket?.objects
         .find({ type: 'notifications' })
         .props('created_at,metadata,slug,title')
         .status('published')
         .sort('-created_at')
-        .limit(5)
+        .limit(10)
     ) || {}
 
     all.value = objects

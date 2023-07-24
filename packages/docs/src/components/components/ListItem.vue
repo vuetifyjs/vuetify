@@ -10,7 +10,11 @@
       class="mb-3"
       elevation="0"
       height="164"
-    />
+    >
+      <template #image>
+        <v-img @error="hasError = true" />
+      </template>
+    </v-card>
 
     <h2 class="text-h6">
       <span class="text-capitalize">{{ name?.replace(/-/g, ' ') }}</span>
@@ -22,17 +26,17 @@
 
 <script setup lang="ts">
   // Utilities
-  import { computed } from 'vue'
+  import { computed, shallowRef } from 'vue'
   import { rpath } from '@/util/routes'
 
   const props = defineProps({
     name: String,
     src: String,
-    placeholder: Boolean,
   })
 
+  const hasError = shallowRef(false)
   const image = computed(() => {
-    if (props.placeholder) return 'https://cdn.vuetifyjs.com/docs/images/graphics/img-placeholder.png'
+    if (hasError.value) return 'https://cdn.vuetifyjs.com/docs/images/graphics/img-placeholder.png'
 
     return `https://cdn.vuetifyjs.com/docs/images/preview/${props.src}.png`
   })

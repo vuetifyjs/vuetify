@@ -1,7 +1,8 @@
-import { describe, expect, it } from '@jest/globals'
-
 // Directives
 import ClickOutside from '../'
+
+// Utilities
+import { describe, expect, it } from '@jest/globals'
 import { wait } from '../../../../test'
 
 function bootstrap (args?: object) {
@@ -48,44 +49,49 @@ describe('v-click-outside', () => {
   })
 
   it('should call the callback when closeConditional returns true', async () => {
-    const { clickHandler, callback } = bootstrap({ closeConditional: () => true })
+    const { clickHandler, mousedownHandler, callback } = bootstrap({ closeConditional: () => true })
     const event = { target: document.createElement('div') }
 
+    mousedownHandler({ target: document.body })
     clickHandler(event)
     await wait()
     expect(callback).toHaveBeenCalledWith(event)
   })
 
   it('should not call the callback when closeConditional returns false', async () => {
-    const { clickHandler, callback, el } = bootstrap({ closeConditional: () => false })
+    const { clickHandler, mousedownHandler, callback, el } = bootstrap({ closeConditional: () => false })
 
+    mousedownHandler({ target: document.body })
     clickHandler({ target: el })
     await wait()
     expect(callback).not.toHaveBeenCalled()
   })
 
   it('should not call the callback when closeConditional is not provided', async () => {
-    const { clickHandler, callback, el } = bootstrap()
+    const { clickHandler, mousedownHandler, callback, el } = bootstrap()
 
+    mousedownHandler({ target: document.body })
     clickHandler({ target: el })
     await wait()
     expect(callback).not.toHaveBeenCalled()
   })
 
   it('should not call the callback when clicked in element', async () => {
-    const { clickHandler, callback, el } = bootstrap({ closeConditional: () => true })
+    const { clickHandler, mousedownHandler, callback, el } = bootstrap({ closeConditional: () => true })
 
+    mousedownHandler({ target: document.body })
     clickHandler({ target: el })
     await wait()
     expect(callback).not.toHaveBeenCalled()
   })
 
   it('should not call the callback when clicked in included element', async () => {
-    const { clickHandler, callback, el2 } = bootstrap({
+    const { clickHandler, mousedownHandler, callback, el2 } = bootstrap({
       closeConditional: () => true,
       include: () => [el2],
     })
 
+    mousedownHandler({ target: document.body })
     clickHandler({ target: el2 })
     await wait()
     expect(callback).not.toHaveBeenCalled()

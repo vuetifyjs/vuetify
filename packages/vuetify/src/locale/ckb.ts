@@ -26,12 +26,21 @@ export default {
     lastPage: 'پەڕەی کۆتایی',
     pageText: '{0}-{1} لە {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} دەسنیشانکراوە',
-    nextMonthAriaLabel: 'مانگی داهاتوو',
-    nextYearAriaLabel: 'ساڵی داهاتوو',
-    prevMonthAriaLabel: 'مانگی پێشوو',
-    prevYearAriaLabel: 'ساڵی پێشوو',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'هیچ داتایەک بەردەست نیە',
   carousel: {
@@ -74,4 +83,8 @@ export default {
     },
   },
   loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
+  },
 }

@@ -12,7 +12,7 @@
   overflow: hidden
   position: relative
   transition: $toolbar-transition
-  transition-property: height, width, transform, max-width, left, right, top, bottom
+  transition-property: height, width, transform, max-width, left, right, top, bottom, box-shadow
   width: 100%
 
   @include tools.border($toolbar-border...)
@@ -71,6 +71,8 @@
   @include tools.absolute()
 
   display: flex
+  opacity: var(--v-toolbar-image-opacity, 1)
+  transition-property: opacity
 
 .v-toolbar__prepend,
 .v-toolbar__append

@@ -27,6 +27,12 @@
   </v-layout>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const value = ref(1)
+</script>
+
 <script>
   export default {
     data: () => ({ value: 1 }),

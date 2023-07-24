@@ -37,9 +37,9 @@
   const props = computed(() => {
     return {
       block: block.value || undefined,
-      'prepend-icon': prepend.value ? 'mdi-vuetify' : undefined,
-      'append-icon': append.value ? 'mdi-vuetify' : undefined,
-      icon: icon.value ? 'mdi-vuetify' : undefined,
+      'prepend-icon': prepend.value ? '$vuetify' : undefined,
+      'append-icon': append.value ? '$vuetify' : undefined,
+      icon: icon.value ? '$vuetify' : undefined,
       stacked: stacked.value || undefined,
       variant: variants.includes(model.value) ? model.value : undefined,
     }

@@ -20,6 +20,14 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const slider1 = ref(0)
+  const slider2 = ref(50)
+  const slider3 = ref(100)
+</script>
+
 <script>
   export default {
     data: () => ({

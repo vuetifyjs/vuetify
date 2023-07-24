@@ -3,8 +3,8 @@ import { useMutationObserver } from '../mutationObserver'
 
 // Utilities
 import { describe, expect, it } from '@jest/globals'
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 
 describe('mutationObserver', () => {
   it('should invoke callback on mounted', async () => {

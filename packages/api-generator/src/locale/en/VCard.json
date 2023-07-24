@@ -1,0 +1,15 @@
+{
+  "props": {
+    "flat": "Removes the card's elevation.",
+    "hover": "Applies **4dp** of elevation when hovered (default 2dp). You can find more information on the [elevation page](/styles/elevation).",
+    "image": "Apply a specific background image to the component.",
+    "prependIcon": "Prepends a [v-icon](/components/icons/) component to the header"
+  },
+  "slots": {
+    "actions": "The slot used for the card actions; located at the bottom of the card.",
+    "image": "The slot used for the card image. This is used with the [image](#props-image) prop."
+  },
+  "events": {
+    "click": "Emitted when component is clicked - Will trigger component to ripple when clicked unless the `.native` modifier is used"
+  }
+}

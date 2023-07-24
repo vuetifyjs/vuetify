@@ -23,6 +23,13 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const start = ref(null)
+  const end = ref(null)
+</script>
+
 <script>
   export default {
     data () {

@@ -12,7 +12,9 @@
 
 .v-overlay-scroll-blocked
   padding-inline-end: var(--v-scrollbar-offset)
-  overflow-y: hidden !important
+
+  &:not(html)
+    overflow-y: hidden !important
 
   @at-root #{selector.append(html, &)}
     position: fixed
