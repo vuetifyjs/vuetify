@@ -1,0 +1,33 @@
+@use 'sass:list'
+@use '../../styles/tools'
+@use './variables' as *
+
+.v-treeview
+  overflow: auto
+  padding: $treeview-padding
+  position: relative
+  outline: none
+
+  @include tools.border($treeview-border...)
+  @include tools.elevation($treeview-elevation)
+  @include tools.rounded($treeview-border-radius)
+  @include tools.theme($treeview-theme...)
+
+  &--disabled
+    pointer-events: none
+    user-select: none
+
+  &--rounded
+    @include tools.rounded($treeview-rounded-border-radius)
+
+.v-list__overlay
+  background-color: currentColor
+  border-radius: inherit
+  bottom: 0
+  left: 0
+  opacity: 0
+  pointer-events: none
+  position: absolute
+  right: 0
+  top: 0
+  transition: opacity 0.2s ease-in-out
