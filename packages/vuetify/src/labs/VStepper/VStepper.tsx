@@ -55,6 +55,7 @@ export const makeVStepperProps = propsFactory({
     type: String,
     default: 'value',
   },
+  mobile: Boolean,
   nonLinear: Boolean,
   flat: Boolean,
   showActions: Boolean,
@@ -66,7 +67,6 @@ export const makeVStepperProps = propsFactory({
     type: String,
     default: 'Continue',
   },
-  // vertical: Boolean,
 
   ...makeGroupProps({
     mandatory: 'force' as const,
@@ -123,7 +123,7 @@ export const VStepper = genericComponent<VStepperSlots>()({
               'v-stepper--alt-labels': props.altLabels,
               'v-stepper--flat': props.flat,
               'v-stepper--non-linear': props.nonLinear,
-              // 'v-stepper--vertical': props.vertical,
+              'v-stepper--mobile': props.mobile,
             },
             props.class,
           ]}
