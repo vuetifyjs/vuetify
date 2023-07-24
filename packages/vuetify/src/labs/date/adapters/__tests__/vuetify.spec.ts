@@ -1,3 +1,4 @@
+// Utilities
 import { describe, expect, it } from '@jest/globals'
 import { VuetifyDateAdapter } from '../vuetify'
 
@@ -5,11 +6,11 @@ describe('vuetify date adapter', () => {
   it('should return weekdays based on locale', () => {
     let instance = new VuetifyDateAdapter({ locale: 'en-us' })
 
-    expect(instance.getWeekdays()).toStrictEqual(['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'])
+    expect(instance.getWeekdays()).toStrictEqual(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'])
 
     instance = new VuetifyDateAdapter({ locale: 'sv-se' })
 
-    expect(instance.getWeekdays()).toStrictEqual(['måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lördag', 'söndag'])
+    expect(instance.getWeekdays()).toStrictEqual(['mån', 'tis', 'ons', 'tors', 'fre', 'lör', 'sön'])
   })
 
   it('should format dates', () => {

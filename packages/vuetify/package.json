@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.3.0",
+  "version": "3.3.9",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -54,6 +54,7 @@
     ".": {
       "sass": "./lib/styles/main.sass",
       "style": "./lib/styles/main.css",
+      "types": "./lib/index.d.mts",
       "default": "./lib/framework.mjs"
     },
     "./styles": {
@@ -122,6 +123,8 @@
     "@date-io/date-fns": "2.14.0"
   },
   "devDependencies": {
+    "@date-io/core": "2.14.0",
+    "@date-io/date-fns": "2.14.0",
     "@formatjs/intl": "^2.6.9",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",

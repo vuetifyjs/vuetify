@@ -26,12 +26,21 @@ export default {
     lastPage: 'Viimane lehekülg',
     pageText: '{0}-{1} {2}st',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} valitud',
-    nextMonthAriaLabel: 'Järgmine kuu',
-    nextYearAriaLabel: 'Järgmine aasta',
-    prevMonthAriaLabel: 'Eelmine kuu',
-    prevYearAriaLabel: 'Eelmine aasta',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Andmed puuduvad',
   carousel: {

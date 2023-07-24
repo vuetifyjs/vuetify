@@ -7,6 +7,12 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const rating = ref(4)
+</script>
+
 <script>
   export default {
     data: () => ({ rating: 4 }),

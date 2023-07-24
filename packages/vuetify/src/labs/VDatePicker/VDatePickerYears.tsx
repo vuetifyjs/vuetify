@@ -8,19 +8,21 @@ import { VBtn } from '@/components/VBtn'
 import { useDate } from '@/labs/date'
 
 // Utilities
-import { convertToUnit, createRange, defineComponent, useRender } from '@/util'
 import { computed, onMounted, ref } from 'vue'
+import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
-export const VDatePickerYears = defineComponent({
+export const makeVDatePickerYearsProps = propsFactory({
+  color: String,
+  min: Number,
+  max: Number,
+  height: [String, Number],
+  displayDate: null,
+}, 'VDatePickerYears')
+
+export const VDatePickerYears = genericComponent()({
   name: 'VDatePickerYears',
 
-  props: {
-    min: Number,
-    max: Number,
-    viewMode: String,
-    height: [String, Number],
-    displayDate: null,
-  },
+  props: makeVDatePickerYearsProps(),
 
   emits: {
     'update:displayDate': (date: any) => true,
@@ -29,7 +31,7 @@ export const VDatePickerYears = defineComponent({
 
   setup (props, { emit }) {
     const adapter = useDate()
-    const displayYear = computed(() => adapter.getYear(props.displayDate))
+    const displayYear = computed(() => adapter.getYear(props.displayDate ?? new Date()))
     const years = computed(() => {
       const min = props.min ?? displayYear.value - 50 - 2
       const max = props.max ?? displayYear.value + 50
@@ -53,9 +55,10 @@ export const VDatePickerYears = defineComponent({
           { years.value.map(year => (
             <VBtn
               ref={ year === displayYear.value ? yearRef : undefined }
-              variant="flat"
+              variant={ year === displayYear.value ? 'flat' : 'text' }
               rounded="xl"
-              color={ year === displayYear.value ? 'primary' : undefined }
+              active={ year === displayYear.value }
+              color={ year === displayYear.value ? props.color : undefined }
               onClick={ () => {
                 emit('update:displayDate', adapter.setYear(props.displayDate, year))
                 emit('update:viewMode', 'month')
@@ -69,3 +72,5 @@ export const VDatePickerYears = defineComponent({
     return {}
   },
 })
+
+export type VDatePickerYears = InstanceType<typeof VDatePickerYears>

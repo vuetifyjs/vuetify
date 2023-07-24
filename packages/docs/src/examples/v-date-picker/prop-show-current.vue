@@ -11,6 +11,13 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const date1 = ref((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10))
+  const date2 = ref('2013-07-29')
+</script>
+
 <script>
   export default {
     data () {

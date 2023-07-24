@@ -2,33 +2,35 @@
 import './VDateRangeCard.sass'
 
 // Components
+import { makeVDatePickerControlsProps, VDatePickerControls } from '../VDatePicker/VDatePickerControls'
+import { makeVDatePickerMonthProps, VDatePickerMonth } from '../VDatePicker/VDatePickerMonth'
+import { makeVDatePickerYearsProps, VDatePickerYears } from '../VDatePicker/VDatePickerYears'
 import { VCard } from '@/components/VCard'
-import { VDatePickerControls } from '../VDatePicker/VDatePickerControls'
-import { VDatePickerMonth } from '../VDatePicker/VDatePickerMonth'
-import { VDatePickerYears } from '../VDatePicker/VDatePickerYears'
 
 // Composables
-import { makeTransitionProps } from '@/composables/transition'
 import { createDatePicker } from '../VDatePicker/composables'
+import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { ref } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { defineComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import { dateEmits, makeDateProps } from '../VDateInput/composables'
 import { useDate } from '@/labs/date'
-import { dateEmits, makeDateProps } from '../VDateField/composables'
+
+export const makeVDateRangeCardProps = propsFactory({
+  ...makeDateProps(),
+  ...makeVDatePickerControlsProps(),
+  ...makeVDatePickerMonthProps(),
+  ...makeVDatePickerYearsProps(),
+  ...makeTransitionProps({ transition: 'fade' }),
+}, 'VDateRangeCard')
 
 export const VDateRangeCard = defineComponent({
   name: 'VDateRangeCard',
 
-  props: {
-    color: String,
-    ...makeDateProps(),
-    ...makeTransitionProps({
-      transition: 'fade',
-    }),
-  },
+  props: makeVDateRangeCardProps(),
 
   emits: {
     ...dateEmits,
@@ -41,24 +43,28 @@ export const VDateRangeCard = defineComponent({
     const hoverDate = ref(null)
 
     useRender(() => {
+      const [cardProps] = VCard.filterProps(props)
+      const [datePickerControlsProps] = VDatePickerControls.filterProps(props)
+      const [datePickerMonthProps] = VDatePickerMonth.filterProps(props)
+      const [datePickerYearsProps] = VDatePickerYears.filterProps(props)
+
       return (
         <VCard
+          { ...cardProps }
           class="v-date-range-card"
         >
           { props.viewMode === 'month' ? (
             <>
               <div class="v-date-range-card__start">
                 <VDatePickerControls
-                  displayDate={ props.displayDate }
+                  { ...datePickerControlsProps }
                   onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
-                  viewMode={ props.viewMode }
                   onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
                   range="start"
                 />
                 <VDatePickerMonth
-                  modelValue={ props.modelValue }
+                  { ...datePickerMonthProps }
                   onUpdate:modelValue={ modelValue => emit('update:modelValue', modelValue) }
-                  displayDate={ props.displayDate }
                   v-model:hoverDate={ hoverDate.value }
                   multiple
                   side="start"
@@ -67,14 +73,13 @@ export const VDateRangeCard = defineComponent({
               <div class="v-date-range-card__divider" />
               <div class="v-date-range-card__end">
                 <VDatePickerControls
-                  displayDate={ props.displayDate }
+                  { ...datePickerControlsProps }
                   onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
-                  viewMode={ props.viewMode }
                   onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
                   range="end"
                 />
                 <VDatePickerMonth
-                  modelValue={ props.modelValue }
+                  { ...datePickerMonthProps }
                   onUpdate:modelValue={ modelValue => emit('update:modelValue', modelValue) }
                   displayDate={ adapter.addMonths(props.displayDate, 1) }
                   v-model:hoverDate={ hoverDate.value }
@@ -86,15 +91,13 @@ export const VDateRangeCard = defineComponent({
           ) : (
             <div class="v-date-range-card__years">
               <VDatePickerControls
-                displayDate={ props.displayDate }
+                { ...datePickerControlsProps }
                 onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
-                viewMode={ props.viewMode }
                 onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
               />
               <VDatePickerYears
-                displayDate={ props.displayDate }
+                { ...datePickerYearsProps }
                 onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
-                viewMode={ props.viewMode }
                 onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
               />
             </div>
@@ -106,3 +109,5 @@ export const VDateRangeCard = defineComponent({
     return {}
   },
 })
+
+export type VDateRangeCard = InstanceType<typeof VDateRangeCard>

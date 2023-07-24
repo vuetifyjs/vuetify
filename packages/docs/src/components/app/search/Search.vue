@@ -186,11 +186,13 @@
     return groups
   }
   function onDocumentKeydown (e: KeyboardEvent) {
-    if (!model.value && e.key === '/') {
+    if (!model.value && e.ctrlKey && e.key === 'k') {
       e.preventDefault()
 
       model.value = true
     } else if (model.value && ['ArrowDown', 'ArrowUp'].includes(e.key)) {
+      e.preventDefault()
+
       list.value?.rootEl?.focus()
     }
   }

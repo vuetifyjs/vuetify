@@ -26,6 +26,14 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const snackbar = ref(false)
+  const text = ref('My timeout is set to 2000.')
+  const timeout = ref(2000)
+</script>
+
 <script>
   export default {
     data: () => ({

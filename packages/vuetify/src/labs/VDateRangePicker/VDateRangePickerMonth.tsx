@@ -2,23 +2,27 @@
 import './VDateRangePickerMonth.sass'
 
 // Components
-import { VDatePickerMonth } from '../VDatePicker/VDatePickerMonth'
+import { makeVDatePickerMonthProps, VDatePickerMonth } from '../VDatePicker/VDatePickerMonth'
 
 // Composables
 import { useDatePicker } from '../VDatePicker/composables'
 
 // Utilities
 import { computed, onMounted, ref } from 'vue'
-import { createRange, defineComponent, useRender } from '@/util'
 import { useDate } from '@/labs/date'
+import { createRange, genericComponent, propsFactory, useRender } from '@/util'
 
-export const VDateRangePickerMonth = defineComponent({
+export const makeVDateRangePickerMonthProps = propsFactory({
+  ...makeVDatePickerMonthProps({
+    hideWeekdays: true,
+    multiple: true,
+  }),
+}, 'VDateRangePickerMonth')
+
+export const VDateRangePickerMonth = genericComponent()({
   name: 'VDateRangePickerMonth',
 
-  props: {
-    modelValue: null,
-    displayDate: null,
-  },
+  props: makeVDateRangePickerMonthProps(),
 
   emits: {
     'update:modelValue': (date: any) => true,
@@ -43,26 +47,30 @@ export const VDateRangePickerMonth = defineComponent({
       hasScrolled.value = true
     }
 
-    useRender(() => (
-      <div
-        class="v-date-range-picker-month"
-        onScrollPassive={ handleScroll }
-      >
-        { months.value.map(month => (
-          <>
-            <div class="v-date-range-picker-month__header">{ adapter.format(month, 'monthAndYear') }</div>
-            <VDatePickerMonth
-              ref={ adapter.isSameMonth(month, props.displayDate) ? monthRef : undefined }
-              modelValue={ props.modelValue }
-              onUpdate:modelValue={ modelValue => emit('update:modelValue', modelValue) }
-              displayDate={ month }
-              hideAdjacentMonths
-              hideWeekdays
-              multiple
-            />
-          </>
-        ))}
-      </div>
-    ))
+    useRender(() => {
+      const [datePickerMonthProps] = VDatePickerMonth.filterProps(props)
+
+      return (
+        <div
+          class="v-date-range-picker-month"
+          onScrollPassive={ handleScroll }
+        >
+          { months.value.map(month => (
+            <>
+              <div class="v-date-range-picker-month__header">{ adapter.format(month, 'monthAndYear') }</div>
+              <VDatePickerMonth
+                ref={ adapter.isSameMonth(month, props.displayDate) ? monthRef : undefined }
+                { ...datePickerMonthProps }
+                modelValue={ props.modelValue }
+                onUpdate:modelValue={ modelValue => emit('update:modelValue', modelValue) }
+                displayDate={ month }
+              />
+            </>
+          ))}
+        </div>
+      )
+    })
   },
 })
+
+export type VDateRangePickerMonth = InstanceType<typeof VDateRangePickerMonth>

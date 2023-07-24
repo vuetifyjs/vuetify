@@ -30,6 +30,14 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const items = ['foo', 'bar', 'fizz', 'buzz']
+
+  const value = ref('foo')
+</script>
+
 <script>
   export default {
     data: () => ({

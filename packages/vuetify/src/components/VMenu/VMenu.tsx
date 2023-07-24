@@ -2,9 +2,10 @@
 import './VMenu.sass'
 
 // Components
-import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDialogTransition } from '@/components/transitions'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
+import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -12,12 +13,12 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { type Component, computed, inject, mergeProps, provide, ref, shallowRef, watch } from 'vue'
-import { genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
-import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
+import { computed, inject, mergeProps, provide, ref, shallowRef, watch } from 'vue'
 import { VMenuSymbol } from './shared'
+import { focusChild, genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
 
 // Types
+import type { Component } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVMenuProps = propsFactory({
@@ -34,7 +35,7 @@ export const makeVMenuProps = propsFactory({
     scrollStrategy: 'reposition' as const,
     transition: { component: VDialogTransition as Component },
   }), ['absolute']),
-}, 'v-menu')
+}, 'VMenu')
 
 export const VMenu = genericComponent<OverlaySlots>()({
   name: 'VMenu',
@@ -81,11 +82,40 @@ export const VMenu = genericComponent<OverlaySlots>()({
       parent?.closeParents()
     }
 
+    function onKeydown (e: KeyboardEvent) {
+      if (props.disabled) return
+
+      if (e.key === 'Tab') {
+        isActive.value = false
+        overlay.value?.activatorEl?.focus()
+      }
+    }
+
+    function onActivatorKeydown (e: KeyboardEvent) {
+      if (props.disabled) return
+
+      const el = overlay.value?.contentEl
+      if (el && isActive.value) {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault()
+          focusChild(el, 'next')
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault()
+          focusChild(el, 'prev')
+        }
+      } else if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
+        isActive.value = true
+        e.preventDefault()
+        setTimeout(() => setTimeout(() => onActivatorKeydown(e)))
+      }
+    }
+
     const activatorProps = computed(() =>
       mergeProps({
         'aria-haspopup': 'menu',
         'aria-expanded': String(isActive.value),
         'aria-owns': id.value,
+        onKeydown: onActivatorKeydown,
       }, props.activatorProps)
     )
 
@@ -105,12 +135,13 @@ export const VMenu = genericComponent<OverlaySlots>()({
           absolute
           activatorProps={ activatorProps.value }
           onClick:outside={ onClickOutside }
+          onKeydown={ onKeydown }
           { ...scopeId }
         >
           {{
             activator: slots.activator,
             default: (...args) => (
-              <VDefaultsProvider root>
+              <VDefaultsProvider root="VMenu">
                 { slots.default?.(...args) }
               </VDefaultsProvider>
             ),

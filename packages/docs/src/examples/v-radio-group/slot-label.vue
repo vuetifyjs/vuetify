@@ -18,6 +18,12 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const radios = ref('Duckduckgo')
+</script>
+
 <script>
   export default {
     data () {

@@ -103,7 +103,7 @@
 
     <v-expand-transition>
       <div v-if="show && display.mdAndUp.value">
-        <div class="pa-3">
+        <div class="pa-2">
           <app-markup :code="code" />
         </div>
 

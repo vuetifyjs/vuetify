@@ -203,6 +203,7 @@
         "items": [
           "basics",
           "headers",
+          "selection",
           "sorting",
           "pagination",
           "filtering",
@@ -215,6 +216,10 @@
       {
         "title": "dates",
         "subfolder": "features"
+      },
+      {
+        "title": "date-pickers",
+        "subfolder": "components"
       },
       {
         "title": "infinite-scroller",

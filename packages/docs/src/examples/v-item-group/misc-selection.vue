@@ -33,6 +33,27 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const items = [
+    {
+      src: 'backgrounds/bg.jpg',
+    },
+    {
+      src: 'backgrounds/md.jpg',
+    },
+    {
+      src: 'backgrounds/bg-2.jpg',
+    },
+    {
+      src: 'backgrounds/md2.jpg',
+    },
+  ]
+
+  const selection = ref([])
+</script>
+
 <script>
   export default {
     data: () => ({

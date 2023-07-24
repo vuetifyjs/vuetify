@@ -2,47 +2,41 @@
 import './VDateRangePicker.sass'
 
 // Components
-import { VPicker } from '@/components/VPicker'
+import { VBtn } from '@/components/VBtn'
 import { VTextField } from '@/components/VTextField'
+import { VPicker } from '@/labs/VPicker'
 
 // Composables
-import { makeTransitionProps } from '@/composables/transition'
 import { createDatePicker } from '../VDatePicker/composables'
+import { makeTransitionProps } from '@/composables/transition'
+import { useDate } from '@/labs/date'
+import { makeVPickerProps } from '@/labs/VPicker/VPicker'
 
-// Utilites
+// Utilities
 import { ref, watch } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
-import { VBtn } from '@/components/VBtn'
-import { VDateRangePickerHeader } from './VDateRangePickerHeader'
-import { VDateRangePickerMonth } from './VDateRangePickerMonth'
-import { useDate } from '@/labs/date'
+import { makeVDateRangePickerHeaderProps, VDateRangePickerHeader } from './VDateRangePickerHeader'
+import { makeVDateRangePickerMonthProps, VDateRangePickerMonth } from './VDateRangePickerMonth'
+import { makeDateProps } from '../VDateInput/composables'
 
-export const VDateRangePicker = defineComponent({
+export const makeVDateRangePickerProps = propsFactory({
+  ...makeDateProps(),
+  ...makeVPickerProps(),
+  ...makeVDateRangePickerHeaderProps(),
+  ...makeVDateRangePickerMonthProps(),
+  ...makeTransitionProps({ transition: 'fade' }),
+}, 'VDateRangePicker')
+
+export const VDateRangePicker = genericComponent()({
   name: 'VDateRangePicker',
 
-  props: {
-    color: String,
-    inputMode: {
-      type: String as PropType<'keyboard' | 'calendar'>,
-      default: 'calendar',
-    },
-    viewMode: {
-      type: String as PropType<'month' | 'years'>,
-      default: 'month',
-    },
-    modelValue: null,
-    displayDate: null,
-    ...makeTransitionProps({
-      transition: 'fade',
-    }),
-  },
+  props: makeVDateRangePickerProps(),
 
   emits: {
     'update:modelValue': (date: any) => true,
-    'update:viewMode': (mode: 'month' | 'years') => true,
+    'update:viewMode': (mode: 'month' | 'year') => true,
     'update:inputMode': (input: string) => true,
     'update:displayDate': (date: any) => true,
     save: (date: any) => true,
@@ -89,8 +83,13 @@ export const VDateRangePicker = defineComponent({
     }
 
     useRender(() => {
+      const [pickerProps] = VPicker.filterProps(props)
+      const [dateRangePickerHeaderProps] = VDateRangePickerHeader.filterProps(props)
+      const [dateRangePickerMonthProps] = VDateRangePickerMonth.filterProps(props)
+
       return (
         <VPicker
+          { ...pickerProps }
           key={ props.inputMode }
           class={[
             'v-date-range-picker',
@@ -100,20 +99,18 @@ export const VDateRangePicker = defineComponent({
           v-slots={{
             header: () => (
               <VDateRangePickerHeader
+                { ...dateRangePickerHeaderProps }
                 modelValue={ selected.value }
-                displayDate={ props.displayDate }
                 onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
-                inputMode={ props.inputMode }
                 onUpdate:inputMode={ inputMode => emit('update:inputMode', inputMode) }
-                color={ props.color }
                 onCancel={ handleCancel }
                 onSave={ handleSave }
               />
             ),
             default: () => props.inputMode === 'calendar' ? (
               <VDateRangePickerMonth
+                { ...dateRangePickerMonthProps }
                 v-model={ selected.value }
-                displayDate={ props.displayDate }
               />
             ) : (
               <div class="v-date-range-picker__input">
@@ -134,10 +131,12 @@ export const VDateRangePicker = defineComponent({
                 <VBtn variant="text" color={ props.color } onClick={ handleCancel }>Cancel</VBtn>
                 <VBtn variant="text" color={ props.color } onClick={ handleSave }>Ok</VBtn>
               </div>
-            ) : null,
+            ) : undefined,
           }}
         />
       )
     })
   },
 })
+
+export type VDateRangePicker = InstanceType<typeof VDateRangePicker>

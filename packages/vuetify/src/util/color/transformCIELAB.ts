@@ -1,3 +1,4 @@
+// Types
 import type { LAB, XYZ } from '../colorUtils'
 
 const delta = 0.20689655172413793 // 6÷29

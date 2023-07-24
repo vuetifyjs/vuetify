@@ -26,12 +26,21 @@ export default {
     lastPage: 'Последняя страница',
     pageText: '{0}-{1} из {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} выбран',
-    nextMonthAriaLabel: 'Следующий месяц',
-    nextYearAriaLabel: 'Следующий год',
-    prevMonthAriaLabel: 'Прошлый месяц',
-    prevYearAriaLabel: 'Предыдущий год',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Отсутствуют данные',
   carousel: {

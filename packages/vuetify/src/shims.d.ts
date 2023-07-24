@@ -1,3 +1,5 @@
+/* eslint-disable local-rules/sort-imports */
+
 import type { ComponentPublicInstance, FunctionalComponent, UnwrapNestedRefs, VNodeChild } from 'vue'
 
 // @skip-build

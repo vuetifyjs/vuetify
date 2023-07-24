@@ -5,39 +5,40 @@ import './VDateRangePickerHeader.sass'
 import { VBtn } from '../../components/VBtn'
 
 // Composables
+import { makeDateProps } from '../VDateInput/composables'
 import { useBackgroundColor } from '@/composables/color'
-
-// Utilities
-import { defineComponent, useRender } from '@/util'
-import { computed } from 'vue'
 import { useLocale } from '@/composables/locale'
 import { useDate } from '@/labs/date'
 
-export const VDateRangePickerHeader = defineComponent({
+// Utilities
+import { computed } from 'vue'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
+
+export const makeVDateRangePickerHeaderProps = propsFactory({
+  color: String,
+  title: String,
+  header: String,
+  keyboardIcon: {
+    type: String,
+    default: '$edit',
+  },
+  calendarIcon: {
+    type: String,
+    default: '$calendar',
+  },
+  closeIcon: {
+    type: String,
+    default: '$close',
+  },
+  showInputSwitch: Boolean,
+  range: null,
+  ...omit(makeDateProps(), ['viewMode', 'format']),
+}, 'VDateRangePickerHeader')
+
+export const VDateRangePickerHeader = genericComponent()({
   name: 'VDateRangePickerHeader',
 
-  props: {
-    color: String,
-    title: String,
-    header: String,
-    keyboardIcon: {
-      type: String,
-      default: '$edit',
-    },
-    calendarIcon: {
-      type: String,
-      default: '$calendar',
-    },
-    closeIcon: {
-      type: String,
-      default: '$close',
-    },
-    showInputSwitch: Boolean,
-    inputMode: String,
-    modelValue: null,
-    displayDate: null,
-    range: null,
-  },
+  props: makeVDateRangePickerHeaderProps(),
 
   emits: {
     cancel: () => true,
@@ -125,3 +126,5 @@ export const VDateRangePickerHeader = defineComponent({
     return {}
   },
 })
+
+export type VDateRangePickerHeader = InstanceType<typeof VDateRangePickerHeader>

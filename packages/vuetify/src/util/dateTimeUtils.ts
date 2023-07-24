@@ -1,3 +1,4 @@
+// Utilities
 import { createRange, padStart } from '@/util'
 
 export function getFirstDayOfMonth (year: number, month: number) {

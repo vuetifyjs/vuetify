@@ -1,5 +1,9 @@
+// Composables
+import { useToggleScope } from '@/composables/toggleScope'
+
 // Utilities
 import { computed, nextTick, onScopeDispose, ref, watch } from 'vue'
+import { anchorToPoint, getOffset } from './util/point'
 import {
   clamp,
   consoleError,
@@ -17,10 +21,6 @@ import {
   propsFactory,
 } from '@/util'
 import { Box, getOverflow } from '@/util/box'
-import { anchorToPoint, getOffset } from './util/point'
-
-// Composables
-import { useToggleScope } from '@/composables/toggleScope'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -70,7 +70,7 @@ export const makeLocationStrategyProps = propsFactory({
     default: 'auto',
   },
   offset: [Number, String, Array] as PropType<StrategyProps['offset']>,
-}, 'v-overlay-location-strategies')
+}, 'VOverlay-location-strategies')
 
 export function useLocationStrategies (
   props: StrategyProps,
@@ -130,6 +130,12 @@ function getIntrinsicSize (el: HTMLElement, isRtl: boolean) {
   // const initialMaxHeight = el.style.maxHeight
   // el.style.removeProperty('max-width')
   // el.style.removeProperty('max-height')
+
+  if (isRtl) {
+    el.style.removeProperty('left')
+  } else {
+    el.style.removeProperty('right')
+  }
 
   /* eslint-disable-next-line sonarjs/prefer-immediate-return */
   const contentBox = nullifyTransforms(el)

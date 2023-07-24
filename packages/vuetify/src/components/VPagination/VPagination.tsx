@@ -5,22 +5,22 @@ import './VPagination.sass'
 import { VBtn } from '../VBtn'
 
 // Composables
-import { IconValue } from '@/composables/icons'
+import { useDisplay } from '@/composables'
 import { makeBorderProps } from '@/composables/border'
 import { makeComponentProps } from '@/composables/component'
+import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps } from '@/composables/density'
 import { makeElevationProps } from '@/composables/elevation'
+import { IconValue } from '@/composables/icons'
+import { useLocale, useRtl } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { useRefs } from '@/composables/refs'
+import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeRoundedProps } from '@/composables/rounded'
 import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
-import { provideDefaults } from '@/composables/defaults'
-import { useDisplay } from '@/composables'
-import { useLocale, useRtl } from '@/composables/locale'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { useRefs } from '@/composables/refs'
-import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, nextTick, shallowRef, toRef } from 'vue'
@@ -45,11 +45,11 @@ type ControlSlot = {
 }
 
 export type VPaginationSlots = {
-  item: [ItemSlot]
-  first: [ControlSlot]
-  prev: [ControlSlot]
-  next: [ControlSlot]
-  last: [ControlSlot]
+  item: ItemSlot
+  first: ControlSlot
+  prev: ControlSlot
+  next: ControlSlot
+  last: ControlSlot
 }
 
 export const makeVPaginationProps = propsFactory({
@@ -128,7 +128,7 @@ export const makeVPaginationProps = propsFactory({
   ...makeTagProps({ tag: 'nav' }),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'text' } as const),
-}, 'v-pagination')
+}, 'VPagination')
 
 export const VPagination = genericComponent<VPaginationSlots>()({
   name: 'VPagination',

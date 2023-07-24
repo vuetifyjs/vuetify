@@ -204,13 +204,33 @@ function endOfMonth (date: Date) {
   return new Date(date.getFullYear(), date.getMonth() + 1, 0)
 }
 
+function formatYyyyMmDd (value: string): string {
+  const formattedValue = value.split('-')
+    .map(d => d.padStart(2, '0'))
+    .join('-')
+
+  const offsetMin = (new Date().getTimezoneOffset() / -60)
+  const offsetSign = offsetMin < 0 ? '-' : '+'
+  const offsetValue = Math.abs(offsetMin).toString().padStart(2, '0')
+
+  return `${formattedValue}T00:00:00.000${offsetSign}${offsetValue}:00`
+}
+
+const _YYYMMDD = /([12]\d{3}-([1-9]|0[1-9]|1[0-2])-([1-9]|0[1-9]|[12]\d|3[01]))/
+
 function date (value?: any): Date | null {
   if (value == null) return new Date()
 
   if (value instanceof Date) return value
 
   if (typeof value === 'string') {
-    const parsed = Date.parse(value)
+    let parsed
+
+    if (_YYYMMDD.test(value)) {
+      parsed = Date.parse(formatYyyyMmDd(value))
+    } else {
+      parsed = Date.parse(value)
+    }
 
     if (!isNaN(parsed)) return new Date(parsed)
   }
@@ -239,7 +259,7 @@ function format (value: Date, formatString: string, locale: string): string {
       options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }
       break
     case 'normalDateWithWeekday':
-      options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }
+      options = { weekday: 'short', day: 'numeric', month: 'short' }
       break
     case 'keyboardDate':
       options = {}
@@ -285,32 +305,6 @@ function startOfYear (date: Date) {
 }
 function endOfYear (date: Date) {
   return new Date(date.getFullYear(), 11, 31)
-}
-
-function getMondayOfFirstWeekOfYear (year: number) {
-  return new Date(year, 0, 1)
-}
-
-// https://stackoverflow.com/questions/274861/how-do-i-calculate-the-week-number-given-a-date/275024#275024
-export function getWeek (date: Date) {
-  let year = date.getFullYear()
-  let d1w1 = getMondayOfFirstWeekOfYear(year)
-
-  if (date < d1w1) {
-    year = year - 1
-    d1w1 = getMondayOfFirstWeekOfYear(year)
-  } else {
-    const tv = getMondayOfFirstWeekOfYear(year + 1)
-    if (date >= tv) {
-      year = year + 1
-      d1w1 = tv
-    }
-  }
-
-  const diffTime = Math.abs(date.getTime() - d1w1.getTime())
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-
-  return Math.floor(diffDays / 7) + 1
 }
 
 function isWithinRange (date: Date, range: [Date, Date]) {
@@ -374,6 +368,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return date(value)
   }
 
+  toJsDate (date: Date) {
+    return date
+  }
+
   addDays (date: Date, amount: number) {
     return addDays(date, amount)
   }
@@ -432,10 +430,6 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   getDiff (date: Date, comparing: Date | string, unit?: string) {
     return getDiff(date, comparing, unit)
-  }
-
-  getWeek (date: Date) {
-    return getWeek(date)
   }
 
   getWeekdays () {

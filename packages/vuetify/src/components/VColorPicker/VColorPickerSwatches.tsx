@@ -22,8 +22,8 @@ import {
 import colors from '@/util/colors'
 
 // Types
-import type { Color, HSV } from '@/util'
 import type { DeepReadonly, PropType } from 'vue'
+import type { Color, HSV } from '@/util'
 
 export const makeVColorPickerSwatchesProps = propsFactory({
   swatches: {
@@ -35,7 +35,7 @@ export const makeVColorPickerSwatchesProps = propsFactory({
   maxHeight: [Number, String],
 
   ...makeComponentProps(),
-}, 'v-color-picker-swatches')
+}, 'VColorPickerSwatches')
 
 function parseDefaultColors (colors: Record<string, Record<string, string>>) {
   return Object.keys(colors).map(key => {

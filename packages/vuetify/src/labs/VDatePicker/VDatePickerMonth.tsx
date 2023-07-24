@@ -5,41 +5,36 @@ import './VDatePickerMonth.sass'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
-import { useBackgroundColor } from '@/composables/color'
 import { useDatePicker } from './composables'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, omit } from '@/util'
+import { genericComponent, omit, propsFactory } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import { getWeek, toIso } from '../date/date'
+import { dateEmits, makeDateProps } from '../VDateInput/composables'
 import { useDate } from '@/labs/date'
-import { dateEmits, makeDateProps } from '../VDateField/composables'
 
-export const VDatePickerMonth = defineComponent({
+export const makeVDatePickerMonthProps = propsFactory({
+  color: String,
+  showAdjacentMonths: Boolean,
+  hideWeekdays: Boolean,
+  showWeek: Boolean,
+  hoverDate: null,
+  multiple: Boolean,
+  side: {
+    type: String,
+  },
+
+  ...omit(makeDateProps(), ['inputMode', 'viewMode']),
+}, 'VDatePickerMonth')
+
+export const VDatePickerMonth = genericComponent()({
   name: 'VDatePickerMonth',
 
-  props: {
-    color: {
-      type: String,
-      default: 'primary',
-    },
-    hideAdjacentMonths: Boolean,
-    hideWeekdays: Boolean,
-    showWeek: Boolean,
-    range: {
-      default: false,
-      type: [String, Boolean] as PropType<'start' | 'end' | boolean>,
-      validator: (v: any) => typeof v === 'boolean' || ['start', 'end'].includes(v),
-    },
-    hoverDate: null,
-    multiple: Boolean,
-    side: {
-      type: String,
-    },
-    ...omit(makeDateProps(), ['inputMode', 'viewMode']),
-  },
+  props: makeVDatePickerMonthProps({ color: 'surface-variant' }),
 
   emits: {
     ...omit(dateEmits, ['update:inputMode', 'update:viewMode']),
@@ -84,7 +79,7 @@ export const VDatePickerMonth = defineComponent({
       // Make sure there's always 6 weeks in month (6 * 7 days)
       // But only do it if we're not hiding adjacent months?
       const daysInMonth = 6 * 7
-      if (days.length < daysInMonth && !props.hideAdjacentMonths) {
+      if (days.length < daysInMonth && props.showAdjacentMonths) {
         const lastDay = days[days.length - 1]
 
         let week = []
@@ -119,6 +114,7 @@ export const VDatePickerMonth = defineComponent({
 
         return {
           date,
+          isoDate: toIso(adapter, date),
           formatted: adapter.format(date, 'keyboardDate'),
           year: adapter.getYear(date),
           month: adapter.getMonth(date),
@@ -129,10 +125,10 @@ export const VDatePickerMonth = defineComponent({
           isEnd,
           isToday: adapter.isSameDay(date, today),
           isAdjacent,
-          isHidden: isAdjacent && props.hideAdjacentMonths,
+          isHidden: isAdjacent && !props.showAdjacentMonths,
           inRange: isRange &&
             !isSame &&
-            (isStart || (validDates.length === 2 && adapter.isWithinRange(date, validDates as [any, any]))),
+            (isStart || isEnd || (validDates.length === 2 && adapter.isWithinRange(date, validDates as [any, any]))),
           // isHovered: props.hoverDate === date,
           // inHover: hoverRange.value && isWithinRange(date, hoverRange.value),
           isHovered: false,
@@ -144,7 +140,7 @@ export const VDatePickerMonth = defineComponent({
 
     const weeks = computed(() => {
       return weeksInMonth.value.map(week => {
-        return adapter.getWeek(week[0])
+        return getWeek(adapter, week[0])
       })
     })
 
@@ -301,7 +297,7 @@ export const VDatePickerMonth = defineComponent({
                 'v-date-picker-month__day',
                 'v-date-picker-month__weekday',
               ]}
-            >{ weekDay }</div>
+            >{ weekDay.charAt(0) }</div>
           ))}
 
           { daysInMonth.value.map((item, index) => (
@@ -319,7 +315,7 @@ export const VDatePickerMonth = defineComponent({
                   'v-date-picker-month__day--hovered': item.isHovered,
                 },
               ]}
-              data-v-date={ !item.isHidden ? item.formatted : undefined }
+              data-v-date={ !item.isHidden ? item.isoDate : undefined }
             >
               { item.inRange && (
                 <div
@@ -339,12 +335,13 @@ export const VDatePickerMonth = defineComponent({
                 />
               )}
 
-              { (!props.hideAdjacentMonths || (props.hideAdjacentMonths && !item.isAdjacent)) && (
+              { (props.showAdjacentMonths || !item.isAdjacent) && (
                 <VBtn
                   icon
                   ripple={ false } /* ripple not working correctly since we preventDefault in touchend */
                   variant={ (item.isToday || item.isHovered) && !item.isSelected ? 'outlined' : 'flat' }
-                  color={ item.isSelected ? props.color : (item.isToday || item.isHovered) ? undefined : 'transparent' }
+                  active={ item.isSelected }
+                  color={ item.isSelected || item.isToday ? props.color : item.isHovered ? undefined : 'transparent' }
                 >
                   { item.localized }
                 </VBtn>
@@ -356,3 +353,5 @@ export const VDatePickerMonth = defineComponent({
     )
   },
 })
+
+export type VDatePickerMonth = InstanceType<typeof VDatePickerMonth>
