@@ -9,13 +9,15 @@
   min-height: 0
   // Themed
   background-color: #fff
+
+.v-calendar__container
   border-top: 1px solid #e0e0e0
   border-left: 1px solid #e0e0e0
+  border-right: 1px solid #e0e0e0
 
 .v-calendar-weekly__head
   display: flex
   user-select: none
-  border-bottom: 1px solid #e0e0e0
 
 .v-calendar-weekly__head-weekday
   flex: 1 0 20px
@@ -30,6 +32,9 @@
   // Themed
   border-right: 1px solid #e0e0e0
 
+  &:last-child
+    border-right: none
+
 .v-calendar-weekly__head-weeknumber
   position: relative
   flex: 0 0 $calendar-weekly-weeknumber-flex-basis
@@ -41,6 +46,45 @@
   // https://github.com/vuetifyjs/vuetify/issues/8319
   min-height: 0
 
+.v-calendar-month__days
+  display: grid
+  grid-row-gap: 4px
+  flex: 1 1
+
+  &.days__0
+    grid-template-columns: 1fr
+    > .v-calendar-month__day
+      border-right: none
+  &.days__1
+    grid-template-columns: 1fr
+    > .v-calendar-month__day
+      border-right: none
+  &.days__2
+    grid-template-columns: 1fr 1fr
+    > .v-calendar-month__day:nth-child(2n)
+      border-right: none
+  &.days__3
+    grid-template-columns: 1fr 1fr 1fr
+    > .v-calendar-month__day:nth-child(3n)
+      border-right: none
+  &.days__4
+    grid-template-columns: 1fr 1fr 1fr 1fr
+    > .v-calendar-month__day:nth-child(4n)
+      border-right: none
+  &.days__5
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr
+    > .v-calendar-month__day:nth-child(5n)
+      border-right: none
+  &.days__6
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
+    > .v-calendar-month__day:nth-child(6n)
+      border-right: none
+  &.days__7
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr
+    > .v-calendar-month__day:nth-child(7n)
+      border-right: none
+
+
 .v-calendar-weekly__weeknumber
   display: flex
   flex: 0 0 $calendar-weekly-weeknumber-flex-basis
@@ -51,48 +95,3 @@
 
   > small
     width: 100% !important
-
-.v-calendar-weekly__day
-  flex: 1
-  width: 0
-  overflow: hidden
-  user-select: none
-  position: relative
-  padding: $calendar-weekly-day-padding
-  // https://github.com/vuetifyjs/vuetify/issues/9058
-  // https://bugzilla.mozilla.org/show_bug.cgi?id=1114904
-  min-width: 0
-  min-height: 100px
-  // Themed
-  border-right: 1px solid #e0e0e0
-  border-bottom: 1px solid #e0e0e0
-  flex: 1 1 auto
-  border-inline-end: 1px solid #e0e0e0
-  text-align: center
-
-  &.v-present
-    .v-calendar-weekly__day-month
-      color: currentColor
-
-.v-calendar-weekly__day-label
-  text-decoration: none
-  user-select: none
-  cursor: pointer
-  box-shadow: none
-  text-align: center
-  margin: $calendar-weekly-day-label-margin
-  padding: .5rem 0
-
-  .v-btn
-    font-size: $calendar-weekly-day-label-font-size
-    text-transform: none !important
-
-.v-calendar-weekly__day-month
-  position: absolute
-  text-decoration: none
-  user-select: none
-  box-shadow: none
-  top: 0
-  left: $calendar-weekly-day-month-left
-  height: $calendar-weekly-day-label-size
-  line-height: $calendar-weekly-day-label-size
