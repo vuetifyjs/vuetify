@@ -174,8 +174,8 @@ export const VStepper = genericComponent<VStepperSlots>()({
               <VStepperActions
                 key="stepper-actions"
                 { ...stepperActionProps }
-                onClick:back={ prev }
-                onClick:continue={ next }
+                onClick:prev={ prev }
+                onClick:next={ next }
               />
             )
           )}
