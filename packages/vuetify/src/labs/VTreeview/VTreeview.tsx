@@ -20,7 +20,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { computed, ref, shallowRef, toRef } from 'vue'
+import { computed, onMounted, ref, shallowRef, toRef } from 'vue'
 import { focusChild, genericComponent, getPropertyFromItem, pick, propsFactory, useRender } from '@/util'
 
 // Types
@@ -28,6 +28,7 @@ import { VTreeviewChildrenSlots } from "./VTreeviewChildren"
 import type { ItemProps, ListItem } from '@/composables/list-items'
 import { IconValue } from '@/composables/icons'
 import type { GenericProps } from '@/util'
+import type { PropType } from 'vue'
 
 export interface InternalListItem<T = any> extends ListItem<T> {
   disabled?: true | false
@@ -107,6 +108,10 @@ export const makeVTreeviewProps = propsFactory({
     default: '$checkboxOn',
   },
   openOnClick: Boolean,
+  openOnMount: {
+    type: String as PropType<'all' | 'root' | undefined>,
+    validator: (v: any) => !v || ['all', 'root'].includes(v),
+  },
   showSelectIcon: Boolean,
   selectable: Boolean,
   selectedClass: String,
@@ -153,12 +158,27 @@ export const VTreeview = genericComponent<new <T>(
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const { open, select } = useNested(props)
+    const { open, select, parents} = useNested(props)
     const selectedColor = toRef(props, 'selectedColor')
     const baseColor = toRef(props, 'baseColor')
     const color = toRef(props, 'color')
 
     createList()
+
+    onMounted(() => {
+      console.log(parents.value);
+      if (props.openOnMount === 'root') {
+        parents.value.forEach(parent => {
+          if (!parents.value.has(parent)) {
+            open(parent, true)
+          }
+        })
+      } else if (props.openOnMount === 'all') {
+        parents.value.forEach(parent => {
+          open(parent, true)
+        })
+      }
+    })
 
     provideDefaults({
       VTreeviewGroup: {
