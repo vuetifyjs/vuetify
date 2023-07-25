@@ -5,25 +5,51 @@
     :name="name"
     :options="options"
   >
-    <v-stepper v-bind="props" v-model="step" :items="undefined">
-      <v-stepper-header>
-        <v-stepper-item title="Step 1"></v-stepper-item>
+    <v-stepper v-bind="props" v-model="step">
+      <template v-slot:window-item.1>
+        <v-card title="Step One" flat min-height="200">
+          <template v-slot:text>
+            <div @dblclick="onDblClick" @blur="onBlur">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
+            </div>
+          </template>
+        </v-card>
+      </template>
 
-        <v-divider></v-divider>
+      <template v-slot:window-item.2>
+        <v-card title="Step Two" flat min-height="200">
+          <template v-slot:text>
+            <div @dblclick="onDblClick" @blur="onBlur">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus!
+            </div>
+          </template>
+        </v-card>
+      </template>
 
-        <v-stepper-item title="Step 2"></v-stepper-item>
-      </v-stepper-header>
+      <template v-slot:window-item.3>
+        <v-card title="Step Three" flat min-height="200">
+          <template v-slot:text>
+            <div @dblclick="onDblClick" @blur="onBlur">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
 
-      <v-stepper-window v-model="step">
-        <v-stepper-window-item class="pa-4 text-center">
-          Step 1
-        </v-stepper-window-item>
-
-        <v-stepper-window-item class="pa-4 text-center">
-          Step 2
-        </v-stepper-window-item>
-      </v-stepper-window>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </div>
+          </template>
+        </v-card>
+      </template>
     </v-stepper>
+
+    <template v-slot:configuration>
+      <v-text-field v-model="prev" label="Previous text"></v-text-field>
+
+      <v-text-field v-model="next" label="Next text"></v-text-field>
+
+      <v-checkbox v-model="showActions" label="Show Actions"></v-checkbox>
+
+      <v-checkbox v-model="editable" label="Editable"></v-checkbox>
+
+      <v-checkbox v-model="altLabels" label="Alt Labels"></v-checkbox>
+    </template>
   </usage-example>
 </template>
 
@@ -36,21 +62,49 @@
   const model = ref('default')
   const options = []
   const step = ref(1)
+  const altLabels = ref(false)
+  const editable = ref(false)
+  const showActions = ref(true)
+  const prev = ref('$vuetify.stepper.prev')
+  const next = ref('$vuetify.stepper.next')
+
+  function onDblClick (e) {
+    e.target.contentEditable = true
+  }
+
+  function onBlur (e) {
+    e.target.contentEditable = false
+  }
 
   const props = computed(() => {
     return {
-      // editable: true,
+      'alt-labels': altLabels.value || undefined,
+      editable: editable.value || undefined,
+      'prev-text': prev.value.startsWith('$vuetify') ? undefined : prev.value,
+      'next-text': next.value.startsWith('$vuetify') ? undefined : next.value,
       items: [
-        'Ad unit details',
-        'Ad sizes',
-        'Ad templates',
+        'Step 1',
+        'Step 2',
+        'Step 3',
       ],
-      'show-actions': true,
+      'show-actions': showActions.value,
     }
   })
 
   const slots = computed(() => {
-    return ''
+    return `
+  <template v-slot:window-item.1>
+    <v-card title="Step One" flat min-height="200">...</v-card>
+  </template>
+
+  <template v-slot:window-item.2>
+    <v-card title="Step Two" flat min-height="200">...</v-card>
+  </template>
+
+  <template v-slot:window-item.3>
+    <v-card title="Step Three" flat min-height="200">...</v-card>
+  </template>
+`
   })
 
   const code = computed(() => {

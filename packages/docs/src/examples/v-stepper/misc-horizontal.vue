@@ -1,47 +1,120 @@
 <template>
-  <v-stepper model-value="1" show-actions>
-    <v-stepper-header>
-      <v-stepper-item value="1">
-        Select campaign settings
-      </v-stepper-item>
+  <v-stepper
+    v-model="step"
+    :items="items"
+    show-actions
+  >
+    <template v-slot:window-item.1>
+      <h3 class="text-h6">Order</h3>
 
-      <v-divider></v-divider>
+      <br>
 
-      <v-stepper-item value="2">
-        Create an ad group
-      </v-stepper-item>
+      <v-sheet border>
+        <v-table>
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th class="text-end">Quantity</th>
+              <th class="text-end">Price</th>
+            </tr>
+          </thead>
 
-      <v-divider></v-divider>
+          <tbody>
+            <tr v-for="(product, index) in products" :key="index">
+              <td v-text="product.name"></td>
+              <td class="text-end" v-text="product.quantity"></td>
+              <td class="text-end" v-text="product.quantity * product.price"></td>
+            </tr>
 
-      <v-stepper-item value="3">
-        Create an ad
-      </v-stepper-item>
-    </v-stepper-header>
+            <tr>
+              <th>Total</th>
+              <th></th>
+              <th class="text-end">
+                ${{ subtotal }}
+              </th>
+            </tr>
+          </tbody>
+        </v-table>
+      </v-sheet>
+    </template>
 
-    <v-stepper-window>
-      <v-stepper-window-item value="1">
-        <v-card
-          color="grey-lighten-1"
-          height="250"
-          rounded="0"
-        ></v-card>
-      </v-stepper-window-item>
+    <template v-slot:window-item.2>
+      <h3 class="text-h6">Shipping</h3>
 
-      <v-stepper-window-item value="2">
-        <v-card
-          color="grey-lighten-1"
-          height="300"
-          rounded="0"
-        ></v-card>
-      </v-stepper-window-item>
+      <br>
 
-      <v-stepper-window-item value="3">
-        <v-card
-          color="grey-lighten-1"
-          height="150"
-          rounded="0"
-        ></v-card>
-      </v-stepper-window-item>
-    </v-stepper-window>
+      <v-radio-group v-model="shipping" label="Delivery Method">
+        <v-radio label="Standard Shipping" value="5"></v-radio>
+        <v-radio label="Priority Shipping" value="10"></v-radio>
+        <v-radio label="Express Shipping" value="15"></v-radio>
+      </v-radio-group>
+    </template>
+
+    <template v-slot:window-item.3>
+      <h3 class="text-h6">Confirm</h3>
+
+      <br>
+
+      <v-sheet border>
+        <v-table>
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th class="text-end">Quantity</th>
+              <th class="text-end">Price</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr v-for="(product, index) in products" :key="index">
+              <td v-text="product.name"></td>
+              <td class="text-end" v-text="product.quantity"></td>
+              <td class="text-end" v-text="product.quantity * product.price"></td>
+            </tr>
+
+            <tr>
+              <td>Shipping</td>
+              <td></td>
+              <td class="text-end" v-text="shipping"></td>
+            </tr>
+
+            <tr>
+              <th>Total</th>
+              <th></th>
+              <th class="text-end">
+                ${{ total }}
+              </th>
+            </tr>
+          </tbody>
+        </v-table>
+      </v-sheet>
+    </template>
   </v-stepper>
 </template>
+
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const shipping = ref(0)
+  const step = ref(1)
+  const subtotal = computed(() => products.reduce((acc, product) => acc + product.quantity * product.price, 0))
+  const total = computed(() => subtotal.value + Number(shipping.value ?? 0))
+
+  const items = [
+    'Review Order',
+    'Select Shipping',
+    'Submit',
+  ]
+  const products = [
+    {
+      name: 'Product 1',
+      price: 10,
+      quantity: 2,
+    },
+    {
+      name: 'Product 2',
+      price: 15,
+      quantity: 10,
+    },
+  ]
+</script>
