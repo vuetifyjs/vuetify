@@ -15,7 +15,7 @@ export const makeDateProps = propsFactory({
   },
   displayDate: {
     type: null as unknown as PropType<any>,
-    default: new Date(),
+    default: null,
   },
   inputMode: {
     type: String as PropType<'calendar' | 'keyboard'>,
@@ -29,14 +29,14 @@ export const makeDateProps = propsFactory({
 }, 'date')
 
 export const dateEmits = {
-  'update:modelValue': (date: any[]) => true,
+  'update:modelValue': (date: readonly any[]) => true,
   'update:displayDate': (date: any) => true,
   'update:focused': (focused: boolean) => true,
   'update:inputMode': (inputMode: 'calendar' | 'keyboard') => true,
   'update:viewMode': (viewMode: 'month' | 'year') => true,
 }
 
-type DateInputProps = {
+export type DateInputProps = {
   modelValue?: any | any[]
   'onUpdate:modelValue': ((value: any | any[]) => void) | undefined
   displayDate?: any

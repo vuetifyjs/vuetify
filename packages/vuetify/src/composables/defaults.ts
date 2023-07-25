@@ -136,6 +136,8 @@ export function internalUseDefaults (
   return { props: _props, provideSubDefaults }
 }
 
+export function useDefaults<T extends Record<string, any>> (props: T, name?: string): T
+export function useDefaults (props?: undefined, name?: string): Record<string, any>
 export function useDefaults (
   props: Record<string, any> = {},
   name?: string,

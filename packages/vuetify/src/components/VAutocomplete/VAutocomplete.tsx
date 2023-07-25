@@ -278,6 +278,15 @@ export const VAutocomplete = genericComponent<new <
       search.value = (e.target as HTMLInputElement).value
     }
 
+    function onChange (e: Event) {
+      if (vTextFieldRef.value?.matches(':autofill') || vTextFieldRef.value?.matches(':-webkit-autofill')) {
+        const item = items.value.find(item => item.title === (e.target as HTMLInputElement).value)
+        if (item) {
+          select(item)
+        }
+      }
+    }
+
     function onAfterLeave () {
       if (isFocused.value) {
         isPristine.value = true
@@ -378,6 +387,7 @@ export const VAutocomplete = genericComponent<new <
           validationValue={ model.externalValue }
           dirty={ isDirty }
           onInput={ onInput }
+          onChange={ onChange }
           class={[
             'v-autocomplete',
             `v-autocomplete--${props.multiple ? 'multiple' : 'single'}`,

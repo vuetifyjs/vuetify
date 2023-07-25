@@ -1,5 +1,16 @@
 <template>
-  <v-sheet border="t-lg primary opacity-100" elevation="2" max-width="900" rounded>
+  <v-sheet
+    border="s e b"
+    class="overflow-hidden"
+    max-width="900"
+    rounded
+  >
+    <v-divider
+      class="border-opacity-100"
+      color="primary"
+      thickness="4"
+    />
+
     <v-container class="pt-9 px-5" fluid>
       <v-row>
         <template v-for="(item, i) in items" :key="i">
@@ -45,7 +56,7 @@
       </v-row>
     </v-container>
 
-    <div class="px-4 pb-2 text-medium-emphasis text-caption">
+    <div class="px-4 pb-3 text-medium-emphasis text-caption">
       *Cost for initial project review. Upgrade quote provided separately.
     </div>
   </v-sheet>
@@ -81,7 +92,7 @@
           text: 'Get help setting up unit tests that ensure your application continues to run as expected',
         },
       ],
-      href: 'https://l.kintell.com/M9y7D7',
+      href: 'https://calendly.com/vuetify/vuetify-direct-support',
     },
     {
       name: 'Project Upgrade',
@@ -106,7 +117,7 @@
           text: "Feel secure knowing that you're working with the team that built Vuetify",
         },
       ],
-      href: 'https://l.kintell.com/fp7BQm',
+      href: 'https://calendly.com/vuetify/project-upgrade-consultation',
     },
     {
       name: 'SLA',
@@ -131,7 +142,7 @@
           text: 'Get priority on reported or identified Vuetify GitHub issues and bugs',
         },
       ],
-      href: 'https://l.kintell.com/E7El3W',
+      href: 'https://calendly.com/vuetify/sla-consultation',
     },
   ]
 

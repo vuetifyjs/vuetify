@@ -46,6 +46,7 @@ export function transformItem (
 
   return {
     type: 'item',
+    key: props.returnObject ? getPropertyFromItem(item, props.itemValue) : value,
     index,
     value,
     selectable,

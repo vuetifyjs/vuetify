@@ -1,3 +1,5 @@
+@use '../../styles/tools'
+
 .v-date-picker-controls
   display: flex
   align-items: center
@@ -13,3 +15,9 @@
 
 .v-date-picker-controls__date
   margin-right: 4px
+
+.v-date-picker-controls__month
+  display: flex
+
+  @include tools.rtl()
+    flex-direction: row-reverse

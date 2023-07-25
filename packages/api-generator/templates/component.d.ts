@@ -53,9 +53,11 @@ type ExtractExposed<T> = T extends (...args: any[]) => infer R
       ? never
       : R extends void
         ? never
-        : R extends object
-          ? RemoveIndex<R>
-          : never
+        : R extends HTMLElement
+          ? never
+          : R extends object
+            ? RemoveIndex<R>
+            : never
   : never
 
 export type ComponentExposed = ExtractExposed<__component__['$options']['setup']>

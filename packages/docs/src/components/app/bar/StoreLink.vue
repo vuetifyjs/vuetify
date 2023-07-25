@@ -2,7 +2,7 @@
   <app-tooltip-btn
     color="medium-emphasis"
     href="https://store.vuetifyjs.com/?utm_source=vuetifyjs.com&utm_medium=toolbar"
-    icon="mdi-shopping-outline"
+    icon="mdi-cart-outline"
     path="store"
     rel="noopener"
     target="_blank"
