@@ -15,7 +15,6 @@ import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 // Composables
 import { createDatePicker } from './composables'
 import { useLocale } from '@/composables/locale'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { useDate } from '@/labs/date'
 
 // Utilities
@@ -80,14 +79,9 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
     const adapter = useDate()
     const { t } = useLocale()
 
-    createDatePicker(props)
+    const { model, displayDate, viewMode, inputMode } = createDatePicker(props)
 
-    const model = ref<any[]>(props.modelValue ?? [])
     const isReversing = ref(false)
-
-    const displayDate = useProxiedModel(props, 'displayDate', props.displayDate)
-    const inputMode = useProxiedModel(props, 'inputMode', props.inputMode)
-    const viewMode = useProxiedModel(props, 'viewMode', props.viewMode)
 
     const inputModel = computed(() => model.value.length ? adapter.format(model.value[0], 'keyboardDate') : '')
     const title = computed(() => t(props.title))
@@ -144,6 +138,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
           ]}
           style={ props.style }
           title={ title.value }
+          width={ props.showWeek ? 408 : 360 }
           v-slots={{
             header: () => slots.header?.(headerSlotProps.value) ?? (
               <VDatePickerHeader

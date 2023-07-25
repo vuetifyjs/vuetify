@@ -2,7 +2,7 @@
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { inject, watch } from 'vue'
+import { inject, reactive, watch } from 'vue'
 import { mergeDeep, propsFactory } from '@/util'
 
 // Adapters
@@ -100,10 +100,10 @@ export function useDate () {
 
   if (!date) throw new Error('[Vuetify] Could not find injected date')
 
-  const instance = typeof date.adapter === 'function'
+  const instance = reactive(typeof date.adapter === 'function'
     // eslint-disable-next-line new-cap
     ? new date.adapter({ locale: date.locale?.[locale.current.value] ?? locale.current.value })
-    : date.adapter
+    : date.adapter)
 
   watch(locale.current, value => {
     const newLocale = date.locale ? date.locale[value] : value

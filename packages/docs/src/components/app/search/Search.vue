@@ -191,6 +191,8 @@
 
       model.value = true
     } else if (model.value && ['ArrowDown', 'ArrowUp'].includes(e.key)) {
+      e.preventDefault()
+
       list.value?.rootEl?.focus()
     }
   }

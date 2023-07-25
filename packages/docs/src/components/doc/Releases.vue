@@ -19,7 +19,9 @@
         <div class="d-flex align-center">
           <div class="me-1">{{ search?.tag_name }}</div>
 
-          &mdash;
+          <template v-if="search?.reactions?.total_count">
+            &mdash;
+          </template>
 
           <template v-for="(value, key) in reactions" :key="key">
             <template v-if="search?.reactions?.[key]">
@@ -37,7 +39,11 @@
         <v-list-item
           v-if="item?.title"
           v-bind="itemProps"
-        />
+        >
+          <template v-if="item.raw?.reactions" #append>
+            {{ genEmoji(item.raw.reactions.total_count) }}
+          </template>
+        </v-list-item>
 
         <template v-else>
           <v-divider />
@@ -211,6 +217,14 @@
 
     autocomplete.value?.blur()
   })
+
+  function genEmoji (count: number) {
+    switch (true) {
+      case (count >= 100): return '💫'
+      case (count > 50): return '🔥'
+      default: return undefined
+    }
+  }
 </script>
 
 <style lang="sass">

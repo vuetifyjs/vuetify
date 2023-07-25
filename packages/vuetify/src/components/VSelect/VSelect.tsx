@@ -174,7 +174,7 @@ export const VSelect = genericComponent<new <
       menu.value = !menu.value
     }
     function onKeydown (e: KeyboardEvent) {
-      if (props.readonly || form?.isReadonly.value) return
+      if (!e.key || props.readonly || form?.isReadonly.value) return
 
       if (['Enter', ' ', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) {
         e.preventDefault()
@@ -246,6 +246,17 @@ export const VSelect = genericComponent<new <
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
     }
+    function onModelUpdate (v: any) {
+      if (v == null) model.value = []
+      else if (vTextFieldRef.value?.matches(':autofill') || vTextFieldRef.value?.matches(':-webkit-autofill')) {
+        const item = items.value.find(item => item.title === v)
+        if (item) {
+          select(item)
+        }
+      } else if (vTextFieldRef.value) {
+        vTextFieldRef.value.value = ''
+      }
+    }
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
@@ -269,7 +280,7 @@ export const VSelect = genericComponent<new <
           ref={ vTextFieldRef }
           { ...textFieldProps }
           modelValue={ model.value.map(v => v.props.value).join(', ') }
-          onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          onUpdate:modelValue={ onModelUpdate }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
           dirty={ isDirty }
@@ -285,7 +296,7 @@ export const VSelect = genericComponent<new <
             props.class,
           ]}
           style={ props.style }
-          readonly
+          inputmode="none"
           placeholder={ placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }

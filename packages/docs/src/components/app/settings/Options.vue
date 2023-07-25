@@ -1,53 +1,24 @@
 <template>
-  <app-link-list-item
-    :href="`https://github.com/vuetifyjs/vuetify/releases/tag/v${version}`"
-    :title="`v${version}`"
-    append-icon="mdi-open-in-new"
-    label="Latest release"
-    prepend-icon="mdi-github"
-    rel="noopener noreferrer"
-    target="_blank"
+  <v-switch
+    v-model="user.quickbar"
+    class="ps-3 flex-0-0"
+    inset
+    color="success"
+    label="Enable Quickbar"
+    messages="The quickbar is a small toolbar that appears in the navigation drawer on the bottom left of the screen. It provides quick access to common actions and settings."
+    density="compact"
   />
 
-  <app-link-list-item
-    :href="`https://github.com/vuetifyjs/vuetify/commit/${commits.latest?.sha}`"
-    :title="commits.latest?.sha.slice(0, 7)"
-    append-icon="mdi-open-in-new"
-    label="Latest commit"
-    prepend-icon="mdi-source-commit"
-    rel="noopener noreferrer"
-    target="_blank"
-  />
+  <br>
 
-  <documentation-build />
-
-  <v-divider class="mt-4" />
-
-  <v-footer
-    app
-    absolute
-    class="text-caption justify-end text-medium-emphasis"
-    height="47"
-  >
-    {{ t('copyright') }} &copy; 2016-{{ (new Date()).getFullYear() }} Vuetify, LLC
-  </v-footer>
+  <developer-mode />
 </template>
 
 <script setup>
   // Components
-  import DocumentationBuild from '@/components/app/settings/DocumentationBuild.vue'
+  import DeveloperMode from './DeveloperMode.vue'
 
-  // Composables
-  import { useI18n } from 'vue-i18n'
+  import { useUserStore } from '@/store/user'
 
-  // Utilities
-  import { version } from 'vuetify'
-
-  // Stores
-  import { useCommitsStore } from '@/store/commits'
-
-  const { t } = useI18n()
-  const commits = useCommitsStore()
-
-  commits.fetch()
+  const user = useUserStore()
 </script>

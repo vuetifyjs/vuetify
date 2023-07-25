@@ -217,7 +217,7 @@ describe('VCombobox', () => {
         .should('have.length', 2)
       cy.get('input').clear()
       cy.get('input').type('Item 3')
-      cy.get('input').should('have.length', 1)
+      cy.get('.v-list-item').should('have.length', 0)
     })
 
     it('should filter items when using multiple', () => {
