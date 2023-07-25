@@ -10,7 +10,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-export const makeVStepperActions = propsFactory({
+export const makeVStepperActionsProps = propsFactory({
   color: String,
   disable: {
     type: [Boolean, String] as PropType<boolean | 'back' | 'continue'>,
@@ -29,7 +29,7 @@ export const makeVStepperActions = propsFactory({
 export const VStepperActions = genericComponent()({
   name: 'VStepperActions',
 
-  props: makeVStepperActions(),
+  props: makeVStepperActionsProps(),
 
   emits: {
     'click:prev': () => true,

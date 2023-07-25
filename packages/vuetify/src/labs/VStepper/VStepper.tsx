@@ -2,7 +2,7 @@
 import './VStepper.sass'
 
 // Components
-import { VStepperActions } from './VStepperActions'
+import { makeVStepperActionsProps, VStepperActions } from './VStepperActions'
 import { VStepperHeader } from './VStepperHeader'
 import { VStepperItem } from './VStepperItem'
 import { VStepperWindow } from './VStepperWindow'
@@ -43,7 +43,6 @@ export type VStepperSlots = {
 
 export const makeVStepperProps = propsFactory({
   altLabels: Boolean,
-  color: String,
   bgColor: String,
   editable: Boolean,
   items: {
@@ -62,20 +61,13 @@ export const makeVStepperProps = propsFactory({
   nonLinear: Boolean,
   flat: Boolean,
   showActions: Boolean,
-  backText: {
-    type: String,
-    default: 'Back',
-  },
-  continueText: {
-    type: String,
-    default: 'Continue',
-  },
 
   ...makeGroupProps({
     mandatory: 'force' as const,
     selectedClass: 'v-stepper-item--selected',
   }),
   ...omit(makeVSheetProps(), ['color']),
+  ...makeVStepperActionsProps(),
 }, 'VStepper')
 
 export const VStepper = genericComponent<VStepperSlots>()({
@@ -106,6 +98,8 @@ export const VStepper = genericComponent<VStepperSlots>()({
     provideDefaults({
       VStepperItem: {
         editable: computed(() => props.editable),
+        prevText: computed(() => props.prevText),
+        nextText: computed(() => props.nextText),
       },
     })
 
@@ -115,7 +109,7 @@ export const VStepper = genericComponent<VStepperSlots>()({
 
       const hasHeader = !!(slots.header || props.items.length)
       const hasWindow = props.items.length > 0
-      const hasActions = !!(props.showActions || hasWindow || slots.actions)
+      const hasActions = props.showActions && !!(hasWindow || slots.actions)
 
       return (
         <VSheet
