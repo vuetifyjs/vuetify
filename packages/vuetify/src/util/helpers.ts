@@ -238,6 +238,17 @@ export function omit<
   return clone
 }
 
+export function only<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, include: U[]): Pick<T, U> {
+  const clone = {} as T
+
+  include.forEach(prop => clone[prop] = obj[prop])
+
+  return clone
+}
+
 /**
  * Filter attributes that should be applied to
  * the root element of a an input component. Remaining
