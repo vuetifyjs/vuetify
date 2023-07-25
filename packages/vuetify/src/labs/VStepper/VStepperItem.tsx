@@ -36,6 +36,8 @@ export type VStepperItemSlots = {
   subtitle: StepperItemSlot
 }
 
+export type ValidationRule = () => string | boolean
+
 export const makeVStepperItemProps = propsFactory({
   color: String,
   title: String,
@@ -60,6 +62,10 @@ export const makeVStepperItemProps = propsFactory({
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
+  rules: {
+    type: Array as PropType<readonly ValidationRule[]>,
+    default: () => ([]),
+  },
 
   ...makeGroupItemProps(),
 }, 'VStepperItem')
@@ -78,15 +84,14 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
   setup (props, { slots }) {
     const group = useGroupItem(props, VStepperSymbol, true)
     const step = computed(() => group?.value.value ?? props.value)
-    const canEdit = computed(() => {
-      return props.editable
-    })
-    const hasError = computed(() => props.error)
-    const hasCompleted = computed(() => props.complete)
+    const isValid = computed(() => props.rules.every(handler => handler() === true))
+    const canEdit = computed(() => !props.disabled && props.editable)
+    const hasError = computed(() => props.error || !isValid.value)
+    const hasCompleted = computed(() => props.complete || (props.rules.length > 0 && isValid.value))
     const icon = computed(() => {
       if (hasError.value) return props.errorIcon
       if (hasCompleted.value) return props.completeIcon
-      if (canEdit.value) return props.editIcon
+      if (props.editable) return props.editIcon
 
       return props.icon
     })
