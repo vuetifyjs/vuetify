@@ -1,17 +1,42 @@
 {
-  "components/alerts": ["VAlert"],
-  "components/app-bars": ["VAppBar", "VAppBarNavIcon", "VAppBarTitle"],
-  "components/application": ["VApp", "VMain"],
+  "components/alerts": ["VAlert", "VAlertTitle"],
+  "components/app-bars": [
+    "VAppBar",
+    "VAppBarNavIcon",
+    "VAppBarTitle"
+  ],
+  "components/application": [
+    "VApp",
+    "VLayout",
+    "VLayoutItem",
+    "VMain"
+  ],
   "components/aspect-ratios": ["VResponsive"],
   "components/autocompletes": ["VAutocomplete"],
   "components/avatars": ["VAvatar"],
   "components/badges": ["VBadge"],
-  "components/banners": ["VBanner"],
+  "components/banners": [
+    "VBanner",
+    "VBannerActions",
+    "VBannerText"
+  ],
   "components/bottom-navigation": ["VBottomNavigation"],
   "components/bottom-sheets": ["VBottomSheet"],
-  "components/breadcrumbs": ["VBreadcrumbs", "VBreadcrumbsItem"],
-  "components/button-groups": ["VBtn", "VBtnToggle"],
-  "components/buttons": ["VBtn", "VBtnToggle"],
+  "components/breadcrumbs": [
+    "VBreadcrumbs",
+    "VBreadcrumbsDivider",
+    "VBreadcrumbsItem"
+  ],
+  "components/button-groups": [
+    "VBtn",
+    "VBtnGroup",
+    "VBtnToggle"
+  ],
+  "components/buttons": [
+    "VBtn",
+    "VBtnGroup",
+    "VBtnToggle"
+  ],
   "components/calendars": [
     "VCalendar",
     "VCalendarDaily",
@@ -21,6 +46,7 @@
   "components/cards": [
     "VCard",
     "VCardActions",
+    "VCardItem",
     "VCardSubtitle",
     "VCardText",
     "VCardTitle"
@@ -28,12 +54,15 @@
   "components/carousels": ["VCarousel", "VCarouselItem"],
   "components/checkboxes": ["VCheckbox", "VCheckboxBtn"],
   "components/chip-groups": ["VChip", "VChipGroup"],
-  "components/chips": ["VChip"],
+  "components/chips": ["VChip", "VChipGroup"],
   "components/color-pickers": ["VColorPicker"],
   "components/combobox": ["VCombobox"],
   "components/data-iterators": ["VDataIterator", "VDataFooter"],
   "components/data-tables": [
     "VDataTable",
+    "VDataTableFooter",
+    "VDataTableRow",
+    "VDataTableRows",
     "VDataTableServer",
     "VDataTableVirtual"
   ],
@@ -49,7 +78,6 @@
     "VExpansionPanelTitle"
   ],
   "components/file-inputs": ["VFileInput"],
-  "components/floating-action-buttons": ["VBtn", "VSpeedDial"],
   "components/footers": ["VFooter"],
   "components/forms": ["VForm"],
   "components/grids": ["VCol", "VContainer", "VRow", "VSpacer"],
@@ -89,7 +117,7 @@
   "components/sheets": ["VSheet"],
   "components/simple-tables": ["VSimpleTable"],
   "components/skeleton-loaders": ["VSkeletonLoader"],
-  "components/slide-groups": ["VSlideGroup", "VSlideItem"],
+  "components/slide-groups": ["VSlideGroup", "VSlideGroupItem"],
   "components/sliders": ["VRangeSlider", "VSlider"],
   "components/snackbars": ["VSnackbar"],
   "components/sparklines": ["VSparkline"],

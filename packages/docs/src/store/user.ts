@@ -10,11 +10,13 @@ import { reactive, toRefs } from 'vue'
 export type RootState = {
   v: number
   api: 'link-only' | 'inline'
+  dev: boolean
   composition: ('options' | 'composition')
   pwaRefresh: boolean
   theme: string
   mixedTheme: boolean
   direction: 'rtl' | 'ltr'
+  quickbar: boolean
   notifications: {
     read: string[]
     last: {
@@ -32,11 +34,13 @@ export const useUserStore = defineStore('user', () => {
   const state = reactive<RootState>({
     v: 1,
     api: 'link-only',
+    dev: false,
     composition: 'options',
     pwaRefresh: true,
     theme: 'system',
     mixedTheme: true,
     direction: 'ltr',
+    quickbar: true,
     notifications: {
       read: [],
       last: {

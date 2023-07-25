@@ -5,13 +5,14 @@ import './VDateRangePickerHeader.sass'
 import { VBtn } from '../../components/VBtn'
 
 // Composables
+import { makeDateProps } from '../VDateInput/composables'
 import { useBackgroundColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
 import { useDate } from '@/labs/date'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 export const makeVDateRangePickerHeaderProps = propsFactory({
   color: String,
@@ -30,10 +31,8 @@ export const makeVDateRangePickerHeaderProps = propsFactory({
     default: '$close',
   },
   showInputSwitch: Boolean,
-  inputMode: String,
-  modelValue: null,
-  displayDate: null,
   range: null,
+  ...omit(makeDateProps(), ['viewMode', 'format']),
 }, 'VDateRangePickerHeader')
 
 export const VDateRangePickerHeader = genericComponent()({

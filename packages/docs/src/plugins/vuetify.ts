@@ -27,6 +27,11 @@ export function installVuetify ({ app }: ViteSSGContext) {
       ...labs,
     },
     directives,
+    defaults: {
+      global: {
+        eager: false,
+      },
+    },
     locale: {
       locale: 'en',
       messages: {

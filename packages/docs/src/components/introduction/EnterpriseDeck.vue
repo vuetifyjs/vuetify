@@ -1,5 +1,16 @@
 <template>
-  <v-sheet border="t-lg primary opacity-100" elevation="2" max-width="900" rounded>
+  <v-sheet
+    border="s e b"
+    class="overflow-hidden"
+    max-width="900"
+    rounded
+  >
+    <v-divider
+      class="border-opacity-100"
+      color="primary"
+      thickness="4"
+    />
+
     <v-container class="pt-9 px-5" fluid>
       <v-row>
         <template v-for="(item, i) in items" :key="i">
@@ -45,7 +56,7 @@
       </v-row>
     </v-container>
 
-    <div class="px-4 pb-2 text-medium-emphasis text-caption">
+    <div class="px-4 pb-3 text-medium-emphasis text-caption">
       *Cost for initial project review. Upgrade quote provided separately.
     </div>
   </v-sheet>

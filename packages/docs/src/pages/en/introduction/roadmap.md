@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Roadmap
   title: The Vuetify roadmap
@@ -24,6 +23,8 @@ The following releases are currently under development:
 ::: warning
   This is not an exhaustive list and is subject to change at any time without notice
 :::
+
+<promoted slug="vuetify-github-sponsors" />
 
 ### v3.4 (Blackguard)
 
@@ -51,8 +52,6 @@ Information regarding upcoming Labs components is located on the [Labs introduct
 
 The following versions have continued maintenance for backwards compatible fixes, major bugs, and security vulnerabilities. More information is located on the [Long-term support](/introduction/long-term-support/) page.
 
-<promoted slug="vuetify-github-sponsors" />
-
 <promoted slug="vuetify-open-collective" />
 
 ## Released
@@ -63,7 +62,9 @@ The following are the already released **minor** and **major** version updates. 
 
 - **Released:** July 2023
 - **Target Release:** Q2 2023
-- **Support until:** January 2025
+- **Notes:** [v2.7 Release](/getting-started/release-notes/?version=v2.7.0)
+- **LTS Support until:** January 2025
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/59)
 
 ----
 

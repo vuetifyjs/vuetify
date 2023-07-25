@@ -17,16 +17,12 @@ import { ref, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
 import { makeVDateRangePickerHeaderProps, VDateRangePickerHeader } from './VDateRangePickerHeader'
 import { makeVDateRangePickerMonthProps, VDateRangePickerMonth } from './VDateRangePickerMonth'
+import { makeDateProps } from '../VDateInput/composables'
 
 export const makeVDateRangePickerProps = propsFactory({
-  viewMode: {
-    type: String as PropType<'month' | 'years'>,
-    default: 'month',
-  },
-
+  ...makeDateProps(),
   ...makeVPickerProps(),
   ...makeVDateRangePickerHeaderProps(),
   ...makeVDateRangePickerMonthProps(),
@@ -40,7 +36,7 @@ export const VDateRangePicker = genericComponent()({
 
   emits: {
     'update:modelValue': (date: any) => true,
-    'update:viewMode': (mode: 'month' | 'years') => true,
+    'update:viewMode': (mode: 'month' | 'year') => true,
     'update:inputMode': (input: string) => true,
     'update:displayDate': (date: any) => true,
     save: (date: any) => true,

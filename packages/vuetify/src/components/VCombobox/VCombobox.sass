@@ -81,8 +81,8 @@
 
     .v-field--variant-outlined
       input
-        top: calc(50% - var(--v-input-chips-margin-top))
-        transform: translateY(-50%)
+        top: 50%
+        transform: translateY(calc(-50% - (var(--v-input-chips-margin-top) + var(--v-input-chips-margin-bottom))/2))
 
     .v-field--active
       input
