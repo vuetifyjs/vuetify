@@ -11,7 +11,6 @@ type names = 'clear' | 'prepend' | 'append' | 'appendInner' | 'prependInner'
 
 type EventProp<T = (...args: any[]) => any> = T | T[]
 type InputIconProps<T extends names> = {
-  color: string | undefined
   label: string | undefined
 } & {
   [K in `${T}Icon`]: IconValue | undefined
@@ -42,7 +41,6 @@ export function useInputIcon<T extends {}, K extends names = Listeners<T>> (prop
         icon={ props[`${name}Icon`] }
         aria-label={ label }
         onClick={ listener }
-        color={ props.color }
       />
     )
   }

@@ -8,6 +8,7 @@ import { VMessages } from '@/components/VMessages/VMessages'
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { provideDefaults } from '@/composables/defaults'
 import { IconValue } from '@/composables/icons'
 import { useRtl } from '@/composables/locale'
 import { makeValidationProps, useValidation } from '@/composables/validation'
@@ -127,6 +128,12 @@ export const VInput = genericComponent<VInputSlots>()({
         return props.hint
       } else {
         return props.messages
+      }
+    })
+
+    provideDefaults({
+      VIcon: {
+        color: props.color
       }
     })
 
