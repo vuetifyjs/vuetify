@@ -1,6 +1,9 @@
 // Components
 import { VBtn } from '@/components/VBtn/VBtn'
 
+// Composables
+import { useLocale } from '@/composables/locale'
+
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
 
@@ -13,13 +16,13 @@ export const makeVStepperActions = propsFactory({
     type: [Boolean, String] as PropType<boolean | 'back' | 'continue'>,
     default: false,
   },
-  backText: {
+  prevText: {
     type: String,
-    default: 'Back',
+    default: '$vuetify.stepper.prev',
   },
-  continueText: {
+  nextText: {
     type: String,
-    default: 'Continue',
+    default: '$vuetify.stepper.next',
   },
 }, 'VStepperActions')
 
@@ -29,35 +32,36 @@ export const VStepperActions = genericComponent()({
   props: makeVStepperActions(),
 
   emits: {
-    'click:back': () => true,
-    'click:continue': () => true,
+    'click:prev': () => true,
+    'click:next': () => true,
   },
 
   setup (props, { emit, slots }) {
-    function onClickBack () {
-      emit('click:back')
+    const { t } = useLocale()
+    function onClickPrev () {
+      emit('click:prev')
     }
 
-    function onClickContinue () {
-      emit('click:continue')
+    function onClickNext () {
+      emit('click:next')
     }
 
     useRender(() => {
       return (
         <div class="v-stepper-actions">
           <VBtn
-            disabled={['back', true].includes(props.disable)}
-            text={ props.backText }
+            disabled={['prev', true].includes(props.disable)}
+            text={ t(props.prevText) }
             variant="text"
-            onClick={ onClickBack }
+            onClick={ onClickPrev }
           />
 
           <VBtn
-            disabled={['continue', true].includes(props.disable)}
+            disabled={['next', true].includes(props.disable)}
             color={ props.color }
-            text={ props.continueText }
+            text={ t(props.nextText) }
             variant="tonal"
-            onClick={ onClickContinue }
+            onClick={ onClickNext }
           />
         </div>
       )
