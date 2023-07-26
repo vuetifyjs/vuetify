@@ -23,6 +23,22 @@
       @at-root #{selector.append(&, $root)}
         height: $btn-group-height + $modifier
 
+  &--tile
+    @include tools.rounded($btn-group-tile-border-radius)
+
+  &--divided:not(.v-btn-group--vertical)
+    .v-btn:not(:last-child)
+      border-inline-end-width: $btn-group-border-thin-width
+      border-inline-end-style: $btn-group-border-style
+      border-inline-end-color: $btn-group-border-color
+
+  &--divided:is(.v-btn-group--vertical)
+    .v-btn:not(:last-child)
+      border-bottom-width: $btn-group-border-thin-width
+      border-bottom-style: $btn-group-border-style
+      border-bottom-color: $btn-group-border-color
+
+.v-btn-group--horizontal
   .v-btn
     border-radius: 0
     border-color: inherit
@@ -41,11 +57,24 @@
       border-start-end-radius: inherit
       border-end-end-radius: inherit
 
-  &--divided
-    .v-btn:not(:last-child)
-      border-inline-end-width: $btn-group-border-thin-width
-      border-inline-end-style: $btn-group-border-style
-      border-inline-end-color: $btn-group-border-color
+.v-btn-group--vertical
+  flex-direction: column
+  height: auto !important
 
-  &--tile
-    @include tools.rounded($btn-group-tile-border-radius)
+  .v-btn
+    border-radius: 0
+    border-color: inherit
+
+    &:not(:last-child)
+      border-bottom: none
+
+    &:not(:first-child)
+      border-top: none
+
+    &:first-child
+      border-start-start-radius: inherit
+      border-start-end-radius: inherit
+
+    &:last-child
+      border-end-start-radius: inherit
+      border-end-end-radius: inherit
