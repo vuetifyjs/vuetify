@@ -7,30 +7,32 @@
   @include tools.rounded(4px)
 
   align-items: center
-  display: inline-flex
-  height: 64px
-  max-width: 320px
+  display: flex
+  justify-content: center
   padding: .5rem
   position: relative
 
   .v-field
     height: 100%
-
-    &:not(:first-child)
-      margin-inline-start: 8px
-
-  &--divided
-    max-width: 360px
-
-    .v-field:not(:first-child)
-      margin-inline-start: 0
+    margin: 0 .25rem
 
 .v-otp-input__divider
   margin: 0 8px
 
+.v-otp-input__content
+  align-items: center
+  display: flex
+  height: 56px
+  justify-content: center
+  max-width: 320px
+
+  .v-otp-input--divided &
+    max-width: 360px
+
 .v-otp-input__field
   font-size: 1.25rem
   height: 100%
+  outline: none
   text-align: center
   width: 100%
 

@@ -13,7 +13,7 @@ import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { genericComponent, only, propsFactory, useRender } from '@/util'
 
 // Types
@@ -69,7 +69,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
   props: makeVOtpInputProps(),
 
   emits: {
-    finish: () => true,
+    finish: (val: string) => true,
     'update:focused': (val: boolean) => true,
     'update:modelValue': (val: string) => true,
   },
@@ -84,18 +84,18 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       val => String(val).split(''),
       val => val.join('')
     )
-    const fields = computed(() => Array(props.length).fill(0))
+    const fields = computed(() => Array(Number(props.length)).fill(0))
 
     const focusIndex = ref(-1)
     const inputRef = ref<HTMLInputElement[]>([])
 
-    function onInput (index: number) {
-      const cur = inputRef.value[index]
-      const next = inputRef.value[index + 1]
+    function onInput () {
+      const cur = inputRef.value[focusIndex.value]
+      const next = inputRef.value[focusIndex.value + 1]
 
       const array = model.value.slice()
 
-      array[index] = cur.value
+      array[focusIndex.value] = cur.value
 
       model.value = array
 
@@ -154,7 +154,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     }, { scoped: true })
 
     watch(model, val => {
-      if (val.length === props.length) emit('finish')
+      if (val.length === props.length) emit('finish', val.join(''))
     }, { deep: true })
 
     watch(focusIndex, val => {
@@ -180,46 +180,48 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
             dimensionStyles.value,
           ]}
         >
-          { fields.value.map((_, i) => (
-            <>
-              { props.divider && i !== 0 && (
-                <span class="v-otp-input__divider">{ props.divider }</span>
-              )}
+          <div class="v-otp-input__content">
+            { fields.value.map((_, i) => (
+              <>
+                { props.divider && i !== 0 && (
+                  <span class="v-otp-input__divider">{ props.divider }</span>
+                )}
 
-              <VField
-                focused={ isFocused.value && props.focusAll }
-                key={ i }
-              >
-                {{
-                  ...slots,
-                  default: () => {
-                    return (
-                      <input
-                        ref={ val => inputRef.value[i] = val as HTMLInputElement }
-                        aria-label={ `Please enter OTP character ${i + 1}` }
-                        autofocus={ i === 0 && props.autofocus }
-                        autocomplete="off"
-                        class={[
-                          'v-otp-input__field',
-                        ]}
-                        inputmode="text"
-                        min={ props.type === 'number' ? 0 : undefined }
-                        maxlength="1"
-                        placeholder={ props.placeholder }
-                        type={ props.type }
-                        value={ model.value[i] }
-                        onInput={ () => onInput(i) }
-                        onFocus={ e => onFocus(e, i) }
-                        onBlur={ onBlur }
-                        onKeydown={ onKeydown }
-                        onPaste={ event => onPaste(i, event) }
-                      />
-                    )
-                  },
-                }}
-              </VField>
-            </>
-          ))}
+                <VField
+                  focused={ (isFocused.value && props.focusAll) || focusIndex.value === i }
+                  key={ i }
+                >
+                  {{
+                    ...slots,
+                    default: () => {
+                      return (
+                        <input
+                          ref={ val => inputRef.value[i] = val as HTMLInputElement }
+                          aria-label={ `Please enter OTP character ${i + 1}` }
+                          autofocus={ i === 0 && props.autofocus }
+                          autocomplete="off"
+                          class={[
+                            'v-otp-input__field',
+                          ]}
+                          inputmode="text"
+                          min={ props.type === 'number' ? 0 : undefined }
+                          maxlength="1"
+                          placeholder={ props.placeholder }
+                          type={ props.type }
+                          value={ model.value[i] }
+                          onInput={ onInput }
+                          onFocus={ e => onFocus(e, i) }
+                          onBlur={ onBlur }
+                          onKeydown={ onKeydown }
+                          onPaste={ event => onPaste(i, event) }
+                        />
+                      )
+                    },
+                  }}
+                </VField>
+              </>
+            ))}
+          </div>
 
           <VOverlay
             contained
