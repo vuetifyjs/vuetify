@@ -31,7 +31,7 @@ export const VCalendarDay = genericComponent()({
             'v-calendar-month__day',
           ]}
         >
-          { hasTitle && (
+          { !props.day?.isHidden && hasTitle && (
             <div key="title" class="v-calendar-weekly__day-label">
               { slots.title?.() ?? (
                 <VBtn
