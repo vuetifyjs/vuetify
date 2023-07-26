@@ -67,7 +67,7 @@ export const makeVDataTableHeadersProps = propsFactory({
   },
 
   ...makeLoaderProps(),
-  'onClick:column': Function as PropType<(e: Event, value: { column: InternalDataTableHeader }) => void>,
+  'onClick:columnHeader': Function as PropType<(e: Event, value: { column: InternalDataTableHeader }) => void>,
 }, 'v-data-table-headers')
 
 export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
@@ -137,11 +137,11 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           }}
           colspan={ column.colspan }
           rowspan={ column.rowspan }
-          onClick={ column.sortable || props['onClick:column'] ? (event: Event) => {
+          onClick={ column.sortable || props['onClick:columnHeader'] ? (event: Event) => {
             if (column.sortable) {
               toggleSort(column)
             }
-            props['onClick:column']?.(event, { column })
+            props['onClick:columnHeader']?.(event, { column })
           } : undefined }
           lastFixed={ column.lastFixed }
           noPadding={ noPadding }
