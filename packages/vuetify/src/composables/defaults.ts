@@ -132,7 +132,7 @@ export function internalUseDefaults (
         injectSelf(DefaultsSymbol, vm)?.value ?? {},
         val
       ) : undefined
-    }, { immediate: true })
+    }, { immediate: true, deep: true })
     provideDefaults(subDefaults)
   }
 
