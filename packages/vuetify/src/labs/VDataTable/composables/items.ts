@@ -15,7 +15,7 @@ export interface DataTableItemProps {
 }
 
 // Composables
-export const makeDataTableItemProps = propsFactory({
+export const makeDataTableItemsProps = propsFactory({
   items: {
     type: Array as PropType<DataTableItemProps['items']>,
     default: () => ([]),
@@ -29,11 +29,12 @@ export const makeDataTableItemProps = propsFactory({
     default: null,
   },
   returnObject: Boolean,
-}, 'v-data-table-item')
+}, 'DataTable-items')
 
 export function transformItem (
   props: Omit<DataTableItemProps, 'items'>,
   item: any,
+  index: number,
   columns: InternalDataTableHeader[]
 ): DataTableItem {
   const value = props.returnObject ? item : getPropertyFromItem(item, props.itemValue)
@@ -45,6 +46,8 @@ export function transformItem (
 
   return {
     type: 'item',
+    key: props.returnObject ? getPropertyFromItem(item, props.itemValue) : value,
+    index,
     value,
     selectable,
     columns: itemColumns,
@@ -56,14 +59,8 @@ export function transformItems (
   props: Omit<DataTableItemProps, 'items'>,
   items: DataTableItemProps['items'],
   columns: InternalDataTableHeader[]
-) {
-  const array: DataTableItem[] = []
-
-  for (const item of items) {
-    array.push(transformItem(props, item, columns))
-  }
-
-  return array
+): DataTableItem[] {
+  return items.map((item, index) => transformItem(props, item, index, columns))
 }
 
 export function useDataTableItems (props: DataTableItemProps, columns: Ref<InternalDataTableHeader[]>) {

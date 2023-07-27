@@ -42,7 +42,7 @@ export const makeVColorPickerEditProps = propsFactory({
   },
 
   ...makeComponentProps(),
-}, 'v-color-picker-edit')
+}, 'VColorPickerEdit')
 
 export const VColorPickerEdit = defineComponent({
   name: 'VColorPickerEdit',

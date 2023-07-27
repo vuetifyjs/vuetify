@@ -15,7 +15,7 @@ export const makeVMainProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeTagProps({ tag: 'main' }),
-}, 'v-main')
+}, 'VMain')
 
 export const VMain = genericComponent()({
   name: 'VMain',

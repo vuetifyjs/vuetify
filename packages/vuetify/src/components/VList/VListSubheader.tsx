@@ -15,7 +15,7 @@ export const makeVListSubheaderProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeTagProps(),
-}, 'v-list-subheader')
+}, 'VListSubheader')
 
 export const VListSubheader = genericComponent()({
   name: 'VListSubheader',

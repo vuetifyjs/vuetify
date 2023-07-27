@@ -10,7 +10,7 @@ export const makeVToolbarTitleProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeTagProps(),
-}, 'v-toolbar-title')
+}, 'VToolbarTitle')
 
 export type VToolbarTitleSlots = {
   default: never

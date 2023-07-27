@@ -28,7 +28,7 @@ export const makeVParallaxProps = propsFactory({
   },
 
   ...makeComponentProps(),
-}, 'v-parallax')
+}, 'VParallax')
 
 export const VParallax = genericComponent<VImgSlots>()({
   name: 'VParallax',

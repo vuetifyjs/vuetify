@@ -42,6 +42,11 @@ export const md2: Blueprint = {
     VTextField: {
       variant: 'filled',
     },
+    VToolbar: {
+      VBtn: {
+        color: null,
+      },
+    },
   },
   icons: {
     defaultSet: 'mdi',

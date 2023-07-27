@@ -1,5 +1,6 @@
 <template>
   <promoted-base
+    v-if="!error"
     ref="script"
     :class="[
       isDark ? 'theme--dark' : 'theme--light',
@@ -15,10 +16,15 @@
       @script:error="error = true"
     />
   </promoted-base>
+
+  <promoted v-else />
+
+  <br>
 </template>
 
 <script setup lang="ts">
   // Components
+  import Promoted from './Promoted.vue'
   import PromotedBase from './Base.vue'
   import PromotedScript from './Script.vue'
 
@@ -43,6 +49,9 @@
 </script>
 
 <style lang="sass">
+  #carbonads-script
+    width: 100%
+
   #carbonads,
   #carbonads_1,
   #carbonads_2

@@ -32,6 +32,10 @@ import { Ripple } from '@/directives/ripple'
 import { computed } from 'vue'
 import { EventProp, genericComponent, propsFactory } from '@/util'
 
+// Types
+import type { PropType } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
+
 export type VChipSlots = {
   default: {
     isSelected: boolean | undefined
@@ -76,7 +80,7 @@ export const makeVChipProps = propsFactory({
   prependAvatar: String,
   prependIcon: IconValue,
   ripple: {
-    type: Boolean,
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
   text: String,
@@ -99,7 +103,7 @@ export const makeVChipProps = propsFactory({
   ...makeTagProps({ tag: 'span' }),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'tonal' } as const),
-}, 'v-chip')
+}, 'VChip')
 
 export const VChip = genericComponent<VChipSlots>()({
   name: 'VChip',

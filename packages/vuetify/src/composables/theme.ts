@@ -3,7 +3,6 @@ import {
   computed,
   inject,
   provide,
-  reactive,
   ref,
   watch,
   watchEffect,
@@ -201,7 +200,7 @@ function parseThemeOptions (options: ThemeOptions = defaultThemeOptions): Intern
 
 // Composables
 export function createTheme (options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
-  const parsedOptions = reactive(parseThemeOptions(options))
+  const parsedOptions = parseThemeOptions(options)
   const name = ref(parsedOptions.defaultTheme)
   const themes = ref(parsedOptions.themes)
 
@@ -307,6 +306,8 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   }
 
   function install (app: App) {
+    if (parsedOptions.isDisabled) return
+
     const head = app._context.provides.usehead as HeadClient | undefined
     if (head) {
       if (head.push) {
@@ -328,8 +329,6 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       watch(styles, updateStyles, { immediate: true })
 
       function updateStyles () {
-        if (parsedOptions.isDisabled) return
-
         if (typeof document !== 'undefined' && !styleEl) {
           const el = document.createElement('style')
           el.type = 'text/css'

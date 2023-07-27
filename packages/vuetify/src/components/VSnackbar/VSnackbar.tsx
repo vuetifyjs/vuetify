@@ -42,7 +42,7 @@ export const makeVSnackbarProps = propsFactory({
   ...omit(makeVOverlayProps({
     transition: 'v-snackbar-transition',
   }), ['persistent', 'noClickAnimation', 'scrim', 'scrollStrategy']),
-}, 'v-snackbar')
+}, 'VSnackbar')
 
 export const VSnackbar = genericComponent<VSnackbarSlots>()({
   name: 'VSnackbar',

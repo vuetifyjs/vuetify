@@ -10,7 +10,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 export const makeVToolbarItemsProps = propsFactory({
   ...makeComponentProps(),
   ...makeVariantProps({ variant: 'text' } as const),
-}, 'v-toolbar-items')
+}, 'VToolbarItems')
 
 export const VToolbarItems = genericComponent()({
   name: 'VToolbarItems',

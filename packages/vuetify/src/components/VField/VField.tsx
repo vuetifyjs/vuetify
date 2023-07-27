@@ -93,7 +93,7 @@ export const makeVFieldProps = propsFactory({
   ...makeLoaderProps(),
   ...makeRoundedProps(),
   ...makeThemeProps(),
-}, 'v-field')
+}, 'VField')
 
 export type VFieldSlots = {
   clear: never
@@ -264,7 +264,7 @@ export const VField = genericComponent<new <T>(
           <LoaderSlot
             name="v-field"
             active={ !!props.loading }
-            color={ props.error ? 'error' : props.color }
+            color={ props.error ? 'error' : (typeof props.loading === 'string' ? props.loading : props.color) }
             v-slots={{ default: slots.loader }}
           />
 

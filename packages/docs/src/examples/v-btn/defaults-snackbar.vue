@@ -25,6 +25,16 @@
   </v-sheet>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const snackbar = ref(false)
+
+  function onClick () {
+    snackbar.value = false
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

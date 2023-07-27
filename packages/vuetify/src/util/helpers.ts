@@ -131,8 +131,10 @@ export function isObject (obj: any): obj is object {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
 }
 
-export function isComponentInstance (obj: any): obj is ComponentPublicInstance {
-  return obj?.$el
+export function refElement<T extends object | undefined> (obj: T): Exclude<T, ComponentPublicInstance> | HTMLElement {
+  return obj && '$el' in obj
+    ? obj.$el as HTMLElement
+    : obj as HTMLElement
 }
 
 // KeyboardEvent.keyCode aliases
@@ -540,6 +542,10 @@ export function includes (arr: readonly any[], val: any) {
 const onRE = /^on[^a-z]/
 export const isOn = (key: string) => onRE.test(key)
 
+export function eventName (propName: string) {
+  return propName[2].toLowerCase() + propName.slice(3)
+}
+
 export type EventProp<T extends any[] = any[], F = (...args: T) => any> = F | F[]
 export const EventProp = <T extends any[] = any[]>() => [Function, Array] as PropType<EventProp<T>>
 
@@ -570,7 +576,7 @@ export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 
   const idx = focusable.indexOf(document.activeElement as HTMLElement)
 
   if (!location) {
-    if (!el.contains(document.activeElement)) {
+    if (el === document.activeElement || !el.contains(document.activeElement)) {
       focusable[0]?.focus()
     }
   } else if (location === 'first') {
@@ -588,6 +594,10 @@ export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 
     if (_el) _el.focus()
     else focusChild(el, location === 'next' ? 'first' : 'last')
   }
+}
+
+export function isEmpty (val: any): boolean {
+  return val === null || val === undefined || (typeof val === 'string' && val.trim() === '')
 }
 
 export function noop () {}

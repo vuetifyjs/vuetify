@@ -37,7 +37,7 @@ export const makeVTabProps = propsFactory({
     'position',
     'symbol',
   ]),
-}, 'v-tabs')
+}, 'VTab')
 
 export const VTab = genericComponent()({
   name: 'VTab',
@@ -86,11 +86,11 @@ export const VTab = genericComponent()({
 
         const sigma = 1.5
         animate(nextEl, {
-          backgroundColor: [color, ''],
+          backgroundColor: [color, 'currentcolor'],
           transform: [
             `translate${XY}(${delta}px) scale${XY}(${initialScale})`,
             `translate${XY}(${delta / sigma}px) scale${XY}(${(scale - 1) / sigma + 1})`,
-            '',
+            'none',
           ],
           transformOrigin: Array(3).fill(origin),
         }, {

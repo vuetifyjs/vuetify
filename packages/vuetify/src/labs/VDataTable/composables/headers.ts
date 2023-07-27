@@ -1,6 +1,6 @@
 // Utilities
-import { inject, provide, ref, watch } from 'vue'
-import { createRange, propsFactory } from '@/util'
+import { inject, provide, ref, watchEffect } from 'vue'
+import { consoleWarn, createRange, propsFactory } from '@/util'
 
 // Types
 import type { DeepReadonly, InjectionKey, PropType, Ref } from 'vue'
@@ -12,7 +12,7 @@ export const makeDataTableHeaderProps = propsFactory({
     type: Array as PropType<DeepReadonly<DataTableHeader[] | DataTableHeader[][]>>,
     default: () => ([]),
   },
-}, 'v-data-table-header')
+}, 'DataTable-header')
 
 export const VDataTableHeadersSymbol: InjectionKey<{
   headers: Ref<InternalDataTableHeader[][]>
@@ -34,7 +34,7 @@ export function createHeaders (
   const headers = ref<InternalDataTableHeader[][]>([])
   const columns = ref<InternalDataTableHeader[]>([])
 
-  watch(() => props.headers, () => {
+  watchEffect(() => {
     const wrapped = !props.headers.length
       ? []
       : Array.isArray(props.headers[0])
@@ -68,7 +68,11 @@ export function createHeaders (
     const fixedOffsets = createRange(rowCount).fill(0)
 
     flat.forEach(({ column, row }) => {
-      const key = column.key
+      let key = column.key
+      if (key == null) {
+        consoleWarn('The header key value must not be null or undefined')
+        key = ''
+      }
       for (let i = row; i <= row + (column.rowspan ?? 1) - 1; i++) {
         fixedRows[i].push({
           ...column,
@@ -104,9 +108,6 @@ export function createHeaders (
     })
 
     columns.value = fixedRows.at(-1) ?? []
-  }, {
-    deep: true,
-    immediate: true,
   })
 
   const data = { headers, columns }

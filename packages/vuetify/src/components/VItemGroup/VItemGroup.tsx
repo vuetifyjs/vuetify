@@ -19,7 +19,7 @@ export const makeVItemGroupProps = propsFactory({
   }),
   ...makeTagProps(),
   ...makeThemeProps(),
-}, 'v-item-group')
+}, 'VItemGroup')
 
 type VItemGroupSlots = {
   default: {

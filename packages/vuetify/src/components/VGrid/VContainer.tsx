@@ -17,7 +17,7 @@ export const makeVContainerProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeTagProps(),
-}, 'v-container')
+}, 'VContainer')
 
 export const VContainer = genericComponent()({
   name: 'VContainer',

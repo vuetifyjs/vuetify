@@ -14,16 +14,31 @@ import { md } from 'vuetify/iconsets/md'
 import { mdi } from 'vuetify/iconsets/mdi-svg'
 import * as mdiSvg from './icons'
 
-// Types
-import type { VuetifyPlugin } from '@/types'
+// Locales
+import { en, sv } from 'vuetify/locale'
 
-export const useVuetify: VuetifyPlugin = ({ app }) => {
+// Types
+import type { ViteSSGContext } from '@vuetify/vite-ssg'
+
+export function installVuetify ({ app }: ViteSSGContext) {
   const vuetify = createVuetify({
     components: {
       ...components,
       ...labs,
     },
     directives,
+    defaults: {
+      global: {
+        eager: false,
+      },
+    },
+    locale: {
+      locale: 'en',
+      messages: {
+        en,
+        sv,
+      },
+    },
     icons: {
       defaultSet: 'mdi',
       sets: {

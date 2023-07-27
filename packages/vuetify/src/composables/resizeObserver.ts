@@ -1,5 +1,6 @@
 // Utilities
 import { onBeforeUnmount, readonly, ref, watch } from 'vue'
+import { refElement } from '@/util'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -10,7 +11,7 @@ interface ResizeState {
   contentRect: DeepReadonly<Ref<DOMRectReadOnly | undefined>>
 }
 
-export function useResizeObserver (callback?: ResizeObserverCallback): ResizeState {
+export function useResizeObserver (callback?: ResizeObserverCallback, box: 'content' | 'border' = 'content'): ResizeState {
   const resizeRef = ref<HTMLElement>()
   const contentRect = ref<DOMRectReadOnly>()
 
@@ -20,7 +21,11 @@ export function useResizeObserver (callback?: ResizeObserverCallback): ResizeSta
 
       if (!entries.length) return
 
-      contentRect.value = entries[0].contentRect
+      if (box === 'content') {
+        contentRect.value = entries[0].contentRect
+      } else {
+        contentRect.value = entries[0].target.getBoundingClientRect()
+      }
     })
 
     onBeforeUnmount(() => {
@@ -29,11 +34,11 @@ export function useResizeObserver (callback?: ResizeObserverCallback): ResizeSta
 
     watch(resizeRef, (newValue, oldValue) => {
       if (oldValue) {
-        observer.unobserve(oldValue)
+        observer.unobserve(refElement(oldValue))
         contentRect.value = undefined
       }
 
-      if (newValue) observer.observe(newValue)
+      if (newValue) observer.observe(refElement(newValue))
     }, {
       flush: 'post',
     })

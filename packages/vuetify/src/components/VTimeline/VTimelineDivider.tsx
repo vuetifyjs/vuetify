@@ -26,7 +26,7 @@ export const makeVTimelineDividerProps = propsFactory({
   ...makeRoundedProps(),
   ...makeSizeProps(),
   ...makeElevationProps(),
-}, 'v-timeline-divider')
+}, 'VTimelineDivider')
 
 export const VTimelineDivider = genericComponent()({
   name: 'VTimelineDivider',

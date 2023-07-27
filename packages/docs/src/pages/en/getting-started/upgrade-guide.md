@@ -1,6 +1,6 @@
 ---
-nav: Upgrade guide
 meta:
+  nav: Upgrade guide
   title: Upgrade guide
   description: Detailed instruction on how to upgrade Vuetify to 3.0
   keywords: migration, upgrade, releases, upgrading vuetify, alpha, v3
@@ -19,25 +19,21 @@ Many of these changes can be applied automatically by [eslint-plugin-vuetify](ht
 
 <entry />
 
-<alert type="warning">
-
+::: warning
   This page is incomplete. Please check back later for more information, or submit a PR if you notice something missing. If you have additional questions, reach out to us in [Discord](https://community.vuetifyjs.com/)
+:::
 
-</alert>
-
-<alert type="warning">
-
+::: warning
   Not all Vuetify 2 components are currently available in Vuetify 3; These components will be released as their development is completed via [Vuetify Labs](https://vuetifyjs.com/en/labs/introduction/).
 
 - v-calendar
-- v-date-picker
+- [v-date-picker](/components/date-pickers/)
 - [v-data-table](/components/data-tables/basics/)
 - [v-skeleton-loader](/components/skeleton-loaders/)
 - v-stepper
 - v-time-picker
 - v-treeview
-
-</alert>
+:::
 
 ## Setup
 
@@ -104,9 +100,9 @@ app.use(vuetify)
 
 ### General changes
 
-- `value` prop has been replaced by `model-value` on components that support `v-model` usage.
+- `value` prop has been replaced by `model-value` on components that support `v-model` usage. (Vue 3 requires this change)
   - Note that this does not apply to `value` used as a *selection value*, for example `v-btn` within `v-btn-toggle`.
-- `@input` event has been replaced by `@update:model-value` on components that support `v-model` usage.
+- `@input` event has been replaced by `@update:model-value` on components that support `v-model` usage. (Vue 3 requires this change)
 - `left` and `right` have been replaced by `start` and `end` respectively. This applies to utility classes too, for example `.border-r` is now `.border-e`.
 - Size props `small` / `medium` / `large` etc. have been combined into a single `size` prop.
 - `absolute` and `fixed` props have been combined into a single `position` prop.
@@ -149,7 +145,7 @@ app.use(vuetify)
 
 ### v-checkbox/v-radio/v-switch
 
-- `input-value` prop has been renamed to `model-value`.
+- `input-value` prop has been renamed to `model-value`. (Vue 3 requires this change)
 - `on-icon` and `off-icon` props have been renamed to `true-icon` and `false-icon`.
 - `on-value` and `off-value` props have been renamed to `true-value` and `false-value`.
 - `v-checkbox`'s label slot should no longer contain a `<label>` as it is already wrapped with one
@@ -214,10 +210,6 @@ app.use(vuetify)
 - `internal-activator` prop has been removed without replacement
 - `offset-y` and `offset-x` props have been removed. Use `offset` prop instead
 - `absolute` variant has been removed. For absolute positioning use css instead
-
-### v-skeleton-loader
-
-- This component hasn't been migrated to vuetify 3
 
 ### v-snackbar
 

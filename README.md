@@ -5,12 +5,6 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/vuetifyjs/vuetify/actions?query=workflow%3ACI">
-    <img src="https://github.com/vuetifyjs/vuetify/workflows/CI/badge.svg?branch=master&event=push" alt="CI badge">
-  </a>
-  <a href="https://codecov.io/gh/vuetifyjs/vuetify">
-    <img src="https://img.shields.io/codecov/c/github/vuetifyjs/vuetify.svg" alt="Coverage">
-  </a>
   <a href="https://www.npmjs.com/package/vuetify">
     <img src="https://img.shields.io/npm/dt/vuetify.svg" alt="Downloads">
   </a>
@@ -20,9 +14,6 @@
   <br>
   <a href="https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md">
     <img src="https://img.shields.io/npm/l/vuetify.svg" alt="License">
-  </a>
-  <a href="https://app.zenhub.com/workspace/o/vuetifyjs/vuetify/boards">
-    <img src="https://img.shields.io/badge/Managed_with-ZenHub-5e60ba.svg" alt="zenhub">
   </a>
   <a href="https://community.vuetifyjs.com">
     <img src="https://discordapp.com/api/guilds/340160225338195969/widget.png" alt="Chat">
@@ -162,6 +153,10 @@ Vuetify is a no design skills required UI Library with beautifully handcrafted V
 - **18 months** Long-term support for [Major releases](https://vuetifyjs.com/introduction/long-term-support/)
 - **Internationalization:** 42+ supported languages
 
+#### Browser Support
+
+Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills](https://vuetifyjs.com/getting-started/browser-support)). Components are designed for a minimum width of _320px_.
+
 ### 🌎 Vuetify Ecosystem
 
 #### Resources
@@ -282,13 +277,19 @@ To check out the docs, visit [vuetifyjs.com](https://vuetifyjs.com).
 
 ![Crowdin Uploads](https://github.com/vuetifyjs/vuetify/workflows/Crowdin%20Uploads/badge.svg?branch=master)
 
-###### Browser Support
-
-Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills](https://vuetifyjs.com/getting-started/browser-support)). Components are designed for a minimum width of _320px_.
-
 ### 🙋‍♂️ Questions
 
 For help and support questions, please use our [Discord community](https://community.vuetifyjs.com). This issue list of this repo is **exclusively** for bug reports and feature requests.
+
+### 🐛 Issues
+
+Use our [Issue generator](https://issues.vuetifyjs.com) to report bugs and request new features.
+
+Please make sure to read the [Important Information](https://github.com/vuetifyjs/vuetify/blob/master/.github/CONTRIBUTING.md#important-information) before opening an issue. Issues not confirming to the guidelines may be closed immediately.
+
+### 📝 Changelog
+
+Detailed changes for each release are documented in the [release notes](https://vuetifyjs.com/getting-started/release-notes/).
 
 ### 💁‍♂️ Contributing
 
@@ -300,10 +301,6 @@ Developers interested in contributing should read the [Code of Conduct](./CODE_O
 To help you get you familiar with our contribution process, we have a list of [good first issues](https://github.com/vuetifyjs/vuetify/labels/good%20first%20issue) that contain bugs which have a relatively limited scope. This is a great place to get started. If you have any questions, please join us on the [community chat](https://community.vuetifyjs.com).
 
 We also have a list of [help wanted](https://github.com/vuetifyjs/vuetify/labels/help%20wanted) issues that you might want to check.
-
-### 📝 Changelog
-
-Detailed changes for each release are documented in the [release notes](https://vuetifyjs.com/getting-started/release-notes/).
 
 ### 📑 License
 

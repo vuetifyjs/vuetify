@@ -39,6 +39,36 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const items = [
+    {
+      title: 'Foo',
+      value: 'foo',
+    },
+    {
+      title: 'Bar',
+      value: 'bar',
+    },
+    {
+      title: 'Fizz',
+      value: 'fizz',
+    },
+    {
+      title: 'Buzz',
+      value: 'buzz',
+    },
+  ]
+
+  const drawer = ref(false)
+  const group = ref(null)
+
+  watch(group, () => {
+    drawer.value = false
+  })
+</script>
+
 <script>
   export default {
     data: () => ({

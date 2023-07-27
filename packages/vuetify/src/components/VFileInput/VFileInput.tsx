@@ -74,7 +74,7 @@ export const makeVFileInputProps = propsFactory({
   },
 
   ...makeVFieldProps({ clearable: true }),
-}, 'v-file-input')
+}, 'VFileInput')
 
 export const VFileInput = genericComponent<VFileInputSlots>()({
   name: 'VFileInput',
@@ -171,8 +171,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
           class={[
             'v-file-input',
             {
-              'v-file-input--chips': !!props.chips,
-              'v-file-input--selection-slot': !!slots.selection,
               'v-text-field--plain-underlined': isPlainOrUnderlined.value,
             },
             props.class,
@@ -224,6 +222,8 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                         name={ props.name }
                         onClick={ e => {
                           e.stopPropagation()
+
+                          if (isReadonly.value) e.preventDefault()
 
                           onFocus()
                         }}

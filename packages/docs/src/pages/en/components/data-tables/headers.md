@@ -1,6 +1,6 @@
 ---
-nav: Headers
 meta:
+  nav: Headers
   title: Data table - Headers
   description: The data table component is used for displaying tabular data in a way that is easy for users to scan. It includes sorting, searching, pagination and selection.
   keywords: data tables, vuetify data table component, vue data table component
@@ -30,11 +30,9 @@ Here is a data-table that uses multiple rows of headers to make use of the colsp
 
 You can use the dynamic slots `column.<key>` to customize only certain columns. `<key>` corresponds to the **key** property in the items found in the **headers** prop.
 
-<alert type="info">
-
+::: info
   There are two built-in slots for customizing both the select (`column.data-table-select`) and expand (`column.data-table-expand`) columns when using **show-select** and **show-expand** props respectively.
-
-</alert>
+:::
 
 <example file="v-data-table/slot-header" />
 

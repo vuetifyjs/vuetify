@@ -31,7 +31,7 @@ export const makeVLazyProps = propsFactory({
   ...makeDimensionProps(),
   ...makeTagProps(),
   ...makeTransitionProps({ transition: 'fade-transition' }),
-}, 'v-lazy')
+}, 'VLazy')
 
 export const VLazy = genericComponent()({
   name: 'VLazy',

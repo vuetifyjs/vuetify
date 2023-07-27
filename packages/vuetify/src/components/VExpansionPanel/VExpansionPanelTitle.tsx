@@ -14,6 +14,10 @@ import { Ripple } from '@/directives/ripple'
 import { computed, inject } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
+// Types
+import type { PropType } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
+
 interface ExpansionPanelTitleSlot {
   collapseIcon: IconValue
   disabled: boolean | undefined
@@ -39,13 +43,13 @@ export const makeVExpansionPanelTitleProps = propsFactory({
   },
   hideActions: Boolean,
   ripple: {
-    type: [Boolean, Object],
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: false,
   },
   readonly: Boolean,
 
   ...makeComponentProps(),
-}, 'v-expansion-panel-title')
+}, 'VExpansionPanelTitle')
 
 export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>()({
   name: 'VExpansionPanelTitle',

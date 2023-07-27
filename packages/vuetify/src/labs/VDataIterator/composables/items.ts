@@ -20,7 +20,7 @@ export interface DataIteratorItem<T = any> extends GroupableItem<T>, SelectableI
 }
 
 // Composables
-export const makeDataIteratorItemProps = propsFactory({
+export const makeDataIteratorItemsProps = propsFactory({
   items: {
     type: Array as PropType<DataIteratorItemProps['items']>,
     default: () => ([]),
@@ -34,7 +34,7 @@ export const makeDataIteratorItemProps = propsFactory({
     default: null,
   },
   returnObject: Boolean,
-}, 'v-data-iterator-item')
+}, 'DataIterator-items')
 
 export function transformItem (
   props: Omit<DataIteratorItemProps, 'items'>,

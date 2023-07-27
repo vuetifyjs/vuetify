@@ -1,6 +1,6 @@
 ---
-nav: Custom inputs
 meta:
+  nav: Custom inputs
   title: Input component
   description: The input component is the baseline functionality for all of Vuetify's form components and provides a baseline for custom implementations.
   keywords: inputs, vuetify input component, vue input component
@@ -32,11 +32,9 @@ The `v-input` component gives you a baseline to create your own custom inputs. I
 
 ## Caveats
 
-<alert type="warning">
-
+::: warning
   The `v-input` component is used as a wrapper for all of the Vuetify form controls. It does **NOT** inherit attributes as they are expected to be passed down to inner inputs.
-
-</alert>
+:::
 
 ## Examples
 

@@ -13,7 +13,7 @@ import type { SubmitEventPromise } from '@/composables/form'
 export const makeVFormProps = propsFactory({
   ...makeComponentProps(),
   ...makeFormProps(),
-}, 'v-form')
+}, 'VForm')
 
 type VFormSlots = {
   default: ReturnType<typeof createForm>

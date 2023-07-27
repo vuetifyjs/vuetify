@@ -1,7 +1,7 @@
 ---
 emphasized: true
-nav: Infinite scrollers
 meta:
+  nav: Infinite scrollers
   title: Infinite scroller component
   description: The Infinite scroll component is a container that loads more items when scrolling. It is useful when you need to display an unknown but large number of items.
   keywords: infinite scroll, vuetify infinite scroll component, vue infinite scroll component, v-infinite-scroll component
@@ -16,6 +16,10 @@ related:
 The `v-infinite-scroll` component displays a potentially infinite list, by loading more items of the list when scrolling. It supports either vertical or horizontal scrolling.
 
 ----
+
+::: warning
+This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
+:::
 
 ## Usage
 

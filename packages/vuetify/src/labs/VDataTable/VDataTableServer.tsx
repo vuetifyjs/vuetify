@@ -33,7 +33,7 @@ export const makeVDataTableServerProps = propsFactory({
   ...makeDataTablePaginateProps(),
   ...makeDataTableProps(),
   ...makeVDataTableFooterProps(),
-}, 'v-data-table-server')
+}, 'VDataTableServer')
 
 export const VDataTableServer = genericComponent<VDataTableSlots>()({
   name: 'VDataTableServer',

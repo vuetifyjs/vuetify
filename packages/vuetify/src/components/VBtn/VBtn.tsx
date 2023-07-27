@@ -35,6 +35,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 export type VBtnSlots = {
   default: never
@@ -61,7 +62,7 @@ export const makeVBtnProps = propsFactory({
   stacked: Boolean,
 
   ripple: {
-    type: Boolean,
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
 
@@ -82,7 +83,7 @@ export const makeVBtnProps = propsFactory({
   ...makeTagProps({ tag: 'button' }),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'elevated' } as const),
-}, 'v-btn')
+}, 'VBtn')
 
 export const VBtn = genericComponent<VBtnSlots>()({
   name: 'VBtn',
@@ -133,7 +134,16 @@ export const VBtn = genericComponent<VBtnSlots>()({
     })
 
     function onClick (e: MouseEvent) {
-      if (isDisabled.value) return
+      if (
+        isDisabled.value ||
+        (link.isLink.value && (
+          e.metaKey ||
+          e.ctrlKey ||
+          e.shiftKey ||
+          (e.button !== 0) ||
+          attrs.target === '_blank'
+        ))
+      ) return
 
       link.navigate?.(e)
       group?.toggle()

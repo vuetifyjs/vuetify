@@ -23,6 +23,7 @@ import {
   withDirectives,
 } from 'vue'
 import {
+  convertToUnit,
   genericComponent,
   propsFactory,
   SUPPORTS_INTERSECTION,
@@ -73,7 +74,7 @@ export const makeVImgProps = propsFactory({
   ...makeVResponsiveProps(),
   ...makeComponentProps(),
   ...makeTransitionProps(),
-}, 'v-img')
+}, 'VImg')
 
 export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',
@@ -302,7 +303,10 @@ export const VImg = genericComponent<VImgSlots>()({
             { 'v-img--booting': !isBooted.value },
             props.class,
           ]}
-          style={ props.style }
+          style={[
+            { width: convertToUnit(props.width === 'auto' ? naturalWidth.value : props.width) },
+            props.style,
+          ]}
           { ...responsiveProps }
           aspectRatio={ aspectRatio.value }
           aria-label={ props.alt }
