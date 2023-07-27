@@ -20,9 +20,9 @@ import {
   bindProps,
   getCurrentInstance,
   IN_BROWSER,
+  matchesSelector,
   propsFactory,
   refElement,
-  SUPPORTS_FOCUS_VISIBLE,
   unbindProps,
 } from '@/util'
 
@@ -114,10 +114,7 @@ export function useActivator (
       runCloseDelay()
     },
     onFocus: (e: FocusEvent) => {
-      if (
-        SUPPORTS_FOCUS_VISIBLE &&
-        !(e.target as HTMLElement).matches(':focus-visible')
-      ) return
+      if (matchesSelector(e.target as HTMLElement, ':focus-visible') === false) return
 
       isFocused = true
       e.stopPropagation()
