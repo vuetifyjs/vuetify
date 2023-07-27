@@ -10,17 +10,17 @@ import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircu
 import { provideDefaults } from '@/composables/defaults'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, watch } from 'vue'
-import { genericComponent, only, propsFactory, useRender } from '@/util'
+import { focusChild, genericComponent, only, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
 // Types
-
 export type VOtpInputSlots = {
   default: never
   loader: never
@@ -30,6 +30,10 @@ export const makeVOtpInputProps = propsFactory({
   autofocus: Boolean,
   divider: String,
   focusAll: Boolean,
+  label: {
+    type: String,
+    default: '$vuetify.input.otp',
+  },
   length: {
     type: [Number, String],
     default: 6,
@@ -84,40 +88,57 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       val => String(val).split(''),
       val => val.join('')
     )
-    const fields = computed(() => Array(Number(props.length)).fill(0))
+    const { t } = useLocale()
 
+    const fields = computed(() => Array(Number(props.length)).fill(0))
     const focusIndex = ref(-1)
+    const contentRef = ref<HTMLElement>()
     const inputRef = ref<HTMLInputElement[]>([])
+    const current = computed(() => inputRef.value[focusIndex.value])
 
     function onInput () {
-      const cur = inputRef.value[focusIndex.value]
-      const next = inputRef.value[focusIndex.value + 1]
-
       const array = model.value.slice()
+      const value = current.value.value
 
-      array[focusIndex.value] = cur.value
+      array[focusIndex.value] = value
 
       model.value = array
-
-      if (next) next.focus()
-      else cur.blur()
     }
 
     function onKeydown (e: KeyboardEvent) {
-      const isFirst = focusIndex.value === 0
-      const isLast = focusIndex.value + 1 === props.length
-
-      let index: number
+      const array = model.value.slice()
+      const index = focusIndex.value
+      let target: 'next' | 'prev' | 'first' | 'last' | null = null
 
       if (e.key === 'ArrowLeft') {
-        index = isFirst ? (parseInt(props.length) - 1) : (focusIndex.value - 1)
-
-        inputRef.value?.[index].focus()
+        target = 'prev'
       } else if (e.key === 'ArrowRight') {
-        index = isLast ? 0 : (focusIndex.value + 1)
+        target = 'next'
+      } else if (e.key === 'Backspace') {
+        if (focusIndex.value > 0) {
+          target = 'prev'
+        }
+      } else if (e.key === 'Delete') {
+        array[focusIndex.value] = ''
 
-        inputRef.value?.[index].focus()
+        model.value = array
+
+        requestAnimationFrame(() => {
+          inputRef.value[index].select()
+        })
+      } else if (focusIndex.value + 1 !== Number(props.length)) {
+        target = 'next'
+      } else {
+        requestAnimationFrame(() => current.value?.blur())
+
+        return
       }
+
+      requestAnimationFrame(() => {
+        if (target) {
+          focusChild(contentRef.value!, target)
+        }
+      })
     }
 
     function onPaste (index: number, e: ClipboardEvent) {
@@ -180,7 +201,10 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
             dimensionStyles.value,
           ]}
         >
-          <div class="v-otp-input__content">
+          <div
+            ref={ contentRef }
+            class="v-otp-input__content"
+          >
             { fields.value.map((_, i) => (
               <>
                 { props.divider && i !== 0 && (
@@ -197,9 +221,9 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                       return (
                         <input
                           ref={ val => inputRef.value[i] = val as HTMLInputElement }
-                          aria-label={ `Please enter OTP character ${i + 1}` }
+                          aria-label={ t(props.label, i + 1) }
                           autofocus={ i === 0 && props.autofocus }
-                          autocomplete="off"
+                          autocomplete="one-time-code"
                           class={[
                             'v-otp-input__field',
                           ]}
