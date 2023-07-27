@@ -43,47 +43,6 @@
             </a>
           </v-layout>
         </v-flex>
-        <v-flex
-          xs12
-          sm8
-          md5
-          mx-auto
-        >
-          <v-form
-            action="https://www.getrevue.co/profile/vuetify/add_subscriber"
-            method="post"
-            name="revue-form"
-            target="_blank"
-          >
-            <v-text-field
-              id="member_email"
-              v-model="email"
-              class="v-text-field--rounded"
-              color="secondary"
-              type="email"
-              name="member[email]"
-              solo
-              flat
-              hide-details
-              label="Email Address"
-            >
-              <template v-slot:append>
-                <v-btn
-                  type="submit"
-                  color="secondary"
-                  name="member[subscribe]"
-                  value="Subscribe"
-                  @click="email = ''"
-                >
-                  Subscribe
-                </v-btn>
-              </template>
-            </v-text-field>
-          </v-form>
-          <div class="text-xs-center caption">
-            Subscribe to our <strong>monthly</strong> Newsletter
-          </div>
-        </v-flex>
         <v-flex xs12 />
         <v-flex
           xs12
