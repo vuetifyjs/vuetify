@@ -76,6 +76,14 @@ export function createDateInput (props: DateInputProps, isRange: boolean) {
     return adapter.isValid(date) ? date : fallback
   }
 
+  function isEqual (model: readonly any[], comparing: readonly any[]) {
+    if (model.length !== comparing.length) return false
+    if (model[0] && comparing[0] && !adapter.isEqual(model[0], comparing[0])) return false
+    if (model[1] && comparing[1] && !adapter.isEqual(model[1], comparing[1])) return false
+
+    return true
+  }
+
   return {
     model,
     adapter,
@@ -83,5 +91,6 @@ export function createDateInput (props: DateInputProps, isRange: boolean) {
     viewMode,
     displayDate,
     parseKeyboardDate,
+    isEqual,
   }
 }
