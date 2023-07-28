@@ -96,3 +96,11 @@
 .v-input__control
   display: flex
   grid-area: control
+
+.v-input--hide-spin-buttons
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button 
+    -webkit-appearance: none
+    margin: 0
+  input[type=number] 
+    -moz-appearance: textfield
