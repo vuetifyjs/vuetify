@@ -22,10 +22,10 @@ export const VCalendarEvent = genericComponent()({
           style="width: 100%;"
           class="align-center"
           color={ props.allDay ? 'primary' : undefined }
-          rounded={ props.allDay ? 0 : false }
+          label={ props.allDay }
         >
-            <VBadge inline dot color={ props.event?.color } ></VBadge>
-            { props.event?.title }
+          <VBadge inline dot color={ props.event?.color } ></VBadge>
+          { props.event?.title }
         </VChip>
       )
     })

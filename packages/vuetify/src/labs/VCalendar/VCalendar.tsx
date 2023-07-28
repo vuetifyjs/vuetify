@@ -2,7 +2,7 @@
 import './VCalendar.sass'
 
 // Utilities
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { VCalendarDay } from './VCalendarDay'
 import { VCalendarHeader } from './VCalendarHeader'
 import { getWeek, toIso } from '../date/date'
@@ -65,7 +65,7 @@ export const VCalendar = genericComponent()({
       return weeks
     })
 
-    const validDates = ref([
+    const validDates = computed(() => [
       adapter.startOfMonth(props.modelValue),
       adapter.endOfMonth(props.modelValue),
     ])
@@ -75,14 +75,14 @@ export const VCalendar = genericComponent()({
       const days = weeksInMonth.value.flat()
       const today = adapter.date()
 
-      const startDate = validDates.value[0]
-      const endDate = validDates.value[1]
+      const startDate = computed(() => validDates.value[0])
+      const endDate = computed(() => validDates.value[1])
 
       return days.filter((date, index) => props.weekdays.includes(date.getDay())).map((date, index) => {
-        const isStart = startDate && adapter.isSameDay(date, startDate)
-        const isEnd = endDate && adapter.isSameDay(date, endDate)
+        const isStart = startDate.value && adapter.isSameDay(date, startDate.value)
+        const isEnd = endDate.value && adapter.isSameDay(date, endDate.value)
         const isAdjacent = !adapter.isSameMonth(date, props.modelValue)
-        const isSame = validDates.value.length === 2 && adapter.isSameDay(startDate, endDate)
+        const isSame = validDates.value.length === 2 && adapter.isSameDay(startDate.value, endDate.value)
 
         return {
           date,

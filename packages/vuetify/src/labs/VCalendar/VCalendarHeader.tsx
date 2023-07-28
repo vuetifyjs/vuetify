@@ -40,6 +40,7 @@ export const VCalendarHeader = genericComponent()({
       return (
         <div style="min-height: 64px">
           { slots.title?.() ?? (
+            
             <div class="text-h4 text-center">{ displayTitle.value }</div>
           )}
         </div>
