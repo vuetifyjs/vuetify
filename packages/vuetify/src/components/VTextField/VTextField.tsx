@@ -211,6 +211,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                     const inputNode = (
                       <input
                         ref={ inputRef }
+                        class={ fieldClass }
                         value={ model.value }
                         onInput={ onInput }
                         v-intersect={[{
