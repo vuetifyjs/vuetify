@@ -135,6 +135,21 @@
   input
     letter-spacing: inherit
 
+    &:autofill,
+    &:-webkit-autofill
+      position: absolute
+      width: 100%
+      height: 100%
+      top: 0
+      left: 0
+      transform: none
+      padding-inline-start: var(--v-field-padding-start)
+      padding-inline-end: var(--v-field-padding-end)
+      padding-top: var(--v-field-input-padding-top)
+      padding-bottom: var(--v-field-input-padding-bottom)
+      margin-top: 0
+      margin-bottom: 0
+
   @at-root
     & input::placeholder,
     input#{&}::placeholder,
