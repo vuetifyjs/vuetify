@@ -1,5 +1,6 @@
 // Utilities
 import { camelize, capitalize, computed, Fragment, reactive, toRefs, watchEffect } from 'vue'
+import { IN_BROWSER } from '@/util/globals'
 
 // Types
 import type {
@@ -601,3 +602,19 @@ export function isEmpty (val: any): boolean {
 }
 
 export function noop () {}
+
+/** Returns null if the selector is not supported or we can't check */
+export function matchesSelector (el: Element | undefined, selector: string): boolean | null {
+  const supportsSelector = IN_BROWSER &&
+    typeof CSS !== 'undefined' &&
+    typeof CSS.supports !== 'undefined' &&
+    CSS.supports(`selector(${selector})`)
+
+  if (!supportsSelector) return null
+
+  try {
+    return !!el && el.matches(selector)
+  } catch (err) {
+    return null
+  }
+}
