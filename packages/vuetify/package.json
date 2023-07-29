@@ -164,6 +164,7 @@
     "rollup-plugin-sass": "^1.2.19",
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-terser": "^7.0.2",
+    "timezone-mock": "^1.3.6",
     "ts-json-schema-generator": "^1.2.0",
     "vite": "^4.3.5",
     "vite-ssr": "^0.17.1",
