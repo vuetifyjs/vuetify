@@ -6,7 +6,8 @@
     "title": "Generates a `v-list-item-title` component with the supplied value",
     "value": "The value used for selection.",
     "nav": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-item.json))",
-    "lines": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-item.json))"
+    "lines": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-item.json))",
+    "linkTitle": "Specify the link title. Useful when the component is rendered as anchor"
   },
   "events": {
     "click": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-item.json))",

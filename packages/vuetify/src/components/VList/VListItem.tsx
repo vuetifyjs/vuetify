@@ -74,6 +74,10 @@ export const makeVListItemProps = propsFactory({
     type: Boolean,
     default: undefined,
   },
+  linkTitle: {
+    type: String,
+    default: undefined,
+  },
   nav: Boolean,
   prependAvatar: String,
   prependIcon: IconValue,
@@ -220,6 +224,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
           ]}
           href={ link.href.value }
           tabindex={ isClickable.value ? (list ? -2 : 0) : undefined }
+          title={ isLink.value ? props.linkTitle : undefined }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && props.ripple }
