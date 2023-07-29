@@ -83,6 +83,8 @@
 
     @if ($button-colored-disabled)
       opacity: $button-disabled-opacity
+      &:hover
+        opacity: $button-disabled-opacity
     @else
       opacity: 1
       &.v-btn
