@@ -7,7 +7,6 @@
   min-width: 0
   overflow-x: auto
   padding: $chip-group-padding
-  flex-wrap: wrap // TODO: replace with slide-group
 
   .v-chip
     margin: $chip-group-margin
@@ -18,5 +17,7 @@
 
 // Modifiers
 .v-chip-group--column
-  flex-wrap: wrap
-  white-space: normal
+  .v-slide-group__content
+    white-space: normal
+    flex-wrap: wrap
+    max-width: 100%

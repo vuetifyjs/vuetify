@@ -1,6 +1,9 @@
 // Styles
 import './VChipGroup.sass'
 
+//Components
+import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'
+
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
@@ -31,6 +34,7 @@ export const makeVChipGroupProps = propsFactory({
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'tonal' } as const),
+  ...makeVSlideGroupProps({ mandatory: false as const }),
 }, 'VChipGroup')
 
 type VChipGroupSlots = {
@@ -53,6 +57,7 @@ export const VChipGroup = genericComponent<VChipGroupSlots>()({
   },
 
   setup (props, { slots }) {
+    const [ slideGroupProps ] = VSlideGroup.filterProps(props)
     const { themeClasses } = provideTheme(props)
     const { isSelected, select, next, prev, selected } = useGroup(props, VChipGroupSymbol)
 
@@ -66,7 +71,8 @@ export const VChipGroup = genericComponent<VChipGroupSlots>()({
     })
 
     useRender(() => (
-      <props.tag
+      <VSlideGroup
+        { ...slideGroupProps }
         class={[
           'v-chip-group',
           {
@@ -84,7 +90,7 @@ export const VChipGroup = genericComponent<VChipGroupSlots>()({
           prev,
           selected: selected.value,
         })}
-      </props.tag>
+      </VSlideGroup>
     ))
 
     return {}
