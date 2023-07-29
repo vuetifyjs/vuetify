@@ -65,6 +65,7 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
       handleScroll,
       handleItemResize,
       scrollToIndex,
+      scrollToItem,
       paddingTop,
       paddingBottom,
       computedItems,
@@ -125,6 +126,7 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
 
     return {
       scrollToIndex,
+      scrollToItem,
     }
   },
 })

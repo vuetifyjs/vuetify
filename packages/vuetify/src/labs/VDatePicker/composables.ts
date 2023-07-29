@@ -20,7 +20,7 @@ export const DatePickerSymbol: InjectionKey<DatePickerProvide> = Symbol.for('vue
 
 type DateProps = DateInputProps & { multiple?: boolean }
 
-export function createDatePicker (props: DateProps) {
+export function createDatePicker (props: DateProps, isRange: boolean) {
   const hoverDate = ref()
   const hoverMonth = ref()
   const isDragging = ref(false)
@@ -36,7 +36,7 @@ export function createDatePicker (props: DateProps) {
   })
 
   // TODO: This composable should probably not live in DateInput
-  const { model, displayDate, viewMode, inputMode, isEqual } = createDateInput(props, !!props.multiple)
+  const { model, displayDate, viewMode, inputMode, isEqual } = createDateInput(props, isRange)
 
   return {
     hoverDate,

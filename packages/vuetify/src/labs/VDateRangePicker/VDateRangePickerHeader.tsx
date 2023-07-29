@@ -43,7 +43,7 @@ export const VDateRangePickerHeader = genericComponent()({
   emits: {
     cancel: () => true,
     save: () => true,
-    'update:inputMode': (input: string) => true,
+    'update:inputMode': (input: 'calendar' | 'keyboard') => true,
     'update:displayDate': (date: any) => true,
   },
 
@@ -55,7 +55,7 @@ export const VDateRangePickerHeader = genericComponent()({
     const headerText = computed(() => {
       if (props.header) return props.header
 
-      if (!props.modelValue.length) return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}header.placeholder`)
+      if (!props.modelValue.length) return t(`$vuetify.dateRangePicker.header.placeholder`)
 
       if (props.modelValue.length === 1) return adapter.format(props.modelValue[0], 'normalDateWithWeekday')
 
@@ -65,9 +65,9 @@ export const VDateRangePickerHeader = genericComponent()({
     const titleText = computed(() => {
       if (props.title) return props.title
 
-      if (!props.modelValue.length) return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}title.placeholder`)
+      if (!props.modelValue.length) return t(`$vuetify.datePicker.title.placeholder`)
 
-      return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}title.selected`)
+      return t(`$vuetify.dateRangePicker.title.selected`)
     })
 
     function handleHeaderClick () {

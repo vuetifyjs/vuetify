@@ -3,8 +3,9 @@ import { useDisplay } from '@/composables/display'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, ref, shallowRef, watch, watchEffect } from 'vue'
+import { computed, nextTick, ref, shallowRef, watch, watchEffect } from 'vue'
 import {
+  IN_BROWSER,
   clamp,
   createRange,
   propsFactory,
@@ -103,6 +104,26 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
 
     const offset = calculateOffset(index)
     containerRef.value.scrollTop = offset
+
+    // TODO: I'm sure there's a smarter way of doing this.
+    if (IN_BROWSER) {
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(() => {
+            handleScroll()
+          })
+        })
+      })
+    }
+  }
+
+  function scrollToItem (item: T | ((item: T) => boolean)) {
+    const fn = typeof item === 'function' ? item as ((item: T) => boolean) : (v: T) => v === item
+    const index = items.value.findIndex(fn)
+
+    if (index < 0) return
+
+    scrollToIndex(index)
   }
 
   const last = computed(() => Math.min(items.value.length, first.value + visibleItems.value))
@@ -134,6 +155,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     paddingTop,
     paddingBottom,
     scrollToIndex,
+    scrollToItem,
     handleScroll,
     handleItemResize,
   }

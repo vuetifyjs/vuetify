@@ -1,3 +1,5 @@
+@use './variables' as *
+
 .v-date-picker-month
   display: flex
   justify-content: center
@@ -48,21 +50,35 @@
   border-left: none
   border-right: none
 
-.v-date-picker-month__day--start, .v-date-picker-month__day--week-start
+.v-date-picker-month__day--start
   .v-date-picker-month__day--range
     border-bottom-left-radius: 50%
     border-top-left-radius: 50%
     left: var(--v-date-picker-month-day-diff)
     width: calc(100% - var(--v-date-picker-month-day-diff))
 
-.v-date-picker-month__day--end, .v-date-picker-month__day--week-end
+.v-date-picker-month__day--end
   .v-date-picker-month__day--range
     border-bottom-right-radius: 50%
     border-top-right-radius: 50%
     right: var(--v-date-picker-month-day-diff)
     width: calc(100% - var(--v-date-picker-month-day-diff))
 
-.v-date-picker-month__day--selected.v-date-picker-month__day--end.v-date-picker-month__day--week-start,
-.v-date-picker-month__day--selected.v-date-picker-month__day--start.v-date-picker-month__day--week-end
+.v-date-picker-month__day--week-end:not(.v-date-picker-month__day--selected)
   .v-date-picker-month__day--range
-    display: none
+    border-bottom-right-radius: 0
+    border-top-right-radius: 0
+    width: calc(100% + $date-picker-table-padding)
+    margin-right: -$date-picker-table-padding
+
+.v-date-picker-month__day--week-start:not(.v-date-picker-month__day--selected)
+  .v-date-picker-month__day--range
+    border-bottom-left-radius: 0
+    border-top-left-radius: 0
+    width: calc(100% + $date-picker-table-padding)
+    margin-left: -$date-picker-table-padding
+
+.v-date-picker-month__day--week-end.v-date-picker-month__day--start
+  .v-date-picker-month__day--range
+    width: calc(100% + $date-picker-table-padding)
+    margin-right: -$date-picker-table-padding

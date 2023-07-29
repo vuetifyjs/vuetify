@@ -2,6 +2,10 @@ export default {
   badge: 'Badge',
   open: 'Open',
   close: 'Close',
+  picker: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'No matching records found',
     loadingText: 'Loading items...',
@@ -31,16 +35,19 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
-    range: {
-      title: 'Select dates',
-      header: 'Enter dates',
-    },
     title: 'Select date',
     header: 'Enter date',
     input: {
       placeholder: 'Enter date',
+    },
+  },
+  dateRangePicker: {
+    title: {
+      placeholder: 'Select dates',
+      selected: 'Selected range',
+    },
+    header: {
+      placeholder: 'Enter dates',
     },
   },
   noDataText: 'No data available',

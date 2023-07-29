@@ -27,6 +27,7 @@ export const makeVDateRangePickerProps = propsFactory({
   ...makeVDateRangePickerHeaderProps(),
   ...makeVDateRangePickerMonthProps(),
   ...makeTransitionProps({ transition: 'fade' }),
+  mobile: Boolean,
 }, 'VDateRangePicker')
 
 export const VDateRangePicker = genericComponent()({
@@ -45,9 +46,8 @@ export const VDateRangePicker = genericComponent()({
 
   setup (props, { emit }) {
     const adapter = useDate()
-    createDatePicker(props)
+    const { model, displayDate, inputMode } = createDatePicker(props, true)
 
-    const selected = ref(props.modelValue)
     const inputModel = ref(props.modelValue[0] ? adapter.format(props.modelValue[0], 'keyboardDate') : '')
 
     // watch(() => props.modelValue, newValue => {
@@ -56,11 +56,11 @@ export const VDateRangePicker = genericComponent()({
     //   inputModel.value = adapter.format(newValue[0], 'keyboardDate')
     // })
 
-    watch(inputModel, () => {
-      const { isValid, date } = adapter
+    // watch(inputModel, () => {
+    //   const { isValid, date } = adapter
 
-      selected.value = isValid(inputModel.value) ? [date(inputModel.value)] : []
-    })
+    //   selected.value = isValid(inputModel.value) ? [date(inputModel.value)] : []
+    // })
 
     // watch(selected, () => {
     //   if (!props.showActions) {
@@ -75,11 +75,10 @@ export const VDateRangePicker = genericComponent()({
     //     emit('update:modelValue', modelValue)
     //   }
     // }
-
     const handleCancel = () => emit('cancel')
     const handleSave = () => {
-      emit('update:modelValue', selected.value)
-      emit('save', selected.value)
+      emit('update:modelValue', model.value)
+      emit('save', model.value)
     }
 
     useRender(() => {
@@ -90,27 +89,45 @@ export const VDateRangePicker = genericComponent()({
       return (
         <VPicker
           { ...pickerProps }
-          key={ props.inputMode }
+          key={ inputMode.value }
           class={[
             'v-date-range-picker',
-            `v-date-range-picker--${props.inputMode}`,
+            `v-date-range-picker--${inputMode.value}`,
           ]}
-          width={ 328 }
           v-slots={{
             header: () => (
-              <VDateRangePickerHeader
-                { ...dateRangePickerHeaderProps }
-                modelValue={ selected.value }
-                onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
-                onUpdate:inputMode={ inputMode => emit('update:inputMode', inputMode) }
-                onCancel={ handleCancel }
-                onSave={ handleSave }
-              />
+              <>
+                <VDateRangePickerHeader
+                  { ...dateRangePickerHeaderProps }
+                  modelValue={ model.value }
+                  inputMode={ inputMode.value}
+                  displayDate={ displayDate.value }
+                  onUpdate:displayDate={ v => displayDate.value = v }
+                  onUpdate:inputMode={ v => inputMode.value = v }
+                  onCancel={ handleCancel }
+                  onSave={ handleSave }
+                />
+                { !props.hideWeekdays && (
+                  <div class="v-date-picker-month">
+                    <div class="v-date-picker-month__days">
+                      {adapter.getWeekdays().map(weekDay => (
+                        <div
+                          class={[
+                            'v-date-picker-month__day',
+                            'v-date-picker-month__weekday',
+                          ]}
+                        >{ weekDay }</div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </>
             ),
-            default: () => props.inputMode === 'calendar' ? (
+            default: () => inputMode.value === 'calendar' ? (
               <VDateRangePickerMonth
                 { ...dateRangePickerMonthProps }
-                v-model={ selected.value }
+                v-model={ model.value }
+                v-model:displayDate={ displayDate.value }
               />
             ) : (
               <div class="v-date-range-picker__input">
@@ -126,7 +143,7 @@ export const VDateRangePicker = genericComponent()({
                 />
               </div>
             ),
-            actions: props.inputMode === 'keyboard' ? () => (
+            actions: inputMode.value === 'keyboard' ? () => (
               <div>
                 <VBtn variant="text" color={ props.color } onClick={ handleCancel }>Cancel</VBtn>
                 <VBtn variant="text" color={ props.color } onClick={ handleSave }>Ok</VBtn>

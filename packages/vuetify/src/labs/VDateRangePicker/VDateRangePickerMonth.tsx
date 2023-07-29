@@ -3,6 +3,7 @@ import './VDateRangePickerMonth.sass'
 
 // Components
 import { makeVDatePickerMonthProps, VDatePickerMonth } from '../VDatePicker/VDatePickerMonth'
+import { VVirtualScroll } from '../../components/VVirtualScroll'
 
 // Composables
 import { useDatePicker } from '../VDatePicker/composables'
@@ -14,7 +15,6 @@ import { createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVDateRangePickerMonthProps = propsFactory({
   ...makeVDatePickerMonthProps({
-    hideWeekdays: true,
     multiple: true,
   }),
 }, 'VDateRangePickerMonth')
@@ -32,42 +32,44 @@ export const VDateRangePickerMonth = genericComponent()({
     const adapter = useDate()
     const { hasScrolled } = useDatePicker()
 
+    const range = ref([50, -25])
     const months = computed(() => {
-      const range = createRange(6, -3)
-
-      return range.map(offset => adapter.addMonths(props.displayDate, offset))
-    })
-
-    const monthRef = ref()
-    onMounted(() => {
-      monthRef.value?.$el.scrollIntoView({ block: 'center' })
+      const [length, start] = range.value
+      return createRange(length, start).map(offset => adapter.addMonths(props.displayDate, offset))
     })
 
     function handleScroll () {
       hasScrolled.value = true
     }
 
+    const virtualScrollRef = ref()
+
+    onMounted(() => {
+      if (virtualScrollRef.value) {
+        virtualScrollRef.value.scrollToItem(item => adapter.isSameMonth(item, props.displayDate))
+      }
+    })
+
     useRender(() => {
       const [datePickerMonthProps] = VDatePickerMonth.filterProps(props)
 
       return (
-        <div
-          class="v-date-range-picker-month"
-          onScrollPassive={ handleScroll }
-        >
-          { months.value.map(month => (
-            <>
-              <div class="v-date-range-picker-month__header">{ adapter.format(month, 'monthAndYear') }</div>
-              <VDatePickerMonth
-                ref={ adapter.isSameMonth(month, props.displayDate) ? monthRef : undefined }
-                { ...datePickerMonthProps }
-                modelValue={ props.modelValue }
-                onUpdate:modelValue={ modelValue => emit('update:modelValue', modelValue) }
-                displayDate={ month }
-              />
-            </>
-          ))}
-        </div>
+        <VVirtualScroll items={months.value} class="v-date-range-picker-month" ref={virtualScrollRef} onScroll={handleScroll}>
+          {{
+            default: (({ item: month }) => (
+              <>
+                <div class="v-date-range-picker-month__header">{ adapter.format(month, 'monthAndYear') }</div>
+                <VDatePickerMonth
+                  { ...datePickerMonthProps }
+                  modelValue={ props.modelValue }
+                  onUpdate:modelValue={ modelValue => emit('update:modelValue', modelValue) }
+                  displayDate={ month }
+                  hideWeekdays
+                />
+              </>
+            ))
+          }}
+        </VVirtualScroll>
       )
     })
   },
