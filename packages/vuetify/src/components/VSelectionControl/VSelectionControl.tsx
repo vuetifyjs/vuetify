@@ -54,6 +54,7 @@ export const makeSelectionControlProps = propsFactory({
   trueValue: null,
   falseValue: null,
   value: null,
+  reverse: Boolean,
 
   ...makeComponentProps(),
   ...makeSelectionControlGroupProps(),
@@ -214,6 +215,12 @@ export const VSelectionControl = genericComponent<new <T>(
           { ...rootAttrs }
           style={ props.style }
         >
+          { props.reverse &&  label && (
+            <VLabel class={ 'v-label--prepend' } for={ id.value } clickable>
+              { label }
+            </VLabel>
+          )}
+
           <div
             class={[
               'v-selection-control__wrapper',
@@ -264,8 +271,8 @@ export const VSelectionControl = genericComponent<new <T>(
             </div>
           </div>
 
-          { label && (
-            <VLabel for={ id.value } clickable>
+          { !props.reverse && label && (
+            <VLabel class={ 'v-label--append' } for={ id.value } clickable>
               { label }
             </VLabel>
           )}

@@ -5,7 +5,10 @@
 
 .v-switch
   .v-label
-    padding-inline-start: $switch-label-margin-inline-start
+    &--append
+      padding-inline-start: $switch-label-margin-inline-start
+    &--prepend
+      padding-inline-end: $switch-label-margin-inline-start
 
 .v-switch__loader
   display: flex
