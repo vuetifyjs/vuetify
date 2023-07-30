@@ -132,6 +132,12 @@ app.use(vuetify)
   - Allowed values are `'elevated'`, `'flat'`, `'tonal'`, `'outlined'`, `'text'`, or `'plain'`.
 - `text` prop has new purpose. It represents the text content of the alert, if default slot is not used.
 
+### v-badge
+
+- `overlap` has been removed and is now the default style, use `floating` to restore the v2 default.
+- Transition props `mode` and `origin` have been removed.
+- `avatar` prop is no longer needed and has been removed.
+
 ### v-btn/v-btn-toggle
 
 - `active-class` prop has been renamed to `selected-class`
