@@ -102,7 +102,7 @@
               rel="noopener noreferrer sponsored"
               @click="onClickPromotion"
             >
-              <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/theme-selection-dashboard-2023/themeselection-promotion-banner.png" />
+              <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/theme-selection-dashboard-2023/vuetify-ad-banner.png" />
             </a>
           </v-col>
         </v-row>

@@ -6,6 +6,7 @@ import { makeVExpansionPanelTitleProps, VExpansionPanelTitle } from './VExpansio
 // Composables
 import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { provideDefaults } from '@/composables/defaults'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { makeLazyProps } from '@/composables/lazy'
@@ -13,7 +14,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { computed, provide } from 'vue'
+import { computed, provide, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVExpansionPanelProps = propsFactory({
@@ -71,6 +72,12 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
 
     provide(VExpansionPanelSymbol, groupItem)
 
+    provideDefaults({
+      VExpansionPanelText: {
+        eager: toRef(props, 'eager'),
+      },
+    })
+
     useRender(() => {
       const hasText = !!(slots.text || props.text)
       const hasTitle = !!(slots.title || props.title)
@@ -115,7 +122,7 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
           )}
 
           { hasText && (
-            <VExpansionPanelText key="text" eager={ props.eager }>
+            <VExpansionPanelText key="text">
               { slots.text ? slots.text() : props.text }
             </VExpansionPanelText>
           )}

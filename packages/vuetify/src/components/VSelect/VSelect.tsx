@@ -24,7 +24,7 @@ import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, ref, shallowRef } from 'vue'
-import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { deepEqual, genericComponent, matchesSelector, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { Component, PropType } from 'vue'
@@ -247,7 +247,7 @@ export const VSelect = genericComponent<new <
     }
     function onModelUpdate (v: any) {
       if (v == null) model.value = []
-      else if (vTextFieldRef.value?.matches(':autofill') || vTextFieldRef.value?.matches(':-webkit-autofill')) {
+      else if (matchesSelector(vTextFieldRef.value, ':autofill') || matchesSelector(vTextFieldRef.value, ':-webkit-autofill')) {
         const item = items.value.find(item => item.title === v)
         if (item) {
           select(item)
