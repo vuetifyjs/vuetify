@@ -35,8 +35,12 @@ export const VStepperWindow = genericComponent()({
 
     const model = computed({
       get () {
+        // Always return modelValue if defined
+        // or if not within a VStepper group
         if (_model.value != null || !group) return _model.value
 
+        // If inside of a VStepper, find the currently selected
+        // item by id. Item value may be assigned by its index
         return group.items.value.find(item => group.selected.value.includes(item.id))?.value
       },
       set (val) {

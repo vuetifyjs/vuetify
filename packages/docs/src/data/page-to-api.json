@@ -126,7 +126,7 @@
     "VStepperHeader",
     "VStepperItem",
     "VStepperWindow",
-    "VStepperWindowItems"
+    "VStepperWindowItem"
   ],
   "components/switches": ["VSwitch"],
   "components/system-bars": ["VSystemBar"],

@@ -12,8 +12,8 @@ import type { PropType } from 'vue'
 
 export const makeVStepperActionsProps = propsFactory({
   color: String,
-  disable: {
-    type: [Boolean, String] as PropType<boolean | 'back' | 'continue'>,
+  disabled: {
+    type: [Boolean, String] as PropType<boolean | 'next' | 'prev'>,
     default: false,
   },
   prevText: {
@@ -50,14 +50,14 @@ export const VStepperActions = genericComponent()({
       return (
         <div class="v-stepper-actions">
           <VBtn
-            disabled={['prev', true].includes(props.disable)}
+            disabled={['prev', true].includes(props.disabled)}
             text={ t(props.prevText) }
             variant="text"
             onClick={ onClickPrev }
           />
 
           <VBtn
-            disabled={['next', true].includes(props.disable)}
+            disabled={['next', true].includes(props.disabled)}
             color={ props.color }
             text={ t(props.nextText) }
             variant="tonal"

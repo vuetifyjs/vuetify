@@ -15,11 +15,12 @@ import { provideDefaults } from '@/composables/defaults'
 import { makeGroupProps, useGroup } from '@/composables/group'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, toRefs } from 'vue'
 import { genericComponent, getPropertyFromItem, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType } from 'vue'
+import type { StepperItemSlot } from './VStepperItem'
 import type { GroupItemProvide } from '@/composables/group'
 
 export const VStepperSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-stepper')
@@ -32,19 +33,24 @@ export type VStepperSlot = {
 }
 
 export type VStepperSlots = {
-  default: VStepperSlot
   actions: VStepperSlot
-  header: never
-  icon: never
-  item: never
-  title: never
-  subtitle: never
-} & { [key: `window-item.${string}`]: never }
+  default: StepperItem
+  header: StepperItem
+  'header-item': StepperItemSlot
+  icon: StepperItemSlot
+  title: StepperItemSlot
+  subtitle: StepperItemSlot
+  item: StepperItem
+} & {
+  [key: `header-item.${string}`]: StepperItemSlot
+  [key: `item.${string}`]: StepperItem
+}
 
 export const makeVStepperProps = propsFactory({
   altLabels: Boolean,
   bgColor: String,
   editable: Boolean,
+  hideActions: Boolean,
   items: {
     type: Array as PropType<readonly StepperItem[]>,
     default: () => ([]),
@@ -60,7 +66,6 @@ export const makeVStepperProps = propsFactory({
   mobile: Boolean,
   nonLinear: Boolean,
   flat: Boolean,
-  showActions: Boolean,
 
   ...makeGroupProps({
     mandatory: 'force' as const,
@@ -80,7 +85,8 @@ export const VStepper = genericComponent<VStepperSlots>()({
   },
 
   setup (props, { slots }) {
-    const { next, prev } = useGroup(props, VStepperSymbol)
+    const { items: _items, next, prev, selected } = useGroup(props, VStepperSymbol)
+    const { editable, prevText, nextText } = toRefs(props)
 
     const items = computed(() => props.items.map((item, index) => {
       const title = getPropertyFromItem(item, props.itemTitle, item)
@@ -92,14 +98,25 @@ export const VStepper = genericComponent<VStepperSlots>()({
         raw: item,
       }
     }))
+    const activeIndex = computed(() => {
+      return _items.value.findIndex(item => selected.value.includes(item.id))
+    })
+    const disabled = computed(() => {
+      if (props.disabled) return props.disabled
+      if (activeIndex.value === 0) return 'prev'
+      if (activeIndex.value === _items.value.length - 1) return 'next'
 
-    const slotProps = computed(() => ({ next, prev }))
+      return false
+    })
 
     provideDefaults({
       VStepperItem: {
-        editable: computed(() => props.editable),
-        prevText: computed(() => props.prevText),
-        nextText: computed(() => props.nextText),
+        editable,
+        prevText,
+        nextText,
+      },
+      VStepperActions: {
+        disabled,
       },
     })
 
@@ -109,7 +126,7 @@ export const VStepper = genericComponent<VStepperSlots>()({
 
       const hasHeader = !!(slots.header || props.items.length)
       const hasWindow = props.items.length > 0
-      const hasActions = props.showActions && !!(hasWindow || slots.actions)
+      const hasActions = !props.hideActions && !!(hasWindow || slots.actions)
 
       return (
         <VSheet
@@ -135,7 +152,7 @@ export const VStepper = genericComponent<VStepperSlots>()({
                   <VStepperItem
                     { ...item }
                     v-slots={{
-                      default: slots.item,
+                      default: slots[`header-item.${item.value}`] ?? slots.header,
                       icon: slots.icon,
                       title: slots.title,
                       subtitle: slots.subtitle,
@@ -143,28 +160,26 @@ export const VStepper = genericComponent<VStepperSlots>()({
                   />
                 </>
               ))}
-
-              { slots.header?.() }
             </VStepperHeader>
           )}
 
           { hasWindow && (
             <VStepperWindow key="stepper-window">
-              { items.value.map((item, index) => {
-                return (
-                  <VStepperWindowItem
-                    value={ item.value }
-                    v-slots={{ default: slots[`window-item.${item.value}`] }}
-                  />
-                )
-              })}
+              { items.value.map(item => (
+                <VStepperWindowItem
+                  value={ item.value }
+                  v-slots={{
+                    default: () => slots[`item.${item.value}`]?.(item) ?? slots.item?.(item),
+                  }}
+                />
+              ))}
             </VStepperWindow>
           )}
 
-          { slots.default?.(slotProps.value) }
+          { slots.default?.({ prev, next }) }
 
           { hasActions && (
-            slots.actions?.(slotProps.value) ?? (
+            slots.actions?.({ next, prev }) ?? (
               <VStepperActions
                 key="stepper-actions"
                 { ...stepperActionProps }

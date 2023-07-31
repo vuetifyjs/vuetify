@@ -102,6 +102,7 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
       title: props.title,
       subtitle: props.subtitle,
       step: step.value,
+      value: props.value,
     }))
 
     useRender(() => {

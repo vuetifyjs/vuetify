@@ -11,11 +11,11 @@ import type { ComponentInternalInstance, ComputedRef, ExtractPropTypes, Injectio
 export interface GroupItem {
   id: number
   value: Ref<unknown>
-  disabled: Ref<boolean | undefined>
+  disabled: Ref<boolean | string | undefined>
 }
 
 export interface GroupProps {
-  disabled: boolean
+  disabled: boolean | string
   modelValue: unknown
   multiple?: boolean
   mandatory?: boolean | 'force' | undefined
@@ -36,9 +36,9 @@ export interface GroupProvide {
   items: ComputedRef<{
     id: number
     value: unknown
-    disabled: boolean | undefined
+    disabled: boolean | string | undefined
   }[]>
-  disabled: Ref<boolean | undefined>
+  disabled: Ref<boolean | string | undefined>
   getItemIndex: (value: unknown) => number
 }
 
@@ -49,7 +49,7 @@ export interface GroupItemProvide {
   select: (value: boolean) => void
   selectedClass: Ref<(string | undefined)[] | false>
   value: Ref<unknown>
-  disabled: Ref<boolean | undefined>
+  disabled: Ref<boolean | string | undefined>
   group: GroupProvide
 }
 
@@ -62,12 +62,12 @@ export const makeGroupProps = propsFactory({
   mandatory: [Boolean, String] as PropType<boolean | 'force'>,
   max: Number,
   selectedClass: String,
-  disabled: Boolean,
+  disabled: [Boolean, String],
 }, 'group')
 
 export const makeGroupItemProps = propsFactory({
   value: null,
-  disabled: Boolean,
+  disabled: [Boolean, String],
   selectedClass: String,
 }, 'group-item')
 
@@ -112,7 +112,7 @@ export function useGroupItem (
   }
 
   const value = toRef(props, 'value')
-  const disabled = computed(() => group.disabled.value || props.disabled)
+  const disabled = computed(() => !!(group.disabled.value || props.disabled))
 
   group.register({
     id,
