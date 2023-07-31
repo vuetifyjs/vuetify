@@ -27,7 +27,7 @@ Many of these changes can be applied automatically by [eslint-plugin-vuetify](ht
   Not all Vuetify 2 components are currently available in Vuetify 3; These components will be released as their development is completed via [Vuetify Labs](https://vuetifyjs.com/en/labs/introduction/).
 
 - v-calendar
-- v-date-picker
+- [v-date-picker](/components/date-pickers/)
 - [v-data-table](/components/data-tables/basics/)
 - [v-skeleton-loader](/components/skeleton-loaders/)
 - v-stepper
@@ -210,10 +210,6 @@ app.use(vuetify)
 - `internal-activator` prop has been removed without replacement
 - `offset-y` and `offset-x` props have been removed. Use `offset` prop instead
 - `absolute` variant has been removed. For absolute positioning use css instead
-
-### v-skeleton-loader
-
-- This component hasn't been migrated to vuetify 3
 
 ### v-snackbar
 
