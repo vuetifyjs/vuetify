@@ -18,7 +18,7 @@ import { useLocale } from '@/composables/locale'
 import { useDate } from '@/labs/date'
 
 // Utilities
-import { computed, ref, watch } from 'vue'
+import { computed, shallowRef, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -81,7 +81,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
 
     const { model, displayDate, viewMode, inputMode } = createDatePicker(props)
 
-    const isReversing = ref(false)
+    const isReversing = shallowRef(false)
 
     const inputModel = computed(() => model.value.length ? adapter.format(model.value[0], 'keyboardDate') : '')
     const title = computed(() => t(props.title))
