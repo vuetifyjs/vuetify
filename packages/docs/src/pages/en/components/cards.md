@@ -77,7 +77,7 @@ In some cases it is possible to combine the different options, like the example 
 
 ### Content overflow
 
-By default, `v-card` doesn't let its content overflow outside the card. It also creates a `z-index` stacking context, making its content unable to display on top of elements outside `v-card` even if it defines a higher `z-index` value. If you want to opt-out from this behavior, you can use it like `<v-card style="overflow: initial; z-index: initial">` ([overflow example](https://play.vuetifyjs.com/#eNqlUsFu2zAM/RVClyZAbKdIL/OSLMM+YbvVPagyEyuVZEOiU3dF/n2SbLdueliA6iQ+ie+Rj7x/ZT+bJj21yHK2JtSN4oTbwgCsT4ngtgShuHObguku4S3VBYPc0YtCD4X33+HuwWdZUuWxu+WyYJHgjSIh7GiAIij1YYwAnBU+rSJqXJ5lojShGpL7l6NLRa0zqfkBXRaIXOZa4yppMD02h4JNSIaKyHLj9rXVOTjBFc5W8+/wN5GmxC6Hb+FM0yqUh4p83u1y2XTTF1Gf0L6HO6GkeJq2DBuY3DcbMK1S8ANuQuJe1c85SCNJcjUpYEBuII/f3wW36yzaMhrno4/Ojch/RnP1FP5U0kG0FsaCXQq/QpdQG5AEVINCCjfsBGIJVGFsOb2ixnU22SUfOmFl0//CrqktQYl73iqC156t5MRzmM1hs4XZgPkpjA73fi16/DyPl3OQeSNmCyZ1YE40b9Kjq43f6EhUDA+uYPkoVzC/ZCH+uHlHV6KSJ5sapMw0Otv5b5ltDUmNSVnr3SpdpXdZKR1N4RSdTh6t9xCtJynYUGmUCbt8hdTwMyrcLnuJAUsUf3RB4xN35gX9+BKLfsGs39grW7pIm7Z18fSptcH6szdcSfPkLrwWLvp8Pxb5tZ4jW6B6CIrnBYuFeuk+gz38A+6GjEk=), related issues [#17593](https://github.com/vuetifyjs/vuetify/issues/17593), [#17628](https://github.com/vuetifyjs/vuetify/issues/17628)).
+By default, `v-card` doesn't let its content overflow outside the card. It also creates a `z-index` stacking context, making its content unable to display on top of elements outside `v-card` even if it defines a higher `z-index` value. If you want to opt-out from this behavior, you can use it like `<v-card style="overflow: initial; z-index: initial">`.
 
 ## Examples
 
