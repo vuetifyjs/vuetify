@@ -582,7 +582,7 @@ export function focusableChildren (el: Element) {
   return [...el.querySelectorAll(targets)] as HTMLElement[]
 }
 
-export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last') {
+export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last' | number) {
   const focusable = focusableChildren(el)
   const idx = focusable.indexOf(document.activeElement as HTMLElement)
 
@@ -594,6 +594,8 @@ export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 
     focusable[0]?.focus()
   } else if (location === 'last') {
     focusable.at(-1)?.focus()
+  } else if (typeof location === 'number') {
+    focusable[location]?.focus()
   } else {
     let _el
     let idxx = idx

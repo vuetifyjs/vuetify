@@ -15,7 +15,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, watch } from 'vue'
-import { focusChild, genericComponent, only, propsFactory, useRender } from '@/util'
+import { focusChild, genericComponent, IN_BROWSER, only, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -108,7 +108,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     function onKeydown (e: KeyboardEvent) {
       const array = model.value.slice()
       const index = focusIndex.value
-      let target: 'next' | 'prev' | 'first' | 'last' | null = null
+      let target: 'next' | 'prev' | 'first' | 'last' | number | null = null
 
       if (e.key === 'ArrowLeft') {
         target = 'prev'
@@ -126,6 +126,10 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         requestAnimationFrame(() => {
           inputRef.value[index].select()
         })
+      } else if (props.type === 'number' && isNaN(parseInt(e.key))) {
+        return
+      } else if (focusIndex.value > model.value.length) {
+        target = model.value.length + 1
       } else if (focusIndex.value + 1 !== Number(props.length)) {
         target = 'next'
       } else {
@@ -135,7 +139,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       }
 
       requestAnimationFrame(() => {
-        if (target) {
+        if (target != null) {
           focusChild(contentRef.value!, target)
         }
       })
@@ -181,8 +185,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     watch(focusIndex, val => {
       if (val < 0) return
 
-      window.requestAnimationFrame(() => {
-        inputRef.value[focusIndex.value].select()
+      IN_BROWSER && window.requestAnimationFrame(() => {
+        inputRef.value[val].select()
       })
     })
 
@@ -198,12 +202,14 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
           ]}
           style={[
             props.style,
-            dimensionStyles.value,
           ]}
         >
           <div
             ref={ contentRef }
             class="v-otp-input__content"
+            style={[
+              dimensionStyles.value,
+            ]}
           >
             { fields.value.map((_, i) => (
               <>
@@ -245,25 +251,25 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                 </VField>
               </>
             ))}
+
+            <VOverlay
+              contained
+              content-class="v-otp-input__loader"
+              model-value={ !!props.loading }
+              persistent
+            >
+              { slots.loader?.() ?? (
+                <VProgressCircular
+                  color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+                  indeterminate
+                  size="24"
+                  width="2"
+                />
+              )}
+            </VOverlay>
+
+            { slots.default?.() }
           </div>
-
-          <VOverlay
-            contained
-            content-class="v-otp-input__loader"
-            model-value={ !!props.loading }
-            persistent
-          >
-            { slots.loader?.() ?? (
-              <VProgressCircular
-                color={ typeof props.loading === 'boolean' ? undefined : props.loading }
-                indeterminate
-                size="24"
-                width="2"
-              />
-            )}
-          </VOverlay>
-
-          { slots.default?.() }
         </div>
       )
     })
