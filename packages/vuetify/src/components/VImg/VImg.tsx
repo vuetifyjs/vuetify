@@ -210,7 +210,7 @@ export const VImg = genericComponent<VImgSlots>()({
 
       const img = (
         <img
-          class={['v-img__img', containClasses.value]}
+          class={['v-img__img', containClasses.value, props.contentClass]}
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
           alt={ props.alt }
