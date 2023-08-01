@@ -408,6 +408,7 @@ export const VAutocomplete = genericComponent<new <
             },
             props.class,
           ]}
+          roleType="combobox"
           style={ props.style }
           readonly={ props.readonly }
           placeholder={ isDirty ? undefined : props.placeholder }

@@ -194,7 +194,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                 onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
-                role="textbox"
+                role={ attrs.roleType || "textbox" }
                 { ...fieldProps }
                 id={ id.value }
                 active={ isActive.value || isDirty.value }
