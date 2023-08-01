@@ -81,13 +81,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
 
     const { model, displayDate, viewMode, inputMode } = createDatePicker(props)
 
-    const model = ref<any[]>(wrapInArray(props.modelValue))
     const isReversing = shallowRef(false)
-
-    const displayDate = useProxiedModel(props, 'displayDate', props.displayDate)
-    const inputMode = useProxiedModel(props, 'inputMode', props.inputMode)
-    const viewMode = useProxiedModel(props, 'viewMode', props.viewMode)
-
     const inputModel = computed(() => model.value.length ? adapter.format(model.value[0], 'keyboardDate') : '')
     const title = computed(() => t(props.title))
     const header = computed(() => model.value.length ? adapter.format(model.value[0], 'normalDateWithWeekday') : t(props.header))
