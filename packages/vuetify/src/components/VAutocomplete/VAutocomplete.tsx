@@ -144,14 +144,16 @@ export const VAutocomplete = genericComponent<new <
     const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
     const selections = computed(() => {
       return model.value.map(v => {
-        return items.value.find(item =>
-          props.returnObject
-            ? props.valueComparator(
-              getPropertyFromItem(item.raw, props.itemValue),
-              getPropertyFromItem(v.raw, props.itemValue)
-            )
+        return items.value.find(item => {
+          const itemRawValue = getPropertyFromItem(item.raw, props.itemValue)
+          const modelRawValue = getPropertyFromItem(v.raw, props.itemValue)
+
+          if (itemRawValue === undefined || modelRawValue === undefined) return false
+
+          return props.returnObject
+            ? props.valueComparator(itemRawValue, modelRawValue)
             : props.valueComparator(item.value, v.value)
-        ) || v
+        }) || v
       })
     })
 
