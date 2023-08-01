@@ -228,6 +228,10 @@
       {
         "title": "skeleton-loaders",
         "subfolder": "components"
+      },
+      {
+        "title": "steppers",
+        "subfolder": "components"
       }
     ]
   },

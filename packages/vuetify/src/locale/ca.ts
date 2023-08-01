@@ -77,6 +77,10 @@ export default {
       last: 'Última pàgina',
     },
   },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
+  },
   rating: {
     ariaLabel: {
       item: 'Puntuació {0} de {1}',
