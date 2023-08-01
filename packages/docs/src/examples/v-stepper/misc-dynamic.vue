@@ -16,11 +16,10 @@
           <template v-for="n in steps" :key="`${n}-step`">
             <v-stepper-item
               :complete="e1 > n"
+              :step="`Step {{ n }}`"
               :value="n"
               editable
-            >
-              Step {{ n }}
-            </v-stepper-item>
+            ></v-stepper-item>
 
             <v-divider
               v-if="n !== steps"

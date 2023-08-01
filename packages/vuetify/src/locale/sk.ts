@@ -77,6 +77,10 @@ export default {
       last: 'Last page',
     },
   },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
+  },
   rating: {
     ariaLabel: {
       item: 'Hodnotenie {0} z {1}',

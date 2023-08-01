@@ -77,6 +77,10 @@ export default {
       last: 'Last page',
     },
   },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
+  },
   rating: {
     ariaLabel: {
       item: 'Đánh giá {0} trên {1}',

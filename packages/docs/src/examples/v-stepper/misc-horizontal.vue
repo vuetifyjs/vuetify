@@ -4,7 +4,7 @@
     :items="items"
     show-actions
   >
-    <template v-slot:window-item.1>
+    <template v-slot:item.1>
       <h3 class="text-h6">Order</h3>
 
       <br>
@@ -38,7 +38,7 @@
       </v-sheet>
     </template>
 
-    <template v-slot:window-item.2>
+    <template v-slot:item.2>
       <h3 class="text-h6">Shipping</h3>
 
       <br>
@@ -50,7 +50,7 @@
       </v-radio-group>
     </template>
 
-    <template v-slot:window-item.3>
+    <template v-slot:item.3>
       <h3 class="text-h6">Confirm</h3>
 
       <br>
@@ -117,4 +117,39 @@
       quantity: 10,
     },
   ]
+</script>
+
+<script>
+  export default {
+    data: () => ({
+      shipping: 0,
+      step: 1,
+      items: [
+        'Review Order',
+        'Select Shipping',
+        'Submit',
+      ],
+      products: [
+        {
+          name: 'Product 1',
+          price: 10,
+          quantity: 2,
+        },
+        {
+          name: 'Product 2',
+          price: 15,
+          quantity: 10,
+        },
+      ],
+    }),
+
+    computed: {
+      subtotal () {
+        return this.products.reduce((acc, product) => acc + product.quantity * product.price, 0)
+      },
+      total () {
+        return this.subtotal + Number(this.shipping ?? 0)
+      },
+    },
+  }
 </script>

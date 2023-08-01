@@ -77,6 +77,10 @@ export default {
       last: 'Sista sidan',
     },
   },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
+  },
   rating: {
     ariaLabel: {
       item: 'Betyg {0} av {1}',

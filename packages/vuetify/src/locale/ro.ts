@@ -77,6 +77,10 @@ export default {
       last: 'Ultima pagină',
     },
   },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
+  },
   rating: {
     ariaLabel: {
       item: 'Rating de {0} din {1}',

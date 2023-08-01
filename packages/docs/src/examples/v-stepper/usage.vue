@@ -6,8 +6,8 @@
     :options="options"
   >
     <v-stepper v-bind="props" v-model="step">
-      <template v-slot:window-item.1>
-        <v-card title="Step One" flat min-height="200">
+      <template v-slot:item.1>
+        <v-card title="Step One" flat>
           <template v-slot:text>
             <div @dblclick="onDblClick" @blur="onBlur">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
@@ -16,8 +16,8 @@
         </v-card>
       </template>
 
-      <template v-slot:window-item.2>
-        <v-card title="Step Two" flat min-height="200">
+      <template v-slot:item.2>
+        <v-card title="Step Two" flat>
           <template v-slot:text>
             <div @dblclick="onDblClick" @blur="onBlur">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus!
@@ -26,8 +26,8 @@
         </v-card>
       </template>
 
-      <template v-slot:window-item.3>
-        <v-card title="Step Three" flat min-height="200">
+      <template v-slot:item.3>
+        <v-card title="Step Three" flat>
           <template v-slot:text>
             <div @dblclick="onDblClick" @blur="onBlur">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
@@ -44,11 +44,11 @@
 
       <v-text-field v-model="next" label="Next text"></v-text-field>
 
-      <v-checkbox v-model="showActions" label="Show Actions"></v-checkbox>
+      <v-checkbox v-model="hideActions" label="Hide actions"></v-checkbox>
 
       <v-checkbox v-model="editable" label="Editable"></v-checkbox>
 
-      <v-checkbox v-model="altLabels" label="Alt Labels"></v-checkbox>
+      <v-checkbox v-model="altLabels" label="Alt labels"></v-checkbox>
     </template>
   </usage-example>
 </template>
@@ -64,7 +64,7 @@
   const step = ref(1)
   const altLabels = ref(false)
   const editable = ref(false)
-  const showActions = ref(true)
+  const hideActions = ref(false)
   const prev = ref('$vuetify.stepper.prev')
   const next = ref('$vuetify.stepper.next')
 
@@ -80,6 +80,7 @@
     return {
       'alt-labels': altLabels.value || undefined,
       editable: editable.value || undefined,
+      'hide-actions': hideActions.value || undefined,
       'prev-text': prev.value.startsWith('$vuetify') ? undefined : prev.value,
       'next-text': next.value.startsWith('$vuetify') ? undefined : next.value,
       items: [
@@ -87,22 +88,21 @@
         'Step 2',
         'Step 3',
       ],
-      'show-actions': showActions.value,
     }
   })
 
   const slots = computed(() => {
     return `
-  <template v-slot:window-item.1>
-    <v-card title="Step One" flat min-height="200">...</v-card>
+  <template v-slot:item.1>
+    <v-card title="Step One" flat>...</v-card>
   </template>
 
-  <template v-slot:window-item.2>
-    <v-card title="Step Two" flat min-height="200">...</v-card>
+  <template v-slot:item.2>
+    <v-card title="Step Two" flat>...</v-card>
   </template>
 
-  <template v-slot:window-item.3>
-    <v-card title="Step Three" flat min-height="200">...</v-card>
+  <template v-slot:item.3>
+    <v-card title="Step Three" flat>...</v-card>
   </template>
 `
   })

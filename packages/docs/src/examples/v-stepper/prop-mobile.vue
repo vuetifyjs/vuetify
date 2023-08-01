@@ -17,3 +17,15 @@
     value: i + 1,
   }))
 </script>
+
+<script>
+  export default {
+    data: () => ({
+      items: Array.from({ length: 10 }).map((_, i) => ({
+        title: `Step ${i + 1}`,
+        subtitle: `Step ${i + 1} subtitle`,
+        value: i + 1,
+      })),
+    }),
+  }
+</script>

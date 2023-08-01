@@ -2,8 +2,8 @@
   <v-stepper alt-labels>
     <v-stepper-header>
       <v-stepper-item
-        value="1"
         complete
+        value="1"
       >
         <template v-slot:title>
           Ad type
@@ -13,8 +13,8 @@
       <v-divider></v-divider>
 
       <v-stepper-item
-        value="2"
         complete
+        value="2"
       >
         <template v-slot:title>
           Ad style

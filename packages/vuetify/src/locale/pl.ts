@@ -77,6 +77,10 @@ export default {
       last: 'Ostatnia strona',
     },
   },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
+  },
   rating: {
     ariaLabel: {
       item: 'Ocena {0} na {1}',
