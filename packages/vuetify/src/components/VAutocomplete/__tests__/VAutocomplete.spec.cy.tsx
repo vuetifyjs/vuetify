@@ -465,9 +465,12 @@ describe('VAutocomplete', () => {
   })
 
   it('should auto-select-first item when pressing enter', () => {
+    const selectedItems = ref(undefined)
+
     cy
       .mount(() => (
         <VAutocomplete
+          v-model={ selectedItems.value }
           items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
           multiple
           autoSelectFirst
@@ -484,7 +487,10 @@ describe('VAutocomplete', () => {
       .get('.v-autocomplete input')
       .trigger('keydown', { key: keyValues.enter, waitForAnimations: false })
       .get('.v-list-item')
-      .should('have.length', 6)
+      .should('have.length', 1)
+      .then(_ => {
+        expect(selectedItems.value).to.deep.equal(['California'])
+      })
   })
 
   describe('Showcase', () => {
