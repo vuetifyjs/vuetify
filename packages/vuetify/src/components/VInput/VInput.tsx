@@ -41,6 +41,7 @@ export const makeVInputProps = propsFactory({
   },
   prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
+  hideSpinButtons: Boolean,
   hint: String,
   persistentHint: Boolean,
   messages: {
@@ -142,6 +143,7 @@ export const VInput = genericComponent<VInputSlots>()({
             `v-input--${props.direction}`,
             {
               'v-input--center-affix': props.centerAffix,
+              'v-input--hide-spin-buttons': props.hideSpinButtons,
             },
             densityClasses.value,
             validationClasses.value,
