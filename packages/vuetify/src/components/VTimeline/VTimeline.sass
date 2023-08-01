@@ -104,7 +104,6 @@ $timeline-line-size-first-last: calc(var(--v-timeline-line-size-base) - var(--v-
 
 .v-timeline-divider__before
   background: $timeline-divider-line-background
-  position: absolute
 
   @include horizontal
     height: $timeline-divider-line-thickness
@@ -119,13 +118,13 @@ $timeline-line-size-first-last: calc(var(--v-timeline-line-size-base) - var(--v-
       left: initial
 
   @include vertical
+    position: absolute
     height: $timeline-line-size
     width: $timeline-divider-line-thickness
     top: $timeline-line-start
 
 .v-timeline-divider__after
   background: $timeline-divider-line-background
-  position: absolute
 
   @include horizontal
     height: $timeline-divider-line-thickness
@@ -140,6 +139,7 @@ $timeline-line-size-first-last: calc(var(--v-timeline-line-size-base) - var(--v-
       right: initial
 
   @include vertical
+    position: absolute
     height: $timeline-line-size
     width: $timeline-divider-line-thickness
     bottom: $timeline-line-start

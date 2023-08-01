@@ -21,8 +21,8 @@ import {
   filterInputAttrs,
   genericComponent,
   getUid,
+  matchesSelector,
   propsFactory,
-  SUPPORTS_FOCUS_VISIBLE,
   useRender,
   wrapInArray,
 } from '@/util'
@@ -168,10 +168,7 @@ export const VSelectionControl = genericComponent<new <T>(
 
     function onFocus (e: FocusEvent) {
       isFocused.value = true
-      if (
-        !SUPPORTS_FOCUS_VISIBLE ||
-        (SUPPORTS_FOCUS_VISIBLE && (e.target as HTMLElement).matches(':focus-visible'))
-      ) {
+      if (matchesSelector(e.target as HTMLElement, ':focus-visible') !== false) {
         isFocusVisible.value = true
       }
     }

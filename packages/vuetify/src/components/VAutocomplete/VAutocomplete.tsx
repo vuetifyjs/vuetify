@@ -25,7 +25,7 @@ import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
-import { genericComponent, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, getPropertyFromItem, matchesSelector, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -115,7 +115,7 @@ export const VAutocomplete = genericComponent<new <
     const vTextFieldRef = ref()
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
-    const listHasFocus = ref(false)
+    const listHasFocus = shallowRef(false)
     const vMenuRef = ref<VMenu>()
     const _menu = useProxiedModel(props, 'menu')
     const menu = computed({
@@ -144,7 +144,16 @@ export const VAutocomplete = genericComponent<new <
     const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
     const selections = computed(() => {
       return model.value.map(v => {
-        return items.value.find(item => props.valueComparator(item.value, v.value)) || v
+        return items.value.find(item => {
+          const itemRawValue = getPropertyFromItem(item.raw, props.itemValue)
+          const modelRawValue = getPropertyFromItem(v.raw, props.itemValue)
+
+          if (itemRawValue === undefined || modelRawValue === undefined) return false
+
+          return props.returnObject
+            ? props.valueComparator(itemRawValue, modelRawValue)
+            : props.valueComparator(item.value, v.value)
+        }) || v
       })
     })
 
@@ -215,12 +224,8 @@ export const VAutocomplete = genericComponent<new <
         menu.value = false
       }
 
-      if (['Enter', 'Escape', 'Tab'].includes(e.key)) {
-        if (highlightFirst.value && ['Enter', 'Tab'].includes(e.key)) {
-          select(filteredItems.value[0])
-        }
-
-        isPristine.value = true
+      if (highlightFirst.value && ['Enter', 'Tab'].includes(e.key)) {
+        select(filteredItems.value[0])
       }
 
       if (e.key === 'ArrowDown' && highlightFirst.value) {
@@ -279,7 +284,7 @@ export const VAutocomplete = genericComponent<new <
     }
 
     function onChange (e: Event) {
-      if (vTextFieldRef.value?.matches(':autofill') || vTextFieldRef.value?.matches(':-webkit-autofill')) {
+      if (matchesSelector(vTextFieldRef.value, ':autofill') || matchesSelector(vTextFieldRef.value, ':-webkit-autofill')) {
         const item = items.value.find(item => item.title === (e.target as HTMLInputElement).value)
         if (item) {
           select(item)
@@ -435,6 +440,7 @@ export const VAutocomplete = genericComponent<new <
                       onFocusout={ onFocusout }
                       onScrollPassive={ onListScroll }
                       tabindex="-1"
+                      color={ props.itemColor ?? props.color }
                     >
                       { slots['prepend-item']?.() }
 
