@@ -26,7 +26,7 @@ import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
-import { genericComponent, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, getPropertyFromItem, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -190,7 +190,16 @@ export const VCombobox = genericComponent<new <
 
     const selections = computed(() => {
       return model.value.map(v => {
-        return items.value.find(item => props.valueComparator(item.value, v.value)) || v
+        return items.value.find(item => {
+          const itemRawValue = getPropertyFromItem(item.raw, props.itemValue)
+          const modelRawValue = getPropertyFromItem(v.raw, props.itemValue)
+
+          if (itemRawValue === undefined || modelRawValue === undefined) return false
+
+          return props.returnObject
+            ? props.valueComparator(itemRawValue, modelRawValue)
+            : props.valueComparator(item.value, v.value)
+        }) || v
       })
     })
 
