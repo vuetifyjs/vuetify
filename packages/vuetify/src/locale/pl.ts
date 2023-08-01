@@ -57,6 +57,7 @@ export default {
     clear: 'Wyczyść {0}',
     prependAction: '{0} dodatkowa akcja',
     appendAction: '{0} dodatkowa akcja',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: 'Liczba plików: {0}',
