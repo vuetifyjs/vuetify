@@ -148,7 +148,9 @@ export const useSteps = (props: SliderProps) => {
   const step = computed(() => +props.step > 0 ? parseFloat(props.step) : 0)
   const decimals = computed(() => Math.max(getDecimals(step.value), getDecimals(min.value)))
 
-  function roundValue (value: number) {
+  function roundValue (value: string | number) {
+    value = parseFloat(value)
+
     if (step.value <= 0) return value
 
     const clamped = clamp(value, min.value, max.value)
