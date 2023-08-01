@@ -465,9 +465,8 @@ describe('VAutocomplete', () => {
   })
 
   it('should auto-select-first item when pressing enter', () => {
-    
     const selectedItems = ref(undefined)
-    
+
     cy
       .mount(() => (
         <VAutocomplete
