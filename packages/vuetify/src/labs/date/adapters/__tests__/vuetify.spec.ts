@@ -1,7 +1,10 @@
 // Utilities
 import { describe, expect, it } from '@jest/globals'
-import timezoneMock, { TimeZone } from 'timezone-mock'
+import timezoneMock from 'timezone-mock'
 import { VuetifyDateAdapter } from '../vuetify'
+
+// Types
+import type { TimeZone } from 'timezone-mock'
 
 describe('vuetify date adapter', () => {
   it('should return weekdays based on locale', () => {
@@ -33,11 +36,11 @@ describe('vuetify date adapter', () => {
     'Etc/GMT-2',
     'Etc/GMT-4',
     'Etc/GMT+4',
-  ])('should handle timezone %s when parsing date without time', (timezone) => {
+  ])('should handle timezone %s when parsing date without time', timezone => {
     // locale option here has no impact on timezone
-    let instance = new VuetifyDateAdapter({ locale: 'en-us' })
+    const instance = new VuetifyDateAdapter({ locale: 'en-us' })
 
-    const str = "2001-01-01"
+    const str = '2001-01-01'
 
     timezoneMock.register(timezone as TimeZone)
 
