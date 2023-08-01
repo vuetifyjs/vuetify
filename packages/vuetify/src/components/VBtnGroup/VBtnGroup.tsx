@@ -50,7 +50,7 @@ export const VBtnGroup = genericComponent()({
 
     provideDefaults({
       VBtn: {
-        height: 'auto',
+        height: props.direction === 'horizontal' ? 'auto' : null,
         color: toRef(props, 'color'),
         density: toRef(props, 'density'),
         flat: true,
