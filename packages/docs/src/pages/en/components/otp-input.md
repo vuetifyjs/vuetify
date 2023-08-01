@@ -1,7 +1,7 @@
 ---
-disabled: true
+emphasized: true
 meta:
-  title: OTP Input component
+  title: OTP Input
   description: The OTP input component is used for MFA authentication via input field.
   keywords: OTP, MFA, vuetify OTP input component, vue OTP component
 related:
@@ -14,7 +14,9 @@ related:
 
 The OTP input is used for MFA procedure of authenticating users by a one-time password.
 
-<entry />
+<!-- ![Pending graphic](https://cdn.vuetifyjs.com/docs/images/graphics/img-placeholder.png){ height=300 } -->
+
+----
 
 ## Usage
 
@@ -22,11 +24,17 @@ Here we display a list of settings that could be applied within an application.
 
 <usage name="v-otp-input" />
 
+<entry />
+
 ## API
 
-- [v-otp-input](/api/v-otp-input)
+| Component | Description |
+| - | - |
+| [v-otp-input](/api/v-otp-input/) | Primary Component |
 
-## Examples
+<api-inline hide-links />
+
+## Guide
 
 ### Props
 

@@ -226,6 +226,10 @@
         "subfolder": "components"
       },
       {
+        "title": "otp-input",
+        "subfolder": "components"
+      },
+      {
         "title": "skeleton-loaders",
         "subfolder": "components"
       },

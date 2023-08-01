@@ -57,6 +57,7 @@ export default {
     clear: 'Șterge {0}',
     prependAction: '{0} acțiune de inserare la început',
     appendAction: '{0} acțiune de inserare la sfârșit',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} fișiere',
