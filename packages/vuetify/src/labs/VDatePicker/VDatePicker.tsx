@@ -20,7 +20,7 @@ import { useDate } from '@/labs/date'
 
 // Utilities
 import { computed, ref, watch } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 export type VDatePickerSlots = {
@@ -82,7 +82,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
 
     createDatePicker(props)
 
-    const model = ref<any[]>(props.modelValue ?? [])
+    const model = ref<any[]>(wrapInArray(props.modelValue))
     const isReversing = ref(false)
 
     const displayDate = useProxiedModel(props, 'displayDate', props.displayDate)
@@ -112,8 +112,8 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
     })
 
     watch(() => props.modelValue, val => {
-      model.value = val ?? []
-    }, { immediate: true })
+      model.value = wrapInArray(val)
+    })
 
     function onClickCancel () {
       emit('click:cancel')
