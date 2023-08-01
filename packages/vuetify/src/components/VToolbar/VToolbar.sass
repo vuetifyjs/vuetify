@@ -30,10 +30,11 @@
     .v-toolbar-title
       display: none
 
-    @include tools.ltr()
+    &-left
       border-bottom-right-radius: $toolbar-collapsed-border-radius
 
-    @include tools.rtl()
+    &-right
+      float: right
       border-bottom-left-radius: $toolbar-collapsed-border-radius
 
   &--flat
