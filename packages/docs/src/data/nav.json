@@ -192,6 +192,10 @@
         "subfolder": "components"
       },
       {
+        "title": "calendars",
+        "subfolder": "components"
+      },
+      {
         "title": "data-iterators",
         "subfolder": "components"
       },

@@ -5,6 +5,7 @@ import './VCalendar.sass'
 import { computed } from 'vue'
 import { VCalendarDay } from './VCalendarDay'
 import { VCalendarHeader } from './VCalendarHeader'
+import { VCalendarMonthDay } from './VCalendarMonthDay'
 import { getWeek, toIso } from '../date/date'
 import { useDate } from '@/labs/date'
 import { chunkArray, genericComponent, useRender } from '@/util'
@@ -18,6 +19,22 @@ export const VCalendar = genericComponent()({
     hideDayHeader: Boolean,
     hideHeader: Boolean,
     hideWeekNumber: Boolean,
+    intervalDuration: {
+      type: Number,
+      default: 60,
+    },
+    intervalHeight: {
+      type: Number,
+      default: 48,
+    },
+    intervals: {
+      type: Number,
+      default: 24,
+    },
+    intervalStart: {
+      type: Number,
+      default: 0,
+    },
     showAdjacentMonths: Boolean,
     title: String,
     type: {
@@ -40,7 +57,20 @@ export const VCalendar = genericComponent()({
   setup (props, { emit, slots }) {
     const adapter = useDate()
     const dayNames = adapter.getWeekdays()
-    const weeksInMonth = computed(() => {
+    const weeksIn = computed(() => {
+      if (props.type === 'day') {
+        return [[props.modelValue]]
+      }
+      if (props.type === 'week') {
+        // get Start of week
+        const lastDay = adapter.startOfWeek(props.modelValue)
+        const week = []
+        for (let day = 0; day <= 6; day++) {
+          week.push(adapter.addDays(lastDay, day))
+        }
+
+        return [week]
+      }
       const weeks = adapter.getWeekArray(props.modelValue)
 
       const days = weeks.flat()
@@ -69,10 +99,10 @@ export const VCalendar = genericComponent()({
       adapter.startOfMonth(props.modelValue),
       adapter.endOfMonth(props.modelValue),
     ])
-    const daysInMonth = computed(() => {
+    const daysIn = computed(() => {
       const isRange = validDates.value.length > 1
 
-      const days = weeksInMonth.value.flat()
+      const days = weeksIn.value.flat()
       const today = adapter.date()
 
       const startDate = computed(() => validDates.value[0])
@@ -112,20 +142,28 @@ export const VCalendar = genericComponent()({
     })
 
     const weeks = computed(() => {
-      return weeksInMonth.value.map(week => {
+      return weeksIn.value.map(week => {
         return getWeek(adapter, week[0])
       })
     })
 
     useRender(() => (
-      <div class={['v-calendar', 'v-calendar-monthly', 'v-calendar-weekly']}>
+      <div class={[
+        'v-calendar',
+        {
+          'v-calendar-monthly': props.type === 'month',
+          'v-calendar-weekly': props.type === 'week',
+          'v-calendar-day': props.type === 'day',
+        },
+      ]}
+      >
         <div>
           { !props.hideHeader ? (
             <VCalendarHeader key="calendarHeader" title={ props.title } start={ validDates.value[0] } end={ validDates.value[1] } />
           ) : '' }
         </div>
         <div class="v-calendar__container">
-        { !props.hideDayHeader
+        { props.type === 'month' && !props.hideDayHeader
           ? (
             <div
               class={
@@ -146,35 +184,65 @@ export const VCalendar = genericComponent()({
                 ))
               }
             </div>
-          ) : '' }
-          <div class={
-            [
-              'v-calendar-month__days',
-              `days__${props.weekdays.length}`,
-              ...(!props.hideWeekNumber ? ['v-calendar-month__weeknumbers'] : []),
-            ]
-          }
+          ) : ''
+        }
+        { props.type === 'month' ? (
+          <div
+            key="VCalendarMonth"
+            class={
+              [
+                'v-calendar-month__days',
+                `days__${props.weekdays.length}`,
+                ...(!props.hideWeekNumber ? ['v-calendar-month__weeknumbers'] : []),
+              ]
+            }
           >
-            { chunkArray(daysInMonth.value, props.weekdays.length).map((week, wi) => (
+            { chunkArray(daysIn.value, props.weekdays.length).map((week, wi) => (
               [
                 !props.hideWeekNumber ? <div class="v-calendar-month__weeknumber">{ weeks.value[wi] }</div> : '',
                 week.map(day => (
-                  <VCalendarDay
+                  <VCalendarMonthDay
                     color={ adapter.isSameDay(new Date(), day.date) ? 'primary' : undefined }
                     day={ day }
                     disabled={ day ? props.disabled?.includes(day.date) : false }
                     title={ day ? adapter.format(day.date, 'dayOfMonth') : 'NaN' }
                     events={ day.events }
-                  ></VCalendarDay>
+                  ></VCalendarMonthDay>
                 )),
               ]
             ))}
-        </div>
+          </div>
+        ) : '' }
+        { props.type === 'week' ? (
+          daysIn.value.map((day, i) => (
+            <VCalendarDay
+              day={ day }
+              dayIndex={ i }
+              events={ day.events }
+              hideDayHeader={ props.hideDayHeader }
+              intervalDuration={ props.intervalDuration }
+              intervalHeight={ props.intervalHeight }
+              intervals={ props.intervals }
+              intervalStart={ props.intervalStart }
+            ></VCalendarDay>
+          ))
+        ) : '' }
+        { props.type === 'day' ? (
+          <VCalendarDay
+            day={ daysIn.value[0] }
+            events={ daysIn.value[0].events }
+            hideDayHeader={ props.hideDayHeader }
+            intervalDuration={ props.intervalDuration }
+            intervalHeight={ props.intervalHeight }
+            intervals={ props.intervals }
+            intervalStart={ props.intervalStart }
+          ></VCalendarDay>
+        ) : '' }
         </div>
       </div>
     ))
 
-    return { daysInMonth, weeks }
+    return { daysIn, weeks }
   },
 })
 

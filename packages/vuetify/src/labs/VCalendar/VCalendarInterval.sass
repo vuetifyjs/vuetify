@@ -1,0 +1,26 @@
+.v-calendar-day__row-with-label
+  display: grid
+  grid-template-columns: 48px 8px 1fr
+  border-right: 1px solid #e0e0e0
+
+  .v-calendar-day__row-hairline
+    border-right: 1px solid #e0e0e0
+    &:after
+      content: ''
+      border-bottom: 1px solid #e0e0e0
+      position: absolute
+      width: 100%
+      margin-top: -1px
+      z-index: 3
+      pointer-events: none
+
+  .v-calendar-day__row-label
+    font-size: 10px
+    text-align: center 
+    position: relative
+    top: -8px
+
+.v-calendar-day__row-without-label
+  display: grid
+  grid-template-columns: 1fr
+  border-right: 1px solid #e0e0e0

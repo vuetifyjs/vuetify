@@ -1,3 +1,3 @@
 export { VCalendar } from './VCalendar'
-export { VCalendarDay } from './VCalendarDay'
+export { VCalendarMonthDay } from './VCalendarMonthDay'
 export { VCalendarHeader } from './VCalendarHeader'

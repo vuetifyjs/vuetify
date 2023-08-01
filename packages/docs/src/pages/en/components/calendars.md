@@ -1,6 +1,6 @@
 ---
-disabled: true
 meta:
+  nav: Calendars
   title: Calendar component
   description: The calendar component is a clean and simple adaptation to the popular Google Calendar application.
   keywords: calendars, vuetify calendar component, vue calendar component

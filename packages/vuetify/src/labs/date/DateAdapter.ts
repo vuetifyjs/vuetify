@@ -3,6 +3,10 @@ export interface DateAdapter<T> {
   format (date: T, formatString: string): string
   toJsDate (value: T): Date
 
+  startOfDay (date: T): T
+  endOfDay (date: T): T
+  startOfWeek (date: T): T
+  endOfWeek (date: T): T
   startOfMonth (date: T): T
   endOfMonth (date: T): T
   startOfYear (date: T): T
@@ -16,6 +20,7 @@ export interface DateAdapter<T> {
   isValid (date: any): boolean
   isWithinRange (date: T, range: [T, T]): boolean
 
+  addMinutes (date: T, amount: number): T
   addDays (date: T, amount: number): T
   addMonths (date: T, amount: number): T
 
@@ -25,4 +30,5 @@ export interface DateAdapter<T> {
   getWeekArray (date: T): T[][]
   getWeekdays (): string[]
   getMonth (date: T): number
+  getMinute (date: T): number
 }

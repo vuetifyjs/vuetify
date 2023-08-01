@@ -196,6 +196,28 @@ function getWeekArray (date: Date, locale: string) {
   return weeks
 }
 
+function startOfDay (date: Date) {
+  date.setHours(0, 0, 0)
+  return date
+}
+
+function endOfDay (date: Date) {
+  date.setHours(23, 59, 59)
+  return date
+}
+
+function startOfWeek (date: Date) {
+  const day = date.getDay()
+  const newDate = addDays(date, -day)
+  return new Date(newDate)
+}
+
+function endOfWeek (date: Date) {
+  const day = date.getDay()
+  const newDate = addDays(date, day === 6 ? 0 : 6 - day)
+  return new Date(newDate)
+}
+
 function startOfMonth (date: Date) {
   return new Date(date.getFullYear(), date.getMonth(), 1)
 }
@@ -273,11 +295,29 @@ function format (value: Date, formatString: string, locale: string): string {
     case 'dayOfMonth':
       options = { day: 'numeric' }
       break
+    case 'fullTime12h':
+      options = { hour: '2-digit', minute: '2-digit', hour12: true }
+      break
+    case 'fullTime24h':
+      options = { hour: '2-digit', minute: '2-digit', hour12: false }
+      break
+    case 'weekday':
+      options = { weekday: 'long' }
+      break
+    case 'weekdayShort':
+      options = { weekday: 'short' }
+      break
     default:
       options = { timeZone: 'UTC', timeZoneName: 'short' }
   }
 
   return new Intl.DateTimeFormat(locale, options).format(date)
+}
+
+function addMinutes (date: Date, amount: number) {
+  const d = new Date(date)
+  d.setMinutes(d.getMinutes() + amount)
+  return d
 }
 
 function addDays (date: Date, amount: number) {
@@ -298,6 +338,10 @@ function getYear (date: Date) {
 
 function getMonth (date: Date) {
   return date.getMonth()
+}
+
+function getMinute (date: Date) {
+  return date.getMinutes()
 }
 
 function startOfYear (date: Date) {
@@ -372,6 +416,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return date
   }
 
+  addMinutes (date: Date, amount: number) {
+    return addMinutes(date, amount)
+  }
+
   addDays (date: Date, amount: number) {
     return addDays(date, amount)
   }
@@ -382,6 +430,14 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   getWeekArray (date: Date) {
     return getWeekArray(date, this.locale)
+  }
+
+  startOfDay (date: Date) {
+    return startOfDay(date)
+  }
+
+  endOfDay (date: Date) {
+    return endOfDay(date)
   }
 
   startOfMonth (date: Date) {
@@ -436,12 +492,24 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return getWeekdays(this.locale)
   }
 
+  startOfWeek (date: Date) {
+    return startOfWeek(date)
+  }
+
+  endOfWeek (date: Date) {
+    return endOfWeek(date)
+  }
+
   getYear (date: Date) {
     return getYear(date)
   }
 
   getMonth (date: Date) {
     return getMonth(date)
+  }
+
+  getMinute (date: Date) {
+    return getMinute(date)
   }
 
   startOfYear (date: Date) {
