@@ -85,7 +85,8 @@ export const VStepper = genericComponent<VStepperSlots>()({
   },
 
   setup (props, { slots }) {
-    const { items: _items, next, prev, selected } = useGroup(props, VStepperSymbol)
+    // TODO: fix typing
+    const { items: _items, next, prev, selected } = useGroup(props as any, VStepperSymbol)
     const { editable, prevText, nextText } = toRefs(props)
 
     const items = computed(() => props.items.map((item, index) => {
