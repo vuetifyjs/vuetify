@@ -234,7 +234,9 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                       <>
                         { props.prefix && (
                           <span class="v-text-field__prefix">
-                            { props.prefix }
+                            <span class="v-text-field__prefix__text">
+                              { props.prefix }
+                            </span>
                           </span>
                         )}
 
@@ -253,7 +255,9 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
 
                         { props.suffix && (
                           <span class="v-text-field__suffix">
-                            { props.suffix }
+                            <span class="v-text-field__suffix__text">
+                              { props.suffix }
+                            </span>
                           </span>
                         )}
                       </>

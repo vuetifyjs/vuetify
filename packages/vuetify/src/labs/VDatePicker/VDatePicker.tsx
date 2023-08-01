@@ -15,11 +15,10 @@ import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 // Composables
 import { createDatePicker } from './composables'
 import { useLocale } from '@/composables/locale'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { useDate } from '@/labs/date'
 
 // Utilities
-import { computed, ref, watch } from 'vue'
+import { computed, ref, shallowRef, watch } from 'vue'
 import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -80,10 +79,10 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
     const adapter = useDate()
     const { t } = useLocale()
 
-    createDatePicker(props)
+    const { model, displayDate, viewMode, inputMode } = createDatePicker(props)
 
     const model = ref<any[]>(wrapInArray(props.modelValue))
-    const isReversing = ref(false)
+    const isReversing = shallowRef(false)
 
     const displayDate = useProxiedModel(props, 'displayDate', props.displayDate)
     const inputMode = useProxiedModel(props, 'inputMode', props.inputMode)
@@ -148,6 +147,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
           ]}
           style={ props.style }
           title={ title.value }
+          width={ props.showWeek ? 408 : 360 }
           v-slots={{
             header: () => slots.header?.(headerSlotProps.value) ?? (
               <VDatePickerHeader
@@ -190,7 +190,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
                 />
               </div>
             ),
-            actions: !props.hideActions ? () => (
+            actions: () => !props.hideActions ? (
               <div>
                 <VBtn
                   variant="text"

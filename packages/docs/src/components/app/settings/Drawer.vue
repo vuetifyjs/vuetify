@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    v-if="!user.dev"
     id="settings-drawer"
     v-model="app.settings"
     :location="isRtl ? 'left' : 'right'"
@@ -43,6 +44,8 @@
       <app-settings-append />
     </template>
   </v-navigation-drawer>
+
+  <app-settings-dialog v-else />
 </template>
 
 <script setup>
@@ -50,13 +53,16 @@
   import AppSettingsAppend from './Append.vue'
   import AppSettingsApi from './Api.vue'
   import AppSettingsCode from './Code.vue'
+  import AppSettingsDialog from './Dialog.vue'
   import AppSettingsRtl from './Rtl.vue'
   import AppSettingsTheme from './Theme.vue'
 
   // Composables
   import { useAppStore } from '@/store/app'
+  import { useUserStore } from '@/store/user'
   import { useRtl } from 'vuetify'
 
   const { isRtl } = useRtl()
   const app = useAppStore()
+  const user = useUserStore()
 </script>

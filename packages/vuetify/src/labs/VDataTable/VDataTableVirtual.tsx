@@ -23,6 +23,7 @@ import { computed, shallowRef, toRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { Ref } from 'vue'
 import type { DataTableItem } from './types'
 import type { VDataTableSlotProps } from './VDataTable'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
@@ -34,6 +35,9 @@ export type VDataTableVirtualSlots = VDataTableRowsSlots & VDataTableHeadersSlot
   top: VDataTableVirtualSlotProps
   headers: VDataTableHeadersSlots['headers']
   bottom: VDataTableVirtualSlotProps
+  item: {
+    itemRef: Ref<HTMLElement | undefined>
+  }
 }
 
 export const makeVDataTableVirtualProps = propsFactory({
@@ -183,15 +187,14 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                         item: itemSlotProps => (
                           <VVirtualScrollItem
                             key={ itemSlotProps.item.index }
-                            dynamicHeight
                             renderless
                             onUpdate:height={ height => handleItemResize(itemSlotProps.item.index, height) }
                           >
-                            { slotProps => (
-                              slots.item?.({ ...itemSlotProps, props: { ...itemSlotProps.props, ...slotProps?.props } }) ?? (
+                            { ({ itemRef }) => (
+                              slots.item?.({ ...itemSlotProps, itemRef }) ?? (
                                 <VDataTableRow
                                   { ...itemSlotProps.props }
-                                  { ...slotProps?.props }
+                                  ref={ itemRef }
                                   key={ itemSlotProps.item.index }
                                   v-slots={ slots }
                                 />

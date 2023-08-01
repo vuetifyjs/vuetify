@@ -1,8 +1,12 @@
+// Composables
+import { createDateInput } from '../VDateInput/composables'
+
 // Utilities
 import { inject, provide, ref } from 'vue'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
+import type { DateInputProps } from '../VDateInput/composables'
 
 export type DatePickerProvide = {
   hoverDate: Ref<any>
@@ -14,8 +18,7 @@ export type DatePickerProvide = {
 
 export const DatePickerSymbol: InjectionKey<DatePickerProvide> = Symbol.for('vuetify:date-picker')
 
-interface DateProps {
-}
+type DateProps = DateInputProps & { multiple?: boolean }
 
 export function createDatePicker (props: DateProps) {
   const hoverDate = ref()
@@ -32,12 +35,19 @@ export function createDatePicker (props: DateProps) {
     hasScrolled,
   })
 
+  // TODO: This composable should probably not live in DateInput
+  const { model, displayDate, viewMode, inputMode } = createDateInput(props, !!props.multiple)
+
   return {
     hoverDate,
     hoverMonth,
     isDragging,
     dragHandle,
     hasScrolled,
+    model,
+    displayDate,
+    viewMode,
+    inputMode,
   }
 }
 

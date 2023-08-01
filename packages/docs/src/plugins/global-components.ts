@@ -10,6 +10,7 @@ import AppDivider from '@/components/app/Divider.vue'
 import AppFigure from '@/components/app/Figure.vue'
 import AppHeading from '@/components/app/Heading.vue'
 import AppHeadline from '@/components/app/Headline.vue'
+import AppLinkListItem from '@/components/app/list/LinkListItem.vue'
 import AppLink from '@/components/app/Link.vue'
 import AppMarkdown from '@/components/app/Markdown.vue'
 import AppMenu from '@/components/app/menu/Menu.vue'
@@ -47,6 +48,7 @@ export function installGlobalComponents ({ app }: ViteSSGContext) {
     .component('AppDivider', AppDivider)
     .component('AppHeading', AppHeading)
     .component('AppHeadline', AppHeadline)
+    .component('AppLinkListItem', AppLinkListItem)
     .component('AppLink', AppLink)
     .component('AppMarkdown', AppMarkdown)
     .component('AppMarkup', AppMarkup)
