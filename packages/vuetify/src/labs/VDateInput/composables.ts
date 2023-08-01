@@ -78,8 +78,12 @@ export function createDateInput (props: DateInputProps, isRange: boolean) {
 
   function isEqual (model: readonly any[], comparing: readonly any[]) {
     if (model.length !== comparing.length) return false
-    if (model[0] && comparing[0] && !adapter.isEqual(model[0], comparing[0])) return false
-    if (model[1] && comparing[1] && !adapter.isEqual(model[1], comparing[1])) return false
+
+    for (let i = 0; i < model.length; i++) {
+      if (comparing[i] && !adapter.isEqual(model[i], comparing[i])) {
+        return false
+      }
+    }
 
     return true
   }
