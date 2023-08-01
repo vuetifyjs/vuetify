@@ -24,7 +24,7 @@ import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, ref, shallowRef } from 'vue'
-import { deepEqual, genericComponent, getPropertyFromItem, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { deepEqual, genericComponent, getPropertyFromItem, matchesSelector, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { Component, PropType } from 'vue'
@@ -180,7 +180,7 @@ export const VSelect = genericComponent<new <
       menu.value = !menu.value
     }
     function onKeydown (e: KeyboardEvent) {
-      if (props.readonly || form?.isReadonly.value) return
+      if (!e.key || props.readonly || form?.isReadonly.value) return
 
       if (['Enter', ' ', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) {
         e.preventDefault()
@@ -252,6 +252,17 @@ export const VSelect = genericComponent<new <
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
     }
+    function onModelUpdate (v: any) {
+      if (v == null) model.value = []
+      else if (matchesSelector(vTextFieldRef.value, ':autofill') || matchesSelector(vTextFieldRef.value, ':-webkit-autofill')) {
+        const item = items.value.find(item => item.title === v)
+        if (item) {
+          select(item)
+        }
+      } else if (vTextFieldRef.value) {
+        vTextFieldRef.value.value = ''
+      }
+    }
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
@@ -275,7 +286,7 @@ export const VSelect = genericComponent<new <
           ref={ vTextFieldRef }
           { ...textFieldProps }
           modelValue={ model.value.map(v => v.props.value).join(', ') }
-          onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          onUpdate:modelValue={ onModelUpdate }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
           dirty={ isDirty }
@@ -291,7 +302,7 @@ export const VSelect = genericComponent<new <
             props.class,
           ]}
           style={ props.style }
-          readonly
+          inputmode="none"
           placeholder={ placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }

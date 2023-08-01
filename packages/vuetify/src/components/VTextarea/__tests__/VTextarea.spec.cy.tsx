@@ -13,7 +13,7 @@ describe('VTextarea', () => {
       .get('textarea').first()
       .should(el => expect(el.outerHeight()).to.equal(56))
       .click()
-      .type('Eos q')
+      .type('Eos')
       .should(el => expect(el.outerHeight()).to.equal(56))
       .type('u')
       .should(el => expect(el.outerHeight()).to.equal(78))

@@ -25,7 +25,7 @@ import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
-import { genericComponent, getPropertyFromItem, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, getPropertyFromItem, matchesSelector, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -115,7 +115,7 @@ export const VAutocomplete = genericComponent<new <
     const vTextFieldRef = ref()
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
-    const listHasFocus = ref(false)
+    const listHasFocus = shallowRef(false)
     const vMenuRef = ref<VMenu>()
     const _menu = useProxiedModel(props, 'menu')
     const menu = computed({
@@ -285,6 +285,15 @@ export const VAutocomplete = genericComponent<new <
       search.value = (e.target as HTMLInputElement).value
     }
 
+    function onChange (e: Event) {
+      if (matchesSelector(vTextFieldRef.value, ':autofill') || matchesSelector(vTextFieldRef.value, ':-webkit-autofill')) {
+        const item = items.value.find(item => item.title === (e.target as HTMLInputElement).value)
+        if (item) {
+          select(item)
+        }
+      }
+    }
+
     function onAfterLeave () {
       if (isFocused.value) {
         isPristine.value = true
@@ -385,6 +394,7 @@ export const VAutocomplete = genericComponent<new <
           validationValue={ model.externalValue }
           dirty={ isDirty }
           onInput={ onInput }
+          onChange={ onChange }
           class={[
             'v-autocomplete',
             `v-autocomplete--${props.multiple ? 'multiple' : 'single'}`,

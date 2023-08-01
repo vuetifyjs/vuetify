@@ -204,13 +204,28 @@ function endOfMonth (date: Date) {
   return new Date(date.getFullYear(), date.getMonth() + 1, 0)
 }
 
+function parseLocalDate (value: string): Date {
+  const parts = value.split('-').map(Number)
+
+  // new Date() uses local time zone when passing individual date component values
+  return new Date(parts[0], parts[1] - 1, parts[2])
+}
+
+const _YYYMMDD = /([12]\d{3}-([1-9]|0[1-9]|1[0-2])-([1-9]|0[1-9]|[12]\d|3[01]))/
+
 function date (value?: any): Date | null {
   if (value == null) return new Date()
 
   if (value instanceof Date) return value
 
   if (typeof value === 'string') {
-    const parsed = Date.parse(value)
+    let parsed
+
+    if (_YYYMMDD.test(value)) {
+      return parseLocalDate(value)
+    } else {
+      parsed = Date.parse(value)
+    }
 
     if (!isNaN(parsed)) return new Date(parsed)
   }
