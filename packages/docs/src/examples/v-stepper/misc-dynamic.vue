@@ -9,71 +9,57 @@
         ></v-select>
       </v-card-text>
     </v-card>
+
     <v-stepper v-model="e1">
-      <v-stepper-header>
-        <template v-for="n in steps" :key="`${n}-step`">
-          <v-stepper-step
-            :complete="e1 > n"
-            :step="n"
-            editable
+      <template v-slot:default="{ prev, next }">
+        <v-stepper-header>
+          <template v-for="n in steps" :key="`${n}-step`">
+            <v-stepper-item
+              :complete="e1 > n"
+              :step="`Step {{ n }}`"
+              :value="n"
+              editable
+            ></v-stepper-item>
+
+            <v-divider
+              v-if="n !== steps"
+              :key="n"
+            ></v-divider>
+          </template>
+        </v-stepper-header>
+
+        <v-stepper-window>
+          <v-stepper-window-item
+            v-for="n in steps"
+            :key="`${n}-content`"
+            :value="n"
           >
-            Step {{ n }}
-          </v-stepper-step>
+            <v-card
+              color="grey-lighten-1"
+              height="200"
+            ></v-card>
+          </v-stepper-window-item>
+        </v-stepper-window>
 
-          <v-divider
-            v-if="n !== steps"
-            :key="n"
-          ></v-divider>
-        </template>
-      </v-stepper-header>
-
-      <v-stepper-items>
-        <v-stepper-content
-          v-for="n in steps"
-          :key="`${n}-content`"
-          :step="n"
-        >
-          <v-card
-            class="mb-12"
-            color="grey-lighten-1"
-            height="200px"
-          ></v-card>
-
-          <v-btn
-            color="primary"
-            @click="nextStep(n)"
-          >
-            Continue
-          </v-btn>
-
-          <v-btn variant="text">
-            Cancel
-          </v-btn>
-        </v-stepper-content>
-      </v-stepper-items>
+        <v-stepper-actions
+          :disable="disable"
+          @click:prev="prev"
+          @click:next="next"
+        ></v-stepper-actions>
+      </template>
     </v-stepper>
   </div>
 </template>
 
 <script setup>
-  import { ref, watch } from 'vue'
+  import { computed, ref } from 'vue'
 
   const e1 = ref(1)
   const steps = ref(2)
 
-  watch(steps, val => {
-    if (e1.value > val) {
-      e1.value = val
-    }
+  const disable = computed(() => {
+    return e1.value === 1 ? 'prev' : e1.value === steps.value ? 'next' : undefined
   })
-
-  function nextStep (n) {
-    if (n === steps.value) {
-      e1.value = 1
-    } else {
-      e1.value = n + 1
-    }
-  }
 </script>
 
 <script>
@@ -85,21 +71,9 @@
       }
     },
 
-    watch: {
-      steps (val) {
-        if (this.e1 > val) {
-          this.e1 = val
-        }
-      },
-    },
-
-    methods: {
-      nextStep (n) {
-        if (n === this.steps) {
-          this.e1 = 1
-        } else {
-          this.e1 = n + 1
-        }
+    computed: {
+      disable () {
+        return this.e1 === 1 ? 'prev' : this.e1 === this.steps ? 'next' : undefined
       },
     },
   }
