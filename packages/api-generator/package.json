@@ -1,6 +1,6 @@
 {
   "name": "@vuetify/api-generator",
-  "version": "3.3.10",
+  "version": "3.3.11",
   "private": true,
   "description": "",
   "scripts": {
@@ -19,7 +19,7 @@
     "rimraf": "^3.0.2",
     "ts-morph": "^18.0.0",
     "vue": "^3.3.4",
-    "vuetify": "^3.3.10"
+    "vuetify": "^3.3.11"
   },
   "devDependencies": {
     "@babel/node": "^7.20.7"

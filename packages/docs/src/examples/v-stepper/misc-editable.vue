@@ -1,31 +1,28 @@
 <template>
   <v-stepper>
     <v-stepper-header>
-      <v-stepper-step
+      <v-stepper-item
         complete
         editable
-        step="1"
-      >
-        Select campaign settings
-      </v-stepper-step>
+        title="Select campaign settings"
+        value="1"
+      ></v-stepper-item>
 
       <v-divider></v-divider>
 
-      <v-stepper-step
+      <v-stepper-item
         complete
-        step="2"
-      >
-        Create an ad group
-      </v-stepper-step>
+        title="Create an ad group"
+        value="2"
+      ></v-stepper-item>
 
       <v-divider></v-divider>
 
-      <v-stepper-step
-        step="3"
+      <v-stepper-item
         editable
-      >
-        Create an ad
-      </v-stepper-step>
+        title="Create an ad"
+        value="3"
+      ></v-stepper-item>
     </v-stepper-header>
   </v-stepper>
 </template>

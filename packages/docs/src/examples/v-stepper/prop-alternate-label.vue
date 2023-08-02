@@ -1,47 +1,15 @@
 <template>
-  <div>
-    <v-stepper alt-labels>
-      <v-stepper-header>
-        <v-stepper-step step="1">
-          Ad unit details
-        </v-stepper-step>
+  <v-stepper alt-labels>
+    <v-stepper-header>
+      <v-stepper-item value="1" title="Ad unit details"></v-stepper-item>
 
-        <v-divider></v-divider>
+      <v-divider></v-divider>
 
-        <v-stepper-step step="2">
-          Ad sizes
-        </v-stepper-step>
+      <v-stepper-item value="2" title="Ad sizes"></v-stepper-item>
 
-        <v-divider></v-divider>
+      <v-divider></v-divider>
 
-        <v-stepper-step step="3">
-          Ad templates
-        </v-stepper-step>
-      </v-stepper-header>
-    </v-stepper>
-
-    <v-stepper
-      alt-labels
-      class="mt-12"
-    >
-      <v-stepper-header>
-        <v-stepper-step step="1">
-          Ad unit details
-        </v-stepper-step>
-
-        <v-divider></v-divider>
-
-        <v-stepper-step step="2">
-          Ad sizes
-          <small>Optional</small>
-        </v-stepper-step>
-
-        <v-divider></v-divider>
-
-        <v-stepper-step step="3">
-          Ad templates
-        </v-stepper-step>
-      </v-stepper-header>
-    </v-stepper>
-  </div>
+      <v-stepper-item value="3" title="Ad templates"></v-stepper-item>
+    </v-stepper-header>
+  </v-stepper>
 </template>

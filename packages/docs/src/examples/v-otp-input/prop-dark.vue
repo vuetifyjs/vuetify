@@ -6,7 +6,7 @@
           <v-otp-input
             v-model="otp"
             :length="length"
-            dark
+            theme="dark"
           ></v-otp-input>
         </div>
       </v-col>
