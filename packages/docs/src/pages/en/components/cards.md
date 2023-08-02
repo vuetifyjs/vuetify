@@ -77,7 +77,7 @@ In some cases it is possible to combine the different options, like the example 
 
 ### Content overflow
 
-By default, `v-card` doesn't let its content overflow outside the card. It also creates a `z-index` stacking context, making its content unable to display on top of elements outside `v-card` even if it defines a higher `z-index` value. If you want to opt-out from this behavior, you can use it like `<v-card style="overflow: initial; z-index: initial">`.
+`v-card` does not allow its content to overflow outside the card by default. It also establishes a z-index stacking context, which prevents its content from displaying on top of elements outside the `v-card`, even when it sets a higher z-index value. To override this default behavior, apply the following usage: `<v-card style="overflow: initial; z-index: initial">`.
 
 ## Examples
 
