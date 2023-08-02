@@ -103,6 +103,18 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       array[focusIndex.value] = value
 
       model.value = array
+
+      let target: any = null
+
+      if (focusIndex.value > model.value.length) {
+        target = model.value.length + 1
+      } else if (focusIndex.value + 1 !== Number(props.length)) {
+        target = 'next'
+      } else {
+        requestAnimationFrame(() => current.value?.blur())
+      }
+
+      if (target) focusChild(contentRef.value!, target)
     }
 
     function onKeydown (e: KeyboardEvent) {
@@ -110,32 +122,31 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       const index = focusIndex.value
       let target: 'next' | 'prev' | 'first' | 'last' | number | null = null
 
+      if (![
+        'ArrowLeft',
+        'ArrowRight',
+        'Backspace',
+        'Delete',
+      ].includes(e.key)) return
+
+      e.preventDefault()
+
       if (e.key === 'ArrowLeft') {
         target = 'prev'
       } else if (e.key === 'ArrowRight') {
         target = 'next'
-      } else if (e.key === 'Backspace') {
-        if (focusIndex.value > 0) {
-          target = 'prev'
-        }
-      } else if (e.key === 'Delete') {
+      } else if (['Backspace', 'Delete'].includes(e.key)) {
         array[focusIndex.value] = ''
 
         model.value = array
 
-        requestAnimationFrame(() => {
-          inputRef.value[index].select()
-        })
-      } else if (props.type === 'number' && isNaN(parseInt(e.key))) {
-        return
-      } else if (focusIndex.value > model.value.length) {
-        target = model.value.length + 1
-      } else if (focusIndex.value + 1 !== Number(props.length)) {
-        target = 'next'
-      } else {
-        requestAnimationFrame(() => current.value?.blur())
-
-        return
+        if (focusIndex.value > 0 && e.key === 'Backspace') {
+          target = 'prev'
+        } else {
+          requestAnimationFrame(() => {
+            inputRef.value[index].select()
+          })
+        }
       }
 
       requestAnimationFrame(() => {
