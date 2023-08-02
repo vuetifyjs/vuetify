@@ -61,8 +61,8 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
   <tbody>
     <tr>
       <td>
-        <a href="https://www.teamwork.com/">
-          <img height="40px" src="https://cdn.cosmicjs.com/29a9d0b0-440a-11ed-8c9b-a1a0c9d2eef2-TWPOSRGB.png">
+        <a href="https://github.com/sponsors/johnleider" target="_blank">
+          Your Logo Here
         </a>
       </td>
     </tr>
@@ -75,13 +75,8 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
   <tbody>
     <tr>
       <td>
-        <a href="https://www.qomplx.com/?ref=vuetify-github">
-          <img height="40px" src="https://cdn.cosmicjs.com/145bda20-1fe1-11ed-a5bd-ef15a2e468ca-QOMPLX-logo-light.png">
-        </a>
-      </td>
-      <td>
-        <a href="https://www.sanofi.us/en/">
-          <img height="50px" src="https://cdn.cosmicjs.com/82029fc0-e0e7-11ec-bb19-d9085ce408df-c7b04c1c-ad15-452c-883f-2dd802ad7df9.png">
+        <a href="https://github.com/sponsors/johnleider" target="_blank">
+          Your Logo Here
         </a>
       </td>
     </tr>
