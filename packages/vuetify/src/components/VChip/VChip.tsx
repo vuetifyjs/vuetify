@@ -144,6 +144,7 @@ export const VChip = genericComponent<VChipSlots>()({
         isActive.value = false
 
         emit('click:close', e)
+        e.stopPropagation()
       },
     }))
 
