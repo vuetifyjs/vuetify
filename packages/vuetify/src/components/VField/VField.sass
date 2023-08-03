@@ -476,6 +476,9 @@
 /* endregion */
 /* region MODIFIERS */
 .v-field--reverse
+  .v-field__field, .v-field__input
+    flex-direction: row-reverse
+
   .v-field__input, input
     @include tools.ltr()
       text-align: right
