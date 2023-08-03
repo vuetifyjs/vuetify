@@ -3,17 +3,24 @@ import './VColorPickerPreview.sass'
 
 // Components
 import { VSlider } from '@/components/VSlider'
+import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
 
 // Utilities
-import { defineComponent, HSVtoCSS, propsFactory, useRender } from '@/util'
+import { defineComponent, HexToHSV, HSVtoCSS, propsFactory, useRender } from '@/util'
 import { nullColor } from './util'
 
 // Types
 import type { PropType } from 'vue'
 import type { HSV } from '@/util'
+
+declare global {
+  interface Window {
+      EyeDropper?: any;
+  }
+}
 
 export const makeVColorPickerPreviewProps = propsFactory({
   color: {
@@ -35,6 +42,18 @@ export const VColorPickerPreview = defineComponent({
   },
 
   setup (props, { emit }) {
+    const supportEyePicker = 'EyeDropper' in window
+
+    async function openEyePicker(){
+      const eyeDropper = new EyeDropper()
+      try{
+        const result = await eyeDropper.open();
+        const colorHexValue = HexToHSV(result.sRGBHex);
+        emit('update:color', { ...(props.color ?? nullColor),  ...colorHexValue})
+      }
+      catch(e){}
+    }
+
     useRender(() => (
       <div
         class={[
@@ -81,6 +100,11 @@ export const VColorPickerPreview = defineComponent({
             />
           )}
         </div>
+        {
+          supportEyePicker && (
+            <div class="v-color-picker-preview__eye-picker"><VIcon onClick={ openEyePicker } icon="$eyeDropper"></VIcon></div>
+          )
+        }
       </div>
     ))
 
