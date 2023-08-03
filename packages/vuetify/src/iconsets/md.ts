@@ -43,6 +43,7 @@ const aliases: IconAliases = {
   file: 'attach_file',
   plus: 'add',
   minus: 'remove',
+  eyeDropper: 'colorize'
 }
 
 const md: IconSet = {

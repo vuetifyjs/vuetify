@@ -9,18 +9,13 @@ import { VIcon } from '@/components/VIcon'
 import { makeComponentProps } from '@/composables/component'
 
 // Utilities
-import { defineComponent, HexToHSV, HSVtoCSS, propsFactory, useRender } from '@/util'
+import { defineComponent, HexToHSV, HSVtoCSS, IN_BROWSER, propsFactory, useRender } from '@/util'
 import { nullColor } from './util'
+import { onUnmounted } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
 import type { HSV } from '@/util'
-
-declare global {
-  interface Window {
-      EyeDropper?: any;
-  }
-}
 
 export const makeVColorPickerPreviewProps = propsFactory({
   color: {
@@ -42,12 +37,16 @@ export const VColorPickerPreview = defineComponent({
   },
 
   setup (props, { emit }) {
-    const supportEyePicker = 'EyeDropper' in window
+    const supportEyePicker = IN_BROWSER && 'EyeDropper' in window
+
+    const abortController = new AbortController();
+
+    onUnmounted(() => abortController.abort())
 
     async function openEyePicker(){
       const eyeDropper = new EyeDropper()
       try{
-        const result = await eyeDropper.open();
+        const result = await eyeDropper.open({signal : abortController.signal});
         const colorHexValue = HexToHSV(result.sRGBHex);
         emit('update:color', { ...(props.color ?? nullColor),  ...colorHexValue})
       }
@@ -65,6 +64,14 @@ export const VColorPickerPreview = defineComponent({
         ]}
         style={ props.style }
       >
+        {
+          supportEyePicker && (
+            <div class="v-color-picker-preview__eye-picker">
+              <VIcon onClick={ openEyePicker } icon="$eyeDropper"></VIcon>
+            </div>
+          )
+        }
+
         <div class="v-color-picker-preview__dot">
           <div style={{ background: HSVtoCSS(props.color ?? nullColor) }} />
         </div>
@@ -100,11 +107,6 @@ export const VColorPickerPreview = defineComponent({
             />
           )}
         </div>
-        {
-          supportEyePicker && (
-            <div class="v-color-picker-preview__eye-picker"><VIcon onClick={ openEyePicker } icon="$eyeDropper"></VIcon></div>
-          )
-        }
       </div>
     ))
 

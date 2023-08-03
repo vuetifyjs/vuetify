@@ -43,6 +43,7 @@ const aliases: IconAliases = {
   file: 'fa-paperclip',
   plus: 'fa-plus',
   minus: 'fa-minus',
+  eyeDropper: 'fa-eye-dropper'
 }
 
 const fa: IconSet = {
