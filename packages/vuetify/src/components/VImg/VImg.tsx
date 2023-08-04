@@ -69,7 +69,7 @@ export const makeVImgProps = propsFactory({
   },
   crossorigin: {
     type: String as PropType<'anonymous' | 'use-credentials'>,
-    default: 'anonymous',
+    default: undefined,
   },
   srcset: String,
 
