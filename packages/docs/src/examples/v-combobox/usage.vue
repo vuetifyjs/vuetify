@@ -34,6 +34,7 @@
     return {
       clearable: clear.value || undefined,
       chips: chips.value || undefined,
+      multiple: multiple.value || undefined,
       label: 'Combobox',
       items: ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'],
       variant: model.value === 'default' ? undefined : model.value,

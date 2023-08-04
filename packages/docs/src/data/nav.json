@@ -226,7 +226,15 @@
         "subfolder": "components"
       },
       {
+        "title": "otp-input",
+        "subfolder": "components"
+      },
+      {
         "title": "skeleton-loaders",
+        "subfolder": "components"
+      },
+      {
+        "title": "steppers",
         "subfolder": "components"
       }
     ]
@@ -238,7 +246,8 @@
     "items": [
       "jobs-for-vue",
       "ui-kits",
-      "themes"
+      "themes",
+      "search-engine"
     ]
   },
   {
