@@ -268,6 +268,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
             <input
               class="v-otp-input-input"
+              type="hidden"
               { ...inputAttrs }
               value={ model.value.join('') }
             />
