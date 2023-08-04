@@ -129,7 +129,7 @@
   padding-inline-end: var(--v-field-padding-end)
   padding-top: var(--v-field-input-padding-top)
   padding-bottom: var(--v-field-input-padding-bottom)
-  position: relative 
+  position: relative
   width: 100%
 
   input
@@ -476,7 +476,10 @@
 /* endregion */
 /* region MODIFIERS */
 .v-field--reverse
-  .v-field__input
+  .v-field__field, .v-field__input
+    flex-direction: row-reverse
+
+  .v-field__input, input
     @include tools.ltr()
       text-align: right
 
