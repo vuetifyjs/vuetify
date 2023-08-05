@@ -204,16 +204,11 @@ function endOfMonth (date: Date) {
   return new Date(date.getFullYear(), date.getMonth() + 1, 0)
 }
 
-function formatYyyyMmDd (value: string): string {
-  const formattedValue = value.split('-')
-    .map(d => d.padStart(2, '0'))
-    .join('-')
+function parseLocalDate (value: string): Date {
+  const parts = value.split('-').map(Number)
 
-  const offsetMin = (new Date().getTimezoneOffset() / -60)
-  const offsetSign = offsetMin < 0 ? '-' : '+'
-  const offsetValue = Math.abs(offsetMin).toString().padStart(2, '0')
-
-  return `${formattedValue}T00:00:00.000${offsetSign}${offsetValue}:00`
+  // new Date() uses local time zone when passing individual date component values
+  return new Date(parts[0], parts[1] - 1, parts[2])
 }
 
 const _YYYMMDD = /([12]\d{3}-([1-9]|0[1-9]|1[0-2])-([1-9]|0[1-9]|[12]\d|3[01]))/
@@ -227,7 +222,7 @@ function date (value?: any): Date | null {
     let parsed
 
     if (_YYYMMDD.test(value)) {
-      parsed = Date.parse(formatYyyyMmDd(value))
+      return parseLocalDate(value)
     } else {
       parsed = Date.parse(value)
     }

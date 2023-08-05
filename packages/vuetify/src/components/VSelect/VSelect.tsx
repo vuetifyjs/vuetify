@@ -24,7 +24,7 @@ import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, ref, shallowRef } from 'vue'
-import { deepEqual, genericComponent, matchesSelector, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { deepEqual, genericComponent, getPropertyFromItem, matchesSelector, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { Component, PropType } from 'vue'
@@ -68,6 +68,7 @@ export const makeSelectProps = propsFactory({
     type: Function as PropType<typeof deepEqual>,
     default: deepEqual,
   },
+  itemColor: String,
 
   ...makeItemsProps({ itemChildren: false }),
 }, 'Select')
@@ -139,7 +140,16 @@ export const VSelect = genericComponent<new <
     const form = useForm()
     const selections = computed(() => {
       return model.value.map(v => {
-        return items.value.find(item => props.valueComparator(item.value, v.value)) || v
+        return items.value.find(item => {
+          const itemRawValue = getPropertyFromItem(item.raw, props.itemValue)
+          const modelRawValue = getPropertyFromItem(v.raw, props.itemValue)
+
+          if (itemRawValue === undefined || modelRawValue === undefined) return false
+
+          return props.returnObject
+            ? props.valueComparator(itemRawValue, modelRawValue)
+            : props.valueComparator(item.value, v.value)
+        }) || v
       })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
@@ -330,6 +340,7 @@ export const VSelect = genericComponent<new <
                       onFocusin={ onFocusin }
                       onScrollPassive={ onListScroll }
                       tabindex="-1"
+                      color={ props.itemColor ?? props.color }
                     >
                       { slots['prepend-item']?.() }
 

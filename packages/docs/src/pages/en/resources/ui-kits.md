@@ -28,11 +28,11 @@ The Vuetify UI Kit is a free component plugin for Figma that streamlines buildin
 1. Download for free from the our [store](https://store.vuetifyjs.com/products/vuetify-ui-kit-figma)
 2. Unzip **vuetify3-ui-light-kit.fig** from `vuetify-figma-ui-kit.zip`
 3. Open Figma and create a new project:
-  ![UI Kit New Project](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-new-project.png) { class="mb-n6" }
+  ![UI Kit New Project](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-new-project.png) { class="mb-n4" }
 4. Select **Import file** and navigate to where you unzipped `vuetify3-ui-light-kit.fig`:
-  ![UI Kit Import File](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-import-file.png) { class="mb-n6" }
+  ![UI Kit Import File](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-import-file.png) { class="mb-n4" }
 5. Create a new design file:
-  ![UI Kit New Design File](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-new-design-file.png) { class="mb-n6" }
+  ![UI Kit New Design File](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-new-design-file.png) { class="mb-n4" }
 6. Access components within your projects by selecting **Assets** and then searching for the desired component:
   ![UI Kit Search Assets](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-search-assets.png)
 
