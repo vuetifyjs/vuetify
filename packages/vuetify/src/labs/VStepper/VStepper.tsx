@@ -16,7 +16,7 @@ import { makeGroupProps, useGroup } from '@/composables/group'
 
 // Utilities
 import { computed, toRefs } from 'vue'
-import { genericComponent, getPropertyFromItem, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, only, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType } from 'vue'
@@ -71,8 +71,8 @@ export const makeVStepperProps = propsFactory({
     mandatory: 'force' as const,
     selectedClass: 'v-stepper-item--selected',
   }),
-  ...omit(makeVSheetProps(), ['color']),
-  ...makeVStepperActionsProps(),
+  ...makeVSheetProps(),
+  ...only(makeVStepperActionsProps(), ['prevText', 'nextText']),
 }, 'VStepper')
 
 export const VStepper = genericComponent<VStepperSlots>()({
@@ -87,7 +87,7 @@ export const VStepper = genericComponent<VStepperSlots>()({
   setup (props, { slots }) {
     // TODO: fix typing
     const { items: _items, next, prev, selected } = useGroup(props as any, VStepperSymbol)
-    const { editable, prevText, nextText } = toRefs(props)
+    const { color, editable, prevText, nextText } = toRefs(props)
 
     const items = computed(() => props.items.map((item, index) => {
       const title = getPropertyFromItem(item, props.itemTitle, item)
@@ -117,13 +117,15 @@ export const VStepper = genericComponent<VStepperSlots>()({
         nextText,
       },
       VStepperActions: {
+        color,
         disabled,
+        prevText,
+        nextText,
       },
     })
 
     useRender(() => {
       const [sheetProps] = VSheet.filterProps(props)
-      const [stepperActionProps] = VStepperActions.filterProps(props)
 
       const hasHeader = !!(slots.header || props.items.length)
       const hasWindow = props.items.length > 0
@@ -132,6 +134,7 @@ export const VStepper = genericComponent<VStepperSlots>()({
       return (
         <VSheet
           { ...sheetProps }
+          color={ props.bgColor }
           class={[
             'v-stepper',
             {
@@ -183,7 +186,6 @@ export const VStepper = genericComponent<VStepperSlots>()({
             slots.actions?.({ next, prev }) ?? (
               <VStepperActions
                 key="stepper-actions"
-                { ...stepperActionProps }
                 onClick:prev={ prev }
                 onClick:next={ next }
               />
