@@ -3,6 +3,10 @@
     v-model="app.settings"
     :fullscreen="mobile"
   >
+    <template #activator="{ props }">
+      <slot name="activator" v-bind="{ props }" />
+    </template>
+
     <v-card
       :min-height="mobile ? '100%' : 650"
       :rounded="mobile ? 0 : 'lg'"
