@@ -62,6 +62,10 @@ export const makeVFileInputProps = propsFactory({
       )
     },
   },
+  truncateLength: {
+    type: [Number, String],
+    default: 22,
+  },
 
   ...makeVInputProps({ prependIcon: '$file' }),
 
@@ -100,10 +104,10 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
     const fileNames = computed(() => (model.value ?? []).map(file => {
       const { name = '', size = 0 } = file
-
+      const truncatedText = truncateText(name)
       return !props.showSize
-        ? name
-        : `${name} (${humanReadableFileSize(size, base.value)})`
+        ? truncatedText
+        : `${truncatedText} (${humanReadableFileSize(size, base.value)})`
     }))
 
     const counterValue = computed(() => {
@@ -147,6 +151,11 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
         callEvent(props['onClick:clear'], e)
       })
+    }
+    function truncateText (str: string) {
+      if (str.length < Number(props.truncateLength)) return str
+      const charsKeepOneSide = Math.floor((Number(props.truncateLength) - 1) / 2)
+      return `${str.slice(0, charsKeepOneSide)}…${str.slice(str.length - charsKeepOneSide)}`
     }
 
     watch(model, newValue => {
