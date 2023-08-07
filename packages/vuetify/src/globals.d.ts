@@ -87,7 +87,7 @@ declare global {
   }
 
   interface Window {
-    EyeDropper?: EyeDropperConstructor | undefined
+    EyeDropper: EyeDropperConstructor
   }
 
   function parseInt(s: string | number, radix?: number): number

@@ -44,7 +44,7 @@ const aliases: IconAliases = {
   plus: 'add',
   minus: 'remove',
   calendar: 'event',
-  eyeDropper: 'colorize'
+  eyeDropper: 'colorize',
 }
 
 const md: IconSet = {

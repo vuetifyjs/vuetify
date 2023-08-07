@@ -44,7 +44,7 @@ const aliases: IconAliases = {
   plus: 'mdi-plus',
   minus: 'mdi-minus',
   calendar: 'mdi-calendar',
-  eyeDropper: 'mdi-eyedropper'
+  eyeDropper: 'mdi-eyedropper',
 }
 
 const mdi: IconSet = {
