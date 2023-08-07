@@ -1,5 +1,5 @@
 <template>
-  <vuetify medium="discovery" type="discovery" />
+  <promoted class="mb-5" medium="discovery" type="discovery" />
 </template>
 
 <script setup>

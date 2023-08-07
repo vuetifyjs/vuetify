@@ -1,26 +1,31 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VTextField } from '../VTextField'
-import { generate } from '../../../../cypress/templates'
+
+// Utilities
 import { cloneVNode } from 'vue'
+import { generate } from '../../../../cypress/templates'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
+const densities = ['default', 'comfortable', 'compact'] as const
 
 const stories = Object.fromEntries(Object.entries({
-  'Default input': <VTextField label="label" />,
-  Disabled: <VTextField label="label" disabled />,
-  Affixes: <VTextField label="label" prefix="prefix" suffix="suffix" />,
-  'Prepend/append': <VTextField label="label" prependIcon="mdi-vuetify" appendIcon="mdi-vuetify" />,
-  'Prepend/append inner': <VTextField label="label" prependInnerIcon="mdi-vuetify" appendInnerIcon="mdi-vuetify" />,
-  Placeholder: <VTextField label="label" placeholder="placeholder" persistentPlaceholder />,
+  'Default input': <VTextField />,
+  Disabled: <VTextField disabled />,
+  Affixes: <VTextField prefix="prefix" suffix="suffix" />,
+  'Prepend/append': <VTextField prependIcon="$vuetify" appendIcon="$vuetify" />,
+  'Prepend/append inner': <VTextField prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
+  Placeholder: <VTextField placeholder="placeholder" persistentPlaceholder />,
 }).map(([k, v]) => [k, (
   <div class="d-flex flex-column flex-grow-1">
     { variants.map(variant => (
-      <div class="d-flex" style="gap: 0.4rem">
-        { cloneVNode(v, { variant }) }
-        { cloneVNode(v, { variant, modelValue: 'Value' }) }
-      </div>
-    ))}
+      densities.map(density => (
+        <div class="d-flex align-start" style="gap: 0.4rem; height: 100px;">
+          { cloneVNode(v, { variant, density, label: `${variant} ${density}` }) }
+          { cloneVNode(v, { variant, density, label: `with value`, modelValue: 'Value' }) }
+        </div>
+      ))
+    )).flat()}
   </div>
 )]))
 

@@ -67,6 +67,15 @@
   </div>
 </template>
 
+<script setup>
+  const items = [
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me 2' },
+  ]
+</script>
+
 <script>
   export default {
     data: () => ({

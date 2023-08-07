@@ -74,13 +74,13 @@
   function generateApiItems (locale: string) {
     return (routes as RouteRecordRaw[])
       .filter(route => route.path.includes(`${locale}/api/`))
-      .sort((a, b) => a.path.localeCompare(b.path))
       .map(route => {
         return {
           title: (route.meta!.title as string).slice(0, -4),
           to: route.path,
         }
       })
+      .sort((a, b) => a.title.localeCompare(b.title))
   }
 
   function generateListItem (item: string | Item, path = '', locale = 'en', t = (key: string) => key): any {

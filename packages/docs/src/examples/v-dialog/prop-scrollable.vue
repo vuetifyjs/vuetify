@@ -117,6 +117,13 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const dialogm1 = ref('')
+  const dialog = ref(false)
+</script>
+
 <script>
   export default {
     data () {

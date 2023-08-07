@@ -35,7 +35,7 @@
     return {
       clearable: clearable.value || undefined,
       label: label.value,
-      'prepend-icon': prepend.value ? 'mdi-vuetify' : undefined,
+      'prepend-icon': prepend.value ? '$vuetify' : undefined,
       variant: model.value === 'default' ? undefined : model.value,
     }
   })

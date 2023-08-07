@@ -1,6 +1,6 @@
 ---
-nav: Cards
 meta:
+  nav: Cards
   title: Card component
   description: The v-card component is a versatile and enhanced sheet of paper that provides a simple interface for headings, text, images, and actions.
   keywords: cards, vuetify card component, vue card component, v-card
@@ -12,7 +12,7 @@ related:
 
 # Cards
 
- The `v-card` component is a versatile and enhanced version of [v-sheet](/components/sheets/) that provides a simple interface for headings, text, images, icons, and more <inline slug="scrimba-cards" />
+ The `v-card` component is a versatile and enhanced version of [v-sheet](/components/sheets/) that provides a simple interface for headings, text, images, icons, and more.
 
 ![Card Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-card/v-card-entry.png)
 
@@ -69,13 +69,15 @@ Use slots if you need to render more complex content. If you need full control o
 
 In some cases it is possible to combine the different options, like the example below where props, slots and markup have all been used.
 
-<alert type="info">
-
+::: info
   In general slots take precedence over props. So if you provide both **text** prop and use **text** slot, then only the slot content will be rendered.
-
-</alert>
+:::
 
 <example file="v-card/basics-combine" />
+
+### Content overflow
+
+`v-card` does not allow its content to overflow outside the card by default. It also establishes a z-index stacking context, which prevents its content from displaying on top of elements outside the `v-card`, even when it sets a higher z-index value. To override this default behavior, apply the following usage: `<v-card style="overflow: initial; z-index: initial">`.
 
 ## Examples
 

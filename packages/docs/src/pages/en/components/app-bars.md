@@ -1,6 +1,6 @@
 ---
-nav: App bars
 meta:
+  nav: App bars
   title: App-bar component
   description: The app bar component is a supercharged toolbar with advanced scrolling techniques and application layout support.
   keywords: app bars, vuetify app bar component, vue app bar component
@@ -59,11 +59,9 @@ The recommended placement of elements inside of `v-app-bar` is:
 | 4. Action items (optional) | Used to highlight certain actions not in the overflow menu |
 | 5. Overflow menu (optional) | Place less often used action items into a hidden menu |
 
-<alert type="warning">
-
+::: warning
   When a `v-btn` with the `icon` prop is used inside of `v-toolbar` and `v-app-bar` they will automatically have their size increased and negative margin applied to ensure proper spacing according to the Material Design Specification. If you choose to wrap your buttons in any container, such as a `div`, you will need to apply negative margin to that container in order to properly align them.
-
-</alert>
+:::
 
 ## Examples
 

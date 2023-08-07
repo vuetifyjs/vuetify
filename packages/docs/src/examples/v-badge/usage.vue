@@ -8,7 +8,7 @@
     <div class="text-center">
       <v-badge v-bind="props">
         <v-icon
-          icon="mdi-vuetify"
+          icon="$vuetify"
           size="x-large"
         ></v-icon>
       </v-badge>
@@ -49,7 +49,7 @@
 
   const slots = computed(() => {
     return `
-  <v-icon icon="mdi-vuetify" size="x-large"></v-icon>
+  <v-icon icon="$vuetify" size="x-large"></v-icon>
 `
   })
 
