@@ -24,12 +24,6 @@ Vuetify is a no design skills required UI Library with beautifully handcrafted V
 
 <br>
 <br>
-<br>
-
-<home-special-sponsor />
-
-<br>
-<br>
 
 ## Project Sponsors
 

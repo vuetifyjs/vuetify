@@ -226,3 +226,7 @@ app.use(vuetify)
 - `v-expansion-panel-header` has been renamed to `v-expansion-panel-title`.
 - `v-expansion-panel-content` has been renamed to `v-expansion-panel-text`.
 - `v-expansion-panel` now has `text` and `title` props that can be used instead of subcomponents.
+
+### v-card
+
+- `v-card` does not allow content to overflow or use higher `z-index` values to display on top of elements outside it. To disable this behavior, use `<v-card style="overflow: initial; z-index: initial">` ([#17593](https://github.com/vuetifyjs/vuetify/issues/17593), [#17628](https://github.com/vuetifyjs/vuetify/issues/17628))

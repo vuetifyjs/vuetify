@@ -184,10 +184,10 @@
 
     if (props.member.twitter) {
       links.push({
-        color: '#40BBF4',
-        href: `https://twitter.com/${props.member.twitter}`,
-        icon: 'mdi-twitter',
-        tooltip: 'Twitter',
+        color: '#212121',
+        href: `https://x.com/${props.member.twitter}`,
+        icon: '$x',
+        tooltip: 'X',
       })
     }
 
