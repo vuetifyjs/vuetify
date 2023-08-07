@@ -1,6 +1,6 @@
 ---
-nav: Chips
 meta:
+  nav: Chips
   title: Chip component
   description: The chip component allows a user to enter information, make selections, filter content or trigger actions.
   keywords: chips, vuetify chip component, vue chip component

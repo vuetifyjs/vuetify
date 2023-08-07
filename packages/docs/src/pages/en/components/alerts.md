@@ -1,6 +1,6 @@
 ---
-nav: Alerts
 meta:
+  nav: Alerts
   title: Alert component
   description: The v-alert component is used to convey information to the user. Designed to stand out, the alerts come in four contextual styles.
   keywords: v-alert, alerts, vue alert component, vuetify alert component
@@ -130,11 +130,9 @@ The **closable** prop adds a [v-icon](/components/icons) on the far right, after
 
 The close icon automatically applies a default `aria-label` and is configurable by using the **close-label** prop or changing **close** value in your locale.
 
-<alert type="info">
-
+::: info
   For more information on how to global modify your locale settings, navigate to the [Internationalization page](/features/internationalization).
-
-</alert>
+:::
 
 ## Additional Examples
 

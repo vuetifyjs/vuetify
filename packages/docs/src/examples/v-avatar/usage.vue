@@ -41,7 +41,7 @@
   const props = computed(() => {
     return {
       color: !image.value && !icon.value ? 'surface-variant' : undefined,
-      icon: icon.value ? 'mdi-vuetify' : undefined,
+      icon: icon.value ? '$vuetify' : undefined,
       image: image.value ? 'smirk.png' : undefined,
       rounded: model.value === 'tile' ? '0' : undefined,
       size: size.value === 40 ? undefined : `${size.value}`,

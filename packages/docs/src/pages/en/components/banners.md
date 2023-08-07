@@ -1,6 +1,6 @@
 ---
-nav: Banners
 meta:
+  nav: Banners
   title: Banner component
   description: The banner component displays an important and concise message for a user to address. It can also indicate actions that the user can take.
   keywords: banners, vuetify banner component, vue banner component

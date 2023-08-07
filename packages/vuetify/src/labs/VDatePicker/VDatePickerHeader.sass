@@ -1,0 +1,51 @@
+@use '../../styles/settings'
+
+.v-date-picker-header
+  display: grid
+  grid-template-areas: "prepend content append"
+  grid-template-columns: min-content minmax(0, 1fr) min-content
+  overflow: hidden
+  padding-inline-start: 24px
+  padding-inline-end: 12px
+  padding-bottom: 12px
+
+.v-date-picker-header__append
+  grid-area: append
+
+.v-date-picker-header__prepend
+  grid-area: prepend
+  padding-inline-start: 8px
+
+.v-date-picker-header__content
+  align-items: center
+  display: flex
+  font-size: 32px
+  line-height: 40px
+  grid-area: content
+  justify-content: space-between
+
+.date-picker-header-transition,
+.date-picker-header-reverse-transition
+  &-enter-active
+    transition-duration: 0.3s
+    transition-timing-function: settings.$standard-easing
+
+  &-leave-active
+    transition-duration: 0.3s
+    transition-timing-function: settings.$standard-easing
+
+.date-picker-header-transition
+  &-enter-from
+    transform: translate(0, 100%)
+
+  &-leave-to
+    opacity: 0
+    transform: translate(0, -100%)
+
+.date-picker-header-reverse-transition
+  &-enter-from
+    transform: translate(0, -100%)
+
+  &-leave-to
+    opacity: 0
+    transform: translate(0, 100%)

@@ -24,6 +24,12 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const checkbox = ref(false)
+</script>
+
 <script>
   export default {
     data () {

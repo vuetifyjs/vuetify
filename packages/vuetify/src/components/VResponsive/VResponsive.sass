@@ -1,9 +1,7 @@
 @use '../../styles/settings'
 
 .v-responsive
-  display: grid
-  grid-template-rows: minmax(100%, 1fr)
-  grid-template-columns: 1fr
+  display: flex
   flex: 1 0 auto
   max-height: 100%
   max-width: 100%
@@ -11,19 +9,17 @@
   position: relative
 
   &--inline
-    display: inline-grid
+    display: inline-flex
     flex: 0 0 auto
 
 .v-responsive__content
   flex: 1 0 0px
   max-width: 100%
 
+.v-responsive__sizer ~ .v-responsive__content
+  margin-inline-start: -100%
+
 .v-responsive__sizer
   flex: 1 0 0px
   transition: padding-bottom 0.2s settings.$standard-easing
   pointer-events: none
-
-.v-responsive__sizer,
-.v-responsive__content
-  grid-row-start: 1
-  grid-column-start: 1

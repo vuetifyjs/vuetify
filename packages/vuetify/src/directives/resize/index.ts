@@ -1,3 +1,4 @@
+// Types
 import type { DirectiveBinding } from 'vue'
 
 interface ResizeDirectiveBinding extends Omit<DirectiveBinding, 'modifiers'> {

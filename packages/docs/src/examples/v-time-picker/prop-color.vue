@@ -12,6 +12,12 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const e4 = ref(null)
+</script>
+
 <script>
   export default {
     data () {

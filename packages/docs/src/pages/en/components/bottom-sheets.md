@@ -1,7 +1,7 @@
 ---
 emphasized: true
-nav: Bottom sheets
 meta:
+  nav: Bottom sheets
   title: Bottom sheet component
   description: The bottom sheet component is used for elevating content above other elements in a dialog style fashion.
   keywords: bottom sheets, vuetify bottom sheet component, vue bottom sheet component
@@ -17,13 +17,11 @@ The bottom sheet is a modified `v-dialog` that slides from the bottom of the scr
 
 ![Bottom Sheet Entry](https://cdn.vuetifyjs.com/docs/images/components/v-bottom-sheet/v-bottom-sheet-entry.png)
 
----
+----
 
-<alert type="success">
-
-This feature was introduced in [v3.3.0 (Icarus)](/getting-started/release-notes/?version=v3.3.0)
-
-</alert>
+::: warning
+This feature requires [v3.3.0 (Icarus)](/getting-started/release-notes/?version=v3.3.0)
+:::
 
 ## Usage
 
@@ -99,11 +97,9 @@ The `v-bottom-sheet` component has access to all of the slots available in [v-di
 | 1. Default   | The default slot                                    |
 | 2. Activator | The activator slot is used to open the bottom sheet |
 
-<alert type="info">
-
+::: info
 The **activator** slot is not required when using the **v-model** prop.
-
-</alert>
+:::
 
 ### Examples
 
