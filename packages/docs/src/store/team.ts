@@ -21,6 +21,7 @@ export type Member = {
   github?: string
   team: string
   twitter?: string
+  joined?: string
 }
 
 export type GithubMember = {

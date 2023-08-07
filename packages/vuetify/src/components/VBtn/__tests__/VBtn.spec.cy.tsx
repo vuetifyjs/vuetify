@@ -1,8 +1,10 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VBtn } from '../VBtn'
-import { generate, gridOn } from '@/../cypress/templates'
+
+// Utilities
 import { createRouter, createWebHistory } from 'vue-router'
+import { generate, gridOn } from '@/../cypress/templates'
 
 const anchor = {
   href: '#my-anchor',
@@ -33,7 +35,7 @@ const stories = {
       <VBtn loading>Default Content</VBtn>
     </div>
   ),
-  Icon: <VBtn icon="mdi-vuetify" color="pink"></VBtn>,
+  Icon: <VBtn icon="$vuetify" color="pink"></VBtn>,
   'Density + size': gridOn(densities, sizes, (density, size) =>
     <VBtn size={ size } density={ density }>{ size }</VBtn>
   ),
@@ -44,7 +46,7 @@ const stories = {
     <VBtn disabled color={ color } variant={ variant }>{ variant }</VBtn>
   ),
   Stacked: gridOn([undefined], variants, (_, variant) =>
-    <VBtn stacked prependIcon="mdi-vuetify" variant={ variant }>{ variant }</VBtn>
+    <VBtn stacked prependIcon="$vuetify" variant={ variant }>{ variant }</VBtn>
   ),
 }
 

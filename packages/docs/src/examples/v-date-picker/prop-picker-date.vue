@@ -35,6 +35,30 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const allNotes = [
+    'President met with prime minister',
+    'New power plant opened',
+    'Rocket launch announced',
+    'Global warming discussion cancelled',
+    'Company changed its location',
+  ]
+
+  const date = ref((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10))
+  const pickerDate = ref(null)
+  const notes = ref([])
+
+  watch(pickerDate, val => {
+    notes.value = [
+      allNotes[Math.floor(Math.random() * 5)],
+      allNotes[Math.floor(Math.random() * 5)],
+      allNotes[Math.floor(Math.random() * 5)],
+    ].filter((value, index, self) => self.indexOf(value) === index)
+  })
+</script>
+
 <script>
   export default {
     data: () => ({

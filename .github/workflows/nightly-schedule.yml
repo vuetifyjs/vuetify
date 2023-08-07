@@ -1,0 +1,81 @@
+name: Scheduled Nightly Release
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 12 * * *' # 1200 UTC
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.repository_owner == 'vuetifyjs' }}
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix:
+        branch: ['master', 'dev', 'next', 'v2-stable', 'v2-dev']
+        include:
+          - branch: 'master'
+            tag: 'latest'
+          - branch: 'dev'
+            tag: 'dev'
+          - branch: 'next'
+            tag: 'next'
+          - branch: 'v2-stable'
+            tag: 'v2-stable'
+          - branch: 'v2-dev'
+            tag: 'v2-dev'
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ matrix.branch }}
+          fetch-depth: 0
+      - run: |
+          last=$(git show -s --format=%ct HEAD)
+          now=$(date +%s)
+          diff=$(($now - $last))
+          if [ $diff -gt 86400 ]; then
+              echo "Last commit was more than 24 hours ago, skipping release"
+              exit 1
+          fi
+      - run: echo "RELEASE_ID=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - uses: ./.github/actions/nightly-release
+        with:
+          checkout-repo: ${{ github.repository }}
+          checkout-ref: ${{ matrix.branch }}
+          release-id: ${{ matrix.branch }}.${{ env.RELEASE_ID }}
+          npm-tag: ${{ matrix.tag }}
+          npm-token: ${{ secrets.NPM_TOKEN }}
+      - uses: actions/checkout@v2
+
+  percy:
+    name: Visual regression tests
+    runs-on: ubuntu-latest
+    if: ${{ github.repository_owner == 'vuetifyjs' }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+          fetch-depth: 0
+      - run: |
+          last=$(git show -s --format=%ct HEAD)
+          now=$(date +%s)
+          diff=$(($now - $last))
+          if [ $diff -gt 86400 ]; then
+              echo "Last commit was more than 24 hours ago, skipping tests"
+              exit 1
+          fi
+      - uses: ./.github/actions/yarn-install
+      - run: echo "COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
+      - run: yarn cy:run
+        working-directory: ./packages/vuetify
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+          PERCY_BRANCH: master
+          PERCY_TARGET_BRANCH: master
+          PERCY_COMMIT: ${{ env.COMMIT }}
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: ./packages/vuetify/cypress/screenshots/
+          if-no-files-found: ignore

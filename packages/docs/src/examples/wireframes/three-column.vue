@@ -77,6 +77,15 @@
   </v-app>
 </template>
 
+<script setup>
+  const links = [
+    'Dashboard',
+    'Messages',
+    'Profile',
+    'Updates',
+  ]
+</script>
+
 <script>
   export default {
     data: () => ({

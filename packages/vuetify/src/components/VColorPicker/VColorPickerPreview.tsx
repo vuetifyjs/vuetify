@@ -9,8 +9,8 @@ import { VIcon } from '@/components/VIcon'
 import { makeComponentProps } from '@/composables/component'
 
 // Utilities
-import { defineComponent, HexToHSV, HSVtoCSS, IN_BROWSER, propsFactory, useRender } from '@/util'
 import { nullColor } from './util'
+import { defineComponent, HexToHSV, HSVtoCSS, IN_BROWSER, propsFactory, useRender } from '@/util'
 import { onUnmounted } from 'vue'
 
 // Types
@@ -25,7 +25,7 @@ export const makeVColorPickerPreviewProps = propsFactory({
   hideAlpha: Boolean,
 
   ...makeComponentProps(),
-}, 'v-color-picker-preview')
+}, 'VColorPickerPreview')
 
 export const VColorPickerPreview = defineComponent({
   name: 'VColorPickerPreview',

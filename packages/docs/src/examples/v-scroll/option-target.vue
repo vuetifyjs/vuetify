@@ -25,6 +25,15 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const offsetTop = ref(0)
+  function onScroll (e) {
+    offsetTop.value = e.target.scrollTop
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

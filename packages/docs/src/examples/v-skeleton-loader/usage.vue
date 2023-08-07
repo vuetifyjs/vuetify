@@ -50,7 +50,7 @@
   const color = ref()
   const colors = ['primary', 'secondary', 'success', 'info', 'warning', 'error']
   const items = ['card', 'paragraph', 'list-item-avatar', 'article', 'card-avatar']
-  const type = ref(undefined)
+  const type = ref()
 
   const props = computed(() => {
     return {

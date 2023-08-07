@@ -36,6 +36,13 @@
   </v-layout>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const drawer = ref(false)
+  const group = ref(null)
+</script>
+
 <script>
   export default {
     data: () => ({
