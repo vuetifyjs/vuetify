@@ -1,14 +1,15 @@
+// Styles
 import './VImg.sass'
 
 // Components
 import { makeVResponsiveProps, VResponsive } from '@/components/VResponsive/VResponsive'
 
-// Directives
-import intersect from '@/directives/intersect'
-
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
+
+// Directives
+import intersect from '@/directives/intersect'
 
 // Utilities
 import {
@@ -22,6 +23,7 @@ import {
   withDirectives,
 } from 'vue'
 import {
+  convertToUnit,
   genericComponent,
   propsFactory,
   SUPPORTS_INTERSECTION,
@@ -40,10 +42,10 @@ export interface srcObject {
 }
 
 export type VImgSlots = {
-  default: []
-  placeholder: []
-  error: []
-  sources: []
+  default: never
+  placeholder: never
+  error: never
+  sources: never
 }
 
 export const makeVImgProps = propsFactory({
@@ -73,7 +75,7 @@ export const makeVImgProps = propsFactory({
   ...makeVResponsiveProps(),
   ...makeComponentProps(),
   ...makeTransitionProps(),
-}, 'v-img')
+}, 'VImg')
 
 export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',
@@ -304,7 +306,10 @@ export const VImg = genericComponent<VImgSlots>()({
             { 'v-img--booting': !isBooted.value },
             props.class,
           ]}
-          style={ props.style }
+          style={[
+            { width: convertToUnit(props.width === 'auto' ? naturalWidth.value : props.width) },
+            props.style,
+          ]}
           { ...responsiveProps }
           aspectRatio={ aspectRatio.value }
           aria-label={ props.alt }

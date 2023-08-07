@@ -1,3 +1,4 @@
+@use 'sass:math'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -8,6 +9,8 @@
   font-weight: $input-font-weight
   line-height: $input-line-height
 
+  --v-input-chips-margin-top: #{$input-chips-margin-top}
+
   &--disabled
     pointer-events: none
 
@@ -15,6 +18,9 @@
     @include tools.density('v-input', $input-density) using ($modifier)
       --v-input-control-height: #{$input-control-height + $modifier}
       --v-input-padding-top: #{15px + $modifier * .5}
+
+    @include tools.density('v-input', $input-chips-margin-bottom) using ($modifier)
+      --v-input-chips-margin-bottom: #{0px + math.div($modifier, 2)}
 
 .v-input--vertical
   grid-template-areas: "append" "control" "prepend"

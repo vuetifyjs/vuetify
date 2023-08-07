@@ -11,6 +11,12 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const date = ref('2017-12')
+</script>
+
 <script>
   export default {
     data () {

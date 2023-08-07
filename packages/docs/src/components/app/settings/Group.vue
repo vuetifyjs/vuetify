@@ -24,7 +24,7 @@
               :ref="'item-' + text"
               :color="isSelected ? 'primary' : `grey-${isDark ? 'darken' : 'lighten'}-3`"
               :append-icon="icon"
-              class="px-4 text-capitalize justify-space-between"
+              class="px-4 text-capitalize justify-space-between text-body-2"
               block
               variant="flat"
               size="large"

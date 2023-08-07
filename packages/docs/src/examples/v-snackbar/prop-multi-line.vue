@@ -26,6 +26,14 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const snackbar = ref(false)
+
+  const text = `I am a multi-line snackbar.\nI can have more than one line. This is another line that is quite long.`
+</script>
+
 <script>
   export default {
     data: () => ({

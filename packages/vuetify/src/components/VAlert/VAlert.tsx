@@ -8,20 +8,20 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
-import { IconValue } from '@/composables/icons'
+import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables/locale'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useLocale } from '@/composables/locale'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTextColor } from '@/composables/color'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -82,15 +82,15 @@ export const makeVAlertProps = propsFactory({
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'flat' } as const),
-}, 'v-alert')
+}, 'VAlert')
 
 export type VAlertSlots = {
-  default: []
-  prepend: []
-  title: []
-  text: []
-  append: []
-  close: [{ props: Record<string, any> }]
+  default: never
+  prepend: never
+  title: never
+  text: never
+  append: never
+  close: { props: Record<string, any> }
 }
 
 export const VAlert = genericComponent<VAlertSlots>()({

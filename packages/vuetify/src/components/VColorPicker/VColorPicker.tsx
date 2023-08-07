@@ -2,27 +2,27 @@
 import './VColorPicker.sass'
 
 // Components
-import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 import { VColorPickerCanvas } from './VColorPickerCanvas'
 import { VColorPickerEdit } from './VColorPickerEdit'
 import { VColorPickerPreview } from './VColorPickerPreview'
 import { VColorPickerSwatches } from './VColorPickerSwatches'
+import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { provideDefaults } from '@/composables/defaults'
 import { useRtl } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { consoleWarn, defineComponent, HSVtoCSS, omit, parseColor, propsFactory, RGBtoHSV, useRender } from '@/util'
-import { extractColor, modes, nullColor } from './util'
 import { onMounted, ref } from 'vue'
+import { extractColor, modes, nullColor } from './util'
+import { consoleWarn, defineComponent, HSVtoCSS, omit, parseColor, propsFactory, RGBtoHSV, useRender } from '@/util'
 
 // Types
 import type { DeepReadonly, PropType } from 'vue'
 import type { Color, HSV } from '@/util'
 
-export const makeVPickerProps = propsFactory({
+export const makeVColorPickerProps = propsFactory({
   canvasHeight: {
     type: [String, Number],
     default: 150,
@@ -63,12 +63,12 @@ export const makeVPickerProps = propsFactory({
     'minWidth',
     'maxWidth',
   ]),
-}, 'v-color-picker')
+}, 'VColorPicker')
 
 export const VColorPicker = defineComponent({
   name: 'VColorPicker',
 
-  props: makeVPickerProps(),
+  props: makeVColorPickerProps(),
 
   emits: {
     'update:modelValue': (color: any) => true,
@@ -83,6 +83,8 @@ export const VColorPicker = defineComponent({
       'modelValue',
       undefined,
       v => {
+        if (v == null || v === '') return null
+
         let c: HSV
         try {
           c = RGBtoHSV(parseColor(v as any))

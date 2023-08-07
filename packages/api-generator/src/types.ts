@@ -34,14 +34,21 @@ export function generateComposableDataFromTypes () {
 
   return Object.entries(composables.properties).map(([name, data]) => {
     const returnType = (data as FunctionDefinition).returnType
-    let exposed
+    let exposed: Record<string, Definition>
     if (returnType.type === 'allOf') {
-      exposed = returnType.items.reduce((obj, item) => {
+      exposed = returnType.items.reduce((acc, item) => {
         const props = (item as ObjectDefinition).properties
-        return { ...obj, ...props }
+        Object.assign(acc, props)
+        return acc
       }, {})
     } else if (returnType.type === 'object') {
       exposed = returnType.properties
+    }
+    if (exposed) {
+      exposed = Object.fromEntries(
+        Object.entries(exposed)
+          .map(([name, prop]) => [name, prettifyType(name, prop)])
+      )
     }
 
     return {
@@ -61,7 +68,7 @@ export function generateDirectiveDataFromTypes () {
   return Object.entries(directives.properties).map(([name, data]) => {
     return {
       name,
-      argument: { value: (data as ObjectDefinition).properties.value },
+      argument: { value: prettifyType(name, (data as ObjectDefinition).properties.value) },
       modifiers: ((data as ObjectDefinition).properties.modifiers as ObjectDefinition).properties,
     }
   }) as { name: string, argument: { value: Definition }, modifiers: Record<string, Definition> }[]

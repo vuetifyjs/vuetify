@@ -30,6 +30,16 @@
   </div>
 </template>
 
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const dialog = ref(false)
+  watch(dialog, val => {
+    if (!val) return
+    setTimeout(() => (dialog.value = false), 4000)
+  })
+</script>
+
 <script>
   export default {
     data () {

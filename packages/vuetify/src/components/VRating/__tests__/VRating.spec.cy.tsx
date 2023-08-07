@@ -1,8 +1,9 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VBtn } from '@/components/VBtn'
+// Components
 import { Application } from '../../../../cypress/templates'
 import { VRating } from '../VRating'
+import { VBtn } from '@/components/VBtn'
 
 describe('VRating', () => {
   it('should response to user interaction', () => {
@@ -24,7 +25,11 @@ describe('VRating', () => {
     ))
 
     cy.setProps({ rating: 4 })
-      .get('.v-rating__item i.mdi-star').should('have.length', 4)
+    cy.get('.v-rating__item .v-icon').then(icons => {
+      icons.each((i, el) => {
+        expect(el.outerHTML).to.equal(icons[i < 4 ? 0 : 4].outerHTML)
+      })
+    })
   })
 
   it('should clear value if using clearable prop', () => {
@@ -72,7 +77,11 @@ describe('VRating', () => {
     ))
 
     cy.get('.v-rating__item .v-btn').eq(2).realHover()
-      .get('.v-rating__item i.mdi-star').should('have.length', 3)
+    cy.get('.v-rating__item .v-icon').then(icons => {
+      icons.each((i, el) => {
+        expect(el.outerHTML).to.equal(icons[i < 3 ? 0 : 4].outerHTML)
+      })
+    })
   })
 
   it('should show item-labels', () => {

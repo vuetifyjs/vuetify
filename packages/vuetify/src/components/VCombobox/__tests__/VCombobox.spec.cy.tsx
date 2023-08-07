@@ -1,9 +1,50 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VForm } from '@/components/VForm'
+// Components
 import { VCombobox } from '../VCombobox'
-import { ref } from 'vue'
+import { VForm } from '@/components/VForm'
+
+// Utilities
+import { cloneVNode, ref } from 'vue'
+import { generate } from '../../../../cypress/templates'
 import { keyValues } from '@/util'
+
+const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
+const densities = ['default', 'comfortable', 'compact'] as const
+const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'] as const
+
+const stories = Object.fromEntries(Object.entries({
+  'Default input': <VCombobox />,
+  Disabled: <VCombobox items={ items } disabled />,
+  Affixes: <VCombobox items={ items } prefix="prefix" suffix="suffix" />,
+  'Prepend/append': <VCombobox items={ items } prependIcon="$vuetify" appendIcon="$vuetify" />,
+  'Prepend/append inner': <VCombobox items={ items } prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
+  Placeholder: <VCombobox items={ items } placeholder="placeholder" persistentPlaceholder />,
+}).map(([k, v]) => [k, (
+  <div class="d-flex flex-column flex-grow-1">
+    { variants.map(variant => (
+      densities.map(density => (
+        <div class="d-flex align-start" style="gap: 0.4rem; height: 100px;">
+          { cloneVNode(v, { variant, density, label: `${variant} ${density}` }) }
+          { cloneVNode(v, { variant, density, label: `with value`, modelValue: ['California'] }) }
+          { cloneVNode(v, { variant, density, label: `chips`, chips: true, modelValue: ['California'] }) }
+          <VCombobox
+            variant={ variant }
+            density={ density }
+            modelValue={['California']}
+            label="selection slot"
+            { ...v.props }
+          >{{
+            selection: ({ item }) => {
+              return item.title
+            },
+          }}
+          </VCombobox>
+        </div>
+      ))
+    )).flat()}
+  </div>
+)]))
 
 describe('VCombobox', () => {
   describe('closableChips', () => {
@@ -176,7 +217,7 @@ describe('VCombobox', () => {
         .should('have.length', 2)
       cy.get('input').clear()
       cy.get('input').type('Item 3')
-      cy.get('input').should('have.length', 1)
+      cy.get('.v-list-item').should('have.length', 0)
     })
 
     it('should filter items when using multiple', () => {
@@ -318,6 +359,62 @@ describe('VCombobox', () => {
         title: 'Item 2',
         value: 'item2',
       }]))
+    })
+
+    it('should work with objects when using multiple and item-value', () => {
+      const items = ref([
+        {
+          text: 'Item 1',
+          id: 'item1',
+        },
+        {
+          text: 'Item 2',
+          id: 'item2',
+        },
+        {
+          text: 'Item 3',
+          id: 'item3',
+        },
+      ])
+
+      const selectedItems = ref(
+        [
+          {
+            text: 'Item 1',
+            id: 'item1',
+          },
+          {
+            text: 'Item 2',
+            id: 'item2',
+          },
+        ]
+      )
+
+      cy.mount(() => (
+        <VCombobox
+          v-model={ selectedItems.value }
+          items={ items.value }
+          multiple
+          item-title="text"
+          item-value="value"
+          return-object
+        />
+      ))
+
+      cy.get('.v-combobox input').click()
+
+      cy.get('.v-list-item--active').should('have.length', 2)
+      cy.get('.v-field__input').should('include.text', 'Item 1')
+      cy.get('.v-field__input').should('include.text', 'Item 2')
+
+      cy.get('.v-list-item--active input')
+        .eq(0)
+        .click()
+        .get('.v-field__input')
+        .should(() => expect(selectedItems.value).to.deep.equal([{
+          text: 'Item 2',
+          id: 'item2',
+        }]))
     })
   })
 
@@ -517,5 +614,9 @@ describe('VCombobox', () => {
       .trigger('keydown', { key: keyValues.enter, waitForAnimations: false })
       .get('.v-list-item')
       .should('have.length', 6)
+  })
+
+  describe('Showcase', () => {
+    generate({ stories })
   })
 })
