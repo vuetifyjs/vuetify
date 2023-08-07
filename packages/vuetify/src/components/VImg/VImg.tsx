@@ -70,6 +70,16 @@ export const makeVImgProps = propsFactory({
     default: '',
   },
   crossorigin: String as PropType<'' | 'anonymous' | 'use-credentials'>,
+  referrerpolicy: String as PropType<
+    | 'no-referrer'
+    | 'no-referrer-when-downgrade'
+    | 'origin'
+    | 'origin-when-cross-origin'
+    | 'same-origin'
+    | 'strict-origin'
+    | 'strict-origin-when-cross-origin'
+    | 'unsafe-url'
+  >,
   srcset: String,
 
   ...makeVResponsiveProps(),
@@ -216,6 +226,7 @@ export const VImg = genericComponent<VImgSlots>()({
           srcset={ normalisedSrc.value.srcset }
           alt={ props.alt }
           crossorigin={ props.crossorigin }
+          referrerpolicy={ props.referrerpolicy }
           sizes={ props.sizes }
           ref={ image }
           onLoad={ onLoad }
@@ -247,6 +258,7 @@ export const VImg = genericComponent<VImgSlots>()({
             src={ normalisedSrc.value.lazySrc }
             alt={ props.alt }
             crossorigin={ props.crossorigin }
+            referrerpolicy={ props.referrerpolicy }
           />
         )}
       </MaybeTransition>
