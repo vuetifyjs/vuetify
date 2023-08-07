@@ -69,6 +69,7 @@ export const makeVImgProps = propsFactory({
     type: [String, Object] as PropType<string | srcObject>,
     default: '',
   },
+  crossorigin: String as PropType<'' | 'anonymous' | 'use-credentials'>,
   srcset: String,
 
   ...makeVResponsiveProps(),
@@ -214,6 +215,7 @@ export const VImg = genericComponent<VImgSlots>()({
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
           alt={ props.alt }
+          crossorigin={ props.crossorigin }
           sizes={ props.sizes }
           ref={ image }
           onLoad={ onLoad }
@@ -244,6 +246,7 @@ export const VImg = genericComponent<VImgSlots>()({
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
             src={ normalisedSrc.value.lazySrc }
             alt={ props.alt }
+            crossorigin={ props.crossorigin }
           />
         )}
       </MaybeTransition>
