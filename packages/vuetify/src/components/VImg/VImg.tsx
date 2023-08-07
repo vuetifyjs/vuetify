@@ -67,10 +67,7 @@ export const makeVImgProps = propsFactory({
     type: [String, Object] as PropType<string | srcObject>,
     default: '',
   },
-  crossorigin: {
-    type: String as PropType<'anonymous' | 'use-credentials'>,
-    default: undefined,
-  },
+  crossorigin: String as PropType<'' | 'anonymous' | 'use-credentials'>,
   srcset: String,
 
   ...makeVResponsiveProps(),
