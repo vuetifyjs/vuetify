@@ -146,35 +146,47 @@ function createContainer (md: MarkdownIt, type: string, title?: string) {
 }
 
 function createTabs (md: MarkdownIt) {
+  // Inject "::: tab" around code blocks
+  md.core.ruler.push('tabs', state => {
+    let inTabs = false
+    let level = 0
+    for (let i = 0; i < state.tokens.length; i++) {
+      const token = state.tokens[i]
+
+      if (token.type === 'container_tabs_open') {
+        inTabs = true
+        level = token.level
+      } else if (token.type === 'container_tabs_close') {
+        inTabs = false
+      } else if (inTabs && token.level === level + 1 && token.type === 'fence' && token.tag === 'code') {
+        const title = extractTitle(token.info)
+        token.level += 1
+        const openToken = new Token('container_tab_open', 'div', 1)
+        openToken.info = ` tab ${title}`
+        openToken.markup = ':::'
+        openToken.block = true
+        openToken.level = level + 1
+        const closeToken = new Token('container_tab_close', 'div', -1)
+        closeToken.level = level + 1
+        closeToken.block = true
+        state.tokens.splice(i, 0, openToken)
+        state.tokens.splice(i + 2, 0, closeToken)
+        i += 2
+      }
+    }
+  })
+
   md.use(container, 'tabs', {
     render (tokens, idx) {
       if (tokens[idx].nesting === 1) {
-        const level = tokens[idx].level
-
         let tabs = ''
         for (let i = idx + 1; i < tokens.length; i++) {
           const token = tokens[i]
-          if (token.type === 'container_tabs_close') break
 
-          if (token.level === level + 1 && token.type === 'fence' && token.tag === 'code') {
-            const title = extractTitle(token.info)
-            tabs += `<v-tab value="${title}" variant="plain" class="text-none">${title}</v-tab>\n`
-            token.level += 1
-            const openToken = new Token('container_tab_open', 'div', 1)
-            openToken.info = ` tab ${title}`
-            openToken.markup = ':::'
-            openToken.block = true
-            openToken.level = level + 1
-            const closeToken = new Token('container_tab_close', 'div', -1)
-            closeToken.level = level + 1
-            closeToken.block = true
-            tokens.splice(i, 0, openToken)
-            tokens.splice(i + 2, 0, closeToken)
-            i += 2
-          } else if (token.type === 'container_tab_open') {
+          if (token.type === 'container_tab_open') {
             const title = token.info.trim().slice('tab'.length).trim()
             tabs += `<v-tab value="${title}" variant="plain" class="text-none">${title}</v-tab>\n`
-          }
+          } else if (token.type === 'container_tabs_close') break
         }
 
         return `<DocTabs>\n<template #tabs>\n${tabs}</template>\n<template #content>\n`
