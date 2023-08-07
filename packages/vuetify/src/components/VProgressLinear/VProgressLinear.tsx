@@ -2,22 +2,22 @@
 import './VProgressLinear.sass'
 
 // Composables
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { useIntersectionObserver } from '@/composables/intersectionObserver'
+import { useRtl } from '@/composables/locale'
 import { makeLocationProps, useLocation } from '@/composables/location'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, Transition } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 type VProgressLinearSlots = {
-  default: [{ value: number, buffer: number }]
+  default: { value: number, buffer: number }
 }
 
 export const makeVProgressLinearProps = propsFactory({
@@ -57,7 +57,7 @@ export const makeVProgressLinearProps = propsFactory({
   ...makeRoundedProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
-}, 'v-progress-linear')
+}, 'VProgressLinear')
 
 export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
   name: 'VProgressLinear',

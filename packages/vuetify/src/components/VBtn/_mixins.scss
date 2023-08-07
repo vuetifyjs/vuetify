@@ -13,7 +13,7 @@
     #{if($immediate, &, '')}.v-btn--size-#{$sizeName} {
       --v-btn-size: #{$size};
       --v-btn-height: #{$height};
-      font-size: $size;
+      font-size: var(--v-btn-size);
       min-width: tools.roundEven($height * map.get($map, 'width-ratio'));
       padding: 0 tools.roundEven(math.div($height, map.get($map, 'padding-ratio')));
     }

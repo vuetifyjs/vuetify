@@ -162,10 +162,22 @@
   </v-expansion-panels>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const locations = ['Australia', 'Barbados', 'Chile', 'Denmark', 'Ecuador', 'France']
+
+  const trip = ref({
+    name: '',
+    location: null,
+    start: null,
+    end: null,
+  })
+</script>
+
 <script>
   export default {
     data: () => ({
-      date: null,
       trip: {
         name: '',
         location: null,

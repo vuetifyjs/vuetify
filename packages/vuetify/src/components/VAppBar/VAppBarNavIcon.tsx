@@ -12,7 +12,7 @@ export const makeVAppBarNavIconProps = propsFactory({
     icon: '$menu',
     variant: 'text' as const,
   }),
-}, 'v-app-bar-nav-icon')
+}, 'VAppBarNavIcon')
 
 export const VAppBarNavIcon = genericComponent<VBtnSlots>()({
   name: 'VAppBarNavIcon',

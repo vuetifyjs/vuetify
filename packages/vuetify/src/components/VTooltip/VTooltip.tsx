@@ -3,22 +3,22 @@ import './VTooltip.sass'
 
 // Components
 import { VOverlay } from '@/components/VOverlay'
+import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Composables
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
-import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { computed, mergeProps, ref } from 'vue'
-import { genericComponent, getUid, omit, propsFactory,parseAnchor, flipSide, useRender } from '@/util'
-import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
+import { genericComponent, getUid, omit, propsFactory, parseAnchor, flipSide, useRender } from '@/util'
 import { makeSpeechBubbleProps, useSpeechBubble } from '@/composables/speechBubble'
 import { includes } from '@/util/helpers'
 
 // Types
-import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
+import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVTooltipProps = propsFactory({
   id: String,
@@ -47,7 +47,7 @@ export const makeVTooltipProps = propsFactory({
     pointerPosition: 50,
     pointerSide: 'bottom' as const
   })
-}, 'v-tooltip')
+}, 'VTooltip')
 
 export const VTooltip = genericComponent<OverlaySlots>()({
   name: 'VTooltip',

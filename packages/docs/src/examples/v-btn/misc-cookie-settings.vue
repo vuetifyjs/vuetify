@@ -98,6 +98,14 @@
   </v-banner>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const dialog = ref(false)
+  const advertising = ref(true)
+  const performance = ref(true)
+</script>
+
 <script>
   export default {
     data: () => ({

@@ -28,6 +28,12 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const snackbar = ref(false)
+</script>
+
 <script>
   export default {
     data: () => ({

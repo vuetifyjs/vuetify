@@ -13,6 +13,13 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const month1 = ref(new Date().toISOString().substr(0, 7))
+  const month2 = ref('2013-09')
+</script>
+
 <script>
   export default {
     data () {

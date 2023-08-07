@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     id="home-sponsors"
-    class="mx-auto pa-3"
+    class="mx-auto pa-3 pb-12"
     color="transparent"
     max-width="700"
   >
@@ -16,7 +16,6 @@
         <v-col
           v-for="sponsor in sponsors"
           :key="sponsor.slug"
-          :md="sponsor.metadata.tier > 1 ? 3 : 5"
           class="d-flex align-center justify-center"
           cols="auto"
         >
@@ -25,6 +24,7 @@
             :compact="Number(sponsor.metadata.tier) > 2"
             :sponsor="sponsor"
             v-bind="$attrs"
+            :width="Number(sponsor.metadata.tier) > 1 && smAndDown ? 90 : undefined"
           />
         </v-col>
       </v-row>
@@ -40,11 +40,13 @@
   import SponsorLink from '@/components/sponsor/Link.vue'
 
   // Composables
+  import { useDisplay } from 'vuetify'
   import { useSponsorsStore } from '@/store/sponsors'
 
   // Utilities
   import { computed } from 'vue'
 
+  const { smAndDown } = useDisplay()
   const sponsorStore = useSponsorsStore()
 
   const sponsors = computed(() => {
