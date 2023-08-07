@@ -1,10 +1,51 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
+import { VSelect } from '../VSelect'
 import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
-import { ref } from 'vue'
-import { VSelect } from '../VSelect'
+
+// Utilities
+import { cloneVNode, ref } from 'vue'
+import { generate } from '../../../../cypress/templates'
 import { keyValues } from '@/util'
+
+const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
+const densities = ['default', 'comfortable', 'compact'] as const
+const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'] as const
+
+const stories = Object.fromEntries(Object.entries({
+  'Default input': <VSelect items={ items } />,
+  Disabled: <VSelect items={ items } disabled />,
+  Affixes: <VSelect items={ items } prefix="prefix" suffix="suffix" />,
+  'Prepend/append': <VSelect items={ items } prependIcon="$vuetify" appendIcon="$vuetify" />,
+  'Prepend/append inner': <VSelect items={ items } prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
+  Placeholder: <VSelect items={ items } placeholder="placeholder" persistentPlaceholder />,
+}).map(([k, v]) => [k, (
+  <div class="d-flex flex-column flex-grow-1">
+    { variants.map(variant => (
+      densities.map(density => (
+        <div class="d-flex align-start" style="gap: 0.4rem; height: 100px;">
+          { cloneVNode(v, { variant, density, label: `${variant} ${density}` }) }
+          { cloneVNode(v, { variant, density, label: `with value`, modelValue: ['California'] }) }
+          { cloneVNode(v, { variant, density, label: `chips`, chips: true, modelValue: ['California'] }) }
+          <VSelect
+            variant={ variant }
+            density={ density }
+            modelValue={['California']}
+            label="selection slot"
+            { ...v.props }
+          >{{
+            selection: ({ item }) => {
+              return item.title
+            },
+          }}
+          </VSelect>
+        </div>
+      ))
+    )).flat()}
+  </div>
+)]))
 
 describe('VSelect', () => {
   it('should render selection slot', () => {
@@ -184,6 +225,60 @@ describe('VSelect', () => {
           },
         ]))
     })
+
+    it('should work with objects when using multiple and item-value', () => {
+      const items = ref([
+        {
+          text: 'Item 1',
+          id: 'item1',
+        },
+        {
+          text: 'Item 2',
+          id: 'item2',
+        },
+        {
+          text: 'Item 3',
+          id: 'item3',
+        },
+      ])
+
+      const selectedItems = ref([
+        {
+          text: 'Item 1',
+          id: 'item1',
+        },
+        {
+          text: 'Item 2',
+          id: 'item2',
+        },
+      ])
+
+      cy.mount(() => (
+        <VSelect
+          v-model={ selectedItems.value }
+          items={ items.value }
+          multiple
+          returnObject
+          item-title="text"
+          item-value="id"
+        />
+      ))
+
+      cy.get('.v-select').click()
+
+      cy.get('.v-list-item--active').should('have.length', 2)
+      cy.get('.v-field__input').should('include.text', 'Item 1')
+      cy.get('.v-field__input').should('include.text', 'Item 2')
+
+      cy.get('.v-list-item--active input')
+        .eq(0)
+        .click()
+        .get('.v-field__input')
+        .should(() => expect(selectedItems.value).to.deep.equal([{
+          text: 'Item 2',
+          id: 'item2',
+        }]))
+    })
   })
 
   it('should not be clickable when in readonly', () => {
@@ -238,6 +333,48 @@ describe('VSelect', () => {
       .type('{downarrow}', { force: true })
       .get('.v-list-item').should('have.length', 0)
       .get('.v-select--active-menu').should('have.length', 0)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/16442
+  describe('null value', () => {
+    it('should allow null as legit itemValue', () => {
+      const items = [
+        { name: 'Default Language', code: null },
+        { code: 'en-US', name: 'English' },
+        { code: 'de-DE', name: 'German' },
+      ]
+
+      const selectedItems = null
+
+      cy.mount(() => (
+        <VSelect
+          items={ items }
+          modelValue={ selectedItems }
+          itemTitle="name"
+          itemValue="code"
+        />
+      ))
+
+      cy.get('.v-select__selection').eq(0).invoke('text').should('equal', 'Default Language')
+    })
+    it('should mark input as "not dirty" when the v-model is null, but null is not present in the items', () => {
+      const items = [
+        { code: 'en-US', name: 'English' },
+        { code: 'de-DE', name: 'German' },
+      ]
+
+      cy.mount(() => (
+        <VSelect
+          label="Language"
+          items={ items }
+          modelValue={ null }
+          itemTitle="name"
+          itemValue="code"
+        />
+      ))
+
+      cy.get('.v-field').should('not.have.class', 'v-field--dirty')
+    })
   })
 
   it('should conditionally show placeholder', () => {
@@ -393,5 +530,9 @@ describe('VSelect', () => {
       .should('have.class', 'v-select--active-menu')
       .trigger('keydown', { key: keyValues.esc })
       .should('not.have.class', 'v-select--active-menu')
+  })
+
+  describe('Showcase', () => {
+    generate({ stories })
   })
 })

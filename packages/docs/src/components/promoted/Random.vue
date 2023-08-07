@@ -1,5 +1,5 @@
 <template>
-  <vuetify />
+  <vuetify class="mb-5" />
 </template>
 
 <script setup>

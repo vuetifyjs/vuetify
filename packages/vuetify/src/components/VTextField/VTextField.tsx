@@ -2,17 +2,17 @@
 import './VTextField.sass'
 
 // Components
+import { VCounter } from '@/components/VCounter/VCounter'
 import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { VCounter, type VCounterSlot } from '@/components/VCounter/VCounter'
+
+// Composables
+import { useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
 import Intersect from '@/directives/intersect'
-
-// Composables
-import { forwardRefs } from '@/composables/forwardRefs'
-import { useFocus } from '@/composables/focus'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref } from 'vue'
@@ -20,6 +20,7 @@ import { callEvent, filterInputAttrs, genericComponent, propsFactory, useRender 
 
 // Types
 import type { PropType } from 'vue'
+import type { VCounterSlot } from '@/components/VCounter/VCounter'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -42,11 +43,11 @@ export const makeVTextFieldProps = propsFactory({
 
   ...makeVInputProps(),
   ...makeVFieldProps(),
-}, 'v-text-field')
+}, 'VTextField')
 
 export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
-  default: []
-  counter: [VCounterSlot]
+  default: never
+  counter: VCounterSlot
 }
 
 export const VTextField = genericComponent<VTextFieldSlots>()({
@@ -233,23 +234,30 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                       <>
                         { props.prefix && (
                           <span class="v-text-field__prefix">
-                            { props.prefix }
+                            <span class="v-text-field__prefix__text">
+                              { props.prefix }
+                            </span>
                           </span>
                         )}
 
-                        { slots.default ? (
-                          <div
-                            class={ fieldClass }
-                            data-no-activator=""
-                          >
-                            { slots.default() }
-                            { inputNode }
-                          </div>
-                        ) : cloneVNode(inputNode, { class: fieldClass })}
+                        <div
+                          class={ fieldClass }
+                          data-no-activator=""
+                        >
+                          { slots.default ? (
+                            <>
+                              { slots.default() }
+                              { inputNode }
+                            </>
+                          ) : cloneVNode(inputNode)
+                        }
+                        </div>
 
                         { props.suffix && (
                           <span class="v-text-field__suffix">
-                            { props.suffix }
+                            <span class="v-text-field__suffix__text">
+                              { props.suffix }
+                            </span>
                           </span>
                         )}
                       </>

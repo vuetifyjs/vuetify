@@ -1,6 +1,6 @@
 ---
-nav: Locale providers
 meta:
+  nav: Locale providers
   title: Locale provider component
   description: The locale provider allows you to modify the application's current language scoped within a template
   keywords: locale provider, vuetify locale provider component, vue locale provider component

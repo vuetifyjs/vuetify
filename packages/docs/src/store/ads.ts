@@ -38,9 +38,9 @@ export const useAdsStore = defineStore('ads', () => {
   onBeforeMount(async () => {
     if (ads.value.length) return
 
-    const { bucket } = useCosmic<Ad>()
+    const { bucket } = useCosmic()
 
-    const { objects = [] } = (
+    const { objects = [] }: { objects: Ad[] } = (
       await bucket?.objects
         .find({ type: 'ads' })
         .props('slug,title,metadata')

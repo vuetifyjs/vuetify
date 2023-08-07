@@ -10,7 +10,9 @@
     flex: $text-field-input-flex
     transition: $text-field-input-transition
     min-width: 0
-
+    margin-top: var(--v-input-chips-margin-top)
+    margin-bottom: var(--v-input-chips-margin-bottom)
+ 
     &:focus,
     &:active
       outline: none
@@ -54,8 +56,13 @@
     opacity: 0
     transition: inherit
     white-space: nowrap
+    min-height: $field-input-min-height
     padding-top: calc(var(--v-field-padding-top, 4px) + var(--v-input-padding-top, 0))
     padding-bottom: var(--v-field-padding-bottom, 6px)
+
+    &__text
+      margin-top: var(--v-input-chips-margin-top)
+      margin-bottom: var(--v-input-chips-margin-bottom)
 
     .v-field--active &
       opacity: 1

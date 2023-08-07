@@ -2,37 +2,38 @@
 import './VAutocomplete.sass'
 
 // Components
-import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
-import { VTextField } from '@/components/VTextField'
+import { makeSelectProps } from '@/components/VSelect/VSelect'
+import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
+import { VVirtualScroll } from '@/components/VVirtualScroll'
 
 // Composables
-import { forwardRefs } from '@/composables/forwardRefs'
+import { useScrolling } from '../VSelect/useScrolling'
+import { useTextColor } from '@/composables/color'
 import { makeFilterProps, useFilter } from '@/composables/filter'
-import { makeTransitionProps } from '@/composables/transition'
 import { useForm } from '@/composables/form'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTextColor } from '@/composables/color'
+import { makeTransitionProps } from '@/composables/transition'
 
-// Utility
+// Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
-import { genericComponent, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
-import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
+import { genericComponent, getPropertyFromItem, matchesSelector, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { GenericProps } from '@/util'
-import type { FilterMatch } from '@/composables/filter'
-import type { ListItem } from '@/composables/list-items'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
+import type { FilterMatch } from '@/composables/filter'
+import type { ListItem } from '@/composables/list-items'
+import type { GenericProps } from '@/util'
 
 function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {
   if (matches == null) return text
@@ -73,7 +74,7 @@ export const makeVAutocompleteProps = propsFactory({
     modelValue: null,
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
   ...makeTransitionProps({ transition: false }),
-}, 'v-autocomplete')
+}, 'VAutocomplete')
 
 export const VAutocomplete = genericComponent<new <
   T extends readonly any[],
@@ -90,12 +91,12 @@ export const VAutocomplete = genericComponent<new <
     'onUpdate:modelValue'?: (val: V) => void
   },
   slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
-    item: [{ item: ListItem<Item>, index: number, props: Record<string, unknown> }]
-    chip: [{ item: ListItem<Item>, index: number, props: Record<string, unknown> }]
-    selection: [{ item: ListItem<Item>, index: number }]
-    'prepend-item': []
-    'append-item': []
-    'no-data': []
+    item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
+    chip: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
+    selection: { item: ListItem<Item>, index: number }
+    'prepend-item': never
+    'append-item': never
+    'no-data': never
   }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VAutocomplete',
@@ -114,7 +115,7 @@ export const VAutocomplete = genericComponent<new <
     const vTextFieldRef = ref()
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
-    const listHasFocus = ref(false)
+    const listHasFocus = shallowRef(false)
     const vMenuRef = ref<VMenu>()
     const _menu = useProxiedModel(props, 'menu')
     const menu = computed({
@@ -133,17 +134,26 @@ export const VAutocomplete = genericComponent<new <
       props,
       'modelValue',
       [],
-      v => transformIn(wrapInArray(v)),
+      v => transformIn(v === null ? [null] : wrapInArray(v)),
       v => {
         const transformed = transformOut(v)
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
     const form = useForm()
-    const { filteredItems, getMatches } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
+    const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
     const selections = computed(() => {
       return model.value.map(v => {
-        return items.value.find(item => props.valueComparator(item.value, v.value)) || v
+        return items.value.find(item => {
+          const itemRawValue = getPropertyFromItem(item.raw, props.itemValue)
+          const modelRawValue = getPropertyFromItem(v.raw, props.itemValue)
+
+          if (itemRawValue === undefined || modelRawValue === undefined) return false
+
+          return props.returnObject
+            ? props.valueComparator(itemRawValue, modelRawValue)
+            : props.valueComparator(item.value, v.value)
+        }) || v
       })
     })
 
@@ -164,8 +174,14 @@ export const VAutocomplete = genericComponent<new <
         !isPristine.value &&
         !listHasFocus.value
     })
-    const listRef = ref<VList>()
 
+    const menuDisabled = computed(() => (
+      (props.hideNoData && !items.value.length) ||
+      props.readonly || form?.isReadonly.value
+    ))
+
+    const listRef = ref<VList>()
+    const { onListScroll, onListKeydown } = useScrolling(listRef, vTextFieldRef)
     function onClear (e: MouseEvent) {
       if (props.openOnClear) {
         menu.value = true
@@ -174,14 +190,13 @@ export const VAutocomplete = genericComponent<new <
       search.value = ''
     }
     function onMousedownControl () {
-      if (
-        (props.hideNoData && !items.value.length) ||
-        props.readonly || form?.isReadonly.value
-      ) return
+      if (menuDisabled.value) return
 
       menu.value = true
     }
     function onMousedownMenuIcon (e: MouseEvent) {
+      if (menuDisabled.value) return
+
       if (isFocused.value) {
         e.preventDefault()
         e.stopPropagation()
@@ -209,21 +224,12 @@ export const VAutocomplete = genericComponent<new <
         menu.value = false
       }
 
-      if (['Enter', 'Escape', 'Tab'].includes(e.key)) {
-        if (highlightFirst.value && ['Enter', 'Tab'].includes(e.key)) {
-          select(filteredItems.value[0])
-        }
-
-        isPristine.value = true
+      if (highlightFirst.value && ['Enter', 'Tab'].includes(e.key)) {
+        select(filteredItems.value[0])
       }
 
-      if (e.key === 'ArrowDown') {
+      if (e.key === 'ArrowDown' && highlightFirst.value) {
         listRef.value?.focus('next')
-        if (highlightFirst.value) {
-          listRef.value?.focus('next')
-        }
-      } else if (e.key === 'ArrowUp') {
-        listRef.value?.focus('prev')
       }
 
       if (!props.multiple) return
@@ -277,6 +283,15 @@ export const VAutocomplete = genericComponent<new <
       search.value = (e.target as HTMLInputElement).value
     }
 
+    function onChange (e: Event) {
+      if (matchesSelector(vTextFieldRef.value, ':autofill') || matchesSelector(vTextFieldRef.value, ':-webkit-autofill')) {
+        const item = items.value.find(item => item.title === (e.target as HTMLInputElement).value)
+        if (item) {
+          select(item)
+        }
+      }
+    }
+
     function onAfterLeave () {
       if (isFocused.value) {
         isPristine.value = true
@@ -292,6 +307,9 @@ export const VAutocomplete = genericComponent<new <
     }
     function onFocusout (e: FocusEvent) {
       listHasFocus.value = false
+    }
+    function onUpdateModelValue (v: any) {
+      if (v == null || (v === '' && !props.multiple)) model.value = []
     }
 
     const isSelecting = shallowRef(false)
@@ -355,7 +373,12 @@ export const VAutocomplete = genericComponent<new <
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
-      const hasList = !!((!props.hideNoData || displayItems.value.length) || slots.prepend || slots.append || slots['no-data'])
+      const hasList = !!(
+        (!props.hideNoData || displayItems.value.length) ||
+        slots['prepend-item'] ||
+        slots['append-item'] ||
+        slots['no-data']
+      )
       const isDirty = model.value.length > 0
       const [textFieldProps] = VTextField.filterProps(props)
 
@@ -364,11 +387,12 @@ export const VAutocomplete = genericComponent<new <
           ref={ vTextFieldRef }
           { ...textFieldProps }
           modelValue={ search.value }
-          onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
           dirty={ isDirty }
           onInput={ onInput }
+          onChange={ onChange }
           class={[
             'v-autocomplete',
             `v-autocomplete--${props.multiple ? 'multiple' : 'single'}`,
@@ -396,6 +420,7 @@ export const VAutocomplete = genericComponent<new <
                   v-model={ menu.value }
                   activator="parent"
                   contentClass="v-autocomplete__content"
+                  disabled={ menuDisabled.value }
                   eager={ props.eager }
                   maxHeight={ 310 }
                   openOnClick={ false }
@@ -410,28 +435,34 @@ export const VAutocomplete = genericComponent<new <
                       selected={ selected.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                      onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
+                      onScrollPassive={ onListScroll }
+                      tabindex="-1"
+                      color={ props.itemColor ?? props.color }
                     >
+                      { slots['prepend-item']?.() }
+
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />
                       ))}
 
-                      { slots['prepend-item']?.() }
+                      <VVirtualScroll renderless items={ displayItems.value }>
+                        { ({ item, index, itemRef }) => {
+                          const itemProps = mergeProps(item.props, {
+                            ref: itemRef,
+                            key: index,
+                            active: (highlightFirst.value && index === 0) ? true : undefined,
+                            onClick: () => select(item),
+                          })
 
-                      { displayItems.value.map((item, index) => {
-                        const itemProps = mergeProps(item.props, {
-                          key: index,
-                          active: (highlightFirst.value && index === 0) ? true : undefined,
-                          onClick: () => select(item),
-                        })
-
-                        return slots.item?.({
-                          item,
-                          index,
-                          props: itemProps,
-                        }) ?? (
-                          <VListItem { ...itemProps }>
+                          return slots.item?.({
+                            item,
+                            index,
+                            props: itemProps,
+                          }) ?? (
+                            <VListItem { ...itemProps }>
                             {{
                               prepend: ({ isSelected }) => (
                                 <>
@@ -456,8 +487,9 @@ export const VAutocomplete = genericComponent<new <
                               },
                             }}
                           </VListItem>
-                        )
-                      })}
+                          )
+                        }}
+                      </VVirtualScroll>
 
                       { slots['append-item']?.() }
                     </VList>

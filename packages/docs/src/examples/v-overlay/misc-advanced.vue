@@ -39,11 +39,3 @@
     </v-hover>
   </div>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-      overlay: false,
-    }),
-  }
-</script>

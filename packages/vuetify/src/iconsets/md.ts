@@ -1,8 +1,8 @@
+// Composables
+import { VLigatureIcon } from '@/composables/icons'
+
 // Utilities
 import { h } from 'vue'
-
-// Components
-import { VLigatureIcon } from '@/composables/icons'
 
 // Types
 import type { IconAliases, IconSet } from '@/composables/icons'
@@ -43,6 +43,7 @@ const aliases: IconAliases = {
   file: 'attach_file',
   plus: 'add',
   minus: 'remove',
+  calendar: 'event',
 }
 
 const md: IconSet = {

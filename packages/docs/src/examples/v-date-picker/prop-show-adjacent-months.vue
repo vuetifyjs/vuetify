@@ -1,16 +1,7 @@
 <template>
-  <v-date-picker
-    v-model="picker"
-    show-adjacent-months
-  ></v-date-picker>
+  <v-container>
+    <v-row justify="space-around">
+      <v-date-picker show-adjacent-months></v-date-picker>
+    </v-row>
+  </v-container>
 </template>
-
-<script>
-  export default {
-    data () {
-      return {
-        picker: null,
-      }
-    },
-  }
-</script>

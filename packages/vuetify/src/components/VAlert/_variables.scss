@@ -41,7 +41,7 @@ $alert-border: (
   $alert-border-style,
   $alert-border-width,
   $alert-border-thin-width
-);
+) !default;
 
 $alert-variants: (
   $alert-background,
@@ -49,4 +49,4 @@ $alert-variants: (
   $alert-elevation,
   $alert-plain-opacity,
   'v-alert'
-);
+) !default;

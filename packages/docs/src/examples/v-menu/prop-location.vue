@@ -28,6 +28,26 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const location = ref('end')
+
+  const items = [
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me 2' },
+  ]
+  const locations = [
+    'top',
+    'bottom',
+    'start',
+    'end',
+    'center',
+  ]
+</script>
+
 <script>
   export default {
     data: () => ({

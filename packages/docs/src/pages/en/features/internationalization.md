@@ -174,11 +174,9 @@ If you are building custom Vuetify components that need to hook into the locale 
 </script>
 ```
 
-<alert type="warning">
-
+::: warning
   The Vuetify locale service only provides a basic translation function `t`, and should really only be used for internal or custom Vuetify components. It is recommended that you use a proper i18n library such as [vue-i18n](https://kazupon.github.io/vue-i18n/) in your own application. Vuetify does provide support for integrating with other libraries.
-
-</alert>
+:::
 
 ## vue-i18n
 

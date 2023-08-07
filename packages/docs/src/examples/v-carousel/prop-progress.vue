@@ -21,6 +21,16 @@
   </v-carousel>
 </template>
 
+<script setup>
+  const slides = [
+    'First',
+    'Second',
+    'Third',
+    'Fourth',
+    'Fifth',
+  ]
+</script>
+
 <script>
   export default {
     data () {

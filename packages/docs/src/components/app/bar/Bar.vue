@@ -8,7 +8,7 @@
       <app-bar-logo />
 
       <v-btn
-        v-if="name !== 'home' && mdAndDown"
+        v-if="route.meta.layout !== 'home' && mdAndDown"
         icon="mdi-menu"
         @click="app.drawer = !app.drawer"
       />
@@ -26,20 +26,16 @@
 
         <app-bar-team-link v-if="lgAndUp" />
 
-        <app-bar-playground-link v-if="lgAndUp" />
-
-        <app-bar-sponsor-link />
+        <app-bar-playground-link />
 
         <app-bar-enterprise-link />
       </template>
 
-      <app-vertical-divider />
+      <app-vertical-divider v-if="mdAndUp" />
 
       <app-bar-theme-toggle />
 
-      <app-vertical-divider />
-
-      <app-bar-store-link />
+      <app-bar-store-link v-if="lgAndUp" />
 
       <app-bar-jobs-link v-if="lgAndUp" />
 
@@ -63,7 +59,6 @@
   import AppBarNotificationsMenu from './NotificationsMenu.vue'
   import AppBarPlaygroundLink from './PlaygroundLink.vue'
   import AppBarSettingsToggle from './SettingsToggle.vue'
-  import AppBarSponsorLink from './SponsorLink.vue'
   import AppBarStoreLink from './StoreLink.vue'
   import AppBarSupportMenu from './SupportMenu.vue'
   import AppBarTeamLink from './TeamLink.vue'
@@ -78,5 +73,5 @@
 
   const app = useAppStore()
   const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
-  const { name } = useRoute()
+  const route = useRoute()
 </script>
