@@ -15,7 +15,7 @@
       &.v-tabs--stacked
         --v-tabs-height: #{$tabs-stacked-height + $modifier}
 
-  &.v-slide-group--vertical
+  &.v-tabs--vertical
     height: auto
     flex: none
     --v-tabs-height: #{$tabs-height}
@@ -47,7 +47,7 @@
     margin-inline-end: 0
 
 @media #{map-get(settings.$display-breakpoints, 'md-and-down')}
-  .v-tabs.v-slide-group--is-overflowing.v-slide-group--horizontal:not(.v-slide-group--has-affixes)
+  .v-tabs.v-slide-group--is-overflowing.v-tabs--horizontal:not(.v-slide-group--has-affixes)
     .v-tab:first-child
       margin-inline-start: 52px
     .v-tab:last-child
