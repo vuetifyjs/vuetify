@@ -2,7 +2,7 @@
 import './VColorPickerPreview.sass'
 
 // Components
-import { VIcon } from '@/components/VIcon'
+import { VBtn } from '@/components/VBtn'
 import { VSlider } from '@/components/VSlider'
 
 // Composables
@@ -72,7 +72,7 @@ export const VColorPickerPreview = defineComponent({
       >
         { SUPPORTS_EYE_DROPPER && (
           <div class="v-color-picker-preview__eye-dropper" key="eyeDropper">
-            <VIcon onClick={ openEyeDropper } icon="$eyeDropper"></VIcon>
+            <VBtn onClick={ openEyeDropper } icon="$eyeDropper" variant="plain" density="comfortable" />
           </div>
         )}
 
