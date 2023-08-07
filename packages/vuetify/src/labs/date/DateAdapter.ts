@@ -1,27 +1,28 @@
-export interface DateAdapter<Date> {
-  date (value?: any): Date | null
-  format (date: Date, formatString: string): string
+export interface DateAdapter<T> {
+  date (value?: any): T | null
+  format (date: T, formatString: string): string
+  toJsDate (value: T): Date
 
-  startOfMonth (date: Date): Date
-  endOfMonth (date: Date): Date
-  startOfYear (date: Date): Date
-  endOfYear (date: Date): Date
+  startOfMonth (date: T): T
+  endOfMonth (date: T): T
+  startOfYear (date: T): T
+  endOfYear (date: T): T
 
-  isAfter (date: Date, comparing: Date): boolean
-  isEqual (date: Date, comparing: Date): boolean
-  isSameDay (date: Date, comparing: Date): boolean
-  isSameMonth (date: Date, comparing: Date): boolean
+  isBefore (date: T, comparing: T): boolean
+  isAfter (date: T, comparing: T): boolean
+  isEqual (date: T, comparing: T): boolean
+  isSameDay (date: T, comparing: T): boolean
+  isSameMonth (date: T, comparing: T): boolean
   isValid (date: any): boolean
-  isWithinRange (date: Date, range: [Date, Date]): boolean
+  isWithinRange (date: T, range: [T, T]): boolean
 
-  addDays (date: Date, amount: number): Date
-  addMonths (date: Date, amount: number): Date
+  addDays (date: T, amount: number): T
+  addMonths (date: T, amount: number): T
 
-  getYear (date: Date): number
-  setYear (date: Date, year: number): Date
-  getDiff (date: Date, comparing: Date | string, unit?: string): number
-  getWeek (date: Date): number
-  getWeekArray (date: Date): (Date | null)[][]
+  getYear (date: T): number
+  setYear (date: T, year: number): T
+  getDiff (date: T, comparing: T | string, unit?: string): number
+  getWeekArray (date: T): T[][]
   getWeekdays (): string[]
-  getMonth (date: Date): number
+  getMonth (date: T): number
 }

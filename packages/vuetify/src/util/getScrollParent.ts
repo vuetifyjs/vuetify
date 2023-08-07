@@ -1,6 +1,6 @@
-export function getScrollParent (el?: HTMLElement) {
+export function getScrollParent (el?: HTMLElement, includeHidden = false) {
   while (el) {
-    if (hasScrollbar(el)) return el
+    if (includeHidden ? isPotentiallyScrollable(el) : hasScrollbar(el)) return el
     el = el.parentElement!
   }
 
@@ -26,4 +26,11 @@ export function hasScrollbar (el?: Element | null) {
 
   const style = window.getComputedStyle(el)
   return style.overflowY === 'scroll' || (style.overflowY === 'auto' && el.scrollHeight > el.clientHeight)
+}
+
+function isPotentiallyScrollable (el?: Element | null) {
+  if (!el || el.nodeType !== Node.ELEMENT_NODE) return false
+
+  const style = window.getComputedStyle(el)
+  return ['scroll', 'auto'].includes(style.overflowY)
 }

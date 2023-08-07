@@ -6,8 +6,9 @@ meta:
   keywords: vue, vue components, vue ui components, material design components, vuetify, component framework, component library
 ---
 <script setup>
-  import HomeLogo from '@/components/home/Logo.vue'
   import HomeActionBtns from '@/components/home/ActionBtns.vue'
+  import HomeLogo from '@/components/home/Logo.vue'
+  import HomeSpecialSponsor from '@/components/home/SpecialSponsor.vue'
   import HomeSponsors from '@/components/home/Sponsors.vue'
   import SponsorCard from '@/components/sponsor/Card.vue'
 </script>
@@ -24,19 +25,8 @@ Vuetify is a no design skills required UI Library with beautifully handcrafted V
 <br>
 <br>
 
-## Special Sponsor
-
-Thank you to our special sponsor:
-
-<sponsor-card slug="teamwork" min-height="60" />
-
-<br>
-<br>
-<v-divider class="mx-auto" width="55%" />
-<br>
-
 ## Project Sponsors
 
-The continued development and maintenance of Vuetify is made possible by these generous sponsors:{style="max-width: 568px" .mx-auto}
+The continued development and maintenance of Vuetify is made possible by these generous sponsors:{style="max-width: 568px" .mx-auto .px-4}
 
 <home-sponsors />

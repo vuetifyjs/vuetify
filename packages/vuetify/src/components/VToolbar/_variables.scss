@@ -52,7 +52,7 @@ $toolbar-title-typography: (
   $toolbar-title-letter-spacing,
   $toolbar-title-line-height,
   $toolbar-title-text-transform
-);
+) !default;
 
 $toolbar-prominent-title-typography: (
   $toolbar-prominent-title-font-size,
@@ -60,7 +60,7 @@ $toolbar-prominent-title-typography: (
   $toolbar-prominent-title-letter-spacing,
   $toolbar-prominent-title-line-height,
   $toolbar-prominent-title-text-transform
-);
+) !default;
 
 $toolbar-theme: (
   $toolbar-background,

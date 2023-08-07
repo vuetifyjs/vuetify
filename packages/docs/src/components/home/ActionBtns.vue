@@ -9,6 +9,7 @@
         <v-btn
           :min-width="btnWidth"
           v-bind="attrs"
+          class="text-none"
           size="x-large"
         >
           <v-icon :icon="icon" start />
@@ -22,6 +23,7 @@
 <script setup>
   // Composables
   import { useI18n } from 'vue-i18n'
+  import { rpath } from '@/util/routes'
 
   const { t } = useI18n()
 
@@ -31,18 +33,14 @@
       flat: true,
       icon: 'mdi-speedometer',
       text: 'home.get-started',
-      to: {
-        name: 'getting-started-installation',
-      },
+      to: rpath('/getting-started/installation/'),
     },
     {
       color: 'primary',
       icon: '$vuetify',
       variant: 'outlined',
       text: 'home.why-vuetify',
-      to: {
-        name: 'introduction-why-vuetify',
-      },
+      to: rpath('/introduction/why-vuetify/'),
     },
     {
       color: '#212121',

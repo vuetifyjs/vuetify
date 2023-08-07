@@ -1,5 +1,6 @@
-import type { TouchStoredHandlers } from './directives/touch'
+// Types
 import type { Events, VNode } from 'vue'
+import type { TouchStoredHandlers } from './directives/touch'
 
 declare global {
   interface HTMLCollection {
@@ -90,7 +91,6 @@ declare module '@vue/runtime-core' {
   }
 
   export interface ComponentInternalInstance {
-    ctx: Record<string, unknown>
     provides: Record<string, unknown>
     setupState: any
   }

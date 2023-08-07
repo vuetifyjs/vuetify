@@ -1,6 +1,8 @@
 /// <reference types="../../../../types/cypress" />
 
 import { Application } from '../../../../cypress/templates'
+
+// Utilities
 import { ref } from 'vue'
 import { VDataTableServer } from '..'
 

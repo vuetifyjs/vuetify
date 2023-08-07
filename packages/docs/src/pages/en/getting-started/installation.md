@@ -1,6 +1,6 @@
 ---
-nav: Installation
 meta:
+  nav: Installation
   title: Get started with Vuetify 3
   description: Details for v3 release - faq, changes, and upgrading.
   keywords: migration, releases, upgrading vuetify, beta, v3
@@ -24,9 +24,21 @@ Get started with Vuetify, the world’s most popular Vue.js framework for buildi
 
 To get started with Vuetify 3, simply paste the following code into your terminal:
 
-```bash
+::: tabs
+
+```bash [yarn]
 yarn create vuetify
 ```
+
+```bash [npm]
+npm create vuetify
+```
+
+```bash [pnpm]
+pnpm create vuetify
+```
+
+:::
 
 This command prompts you with a few options before generating your scaffolded Vue / Vuetify 3 project.
 
@@ -43,7 +55,7 @@ success Installed "create-vuetify@x.x.x" with binaries:
     none
 ```
 
-After making your selections, [vuetify-create](https://github.com/vuetifyjs/create-vuetify) will generate the structure for your new application.
+After making your selections, [create-vuetify](https://github.com/vuetifyjs/create-vuetify) will generate the structure for your new application.
 
 Once the scaffold is complete, start the vite development server by running the following commands:
 
@@ -186,6 +198,13 @@ The three development branches (`master`, `dev`, and `next`) are automatically p
 | `master`    | Bug fixes        | `"vuetify": "npm:@vuetify/nightly@latest"` | [Changelog](https://unpkg.com/@vuetify/nightly@latest/CHANGELOG.md) |
 | `dev`       | New features     | `"vuetify": "npm:@vuetify/nightly@dev"`    | [Changelog](https://unpkg.com/@vuetify/nightly@dev/CHANGELOG.md)    |
 | `next`      | Breaking changes | `"vuetify": "npm:@vuetify/nightly@next"`   | [Changelog](https://unpkg.com/@vuetify/nightly@next/CHANGELOG.md)   |
+
+```diff
+ "devDependencies": {
+-  "vuetify": "^3.3.0"
++  "vuetify": "npm:@vuetify/nightly@3.3.0-master.2023-05-21"
+ }
+```
 
 ## Questions
 

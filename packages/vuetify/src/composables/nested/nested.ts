@@ -3,7 +3,6 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject, onBeforeUnmount, provide, ref, shallowRef, toRaw } from 'vue'
-import { getCurrentInstance, getUid, propsFactory } from '@/util'
 import { listOpenStrategy, multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import {
   classicSelectStrategy,
@@ -12,6 +11,7 @@ import {
   leafSelectStrategy,
   leafSingleSelectStrategy,
 } from './selectStrategies'
+import { getCurrentInstance, getUid, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -221,7 +221,7 @@ export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
   const parent = inject(VNestedSymbol, emptyNested)
 
   const uidSymbol = Symbol(getUid())
-  const computedId = computed(() => id.value ?? uidSymbol)
+  const computedId = computed(() => id.value !== undefined ? id.value : uidSymbol)
 
   const item = {
     ...parent,

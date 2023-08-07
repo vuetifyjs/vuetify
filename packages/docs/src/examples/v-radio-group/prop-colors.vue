@@ -91,6 +91,13 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const ex7 = ref('red')
+  const ex8 = ref('primary')
+</script>
+
 <script>
   export default {
     data () {

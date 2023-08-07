@@ -2,16 +2,16 @@
 import './VIcon.sass'
 
 // Composables
-import { IconValue, useIcon } from '@/composables/icons'
+import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { IconValue, useIcon } from '@/composables/icons'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, Text, toRef } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, flattenFragments, genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVIconProps = propsFactory({
   color: String,
@@ -23,7 +23,7 @@ export const makeVIconProps = propsFactory({
   ...makeSizeProps(),
   ...makeTagProps({ tag: 'i' }),
   ...makeThemeProps(),
-}, 'v-icon')
+}, 'VIcon')
 
 export const VIcon = genericComponent()({
   name: 'VIcon',
@@ -41,7 +41,7 @@ export const VIcon = genericComponent()({
     useRender(() => {
       const slotValue = slots.default?.()
       if (slotValue) {
-        slotIcon.value = slotValue.filter(node =>
+        slotIcon.value = flattenFragments(slotValue).filter(node =>
           node.type === Text && node.children && typeof node.children === 'string'
         )[0]?.children as string
       }

@@ -6,14 +6,14 @@
       variant="solo"
       @keydown.enter="create"
     >
-      <template v-slot:append>
+      <template v-slot:append-inner>
         <v-fade-transition>
-          <v-icon
-            v-if="newTask"
+          <v-btn
+            v-show="newTask"
+            icon="mdi-plus-circle"
+            variant="text"
             @click="create"
-          >
-            mdi-plus-circle
-          </v-icon>
+          ></v-btn>
         </v-fade-transition>
       </template>
     </v-text-field>
@@ -65,38 +65,61 @@
             :key="`${i}-divider`"
           ></v-divider>
 
-          <v-list-item>
-            <v-list-item-action>
-              <v-checkbox
-                v-model="task.done"
-                :color="task.done && 'grey' || 'primary'"
-              >
-                <template v-slot:label>
-                  <div
-                    :class="task.done && 'text-grey' || 'text-primary'"
-                    class="ms-4"
-                    v-text="task.text"
-                  ></div>
-                </template>
-              </v-checkbox>
-            </v-list-item-action>
+          <v-list-item @click="task.done = !task.done">
+            <template v-slot:prepend>
+              <v-checkbox-btn v-model="task.done" color="grey"></v-checkbox-btn>
+            </template>
 
-            <v-spacer></v-spacer>
+            <v-list-item-title>
+              <span :class="task.done ? 'text-grey' : 'text-primary'">{{ task.text }}</span>
+            </v-list-item-title>
 
-            <v-scroll-x-transition>
-              <v-icon
-                v-if="task.done"
-                color="success"
-              >
-                mdi-check
-              </v-icon>
-            </v-scroll-x-transition>
+            <template v-slot:append>
+              <v-expand-x-transition>
+                <v-icon v-if="task.done" color="success">
+                  mdi-check
+                </v-icon>
+              </v-expand-x-transition>
+            </template>
           </v-list-item>
         </template>
       </v-slide-y-transition>
     </v-card>
   </v-container>
 </template>
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const tasks = ref([
+    {
+      done: false,
+      text: 'Foobar',
+    },
+    {
+      done: false,
+      text: 'Fizzbuzz',
+    },
+  ])
+  const newTask = ref(null)
+
+  const completedTasks = computed(() => {
+    return tasks.value.filter(task => task.done).length
+  })
+  const progress = computed(() => {
+    return completedTasks.value / tasks.value.length * 100
+  })
+  const remainingTasks = computed(() => {
+    return tasks.value.length - completedTasks.value
+  })
+
+  function create () {
+    tasks.value.push({
+      done: false,
+      text: newTask.value,
+    })
+    newTask.value = null
+  }
+</script>
 
 <script>
   export default {

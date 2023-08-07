@@ -1,8 +1,13 @@
 /* eslint-disable jest/no-commented-out-tests */
 
-import { describe, expect, it } from '@jest/globals'
+// Composables
 import { createTheme } from '../theme'
+
+// Utilities
+import { describe, expect, it } from '@jest/globals'
 import { createApp } from 'vue'
+
+// Types
 import type { App } from 'vue'
 
 describe('createTheme', () => {
