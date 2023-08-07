@@ -26,12 +26,21 @@ export default {
     lastPage: 'Viimeinen sivu',
     pageText: '{0}-{1} ({2})',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} valittu',
-    nextMonthAriaLabel: 'Seuraava kuukausi',
-    nextYearAriaLabel: 'Ensi vuosi',
-    prevMonthAriaLabel: 'Edellinen kuukausi',
-    prevYearAriaLabel: 'Edellinen vuosi',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Ei dataa',
   carousel: {
@@ -48,6 +57,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} tiedostoa',
@@ -67,6 +77,10 @@ export default {
       first: 'First page',
       last: 'Last page',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

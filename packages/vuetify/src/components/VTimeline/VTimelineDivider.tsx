@@ -3,16 +3,16 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { IconValue } from '@/composables/icons'
+import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { IconValue } from '@/composables/icons'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeSizeProps, useSize } from '@/composables/size'
-import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
 import { toRef } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVTimelineDividerProps = propsFactory({
   dotColor: String,
@@ -26,7 +26,7 @@ export const makeVTimelineDividerProps = propsFactory({
   ...makeRoundedProps(),
   ...makeSizeProps(),
   ...makeElevationProps(),
-}, 'v-timeline-divider')
+}, 'VTimelineDivider')
 
 export const VTimelineDivider = genericComponent()({
   name: 'VTimelineDivider',

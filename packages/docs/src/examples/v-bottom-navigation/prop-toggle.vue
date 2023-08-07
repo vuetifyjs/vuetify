@@ -36,6 +36,12 @@
   </v-layout>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const active = ref(true)
+</script>
+
 <script>
   export default {
     data: () => ({ active: true }),

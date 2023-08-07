@@ -179,7 +179,12 @@ module.exports = {
         '@typescript-eslint/no-inferrable-types': 'error',
         '@typescript-eslint/unified-signatures': 'error',
         '@typescript-eslint/no-invalid-this': 'error',
-        '@typescript-eslint/consistent-type-imports': 'error',
+        '@typescript-eslint/consistent-type-imports': ['error', {
+          prefer: 'type-imports',
+          fixStyle: 'separate-type-imports',
+        }],
+        'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
+        'import/no-duplicates': ['error', { 'prefer-inline': false }],
         '@typescript-eslint/no-non-null-asserted-optional-chain': 'error',
         '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'error',
         // '@typescript-eslint/no-unnecessary-condition': 'error',

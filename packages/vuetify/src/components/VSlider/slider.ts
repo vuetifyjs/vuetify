@@ -1,12 +1,12 @@
 /* eslint-disable max-statements */
 // Composables
 import { makeElevationProps } from '@/composables/elevation'
-import { makeRoundedProps } from '@/composables/rounded'
 import { useRtl } from '@/composables/locale'
+import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
-import { clamp, createRange, getDecimals, propsFactory } from '@/util'
 import { computed, provide, ref, shallowRef, toRef } from 'vue'
+import { clamp, createRange, getDecimals, propsFactory } from '@/util'
 
 // Types
 import type { ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue'
@@ -138,7 +138,7 @@ export const makeSliderProps = propsFactory({
     type: Boolean,
     default: true,
   },
-}, 'slider')
+}, 'Slider')
 
 type SliderProps = ExtractPropTypes<ReturnType<typeof makeSliderProps>>
 
@@ -152,7 +152,9 @@ export const useSteps = (props: SliderProps) => {
   const step = computed(() => +props.step > 0 ? parseFloat(props.step) : 0)
   const decimals = computed(() => Math.max(getDecimals(step.value), getDecimals(min.value)))
 
-  function roundValue (value: number) {
+  function roundValue (value: string | number) {
+    value = parseFloat(value)
+
     if (step.value <= 0) return value
 
     const clamped = clamp(value, min.value, max.value)
