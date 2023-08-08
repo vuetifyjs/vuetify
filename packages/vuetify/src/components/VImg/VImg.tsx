@@ -50,8 +50,8 @@ export const makeVImgProps = propsFactory({
   alt: String,
   cover: Boolean,
   draggable: {
-    type: Boolean,
-    default: true,
+    type: [Boolean, String] as PropType<boolean | 'true' | 'false'>,
+    default: undefined,
   },
   eager: Boolean,
   gradient: String,
