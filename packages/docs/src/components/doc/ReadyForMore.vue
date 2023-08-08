@@ -13,7 +13,7 @@
       tag="div"
     >
       <template #team>
-        <app-link :href="rpath('/introduction/meet-the-team/')">
+        <app-link :href="rpath('/about/meet-the-team/')">
           {{ t('team') }}
         </app-link>
       </template>

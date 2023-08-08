@@ -7,7 +7,6 @@
       "why-vuetify",
       "long-term-support",
       "roadmap",
-      "meet-the-team",
       "sponsors-and-backers",
       { "divider": true },
       { "subheader": "professional-support" },
@@ -255,6 +254,7 @@
     "inactiveIcon": "$vuetify-outline",
     "activeIcon": "$vuetify",
     "items": [
+      "meet-the-team",
       "security-disclosure",
       "code-of-conduct"
     ]
