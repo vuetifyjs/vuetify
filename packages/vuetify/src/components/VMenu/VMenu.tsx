@@ -15,7 +15,7 @@ import { useScopeId } from '@/composables/scopeId'
 // Utilities
 import { computed, inject, mergeProps, provide, ref, shallowRef, watch } from 'vue'
 import { VMenuSymbol } from './shared'
-import { focusChild, genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
+import { focusableChildren, focusChild, genericComponent, getNextElement, getUid, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Component } from 'vue'
@@ -74,8 +74,33 @@ export const VMenu = genericComponent<OverlaySlots>()({
       },
     })
 
+    function onFocusIn (e: FocusEvent) {
+      const before = e.relatedTarget as HTMLElement | null
+      const after = e.target as HTMLElement | null
+
+      if (
+        before !== after &&
+        overlay.value?.contentEl &&
+        // We're the topmost menu
+        overlay.value?.globalTop &&
+        // It isn't the document or the menu body
+        ![document, overlay.value.contentEl].includes(after!) &&
+        // It isn't inside the menu body
+        !overlay.value.contentEl.contains(after)
+      ) {
+        const focusable = focusableChildren(overlay.value.contentEl)
+        focusable[0]?.focus()
+      }
+    }
+
     watch(isActive, val => {
-      val ? parent?.register() : parent?.unregister()
+      if (val) {
+        parent?.register()
+        document.addEventListener('focusin', onFocusIn, { once: true })
+      } else {
+        parent?.unregister()
+        document.removeEventListener('focusin', onFocusIn)
+      }
     })
 
     function onClickOutside () {
@@ -86,8 +111,15 @@ export const VMenu = genericComponent<OverlaySlots>()({
       if (props.disabled) return
 
       if (e.key === 'Tab') {
-        isActive.value = false
-        overlay.value?.activatorEl?.focus()
+        const nextElement = getNextElement(
+          focusableChildren(overlay.value?.contentEl as Element, false),
+          e.shiftKey ? 'prev' : 'next',
+          (el: HTMLElement) => el.tabIndex >= 0
+        )
+        if (!nextElement) {
+          isActive.value = false
+          overlay.value?.activatorEl?.focus()
+        }
       }
     }
 
