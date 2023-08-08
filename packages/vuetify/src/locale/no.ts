@@ -39,7 +39,7 @@ export default {
     title: 'Velg dato',
     header: 'Velg dato',
     input: {
-      placeholder: 'Velg dato',
+      placeholder: 'Fyll inn dato',
     },
   },
   noDataText: 'Ingen data er tilgjengelig',
