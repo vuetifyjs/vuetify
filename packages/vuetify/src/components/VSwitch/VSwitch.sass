@@ -54,7 +54,7 @@
     @include tools.elevation(0)
 
   .v-switch:not(.v-switch--loading) .v-icon ~ &
-    display: none
+    overflow: hidden
 
 .v-switch--loading .v-selection-control__input > .v-icon
   display: none
@@ -72,13 +72,14 @@
     position: absolute
 
     .v-icon
-      background: $switch-control-icon-background-color
-      border-radius: 50%
-      overflow: hidden
+      position: absolute
 
   .v-selection-control--dirty
     .v-selection-control__input
       transform: translateX($switch-thumb-transform)
+
+    .v-icon
+      color: rgb(var(--v-theme-surface))
 
   &.v-switch--indeterminate
     .v-selection-control__input
