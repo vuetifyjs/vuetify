@@ -17,6 +17,6 @@ related:
 
 The Vuetify team performs releases on a weekly basis.
 
-<entry />
-
 <releases />
+
+<entry />
