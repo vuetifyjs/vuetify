@@ -1,4 +1,5 @@
 ---
+fluid: true
 meta:
   title: Release notes
   description: Stay up to date with the latest release notes. The migration guides will also help you migrate applications though major releases.
