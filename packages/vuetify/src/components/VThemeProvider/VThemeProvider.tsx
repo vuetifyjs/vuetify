@@ -15,7 +15,7 @@ export const makeVThemeProviderProps = propsFactory({
   ...makeComponentProps(),
   ...makeThemeProps(),
   ...makeTagProps(),
-}, 'v-theme-provider')
+}, 'VThemeProvider')
 
 export const VThemeProvider = genericComponent()({
   name: 'VThemeProvider',

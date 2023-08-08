@@ -1,9 +1,9 @@
+// Composables
+import { useProxiedModel } from '@/composables/proxiedModel'
+
 // Utilities
 import { inject, provide, toRef } from 'vue'
 import { propsFactory } from '@/util'
-
-// Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -16,7 +16,7 @@ export const makeDataTableExpandProps = propsFactory({
     type: Array as PropType<readonly string[]>,
     default: () => ([]),
   },
-}, 'v-data-table-expand')
+}, 'DataTable-expand')
 
 export const VDataTableExpandedKey: InjectionKey<{
   expand: (item: DataTableItem, value: boolean) => void

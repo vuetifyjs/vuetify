@@ -14,6 +14,20 @@
   </v-toolbar>
 </template>
 
+<script setup>
+  const items = [
+    {
+      text: 'Link One',
+    },
+    {
+      text: 'Link Two',
+    },
+    {
+      text: 'Link Three',
+    },
+  ]
+</script>
+
 <script>
   export default {
     data () {

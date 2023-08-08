@@ -1,6 +1,6 @@
 ---
-nav: Footers
 meta:
+  nav: Footers
   title: Footer component
   description: The footer component provides a container for displaying additional navigation information about a site.
   keywords: footers, vuetify footer component, vue footer component

@@ -1,9 +1,13 @@
-import { watch } from 'vue'
+// Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
 
+// Utilities
+import { watch } from 'vue'
+
+// Types
 import type { Ref } from 'vue'
-import type { LocaleInstance, LocaleMessages, LocaleOptions } from '@/composables/locale'
 import type { I18n, useI18n } from 'vue-i18n'
+import type { LocaleInstance, LocaleMessages, LocaleOptions } from '@/composables/locale'
 
 type VueI18nAdapterParams = {
   i18n: I18n<any, {}, {}, string, false>

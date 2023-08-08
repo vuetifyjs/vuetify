@@ -24,7 +24,7 @@
     <v-tab>
       <v-badge
         color="deep-purple-accent-4"
-        icon="mdi-vuetify"
+        icon="$vuetify"
       >
         Item Three
       </v-badge>

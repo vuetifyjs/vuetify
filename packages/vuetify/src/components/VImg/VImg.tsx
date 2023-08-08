@@ -1,14 +1,15 @@
+// Styles
 import './VImg.sass'
 
 // Components
 import { makeVResponsiveProps, VResponsive } from '@/components/VResponsive/VResponsive'
 
-// Directives
-import intersect from '@/directives/intersect'
-
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
+
+// Directives
+import intersect from '@/directives/intersect'
 
 // Utilities
 import {
@@ -22,6 +23,7 @@ import {
   withDirectives,
 } from 'vue'
 import {
+  convertToUnit,
   genericComponent,
   propsFactory,
   SUPPORTS_INTERSECTION,
@@ -40,15 +42,19 @@ export interface srcObject {
 }
 
 export type VImgSlots = {
-  default: []
-  placeholder: []
-  error: []
-  sources: []
+  default: never
+  placeholder: never
+  error: never
+  sources: never
 }
 
 export const makeVImgProps = propsFactory({
   alt: String,
   cover: Boolean,
+  draggable: {
+    type: [Boolean, String] as PropType<boolean | 'true' | 'false'>,
+    default: undefined,
+  },
   eager: Boolean,
   gradient: String,
   lazySrc: String,
@@ -67,12 +73,23 @@ export const makeVImgProps = propsFactory({
     type: [String, Object] as PropType<string | srcObject>,
     default: '',
   },
+  crossorigin: String as PropType<'' | 'anonymous' | 'use-credentials'>,
+  referrerpolicy: String as PropType<
+    | 'no-referrer'
+    | 'no-referrer-when-downgrade'
+    | 'origin'
+    | 'origin-when-cross-origin'
+    | 'same-origin'
+    | 'strict-origin'
+    | 'strict-origin-when-cross-origin'
+    | 'unsafe-url'
+  >,
   srcset: String,
 
   ...makeVResponsiveProps(),
   ...makeComponentProps(),
   ...makeTransitionProps(),
-}, 'v-img')
+}, 'VImg')
 
 export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',
@@ -212,6 +229,9 @@ export const VImg = genericComponent<VImgSlots>()({
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
           alt={ props.alt }
+          crossorigin={ props.crossorigin }
+          referrerpolicy={ props.referrerpolicy }
+          draggable={ props.draggable }
           sizes={ props.sizes }
           ref={ image }
           onLoad={ onLoad }
@@ -242,6 +262,9 @@ export const VImg = genericComponent<VImgSlots>()({
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
             src={ normalisedSrc.value.lazySrc }
             alt={ props.alt }
+            crossorigin={ props.crossorigin }
+            referrerpolicy={ props.referrerpolicy }
+            draggable={ props.draggable }
           />
         )}
       </MaybeTransition>
@@ -301,7 +324,10 @@ export const VImg = genericComponent<VImgSlots>()({
             { 'v-img--booting': !isBooted.value },
             props.class,
           ]}
-          style={ props.style }
+          style={[
+            { width: convertToUnit(props.width === 'auto' ? naturalWidth.value : props.width) },
+            props.style,
+          ]}
           { ...responsiveProps }
           aspectRatio={ aspectRatio.value }
           aria-label={ props.alt }

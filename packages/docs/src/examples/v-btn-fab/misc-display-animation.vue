@@ -55,6 +55,12 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const hidden = ref(false)
+</script>
+
 <script>
   export default {
     data: () => ({

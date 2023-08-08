@@ -1,7 +1,7 @@
 <template>
   <v-lazy
     :min-height="minHeight"
-    class="d-flex mb-4"
+    class="d-flex"
   >
     <v-sheet
       v-bind="$attrs"

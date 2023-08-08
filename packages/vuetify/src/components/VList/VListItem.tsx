@@ -2,29 +2,29 @@
 import './VListItem.sass'
 
 // Components
+import { VListItemSubtitle } from './VListItemSubtitle'
+import { VListItemTitle } from './VListItemTitle'
 import { VAvatar } from '@/components/VAvatar'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
-import { VListItemSubtitle } from './VListItemSubtitle'
-import { VListItemTitle } from './VListItemTitle'
-
-// Directives
-import { Ripple } from '@/directives/ripple'
 
 // Composables
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
-import { IconValue } from '@/composables/icons'
+import { useList } from './list'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { IconValue } from '@/composables/icons'
+import { useNestedItem } from '@/composables/nested/nested'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useList } from './list'
-import { useNestedItem } from '@/composables/nested/nested'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+
+// Directives
+import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed, watch } from 'vue'
@@ -32,6 +32,7 @@ import { deprecate, EventProp, genericComponent, propsFactory, useRender } from 
 
 // Types
 import type { PropType } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 type ListItemSlot = {
   isActive: boolean
@@ -49,11 +50,11 @@ export type ListItemSubtitleSlot = {
 }
 
 export type VListItemSlots = {
-  prepend: [ListItemSlot]
-  append: [ListItemSlot]
-  default: [ListItemSlot]
-  title: [ListItemTitleSlot]
-  subtitle: [ListItemSubtitleSlot]
+  prepend: ListItemSlot
+  append: ListItemSlot
+  default: ListItemSlot
+  title: ListItemTitleSlot
+  subtitle: ListItemSubtitleSlot
 }
 
 export const makeVListItemProps = propsFactory({
@@ -77,7 +78,7 @@ export const makeVListItemProps = propsFactory({
   prependAvatar: String,
   prependIcon: IconValue,
   ripple: {
-    type: Boolean,
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
   subtitle: [String, Number, Boolean],
@@ -97,7 +98,7 @@ export const makeVListItemProps = propsFactory({
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'text' } as const),
-}, 'v-list-item')
+}, 'VListItem')
 
 export const VListItem = genericComponent<VListItemSlots>()({
   name: 'VListItem',
@@ -112,7 +113,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
   setup (props, { attrs, slots, emit }) {
     const link = useLink(props, attrs)
-    const id = computed(() => props.value ?? link.href.value)
+    const id = computed(() => props.value === undefined ? link.href.value : props.value)
     const { select, isSelected, isIndeterminate, isGroupActivator, root, parent, openOnSelect } = useNestedItem(id, false)
     const list = useList()
     const isActive = computed(() =>

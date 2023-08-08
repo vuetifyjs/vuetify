@@ -2,21 +2,21 @@
 import './VToolbar.sass'
 
 // Components
-import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VExpandTransition } from '@/components/transitions'
-import { VImg } from '@/components/VImg'
 import { VToolbarTitle } from './VToolbarTitle'
+import { VExpandTransition } from '@/components/transitions'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VImg } from '@/components/VImg'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { provideDefaults } from '@/composables/defaults'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { useRtl } from '@/composables/locale'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { provideDefaults } from '@/composables/defaults'
-import { useBackgroundColor } from '@/composables/color'
-import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, shallowRef, toRef } from 'vue'
@@ -58,15 +58,15 @@ export const makeVToolbarProps = propsFactory({
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'header' }),
   ...makeThemeProps(),
-}, 'v-toolbar')
+}, 'VToolbar')
 
 export type VToolbarSlots = {
-  default: []
-  image: []
-  prepend: []
-  append: []
-  title: []
-  extension: []
+  default: never
+  image: never
+  prepend: never
+  append: never
+  title: never
+  extension: never
 }
 
 export const VToolbar = genericComponent<VToolbarSlots>()({

@@ -6,7 +6,7 @@
     <router-link
       v-if="href"
       :to="href"
-      class="text-decoration-none text-end text-md-start"
+      class="text-decoration-none text-end text-md-start d-none d-sm-inline-block"
       style="user-select: none"
       aria-hidden="true"
     >
@@ -48,7 +48,7 @@
 
     > a
       bottom: 0
-      display: inline-block
+      font-size: .75em
       left: 0
       margin: 0 -.7em
       position: absolute

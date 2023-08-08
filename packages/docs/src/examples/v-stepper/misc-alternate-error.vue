@@ -1,37 +1,48 @@
 <template>
   <v-stepper alt-labels>
     <v-stepper-header>
-      <v-stepper-step
-        step="3"
+      <v-stepper-item
         complete
+        value="1"
       >
-        Ad type
-      </v-stepper-step>
+        <template v-slot:title>
+          Ad type
+        </template>
+      </v-stepper-item>
 
       <v-divider></v-divider>
 
-      <v-stepper-step
-        step="4"
+      <v-stepper-item
         complete
+        value="2"
       >
-        Ad style
-      </v-stepper-step>
+        <template v-slot:title>
+          Ad style
+        </template>
+      </v-stepper-item>
 
       <v-divider></v-divider>
 
-      <v-stepper-step
+      <v-stepper-item
         :rules="[() => false]"
-        step="5"
+        value="3"
       >
-        Custom channels
-        <small>Alert message</small>
-      </v-stepper-step>
+        <template v-slot:title>
+          Custom channels
+        </template>
+
+        <template v-slot:subtitle>
+          Alert message
+        </template>
+      </v-stepper-item>
 
       <v-divider></v-divider>
 
-      <v-stepper-step step="6">
-        Get code
-      </v-stepper-step>
+      <v-stepper-item value="46">
+        <template v-slot:title>
+          Get code
+        </template>
+      </v-stepper-item>
     </v-stepper-header>
   </v-stepper>
 </template>

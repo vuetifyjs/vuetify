@@ -11,7 +11,7 @@ export const makeVListItemMediaProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeTagProps(),
-}, 'v-list-item-media')
+}, 'VListItemMedia')
 
 export const VListItemMedia = genericComponent()({
   name: 'VListItemMedia',

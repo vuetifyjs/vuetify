@@ -3,42 +3,50 @@ import { computed } from 'vue'
 import { getPropertyFromItem, propsFactory } from '@/util'
 
 // Types
-import type { GroupableItem } from '@/labs/VDataTable/composables/group'
 import type { PropType } from 'vue'
+import type { GroupableItem } from '@/labs/VDataTable/composables/group'
+import type { SelectableItem } from '@/labs/VDataTable/composables/select'
 import type { SelectItemKey } from '@/util'
 
 export interface DataIteratorItemProps {
   items: any[]
   itemValue: SelectItemKey
+  itemSelectable: SelectItemKey
   returnObject: boolean
 }
 
-export interface DataIteratorItem<T = any> extends GroupableItem<T> {
+export interface DataIteratorItem<T = any> extends GroupableItem<T>, SelectableItem {
   value: unknown
 }
 
 // Composables
-export const makeDataIteratorItemProps = propsFactory({
+export const makeDataIteratorItemsProps = propsFactory({
   items: {
     type: Array as PropType<DataIteratorItemProps['items']>,
     default: () => ([]),
   },
   itemValue: {
     type: [String, Array, Function] as PropType<SelectItemKey>,
-    default: 'value',
+    default: 'id',
+  },
+  itemSelectable: {
+    type: [String, Array, Function] as PropType<SelectItemKey>,
+    default: null,
   },
   returnObject: Boolean,
-}, 'v-data-iterator-item')
+}, 'DataIterator-items')
 
 export function transformItem (
   props: Omit<DataIteratorItemProps, 'items'>,
   item: any
 ): DataIteratorItem {
   const value = props.returnObject ? item : getPropertyFromItem(item, props.itemValue)
+  const selectable = getPropertyFromItem(item, props.itemSelectable, true)
 
   return {
     type: 'item',
     value,
+    selectable,
     raw: item,
   }
 }

@@ -24,12 +24,18 @@ module.exports = {
         importNames: ['defineComponent'],
         message: 'Please use wrapped function from @/util instead'
       }]
-    }]
+    }],
 
     // 'import/no-cycle': 'warn',
     // 'import/no-self-import': 'warn',
   },
   overrides: [
+    {
+      files: 'src/**/*',
+      rules: {
+        'local-rules/sort-imports': 'warn',
+      },
+    },
     {
       files: 'dev/Playground.vue',
       rules: {

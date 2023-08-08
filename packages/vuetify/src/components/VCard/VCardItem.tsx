@@ -1,23 +1,23 @@
 // Components
-import { VAvatar } from '@/components/VAvatar'
 import { VCardSubtitle } from './VCardSubtitle'
 import { VCardTitle } from './VCardTitle'
+import { VAvatar } from '@/components/VAvatar'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
-import { IconValue } from '@/composables/icons'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps } from '@/composables/density'
+import { IconValue } from '@/composables/icons'
 
-// Utility
+// Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export type VCardItemSlots = {
-  default: []
-  prepend: []
-  append: []
-  title: []
-  subtitle: []
+  default: never
+  prepend: never
+  append: never
+  title: never
+  subtitle: never
 }
 
 export const makeCardItemProps = propsFactory({
@@ -30,7 +30,7 @@ export const makeCardItemProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeDensityProps(),
-}, 'v-card-item')
+}, 'VCardItem')
 
 export const VCardItem = genericComponent<VCardItemSlots>()({
   name: 'VCardItem',
