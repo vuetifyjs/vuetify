@@ -68,17 +68,17 @@ export function filterItems (
 
   loop:
   for (let i = 0; i < items.length; i++) {
-    const item = items[i]
+    const [item, transformed] = wrapInArray(items[i])
     const customMatches: Record<string, FilterMatch> = {}
     const defaultMatches: Record<string, FilterMatch> = {}
     let match: FilterMatch = -1
 
     if (query && !options?.noFilter) {
       if (typeof item === 'object') {
-        const filterKeys = keys || Object.keys(item)
+        const filterKeys = keys || Object.keys(transformed)
 
         for (const key of filterKeys) {
-          const value = getPropertyFromItem(item as any, key, item)
+          const value = getPropertyFromItem(transformed ?? item, key, transformed ?? item)
           const keyFilter = options?.customKeyFilter?.[key]
 
           match = keyFilter
@@ -135,12 +135,11 @@ export function useFilter <T extends { value: unknown }> (
 ) {
   const filteredItems: Ref<T[]> = ref([])
   const filteredMatches: Ref<Map<unknown, Record<string, FilterMatch>>> = ref(new Map())
-  const transformedItems = computed(() => options?.transform
-    ? unref(items).map(item => ({
-      item,
-      ...(options?.transform?.(item) ?? {}),
-    }))
-    : unref(items))
+  const transformedItems = computed(() => (
+    options?.transform
+      ? unref(items).map(item => ([item, options?.transform?.(item)]))
+      : unref(items).map(item => ([item, item]))
+  ))
 
   watchEffect(() => {
     const _query = typeof query === 'function' ? query() : unref(query)
