@@ -12,6 +12,18 @@
   </v-infinite-scroll>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const items = ref(Array.from({ length: 50 }, (k, v) => v + 1))
+  function load ({ done }) {
+    setTimeout(() => {
+      items.value.unshift(...Array.from({ length: 10 }, (k, v) => items.value[0] - (10 - v)))
+      done('ok')
+    }, 1000)
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

@@ -81,20 +81,21 @@
               class="py-2"
             >
               <template #prepend>
-                <div class="pe-4 mt-n2">{{ notification.metadata.emoji }}</div>
+                <div class="pe-4 align-self-start">{{ notification.metadata.emoji }}</div>
               </template>
 
               <v-list-item-title class="text-wrap text-h6">
                 <div>{{ notification.title }}</div>
               </v-list-item-title>
 
-              <div class="text-caption mb-1">{{ format(notification.created_at) }}</div>
+              <div class="text-caption mb-1 font-weight-bold text-medium-emphasis">{{ format(notification.created_at) }}</div>
 
               <div class="text-medium-emphasis text-caption">
-                {{ notification.metadata.text }}
+                <app-markdown :content="notification.metadata.text" class="mb-n3" />
 
                 <app-link
                   :href="notification.metadata.action"
+                  class="border px-2 py-1 rounded"
                   @click="onClick(notification)"
                 >
                   {{ notification.metadata.action_text }}
@@ -102,7 +103,7 @@
               </div>
 
               <template #append>
-                <div class="ps-4 mt-n2">
+                <div class="ps-4">
                   <v-icon
                     :icon="showArchived ? 'mdi-email-outline' : 'mdi-email-open-outline'"
                     color="medium-emphasis"
@@ -149,7 +150,7 @@
   }
 
   const { t } = useI18n()
-  const { bucket } = useCosmic<Notification>()
+  const { bucket } = useCosmic()
   const { mobile } = useDisplay()
   const date = useDate()
   const user = useUserStore()
@@ -197,7 +198,7 @@
   onMounted(async () => {
     if (all.value.length) return
 
-    const { objects = [] } = (
+    const { objects = [] }: { objects: Notification[] } = (
       await bucket?.objects
         .find({ type: 'notifications' })
         .props('created_at,metadata,slug,title')

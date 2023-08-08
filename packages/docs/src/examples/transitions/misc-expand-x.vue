@@ -46,6 +46,13 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const expand = ref(false)
+  const expand2 = ref(false)
+</script>
+
 <script>
   export default {
     data: () => ({

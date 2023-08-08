@@ -20,7 +20,7 @@ export const makeVBottomSheetProps = propsFactory({
     contentClass: 'v-bottom-sheet__content',
     transition: 'bottom-sheet-transition',
   }),
-}, 'v-bottom-sheet')
+}, 'VBottomSheet')
 
 export const VBottomSheet = genericComponent<OverlaySlots>()({
   name: 'VBottomSheet',

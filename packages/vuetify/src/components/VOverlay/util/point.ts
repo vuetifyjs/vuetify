@@ -1,3 +1,4 @@
+// Types
 import type { ParsedAnchor } from '@/util'
 import type { Box } from '@/util/box'
 

@@ -36,6 +36,12 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const tab = ref(null)
+</script>
+
 <script>
   export default {
     data: () => ({

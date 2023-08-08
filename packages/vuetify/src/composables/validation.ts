@@ -1,8 +1,8 @@
 // Composables
+import { makeFocusProps } from '@/composables/focus'
 import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useToggleScope } from '@/composables/toggleScope'
-import { makeFocusProps } from '@/composables/focus'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref, shallowRef, unref, watch } from 'vue'
@@ -195,14 +195,14 @@ export function useValidation (
 
       if (result === true) continue
 
-      if (typeof result !== 'string') {
+      if (result !== false && typeof result !== 'string') {
         // eslint-disable-next-line no-console
         console.warn(`${result} is not a valid value. Rule functions must return boolean true or a string.`)
 
         continue
       }
 
-      results.push(result)
+      results.push(result || '')
     }
 
     internalErrorMessages.value = results

@@ -1,8 +1,6 @@
 // Utilities
 import { inject, reactive, shallowRef, toRefs, watchEffect } from 'vue'
 import { mergeDeep } from '@/util'
-
-// Globals
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types

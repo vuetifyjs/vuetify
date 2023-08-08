@@ -97,12 +97,16 @@ export function useItems (props: ItemProps) {
 
 export function useTransformItems <T extends { value: unknown }> (items: Ref<T[]>, transform: (value: unknown) => T) {
   function transformIn (value: any[]): T[] {
-    return value.map(v => {
-      const existingItem = items.value.find(item => deepEqual(v, item.value))
-      // Nullish existingItem means value is a custom input value from combobox
-      // In this case, use transformItem to create an { value: unknown } based on value
-      return existingItem ?? transform(v)
-    })
+    return value
+      // When the model value is null, returns an InternalItem based on null
+      // only if null is one of the items
+      .filter(v => v !== null || items.value.some(item => item.value === null))
+      .map(v => {
+        const existingItem = items.value.find(item => deepEqual(v, item.value))
+        // Nullish existingItem means value is a custom input value from combobox
+        // In this case, use transformItem to create an InternalItem based on value
+        return existingItem ?? transform(v)
+      })
   }
 
   function transformOut (value: T[]) {

@@ -1,7 +1,10 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
 import { VBadge } from '..'
 import { VBtn } from '@/components/VBtn'
+
+// Utilities
 import { generate, gridOn } from '@/../cypress/templates'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
@@ -14,7 +17,7 @@ const props = {
   color: defaultColors,
   content: ['content'],
   dot: true,
-  icon: ['mdi-vuetify'],
+  icon: ['$vuetify'],
   floating: true,
   inline: true,
   location,
@@ -24,7 +27,7 @@ const props = {
 
 const stories = {
   'Default badge': <VBadge />,
-  'Icon badge': <VBadge icon="mdi-vuetify" />,
+  'Icon badge': <VBadge icon="$vuetify" />,
   'Offset badge': gridOn(['offsetX', 'offsetY'], offset, (xy, offset) => (
       <VBadge { ...{ [xy]: offset } } content={ `${offset}` }>
         <VBtn>

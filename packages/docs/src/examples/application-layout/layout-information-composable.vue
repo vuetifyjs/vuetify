@@ -1,24 +1,57 @@
 <template>
-  <v-layout ref="app">
-    <v-app-bar color="grey-lighten-2" name="app-bar" class="justify-center">
-      <div class="d-flex justify-center align-center w-100">
-        <child v-slot="{ print }">
-          <v-btn @click="print('app-bar')">Get data</v-btn>
-        </child>
-      </div>
+  <v-layout ref="app" class="rounded rounded-md">
+    <v-app-bar color="grey-lighten-2" name="app-bar">
+      <child v-slot="{ print }">
+        <v-btn class="mx-auto" @click="print('app-bar')">Get data</v-btn>
+      </child>
     </v-app-bar>
-    <v-navigation-drawer color="grey-darken-2" permanent name="drawer">
+
+    <v-navigation-drawer
+      color="grey-darken-2"
+      permanent
+      name="drawer"
+    >
       <div class="d-flex justify-center align-center h-100">
         <child v-slot="{ print }">
           <v-btn @click="print('drawer')">Get data</v-btn>
         </child>
       </div>
     </v-navigation-drawer>
-    <v-main>
-      <v-card height="200px"></v-card>
+
+    <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
+      Main Content
     </v-main>
+
+    <v-footer
+      app
+      name="footer"
+    >
+      <v-btn
+        class="mx-auto"
+        variant="text"
+        @click="print('footer')"
+      >
+        Get data
+      </v-btn>
+    </v-footer>
   </v-layout>
 </template>
+
+<script setup>
+  import { useLayout } from 'vuetify'
+
+  const Child = {
+    setup (props, ctx) {
+      const { getLayoutItem } = useLayout()
+
+      function print (key) {
+        alert(JSON.stringify(getLayoutItem(key), null, 2))
+      }
+
+      return () => ctx.slots.default({ print })
+    },
+  }
+</script>
 
 <script>
   import { useLayout } from 'vuetify'

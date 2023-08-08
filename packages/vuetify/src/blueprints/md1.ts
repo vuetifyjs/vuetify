@@ -43,6 +43,11 @@ export const md1: Blueprint = {
     VTextField: {
       variant: 'underlined',
     },
+    VToolbar: {
+      VBtn: {
+        color: null,
+      },
+    },
   },
   icons: {
     defaultSet: 'mdi',
