@@ -49,6 +49,6 @@
   })
 
   const code = computed(() => {
-    return `<v-otp-input${propsToString(props.value)}>${slots.value}</v-stepper>`
+    return `<v-otp-input${propsToString(props.value)}>${slots.value}</v-otp-input>`
   })
 </script>
