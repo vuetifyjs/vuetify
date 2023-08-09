@@ -1,5 +1,7 @@
 @use 'sass:list'
+@use 'sass:map'
 @use 'sass:math'
+@use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -34,12 +36,14 @@
 
   &__prepend,
   &__append
+    > .v-badge .v-icon,
     > .v-icon
       opacity: #{$list-item-icon-opacity}
 
   &--active
     .v-list-item__prepend,
     .v-list-item__append
+      > .v-badge .v-icon,
       > .v-icon
         opacity: #{$list-item-icon-active-opacity}
 
@@ -63,6 +67,7 @@
   > .v-avatar
     margin-inline-end: $list-item-avatar-margin-end
 
+  > .v-badge .v-icon,
   > .v-icon
     margin-inline-end: $list-item-icon-margin-end
 
@@ -78,6 +83,7 @@
   > .v-avatar
     margin-inline-start: $list-item-avatar-margin-start
 
+  > .v-badge .v-icon,
   > .v-icon
     margin-inline-start: $list-item-icon-margin-start
 
@@ -261,6 +267,11 @@ $base-padding: list.nth($list-item-padding, 2)
 .v-list-group__items .v-list-item
   padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
 
-.v-list-group__header.v-list-item--active:not(:focus-visible)
-  .v-list-item__overlay
-    opacity: 0
+.v-list-group__header.v-list-item--active
+  &:not(:focus-visible)
+    .v-list-item__overlay
+      opacity: 0
+
+  &:hover
+    .v-list-item__overlay
+      opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))

@@ -29,7 +29,7 @@
 
 <h2 align="center">Supporting Vuetify</h2>
 
-Vuetify is a [MIT licensed](http://opensource.org/licenses/MIT) project that is developed and maintained full-time by [John Leider](https://github.com/johnleider) and [Heather Leider](https://github.com/heatherleider); with support from the entire [Core Team](https://vuetifyjs.com/introduction/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
+Vuetify is a [MIT licensed](http://opensource.org/licenses/MIT) project that is developed and maintained full-time by [John Leider](https://github.com/johnleider) and [Heather Leider](https://github.com/heatherleider); with support from the entire [Core Team](https://vuetifyjs.com/about/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
 
 <ul>
   <li>
@@ -61,8 +61,8 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
   <tbody>
     <tr>
       <td>
-        <a href="https://www.teamwork.com/">
-          <img height="40px" src="https://cdn.cosmicjs.com/29a9d0b0-440a-11ed-8c9b-a1a0c9d2eef2-TWPOSRGB.png">
+        <a href="https://github.com/sponsors/johnleider" target="_blank">
+          Your Logo Here
         </a>
       </td>
     </tr>
@@ -75,13 +75,8 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
   <tbody>
     <tr>
       <td>
-        <a href="https://www.qomplx.com/?ref=vuetify-github">
-          <img height="40px" src="https://cdn.cosmicjs.com/145bda20-1fe1-11ed-a5bd-ef15a2e468ca-QOMPLX-logo-light.png">
-        </a>
-      </td>
-      <td>
-        <a href="https://www.sanofi.us/en/">
-          <img height="50px" src="https://cdn.cosmicjs.com/82029fc0-e0e7-11ec-bb19-d9085ce408df-c7b04c1c-ad15-452c-883f-2dd802ad7df9.png">
+        <a href="https://github.com/sponsors/johnleider" target="_blank">
+          Your Logo Here
         </a>
       </td>
     </tr>
@@ -152,6 +147,10 @@ Vuetify is a no design skills required UI Library with beautifully handcrafted V
 - **Vite Support:** _Smaller_ bundle sizes with **automatic** tree-shaking
 - **18 months** Long-term support for [Major releases](https://vuetifyjs.com/introduction/long-term-support/)
 - **Internationalization:** 42+ supported languages
+
+#### Browser Support
+
+Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills](https://vuetifyjs.com/getting-started/browser-support)). Components are designed for a minimum width of _320px_.
 
 ### 🌎 Vuetify Ecosystem
 
@@ -273,13 +272,19 @@ To check out the docs, visit [vuetifyjs.com](https://vuetifyjs.com).
 
 ![Crowdin Uploads](https://github.com/vuetifyjs/vuetify/workflows/Crowdin%20Uploads/badge.svg?branch=master)
 
-###### Browser Support
-
-Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills](https://vuetifyjs.com/getting-started/browser-support)). Components are designed for a minimum width of _320px_.
-
 ### 🙋‍♂️ Questions
 
 For help and support questions, please use our [Discord community](https://community.vuetifyjs.com). This issue list of this repo is **exclusively** for bug reports and feature requests.
+
+### 🐛 Issues
+
+Use our [Issue generator](https://issues.vuetifyjs.com) to report bugs and request new features.
+
+Please make sure to read the [Important Information](https://github.com/vuetifyjs/vuetify/blob/master/.github/CONTRIBUTING.md#important-information) before opening an issue. Issues not confirming to the guidelines may be closed immediately.
+
+### 📝 Changelog
+
+Detailed changes for each release are documented in the [release notes](https://vuetifyjs.com/getting-started/release-notes/).
 
 ### 💁‍♂️ Contributing
 
@@ -291,10 +296,6 @@ Developers interested in contributing should read the [Code of Conduct](./CODE_O
 To help you get you familiar with our contribution process, we have a list of [good first issues](https://github.com/vuetifyjs/vuetify/labels/good%20first%20issue) that contain bugs which have a relatively limited scope. This is a great place to get started. If you have any questions, please join us on the [community chat](https://community.vuetifyjs.com).
 
 We also have a list of [help wanted](https://github.com/vuetifyjs/vuetify/labels/help%20wanted) issues that you might want to check.
-
-### 📝 Changelog
-
-Detailed changes for each release are documented in the [release notes](https://vuetifyjs.com/getting-started/release-notes/).
 
 ### 📑 License
 

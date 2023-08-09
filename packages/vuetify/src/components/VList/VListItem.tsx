@@ -220,6 +220,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
           ]}
           href={ link.href.value }
           tabindex={ isClickable.value ? (list ? -2 : 0) : undefined }
+          title={ props.title }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && props.ripple }

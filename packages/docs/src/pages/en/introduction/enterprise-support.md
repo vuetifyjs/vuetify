@@ -9,7 +9,7 @@ meta:
 related:
   - /introduction/long-term-support/
   - /about/security-disclosure/
-  - /introduction/meet-the-team/
+  - /about/meet-the-team/
 ---
 
 <script setup>

@@ -7,7 +7,6 @@
       "why-vuetify",
       "long-term-support",
       "roadmap",
-      "meet-the-team",
       "sponsors-and-backers",
       { "divider": true },
       { "subheader": "professional-support" },
@@ -226,7 +225,15 @@
         "subfolder": "components"
       },
       {
+        "title": "otp-input",
+        "subfolder": "components"
+      },
+      {
         "title": "skeleton-loaders",
+        "subfolder": "components"
+      },
+      {
+        "title": "steppers",
         "subfolder": "components"
       }
     ]
@@ -238,7 +245,8 @@
     "items": [
       "jobs-for-vue",
       "ui-kits",
-      "themes"
+      "themes",
+      "search-engine"
     ]
   },
   {
@@ -246,6 +254,7 @@
     "inactiveIcon": "$vuetify-outline",
     "activeIcon": "$vuetify",
     "items": [
+      "meet-the-team",
       "security-disclosure",
       "code-of-conduct"
     ]

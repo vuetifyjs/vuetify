@@ -4,7 +4,7 @@
       <v-card width="400">
         <v-img
           height="200"
-          src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg"
+          src="https://cdn.vuetifyjs.com/docs/images/cards/purple-flowers.jpg"
           cover
           class="text-white"
         >

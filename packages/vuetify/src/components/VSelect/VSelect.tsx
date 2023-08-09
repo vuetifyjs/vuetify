@@ -24,7 +24,7 @@ import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, ref, shallowRef } from 'vue'
-import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { deepEqual, genericComponent, getPropertyFromItem, matchesSelector, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { Component, PropType } from 'vue'
@@ -68,6 +68,7 @@ export const makeSelectProps = propsFactory({
     type: Function as PropType<typeof deepEqual>,
     default: deepEqual,
   },
+  itemColor: String,
 
   ...makeItemsProps({ itemChildren: false }),
 }, 'Select')
@@ -139,7 +140,16 @@ export const VSelect = genericComponent<new <
     const form = useForm()
     const selections = computed(() => {
       return model.value.map(v => {
-        return items.value.find(item => props.valueComparator(item.value, v.value)) || v
+        return items.value.find(item => {
+          const itemRawValue = getPropertyFromItem(item.raw, props.itemValue)
+          const modelRawValue = getPropertyFromItem(v.raw, props.itemValue)
+
+          if (itemRawValue === undefined || modelRawValue === undefined) return false
+
+          return props.returnObject
+            ? props.valueComparator(itemRawValue, modelRawValue)
+            : props.valueComparator(item.value, v.value)
+        }) || v
       })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
@@ -173,7 +183,7 @@ export const VSelect = genericComponent<new <
       menu.value = !menu.value
     }
     function onKeydown (e: KeyboardEvent) {
-      if (props.readonly || form?.isReadonly.value) return
+      if (!e.key || props.readonly || form?.isReadonly.value) return
 
       if (['Enter', ' ', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) {
         e.preventDefault()
@@ -245,6 +255,17 @@ export const VSelect = genericComponent<new <
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
     }
+    function onModelUpdate (v: any) {
+      if (v == null) model.value = []
+      else if (matchesSelector(vTextFieldRef.value, ':autofill') || matchesSelector(vTextFieldRef.value, ':-webkit-autofill')) {
+        const item = items.value.find(item => item.title === v)
+        if (item) {
+          select(item)
+        }
+      } else if (vTextFieldRef.value) {
+        vTextFieldRef.value.value = ''
+      }
+    }
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
@@ -268,7 +289,7 @@ export const VSelect = genericComponent<new <
           ref={ vTextFieldRef }
           { ...textFieldProps }
           modelValue={ model.value.map(v => v.props.value).join(', ') }
-          onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          onUpdate:modelValue={ onModelUpdate }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
           dirty={ isDirty }
@@ -284,7 +305,7 @@ export const VSelect = genericComponent<new <
             props.class,
           ]}
           style={ props.style }
-          readonly
+          inputmode="none"
           placeholder={ placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
@@ -319,6 +340,7 @@ export const VSelect = genericComponent<new <
                       onFocusin={ onFocusin }
                       onScrollPassive={ onListScroll }
                       tabindex="-1"
+                      color={ props.itemColor ?? props.color }
                     >
                       { slots['prepend-item']?.() }
 

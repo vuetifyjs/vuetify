@@ -3,7 +3,6 @@ import {
   computed,
   inject,
   provide,
-  reactive,
   ref,
   watch,
   watchEffect,
@@ -201,7 +200,7 @@ function parseThemeOptions (options: ThemeOptions = defaultThemeOptions): Intern
 
 // Composables
 export function createTheme (options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
-  const parsedOptions = reactive(parseThemeOptions(options))
+  const parsedOptions = parseThemeOptions(options)
   const name = ref(parsedOptions.defaultTheme)
   const themes = ref(parsedOptions.themes)
 
@@ -313,7 +312,9 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     if (head) {
       if (head.push) {
         const entry = head.push(getHead)
-        watch(styles, () => { entry.patch(getHead) })
+        if (IN_BROWSER) {
+          watch(styles, () => { entry.patch(getHead) })
+        }
       } else {
         if (IN_BROWSER) {
           head.addHeadObjs(computed(getHead))
@@ -327,7 +328,11 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         ? document.getElementById('vuetify-theme-stylesheet')
         : null
 
-      watch(styles, updateStyles, { immediate: true })
+      if (IN_BROWSER) {
+        watch(styles, updateStyles, { immediate: true })
+      } else {
+        updateStyles()
+      }
 
       function updateStyles () {
         if (typeof document !== 'undefined' && !styleEl) {

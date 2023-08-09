@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    v-if="!user.dev"
     id="settings-drawer"
     v-model="app.settings"
     :location="isRtl ? 'left' : 'right'"
@@ -55,8 +56,10 @@
 
   // Composables
   import { useAppStore } from '@/store/app'
+  import { useUserStore } from '@/store/user'
   import { useRtl } from 'vuetify'
 
   const { isRtl } = useRtl()
   const app = useAppStore()
+  const user = useUserStore()
 </script>

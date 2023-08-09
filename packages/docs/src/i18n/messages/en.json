@@ -35,6 +35,7 @@
     "spec": "Specification"
   },
   "breakpoints": "Breakpoints",
+  "documentation-build": "Documentation Build",
   "business": "Business",
   "cancel": "Cancel",
   "close": "Close",
@@ -75,6 +76,7 @@
   "data-and-display": "Data & display",
   "grids": "Grids",
   "details": "Details",
+  "developer-mode": "Developer Mode",
   "device": "Device",
   "direction": "Direction",
   "directive": "Directive",
@@ -125,6 +127,7 @@
   "invert-example-colors": "Invert example colors",
   "jobs": "Jobs",
   "jobs-for-vue": "Jobs for Vue",
+  "joined": "Joined {date}",
   "labs": "Labs",
   "laptop": "Laptop",
   "languages": "Languages",
@@ -246,5 +249,6 @@
   "view-in-github": "View on GitHub",
   "view-source": "View source",
   "viewport": "Viewport",
-  "vuetify": "Vuetify"
+  "vuetify": "Vuetify",
+  "x": "X"
 }

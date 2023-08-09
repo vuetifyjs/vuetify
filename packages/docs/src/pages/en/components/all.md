@@ -222,6 +222,12 @@ Form components are used to collect user input in a variety of ways.
 
 </components-list-item>
 
+<components-list-item name="OTP Input component" src="otp-input">
+
+  The OTP input component is used for MFA authentication via input field
+
+</components-list-item>
+
 <components-list-item name="Select component" src="selects">
 
   The select component is used to select a value from a list of options and is a replacement for the native select element
@@ -278,13 +284,13 @@ These components allow a user to select one or multiple items from a list of opt
 
 </components-list-item>
 
-<components-list-item name="Button group"  src="button-groups">
+<components-list-item name="Button group" src="button-groups">
 
   Button groups are used to select between multiple options using the button component
 
 </components-list-item>
 
-<components-list-item name="Chip group"  src="chip-groups">
+<components-list-item name="Chip group" src="chip-groups">
 
   Chip group is a wrapper component that makes chips interactive and allows them to be selected
 
