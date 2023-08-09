@@ -1,5 +1,5 @@
 // Utilities
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { deepEqual, getPropertyFromItem, pick, propsFactory } from '@/util'
 
 // Types
@@ -19,6 +19,7 @@ export interface ListItem<T = any> {
 }
 
 export interface ItemProps {
+  cacheItems: Boolean
   items: any[]
   itemTitle: SelectItemKey
   itemValue: SelectItemKey
@@ -29,6 +30,7 @@ export interface ItemProps {
 
 // Composables
 export const makeItemsProps = propsFactory({
+  cacheItems: Boolean,
   items: {
     type: Array as PropType<ItemProps['items']>,
     default: () => ([]),
@@ -90,7 +92,13 @@ export function transformItems (props: Omit<ItemProps, 'items'>, items: ItemProp
 }
 
 export function useItems (props: ItemProps) {
-  const items = computed(() => transformItems(props, props.items))
+  let cachedItems = props.cacheItems?props.items:[];
+
+  const items = computed(() => transformItems(props, Array.from(new Set(cachedItems.concat(props.items)))))
+
+  watch(items, () => {
+    cachedItems = Array.from(new Set(cachedItems.concat(props.items)))
+  })
 
   return useTransformItems(items, value => transformItem(props, value))
 }
