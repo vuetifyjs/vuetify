@@ -6,6 +6,7 @@
       isDark ? 'theme--dark' : 'theme--light',
     ]"
     border
+    id="carbonContainer"
     min-height="118"
     max-width="360"
   >
@@ -32,7 +33,7 @@
   import { useTheme } from 'vuetify'
 
   // Utilities
-  import { computed, onBeforeUnmount, ref } from 'vue'
+  import { computed, onMounted, onBeforeUnmount, ref } from 'vue'
 
   const error = ref(false)
   const script = ref(null)
@@ -43,12 +44,48 @@
     script?.remove()
   })
 
+  onMounted(() => {
+
+    setTimeout(()=> {
+      const isCarbonVisible = !!document.getElementById('carbonads');
+
+      const optimizeEl = document.createElement("div");
+      optimizeEl.id = "bsa-zone_1691166982595-9_123456";
+
+      if(!isCarbonVisible) {
+        document.querySelector("#sponsoredContainer").appendChild(optimizeEl);
+        document.querySelector("#carbonContainer").remove();
+
+        (function(){
+          var bsa_optimize=document.createElement('script');
+          bsa_optimize.type='text/javascript';
+          bsa_optimize.async=true;
+          bsa_optimize.src='https://cdn4.buysellads.net/pub/vuetifyjs.js?'+(new Date()-new Date()%600000);
+          (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa_optimize);
+        })();
+      }
+    }, 2000)
+
+  })
+
   const theme = useTheme()
 
   const isDark = computed(() => theme.current.value.dark)
 </script>
 
 <style lang="sass">
+  @media only screen and (min-width: 0px) and (min-height: 0px)
+    div[id^="bsa-zone_1691166982595-9_123456"]
+      min-width: 300px
+      min-height: 250px
+
+  
+  @media only screen and (min-width: 760px) and (min-height: 0px)
+    div[id^="bsa-zone_1691166982595-9_123456"]
+      min-width: 728px
+      min-height: 90px
+
+
   #carbonads-script
     width: 100%
 
