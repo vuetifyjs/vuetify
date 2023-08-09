@@ -4,7 +4,7 @@
     id="app-banner-bar"
     :color="banner.metadata.color"
     :height="height"
-    :image="banner.metadata.images.bg.url"
+    :image="banner.metadata.images.bg?.url"
     :theme="banner.metadata.theme.key"
     :model-value="hasPromotion"
     flat
@@ -17,12 +17,12 @@
       v-bind="banner.metadata.attributes"
       @click="onClick"
     >
-      <v-list-item lines="three">
+      <v-list-item lines="two">
         <template #prepend>
           <v-avatar :image="banner.metadata.images.logo.url" size="x-large" />
         </template>
 
-        <v-list-item-title class="text-subtitle-1 text-md-h6 font-weight-medium mb-1">
+        <v-list-item-title class="text-subtitle-1 text-md-h6 font-weight-medium">
           <app-markdown
             v-if="banner.metadata.text"
             :content="banner.metadata.text"
