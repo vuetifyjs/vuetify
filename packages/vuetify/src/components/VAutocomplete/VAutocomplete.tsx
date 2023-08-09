@@ -118,6 +118,7 @@ export const VAutocomplete = genericComponent<new <
     const isPristine = shallowRef(true)
     const listHasFocus = shallowRef(false)
     const vMenuRef = ref<VMenu>()
+    const vVirtualScrollRef = ref<VVirtualScroll>()
     const _menu = useProxiedModel(props, 'menu')
     const menu = computed({
       get: () => _menu.value,
@@ -373,6 +374,17 @@ export const VAutocomplete = genericComponent<new <
       isPristine.value = !val
     })
 
+    watch(menu, () => {
+      if (props.autoScroll && !props.hideSelected && menu.value && selections.value.length) {
+        const index = displayItems.value.findIndex(
+          item => selections.value.some(s => item.value === s.value)
+        )
+        setTimeout(() => {
+          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
+        })
+      }
+    })
+
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
       const hasList = !!(
@@ -450,7 +462,7 @@ export const VAutocomplete = genericComponent<new <
                         <VListItem title={ t(props.noDataText) } />
                       ))}
 
-                      <VVirtualScroll renderless items={ displayItems.value }>
+                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value }>
                         { ({ item, index, itemRef }) => {
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
