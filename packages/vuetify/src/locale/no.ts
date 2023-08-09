@@ -27,7 +27,7 @@ export default {
     pageText: '{0}-{1} av {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'til',
   },
   datePicker: {
     ok: 'OK',
