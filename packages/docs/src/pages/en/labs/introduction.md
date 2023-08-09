@@ -108,7 +108,6 @@ The following is a list of available and up-and-coming components for use with L
 | [v-stepper-window](/api/v-stepper-window/) | Window container for stepper window items | |
 | [v-stepper-window-item](/api/v-stepper-window-item/) | Items for stepper window | |
 
-
 ### Up Next
 
 | Component | Release Target |
