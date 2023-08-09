@@ -36,12 +36,14 @@
 
   &__prepend,
   &__append
+    > .v-badge .v-icon,
     > .v-icon
       opacity: #{$list-item-icon-opacity}
 
   &--active
     .v-list-item__prepend,
     .v-list-item__append
+      > .v-badge .v-icon,
       > .v-icon
         opacity: #{$list-item-icon-active-opacity}
 
@@ -65,6 +67,7 @@
   > .v-avatar
     margin-inline-end: $list-item-avatar-margin-end
 
+  > .v-badge .v-icon,
   > .v-icon
     margin-inline-end: $list-item-icon-margin-end
 
@@ -80,6 +83,7 @@
   > .v-avatar
     margin-inline-start: $list-item-avatar-margin-start
 
+  > .v-badge .v-icon,
   > .v-icon
     margin-inline-start: $list-item-icon-margin-start
 
