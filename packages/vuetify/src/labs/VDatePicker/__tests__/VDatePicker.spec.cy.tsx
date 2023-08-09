@@ -1,7 +1,10 @@
 /// <reference types="../../../../types/cypress" />
 
-import { ref } from 'vue'
+// Components
 import { VDatePicker } from '../VDatePicker'
+
+// Utilities
+import { ref } from 'vue'
 import { Application } from '../../../../cypress/templates'
 
 describe('VDatePicker', () => {
@@ -9,7 +12,7 @@ describe('VDatePicker', () => {
     const model = ref(new Date(2023, 0, 1))
     cy.mount(() => (
       <Application>
-        <VDatePicker v-model={model.value} hideActions />
+        <VDatePicker v-model={ model.value } hideActions />
       </Application>
     ))
       .get('div[data-v-date="2023-1-2"]')
@@ -26,7 +29,7 @@ describe('VDatePicker', () => {
     const model = ref(new Date(2023, 0, 1))
     cy.mount(() => (
       <Application>
-        <VDatePicker v-model={model.value} />
+        <VDatePicker v-model={ model.value } />
       </Application>
     ))
       .get('div[data-v-date="2023-1-2"]')
