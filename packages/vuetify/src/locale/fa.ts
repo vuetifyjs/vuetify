@@ -33,10 +33,10 @@ export default {
     ok: 'OK',
     cancel: 'لغو',
     range: {
-      title: 'تاریخ‌ها را انتخاب کنید',
+      title: 'انتخاب تاریخ‌ها',
       header: 'تاریخ‌ها را وارد کنید',
     },
-    title: 'تاریخ‌ را انتخاب کنید',
+    title: 'انتخاب تاریخ',
     header: 'تاریخ را وارد کنید',
     input: {
       placeholder: 'تاریخ را وارد کنید',
@@ -79,17 +79,17 @@ export default {
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'بعدی',
+    prev: 'قبلی',
   },
   rating: {
     ariaLabel: {
       item: 'Rating {0} of {1}',
     },
   },
-  loading: 'بارگذاری...',
+  loading: 'در حال بارگذاری...',
   infiniteScroll: {
     loadMore: 'بارگذاری بیشتر',
-    empty: 'چیزی وجود ندارد',
+    empty: 'پایان',
   },
 }
