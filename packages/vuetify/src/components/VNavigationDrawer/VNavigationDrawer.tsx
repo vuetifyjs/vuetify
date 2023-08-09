@@ -9,7 +9,7 @@ import { makeBorderProps, useBorder } from '@/composables/border'
 import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
-import { useDisplay } from '@/composables/display'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -79,6 +79,7 @@ export const makeVNavigationDrawerProps = propsFactory({
 
   ...makeBorderProps(),
   ...makeComponentProps(),
+  ...makeDisplayProps(),
   ...makeElevationProps(),
   ...makeLayoutItemProps(),
   ...makeRoundedProps(),
@@ -102,7 +103,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const { borderClasses } = useBorder(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { elevationClasses } = useElevation(props)
-    const { mobile } = useDisplay()
+    const { isMobile } = useDisplay(props)
     const { roundedClasses } = useRounded(props)
     const router = useRouter()
     const isActive = useProxiedModel(props, 'modelValue', null, v => !!v)
@@ -120,7 +121,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const location = computed(() => {
       return toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'bottom'
     })
-    const isTemporary = computed(() => !props.permanent && (mobile.value || props.temporary))
+    const isTemporary = computed(() => !props.permanent && (isMobile.value || props.temporary))
     const isSticky = computed(() =>
       props.sticky &&
       !isTemporary.value &&
@@ -146,7 +147,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     onBeforeMount(() => {
       if (props.modelValue != null || isTemporary.value) return
 
-      isActive.value = props.permanent || !mobile.value
+      isActive.value = props.permanent || !isMobile.value
     })
 
     const { isDragging, dragProgress, dragStyles } = useTouch({

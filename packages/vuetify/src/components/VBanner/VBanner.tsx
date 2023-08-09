@@ -13,7 +13,7 @@ import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import { useDisplay } from '@/composables/display'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { IconValue } from '@/composables/icons'
 import { makeLocationProps, useLocation } from '@/composables/location'
@@ -49,6 +49,7 @@ export const makeVBannerProps = propsFactory({
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeDimensionProps(),
+  ...makeDisplayProps(),
   ...makeElevationProps(),
   ...makeLocationProps(),
   ...makePositionProps(),
@@ -65,7 +66,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
   setup (props, { slots }) {
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
-    const { mobile } = useDisplay()
+    const { isMobile } = useDisplay(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { locationStyles } = useLocation(props)
@@ -89,7 +90,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
           class={[
             'v-banner',
             {
-              'v-banner--stacked': props.stacked || mobile.value,
+              'v-banner--stacked': props.stacked || isMobile.value,
               'v-banner--sticky': props.sticky,
               [`v-banner--${props.lines}-line`]: !!props.lines,
             },
