@@ -31,6 +31,7 @@ export type RootState = {
   }
 }
 
+// @ts-expect-error too hard to actually validate in strict mode
 type SavedState = {
   api: boolean
   drawer: { alphabetical: boolean, mini: boolean }
