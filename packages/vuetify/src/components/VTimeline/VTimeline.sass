@@ -19,13 +19,18 @@
   position: relative
 
   @include horizontal(true)
-    grid-column-gap: $timeline-item-padding
     width: 100%
 
     @include timeline-first-item()
       padding-inline-start: $timeline-item-padding
 
     @include timeline-last-item()
+      padding-inline-end: $timeline-item-padding
+
+    .v-timeline-item__body
+      padding-inline-end: $timeline-item-padding
+
+    .v-timeline-item__opposite
       padding-inline-end: $timeline-item-padding
 
     .v-timeline-item:nth-child(2n)
