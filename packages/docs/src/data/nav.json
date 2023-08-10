@@ -74,6 +74,7 @@
     "activeIcon": "mdi-view-dashboard",
     "items": [
       "all",
+      "explorer",
       { "divider": true },
       { "subheader": "containment" },
       "buttons",
