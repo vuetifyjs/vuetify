@@ -17,7 +17,7 @@
   @at-root
     @include tools.density('v-input', $input-density) using ($modifier)
       --v-input-control-height: #{$input-control-height + $modifier}
-      --v-input-padding-top: #{15px + $modifier * .5}
+      --v-input-padding-top: #{15px + $modifier * .625}
 
     @include tools.density('v-input', $input-chips-margin-bottom) using ($modifier)
       --v-input-chips-margin-bottom: #{0px + math.div($modifier, 2)}
