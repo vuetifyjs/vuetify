@@ -18,9 +18,10 @@ export type RootState = {
   direction: 'rtl' | 'ltr'
   quickbar: boolean
   notifications: {
+    show: boolean
     read: string[]
     last: {
-      banner: null | number
+      banner: string[]
       v2banner: null | number
       install: null | number
       notification: null | number
@@ -42,9 +43,10 @@ export const useUserStore = defineStore('user', () => {
     direction: 'ltr',
     quickbar: true,
     notifications: {
+      show: true,
       read: [],
       last: {
-        banner: null,
+        banner: [],
         v2banner: null,
         install: null,
         notification: null,
@@ -87,6 +89,10 @@ export const useUserStore = defineStore('user', () => {
 
     if (Array.isArray(data.composition)) {
       data.composition = 'composition'
+    }
+
+    if (!Array.isArray(data.notifications.last.banner)) {
+      data.notifications.last.banner = []
     }
 
     Object.assign(state, merge(state, data))

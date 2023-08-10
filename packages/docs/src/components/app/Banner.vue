@@ -81,34 +81,33 @@
 
   // Utilities
   import { computed, onBeforeMount } from 'vue'
-  import { differenceInHours } from 'date-fns'
 
   const { event } = useGtag()
   const { mdAndUp } = useDisplay()
   const { name } = useRoute()
-  const { notifications } = useUserStore()
+  const user = useUserStore()
   const banners = useBannersStore()
 
   const banner = computed(() => banners.banner)
   const height = computed(() => banner.value?.metadata.subtext ? 80 : 64)
   const hasPromotion = computed(() => {
-    if (!banner.value) return false
-
-    const now = Date.now()
-
-    return differenceInHours(now, Number(notifications.last.banner)) > 1
+    return !banner.value || !user.notifications.last.banner.includes(banner.value.slug)
   })
 
   function onClick () {
+    if (!banner.value) return
+
     event('click', {
       event_category: 'vuetify-banner',
-      event_label: banner.value?.metadata.label,
+      event_label: banner.value.slug,
       value: name?.toString().toLowerCase(),
     })
   }
 
   function onClose () {
-    notifications.last.banner = Date.now()
+    if (!banner.value) return
+
+    user.notifications.last.banner.push(banner.value.slug)
   }
 
   onBeforeMount(banners.fetch)
