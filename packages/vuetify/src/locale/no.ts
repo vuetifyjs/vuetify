@@ -31,15 +31,15 @@ export default {
   },
   datePicker: {
     ok: 'OK',
-    cancel: 'Cancel',
+    cancel: 'Avbryt',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Velg datoer',
+      header: 'Velg datoer',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Velg dato',
+    header: 'Velg dato',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Fyll inn dato',
     },
   },
   noDataText: 'Ingen data er tilgjengelig',
@@ -54,7 +54,7 @@ export default {
     moreEvents: '{0} flere',
   },
   input: {
-    clear: 'Clear {0}',
+    clear: 'Fjern {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
     otp: 'Please enter OTP character {0}',
@@ -74,22 +74,22 @@ export default {
       previous: 'Forrige side',
       page: 'Gå til side {0}',
       currentPage: 'Gjeldende side, side {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Første side',
+      last: 'Siste side',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Neste',
+    prev: 'Forrige',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Anmeldelse {0} av {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Laster...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Last flere',
+    empty: 'Det var alt',
   },
 }
