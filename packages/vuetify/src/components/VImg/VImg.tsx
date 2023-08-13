@@ -51,6 +51,10 @@ export type VImgSlots = {
 export const makeVImgProps = propsFactory({
   alt: String,
   cover: Boolean,
+  draggable: {
+    type: [Boolean, String] as PropType<boolean | 'true' | 'false'>,
+    default: undefined,
+  },
   eager: Boolean,
   gradient: String,
   lazySrc: String,
@@ -227,6 +231,7 @@ export const VImg = genericComponent<VImgSlots>()({
           alt={ props.alt }
           crossorigin={ props.crossorigin }
           referrerpolicy={ props.referrerpolicy }
+          draggable={ props.draggable }
           sizes={ props.sizes }
           ref={ image }
           onLoad={ onLoad }
@@ -259,6 +264,7 @@ export const VImg = genericComponent<VImgSlots>()({
             alt={ props.alt }
             crossorigin={ props.crossorigin }
             referrerpolicy={ props.referrerpolicy }
+            draggable={ props.draggable }
           />
         )}
       </MaybeTransition>
