@@ -6,9 +6,9 @@ import { useInputIcon } from '@/components/VInput/InputIcon'
 import { VMessages } from '@/components/VMessages/VMessages'
 
 // Composables
+import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
-import { provideDefaults } from '@/composables/defaults'
 import { IconValue } from '@/composables/icons'
 import { useRtl } from '@/composables/locale'
 import { makeValidationProps, useValidation } from '@/composables/validation'
@@ -43,6 +43,7 @@ export const makeVInputProps = propsFactory({
     default: true,
   },
   color: String,
+  baseColor: String,
   prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hint: String,
@@ -107,6 +108,12 @@ export const VInput = genericComponent<VInputSlots>()({
       validationClasses,
     } = useValidation(props, 'v-input', id)
 
+    const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
+      return props.error || props.disabled ? undefined
+        : props.focused ? props.color
+        : props.baseColor
+    }))
+
     const slotProps = computed<VInputSlot>(() => ({
       id,
       messagesId,
@@ -131,12 +138,6 @@ export const VInput = genericComponent<VInputSlots>()({
       }
     })
 
-    provideDefaults({
-      VIcon: {
-        color: props.color
-      }
-    })
-
     useRender(() => {
       const hasPrepend = !!(slots.prepend || props.prependIcon)
       const hasAppend = !!(slots.append || props.appendIcon)
@@ -156,10 +157,14 @@ export const VInput = genericComponent<VInputSlots>()({
             },
             densityClasses.value,
             rtlClasses.value,
+            textColorClasses.value,
             validationClasses.value,
             props.class,
           ]}
-          style={ props.style }
+          style={[
+            textColorStyles.value,
+            props.style
+          ]}
         >
           { hasPrepend && (
             <div key="prepend" class="v-input__prepend">
