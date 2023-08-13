@@ -39,7 +39,7 @@ The following themes are created and maintained by Vuetify. They are available f
 
 <ThemeVendor name="Vuetify" />
 
-----
+---
 
 <br>
 
@@ -49,7 +49,7 @@ UI Lib is a collection of free and premium themes built on top of Vuetify.
 
 <ThemeVendor name="UI Lib" />
 
-----
+---
 
 <br>
 
@@ -59,7 +59,7 @@ Create web apps and products using WrapPixel's product ready Vue Admin Templates
 
 <ThemeVendor name="WrapPixel" />
 
-----
+---
 
 <br>
 
