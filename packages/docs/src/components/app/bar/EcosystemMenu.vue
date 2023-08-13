@@ -49,6 +49,11 @@
     { divider: true },
     { subheader: t('tools') },
     {
+      title: 'pastebin',
+      href: 'https://bin.vuetifyjs.com/',
+      appendIcon: 'mdi-delete-outline',
+    },
+    {
       title: 'playground',
       href: 'https://play.vuetifyjs.com/',
       appendIcon: 'mdi-play-circle-outline',
