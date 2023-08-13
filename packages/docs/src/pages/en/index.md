@@ -9,7 +9,7 @@ meta:
   import HomeActionBtns from '@/components/home/ActionBtns.vue'
   import HomeEntry from '@/components/home/Entry.vue'
   import HomeFeatures from '@/components/home/Features.vue'
-  // import HomeSpecialSponsor from '@/components/home/SpecialSponsor.vue'
+  import HomeSpecialSponsor from '@/components/home/SpecialSponsor.vue'
   import HomeSponsors from '@/components/home/Sponsors.vue'
 </script>
 
@@ -20,6 +20,9 @@ meta:
 <home-features />
 
 <br>
+
+<home-special-sponsor />
+
 <br>
 
 ## Project Sponsors
