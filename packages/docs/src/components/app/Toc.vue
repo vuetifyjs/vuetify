@@ -61,32 +61,47 @@
         />
 
         <v-row dense>
-          <v-col
-            v-for="sponsor of sponsors"
-            :key="sponsor.slug"
-            class="d-inline-flex"
-          >
-            <sponsor-card
-              :max-height="sponsor.metadata.tier === -1 ? 52 : 40"
-              :sponsor="sponsor"
-              :color="dark ? undefined : 'grey-lighten-5'"
-            />
-          </v-col>
-
-          <v-col class="d-inline-flex">
-            <v-card
-              :to="rpath('/introduction/sponsors-and-backers/')"
-              class="py-1 px-3 text-center"
-              color="primary"
-              variant="tonal"
-              width="100%"
+          <template v-if="sponsors.length">
+            <v-col
+              v-for="sponsor of sponsors"
+              :key="sponsor.slug"
+              class="d-inline-flex"
             >
-              <div>
-                Support
+              <sponsor-card
+                :color="dark ? undefined : 'grey-lighten-5'"
+                :max-height="sponsor.metadata.tier === -1 ? 52 : 40"
+                :sponsor="sponsor"
+              />
+            </v-col>
 
-                <v-icon icon="$vuetify" />
-              </div>
-            </v-card>
+            <v-col class="d-inline-flex">
+              <v-btn
+                :to="rpath('/introduction/sponsors-and-backers/')"
+                append-icon="$vuetify"
+                block
+                class="text-none"
+                color="primary"
+                size="large"
+                variant="tonal"
+                text="Support"
+              />
+            </v-col>
+          </template>
+
+          <v-col v-else cols="12">
+            <v-btn
+              block
+              border
+              class="text-none border-opacity-50 border-primary"
+              color="primary"
+              href="https://github.com/sponsors/johnleider"
+              prepend-icon="mdi-github"
+              rel="noopener noreferrer"
+              size="large"
+              target="_blank"
+              text="Your Logo Here"
+              variant="tonal"
+            />
           </v-col>
 
           <!-- <v-col cols="12">
