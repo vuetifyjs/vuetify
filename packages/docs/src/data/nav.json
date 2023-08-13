@@ -117,6 +117,7 @@
       { "divider": true },
       { "subheader": "data-and-display" },
       "tables",
+      "virtual-scroller",
       { "divider": true },
       { "subheader": "grids" },
       "grids",
@@ -187,6 +188,14 @@
     "items": [
       "introduction",
       {
+        "title": "bottom-sheets",
+        "subfolder": "components"
+      },
+      {
+        "title": "data-iterators",
+        "subfolder": "components"
+      },
+      {
         "title": "data-tables",
         "subfolder": "components",
         "activeIcon": "",
@@ -194,6 +203,7 @@
         "items": [
           "basics",
           "headers",
+          "selection",
           "sorting",
           "pagination",
           "filtering",
@@ -204,11 +214,27 @@
         ]
       },
       {
+        "title": "dates",
+        "subfolder": "features"
+      },
+      {
+        "title": "date-pickers",
+        "subfolder": "components"
+      },
+      {
+        "title": "infinite-scroller",
+        "subfolder": "components"
+      },
+      {
+        "title": "otp-input",
+        "subfolder": "components"
+      },
+      {
         "title": "skeleton-loaders",
         "subfolder": "components"
       },
       {
-        "title": "virtual-scroller",
+        "title": "steppers",
         "subfolder": "components"
       }
     ]
@@ -220,7 +246,8 @@
     "items": [
       "jobs-for-vue",
       "ui-kits",
-      "themes"
+      "themes",
+      "search-engine"
     ]
   },
   {

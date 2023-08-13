@@ -11,7 +11,6 @@
     </v-system-bar>
 
     <v-navigation-drawer
-      absolute
       color="grey-lighten-3"
       rail
     >
@@ -99,9 +98,3 @@
     </v-footer>
   </v-app>
 </template>
-
-<script>
-  export default {
-    //
-  }
-</script>

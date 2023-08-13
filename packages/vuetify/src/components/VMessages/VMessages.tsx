@@ -5,43 +5,47 @@ import './VMessages.sass'
 import { VSlideYTransition } from '@/components/transitions'
 
 // Composables
-import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useTextColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, useRender, wrapInArray } from '@/util'
+import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { Component, PropType } from 'vue'
 
 export type VMessageSlot = {
   message: string
 }
 
 export type VMessagesSlots = {
-  message: [VMessageSlot]
+  message: VMessageSlot
 }
+
+export const makeVMessagesProps = propsFactory({
+  active: Boolean,
+  color: String,
+  messages: {
+    type: [Array, String] as PropType<string | readonly string[]>,
+    default: () => ([]),
+  },
+
+  ...makeComponentProps(),
+  ...makeTransitionProps({
+    transition: {
+      component: VSlideYTransition as Component,
+      leaveAbsolute: true,
+      group: true,
+    },
+  }),
+}, 'VMessages')
 
 export const VMessages = genericComponent<VMessagesSlots>()({
   name: 'VMessages',
 
-  props: {
-    active: Boolean,
-    color: String,
-    messages: {
-      type: [Array, String] as PropType<string | string[]>,
-      default: () => ([]),
-    },
-
-    ...makeTransitionProps({
-      transition: {
-        component: VSlideYTransition,
-        leaveAbsolute: true,
-        group: true,
-      },
-    }),
-  },
+  props: makeVMessagesProps(),
 
   setup (props, { slots }) {
     const messages = computed(() => wrapInArray(props.messages))
@@ -54,8 +58,12 @@ export const VMessages = genericComponent<VMessagesSlots>()({
         class={[
           'v-messages',
           textColorClasses.value,
+          props.class,
         ]}
-        style={ textColorStyles.value }
+        style={[
+          textColorStyles.value,
+          props.style,
+        ]}
         role="alert"
         aria-live="polite"
       >

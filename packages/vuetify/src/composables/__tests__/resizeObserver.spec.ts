@@ -2,9 +2,9 @@
 import { useResizeObserver } from '../resizeObserver'
 
 // Utilities
-import { h, nextTick } from 'vue'
-import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
+import { h, nextTick } from 'vue'
 
 describe('resizeObserver', () => {
   it('should make sure mock exists', async () => {

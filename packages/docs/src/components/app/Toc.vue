@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    v-if="!route.meta.fluid"
     id="app-toc"
     v-model="app.toc"
     color="background"
@@ -74,13 +75,17 @@
 
           <v-col class="d-inline-flex">
             <v-card
-              :color="dark ? undefined : 'grey-lighten-5'"
               :to="rpath('/introduction/sponsors-and-backers/')"
-              class="py-2 px-3 text-center"
-              variant="flat"
+              class="py-1 px-3 text-center"
+              color="primary"
+              variant="tonal"
               width="100%"
             >
-              <small class="text-disabled">Your logo here</small>
+              <div>
+                Support
+
+                <v-icon icon="$vuetify" />
+              </div>
             </v-card>
           </v-col>
 
@@ -91,7 +96,7 @@
               rel="noopener noreferrer sponsored"
               @click="onClickPromotion"
             >
-              <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/theme-selection-dashboard-2023/themeselection-promotion-banner.png" />
+              <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/theme-selection-dashboard-2023/vuetify-ad-banner.png" />
             </a>
           </v-col>
         </v-row>
@@ -256,7 +261,7 @@
   const dark = computed(() => theme.current.value.dark)
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
   #app-toc
     ul
       list-style-type: none
@@ -274,7 +279,7 @@
       li:not(.router-link-active)
         border-left-color: rgba(255, 255, 255, 0.5)
 
-    .v-navigation-drawer__content
+    :deep(.v-navigation-drawer__content)
       height: auto
       margin-right: 12px
 </style>

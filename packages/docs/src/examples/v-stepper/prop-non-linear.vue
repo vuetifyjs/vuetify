@@ -2,30 +2,30 @@
   <div>
     <v-stepper non-linear>
       <v-stepper-header>
-        <v-stepper-step
+        <v-stepper-item
           editable
-          step="1"
+          value="1"
         >
           Select campaign settings
-        </v-stepper-step>
+        </v-stepper-item>
 
         <v-divider></v-divider>
 
-        <v-stepper-step
+        <v-stepper-item
           editable
-          step="2"
+          value="2"
         >
           Create an ad group
-        </v-stepper-step>
+        </v-stepper-item>
 
         <v-divider></v-divider>
 
-        <v-stepper-step
-          step="3"
+        <v-stepper-item
+          value="3"
           editable
         >
           Create an ad
-        </v-stepper-step>
+        </v-stepper-item>
       </v-stepper-header>
     </v-stepper>
 
@@ -34,32 +34,32 @@
       non-linear
     >
       <v-stepper-header>
-        <v-stepper-step
+        <v-stepper-item
           complete
           editable
-          step="1"
+          value="1"
         >
           Select campaign settings
-        </v-stepper-step>
+        </v-stepper-item>
 
         <v-divider></v-divider>
 
-        <v-stepper-step
+        <v-stepper-item
           editable
-          step="2"
+          value="2"
         >
           Create an ad group
-        </v-stepper-step>
+        </v-stepper-item>
 
         <v-divider></v-divider>
 
-        <v-stepper-step
+        <v-stepper-item
           complete
           editable
-          step="3"
+          value="3"
         >
           Create an ad
-        </v-stepper-step>
+        </v-stepper-item>
       </v-stepper-header>
     </v-stepper>
 
@@ -69,33 +69,33 @@
       value="3"
     >
       <v-stepper-header>
-        <v-stepper-step
+        <v-stepper-item
           complete
           editable
-          step="1"
+          value="1"
         >
           Select campaign settings
-        </v-stepper-step>
+        </v-stepper-item>
 
         <v-divider></v-divider>
 
-        <v-stepper-step
+        <v-stepper-item
           complete
           editable
-          step="2"
+          value="2"
         >
           Create an ad group
-        </v-stepper-step>
+        </v-stepper-item>
 
         <v-divider></v-divider>
 
-        <v-stepper-step
+        <v-stepper-item
           complete
           editable
-          step="3"
+          value="3"
         >
           Create an ad
-        </v-stepper-step>
+        </v-stepper-item>
       </v-stepper-header>
     </v-stepper>
   </div>

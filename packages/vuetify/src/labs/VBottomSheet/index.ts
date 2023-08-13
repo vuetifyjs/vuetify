@@ -1,0 +1,1 @@
+export { VBottomSheet } from './VBottomSheet'

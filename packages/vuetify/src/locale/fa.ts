@@ -26,12 +26,21 @@ export default {
     lastPage: 'صفحه‌ی آخر',
     pageText: '{0} تا {1} از {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} انتخاب شده',
-    nextMonthAriaLabel: 'ماه بعد',
-    nextYearAriaLabel: 'سال بعد',
-    prevMonthAriaLabel: 'ماه قبل',
-    prevYearAriaLabel: 'سال قبل',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'داده‌ای موجود نیست',
   carousel: {
@@ -48,6 +57,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} پرونده',
@@ -68,10 +78,18 @@ export default {
       last: 'Last page',
     },
   },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
+  },
   rating: {
     ariaLabel: {
       item: 'Rating {0} of {1}',
     },
   },
   loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
+  },
 }

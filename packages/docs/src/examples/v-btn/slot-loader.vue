@@ -13,6 +13,16 @@
   </div>
 </template>
 
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const loading = ref(false)
+  watch(loading, val => {
+    if (!val) return
+    setTimeout(() => (loading.value = false), 2000)
+  })
+</script>
+
 <script>
   export default {
     data: () => ({

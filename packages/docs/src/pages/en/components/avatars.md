@@ -1,6 +1,6 @@
 ---
-nav: Avatars
 meta:
+  nav: Avatars
   title: Avatar component
   description: The avatar component is used to control the size and border radius of an image. It can be used with numerous components to provide better visual context.
   keywords: avatars, vuetify avatar component, vue avatar component
@@ -71,7 +71,7 @@ The `v-avatar` default slot allows you to render content such as `v-icon` compon
 
 <example file="v-avatar/slot-default" />
 
-<discovery />
+<promoted />
 
 ### Misc
 

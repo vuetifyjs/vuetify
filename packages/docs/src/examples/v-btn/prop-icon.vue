@@ -6,7 +6,7 @@
       </v-col>
 
       <v-col cols="auto">
-        <v-btn density="comfortable" icon="mdi-vuetify"></v-btn>
+        <v-btn density="comfortable" icon="$vuetify"></v-btn>
       </v-col>
 
       <v-col cols="auto">
@@ -24,7 +24,7 @@
       </v-col>
 
       <v-col cols="auto">
-        <v-btn icon="mdi-vuetify"></v-btn>
+        <v-btn icon="$vuetify"></v-btn>
       </v-col>
 
       <v-col cols="auto">

@@ -39,6 +39,20 @@
   </v-form>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const rules = {
+    required: value => !!value || 'Required.',
+    min: v => v.length >= 8 || 'Min 8 characters',
+    emailMatch: () => (`The email and password you entered don't match`),
+  }
+
+  const show1 = ref(false)
+  const show2 = ref(true)
+  const password = ref('Password')
+</script>
+
 <script>
   export default {
     data () {

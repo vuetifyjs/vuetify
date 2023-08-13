@@ -26,12 +26,21 @@ export default {
     lastPage: 'Dernière page',
     pageText: '{0}-{1} de {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} sélectionné(s)',
-    nextMonthAriaLabel: 'Le mois prochain',
-    nextYearAriaLabel: `L'année prochaine`,
-    prevMonthAriaLabel: 'Le mois précédent',
-    prevYearAriaLabel: 'Année précédente',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Aucune donnée disponible',
   carousel: {
@@ -48,6 +57,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} fichier(s)',
@@ -68,10 +78,18 @@ export default {
       last: 'Last page',
     },
   },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
+  },
   rating: {
     ariaLabel: {
       item: 'Note de {0} sur {1}',
     },
   },
   loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
+  },
 }

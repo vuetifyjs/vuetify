@@ -2,10 +2,10 @@
 import { useIcon } from '../icons'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { createVuetify } from '@/framework'
-import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
+import { defineComponent, toRef } from 'vue'
+import { createVuetify } from '@/framework'
 
 describe('icons.tsx', () => {
   const Component = defineComponent({
@@ -13,7 +13,7 @@ describe('icons.tsx', () => {
       icon: String,
     },
     setup (props) {
-      const { iconData } = useIcon(props)
+      const { iconData } = useIcon(toRef(props, 'icon'))
 
       return () => iconData.value.icon
     },

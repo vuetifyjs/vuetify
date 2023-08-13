@@ -1,7 +1,0 @@
-{
-  "props": {
-    "hideOverlay": "Hides the display of the overlay.",
-    "overlayColor": "Sets the overlay color.",
-    "overlayOpacity": "Sets the overlay opacity."
-  }
-}

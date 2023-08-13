@@ -26,12 +26,21 @@ export default {
     lastPage: 'Poslední strana',
     pageText: '{0}-{1} z {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} vybráno',
-    nextMonthAriaLabel: 'Příští měsíc',
-    nextYearAriaLabel: 'Příští rok',
-    prevMonthAriaLabel: 'Předchozí měsíc',
-    prevYearAriaLabel: 'Předchozí rok',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Nejsou dostupná žádná data',
   carousel: {
@@ -48,6 +57,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} souborů',
@@ -68,10 +78,18 @@ export default {
       last: 'Last page',
     },
   },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
+  },
   rating: {
     ariaLabel: {
       item: 'Hodnocení {0} z {1}',
     },
   },
   loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
+  },
 }

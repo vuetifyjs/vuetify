@@ -58,6 +58,11 @@ export const md3: Blueprint = {
     VTextField: {
       variant: 'filled',
     },
+    VToolbar: {
+      VBtn: {
+        color: null,
+      },
+    },
   },
   icons: {
     defaultSet: 'mdi',

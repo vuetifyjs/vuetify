@@ -64,24 +64,24 @@ $button-border: (
 
 $button-sizes: () !default;
 $button-sizes: map.merge(
-    (
-      'height': $button-height,
-      'font-size': $button-font-size,
-      'width-ratio': $button-width-ratio,
-      'padding-ratio': $button-padding-ratio
-    ),
-    $button-sizes
+  (
+    'height': $button-height,
+    'font-size': $button-font-size,
+    'width-ratio': $button-width-ratio,
+    'padding-ratio': $button-padding-ratio
+  ),
+  $button-sizes
 );
 
 $button-stacked-sizes: () !default;
 $button-stacked-sizes: map.merge(
-    (
-      'height': $button-stacked-height,
-      'font-size': $button-font-size,
-      'width-ratio': $button-stacked-width-ratio,
-      'padding-ratio': $button-stacked-padding-ratio
-    ),
-    $button-stacked-sizes
+  (
+    'height': $button-stacked-height,
+    'font-size': $button-font-size,
+    'width-ratio': $button-stacked-width-ratio,
+    'padding-ratio': $button-stacked-padding-ratio
+  ),
+  $button-stacked-sizes
 );
 
 $button-variants: (
@@ -90,4 +90,4 @@ $button-variants: (
   map.get($button-elevation, 'default'),
   $button-plain-opacity,
   'v-btn'
-);
+) !default;

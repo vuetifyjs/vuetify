@@ -1,0 +1,7 @@
+{
+  "props": {
+    "autoSelectFirst": "When searching, will always highlight the first option and select it on blur. `exact` will only highlight and select exact matches.",
+    "filter": "The filtering algorithm used when searching. [example](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L40)",
+    "noFilter": "Do not apply filtering when searching. Useful when data is being filtered server side"
+  }
+}

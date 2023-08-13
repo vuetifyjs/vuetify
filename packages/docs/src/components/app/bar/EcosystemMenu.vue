@@ -27,6 +27,11 @@
   const items = computed(() => ([
     { subheader: t('social') },
     {
+      title: 'X',
+      href: 'https://x.com/vuetifyjs',
+      appendIcon: '$x',
+    },
+    {
       title: 'Discord',
       href: 'https://community.vuetifyjs.com/',
       appendIcon: 'mdi-discord',
@@ -37,11 +42,6 @@
       appendIcon: 'mdi-github',
     },
     {
-      title: 'twitter',
-      href: 'https://twitter.com/vuetifyjs',
-      appendIcon: 'mdi-twitter',
-    },
-    {
       title: 'reddit',
       href: 'https://reddit.com/r/vuetifyjs',
       appendIcon: 'mdi-reddit',
@@ -49,24 +49,24 @@
     { divider: true },
     { subheader: t('tools') },
     {
+      title: 'playground',
+      href: 'https://play.vuetifyjs.com/',
+      appendIcon: 'mdi-play-circle-outline',
+    },
+    {
       title: 'jobs',
       to: rpath('/resources/jobs-for-vue/'),
       appendIcon: 'mdi-briefcase-variant-outline',
     },
     {
       title: 'themes',
-      href: 'https://store.vuetifyjs.com/collections/vuetify-3',
+      to: rpath('/resources/themes/'),
       appendIcon: 'mdi-shape-outline',
     },
     {
       title: 'ui-kits',
       to: rpath('/resources/ui-kits/'),
       appendIcon: 'mdi-vector-difference-ab',
-    },
-    {
-      title: 'playground',
-      href: 'https://play.vuetifyjs.com/',
-      appendIcon: 'mdi-play-circle-outline',
     },
     { divider: true },
     { subheader: t('documentation') },

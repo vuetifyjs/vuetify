@@ -10,6 +10,9 @@
 .v-switch__loader
   display: flex
 
+  .v-progress-circular
+    color: $switch-loader-color
+
 .v-switch__track,
 .v-switch__thumb
   background-color: currentColor
@@ -62,9 +65,6 @@
   .v-selection-control
     min-height: var(--v-input-control-height)
 
-  .v-selection-control__wrapper
-    width: auto
-
   .v-selection-control__input
     border-radius: 50%
     transition: $switch-control-input-transition
@@ -81,3 +81,7 @@
     .v-switch__thumb
       transform: scale(.75)
       box-shadow: none
+
+  &.v-switch--inset
+    .v-selection-control__wrapper
+      width: auto

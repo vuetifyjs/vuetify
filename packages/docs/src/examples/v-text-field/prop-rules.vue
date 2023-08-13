@@ -11,6 +11,12 @@
   </v-responsive>
 </template>
 
+<script setup>
+  const rules = {
+    required: value => !!value || 'Field is required',
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

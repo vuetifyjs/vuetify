@@ -8,6 +8,12 @@
   ></v-switch>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const model = ref('no')
+</script>
+
 <script>
   export default {
     data: () => ({

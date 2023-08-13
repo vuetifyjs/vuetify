@@ -1,5 +1,6 @@
-import type { TouchStoredHandlers } from './directives/touch'
+// Types
 import type { Events, VNode } from 'vue'
+import type { TouchStoredHandlers } from './directives/touch'
 
 declare global {
   interface HTMLCollection {
@@ -65,6 +66,30 @@ declare global {
     ): void
   }
 
+  interface MouseEvent {
+    sourceCapabilities?: { firesTouchEvents: boolean }
+  }
+
+  interface ColorSelectionOptions {
+    signal?: AbortSignal
+  }
+
+  interface ColorSelectionResult {
+    sRGBHex: string
+  }
+
+  interface EyeDropper {
+    open: (options?: ColorSelectionOptions) => Promise<ColorSelectionResult>
+  }
+
+  interface EyeDropperConstructor {
+    new (): EyeDropper
+  }
+
+  interface Window {
+    EyeDropper: EyeDropperConstructor
+  }
+
   function parseInt(s: string | number, radix?: number): number
   function parseFloat(string: string | number): number
 
@@ -86,7 +111,6 @@ declare module '@vue/runtime-core' {
   }
 
   export interface ComponentInternalInstance {
-    ctx: Record<string, unknown>
     provides: Record<string, unknown>
     setupState: any
   }
