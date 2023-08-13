@@ -76,9 +76,7 @@
         })
         return arr
       }, []).sort((a: any, b: any) => a.name.localeCompare(b.name))
-    } catch (err) {
-      console.error(err)
-    }
+    } catch (err) {}
   }
 
   fetchApiData()

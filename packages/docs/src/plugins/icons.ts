@@ -103,6 +103,7 @@ export {
   mdiClipboardMultipleOutline,
   mdiClipboardTextOutline,
   mdiCrosshairsGps,
+  mdiDatabaseSearchOutline,
   mdiDelete,
   mdiDeleteOutline,
   mdiDesktopTowerMonitor,

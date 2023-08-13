@@ -1,29 +1,30 @@
 <template>
-  <v-container>
-    <v-row justify="center">
-      <v-col
-        v-for="({ icon, text, ...attrs }, i) in buttons"
-        :key="`home-btn-${i}`"
-        cols="auto"
+  <v-row :justify="mdAndDown ? 'center' : undefined">
+    <v-col
+      v-for="({ icon, text, ...attrs }, i) in buttons"
+      :key="`home-btn-${i}`"
+      cols="auto"
+    >
+      <v-btn
+        :min-width="btnWidth"
+        v-bind="attrs"
+        class="text-none"
+        size="x-large"
       >
-        <v-btn
-          :min-width="btnWidth"
-          v-bind="attrs"
-          class="text-none"
-          size="x-large"
-        >
-          <v-icon :icon="icon" start />
-          {{ t(text) }}
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
+        <v-icon :icon="icon" start />
+        {{ t(text) }}
+      </v-btn>
+    </v-col>
+  </v-row>
 </template>
 
 <script setup>
   // Composables
-  import { useI18n } from 'vue-i18n'
   import { rpath } from '@/util/routes'
+  import { useDisplay } from 'vuetify'
+  import { useI18n } from 'vue-i18n'
+
+  const { mdAndDown } = useDisplay()
 
   const { t } = useI18n()
 
@@ -53,5 +54,5 @@
       text: 'github',
     },
   ]
-  const btnWidth = 228
+  const btnWidth = 215
 </script>
