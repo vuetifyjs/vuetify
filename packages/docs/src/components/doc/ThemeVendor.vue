@@ -13,8 +13,11 @@
       <app-btn
         :href="vendor.moreUrl"
         :text="`See More Themes from ${vendor.name}`"
-        size="large"
+        append-icon="mdi-open-in-new"
         color="primary"
+        size="large"
+        target="_blank"
+        rel="noopener noreferrer"
         variant="outlined"
       />
     </v-col>
