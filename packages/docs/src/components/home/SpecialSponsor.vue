@@ -28,5 +28,5 @@
 
   const store = useSponsorsStore()
 
-  const hasSpecialSponsor = computed(() => store.byTier[-2].length > 0)
+  const hasSpecialSponsor = computed(() => store.byTier[-2]?.length > 0)
 </script>
