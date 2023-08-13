@@ -15,6 +15,7 @@ export type DataTableHeader = {
 
   fixed?: boolean
   align?: 'start' | 'end' | 'center'
+  cellClass?: any
 
   width?: number | string
   minWidth?: string

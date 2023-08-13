@@ -50,6 +50,9 @@ export const VDataTableRow = defineComponent({
             lastFixed={ column.lastFixed }
             noPadding={ column.key === 'data-table-select' || column.key === 'data-table-expand' }
             width={ column.width }
+            class={[
+              column.cellClass,
+            ]}
           >
             {{
               default: () => {
