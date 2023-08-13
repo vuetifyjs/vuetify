@@ -4,20 +4,21 @@ meta:
   description: Vuetify provides automatic treeshaking via the vuetify-loader. Use only the features that you need and drastically reduce your package bundle size.
   keywords: a la carte, a-la-carte, vuetify single import, vuetify import, component importing, reduce vuetify size, treeshaking, tree shaking
 related:
-  - /getting-started/unit-testing/
+  - /features/sass-variables/
   - /features/blueprints/
   - /introduction/why-vuetify/
 ---
 
 # Treeshaking
 
-Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small bundle size may be a requirement. Treeshaking enables you to drastically lower your build size by only including the components you actually use in the final bundle.
+Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small bundle size may be a requirement.
 
 <entry />
 
 ## Automatic treeshaking
 
-Vuetify comes with plugins for both webpack and vite that enable automatic treeshaking.  \
+Treeshaking enables you to drastically lower your build size by only including the components you actually use in the final bundle. Vuetify comes with plugins for both [Webpack](https://webpack.js.org/) and [vite](https://vitejs.dev/) that enable automatic treeshaking.
+
 Install [`webpack-plugin-vuetify`](https://www.npmjs.com/package/webpack-plugin-vuetify) or [`vite-plugin-vuetify`](https://www.npmjs.com/package/vite-plugin-vuetify) then enable it in your bundler configuration. Make sure the vuetify plugin comes after the vue plugin or it won't work correctly.
 
 ::: tabs
@@ -77,7 +78,7 @@ export default defineNuxtConfig({
 
 And that's it! Vuetify components and directives will be automatically imported into your application wherever they are used. If you had any wildcard imports they can now be removed.
 
-```diff { resource="main.js" }
+```diff { resource="src/main.js" }
   import 'vuetify/styles'
   import { createVuetify } from 'vuetify'
 - import * as components from 'vuetify/components'
@@ -114,7 +115,7 @@ export default vuetify
 
 You can also import components locally in .vue files, as seen below.
 
-```html
+```html { resource="Component.vue" }
 <template>
   <v-card>
     <v-card-title>...</v-card-title>
@@ -122,16 +123,8 @@ You can also import components locally in .vue files, as seen below.
   </v-card>
 </template>
 
-<script>
+<script setup>
   import { VCard, VCardText, VCardTitle } from 'vuetify/components/VCard'
-
-  export default {
-    components: {
-      VCard,
-      VCardText,
-      VCardTitle,
-    },
-  }
 </script>
 ```
 
@@ -172,19 +165,17 @@ export default new Vuetify(opts)
 
 Dynamic components using `<component>` can be registered locally:
 
-```html
+```html { resource="Component.vue" }
 <template>
   <component :is="button ? 'v-btn' : 'v-chip'" />
 </template>
 
-<script>
+<script setup>
   import { VBtn } from 'vuetify/components/VBtn'
   import { VChip } from 'vuetify/components/VChip'
+  import { shallowRef } from 'vue'
 
-  export default {
-    components: { VBtn, VChip },
-    data: () => ({ button: false }),
-  }
+  const btn = shallowRef(false)
 </script>
 ```
 
