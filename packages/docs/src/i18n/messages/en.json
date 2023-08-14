@@ -20,6 +20,7 @@
     "slots": "Slots",
     "exposed": "Exposed"
   },
+  "api-explorer": "API Explorer",
   "application": "Application",
   "apply": "Apply",
   "bars": "Bars",
@@ -70,6 +71,7 @@
   "copy-example-source": "Copy example source",
   "copy-source": "Copy source",
   "copyright": "Copyright {0}",
+  "create": "Create",
   "customization": "Customization",
   "dark": "Dark",
   "data-tables": "Data tables",

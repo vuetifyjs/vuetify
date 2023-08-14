@@ -55,6 +55,11 @@
       href: 'https://github.com/vuetifyjs/vuetify/discussions',
       appendIcon: 'mdi-message-text-outline',
     },
+    {
+      title: 'stack-overflow',
+      href: 'https://stackoverflow.com/search?q=vuetify',
+      appendIcon: 'mdi-layers-outline',
+    },
     { divider: true },
     { subheader: t('resources') },
     {
@@ -66,11 +71,6 @@
       title: 'documentation-status',
       href: 'https://status.vuetifyjs.com/',
       appendIcon: 'mdi-cloud-outline',
-    },
-    {
-      title: 'stack-overflow',
-      href: 'https://stackoverflow.com/search?q=vuetify',
-      appendIcon: 'mdi-layers-outline',
     },
     {
       title: 'latest-releases',
