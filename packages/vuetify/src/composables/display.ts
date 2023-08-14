@@ -222,7 +222,7 @@ export function useDisplay (props: DisplayProps = {}) {
 
   if (!display) throw new Error('Could not find Vuetify display injection')
 
-  const isMobile = computed(() => {
+  const isLocalMobile = computed(() => {
     if (!props.mobileBreakpoint) return display.mobile.value
 
     const breakpointValue = typeof props.mobileBreakpoint === 'number'
@@ -232,5 +232,5 @@ export function useDisplay (props: DisplayProps = {}) {
     return display.width.value < breakpointValue
   })
 
-  return { ...display, isMobile }
+  return { ...display, isLocalMobile }
 }

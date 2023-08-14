@@ -66,7 +66,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
   setup (props, { slots }) {
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
-    const { isMobile } = useDisplay(props)
+    const { isLocalMobile } = useDisplay(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { locationStyles } = useLocation(props)
@@ -90,7 +90,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
           class={[
             'v-banner',
             {
-              'v-banner--stacked': props.stacked || isMobile.value,
+              'v-banner--stacked': props.stacked || isLocalMobile.value,
               'v-banner--sticky': props.sticky,
               [`v-banner--${props.lines}-line`]: !!props.lines,
             },
