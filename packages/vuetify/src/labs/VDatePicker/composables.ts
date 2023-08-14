@@ -36,7 +36,7 @@ export function createDatePicker (props: DateProps) {
   })
 
   // TODO: This composable should probably not live in DateInput
-  const { model, displayDate, viewMode, inputMode } = createDateInput(props, !!props.multiple)
+  const { model, displayDate, viewMode, inputMode, isEqual } = createDateInput(props, !!props.multiple)
 
   return {
     hoverDate,
@@ -48,6 +48,7 @@ export function createDatePicker (props: DateProps) {
     displayDate,
     viewMode,
     inputMode,
+    isEqual,
   }
 }
 

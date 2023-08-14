@@ -47,6 +47,14 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
 export const makeSelectProps = propsFactory({
   chips: Boolean,
   closableChips: Boolean,
+  closeText: {
+    type: String,
+    default: '$vuetify.close',
+  },
+  openText: {
+    type: String,
+    default: '$vuetify.open',
+  },
   eager: Boolean,
   hideNoData: Boolean,
   hideSelected: Boolean,
@@ -77,6 +85,7 @@ export const makeVSelectProps = propsFactory({
   ...makeSelectProps(),
   ...omit(makeVTextFieldProps({
     modelValue: null,
+    role: 'button',
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
   ...makeTransitionProps({ transition: { component: VDialogTransition as Component } }),
 }, 'VSelect')
@@ -154,6 +163,7 @@ export const VSelect = genericComponent<new <
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
     const isFocused = shallowRef(false)
+    const label = computed(() => menu.value ? props.closeText : props.openText)
 
     let keyboardLookupPrefix = ''
     let keyboardLookupLastTime: number
@@ -311,6 +321,8 @@ export const VSelect = genericComponent<new <
           onMousedown:control={ onMousedownControl }
           onBlur={ onBlur }
           onKeydown={ onKeydown }
+          aria-label={ t(label.value) }
+          title={ t(label.value) }
         >
           {{
             ...slots,

@@ -1,5 +1,6 @@
 export default {
   badge: 'Huy hiệu',
+  open: 'Open',
   close: 'Đóng',
   dataIterator: {
     noResultsText: 'Không tìm thấy kết quả nào',
