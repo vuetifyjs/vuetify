@@ -63,6 +63,11 @@
     { divider: true },
     { subheader: t('resources') },
     {
+      title: 'brand-kit',
+      to: rpath('/resources/brand-kit/'),
+      appendIcon: 'mdi-image-outline',
+    },
+    {
       title: 'github-issues',
       href: 'https://github.com/vuetifyjs/vuetify/issues/',
       appendIcon: 'mdi-alert-circle-outline',
