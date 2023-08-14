@@ -25,7 +25,7 @@
           <template #default="{ isHovering, props }">
             <v-sheet
               border
-              class="px-2 py-2 d-inline-flex align-center text-mono text-body-2"
+              class="px-2 py-2 d-inline-flex align-center text-mono text-body-2 text-no-wrap"
               color="grey-lighten-3"
               rounded
               width="215"
