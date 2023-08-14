@@ -87,7 +87,7 @@
 
       <v-col cols="12" class="pb-0 font-weight-bold">{{ t('icon') }}</v-col>
 
-      <v-col v-for="icon in icons" :key="icon.title">
+      <v-col v-for="icon in icons" :key="icon.title" cols="auto">
         <v-sheet
           rounded
           border
