@@ -1,5 +1,5 @@
 // Composables
-import { createDisplay } from '../display'
+import { createDisplay, makeDisplayProps, useDisplay } from '../display'
 
 // Utilities
 import { describe, expect, it } from '@jest/globals'

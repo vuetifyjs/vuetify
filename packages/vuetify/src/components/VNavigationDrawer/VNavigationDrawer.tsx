@@ -103,7 +103,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const { borderClasses } = useBorder(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { elevationClasses } = useElevation(props)
-    const { isLocalMobile } = useDisplay(props)
+    const { displayClasses, isLocalMobile } = useDisplay(props)
     const { roundedClasses } = useRounded(props)
     const router = useRouter()
     const isActive = useProxiedModel(props, 'modelValue', null, v => !!v)
@@ -230,6 +230,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               themeClasses.value,
               backgroundColorClasses.value,
               borderClasses.value,
+              displayClasses.value,
               elevationClasses.value,
               roundedClasses.value,
               props.class,

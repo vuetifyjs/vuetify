@@ -66,7 +66,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
   setup (props, { slots }) {
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
-    const { isLocalMobile } = useDisplay(props)
+    const { displayClasses, isLocalMobile } = useDisplay(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { locationStyles } = useLocation(props)
@@ -96,6 +96,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
             },
             borderClasses.value,
             densityClasses.value,
+            displayClasses.value,
             elevationClasses.value,
             positionClasses.value,
             roundedClasses.value,

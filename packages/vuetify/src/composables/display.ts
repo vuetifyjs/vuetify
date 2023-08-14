@@ -1,6 +1,6 @@
 // Utilities
 import { computed, inject, reactive, shallowRef, toRefs, watchEffect } from 'vue'
-import { mergeDeep, propsFactory } from '@/util'
+import { getCurrentInstanceName, mergeDeep, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
@@ -217,7 +217,10 @@ export const makeDisplayProps = propsFactory({
   mobileBreakpoint: [Number, String] as PropType<number | DisplayBreakpoint>,
 }, 'display')
 
-export function useDisplay (props: DisplayProps = {}) {
+export function useDisplay (
+  props: DisplayProps = {},
+  name = getCurrentInstanceName(),
+) {
   const display = inject(DisplaySymbol)
 
   if (!display) throw new Error('Could not find Vuetify display injection')
@@ -232,5 +235,11 @@ export function useDisplay (props: DisplayProps = {}) {
     return display.width.value < breakpointValue
   })
 
-  return { ...display, isLocalMobile }
+  const displayClasses = computed(() => {
+    if (!name) return {}
+
+    return { [`${name}--mobile`]: isLocalMobile.value }
+  })
+
+  return { ...display, displayClasses, isLocalMobile }
 }

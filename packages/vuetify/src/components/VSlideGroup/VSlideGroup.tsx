@@ -86,7 +86,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
 
   setup (props, { slots }) {
     const { isRtl } = useRtl()
-    const { isLocalMobile } = useDisplay(props)
+    const { displayClasses, isLocalMobile } = useDisplay(props)
     const group = useGroup(props, props.symbol)
     const isOverflowing = shallowRef(false)
     const scrollOffset = shallowRef(0)
@@ -350,6 +350,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
             'v-slide-group--has-affixes': hasAffixes.value,
             'v-slide-group--is-overflowing': isOverflowing.value,
           },
+          displayClasses.value,
           props.class,
         ]}
         style={ props.style }
