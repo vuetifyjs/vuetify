@@ -124,6 +124,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
 
       if (val[0] && oldVal[0]) {
         isReversing.value = adapter.isBefore(val[0], oldVal[0])
+        inputModel.value = val.map(date => adapter.format(date, 'keyboardDate'))
       }
     })
 
