@@ -1,9 +1,16 @@
 <template>
   <div>
-    <app-title
+    <v-label
       v-if="title"
-      :path="title"
-      class="mb-0 ps-1"
+      :text="te(title) ? t(title) : title"
+      class="mb-2"
+    />
+
+    <v-messages
+      v-if="text"
+      :messages="te(text) ? t(text) : text"
+      active
+      class="mb-4"
     />
 
     <v-item-group
@@ -15,13 +22,13 @@
     >
       <v-row>
         <v-col
-          v-for="({ icon, text }) in items"
-          :key="text"
+          v-for="({ icon, text: itext }) in items"
+          :key="itext"
           cols="6"
         >
-          <v-item v-slot="{ isSelected, toggle }" :value="text">
+          <v-item v-slot="{ isSelected, toggle }" :value="itext">
             <v-btn
-              :ref="'item-' + text"
+              :ref="'item-' + itext"
               :color="isSelected ? 'primary' : `grey-${isDark ? 'darken' : 'lighten'}-3`"
               :append-icon="icon"
               class="px-4 text-capitalize justify-space-between text-body-2"
@@ -30,7 +37,7 @@
               size="large"
               @click="toggle"
             >
-              {{ t(text) }}
+              {{ t(itext) }}
             </v-btn>
           </v-item>
         </v-col>
@@ -49,6 +56,7 @@
 
   defineProps({
     title: String,
+    text: String,
     modelValue: null,
     items: Array as PropType<{ icon: string, text: string }[]>,
     multiple: Boolean,
@@ -58,7 +66,7 @@
     'update:modelValue': (value: string) => true,
   })
 
-  const { t } = useI18n()
+  const { t, te } = useI18n()
   const theme = useTheme()
 
   const isDark = computed(() => theme.current.value.dark)

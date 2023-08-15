@@ -1,53 +1,18 @@
 <template>
-  <banner-option />
+  <theme-option />
 
   <br>
 
-  <notifications-option />
+  <code-option />
 
   <br>
 
-  <quickbar-option />
-
-  <br>
-
-  <developer-mode />
-
-  <br>
-
-  <v-footer
-    app
-    absolute
-    class="text-caption justify-end text-medium-emphasis"
-    height="47"
-  >
-    <v-btn
-      variant="flat"
-      size="small"
-      color="error"
-      @click="onResetAll"
-    >
-      Reset All
-    </v-btn>
-  </v-footer>
+  <api-option />
 </template>
 
 <script setup>
   // Components
-  import BannerOption from './options/BannerOption.vue'
-  import DeveloperMode from './DeveloperMode.vue'
-  import NotificationsOption from './options/NotificationsOption.vue'
-  import QuickbarOption from './options/QuickbarOption.vue'
-
-  // Stores
-  import { useUserStore } from '@/store/user'
-
-  const user = useUserStore()
-
-  function onResetAll () {
-    user.notifications.read = []
-    user.notifications.show = true
-    user.notifications.last.banner = []
-    user.quickbar = true
-  }
+  import ApiOption from '@/components/app/settings/options/ApiOption.vue'
+  import CodeOption from '@/components/app/settings/options/CodeOption.vue'
+  import ThemeOption from '@/components/app/settings/options/ThemeOption.vue'
 </script>
