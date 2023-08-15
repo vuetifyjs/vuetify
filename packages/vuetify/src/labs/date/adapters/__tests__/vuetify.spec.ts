@@ -10,11 +10,11 @@ describe('vuetify date adapter', () => {
   it('should return weekdays based on locale', () => {
     let instance = new VuetifyDateAdapter({ locale: 'en-us' })
 
-    expect(instance.getWeekdays()).toStrictEqual(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'])
+    expect(instance.getWeekdays()).toStrictEqual(['S', 'M', 'T', 'W', 'T', 'F', 'S'])
 
     instance = new VuetifyDateAdapter({ locale: 'sv-se' })
 
-    expect(instance.getWeekdays()).toStrictEqual(['mån', 'tis', 'ons', 'tors', 'fre', 'lör', 'sön'])
+    expect(instance.getWeekdays()).toStrictEqual(['M', 'T', 'O', 'T', 'F', 'L', 'S'])
   })
 
   it('should format dates', () => {

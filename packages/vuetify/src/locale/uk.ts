@@ -1,5 +1,6 @@
 export default {
   badge: 'Знак',
+  open: 'Open',
   close: 'Закрити',
   dataIterator: {
     noResultsText: 'В результаті пошуку нічого не знайдено',

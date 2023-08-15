@@ -81,16 +81,7 @@ Create a **main.scss** file in your **src/styles** directory and update the styl
 + import '@/styles/main.scss'
 ```
 
-Within your style file, import the Vuetify styles and specify the variables you want to override, that's it. This is useful when you want to make changes to the global theme or utility classes.
-
-The following example turns off all utility classes and color packs:
-
-```scss { resource="src/styles/main.scss" }
-@use 'vuetify' with (
-  $utilities: false,
-  $color-pack: false,
-);
-```
+Within your style file, import the Vuetify styles and specify the variables you want to override, that's it.
 
 ::: warning
 
@@ -106,7 +97,6 @@ Follow the plugin setup guide from [treeshaking](/features/treeshaking/) then ad
 
 ```scss { resource="src/styles/settings.scss" }
 @use 'vuetify/settings' with (
-  $utilities: false,
   $button-height: 40px,
 );
 ```
@@ -150,6 +140,106 @@ Keep in mind that to obtain settings from Vuetify, you must forward its variable
 ```diff { resource="src/styles/settings.scss" }
 - @use 'vuetify/settings' with (
 + @forward 'vuetify/settings' with (
+```
+
+## Disabling utility classes
+
+Utility classes are a powerful feature of Vuetify, but they can also be unnecessary for some projects. Each utility class is generated with a set of options that are defined [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_utilities.scss). Disable individual classes by setting their corresponding variable to `false`:
+
+```scss { resource="src/styles/settings.scss" }
+@forward 'vuetify/settings' with (
+  $utilities: (
+    "align-content": false,
+    "align-items": false,
+    "align-self": false,
+    "border-bottom": false,
+    "border-end": false,
+    "border-opacity": false,
+    "border-start": false,
+    "border-style": false,
+    "border-top": false,
+    "border": false,
+    "display": false,
+    "flex-direction": false,
+    "flex-grow": false,
+    "flex-shrink": false,
+    "flex-wrap": false,
+    "flex": false,
+    "float-ltr": false,
+    "float-rtl": false,
+    "float": false,
+    "font-italic": false,
+    "font-weight": false,
+    "justify-content": false,
+    "margin-bottom": false,
+    "margin-end": false,
+    "margin-left": false,
+    "margin-right": false,
+    "margin-start": false,
+    "margin-top": false,
+    "margin-x": false,
+    "margin-y": false,
+    "margin": false,
+    "negative-margin-bottom": false,
+    "negative-margin-end": false,
+    "negative-margin-left": false,
+    "negative-margin-right": false,
+    "negative-margin-start": false,
+    "negative-margin-top": false,
+    "negative-margin-x": false,
+    "negative-margin-y": false,
+    "negative-margin": false,
+    "order": false,
+    "overflow-wrap": false,
+    "overflow-x": false,
+    "overflow-y": false,
+    "overflow": false,
+    "padding-bottom": false,
+    "padding-end": false,
+    "padding-left": false,
+    "padding-right": false,
+    "padding-start": false,
+    "padding-top": false,
+    "padding-x": false,
+    "padding-y": false,
+    "padding": false,
+    "rounded-bottom-end": false,
+    "rounded-bottom-start": false,
+    "rounded-bottom": false,
+    "rounded-end": false,
+    "rounded-start": false,
+    "rounded-top-end": false,
+    "rounded-top-start": false,
+    "rounded-top": false,
+    "rounded": false,
+    "text-align": false,
+    "text-decoration": false,
+    "text-mono": false,
+    "text-opacity": false,
+    "text-overflow": false,
+    "text-transform": false,
+    "typography": false,
+    "white-space": false,
+  ),
+);
+```
+
+To disable all utility classes, set the entire `$utilities` variable to `false`:
+
+```scss { resource="src/styles/settings.scss" }
+@forward 'vuetify/settings' with (
+  $utilities: false,
+);
+```
+
+## Disabling color packs
+
+Color packs are handy for quickly applying a color to a component but mostly unused in production. To disable them, set the `$color-pack` variable to `false`:
+
+```scss { resource="src/styles/settings.scss" }
+@forward 'vuetify/settings' with (
+  $color-pack: false,
+);
 ```
 
 ## Caveats

@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Global configuration
   description: Vuetify.config is an object containing global configuration options that modify the bootstrapping of your project.

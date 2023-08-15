@@ -35,6 +35,7 @@ export const makeVTextFieldProps = propsFactory({
   persistentPlaceholder: Boolean,
   persistentCounter: Boolean,
   suffix: String,
+  role: String,
   type: {
     type: String,
     default: 'text',
@@ -194,7 +195,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                 onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
-                role="textbox"
+                role={ props.role }
                 { ...fieldProps }
                 id={ id.value }
                 active={ isActive.value || isDirty.value }

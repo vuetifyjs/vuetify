@@ -249,7 +249,6 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                 onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
-                role="textbox"
                 { ...fieldProps }
                 active={ isActive.value || isDirty.value }
                 centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }

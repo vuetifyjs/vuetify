@@ -83,6 +83,8 @@
 
     @if ($button-colored-disabled)
       opacity: $button-disabled-opacity
+      &:hover
+        opacity: $button-disabled-opacity
     @else
       opacity: 1
       &.v-btn
@@ -145,6 +147,9 @@
 
   &--rounded
     @include tools.rounded($button-rounded-border-radius)
+
+    &.v-btn--icon
+      @include tools.rounded($button-border-radius)
 
   .v-icon
     --v-icon-size-multiplier: #{calc(18/21)}
