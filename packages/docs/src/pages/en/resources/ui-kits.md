@@ -9,10 +9,6 @@ related:
   - /getting-started/installation/
 ---
 
-<script setup>
-  import VuetifyUiKits from '@/components/doc/VuetifyUiKits.vue'
-</script>
-
 # Vuetify UI Kits
 
 Easily create design prototypes with Figma components that match Vuetify's.
@@ -35,15 +31,3 @@ The Vuetify UI Kit is a free component plugin for Figma that streamlines buildin
   ![UI Kit New Design File](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-new-design-file.png) { class="mb-n4" }
 6. Access components within your projects by selecting **Assets** and then searching for the desired component:
   ![UI Kit Search Assets](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-search-assets.png)
-
-<entry />
-
-## All kits
-
-Below is a collection of all UI Kits available on our store:
-
-<vuetify-ui-kits />
-
-::: info
-  Whenever a new version is released you will receive a new download link with the latest update via email.
-:::

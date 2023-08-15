@@ -7,7 +7,7 @@ meta:
 related:
   - /introduction/enterprise-support/
   - /introduction/roadmap/
-  - /introduction/meet-the-team/
+  - /about/meet-the-team/
 ---
 
 # Sponsor Vuetify development
