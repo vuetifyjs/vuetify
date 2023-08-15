@@ -72,6 +72,7 @@ export const makeVAutocompleteProps = propsFactory({
   ...makeSelectProps(),
   ...omit(makeVTextFieldProps({
     modelValue: null,
+    role: 'combobox',
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
   ...makeTransitionProps({ transition: false }),
 }, 'VAutocomplete')
@@ -127,6 +128,7 @@ export const VAutocomplete = genericComponent<new <
     })
     const selectionIndex = shallowRef(-1)
     const color = computed(() => vTextFieldRef.value?.color)
+    const label = computed(() => menu.value ? props.closeText : props.openText)
     const { items, transformIn, transformOut } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(color)
     const search = useProxiedModel(props, 'search', '')
@@ -573,6 +575,8 @@ export const VAutocomplete = genericComponent<new <
                     icon={ props.menuIcon }
                     onMousedown={ onMousedownMenuIcon }
                     onClick={ noop }
+                    aria-label={ t(label.value) }
+                    title={ t(label.value) }
                   />
                 ) : undefined }
               </>

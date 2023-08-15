@@ -33,6 +33,12 @@ While `v-bottom navigation` is meant to be used with [vue-router](https://router
 
 <api-inline hide-links />
 
+::: info
+
+For styles to apply properly when using the **shift** prop, `v-btn` text is **required** to be wrapped in a `span` tag.
+
+:::
+
 ## Examples
 
 ### Props

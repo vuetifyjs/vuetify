@@ -1,5 +1,6 @@
 export default {
   badge: 'Insígnia',
+  open: 'Open',
   close: 'Tancar',
   dataIterator: {
     noResultsText: 'Sense dades per mostrar',

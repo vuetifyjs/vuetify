@@ -229,6 +229,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         name: 'vuetify:example-blocks',
         transform (code, id) {
           const type = id.includes('vue&type=playground-resources') ? 'playgroundResources'
+            : id.includes('vue&type=playground-setup') ? 'playgroundSetup'
             : null
           if (!type) return
 
