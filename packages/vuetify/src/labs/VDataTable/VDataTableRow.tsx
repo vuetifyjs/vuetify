@@ -20,6 +20,7 @@ export const makeVDataTableRowProps = propsFactory({
   index: Number as PropType<Number>,
   item: Object as PropType<DataTableItem>,
   onClick: Function as PropType<(e: MouseEvent) => void>,
+  onDblclick: Function as PropType<(e: MouseEvent) => void>,
 }, 'VDataTableRow')
 
 export const VDataTableRow = defineComponent({
@@ -41,6 +42,7 @@ export const VDataTableRow = defineComponent({
           },
         ]}
         onClick={ props.onClick }
+        onDblclick={ props.onDblclick }
       >
         { props.item && columns.value.map((column, i) => (
           <VDataTableColumn
