@@ -18,9 +18,9 @@ import { computed, ref } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { VInputSlot, VInputSlots } from '@/components/VInput/VInput'
 import type { VSliderThumbSlots } from './VSliderThumb'
 import type { VSliderTrackSlots } from './VSliderTrack'
+import type { VInputSlot, VInputSlots } from '@/components/VInput/VInput'
 
 export type VSliderSlots = VInputSlots & VSliderThumbSlots & VSliderTrackSlots & {
   label: VInputSlot
