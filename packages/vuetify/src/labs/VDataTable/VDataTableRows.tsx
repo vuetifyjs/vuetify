@@ -69,6 +69,7 @@ export const makeVDataTableRowsProps = propsFactory({
   },
   rowHeight: Number,
   'onClick:row': Function as PropType<(e: Event, value: { item: DataTableItem }) => void>,
+  'onDblclick:row': Function as PropType<(e: Event, value: { item: DataTableItem }) => void>,
 }, 'VDataTableRows')
 
 export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
@@ -153,6 +154,7 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
                   }
                   props['onClick:row']?.(event, { item })
                 } : undefined,
+                onDblclick: props['onDblclick:row']? (event: Event) => props['onDblclick:row']?.(event, { item }) : undefined,
                 index,
                 item,
               },
