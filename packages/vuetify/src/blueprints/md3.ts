@@ -28,6 +28,7 @@ export const md3: Blueprint = {
     },
     VCheckbox: {
       color: 'secondary',
+      inset: true,
     },
     VChip: {
       rounded: 'sm',

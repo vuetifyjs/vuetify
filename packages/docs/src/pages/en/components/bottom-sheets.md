@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Bottom sheets
   title: Bottom sheet component
