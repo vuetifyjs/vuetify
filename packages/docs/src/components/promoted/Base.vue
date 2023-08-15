@@ -2,7 +2,6 @@
   <v-lazy
     :min-height="minHeight"
     class="d-flex"
-    id="sponsoredContainer"
   >
     <v-sheet
       v-bind="$attrs"

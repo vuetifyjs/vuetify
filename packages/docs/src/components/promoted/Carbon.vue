@@ -1,12 +1,11 @@
 <template>
   <promoted-base
-    v-if="!error"
+    v-if="!error2"
     ref="script"
     :class="[
       isDark ? 'theme--dark' : 'theme--light',
     ]"
     border
-    id="carbonContainer"
     min-height="118"
     max-width="360"
   >
@@ -14,7 +13,15 @@
       id="carbonads-script"
       script-id="_carbonads_js"
       src="//cdn.carbonads.com/carbon.js?serve=CWYDC27W&placement=v3vuetifyjscom"
-      @script:error="error = true"
+      @script:error="error1 = true"
+    />
+
+    <promoted-script
+      v-if="error1"
+      id="bsa-optimize"
+      :src="`https://cdn4.buysellads.net/pub/vuetifyjs.js?${(Date.now() - Date.now()) % 600000}`"
+      script-id="bsa-optimize"
+      @script:error="error2 = true"
     />
   </promoted-base>
 
@@ -33,39 +40,16 @@
   import { useTheme } from 'vuetify'
 
   // Utilities
-  import { computed, onMounted, onBeforeUnmount, ref } from 'vue'
+  import { computed, onBeforeUnmount, shallowRef } from 'vue'
 
-  const error = ref(false)
-  const script = ref(null)
+  const error1 = shallowRef(false)
+  const error2 = shallowRef(false)
+  const script = shallowRef(null)
 
   onBeforeUnmount(() => {
     const script = document.getElementById('carbonads-script')
 
     script?.remove()
-  })
-
-  onMounted(() => {
-
-    setTimeout(()=> {
-      const isCarbonVisible = !!document.getElementById('carbonads');
-
-      const optimizeEl = document.createElement("div");
-      optimizeEl.id = "bsa-zone_1691166982595-9_123456";
-
-      if(!isCarbonVisible) {
-        document.querySelector("#sponsoredContainer").appendChild(optimizeEl);
-        document.querySelector("#carbonContainer").remove();
-
-        (function(){
-          var bsa_optimize=document.createElement('script');
-          bsa_optimize.type='text/javascript';
-          bsa_optimize.async=true;
-          bsa_optimize.src='https://cdn4.buysellads.net/pub/vuetifyjs.js?'+(new Date()-new Date()%600000);
-          (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa_optimize);
-        })();
-      }
-    }, 2000)
-
   })
 
   const theme = useTheme()
@@ -79,12 +63,10 @@
       min-width: 300px
       min-height: 250px
 
-  
   @media only screen and (min-width: 760px) and (min-height: 0px)
     div[id^="bsa-zone_1691166982595-9_123456"]
       min-width: 728px
       min-height: 90px
-
 
   #carbonads-script
     width: 100%
