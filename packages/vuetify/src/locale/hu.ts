@@ -1,5 +1,6 @@
 export default {
   badge: 'Jelvény',
+  open: 'Open',
   close: 'Bezárás',
   dataIterator: {
     noResultsText: 'Nincs egyező találat',

@@ -141,6 +141,8 @@ export const VChip = genericComponent<VChipSlots>()({
     const closeProps = computed(() => ({
       'aria-label': t(props.closeLabel),
       onClick (e: MouseEvent) {
+        e.stopPropagation()
+
         isActive.value = false
 
         emit('click:close', e)

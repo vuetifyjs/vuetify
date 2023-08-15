@@ -1,5 +1,6 @@
 export default {
   badge: 'باج',
+  open: 'Open',
   close: 'داخستن',
   dataIterator: {
     noResultsText: 'هیچ تۆمارێکی هاوتا نەدۆزرایەوە',
