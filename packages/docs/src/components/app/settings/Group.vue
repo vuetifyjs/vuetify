@@ -3,7 +3,7 @@
     <v-label
       v-if="title"
       :text="te(title) ? t(title) : title"
-      class="mb-2"
+      class="mb-2 font-weight-medium"
     />
 
     <v-messages

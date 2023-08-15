@@ -76,8 +76,8 @@
           </v-list>
         </v-navigation-drawer>
 
-        <v-main>
-          <v-container class="pt-2 h-100 overflow-y-auto">
+        <v-main scrollable>
+          <v-container class="pt-2 overflow-y-auto">
             <h3 class="text-h6 mb-2">{{ record?.title }}</h3>
 
             <div class="text-body-2 mb-4">
@@ -89,6 +89,14 @@
             <component :is="record?.component" />
           </v-container>
         </v-main>
+
+        <v-footer
+          app
+          class="text-caption justify-end text-medium-emphasis"
+          height="48"
+        >
+          {{ t('copyright') }} &copy; 2016-{{ (new Date()).getFullYear() }} Vuetify, LLC
+        </v-footer>
       </v-layout>
     </v-card>
   </v-dialog>
@@ -102,6 +110,7 @@
 
   // Composables
   import { useDisplay } from 'vuetify'
+  import { useI18n } from 'vue-i18n'
   import { useAppStore } from '@/store/app'
 
   // Utilities
@@ -109,6 +118,7 @@
 
   const app = useAppStore()
   const { mobile } = useDisplay()
+  const { t } = useI18n()
 
   const record = computed(() => items[model.value[0]])
   const items = [

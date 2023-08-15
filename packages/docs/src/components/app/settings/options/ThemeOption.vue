@@ -3,8 +3,9 @@
     ref="group"
     v-model="model"
     :items="items"
-    multiple
     :title="t('theme')"
+    class="ps-3"
+    multiple
     text="Customize your documentation experience with light and dark themes, as well as a combination of both named"
   />
 </template>

@@ -11,31 +11,25 @@
 
   <br>
 
-  <developer-mode />
+  <v-divider />
 
   <br>
 
-  <v-footer
-    app
-    absolute
-    class="text-caption justify-end text-medium-emphasis"
-    height="47"
-  >
+  <div class="d-flex justify-end">
     <v-btn
-      variant="flat"
-      size="small"
       color="error"
+      size="small"
+      variant="flat"
       @click="onResetAll"
     >
       Reset All
     </v-btn>
-  </v-footer>
+  </div>
 </template>
 
 <script setup>
   // Components
   import BannerOption from './options/BannerOption.vue'
-  import DeveloperMode from './DeveloperMode.vue'
   import NotificationsOption from './options/NotificationsOption.vue'
   import QuickbarOption from './options/QuickbarOption.vue'
 
