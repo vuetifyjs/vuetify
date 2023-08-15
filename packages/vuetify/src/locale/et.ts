@@ -1,5 +1,6 @@
 export default {
   badge: 'Märk',
+  open: 'Open',
   close: 'Sulge',
   dataIterator: {
     noResultsText: 'Vastavaid kirjeid ei leitud',

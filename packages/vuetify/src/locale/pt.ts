@@ -1,5 +1,6 @@
 export default {
   badge: 'Distintivo',
+  open: 'Open',
   close: 'Fechar',
   dataIterator: {
     noResultsText: 'Nenhum dado encontrado',

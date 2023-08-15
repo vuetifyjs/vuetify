@@ -73,6 +73,7 @@ export const makeVComboboxProps = propsFactory({
   ...makeSelectProps({ hideNoData: true, returnObject: true }),
   ...omit(makeVTextFieldProps({
     modelValue: null,
+    role: 'combobox',
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
   ...makeTransitionProps({ transition: false }),
 }, 'VCombobox')
@@ -129,6 +130,7 @@ export const VCombobox = genericComponent<new <
     const selectionIndex = shallowRef(-1)
     let cleared = false
     const color = computed(() => vTextFieldRef.value?.color)
+    const label = computed(() => menu.value ? props.closeText : props.openText)
     const { items, transformIn, transformOut } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(color)
     const model = useProxiedModel(
@@ -599,6 +601,8 @@ export const VCombobox = genericComponent<new <
                     icon={ props.menuIcon }
                     onMousedown={ onMousedownMenuIcon }
                     onClick={ noop }
+                    aria-label={ t(label.value) }
+                    title={ t(label.value) }
                   />
                 ) : undefined }
               </>
