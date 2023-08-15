@@ -1,20 +1,19 @@
 // Components
-import { VBtn } from '@/components/VBtn'
-import { VCheckboxBtn } from '@/components/VCheckbox'
+import {VBtn} from '@/components/VBtn'
+import {VCheckboxBtn} from '@/components/VCheckbox'
 
 // Composables
-import { useExpanded } from './composables/expand'
-import { useHeaders } from './composables/headers'
-import { useSelection } from './composables/select'
-import { VDataTableColumn } from './VDataTableColumn'
-
-// Utilities
-import { withModifiers } from 'vue'
-import { defineComponent, getPropertyFromItem, propsFactory, useRender } from '@/util'
+import {useExpanded} from './composables/expand'
+import {useHeaders} from './composables/headers'
+import {useSelection} from './composables/select'
+import {VDataTableColumn} from './VDataTableColumn'
 
 // Types
-import type { PropType } from 'vue'
-import type { DataTableItem } from './types'
+import type {PropType} from 'vue'
+// Utilities
+import {withModifiers} from 'vue'
+import {defineComponent, getPropertyFromItem, propsFactory, useRender} from '@/util'
+import type {DataTableItem} from './types'
 
 export const makeVDataTableRowProps = propsFactory({
   index: Number as PropType<Number>,
@@ -41,6 +40,7 @@ export const VDataTableRow = defineComponent({
           },
         ]}
         onClick={ props.onClick }
+        onDblclick={ props.onDblclick }
       >
         { props.item && columns.value.map((column, i) => (
           <VDataTableColumn
