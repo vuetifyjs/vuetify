@@ -43,9 +43,31 @@
       appendIcon: 'mdi-view-dashboard-outline',
     },
     {
+      title: t('api-explorer'),
+      to: rpath('/components/api-explorer/'),
+      appendIcon: 'mdi-code-json',
+    },
+    {
       title: t('labs'),
       to: rpath('/labs/introduction/'),
       appendIcon: 'mdi-beaker-outline',
+    },
+    { divider: true },
+    { subheader: t('documentation') },
+    {
+      title: '3.x (latest)',
+      href: 'https://vuetifyjs.com/',
+      appendIcon: 'mdi-numeric-3-box',
+    },
+    {
+      title: '2.6.x (v2-stable)',
+      href: 'https://v2.vuetifyjs.com/',
+      appendIcon: 'mdi-numeric-2-box',
+    },
+    {
+      title: '1.5.x (v1-stable)',
+      href: 'https://v15.vuetifyjs.com/',
+      appendIcon: 'mdi-numeric-1-box',
     },
   ]))
 </script>
