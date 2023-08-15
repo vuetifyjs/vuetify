@@ -19,11 +19,11 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VInputSlot, VInputSlots } from '@/components/VInput/VInput'
+import type { VSliderThumbSlots } from './VSliderThumb'
+import type { VSliderTrackSlots } from './VSliderTrack'
 
-export type VSliderSlots = VInputSlots & {
+export type VSliderSlots = VInputSlots & VSliderThumbSlots & VSliderTrackSlots & {
   label: VInputSlot
-  'tick-label': never
-  'thumb-label': never
 }
 
 export const makeVSliderProps = propsFactory({
