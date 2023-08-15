@@ -110,6 +110,7 @@ export const VCombobox = genericComponent<new <
     'update:modelValue': (val: any) => true,
     'update:search': (val: string) => true,
     'update:menu': (val: boolean) => true,
+    'change': (selected: any, added: any, removed: any) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -182,11 +183,20 @@ export const VCombobox = genericComponent<new <
 
       emit('update:search', value)
     })
-    watch(model, value => {
-      if (!props.multiple) {
-        _search.value = value[0]?.title ?? ''
+
+    watch(
+      model,
+      (val, oldVal) => {
+        if (!props.multiple) {
+          _search.value = val[0]?.title ?? ''
+        }
+        emit('change',
+          model.value.map(v => v.props.value),
+          val.filter(v => !oldVal.includes(v)).map(v => v.props.value),
+          oldVal.filter(v => !val.includes(v)).map(v => v.props.value)
+        )
       }
-    })
+    )
 
     const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
 

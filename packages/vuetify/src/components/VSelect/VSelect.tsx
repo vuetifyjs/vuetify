@@ -23,7 +23,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, mergeProps, ref, shallowRef } from 'vue'
+import { computed, mergeProps, ref, shallowRef, watch } from 'vue'
 import { deepEqual, genericComponent, getPropertyFromItem, matchesSelector, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -121,9 +121,10 @@ export const VSelect = genericComponent<new <
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: any) => true,
     'update:menu': (val: boolean) => true,
+    'change': (selected: any, added: any, removed: any) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
     const vMenuRef = ref<VMenu>()
@@ -182,6 +183,7 @@ export const VSelect = genericComponent<new <
 
     const listRef = ref<VList>()
     const { onListScroll, onListKeydown } = useScrolling(listRef, vTextFieldRef)
+
     function onClear (e: MouseEvent) {
       if (props.openOnClear) {
         menu.value = true
@@ -276,6 +278,17 @@ export const VSelect = genericComponent<new <
         vTextFieldRef.value.value = ''
       }
     }
+
+    watch(
+      model,
+      (val, oldVal) => {
+        emit('change',
+          model.value.map(v => v.props.value),
+          val.filter(v => !oldVal.includes(v)).map(v => v.props.value),
+          oldVal.filter(v => !val.includes(v)).map(v => v.props.value)
+        )
+      }
+    )
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)

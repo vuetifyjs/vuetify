@@ -109,9 +109,10 @@ export const VAutocomplete = genericComponent<new <
     'update:search': (val: any) => true,
     'update:modelValue': (val: any) => true,
     'update:menu': (val: boolean) => true,
+    'change': (selected: any, added: any, removed: any) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
     const isFocused = shallowRef(false)
@@ -364,6 +365,17 @@ export const VAutocomplete = genericComponent<new <
         selectionIndex.value = -1
       }
     })
+
+    watch(
+      model,
+      (val, oldVal) => {
+        emit('change',
+          model.value.map(v => v.props.value),
+          val.filter(v => !oldVal.includes(v)).map(v => v.props.value),
+          oldVal.filter(v => !val.includes(v)).map(v => v.props.value)
+        )
+      }
+    )
 
     watch(search, val => {
       if (!isFocused.value || isSelecting.value) return
