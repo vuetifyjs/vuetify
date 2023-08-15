@@ -16,7 +16,9 @@ Add Vuetify as a browser search engine for quick access to the documentation.
 
 ## Setup
 
-The Vuetify documentation supports being a search engine for your browser. This allows you to quickly search directly from the url bar without having to navigate to the site. To add Vuetify as a search engine, follow the steps below:
+The Vuetify documentation supports being a search engine for your browser. This allows you to query directly from the url bar without having to navigate to the site first. To add Vuetify as a search engine, follow the steps below:
+
+### For Chrome
 
 1. Open Chrome settings
   ![image](https://github.com/vuetifyjs/vuetify/assets/9064066/3b83a0a1-a51d-4c88-bf1b-0200a1f6b532) { class="mb-n4" }

@@ -15,7 +15,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, watch } from 'vue'
-import { focusChild, genericComponent, IN_BROWSER, only, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, focusChild, genericComponent, IN_BROWSER, only, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -78,7 +78,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     'update:modelValue': (val: string) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const { dimensionStyles } = useDimension(props)
     const { isFocused, focus, blur } = useFocus(props)
     const model = useProxiedModel(
@@ -202,6 +202,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     })
 
     useRender(() => {
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
+
       return (
         <div
           class={[
@@ -214,6 +216,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
           style={[
             props.style,
           ]}
+          { ...rootAttrs }
         >
           <div
             ref={ contentRef }
@@ -262,6 +265,13 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                 </VField>
               </>
             ))}
+
+            <input
+              class="v-otp-input-input"
+              type="hidden"
+              { ...inputAttrs }
+              value={ model.value.join('') }
+            />
 
             <VOverlay
               contained

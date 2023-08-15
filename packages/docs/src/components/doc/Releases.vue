@@ -222,6 +222,7 @@
     switch (true) {
       case (count >= 100): return '💫'
       case (count > 50): return '🔥'
+      case (count > 30): return '🌶️'
       default: return undefined
     }
   }

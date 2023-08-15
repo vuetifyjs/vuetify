@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Data iterators
   title: Data iterator component
