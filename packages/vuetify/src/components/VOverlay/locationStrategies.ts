@@ -20,7 +20,7 @@ import {
   parseAnchor,
   propsFactory,
 } from '@/util'
-import { Box, getOverflow } from '@/util/box'
+import { Box, getOverflow, getTargetBox } from '@/util/box'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -452,17 +452,4 @@ function pixelRound (val: number) {
 
 function pixelCeil (val: number) {
   return Math.ceil(val * devicePixelRatio) / devicePixelRatio
-}
-
-function getTargetBox (target: HTMLElement | [x: number, y: number]) {
-  if (Array.isArray(target)) {
-    return new Box({
-      x: target[0],
-      y: target[1],
-      width: 0,
-      height: 0,
-    })
-  } else {
-    return target.getBoundingClientRect()
-  }
 }

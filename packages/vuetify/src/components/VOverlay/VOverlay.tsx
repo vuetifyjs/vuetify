@@ -287,7 +287,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 appear
                 persisted
                 transition={ props.transition }
-                target={ activatorEl.value }
+                target={ target.value }
                 onAfterLeave={ () => { onAfterLeave(); emit('afterLeave') } }
               >
                 <div
