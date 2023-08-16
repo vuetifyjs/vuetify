@@ -455,14 +455,13 @@ function pixelCeil (val: number) {
 }
 
 function getTargetBox (target: HTMLElement | [x: number, y: number]) {
-  console.log(target)
   if (Array.isArray(target)) {
-    return {
+    return new Box({
       x: target[0],
       y: target[1],
       width: 0,
       height: 0,
-    }
+    })
   } else {
     return target.getBoundingClientRect()
   }
