@@ -1,8 +1,8 @@
+// Composables
+import { VClassIcon } from '@/composables/icons'
+
 // Utilities
 import { h } from 'vue'
-
-// Components
-import { VClassIcon } from '@/composables/icons'
 
 // Types
 import type { IconAliases, IconSet } from '@/composables/icons'
@@ -43,6 +43,8 @@ const aliases: IconAliases = {
   file: 'mdi-paperclip',
   plus: 'mdi-plus',
   minus: 'mdi-minus',
+  calendar: 'mdi-calendar',
+  eyeDropper: 'mdi-eyedropper',
 }
 
 const mdi: IconSet = {

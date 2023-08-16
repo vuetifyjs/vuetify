@@ -7,7 +7,6 @@
       "why-vuetify",
       "long-term-support",
       "roadmap",
-      "meet-the-team",
       "sponsors-and-backers",
       { "divider": true },
       { "subheader": "professional-support" },
@@ -36,7 +35,6 @@
       "aliasing",
       "application-layout",
       "blueprints",
-      "dates",
       "display-and-platform",
       "global-configuration",
       "icon-fonts",
@@ -76,6 +74,7 @@
     "activeIcon": "mdi-view-dashboard",
     "items": [
       "all",
+      "explorer",
       { "divider": true },
       { "subheader": "containment" },
       "buttons",
@@ -189,6 +188,14 @@
     "items": [
       "introduction",
       {
+        "title": "bottom-sheets",
+        "subfolder": "components"
+      },
+      {
+        "title": "data-iterators",
+        "subfolder": "components"
+      },
+      {
         "title": "data-tables",
         "subfolder": "components",
         "activeIcon": "",
@@ -196,6 +203,7 @@
         "items": [
           "basics",
           "headers",
+          "selection",
           "sorting",
           "pagination",
           "filtering",
@@ -206,11 +214,27 @@
         ]
       },
       {
+        "title": "dates",
+        "subfolder": "features"
+      },
+      {
+        "title": "date-pickers",
+        "subfolder": "components"
+      },
+      {
         "title": "infinite-scroller",
         "subfolder": "components"
       },
       {
+        "title": "otp-input",
+        "subfolder": "components"
+      },
+      {
         "title": "skeleton-loaders",
+        "subfolder": "components"
+      },
+      {
+        "title": "steppers",
         "subfolder": "components"
       }
     ]
@@ -222,7 +246,9 @@
     "items": [
       "jobs-for-vue",
       "ui-kits",
-      "themes"
+      "themes",
+      "search-engine",
+      "brand-kit"
     ]
   },
   {
@@ -230,6 +256,7 @@
     "inactiveIcon": "$vuetify-outline",
     "activeIcon": "$vuetify",
     "items": [
+      "meet-the-team",
       "security-disclosure",
       "code-of-conduct"
     ]

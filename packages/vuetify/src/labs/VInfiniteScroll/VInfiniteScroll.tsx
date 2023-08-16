@@ -9,10 +9,11 @@ import { VProgressCircular } from '@/components/VProgressCircular'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useLocale } from '@/composables/locale'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
-import { convertToUnit, defineComponent, genericComponent, useRender } from '@/util'
+import { computed, nextTick, onMounted, ref, shallowRef, watch } from 'vue'
+import { convertToUnit, defineComponent, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -22,19 +23,47 @@ export type InfiniteScrollStatus = 'ok' | 'empty' | 'loading' | 'error'
 
 type InfiniteScrollSlot = {
   side: InfiniteScrollSide
-  props: {
-    onClick: () => (side: InfiniteScrollSide) => void
-    color: string | undefined
-  }
+  props: Record<string, any>
 }
 
 type VInfiniteScrollSlots = {
-  default: [InfiniteScrollSlot]
-  loading: [InfiniteScrollSlot]
-  error: [InfiniteScrollSlot]
-  empty: [InfiniteScrollSlot]
-  'load-more': [InfiniteScrollSlot]
+  default: never
+  loading: InfiniteScrollSlot
+  error: InfiniteScrollSlot
+  empty: InfiniteScrollSlot
+  'load-more': InfiniteScrollSlot
 }
+
+export const makeVInfiniteScrollProps = propsFactory({
+  color: String,
+  direction: {
+    type: String as PropType<'vertical' | 'horizontal'>,
+    default: 'vertical',
+    validator: (v: any) => ['vertical', 'horizontal'].includes(v),
+  },
+  side: {
+    type: String as PropType<InfiniteScrollSide>,
+    default: 'end',
+    validator: (v: any) => ['start', 'end', 'both'].includes(v),
+  },
+  mode: {
+    type: String as PropType<'intersect' | 'manual'>,
+    default: 'intersect',
+    validator: (v: any) => ['intersect', 'manual'].includes(v),
+  },
+  margin: [Number, String],
+  loadMoreText: {
+    type: String,
+    default: '$vuetify.infiniteScroll.loadMore',
+  },
+  emptyText: {
+    type: String,
+    default: '$vuetify.infiniteScroll.empty',
+  },
+
+  ...makeDimensionProps(),
+  ...makeTagProps(),
+}, 'VInfiniteScroll')
 
 export const VInfiniteScrollIntersect = defineComponent({
   name: 'VInfiniteScrollIntersect',
@@ -49,18 +78,17 @@ export const VInfiniteScrollIntersect = defineComponent({
   },
 
   emits: {
-    intersect: (side: InfiniteScrollSide) => true,
+    intersect: (side: InfiniteScrollSide, isIntersecting: boolean) => true,
   },
 
   setup (props, { emit }) {
     const { intersectionRef, isIntersecting } = useIntersectionObserver(entries => {
     }, props.rootMargin ? {
-      root: props.rootRef,
       rootMargin: props.rootMargin,
     } : undefined)
 
     watch(isIntersecting, async val => {
-      if (val) emit('intersect', props.side)
+      emit('intersect', props.side, val)
     })
 
     useRender(() => (
@@ -74,35 +102,7 @@ export const VInfiniteScrollIntersect = defineComponent({
 export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
   name: 'VInfiniteScroll',
 
-  props: {
-    color: String,
-    direction: {
-      type: String as PropType<'vertical' | 'horizontal'>,
-      default: 'vertical',
-      validator: (v: any) => ['vertical', 'horizontal'].includes(v),
-    },
-    side: {
-      type: String as PropType<InfiniteScrollSide>,
-      default: 'end',
-      validator: (v: any) => ['start', 'end', 'both'].includes(v),
-    },
-    mode: {
-      type: String as PropType<'intersect' | 'manual'>,
-      default: 'intersect',
-      validator: (v: any) => ['intersect', 'manual'].includes(v),
-    },
-    margin: [Number, String],
-    loadMoreText: {
-      type: String,
-      default: '$vuetify.infiniteScroll.loadMore',
-    },
-    emptyText: {
-      type: String,
-      default: '$vuetify.infiniteScroll.empty',
-    },
-
-    ...makeDimensionProps(),
-  },
+  props: makeVInfiniteScrollProps(),
 
   emits: {
     load: (options: { side: InfiniteScrollSide, done: (status: InfiniteScrollStatus) => void }) => true,
@@ -110,9 +110,10 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
 
   setup (props, { slots, emit }) {
     const rootEl = ref<HTMLDivElement>()
-    const startStatus = ref<InfiniteScrollStatus>('ok')
-    const endStatus = ref<InfiniteScrollStatus>('ok')
+    const startStatus = shallowRef<InfiniteScrollStatus>('ok')
+    const endStatus = shallowRef<InfiniteScrollStatus>('ok')
     const margin = computed(() => convertToUnit(props.margin))
+    const isIntersecting = shallowRef(false)
 
     function setScrollAmount (amount: number) {
       if (!rootEl.value) return
@@ -165,7 +166,16 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
     }
 
     let previousScrollSize = 0
-    function handleIntersect (side: InfiniteScrollSide) {
+    function handleIntersect (side: InfiniteScrollSide, _isIntersecting: boolean) {
+      isIntersecting.value = _isIntersecting
+      if (isIntersecting.value) {
+        intersecting(side)
+      }
+    }
+
+    function intersecting (side: InfiniteScrollSide) {
+      if (props.mode !== 'manual' && !isIntersecting.value) return
+
       const status = getStatus(side)
       if (!rootEl.value || status === 'loading') return
 
@@ -176,8 +186,21 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
         setStatus(side, status)
 
         nextTick(() => {
+          if (status === 'empty' || status === 'error') return
+
           if (status === 'ok' && side === 'start') {
             setScrollAmount(getScrollSize() - previousScrollSize + getScrollAmount())
+          }
+          if (props.mode !== 'manual') {
+            nextTick(() => {
+              window.requestAnimationFrame(() => {
+                window.requestAnimationFrame(() => {
+                  window.requestAnimationFrame(() => {
+                    intersecting(side)
+                  })
+                })
+              })
+            })
           }
         })
       }
@@ -190,7 +213,7 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
     function renderSide (side: InfiniteScrollSide, status: InfiniteScrollStatus) {
       if (props.side !== side && props.side !== 'both') return
 
-      const onClick = () => handleIntersect(side)
+      const onClick = () => intersecting(side)
       const slotProps = { side, props: { onClick, color: props.color } }
 
       if (status === 'error') return slots.error?.(slotProps)
@@ -219,12 +242,13 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
     const { dimensionStyles } = useDimension(props)
 
     useRender(() => {
+      const Tag = props.tag
       const hasStartIntersect = props.side === 'start' || props.side === 'both'
       const hasEndIntersect = props.side === 'end' || props.side === 'both'
       const intersectMode = props.mode === 'intersect'
 
       return (
-        <div
+        <Tag
           ref={ rootEl }
           class={[
             'v-infinite-scroll',
@@ -265,7 +289,7 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
           <div class="v-infinite-scroll__side">
             { renderSide('end', endStatus.value) }
           </div>
-        </div>
+        </Tag>
       )
     })
   },

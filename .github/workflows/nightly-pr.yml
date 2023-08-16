@@ -1,0 +1,47 @@
+name: Nightly Release
+on:
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: 'Pull Request number'
+        required: false
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.repository_owner == 'vuetifyjs' }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const pr = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: ${{ github.event.inputs.pr }}
+            })
+            core.exportVariable('CHECKOUT_REPO', pr.data.head.repo.full_name)
+            core.exportVariable('CHECKOUT_REF', pr.data.head.ref)
+            core.exportVariable('SHORT_SHA', pr.data.head.sha.slice(0, 7))
+      - id: nightly-release
+        uses: ./.github/actions/nightly-release
+        with:
+          checkout-repo: ${{ env.CHECKOUT_REPO }}
+          checkout-ref: ${{ env.CHECKOUT_REF }}
+          release-id: pr-${{ github.event.inputs.pr }}.${{ env.SHORT_SHA }}
+          npm-tag: pr
+          npm-token: ${{ secrets.NPM_TOKEN }}
+      - uses: actions/checkout@v2
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const fullVersion = process.env.FULL_VERSION
+            const pr = await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ github.event.inputs.pr }},
+              body: `:rocket: Nightly release published to [@vuetify/nightly@${fullVersion}](https://www.npmjs.com/package/@vuetify/nightly/v/${fullVersion}).`
+            })
+        env:
+          FULL_VERSION: ${{ steps.nightly-release.outputs.full-version }}

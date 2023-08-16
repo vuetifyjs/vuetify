@@ -1,18 +1,18 @@
 /* eslint-disable max-statements */
 // Composables
 import { makeElevationProps } from '@/composables/elevation'
-import { makeRoundedProps } from '@/composables/rounded'
 import { useRtl } from '@/composables/locale'
+import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
+import { computed, provide, ref, shallowRef, toRef } from 'vue'
 import { clamp, createRange, getDecimals, propsFactory } from '@/util'
-import { computed, provide, ref, toRef } from 'vue'
 
 // Types
 import type { ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue'
 import type { VSliderTrack } from './VSliderTrack'
 
-type Tick = {
+export type Tick = {
   value: number
   position: number
   label?: string
@@ -23,7 +23,7 @@ type SliderProvide = {
   color: Ref<string | undefined>
   decimals: Ref<number>
   direction: Ref<'vertical' | 'horizontal'>
-  disabled: Ref<boolean | undefined>
+  disabled: Ref<boolean | null | undefined>
   elevation: Ref<number | string | undefined>
   min: Ref<number>
   max: Ref<number>
@@ -33,7 +33,7 @@ type SliderProvide = {
   onSliderTouchstart: (e: TouchEvent) => void
   parseMouseMove: (e: MouseEvent | TouchEvent) => number
   position: (val: number) => number
-  readonly: Ref<boolean | undefined>
+  readonly: Ref<boolean | null | undefined>
   rounded: Ref<boolean | number | string | undefined>
   roundValue: (value: number) => number
   thumbLabel: Ref<boolean | string | undefined>
@@ -45,7 +45,7 @@ type SliderProvide = {
   trackColor: Ref<string | undefined>
   trackFillColor: Ref<string | undefined>
   trackSize: Ref<number>
-  ticks: Ref<number[] | Record<string, string> | undefined>
+  ticks: Ref<readonly number[] | Record<string, string> | undefined>
   tickSize: Ref<number>
   trackContainerRef: Ref<VSliderTrack | undefined>
   vertical: Ref<boolean>
@@ -73,9 +73,15 @@ function getPosition (e: MouseEvent | TouchEvent, position: 'clientX' | 'clientY
 }
 
 export const makeSliderProps = propsFactory({
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
   error: Boolean,
-  readonly: Boolean,
+  readonly: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
   max: {
     type: [Number, String],
     default: 100,
@@ -104,7 +110,7 @@ export const makeSliderProps = propsFactory({
     validator: (v: any) => typeof v === 'boolean' || v === 'always',
   },
   ticks: {
-    type: [Array, Object] as PropType<number[] | Record<number, string>>,
+    type: [Array, Object] as PropType<readonly number[] | Record<number, string>>,
   },
   tickSize: {
     type: [Number, String],
@@ -128,7 +134,11 @@ export const makeSliderProps = propsFactory({
   ...makeElevationProps({
     elevation: 2,
   }),
-}, 'slider')
+  ripple: {
+    type: Boolean,
+    default: true,
+  },
+}, 'Slider')
 
 type SliderProps = ExtractPropTypes<ReturnType<typeof makeSliderProps>>
 
@@ -142,7 +152,9 @@ export const useSteps = (props: SliderProps) => {
   const step = computed(() => +props.step > 0 ? parseFloat(props.step) : 0)
   const decimals = computed(() => Math.max(getDecimals(step.value), getDecimals(min.value)))
 
-  function roundValue (value: number) {
+  function roundValue (value: string | number) {
+    value = parseFloat(value)
+
     if (step.value <= 0) return value
 
     const clamped = clamp(value, min.value, max.value)
@@ -195,9 +207,9 @@ export const useSlider = ({
   const trackColor = computed(() => props.error || props.disabled ? undefined : props.trackColor ?? props.color)
   const trackFillColor = computed(() => props.error || props.disabled ? undefined : props.trackFillColor ?? props.color)
 
-  const mousePressed = ref(false)
+  const mousePressed = shallowRef(false)
 
-  const startOffset = ref(0)
+  const startOffset = shallowRef(0)
   const trackContainerRef = ref<VSliderTrack | undefined>()
   const activeThumbRef = ref<HTMLElement | undefined>()
 

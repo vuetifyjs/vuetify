@@ -1,4 +1,4 @@
-// Components
+// Composables
 import { VClassIcon } from '@/composables/icons'
 
 // Types
@@ -21,8 +21,8 @@ const aliases: IconAliases = {
   checkboxOff: 'far fa-square', // note 'far'
   checkboxIndeterminate: 'fas fa-minus-square',
   delimiter: 'fas fa-circle', // for carousel
-  sortAsc: 'fas fa-sort-up',
-  sortDesc: 'fas fa-sort-down',
+  sortAsc: 'fas fa-arrow-up',
+  sortDesc: 'fas fa-arrow-down',
   expand: 'fas fa-chevron-down',
   menu: 'fas fa-bars',
   subgroup: 'fas fa-caret-down',
@@ -40,6 +40,8 @@ const aliases: IconAliases = {
   file: 'fas fa-paperclip',
   plus: 'fas fa-plus',
   minus: 'fas fa-minus',
+  calendar: 'fas fa-calendar',
+  eyeDropper: 'fas fa-eye-dropper',
 }
 
 const fa: IconSet = {

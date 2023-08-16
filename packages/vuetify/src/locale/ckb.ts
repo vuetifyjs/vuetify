@@ -1,5 +1,6 @@
 export default {
   badge: 'باج',
+  open: 'Open',
   close: 'داخستن',
   dataIterator: {
     noResultsText: 'هیچ تۆمارێکی هاوتا نەدۆزرایەوە',
@@ -26,12 +27,21 @@ export default {
     lastPage: 'پەڕەی کۆتایی',
     pageText: '{0}-{1} لە {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} دەسنیشانکراوە',
-    nextMonthAriaLabel: 'مانگی داهاتوو',
-    nextYearAriaLabel: 'ساڵی داهاتوو',
-    prevMonthAriaLabel: 'مانگی پێشوو',
-    prevYearAriaLabel: 'ساڵی پێشوو',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'هیچ داتایەک بەردەست نیە',
   carousel: {
@@ -48,6 +58,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} فایل',
@@ -67,6 +78,10 @@ export default {
       first: 'First page',
       last: 'Last page',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

@@ -1,0 +1,18 @@
+{
+  "props": {
+    "column": "Displays radio buttons in column",
+    "dark": "Applies the dark theme variant to the component. This will default the components color to _white_ unless you've configured your [application theme](/customization/theme) to **dark** or if you are using the **color** prop on the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
+    "flat": "Display component without elevation. Default elevation for thumb is 4dp, `flat` resets it",
+    "indeterminate": "Sets an indeterminate state for the checkbox",
+    "indeterminateIcon": "The icon used when in an indeterminate state",
+    "inputValue": "The **v-model** bound value",
+    "inset": "Enlarge the `v-switch` track to encompass the thumb",
+    "multiple": "Changes expected model to an array",
+    "falseIcon": "The icon used when inactive",
+    "trueIcon": "The icon used when active",
+    "row": "Displays radio buttons in row"
+  },
+  "events": {
+    "change": "Emitted when the input is changed by user interaction."
+  }
+}

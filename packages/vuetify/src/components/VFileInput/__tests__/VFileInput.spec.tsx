@@ -1,8 +1,8 @@
 import { VFileInput } from '../VFileInput'
 
 // Utilities
-import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
 import { createVuetify } from '@/framework'
 
 describe('VFileInput', () => {
@@ -20,10 +20,10 @@ describe('VFileInput', () => {
   it('has affixed icons', () => {
     const wrapper = mountFunction(
       <VFileInput
-        prependIcon="mdi-vuetify"
-        prependInnerIcon="mdi-vuetify"
-        appendInnerIcon="mdi-vuetify"
-        appendIcon="mdi-vuetify"
+        prependIcon="$vuetify"
+        prependInnerIcon="$vuetify"
+        appendInnerIcon="$vuetify"
+        appendIcon="$vuetify"
       />
     )
 
@@ -52,10 +52,10 @@ describe('VFileInput', () => {
 
     const wrapper = mountFunction(
       <VFileInput
-        prependIcon="mdi-vuetify"
-        prependInnerIcon="mdi-vuetify"
-        appendInnerIcon="mdi-vuetify"
-        appendIcon="mdi-vuetify"
+        prependIcon="$vuetify"
+        prependInnerIcon="$vuetify"
+        appendInnerIcon="$vuetify"
+        appendIcon="$vuetify"
         onClick:prepend={ onClickPrepend }
         onClick:prependInner={ onClickPrependInner }
         onClick:appendInner={ onClickAppendInner }

@@ -69,7 +69,7 @@ self.addEventListener('activate', event => {
 })
 
 function getFallbackDocument (url) {
-  return matchPrecache(url.pathname.startsWith('/eo-UY/') ? '_crowdin.html' : '/_fallback.html')
+  return matchPrecache('/_fallback.html')
 }
 
 async function cleanCache (manifest) {

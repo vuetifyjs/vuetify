@@ -1,7 +1,8 @@
+// Utilities
 import { describe, expect, it } from '@jest/globals'
-import * as locales from '../'
 import fs from 'fs'
 import path from 'path'
+import * as locales from '../'
 
 describe('locales', () => {
   it('should have listed all available locales in index.ts', async () => {

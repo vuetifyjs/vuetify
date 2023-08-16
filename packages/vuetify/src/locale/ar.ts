@@ -1,5 +1,6 @@
 export default {
   badge: 'شارة',
+  open: 'Open',
   close: 'إغلاق',
   dataIterator: {
     noResultsText: 'لم يتم إيجاد نتائج',
@@ -26,12 +27,21 @@ export default {
     lastPage: 'الصفحة الأخيرة',
     pageText: '{0}-{1} من {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: 'تم تحديد {0}',
-    nextMonthAriaLabel: 'الشهر القادم',
-    nextYearAriaLabel: 'العام القادم',
-    prevMonthAriaLabel: 'الشهر الماضى',
-    prevYearAriaLabel: 'السنة الماضية',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'لا توجد بيانات',
   carousel: {
@@ -48,6 +58,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} ملفات',
@@ -67,6 +78,10 @@ export default {
       first: 'First page',
       last: 'Last page',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

@@ -12,6 +12,13 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const picker = ref(new Date().toISOString().substr(0, 7))
+  const landscape = ref(false)
+</script>
+
 <script>
   export default {
     data () {

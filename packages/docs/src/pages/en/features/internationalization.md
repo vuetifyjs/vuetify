@@ -37,8 +37,8 @@ const vuetify = createVuetify({
   locale: {
     locale: 'zhHans',
     fallback: 'sv',
-    messages: { zhHans, pl, sv }
-  }
+    messages: { zhHans, pl, sv },
+  },
 })
 
 app.use(vuetify)
@@ -59,7 +59,7 @@ You can change the locale during runtime by using the `useLocale` composable. If
       return {
         changeLocale: locale => current.value = locale
       }
-    }
+    },
   }
 </script>
 ```
@@ -70,8 +70,8 @@ You can change the locale during runtime by using the `useLocale` composable. If
     methods: {
       changeLocale (locale) {
         this.$vuetify.locale.current = locale
-      }
-    }
+      },
+    },
   }
 </script>
 ```
@@ -139,8 +139,8 @@ const vuetify = createVuetify({
     messages: { customLocale },
     rtl: {
       customLocale: true,
-    }
-  }
+    },
+  },
 })
 ```
 
@@ -169,16 +169,14 @@ If you are building custom Vuetify components that need to hook into the locale 
       return {
         t
       }
-    }
+    },
   }
 </script>
 ```
 
-<alert type="warning">
-
+::: warning
   The Vuetify locale service only provides a basic translation function `t`, and should really only be used for internal or custom Vuetify components. It is recommended that you use a proper i18n library such as [vue-i18n](https://kazupon.github.io/vue-i18n/) in your own application. Vuetify does provide support for integrating with other libraries.
-
-</alert>
+:::
 
 ## vue-i18n
 
@@ -218,8 +216,8 @@ const i18n = new createI18n({
 
 const vuetify = createVuetify({
   locale: {
-    adapter: createVueI18nAdapter({ i18n, useI18n })
-  }
+    adapter: createVueI18nAdapter({ i18n, useI18n }),
+  },
 })
 
 const app = createApp()

@@ -3,7 +3,6 @@ import {
   computed,
   inject,
   provide,
-  reactive,
   ref,
   watch,
   watchEffect,
@@ -23,8 +22,8 @@ import {
 import { APCAcontrast } from '@/util/color/APCA'
 
 // Types
-import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 import type { HeadClient } from '@vueuse/head'
+import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
@@ -163,9 +162,9 @@ const defaultThemeOptions: Exclude<ThemeOptions, false> = {
       variables: {
         'border-color': '#FFFFFF',
         'border-opacity': 0.12,
-        'high-emphasis-opacity': 0.87,
-        'medium-emphasis-opacity': 0.60,
-        'disabled-opacity': 0.38,
+        'high-emphasis-opacity': 1,
+        'medium-emphasis-opacity': 0.70,
+        'disabled-opacity': 0.50,
         'idle-opacity': 0.10,
         'hover-opacity': 0.04,
         'focus-opacity': 0.12,
@@ -201,7 +200,7 @@ function parseThemeOptions (options: ThemeOptions = defaultThemeOptions): Intern
 
 // Composables
 export function createTheme (options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
-  const parsedOptions = reactive(parseThemeOptions(options))
+  const parsedOptions = parseThemeOptions(options)
   const name = ref(parsedOptions.defaultTheme)
   const themes = ref(parsedOptions.themes)
 
@@ -307,11 +306,15 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   }
 
   function install (app: App) {
+    if (parsedOptions.isDisabled) return
+
     const head = app._context.provides.usehead as HeadClient | undefined
     if (head) {
       if (head.push) {
         const entry = head.push(getHead)
-        watch(styles, () => { entry.patch(getHead) })
+        if (IN_BROWSER) {
+          watch(styles, () => { entry.patch(getHead) })
+        }
       } else {
         if (IN_BROWSER) {
           head.addHeadObjs(computed(getHead))
@@ -325,11 +328,13 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         ? document.getElementById('vuetify-theme-stylesheet')
         : null
 
-      watch(styles, updateStyles, { immediate: true })
+      if (IN_BROWSER) {
+        watch(styles, updateStyles, { immediate: true })
+      } else {
+        updateStyles()
+      }
 
       function updateStyles () {
-        if (parsedOptions.isDisabled) return
-
         if (typeof document !== 'undefined' && !styleEl) {
           const el = document.createElement('style')
           el.type = 'text/css'

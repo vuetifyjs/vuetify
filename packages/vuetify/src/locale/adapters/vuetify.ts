@@ -1,8 +1,14 @@
-import { ref, watch } from 'vue'
-import { consoleError, consoleWarn, getObjectValueByPath } from '@/util'
+// Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
+
+// Utilities
+import { ref, shallowRef, watch } from 'vue'
+import { consoleError, consoleWarn, getObjectValueByPath } from '@/util'
+
+// Locales
 import en from '@/locale/en'
 
+// Types
 import type { Ref } from 'vue'
 import type { LocaleInstance, LocaleMessages, LocaleOptions } from '@/composables/locale'
 
@@ -91,8 +97,8 @@ function createProvideFunction (state: { current: Ref<string>, fallback: Ref<str
 }
 
 export function createVuetifyAdapter (options?: LocaleOptions): LocaleInstance {
-  const current = ref(options?.locale ?? 'en')
-  const fallback = ref(options?.fallback ?? 'en')
+  const current = shallowRef(options?.locale ?? 'en')
+  const fallback = shallowRef(options?.fallback ?? 'en')
   const messages = ref({ en, ...options?.messages })
 
   return {

@@ -1,6 +1,6 @@
 ---
-nav: Dialogs
 meta:
+  nav: Dialogs
   title: Dialog component
   description: The dialog component informs a user about a specific task and may contain critical information or require the user to take a specific action.
   keywords: dialogs, vuetify dialog component, vue dialog component

@@ -1,5 +1,5 @@
 ---
-emphasized: true
+emphasized: false
 meta:
   title: Dates
   description: Vuetify has first party date support that can easily be swapped for another date library
@@ -16,6 +16,12 @@ Easily hook up date libraries that are used for components that require date fun
 
 <entry />
 
+----
+
+::: warning
+This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
+:::
+
 ## Usage
 
 The date composable provides a shared architecture that is used by components such as date picker and calendar. The default implementation is built using the native Date object, but can be swapped out for another date library. If no other date adapter is given, the default Vuetify one is used.
@@ -24,7 +30,7 @@ The following example demonstrates explicitly importing the Vuetify date adapter
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
-import VuetifyDateAdapter from 'vuetify/adapters'
+import { VuetifyDateAdapter } from 'vuetify/labs/date/adapters/vuetify'
 
 export default createVuetify({
   date: {
@@ -37,7 +43,7 @@ Within your application, import the **useDate** function and use it to access th
 
 ```html { resource="src/views/Date.vue" }
 <script>
-  import { useDate } from 'vuetify'
+  import { useDate } from 'vuetify/labs/date'
 
   export default {
     setup () {
@@ -49,11 +55,9 @@ Within your application, import the **useDate** function and use it to access th
 </script>
 ```
 
-<alert type="info">
-
+::: info
 For a list of all supported date adapters, visit the [date-io](https://github.com/dmtrKovalenko/date-io#projects) project repository.
-
-</alert>
+:::
 
 ### Format options
 
@@ -69,7 +73,7 @@ The following example shows how to use the date composable to format a date stri
 
 ```html { resource="src/views/Date.vue" }
 <script>
-  import { useDate } from 'vuetify'
+  import { useDate } from 'vuetify/labs/date'
 
   export default {
     setup () {
@@ -93,7 +97,7 @@ The following example shows how to use the date composable to format a date stri
 
 ### Adapter
 
-The built in date adapter implements a subset of functionality from the [DateIOFormats](https://github.com/dmtrKovalenko/date-io/blob/master/packages/core/IUtils.d.ts) interface. Because of this, it's easy to swap in any date library supported by [date-io](https://github.com/dmtrKovalenko/date-io).
+The built-in date adapter implements a subset of functionality from the [DateIOFormats](https://github.com/dmtrKovalenko/date-io/blob/master/packages/core/IUtils.d.ts) interface. Because of this, it's easy to swap in any date library supported by [date-io](https://github.com/dmtrKovalenko/date-io).
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
@@ -108,11 +112,13 @@ export default createVuetify({
 })
 ```
 
-#### Create you own
+#### Create your own
 
 To create your own date adapter, implement the **DateAdapter** interface:
 
 ```ts
+import type { DateAdapter } from 'vuetify/labs'
+
 export interface DateAdapter<Date> {
   date (value?: any): Date | null
   format (date: Date, formatString: string): string

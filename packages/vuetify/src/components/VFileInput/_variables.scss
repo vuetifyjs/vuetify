@@ -1,4 +1,5 @@
 // Defaults
-$file-input-chip-margin-inline-end: 4px !default;
-$file-input-chips-margin-top: 2px !default;
-$file-input-chips-margin-bottom: ('default': 0, 'comfortable': 1, 'compact': 2) !default;
+$file-input-chip-margin-inline-end: null !default;
+$file-input-chips-margin-top: null !default;
+$file-input-chips-margin-bottom: null !default;
+$file-input-details-padding-inline: 16px !default;
