@@ -20,7 +20,6 @@ import {
   bindProps,
   getCurrentInstance,
   IN_BROWSER,
-  isComponentInstance,
   matchesSelector,
   propsFactory,
   refElement,
@@ -38,8 +37,8 @@ import type {
 import type { DelayProps } from '@/composables/delay'
 
 interface ActivatorProps extends DelayProps {
-  target: 'parent' | string | Element | ComponentPublicInstance | undefined
-  activator: 'parent' | string | Element | ComponentPublicInstance | undefined
+  target: 'parent' | 'cursor' | (string & {}) | Element | ComponentPublicInstance | [x: number, y: number] | undefined
+  activator: 'parent' | (string & {}) | Element | ComponentPublicInstance | undefined
   activatorProps: Record<string, any>
 
   openOnClick: boolean | undefined
@@ -100,10 +99,14 @@ export function useActivator (
     }
   })
 
+  const cursorTarget = ref<[x: number, y: number]>()
   const availableEvents = {
     onClick: (e: MouseEvent) => {
       e.stopPropagation()
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
+      if (!isActive.value) {
+        cursorTarget.value = [e.clientX, e.clientY]
+      }
       isActive.value = !isActive.value
     },
     onMouseenter: (e: MouseEvent) => {
@@ -217,7 +220,13 @@ export function useActivator (
     }
   })
 
-  const activatorRef = ref()
+  watch(isActive, val => {
+    if (!val) {
+      cursorTarget.value = undefined
+    }
+  })
+
+  const activatorRef = ref<HTMLElement>()
   watchEffect(() => {
     if (!activatorRef.value) return
 
@@ -226,12 +235,16 @@ export function useActivator (
     })
   })
 
-  const targetRef = ref()
+  const targetRef = ref<HTMLElement>()
+  const target = computed(() => {
+    if (props.target === 'cursor' && cursorTarget.value) return cursorTarget.value
+    if (targetRef.value) return refElement(targetRef.value)
+    return getTarget(props.target, vm) || activatorEl.value
+  })
   const targetEl = computed(() => {
-    const target = targetRef.value
-    return target
-      ? isComponentInstance(target) ? target.$el : target
-      : getTarget(props.target, vm) || activatorEl.value
+    return Array.isArray(target.value)
+      ? undefined
+      : target.value
   })
 
   let scope: EffectScope
@@ -250,7 +263,7 @@ export function useActivator (
     scope?.stop()
   })
 
-  return { activatorEl, activatorRef, targetEl, targetRef, activatorEvents, contentEvents, scrimEvents }
+  return { activatorEl, activatorRef, target, targetEl, targetRef, activatorEvents, contentEvents, scrimEvents }
 }
 
 function _useActivator (
@@ -292,13 +305,16 @@ function _useActivator (
     const activator = getTarget(selector, vm)
 
     // The activator should only be a valid element (Ignore comments and text nodes)
-    activatorEl.value = activator?.nodeType === Node.ELEMENT_NODE ? activator : null
+    activatorEl.value = activator?.nodeType === Node.ELEMENT_NODE ? activator : undefined
 
     return activatorEl.value
   }
 }
 
-function getTarget (selector: 'parent' | string | Element | ComponentPublicInstance | undefined, vm: ComponentInternalInstance) {
+function getTarget<T extends 'parent' | string | Element | ComponentPublicInstance | [x: number, y: number] | undefined> (
+  selector: T,
+  vm: ComponentInternalInstance
+): HTMLElement | undefined | (T extends any[] ? [x: number, y: number] : never) {
   if (!selector) return
 
   let target
@@ -315,7 +331,7 @@ function getTarget (selector: 'parent' | string | Element | ComponentPublicInsta
     // Component (ref)
     target = selector.$el
   } else {
-    // HTMLElement | Element
+    // HTMLElement | Element | [x, y]
     target = selector
   }
 

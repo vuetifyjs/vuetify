@@ -28,7 +28,7 @@ import type { Anchor } from '@/util'
 
 export interface LocationStrategyData {
   contentEl: Ref<HTMLElement | undefined>
-  targetEl: Ref<HTMLElement | undefined>
+  target: Ref<HTMLElement | [x: number, y: number] | undefined>
   isActive: Ref<boolean>
   isRtl: Ref<boolean>
 }
@@ -157,7 +157,7 @@ function getIntrinsicSize (el: HTMLElement, isRtl: boolean) {
 }
 
 function connectedLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
-  const activatorFixed = isFixedPosition(data.targetEl.value)
+  const activatorFixed = Array.isArray(data.target.value) || isFixedPosition(data.target.value)
   if (activatorFixed) {
     Object.assign(contentStyles.value, {
       position: 'fixed',
@@ -212,9 +212,9 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     if (observe) updateLocation()
   })
 
-  watch([data.targetEl, data.contentEl], ([newTargetEl, newContentEl], [oldTargetEl, oldContentEl]) => {
-    if (oldTargetEl) observer.unobserve(oldTargetEl)
-    if (newTargetEl) observer.observe(newTargetEl)
+  watch([data.target, data.contentEl], ([newTarget, newContentEl], [oldTarget, oldContentEl]) => {
+    if (oldTarget && !Array.isArray(oldTarget)) observer.unobserve(oldTarget)
+    if (newTarget && !Array.isArray(newTarget)) observer.observe(newTarget)
 
     if (oldContentEl) observer.unobserve(oldContentEl)
     if (newContentEl) observer.observe(newContentEl)
@@ -233,9 +233,9 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       requestAnimationFrame(() => observe = true)
     })
 
-    if (!data.targetEl.value || !data.contentEl.value) return
+    if (!data.target.value || !data.contentEl.value) return
 
-    const targetBox = data.targetEl.value.getBoundingClientRect()
+    const targetBox = getTargetBox(data.target.value)
     const contentBox = getIntrinsicSize(data.contentEl.value, data.isRtl.value)
     const scrollParents = getScrollParents(data.contentEl.value)
     const viewportMargin = 12
@@ -452,4 +452,18 @@ function pixelRound (val: number) {
 
 function pixelCeil (val: number) {
   return Math.ceil(val * devicePixelRatio) / devicePixelRatio
+}
+
+function getTargetBox (target: HTMLElement | [x: number, y: number]) {
+  console.log(target)
+  if (Array.isArray(target)) {
+    return {
+      x: target[0],
+      y: target[1],
+      width: 0,
+      height: 0,
+    }
+  } else {
+    return target.getBoundingClientRect()
+  }
 }

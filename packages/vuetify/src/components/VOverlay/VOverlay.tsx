@@ -146,7 +146,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'), props._disableGlobalStack)
     const {
       activatorEl, activatorRef,
-      targetEl, targetRef,
+      target, targetEl, targetRef,
       activatorEvents,
       contentEvents,
       scrimEvents,
@@ -164,7 +164,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     const { contentStyles, updateLocation } = useLocationStrategies(props, {
       isRtl,
       contentEl,
-      targetEl,
+      target,
       isActive,
     })
     useScrollStrategies(props, {
@@ -316,7 +316,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     return {
       activatorEl,
-      targetEl,
+      target,
       animateClick,
       contentEl,
       globalTop,
