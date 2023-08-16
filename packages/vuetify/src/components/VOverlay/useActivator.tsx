@@ -222,9 +222,11 @@ export function useActivator (
 
   watch(isActive, val => {
     if (!val) {
-      cursorTarget.value = undefined
+      setTimeout(() => {
+        cursorTarget.value = undefined
+      })
     }
-  })
+  }, { flush: 'post' })
 
   const activatorRef = ref<HTMLElement>()
   watchEffect(() => {
