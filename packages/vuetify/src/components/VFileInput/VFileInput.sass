@@ -2,10 +2,6 @@
 @use '../../styles/tools'
 @use 'sass:math'
 
-@at-root
-  @include tools.density('v-input', $file-input-chips-margin-bottom) using ($modifier)
-    --file-input-chips-margin-bottom: #{0px + math.div($modifier, 2)}
-
 // Block
 .v-file-input
   input[type="file"]
@@ -16,7 +12,11 @@
     top: 0
     width: 100%
     z-index: 1
-  
+
+  .v-input__details
+    padding-inline-start: $file-input-details-padding-inline
+    padding-inline-end: $file-input-details-padding-inline
+
   .v-chip
-    margin-top: $file-input-chips-margin-top
-    margin-bottom: var(--file-input-chips-margin-bottom)
+    margin-top: var(--v-input-chips-margin-top)
+    margin-bottom: var(--v-input-chips-margin-bottom)

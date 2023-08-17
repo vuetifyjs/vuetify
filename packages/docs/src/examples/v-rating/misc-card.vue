@@ -2,8 +2,8 @@
   <v-card
     class="mx-auto"
     color="purple"
-    elevation="20"
-    max-width="400"
+    elevation="10"
+    width="360"
   >
     <div class="d-flex justify-between">
       <v-card-title class="flex-grow-1 flex-column align-start">
@@ -46,6 +46,12 @@
     </v-card-actions>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const rating = ref(4.5)
+</script>
 
 <script>
   export default {

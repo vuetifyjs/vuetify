@@ -1,0 +1,1 @@
+export { VSkeletonLoader } from './VSkeletonLoader'

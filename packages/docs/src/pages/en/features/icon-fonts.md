@@ -11,7 +11,7 @@ related:
 
 # Icon Fonts
 
-Out of the box, Vuetify supports 4 popular icon font libraries—[Material Design Icons](https://materialdesignicons.com/), [Material Icons](https://material.io/resources/icons/?style=baseline), [Font Awesome 4](https://fontawesome.com/v4.7.0/) and [Font Awesome 5](https://fontawesome.com/).
+Out of the box, Vuetify supports 4 popular icon font libraries—[Material Design Icons](https://materialdesignicons.com/), [Material Icons](https://fonts.google.com/icons), [Font Awesome 4](https://fontawesome.com/v4.7.0/) and [Font Awesome 5](https://fontawesome.com/).
 
 <entry />
 
@@ -29,7 +29,7 @@ export default createVuetify({
     aliases,
     sets: {
       mdi,
-    }
+    },
   },
 })
 ```
@@ -44,11 +44,9 @@ export default createVuetify({
 
 In the above examples we import the default `mdi` icon set and its corresponding aliases. These aliases reference commonly used types of icons that are utilized by Vuetify components.
 
-<alert type="info">
-
+::: info
   While it is still possible to supply the icon value through the default slot in Vuetify 3.0 (`<v-icon>mdi-home</v-icon>`), we recommend using the `icon` prop instead.
-
-</alert>
+:::
 
 ### Multiple icon sets
 
@@ -66,7 +64,7 @@ export default createVuetify({
     sets: {
       fa,
       mdi,
-    }
+    },
   },
 })
 ```
@@ -78,21 +76,17 @@ export default createVuetify({
 </template>
 ```
 
-<alert type="info">
-
+::: info
   It is not necessary to provide a prefix (such as `mdi:`) for icons from the default icon set
-
-</alert>
+:::
 
 ## Installing icon fonts
 
 You are required to include the specified icon library (even when using the default icons from [Material Design Icons](https://materialdesignicons.com/)). This can be done by including a CDN link or importing the icon library into your application.
 
-<alert type="info">
-
-  In this page "Material Icons" is used to refer to the [official google icons](https://material.io/resources/icons/) and "Material Design Icons" refers to the [extended third-party library](https://materialdesignicons.com/)
-
-</alert>
+::: info
+  In this page "Material Icons" is used to refer to the [official google icons](https://fonts.google.com/icons) and "Material Design Icons" refers to the [extended third-party library](https://materialdesignicons.com/)
+:::
 
 ### Material Design Icons
 
@@ -121,11 +115,9 @@ export default createVuetify({
 })
 ```
 
-<alert type="error">
-
+::: error
   **DO NOT** use a CDN link without specifying a package *version*. Failure to do so can result in unexpected changes to your application with new releases.
-
-</alert>
+:::
 
 Use this tool to search for any Material Design Icons and copy them to your clipboard by clicking the item.
 
@@ -170,14 +162,8 @@ $ npm install @mdi/js -D
   <v-icon :icon="mdiAccount" />
 </template>
 
-<script>
+<script setup>
   import { mdiAccount } from '@mdi/js'
-
-  export default {
-    data: () => ({
-      mdiAccount
-    }),
-  }
 </script>
 ```
 
@@ -293,11 +279,9 @@ export default createVuetify({
 </template>
 ```
 
-<alert type="error">
-
+::: error
   The JavaScript version (`all.js`) of the FontAwesome icons will **NOT** work with Vue
-
-</alert>
+:::
 
 ### Font Awesome 4 Icons
 
@@ -326,7 +310,7 @@ export default createVuetify({
     aliases,
     sets: {
       fa,
-    }
+    },
   },
 })
 ```
@@ -342,9 +326,9 @@ export default createVuetify({
 Install the following packages.
 
 ```bash
-$ yarn add @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons -D
+$ yarn add @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons -D
 // or
-$ npm install @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons -D
+$ npm install @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons -D
 ```
 
 Then register the global `font-awesome-icon` component and use the pre-defined `fa-svg` icon set. If you have access to Font Awesome Pro icons they can be added to the library in the same way.
@@ -356,11 +340,13 @@ import { aliases, fa } from 'vuetify/iconsets/fa-svg'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
 
 const app = createApp()
 
 app.component('font-awesome-icon', FontAwesomeIcon) // Register component globally
-library.add(fas) // Include needed icons
+library.add(fas) // Include needed solid icons
+library.add(far) // Include needed regular icons
 
 const vuetify = createVuetify({
   icons: {
@@ -448,7 +434,7 @@ export default createVuetify({
     sets: {
       custom,
     },
-  }
+  },
 })
 ```
 

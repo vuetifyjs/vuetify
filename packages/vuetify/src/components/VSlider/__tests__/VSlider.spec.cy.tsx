@@ -1,8 +1,9 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VApp } from '@/components/VApp'
-import { Application, CenteredGrid } from '@/../cypress/templates'
+// Components
 import { VSlider } from '..'
+import { Application, CenteredGrid } from '@/../cypress/templates'
+import { VApp } from '@/components/VApp'
 
 describe('VSlider', () => {
   it('should react to clicking on track', () => {
@@ -145,6 +146,30 @@ describe('VSlider', () => {
     cy.get('.mdi-home').should('have.length', 2)
   })
 
+  it('should render icons with actions', () => {
+    const onClickPrepend = cy.spy().as('onClickPrepend')
+    const onClickAppend = cy.spy().as('onClickAppend')
+
+    cy.mount(() => (
+      <VApp>
+        <CenteredGrid width="300px">
+          <VSlider
+            prependIcon="mdi-magnify-minus-outline"
+            appendIcon="mdi-magnify-plus-outline"
+            onClick:prepend={ onClickPrepend }
+            onClick:append={ onClickAppend }
+          />
+        </CenteredGrid>
+      </VApp>
+    ))
+
+    cy.get('.mdi-magnify-minus-outline').click()
+    cy.get('.mdi-magnify-plus-outline').click()
+
+    cy.get('@onClickPrepend').should('have.been.calledOnce')
+    cy.get('@onClickAppend').should('have.been.calledOnce')
+  })
+
   it('should render vertical slider', () => {
     cy.mount(() => (
       <VApp>
@@ -175,6 +200,27 @@ describe('VSlider', () => {
         </CenteredGrid>
       </VApp>
     ))
+  })
+
+  it('should emit start and end events', () => {
+    // eslint-disable-next-line sonarjs/no-identical-functions
+    cy.mount(() => (
+      <VApp>
+        <CenteredGrid width="300px">
+          <VSlider />
+        </CenteredGrid>
+      </VApp>
+    ))
+
+    cy.get('.v-slider-thumb').swipe([100, 15], [200, 15])
+
+    cy.vue().then(wrapper => {
+      const slider = wrapper.getComponent(VSlider)
+      const start = slider.emitted('start')
+      expect(start).to.have.length(1)
+      const end = slider.emitted('end')
+      expect(end).to.have.length(1)
+    })
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/16634

@@ -2,33 +2,37 @@
 import './VTable.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 export type VTableSlots = {
-  default: []
-  top: []
-  bottom: []
-  wrapper: []
+  default: never
+  top: never
+  bottom: never
+  wrapper: never
 }
+
+export const makeVTableProps = propsFactory({
+  fixedHeader: Boolean,
+  fixedFooter: Boolean,
+  height: [Number, String],
+  hover: Boolean,
+
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'VTable')
 
 export const VTable = genericComponent<VTableSlots>()({
   name: 'VTable',
 
-  props: {
-    fixedHeader: Boolean,
-    fixedFooter: Boolean,
-    height: [Number, String],
-    hover: Boolean,
-
-    ...makeDensityProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVTableProps(),
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
@@ -48,7 +52,9 @@ export const VTable = genericComponent<VTableSlots>()({
           },
           themeClasses.value,
           densityClasses.value,
+          props.class,
         ]}
+        style={ props.style }
       >
         { slots.top?.() }
 

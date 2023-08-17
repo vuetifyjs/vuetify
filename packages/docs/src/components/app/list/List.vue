@@ -67,28 +67,37 @@
     divider?: boolean
     to?: RouteLocationRaw
     href?: string
-    subfolder?: boolean
+    subfolder?: string
     disabled?: boolean
   }
 
   function generateApiItems (locale: string) {
     return (routes as RouteRecordRaw[])
       .filter(route => route.path.includes(`${locale}/api/`))
-      .sort((a, b) => a.path.localeCompare(b.path))
       .map(route => {
         return {
           title: (route.meta!.title as string).slice(0, -4),
           to: route.path,
         }
       })
+      .sort((a, b) => a.title.localeCompare(b.title))
   }
 
   function generateListItem (item: string | Item, path = '', locale = 'en', t = (key: string) => key): any {
-    if (typeof item === 'string') {
-      const route = routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${item}/`))
+    const isString = typeof item === 'string'
+    const isLink = !isString && (item.to || item.href)
+    const isParent = !isString && item.items
+    const isType = !isString && (item.divider || item.subheader)
+
+    if (isString || (!isLink && !isParent && !isType)) {
+      const litem = isString ? { title: item } : item
+
+      if (litem.subfolder) path = litem.subfolder
+
+      const route = routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.title}/`))
 
       return {
-        title: route?.meta?.nav ?? route?.meta?.title ?? item,
+        title: route?.meta?.nav ?? route?.meta?.title ?? litem.title,
         emphasized: route?.meta?.emphasized ?? false,
         to: route?.path,
         disabled: !route,

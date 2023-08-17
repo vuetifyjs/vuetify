@@ -2,42 +2,50 @@
 import './VSwitch.sass'
 
 // Components
-import { makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { VScaleTransition } from '@/components/transitions'
+import { VIcon } from '@/components/VIcon'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VProgressCircular } from '@/components/VProgressCircular'
+import { makeVSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
 
 // Composables
-import { LoaderSlot, useLoader } from '@/composables/loader'
 import { useFocus } from '@/composables/focus'
+import { LoaderSlot, useLoader } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
-// Utility
+// Utilities
 import { computed, ref } from 'vue'
-import { filterInputAttrs, genericComponent, getUid, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, getUid, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
+import type { LoaderSlotProps } from '@/composables/loader'
 
-export type VSwitchSlots = VInputSlots & VSelectionControlSlots
+export type VSwitchSlots =
+  & VInputSlots
+  & VSelectionControlSlots
+  & { loader: LoaderSlotProps }
+
+export const makeVSwitchProps = propsFactory({
+  indeterminate: Boolean,
+  inset: Boolean,
+  flat: Boolean,
+  loading: {
+    type: [Boolean, String],
+    default: false,
+  },
+
+  ...makeVInputProps(),
+  ...makeVSelectionControlProps(),
+}, 'VSwitch')
 
 export const VSwitch = genericComponent<VSwitchSlots>()({
   name: 'VSwitch',
 
   inheritAttrs: false,
 
-  props: {
-    indeterminate: Boolean,
-    inset: Boolean,
-    flat: Boolean,
-    loading: {
-      type: [Boolean, String],
-      default: false,
-    },
-
-    ...makeVInputProps(),
-    ...makeSelectionControlProps(),
-  },
+  props: makeVSwitchProps(),
 
   emits: {
     'update:focused': (focused: boolean) => true,
@@ -66,13 +74,15 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
         indeterminate.value = false
       }
     }
-    function onTrackClick () {
+    function onTrackClick (e: Event) {
+      e.stopPropagation()
+      e.preventDefault()
       control.value?.input?.click()
     }
 
     useRender(() => {
       const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
-      const [inputProps, _1] = filterInputProps(props)
+      const [inputProps, _1] = VInput.filterProps(props)
       const [controlProps, _2] = VSelectionControl.filterProps(props)
 
       return (
@@ -82,7 +92,9 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
             { 'v-switch--inset': props.inset },
             { 'v-switch--indeterminate': indeterminate.value },
             loaderClasses.value,
+            props.class,
           ]}
+          style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
           id={ id.value }
@@ -115,36 +127,42 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
                 {{
                   ...slots,
                   default: () => (<div class="v-switch__track" onClick={ onTrackClick }></div>),
-                  input: ({ textColorClasses, textColorStyles }) => (
-                    <div
-                      class={[
-                        'v-switch__thumb',
-                        textColorClasses.value,
-                      ]}
-                      style={ textColorStyles.value }
-                    >
-                      { props.loading && (
-                        <LoaderSlot
-                          name="v-switch"
-                          active
-                          color={ isValid.value === false ? undefined : loaderColor.value }
-                        >
-                          { slotProps => (
-                            slots.loader
-                              ? slots.loader(slotProps)
-                              : (
-                                  <VProgressCircular
-                                    active={ slotProps.isActive }
-                                    color={ slotProps.color }
-                                    indeterminate
-                                    size="16"
-                                    width="2"
-                                  />
-                              )
+                  input: ({ inputNode, icon }) => (
+                    <>
+                      { inputNode }
+                      <div
+                        class={[
+                          'v-switch__thumb',
+                          { 'v-switch__thumb--filled': icon || props.loading },
+                        ]}
+                      >
+                        <VScaleTransition>
+                          { !props.loading ? (
+                            icon && <VIcon key={ icon as any } icon={ icon } size="x-small" />
+                          ) : (
+                            <LoaderSlot
+                              name="v-switch"
+                              active
+                              color={ isValid.value === false ? undefined : loaderColor.value }
+                            >
+                              { slotProps => (
+                                slots.loader
+                                  ? slots.loader(slotProps)
+                                  : (
+                                    <VProgressCircular
+                                      active={ slotProps.isActive }
+                                      color={ slotProps.color }
+                                      indeterminate
+                                      size="16"
+                                      width="2"
+                                    />
+                                  )
+                              )}
+                            </LoaderSlot>
                           )}
-                        </LoaderSlot>
-                      )}
-                    </div>
+                        </VScaleTransition>
+                      </div>
+                    </>
                   ),
                 }}
               </VSelectionControl>

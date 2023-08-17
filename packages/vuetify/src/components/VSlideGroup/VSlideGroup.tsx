@@ -6,20 +6,21 @@ import { VFadeTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { IconValue } from '@/composables/icons'
-import { makeGroupProps, useGroup } from '@/composables/group'
-import { makeTagProps } from '@/composables/tag'
 import { useDisplay } from '@/composables'
-import { useResizeObserver } from '@/composables/resizeObserver'
+import { makeComponentProps } from '@/composables/component'
+import { makeGroupProps, useGroup } from '@/composables/group'
+import { IconValue } from '@/composables/icons'
 import { useRtl } from '@/composables/locale'
+import { useResizeObserver } from '@/composables/resizeObserver'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { computed, ref, watch } from 'vue'
-import { clamp, genericComponent, IN_BROWSER, useRender } from '@/util'
+import { computed, shallowRef, watch } from 'vue'
 import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
+import { clamp, focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
-import type { InjectionKey } from 'vue'
+import type { InjectionKey, PropType } from 'vue'
 import type { GroupProvide } from '@/composables/group'
 
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
@@ -32,48 +33,51 @@ interface SlideGroupSlot {
 }
 
 type VSlideGroupSlots = {
-  default: [SlideGroupSlot]
-  prev: [SlideGroupSlot]
-  next: [SlideGroupSlot]
+  default: SlideGroupSlot
+  prev: SlideGroupSlot
+  next: SlideGroupSlot
 }
+
+export const makeVSlideGroupProps = propsFactory({
+  centerActive: Boolean,
+  direction: {
+    type: String as PropType<'horizontal' | 'vertical'>,
+    default: 'horizontal',
+  },
+  symbol: {
+    type: null,
+    default: VSlideGroupSymbol,
+  },
+  nextIcon: {
+    type: IconValue,
+    default: '$next',
+  },
+  prevIcon: {
+    type: IconValue,
+    default: '$prev',
+  },
+  showArrows: {
+    type: [Boolean, String],
+    validator: (v: any) => (
+      typeof v === 'boolean' || [
+        'always',
+        'desktop',
+        'mobile',
+      ].includes(v)
+    ),
+  },
+
+  ...makeComponentProps(),
+  ...makeTagProps(),
+  ...makeGroupProps({
+    selectedClass: 'v-slide-group-item--active',
+  }),
+}, 'VSlideGroup')
 
 export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
   name: 'VSlideGroup',
 
-  props: {
-    centerActive: Boolean,
-    direction: {
-      type: String,
-      default: 'horizontal',
-    },
-    symbol: {
-      type: null,
-      default: VSlideGroupSymbol,
-    },
-    nextIcon: {
-      type: IconValue,
-      default: '$next',
-    },
-    prevIcon: {
-      type: IconValue,
-      default: '$prev',
-    },
-    showArrows: {
-      type: [Boolean, String],
-      validator: (v: any) => (
-        typeof v === 'boolean' || [
-          'always',
-          'desktop',
-          'mobile',
-        ].includes(v)
-      ),
-    },
-
-    ...makeTagProps(),
-    ...makeGroupProps({
-      selectedClass: 'v-slide-group-item--active',
-    }),
-  },
+  props: makeVSlideGroupProps(),
 
   emits: {
     'update:modelValue': (value: any) => true,
@@ -83,10 +87,10 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
     const { isRtl } = useRtl()
     const { mobile } = useDisplay()
     const group = useGroup(props, props.symbol)
-    const isOverflowing = ref(false)
-    const scrollOffset = ref(0)
-    const containerSize = ref(0)
-    const contentSize = ref(0)
+    const isOverflowing = shallowRef(false)
+    const scrollOffset = shallowRef(0)
+    const containerSize = shallowRef(0)
+    const contentSize = shallowRef(0)
     const isHorizontal = computed(() => props.direction === 'horizontal')
 
     const { resizeRef: containerRef, contentRect: containerRect } = useResizeObserver()
@@ -147,7 +151,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
       })
     }
 
-    const disableTransition = ref(false)
+    const disableTransition = shallowRef(false)
 
     let startTouch = 0
     let startOffset = 0
@@ -186,7 +190,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
       containerRef.value[isHorizontal.value ? 'scrollLeft' : 'scrollTop'] = 0
     }
 
-    const isFocused = ref(false)
+    const isFocused = shallowRef(false)
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
 
@@ -250,9 +254,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
       if (!contentRef.value) return
 
       if (!location) {
-        const focusable = [...contentRef.value.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        )].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
+        const focusable = focusableChildren(contentRef.value)
         focusable[0]?.focus()
       } else if (location === 'next') {
         const el = contentRef.value.querySelector(':focus')?.nextElementSibling as HTMLElement | undefined
@@ -347,7 +349,9 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
             'v-slide-group--has-affixes': hasAffixes.value,
             'v-slide-group--is-overflowing': isOverflowing.value,
           },
+          props.class,
         ]}
+        style={ props.style }
         tabindex={ (isFocused.value || group.selected.value.length) ? -1 : 0 }
         onFocus={ onFocus }
       >

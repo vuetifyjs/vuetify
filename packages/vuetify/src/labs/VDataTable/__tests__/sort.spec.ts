@@ -1,8 +1,9 @@
+// Composables
 import { sortItems } from '../composables/sort'
+import { transformItems } from '@/composables/list-items'
 
 // Utilities
 import { describe, expect, it } from '@jest/globals'
-import { transformItems } from '@/composables/items'
 
 describe('VDataTable - sorting', () => {
   it('should sort items by single column', () => {
@@ -199,6 +200,44 @@ describe('VDataTable - sorting', () => {
       { string: 'baz', number: 2 },
       { string: 'baz', number: 1 },
       { string: 'foo', number: 1 },
+    ])
+  })
+
+  it('should sort items with nullable column', () => {
+    const items = transformItems({} as any, [
+      { string: 'foo', number: 1 },
+      { string: 'bar', number: null },
+      { string: 'baz', number: 4 },
+      { string: 'fizzbuzz', number: 3 },
+      { string: 'foobar', number: 5 },
+      { string: 'barbaz', number: undefined },
+      { string: 'foobarbuzz', number: '' },
+    ])
+
+    expect(
+      sortItems(items, [{ key: 'number', order: 'asc' }], 'en')
+        .map(i => i.raw)
+    ).toStrictEqual([
+      { string: 'bar', number: null },
+      { string: 'barbaz', number: undefined },
+      { string: 'foobarbuzz', number: '' },
+      { string: 'foo', number: 1 },
+      { string: 'fizzbuzz', number: 3 },
+      { string: 'baz', number: 4 },
+      { string: 'foobar', number: 5 },
+    ])
+
+    expect(
+      sortItems(items, [{ key: 'number', order: 'desc' }], 'en')
+        .map(i => i.raw)
+    ).toStrictEqual([
+      { string: 'foobar', number: 5 },
+      { string: 'baz', number: 4 },
+      { string: 'fizzbuzz', number: 3 },
+      { string: 'foo', number: 1 },
+      { string: 'bar', number: null },
+      { string: 'barbaz', number: undefined },
+      { string: 'foobarbuzz', number: '' },
     ])
   })
 })

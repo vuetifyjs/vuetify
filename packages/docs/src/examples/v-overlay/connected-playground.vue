@@ -61,49 +61,43 @@
   </div>
 </template>
 
-<script>
-  export default {
-    data: () => ({
-      locationSide: 'top',
-      locationAlign: 'center',
-      originSide: 'auto',
-      originAlign: '',
-    }),
+<script setup>
+  import { computed, ref, watch } from 'vue'
 
-    computed: {
-      location () {
-        return `${this.locationSide} ${this.locationAlign}`
-      },
-      origin () {
-        return this.originDisabled ? this.originSide : `${this.originSide} ${this.originAlign}`
-      },
-      code () {
-        return `<v-tooltip location="${this.location}" origin="${this.origin}" />`
-      },
-      originDisabled () {
-        return ['auto', 'overlap'].includes(this.originSide)
-      },
-    },
+  const locationSide = ref('top')
+  const locationAlign = ref('center')
+  const originSide = ref('auto')
+  const originAlign = ref('')
 
-    watch: {
-      locationSide (val) {
-        if (['top', 'bottom'].includes(val)) {
-          this.locationAlign = {
-            top: 'start',
-            bottom: 'end',
-          }[this.locationAlign] || this.locationAlign
-        } else {
-          this.locationAlign = {
-            start: 'top',
-            end: 'bottom',
-          }[this.locationAlign] || this.locationAlign
-        }
-      },
-      originDisabled (val) {
-        if (!val && !this.originAlign) {
-          this.originAlign = 'center'
-        }
-      },
-    },
-  }
+  const location = computed(() => {
+    return `${locationSide.value} ${locationAlign.value}`
+  })
+  const origin = computed(() => {
+    return originDisabled.value ? originSide.value : `${originSide.value} ${originAlign.value}`
+  })
+  const code = computed(() => {
+    return `<v-tooltip location="${location.value}" origin="${origin.value}" />`
+  })
+  const originDisabled = computed(() => {
+    return ['auto', 'overlap'].includes(originSide.value)
+  })
+
+  watch(locationSide, val => {
+    if (['top', 'bottom'].includes(val)) {
+      locationAlign.value = {
+        top: 'start',
+        bottom: 'end',
+      }[locationAlign.value] || locationAlign.value
+    } else {
+      locationAlign.value = {
+        start: 'top',
+        end: 'bottom',
+      }[locationAlign.value] || locationAlign.value
+    }
+  })
+  watch(originDisabled, val => {
+    if (!val && !originAlign.value) {
+      originAlign.value = 'center'
+    }
+  })
 </script>

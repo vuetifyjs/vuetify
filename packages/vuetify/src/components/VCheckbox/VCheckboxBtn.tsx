@@ -1,6 +1,5 @@
 // Components
-import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
-import { makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
+import { makeVSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
 
 // Composables
 import { IconValue } from '@/composables/icons'
@@ -10,6 +9,9 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { computed } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
+// Types
+import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
+
 export const makeVCheckboxBtnProps = propsFactory({
   indeterminate: Boolean,
   indeterminateIcon: {
@@ -17,11 +19,11 @@ export const makeVCheckboxBtnProps = propsFactory({
     default: '$checkboxIndeterminate',
   },
 
-  ...makeSelectionControlProps({
+  ...makeVSelectionControlProps({
     falseIcon: '$checkboxOff',
     trueIcon: '$checkboxOn',
   }),
-}, 'v-checkbox-btn')
+}, 'VCheckboxBtn')
 
 export const VCheckboxBtn = genericComponent<VSelectionControlSlots>()({
   name: 'VCheckboxBtn',
@@ -44,13 +46,13 @@ export const VCheckboxBtn = genericComponent<VSelectionControlSlots>()({
     }
 
     const falseIcon = computed(() => {
-      return props.indeterminate
+      return indeterminate.value
         ? props.indeterminateIcon
         : props.falseIcon
     })
 
     const trueIcon = computed(() => {
-      return props.indeterminate
+      return indeterminate.value
         ? props.indeterminateIcon
         : props.trueIcon
     })
@@ -61,13 +63,16 @@ export const VCheckboxBtn = genericComponent<VSelectionControlSlots>()({
         <VSelectionControl
           { ...controlProps }
           v-model={ model.value }
-          class="v-checkbox-btn"
+        class={[
+          'v-checkbox-btn',
+          props.class,
+        ]}
+        style={ props.style }
           type="checkbox"
-          inline
           onUpdate:modelValue={ onChange }
           falseIcon={ falseIcon.value }
           trueIcon={ trueIcon.value }
-          aria-checked={ props.indeterminate ? 'mixed' : undefined }
+        aria-checked={ indeterminate.value ? 'mixed' : undefined }
           v-slots={ slots }
         />
       )

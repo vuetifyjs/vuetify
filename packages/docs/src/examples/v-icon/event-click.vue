@@ -26,6 +26,12 @@
   </v-card>
 </template>
 
+<script setup>
+  function next () {
+    alert('You clicked next!')
+  }
+</script>
+
 <script>
   export default {
     methods: {

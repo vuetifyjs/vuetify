@@ -1,8 +1,0 @@
-{
-  "props": {
-    "fixedHeader": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-table.json))",
-    "fixedFooter": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-table.json))",
-    "height": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-table.json))",
-    "hover": "Will add a hover effect to a table's row when the mouse is over it."
-  }
-}

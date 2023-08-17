@@ -1,5 +1,6 @@
 // Utilities
 import { camelize, capitalize, computed, Fragment, reactive, toRefs, watchEffect } from 'vue'
+import { IN_BROWSER } from '@/util/globals'
 
 // Types
 import type {
@@ -131,8 +132,10 @@ export function isObject (obj: any): obj is object {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
 }
 
-export function isComponentInstance (obj: any): obj is ComponentPublicInstance {
-  return obj?.$el
+export function refElement<T extends object | undefined> (obj: T): Exclude<T, ComponentPublicInstance> | HTMLElement {
+  return obj && '$el' in obj
+    ? obj.$el as HTMLElement
+    : obj as HTMLElement
 }
 
 // KeyboardEvent.keyCode aliases
@@ -180,6 +183,10 @@ export function keys<O extends {}> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }
 
+export function has<T extends string> (obj: object, key: T[]): obj is Record<T, unknown> {
+  return key.every(k => obj.hasOwnProperty(k))
+}
+
 type MaybePick<
   T extends object,
   U extends Extract<keyof T, string>
@@ -188,17 +195,20 @@ type MaybePick<
 // Array of keys
 export function pick<
   T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: U[]): [yes: MaybePick<T, U>, no: Omit<T, U>]
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: U[], exclude?: E[]): [yes: MaybePick<T, Exclude<U, E>>, no: Omit<T, Exclude<U, E>>]
 // Array of keys or RegExp to test keys against
 export function pick<
   T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>]
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[], exclude?: E[]): [yes: Partial<T>, no: Partial<T>]
 export function pick<
   T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>] {
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[], exclude?: E[]): [yes: Partial<T>, no: Partial<T>] {
   const found = Object.create(null)
   const rest = Object.create(null)
 
@@ -207,7 +217,7 @@ export function pick<
       paths.some(path => path instanceof RegExp
         ? path.test(key)
         : path === key
-      )
+      ) && !exclude?.some(path => path === key)
     ) {
       found[key] = obj[key]
     } else {
@@ -225,6 +235,17 @@ export function omit<
   const clone = { ...obj }
 
   exclude.forEach(prop => delete clone[prop])
+
+  return clone
+}
+
+export function only<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, include: U[]): Pick<T, U> {
+  const clone = {} as T
+
+  include.forEach(prop => clone[prop] = obj[prop])
 
   return clone
 }
@@ -273,39 +294,16 @@ export function arrayDiff (a: any[], b: any[]): any[] {
   return diff
 }
 
-interface ItemGroup<T> {
-  name: string
-  items: T[]
-}
-
-export function groupItems<T extends any = any> (
-  items: T[],
-  groupBy: string[],
-  groupDesc: boolean[]
-): ItemGroup<T>[] {
-  const key = groupBy[0]
-  const groups: ItemGroup<T>[] = []
-  let current
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i]
-    const val = getObjectValueByPath(item, key, null)
-    if (current !== val) {
-      current = val
-      groups.push({
-        name: val ?? '',
-        items: [],
-      })
-    }
-    groups[groups.length - 1].items.push(item)
-  }
-  return groups
-}
-
-export function wrapInArray<T> (v: T | T[] | null | undefined): T[] {
+type IfAny<T, Y, N> = 0 extends (1 & T) ? Y : N;
+export function wrapInArray<T> (
+  v: T | null | undefined
+): T extends readonly any[]
+    ? IfAny<T, T[], T>
+    : NonNullable<T>[] {
   return v == null
     ? []
     : Array.isArray(v)
-      ? v : [v]
+      ? v as any : [v]
 }
 
 export function defaultFilter (value: any, search: string | null, item: any) {
@@ -371,6 +369,10 @@ export function getDecimals (value: number) {
 
 export function padEnd (str: string, length: number, char = '0') {
   return str + char.repeat(Math.max(0, length - str.length))
+}
+
+export function padStart (str: string, length: number, char = '0') {
+  return char.repeat(Math.max(0, length - str.length)) + str
 }
 
 export function chunk (str: string, size = 1) {
@@ -573,20 +575,84 @@ export function includes (arr: readonly any[], val: any) {
   return arr.includes(val)
 }
 
-export type EventProp<T = (...args: any[]) => any> = T | T[]
-export const EventProp = [Function, Array] as PropType<EventProp>
+export function eventName (propName: string) {
+  return propName[2].toLowerCase() + propName.slice(3)
+}
+
+export type EventProp<T extends any[] = any[], F = (...args: T) => any> = F | F[]
+export const EventProp = <T extends any[] = any[]>() => [Function, Array] as PropType<EventProp<T>>
 
 export function hasEvent (props: Record<string, any>, name: string) {
   name = 'on' + capitalize(name)
   return !!(props[name] || props[`${name}Once`] || props[`${name}Capture`] || props[`${name}OnceCapture`] || props[`${name}CaptureOnce`])
 }
 
-export function callEvent (handler: EventProp | undefined, ...args: any[]) {
+export function callEvent<T extends any[]> (handler: EventProp<T> | undefined, ...args: T) {
   if (Array.isArray(handler)) {
     for (const h of handler) {
       h(...args)
     }
   } else if (typeof handler === 'function') {
     handler(...args)
+  }
+}
+
+export function focusableChildren (el: Element, filterByTabIndex = true) {
+  const targets = ['button', '[href]', 'input:not([type="hidden"])', 'select', 'textarea', '[tabindex]']
+    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled])`)
+    .join(', ')
+  return [...el.querySelectorAll(targets)] as HTMLElement[]
+}
+
+export function getNextElement (elements: HTMLElement[], location?: 'next' | 'prev', condition?: (el: HTMLElement) => boolean) {
+  let _el
+  let idx = elements.indexOf(document.activeElement as HTMLElement)
+  const inc = location === 'next' ? 1 : -1
+  do {
+    idx += inc
+    _el = elements[idx]
+  } while ((!_el || _el.offsetParent == null || !(condition?.(_el) ?? true)) && idx < elements.length && idx >= 0)
+  return _el
+}
+
+export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last' | number) {
+  const focusable = focusableChildren(el)
+
+  if (!location) {
+    if (el === document.activeElement || !el.contains(document.activeElement)) {
+      focusable[0]?.focus()
+    }
+  } else if (location === 'first') {
+    focusable[0]?.focus()
+  } else if (location === 'last') {
+    focusable.at(-1)?.focus()
+  } else if (typeof location === 'number') {
+    focusable[location]?.focus()
+  } else {
+    const _el = getNextElement(focusable, location)
+    if (_el) _el.focus()
+    else focusChild(el, location === 'next' ? 'first' : 'last')
+  }
+}
+
+export function isEmpty (val: any): boolean {
+  return val === null || val === undefined || (typeof val === 'string' && val.trim() === '')
+}
+
+export function noop () {}
+
+/** Returns null if the selector is not supported or we can't check */
+export function matchesSelector (el: Element | undefined, selector: string): boolean | null {
+  const supportsSelector = IN_BROWSER &&
+    typeof CSS !== 'undefined' &&
+    typeof CSS.supports !== 'undefined' &&
+    CSS.supports(`selector(${selector})`)
+
+  if (!supportsSelector) return null
+
+  try {
+    return !!el && el.matches(selector)
+  } catch (err) {
+    return null
   }
 }

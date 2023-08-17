@@ -30,15 +30,10 @@
 
   const isExternal = computed(() => props.href.startsWith('http') || props.href.startsWith('mailto'))
   const isSamePage = computed(() => !isExternal.value && props.href.startsWith('#'))
-  const attrs = computed(() => {
-    return isExternal.value
-      ? { href: props.href, target: '_blank', rel: 'noopener' }
-      : {
-        to: isSamePage.value ? props.href : {
-          path: rpath(props.href),
-        },
-      }
-  })
+  const attrs = computed(() => isExternal.value
+    ? { href: props.href, target: '_blank', rel: 'noopener' }
+    : { to: isSamePage.value ? props.href : rpath(props.href) }
+  )
 
   const icon = computed(() => {
     if (isSamePage.value) return 'mdi-pound'

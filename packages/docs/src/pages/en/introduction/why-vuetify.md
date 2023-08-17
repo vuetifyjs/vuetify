@@ -1,6 +1,6 @@
 ---
-nav: Why Vuetify?
 meta:
+  nav: Why Vuetify?
   title: Why you should be using Vuetify
   description: Vuetify has an extremely active community, provides easy to use Material Design components and is consistently updated.
   keywords: why vuetify, best vue framework, best ui framework, best component framework, best ui library, best component library
@@ -37,14 +37,14 @@ Vuetify is an Open Source project available for free under the [MIT licensed](ht
 
 ### Flexible components
 
-Every component in Vuetify is handcrafted under the guise of Google's [Material Design specification](https://material.io/) and comes with hundreds of customization options that fit any style or design; even if it's not Material. Write Vue templates that are as concise or verbose as you want using exlusively or a combination of **props**, **slots**, and **components**.
+Every component in Vuetify is handcrafted under the guise of Google's [Material Design specification](https://material.io/) and comes with hundreds of customization options that fit any style or design; even if it's not Material. Write Vue templates that are as concise or verbose as you want using exclusively or in combination, **props**, **slots**, and **components**.
 
 ### Tooling
 
 Vuetify has a large ecosystem of supporting tools that enrich the development experience that range from project creation to design UI kits.
 
 * 🎨 [Figma UI Component Kit](https://store.vuetifyjs.com/products/vuetify-ui-kit-figma)
-* ⚡ [First-party Vite support](https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin)
+* ⚡ [First-party Vite support](https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin)
 * 🏗️ [Pre-configured Vue 3 applications for TypeScript and JavaScript](https://tryvuetify.com)
 * ⌨️ Intellisense & autocomplete support for [VSCode](https://code.visualstudio.com/docs/editor/intellisense) and [JetBrains](https://www.jetbrains.com/help/rider/Auto-Completing_Code.html) products
 * 🖼️ [Wireframe examples](/getting-started/wireframes/)

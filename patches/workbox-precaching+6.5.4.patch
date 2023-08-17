@@ -1,0 +1,32 @@
+diff --git a/node_modules/workbox-precaching/PrecacheController.js b/node_modules/workbox-precaching/PrecacheController.js
+index e00975e..7380049 100644
+--- a/node_modules/workbox-precaching/PrecacheController.js
++++ b/node_modules/workbox-precaching/PrecacheController.js
+@@ -5,6 +5,7 @@
+   license that can be found in the LICENSE file or at
+   https://opensource.org/licenses/MIT.
+ */
++import eachLimit from 'async-es/eachLimit'
+ import { assert } from 'workbox-core/_private/assert.js';
+ import { cacheNames } from 'workbox-core/_private/cacheNames.js';
+ import { logger } from 'workbox-core/_private/logger.js';
+@@ -150,9 +151,8 @@ class PrecacheController {
+         return waitUntil(event, async () => {
+             const installReportPlugin = new PrecacheInstallReportPlugin();
+             this.strategy.plugins.push(installReportPlugin);
+-            // Cache entries one at a time.
+             // See https://github.com/GoogleChrome/workbox/issues/2528
+-            for (const [url, cacheKey] of this._urlsToCacheKeys) {
++            await eachLimit(this._urlsToCacheKeys, 10, async ([url, cacheKey]) => {
+                 const integrity = this._cacheKeysToIntegrities.get(cacheKey);
+                 const cacheMode = this._urlsToCacheModes.get(url);
+                 const request = new Request(url, {
+@@ -165,7 +165,7 @@ class PrecacheController {
+                     request,
+                     event,
+                 }));
+-            }
++            })
+             const { updatedURLs, notUpdatedURLs } = installReportPlugin;
+             if (process.env.NODE_ENV !== 'production') {
+                 printInstallDetails(updatedURLs, notUpdatedURLs);

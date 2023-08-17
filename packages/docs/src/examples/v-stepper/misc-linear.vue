@@ -1,78 +1,77 @@
 <template>
-  <div>
-    <v-stepper>
-      <v-stepper-header>
-        <v-stepper-step step="1">
-          Select campaign settings
-        </v-stepper-step>
+  <v-stepper>
+    <v-stepper-header>
+      <v-stepper-item
+        title="Select campaign settings"
+        value="1"
+      ></v-stepper-item>
 
-        <v-divider></v-divider>
+      <v-divider></v-divider>
 
-        <v-stepper-step step="2">
-          Create an ad group
-        </v-stepper-step>
+      <v-stepper-item
+        title="Create an ad group"
+        value="2"
+      ></v-stepper-item>
 
-        <v-divider></v-divider>
+      <v-divider></v-divider>
 
-        <v-stepper-step step="3">
-          Create an ad
-        </v-stepper-step>
-      </v-stepper-header>
-    </v-stepper>
+      <v-stepper-item
+        title="Create an ad"
+        value="3"
+      ></v-stepper-item>
+    </v-stepper-header>
+  </v-stepper>
 
-    <v-stepper
-      value="2"
-      class="mt-12"
-    >
-      <v-stepper-header>
-        <v-stepper-step
-          step="1"
-          complete
-        >
-          Select campaign settings
-        </v-stepper-step>
+  <br>
 
-        <v-divider></v-divider>
+  <v-stepper model-value="2">
+    <v-stepper-header>
+      <v-stepper-item
+        complete
+        title="Select campaign settings"
+        value="1"
+      ></v-stepper-item>
 
-        <v-stepper-step step="2">
-          Create an ad group
-        </v-stepper-step>
+      <v-divider></v-divider>
 
-        <v-divider></v-divider>
+      <v-stepper-item
+        title="Create an ad group"
+        value="2"
+      ></v-stepper-item>
 
-        <v-stepper-step step="3">
-          Create an ad
-        </v-stepper-step>
-      </v-stepper-header>
-    </v-stepper>
+      <v-divider></v-divider>
 
-    <v-stepper
-      value="3"
-      class="mt-12"
-    >
-      <v-stepper-header>
-        <v-stepper-step
-          step="1"
-          complete
-        >
-          Select campaign settings
-        </v-stepper-step>
+      <v-stepper-item
+        title="Create an ad"
+        value="3"
+      ></v-stepper-item>
+    </v-stepper-header>
+  </v-stepper>
 
-        <v-divider></v-divider>
+  <br>
 
-        <v-stepper-step
-          step="2"
-          complete
-        >
-          Create an ad group
-        </v-stepper-step>
+  <v-stepper model-value="3">
+    <v-stepper-header>
+      <v-stepper-item
+        complete
+        title="Select campaign settings"
+        value="1"
+      ></v-stepper-item>
 
-        <v-divider></v-divider>
+      <v-divider></v-divider>
 
-        <v-stepper-step step="3">
-          Create an ad
-        </v-stepper-step>
-      </v-stepper-header>
-    </v-stepper>
-  </div>
+      <v-stepper-item
+        complete
+        title="Create an ad group"
+        value="2"
+      ></v-stepper-item>
+
+      <v-divider></v-divider>
+
+      <v-stepper-item
+        title="Create an ad"
+        value="3"
+      ></v-stepper-item>
+    </v-stepper-header>
+  </v-stepper>
 </template>

@@ -1,0 +1,7 @@
+{
+  "props": {
+    "value": "Sets the current counter value.",
+    "active": "Determines whether the counter is visible or not.",
+    "max": "Sets the maximum allowed value."
+  }
+}

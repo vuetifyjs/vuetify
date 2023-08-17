@@ -7,7 +7,7 @@ import { getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
 import type { ExtractPropTypes, SetupContext } from 'vue'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { SlotsToProps } from '@/util'
 
 export interface LoaderSlotProps {
   color: string | undefined
@@ -39,9 +39,9 @@ export function LoaderSlot (
     active: boolean
     name: string
     color?: string
-  } & ExtractPropTypes<SlotsToProps<MakeSlots<{
-    default: [LoaderSlotProps]
-  }>>>,
+  } & ExtractPropTypes<SlotsToProps<{
+    default: LoaderSlotProps
+  }>>,
   { slots }: SetupContext,
 ) {
   return (

@@ -2,10 +2,10 @@
 import './VRadioGroup.sass'
 
 // Components
-import { VSelectionControl } from '@/components/VSelectionControl'
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { makeSelectionControlGroupProps, VSelectionControlGroup } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VLabel } from '@/components/VLabel'
+import { VSelectionControl } from '@/components/VSelectionControl'
+import { makeSelectionControlGroupProps, VSelectionControlGroup } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Composables
 import { IconValue } from '@/composables/icons'
@@ -13,7 +13,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed } from 'vue'
-import { filterInputAttrs, genericComponent, getUid, omit, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
@@ -21,33 +21,35 @@ import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSel
 
 export type VRadioGroupSlots = VInputSlots & VSelectionControlSlots
 
+export const makeVRadioGroupProps = propsFactory({
+  height: {
+    type: [Number, String],
+    default: 'auto',
+  },
+
+  ...makeVInputProps(),
+  ...omit(makeSelectionControlGroupProps(), ['multiple']),
+
+  trueIcon: {
+    type: IconValue,
+    default: '$radioOn',
+  },
+  falseIcon: {
+    type: IconValue,
+    default: '$radioOff',
+  },
+  type: {
+    type: String,
+    default: 'radio',
+  },
+}, 'VRadioGroup')
+
 export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
   name: 'VRadioGroup',
 
   inheritAttrs: false,
 
-  props: {
-    height: {
-      type: [Number, String],
-      default: 'auto',
-    },
-
-    ...makeVInputProps(),
-    ...omit(makeSelectionControlGroupProps(), ['multiple']),
-
-    trueIcon: {
-      type: IconValue,
-      default: '$radioOn',
-    },
-    falseIcon: {
-      type: IconValue,
-      default: '$radioOff',
-    },
-    type: {
-      type: String,
-      default: 'radio',
-    },
-  },
+  props: makeVRadioGroupProps(),
 
   emits: {
     'update:modelValue': (val: any) => true,
@@ -60,7 +62,7 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
 
     useRender(() => {
       const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
-      const [inputProps, _1] = filterInputProps(props)
+      const [inputProps, _1] = VInput.filterProps(props)
       const [controlProps, _2] = VSelectionControl.filterProps(props)
       const label = slots.label
         ? slots.label({
@@ -71,7 +73,11 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
 
       return (
         <VInput
-          class="v-radio-group"
+          class={[
+            'v-radio-group',
+            props.class,
+          ]}
+          style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
           v-model={ model.value }

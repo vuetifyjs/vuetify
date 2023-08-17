@@ -1,25 +1,43 @@
 <template>
-  <promoted-base
-    ref="script"
-    :class="[
-      'mb-4',
-      isDark ? 'theme--dark' : 'theme--light',
-    ]"
-    border
+  <v-responsive
+    class="align-center"
     min-height="118"
-    max-width="360"
   >
-    <promoted-script
-      id="carbonads-script"
-      script-id="_carbonads_js"
-      src="//cdn.carbonads.com/carbon.js?serve=CWYDC27W&placement=v3vuetifyjscom"
-      @script:error="error = true"
-    />
-  </promoted-base>
+    <template v-if="!error1 && !error2">
+      <promoted-base
+        ref="script"
+        :class="[
+          isDark ? 'theme--dark' : 'theme--light',
+        ]"
+        border
+        max-width="360"
+      >
+        <promoted-script
+          id="carbonads-script"
+          script-id="_carbonads_js"
+          src="//cdn.carbonads.com/carbon.js?serve=CWYDC27W&placement=v3vuetifyjscom"
+          @script:error="error1 = true"
+        />
+
+        <promoted-script
+          v-if="error1"
+          id="bsa-zone_1691166982595-9_123456"
+          :src="`https://cdn4.buysellads.net/pub/vuetifyjs.js?${Date.now() % 600000}`"
+          script-id="bsa-optimize"
+          @script:error="error2 = true"
+        />
+      </promoted-base>
+    </template>
+
+    <promoted v-else />
+  </v-responsive>
+
+  <br>
 </template>
 
 <script setup lang="ts">
   // Components
+  import Promoted from './Promoted.vue'
   import PromotedBase from './Base.vue'
   import PromotedScript from './Script.vue'
 
@@ -27,16 +45,41 @@
   import { useTheme } from 'vuetify'
 
   // Utilities
-  import { computed, onBeforeUnmount, ref } from 'vue'
+  import { computed, onBeforeUnmount, onMounted, shallowRef } from 'vue'
 
-  const error = ref(false)
-  const script = ref(null)
+  const error1 = shallowRef(false)
+  const error2 = shallowRef(false)
+  const script = shallowRef(null)
+  let timer1 = 0 as any
+  let timer2 = 0 as any
 
   onBeforeUnmount(() => {
-    const script = document.getElementById('carbonads-script')
+    document.getElementById('carbonads-script')?.remove()
+    document.getElementById('bsa-zone_1691166982595-9_123456')?.remove()
 
-    script?.remove()
+    clearTimeout(timer1)
+    clearTimeout(timer2)
   })
+
+  onMounted(check1)
+
+  function check1 () {
+    timer1 = setTimeout(() => {
+      if (document.getElementById('carbonads')) return
+
+      clearTimeout(timer2)
+      error1.value = true
+      check2()
+    }, 2000)
+  }
+
+  function check2 () {
+    timer2 = setTimeout(() => {
+      if (document.getElementById('bsa-zone_1691166982595-9_123456')) return
+
+      error2.value = true
+    }, 2000)
+  }
 
   const theme = useTheme()
 
@@ -44,6 +87,19 @@
 </script>
 
 <style lang="sass">
+  @media only screen and (min-width: 0px) and (min-height: 0px)
+    div[id^="bsa-zone_1691166982595-9_123456"]
+      min-width: 300px
+      min-height: 250px
+
+  @media only screen and (min-width: 760px) and (min-height: 0px)
+    div[id^="bsa-zone_1691166982595-9_123456"]
+      min-width: 728px
+      min-height: 90px
+
+  #carbonads-script
+    width: 100%
+
   #carbonads,
   #carbonads_1,
   #carbonads_2

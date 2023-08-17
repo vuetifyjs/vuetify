@@ -29,11 +29,12 @@
   const clear = ref(false)
   const chips = ref(false)
   const multiple = ref(false)
-  const options = ['solo', 'underlined']
+  const options = ['outlined', 'underlined', 'solo', 'solo-filled', 'solo-inverted']
   const props = computed(() => {
     return {
       clearable: clear.value || undefined,
       chips: chips.value || undefined,
+      multiple: multiple.value || undefined,
       label: 'Combobox',
       items: ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'],
       variant: model.value === 'default' ? undefined : model.value,

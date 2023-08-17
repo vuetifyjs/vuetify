@@ -34,6 +34,17 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const length = ref(15)
+  const tab = ref(null)
+
+  watch(length, val => {
+    tab.value = val - 1
+  })
+</script>
+
 <script>
   export default {
     data: () => ({

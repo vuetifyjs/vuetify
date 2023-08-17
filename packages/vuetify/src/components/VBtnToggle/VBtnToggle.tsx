@@ -7,8 +7,8 @@ import { makeVBtnGroupProps, VBtnGroup } from '@/components/VBtnGroup/VBtnGroup'
 // Composables
 import { makeGroupProps, useGroup } from '@/composables/group'
 
-// Utility
-import { genericComponent, useRender } from '@/util'
+// Utilities
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey } from 'vue'
@@ -20,16 +20,18 @@ export interface DefaultBtnToggleSlot extends Pick<GroupProvide, BtnToggleSlotPr
 export const VBtnToggleSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-btn-toggle')
 
 type VBtnToggleSlots = {
-  default: [DefaultBtnToggleSlot]
+  default: DefaultBtnToggleSlot
 }
+
+export const makeVBtnToggleProps = propsFactory({
+  ...makeVBtnGroupProps(),
+  ...makeGroupProps(),
+}, 'VBtnToggle')
 
 export const VBtnToggle = genericComponent<VBtnToggleSlots>()({
   name: 'VBtnToggle',
 
-  props: {
-    ...makeVBtnGroupProps(),
-    ...makeGroupProps(),
-  },
+  props: makeVBtnToggleProps(),
 
   emits: {
     'update:modelValue': (value: any) => true,
@@ -43,8 +45,12 @@ export const VBtnToggle = genericComponent<VBtnToggleSlots>()({
 
       return (
         <VBtnGroup
-          class="v-btn-toggle"
+          class={[
+            'v-btn-toggle',
+            props.class,
+          ]}
           { ...btnGroupProps }
+          style={ props.style }
         >
           { slots.default?.({
             isSelected,

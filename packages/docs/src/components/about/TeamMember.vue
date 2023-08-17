@@ -1,8 +1,9 @@
 <template>
   <v-lazy min-height="128">
     <div class="d-flex">
-      <v-avatar color="grey-lighten-4" size="72">
+      <v-avatar color="grey-lighten-2" size="72">
         <v-img v-if="member.avatar" :src="member.avatar" />
+        <v-icon v-else color="grey" size="35"> mdi-image</v-icon>
       </v-avatar>
 
       <div class="ps-6 font-weight-medium">
@@ -133,6 +134,19 @@
             </template>
           </div>
         </template>
+
+        <v-chip
+          v-if="member.joined"
+          :text="t('joined', { date: member.joined })"
+          border
+          prepend-icon="mdi-calendar"
+          size="small"
+          variant="text"
+        >
+          <template #prepend>
+            <v-icon color="medium-emphasis" size="small" />
+          </template>
+        </v-chip>
       </div>
     </div>
   </v-lazy>
@@ -170,10 +184,10 @@
 
     if (props.member.twitter) {
       links.push({
-        color: '#40BBF4',
-        href: `https://twitter.com/${props.member.twitter}`,
-        icon: 'mdi-twitter',
-        tooltip: 'Twitter',
+        color: '#212121',
+        href: `https://x.com/${props.member.twitter}`,
+        icon: '$x',
+        tooltip: 'X',
       })
     }
 

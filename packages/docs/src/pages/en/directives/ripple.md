@@ -1,6 +1,6 @@
 ---
-nav: Ripple
 meta:
+  nav: Ripple
   title: Ripple directive
   description: The ripple directive adds touch and click feedback to any element in the form of a water ripple.
   keywords: ripples, ink, vuetify ripple directive, vue ripple directive

@@ -38,6 +38,19 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const active = ref(false)
+
+  function onClickOutside () {
+    active.value = false
+  }
+  function include () {
+    return [document.querySelector('.included')]
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

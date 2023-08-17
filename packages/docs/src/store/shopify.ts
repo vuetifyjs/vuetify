@@ -4,62 +4,53 @@ import { useCosmic } from '@/composables/cosmic'
 // Utilities
 import { defineStore } from 'pinia'
 
-// Types
-export type State = {
+interface Product {
+  href: string
+  title: string
+  src: string
+  price: number
+}
+
+interface Vendor {
+  name: string
   products: Product[]
 }
 
-export interface ProductRecord {
-  metadata: {
-    products: string
-  }
+export type State = {
+  vendors: Vendor[]
 }
 
-export interface ProductImage {
-  src: string
-}
-
-export interface Variant {
-  price: string
-  compareAtPrice: string
-}
-
-export interface Product {
-  availableForSale: boolean
-  handle: string
-  id: string
-  image: ProductImage
-  images: ProductImage[]
-  productType: string
-  title: string
-  variants: Variant[]
-}
-
-export const useShopifyStore = defineStore('shopify', {
+export const useShopifyStore = defineStore('vendors', {
   state: (): State => ({
-    products: [],
+    vendors: [],
   }),
 
   actions: {
     async fetch () {
-      if (this.products.length) return
+      if (this.vendors.length) return
 
-      const { bucket } = useCosmic<ProductRecord>(
-        import.meta.env.VITE_COSMIC_BUCKET_SLUG_STORE,
-        import.meta.env.VITE_COSMIC_BUCKET_READ_KEY_STORE,
-      )
+      const { bucket } = useCosmic()
 
       const { objects = [] } = (
         await bucket?.objects
-          .find({ type: 'products' })
-          .props('slug,title,metadata')
-          .sort('-created_at')
+          .find({ type: 'vendors' })
+          .props('metadata')
+          .sort('created_at')
           .limit(1)
       ) || {}
 
-      this.products = objects?.length
-        ? JSON.parse(objects[0].metadata.products)
-        : []
+      if (objects?.length) {
+        this.vendors = objects[0].metadata.vendors
+      }
+    },
+  },
+
+  getters: {
+    byVendor: state => {
+      return state.vendors.reduce((acc, vendor) => {
+        acc[vendor.name] = vendor
+        return acc
+      }, {} as Record<string, Vendor>)
     },
   },
 })

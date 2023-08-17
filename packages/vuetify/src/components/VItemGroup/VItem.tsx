@@ -1,14 +1,22 @@
 // Composables
-import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { VItemGroupSymbol } from './VItemGroup'
+import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 
 // Utilities
 import { genericComponent } from '@/util'
 
-// Types
-import type { GroupItemProvide } from '@/composables/group'
+type VItemSlots = {
+  default: {
+    isSelected: boolean | undefined
+    selectedClass: boolean | (string | undefined)[] | undefined
+    select: ((value: boolean) => void) | undefined
+    toggle: (() => void) | undefined
+    value: unknown
+    disabled: boolean | undefined
+  }
+}
 
-export const VItem = genericComponent<{ default: [GroupItemProvide] }>()({
+export const VItem = genericComponent<VItemSlots>()({
   name: 'VItem',
 
   props: makeGroupItemProps(),

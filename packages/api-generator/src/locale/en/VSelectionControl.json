@@ -1,0 +1,12 @@
+{
+  "props": {
+    "value": "The value used when the component is selected in a group. If not provided, a unique ID will be used."
+  },
+  "slots": {
+    "input": "The slot used for the default input element."
+  },
+  "exposed": {
+    "isFocused": "Will return true if the component is currently focused.",
+    "input": "Reference to the root input element."
+  }
+}

@@ -9,14 +9,15 @@ import App from './App.vue'
 import { setupLayouts } from 'virtual:generated-layouts'
 
 // Plugins
-import { pinia, usePinia } from '@/plugins/pinia'
-import { useGlobalComponents } from '@/plugins/global-components'
-import { useGtag } from '@/plugins/gtag'
-import { useI18n } from '@/plugins/i18n'
+import { installPinia, pinia } from '@/plugins/pinia'
+import { installGlobalComponents } from '@/plugins/global-components'
+import { installAuth0 } from '@/plugins/auth'
+import { installGtag } from '@/plugins/gtag'
+import { installI18n } from '@/plugins/i18n'
 import { useLocaleStore } from '@/store/locale'
-import { usePwa } from '@/plugins/pwa'
+import { installPwa } from '@/plugins/pwa'
 import { useUserStore } from '@/store/user'
-import { useVuetify } from '@/plugins/vuetify'
+import { installVuetify } from '@/plugins/vuetify'
 import { ViteSSG } from '@vuetify/vite-ssg'
 
 // Utilities
@@ -38,13 +39,14 @@ const routes = setupLayouts(generatedRoutes)
 const localeStore = useLocaleStore(pinia)
 const userStore = useUserStore(pinia)
 
-localeStore.$subscribe((_, state) => {
-  window.localStorage.setItem('currentLocale', state.locale)
-})
-
-userStore.$subscribe(() => {
-  userStore.save()
-})
+if (IN_BROWSER) {
+  localeStore.$subscribe((_, state) => {
+    window.localStorage.setItem('currentLocale', state.locale)
+  })
+  userStore.$subscribe(() => {
+    userStore.save()
+  })
+}
 
 // https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(
@@ -78,11 +80,19 @@ export const createApp = ViteSSG(
     ],
     async scrollBehavior (to, from, savedPosition) {
       let main = IN_BROWSER && document.querySelector('main')
+      // For default & hash navigation
+      let wait = 0
 
       if (!main) {
-        await (new Promise(resolve => setTimeout(resolve, 1000)))
+        // For initial page load
+        wait = 1500
         main = document.querySelector('main')
+      } else if (to.path !== from.path && to.hash) {
+        // For cross page navigation
+        wait = 500
       }
+
+      await (new Promise(resolve => setTimeout(resolve, wait)))
 
       if (to.hash) {
         return {
@@ -102,18 +112,27 @@ export const createApp = ViteSSG(
       console.warn(err, vm, info)
     }
 
-    ctx.router.beforeEach(({ path, hash }, from, next) => {
-      return path.endsWith('/') ? next() : next(`${trailingSlash(path)}` + hash)
+    ctx.router.beforeEach((to, from, next) => {
+      if (to.meta.locale !== from.meta.locale) {
+        localeStore.locale = to.meta.locale as string
+      }
+      return to.path.endsWith('/') ? next() : next(`${trailingSlash(to.path)}` + to.hash)
+    })
+    ctx.router.afterEach((to, from) => {
+      if (to.meta.locale !== from.meta.locale && from.meta.locale === 'eo-UY') {
+        setTimeout(() => window.location.reload(), 100)
+      }
     })
     ctx.router.onError(err => {
       console.error(err)
     })
 
-    useGlobalComponents(ctx)
-    useGtag(ctx)
-    useI18n(ctx)
-    usePwa(ctx)
-    usePinia(ctx)
-    useVuetify(ctx)
+    installGlobalComponents(ctx)
+    installAuth0(ctx)
+    installGtag(ctx)
+    installI18n(ctx)
+    installPwa(ctx)
+    installPinia(ctx)
+    installVuetify(ctx)
   },
 )
