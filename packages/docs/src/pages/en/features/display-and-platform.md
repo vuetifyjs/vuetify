@@ -242,7 +242,7 @@ The following components have built in support for the **mobile-breakpoint** pro
 
 By default, **mobileBreakpoint** is set to **lg**, which means that if the window is less than _1280_ pixels in width (which is the default value for the **lg** threshold), then the **useDisplay** composable will update its **mobile** value to `true`.
 
-For example, the [v-banner](/components/banners/) component implements different styling based upon the value of **isLocalMobile** from the **useDisplay** composable. In the following example, The first banner uses the global **mobile-breakpoint** value of **lg** while the second overrides this default with **580**:
+For example, the [v-banner](/components/banners/) component implements different styling when its mobile versus desktop. In the following example, The first banner uses the global **mobile-breakpoint** value of **lg** while the second overrides this default with **580**:
 
 ```html { resource="Component.vue" }
 <template>
@@ -274,19 +274,18 @@ If the screen width is 1024 pixels, the second banner would not convert into its
 
 ### useDisplay overrides
 
-Specify a custom **mobileBreakpoint** value directly to the [useDisplay](/api/use-display/) composable. This allows you to track the applications global mobile value as well as a local value. The following example uses a custom mobileBreakpoint value of **580**:
+Specify a custom **mobileBreakpoint** value directly to the [useDisplay](/api/use-display/) composable and override the global value. In the following example we use a custom mobileBreakpoint value of **580**:
 
 ```html { resource="Component.vue" }
 <script setup>
   import { onMounted } from 'vue'
   import { useDisplay } from 'vuetify'
 
-  const { mobile, isLocalMobile } = useDisplay({ mobileBreakpoint })
+  const { mobile } = useDisplay({ mobileBreakpoint })
 
   // Given a viewport width of 960px
   onMounted(() => {
-    console.log(mobile.value) // true
-    console.log(isLocalMobile.value) // false
+    console.log(mobile.value) // false
   })
 </script>
 ```
