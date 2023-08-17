@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, isRef, provide, ref, shallowRef, unref, watch, watchEffect } from 'vue'
+import { computed, inject, provide, ref, shallowRef, unref, watchEffect } from 'vue'
 import { getCurrentInstance, injectSelf, mergeDeep, toKebabCase } from '@/util'
 
 // Types
