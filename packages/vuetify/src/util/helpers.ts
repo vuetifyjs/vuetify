@@ -253,20 +253,59 @@ export function only<
 const onRE = /^on[^a-z]/
 export const isOn = (key: string) => onRE.test(key)
 
-const nonBubblingEvents = [
-  'onBlur',
-  'onFocus',
-  'onMouseenter',
-  'onMouseleave',
-  'onScroll',
-  'onLoad',
-  'onLoadstart',
-  'onLoadend',
-  'onUnload',
-  'onProgress',
-  'onAbort',
-  'onError',
-  /^onUpdate:.+/,
+const bubblingEvents = [
+  'onAfterscriptexecute',
+  'onAnimationcancel',
+  'onAnimationend',
+  'onAnimationiteration',
+  'onAnimationstart',
+  'onAuxclick',
+  'onBeforescriptexecute',
+  'onClick',
+  'onCompositionend',
+  'onCompositionstart',
+  'onCompositionupdate',
+  'onContextmenu',
+  'onCopy',
+  'onCut',
+  'onDblclick',
+  'onFocusin',
+  'onFocusout',
+  'onFullscreenchange',
+  'onFullscreenerror',
+  'onGesturechange',
+  'onGestureend',
+  'onGesturestart',
+  'onGotpointercapture',
+  'onKeydown',
+  'onKeypress',
+  'onKeyup',
+  'onLostpointercapture',
+  'onMousedown',
+  'onMousemove',
+  'onMouseout',
+  'onMouseover',
+  'onMouseup',
+  'onMousewheel',
+  'onPaste',
+  'onPointercancel',
+  'onPointerdown',
+  'onPointerenter',
+  'onPointerleave',
+  'onPointermove',
+  'onPointerout',
+  'onPointerover',
+  'onPointerup',
+  'onSelect',
+  'onTouchcancel',
+  'onTouchend',
+  'onTouchmove',
+  'onTouchstart',
+  'onTransitioncancel',
+  'onTransitionend',
+  'onTransitionrun',
+  'onTransitionstart',
+  'onWheel',
 ]
 
 /**
@@ -276,7 +315,7 @@ const nonBubblingEvents = [
  */
 export function filterInputAttrs (attrs: Record<string, unknown>) {
   const [events, props] = pick(attrs, [onRE])
-  const [inputEvents] = pick(events, nonBubblingEvents)
+  const inputEvents = omit(events, bubblingEvents)
   const [rootAttrs, inputAttrs] = pick(props, ['class', 'style', 'id', /^data-/])
   Object.assign(rootAttrs, events)
   Object.assign(inputAttrs, inputEvents)
