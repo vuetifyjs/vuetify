@@ -45,7 +45,6 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
     : Val<T, ReturnObject> | null
 
 export const makeSelectProps = propsFactory({
-  autoScroll: Boolean,
   chips: Boolean,
   closableChips: Boolean,
   closeText: {
@@ -280,7 +279,7 @@ export const VSelect = genericComponent<new <
     }
 
     watch(menu, () => {
-      if (props.autoScroll && !props.hideSelected && menu.value && selections.value.length) {
+      if (!props.hideSelected && menu.value && selections.value.length) {
         const index = displayItems.value.findIndex(
           item => selections.value.some(s => item.value === s.value)
         )

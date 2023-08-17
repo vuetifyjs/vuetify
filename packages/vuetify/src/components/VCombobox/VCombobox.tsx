@@ -403,7 +403,7 @@ export const VCombobox = genericComponent<new <
     })
 
     watch(menu, () => {
-      if (props.autoScroll && !props.hideSelected && menu.value && selections.value.length) {
+      if (!props.hideSelected && menu.value && selections.value.length) {
         const index = displayItems.value.findIndex(
           item => selections.value.some(s => item.value === s.value)
         )
