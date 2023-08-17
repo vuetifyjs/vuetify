@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, provide, ref, shallowRef, unref, watch, watchEffect } from 'vue'
+import { computed, inject, isRef, provide, ref, shallowRef, unref, watch, watchEffect } from 'vue'
 import { getCurrentInstance, injectSelf, mergeDeep, toKebabCase } from '@/util'
 
 // Types
@@ -123,17 +123,13 @@ export function internalUseDefaults (
   })
 
   function provideSubDefaults () {
-    // If subcomponent defaults are provided, override any
-    // subcomponents provided by the component's setup function.
-    // This uses injectSelf so must be done after the original setup to work.
-    const subDefaults = shallowRef()
-    watch(_subcomponentDefaults, val => {
-      subDefaults.value = val ? mergeDeep(
-        injectSelf(DefaultsSymbol, vm)?.value ?? {},
-        val
-      ) : undefined
-    }, { immediate: true, deep: true })
-    provideDefaults(subDefaults)
+    const injected = injectSelf(DefaultsSymbol, vm)
+    provide(DefaultsSymbol, computed(() => {
+      return _subcomponentDefaults.value ? mergeDeep(
+        injected?.value ?? {},
+        _subcomponentDefaults.value
+      ) : injected?.value
+    }))
   }
 
   return { props: _props, provideSubDefaults }
