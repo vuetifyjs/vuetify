@@ -87,6 +87,6 @@ Another example combining avatar with menu.
 
 #### Profile Card
 
-Using the **rounded** prop set to `0`, we can create a sleek hard-lined profile card.
+Using the **rounded** prop value `0`, we can create a sleek hard-lined profile card.
 
 <example file="v-avatar/misc-profile-card" />
