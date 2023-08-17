@@ -122,3 +122,9 @@ $card-variants: (
   $card-plain-opacity,
   'v-card'
 ) !default;
+
+$card-speech-bubble: (
+  $card-background,
+  $card-elevation,
+  'v-card'
+) !default;

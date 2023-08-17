@@ -22,6 +22,7 @@ import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
+import { makeSpeechBubbleProps, useSpeechBubble } from '@/composables/speechBubble'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
@@ -70,6 +71,12 @@ export const makeVCardProps = propsFactory({
   ...makePositionProps(),
   ...makeRoundedProps(),
   ...makeRouterProps(),
+  ...makeSpeechBubbleProps({
+    pointerHeight: 10,
+    pointerWidth: 20,
+    pointerPosition: 50,
+    pointerSide: 'bottom' as const
+  }),
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'elevated' } as const),
@@ -102,6 +109,7 @@ export const VCard = genericComponent<VCardSlots>()({
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
+    const { speechBubbleClasses, speechBubbleStyles } = useSpeechBubble(props)
     const link = useLink(props, attrs)
 
     const isLink = computed(() => props.link !== false && link.isLink.value)
@@ -123,102 +131,116 @@ export const VCard = genericComponent<VCardSlots>()({
       const hasText = !!(slots.text || props.text)
 
       return (
-        <Tag
+        <div
           class={[
             'v-card',
-            {
-              'v-card--disabled': props.disabled,
-              'v-card--flat': props.flat,
-              'v-card--hover': props.hover && !(props.disabled || props.flat),
-              'v-card--link': isClickable.value,
-            },
-            themeClasses.value,
-            borderClasses.value,
-            colorClasses.value,
-            densityClasses.value,
-            elevationClasses.value,
-            loaderClasses.value,
-            positionClasses.value,
-            roundedClasses.value,
-            variantClasses.value,
-            props.class,
+            'v-card__container',
+            `v-card__container--${props.variant}`,
+            speechBubbleClasses.value
           ]}
           style={[
-            colorStyles.value,
-            dimensionStyles.value,
-            locationStyles.value,
-            props.style,
+            speechBubbleStyles.value
           ]}
-          href={ link.href.value }
-          onClick={ isClickable.value && link.navigate }
-          v-ripple={ isClickable.value && props.ripple }
-          tabindex={ props.disabled ? -1 : undefined }
         >
-          { hasImage && (
-            <div key="image" class="v-card__image">
-              { !slots.image ? (
-                <VImg
-                  key="image-img"
-                  cover
-                  src={ props.image }
-                />
-              ) : (
-                <VDefaultsProvider
-                  key="image-defaults"
-                  disabled={ !props.image }
-                  defaults={{
-                    VImg: {
-                      cover: true,
-                      src: props.image,
-                    },
-                  }}
-                  v-slots:default={ slots.image }
-                />
-              )}
-            </div>
-          )}
+          <Tag
+            class={[
+              'v-card',
+              {
+                'v-card--disabled': props.disabled,
+                'v-card--flat': props.flat,
+                'v-card--hover': props.hover && !(props.disabled || props.flat),
+                'v-card--link': isClickable.value,
+              },
+              themeClasses.value,
+              borderClasses.value,
+              colorClasses.value,
+              densityClasses.value,
+              elevationClasses.value,
+              loaderClasses.value,
+              positionClasses.value,
+              roundedClasses.value,
+              speechBubbleClasses.value,
+              variantClasses.value,
+              props.class,
+            ]}
+            style={[
+              colorStyles.value,
+              dimensionStyles.value,
+              locationStyles.value,
+              props.style,
+              speechBubbleStyles.value
+            ]}
+            href={ link.href.value }
+            onClick={ isClickable.value && link.navigate }
+            v-ripple={ isClickable.value && props.ripple }
+            tabindex={ props.disabled ? -1 : undefined }
+          >
+            { hasImage && (
+              <div key="image" class="v-card__image">
+                { !slots.image ? (
+                  <VImg
+                    key="image-img"
+                    cover
+                    src={ props.image }
+                  />
+                ) : (
+                  <VDefaultsProvider
+                    key="image-defaults"
+                    disabled={ !props.image }
+                    defaults={{
+                      VImg: {
+                        cover: true,
+                        src: props.image,
+                      },
+                    }}
+                    v-slots:default={ slots.image }
+                  />
+                )}
+              </div>
+            )}
 
-          <LoaderSlot
-            name="v-card"
-            active={ !!props.loading }
-            color={ typeof props.loading === 'boolean' ? undefined : props.loading }
-            v-slots={{ default: slots.loader }}
-          />
+            <LoaderSlot
+              name="v-card"
+              active={ !!props.loading }
+              color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+              v-slots={{ default: slots.loader }}
+            />
 
-          { hasCardItem && (
-            <VCardItem
-              key="item"
-              prependAvatar={ props.prependAvatar }
-              prependIcon={ props.prependIcon }
-              title={ props.title }
-              subtitle={ props.subtitle }
-              appendAvatar={ props.appendAvatar }
-              appendIcon={ props.appendIcon }
-            >
-              {{
-                default: slots.item,
-                prepend: slots.prepend,
-                title: slots.title,
-                subtitle: slots.subtitle,
-                append: slots.append,
-              }}
-            </VCardItem>
-          )}
+            { hasCardItem && (
+              <VCardItem
+                key="item"
+                prependAvatar={ props.prependAvatar }
+                prependIcon={ props.prependIcon }
+                title={ props.title }
+                subtitle={ props.subtitle }
+                appendAvatar={ props.appendAvatar }
+                appendIcon={ props.appendIcon }
+              >
+                {{
+                  default: slots.item,
+                  prepend: slots.prepend,
+                  title: slots.title,
+                  subtitle: slots.subtitle,
+                  append: slots.append,
+                }}
+              </VCardItem>
+            )}
 
-          { hasText && (
-            <VCardText key="text">
-              { slots.text?.() ?? props.text }
-            </VCardText>
-          )}
+            { hasText && (
+              <VCardText key="text">
+                { slots.text?.() ?? props.text }
+              </VCardText>
+            )}
 
-          { slots.default?.() }
+            { slots.default?.() }
 
-          { slots.actions && (
-            <VCardActions v-slots={{ default: slots.actions }} />
-          )}
+            { slots.actions && (
+              <VCardActions v-slots={{ default: slots.actions }} />
+            )}
 
-          { genOverlays(isClickable.value, 'v-card') }
-        </Tag>
+            { genOverlays(isClickable.value, 'v-card') }
+          </Tag>
+        </div>
       )
     })
 
