@@ -49,6 +49,16 @@
     { divider: true },
     { subheader: t('tools') },
     {
+      title: 'create',
+      href: 'https://tryvuetify.com/',
+      appendIcon: 'mdi-widgets-outline',
+    },
+    {
+      title: 'pastebin',
+      href: 'https://bin.vuetifyjs.com/',
+      appendIcon: 'mdi-delete-outline',
+    },
+    {
       title: 'playground',
       href: 'https://play.vuetifyjs.com/',
       appendIcon: 'mdi-play-circle-outline',
@@ -67,23 +77,6 @@
       title: 'ui-kits',
       to: rpath('/resources/ui-kits/'),
       appendIcon: 'mdi-vector-difference-ab',
-    },
-    { divider: true },
-    { subheader: t('documentation') },
-    {
-      title: '3.x (latest)',
-      href: 'https://vuetifyjs.com/',
-      appendIcon: 'mdi-numeric-3-box',
-    },
-    {
-      title: '2.6.x (v2-stable)',
-      href: 'https://v2.vuetifyjs.com/',
-      appendIcon: 'mdi-numeric-2-box',
-    },
-    {
-      title: '1.5.x (v1-stable)',
-      href: 'https://v15.vuetifyjs.com/',
-      appendIcon: 'mdi-numeric-1-box',
     },
   ]))
 </script>

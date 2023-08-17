@@ -37,8 +37,8 @@
       <v-spacer />
     </a>
 
-    <template v-if="mdAndUp" #append>
-      <v-hover>
+    <template #append>
+      <v-hover v-if="mdAndUp">
         <template #default="{ isHovering, props }">
           <v-btn
             :color="banner.metadata.link_color"

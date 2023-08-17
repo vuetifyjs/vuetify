@@ -10,9 +10,7 @@
     flex: $text-field-input-flex
     transition: $text-field-input-transition
     min-width: 0
-    margin-top: var(--v-input-chips-margin-top)
-    margin-bottom: var(--v-input-chips-margin-bottom)
- 
+
     &:focus,
     &:active
       outline: none
@@ -30,6 +28,15 @@
 
     @at-root #{selector.append('.v-text-field--suffixed', &)}
       --v-field-padding-end: #{$text-field-input-padding-end}
+  
+    input
+      margin-top: var(--v-input-chips-margin-top)
+      margin-bottom: var(--v-input-chips-margin-bottom)
+
+  input.v-field__input
+    min-height: calc($field-input-min-height - var(--v-input-chips-margin-top) - var(--v-input-chips-margin-bottom))
+    padding-top: calc(var(--v-input-chips-margin-top) + var(--v-field-input-padding-top))
+    padding-bottom: calc(var(--v-input-chips-margin-bottom) + var(--v-field-input-padding-bottom))
 
   .v-input__details
     padding-inline-start: $text-field-details-padding-inline

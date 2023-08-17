@@ -64,12 +64,14 @@
   display: flex
   grid-area: prepend
 
-  > .v-avatar
-    margin-inline-end: $list-item-avatar-margin-end
-
   > .v-badge,
-  > .v-icon
-    margin-inline-end: $list-item-icon-margin-end
+  > .v-icon,
+  > .v-tooltip
+    ~ .v-list-item__spacer
+      width: $list-item-icon-margin-start
+
+  > .v-avatar ~ .v-list-item__spacer
+    width: $list-item-avatar-margin-start
 
   .v-list-item--three-line &
     align-self: start
@@ -80,12 +82,17 @@
   align-items: center
   grid-area: append
 
-  > .v-avatar
-    margin-inline-start: $list-item-avatar-margin-start
+  .v-list-item__spacer
+    order: -1
 
   > .v-badge,
-  > .v-icon
-    margin-inline-start: $list-item-icon-margin-start
+  > .v-icon,
+  > .v-tooltip
+    ~ .v-list-item__spacer
+      width: $list-item-icon-margin-end
+
+  > .v-avatar ~ .v-list-item__spacer
+    width: $list-item-avatar-margin-end
 
   .v-list-item--three-line &
     align-self: start

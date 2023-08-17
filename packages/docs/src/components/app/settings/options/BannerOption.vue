@@ -5,7 +5,7 @@
     label="Enable Banners"
     messages="Banners are located at the top of the screen and usually provide general information about Vuetify."
     density="compact"
-    color="success"
+    color="disabled"
     readonly
     inset
   >
