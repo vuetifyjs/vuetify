@@ -23,6 +23,8 @@ export const makeVDatePickerMonthProps = propsFactory({
   hideWeekdays: Boolean,
   showWeek: Boolean,
   hoverDate: null,
+  max: null,
+  min: null,
   multiple: Boolean,
   side: {
     type: String,
@@ -96,6 +98,9 @@ export const VDatePickerMonth = genericComponent()({
       return weeks
     })
 
+    const minDate = computed(() => props.min && adapter.isValid(props.min) ? adapter.date(props.min) : null)
+    const maxDate = computed(() => props.max && adapter.isValid(props.max) ? adapter.date(props.max) : null)
+
     const daysInMonth = computed(() => {
       const validDates = props.modelValue.filter(v => !!v)
       const isRange = validDates.length > 1
@@ -112,6 +117,10 @@ export const VDatePickerMonth = genericComponent()({
         const isAdjacent = !adapter.isSameMonth(date, month.value)
         const isSame = validDates.length === 2 && adapter.isSameDay(startDate, endDate)
 
+        const isDisabled =
+          (minDate.value && adapter.isAfter(minDate.value, date)) ||
+          (maxDate.value && adapter.isAfter(date, maxDate.value))
+
         return {
           date,
           isoDate: toIso(adapter, date),
@@ -125,6 +134,7 @@ export const VDatePickerMonth = genericComponent()({
           isEnd,
           isToday: adapter.isSameDay(date, today),
           isAdjacent,
+          isDisabled,
           isHidden: isAdjacent && !props.showAdjacentMonths,
           inRange: isRange &&
             !isSame &&
@@ -313,9 +323,10 @@ export const VDatePickerMonth = genericComponent()({
                   'v-date-picker-month__day--week-start': item.isWeekStart,
                   'v-date-picker-month__day--week-end': item.isWeekEnd,
                   'v-date-picker-month__day--hovered': item.isHovered,
+                  'v-date-picker-month__dat--disabled': item.isDisabled,
                 },
               ]}
-              data-v-date={ !item.isHidden ? item.isoDate : undefined }
+              data-v-date={ !item.isHidden && !item.isDisabled ? item.isoDate : undefined }
             >
               { item.inRange && (
                 <div
@@ -339,9 +350,10 @@ export const VDatePickerMonth = genericComponent()({
                 <VBtn
                   icon
                   ripple={ false } /* ripple not working correctly since we preventDefault in touchend */
-                  variant={ (item.isToday || item.isHovered) && !item.isSelected ? 'outlined' : 'flat' }
+                  variant={ item.isDisabled ? 'text' : (item.isToday || item.isHovered) && !item.isSelected ? 'outlined' : 'flat' }
                   active={ item.isSelected }
-                  color={ item.isSelected || item.isToday ? props.color : item.isHovered ? undefined : 'transparent' }
+                  disabled={ item.isDisabled }
+                  color={ item.isSelected || item.isToday || item.isDisabled ? props.color : item.isHovered ? undefined : 'transparent' }
                 >
                   { item.localized }
                 </VBtn>

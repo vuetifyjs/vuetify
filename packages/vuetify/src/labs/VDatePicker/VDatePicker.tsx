@@ -19,7 +19,7 @@ import { useDate } from '@/labs/date'
 
 // Utilities
 import { computed, ref, shallowRef, watch } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 export type VDatePickerSlots = {
@@ -63,8 +63,8 @@ export const makeVDatePickerProps = propsFactory({
 
   ...makeDateProps(),
   ...makeVDatePickerControlsProps(),
-  ...makeVDatePickerMonthProps(),
-  ...makeVDatePickerYearsProps(),
+  ...omit(makeVDatePickerMonthProps(), ['min', 'max']),
+  ...omit(makeVDatePickerYearsProps(), ['min', 'max']),
   ...makeVPickerProps({ title: '$vuetify.datePicker.title' }),
 }, 'VDatePicker')
 
@@ -94,12 +94,20 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
     const headerIcon = computed(() => inputMode.value === 'calendar' ? props.keyboardIcon : props.calendarIcon)
     const headerTransition = computed(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
 
-    function updateFromInput (input: string, index: number) {
-      const { isValid, date } = adapter
+    const minDate = computed(() => props.min && adapter.isValid(props.min) ? adapter.date(props.min) : null)
+    const maxDate = computed(() => props.max && adapter.isValid(props.max) ? adapter.date(props.max) : null)
 
-      if (isValid(input)) {
+    function updateFromInput (input: string, index: number) {
+      const { isValid, date, isAfter } = adapter
+      const inputDate = date(input)
+
+      if (
+        isValid(input) &&
+        (!minDate.value || !isAfter(minDate.value, inputDate)) &&
+        (!maxDate.value || !isAfter(inputDate, maxDate.value))
+      ) {
         const newModel = model.value.slice()
-        newModel[index] = date(input)
+        newModel[index] = inputDate
 
         if (props.hideActions) {
           model.value = newModel
@@ -152,7 +160,11 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
       const [pickerProps] = VPicker.filterProps(props)
       const [datePickerControlsProps] = VDatePickerControls.filterProps(props)
       const [datePickerMonthProps] = VDatePickerMonth.filterProps(props)
-      const [datePickerYearsProps] = VDatePickerYears.filterProps(props)
+      const [datePickerYearsProps] = VDatePickerYears.filterProps({
+        ...omit(props, ['min', 'max']),
+        min: minDate.value ? minDate.value.getFullYear() : undefined,
+        max: maxDate.value ? (maxDate.value.getFullYear() as number) + 1 : undefined,
+      })
 
       return (
         <VPicker
@@ -200,7 +212,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
             ) : (
               <div class="v-date-picker__input">
                 <VTextField
-                  modelValue={ inputModel.value[0] }
+                  modelValue={ props.hideActions ? inputModel.value[0] : adapter.format(temporaryModel.value, 'keyboardDate') }
                   onUpdate:modelValue={ v => updateFromInput(v, 0) }
                   label={ t(props.inputText) }
                   placeholder={ props.inputPlaceholder }
