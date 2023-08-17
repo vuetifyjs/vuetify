@@ -86,7 +86,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
 
   setup (props, { slots }) {
     const { isRtl } = useRtl()
-    const { displayClasses, isLocalMobile } = useDisplay(props)
+    const { displayClasses, mobile } = useDisplay(props)
     const group = useGroup(props, props.symbol)
     const isOverflowing = shallowRef(false)
     const scrollOffset = shallowRef(0)
@@ -310,7 +310,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
         case 'always': return true
 
         // Always show arrows on desktop
-        case 'desktop': return !isLocalMobile.value
+        case 'desktop': return !mobile.value
 
         // Show arrows on mobile when overflowing.
         // This matches the default 2.2 behavior
@@ -318,7 +318,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
 
         // Always show on mobile
         case 'mobile': return (
-          isLocalMobile.value ||
+          mobile.value ||
           (isOverflowing.value || Math.abs(scrollOffset.value) > 0)
         )
 
@@ -326,7 +326,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
         // Always show arrows when
         // overflowed on desktop
         default: return (
-          !isLocalMobile.value &&
+          !mobile.value &&
           (isOverflowing.value || Math.abs(scrollOffset.value) > 0)
         )
       }
