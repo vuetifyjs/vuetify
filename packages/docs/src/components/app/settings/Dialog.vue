@@ -20,7 +20,7 @@
         <v-icon icon="$vuetify" size="x-large" />
 
         <v-toolbar-title class="ms-2">
-          Documentation settings
+          Documentation Settings
         </v-toolbar-title>
 
         <v-spacer />
@@ -74,6 +74,10 @@
               </v-list-item>
             </template>
           </v-list>
+
+          <template #append>
+            <git-hub-login />
+          </template>
         </v-navigation-drawer>
 
         <v-main scrollable>
@@ -106,6 +110,7 @@
   // Components
   import AboutVuetify from '@/components/app/settings/AboutVuetify.vue'
   import AdvancedOptions from '@/components/app/settings/AdvancedOptions.vue'
+  import GitHubLogin from '@/components/app/GitHubLogin.vue'
   import Options from '@/components/app/settings/Options.vue'
 
   // Composables

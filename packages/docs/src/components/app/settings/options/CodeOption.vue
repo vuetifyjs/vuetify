@@ -2,7 +2,7 @@
   <v-switch
     v-model="user.composition"
     class="ps-3 flex-0-0"
-    color="success"
+    color="primary"
     density="compact"
     false-value="options"
     inset

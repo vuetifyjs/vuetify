@@ -23,9 +23,7 @@
                   {{ tier.name }}
 
                   <div class="text-h5 font-weight-bold">
-                    {{ tier.price }}
-
-                    <span v-if="tier.suffix" class="font-weight-medium text-medium-emphasis text-subtitle-1">{{ tier.suffix }}</span>
+                    {{ tier.price }}<span v-if="tier.suffix" class="font-weight-medium text-medium-emphasis text-body-2">{{ tier.suffix }}</span>
                   </div>
                 </div>
               </h3>
