@@ -16,7 +16,7 @@ import type { MaybeRef } from '@/util'
  * - multiple matches (start, end), probably shouldn't overlap
  */
 export type FilterMatch = boolean | number | [number, number] | [number, number][]
-export type FilterFunction = (value: string, query: string, item?: any) => FilterMatch
+export type FilterFunction = (value: string, query: string, item?: InternalItem) => FilterMatch
 export type FilterKeyFunctions = Record<string, FilterFunction>
 export type FilterKeys = string | string[]
 export type FilterMode = 'some' | 'every' | 'union' | 'intersection'
