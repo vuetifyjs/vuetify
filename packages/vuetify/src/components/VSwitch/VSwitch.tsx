@@ -3,6 +3,7 @@ import './VSwitch.sass'
 
 // Components
 import { VScaleTransition } from '@/components/transitions'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VProgressCircular } from '@/components/VProgressCircular'
@@ -20,6 +21,7 @@ import { filterInputAttrs, genericComponent, getUid, propsFactory, useRender } f
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
+import type { IconValue } from '@/composables/icons'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
 
@@ -27,6 +29,9 @@ export type VSwitchSlots =
   & VInputSlots
   & VSelectionControlSlots
   & { loader: LoaderSlotProps }
+  & {
+    thumb: { icon?: IconValue }
+  }
 
 export const makeVSwitchProps = propsFactory({
   indeterminate: Boolean,
@@ -155,31 +160,44 @@ export const VSwitch = genericComponent<new <T>(
                         ]}
                         style={ props.inset ? undefined : backgroundColorStyles.value }
                       >
-                        <VScaleTransition>
-                          { !props.loading ? (
-                            icon && <VIcon key={ icon as any } icon={ icon } size="x-small" />
-                          ) : (
-                            <LoaderSlot
-                              name="v-switch"
-                              active
-                              color={ isValid.value === false ? undefined : loaderColor.value }
-                            >
-                              { slotProps => (
-                                slots.loader
-                                  ? slots.loader(slotProps)
-                                  : (
-                                    <VProgressCircular
-                                      active={ slotProps.isActive }
-                                      color={ slotProps.color }
-                                      indeterminate
-                                      size="16"
-                                      width="2"
-                                    />
-                                  )
-                              )}
-                            </LoaderSlot>
-                          )}
-                        </VScaleTransition>
+                        { slots.thumb ? (
+                          <VDefaultsProvider
+                            defaults={{
+                              VIcon: {
+                                icon,
+                                size: 'x-small',
+                              },
+                            }}
+                          >
+                            { slots.thumb?.({ icon }) }
+                          </VDefaultsProvider>
+                        ) : (
+                          <VScaleTransition>
+                            { !props.loading ? (
+                              (icon && (<VIcon key={ icon as any } icon={ icon } size="x-small" />))
+                            ) : (
+                              <LoaderSlot
+                                name="v-switch"
+                                active
+                                color={ isValid.value === false ? undefined : loaderColor.value }
+                              >
+                                { slotProps => (
+                                  slots.loader
+                                    ? slots.loader(slotProps)
+                                    : (
+                                      <VProgressCircular
+                                        active={ slotProps.isActive }
+                                        color={ slotProps.color }
+                                        indeterminate
+                                        size="16"
+                                        width="2"
+                                      />
+                                    )
+                                )}
+                              </LoaderSlot>
+                            )}
+                          </VScaleTransition>
+                        )}
                       </div>
                     </>
                   ),
