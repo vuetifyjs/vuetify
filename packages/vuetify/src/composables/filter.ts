@@ -29,6 +29,11 @@ export interface FilterProps {
   noFilter?: boolean
 }
 
+export interface InternalItem<T = any> {
+  value: any
+  raw: T
+}
+
 // Composables
 export const defaultFilter: FilterFunction = (value, query, item) => {
   if (value == null || query == null) return -1
@@ -48,7 +53,7 @@ export const makeFilterProps = propsFactory({
 }, 'filter')
 
 export function filterItems (
-  items: any[],
+  items: readonly (readonly [item: InternalItem, transformed: any])[] | readonly InternalItem[],
   query: string,
   options?: {
     customKeyFilter?: FilterKeyFunctions
@@ -125,7 +130,7 @@ export function filterItems (
   return array
 }
 
-export function useFilter <T extends { value: unknown }> (
+export function useFilter <T extends InternalItem> (
   props: FilterProps,
   items: MaybeRef<T[]>,
   query: Ref<string | undefined> | (() => string | undefined),
@@ -137,8 +142,8 @@ export function useFilter <T extends { value: unknown }> (
   const filteredMatches: Ref<Map<unknown, Record<string, FilterMatch>>> = ref(new Map())
   const transformedItems = computed(() => (
     options?.transform
-      ? unref(items).map(item => ([item, options?.transform?.(item)]))
-      : unref(items).map(item => ([item, item]))
+      ? unref(items).map(item => ([item, options.transform!(item)] as const))
+      : unref(items)
   ))
 
   watchEffect(() => {
