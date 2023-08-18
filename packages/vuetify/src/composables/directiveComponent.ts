@@ -1,4 +1,7 @@
+// Utilities
 import { h, mergeProps, render, resolveComponent } from 'vue'
+
+// Types
 import type {
   Component,
   ComponentInternalInstance,
