@@ -1,64 +1,47 @@
 <template>
-  <app-link-list-item
-    :to="rpath(`/getting-started/release-notes/?version=v${version}`)"
-    :title="`v${version}`"
-    append-icon="mdi-page-next"
-    label="Latest release"
-    prepend-icon="mdi-github"
-    @click="onClick"
-  />
+  <div class="ps-3 mb-6">
+    <v-label class="mb-2 font-weight-medium">Theme</v-label>
 
-  <app-link-list-item
-    v-if="commits.latest"
-    :href="`https://github.com/vuetifyjs/vuetify/commit/${commits.latest?.sha}`"
-    :title="commits.latest?.sha.slice(0, 7)"
-    append-icon="mdi-open-in-new"
-    label="Latest commit"
-    prepend-icon="mdi-source-commit"
-    rel="noopener noreferrer"
-    target="_blank"
-    min-width="90"
-  />
+    <v-messages
+      active
+      messages="Customize your documentation experience with light and dark themes, as well as a combination of both named"
+      class="mb-n3"
+    />
+  </div>
 
-  <documentation-build />
+  <theme-option />
 
-  <v-divider class="mt-4" />
+  <br>
 
-  <v-footer
-    app
-    absolute
-    class="text-caption justify-end text-medium-emphasis"
-    height="47"
-  >
-    {{ t('copyright') }} &copy; 2016-{{ (new Date()).getFullYear() }} Vuetify, LLC
-  </v-footer>
+  <v-divider class="mb-4" />
+
+  <div class="ps-3">
+    <v-label class="mb-2 font-weight-medium">General</v-label>
+
+    <v-messages
+      active
+      messages="Enable composition API for examples, show component API inline, and more."
+      class="mb-n3"
+    />
+  </div>
+
+  <br>
+
+  <code-option />
+
+  <br>
+
+  <api-option />
+
+  <br>
+
+  <developer-mode />
 </template>
 
 <script setup>
   // Components
-  import DocumentationBuild from '@/components/app/settings/DocumentationBuild.vue'
-
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { onBeforeMount } from 'vue'
-  import { version } from 'vuetify'
-  import { rpath } from '@/util/routes'
-
-  // Stores
-  import { useAppStore } from '@/store/app'
-  import { useCommitsStore } from '@/store/commits'
-
-  const { t } = useI18n()
-  const app = useAppStore()
-  const commits = useCommitsStore()
-
-  onBeforeMount(() => {
-    if (!commits.latest) commits.fetch()
-  })
-
-  function onClick () {
-    app.settings = false
-  }
+  import ApiOption from '@/components/app/settings/options/ApiOption.vue'
+  import CodeOption from '@/components/app/settings/options/CodeOption.vue'
+  import DeveloperMode from './DeveloperMode.vue'
+  import ThemeOption from '@/components/app/settings/options/ThemeOption.vue'
 </script>

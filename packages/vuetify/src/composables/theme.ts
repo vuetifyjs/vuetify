@@ -312,7 +312,9 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     if (head) {
       if (head.push) {
         const entry = head.push(getHead)
-        watch(styles, () => { entry.patch(getHead) })
+        if (IN_BROWSER) {
+          watch(styles, () => { entry.patch(getHead) })
+        }
       } else {
         if (IN_BROWSER) {
           head.addHeadObjs(computed(getHead))
@@ -326,7 +328,11 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         ? document.getElementById('vuetify-theme-stylesheet')
         : null
 
-      watch(styles, updateStyles, { immediate: true })
+      if (IN_BROWSER) {
+        watch(styles, updateStyles, { immediate: true })
+      } else {
+        updateStyles()
+      }
 
       function updateStyles () {
         if (typeof document !== 'undefined' && !styleEl) {

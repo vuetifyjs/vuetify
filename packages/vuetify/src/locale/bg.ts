@@ -1,5 +1,6 @@
 export default {
   badge: 'Значка',
+  open: 'Open',
   close: 'Затвори',
   dataIterator: {
     noResultsText: 'Не са намерени записи',
@@ -57,6 +58,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} файла',
@@ -76,6 +78,10 @@ export default {
       first: 'First page',
       last: 'Last page',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

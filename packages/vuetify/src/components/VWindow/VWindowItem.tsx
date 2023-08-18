@@ -145,7 +145,7 @@ export const VWindowItem = genericComponent()({
       </MaybeTransition>
     ))
 
-    return {}
+    return { groupItem }
   },
 })
 
