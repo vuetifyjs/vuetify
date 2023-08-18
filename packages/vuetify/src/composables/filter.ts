@@ -53,7 +53,7 @@ export const makeFilterProps = propsFactory({
 }, 'filter')
 
 export function filterItems (
-  items: readonly (readonly [item: InternalItem, transformed: any])[] | readonly InternalItem[],
+  items: readonly (readonly [item: InternalItem, transformed: {}])[] | readonly InternalItem[],
   query: string,
   options?: {
     customKeyFilter?: FilterKeyFunctions
@@ -73,7 +73,7 @@ export function filterItems (
 
   loop:
   for (let i = 0; i < items.length; i++) {
-    const [item, transformed] = wrapInArray(items[i])
+    const [item, transformed = item] = wrapInArray(items[i]) as readonly [InternalItem, {}]
     const customMatches: Record<string, FilterMatch> = {}
     const defaultMatches: Record<string, FilterMatch> = {}
     let match: FilterMatch = -1
@@ -83,7 +83,7 @@ export function filterItems (
         const filterKeys = keys || Object.keys(transformed)
 
         for (const key of filterKeys) {
-          const value = getPropertyFromItem(transformed ?? item, key, transformed ?? item)
+          const value = getPropertyFromItem(transformed, key, transformed)
           const keyFilter = options?.customKeyFilter?.[key]
 
           match = keyFilter
@@ -135,7 +135,7 @@ export function useFilter <T extends InternalItem> (
   items: MaybeRef<T[]>,
   query: Ref<string | undefined> | (() => string | undefined),
   options?: {
-    transform?: (item: T) => any
+    transform?: (item: T) => {}
   }
 ) {
   const filteredItems: Ref<T[]> = ref([])
