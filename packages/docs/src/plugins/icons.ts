@@ -301,6 +301,7 @@ export {
   mdiSkipPrevious,
   mdiSourceCommit,
   mdiSnowflake,
+  mdiSpaceInvaders,
   mdiSpeedometer,
   mdiSpeedometerMedium,
   mdiSquare,
