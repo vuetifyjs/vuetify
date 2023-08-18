@@ -19,6 +19,8 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 
 // Utilities
 import { mergeProps, onMounted, ref, shallowRef, watch } from 'vue'
+import { onScopeDispose } from 'vue'
+import { onUnmounted } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 type VSnackbarSlots = {
@@ -29,7 +31,7 @@ type VSnackbarSlots = {
 
 function useCountdown (milliseconds: number, interval = 1000) {
   const time = shallowRef(milliseconds)
-  let timer: any
+  let timer = -1
 
   function clear () {
     clearInterval(timer)
@@ -48,7 +50,7 @@ function useCountdown (milliseconds: number, interval = 1000) {
       return
     }
 
-    timer = setInterval(() => {
+    timer = window.setInterval(() => {
       time.value -= interval
 
       if (time.value <= 0) {
@@ -107,6 +109,8 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     onMounted(() => {
       if (isActive.value) startTimeout()
     })
+
+    onScopeDispose(clear)
 
     let activeTimeout = -1
     function startTimeout () {
