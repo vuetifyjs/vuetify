@@ -268,7 +268,7 @@ export const VField = genericComponent<new <T>(
           />
 
           { hasPrepend && (
-            <div key="prepend" class="v-field__prepend-inner">
+            <div key="prepend" class={['v-field__prepend-inner', textColorClasses.value]} style={ textColorStyles.value }>
               { props.prependInnerIcon && (
                 <InputIcon key="prepend-icon" name="prependInner" />
               )}
@@ -326,7 +326,7 @@ export const VField = genericComponent<new <T>(
           )}
 
           { hasAppend && (
-            <div key="append" class="v-field__append-inner">
+            <div key="append" class={['v-field__append-inner', textColorClasses.value]} style={ textColorStyles.value }>
               { slots['append-inner']?.(slotProps.value) }
 
               { props.appendInnerIcon && (

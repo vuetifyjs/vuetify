@@ -157,17 +157,13 @@ export const VInput = genericComponent<VInputSlots>()({
             },
             densityClasses.value,
             rtlClasses.value,
-            textColorClasses.value,
             validationClasses.value,
             props.class,
           ]}
-          style={[
-            textColorStyles.value,
-            props.style
-          ]}
+          style={ props.style }
         >
           { hasPrepend && (
-            <div key="prepend" class="v-input__prepend">
+            <div key="prepend" class={[ "v-input__prepend" , textColorClasses.value ]} style={ textColorStyles.value }>
               { slots.prepend?.(slotProps.value) }
 
               { props.prependIcon && (
@@ -186,7 +182,7 @@ export const VInput = genericComponent<VInputSlots>()({
           )}
 
           { hasAppend && (
-            <div key="append" class="v-input__append">
+            <div key="append" class={[ "v-input__append" , textColorClasses.value ]} style={ textColorStyles.value }>
               { props.appendIcon && (
                 <InputIcon
                   key="append-icon"
