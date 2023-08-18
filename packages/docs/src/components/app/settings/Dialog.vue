@@ -20,7 +20,7 @@
         <v-icon icon="$vuetify" size="x-large" />
 
         <v-toolbar-title class="ms-2">
-          Documentation settings
+          Documentation Settings
         </v-toolbar-title>
 
         <v-spacer />
