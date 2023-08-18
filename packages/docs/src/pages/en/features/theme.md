@@ -15,8 +15,6 @@ Customize your application's default text colors, surfaces, and more. Easily mod
 
 <entry />
 
-<promoted slug="vuemastery-themes" />
-
 ## API
 
 | Feature | Description |

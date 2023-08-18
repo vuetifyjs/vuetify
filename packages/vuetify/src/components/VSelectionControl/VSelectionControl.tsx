@@ -273,7 +273,7 @@ export const VSelectionControl = genericComponent<new <T>(
           </div>
 
           { label && (
-            <VLabel for={ id.value } clickable>
+            <VLabel for={ id.value } clickable onClick={ (e: Event) => e.stopPropagation() }>
               { label }
             </VLabel>
           )}

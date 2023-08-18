@@ -1,13 +1,12 @@
 <template>
-  <app-tooltip-btn
+  <app-btn
     id="settings-toggle"
     :icon="app.settings ? 'mdi-cog' : 'mdi-cog-outline'"
     color="medium-emphasis"
-    path="settings"
     @click="onClick"
   >
     <app-settings-dialog v-if="user.dev" activator="parent" />
-  </app-tooltip-btn>
+  </app-btn>
 </template>
 
 <script setup>
