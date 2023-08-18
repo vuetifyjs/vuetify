@@ -9,7 +9,7 @@
     </template>
 
     <v-card
-      :min-height="mobile ? '100%' : 650"
+      :min-height="mobile ? '100%' : 750"
       :rounded="mobile ? 0 : 'lg'"
       class="mx-auto"
       elevation="24"
