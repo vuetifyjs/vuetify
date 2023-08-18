@@ -1,7 +1,10 @@
 @use '../../styles/settings'
+@use '../../styles/tools'
 @use './variables' as *
 
 .v-tooltip
+  @include tools.speechbubble($tooltip-speech-bubble...)
+
   > .v-overlay__content
     background: $tooltip-background-color
     color: $tooltip-text-color
@@ -23,20 +26,3 @@
     &[class*="leave-active"]
       transition-timing-function: settings.$accelerated-easing
       transition-duration: $tooltip-transition-leave-duration
-
-  &--speech-bubble
-    &-bottom
-      padding-bottom: calc(5px + var(--speech-bubble-pointer-height)) !important
-      clip-path: polygon(0 0,100% 0, 100% calc(100% - var(--speech-bubble-pointer-height)), calc(var(--speech-bubble-pointer-position) - var(--speech-bubble-pointer-width)/2) calc(100% - var(--speech-bubble-pointer-height)), var(--speech-bubble-pointer-position) 100%, calc(var(--speech-bubble-pointer-position) + var(--speech-bubble-pointer-width)/2) calc(100% - var(--speech-bubble-pointer-height)), 0 calc(100% - var(--speech-bubble-pointer-height)))
-
-    &-top
-      padding-top: calc(5px + var(--speech-bubble-pointer-height)) !important
-      clip-path: polygon(0 var(--speech-bubble-pointer-height), calc(var(--speech-bubble-pointer-position) - var(--speech-bubble-pointer-width)/2) var(--speech-bubble-pointer-height), var(--speech-bubble-pointer-position) 0, calc(var(--speech-bubble-pointer-position) + var(--speech-bubble-pointer-width)/2) var(--speech-bubble-pointer-height), 100% var(--speech-bubble-pointer-height), 100% 100%,0 100%)
-
-    &-left
-      padding-left: calc(16px + var(--speech-bubble-pointer-width)) !important
-      clip-path: polygon(100% 0,100% 100%, var(--speech-bubble-pointer-width) 100%, var(--speech-bubble-pointer-width) calc(var(--speech-bubble-pointer-position) - var(--speech-bubble-pointer-height)/2), 0 var(--speech-bubble-pointer-position), var(--speech-bubble-pointer-width) calc(var(--speech-bubble-pointer-position) + var(--speech-bubble-pointer-height)/2), var(--speech-bubble-pointer-width) 0)
-
-    &-right
-      padding-right: calc(16px + var(--speech-bubble-pointer-width)) !important
-      clip-path: polygon(0 100%,0 0, calc(100% - var(--speech-bubble-pointer-width)) 0, calc(100% - var(--speech-bubble-pointer-width)) calc(var(--speech-bubble-pointer-position) - var(--speech-bubble-pointer-height)/2),100% var(--speech-bubble-pointer-position),calc(100% - var(--speech-bubble-pointer-width)) calc(var(--speech-bubble-pointer-position) + var(--speech-bubble-pointer-height)/2),calc(100% - var(--speech-bubble-pointer-width)) 100%)

@@ -35,7 +35,8 @@ export function useSpeechBubble (
   name = getCurrentInstanceName(),
 ) {
   const speechBubbleClasses = computed(() => {
-    return props.speechBubble ? `${name}--speech-bubble-${props.pointerSide}` : null
+    return props.speechBubble
+      ? [`${name}--speech-bubble-${props.pointerSide}` , `${name}--speech-bubble`] : null
   })
 
   const speechBubbleStyles = computed(() => ({
