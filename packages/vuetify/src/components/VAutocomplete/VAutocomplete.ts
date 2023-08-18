@@ -166,7 +166,6 @@ export default VSelect.extend({
     isFocused (val) {
       if (val) {
         document.addEventListener('copy', this.onCopy)
-        this.$refs.input && this.$refs.input.select()
       } else {
         document.removeEventListener('copy', this.onCopy)
         this.blur()

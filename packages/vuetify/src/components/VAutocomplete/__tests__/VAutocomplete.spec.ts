@@ -404,29 +404,6 @@ describe('VAutocomplete.ts', () => {
     expect(wrapper.vm.lazySearch).toBeNull()
   })
 
-  it('should select input text on focus', async () => {
-    const wrapper = mountFunction({
-      attachToDocument: true,
-    })
-    const select = jest.fn()
-    wrapper.vm.$refs.input.select = select
-
-    const input = wrapper.find('input')
-    input.trigger('focus')
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.isFocused).toBe(true)
-    expect(select).toHaveBeenCalledTimes(1)
-
-    input.trigger('keydown.tab')
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.isFocused).toBe(false)
-    expect(select).toHaveBeenCalledTimes(1)
-  })
-
   it('should not respond to click', () => {
     const onFocus = jest.fn()
     const wrapper = mountFunction({
