@@ -138,6 +138,10 @@ app.use(vuetify)
 - Transition props `mode` and `origin` have been removed.
 - `avatar` prop is no longer needed and has been removed.
 
+### v-banner
+
+- `color` no longer changes the background color, but instead changes the color of the icon and action text. Use `bg-color` to change the background color.
+
 ### v-btn/v-btn-toggle
 
 - `active-class` prop has been renamed to `selected-class`

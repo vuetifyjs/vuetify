@@ -9,6 +9,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
@@ -39,6 +40,7 @@ export type VBannerSlots = {
 export const makeVBannerProps = propsFactory({
   avatar: String,
   color: String,
+  bgColor: String,
   icon: IconValue,
   lines: String as PropType<'one' | 'two' | 'three'>,
   stacked: Boolean,
@@ -72,6 +74,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
+    const { backgroundColorClasses } = useBackgroundColor(props, 'bgColor')
 
     const { themeClasses } = provideTheme(props)
 
@@ -101,6 +104,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
             positionClasses.value,
             roundedClasses.value,
             themeClasses.value,
+            backgroundColorClasses.value,
             props.class,
           ]}
           style={[
