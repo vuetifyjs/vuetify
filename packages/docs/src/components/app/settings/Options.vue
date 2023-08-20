@@ -1,53 +1,42 @@
 <template>
-  <banner-option />
+  <div class="ps-3 mb-6">
+    <v-label class="mb-2 font-weight-medium">Theme</v-label>
+
+    <v-messages
+      active
+      messages="Customize your documentation experience with light and dark themes, as well as a combination of both named"
+      class="mb-n3"
+    />
+  </div>
+
+  <theme-option />
 
   <br>
 
-  <notifications-option />
+  <v-divider class="mb-4" />
+
+  <div class="ps-3">
+    <v-label class="mb-2 font-weight-medium">General</v-label>
+
+    <v-messages
+      active
+      messages="Enable composition API for examples, show component API inline, and more."
+      class="mb-n3"
+    />
+  </div>
 
   <br>
 
-  <quickbar-option />
+  <code-option />
 
   <br>
 
-  <developer-mode />
-
-  <br>
-
-  <v-footer
-    app
-    absolute
-    class="text-caption justify-end text-medium-emphasis"
-    height="47"
-  >
-    <v-btn
-      variant="flat"
-      size="small"
-      color="error"
-      @click="onResetAll"
-    >
-      Reset All
-    </v-btn>
-  </v-footer>
+  <api-option />
 </template>
 
 <script setup>
   // Components
-  import BannerOption from './options/BannerOption.vue'
-  import DeveloperMode from './DeveloperMode.vue'
-  import NotificationsOption from './options/NotificationsOption.vue'
-  import QuickbarOption from './options/QuickbarOption.vue'
-
-  // Stores
-  import { useUserStore } from '@/store/user'
-
-  const user = useUserStore()
-
-  function onResetAll () {
-    user.notifications.read = []
-    user.notifications.show = true
-    user.notifications.last.banner = []
-    user.quickbar = true
-  }
+  import ApiOption from '@/components/app/settings/options/ApiOption.vue'
+  import CodeOption from '@/components/app/settings/options/CodeOption.vue'
+  import ThemeOption from '@/components/app/settings/options/ThemeOption.vue'
 </script>
