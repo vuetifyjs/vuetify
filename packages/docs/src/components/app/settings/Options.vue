@@ -1,24 +1,42 @@
 <template>
-  <v-switch
-    v-model="user.quickbar"
-    class="ps-3 flex-0-0"
-    inset
-    color="success"
-    label="Enable Quickbar"
-    messages="The quickbar is a small toolbar that appears in the navigation drawer on the bottom left of the screen. It provides quick access to common actions and settings."
-    density="compact"
-  />
+  <div class="ps-3 mb-6">
+    <v-label class="mb-2 font-weight-medium">Theme</v-label>
+
+    <v-messages
+      active
+      messages="Customize your documentation experience with light and dark themes, as well as a combination of both named"
+      class="mb-n3"
+    />
+  </div>
+
+  <theme-option />
 
   <br>
 
-  <developer-mode />
+  <v-divider class="mb-4" />
+
+  <div class="ps-3">
+    <v-label class="mb-2 font-weight-medium">General</v-label>
+
+    <v-messages
+      active
+      messages="Enable composition API for examples, show component API inline, and more."
+      class="mb-n3"
+    />
+  </div>
+
+  <br>
+
+  <code-option />
+
+  <br>
+
+  <api-option />
 </template>
 
 <script setup>
   // Components
-  import DeveloperMode from './DeveloperMode.vue'
-
-  import { useUserStore } from '@/store/user'
-
-  const user = useUserStore()
+  import ApiOption from '@/components/app/settings/options/ApiOption.vue'
+  import CodeOption from '@/components/app/settings/options/CodeOption.vue'
+  import ThemeOption from '@/components/app/settings/options/ThemeOption.vue'
 </script>

@@ -250,13 +250,81 @@ export function only<
   return clone
 }
 
+const onRE = /^on[^a-z]/
+export const isOn = (key: string) => onRE.test(key)
+
+const bubblingEvents = [
+  'onAfterscriptexecute',
+  'onAnimationcancel',
+  'onAnimationend',
+  'onAnimationiteration',
+  'onAnimationstart',
+  'onAuxclick',
+  'onBeforeinput',
+  'onBeforescriptexecute',
+  'onChange',
+  'onClick',
+  'onCompositionend',
+  'onCompositionstart',
+  'onCompositionupdate',
+  'onContextmenu',
+  'onCopy',
+  'onCut',
+  'onDblclick',
+  'onFocusin',
+  'onFocusout',
+  'onFullscreenchange',
+  'onFullscreenerror',
+  'onGesturechange',
+  'onGestureend',
+  'onGesturestart',
+  'onGotpointercapture',
+  'onInput',
+  'onKeydown',
+  'onKeypress',
+  'onKeyup',
+  'onLostpointercapture',
+  'onMousedown',
+  'onMousemove',
+  'onMouseout',
+  'onMouseover',
+  'onMouseup',
+  'onMousewheel',
+  'onPaste',
+  'onPointercancel',
+  'onPointerdown',
+  'onPointerenter',
+  'onPointerleave',
+  'onPointermove',
+  'onPointerout',
+  'onPointerover',
+  'onPointerup',
+  'onReset',
+  'onSelect',
+  'onSubmit',
+  'onTouchcancel',
+  'onTouchend',
+  'onTouchmove',
+  'onTouchstart',
+  'onTransitioncancel',
+  'onTransitionend',
+  'onTransitionrun',
+  'onTransitionstart',
+  'onWheel',
+]
+
 /**
  * Filter attributes that should be applied to
- * the root element of a an input component. Remaining
+ * the root element of an input component. Remaining
  * attributes should be passed to the <input> element inside.
  */
 export function filterInputAttrs (attrs: Record<string, unknown>) {
-  return pick(attrs, ['class', 'style', 'id', /^data-/])
+  const [events, props] = pick(attrs, [onRE])
+  const inputEvents = omit(events, bubblingEvents)
+  const [rootAttrs, inputAttrs] = pick(props, ['class', 'style', 'id', /^data-/])
+  Object.assign(rootAttrs, events)
+  Object.assign(inputAttrs, inputEvents)
+  return [rootAttrs, inputAttrs]
 }
 
 /**
@@ -550,9 +618,6 @@ export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
 export function includes (arr: readonly any[], val: any) {
   return arr.includes(val)
 }
-
-const onRE = /^on[^a-z]/
-export const isOn = (key: string) => onRE.test(key)
 
 export function eventName (propName: string) {
   return propName[2].toLowerCase() + propName.slice(3)

@@ -21,6 +21,7 @@
       "installation",
       "frequently-asked-questions",
       "wireframes",
+      "unit-testing",
       "browser-support",
       "upgrade-guide",
       "release-notes",
@@ -74,6 +75,7 @@
     "activeIcon": "mdi-view-dashboard",
     "items": [
       "all",
+      "explorer",
       { "divider": true },
       { "subheader": "containment" },
       "buttons",
@@ -246,7 +248,8 @@
       "jobs-for-vue",
       "ui-kits",
       "themes",
-      "search-engine"
+      "search-engine",
+      "brand-kit"
     ]
   },
   {

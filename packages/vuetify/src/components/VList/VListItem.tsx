@@ -220,7 +220,6 @@ export const VListItem = genericComponent<VListItemSlots>()({
           ]}
           href={ link.href.value }
           tabindex={ isClickable.value ? (list ? -2 : 0) : undefined }
-          title={ props.title }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && props.ripple }
@@ -268,6 +267,8 @@ export const VListItem = genericComponent<VListItemSlots>()({
                   { slots.prepend?.(slotProps.value) }
                 </VDefaultsProvider>
               )}
+
+              <div class="v-list-item__spacer" />
             </div>
           )}
 
@@ -328,6 +329,8 @@ export const VListItem = genericComponent<VListItemSlots>()({
                   { slots.append?.(slotProps.value) }
                 </VDefaultsProvider>
               )}
+
+              <div class="v-list-item__spacer" />
             </div>
           )}
         </Tag>
