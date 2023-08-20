@@ -12,6 +12,7 @@ import { makeVSelectionControlProps, VSelectionControl } from '@/components/VSel
 import { useFocus } from '@/composables/focus'
 import { LoaderSlot, useLoader } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, ref } from 'vue'
@@ -84,6 +85,7 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
       const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
       const [inputProps, _1] = VInput.filterProps(props)
       const [controlProps, _2] = VSelectionControl.filterProps(props)
+      const { current } = useTheme()
 
       return (
         <VInput
@@ -91,6 +93,7 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
             'v-switch',
             { 'v-switch--inset': props.inset },
             { 'v-switch--indeterminate': indeterminate.value },
+            { 'v-switch--dark' : current.value.dark },
             loaderClasses.value,
             props.class,
           ]}
