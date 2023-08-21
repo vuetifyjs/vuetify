@@ -82,7 +82,7 @@
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
-          --v-field-padding-bottom: #{13px + $modifier * .5}
+          --v-field-padding-bottom: #{16px + $modifier * .5}
 
   &--variant-plain,
   &--variant-underlined
@@ -99,7 +99,7 @@
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
           --v-input-control-height: #{$field-control-underlined-height + $modifier}
-          --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)}
+          --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)} !important
 
   &--flat
     box-shadow: none

@@ -1,0 +1,16 @@
+@use 'sass:math'
+@use 'sass:selector'
+@use '../../styles/tools'
+@use './variables' as *
+
+@mixin v-field-support-chips()
+  .v-field
+    &--variant-outlined,
+    &--single-line,
+    &--no-label
+      $v-field-root: &
+      
+      @at-root
+        @include tools.density('v-input', $input-density) using ($modifier)
+          @at-root #{selector.append(&, $v-field-root)}
+            --v-field-padding-bottom: #{13px + $modifier * .5}

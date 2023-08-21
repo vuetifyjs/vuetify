@@ -3,8 +3,14 @@
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
+@use '../VField/_mixins' as *
+@use '../VInput/_mixins' as *
 
 .v-autocomplete
+
+  @include v-input-support-chips
+  @include v-field-support-chips
+
   .v-field
     .v-text-field__prefix,
     .v-text-field__suffix,
