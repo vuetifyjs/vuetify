@@ -11,6 +11,7 @@ import {
   createRange,
   darken,
   getCurrentInstance,
+  getForeground,
   getLuma,
   IN_BROWSER,
   lighten,
@@ -19,7 +20,6 @@ import {
   propsFactory,
   RGBtoHex,
 } from '@/util'
-import { APCAcontrast } from '@/util/color/APCA'
 
 // Types
 import type { HeadClient } from '@vueuse/head'
@@ -235,9 +235,6 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         const onColor = `on-${color}` as keyof OnColors
         const colorVal = parseColor(theme.colors[color]!)
 
-        const blackContrast = Math.abs(APCAcontrast(parseColor(0), colorVal))
-        const whiteContrast = Math.abs(APCAcontrast(parseColor(0xffffff), colorVal))
-
         // TODO: warn about poor color selections
         // const contrastAsText = Math.abs(APCAcontrast(colorVal, colorToInt(theme.colors.background)))
         // const minContrast = Math.max(blackContrast, whiteContrast)
@@ -248,7 +245,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         // }
 
         // Prefer white text if both have an acceptable contrast ratio
-        theme.colors[onColor] = whiteContrast > Math.min(blackContrast, 50) ? '#fff' : '#000'
+        theme.colors[onColor] = getForeground(colorVal)
       }
     }
 
