@@ -13,7 +13,7 @@ export type State = {
   isLoading: boolean
 }
 
-export const useCommitsStore = defineStore('releases', {
+export const useCommitsStore = defineStore('commits', {
   state: (): State => ({
     latest: null,
     commits: [] as Commit[],

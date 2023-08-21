@@ -28,7 +28,7 @@ export const makeVRangeSliderProps = propsFactory({
 
   strict: Boolean,
   modelValue: {
-    type: Array as PropType<readonly number[]>,
+    type: Array as PropType<readonly (string | number)[]>,
     default: () => ([0, 0]),
   },
 }, 'VRangeSlider')

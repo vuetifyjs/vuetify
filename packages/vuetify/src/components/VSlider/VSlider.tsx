@@ -18,12 +18,12 @@ import { computed, ref } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { VSliderThumbSlots } from './VSliderThumb'
+import type { VSliderTrackSlots } from './VSliderTrack'
 import type { VInputSlot, VInputSlots } from '@/components/VInput/VInput'
 
-export type VSliderSlots = VInputSlots & {
+export type VSliderSlots = VInputSlots & VSliderThumbSlots & VSliderTrackSlots & {
   label: VInputSlot
-  'tick-label': never
-  'thumb-label': never
 }
 
 export const makeVSliderProps = propsFactory({
@@ -59,10 +59,8 @@ export const VSlider = genericComponent<VSliderSlots>()({
       props,
       'modelValue',
       undefined,
-      v => {
-        const value = typeof v === 'string' ? parseFloat(v) : v == null ? steps.min.value : v
-
-        return steps.roundValue(value)
+      value => {
+        return steps.roundValue(value == null ? steps.min.value : value)
       },
     )
 

@@ -134,6 +134,8 @@ jobs:
       - run: yarn build docs
         env:
           NODE_OPTIONS: --max-old-space-size=4096
+          VITE_COSMIC_2_BUCKET_SLUG: ${{ secrets.COSMIC_2_BUCKET_SLUG }}
+          VITE_COSMIC_2_BUCKET_READ_KEY: ${{ secrets.COSMIC_2_BUCKET_READ_KEY }}
           VITE_COSMIC_BUCKET_SLUG: ${{ secrets.COSMIC_BUCKET_SLUG }}
           VITE_COSMIC_BUCKET_READ_KEY: ${{ secrets.COSMIC_BUCKET_READ_KEY }}
           VITE_COSMIC_BUCKET_SLUG_STORE: ${{ secrets.COSMIC_BUCKET_SLUG_STORE }}

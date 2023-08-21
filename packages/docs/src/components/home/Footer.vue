@@ -113,9 +113,9 @@
       title: 'github',
     },
     {
-      icon: 'mdi-twitter',
-      href: 'https://twitter.com/vuetifyjs',
-      title: 'twitter',
+      icon: '$x',
+      href: 'https://x.com/vuetifyjs',
+      title: 'x',
     },
     {
       icon: 'mdi-discord',

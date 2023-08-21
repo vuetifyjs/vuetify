@@ -26,6 +26,8 @@
         {{ t(path) }}
       </v-tooltip>
     </v-btn>
+
+    <slot />
   </span>
 </template>
 

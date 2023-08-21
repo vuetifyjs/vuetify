@@ -8,7 +8,7 @@ import { VBtn } from '../../components/VBtn'
 import { useBackgroundColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
 import { useDate } from '@/labs/date'
-import { makeDateProps } from '../VDateInput/composables'
+import { makeDateProps } from '@/labs/VDateInput/composables'
 
 // Utilities
 import { computed } from 'vue'

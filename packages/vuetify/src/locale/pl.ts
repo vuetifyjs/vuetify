@@ -1,5 +1,6 @@
 export default {
   badge: 'Odznaka',
+  open: 'Open',
   close: 'Zamknij',
   dataIterator: {
     noResultsText: 'Nie znaleziono danych odpowiadających wyszukiwaniu',
@@ -57,6 +58,7 @@ export default {
     clear: 'Wyczyść {0}',
     prependAction: '{0} dodatkowa akcja',
     appendAction: '{0} dodatkowa akcja',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: 'Liczba plików: {0}',
@@ -76,6 +78,10 @@ export default {
       first: 'Pierwsza strona',
       last: 'Ostatnia strona',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

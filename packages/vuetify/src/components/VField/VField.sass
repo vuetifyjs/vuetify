@@ -129,7 +129,7 @@
   padding-inline-end: var(--v-field-padding-end)
   padding-top: var(--v-field-input-padding-top)
   padding-bottom: var(--v-field-input-padding-bottom)
-  position: relative 
+  position: relative
   width: 100%
 
   input
@@ -239,6 +239,7 @@
   transform-origin: left center
   transition: $field-transition-timing
   transition-property: opacity, transform
+  z-index: 1
 
   .v-field--variant-underlined &,
   .v-field--variant-plain &
@@ -325,6 +326,7 @@
   .v-field--variant-filled &,
   .v-field--variant-underlined &
     &::before
+      border-color: currentColor
       border-style: solid
       border-width: 0 0 var(--v-field-border-width)
       opacity: var(--v-field-border-opacity)
@@ -476,7 +478,10 @@
 /* endregion */
 /* region MODIFIERS */
 .v-field--reverse
-  .v-field__input
+  .v-field__field, .v-field__input
+    flex-direction: row-reverse
+
+  .v-field__input, input
     @include tools.ltr()
       text-align: right
 

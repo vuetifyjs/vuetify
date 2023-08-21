@@ -1,5 +1,10 @@
 <template>
-  <v-defaults-provider scoped>
+  <v-defaults-provider
+    :defaults="{
+      global: { eager: false }
+    }"
+    scoped
+  >
     <v-sheet
       border
       class="mb-9 overflow-hidden"
@@ -204,10 +209,12 @@
     if (!isLoaded.value || isError.value) return null
 
     const resources = JSON.parse(component.value.playgroundResources || '{}')
+    const setup = component.value.playgroundSetup?.trim()
     return usePlayground(
       sections.value,
       resources.css,
       resources.imports,
+      setup,
     )
   })
 

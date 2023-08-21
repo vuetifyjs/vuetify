@@ -217,7 +217,7 @@ describe('VCombobox', () => {
         .should('have.length', 2)
       cy.get('input').clear()
       cy.get('input').type('Item 3')
-      cy.get('input').should('have.length', 1)
+      cy.get('.v-list-item').should('have.length', 0)
     })
 
     it('should filter items when using multiple', () => {
@@ -359,6 +359,62 @@ describe('VCombobox', () => {
         title: 'Item 2',
         value: 'item2',
       }]))
+    })
+
+    it('should work with objects when using multiple and item-value', () => {
+      const items = ref([
+        {
+          text: 'Item 1',
+          id: 'item1',
+        },
+        {
+          text: 'Item 2',
+          id: 'item2',
+        },
+        {
+          text: 'Item 3',
+          id: 'item3',
+        },
+      ])
+
+      const selectedItems = ref(
+        [
+          {
+            text: 'Item 1',
+            id: 'item1',
+          },
+          {
+            text: 'Item 2',
+            id: 'item2',
+          },
+        ]
+      )
+
+      cy.mount(() => (
+        <VCombobox
+          v-model={ selectedItems.value }
+          items={ items.value }
+          multiple
+          item-title="text"
+          item-value="value"
+          return-object
+        />
+      ))
+
+      cy.get('.v-combobox input').click()
+
+      cy.get('.v-list-item--active').should('have.length', 2)
+      cy.get('.v-field__input').should('include.text', 'Item 1')
+      cy.get('.v-field__input').should('include.text', 'Item 2')
+
+      cy.get('.v-list-item--active input')
+        .eq(0)
+        .click()
+        .get('.v-field__input')
+        .should(() => expect(selectedItems.value).to.deep.equal([{
+          text: 'Item 2',
+          id: 'item2',
+        }]))
     })
   })
 

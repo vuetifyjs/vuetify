@@ -29,7 +29,7 @@ type GroupHeaderSlot = {
   isSelected: ReturnType<typeof provideSelection>['isSelected']
   toggleSelect: ReturnType<typeof provideSelection>['toggleSelect']
   toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
-  isGroupOpen: ReturnType<typeof provideGroupBy>['toggleGroup']
+  isGroupOpen: ReturnType<typeof provideGroupBy>['isGroupOpen']
 }
 
 type ItemSlot = {

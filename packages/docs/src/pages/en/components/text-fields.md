@@ -129,7 +129,7 @@ Note that **readonly** will not remove the clear icon, to prevent readonly input
 
 Sometimes you may need to perform an action when the user clears an input. By using a custom [Vue Event Handler](https://vuejs.org/guide/essentials/event-handling.html), you can bind a custom function that is invoked whenever the `v-text-field` is cleared by the user. The following example demonstrates how to use a a custom event handler to invoke the **onClear** method:
 
-```html
+```html { resource="Component.vue" }
 <template>
   <v-text-field
     clearable
@@ -140,13 +140,9 @@ Sometimes you may need to perform an action when the user clears an input. By us
   ></v-text-field>
 </template>
 
-<script>
-  export default {
-    methods: {
-      onClear () {
-        alert('User cleared the input')
-      }
-    }
+<script setup>
+  onClear () {
+    alert('User cleared the input')
   }
 </script>
 ```
@@ -246,7 +242,7 @@ Slots allow you to customize the display of many `v-text-field` properties to mo
 
 The following example uses the **label**, **prepend**, and **prepend-inner** slots and adds custom elements to the `v-text-field`
 
-```html
+```html { resource="Component.vue" }
 <template>
   <v-text-field v-model="model">
     <template v-slot:label>
@@ -275,10 +271,10 @@ The following example uses the **label**, **prepend**, and **prepend-inner** slo
   </v-text-field>
 </template>
 
-<script>
-  export default {
-    data: () => ({ model: null }),
-  }
+<script setup>
+  import { shallowRef } from 'vue'
+
+  const model = shallowRef('')
 </script>
 ```
 
