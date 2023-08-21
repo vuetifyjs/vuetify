@@ -24,7 +24,17 @@ import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, ref, shallowRef, watch } from 'vue'
-import { deepEqual, genericComponent, getPropertyFromItem, matchesSelector, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import {
+  deepEqual,
+  genericComponent,
+  getPropertyFromItem,
+  IN_BROWSER,
+  matchesSelector,
+  omit,
+  propsFactory,
+  useRender,
+  wrapInArray,
+} from '@/util'
 
 // Types
 import type { Component, PropType } from 'vue'
@@ -283,7 +293,7 @@ export const VSelect = genericComponent<new <
         const index = displayItems.value.findIndex(
           item => selections.value.some(s => item.value === s.value)
         )
-        setTimeout(() => {
+        IN_BROWSER && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
       }
