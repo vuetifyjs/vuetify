@@ -225,6 +225,60 @@ describe('VSelect', () => {
           },
         ]))
     })
+
+    it('should work with objects when using multiple and item-value', () => {
+      const items = ref([
+        {
+          text: 'Item 1',
+          id: 'item1',
+        },
+        {
+          text: 'Item 2',
+          id: 'item2',
+        },
+        {
+          text: 'Item 3',
+          id: 'item3',
+        },
+      ])
+
+      const selectedItems = ref([
+        {
+          text: 'Item 1',
+          id: 'item1',
+        },
+        {
+          text: 'Item 2',
+          id: 'item2',
+        },
+      ])
+
+      cy.mount(() => (
+        <VSelect
+          v-model={ selectedItems.value }
+          items={ items.value }
+          multiple
+          returnObject
+          item-title="text"
+          item-value="id"
+        />
+      ))
+
+      cy.get('.v-select').click()
+
+      cy.get('.v-list-item--active').should('have.length', 2)
+      cy.get('.v-field__input').should('include.text', 'Item 1')
+      cy.get('.v-field__input').should('include.text', 'Item 2')
+
+      cy.get('.v-list-item--active input')
+        .eq(0)
+        .click()
+        .get('.v-field__input')
+        .should(() => expect(selectedItems.value).to.deep.equal([{
+          text: 'Item 2',
+          id: 'item2',
+        }]))
+    })
   })
 
   it('should not be clickable when in readonly', () => {

@@ -168,7 +168,8 @@
       word-spacing: normal
       word-wrap: normal
 
-    pre
+    pre,
+    code
       &::after
         bottom: .5rem
         color: hsla(0, 0%, 19%, 0.5)
@@ -195,7 +196,7 @@
     pre.language-sass::after
       content: 'sass'
 
-    pre.language-scss::after
+    code.language-scss::after
       content: 'scss'
 
     pre.language-ts::after
@@ -212,6 +213,7 @@
         &::selection, ::selection
           background-color: #113663
 
+      code,
       pre
         &::after
           color: hsla(0, 0%, 50%, 1)

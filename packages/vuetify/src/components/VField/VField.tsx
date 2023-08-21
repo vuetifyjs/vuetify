@@ -253,7 +253,6 @@ export const VField = genericComponent<new <T>(
           ]}
           style={[
             backgroundColorStyles.value,
-            textColorStyles.value,
             props.style,
           ]}
           onClick={ onClick }
@@ -286,6 +285,7 @@ export const VField = genericComponent<new <T>(
                 class={[textColorClasses.value]}
                 floating
                 for={ id.value }
+                style={ textColorStyles.value }
               >
                 { label }
               </VFieldLabel>
@@ -340,6 +340,7 @@ export const VField = genericComponent<new <T>(
               'v-field__outline',
               textColorClasses.value,
             ]}
+            style={ textColorStyles.value }
           >
             { isOutlined && (
               <>

@@ -115,9 +115,9 @@ const defaultThemeOptions: Exclude<ThemeOptions, false> = {
         surface: '#FFFFFF',
         'surface-variant': '#424242',
         'on-surface-variant': '#EEEEEE',
-        primary: '#6200EE',
-        'primary-darken-1': '#3700B3',
-        secondary: '#03DAC6',
+        primary: '#1867C0',
+        'primary-darken-1': '#1F5592',
+        secondary: '#48A9A6',
         'secondary-darken-1': '#018786',
         error: '#B00020',
         info: '#2196F3',
@@ -150,10 +150,10 @@ const defaultThemeOptions: Exclude<ThemeOptions, false> = {
         surface: '#212121',
         'surface-variant': '#BDBDBD',
         'on-surface-variant': '#424242',
-        primary: '#BB86FC',
-        'primary-darken-1': '#3700B3',
-        secondary: '#03DAC5',
-        'secondary-darken-1': '#03DAC5',
+        primary: '#2196F3',
+        'primary-darken-1': '#277CC1',
+        secondary: '#54B6B2',
+        'secondary-darken-1': '#48A9A6',
         error: '#CF6679',
         info: '#2196F3',
         success: '#4CAF50',
@@ -312,7 +312,9 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     if (head) {
       if (head.push) {
         const entry = head.push(getHead)
-        watch(styles, () => { entry.patch(getHead) })
+        if (IN_BROWSER) {
+          watch(styles, () => { entry.patch(getHead) })
+        }
       } else {
         if (IN_BROWSER) {
           head.addHeadObjs(computed(getHead))
@@ -326,7 +328,11 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         ? document.getElementById('vuetify-theme-stylesheet')
         : null
 
-      watch(styles, updateStyles, { immediate: true })
+      if (IN_BROWSER) {
+        watch(styles, updateStyles, { immediate: true })
+      } else {
+        updateStyles()
+      }
 
       function updateStyles () {
         if (typeof document !== 'undefined' && !styleEl) {

@@ -123,10 +123,10 @@
   "components/sparklines": ["VSparkline"],
   "components/steppers": [
     "VStepper",
-    "VStepperContent",
     "VStepperHeader",
-    "VStepperItems",
-    "VStepperStep"
+    "VStepperItem",
+    "VStepperWindow",
+    "VStepperWindowItem"
   ],
   "components/switches": ["VSwitch"],
   "components/system-bars": ["VSystemBar"],

@@ -28,6 +28,7 @@ export const md3: Blueprint = {
     },
     VCheckbox: {
       color: 'secondary',
+      inset: true,
     },
     VChip: {
       rounded: 'sm',
@@ -57,6 +58,11 @@ export const md3: Blueprint = {
     },
     VTextField: {
       variant: 'filled',
+    },
+    VToolbar: {
+      VBtn: {
+        color: null,
+      },
     },
   },
   icons: {

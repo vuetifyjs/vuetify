@@ -44,8 +44,6 @@
       <app-settings-append />
     </template>
   </v-navigation-drawer>
-
-  <app-settings-dialog v-else />
 </template>
 
 <script setup>
@@ -53,7 +51,6 @@
   import AppSettingsAppend from './Append.vue'
   import AppSettingsApi from './Api.vue'
   import AppSettingsCode from './Code.vue'
-  import AppSettingsDialog from './Dialog.vue'
   import AppSettingsRtl from './Rtl.vue'
   import AppSettingsTheme from './Theme.vue'
 

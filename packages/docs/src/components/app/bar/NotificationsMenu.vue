@@ -1,5 +1,6 @@
 <template>
   <app-menu
+    v-if="user.notifications.show"
     v-model="menu"
     :close-on-content-click="false"
     :open-on-hover="false"
