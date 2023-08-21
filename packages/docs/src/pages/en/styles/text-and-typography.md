@@ -11,7 +11,7 @@ related:
 
 # Text and typography
 
-Control text size, alignment, wrapping, overflow, transforms and more.
+Control text size, alignment, wrapping, overflow, transforms and more. Vuetify.js uses the Material Design spec Roboto Font.
 
 <entry />
 
