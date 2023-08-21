@@ -44,7 +44,7 @@
     },
     {
       title: t('api-explorer'),
-      to: rpath('/components/api-explorer/'),
+      to: rpath('/components/explorer/'),
       appendIcon: 'mdi-code-json',
     },
     {
