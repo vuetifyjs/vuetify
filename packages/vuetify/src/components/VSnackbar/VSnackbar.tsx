@@ -3,6 +3,7 @@ import './VSnackbar.sass'
 
 // Components
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VHover } from '@/components/VHover/VHover'
 import { VOverlay } from '@/components/VOverlay'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VProgressLinear } from '@/components/VProgressLinear'
@@ -19,6 +20,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 
 // Utilities
 import { mergeProps, onMounted, onScopeDispose, ref, shallowRef, watch } from 'vue'
+import { nextTick } from 'vue'
 import { genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
 
 type VSnackbarSlots = {
@@ -29,16 +31,16 @@ type VSnackbarSlots = {
 
 function useCountdown (milliseconds: number) {
   const time = shallowRef(milliseconds)
-  let timer = -1
+  const timer = shallowRef(-1)
 
   function clear () {
-    clearInterval(timer)
+    clearInterval(timer.value)
   }
 
   function reset () {
-    time.value = milliseconds
-
     clear()
+
+    nextTick(() => time.value = milliseconds)
   }
 
   function start (el?: HTMLElement) {
@@ -51,7 +53,7 @@ function useCountdown (milliseconds: number) {
       return
     }
 
-    timer = window.setInterval(() => {
+    timer.value = window.setInterval(() => {
       time.value -= interval
 
       if (time.value <= 0) {
@@ -62,7 +64,7 @@ function useCountdown (milliseconds: number) {
 
   onScopeDispose(clear)
 
-  return { clear, time, start, reset }
+  return { clear, time, start, reset, timer }
 }
 
 export const makeVSnackbarProps = propsFactory({
@@ -102,10 +104,11 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     const { themeClasses } = provideTheme(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { roundedClasses } = useRounded(props)
-    const { time, start, clear } = useCountdown(Number(props.timeout))
+    const { time, start, reset } = useCountdown(Number(props.timeout))
 
     const overlay = ref<VOverlay>()
     const timerRef = ref<VProgressLinear>()
+    const isHovering = shallowRef(false)
 
     watch(isActive, startTimeout)
     watch(() => props.timeout, startTimeout)
@@ -116,7 +119,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
     let activeTimeout = -1
     function startTimeout () {
-      clear()
+      reset()
       window.clearTimeout(activeTimeout)
       const timeout = Number(props.timeout)
 
@@ -131,8 +134,19 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
       }, timeout)
     }
 
-    function onPointerenter () {
+    function clearTimeout () {
+      reset()
       window.clearTimeout(activeTimeout)
+    }
+
+    function onPointerenter () {
+      isHovering.value = true
+      clearTimeout()
+    }
+
+    function onPointerleave () {
+      isHovering.value = false
+      startTimeout()
     }
 
     useRender(() => {
@@ -168,7 +182,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
               colorStyles.value,
             ],
             onPointerenter,
-            onPointerleave: startTimeout,
+            onPointerleave,
           }, overlayProps.contentProps)}
           persistent
           noClickAnimation
@@ -184,10 +198,10 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             <div key="timer" class="v-snackbar__timer">
               <VProgressLinear
                 ref={ timerRef }
-                active
+                active={ !isHovering.value }
                 color="blue"
                 max={ props.timeout }
-                model-value={ (time.value - 200) < 0 ? 0 : time.value - 200 }
+                model-value={ time.value }
               />
             </div>
           )}
