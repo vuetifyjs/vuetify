@@ -25,7 +25,9 @@
               'border rounded text-disabled text-caption'
             ]"
           >
-            <span v-if="mdAndUp">{{ t('search.key-hint') }}</span>
+            <span v-if="mdAndUp">
+              {{ t(`search.key-hint${user.slashSearch ? '-slash' : ''}`) }}
+            </span>
           </span>
         </span>
       </app-btn>
@@ -110,12 +112,16 @@
   import { onBeforeUnmount, onMounted, ref } from 'vue'
   import algoliasearch from 'algoliasearch'
 
+  // Stores
+  import { useUserStore } from '@/store/user'
+
   // Types
   import type { AlgoliaSearchHelper } from 'algoliasearch-helper'
 
   const { t } = useI18n()
   const { smAndUp, smAndDown, mdAndUp, xs } = useDisplay()
   const { query } = useRoute()
+  const user = useUserStore()
 
   const list = ref<InstanceType<typeof SearchResults>>()
   const model = ref(false)
@@ -186,7 +192,9 @@
     return groups
   }
   function onDocumentKeydown (e: KeyboardEvent) {
-    if (!model.value && e.ctrlKey && e.key === 'k') {
+    const isSearchKey = user.slashSearch ? e.key === '/' : e.ctrlKey && e.key === 'k'
+
+    if (!model.value && isSearchKey) {
       e.preventDefault()
 
       model.value = true
