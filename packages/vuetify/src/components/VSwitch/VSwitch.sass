@@ -7,22 +7,9 @@
   .v-label
     padding-inline-start: $switch-label-margin-inline-start
 
-  &--dark
-    .v-switch__thumb
-      background-color: currentColor
-
-      .v-icon
-        color: $switch-thumb-background
-
-    .v-selection-control--dirty
-      .v-icon
-        color: $switch-thumb-color
-
-
-  &:not(.v-switch--dark)
-    .v-switch__thumb
-      color: currentColor
-      background-color: $switch-thumb-background
+  .v-switch__thumb
+    background-color: rgb(var(--v-theme-surface-bright))
+    color: rgb(var(--v-theme-on-surface-bright))
 
 .v-switch__loader
   display: flex
@@ -39,7 +26,7 @@
     color: $switch-error-color
 
 .v-switch__track
-  background-color: currentColor
+  background-color: rgb(var(--v-theme-surface-variant))
   border-radius: $switch-track-radius
   height: $switch-track-height
   opacity: $switch-track-opacity
@@ -60,7 +47,7 @@
   justify-content: center
   width: $switch-thumb-width
   pointer-events: none
-  transition: .15s .05s transform settings.$decelerated-easing
+  transition: .15s .05s transform settings.$decelerated-easing, .2s color settings.$standard-easing, .2s background-color settings.$standard-easing
   position: relative
   overflow: hidden
 
