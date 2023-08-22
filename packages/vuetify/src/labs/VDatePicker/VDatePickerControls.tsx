@@ -7,6 +7,7 @@ import { VSpacer } from '@/components/VGrid'
 
 // Composables
 import { useLocale } from '@/composables/locale'
+import { useDate } from '@/labs/date'
 
 // Utilities
 import { computed, shallowRef, Transition, watch } from 'vue'
@@ -16,7 +17,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 import type { PropType } from 'vue'
 
 export const makeVDatePickerControlsProps = propsFactory({
-  displayDate: String,
+  displayDate: null,
   disabled: {
     type: [Boolean, String] as PropType<boolean | string[]>,
     default: false,
@@ -55,6 +56,7 @@ export const VDatePickerControls = genericComponent()({
   },
 
   setup (props, { emit }) {
+    const adapter = useDate()
     const { isRtl } = useLocale()
     const modeIcon = computed(() => {
       return props.viewMode === 'month' ? props.expandIcon : props.collapseIcon
@@ -93,6 +95,10 @@ export const VDatePickerControls = genericComponent()({
       const direction = reverse ? '-reverse' : ''
 
       return `v-window-x${direction}-transition`
+    })
+
+    const monthAndYear = computed(() => {
+      return adapter.format(props.displayDate, 'monthAndYear')
     })
 
     watch(() => props.displayDate, (to, from) => {
