@@ -27,15 +27,18 @@
 
     <v-tooltip location="start">
       <template #activator="{ props: activatorProps }">
-        <v-btn
-          :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text-outline'"
-          class="text-disabled me-3 mt-1 app-markup-btn"
-          density="comfortable"
-          style="position: absolute; right: 0; top: 0;"
-          v-bind="activatorProps"
-          variant="text"
-          @click="copy"
-        />
+        <v-fade-transition hide-on-leave>
+          <v-btn
+            :key="icon"
+            :icon="icon"
+            class="text-disabled me-3 mt-1 app-markup-btn"
+            density="comfortable"
+            style="position: absolute; right: 0; top: 0;"
+            v-bind="activatorProps"
+            variant="text"
+            @click="copy"
+          />
+        </v-fade-transition>
       </template>
 
       <span>{{ t('copy-source') }}</span>
@@ -115,13 +118,16 @@
   })
 
   const className = computed(() => `language-${props.language}`)
+  const icon = computed(() => clicked.value ? 'mdi-check' : 'mdi-clipboard-text-outline')
 
   async function copy () {
-    navigator.clipboard.writeText(props.code)
+    const el = root.value?.$el.querySelector('code')
+
+    navigator.clipboard.writeText(props.code || el?.innerText || '')
 
     clicked.value = true
 
-    await wait(500)
+    await wait(2000)
 
     clicked.value = false
   }
@@ -162,7 +168,8 @@
       word-spacing: normal
       word-wrap: normal
 
-    pre
+    pre,
+    code
       &::after
         bottom: .5rem
         color: hsla(0, 0%, 19%, 0.5)
@@ -189,7 +196,7 @@
     pre.language-sass::after
       content: 'sass'
 
-    pre.language-scss::after
+    code.language-scss::after
       content: 'scss'
 
     pre.language-ts::after
@@ -206,6 +213,7 @@
         &::selection, ::selection
           background-color: #113663
 
+      code,
       pre
         &::after
           color: hsla(0, 0%, 50%, 1)

@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-if="app.settingsCanShow"
+    v-if="!user.dev"
     id="settings-drawer"
     v-model="app.settings"
     :location="isRtl ? 'left' : 'right'"
@@ -38,10 +38,6 @@
       <v-divider class="mt-4 mb-3 mx-n3" />
 
       <app-settings-code />
-
-      <v-divider class="mt-4 mb-3 mx-n3" />
-
-      <app-settings-dev />
     </v-container>
 
     <template #append>
@@ -57,12 +53,13 @@
   import AppSettingsCode from './Code.vue'
   import AppSettingsRtl from './Rtl.vue'
   import AppSettingsTheme from './Theme.vue'
-  import AppSettingsDev from './Dev.vue'
 
   // Composables
   import { useAppStore } from '@/store/app'
+  import { useUserStore } from '@/store/user'
   import { useRtl } from 'vuetify'
 
   const { isRtl } = useRtl()
   const app = useAppStore()
+  const user = useUserStore()
 </script>

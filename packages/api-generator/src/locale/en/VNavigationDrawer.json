@@ -16,7 +16,7 @@
     "temporary": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background",
     "touchless": "Disable mobile touch functionality",
     "value": "Controls whether the component is visible or hidden.",
-    "rail": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
+    "rail": "Sets the component width to the **rail-width** value.",
     "railWidth": "Sets the width for the component when `rail` is enabled.",
     "scrim": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
     "sticky": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))"

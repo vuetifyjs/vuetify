@@ -1,5 +1,5 @@
 <template>
-  <div v-if="ad">
+  <div v-if="ad" class="mb-5">
     <a
       v-if="hasPromoted"
       class="d-block"
@@ -20,11 +20,11 @@
           max-height="56"
           cover
         >
-          <div class="d-flex align-center fill-height">
+          <div class="d-flex align-center fill-height pe-3">
             <v-img
               :alt="`Link to ${ad.title}`"
               :src="logo"
-              class="mx-2"
+              class="mx-1 mx-md-2"
               contain
               height="56"
               max-width="56"

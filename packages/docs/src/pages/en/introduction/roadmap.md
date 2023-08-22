@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Roadmap
   title: The Vuetify roadmap
@@ -25,21 +24,23 @@ The following releases are currently under development:
   This is not an exhaustive list and is subject to change at any time without notice
 :::
 
+<promoted slug="vuetify-github-sponsors" />
+
 ### v3.4 (Blackguard)
 
 - **Target Release:** Q3 2023
-- **Overview:** This release will be smaller in scope with a primary focus on expanding our testing coverage and will include 4 new components:
-  - `<v-overflow-btn>`
+- **Overview:** This release will be smaller in scope with a primary focus on expanding our testing coverage and will include 9 new components:
+  - `<v-bottom-sheet>`
+  - `<v-data-iterator>`
+  - `<v-data-table>`
+  - `<v-date-picker>`
+  - `<v-infinite-scroll>`
   - `<v-otp-input>`
+  - `<v-overflow-btn>`
+  - `<v-skeleton-loader>`
   - `<v-speed-dial>`
   - `<v-stepper>`
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/61)
-
-### v2.7 (Nirvana)
-
-- **Target Release:** Q2 2023
-- **Support until:** 18 months after release
-- **Overview:** Backports and deprecations from v3.0.0 to help developers prepare for v3 upgrade
 
 ### Labs release schedule
 
@@ -51,13 +52,21 @@ Information regarding upcoming Labs components is located on the [Labs introduct
 
 The following versions have continued maintenance for backwards compatible fixes, major bugs, and security vulnerabilities. More information is located on the [Long-term support](/introduction/long-term-support/) page.
 
-<promoted slug="vuetify-github-sponsors" />
-
 <promoted slug="vuetify-open-collective" />
 
 ## Released
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
+
+### v2.7 (Nirvana)
+
+- **Released:** July 2023
+- **Target Release:** Q2 2023
+- **Notes:** [v2.7 Release](/getting-started/release-notes/?version=v2.7.0)
+- **LTS Support until:** January 2025
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/59)
+
+----
 
 ### v3.3 (Icarus)
 
@@ -67,6 +76,8 @@ The following are the already released **minor** and **major** version updates. 
 - **Overview:** A small intermediary minor that will release alongside Vue v3.3 and include a few small features.
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/67)
 
+----
+
 ### v3.2 (Orion)
 
 - **Released:** April 2023
@@ -74,6 +85,8 @@ The following are the already released **minor** and **major** version updates. 
 - **Notes:** [v3.2 Release](/getting-started/release-notes/?version=v3.2.0)
 - **Overview:** New and ported components from v2. Exposed defaults system for public use, allowing you to hook into the global default configuration with your components. More information in the [release notes](/getting-started/release-notes/?version=v3.2.0)
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/53)
+
+----
 
 ### v3.1 (Valkyrie)
 
@@ -83,11 +96,15 @@ The following are the already released **minor** and **major** version updates. 
 - **Overview:** First post v3 release that will focus on porting remaining missing v2 components and general bug fixing.
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/56)
 
+----
+
 ### Vuetify Labs { id="labs" }
 
 - **Released:** January 2023
 - **Target Release:** Q4 2022
 - **Overview:** Labs is a new package that includes large components from Vuetify 2 in a pre-production state. More information is located on the [Labs introduction](/labs/introduction/) page.
+
+----
 
 ### v3.0 (Titan)
 

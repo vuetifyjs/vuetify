@@ -91,7 +91,7 @@ export const makeVOverlayProps = propsFactory({
   modelValue: Boolean,
   persistent: Boolean,
   scrim: {
-    type: [String, Boolean],
+    type: [Boolean, String],
     default: true,
   },
   zIndex: {
@@ -245,65 +245,63 @@ export const VOverlay = genericComponent<OverlaySlots>()({
           }, activatorEvents.value, props.activatorProps),
         })}
 
-        { isMounted.value && (
+        { isMounted.value && hasContent.value && (
           <Teleport
             disabled={ !teleportTarget.value }
             to={ teleportTarget.value }
           >
-            { hasContent.value && (
-              <div
-                class={[
-                  'v-overlay',
-                  {
-                    'v-overlay--absolute': props.absolute || props.contained,
-                    'v-overlay--active': isActive.value,
-                    'v-overlay--contained': props.contained,
-                  },
-                  themeClasses.value,
-                  rtlClasses.value,
-                  props.class,
-                ]}
-                style={[
-                  stackStyles.value,
-                  { top: convertToUnit(top.value) },
-                  props.style,
-                ]}
-                ref={ root }
-                { ...scopeId }
-                { ...attrs }
+            <div
+              class={[
+                'v-overlay',
+                {
+                  'v-overlay--absolute': props.absolute || props.contained,
+                  'v-overlay--active': isActive.value,
+                  'v-overlay--contained': props.contained,
+                },
+                themeClasses.value,
+                rtlClasses.value,
+                props.class,
+              ]}
+              style={[
+                stackStyles.value,
+                { top: convertToUnit(top.value) },
+                props.style,
+              ]}
+              ref={ root }
+              { ...scopeId }
+              { ...attrs }
+            >
+              <Scrim
+                color={ scrimColor }
+                modelValue={ isActive.value && !!props.scrim }
+                { ...scrimEvents.value }
+              />
+              <MaybeTransition
+                appear
+                persisted
+                transition={ props.transition }
+                target={ activatorEl.value }
+                onAfterLeave={ () => { onAfterLeave(); emit('afterLeave') } }
               >
-                <Scrim
-                  color={ scrimColor }
-                  modelValue={ isActive.value && !!props.scrim }
-                  { ...scrimEvents.value }
-                />
-                <MaybeTransition
-                  appear
-                  persisted
-                  transition={ props.transition }
-                  target={ activatorEl.value }
-                  onAfterLeave={ () => { onAfterLeave(); emit('afterLeave') } }
+                <div
+                  ref={ contentEl }
+                  v-show={ isActive.value }
+                  v-click-outside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
+                  class={[
+                    'v-overlay__content',
+                    props.contentClass,
+                  ]}
+                  style={[
+                    dimensionStyles.value,
+                    contentStyles.value,
+                  ]}
+                  { ...contentEvents.value }
+                  { ...props.contentProps }
                 >
-                  <div
-                    ref={ contentEl }
-                    v-show={ isActive.value }
-                    v-click-outside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
-                    class={[
-                      'v-overlay__content',
-                      props.contentClass,
-                    ]}
-                    style={[
-                      dimensionStyles.value,
-                      contentStyles.value,
-                    ]}
-                    { ...contentEvents.value }
-                    { ...props.contentProps }
-                  >
-                    { slots.default?.({ isActive }) }
-                  </div>
-                </MaybeTransition>
-              </div>
-            )}
+                  { slots.default?.({ isActive }) }
+                </div>
+              </MaybeTransition>
+            </div>
           </Teleport>
         )}
       </>

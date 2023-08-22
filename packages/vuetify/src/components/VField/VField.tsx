@@ -253,7 +253,6 @@ export const VField = genericComponent<new <T>(
           ]}
           style={[
             backgroundColorStyles.value,
-            textColorStyles.value,
             props.style,
           ]}
           onClick={ onClick }
@@ -264,7 +263,7 @@ export const VField = genericComponent<new <T>(
           <LoaderSlot
             name="v-field"
             active={ !!props.loading }
-            color={ props.error ? 'error' : props.color }
+            color={ props.error ? 'error' : (typeof props.loading === 'string' ? props.loading : props.color) }
             v-slots={{ default: slots.loader }}
           />
 
@@ -286,6 +285,7 @@ export const VField = genericComponent<new <T>(
                 class={[textColorClasses.value]}
                 floating
                 for={ id.value }
+                style={ textColorStyles.value }
               >
                 { label }
               </VFieldLabel>
@@ -340,6 +340,7 @@ export const VField = genericComponent<new <T>(
               'v-field__outline',
               textColorClasses.value,
             ]}
+            style={ textColorStyles.value }
           >
             { isOutlined && (
               <>

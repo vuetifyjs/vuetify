@@ -29,7 +29,7 @@ type GroupHeaderSlot = {
   isSelected: ReturnType<typeof provideSelection>['isSelected']
   toggleSelect: ReturnType<typeof provideSelection>['toggleSelect']
   toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
-  isGroupOpen: ReturnType<typeof provideGroupBy>['toggleGroup']
+  isGroupOpen: ReturnType<typeof provideGroupBy>['isGroupOpen']
 }
 
 type ItemSlot = {
@@ -146,7 +146,7 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
             const itemSlotProps = {
               ...slotProps,
               props: {
-                key: `item_${item.value}`,
+                key: `item_${item.key ?? item.index}`,
                 onClick: expandOnClick.value || props['onClick:row'] ? (event: Event) => {
                   if (expandOnClick.value) {
                     toggleExpand(item)

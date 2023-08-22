@@ -22,16 +22,16 @@
         width: 100%
         transition: none
         pointer-events: none
+        caret-color: transparent
 
   .v-field--dirty
     .v-select__selection
       margin-inline-end: 2px
 
-  .v-field--single-line
-    .v-select__selection-text
-      overflow: hidden
-      text-overflow: ellipsis
-      white-space: nowrap
+  .v-select__selection-text
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
 
   &__content
     overflow: hidden
@@ -41,18 +41,17 @@
 
   &__selection
     display: inline-flex
+    align-items: center
     letter-spacing: inherit
     line-height: inherit
     max-width: 100%
 
-  &--chips,
-  &--selection-slot
-    .v-select__selection
-      margin-top: var(--v-input-chips-margin-top)
-      margin-bottom: var(--v-input-chips-margin-bottom)
+  .v-select__selection
+    margin-top: var(--v-input-chips-margin-top)
+    margin-bottom: var(--v-input-chips-margin-bottom)
 
-      &:first-child
-        margin-inline-start: 0
+    &:first-child
+      margin-inline-start: 0
 
   &--selected
     .v-field

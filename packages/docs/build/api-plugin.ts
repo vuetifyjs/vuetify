@@ -18,6 +18,7 @@ const localeList = locales
   .map(item => item.alternate || item.locale)
 
 function genApiLinks (componentName: string, header: string) {
+  const section = ['<entry />', '<api-search />']
   const links = (Object.keys(pageToApi) as (keyof typeof pageToApi)[])
     .filter(page => pageToApi[page].includes(componentName))
     .reduce<string[]>((acc, href) => {
@@ -26,13 +27,9 @@ function genApiLinks (componentName: string, header: string) {
       return acc
     }, [])
 
-  if (!links.length || !header) return ''
-
-  const section = [
-    `## ${header} {#links}`,
-    links.join('\n'),
-    '<entry />',
-  ]
+  if (links.length && header) {
+    section.unshift(...[links.join('\n'), `## ${header} {#links}`])
+  }
 
   return `${section.join('\n\n')}\n\n`
 }

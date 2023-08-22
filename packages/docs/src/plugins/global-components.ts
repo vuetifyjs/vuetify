@@ -2,6 +2,7 @@
 import Alert from '@/components/Alert.vue'
 import ApiInline from '@/components/api/Inline.vue'
 import ApiLinks from '@/components/api/Links.vue'
+import ApiSearch from '@/components/api/Search.vue'
 import ApiSection from '@/components/api/Section.vue'
 import AppBtn from '@/components/app/Btn.vue'
 import AppCaption from '@/components/app/Caption.vue'
@@ -9,6 +10,7 @@ import AppDivider from '@/components/app/Divider.vue'
 import AppFigure from '@/components/app/Figure.vue'
 import AppHeading from '@/components/app/Heading.vue'
 import AppHeadline from '@/components/app/Headline.vue'
+import AppLinkListItem from '@/components/app/list/LinkListItem.vue'
 import AppLink from '@/components/app/Link.vue'
 import AppMarkdown from '@/components/app/Markdown.vue'
 import AppMenu from '@/components/app/menu/Menu.vue'
@@ -46,6 +48,7 @@ export function installGlobalComponents ({ app }: ViteSSGContext) {
     .component('AppDivider', AppDivider)
     .component('AppHeading', AppHeading)
     .component('AppHeadline', AppHeadline)
+    .component('AppLinkListItem', AppLinkListItem)
     .component('AppLink', AppLink)
     .component('AppMarkdown', AppMarkdown)
     .component('AppMarkup', AppMarkup)
@@ -63,6 +66,7 @@ export function installGlobalComponents ({ app }: ViteSSGContext) {
     .component('ApiInline', ApiInline)
     .component('ApiLinks', ApiLinks)
     .component('ApiSection', ApiSection)
+    .component('ApiSearch', ApiSearch)
     .component('Backmatter', Backmatter)
     .component('BreakpointsTable', BreakpointsTable)
     .component('ColorPalette', ColorPalette)

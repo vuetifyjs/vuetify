@@ -178,7 +178,10 @@ export const VRating = genericComponent<VRatingSlots>()({
                 rating: normalizedValue.value,
               })
               : (
-                <VBtn { ...btnProps } />
+                <VBtn
+                  aria-label={ t(props.itemAriaLabel, value, props.length) }
+                  { ...btnProps }
+                />
               )
             }
           </label>

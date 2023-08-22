@@ -14,7 +14,6 @@ import { computed, ref, shallowRef, Transition, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
 import { getWeek, toIso } from '../date/date'
 import { dateEmits, makeDateProps } from '../VDateInput/composables'
 import { useDate } from '@/labs/date'
@@ -24,16 +23,13 @@ export const makeVDatePickerMonthProps = propsFactory({
   showAdjacentMonths: Boolean,
   hideWeekdays: Boolean,
   showWeek: Boolean,
-  range: {
-    default: false,
-    type: [String, Boolean] as PropType<'start' | 'end' | boolean>,
-    validator: (v: any) => typeof v === 'boolean' || ['start', 'end'].includes(v),
-  },
   hoverDate: null,
   multiple: Boolean,
   side: {
     type: String,
   },
+  min: [Number, String, Date],
+  max: [Number, String, Date],
 
   ...omit(makeDateProps(), ['inputMode', 'viewMode']),
 }, 'VDatePickerMonth')
@@ -115,6 +111,10 @@ export const VDatePickerMonth = genericComponent()({
       const endDate = validDates[1]
 
       return days.map((date, index) => {
+        const isDisabled = !!(
+          (props.min && adapter.isAfter(props.min, date)) ||
+          (props.max && adapter.isAfter(date, props.max))
+        )
         const isStart = startDate && adapter.isSameDay(date, startDate)
         const isEnd = endDate && adapter.isSameDay(date, endDate)
         const isAdjacent = !adapter.isSameMonth(date, month.value)
@@ -126,6 +126,7 @@ export const VDatePickerMonth = genericComponent()({
           formatted: adapter.format(date, 'keyboardDate'),
           year: adapter.getYear(date),
           month: adapter.getMonth(date),
+          isDisabled,
           isWeekStart: index % 7 === 0,
           isWeekEnd: index % 7 === 6,
           isSelected: isStart || isEnd,
@@ -320,10 +321,22 @@ export const VDatePickerMonth = genericComponent()({
                     'v-date-picker-month__day',
                     'v-date-picker-month__weekday',
                   ]}
-                >{ weekDay.charAt(0) }</div>
+                >{ weekDay }</div>
               ))}
 
-              { daysInMonth.value.map((item, index) => (
+          { daysInMonth.value.map((item, index) => {
+            const color = (item.isSelected || item.isToday)
+              ? props.color
+              : (item.isHovered || item.isDisabled)
+                ? undefined
+                : 'transparent'
+            const variant = item.isDisabled
+              ? 'text'
+              : (item.isToday || item.isHovered) && !item.isSelected
+                ? 'outlined'
+                : 'flat'
+
+            return (
                 <div
                   class={[
                     'v-date-picker-month__day',
@@ -338,7 +351,7 @@ export const VDatePickerMonth = genericComponent()({
                       'v-date-picker-month__day--hovered': item.isHovered,
                     },
                   ]}
-                  data-v-date={ !item.isHidden ? item.isoDate : undefined }
+                data-v-date={ !item.isHidden && !item.isDisabled ? item.isoDate : undefined }
                 >
                   { item.inRange && (
                     <div
@@ -360,17 +373,19 @@ export const VDatePickerMonth = genericComponent()({
 
                   { (props.showAdjacentMonths || !item.isAdjacent) && (
                     <VBtn
+                    active={ item.isSelected }
+                    color={ color }
+                    disabled={ item.isDisabled }
                       icon
                       ripple={ false } /* ripple not working correctly since we preventDefault in touchend */
-                      variant={ (item.isToday || item.isHovered) && !item.isSelected ? 'outlined' : 'flat' }
-                      active={ item.isSelected }
-                      color={ item.isSelected || item.isToday ? props.color : item.isHovered ? undefined : 'transparent' }
+                    variant={ variant }
                     >
                       { item.localized }
                     </VBtn>
                   )}
                 </div>
-              ))}
+            )
+          })}
             </div>
           </Transition>
         </div>

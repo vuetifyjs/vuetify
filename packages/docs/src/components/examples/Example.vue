@@ -1,5 +1,10 @@
 <template>
-  <v-defaults-provider scoped>
+  <v-defaults-provider
+    :defaults="{
+      global: { eager: false }
+    }"
+    scoped
+  >
     <v-sheet
       border
       class="mb-9 overflow-hidden"
@@ -43,12 +48,16 @@
             location="top"
           >
             <template #activator="{ props: tooltip }">
-              <v-btn
-                class="me-2 text-medium-emphasis"
-                density="comfortable"
-                variant="text"
-                v-bind="mergeProps(action as any, tooltip)"
-              />
+              <v-fade-transition hide-on-leave>
+                <v-btn
+                  v-show="!action.hide"
+                  :key="action.icon"
+                  class="me-2 text-medium-emphasis"
+                  density="comfortable"
+                  variant="text"
+                  v-bind="mergeProps(action as any, tooltip)"
+                />
+              </v-fade-transition>
             </template>
 
             <span>{{ t(path) }}</span>
@@ -77,7 +86,7 @@
         <v-theme-provider
           :class="showCode && 'border-t'"
           :theme="theme"
-          class="pa-4 rounded-b"
+          class="pa-2 rounded-b"
           with-background
         >
           <component :is="ExampleComponent" v-if="isLoaded" />
@@ -92,17 +101,18 @@
   import ExampleMissing from './ExampleMissing.vue'
 
   // Composables
+  import { useDisplay, useTheme } from 'vuetify'
   import { useI18n } from 'vue-i18n'
   import { usePlayground } from '@/composables/playground'
-  import { useTheme } from 'vuetify'
   import { useUserStore } from '@/store/user'
 
   // Utilities
   import { computed, mergeProps, onMounted, ref, shallowRef, watch } from 'vue'
-  import { getBranch } from '@/util/helpers'
+  import { getBranch, wait } from '@/util/helpers'
   import { getExample } from 'virtual:examples'
   import { upperFirst } from 'lodash-es'
 
+  const { xs } = useDisplay()
   const { t } = useI18n()
   const userStore = useUserStore()
 
@@ -133,6 +143,7 @@
   const template = ref(0)
   const hasRendered = ref(false)
   const isEager = shallowRef(false)
+  const copied = shallowRef(false)
 
   const component = shallowRef()
   const code = ref<string>()
@@ -198,59 +209,59 @@
     if (!isLoaded.value || isError.value) return null
 
     const resources = JSON.parse(component.value.playgroundResources || '{}')
+    const setup = component.value.playgroundSetup?.trim()
     return usePlayground(
       sections.value,
       resources.css,
       resources.imports,
+      setup,
     )
   })
 
-  const actions = computed(() => {
-    const array = []
+  const actions = computed(() => [
+    {
+      icon: 'mdi-theme-light-dark',
+      path: 'invert-example-colors',
+      onClick: toggleTheme,
+    },
+    {
+      icon: '$vuetifyPlay',
+      path: 'edit-in-playground',
+      href: playgroundLink.value,
+      target: '_blank',
+      hide: xs.value,
+    },
+    {
+      icon: 'mdi-github',
+      path: 'view-in-github',
+      href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
+      target: '_blank',
+      hide: xs.value,
+    },
+    {
+      icon: copied.value ? 'mdi-check' : 'mdi-clipboard-multiple-outline',
+      path: 'copy-example-source',
+      onClick: async () => {
+        navigator.clipboard.writeText(
+          sections.value.map(section => section.content).join('\n')
+        )
 
-    if (!props.hideInvert) {
-      array.push({
-        icon: 'mdi-theme-light-dark',
-        path: 'invert-example-colors',
-        onClick: toggleTheme,
-      })
-    }
+        copied.value = true
 
-    if (playgroundLink.value) {
-      array.push({
-        icon: '$vuetifyPlay',
-        path: 'edit-in-playground',
-        href: playgroundLink.value,
-        target: '_blank',
-      })
-    }
+        await wait(2000)
 
-    return [
-      ...array,
-      {
-        icon: 'mdi-github',
-        path: 'view-in-github',
-        href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
-        target: '_blank',
+        copied.value = false
       },
-      {
-        icon: 'mdi-clipboard-multiple-outline',
-        path: 'copy-example-source',
-        onClick: () => {
-          navigator.clipboard.writeText(
-            sections.value.map(section => section.content).join('\n')
-          )
-        },
+      hide: xs.value,
+    },
+    {
+      icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',
+      path: !showCode.value ? 'view-source' : 'hide-source',
+      onClick: () => {
+        showCode.value = !showCode.value
       },
-      {
-        icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',
-        path: !showCode.value ? 'view-source' : 'hide-source',
-        onClick: () => {
-          showCode.value = !showCode.value
-        },
-      },
-    ]
-  })
+    },
+  ])
 
   watch(showCode, val => val && (isEager.value = true))
 </script>

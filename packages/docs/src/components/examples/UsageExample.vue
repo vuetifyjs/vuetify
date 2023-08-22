@@ -64,7 +64,7 @@
     <v-layout :class="['border-b', !show && 'border-opacity-0']">
       <v-main>
         <v-sheet
-          class="pa-14 d-flex align-center"
+          class="py-14 px-4 d-flex align-center"
           min-height="300"
           rounded="0"
         >
@@ -103,7 +103,7 @@
 
     <v-expand-transition>
       <div v-if="show && display.mdAndUp.value">
-        <div class="pa-3">
+        <div class="pa-2">
           <app-markup :code="code" />
         </div>
 

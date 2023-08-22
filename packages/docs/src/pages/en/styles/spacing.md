@@ -11,7 +11,7 @@ related:
 
 # Spacing
 
-Update your layout without creating new classes. Spacing helpers are useful for modifying the padding and margin of an element.<inline slug="scrimba-spacing" />
+Update your layout without creating new classes. Spacing helpers are useful for modifying the padding and margin of an element.
 
 <entry />
 

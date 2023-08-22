@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Infinite scrollers
   title: Infinite scroller component
@@ -7,7 +6,7 @@ meta:
   keywords: infinite scroll, vuetify infinite scroll component, vue infinite scroll component, v-infinite-scroll component
 related:
   - /components/lists/
-  - /components/data-tables/
+  - /components/data-tables/basics/
   - /components/data-iterators/
 ---
 

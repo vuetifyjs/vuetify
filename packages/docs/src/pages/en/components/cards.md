@@ -12,7 +12,7 @@ related:
 
 # Cards
 
- The `v-card` component is a versatile and enhanced version of [v-sheet](/components/sheets/) that provides a simple interface for headings, text, images, icons, and more <inline slug="scrimba-cards" />
+ The `v-card` component is a versatile and enhanced version of [v-sheet](/components/sheets/) that provides a simple interface for headings, text, images, icons, and more.
 
 ![Card Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-card/v-card-entry.png)
 
@@ -74,6 +74,10 @@ In some cases it is possible to combine the different options, like the example 
 :::
 
 <example file="v-card/basics-combine" />
+
+### Content overflow
+
+`v-card` does not allow its content to overflow outside the card by default. It also establishes a z-index stacking context, which prevents its content from displaying on top of elements outside the `v-card`, even when it sets a higher z-index value. To override this default behavior, apply the following usage: `<v-card style="overflow: initial; z-index: initial">`.
 
 ## Examples
 
