@@ -66,7 +66,6 @@ function useCountdown (milliseconds: number) {
 export const makeVSnackbarProps = propsFactory({
   multiLine: Boolean,
   timer: [Boolean, String],
-  // countdown: [Boolean, String],
   timeout: {
     type: [Number, String],
     default: 5000,
@@ -195,7 +194,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
               <VProgressLinear
                 ref={ timerRef }
                 active={ !isHovering.value }
-                color="blue"
+                color={ typeof props.timer === 'string' ? props.timer : 'info' }
                 max={ props.timeout }
                 model-value={ countdown.time.value }
               />
