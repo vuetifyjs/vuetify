@@ -26,7 +26,7 @@
         <v-spacer />
 
         <v-btn
-          class="me-n2"
+          class="me-n1"
           icon="$close"
           size="x-small"
           variant="text"
@@ -116,11 +116,15 @@
   // Composables
   import { useDisplay } from 'vuetify'
   import { useI18n } from 'vue-i18n'
+
+  // Stores
   import { useAppStore } from '@/store/app'
+  import { useAuthStore } from '@/store/auth'
 
   // Utilities
-  import { computed, ref } from 'vue'
+  import { computed, onMounted, ref } from 'vue'
 
+  const auth = useAuthStore()
   const app = useAppStore()
   const { mobile } = useDisplay()
   const { t } = useI18n()
@@ -150,4 +154,6 @@
     },
   ]
   const model = ref([0])
+
+  onMounted(auth.getUser)
 </script>
