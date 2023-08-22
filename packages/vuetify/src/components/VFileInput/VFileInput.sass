@@ -1,9 +1,15 @@
 @use './variables' as *
 @use '../../styles/tools'
 @use 'sass:math'
+@use '../VField/_mixins' as *
+@use '../VInput/_mixins' as *
 
 // Block
 .v-file-input
+
+  @include v-input-support-chips
+  @include v-field-support-chips
+
   input[type="file"]
     height: 100%
     left: 0
