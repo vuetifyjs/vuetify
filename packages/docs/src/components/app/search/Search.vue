@@ -26,7 +26,7 @@
             ]"
           >
             <span v-if="mdAndUp">
-              {{ t(`search.key-hint${user.slashSearch ? '-slash' : ''}`) }}
+              {{ t(`search.key-hint${user.slashSearch ? '-slash' : platform.mac ? '-mac' : ''}`) }}
             </span>
           </span>
         </span>
@@ -119,7 +119,7 @@
   import type { AlgoliaSearchHelper } from 'algoliasearch-helper'
 
   const { t } = useI18n()
-  const { smAndUp, smAndDown, mdAndUp, xs } = useDisplay()
+  const { smAndUp, smAndDown, mdAndUp, xs, platform } = useDisplay()
   const { query } = useRoute()
   const user = useUserStore()
 
@@ -192,7 +192,8 @@
     return groups
   }
   function onDocumentKeydown (e: KeyboardEvent) {
-    const isSearchKey = user.slashSearch ? e.key === '/' : e.ctrlKey && e.key === 'k'
+    const modifierKey = platform.value.mac ? e.metaKey : e.ctrlKey
+    const isSearchKey = user.slashSearch ? e.key === '/' : modifierKey && e.key === 'k'
 
     if (!model.value && isSearchKey) {
       e.preventDefault()
