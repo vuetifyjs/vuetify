@@ -282,7 +282,7 @@ function _useActivator (
     if (selector) {
       if (selector === 'parent') {
         let el = vm?.proxy?.$el?.parentNode
-        while (el.hasAttribute('data-no-activator')) {
+        while (el?.hasAttribute('data-no-activator')) {
           el = el.parentNode
         }
         activator = el
