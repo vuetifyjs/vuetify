@@ -109,18 +109,18 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
     })
 
     const items = computed(() => {
-      const items = [];
+      const items = []
       const children = contentRef.value?.children
-      if(children){
-        for(const child of children){
+      if( children ) {
+        for( const child of children ) {
           const style = getComputedStyle(child)
-          items.push(isHorizontal
-            ?child.clientWidth + parseInt(style.marginLeft) + parseInt(style.marginRight)
-            :child.clientHeight + parseInt(style.marginTop) + parseInt(style.marginBottom)
-          );
+          items.push(isHorizontal.value
+            ? child.clientWidth + parseInt(style.marginLeft) + parseInt(style.marginRight)
+            : child.clientHeight + parseInt(style.marginTop) + parseInt(style.marginBottom)
+          )
         }
       }
-      return items;
+      return items
     })
 
     if (IN_BROWSER) {
@@ -289,13 +289,13 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
     function scrollTo (location: 'prev' | 'next') {
       let newAbsoluteOffset = scrollOffset.value + (location === 'prev' ? -1 : 1) * containerSize.value
 
-      let sum = 0;
+      let sum = 0
       items.value.some(item => {
-        sum += item;
+        sum += item
         return sum + item > newAbsoluteOffset
       })
 
-      if(sum < newAbsoluteOffset) newAbsoluteOffset = sum
+      if (sum < newAbsoluteOffset) newAbsoluteOffset = sum
 
       scrollOffset.value = clamp(newAbsoluteOffset, 0, contentSize.value - containerSize.value)
     }
