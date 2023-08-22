@@ -40,13 +40,6 @@
       'three-lines': 'three',
     }[model.value]
   })
-  const subtitle = computed(() => {
-    switch (lines.value) {
-      case 'two': return 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima'
-      case 'three': return 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!'
-      default: return 'Lorem ipsum dolor sit amet consectetur adipisicing elit'
-    }
-  })
 
   const props = computed(() => {
     return {
