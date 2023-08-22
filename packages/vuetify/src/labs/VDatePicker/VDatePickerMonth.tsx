@@ -324,68 +324,68 @@ export const VDatePickerMonth = genericComponent()({
                 >{ weekDay }</div>
               ))}
 
-          { daysInMonth.value.map((item, index) => {
-            const color = (item.isSelected || item.isToday)
-              ? props.color
-              : (item.isHovered || item.isDisabled)
-                ? undefined
-                : 'transparent'
-            const variant = item.isDisabled
-              ? 'text'
-              : (item.isToday || item.isHovered) && !item.isSelected
-                ? 'outlined'
-                : 'flat'
+              { daysInMonth.value.map((item, index) => {
+                const color = (item.isSelected || item.isToday)
+                  ? props.color
+                  : (item.isHovered || item.isDisabled)
+                    ? undefined
+                    : 'transparent'
+                const variant = item.isDisabled
+                  ? 'text'
+                  : (item.isToday || item.isHovered) && !item.isSelected
+                    ? 'outlined'
+                    : 'flat'
 
-            return (
-                <div
-                  class={[
-                    'v-date-picker-month__day',
-                    {
-                      'v-date-picker-month__day--selected': item.isSelected,
-                      'v-date-picker-month__day--start': item.isStart,
-                      'v-date-picker-month__day--end': item.isEnd,
-                      'v-date-picker-month__day--adjacent': item.isAdjacent,
-                      'v-date-picker-month__day--hide-adjacent': item.isHidden,
-                      'v-date-picker-month__day--week-start': item.isWeekStart,
-                      'v-date-picker-month__day--week-end': item.isWeekEnd,
-                      'v-date-picker-month__day--hovered': item.isHovered,
-                    },
-                  ]}
-                data-v-date={ !item.isHidden && !item.isDisabled ? item.isoDate : undefined }
-                >
-                  { item.inRange && (
-                    <div
-                      key="in-range"
-                      class={[
-                        'v-date-picker-month__day--range',
-                        backgroundColorClasses.value,
-                      ]}
-                      style={ backgroundColorStyles.value }
-                    />
-                  )}
+                return (
+                  <div
+                    class={[
+                      'v-date-picker-month__day',
+                      {
+                        'v-date-picker-month__day--selected': item.isSelected,
+                        'v-date-picker-month__day--start': item.isStart,
+                        'v-date-picker-month__day--end': item.isEnd,
+                        'v-date-picker-month__day--adjacent': item.isAdjacent,
+                        'v-date-picker-month__day--hide-adjacent': item.isHidden,
+                        'v-date-picker-month__day--week-start': item.isWeekStart,
+                        'v-date-picker-month__day--week-end': item.isWeekEnd,
+                        'v-date-picker-month__day--hovered': item.isHovered,
+                      },
+                    ]}
+                    data-v-date={ !item.isHidden && !item.isDisabled ? item.isoDate : undefined }
+                  >
+                    { item.inRange && (
+                      <div
+                        key="in-range"
+                        class={[
+                          'v-date-picker-month__day--range',
+                          backgroundColorClasses.value,
+                        ]}
+                        style={ backgroundColorStyles.value }
+                      />
+                    )}
 
-                  { item.inHover && !item.isStart && !item.isEnd && !item.isHovered && !item.inRange && (
-                    <div
-                      key="in-hover"
-                      class="v-date-picker-month__day--hover"
-                    />
-                  )}
+                    { item.inHover && !item.isStart && !item.isEnd && !item.isHovered && !item.inRange && (
+                      <div
+                        key="in-hover"
+                        class="v-date-picker-month__day--hover"
+                      />
+                    )}
 
-                  { (props.showAdjacentMonths || !item.isAdjacent) && (
-                    <VBtn
-                    active={ item.isSelected }
-                    color={ color }
-                    disabled={ item.isDisabled }
-                      icon
-                      ripple={ false } /* ripple not working correctly since we preventDefault in touchend */
-                    variant={ variant }
-                    >
-                      { item.localized }
-                    </VBtn>
-                  )}
-                </div>
-            )
-          })}
+                    { (props.showAdjacentMonths || !item.isAdjacent) && (
+                      <VBtn
+                        active={ item.isSelected }
+                        color={ color }
+                        disabled={ item.isDisabled }
+                        icon
+                        ripple={ false } /* ripple not working correctly since we preventDefault in touchend */
+                        variant={ variant }
+                      >
+                        { item.localized }
+                      </VBtn>
+                    )}
+                  </div>
+                )
+              })}
             </div>
           </Transition>
         </div>
