@@ -2,6 +2,8 @@
 import './VSwitch.sass'
 
 // Components
+import { VScaleTransition } from '@/components/transitions'
+import { VIcon } from '@/components/VIcon'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VProgressCircular } from '@/components/VProgressCircular'
 import { makeVSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
@@ -126,36 +128,43 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
                 {{
                   ...slots,
                   default: () => (<div class="v-switch__track" onClick={ onClick }></div>),
-                  input: ({ textColorClasses, textColorStyles }) => (
-                    <div
-                      class={[
-                        'v-switch__thumb',
-                        textColorClasses.value,
-                      ]}
-                      style={ textColorStyles.value }
-                    >
-                      { props.loading && (
-                        <LoaderSlot
-                          name="v-switch"
-                          active
-                          color={ isValid.value === false ? undefined : loaderColor.value }
-                        >
-                          { slotProps => (
-                            slots.loader
-                              ? slots.loader(slotProps)
-                              : (
-                                  <VProgressCircular
-                                    active={ slotProps.isActive }
-                                    color={ slotProps.color }
-                                    indeterminate
-                                    size="16"
-                                    width="2"
-                                  />
-                              )
+                  input: ({ inputNode, icon }) => (
+                    <>
+                      { inputNode }
+
+                      <div
+                        class={[
+                          'v-switch__thumb',
+                          { 'v-switch__thumb--filled': icon || props.loading },
+                        ]}
+                      >
+                        <VScaleTransition>
+                          { !props.loading ? (
+                            icon && <VIcon key={ icon as any } icon={ icon } size="x-small" />
+                          ) : (
+                            <LoaderSlot
+                              name="v-switch"
+                              active
+                              color={ isValid.value === false ? undefined : loaderColor.value }
+                            >
+                              { slotProps => (
+                                slots.loader
+                                  ? slots.loader(slotProps)
+                                  : (
+                                    <VProgressCircular
+                                      active={ slotProps.isActive }
+                                      color={ slotProps.color }
+                                      indeterminate
+                                      size="16"
+                                      width="2"
+                                    />
+                                  )
+                              )}
+                            </LoaderSlot>
                           )}
-                        </LoaderSlot>
-                      )}
-                    </div>
+                        </VScaleTransition>
+                      </div>
+                    </>
                   ),
                 }}
               </VSelectionControl>

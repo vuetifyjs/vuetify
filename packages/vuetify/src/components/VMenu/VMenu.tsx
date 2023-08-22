@@ -13,7 +13,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { computed, inject, mergeProps, provide, ref, shallowRef, watch } from 'vue'
+import { computed, inject, mergeProps, nextTick, provide, ref, shallowRef, watch } from 'vue'
 import { VMenuSymbol } from './shared'
 import { focusableChildren, focusChild, genericComponent, getNextElement, getUid, omit, propsFactory, useRender } from '@/util'
 
@@ -74,11 +74,14 @@ export const VMenu = genericComponent<OverlaySlots>()({
       },
     })
 
-    function onFocusIn (e: FocusEvent) {
+    async function onFocusIn (e: FocusEvent) {
       const before = e.relatedTarget as HTMLElement | null
       const after = e.target as HTMLElement | null
 
+      await nextTick()
+
       if (
+        isActive.value &&
         before !== after &&
         overlay.value?.contentEl &&
         // We're the topmost menu

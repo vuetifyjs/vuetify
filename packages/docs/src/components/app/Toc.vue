@@ -61,35 +61,50 @@
         />
 
         <v-row dense>
-          <v-col
-            v-for="sponsor of sponsors"
-            :key="sponsor.slug"
-            class="d-inline-flex"
-          >
-            <sponsor-card
-              :max-height="sponsor.metadata.tier === -1 ? 52 : 40"
-              :sponsor="sponsor"
-              :color="dark ? undefined : 'grey-lighten-5'"
+          <template v-if="sponsors.length">
+            <v-col
+              v-for="sponsor of sponsors"
+              :key="sponsor.slug"
+              class="d-inline-flex"
+            >
+              <sponsor-card
+                :color="dark ? undefined : 'grey-lighten-5'"
+                :max-height="sponsor.metadata.tier === -1 ? 52 : 40"
+                :sponsor="sponsor"
+              />
+            </v-col>
+
+            <v-col class="d-inline-flex">
+              <v-btn
+                :to="rpath('/introduction/sponsors-and-backers/')"
+                append-icon="$vuetify"
+                block
+                class="text-none"
+                color="primary"
+                size="large"
+                variant="tonal"
+                text="Support"
+              />
+            </v-col>
+          </template>
+
+          <v-col v-else cols="12">
+            <v-btn
+              block
+              border
+              class="text-none border-opacity-50 border-primary"
+              color="primary"
+              href="https://github.com/sponsors/johnleider"
+              prepend-icon="mdi-github"
+              rel="noopener noreferrer"
+              size="large"
+              target="_blank"
+              text="Your Logo Here"
+              variant="tonal"
             />
           </v-col>
 
-          <v-col class="d-inline-flex">
-            <v-card
-              :to="rpath('/introduction/sponsors-and-backers/')"
-              class="py-1 px-3 text-center"
-              color="primary"
-              variant="tonal"
-              width="100%"
-            >
-              <div>
-                Support
-
-                <v-icon icon="$vuetify" />
-              </div>
-            </v-card>
-          </v-col>
-
-          <v-col cols="12">
+          <!-- <v-col cols="12">
             <a
               href="https://themeselection.com/item/category/vuejs-admin-templates/?utm_source=vuetify&utm_medium=banner&utm_campaign=category_page&utm_id=12"
               target="_blank"
@@ -98,7 +113,7 @@
             >
               <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/theme-selection-dashboard-2023/vuetify-ad-banner.png" />
             </a>
-          </v-col>
+          </v-col> -->
         </v-row>
       </v-container>
     </template>
@@ -112,7 +127,7 @@
   // Composables
   import { RouteLocation, Router, useRoute, useRouter } from 'vue-router'
   import { useAppStore } from '@/store/app'
-  import { useGtag } from 'vue-gtag-next'
+  // import { useGtag } from 'vue-gtag-next'
   import { useSponsorsStore } from '@/store/sponsors'
   import { useTheme } from 'vuetify'
 
@@ -219,7 +234,7 @@
   const route = useRoute()
   const router = useRouter()
   const theme = useTheme()
-  const { event } = useGtag()
+  // const { event } = useGtag()
 
   const { scrolling } = useUpdateHashOnScroll(route, router)
 
@@ -236,13 +251,13 @@
     scrolling.value = false
   }
 
-  function onClickPromotion () {
-    event('click', {
-      event_category: 'vuetify-toc',
-      event_label: 'promotion',
-      value: 'theme-selection',
-    })
-  }
+  // function onClickPromotion () {
+  //   event('click', {
+  //     event_category: 'vuetify-toc',
+  //     event_label: 'promotion',
+  //     value: 'theme-selection',
+  //   })
+  // }
 
   const sponsorStore = useSponsorsStore()
 

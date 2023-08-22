@@ -1,5 +1,6 @@
 export default {
   badge: 'สัญลักษณ์',
+  open: 'Open',
   close: 'ปิด',
   dataIterator: {
     noResultsText: 'ไม่พบข้อมูลที่ค้นหา',
