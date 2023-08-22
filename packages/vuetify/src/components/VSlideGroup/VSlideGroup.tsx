@@ -111,8 +111,8 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
     const items = computed(() => {
       const items = []
       const children = contentRef.value?.children
-      if( children ) {
-        for( const child of children ) {
+      if (children) {
+        for (const child of children) {
           const style = getComputedStyle(child)
           items.push(isHorizontal.value
             ? child.clientWidth + parseInt(style.marginLeft) + parseInt(style.marginRight)
