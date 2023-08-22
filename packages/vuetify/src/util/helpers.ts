@@ -132,7 +132,7 @@ export function isObject (obj: any): obj is object {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
 }
 
-export function refElement<T extends object | undefined> (obj: T): Exclude<T, ComponentPublicInstance> | HTMLElement {
+export function refElement (obj?: ComponentPublicInstance<any> | HTMLElement): HTMLElement | undefined {
   if (obj && '$el' in obj) {
     const el = obj.$el as HTMLElement
     if (el?.nodeType === Node.TEXT_NODE) {
