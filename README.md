@@ -235,7 +235,7 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/vuetifyjs/vuetify-loader/tree/next">
+        <a href="https://github.com/vuetifyjs/vuetify-loader/tree/master">
           📦 vuetify-loader
         </a>
       </td>
