@@ -107,7 +107,7 @@
           <app-markup :code="code" />
         </div>
 
-        <div v-if="script" class="pa-3">
+        <div v-if="script" class="pa-2 pt-0">
           <app-markup :code="script" language="js" />
         </div>
       </div>
