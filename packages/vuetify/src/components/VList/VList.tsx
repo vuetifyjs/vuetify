@@ -13,7 +13,7 @@ import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
-import { makeItemsProps } from '@/composables/list-items'
+import { makeItemsProps, useItems } from '@/composables/list-items'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
@@ -22,60 +22,12 @@ import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
 import { computed, ref, shallowRef, toRef } from 'vue'
-import { focusChild, genericComponent, getPropertyFromItem, pick, propsFactory, useRender } from '@/util'
+import { focusChild, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { GenericProps } from '@/util'
 import type { PropType } from 'vue'
 import type { VListChildrenSlots } from './VListChildren'
-import type { ItemProps, ListItem } from '@/composables/list-items'
-import type { GenericProps } from '@/util'
-
-export interface InternalListItem<T = any> extends ListItem<T> {
-  type?: 'item' | 'subheader' | 'divider'
-}
-
-function isPrimitive (value: unknown): value is string | number | boolean {
-  return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean'
-}
-
-function transformItem (props: ItemProps & { itemType: string }, item: any): InternalListItem {
-  const type = getPropertyFromItem(item, props.itemType, 'item')
-  const title = isPrimitive(item) ? item : getPropertyFromItem(item, props.itemTitle)
-  const value = getPropertyFromItem(item, props.itemValue, undefined)
-  const children = getPropertyFromItem(item, props.itemChildren)
-  const itemProps = props.itemProps === true ? pick(item, ['children'])[1] : getPropertyFromItem(item, props.itemProps)
-
-  const _props = {
-    title,
-    value,
-    ...itemProps,
-  }
-
-  return {
-    type,
-    title: _props.title,
-    value: _props.value,
-    props: _props,
-    children: type === 'item' && children ? transformItems(props, children) : undefined,
-    raw: item,
-  }
-}
-
-function transformItems (props: ItemProps & { itemType: string }, items: (string | object)[]) {
-  const array: InternalListItem[] = []
-
-  for (const item of items) {
-    array.push(transformItem(props, item))
-  }
-
-  return array
-}
-
-function useListItems (props: ItemProps & { itemType: string }) {
-  const items = computed(() => transformItems(props, props.items))
-
-  return { items }
-}
 
 export const makeVListProps = propsFactory({
   baseColor: String,
@@ -99,10 +51,6 @@ export const makeVListProps = propsFactory({
   ...makeDensityProps(),
   ...makeDimensionProps(),
   ...makeElevationProps(),
-  itemType: {
-    type: String,
-    default: 'type',
-  },
   ...makeItemsProps(),
   ...makeRoundedProps(),
   ...makeTagProps(),
@@ -128,7 +76,7 @@ export const VList = genericComponent<new <T>(
   },
 
   setup (props, { slots }) {
-    const { items } = useListItems(props)
+    const { items } = useItems(props)
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { borderClasses } = useBorder(props)
@@ -236,7 +184,11 @@ export const VList = genericComponent<new <T>(
           onFocus={ onFocus }
           onKeydown={ onKeydown }
         >
-          <VListChildren items={ items.value } v-slots={ slots }></VListChildren>
+          <VListChildren
+            items={ items.value }
+            // noDataText={ !props.hideNoData ? props.noDataText : undefined }
+            v-slots={ slots }
+          ></VListChildren>
         </props.tag>
       )
     })

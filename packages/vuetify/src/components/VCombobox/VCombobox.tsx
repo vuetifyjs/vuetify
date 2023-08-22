@@ -6,23 +6,24 @@ import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
-import { VList, VListItem } from '@/components/VList'
+import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VTextField } from '@/components/VTextField'
-import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
-import { VVirtualScroll } from '@/components/VVirtualScroll'
+import { VDivider } from '../VDivider'
 
 // Composables
+import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
+import { makeTransitionProps } from '@/composables/transition'
+import { flatten, transformItem, useItems } from '@/composables/list-items'
+import { forwardRefs } from '@/composables/forwardRefs'
+import { useForm } from '@/composables/form'
+import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
+import { VVirtualScroll } from '@/components/VVirtualScroll'
 import { useScrolling } from '../VSelect/useScrolling'
 import { useTextColor } from '@/composables/color'
-import { makeFilterProps, useFilter } from '@/composables/filter'
-import { useForm } from '@/composables/form'
-import { forwardRefs } from '@/composables/forwardRefs'
-import { transformItem, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
@@ -32,25 +33,8 @@ import { genericComponent, getPropertyFromItem, noop, omit, propsFactory, useRen
 import type { PropType } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
-import type { FilterMatch } from '@/composables/filter'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps } from '@/util'
-
-function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {
-  if (matches == null) return text
-
-  if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
-
-  return typeof matches === 'number' && ~matches
-    ? (
-      <>
-        <span class="v-combobox__unmask">{ text.substr(0, matches) }</span>
-        <span class="v-combobox__mask">{ text.substr(matches, length) }</span>
-        <span class="v-combobox__unmask">{ text.substr(matches + length) }</span>
-      </>
-    )
-    : text
-}
 
 type Primitive = string | number | boolean | symbol
 
@@ -96,6 +80,7 @@ export const VCombobox = genericComponent<new <
     item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     chip: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     selection: { item: ListItem<Item>, index: number }
+    subheader: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     'prepend-item': never
     'append-item': never
     'no-data': never
@@ -113,7 +98,6 @@ export const VCombobox = genericComponent<new <
   },
 
   setup (props, { emit, slots }) {
-    const { t } = useLocale()
     const vTextFieldRef = ref()
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
@@ -144,6 +128,7 @@ export const VCombobox = genericComponent<new <
       }
     )
     const form = useForm()
+    const { t } = useLocale()
     const _search = shallowRef(!props.multiple ? model.value[0]?.title ?? '' : '')
     const search = computed<string>({
       get: () => {
@@ -211,6 +196,8 @@ export const VCombobox = genericComponent<new <
       }
       return filteredItems.value
     })
+
+    const flatItems = computed(() => flatten(displayItems.value))
 
     const selected = computed(() => selections.value.map(selection => selection.props.value))
     const selection = computed(() => selections.value[selectionIndex.value])
@@ -476,8 +463,18 @@ export const VCombobox = genericComponent<new <
                         <VListItem title={ t(props.noDataText) } />
                       ))}
 
-                      <VVirtualScroll renderless items={ displayItems.value }>
-                        { ({ item, index, itemRef }) => {
+                      <VVirtualScroll renderless items={ flatItems.value }>
+                        { ({ item: virtualItem, index, itemRef }) => {
+                          if (virtualItem.type === 'divider') {
+                            return <VDivider ref={itemRef} key={index} />
+                          }
+
+                          const item = virtualItem.item
+
+                          if (virtualItem.type === 'subheader') {
+                            return slots.subheader?.({ item, index, props: item.props }) ?? <VListSubheader ref={itemRef} key={index}>{item.title}</VListSubheader>
+                          }
+
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: index,
@@ -511,13 +508,14 @@ export const VCombobox = genericComponent<new <
                               title: () => {
                                 return isPristine.value
                                   ? item.title
-                                  : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
+                                  : highlightResult('v-combobox', item.title, getMatches(item)?.title, search.value?.length ?? 0)
                               },
                             }}
                           </VListItem>
                           )
                         }}
                       </VVirtualScroll>
+
 
                       { slots['append-item']?.() }
                     </VList>
