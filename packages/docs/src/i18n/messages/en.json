@@ -208,6 +208,7 @@
     "label": "Search",
     "looking": "Looking for",
     "key-hint": "Ctrl+K",
+    "key-hint-slash": "Press /",
     "results": "Your search results will appear here",
     "no-results": "No results found"
   },

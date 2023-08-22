@@ -32,11 +32,16 @@
   <br>
 
   <api-option />
+
+  <br>
+
+  <slash-search-option />
 </template>
 
 <script setup>
   // Components
   import ApiOption from '@/components/app/settings/options/ApiOption.vue'
   import CodeOption from '@/components/app/settings/options/CodeOption.vue'
+  import SlashSearchOption from '@/components/app/settings/options/SlashSearchOption.vue'
   import ThemeOption from '@/components/app/settings/options/ThemeOption.vue'
 </script>
