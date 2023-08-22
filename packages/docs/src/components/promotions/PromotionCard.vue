@@ -5,27 +5,34 @@
     class="v-promotion-card"
     max-width="360"
   >
-    <v-container class="pa-2">
-      <v-row dense>
-        <v-col cols="auto">
-          <v-img
-            :src="promotion.metadata.images.default.url"
-            class="rounded-s"
-            width="130"
-          />
-        </v-col>
+    <a
+      :href="promotion.metadata.url"
+      class="d-inline-block text-medium-emphasis"
+      target="_blank"
+      rel="noopener"
+    >
+      <v-container class="pa-2">
+        <v-row dense>
+          <v-col cols="auto">
+            <v-img
+              :src="promotion.metadata.images.default.url"
+              class="rounded-s"
+              width="130"
+            />
+          </v-col>
 
-        <v-col>
-          <div class="px-2">
-            <app-markdown :content="promotion.metadata.text" />
-          </div>
-        </v-col>
-      </v-row>
-    </v-container>
+          <v-col>
+            <div class="px-2">
+              <app-markdown :content="promotion.metadata.text" />
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
 
-    <span class="v-promotion-card__via text-medium-emphasis">
-      ADS VIA VUETIFY
-    </span>
+      <span class="v-promotion-card__via text-medium-emphasis">
+        ADS VIA VUETIFY
+      </span>
+    </a>
   </promoted-base>
 </template>
 
