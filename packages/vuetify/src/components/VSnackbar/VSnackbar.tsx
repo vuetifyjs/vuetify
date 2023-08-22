@@ -19,7 +19,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { mergeProps, onMounted, onScopeDispose, ref, shallowRef, watch } from 'vue'
+import { ComponentPublicInstance, mergeProps, onMounted, onScopeDispose, ref, shallowRef, watch } from 'vue'
 import { nextTick } from 'vue'
 import { genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
 
