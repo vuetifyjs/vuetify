@@ -8,11 +8,11 @@
     <div>
       <v-list v-bind="props">
         <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          :title="item.title"
-          :subtitle="subtitle"
-          :prepend-avatar="avatar ? item.avatar : undefined"
+          v-for="n in 3"
+          :key="n"
+          :title="'Item ' + n"
+          subtitle="Lorem ipsum dolor sit amet consectetur adipisicing elit"
+          :prepend-avatar="avatar ? 'https://randomuser.me/api/portraits/women/8.jpg' : undefined"
         ></v-list-item>
       </v-list>
     </div>
@@ -33,20 +33,6 @@
   const options = ['two-lines', 'three-lines']
   const avatar = ref(false)
 
-  const items = [
-    {
-      title: 'Item One',
-      avatar: 'https://randomuser.me/api/portraits/women/8.jpg',
-    },
-    {
-      title: 'Item Two',
-      avatar: 'https://randomuser.me/api/portraits/men/2.jpg',
-    },
-    {
-      title: 'Item Three',
-      avatar: 'https://randomuser.me/api/portraits/men/22.jpg',
-    },
-  ]
   const lines = computed(() => {
     return {
       default: 'one',
@@ -69,11 +55,11 @@
   })
   const itemProps = computed(() => {
     return {
-      'v-for': 'item in items',
-      ':key': 'item.title',
-      ':title': 'item.title',
-      subtitle: '...',
-      ':prepend-avatar': avatar.value ? 'item.avatar' : undefined,
+      'v-for': 'n in 3',
+      ':key': 'n',
+      ':title': `'Item ' + n`,
+      subtitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit',
+      ':prepend-avatar': avatar.value ? 'https://randomuser.me/api/portraits/women/8.jpg' : undefined,
     }
   })
 
