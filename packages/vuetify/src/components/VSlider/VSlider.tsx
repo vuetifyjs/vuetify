@@ -15,7 +15,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VSliderThumbSlots } from './VSliderThumb'
@@ -91,6 +91,14 @@ export const VSlider = genericComponent<VSliderSlots>()({
     })
 
     const { isFocused, focus, blur } = useFocus(props)
+
+    const color = computed(() => {
+      return (
+        !props.error &&
+        !props.disabled
+      ) ? props.color : undefined
+    })
+
     const trackStop = computed(() => position(model.value))
 
     useRender(() => {
@@ -99,6 +107,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
 
       return (
         <VInput
+          baseColor= { color.value }
           class={[
             'v-slider',
             {
@@ -110,8 +119,9 @@ export const VSlider = genericComponent<VSliderSlots>()({
             rtlClasses.value,
             props.class,
           ]}
+          color={ color.value }
           style={ props.style }
-          { ...inputProps }
+          { ...omit(inputProps, ['color', 'baseColor']) }
           focused={ isFocused.value }
         >
           {{

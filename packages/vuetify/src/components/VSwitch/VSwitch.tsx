@@ -15,7 +15,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { filterInputAttrs, genericComponent, getUid, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
@@ -60,6 +60,14 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
     const { isFocused, focus, blur } = useFocus(props)
     const control = ref<VSelectionControl>()
 
+    const color = computed(() => {
+      return (
+        model.value &&
+        !props.error &&
+        !props.disabled
+      ) ? props.color : undefined
+    })
+
     const loaderColor = computed(() => {
       return typeof props.loading === 'string' && props.loading !== ''
         ? props.loading
@@ -87,6 +95,7 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
 
       return (
         <VInput
+          baseColor= { color.value }
           class={[
             'v-switch',
             { 'v-switch--inset': props.inset },
@@ -94,9 +103,10 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
             loaderClasses.value,
             props.class,
           ]}
+          color={ color.value }
           style={ props.style }
           { ...rootAttrs }
-          { ...inputProps }
+          { ...omit(inputProps, ['color', 'baseColor']) }
           id={ id.value }
           focused={ isFocused.value }
         >
