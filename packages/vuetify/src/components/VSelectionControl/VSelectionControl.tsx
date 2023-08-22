@@ -53,6 +53,7 @@ export type VSelectionControlSlots = {
 
 export const makeVSelectionControlProps = propsFactory({
   label: String,
+  baseColor: String,
   trueValue: null,
   falseValue: null,
   value: null,
@@ -108,11 +109,9 @@ export function useSelectionControl (
     },
   })
   const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
-    return (
-      model.value &&
-      !props.error &&
-      !props.disabled
-    ) ? props.color : undefined
+    if (props.error || props.disabled) return undefined
+
+    return model.value ? props.color : props.baseColor
   }))
   const icon = computed(() => model.value ? props.trueIcon : props.falseIcon)
 
@@ -274,7 +273,7 @@ export const VSelectionControl = genericComponent<new <T>(
           </div>
 
           { label && (
-            <VLabel for={ id.value } clickable>
+            <VLabel for={ id.value } clickable onClick={ (e: Event) => e.stopPropagation() }>
               { label }
             </VLabel>
           )}

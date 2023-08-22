@@ -1,70 +1,66 @@
 <template>
-  <app-settings-group
-    ref="group"
-    v-model="model"
-    :items="items"
-    :title="t('theme')"
-    class="ps-3"
-    multiple
-    text="Customize your documentation experience with light and dark themes, as well as a combination of both named"
-  />
+  <v-radio-group
+    v-model="user.theme"
+    color="#70a2d8"
+    hide-details
+    true-icon="mdi-check-circle-outline"
+  >
+    <v-radio
+      v-for="(item, i) in items"
+      :key="i"
+      :value="item.value"
+    >
+      <template #label>
+        <v-icon :icon="item.icon" start />
+
+        {{ item.text }}
+      </template>
+    </v-radio>
+  </v-radio-group>
+
+  <v-defaults-provider
+    :defaults="{
+      VIcon: {
+        color: user.mixedTheme ? 'primary' : 'disabled'
+      }
+    }"
+  >
+    <v-switch
+      v-model="user.mixedTheme"
+      class="ps-3 flex-0-0"
+      color="primary"
+      inset
+      label="Dark Code Blocks"
+      messages="Change all code blocks to use a dark theme."
+      true-icon="mdi-check"
+      false-icon="$close"
+    />
+  </v-defaults-provider>
 </template>
 
 <script setup lang="ts">
-  // Components
-  import AppSettingsGroup from '../Group.vue'
-
   // Composables
   import { useUserStore } from '@/store/user'
   import { useI18n } from 'vue-i18n'
 
-  // Utilities
-  import { computed, ref } from 'vue'
-
-  const group = ref<InstanceType<typeof AppSettingsGroup>>()
   const user = useUserStore()
   const { t } = useI18n()
 
   const items = [
     {
-      text: 'light',
+      text: t('light'),
       icon: 'mdi-white-balance-sunny',
+      value: 'light',
     },
     {
-      text: 'dark',
+      text: t('dark'),
       icon: 'mdi-weather-night',
+      value: 'dark',
     },
     {
-      text: 'system',
+      text: t('system'),
       icon: 'mdi-desktop-tower-monitor',
-    },
-    {
-      text: 'mixed',
-      icon: 'mdi-theme-light-dark',
+      value: 'system',
     },
   ]
-
-  const model = computed({
-    get () {
-      return [user.theme].concat(user.mixedTheme ? 'mixed' : [])
-    },
-    set (val: string[]) {
-      {
-        const idx = val.indexOf('mixed')
-        user.mixedTheme = !!~idx
-        if (~idx) {
-          val.splice(idx, 1)
-        }
-      }
-      {
-        const idx = val.indexOf(user.theme)
-        if (~idx) {
-          val.splice(idx, 1)
-        }
-        if (val.length) {
-          user.theme = val[0]
-        }
-      }
-    },
-  })
 </script>

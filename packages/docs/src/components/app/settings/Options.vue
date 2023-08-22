@@ -1,4 +1,14 @@
 <template>
+  <div class="ps-3 mb-6">
+    <v-label class="mb-2 font-weight-medium">Theme</v-label>
+
+    <v-messages
+      active
+      messages="Customize your documentation experience with light and dark themes, as well as a combination of both named"
+      class="mb-n3"
+    />
+  </div>
+
   <theme-option />
 
   <br>
@@ -22,16 +32,11 @@
   <br>
 
   <api-option />
-
-  <br>
-
-  <developer-mode />
 </template>
 
 <script setup>
   // Components
   import ApiOption from '@/components/app/settings/options/ApiOption.vue'
   import CodeOption from '@/components/app/settings/options/CodeOption.vue'
-  import DeveloperMode from './DeveloperMode.vue'
   import ThemeOption from '@/components/app/settings/options/ThemeOption.vue'
 </script>

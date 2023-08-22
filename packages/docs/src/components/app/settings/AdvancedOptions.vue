@@ -15,6 +15,10 @@
 
   <br>
 
+  <developer-mode />
+
+  <br>
+
   <div class="d-flex justify-end">
     <v-btn
       color="error"
@@ -30,6 +34,7 @@
 <script setup>
   // Components
   import BannerOption from './options/BannerOption.vue'
+  import DeveloperMode from './DeveloperMode.vue'
   import NotificationsOption from './options/NotificationsOption.vue'
   import QuickbarOption from './options/QuickbarOption.vue'
 
@@ -39,6 +44,7 @@
   const user = useUserStore()
 
   function onResetAll () {
+    user.banner = true
     user.notifications.read = []
     user.notifications.show = true
     user.notifications.last.banner = []

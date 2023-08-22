@@ -23,6 +23,7 @@ export const makeVAvatarProps = propsFactory({
   end: Boolean,
   icon: IconValue,
   image: String,
+  text: String,
 
   ...makeComponentProps(),
   ...makeDensityProps(),
@@ -71,7 +72,7 @@ export const VAvatar = genericComponent()({
           ? (<VImg key="image" src={ props.image } alt="" cover />)
           : props.icon
             ? (<VIcon key="icon" icon={ props.icon } />)
-            : slots.default?.()
+            : slots.default?.() ?? props.text
         }
 
         { genOverlays(false, 'v-avatar') }

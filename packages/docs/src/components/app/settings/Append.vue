@@ -1,9 +1,11 @@
 <template>
-  <documentation-build />
+  <div class="pb-2 pe-2">
+    <documentation-build />
 
-  <v-divider />
+    <v-divider />
 
-  <developer-mode hide-details />
+    <developer-mode hide-details />
+  </div>
 </template>
 
 <script setup>

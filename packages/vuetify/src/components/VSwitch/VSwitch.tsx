@@ -58,6 +58,7 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
     const model = useProxiedModel(props, 'modelValue')
     const { loaderClasses } = useLoader(props)
     const { isFocused, focus, blur } = useFocus(props)
+    const control = ref<VSelectionControl>()
 
     const loaderColor = computed(() => {
       return typeof props.loading === 'string' && props.loading !== ''
@@ -73,18 +74,16 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
         indeterminate.value = false
       }
     }
+    function onTrackClick (e: Event) {
+      e.stopPropagation()
+      e.preventDefault()
+      control.value?.input?.click()
+    }
 
     useRender(() => {
-      const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
+      const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
       const [inputProps, _1] = VInput.filterProps(props)
       const [controlProps, _2] = VSelectionControl.filterProps(props)
-      const control = ref<VSelectionControl>()
-
-      function onClick (e: Event) {
-        e.stopPropagation()
-        e.preventDefault()
-        control.value?.input?.click()
-      }
 
       return (
         <VInput
@@ -96,7 +95,7 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
             props.class,
           ]}
           style={ props.style }
-          { ...inputAttrs }
+          { ...rootAttrs }
           { ...inputProps }
           id={ id.value }
           focused={ isFocused.value }
@@ -127,11 +126,10 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
               >
                 {{
                   ...slots,
-                  default: () => (<div class="v-switch__track" onClick={ onClick }></div>),
+                  default: () => (<div class="v-switch__track" onClick={ onTrackClick }></div>),
                   input: ({ inputNode, icon }) => (
                     <>
                       { inputNode }
-
                       <div
                         class={[
                           'v-switch__thumb',
