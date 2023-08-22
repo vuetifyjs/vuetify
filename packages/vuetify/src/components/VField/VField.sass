@@ -358,10 +358,17 @@
       transition: opacity $field-subtle-transition-timing
 
     &__start
-      flex: 0 0 $field-control-affixed-padding
       border-top-width: var(--v-field-border-width)
       border-bottom-width: var(--v-field-border-width)
       border-inline-start-width: var(--v-field-border-width)
+
+      $root: &
+
+      @at-root
+        @include tools.density('v-input', $input-density) using ($modifier)
+          @at-root #{selector.nest(&, $root)}
+            flex: 0 0 #{$field-control-outlined-start-width + $modifier * .5}
+
 
       @include tools.ltr()
         border-top-left-radius: inherit
