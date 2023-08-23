@@ -38,6 +38,7 @@
     "spec": "Specification"
   },
   "breakpoints": "Breakpoints",
+  "browse-components": "Browse Components",
   "documentation-build": "Documentation Build",
   "business": "Business",
   "cancel": "Cancel",
