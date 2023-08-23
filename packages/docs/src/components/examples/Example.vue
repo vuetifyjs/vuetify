@@ -225,7 +225,7 @@
       onClick: toggleTheme,
     },
     {
-      icon: '$vuetifyPlay',
+      icon: '$vuetify-play',
       path: 'edit-in-playground',
       href: playgroundLink.value,
       target: '_blank',
