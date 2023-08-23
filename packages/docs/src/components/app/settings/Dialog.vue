@@ -120,12 +120,14 @@
   // Stores
   import { useAppStore } from '@/store/app'
   import { useAuthStore } from '@/store/auth'
+  import { useAuth0 } from '@auth0/auth0-vue'
 
   // Utilities
-  import { computed, onMounted, ref } from 'vue'
+  import { computed, ref, watch } from 'vue'
 
   const auth = useAuthStore()
   const app = useAppStore()
+  const { user } = useAuth0()
   const { mobile } = useDisplay()
   const { t } = useI18n()
 
@@ -155,5 +157,9 @@
   ]
   const model = ref([0])
 
-  onMounted(auth.getUser)
+  watch(user, val => {
+    if (!val?.sub) return
+
+    auth.getUser()
+  }, { immediate: true })
 </script>

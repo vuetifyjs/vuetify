@@ -14,9 +14,13 @@ export const useAuthStore = defineStore('auth', () => {
   const url = import.meta.env.VITE_COSMIC_USER_URL
 
   user.$subscribe(() => {
+    updateUser()
+  })
+
+  async function updateUser () {
     const local = localStorage.getItem('vuetify@user')
 
-    if (!_user || !url || !local || isUpdating.value) return
+    if (!_user?.value?.sub || !url || !local || isUpdating.value) return
 
     const settings = JSON.parse(local)
 
@@ -34,20 +38,27 @@ export const useAuthStore = defineStore('auth', () => {
     }).finally(() => {
       isUpdating.value = false
     })
-  })
+  }
 
   async function getUser () {
-    if (!_user || !user.syncSettings || !url) return
+    if (!_user?.value?.sub || !user.syncSettings || !url) return
 
-    const { object } = await fetch(`${url}/api/user/get`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: _user.value.sub }),
-    }).then(res => res.json())
+    try {
+      const { object } = await fetch(`${url}/api/user/get?user=${_user.value.sub}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }).then(res => res.json())
 
-    const settings = object.metadata.settings
+      const settings = object.metadata.settings
+      const local = localStorage.getItem('vuetify@user') || '{}'
 
-    if (settings) Object.assign(user, settings)
+      // Local already matches remote
+      if (!settings || JSON.stringify(settings, null, 2) === local) return
+
+      Object.assign(user, settings)
+    } catch (e) {
+      updateUser()
+    }
   }
 
   return { getUser, isUpdating }

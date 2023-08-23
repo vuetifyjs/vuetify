@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="!isAuthenticated && !user"
+    v-if="!isAuthenticated"
     class="pa-2"
   >
     <v-btn
@@ -15,7 +15,7 @@
   </div>
 
   <v-list-item
-    v-else
+    v-else-if="user"
     :prepend-avatar="user.picture"
     :title="user.name"
     :subtitle="user.email"
