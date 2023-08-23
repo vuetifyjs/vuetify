@@ -1,9 +1,16 @@
+.v-calendar__container:last-child
+  border-right: none
+
+.v-calendar-weekly__head-weekday
+  border-bottom: 1px solid #e0e0e0
+
 .v-calendar-day__row-with-label
   display: grid
   grid-template-columns: 48px 8px 1fr
   border-right: 1px solid #e0e0e0
 
   .v-calendar-day__row-hairline
+    position: relative
     border-right: 1px solid #e0e0e0
     &:after
       content: ''
@@ -19,8 +26,18 @@
     text-align: center 
     position: relative
     top: -8px
+  .v-calendar-day__row-content
+    border-bottom: 1px solid #e0e0e0
+    &.v-calendar-day__row-content-through
+      border-bottom: none
 
 .v-calendar-day__row-without-label
   display: grid
   grid-template-columns: 1fr
   border-right: 1px solid #e0e0e0
+  
+  .v-calendar-day__row-content
+    border-bottom: 1px solid #e0e0e0
+
+    &.v-calendar-day__row-content-through
+      border-bottom: none

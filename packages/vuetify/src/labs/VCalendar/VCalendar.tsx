@@ -19,6 +19,10 @@ export const VCalendar = genericComponent()({
     hideDayHeader: Boolean,
     hideHeader: Boolean,
     hideWeekNumber: Boolean,
+    intervalDivisions: {
+      type: Number,
+      default: 2,
+    },
     intervalDuration: {
       type: Number,
       default: 60,
@@ -27,6 +31,7 @@ export const VCalendar = genericComponent()({
       type: Number,
       default: 48,
     },
+    intervalLabel: [String, Function],
     intervals: {
       type: Number,
       default: 24,
@@ -53,6 +58,13 @@ export const VCalendar = genericComponent()({
       default: () => [0, 1, 2, 3, 4, 5, 6],
     },
   },
+
+  emits: {
+    next: null,
+    prev: null,
+    'update:modelValue': null,
+  },
+  expose: ['prev', 'next'],
 
   setup (props, { emit, slots }) {
     const adapter = useDate()
@@ -94,6 +106,30 @@ export const VCalendar = genericComponent()({
 
       return weeks
     })
+
+    const prev = () => {
+      if (props.type === 'month') {
+        emit('update:modelValue', adapter.addMonths(props.modelValue, -1))
+      }
+      if (props.type === 'week') {
+        emit('update:modelValue', adapter.addDays(props.modelValue, -7))
+      }
+      if (props.type === 'day') {
+        emit('update:modelValue', adapter.addDays(props.modelValue, -1))
+      }
+    }
+
+    const next = () => {
+      if (props.type === 'month') {
+        emit('update:modelValue', adapter.addMonths(props.modelValue, 1))
+      }
+      if (props.type === 'week') {
+        emit('update:modelValue', adapter.addDays(props.modelValue, 7))
+      }
+      if (props.type === 'day') {
+        emit('update:modelValue', adapter.addDays(props.modelValue, 1))
+      }
+    }
 
     const validDates = computed(() => [
       adapter.startOfMonth(props.modelValue),
@@ -143,7 +179,7 @@ export const VCalendar = genericComponent()({
 
     const weeks = computed(() => {
       return weeksIn.value.map(week => {
-        return getWeek(adapter, week[0])
+        return week.length ? getWeek(adapter, week[0]) : null
       })
     })
 
@@ -159,7 +195,14 @@ export const VCalendar = genericComponent()({
       >
         <div>
           { !props.hideHeader ? (
-            <VCalendarHeader key="calendarHeader" title={ props.title } start={ validDates.value[0] } end={ validDates.value[1] } />
+            <VCalendarHeader
+              key="calendarHeader"
+              title={ props.title }
+              start={ validDates.value[0] }
+              end={ validDates.value[1] }
+              onPrev={ prev }
+              onNext={ next }
+            />
           ) : '' }
         </div>
         <div class="v-calendar__container">
@@ -220,8 +263,10 @@ export const VCalendar = genericComponent()({
               dayIndex={ i }
               events={ day.events }
               hideDayHeader={ props.hideDayHeader }
+              intervalDivisions={ props.intervalDivisions }
               intervalDuration={ props.intervalDuration }
               intervalHeight={ props.intervalHeight }
+              intervalLabel={ props.intervalLabel }
               intervals={ props.intervals }
               intervalStart={ props.intervalStart }
             ></VCalendarDay>
@@ -232,8 +277,10 @@ export const VCalendar = genericComponent()({
             day={ daysIn.value[0] }
             events={ daysIn.value[0].events }
             hideDayHeader={ props.hideDayHeader }
+            intervalDivisions={ props.intervalDivisions }
             intervalDuration={ props.intervalDuration }
             intervalHeight={ props.intervalHeight }
+            intervalLabel={ props.intervalLabel }
             intervals={ props.intervals }
             intervalStart={ props.intervalStart }
           ></VCalendarDay>
@@ -242,7 +289,7 @@ export const VCalendar = genericComponent()({
       </div>
     ))
 
-    return { daysIn, weeks }
+    return { daysIn, weeksIn, weeks }
   },
 })
 

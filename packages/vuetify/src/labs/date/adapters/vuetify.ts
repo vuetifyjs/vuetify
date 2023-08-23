@@ -197,12 +197,12 @@ function getWeekArray (date: Date, locale: string) {
 }
 
 function startOfDay (date: Date) {
-  date.setHours(0, 0, 0)
+  date.setHours(0, 0, 0, 0)
   return date
 }
 
 function endOfDay (date: Date) {
-  date.setHours(23, 59, 59)
+  date.setHours(23, 59, 59, 999)
   return date
 }
 

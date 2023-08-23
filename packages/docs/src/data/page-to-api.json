@@ -38,10 +38,7 @@
     "VBtnToggle"
   ],
   "components/calendars": [
-    "VCalendar",
-    "VCalendarDaily",
-    "VCalendarMonthly",
-    "VCalendarWeekly"
+    "VCalendar"
   ],
   "components/cards": [
     "VCard",

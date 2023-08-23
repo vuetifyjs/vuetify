@@ -21,11 +21,16 @@ export const VCalendarDay = genericComponent()({
     },
     events: Array<any>,
     hideDayHeader: Boolean,
+    intervalDivisions: {
+      type: Number,
+      required: true,
+    },
     intervalDuration: {
       type: Number,
       required: true,
     },
     intervalHeight: Number,
+    intervalLabel: [String, Function],
     intervals: {
       type: Number,
       required: true,
@@ -57,8 +62,10 @@ export const VCalendarDay = genericComponent()({
               dayIndex={ props.dayIndex }
               events={ props.events }
               index={ index }
+              intervalDivisions={ props.intervalDivisions }
               intervalDuration={ props.intervalDuration }
               intervalHeight={ props.intervalHeight }
+              intervalLabel={ props.intervalLabel }
               intervalStart={ props.intervalStart }
             ></VCalendarInterval>
           ))

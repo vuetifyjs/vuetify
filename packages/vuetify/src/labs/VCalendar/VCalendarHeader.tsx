@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 import { useDate } from '@/labs/date'
+import { VBtn, VSpacer } from '../allComponents'
 
 export const VCalendarHeader = genericComponent()({
   name: 'VCalendarHeader',
@@ -14,6 +15,11 @@ export const VCalendarHeader = genericComponent()({
       type: String,
       default: 'month',
     },
+  },
+
+  emits: {
+    prev: null,
+    next: null,
   },
 
   setup (props, { emit, slots }) {
@@ -37,11 +43,23 @@ export const VCalendarHeader = genericComponent()({
           break
       }
 
+      const prev = () => {
+        emit('prev')
+      }
+      const next = () => {
+        emit('next')
+      }
+
       return (
         <div style="min-height: 64px">
           { slots.title?.() ?? (
-            
-            <div class="text-h4 text-center">{ displayTitle.value }</div>
+            <div class="d-flex" >
+              <VBtn icon="$prev" onClick={ prev } />
+              <VSpacer />
+              <div class="text-h4 text-center">{ displayTitle.value }</div>
+              <VSpacer />
+              <VBtn icon="$next" onClick={ next } />
+            </div>
           )}
         </div>
       )

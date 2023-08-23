@@ -1,11 +1,23 @@
 <template>
   <v-row>
-    <v-col>
-      <v-sheet height="400">
+    <v-col cols="12">
+      <v-sheet>
+        <v-select
+          v-model="weekday"
+          :items="weekdays"
+          dense
+          variant="outlined"
+          hide-details
+          label="weekdays"
+          class="ma-2"
+        ></v-select>
+      </v-sheet>
+    </v-col>
+    <v-col cols="12">
+      <v-sheet>
         <v-calendar
           ref="calendar"
-          :now="today"
-          :value="today"
+          v-model="today"
           :events="events"
           color="primary"
           type="week"
@@ -16,58 +28,68 @@
 </template>
 
 <script setup>
-  import { onMounted, ref } from 'vue'
+  import { ref } from 'vue'
 
-  const calendar = ref()
-
+  const calendar = ref(null)
+  const weekday = ref([0, 1, 2, 3, 4, 5, 6])
+  const weekdays = ref([
+    { title: 'Sun - Sat', value: [0, 1, 2, 3, 4, 5, 6] },
+    { title: 'Mon - Sun', value: [1, 2, 3, 4, 5, 6, 0] },
+    { title: 'Mon - Fri', value: [1, 2, 3, 4, 5] },
+    { title: 'Mon, Wed, Fri', value: [1, 3, 5] },
+  ])
   const events = [
     {
-      name: 'Weekly Meeting',
-      start: '2019-01-07 09:00',
-      end: '2019-01-07 10:00',
+      title: 'Weekly Meeting',
+      start: new Date('2019-01-07 09:00'),
+      end: new Date('2019-01-07 10:00'),
     },
     {
-      name: `Thomas' Birthday`,
-      start: '2019-01-10',
+      title: `Thomas' Birthday`,
+      start: new Date('2019-01-10'),
+      end: new Date('2019-01-10'),
+      allDay: true,
     },
     {
-      name: 'Mash Potatoes',
-      start: '2019-01-09 12:30',
-      end: '2019-01-09 15:30',
+      title: 'Mash Potatoes',
+      start: new Date('2019-01-09 12:30'),
+      end: new Date('2019-01-09 15:30'),
     },
   ]
 
-  const today = ref('2019-01-08')
-
-  onMounted(() => {
-    calendar.value.scrollToTime('08:00')
-  })
+  const today = ref(new Date('2019-01-08'))
 </script>
 
 <script>
   export default {
     data: () => ({
       today: '2019-01-08',
+      weekday: [0, 1, 2, 3, 4, 5, 6],
+      weekdays: [
+        { title: 'Sun - Sat', value: [0, 1, 2, 3, 4, 5, 6] },
+        { title: 'Mon - Sun', value: [1, 2, 3, 4, 5, 6, 0] },
+        { title: 'Mon - Fri', value: [1, 2, 3, 4, 5] },
+        { title: 'Mon, Wed, Fri', value: [1, 3, 5] },
+      ],
       events: [
         {
-          name: 'Weekly Meeting',
-          start: '2019-01-07 09:00',
-          end: '2019-01-07 10:00',
+          title: 'Weekly Meeting',
+          start: new Date('2019-01-07 09:00'),
+          end: new Date('2019-01-07 10:00'),
         },
         {
-          name: `Thomas' Birthday`,
-          start: '2019-01-10',
+          title: `Thomas' Birthday`,
+          start: new Date('2019-01-10'),
+          end: new Date('2019-01-10'),
+          allDay: true,
         },
         {
-          name: 'Mash Potatoes',
-          start: '2019-01-09 12:30',
-          end: '2019-01-09 15:30',
+          title: 'Mash Potatoes',
+          start: new Date('2019-01-09 12:30'),
+          end: new Date('2019-01-09 15:30'),
         },
       ],
     }),
-    mounted () {
-      this.$refs.calendar.scrollToTime('08:00')
-    },
   }
 </script>
 

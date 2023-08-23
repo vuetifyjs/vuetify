@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col>
-      <v-sheet height="400">
+      <v-sheet>
         <v-calendar color="primary" type="day">
           <template v-slot:day-header="{ present }">
             <div v-if="present" class="text-center">
