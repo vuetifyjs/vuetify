@@ -60,6 +60,10 @@ npm install @vue/test-utils vitest resize-observer-polyfill --save-dev
 pnpm add @vue/test-utils vitest resize-observer-polyfill --save-dev
 ```
 
+```bash [pnpm]
+bun add @vue/test-utils vitest resize-observer-polyfill --dev
+```
+
 :::
 
 Once installed, create a new folder at the root of your application named **tests/spec** and add a new file named **HelloWorld.spec.js**. The following example shows how to setup a basic unit test for a Vuetify component:
