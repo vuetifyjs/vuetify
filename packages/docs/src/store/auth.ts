@@ -37,13 +37,11 @@ export const useAuthStore = defineStore('auth', () => {
   })
 
   async function getUser () {
-    if (!_user || !user.syncSettings) return
+    if (!_user || !user.syncSettings || !url) return
 
     const { object } = await fetch(`${url}/api/user/get`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title: _user.value.sub }),
     }).then(res => res.json())
 
