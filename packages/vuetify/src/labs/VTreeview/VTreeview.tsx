@@ -6,19 +6,18 @@ import { VTreeviewChildren } from "./VTreeviewChildren"
 
 // Composables
 import { createList } from '@/components/VList/list'
-import { makeBorderProps, useBorder } from '@/composables/border'
+import { useBorder } from '@/composables/border'
 import { useBackgroundColor } from '@/composables/color'
-import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
-import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { useDensity } from '@/composables/density'
+import { useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeItemsProps } from '@/composables/list-items'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { makeVariantProps } from '@/composables/variant'
+import { useRounded } from '@/composables/rounded'
+import { provideTheme } from '@/composables/theme'
+import { makeVTreeviewItemProps } from './VTreeviewItem'
 
 // Utilities
 import { computed, onMounted, provide, ref, shallowRef, toRef } from 'vue'
@@ -27,7 +26,6 @@ import { focusChild, genericComponent, getPropertyFromItem, pick, propsFactory, 
 // Types
 import { VTreeviewChildrenSlots } from "./VTreeviewChildren"
 import type { ItemProps, ListItem } from '@/composables/list-items'
-import { IconValue } from '@/composables/icons'
 import type { GenericProps } from '@/util'
 import type { ComputedRef, InjectionKey, PropType } from 'vue'
 
@@ -96,59 +94,24 @@ function flatten (items: ListItem[], flat: ListItem[] = []) {
 }
 
 export const makeVTreeviewProps = propsFactory({
-  baseColor: String,
   bgColor: String,
-  collapseIcon: {
-    type: IconValue,
-    default: '$treeviewCollapse',
-  },
-  disabled: Boolean,
-  expandIcon: {
-    type: IconValue,
-    default: '$treeviewExpand',
-  },
-  hoverable: Boolean,
-  indeterminateIcon: {
-    type: IconValue,
-    default: '$checkboxIndeterminate',
-  },
   itemDisabled: {
     type: String,
     default: 'disabled',
   },
-  offIcon: {
-    type: IconValue,
-    default: '$checkboxOff',
-  },
-  onIcon: {
-    type: IconValue,
-    default: '$checkboxOn',
-  },
-  openOnClick: Boolean,
   openOnMount: {
     type: String as PropType<'all' | 'root' | undefined>,
     validator: (v: any) => !v || ['all', 'root'].includes(v),
   },
   search: String,
-  showSelectIcon: Boolean,
-  selectable: Boolean,
-  selectedClass: String,
-  selectedColor: String,
-  selectOnClick: Boolean,
   ...makeNestedProps({
     selectStrategy: 'classic' as const,
     openStrategy: 'single' as const,
   }),
-  ...makeBorderProps(),
-  ...makeComponentProps(),
-  ...makeDensityProps(),
-  ...makeDimensionProps(),
   ...makeElevationProps(),
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...makeItemsProps(),
-  ...makeRoundedProps(),
-  ...makeThemeProps(),
-  ...makeVariantProps({ variant: 'text' } as const),
+  ...makeVTreeviewItemProps()
 }, 'VTreeview')
 
 export const VTreeview = genericComponent<new <T>(
