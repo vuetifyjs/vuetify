@@ -9,6 +9,7 @@ import { reactive, toRefs } from 'vue'
 
 export type RootState = {
   v: 2
+  ads?: boolean
   api: 'link-only' | 'inline'
   dev: boolean
   composition: ('options' | 'composition')
@@ -68,6 +69,7 @@ type SavedState = {
   }
 } | {
   v: 1
+  ads?: boolean
   api: 'link-only' | 'inline'
   dev?: boolean
   composition?: ('options' | 'composition') | ('options' | 'composition')[]
@@ -93,6 +95,7 @@ type SavedState = {
 export const useUserStore = defineStore('user', () => {
   const state = reactive<RootState>({
     v: 2,
+    ads: true,
     api: 'link-only',
     dev: false,
     composition: 'options',
@@ -128,6 +131,7 @@ export const useUserStore = defineStore('user', () => {
       data.pwaRefresh = true
       data.slashSearch = false
       data.syncSettings = false
+      data.ads = true
       if (typeof data.api === 'boolean') {
         data.api = data.api ? 'inline' : 'link-only'
       }

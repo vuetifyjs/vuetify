@@ -157,9 +157,10 @@
   ]
   const model = ref([0])
 
-  watch(user, val => {
+  watch(user, async val => {
     if (!val?.sub) return
 
-    auth.getUser()
+    await auth.getUser()
+    auth.verifyUserSponsorship()
   }, { immediate: true })
 </script>

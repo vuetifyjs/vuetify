@@ -1,5 +1,26 @@
 <template>
   <div class="ps-3 mb-3">
+    <v-label class="mb-2 font-weight-medium">Display</v-label>
+
+    <v-messages
+      active
+      messages="Toggle various elements of the documentation experience."
+    />
+  </div>
+
+  <ad-option />
+
+  <br>
+
+  <quickbar-option />
+
+  <br>
+
+  <v-divider />
+
+  <br>
+
+  <div class="ps-3 mb-3">
     <v-label class="mb-2 font-weight-medium">Communication</v-label>
 
     <v-messages
@@ -13,23 +34,6 @@
   <br>
 
   <notifications-option />
-
-  <br>
-
-  <v-divider />
-
-  <br>
-
-  <div class="ps-3 mb-3">
-    <v-label class="mb-2 font-weight-medium">Display</v-label>
-
-    <v-messages
-      active
-      messages="Toggle various elements of the documentation experience."
-    />
-  </div>
-
-  <quickbar-option />
 
   <br>
 
@@ -55,6 +59,7 @@
 
 <script setup>
   // Components
+  import AdOption from './options/AdOption.vue'
   import BannerOption from './options/BannerOption.vue'
   import DeveloperMode from './DeveloperMode.vue'
   import NotificationsOption from './options/NotificationsOption.vue'
