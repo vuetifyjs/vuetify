@@ -4,6 +4,7 @@ import './VTreeviewItem.sass'
 // Components
 import { VIcon } from '@/components/VIcon'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VTreeviewSymbol } from './VTreeview'
 
 // Composables
 import { useList } from '@/components/VList/list'
@@ -21,11 +22,11 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, inject, ref } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { ComputedRef, PropType } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 type TreeviewItemSlot = {
@@ -131,6 +132,8 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
     const { dimensionStyles } = useDimension(props)
     const { roundedClasses } = useRounded(roundedProps)
 
+    const visibleIds = inject(VTreeviewSymbol, { visibleIds: ref()}).visibleIds
+
     const slotProps = computed(() => ({
       isSelected: isSelected.value,
       isIndeterminate: isIndeterminate.value,
@@ -164,6 +167,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
               'v-treeview-item--link': isClickable.value,
               //'v-treeview-item--prepend': !hasPrepend && list?.hasPrepend.value,
               [`${props.selectedClass}`]: props.selectedClass && isSelected.value,
+              'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(id.value),
             },
             themeClasses.value,
             borderClasses.value,
@@ -185,7 +189,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
           { (
             <div key="prepend" class="v-treeview-item__prepend">
               <VIcon onClick={ openNode } icon={ isLeaf.value ?  undefined : toggleIcon.value }></VIcon>
-              { props.selectable && props.showSelectIcon && (
+              { props.selectable && (props.showSelectIcon || !props.selectOnClick) && (
                 <VIcon onClick={ selectItem } color={ props.selectedColor } icon={ isIndeterminate.value ?  props.indeterminateIcon : selectIcon.value }></VIcon>
               )}
               {

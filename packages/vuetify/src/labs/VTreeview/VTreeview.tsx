@@ -13,6 +13,7 @@ import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeItemsProps } from '@/composables/list-items'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -20,7 +21,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { computed, onMounted, ref, shallowRef, toRef } from 'vue'
+import { computed, onMounted, provide, ref, shallowRef, toRef } from 'vue'
 import { focusChild, genericComponent, getPropertyFromItem, pick, propsFactory, useRender } from '@/util'
 
 // Types
@@ -28,11 +29,17 @@ import { VTreeviewChildrenSlots } from "./VTreeviewChildren"
 import type { ItemProps, ListItem } from '@/composables/list-items'
 import { IconValue } from '@/composables/icons'
 import type { GenericProps } from '@/util'
-import type { PropType } from 'vue'
+import type { ComputedRef, InjectionKey, PropType } from 'vue'
 
 export interface InternalListItem<T = any> extends ListItem<T> {
   disabled?: true | false
 }
+
+export interface TreeviewProvide {
+  visibleIds: ComputedRef<Set<unknown> | null>
+}
+
+export const VTreeviewSymbol: InjectionKey<TreeviewProvide> = Symbol.for('vuetify:v-treeview')
 
 function isPrimitive (value: unknown): value is string | number | boolean {
   return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean'
@@ -78,6 +85,16 @@ function useListItems (props: ItemProps & { disabled: Boolean, itemDisabled: str
   return { items }
 }
 
+function flatten (items: ListItem[], flat: ListItem[] = []) {
+  for (const item of items) {
+    flat.push(item)
+
+    if (item.children) flatten (item.children, flat)
+  }
+
+  return flat
+}
+
 export const makeVTreeviewProps = propsFactory({
   baseColor: String,
   bgColor: String,
@@ -112,6 +129,7 @@ export const makeVTreeviewProps = propsFactory({
     type: String as PropType<'all' | 'root' | undefined>,
     validator: (v: any) => !v || ['all', 'root'].includes(v),
   },
+  search: String,
   showSelectIcon: Boolean,
   selectable: Boolean,
   selectedClass: String,
@@ -126,6 +144,7 @@ export const makeVTreeviewProps = propsFactory({
   ...makeDensityProps(),
   ...makeDimensionProps(),
   ...makeElevationProps(),
+  ...makeFilterProps({ filterKeys: ['title'] }),
   ...makeItemsProps(),
   ...makeRoundedProps(),
   ...makeThemeProps(),
@@ -150,23 +169,39 @@ export const VTreeview = genericComponent<new <T>(
   },
 
   setup (props, { slots }) {
-    const { items } = useListItems(props)
-    const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
+    const { getChildren, getPath, open, select, parents} = useNested(props)
     const { roundedClasses } = useRounded(props)
-    const { open, select, parents} = useNested(props)
-    const selectedColor = toRef(props, 'selectedColor')
+    const { themeClasses } = provideTheme(props)
+
     const baseColor = toRef(props, 'baseColor')
     const color = toRef(props, 'color')
+    const selectedColor = toRef(props, 'selectedColor')
+
+    const { items } = useListItems(props)
+    const flatItems = computed(() => flatten(items.value))
+
+    const search = toRef(props, 'search')
+    const { filteredItems } = useFilter(props, flatItems, search)
+
+    const visibleIds = computed(() => {
+      if (!search) {
+        return null
+      }
+      return new Set(filteredItems.value.flatMap((item) => {
+        return [...getPath(item.props.value), ...getChildren(item.props.value)]
+      }))
+    })
+
+    provide(VTreeviewSymbol, {visibleIds : visibleIds})
 
     createList()
 
     onMounted(() => {
-      console.log(parents.value);
       if (props.openOnMount === 'root') {
         parents.value.forEach(parent => {
           if (!parents.value.has(parent)) {
