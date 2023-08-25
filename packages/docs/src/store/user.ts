@@ -45,7 +45,6 @@ type SavedState = {
     jobs: null | number
   }
   pwaRefresh: boolean
-  slashSearch: boolean
   rtl: boolean
   theme: {
     dark: boolean
@@ -69,7 +68,6 @@ type SavedState = {
   }
 } | {
   v: 1
-  ads?: boolean
   api: 'link-only' | 'inline'
   dev?: boolean
   composition?: ('options' | 'composition') | ('options' | 'composition')[]
@@ -77,7 +75,6 @@ type SavedState = {
   theme: string
   mixedTheme: boolean
   direction: 'rtl' | 'ltr'
-  quickbar?: boolean
   notifications: {
     show?: boolean
     read: string[]
@@ -129,9 +126,6 @@ export const useUserStore = defineStore('user', () => {
 
     if (!data.v) {
       data.pwaRefresh = true
-      data.slashSearch = false
-      data.syncSettings = true
-      data.ads = true
       if (typeof data.api === 'boolean') {
         data.api = data.api ? 'inline' : 'link-only'
       }
