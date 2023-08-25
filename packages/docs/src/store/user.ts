@@ -104,7 +104,7 @@ export const useUserStore = defineStore('user', () => {
     mixedTheme: true,
     direction: 'ltr',
     slashSearch: false,
-    syncSettings: false,
+    syncSettings: true,
     quickbar: true,
     notifications: {
       show: true,
@@ -130,7 +130,7 @@ export const useUserStore = defineStore('user', () => {
     if (!data.v) {
       data.pwaRefresh = true
       data.slashSearch = false
-      data.syncSettings = false
+      data.syncSettings = true
       data.ads = true
       if (typeof data.api === 'boolean') {
         data.api = data.api ? 'inline' : 'link-only'
