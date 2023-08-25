@@ -35,7 +35,7 @@ export const useShopifyStore = defineStore('vendors', {
         await bucket?.objects
           .find({ type: 'vendors' })
           .props('metadata')
-          .sort('created_at')
+          .sort('created')
           .limit(1)
       ) || {}
 

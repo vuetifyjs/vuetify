@@ -211,7 +211,7 @@
         .find({ type: 'notifications' })
         .props('created_at,metadata,slug,title')
         .status('published')
-        .sort('-created_at')
+        .sort('-created')
         .limit(10)
     ) || {}
 

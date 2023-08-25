@@ -29,7 +29,7 @@ export const useSponsorsStore = defineStore('sponsors', () => {
       await bucket?.objects
         .find({ type: 'sponsors' })
         .props('slug,title,metadata')
-        .sort('created_at')
+        .sort('created')
     ) || {}
 
     sponsors.value = objects
