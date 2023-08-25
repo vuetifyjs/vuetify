@@ -1,11 +1,8 @@
 <template>
-  <div class="ps-3 mb-3">
-    <v-label class="mb-2 font-weight-medium">Display</v-label>
+  <div class="ps-1 mb-3">
+    <v-label :text="t('display')" class="mb-2 font-weight-medium" />
 
-    <v-messages
-      active
-      messages="Toggle various elements of the documentation experience."
-    />
+    <v-messages :messages="t('display-message')" active />
   </div>
 
   <ad-option />
@@ -20,13 +17,10 @@
 
   <br>
 
-  <div class="ps-3 mb-3">
-    <v-label class="mb-2 font-weight-medium">Communication</v-label>
+  <div class="ps-1 mb-3">
+    <v-label :text="t('communication')" class="mb-2 font-weight-medium" />
 
-    <v-messages
-      active
-      messages="Vuetify will communicate with you through banners and notifications. You can disable these features here or reset your local notification cache."
-    />
+    <v-messages :messages="t('communication-message')" active />
   </div>
 
   <banner-option />
@@ -37,24 +31,23 @@
 
   <br>
 
+  <div class="d-flex justify-end">
+    <v-btn
+      :text="t('reset-all')"
+      color="error"
+      size="small"
+      variant="flat"
+      @click="onResetAll"
+    />
+  </div>
+
+  <br>
+
   <v-divider />
 
   <br>
 
   <developer-mode />
-
-  <br>
-
-  <div class="d-flex justify-end">
-    <v-btn
-      color="error"
-      size="small"
-      variant="flat"
-      @click="onResetAll"
-    >
-      Reset All
-    </v-btn>
-  </div>
 </template>
 
 <script setup>
@@ -65,9 +58,13 @@
   import NotificationsOption from './options/NotificationsOption.vue'
   import QuickbarOption from './options/QuickbarOption.vue'
 
+  // Composables
+  import { useI18n } from 'vue-i18n'
+
   // Stores
   import { useUserStore } from '@/store/user'
 
+  const { t } = useI18n()
   const user = useUserStore()
 
   function onResetAll () {

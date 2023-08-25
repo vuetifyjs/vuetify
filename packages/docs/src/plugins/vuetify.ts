@@ -22,6 +22,9 @@ import type { ViteSSGContext } from '@vuetify/vite-ssg'
 
 export function installVuetify ({ app }: ViteSSGContext) {
   const vuetify = createVuetify({
+    aliases: {
+      SettingsSwitch: components.VSwitch,
+    },
     components: {
       ...components,
       ...labs,
@@ -30,6 +33,14 @@ export function installVuetify ({ app }: ViteSSGContext) {
     defaults: {
       global: {
         eager: false,
+      },
+      SettingsSwitch: {
+        class: 'ps-1 mb-2',
+        color: 'primary',
+        density: 'compact',
+        inset: true,
+        trueIcon: 'mdi-check',
+        falseIcon: '$close',
       },
     },
     locale: {

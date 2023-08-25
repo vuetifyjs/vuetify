@@ -29,6 +29,7 @@
     <template #append>
       <v-icon
         icon="mdi-logout-variant"
+        class="me-1"
         size="small"
         @click="onClickLogout"
       />

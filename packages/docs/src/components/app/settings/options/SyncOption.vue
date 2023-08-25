@@ -7,16 +7,10 @@
       }
     }"
   >
-    <v-switch
+    <settings-switch
       v-model="user.syncSettings"
-      class="ps-3 flex-0-0"
-      inset
-      color="primary"
-      label="Sync Settings"
-      messages="When logged in w/ GitHub, sync settings across devices."
-      density="compact"
-      true-icon="mdi-check"
-      false-icon="$close"
+      :label="t('sync-settings')"
+      :messages="t('sync-settings-message')"
     />
   </v-defaults-provider>
 </template>
@@ -24,10 +18,12 @@
 <script setup>
   // Composables
   import { useAuth0 } from '@auth0/auth0-vue'
+  import { useI18n } from 'vue-i18n'
 
   // Stores
   import { useUserStore } from '@/store/user'
 
+  const { t } = useI18n()
   const user = useUserStore()
   const { isAuthenticated } = useAuth0()
 </script>

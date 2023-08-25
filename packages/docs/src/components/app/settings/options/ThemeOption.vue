@@ -1,6 +1,7 @@
 <template>
   <v-radio-group
     v-model="user.theme"
+    class="mb-2"
     color="#70a2d8"
     hide-details
     true-icon="mdi-check-circle-outline"
@@ -26,15 +27,10 @@
       }
     }"
   >
-    <v-switch
+    <settings-switch
       v-model="user.mixedTheme"
-      class="ps-3 flex-0-0"
-      color="primary"
-      inset
-      label="Dark Code Blocks"
-      messages="Change all code blocks to use a dark theme."
-      true-icon="mdi-check"
-      false-icon="$close"
+      :label="t('dark-code')"
+      :messages="t('dark-code-message')"
     />
   </v-defaults-provider>
 </template>
