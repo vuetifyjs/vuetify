@@ -209,9 +209,9 @@
     const { objects = [] }: { objects: Notification[] } = (
       await bucket?.objects
         .find({ type: 'notifications' })
-        .props('created_at,metadata,slug,title')
+        .props('metadata,created_at,slug,title')
         .status('published')
-        .sort('-created')
+        .sort('-created_at')
         .limit(10)
     ) || {}
 

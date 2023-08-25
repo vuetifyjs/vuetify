@@ -28,8 +28,8 @@ export const useSponsorsStore = defineStore('sponsors', () => {
     const { objects = [] }: { objects: Sponsor[] } = (
       await bucket?.objects
         .find({ type: 'sponsors' })
-        .props('slug,title,metadata')
-        .sort('created')
+        .props('metadata,slug,title')
+        .sort('created_at')
     ) || {}
 
     sponsors.value = objects
