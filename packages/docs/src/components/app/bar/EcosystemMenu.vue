@@ -49,6 +49,11 @@
     { divider: true },
     { subheader: t('tools') },
     {
+      title: 'awesome',
+      href: 'https://github.com/vuetifyjs/awesome-vuetify',
+      appendIcon: '$vuetify-outline',
+    },
+    {
       title: 'create',
       href: 'https://tryvuetify.com/',
       appendIcon: 'mdi-widgets-outline',

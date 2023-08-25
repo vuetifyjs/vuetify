@@ -26,7 +26,7 @@
   const { t } = useI18n()
   const title = t('learn')
   const items = computed(() => ([
-    { subheader: t('documentation') },
+    { subheader: t('overview') },
     {
       title: t('feature-guides'),
       to: rpath('/introduction/why-vuetify/#feature-guides'),
