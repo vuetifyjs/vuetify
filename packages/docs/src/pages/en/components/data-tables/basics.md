@@ -31,9 +31,11 @@ There are three variants of the data table available depending on your requireme
 Labs components require a manual import and installation of the component.
 
 ```js { resource="src/plugins/vuetify.js" }
-import { VDataTable } from 'vuetify/labs/VDataTable'
-import { VDataTableServer } from 'vuetify/labs/VDataTableServer'
-import { VDataTableVirtual } from 'vuetify/labs/VDataTableVirtual'
+import {
+  VDataTable,
+  VDataTableServer,
+  VDataTableVirtual,
+} from "vuetify/labs/VDataTable";
 
 export default createVuetify({
   components: {

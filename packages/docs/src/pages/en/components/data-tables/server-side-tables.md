@@ -21,7 +21,7 @@ Server-side Data tables are used for showing data coming from an API.
 Labs components require a manual import and installation of the component.
 
 ```js { resource="src/plugins/vuetify.js" }
-import { VDataTableServer } from 'vuetify/labs/VDataTableServer'
+import { VDataTableServer } from 'vuetify/labs/VDataTable'
 
 export default createVuetify({
   components: {
