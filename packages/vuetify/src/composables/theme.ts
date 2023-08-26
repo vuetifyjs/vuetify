@@ -185,7 +185,7 @@ const defaultThemeOptions: Exclude<ThemeOptions, false> = {
   },
 }
 
-function parseThemeOptions(options: ThemeOptions = defaultThemeOptions): InternalThemeOptions {
+function parseThemeOptions (options: ThemeOptions = defaultThemeOptions): InternalThemeOptions {
   if (!options) return { ...defaultThemeOptions, isDisabled: true } as InternalThemeOptions
 
   const themes: Record<string, InternalThemeDefinition> = {}
@@ -203,7 +203,7 @@ function parseThemeOptions(options: ThemeOptions = defaultThemeOptions): Interna
 }
 
 // Composables
-export function createTheme(options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
+export function createTheme (options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
   const parsedOptions = parseThemeOptions(options)
   const name = ref(parsedOptions.defaultTheme)
   const themes = ref(parsedOptions.themes)
@@ -296,7 +296,7 @@ export function createTheme(options?: ThemeOptions): ThemeInstance & { install: 
     return lines.map((str, i) => i === 0 ? str : `    ${str}`).join('')
   })
 
-  function getHead() {
+  function getHead () {
     return {
       style: [{
         children: styles.value,
@@ -306,7 +306,7 @@ export function createTheme(options?: ThemeOptions): ThemeInstance & { install: 
     }
   }
 
-  function install(app: App) {
+  function install (app: App) {
     if (parsedOptions.isDisabled) return
 
     const head = app._context.provides.usehead as HeadClient | undefined
@@ -335,7 +335,7 @@ export function createTheme(options?: ThemeOptions): ThemeInstance & { install: 
         updateStyles()
       }
 
-      function updateStyles() {
+      function updateStyles () {
         if (typeof document !== 'undefined' && !styleEl) {
           const el = document.createElement('style')
           el.type = 'text/css'
@@ -369,7 +369,7 @@ export function createTheme(options?: ThemeOptions): ThemeInstance & { install: 
   }
 }
 
-export function provideTheme(props: { theme?: string }) {
+export function provideTheme (props: { theme?: string }) {
   getCurrentInstance('provideTheme')
 
   const theme = inject(ThemeSymbol, null)
@@ -393,7 +393,7 @@ export function provideTheme(props: { theme?: string }) {
   return newTheme
 }
 
-export function useTheme() {
+export function useTheme () {
   getCurrentInstance('useTheme')
 
   const theme = inject(ThemeSymbol, null)
@@ -403,7 +403,7 @@ export function useTheme() {
   return theme
 }
 
-function createCssClass(lines: string[], selector: string, content: string[]) {
+function createCssClass (lines: string[], selector: string, content: string[]) {
   lines.push(
     `${selector} {\n`,
     ...content.map(line => `  ${line};\n`),
@@ -411,7 +411,7 @@ function createCssClass(lines: string[], selector: string, content: string[]) {
   )
 }
 
-function genCssVariables(theme: InternalThemeDefinition) {
+function genCssVariables (theme: InternalThemeDefinition) {
   const lightOverlay = theme.dark ? 2 : 1
   const darkOverlay = theme.dark ? 1 : 2
 
