@@ -8,7 +8,7 @@
       <app-bar-logo />
 
       <v-btn
-        v-if="route.meta.layout !== 'home' && mdAndDown"
+        v-if="mdAndDown"
         icon="mdi-menu"
         @click="app.drawer = !app.drawer"
       />
@@ -69,9 +69,7 @@
   // Composables
   import { useAppStore } from '@/store/app'
   import { useDisplay } from 'vuetify'
-  import { useRoute } from 'vue-router'
 
   const app = useAppStore()
   const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
-  const route = useRoute()
 </script>
