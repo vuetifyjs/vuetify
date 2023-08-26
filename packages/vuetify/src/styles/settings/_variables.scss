@@ -16,87 +16,95 @@ $border-style-root: solid !default;
 $anchor-color: rgb(var(--v-anchor)) !default;
 $anchor-hover-color: rgb(var(--v-anchor-hover)) !default;
 
-$borders: (
-  ) !default;
-$borders: map-deep-merge((0: 0,
-      null: thin,
-      sm: 1px,
-      md: 2px,
-      lg: 4px,
-      xl: 8px),
-    $borders
+$borders: () !default;
+$borders: map-deep-merge(
+  (
+    0: 0,
+    null: thin,
+    sm: 1px,
+    md: 2px,
+    lg: 4px,
+    xl: 8px
+  ),
+  $borders
 );
 
-@each $key,
-$border in $borders {
-  $borders: map-deep-merge($borders,
-    ($key: $border $border-style-root $border-color-root ))
+@each $key, $border in $borders {
+  $borders: map-deep-merge(
+    $borders,
+    ( $key: $border $border-style-root $border-color-root )
+  )
 }
 
-$border-opacities: (
-  ) !default;
-$border-opacities: map-deep-merge((0: 0,
-      null: .12,
-      25: .25,
-      50: .50,
-      75: .75,
-      100: 1),
-    $border-opacities
+$border-opacities: () !default;
+$border-opacities: map-deep-merge(
+  (
+    0: 0,
+    null: .12,
+    25: .25,
+    50: .50,
+    75: .75,
+    100: 1
+  ),
+  $border-opacities
 );
 
-$states: (
-  ) !default;
-$states: map-deep-merge(('hover': var(--v-hover-opacity),
-      'focus': var(--v-focus-opacity),
-      'selected': var(--v-selected-opacity),
-      'activated': var(--v-activated-opacity),
-      'pressed': var(--v-pressed-opacity),
-      'dragged': var(--v-dragged-opacity)),
-    $states
+$states: () !default;
+$states: map-deep-merge(
+    (
+    'hover': var(--v-hover-opacity),
+    'focus': var(--v-focus-opacity),
+    'selected': var(--v-selected-opacity),
+    'activated': var(--v-activated-opacity),
+    'pressed': var(--v-pressed-opacity),
+    'dragged': var(--v-dragged-opacity)
+  ),
+  $states
 );
 
-$rounded: (
-  ) !default;
-$rounded: map-deep-merge((0: 0,
-      'sm': $border-radius-root * .5,
-      null: $border-radius-root,
-      'lg': $border-radius-root * 2,
-      'xl': $border-radius-root * 6,
-      'pill': 9999px,
-      'circle': 50%,
-      'shaped': $border-radius-root * 6 0),
-    $rounded
+$rounded: () !default;
+$rounded: map-deep-merge(
+  (
+    0: 0,
+    'sm': $border-radius-root * .5,
+    null: $border-radius-root,
+    'lg': $border-radius-root * 2,
+    'xl': $border-radius-root * 6,
+    'pill': 9999px,
+    'circle': 50%,
+    'shaped': $border-radius-root * 6 0
+  ),
+  $rounded
 );
 
 $spacer: 4px !default;
 $spacers-steps: 16 !default;
 
-$spacers: (
-  ) !default;
-@if (meta.type-of($spacers)==list) {
+$spacers: () !default;
+@if (meta.type-of($spacers) == list) {
   @for $i from 0 through $spacers-steps {
     $spacers: map.merge($spacers, ($i: $spacer * $i))
   }
 }
 
-$negative-spacers: (
-  ) !default;
-@if (meta.type-of($negative-spacers)==list) {
+$negative-spacers: () !default;
+@if (meta.type-of($negative-spacers) == list) {
   @for $i from 1 through $spacers-steps {
     $negative-spacers: map.merge($negative-spacers, ("n" + $i: -$spacer * $i))
   }
 }
 
-$grid-breakpoints: (
-  ) !default;
-$grid-breakpoints: map-deep-merge(('xs': 0,
-      'sm': 600px,
-      'md': 960px,
-      'lg': 1280px,
-      'xl': 1920px,
-      'xxl': 2560px,
-    ),
-    $grid-breakpoints
+$grid-breakpoints: () !default;
+$grid-breakpoints: map-deep-merge(
+  (
+    'xs': 0,
+    'sm': 600px,
+    'md': 960px,
+    'lg': 1280px,
+    'xl': 1920px,
+    'xxl': 2560px,
+  ),
+  $grid-breakpoints
 );
 
 $grid-gutter: $spacer * 6 !default;
@@ -104,155 +112,187 @@ $form-grid-gutter: $spacer * 2 !default;
 $grid-columns: 12 !default;
 $container-padding-x: $spacer * 4 !default;
 
-$grid-gutters: (
-  ) !default;
-$grid-gutters: map-deep-merge(('xs': math.div($grid-gutter, 12),
-      'sm': math.div($grid-gutter, 6),
-      'md': math.div($grid-gutter, 3),
-      'lg': math.div($grid-gutter * 2, 3),
-      'xl': $grid-gutter,
-    ),
-    $grid-gutters
+$grid-gutters: () !default;
+$grid-gutters: map-deep-merge(
+  (
+    'xs': math.div($grid-gutter, 12),
+    'sm': math.div($grid-gutter, 6),
+    'md': math.div($grid-gutter, 3),
+    'lg': math.div($grid-gutter * 2, 3),
+    'xl': $grid-gutter,
+  ),
+  $grid-gutters
 );
 
-$container-max-widths: (
-  ) !default;
-$container-max-widths: map-deep-merge(('xs': null,
-      'sm': null,
-      'md': map.get($grid-breakpoints, 'md') * 0.9375,
-      'lg': map.get($grid-breakpoints, 'lg') * 0.9375,
-      'xl': map.get($grid-breakpoints, 'xl') * 0.9375,
-      'xxl': map.get($grid-breakpoints, 'xxl') * 0.9375,
-    ),
-    $container-max-widths
+$container-max-widths: () !default;
+$container-max-widths: map-deep-merge(
+  (
+    'xs': null,
+    'sm': null,
+    'md': map.get($grid-breakpoints, 'md') * 0.9375,
+    'lg': map.get($grid-breakpoints, 'lg') * 0.9375,
+    'xl': map.get($grid-breakpoints, 'xl') * 0.9375,
+    'xxl': map.get($grid-breakpoints, 'xxl') * 0.9375,
+  ),
+  $container-max-widths
 );
 
 // Avoid using *-and-down where possible
-$display-breakpoints: (
-  ) !default;
-$display-breakpoints: map-deep-merge(('print-only': 'only print',
-      'screen-only': 'only screen',
-      'xs': '(max-width: #{map.get($grid-breakpoints, ' sm') - 0.02})',
-      'sm': '(min-width: #{map.get($grid-breakpoints, ' sm')}) and (max-width: #{map.get($grid-breakpoints, ' md') - 0.02})',
-      'md': '(min-width: #{map.get($grid-breakpoints, ' md')}) and (max-width: #{map.get($grid-breakpoints, ' lg') - 0.02})',
-      'lg': '(min-width: #{map.get($grid-breakpoints, ' lg')}) and (max-width: #{map.get($grid-breakpoints, ' xl') - 0.02})',
-      'xl': '(min-width: #{map.get($grid-breakpoints, ' xl')}) and (max-width: #{map.get($grid-breakpoints, ' xxl') - 0.02})',
-      'xxl': '(min-width: #{map.get($grid-breakpoints, ' xxl')})',
-      'sm-and-up': '(min-width: #{map.get($grid-breakpoints, ' sm')})',
-      'md-and-up': '(min-width: #{map.get($grid-breakpoints, ' md')})',
-      'lg-and-up': '(min-width: #{map.get($grid-breakpoints, ' lg')})',
-      'xl-and-up': '(min-width: #{map.get($grid-breakpoints, ' xl')})',
-      'sm-and-down': '(max-width: #{map.get($grid-breakpoints, ' md') - 0.02})',
-      'md-and-down': '(max-width: #{map.get($grid-breakpoints, ' lg') - 0.02})',
-      'lg-and-down': '(max-width: #{map.get($grid-breakpoints, ' xl') - 0.02})',
-      'xl-and-down': '(max-width: #{map.get($grid-breakpoints, ' xxl') - 0.02})',
-    ),
-    $display-breakpoints
+$display-breakpoints: () !default;
+$display-breakpoints: map-deep-merge(
+  (
+    'print-only': 'only print',
+    'screen-only': 'only screen',
+    'xs': '(max-width: #{map.get($grid-breakpoints, 'sm') - 0.02})',
+    'sm': '(min-width: #{map.get($grid-breakpoints, 'sm')}) and (max-width: #{map.get($grid-breakpoints, 'md') - 0.02})',
+    'md': '(min-width: #{map.get($grid-breakpoints, 'md')}) and (max-width: #{map.get($grid-breakpoints, 'lg') - 0.02})',
+    'lg': '(min-width: #{map.get($grid-breakpoints, 'lg')}) and (max-width: #{map.get($grid-breakpoints, 'xl') - 0.02})',
+    'xl': '(min-width: #{map.get($grid-breakpoints, 'xl')}) and (max-width: #{map.get($grid-breakpoints, 'xxl') - 0.02})',
+    'xxl': '(min-width: #{map.get($grid-breakpoints, 'xxl')})',
+    'sm-and-up': '(min-width: #{map.get($grid-breakpoints, 'sm')})',
+    'md-and-up': '(min-width: #{map.get($grid-breakpoints, 'md')})',
+    'lg-and-up': '(min-width: #{map.get($grid-breakpoints, 'lg')})',
+    'xl-and-up': '(min-width: #{map.get($grid-breakpoints, 'xl')})',
+    'sm-and-down': '(max-width: #{map.get($grid-breakpoints, 'md') - 0.02})',
+    'md-and-down': '(max-width: #{map.get($grid-breakpoints, 'lg') - 0.02})',
+    'lg-and-down': '(max-width: #{map.get($grid-breakpoints, 'xl') - 0.02})',
+    'xl-and-down': '(max-width: #{map.get($grid-breakpoints, 'xxl') - 0.02})',
+  ),
+  $display-breakpoints
 );
 
-$font-weights: (
-  ) !default;
-$font-weights: map-deep-merge(('thin': 100,
-      'light': 300,
-      'regular': 400,
-      'medium': 500,
-      'bold': 700,
-      'black': 900),
-    $font-weights
+$font-weights: () !default;
+$font-weights: map-deep-merge(
+  (
+    'thin': 100,
+    'light': 300,
+    'regular': 400,
+    'medium': 500,
+    'bold': 700,
+    'black': 900
+  ),
+  $font-weights
 );
 
 $heading-font-family: $body-font-family !default;
 
-$typography: (
-  ) !default;
-$typography: map-deep-merge(('h1': ('size': 6rem,
-        'weight': 300,
-        'line-height': 6rem,
-        'letter-spacing': -.015625em,
-        'font-family': $heading-font-family,
-        'text-transform': none),
-      'h2': ('size': 3.75rem,
-        'weight': 300,
-        'line-height': 3.75rem,
-        'letter-spacing': -.0083333333em,
-        'font-family': $heading-font-family,
-        'text-transform': none),
-      'h3': ('size': 3rem,
-        'weight': 400,
-        'line-height': 3.125rem,
-        'letter-spacing': normal,
-        'font-family': $heading-font-family,
-        'text-transform': none),
-      'h4': ('size': 2.125rem,
-        'weight': 400,
-        'line-height': 2.5rem,
-        'letter-spacing': .0073529412em,
-        'font-family': $heading-font-family,
-        'text-transform': none),
-      'h5': ('size': 1.5rem,
-        'weight': 400,
-        'line-height': 2rem,
-        'letter-spacing': normal,
-        'font-family': $heading-font-family,
-        'text-transform': none),
-      'h6': ('size': 1.25rem,
-        'weight': 500,
-        'line-height': 2rem,
-        'letter-spacing': .0125em,
-        'font-family': $heading-font-family,
-        'text-transform': none),
-      'subtitle-1': ('size': 1rem,
-        'weight': normal,
-        'line-height': 1.75rem,
-        'letter-spacing': .009375em,
-        'font-family': $body-font-family,
-        'text-transform': none),
-      'subtitle-2': ('size': .875rem,
-        'weight': 500,
-        'line-height': 1.375rem,
-        'letter-spacing': .0071428571em,
-        'font-family': $body-font-family,
-        'text-transform': none),
-      'body-1': ('size': 1rem,
-        'weight': 400,
-        'line-height': 1.5rem,
-        'letter-spacing': .03125em,
-        'font-family': $body-font-family,
-        'text-transform': none),
-      'body-2': ('size': .875rem,
-        'weight': 400,
-        'line-height': 1.25rem,
-        'letter-spacing': .0178571429em,
-        'font-family': $body-font-family,
-        'text-transform': none),
-      'button': ('size': .875rem,
-        'weight': 500,
-        'line-height': 2.25rem,
-        'letter-spacing': .0892857143em,
-        'font-family': $body-font-family,
-        'text-transform': uppercase),
-      'caption': ('size': .75rem,
-        'weight': 400,
-        'line-height': 1.25rem,
-        'letter-spacing': .0333333333em,
-        'font-family': $body-font-family,
-        'text-transform': none),
-      'overline': ('size': .75rem,
-        'weight': 500,
-        'line-height': 2rem,
-        'letter-spacing': .1666666667em,
-        'font-family': $body-font-family,
-        'text-transform': uppercase)),
-    $typography
+$typography: () !default;
+$typography: map-deep-merge(
+  (
+    'h1': (
+      'size': 6rem,
+      'weight': 300,
+      'line-height': 6rem,
+      'letter-spacing': -.015625em,
+      'font-family': $heading-font-family,
+      'text-transform': none
+    ),
+    'h2': (
+      'size': 3.75rem,
+      'weight': 300,
+      'line-height': 3.75rem,
+      'letter-spacing': -.0083333333em,
+      'font-family': $heading-font-family,
+      'text-transform': none
+    ),
+    'h3': (
+      'size': 3rem,
+      'weight': 400,
+      'line-height': 3.125rem,
+      'letter-spacing': normal,
+      'font-family': $heading-font-family,
+      'text-transform': none
+    ),
+    'h4': (
+      'size': 2.125rem,
+      'weight': 400,
+      'line-height': 2.5rem,
+      'letter-spacing': .0073529412em,
+      'font-family': $heading-font-family,
+      'text-transform': none
+    ),
+    'h5': (
+      'size': 1.5rem,
+      'weight': 400,
+      'line-height': 2rem,
+      'letter-spacing': normal,
+      'font-family': $heading-font-family,
+      'text-transform': none
+    ),
+    'h6': (
+      'size': 1.25rem,
+      'weight': 500,
+      'line-height': 2rem,
+      'letter-spacing': .0125em,
+      'font-family': $heading-font-family,
+      'text-transform': none
+    ),
+    'subtitle-1': (
+      'size': 1rem,
+      'weight': normal,
+      'line-height': 1.75rem,
+      'letter-spacing': .009375em,
+      'font-family': $body-font-family,
+      'text-transform': none
+    ),
+    'subtitle-2': (
+      'size': .875rem,
+      'weight': 500,
+      'line-height': 1.375rem,
+      'letter-spacing': .0071428571em,
+      'font-family': $body-font-family,
+      'text-transform': none
+    ),
+    'body-1': (
+      'size': 1rem,
+      'weight': 400,
+      'line-height': 1.5rem,
+      'letter-spacing': .03125em,
+      'font-family': $body-font-family,
+      'text-transform': none
+    ),
+    'body-2': (
+      'size': .875rem,
+      'weight': 400,
+      'line-height': 1.25rem,
+      'letter-spacing': .0178571429em,
+      'font-family': $body-font-family,
+      'text-transform': none
+    ),
+    'button': (
+      'size': .875rem,
+      'weight': 500,
+      'line-height': 2.25rem,
+      'letter-spacing': .0892857143em,
+      'font-family': $body-font-family,
+      'text-transform': uppercase
+    ),
+    'caption': (
+      'size': .75rem,
+      'weight': 400,
+      'line-height': 1.25rem,
+      'letter-spacing': .0333333333em,
+      'font-family': $body-font-family,
+      'text-transform': none
+    ),
+    'overline': (
+      'size': .75rem,
+      'weight': 500,
+      'line-height': 2rem,
+      'letter-spacing': .1666666667em,
+      'font-family': $body-font-family,
+      'text-transform': uppercase
+    )
+  ),
+  $typography
 );
 
-$flat-typography: (
-  ) !default;
-@each $type,
-$values in $typography {
-  $flat-typography: map-deep-merge($flat-typography,
+$flat-typography: () !default;
+@each $type, $values in $typography {
+  $flat-typography: map-deep-merge(
+    $flat-typography,
     (#{$type}: map.values($values))
-);
+  );
 }
 
 // Mapping from transition to easings:
@@ -278,7 +318,7 @@ $sizes: (
   'default',
   'large',
   'x-large'
-  ) !default;
+) !default;
 
 $size-scale: $spacer * 2 !default;
 $size-scales: (
@@ -286,4 +326,5 @@ $size-scales: (
   'small': -1,
   'default': 0,
   'large': 1,
-  'x-large': 2) !default;
+  'x-large': 2
+) !default;
