@@ -6,7 +6,7 @@ import {
   ref,
   watch,
   watchEffect,
-} from 'vue';
+} from 'vue'
 import {
   createRange,
   darken,
@@ -19,90 +19,90 @@ import {
   parseColor,
   propsFactory,
   RGBtoHex,
-} from '@/util';
+} from '@/util'
 
 // Types
-import type { HeadClient } from '@vueuse/head';
-import type { App, DeepReadonly, InjectionKey, Ref } from 'vue';
+import type { HeadClient } from '@vueuse/head'
+import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 
-type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T;
+type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
 export type ThemeOptions = false | {
-  cspNonce?: string;
-  defaultTheme?: string;
-  variations?: false | VariationsOptions;
-  themes?: Record<string, ThemeDefinition>;
-};
-export type ThemeDefinition = DeepPartial<InternalThemeDefinition>;
+  cspNonce?: string
+  defaultTheme?: string
+  variations?: false | VariationsOptions
+  themes?: Record<string, ThemeDefinition>
+}
+export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 
 interface InternalThemeOptions {
-  cspNonce?: string;
-  isDisabled: boolean;
-  defaultTheme: string;
-  variations: false | VariationsOptions;
-  themes: Record<string, InternalThemeDefinition>;
+  cspNonce?: string
+  isDisabled: boolean
+  defaultTheme: string
+  variations: false | VariationsOptions
+  themes: Record<string, InternalThemeDefinition>
 }
 
 interface VariationsOptions {
-  colors: string[];
-  lighten: number;
-  darken: number;
+  colors: string[]
+  lighten: number
+  darken: number
 }
 
 interface InternalThemeDefinition {
-  dark: boolean;
-  colors: Colors;
-  variables: Record<string, string | number>;
+  dark: boolean
+  colors: Colors
+  variables: Record<string, string | number>
 }
 
 export interface Colors extends BaseColors, OnColors {
-  [key: string]: string;
+  [key: string]: string
 }
 
 interface BaseColors {
-  background: string;
-  surface: string;
-  primary: string;
-  secondary: string;
-  success: string;
-  warning: string;
-  error: string;
-  info: string;
+  background: string
+  surface: string
+  primary: string
+  secondary: string
+  success: string
+  warning: string
+  error: string
+  info: string
 }
 
 interface OnColors {
-  'on-background': string;
-  'on-surface': string;
-  'on-primary': string;
-  'on-secondary': string;
-  'on-success': string;
-  'on-warning': string;
-  'on-error': string;
-  'on-info': string;
+  'on-background': string
+  'on-surface': string
+  'on-primary': string
+  'on-secondary': string
+  'on-success': string
+  'on-warning': string
+  'on-error': string
+  'on-info': string
 }
 
 export interface ThemeInstance {
-  readonly isDisabled: boolean;
-  readonly themes: Ref<Record<string, InternalThemeDefinition>>;
+  readonly isDisabled: boolean
+  readonly themes: Ref<Record<string, InternalThemeDefinition>>
 
-  readonly name: Readonly<Ref<string>>;
-  readonly current: DeepReadonly<Ref<InternalThemeDefinition>>;
-  readonly computedThemes: DeepReadonly<Ref<Record<string, InternalThemeDefinition>>>;
+  readonly name: Readonly<Ref<string>>
+  readonly current: DeepReadonly<Ref<InternalThemeDefinition>>
+  readonly computedThemes: DeepReadonly<Ref<Record<string, InternalThemeDefinition>>>
 
-  readonly themeClasses: Readonly<Ref<string | undefined>>;
-  readonly styles: Readonly<Ref<string>>;
+  readonly themeClasses: Readonly<Ref<string | undefined>>
+  readonly styles: Readonly<Ref<string>>
 
   readonly global: {
-    readonly name: Ref<string>;
-    readonly current: DeepReadonly<Ref<InternalThemeDefinition>>;
-  };
+    readonly name: Ref<string>
+    readonly current: DeepReadonly<Ref<InternalThemeDefinition>>
+  }
 }
 
-export const ThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme');
+export const ThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme')
 
 export const makeThemeProps = propsFactory({
   theme: String,
-}, 'theme');
+}, 'theme')
 
 const defaultThemeOptions: Exclude<ThemeOptions, false> = {
   defaultTheme: 'light',
@@ -163,7 +163,7 @@ const defaultThemeOptions: Exclude<ThemeOptions, false> = {
       },
       variables: {
         'anchor': '#BB86FC',
-        'anchor-hover': '#D8C1F5',
+        'anchor-hover': '#651FFF',
         'border-color': '#FFFFFF',
         'border-opacity': 0.12,
         'high-emphasis-opacity': 1,
@@ -183,61 +183,61 @@ const defaultThemeOptions: Exclude<ThemeOptions, false> = {
       },
     },
   },
-};
+}
 
 function parseThemeOptions(options: ThemeOptions = defaultThemeOptions): InternalThemeOptions {
-  if (!options) return { ...defaultThemeOptions, isDisabled: true } as InternalThemeOptions;
+  if (!options) return { ...defaultThemeOptions, isDisabled: true } as InternalThemeOptions
 
-  const themes: Record<string, InternalThemeDefinition> = {};
+  const themes: Record<string, InternalThemeDefinition> = {}
   for (const [key, theme] of Object.entries(options.themes ?? {})) {
     const defaultTheme = theme.dark || key === 'dark'
       ? defaultThemeOptions.themes?.dark
-      : defaultThemeOptions.themes?.light;
-    themes[key] = mergeDeep(defaultTheme, theme) as InternalThemeDefinition;
+      : defaultThemeOptions.themes?.light
+    themes[key] = mergeDeep(defaultTheme, theme) as InternalThemeDefinition
   }
 
   return mergeDeep(
     defaultThemeOptions,
     { ...options, themes },
-  ) as InternalThemeOptions;
+  ) as InternalThemeOptions
 }
 
 // Composables
-export function createTheme(options?: ThemeOptions): ThemeInstance & { install: (app: App) => void; } {
-  const parsedOptions = parseThemeOptions(options);
-  const name = ref(parsedOptions.defaultTheme);
-  const themes = ref(parsedOptions.themes);
+export function createTheme(options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
+  const parsedOptions = parseThemeOptions(options)
+  const name = ref(parsedOptions.defaultTheme)
+  const themes = ref(parsedOptions.themes)
 
   const computedThemes = computed(() => {
-    const acc: Record<string, InternalThemeDefinition> = {};
+    const acc: Record<string, InternalThemeDefinition> = {}
     for (const [name, original] of Object.entries(themes.value)) {
       const theme: InternalThemeDefinition = acc[name] = {
         ...original,
         colors: {
           ...original.colors,
         },
-      };
+      }
 
       if (parsedOptions.variations) {
         for (const name of parsedOptions.variations.colors) {
-          const color = theme.colors[name];
+          const color = theme.colors[name]
 
-          if (!color) continue;
+          if (!color) continue
 
           for (const variation of (['lighten', 'darken'] as const)) {
-            const fn = variation === 'lighten' ? lighten : darken;
+            const fn = variation === 'lighten' ? lighten : darken
             for (const amount of createRange(parsedOptions.variations[variation], 1)) {
-              theme.colors[`${name}-${variation}-${amount}`] = RGBtoHex(fn(parseColor(color), amount));
+              theme.colors[`${name}-${variation}-${amount}`] = RGBtoHex(fn(parseColor(color), amount))
             }
           }
         }
       }
 
       for (const color of Object.keys(theme.colors)) {
-        if (/^on-[a-z]/.test(color) || theme.colors[`on-${color}`]) continue;
+        if (/^on-[a-z]/.test(color) || theme.colors[`on-${color}`]) continue
 
-        const onColor = `on-${color}` as keyof OnColors;
-        const colorVal = parseColor(theme.colors[color]!);
+        const onColor = `on-${color}` as keyof OnColors
+        const colorVal = parseColor(theme.colors[color]!)
 
         // TODO: warn about poor color selections
         // const contrastAsText = Math.abs(APCAcontrast(colorVal, colorToInt(theme.colors.background)))
@@ -249,52 +249,52 @@ export function createTheme(options?: ThemeOptions): ThemeInstance & { install: 
         // }
 
         // Prefer white text if both have an acceptable contrast ratio
-        theme.colors[onColor] = getForeground(colorVal);
+        theme.colors[onColor] = getForeground(colorVal)
       }
     }
 
-    return acc;
-  });
-  const current = computed(() => computedThemes.value[name.value]);
+    return acc
+  })
+  const current = computed(() => computedThemes.value[name.value])
 
   const styles = computed(() => {
-    const lines: string[] = [];
+    const lines: string[] = []
 
     if (current.value.dark) {
-      createCssClass(lines, ':root', ['color-scheme: dark']);
+      createCssClass(lines, ':root', ['color-scheme: dark'])
     }
 
-    createCssClass(lines, ':root', genCssVariables(current.value));
+    createCssClass(lines, ':root', genCssVariables(current.value))
 
     for (const [themeName, theme] of Object.entries(computedThemes.value)) {
       createCssClass(lines, `.v-theme--${themeName}`, [
         `color-scheme: ${theme.dark ? 'dark' : 'normal'}`,
         ...genCssVariables(theme),
-      ]);
+      ])
     }
 
-    const bgLines: string[] = [];
-    const fgLines: string[] = [];
+    const bgLines: string[] = []
+    const fgLines: string[] = []
 
-    const colors = new Set(Object.values(computedThemes.value).flatMap(theme => Object.keys(theme.colors)));
+    const colors = new Set(Object.values(computedThemes.value).flatMap(theme => Object.keys(theme.colors)))
     for (const key of colors) {
       if (/^on-[a-z]/.test(key)) {
-        createCssClass(fgLines, `.${key}`, [`color: rgb(var(--v-theme-${key})) !important`]);
+        createCssClass(fgLines, `.${key}`, [`color: rgb(var(--v-theme-${key})) !important`])
       } else {
         createCssClass(bgLines, `.bg-${key}`, [
           `--v-theme-overlay-multiplier: var(--v-theme-${key}-overlay-multiplier)`,
           `background-color: rgb(var(--v-theme-${key})) !important`,
           `color: rgb(var(--v-theme-on-${key})) !important`,
-        ]);
-        createCssClass(fgLines, `.text-${key}`, [`color: rgb(var(--v-theme-${key})) !important`]);
-        createCssClass(fgLines, `.border-${key}`, [`--v-border-color: var(--v-theme-${key})`]);
+        ])
+        createCssClass(fgLines, `.text-${key}`, [`color: rgb(var(--v-theme-${key})) !important`])
+        createCssClass(fgLines, `.border-${key}`, [`--v-border-color: var(--v-theme-${key})`])
       }
     }
 
-    lines.push(...bgLines, ...fgLines);
+    lines.push(...bgLines, ...fgLines)
 
-    return lines.map((str, i) => i === 0 ? str : `    ${str}`).join('');
-  });
+    return lines.map((str, i) => i === 0 ? str : `    ${str}`).join('')
+  })
 
   function getHead() {
     return {
@@ -303,55 +303,55 @@ export function createTheme(options?: ThemeOptions): ThemeInstance & { install: 
         id: 'vuetify-theme-stylesheet',
         nonce: parsedOptions.cspNonce || false as never,
       }],
-    };
+    }
   }
 
   function install(app: App) {
-    if (parsedOptions.isDisabled) return;
+    if (parsedOptions.isDisabled) return
 
-    const head = app._context.provides.usehead as HeadClient | undefined;
+    const head = app._context.provides.usehead as HeadClient | undefined
     if (head) {
       if (head.push) {
-        const entry = head.push(getHead);
+        const entry = head.push(getHead)
         if (IN_BROWSER) {
-          watch(styles, () => { entry.patch(getHead); });
+          watch(styles, () => { entry.patch(getHead) })
         }
       } else {
         if (IN_BROWSER) {
-          head.addHeadObjs(computed(getHead));
-          watchEffect(() => head.updateDOM());
+          head.addHeadObjs(computed(getHead))
+          watchEffect(() => head.updateDOM())
         } else {
-          head.addHeadObjs(getHead());
+          head.addHeadObjs(getHead())
         }
       }
     } else {
       let styleEl = IN_BROWSER
         ? document.getElementById('vuetify-theme-stylesheet')
-        : null;
+        : null
 
       if (IN_BROWSER) {
-        watch(styles, updateStyles, { immediate: true });
+        watch(styles, updateStyles, { immediate: true })
       } else {
-        updateStyles();
+        updateStyles()
       }
 
       function updateStyles() {
         if (typeof document !== 'undefined' && !styleEl) {
-          const el = document.createElement('style');
-          el.type = 'text/css';
-          el.id = 'vuetify-theme-stylesheet';
-          if (parsedOptions.cspNonce) el.setAttribute('nonce', parsedOptions.cspNonce);
+          const el = document.createElement('style')
+          el.type = 'text/css'
+          el.id = 'vuetify-theme-stylesheet'
+          if (parsedOptions.cspNonce) el.setAttribute('nonce', parsedOptions.cspNonce)
 
-          styleEl = el;
-          document.head.appendChild(styleEl);
+          styleEl = el
+          document.head.appendChild(styleEl)
         }
 
-        if (styleEl) styleEl.innerHTML = styles.value;
+        if (styleEl) styleEl.innerHTML = styles.value
       }
     }
   }
 
-  const themeClasses = computed(() => parsedOptions.isDisabled ? undefined : `v-theme--${name.value}`);
+  const themeClasses = computed(() => parsedOptions.isDisabled ? undefined : `v-theme--${name.value}`)
 
   return {
     install,
@@ -366,41 +366,41 @@ export function createTheme(options?: ThemeOptions): ThemeInstance & { install: 
       name,
       current,
     },
-  };
+  }
 }
 
-export function provideTheme(props: { theme?: string; }) {
-  getCurrentInstance('provideTheme');
+export function provideTheme(props: { theme?: string }) {
+  getCurrentInstance('provideTheme')
 
-  const theme = inject(ThemeSymbol, null);
+  const theme = inject(ThemeSymbol, null)
 
-  if (!theme) throw new Error('Could not find Vuetify theme injection');
+  if (!theme) throw new Error('Could not find Vuetify theme injection')
 
   const name = computed<string>(() => {
-    return props.theme ?? theme?.name.value;
-  });
+    return props.theme ?? theme?.name.value
+  })
 
-  const themeClasses = computed(() => theme.isDisabled ? undefined : `v-theme--${name.value}`);
+  const themeClasses = computed(() => theme.isDisabled ? undefined : `v-theme--${name.value}`)
 
   const newTheme: ThemeInstance = {
     ...theme,
     name,
     themeClasses,
-  };
+  }
 
-  provide(ThemeSymbol, newTheme);
+  provide(ThemeSymbol, newTheme)
 
-  return newTheme;
+  return newTheme
 }
 
 export function useTheme() {
-  getCurrentInstance('useTheme');
+  getCurrentInstance('useTheme')
 
-  const theme = inject(ThemeSymbol, null);
+  const theme = inject(ThemeSymbol, null)
 
-  if (!theme) throw new Error('Could not find Vuetify theme injection');
+  if (!theme) throw new Error('Could not find Vuetify theme injection')
 
-  return theme;
+  return theme
 }
 
 function createCssClass(lines: string[], selector: string, content: string[]) {
@@ -408,27 +408,27 @@ function createCssClass(lines: string[], selector: string, content: string[]) {
     `${selector} {\n`,
     ...content.map(line => `  ${line};\n`),
     '}\n',
-  );
+  )
 }
 
 function genCssVariables(theme: InternalThemeDefinition) {
-  const lightOverlay = theme.dark ? 2 : 1;
-  const darkOverlay = theme.dark ? 1 : 2;
+  const lightOverlay = theme.dark ? 2 : 1
+  const darkOverlay = theme.dark ? 1 : 2
 
-  const variables: string[] = [];
+  const variables: string[] = []
   for (const [key, value] of Object.entries(theme.colors)) {
-    const rgb = parseColor(value);
-    variables.push(`--v-theme-${key}: ${rgb.r},${rgb.g},${rgb.b}`);
+    const rgb = parseColor(value)
+    variables.push(`--v-theme-${key}: ${rgb.r},${rgb.g},${rgb.b}`)
     if (!key.startsWith('on-')) {
-      variables.push(`--v-theme-${key}-overlay-multiplier: ${getLuma(value) > 0.18 ? lightOverlay : darkOverlay}`);
+      variables.push(`--v-theme-${key}-overlay-multiplier: ${getLuma(value) > 0.18 ? lightOverlay : darkOverlay}`)
     }
   }
 
   for (const [key, value] of Object.entries(theme.variables)) {
-    const color = typeof value === 'string' && value.startsWith('#') ? parseColor(value) : undefined;
-    const rgb = color ? `${color.r}, ${color.g}, ${color.b}` : undefined;
-    variables.push(`--v-${key}: ${rgb ?? value}`);
+    const color = typeof value === 'string' && value.startsWith('#') ? parseColor(value) : undefined
+    const rgb = color ? `${color.r}, ${color.g}, ${color.b}` : undefined
+    variables.push(`--v-${key}: ${rgb ?? value}`)
   }
 
-  return variables;
+  return variables
 }
