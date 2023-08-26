@@ -21,6 +21,7 @@
   </v-radio-group>
 
   <v-defaults-provider
+    v-if="!theme.current.value.dark"
     :defaults="{
       VIcon: {
         color: user.mixedTheme ? 'primary' : 'disabled'
@@ -39,9 +40,11 @@
   // Composables
   import { useUserStore } from '@/store/user'
   import { useI18n } from 'vue-i18n'
+  import { useTheme } from 'vuetify'
 
-  const user = useUserStore()
   const { t } = useI18n()
+  const theme = useTheme()
+  const user = useUserStore()
 
   const items = [
     {
