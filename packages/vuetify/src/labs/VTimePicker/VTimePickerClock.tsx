@@ -4,9 +4,8 @@
 import './VTimePickerClock.sass'
 
 import { dateEmits, makeDateProps } from '@/labs/VDateInput/composables'
-import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
-// // Mixins
+// Mixins
 // import Colorable from '../../mixins/colorable'
 // import Themeable from '../../mixins/themeable'
 
@@ -31,7 +30,7 @@ interface options extends Vue {
   }
 }
 
-export const makeVTimePickerProps = propsFactory({
+export const makeVTimePickerClockProps = propsFactory({
   allowedValues: Function as PropType<(value: number) => boolean>,
   ampm: Boolean,
   disabled: Boolean,
@@ -61,19 +60,20 @@ export const makeVTimePickerProps = propsFactory({
   value: Number,
 
   ...makeDateProps(),
-  ...makeVPickerProps({ title: '$vueitfy.timePicker.title' }),
 }, 'VTimePickerClock')
 
 export const VTimePickerClock = genericComponent()({
   name: 'VTimePickerClock',
 
-  props: makeVTimePickerProps(),
+  props: makeVTimePickerClockProps(),
 
-  emits: {
-    change,
-    input,
-    ...dateEmits,
-  },
+  emits: [
+    'change',
+    'input',
+    {
+      ...dateEmits,
+    }
+  ],
 
   setup (props, { emit, slots }) {
     const clock = ref(null)
@@ -217,7 +217,7 @@ export const VTimePickerClock = genericComponent()({
 
     useRender(() => {
       return (
-        <VPicker class={['v-time-picker-clock', { 'v-time-picker-clock--indeterminate': value == null } ]}
+        <div class={['v-time-picker-clock', { 'v-time-picker-clock--indeterminate': props.value == null } ]}
           onMousedown={ onMouseDown }
           onMouseup={ onMouseUp }
           onMouseleave={ (e: MouseEvent) => (isDragging && onMouseUp(e)) }
@@ -234,7 +234,7 @@ export const VTimePickerClock = genericComponent()({
               style={ `background: ${(props.value != null) && (props.color || 'accent')}; transform: rotate(${props.rotate + degreesPerUnit.value * (displayedValue.value - props.min)}deg ${`scaleY(${handScale(displayedValue.value)})`})` }
             ></div>
             {
-              genChildren.map(value => (
+              genChildren.value.map(value => (
                 <div
                   class={[
                     'v-time-picker-clock__item', {
@@ -247,7 +247,7 @@ export const VTimePickerClock = genericComponent()({
               ))
             }
           </div>
-        </VPicker>
+        </div>
       )
     })
   },
