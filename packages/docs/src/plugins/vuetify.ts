@@ -93,6 +93,18 @@ export function installVuetify ({ app }: ViteSSGContext) {
             quarternary: '#B0D1E8',
           },
         },
+        blackguard: {
+          dark: true,
+          colors: {
+            background: '#0f0c24',
+            primary: '#e7810d',
+            surface: '#1e184a',
+            'on-surface-variant': '#4c219e',
+          },
+          variables: {
+            'theme-code': '#15123d',
+          },
+        },
       },
     },
   })

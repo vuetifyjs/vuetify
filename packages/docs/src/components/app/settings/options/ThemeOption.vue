@@ -2,7 +2,7 @@
   <v-radio-group
     v-model="user.theme"
     class="mb-2"
-    color="#70a2d8"
+    color="primary"
     hide-details
     true-icon="mdi-check-circle-outline"
   >
@@ -65,7 +65,7 @@
     {
       text: t('blackguard'),
       icon: 'mdi-space-invaders',
-      disabled: true,
+      disabled: false,
       value: 'blackguard',
     },
   ]

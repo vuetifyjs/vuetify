@@ -2,6 +2,7 @@
   <v-app-bar
     id="app-bar"
     border="b"
+    image="https://github.com/vuetifyjs/vuetify/assets/9064066/379d1932-a56f-42d9-98f6-fbb1b04c38e2"
     flat
   >
     <template #prepend>

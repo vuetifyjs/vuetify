@@ -3,6 +3,7 @@
     id="app-drawer"
     v-model="app.drawer"
     :order="mobile ? -1 : undefined"
+    image="https://github.com/vuetifyjs/vuetify/assets/9064066/a82de42c-ceb7-48cc-85a0-9e10851ca0d3"
     width="300"
   >
     <app-list :items="app.items" nav>

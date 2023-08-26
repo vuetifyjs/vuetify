@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-toolbar
-      :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
       border="b"
       class="ps-1"
       flat
@@ -117,7 +116,7 @@
 
 <script setup>
   // Composables
-  import { useDisplay, useTheme } from 'vuetify'
+  import { useDisplay } from 'vuetify'
   import { useI18n } from 'vue-i18n'
 
   // Utilities
@@ -142,13 +141,9 @@
 
   const display = useDisplay()
   const { t } = useI18n()
-  const theme = useTheme()
 
   const tune = ref(true)
   const show = ref(true)
-  const isDark = computed(() => {
-    return theme.current.value.dark
-  })
 
   const model = computed({
     get () {
