@@ -18,7 +18,7 @@
       v-if="!canToggle"
       :text="t('unlock-with-github')"
       block
-      class="mb-3"
+      class="mb-3 text-none"
       color="#2a2a2a"
       href="https://github.com/sponsors/johnleider"
       prepend-icon="mdi-github"
@@ -39,15 +39,15 @@
   import { useI18n } from 'vue-i18n'
 
   // Stores
-  import { useUserStore } from '@/store/user'
   import { useAuthStore } from '@/store/auth'
+  import { useUserStore } from '@/store/user'
 
   // Utilities
   import { computed } from 'vue'
 
   const { t } = useI18n()
-  const user = useUserStore()
   const auth = useAuthStore()
+  const user = useUserStore()
 
   const canToggle = computed(() => auth.admin || auth.sponsor?.monthlyPriceInDollars >= 1)
 </script>

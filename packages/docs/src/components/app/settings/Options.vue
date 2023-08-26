@@ -27,6 +27,10 @@
     <slash-search-option />
 
     <sync-option />
+
+    <v-divider class="my-3" />
+
+    <developer-mode />
   </div>
 </template>
 
@@ -35,8 +39,9 @@
   import AdOption from '@/components/app/settings/options/AdOption.vue'
   import ApiOption from '@/components/app/settings/options/ApiOption.vue'
   import CodeOption from '@/components/app/settings/options/CodeOption.vue'
-  import SyncOption from '@/components/app/settings/options/SyncOption.vue'
+  import DeveloperMode from '@/components/app/settings/DeveloperMode.vue'
   import SlashSearchOption from '@/components/app/settings/options/SlashSearchOption.vue'
+  import SyncOption from '@/components/app/settings/options/SyncOption.vue'
   import ThemeOption from '@/components/app/settings/options/ThemeOption.vue'
 
   // Composables
