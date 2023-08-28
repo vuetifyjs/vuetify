@@ -4,11 +4,9 @@
 .v-number-input
   padding-inline-end: 0 !important
 
-  // input[type="number"]
-  //   height: 100%
-  //   left: 0
-  //   outline-style: none
-  //   position: absolute
-  //   top: 0
-  //   width: 100%
-  //   z-index: 1
+  input[type="number"]
+    -moz-appearance: textfield
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button
+      -webkit-appearance: none
