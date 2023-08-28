@@ -100,6 +100,8 @@ export function installVuetify ({ app }: ViteSSGContext) {
             primary: '#e7810d',
             surface: '#1e184a',
             'on-surface-variant': '#4c219e',
+            info: '#4c219e',
+            success: '#84b38a',
           },
           variables: {
             'theme-code': '#15123d',

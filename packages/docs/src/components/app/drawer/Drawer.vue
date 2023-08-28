@@ -2,8 +2,8 @@
   <v-navigation-drawer
     id="app-drawer"
     v-model="app.drawer"
+    :image="image"
     :order="mobile ? -1 : undefined"
-    image="https://github.com/vuetifyjs/vuetify/assets/9064066/a82de42c-ceb7-48cc-85a0-9e10851ca0d3"
     width="300"
   >
     <app-list :items="app.items" nav>
@@ -25,14 +25,21 @@
 
   // Composables
   import { useAppStore } from '@/store/app'
-  import { useDisplay } from 'vuetify'
+  import { useDisplay, useTheme } from 'vuetify'
 
   // Utilities
-  import { onMounted } from 'vue'
+  import { computed, onMounted } from 'vue'
   import { wait } from '@/util/helpers'
 
   const app = useAppStore()
   const { mobile } = useDisplay()
+  const theme = useTheme()
+
+  const image = computed(() => {
+    if (['dark', 'light'].includes(theme.name.value)) return undefined
+
+    return `https://cdn.vuetifyjs.com/docs/images/themes/${theme.name.value}-app-drawer.png`
+  })
 
   onMounted(async () => {
     await wait(1000)
