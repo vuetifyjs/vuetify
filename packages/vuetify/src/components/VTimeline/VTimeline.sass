@@ -428,6 +428,9 @@ $timeline-line-size-first-last: calc(var(--v-timeline-line-size-base) - var(--v-
     .v-timeline-divider__after
       --v-timeline-line-size-offset: #{math.div($timeline-item-padding, 2)}
 
+      @include horizontal(true)
+        width: 100%
+
   @include vertical(true)
     @include timeline-first-item()
       padding-block-start: 0
@@ -441,6 +444,9 @@ $timeline-line-size-first-last: calc(var(--v-timeline-line-size-base) - var(--v-
   .v-timeline-item:last-child
     .v-timeline-divider__before
       --v-timeline-line-size-offset: #{math.div($timeline-item-padding, 2)}
+
+      @include horizontal(true)
+        width: 100%
 
   @include vertical(true)
     @include timeline-last-item()
