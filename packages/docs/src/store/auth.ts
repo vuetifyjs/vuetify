@@ -9,7 +9,7 @@ import { defineStore } from 'pinia'
 import { ref, shallowRef } from 'vue'
 
 export const useAuthStore = defineStore('auth', () => {
-  const { user: _user, getAccessTokenSilently } = useAuth0()
+  const auth = useAuth0()
   const user = useUserStore()
 
   const isUpdating = shallowRef(false)
@@ -24,7 +24,7 @@ export const useAuthStore = defineStore('auth', () => {
   async function updateUser () {
     const local = localStorage.getItem('vuetify@user')
 
-    if (!_user?.value?.sub || !url || !local || isUpdating.value) return
+    if (!auth?.user?.value?.sub || !url || !local || isUpdating.value) return
 
     const settings = JSON.parse(local)
 
@@ -36,7 +36,7 @@ export const useAuthStore = defineStore('auth', () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        title: _user.value.sub,
+        title: auth?.user.value.sub,
         settings,
       }),
     }).finally(() => {
@@ -45,12 +45,12 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function getUser () {
-    if (!_user?.value?.sub || !user.syncSettings || !url) return
+    if (!auth?.user?.value?.sub || !user.syncSettings || !url) return
 
-    const token = await getAccessTokenSilently({ detailedResponse: true })
+    const token = await auth.getAccessTokenSilently({ detailedResponse: true })
 
     try {
-      const { object } = await fetch(`${url}/api/user/get?user=${_user.value.sub}`, {
+      const { object } = await fetch(`${url}/api/user/get?user=${auth?.user.value.sub}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token.id_token}`,
@@ -73,12 +73,12 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function verifyUserSponsorship () {
-    if (!_user?.value?.sub || !url) return
+    if (!auth?.user?.value?.sub || !url) return
 
-    const token = await getAccessTokenSilently({ detailedResponse: true })
+    const token = await auth.getAccessTokenSilently({ detailedResponse: true })
 
     try {
-      const res = await fetch(`${url}/api/sponsors/verify?user=${_user.value.nickname}&sub=${_user.value.sub}`, {
+      const res = await fetch(`${url}/api/sponsors/verify?user=${auth?.user.value.nickname}&sub=${auth?.user.value.sub}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token.id_token}`,
