@@ -1,8 +1,8 @@
 // Composables
-import type { Auth0Plugin } from '@auth0/auth0-vue'
 import { useAuth0 as _useAuth0, createAuth0 } from '@auth0/auth0-vue'
 
 // Types
+import type { Auth0Plugin } from '@auth0/auth0-vue'
 import type { ViteSSGContext } from '@vuetify/vite-ssg'
 
 // Globals

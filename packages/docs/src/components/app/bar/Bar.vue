@@ -1,6 +1,7 @@
 <template>
   <v-app-bar
     id="app-bar"
+    :image="image"
     border="b"
     flat
   >
@@ -68,8 +69,18 @@
 
   // Composables
   import { useAppStore } from '@/store/app'
-  import { useDisplay } from 'vuetify'
+  import { useDisplay, useTheme } from 'vuetify'
+
+  // Utilities
+  import { computed } from 'vue'
 
   const app = useAppStore()
   const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
+  const theme = useTheme()
+
+  const image = computed(() => {
+    if (['dark', 'light'].includes(theme.name.value)) return undefined
+
+    return `https://cdn.vuetifyjs.com/docs/images/themes/${theme.name.value}-app-bar.png`
+  })
 </script>

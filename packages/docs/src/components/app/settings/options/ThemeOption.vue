@@ -2,14 +2,13 @@
   <v-radio-group
     v-model="user.theme"
     class="mb-2"
-    color="#70a2d8"
+    color="primary"
     hide-details
     true-icon="mdi-check-circle-outline"
   >
     <v-radio
       v-for="(item, i) in items"
       :key="i"
-      :disabled="item.disabled"
       :value="item.value"
     >
       <template #label>
@@ -65,7 +64,6 @@
     {
       text: t('blackguard'),
       icon: 'mdi-space-invaders',
-      disabled: true,
       value: 'blackguard',
     },
   ]
