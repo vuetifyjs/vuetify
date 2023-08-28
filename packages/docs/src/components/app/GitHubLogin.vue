@@ -28,6 +28,16 @@
     </template>
 
     <template #append>
+      <v-fade-transition leave-absolute>
+        <v-icon
+          :key="app.settings"
+          :icon="app.settings ? 'mdi-cog' : 'mdi-cog-outline'"
+          class="me-4"
+          size="small"
+          @click="app.settings = !app.settings"
+        />
+      </v-fade-transition>
+
       <v-icon
         icon="mdi-logout-variant"
         class="me-1"
@@ -43,6 +53,10 @@
   import { useAuth0 } from '@/plugins/auth'
   import { useI18n } from 'vue-i18n'
 
+  // Stores
+  import { useAppStore } from '@/store/app'
+
+  const app = useAppStore()
   const { loginWithPopup, user, logout, isAuthenticated } = useAuth0()
   const { t } = useI18n()
 
