@@ -20,7 +20,7 @@
       :text="isAuthenticated ? t('subscribe-to-unlock') : t('login-with-github')"
       block
       class="mb-3 text-none"
-      color="#2a2a2a"
+      color="surface-variant"
       prepend-icon="mdi-github"
       rel="noopener"
       size="small"
@@ -29,7 +29,7 @@
       @click="onClick"
     >
       <template #prepend>
-        <v-icon color="#2a2a2a" />
+        <v-icon color="surface-variant" />
       </template>
     </v-btn>
   </v-defaults-provider>
