@@ -23,7 +23,7 @@
             v-bind="{
               ...item,
               props: {
-                class: 'bg-info'
+                class: 'bg-surface-bright'
               }
             }"
           />

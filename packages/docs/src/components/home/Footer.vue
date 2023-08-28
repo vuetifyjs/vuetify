@@ -2,7 +2,7 @@
   <v-footer
     id="footer"
     class="d-block py-6"
-    theme="dark"
+    color="surface-bright"
   >
     <v-container class="text-center">
       <v-row>
@@ -47,7 +47,7 @@
           </v-responsive>
         </v-col>
 
-        <v-col cols="12">
+        <v-col class="text-medium-emphasis" cols="12">
           <div>
             {{ t('released-under-the') }}
             <a
