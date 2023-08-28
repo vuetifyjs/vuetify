@@ -4,51 +4,74 @@ import './VNumberInput.sass'
 // Components
 import { VBtn } from '../VBtn'
 import { VDivider } from '../VDivider'
-import { VField } from '@/components/VField'
+import { makeVFieldProps, VField } from '@/components/VField/VField'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
-type VNumberInputSlots = {}
+// Types
+import type { VFieldSlots } from '@/components/VField/VField'
+import type { VInputSlots } from '@/components/VInput/VInput'
+
+type VNumberInputSlots = Omit<VInputSlots & VFieldSlots, 'default'>
+
+const makeVNumberInputProps = propsFactory({
+  ...makeVInputProps(),
+  ...makeVFieldProps()
+}, 'VNumberInput')
 
 export const VNumberInput = genericComponent<VNumberInputSlots>()({
   name: 'VNumberInput',
 
   inheritAttrs: false,
 
-  props: {},
+  props: makeVNumberInputProps(),
 
-  setup(props, ctx) {
+  setup(props, { attrs, emit, slots }) {
 
      useRender(() => {
         return (
-          <VField
+          <VInput
             class={[
               'v-number-input',
+              props.class,
             ]}
-            variant="outlined"
+            style={ props.style }
           >
             {{
-              default: ({
-                props: { class: fieldClass, ...slotProps },
-              }) => (
-                <>
-                  <input
-                    type="number"
-                    { ...slotProps }
-                  />
-                </>
-              ),
-              'append-inner': () => (
-                <>
-                  <VDivider vertical />
-                  <VBtn icon="mdi-chevron-down" rounded="0" size="small" flat />
-                  <VDivider vertical />
-                  <VBtn icon="mdi-chevron-up" rounded="0" size="small" flat />
-                </>
+              default: () => (
+                <VField
+                  class={[
+                    'v-number-input',
+                  ]}
+                  variant="outlined"
+                >
+                  {{
+                    default: ({
+                      props: { class: fieldClass, ...slotProps },
+                    }) => {
+                      return (
+                        <input
+                          type="number"
+                          class={ fieldClass }
+                        />
+                      )
+                    },
+                    'append-inner': () => (
+                      <>
+                        <VDivider vertical />
+                        <VBtn icon="mdi-chevron-down" rounded="0" size="small" flat />
+                        <VDivider vertical />
+                        <VBtn icon="mdi-chevron-up" rounded="0" size="small" flat />
+                      </>
+                    )
+                  }}
+                </VField>
               )
             }}
-          </VField>
+          </VInput>
+          
         )
      }) 
   },
