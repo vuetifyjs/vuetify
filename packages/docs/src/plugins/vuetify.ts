@@ -82,7 +82,7 @@ export function installVuetify ({ app }: ViteSSGContext) {
             tertiary: '#E57373',
             accent: '#005CAF',
             quarternary: '#B0D1E8',
-            'surface-bright': '#eeeeee',
+            'surface-bright': '#fafafa',
           },
         },
         dark: {
@@ -102,7 +102,7 @@ export function installVuetify ({ app }: ViteSSGContext) {
             primary: '#e7810d',
             surface: '#1e184a',
             'on-surface-variant': '#4c219e',
-            info: '#4c219e',
+            info: '#9c27b0',
             success: '#84b38a',
             'surface-bright': '#362b89',
           },
