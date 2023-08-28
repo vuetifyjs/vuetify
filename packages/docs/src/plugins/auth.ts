@@ -20,3 +20,9 @@ export function installAuth0 (ctx: ViteSSGContext) {
     })
   )
 }
+
+export function useAuth0 () {
+  if (!IN_BROWSER) return {}
+
+  return useAuth0()
+}

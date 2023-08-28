@@ -36,7 +36,7 @@
   import Options from '@/components/app/settings/Options.vue'
 
   // Composables
-  import { useAuth0 } from '@auth0/auth0-vue'
+  import { useAuth0 } from '@/plugins/auth'
   import { useRtl } from 'vuetify'
   import { useI18n } from 'vue-i18n'
 

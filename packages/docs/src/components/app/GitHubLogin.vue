@@ -40,7 +40,7 @@
 
 <script setup>
   // Composables
-  import { useAuth0 } from '@auth0/auth0-vue'
+  import { useAuth0 } from '@/plugins/auth'
   import { useI18n } from 'vue-i18n'
 
   const { loginWithPopup, user, logout, isAuthenticated } = useAuth0()

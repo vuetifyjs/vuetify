@@ -38,7 +38,7 @@
 <script setup>
   // Composables
   import { useI18n } from 'vue-i18n'
-  import { useAuth0 } from '@auth0/auth0-vue'
+  import { useAuth0 } from '@/plugins/auth'
 
   // Stores
   import { useAuthStore } from '@/store/auth'
