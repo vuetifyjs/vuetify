@@ -32,7 +32,7 @@
           >
             <v-icon
               :icon="social.icon"
-              color="white"
+              color="medium-emphasis"
             />
           </a>
         </v-col>

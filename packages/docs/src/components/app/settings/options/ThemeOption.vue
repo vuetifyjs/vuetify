@@ -9,7 +9,6 @@
     <v-radio
       v-for="(item, i) in items"
       :key="i"
-      :disabled="item.disabled"
       :value="item.value"
     >
       <template #label>
@@ -65,7 +64,6 @@
     {
       text: t('blackguard'),
       icon: 'mdi-space-invaders',
-      disabled: false,
       value: 'blackguard',
     },
   ]

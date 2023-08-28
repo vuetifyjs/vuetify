@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     ref="root"
-    :color="theme.name.value === 'light' && !user.mixedTheme ? '#fafafa' : undefined"
+    :color="theme.name.value === 'light' && !user.mixedTheme ? 'surface-bright' : undefined"
     :rounded="rounded"
     :theme="theme.name.value === 'light' && user.mixedTheme ? 'dark' : theme.name.value"
     class="app-markup overflow-hidden"
