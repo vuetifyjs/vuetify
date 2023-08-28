@@ -1,5 +1,6 @@
 <template>
   <app-btn
+    v-if="!isAuthenticated"
     id="settings-toggle"
     :icon="app.settings ? 'mdi-cog' : 'mdi-cog-outline'"
     color="medium-emphasis"
@@ -9,6 +10,7 @@
 
 <script setup>
   // Composables
+  import { useAuth0 } from '@/plugins/auth'
   import { useRoute } from 'vue-router'
 
   // Stores
@@ -18,6 +20,7 @@
   import { gtagClick } from '@/util/analytics'
 
   const app = useAppStore()
+  const { isAuthenticated } = useAuth0()
   const { name } = useRoute()
 
   function onClick () {
