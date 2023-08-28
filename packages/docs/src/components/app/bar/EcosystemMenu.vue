@@ -51,6 +51,11 @@
     {
       title: 'awesome',
       href: 'https://github.com/vuetifyjs/awesome-vuetify',
+      appendIcon: 'mdi-creation-outline',
+    },
+    {
+      title: 'brand-kit',
+      to: rpath('/resources/brand-kit/'),
       appendIcon: '$vuetify-outline',
     },
     {

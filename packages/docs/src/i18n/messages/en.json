@@ -232,6 +232,7 @@
   "roadmap": "Roadmap",
   "rtl": "RTL",
   "scroll-to-top": "Scroll to top",
+  "sass-variables": "SASS Variables",
   "search": {
     "label": "Search",
     "looking": "Looking for",
@@ -287,6 +288,7 @@
   "ui": "UI",
   "ultra-wide": "Ultra-wide",
   "upgrade-guide": "Upgrade guide",
+  "unit-testing": "Unit testing",
   "unread": "View Unread ({number})",
   "unlock-with-github": "Unlock with GitHub",
   "updated": "Updated",
