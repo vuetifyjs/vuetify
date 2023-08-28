@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-3 px-2">
+  <div>
     <v-divider />
 
     <latest-release />

@@ -16,9 +16,7 @@
       <v-messages :messages="t('general-message')" active />
     </div>
 
-    <template v-if="user.dev">
-      <ad-option />
-    </template>
+    <ad-option />
 
     <code-option />
 
@@ -46,8 +44,6 @@
 
   // Composables
   import { useI18n } from 'vue-i18n'
-  import { useUserStore } from '@/store/user'
 
   const { t } = useI18n()
-  const user = useUserStore()
 </script>

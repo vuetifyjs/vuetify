@@ -41,19 +41,19 @@
   import { useI18n } from 'vue-i18n'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
   import { useAppStore } from '@/store/app'
+  import { useAuthStore } from '@/store/auth'
 
   // Utilities
   import { watch } from 'vue'
 
   const app = useAppStore()
   const auth = useAuthStore()
-  const { user } = useAuth0()
+  const auth0 = useAuth0()
   const { t } = useI18n()
   const { isRtl } = useRtl()
 
-  watch(user, async val => {
+  watch(auth0.user, async val => {
     if (!val?.sub) return
 
     await auth.getUser()

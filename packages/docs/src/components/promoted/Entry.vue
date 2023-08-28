@@ -1,5 +1,5 @@
 <template>
-  <carbon v-if="user.ads" />
+  <carbon v-if="!user.disableAds" />
 </template>
 
 <script setup>

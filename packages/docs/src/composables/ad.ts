@@ -30,7 +30,7 @@ export const useAd = (props: { medium: string, slug?: string, type?: string, com
   })
 
   const ad = computed(() => {
-    if (!user.ads) return undefined
+    if (user.disableAds) return undefined
     if (props.slug) return store.ads?.find(ad => ad.slug === props.slug)
 
     return ads.value[Math.floor(Math.random() * ads.value.length)]

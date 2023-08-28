@@ -21,7 +21,7 @@
   </v-radio-group>
 
   <v-defaults-provider
-    v-if="!theme.current.value.dark"
+    v-if="!theme.current.value?.dark"
     :defaults="{
       VIcon: {
         color: user.mixedTheme ? 'primary' : 'disabled'
