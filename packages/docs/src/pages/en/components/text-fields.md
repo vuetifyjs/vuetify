@@ -1,6 +1,6 @@
 ---
-nav: Text fields
 meta:
+  nav: Text fields
   title: Text field component
   description: The text field component accepts textual input from users.
   keywords: text fields, vuetify text field component, vue text field component
@@ -92,11 +92,9 @@ When the user focuses the input, the placeholder fades in as the label translate
 
 <example file="v-text-field/prop-placeholder" />
 
-<alert type="info">
-
+::: info
   Use the **persistent-placeholder** prop to force the **placeholder** to be visible, even when the input is not focused.
-
-</alert>
+:::
 
 #### Hints & messages
 
@@ -131,7 +129,7 @@ Note that **readonly** will not remove the clear icon, to prevent readonly input
 
 Sometimes you may need to perform an action when the user clears an input. By using a custom [Vue Event Handler](https://vuejs.org/guide/essentials/event-handling.html), you can bind a custom function that is invoked whenever the `v-text-field` is cleared by the user. The following example demonstrates how to use a a custom event handler to invoke the **onClear** method:
 
-```html
+```html { resource="Component.vue" }
 <template>
   <v-text-field
     clearable
@@ -142,13 +140,9 @@ Sometimes you may need to perform an action when the user clears an input. By us
   ></v-text-field>
 </template>
 
-<script>
-  export default {
-    methods: {
-      onClear () {
-        alert('User cleared the input')
-      }
-    }
+<script setup>
+  onClear () {
+    alert('User cleared the input')
   }
 </script>
 ```
@@ -248,7 +242,7 @@ Slots allow you to customize the display of many `v-text-field` properties to mo
 
 The following example uses the **label**, **prepend**, and **prepend-inner** slots and adds custom elements to the `v-text-field`
 
-```html
+```html { resource="Component.vue" }
 <template>
   <v-text-field v-model="model">
     <template v-slot:label>
@@ -258,7 +252,7 @@ The following example uses the **label**, **prepend**, and **prepend-inner** slo
     <template v-slot:prepend>
       <v-icon
         :color="model ? 'primary' : undefined"
-        icon="mdi-vuetify"
+        icon="$vuetify"
       />
     </template>
 
@@ -277,14 +271,14 @@ The following example uses the **label**, **prepend**, and **prepend-inner** slo
   </v-text-field>
 </template>
 
-<script>
-  export default {
-    data: () => ({ model: null }),
-  }
+<script setup>
+  import { shallowRef } from 'vue'
+
+  const model = shallowRef('')
 </script>
 ```
 
-<vuetify />
+<promoted />
 
 #### Icon slots
 
@@ -323,3 +317,9 @@ Full width text fields allow you to create boundless inputs. In this example, we
 Using the HTML input **type** [password](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password) can be used with an appended icon and callback to control the visibility.
 
 <example file="v-text-field/misc-password" />
+
+#### Login Form
+
+In this example we use a combination of prepend and append icon to create a custom login form.
+
+<example file="v-text-field/misc-login-form" />

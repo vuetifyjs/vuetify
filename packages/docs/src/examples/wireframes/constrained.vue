@@ -1,9 +1,9 @@
 <template>
   <v-app id="inspire">
     <v-app-bar flat>
-      <v-container class="fill-height d-flex align-center">
+      <v-container class="mx-auto d-flex align-center justify-center">
         <v-avatar
-          class="me-10 ms-4"
+          class="me-4 "
           color="grey-darken-1"
           size="32"
         ></v-avatar>
@@ -11,18 +11,21 @@
         <v-btn
           v-for="link in links"
           :key="link"
+          :text="link"
           variant="text"
-        >
-          {{ link }}
-        </v-btn>
+        ></v-btn>
 
         <v-spacer></v-spacer>
 
-        <v-responsive max-width="260">
+        <v-responsive max-width="160">
           <v-text-field
             density="compact"
+            flat
             hide-details
-            variant="solo"
+            label="Search"
+            rounded="lg"
+            single-line
+            variant="solo-filled"
           ></v-text-field>
         </v-responsive>
       </v-container>
@@ -38,22 +41,16 @@
                   v-for="n in 5"
                   :key="n"
                   link
-                >
-                  <v-list-item-title>
-                    List Item {{ n }}
-                  </v-list-item-title>
-                </v-list-item>
+                  :title="`List Item ${n}`"
+                ></v-list-item>
 
                 <v-divider class="my-2"></v-divider>
 
                 <v-list-item
-                  link
                   color="grey-lighten-4"
-                >
-                  <v-list-item-title>
-                    Refresh
-                  </v-list-item-title>
-                </v-list-item>
+                  link
+                  title="Refresh"
+                ></v-list-item>
               </v-list>
             </v-sheet>
           </v-col>
@@ -71,6 +68,15 @@
     </v-main>
   </v-app>
 </template>
+
+<script setup>
+  const links = [
+    'Dashboard',
+    'Messages',
+    'Profile',
+    'Updates',
+  ]
+</script>
 
 <script>
   export default {

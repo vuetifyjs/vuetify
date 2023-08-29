@@ -69,6 +69,14 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const red = ref(64)
+  const green = ref(128)
+  const blue = ref(10)
+</script>
+
 <script>
   export default {
     data () {

@@ -1,14 +1,14 @@
 <template>
   <promoted-base
+    v-if="ad"
     border
-    class="v-vuetify mb-4"
+    class="v-vuetify"
     density="comfortable"
   >
     <v-list-item
-      v-if="ad"
       :prepend-avatar="src"
       :title="ad.title"
-      append-icon="mdi-open-in-new"
+      :append-icon="smAndUp ? 'mdi-open-in-new' : undefined"
       style="min-height: inherit; width: 100%"
       v-bind="attrs"
     >
@@ -28,6 +28,7 @@
   import PromotedBase from './Base.vue'
 
   // Composables
+  import { useDisplay } from 'vuetify'
   import { createAdProps, useAd } from '@/composables/ad'
 
   const props = defineProps({
@@ -37,6 +38,7 @@
   })
 
   const { ad, attrs, src, description } = useAd(props)
+  const { smAndUp } = useDisplay()
 </script>
 
 <style lang="sass">

@@ -6,12 +6,13 @@ import { makeVToolbarProps, VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
-import { makeScrollProps, useScroll } from '@/composables/scroll'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeScrollProps, useScroll } from '@/composables/scroll'
 import { useSsrBoot } from '@/composables/ssrBoot'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, ref, shallowRef, toRef, watchEffect } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -19,7 +20,7 @@ import type { PropType } from 'vue'
 import type { VToolbarSlots } from '@/components/VToolbar/VToolbar'
 
 export const makeVAppBarProps = propsFactory({
-  scrollBehavior: String,
+  scrollBehavior: String as PropType<'hide' | 'inverted' | 'collapse' | 'elevate' | 'fade-image' | (string & {})>,
   modelValue: {
     type: Boolean,
     default: true,
@@ -38,7 +39,7 @@ export const makeVAppBarProps = propsFactory({
     type: [Number, String],
     default: 64,
   },
-}, 'v-app-bar')
+}, 'VAppBar')
 
 export const VAppBar = genericComponent<VToolbarSlots>()({
   name: 'VAppBar',
@@ -105,20 +106,20 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
 
       return (height + extensionHeight)
     })
-    function setActive () {
-      if (scrollBehavior.value.hide) {
-        if (scrollBehavior.value.inverted) {
-          isActive.value = currentScroll.value > scrollThreshold.value
-        } else {
-          isActive.value = isScrollingUp.value || (currentScroll.value < scrollThreshold.value)
-        }
-      } else {
-        isActive.value = true
-      }
-    }
 
-    watch(currentScroll, setActive, { immediate: true })
-    watch(scrollBehavior, setActive)
+    useToggleScope(computed(() => !!props.scrollBehavior), () => {
+      watchEffect(() => {
+        if (scrollBehavior.value.hide) {
+          if (scrollBehavior.value.inverted) {
+            isActive.value = currentScroll.value > scrollThreshold.value
+          } else {
+            isActive.value = isScrollingUp.value || (currentScroll.value < scrollThreshold.value)
+          }
+        } else {
+          isActive.value = true
+        }
+      })
+    })
 
     const { ssrBootStyles } = useSsrBoot()
     const { layoutItemStyles } = useLayoutItem({

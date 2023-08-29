@@ -4,7 +4,6 @@
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
-@use '../VInput/variables' as *
 
 /* region INPUT */
 .v-field
@@ -124,13 +123,14 @@
   flex-wrap: wrap
   letter-spacing: $field-letter-spacing
   opacity: $field-input-opacity
-  min-height: var(--v-field-input-min-height)
+  min-height: $field-input-min-height
+  min-width: 0
   padding-inline-start: var(--v-field-padding-start)
   padding-inline-end: var(--v-field-padding-end)
   padding-top: var(--v-field-input-padding-top)
   padding-bottom: var(--v-field-input-padding-bottom)
+  position: relative
   width: 100%
-  --v-field-input-min-height: #{$field-input-min-height}
 
   input
     letter-spacing: inherit
@@ -239,6 +239,7 @@
   transform-origin: left center
   transition: $field-transition-timing
   transition-property: opacity, transform
+  z-index: 1
 
   .v-field--variant-underlined &,
   .v-field--variant-plain &
@@ -325,6 +326,7 @@
   .v-field--variant-filled &,
   .v-field--variant-underlined &
     &::before
+      border-color: currentColor
       border-style: solid
       border-width: 0 0 var(--v-field-border-width)
       opacity: var(--v-field-border-opacity)
@@ -356,16 +358,29 @@
       transition: opacity $field-subtle-transition-timing
 
     &__start
-      flex: 0 0 $field-control-affixed-padding
       border-top-width: var(--v-field-border-width)
       border-bottom-width: var(--v-field-border-width)
       border-inline-start-width: var(--v-field-border-width)
 
+      $root: &
+
+      @at-root
+        @include tools.density('v-input', $input-density) using ($modifier)
+          @at-root #{selector.nest(&, $root)}
+            flex: 0 0 #{$field-control-outlined-start-width + $modifier * .5}
+
+
       @include tools.ltr()
-        border-radius: $field-border-radius 0 0 $field-border-radius
+        border-top-left-radius: inherit
+        border-top-right-radius: 0
+        border-bottom-right-radius: 0
+        border-bottom-left-radius: inherit
 
       @include tools.rtl()
-        border-radius: 0 $field-border-radius $field-border-radius 0
+        border-top-left-radius: 0
+        border-top-right-radius: inherit
+        border-bottom-right-radius: inherit
+        border-bottom-left-radius: 0
 
     &__notch
       flex: none
@@ -396,10 +411,16 @@
       border-inline-end-width: var(--v-field-border-width)
 
       @include tools.ltr()
-        border-radius: 0 $field-border-radius $field-border-radius 0
+        border-top-left-radius: 0
+        border-top-right-radius: inherit
+        border-bottom-right-radius: inherit
+        border-bottom-left-radius: 0
 
       @include tools.rtl()
-        border-radius: $field-border-radius 0 0 $field-border-radius
+        border-top-left-radius: inherit
+        border-top-right-radius: 0
+        border-bottom-right-radius: 0
+        border-bottom-left-radius: inherit
 /* endregion */
 /* region LOADER */
 .v-field__loader
@@ -464,7 +485,10 @@
 /* endregion */
 /* region MODIFIERS */
 .v-field--reverse
-  .v-field__input
+  .v-field__field, .v-field__input
+    flex-direction: row-reverse
+
+  .v-field__input, input
     @include tools.ltr()
       text-align: right
 

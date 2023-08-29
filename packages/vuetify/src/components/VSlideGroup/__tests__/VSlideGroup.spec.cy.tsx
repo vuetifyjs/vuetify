@@ -1,9 +1,12 @@
 /* eslint-disable sonarjs/no-identical-functions */
 /// <reference types="../../../../types/cypress" />
 
+// Components
+import { VSlideGroup, VSlideGroupItem } from '../'
 import { Application, CenteredGrid } from '../../../../cypress/templates'
 import { VCard } from '@/components/VCard'
-import { VSlideGroup, VSlideGroupItem } from '../'
+
+// Utilities
 import { createRange } from '@/util'
 
 describe('VSlideGroup', () => {

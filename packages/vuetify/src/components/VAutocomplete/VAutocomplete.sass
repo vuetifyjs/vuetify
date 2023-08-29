@@ -4,10 +4,6 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-@at-root
-  @include tools.density('v-input', $autocomplete-chips-margin-bottom) using ($modifier)
-    --autocomplete-chips-margin-bottom: #{0px + math.div($modifier, 2)}
-
 .v-autocomplete
   .v-field
     .v-text-field__prefix,
@@ -16,28 +12,28 @@
     &.v-field
       cursor: text
 
-    &--variant-outlined
-      --autocomplete-chips-margin-bottom: #{$autocomplete-chips-margin-top}
-
   .v-field
     .v-field__input
       > input
         align-self: flex-start
         flex: 1 1
 
-  .v-field:not(.v-field--focused)
+  .v-field
     input
-      min-width: 0
+      min-width: $autocomplete-focused-input
+
+    &:not(.v-field--focused)
+      input
+        min-width: 0
 
   .v-field--dirty
     .v-autocomplete__selection
       margin-inline-end: 2px
 
-  .v-field--single-line
-    .v-autocomplete__selection-text
-      overflow: hidden
-      text-overflow: ellipsis
-      white-space: nowrap
+  .v-autocomplete__selection-text
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
 
 .v-autocomplete
   &__content
@@ -51,21 +47,17 @@
 
   &__selection
     display: inline-flex
+    align-items: center
     letter-spacing: inherit
     line-height: inherit
-    max-width: 100%
+    max-width: 90%
 
-  &--chips,
-  &--selection-slot
-    .v-field__input
-      min-height: calc(var(--v-field-input-min-height) + var(--autocomplete-chips-margin-bottom) + $autocomplete-chips-margin-top)
+  &__selection
+    margin-top: var(--v-input-chips-margin-top)
+    margin-bottom: var(--v-input-chips-margin-bottom)
 
-    .v-autocomplete__selection
-      margin-top: $autocomplete-chips-margin-top
-      margin-bottom: var(--autocomplete-chips-margin-bottom)
-
-      &:first-child
-        margin-inline-start: 0
+    &:first-child
+      margin-inline-start: 0
 
   &--selecting-index
     .v-autocomplete__selection
@@ -86,6 +78,11 @@
       width: 100%
       padding-inline-start: inherit
       padding-inline-end: inherit
+
+    .v-field--variant-outlined
+      input
+        top: 50%
+        transform: translateY(calc(-50% - (var(--v-input-chips-margin-top) + var(--v-input-chips-margin-bottom))/2))
 
     .v-field--active
       input

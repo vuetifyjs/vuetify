@@ -1,6 +1,6 @@
 ---
-nav: Timelines
 meta:
+  nav: Timelines
   title: Timeline component
   description: The timeline component is used to display chronological information either vertically or horizontally.
   keywords: timelines, vuetify timeline component, vue timeline component

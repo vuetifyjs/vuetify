@@ -52,11 +52,3 @@
     </v-card-actions>
   </v-card>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-      //
-    }),
-  }
-</script>

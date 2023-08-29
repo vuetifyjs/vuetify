@@ -1,5 +1,6 @@
 export default {
   badge: 'знак',
+  open: 'Open',
   close: 'Закрыть',
   dataIterator: {
     noResultsText: 'Не найдено подходящих записей',
@@ -26,12 +27,21 @@ export default {
     lastPage: 'Последняя страница',
     pageText: '{0}-{1} из {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} выбран',
-    nextMonthAriaLabel: 'Следующий месяц',
-    nextYearAriaLabel: 'Следующий год',
-    prevMonthAriaLabel: 'Прошлый месяц',
-    prevYearAriaLabel: 'Предыдущий год',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Отсутствуют данные',
   carousel: {
@@ -48,6 +58,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: 'Файлов: {0}',
@@ -67,6 +78,10 @@ export default {
       first: 'First page',
       last: 'Last page',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

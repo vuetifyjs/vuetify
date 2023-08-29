@@ -1,6 +1,6 @@
 ---
-nav: Basics
 meta:
+  nav: Basics
   title: Data table component
   description: The data table component is used for displaying tabular data in a way that is easy for users to scan. It includes sorting, searching, pagination and selection.
   keywords: data tables, vuetify data table component, vue data table component
@@ -14,11 +14,35 @@ related:
 
 The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, grouping, and row selection.
 
+----
+
+::: warning
+This feature requires [v3.1.0 (Valkyrie)](/getting-started/release-notes/?version=v3.1.0)
+:::
+
 ## Usage
 
 There are three variants of the data table available depending on your requirements.
 
 <entry />
+
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VDataTable } from 'vuetify/labs/VDataTable'
+import { VDataTableServer } from 'vuetify/labs/VDataTableServer'
+import { VDataTableVirtual } from 'vuetify/labs/VDataTableVirtual'
+
+export default createVuetify({
+  components: {
+    VDataTable,
+    VDataTableServer,
+    VDataTableVirtual,
+  },
+})
+```
 
 ### v-data-table
 

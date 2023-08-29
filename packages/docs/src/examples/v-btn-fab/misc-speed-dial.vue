@@ -156,14 +156,37 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const direction = ref('top')
+  const fab = ref(false)
+  const hover = ref(false)
+  const top = ref(false)
+  const right = ref(true)
+  const bottom = ref(true)
+  const left = ref(false)
+  const transition = ref('slide-y-reverse-transition')
+  watch(top, val => {
+    bottom.value = !val
+  })
+  watch(right, val => {
+    left.value = !val
+  })
+  watch(bottom, val => {
+    top.value = !val
+  })
+  watch(left, val => {
+    right.value = !val
+  })
+</script>
+
 <script>
   export default {
     data: () => ({
       direction: 'top',
       fab: false,
-      fling: false,
       hover: false,
-      tabs: null,
       top: false,
       right: true,
       bottom: true,

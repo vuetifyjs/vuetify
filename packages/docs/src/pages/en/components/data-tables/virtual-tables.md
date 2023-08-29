@@ -1,6 +1,6 @@
 ---
-nav: Virtual tables
 meta:
+  nav: Virtual tables
   title: Data table - Virtual tables
   description: The data table component is used for displaying tabular data in a way that is easy for users to scan. It includes sorting, searching, pagination and selection.
   keywords: data tables, vuetify data table component, vue data table component
@@ -13,6 +13,22 @@ related:
 # Data table - Virtual tables
 
 The v-data-table-virtual component relies on all data being available locally. But unlike the standard data-table it uses virtualization to only render a small portion of the rows. This makes it well suited for displaying large data sets. It supports sorting and filtering, but not pagination.
+
+<entry />
+
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VDataTableVirtual } from 'vuetify/labs/VDataTableVirtual'
+
+export default createVuetify({
+  components: {
+    VDataTableVirtual,
+  },
+})
+```
 
 ## Examples
 

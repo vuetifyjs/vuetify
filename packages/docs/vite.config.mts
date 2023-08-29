@@ -3,7 +3,7 @@ import fs from 'fs'
 import { fileURLToPath } from 'url'
 
 import { defineConfig, loadEnv } from 'vite'
-import Vue from '@vitejs/plugin-vue'
+import Vue, { parseVueRequest } from '@vitejs/plugin-vue'
 import ViteFonts from 'unplugin-fonts/vite'
 import Pages from 'vite-plugin-pages'
 import Layouts from 'vite-plugin-vue-layouts'
@@ -108,26 +108,18 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       Pages({
         extensions: ['vue', 'md'],
         dirs: [
-          { dir: 'src/pages', baseRoute: 'pages' },
-          { dir: 'src/api', baseRoute: 'api' },
+          { dir: 'src/pages', baseRoute: '' },
+          { dir: 'node_modules/.cache/api-pages', baseRoute: '' },
         ],
         extendRoute (route) {
-          const [base, locale, ...folders] = route.component.split('/').slice(2)
-          const paths = [locale]
+          let [locale, category, ...rest] = route.path.split('/').slice(1)
 
-          if (base !== 'pages') paths.push(base)
+          const idx = route.component.toLowerCase().indexOf(locale)
+          locale = ~idx ? route.component.slice(idx, idx + locale.length) : locale
 
-          for (const folder of folders) {
-            if (folder.match('index')) continue
-
-            // remove file extensions if present
-            paths.push(folder.replace(/\.[a-z]*/, ''))
-          }
-
-          const [category, ...rest] = paths.slice(1)
           const meta = {
             layout: 'default',
-            ...parseMeta(route.component),
+            ...parseMeta(route.component, locale),
           }
 
           if (meta.disabled) {
@@ -136,12 +128,12 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 
           return {
             ...route,
-            path: `/${paths.join('/')}/`,
-            name: `${category ?? meta.layout}${rest.length ? '-' + rest.join('-') : ''}`,
+            path: '/' + [locale, category, ...rest].filter(Boolean).join('/') + '/',
+            // name: [`${category ?? meta.layout}`, ...rest].join('-'),
             meta: {
               ...meta,
               category,
-              page: rest?.join('-'),
+              page: rest.join('-'),
               locale,
             },
           }
@@ -166,7 +158,6 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         injectManifest: {
           globIgnores: ['**/*.html'],
           additionalManifestEntries: [
-            { url: '/_crowdin.html', revision: Date.now().toString(16) },
             { url: '/_fallback.html', revision: Date.now().toString(16) },
           ],
           dontCacheBustURLsMatching: /assets\/.+[A-Za-z0-9]{8}\.(js|css)$/,
@@ -191,6 +182,23 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
           ],
         },
       }),
+
+      {
+        // Remove options block from examples
+        name: 'vuetify:example-setup',
+        transform (code, id) {
+          const { filename, query } = parseVueRequest(id)
+          if (query.raw || query.url) return
+          if (filename.includes('packages/docs/src/examples')) {
+            const composition = /(<script setup>[\w\W]*?<\/script>)/g.exec(code)
+            const options = /(<script>[\w\W]*?<\/script>)/g.exec(code)
+
+            if (composition && options) {
+              return code.slice(0, options.index) + code.slice(options.index + options[0].length + 1)
+            }
+          }
+        }
+      },
 
       Vue({
         include: [/\.vue$/, /\.md$/],
@@ -218,10 +226,10 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       Examples(),
 
       {
-        name: 'vuetify:codepen-blocks',
+        name: 'vuetify:example-blocks',
         transform (code, id) {
-          const type = id.includes('vue&type=codepen-additional') ? 'codepenAdditional'
-            : id.includes('vue&type=codepen-resources') ? 'codepenResources'
+          const type = id.includes('vue&type=playground-resources') ? 'playgroundResources'
+            : id.includes('vue&type=playground-setup') ? 'playgroundSetup'
             : null
           if (!type) return
 
@@ -238,10 +246,6 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         transformIndexHtml (html) {
           fs.mkdirSync('dist', { recursive: true })
           fs.writeFileSync(path.join('dist/_fallback.html'), html)
-          fs.writeFileSync(path.join('dist/_crowdin.html').replace(/<\/head>/, `
-<script type="text/javascript">let _jipt = [['project', 'vuetify']];</script>
-<script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
-$&`), html)
         },
       },
 
@@ -255,6 +259,11 @@ $&`), html)
       script: 'sync',
       formatting: 'minify',
       crittersOptions: false,
+      includedRoutes (routes: string[]) {
+        return routes.filter(route => (route === '/' || route.startsWith('/en/')) &&
+          ['/eo-UY/', '/api/', ':', '*'].every(v => !route.includes(v))
+        )
+      },
     },
 
     optimizeDeps: {
@@ -273,6 +282,9 @@ $&`), html)
 
     server: {
       port: +(process.env.PORT ?? 8080),
+      proxy: {
+        '/api': process.env.PROXY ?? 'http://localhost:3005'
+      }
     },
 
     preview: {

@@ -5,7 +5,7 @@
   >
     <v-img
       :key="logo"
-      :alt="t('logo')"
+      :alt="`Vuetify ${t('logo')}`"
       :src="`https://cdn.vuetifyjs.com/docs/images/logos/${logo}`"
       :width="lgAndUp ? 148 : 34"
       class="shrink"

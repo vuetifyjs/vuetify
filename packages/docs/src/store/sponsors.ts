@@ -24,11 +24,11 @@ export const useSponsorsStore = defineStore('sponsors', () => {
   async function fetchSponsors () {
     if (sponsors.value.length) return
 
-    const { bucket } = useCosmic<Sponsor>()
-    const { objects = [] } = (
+    const { bucket } = useCosmic()
+    const { objects = [] }: { objects: Sponsor[] } = (
       await bucket?.objects
         .find({ type: 'sponsors' })
-        .props('slug,title,metadata')
+        .props('metadata,slug,title')
         .sort('created_at')
     ) || {}
 

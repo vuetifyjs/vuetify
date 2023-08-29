@@ -6,7 +6,7 @@
     :name="name"
   >
     <div>
-      <v-textarea v-bind="props" v-model="field"></v-textarea>
+      <v-textarea v-bind="props" v-model="field" hide-details></v-textarea>
     </div>
 
     <template v-slot:configuration>
@@ -35,7 +35,7 @@
     return {
       clearable: clearable.value || undefined,
       label: label.value,
-      'prepend-icon': prepend.value ? 'mdi-vuetify' : undefined,
+      'prepend-icon': prepend.value ? '$vuetify' : undefined,
       variant: model.value === 'default' ? undefined : model.value,
     }
   })
