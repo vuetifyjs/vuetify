@@ -2,12 +2,10 @@
 @use '../../styles/tools'
 @use 'sass:math'
 @use '../VField/_mixins' as *
-@use '../VInput/_mixins' as *
 
 // Block
 .v-file-input
 
-  @include v-input-align-input-chips
   @include v-field-align-input-chips
 
   input[type="file"]

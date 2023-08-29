@@ -4,6 +4,8 @@
 @use './variables' as *
 
 @mixin v-field-align-input-chips()
+  $root: &
+  
   .v-field
     &--variant-outlined,
     &--single-line,
@@ -14,3 +16,10 @@
         @include tools.density('v-input', $input-density) using ($modifier)
           @at-root #{selector.append(&, $v-field-root)}
             --v-field-padding-bottom: #{13px + $modifier * .5}
+
+  @at-root
+    @include tools.density('v-input', $input-density) using ($modifier)
+      @at-root #{selector.unify(&, $root)}
+        --v-input-padding-top: calc(13px + #{$modifier * .5})
+        --v-input-chips-margin-top: #{3px + math.div($modifier, 8)}
+        --v-input-chips-margin-bottom: #{2px + math.div($modifier, 8)}
