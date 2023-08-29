@@ -16,13 +16,13 @@ import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, shallowRef, watch } from 'vue'
+import { animateHorizontalScroll } from '@/util/animateHorizontalScroll'
+import { animateVerticalScroll } from '@/util/animateVerticalScroll'
 import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
 import type { GroupProvide } from '@/composables/group'
 import type { InjectionKey, PropType } from 'vue'
-import { animateHorizontalScroll } from '@/util/animateHorizontalScroll'
-import { animateVerticalScroll } from '@/util/animateVerticalScroll'
 import { calculateCenteredOffset, calculateUpdatedOffset, getClientSize, getOffsetSize, getScrollPosition, getScrollSize } from './helpers'
 
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
@@ -164,22 +164,17 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
     }
 
     function scrollToPosition (newPosition: number) {
-      if (!IN_BROWSER || !containerRef.value) {
-        return
-      }
+      if (!IN_BROWSER || !containerRef.value) return
 
       const offsetSize = getOffsetSize(isHorizontal.value, containerRef.value)
       const scrollPosition = getScrollPosition(isHorizontal.value, isRtl.value, containerRef.value)
       const scrollSize = getScrollSize(isHorizontal.value, containerRef.value)
 
-      if (scrollSize <= offsetSize) {
-        return
-      }
-
-      // Prevent scrolling by only a couple of pixels, which doesn't look smooth
-      if (Math.abs(newPosition - scrollPosition) < 16) {
-        return
-      }
+      if (
+        scrollSize <= offsetSize ||
+        // Prevent scrolling by only a couple of pixels, which doesn't look smooth
+        Math.abs(newPosition - scrollPosition) < 16
+      ) return
 
       if (isHorizontal.value) {
         animateHorizontalScroll({
@@ -231,7 +226,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
     function onKeydown (e: KeyboardEvent) {
       if (!contentRef.value) return
 
-      const toFocus = (location: Parameters<typeof focus>[0]) => {
+      function toFocus (location: Parameters<typeof focus>[0]) {
         e.preventDefault()
         focus(location)
       }
@@ -257,7 +252,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
       }
     }
 
-    function focus (location?: 'next' | 'prev' | 'first' | 'last'): void {
+    function focus (location?: 'next' | 'prev' | 'first' | 'last') {
       if (!contentRef.value) return
 
       let el: HTMLElement | undefined
