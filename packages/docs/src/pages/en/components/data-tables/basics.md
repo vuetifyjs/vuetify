@@ -26,6 +26,26 @@ There are three variants of the data table available depending on your requireme
 
 <entry />
 
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import {
+  VDataTable,
+  VDataTableServer,
+  VDataTableVirtual,
+} from "vuetify/labs/VDataTable";
+
+export default createVuetify({
+  components: {
+    VDataTable,
+    VDataTableServer,
+    VDataTableVirtual,
+  },
+})
+```
+
 ### v-data-table
 
 The standard data table presumes that the entire data set is available locally. Sorting, pagination, and filtering is supported and done internally by the component itself.

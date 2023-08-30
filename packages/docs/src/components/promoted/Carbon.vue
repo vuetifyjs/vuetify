@@ -13,6 +13,7 @@
         max-width="360"
       >
         <promoted-script
+          v-if="!error1"
           id="carbonads-script"
           script-id="_carbonads_js"
           src="//cdn.carbonads.com/carbon.js?serve=CWYDC27W&placement=v3vuetifyjscom"
@@ -29,7 +30,7 @@
       </promoted-base>
     </template>
 
-    <promoted v-else />
+    <promotion-card v-else />
   </v-responsive>
 
   <br>
@@ -37,7 +38,7 @@
 
 <script setup lang="ts">
   // Components
-  import Promoted from './Promoted.vue'
+  import PromotionCard from '@/components/promotions/PromotionCard.vue'
   import PromotedBase from './Base.vue'
   import PromotedScript from './Script.vue'
 
@@ -45,41 +46,45 @@
   import { useTheme } from 'vuetify'
 
   // Utilities
-  import { computed, onBeforeUnmount, onMounted, shallowRef } from 'vue'
+  import { computed, onBeforeUnmount, onMounted, onScopeDispose, shallowRef, watch } from 'vue'
 
   const error1 = shallowRef(false)
   const error2 = shallowRef(false)
   const script = shallowRef(null)
-  let timer1 = 0 as any
-  let timer2 = 0 as any
+  let timer = -1 as any
+
+  function checkForElement (id: string, cb?: () => void) {
+    return setTimeout(() => {
+      if (document.getElementById(id)) return
+
+      clearTimeout(timer)
+
+      cb?.()
+    }, 2000)
+  }
+
+  watch(error1, val => {
+    if (!val) return
+
+    timer = checkForElement('bsa-zone_1691166982595-9_123456', () => {
+      error2.value = true
+    })
+  })
+
+  onMounted(() => {
+    timer = checkForElement('carbonads', () => {
+      error1.value = true
+    })
+  })
 
   onBeforeUnmount(() => {
     document.getElementById('carbonads-script')?.remove()
     document.getElementById('bsa-zone_1691166982595-9_123456')?.remove()
-
-    clearTimeout(timer1)
-    clearTimeout(timer2)
   })
 
-  onMounted(check1)
-
-  function check1 () {
-    timer1 = setTimeout(() => {
-      if (document.getElementById('carbonads')) return
-
-      clearTimeout(timer2)
-      error1.value = true
-      check2()
-    }, 2000)
-  }
-
-  function check2 () {
-    timer2 = setTimeout(() => {
-      if (document.getElementById('bsa-zone_1691166982595-9_123456')) return
-
-      error2.value = true
-    }, 2000)
-  }
+  onScopeDispose(() => {
+    clearTimeout(timer)
+  })
 
   const theme = useTheme()
 

@@ -322,7 +322,7 @@ function getTarget<T extends 'parent' | string | Element | ComponentPublicInstan
   let target
   if (selector === 'parent') {
     let el = vm?.proxy?.$el?.parentNode
-    while (el.hasAttribute('data-no-activator')) {
+    while (el?.hasAttribute('data-no-activator')) {
       el = el.parentNode
     }
     target = el

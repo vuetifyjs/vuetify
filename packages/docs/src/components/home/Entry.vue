@@ -26,14 +26,14 @@
             <v-sheet
               border
               class="px-2 py-2 d-inline-flex align-center text-mono text-body-2 text-no-wrap"
-              color="grey-lighten-3"
+              color="surface"
               rounded
               width="215"
               v-bind="props"
             >
               <v-icon
                 class="me-1"
-                color="grey-darken-4"
+                color="medium-emphasis"
                 icon="mdi-chevron-right"
                 size="16"
               />
@@ -50,7 +50,7 @@
                   opacity: isHovering || isCopying ? 1 : 0,
                 }"
                 class="ms-auto"
-                color="grey-darken-4"
+                color="medium-emphasis"
                 size="17"
                 @click="copy"
               />

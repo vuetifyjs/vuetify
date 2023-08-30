@@ -58,7 +58,7 @@ You can use `density` prop to adjusts vertical spacing within the component.
 
 #### Filter
 
-The `filter` prop can be used to filter each individual item with custom logic. In this example we filter items by name.
+The `custom-filter` prop can be used to filter each individual item with custom logic. In this example we filter items by name.
 
 <example file="v-autocomplete/prop-filter" />
 
