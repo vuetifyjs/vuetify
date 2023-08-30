@@ -17,6 +17,7 @@
   contain: layout
   flex: 1 0
   grid-area: control
+  overflow: hidden
   position: relative
 
   &--disabled
@@ -425,11 +426,17 @@
 /* endregion */
 /* region LOADER */
 .v-field__loader
-  bottom: 0
+  top: calc(100% - 2px)
   left: 0
   position: absolute
   right: 0
   width: 100%
+
+  .v-field--variant-outlined &
+    top: calc(100% - 2px)
+
+  .v-field--variant-outlined.v-field--focused &
+    top: calc(100% - 3px)
 
 /* endregion */
 /* region OVERLAY */
