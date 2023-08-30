@@ -7,7 +7,7 @@
     item-value="name"
     placeholder="Search for icons (e.g. account, close)"
     :item-props="itemProps"
-    hide-no-data
+    no-filter
   >
     <template #prepend-inner>
       <v-expand-x-transition>
@@ -51,7 +51,6 @@
   const selection = ref()
   const search = ref('')
   const filteredIcons = computed(() => {
-    if (!icons.length || !search.value) return []
     if (!search.value) return icons
 
     return icons
@@ -82,7 +81,6 @@
   }
   function copy (item) {
     navigator.clipboard.writeText('mdi-' + item).then(() => {
-      search.value = item
       copied.value = true
       setTimeout(() => {
         copied.value = false
