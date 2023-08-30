@@ -17,7 +17,6 @@
   contain: layout
   flex: 1 0
   grid-area: control
-  overflow: hidden
   position: relative
 
   &--disabled
@@ -431,11 +430,13 @@
   position: absolute
   right: 0
   width: 100%
+  border-top-left-radius: 0
+  border-top-right-radius: 0
+  border-bottom-left-radius: inherit
+  border-bottom-right-radius: inherit
+  overflow: hidden
 
   .v-field--variant-outlined &
-    top: calc(100% - 2px)
-
-  .v-field--variant-outlined.v-field--focused &
     top: calc(100% - 3px)
 
 /* endregion */
