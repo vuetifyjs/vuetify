@@ -361,12 +361,13 @@
       border-top-width: var(--v-field-border-width)
       border-bottom-width: var(--v-field-border-width)
       border-inline-start-width: var(--v-field-border-width)
+      flex: 0 0 12px
 
-      $root: &
-
+      $v-field-outline-start-root: &
+      
       @at-root
         @include tools.density('v-input', $input-density) using ($modifier)
-          @at-root #{selector.nest(&, $root)}
+          @at-root #{selector.nest(&, selector.append("[class*='rounded']", $v-field-outline-start-root))}
             flex: 0 0 #{$field-control-outlined-start-width + $modifier * .5}
 
 
