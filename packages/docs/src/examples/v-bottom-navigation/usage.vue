@@ -58,19 +58,19 @@
   <v-btn value="recent">
     <v-icon>mdi-history</v-icon>
 
-    Recent
+    <span>Recent</span>
   </v-btn>
 
   <v-btn value="favorites">
     <v-icon>mdi-heart</v-icon>
 
-    Favorites
+    <span>Favorites</span>
   </v-btn>
 
   <v-btn value="nearby">
     <v-icon>mdi-map-marker</v-icon>
 
-    Nearby
+    <span>Nearby</span>
   </v-btn>
 `
 

@@ -81,6 +81,7 @@ export const makeVWindowProps = propsFactory({
   },
   // TODO: mandatory should probably not be exposed but do this for now
   mandatory: {
+    type: [Boolean, String] as PropType<boolean | 'force'>,
     default: 'force' as const,
   },
 

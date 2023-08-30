@@ -1,4 +1,5 @@
 // Utilities
+import { APCAcontrast } from './color/APCA'
 import { consoleWarn } from './console'
 import { chunk, has, padEnd } from './helpers'
 import * as CIELAB from '@/util/color/transformCIELAB'
@@ -279,4 +280,11 @@ export function getContrast (first: Color, second: Color) {
   const dark = Math.min(l1, l2)
 
   return (light + 0.05) / (dark + 0.05)
+}
+
+export function getForeground (color: Color) {
+  const blackContrast = Math.abs(APCAcontrast(parseColor(0), parseColor(color)))
+  const whiteContrast = Math.abs(APCAcontrast(parseColor(0xffffff), parseColor(color)))
+
+  return whiteContrast > Math.min(blackContrast, 50) ? '#fff' : '#000'
 }

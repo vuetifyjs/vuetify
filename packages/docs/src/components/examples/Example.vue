@@ -16,7 +16,6 @@
         min-height="44"
       >
         <v-toolbar
-          :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
           border="b"
           class="px-1"
           flat
@@ -199,20 +198,17 @@
     get: () => _theme.value ?? parentTheme.name.value,
     set: val => _theme.value = val,
   })
-  const toggleTheme = () => theme.value = theme.value === 'light' ? 'dark' : 'light'
-
-  const isDark = computed(() => {
-    return parentTheme.current.value.dark
-  })
 
   const playgroundLink = computed(() => {
     if (!isLoaded.value || isError.value) return null
 
     const resources = JSON.parse(component.value.playgroundResources || '{}')
+    const setup = component.value.playgroundSetup?.trim()
     return usePlayground(
       sections.value,
       resources.css,
       resources.imports,
+      setup,
     )
   })
 
@@ -223,7 +219,7 @@
       onClick: toggleTheme,
     },
     {
-      icon: '$vuetifyPlay',
+      icon: '$vuetify-play',
       path: 'edit-in-playground',
       href: playgroundLink.value,
       target: '_blank',
@@ -262,4 +258,12 @@
   ])
 
   watch(showCode, val => val && (isEager.value = true))
+
+  function toggleTheme () {
+    if (theme.value === parentTheme.name.value) {
+      theme.value = parentTheme.current.value.dark ? 'light' : 'dark'
+    } else {
+      theme.value = parentTheme.name.value
+    }
+  }
 </script>

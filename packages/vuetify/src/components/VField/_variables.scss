@@ -18,6 +18,7 @@ $field-clearable-margin: 4px !default;
 $field-clearable-transition: .15s opacity, .15s width settings.$standard-easing !default;
 
 // CONTROL
+$field-control-outlined-start-width: 29px !default;
 $field-control-solo-background: rgb(var(--v-theme-surface)) !default;
 $field-control-solo-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $field-control-solo-elevation: 2 !default;

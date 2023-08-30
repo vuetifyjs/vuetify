@@ -5,10 +5,9 @@
     :items="items"
   >
     <template #activator="{ props }">
-      <app-tooltip-btn
+      <app-btn
         color="medium-emphasis"
         icon="mdi-translate"
-        path="languages"
         v-bind="props"
       />
     </template>

@@ -27,7 +27,7 @@ Many of these changes can be applied automatically by [eslint-plugin-vuetify](ht
   Not all Vuetify 2 components are currently available in Vuetify 3; These components will be released as their development is completed via [Vuetify Labs](https://vuetifyjs.com/en/labs/introduction/).
 
 - v-calendar
-- v-date-picker
+- [v-date-picker](/components/date-pickers/)
 - [v-data-table](/components/data-tables/basics/)
 - [v-skeleton-loader](/components/skeleton-loaders/)
 - v-stepper
@@ -132,6 +132,12 @@ app.use(vuetify)
   - Allowed values are `'elevated'`, `'flat'`, `'tonal'`, `'outlined'`, `'text'`, or `'plain'`.
 - `text` prop has new purpose. It represents the text content of the alert, if default slot is not used.
 
+### v-badge
+
+- `overlap` has been removed and is now the default style, use `floating` to restore the v2 default.
+- Transition props `mode` and `origin` have been removed.
+- `avatar` prop is no longer needed and has been removed.
+
 ### v-btn/v-btn-toggle
 
 - `active-class` prop has been renamed to `selected-class`
@@ -211,10 +217,6 @@ app.use(vuetify)
 - `offset-y` and `offset-x` props have been removed. Use `offset` prop instead
 - `absolute` variant has been removed. For absolute positioning use css instead
 
-### v-skeleton-loader
-
-- This component hasn't been migrated to vuetify 3
-
 ### v-snackbar
 
 - `action` slot was renamed to `actions`
@@ -224,3 +226,7 @@ app.use(vuetify)
 - `v-expansion-panel-header` has been renamed to `v-expansion-panel-title`.
 - `v-expansion-panel-content` has been renamed to `v-expansion-panel-text`.
 - `v-expansion-panel` now has `text` and `title` props that can be used instead of subcomponents.
+
+### v-card
+
+- `v-card` does not allow content to overflow or use higher `z-index` values to display on top of elements outside it. To disable this behavior, use `<v-card style="overflow: initial; z-index: initial">` ([#17593](https://github.com/vuetifyjs/vuetify/issues/17593), [#17628](https://github.com/vuetifyjs/vuetify/issues/17628))

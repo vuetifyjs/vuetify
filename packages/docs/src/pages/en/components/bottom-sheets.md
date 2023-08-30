@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Bottom sheets
   title: Bottom sheet component
@@ -30,6 +29,20 @@ Whereas a bottom navigation component is for buttons and specific application le
 <usage name="v-bottom-sheet" />
 
 <entry />
+
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VBottomSheet } from 'vuetify/labs/VBottomSheet'
+
+export default createVuetify({
+  components: {
+    VBottomSheet,
+  },
+})
+```
 
 ## API
 

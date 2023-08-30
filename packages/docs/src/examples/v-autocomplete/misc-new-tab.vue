@@ -5,7 +5,7 @@
         class="mx-auto mt-12 mb-16"
         max-height="140"
         max-width="240"
-        src="https://vuetifyjs.b-cdn.net/docs/images/logos/vuetify-logo-dark-text.svg"
+        src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-dark-text.svg"
       ></v-img>
 
       <v-autocomplete

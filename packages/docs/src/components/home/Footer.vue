@@ -2,7 +2,7 @@
   <v-footer
     id="footer"
     class="d-block py-6"
-    theme="dark"
+    color="surface-bright"
   >
     <v-container class="text-center">
       <v-row>
@@ -32,7 +32,7 @@
           >
             <v-icon
               :icon="social.icon"
-              color="white"
+              color="medium-emphasis"
             />
           </a>
         </v-col>
@@ -47,7 +47,7 @@
           </v-responsive>
         </v-col>
 
-        <v-col cols="12">
+        <v-col class="text-medium-emphasis" cols="12">
           <div>
             {{ t('released-under-the') }}
             <a
@@ -113,9 +113,9 @@
       title: 'github',
     },
     {
-      icon: 'mdi-twitter',
-      href: 'https://twitter.com/vuetifyjs',
-      title: 'twitter',
+      icon: '$x',
+      href: 'https://x.com/vuetifyjs',
+      title: 'x',
     },
     {
       icon: 'mdi-discord',
