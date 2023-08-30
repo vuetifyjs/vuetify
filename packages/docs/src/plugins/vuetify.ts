@@ -103,6 +103,7 @@ export function installVuetify ({ app }: ViteSSGContext) {
             surface: '#1e184a',
             'on-surface-variant': '#4c219e',
             info: '#9c27b0',
+            accent: '#FF4081',
             success: '#84b38a',
             'surface-bright': '#362b89',
           },
