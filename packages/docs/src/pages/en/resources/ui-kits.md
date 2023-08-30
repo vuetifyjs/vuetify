@@ -13,7 +13,7 @@ related:
 
 Easily create design prototypes with Figma components that match Vuetify's.
 
-![UI Kit Entry](https://cdn.vuetifyjs.com/docs/images/entry/ui-kits-entry.png)
+<entry />
 
 ----
 
