@@ -100,6 +100,7 @@ export {
   mdiCogOutline,
   mdiComment,
   mdiCompassOutline,
+  mdiContentCopy,
   mdiContentSave,
   mdiContentSaveCogOutline,
   mdiClipboardMultipleOutline,
