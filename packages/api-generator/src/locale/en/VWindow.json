@@ -21,6 +21,5 @@
     "additional": "Slot for additional content at the end of the component."
   },
   "exposed": {
-    "group": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-window.json))"
   }
 }

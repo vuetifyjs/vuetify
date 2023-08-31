@@ -17,9 +17,7 @@
     "touchless": "Disable mobile touch functionality",
     "value": "Controls whether the component is visible or hidden.",
     "rail": "Sets the component width to the **rail-width** value.",
-    "railWidth": "Sets the width for the component when `rail` is enabled.",
-    "scrim": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
-    "sticky": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))"
+    "railWidth": "Sets the width for the component when `rail` is enabled."
   },
   "slots": {
     "append": "A slot at the bottom of the drawer",
@@ -31,6 +29,5 @@
     "update:rail": "Event that is emitted when the rail model changes"
   },
   "exposed": {
-    "isStuck": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))"
   }
 }
