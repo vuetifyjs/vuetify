@@ -112,9 +112,7 @@ The following is a list of available and up-and-coming components for use with L
 
 | Component | Release Target |
 | - | - |
-| v-calendar | ~~Q1~~* Q2 2023 |
-
-<small>*Q1 2023 was the original target, but due to the complexity of the component, it has been pushed back to Q2 2023.</small>
+| v-calendar | ~~Q1~~ ~~Q2~~ Soon™️ 2023 |
 
 ::: warning
 Lab component APIs are **NOT** finalized and can and will change. You should **EXPECT** for things to break during the course of development.
