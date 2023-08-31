@@ -80,19 +80,15 @@ export const VColorPickerCanvas = defineComponent({
       }
     }
 
-    function handleClick (e: MouseEvent) {
-      if (props.disabled || !canvasRef.value) return
-
-      updateDotPosition(e.clientX, e.clientY, canvasRef.value.getBoundingClientRect())
-    }
-
     function handleMouseDown (e: MouseEvent | TouchEvent) {
-      // To prevent selection while moving cursor
-      e.preventDefault()
+      if (e.type === 'mousedown') {
+        // Prevent text selection while dragging
+        e.preventDefault()
+      }
 
       if (props.disabled) return
 
-      isInteracting.value = true
+      handleMouseMove(e)
 
       window.addEventListener('mousemove', handleMouseMove)
       window.addEventListener('mouseup', handleMouseUp)
@@ -189,9 +185,8 @@ export const VColorPickerCanvas = defineComponent({
           props.class,
         ]}
         style={ props.style }
-        onClick={ handleClick }
         onMousedown={ handleMouseDown }
-        onTouchstart={ handleMouseDown }
+        onTouchstartPassive={ handleMouseDown }
       >
         <canvas
           ref={ canvasRef }
