@@ -15,6 +15,8 @@
     "selection": "Slot for defining a custom appearance for selected item(s). Provides the current **index**, **text** (truncated) and [file](https://developer.mozilla.org/en-US/docs/Web/API/File)."
   },
   "events": {
+    "mousedown:control": "Event that is emitted when using mousedown on the main control area",
+    "counter": "Creates counter for selected files length. Does not apply any validation."
   },
   "exposed": {
   }

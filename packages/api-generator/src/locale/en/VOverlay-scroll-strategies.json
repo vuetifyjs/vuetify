@@ -1,4 +1,5 @@
 {
   "props": {
+    "scrollStrategy": "Strategy used when the component is activate and user scrolls."
   }
 }

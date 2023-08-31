@@ -1,5 +1,7 @@
 {
-  "props": {},
+  "props": {
+    "overlaps": false,
+  },
   "exposed": {
     "theme": "The instance of the injected active theme"
   }

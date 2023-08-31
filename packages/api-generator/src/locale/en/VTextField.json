@@ -13,7 +13,8 @@
     "suffix": "Displays suffix text",
     "toggleKeys": "Array of key codes that will toggle the input (if it supports toggling)",
     "type": "Sets input type",
-    "counterValue": "Function returns the counter display text"
+    "counterValue": "Function returns the counter display text",
+    "role": "The role attribute applied to the input"
   },
   "events": {
     "blur": "Emitted when the input is blurred",

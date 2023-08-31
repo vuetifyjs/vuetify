@@ -11,10 +11,12 @@
     "startOfYear": "Returns the first day of the year.",
     "endOfYear": "Returns the last day of the year.",
     "isAfter": "Returns true if the first date is after the second date.",
+    "isBefore": "Returns true if the first date is before the second date.",
     "isEqual": "Returns true if the two dates are equal.",
     "isSameDay": "Returns true if the two dates are the same day.",
     "isSameMonth": "Returns true if the two dates are the same month.",
     "isValid": "Returns true if the date is valid.",
+    "locale": "Returns the current locale being used",
     "isWithinRange": "Returns true if the first date is within the range of the second and third dates.",
     "addDays": "Adds the specified number of days to the date.",
     "addMonths": "Adds the specified number of months to the date.",
@@ -24,6 +26,7 @@
     "getWeek": "Returns the week of the year of the date.",
     "getWeekArray": "Returns an array of the days of the week of the date.",
     "getWeekdays": "Returns an array of the names of the days of the week.",
-    "getMonth": "Returns the month of the date."
+    "getMonth": "Returns the month of the date.",
+    "toJsDate": "Converts date value to a JS Date Object"
   }
 }

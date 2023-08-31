@@ -1,5 +1,7 @@
 {
   "props": {
-    "menuProps": "Pass props through to the `v-menu` component. Accepts an object with anything from [v-menu](/api/v-menu/#props) props, camelCase keys are recommended."
+    "menuProps": "Pass props through to the `v-menu` component. Accepts an object with anything from [v-menu](/api/v-menu/#props) props, camelCase keys are recommended.",
+    "openOnClear": "Open's the menu whenever the clear icon is clicked",
+    "open-text": "Text used as label when the menu is open"
   }
 }
