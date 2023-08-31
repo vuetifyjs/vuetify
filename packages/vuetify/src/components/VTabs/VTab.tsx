@@ -81,8 +81,8 @@ export const VTab = genericComponent()({
           : Math.sign(delta) < 0 ? (isHorizontal.value ? 'left' : 'top')
           : 'center'
         const size = Math.abs(delta) + (Math.sign(delta) < 0 ? prevBox[widthHeight] : nextBox[widthHeight])
-        const scale = size / Math.max(prevBox[widthHeight], nextBox[widthHeight])
-        const initialScale = prevBox[widthHeight] / nextBox[widthHeight]
+        const scale = size / Math.max(prevBox[widthHeight], nextBox[widthHeight]) || 0
+        const initialScale = prevBox[widthHeight] / nextBox[widthHeight] || 0
 
         const sigma = 1.5
         animate(nextEl, {

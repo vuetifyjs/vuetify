@@ -36,24 +36,24 @@
   import Options from '@/components/app/settings/Options.vue'
 
   // Composables
-  import { useAuth0 } from '@auth0/auth0-vue'
+  import { useAuth0 } from '@/plugins/auth'
   import { useRtl } from 'vuetify'
   import { useI18n } from 'vue-i18n'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
   import { useAppStore } from '@/store/app'
+  import { useAuthStore } from '@/store/auth'
 
   // Utilities
   import { watch } from 'vue'
 
   const app = useAppStore()
   const auth = useAuthStore()
-  const { user } = useAuth0()
+  const auth0 = useAuth0()
   const { t } = useI18n()
   const { isRtl } = useRtl()
 
-  watch(user, async val => {
+  watch(auth0.user, async val => {
     if (!val?.sub) return
 
     await auth.getUser()

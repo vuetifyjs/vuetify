@@ -2,33 +2,34 @@
   <v-defaults-provider
     :defaults="{
       VIcon: {
-        color: user.ads && canToggle ? 'primary' : 'disabled'
+        color: user.disableAds && canToggle ? 'primary' : 'disabled'
       }
     }"
   >
     <settings-switch
-      v-model="user.ads"
+      v-model="user.disableAds"
       :readonly="!canToggle"
-      :label="t('enable-ads')"
-      :messages="t('enable-ads-message')"
+      :label="t('disable-ads')"
+      :messages="t('disable-ads-message')"
       :disabled="!canToggle"
     />
 
     <v-btn
       v-if="!canToggle"
-      :text="t('unlock-with-github')"
+      :href="isAuthenticated ? 'https://github.com/sponsors/johnleider' : undefined"
+      :text="isAuthenticated ? t('subscribe-to-unlock') : t('login-with-github')"
       block
       class="mb-3 text-none"
-      color="#2a2a2a"
-      href="https://github.com/sponsors/johnleider"
+      color="surface-variant"
       prepend-icon="mdi-github"
       rel="noopener"
       size="small"
       target="_blank"
       variant="outlined"
+      @click="onClick"
     >
       <template #prepend>
-        <v-icon color="#2a2a2a" />
+        <v-icon color="surface-variant" />
       </template>
     </v-btn>
   </v-defaults-provider>
@@ -37,6 +38,7 @@
 <script setup>
   // Composables
   import { useI18n } from 'vue-i18n'
+  import { useAuth0 } from '@/plugins/auth'
 
   // Stores
   import { useAuthStore } from '@/store/auth'
@@ -48,6 +50,11 @@
   const { t } = useI18n()
   const auth = useAuthStore()
   const user = useUserStore()
+  const { isAuthenticated, loginWithPopup } = useAuth0()
 
   const canToggle = computed(() => auth.admin || auth.sponsor?.monthlyPriceInDollars >= 1)
+
+  function onClick () {
+    if (!isAuthenticated.value) loginWithPopup()
+  }
 </script>

@@ -17,9 +17,14 @@ import { filterInputAttrs, genericComponent, getUid, omit, propsFactory, useRend
 
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
-import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
 
-export type VRadioGroupSlots = VInputSlots & VSelectionControlSlots
+export type VRadioGroupSlots = Omit<VInputSlots, 'default'> & {
+  default: never
+  label: {
+    label: string | undefined
+    props: Record<string, any>
+  }
+}
 
 export const makeVRadioGroupProps = propsFactory({
   height: {
