@@ -45,7 +45,7 @@ export function LoaderSlot (
   { slots }: SetupContext,
 ) {
   return (
-    <div class={ `${props.name}__loader` }>
+    <div class={ `${props.name}__loader` } style={ 'z-index=1'}>
       { slots.default?.({
         color: props.color,
         isActive: props.active,

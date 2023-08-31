@@ -19,18 +19,13 @@
   position: relative
 
   @include horizontal(true)
+    grid-column-gap: $timeline-item-padding
     width: 100%
 
     @include timeline-first-item()
       padding-inline-start: $timeline-item-padding
 
     @include timeline-last-item()
-      padding-inline-end: $timeline-item-padding
-
-    .v-timeline-item__body
-      padding-inline-end: $timeline-item-padding
-
-    .v-timeline-item__opposite
       padding-inline-end: $timeline-item-padding
 
     .v-timeline-item:nth-child(2n)
@@ -109,6 +104,7 @@ $timeline-line-size-first-last: calc(var(--v-timeline-line-size-base) - var(--v-
 
 .v-timeline-divider__before
   background: $timeline-divider-line-background
+  position: absolute
 
   @include horizontal
     height: $timeline-divider-line-thickness
@@ -123,13 +119,13 @@ $timeline-line-size-first-last: calc(var(--v-timeline-line-size-base) - var(--v-
       left: initial
 
   @include vertical
-    position: absolute
     height: $timeline-line-size
     width: $timeline-divider-line-thickness
     top: $timeline-line-start
 
 .v-timeline-divider__after
   background: $timeline-divider-line-background
+  position: absolute
 
   @include horizontal
     height: $timeline-divider-line-thickness
@@ -144,7 +140,6 @@ $timeline-line-size-first-last: calc(var(--v-timeline-line-size-base) - var(--v-
       right: initial
 
   @include vertical
-    position: absolute
     height: $timeline-line-size
     width: $timeline-divider-line-thickness
     bottom: $timeline-line-start
@@ -352,17 +347,6 @@ $timeline-line-size-first-last: calc(var(--v-timeline-line-size-base) - var(--v-
     height: inherit
     width: inherit
 
-// Truncate line
-.v-timeline--truncate-line-start
-  .v-timeline-item:first-child
-    .v-timeline-divider__before
-      display: none
-
-.v-timeline--truncate-line-end
-  .v-timeline-item:last-child
-    .v-timeline-divider__after
-      display: none
-
 // Alignment
 .v-timeline--align-center
   --v-timeline-line-size-base: 50%
@@ -425,11 +409,11 @@ $timeline-line-size-first-last: calc(var(--v-timeline-line-size-base) - var(--v-
 // Truncate start
 .v-timeline--truncate-line-start
   .v-timeline-item:first-child
+    .v-timeline-divider__before
+      display: none
+
     .v-timeline-divider__after
       --v-timeline-line-size-offset: #{math.div($timeline-item-padding, 2)}
-
-      @include horizontal(true)
-        width: 100%
 
   @include vertical(true)
     @include timeline-first-item()
@@ -442,11 +426,11 @@ $timeline-line-size-first-last: calc(var(--v-timeline-line-size-base) - var(--v-
 // Truncate end
 .v-timeline--truncate-line-end
   .v-timeline-item:last-child
+    .v-timeline-divider__after
+      display: none
+
     .v-timeline-divider__before
       --v-timeline-line-size-offset: #{math.div($timeline-item-padding, 2)}
-
-      @include horizontal(true)
-        width: 100%
 
   @include vertical(true)
     @include timeline-last-item()
