@@ -10,6 +10,8 @@
 </template>
 
 <script setup>
+  // Composables
+  import { useTheme } from 'vuetify'
   // Utilities
   import { computed } from 'vue'
 
@@ -17,7 +19,9 @@
     size: String,
   })
 
+  const theme = useTheme()
+
   const logo = computed(() => {
-    return `vuetify-logo-light-atom.svg`
+    return `vuetify-logo-${theme.name.value}-atom.svg`
   })
 </script>
