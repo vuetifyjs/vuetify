@@ -4,18 +4,17 @@ import { deepEqual, getPropertyFromItem, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
+import type { InternalItem } from '@/composables/filter'
 import type { SelectItemKey } from '@/util'
 
-export interface ListItem<T = any> {
+export interface ListItem<T = any> extends InternalItem<T> {
   title: string
-  value: any
   props: {
     [key: string]: any
     title: string
     value: any
   }
   children?: ListItem<T>[]
-  raw: T
 }
 
 export interface ItemProps {
