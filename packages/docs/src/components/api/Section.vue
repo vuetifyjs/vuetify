@@ -73,6 +73,7 @@
           ...prop,
           name,
           description: prop.description?.[store.locale],
+          descriptionSource: prop.descriptionSource?.[store.locale],
         })
         return arr
       }, []).sort((a: any, b: any) => a.name.localeCompare(b.name))
