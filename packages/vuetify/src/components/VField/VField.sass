@@ -366,7 +366,8 @@
 
       @at-root
         #{selector.append('.v-field--rounded', &)},
-        #{selector.append('[class^="rounded-"]', &)}
+        #{selector.append('[class^="rounded-"]', &)},
+        #{selector.append('[class*=" rounded-"]', &)}
           flex-basis: calc(var(--v-input-control-height) / 2 + 2px)
 
       @include tools.ltr()
