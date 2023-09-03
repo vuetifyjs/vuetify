@@ -1,10 +1,7 @@
 <template>
   <td :id="`${section}-${name.replace('$', '')}`">
     <kbd class="name-item text-mono">
-      <app-link
-        :href="`#${section}-${name.replace('$', '')}`"
-        class="font-weight-bold"
-      >
+      <app-link :href="href" class="font-weight-bold">
         {{ name }}
       </app-link>
     </kbd>
@@ -12,9 +9,15 @@
 </template>
 
 <script setup>
-  defineProps({
+  import { computed } from 'vue'
+
+  const props = defineProps({
     section: String,
     name: String,
+  })
+
+  const href = computed(() => {
+    return `#${props.section}-${props.name.replace('$', '')}`
   })
 </script>
 

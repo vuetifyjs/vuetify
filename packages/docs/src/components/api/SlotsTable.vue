@@ -1,6 +1,6 @@
 <template>
   <ApiTable>
-    <template #row="{ props, ...item }">
+    <template #row="{ props, item }">
       <tr v-bind="props">
         <NameCell section="slots" :name="item.name" />
       </tr>

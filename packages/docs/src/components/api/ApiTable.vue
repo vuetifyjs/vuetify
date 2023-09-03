@@ -21,10 +21,10 @@
           <slot
             name="row"
             v-bind="{
-              ...item,
               props: {
                 class: 'bg-surface-bright'
-              }
+              },
+              item,
             }"
           />
 

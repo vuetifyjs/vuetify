@@ -9,21 +9,7 @@
       />
     </div> -->
     <app-headline v-if="showHeadline" :path="`api-headers.${section}`" />
-    <template v-if="['props', 'argument', 'modifiers'].includes(section)">
-      <PropsTable :items="items" />
-    </template>
-    <template v-else-if="section === 'events'">
-      <EventsTable :items="items" />
-    </template>
-    <template v-else-if="section === 'slots'">
-      <SlotsTable :items="items" />
-    </template>
-    <template v-else-if="section === 'exposed'">
-      <ExposedTable :items="items" />
-    </template>
-    <template v-else-if="section === 'sass'">
-      <SassTable :items="items" />
-    </template>
+    <TableComponent :name="name" :items="items" />
   </div>
 </template>
 
@@ -40,7 +26,7 @@
 
   // Utilities
   import { Item } from './utils'
-  import { ref, watch } from 'vue'
+  import { computed, ref, watch } from 'vue'
 
   const getApi = (name: string) => {
     return import(`../../../../api-generator/dist/api/${name}.json`)
@@ -60,6 +46,22 @@
 
   const store = useLocaleStore()
   const items = ref()
+
+  const TableComponent = computed(() => {
+    if (['props', 'argument', 'modifiers'].includes(props.section)) {
+      return PropsTable
+    } else if (props.section === 'events') {
+      return EventsTable
+    } else if (props.section === 'slots') {
+      return SlotsTable
+    } else if (props.section === 'exposed') {
+      return ExposedTable
+    } else if (props.section === 'sass') {
+      return SassTable
+    }
+
+    return PropsTable
+  })
 
   async function fetchApiData () {
     try {
