@@ -96,7 +96,7 @@
   }, [])
 
   const name = route.params.name?.replace('/', '')
-  const pascalName = name && `${name.charAt(0).toUpperCase()}${camelize(name.slice(1))}`
+  const pascalName = name ? `${name.charAt(0).toUpperCase()}${camelize(name.slice(1))}` : undefined
   const model = ref(components.some(v => v.value === name) ? name : pascalName)
 
   const sections = ['props', 'events', 'slots', 'exposed', 'sass', 'options', 'argument', 'modifiers']
