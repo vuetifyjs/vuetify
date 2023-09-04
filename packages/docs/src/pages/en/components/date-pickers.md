@@ -29,6 +29,20 @@ Date pickers come in two orientation variations, portrait **(default)** and land
 
 <entry />
 
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VDatePicker } from 'vuetify/labs/VDatePicker'
+
+export default createVuetify({
+  components: {
+    VDatePicker,
+  },
+})
+```
+
 ## API
 
 | Component | Description |
