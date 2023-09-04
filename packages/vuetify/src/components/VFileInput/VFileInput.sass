@@ -8,6 +8,15 @@
 
   @include v-field-align-input-chips
 
+  &--chips.v-input--density-compact
+    .v-field--variant-solo,
+    .v-field--variant-solo-inverted,
+    .v-field--variant-filled,
+    .v-field--variant-solo-filled
+      .v-label.v-field-label
+        &--floating
+          top: 0px
+
   input[type="file"]
     height: 100%
     left: 0
