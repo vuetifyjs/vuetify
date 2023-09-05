@@ -73,6 +73,16 @@
   > .v-avatar ~ .v-list-item__spacer
     width: $list-item-avatar-margin-start
 
+  .v-list-item--slim &
+    > .v-badge,
+    > .v-icon,
+    > .v-tooltip
+      ~ .v-list-item__spacer
+        width: $list-item-slim-spacer-width
+
+    > .v-avatar ~ .v-list-item__spacer
+      width: $list-item-slim-avatar-spacer-width
+
   .v-list-item--three-line &
     align-self: start
 
@@ -93,6 +103,16 @@
 
   > .v-avatar ~ .v-list-item__spacer
     width: $list-item-avatar-margin-end
+
+  .v-list-item--slim &
+    > .v-badge,
+    > .v-icon,
+    > .v-tooltip
+      ~ .v-list-item__spacer
+        width: $list-item-slim-spacer-width
+
+    > .v-avatar ~ .v-list-item__spacer
+      width: $list-item-slim-avatar-spacer-width
 
   .v-list-item--three-line &
     align-self: start
