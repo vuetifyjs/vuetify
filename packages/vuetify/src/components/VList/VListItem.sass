@@ -74,11 +74,14 @@
     width: $list-item-avatar-margin-start
 
   .v-list-item--slim &
-    > .v-avatar
-      margin-inline-end: $list-item-slim-avatar-margin
+    > .v-badge,
+    > .v-icon,
+    > .v-tooltip
+      ~ .v-list-item__spacer
+        width: $list-item-slim-spacer-width
 
-    > .v-icon
-      margin-inline-end: $list-item-slim-icon-margin
+    > .v-avatar ~ .v-list-item__spacer
+      width: $list-item-slim-avatar-spacer-width
 
   .v-list-item--three-line &
     align-self: start
@@ -102,11 +105,14 @@
     width: $list-item-avatar-margin-end
 
   .v-list-item--slim &
-    > .v-avatar
-      margin-inline-start: $list-item-slim-avatar-margin
+    > .v-badge,
+    > .v-icon,
+    > .v-tooltip
+      ~ .v-list-item__spacer
+        width: $list-item-slim-spacer-width
 
-    > .v-icon
-      margin-inline-start: $list-item-slim-icon-margin
+    > .v-avatar ~ .v-list-item__spacer
+      width: $list-item-slim-avatar-spacer-width
 
   .v-list-item--three-line &
     align-self: start
