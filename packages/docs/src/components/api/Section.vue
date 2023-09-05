@@ -28,6 +28,9 @@
   import { Item } from './utils'
   import { computed, ref, watch } from 'vue'
 
+  // Data
+  import newIn from '@/data/new-in.json'
+
   const getApi = (name: string) => {
     return import(`../../../../api-generator/dist/api/${name}.json`)
   }
@@ -70,10 +73,13 @@
         throw new Error(`API section "${props.section}" for "${props.name}" does not exist`)
       }
       const section = (api[props.section] ?? {}) as Record<string, Item>
+      const _newIn = newIn as Record<string, Record<string, Record<string, string>>>
+
       items.value = Object.entries(section).reduce<any>((arr, [name, prop]) => {
         arr.push({
           ...prop,
           name,
+          newIn: _newIn?.[props.name]?.[props.section]?.[name],
           description: prop.description?.[store.locale],
           descriptionSource: prop.descriptionSource?.[store.locale],
         })
