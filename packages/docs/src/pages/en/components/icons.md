@@ -129,20 +129,14 @@ If your icons are purely decorative, you’ll need to manually add an attribute 
 
 Apply accessibility attributes to the [v-icon](/components/icons/) component, such as `role="img"`, to give it a semantic meaning.
 
-```html
+```html { resource="Component.vue" }
 <v-icon aria-label="My Account" role="img" aria-hidden="false">
   mdiAccount
 </v-icon>
 
-<script>
+<script setup>
 import { mdiAccount } from "@mdi/js";
 
-export default {
-  data: () => ({
-    icons: {
-      mdiAccount
-    }
-  })
-};
+const icons = { mdiAccount }
 </script>
 ```

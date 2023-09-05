@@ -30,6 +30,20 @@ The `v-data-iterator` allows you to customize exactly how to display your data. 
 
 <entry />
 
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VDataIterator } from 'vuetify/labs/VDataIterator'
+
+export default createVuetify({
+  components: {
+    VDataIterator,
+  },
+})
+```
+
 ## API
 
 | Component                                | Description       |

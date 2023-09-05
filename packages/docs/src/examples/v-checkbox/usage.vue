@@ -6,7 +6,7 @@
     :name="name"
   >
     <div>
-      <v-checkbox v-bind="props"></v-checkbox>
+      <v-checkbox v-bind="props" hide-details></v-checkbox>
     </div>
   </usage-example>
 </template>

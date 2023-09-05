@@ -93,21 +93,32 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
     const header = computed(() => model.value.length ? adapter.format(model.value[0], 'normalDateWithWeekday') : t(props.header))
     const headerIcon = computed(() => inputMode.value === 'calendar' ? props.keyboardIcon : props.calendarIcon)
     const headerTransition = computed(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
+    const minDate = computed(() => props.min && adapter.isValid(props.min) ? adapter.date(props.min) : null)
+    const maxDate = computed(() => props.max && adapter.isValid(props.max) ? adapter.date(props.max) : null)
 
-    function updateFromInput (input: string, index: number) {
-      const { isValid, date } = adapter
+    const disabled = computed(() => {
+      if (!minDate.value && !maxDate.value) return false
 
-      if (isValid(input)) {
-        const newModel = model.value.slice()
-        newModel[index] = date(input)
+      const targets = []
 
-        if (props.hideActions) {
-          model.value = newModel
-        } else {
-          temporaryModel.value = newModel
-        }
+      if (minDate.value) {
+        const date = adapter.addDays(adapter.startOfMonth(displayDate.value), -1)
+
+        adapter.isAfter(minDate.value, date) && targets.push('prev')
       }
-    }
+
+      if (maxDate.value) {
+        const date = adapter.addDays(adapter.endOfMonth(displayDate.value), 1)
+
+        adapter.isAfter(date, maxDate.value) && targets.push('next')
+      }
+
+      if (minDate.value?.getFullYear() === maxDate.value?.getFullYear()) {
+        targets.push('mode')
+      }
+
+      return targets
+    })
 
     watch(model, val => {
       if (!isEqual(val, temporaryModel.value)) {
@@ -127,6 +138,21 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
       }
     })
 
+    function updateFromInput (input: string, index: number) {
+      const { isValid, date } = adapter
+
+      if (isValid(input)) {
+        const newModel = model.value.slice()
+        newModel[index] = date(input)
+
+        if (props.hideActions) {
+          model.value = newModel
+        } else {
+          temporaryModel.value = newModel
+        }
+      }
+    }
+
     function onClickCancel () {
       emit('click:cancel')
     }
@@ -139,6 +165,18 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
 
     function onClickAppend () {
       inputMode.value = inputMode.value === 'calendar' ? 'keyboard' : 'calendar'
+    }
+
+    function onClickNext () {
+      displayDate.value = adapter.addMonths(displayDate.value, 1)
+    }
+
+    function onClickPrev () {
+      displayDate.value = adapter.addMonths(displayDate.value, -1)
+    }
+
+    function onClickMode () {
+      viewMode.value = viewMode.value === 'month' ? 'year' : 'month'
     }
 
     const headerSlotProps = computed(() => ({
@@ -175,8 +213,11 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
               <>
                 <VDatePickerControls
                   { ...datePickerControlsProps }
-                  v-model:displayDate={ displayDate.value }
-                  v-model:viewMode={ viewMode.value }
+                  disabled={ disabled.value }
+                  displayDate={ adapter.format(displayDate.value, 'monthAndYear') }
+                  onClick:next={ onClickNext }
+                  onClick:prev={ onClickPrev }
+                  onClick:mode={ onClickMode }
                 />
 
                 <VFadeTransition hideOnLeave>
@@ -185,14 +226,18 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
                       key="date-picker-month"
                       { ...datePickerMonthProps }
                       v-model={ temporaryModel.value }
-                      v-model:displayDate={ displayDate.value }
+                      displayDate={ displayDate.value }
+                      min={ minDate.value }
+                      max={ maxDate.value }
                     />
                   ) : (
                     <VDatePickerYears
                       key="date-picker-years"
                       { ...datePickerYearsProps }
                       v-model:displayDate={ displayDate.value }
-                      v-model:viewMode={ viewMode.value }
+                      min={ minDate.value }
+                      max={ maxDate.value }
+                      onClick:mode={ onClickMode }
                     />
                   )}
                 </VFadeTransition>
