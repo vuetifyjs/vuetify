@@ -1,9 +1,9 @@
 // Components
 import { VExpandTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { useList } from '@/components/VList/list'
 
 // Composables
-import { useList } from '@/components/VList/list'
 import { makeComponentProps } from '@/composables/component'
 import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
 import { useSsrBoot } from '@/composables/ssrBoot'

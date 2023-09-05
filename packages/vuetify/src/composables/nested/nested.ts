@@ -66,7 +66,7 @@ export const emptyNested: NestedProvide = {
     selected: ref(new Map()),
     selectedValues: ref([]),
     getPath: () => [],
-    getChildren: () => []
+    getChildren: () => [],
   },
 }
 

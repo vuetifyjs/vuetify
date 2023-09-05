@@ -2,12 +2,12 @@
 import './VTreeviewItem.sass'
 
 // Components
-import { VIcon } from '@/components/VIcon'
-import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VTreeviewSymbol } from './VTreeview'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VIcon } from '@/components/VIcon'
+import { useList } from '@/components/VList/list'
 
 // Composables
-import { useList } from '@/components/VList/list'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
@@ -26,7 +26,7 @@ import { computed, inject, ref } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 type TreeviewItemSlot = {
@@ -121,7 +121,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
 
     const toggleIcon = computed(() => isOpen.value ? props.collapseIcon : props.expandIcon)
 
-    const selectIcon = computed(() => isSelected.value ?  props.onIcon : props.offIcon )
+    const selectIcon = computed(() => isSelected.value ? props.onIcon : props.offIcon)
 
     const roundedProps = computed(() => props.rounded)
 
@@ -132,27 +132,27 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
     const { dimensionStyles } = useDimension(props)
     const { roundedClasses } = useRounded(roundedProps)
 
-    const visibleIds = inject(VTreeviewSymbol, { visibleIds: ref()}).visibleIds
+    const visibleIds = inject(VTreeviewSymbol, { visibleIds: ref() }).visibleIds
 
     const slotProps = computed(() => ({
       isSelected: isSelected.value,
       isIndeterminate: isIndeterminate.value,
-      select
+      select,
     } satisfies TreeviewItemSlot))
 
-    function openNode(e: MouseEvent){
+    function openNode (e: MouseEvent) {
       emit('click', e)
       e.stopPropagation()
     }
 
-    function selectItem (e: MouseEvent){
+    function selectItem (e: MouseEvent) {
       props.value != null && select(!isSelected.value, e)
       e.stopPropagation()
     }
 
-    function onClick(e: MouseEvent){
-      if(props.openOnClick) openNode(e);
-      if(props.selectOnClick) selectItem(e);
+    function onClick (e: MouseEvent) {
+      if (props.openOnClick) openNode(e)
+      if (props.selectOnClick) selectItem(e)
     }
 
     useRender(() => {
@@ -165,7 +165,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
               'v-treeview-item--selected': isSelected.value,
               'v-treeview-item--disabled': props.disabled,
               'v-treeview-item--link': isClickable.value,
-              //'v-treeview-item--prepend': !hasPrepend && list?.hasPrepend.value,
+              // 'v-treeview-item--prepend': !hasPrepend && list?.hasPrepend.value,
               [`${props.selectedClass}`]: props.selectedClass && isSelected.value,
               'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(id.value),
             },
@@ -183,41 +183,47 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
             props.style,
           ]}
           v-ripple={ isClickable.value && props.ripple }
-          onClick= { onClick }
+          onClick={ onClick }
         >
           { genOverlays((isClickable.value || isSelected.value) && props.hoverable, 'v-treeview-item') }
-          { (
             <div key="prepend" class="v-treeview-item__prepend">
-              <VIcon onClick={ openNode } icon={ isLeaf.value ?  undefined : toggleIcon.value }></VIcon>
+              <VIcon onClick={ openNode } icon={ isLeaf.value ? undefined : toggleIcon.value }></VIcon>
               { props.selectable && (props.showSelectIcon || !props.selectOnClick) && (
-                <VIcon onClick={ selectItem } color={ props.selectedColor } icon={ isIndeterminate.value ?  props.indeterminateIcon : selectIcon.value }></VIcon>
+                <VIcon
+                  key="prepend-icon"
+                  onClick={ selectItem }
+                  color={ props.selectedColor }
+                  icon={ isIndeterminate.value ? props.indeterminateIcon : selectIcon.value }
+                />
               )}
               {
-                slots.prepend && <VDefaultsProvider
-                  key="prepend-defaults"
-                >
-                  { slots.prepend?.(slotProps.value) }
-                </VDefaultsProvider>
+                slots.prepend && (
+                  <VDefaultsProvider
+                    key="prepend-defaults"
+                  >
+                    { slots.prepend?.(slotProps.value) }
+                  </VDefaultsProvider>
+                )
               }
             </div>
-          ) }
 
-          <div class={['v-treeview-item__content']}>
-            { hasTitle && (
-              <VDefaultsProvider key="title">
-                { slots.title?.({ title: props.title }) ?? props.title }
-              </VDefaultsProvider>
-            )}
-            { slots.default?.(slotProps.value) }
-          </div>
-          { slots.append && (
-            <div key="append" class="v-list-item__append">
-              <VDefaultsProvider
-                key="append-defaults"
-              >
-                { slots.append?.(slotProps.value) }
-              </VDefaultsProvider>
-            </div>)
+            <div class={['v-treeview-item__content']}>
+              { hasTitle && (
+                <VDefaultsProvider key="title">
+                  { slots.title?.({ title: props.title }) ?? props.title }
+                </VDefaultsProvider>
+              )}
+              { slots.default?.(slotProps.value) }
+            </div>
+            { slots.append && (
+              <div key="append" class="v-list-item__append">
+                <VDefaultsProvider
+                  key="append-defaults"
+                >
+                  { slots.append?.(slotProps.value) }
+                </VDefaultsProvider>
+              </div>
+            )
           }
         </div>
       )

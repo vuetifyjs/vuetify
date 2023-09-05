@@ -1,17 +1,16 @@
 // Components
-import { VTreeviewItem } from './VTreeviewItem'
 import { VTreeviewGroup } from './VTreeviewGroup'
+import { VTreeviewItem } from './VTreeviewItem'
+import { createList } from '@/components/VList/list'
 
 // Utilities
-import { createList } from '@/components/VList/list'
 import { genericComponent, propsFactory } from '@/util'
 
-//Type
-import type { GenericProps } from '@/util'
-import type { ListItem } from '@/composables/list-items'
-import type { VTreeviewItemSlots } from './VTreeviewItem'
+// Types
 import type { PropType } from 'vue'
-
+import type { VTreeviewItemSlots } from './VTreeviewItem'
+import type { ListItem } from '@/composables/list-items'
+import type { GenericProps } from '@/util'
 
 export type VTreeviewChildrenSlots<T> = {
   [K in keyof Omit<VTreeviewItemSlots, 'default'>]: VTreeviewItemSlots[K] & { item: T }
@@ -60,12 +59,12 @@ export const VTreeviewChildren = genericComponent<new <T extends ListItem>(
           }}
         </VTreeviewGroup>
       ) : (
-      slots.item ? slots.item({ props: itemProps }) : (
+        slots.item ? slots.item({ props: itemProps }) : (
         <VTreeviewItem
           { ...itemProps }
           v-slots={ slotsWithItem }
         />
-      ))
+        ))
     })
   },
 })

@@ -1,11 +1,12 @@
 // Styles
 import './VTreeview.sass'
+import { VTreeviewChildren } from './VTreeviewChildren'
 
-//Components
-import { VTreeviewChildren } from "./VTreeviewChildren"
+// Components
+import { createList } from '@/components/VList/list'
 
 // Composables
-import { createList } from '@/components/VList/list'
+import { makeVTreeviewItemProps } from './VTreeviewItem'
 import { useBorder } from '@/composables/border'
 import { useBackgroundColor } from '@/composables/color'
 import { provideDefaults } from '@/composables/defaults'
@@ -17,17 +18,16 @@ import { makeItemsProps } from '@/composables/list-items'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
 import { useRounded } from '@/composables/rounded'
 import { provideTheme } from '@/composables/theme'
-import { makeVTreeviewItemProps } from './VTreeviewItem'
 
 // Utilities
 import { computed, onMounted, provide, ref, shallowRef, toRef } from 'vue'
 import { focusChild, genericComponent, getPropertyFromItem, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import { VTreeviewChildrenSlots } from "./VTreeviewChildren"
+import type { ComputedRef, InjectionKey, PropType } from 'vue'
+import type { VTreeviewChildrenSlots } from './VTreeviewChildren'
 import type { ItemProps, ListItem } from '@/composables/list-items'
 import type { GenericProps } from '@/util'
-import type { ComputedRef, InjectionKey, PropType } from 'vue'
 
 export interface InternalListItem<T = any> extends ListItem<T> {
   disabled?: true | false
@@ -87,7 +87,7 @@ function flatten (items: ListItem[], flat: ListItem[] = []) {
   for (const item of items) {
     flat.push(item)
 
-    if (item.children) flatten (item.children, flat)
+    if (item.children) flatten(item.children, flat)
   }
 
   return flat
@@ -111,7 +111,7 @@ export const makeVTreeviewProps = propsFactory({
   ...makeElevationProps(),
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...makeItemsProps(),
-  ...makeVTreeviewItemProps()
+  ...makeVTreeviewItemProps(),
 }, 'VTreeview')
 
 export const VTreeview = genericComponent<new <T>(
@@ -137,7 +137,7 @@ export const VTreeview = genericComponent<new <T>(
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { getChildren, getPath, open, select, parents} = useNested(props)
+    const { getChildren, getPath, open, select, parents } = useNested(props)
     const { roundedClasses } = useRounded(props)
     const { themeClasses } = provideTheme(props)
 
@@ -152,15 +152,15 @@ export const VTreeview = genericComponent<new <T>(
     const { filteredItems } = useFilter(props, flatItems, search)
 
     const visibleIds = computed(() => {
-      if (!search) {
+      if (!search.value) {
         return null
       }
-      return new Set(filteredItems.value.flatMap((item) => {
+      return new Set(filteredItems.value.flatMap(item => {
         return [...getPath(item.props.value), ...getChildren(item.props.value)]
       }))
     })
 
-    provide(VTreeviewSymbol, {visibleIds : visibleIds})
+    provide(VTreeviewSymbol, { visibleIds })
 
     createList()
 
@@ -182,7 +182,7 @@ export const VTreeview = genericComponent<new <T>(
       VTreeviewGroup: {
         baseColor,
         color,
-        selectedColor
+        selectedColor,
       },
       VTreeviewItem: {
         baseColor,
@@ -202,7 +202,7 @@ export const VTreeview = genericComponent<new <T>(
         selectedClass: toRef(props, 'selectedClass'),
         selectedColor,
         selectOnClick: toRef(props, 'selectOnClick'),
-        variant: toRef(props, 'variant')
+        variant: toRef(props, 'variant'),
       },
     })
 
