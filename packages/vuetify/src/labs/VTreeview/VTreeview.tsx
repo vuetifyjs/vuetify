@@ -183,27 +183,7 @@ export const VTreeview = genericComponent<new <T>(
         baseColor,
         color,
         selectedColor,
-      },
-      VTreeviewItem: {
-        baseColor,
-        collapseIcon: toRef(props, 'collapseIcon'),
-        color,
-        density: toRef(props, 'density'),
-        disabled: toRef(props, 'disabled'),
-        expandIcon: toRef(props, 'expandIcon'),
-        hoverable: toRef(props, 'hoverable'),
-        indeterminateIcon: toRef(props, 'indeterminateIcon'),
-        offIcon: toRef(props, 'offIcon'),
-        onIcon: toRef(props, 'onIcon'),
-        openOnClick: toRef(props, 'openOnClick'),
-        rounded: toRef(props, 'rounded'),
-        showSelectIcon: toRef(props, 'showSelectIcon'),
-        selectable: toRef(props, 'selectable'),
-        selectedClass: toRef(props, 'selectedClass'),
-        selectedColor,
-        selectOnClick: toRef(props, 'selectOnClick'),
-        variant: toRef(props, 'variant'),
-      },
+      }
     })
 
     const isFocused = shallowRef(false)
@@ -247,6 +227,8 @@ export const VTreeview = genericComponent<new <T>(
       }
     }
 
+    const [treeviewChildrenProps, _1] = VTreeviewChildren.filterProps(props)
+
     useRender(() => {
       return (
         <div
@@ -277,7 +259,7 @@ export const VTreeview = genericComponent<new <T>(
           onFocus={ onFocus }
           onKeydown={ onKeydown }
         >
-          <VTreeviewChildren items={ items.value } v-slots={ slots }></VTreeviewChildren>
+          <VTreeviewChildren { ...treeviewChildrenProps } items={ items.value } v-slots={ slots }></VTreeviewChildren>
         </div>
       )
     })

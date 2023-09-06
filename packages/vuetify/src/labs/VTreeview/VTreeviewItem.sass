@@ -39,11 +39,11 @@
     > .v-icon
       opacity: #{$treeview-item-icon-opacity}
 
-  &--selected
+  &--active
     .v-list-item__prepend,
     .v-list-item__append
       > .v-icon
-        opacity: #{$treeview-item-icon-selected-opacity}
+        opacity: #{$treeview-item-icon-active-opacity}
 
   &--rounded
     @include tools.rounded($treeview-item-rounded-border-radius)
@@ -108,7 +108,7 @@
   top: 0
   transition: opacity 0.2s ease-in-out
 
-  .v-treeview-item--selected.v-treeview-item--variant-elevated &
+  .v-treeview-item--active.v-treeview-item--variant-elevated &
     --v-theme-overlay-multiplier: 0
 
 $base-padding: list.nth($treeview-item-padding, 2)
@@ -134,12 +134,3 @@ $base-padding: list.nth($treeview-item-padding, 2)
 
 .v-treeview-group__items .v-treeview-item
   padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
-
-.v-treeview-group__header.v-treeview-item--selected
-  &:not(:focus-visible)
-    .v-treeview-item__overlay
-      opacity: 0
-
-  &:hover
-    .v-treeview-item__overlay
-      opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))

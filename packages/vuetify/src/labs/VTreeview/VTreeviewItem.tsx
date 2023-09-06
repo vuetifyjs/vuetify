@@ -162,10 +162,9 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
           class={[
             'v-treeview-item',
             {
-              'v-treeview-item--selected': isSelected.value,
+              'v-treeview-item--active': isSelected.value,
               'v-treeview-item--disabled': props.disabled,
               'v-treeview-item--link': isClickable.value,
-              // 'v-treeview-item--prepend': !hasPrepend && list?.hasPrepend.value,
               [`${props.selectedClass}`]: props.selectedClass && isSelected.value,
               'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(id.value),
             },
@@ -185,7 +184,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
           v-ripple={ isClickable.value && props.ripple }
           onClick={ onClick }
         >
-          { genOverlays((isClickable.value || isSelected.value) && props.hoverable, 'v-treeview-item') }
+          { genOverlays((isClickable.value || isSelected.value), 'v-treeview-item') }
             <div key="prepend" class="v-treeview-item__prepend">
               <VIcon onClick={ openNode } icon={ isLeaf.value ? undefined : toggleIcon.value }></VIcon>
               { props.selectable && (props.showSelectIcon || !props.selectOnClick) && (

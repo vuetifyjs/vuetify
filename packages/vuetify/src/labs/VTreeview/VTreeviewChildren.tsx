@@ -3,6 +3,9 @@ import { VTreeviewGroup } from './VTreeviewGroup'
 import { VTreeviewItem } from './VTreeviewItem'
 import { createList } from '@/components/VList/list'
 
+// Composables
+import { makeVTreeviewItemProps } from './VTreeviewItem'
+
 // Utilities
 import { genericComponent, propsFactory } from '@/util'
 
@@ -21,6 +24,7 @@ export type VTreeviewChildrenSlots<T> = {
 
 export const makeVTreeviewChildrenProps = propsFactory({
   items: Array as PropType<readonly ListItem[]>,
+  ...makeVTreeviewItemProps(),
 }, 'VTreeviewChildren')
 
 export const VTreeviewChildren = genericComponent<new <T extends ListItem>(
@@ -45,6 +49,8 @@ export const VTreeviewChildren = genericComponent<new <T extends ListItem>(
 
       const [treeviewGroupProps, _1] = VTreeviewGroup.filterProps(itemProps)
 
+      const [treeviewItemProps, _2] = VTreeviewItem.filterProps(props)
+
       return children ? (
         <VTreeviewGroup
           value={ itemProps?.value }
@@ -52,7 +58,7 @@ export const VTreeviewChildren = genericComponent<new <T extends ListItem>(
         >
           {{
             activator: ({ props: activatorProps }) =>
-              <VTreeviewItem { ...itemProps } { ...activatorProps } v-slots={ slotsWithItem } />,
+              <VTreeviewItem { ...treeviewItemProps } { ...itemProps } { ...activatorProps } v-slots={ slotsWithItem } />,
             default: () => (
               <VTreeviewChildren { ...props } items={ children } v-slots={ slots } />
             ),
@@ -61,6 +67,7 @@ export const VTreeviewChildren = genericComponent<new <T extends ListItem>(
       ) : (
         slots.item ? slots.item({ props: itemProps }) : (
         <VTreeviewItem
+          { ...treeviewItemProps }
           { ...itemProps }
           v-slots={ slotsWithItem }
         />
