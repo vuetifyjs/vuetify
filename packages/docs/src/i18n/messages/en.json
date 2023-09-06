@@ -185,6 +185,7 @@
   "name": "Name",
   "navigation": "Navigation",
   "new": "New",
+  "new-in": "New in v{version}",
   "newsletter": "Newsletter",
   "notifications": "Notifications",
   "not-found": "Not Found",
