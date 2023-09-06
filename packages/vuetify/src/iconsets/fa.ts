@@ -42,7 +42,7 @@ const aliases: IconAliases = {
   minus: 'fas fa-minus',
   calendar: 'fas fa-calendar',
   treeviewCollapse: 'fas fa-caret-down',
-  treeviewExpand: 'fas fa-caret-right'
+  treeviewExpand: 'fas fa-caret-right',
 }
 
 const fa: IconSet = {

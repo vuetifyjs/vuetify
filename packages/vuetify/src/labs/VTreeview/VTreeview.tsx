@@ -183,7 +183,7 @@ export const VTreeview = genericComponent<new <T>(
         baseColor,
         color,
         selectedColor,
-      }
+      },
     })
 
     const isFocused = shallowRef(false)

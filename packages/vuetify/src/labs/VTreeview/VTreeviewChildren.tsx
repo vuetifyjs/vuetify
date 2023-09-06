@@ -1,10 +1,7 @@
 // Components
 import { VTreeviewGroup } from './VTreeviewGroup'
-import { VTreeviewItem } from './VTreeviewItem'
+import { makeVTreeviewItemProps, VTreeviewItem } from './VTreeviewItem'
 import { createList } from '@/components/VList/list'
-
-// Composables
-import { makeVTreeviewItemProps } from './VTreeviewItem'
 
 // Utilities
 import { genericComponent, propsFactory } from '@/util'

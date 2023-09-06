@@ -45,7 +45,7 @@ const aliases: IconAliases = {
   minus: 'remove',
   calendar: 'event',
   treeviewCollapse: 'arrow_drop_down',
-  treeviewExpand: 'arrow_right'
+  treeviewExpand: 'arrow_right',
 }
 
 const md: IconSet = {
