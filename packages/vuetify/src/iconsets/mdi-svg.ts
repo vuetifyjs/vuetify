@@ -43,6 +43,8 @@ const aliases: IconAliases = {
   plus: 'svg:M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z',
   minus: 'svg:M19,13H5V11H19V13Z',
   calendar: 'svg:M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z',
+  treeviewCollapse: 'svg:M7,10L12,15L17,10H7Z',
+  treeviewExpand: 'svg:M10,17L15,12L10,7V17Z'
 }
 
 const mdi: IconSet = {
