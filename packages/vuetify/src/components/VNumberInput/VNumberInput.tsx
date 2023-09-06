@@ -7,6 +7,9 @@ import { VDivider } from '../VDivider'
 import { makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
+// Composables
+import { useProxiedModel } from '@/composables/proxiedModel'
+
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
 
@@ -18,7 +21,7 @@ type VNumberInputSlots = Omit<VInputSlots & VFieldSlots, 'default'>
 
 const makeVNumberInputProps = propsFactory({
   ...makeVInputProps(),
-  ...makeVFieldProps()
+  ...makeVFieldProps(),
 }, 'VNumberInput')
 
 export const VNumberInput = genericComponent<VNumberInputSlots>()({
@@ -26,12 +29,23 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
   inheritAttrs: false,
 
-  props: makeVNumberInputProps(),
+  props: {
+    ...makeVNumberInputProps(),
+    modelValue: {
+      type: Number,
+      default: 0,
+    },
+  },
 
-  setup(props, { attrs, emit, slots }) {
+  emits: {
+    'update:modelValue': (val: number) => true,
+  },
 
-     useRender(() => {
-        return (
+  setup (props, { attrs, emit, slots }) {
+    const model = useProxiedModel(props, 'modelValue')
+
+    useRender(() => {
+      return (
           <VInput
             class={[
               'v-number-input',
@@ -54,6 +68,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                       return (
                         <input
                           type="number"
+                          value={ model.value }
                           class={ fieldClass }
                         />
                       )
@@ -61,19 +76,30 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                     'append-inner': () => (
                       <>
                         <VDivider vertical />
-                        <VBtn icon="mdi-chevron-down" rounded="0" size="small" flat />
+                        <VBtn
+                          icon="mdi-chevron-down"
+                          rounded="0"
+                          size="small"
+                          onClick={ () => model.value-- }
+                          flat
+                        />
                         <VDivider vertical />
-                        <VBtn icon="mdi-chevron-up" rounded="0" size="small" flat />
+                        <VBtn
+                          icon="mdi-chevron-up"
+                          rounded="0"
+                          size="small"
+                          onClick={ () => model.value++ }
+                          flat
+                        />
                       </>
-                    )
+                    ),
                   }}
                 </VField>
-              )
+              ),
             }}
           </VInput>
-          
-        )
-     }) 
+      )
+    })
   },
 })
 
