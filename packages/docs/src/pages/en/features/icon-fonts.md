@@ -247,6 +247,37 @@ export default createVuetify({
 </template>
 ```
 
+It is also possible to use different variants of icons (`outlined`, `round`, `sharp`, `two-tone`) as separate sets.
+
+To do so you also need to use icon font that includes various variants, like [material-icons](https://github.com/marella/material-icons#readme)
+
+```js { resource="src/plugins/vuetify.js" }
+import 'material-icons/iconfont/material-icons.css'; // Ensure your project is capable of handling css files
+import { createVuetify } from 'vuetify'
+import { aliases, md, mdOutlined } from 'vuetify/iconsets/md'
+
+export default createVuetify({
+  icons: {
+    defaultSet: 'md',
+    aliases,
+    sets: {
+      md,
+      mdOutlined,
+    },
+  },
+})
+```
+
+```html
+<template>
+  <v-icon icon="mdOutlined:home" />
+</template>
+```
+
+::: info
+  It is also possible to set specific variant as default one: `defaultSet: 'mdOutlined',`
+:::
+
 ### Font Awesome 5 Icons
 
 The easiest way to get started with **FontAwesome** is to use a CDN.
