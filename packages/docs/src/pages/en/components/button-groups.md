@@ -28,11 +28,11 @@ Toggle buttons allow you to create a styled group of buttons that can be selecte
 
 ## API
 
-| Component | Description |
-| - | - |
+| Component                          | Description |
+|------------------------------------| - |
 | [v-btn-toggle](/api/v-btn-toggle/) | Primary component |
-| [v-btn](/api/v-btn/) | Sub-component used for modifying the `v-btn-toggle` state |
-| [v-btn-group](/api/v-btn/) | A stateless version of `v-btn-toggle` |
+| [v-btn](/api/v-btn/)               | Sub-component used for modifying the `v-btn-toggle` state |
+| [v-btn-group](/api/v-btn-group/)   | A stateless version of `v-btn-toggle` |
 
 <api-inline hide-links />
 
