@@ -307,6 +307,8 @@ function isWithinRange (date: Date, range: [Date, Date]) {
 }
 
 function isValid (date: any) {
+  if (!date || date == null) return false
+
   const d = new Date(date)
 
   return d instanceof Date && !isNaN(d.getTime())
