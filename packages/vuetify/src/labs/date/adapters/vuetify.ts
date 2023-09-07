@@ -352,6 +352,14 @@ function setYear (date: Date, year: number) {
   return d
 }
 
+function startOfDay (date: Date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate())
+}
+
+function endOfDay (date: Date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999)
+}
+
 export class VuetifyDateAdapter implements DateAdapter<Date> {
   locale: string
 
@@ -437,6 +445,14 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   getMonth (date: Date) {
     return getMonth(date)
+  }
+
+  startOfDay (date: Date) {
+    return startOfDay(date)
+  }
+
+  endOfDay (date: Date) {
+    return endOfDay(date)
   }
 
   startOfYear (date: Date) {
