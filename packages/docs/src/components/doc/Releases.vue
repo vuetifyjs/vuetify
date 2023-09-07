@@ -77,7 +77,7 @@
       >
         <v-list-item v-if="publishedOn" lines="two">
           <v-list-item-title class="d-flex align-center">
-            <i18n-t keypath="published">
+            <i18n-t keypath="published" scope="global">
               <template #date>
                 <v-chip
                   :text="publishedOn"
