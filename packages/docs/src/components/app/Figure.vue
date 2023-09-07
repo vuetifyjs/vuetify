@@ -1,5 +1,5 @@
 <template>
-  <figure class="mb-6">
+  <figure>
     <v-img
       class="rounded bg-surface"
       cover
