@@ -139,9 +139,14 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
     })
 
     function updateFromInput (input: string, index: number) {
-      const { isValid, date } = adapter
+      const { isValid, date, isAfter } = adapter
+      const inputDate = date(input)
 
-      if (isValid(input)) {
+      if (
+        isValid(input) &&
+        (!minDate.value || !isAfter(minDate.value, inputDate)) &&
+        (!maxDate.value || !isAfter(inputDate, maxDate.value))
+      ) {
         const newModel = model.value.slice()
         newModel[index] = date(input)
 
