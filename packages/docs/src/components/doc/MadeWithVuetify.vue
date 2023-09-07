@@ -23,6 +23,8 @@
             :name="project.title"
             :src="project.image"
             :title="project.title"
+            height="180"
+            min-height="180"
           />
         </a>
       </v-col>
