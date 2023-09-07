@@ -3,6 +3,7 @@
     <v-autocomplete
       v-model="model"
       :items="components"
+      autofocus
       auto-select-first
       base-color="disabled"
       chips
