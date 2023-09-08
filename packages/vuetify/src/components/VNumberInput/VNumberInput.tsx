@@ -64,15 +64,13 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                   {{
                     default: ({
                       props: { class: fieldClass, ...slotProps },
-                    }) => {
-                      return (
-                        <input
-                          type="number"
-                          value={ model.value }
-                          class={ fieldClass }
-                        />
-                      )
-                    },
+                    }) => (
+                      <input
+                        type="number"
+                        value={ model.value }
+                        class={ fieldClass }
+                      />
+                    ),
                     'append-inner': () => (
                       <>
                         <VDivider vertical />
