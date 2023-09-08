@@ -99,7 +99,7 @@
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
           --v-input-control-height: #{$field-control-underlined-height + $modifier}
-          --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)}
+          --v-field-padding-bottom: #{$field-control-padding-bottom + $modifier * .5}
 
   &--flat
     box-shadow: none
@@ -131,6 +131,7 @@
   padding-top: var(--v-field-input-padding-top)
   padding-bottom: var(--v-field-input-padding-bottom)
   position: relative
+  row-gap: 3px
   width: 100%
 
   input

@@ -3,10 +3,8 @@
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
-@use '../VField/mixins' as *
 
 .v-autocomplete
-  @include v-field-align-input-chips
 
   .v-field
     .v-text-field__prefix,
@@ -19,8 +17,6 @@
     .v-field__input
       > input
         flex: 1 1
-        margin-top: var(--v-input-chips-margin-top)
-        margin-bottom: var(--v-input-chips-margin-bottom)
 
   .v-field
     input
@@ -58,9 +54,6 @@
     max-width: 90%
 
   &__selection
-    margin-top: var(--v-input-chips-margin-top)
-    margin-bottom: var(--v-input-chips-margin-bottom)
-
     &:first-child
       margin-inline-start: 0
 

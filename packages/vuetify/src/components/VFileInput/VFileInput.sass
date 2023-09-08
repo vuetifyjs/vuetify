@@ -1,11 +1,9 @@
 @use './variables' as *
 @use '../../styles/tools'
 @use 'sass:math'
-@use '../VField/mixins' as *
 
 // Block
 .v-file-input
-  @include v-field-align-input-chips
 
   &--chips.v-input--density-compact
     .v-field--variant-solo,
@@ -28,7 +26,3 @@
   .v-input__details
     padding-inline-start: $file-input-details-padding-inline
     padding-inline-end: $file-input-details-padding-inline
-
-  .v-chip
-    margin-top: var(--v-input-chips-margin-top)
-    margin-bottom: var(--v-input-chips-margin-bottom)
