@@ -255,14 +255,12 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
             actions: () => !props.hideActions ? (
               <div>
                 <VBtn
-                  variant="text"
                   color={ props.color }
                   onClick={ onClickCancel }
                   text={ t(props.cancelText) }
                 />
 
                 <VBtn
-                  variant="text"
                   color={ props.color }
                   onClick={ onClickSave }
                   text={ t(props.okText) }

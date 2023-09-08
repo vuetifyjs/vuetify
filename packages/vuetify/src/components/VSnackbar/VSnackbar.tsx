@@ -25,6 +25,7 @@ type VSnackbarSlots = {
   activator: { isActive: boolean, props: Record<string, any> }
   default: never
   actions: never
+  text: never
 }
 
 function useCountdown (milliseconds: number) {
@@ -65,6 +66,7 @@ function useCountdown (milliseconds: number) {
 
 export const makeVSnackbarProps = propsFactory({
   multiLine: Boolean,
+  text: String,
   timer: [Boolean, String],
   timeout: {
     type: [Number, String],
@@ -146,6 +148,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
     useRender(() => {
       const [overlayProps] = VOverlay.filterProps(props)
+      const hasContent = !!(slots.default || slots.text || props.text)
 
       return (
         <VOverlay
@@ -201,13 +204,16 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             </div>
           )}
 
-          { slots.default && (
+          { hasContent && (
             <div
+              key="content"
               class="v-snackbar__content"
               role="status"
               aria-live="polite"
             >
-              { slots.default() }
+              { slots.text?.() ?? props.text }
+
+              { slots.default?.() }
             </div>
           )}
 
@@ -217,6 +223,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
                 VBtn: {
                   variant: 'text',
                   ripple: false,
+                  slim: true,
                 },
               }}
             >
