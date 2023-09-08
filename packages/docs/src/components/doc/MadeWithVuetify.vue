@@ -16,12 +16,15 @@
           target="_blank"
           rel="noopener noreferrer"
           class="d-block text-decoration-none"
+          style="min-height: 205px;"
         >
           <app-figure
-            class="border rounded-lg"
+            class="border"
             :name="project.title"
             :src="project.image"
             :title="project.title"
+            height="180"
+            min-height="180"
           />
         </a>
       </v-col>
