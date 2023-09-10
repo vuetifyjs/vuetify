@@ -145,6 +145,9 @@
       @include button-sizes($button-stacked-sizes, true)
       @include button-density('height', $button-stacked-density)
 
+  &--slim
+    padding: $button-slim-padding
+
   &--rounded
     @include tools.rounded($button-rounded-border-radius)
 
@@ -218,17 +221,9 @@
 
 // VCard
 .v-btn
-  .v-card-actions &
-    padding: $button-card-actions-padding
-
   ~ .v-btn:not(.v-btn-toggle .v-btn)
     .v-card-actions &
       margin-inline-start: $button-card-actions-margin
-
-// VBanner
-.v-btn
-  .v-banner-actions &
-    padding: $button-banner-actions-padding
 
 // VPagination
 .v-btn
@@ -240,8 +235,3 @@
 
     .v-pagination__item--is-active &
       opacity: $button-pagination-active-overlay-opacity
-
-// VSnackbar
-.v-btn
-  .v-snackbar-actions &
-    padding: $button-snackbar-action-padding
