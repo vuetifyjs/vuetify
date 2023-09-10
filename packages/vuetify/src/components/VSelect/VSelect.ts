@@ -263,6 +263,11 @@ export default baseMixins.extend<options>().extend({
           this.$refs.menu?.updateDimensions()
         })
       }
+      if (this.hideSelected) {
+        this.$nextTick(() => {
+          this.onScroll()
+        })
+      }
     },
     isMenuActive (val) {
       window.setTimeout(() => this.onMenuActiveChange(val))
@@ -749,7 +754,10 @@ export default baseMixins.extend<options>().extend({
     },
     onScroll () {
       if (!this.isMenuActive) {
-        requestAnimationFrame(() => (this.getContent().scrollTop = 0))
+        requestAnimationFrame(() => {
+          const content = this.getContent()
+          if (content) content.scrollTop = 0
+        })
       } else {
         if (this.lastItem > this.computedItems.length) return
 

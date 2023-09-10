@@ -1,3 +1,6 @@
+// Styles
+import './VItem.sass'
+
 // Mixins
 import { factory as GroupableFactory } from '../../mixins/groupable'
 
@@ -16,6 +19,7 @@ export const BaseItem = Vue.extend({
     value: {
       required: false,
     },
+    disabled: Boolean,
   },
 
   data: () => ({
@@ -56,8 +60,15 @@ export const BaseItem = Vue.extend({
     }
 
     element.data = this._b(element.data || {}, element.tag!, {
-      class: { [this.activeClass]: this.isActive },
+      class: {
+        [this.activeClass]: this.isActive,
+        'v-item--disabled': this.disabled,
+      },
     })
+
+    if (this.disabled) {
+      element.data.attrs = { ...element.data.attrs, tabindex: -1 }
+    }
 
     return element
   },

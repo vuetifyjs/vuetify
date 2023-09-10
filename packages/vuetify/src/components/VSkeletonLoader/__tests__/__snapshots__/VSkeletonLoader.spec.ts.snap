@@ -12,6 +12,7 @@ exports[`VSkeletonLoader.ts should dynamically render content 2`] = `
 <div class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
      aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
 >
   <div class="v-skeleton-loader__ v-skeleton-loader__bone">
@@ -22,6 +23,7 @@ exports[`VSkeletonLoader.ts should dynamically render content 2`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 1`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -35,6 +37,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 1`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 2`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -54,6 +57,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 2`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 3`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -65,6 +69,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 3`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 4`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -76,6 +81,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 4`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 5`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -91,6 +97,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 5`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 6`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -108,6 +115,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 6`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 7`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -119,6 +127,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 7`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 8`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -130,6 +139,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 8`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 9`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -221,6 +231,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 9`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 10`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -236,6 +247,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 10`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 11`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -301,6 +313,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 11`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 12`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -312,6 +325,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 12`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 13`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -323,6 +337,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 13`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 14`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -334,6 +349,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 14`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 15`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -347,6 +363,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 15`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 16`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -362,6 +379,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 16`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 17`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -379,6 +397,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 17`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 18`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -396,6 +415,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 18`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 19`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -415,6 +435,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 19`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 20`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -430,6 +451,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 20`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 21`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -443,6 +465,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 21`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 22`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -664,6 +687,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 22`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 23`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -677,6 +701,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 23`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 24`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -698,6 +723,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 24`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 25`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -887,6 +913,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 25`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 26`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -924,6 +951,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 26`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 27`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -957,6 +985,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 27`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 28`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -968,6 +997,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 28`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 29`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >
@@ -985,6 +1015,7 @@ exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 29`] = `
 exports[`VSkeletonLoader.ts should generate a skeleton recursive tree 30`] = `
 <div aria-busy="true"
      aria-live="polite"
+     aria-label="$vuetify.loading"
      role="alert"
      class="v-skeleton-loader v-skeleton-loader--is-loading theme--light"
 >

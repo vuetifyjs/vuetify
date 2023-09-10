@@ -117,6 +117,8 @@ export interface DataItemProps {
 
 export interface DataTableItemProps extends DataItemProps {
   headers: DataTableHeader[]
+  on: { [key: string]: Function | Function[] }
+  attrs: object;
 }
 
 export interface DataScopeProps {
@@ -294,9 +296,13 @@ export interface DataTableHeader<T extends any = any> {
   sort?: DataTableCompareFunction<T>
 }
 
+export type DataTableFilterMode = 'union' | 'intersection'
+
 export type DataItemsPerPageOption = (number | {
   text: string
   value: number
 });
 
 export type RowClassFunction = (item: any) => null | undefined | string | string[] | Record<string, boolean>
+
+export type RowStyleFunction = (item: any) => null | undefined | string | string[] | Record<string, boolean>

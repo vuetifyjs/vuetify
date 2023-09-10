@@ -259,6 +259,37 @@ describe('VMenu.ts', () => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
+  it('should be able to navigate the menu list with up and down keys', async () => {
+    const event = (keyCode: number) => new KeyboardEvent('keydown', { keyCode })
+    const wrapper = mountFunction({
+      propsData: { eager: true },
+      scopedSlots: {
+        default () {
+          return this.$createElement('div', [
+            this.$createElement(VListItem, { props: { link: true } }),
+            this.$createElement(VListItem, { props: { link: true } }),
+          ])
+        },
+      },
+    })
+
+    wrapper.setData({ isActive: true })
+
+    wrapper.vm.onKeyDown(event(keyCodes.down))
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.listIndex).toBe(0)
+
+    wrapper.vm.onKeyDown(event(keyCodes.up))
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.listIndex).toBe(1)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
   it('should select first or last item when pressing home or end on active menu', async () => {
     const event = (keyCode: number) => new KeyboardEvent('keydown', { keyCode })
     const wrapper = mountFunction({
@@ -288,6 +319,105 @@ describe('VMenu.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.listIndex).toBe(1)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should deactivate when escape is pressed', async () => {
+    jest.useFakeTimers()
+    const event = (keyCode: number) => new KeyboardEvent('keydown', { keyCode })
+    const wrapper = mountFunction({
+      propsData: { eager: true },
+    })
+
+    wrapper.setData({ isActive: true })
+
+    wrapper.vm.onKeyDown(event(keyCodes.esc))
+
+    await wrapper.vm.$nextTick()
+    jest.runAllTimers()
+
+    expect(wrapper.vm.isActive).toBe(false)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+    jest.useRealTimers()
+  })
+
+  it('should disable escape key when disableKeys is true', async () => {
+    const event = (keyCode: number) => new KeyboardEvent('keydown', { keyCode })
+    const wrapper = mountFunction({
+      propsData: {
+        eager: true,
+        disableKeys: true,
+      },
+    })
+
+    wrapper.setData({ isActive: true })
+
+    wrapper.vm.onKeyDown(event(keyCodes.esc))
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isActive).toBe(true)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should disable navigation keys when disableKeys is true', async () => {
+    const event = (keyCode: number) => new KeyboardEvent('keydown', { keyCode })
+    const wrapper = mountFunction({
+      propsData: {
+        eager: true,
+        disableKeys: true,
+      },
+      scopedSlots: {
+        default () {
+          return this.$createElement('div', [
+            this.$createElement(VListItem, { props: { link: true } }),
+          ])
+        },
+      },
+    })
+
+    wrapper.setData({ isActive: true })
+
+    wrapper.vm.onKeyDown(event(keyCodes.up))
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.listIndex).toBe(-1)
+
+    wrapper.vm.onKeyDown(event(keyCodes.down))
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.listIndex).toBe(-1)
+
+    wrapper.vm.onKeyDown(event(keyCodes.end))
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.listIndex).toBe(-1)
+
+    wrapper.vm.onKeyDown(event(keyCodes.home))
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.listIndex).toBe(-1)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should not open menu on up or down press when disableKeys is true', async () => {
+    const event = (keyCode: number) => new KeyboardEvent('keydown', { keyCode })
+    const wrapper = mountFunction({
+      propsData: {
+        eager: true,
+        disableKeys: true,
+      },
+    })
+
+    wrapper.vm.onKeyDown(event(keyCodes.up))
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isActive).toBe(false)
+    expect(wrapper.vm.listIndex).toBe(-1)
+
+    wrapper.vm.onKeyDown(event(keyCodes.down))
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isActive).toBe(false)
+    expect(wrapper.vm.listIndex).toBe(-1)
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })

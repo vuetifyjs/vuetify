@@ -11,17 +11,22 @@ import { waitAnimationFrame } from '../../../../test'
 describe('VTextField.ts', () => { // eslint-disable-line max-statements
   type Instance = InstanceType<typeof VTextField>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  let mocks: any
   beforeEach(() => {
+    mocks = {
+      $vuetify: {
+        icons: {},
+        rtl: false,
+        lang: {
+          t: (val: string) => val,
+        },
+      },
+    }
     mountFunction = (options?: MountOptions<Instance>) => {
       return mount(VTextField, {
         // https://github.com/vuejs/vue-test-utils/issues/1130
         sync: false,
-        mocks: {
-          $vuetify: {
-            icons: {},
-            rtl: false,
-          },
-        },
+        mocks,
         ...options,
       })
     }
@@ -51,7 +56,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
         return h(VTextField, { on: { keyUp: keyup }, props: { download: '' }, attrs: {} })
       },
     }
-    const wrapper = mount(component)
+    const wrapper = mount(component, { mocks })
 
     const input = wrapper.findAll('input').at(0)
     input.trigger('keyUp', { keyCode: 65 })
@@ -296,6 +301,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     }
     const wrapper = mount(component, {
       attachToDocument: true,
+      mocks,
     })
 
     const input = wrapper.findAll('input').at(0)
@@ -347,7 +353,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
         })
       },
     }
-    const wrapper = mount(component, { sync: false })
+    const wrapper = mount(component, { sync: false, mocks })
 
     const input = wrapper.findAll('input').at(0)
 
@@ -793,6 +799,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     }
     const wrapper = mount(component, {
       attachToDocument: true,
+      mocks,
     })
 
     const inputElement = wrapper.findAll('input').at(0)

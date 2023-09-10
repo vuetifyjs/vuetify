@@ -102,3 +102,12 @@
 
         +rtl()
           padding-left: $textarea-enclosed-text-slot-padding
+
+    &.v-text-field--reverse
+      .v-text-field__slot
+        .v-label
+          +ltr()
+            margin-right: -$textarea-enclosed-text-slot-margin
+
+          +rtl()
+            margin-left: -$textarea-enclosed-text-slot-margin

@@ -3,7 +3,7 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john@vuetifyjs.com>",
-  "version": "2.6.15",
+  "version": "2.7.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuetifyjs/vuetify.git",
@@ -30,7 +30,7 @@
     "register-service-worker": "^1.7.1",
     "vue-i18n": "^8.17.7",
     "vue-instantsearch": "^3.4.3",
-    "vuetify": "^2.6.15",
+    "vuetify": "^2.7.1",
     "vuex": "^3.4.0",
     "webpack-node-externals": "^2.5.1"
   },
@@ -41,7 +41,7 @@
     "@vue/cli-plugin-router": "~4.5.19",
     "@vue/cli-plugin-vuex": "~4.5.19",
     "@vue/cli-service": "~4.5.19",
-    "@vuetify/api-generator": "^2.6.15",
+    "@vuetify/api-generator": "^2.7.1",
     "@vuetify/vue-cli-plugin-base": "~0.3.5",
     "cosmicjs": "^4.2.10",
     "date-fns": "^2.14.0",

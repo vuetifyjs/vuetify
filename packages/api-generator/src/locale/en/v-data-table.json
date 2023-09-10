@@ -11,6 +11,7 @@
     "disablePagination": "Disables pagination completely",
     "disableSort": "Disables sorting completely",
     "expandIcon": "Icon used for expand toggle button.",
+    "filterMode": "Controls how how custom column filters are combined with the default filtering. Both modes only apply the default filter to columns not specified in `customKeyFilter`.\n\n- **union**: There is at least one match from the default filter, OR all custom column filters match.\n- **intersection**: There is at least one match from the default filter, AND all custom column filters match.",
     "fixedHeader": "Fixed header to top of table. **NOTE:** Does not work in IE11",
     "groupBy": "Changes which item property should be used for grouping items. Currently only supports a single grouping in the format: `group` or `['group']`. When using an array, only the first element is considered. Can be used with `.sync` modifier",
     "groupDesc": "Changes which direction grouping is done. Can be used with `.sync` modifier",
@@ -63,8 +64,7 @@
   },
   "events": {
     "click:row": "Emits when a table row is clicked. This event provides 3 arguments: the first is the item data that was clicked, the second is the other related data provided by the `item` slot, and the third is the native click event. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
-    "contextmenu:row": "Emits when a table row is right-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
-    "dblclick:row": "Emits when a table row is double-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
+    "<event>:row": "Pass through any native event listener to the table row elements. The first argument is the event object and the second is related data provided to the item slot. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
     "current-items": "Emits the items provided via the **items** prop, every time the internal **computedItems** is changed.",
     "page-count": "Emits when the **pageCount** property of the **pagination** prop is updated",
     "pagination": "Emits when something changed to the `pagination` which can be provided via the `pagination` prop",
