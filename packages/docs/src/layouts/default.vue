@@ -32,7 +32,7 @@
             </v-fade-transition>
           </router-view>
 
-          <backmatter v-if="!isApi" :key="route.name" />
+          <backmatter v-if="hasBackmatter" :key="route.name" />
         </v-container>
       </slot>
     </v-main>
@@ -60,4 +60,5 @@
 
   const isApi = computed(() => route.meta?.category === 'api')
   const style = computed(() => ({ maxWidth: isApi.value ? '1368px' : '960px' }))
+  const hasBackmatter = computed(() => !isApi.value && route.meta?.backmatter !== false)
 </script>

@@ -1,9 +1,9 @@
 <template>
   <v-sheet
     ref="root"
-    :theme="isDark ? 'dark' : 'light'"
-    :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
+    :color="theme.name.value === 'light' && !user.mixedTheme ? 'surface-bright' : undefined"
     :rounded="rounded"
+    :theme="theme.name.value === 'light' && user.mixedTheme ? 'dark' : theme.name.value"
     class="app-markup overflow-hidden"
     dir="ltr"
   >
@@ -131,11 +131,6 @@
 
     clicked.value = false
   }
-
-  const isDark = computed(() => {
-    return user.mixedTheme || theme.current.value.dark
-  })
-
 </script>
 
 <style lang="sass">
@@ -168,7 +163,8 @@
       word-spacing: normal
       word-wrap: normal
 
-    pre
+    pre,
+    code
       &::after
         bottom: .5rem
         color: hsla(0, 0%, 19%, 0.5)
@@ -195,7 +191,7 @@
     pre.language-sass::after
       content: 'sass'
 
-    pre.language-scss::after
+    code.language-scss::after
       content: 'scss'
 
     pre.language-ts::after
@@ -204,6 +200,8 @@
     pre.language-vue::after
       content: 'vue'
 
+    // TODO: handle this differently
+    &.v-theme--blackguard,
     &.v-theme--dark
       code,
       pre
@@ -212,6 +210,7 @@
         &::selection, ::selection
           background-color: #113663
 
+      code,
       pre
         &::after
           color: hsla(0, 0%, 50%, 1)
