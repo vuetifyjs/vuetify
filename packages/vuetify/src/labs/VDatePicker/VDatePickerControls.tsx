@@ -15,7 +15,7 @@ import type { PropType } from 'vue'
 export const makeVDatePickerControlsProps = propsFactory({
   displayDate: String,
   disabled: {
-    type: [Boolean, String] as PropType<boolean | string[]>,
+    type: [Boolean, String, Array] as PropType<boolean | string | string[]>,
     default: false,
   },
   nextIcon: {
@@ -58,17 +58,17 @@ export const VDatePickerControls = genericComponent()({
     const disableMode = computed(() => {
       return Array.isArray(props.disabled)
         ? props.disabled.includes('mode')
-        : props.disabled
+        : !!props.disabled
     })
     const disablePrev = computed(() => {
       return Array.isArray(props.disabled)
         ? props.disabled.includes('prev')
-        : props.disabled
+        : !!props.disabled
     })
     const disableNext = computed(() => {
       return Array.isArray(props.disabled)
         ? props.disabled.includes('next')
-        : props.disabled
+        : !!props.disabled
     })
 
     function onClickPrev () {

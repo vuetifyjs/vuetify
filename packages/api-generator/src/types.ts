@@ -243,6 +243,7 @@ function count (arr: string[], needle: string) {
   }, 0)
 }
 
+// Types that are displayed as links
 const allowedRefs = [
   'Anchor',
   'LocationStrategyFn',
@@ -263,12 +264,15 @@ const allowedRefs = [
   'FilterFunction',
   'DataIteratorItem',
 ]
+
+// Types that displayed without their generic arguments
 const plainRefs = [
   'Component',
   'ComponentPublicInstance',
   'ComponentInternalInstance',
   'FunctionalComponent',
   'DataTableItem',
+  'ListItem',
   'Group',
   'DataIteratorItem',
 ]

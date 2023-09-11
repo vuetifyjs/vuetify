@@ -115,6 +115,8 @@ export interface DateAdapter<Date> {
   date (value?: any): Date | null
   format (date: Date, formatString: string): string
 
+  startOfDay (date: Date): Date
+  endOfDay (date: Date): Date
   startOfMonth (date: Date): Date
   endOfMonth (date: Date): Date
   startOfYear (date: Date): Date
