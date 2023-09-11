@@ -71,7 +71,7 @@ function transformItems (props: ItemProps & { itemType: string }, items: (string
   return array
 }
 
-function useListItems (props: ItemProps & { itemType: string }) {
+export function useListItems (props: ItemProps & { itemType: string }) {
   const items = computed(() => transformItems(props, props.items))
 
   return { items }
@@ -136,7 +136,7 @@ export const VList = genericComponent<new <T>(
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const { open, select } = useNested(props)
+    const { children, open, parents, select } = useNested(props)
     const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
     const activeColor = toRef(props, 'activeColor')
     const baseColor = toRef(props, 'baseColor')
@@ -245,6 +245,8 @@ export const VList = genericComponent<new <T>(
       open,
       select,
       focus,
+      children,
+      parents,
     }
   },
 })

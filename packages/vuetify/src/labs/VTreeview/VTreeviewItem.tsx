@@ -1,101 +1,28 @@
-// Styles
 import './VTreeviewItem.sass'
 
 // Components
-import { VTreeviewSymbol } from './VTreeview'
-import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VIcon } from '@/components/VIcon'
-import { useList } from '@/components/VList/list'
+import { makeVListItemProps, VListItem } from "@/components/VList/VListItem";
+import { VIcon } from '@/components/VIcon';
 
-// Composables
-import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeComponentProps } from '@/composables/component'
-import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+//Composables
 import { IconValue } from '@/composables/icons'
-import { useNestedItem } from '@/composables/nested/nested'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
-
-// Directives
-import { Ripple } from '@/directives/ripple'
+import { useLink } from '@/composables/router'
 
 // Utilities
 import { computed, inject, ref } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from "@/util";
 
 // Types
-import type { PropType } from 'vue'
-import type { RippleDirectiveBinding } from '@/directives/ripple'
-
-type TreeviewItemSlot = {
-  isSelected: boolean
-  isIndeterminate: boolean
-  select: (value: boolean) => void
-}
-
-export type TreeviewItemTitleSlot = {
-  title?: string | number | boolean
-}
-
-export type VTreeviewItemSlots = {
-  prepend: TreeviewItemSlot
-  append: TreeviewItemSlot
-  default: TreeviewItemSlot
-  title: TreeviewItemTitleSlot
-}
+import type { VListItemSlots } from '@/components/VList/VListItem'
+import { VTreeviewSymbol } from "./VTreeview";
 
 export const makeVTreeviewItemProps = propsFactory({
-  baseColor: String,
-  collapseIcon: {
-    type: IconValue,
-    default: '$treeviewCollapse',
-  },
-  disabled: Boolean,
-  expandIcon: {
-    type: IconValue,
-    default: '$treeviewExpand',
-  },
-  hoverable: Boolean,
-  indeterminateIcon: {
-    type: IconValue,
-    default: '$checkboxIndeterminate',
-  },
-  offIcon: {
-    type: IconValue,
-    default: '$checkboxOff',
-  },
-  onIcon: {
-    type: IconValue,
-    default: '$checkboxOn',
-  },
-  openOnClick: Boolean,
-  ripple: {
-    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
-    default: true,
-  },
-  showSelectIcon: Boolean,
-  selectable: Boolean,
-  selectedColor: String,
-  selectedClass: String,
-  selectOnClick: Boolean,
-  title: [String, Number, Boolean],
-  value: null,
-
-  ...makeBorderProps(),
-  ...makeComponentProps(),
-  ...makeDensityProps(),
-  ...makeDimensionProps(),
-  ...makeRoundedProps(),
-  ...makeThemeProps(),
-  ...makeVariantProps({ variant: 'text' } as const),
+  toggleIcon: IconValue,
+  ...makeVListItemProps()
 }, 'VTreeviewItem')
 
-export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
+export const VTreeviewItem = genericComponent<VListItemSlots>()({
   name: 'VTreeviewItem',
-
-  directives: { Ripple },
 
   props: makeVTreeviewItemProps(),
 
@@ -104,132 +31,67 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
   },
 
   setup (props, { attrs, slots, emit }) {
-    const id = computed(() => props.value)
-    const { select, isSelected, isIndeterminate, isOpen, isLeaf } = useNestedItem(id, false)
-    const list = useList()
+    const link = useLink(props, attrs)
+    const id = computed(() => props.value === undefined ? link.href.value : props.value)
 
     const isClickable = computed(() =>
-      !props.disabled && (props.value != null && !!list)
+      !props.disabled &&
+      props.link !== false &&
+      (props.link || link.isClickable.value || (props.value != null && !!vListItemRef.value?.list))
     )
 
-    const color = computed(() => props.color ?? props.selectedColor)
+    const vListItemRef = ref<VListItem>()
 
-    const variantProps = computed(() => ({
-      color: isSelected.value ? color.value ?? props.baseColor : props.baseColor,
-      variant: props.variant,
-    }))
+    function onClick (e: MouseEvent) {
+      emit('click', e)
+      if ( !vListItemRef.value?.isGroupActivator || !isClickable.value) return
+      props.value != null && vListItemRef.value?.select(!vListItemRef.value?.isSelected, e)
+    }
 
-    const toggleIcon = computed(() => isOpen.value ? props.collapseIcon : props.expandIcon)
-
-    const selectIcon = computed(() => isSelected.value ? props.onIcon : props.offIcon)
-
-    const roundedProps = computed(() => props.rounded)
-
-    const { themeClasses } = provideTheme(props)
-    const { borderClasses } = useBorder(props)
-    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
-    const { densityClasses } = useDensity(props)
-    const { dimensionStyles } = useDimension(props)
-    const { roundedClasses } = useRounded(roundedProps)
+    function onKeyDown (e: KeyboardEvent) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        onClick(e as any as MouseEvent)
+      }
+    }
 
     const visibleIds = inject(VTreeviewSymbol, { visibleIds: ref() }).visibleIds
 
-    const slotProps = computed(() => ({
-      isSelected: isSelected.value,
-      isIndeterminate: isIndeterminate.value,
-      select,
-    } satisfies TreeviewItemSlot))
-
-    function openNode (e: MouseEvent) {
-      emit('click', e)
-      e.stopPropagation()
-    }
-
-    function selectItem (e: MouseEvent) {
-      props.value != null && select(!isSelected.value, e)
-      e.stopPropagation()
-    }
-
-    function onClick (e: MouseEvent) {
-      if (props.openOnClick) openNode(e)
-      if (props.selectOnClick) selectItem(e)
-    }
-
     useRender(() => {
-      const hasTitle = (slots.title || props.title)
       return (
-        <div
+        <VListItem
+          ref={ vListItemRef }
+          { ...omit(props, ['class']) }
           class={[
             'v-treeview-item',
-            {
-              'v-treeview-item--active': isSelected.value,
-              'v-treeview-item--disabled': props.disabled,
-              'v-treeview-item--link': isClickable.value,
-              [`${props.selectedClass}`]: props.selectedClass && isSelected.value,
-              'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(id.value),
-            },
-            themeClasses.value,
-            borderClasses.value,
-            colorClasses.value,
-            densityClasses.value,
-            roundedClasses.value,
-            variantClasses.value,
             props.class,
+            {
+              'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(id.value),
+            }
           ]}
-          style={[
-            colorStyles.value,
-            dimensionStyles.value,
-            props.style,
-          ]}
-          v-ripple={ isClickable.value && props.ripple }
           onClick={ onClick }
+          onKeydown={ isClickable.value && onKeyDown }
         >
-          { genOverlays((isClickable.value || isSelected.value), 'v-treeview-item') }
-            <div key="prepend" class="v-treeview-item__prepend">
-              <VIcon onClick={ openNode } icon={ isLeaf.value ? undefined : toggleIcon.value }></VIcon>
-              { props.selectable && (props.showSelectIcon || !props.selectOnClick) && (
-                <VIcon
-                  key="prepend-icon"
-                  onClick={ selectItem }
-                  color={ props.selectedColor }
-                  icon={ isIndeterminate.value ? props.indeterminateIcon : selectIcon.value }
-                />
-              )}
-              {
-                slots.prepend && (
-                  <VDefaultsProvider
-                    key="prepend-defaults"
-                  >
-                    { slots.prepend?.(slotProps.value) }
-                  </VDefaultsProvider>
-                )
-              }
-            </div>
-
-            <div class={['v-treeview-item__content']}>
-              { hasTitle && (
-                <VDefaultsProvider key="title">
-                  { slots.title?.({ title: props.title }) ?? props.title }
-                </VDefaultsProvider>
-              )}
-              { slots.default?.(slotProps.value) }
-            </div>
-            { slots.append && (
-              <div key="append" class="v-list-item__append">
-                <VDefaultsProvider
-                  key="append-defaults"
-                >
-                  { slots.append?.(slotProps.value) }
-                </VDefaultsProvider>
-              </div>
+          {{
+            ...slots,
+            prepend: slotProps => (
+              <>
+                {
+                  <VIcon
+                    density={ props.density }
+                    icon={ props.toggleIcon }
+                  />
+                }
+                { slots.prepend?.(slotProps) }
+              </>
             )
-          }
-        </div>
+          }}
+        </VListItem>
       )
     })
-
     return {}
-  },
+  }
 })
 
 export type VTreeviewItem = InstanceType<typeof VTreeviewItem>
+

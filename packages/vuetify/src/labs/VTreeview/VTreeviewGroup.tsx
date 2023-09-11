@@ -1,109 +1,66 @@
 // Components
-import { VExpandTransition } from '@/components/transitions'
+import { makeVListGroupProps, VListGroup } from "@/components/VList/VListGroup"
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { useList } from '@/components/VList/list'
-
-// Composables
-import { makeComponentProps } from '@/composables/component'
-import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
-import { useSsrBoot } from '@/composables/ssrBoot'
-import { makeTagProps } from '@/composables/tag'
-import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, toRef } from 'vue'
-import { defineComponent, genericComponent, propsFactory, useRender } from '@/util'
+import { computed, ref } from 'vue'
+import { genericComponent, omit, propsFactory, useRender } from "@/util"
 
-export type VTreeviewGroupSlots = {
-  default: never
-  activator: { isOpen: boolean, props: Record<string, unknown> }
-}
-
-const VTreeviewGroupActivator = defineComponent({
-  name: 'VTreeviewGroupActivator',
-
-  setup (_, { slots }) {
-    useNestedGroupActivator()
-
-    return () => slots.default?.()
-  },
-})
+//Types
+import type { VListGroupSlots } from "@/components/VList/VListGroup"
 
 export const makeVTreeviewGroupProps = propsFactory({
-  baseColor: String,
-  color: String,
-  fluid: Boolean,
-  selectedColor: String,
-  title: String,
-  value: null,
-
-  ...makeComponentProps(),
-  ...makeTagProps(),
+  ...omit(makeVListGroupProps({
+    collapseIcon: '$treeviewCollapse',
+    expandIcon: '$treeviewExpand'
+  }), ['subgroup'])
 }, 'VTreeviewGroup')
 
-export const VTreeviewGroup = genericComponent<VTreeviewGroupSlots>()({
+export const VTreeviewGroup = genericComponent<VListGroupSlots>()({
   name: 'VTreeviewGroup',
 
   props: makeVTreeviewGroupProps(),
 
   setup (props, { slots }) {
-    const { isOpen, open, id: _id } = useNestedItem(toRef(props, 'value'), true)
-    const id = computed(() => `v-treeview-group--id-${String(_id.value)}`)
-    const list = useList()
-    const { isBooted } = useSsrBoot()
-
-    function onClick (e: Event) {
-      open(!isOpen.value, e)
-    }
-
-    const activatorProps = computed(() => ({
-      onClick,
-      class: 'v-treeview-group__header',
-      id: id.value,
-    }))
+    const toggleIcon = computed(() => vListGroupRef.value?.isOpen ? props.collapseIcon : props.expandIcon)
 
     const activatorDefaults = computed(() => ({
       VTreeviewItem: {
-        active: isOpen.value,
-        baseColor: props.baseColor,
-        color: props.color,
-        selectedColor: props.selectedColor,
-        title: props.title,
-        value: props.value,
+        prependIcon: undefined,
+        appendIcon: undefined,
+        toggleIcon: toggleIcon.value
       },
     }))
 
+    const vListGroupRef = ref<VListGroup>()
+
     useRender(() => (
-      <props.tag
+      <VListGroup
+        ref={ vListGroupRef }
+        { ...omit(props, ['class']) }
         class={[
           'v-treeview-group',
-          {
-            'v-treeview-group--prepend': list?.hasPrepend.value,
-            'v-treeview-group--fluid': props.fluid,
-            'v-treeview-group--open': isOpen.value,
-          },
           props.class,
         ]}
-        style={ props.style }
+        subgroup
       >
-        { slots.activator && (
-          <VDefaultsProvider defaults={ activatorDefaults.value }>
-            <VTreeviewGroupActivator>
-              { slots.activator({ props: activatorProps.value, isOpen: isOpen.value }) }
-            </VTreeviewGroupActivator>
-          </VDefaultsProvider>
-        )}
-
-        <MaybeTransition transition={{ component: VExpandTransition }} disabled={ !isBooted.value }>
-          <div class="v-treeview-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
-            { slots.default?.() }
-          </div>
-        </MaybeTransition>
-      </props.tag>
+        {{
+          ...slots,
+          activator: slots.activator ? slotProps => (
+            <>
+              {
+                <VDefaultsProvider defaults={ activatorDefaults.value }>
+                  { slots.activator?.(slotProps) }
+                </VDefaultsProvider>
+              }
+            </>
+          ) : undefined
+        }}
+      </VListGroup>
     ))
 
     return {}
-  },
+  }
 })
 
 export type VTreeviewGroup = InstanceType<typeof VTreeviewGroup>

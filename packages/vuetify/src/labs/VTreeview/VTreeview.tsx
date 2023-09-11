@@ -1,124 +1,60 @@
-// Styles
-import './VTreeview.sass'
+// Components
+import { makeVListProps, useListItems, VList } from '@/components/VList/VList'
 import { VTreeviewChildren } from './VTreeviewChildren'
 
-// Components
-import { createList } from '@/components/VList/list'
-
 // Composables
-import { makeVTreeviewItemProps } from './VTreeviewItem'
-import { useBorder } from '@/composables/border'
-import { useBackgroundColor } from '@/composables/color'
 import { provideDefaults } from '@/composables/defaults'
-import { useDensity } from '@/composables/density'
-import { useDimension } from '@/composables/dimensions'
-import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeFilterProps, useFilter } from '@/composables/filter'
-import { makeItemsProps } from '@/composables/list-items'
-import { makeNestedProps, useNested } from '@/composables/nested/nested'
-import { useRounded } from '@/composables/rounded'
-import { provideTheme } from '@/composables/theme'
+import { IconValue } from '@/composables/icons'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onMounted, provide, ref, shallowRef, toRef } from 'vue'
-import { focusChild, genericComponent, getPropertyFromItem, pick, propsFactory, useRender } from '@/util'
+import { computed, provide, ref, toRef } from 'vue'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, InjectionKey, PropType } from 'vue'
-import type { VTreeviewChildrenSlots } from './VTreeviewChildren'
-import type { ItemProps, ListItem } from '@/composables/list-items'
+import type { ComputedRef, InjectionKey } from 'vue'
+import type { VListChildrenSlots } from '@/components/VList/VListChildren'
 import type { GenericProps } from '@/util'
+import type { ListItem } from '@/composables/list-items'
 
-export interface InternalListItem<T = any> extends ListItem<T> {
-  disabled?: true | false
-}
-
-export interface TreeviewProvide {
+export interface TreeViewProvide {
   visibleIds: ComputedRef<Set<unknown> | null>
 }
 
-export const VTreeviewSymbol: InjectionKey<TreeviewProvide> = Symbol.for('vuetify:v-treeview')
-
-function isPrimitive (value: unknown): value is string | number | boolean {
-  return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean'
-}
-
-function transformItem (props: ItemProps & { disabled: Boolean, itemDisabled: string }, item: any): InternalListItem {
-  const disabled = props.disabled || getPropertyFromItem(item, props.itemDisabled, false)
-  const title = isPrimitive(item) ? item : getPropertyFromItem(item, props.itemTitle)
-  const value = getPropertyFromItem(item, props.itemValue, undefined)
-  const children = getPropertyFromItem(item, props.itemChildren)
-  const itemProps = props.itemProps === true ? pick(item, ['children'])[1] : getPropertyFromItem(item, props.itemProps)
-
-  const _props = {
-    disabled,
-    title,
-    value,
-    ...itemProps,
-  }
-
-  return {
-    disabled: _props.disabled,
-    title: _props.title,
-    value: _props.value,
-    props: _props,
-    children: children ? transformItems(props, children) : undefined,
-    raw: item,
-  }
-}
-
-function transformItems (props: ItemProps & { disabled: Boolean, itemDisabled: string }, items: (string | object)[]) {
-  const array: ListItem[] = []
-
-  for (const item of items) {
-    array.push(transformItem(props, item))
-  }
-
-  return array
-}
-
-function useListItems (props: ItemProps & { disabled: Boolean, itemDisabled: string }) {
-  const items = computed(() => transformItems(props, props.items))
-
-  return { items }
-}
+export const VTreeviewSymbol: InjectionKey<TreeViewProvide> = Symbol.for('vuetify:v-treeview')
 
 function flatten (items: ListItem[], flat: ListItem[] = []) {
   for (const item of items) {
     flat.push(item)
-
     if (item.children) flatten(item.children, flat)
   }
-
   return flat
 }
 
 export const makeVTreeviewProps = propsFactory({
-  bgColor: String,
-  itemDisabled: {
-    type: String,
-    default: 'disabled',
+  collapseIcon: {
+    type: IconValue,
+    default: '$treeviewCollapse',
   },
-  openOnMount: {
-    type: String as PropType<'all' | 'root' | undefined>,
-    validator: (v: any) => !v || ['all', 'root'].includes(v),
+  expandIcon: {
+    type: IconValue,
+    default: '$treeviewExpand',
   },
   search: String,
-  ...makeNestedProps({
-    selectStrategy: 'classic' as const,
-    openStrategy: 'single' as const,
-  }),
-  ...makeElevationProps(),
+
   ...makeFilterProps({ filterKeys: ['title'] }),
-  ...makeItemsProps(),
-  ...makeVTreeviewItemProps(),
+  ...omit(makeVListProps({
+    selectStrategy: 'independent' as  const,
+    openStrategy: 'multiple' as const
+  }), ['nav'])
 }, 'VTreeview')
 
 export const VTreeview = genericComponent<new <T>(
   props: {
     items?: T[]
   },
-  slots: VTreeviewChildrenSlots<T>
+  slots: VListChildrenSlots<T>
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VTreeview',
 
@@ -132,25 +68,18 @@ export const VTreeview = genericComponent<new <T>(
   },
 
   setup (props, { slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
-    const { borderClasses } = useBorder(props)
-    const { densityClasses } = useDensity(props)
-    const { dimensionStyles } = useDimension(props)
-    const { elevationClasses } = useElevation(props)
-    const { getChildren, getPath, open, select, parents } = useNested(props)
-    const { roundedClasses } = useRounded(props)
-    const { themeClasses } = provideTheme(props)
-
+    const { items } = useListItems(props)
+    const activeColor = toRef(props, 'activeColor')
     const baseColor = toRef(props, 'baseColor')
     const color = toRef(props, 'color')
-    const selectedColor = toRef(props, 'selectedColor')
+    const opened = useProxiedModel(props, 'opened')
+    const selected = useProxiedModel(props, 'selected')
 
-    const { items } = useListItems(props)
+    const vListRef = ref<VList>()
+
     const flatItems = computed(() => flatten(items.value))
-
     const search = toRef(props, 'search')
     const { filteredItems } = useFilter(props, flatItems, search)
-
     const visibleIds = computed(() => {
       if (!search.value) {
         return null
@@ -160,116 +89,73 @@ export const VTreeview = genericComponent<new <T>(
       }))
     })
 
-    provide(VTreeviewSymbol, { visibleIds })
-
-    createList()
-
-    onMounted(() => {
-      if (props.openOnMount === 'root') {
-        parents.value.forEach(parent => {
-          if (!parents.value.has(parent)) {
-            open(parent, true)
-          }
-        })
-      } else if (props.openOnMount === 'all') {
-        parents.value.forEach(parent => {
-          open(parent, true)
-        })
+    function getPath (id: unknown) {
+      const path: unknown[] = []
+      let parent: unknown = id
+      while (parent != null) {
+        path.unshift(parent)
+        parent = vListRef.value?.parents.get(parent)
       }
-    })
+      return path
+    }
+
+    function getChildren (id: unknown) {
+      const arr: unknown[] = []
+      const queue = ((vListRef.value?.children.get(id) ?? []).slice())
+      while (queue.length) {
+        const child = queue.shift()
+        if (!child) continue
+        arr.push(child)
+        queue.push(...((vListRef.value?.children.get(child) ?? []).slice()))
+      }
+      return arr
+    }
+
+    provide(VTreeviewSymbol, { visibleIds })
 
     provideDefaults({
       VTreeviewGroup: {
+        activeColor,
         baseColor,
         color,
-        selectedColor,
+        collapseIcon: props.collapseIcon,
+        expandIcon: props.expandIcon,
+        subgroup: true,
+      },
+      VTreeviewItem: {
+        activeClass: toRef(props, 'activeClass'),
+        activeColor,
+        baseColor,
+        color,
+        density: toRef(props, 'density'),
+        disabled: toRef(props, 'disabled'),
+        lines: toRef(props, 'lines'),
+        variant: toRef(props, 'variant'),
       },
     })
 
-    const isFocused = shallowRef(false)
-    const contentRef = ref<HTMLElement>()
-    function onFocusin (e: FocusEvent) {
-      isFocused.value = true
-    }
-
-    function onFocusout (e: FocusEvent) {
-      isFocused.value = false
-    }
-
-    function onFocus (e: FocusEvent) {
-      if (
-        !isFocused.value &&
-        !(e.relatedTarget && contentRef.value?.contains(e.relatedTarget as Node))
-      ) focus()
-    }
-
-    function onKeydown (e: KeyboardEvent) {
-      if (!contentRef.value) return
-
-      if (e.key === 'ArrowDown') {
-        focus('next')
-      } else if (e.key === 'ArrowUp') {
-        focus('prev')
-      } else if (e.key === 'Home') {
-        focus('first')
-      } else if (e.key === 'End') {
-        focus('last')
-      } else {
-        return
-      }
-
-      e.preventDefault()
-    }
-
-    function focus (location?: 'next' | 'prev' | 'first' | 'last') {
-      if (contentRef.value) {
-        return focusChild(contentRef.value, location)
-      }
-    }
-
-    const [treeviewChildrenProps, _1] = VTreeviewChildren.filterProps(props)
-
     useRender(() => {
+      const [listProps, _1] = VList.filterProps(props)
+
       return (
-        <div
-          ref={ contentRef }
+        <VList
+          ref={ vListRef }
+          { ...omit(listProps, ['items', 'class']) }
           class={[
             'v-treeview',
-            {
-              'v-treeview--disabled': props.disabled,
-            },
-            themeClasses.value,
-            backgroundColorClasses.value,
-            borderClasses.value,
-            densityClasses.value,
-            elevationClasses.value,
-            roundedClasses.value,
             props.class,
           ]}
-          style={[
-            backgroundColorStyles.value,
-            dimensionStyles.value,
-            props.style,
-          ]}
-          tabindex={ (props.disabled || isFocused.value) ? -1 : 0 }
-          role="listbox"
-          aria-activedescendant={ undefined }
-          onFocusin={ onFocusin }
-          onFocusout={ onFocusout }
-          onFocus={ onFocus }
-          onKeydown={ onKeydown }
+          items={ props.items }
+          v-model:opened={ opened.value }
+          v-model:selected={ selected.value }
         >
-          <VTreeviewChildren { ...treeviewChildrenProps } items={ items.value } v-slots={ slots }></VTreeviewChildren>
-        </div>
+          <VTreeviewChildren items={ items.value } v-slots={ slots }></VTreeviewChildren>
+        </VList>
       )
     })
 
-    return {
-      open,
-      select,
-      focus,
-    }
-  },
+    return { open }
+  }
 })
 
 export type VTreeview = InstanceType<typeof VTreeview>

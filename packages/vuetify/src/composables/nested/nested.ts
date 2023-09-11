@@ -45,8 +45,6 @@ type NestedProvide = {
     open: (id: unknown, value: boolean, event?: Event) => void
     select: (id: unknown, value: boolean, event?: Event) => void
     openOnSelect: (id: unknown, value: boolean, event?: Event) => void
-    getPath: (id: unknown) => unknown[]
-    getChildren: (id: unknown) => unknown[]
   }
 }
 
@@ -65,8 +63,6 @@ export const emptyNested: NestedProvide = {
     opened: ref(new Set()),
     selected: ref(new Map()),
     selectedValues: ref([]),
-    getPath: () => [],
-    getChildren: () => [],
   },
 }
 
@@ -131,23 +127,6 @@ export const useNested = (props: NestedProps) => {
     }
 
     return path
-  }
-
-  function getChildren (id: unknown) {
-    const arr: unknown[] = []
-    const queue = (children.value.get(id) ?? []).slice()
-
-    while (queue.length) {
-      const child = queue.shift()
-
-      if (!child) continue
-
-      arr.push(child)
-
-      queue.push(...(children.value.get(child) ?? []))
-    }
-
-    return arr
   }
 
   const vm = getCurrentInstance('nested')
@@ -230,8 +209,6 @@ export const useNested = (props: NestedProps) => {
       },
       children,
       parents,
-      getPath,
-      getChildren,
     },
   }
 
