@@ -120,6 +120,7 @@
 .v-field__input
   align-items: center
   color: inherit
+  column-gap: $field-input-column-gap
   display: flex
   flex-wrap: wrap
   letter-spacing: $field-letter-spacing
@@ -131,8 +132,14 @@
   padding-top: var(--v-field-input-padding-top)
   padding-bottom: var(--v-field-input-padding-bottom)
   position: relative
-  row-gap: $field-input-row-gap
   width: 100%
+
+  $root: &
+
+  @at-root
+    @include tools.density('v-input', $input-density) using ($modifier)
+      @at-root #{selector.nest(&, $root)}
+        row-gap: #{$field-input-row-gap + $modifier * .25}
 
   input
     letter-spacing: inherit
