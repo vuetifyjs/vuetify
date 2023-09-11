@@ -130,6 +130,17 @@ describe('VDialog.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render component with custom attributes and match snapshot', () => {
+    const wrapper = mountFunction({
+      attrs: {
+        'aria-labelledby': 'dialog-title',
+        'aria-describedby': 'dialog-description',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should open dialog on activator click', async () => {
     const input = jest.fn()
     const wrapper = mountFunction({
