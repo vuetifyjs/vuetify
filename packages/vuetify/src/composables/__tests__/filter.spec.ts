@@ -5,6 +5,7 @@ import { transformItem, transformItems } from '../list-items'
 // Utilities
 import { describe, expect, it } from '@jest/globals'
 import { nextTick, ref } from 'vue'
+import { deepEqual } from '@/util'
 
 describe('filter', () => {
   describe('defaultFilter', () => {
@@ -114,6 +115,7 @@ describe('filter', () => {
       itemChildren: 'children',
       itemProps: 'props',
       returnObject: false,
+      valueComparator: deepEqual,
     }
     const items = Array.from({ length: 50 }, (v, k) => ({
       text: `item-${k}`,
