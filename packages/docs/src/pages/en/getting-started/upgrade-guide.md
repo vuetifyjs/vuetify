@@ -138,6 +138,13 @@ app.use(vuetify)
 - Transition props `mode` and `origin` have been removed.
 - `avatar` prop is no longer needed and has been removed.
 
+### v-banner
+
+- The `actions` slot no longer provides a dismiss function.
+- `shaped` prop has been removed.
+- `icon-color` has been removed.
+- `single-line` has been replaced with `lines="one"`.
+
 ### v-btn/v-btn-toggle
 
 - `active-class` prop has been renamed to `selected-class`

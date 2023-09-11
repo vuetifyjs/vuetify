@@ -13,7 +13,8 @@
     "suffix": "Displays suffix text",
     "toggleKeys": "Array of key codes that will toggle the input (if it supports toggling)",
     "type": "Sets input type",
-    "counterValue": "Function returns the counter display text"
+    "counterValue": "Function returns the counter display text",
+    "role": "The role attribute applied to the input"
   },
   "events": {
     "blur": "Emitted when the input is blurred",
@@ -26,15 +27,8 @@
     "click:prepend": "Emitted when prepended icon is clicked",
     "click:append": "Emitted when append icon is clicked",
     "click:appendInner": "Emitted when appended inner icon is clicked",
-    "click:prependInner": "Emitted when prepended inner icon is clicked",
-    "click:control": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-text-field.json))",
-    "click:input": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-text-field.json))",
-    "update:focused": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-text-field.json))"
+    "click:prependInner": "Emitted when prepended inner icon is clicked"
   },
   "exposed": {
-    "reset": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-text-field.json))",
-    "resetValidation": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-text-field.json))",
-    "validate": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-text-field.json))",
-    "controlRef": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-text-field.json))"
   }
 }

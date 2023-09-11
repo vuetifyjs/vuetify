@@ -3,6 +3,7 @@
     <v-autocomplete
       v-model="model"
       :items="components"
+      autofocus
       auto-select-first
       base-color="disabled"
       chips
@@ -13,7 +14,6 @@
       persistent-clear
       placeholder="Search Vuetify API"
       prepend-inner-icon="mdi-database-search-outline"
-      return-object
       variant="outlined"
     >
       <template #chip="{ props, item }">
@@ -57,11 +57,15 @@
 
 <script setup>
   // Utilities
-  import { nextTick, ref, shallowRef, watch } from 'vue'
+  import { camelize, nextTick, ref, shallowRef, watch } from 'vue'
+  import { useRoute, useRouter } from 'vue-router'
+  import { kebabCase } from 'lodash-es'
+
+  const route = useRoute()
+  const router = useRouter()
 
   const files = import.meta.glob('../../../../api-generator/dist/api/*.json')
 
-  const model = ref()
   const search = shallowRef()
 
   const components = Object.keys(files).reduce((acc, cur) => {
@@ -92,6 +96,10 @@
     return acc
   }, [])
 
+  const name = route.params.name?.replace('/', '')
+  const pascalName = name ? `${name.charAt(0).toUpperCase()}${camelize(name.slice(1))}` : undefined
+  const model = ref(components.some(v => v.value === name) ? name : pascalName)
+
   const sections = ['props', 'events', 'slots', 'exposed', 'sass', 'options', 'argument', 'modifiers']
 
   watch(model, async () => {
@@ -100,5 +108,6 @@
     await nextTick()
 
     search.value.$el.querySelector('input').focus()
+    router.replace({ params: { name: kebabCase(model.value) } })
   })
 </script>

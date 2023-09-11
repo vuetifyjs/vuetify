@@ -270,7 +270,7 @@
       transform: none
 
     .v-field.v-field--active &
-      visibility: visible
+      visibility: unset
 
     .v-field--variant-solo &,
     .v-field--variant-solo-inverted &,
@@ -359,17 +359,16 @@
       transition: opacity $field-subtle-transition-timing
 
     &__start
+      flex: 0 0 $field-control-affixed-padding
       border-top-width: var(--v-field-border-width)
       border-bottom-width: var(--v-field-border-width)
       border-inline-start-width: var(--v-field-border-width)
 
-      $root: &
-
       @at-root
-        @include tools.density('v-input', $input-density) using ($modifier)
-          @at-root #{selector.nest(&, $root)}
-            flex: 0 0 #{$field-control-outlined-start-width + $modifier * .5}
-
+        #{selector.append('.v-field--rounded', &)},
+        #{selector.append('[class^="rounded-"]', &)},
+        #{selector.append('[class*=" rounded-"]', &)}
+          flex-basis: calc(var(--v-input-control-height) / 2 + 2px)
 
       @include tools.ltr()
         border-top-left-radius: inherit
@@ -425,11 +424,19 @@
 /* endregion */
 /* region LOADER */
 .v-field__loader
-  bottom: 0
+  top: calc(100% - 2px)
   left: 0
   position: absolute
   right: 0
   width: 100%
+  border-top-left-radius: 0
+  border-top-right-radius: 0
+  border-bottom-left-radius: inherit
+  border-bottom-right-radius: inherit
+  overflow: hidden
+
+  .v-field--variant-outlined &
+    top: calc(100% - 3px)
 
 /* endregion */
 /* region OVERLAY */

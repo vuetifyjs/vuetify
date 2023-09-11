@@ -266,6 +266,7 @@ export {
   mdiPageNext,
   mdiPalette,
   mdiPaletteOutline,
+  mdiPaletteSwatchOutline,
   mdiPaperclip,
   mdiPause,
   mdiPencil,

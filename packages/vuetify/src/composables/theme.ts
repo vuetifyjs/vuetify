@@ -113,6 +113,7 @@ const defaultThemeOptions: Exclude<ThemeOptions, false> = {
       colors: {
         background: '#FFFFFF',
         surface: '#FFFFFF',
+        'surface-bright': '#FFFFFF',
         'surface-variant': '#424242',
         'on-surface-variant': '#EEEEEE',
         primary: '#6200EE',
@@ -148,7 +149,8 @@ const defaultThemeOptions: Exclude<ThemeOptions, false> = {
       colors: {
         background: '#121212',
         surface: '#212121',
-        'surface-variant': '#BDBDBD',
+        'surface-bright': '#ccbfd6',
+        'surface-variant': '#a3a3a3',
         'on-surface-variant': '#424242',
         primary: '#BB86FC',
         'primary-darken-1': '#3700B3',
@@ -373,14 +375,16 @@ export function provideTheme (props: { theme?: string }) {
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
   const name = computed<string>(() => {
-    return props.theme ?? theme?.name.value
+    return props.theme ?? theme.name.value
   })
+  const current = computed(() => theme.themes.value[name.value])
 
   const themeClasses = computed(() => theme.isDisabled ? undefined : `v-theme--${name.value}`)
 
   const newTheme: ThemeInstance = {
     ...theme,
     name,
+    current,
     themeClasses,
   }
 

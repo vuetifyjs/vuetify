@@ -1,3 +1,4 @@
+import { execSync } from 'child_process'
 import stringifyObject from 'stringify-object'
 import prettier from 'prettier'
 import typescriptParser from 'prettier/esm/parser-typescript.mjs'
@@ -111,14 +112,16 @@ async function loadLocale (componentName: string, locale: string): Promise<Recor
     return data.default
   } catch (err) {
     if (err.code === 'ERR_MODULE_NOT_FOUND') {
-      console.error(`Missing locale for ${cacheKey}`)
+      console.error(`\x1b[35mMissing locale for ${cacheKey}\x1b[0m`)
       localeCache.set(cacheKey, {})
     } else {
-      console.error(err.message)
+      console.error('\x1b[31m', err.message, '\x1b[0m')
     }
     return {}
   }
 }
+
+const currentBranch = execSync('git branch --show-current', { encoding: 'utf-8' }).trim()
 
 async function getSources (name: string, locale: string, sources: string[]) {
   const arr = await Promise.all([
@@ -126,13 +129,19 @@ async function getSources (name: string, locale: string, sources: string[]) {
     ...sources.map(source => loadLocale(source, locale)),
     loadLocale('generic', locale),
   ])
+  const sourcesMap = [name, ...sources, 'generic']
 
   return {
-    find: (section: string, key?: string) => {
-      return arr.reduce((str, source) => {
-        if (str) return str
-        return key ? source?.[section]?.[key] : source?.[section]
-      }, null) ?? 'MISSING DESCRIPTION'
+    find: (section: string, key: string, ogSource = name) => {
+      for (let i = 0; i < arr.length; i++) {
+        const source = arr[i]
+        const found: string | undefined = source?.[section]?.[key]
+        if (found) {
+          return { text: found, source: sourcesMap[i] }
+        }
+      }
+      const githubUrl = `https://github.com/vuetifyjs/vuetify/tree/${currentBranch}/packages/api-generator/src/locale/${locale}/${ogSource}.json`
+      return { text: `MISSING DESCRIPTION ([edit in github](${githubUrl}))`, source: name }
     },
   }
 }
@@ -143,9 +152,12 @@ export async function addDescriptions (name: string, componentData: ComponentDat
 
     for (const section of ['props', 'slots', 'events', 'exposed'] as const) {
       for (const [propName, propObj] of Object.entries(componentData[section] ?? {})) {
-        (propObj as any).description = (propObj as any).description ?? {}
+        propObj.description = propObj.description ?? {}
+        propObj.descriptionSource = propObj.descriptionSource ?? {}
 
-        ;(propObj as any).description[locale] = descriptions.find(section, propName)
+        const found = descriptions.find(section, propName, propObj.source)
+        propObj.description![locale] = found.text
+        propObj.descriptionSource![locale] = found.source
       }
     }
   }
@@ -164,7 +176,7 @@ export async function addDirectiveDescriptions (
       for (const [name, arg] of Object.entries(componentData.argument)) {
         arg.description = arg.description ?? {}
 
-        arg.description[locale] = descriptions.find('argument', name)
+        arg.description[locale] = descriptions.find('argument', name)?.text
       }
     }
 
@@ -172,7 +184,7 @@ export async function addDirectiveDescriptions (
       for (const [name, modifier] of Object.entries(componentData.modifiers)) {
         modifier.description = modifier.description ?? {}
 
-        modifier.description[locale] = descriptions.find('modifiers', name)
+        modifier.description[locale] = descriptions.find('modifiers', name)?.text
       }
     }
   }
@@ -216,7 +228,7 @@ export function prettifyType (name: string, item: Definition) {
       trailingComma: 'all',
     })
   } catch (err) {
-    console.error(`${name}:`, err.message)
+    console.error('\x1b[31m', `${name}:`, err.message, '\x1b[0m')
     return item
   }
 
