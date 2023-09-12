@@ -9,6 +9,10 @@ related:
   - /features/treeshaking/
 ---
 
+<script setup>
+  import SassApi from '@/components/features/SassApi.vue'
+</script>
+
 # SASS variables
 
 Vuetify uses **SASS/SCSS** to craft the style and appearance of all aspects of the framework.
@@ -27,42 +31,21 @@ Vuetify works out of the box without any additional compilers needing to be inst
 
 To begin modifying Vuetify's internal variables, install the [sass](https://sass-lang.com/) pre-processor:
 
-<DocTabs>
-  <template #tabs>
-    <v-tab value="vite" variant="plain">Vite</v-tab>
-    <v-tab value="vue-cli" variant="plain">Vue CLI</v-tab>
-  </template>
-  <template #content>
-  <v-window-item value="vite">
+::: tabs
 
-```bash
-  # yarn
+```bash [yarn]
   yarn install -D sass
-
-  #npm
-  npm install -D sass
-
-  #pnpm
-  pnpm install -D sass
 ```
 
-  </v-window-item>
-  <v-window-item value="vue-cli">
-
-```bash
-  # yarn
-  yarn install -D sass-loader sass
-
-  # npm
+```bash [npm]
   npm install -D sass-loader sass
+```
 
-  #pnpm
+```bash [pnpm]
   pnpm install -D sass-loader sass
 ```
 
-  </v-window-item>
-  </template>
-</DocTabs>
+:::
 
 For additional details about css-pre-processors, please refer to the official vite page at: https://vitejs.dev/guide/features.html#css-pre-processors or official vue-cli-page at: https://cli.vuejs.org/guide/css.html#pre-processors
 
@@ -105,21 +88,15 @@ Follow the plugin setup guide from [treeshaking](/features/treeshaking/) then ad
 If you were using the basic technique from above, make sure to remove it and switch back to `import 'vuetify/styles'`.
 You can keep `main.scss` for other style overrides but don't do both or you'll end up with duplicated styles.
 
-Available SASS variables are located on each component's API page.
-
-![image](https://github.com/vuetifyjs/vuetify/assets/9064066/967da002-5a9e-4bce-8285-1fa9b849e36d "VBtn SASS Variables")
-
-<!--
 ## Variable API
 
 There are many SASS/SCSS variables that can be customized across the entire Vuetify framework. You can browse all the variables using the tool below:
 
-::: info
-  Some color-related variables for components are defined in the global material-theme variables: `$material-light` / `$material-dark`
-:::
+<sass-api />
 
- <sass-api />
--->
+Available SASS variables are located on each component's API page.
+
+![image](https://github.com/vuetifyjs/vuetify/assets/9064066/967da002-5a9e-4bce-8285-1fa9b849e36d "VBtn SASS Variables")
 
 ## Usage in templates
 

@@ -7,7 +7,7 @@ import { VLabel } from '@/components/VLabel'
 import { makeSelectionControlGroupProps, VSelectionControlGroupSymbol } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Composables
-import { useTextColor } from '@/composables/color'
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { useDensity } from '@/composables/density'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -36,6 +36,8 @@ export type SelectionControlSlot = {
   model: WritableComputedRef<any>
   textColorClasses: Ref<string[]>
   textColorStyles: Ref<CSSProperties>
+  backgroundColorClasses: Ref<string[]>
+  backgroundColorStyles: Ref<CSSProperties>
   inputNode: VNode
   icon: IconValue | undefined
   props: {
@@ -46,7 +48,10 @@ export type SelectionControlSlot = {
 }
 
 export type VSelectionControlSlots = {
-  default: never
+  default: {
+    backgroundColorClasses: Ref<string[]>
+    backgroundColorStyles: Ref<CSSProperties>
+  }
   label: { label: string | undefined, props: Record<string, unknown> }
   input: SelectionControlSlot
 }
@@ -114,6 +119,13 @@ export function useSelectionControl (
       !props.disabled
     ) ? props.color : undefined
   }))
+  const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => {
+    return (
+      model.value &&
+      !props.error &&
+      !props.disabled
+    ) ? props.color : undefined
+  }))
   const icon = computed(() => model.value ? props.trueIcon : props.falseIcon)
 
   return {
@@ -124,6 +136,8 @@ export function useSelectionControl (
     model,
     textColorClasses,
     textColorStyles,
+    backgroundColorClasses,
+    backgroundColorStyles,
     icon,
   }
 }
@@ -155,6 +169,8 @@ export const VSelectionControl = genericComponent<new <T>(
       model,
       textColorClasses,
       textColorStyles,
+      backgroundColorClasses,
+      backgroundColorStyles,
       trueValue,
     } = useSelectionControl(props)
     const uid = getUid()
@@ -240,7 +256,10 @@ export const VSelectionControl = genericComponent<new <T>(
             ]}
             style={ textColorStyles.value }
           >
-            { slots.default?.() }
+            { slots.default?.({
+              backgroundColorClasses,
+              backgroundColorStyles,
+            })}
 
             <div
               class={[
@@ -256,6 +275,8 @@ export const VSelectionControl = genericComponent<new <T>(
                 model,
                 textColorClasses,
                 textColorStyles,
+                backgroundColorClasses,
+                backgroundColorStyles,
                 inputNode,
                 icon: icon.value,
                 props: {
@@ -274,7 +295,7 @@ export const VSelectionControl = genericComponent<new <T>(
           </div>
 
           { label && (
-            <VLabel for={ id.value } clickable>
+            <VLabel for={ id.value } clickable onClick={ (e: Event) => e.stopPropagation() }>
               { label }
             </VLabel>
           )}

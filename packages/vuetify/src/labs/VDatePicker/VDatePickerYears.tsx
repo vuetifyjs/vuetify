@@ -13,10 +13,10 @@ import { convertToUnit, createRange, genericComponent, propsFactory, useRender }
 
 export const makeVDatePickerYearsProps = propsFactory({
   color: String,
-  min: Number,
-  max: Number,
   height: [String, Number],
   displayDate: null,
+  min: [Number, String, Date],
+  max: [Number, String, Date],
 }, 'VDatePickerYears')
 
 export const VDatePickerYears = genericComponent()({
@@ -26,15 +26,15 @@ export const VDatePickerYears = genericComponent()({
 
   emits: {
     'update:displayDate': (date: any) => true,
-    'update:viewMode': (date: any) => true,
+    'click:mode': () => true,
   },
 
   setup (props, { emit }) {
     const adapter = useDate()
     const displayYear = computed(() => adapter.getYear(props.displayDate ?? new Date()))
     const years = computed(() => {
-      const min = props.min ?? displayYear.value - 50 - 2
-      const max = props.max ?? displayYear.value + 50
+      const min = props.min ? adapter.date(props.min).getFullYear() : displayYear.value - 100
+      const max = props.max ? adapter.date(props.max).getFullYear() : displayYear.value + 50
 
       return createRange(max - min, min)
     })
@@ -52,19 +52,24 @@ export const VDatePickerYears = genericComponent()({
         }}
       >
         <div class="v-date-picker-years__content">
-          { years.value.map(year => (
-            <VBtn
-              ref={ year === displayYear.value ? yearRef : undefined }
-              variant={ year === displayYear.value ? 'flat' : 'text' }
-              rounded="xl"
-              active={ year === displayYear.value }
-              color={ year === displayYear.value ? props.color : undefined }
-              onClick={ () => {
-                emit('update:displayDate', adapter.setYear(props.displayDate, year))
-                emit('update:viewMode', 'month')
-              }}
-            >{ year }</VBtn>
-          ))}
+          { years.value.map(year => {
+            function onClick () {
+              emit('update:displayDate', adapter.setYear(props.displayDate, year))
+              emit('click:mode')
+            }
+
+            return (
+              <VBtn
+                ref={ year === displayYear.value ? yearRef : undefined }
+                active={ year === displayYear.value }
+                color={ year === displayYear.value ? props.color : undefined }
+                rounded="xl"
+                text={ String(year) }
+                variant={ year === displayYear.value ? 'flat' : 'text' }
+                onClick={ onClick }
+              />
+            )
+          })}
         </div>
       </div>
     ))

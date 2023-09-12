@@ -5,15 +5,19 @@ import './VDatePickerControls.sass'
 import { VBtn } from '@/components/VBtn'
 import { VSpacer } from '@/components/VGrid'
 
-// Composables
-import { useDate } from '@/labs/date'
-
 // Utilities
 import { computed } from 'vue'
-import { dateEmits, makeDateProps } from '../VDateInput/composables'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
 
 export const makeVDatePickerControlsProps = propsFactory({
+  displayDate: String,
+  disabled: {
+    type: [Boolean, String, Array] as PropType<boolean | string | string[]>,
+    default: false,
+  },
   nextIcon: {
     type: [String],
     default: '$next',
@@ -30,12 +34,10 @@ export const makeVDatePickerControlsProps = propsFactory({
     type: [String],
     default: '$collapse',
   },
-  range: {
-    default: false,
-    type: [Boolean, String],
-    validator: (v: any) => v === false || ['start', 'end'].includes(v),
+  viewMode: {
+    type: String as PropType<'month' | 'year'>,
+    default: 'month',
   },
-  ...omit(makeDateProps(), ['modelValue', 'inputMode']),
 }, 'VDatePickerControls')
 
 export const VDatePickerControls = genericComponent()({
@@ -44,52 +46,76 @@ export const VDatePickerControls = genericComponent()({
   props: makeVDatePickerControlsProps(),
 
   emits: {
-    ...omit(dateEmits, ['update:modelValue', 'update:inputMode']),
+    'click:mode': () => true,
+    'click:prev': () => true,
+    'click:next': () => true,
   },
 
   setup (props, { emit }) {
-    const adapter = useDate()
-    const monthAndYear = computed(() => {
-      const month = props.range === 'end' ? adapter.addMonths(props.displayDate, 1) : props.displayDate
-      return adapter.format(month, 'monthAndYear')
+    const modeIcon = computed(() => {
+      return props.viewMode === 'month' ? props.expandIcon : props.collapseIcon
+    })
+    const disableMode = computed(() => {
+      return Array.isArray(props.disabled)
+        ? props.disabled.includes('mode')
+        : !!props.disabled
+    })
+    const disablePrev = computed(() => {
+      return Array.isArray(props.disabled)
+        ? props.disabled.includes('prev')
+        : !!props.disabled
+    })
+    const disableNext = computed(() => {
+      return Array.isArray(props.disabled)
+        ? props.disabled.includes('next')
+        : !!props.disabled
     })
 
+    function onClickPrev () {
+      emit('click:prev')
+    }
+
+    function onClickNext () {
+      emit('click:next')
+    }
+
+    function onClickMode () {
+      emit('click:mode')
+    }
+
     useRender(() => {
-      const prevBtn = (
-        <VBtn
-          variant="text"
-          icon={ props.prevIcon }
-          onClick={ () => emit('update:displayDate', adapter.addMonths(props.displayDate, -1)) }
-        />
-      )
-
-      const nextBtn = (
-        <VBtn
-          variant="text"
-          icon={ props.nextIcon }
-          onClick={ () => emit('update:displayDate', adapter.addMonths(props.displayDate, 1)) }
-        />
-      )
-
       return (
         <div class="v-date-picker-controls">
-          { props.viewMode === 'month' && props.range === 'start' && prevBtn }
-          { !!props.range && <VSpacer key="range-spacer" /> }
-          <div class="v-date-picker-controls__date">{ monthAndYear.value }</div>
+          <div class="v-date-picker-controls__date">{ props.displayDate }</div>
+
           <VBtn
+            disabled={ disableMode.value }
             key="expand-btn"
+            icon={ modeIcon.value }
             variant="text"
-            icon={ props.viewMode === 'month' ? props.expandIcon : props.collapseIcon }
-            onClick={ () => emit('update:viewMode', props.viewMode === 'month' ? 'year' : 'month') }
+            onClick={ onClickMode }
           />
+
           <VSpacer />
-          { (props.viewMode === 'month' && !props.range) && (
-            <div class="v-date-picker-controls__month" key="month-buttons">
-              { prevBtn }
-              { nextBtn }
-            </div>
-          )}
-          { props.viewMode === 'month' && props.range === 'end' && nextBtn }
+
+          <div
+            key="month-buttons"
+            class="v-date-picker-controls__month"
+          >
+            <VBtn
+              disabled={ disablePrev.value }
+              icon={ props.prevIcon }
+              variant="text"
+              onClick={ onClickPrev }
+            />
+
+            <VBtn
+              disabled={ disableNext.value }
+              icon={ props.nextIcon }
+              variant="text"
+              onClick={ onClickNext }
+            />
+          </div>
         </div>
       )
     })

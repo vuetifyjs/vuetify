@@ -1,14 +1,11 @@
 <template>
   <v-sheet
     id="home-sponsors"
-    class="mx-auto pa-3 pb-12"
+    class="mx-auto pa-3"
     color="transparent"
     max-width="700"
   >
-    <v-responsive
-      class="mb-12"
-      min-height="500"
-    >
+    <v-responsive min-height="500">
       <v-row
         dense
         justify="center"
@@ -29,6 +26,9 @@
         </v-col>
       </v-row>
     </v-responsive>
+
+    <br>
+    <br>
 
     <sponsor-link size="large" />
   </v-sheet>

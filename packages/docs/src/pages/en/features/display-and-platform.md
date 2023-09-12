@@ -26,7 +26,7 @@ This enables you to control various aspects of your application based upon the w
 
 The following shows how to access the application's display information:
 
-```html { resource="Component.vue" }
+```html { resource="Composition.vue" }
 <script setup>
   import { onMounted } from 'vue'
   import { useDisplay } from 'vuetify'
@@ -41,7 +41,7 @@ The following shows how to access the application's display information:
 
 If you are still using the Options API, you can access the display information on the global **$vuetify** variable. Note that refs are unwrapped here, so you don't need `.value`.
 
-```html
+```html { resource="Options.vue" }
 <script>
   export default {
     mounted () {
@@ -57,7 +57,7 @@ If you are still using the Options API, you can access the display information o
 
 | Component | Description |
 | - | - |
-| [useDisplay](/api/useDisplay/) | Composable |
+| [useDisplay](/api/use-display/) | Composable |
 
 ## Options
 

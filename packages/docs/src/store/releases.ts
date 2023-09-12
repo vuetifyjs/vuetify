@@ -47,6 +47,8 @@ export const useReleasesStore = defineStore('releases', {
       this.page++
     },
     async find (tag: string) {
+      if (!tag.startsWith('v')) tag = `v${tag}`
+
       const found = this.releases.find(release => release.tag_name === tag)
 
       if (found) return found
@@ -54,8 +56,6 @@ export const useReleasesStore = defineStore('releases', {
       this.isLoading = true
 
       let res: any
-
-      if (!tag.startsWith('v')) tag = `v${tag}`
 
       if (tag.length >= 6) {
         res = await octokit.request(`GET /repos/vuetifyjs/vuetify/releases/tags/${tag}`)

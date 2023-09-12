@@ -14,7 +14,7 @@
     html: true,
     linkify: true,
     typographer: true,
-  }))
+  }), { headerSections: false })
 
   md.core.ruler.after('linkify', 'gh_links', state => {
     const blockTokens = state.tokens
