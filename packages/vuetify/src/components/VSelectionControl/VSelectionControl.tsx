@@ -231,6 +231,18 @@ export const VSelectionControl = genericComponent<new <T>(
         />
       )
 
+      const labelNode = (
+        <VLabel
+          key="label"
+          class={ props.reverse ? 'v-label--prepend' : 'v-label--append' }
+          for={ id.value }
+          clickable
+          onClick={ (e: Event) => e.stopPropagation() }
+        >
+          { label }
+        </VLabel>
+      )
+
       return (
         <div
           class={[
@@ -249,11 +261,7 @@ export const VSelectionControl = genericComponent<new <T>(
           { ...rootAttrs }
           style={ props.style }
         >
-          { props.reverse && label && (
-            <VLabel key="label_prepend" class={['v-label--prepend']} for={ id.value } clickable onClick={ (e: Event) => e.stopPropagation() }>
-              { label }
-            </VLabel>
-          )}
+          { props.reverse && label && labelNode}
 
           <div
             class={[
@@ -300,11 +308,7 @@ export const VSelectionControl = genericComponent<new <T>(
             </div>
           </div>
 
-          { !props.reverse && label && (
-            <VLabel key="label_append" class={['v-label--append']} for={ id.value } clickable onClick={ (e: Event) => e.stopPropagation() }>
-              { label }
-            </VLabel>
-          )}
+          { !props.reverse && label && labelNode}
         </div>
       )
     })
