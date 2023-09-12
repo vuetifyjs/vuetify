@@ -107,7 +107,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
 
       return (
         <VInput
-          baseColor= { color.value }
+          baseColor={ color.value }
           class={[
             'v-slider',
             {

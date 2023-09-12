@@ -95,7 +95,7 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
 
       return (
         <VInput
-          baseColor= { color.value }
+          baseColor={ color.value }
           class={[
             'v-switch',
             { 'v-switch--inset': props.inset },
