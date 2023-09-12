@@ -8,11 +8,14 @@ import { defineStore } from 'pinia'
 import { reactive, toRefs } from 'vue'
 
 export type RootState = {
-  v: 2
+  v: 2 | 3
   api: 'link-only' | 'inline'
   dev: boolean
+  disableAds: boolean
   composition: ('options' | 'composition')
   pwaRefresh: boolean
+  slashSearch: boolean
+  syncSettings: boolean
   theme: string
   mixedTheme: boolean
   direction: 'rtl' | 'ltr'
@@ -72,7 +75,6 @@ type SavedState = {
   theme: string
   mixedTheme: boolean
   direction: 'rtl' | 'ltr'
-  quickbar?: boolean
   notifications: {
     show?: boolean
     read: string[]
@@ -89,14 +91,17 @@ type SavedState = {
 
 export const useUserStore = defineStore('user', () => {
   const state = reactive<RootState>({
-    v: 2,
+    v: 3,
     api: 'link-only',
     dev: false,
+    disableAds: false,
     composition: 'options',
     pwaRefresh: true,
     theme: 'system',
     mixedTheme: true,
     direction: 'ltr',
+    slashSearch: false,
+    syncSettings: true,
     quickbar: true,
     notifications: {
       show: true,
@@ -150,6 +155,12 @@ export const useUserStore = defineStore('user', () => {
       if (!Array.isArray(data.notifications.last.banner)) {
         data.notifications.last.banner = []
       }
+    }
+
+    if (data.v === 2) {
+      data.syncSettings = true
+      data.disableAds = false
+      data.v = 3
     }
 
     data.v = state.v

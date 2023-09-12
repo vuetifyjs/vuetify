@@ -295,6 +295,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                             fieldClass,
                             'v-textarea__sizer',
                           ]}
+                          id={ `${slotProps.id}-sizer` }
                           v-model={ model.value }
                           ref={ sizerRef }
                           readonly

@@ -39,5 +39,6 @@
     'Side navigation',
     'Three column',
     'Discord',
+    'Steam',
   ].map(wireframe => ([wireframe, kebabCase(wireframe)]))
 </script>
