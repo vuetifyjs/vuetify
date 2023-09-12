@@ -90,7 +90,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       )
     })
     return {}
-  }
+  },
 })
 
 export type VTreeviewItem = InstanceType<typeof VTreeviewItem>

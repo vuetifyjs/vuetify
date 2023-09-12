@@ -14,8 +14,8 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey } from 'vue'
-import type { ListItem } from '@/composables/list-items'
 import type { VListChildrenSlots } from '@/components/VList/VListChildren'
+import type { ListItem } from '@/composables/list-items'
 import type { GenericProps } from '@/util'
 
 export interface TreeViewProvide {
