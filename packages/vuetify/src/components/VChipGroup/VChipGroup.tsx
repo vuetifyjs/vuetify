@@ -1,7 +1,7 @@
 // Styles
 import './VChipGroup.sass'
 
-//Components
+// Components
 import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'
 
 // Composables
@@ -57,7 +57,7 @@ export const VChipGroup = genericComponent<VChipGroupSlots>()({
   },
 
   setup (props, { slots }) {
-    const [ slideGroupProps ] = VSlideGroup.filterProps(props)
+    const [slideGroupProps] = VSlideGroup.filterProps(props)
     const { themeClasses } = provideTheme(props)
     const { isSelected, select, next, prev, selected } = useGroup(props, VChipGroupSymbol)
 
