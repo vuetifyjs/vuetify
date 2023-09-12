@@ -21,10 +21,10 @@
           <slot
             name="row"
             v-bind="{
-              ...item,
               props: {
                 class: 'bg-surface-bright'
-              }
+              },
+              item,
             }"
           />
 
@@ -41,6 +41,10 @@
 
               <p v-if="user.dev && item.source">
                 <strong>source: {{ item.source }}</strong>
+                <template v-if="user.dev && item.descriptionSource && item.source !== item.descriptionSource">
+                  <br>
+                  <strong>description source: {{ item.descriptionSource }}</strong>
+                </template>
               </p>
             </td>
           </tr>

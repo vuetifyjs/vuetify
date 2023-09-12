@@ -25,8 +25,9 @@
     "update:list-index": "Emitted when menu item is selected using keyboard arrows",
     "update:search-input": "The `search-input.sync` event"
   },
+  "slots": {
+    "item": "Define a custom item appearance. The root element of this slot must be a **v-list-item** with `v-bind=\"props\"` applied. `props` includes everything required for the default select list behaviour - including title, value, click handlers, virtual scrolling, and anything else that has been added with [`item-props`](api/v-select/#props-item-props)."
+  },
   "exposed": {
-    "menu": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-select.json))",
-    "select": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-select.json))"
   }
 }

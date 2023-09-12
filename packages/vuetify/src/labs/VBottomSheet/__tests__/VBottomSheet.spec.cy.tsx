@@ -16,7 +16,6 @@ describe('VBottomSheet', () => {
     ))
       .get('.v-bottom-sheet')
       .should('have.not.class', 'v-bottom-sheet--inset')
-      .percySnapshot()
       .setProps({ inset: true })
       .get('.v-bottom-sheet')
       .should('have.class', 'v-bottom-sheet--inset')

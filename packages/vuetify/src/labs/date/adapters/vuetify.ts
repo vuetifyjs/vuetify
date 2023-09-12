@@ -307,6 +307,8 @@ function isWithinRange (date: Date, range: [Date, Date]) {
 }
 
 function isValid (date: any) {
+  if (!date || date == null) return false
+
   const d = new Date(date)
 
   return d instanceof Date && !isNaN(d.getTime())
@@ -350,6 +352,14 @@ function setYear (date: Date, year: number) {
   const d = new Date(date)
   d.setFullYear(year)
   return d
+}
+
+function startOfDay (date: Date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate())
+}
+
+function endOfDay (date: Date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999)
 }
 
 export class VuetifyDateAdapter implements DateAdapter<Date> {
@@ -437,6 +447,14 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   getMonth (date: Date) {
     return getMonth(date)
+  }
+
+  startOfDay (date: Date) {
+    return startOfDay(date)
+  }
+
+  endOfDay (date: Date) {
+    return endOfDay(date)
   }
 
   startOfYear (date: Date) {

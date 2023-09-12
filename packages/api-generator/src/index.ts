@@ -14,14 +14,7 @@ import rimraf from 'rimraf'
 import { createWebTypesApi } from './web-types'
 import inspector from 'inspector'
 import yargs from 'yargs'
-import { execSync } from 'child_process'
 import { parseSassVariables } from './helpers/sass'
-
-type TranslationData = {
-  [type in 'props' | 'events' | 'slots' | 'exposed']?: {
-    [name in string]?: string
-  }
-}
 
 const yar = yargs(process.argv.slice(2))
   .option('components', {
@@ -33,9 +26,10 @@ const yar = yargs(process.argv.slice(2))
   .option('skip-composables', {
     type: 'boolean',
   })
-  .option('missing-descriptions', {
-    type: 'boolean',
-  })
+
+const reset = '\x1b[0m'
+const red = '\x1b[31m'
+const blue = '\x1b[34m'
 
 const componentsInfo = {
   ...importMap.components,
@@ -87,70 +81,10 @@ const run = async () => {
     }).filter(Boolean)
   )
 
-  // Missing descriptions
-  if (argv.missingDescriptions) {
-    const currentBranch = execSync('git branch --show-current', { encoding: 'utf-8' }).trim()
-    const translations: { [filename in string]?: TranslationData } = {}
-
-    async function readData (filename: string): Promise<TranslationData> {
-      if (!(filename in translations)) {
-        try {
-          const data = JSON.parse(await fs.readFile(filename, 'utf-8'))
-
-          for (const type of ['props', 'events', 'slots', 'exposed']) {
-            for (const item in data[type] ?? {}) {
-              if (data[type][item].startsWith('MISSING DESCRIPTION')) {
-                delete data[type][item]
-              }
-            }
-          }
-
-          translations[filename] = data
-        } catch (e) {
-          translations[filename] = {}
-        }
-      }
-
-      return translations[filename]
-    }
-
-    for (const component of componentData) {
-      for (const type of ['props', 'events', 'slots', 'exposed']) {
-        for (const name in component[type]) {
-          if (type === 'props' && !component[type][name].source) {
-            console.warn(`Missing source for ${component.displayName} ${type}: ${name}`)
-          }
-
-          const filename = type === 'props'
-            ? component[type][name].source ?? component.displayName
-            : component.displayName
-
-          for (const locale of locales) {
-            const sourceData = await readData(`./src/locale/${locale}/${filename}.json`)
-            const githubUrl = `https://github.com/vuetifyjs/vuetify/tree/${currentBranch}/packages/api-generator/src/locale/${locale}/${filename}.json`
-
-            sourceData[type] ??= {}
-            sourceData[type][name] ??= `MISSING DESCRIPTION ([edit in github](${githubUrl}))`
-          }
-        }
-      }
-    }
-
-    for (const filename in translations) {
-      try {
-        await fs.writeFile(filename, JSON.stringify(translations[filename], null, 2) + '\n')
-      } catch (e: unknown) {
-        console.error(filename, e)
-      }
-    }
-
-    process.exit()
-  }
-
   // Composables
   if (!argv.skipComposables) {
     const composables = await Promise.all(generateComposableDataFromTypes().map(async composable => {
-      console.log(composable.name)
+      console.log(blue, composable.name, reset)
       const kebabName = kebabCase(composable.name)
       await addDescriptions(composable.name, composable.data, locales)
       return { fileName: kebabName, displayName: composable.name, ...composable }
@@ -166,7 +100,7 @@ const run = async () => {
   if (!argv.skipDirectives) {
     directives = await Promise.all(generateDirectiveDataFromTypes().map(async directive => {
       const name = `v-${kebabCase(directive.name)}`
-      console.log(name)
+      console.log(blue, name, reset)
       await addDirectiveDescriptions(name, directive, locales)
 
       return { fileName: name, displayName: name, ...directive }

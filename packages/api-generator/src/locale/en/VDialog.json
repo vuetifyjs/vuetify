@@ -17,11 +17,11 @@
     "keydown": "Event that fires when key is pressed. If dialog is active and not using the **persistent** prop, the **esc** key will deactivate it."
   },
   "exposed": {
-    "activatorEl": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-dialog.json))",
-    "animateClick": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-dialog.json))",
-    "contentEl": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-dialog.json))",
-    "globalTop": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-dialog.json))",
-    "localTop": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-dialog.json))",
-    "updateLocation": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-dialog.json))"
+    "activatorEl": "Ref to the current activator element.",
+    "animateClick": "Function invoked when user clicks outside the component and the **persistent** prop is used.",
+    "contentEl": "Ref to the current content element.",
+    "globalTop": "Used by activator to determine a components position in the global stack order.",
+    "localTop": "Used by activator to determine a components position in the local stack order.",
+    "updateLocation": "Function used for locationStrategy positioning."
   }
 }

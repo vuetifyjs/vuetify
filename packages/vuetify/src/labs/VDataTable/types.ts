@@ -1,6 +1,7 @@
 // Types
 import type { GroupableItem } from './composables/group'
 import type { SelectableItem } from './composables/select'
+import type { InternalItem } from '@/composables/filter'
 import type { SelectItemKey } from '@/util'
 
 export type DataTableCompareFunction<T = any> = (a: T, b: T) => number
@@ -30,7 +31,7 @@ export type InternalDataTableHeader = DataTableHeader & {
   lastFixed?: boolean
 }
 
-export interface DataTableItem<T = any> extends GroupableItem<T>, SelectableItem {
+export interface DataTableItem<T = any> extends InternalItem<T>, GroupableItem<T>, SelectableItem {
   key: any
   index: number
   columns: {

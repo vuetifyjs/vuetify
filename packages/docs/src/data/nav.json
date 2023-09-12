@@ -75,7 +75,12 @@
     "activeIcon": "mdi-view-dashboard",
     "items": [
       "all",
-      { "title": "explorer", "subtitle": "browse-components" },
+      {
+        "title": "explorer",
+        "routeMatch": "explorer/:name(.*)",
+        "routePath": "explorer",
+        "subtitle": "browse-components"
+      },
       { "divider": true },
       { "subheader": "containment" },
       "buttons",
