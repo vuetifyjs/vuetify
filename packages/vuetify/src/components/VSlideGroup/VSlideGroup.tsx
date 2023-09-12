@@ -6,8 +6,8 @@ import { VFadeTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { useDisplay } from '@/composables'
 import { makeComponentProps } from '@/composables/component'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { IconValue } from '@/composables/icons'
 import { useRtl } from '@/composables/locale'
@@ -68,6 +68,7 @@ export const makeVSlideGroupProps = propsFactory({
   },
 
   ...makeComponentProps(),
+  ...makeDisplayProps(),
   ...makeTagProps(),
   ...makeGroupProps({
     selectedClass: 'v-slide-group-item--active',
@@ -85,7 +86,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
 
   setup (props, { slots }) {
     const { isRtl } = useRtl()
-    const { mobile } = useDisplay()
+    const { displayClasses, mobile } = useDisplay(props)
     const group = useGroup(props, props.symbol)
     const isOverflowing = shallowRef(false)
     const scrollOffset = shallowRef(0)
@@ -349,6 +350,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
             'v-slide-group--has-affixes': hasAffixes.value,
             'v-slide-group--is-overflowing': isOverflowing.value,
           },
+          displayClasses.value,
           props.class,
         ]}
         style={ props.style }

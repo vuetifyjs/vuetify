@@ -3,6 +3,7 @@ import './VPicker.sass'
 
 // Components
 import { VPickerTitle } from './VPickerTitle'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
 import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 
 // Utilities
@@ -63,9 +64,18 @@ export const VPicker = genericComponent<VPickerSlots>()({
           </div>
 
           { slots.actions?.()[0]?.children && (
-            <div class="v-picker__actions">
-              { slots.actions() }
-            </div>
+            <VDefaultsProvider
+              defaults={{
+                VBtn: {
+                  slim: true,
+                  variant: 'text',
+                },
+              }}
+            >
+              <div class="v-picker__actions">
+                { slots.actions() }
+              </div>
+            </VDefaultsProvider>
           )}
         </VSheet>
       )

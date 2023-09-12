@@ -71,10 +71,9 @@
           </template>
         </v-list-item>
 
-        <v-card-text
-          class="text-medium-emphasis py-0"
-          v-text="job.description"
-        />
+        <v-card-text class="text-medium-emphasis py-0">
+          <app-markdown :content="job.description" />
+        </v-card-text>
 
         <div class="text-end text-caption text-disabled mb-1 me-2">
           via {{ job.via }}

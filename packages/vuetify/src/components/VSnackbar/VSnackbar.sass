@@ -17,6 +17,7 @@
     max-width: $snackbar-wrapper-max-width
     min-height: $snackbar-wrapper-min-height
     min-width: $snackbar-wrapper-min-width
+    overflow: hidden
     padding: $snackbar-wrapper-padding
 
     @include tools.rounded($snackbar-border-radius)
@@ -43,6 +44,14 @@
     & > .v-btn
       padding: $snackbar-btn-padding
       min-width: auto
+
+  &__timer
+    width: 100%
+    position: absolute
+    top: 0
+
+    .v-progress-linear
+      transition: .2s linear
 
   &--absolute
     position: absolute
