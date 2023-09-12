@@ -75,7 +75,7 @@ export const makeVCardProps = propsFactory({
     pointerHeight: 10,
     pointerWidth: 20,
     pointerPosition: 50,
-    pointerSide: 'bottom' as const
+    pointerSide: 'bottom' as const,
   }),
   ...makeTagProps(),
   ...makeThemeProps(),
@@ -136,10 +136,10 @@ export const VCard = genericComponent<VCardSlots>()({
             'v-card',
             'v-card__container',
             `v-card__container--${props.variant}`,
-            speechBubbleClasses.value
+            speechBubbleClasses.value,
           ]}
           style={[
-            speechBubbleStyles.value
+            speechBubbleStyles.value,
           ]}
         >
           <Tag
@@ -168,7 +168,7 @@ export const VCard = genericComponent<VCardSlots>()({
               dimensionStyles.value,
               locationStyles.value,
               props.style,
-              speechBubbleStyles.value
+              speechBubbleStyles.value,
             ]}
             href={ link.href.value }
             onClick={ isClickable.value && link.navigate }
