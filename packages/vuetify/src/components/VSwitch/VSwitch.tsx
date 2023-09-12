@@ -126,15 +126,26 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
               >
                 {{
                   ...slots,
-                  default: () => (<div class="v-switch__track" onClick={ onTrackClick }></div>),
-                  input: ({ inputNode, icon }) => (
+                  default: ({ backgroundColorClasses, backgroundColorStyles }) => (
+                    <div
+                      class={[
+                        'v-switch__track',
+                        ...backgroundColorClasses.value,
+                      ]}
+                      style={ backgroundColorStyles.value }
+                      onClick={ onTrackClick }
+                    ></div>
+                  ),
+                  input: ({ inputNode, icon, backgroundColorClasses, backgroundColorStyles }) => (
                     <>
                       { inputNode }
                       <div
                         class={[
                           'v-switch__thumb',
                           { 'v-switch__thumb--filled': icon || props.loading },
+                          props.inset ? undefined : backgroundColorClasses.value,
                         ]}
+                        style={ props.inset ? undefined : backgroundColorStyles.value }
                       >
                         <VScaleTransition>
                           { !props.loading ? (

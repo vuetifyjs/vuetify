@@ -17,7 +17,7 @@ import { filterInputAttrs, genericComponent, getUid, omit, propsFactory, useRend
 import type { VSelectionControlSlots } from '../VSelectionControl/VSelectionControl'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
-export type VCheckboxSlots = VInputSlots & VSelectionControlSlots
+export type VCheckboxSlots = Omit<VInputSlots, 'default'> & VSelectionControlSlots
 
 export const makeVCheckboxProps = propsFactory({
   ...makeVInputProps(),
