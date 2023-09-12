@@ -92,7 +92,7 @@ export function transformItems (props: Omit<ItemProps, 'items'>, items: ItemProp
 }
 
 export function useItems (props: ItemProps) {
-  let cachedItems = props.cacheItems?props.items:[];
+  let cachedItems = props.cacheItems ? props.items : []
 
   const items = computed(() => transformItems(props, Array.from(new Set(cachedItems.concat(props.items)))))
 
