@@ -261,7 +261,7 @@ export const VSelectionControl = genericComponent<new <T>(
           { ...rootAttrs }
           style={ props.style }
         >
-          { props.reverse && label && labelNode}
+          { props.reverse && label && labelNode }
 
           <div
             class={[
@@ -308,7 +308,7 @@ export const VSelectionControl = genericComponent<new <T>(
             </div>
           </div>
 
-          { !props.reverse && label && labelNode}
+          { !props.reverse && label && labelNode }
         </div>
       )
     })
