@@ -21,6 +21,7 @@
       "installation",
       "frequently-asked-questions",
       "wireframes",
+      "unit-testing",
       "browser-support",
       "upgrade-guide",
       "release-notes",
@@ -74,7 +75,7 @@
     "activeIcon": "mdi-view-dashboard",
     "items": [
       "all",
-      "explorer",
+      { "title": "explorer", "subtitle": "browse-components" },
       { "divider": true },
       { "subheader": "containment" },
       "buttons",

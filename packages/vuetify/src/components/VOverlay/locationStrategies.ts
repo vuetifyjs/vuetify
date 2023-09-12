@@ -20,7 +20,7 @@ import {
   parseAnchor,
   propsFactory,
 } from '@/util'
-import { Box, getOverflow } from '@/util/box'
+import { Box, getOverflow, getTargetBox } from '@/util/box'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -28,7 +28,7 @@ import type { Anchor } from '@/util'
 
 export interface LocationStrategyData {
   contentEl: Ref<HTMLElement | undefined>
-  activatorEl: Ref<HTMLElement | undefined>
+  target: Ref<HTMLElement | [x: number, y: number] | undefined>
   isActive: Ref<boolean>
   isRtl: Ref<boolean>
 }
@@ -157,7 +157,7 @@ function getIntrinsicSize (el: HTMLElement, isRtl: boolean) {
 }
 
 function connectedLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
-  const activatorFixed = isFixedPosition(data.activatorEl.value)
+  const activatorFixed = Array.isArray(data.target.value) || isFixedPosition(data.target.value)
   if (activatorFixed) {
     Object.assign(contentStyles.value, {
       position: 'fixed',
@@ -212,9 +212,9 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     if (observe) updateLocation()
   })
 
-  watch([data.activatorEl, data.contentEl], ([newActivatorEl, newContentEl], [oldActivatorEl, oldContentEl]) => {
-    if (oldActivatorEl) observer.unobserve(oldActivatorEl)
-    if (newActivatorEl) observer.observe(newActivatorEl)
+  watch([data.target, data.contentEl], ([newTarget, newContentEl], [oldTarget, oldContentEl]) => {
+    if (oldTarget && !Array.isArray(oldTarget)) observer.unobserve(oldTarget)
+    if (newTarget && !Array.isArray(newTarget)) observer.observe(newTarget)
 
     if (oldContentEl) observer.unobserve(oldContentEl)
     if (newContentEl) observer.observe(newContentEl)
@@ -233,9 +233,9 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       requestAnimationFrame(() => observe = true)
     })
 
-    if (!data.activatorEl.value || !data.contentEl.value) return
+    if (!data.target.value || !data.contentEl.value) return
 
-    const targetBox = data.activatorEl.value.getBoundingClientRect()
+    const targetBox = getTargetBox(data.target.value)
     const contentBox = getIntrinsicSize(data.contentEl.value, data.isRtl.value)
     const scrollParents = getScrollParents(data.contentEl.value)
     const viewportMargin = 12

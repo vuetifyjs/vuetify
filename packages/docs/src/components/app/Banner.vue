@@ -18,22 +18,22 @@
       @click="onClick"
     >
       <v-list-item lines="two">
-        <template #prepend>
+        <template v-if="banner.metadata.images.logo" #prepend>
           <v-avatar :image="banner.metadata.images.logo.url" size="x-large" />
         </template>
 
-        <v-list-item-title class="text-subtitle-1 text-md-h6 font-weight-medium">
-          <app-markdown
-            v-if="banner.metadata.text"
-            :content="banner.metadata.text"
-          />
+        <v-list-item-title
+          v-if="banner.metadata.text"
+          class="text-subtitle-1 text-md-h6 font-weight-medium"
+        >
+          <app-markdown :content="banner.metadata.text" />
         </v-list-item-title>
 
-        <v-list-item-subtitle
-          v-if="banner.metadata.subtext"
-          v-text="banner.metadata.subtext"
-        />
+        <v-list-item-subtitle v-if="banner.metadata.subtext">
+          <app-markdown :content="banner.metadata.subtext" />
+        </v-list-item-subtitle>
       </v-list-item>
+
       <v-spacer />
     </a>
 

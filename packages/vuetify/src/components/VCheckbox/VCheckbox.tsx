@@ -17,7 +17,7 @@ import { filterInputAttrs, genericComponent, getUid, omit, propsFactory, useRend
 import type { VSelectionControlSlots } from '../VSelectionControl/VSelectionControl'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
-export type VCheckboxSlots = VInputSlots & VSelectionControlSlots
+export type VCheckboxSlots = Omit<VInputSlots, 'default'> & VSelectionControlSlots
 
 export const makeVCheckboxProps = propsFactory({
   ...makeVInputProps(),
@@ -44,7 +44,7 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
     const id = computed(() => props.id || `checkbox-${uid}`)
 
     useRender(() => {
-      const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
+      const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
       const [inputProps, _1] = VInput.filterProps(props)
       const [checkboxProps, _2] = VCheckboxBtn.filterProps(props)
 
@@ -54,7 +54,7 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
             'v-checkbox',
             props.class,
           ]}
-          { ...inputAttrs }
+          { ...rootAttrs }
           { ...inputProps }
           v-model={ model.value }
           id={ id.value }

@@ -23,8 +23,18 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, mergeProps, ref, shallowRef } from 'vue'
-import { deepEqual, genericComponent, getPropertyFromItem, matchesSelector, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { computed, mergeProps, ref, shallowRef, watch } from 'vue'
+import {
+  deepEqual,
+  genericComponent,
+  getPropertyFromItem,
+  IN_BROWSER,
+  matchesSelector,
+  omit,
+  propsFactory,
+  useRender,
+  wrapInArray,
+} from '@/util'
 
 // Types
 import type { Component, PropType } from 'vue'
@@ -127,6 +137,7 @@ export const VSelect = genericComponent<new <
     const { t } = useLocale()
     const vTextFieldRef = ref()
     const vMenuRef = ref<VMenu>()
+    const vVirtualScrollRef = ref<VVirtualScroll>()
     const _menu = useProxiedModel(props, 'menu')
     const menu = computed({
       get: () => _menu.value,
@@ -277,6 +288,17 @@ export const VSelect = genericComponent<new <
       }
     }
 
+    watch(menu, () => {
+      if (!props.hideSelected && menu.value && selections.value.length) {
+        const index = displayItems.value.findIndex(
+          item => selections.value.some(s => item.value === s.value)
+        )
+        IN_BROWSER && window.requestAnimationFrame(() => {
+          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
+        })
+      }
+    })
+
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
       const hasList = !!(
@@ -360,7 +382,7 @@ export const VSelect = genericComponent<new <
                         <VListItem title={ t(props.noDataText) } />
                       ))}
 
-                      <VVirtualScroll renderless items={ displayItems.value }>
+                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value }>
                         { ({ item, index, itemRef }) => {
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
