@@ -109,11 +109,13 @@ describe('filter', () => {
 
   describe('useFilter', () => {
     const itemProps = {
+      cacheItems: false,
       itemTitle: 'title',
       itemValue: 'value',
       itemChildren: 'children',
       itemProps: 'props',
       returnObject: false,
+
     }
     const items = Array.from({ length: 50 }, (v, k) => ({
       text: `item-${k}`,
