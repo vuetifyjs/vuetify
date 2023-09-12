@@ -16,7 +16,7 @@ import { makeVariantProps } from '@/composables/variant'
 import { toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
-// Type
+// Types
 import type { PropType } from 'vue'
 
 export const makeVBtnGroupProps = propsFactory({
