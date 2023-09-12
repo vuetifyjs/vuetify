@@ -1,16 +1,27 @@
 <template>
-  <v-switch
-    v-model="user.dev"
-    class="ps-3 flex-0-0"
-    color="error"
-    density="comfortable"
-    inset
-    messages="Development mode enables new features and functionality within the documentation that are still in development."
+  <v-defaults-provider
+    :defaults="{
+      VIcon: {
+        color: user.dev ? 'error' : 'disabled'
+      }
+    }"
   >
-    <template #label>
-      <div v-text="t('developer-mode')" />
-    </template>
-  </v-switch>
+    <v-switch
+      v-model="user.dev"
+      :messages="t('developer-mode-message')"
+      class="ps-1"
+      color="error"
+      density="comfortable"
+      inset
+
+      true-icon="mdi-check"
+      false-icon="$close"
+    >
+      <template #label>
+        <div v-text="t('developer-mode')" />
+      </template>
+    </v-switch>
+  </v-defaults-provider>
 </template>
 
 <script setup>

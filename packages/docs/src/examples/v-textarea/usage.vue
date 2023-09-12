@@ -6,7 +6,7 @@
     :name="name"
   >
     <div>
-      <v-textarea v-bind="props" v-model="field"></v-textarea>
+      <v-textarea v-bind="props" v-model="field" hide-details></v-textarea>
     </div>
 
     <template v-slot:configuration>

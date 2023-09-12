@@ -52,6 +52,7 @@
   // Composables
   import { createAdProps, useAd } from '@/composables/ad'
   import { useGtag } from 'vue-gtag-next'
+  import { useRoute } from 'vue-router'
 
   // Utilities
   import { computed } from 'vue'
@@ -67,6 +68,7 @@
 
   const { ad, attrs } = useAd(props)
   const { event } = useGtag()
+  const { name } = useRoute()
 
   const background = computed(() => ad.value?.metadata?.images?.background?.url)
   const hasPromoted = computed(() => {
@@ -91,9 +93,9 @@
     if (!slug) return
 
     event('click', {
-      event_category: 'vuetifys',
+      event_category: 'promoted',
       event_label: slug,
-      value: 'promoted',
+      value: name?.toString().toLowerCase(),
     })
   }
 </script>

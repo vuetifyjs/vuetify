@@ -22,7 +22,7 @@
         </template>
       </v-app-bar>
 
-      <v-main style="height: 250px;"></v-main>
+      <v-main style="height: 75px;"></v-main>
     </v-layout>
 
     <template v-slot:configuration>
