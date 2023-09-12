@@ -9,11 +9,11 @@ import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
+import { makeSpeechBubbleProps, useSpeechBubble } from '@/composables/speechBubble'
 
 // Utilities
 import { computed, mergeProps, ref } from 'vue'
-import { genericComponent, getUid, omit, propsFactory, parseAnchor, flipSide, useRender } from '@/util'
-import { makeSpeechBubbleProps, useSpeechBubble } from '@/composables/speechBubble'
+import { flipSide, genericComponent, getUid, omit, parseAnchor, propsFactory, useRender } from '@/util'
 import { includes } from '@/util/helpers'
 
 // Types
@@ -45,8 +45,8 @@ export const makeVTooltipProps = propsFactory({
     pointerHeight: 10,
     pointerWidth: 20,
     pointerPosition: 50,
-    pointerSide: 'bottom' as const
-  })
+    pointerSide: 'bottom' as const,
+  }),
 }, 'VTooltip')
 
 export const VTooltip = genericComponent<OverlaySlots>()({
@@ -96,17 +96,15 @@ export const VTooltip = genericComponent<OverlaySlots>()({
 
     const speechBubbleProps = computed(() => {
       const locationAnchor = flipSide(parseAnchor(location.value, false))
-      const position = includes(['bottom', 'left'], locationAnchor.align) ? '0%'
-                        : includes(['right', 'top'], locationAnchor.align) ? '100%' : '50%'
+      const position = includes(['bottom', 'left'], locationAnchor.align) ? '0%' : includes(['right', 'top'], locationAnchor.align) ? '100%' : '50%'
       return {
         speechBubble: props.speechBubble,
         pointerHeight: props.pointerHeight,
         pointerWidth: props.pointerWidth,
         pointerPosition: position,
-        pointerSide: locationAnchor.side === 'center' ? 'bottom' : locationAnchor.side
+        pointerSide: locationAnchor.side === 'center' ? 'bottom' : locationAnchor.side,
       }
     })
-
 
     useRender(() => {
       const [overlayProps] = VOverlay.filterProps(props)
@@ -119,7 +117,7 @@ export const VTooltip = genericComponent<OverlaySlots>()({
             'v-tooltip',
             props.class,
           ]}
-          style={[ props.style, speechBubbleStyles.value ]}
+          style={[props.style, speechBubbleStyles.value]}
           id={ id.value }
           { ...overlayProps }
           v-model={ isActive.value }

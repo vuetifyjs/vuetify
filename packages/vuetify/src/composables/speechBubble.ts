@@ -1,6 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import { getCurrentInstanceName, convertToUnit, propsFactory } from '@/util'
+import { convertToUnit, getCurrentInstanceName, propsFactory } from '@/util'
 
 import type { PropType } from 'vue'
 
@@ -8,7 +8,6 @@ const pointerSideValues = ['bottom', 'left', 'right', 'top'] as const
 
 export type pointerSide = typeof pointerSideValues[number]
 
-// Types
 export interface SpeechBubbleProps {
   speechBubble?: Boolean
   pointerHeight?: number | string
@@ -17,7 +16,6 @@ export interface SpeechBubbleProps {
   pointerSide?: pointerSide
 }
 
-// Composables
 export const makeSpeechBubbleProps = propsFactory({
   speechBubble: Boolean,
   pointerHeight: [Number, String],
@@ -27,7 +25,7 @@ export const makeSpeechBubbleProps = propsFactory({
     type: String as PropType<pointerSide>,
     default: 'bottom',
     validator: (v: any) => pointerSideValues.includes(v),
-  }
+  },
 }, 'speechBubble')
 
 export function useSpeechBubble (
@@ -36,7 +34,7 @@ export function useSpeechBubble (
 ) {
   const speechBubbleClasses = computed(() => {
     return props.speechBubble
-      ? [`${name}--speech-bubble-${props.pointerSide}` , `${name}--speech-bubble`] : null
+      ? [`${name}--speech-bubble-${props.pointerSide}`, `${name}--speech-bubble`] : null
   })
 
   const speechBubbleStyles = computed(() => ({
