@@ -15,7 +15,12 @@ related:
 ## Introduction
 
 This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
-Many of these changes can be applied automatically by [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)
+
+::: error
+
+Many of these changes on this page can be applied automatically by using our [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)
+
+:::
 
 <entry />
 
@@ -30,7 +35,7 @@ Many of these changes can be applied automatically by [eslint-plugin-vuetify](ht
 - [v-date-picker](/components/date-pickers/)
 - [v-data-table](/components/data-tables/basics/)
 - [v-skeleton-loader](/components/skeleton-loaders/)
-- v-stepper
+- [v-stepper](/components/steppers/)
 - v-time-picker
 - v-treeview
 :::
@@ -137,6 +142,13 @@ app.use(vuetify)
 - `overlap` has been removed and is now the default style, use `floating` to restore the v2 default.
 - Transition props `mode` and `origin` have been removed.
 - `avatar` prop is no longer needed and has been removed.
+
+### v-banner
+
+- The `actions` slot no longer provides a dismiss function.
+- `shaped` prop has been removed.
+- `icon-color` has been removed.
+- `single-line` has been replaced with `lines="one"`.
 
 ### v-btn/v-btn-toggle
 

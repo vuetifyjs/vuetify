@@ -213,7 +213,7 @@ describe('VColorPicker', () => {
   it('should emit value when changing hue slider', () => {
     cy.mount(() => (
       <Application>
-        <VColorPicker modelValue="#000ff" />
+        <VColorPicker modelValue="#0000ff" />
       </Application>
     ))
 
@@ -231,7 +231,7 @@ describe('VColorPicker', () => {
   it('should emit value when changing alpha slider', () => {
     cy.mount(() => (
       <Application>
-        <VColorPicker modelValue="#000ff" />
+        <VColorPicker modelValue="#0000ff" />
       </Application>
     ))
 

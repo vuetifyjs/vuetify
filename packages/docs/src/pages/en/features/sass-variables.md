@@ -88,15 +88,15 @@ Follow the plugin setup guide from [treeshaking](/features/treeshaking/) then ad
 If you were using the basic technique from above, make sure to remove it and switch back to `import 'vuetify/styles'`.
 You can keep `main.scss` for other style overrides but don't do both or you'll end up with duplicated styles.
 
-Available SASS variables are located on each component's API page.
-
-![image](https://github.com/vuetifyjs/vuetify/assets/9064066/967da002-5a9e-4bce-8285-1fa9b849e36d "VBtn SASS Variables")
-
 ## Variable API
 
 There are many SASS/SCSS variables that can be customized across the entire Vuetify framework. You can browse all the variables using the tool below:
 
- <sass-api />
+<sass-api />
+
+Available SASS variables are located on each component's API page.
+
+![image](https://github.com/vuetifyjs/vuetify/assets/9064066/967da002-5a9e-4bce-8285-1fa9b849e36d "VBtn SASS Variables")
 
 ## Usage in templates
 

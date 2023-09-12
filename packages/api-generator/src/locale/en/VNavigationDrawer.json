@@ -2,7 +2,7 @@
   "props": {
     "bottom": "Expands from the bottom of the screen on mobile devices",
     "clipped": "A clipped drawer rests under the application toolbar. **Note:** requires the **clipped-left** or **clipped-right** prop on `v-app-bar` to work as intended",
-    "disableResizeWatcher": "Will automatically open/close drawer when resized depending if mobile or desktop.",
+    "disableResizeWatcher": "Prevents the automatic opening or closing of the drawer when resized, based on whether the device is mobile or desktop.",
     "disableRouteWatcher": "Disables opening of navigation drawer when route changes",
     "expandOnHover": "Collapses the drawer to a **mini-variant** until hovering with the mouse",
     "floating": "A floating drawer has no visible container (no border-right)",
@@ -18,8 +18,7 @@
     "value": "Controls whether the component is visible or hidden.",
     "rail": "Sets the component width to the **rail-width** value.",
     "railWidth": "Sets the width for the component when `rail` is enabled.",
-    "scrim": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
-    "sticky": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))"
+    "scrim": "Determines whether an overlay is used when a **temporary** drawer is open. Accepts true/false to enable background, and string to define color."
   },
   "slots": {
     "append": "A slot at the bottom of the drawer",
@@ -31,6 +30,5 @@
     "update:rail": "Event that is emitted when the rail model changes"
   },
   "exposed": {
-    "isStuck": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))"
   }
 }

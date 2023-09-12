@@ -30,7 +30,7 @@
       </promoted-base>
     </template>
 
-    <promoted v-else />
+    <promotion-card v-else />
   </v-responsive>
 
   <br>
@@ -38,7 +38,7 @@
 
 <script setup lang="ts">
   // Components
-  import Promoted from './Promoted.vue'
+  import PromotionCard from '@/components/promotions/PromotionCard.vue'
   import PromotedBase from './Base.vue'
   import PromotedScript from './Script.vue'
 

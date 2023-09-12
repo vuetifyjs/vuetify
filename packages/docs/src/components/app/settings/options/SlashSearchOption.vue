@@ -6,23 +6,21 @@
       }
     }"
   >
-    <v-switch
+    <settings-switch
       v-model="user.slashSearch"
-      class="ps-3 flex-0-0"
-      inset
-      color="primary"
-      label="Use / for Search hotkey"
-      messages="The option sets the bound search key to '/' from Ctrl+K."
-      density="compact"
-      true-icon="mdi-check"
-      false-icon="$close"
+      :label="t('slash-search')"
+      :messages="t('slash-search-message')"
     />
   </v-defaults-provider>
 </template>
 
 <script setup>
+  // Composables
+  import { useI18n } from 'vue-i18n'
+
   // Stores
   import { useUserStore } from '@/store/user'
 
+  const { t } = useI18n()
   const user = useUserStore()
 </script>

@@ -98,7 +98,7 @@ The following is a list of available and up-and-coming components for use with L
 | **Infinite scroll** | [Usage](/components/infinite-scroller/) | [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0) |
 | [v-infinite-scroll](/api/v-infinite-scroll/) | Primary Component | |
 | **OTP input** | [Usage](/components/otp-input/) | [v3.3.11 (Icarus)](/getting-started/release-notes/?version=v3.3.11) |
-| [v-otp-input](/api/v-sotp-input/) | Primary Component | |
+| [v-otp-input](/api/v-otp-input/) | Primary Component | |
 | **Skeleton loader** | [Usage](/components/skeleton-loaders/) | [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0) |
 | [v-skeleton-loader](/api/v-skeleton-loader/) | Primary Component | |
 | **Steppers** | [Usage](/components/steppers/) | [v3.3.11 (Icarus)](/getting-started/release-notes/?version=v3.3.11) |
@@ -112,9 +112,7 @@ The following is a list of available and up-and-coming components for use with L
 
 | Component | Release Target |
 | - | - |
-| v-calendar | ~~Q1~~* Q2 2023 |
-
-<small>*Q1 2023 was the original target, but due to the complexity of the component, it has been pushed back to Q2 2023.</small>
+| v-calendar | ~~Q1~~ ~~Q2~~ Soon™️ 2023 |
 
 ::: warning
 Lab component APIs are **NOT** finalized and can and will change. You should **EXPECT** for things to break during the course of development.

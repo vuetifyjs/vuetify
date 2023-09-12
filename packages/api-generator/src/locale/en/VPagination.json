@@ -22,7 +22,6 @@
     "first": "Emitted when clicking on go to first button",
     "previous": "Emitted when clicking on go to previous button",
     "next": "Emitted when clicking on go to next button",
-    "last": "Emitted when clicking on go to last button",
-    "prev": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-pagination.json))"
+    "last": "Emitted when clicking on go to last button"
   }
 }

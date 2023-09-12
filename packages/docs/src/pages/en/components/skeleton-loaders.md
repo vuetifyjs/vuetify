@@ -30,6 +30,20 @@ The `v-skeleton-loader` component provides a user with a visual indicator that c
 
 <entry />
 
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VSkeletonLoader } from 'vuetify/labs/VSkeletonLoader'
+
+export default createVuetify({
+  components: {
+    VSkeletonLoader,
+  },
+})
+```
+
 ## API
 
 | Component | Description |
