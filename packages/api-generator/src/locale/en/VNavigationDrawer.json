@@ -17,7 +17,8 @@
     "touchless": "Disable mobile touch functionality",
     "value": "Controls whether the component is visible or hidden.",
     "rail": "Sets the component width to the **rail-width** value.",
-    "railWidth": "Sets the width for the component when `rail` is enabled."
+    "railWidth": "Sets the width for the component when `rail` is enabled.",
+    "scrim": "Determines whether an overlay is used when a **temporary** drawer is open. Accepts true/false to enable background, and string to define color."
   },
   "slots": {
     "append": "A slot at the bottom of the drawer",
