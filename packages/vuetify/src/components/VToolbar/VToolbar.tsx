@@ -33,7 +33,7 @@ export const makeVToolbarProps = propsFactory({
   absolute: Boolean,
   collapse: {
     type: [Boolean, String] as PropType<Boolean | 'left' | 'right'>,
-    default: false
+    default: false,
   },
   color: String,
   density: {
@@ -109,7 +109,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
     })
 
     useRender(() => {
-      const collapsePositon = typeof(props.collapse) === 'string' ? props.collapse : 'left'
+      const collapsePositon = typeof (props.collapse) === 'string' ? props.collapse : 'left'
 
       const hasTitle = !!(props.title || slots.title)
       const hasImage = !!(slots.image || props.image)
