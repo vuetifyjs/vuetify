@@ -30,6 +30,20 @@ Here we display a list of settings that could be applied within an application.
 
 <entry />
 
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VOtpInput } from 'vuetify/labs/VOtpInput'
+
+export default createVuetify({
+  components: {
+    VOtpInput,
+  },
+})
+```
+
 ## API
 
 | Component | Description |

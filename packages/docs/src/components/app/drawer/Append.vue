@@ -1,17 +1,12 @@
 <template>
-  <div v-if="user.quickbar">
+  <div>
     <v-divider />
 
-    <latest-release />
+    <git-hub-login />
   </div>
 </template>
 
 <script setup>
   // Components
-  import LatestRelease from '@/components/app/settings/LatestRelease.vue'
-
-  // Stores
-  import { useUserStore } from '@/store/user'
-
-  const user = useUserStore()
+  import GitHubLogin from '@/components/app/GitHubLogin.vue'
 </script>

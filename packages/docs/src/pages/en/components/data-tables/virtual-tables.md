@@ -14,6 +14,22 @@ related:
 
 The v-data-table-virtual component relies on all data being available locally. But unlike the standard data-table it uses virtualization to only render a small portion of the rows. This makes it well suited for displaying large data sets. It supports sorting and filtering, but not pagination.
 
+<entry />
+
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VDataTableVirtual } from 'vuetify/labs/VDataTableVirtual'
+
+export default createVuetify({
+  components: {
+    VDataTableVirtual,
+  },
+})
+```
+
 ## Examples
 
 ### Basic example
