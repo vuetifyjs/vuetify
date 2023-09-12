@@ -23,7 +23,7 @@
             v-bind="{
               ...item,
               props: {
-                class: theme.dark ? 'bg-grey-darken-3' : 'bg-grey-lighten-4'
+                class: 'bg-surface-bright'
               }
             }"
           />
@@ -59,7 +59,6 @@
 <script setup lang="ts">
   // Composables
   import { useI18n } from 'vue-i18n'
-  import { useTheme } from 'vuetify'
 
   // Utilities
   import { computed, PropType } from 'vue'
@@ -80,7 +79,6 @@
     },
   })
 
-  const { current: theme } = useTheme()
   const { t } = useI18n()
   const appStore = useAppStore()
   const localeStore = useLocaleStore()

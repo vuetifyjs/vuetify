@@ -213,6 +213,7 @@
 .v-field__clearable
   cursor: pointer
   opacity: 0
+  overflow: hidden
   margin-inline-start: $field-clearable-margin
   margin-inline-end: $field-clearable-margin
   transition: $field-transition-timing
@@ -239,6 +240,7 @@
   transform-origin: left center
   transition: $field-transition-timing
   transition-property: opacity, transform
+  z-index: 1
 
   .v-field--variant-underlined &,
   .v-field--variant-plain &
@@ -362,6 +364,11 @@
       border-bottom-width: var(--v-field-border-width)
       border-inline-start-width: var(--v-field-border-width)
 
+      @at-root
+        #{selector.append('.v-field--rounded', &)},
+        #{selector.append('[class^="rounded-"]', &)}
+          flex-basis: calc(var(--v-input-control-height) / 2 + 2px)
+
       @include tools.ltr()
         border-top-left-radius: inherit
         border-top-right-radius: 0
@@ -416,11 +423,19 @@
 /* endregion */
 /* region LOADER */
 .v-field__loader
-  bottom: 0
+  top: calc(100% - 2px)
   left: 0
   position: absolute
   right: 0
   width: 100%
+  border-top-left-radius: 0
+  border-top-right-radius: 0
+  border-bottom-left-radius: inherit
+  border-bottom-right-radius: inherit
+  overflow: hidden
+
+  .v-field--variant-outlined &
+    top: calc(100% - 3px)
 
 /* endregion */
 /* region OVERLAY */

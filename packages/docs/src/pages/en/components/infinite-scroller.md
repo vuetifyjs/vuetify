@@ -40,6 +40,20 @@ A **load** event will be emitted when the component needs to load more content. 
 
 <entry />
 
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VInfiniteScroll } from 'vuetify/labs/VInfiniteScroll'
+
+export default createVuetify({
+  components: {
+    VInfiniteScroll,
+  },
+})
+```
+
 ## API
 
 | Component | Description |
