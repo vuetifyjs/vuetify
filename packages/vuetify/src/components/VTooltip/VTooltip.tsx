@@ -96,7 +96,8 @@ export const VTooltip = genericComponent<OverlaySlots>()({
 
     const speechBubbleProps = computed(() => {
       const locationAnchor = flipSide(parseAnchor(location.value, false))
-      const position = includes(['bottom', 'left'], locationAnchor.align) ? '0%' : includes(['right', 'top'], locationAnchor.align) ? '100%' : '50%'
+      const position = includes(['bottom', 'left'], locationAnchor.align)
+      ? '0%' : includes(['right', 'top'], locationAnchor.align) ? '100%' : '50%'
       return {
         speechBubble: props.speechBubble,
         pointerHeight: props.pointerHeight,

@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { convertToUnit, getCurrentInstanceName, propsFactory } from '@/util'
 
+// Types
 import type { PropType } from 'vue'
 
 const pointerSideValues = ['bottom', 'left', 'right', 'top'] as const
