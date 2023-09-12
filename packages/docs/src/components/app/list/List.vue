@@ -29,6 +29,12 @@
       />
     </template>
 
+    <template #subtitle="{ item }">
+      <span v-if="item.subtitle" class="text-high-emphasis">
+        {{ item.subtitle }}
+      </span>
+    </template>
+
     <template #subheader="{ props: subheaderProps }">
       <slot
         name="subheader"
@@ -59,6 +65,7 @@
 
   export type Item = {
     title?: string
+    subtitle?: string
     appendIcon?: string
     activeIcon?: string
     inactiveIcon?: string
@@ -98,6 +105,7 @@
 
       return {
         title: route?.meta?.nav ?? route?.meta?.title ?? litem.title,
+        subtitle: litem.subtitle && te(litem.subtitle) ? t(litem.subtitle) : litem.subtitle,
         emphasized: route?.meta?.emphasized ?? false,
         to: route?.path,
         disabled: !route,

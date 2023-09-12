@@ -30,6 +30,20 @@ Whereas a bottom navigation component is for buttons and specific application le
 
 <entry />
 
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VBottomSheet } from 'vuetify/labs/VBottomSheet'
+
+export default createVuetify({
+  components: {
+    VBottomSheet,
+  },
+})
+```
+
 ## API
 
 | Component                                        | Description       |

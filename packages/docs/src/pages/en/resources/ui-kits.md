@@ -13,15 +13,23 @@ related:
 
 Easily create design prototypes with Figma components that match Vuetify's.
 
-![UI Kit Entry](https://cdn.vuetifyjs.com/docs/images/entry/ui-kits-entry.png)
+<entry />
 
 ----
 
 ## Usage
 
-The Vuetify UI Kit is a free component plugin for Figma that streamlines building your applications. Getting up and running is as simple as following these steps:
+The Vuetify UI Kit is a free component plugin for Figma that streamlines building your applications.
 
-1. Download for free from the our [store](https://store.vuetifyjs.com/products/vuetify-ui-kit-figma)
+### Figma Plugin
+
+The fastest and easiest way to use the Vuetify UI Kit is to install it as a [plugin for Figma](https://www.figma.com/community/file/1266515419060480209).
+
+### Digital Download
+
+If you need to manually install the plugin for whatever reason, you can download the latest version from the [Vuetify Store](https://store.vuetifyjs.com/).
+
+1. [Download](https://store.vuetifyjs.com/products/vuetify-ui-kit-figma) for free from the our store
 2. Unzip **vuetify3-ui-light-kit.fig** from `vuetify-figma-ui-kit.zip`
 3. Open Figma and create a new project:
   ![UI Kit New Project](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-new-project.png) { class="mb-n4" }

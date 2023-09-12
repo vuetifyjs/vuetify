@@ -1,53 +1,49 @@
 <template>
-  <banner-option />
+  <div class="px-2">
+    <div class="ps-1 mb-3">
+      <v-label :text="t('theme')" class="mb-2 font-weight-medium" />
 
-  <br>
+      <v-messages :messages="t('theme-message')" active />
+    </div>
 
-  <notifications-option />
+    <theme-option />
 
-  <br>
+    <v-divider class="my-3" />
 
-  <quickbar-option />
+    <div class="ps-1 mb-3">
+      <v-label :text="t('general')" class="mb-2 font-weight-medium" />
 
-  <br>
+      <v-messages :messages="t('general-message')" active />
+    </div>
 
-  <developer-mode />
+    <ad-option />
 
-  <br>
+    <code-option />
 
-  <v-footer
-    app
-    absolute
-    class="text-caption justify-end text-medium-emphasis"
-    height="47"
-  >
-    <v-btn
-      variant="flat"
-      size="small"
-      color="error"
-      @click="onResetAll"
-    >
-      Reset All
-    </v-btn>
-  </v-footer>
+    <api-option />
+
+    <slash-search-option />
+
+    <sync-option />
+
+    <v-divider class="my-3" />
+
+    <developer-mode />
+  </div>
 </template>
 
 <script setup>
   // Components
-  import BannerOption from './options/BannerOption.vue'
-  import DeveloperMode from './DeveloperMode.vue'
-  import NotificationsOption from './options/NotificationsOption.vue'
-  import QuickbarOption from './options/QuickbarOption.vue'
+  import AdOption from '@/components/app/settings/options/AdOption.vue'
+  import ApiOption from '@/components/app/settings/options/ApiOption.vue'
+  import CodeOption from '@/components/app/settings/options/CodeOption.vue'
+  import DeveloperMode from '@/components/app/settings/DeveloperMode.vue'
+  import SlashSearchOption from '@/components/app/settings/options/SlashSearchOption.vue'
+  import SyncOption from '@/components/app/settings/options/SyncOption.vue'
+  import ThemeOption from '@/components/app/settings/options/ThemeOption.vue'
 
-  // Stores
-  import { useUserStore } from '@/store/user'
+  // Composables
+  import { useI18n } from 'vue-i18n'
 
-  const user = useUserStore()
-
-  function onResetAll () {
-    user.notifications.read = []
-    user.notifications.show = true
-    user.notifications.last.banner = []
-    user.quickbar = true
-  }
+  const { t } = useI18n()
 </script>

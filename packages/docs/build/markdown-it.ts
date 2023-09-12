@@ -75,7 +75,8 @@ const validate = ajv.compile({
     },
     disabled: { type: 'boolean' }, // The page is not published
     emphasized: { type: 'boolean' }, // The page is emphasized in the navigation
-    fluid: { type: 'boolean' }, // The page is emphasized in the navigation
+    fluid: { type: 'boolean' }, // Hide the Toc
+    backmatter: { type: 'boolean' }, // Hide the backmatter
   },
 })
 
