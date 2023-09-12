@@ -42,10 +42,13 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
 
     const vListItemRef = ref<VListItem>()
 
-    function onClick (e: MouseEvent) {
-      emit('click', e)
-      if ( !vListItemRef.value?.isGroupActivator || !isClickable.value) return
-      props.value != null && vListItemRef.value?.select(!vListItemRef.value?.isSelected, e)
+    function onClick (e: MouseEvent | KeyboardEvent) {
+      if( e instanceof MouseEvent)
+      {
+        emit('click', e)
+        if ( !vListItemRef.value?.isGroupActivator || !isClickable.value) return
+        props.value != null && vListItemRef.value?.select(!vListItemRef.value?.isSelected, e)
+      }
     }
 
     function onKeyDown (e: KeyboardEvent) {
@@ -94,4 +97,3 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
 })
 
 export type VTreeviewItem = InstanceType<typeof VTreeviewItem>
-
