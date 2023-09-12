@@ -120,7 +120,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
     ))
 
     return {
-      isOpen
+      isOpen,
     }
   },
 })

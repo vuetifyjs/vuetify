@@ -1,14 +1,14 @@
 // Components
-import { VTreeviewGroup } from './VTreeviewGroup';
-import { VTreeviewItem } from './VTreeviewItem';
+import { VTreeviewGroup } from './VTreeviewGroup'
+import { VTreeviewItem } from './VTreeviewItem'
 
 // Utilities
-import { genericComponent, propsFactory } from "@/util";
+import { genericComponent, propsFactory } from '@/util'
 
-//Type
+// Types
 import type { PropType } from 'vue'
 import type { InternalListItem } from '@/components/VList/VList'
-import type { VListItemSlots } from "@/components/VList/VListItem";
+import type { VListItemSlots } from '@/components/VList/VListItem'
 import type { GenericProps } from '@/util'
 
 export type VTreeviewChildrenSlots<T> = {

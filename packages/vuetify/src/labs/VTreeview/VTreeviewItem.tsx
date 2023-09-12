@@ -1,24 +1,25 @@
+// Styles
 import './VTreeviewItem.sass'
 
 // Components
-import { makeVListItemProps, VListItem } from "@/components/VList/VListItem";
-import { VIcon } from '@/components/VIcon';
+import { VIcon } from '@/components/VIcon'
+import { makeVListItemProps, VListItem } from '@/components/VList/VListItem'
 
-//Composables
+// Composables
 import { IconValue } from '@/composables/icons'
 import { useLink } from '@/composables/router'
 
 // Utilities
 import { computed, inject, ref } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from "@/util";
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
+import { VTreeviewSymbol } from './VTreeview'
 import type { VListItemSlots } from '@/components/VList/VListItem'
-import { VTreeviewSymbol } from "./VTreeview";
 
 export const makeVTreeviewItemProps = propsFactory({
   toggleIcon: IconValue,
-  ...makeVListItemProps()
+  ...makeVListItemProps(),
 }, 'VTreeviewItem')
 
 export const VTreeviewItem = genericComponent<VListItemSlots>()({
@@ -33,6 +34,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
   setup (props, { attrs, slots, emit }) {
     const link = useLink(props, attrs)
     const id = computed(() => props.value === undefined ? link.href.value : props.value)
+    const vListItemRef = ref<VListItem>()
 
     const isClickable = computed(() =>
       !props.disabled &&
@@ -40,13 +42,10 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       (props.link || link.isClickable.value || (props.value != null && !!vListItemRef.value?.list))
     )
 
-    const vListItemRef = ref<VListItem>()
-
     function onClick (e: MouseEvent | KeyboardEvent) {
-      if( e instanceof MouseEvent)
-      {
+      if (e instanceof MouseEvent) {
         emit('click', e)
-        if ( !vListItemRef.value?.isGroupActivator || !isClickable.value) return
+        if (!vListItemRef.value?.isGroupActivator || !isClickable.value) return
         props.value != null && vListItemRef.value?.select(!vListItemRef.value?.isSelected, e)
       }
     }
@@ -70,7 +69,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             props.class,
             {
               'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(id.value),
-            }
+            },
           ]}
           onClick={ onClick }
           onKeydown={ isClickable.value && onKeyDown }
@@ -79,15 +78,13 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             ...slots,
             prepend: slotProps => (
               <>
-                {
-                  <VIcon
-                    density={ props.density }
-                    icon={ props.toggleIcon }
-                  />
-                }
+                <VIcon
+                  density={ props.density }
+                  icon={ props.toggleIcon }
+                />
                 { slots.prepend?.(slotProps) }
               </>
-            )
+            ),
           }}
         </VListItem>
       )

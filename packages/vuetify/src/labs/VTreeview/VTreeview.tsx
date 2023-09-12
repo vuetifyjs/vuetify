@@ -1,6 +1,6 @@
 // Components
-import { makeVListProps, useListItems, VList } from '@/components/VList/VList'
 import { VTreeviewChildren } from './VTreeviewChildren'
+import { makeVListProps, useListItems, VList } from '@/components/VList/VList'
 
 // Composables
 import { provideDefaults } from '@/composables/defaults'
@@ -14,9 +14,9 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey } from 'vue'
+import type { ListItem } from '@/composables/list-items'
 import type { VListChildrenSlots } from '@/components/VList/VListChildren'
 import type { GenericProps } from '@/util'
-import type { ListItem } from '@/composables/list-items'
 
 export interface TreeViewProvide {
   visibleIds: ComputedRef<Set<unknown> | null>
@@ -45,9 +45,9 @@ export const makeVTreeviewProps = propsFactory({
 
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...omit(makeVListProps({
-    selectStrategy: 'independent' as  const,
-    openStrategy: 'multiple' as const
-  }), ['nav'])
+    selectStrategy: 'independent' as const,
+    openStrategy: 'multiple' as const,
+  }), ['nav']),
 }, 'VTreeview')
 
 export const VTreeview = genericComponent<new <T>(
@@ -154,8 +154,10 @@ export const VTreeview = genericComponent<new <T>(
       )
     })
 
-    return { open }
-  }
+    return {
+      open,
+    }
+  },
 })
 
 export type VTreeview = InstanceType<typeof VTreeview>
