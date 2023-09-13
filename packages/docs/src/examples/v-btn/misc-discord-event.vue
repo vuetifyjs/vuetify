@@ -106,7 +106,6 @@
 
         <v-btn
           icon="mdi-dots-horizontal"
-          size="default"
           variant="text"
         ></v-btn>
 
