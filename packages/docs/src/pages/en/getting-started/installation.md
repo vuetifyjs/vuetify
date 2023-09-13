@@ -38,6 +38,10 @@ npm create vuetify
 pnpm create vuetify
 ```
 
+```bash [bun]
+bunx create-vuetify
+```
+
 :::
 
 This command prompts you with a few options before generating your scaffolded Vue / Vuetify 3 project.
@@ -52,6 +56,7 @@ success Installed "create-vuetify@x.x.x" with binaries:
   ❯ yarn
     npm
     pnpm
+    bun
     none
 ```
 
@@ -69,6 +74,7 @@ For more information regarding supported package managers, please visit their of
 * [yarn](https://yarnpkg.com/)
 * [npm](https://npmjs.org/)
 * [pnpm](https://pnpm.io/)
+* [bun](https://bun.sh/package-manager)
 
 ### SSR
 

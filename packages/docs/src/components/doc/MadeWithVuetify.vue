@@ -23,6 +23,7 @@
             :name="project.title"
             :src="project.image"
             :title="project.title"
+            eager
             height="180"
             min-height="180"
           />

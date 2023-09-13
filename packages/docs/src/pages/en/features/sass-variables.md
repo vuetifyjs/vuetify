@@ -45,6 +45,10 @@ To begin modifying Vuetify's internal variables, install the [sass](https://sass
   pnpm install -D sass-loader sass
 ```
 
+```bash [bun]
+  bun add -D sass-loader sass
+```
+
 :::
 
 For additional details about css-pre-processors, please refer to the official vite page at: https://vitejs.dev/guide/features.html#css-pre-processors or official vue-cli-page at: https://cli.vuejs.org/guide/css.html#pre-processors
