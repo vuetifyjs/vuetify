@@ -8,7 +8,7 @@
     "prominent": "Increases the height of the component content to the value of the **prominentHeight** prop.",
     "prominentHeight": "Designate an explicit height when using the **prominent** prop.",
     "scrollBehavior": "Specify an action to take when the scroll position of **scroll-target** reaches **scroll-threshold**. Accepts any combination of hide, inverted, collapse, elevate, and fade-image. Multiple values can be used, separated by a space.",
-    "scrollTarget":  "The element to target for scrolling events. Uses `window` by default.",
+    "scrollTarget": "The element to target for scrolling events. Uses `window` by default.",
     "scrollThreshold": "The amount of scroll distance down before **scroll-behavior** activates."
   },
   "slots": {
