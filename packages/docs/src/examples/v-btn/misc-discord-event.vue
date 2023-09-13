@@ -104,10 +104,11 @@
 
         <v-spacer></v-spacer>
 
-        <v-icon
-          class="me-3"
+        <v-btn
           icon="mdi-dots-horizontal"
-        ></v-icon>
+          size="default"
+          variant="text"
+        ></v-btn>
 
         <v-btn
           class="me-2 text-none"
@@ -130,3 +131,5 @@
     </v-card>
   </v-card>
 </template>
+<script setup lang="ts">
+</script>
