@@ -33,7 +33,7 @@
     "default": "The default slot. Use this to render your items",
     "footer.page-text": "This slot is forwarded to the default footer. See the [`v-data-footer`](/api/v-data-footer) API for more information",
     "footer": "Defines a footer below the items",
-    "heading": "Defines a header above the items",
+    "header": "Defines a header above the items",
     "item": "Slot for each item",
     "loading": "Defines content for when `loading` is true and no items are provided",
     "no-data": "Defines content for when no items are provided",
@@ -43,6 +43,11 @@
     "input": "Array of selected items",
     "item-expanded": "Event emitted when an item is expanded or closed",
     "item-selected": "Event emitted when an item is selected or deselected",
-    "update:expanded": "The `.sync` event for `expanded` prop"
+    "update:expanded": "The `.sync` event for `expanded` prop",
+    "update:groupBy": "The `.sync` event for `groupBy` prop",
+    "update:itemsPerPage": "The `.sync` event for `itemsPerPage` prop",
+    "update:options": "The `.sync` event for `options` prop",
+    "update:page": "The `.sync` event for `page` prop",
+    "update:sortBy": "The `.sync` event for `sortBy` prop",
   }
 }

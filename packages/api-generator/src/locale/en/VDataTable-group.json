@@ -1,0 +1,5 @@
+{
+  "props": {
+    "groupBy": "Defines the groupping of the table items."
+  }
+}
