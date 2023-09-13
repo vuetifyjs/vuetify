@@ -11,6 +11,9 @@
       "@/*": [
         "../vuetify/src/*"
       ]
-    }
-  }
+    },
+  },
+  "include": [
+    "./src/locale/**/*.json",
+  ],
 }

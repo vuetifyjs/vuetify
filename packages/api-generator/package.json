@@ -7,7 +7,7 @@
     "build": "yarn pre-build && yarn start",
     "pre-build": "babel src --out-dir lib --source-maps --extensions \".ts\" --out-file-extension .mjs",
     "start": "node --no-warnings lib/index.mjs",
-    "lint": "eslint --ext .ts src -f codeframe --max-warnings 0",
+    "lint": "eslint --ext .ts,.json src -f codeframe --max-warnings 0",
     "lint:fix": "yarn lint --fix"
   },
   "author": "",
