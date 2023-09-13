@@ -1,7 +1,7 @@
 <template>
   <div class="mb-8">
     <page-feature-chip
-      v-if="meta.figma"
+      v-if="meta.features.figma"
       :text="t('figma-design')"
       prepend-icon="mdi-image"
       href="https://figma.vuetifyjs.com/"
@@ -14,7 +14,7 @@
     </page-feature-chip>
 
     <page-feature-chip
-      v-if="meta.issues"
+      v-if="meta.features.issues"
       :text="t('report-an-issue')"
       prepend-icon="mdi-bug-outline"
       target="_blank"
@@ -27,10 +27,10 @@
     </page-feature-chip>
 
     <page-feature-chip
-      v-if="meta.github"
+      v-if="meta.features.github"
       :text="t('view-in-github')"
       prepend-icon="mdi-github"
-      :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetify/src${meta.github}`"
+      :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetify/src${meta.features.github}`"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -40,10 +40,10 @@
     </page-feature-chip>
 
     <page-feature-chip
-      v-if="meta.spec"
+      v-if="meta.features.spec"
       :text="t('design-spec')"
       prepend-icon="mdi-material-design"
-      :href="meta.spec"
+      :href="meta.features.spec"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -63,6 +63,7 @@
   import { getBranch } from '@/util/helpers'
 
   const meta = useRoute().meta
+
   const { t } = useI18n()
   const branch = getBranch()
 </script>
