@@ -77,6 +77,10 @@ const validate = ajv.compile({
     emphasized: { type: 'boolean' }, // The page is emphasized in the navigation
     fluid: { type: 'boolean' }, // Hide the Toc
     backmatter: { type: 'boolean' }, // Hide the backmatter
+    figma: { type: 'boolean' },
+    issues: { type: 'boolean' },
+    github: { type: 'string' },
+    spec: { type: 'string' },
   },
 })
 
