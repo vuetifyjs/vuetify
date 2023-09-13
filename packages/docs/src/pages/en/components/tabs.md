@@ -35,23 +35,23 @@ The `v-tabs` component is a styled extension of [v-slide-group](/components/slid
 
 ### Props
 
-#### Align with title
+#### Align tabs
 
-Make `v-tabs` line up with the `v-toolbar-title` component using the **align** prop (`v-app-bar-nav-icon` or `v-btn` must be used in `v-toolbar`).
-
-<example file="v-tabs/prop-align-tabs-title" />
-
-#### Align end
-
-The **align** prop can also align tabs to the center or end.
+The **align-tabs** prop will align tabs to the `start`, `center`, or `end` of its container.
 
 <example file="v-tabs/prop-align-tabs-center" />
 
 <example file="v-tabs/prop-align-tabs-end" />
 
+#### Align tabs with title
+
+Make `v-tabs` line up with the `v-toolbar-title` component by setting the **align-tabs** prop to `title` (`v-app-bar-nav-icon` or `v-btn` must be used in `v-toolbar`).
+
+<example file="v-tabs/prop-align-tabs-title" />
+
 #### Center active
 
-The **center-active** prop will make the active tab always centered
+The **center-active** prop will make the active tab always centered.
 
 <example file="v-tabs/prop-center-active" />
 
