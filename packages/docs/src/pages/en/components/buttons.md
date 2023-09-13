@@ -281,7 +281,7 @@ The `v-banner-actions` component applies the **text** variant and reduces button
 | - | - |
 | [Banners](/components/banners/) | [v-banner-actions](/api/v-banner-actions/) |  |
 
-<example file="v-btn/defaults-banners" />
+<example file="v-btn/defaults-banner-actions" />
 
 The following properties are modified when used within a `v-banner-actions` component:
 
