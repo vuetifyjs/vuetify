@@ -8,7 +8,5 @@
   },
   "slots": {
     "actions": "Used to bind styles to [v-btn](/components/buttons) to match MD2 specification."
-  },
-  "exposed": {
   }
 }
