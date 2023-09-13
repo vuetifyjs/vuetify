@@ -15,6 +15,6 @@
   },
   "slots": {
     "item": "The slot for each item.",
-    "itemLabel": "The slot for each item label."
+    "item-label": "The slot for each item label."
   }
 }

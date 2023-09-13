@@ -5,6 +5,6 @@
     "sticky": "Sticks the header to the top of the table."
   },
   "slots": {
-    "[`column.${string}]": "Slot for custom rendering of a column."
+    "[`column.${string}`]": "Slot for custom rendering of a column."
   }
 }

@@ -128,7 +128,8 @@ All api descriptions are managed via the api-generator package. This package mus
 - `en` language only.
 - Prop names should be formatted using bold markdown eg: **prop-name**.
 - Slot and other code related text should be formatted using code markdown eg: `some-slot`.
-- Description keys are in camelCase and in alphabetical order.
+- Description keys should be in camelCase, except for `slot` keys which should be kebab-case.
+- Put keys in alphabetical order.
 - Descriptions utilize a hierarchy of `generic.json` < `Source.json` < `Component.json` to reduce duplication. Source can be viewed using the **Developer Mode** in docs settings.
 
 ### Submitting Changes / Pull Requests

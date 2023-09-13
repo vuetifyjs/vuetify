@@ -9,7 +9,7 @@
     "click:row": "Emitted when a row is clicked. Native event is passed as the first argument, row data as the second."
   },
   "slots": {
-    "[`item.${string}]": "Slot for custom rendering of a column.",
+    "[`item.${string}]`": "Slot for custom rendering of a column.",
     "data-table-group": "Slot for custom rendering of a group.",
     "data-table-select": "Slot for custom rendering of a header cell with the select checkbox.",
     "expanded-row": "Slot for custom rendering of an expanded row.",

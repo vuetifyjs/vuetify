@@ -37,7 +37,7 @@
     "virtualRows": "Virtualizes the rendering of rows. Be aware that you can not use the `body`, `body.prepend` or `body.append` slots with this prop."
   },
   "slots": {
-    "[`item.${string}]": "Slot for custom rendering of a row cell.",
+    "[`item.${string}`]": "Slot for custom rendering of a row cell.",
     "body": "Slot to replace the default table `<tbody>`.",
     "body.append": "Appends elements to the end of the default table `<tbody>`.",
     "body.prepend": "Prepends elements to the start of the default table `<tbody>`.",

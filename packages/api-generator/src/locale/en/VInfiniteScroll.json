@@ -10,7 +10,7 @@
   "slots": {
     "empty": "Shown when load returned status 'empty'.",
     "error": "Shown when load returned status 'error'.",
-    "loadMore": "Shown when scrolled to either side of the content, in manual mode.",
+    "load-more": "Shown when scrolled to either side of the content, in manual mode.",
     "loading": "Shown when content is loading."
   },
   "events": {
