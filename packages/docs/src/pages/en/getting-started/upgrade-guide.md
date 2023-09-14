@@ -15,7 +15,12 @@ related:
 ## Introduction
 
 This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
-Many of these changes can be applied automatically by [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)
+
+::: error
+
+Many of these changes on this page can be applied automatically by using our [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)
+
+:::
 
 <entry />
 
@@ -30,7 +35,7 @@ Many of these changes can be applied automatically by [eslint-plugin-vuetify](ht
 - [v-date-picker](/components/date-pickers/)
 - [v-data-table](/components/data-tables/basics/)
 - [v-skeleton-loader](/components/skeleton-loaders/)
-- v-stepper
+- [v-stepper](/components/steppers/)
 - v-time-picker
 - v-treeview
 :::

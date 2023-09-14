@@ -1,13 +1,13 @@
 {
   "props": {
-    "id": "Sets the DOM id on the component",
-    "error": "Puts the input in a manual error state",
-    "readonly": "Puts input in readonly state",
+    "defaultsTarget": "The target component to provide defaults values for.",
+    "error": "Puts the input in a manual error state.",
+    "falseIcon": "The icon used when inactiv.e",
+    "id": "Sets the DOM id on the component.",
     "inline": "Puts children inputs into a row.",
-    "type": "Provides the default type for children selection controls.",
-    "falseIcon": "The icon used when inactive",
-    "trueIcon": "The icon used when active",
-    "multiple": "Changes select to multiple. Accepts array for value",
-    "defaultsTarget": "The target component to provide defaults values for."
+    "multiple": "Changes select to multiple. Accepts array for value.",
+    "readonly": "Puts input in readonly state.",
+    "trueIcon": "The icon used when active.",
+    "type": "Provides the default type for children selection controls."
   }
 }

@@ -1,10 +1,10 @@
 {
   "props": {
-    "disabled": "Puts all children inputs into a disabled state",
-    "group": "Assign a route namespace. Accepts a string or regexp for determining active state",
-    "noAction": "Removes left padding assigned for action icons from group items",
-    "prependIcon": "Prepends an icon to the component, uses the same syntax as `v-icon`",
-    "subGroup": "Designate the component as nested list group",
-    "value": "Expands / Collapse the list-group"
+    "disabled": "Puts all children inputs into a disabled state.",
+    "group": "Assign a route namespace. Accepts a string or regexp for determining active state.",
+    "noAction": "Removes left padding assigned for action icons from group items.",
+    "prependIcon": "Prepends an icon to the component, uses the same syntax as `v-icon`.",
+    "subGroup": "Designate the component as nested list group.",
+    "value": "Expands / Collapse the list-group."
   }
 }

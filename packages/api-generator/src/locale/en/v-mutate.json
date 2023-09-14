@@ -3,11 +3,11 @@
     "value": "By default takes a handler function that is invoked when the element that the directive is attached to is mutated. It can also take an object, which allows you to pass along [MutationObserver options](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe)."
   },
   "modifiers": {
+    "attr": "Sets the value of [attributes](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/attributes) to true.",
+    "char": "Sets the value of [characterData](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/characterData) to true.",
+    "child": "Sets the value of [childList](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/childList) to true.",
     "immediate": "The provided handler function is invoked immediately when directive is attached to element.",
     "once": "The provided handler function is only invoked once.",
-    "attr": "Sets the value of [attributes](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/attributes) to true.",
-    "child": "Sets the value of [childList](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/childList) to true.",
-    "char": "Sets the value of [characterData](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/characterData) to true.",
     "sub": "Sets the value of [subtree](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe#Parameters) to true."
   }
 }

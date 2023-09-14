@@ -1,0 +1,5 @@
+{
+  "props": {
+    "itemHeight": "Height in pixels of each item to display."
+  }
+}
