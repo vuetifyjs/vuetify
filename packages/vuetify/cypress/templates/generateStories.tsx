@@ -27,7 +27,7 @@ type Example = {
 const title = (key: string) => <h4 class="my-4">{ key }</h4>
 
 // Spacing between content
-const grid = (content: JSX.Element | JSX.Element[]) => <div style="display: flex; grid-gap: 0.8rem;">{ content }</div>
+const grid = (content: JSX.Element | JSX.Element[]) => <div style="display: flex; gap: 0.8rem;">{ content }</div>
 
 // Spacing between mounted components
 const Wrapper: FunctionalComponent = (_, { slots }) => <div class="ma-4">{ slots.default?.() }</div>
