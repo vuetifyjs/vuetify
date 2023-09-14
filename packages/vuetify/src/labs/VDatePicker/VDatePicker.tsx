@@ -202,6 +202,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
           { ...pickerProps }
           class={[
             'v-date-picker',
+            `v-date-picker--${viewMode.value}`,
             props.class,
           ]}
           style={ props.style }

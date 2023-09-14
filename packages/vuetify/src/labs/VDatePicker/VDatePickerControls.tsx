@@ -26,13 +26,9 @@ export const makeVDatePickerControlsProps = propsFactory({
     type: [String],
     default: '$prev',
   },
-  expandIcon: {
+  modeIcon: {
     type: [String],
-    default: '$expand',
-  },
-  collapseIcon: {
-    type: [String],
-    default: '$collapse',
+    default: '$subgroup',
   },
   viewMode: {
     type: String as PropType<'month' | 'year'>,
@@ -52,9 +48,6 @@ export const VDatePickerControls = genericComponent()({
   },
 
   setup (props, { emit }) {
-    const modeIcon = computed(() => {
-      return props.viewMode === 'month' ? props.expandIcon : props.collapseIcon
-    })
     const disableMode = computed(() => {
       return Array.isArray(props.disabled)
         ? props.disabled.includes('mode')
@@ -89,9 +82,10 @@ export const VDatePickerControls = genericComponent()({
           <div class="v-date-picker-controls__date">{ props.displayDate }</div>
 
           <VBtn
-            disabled={ disableMode.value }
             key="expand-btn"
-            icon={ modeIcon.value }
+            disabled={ disableMode.value }
+            density="comfortable"
+            icon={ props.modeIcon }
             variant="text"
             onClick={ onClickMode }
           />
