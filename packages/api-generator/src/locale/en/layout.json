@@ -1,6 +1,7 @@
 {
   "props": {
-    "fullHeight": "Sets the component height to 100%."
+    "fullHeight": "Sets the component height to 100%.",
+    "overlaps": "**FOR INTERNAL USE ONLY**"
   },
   "exposed": {
     "getLayoutItem": "Function that returns position and size information about a specific layout item.",
