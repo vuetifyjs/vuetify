@@ -30,6 +30,10 @@ export const makeVDatePickerControlsProps = propsFactory({
     type: [String],
     default: '$subgroup',
   },
+  variant: {
+    type: String,
+    default: 'modern',
+  },
   viewMode: {
     type: String as PropType<'month' | 'year'>,
     default: 'month',
@@ -77,20 +81,33 @@ export const VDatePickerControls = genericComponent()({
     }
 
     useRender(() => {
+      const displayDate = (
+        <div class="v-date-picker-controls__date">{ props.displayDate }</div>
+      )
+
       return (
-        <div class="v-date-picker-controls">
-          <div class="v-date-picker-controls__date">{ props.displayDate }</div>
+        <div
+          class={[
+            'v-date-picker-controls',
+            `v-date-picker-controls--variant-${props.variant}`,
+          ]}
+        >
+          { props.variant === 'modern' && (
+            <>
+              { displayDate }
 
-          <VBtn
-            key="expand-btn"
-            disabled={ disableMode.value }
-            density="comfortable"
-            icon={ props.modeIcon }
-            variant="text"
-            onClick={ onClickMode }
-          />
+              <VBtn
+                key="mode-btn"
+                disabled={ disableMode.value }
+                density="comfortable"
+                icon={ props.modeIcon }
+                variant="text"
+                onClick={ onClickMode }
+              />
 
-          <VSpacer />
+              <VSpacer key="mode-spacer" />
+            </>
+          )}
 
           <div
             key="month-buttons"
@@ -102,6 +119,8 @@ export const VDatePickerControls = genericComponent()({
               variant="text"
               onClick={ onClickPrev }
             />
+
+            { props.variant === 'classic' && displayDate }
 
             <VBtn
               disabled={ disableNext.value }
