@@ -8,18 +8,24 @@ related:
 - /features/blueprints/
 - /features/global-configuration/
 - /features/treeshaking/
+features:
+  github: /labs/date/
+  label: 'E: date'
+  report: true
 ---
 
 # Dates
 
 Easily hook up date libraries that are used for components that require date functionality.
 
+<page-features />
+
 <entry />
 
-----
-
 ::: warning
+
 This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
+
 :::
 
 ## Usage
