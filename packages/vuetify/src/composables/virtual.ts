@@ -25,7 +25,7 @@ type VirtualProps = {
 export const makeVirtualProps = propsFactory({
   itemHeight: {
     type: [Number, String],
-    default: 24,
+    default: 48,
   },
 }, 'virtual')
 
@@ -91,6 +91,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     const buffer = Math.ceil(visibleItems.value / (BUFFER_RATIO_RECEPROCAL + 2))
     const firstIndex = Math.ceil(midPointIndex - visibleItems.value / 2)
     const lastIndex = first.value + buffer * (BUFFER_RATIO_RECEPROCAL + 1)
+
     if (direction === UP && midPointIndex <= first.value + buffer * BUFFER_RATIO_RECEPROCAL / 2) {
       first.value = clamp(firstIndex, 0, items.value.length)
     } else if (direction === DOWN && (midPointIndex >= lastIndex - buffer * BUFFER_RATIO_RECEPROCAL / 2)) {
