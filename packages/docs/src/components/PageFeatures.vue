@@ -51,6 +51,19 @@
         <v-icon color="surface-variant" />
       </template>
     </page-feature-chip>
+
+    <page-feature-chip
+      v-if="label"
+      :href="label"
+      :text="t('open-issues')"
+      prepend-icon="mdi-alert-circle-outline"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <template #prepend>
+        <v-icon color="warning" />
+      </template>
+    </page-feature-chip>
   </div>
 </template>
 
@@ -60,10 +73,21 @@
   import { useRoute } from 'vue-router'
 
   // Utilities
+  import { computed } from 'vue'
   import { getBranch } from '@/util/helpers'
 
   const meta = useRoute().meta
 
   const { t } = useI18n()
   const branch = getBranch()
+
+  const label = computed(() => {
+    if (!meta.features.label) return false
+
+    console.log(meta.features.label)
+
+    const original = encodeURIComponent(meta.features.label)
+
+    return `https://github.com/vuetifyjs/vuetify/labels/${original}`
+  })
 </script>
