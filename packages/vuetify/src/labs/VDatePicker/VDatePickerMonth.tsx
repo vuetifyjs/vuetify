@@ -6,11 +6,12 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { useDatePicker } from './composables'
+import { useRtl } from '@/composables'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { computed, ref } from 'vue'
-import { genericComponent, omit, propsFactory } from '@/util'
+import { computed, ref, shallowRef, Transition, watch } from 'vue'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import { getWeek, toIso } from '../date/date'
@@ -44,6 +45,7 @@ export const VDatePickerMonth = genericComponent()({
   },
 
   setup (props, { emit, slots }) {
+    const { isRtl } = useRtl()
     const adapter = useDate()
     const { isDragging, dragHandle, hasScrolled } = useDatePicker()
 
@@ -274,104 +276,121 @@ export const VDatePickerMonth = genericComponent()({
       canDrag = false
     }
 
-    return () => (
-      <div class="v-date-picker-month">
-        { props.showWeek && (
-          <div key="weeks" class="v-date-picker-month__weeks">
-            { !props.hideWeekdays && (
-              <div key="hide-week-days" class="v-date-picker-month__day">&nbsp;</div>
-            )}
-            { weeks.value.map(week => (
-              <div
-                class={[
-                  'v-date-picker-month__day',
-                  'v-date-picker-month__day--adjacent',
-                ]}
-              >{ week }</div>
-            ))}
-          </div>
-        )}
+    const isReversed = shallowRef(false)
+    const transition = computed(() => {
+      const reverse = isRtl.value ? !isReversed.value : isReversed.value
+      const direction = reverse ? '-reverse' : ''
 
-        <div
-          ref={ daysRef }
-          class="v-date-picker-month__days"
-          onMousedown={ handleMousedown }
-          onTouchstart={ handleMousedown }
-        >
-          { !props.hideWeekdays && adapter.getWeekdays().map(weekDay => (
+      return `v-window-x${direction}-transition`
+    })
+
+    watch(month, (to, from) => {
+      isReversed.value = adapter.isBefore(to, from)
+    })
+
+    useRender(() => {
+      return (
+        <div class="v-date-picker-month">
+          { props.showWeek && (
+            <div key="weeks" class="v-date-picker-month__weeks">
+              { !props.hideWeekdays && (
+                <div key="hide-week-days" class="v-date-picker-month__day">&nbsp;</div>
+              )}
+              { weeks.value.map(week => (
+                <div
+                  class={[
+                    'v-date-picker-month__day',
+                    'v-date-picker-month__day--adjacent',
+                  ]}
+                >{ week }</div>
+              ))}
+            </div>
+          )}
+
+          <Transition name={ transition.value }>
             <div
-              class={[
-                'v-date-picker-month__day',
-                'v-date-picker-month__weekday',
-              ]}
-            >{ weekDay }</div>
-          ))}
+              ref={ daysRef }
+              key={ month.value }
+              class="v-date-picker-month__days"
+              onMousedown={ handleMousedown }
+              onTouchstart={ handleMousedown }
+            >
+              { !props.hideWeekdays && adapter.getWeekdays().map(weekDay => (
+                <div
+                  class={[
+                    'v-date-picker-month__day',
+                    'v-date-picker-month__weekday',
+                  ]}
+                >{ weekDay }</div>
+              ))}
 
-          { daysInMonth.value.map((item, index) => {
-            const color = (item.isSelected || item.isToday)
-              ? props.color
-              : (item.isHovered || item.isDisabled)
-                ? undefined
-                : 'transparent'
-            const variant = item.isDisabled
-              ? 'text'
-              : (item.isToday || item.isHovered) && !item.isSelected
-                ? 'outlined'
-                : 'flat'
+              { daysInMonth.value.map((item, index) => {
+                const color = (item.isSelected || item.isToday)
+                  ? props.color
+                  : (item.isHovered || item.isDisabled)
+                    ? undefined
+                    : 'transparent'
+                const variant = item.isDisabled
+                  ? 'text'
+                  : (item.isToday || item.isHovered) && !item.isSelected
+                    ? 'outlined'
+                    : 'flat'
 
-            return (
-              <div
-                class={[
-                  'v-date-picker-month__day',
-                  {
-                    'v-date-picker-month__day--selected': item.isSelected,
-                    'v-date-picker-month__day--start': item.isStart,
-                    'v-date-picker-month__day--end': item.isEnd,
-                    'v-date-picker-month__day--adjacent': item.isAdjacent,
-                    'v-date-picker-month__day--hide-adjacent': item.isHidden,
-                    'v-date-picker-month__day--week-start': item.isWeekStart,
-                    'v-date-picker-month__day--week-end': item.isWeekEnd,
-                    'v-date-picker-month__day--hovered': item.isHovered,
-                  },
-                ]}
-                data-v-date={ !item.isHidden && !item.isDisabled ? item.isoDate : undefined }
-              >
-                { item.inRange && (
+                return (
                   <div
-                    key="in-range"
                     class={[
-                      'v-date-picker-month__day--range',
-                      backgroundColorClasses.value,
+                      'v-date-picker-month__day',
+                      {
+                        'v-date-picker-month__day--selected': item.isSelected,
+                        'v-date-picker-month__day--start': item.isStart,
+                        'v-date-picker-month__day--end': item.isEnd,
+                        'v-date-picker-month__day--adjacent': item.isAdjacent,
+                        'v-date-picker-month__day--hide-adjacent': item.isHidden,
+                        'v-date-picker-month__day--week-start': item.isWeekStart,
+                        'v-date-picker-month__day--week-end': item.isWeekEnd,
+                        'v-date-picker-month__day--hovered': item.isHovered,
+                      },
                     ]}
-                    style={ backgroundColorStyles.value }
-                  />
-                )}
-
-                { item.inHover && !item.isStart && !item.isEnd && !item.isHovered && !item.inRange && (
-                  <div
-                    key="in-hover"
-                    class="v-date-picker-month__day--hover"
-                  />
-                )}
-
-                { (props.showAdjacentMonths || !item.isAdjacent) && (
-                  <VBtn
-                    active={ item.isSelected }
-                    color={ color }
-                    disabled={ item.isDisabled }
-                    icon
-                    ripple={ false } /* ripple not working correctly since we preventDefault in touchend */
-                    variant={ variant }
+                    data-v-date={ !item.isHidden && !item.isDisabled ? item.isoDate : undefined }
                   >
-                    { item.localized }
-                  </VBtn>
-                )}
-              </div>
-            )
-          })}
+                    { item.inRange && (
+                      <div
+                        key="in-range"
+                        class={[
+                          'v-date-picker-month__day--range',
+                          backgroundColorClasses.value,
+                        ]}
+                        style={ backgroundColorStyles.value }
+                      />
+                    )}
+
+                    { item.inHover && !item.isStart && !item.isEnd && !item.isHovered && !item.inRange && (
+                      <div
+                        key="in-hover"
+                        class="v-date-picker-month__day--hover"
+                      />
+                    )}
+
+                    { (props.showAdjacentMonths || !item.isAdjacent) && (
+                      <VBtn
+                        active={ item.isSelected }
+                        color={ color }
+                        disabled={ item.isDisabled }
+                        icon
+                        ripple={ false } /* ripple not working correctly since we preventDefault in touchend */
+                        variant={ variant }
+                      >
+                        { item.localized }
+                      </VBtn>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          </Transition>
         </div>
-      </div>
-    )
+      )
+    })
   },
 })
 

@@ -115,6 +115,66 @@
   }
 }
 
+.v-window {
+  &-x-transition,
+  &-x-reverse-transition,
+  &-y-transition,
+  &-y-reverse-transition {
+    &-enter-active,
+    &-leave-active {
+      transition: .3s cubic-bezier(.25, .8, .50, 1);
+    }
+
+    &-leave-from,
+    &-leave-to {
+      position: absolute !important;
+      top: 0;
+      width: 100%;
+    }
+  }
+
+  &-x-transition {
+    &-enter-from {
+      transform: translateX(100%);
+    }
+
+    &-leave-to {
+      transform: translateX(-100%);
+    }
+  }
+
+  &-x-reverse-transition {
+    &-enter-from {
+      transform: translateX(-100%);
+    }
+
+    &-leave-to {
+      transform: translateX(100%);
+    }
+  }
+
+  &-y-transition {
+    &-enter-from {
+      transform: translateY(100%);
+    }
+
+    &-leave-to {
+      transform: translateY(-100%);
+    }
+  }
+
+  &-y-reverse-transition {
+    &-enter-from {
+      transform: translateY(-100%);
+    }
+
+    &-leave-to {
+      transform: translateY(100%);
+    }
+  }
+}
+
+
 // Generic transitions
 .expand-transition {
   @include transition-default();

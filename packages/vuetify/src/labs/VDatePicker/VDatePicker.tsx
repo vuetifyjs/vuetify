@@ -219,7 +219,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
                 <VDatePickerControls
                   { ...datePickerControlsProps }
                   disabled={ disabled.value }
-                  displayDate={ adapter.format(displayDate.value, 'monthAndYear') }
+                  displayDate={ displayDate.value }
                   onClick:next={ onClickNext }
                   onClick:prev={ onClickPrev }
                   onClick:mode={ onClickMode }
