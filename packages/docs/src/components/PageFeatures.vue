@@ -14,7 +14,7 @@
     </page-feature-chip>
 
     <page-feature-chip
-      v-if="meta.features.issues"
+      v-if="meta.features.report"
       :text="t('report-an-issue')"
       prepend-icon="mdi-bug-outline"
       target="_blank"
@@ -83,8 +83,6 @@
 
   const label = computed(() => {
     if (!meta.features.label) return false
-
-    console.log(meta.features.label)
 
     const original = encodeURIComponent(meta.features.label)
 

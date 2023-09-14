@@ -11,7 +11,8 @@ related:
 features:
   figma: true
   github: /components/VBtn/
-  issues: true
+  label: 'C: VBtn'
+  report: true
   spec: https://m2.material.io/components/buttons
 ---
 

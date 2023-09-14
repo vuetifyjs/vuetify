@@ -83,7 +83,7 @@ const validate = ajv.compile({
       properties: {
         figma: { type: 'boolean' },
         label: { type: 'string' },
-        issues: { type: 'boolean' },
+        report: { type: 'boolean' },
         github: { type: 'string' },
         spec: { type: 'string' },
       },
