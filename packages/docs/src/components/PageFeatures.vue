@@ -1,7 +1,7 @@
 <template>
   <div class="mb-8">
     <page-feature-chip
-      v-if="meta.features.figma"
+      v-if="meta?.features?.figma"
       :text="t('figma-design')"
       prepend-icon="mdi-image"
       href="https://figma.vuetifyjs.com/"
@@ -14,7 +14,7 @@
     </page-feature-chip>
 
     <page-feature-chip
-      v-if="meta.features.report"
+      v-if="meta?.features?.report"
       :text="t('report-an-issue')"
       prepend-icon="mdi-bug-outline"
       target="_blank"
@@ -27,7 +27,7 @@
     </page-feature-chip>
 
     <page-feature-chip
-      v-if="meta.features.github"
+      v-if="meta?.features?.github"
       :text="t('view-in-github')"
       prepend-icon="mdi-github"
       :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetify/src${meta.features.github}`"
@@ -40,7 +40,7 @@
     </page-feature-chip>
 
     <page-feature-chip
-      v-if="meta.features.spec"
+      v-if="meta?.features?.spec"
       :text="t('design-spec')"
       prepend-icon="mdi-material-design"
       :href="meta.features.spec"
