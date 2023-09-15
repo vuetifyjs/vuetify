@@ -39,10 +39,9 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   })
   const containerRef = ref<HTMLElement>()
 
-  const bufferRatio = computed(() => {
-    if (containerRef.value && containerRef.value.clientHeight <= itemHeight.value) return 1
-    return BUFFER_RATIO
-  })
+  const isItemBeyondContainer = computed(() => containerRef.value && containerRef.value.clientHeight <= itemHeight.value)
+
+  const bufferRatio = computed(() => isItemBeyondContainer.value ? 1 : BUFFER_RATIO)
 
   const bufferRatioReceprocal = computed(() => 1 / bufferRatio.value)
 
@@ -94,14 +93,14 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     const scrollTop = containerRef.value.scrollTop
     const direction = scrollTop < lastScrollTop ? UP : DOWN
 
-    const midPointIndex = calculateMidPointIndex(scrollTop + height / 2)
+    const midPointIndex = calculateMidPointIndex(scrollTop + (isItemBeyondContainer.value ? height : (height / 2)))
     const buffer = Math.ceil(visibleItems.value / (bufferRatioReceprocal.value + 2))
     const firstIndex = Math.ceil(midPointIndex - visibleItems.value / 2)
     const lastIndex = (first.value - 1) + buffer * (bufferRatioReceprocal.value + 2)
 
     if (direction === UP && midPointIndex <= first.value + buffer * bufferRatioReceprocal.value / 2) {
       first.value = clamp(firstIndex, 0, items.value.length)
-    } else if (direction === DOWN && (midPointIndex >= lastIndex - buffer * (1 + bufferRatioReceprocal.value / 2))) {
+    } else if (direction === DOWN && (midPointIndex >= lastIndex - buffer * (bufferRatioReceprocal.value / 2))) {
       first.value = clamp(firstIndex, 0, items.value.length - visibleItems.value)
     }
     lastScrollTop = scrollTop
