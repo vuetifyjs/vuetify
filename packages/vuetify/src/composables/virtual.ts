@@ -15,7 +15,7 @@ import type { Ref } from 'vue'
 
 const UP = -1
 const DOWN = 1
-const BUFFER_RATIO_RECEPROCAL = 3
+const BUFFER_RATIO = 1 / 3
 
 type VirtualProps = {
   itemHeight?: number | string
@@ -39,12 +39,12 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   })
   const containerRef = ref<HTMLElement>()
 
-  const bufferRatioReceprocal = computed(() => {
-    if (containerRef.value && containerRef.value.clientHeight < itemHeight.value) return 1
-    return BUFFER_RATIO_RECEPROCAL
+  const bufferRatio = computed(() => {
+    if (containerRef.value && containerRef.value.clientHeight <= itemHeight.value) return 1
+    return BUFFER_RATIO
   })
 
-  const bufferRatio = computed(() => 1 / bufferRatioReceprocal.value)
+  const bufferRatioReceprocal = computed(() => 1 / bufferRatio.value)
 
   const { resizeRef, contentRect } = useResizeObserver()
   watchEffect(() => {
