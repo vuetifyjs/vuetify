@@ -8,6 +8,12 @@ related:
   - /components/buttons
   - /components/images
   - /styles/text-and-typography
+features:
+  figma: true
+  label: 'C: VCard'
+  github: /components/VCard/
+  report: true
+  spec: https://m2.material.io/components/cards
 ---
 
 # Cards
@@ -16,7 +22,7 @@ related:
 
 ![Card Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-card/v-card-entry.png)
 
----
+<page-features />
 
 ## Usage
 

@@ -268,6 +268,9 @@ function format (value: Date, formatString: string, locale: string): string {
     case 'dayOfMonth':
       options = { day: 'numeric' }
       break
+    case 'shortDate':
+      options = { year: 'numeric' }
+      break
     default:
       options = { timeZone: 'UTC', timeZoneName: 'short' }
   }

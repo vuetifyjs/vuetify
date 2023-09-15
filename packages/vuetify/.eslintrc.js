@@ -17,6 +17,7 @@ module.exports = {
     // 'vue/html-closing-bracket-spacing': 'off',
     // 'local-rules/no-render-string-reference': 'error',
     'local-rules/no-components-index': 'error',
+    'local-rules/no-nullish-coalescing-in-condition': 'error',
 
     'no-restricted-imports': ['error', {
       paths: [{

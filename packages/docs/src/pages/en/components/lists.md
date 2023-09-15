@@ -8,11 +8,19 @@ related:
   - /components/item-groups/
   - /components/avatars/
   - /components/sheets/
+features:
+  figma: true
+  github: /components/VList/
+  label: 'C: VList'
+  report: true
+  spec: https://m2.material.io/components/lists
 ---
 
 # Lists
 
 The `v-list` component is used to display information. It can contain an avatar, content, actions, subheaders and much more. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a consistent styling for organizing groups of text and images.
+
+<page-features />
 
 ## Usage
 

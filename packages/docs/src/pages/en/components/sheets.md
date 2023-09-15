@@ -8,6 +8,10 @@ related:
   - /components/cards
   - /components/grids
   - /styles/elevation
+features:
+  github: /components/VSheet/
+  label: 'C: VSheet'
+  report: true
 ---
 
 # Sheets
@@ -16,7 +20,7 @@ The `v-sheet` component is a transformable piece of _paper_ that provides a basi
 
 ![Sheet Entry](https://cdn.vuetifyjs.com/docs/images/components/v-sheet/v-sheet-entry.png)
 
-----
+<page-features />
 
 ## Usage
 
