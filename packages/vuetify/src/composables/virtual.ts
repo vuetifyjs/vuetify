@@ -16,7 +16,6 @@ import type { Ref } from 'vue'
 const UP = -1
 const DOWN = 1
 const BUFFER_RATIO_RECEPROCAL = 3
-const BUFFER_RATIO = 1 / BUFFER_RATIO_RECEPROCAL
 
 type VirtualProps = {
   itemHeight?: number | string
@@ -39,6 +38,14 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     },
   })
   const containerRef = ref<HTMLElement>()
+
+  const bufferRatioReceprocal = computed(() => {
+    if (containerRef.value && containerRef.value.clientHeight < itemHeight.value) return 1
+    return BUFFER_RATIO_RECEPROCAL
+  })
+
+  const bufferRatio = computed(() => 1 / bufferRatioReceprocal.value)
+
   const { resizeRef, contentRect } = useResizeObserver()
   watchEffect(() => {
     resizeRef.value = containerRef.value
@@ -53,7 +60,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
         ? display.height.value
         : contentRect.value.height
     ) - (offset?.value ?? 0)
-    return Math.ceil((height / itemHeight.value) * (1 + BUFFER_RATIO * 2) + 1)
+    return Math.ceil((height / itemHeight.value) * (1 + bufferRatio.value * 2) + 1)
   })
 
   function handleItemResize (index: number, height: number) {
@@ -88,13 +95,13 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     const direction = scrollTop < lastScrollTop ? UP : DOWN
 
     const midPointIndex = calculateMidPointIndex(scrollTop + height / 2)
-    const buffer = Math.ceil(visibleItems.value / (BUFFER_RATIO_RECEPROCAL + 2))
+    const buffer = Math.ceil(visibleItems.value / (bufferRatioReceprocal.value + 2))
     const firstIndex = Math.ceil(midPointIndex - visibleItems.value / 2)
-    const lastIndex = first.value + buffer * (BUFFER_RATIO_RECEPROCAL + 1)
+    const lastIndex = first.value + buffer * (bufferRatioReceprocal.value + 1)
 
-    if (direction === UP && midPointIndex <= first.value + buffer * BUFFER_RATIO_RECEPROCAL / 2) {
+    if (direction === UP && midPointIndex <= first.value + buffer * bufferRatioReceprocal.value / 2) {
       first.value = clamp(firstIndex, 0, items.value.length)
-    } else if (direction === DOWN && (midPointIndex >= lastIndex - buffer * BUFFER_RATIO_RECEPROCAL / 2)) {
+    } else if (direction === DOWN && (midPointIndex >= lastIndex - buffer * bufferRatioReceprocal.value / 2)) {
       first.value = clamp(firstIndex, 0, items.value.length - visibleItems.value)
     }
     lastScrollTop = scrollTop
