@@ -9,7 +9,7 @@ related:
   - /components/data-tables/basics/
   - /components/data-iterators/
 features:
-  github: /components/VInfiniteScroll/
+  github: /labs/VInfiniteScroll/
   label: 'C: VInfiniteScroll'
   report: true
 ---

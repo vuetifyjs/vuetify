@@ -8,7 +8,7 @@ related:
   - /features/dates/
   - /components/text-fields/
 features:
-  github: /components/VDatePicker/
+  github: /labs/VDatePicker/
   label: 'C: VDatePicker'
   report: true
   spec: https://material.io/components/date-pickers

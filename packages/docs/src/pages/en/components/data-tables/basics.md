@@ -9,7 +9,7 @@ related:
   - /components/tables/
   - /components/lists/
 features:
-  github: /components/VDataTable/
+  github: /labs/VDataTable/
   label: 'C: VDataTable'
   report: true
   spec: https://m2.material.io/components/data-tables
