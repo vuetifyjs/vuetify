@@ -60,7 +60,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
         ? display.height.value
         : contentRect.value.height
     ) - (offset?.value ?? 0)
-    return Math.ceil((height / itemHeight.value) * (1 + bufferRatio.value * 2) + 1)
+    return Math.ceil((height / itemHeight.value) * (1 + bufferRatio.value * 2))
   })
 
   function handleItemResize (index: number, height: number) {
@@ -97,11 +97,11 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     const midPointIndex = calculateMidPointIndex(scrollTop + height / 2)
     const buffer = Math.ceil(visibleItems.value / (bufferRatioReceprocal.value + 2))
     const firstIndex = Math.ceil(midPointIndex - visibleItems.value / 2)
-    const lastIndex = first.value + buffer * (bufferRatioReceprocal.value + 1)
+    const lastIndex = (first.value - 1) + buffer * (bufferRatioReceprocal.value + 2)
 
     if (direction === UP && midPointIndex <= first.value + buffer * bufferRatioReceprocal.value / 2) {
       first.value = clamp(firstIndex, 0, items.value.length)
-    } else if (direction === DOWN && (midPointIndex >= lastIndex - buffer * bufferRatioReceprocal.value / 2)) {
+    } else if (direction === DOWN && (midPointIndex >= lastIndex - buffer * (1 + bufferRatioReceprocal.value / 2))) {
       first.value = clamp(firstIndex, 0, items.value.length - visibleItems.value)
     }
     lastScrollTop = scrollTop
