@@ -15,7 +15,7 @@
 
     <page-feature-chip
       v-if="meta?.features?.report"
-      :text="t('report-an-issue')"
+      :text="t('report-a-bug')"
       prepend-icon="mdi-bug-outline"
       target="_blank"
       rel="noopener noreferrer"
@@ -23,6 +23,19 @@
     >
       <template #prepend>
         <v-icon color="red" />
+      </template>
+    </page-feature-chip>
+
+    <page-feature-chip
+      v-if="label"
+      :href="label"
+      :text="t('open-issues')"
+      prepend-icon="mdi-alert-circle-outline"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <template #prepend>
+        <v-icon color="warning" />
       </template>
     </page-feature-chip>
 
@@ -49,19 +62,6 @@
     >
       <template #prepend>
         <v-icon color="surface-variant" />
-      </template>
-    </page-feature-chip>
-
-    <page-feature-chip
-      v-if="label"
-      :href="label"
-      :text="t('open-issues')"
-      prepend-icon="mdi-alert-circle-outline"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <template #prepend>
-        <v-icon color="warning" />
       </template>
     </page-feature-chip>
   </div>
