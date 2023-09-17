@@ -78,11 +78,15 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
 
     let middle = 0
     let middleOffset = 0
-    while (middleOffset < scrollTop && middle < end) {
-      middleOffset += sizes[middle++] || itemHeight.value
+    while (middleOffset < scrollTop && middle <= end) {
+      const offset = sizes[middle] || itemHeight.value
+      middleOffset += isItemBeyondContainer.value && containerRef.value && middle === 0
+        ? (offset - containerRef.value.clientHeight)
+        : offset
+      middle++
     }
 
-    return middle - 1
+    return middle - 2
   }
 
   let lastScrollTop = 0
@@ -93,14 +97,16 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     const scrollTop = containerRef.value.scrollTop
     const direction = scrollTop < lastScrollTop ? UP : DOWN
 
-    const midPointIndex = calculateMidPointIndex(scrollTop + (isItemBeyondContainer.value ? height : (height / 2)))
+    const midPointIndex = calculateMidPointIndex(scrollTop + (isItemBeyondContainer.value ? itemHeight.value : (height / 2)))
     const buffer = Math.ceil(visibleItems.value / (bufferRatioReceprocal.value + 2))
     const firstIndex = Math.ceil(midPointIndex - visibleItems.value / 2)
     const lastIndex = (first.value - 1) + buffer * (bufferRatioReceprocal.value + 2)
 
-    if (direction === UP && midPointIndex <= first.value + buffer * bufferRatioReceprocal.value / 2) {
+    if (direction === UP && (midPointIndex <= first.value + buffer * bufferRatioReceprocal.value / 2 || isItemBeyondContainer.value)) {
       first.value = clamp(firstIndex, 0, items.value.length)
-    } else if (direction === DOWN && (midPointIndex >= lastIndex - buffer * (bufferRatioReceprocal.value / 2))) {
+    } else if (direction === DOWN &&
+        (midPointIndex >= lastIndex - buffer * (bufferRatioReceprocal.value / 2) || isItemBeyondContainer.value)
+    ) {
       first.value = clamp(firstIndex, 0, items.value.length - visibleItems.value)
     }
     lastScrollTop = scrollTop
