@@ -9,7 +9,7 @@ related:
   - /components/simple-tables/
   - /components/toolbars/
 features:
-  github: /components/VDataIterator/
+  github: /labs/VDataIterator/
   label: 'C: VDataIterator'
   report: true
 ---
