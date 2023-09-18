@@ -23,20 +23,23 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function updateUser () {
     const local = localStorage.getItem('vuetify@user')
-
     if (!auth?.user?.value?.sub || !url || !local || isUpdating.value) return
 
     const settings = JSON.parse(local)
 
     if (!settings.syncSettings) return
 
+    const token = await auth.getAccessTokenSilently({ detailedResponse: true })
+
     isUpdating.value = true
 
-    fetch(`${url}/api/user/update`, {
+    fetch(`${url}/api/user/update?sub=${auth?.user.value.sub}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token.id_token}`,
+      },
       body: JSON.stringify({
-        title: auth?.user.value.sub,
         settings,
       }),
     }).finally(() => {
@@ -50,7 +53,7 @@ export const useAuthStore = defineStore('auth', () => {
     const token = await auth.getAccessTokenSilently({ detailedResponse: true })
 
     try {
-      const { object } = await fetch(`${url}/api/user/get?user=${auth?.user.value.sub}`, {
+      const { object } = await fetch(`${url}/api/user/get?sub=${auth?.user.value.sub}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token.id_token}`,
