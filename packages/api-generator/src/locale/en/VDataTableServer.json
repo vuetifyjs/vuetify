@@ -3,8 +3,9 @@
     "itemsLength": "Number of all items."
   },
   "slots": {
-    "[`column.${string}`]": "Slot for custom rendering of a column.",
+    "[`column.${string}`]": "Slot for custom rendering of a column header.",
     "[`item.${string}`]": "Slot for custom rendering of a row cell.",
+    "[`group.${string}`]": "Slot for custom rendering of a group header cell.",
     "body": "Slot to replace the default rendering of the `<tbody>` element.",
     "bottom": "Slot to add content below the table.",
     "colgroup": "Slot to replace the default rendering of the `<colgroup>` element.",

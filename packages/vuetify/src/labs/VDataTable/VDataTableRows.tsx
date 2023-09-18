@@ -89,7 +89,7 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
         <>
           { props.items.map((item, index) => {
             if (item.type === 'group') {
-              return slots['group-header'] ? slots['group-header']({
+              const slotProps = {
                 index,
                 item,
                 columns: columns.value,
@@ -99,9 +99,12 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
                 toggleSelect,
                 toggleGroup,
                 isGroupOpen,
-              } as GroupHeaderSlot) : (
+              } satisfies GroupHeaderSlot
+
+              return slots['group-header']?.(slotProps) ?? (
                 <VDataTableGroupHeaderRow
                   key={ `group-header_${item.id}` }
+                  index={ index }
                   item={ item }
                   v-slots={ slots }
                 />
