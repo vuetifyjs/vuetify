@@ -35,9 +35,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     fetch(`${url}/api/user/update?sub=${auth?.user.value.sub}`, {
       method: 'POST',
-      mode: import.meta.env.MODE !== 'development' ? 'cors' : 'no-cors',
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${token.id_token}`,
       },
       body: JSON.stringify({
@@ -55,9 +53,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     try {
       const { object } = await fetch(`${url}/api/user/get?sub=${auth?.user.value.sub}`, {
-        mode: import.meta.env.MODE !== 'development' ? 'cors' : 'no-cors',
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${token.id_token}`,
         },
       }).then(res => res.json())
@@ -84,9 +80,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     try {
       const res = await fetch(`${url}/api/sponsors/verify?user=${auth?.user.value.nickname}&sub=${auth?.user.value.sub}`, {
-        mode: import.meta.env.MODE !== 'development' ? 'cors' : 'no-cors',
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${token.id_token}`,
         },
       }).then(res => res.json())
