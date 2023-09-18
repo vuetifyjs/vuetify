@@ -1,6 +1,6 @@
 <template>
   <v-sheet
-    class="mx-auto pa-3 pb-12"
+    class="mx-auto pb-12 text-center"
     color="transparent"
     max-width="900"
   >
@@ -32,12 +32,25 @@
     </v-row>
 
     <br>
+
+    <div class="mb-8">
+      <div class="d-flex align-center justify-center my-1 px-4">
+        <small class="font-weight-bold text-no-wrap">Powered By</small>
+
+        <sponsor-card
+          min-height="64"
+          slug="made-with-vuejs"
+          width="180"
+        />
+      </div>
+    </div>
+
     <br>
 
     <v-btn
       :aria-label="t('see-more-projects')"
       color="primary"
-      href="https://madewithvuetify.com/"
+      href="https://madewithvuejs.com/vuetify"
       rel="noopener noreferrer"
       size="large"
       target="_blank"
@@ -53,6 +66,8 @@
 </template>
 
 <script setup>
+  // Components
+  import SponsorCard from '@/components/sponsor/Card.vue'
   // Composables
   import { useMadeWithVuetifyStore } from '@/store/made-with-vuetify'
   import { useGtag } from 'vue-gtag-next'
