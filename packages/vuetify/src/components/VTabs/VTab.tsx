@@ -122,7 +122,7 @@ export const VTab = genericComponent()({
           maxWidth={ props.fixed ? 300 : undefined }
           onGroup:selected={ updateSlider }
         >
-          { slots.default?.() ?? props.text }
+          { slots.default?.() ?? props.text ?? props.title }
 
           { !props.hideSlider && (
             <div
