@@ -77,7 +77,9 @@
   const isSponsoring = computed(() => {
     if (!auth.sponsor) return false
 
-    return auth.sponsor.find(sponsor => sponsor.tier.monthlyPriceInDollars >= 1)
+    const sponsor = Array.isArray(auth.sponsor) ? auth.sponsor : [auth.sponsor]
+
+    return sponsor.find(s => s.tier.monthlyPriceInDollars >= 1)
   })
 
   function onClickLogout () {
