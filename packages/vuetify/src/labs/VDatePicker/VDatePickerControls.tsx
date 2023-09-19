@@ -15,7 +15,7 @@ import type { PropType } from 'vue'
 export const makeVDatePickerControlsProps = propsFactory({
   displayDate: String,
   disabled: {
-    type: [Boolean, Array<String>] as PropType<boolean | string[]>,
+    type: [Boolean, String] as PropType<boolean | string[]>,
     default: false,
   },
   nextIcon: {
