@@ -1,0 +1,7 @@
+{
+  "props": {
+    "itemSelectable": "Property on supplied `items` that contains the boolean value indicating if the item is selectable.",
+    "itemValue": "Property on supplied `items` that contains its value.",
+    "returnObject": "Changes the selection behavior to return the object directly rather than the value specified with **item-value**."
+  }
+}

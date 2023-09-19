@@ -250,11 +250,12 @@
     "inactiveIcon": "mdi-human-male-board",
     "activeIcon": "mdi-human-male-board",
     "items": [
+      "brand-kit",
       "jobs-for-vue",
-      "ui-kits",
-      "themes",
+      "made-with-vuetify",
       "search-engine",
-      "brand-kit"
+      "themes",
+      "ui-kits"
     ]
   },
   {

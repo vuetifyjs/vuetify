@@ -1,7 +1,7 @@
 <template>
   <div class="mb-8">
     <page-feature-chip
-      v-if="meta.figma"
+      v-if="meta?.features?.figma"
       :text="t('figma-design')"
       prepend-icon="mdi-image"
       href="https://figma.vuetifyjs.com/"
@@ -14,8 +14,8 @@
     </page-feature-chip>
 
     <page-feature-chip
-      v-if="meta.issues"
-      :text="t('report-an-issue')"
+      v-if="meta?.features?.report"
+      :text="t('report-a-bug')"
       prepend-icon="mdi-bug-outline"
       target="_blank"
       rel="noopener noreferrer"
@@ -27,10 +27,23 @@
     </page-feature-chip>
 
     <page-feature-chip
-      v-if="meta.github"
+      v-if="label"
+      :href="label"
+      :text="t('open-issues')"
+      prepend-icon="mdi-alert-circle-outline"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <template #prepend>
+        <v-icon color="warning" />
+      </template>
+    </page-feature-chip>
+
+    <page-feature-chip
+      v-if="meta?.features?.github"
       :text="t('view-in-github')"
       prepend-icon="mdi-github"
-      :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetify/src${meta.github}`"
+      :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetify/src${meta.features.github}`"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -40,10 +53,10 @@
     </page-feature-chip>
 
     <page-feature-chip
-      v-if="meta.spec"
+      v-if="meta?.features?.spec"
       :text="t('design-spec')"
       prepend-icon="mdi-material-design"
-      :href="meta.spec"
+      :href="meta.features.spec"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -60,9 +73,19 @@
   import { useRoute } from 'vue-router'
 
   // Utilities
+  import { computed } from 'vue'
   import { getBranch } from '@/util/helpers'
 
   const meta = useRoute().meta
+
   const { t } = useI18n()
   const branch = getBranch()
+
+  const label = computed(() => {
+    if (!meta.features.label) return false
+
+    const original = encodeURIComponent(meta.features.label)
+
+    return `https://github.com/vuetifyjs/vuetify/labels/${original}`
+  })
 </script>

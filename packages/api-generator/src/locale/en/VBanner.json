@@ -1,10 +1,10 @@
 {
   "props": {
     "avatar": "Designates a specific src image to pass to the thumbnail.",
+    "lines": "The amount of visible lines of text before it truncates.",
     "mobile": "Applies the mobile banner styles.",
     "sticky": "Applies `position: sticky` to the component with `top: 0`. You can find more information on the [MDN documentation for sticky position](https://developer.mozilla.org/en-US/docs/Web/CSS/position).",
-    "stacked": "Forces the banner actions onto a new line. This is not applicable when the banner has `lines=\"one\"`.",
-    "lines": "The amount of visible lines of text before it truncates."
+    "stacked": "Forces the banner actions onto a new line. This is not applicable when the banner has `lines=\"one\"`."
   },
   "slots": {
     "actions": "The slot used for the action's content such as a [v-btn](/components/buttons).",

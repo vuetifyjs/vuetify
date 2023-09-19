@@ -34,7 +34,7 @@ The continued development and maintenance of Vuetify is made possible by these g
 
 <br>
 
-<v-divider width="500" class="mx-auto" />
+<v-divider style="max-width: 500px;" class="mx-auto" />
 
 <br>
 

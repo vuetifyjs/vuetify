@@ -7,8 +7,8 @@
     "large": "Increase the font-size of the breadcrumb item text to 16px (14px default)."
   },
   "slots": {
-    "prepend": "The slot used for prepend content.",
     "divider": "The slot used for dividers.",
+    "prepend": "The slot used for prepend content.",
     "title": "The slot used to display the title of each breadcrumb."
   }
 }

@@ -73,6 +73,10 @@
 </template>
 
 <script setup>
+  import { useDisplay } from 'vuetify'
+
+  const { mdAndUp } = useDisplay()
+
   const tiers = [
     {
       name: 'Grass Tier',
@@ -149,11 +153,6 @@
           name: 'Private Help Channel',
           text: 'Get a private help channel where you can ask questions to the Core Team. *Response Guaranteed*.',
           emoji: '🛠️',
-        },
-        {
-          name: 'Virtual Subscriber Meetup',
-          text: 'Hangout with the team behind Vuetify in a Subscriber only virtual meetup on Discord',
-          emoji: '🎥',
         },
         {
           name: 'Priority GitHub Issues',

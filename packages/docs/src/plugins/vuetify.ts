@@ -39,7 +39,7 @@ export function installVuetify ({ app }: ViteSSGContext) {
       PageFeatureChip: {
         variant: 'tonal',
         border: true,
-        class: 'text-medium-emphasis me-2',
+        class: 'text-medium-emphasis me-2 mb-2',
         size: 'small',
       },
       NewInChip: {

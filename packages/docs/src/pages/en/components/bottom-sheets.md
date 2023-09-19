@@ -8,6 +8,11 @@ related:
   - /components/dialogs/
   - /components/lists/
   - /components/menus/
+features:
+  label: 'C: VBottomSheet'
+  github: /labs/VBottomSheet/
+  report: true
+  spec: https://m2.material.io/components/sheets-bottom
 ---
 
 # Bottom sheets
@@ -16,10 +21,18 @@ The bottom sheet is a modified `v-dialog` that slides from the bottom of the scr
 
 ![Bottom Sheet Entry](https://cdn.vuetifyjs.com/docs/images/components/v-bottom-sheet/v-bottom-sheet-entry.png)
 
-----
+<page-features />
+
+::: success
+
+This component is feature complete and is pending release in [v3.4.0 (Blackguard)](/introduction/roadmap/#v3-4-blackguard)
+
+:::
 
 ::: warning
+
 This feature requires [v3.3.0 (Icarus)](/getting-started/release-notes/?version=v3.3.0)
+
 :::
 
 ## Usage

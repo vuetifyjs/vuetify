@@ -8,19 +8,41 @@ related:
   - /components/lists/
   - /components/icons/
   - /getting-started/wireframes/
+features:
+  label: 'C: VNavigationDrawer'
+  report: true
+  github: /components/VNavigationDrawer/
+  spec: https://m2.material.io/components/navigation-drawer
 ---
 
 # Navigation drawers
 
-The `v-navigation-drawer` component is what your users will utilize to navigate through the application. The navigation-drawer is pre-configured to work with or without **vue-router** right out the box. For the purpose of display, some examples are wrapped in a `v-card` element. Within your application you will generally place the `v-navigation-drawer` as a direct child of `v-app`.
+The `v-navigation-drawer` component is what your users will utilize to navigate through the application.
+
+<page-features />
 
 ## Usage
 
-The navigation drawer is primarily used to house links to the pages in your application. Using `null` as the starting value for its **v-model** will initialize the drawer as closed on mobile and as open on desktop. It is common to pair drawers with the [v-list](/components/lists) component using the **nav** property.
+The navigation drawer is primarily used to house links to the pages in your application and is pre-configured to work with or without **vue-router** right out the box. Using `null` as the starting value for its **v-model** will initialize the drawer as closed on mobile and as open on desktop. It is common to pair drawers with the [v-list](/components/lists) component using the **nav** property.
 
-<!-- <example file="v-navigation-drawer/usage" /> -->
+<usage name="v-navigation-drawer" />
 
 <entry />
+
+::: tip
+
+For the purpose of display, some examples are wrapped in a `v-card` element. Within your application you will generally place the `v-navigation-drawer` as a direct child of
+ `v-app`.
+
+:::
+
+```html { resource="src/App.vue" }
+<template>
+  <v-app>
+    <v-navigation-drawer />
+  </v-app>
+</template>
+```
 
 ## API
 

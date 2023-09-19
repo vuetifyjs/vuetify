@@ -20,7 +20,7 @@
             width="125"
           />
 
-          <div class="d-flex justify-center mt-n2">
+          <div class="d-flex justify-center">
             <v-btn
               :href="`${logo.src}.svg`"
               class="mx-1"
@@ -61,7 +61,7 @@
             cover
           />
 
-          <div class="d-flex justify-center mt-n2">
+          <div class="d-flex justify-center">
             <v-btn
               :href="`${logo.src}.svg`"
               class="mx-1"
