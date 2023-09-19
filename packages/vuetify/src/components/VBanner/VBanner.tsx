@@ -39,8 +39,8 @@ export type VBannerSlots = {
 
 export const makeVBannerProps = propsFactory({
   avatar: String,
-  color: String,
   bgColor: String,
+  color: String,
   icon: IconValue,
   lines: String as PropType<'one' | 'two' | 'three'>,
   stacked: Boolean,
@@ -66,6 +66,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
   props: makeVBannerProps(),
 
   setup (props, { slots }) {
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'bgColor')
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
     const { displayClasses, mobile } = useDisplay(props)
@@ -74,7 +75,6 @@ export const VBanner = genericComponent<VBannerSlots>()({
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
-    const { backgroundColorClasses } = useBackgroundColor(props, 'bgColor')
 
     const { themeClasses } = provideTheme(props)
 
@@ -97,17 +97,18 @@ export const VBanner = genericComponent<VBannerSlots>()({
               'v-banner--sticky': props.sticky,
               [`v-banner--${props.lines}-line`]: !!props.lines,
             },
+            themeClasses.value,
+            backgroundColorClasses.value,
             borderClasses.value,
             densityClasses.value,
             displayClasses.value,
             elevationClasses.value,
             positionClasses.value,
             roundedClasses.value,
-            themeClasses.value,
-            backgroundColorClasses.value,
             props.class,
           ]}
           style={[
+            backgroundColorStyles.value,
             dimensionStyles.value,
             locationStyles.value,
             props.style,

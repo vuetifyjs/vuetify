@@ -140,7 +140,7 @@ app.use(vuetify)
 
 ### v-banner
 
-- `color` no longer changes the background color, but instead changes the color of the icon and action text. Use `bg-color` to change the background color.
+- `color` now applies to the icon and action text. Use `bg-color` to change the background color.
 
 ### v-btn/v-btn-toggle
 
