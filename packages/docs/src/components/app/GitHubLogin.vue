@@ -17,7 +17,6 @@
   <v-list-item
     v-else-if="user"
     :prepend-avatar="user.picture"
-    :title="user.name"
     :subtitle="user.email"
     class="px-4"
     lines="one"
@@ -25,6 +24,16 @@
   >
     <template #prepend>
       <v-avatar size="small" class="me-n2" />
+    </template>
+
+    <template #title>
+      <div class="d-flex align-center">
+        <span class="me-1">{{ user.name }}</span>
+
+        <v-icon v-if="auth.admin" color="primary" icon="$vuetify" size="12" />
+
+        <v-icon v-if="auth.sponsor?.tier" icon="mdi-crown" color="#e98b20" size="12" />
+      </div>
     </template>
 
     <template #append>
@@ -55,8 +64,10 @@
 
   // Stores
   import { useAppStore } from '@/store/app'
+  import { useAuthStore } from '@/store/auth'
 
   const app = useAppStore()
+  const auth = useAuthStore()
   const { loginWithPopup, user, logout, isAuthenticated } = useAuth0()
   const { t } = useI18n()
 
