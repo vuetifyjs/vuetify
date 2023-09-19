@@ -153,7 +153,7 @@ export function provideSelection (
       allItems: allSelectable.value,
       currentPage: currentPageSelectable.value,
     })
-    return isSelected(items)
+    return items.length && isSelected(items)
   })
 
   const data = {
