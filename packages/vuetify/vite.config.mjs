@@ -45,7 +45,7 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       vue(),
-      vueJsx({ optimize: false, enableObjectSlots: true }),
+      vueJsx({ optimize: false, enableObjectSlots: false }),
       viteSSR(),
       Components({
         dts: !process.env.CYPRESS,
