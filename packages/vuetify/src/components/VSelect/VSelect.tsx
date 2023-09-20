@@ -420,6 +420,7 @@ export const VSelect = genericComponent<new <
                     },
                     modelValue: true,
                     'onUpdate:modelValue': undefined,
+                    ...item.props,
                   }
 
                   return (
