@@ -62,6 +62,7 @@ export const makeVSelectionControlProps = propsFactory({
   trueValue: null,
   falseValue: null,
   value: null,
+  reverse: Boolean,
 
   ...makeComponentProps(),
   ...makeSelectionControlGroupProps(),
@@ -230,6 +231,18 @@ export const VSelectionControl = genericComponent<new <T>(
         />
       )
 
+      const labelNode = (
+        <VLabel
+          key="label"
+          class={ props.reverse ? 'v-label--prepend' : 'v-label--append' }
+          for={ id.value }
+          clickable
+          onClick={ (e: Event) => e.stopPropagation() }
+        >
+          { label }
+        </VLabel>
+      )
+
       return (
         <div
           class={[
@@ -248,6 +261,8 @@ export const VSelectionControl = genericComponent<new <T>(
           { ...rootAttrs }
           style={ props.style }
         >
+          { props.reverse && label && labelNode }
+
           <div
             class={[
               'v-selection-control__wrapper',
@@ -293,11 +308,7 @@ export const VSelectionControl = genericComponent<new <T>(
             </div>
           </div>
 
-          { label && (
-            <VLabel for={ id.value } clickable onClick={ (e: Event) => e.stopPropagation() }>
-              { label }
-            </VLabel>
-          )}
+          { !props.reverse && label && labelNode }
         </div>
       )
     })
