@@ -7,11 +7,17 @@ related:
   - /components/cards/
   - /components/sheets/
   - /components/images/
+features:
+  github: /components/VAspectRatio/
+  label: 'C: VAspectRatio'
+  report: true
 ---
 
 # Aspect ratios
 
 The `v-responsive` component can be used to fix any section to a specific aspect ratio
+
+<page-features />
 
 ## Usage
 

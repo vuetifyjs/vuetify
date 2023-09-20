@@ -11,13 +11,19 @@ related:
 assets:
   - https://use.fontawesome.com/releases/v5.0.13/css/all.css
   - https://fonts.googleapis.com/icon?family=Material+Icons
+features:
+  figma: true
+  github: /components/VIcon/
+  label: 'C: VIcon'
+  report: true
+  spec: https://m2.material.io/design/iconography/system-icons.html
 ---
 
 # Icons
 
 The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. For a list of all available icons, visit the official [Material Design Icons](https://materialdesignicons.com/) page. To use any of these icons simply use the `mdi-` prefix followed by the icon name.
 
-----
+<page-features />
 
 ## Usage
 

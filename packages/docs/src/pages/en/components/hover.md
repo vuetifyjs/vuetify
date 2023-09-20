@@ -8,11 +8,17 @@ related:
   - /components/cards/
   - /components/images/
   - /components/tooltips/
+features:
+  github: /components/VHover/
+  label: 'C: VHover'
+  report: true
 ---
 
 # Hover
 
 The `v-hover` component provides a simple interface for handling hover states for any component.
+
+<page-features />
 
 ## Usage
 

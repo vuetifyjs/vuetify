@@ -8,6 +8,11 @@ related:
   - /components/buttons/
   - /components/icons/
   - /components/snackbars/
+features:
+  figma: true
+  github: /components/VAlert/
+  label: 'C: VAlert'
+  report: true
 ---
 
 # Alerts
@@ -16,7 +21,7 @@ The `v-alert` component is used to convey important information to the user thro
 
 ![Alert Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-alert/v-alert-entry.png)
 
-----
+<page-features />
 
 ## Usage
 

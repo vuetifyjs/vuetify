@@ -8,6 +8,11 @@ related:
   - /components/badges/
   - /components/icons/
   - /components/lists/
+features:
+  figma: true
+  github: /components/VAvatar/
+  label: 'C: VAvatar'
+  report: true
 ---
 
 # Avatars
@@ -16,7 +21,7 @@ The `v-avatar` component is typically used to display circular user profile pict
 
 ![Avatar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-avatar/v-avatar-entry.png)
 
----
+<page-features />
 
 ## Usage
 

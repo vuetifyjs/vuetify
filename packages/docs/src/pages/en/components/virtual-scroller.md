@@ -8,6 +8,10 @@ related:
   - /components/lists/
   - /components/data-tables/virtual-tables/
   - /components/combobox/
+features:
+  github: /components/VVirtualScroller/
+  label: 'C: VVirtualScroller'
+  report: true
 ---
 
 # Virtual scrollers
@@ -16,7 +20,7 @@ The `v-virtual-scroll` component displays a virtual, _infinite_ list. It support
 
 ![Virtual scroll Entry](https://cdn.vuetifyjs.com/docs/images/components/v-virtual-scroll/v-virtual-scroll-entry.png)
 
-----
+<page-features />
 
 ::: warning
 This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)

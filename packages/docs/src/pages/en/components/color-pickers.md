@@ -8,11 +8,17 @@ related:
   - /components/menus/
   - /styles/colors/
   - /features/theme/
+features:
+  github: /components/VColorPicker/
+  label: 'C: VColorPicker'
+  report: true
 ---
 
 # Color pickers
 
 The `v-color-picker` allows you to select a color using a variety of input methods.
+
+<page-features />
 
 ## Usage
 

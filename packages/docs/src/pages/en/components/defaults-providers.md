@@ -8,13 +8,17 @@ related:
   - /features/aliasing/
   - /features/blueprints/
   - /features/global-configuration/
+features:
+  github: /components/VDefaultsProvider/
+  label: 'C: VDefaultsProvider'
+  report: true
 ---
 
 # Defaults providers
 
 The defaults provider allows you to provide specific default prop values to components in a section of your application
 
-----
+<page-features />
 
 ## Usage
 

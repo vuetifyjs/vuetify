@@ -8,11 +8,18 @@ related:
   - /components/cards/
   - /components/progress-linear/
   - /components/lists/
+features:
+  github: /components/VProgressCircular/
+  label: 'C: VProgressCircular'
+  report: true
+  spec: https://m2.material.io/components/progress-indicators
 ---
 
 # Progress circular
 
 The `v-progress-circular` component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.
+
+<page-features />
 
 ## Usage
 
