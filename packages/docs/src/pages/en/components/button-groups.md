@@ -8,6 +8,11 @@ related:
   - /components/buttons/
   - /components/icons/
   - /components/toolbars/
+features:
+  github: /components/VBtnToggle/
+  label: 'C: VBtnToggle'
+  report: true
+  spec: https://m2.material.io/components/buttons#toggle-button
 ---
 
 # Button toggles
@@ -16,7 +21,7 @@ The `v-btn-toggle` component is a simple wrapper for `v-item-group` built specif
 
 <!-- ![btn-groups Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-btn-groups/v-btn-groups-entry.png) -->
 
----
+<page-features />
 
 ## Usage
 

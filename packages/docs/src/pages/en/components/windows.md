@@ -8,11 +8,17 @@ related:
     - /components/carousels/
     - /components/sheets/
     - /components/tabs/
+features:
+  github: /components/VWindow/
+  label: 'C: VWindow'
+  report: true
 ---
 
 # Windows
 
 The `v-window` component provides the baseline functionality for transitioning content from one pane to another. Other components such as `v-tabs`, `v-carousel` and `v-stepper` utilize this component at their core.
+
+<page-features />
 
 ## Usage
 

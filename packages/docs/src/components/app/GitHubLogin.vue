@@ -32,7 +32,7 @@
 
         <v-icon v-if="auth.admin" color="primary" icon="$vuetify" size="12" />
 
-        <v-icon v-if="auth.sponsor?.tier" icon="mdi-crown" color="#e98b20" size="12" />
+        <v-icon v-if="isSponsoring" icon="mdi-crown" color="#e98b20" size="12" />
       </div>
     </template>
 
@@ -62,6 +62,9 @@
   import { useAuth0 } from '@/plugins/auth'
   import { useI18n } from 'vue-i18n'
 
+  // Utilities
+  import { computed } from 'vue'
+
   // Stores
   import { useAppStore } from '@/store/app'
   import { useAuthStore } from '@/store/auth'
@@ -70,6 +73,14 @@
   const auth = useAuthStore()
   const { loginWithPopup, user, logout, isAuthenticated } = useAuth0()
   const { t } = useI18n()
+
+  const isSponsoring = computed(() => {
+    if (!auth.sponsor) return false
+
+    const sponsor = Array.isArray(auth.sponsor) ? auth.sponsor : [auth.sponsor]
+
+    return sponsor.find(s => s.tier.monthlyPriceInDollars >= 1)
+  })
 
   function onClickLogout () {
     logout({ logoutParams: { returnTo: window.location.origin } })
