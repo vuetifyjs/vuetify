@@ -18,10 +18,16 @@
     "start": "Specify the starting page.",
     "totalVisible": "Specify the total visible pagination numbers."
   },
+  "slots": {
+    "first": "Define a custom appearance for the first button.",
+    "last": "Define a custom appearance for the last button.",
+    "next": "Define a custom appearance for the next button.",
+    "prev": "Define a custom appearance for the previous button."
+  },
   "events": {
     "first": "Emitted when clicking on go to first button.",
     "last": "Emitted when clicking on go to last button.",
     "next": "Emitted when clicking on go to next button.",
-    "previous": "Emitted when clicking on go to previous button."
+    "prev": "Emitted when clicking on go to previous button."
   }
 }
