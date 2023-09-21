@@ -82,6 +82,7 @@
           newIn: _newIn?.[props.name]?.[props.section]?.[name],
           description: prop.description?.[store.locale],
           descriptionSource: prop.descriptionSource?.[store.locale],
+          githubUrl: prop.githubUrl?.[store.locale],
         })
         return arr
       }, []).sort((a: any, b: any) => a.name.localeCompare(b.name))

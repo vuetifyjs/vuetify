@@ -135,15 +135,15 @@ async function getSources (name: string, locale: string, sources: string[]) {
 
   return {
     find: (section: string, key: string, ogSource = name) => {
+      const githubUrl = `https://github.com/vuetifyjs/vuetify/tree/${currentBranch}/packages/api-generator/src/locale/${locale}/${ogSource}.json`
       for (let i = 0; i < arr.length; i++) {
         const source = arr[i] as any
         const found: string | undefined = source?.[section]?.[key]
         if (found) {
-          return { text: found, source: sourcesMap[i] }
+          return { text: found, source: sourcesMap[i], githubUrl }
         }
       }
-      const githubUrl = `https://github.com/vuetifyjs/vuetify/tree/${currentBranch}/packages/api-generator/src/locale/${locale}/${ogSource}.json`
-      return { text: `MISSING DESCRIPTION ([edit in github](${githubUrl}))`, source: name }
+      return { text: `MISSING DESCRIPTION ([edit in github](${githubUrl}))`, source: name, githubUrl }
     },
   }
 }
@@ -156,10 +156,12 @@ export async function addDescriptions (name: string, componentData: ComponentDat
       for (const [propName, propObj] of Object.entries(componentData[section] ?? {})) {
         propObj.description = propObj.description ?? {}
         propObj.descriptionSource = propObj.descriptionSource ?? {}
+        propObj.githubUrl = propObj.githubUrl ?? {}
 
         const found = descriptions.find(section, propName, propObj.source)
         propObj.description![locale] = found.text
         propObj.descriptionSource![locale] = found.source
+        propObj.githubUrl![locale] = found.githubUrl
       }
     }
   }

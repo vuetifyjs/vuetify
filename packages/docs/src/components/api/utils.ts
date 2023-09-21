@@ -9,6 +9,7 @@ export type Item = {
   default: any
   description: Record<string, string>
   descriptionSource?: Record<string, string>
+  githubUrl?: Record<string, string>
   snippet: string
   value: any
   example: string

@@ -30,6 +30,18 @@
 
           <tr v-if="item.description || (user.dev && item.source)">
             <td colspan="3" class="text-mono pt-4">
+              <v-btn
+                v-if="item.githubUrl"
+                class="mb-3 ms-3 float-end"
+                :href="item.githubUrl"
+                icon
+                size="small"
+                target="_blank"
+                title="Edit in GitHub"
+              >
+                <v-icon size="small">mdi-pencil</v-icon>
+              </v-btn>
+
               <template v-if="item.description">
                 <app-markdown
                   v-if="localeStore.locale !== 'eo-UY'"
