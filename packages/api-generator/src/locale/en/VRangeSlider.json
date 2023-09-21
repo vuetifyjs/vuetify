@@ -1,1 +1,14 @@
-{}
+{
+  "props": {
+    "strict": "Disallows dragging the ending thumb past the starting thumb and vice versa."
+
+  },
+  "slots": {
+    "thumb-label": "Slot for the thumb label.",
+    "tick-label": "Slot for the tick label."
+  },
+  "events": {
+    "end": "Slider value emitted at the end of slider movement.",
+    "start": "Slider value emitted at start of slider movement."
+  }
+}
