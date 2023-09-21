@@ -1,3 +1,5 @@
 {
-  "clickable": "Changes the cursor to a pointer when the mouse is over the element."
+  "props": {
+    "clickable": "Changes the cursor to a pointer when the mouse is over the element."
+  }
 }
