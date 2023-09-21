@@ -27,6 +27,10 @@
     "click:prepend-inner": "Emitted when prepended inner icon is clicked.",
     "click:prependInner": "Emitted when prepended inner icon is clicked.",
     "focus": "Emitted when component is focused.",
-    "keydown": "Emitted when **any** key is pressed."
+    "keydown": "Emitted when **any** key is pressed.",
+    "mousedown:control": "Event that is emitted when using mousedown on the main control area."
+  },
+  "slots": {
+    "counter": "Slot for the input’s counter text."
   }
 }
