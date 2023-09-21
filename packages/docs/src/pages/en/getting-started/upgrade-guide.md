@@ -242,3 +242,9 @@ app.use(vuetify)
 ### v-card
 
 - `v-card` does not allow content to overflow or use higher `z-index` values to display on top of elements outside it. To disable this behavior, use `<v-card style="overflow: initial; z-index: initial">` ([#17593](https://github.com/vuetifyjs/vuetify/issues/17593), [#17628](https://github.com/vuetifyjs/vuetify/issues/17628))
+
+## Directives
+
+### v-intersect
+
+- Handler argument order has changed from `entries, observer, isIntersecting` to `isIntersecting, entries, observer`
