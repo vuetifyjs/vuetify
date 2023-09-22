@@ -22,6 +22,7 @@ import { makeFilterProps, useFilter } from '@/composables/filter'
 // Utilities
 import { computed, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
+import { isVNodesEmpty } from '@/util/helpers'
 
 // Types
 import type { UnwrapRef } from 'vue'
@@ -203,7 +204,7 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
         >
           {{
             top: () => slots.top?.(slotProps.value),
-            default: () => slots.default ? slots.default(slotProps.value) : (
+            default: () => !isVNodesEmpty(slots.default?.(slotProps.value)) ? slots.default?.(slotProps.value) : (
               <>
                 { slots.colgroup?.(slotProps.value) }
                 <thead>
