@@ -1,5 +1,5 @@
 // Utilities
-import { camelize, capitalize, computed, Fragment, reactive, toRefs, watchEffect } from 'vue'
+import { camelize, capitalize, Comment, computed, Fragment, reactive, toRefs, watchEffect } from 'vue'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -699,4 +699,8 @@ export function matchesSelector (el: Element | undefined, selector: string): boo
   } catch (err) {
     return null
   }
+}
+
+export function isVNodesEmpty (vnodes: VNode[] | undefined): boolean {
+  return !vnodes || wrapInArray(vnodes).every(vnode => vnode.type === Comment)
 }
