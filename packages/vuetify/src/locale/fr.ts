@@ -93,4 +93,17 @@ export default {
     loadMore: 'Load more',
     empty: 'No more',
   },
+  rules: {
+    required: 'Ce champ est obligatoire',
+    email: 'Veuillez saisir un E-mail valide',
+    number: 'Ce champs ne peut contenir que des chiffres',
+    integer: 'Ce champs ne peut contenir que des nombres entiers',
+    capital: 'Ce champs ne peut contenir que des majuscules',
+    maxLength: 'Vous devez saisir {0} caractères maximum',
+    minLength: 'Vous devez saisir au moins {0} caractères',
+    strictLength: 'La longueur du champ saisi est invalide',
+    exclude: 'Le caractère {0} n\'est pas autorisé',
+    notEmpty: 'Veuillez choisir au moins une valeur',
+    pattern: 'Format invalide',
+  },
 }
