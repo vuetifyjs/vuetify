@@ -280,6 +280,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
               </div>
             ),
             actions: () => !props.hideActions ? (
+              slots.actions?.() ??
               <div>
                 <VBtn
                   variant="text"
