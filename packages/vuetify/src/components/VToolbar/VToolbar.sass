@@ -26,15 +26,10 @@
   &--collapse
     max-width: $toolbar-collapsed-max-width
     overflow: hidden
+    border-end-end-radius: $toolbar-collapsed-border-radius
 
     .v-toolbar-title
       display: none
-
-    @include tools.ltr()
-      border-bottom-right-radius: $toolbar-collapsed-border-radius
-
-    @include tools.rtl()
-      border-bottom-left-radius: $toolbar-collapsed-border-radius
 
   &--flat
     @include tools.elevation($toolbar-flat-elevation)
@@ -81,12 +76,10 @@
   display: flex
 
 .v-toolbar__prepend
-  margin-inline-start: $toolbar-prepend-btn-margin-start
-  margin-inline-end: auto
+  margin-inline: $toolbar-prepend-btn-margin-start auto
 
 .v-toolbar__append
-  margin-inline-start: auto
-  margin-inline-end: $toolbar-append-btn-margin-end
+  margin-inline: auto $toolbar-append-btn-margin-end
 
 .v-toolbar-title
   flex: 1 1
