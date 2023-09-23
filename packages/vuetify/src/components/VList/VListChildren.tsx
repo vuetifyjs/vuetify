@@ -26,11 +26,13 @@ export type VListChildrenSlots<T> = {
 
 export const makeVListChildrenProps = propsFactory({
   items: Array as PropType<readonly InternalListItem[]>,
+  returnObject: Boolean,
 }, 'VListChildren')
 
 export const VListChildren = genericComponent<new <T extends InternalListItem>(
   props: {
     items?: readonly T[]
+    returnObject?: boolean
   },
   slots: VListChildrenSlots<T>
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -71,7 +73,14 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(
           {{
             activator: ({ props: activatorProps }) => slots.header
               ? slots.header({ props: { ...itemProps, ...activatorProps } })
-              : <VListItem { ...itemProps } { ...activatorProps } v-slots={ slotsWithItem } />,
+              : (
+                <VListItem
+                  title={ itemProps.title }
+                  value={ props.returnObject ? item : itemProps.value }
+                  { ...activatorProps }
+                  v-slots={ slotsWithItem }
+                />
+              ),
             default: () => (
               <VListChildren items={ children } v-slots={ slots } />
             ),
@@ -80,7 +89,8 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(
       ) : (
         slots.item ? slots.item({ props: itemProps }) : (
           <VListItem
-            { ...itemProps }
+            title={ itemProps.title }
+            value={ props.returnObject ? item : itemProps.value }
             v-slots={ slotsWithItem }
           />
         )
