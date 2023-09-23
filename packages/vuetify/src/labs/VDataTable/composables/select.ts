@@ -3,11 +3,12 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject, provide } from 'vue'
-import { propsFactory, wrapInArray } from '@/util'
+import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
 import type { DataTableItemProps } from './items'
+import type { SelectItemKey } from '@/util'
 
 export interface SelectableItem {
   value: any
@@ -92,7 +93,7 @@ export const VDataTableSelectionSymbol: InjectionKey<ReturnType<typeof provideSe
 
 export function provideSelection (
   props: SelectionProps,
-  { allItems, currentPage }: { allItems: Ref<SelectableItem[]>, currentPage: Ref<SelectableItem[]> }
+  { allItems, currentPage, itemValue='', returnObject=false }: { allItems: Ref<SelectableItem[]>, currentPage: Ref<SelectableItem[]>, itemValue?: SelectItemKey, returnObject?: boolean }
 ) {
   const selected = useProxiedModel(props, 'modelValue', props.modelValue, v => {
     return new Set(v)
@@ -115,6 +116,15 @@ export function provideSelection (
   })
 
   function isSelected (items: SelectableItem | SelectableItem[]) {
+    if (returnObject) {
+      const selectedItemValueSet = new Set([...selected.value.values()].map(item => {
+        return getPropertyFromItem(item, itemValue, item)
+      }))
+
+      return wrapInArray(items).every(item => {
+        return selectedItemValueSet.has(getPropertyFromItem(item.value, itemValue, item))
+      })
+    }
     return wrapInArray(items).every(item => selected.value.has(item.value))
   }
 

@@ -76,6 +76,8 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
     const { isSelected, select, selectAll, toggleSelect, someSelected, allSelected } = provideSelection(props, {
       allItems: items,
       currentPage: items,
+      itemValue: props.itemValue,
+      returnObject: props.returnObject,
     })
 
     const { isExpanded, toggleExpand } = provideExpanded(props)
