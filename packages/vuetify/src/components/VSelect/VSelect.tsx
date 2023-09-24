@@ -413,7 +413,6 @@ export const VSelect = genericComponent<new <
                   }
 
                   const slotProps = {
-                    disabled: item.props.disabled,
                     'onClick:close': onChipClose,
                     onMousedown (e: MouseEvent) {
                       e.preventDefault()
@@ -432,6 +431,7 @@ export const VSelect = genericComponent<new <
                             closable={ props.closableChips }
                             size="small"
                             text={ item.title }
+                            disabled={ item.props.disabled }
                             { ...slotProps }
                           />
                         ) : (
