@@ -12,32 +12,32 @@ related:
 
 # Upgrade Guide
 
-## Introduction
-
 This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
 
 ::: error
-
-Many of these changes on this page can be applied automatically by using our [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)
-
+  <span class="text-h6">Many of the changes on this page can be applied automatically using [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)</span>
 :::
 
 <entry />
 
-::: warning
+::: info
   This page is incomplete. Please check back later for more information, or submit a PR if you notice something missing. If you have additional questions, reach out to us in [Discord](https://community.vuetifyjs.com/)
 :::
 
 ::: warning
   Not all Vuetify 2 components are currently available in Vuetify 3; These components will be released as their development is completed via [Vuetify Labs](https://vuetifyjs.com/en/labs/introduction/).
 
-- v-calendar
-- [v-date-picker](/components/date-pickers/)
-- [v-data-table](/components/data-tables/basics/)
-- [v-skeleton-loader](/components/skeleton-loaders/)
-- [v-stepper](/components/steppers/)
-- v-time-picker
-- v-treeview
+- [calendar](https://github.com/vuetifyjs/vuetify/issues/13469)
+- [date-picker](/components/date-pickers/)
+- [data-table](/components/data-tables/basics/)
+- [otp-input](/components/otp-input/)
+- [overflow-btn](https://github.com/vuetifyjs/vuetify/issues/13493)
+- [skeleton-loader](/components/skeleton-loaders/)
+- [sparkline](https://github.com/vuetifyjs/vuetify/issues/13507)
+- [speed-dial](https://github.com/vuetifyjs/vuetify/issues/13508)
+- [stepper](/components/steppers/)
+- [time-picker](https://github.com/vuetifyjs/vuetify/issues/13516)
+- [treeview](https://github.com/vuetifyjs/vuetify/issues/13518)
 :::
 
 ## Setup
