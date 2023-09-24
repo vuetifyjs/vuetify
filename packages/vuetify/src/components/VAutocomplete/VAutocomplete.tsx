@@ -515,6 +515,7 @@ export const VAutocomplete = genericComponent<new <
                   }
 
                   const slotProps = {
+                    disabled: item.props.disabled,
                     'onClick:close': onChipClose,
                     onMousedown (e: MouseEvent) {
                       e.preventDefault()
@@ -522,7 +523,6 @@ export const VAutocomplete = genericComponent<new <
                     },
                     modelValue: true,
                     'onUpdate:modelValue': undefined,
-                    ...item.props,
                   }
 
                   return (
