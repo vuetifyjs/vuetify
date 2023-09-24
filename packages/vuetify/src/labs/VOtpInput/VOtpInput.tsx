@@ -190,7 +190,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     }, { scoped: true })
 
     watch(model, val => {
-      if (val.length === props.length) emit('finish', val.join(''))
+      if (val.length === Number(props.length)) emit('finish', val.join(''))
     }, { deep: true })
 
     watch(focusIndex, val => {
