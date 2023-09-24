@@ -417,7 +417,7 @@ export const VCombobox = genericComponent<new <
           onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
-          counterValue={ () => model.value.length }
+          counterValue={ props.multiple ? model.value.length : search.value.length }
           dirty={ isDirty }
           class={[
             'v-combobox',
