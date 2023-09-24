@@ -232,12 +232,6 @@
   "progress": "Progress",
   "providers": "Providers",
   "published": "Published: {date}",
-  "pwa": {
-    "install": "Install Vuetify Documentation",
-    "new-content-available": "New content is available. Click **Refresh** to update.",
-    "refresh": "Refresh",
-    "ignore": "Don't ask again"
-  },
   "range": "Range",
   "read": "View Read ({number})",
   "ready-text": "Continue your learning with related content selected by the {team} or move between pages by using the navigation links below.",

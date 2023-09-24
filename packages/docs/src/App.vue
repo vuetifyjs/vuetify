@@ -1,5 +1,4 @@
 <template>
-  <v-progress-linear v-if="pwa.loading" indeterminate color="primary" height="3" class="pwa-loader" />
   <router-view />
 </template>
 
@@ -14,7 +13,6 @@
   // Stores
   import { useAuthStore } from '@/store/auth'
   import { useUserStore } from '@/store/user'
-  import { usePwaStore } from '@/store/pwa'
 
   // Utilities
   import { computed, nextTick, onBeforeMount, ref, watch, watchEffect } from 'vue'
@@ -25,7 +23,6 @@
   import { IN_BROWSER } from '@/util/globals'
 
   const user = useUserStore()
-  const pwa = usePwaStore()
   const router = useRouter()
   const route = useRoute()
   const theme = useTheme()
