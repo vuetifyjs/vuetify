@@ -530,7 +530,6 @@ export const VCombobox = genericComponent<new <
                   }
 
                   const slotProps = {
-                    disabled: item.props.disabled,
                     'onClick:close': onChipClose,
                     onMousedown (e: MouseEvent) {
                       e.preventDefault()
@@ -559,6 +558,7 @@ export const VCombobox = genericComponent<new <
                             closable={ props.closableChips }
                             size="small"
                             text={ item.title }
+                            disabled={ item.props.disabled }
                             { ...slotProps }
                           />
                         ) : (
