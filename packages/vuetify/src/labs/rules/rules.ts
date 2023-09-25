@@ -1,6 +1,11 @@
+// Composables
 import { useLocale } from '@/composables'
-import { mergeDeep } from '@/util'
+
+// Utilities
 import { inject } from 'vue'
+import { mergeDeep } from '@/util'
+
+// Types
 import type { InjectionKey } from 'vue'
 import type { ValidationRule } from '@/composables/validation'
 
@@ -33,7 +38,7 @@ const parseRulesOptions = (options?: RulesOptions) => {
 }
 
 export function createRules (options?: RulesOptions) {
-  // @ts-ignore
+  // @ts-expect-error
   const _options = parseRulesOptions(options)
 
   const state: RulesInstance = {
