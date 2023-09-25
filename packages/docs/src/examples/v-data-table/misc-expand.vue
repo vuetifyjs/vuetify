@@ -15,7 +15,7 @@
     <template v-slot:expanded-row="{ columns, item }">
       <tr>
         <td :colspan="columns.length">
-          More info about {{ item.raw.name }}
+          More info about {{ item.name }}
         </td>
       </tr>
     </template>
