@@ -280,22 +280,23 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
               </div>
             ),
             actions: () => !props.hideActions ? (
-              slots.actions?.() ??
-              <div>
-                <VBtn
-                  variant="text"
-                  color={ props.color }
-                  onClick={ onClickCancel }
-                  text={ t(props.cancelText) }
-                />
+              slots.actions?.() ?? (
+                <div>
+                  <VBtn
+                    variant="text"
+                    color={ props.color }
+                    onClick={ onClickCancel }
+                    text={ t(props.cancelText) }
+                  />
 
-                <VBtn
-                  variant="text"
-                  color={ props.color }
-                  onClick={ onClickSave }
-                  text={ t(props.okText) }
-                />
-              </div>
+                  <VBtn
+                    variant="text"
+                    color={ props.color }
+                    onClick={ onClickSave }
+                    text={ t(props.okText) }
+                  />
+                </div>
+              )
             ) : undefined,
           }}
         />
