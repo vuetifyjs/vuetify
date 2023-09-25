@@ -266,7 +266,7 @@ describe('VDataTable', () => {
               colgroup: ({ columns }) => (
                 <colgroup>
                   { columns.map(column => (
-                    <col id={ column.key }></col>
+                    <col id={ column.key! }></col>
                   ))}
                 </colgroup>
               ),
@@ -306,9 +306,11 @@ describe('VDataTable', () => {
               item: ({ columns, internalItem }) => (
                 <tr class="custom-row">
                   { columns.map(column => (
-                    <td>
-                      <h1>{ internalItem.columns[column.key] }</h1>
-                    </td>
+                    column.key != null ? (
+                      <td>
+                        <h1>{ internalItem.columns[column.key] }</h1>
+                      </td>
+                    ) : null
                   ))}
                 </tr>
               ),

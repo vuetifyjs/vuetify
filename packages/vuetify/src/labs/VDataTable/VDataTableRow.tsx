@@ -10,7 +10,7 @@ import { VDataTableColumn } from './VDataTableColumn'
 
 // Utilities
 import { toDisplayString, withModifiers } from 'vue'
-import { genericComponent, getPropertyFromItem, propsFactory, useRender } from '@/util'
+import { genericComponent, getObjectValueByPath, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -64,7 +64,7 @@ export const VDataTableRow = genericComponent<VDataTableRowSlots>()({
                   index: props.index!,
                   item: item.raw,
                   internalItem: item,
-                  value: getPropertyFromItem(item.columns, column.key),
+                  value: getObjectValueByPath(item.columns, column.key),
                   column,
                   isSelected,
                   toggleSelect,

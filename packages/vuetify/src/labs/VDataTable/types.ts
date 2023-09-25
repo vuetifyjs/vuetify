@@ -8,7 +8,7 @@ import type { SelectItemKey } from '@/util'
 export type DataTableCompareFunction<T = any> = (a: T, b: T) => number
 
 export type DataTableHeader = {
-  key: string
+  key?: 'data-table-group' | 'data-table-select' | 'data-table-expand' | (string & {})
   value?: SelectItemKey
   title: string
 
@@ -26,7 +26,9 @@ export type DataTableHeader = {
   sort?: DataTableCompareFunction
 }
 
-export type InternalDataTableHeader = DataTableHeader & {
+export type InternalDataTableHeader = Omit<DataTableHeader, 'key' | 'value'> & {
+  key: string | null
+  value: SelectItemKey | null
   sortable: boolean
   fixedOffset?: number
   lastFixed?: boolean
