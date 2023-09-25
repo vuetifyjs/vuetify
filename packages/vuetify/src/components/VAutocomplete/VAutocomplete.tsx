@@ -244,7 +244,7 @@ export const VAutocomplete = genericComponent<new <
         const originalSelectionIndex = selectionIndex.value
 
         const selectedItem = model.value[selectionIndex.value]
-        if (selectedItem && !selectedItem.props?.disabled) select(selectedItem)
+        if (selectedItem && !selectedItem.props.disabled) select(selectedItem)
 
         selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
       }
