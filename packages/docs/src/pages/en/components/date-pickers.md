@@ -114,7 +114,8 @@ Here is an example of switching the locale of the **v-date-picker** component.
 
 ```html
 <v-date-picker></v-date-picker>
-``` -->
+```
+-->
 
 ### Props
 

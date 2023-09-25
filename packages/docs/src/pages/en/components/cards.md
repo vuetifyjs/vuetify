@@ -89,11 +89,26 @@ In some cases it is possible to combine the different options, like the example 
 
 ### Props
 
-#### Outlined
+#### Variants
 
-A card with the **variant** prop set to `outlined` has zero elevation.
+The **variant** prop gives you easy access to several different card styles. Available variants are: **elevated**(default), **flat**, **tonal**, **outlined**, **text**, and **plain**.
 
-<example file="v-card/prop-outlined" />
+| Value        | Description                                                 |
+|--------------|-------------------------------------------------------------|
+| **elevated** | Elevates the card with a shadow                             |
+| **flat**     | Removes card shadow and border                              |
+| **tonal**    | Background color is a lowered opacity of the color          |
+| **outlined** | Applies a thin border and card has zero elevation           |
+| **text**     | Removes the background and removes shadow                   |
+| **plain**    | Removes the background and lowers the opacity until hovered |
+
+<example file="v-card/prop-variant" />
+
+#### Color
+
+Cards can be colored by using any of the builtin colors and contextual names using the **color** prop.
+
+<example file="v-card/prop-color" />
 
 ### Misc
 

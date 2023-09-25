@@ -283,7 +283,7 @@ export const VCombobox = genericComponent<new <
 
         const originalSelectionIndex = selectionIndex.value
         const selectedItem = model.value[selectionIndex.value]
-        if (selectedItem) select(selectedItem)
+        if (selectedItem && !selectedItem.props.disabled) select(selectedItem)
 
         selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
       }
@@ -558,6 +558,7 @@ export const VCombobox = genericComponent<new <
                             closable={ props.closableChips }
                             size="small"
                             text={ item.title }
+                            disabled={ item.props.disabled }
                             { ...slotProps }
                           />
                         ) : (
