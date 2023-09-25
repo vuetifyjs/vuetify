@@ -39,7 +39,6 @@ The virtual scroller displays just enough records to fill the viewport and uses 
 | Component | Description |
 | - | - |
 | [v-virtual-scroll](/api/v-virtual-scroll/) | Primary Component |
-| [v-virtual-scroll-item](/api/v-virtual-scroll-item/) | Wraps content and communicates height to parent |
 
 <api-inline hide-links />
 
