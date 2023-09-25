@@ -236,7 +236,11 @@ export const VList = genericComponent<new <T>(
           onFocus={ onFocus }
           onKeydown={ onKeydown }
         >
-          <VListChildren returnObject={ props.returnObject } items={ items.value } v-slots={ slots }></VListChildren>
+          <VListChildren
+            items={ items.value }
+            returnObject={ props.returnObject }
+            v-slots={ slots }
+          />
         </props.tag>
       )
     })
