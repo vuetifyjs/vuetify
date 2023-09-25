@@ -46,11 +46,12 @@ export const VBottomSheet = genericComponent<OverlaySlots>()({
           v-model={ isActive.value }
           class={[
             'v-bottom-sheet',
-            props.class,
             {
               'v-bottom-sheet--inset': props.inset,
             },
+            props.class,
           ]}
+          style={ props.style }
           v-slots={ slots }
         />
       )
