@@ -58,7 +58,7 @@
   import { ref } from 'vue'
 
   const length = ref(3)
-  const onboarding = ref(0)
+  const onboarding = ref(1)
 
   function next () {
     onboarding.value = onboarding.value + 1 > length.value ? 1 : onboarding.value + 1
@@ -72,7 +72,7 @@
   export default {
     data: () => ({
       length: 3,
-      onboarding: 0,
+      onboarding: 1,
     }),
 
     methods: {
