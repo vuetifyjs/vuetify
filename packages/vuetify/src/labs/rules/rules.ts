@@ -33,48 +33,59 @@ const parseRulesOptions = (options?: RulesOptions) => {
 }
 
 export function createRules (options?: RulesOptions) {
+  // @ts-ignore
   const _options = parseRulesOptions(options)
-  const { t } = useLocale()
 
   const state: RulesInstance = {
     required: (err?: string) => {
-      return (v: any) => !!v || t(err || 'rules.required')
+      const { t } = useLocale()
+      return (v: any) => !!v || t(err || '$vuetify.rules.required')
     },
     email: (err?: string) => {
-      return (v: any) => (!v || (typeof v === 'string' && /^.+@\S+\.\S+$/.test(v))) || t(err || 'rules.email')
+      const { t } = useLocale()
+      return (v: any) => (!v || (typeof v === 'string' && /^.+@\S+\.\S+$/.test(v))) || t(err || '$vuetify.rules.email')
     },
     number: (err?: string) => {
-      return (v: string) => !!+v || t(err || 'rules.number')
+      const { t } = useLocale()
+      return (v: string) => !!+v || t(err || '$vuetify.rules.number')
     },
     integer: (err?: string) => {
-      return (v: string) => (/^[\d]*$/.test(v)) || t(err || 'rules.integer')
+      const { t } = useLocale()
+      return (v: string) => (/^[\d]*$/.test(v)) || t(err || '$vuetify.rules.integer')
     },
     capital: (err?: string) => {
-      return (v: string) => (/^[A-Z]*$/.test(v)) || t(err || 'rules.capital')
+      const { t } = useLocale()
+      return (v: string) => (/^[A-Z]*$/.test(v)) || t(err || '$vuetify.rules.capital')
     },
     maxLength: (len: number, err?: string) => {
-      return (v: any) => (!v || v.length <= len) || t(err || 'rules.maxLength', [len])
+      const { t } = useLocale()
+      return (v: any) => (!v || v.length <= len) || t(err || '$vuetify.rules.maxLength', [len])
     },
     minLength: (len: number, err?: string) => {
-      return (v: any) => (!v || v.length >= len) || t(err || 'rules.minLength', [len])
+      const { t } = useLocale()
+      return (v: any) => (!v || v.length >= len) || t(err || '$vuetify.rules.minLength', [len])
     },
     strictLength: (len: number, err?: string) => {
-      return (v: any) => (!v || v.length === len) || t(err || 'rules.strictLength', [len])
+      const { t } = useLocale()
+      return (v: any) => (!v || v.length === len) || t(err || '$vuetify.rules.strictLength', [len])
     },
     exclude: (forbiddenCharacters: string[], err?: string) => {
       return (v: string) => {
+        const { t } = useLocale()
         let error: string | true = true
         for (const character of forbiddenCharacters) {
-          if (v.includes(character)) error = err || t('rules.exclude', character)
+          if (v.includes(character)) error = err || t('$vuetify.rules.exclude', character)
         }
         return error
       }
     },
     notEmpty: (err?: string) => {
-      return (v: any) => (v && v.length > 0) || t(err || 'rules.notEmpty')
+      const { t } = useLocale()
+      return (v: any) => (v && v.length > 0) || t(err || '$vuetify.rules.notEmpty')
     },
     pattern: (pattern: RegExp, err?: string) => {
-      return (v: any) => (!v || pattern.test(v) || t(err || 'rules.pattern'))
+      const { t } = useLocale()
+      return (v: any) => (!v || pattern.test(v) || t(err || '$vuetify.rules.pattern'))
     },
   }
 
