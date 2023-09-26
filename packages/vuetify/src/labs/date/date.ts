@@ -60,7 +60,7 @@ export function createDate (options?: DateOptions) {
       lv: 'lv-LV',
       lt: 'lt-LT',
       nl: 'nl-NL',
-      no: 'nn-NO',
+      no: 'no-NO',
       pl: 'pl-PL',
       pt: 'pt-PT',
       ro: 'ro-RO',
