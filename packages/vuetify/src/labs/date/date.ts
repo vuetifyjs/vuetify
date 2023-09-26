@@ -17,8 +17,8 @@ export interface DateInstance<T> extends DateAdapter<T> {
 }
 
 export type InternalDateOptions<T = any> = {
-  adapter: (new (options: { locale: any }) => DateInstance<T>) | DateInstance<T>
-  formats?: Record<string, string>
+  adapter: (new (options: { locale: any, formats?: any }) => DateInstance<T>) | DateInstance<T>
+  formats?: Record<string, any>
   locale: Record<string, any>
 }
 
@@ -102,7 +102,10 @@ export function useDate () {
 
   const instance = reactive(typeof date.adapter === 'function'
     // eslint-disable-next-line new-cap
-    ? new date.adapter({ locale: date.locale?.[locale.current.value] ?? locale.current.value })
+    ? new date.adapter({
+      locale: date.locale?.[locale.current.value] ?? locale.current.value,
+      formats: date.formats,
+    })
     : date.adapter)
 
   watch(locale.current, value => {

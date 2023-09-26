@@ -1,9 +1,18 @@
+// import DateFnsAdapter from '@date-io/date-fns'
+// import enUS from 'date-fns/locale/en-US'
+// import svSE from 'date-fns/locale/sv'
+// import jaJP from 'date-fns/locale/ja'
+
 export default {
-  // adapter: DateIoDateFnsAdapter,
+  // adapter: DateFnsAdapter,
+  formats: {
+    // dayOfMonth: date => date.getDate(),
+  },
   locale: {
     en: 'en-US',
     // en: 'en-AU',
-    // en: datefnsen,
-    // sv: datefnssv,
+    // en: enUS,
+    // sv: svSE,
+    // ja: jaJP,
   },
 }

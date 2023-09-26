@@ -4,6 +4,8 @@ import { createRange } from '@/util'
 // Types
 import type { DateAdapter } from '../DateAdapter'
 
+type CustomDateFormat = Intl.DateTimeFormatOptions | ((date: Date, formatString: string, locale: string) => string)
+
 const firstDay: Record<string, number> = {
   '001': 1,
   AD: 1,
@@ -245,8 +247,17 @@ function getWeekdays (locale: string) {
   })
 }
 
-function format (value: Date, formatString: string, locale: string): string {
+function format (value: Date, formatString: string, locale: string, formats?: Record<string, CustomDateFormat>): string {
   const date = new Date(value)
+
+  const customFormat = formats?.[formatString]
+  if (customFormat) {
+    if (typeof customFormat === 'function') {
+      return customFormat(date, formatString, locale)
+    } else {
+      return new Intl.DateTimeFormat(locale, customFormat).format(date)
+    }
+  }
 
   let options: Intl.DateTimeFormatOptions = {}
   switch (formatString) {
@@ -367,9 +378,11 @@ function endOfDay (date: Date) {
 
 export class VuetifyDateAdapter implements DateAdapter<Date> {
   locale: string
+  formats?: Record<string, CustomDateFormat>
 
-  constructor (options: { locale: string }) {
+  constructor (options: { locale: string, formats?: Record<string, CustomDateFormat> }) {
     this.locale = options.locale
+    this.formats = options.formats
   }
 
   date (value?: any) {
@@ -401,7 +414,7 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
   }
 
   format (date: Date, formatString: string) {
-    return format(date, formatString, this.locale)
+    return format(date, formatString, this.locale, this.formats)
   }
 
   isEqual (date: Date, comparing: Date) {

@@ -88,7 +88,7 @@ createVuetify({
 
 The components also use the [i18n](/features/internationalization) feature to know which locale should be used for dates. If you are using the built-in date adapter, then everything should work automatically.
 
-However if you are not using the build in date adapter, like [date-fns](https://www.npmjs.com/package/@date-io/date-fns), then you will need to set up a mapping from the [i18n](/features/internationalization) locale string to the date library locale in the vuetify options.
+However if you are not using the built in date adapter, then you will need to set up a mapping from the [i18n](/features/internationalization) locale string to the date library locale in the vuetify options.
 
 ```js
 import DateFnsAdapter from '@date-io/date-fns'
@@ -110,12 +110,24 @@ Here is an example of switching the locale of the **v-date-picker** component.
 
 <example file="v-date-picker/guide-locale" />
 
-<!-- The following code snippet is an example of a basic `v-date-picker` component:
+If you need to customize the date formatting, you can provide a `formats` object to the date options. The keys are the formats documented [here](/features/dates/#format-options), and the value can be either a [DateTimeFormatOptions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat#using_options) object, or a method that should return a string.
 
-```html
-<v-date-picker></v-date-picker>
+::: warning
+
+Keep in mind that this `formats` object is only valid when using the built-in date adapter. If you are using any other [date-io](https://github.com/dmtrKovalenko/date-io) adapter then you will need to follow that library's formatting documentation.
+
+:::
+
+```js
+createVuetify({
+  date: {
+    formats: {
+      keyboardDate: { year: 'numeric', month: 'long', day: 'numeric' },
+      dayOfMonth: (date, formatString, locale) => date.getDate(),
+    }
+  }
+})
 ```
--->
 
 ### Props
 
