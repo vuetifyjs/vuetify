@@ -400,6 +400,7 @@ export const VAutocomplete = genericComponent<new <
           onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
+          counterValue={ model.value.length }
           dirty={ isDirty }
           onInput={ onInput }
           onChange={ onChange }

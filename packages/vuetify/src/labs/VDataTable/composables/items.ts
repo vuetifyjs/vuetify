@@ -40,7 +40,7 @@ export function transformItem (
   const value = props.returnObject ? item : getPropertyFromItem(item, props.itemValue)
   const selectable = getPropertyFromItem(item, props.itemSelectable, true)
   const itemColumns = columns.reduce((obj, column) => {
-    obj[column.key] = getPropertyFromItem(item, column.value ?? column.key)
+    if (column.key != null) obj[column.key] = getPropertyFromItem(item, column.value!)
     return obj
   }, {} as Record<string, unknown>)
 
