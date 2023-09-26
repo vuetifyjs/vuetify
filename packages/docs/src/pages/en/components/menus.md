@@ -8,11 +8,18 @@ related:
   - /components/dialogs/
   - /components/tooltips/
   - /styles/transitions/
+features:
+  github: /components/VMenu/
+  label: 'C: VMenu'
+  report: true
+  spec: https://m2.material.io/components/menus
 ---
 
 # Menus
 
 The `v-menu` component shows a menu at the position of the element used to activate it.
+
+<page-features />
 
 ## Usage
 

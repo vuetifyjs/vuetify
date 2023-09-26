@@ -23,6 +23,7 @@ import type { ViteSSGContext } from '@vuetify/vite-ssg'
 export function installVuetify ({ app }: ViteSSGContext) {
   const vuetify = createVuetify({
     aliases: {
+      PageFeatureChip: components.VChip,
       NewInChip: components.VChip,
       SettingsSwitch: components.VSwitch,
     },
@@ -34,6 +35,12 @@ export function installVuetify ({ app }: ViteSSGContext) {
     defaults: {
       global: {
         eager: false,
+      },
+      PageFeatureChip: {
+        variant: 'tonal',
+        border: true,
+        class: 'text-medium-emphasis me-2 mb-2',
+        size: 'small',
       },
       NewInChip: {
         appendIcon: 'mdi-page-next',

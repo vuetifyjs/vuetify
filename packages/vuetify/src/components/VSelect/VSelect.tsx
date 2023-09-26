@@ -304,6 +304,7 @@ export const VSelect = genericComponent<new <
           onUpdate:modelValue={ onModelUpdate }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
+          counterValue={ model.value.length }
           dirty={ isDirty }
           class={[
             'v-select',
@@ -431,6 +432,7 @@ export const VSelect = genericComponent<new <
                             closable={ props.closableChips }
                             size="small"
                             text={ item.title }
+                            disabled={ item.props.disabled }
                             { ...slotProps }
                           />
                         ) : (

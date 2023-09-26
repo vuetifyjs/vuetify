@@ -1,4 +1,5 @@
 @use '../../styles/tools'
+@use './variables' as *
 
 .v-picker.v-sheet
   @include tools.elevation(2)
@@ -43,7 +44,6 @@
   text-transform: uppercase
   font-size: .75rem
   grid-area: title
-  color: rgb(var(--v-theme-on-surface), var(--v-disabled-opacity))
   padding-inline-start: 24px
   padding-inline-end: 12px
   padding-top: 16px

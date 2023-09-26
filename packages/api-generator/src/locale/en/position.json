@@ -1,7 +1,5 @@
 {
   "props": {
-    "position": {
-    "position": "Sets the position for the component"
-    }
+    "position": "Sets the position for the component."
   }
 }

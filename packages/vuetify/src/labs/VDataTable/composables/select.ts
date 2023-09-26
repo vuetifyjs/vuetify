@@ -2,8 +2,8 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide } from 'vue'
-import { propsFactory, wrapInArray } from '@/util'
+import { computed, inject, provide, toRaw } from 'vue'
+import { deepEqual, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -36,6 +36,7 @@ export interface DataTableSelectStrategy {
 type SelectionProps = Pick<DataTableItemProps, 'itemValue'> & {
   modelValue: readonly any[]
   selectStrategy: 'single' | 'page' | 'all'
+  valueComparator: typeof deepEqual
   'onUpdate:modelValue': ((value: any[]) => void) | undefined
 }
 
@@ -43,7 +44,7 @@ const singleSelectStrategy: DataTableSelectStrategy = {
   showSelectAll: false,
   allSelected: () => [],
   select: ({ items, value }) => {
-    return new Set(value ? [items[0]?.value] : [])
+    return new Set(value ? [toRaw(items[0]?.value)] : [])
   },
   selectAll: ({ selected }) => selected,
 }
@@ -53,8 +54,8 @@ const pageSelectStrategy: DataTableSelectStrategy = {
   allSelected: ({ currentPage }) => currentPage,
   select: ({ items, value, selected }) => {
     for (const item of items) {
-      if (value) selected.add(item.value)
-      else selected.delete(item.value)
+      if (value) selected.add(toRaw(item.value))
+      else selected.delete(toRaw(item.value))
     }
 
     return selected
@@ -67,8 +68,8 @@ const allSelectStrategy: DataTableSelectStrategy = {
   allSelected: ({ allItems }) => allItems,
   select: ({ items, value, selected }) => {
     for (const item of items) {
-      if (value) selected.add(item.value)
-      else selected.delete(item.value)
+      if (value) selected.add(toRaw(item.value))
+      else selected.delete(toRaw(item.value))
     }
 
     return selected
@@ -86,6 +87,10 @@ export const makeDataTableSelectProps = propsFactory({
     type: Array as PropType<readonly any[]>,
     default: () => ([]),
   },
+  valueComparator: {
+    type: Function as PropType<typeof deepEqual>,
+    default: deepEqual,
+  },
 }, 'DataTable-select')
 
 export const VDataTableSelectionSymbol: InjectionKey<ReturnType<typeof provideSelection>> = Symbol.for('vuetify:data-table-selection')
@@ -95,7 +100,9 @@ export function provideSelection (
   { allItems, currentPage }: { allItems: Ref<SelectableItem[]>, currentPage: Ref<SelectableItem[]> }
 ) {
   const selected = useProxiedModel(props, 'modelValue', props.modelValue, v => {
-    return new Set(v)
+    return new Set(wrapInArray(v).map(v => {
+      return allItems.value.find(item => props.valueComparator(v, item.value))?.value ?? v
+    }))
   }, v => {
     return [...v.values()]
   })
@@ -115,11 +122,11 @@ export function provideSelection (
   })
 
   function isSelected (items: SelectableItem | SelectableItem[]) {
-    return wrapInArray(items).every(item => selected.value.has(item.value))
+    return wrapInArray(items).every(item => selected.value.has(toRaw(item.value)))
   }
 
   function isSomeSelected (items: SelectableItem | SelectableItem[]) {
-    return wrapInArray(items).some(item => selected.value.has(item.value))
+    return wrapInArray(items).some(item => selected.value.has(toRaw(item.value)))
   }
 
   function select (items: SelectableItem[], value: boolean) {
@@ -153,7 +160,7 @@ export function provideSelection (
       allItems: allSelectable.value,
       currentPage: currentPageSelectable.value,
     })
-    return isSelected(items)
+    return !!items.length && isSelected(items)
   })
 
   const data = {

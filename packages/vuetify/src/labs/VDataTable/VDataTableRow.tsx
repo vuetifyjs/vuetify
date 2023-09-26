@@ -9,20 +9,25 @@ import { useSelection } from './composables/select'
 import { VDataTableColumn } from './VDataTableColumn'
 
 // Utilities
-import { withModifiers } from 'vue'
-import { defineComponent, getPropertyFromItem, propsFactory, useRender } from '@/util'
+import { toDisplayString, withModifiers } from 'vue'
+import { genericComponent, getObjectValueByPath, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { DataTableItem } from './types'
+import type { DataTableItem, ItemKeySlot } from './types'
+
+export type VDataTableRowSlots = {
+  'item.data-table-select': Omit<ItemKeySlot, 'value'>
+  'item.data-table-expand': Omit<ItemKeySlot, 'value'>
+} & { [key: `item.${string}`]: ItemKeySlot }
 
 export const makeVDataTableRowProps = propsFactory({
-  index: Number as PropType<Number>,
+  index: Number,
   item: Object as PropType<DataTableItem>,
   onClick: Function as PropType<(e: MouseEvent) => void>,
 }, 'VDataTableRow')
 
-export const VDataTableRow = defineComponent({
+export const VDataTableRow = genericComponent<VDataTableRowSlots>()({
   name: 'VDataTableRow',
 
   props: makeVDataTableRowProps(),
@@ -54,16 +59,18 @@ export const VDataTableRow = defineComponent({
             {{
               default: () => {
                 const item = props.item!
-                const slotName = `item.${column.key}`
+                const slotName = `item.${column.key}` as const
                 const slotProps = {
-                  index: props.index,
-                  item: props.item,
-                  columns: columns.value,
+                  index: props.index!,
+                  item: item.raw,
+                  internalItem: item,
+                  value: getObjectValueByPath(item.columns, column.key),
+                  column,
                   isSelected,
                   toggleSelect,
                   isExpanded,
                   toggleExpand,
-                }
+                } satisfies ItemKeySlot
 
                 if (slots[slotName]) return slots[slotName]!(slotProps)
 
@@ -88,7 +95,7 @@ export const VDataTableRow = defineComponent({
                   )
                 }
 
-                return getPropertyFromItem(item.columns, column.key)
+                return toDisplayString(slotProps.value)
               },
             }}
           </VDataTableColumn>

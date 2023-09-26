@@ -8,19 +8,25 @@ related:
   - /components/alerts/
   - /components/icons/
   - /components/snackbars/
+features:
+  figma: true
+  github: /components/VBanner/
+  label: 'C: VBanner'
+  report: true
+  spec: https://m2.material.io/components/banners
 ---
 
 # Banners
 
-The `v-banner` component is used as a middle-interrupting message to the user with one to two actions. It comes in two variations **single-line** and **multi-line** (implicit). These can have icons and actions that you can use with your message. Note that only one banner should be shown at a time.
+The `v-banner` component is used as a middle-interrupting message to the user with one to two actions.
 
 ![Banner Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-banner/v-banner-entry.png)
 
----
+<page-features />
 
 ## Usage
 
-Banners can contain one to two lines of text, to which actions and icons can be added.
+Banners come in two variations **single-line** and **multi-line** (implicit). These can have icons and actions that you can use with your message.
 
 <usage name="v-banner" />
 

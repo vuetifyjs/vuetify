@@ -106,6 +106,7 @@ export {
   mdiClipboardMultipleOutline,
   mdiClipboardTextOutline,
   mdiCrosshairsGps,
+  mdiCrown,
   mdiDatabaseSearchOutline,
   mdiDelete,
   mdiDeleteOutline,

@@ -17,7 +17,6 @@
   <v-list-item
     v-else-if="user"
     :prepend-avatar="user.picture"
-    :title="user.name"
     :subtitle="user.email"
     class="px-4"
     lines="one"
@@ -25,6 +24,16 @@
   >
     <template #prepend>
       <v-avatar size="small" class="me-n2" />
+    </template>
+
+    <template #title>
+      <div class="d-flex align-center">
+        <span class="me-1">{{ user.name }}</span>
+
+        <v-icon v-if="auth.admin" color="primary" icon="$vuetify" size="12" />
+
+        <v-icon v-if="isSponsoring" icon="mdi-crown" color="#e98b20" size="12" />
+      </div>
     </template>
 
     <template #append>
@@ -53,12 +62,25 @@
   import { useAuth0 } from '@/plugins/auth'
   import { useI18n } from 'vue-i18n'
 
+  // Utilities
+  import { computed } from 'vue'
+
   // Stores
   import { useAppStore } from '@/store/app'
+  import { useAuthStore } from '@/store/auth'
 
   const app = useAppStore()
+  const auth = useAuthStore()
   const { loginWithPopup, user, logout, isAuthenticated } = useAuth0()
   const { t } = useI18n()
+
+  const isSponsoring = computed(() => {
+    if (!auth.sponsor) return false
+
+    const sponsor = Array.isArray(auth.sponsor) ? auth.sponsor : [auth.sponsor]
+
+    return sponsor.find(s => s.tier.monthlyPriceInDollars >= 1)
+  })
 
   function onClickLogout () {
     logout({ logoutParams: { returnTo: window.location.origin } })

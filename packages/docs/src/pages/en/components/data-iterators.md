@@ -8,18 +8,24 @@ related:
   - /components/data-tables/basics/
   - /components/simple-tables/
   - /components/toolbars/
+features:
+  github: /labs/VDataIterator/
+  label: 'C: VDataIterator'
+  report: true
 ---
 
 # Data iterators
 
 The `v-data-iterator` component is used for displaying arbitrary data, and shares a majority of its functionality with the `v-data-table` component. Features include sorting, searching, pagination, and selection.
 
-![Data iterator Entry](https://cdn.vuetifyjs.com/docs/images/components/v-data-iterator/v-data-iterator-entry.png){ placeholder=true }
+<!-- ![Data iterator Entry](https://cdn.vuetifyjs.com/docs/images/components/v-data-iterator/v-data-iterator-entry.png){ placeholder=true } -->
 
-----
+<page-features />
 
 ::: warning
+
 This feature requires [v3.3.0 (Icarus)](/getting-started/release-notes/?version=v3.3.0)
+
 :::
 
 ## Usage

@@ -8,15 +8,21 @@ related:
   - /components/avatars
   - /components/icons
   - /components/selects
+features:
+  figma: true
+  github: /components/VBtn/
+  label: 'C: VChip'
+  report: true
+  spec: https://m2.material.io/components/buttons
 ---
 
 # Chips
 
 The `v-chip` component is used to convey small pieces of information. Using the `close` property, the chip becomes interactive, allowing user interaction. This component is used by the [v-chip-group](/components/chip-groups) for advanced selection options.
 
-<!-- ![chips Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-chips/v-chips-entry.png) -->
+![Chips Entry](https://cdn.vuetifyjs.com/docs/images/components/v-chip/v-chip-entry.png)
 
-----
+<page-features />
 
 ## Usage
 

@@ -350,7 +350,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
   ])
 
   const layoutStyles = computed(() => ({
-    zIndex: rootZIndex.value,
+    zIndex: parentLayout ? rootZIndex.value : undefined,
     position: parentLayout ? 'relative' as const : undefined,
     overflow: parentLayout ? 'hidden' : undefined,
   }))

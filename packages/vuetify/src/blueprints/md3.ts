@@ -15,6 +15,9 @@ export const md3: Blueprint = {
     VBanner: {
       color: 'primary',
     },
+    VBottomSheet: {
+      contentClass: 'rounded-t-xl overflow-hidden',
+    },
     VBtn: {
       color: 'primary',
       rounded: 'xl',

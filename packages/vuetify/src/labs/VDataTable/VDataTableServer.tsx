@@ -21,7 +21,6 @@ import { computed, provide, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { DataTableItem } from './types'
 import type { VDataTableSlotProps, VDataTableSlots } from './VDataTable'
 
 export const makeVDataTableServerProps = propsFactory({
@@ -48,7 +47,6 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
     'update:options': (options: any) => true,
     'update:expanded': (options: any) => true,
     'update:groupBy': (value: any) => true,
-    'click:row': (e: Event, value: { item: DataTableItem }) => true,
   },
 
   setup (props, { emit, slots }) {

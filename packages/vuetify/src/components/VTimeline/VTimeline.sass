@@ -22,12 +22,6 @@
     grid-column-gap: $timeline-item-padding
     width: 100%
 
-    @include timeline-first-item()
-      padding-inline-start: $timeline-item-padding
-
-    @include timeline-last-item()
-      padding-inline-end: $timeline-item-padding
-
     .v-timeline-item:nth-child(2n)
       .v-timeline-item__body
         grid-row: 3
@@ -354,6 +348,12 @@ $timeline-line-size-first-last: calc(var(--v-timeline-line-size-base) - var(--v-
 
   @include horizontal(true)
     justify-items: center
+
+    .v-timeline-item__body
+      padding-inline: math.div($timeline-item-padding, 2)
+
+    .v-timeline-item__opposite
+      padding-inline: math.div($timeline-item-padding, 2)
 
     .v-timeline-divider
       justify-content: center

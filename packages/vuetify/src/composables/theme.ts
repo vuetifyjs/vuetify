@@ -237,16 +237,6 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         const onColor = `on-${color}` as keyof OnColors
         const colorVal = parseColor(theme.colors[color]!)
 
-        // TODO: warn about poor color selections
-        // const contrastAsText = Math.abs(APCAcontrast(colorVal, colorToInt(theme.colors.background)))
-        // const minContrast = Math.max(blackContrast, whiteContrast)
-        // if (minContrast < 60) {
-        //   consoleInfo(`${key} theme color ${color} has poor contrast (${minContrast.toFixed()}%)`)
-        // } else if (contrastAsText < 60 && !['background', 'surface'].includes(color)) {
-        //   consoleInfo(`${key} theme color ${color} has poor contrast as text (${contrastAsText.toFixed()}%)`)
-        // }
-
-        // Prefer white text if both have an acceptable contrast ratio
         theme.colors[onColor] = getForeground(colorVal)
       }
     }
