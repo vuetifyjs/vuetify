@@ -8,9 +8,18 @@
       nav
       base-color="#2a2a2a"
       prepend-icon="mdi-github"
+      append-icon="mdi-login-variant"
       variant="flat"
       @click="loginWithPopup"
-    />
+    >
+      <template #prepend>
+        <v-icon class="me-n6" />
+      </template>
+
+      <template #append>
+        <v-icon size="small" />
+      </template>
+    </v-list-item>
   </div>
 
   <v-list-item
@@ -18,6 +27,7 @@
     :prepend-avatar="user.picture"
     :subtitle="`@${user.nickname}`"
     class="px-4"
+    rounded="0"
     lines="one"
     nav
   >
@@ -35,15 +45,19 @@
 
     <template #append>
       <v-icon
-        icon="mdi-view-dashboard-outline"
+        :color="isDashboard ? 'primary' : undefined"
+        :icon="`mdi-view-dashboard${isDashboard ? '' : '-outline'}`"
+        :style="{
+          opacity: isDashboard ? 1 : undefined,
+        }"
         class="me-4"
         size="small"
         @click="onClickDashboard"
       />
 
       <v-icon
-        icon="mdi-logout-variant"
         class="me-1"
+        icon="mdi-logout-variant"
         size="small"
         @click="onClickLogout"
       />
@@ -58,14 +72,18 @@
   // Composables
   import { useAuth0 } from '@/plugins/auth'
   import { useI18n } from 'vue-i18n'
-  import { useRouter } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
 
   // Utilities
+  import { computed } from 'vue'
   import { rpath } from '@/util/routes'
 
   const { t } = useI18n()
+  const route = useRoute()
   const router = useRouter()
   const { loginWithPopup, user, logout, isAuthenticated } = useAuth0()
+
+  const isDashboard = computed(() => route.meta?.category === 'user')
 
   function onClickDashboard () {
     router.push(rpath('/user/dashboard/'))
