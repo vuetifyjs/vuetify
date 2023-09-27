@@ -44,7 +44,7 @@ export const makeValidationProps = propsFactory({
   },
   error: Boolean,
   errorMessages: {
-    type: [Array, String] as PropType<string | readonly string[]>,
+    type: [Array, String] as PropType<string | readonly string[] | null>,
     default: () => ([]),
   },
   maxErrors: {
