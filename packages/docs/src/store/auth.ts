@@ -12,14 +12,14 @@ export const useAuthStore = defineStore('auth', () => {
   const auth = useAuth0()
   const user = useUserStore()
 
+  const url = import.meta.env.VITE_API_SERVER_URL
   const isUpdating = shallowRef(false)
   const isVerifying = shallowRef(false)
-  const admin = shallowRef(false)
+  const admin = shallowRef(!url)
   const sponsor = ref([])
-  const url = import.meta.env.VITE_COSMIC_USER_URL
 
   const isSubscriber = computed(() => {
-    return !!sponsor.value.find((s: any) => s.monthlyPriceInDollars >= 1) || admin.value
+    return !url || !!sponsor.value.find((s: any) => s.monthlyPriceInDollars >= 1) || admin.value
   })
 
   user.$subscribe(() => {
