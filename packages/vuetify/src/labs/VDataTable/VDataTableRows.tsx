@@ -59,14 +59,14 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
     const { t } = useLocale()
 
     useRender(() => {
-      if (props.loading && slots.loading) {
+      if (props.loading) {
         return (
           <tr
             class="v-data-table-rows-loading"
             key="loading"
           >
             <td colspan={ columns.value.length }>
-              { slots.loading() }
+              { slots.loading?.() ?? t(props.loadingText) }
             </td>
           </tr>
         )

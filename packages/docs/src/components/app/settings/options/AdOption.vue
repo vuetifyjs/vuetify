@@ -52,7 +52,15 @@
   const user = useUserStore()
   const { isAuthenticated, loginWithPopup } = useAuth0()
 
-  const canToggle = computed(() => auth.admin || auth.sponsor?.monthlyPriceInDollars >= 1)
+  const isSponsoring = computed(() => {
+    if (!auth.sponsor) return false
+
+    const sponsor = Array.isArray(auth.sponsor) ? auth.sponsor : [auth.sponsor]
+
+    return sponsor.find(s => s.tier.monthlyPriceInDollars >= 1)
+  })
+
+  const canToggle = computed(() => auth.admin || isSponsoring.value)
 
   function onClick () {
     if (!isAuthenticated.value) loginWithPopup()

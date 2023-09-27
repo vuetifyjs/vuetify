@@ -58,6 +58,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
       vertical,
       min,
       max,
+      isNotVerticalAndReversed,
     } = slider
 
     const { roundedClasses } = useRounded(rounded)
@@ -77,7 +78,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
 
     const backgroundStyles = computed(() => {
       return {
-        [startDir.value]: '0%',
+        [startDir.value]: isNotVerticalAndReversed.value && '0%',
         [endDir.value]: '100%',
       }
     })
@@ -86,7 +87,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
 
     const trackFillStyles = computed(() => {
       return {
-        [startDir.value]: convertToUnit(props.start, '%'),
+        [startDir.value]: isNotVerticalAndReversed.value && convertToUnit(props.start, '%'),
         [endDir.value]: convertToUnit(trackFillWidth.value, '%'),
       }
     })

@@ -52,6 +52,7 @@ type SliderProvide = {
   parsedTicks: Ref<Tick[]>
   hasLabels: Ref<boolean>
   isReversed: Ref<boolean>
+  isNotVerticalAndReversed: Ref<boolean>
   horizontalDirection: Ref<'ltr' | 'rtl'>
 }
 
@@ -180,10 +181,12 @@ export const useSlider = ({
 }) => {
   const { isRtl } = useRtl()
   const isReversed = toRef(props, 'reverse')
+  const vertical = computed(() => props.direction === 'vertical')
+  const isNotVerticalAndReversed = computed(() => vertical.value !== isReversed.value)
   const horizontalDirection = computed(() => {
     let hd: 'ltr' | 'rtl' = isRtl.value ? 'rtl' : 'ltr'
 
-    if (props.reverse) {
+    if (isNotVerticalAndReversed.value) {
       hd = hd === 'rtl' ? 'ltr' : 'rtl'
     }
 
@@ -197,7 +200,6 @@ export const useSlider = ({
   const trackSize = computed(() => parseInt(props.trackSize, 10))
   const numTicks = computed(() => (max.value - min.value) / step.value)
   const disabled = toRef(props, 'disabled')
-  const vertical = computed(() => props.direction === 'vertical')
 
   const thumbColor = computed(() => props.error || props.disabled ? undefined : props.thumbColor ?? props.color)
   const trackColor = computed(() => props.error || props.disabled ? undefined : props.trackColor ?? props.color)
@@ -224,7 +226,7 @@ export const useSlider = ({
     // It is possible for left to be NaN, force to number
     let clickPos = Math.min(Math.max((clickOffset - trackStart - startOffset.value) / trackLength, 0), 1) || 0
 
-    if (vertical || horizontalDirection.value === 'rtl') clickPos = 1 - clickPos
+    if (isNotVerticalAndReversed.value || horizontalDirection.value === 'rtl') clickPos = 1 - clickPos
 
     return roundValue(min.value + clickPos * (max.value - min.value))
   }
@@ -331,6 +333,7 @@ export const useSlider = ({
     hasLabels,
     horizontalDirection,
     isReversed,
+    isNotVerticalAndReversed,
     min,
     max,
     mousePressed,
