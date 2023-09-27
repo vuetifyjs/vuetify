@@ -30,22 +30,17 @@
       <div class="d-flex align-center">
         <span class="me-1">{{ user.name }}</span>
 
-        <v-icon v-if="auth.admin" color="primary" icon="$vuetify" size="12" />
-
-        <v-icon v-if="isSponsoring" icon="mdi-crown" color="#e98b20" size="12" />
+        <user-badges size="12" />
       </div>
     </template>
 
     <template #append>
-      <v-fade-transition leave-absolute>
-        <v-icon
-          :key="app.settings"
-          :icon="app.settings ? 'mdi-cog' : 'mdi-cog-outline'"
-          class="me-4"
-          size="small"
-          @click="app.settings = !app.settings"
-        />
-      </v-fade-transition>
+      <v-icon
+        icon="mdi-view-dashboard-outline"
+        class="me-4"
+        size="small"
+        @click="onClickDashboard"
+      />
 
       <v-icon
         icon="mdi-logout-variant"
@@ -58,29 +53,24 @@
 </template>
 
 <script setup>
+  // Components
+  import UserBadges from '@/components/user/UserBadges.vue'
+
   // Composables
   import { useAuth0 } from '@/plugins/auth'
   import { useI18n } from 'vue-i18n'
+  import { useRouter } from 'vue-router'
 
   // Utilities
-  import { computed } from 'vue'
+  import { rpath } from '@/util/routes'
 
-  // Stores
-  import { useAppStore } from '@/store/app'
-  import { useAuthStore } from '@/store/auth'
-
-  const app = useAppStore()
-  const auth = useAuthStore()
-  const { loginWithPopup, user, logout, isAuthenticated } = useAuth0()
   const { t } = useI18n()
+  const router = useRouter()
+  const { loginWithPopup, user, logout, isAuthenticated } = useAuth0()
 
-  const isSponsoring = computed(() => {
-    if (!auth.sponsor) return false
-
-    const sponsor = Array.isArray(auth.sponsor) ? auth.sponsor : [auth.sponsor]
-
-    return sponsor.find(s => s.tier.monthlyPriceInDollars >= 1)
-  })
+  function onClickDashboard () {
+    router.push(rpath('/user/dashboard/'))
+  }
 
   function onClickLogout () {
     logout({ logoutParams: { returnTo: window.location.origin } })
