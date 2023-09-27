@@ -8,8 +8,7 @@ meta:
 ---
 
 <script setup>
-  import AdOption from '@/components/app/settings/options/AdOption.vue'
-  import QuickbarOption from '@/components/app/settings/options/QuickbarOption.vue'
+  import PerksOptions from '@/components/app/settings/PerksOptions.vue'
 </script>
 
 ::: info
@@ -26,6 +25,4 @@ Support Vuetify and gain access to exclusive documentation perks and features fo
 
 ----
 
-<ad-option />
-
-<quickbar-option />
+<PerksOptions />

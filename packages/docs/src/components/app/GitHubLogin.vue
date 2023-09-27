@@ -3,11 +3,10 @@
     v-if="!isAuthenticated"
     class="pa-2"
   >
-    <v-btn
-      :text="t('login-with-github')"
-      block
-      class="text-white text-none"
-      color="#2a2a2a"
+    <v-list-item
+      :title="t('login-with-github')"
+      nav
+      base-color="#2a2a2a"
       prepend-icon="mdi-github"
       variant="flat"
       @click="loginWithPopup"

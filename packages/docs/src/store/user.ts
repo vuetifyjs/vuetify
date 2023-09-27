@@ -20,6 +20,7 @@ export type RootState = {
   mixedTheme: boolean
   direction: 'rtl' | 'ltr'
   quickbar: boolean
+  railDrawer: boolean
   notifications: {
     show: boolean
     read: string[]
@@ -103,6 +104,7 @@ export const useUserStore = defineStore('user', () => {
     slashSearch: false,
     syncSettings: true,
     quickbar: false,
+    railDrawer: false,
     notifications: {
       show: true,
       read: [],

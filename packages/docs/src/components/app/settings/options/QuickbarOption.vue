@@ -9,8 +9,8 @@
     <settings-switch
       v-model="user.quickbar"
       :disabled="!auth.isSubscriber"
-      :label="t('disable-quickbar')"
-      :messages="t('disable-quickbar-message')"
+      :label="t('dashboard.perks.disable-quickbar')"
+      :messages="t('dashboard.perks.disable-quickbar-message')"
       :readonly="!auth.isSubscriber"
     />
   </v-defaults-provider>
