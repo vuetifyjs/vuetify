@@ -4,97 +4,89 @@
     color="transparent"
     max-width="900"
   >
-    <v-row>
-      <v-col v-for="n in 9" :key="n" cols="12" md="4">
-        <v-skeleton-loader height="180" width="100%" class="rounded" />
-      </v-col>
-
+    <v-row v-if="!items.length">
       <v-col
-        v-for="project in items"
-        :key="project.id"
+        v-for="n in 9"
+        :key="n"
         cols="12"
-        sm="4"
+        md="4"
       >
-        <a
-          :href="project.url"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="d-block text-decoration-none"
-          style="min-height: 205px;"
-        >
-          <app-figure
-            class="border"
-            :name="project.title"
-            :src="project.image"
-            :title="project.title"
-            eager
-            height="180"
-            min-height="180"
-          />
-        </a>
+        <v-skeleton-loader height="180" />
+
+        <v-skeleton-loader type="text" />
       </v-col>
     </v-row>
 
-    <br>
-
-    <div class="mb-8">
-      <div class="d-flex align-center justify-center my-1 px-4">
-        <small class="font-weight-bold text-no-wrap">Powered By</small>
-
-        <sponsor-card
-          min-height="64"
-          slug="made-with-vuejs"
-          width="180"
-        />
-      </div>
-    </div>
-
-    <br>
-
-    <v-btn
-      :aria-label="t('see-more-projects')"
-      color="primary"
-      href="https://madewithvuejs.com/vuetify"
-      rel="noopener noreferrer"
-      size="large"
-      target="_blank"
-      variant="outlined"
-      @click="onClick"
+    <v-data-iterator
+      v-else
+      :items="items"
+      :page="page"
+      :items-per-page="itemsPerPage"
     >
-      <span
-        class="text-capitalize font-weight-regular"
-        v-text="t('see-more-projects')"
-      />
-    </v-btn>
+      <template #default="{ items: _items }">
+        <v-row style="min-height: 750px;">
+          <v-col
+            v-for="project in _items"
+            :key="project.raw.id"
+            cols="12"
+            sm="4"
+          >
+            <a
+              :href="project.raw.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="d-block text-decoration-none"
+              style="min-height: 205px;"
+            >
+              <app-figure
+                class="border"
+                :name="project.raw.title"
+                :src="project.raw.image"
+                :title="project.raw.title"
+                eager
+                height="180"
+                min-height="180"
+              />
+            </a>
+          </v-col>
+        </v-row>
+      </template>
+
+      <template
+        v-if="pagination"
+        #footer="{ pageCount }"
+      >
+
+        <v-pagination
+          v-model="page"
+          :length="pageCount"
+        />
+      </template>
+    </v-data-iterator>
   </v-sheet>
 </template>
 
 <script setup>
-  // Components
-  import SponsorCard from '@/components/sponsor/Card.vue'
   // Composables
   import { useMadeWithVuetifyStore } from '@/store/made-with-vuetify'
-  import { useGtag } from 'vue-gtag-next'
-  import { useI18n } from 'vue-i18n'
 
   // Utilities
-  import { computed } from 'vue'
+  import { computed, ref } from 'vue'
 
-  const { event } = useGtag()
-  const { t } = useI18n()
+  defineProps({
+    itemsPerPage: {
+      type: [Number, String],
+      default: 9,
+    },
+    pagination: Boolean,
+  })
+
+  const page = ref(1)
   const store = useMadeWithVuetifyStore()
 
   const items = computed(() => {
-    return shuffle(store.items).slice(0, 9)
+    return shuffle(store.items)
   })
-
-  function onClick (project) {
-    event('click', {
-      event_category: 'vuetify-project',
-      event_label: project.title,
-      value: project.id,
-    })
-  }
 
   function shuffle (array) {
     let currentIndex = array.length
