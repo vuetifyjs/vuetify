@@ -37,6 +37,31 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const labels = ref([
+    '12am',
+    '3am',
+    '6am',
+    '9am',
+    '12pm',
+    '3pm',
+    '6pm',
+    '9pm',
+  ])
+  const value = ref([
+    200,
+    675,
+    410,
+    390,
+    310,
+    460,
+    250,
+    240,
+  ])
+</script>
+
 <script>
   export default {
     data: () => ({

@@ -1,6 +1,6 @@
 ---
-nav: Breadcrumbs
 meta:
+  nav: Breadcrumbs
   title: Breadcrumbs component
   description: The breadcrumbs component is a navigational helper for pages. It can accept a Material Icons icon or characters as a divider.
   keywords: breadcrumbs, vuetify breadcrumbs component, vue breadcrumbs component, v-breadcrumbs component
@@ -36,11 +36,9 @@ By default, breadcrumbs use a text divider. This can be any string.
 
 <api-inline hide-links />
 
-<alert type="info">
-
+::: info
   By default `v-breadcrumbs` will disable all crumbs up to the current page in a nested paths. You can prevent this behavior by using `exact: true` on each applicable breadcrumb in the `items` array.
-
-</alert>
+:::
 
 ## Examples
 

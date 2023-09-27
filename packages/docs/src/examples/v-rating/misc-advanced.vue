@@ -137,6 +137,22 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const link = ref()
+
+  const copied = ref(false)
+  const dialog = ref(false)
+  const rating = ref(10)
+
+  function copy () {
+    link.value.focus()
+    document.execCommand('selectAll', false, null)
+    copied.value = document.execCommand('copy')
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

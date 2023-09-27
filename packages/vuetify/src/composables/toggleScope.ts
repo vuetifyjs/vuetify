@@ -1,4 +1,7 @@
+// Utilities
 import { effectScope, onScopeDispose, watch } from 'vue'
+
+// Types
 import type { EffectScope, WatchSource } from 'vue'
 
 export function useToggleScope (source: WatchSource<boolean>, fn: (reset: () => void) => void) {

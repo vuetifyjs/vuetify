@@ -1,6 +1,6 @@
 ---
-nav: Forms
 meta:
+  nav: Forms
   title: Form component
   description: The form component provides a wrapper that makes it easy to process and control validation states of input components.
   keywords: forms, vuetify form component, vue form component, form validation

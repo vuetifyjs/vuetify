@@ -2,10 +2,10 @@
 import './VRadioGroup.sass'
 
 // Components
-import { VSelectionControl } from '@/components/VSelectionControl'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { makeSelectionControlGroupProps, VSelectionControlGroup } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 import { VLabel } from '@/components/VLabel'
+import { VSelectionControl } from '@/components/VSelectionControl'
+import { makeSelectionControlGroupProps, VSelectionControlGroup } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Composables
 import { IconValue } from '@/composables/icons'
@@ -17,9 +17,14 @@ import { filterInputAttrs, genericComponent, getUid, omit, propsFactory, useRend
 
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
-import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
 
-export type VRadioGroupSlots = VInputSlots & VSelectionControlSlots
+export type VRadioGroupSlots = Omit<VInputSlots, 'default'> & {
+  default: never
+  label: {
+    label: string | undefined
+    props: Record<string, any>
+  }
+}
 
 export const makeVRadioGroupProps = propsFactory({
   height: {
@@ -42,7 +47,7 @@ export const makeVRadioGroupProps = propsFactory({
     type: String,
     default: 'radio',
   },
-}, 'v-radio-group')
+}, 'VRadioGroup')
 
 export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
   name: 'VRadioGroup',
@@ -61,7 +66,7 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
     const model = useProxiedModel(props, 'modelValue')
 
     useRender(() => {
-      const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
+      const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
       const [inputProps, _1] = VInput.filterProps(props)
       const [controlProps, _2] = VSelectionControl.filterProps(props)
       const label = slots.label
@@ -78,7 +83,7 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
             props.class,
           ]}
           style={ props.style }
-          { ...inputAttrs }
+          { ...rootAttrs }
           { ...inputProps }
           v-model={ model.value }
           id={ id.value }

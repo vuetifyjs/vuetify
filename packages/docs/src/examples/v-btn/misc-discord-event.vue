@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="mx-auto mt-5"
+    class="mx-auto"
     color="#36393f"
     max-width="650"
     min-height="350"

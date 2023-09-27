@@ -2,22 +2,23 @@
 import './VNavigationDrawer.sass'
 
 // Composables
-import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeComponentProps } from '@/composables/component'
-import { makeElevationProps, useElevation } from '@/composables/elevation'
-import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { provideDefaults } from '@/composables/defaults'
-import { useBackgroundColor } from '@/composables/color'
-import { useDisplay } from '@/composables/display'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { useRouter } from '@/composables/router'
-import { useRtl } from '@/composables'
-import { useSsrBoot } from '@/composables/ssrBoot'
 import { useSticky } from './sticky'
 import { useTouch } from './touch'
+import { useRtl } from '@/composables'
+import { makeBorderProps, useBorder } from '@/composables/border'
+import { useBackgroundColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { provideDefaults } from '@/composables/defaults'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
+import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { useRouter } from '@/composables/router'
+import { useScopeId } from '@/composables/scopeId'
+import { useSsrBoot } from '@/composables/ssrBoot'
+import { makeTagProps } from '@/composables/tag'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, ref, shallowRef, toRef, Transition, watch } from 'vue'
@@ -31,10 +32,10 @@ export type VNavigationDrawerImageSlot = {
 }
 
 export type VNavigationDrawerSlots = {
-  default: []
-  prepend: []
-  append: []
-  image: [VNavigationDrawerImageSlot]
+  default: never
+  prepend: never
+  append: never
+  image: VNavigationDrawerImageSlot
 }
 
 const locations = ['start', 'end', 'left', 'right', 'top', 'bottom'] as const
@@ -59,7 +60,7 @@ export const makeVNavigationDrawerProps = propsFactory({
     default: 56,
   },
   scrim: {
-    type: [String, Boolean],
+    type: [Boolean, String],
     default: true,
   },
   image: String,
@@ -78,12 +79,13 @@ export const makeVNavigationDrawerProps = propsFactory({
 
   ...makeBorderProps(),
   ...makeComponentProps(),
+  ...makeDisplayProps(),
   ...makeElevationProps(),
   ...makeLayoutItemProps(),
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'nav' }),
   ...makeThemeProps(),
-}, 'v-navigation-drawer')
+}, 'VNavigationDrawer')
 
 export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
   name: 'VNavigationDrawer',
@@ -101,11 +103,12 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const { borderClasses } = useBorder(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { elevationClasses } = useElevation(props)
-    const { mobile } = useDisplay()
+    const { displayClasses, mobile } = useDisplay(props)
     const { roundedClasses } = useRounded(props)
     const router = useRouter()
     const isActive = useProxiedModel(props, 'modelValue', null, v => !!v)
     const { ssrBootStyles } = useSsrBoot()
+    const { scopeId } = useScopeId()
 
     const rootEl = ref<HTMLElement>()
     const isHovering = shallowRef(false)
@@ -227,6 +230,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               themeClasses.value,
               backgroundColorClasses.value,
               borderClasses.value,
+              displayClasses.value,
               elevationClasses.value,
               roundedClasses.value,
               props.class,
@@ -239,6 +243,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               stickyStyles.value,
               props.style,
             ]}
+            { ...scopeId }
             { ...attrs }
           >
             { hasImage && (
@@ -273,6 +278,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
                 class={['v-navigation-drawer__scrim', scrimColor.backgroundColorClasses.value]}
                 style={[scrimStyles.value, scrimColor.backgroundColorStyles.value]}
                 onClick={ () => isActive.value = false }
+                { ...scopeId }
               />
             )}
           </Transition>

@@ -1,23 +1,24 @@
 // Components
-import { VDataTableGroupHeaderRow, type VDataTableGroupHeaderRowSlots } from './VDataTableGroupHeaderRow'
+import { VDataTableGroupHeaderRow } from './VDataTableGroupHeaderRow'
 import { VDataTableRow } from './VDataTableRow'
 
 // Composables
-import { useLocale } from '@/composables/locale'
 import { useExpanded } from './composables/expand'
+import { useGroupBy } from './composables/group'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
-import { useGroupBy } from './composables/group'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { Group, provideGroupBy } from './composables/group'
 import type { provideExpanded } from './composables/expand'
+import type { Group, provideGroupBy } from './composables/group'
 import type { provideSelection } from './composables/select'
 import type { DataTableItem, InternalDataTableHeader } from './types'
+import type { VDataTableGroupHeaderRowSlots } from './VDataTableGroupHeaderRow'
 
 type GroupHeaderSlot = {
   index: number
@@ -28,7 +29,7 @@ type GroupHeaderSlot = {
   isSelected: ReturnType<typeof provideSelection>['isSelected']
   toggleSelect: ReturnType<typeof provideSelection>['toggleSelect']
   toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
-  isGroupOpen: ReturnType<typeof provideGroupBy>['toggleGroup']
+  isGroupOpen: ReturnType<typeof provideGroupBy>['isGroupOpen']
 }
 
 type ItemSlot = {
@@ -42,14 +43,14 @@ type ItemSlot = {
 }
 
 export type VDataTableRowsSlots = VDataTableGroupHeaderRowSlots & {
-  item: [ItemSlot]
-  loading: []
-  'group-header': [GroupHeaderSlot]
-  'no-data': []
-  'expanded-row': [ItemSlot]
-  'item.data-table-select': [ItemSlot]
-  'item.data-table-expand': [ItemSlot]
-} & { [key: `item.${string}`]: [ItemSlot] }
+  item: ItemSlot & { props: Record<string, any> }
+  loading: never
+  'group-header': GroupHeaderSlot
+  'no-data': never
+  'expanded-row': ItemSlot
+  'item.data-table-select': ItemSlot
+  'item.data-table-expand': ItemSlot
+} & { [key: `item.${string}`]: ItemSlot }
 
 export const makeVDataTableRowsProps = propsFactory({
   loading: [Boolean, String],
@@ -68,7 +69,7 @@ export const makeVDataTableRowsProps = propsFactory({
   },
   rowHeight: Number,
   'onClick:row': Function as PropType<(e: Event, value: { item: DataTableItem }) => void>,
-}, 'v-data-table-rows')
+}, 'VDataTableRows')
 
 export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
   name: 'VDataTableRows',
@@ -140,21 +141,28 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
               toggleExpand,
               isSelected,
               toggleSelect,
-            } as ItemSlot
+            } satisfies ItemSlot
+
+            const itemSlotProps = {
+              ...slotProps,
+              props: {
+                key: `item_${item.key ?? item.index}`,
+                onClick: expandOnClick.value || props['onClick:row'] ? (event: Event) => {
+                  if (expandOnClick.value) {
+                    toggleExpand(item)
+                  }
+                  props['onClick:row']?.(event, { item })
+                } : undefined,
+                index,
+                item,
+              },
+            }
 
             return (
               <>
-                { slots.item ? slots.item(slotProps) : (
+                { slots.item ? slots.item(itemSlotProps) : (
                   <VDataTableRow
-                    key={ `item_${item.value}` }
-                    onClick={ expandOnClick.value || props['onClick:row'] ? (event: Event) => {
-                      if (expandOnClick.value) {
-                        toggleExpand(item)
-                      }
-                      props['onClick:row']?.(event, { item })
-                    } : undefined }
-                    index={ index }
-                    item={ item }
+                    { ...itemSlotProps.props }
                     v-slots={ slots }
                   />
                 )}

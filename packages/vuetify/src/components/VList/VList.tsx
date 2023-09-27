@@ -7,7 +7,9 @@ import { VListChildren } from './VListChildren'
 // Composables
 import { createList } from './list'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -17,18 +19,16 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
-import { provideDefaults } from '@/composables/defaults'
-import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, shallowRef, toRef } from 'vue'
 import { focusChild, genericComponent, getPropertyFromItem, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { GenericProps } from '@/util'
-import type { ItemProps, ListItem } from '@/composables/list-items'
-import type { VListChildrenSlots } from './VListChildren'
 import type { PropType } from 'vue'
+import type { VListChildrenSlots } from './VListChildren'
+import type { ItemProps, ListItem } from '@/composables/list-items'
+import type { GenericProps } from '@/util'
 
 export interface InternalListItem<T = any> extends ListItem<T> {
   type?: 'item' | 'subheader' | 'divider'
@@ -88,6 +88,7 @@ export const makeVListProps = propsFactory({
     type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
     default: 'one',
   },
+  slim: Boolean,
   nav: Boolean,
 
   ...makeNestedProps({
@@ -108,7 +109,7 @@ export const makeVListProps = propsFactory({
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'text' } as const),
-}, 'v-list')
+}, 'VList')
 
 export const VList = genericComponent<new <T>(
   props: {
@@ -159,6 +160,7 @@ export const VList = genericComponent<new <T>(
         disabled: toRef(props, 'disabled'),
         lines: toRef(props, 'lines'),
         nav: toRef(props, 'nav'),
+        slim: toRef(props, 'slim'),
         variant: toRef(props, 'variant'),
       },
     })
@@ -228,6 +230,7 @@ export const VList = genericComponent<new <T>(
             dimensionStyles.value,
             props.style,
           ]}
+          tabindex={ (props.disabled || isFocused.value) ? -1 : 0 }
           role="listbox"
           aria-activedescendant={ undefined }
           onFocusin={ onFocusin }

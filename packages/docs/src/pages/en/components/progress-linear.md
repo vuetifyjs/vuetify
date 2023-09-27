@@ -1,6 +1,6 @@
 ---
-nav: Progress linear
 meta:
+  nav: Progress linear
   title: Progress linear component
   description: The progress-linear component is useful for displaying a visual indicator of numerical data in a straight line.
   keywords: progress linear, vuetify progress linear component, vue progress linear component, linear progress
@@ -64,11 +64,9 @@ The **rounded** prop is used to apply a border radius to the `v-progress-linear`
 
 <example file="v-progress-linear/prop-rounded" />
 
-<alert type="info">
-
+::: info
   Use the **rounded-bar** property to add a border-radius to the inner edges of value bar. By default, the value bar's border-radius is equal to the default _border-radius_ of your application unless a different value is provided by the **rounded** prop or SASS variable.
-
-</alert>
+:::
 
 #### Stream
 

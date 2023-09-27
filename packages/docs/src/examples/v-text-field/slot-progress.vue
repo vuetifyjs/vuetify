@@ -25,6 +25,19 @@
   </v-container>
 </template>
 
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const value = ref('')
+  const custom = ref(false)
+  const progress = computed(() => {
+    return Math.min(100, value.value.length * 10)
+  })
+  const color = computed(() => {
+    return ['error', 'warning', 'success'][Math.floor(progress.value / 40)]
+  })
+</script>
+
 <script>
   export default {
     data: () => ({

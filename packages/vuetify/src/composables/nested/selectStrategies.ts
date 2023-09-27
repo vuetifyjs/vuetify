@@ -1,4 +1,5 @@
 /* eslint-disable sonarjs/no-identical-functions */
+// Utilities
 import { toRaw } from 'vue'
 
 export type SelectStrategyFn = (data: {

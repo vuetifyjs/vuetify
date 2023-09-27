@@ -19,13 +19,17 @@
   </v-container>
 </template>
 
+<script setup>
+  function appendIconCallback () {
+    alert('click:append')
+  }
+  function prependIconCallback () {
+    alert('click:prepend')
+  }
+</script>
+
 <script>
   export default {
-    data () {
-      return {
-        text: '',
-      }
-    },
     methods: {
       appendIconCallback () {
         alert('click:append')

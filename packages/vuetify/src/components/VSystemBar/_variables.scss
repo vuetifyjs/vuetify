@@ -26,7 +26,7 @@ $system-bar-window-height: 32px !default;
 $system-bar-theme: (
   $system-bar-background,
   $system-bar-color
-);
+) !default;
 
 $system-bar-typography: (
   $system-bar-font-size,
@@ -34,7 +34,7 @@ $system-bar-typography: (
   $system-bar-letter-spacing,
   $system-bar-line-height,
   $system-bar-text-transform
-);
+) !default;
 
 // Deprecated
 $system-bar-padding: 0 8px !default;

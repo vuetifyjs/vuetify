@@ -25,7 +25,7 @@ export const makeVLayoutItemProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeLayoutItemProps(),
-}, 'v-layout-item')
+}, 'VLayoutItem')
 
 export const VLayoutItem = genericComponent()({
   name: 'VLayoutItem',

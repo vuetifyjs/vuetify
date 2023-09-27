@@ -2,8 +2,8 @@
 import './VGrid.sass'
 
 // Composables
-import { breakpoints } from '@/composables/display'
 import { makeComponentProps } from '@/composables/component'
+import { breakpoints } from '@/composables/display'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
@@ -11,8 +11,8 @@ import { capitalize, computed, h } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
-import type { Breakpoint } from '@/composables/display'
 import type { Prop, PropType } from 'vue'
+import type { Breakpoint } from '@/composables/display'
 
 const ALIGNMENT = ['start', 'end', 'center'] as const
 
@@ -111,7 +111,7 @@ export const makeVRowProps = propsFactory({
   ...alignContentProps,
   ...makeComponentProps(),
   ...makeTagProps(),
-}, 'v-row')
+}, 'VRow')
 
 export const VRow = genericComponent()({
   name: 'VRow',

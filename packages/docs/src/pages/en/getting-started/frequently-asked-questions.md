@@ -23,6 +23,14 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 
   Vuetify is a Vue.js framework that helps to create beautiful and responsive user interfaces. It includes a wide variety of customizable and reusable components for building modern applications.
 
+* **Does Vuetify provide support?** { #does-vuetify-provide-support }
+
+  Vuetify is a free to use Open Source project released under the [MIT](http://opensource.org/licenses/MIT) license. There are multiple ways to receive support for Vuetify:
+
+  * Join our [Discord Community](https://community.vuetifyjs.com/) - (Free/Paid)
+  * Ask a question on [GitHub Discussions](https://discussions.vuetifyjs.com/) - (Free)
+  * Get [Direct Support](/introduction/enterprise-support/) from Vuetify - (Paid)
+
 * **What is the difference between Vuetify and Vue?** { #what-is-the-difference-between-vuetify-and-vue }
 
   Vuetify is a framework that is built on top of Vue.js. It is a collection of components that can be used to build applications. Vue.js is a JavaScript framework that is used to build user interfaces.

@@ -1,11 +1,10 @@
-import { mount } from '@vue/test-utils'
-import { describe, expect, it } from '@jest/globals'
-import { defineComponent } from 'vue'
-
 // Directives
 import Ripple from '../'
 
 // Utilities
+import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
+import { defineComponent } from 'vue'
 import { keyCodes } from '@/util'
 
 const testComponent = defineComponent({

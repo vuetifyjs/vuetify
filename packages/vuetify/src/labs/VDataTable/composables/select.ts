@@ -8,69 +8,164 @@ import { propsFactory, wrapInArray } from '@/util'
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
 import type { DataTableItemProps } from './items'
-import type { DataTableItem } from '../types'
+
+export interface SelectableItem {
+  value: any
+  selectable: boolean
+}
+
+export interface DataTableSelectStrategy {
+  showSelectAll: boolean
+  allSelected: (data: {
+    allItems: SelectableItem[]
+    currentPage: SelectableItem[]
+  }) => SelectableItem[]
+  select: (data: {
+    items: SelectableItem[]
+    value: boolean
+    selected: Set<unknown>
+  }) => Set<unknown>
+  selectAll: (data: {
+    value: boolean
+    allItems: SelectableItem[]
+    currentPage: SelectableItem[]
+    selected: Set<unknown>
+  }) => Set<unknown>
+}
+
+type SelectionProps = Pick<DataTableItemProps, 'itemValue'> & {
+  modelValue: readonly any[]
+  selectStrategy: 'single' | 'page' | 'all'
+  'onUpdate:modelValue': ((value: any[]) => void) | undefined
+}
+
+const singleSelectStrategy: DataTableSelectStrategy = {
+  showSelectAll: false,
+  allSelected: () => [],
+  select: ({ items, value }) => {
+    return new Set(value ? [items[0]?.value] : [])
+  },
+  selectAll: ({ selected }) => selected,
+}
+
+const pageSelectStrategy: DataTableSelectStrategy = {
+  showSelectAll: true,
+  allSelected: ({ currentPage }) => currentPage,
+  select: ({ items, value, selected }) => {
+    for (const item of items) {
+      if (value) selected.add(item.value)
+      else selected.delete(item.value)
+    }
+
+    return selected
+  },
+  selectAll: ({ value, currentPage, selected }) => pageSelectStrategy.select({ items: currentPage, value, selected }),
+}
+
+const allSelectStrategy: DataTableSelectStrategy = {
+  showSelectAll: true,
+  allSelected: ({ allItems }) => allItems,
+  select: ({ items, value, selected }) => {
+    for (const item of items) {
+      if (value) selected.add(item.value)
+      else selected.delete(item.value)
+    }
+
+    return selected
+  },
+  selectAll: ({ value, allItems, selected }) => allSelectStrategy.select({ items: allItems, value, selected }),
+}
 
 export const makeDataTableSelectProps = propsFactory({
   showSelect: Boolean,
+  selectStrategy: {
+    type: [String, Object] as PropType<'single' | 'page' | 'all'>,
+    default: 'page',
+  },
   modelValue: {
     type: Array as PropType<readonly any[]>,
     default: () => ([]),
   },
-}, 'v-data-table-select')
+}, 'DataTable-select')
 
-export const VDataTableSelectionSymbol: InjectionKey<{
-  toggleSelect: (item: any) => void
-  select: (items: any[], value: boolean) => void
-  selectAll: (value: boolean) => void
-  isSelected: (items: any[]) => boolean
-  isSomeSelected: (items: any[]) => boolean
-  someSelected: Ref<boolean>
-  allSelected: Ref<boolean>
-}> = Symbol.for('vuetify:data-table-selection')
+export const VDataTableSelectionSymbol: InjectionKey<ReturnType<typeof provideSelection>> = Symbol.for('vuetify:data-table-selection')
 
-type SelectionProps = Pick<DataTableItemProps, 'itemValue'> & {
-  modelValue: readonly any[]
-  'onUpdate:modelValue': ((value: any[]) => void) | undefined
-}
-
-export function provideSelection <T extends DataTableItem> (props: SelectionProps, allItems: Ref<T[]>) {
+export function provideSelection (
+  props: SelectionProps,
+  { allItems, currentPage }: { allItems: Ref<SelectableItem[]>, currentPage: Ref<SelectableItem[]> }
+) {
   const selected = useProxiedModel(props, 'modelValue', props.modelValue, v => {
     return new Set(v)
   }, v => {
     return [...v.values()]
   })
 
-  function isSelected (items: T | T[]) {
+  const allSelectable = computed(() => allItems.value.filter(item => item.selectable))
+  const currentPageSelectable = computed(() => currentPage.value.filter(item => item.selectable))
+
+  const selectStrategy = computed(() => {
+    if (typeof props.selectStrategy === 'object') return props.selectStrategy
+
+    switch (props.selectStrategy) {
+      case 'single': return singleSelectStrategy
+      case 'all': return allSelectStrategy
+      case 'page':
+      default: return pageSelectStrategy
+    }
+  })
+
+  function isSelected (items: SelectableItem | SelectableItem[]) {
     return wrapInArray(items).every(item => selected.value.has(item.value))
   }
 
-  function isSomeSelected (items: T | T[]) {
+  function isSomeSelected (items: SelectableItem | SelectableItem[]) {
     return wrapInArray(items).some(item => selected.value.has(item.value))
   }
 
-  function select (items: T[], value: boolean) {
-    const newSelected = new Set(selected.value)
-
-    for (const item of items) {
-      if (value) newSelected.add(item.value)
-      else newSelected.delete(item.value)
-    }
+  function select (items: SelectableItem[], value: boolean) {
+    const newSelected = selectStrategy.value.select({
+      items,
+      value,
+      selected: new Set(selected.value),
+    })
 
     selected.value = newSelected
   }
 
-  function toggleSelect (item: T) {
+  function toggleSelect (item: SelectableItem) {
     select([item], !isSelected([item]))
   }
 
   function selectAll (value: boolean) {
-    select(allItems.value, value)
+    const newSelected = selectStrategy.value.selectAll({
+      value,
+      allItems: allSelectable.value,
+      currentPage: currentPageSelectable.value,
+      selected: new Set(selected.value),
+    })
+
+    selected.value = newSelected
   }
 
   const someSelected = computed(() => selected.value.size > 0)
-  const allSelected = computed(() => isSelected(allItems.value))
+  const allSelected = computed(() => {
+    const items = selectStrategy.value.allSelected({
+      allItems: allSelectable.value,
+      currentPage: currentPageSelectable.value,
+    })
+    return isSelected(items)
+  })
 
-  const data = { toggleSelect, select, selectAll, isSelected, isSomeSelected, someSelected, allSelected }
+  const data = {
+    toggleSelect,
+    select,
+    selectAll,
+    isSelected,
+    isSomeSelected,
+    someSelected,
+    allSelected,
+    showSelectAll: selectStrategy.value.showSelectAll,
+  }
 
   provide(VDataTableSelectionSymbol, data)
 

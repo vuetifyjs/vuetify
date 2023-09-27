@@ -25,6 +25,20 @@
   </v-bottom-sheet>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const tiles = [
+    { img: 'keep.png', title: 'Keep' },
+    { img: 'inbox.png', title: 'Inbox' },
+    { img: 'hangouts.png', title: 'Hangouts' },
+    { img: 'messenger.png', title: 'Messenger' },
+    { img: 'google.png', title: 'Google+' },
+  ]
+
+  const sheet = ref(false)
+</script>
+
 <script>
   export default {
     data: () => ({

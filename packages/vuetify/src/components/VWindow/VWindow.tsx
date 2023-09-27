@@ -4,15 +4,15 @@ import './VWindow.sass'
 // Components
 import { VBtn } from '@/components/VBtn'
 
-// Directives
-import { Touch } from '@/directives/touch'
-
 // Composables
 import { makeComponentProps } from '@/composables/component'
-import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useGroup } from '@/composables/group'
 import { useLocale, useRtl } from '@/composables/locale'
+import { makeTagProps } from '@/composables/tag'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
+
+// Directives
+import { Touch } from '@/directives/touch'
 
 // Utilities
 import { computed, provide, ref, shallowRef, watch } from 'vue'
@@ -25,10 +25,10 @@ import type { IconValue } from '@/composables/icons'
 import type { TouchHandlers } from '@/directives/touch'
 
 export type VWindowSlots = {
-  default: [{ group: GroupProvide }]
-  additional: [{ group: GroupProvide }]
-  prev: [{ props: ControlProps }]
-  next: [{ props: ControlProps }]
+  default: { group: GroupProvide }
+  additional: { group: GroupProvide }
+  prev: { props: ControlProps }
+  next: { props: ControlProps }
 }
 
 type WindowProvide = {
@@ -81,13 +81,14 @@ export const makeVWindowProps = propsFactory({
   },
   // TODO: mandatory should probably not be exposed but do this for now
   mandatory: {
+    type: [Boolean, String] as PropType<boolean | 'force'>,
     default: 'force' as const,
   },
 
   ...makeComponentProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
-}, 'v-window')
+}, 'VWindow')
 
 export const VWindow = genericComponent<VWindowSlots>()({
   name: 'VWindow',

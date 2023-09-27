@@ -26,6 +26,13 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const includeFiles = ref(true)
+  const enabled = ref(false)
+</script>
+
 <script>
   export default {
     data: () => ({

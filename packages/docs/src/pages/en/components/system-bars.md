@@ -1,6 +1,6 @@
 ---
-nav: System bars
 meta:
+  nav: System bars
   title: System-bar component
   description: The system bar component creates an android style status bar that rests on the very top of your application.
   keywords: system bars, vuetify system bar component, vue system bar component, android status bar, status bar

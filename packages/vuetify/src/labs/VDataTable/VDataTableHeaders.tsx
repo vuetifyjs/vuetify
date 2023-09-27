@@ -1,16 +1,15 @@
 // Components
-import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VDataTableColumn } from './VDataTableColumn'
+import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { IconValue } from '@/composables/icons'
-import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
-import { useBackgroundColor } from '@/composables/color'
 import { useHeaders } from './composables/headers'
-import type { provideSelection } from './composables/select'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
+import { useBackgroundColor } from '@/composables/color'
+import { IconValue } from '@/composables/icons'
+import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 
 // Utilities
 import { computed } from 'vue'
@@ -18,9 +17,10 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 
 // Types
 import type { CSSProperties, UnwrapRef } from 'vue'
+import type { provideSelection } from './composables/select'
+import type { provideSort } from './composables/sort'
 import type { InternalDataTableHeader } from './types'
 import type { LoaderSlotProps } from '@/composables/loader'
-import type { provideSort } from './composables/sort'
 
 export type HeadersSlotProps = {
   headers: InternalDataTableHeader[][]
@@ -47,11 +47,11 @@ type VDataTableHeaderCellColumnSlotProps = {
 }
 
 export type VDataTableHeadersSlots = {
-  headers: [HeadersSlotProps]
-  loader: [LoaderSlotProps]
-  'column.data-table-select': [VDataTableHeaderCellColumnSlotProps]
-  'column.data-table-expand': [VDataTableHeaderCellColumnSlotProps]
-} & { [key: `column.${string}`]: [VDataTableHeaderCellColumnSlotProps] }
+  headers: HeadersSlotProps
+  loader: LoaderSlotProps
+  'column.data-table-select': VDataTableHeaderCellColumnSlotProps
+  'column.data-table-expand': VDataTableHeaderCellColumnSlotProps
+} & { [key: `column.${string}`]: VDataTableHeaderCellColumnSlotProps }
 
 export const makeVDataTableHeadersProps = propsFactory({
   color: String,
@@ -67,7 +67,7 @@ export const makeVDataTableHeadersProps = propsFactory({
   },
 
   ...makeLoaderProps(),
-}, 'v-data-table-headers')
+}, 'VDataTableHeaders')
 
 export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
   name: 'VDataTableHeaders',
@@ -76,7 +76,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
 
   setup (props, { slots, emit }) {
     const { toggleSort, sortBy, isSorted } = useSort()
-    const { someSelected, allSelected, selectAll } = useSelection()
+    const { someSelected, allSelected, selectAll, showSelectAll } = useSelection()
     const { columns, headers } = useHeaders()
     const { loaderClasses } = useLoader(props)
 
@@ -157,13 +157,13 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               if (slots[columnSlotName]) return slots[columnSlotName]!(columnSlotProps)
 
               if (column.key === 'data-table-select') {
-                return slots['column.data-table-select']?.(columnSlotProps) ?? (
+                return slots['column.data-table-select']?.(columnSlotProps) ?? (showSelectAll && (
                   <VCheckboxBtn
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
                     onUpdate:modelValue={ selectAll }
                   />
-                )
+                ))
               }
 
               return (
@@ -210,10 +210,10 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
             ))}
 
           { props.loading && (
-            <tr class="v-data-table__progress">
+            <tr class="v-data-table-progress">
               <th colspan={ columns.value.length }>
                 <LoaderSlot
-                  name="v-data-table-headers"
+                  name="v-data-table-progress"
                   active
                   color={ typeof props.loading === 'boolean' ? undefined : props.loading }
                   indeterminate

@@ -7,6 +7,19 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const defaults = ref({
+    global: {
+      elevation: 10,
+    },
+    VCard: {
+      color: 'secondary',
+    },
+  })
+</script>
+
 <script>
   export default {
     data: () => ({

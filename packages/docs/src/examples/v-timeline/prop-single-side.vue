@@ -17,6 +17,21 @@
   </v-timeline>
 </template>
 
+<script setup>
+  const items = [
+    {
+      id: 1,
+      color: 'info',
+      icon: 'mdi-information',
+    },
+    {
+      id: 2,
+      color: 'error',
+      icon: 'mdi-alert-circle',
+    },
+  ]
+</script>
+
 <script>
   export default {
     data: () => ({

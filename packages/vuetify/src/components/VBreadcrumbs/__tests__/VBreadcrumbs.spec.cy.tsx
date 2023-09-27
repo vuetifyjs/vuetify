@@ -1,10 +1,13 @@
 /// <reference types="../../../../types/cypress" />
 
-import { createRouter, createWebHistory } from 'vue-router'
-import { Application } from '../../../../cypress/templates'
+// Components
 import { VBreadcrumbs } from '..'
-import { VBreadcrumbsItem } from '../VBreadcrumbsItem'
+import { Application } from '../../../../cypress/templates'
 import { VBreadcrumbsDivider } from '../VBreadcrumbsDivider'
+import { VBreadcrumbsItem } from '../VBreadcrumbsItem'
+
+// Utilities
+import { createRouter, createWebHistory } from 'vue-router'
 
 describe('VBreadcrumbs', () => {
   it('should use item slot', () => {
@@ -12,7 +15,7 @@ describe('VBreadcrumbs', () => {
       <Application>
         <VBreadcrumbs items={['hello', 'world']}>
           {{
-            title: ({ item }: any) => `${item}!`,
+            title: ({ item }: any) => `${item.title}!`,
           }}
         </VBreadcrumbs>
       </Application>
@@ -72,7 +75,7 @@ describe('VBreadcrumbs', () => {
       </Application>
     ))
 
-    cy.get('a.v-breadcrumbs-item').should('exist').should('have.attr', 'href')
+    cy.get('a.v-breadcrumbs-item--link').should('exist').should('have.attr', 'href')
   })
 
   it('should use router if to is set', () => {

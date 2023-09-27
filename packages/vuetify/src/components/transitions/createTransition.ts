@@ -1,6 +1,6 @@
 // Utilities
-import { genericComponent, propsFactory } from '@/util'
 import { h, Transition, TransitionGroup } from 'vue'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { FunctionalComponent, PropType } from 'vue'
@@ -16,7 +16,7 @@ export const makeTransitionProps = propsFactory({
 
 export function createCssTransition (
   name: string,
-  origin = 'center center',
+  origin?: string,
   mode?: string
 ) {
   return genericComponent()({
@@ -30,7 +30,9 @@ export function createCssTransition (
     setup (props, { slots }) {
       const functions = {
         onBeforeEnter (el: HTMLElement) {
-          el.style.transformOrigin = props.origin
+          if (props.origin) {
+            el.style.transformOrigin = props.origin
+          }
         },
         onLeave (el: HTMLElement) {
           if (props.leaveAbsolute) {

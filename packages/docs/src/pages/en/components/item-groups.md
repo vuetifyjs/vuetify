@@ -1,6 +1,6 @@
 ---
-nav: Item groups
 meta:
+  nav: Item groups
   title: Item group component
   description: The item group components provides the ability to create a group of selectable items out of any component.
   keywords: item groups, vuetify item group component, vue item group component

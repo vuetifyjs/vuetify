@@ -28,6 +28,13 @@
   </v-form>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const first = ref('John')
+  const last = ref('Doe')
+</script>
+
 <script>
   export default {
     data: () => ({

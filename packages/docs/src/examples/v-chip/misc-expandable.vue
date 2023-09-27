@@ -82,6 +82,12 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const menu = ref(false)
+</script>
+
 <script>
   export default {
     data: () => ({

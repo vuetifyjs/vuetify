@@ -36,7 +36,7 @@ export function useSticky ({ rootEl, isSticky, layoutItemStyles }: StickyProps) 
   })
 
   onBeforeUnmount(() => {
-    document.removeEventListener('scroll', onScroll)
+    window.removeEventListener('scroll', onScroll)
   })
 
   let lastScrollTop = 0

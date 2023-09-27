@@ -5,23 +5,23 @@ import './VBadge.sass'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { IconValue } from '@/composables/icons'
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables/locale'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { genericComponent, pick, propsFactory, useRender } from '@/util'
 import { toRef } from 'vue'
+import { genericComponent, pick, propsFactory, useRender } from '@/util'
 
 export type VBadgeSlots = {
-  default: []
-  badge: []
+  default: never
+  badge: never
 }
 
 export const makeVBadgeProps = propsFactory({
@@ -51,7 +51,7 @@ export const makeVBadgeProps = propsFactory({
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeTransitionProps({ transition: 'scale-rotate-transition' }),
-}, 'v-badge')
+}, 'VBadge')
 
 export const VBadge = genericComponent<VBadgeSlots>()({
   name: 'VBadge',

@@ -1,14 +1,14 @@
 // Directives
 import Touch from '../'
 
-// Types
-import { nextTick } from 'vue'
-import type { TouchValue } from '../'
-
 // Utilities
-import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
+import { nextTick } from 'vue'
 import { touch } from '@/../test'
+
+// Types
+import type { TouchValue } from '../'
 
 describe('v-touch', () => {
   const mountFunction = (value: TouchValue): Element => {

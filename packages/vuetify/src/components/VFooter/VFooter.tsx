@@ -3,18 +3,18 @@ import './VFooter.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
+import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor } from '@/composables/color'
-import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, shallowRef, toRef } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVFooterProps = propsFactory({
   app: Boolean,
@@ -31,7 +31,7 @@ export const makeVFooterProps = propsFactory({
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'footer' }),
   ...makeThemeProps(),
-}, 'v-footer')
+}, 'VFooter')
 
 export const VFooter = genericComponent()({
   name: 'VFooter',
@@ -75,7 +75,9 @@ export const VFooter = genericComponent()({
         ]}
         style={[
           backgroundColorStyles.value,
-          props.app ? layoutItemStyles.value : undefined,
+          props.app ? layoutItemStyles.value : {
+            height: convertToUnit(props.height),
+          },
           props.style,
         ]}
         v-slots={ slots }

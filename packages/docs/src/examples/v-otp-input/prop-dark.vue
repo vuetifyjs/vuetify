@@ -6,7 +6,7 @@
           <v-otp-input
             v-model="otp"
             :length="length"
-            dark
+            theme="dark"
           ></v-otp-input>
         </div>
       </v-col>
@@ -17,6 +17,17 @@
     </v-row>
   </v-container>
 </template>
+
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const otp = ref('')
+  const length = ref(7)
+
+  const isActive = computed(() => {
+    return otp.value.length === length.value
+  })
+</script>
 
 <script>
   export default {

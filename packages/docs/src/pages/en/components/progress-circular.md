@@ -1,6 +1,6 @@
 ---
-nav: Progress circular
 meta:
+  nav: Progress circular
   title: Progress circular component
   description: The progress circular component is useful for displaying a visual indicator of numerical data in a circle.
   keywords: progress circular, vuetify progress circular component, vue progress circular component, circular progress

@@ -2,7 +2,7 @@
 import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
 
-// Utility
+// Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVBannerActionsProps = propsFactory({
@@ -10,7 +10,7 @@ export const makeVBannerActionsProps = propsFactory({
   density: String,
 
   ...makeComponentProps(),
-}, 'v-banner-actions')
+}, 'VBannerActions')
 
 export const VBannerActions = genericComponent()({
   name: 'VBannerActions',
@@ -22,6 +22,7 @@ export const VBannerActions = genericComponent()({
       VBtn: {
         color: props.color,
         density: props.density,
+        slim: true,
         variant: 'text',
       },
     })

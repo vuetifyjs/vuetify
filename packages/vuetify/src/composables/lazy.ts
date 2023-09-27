@@ -1,9 +1,9 @@
 // Utilities
 import { computed, shallowRef, watch } from 'vue'
+import { propsFactory } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
-import { propsFactory } from '@/util'
 
 export const makeLazyProps = propsFactory({
   eager: Boolean,

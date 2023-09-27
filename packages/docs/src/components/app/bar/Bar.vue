@@ -1,6 +1,7 @@
 <template>
   <v-app-bar
     id="app-bar"
+    :image="image"
     border="b"
     flat
   >
@@ -8,7 +9,7 @@
       <app-bar-logo />
 
       <v-btn
-        v-if="name !== 'home' && mdAndDown"
+        v-if="mdAndDown"
         icon="mdi-menu"
         @click="app.drawer = !app.drawer"
       />
@@ -26,20 +27,16 @@
 
         <app-bar-team-link v-if="lgAndUp" />
 
-        <app-bar-playground-link v-if="lgAndUp" />
-
-        <app-bar-sponsor-link />
+        <app-bar-playground-link />
 
         <app-bar-enterprise-link />
       </template>
 
-      <app-vertical-divider />
+      <app-vertical-divider v-if="mdAndUp" />
 
       <app-bar-theme-toggle />
 
-      <app-vertical-divider />
-
-      <app-bar-store-link />
+      <app-bar-store-link v-if="lgAndUp" />
 
       <app-bar-jobs-link v-if="lgAndUp" />
 
@@ -63,7 +60,6 @@
   import AppBarNotificationsMenu from './NotificationsMenu.vue'
   import AppBarPlaygroundLink from './PlaygroundLink.vue'
   import AppBarSettingsToggle from './SettingsToggle.vue'
-  import AppBarSponsorLink from './SponsorLink.vue'
   import AppBarStoreLink from './StoreLink.vue'
   import AppBarSupportMenu from './SupportMenu.vue'
   import AppBarTeamLink from './TeamLink.vue'
@@ -73,10 +69,18 @@
 
   // Composables
   import { useAppStore } from '@/store/app'
-  import { useDisplay } from 'vuetify'
-  import { useRoute } from 'vue-router'
+  import { useDisplay, useTheme } from 'vuetify'
+
+  // Utilities
+  import { computed } from 'vue'
 
   const app = useAppStore()
   const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
-  const { name } = useRoute()
+  const theme = useTheme()
+
+  const image = computed(() => {
+    if (['dark', 'light'].includes(theme.name.value)) return undefined
+
+    return `https://cdn.vuetifyjs.com/docs/images/themes/${theme.name.value}-app-bar.png`
+  })
 </script>

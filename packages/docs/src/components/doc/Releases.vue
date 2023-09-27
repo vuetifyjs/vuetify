@@ -1,6 +1,7 @@
 <template>
   <div class="border rounded my-6">
     <v-autocomplete
+      ref="autocomplete"
       v-model="search"
       :items="releases"
       :loading="store.isLoading"
@@ -14,11 +15,35 @@
       prepend-inner-icon="mdi-text-box-search-outline"
       return-object
     >
+      <template #selection>
+        <div class="d-flex align-center">
+          <div class="me-1">{{ search?.tag_name }}</div>
+
+          <template v-if="search?.reactions?.total_count">
+            &mdash;
+          </template>
+
+          <template v-for="(value, key) in reactions" :key="key">
+            <template v-if="search?.reactions?.[key]">
+              <span class="d-inline-flex align-center text-body-2 me-2">
+                {{ value }}
+
+                <span class="text-caption">{{ search.reactions[key] }}</span>
+              </span>
+            </template>
+          </template>
+        </div>
+      </template>
+
       <template #item="{ item, props: itemProps }">
         <v-list-item
           v-if="item?.title"
           v-bind="itemProps"
-        />
+        >
+          <template v-if="item.raw?.reactions" #append>
+            {{ genEmoji(item.raw.reactions.total_count) }}
+          </template>
+        </v-list-item>
 
         <template v-else>
           <v-divider />
@@ -42,7 +67,7 @@
       >
         <v-list-item v-if="publishedOn" lines="two">
           <v-list-item-title class="d-flex align-center">
-            <i18n-t keypath="published-on">
+            <i18n-t keypath="published">
               <template #date>
                 <v-chip
                   :text="publishedOn"
@@ -93,6 +118,7 @@
   // Composables
   import { useDate } from 'vuetify/labs/date'
   import { useI18n } from 'vue-i18n'
+  import { useDisplay, version } from 'vuetify'
   import { useRoute, useRouter } from 'vue-router'
 
   // Stores
@@ -100,15 +126,25 @@
 
   // Utilities
   import { computed, onBeforeMount, ref, watch } from 'vue'
-  import { version } from 'vuetify'
   import { wait } from '@/util/helpers'
 
+  const reactions = {
+    '+1': '👍',
+    hooray: '🎉',
+    rocket: '🚀',
+    laugh: '😂',
+    heart: '❤️',
+    eyes: '👀',
+  }
+
+  const { smAndUp } = useDisplay()
   const { t } = useI18n()
   const date = useDate()
   const route = useRoute()
   const router = useRouter()
   const store = useReleasesStore()
 
+  const autocomplete = ref()
   const clicked = ref('copy-link')
   const search = ref<Release>()
 
@@ -163,7 +199,7 @@
   const publishedOn = computed(() => {
     if (!search.value?.published_at) return undefined
 
-    return date.format(new Date(search.value.published_at), 'fullDateWithWeekday')
+    return date.format(new Date(search.value.published_at), smAndUp.value ? 'fullDateWithWeekday' : 'normalDateWithWeekday')
   })
 
   onBeforeMount(async () => {
@@ -178,7 +214,18 @@
     if (!version) return
 
     router.push({ query: { version } })
+
+    autocomplete.value?.blur()
   })
+
+  function genEmoji (count: number) {
+    switch (true) {
+      case (count >= 100): return '💫'
+      case (count > 50): return '🔥'
+      case (count > 30): return '🌶️'
+      default: return undefined
+    }
+  }
 </script>
 
 <style lang="sass">

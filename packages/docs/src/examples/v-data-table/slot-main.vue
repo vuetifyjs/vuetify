@@ -284,7 +284,7 @@
           this.search = '...'
         } else {
           this.search = null
-          this.items = desserts
+          this.itemsArray = desserts
         }
       },
     },

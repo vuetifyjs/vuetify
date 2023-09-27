@@ -13,6 +13,6 @@
     "validationValue": "The value used when applying validation rules."
   },
   "events": {
-    "update:error": "The `error.sync` event"
+    "update:error": "The `v-model:error` event"
   }
 }

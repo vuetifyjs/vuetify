@@ -1,6 +1,6 @@
 ---
-nav: Buttons
 meta:
+  nav: Buttons
   title: Button component
   description: The button component communicates actions that a user can take and are typically placed in dialogs, forms, cards and toolbars.
   keywords: buttons, vuetify button component, vue button component
@@ -12,7 +12,7 @@ related:
 
 # Buttons
 
-The `v-btn` component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color. <inline slug="scrimba-buttons" />
+The `v-btn` component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color.
 
 ![Button Entry](https://cdn.vuetifyjs.com/docs/images/components/v-btn/v-btn-entry.png)
 
@@ -24,7 +24,7 @@ Buttons in their simplest form contain uppercase text, a slight elevation, hover
 
 <usage name="v-btn" />
 
-<entry />
+<promoted slug="enterprise-support" />
 
 ## API
 
@@ -81,11 +81,9 @@ Block buttons extend the full available width of their container. This is useful
 
 <example file="v-btn/prop-block" />
 
-<alert type="info">
-
+::: info
 Block applies **width: 100%** which can cause overflow issues inside a flex container.
-
-</alert>
+:::
 
 #### Rounded
 

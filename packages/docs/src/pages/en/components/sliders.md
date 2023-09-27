@@ -1,9 +1,9 @@
 ---
 meta:
+  nav: Sliders
   title: Slider component
   description: The slider component can be used as an alternative visualization instead of a number input.
   keywords: sliders, vuetify slider component, vue slider component
-nav: Sliders
 related:
   - /components/forms/
   - /components/selects/

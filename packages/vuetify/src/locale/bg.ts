@@ -1,5 +1,6 @@
 export default {
   badge: 'Значка',
+  open: 'Отвори',
   close: 'Затвори',
   dataIterator: {
     noResultsText: 'Не са намерени записи',
@@ -26,12 +27,21 @@ export default {
     lastPage: 'Последна страница',
     pageText: '{0}-{1} от {2}',
   },
+  dateRangeInput: {
+    divider: 'до',
+  },
   datePicker: {
-    itemsSelected: '{0} избрани',
-    nextMonthAriaLabel: 'Следващ месец',
-    nextYearAriaLabel: 'Следващата година',
-    prevMonthAriaLabel: 'Предишен месец',
-    prevYearAriaLabel: 'Предишна година',
+    ok: 'ОК',
+    cancel: 'Отмяна',
+    range: {
+      title: 'Избор на дати',
+      header: 'Въвеждане на дати',
+    },
+    title: 'Избор на дата',
+    header: 'Въвеждане на дата',
+    input: {
+      placeholder: 'Въведете дата',
+    },
   },
   noDataText: 'Няма налични данни',
   carousel: {
@@ -45,17 +55,18 @@ export default {
     moreEvents: 'Още {0}',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: 'Изчисти {0}',
+    prependAction: '{0} предшестващо действие',
+    appendAction: '{0} последващо действие',
+    otp: 'Моля, въведете OTP символ {0}',
   },
   fileInput: {
     counter: '{0} файла',
     counterSize: '{0} файла ({1} общо)',
   },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
+    am: 'пр. обяд',
+    pm: 'сл. обяд',
   },
   pagination: {
     ariaLabel: {
@@ -64,18 +75,22 @@ export default {
       previous: 'Предишна страница',
       page: 'Отиди на страница {0}',
       currentPage: 'Текуща страница, Страница {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Първа страница',
+      last: 'Последна страница',
     },
+  },
+  stepper: {
+    next: 'Следващ',
+    prev: 'Предишен',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Оценка {0} от {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Зареждане...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Зареди още',
+    empty: 'Няма повече',
   },
 }

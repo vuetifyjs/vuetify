@@ -21,6 +21,5 @@ describe('VBottomSheet', () => {
       .get('.v-bottom-sheet')
       .should('have.class', 'v-bottom-sheet--inset')
       .should('have.css', 'max-width', '70%')
-      .percySnapshot()
   })
 })

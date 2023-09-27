@@ -1,5 +1,6 @@
 export default {
   badge: 'Distintivo',
+  open: 'Open',
   close: 'Fechar',
   dataIterator: {
     noResultsText: 'Nenhum dado encontrado',
@@ -26,12 +27,21 @@ export default {
     lastPage: 'Última página',
     pageText: '{0}-{1} de {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} selecionado(s)',
-    nextMonthAriaLabel: 'Próximo mês',
-    nextYearAriaLabel: 'Próximo ano',
-    prevMonthAriaLabel: 'Mês anterior',
-    prevYearAriaLabel: 'Ano anterior',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Não há dados disponíveis',
   carousel: {
@@ -48,6 +58,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} arquivo(s)',
@@ -67,6 +78,10 @@ export default {
       first: 'First page',
       last: 'Last page',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

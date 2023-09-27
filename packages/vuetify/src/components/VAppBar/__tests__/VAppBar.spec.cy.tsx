@@ -5,6 +5,9 @@ import { VAppBar } from '..'
 import { VLayout } from '@/components/VLayout'
 import { VMain } from '@/components/VMain'
 
+// Utilities
+import { ref } from 'vue'
+
 // Constants
 const SCROLL_OPTIONS = { ensureScrollable: true, duration: 50 }
 
@@ -35,6 +38,22 @@ describe('VAppBar', () => {
       .get('.v-app-bar').should('have.css', 'height', '56px')
       .setProps({ density: 'compact' })
       .get('.v-app-bar').should('have.css', 'height', '48px')
+  })
+
+  it('is hidden on mount', () => {
+    const model = ref(false)
+
+    cy
+      .mount(() => (
+        <VLayout>
+          <VAppBar v-model={ model.value } />
+        </VLayout>
+      ))
+      .get('.v-app-bar')
+      .should('not.be.visible')
+      .then(() => (model.value = true))
+      .get('.v-app-bar')
+      .should('be.visible')
   })
 
   describe('scroll behavior', () => {

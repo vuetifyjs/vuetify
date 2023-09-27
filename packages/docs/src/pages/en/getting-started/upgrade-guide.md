@@ -1,6 +1,6 @@
 ---
-nav: Upgrade guide
 meta:
+  nav: Upgrade guide
   title: Upgrade guide
   description: Detailed instruction on how to upgrade Vuetify to 3.0
   keywords: migration, upgrade, releases, upgrading vuetify, alpha, v3
@@ -19,25 +19,21 @@ Many of these changes can be applied automatically by [eslint-plugin-vuetify](ht
 
 <entry />
 
-<alert type="warning">
-
+::: warning
   This page is incomplete. Please check back later for more information, or submit a PR if you notice something missing. If you have additional questions, reach out to us in [Discord](https://community.vuetifyjs.com/)
+:::
 
-</alert>
-
-<alert type="warning">
-
+::: warning
   Not all Vuetify 2 components are currently available in Vuetify 3; These components will be released as their development is completed via [Vuetify Labs](https://vuetifyjs.com/en/labs/introduction/).
 
 - v-calendar
-- v-date-picker
+- [v-date-picker](/components/date-pickers/)
 - [v-data-table](/components/data-tables/basics/)
 - [v-skeleton-loader](/components/skeleton-loaders/)
 - v-stepper
 - v-time-picker
 - v-treeview
-
-</alert>
+:::
 
 ## Setup
 
@@ -104,9 +100,9 @@ app.use(vuetify)
 
 ### General changes
 
-- `value` prop has been replaced by `model-value` on components that support `v-model` usage.
+- `value` prop has been replaced by `model-value` on components that support `v-model` usage. (Vue 3 requires this change)
   - Note that this does not apply to `value` used as a *selection value*, for example `v-btn` within `v-btn-toggle`.
-- `@input` event has been replaced by `@update:model-value` on components that support `v-model` usage.
+- `@input` event has been replaced by `@update:model-value` on components that support `v-model` usage. (Vue 3 requires this change)
 - `left` and `right` have been replaced by `start` and `end` respectively. This applies to utility classes too, for example `.border-r` is now `.border-e`.
 - Size props `small` / `medium` / `large` etc. have been combined into a single `size` prop.
 - `absolute` and `fixed` props have been combined into a single `position` prop.
@@ -136,6 +132,16 @@ app.use(vuetify)
   - Allowed values are `'elevated'`, `'flat'`, `'tonal'`, `'outlined'`, `'text'`, or `'plain'`.
 - `text` prop has new purpose. It represents the text content of the alert, if default slot is not used.
 
+### v-badge
+
+- `overlap` has been removed and is now the default style, use `floating` to restore the v2 default.
+- Transition props `mode` and `origin` have been removed.
+- `avatar` prop is no longer needed and has been removed.
+
+### v-banner
+
+- `color` now applies to the icon and action text. Use `bg-color` to change the background color.
+
 ### v-btn/v-btn-toggle
 
 - `active-class` prop has been renamed to `selected-class`
@@ -149,7 +155,7 @@ app.use(vuetify)
 
 ### v-checkbox/v-radio/v-switch
 
-- `input-value` prop has been renamed to `model-value`.
+- `input-value` prop has been renamed to `model-value`. (Vue 3 requires this change)
 - `on-icon` and `off-icon` props have been renamed to `true-icon` and `false-icon`.
 - `on-value` and `off-value` props have been renamed to `true-value` and `false-value`.
 - `v-checkbox`'s label slot should no longer contain a `<label>` as it is already wrapped with one
@@ -215,10 +221,6 @@ app.use(vuetify)
 - `offset-y` and `offset-x` props have been removed. Use `offset` prop instead
 - `absolute` variant has been removed. For absolute positioning use css instead
 
-### v-skeleton-loader
-
-- This component hasn't been migrated to vuetify 3
-
 ### v-snackbar
 
 - `action` slot was renamed to `actions`
@@ -228,3 +230,7 @@ app.use(vuetify)
 - `v-expansion-panel-header` has been renamed to `v-expansion-panel-title`.
 - `v-expansion-panel-content` has been renamed to `v-expansion-panel-text`.
 - `v-expansion-panel` now has `text` and `title` props that can be used instead of subcomponents.
+
+### v-card
+
+- `v-card` does not allow content to overflow or use higher `z-index` values to display on top of elements outside it. To disable this behavior, use `<v-card style="overflow: initial; z-index: initial">` ([#17593](https://github.com/vuetifyjs/vuetify/issues/17593), [#17628](https://github.com/vuetifyjs/vuetify/issues/17628))

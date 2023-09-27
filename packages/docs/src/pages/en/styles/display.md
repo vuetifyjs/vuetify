@@ -75,11 +75,9 @@ Additionally, **media types** can be targeted using the `only` condition. Both `
 
 ### Caveats
 
-<alert type="info">
-
+::: info
 It is important to note that using any of the display classes above will result in any display style previously added being overwritten. This is because of the classes using `!important` in their display styling.
-
-</alert>
+:::
 
 ## Display in print
 

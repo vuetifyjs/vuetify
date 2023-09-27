@@ -3,10 +3,10 @@ import './VExpansionPanel.sass'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { provideDefaults } from '@/composables/defaults'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -24,6 +24,7 @@ type Variant = typeof allowedVariants[number]
 
 export const makeVExpansionPanelsProps = propsFactory({
   color: String,
+  static: Boolean,
   variant: {
     type: String as PropType<Variant>,
     default: 'default',
@@ -35,7 +36,7 @@ export const makeVExpansionPanelsProps = propsFactory({
   ...makeGroupProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
-}, 'v-expansion-panel')
+}, 'VExpansionPanels')
 
 export const VExpansionPanels = genericComponent()({
   name: 'VExpansionPanels',
@@ -59,6 +60,7 @@ export const VExpansionPanels = genericComponent()({
       },
       VExpansionPanelTitle: {
         readonly: toRef(props, 'readonly'),
+        static: toRef(props, 'static'),
       },
     })
 

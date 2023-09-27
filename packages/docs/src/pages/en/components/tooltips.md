@@ -1,6 +1,6 @@
 ---
-nav: Tooltips
 meta:
+  nav: Tooltips
   title: Tooltip component
   description: The tooltip component displays textual information regarding the element it is attached to.
   keywords: tooltips, vuetify tooltip component, vue tooltip component

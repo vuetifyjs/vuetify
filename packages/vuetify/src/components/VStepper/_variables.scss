@@ -22,10 +22,16 @@ $stepper-step-step-icon-font-size: map-deep-get($typography, 'h6', 'size') !defa
 $stepper-step-step-margin: 8px !default;
 $stepper-step-step-min-width: 24px !default;
 $stepper-step-step-width: 24px !default;
+$stepper-vertical-content-margin-inline: 36px -36px !default;
+$stepper-vertical-content-margin-block: -8px -16px !default;
+$stepper-vertical-content-padding-inline: 23px 60px  !default;
+$stepper-vertical-content-padding-block: 16px !default;
+$stepper-vertical-padding-bottom: 36px !default;
+$stepper-vertical-step-padding: 24px 24px 16px !default;
+$stepper-vertical-step-step-margin: 12px !default;
+
+// Deprecated
 $stepper-vertical-content-ltr-margin: -8px -36px -16px 36px !default;
 $stepper-vertical-content-rtl-margin: -8px 36px -16px -36px !default;
 $stepper-vertical-content-ltr-padding: 16px 60px 16px 23px !default;
 $stepper-vertical-content-rtl-padding: 16px 23px 16px 60px !default;
-$stepper-vertical-padding-bottom: 36px !default;
-$stepper-vertical-step-padding: 24px 24px 16px !default;
-$stepper-vertical-step-step-margin: 12px !default;

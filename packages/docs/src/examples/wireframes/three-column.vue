@@ -2,12 +2,12 @@
   <v-app id="inspire">
     <v-app-bar
       class="px-3"
-      color="white"
       flat
       density="compact"
     >
       <v-avatar
         color="grey-darken-1"
+        class="hidden-md-and-up"
         size="32"
       ></v-avatar>
 
@@ -20,9 +20,8 @@
         <v-tab
           v-for="link in links"
           :key="link"
-        >
-          {{ link }}
-        </v-tab>
+          :text="link"
+        ></v-tab>
       </v-tabs>
       <v-spacer></v-spacer>
 
@@ -38,7 +37,7 @@
         <v-row>
           <v-col
             cols="12"
-            sm="2"
+            md="2"
           >
             <v-sheet
               rounded="lg"
@@ -50,7 +49,7 @@
 
           <v-col
             cols="12"
-            sm="8"
+            md="8"
           >
             <v-sheet
               min-height="70vh"
@@ -62,7 +61,7 @@
 
           <v-col
             cols="12"
-            sm="2"
+            md="2"
           >
             <v-sheet
               rounded="lg"
@@ -76,6 +75,15 @@
     </v-main>
   </v-app>
 </template>
+
+<script setup>
+  const links = [
+    'Dashboard',
+    'Messages',
+    'Profile',
+    'Updates',
+  ]
+</script>
 
 <script>
   export default {

@@ -2,19 +2,22 @@
 import './VSliderTrack.sass'
 
 // Components
-import { type Tick, VSliderSymbol } from './slider'
+import { VSliderSymbol } from './slider'
 
 // Composables
-import { makeComponentProps } from '@/composables/component'
 import { useBackgroundColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
 import { useRounded } from '@/composables/rounded'
 
 // Utilities
 import { computed, inject } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
+// Types
+import type { Tick } from './slider'
+
 export type VSliderTrackSlots = {
-  'tick-label': [{ tick: Tick, index: number }]
+  'tick-label': { tick: Tick, index: number }
 }
 
 export const makeVSliderTrackProps = propsFactory({
@@ -28,7 +31,7 @@ export const makeVSliderTrackProps = propsFactory({
   },
 
   ...makeComponentProps(),
-}, 'v-slider-track')
+}, 'VSliderTrack')
 
 export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
   name: 'VSliderTrack',

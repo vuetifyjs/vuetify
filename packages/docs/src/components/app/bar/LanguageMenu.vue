@@ -1,15 +1,13 @@
 <template>
   <app-menu
     key="language-menu"
-    :close-on-content-click="false"
     :open-on-hover="false"
     :items="items"
   >
     <template #activator="{ props }">
-      <app-tooltip-btn
+      <app-btn
         color="medium-emphasis"
         icon="mdi-translate"
-        path="languages"
         v-bind="props"
       />
     </template>

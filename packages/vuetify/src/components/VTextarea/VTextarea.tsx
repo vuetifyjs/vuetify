@@ -3,25 +3,26 @@ import './VTextarea.sass'
 import '../VTextField/VTextField.sass'
 
 // Components
+import { VCounter } from '@/components/VCounter/VCounter'
+import { VField } from '@/components/VField'
 import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { VCounter, type VCounterSlot } from '@/components/VCounter/VCounter'
-import { VField } from '@/components/VField'
+
+// Composables
+import { useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
 import Intersect from '@/directives/intersect'
 
-// Composables
-import { forwardRefs } from '@/composables/forwardRefs'
-import { useFocus } from '@/composables/focus'
-import { useProxiedModel } from '@/composables/proxiedModel'
-
 // Utilities
-import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
+import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VCounterSlot } from '@/components/VCounter/VCounter'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -49,10 +50,10 @@ export const makeVTextareaProps = propsFactory({
 
   ...makeVInputProps(),
   ...makeVFieldProps(),
-}, 'v-textarea')
+}, 'VTextarea')
 
 type VTextareaSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
-  counter: [VCounterSlot]
+  counter: VCounterSlot
 }
 
 export const VTextarea = genericComponent<VTextareaSlots>()({
@@ -248,7 +249,6 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                 onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
-                role="textbox"
                 { ...fieldProps }
                 active={ isActive.value || isDirty.value }
                 centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
@@ -295,6 +295,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                             fieldClass,
                             'v-textarea__sizer',
                           ]}
+                          id={ `${slotProps.id}-sizer` }
                           v-model={ model.value }
                           ref={ sizerRef }
                           readonly

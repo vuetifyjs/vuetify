@@ -1,6 +1,6 @@
 ---
-nav: Autocompletes
 meta:
+  nav: Autocompletes
   title: Autocomplete component
   description: The autocomplete component provides type-ahead autocomplete functionality and provides a list of available options.
   keywords: autocomplete, vuetify autocomplete component, vue autocomplete component
@@ -32,23 +32,17 @@ The autocomplete component extends `v-select` and adds the ability to filter ite
 
 ## Caveats
 
-<alert type="error">
-
+::: error
   When using objects for the **items** prop, you must associate **item-title** and **item-value** with existing properties on your objects. These values are defaulted to **title** and **value** and can be changed.
+:::
 
-</alert>
-
-<alert type="warning">
-
+::: warning
   The **auto** property of **menu-props** is only supported for the default input style.
+:::
 
-</alert>
-
-<alert type="info">
-
+::: info
   Browser autocomplete is set to off by default, may vary by browser and may be ignored. [MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)
-
-</alert>
+:::
 
 ## Examples
 
@@ -64,7 +58,7 @@ You can use `density` prop to adjusts vertical spacing within the component.
 
 #### Filter
 
-The `filter` prop can be used to filter each individual item with custom logic. In this example we filter items by name.
+The `custom-filter` prop can be used to filter each individual item with custom logic. In this example we filter items by name.
 
 <example file="v-autocomplete/prop-filter" />
 
@@ -92,11 +86,9 @@ Using a combination of `v-autocomplete` slots and transitions, you can create a 
 
 #### New tab
 
-<alert type="success">
-
+::: success
 This feature was introduced in [v3.3.0 (Icarus)](/getting-started/release-notes/?version=v3.3.0)
-
-</alert>
+:::
 
 The **auto-select-first** property highlights the first result when searching, allowing you to press <v-kbd>tab</v-kbd> or <v-kbd>enter</v-kbd> to quickly select it.
 

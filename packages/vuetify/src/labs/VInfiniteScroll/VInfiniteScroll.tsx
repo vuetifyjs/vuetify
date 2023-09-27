@@ -12,7 +12,7 @@ import { useLocale } from '@/composables/locale'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, ref, shallowRef, watch } from 'vue'
 import { convertToUnit, defineComponent, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -27,11 +27,11 @@ type InfiniteScrollSlot = {
 }
 
 type VInfiniteScrollSlots = {
-  default: []
-  loading: [InfiniteScrollSlot]
-  error: [InfiniteScrollSlot]
-  empty: [InfiniteScrollSlot]
-  'load-more': [InfiniteScrollSlot]
+  default: never
+  loading: InfiniteScrollSlot
+  error: InfiniteScrollSlot
+  empty: InfiniteScrollSlot
+  'load-more': InfiniteScrollSlot
 }
 
 export const makeVInfiniteScrollProps = propsFactory({
@@ -63,7 +63,7 @@ export const makeVInfiniteScrollProps = propsFactory({
 
   ...makeDimensionProps(),
   ...makeTagProps(),
-}, 'v-infinite-scroll')
+}, 'VInfiniteScroll')
 
 export const VInfiniteScrollIntersect = defineComponent({
   name: 'VInfiniteScrollIntersect',
@@ -78,18 +78,17 @@ export const VInfiniteScrollIntersect = defineComponent({
   },
 
   emits: {
-    intersect: (side: InfiniteScrollSide) => true,
+    intersect: (side: InfiniteScrollSide, isIntersecting: boolean) => true,
   },
 
   setup (props, { emit }) {
     const { intersectionRef, isIntersecting } = useIntersectionObserver(entries => {
     }, props.rootMargin ? {
-      root: props.rootRef,
       rootMargin: props.rootMargin,
     } : undefined)
 
     watch(isIntersecting, async val => {
-      if (val) emit('intersect', props.side)
+      emit('intersect', props.side, val)
     })
 
     useRender(() => (
@@ -111,9 +110,10 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
 
   setup (props, { slots, emit }) {
     const rootEl = ref<HTMLDivElement>()
-    const startStatus = ref<InfiniteScrollStatus>('ok')
-    const endStatus = ref<InfiniteScrollStatus>('ok')
+    const startStatus = shallowRef<InfiniteScrollStatus>('ok')
+    const endStatus = shallowRef<InfiniteScrollStatus>('ok')
     const margin = computed(() => convertToUnit(props.margin))
+    const isIntersecting = shallowRef(false)
 
     function setScrollAmount (amount: number) {
       if (!rootEl.value) return
@@ -166,7 +166,16 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
     }
 
     let previousScrollSize = 0
-    function handleIntersect (side: InfiniteScrollSide) {
+    function handleIntersect (side: InfiniteScrollSide, _isIntersecting: boolean) {
+      isIntersecting.value = _isIntersecting
+      if (isIntersecting.value) {
+        intersecting(side)
+      }
+    }
+
+    function intersecting (side: InfiniteScrollSide) {
+      if (props.mode !== 'manual' && !isIntersecting.value) return
+
       const status = getStatus(side)
       if (!rootEl.value || status === 'loading') return
 
@@ -177,8 +186,21 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
         setStatus(side, status)
 
         nextTick(() => {
+          if (status === 'empty' || status === 'error') return
+
           if (status === 'ok' && side === 'start') {
             setScrollAmount(getScrollSize() - previousScrollSize + getScrollAmount())
+          }
+          if (props.mode !== 'manual') {
+            nextTick(() => {
+              window.requestAnimationFrame(() => {
+                window.requestAnimationFrame(() => {
+                  window.requestAnimationFrame(() => {
+                    intersecting(side)
+                  })
+                })
+              })
+            })
           }
         })
       }
@@ -191,7 +213,7 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
     function renderSide (side: InfiniteScrollSide, status: InfiniteScrollStatus) {
       if (props.side !== side && props.side !== 'both') return
 
-      const onClick = () => handleIntersect(side)
+      const onClick = () => intersecting(side)
       const slotProps = { side, props: { onClick, color: props.color } }
 
       if (status === 'error') return slots.error?.(slotProps)

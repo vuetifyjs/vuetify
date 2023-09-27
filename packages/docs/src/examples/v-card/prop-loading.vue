@@ -87,6 +87,17 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const loading = ref(false)
+  const selection = ref(1)
+  function reserve () {
+    loading.value = true
+    setTimeout(() => (loading.value = false), 2000)
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

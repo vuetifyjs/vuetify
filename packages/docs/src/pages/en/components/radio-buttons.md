@@ -1,6 +1,6 @@
 ---
-nav: Radio buttons
 meta:
+  nav: Radio buttons
   title: Radio button component
   description: A radio button allows the user to choose only one of a set of options using a radio group.
   keywords: radio groups, radio buttons, vuetify radio group component, vuetify radio component, vue radio component, vue radio group component

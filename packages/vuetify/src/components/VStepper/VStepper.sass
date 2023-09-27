@@ -52,11 +52,7 @@
 
   &--vertical
     .v-stepper__content:not(:last-child)
-      +ltr()
-        border-left: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
-
-      +rtl()
-        border-right: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+        border-inline-start: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
 
 +sheet(v-stepper, $stepper-elevation, $stepper-border-radius, $stepper-shaped-border-radius)
 
@@ -91,12 +87,7 @@
     min-width: $stepper-step-step-min-width
     width: $stepper-step-step-width
     transition: .3s map-get($transition, 'fast-in-fast-out')
-
-    +ltr()
-      margin-right: $stepper-step-step-margin
-
-    +rtl()
-      margin-left: $stepper-step-step-margin
+    margin-inline-end: $stepper-step-step-margin
 
     .v-icon.v-icon
       font-size: $stepper-step-step-icon-font-size
@@ -140,12 +131,7 @@
     display: block
     flex-grow: 1
     line-height: $stepper-label-line-height
-
-    +ltr()
-      text-align: left
-
-    +rtl()
-      text-align: right
+    text-align: start
 
     small
       display: block
@@ -182,27 +168,17 @@
     padding-bottom: $stepper-vertical-padding-bottom
 
     .v-stepper__content
-      +ltr()
-        padding: $stepper-vertical-content-ltr-padding
-      +rtl()
-        padding: $stepper-vertical-content-rtl-padding
-
       width: auto
-      +ltr()
-        margin: $stepper-vertical-content-ltr-margin
-
-      +rtl()
-        margin: $stepper-vertical-content-rtl-margin
+      margin-inline: $stepper-vertical-content-margin-inline
+      margin-block: $stepper-vertical-content-margin-block
+      padding-inline: $stepper-vertical-content-padding-inline
+      padding-block: $stepper-vertical-content-padding-block
 
     .v-stepper__step
       padding: $stepper-vertical-step-padding
 
     .v-stepper__step__step
-      +ltr()
-        margin-right: $stepper-vertical-step-step-margin
-
-      +rtl()
-        margin-left: $stepper-vertical-step-step-margin
+      margin-inline-end: $stepper-vertical-step-step-margin
 
   &--alt-labels
     .v-stepper__header

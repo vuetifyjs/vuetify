@@ -47,6 +47,12 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const rating = ref(4.5)
+</script>
+
 <script>
   export default {
     data: () => ({ rating: 4.5 }),

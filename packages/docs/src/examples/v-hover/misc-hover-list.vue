@@ -54,6 +54,31 @@
   </v-container>
 </template>
 
+<script setup>
+  const icons = ['mdi-rewind', 'mdi-play', 'mdi-fast-forward']
+  const items = [
+    {
+      title: 'New Releases',
+      text: `It's New Release Friday`,
+      subtext: 'Newly released songs.',
+      img: 'https://cdn.vuetifyjs.com/docs/images/cards/hands.jpg',
+    },
+    {
+      title: 'Rock',
+      text: 'Greatest Rock Hits',
+      subtext: 'Lose yourself in rock tunes.',
+      img: 'https://cdn.vuetifyjs.com/docs/images/cards/singer.jpg',
+    },
+    {
+      title: 'Mellow Moods',
+      text: 'Ambient Bass',
+      subtext: 'Chill beats to mellow you out.',
+      img: 'https://cdn.vuetifyjs.com/docs/images/cards/concert.jpg',
+    },
+  ]
+  const transparent = 'rgba(255, 255, 255, 0)'
+</script>
+
 <script>
   export default {
     data: () => ({
@@ -62,20 +87,20 @@
         {
           title: 'New Releases',
           text: `It's New Release Friday`,
-          subtext: 'Newly released songs. Updated daily.',
-          img: 'https://images.unsplash.com/photo-1429514513361-8fa32282fd5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3264&q=80',
+          subtext: 'Newly released songs.',
+          img: 'https://cdn.vuetifyjs.com/docs/images/cards/hands.jpg',
         },
         {
           title: 'Rock',
           text: 'Greatest Rock Hits',
           subtext: 'Lose yourself in rock tunes.',
-          img: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80',
+          img: 'https://cdn.vuetifyjs.com/docs/images/cards/singer.jpg',
         },
         {
           title: 'Mellow Moods',
           text: 'Ambient Bass',
           subtext: 'Chill beats to mellow you out.',
-          img: 'https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80',
+          img: 'https://cdn.vuetifyjs.com/docs/images/cards/concert.jpg',
         },
       ],
       transparent: 'rgba(255, 255, 255, 0)',

@@ -1,6 +1,6 @@
 ---
-nav: Server side tables
 meta:
+  nav: Server side tables
   title: Data table - Server side tables
   description: The data table component is used for displaying tabular data in a way that is easy for users to scan. It includes sorting, searching, pagination and selection.
   keywords: data tables, vuetify data table component, vue data table component
@@ -15,6 +15,20 @@ related:
 Server-side Data tables are used for showing data coming from an API.
 
 <entry />
+
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VDataTableServer } from 'vuetify/labs/VDataTable'
+
+export default createVuetify({
+  components: {
+    VDataTableServer,
+  },
+})
+```
 
 ## Examples
 

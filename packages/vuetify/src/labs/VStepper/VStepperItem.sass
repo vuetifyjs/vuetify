@@ -1,0 +1,71 @@
+@use '../../styles/settings'
+@use './variables' as *
+
+.v-stepper-item
+  align-items: center
+  align-self: stretch
+  display: inline-flex
+  flex: none
+  opacity: var(--v-medium-emphasis-opacity)
+  padding: 1.5rem
+  transition-duration: .2s
+  transition-property: opacity
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+
+  &--selected
+    opacity: 1
+
+  &--error
+    color: rgb(var(--v-theme-error))
+
+  &--disabled
+    opacity: var(--v-medium-emphasis-opacity)
+    pointer-events: none
+
+  .v-stepper--alt-labels &
+    flex-direction: column
+    justify-content: flex-start
+    align-items: center
+    flex-basis: $stepper-alt-labels-flex-basis
+
+.v-stepper-item__avatar.v-avatar
+  background: rgba(var(--v-theme-surface-variant), var(--v-medium-emphasis-opacity))
+  color: rgb(var(--v-theme-on-surface-variant))
+  font-size: .75rem
+  margin-inline-end: 8px
+
+  .v-icon
+    font-size: .875rem
+
+  .v-stepper-item--selected &,
+  .v-stepper-item--complete &
+    background: rgb(var(--v-theme-surface-variant))
+
+  .v-stepper-item--error &
+    background: rgb(var(--v-theme-error))
+
+  .v-stepper--alt-labels &
+    margin-bottom: 16px
+    margin-inline-end: 0
+
+.v-stepper-item__content
+  .v-stepper--alt-labels &
+    // min-height: 28px
+
+.v-stepper-item__title
+  line-height: 1
+
+  .v-stepper--mobile &
+    display: none
+
+.v-stepper-item__subtitle
+  font-size: .75rem
+  text-align: left
+  line-height: 1
+  opacity: var(--v-medium-emphasis-opacity)
+
+  .v-stepper--alt-labels &
+    text-align: center
+
+  .v-stepper--mobile &
+    display: none

@@ -1,6 +1,6 @@
 ---
-nav: Lazy
 meta:
+  nav: Lazy
   title: Lazy component
   description: The lazy component allows you to dynamically render content based upon the user's viewport.
   keywords: lazy loading

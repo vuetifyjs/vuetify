@@ -1,8 +1,10 @@
 // Imports
 import { createI18n } from 'vue-i18n'
+import { useLocaleStore } from '@/store/locale'
 
 // Types
-import type { I18nPlugin } from '@/types'
+import type { ViteSSGContext } from '@vuetify/vite-ssg'
+import { watch } from 'vue'
 
 const messages = Object.fromEntries(
   Object.entries(
@@ -12,11 +14,17 @@ const messages = Object.fromEntries(
     }),
 )
 
-export const useI18n: I18nPlugin = ({ app }) => {
+export function installI18n ({ app }: ViteSSGContext) {
+  const localeStore = useLocaleStore()
+
   const i18n = createI18n({
     legacy: false,
-    locale: 'en',
+    locale: localeStore.locale,
     messages,
+  })
+
+  watch(() => localeStore.locale, locale => {
+    i18n.global.locale.value = locale
   })
 
   app.use(i18n)

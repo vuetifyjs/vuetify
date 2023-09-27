@@ -73,6 +73,15 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const dialog = ref(false)
+  const notifications = ref(false)
+  const sound = ref(true)
+  const widgets = ref(false)
+</script>
+
 <script>
   export default {
     data () {

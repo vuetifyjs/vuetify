@@ -1,6 +1,6 @@
 ---
-nav: Button toggles
 meta:
+  nav: Button toggles
   title: Button toggle component
   description: The button toggle component allows you to combine a series of selectable buttons together in a single element.
   keywords: button groups, vuetify button group component, vue button group component

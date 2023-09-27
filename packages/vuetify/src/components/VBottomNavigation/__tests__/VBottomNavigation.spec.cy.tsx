@@ -1,7 +1,8 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VLayout } from '@/components/VLayout'
+// Components
 import { VBottomNavigation } from '..'
+import { VLayout } from '@/components/VLayout'
 
 describe('VBottomNavigation', () => {
   it('should allow custom height', () => {

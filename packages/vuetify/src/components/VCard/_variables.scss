@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '../../styles/settings';
 @use '../../styles/tools';
 
@@ -94,27 +95,25 @@ $card-border: (
 ) !default;
 
 $card-title-densities: () !default;
-$card-title-densities: (
+$card-title-densities: map.merge((
   null: $card-title-line-height,
   'comfortable': $card-title-comfortable-line-height,
   'compact': $card-title-compact-line-height
-);
+), $card-title-densities);
 
-$card-subtitle-densities: ('default': 0, 'comfortable': -1, 'compact': -2);
-
-$card-subtitle-densities: () !default;
-$card-subtitle-densities: (
+$card-subtitle-density-line-height: () !default;
+$card-subtitle-density-line-height: map.merge((
   null: $card-subtitle-line-height,
   'comfortable': $card-subtitle-comfortable-line-height,
   'compact': $card-subtitle-compact-line-height
-);
+), $card-subtitle-density-line-height);
 
-$card-text-densities: () !default;
-$card-text-densities: (
+$card-text-density-line-height: () !default;
+$card-text-density-line-height: map.merge((
   null: $card-text-line-height,
   'comfortable': $card-text-comfortable-line-height,
   'compact': $card-text-compact-line-height
-);
+), $card-text-density-line-height);
 
 $card-variants: (
   $card-background,
@@ -122,4 +121,4 @@ $card-variants: (
   $card-elevation,
   $card-plain-opacity,
   'v-card'
-);
+) !default;

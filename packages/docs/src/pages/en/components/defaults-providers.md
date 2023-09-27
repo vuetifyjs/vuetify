@@ -1,6 +1,6 @@
 ---
-nav: Defaults providers
 meta:
+  nav: Defaults providers
   title: Defaults provider component
   description: The defaults provider allows you to provide specific default prop values to components in a section of your application
   keywords: defaults provider, vuetify defaults provider component, vue defaults provider component

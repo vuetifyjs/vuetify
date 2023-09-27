@@ -6,8 +6,8 @@ import { VBtn } from '@/components/VBtn'
 import { VSelect } from '@/components/VSelect'
 
 // Composables
-import { useLocale } from '@/composables/locale'
 import { usePagination } from './composables/paginate'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
@@ -68,9 +68,9 @@ export const makeVDataTableFooterProps = propsFactory({
     ]),
   },
   showCurrentPage: Boolean,
-}, 'v-data-table-footer')
+}, 'VDataTableFooter')
 
-export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
+export const VDataTableFooter = genericComponent<{ prepend: never }>()({
   name: 'VDataTableFooter',
 
   props: makeVDataTableFooterProps(),

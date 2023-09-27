@@ -21,6 +21,22 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const tags = ref([
+    'Work',
+    'Home Improvement',
+    'Vacation',
+    'Food',
+    'Drawers',
+    'Shopping',
+    'Art',
+    'Tech',
+    'Creative Writing',
+  ])
+</script>
+
 <script>
   export default {
     data: () => ({

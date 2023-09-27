@@ -1,6 +1,6 @@
 // Components
-import { VExpandTransition } from '@/components/transitions'
 import { VExpansionPanelSymbol } from './VExpansionPanels'
+import { VExpandTransition } from '@/components/transitions'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
@@ -13,7 +13,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 export const makeVExpansionPanelTextProps = propsFactory({
   ...makeComponentProps(),
   ...makeLazyProps(),
-}, 'v-expansion-panel-text')
+}, 'VExpansionPanelText')
 
 export const VExpansionPanelText = genericComponent()({
   name: 'VExpansionPanelText',

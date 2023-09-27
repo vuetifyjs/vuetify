@@ -1,7 +1,6 @@
 ---
-emphasized: true
-nav: Skeleton loaders
 meta:
+  nav: Skeleton loaders
   title: Skeleton loader component
   description:  The skeleton loader component provides a placeholder loading state for when content is being fetched from a server or loaded asynchronously. It can be used in a variety of contexts, including cards, lists, and tables.
   keywords: skeleton loaders, vuetify skeleton loader component, vue skeleton loader
@@ -19,6 +18,10 @@ Skeleton loaders provide a simple way to display loading placeholders in your ap
 
 ----
 
+::: warning
+This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
+:::
+
 ## Usage
 
 The `v-skeleton-loader` component provides a user with a visual indicator that content is coming / loading. This is better received than traditional full-screen loaders.
@@ -26,6 +29,20 @@ The `v-skeleton-loader` component provides a user with a visual indicator that c
 <usage name="v-skeleton-loader" />
 
 <entry />
+
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VSkeletonLoader } from 'vuetify/labs/VSkeletonLoader'
+
+export default createVuetify({
+  components: {
+    VSkeletonLoader,
+  },
+})
+```
 
 ## API
 
@@ -61,7 +78,7 @@ The `v-skeleton-loader` component has a small API mainly used to configure the r
 
 #### Type
 
-The **type** property is used to define the type of skeleton loader. Types can be combined to create more complex skeletons. For example, the **card** type is a combination of the **image** and **card-heading** types.
+The **type** property is used to define the type of skeleton loader. Types can be combined to create more complex skeletons. For example, the **card** type is a combination of the **image** and **heading** types.
 
 <example file="v-skeleton-loader/prop-type" />
 
@@ -73,11 +90,10 @@ The following built-in types are available:
 | **article** | heading, paragraph |
 | **avatar** | avatar |
 | **button** | button |
-| **card** | image, card-heading |
+| **card** | image, heading |
 | **card-avatar** | image, list-item-avatar |
-| **card-heading** | heading |
 | **chip** | chip |
-| **date-picker** | list-item, card-heading, divider, date-picker-options, date-picker-days, actions |
+| **date-picker** | list-item, heading, divider, date-picker-options, date-picker-days, actions |
 | **date-picker-options** | text, avatar@2 |
 | **date-picker-days** | avatar@28 |
 | **divider** | divider |

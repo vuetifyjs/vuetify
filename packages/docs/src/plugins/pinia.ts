@@ -3,11 +3,11 @@ import { createPinia } from 'pinia'
 import { markRaw } from 'vue'
 
 // Types
-import type { PiniaPlugin } from '@/types'
+import type { ViteSSGContext } from '@vuetify/vite-ssg'
 
 export const pinia = createPinia()
 
-export const usePinia: PiniaPlugin = ({ app, router }) => {
+export function installPinia ({ app, router }: ViteSSGContext) {
   pinia.use(({ store }) => {
     store.router = markRaw(router)
   })

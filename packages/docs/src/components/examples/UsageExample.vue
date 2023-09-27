@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-toolbar
-      :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
       border="b"
       class="ps-1"
       flat
@@ -64,7 +63,7 @@
     <v-layout :class="['border-b', !show && 'border-opacity-0']">
       <v-main>
         <v-sheet
-          class="pa-14 d-flex align-center"
+          class="py-14 px-4 d-flex align-center"
           min-height="300"
           rounded="0"
         >
@@ -103,11 +102,11 @@
 
     <v-expand-transition>
       <div v-if="show && display.mdAndUp.value">
-        <div class="pa-3">
+        <div class="pa-2">
           <app-markup :code="code" />
         </div>
 
-        <div v-if="script" class="pa-3">
+        <div v-if="script" class="pa-2 pt-0">
           <app-markup :code="script" language="js" />
         </div>
       </div>
@@ -117,7 +116,7 @@
 
 <script setup>
   // Composables
-  import { useDisplay, useTheme } from 'vuetify'
+  import { useDisplay } from 'vuetify'
   import { useI18n } from 'vue-i18n'
 
   // Utilities
@@ -142,13 +141,9 @@
 
   const display = useDisplay()
   const { t } = useI18n()
-  const theme = useTheme()
 
   const tune = ref(true)
   const show = ref(true)
-  const isDark = computed(() => {
-    return theme.current.value.dark
-  })
 
   const model = computed({
     get () {

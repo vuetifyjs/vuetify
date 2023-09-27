@@ -17,6 +17,12 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const time = ref('11:15')
+</script>
+
 <script>
   export default {
     data: () => ({

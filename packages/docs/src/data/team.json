@@ -17,7 +17,8 @@
     "name": "John Leider",
     "team": "company",
     "twitter": "zeroskillz",
-    "work": "Engineer @ Vuetify"
+    "work": "Engineer @ Vuetify",
+    "joined": "Jun 2016"
   },
   "heatherleider": {
     "discord": "heatherleider#7788",
@@ -31,7 +32,8 @@
     "name": "Heather Leider",
     "team": "company",
     "twitter": "grneyedgrl01",
-    "work": "COO @ Vuetify"
+    "work": "COO @ Vuetify",
+    "joined": "Nov 2019"
   },
   "KaelWD": {
     "discord": "Kaelwd#6373",
@@ -50,7 +52,8 @@
     "location": "Melbourne, Australia",
     "name": "Kael Watts-Deuchar",
     "team": "core",
-    "twitter": "kaelwd"
+    "twitter": "kaelwd",
+    "joined": "Dec 2017"
   },
   "nekosaur": {
     "discord": "nekosaur#5406",
@@ -63,7 +66,8 @@
     ],
     "location": "Malmö, Sweden",
     "name": "Albert Kaaman",
-    "team": "core"
+    "team": "core",
+    "joined": "Dec 2017"
   },
   "MajesticPotatoe": {
     "discord": "MajesticPotatoe#4997",
@@ -82,7 +86,8 @@
     "location": "Rochester, NY, USA",
     "name": "Andrew Henry",
     "team": "core",
-    "twitter": "SeeMWhyK"
+    "twitter": "SeeMWhyK",
+    "joined": "Dec 2018"
   },
   "blalan05": {
     "discord": "blalan05#3967",
@@ -95,39 +100,9 @@
     "linkedin": "blalan05",
     "location": "Wisconsin, USA",
     "name": "Blaine Landowski",
-    "team": "core"
-  },
-  "ElijahKotyluk": {
-    "discord": "edk#4363",
-    "funding": [
-      "[GitHub Sponsors](https://github.com/sponsors/ElijahKotyluk)"
-    ],
-    "focus": [
-      "[vuetifyjs](https://github.com/vuetifyjs)",
-      "[vuetifyjs/vue-cli-plugins](https://github.com/vuetifyjs/vue-cli-plugins)"
-    ],
-    "languages": [
-      "English"
-    ],
-    "location": "USA",
-    "name": "Elijah Kotyluk",
-    "team": "core"
-  },
-  "yooneskh": {
-    "discord": "YoonesKh#7826",
-    "focus": [
-      "[vuetifyjs](https://github.com/vuetifyjs)",
-      "[vuetifyjs/Community Suppport](https://discord.com/invite/vuetify-340160225338195969)"
-    ],
-    "languages": [
-      "English",
-      "Persian"
-    ],
-    "twitter": "yooneskh",
-    "linkedin": "yooneskh ",
-    "location": "Iran",
-    "name": "Yoones Khoshghadam",
-    "team": "core"
+    "team": "core",
+    "work": "CEO at Foundational Technologies LLC",
+    "joined": "Feb 2021"
   },
   "": {
     "discord": "Elvina Garcia#0203",
@@ -139,7 +114,8 @@
     ],
     "location": "Virginia, USA",
     "name": "Elvina Garcia",
-    "team": "core"
+    "team": "core",
+    "joined": "Feb 2023"
   },
   "santiagoaloi": {
     "discord": "lannister#9474",
@@ -158,7 +134,9 @@
     "linkedin": "santiagoaloi",
     "location": "Stockholm, Sweden",
     "name": "Santiago Aloi",
-    "team": "core"
+    "team": "core",
+    "work": "Product Specialist @ DataTalks",
+    "joined": "Feb 2023"
   },
   "yuwu9145": {
     "discord": "yuchao#8454",
@@ -171,6 +149,7 @@
     ],
     "location": "Melbourne, Australia",
     "name": "Yuchao Wu",
-    "team": "core"
+    "team": "core",
+    "joined": "Mar 2023"
   }
 }

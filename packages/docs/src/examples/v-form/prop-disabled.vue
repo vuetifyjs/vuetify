@@ -13,6 +13,13 @@
   </v-sheet>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const firstName = ref('')
+  const lastName = ref('')
+</script>
+
 <script>
   export default {
     data: () => ({

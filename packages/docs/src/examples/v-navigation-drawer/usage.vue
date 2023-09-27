@@ -23,7 +23,7 @@
         <v-list>
           <v-list-item link>
             <v-list-item-icon>
-              <v-icon>mdi-vuetify</v-icon>
+              <v-icon>$vuetify</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>

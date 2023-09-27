@@ -4,10 +4,6 @@
   "trailingSlash": true,
   "rewrites": [
     {
-      "source": "/eo-UY/(.*)",
-      "destination": "/_crowdin"
-    },
-    {
       "source": "/(.*)",
       "destination": "$1"
     },

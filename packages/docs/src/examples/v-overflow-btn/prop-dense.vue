@@ -9,6 +9,12 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const items = ref(['Arial', 'Calibri', 'Courier', 'Verdana'])
+</script>
+
 <script>
   export default {
     data: () => ({

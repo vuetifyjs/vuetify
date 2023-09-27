@@ -1,6 +1,6 @@
 ---
-nav: Overlays
 meta:
+  nav: Overlays
   title: Overlay component
   description: The overlay component makes it easy to create a scrim over components or your entire application.
   keywords: overlays, vuetify overlay component, vue overlay component

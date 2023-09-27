@@ -1,10 +1,7 @@
 <template>
-  <v-row
-    justify="center"
-    align="center"
-  >
+  <div class="text-center">
     <v-chip draggable>
       Default
     </v-chip>
-  </v-row>
+  </div>
 </template>

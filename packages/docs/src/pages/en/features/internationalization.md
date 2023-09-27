@@ -46,25 +46,23 @@ app.use(vuetify)
 app.mount('#app')
 ```
 
-You can change the locale during runtime by using the `useLocale` composable. If you are still using the Options API, you can access the locale settings on `this.$vuetify.locale`.
+You can change the locale during runtime by using the `useLocale` composable.
 
 ```html { resource="Composition.vue" }
-<script>
+<script setup>
   import { useLocale } from 'vuetify'
 
-  export default {
-    setup () {
-      const { current } = useLocale()
+  const { current } = useLocale()
 
-      return {
-        changeLocale: locale => current.value = locale
-      }
-    },
+  function changeLocale (locale) {
+    current.value = locale
   }
 </script>
 ```
 
-```html { resource="Option.vue" }
+If you are still using the Options API, you can access the locale settings on `this.$vuetify.locale`.
+
+```html { resource="Options.vue" }
 <script>
   export default {
     methods: {
@@ -89,7 +87,7 @@ You can change the locale during runtime by using the `useLocale` composable. If
 
 Using the `v-locale-provider` component it is possible to scope a portion of your application to a different locale than the default one.
 
-```html
+```html { resource="src/App.vue" }
 <template>
   <v-app>
     <v-select></v-select> <!-- Will use default locale -->
@@ -107,7 +105,7 @@ RTL (Right To Left) support is built in for all localizations that ship with Vue
 
 The following example demonstrates how to force RTL for a specific section of your content, without switching the current language, by using the `v-locale-provider` component:
 
-```html
+```html { resource="src/App.vue" }
 <v-app>
   <v-card>...</v-card> <!-- default locale used here -->
 
@@ -148,37 +146,24 @@ const vuetify = createVuetify({
 
 If you are building custom Vuetify components that need to hook into the locale service, you can use the `t` function from the **useLocale** composable, or the `$vuetify.locale` property when using Options API.
 
-```html
-<!-- Custom Vuetify Component -->
-
+```html { resource="Component.vue" }
 <template>
   <div class="my-component">
-    {{ $vuetify.locale.t('$vuetify.my-component.text') }}
+    {{ text }}
   </div>
 </template>
-```
 
-```html
-<script>
+<script setup>
   import { useLocale } from 'vuetify'
 
-  export default {
-    setup () {
-      const { t } = useLocale()
-
-      return {
-        t
-      }
-    },
-  }
+  const { t } = useLocale()
+  const text = t('$vuetify.my-component.text')
 </script>
 ```
 
-<alert type="warning">
-
+::: warning
   The Vuetify locale service only provides a basic translation function `t`, and should really only be used for internal or custom Vuetify components. It is recommended that you use a proper i18n library such as [vue-i18n](https://kazupon.github.io/vue-i18n/) in your own application. Vuetify does provide support for integrating with other libraries.
-
-</alert>
+:::
 
 ## vue-i18n
 

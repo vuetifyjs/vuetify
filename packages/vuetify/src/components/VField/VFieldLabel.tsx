@@ -11,7 +11,7 @@ export const makeVFieldLabelProps = propsFactory({
   floating: Boolean,
 
   ...makeComponentProps(),
-}, 'v-field-label')
+}, 'VFieldLabel')
 
 export const VFieldLabel = genericComponent()({
   name: 'VFieldLabel',

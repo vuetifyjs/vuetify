@@ -2,8 +2,8 @@
 /* eslint-disable no-labels */
 
 // Utilities
-import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
 import { computed, ref, unref, watchEffect } from 'vue'
+import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -128,27 +128,25 @@ export function filterItems (
 export function useFilter <T extends { value: unknown }> (
   props: FilterProps,
   items: MaybeRef<T[]>,
-  query: Ref<string | undefined>,
+  query: Ref<string | undefined> | (() => string | undefined),
   options?: {
     transform?: (item: T) => any
   }
 ) {
-  const strQuery = computed(() => (
-    typeof query?.value !== 'string' &&
-    typeof query?.value !== 'number'
-  ) ? '' : String(query.value))
-
   const filteredItems: Ref<T[]> = ref([])
   const filteredMatches: Ref<Map<unknown, Record<string, FilterMatch>>> = ref(new Map())
   const transformedItems = computed(() => options?.transform ? unref(items).map(options?.transform) : unref(items))
 
   watchEffect(() => {
-    filteredItems.value = []
-    filteredMatches.value = new Map()
+    const _query = typeof query === 'function' ? query() : unref(query)
+    const strQuery = (
+      typeof _query !== 'string' &&
+      typeof _query !== 'number'
+    ) ? '' : String(_query)
 
     const results = filterItems(
       transformedItems.value,
-      strQuery.value,
+      strQuery,
       {
         customKeyFilter: props.customKeyFilter,
         default: props.customFilter,
@@ -160,11 +158,15 @@ export function useFilter <T extends { value: unknown }> (
 
     const originalItems = unref(items)
 
+    const _filteredItems: typeof filteredItems['value'] = []
+    const _filteredMatches: typeof filteredMatches['value'] = new Map()
     results.forEach(({ index, matches }) => {
       const item = originalItems[index]
-      filteredItems.value.push(item)
-      filteredMatches.value.set(item.value, matches)
+      _filteredItems.push(item)
+      _filteredMatches.set(item.value, matches)
     })
+    filteredItems.value = _filteredItems
+    filteredMatches.value = _filteredMatches
   })
 
   function getMatches (item: T) {

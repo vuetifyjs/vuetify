@@ -2,23 +2,28 @@
 import './VSliderThumb.sass'
 
 // Components
-import { VScaleTransition } from '../transitions'
 import { VSliderSymbol } from './slider'
+import { VScaleTransition } from '../transitions'
+
+// Composables
+import { useTextColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { useElevation } from '@/composables/elevation'
+import { useRtl } from '@/composables/locale'
 
 // Directives
 import Ripple from '@/directives/ripple'
-
-// Composables
-import { makeComponentProps } from '@/composables/component'
-import { useElevation } from '@/composables/elevation'
-import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, inject } from 'vue'
 import { convertToUnit, genericComponent, keyValues, propsFactory, useRender } from '@/util'
 
+// Types
+import type { PropType } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
+
 export type VSliderThumbSlots = {
-  'thumb-label': [{ modelValue: number }]
+  'thumb-label': { modelValue: number }
 }
 
 export const makeVSliderThumbProps = propsFactory({
@@ -40,12 +45,12 @@ export const makeVSliderThumbProps = propsFactory({
     required: true,
   },
   ripple: {
-    type: Boolean,
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
 
   ...makeComponentProps(),
-}, 'v-slider-thumb')
+}, 'VSliderThumb')
 
 export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
   name: 'VSliderThumb',
@@ -60,7 +65,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
 
   setup (props, { slots, emit }) {
     const slider = inject(VSliderSymbol)
-
+    const { rtlClasses } = useRtl()
     if (!slider) throw new Error('[Vuetify] v-slider-thumb must be used inside v-slider or v-range-slider')
 
     const {
@@ -133,6 +138,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
               'v-slider-thumb--pressed': props.focused && mousePressed.value,
             },
             props.class,
+            rtlClasses.value,
           ]}
           style={[
             {

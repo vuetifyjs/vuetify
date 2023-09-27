@@ -7,7 +7,6 @@
       "why-vuetify",
       "long-term-support",
       "roadmap",
-      "meet-the-team",
       "sponsors-and-backers",
       { "divider": true },
       { "subheader": "professional-support" },
@@ -22,6 +21,7 @@
       "installation",
       "frequently-asked-questions",
       "wireframes",
+      "unit-testing",
       "browser-support",
       "upgrade-guide",
       "release-notes",
@@ -75,6 +75,7 @@
     "activeIcon": "mdi-view-dashboard",
     "items": [
       "all",
+      { "title": "explorer", "subtitle": "browse-components" },
       { "divider": true },
       { "subheader": "containment" },
       "buttons",
@@ -203,6 +204,7 @@
         "items": [
           "basics",
           "headers",
+          "selection",
           "sorting",
           "pagination",
           "filtering",
@@ -217,11 +219,23 @@
         "subfolder": "features"
       },
       {
+        "title": "date-pickers",
+        "subfolder": "components"
+      },
+      {
         "title": "infinite-scroller",
         "subfolder": "components"
       },
       {
+        "title": "otp-input",
+        "subfolder": "components"
+      },
+      {
         "title": "skeleton-loaders",
+        "subfolder": "components"
+      },
+      {
+        "title": "steppers",
         "subfolder": "components"
       }
     ]
@@ -233,7 +247,9 @@
     "items": [
       "jobs-for-vue",
       "ui-kits",
-      "themes"
+      "themes",
+      "search-engine",
+      "brand-kit"
     ]
   },
   {
@@ -241,6 +257,7 @@
     "inactiveIcon": "$vuetify-outline",
     "activeIcon": "$vuetify",
     "items": [
+      "meet-the-team",
       "security-disclosure",
       "code-of-conduct"
     ]

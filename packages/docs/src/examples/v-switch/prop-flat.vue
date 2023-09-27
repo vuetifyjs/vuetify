@@ -7,6 +7,12 @@
   ></v-switch>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const model = ref(true)
+</script>
+
 <script>
   export default {
     data () {

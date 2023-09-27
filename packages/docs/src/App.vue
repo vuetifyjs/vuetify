@@ -42,6 +42,18 @@
     title: computed(() => meta.value.title),
     meta: computed(() => meta.value.meta),
     link: computed(() => meta.value.link),
+    script: computed(() => {
+      return route.meta.locale === 'eo-UY' ? [
+        {
+          type: 'text/javascript',
+          innerHTML: `let _jipt = [['project', 'vuetify']];`,
+        },
+        {
+          type: 'text/javascript',
+          src: '//cdn.crowdin.com/jipt/jipt.js',
+        },
+      ] : []
+    }),
   })
 
   onBeforeMount(() => {

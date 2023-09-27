@@ -1,6 +1,6 @@
 ---
-nav: Bottom navigation
 meta:
+  nav: Bottom navigation
   title: Bottom navigation component
   description: The bottom navigation component is used for mobile devices and acts as the primary navigation for your application.
   keywords: bottom navigation, vuetify bottom navigation component, vue bottom navigation component
@@ -32,6 +32,12 @@ While `v-bottom navigation` is meant to be used with [vue-router](https://router
 | [v-btn](/api/v-btn/) | Sub-component used for modifying the `v-bottom-navigation` state |
 
 <api-inline hide-links />
+
+::: info
+
+For styles to apply properly when using the **shift** prop, `v-btn` text is **required** to be wrapped in a `span` tag.
+
+:::
 
 ## Examples
 
@@ -75,16 +81,14 @@ Modify the **scroll-threshold** property to increase the distance a user must sc
 
 The **shift** prop hides button text when not active. This provides an alternative visual style to the `v-bottom-navigation` component.
 
-<alert type="info">
-
+::: info
   For this to work, `v-btn` text is **required** to be wrapped in a `span` tag.
-
-</alert>
+:::
 
 <example file="v-bottom-navigation/prop-shift" />
 
 #### Toggle
 
-The display state of `v-bottom-navigation` can be toggled using the **input-value** prop. You can also control the currently active button using **v-model**.
+Since `v-bottom-navigation` supports v-model, use the **active** prop to control the display state.
 
 <example file="v-bottom-navigation/prop-toggle" />

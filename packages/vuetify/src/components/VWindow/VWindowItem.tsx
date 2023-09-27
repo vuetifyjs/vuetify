@@ -1,12 +1,12 @@
-// Directives
-import Touch from '@/directives/touch'
-
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
-import { MaybeTransition } from '@/composables/transition'
 import { useSsrBoot } from '@/composables/ssrBoot'
+import { MaybeTransition } from '@/composables/transition'
+
+// Directives
+import Touch from '@/directives/touch'
 
 // Utilities
 import { computed, inject, nextTick, shallowRef } from 'vue'
@@ -28,7 +28,7 @@ export const makeVWindowItemProps = propsFactory({
   ...makeComponentProps(),
   ...makeGroupItemProps(),
   ...makeLazyProps(),
-}, 'v-window-item')
+}, 'VWindowItem')
 
 export const VWindowItem = genericComponent()({
   name: 'VWindowItem',
@@ -145,7 +145,7 @@ export const VWindowItem = genericComponent()({
       </MaybeTransition>
     ))
 
-    return {}
+    return { groupItem }
   },
 })
 

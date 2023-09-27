@@ -6,22 +6,22 @@ import { VFadeTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { IconValue } from '@/composables/icons'
 import { makeComponentProps } from '@/composables/component'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeGroupProps, useGroup } from '@/composables/group'
-import { makeTagProps } from '@/composables/tag'
-import { useDisplay } from '@/composables'
-import { useResizeObserver } from '@/composables/resizeObserver'
+import { IconValue } from '@/composables/icons'
 import { useRtl } from '@/composables/locale'
+import { useResizeObserver } from '@/composables/resizeObserver'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, shallowRef, watch } from 'vue'
-import { clamp, focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
+import { clamp, focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
-import type { GroupProvide } from '@/composables/group'
 import type { InjectionKey, PropType } from 'vue'
+import type { GroupProvide } from '@/composables/group'
 
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
 
@@ -33,9 +33,9 @@ interface SlideGroupSlot {
 }
 
 type VSlideGroupSlots = {
-  default: [SlideGroupSlot]
-  prev: [SlideGroupSlot]
-  next: [SlideGroupSlot]
+  default: SlideGroupSlot
+  prev: SlideGroupSlot
+  next: SlideGroupSlot
 }
 
 export const makeVSlideGroupProps = propsFactory({
@@ -68,11 +68,12 @@ export const makeVSlideGroupProps = propsFactory({
   },
 
   ...makeComponentProps(),
+  ...makeDisplayProps(),
   ...makeTagProps(),
   ...makeGroupProps({
     selectedClass: 'v-slide-group-item--active',
   }),
-}, 'v-slide-group')
+}, 'VSlideGroup')
 
 export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
   name: 'VSlideGroup',
@@ -85,7 +86,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
 
   setup (props, { slots }) {
     const { isRtl } = useRtl()
-    const { mobile } = useDisplay()
+    const { displayClasses, mobile } = useDisplay(props)
     const group = useGroup(props, props.symbol)
     const isOverflowing = shallowRef(false)
     const scrollOffset = shallowRef(0)
@@ -349,6 +350,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
             'v-slide-group--has-affixes': hasAffixes.value,
             'v-slide-group--is-overflowing': isOverflowing.value,
           },
+          displayClasses.value,
           props.class,
         ]}
         style={ props.style }

@@ -1,6 +1,6 @@
 ---
-nav: Color pickers
 meta:
+  nav: Color pickers
   title: Color picker component
   description: The color picker component allows users to select a from pre-defined or custom colors using a variety of different inputs and formats.
   keywords: color pickers, vuetify color picker component, vue color picker component

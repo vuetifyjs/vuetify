@@ -4,6 +4,7 @@
 import { VInfiniteScroll } from '../VInfiniteScroll'
 
 // Utilities
+import { ref } from 'vue'
 import { createRange } from '@/util'
 
 // Constants
@@ -75,5 +76,30 @@ describe('VInfiniteScroll', () => {
       .get('.v-infinite-scroll').scrollTo('right', SCROLL_OPTIONS)
       .get('.v-infinite-scroll .v-progress-circular').should('exist')
       .get('@load').should('have.been.calledOnce')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/17358
+  it('should keep triggering load logic until VInfiniteScrollIntersect disappears', () => {
+    const loadTracker = cy.spy().as('loadTracker')
+    const items = ref(Array.from({ length: 3 }, (k, v) => v + 1))
+
+    const load = async ({ done }: any) => {
+      setTimeout(() => {
+        items.value.push(...Array.from({ length: 3 }, (k, v) => v + items.value.at(-1)! + 1))
+        loadTracker()
+        done('ok')
+      }, 100)
+    }
+
+    cy.viewport(400, 200)
+      .mount(() => (
+        <VInfiniteScroll onLoad={ load } mode="intersect">
+          { items.value.map(item => (
+            <div>Item #{ item }</div>
+          ))}
+        </VInfiniteScroll>
+      ))
+      .get('.v-infinite-scroll .v-progress-circular').should('exist')
+      .get('@loadTracker').should('have.been.calledTwice')
   })
 })

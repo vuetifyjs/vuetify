@@ -1,6 +1,6 @@
 ---
-nav: Lists
 meta:
+  nav: Lists
   title: List component
   description: The list component is a continuous group of text, images and icons that may contain primary or supplemental actions.
   keywords: lists, vuetify list component, vue list component

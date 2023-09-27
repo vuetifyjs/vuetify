@@ -34,6 +34,12 @@
   </v-range-slider>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const range = ref([-5, 5])
+</script>
+
 <script>
   export default {
     data () {

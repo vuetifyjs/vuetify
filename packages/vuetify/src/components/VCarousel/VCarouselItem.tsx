@@ -11,7 +11,7 @@ import type { VImgSlots } from '@/components/VImg/VImg'
 export const makeVCarouselItemProps = propsFactory({
   ...makeVImgProps(),
   ...makeVWindowItemProps(),
-}, 'v-carousel-item')
+}, 'VCarouselItem')
 
 export const VCarouselItem = genericComponent<VImgSlots>()({
   name: 'VCarouselItem',

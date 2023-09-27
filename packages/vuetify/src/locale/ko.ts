@@ -1,5 +1,6 @@
 export default {
   badge: '배지',
+  open: 'Open',
   close: '닫기',
   dataIterator: {
     noResultsText: '일치하는 항목이 없습니다.',
@@ -26,12 +27,21 @@ export default {
     lastPage: '마지막 페이지',
     pageText: '{2} 중 {0}-{1}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} 선택됨',
-    nextMonthAriaLabel: '다음 달',
-    nextYearAriaLabel: '내년',
-    prevMonthAriaLabel: '지난달',
-    prevYearAriaLabel: '전년도',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: '데이터가 없습니다.',
   carousel: {
@@ -48,6 +58,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} files',
@@ -67,6 +78,10 @@ export default {
       first: 'First page',
       last: 'Last page',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

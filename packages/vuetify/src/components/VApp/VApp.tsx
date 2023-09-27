@@ -2,10 +2,10 @@
 import './VApp.sass'
 
 // Composables
-import { createLayout, makeLayoutProps } from '@/composables/layout'
 import { makeComponentProps } from '@/composables/component'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { createLayout, makeLayoutProps } from '@/composables/layout'
 import { useRtl } from '@/composables/locale'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
@@ -14,7 +14,7 @@ export const makeVAppProps = propsFactory({
   ...makeComponentProps(),
   ...makeLayoutProps({ fullHeight: true }),
   ...makeThemeProps(),
-}, 'v-app')
+}, 'VApp')
 
 export const VApp = genericComponent()({
   name: 'VApp',

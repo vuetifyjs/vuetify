@@ -16,12 +16,11 @@
       :key="job.id"
       cols="12"
       :md="view ? 6 : undefined"
-      class="d-flex"
     >
       <v-card
-        :href="job.link"
+        :href="job.url"
         border
-        class="transition-swing h-100 d-flex flex-column"
+        class="transition-swing"
         max-height="225"
         rel="sponsored"
         target="_blank"
@@ -29,18 +28,28 @@
         @click="onClick(job)"
       >
         <v-list-item
-          :prepend-avatar="typeof job.organization.avatar === 'string' ? job.organization.avatar : undefined"
           :title="job.title"
-          class="mt-2"
+          lines="two"
         >
-          <template v-if="job.locations.length > 0" #subtitle>
-            <v-icon
-              class="me-1"
-              icon="mdi-map-marker-outline"
-              size="14"
+          <template #prepend>
+            <v-avatar
+              :color="!job.avatar ? 'primary' : undefined"
+              :class="!job.avatar && 'pt-1'"
+              :image="job.avatar"
+              icon="$vuetify"
             />
+          </template>
 
-            {{ job.locations.join(', ') }}
+          <template v-if="job.locations.length > 0" #subtitle>
+            <div class="d-flex align-center">
+              <v-icon
+                class="me-1"
+                icon="mdi-map-marker-outline"
+                size="14"
+              />
+
+              {{ job.locations.join(', ') }}
+            </div>
           </template>
 
           <template #append>
@@ -62,39 +71,12 @@
           </template>
         </v-list-item>
 
-        <v-card-text class="pb-2 pt-2 d-flex">
-          <div
-            class="mb-4 text-medium-emphasis"
-            v-text="job.description"
-          />
+        <v-card-text class="text-medium-emphasis py-0">
+          <app-markdown :content="job.description" />
         </v-card-text>
 
-        <div class="d-flex align-center text-lowercase px-4 pb-4">
-          <v-chip
-            v-if="job.isNew"
-            class="me-1"
-            color="#e83e8c"
-            label
-            size="x-small"
-          >
-            <span class="font-weight-bold">#{{ t('new') }}</span>
-          </v-chip>
-
-          <v-chip
-            v-if="job.remote"
-            class="px-2"
-            color="primary"
-            label
-            size="x-small"
-          >
-            <span class="font-weight-bold">#remote {{ job.remote }}</span>
-          </v-chip>
-
-          <v-spacer />
-
-          <div class="text-end text-caption text-medium-emphasis">
-            via {{ job.via }}
-          </div>
+        <div class="text-end text-caption text-disabled mb-1 me-2">
+          via {{ job.via }}
         </div>
       </v-card>
     </v-col>

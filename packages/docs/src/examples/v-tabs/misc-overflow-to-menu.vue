@@ -79,6 +79,34 @@
   </v-card>
 </template>
 
+<script setup>
+  import { nextTick, ref } from 'vue'
+
+  const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+
+  const currentItem = ref('tab-Web')
+  const items = ref([
+    'Web',
+    'Shopping',
+    'Videos',
+    'Images',
+  ])
+  const more = ref([
+    'News',
+    'Maps',
+    'Books',
+    'Flights',
+    'Apps',
+  ])
+
+  function addItem (item) {
+    const removed = items.value.splice(0, 1)
+    items.value.push(...more.value.splice(more.value.indexOf(item), 1))
+    more.value.push(...removed)
+    nextTick(() => { currentItem.value = 'tab-' + item })
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

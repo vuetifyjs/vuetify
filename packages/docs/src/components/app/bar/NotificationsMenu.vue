@@ -1,5 +1,6 @@
 <template>
   <app-menu
+    v-if="user.notifications.show"
     v-model="menu"
     :close-on-content-click="false"
     :open-on-hover="false"
@@ -38,15 +39,6 @@
       >
         {{ showArchived ? t('unread', { number: unread.length }) : t('read', { number: read.length }) }}
       </v-btn>
-
-      <template #append>
-        <v-icon
-          v-if="showArchived ? read.length > 0 : unread.length > 0"
-          :icon="showArchived ? 'mdi-email' : 'mdi-email-open'"
-          color="medium-emphasis"
-          @click.stop.prevent="toggleAll"
-        />
-      </template>
     </v-toolbar>
 
     <v-divider />
@@ -81,31 +73,32 @@
               class="py-2"
             >
               <template #prepend>
-                <div class="pe-4 mt-n2">{{ notification.metadata.emoji }}</div>
+                <div class="pe-4 align-self-start">{{ notification.metadata.emoji }}</div>
               </template>
 
               <v-list-item-title class="text-wrap text-h6">
-                <div>{{ notification.title }}</div>
+                <div class=" text-truncate">{{ notification.title }}</div>
               </v-list-item-title>
 
-              <div class="text-caption mb-1">{{ format(notification.created_at) }}</div>
+              <div class="text-caption mb-1 font-weight-bold text-medium-emphasis">{{ format(notification.created_at) }}</div>
 
               <div class="text-medium-emphasis text-caption">
-                {{ notification.metadata.text }}
+                <app-markdown :content="notification.metadata.text" class="mb-n3" />
 
                 <app-link
                   :href="notification.metadata.action"
+                  class="border px-2 py-1 rounded"
                   @click="onClick(notification)"
                 >
                   {{ notification.metadata.action_text }}
                 </app-link>
               </div>
 
-              <template #append>
-                <div class="ps-4 mt-n2">
+              <template v-if="!showArchived" #append>
+                <div class="ps-4">
                   <v-icon
-                    :icon="showArchived ? 'mdi-email-outline' : 'mdi-email-open-outline'"
                     color="medium-emphasis"
+                    icon="mdi-check"
                     @click.stop.prevent="toggle(notification)"
                   />
                 </div>
@@ -126,6 +119,7 @@
   import { useCosmic } from '@/composables/cosmic'
   import { useDate } from 'vuetify/labs/date'
   import { useDisplay } from 'vuetify'
+  import { useGtag } from 'vue-gtag-next'
   import { useI18n } from 'vue-i18n'
 
   // Stores
@@ -149,7 +143,8 @@
   }
 
   const { t } = useI18n()
-  const { bucket } = useCosmic<Notification>()
+  const { event } = useGtag()
+  const { bucket } = useCosmic()
   const { mobile } = useDisplay()
   const date = useDate()
   const user = useUserStore()
@@ -184,23 +179,25 @@
   function onClick (notification: Notification) {
     toggle(notification)
     menu.value = false
+    event('click', {
+      event_category: 'vuetify-notification',
+      event_label: notification.slug,
+      value: notification.metadata.action,
+    })
   }
   function toggle ({ slug }: Notification) {
     user.notifications.read = user.notifications.read.includes(slug)
       ? user.notifications.read.filter(n => n !== slug)
       : [...user.notifications.read, slug]
   }
-  function toggleAll () {
-    user.notifications.read = showArchived.value ? [] : all.value.map(({ slug }) => slug)
-  }
 
   onMounted(async () => {
     if (all.value.length) return
 
-    const { objects = [] } = (
+    const { objects = [] }: { objects: Notification[] } = (
       await bucket?.objects
         .find({ type: 'notifications' })
-        .props('created_at,metadata,slug,title')
+        .props('metadata,created_at,slug,title')
         .status('published')
         .sort('-created_at')
         .limit(10)

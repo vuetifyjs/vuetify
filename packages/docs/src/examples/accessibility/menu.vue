@@ -27,6 +27,12 @@
   </div>
 </template>
 
+<script setup>
+  function onClick () {
+        // Perform an action
+  }
+</script>
+
 <script>
   export default {
     methods: {

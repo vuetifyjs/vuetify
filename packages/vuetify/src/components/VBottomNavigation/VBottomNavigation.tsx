@@ -1,26 +1,26 @@
 // Styles
 import './VBottomNavigation.sass'
 
+// Components
+import { VBtnToggleSymbol } from '@/components/VBtnToggle/VBtnToggle'
+
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { useSsrBoot } from '@/composables/ssrBoot'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
-import { provideDefaults } from '@/composables/defaults'
-import { useBackgroundColor } from '@/composables/color'
-import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
 import { computed, toRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
-
-// Types
-import { VBtnToggleSymbol } from '@/components/VBtnToggle/VBtnToggle'
 
 export const makeVBottomNavigationProps = propsFactory({
   bgColor: String,
@@ -51,7 +51,7 @@ export const makeVBottomNavigationProps = propsFactory({
     selectedClass: 'v-btn--selected',
   }),
   ...makeThemeProps(),
-}, 'v-bottom-navigation')
+}, 'VBottomNavigation')
 
 export const VBottomNavigation = genericComponent()({
   name: 'VBottomNavigation',

@@ -651,21 +651,24 @@ $text-on-orange: map-deep-merge(
 );
 
 $deep-orange: () !default;
-$deep-orange: (
-  'base': #ff5722,
-  'lighten-5': #fbe9e7,
-  'lighten-4': #ffccbc,
-  'lighten-3': #ffab91,
-  'lighten-2': #ff8a65,
-  'lighten-1': #ff7043,
-  'darken-1': #f4511e,
-  'darken-2': #e64a19,
-  'darken-3': #d84315,
-  'darken-4': #bf360c,
-  'accent-1': #ff9e80,
-  'accent-2': #ff6e40,
-  'accent-3': #ff3d00,
-  'accent-4': #dd2c00
+$deep-orange: map-deep-merge(
+  (
+    'base': #ff5722,
+    'lighten-5': #fbe9e7,
+    'lighten-4': #ffccbc,
+    'lighten-3': #ffab91,
+    'lighten-2': #ff8a65,
+    'lighten-1': #ff7043,
+    'darken-1': #f4511e,
+    'darken-2': #e64a19,
+    'darken-3': #d84315,
+    'darken-4': #bf360c,
+    'accent-1': #ff9e80,
+    'accent-2': #ff6e40,
+    'accent-3': #ff3d00,
+    'accent-4': #dd2c00
+  ),
+  $deep-orange
 );
 
 $text-on-deep-orange: () !default;

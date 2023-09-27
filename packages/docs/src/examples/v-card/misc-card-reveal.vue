@@ -50,6 +50,12 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const reveal = ref(false)
+</script>
+
 <script>
   export default {
     data: () => ({

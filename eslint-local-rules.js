@@ -7,4 +7,5 @@ module.exports = {
   'jsx-curly-spacing': require('./scripts/rules/jsx-curly-spacing'),
   'jest-global-imports': require('./scripts/rules/jest-global-imports'),
   'cypress-types-reference': require('./scripts/rules/cypress-types-reference'),
+  'sort-imports': require('./scripts/rules/sort-imports'),
 }

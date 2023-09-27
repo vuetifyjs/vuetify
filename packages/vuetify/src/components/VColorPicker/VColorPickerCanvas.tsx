@@ -6,12 +6,12 @@ import { makeComponentProps } from '@/composables/component'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { clamp, convertToUnit, defineComponent, getEventCoordinates, propsFactory, useRender } from '@/util'
 import { computed, onMounted, ref, shallowRef, watch } from 'vue'
+import { clamp, convertToUnit, defineComponent, getEventCoordinates, propsFactory, useRender } from '@/util'
 
 // Types
-import type { HSV } from '@/util'
 import type { PropType } from 'vue'
+import type { HSV } from '@/util'
 
 export const makeVColorPickerCanvasProps = propsFactory({
   color: {
@@ -32,7 +32,7 @@ export const makeVColorPickerCanvasProps = propsFactory({
   },
 
   ...makeComponentProps(),
-}, 'v-color-picker-canvas')
+}, 'VColorPickerCanvas')
 
 export const VColorPickerCanvas = defineComponent({
   name: 'VColorPickerCanvas',

@@ -5,7 +5,7 @@
         class="mx-auto mt-12 mb-16"
         max-height="140"
         max-width="240"
-        src="https://vuetifyjs.b-cdn.net/docs/images/logos/vuetify-logo-dark-text.svg"
+        src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-dark-text.svg"
       ></v-img>
 
       <v-autocomplete
@@ -92,6 +92,57 @@
     </v-responsive>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const items = [
+    {
+      prependIcon: 'mdi-clock-outline',
+      title: 'recipe with chicken',
+    },
+    {
+      prependIcon: 'mdi-clock-outline',
+      title: 'best hiking trails near me',
+    },
+    {
+      prependIcon: 'mdi-clock-outline',
+      title: 'how to learn a new language',
+    },
+    {
+      prependIcon: 'mdi-clock-outline',
+      title: 'DIY home organization ideas',
+    },
+    {
+      prependIcon: 'mdi-clock-outline',
+      title: 'latest fashion trends',
+    },
+  ]
+  const shortcuts = [
+    {
+      icon: 'mdi-github',
+      title: 'Master ',
+      href: 'https://github.com/vuetifyjs/vuetify',
+    },
+    {
+      icon: 'mdi-github',
+      title: 'Dev',
+      href: 'https://github.com/vuetifyjs/vuetify/tree/dev',
+    },
+    {
+      icon: 'mdi-github',
+      title: 'Stable',
+      href: 'https://github.com/vuetifyjs/vuetify/tree/v2-stable',
+    },
+    {
+      icon: 'mdi-github',
+      title: 'My Pull Requests',
+      href: 'https://github.com/vuetifyjs/vuetify/pulls/johnleider',
+    },
+  ]
+
+  const dialog = ref(false)
+</script>
 
 <script>
   export default {

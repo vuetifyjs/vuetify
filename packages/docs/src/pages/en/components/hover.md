@@ -1,6 +1,6 @@
 ---
-nav: Hover
 meta:
+  nav: Hover
   title: Hover component
   description: The hover component makes it easy respond when the user hover events by wrapping selectable content.
   keywords: hover, vuetify hover component, vue hover component

@@ -17,7 +17,7 @@ $chip-disabled-opacity: 0.3 !default;
 $chip-elevation: 1 !default;
 $chip-font-size: tools.map-deep-get(settings.$typography, "button", "size") !default;
 $chip-font-weight: 400 !default;
-$chip-height: 32px !default;
+$chip-height: 30px !default;
 $chip-icon-font-size: 1.25rem !default;
 $chip-label-border-radius: settings.$border-radius-root !default;
 $chip-max-width: 100% !default;

@@ -24,8 +24,6 @@ These templates are known as **wireframes** and are designed to provide a consis
 
 <wireframe-examples />
 
-<alert type="info">
-
+::: info
   Additional information on how these templates are structured is located on the [Application page](/features/application-layout/).
-
-</alert>
+:::

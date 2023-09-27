@@ -18,6 +18,17 @@
   </v-footer>
 </template>
 
+<script setup>
+  const links = [
+    'Home',
+    'About Us',
+    'Team',
+    'Services',
+    'Blog',
+    'Contact Us',
+  ]
+</script>
+
 <script>
   export default {
     data: () => ({
