@@ -84,6 +84,7 @@
   "customization": "Customization",
   "dark": "Dark",
   "dashboard": {
+    "connected-accounts": "Connected accounts",
     "perks": {
       "disable-ads": "Disable Ads",
       "disable-ads-message": "Disable advertisements on all documentation pages.",

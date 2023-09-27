@@ -16,7 +16,7 @@
   <v-list-item
     v-else-if="user"
     :prepend-avatar="user.picture"
-    :subtitle="user.email"
+    :subtitle="`@${user.nickname}`"
     class="px-4"
     lines="one"
     nav
