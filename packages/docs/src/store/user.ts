@@ -8,7 +8,7 @@ import { defineStore } from 'pinia'
 import { reactive, toRefs } from 'vue'
 
 export type RootState = {
-  v: 2 | 3
+  v: 2 | 3 | 4
   api: 'link-only' | 'inline'
   dev: boolean
   disableAds: boolean
@@ -91,7 +91,7 @@ type SavedState = {
 
 export const useUserStore = defineStore('user', () => {
   const state = reactive<RootState>({
-    v: 3,
+    v: 4,
     api: 'link-only',
     dev: false,
     disableAds: false,
@@ -102,7 +102,7 @@ export const useUserStore = defineStore('user', () => {
     direction: 'ltr',
     slashSearch: false,
     syncSettings: true,
-    quickbar: true,
+    quickbar: false,
     notifications: {
       show: true,
       read: [],
@@ -161,6 +161,10 @@ export const useUserStore = defineStore('user', () => {
       data.syncSettings = true
       data.disableAds = false
       data.v = 3
+    }
+
+    if (data.v === 3) {
+      data.quickbar = false
     }
 
     data.v = state.v
