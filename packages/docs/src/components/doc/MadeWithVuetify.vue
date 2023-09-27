@@ -5,6 +5,10 @@
     max-width="900"
   >
     <v-row>
+      <v-col v-for="n in 9" :key="n" cols="12" md="4">
+        <v-skeleton-loader height="180" width="100%" class="rounded" />
+      </v-col>
+
       <v-col
         v-for="project in items"
         :key="project.id"
