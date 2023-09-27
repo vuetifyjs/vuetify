@@ -6,7 +6,8 @@
     "rowHeight": "Height of each row in pixels."
   },
   "events": {
-    "click:row": "Emitted when a row is clicked. Native event is passed as the first argument, row data as the second."
+    "click:row": "Emitted when a row is clicked. Native event is passed as the first argument, row data as the second.",
+    "contextmenu:row": "Emitted when a row is right-clicked. Native event is passed as the first argument, row data as the second."
   },
   "slots": {
     "[`item.${string}]`": "Slot for custom rendering of a column.",

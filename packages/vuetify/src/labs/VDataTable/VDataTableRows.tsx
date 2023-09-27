@@ -44,6 +44,7 @@ export const makeVDataTableRowsProps = propsFactory({
   },
   rowHeight: Number,
   'onClick:row': Function as PropType<(e: Event, value: { item: any, internalItem: DataTableItem }) => void>,
+  'onContextmenu:row': Function as PropType<(e: Event, value: { item: DataTableItem, internalItem: DataTableItem }) => void>,
 }, 'VDataTableRows')
 
 export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
@@ -128,6 +129,9 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
                     toggleExpand(item)
                   }
                   props['onClick:row']?.(event, { item: item.raw, internalItem: item })
+                } : undefined,
+                onContextmenu: props['onContextmenu:row'] ? (event: Event) => {
+                  props['onContextmenu:row']?.(event, { item, internalItem: item })
                 } : undefined,
                 index,
                 item,

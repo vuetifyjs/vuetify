@@ -27,6 +27,7 @@
   },
   "events": {
     "click:row": "Emits when a table row is clicked. This event provides 2 arguments: the first is the native click event, and the second is an object containing the corresponding item for that row. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
+    "contextmenu:row": "Emits when a table row is right-clicked. This event provides 2 arguments: the first is the native click event, and the second is an object containing the corresponding item for that row. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
     "update:expanded": "Emits when the **expanded** property of the **options** prop is updated.",
     "update:groupBy": "Emits when the **group-by** property of the **options** property is updated.",
     "update:itemsPerPage": "Emits when the **items-per-page** property of the **options** prop is updated.",

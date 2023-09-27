@@ -25,6 +25,7 @@ export const makeVDataTableRowProps = propsFactory({
   index: Number,
   item: Object as PropType<DataTableItem>,
   onClick: Function as PropType<(e: MouseEvent) => void>,
+  onContextmenu: Function as PropType<(e: MouseEvent) => void>,
 }, 'VDataTableRow')
 
 export const VDataTableRow = genericComponent<VDataTableRowSlots>()({
@@ -46,6 +47,7 @@ export const VDataTableRow = genericComponent<VDataTableRowSlots>()({
           },
         ]}
         onClick={ props.onClick }
+        onContextmenu={ props.onContextmenu }
       >
         { props.item && columns.value.map((column, i) => (
           <VDataTableColumn

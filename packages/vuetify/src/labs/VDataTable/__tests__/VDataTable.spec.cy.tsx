@@ -185,6 +185,35 @@ describe('VDataTable', () => {
       })
   })
 
+  it('should emit contextmenu:row event when clicking select or expand', () => {
+    const onContextmenu = cy.stub()
+    cy.mount(() => (
+      <Application>
+        <VDataTable showSelect showExpand items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS } onContextmenu:row={ onContextmenu } />
+      </Application>
+    ))
+
+    cy.get('tbody tr')
+      .eq(2)
+      .find('.v-checkbox-btn')
+      .click()
+
+    cy.get('tbody tr')
+      .eq(3)
+      .find('.v-btn')
+      .rightclick()
+      .then(() => {
+        expect(onContextmenu).to.be.calledOnce
+      })
+
+    cy.get('tbody tr')
+      .eq(1)
+      .rightclick()
+      .then(() => {
+        expect(onContextmenu).to.be.calledTwice
+      })
+  })
+
   it('should show no-data-text if there are no items', () => {
     cy.mount(() => (
       <Application>
