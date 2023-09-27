@@ -1,6 +1,6 @@
 <template>
   <v-sheet
-    class="mx-auto pb-12 text-center"
+    class="mx-auto pb-6 text-center"
     color="transparent"
     max-width="900"
   >
