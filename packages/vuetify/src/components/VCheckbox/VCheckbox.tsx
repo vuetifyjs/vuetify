@@ -58,14 +58,14 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
 
       return (
         <VInput
-          baseColor={ color.value }
           class={[
             'v-checkbox',
             props.class,
           ]}
-          color={ color.value }
           { ...rootAttrs }
-          { ...omit(inputProps, ['color', 'baseColor']) }
+          { ...inputProps }
+          baseColor={ color.value }
+          color={ color.value }
           v-model={ model.value }
           id={ id.value }
           focused={ isFocused.value }
