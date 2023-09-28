@@ -56,8 +56,6 @@ export const VExpansionPanels = genericComponent()({
     provideDefaults({
       VExpansionPanel: {
         color: toRef(props, 'color'),
-      },
-      VExpansionPanelTitle: {
         readonly: toRef(props, 'readonly'),
       },
     })
