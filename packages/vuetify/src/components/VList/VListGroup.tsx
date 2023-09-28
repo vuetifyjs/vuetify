@@ -6,6 +6,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { useList } from './list'
 import { makeComponentProps } from '@/composables/component'
 import { IconValue } from '@/composables/icons'
+import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { makeTagProps } from '@/composables/tag'
@@ -51,6 +52,7 @@ export const makeVListGroupProps = propsFactory({
   value: null,
 
   ...makeComponentProps(),
+  ...makeLazyProps(),
   ...makeTagProps(),
 }, 'VListGroup')
 
@@ -64,6 +66,8 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
     const id = computed(() => `v-list-group--id-${String(_id.value)}`)
     const list = useList()
     const { isBooted } = useSsrBoot()
+
+    const { hasContent, onAfterLeave } = useLazy(props, isOpen)
 
     function onClick (e: Event) {
       open(!isOpen.value, e)
@@ -111,9 +115,9 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
           </VDefaultsProvider>
         )}
 
-        <MaybeTransition transition={{ component: VExpandTransition }} disabled={ !isBooted.value }>
+        <MaybeTransition transition={{ component: VExpandTransition }} disabled={ !isBooted.value } onAfterLeave={ onAfterLeave }>
           <div class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
-            { slots.default?.() }
+            { hasContent.value && slots.default?.() }
           </div>
         </MaybeTransition>
       </props.tag>
