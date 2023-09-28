@@ -270,9 +270,9 @@ export default defineNuxtPlugin((app) => {
 })
 ```
 
-Finally, add Vuetify's root `VApp` component either in `~/app.vue` _or_ `~/layouts/default.vue`, for example:
+Finally, add Vuetify's root `VApp` component either in `~/app.vue` or `~/layouts/default.vue`, for example:
 
-```vue { data-resource="app.vue" }
+```html { data-resource="app.vue" }
 <template>
   <NuxtLayout>
     <v-app>
@@ -284,7 +284,7 @@ Finally, add Vuetify's root `VApp` component either in `~/app.vue` _or_ `~/layou
 
 or
 
-```vue { data-resource="~/layouts/default.vue" }
+```html { data-resource="~/layouts/default.vue" }
 <template>
   <v-app>
     <!-- .... -->
