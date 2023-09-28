@@ -254,7 +254,7 @@ export default defineNuxtConfig({
 }
 ```
 
-Nuxt allows you to change its Vite config by using its built-in hook `vite:extendConfig`. In its callback function, we add the Vuetify plugin to the array of Vite plugins. To resolve relative asset URLs that are passed to Vuetify components such as `VImg` (e.g. `~/assets/img/some.png`) the `transformAssetUrls` function needs to be added in the `vite` entry .
+Nuxt allows you to change its Vite config by using its built-in hook `vite:extendConfig`. In its callback function, add the Vuetify plugin to the array of Vite plugins. To resolve relative asset URLs that are passed to Vuetify components such as `VImg` (e.g. `~/assets/img/some.png`) the `transformAssetUrls` function needs to be added in the `vite` entry .
 
 In the next step, initialize Vuetify and add it to the main Vue app instance. This can be done in the `plugins` folder as any plugin that is placed in this folder will be automatically loaded by Nuxt at startup.
 
