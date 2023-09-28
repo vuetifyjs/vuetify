@@ -167,6 +167,7 @@ To import the fonts you need to add to webpack.mix.js:
 ```js
 mix.copy('node_modules/@mdi/font/fonts/', 'dist/fonts/')
 ```
+
 ## Nuxt 3
 
 [Nuxt](https://nuxt.com/) is an open-source framework that has helpful features to quickly get you started with developing a full-stack Vue app, such as file-based routing, SSR and component auto-imports. Nuxt is powered by Vite, so the steps to get Vuetify working in Nuxt 3 are quite similar to the manual steps described above.
