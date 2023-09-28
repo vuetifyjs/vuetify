@@ -22,6 +22,17 @@ Get started with Vuetify, the world’s most popular Vue.js framework for buildi
 
 ## Installation
 
+Vuetify has support for multiple different installation paths with the most common scaffolding tool being [create-vuetify](https://github.com/vuetifyjs/create-vuetify)
+
+For more information regarding supported package managers, please visit their official websites:
+
+* [yarn](https://yarnpkg.com/)
+* [npm](https://npmjs.org/)
+* [pnpm](https://pnpm.io/)
+* [bun](https://bun.sh/package-manager)
+
+## Using Vite
+
 To get started with Vuetify 3, simply paste the following code into your terminal:
 
 ::: tabs
@@ -39,7 +50,7 @@ pnpm create vuetify
 ```
 
 ```bash [bun]
-bunx create-vuetify
+bun create-vuetify
 ```
 
 :::
@@ -69,106 +80,7 @@ cd vuetify-project
 yarn dev
 ```
 
-For more information regarding supported package managers, please visit their official websites:
-
-* [yarn](https://yarnpkg.com/)
-* [npm](https://npmjs.org/)
-* [pnpm](https://pnpm.io/)
-* [bun](https://bun.sh/package-manager)
-
-### SSR
-
-Vue 3 has no way to automatically detect if SSR is used &mdash; so nuxt, gridsome, and other SSR frameworks must manually set the `ssr` option to `true` in order to properly render the application.
-
-```js { data-resource="src/plugins/vuetify.js" }
-import '@mdi/font/css/materialdesignicons.css'
-import 'vuetify/styles'
-
-const vuetify = createVuetify({
-  ssr: true,
-})
-```
-
-## Vue CLI
-
-Vue CLI is currently in maintenance mode and no longer the default tooling used to build Vue applications. Vuetify projects are now generated using [vite](https://vitejs.dev/). We plan on enabling the Vue CLI installation path in an official guide in the future.
-
-## Manual steps
-
-Follow these steps if for example you are adding Vuetify to an existing project, or simply do not want to use a scaffolding tool.
-
-`yarn add vuetify@^{{ version }}`
-
-In the file where you create the Vue application, add the following code
-
-```js
-import { createApp } from 'vue'
-import App from './App.vue'
-
-// Vuetify
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-
-const vuetify = createVuetify({
-  components,
-  directives,
-})
-
-createApp(App).use(vuetify).mount('#app')
-```
-
-This will include all components and directives regardless of whether or not you are using them. If you instead only want to include used components, have a look at the [Vite](https://npmjs.com/package/vite-plugin-vuetify) or [Webpack](https://npmjs.com/package/webpack-plugin-vuetify) plugins, depending on your setup. The plugins also makes it possible to customize SCSS variables.
-
-Lastly, do not forget to install [icons](/features/icon-fonts/).
-
-## CDN
-
-We recommend using the latest version of Vuetify 3 from [jsdelivr](https://www.jsdelivr.com/). All components and styles are included.
-
-`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.css` { .text-truncate }
-
-`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.js` { .text-truncate }
-
-```js
-const { createApp } = Vue
-const { createVuetify } = Vuetify
-
-const vuetify = createVuetify()
-
-const app = createApp()
-app.use(vuetify).mount('#app')
-```
-
-## Using Laravel Mix
-
-```js
-import { createApp } from 'vue'
-import App from './App.vue'
-
-// Vuetify
-import '@mdi/font/css/materialdesignicons.css'
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-
-const vuetify = createVuetify({
-  components,
-  directives
-})
-
-createApp(App).use(vuetify).mount('#app')
-```
-
-To import the fonts you need to add to webpack.mix.js:
-
-```js
-mix.copy('node_modules/@mdi/font/fonts/', 'dist/fonts/')
-```
-
-## Nuxt 3
+## Using Nuxt 3
 
 [Nuxt](https://nuxt.com/) is an open-source framework that has helpful features to quickly get you started with developing a full-stack Vue app, such as file-based routing, SSR and component auto-imports. Nuxt is powered by Vite, so the steps to get Vuetify working in Nuxt 3 are quite similar to the manual steps described above.
 
@@ -203,7 +115,7 @@ bun install
 
 :::
 
-and install the required Vuefity modules as dependencies:
+and then install the required Vuefity modules as dependencies:
 
 ::: tabs
 
@@ -295,9 +207,121 @@ or
 
 You should now have access to all Vuetify components and tools in Nuxt app.
 
+## Using Laravel Mix
+
+```js
+import { createApp } from 'vue'
+import App from './App.vue'
+
+// Vuetify
+import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+  components,
+  directives
+})
+
+createApp(App).use(vuetify).mount('#app')
+```
+
+To import the fonts you need to add to webpack.mix.js:
+
+```js
+mix.copy('node_modules/@mdi/font/fonts/', 'dist/fonts/')
+```
+
+## Using CDN
+
+We recommend using the latest version of Vuetify 3 from [jsdelivr](https://www.jsdelivr.com/). All components and styles are included.
+
+`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.css` { .text-truncate }
+
+`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.js` { .text-truncate }
+
+```js
+const { createApp } = Vue
+const { createVuetify } = Vuetify
+
+const vuetify = createVuetify()
+
+const app = createApp()
+app.use(vuetify).mount('#app')
+```
+
+## Existing projects
+
+Follow these steps if for example you are adding Vuetify to an existing project, or simply do not want to use a scaffolding tool.
+
+::: tabs
+
+``` [yarn]
+yarn add vuetify@^{{ version }}
+```
+
+``` [npm]
+npm i vuetify@^{{ version }}
+```
+
+``` [pnpm]
+pnpm i vuetify@^{{ version }}
+```
+
+``` [bun]
+bun add vuetify@^{{ version }}
+```
+
+::: tip
+
+If you are upgrading from an earlier version of Vuetify, make sure to check out our [Upgrade Guide](/getting-started/upgrade-guide/)
+
+:::
+
+In the file where you create the Vue application, add the following code
+
+```js
+import { createApp } from 'vue'
+import App from './App.vue'
+
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+  components,
+  directives,
+})
+
+createApp(App).use(vuetify).mount('#app')
+```
+
+This will include all components and directives regardless of whether or not you are using them. If you instead only want to include used components, have a look at the [Vite](https://npmjs.com/package/vite-plugin-vuetify) or [Webpack](https://npmjs.com/package/webpack-plugin-vuetify) plugins, depending on your setup. The plugins also makes it possible to customize SCSS variables.
+
+Lastly, do not forget to install [icons](/features/icon-fonts/).
+
+## SSR caveats
+
+Vue 3 has no way to automatically detect if SSR is used &mdash; so nuxt, gridsome, and other SSR frameworks must manually set the `ssr` option to `true` in order to properly render the application.
+
+```js { data-resource="src/plugins/vuetify.js" }
+import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
+
+const vuetify = createVuetify({
+  ssr: true,
+})
+```
+
 ## Exposed exports
 
-### JS
+The following export paths exist for the Vuetify framework:
+
+### JS / TS
 
 | Name                             | Description                                                                                                                                        |
 |----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
