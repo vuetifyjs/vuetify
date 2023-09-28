@@ -171,7 +171,7 @@ mix.copy('node_modules/@mdi/font/fonts/', 'dist/fonts/')
 
 [Nuxt](https://nuxt.com/) is an open-source framework that has helpful features to quickly get you started with developing a full-stack Vue app, such as file-based routing, SSR and component auto-imports. Nuxt is powered by Vite, so the steps to get Vuetify working in Nuxt 3 are quite similar to the manual steps described above.
 
-Start off your nuxt app with the following commands:
+Start off with your nuxt app by executing the following commands:
 
 ::: tabs
 
@@ -202,7 +202,7 @@ bun install
 
 :::
 
-and  install the required Vuefity modules as dependencies:
+and install the required Vuefity modules as dependencies:
 
 ::: tabs
 
@@ -255,7 +255,7 @@ export default defineNuxtConfig({
 
 Nuxt allows you to change its Vite config by using its built-in hook `vite:extendConfig`. In its callback function, we add the Vuetify plugin to the array of Vite plugins. To resolve relative asset URLs that are passed to Vuetify components such as `VImg` (e.g. `~/assets/img/some.png`) the `transformAssetUrls` function needs to be added in the `vite` entry .
 
-In the next step, initialize Vuetify and add it to the main Vue app instance. This can be done in the `plugins` folderm as any plugin that is placed in this folder will be automatically loaded by Nuxt at startup.
+In the next step, initialize Vuetify and add it to the main Vue app instance. This can be done in the `plugins` folder as any plugin that is placed in this folder will be automatically loaded by Nuxt at startup.
 
 ```ts { data-resource="~/plugins/vuetify.ts" }
 import '@mdi/font/css/materialdesignicons.css'
