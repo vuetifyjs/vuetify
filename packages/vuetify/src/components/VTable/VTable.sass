@@ -83,7 +83,9 @@
           > td,
           > th
             padding: $table-column-padding
-            transition: height settings.$standard-easing
+            transition-duration: $table-transition-duration
+            transition-property: $table-transition-property
+            transition-timing-function: $table-transition-timing-function
 
           > th
             font-weight: $table-header-font-weight

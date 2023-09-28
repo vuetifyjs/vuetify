@@ -14,19 +14,19 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, isObject, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import { VTabsSymbol } from './shared'
 
-export type TabItem = string | Record<string, any>
+export type TabItem = string | number | Record<string, any>
 
 function parseItems (items: readonly TabItem[] | undefined) {
   if (!items) return []
 
   return items.map(item => {
-    if (typeof item === 'string') return { title: item, value: item }
+    if (!isObject(item)) return { text: item, value: item }
 
     return item
   })
@@ -113,7 +113,7 @@ export const VTabs = genericComponent()({
           symbol={ VTabsSymbol }
         >
           { slots.default ? slots.default() : parsedItems.value.map(item => (
-            <VTab { ...item } key={ item.title } />
+            <VTab { ...item } key={ item.text } />
           ))}
         </VSlideGroup>
       )

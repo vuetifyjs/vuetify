@@ -244,7 +244,7 @@ export const VAutocomplete = genericComponent<new <
         const originalSelectionIndex = selectionIndex.value
 
         const selectedItem = model.value[selectionIndex.value]
-        if (selectedItem) select(selectedItem)
+        if (selectedItem && !selectedItem.props.disabled) select(selectedItem)
 
         selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
       }
@@ -400,6 +400,7 @@ export const VAutocomplete = genericComponent<new <
           onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
+          counterValue={ model.value.length }
           dirty={ isDirty }
           onInput={ onInput }
           onChange={ onChange }
@@ -543,6 +544,7 @@ export const VAutocomplete = genericComponent<new <
                             closable={ props.closableChips }
                             size="small"
                             text={ item.title }
+                            disabled={ item.props.disabled }
                             { ...slotProps }
                           />
                         ) : (

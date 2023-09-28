@@ -52,6 +52,8 @@ export function provideSort (options: {
   const { sortBy, mustSort, multiSort, page } = options
 
   const toggleSort = (column: InternalDataTableHeader) => {
+    if (column.key == null) return
+
     let newSortBy = sortBy.value.map(x => ({ ...x })) ?? []
     const item = newSortBy.find(x => x.key === column.key)
 

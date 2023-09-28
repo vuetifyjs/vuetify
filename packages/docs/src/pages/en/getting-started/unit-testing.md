@@ -33,7 +33,7 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   test: {
-    global: true,
+    globals: true,
     environment: 'jsdom',
     deps: {
       inline: ['vuetify'],

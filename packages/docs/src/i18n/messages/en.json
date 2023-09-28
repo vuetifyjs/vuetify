@@ -83,6 +83,17 @@
   "create": "Create",
   "customization": "Customization",
   "dark": "Dark",
+  "dashboard": {
+    "connected-accounts": "Connected accounts",
+    "perks": {
+      "disable-ads": "Disable Ads",
+      "disable-ads-message": "Disable advertisements on all documentation pages.",
+      "rail-drawer": "Rail drawer",
+      "rail-drawer-message": "Show the navigation drawer as a rail that expands on hover",
+      "disable-quickbar": "Disable Quickbar",
+      "disable-quickbar-message": "Hide the Quickbar actions located on the top right of the documentation"
+    }
+  },
   "data-tables": "Data tables",
   "data-and-display": "Data & display",
   "grids": "Grids",
@@ -94,8 +105,6 @@
   "direction": "Direction",
   "directive": "Directive",
   "directives": "Directives",
-  "disable-ads": "Disable Ads",
-  "disable-ads-message": "Disable advertisements on documentation pages. This option unlocks with any GitHub monthly sponsorship of $1 or more.",
   "discuss-on-discord": "Discuss on Discord",
   "discuss-on-github": "Discuss on GitHub",
   "discussions": "Discussions",
@@ -171,7 +180,7 @@
   "light": "Light",
   "link-only": "Link Only",
   "load-more": "Load more...",
-  "login-with-github": "Login w/ GitHub",
+  "login-with-github": "Login with GitHub",
   "logo": "Logo",
   "ltr": "LTR",
   "marked-read": "Mark all read",
@@ -217,8 +226,6 @@
     "refresh": "Refresh",
     "ignore": "Don't ask again"
   },
-  "quick-bar": "Enable Quickbar",
-  "quick-bar-message": "The quickbar is a small toolbar that appears in the navigation drawer on the bottom left of the screen. It provides quick access to common actions and settings.",
   "range": "Range",
   "read": "View Read ({number})",
   "ready-text": "Continue your learning with related content selected by the {team} or move between pages by using the navigation links below.",
@@ -252,6 +259,7 @@
   "search-sass-api": "Search SASS Variables",
   "section": "Section",
   "see-more-projects": "See More Projects",
+  "see-more-themes-from": "See More Themes From {vendor}",
   "selection": "Selection",
   "services": "Services",
   "settings": "Settings",

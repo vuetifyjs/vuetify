@@ -8,14 +8,17 @@ related:
   - /components/cards/
   - /components/icons/
   - /components/grids/
-
+features:
+  github: /components/VTimeline/
+  label: 'C: VTimeline'
+  report: true
 ---
 
 # Timelines
 
 The `v-timeline` is useful for stylistically displaying chronological information.
 
-<entry />
+<page-features />
 
 <!--
 ## Usage
@@ -24,6 +27,8 @@ The `v-timeline` is useful for stylistically displaying chronological informatio
 
 <example file="v-timeline/usage" />
 -->
+
+<entry />
 
 ## API
 

@@ -12,6 +12,7 @@ meta:
   import HomeSpecialSponsor from '@/components/home/SpecialSponsor.vue'
   import HomeSponsors from '@/components/home/Sponsors.vue'
   import MadeWithVuetify from '@/components/doc/MadeWithVuetify.vue'
+  import MadeWithVuetifyLink from '@/components/doc/MadeWithVuetifyLink.vue'
 </script>
 
 <home-entry />
@@ -34,7 +35,7 @@ The continued development and maintenance of Vuetify is made possible by these g
 
 <br>
 
-<v-divider max-width="500" class="mx-auto" />
+<v-divider style="max-width: 500px;" class="mx-auto" />
 
 <br>
 
@@ -43,3 +44,9 @@ The continued development and maintenance of Vuetify is made possible by these g
 Check out these beautiful apps, plugins, and themes built using Vuetify.{style="max-width: 568px" .mx-auto .px-4}
 
 <made-with-vuetify />
+
+<made-with-vuetify-link />
+
+<br>
+<br>
+<br>

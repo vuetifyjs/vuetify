@@ -10,7 +10,7 @@ related:
   - /components/lists/
 features:
   github: /components/VExpansionPanel/
-  label: 'C: VExpansionPanel'
+  label: 'C: VExpansionPanels'
   report: true
   spec: https://m1.material.io/components/expansion-panels.html
 ---

@@ -19,10 +19,10 @@ The display helpers allow you to control the display of content. This includes b
 
 ## Display
 
-Specify the elements `display` property. These classes can be applied to all breakpoints from `xs` to `xl`. When using a base class,`.d-{value}`, it is inferred to be `.d-xs-{value}`.
+Specify the element's `display` property. These classes can be applied to all breakpoints from `xs` to `xxl`. When using a base class,`.d-{value}`, it is inferred to be `.d-xs-{value}`.
 
 - `.d-{value}` for `xs`
-- `.d-{breakpoint}-{value}` for `sm`, `md`, `lg` and `xl`
+- `.d-{breakpoint}-{value}` for `sm`, `md`, `lg`, `xl`, and `xxl`
 
 The _value_ property is one of:
 
@@ -36,7 +36,7 @@ The _value_ property is one of:
 - `flex`
 - `inline-flex`
 
-When setting a specific breakpoint for a display helper class, it will apply to all screen widths from the designation and up. For example, `d-lg-flex` will apply to `lg` and `xl` size screens.
+When setting a specific breakpoint for a display helper class, it will apply to all screen widths from the designation and up. For example, `d-lg-flex` will apply to `lg`, `xl` and `xxl` size screens.
 
 <example file="display/display-inline" />
 
@@ -46,32 +46,36 @@ When setting a specific breakpoint for a display helper class, it will apply to 
 
 Conditionally display an element based upon the current **viewport**. Breakpoint utility classes always apply from the bottom up. That means if you have `.d-none`, it will apply to all breakpoints. However, `.d-md-none` will apply to only `md` and up.
 
-| Screen size        | Class                           |
-| ------------------ | ------------------------------- |
-| Hidden on all      | `.d-none`                       |
-| Hidden only on xs  | `.d-none .d-sm-flex`            |
-| Hidden only on sm  | `.d-sm-none .d-md-flex`         |
-| Hidden only on md  | `.d-md-none .d-lg-flex`         |
-| Hidden only on lg  | `.d-lg-none .d-xl-flex`         |
-| Hidden only on xl  | `.d-xl-none`                    |
-| Visible on all     | `.d-flex`                       |
-| Visible only on xs | `.d-flex .d-sm-none`            |
-| Visible only on sm | `.d-none .d-sm-flex .d-md-none` |
-| Visible only on md | `.d-none .d-md-flex .d-lg-none` |
-| Visible only on lg | `.d-none .d-lg-flex .d-xl-none` |
-| Visible only on xl | `.d-none .d-xl-flex`            |
+| Screen size         | Class                            |
+|---------------------|----------------------------------|
+| Hidden on all       | `.d-none`                        |
+| Hidden only on xs   | `.d-none .d-sm-flex`             |
+| Hidden only on sm   | `.d-sm-none .d-md-flex`          |
+| Hidden only on md   | `.d-md-none .d-lg-flex`          |
+| Hidden only on lg   | `.d-lg-none .d-xl-flex`          |
+| Hidden only on xl   | `.d-xl-none .d-xxl-flex`         |
+| Hidden only on xxl  | `.d-xxl-none`                    |
+| Visible on all      | `.d-flex`                        |
+| Visible only on xs  | `.d-flex .d-sm-none`             |
+| Visible only on sm  | `.d-none .d-sm-flex .d-md-none`  |
+| Visible only on md  | `.d-none .d-md-flex .d-lg-none`  |
+| Visible only on lg  | `.d-none .d-lg-flex .d-xl-none`  |
+| Visible only on xl  | `.d-none .d-xl-flex .d-xxl-none` |
+| Visible only on xxl | `.d-none .d-xxl-flex`            |
 
 <example file="display/visibility" />
 
-Additionally you can also display an element based upon the current **viewport** using lateral display helper classes. These classes can be applied using the following format `hidden-{breakpoint}-{condition}`
+Alternatively you can hide an element based upon the current **viewport** using lateral display helper classes. These classes can be applied using the following format `hidden-{breakpoint}-{condition?}`
 
 The _condition_ applies the class base on:
 
-- `only` - hide the element only on `xs` through `xl` breakpoints
-- `and-down` - hide the element on the specified breakpoint and down `sm` through `lg` breakpoints
-- `and-up` - hide the element on the specified breakpoint and up `sm` through `lg` breakpoints
+- nothing - hide the element only on the specified breakpoint
+- `and-down` - hide the element on the specified breakpoint and down - `sm` through `xl` only
+- `and-up` - hide the element on the specified breakpoint and up - `sm` through `xl` only
 
-Additionally, **media types** can be targeted using the `only` condition. Both `hidden-screen-only` and `hidden-print-only` are currently supported.
+`hidden-{breakpoint}-and-up` is equivalent to `d-{breakpoint}-none`.
+
+**Media types** can also be targeted using the `only` condition. Both `hidden-screen-only` and `hidden-print-only` are currently supported.
 
 ### Caveats
 

@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Vuetify UI Kits
+  title: UI Kits
   description: Vuetify offers numerous pre-built component kits for both Figma and Adobe Xd. Kickstart your next application today.
   keywords: vuetify ui kit, vuetify ui, ui kits, ui kit figma, ui kit adobe xd
 related:
@@ -32,10 +32,10 @@ If you need to manually install the plugin for whatever reason, you can download
 1. [Download](https://store.vuetifyjs.com/products/vuetify-ui-kit-figma) for free from the our store
 2. Unzip **vuetify3-ui-light-kit.fig** from `vuetify-figma-ui-kit.zip`
 3. Open Figma and create a new project:
-  ![UI Kit New Project](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-new-project.png) { class="mb-n4" }
+  ![UI Kit New Project](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-new-project.png)
 4. Select **Import file** and navigate to where you unzipped `vuetify3-ui-light-kit.fig`:
-  ![UI Kit Import File](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-import-file.png) { class="mb-n4" }
+  ![UI Kit Import File](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-import-file.png)
 5. Create a new design file:
-  ![UI Kit New Design File](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-new-design-file.png) { class="mb-n4" }
+  ![UI Kit New Design File](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-new-design-file.png)
 6. Access components within your projects by selecting **Assets** and then searching for the desired component:
   ![UI Kit Search Assets](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-search-assets.png)

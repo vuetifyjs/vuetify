@@ -71,17 +71,16 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
     const {
       thumbColor,
       step,
-      vertical,
       disabled,
       thumbSize,
       thumbLabel,
       direction,
       readonly,
       elevation,
-      isReversed,
       horizontalDirection,
       mousePressed,
       decimals,
+      isNotVerticalAndReversed,
     } = slider
 
     const { textColorClasses, textColorStyles } = useTextColor(thumbColor)
@@ -126,7 +125,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
     }
 
     useRender(() => {
-      const positionPercentage = convertToUnit((vertical.value || isReversed.value) ? 100 - props.position : props.position, '%')
+      const positionPercentage = convertToUnit(isNotVerticalAndReversed.value ? 100 - props.position : props.position, '%')
       const { elevationClasses } = useElevation(computed(() => !disabled.value ? elevation.value : undefined))
 
       return (

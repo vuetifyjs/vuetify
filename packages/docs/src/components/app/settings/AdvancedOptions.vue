@@ -1,23 +1,5 @@
 <template>
-  <div class="ps-1 mb-3">
-    <v-label :text="t('display')" class="mb-2 font-weight-medium" />
-
-    <v-messages :messages="t('display-message')" active />
-  </div>
-
-  <ad-option />
-
-  <br>
-
-  <quickbar-option />
-
-  <br>
-
-  <v-divider />
-
-  <br>
-
-  <div class="ps-1 mb-3">
+  <div class="mb-3">
     <v-label :text="t('communication')" class="mb-2 font-weight-medium" />
 
     <v-messages :messages="t('communication-message')" active />
@@ -25,11 +7,7 @@
 
   <banner-option />
 
-  <br>
-
   <notifications-option />
-
-  <br>
 
   <div class="d-flex justify-end">
     <v-btn
@@ -41,22 +19,16 @@
     />
   </div>
 
-  <br>
-
-  <v-divider />
-
-  <br>
+  <v-divider class="my-3" />
 
   <developer-mode />
 </template>
 
 <script setup>
   // Components
-  import AdOption from './options/AdOption.vue'
   import BannerOption from './options/BannerOption.vue'
   import DeveloperMode from './DeveloperMode.vue'
   import NotificationsOption from './options/NotificationsOption.vue'
-  import QuickbarOption from './options/QuickbarOption.vue'
 
   // Composables
   import { useI18n } from 'vue-i18n'
