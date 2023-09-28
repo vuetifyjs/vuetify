@@ -1,9 +1,8 @@
 <template>
-  <div class="mb-3">
-    <v-label :text="t('communication')" class="mb-2 font-weight-medium" />
-
-    <v-messages :messages="t('communication-message')" active />
-  </div>
+  <settings-header
+    title="communication"
+    text="communication-message"
+  />
 
   <banner-option />
 
@@ -29,6 +28,7 @@
   import BannerOption from './options/BannerOption.vue'
   import DeveloperMode from './DeveloperMode.vue'
   import NotificationsOption from './options/NotificationsOption.vue'
+  import SettingsHeader from '@/components/app/settings/SettingsHeader.vue'
 
   // Composables
   import { useI18n } from 'vue-i18n'
