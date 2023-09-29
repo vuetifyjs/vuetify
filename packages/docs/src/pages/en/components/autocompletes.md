@@ -8,11 +8,19 @@ related:
   - /components/combobox/
   - /components/forms/
   - /components/selects/
+features:
+  figma: true
+  label: 'C: VAutocomplete'
+  report: true
+  github: /components/VAutocomplete/
+  spec: https://m2.material.io/components/text-fields
 ---
 
 # Autocompletes
 
 The `v-autocomplete` component offers simple and flexible type-ahead functionality. This is useful when searching large sets of data or even dynamically requesting information from an API.
+
+<page-features />
 
 ## Usage
 
@@ -33,7 +41,9 @@ The autocomplete component extends `v-select` and adds the ability to filter ite
 ## Caveats
 
 ::: error
-  When using objects for the **items** prop, you must associate **item-title** and **item-value** with existing properties on your objects. These values are defaulted to **title** and **value** and can be changed.
+
+When using objects for the **items** prop, you must associate **item-title** and **item-value** with existing properties on your objects. These values are defaulted to **title** and **value** and can be changed.
+
 :::
 
 ## Examples
@@ -81,7 +91,9 @@ Using a combination of `v-autocomplete` slots and transitions, you can create a 
 #### New tab
 
 ::: success
+
 This feature was introduced in [v3.3.0 (Icarus)](/getting-started/release-notes/?version=v3.3.0)
+
 :::
 
 The **auto-select-first** property highlights the first result when searching, allowing you to press <v-kbd>tab</v-kbd> or <v-kbd>enter</v-kbd> to quickly select it.
