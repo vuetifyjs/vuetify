@@ -937,7 +937,7 @@ describe.skip('VDataTable.ts', () => {
         headers: testHeaders,
         items: testItems,
         itemsPerPage: 5,
-        itemClass: (item: Object) => ({
+        itemClass: ({ item }: Object) => ({
           'first-class': item.fat < 10,
           'second-class': item.protein > 4.0,
         }),

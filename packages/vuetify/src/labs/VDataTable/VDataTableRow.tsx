@@ -9,8 +9,8 @@ import { useSelection } from './composables/select'
 import { VDataTableColumn } from './VDataTableColumn'
 
 // Utilities
-import { toDisplayString, withModifiers } from 'vue'
-import { genericComponent, getObjectValueByPath, propsFactory, useRender } from '@/util'
+import { computed, toDisplayString, withModifiers } from 'vue'
+import { genericComponent, getObjectValueByPath, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -25,6 +25,11 @@ export const makeVDataTableRowProps = propsFactory({
   index: Number,
   item: Object as PropType<DataTableItem>,
   onClick: Function as PropType<(e: MouseEvent) => void>,
+  itemClass: [String, Array<String>, Function] as PropType<
+    | string
+    | string[]
+    | ((value: { item: any, internalItem: DataTableItem }) => string | string[])
+  >,
 }, 'VDataTableRow')
 
 export const VDataTableRow = genericComponent<VDataTableRowSlots>()({
@@ -37,6 +42,22 @@ export const VDataTableRow = genericComponent<VDataTableRowSlots>()({
     const { isExpanded, toggleExpand } = useExpanded()
     const { columns } = useHeaders()
 
+    const itemClasses = computed(() => {
+      if (!props.itemClass) {
+        return []
+      }
+
+      if (typeof props.itemClass === 'function') {
+        const item = props.item!
+        return wrapInArray(props.itemClass({
+          item: item.raw,
+          internalItem: item,
+        }))
+      }
+
+      return wrapInArray(props.itemClass)
+    })
+
     useRender(() => (
       <tr
         class={[
@@ -44,6 +65,7 @@ export const VDataTableRow = genericComponent<VDataTableRowSlots>()({
           {
             'v-data-table__tr--clickable': !!props.onClick,
           },
+          ...itemClasses.value,
         ]}
         onClick={ props.onClick }
       >

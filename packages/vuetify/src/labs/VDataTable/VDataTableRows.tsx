@@ -43,6 +43,11 @@ export const makeVDataTableRowsProps = propsFactory({
     default: '$vuetify.noDataText',
   },
   rowHeight: Number,
+  itemClass: [String, Array<String>, Function] as PropType<
+    | string
+    | string[]
+    | ((value: { item: any, internalItem: DataTableItem }) => string | string[])
+  >,
   'onClick:row': Function as PropType<(e: Event, value: { item: any, internalItem: DataTableItem }) => void>,
 }, 'VDataTableRows')
 
@@ -129,6 +134,7 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
                   }
                   props['onClick:row']?.(event, { item: item.raw, internalItem: item })
                 } : undefined,
+                itemClass: props.itemClass,
                 index,
                 item,
               },
