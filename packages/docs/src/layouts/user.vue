@@ -16,12 +16,17 @@
           fluid
           tag="section"
         >
-          <v-row>
-            <v-col cols="12" md="auto">
+          <v-row justify="center" justify-md="start">
+            <v-col cols="auto">
               <user-profile />
             </v-col>
 
-            <v-col cols="8">
+            <v-col
+              class="me-auto"
+              cols="12"
+              sm="10"
+              md="7"
+            >
               <user-tabs />
 
               <br>
