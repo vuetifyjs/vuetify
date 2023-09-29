@@ -257,22 +257,22 @@ app.use(vuetify).mount('#app')
 Follow these steps if for example you are adding Vuetify to an existing project, or simply do not want to use a scaffolding tool.
 
 ::: tabs
-
-``` [yarn]
-yarn add vuetify@^{{ version }}
+```bash [yarn]
+yarn add vuetify
 ```
 
-``` [npm]
-npm i vuetify@^{{ version }}
+```bash [npm]
+npm i vuetify
 ```
 
-``` [pnpm]
-pnpm i vuetify@^{{ version }}
+```bash [pnpm]
+pnpm i vuetify
 ```
 
-``` [bun]
-bun add vuetify@^{{ version }}
+```bash [bun]
+bun add vuetify
 ```
+:::
 
 ::: tip
 
