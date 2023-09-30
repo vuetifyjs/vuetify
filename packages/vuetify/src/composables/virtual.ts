@@ -99,10 +99,10 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   }
 
   function scrollToIndex (index: number) {
-    if (!containerRef.value) return
+    if (!containerRef.value || !contentRect.value) return
 
     const offset = calculateOffset(index)
-    containerRef.value.scrollTop = offset
+    containerRef.value.scrollTop = Math.max(0, offset - (contentRect.value.height / 2))
   }
 
   const last = computed(() => Math.min(items.value.length, first.value + visibleItems.value))

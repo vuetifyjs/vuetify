@@ -294,7 +294,9 @@ export const VSelect = genericComponent<new <
           item => selections.value.some(s => item.value === s.value)
         )
         IN_BROWSER && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
+          window.requestAnimationFrame(() => {
+            index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
+          })
         })
       }
     })
