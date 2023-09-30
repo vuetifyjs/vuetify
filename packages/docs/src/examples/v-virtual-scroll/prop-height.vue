@@ -1,5 +1,5 @@
 <template>
-  <v-virtual-scroll :items="items" height="200">
+  <v-virtual-scroll :items="items" height="200" item-height="24">
     <template v-slot:default="{ item }">
       Virtual Item {{ item }}
     </template>

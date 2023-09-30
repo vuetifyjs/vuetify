@@ -26,7 +26,7 @@
     <v-virtual-scroll
       :items="items"
       height="300"
-      item-height="50"
+      item-height="48"
     >
       <template v-slot:default="{ item }">
         <v-list-item>

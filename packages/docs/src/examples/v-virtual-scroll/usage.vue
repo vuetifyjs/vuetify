@@ -6,7 +6,7 @@
     :options="options"
   >
     <div>
-      <v-virtual-scroll v-bind="props" :items="items">
+      <v-virtual-scroll v-bind="props" :items="items" item-height="24">
         <template v-slot:default="{ item }">
           Item {{ item }}
         </template>
