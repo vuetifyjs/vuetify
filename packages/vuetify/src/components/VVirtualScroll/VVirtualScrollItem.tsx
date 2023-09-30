@@ -1,9 +1,10 @@
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { useResizeObserver } from '@/composables/resizeObserver'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { watch } from 'vue'
+import { ref, watch, watchEffect } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -12,6 +13,7 @@ import type { GenericProps } from '@/util'
 
 export const makeVVirtualScrollItemProps = propsFactory({
   renderless: Boolean,
+  disableItemResize: Boolean,
 
   ...makeComponentProps(),
 }, 'VVirtualScrollItem')
@@ -19,6 +21,7 @@ export const makeVVirtualScrollItemProps = propsFactory({
 export const VVirtualScrollItem = genericComponent<new <Renderless extends boolean = false>(
   props: {
     renderless?: Renderless
+    disableItemResize?: boolean
   },
   slots: {
     default: Renderless extends true ? {
@@ -37,19 +40,27 @@ export const VVirtualScrollItem = genericComponent<new <Renderless extends boole
   },
 
   setup (props, { attrs, emit, slots }) {
-    const { resizeRef, contentRect } = useResizeObserver(undefined, 'border')
+    const itemRef = ref()
 
-    watch(() => contentRect.value?.height, height => {
-      if (height != null) emit('update:height', height)
+    useToggleScope(() => !props.disableItemResize, () => {
+      const { resizeRef, contentRect } = useResizeObserver(undefined, 'border')
+
+      watchEffect(() => {
+        resizeRef.value = itemRef.value
+      })
+
+      watch(() => contentRect.value?.height, height => {
+        if (height != null) emit('update:height', height)
+      })
     })
 
     useRender(() => props.renderless ? (
       <>
-        { slots.default?.({ itemRef: resizeRef }) }
+        { slots.default?.({ itemRef }) }
       </>
     ) : (
       <div
-        ref={ resizeRef }
+        ref={ itemRef }
         class={[
           'v-virtual-scroll__item',
           props.class,

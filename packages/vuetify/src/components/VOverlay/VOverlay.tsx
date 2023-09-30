@@ -126,6 +126,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     'click:outside': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
     afterLeave: () => true,
+    afterEnter: () => true,
   },
 
   setup (props, { slots, attrs, emit }) {
@@ -289,6 +290,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 transition={ props.transition }
                 target={ target.value }
                 onAfterLeave={ () => { onAfterLeave(); emit('afterLeave') } }
+                onAfterEnter={ () => emit('afterEnter') }
               >
                 <div
                   ref={ contentEl }

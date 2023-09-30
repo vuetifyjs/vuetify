@@ -2,6 +2,7 @@
   <v-virtual-scroll
     :items="items"
     height="400"
+    :item-height="(40 + 56) / 2"
   >
     <template v-slot:default="{ item, index }">
       <div

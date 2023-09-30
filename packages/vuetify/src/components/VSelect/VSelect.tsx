@@ -288,8 +288,15 @@ export const VSelect = genericComponent<new <
       }
     }
 
+    const disableItemResize = shallowRef(false)
+
+    function onAfterEnter () {
+      disableItemResize.value = false
+    }
+
     watch(menu, () => {
       if (!props.hideSelected && menu.value && selections.value.length) {
+        disableItemResize.value = true
         const index = displayItems.value.findIndex(
           item => selections.value.some(s => item.value === s.value)
         )
@@ -364,6 +371,7 @@ export const VSelect = genericComponent<new <
                   closeOnContentClick={ false }
                   transition={ props.transition }
                   onAfterLeave={ onAfterLeave }
+                  onAfterEnter={ onAfterEnter }
                   { ...props.menuProps }
                 >
                   { hasList && (
@@ -384,7 +392,12 @@ export const VSelect = genericComponent<new <
                         <VListItem title={ t(props.noDataText) } />
                       ))}
 
-                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value }>
+                      <VVirtualScroll
+                        ref={ vVirtualScrollRef }
+                        renderless
+                        items={ displayItems.value }
+                        disableItemResize={ disableItemResize.value }
+                      >
                         { ({ item, index, itemRef }) => {
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,

@@ -36,6 +36,7 @@ export const makeVVirtualScrollProps = propsFactory({
     default: () => ([]),
   },
   renderless: Boolean,
+  disableItemResize: Boolean,
 
   ...makeVirtualProps(),
   ...makeComponentProps(),
@@ -85,6 +86,7 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
         <VVirtualScrollItem
           key={ item.index }
           renderless={ props.renderless }
+          disableItemResize={ props.disableItemResize }
           onUpdate:height={ height => handleItemResize(item.index, height) }
         >
           { slotProps => slots.default?.({ item: item.raw, index: item.index, ...slotProps }) }

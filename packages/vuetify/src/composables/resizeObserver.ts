@@ -1,5 +1,5 @@
 // Utilities
-import { onBeforeUnmount, readonly, ref, watch } from 'vue'
+import { onScopeDispose, readonly, ref, watch } from 'vue'
 import { refElement } from '@/util'
 import { IN_BROWSER } from '@/util/globals'
 
@@ -28,7 +28,7 @@ export function useResizeObserver (callback?: ResizeObserverCallback, box: 'cont
       }
     })
 
-    onBeforeUnmount(() => {
+    onScopeDispose(() => {
       observer.disconnect()
     })
 
