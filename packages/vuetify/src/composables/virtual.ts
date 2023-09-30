@@ -29,13 +29,7 @@ export const makeVirtualProps = propsFactory({
 
 export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, offset?: Ref<number>) {
   const first = shallowRef(0)
-  const baseItemHeight = shallowRef(props.itemHeight)
-  const itemHeight = computed({
-    get: () => parseInt(baseItemHeight.value ?? 0, 10),
-    set (val) {
-      baseItemHeight.value = val
-    },
-  })
+  const itemHeight = parseInt(props.itemHeight ?? 0, 10)
   const containerRef = ref<HTMLElement>()
   const { resizeRef, contentRect } = useResizeObserver()
   watchEffect(() => {
@@ -44,25 +38,29 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   const display = useDisplay()
 
   const sizeMap = new Map<any, number>()
-  let sizes = Array.from<number | null>({ length: items.value.length })
+  const averageItemHeight = shallowRef(itemHeight)
+  let sizes = Array.from<number | null>({ length: items.value.length }).map(() => averageItemHeight.value)
   const visibleItems = computed(() => {
     const height = (
       !contentRect.value || containerRef.value === document.documentElement
         ? display.height.value
         : contentRect.value.height
     ) - (offset?.value ?? 0)
-    return Math.ceil((height / itemHeight.value) * 1.7 + 1)
+    return Math.ceil((height / averageItemHeight.value) * 1.7 + 1)
   })
 
   function handleItemResize (index: number, height: number) {
-    itemHeight.value = Math.max(itemHeight.value, height)
+    const removeSize = (sizes[index] ?? itemHeight)
+    const addSize = height
+    if (removeSize === addSize) return
+    averageItemHeight.value = averageItemHeight.value + ((addSize - removeSize) / sizes.length)
     sizes[index] = height
     sizeMap.set(items.value[index], height)
   }
 
   function calculateOffset (index: number) {
     return sizes.slice(0, index)
-      .reduce((acc, val) => acc! + (val || itemHeight.value), 0)!
+      .reduce((acc, val) => acc! + (val || averageItemHeight.value), 0)!
   }
 
   function calculateMidPointIndex (scrollTop: number) {
@@ -71,7 +69,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     let middle = 0
     let middleOffset = 0
     while (middleOffset < scrollTop && middle < end) {
-      middleOffset += sizes[middle++] || itemHeight.value
+      middleOffset += sizes[middle++] || averageItemHeight.value
     }
 
     return middle - 1
@@ -116,7 +114,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   const paddingBottom = computed(() => calculateOffset(items.value.length) - calculateOffset(last.value))
 
   watch(() => items.value.length, () => {
-    sizes = createRange(items.value.length).map(() => itemHeight.value)
+    sizes = createRange(items.value.length).map(() => averageItemHeight.value)
     sizeMap.forEach((height, item) => {
       const index = items.value.indexOf(item)
       if (index === -1) {
