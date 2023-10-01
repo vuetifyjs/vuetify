@@ -21,8 +21,4 @@ The User Dashboard is currently under development. Please check back later for u
 
 Support Vuetify and gain access to exclusive documentation perks and features for only $1 per month
 
-<promoted permanent slug="vuetify-github-sponsors" />
-
-----
-
 <PerksOptions />

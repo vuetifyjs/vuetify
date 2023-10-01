@@ -90,34 +90,36 @@ type SavedState = {
   }
 } | RootState
 
-export const useUserStore = defineStore('user', () => {
-  const state = reactive<RootState>({
-    v: 4,
-    api: 'link-only',
-    dev: false,
-    disableAds: false,
-    composition: 'options',
-    pwaRefresh: true,
-    theme: 'system',
-    mixedTheme: true,
-    direction: 'ltr',
-    slashSearch: false,
-    syncSettings: true,
-    quickbar: false,
-    railDrawer: false,
-    notifications: {
-      show: true,
-      read: [],
-      last: {
-        banner: [],
-        v2banner: null,
-        install: null,
-        notification: null,
-        promotion: null,
-        jobs: null,
-      },
+export const DEFAULT_USER: RootState = {
+  v: 4,
+  api: 'link-only',
+  dev: false,
+  disableAds: false,
+  composition: 'options',
+  pwaRefresh: true,
+  theme: 'system',
+  mixedTheme: true,
+  direction: 'ltr',
+  slashSearch: false,
+  syncSettings: true,
+  quickbar: false,
+  railDrawer: false,
+  notifications: {
+    show: true,
+    read: [],
+    last: {
+      banner: [],
+      v2banner: null,
+      install: null,
+      notification: null,
+      promotion: null,
+      jobs: null,
     },
-  })
+  },
+}
+
+export const useUserStore = defineStore('user', () => {
+  const state = reactive(merge({}, DEFAULT_USER))
 
   function load () {
     if (!IN_BROWSER) return
@@ -182,7 +184,20 @@ export const useUserStore = defineStore('user', () => {
     localStorage.setItem('vuetify@user', JSON.stringify(state, null, 2))
   }
 
+  function reset () {
+    if (!IN_BROWSER) return
+
+    Object.assign(state, merge({}, DEFAULT_USER))
+
+    save()
+  }
+
   load()
 
-  return { ...toRefs(state), load, save }
+  return {
+    ...toRefs(state),
+    load,
+    save,
+    reset,
+  }
 })

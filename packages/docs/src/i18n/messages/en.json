@@ -85,9 +85,17 @@
   "dark": "Dark",
   "dashboard": {
     "connected-accounts": "Connected accounts",
+    "advanced-options": {
+      "danger-zone": "Danger zone",
+      "danger-zone-message": "The following settings are for development purposes."
+    },
     "perks": {
       "disable-ads": "Disable Ads",
       "disable-ads-message": "Disable advertisements on all documentation pages.",
+      "experience": "Experience",
+      "experience-message": "These options change your browsing experience within the documentation.",
+      "layout": "Layout",
+      "layout-message": "Modify various the visiblity and behavior of various elements of the documentation.",
       "rail-drawer": "Rail drawer",
       "rail-drawer-message": "Show the navigation drawer as a rail that expands on hover",
       "disable-quickbar": "Disable Quickbar",
@@ -239,6 +247,7 @@
   "report-a-bug": "Report a Bug",
   "reset": "Reset",
   "reset-all": "Reset All",
+  "reset-all-settings": "Reset All Settings",
   "resources-and-tools": "Resources and tools",
   "resources": "Resources",
   "roadmap": "Roadmap",

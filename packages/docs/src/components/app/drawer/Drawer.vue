@@ -76,7 +76,6 @@
     if (!element) return
 
     element.scrollIntoView({
-      behavior: 'smooth',
       block: 'center',
       inline: 'center',
     })

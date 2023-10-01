@@ -8,11 +8,18 @@ related:
   - /components/autocompletes/
   - /components/combobox/
   - /components/forms/
+features:
+  label: 'C: VSelect'
+  report: true
+  github: /components/VSelect/
+  spec: https://m2.material.io/components/text-fields
 ---
 
 # Selects
 
 Select fields components are used for collecting user provided information from a list of options.
+
+<page-features />
 
 ## Usage
 
@@ -31,7 +38,9 @@ Select fields components are used for collecting user provided information from 
 ## Caveats
 
 ::: error
-  When using objects for the **items** prop, you must associate **item-title** and **item-value** with existing properties on your objects. These values are defaulted to **title** and **value** and can be changed.
+
+When using objects for the **items** prop, you must associate **item-title** and **item-value** with existing properties on your objects. These values are defaulted to **title** and **value** and can be changed.
+
 :::
 
 ## Guide
