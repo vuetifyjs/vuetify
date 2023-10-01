@@ -24,7 +24,7 @@ type VirtualProps = {
 export const makeVirtualProps = propsFactory({
   itemHeight: {
     type: [Number, String],
-    default: 48,
+    default: null,
   },
 }, 'virtual')
 
@@ -41,13 +41,11 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   })
   const containerRef = ref<HTMLElement>()
 
-  const isItemBeyondContainer = computed(() => containerRef.value && containerRef.value.clientHeight <= itemHeight.value)
+  const { resizeRef, contentRect } = useResizeObserver()
 
+  const isItemBeyondContainer = computed(() => contentRect.value && contentRect.value.height <= itemHeight.value)
   const bufferRatio = computed(() => isItemBeyondContainer.value ? 1 : BUFFER_RATIO)
 
-  const bufferRatioReceprocal = computed(() => 1 / bufferRatio.value)
-
-  const { resizeRef, contentRect } = useResizeObserver()
   watchEffect(() => {
     resizeRef.value = containerRef.value
   })
@@ -56,7 +54,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   const sizeMap = new Map<any, number>()
   let sizes = Array.from<number | null>({ length: items.value.length })
   const visibleItems = computed(() => {
-    if (endIndex.value > startIndex.value) return Math.ceil((endIndex.value - startIndex.value) * (1 + bufferRatio.value * 2))
+    if (endIndex.value > startIndex.value) return Math.ceil((endIndex.value - startIndex.value + 1) * (1 + bufferRatio.value * 2))
     const height = (
       !contentRect.value || containerRef.value === document.documentElement
         ? display.height.value
@@ -66,6 +64,11 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   })
 
   function handleItemResize (index: number, height: number) {
+    if (!itemHeight.value) {
+      itemHeight.value = height
+    } else {
+      itemHeight.value = Math.min(itemHeight.value, height)
+    }
     sizes[index] = height
     sizeMap.set(items.value[index], height)
   }
@@ -110,11 +113,11 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     ) {
       endIndex.value++
     }
-    const buffer = isItemBeyondContainer.value ? 1 : Math.floor(visibleItems.value / (bufferRatioReceprocal.value + 2))
+    const buffer = Math.ceil((endIndex.value - startIndex.value + 1) * bufferRatio.value)
 
-    if (direction === UP) {
+    if (direction === UP && startIndex.value <= first.value) {
       first.value = clamp(startIndex.value - buffer, 0, items.value.length)
-    } else if (direction === DOWN) {
+    } else if (direction === DOWN && endIndex.value >= last.value) {
       first.value = clamp(startIndex.value - buffer, 0, items.value.length - visibleItems.value)
     }
     lastScrollTop = scrollTop

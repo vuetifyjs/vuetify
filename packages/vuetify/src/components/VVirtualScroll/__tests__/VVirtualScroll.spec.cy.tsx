@@ -61,7 +61,7 @@ describe('VVirtualScroll', () => {
 
     cy.get('.v-virtual-scroll__item').should('have.length', 2)
     cy.get('.v-virtual-scroll').scrollTo(0, 1900, { duration: 500 })
-    cy.get('.v-virtual-scroll__item').contains('2').should('not.exist') // scroll to bottom of item 1, item 2 hasn' been rendered
+    cy.get('.v-virtual-scroll__item').contains('2').should('not.exist') // scroll to bottom of item 1, item 2 hasn't been rendered
     cy.get('.v-virtual-scroll').scrollTo(0, 1901, { duration: 500 })
     cy.get('.v-virtual-scroll__item').contains('2').should('exist')
     cy.get('.v-virtual-scroll__item').should('have.length', 2)
