@@ -128,8 +128,6 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   }
 
   const computedItems = computed(() => {
-    console.log('--start end index---', startIndex.value, endIndex.value)
-    console.log('--rendering---', first.value, last.value, visibleItems.value)
     return items.value.slice(first.value, last.value).map((item, index) => ({
       raw: item,
       index: index + first.value,
