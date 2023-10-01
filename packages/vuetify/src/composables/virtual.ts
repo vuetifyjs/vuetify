@@ -30,6 +30,8 @@ export const makeVirtualProps = propsFactory({
 
 export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, offset?: Ref<number>) {
   const first = shallowRef(0)
+  const startIndex = shallowRef(0)
+  const endIndex = shallowRef(0)
   const baseItemHeight = shallowRef(props.itemHeight)
   const itemHeight = computed({
     get: () => parseInt(baseItemHeight.value ?? 0, 10),
@@ -54,6 +56,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   const sizeMap = new Map<any, number>()
   let sizes = Array.from<number | null>({ length: items.value.length })
   const visibleItems = computed(() => {
+    if (endIndex.value > startIndex.value) return Math.ceil((endIndex.value - startIndex.value) * (1 + bufferRatio.value * 2))
     const height = (
       !contentRect.value || containerRef.value === document.documentElement
         ? display.height.value
@@ -63,7 +66,6 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   })
 
   function handleItemResize (index: number, height: number) {
-    itemHeight.value = Math.max(itemHeight.value, height)
     sizes[index] = height
     sizeMap.set(items.value[index], height)
   }
@@ -73,41 +75,47 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
       .reduce((acc, val) => acc! + (val || itemHeight.value), 0)!
   }
 
-  function calculateMidPointIndex (scrollTop: number) {
+  function calculateIndex (scrollTop: number) {
     const end = items.value.length
 
-    let middle = 0
-    let middleOffset = 0
-    while (middleOffset < scrollTop && middle <= end) {
-      const offset = sizes[middle] || itemHeight.value
-      middleOffset += isItemBeyondContainer.value && containerRef.value && middle === 0
+    let index = 0
+    let indexOffset = 0
+    while (indexOffset < scrollTop && index <= end) {
+      const offset = sizes[index] || itemHeight.value
+      indexOffset += isItemBeyondContainer.value && containerRef.value && index === 0
         ? (offset - containerRef.value.clientHeight)
         : offset
-      middle++
+      index++
     }
 
-    return middle - 2
+    return index - 1
   }
+
+  const last = computed(() => Math.min(items.value.length, first.value + visibleItems.value))
 
   let lastScrollTop = 0
   function handleScroll () {
     if (!containerRef.value || !contentRect.value) return
-
-    const height = containerRef.value.clientHeight
     const scrollTop = containerRef.value.scrollTop
     const direction = scrollTop < lastScrollTop ? UP : DOWN
 
-    const midPointIndex = calculateMidPointIndex(scrollTop + (isItemBeyondContainer.value ? itemHeight.value : (height / 2)))
-    const buffer = Math.ceil(visibleItems.value / (bufferRatioReceprocal.value + 2))
-    const firstIndex = Math.ceil(midPointIndex - visibleItems.value / 2)
-    const lastIndex = (first.value - 1) + buffer * (bufferRatioReceprocal.value + 2)
+    startIndex.value = calculateIndex(scrollTop)
+    endIndex.value = startIndex.value
+    let endOffset = sizes[startIndex.value]
 
-    if (direction === UP && (midPointIndex <= first.value + buffer * bufferRatioReceprocal.value / 2 || isItemBeyondContainer.value)) {
-      first.value = clamp(firstIndex, 0, items.value.length)
-    } else if (direction === DOWN &&
-        (midPointIndex >= lastIndex - buffer * (bufferRatioReceprocal.value / 2) || isItemBeyondContainer.value)
+    while (
+      contentRect.value &&
+      sizes[endIndex.value] &&
+      (endOffset! += sizes[endIndex.value]!) < sizes[startIndex.value]! + contentRect.value.height
     ) {
-      first.value = clamp(firstIndex, 0, items.value.length - visibleItems.value)
+      endIndex.value++
+    }
+    const buffer = isItemBeyondContainer.value ? 1 : Math.floor(visibleItems.value / (bufferRatioReceprocal.value + 2))
+
+    if (direction === UP) {
+      first.value = clamp(startIndex.value - buffer, 0, items.value.length)
+    } else if (direction === DOWN) {
+      first.value = clamp(startIndex.value - buffer, 0, items.value.length - visibleItems.value)
     }
     lastScrollTop = scrollTop
   }
@@ -119,8 +127,9 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     containerRef.value.scrollTop = offset
   }
 
-  const last = computed(() => Math.min(items.value.length, first.value + visibleItems.value))
   const computedItems = computed(() => {
+    console.log('--start end index---', startIndex.value, endIndex.value)
+    console.log('--rendering---', first.value, last.value, visibleItems.value)
     return items.value.slice(first.value, last.value).map((item, index) => ({
       raw: item,
       index: index + first.value,
