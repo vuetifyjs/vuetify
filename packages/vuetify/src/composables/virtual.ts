@@ -54,7 +54,9 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   const sizeMap = new Map<any, number>()
   let sizes = Array.from<number | null>({ length: items.value.length })
   const visibleItems = computed(() => {
-    if (endIndex.value > startIndex.value) return Math.ceil((endIndex.value - startIndex.value + 1) * (1 + bufferRatio.value * 2))
+    if (endIndex.value > startIndex.value && !itemHeight.value) {
+      return Math.ceil((endIndex.value - startIndex.value + 1) * (1 + bufferRatio.value * 2))
+    }
     const height = (
       !contentRect.value || containerRef.value === document.documentElement
         ? display.height.value
@@ -64,11 +66,6 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   })
 
   function handleItemResize (index: number, height: number) {
-    if (!itemHeight.value) {
-      itemHeight.value = height
-    } else {
-      itemHeight.value = Math.min(itemHeight.value, height)
-    }
     sizes[index] = height
     sizeMap.set(items.value[index], height)
   }
@@ -103,13 +100,13 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     const direction = scrollTop < lastScrollTop ? UP : DOWN
 
     startIndex.value = calculateIndex(scrollTop)
-    endIndex.value = startIndex.value
-    let endOffset = sizes[startIndex.value]
+    endIndex.value = startIndex.value || itemHeight.value
+    let endOffset = sizes[startIndex.value] || itemHeight.value
 
     while (
       contentRect.value &&
-      sizes[endIndex.value] &&
-      (endOffset! += sizes[endIndex.value]!) < sizes[startIndex.value]! + contentRect.value.height
+      (sizes[endIndex.value] || itemHeight.value) &&
+      (endOffset! += (sizes[endIndex.value] || itemHeight.value)) < (sizes[startIndex.value] || itemHeight.value) + contentRect.value.height
     ) {
       endIndex.value++
     }
