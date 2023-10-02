@@ -1,0 +1,5 @@
+@use 'sass:selector'
+
+@mixin reverse()
+  @at-root #{selector.append('v-slider--reversed')}
+    @content

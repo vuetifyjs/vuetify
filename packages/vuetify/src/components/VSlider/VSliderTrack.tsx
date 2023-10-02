@@ -138,7 +138,6 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
             {
               '--v-slider-track-size': convertToUnit(trackSize.value),
               '--v-slider-tick-size': convertToUnit(tickSize.value),
-              direction: !vertical.value ? horizontalDirection.value : undefined,
             },
             props.style,
           ]}

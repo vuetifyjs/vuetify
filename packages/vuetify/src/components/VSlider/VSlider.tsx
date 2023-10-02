@@ -10,7 +10,6 @@ import { VLabel } from '@/components/VLabel'
 // Composables
 import { makeSliderProps, useSlider, useSteps } from './slider'
 import { makeFocusProps, useFocus } from '@/composables/focus'
-import { useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -51,7 +50,6 @@ export const VSlider = genericComponent<VSliderSlots>()({
 
   setup (props, { slots, emit }) {
     const thumbContainerRef = ref()
-    const { rtlClasses } = useRtl()
 
     const steps = useSteps(props)
 
@@ -75,6 +73,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
       position,
       hasLabels,
       readonly,
+      isReversed,
     } = useSlider({
       props,
       steps,
@@ -106,8 +105,8 @@ export const VSlider = genericComponent<VSliderSlots>()({
               'v-slider--focused': isFocused.value,
               'v-slider--pressed': mousePressed.value,
               'v-slider--disabled': props.disabled,
+              'v-slider--reversed': isReversed.value,
             },
-            rtlClasses.value,
             props.class,
           ]}
           style={ props.style }

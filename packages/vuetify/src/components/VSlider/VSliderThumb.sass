@@ -4,6 +4,7 @@
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
+@use './tools' as *
 
 // Theme
 .v-slider-thumb
@@ -94,9 +95,8 @@
     top: 50%
     transform: translateY(-50%)
 
-    +tools.ltr()
-      left: calc(var(--v-slider-thumb-position) - var(--v-slider-thumb-size) / 2)
-    +tools.rtl()
+    left: calc(var(--v-slider-thumb-position) - var(--v-slider-thumb-size) / 2)
+    +reverse()
       right: calc(var(--v-slider-thumb-position) - var(--v-slider-thumb-size) / 2)
 
   .v-slider-thumb__label-container
@@ -106,9 +106,8 @@
   .v-slider-thumb__label
     bottom: $slider-thumb-label-offset
 
-    +tools.ltr()
-      transform: translateX(-50%)
-    +tools.rtl()
+    transform: translateX(-50%)
+    +reverse()
       transform: translateX(50%)
 
     &::before

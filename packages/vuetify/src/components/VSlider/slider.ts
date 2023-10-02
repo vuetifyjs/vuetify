@@ -180,7 +180,7 @@ export const useSlider = ({
   getActiveThumb: (e: MouseEvent | TouchEvent) => HTMLElement
 }) => {
   const { isRtl } = useRtl()
-  const isReversed = toRef(props, 'reverse')
+  const isReversed = computed(() => isRtl.value !== props.reverse)
   const vertical = computed(() => props.direction === 'vertical')
   const isNotVerticalAndReversed = computed(() => vertical.value !== isReversed.value)
   const horizontalDirection = computed(() => {

@@ -3,6 +3,7 @@
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
+@use './tools' as *
 
 // Theme
 .v-slider-track__background
@@ -48,17 +49,13 @@
   transform: translate(calc(var(--v-slider-tick-size) / -2), calc(var(--v-slider-tick-size) / -2))
 
   &--first .v-slider-track__tick-label
-    @include tools.ltr()
-      transform: none
-
-    @include tools.rtl()
+    transform: none
+    +reverse()
       transform: translateX(100%)
 
   &--last .v-slider-track__tick-label
-    @include tools.ltr()
-      transform: translateX(-100%)
-
-    @include tools.rtl()
+    transform: translateX(-100%)
+    +reverse()
       transform: none
 
 .v-slider-track__tick-label
@@ -84,36 +81,30 @@
   .v-slider-track__tick
     margin-top: calc(#{$slider-track-active-size} / 2)
 
-    @include tools.rtl()
+    +reverse()
       transform: translate(calc(var(--v-slider-tick-size) / 2), calc(var(--v-slider-tick-size) / -2))
 
     .v-slider-track__tick-label
       margin-top: calc(var(--v-slider-track-size) / 2 + #{$slider-tick-label-margin-top})
 
-      @include tools.ltr()
-        transform: translateX(-50%)
-
-      @include tools.rtl()
+      transform: translateX(-50%)
+      +reverse()
         transform: translateX(50%)
 
     &--first
       margin-inline-start: calc(var(--v-slider-tick-size) + 1px)
 
       .v-slider-track__tick-label
-        @include tools.ltr()
-          transform: translateX(0%)
-
-        @include tools.rtl()
+        transform: translateX(0%)
+        +reverse()
           transform: translateX(0%)
 
     &--last
       margin-inline-start: calc(100% - var(--v-slider-tick-size) - 1px)
 
       .v-slider-track__tick-label
-        @include tools.ltr()
-          transform: translateX(-100%)
-
-        @include tools.rtl()
+        transform: translateX(-100%)
+        +reverse()
           transform: translateX(100%)
 
 // Vertical
@@ -136,9 +127,9 @@
 
   .v-slider-track__tick
     margin-inline-start: calc(#{$slider-track-active-size} / 2)
-    transform: translate(calc(var(--v-slider-tick-size) / -2), calc(var(--v-slider-tick-size) / 2))
 
-    @include tools.rtl()
+    transform: translate(calc(var(--v-slider-tick-size) / -2), calc(var(--v-slider-tick-size) / 2))
+    +reverse()
       transform: translate(calc(var(--v-slider-tick-size) / 2), calc(var(--v-slider-tick-size) / 2))
 
     &--first
