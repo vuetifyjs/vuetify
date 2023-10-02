@@ -1,6 +1,6 @@
 ---
-nav: Items
 meta:
+  nav: Items
   title: Items
   description: Items
   keywords: items

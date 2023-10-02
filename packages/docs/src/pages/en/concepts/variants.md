@@ -1,6 +1,6 @@
 ---
-nav: Variants
 meta:
+  nav: Variants
   title: Variants
   description: Variants
   keywords: variants

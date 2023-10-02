@@ -73,8 +73,8 @@
   },
   {
     "title": "concepts",
-    "inactiveIcon": "mdi-hammer-sickle",
-    "activeIcon": "mdi-hammer-sickle",
+    "inactiveIcon": "mdi-puzzle-outline",
+    "activeIcon": "mdi-puzzle",
     "items": [
       "density-and-sizing",
       "items",

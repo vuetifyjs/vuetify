@@ -1,6 +1,6 @@
 ---
-nav: v-model
 meta:
+  nav: v-model
   title: v-model
   description: v-model
   keywords: v-model

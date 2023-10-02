@@ -1,6 +1,6 @@
 ---
-nav: Routing
 meta:
+  nav: Routing
   title: Routing
   description: Routing
   keywords: routing

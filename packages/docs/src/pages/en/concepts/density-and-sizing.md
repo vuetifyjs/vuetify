@@ -1,6 +1,6 @@
 ---
-nav: Density and sizing
 meta:
+  nav: Density and sizing
   title: Density and sizing
   description: Density and sizing
   keywords: density, sizing
