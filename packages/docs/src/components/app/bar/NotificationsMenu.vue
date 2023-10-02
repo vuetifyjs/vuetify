@@ -174,7 +174,7 @@
   const width = computed(() => mobile.value ? 420 : 520)
 
   function format (str: string) {
-    return date.format(new Date(str), 'normalDateWithWeekday')
+    return date.format(new Date(str), 'fullDateWithWeekday')
   }
   function onClick (notification: Notification) {
     toggle(notification)

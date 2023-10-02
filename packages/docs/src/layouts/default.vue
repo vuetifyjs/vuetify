@@ -56,6 +56,7 @@
   const route = useRoute()
 
   const isApi = computed(() => route.meta?.category === 'api')
-  const style = computed(() => ({ maxWidth: isApi.value ? '1368px' : '960px' }))
+  const isDashboard = computed(() => route.meta?.category === 'user')
+  const style = computed(() => ({ maxWidth: isApi.value || isDashboard.value ? '1368px' : '960px' }))
   const hasBackmatter = computed(() => !isApi.value && route.meta?.backmatter !== false)
 </script>

@@ -28,7 +28,7 @@ const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 
 
 export const makeVTextFieldProps = propsFactory({
   autofocus: Boolean,
-  counter: [Boolean, Number, String] as PropType<true | number | string>,
+  counter: [Boolean, Number, String],
   counterValue: [Number, Function] as PropType<number | ((value: any) => number)>,
   prefix: String,
   placeholder: String,
@@ -154,7 +154,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     }
 
     useRender(() => {
-      const hasCounter = !!(slots.counter || props.counter || props.counterValue)
+      const hasCounter = !!(slots.counter || (props.counter !== false && props.counter != null))
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const [{ modelValue: _, ...inputProps }] = VInput.filterProps(props)

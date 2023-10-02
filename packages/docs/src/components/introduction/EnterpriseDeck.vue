@@ -141,6 +141,10 @@
           emoji: '🎯',
           text: 'Get priority on reported or identified Vuetify GitHub issues and bugs',
         },
+        {
+          emoji: '🚌',
+          text: 'Great for large teams or companies with 3 or more developers',
+        },
       ],
       href: 'https://calendly.com/vuetify/sla-consultation',
     },

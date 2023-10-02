@@ -1,5 +1,6 @@
 // Composables
 import { useCosmic } from '@/composables/cosmic'
+import { useDate } from 'vuetify/labs/date'
 
 // Utilities
 import { defineStore } from 'pinia'
@@ -10,6 +11,7 @@ import { IS_PROD } from '@/util/globals'
 // Types
 interface Banner {
   status: 'published' | 'unpublished'
+  modified_at: string
   slug: string
   title: string
   metadata: {
@@ -67,13 +69,10 @@ export const useBannersStore = defineStore('banners', {
               'metadata.start_date': {
                 $lte: today,
               },
-              'metadata.end_date': {
-                $gte: today,
-              },
             })
-            .props('status,metadata,slug,title')
+            .props('status,metadata,slug,title,modified_at')
             .sort('metadata.start_date')
-            .limit(1)
+            .limit(2)
         ) || {}
 
         this.banners = objects
@@ -83,9 +82,16 @@ export const useBannersStore = defineStore('banners', {
   getters: {
     banner: state => {
       const name = state.router.currentRoute.value.meta.page
+      const date = useDate()
 
-      return state.banners.find(({ metadata: { visible }, status }) => {
+      return state.banners.find(({
+        metadata: { visible },
+        modified_at: modifiedAt,
+        status,
+      }) => {
         if (IS_PROD && status !== 'published') return false
+
+        if (!date.isBefore(date.date(modifiedAt), date.endOfDay(new Date()))) return false
 
         if (visible.key === 'both') return true
         // '' is home

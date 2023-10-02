@@ -111,6 +111,7 @@ The following built-in types are available:
 | **list-item-avatar-two-line** | avatar, sentences |
 | **list-item-three-line** | paragraph |
 | **list-item-avatar-three-line** | avatar, paragraph |
+| **ossein** | ossein |
 | **paragraph** | text@3 |
 | **sentences** | text@2 |
 | **subtitle** | text |

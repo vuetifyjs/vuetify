@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <v-divider />
+  <v-divider />
 
-    <git-hub-login />
-  </div>
+  <git-hub-login />
 </template>
 
 <script setup>

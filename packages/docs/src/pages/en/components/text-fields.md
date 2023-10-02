@@ -8,6 +8,11 @@ related:
   - /components/textareas/
   - /components/selects/
   - /components/forms/
+features:
+  label: 'C: VTextField'
+  report: true
+  github: /components/VTextField/
+  spec: https://m2.material.io/components/text-fields
 ---
 
 # Text fields
@@ -16,7 +21,7 @@ Text field components are used for collecting user provided information.
 
 ![Text-field Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-text-field/v-text-field-entry.png)
 
-----
+<page-features />
 
 ## Usage
 

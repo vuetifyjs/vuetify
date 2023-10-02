@@ -1,15 +1,15 @@
 <template>
   <v-btn
-    :aria-label="t('become-a-sponsor')"
+    :aria-label="t('see-more-projects')"
     :size="size"
-    :to="rpath('/introduction/sponsors-and-backers/')"
+    :to="rpath('/resources/made-with-vuetify/')"
     color="primary"
     variant="outlined"
     @click="onClick"
   >
     <span
       class="text-capitalize font-weight-regular"
-      v-text="t('become-a-sponsor')"
+      v-text="t('see-more-projects')"
     />
   </v-btn>
 </template>
@@ -24,7 +24,10 @@
   import { rpath } from '@/util/routes'
 
   defineProps({
-    size: String,
+    size: {
+      type: String,
+      default: 'large',
+    },
   })
 
   const { event } = useGtag()

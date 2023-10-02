@@ -280,6 +280,7 @@ export {
   mdiPlusOutline,
   mdiPost,
   mdiPound,
+  mdiPower,
   mdiPuzzleOutline,
   mdiRadioboxBlank,
   mdiRadioboxMarked,

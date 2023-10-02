@@ -2,15 +2,15 @@
   <v-defaults-provider
     :defaults="{
       VIcon: {
-        color: user.disableAds && auth.isSubscriber ? 'primary' : 'disabled'
+        color: user.railDrawer && auth.isSubscriber ? 'primary' : 'disabled'
       }
     }"
   >
     <settings-switch
-      v-model="user.disableAds"
+      v-model="user.railDrawer"
       :disabled="!auth.isSubscriber"
-      :label="t('dashboard.perks.disable-ads')"
-      :messages="t('dashboard.perks.disable-ads-message')"
+      :label="t('dashboard.perks.rail-drawer')"
+      :messages="t('dashboard.perks.rail-drawer-message')"
       :readonly="!auth.isSubscriber"
     />
   </v-defaults-provider>
