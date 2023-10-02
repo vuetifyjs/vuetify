@@ -91,7 +91,7 @@ Start off creating a nuxt app by executing the following commands:
 ```bash [yarn]
 yarn create nuxt-app <project-name>
 cd <project-name>
-yarn install
+yarn
 ```
 
 ```bash [npm]

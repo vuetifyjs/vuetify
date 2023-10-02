@@ -34,7 +34,7 @@ To begin modifying Vuetify's internal variables, install the [sass](https://sass
 ::: tabs
 
 ```bash [yarn]
-  yarn install -D sass
+  yarn add -D sass
 ```
 
 ```bash [npm]
