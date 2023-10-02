@@ -75,7 +75,7 @@ For lists where the item height is static and uniform for all items, it's recomm
 
 <example file="v-virtual-scroll/prop-item-height" />
 
-If your items are not of a uniform size, try to set the **item-height** prop to the average size of an item, for the best possible user experience. However if you have dynamic content with unknown size and omit the **item-height** prop, `v-virtual-scroll` will still dynamically calculate each item as the user scrolls.
+Set the **item-height** prop to the average size of an item if your items aren't uniformly sized; this will improve user experience. If you leave out the **item-height** prop due to dynamic, unknown-size content, **v-virtual-scroll** will dynamically calculate each item's size as the user scrolls. However, users might notice some jumping of the scrollbar when the component recalculates the height of the container as more items are rendered.
 
 <example file="v-virtual-scroll/prop-dynamic-item-height" />
 
