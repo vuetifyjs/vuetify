@@ -120,7 +120,7 @@ and then install the required Vuefity modules as dependencies:
 ::: tabs
 
 ```bash [yarn]
-yarn add --dev vuetify vite-plugin-vuetify
+yarn add -D vuetify vite-plugin-vuetify
 yarn add @mdi/font
 ```
 
