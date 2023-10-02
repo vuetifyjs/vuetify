@@ -54,9 +54,6 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   const sizeMap = new Map<any, number>()
   let sizes = Array.from<number | null>({ length: items.value.length })
   const visibleItems = computed(() => {
-    if (!itemHeight.value) {
-      return 1
-    }
     if (endIndex.value > startIndex.value && !props.itemHeight) {
       return Math.ceil((endIndex.value - startIndex.value + 1) * (1 + bufferRatio.value * 2))
     }
@@ -69,7 +66,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   })
 
   function handleItemResize (index: number, height: number) {
-    if (props.itemHeight) {
+    if (itemHeight.value) {
       itemHeight.value = Math.min(itemHeight.value, height)
     } else {
       itemHeight.value = height
