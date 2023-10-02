@@ -193,6 +193,6 @@
     if (tier.price === 'Free') return 'Join Community'
     if (tier.contact) return 'Contact Us'
 
-    return 'Purchase'
+    return 'Subscribe'
   }
 </script>
