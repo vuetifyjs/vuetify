@@ -257,6 +257,7 @@ app.use(vuetify).mount('#app')
 Follow these steps if for example you are adding Vuetify to an existing project, or simply do not want to use a scaffolding tool.
 
 ::: tabs
+
 ```bash [yarn]
 yarn add vuetify
 ```
@@ -272,6 +273,7 @@ pnpm i vuetify
 ```bash [bun]
 bun add vuetify
 ```
+
 :::
 
 ::: tip
