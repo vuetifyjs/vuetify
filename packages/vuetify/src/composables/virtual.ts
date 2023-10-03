@@ -123,9 +123,9 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
 
     const bufferOverflow = direction === UP
       ? Math.abs(calculateOffset(start) - calculateOffset(first.value))
-      : Math.abs(calculateOffset(end + 1) - calculateOffset(last.value + 1))
+      : Math.abs(calculateOffset(end) - calculateOffset(last.value))
 
-    if (bufferOverflow > bufferPx) {
+    if (bufferOverflow > bufferPx || start === 0 || end === items.value.length) {
       first.value = start
       last.value = end
     }
