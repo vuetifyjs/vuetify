@@ -88,7 +88,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     const val = scrollTop - lastScrollTop
     lastScrollTop = scrollTop
     if (
-      Math.sign(val) !== Math.sign(scrollVelocity) ||
+      (val && Math.sign(val) !== Math.sign(scrollVelocity)) ||
       Math.abs(val) > Math.abs(scrollVelocity)
     ) return scrollVelocity = val
 
@@ -98,11 +98,19 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     return scrollVelocity
   }
 
+  let raf = -1
   function calculateVisibleItems () {
+    cancelAnimationFrame(raf)
     if (!containerRef.value || !contentRect.value) return
     const scrollTop = containerRef.value.scrollTop
     const scrollVelocity = getScrollVelocity(scrollTop)
     const direction = Math.sign(scrollVelocity)
+
+    if (Math.abs(scrollVelocity) > contentRect.value.height) {
+      // We aren't rendering fast enough to keep up anyway, so don't bother
+      raf = requestAnimationFrame(calculateVisibleItems)
+      return
+    }
 
     const bufferPx = contentRect.value.height * BUFFER_RATIO
     const scrollBuffer = Math.min(contentRect.value.height, Math.abs(scrollVelocity) * 2)
