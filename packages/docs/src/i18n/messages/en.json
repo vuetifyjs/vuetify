@@ -168,6 +168,7 @@
   "hide-source": "Hide source",
   "homepage": "Vuetify Home Page",
   "icon": "Icon",
+  "icons": "Icons",
   "images-and-icons": "Images & icons",
   "inline": "Inline",
   "introduction": "Introduction",
@@ -255,6 +256,7 @@
   "scroll-to-top": "Scroll to top",
   "sass-variables": "SASS Variables",
   "search": {
+    "icons": "Search for icons (e.g. account, close)",
     "label": "Search",
     "looking": "Looking for",
     "key-hint": "Ctrl+K",

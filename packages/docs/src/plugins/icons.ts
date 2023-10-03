@@ -123,6 +123,7 @@ export {
   mdiEmailOpenOutline,
   mdiEmailOutline,
   mdiEmoticon,
+  mdiEmoticonOutline,
   mdiEmoticonCool,
   mdiEmoticonDead,
   mdiEmoticonExcited,
