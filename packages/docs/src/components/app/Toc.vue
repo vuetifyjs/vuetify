@@ -2,7 +2,7 @@
   <v-navigation-drawer
     v-if="!route.meta.fluid"
     id="app-toc"
-    v-model="app.toc"
+    v-model="tocDrawer"
     color="background"
     floating
     location="right"
@@ -29,10 +29,9 @@
       >
         <li
           :class="[
-            'ps-3 text-body-2 py-1 font-weight-regular',
+            'ps-3 text-medium-emphasis text-body-2 py-1 font-weight-regular',
             {
-              'text-primary router-link-active': route.hash === to,
-              'text-medium-emphasis': route.hash !== to,
+              'text-primary router-link-active': activeHeaders.temp == to || activeHeaders.hrefs.includes(to),
               'ps-6': level === 3,
               'ps-9': level === 4,
               'ps-12': level === 5,
@@ -126,6 +125,7 @@
 
   // Composables
   import { RouteLocation, Router, useRoute, useRouter } from 'vue-router'
+  import { storeToRefs } from 'pinia'
   import { useAppStore } from '@/store/app'
   // import { useGtag } from 'vue-gtag-next'
   import { useSponsorsStore } from '@/store/sponsors'
@@ -141,7 +141,7 @@
     level: number;
   }
 
-  const app = useAppStore()
+  const { toc: tocDrawer, activeHeaders } = storeToRefs(useAppStore())
 
   function useUpdateHashOnScroll (route: RouteLocation, router: Router) {
     const scrolling = ref(false)

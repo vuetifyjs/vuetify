@@ -1,6 +1,7 @@
 <template>
   <component
     :is="component"
+    v-intersect="href ? onIntersect : undefined"
     :class="classes"
   >
     <router-link
@@ -22,6 +23,10 @@
 <script setup>
   // Utilities
   import { computed } from 'vue'
+  import { storeToRefs } from 'pinia'
+
+  // Composables
+  import { useAppStore } from '@/store/app'
 
   const HEADING_CLASSES = {
     1: 'text-h3 text-sm-h3',
@@ -31,6 +36,8 @@
     5: 'text-subtitle-1 font-weight-medium',
   }
 
+  const { activeHeaders } = storeToRefs(useAppStore())
+
   const props = defineProps({
     content: String,
     href: String,
@@ -39,6 +46,17 @@
 
   const component = computed(() => `h${props.level}`)
   const classes = computed(() => ['v-heading', 'mb-2', HEADING_CLASSES[props.level]])
+
+  function onIntersect (isIntersecting) {
+    if (isIntersecting) {
+      if (!activeHeaders.value.hrefs.includes(props.href)) {
+        activeHeaders.value.hrefs.push(props.href)
+      }
+    } else if (!isIntersecting && activeHeaders.value.hrefs.includes(props.href)) {
+      activeHeaders.value.hrefs.splice(activeHeaders.value.hrefs.indexOf(props.href), 1)
+    }
+    activeHeaders.value.temp = !isIntersecting && !activeHeaders.value.hrefs.length ? props.href : ''
+  }
 </script>
 
 <style lang="sass">

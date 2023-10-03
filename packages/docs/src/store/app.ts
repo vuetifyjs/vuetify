@@ -12,6 +12,10 @@ export type Category = {
 
 export type RootState = {
   apiSearch: string
+  activeHeaders: {
+    hrefs: string[]
+    temp: string
+  }
   drawer: boolean | null
   toc: boolean | null
   items: NavItem[]
@@ -33,6 +37,10 @@ export const useAppStore = defineStore({
   id: 'app',
   state: () => ({
     apiSearch: '',
+    activeHeaders: {
+      hrefs: [],
+      temp: '',
+    },
     drawer: null,
     toc: null,
     items: Array.from(data),
