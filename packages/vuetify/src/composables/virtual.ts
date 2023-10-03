@@ -108,7 +108,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     const scrollBuffer = Math.min(contentRect.value.height, Math.abs(scrollVelocity) * 2)
 
     const startPx = Math.max(0, scrollTop - bufferPx - (direction === UP ? scrollBuffer : 0))
-    const start = calculateIndex(startPx)
+    const start = clamp(calculateIndex(startPx), 0, items.value.length)
     const startOffset = scrollTop - calculateOffset(start)
     let end = start
     let endOffset = getSize(start)
@@ -117,8 +117,18 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
       endOffset += getSize(end++)
     } while (endOffset < endPx && end < items.value.length)
 
-    first.value = clamp(start, 0, items.value.length)
-    last.value = clamp(end, 0, items.value.length)
+    end = clamp(end, 0, items.value.length)
+
+    if (start === first.value && end === last.value) return
+
+    const bufferOverflow = direction === UP
+      ? Math.abs(calculateOffset(start) - calculateOffset(first.value))
+      : Math.abs(calculateOffset(end + 1) - calculateOffset(last.value + 1))
+
+    if (bufferOverflow > bufferPx) {
+      first.value = start
+      last.value = end
+    }
   }
 
   function scrollToIndex (index: number) {
