@@ -73,11 +73,18 @@
   import { useAuth0 } from '@/plugins/auth'
   import { useI18n } from 'vue-i18n'
   import { useRoute, useRouter } from 'vue-router'
+  import { useDisplay } from 'vuetify'
 
   // Utilities
   import { computed } from 'vue'
   import { rpath } from '@/util/routes'
 
+  // Stores
+  import { useAppStore } from '@/store/app'
+
+  const app = useAppStore()
+  // TODO: update to isMobile when v3.4.0 is released
+  const { mobile } = useDisplay()
   const { t } = useI18n()
   const route = useRoute()
   const router = useRouter()
@@ -86,6 +93,8 @@
   const isDashboard = computed(() => route.meta?.category === 'user')
 
   function onClickDashboard () {
+    if (mobile.value) app.drawer = false
+
     router.push(rpath('/user/dashboard/'))
   }
 
