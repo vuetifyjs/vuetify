@@ -7,7 +7,15 @@
     prepend-inner-icon="mdi-magnify"
     single-line
     variant="outlined"
-  />
+  >
+    <template
+      v-for="(slot, index) of Object.keys($slots)"
+      #[slot]
+      :key="index"
+    >
+      <slot :name="slot" />
+    </template>
+  </v-text-field>
 </template>
 
 <script setup>
