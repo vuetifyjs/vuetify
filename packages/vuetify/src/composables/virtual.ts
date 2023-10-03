@@ -3,7 +3,7 @@ import { useDisplay } from '@/composables/display'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, ref, shallowRef, watch, watchEffect } from 'vue'
+import { computed, nextTick, ref, shallowRef, watch, watchEffect } from 'vue'
 import {
   clamp,
   createRange,
@@ -15,6 +15,7 @@ import type { Ref } from 'vue'
 
 const UP = -1
 const DOWN = 1
+const BUFFER_RATIO = 1 / 3
 
 type VirtualProps = {
   itemHeight?: number | string
@@ -23,39 +24,42 @@ type VirtualProps = {
 export const makeVirtualProps = propsFactory({
   itemHeight: {
     type: [Number, String],
-    default: 48,
+    default: null,
   },
 }, 'virtual')
 
 export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, offset?: Ref<number>) {
-  const first = shallowRef(0)
-  const baseItemHeight = shallowRef(props.itemHeight)
-  const itemHeight = computed({
-    get: () => parseInt(baseItemHeight.value ?? 0, 10),
-    set (val) {
-      baseItemHeight.value = val
-    },
+  const display = useDisplay()
+
+  const itemHeight = shallowRef(0)
+  watchEffect(() => {
+    itemHeight.value = parseFloat(props.itemHeight || 0)
   })
+
+  const first = shallowRef(0)
+  const last = shallowRef(itemHeight.value ? display.height.value / itemHeight.value : 1)
+
   const containerRef = ref<HTMLElement>()
   const { resizeRef, contentRect } = useResizeObserver()
   watchEffect(() => {
     resizeRef.value = containerRef.value
   })
-  const display = useDisplay()
+  const unwatch = watch(() => !!(containerRef.value && contentRect.value && itemHeight.value), v => {
+    if (!v) return
+    unwatch()
+    requestAnimationFrame(calculateVisibleItems)
+  })
 
   const sizeMap = new Map<any, number>()
   let sizes = Array.from<number | null>({ length: items.value.length })
-  const visibleItems = computed(() => {
-    const height = (
-      !contentRect.value || containerRef.value === document.documentElement
-        ? display.height.value
-        : contentRect.value.height
-    ) - (offset?.value ?? 0)
-    return Math.ceil((height / itemHeight.value) * 1.7 + 1)
-  })
+
+  function getSize (index: number) {
+    return sizes[index] || itemHeight.value
+  }
 
   function handleItemResize (index: number, height: number) {
-    itemHeight.value = Math.max(itemHeight.value, height)
+    if (!itemHeight.value) itemHeight.value = height
+    else itemHeight.value += (height - getSize(index)) / sizes.length
     sizes[index] = height
     sizeMap.set(items.value[index], height)
   }
@@ -65,37 +69,56 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
       .reduce((acc, val) => acc! + (val || itemHeight.value), 0)!
   }
 
-  function calculateMidPointIndex (scrollTop: number) {
+  function calculateIndex (scrollTop: number) {
     const end = items.value.length
 
-    let middle = 0
-    let middleOffset = 0
-    while (middleOffset < scrollTop && middle < end) {
-      middleOffset += sizes[middle++] || itemHeight.value
+    let index = 0
+    let indexOffset = 0
+    while (indexOffset < scrollTop && index <= end) {
+      indexOffset += getSize(index)
+      index++
     }
 
-    return middle - 1
+    return Math.max(0, index - 1)
   }
 
   let lastScrollTop = 0
-  function handleScroll () {
-    if (!containerRef.value || !contentRect.value) return
-
-    const height = contentRect.value.height - 56
-    const scrollTop = containerRef.value.scrollTop
-    const direction = scrollTop < lastScrollTop ? UP : DOWN
-
-    const midPointIndex = calculateMidPointIndex(scrollTop + height / 2)
-    const buffer = Math.round(visibleItems.value / 3)
-    const firstIndex = midPointIndex - buffer
-    const lastIndex = first.value + (buffer * 2) - 1
-    if (direction === UP && midPointIndex <= lastIndex) {
-      first.value = clamp(firstIndex, 0, items.value.length)
-    } else if (direction === DOWN && midPointIndex >= lastIndex) {
-      first.value = clamp(firstIndex, 0, items.value.length - visibleItems.value)
-    }
-
+  let scrollVelocity = 0
+  function getScrollVelocity (scrollTop: number) {
+    const val = scrollTop - lastScrollTop
     lastScrollTop = scrollTop
+    if (
+      Math.sign(val) !== Math.sign(scrollVelocity) ||
+      Math.abs(val) > Math.abs(scrollVelocity)
+    ) return scrollVelocity = val
+
+    scrollVelocity -= scrollVelocity / 10
+    scrollVelocity += val / 10
+
+    return scrollVelocity
+  }
+
+  function calculateVisibleItems () {
+    if (!containerRef.value || !contentRect.value) return
+    const scrollTop = containerRef.value.scrollTop
+    const scrollVelocity = getScrollVelocity(scrollTop)
+    const direction = Math.sign(scrollVelocity)
+
+    const bufferPx = contentRect.value.height * BUFFER_RATIO
+    const scrollBuffer = Math.min(contentRect.value.height, Math.abs(scrollVelocity) * 2)
+
+    const startPx = Math.max(0, scrollTop - bufferPx - (direction === UP ? scrollBuffer : 0))
+    const start = calculateIndex(startPx)
+    const startOffset = scrollTop - calculateOffset(start)
+    let end = start
+    let endOffset = getSize(start)
+    const endPx = startOffset + endOffset + contentRect.value.height + bufferPx + (direction === DOWN ? scrollBuffer : 0)
+    do {
+      endOffset += getSize(end++)
+    } while (endOffset < endPx && end < items.value.length)
+
+    first.value = clamp(start, 0, items.value.length)
+    last.value = clamp(end, 0, items.value.length)
   }
 
   function scrollToIndex (index: number) {
@@ -105,7 +128,6 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     containerRef.value.scrollTop = offset
   }
 
-  const last = computed(() => Math.min(items.value.length, first.value + visibleItems.value))
   const computedItems = computed(() => {
     return items.value.slice(first.value, last.value).map((item, index) => ({
       raw: item,
@@ -130,11 +152,10 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   return {
     containerRef,
     computedItems,
-    itemHeight,
     paddingTop,
     paddingBottom,
     scrollToIndex,
-    handleScroll,
+    calculateVisibleItems,
     handleItemResize,
   }
 }

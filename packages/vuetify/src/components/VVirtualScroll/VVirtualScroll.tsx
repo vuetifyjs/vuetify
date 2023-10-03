@@ -62,7 +62,7 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
     const { dimensionStyles } = useDimension(props)
     const {
       containerRef,
-      handleScroll,
+      calculateVisibleItems,
       handleItemResize,
       scrollToIndex,
       paddingTop,
@@ -73,10 +73,18 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
     useToggleScope(() => props.renderless, () => {
       onMounted(() => {
         containerRef.value = getScrollParent(vm.vnode.el as HTMLElement, true)
-        containerRef.value?.addEventListener('scroll', handleScroll)
+        if (containerRef.value === document.documentElement) {
+          document.addEventListener('scroll', calculateVisibleItems, { passive: true })
+        } else {
+          containerRef.value?.addEventListener('scroll', calculateVisibleItems, { passive: true })
+        }
       })
       onScopeDispose(() => {
-        containerRef.value?.removeEventListener('scroll', handleScroll)
+        if (containerRef.value === document.documentElement) {
+          document.removeEventListener('scroll', calculateVisibleItems)
+        } else {
+          containerRef.value?.removeEventListener('scroll', calculateVisibleItems)
+        }
       })
     })
 
@@ -104,7 +112,7 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
             'v-virtual-scroll',
             props.class,
           ]}
-          onScroll={ handleScroll }
+          onScroll={ calculateVisibleItems }
           style={[
             dimensionStyles.value,
             props.style,
