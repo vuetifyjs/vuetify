@@ -74,7 +74,7 @@
   if (IN_BROWSER) {
     let media: MediaQueryList
 
-    watch(auth0.user, async val => {
+    watch(auth0!.user, async val => {
       if (!val?.sub) return
 
       await auth.getUser()
