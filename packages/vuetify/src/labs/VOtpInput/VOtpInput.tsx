@@ -145,7 +145,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
           target = 'prev'
         } else {
           requestAnimationFrame(() => {
-            inputRef.value[index].select()
+            inputRef.value[index]?.select()
           })
         }
       }
@@ -201,7 +201,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       if (val < 0) return
 
       IN_BROWSER && window.requestAnimationFrame(() => {
-        inputRef.value[val].select()
+        inputRef.value[val]?.select()
       })
     })
 
