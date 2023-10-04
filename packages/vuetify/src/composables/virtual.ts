@@ -15,8 +15,10 @@ import {
 import type { Ref } from 'vue'
 
 const UP = -1
-const DOWN = 1
+// const DOWN = 1
 const BUFFER_RATIO = 1 / 3
+
+const SUPPORTS_SCROLLEND = 'onscrollend' in window
 
 type VirtualProps = {
   itemHeight?: number | string
@@ -142,6 +144,14 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
 
     calculateVisibleItems()
   }
+  function handleScrollend () {
+    if (!containerRef.value || !markerRef.value) return
+
+    scrollVelocity = 0
+    lastScrollTime = 0
+
+    calculateVisibleItems()
+  }
 
   let raf = -1
   function calculateVisibleItems () {
@@ -154,12 +164,12 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     const direction = Math.sign(scrollVelocity)
 
     const bufferPx = viewportHeight.value * BUFFER_RATIO
-    const scrollBuffer = Math.min(viewportHeight.value, Math.abs(scrollVelocity) * 2)
+    const scrollOffset = SUPPORTS_SCROLLEND ? scrollVelocity : 0
 
-    const startPx = Math.max(0, scrollTop - bufferPx - (direction === UP ? scrollBuffer : 0))
+    const startPx = Math.max(0, scrollTop - bufferPx + scrollOffset)
     const start = clamp(calculateIndex(startPx), 0, items.value.length)
 
-    const endPx = scrollTop + getSize(start) + viewportHeight.value + bufferPx + (direction === DOWN ? scrollBuffer : 0)
+    const endPx = scrollTop + getSize(start) + viewportHeight.value + bufferPx + scrollOffset
     const end = clamp(calculateIndex(endPx) + 1, start + 1, items.value.length)
 
     if (start === first.value && end === last.value) return
@@ -212,6 +222,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     paddingBottom,
     scrollToIndex,
     handleScroll,
+    handleScrollend,
     handleItemResize,
   }
 }
