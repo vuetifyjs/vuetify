@@ -196,7 +196,7 @@ export default createVuetify({
 </template>
 ```
 
-#### MDI - Icons search
+#### MDI - Icon search
 
 Use this tool to search for any Material Design Icons and copy them to your clipboard by clicking the item.
 
@@ -377,7 +377,7 @@ export default createVuetify({
 </template>
 ```
 
-#### FA 5 SVG Icons
+#### FA 5 - SVG
 
 Install the following packages.
 

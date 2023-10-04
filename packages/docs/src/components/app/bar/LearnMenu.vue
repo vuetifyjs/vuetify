@@ -49,7 +49,7 @@
     },
     {
       title: t('icons'),
-      to: rpath('/features/icon-fonts/#mdi-icons-search'),
+      to: rpath('/features/icon-fonts/#mdi-icon-search'),
       appendIcon: 'mdi-emoticon-outline',
     },
     {
