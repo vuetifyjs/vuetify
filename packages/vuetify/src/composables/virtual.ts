@@ -3,7 +3,7 @@ import { useDisplay } from '@/composables/display'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, nextTick, ref, shallowRef, watch, watchEffect } from 'vue'
+import { computed, ref, shallowRef, watch, watchEffect } from 'vue'
 import {
   clamp,
   createRange,
@@ -28,7 +28,7 @@ export const makeVirtualProps = propsFactory({
   },
 }, 'virtual')
 
-export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, offset?: Ref<number>) {
+export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   const display = useDisplay()
 
   const itemHeight = shallowRef(0)
@@ -40,14 +40,23 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   const last = shallowRef(itemHeight.value ? display.height.value / itemHeight.value : 1)
 
   const containerRef = ref<HTMLElement>()
+  const markerRef = ref<HTMLElement>()
   const { resizeRef, contentRect } = useResizeObserver()
   watchEffect(() => {
     resizeRef.value = containerRef.value
   })
-  const unwatch = watch(() => !!(containerRef.value && contentRect.value && itemHeight.value), v => {
+  const viewportHeight = computed(() => {
+    return containerRef.value === document.documentElement
+      ? display.height.value
+      : contentRect.value?.height || 0
+  })
+  const unwatch = watch(() => !!(containerRef.value && markerRef.value && viewportHeight.value && itemHeight.value), v => {
     if (!v) return
     unwatch()
     requestAnimationFrame(calculateVisibleItems)
+  })
+  watch(viewportHeight, (val, oldVal) => {
+    oldVal && calculateVisibleItems()
   })
 
   const sizeMap = new Map<any, number>()
@@ -101,26 +110,26 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   let raf = -1
   function calculateVisibleItems () {
     cancelAnimationFrame(raf)
-    if (!containerRef.value || !contentRect.value) return
-    const scrollTop = containerRef.value.scrollTop
+    if (!containerRef.value || !markerRef.value || !viewportHeight.value) return
+    const scrollTop = containerRef.value.scrollTop - markerRef.value.offsetTop
     const scrollVelocity = getScrollVelocity(scrollTop)
     const direction = Math.sign(scrollVelocity)
 
-    if (Math.abs(scrollVelocity) > contentRect.value.height) {
+    if (Math.abs(scrollVelocity) > viewportHeight.value) {
       // We aren't rendering fast enough to keep up anyway, so don't bother
       raf = requestAnimationFrame(calculateVisibleItems)
       return
     }
 
-    const bufferPx = contentRect.value.height * BUFFER_RATIO
-    const scrollBuffer = Math.min(contentRect.value.height, Math.abs(scrollVelocity) * 2)
+    const bufferPx = viewportHeight.value * BUFFER_RATIO
+    const scrollBuffer = Math.min(viewportHeight.value, Math.abs(scrollVelocity) * 2)
 
     const startPx = Math.max(0, scrollTop - bufferPx - (direction === UP ? scrollBuffer : 0))
     const start = clamp(calculateIndex(startPx), 0, items.value.length)
     const startOffset = scrollTop - calculateOffset(start)
     let end = start
     let endOffset = getSize(start)
-    const endPx = startOffset + endOffset + contentRect.value.height + bufferPx + (direction === DOWN ? scrollBuffer : 0)
+    const endPx = startOffset + endOffset + viewportHeight.value + bufferPx + (direction === DOWN ? scrollBuffer : 0)
     do {
       endOffset += getSize(end++)
     } while (endOffset < endPx && end < items.value.length)
@@ -169,6 +178,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
 
   return {
     containerRef,
+    markerRef,
     computedItems,
     paddingTop,
     paddingBottom,

@@ -88,16 +88,15 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     })
     const { isExpanded, toggleExpand } = provideExpanded(props)
 
-    const headerHeight = computed(() => headers.value.length * 56)
-
     const {
       containerRef,
+      markerRef,
       paddingTop,
       paddingBottom,
       computedItems,
       handleItemResize,
       calculateVisibleItems,
-    } = useVirtual(props, flatItems, headerHeight)
+    } = useVirtual(props, flatItems)
     const displayItems = computed(() => computedItems.value.map(item => item.raw))
 
     useOptions({
@@ -173,7 +172,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                     />
                   </thead>
                   <tbody>
-                    <tr style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
+                    <tr ref={ markerRef } style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
                       <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
                     </tr>
 
