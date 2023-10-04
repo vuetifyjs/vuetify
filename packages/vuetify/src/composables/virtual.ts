@@ -3,7 +3,7 @@ import { useDisplay } from '@/composables/display'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
+import { computed, nextTick, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
 import {
   clamp,
   createRange,
@@ -56,6 +56,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   let sizes = Array.from<number | null>({ length: items.value.length })
   const offsets = Array.from<number>({ length: items.value.length })
   const updateTime = shallowRef(0)
+  let targetScrollIndex = -1
 
   function getSize (index: number) {
     return sizes[index] || itemHeight.value
@@ -64,7 +65,8 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   const updateOffsets = debounce(() => {
     const start = performance.now()
     offsets[0] = 0
-    for (let i = 1; i <= items.value.length - 1; i++) {
+    const length = items.value.length
+    for (let i = 1; i <= length - 1; i++) {
       offsets[i] = (offsets[i - 1] || 0) + getSize(i - 1)
     }
     updateTime.value = Math.max(updateTime.value, performance.now() - start)
@@ -75,6 +77,15 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     unwatch()
     updateOffsets.immediate()
     calculateVisibleItems()
+
+    if (~targetScrollIndex) {
+      nextTick(() => {
+        requestAnimationFrame(() => {
+          scrollToIndex(targetScrollIndex)
+          targetScrollIndex = -1
+        })
+      })
+    }
   })
   watch(viewportHeight, (val, oldVal) => {
     oldVal && calculateVisibleItems()
@@ -85,15 +96,14 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   })
 
   function handleItemResize (index: number, height: number) {
+    const prevMinHeight = itemHeight.value
     if (!itemHeight.value) itemHeight.value = height
-    else itemHeight.value += (height - getSize(index)) / sizes.length
+    else itemHeight.value = Math.min(itemHeight.value, height)
     const prevHeight = sizes[index]
-    if (prevHeight !== height) {
+    if (prevHeight !== height || prevMinHeight !== itemHeight.value) {
       sizes[index] = height
       sizeMap.set(items.value[index], height)
-      if (height !== itemHeight.value) {
-        updateOffsets()
-      }
+      updateOffsets()
     }
   }
 
@@ -165,9 +175,12 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   }
 
   function scrollToIndex (index: number) {
-    if (!containerRef.value) return
-
-    containerRef.value.scrollTop = calculateOffset(index)
+    const offset = calculateOffset(index)
+    if (!containerRef.value || (index && !offset)) {
+      targetScrollIndex = index
+    } else {
+      containerRef.value.scrollTop = offset
+    }
   }
 
   const computedItems = computed(() => {
