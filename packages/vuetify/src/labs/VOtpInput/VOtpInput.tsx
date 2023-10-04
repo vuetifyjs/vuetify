@@ -107,7 +107,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       let target: any = null
 
       if (focusIndex.value > model.value.length) {
-        target = model.value.length + 1
+        target = model.value.length
       } else if (focusIndex.value + 1 !== Number(props.length)) {
         target = 'next'
       } else {
