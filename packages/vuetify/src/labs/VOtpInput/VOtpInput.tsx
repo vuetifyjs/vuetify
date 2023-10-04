@@ -183,6 +183,9 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
     provideDefaults({
       VField: {
+        color: computed(() => props.color),
+        bgColor: computed(() => props.color),
+        baseColor: computed(() => props.baseColor),
         disabled: computed(() => props.disabled),
         error: computed(() => props.error),
         variant: computed(() => props.variant),
