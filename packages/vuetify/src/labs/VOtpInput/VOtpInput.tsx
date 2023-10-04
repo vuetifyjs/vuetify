@@ -45,7 +45,7 @@ export const makeVOtpInputProps = propsFactory({
   placeholder: String,
   type: {
     type: String as PropType<'text' | 'password' | 'number'>,
-    default: 'text',
+    default: 'number',
   },
 
   ...makeDimensionProps(),
