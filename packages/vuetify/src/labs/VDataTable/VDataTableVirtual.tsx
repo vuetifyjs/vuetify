@@ -95,7 +95,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
       paddingBottom,
       computedItems,
       handleItemResize,
-      calculateVisibleItems,
+      handleScroll,
     } = useVirtual(props, flatItems)
     const displayItems = computed(() => computedItems.value.map(item => item.raw))
 
@@ -157,7 +157,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
             wrapper: () => (
               <div
                 ref={ containerRef }
-                onScroll={ calculateVisibleItems }
+                onScrollPassive={ handleScroll }
                 class="v-table__wrapper"
                 style={{
                   height: convertToUnit(props.height),

@@ -3,10 +3,11 @@ import { useDisplay } from '@/composables/display'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, ref, shallowRef, watch, watchEffect } from 'vue'
+import { computed, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
 import {
   clamp,
   createRange,
+  debounce,
   propsFactory,
 } from '@/util'
 
@@ -37,7 +38,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   })
 
   const first = shallowRef(0)
-  const last = shallowRef(itemHeight.value ? display.height.value / itemHeight.value : 1)
+  const last = shallowRef(display.height.value / (itemHeight.value || 16))
 
   const containerRef = ref<HTMLElement>()
   const markerRef = ref<HTMLElement>()
@@ -50,91 +51,106 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
       ? display.height.value
       : contentRect.value?.height || 0
   })
-  const unwatch = watch(() => !!(containerRef.value && markerRef.value && viewportHeight.value && itemHeight.value), v => {
-    if (!v) return
-    unwatch()
-    requestAnimationFrame(calculateVisibleItems)
-  })
-  watch(viewportHeight, (val, oldVal) => {
-    oldVal && calculateVisibleItems()
-  })
 
   const sizeMap = new Map<any, number>()
   let sizes = Array.from<number | null>({ length: items.value.length })
+  const offsets = Array.from<number>({ length: items.value.length })
+  const updateTime = shallowRef(0)
 
   function getSize (index: number) {
     return sizes[index] || itemHeight.value
   }
 
+  const updateOffsets = debounce(() => {
+    const start = performance.now()
+    offsets[0] = 0
+    for (let i = 1; i <= items.value.length - 1; i++) {
+      offsets[i] = (offsets[i - 1] || 0) + getSize(i - 1)
+    }
+    updateTime.value = Math.max(updateTime.value, performance.now() - start)
+  }, updateTime)
+
+  const unwatch = watch(() => !!(containerRef.value && markerRef.value && viewportHeight.value && itemHeight.value), v => {
+    if (!v) return
+    unwatch()
+    updateOffsets.immediate()
+    calculateVisibleItems()
+  })
+  watch(viewportHeight, (val, oldVal) => {
+    oldVal && calculateVisibleItems()
+  })
+
+  onScopeDispose(() => {
+    updateOffsets.clear()
+  })
+
   function handleItemResize (index: number, height: number) {
     if (!itemHeight.value) itemHeight.value = height
     else itemHeight.value += (height - getSize(index)) / sizes.length
-    sizes[index] = height
-    sizeMap.set(items.value[index], height)
+    const prevHeight = sizes[index]
+    if (prevHeight !== height) {
+      sizes[index] = height
+      sizeMap.set(items.value[index], height)
+      if (height !== itemHeight.value) {
+        updateOffsets()
+      }
+    }
   }
 
   function calculateOffset (index: number) {
-    return sizes.slice(0, index)
-      .reduce((acc, val) => acc! + (val || itemHeight.value), 0)!
+    index = clamp(index, 0, items.value.length - 1)
+    return offsets[index] || 0
   }
 
   function calculateIndex (scrollTop: number) {
-    const end = items.value.length
-
-    let index = 0
-    let indexOffset = 0
-    while (indexOffset < scrollTop && index <= end) {
-      indexOffset += getSize(index)
-      index++
-    }
-
-    return Math.max(0, index - 1)
+    return binaryClosest(offsets, scrollTop)
   }
 
   let lastScrollTop = 0
   let scrollVelocity = 0
-  function getScrollVelocity (scrollTop: number) {
-    const val = scrollTop - lastScrollTop
+  let lastScrollTime = 0
+  let markerOffset = 0
+  function handleScroll () {
+    if (!containerRef.value || !markerRef.value) return
+
+    const scrollTop = containerRef.value.scrollTop
+    const scrollTime = performance.now()
+    const scrollDeltaT = scrollTime - lastScrollTime
+
+    if (scrollDeltaT > 500) {
+      scrollVelocity = 0
+
+      // Not super important, only update at the
+      // start of a scroll sequence to avoid reflows
+      markerOffset = markerRef.value.offsetTop
+    } else {
+      scrollVelocity = scrollTop - lastScrollTop
+    }
+
     lastScrollTop = scrollTop
-    if (
-      (val && Math.sign(val) !== Math.sign(scrollVelocity)) ||
-      Math.abs(val) > Math.abs(scrollVelocity)
-    ) return scrollVelocity = val
+    lastScrollTime = scrollTime
 
-    scrollVelocity -= scrollVelocity / 10
-    scrollVelocity += val / 10
-
-    return scrollVelocity
+    calculateVisibleItems()
   }
 
   let raf = -1
   function calculateVisibleItems () {
     cancelAnimationFrame(raf)
-    if (!containerRef.value || !markerRef.value || !viewportHeight.value) return
-    const scrollTop = containerRef.value.scrollTop - markerRef.value.offsetTop
-    const scrollVelocity = getScrollVelocity(scrollTop)
+    raf = requestAnimationFrame(_calculateVisibleItems)
+  }
+  function _calculateVisibleItems () {
+    if (!containerRef.value || !viewportHeight.value) return
+    const scrollTop = lastScrollTop - markerOffset
     const direction = Math.sign(scrollVelocity)
-
-    if (Math.abs(scrollVelocity) > viewportHeight.value) {
-      // We aren't rendering fast enough to keep up anyway, so don't bother
-      raf = requestAnimationFrame(calculateVisibleItems)
-      return
-    }
 
     const bufferPx = viewportHeight.value * BUFFER_RATIO
     const scrollBuffer = Math.min(viewportHeight.value, Math.abs(scrollVelocity) * 2)
 
     const startPx = Math.max(0, scrollTop - bufferPx - (direction === UP ? scrollBuffer : 0))
     const start = clamp(calculateIndex(startPx), 0, items.value.length)
-    const startOffset = scrollTop - calculateOffset(start)
-    let end = start
-    let endOffset = getSize(start)
-    const endPx = startOffset + endOffset + viewportHeight.value + bufferPx + (direction === DOWN ? scrollBuffer : 0)
-    do {
-      endOffset += getSize(end++)
-    } while (endOffset < endPx && end < items.value.length)
 
-    end = clamp(end, 0, items.value.length)
+    const endPx = scrollTop + getSize(start) + viewportHeight.value + bufferPx + (direction === DOWN ? scrollBuffer : 0)
+    const end = clamp(calculateIndex(endPx) + 1, start + 1, items.value.length)
 
     if (start === first.value && end === last.value) return
 
@@ -142,7 +158,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
       ? Math.abs(calculateOffset(start) - calculateOffset(first.value))
       : Math.abs(calculateOffset(end) - calculateOffset(last.value))
 
-    if (bufferOverflow > bufferPx || start === 0 || end === items.value.length) {
+    if (bufferOverflow > bufferPx || start <= 0 || end >= items.value.length) {
       first.value = start
       last.value = end
     }
@@ -151,8 +167,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   function scrollToIndex (index: number) {
     if (!containerRef.value) return
 
-    const offset = calculateOffset(index)
-    containerRef.value.scrollTop = offset
+    containerRef.value.scrollTop = calculateOffset(index)
   }
 
   const computedItems = computed(() => {
@@ -183,7 +198,38 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     paddingTop,
     paddingBottom,
     scrollToIndex,
-    calculateVisibleItems,
+    handleScroll,
     handleItemResize,
   }
+}
+
+// https://gist.github.com/robertleeplummerjr/1cc657191d34ecd0a324
+function binaryClosest (arr: ArrayLike<number>, val: number) {
+  let high = arr.length - 1
+  let low = 0
+  let mid = 0
+  let item = null
+  let target = -1
+
+  if (arr[high]! < val) {
+    return high
+  }
+
+  while (low <= high) {
+    mid = (low + high) >> 1
+    item = arr[mid]!
+
+    if (item > val) {
+      high = mid - 1
+    } else if (item < val) {
+      target = mid
+      low = mid + 1
+    } else if (item === val) {
+      return mid
+    } else {
+      return low
+    }
+  }
+
+  return target
 }
