@@ -132,3 +132,41 @@ Just like selection, row items require a unique property on each item for expans
 <!-- You can also switch between allowing multiple expanded rows at the same time or just one with the **single-expand** prop. The expanded rows are available on the synced prop `expanded.sync`.  -->
 
 <example file="v-data-table/misc-expand" />
+
+## Headers and columns
+
+In all of the data-table components, we differentiate between **headers** and **columns**. When you use a data-table component, you provide it with **headers**, which is either a 1- or 2-dimensional array of items describing one or more rows of headers in the table. The **columns** of a data-table component are a subset of the headers, but is always a 1-dimensional array, and consists of those items that are part of the last row.
+
+Here is a data-table that uses multiple rows of headers to make use of the colspan and rowspan features. The **Properties** cell is not part of the **columns** array, because it is not a part of the last row, while the **Dessert (100g serving)** cell is, because it used **rowspan** to span both rows.
+
+<example file="v-data-table/headers-multiple" />
+
+## Examples
+
+### Column slot
+
+You can use the dynamic slots `column.<key>` to customize only certain columns. `<key>` corresponds to the **key** property in the items found in the **headers** prop.
+
+::: info
+  There are two built-in slots for customizing both the select (`column.data-table-select`) and expand (`column.data-table-expand`) columns when using **show-select** and **show-expand** props respectively.
+:::
+
+<example file="v-data-table/slot-header" />
+
+### Headers slot
+
+You can also override all the internal headers by using the `headers` slot. Remember that you will have to re-implement any internal functionality like sorting.
+
+<example file="v-data-table/slot-headers" />
+
+### Item slot
+
+Normally you would use the `item.<key>` slots to render custom markup in specific columns. If you instead need more control over the entire row, you can use the `item` slot.
+
+<example file="v-data-table/slot-item" />
+
+### Group header slot
+
+When using the **group-by** prop, you can customize the group header with the `group-header` slot.
+
+<example file="v-data-table/slot-group-header" />
