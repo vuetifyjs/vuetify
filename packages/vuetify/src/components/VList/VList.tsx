@@ -141,6 +141,7 @@ export const VList = genericComponent<new <T>(
     const activeColor = toRef(props, 'activeColor')
     const baseColor = toRef(props, 'baseColor')
     const color = toRef(props, 'color')
+    const focusedIndex = shallowRef<number | 'last' | undefined>(undefined)
 
     createList()
 
@@ -200,7 +201,7 @@ export const VList = genericComponent<new <T>(
 
     function focus (location?: 'next' | 'prev' | 'first' | 'last') {
       if (contentRef.value) {
-        return focusChild(contentRef.value, location)
+        focusedIndex.value = focusChild(contentRef.value, location)
       }
     }
 
@@ -248,6 +249,7 @@ export const VList = genericComponent<new <T>(
     return {
       open,
       select,
+      focusedIndex,
       focus,
     }
   },

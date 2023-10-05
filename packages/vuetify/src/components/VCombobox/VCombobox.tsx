@@ -215,7 +215,7 @@ export const VCombobox = genericComponent<new <
     ))
 
     const listRef = ref<VList>()
-    const { onListScroll, onListKeydown } = useScrolling(listRef, vTextFieldRef)
+    const { onListScroll, onListKeydown } = useScrolling(listRef, vTextFieldRef, vVirtualScrollRef, displayItems)
     function onClear (e: MouseEvent) {
       cleared = true
 
@@ -252,6 +252,13 @@ export const VCombobox = genericComponent<new <
 
       if (['Enter', 'ArrowDown'].includes(e.key)) {
         menu.value = true
+      }
+
+      if (['ArrowUp'].includes(e.key)) {
+        vVirtualScrollRef.value?.scrollToIndex(displayItems.value.length - 1)
+        window.requestAnimationFrame(() => {
+          listRef.value?.focus('last')
+        })
       }
 
       if (['Escape'].includes(e.key)) {

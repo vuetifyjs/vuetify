@@ -661,23 +661,29 @@ export function getNextElement (elements: HTMLElement[], location?: 'next' | 'pr
   return _el
 }
 
-export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last' | number) {
+export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last' | number): 'last' | number {
   const focusable = focusableChildren(el)
 
   if (!location) {
     if (el === document.activeElement || !el.contains(document.activeElement)) {
       focusable[0]?.focus()
+      return 0
     }
   } else if (location === 'first') {
     focusable[0]?.focus()
+    return 0
   } else if (location === 'last') {
     focusable.at(-1)?.focus()
+    return 'last'
   } else if (typeof location === 'number') {
     focusable[location]?.focus()
+    return location
   } else {
     const _el = getNextElement(focusable, location)
-    if (_el) _el.focus()
-    else focusChild(el, location === 'next' ? 'first' : 'last')
+    if (_el) {
+      _el.focus()
+      return focusable.indexOf(_el as HTMLElement)
+    } else focusChild(el, location === 'next' ? 'first' : 'last')
   }
 }
 
