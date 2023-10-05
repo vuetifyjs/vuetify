@@ -28,18 +28,19 @@ The following releases are currently under development:
 
 ### v3.4 (Blackguard)
 
+- **Release Banner:** [View](https://cdn.vuetifyjs.com/docs/images/release-banners/blackguard-34.png)
 - **Target Release:** Q3 2023
-- **Overview:** This release will be smaller in scope with a primary focus on expanding our testing coverage and will include 9 new components:
-  - `<v-bottom-sheet>`
-  - `<v-data-iterator>`
-  - `<v-data-table>`
-  - `<v-date-picker>`
-  - `<v-infinite-scroll>`
-  - `<v-otp-input>`
-  - `<v-overflow-btn>`
-  - `<v-skeleton-loader>`
+- **Overview:** This release will introduce 9 new components to the main framework from Labs in addition to other bug fixes and improvements.:
+  - [v-bottom-sheet](/components/bottom-sheets/)
+  - [v-data-iterator](/components/data-iterators/)
+  - [v-data-table](/components/data-tables/basics/)
+  - [v-date-picker](/components/date-pickers/)
+  - [v-infinite-scroll](/components/infinite-scroller/)
+  - [v-otp-input](/components/otp-input/)
+  - [v-skeleton-loader](/components/skeleton-loaders/)
+  - [v-stepper](/components/steppers/)
   - `<v-speed-dial>`
-  - `<v-stepper>`
+  - `<v-overflow-btn>`
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/61)
 
 ### Labs release schedule
