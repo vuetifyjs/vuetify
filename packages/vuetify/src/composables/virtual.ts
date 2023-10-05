@@ -9,6 +9,7 @@ import {
   createRange,
   debounce,
   propsFactory,
+  SUPPORTS_SCROLLEND,
 } from '@/util'
 
 // Types
@@ -17,8 +18,6 @@ import type { Ref } from 'vue'
 const UP = -1
 // const DOWN = 1
 const BUFFER_RATIO = 1 / 3
-
-const SUPPORTS_SCROLLEND = 'onscrollend' in window
 
 type VirtualProps = {
   itemHeight?: number | string
@@ -40,7 +39,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   })
 
   const first = shallowRef(0)
-  const last = shallowRef(display.height.value / (itemHeight.value || 16))
+  const last = shallowRef(display.height.value / (itemHeight.value || 16) || 1)
 
   const containerRef = ref<HTMLElement>()
   const markerRef = ref<HTMLElement>()
