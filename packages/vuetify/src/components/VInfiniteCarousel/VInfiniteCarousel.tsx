@@ -67,7 +67,12 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
             // Only apply the id to the center elements so I can guarentee that the
             // correct element is being used (for the infinite scroll effect)
             if (i === centerNumber) {
-              items.push(<div class="v-infinite-carousel__inner" id={ 'v-infinite-carousel__inner-' + options.carouselId }>{ slots.default() }</div>)
+              items.push(
+                <div class="v-infinite-carousel__inner"
+                     id={'v-infinite-carousel__inner-' + options.carouselId}>
+                  { slots.default() }
+                </div>
+              )
             } else {
               items.push(<div class="v-infinite-carousel__inner-"> { slots.default() } </div>)
             }
@@ -85,9 +90,8 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       let timerCounter = 0
 
       setInterval(() => {
-        const element = document.getElementById('v-infinite-carousel__inner-' + options.carouselId)
+        const element = document.getElementById('v-infinite-carousel__inner-' + options.carouselId);
         if (element?.parentElement) {
-
           if (!props.pause) {
             timerCounter++
 
