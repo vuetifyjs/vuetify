@@ -253,4 +253,40 @@ describe('VAutocomplete.ts', () => {
 
     expect(wrapper.vm.internalValue).toBeNull()
   })
+
+  it('should not remove selected item when text-field is cleared but chips prop is set', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo', 'bar'],
+        value: 'foo',
+        chips:true
+      },
+    })
+
+    const input = wrapper.find('input')
+
+    input.element.value = ''
+    input.trigger('input')
+
+    expect(wrapper.vm.internalValue).not.toBeNull()
+    expect(wrapper.vm.internalValue).toBe("foo")
+  })
+
+  it('should not remove selected item when text-field is cleared but small-chips prop is set', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo', 'bar'],
+        value: 'foo',
+        smallChips:true
+      },
+    })
+
+    const input = wrapper.find('input')
+
+    input.element.value = ''
+    input.trigger('input')
+
+    expect(wrapper.vm.internalValue).not.toBeNull()
+    expect(wrapper.vm.internalValue).toBe("foo")
+  })
 })
