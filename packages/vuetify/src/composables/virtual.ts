@@ -16,8 +16,8 @@ import {
 import type { Ref } from 'vue'
 
 const UP = -1
-// const DOWN = 1
-const BUFFER_RATIO = 1 / 3
+const DOWN = 1
+const BUFFER_PX = 100
 
 type VirtualProps = {
   itemHeight?: number | string
@@ -39,10 +39,14 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   })
 
   const first = shallowRef(0)
-  const last = shallowRef(display.height.value / (itemHeight.value || 16) || 1)
+  const last = shallowRef(Math.ceil(display.height.value / (itemHeight.value || 16) || 1))
+  const paddingTop = shallowRef(0)
+  const paddingBottom = shallowRef(0)
 
   const containerRef = ref<HTMLElement>()
   const markerRef = ref<HTMLElement>()
+  let markerOffset = 0
+
   const { resizeRef, contentRect } = useResizeObserver()
   watchEffect(() => {
     resizeRef.value = containerRef.value
@@ -76,6 +80,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   const unwatch = watch(() => !!(containerRef.value && markerRef.value && viewportHeight.value && itemHeight.value), v => {
     if (!v) return
     unwatch()
+    markerOffset = markerRef.value!.offsetTop
     updateOffsets.immediate()
     calculateVisibleItems()
 
@@ -120,7 +125,6 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   let lastScrollTop = 0
   let scrollVelocity = 0
   let lastScrollTime = 0
-  let markerOffset = 0
   function handleScroll () {
     if (!containerRef.value || !markerRef.value) return
 
@@ -129,7 +133,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     const scrollDeltaT = scrollTime - lastScrollTime
 
     if (scrollDeltaT > 500) {
-      scrollVelocity = 0
+      scrollVelocity = Math.sign(scrollTop - lastScrollTop)
 
       // Not super important, only update at the
       // start of a scroll sequence to avoid reflows
@@ -162,25 +166,34 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     const scrollTop = lastScrollTop - markerOffset
     const direction = Math.sign(scrollVelocity)
 
-    const bufferPx = viewportHeight.value * BUFFER_RATIO
     const scrollOffset = SUPPORTS_SCROLLEND ? scrollVelocity : 0
 
-    const startPx = Math.max(0, scrollTop - bufferPx + scrollOffset)
+    const startPx = Math.max(0, scrollTop - BUFFER_PX + scrollOffset)
     const start = clamp(calculateIndex(startPx), 0, items.value.length)
 
-    const endPx = scrollTop + getSize(start) + viewportHeight.value + bufferPx + scrollOffset
+    const endPx = scrollTop + getSize(start) + viewportHeight.value + BUFFER_PX + scrollOffset
     const end = clamp(calculateIndex(endPx) + 1, start + 1, items.value.length)
 
-    if (start === first.value && end === last.value) return
+    if (
+      (direction === UP && start >= first.value) ||
+      (direction === DOWN && end <= last.value)
+    ) return
 
-    const bufferOverflow = direction === UP
-      ? Math.abs(calculateOffset(start) - calculateOffset(first.value))
-      : Math.abs(calculateOffset(end) - calculateOffset(last.value))
+    const topOverflow = calculateOffset(first.value) - calculateOffset(start)
+    const bottomOverflow = calculateOffset(end) - calculateOffset(last.value)
+    const bufferOverflow = Math.max(topOverflow, bottomOverflow)
 
-    if (bufferOverflow > bufferPx || start <= 0 || end >= items.value.length) {
+    if (bufferOverflow > BUFFER_PX) {
       first.value = start
       last.value = end
+    } else {
+      // Only update the side that's reached its limit if there's still buffer left
+      if (start <= 0) first.value = start
+      if (end >= items.value.length) last.value = end
     }
+
+    paddingTop.value = calculateOffset(first.value)
+    paddingBottom.value = calculateOffset(items.value.length) - calculateOffset(last.value)
   }
 
   function scrollToIndex (index: number) {
@@ -198,8 +211,6 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
       index: index + first.value,
     }))
   })
-  const paddingTop = computed(() => calculateOffset(first.value))
-  const paddingBottom = computed(() => calculateOffset(items.value.length) - calculateOffset(last.value))
 
   watch(() => items.value.length, () => {
     sizes = createRange(items.value.length).map(() => itemHeight.value)
