@@ -58,10 +58,7 @@ export const VColorPickerCanvas = defineComponent({
 
         const { x, y } = val
 
-        _dotPosition.value = {
-          x,
-          y,
-        }
+        _dotPosition.value = { x, y }
 
         emit('update:color', {
           h: props.color?.h ?? 0,
