@@ -56,7 +56,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       numOfItems: 1, // The amount of items that are needed to fill the viewport ( * 3 for infinite scroll effect)
       carouselId: crypto.randomUUID(), // This is used to make sure that each carousel is accessed individually, and that no ids override (I am willing ti be money they won't with this method)
 
-      getItems() { // This works like a computed property
+      getItems () { // This works like a computed property
         const items = []
 
         if (slots.default) {
@@ -67,15 +67,15 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
             // Only apply the id to the center elements so I can guarentee that the
             // correct element is being used (for the infinite scroll effect)
             if (i === centerNumber) {
-              items.push(<div class='v-infinite-carousel__inner' id={'v-infinite-carousel__inner-' + options.carouselId}>{ slots.default() }</div>)
-            }else {
-              items.push(<div class='v-infinite-carousel__inner-'> { slots.default() } </div>)
+              items.push(<div class="v-infinite-carousel__inner" id={ 'v-infinite-carousel__inner-' + options.carouselId }>{ slots.default() }</div>)
+            } else {
+              items.push(<div class="v-infinite-carousel__inner-"> { slots.default() } </div>)
             }
           }
         }
 
         return items
-      }
+      },
     })
 
     onMounted(() => {
@@ -86,7 +86,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
 
       setInterval(() => {
         const element = document.getElementById('v-infinite-carousel__inner-' + options.carouselId)
-        if (element && element.parentElement) {
+        if (element?.parentElement) {
 
           if (!props.pause) {
             timerCounter++
@@ -94,7 +94,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
             if (timerCounter === props.speed) {
               if (props.reverse) {
                 element.parentElement.scrollLeft -= props.step
-              }else {
+              } else {
                 element.parentElement.scrollLeft += props.step
               }
               timerCounter = 0
@@ -124,7 +124,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
 
           if (scrollLeft + widthOfViewPort <= scrollPositionBefore) {
             element.parentElement.scrollLeft = ((widthOfOneItem * 2) - widthOfOneItem) - (widthOfOneItem - (scrollLeft + widthOfOneItem))
-          }else if (scrollLeft >= scrollPositionAfter) {
+          } else if (scrollLeft >= scrollPositionAfter) {
             element.parentElement.scrollLeft = widthOfOneItem + (scrollLeft - (widthOfOneItem * 2))
           }
         }
