@@ -29,6 +29,7 @@ export type VOtpInputSlots = {
 export const makeVOtpInputProps = propsFactory({
   autofocus: Boolean,
   divider: String,
+  fluid: Boolean,
   focusAll: Boolean,
   label: {
     type: String,
@@ -144,7 +145,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
           target = 'prev'
         } else {
           requestAnimationFrame(() => {
-            inputRef.value[index].select()
+            inputRef.value[index]?.select()
           })
         }
       }
@@ -200,7 +201,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       if (val < 0) return
 
       IN_BROWSER && window.requestAnimationFrame(() => {
-        inputRef.value[val].select()
+        inputRef.value[val]?.select()
       })
     })
 
@@ -213,6 +214,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
             'v-otp-input',
             {
               'v-otp-input--divided': !!props.divider,
+              'v-otp-input--fluid': props.fluid,
             },
             props.class,
           ]}

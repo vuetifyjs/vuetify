@@ -1,2 +1,6 @@
 @use '../../styles/settings';
 @use '../../styles/tools';
+
+$otp-input-content-gap: .5rem !default;
+$otp-input-content-padding: .5rem 0 !default;
+$otp-input-padding: .5rem 0 !default;
