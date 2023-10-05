@@ -238,19 +238,58 @@ describe('VAutocomplete.ts', () => {
     expect(onSearch).toHaveBeenCalledTimes(2)
   })
 
-  it('should reset selected item when text-field is cleared if not multiple', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        items: ['foo', 'bar'],
-        value: 'foo',
-      },
+  describe("input clearing", ()=>{
+
+    it('should reset selected item when text-field is cleared if not multiple', () => {
+      const wrapper = mountFunction({
+        propsData: {
+          items: ['foo', 'bar'],
+          value: 'foo',
+        },
+      })
+
+      const input = wrapper.find('input')
+
+      input.element.value = ''
+      input.trigger('input')
+
+      expect(wrapper.vm.internalValue).toBeNull()
     })
 
-    const input = wrapper.find('input')
+    it('should not remove selected item when text-field is cleared but chips prop is set', () => {
+      const wrapper = mountFunction({
+        propsData: {
+          items: ['foo', 'bar'],
+          value: 'foo',
+          chips:true
+        },
+      })
 
-    input.element.value = ''
-    input.trigger('input')
+      const input = wrapper.find('input')
 
-    expect(wrapper.vm.internalValue).toBeNull()
+      input.element.value = ''
+      input.trigger('input')
+
+      expect(wrapper.vm.internalValue).not.toBeNull()
+      expect(wrapper.vm.internalValue).toBe("foo")
+    })
+
+    it('should not remove selected item when text-field is cleared but small-chips prop is set', () => {
+      const wrapper = mountFunction({
+        propsData: {
+          items: ['foo', 'bar'],
+          value: 'foo',
+          smallChips:true
+        },
+      })
+
+      const input = wrapper.find('input')
+
+      input.element.value = ''
+      input.trigger('input')
+
+      expect(wrapper.vm.internalValue).not.toBeNull()
+      expect(wrapper.vm.internalValue).toBe("foo")
+    })
   })
 })
