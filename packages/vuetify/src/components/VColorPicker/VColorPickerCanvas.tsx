@@ -57,6 +57,7 @@ export const VColorPickerCanvas = defineComponent({
         if (!canvasRef.value) return
 
         const { x, y } = val
+        _dotPosition.value = val
 
         emit('update:color', {
           h: props.color?.h ?? 0,
