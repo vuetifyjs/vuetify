@@ -22,6 +22,8 @@
 
     <v-container class="px-3 py-3">
       <options />
+
+      <developer-mode />
     </v-container>
 
     <template #append>
@@ -33,6 +35,7 @@
 <script setup>
   // Components
   import AppSettingsAppend from './Append.vue'
+  import DeveloperMode from '@/components/app/settings/DeveloperMode.vue'
   import Options from '@/components/app/settings/Options.vue'
 
   // Composables

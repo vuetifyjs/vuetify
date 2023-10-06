@@ -140,6 +140,7 @@
           :text="t('joined', { date: member.joined })"
           border
           prepend-icon="mdi-calendar"
+          label
           size="small"
           variant="text"
         >

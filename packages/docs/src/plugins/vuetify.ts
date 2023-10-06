@@ -18,9 +18,9 @@ import * as mdiSvg from './icons'
 import { en, sv } from 'vuetify/locale'
 
 // Types
-import type { ViteSSGContext } from '@vuetify/vite-ssg'
+import type { App } from 'vue'
 
-export function installVuetify ({ app }: ViteSSGContext) {
+export function installVuetify (app: App) {
   const vuetify = createVuetify({
     aliases: {
       PageFeatureChip: components.VChip,

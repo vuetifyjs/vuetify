@@ -40,9 +40,9 @@ import VueFile from '@/components/examples/VueFile.vue'
 import Vuetify from '@/components/promoted/Vuetify.vue'
 
 // Types
-import type { ViteSSGContext } from '@vuetify/vite-ssg'
+import type { App } from 'vue'
 
-export function installGlobalComponents ({ app }: ViteSSGContext) {
+export function installGlobalComponents (app: App) {
   app
     .component('AppBtn', AppBtn)
     .component('AppCaption', AppCaption)
