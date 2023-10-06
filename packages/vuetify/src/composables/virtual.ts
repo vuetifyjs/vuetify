@@ -219,6 +219,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
         sizes[index] = height
       }
     })
+    calculateVisibleItems()
   })
 
   return {
