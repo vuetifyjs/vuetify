@@ -21,7 +21,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { computed, ref, shallowRef, toRef } from 'vue'
+import { computed, readonly, ref, shallowRef, toRef } from 'vue'
 import { focusChild, genericComponent, getPropertyFromItem, pick, propsFactory, useRender } from '@/util'
 
 // Types
@@ -249,7 +249,7 @@ export const VList = genericComponent<new <T>(
     return {
       open,
       select,
-      focusedIndex,
+      focusedIndex: readonly(focusedIndex),
       focus,
     }
   },

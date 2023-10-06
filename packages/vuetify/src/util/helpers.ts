@@ -661,7 +661,8 @@ export function getNextElement (elements: HTMLElement[], location?: 'next' | 'pr
   return _el
 }
 
-export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last' | number): 'last' | number {
+/** Returns focused child index */
+export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last' | number): 'last' | number | undefined {
   const focusable = focusableChildren(el)
 
   if (!location) {
@@ -685,6 +686,7 @@ export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 
       return focusable.indexOf(_el as HTMLElement)
     } else focusChild(el, location === 'next' ? 'first' : 'last')
   }
+  return undefined
 }
 
 export function isEmpty (val: any): boolean {
