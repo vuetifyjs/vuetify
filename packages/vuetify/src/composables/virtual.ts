@@ -9,7 +9,6 @@ import {
   createRange,
   debounce,
   propsFactory,
-  SUPPORTS_SCROLLEND,
 } from '@/util'
 
 // Types
@@ -166,12 +165,10 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     const scrollTop = lastScrollTop - markerOffset
     const direction = Math.sign(scrollVelocity)
 
-    const scrollOffset = SUPPORTS_SCROLLEND ? scrollVelocity : 0
-
-    const startPx = Math.max(0, scrollTop - BUFFER_PX + scrollOffset)
+    const startPx = Math.max(0, scrollTop - BUFFER_PX)
     const start = clamp(calculateIndex(startPx), 0, items.value.length)
 
-    const endPx = scrollTop + getSize(start) + viewportHeight.value + BUFFER_PX + scrollOffset
+    const endPx = scrollTop + getSize(start) + viewportHeight.value + BUFFER_PX
     const end = clamp(calculateIndex(endPx) + 1, start + 1, items.value.length)
 
     if (
