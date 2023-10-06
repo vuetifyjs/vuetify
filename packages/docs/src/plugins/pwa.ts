@@ -3,11 +3,9 @@ import { usePwaStore } from '@/store/pwa'
 import { useUserStore } from '@/store/user'
 
 // Types
-import type { ViteSSGContext } from '@vuetify/vite-ssg'
+import type { Router } from 'vue-router'
 
-export async function installPwa ({ isClient, router }: ViteSSGContext) {
-  if (!isClient) return
-
+export async function installPwa (router: Router) {
   const { registerSW } = await import('virtual:pwa-register')
 
   await router.isReady()
