@@ -9,21 +9,7 @@
       />
     </div> -->
     <app-headline v-if="showHeadline" :path="`api-headers.${section}`" />
-    <template v-if="['props', 'argument', 'modifiers'].includes(section)">
-      <PropsTable :items="items" />
-    </template>
-    <template v-else-if="section === 'events'">
-      <EventsTable :items="items" />
-    </template>
-    <template v-else-if="section === 'slots'">
-      <SlotsTable :items="items" />
-    </template>
-    <template v-else-if="section === 'exposed'">
-      <ExposedTable :items="items" />
-    </template>
-    <template v-else-if="section === 'sass'">
-      <SassTable :items="items" />
-    </template>
+    <TableComponent :name="name" :items="items" />
   </div>
 </template>
 
@@ -40,7 +26,10 @@
 
   // Utilities
   import { Item } from './utils'
-  import { ref, watch } from 'vue'
+  import { computed, ref, watch } from 'vue'
+
+  // Data
+  import newIn from '@/data/new-in.json'
 
   const getApi = (name: string) => {
     return import(`../../../../api-generator/dist/api/${name}.json`)
@@ -61,6 +50,22 @@
   const store = useLocaleStore()
   const items = ref()
 
+  const TableComponent = computed(() => {
+    if (['props', 'argument', 'modifiers'].includes(props.section)) {
+      return PropsTable
+    } else if (props.section === 'events') {
+      return EventsTable
+    } else if (props.section === 'slots') {
+      return SlotsTable
+    } else if (props.section === 'exposed') {
+      return ExposedTable
+    } else if (props.section === 'sass') {
+      return SassTable
+    }
+
+    return PropsTable
+  })
+
   async function fetchApiData () {
     try {
       const api = (await getApi(props.name)).default
@@ -68,11 +73,15 @@
         throw new Error(`API section "${props.section}" for "${props.name}" does not exist`)
       }
       const section = (api[props.section] ?? {}) as Record<string, Item>
+      const _newIn = newIn as Record<string, Record<string, Record<string, string>>>
+
       items.value = Object.entries(section).reduce<any>((arr, [name, prop]) => {
         arr.push({
           ...prop,
           name,
+          newIn: _newIn?.[props.name]?.[props.section]?.[name],
           description: prop.description?.[store.locale],
+          descriptionSource: prop.descriptionSource?.[store.locale],
         })
         return arr
       }, []).sort((a: any, b: any) => a.name.localeCompare(b.name))

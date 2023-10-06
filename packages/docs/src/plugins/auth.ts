@@ -2,7 +2,6 @@
 import { useAuth0 as _useAuth0, createAuth0 } from '@auth0/auth0-vue'
 
 // Types
-import type { Auth0Plugin } from '@auth0/auth0-vue'
 import type { ViteSSGContext } from '@vuetify/vite-ssg'
 
 // Globals
@@ -23,7 +22,7 @@ export function installAuth0 (ctx: ViteSSGContext) {
 }
 
 export function useAuth0 () {
-  if (!IN_BROWSER) return {} as Auth0Plugin
+  if (!IN_BROWSER) return
 
   return _useAuth0()
 }

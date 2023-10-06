@@ -3,6 +3,8 @@ export interface DateAdapter<T> {
   format (date: T, formatString: string): string
   toJsDate (value: T): Date
 
+  startOfDay (date: T): T
+  endOfDay (date: T): T
   startOfMonth (date: T): T
   endOfMonth (date: T): T
   startOfYear (date: T): T

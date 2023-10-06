@@ -8,6 +8,10 @@ related:
   - /components/inputs/
   - /components/text-fields/
   - /components/forms/
+features:
+  label: 'C: VOtpInput'
+  github: /labs/VOtpInput/
+  report: true
 ---
 
 # OTP Input
@@ -16,10 +20,12 @@ The OTP input is used for MFA procedure of authenticating users by a one-time pa
 
 ![Otp input Entry](https://cdn.vuetifyjs.com/docs/images/components/v-otp-input/v-otp-input-entry.png){ height=300 }
 
-----
+<page-features />
 
 ::: warning
+
 This feature requires [v3.3.11](/getting-started/release-notes/?version=v3.3.11)
+
 :::
 
 ## Usage

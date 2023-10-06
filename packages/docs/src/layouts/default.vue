@@ -4,8 +4,6 @@
 
     <app-banner />
 
-    <app-v2-banner />
-
     <app-bar />
 
     <app-drawer />
@@ -43,7 +41,6 @@
   // Components
   import AppBanner from '@/components/app/Banner.vue'
   import AppBackToTop from '@/components/app/BackToTop.vue'
-  import AppV2Banner from '@/components/app/V2Banner.vue'
   import AppBar from '@/components/app/bar/Bar.vue'
   import AppDrawer from '@/components/app/drawer/Drawer.vue'
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
@@ -59,6 +56,7 @@
   const route = useRoute()
 
   const isApi = computed(() => route.meta?.category === 'api')
-  const style = computed(() => ({ maxWidth: isApi.value ? '1368px' : '960px' }))
+  const isDashboard = computed(() => route.meta?.category === 'user')
+  const style = computed(() => ({ maxWidth: isApi.value || isDashboard.value ? '1368px' : '960px' }))
   const hasBackmatter = computed(() => !isApi.value && route.meta?.backmatter !== false)
 </script>

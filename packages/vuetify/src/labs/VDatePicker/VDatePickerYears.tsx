@@ -36,7 +36,7 @@ export const VDatePickerYears = genericComponent()({
       const min = props.min ? adapter.date(props.min).getFullYear() : displayYear.value - 100
       const max = props.max ? adapter.date(props.max).getFullYear() : displayYear.value + 50
 
-      return createRange(max - min, min)
+      return createRange(max - min + 1, min)
     })
 
     const yearRef = ref<VBtn>()

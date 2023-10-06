@@ -1,10 +1,12 @@
 <!-- eslint-disable vue/attribute-hyphenation  -->
 <template>
+  <!-- possible bug with dialog overflow with scrollable -->
   <v-dialog
     v-model="model"
-    height="700"
+    content-class="overflow-visible"
+    height="500"
     scrollable
-    width="500"
+    width="600"
     @after-leave="searchString = ''"
   >
     <template #activator="{ props: activatorProps }">
@@ -56,12 +58,13 @@
         v-model="searchString"
         :placeholder="`${t('search.looking') }...`"
         autofocus
-        class="flex-grow-0"
-        variant="filled"
+        class="flex-grow-0 pa-4"
+        clearable
+        variant="outlined"
       />
 
-      <v-card-text class="pa-4">
-        <div v-if="!searchString" class="mt-16 pt-16 text-center">
+      <v-card-text class="px-4 pb-4 pt-0">
+        <div v-if="!searchString" class="mt-6 text-center">
           <v-icon
             class="mb-6 mx-auto text-disabled"
             icon="mdi-text-box-search-outline"
@@ -78,8 +81,8 @@
         <ais-instant-search
           v-else
           :search-client="searchClient"
-          :search-function="searchFunction"
           index-name="vuetifyjs-v3"
+          @state-change="searchFunction"
         >
           <ais-configure
             :facetFilters="[`lang:${locale}`]"

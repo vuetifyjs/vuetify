@@ -11,6 +11,8 @@ meta:
   import HomeFeatures from '@/components/home/Features.vue'
   import HomeSpecialSponsor from '@/components/home/SpecialSponsor.vue'
   import HomeSponsors from '@/components/home/Sponsors.vue'
+  import MadeWithVuetify from '@/components/doc/MadeWithVuetify.vue'
+  import MadeWithVuetifyLink from '@/components/doc/MadeWithVuetifyLink.vue'
 </script>
 
 <home-entry />
@@ -30,3 +32,21 @@ meta:
 The continued development and maintenance of Vuetify is made possible by these generous sponsors:{style="max-width: 568px" .mx-auto .px-4}
 
 <home-sponsors />
+
+<br>
+
+<v-divider style="max-width: 500px;" class="mx-auto" />
+
+<br>
+
+## Made With Vuetify
+
+Check out these beautiful apps, plugins, and themes built using Vuetify.{style="max-width: 568px" .mx-auto .px-4}
+
+<made-with-vuetify />
+
+<made-with-vuetify-link />
+
+<br>
+<br>
+<br>

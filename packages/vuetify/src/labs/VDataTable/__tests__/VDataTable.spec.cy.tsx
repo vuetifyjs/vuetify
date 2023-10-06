@@ -266,7 +266,7 @@ describe('VDataTable', () => {
               colgroup: ({ columns }) => (
                 <colgroup>
                   { columns.map(column => (
-                    <col id={ column.key }></col>
+                    <col id={ column.key! }></col>
                   ))}
                 </colgroup>
               ),
@@ -303,12 +303,14 @@ describe('VDataTable', () => {
         <Application>
           <VDataTable items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS } itemsPerPage={ 10 }>
             {{
-              item: ({ columns, item }) => (
+              item: ({ columns, internalItem }) => (
                 <tr class="custom-row">
                   { columns.map(column => (
-                    <td>
-                      <h1>{ item.columns[column.key] }</h1>
-                    </td>
+                    column.key != null ? (
+                      <td>
+                        <h1>{ internalItem.columns[column.key] }</h1>
+                      </td>
+                    ) : null
                   ))}
                 </tr>
               ),
@@ -327,8 +329,8 @@ describe('VDataTable', () => {
             {{
               'item.data-table-expand': () => <h1>expand</h1>,
               'item.data-table-select': () => <h2>select</h2>,
-              'item.name': ({ item }) => (
-                <h3>{ item.columns.name }</h3>
+              'item.name': ({ value }) => (
+                <h3>{ value }</h3>
               ),
             }}
           </VDataTable>

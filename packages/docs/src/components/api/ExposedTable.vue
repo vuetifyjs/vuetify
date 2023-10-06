@@ -1,8 +1,8 @@
 <template>
   <ApiTable>
-    <template #row="{ props, ...item }">
+    <template #row="{ props, item }">
       <tr v-bind="props">
-        <NameCell section="exposed" :name="item.name" />
+        <NameCell section="exposed" :name="item.name" :new-in="item.newIn" />
       </tr>
 
       <tr>

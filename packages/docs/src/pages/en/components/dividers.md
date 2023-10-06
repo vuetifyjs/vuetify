@@ -8,6 +8,11 @@ related:
   - /components/lists
   - /components/navigation-drawers
   - /components/toolbars
+features:
+  github: /components/VDivider/
+  label: 'C: VDivider'
+  report: true
+  spec: https://m2.material.io/components/dividers
 ---
 
 # Dividers
@@ -16,7 +21,7 @@ The `v-divider` component is used to separate sections of lists or layouts.
 
 <!-- ![divider Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-divider/v-divider-entry.png) -->
 
-----
+<page-features />
 
 ## Usage
 
@@ -25,7 +30,9 @@ Dividers in their simplest form display a horizontal line.
 <usage name="v-divider" />
 
 ::: info
-  This example uses the **border-opacity** utility class and is not available when **$utilities** is set to **false**. More information regarding utility classes is located on the [SASS variables page](features/sass-variables/#basic-usage).
+
+This example uses the **border-opacity** utility class and is not available when **$utilities** is set to **false**. More information regarding utility classes is located on the [SASS variables page](features/sass-variables/#basic-usage).
+
 :::
 
 <entry />

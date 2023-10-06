@@ -1,6 +1,6 @@
 ---
 meta:
-  nav: Vuetify Themes
+  nav: Themes
   title: Free & Premium Vuetify themes
   description: Vuetify offers numerous pre-build starter and premium themes. Kickstart your next application today, no design skills needed.
   keywords: vuetify themes, pre-built material themes, premium themes

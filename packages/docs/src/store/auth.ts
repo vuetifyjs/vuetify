@@ -6,53 +6,58 @@ import { useUserStore } from './user'
 
 // Utilities
 import { defineStore } from 'pinia'
-import { ref, shallowRef } from 'vue'
+import { computed, ref, shallowRef } from 'vue'
 
 export const useAuthStore = defineStore('auth', () => {
   const auth = useAuth0()
   const user = useUserStore()
 
-  const isUpdating = shallowRef(false)
-  const admin = shallowRef(false)
-  const sponsor = ref(false)
-  const url = import.meta.env.VITE_COSMIC_USER_URL
+  const url = import.meta.env.VITE_API_SERVER_URL
+  const admin = shallowRef(!url)
+  const sponsor = ref([])
+
+  const isSubscriber = computed(() => {
+    return !url || !!sponsor.value.find((s: any) => s.monthlyPriceInDollars >= 1) || admin.value
+  })
 
   user.$subscribe(() => {
     updateUser()
   })
 
+  let isUpdating = false
   async function updateUser () {
-    const local = localStorage.getItem('vuetify@user')
+    if (isUpdating || !url || !user.syncSettings || !auth?.user.value) return
 
-    if (!auth?.user?.value?.sub || !url || !local || isUpdating.value) return
+    const token = await auth.getAccessTokenSilently({ detailedResponse: true })
 
-    const settings = JSON.parse(local)
+    isUpdating = true
 
-    if (!settings.syncSettings) return
-
-    isUpdating.value = true
-
-    fetch(`${url}/api/user/update`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        title: auth?.user.value.sub,
-        settings,
-      }),
-    }).finally(() => {
-      isUpdating.value = false
-    })
+    try {
+      fetch(`${url}/api/user/update?sub=${auth?.user.value.sub}`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token.id_token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          settings: user.$state,
+        }),
+      })
+    } catch (e) {
+      //
+    } finally {
+      isUpdating = false
+    }
   }
 
   async function getUser () {
-    if (!auth?.user?.value?.sub || !user.syncSettings || !url) return
+    if (!url || !user.syncSettings || !auth?.user.value) return
 
     const token = await auth.getAccessTokenSilently({ detailedResponse: true })
 
     try {
-      const { object } = await fetch(`${url}/api/user/get?user=${auth?.user.value.sub}`, {
+      const { object } = await fetch(`${url}/api/user/get?sub=${auth.user.value.sub}`, {
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${token.id_token}`,
         },
       }).then(res => res.json())
@@ -72,15 +77,17 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  let isVerifying = false
   async function verifyUserSponsorship () {
-    if (!auth?.user?.value?.sub || !url) return
+    if (isVerifying || !url || !auth?.user.value) return
 
     const token = await auth.getAccessTokenSilently({ detailedResponse: true })
 
+    isVerifying = true
+
     try {
-      const res = await fetch(`${url}/api/sponsors/verify?user=${auth?.user.value.nickname}&sub=${auth?.user.value.sub}`, {
+      const res = await fetch(`${url}/api/sponsors/verify?sub=${auth.user.value.sub}`, {
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${token.id_token}`,
         },
       }).then(res => res.json())
@@ -88,14 +95,16 @@ export const useAuthStore = defineStore('auth', () => {
       sponsor.value = res.sponsor
     } catch (e) {
       //
+    } finally {
+      isVerifying = false
     }
   }
 
   return {
     admin,
-    sponsor,
-    isUpdating,
     getUser,
+    isSubscriber,
+    sponsor,
     verifyUserSponsorship,
   }
 })

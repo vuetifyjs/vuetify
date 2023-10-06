@@ -2,7 +2,13 @@
 <!--  eslint-disable vue/valid-v-for -->
 <!--  eslint-disable vue/require-v-for-key -->
 <template>
-  <v-list ref="rootEl" density="compact" nav bg-color="transparent">
+  <v-list
+    ref="rootEl"
+    bg-color="transparent"
+    class="py-0"
+    density="compact"
+    nav
+  >
     <template v-for="(group, i) in props.groups">
       <v-divider
         v-if="i !== 0"

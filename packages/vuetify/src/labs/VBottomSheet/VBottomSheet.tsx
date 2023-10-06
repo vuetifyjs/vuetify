@@ -17,7 +17,6 @@ export const makeVBottomSheetProps = propsFactory({
   inset: Boolean,
 
   ...makeVDialogProps({
-    contentClass: 'v-bottom-sheet__content',
     transition: 'bottom-sheet-transition',
   }),
 }, 'VBottomSheet')
@@ -40,13 +39,19 @@ export const VBottomSheet = genericComponent<OverlaySlots>()({
       return (
         <VDialog
           { ...dialogProps }
+          contentClass={[
+            'v-bottom-sheet__content',
+            props.contentClass,
+          ]}
           v-model={ isActive.value }
           class={[
             'v-bottom-sheet',
             {
               'v-bottom-sheet--inset': props.inset,
             },
+            props.class,
           ]}
+          style={ props.style }
           v-slots={ slots }
         />
       )

@@ -6,55 +6,45 @@
     :name="name"
   >
     <div>
-      <v-navigation-drawer v-bind="props">
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title class="text-h6">
-              Application
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              subtext
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-
+      <v-navigation-drawer
+        v-bind="props"
+      >
+        <v-list-item title="My Application" subtitle="Vuetify"></v-list-item>
         <v-divider></v-divider>
-
-        <v-list>
-          <v-list-item link>
-            <v-list-item-icon>
-              <v-icon>$vuetify</v-icon>
-            </v-list-item-icon>
-
-            <v-list-item-content>
-              <v-list-item-title>List Item One</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
+        <v-list-item link title="List Item 1"></v-list-item>
+        <v-list-item link title="List Item 2"></v-list-item>
+        <v-list-item link title="List Item 3"></v-list-item>
       </v-navigation-drawer>
     </div>
 
     <template v-slot:configuration>
-
+      <v-slider v-model="width" label="Width" min="100" max="400" step="1"></v-slider>
     </template>
   </usage-example>
 </template>
 
 <script setup>
   // Utilities
-  import { computed, ref } from 'vue'
+  import { computed, ref, shallowRef } from 'vue'
   import { propsToString } from '@/util/helpers'
 
   const name = 'v-navigation-drawer'
   const model = ref('default')
+  const width = shallowRef(256)
   const options = []
   const props = computed(() => {
-    return {}
+    return {
+      width: width.value === 256 ? undefined : width.value || undefined,
+    }
   })
 
   const slots = computed(() => {
     return `
-
+  <v-list-item title="My Application" subtitle="Vuetify"></v-list-item>
+  <v-divider></v-divider>
+  <v-list-item link title="List Item 1"></v-list-item>
+  <v-list-item link title="List Item 2"></v-list-item>
+  <v-list-item link title="List Item 3"></v-list-item>
 `
   })
 

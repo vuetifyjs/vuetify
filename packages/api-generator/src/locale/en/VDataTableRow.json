@@ -1,0 +1,6 @@
+{
+  "props": {
+    "index": "Row index.",
+    "item": "Data (key, index and column values) of the displayed item."
+  }
+}

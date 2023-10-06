@@ -9,6 +9,12 @@ related:
   - /components/tabs/
   - /components/item-groups/
   - /components/windows/
+features:
+  figma: true
+  github: /components/VStepper/
+  label: 'C: VStepper'
+  report: true
+  spec: https://m1.material.io/components/steppers.html
 ---
 
 # Steppers
@@ -17,10 +23,12 @@ The `v-stepper` component displays progress through numbered steps.
 
 <!-- ![Pending graphic](https://cdn.vuetifyjs.com/docs/images/components/v-stepper/v-stepper-entry.png){ height=300 } -->
 
----
+<page-features />
 
 ::: warning
+
 This feature requires [v3.3.11](/getting-started/release-notes/?version=v3.3.11)
+
 :::
 
 ## Usage

@@ -97,7 +97,7 @@
     {
       name: 'Project Upgrade',
       text: 'Ready to upgrade to Vuetify 3? Let us help you make the transition as smooth as possible',
-      price: '2,000',
+      price: '1,500',
       suffix: '*',
       benefits: [
         {
@@ -122,7 +122,7 @@
     {
       name: 'SLA',
       text: 'Get dedicated support with a customized Service Level Agreement',
-      price: '1,500',
+      price: '1,000',
       suffix: '/mo',
       benefits: [
         {
@@ -130,16 +130,20 @@
           text: "We work with your company to forge a customized SLA plan, tailored for your development team's productivity and growth",
         },
         {
-          emoji: '💬',
-          text: 'Direct chat access to the Vuetify team through Discord with guaranteed response times',
-        },
-        {
           emoji: '🕒',
           text: '2x1h live support calls per month with the author of Vuetify',
         },
         {
+          emoji: '💬',
+          text: 'Direct chat access to the Vuetify team through Discord with guaranteed response times',
+        },
+        {
           emoji: '🎯',
           text: 'Get priority on reported or identified Vuetify GitHub issues and bugs',
+        },
+        {
+          emoji: '🚌',
+          text: 'Great for large teams or companies with 3 or more developers',
         },
       ],
       href: 'https://calendly.com/vuetify/sla-consultation',

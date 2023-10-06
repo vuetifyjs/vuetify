@@ -7,6 +7,11 @@ related:
   - /components/buttons/
   - /features/dates/
   - /components/text-fields/
+features:
+  github: /labs/VDatePicker/
+  label: 'C: VDatePicker'
+  report: true
+  spec: https://material.io/components/date-pickers
 ---
 
 # Date pickers
@@ -15,10 +20,12 @@ related:
 
 <!-- ![Date picker Entry](https://cdn.vuetifyjs.com/docs/images/components/v-date-picker/v-date-picker-entry.png) -->
 
----
+<page-features />
 
 ::: warning
+
 This feature requires [v3.3.4](/getting-started/release-notes/?version=v3.3.4)
+
 :::
 
 ## Usage
@@ -107,7 +114,8 @@ Here is an example of switching the locale of the **v-date-picker** component.
 
 ```html
 <v-date-picker></v-date-picker>
-``` -->
+```
+-->
 
 ### Props
 

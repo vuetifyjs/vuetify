@@ -8,8 +8,8 @@
     <template #prepend>
       <app-bar-logo />
 
-      <v-btn
-        v-if="mdAndDown"
+      <app-btn
+        v-if="route.meta.layout !== 'home' && mdAndDown"
         icon="mdi-menu"
         @click="app.drawer = !app.drawer"
       />
@@ -32,19 +32,21 @@
         <app-bar-enterprise-link />
       </template>
 
-      <app-vertical-divider v-if="mdAndUp" />
+      <template v-if="!user.quickbar">
+        <app-vertical-divider v-if="mdAndUp" />
 
-      <app-bar-theme-toggle />
+        <app-bar-theme-toggle />
 
-      <app-bar-store-link v-if="lgAndUp" />
+        <app-bar-store-link v-if="lgAndUp" />
 
-      <app-bar-jobs-link v-if="lgAndUp" />
+        <app-bar-jobs-link v-if="lgAndUp" />
 
-      <app-bar-notifications-menu />
+        <app-bar-notifications-menu />
 
-      <app-bar-settings-toggle />
+        <app-bar-settings-toggle />
 
-      <app-bar-language-menu v-if="smAndUp" />
+        <app-bar-language-menu v-if="smAndUp" />
+      </template>
     </template>
   </v-app-bar>
 </template>
@@ -70,12 +72,18 @@
   // Composables
   import { useAppStore } from '@/store/app'
   import { useDisplay, useTheme } from 'vuetify'
+  import { useRoute } from 'vue-router'
+
+  // Stores
+  import { useUserStore } from '@/store/user'
 
   // Utilities
   import { computed } from 'vue'
 
   const app = useAppStore()
+  const user = useUserStore()
   const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
+  const route = useRoute()
   const theme = useTheme()
 
   const image = computed(() => {

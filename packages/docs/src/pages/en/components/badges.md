@@ -8,6 +8,10 @@ related:
   - /components/avatars/
   - /components/icons/
   - /components/toolbars/
+features:
+  github: /components/VBadge/
+  label: 'C: VBadge'
+  report: true
 ---
 
 # Badges
@@ -16,7 +20,7 @@ The `v-badge` component superscripts or subscripts an avatar-like icon or text o
 
 <!-- ![Badge Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-badge/v-badge-entry.png) -->
 
----
+<page-features />
 
 ## Usage
 

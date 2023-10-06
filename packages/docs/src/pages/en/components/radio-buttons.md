@@ -8,11 +8,18 @@ related:
   - /components/button-groups/
   - /components/forms/
   - /components/checkboxes/
+features:
+  label: 'C: VRadio'
+  report: true
+  github: /components/VRadio/
+  spec: https://m2.material.io/components/radio-buttons
 ---
 
 # Radio buttons
 
 The `v-radio` component is a simple radio button. When combined with  the `v-radio-group` component you can provide groupable functionality to allow users to select from a predefined set of options.
+
+<page-features />
 
 ## Usage
 

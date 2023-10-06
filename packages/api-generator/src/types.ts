@@ -91,7 +91,7 @@ export async function generateComponentDataFromTypes (component: string) {
 
   for (const [name, { formatted }] of Object.entries(props.properties)) {
     if (formatted.length > 400) {
-      console.log(`Long prop type (${formatted.length}): ${component}.${name}`)
+      console.log(`\x1b[33mLong prop type (${formatted.length}): ${component}.${name}\x1b[0m`)
     }
   }
 
@@ -108,6 +108,7 @@ type BaseDefinition = {
   formatted: string
   source?: string
   description?: Record<string, string>
+  descriptionSource?: Record<string, string>
   default?: string
   optional?: boolean
 }
@@ -242,6 +243,7 @@ function count (arr: string[], needle: string) {
   }, 0)
 }
 
+// Types that are displayed as links
 const allowedRefs = [
   'Anchor',
   'LocationStrategyFn',
@@ -262,12 +264,15 @@ const allowedRefs = [
   'FilterFunction',
   'DataIteratorItem',
 ]
+
+// Types that displayed without their generic arguments
 const plainRefs = [
   'Component',
   'ComponentPublicInstance',
   'ComponentInternalInstance',
   'FunctionalComponent',
   'DataTableItem',
+  'ListItem',
   'Group',
   'DataIteratorItem',
 ]
@@ -302,6 +307,7 @@ function formatDefinition (definition: Definition) {
       break
     case 'object':
       formatted = `{ ${Object.entries(definition.properties).reduce<string[]>((arr, [name, prop]) => {
+        if (name.includes(':') || name.includes('-')) name = `'${name}'`
         arr.push(`${name}: ${prop.formatted}`)
         return arr
       }, []).join('; ')} }`

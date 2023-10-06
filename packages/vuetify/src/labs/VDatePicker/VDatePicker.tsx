@@ -22,7 +22,10 @@ import { computed, ref, shallowRef, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-export type VDatePickerSlots = {
+import type { VPickerSlots } from '@/labs/VPicker/VPicker'
+
+// Types
+export type VDatePickerSlots = Omit<VPickerSlots, 'header'> & {
   header: {
     header: string
     appendIcon: string
@@ -89,7 +92,11 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
 
     const inputModel = ref(model.value.map(date => adapter.format(date, 'keyboardDate')))
     const temporaryModel = ref(model.value)
-    const title = computed(() => t(props.title))
+    const title = computed(() => {
+      return props.variant === 'modern'
+        ? t(props.title)
+        : adapter.format(displayDate.value, 'shortDate')
+    })
     const header = computed(() => model.value.length ? adapter.format(model.value[0], 'normalDateWithWeekday') : t(props.header))
     const headerIcon = computed(() => inputMode.value === 'calendar' ? props.keyboardIcon : props.calendarIcon)
     const headerTransition = computed(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
@@ -139,9 +146,14 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
     })
 
     function updateFromInput (input: string, index: number) {
-      const { isValid, date } = adapter
+      const { isValid, date, isAfter } = adapter
+      const inputDate = date(input)
 
-      if (isValid(input)) {
+      if (
+        isValid(input) &&
+        (!minDate.value || !isAfter(minDate.value, inputDate)) &&
+        (!maxDate.value || !isAfter(inputDate, maxDate.value))
+      ) {
         const newModel = model.value.slice()
         newModel[index] = date(input)
 
@@ -179,6 +191,10 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
       viewMode.value = viewMode.value === 'month' ? 'year' : 'month'
     }
 
+    function onClickHeader () {
+      viewMode.value = 'month'
+    }
+
     const headerSlotProps = computed(() => ({
       header: header.value,
       appendIcon: headerIcon.value,
@@ -197,28 +213,39 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
           { ...pickerProps }
           class={[
             'v-date-picker',
+            `v-date-picker--${viewMode.value}`,
             props.class,
           ]}
           style={ props.style }
-          title={ title.value }
           width={ props.showWeek ? 408 : 360 }
           v-slots={{
+            title: () => slots.title?.() ?? (
+              <div
+                class="v-date-picker__title"
+                onClick={ props.variant === 'classic' ? onClickMode : undefined }
+              >
+                { title.value }
+              </div>
+            ),
             header: () => slots.header?.(headerSlotProps.value) ?? (
               <VDatePickerHeader
                 key="header"
                 { ...headerSlotProps.value }
+                onClick={ viewMode.value === 'year' ? onClickHeader : undefined }
               />
             ),
             default: () => inputMode.value === 'calendar' ? (
               <>
-                <VDatePickerControls
-                  { ...datePickerControlsProps }
-                  disabled={ disabled.value }
-                  displayDate={ adapter.format(displayDate.value, 'monthAndYear') }
-                  onClick:next={ onClickNext }
-                  onClick:prev={ onClickPrev }
-                  onClick:mode={ onClickMode }
-                />
+                { (props.variant !== 'classic' || viewMode.value !== 'year') && (
+                  <VDatePickerControls
+                    { ...datePickerControlsProps }
+                    disabled={ disabled.value }
+                    displayDate={ adapter.format(displayDate.value, 'monthAndYear') }
+                    onClick:next={ onClickNext }
+                    onClick:prev={ onClickPrev }
+                    onClick:mode={ onClickMode }
+                  />
+                )}
 
                 <VFadeTransition hideOnLeave>
                   { viewMode.value === 'month' ? (
@@ -253,19 +280,21 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
               </div>
             ),
             actions: () => !props.hideActions ? (
-              <div>
-                <VBtn
-                  color={ props.color }
-                  onClick={ onClickCancel }
-                  text={ t(props.cancelText) }
-                />
+              slots.actions?.() ?? (
+                <div>
+                  <VBtn
+                    color={ props.color }
+                    onClick={ onClickCancel }
+                    text={ t(props.cancelText) }
+                  />
 
-                <VBtn
-                  color={ props.color }
-                  onClick={ onClickSave }
-                  text={ t(props.okText) }
-                />
-              </div>
+                  <VBtn
+                    color={ props.color }
+                    onClick={ onClickSave }
+                    text={ t(props.okText) }
+                  />
+                </div>
+              )
             ) : undefined,
           }}
         />

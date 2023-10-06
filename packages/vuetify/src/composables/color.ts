@@ -1,6 +1,6 @@
 // Utilities
 import { computed, isRef } from 'vue'
-import { destructComputed, getForeground, isCssColor } from '@/util'
+import { destructComputed, getForeground, isCssColor, parseColor } from '@/util'
 
 // Types
 import type { CSSProperties, Ref } from 'vue'
@@ -28,10 +28,13 @@ export function useColor (colors: Ref<{ background?: ColorValue, text?: ColorVal
         styles.backgroundColor = colors.value.background
 
         if (!colors.value.text) {
-          const textColor = getForeground(styles.backgroundColor)
+          const backgroundColor = parseColor(colors.value.background)
+          if (backgroundColor.a == null || backgroundColor.a === 1) {
+            const textColor = getForeground(backgroundColor)
 
-          styles.color = textColor
-          styles.caretColor = textColor
+            styles.color = textColor
+            styles.caretColor = textColor
+          }
         }
       } else {
         classes.push(`bg-${colors.value.background}`)

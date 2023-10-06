@@ -3,19 +3,18 @@ import { computed } from 'vue'
 import { deepEqual, getPropertyFromItem, pick, propsFactory } from '@/util'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type { PropType } from 'vue'
+import type { InternalItem } from '@/composables/filter'
 import type { SelectItemKey } from '@/util'
 
-export interface ListItem<T = any> {
+export interface ListItem<T = any> extends InternalItem<T> {
   title: string
-  value: any
   props: {
     [key: string]: any
     title: string
     value: any
   }
   children?: ListItem<T>[]
-  raw: T
 }
 
 export interface ItemProps {
@@ -25,6 +24,7 @@ export interface ItemProps {
   itemChildren: SelectItemKey
   itemProps: SelectItemKey
   returnObject: boolean
+  valueComparator: typeof deepEqual
 }
 
 // Composables
@@ -50,11 +50,15 @@ export const makeItemsProps = propsFactory({
     default: 'props',
   },
   returnObject: Boolean,
+  valueComparator: {
+    type: Function as PropType<typeof deepEqual>,
+    default: deepEqual,
+  },
 }, 'list-items')
 
 export function transformItem (props: Omit<ItemProps, 'items'>, item: any): ListItem {
   const title = getPropertyFromItem(item, props.itemTitle, item)
-  const value = props.returnObject ? item : getPropertyFromItem(item, props.itemValue, title)
+  const value = getPropertyFromItem(item, props.itemValue, title)
   const children = getPropertyFromItem(item, props.itemChildren)
   const itemProps = props.itemProps === true
     ? typeof item === 'object' && item != null && !Array.isArray(item)
@@ -91,26 +95,29 @@ export function transformItems (props: Omit<ItemProps, 'items'>, items: ItemProp
 
 export function useItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
+  const hasNullItem = computed(() => items.value.some(item => item.value === null))
 
-  return useTransformItems(items, value => transformItem(props, value))
-}
+  function transformIn (value: any[]): ListItem[] {
+    if (!hasNullItem.value) {
+      // When the model value is null, return an InternalItem
+      // based on null only if null is one of the items
+      value = value.filter(v => v !== null)
+    }
 
-export function useTransformItems <T extends { value: unknown }> (items: Ref<T[]>, transform: (value: unknown) => T) {
-  function transformIn (value: any[]): T[] {
-    return value
-      // When the model value is null, returns an InternalItem based on null
-      // only if null is one of the items
-      .filter(v => v !== null || items.value.some(item => item.value === null))
-      .map(v => {
-        const existingItem = items.value.find(item => deepEqual(v, item.value))
-        // Nullish existingItem means value is a custom input value from combobox
-        // In this case, use transformItem to create an InternalItem based on value
-        return existingItem ?? transform(v)
-      })
+    return value.map(v => {
+      if (props.returnObject && typeof v === 'string') {
+        // String model value means value is a custom input value from combobox
+        // Don't look up existing items if the model value is a string
+        return transformItem(props, v)
+      }
+      return items.value.find(item => props.valueComparator(v, item.value)) || transformItem(props, v)
+    })
   }
 
-  function transformOut (value: T[]) {
-    return value.map(({ value }) => value)
+  function transformOut (value: ListItem[]): any[] {
+    return props.returnObject
+      ? value.map(({ raw }) => raw)
+      : value.map(({ value }) => value)
   }
 
   return { items, transformIn, transformOut }
