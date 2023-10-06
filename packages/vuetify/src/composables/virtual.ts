@@ -175,21 +175,21 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     const end = clamp(calculateIndex(endPx) + 1, start + 1, items.value.length)
 
     if (
-      (direction === UP && start >= first.value) ||
-      (direction === DOWN && end <= last.value)
-    ) return
+      (direction !== UP || start < first.value) &&
+      (direction !== DOWN || end > last.value)
+    ) {
+      const topOverflow = calculateOffset(first.value) - calculateOffset(start)
+      const bottomOverflow = calculateOffset(end) - calculateOffset(last.value)
+      const bufferOverflow = Math.max(topOverflow, bottomOverflow)
 
-    const topOverflow = calculateOffset(first.value) - calculateOffset(start)
-    const bottomOverflow = calculateOffset(end) - calculateOffset(last.value)
-    const bufferOverflow = Math.max(topOverflow, bottomOverflow)
-
-    if (bufferOverflow > BUFFER_PX) {
-      first.value = start
-      last.value = end
-    } else {
-      // Only update the side that's reached its limit if there's still buffer left
-      if (start <= 0) first.value = start
-      if (end >= items.value.length) last.value = end
+      if (bufferOverflow > BUFFER_PX) {
+        first.value = start
+        last.value = end
+      } else {
+        // Only update the side that's reached its limit if there's still buffer left
+        if (start <= 0) first.value = start
+        if (end >= items.value.length) last.value = end
+      }
     }
 
     paddingTop.value = calculateOffset(first.value)
