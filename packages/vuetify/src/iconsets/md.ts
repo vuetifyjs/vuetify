@@ -47,9 +47,19 @@ const aliases: IconAliases = {
   eyeDropper: 'colorize',
 }
 
-const md: IconSet = {
-  // Not using mergeProps here, functional components merge props by default (?)
-  component: props => h(VLigatureIcon, { ...props, class: 'material-icons' }),
+const createMdIconSet = (variant?: 'outlined' | 'round' | 'sharp' | 'two-tone'): IconSet => {
+  const variantSuffix = variant ? '' : `-${variant}`
+  const iconClass = `material-icons${variantSuffix}`
+  return {
+    // Not using mergeProps here, functional components merge props by default (?)
+    component: props => h(VLigatureIcon, { ...props, class: iconClass }),
+  }
 }
 
-export { aliases, md }
+const md = createMdIconSet()
+const mdOutlined = createMdIconSet('outlined')
+const mdRound = createMdIconSet('round')
+const mdSharp = createMdIconSet('sharp')
+const mdTwoTone = createMdIconSet('two-tone')
+
+export { aliases, md, mdOutlined, mdRound, mdSharp, mdTwoTone }
