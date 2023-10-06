@@ -24,7 +24,7 @@ The `v-rating` component is a specialized but important piece in building user w
 
 The `v-rating` component provides a simple interface for gathering user feedback.
 
-<!-- <usage name="v-rating" /> -->
+<usage name="v-rating" />
 
 <entry />
 
