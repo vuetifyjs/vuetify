@@ -50,7 +50,7 @@ pnpm create vuetify
 ```
 
 ```bash [bun]
-bun create-vuetify
+bun create vuetify
 ```
 
 :::
