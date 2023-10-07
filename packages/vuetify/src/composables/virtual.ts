@@ -20,6 +20,7 @@ const BUFFER_PX = 100
 
 type VirtualProps = {
   itemHeight?: number | string
+  height?: number | string
 }
 
 export const makeVirtualProps = propsFactory({
@@ -27,6 +28,7 @@ export const makeVirtualProps = propsFactory({
     type: [Number, String],
     default: null,
   },
+  height: [Number, String],
 }, 'virtual')
 
 export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
@@ -38,7 +40,13 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   })
 
   const first = shallowRef(0)
-  const last = shallowRef(Math.ceil(display.height.value / (itemHeight.value || 16) || 1))
+  const last = shallowRef(Math.ceil(
+    // Assume 16px items filling the entire screen height if
+    // not provided. This is probably incorrect but it minimises
+    // the chance of ending up with empty space at the bottom.
+    // The default value is set here to avoid poisoning getSize()
+    (parseInt(props.height!) || display.height.value) / (itemHeight.value || 16)
+  ) || 1)
   const paddingTop = shallowRef(0)
   const paddingBottom = shallowRef(0)
 
@@ -53,7 +61,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   const viewportHeight = computed(() => {
     return containerRef.value === document.documentElement
       ? display.height.value
-      : contentRect.value?.height || 0
+      : contentRect.value?.height || parseInt(props.height!) || 0
   })
 
   const sizeMap = new Map<any, number>()
