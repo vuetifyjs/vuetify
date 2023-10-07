@@ -115,7 +115,7 @@ export function useDate () {
 
 export function toIso (adapter: DateAdapter<any>, value: any) {
   const date = adapter.toJsDate(value)
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
 }
 
 function getMondayOfFirstWeekOfYear (year: number) {
