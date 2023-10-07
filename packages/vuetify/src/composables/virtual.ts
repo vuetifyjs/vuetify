@@ -168,7 +168,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     const startPx = Math.max(0, scrollTop - BUFFER_PX)
     const start = clamp(calculateIndex(startPx), 0, items.value.length)
 
-    const endPx = scrollTop + getSize(start) + viewportHeight.value + BUFFER_PX
+    const endPx = scrollTop + viewportHeight.value + BUFFER_PX
     const end = clamp(calculateIndex(endPx) + 1, start + 1, items.value.length)
 
     if (
