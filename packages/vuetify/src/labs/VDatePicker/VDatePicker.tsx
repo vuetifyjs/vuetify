@@ -29,6 +29,7 @@ export type VDatePickerSlots = Omit<VPickerSlots, 'header'> & {
   header: {
     header: string
     appendIcon: string
+    headerColor?: string
     'onClick:append': () => void
   }
 }
@@ -63,6 +64,7 @@ export const makeVDatePickerProps = propsFactory({
     default: '$vuetify.datePicker.header',
   },
   hideActions: Boolean,
+  headerColor: String,
 
   ...makeDateProps(),
   ...makeVDatePickerControlsProps(),
@@ -98,6 +100,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
         : adapter.format(displayDate.value, 'shortDate')
     })
     const header = computed(() => model.value.length ? adapter.format(model.value[0], 'normalDateWithWeekday') : t(props.header))
+    const headerColor = computed(() => props.headerColor ? props.headerColor : props.color)
     const headerIcon = computed(() => inputMode.value === 'calendar' ? props.keyboardIcon : props.calendarIcon)
     const headerTransition = computed(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
     const minDate = computed(() => props.min && adapter.isValid(props.min) ? adapter.date(props.min) : null)
@@ -198,19 +201,25 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
     const headerSlotProps = computed(() => ({
       header: header.value,
       appendIcon: headerIcon.value,
+      color: headerColor.value,
       transition: headerTransition.value,
       'onClick:append': onClickAppend,
     }))
 
+    const pickerProps = computed(() => {
+      const [filteredProps] = VPicker.filterProps(props)
+
+      return { ...filteredProps, color: headerColor.value }
+    })
+
     useRender(() => {
-      const [pickerProps] = VPicker.filterProps(props)
       const [datePickerControlsProps] = VDatePickerControls.filterProps(props)
       const [datePickerMonthProps] = VDatePickerMonth.filterProps(props)
       const [datePickerYearsProps] = VDatePickerYears.filterProps(props)
 
       return (
         <VPicker
-          { ...pickerProps }
+          { ...pickerProps.value }
           class={[
             'v-date-picker',
             `v-date-picker--${viewMode.value}`,

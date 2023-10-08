@@ -13,6 +13,7 @@
     "flat": "Removes  elevation.",
     "format": "Takes a date object and returns it in a specified format.",
     "header": "Text shown when no **display-date** is set.",
+    "headerColor": "Sets color of date picker header",
     "headerDateFormat": "Allows you to customize the format of the month string that appears in the header of the calendar. Called with date (ISO 8601 **date** string) arguments.",
     "hideActions": "Hide the picker actions.",
     "inputMode": "Toggles between showing dates or inputs.",
