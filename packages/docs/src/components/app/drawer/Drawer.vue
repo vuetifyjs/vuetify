@@ -2,11 +2,14 @@
   <v-navigation-drawer
     id="app-drawer"
     v-model="app.drawer"
+    :rail="railEnabled"
+    :expand-on-hover="railEnabled"
     :image="image"
     :order="mobile ? -1 : undefined"
     width="300"
+    @update:rail="onUpdateRail"
   >
-    <app-list :items="app.items" nav>
+    <app-list v-model:opened="opened" :items="app.items" nav>
       <template #divider>
         <v-divider class="my-3 mb-4 ms-16" />
       </template>
@@ -28,12 +31,36 @@
   import { useDisplay, useTheme } from 'vuetify'
 
   // Utilities
-  import { computed, onMounted } from 'vue'
+  import { computed, onMounted, ref, watch } from 'vue'
   import { wait } from '@/util/helpers'
+  import { useUserStore } from '@/store/user'
 
   const app = useAppStore()
+  const user = useUserStore()
+
   const { mobile } = useDisplay()
   const theme = useTheme()
+
+  const railEnabled = computed(() => user.railDrawer)
+
+  const rail = ref(railEnabled.value)
+  const _opened = ref([])
+  const opened = computed({
+    get: () => rail.value ? [] : _opened.value,
+    set: val => {
+      _opened.value = val
+    },
+  })
+
+  watch(railEnabled, val => {
+    rail.value = val
+  })
+
+  function onUpdateRail (val) {
+    if (railEnabled.value) {
+      rail.value = val
+    }
+  }
 
   const image = computed(() => {
     if (['dark', 'light'].includes(theme.name.value)) return undefined
@@ -49,7 +76,6 @@
     if (!element) return
 
     element.scrollIntoView({
-      behavior: 'smooth',
       block: 'center',
       inline: 'center',
     })

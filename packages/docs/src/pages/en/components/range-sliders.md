@@ -8,11 +8,18 @@ related:
   - /components/forms/
   - /components/selects/
   - /components/sliders/
+features:
+  label: 'C: VRangeSlider'
+  report: true
+  github: /components/VRangeSlider/
+  spec: https://m2.material.io/components/sliders
 ---
 
 # Range Sliders
 
 The `v-range-slider` component complements the `v-slider` component nicely when you are in need of representing a range of values.
+
+<page-features />
 
 ## Usage
 

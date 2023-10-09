@@ -268,7 +268,7 @@
       transform: none
 
     .v-field.v-field--active &
-      visibility: visible
+      visibility: unset
 
     .v-field--variant-solo &,
     .v-field--variant-solo-inverted &,
@@ -368,7 +368,8 @@
 
       @at-root
         #{selector.append('.v-field--rounded', &)},
-        #{selector.append('[class^="rounded-"]', &)}
+        #{selector.append('[class^="rounded-"]', &)},
+        #{selector.append('[class*=" rounded-"]', &)}
           flex-basis: calc(var(--v-input-control-height) / 2 + 2px)
 
     &__notch

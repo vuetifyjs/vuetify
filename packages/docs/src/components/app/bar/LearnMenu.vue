@@ -33,6 +33,11 @@
       appendIcon: 'mdi-code-json',
     },
     {
+      title: t('colors'),
+      to: rpath('/styles/colors/#material-colors'),
+      appendIcon: 'mdi-palette-swatch-outline',
+    },
+    {
       title: t('components'),
       to: rpath('/components/all/'),
       appendIcon: 'mdi-view-dashboard-outline',

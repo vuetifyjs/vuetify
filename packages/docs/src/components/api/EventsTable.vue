@@ -1,8 +1,8 @@
 <template>
   <ApiTable :headers="headers">
-    <template #row="{ props, ...item }">
+    <template #row="{ props, item }">
       <tr v-bind="props">
-        <NameCell section="events" :name="item.name" />
+        <NameCell section="events" :name="item.name" :new-in="item.newIn" />
 
         <td>
           <PrismCell :code="item.formatted" />

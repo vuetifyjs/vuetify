@@ -57,7 +57,7 @@ If you are still using the Options API, you can access the display information o
 
 | Component | Description |
 | - | - |
-| [useDisplay](/api/useDisplay/) | Composable |
+| [useDisplay](/api/use-display/) | Composable |
 
 ## Options
 

@@ -8,6 +8,11 @@ related:
   - /components/chips/
   - /components/slide-groups/
   - /components/item-groups/
+features:
+  github: /components/VChipGroup/
+  label: 'C: VChipGroup'
+  report: true
+  spec: https://m2.material.io/components/chips#choice-chips
 ---
 
 # Chip groups
@@ -16,7 +21,7 @@ The `v-chip-group` supercharges the `v-chip` component by providing groupable fu
 
 <!-- ![chip-groups Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-chip-groups/v-chip-groups-entry.png) -->
 
----
+<page-features />
 
 ## Usage
 

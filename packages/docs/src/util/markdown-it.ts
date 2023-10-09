@@ -7,7 +7,10 @@ import markdownRules from './markdown-it-rules'
 import Emoji from 'markdown-it-emoji/bare.js'
 import type MarkdownIt from 'markdown-it'
 
-export const configureMarkdown = (md: MarkdownIt) => {
+export function configureMarkdown (
+  md: MarkdownIt,
+  options: Partial<{ headerSections: boolean }> = {}
+) {
   md.use(MarkdownItPrism)
     .use(MarkdownItLinkAttributes, {
       matcher (href: string) {
@@ -38,7 +41,6 @@ export const configureMarkdown = (md: MarkdownIt) => {
         return encodeURIComponent(slug)
       },
     })
-    .use(MarkdownItHeaderSections)
     .use(Emoji, {
       defs: {
         rocket: '🚀',
@@ -49,6 +51,10 @@ export const configureMarkdown = (md: MarkdownIt) => {
         test_tube: '🧪',
       },
     })
+
+  if (options.headerSections !== false) {
+    md.use(MarkdownItHeaderSections)
+  }
 
   markdownRules.forEach(rule => rule(md))
 

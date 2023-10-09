@@ -104,10 +104,10 @@
 
         <v-spacer></v-spacer>
 
-        <v-icon
-          class="me-3"
+        <v-btn
           icon="mdi-dots-horizontal"
-        ></v-icon>
+          variant="text"
+        ></v-btn>
 
         <v-btn
           class="me-2 text-none"

@@ -356,8 +356,7 @@ export const VDatePickerMonth = genericComponent()({
 
                 { (props.showAdjacentMonths || !item.isAdjacent) && (
                   <VBtn
-                    active={ item.isSelected }
-                    color={ color }
+                    color={ (!item.isToday || item.isSelected) ? color : undefined }
                     disabled={ item.isDisabled }
                     icon
                     ripple={ false } /* ripple not working correctly since we preventDefault in touchend */

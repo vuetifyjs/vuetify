@@ -1,6 +1,6 @@
 // Utilities
 import { inject, provide, ref, watchEffect } from 'vue'
-import { consoleWarn, createRange, propsFactory } from '@/util'
+import { createRange, propsFactory } from '@/util'
 
 // Types
 import type { DeepReadonly, InjectionKey, PropType, Ref } from 'vue'
@@ -40,7 +40,10 @@ export function createHeaders (
       : Array.isArray(props.headers[0])
         ? props.headers as DataTableHeader[][]
         : [props.headers as DataTableHeader[]]
-    const flat = wrapped.flatMap((row, index) => row.map(column => ({ column, row: index })))
+    const flat = wrapped.flatMap((row, index) => row.map(column => ({
+      column,
+      row: index,
+    })))
 
     const rowCount = wrapped.length
     const defaultHeader = { title: '', sortable: false }
@@ -68,17 +71,15 @@ export function createHeaders (
     const fixedOffsets = createRange(rowCount).fill(0)
 
     flat.forEach(({ column, row }) => {
-      let key = column.key
-      if (key == null) {
-        consoleWarn('The header key value must not be null or undefined')
-        key = ''
-      }
+      const key = column.key ?? (typeof column.value === 'string' ? column.value : null)
+      const value = column.value ?? column.key ?? null
       for (let i = row; i <= row + (column.rowspan ?? 1) - 1; i++) {
         fixedRows[i].push({
           ...column,
           key,
+          value,
           fixedOffset: fixedOffsets[i],
-          sortable: column.sortable ?? !!column.key,
+          sortable: column.sortable ?? key != null,
         })
 
         fixedOffsets[i] += Number(column.width ?? 0)

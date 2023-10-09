@@ -205,6 +205,8 @@ export const VInput = genericComponent<VInputSlots>()({
       reset,
       resetValidation,
       validate,
+      isValid,
+      errorMessages,
     }
   },
 })

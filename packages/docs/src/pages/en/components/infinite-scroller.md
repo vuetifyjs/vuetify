@@ -8,16 +8,28 @@ related:
   - /components/lists/
   - /components/data-tables/basics/
   - /components/data-iterators/
+features:
+  github: /labs/VInfiniteScroll/
+  label: 'C: VInfiniteScroll'
+  report: true
 ---
 
 # Infinite scroller
 
 The `v-infinite-scroll` component displays a potentially infinite list, by loading more items of the list when scrolling. It supports either vertical or horizontal scrolling.
 
-----
+<page-features />
+
+::: success
+
+This component is feature complete and is pending release in [v3.4.0 (Blackguard)](/introduction/roadmap/#v3-4-blackguard)
+
+:::
 
 ::: warning
+
 This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
+
 :::
 
 ## Usage

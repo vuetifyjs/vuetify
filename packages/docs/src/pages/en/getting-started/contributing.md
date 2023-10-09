@@ -121,6 +121,17 @@ The documentation is located in `packages/docs` but also uses some files from `p
 
 If you want to see changes from Vuetify in the documentation you need to run `yarn build:lib` in the vuetify package before starting the documentation server.
 
+### API Generator
+
+All api descriptions are managed via the api-generator package. This package must be built prior to running or building the docs. Descriptions can be updated via the JSON files located in the `src/locale/en` folder. Some general guidelines to follow when handling api descriptions are:
+
+- `en` language only.
+- Prop names should be formatted using bold markdown eg: **prop-name**.
+- Slot and other code related text should be formatted using code markdown eg: `some-slot`.
+- Description keys should be in camelCase, except for `slot` keys which should be kebab-case.
+- Put keys in alphabetical order.
+- Descriptions utilize a hierarchy of `generic.json` < `Source.json` < `Component.json` to reduce duplication. Source can be viewed using the **Developer Mode** in docs settings.
+
 ### Submitting Changes / Pull Requests
 
 First you should create a fork of the vuetify repository to push your changes to. Information on forking repositories can be found in the [GitHub documentation](https://help.github.com/en/github/getting-started-with-github/fork-a-repo).

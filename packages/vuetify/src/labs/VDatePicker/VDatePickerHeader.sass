@@ -17,11 +17,21 @@
 
 .v-date-picker-header__content
   align-items: center
-  display: flex
+  display: inline-flex
   font-size: 32px
   line-height: 40px
   grid-area: content
   justify-content: space-between
+
+  .v-date-picker-header--clickable &
+    &:not(:hover)
+      opacity: .7
+
+  .v-date-picker--month &
+    opacity: 1
+
+  .v-date-picker--year &
+    cursor: pointer
 
 .date-picker-header-transition,
 .date-picker-header-reverse-transition

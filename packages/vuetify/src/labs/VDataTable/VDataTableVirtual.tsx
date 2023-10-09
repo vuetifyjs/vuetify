@@ -58,7 +58,6 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     'update:options': (value: any) => true,
     'update:groupBy': (value: any) => true,
     'update:expanded': (value: any) => true,
-    'click:row': (e: Event, value: { item: DataTableItem }) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -175,7 +174,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                   </thead>
                   <tbody>
                     <tr style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
-                      <td colspan={ columns.value.length } style={{ height: convertToUnit(paddingTop.value), border: 0 }}></td>
+                      <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
                     </tr>
 
                     <VDataTableRows
@@ -186,16 +185,16 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                         ...slots,
                         item: itemSlotProps => (
                           <VVirtualScrollItem
-                            key={ itemSlotProps.item.index }
+                            key={ itemSlotProps.internalItem.index }
                             renderless
-                            onUpdate:height={ height => handleItemResize(itemSlotProps.item.index, height) }
+                            onUpdate:height={ height => handleItemResize(itemSlotProps.internalItem.index, height) }
                           >
                             { ({ itemRef }) => (
                               slots.item?.({ ...itemSlotProps, itemRef }) ?? (
                                 <VDataTableRow
                                   { ...itemSlotProps.props }
                                   ref={ itemRef }
-                                  key={ itemSlotProps.item.index }
+                                  key={ itemSlotProps.internalItem.index }
                                   v-slots={ slots }
                                 />
                               )
@@ -206,7 +205,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                     </VDataTableRows>
 
                     <tr style={{ height: convertToUnit(paddingBottom.value), border: 0 }}>
-                      <td colspan={ columns.value.length } style={{ height: convertToUnit(paddingBottom.value), border: 0 }}></td>
+                      <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
                     </tr>
                   </tbody>
                 </table>

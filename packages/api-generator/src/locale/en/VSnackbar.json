@@ -9,13 +9,5 @@
   },
   "slots": {
     "actions": "Used to bind styles to [v-btn](/components/buttons) to match MD2 specification."
-  },
-  "exposed": {
-    "activatorEl": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-snackbar.json))",
-    "animateClick": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-snackbar.json))",
-    "contentEl": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-snackbar.json))",
-    "globalTop": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-snackbar.json))",
-    "localTop": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-snackbar.json))",
-    "updateLocation": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-snackbar.json))"
   }
 }
