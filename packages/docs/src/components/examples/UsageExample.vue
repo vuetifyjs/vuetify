@@ -116,7 +116,7 @@
     </v-layout>
 
     <v-expand-transition>
-      <div v-if="show && display.mdAndUp.value">
+      <div v-if="show">
         <div class="pa-2">
           <app-markup :code="code" />
         </div>
