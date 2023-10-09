@@ -8,6 +8,7 @@ import {
   clamp,
   createRange,
   debounce,
+  IN_BROWSER,
   propsFactory,
 } from '@/util'
 
@@ -63,6 +64,9 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
       ? display.height.value
       : contentRect.value?.height || parseInt(props.height!) || 0
   })
+  const hasElements = computed(() => {
+    return !!(containerRef.value && markerRef.value && viewportHeight.value && itemHeight.value)
+  })
 
   const sizeMap = new Map<any, number>()
   let sizes = Array.from<number | null>({ length: items.value.length })
@@ -84,21 +88,22 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     updateTime.value = Math.max(updateTime.value, performance.now() - start)
   }, updateTime)
 
-  const unwatch = watch(() => !!(containerRef.value && markerRef.value && viewportHeight.value && itemHeight.value), v => {
+  const unwatch = watch(hasElements, v => {
     if (!v) return
+
     unwatch()
     markerOffset = markerRef.value!.offsetTop
     updateOffsets.immediate()
     calculateVisibleItems()
 
-    if (~targetScrollIndex) {
-      nextTick(() => {
-        requestAnimationFrame(() => {
-          scrollToIndex(targetScrollIndex)
-          targetScrollIndex = -1
-        })
+    if (!~targetScrollIndex) return
+
+    nextTick(() => {
+      IN_BROWSER && window.requestAnimationFrame(() => {
+        scrollToIndex(targetScrollIndex)
+        targetScrollIndex = -1
       })
-    }
+    })
   })
   watch(viewportHeight, (val, oldVal) => {
     oldVal && calculateVisibleItems()
@@ -109,10 +114,11 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   })
 
   function handleItemResize (index: number, height: number) {
-    const prevMinHeight = itemHeight.value
-    if (!itemHeight.value) itemHeight.value = height
-    else itemHeight.value = Math.min(itemHeight.value, height)
     const prevHeight = sizes[index]
+    const prevMinHeight = itemHeight.value
+
+    itemHeight.value = prevMinHeight ? Math.min(itemHeight.value, height) : height
+
     if (prevHeight !== height || prevMinHeight !== itemHeight.value) {
       sizes[index] = height
       sizeMap.set(items.value[index], height)
