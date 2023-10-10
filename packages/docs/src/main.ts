@@ -17,6 +17,7 @@ import { installGlobalComponents } from '@/plugins/global-components'
 import { installAuth0 } from '@/plugins/auth'
 import { installGtag } from '@/plugins/gtag'
 import { installI18n } from '@/plugins/i18n'
+import { useAppStore } from '@/store/app'
 import { useLocaleStore } from '@/store/locale'
 import { installPwa } from '@/plugins/pwa'
 import { useUserStore } from '@/store/user'
@@ -38,6 +39,7 @@ import { IN_BROWSER } from '@/util/globals'
 
 const routes = setupLayouts(generatedRoutes)
 
+const appStore = useAppStore(pinia)
 const localeStore = useLocaleStore(pinia)
 const userStore = useUserStore(pinia)
 
@@ -117,6 +119,10 @@ app.config.warnHandler = (err, vm, info) => {
 }
 
 router.beforeEach((to, from, next) => {
+  appStore.activeHeaders = {
+    hrefs: [],
+    temp: '',
+  }
   if (to.meta.locale !== from.meta.locale) {
     localeStore.locale = to.meta.locale as string
   }
