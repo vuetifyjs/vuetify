@@ -17,6 +17,8 @@ import type { Ref } from 'vue'
 
 const UP = -1
 const DOWN = 1
+
+/** Determines how large each batch of items should be */
 const BUFFER_PX = 100
 
 type VirtualProps = {
@@ -51,8 +53,12 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   const paddingTop = shallowRef(0)
   const paddingBottom = shallowRef(0)
 
+  /** The scrollable element */
   const containerRef = ref<HTMLElement>()
+  /** An element marking the top of the scrollable area,
+   * used to add an offset if there's padding or other elements above the virtual list */
   const markerRef = ref<HTMLElement>()
+  /** markerRef's offsetTop, lazily evaluated */
   let markerOffset = 0
 
   const { resizeRef, contentRect } = useResizeObserver()
@@ -64,7 +70,8 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
       ? display.height.value
       : contentRect.value?.height || parseInt(props.height!) || 0
   })
-  const hasElements = computed(() => {
+  /** All static elements have been rendered and we have an assumed item height */
+  const hasInitialRender = computed(() => {
     return !!(containerRef.value && markerRef.value && viewportHeight.value && itemHeight.value)
   })
 
@@ -88,8 +95,10 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     updateTime.value = Math.max(updateTime.value, performance.now() - start)
   }, updateTime)
 
-  const unwatch = watch(hasElements, v => {
+  const unwatch = watch(hasInitialRender, v => {
     if (!v) return
+    // First render is complete, update offsets and visible
+    // items in case our assumed item height was incorrect
 
     unwatch()
     markerOffset = markerRef.value!.offsetTop
@@ -186,6 +195,8 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     const end = clamp(calculateIndex(endPx) + 1, start + 1, items.value.length)
 
     if (
+      // Only update the side we're scrolling towards,
+      // the other side will be updated incidentally
       (direction !== UP || start < first.value) &&
       (direction !== DOWN || end > last.value)
     ) {
