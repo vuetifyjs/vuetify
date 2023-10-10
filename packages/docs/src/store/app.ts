@@ -14,7 +14,7 @@ export type RootState = {
   apiSearch: string
   drawer: boolean | null
   toc: boolean | null
-  scrolling: false
+  scrolling: boolean
   items: NavItem[]
   pages: string[]
   settings: boolean

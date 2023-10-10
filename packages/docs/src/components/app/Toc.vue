@@ -146,7 +146,9 @@
   const router = useRouter()
   const theme = useTheme()
 
-  const activeStack = []
+  const routeToc = computed(() => route.meta.toc as TocItem[] | undefined)
+
+  const activeStack = [] as string[]
   const activeItem = ref('')
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -156,7 +158,7 @@
         activeStack.splice(activeStack.indexOf(entry.target.id), 1)
       }
     })
-    activeItem.value = activeStack.at(-1) || activeItem.value || route.meta.toc[0]?.to.slice(1) || ''
+    activeItem.value = activeStack.at(-1) || activeItem.value || routeToc.value?.[0]?.to.slice(1) || ''
   }, { rootMargin: '-10% 0px -75%' })
 
   async function observeToc () {
@@ -165,13 +167,13 @@
     activeItem.value = ''
     observer.disconnect()
     await nextTick()
-    route.meta.toc.forEach(v => {
+    routeToc.value?.forEach(v => {
       const el = document.querySelector(v.to)
       el && observer.observe(el)
     })
   }
 
-  watch(() => route.meta.toc, observeToc)
+  watch(routeToc, observeToc)
   onMounted(() => {
     observeToc()
   })
@@ -186,16 +188,16 @@
 
     scrolling.value = true
 
-    if (val === route.meta.toc[0]?.to.slice(1) && route.hash) {
+    if (val === routeToc.value?.[0]?.to.slice(1) && route.hash) {
       router.replace({ path: route.path })
     } else {
-      const toc = route.meta.toc.find(v => v.to.slice(1) === val)
+      const toc = routeToc.value?.find(v => v.to.slice(1) === val)
       if (toc) {
         await router.replace({ path: route.path, hash: toc.to })
       }
     }
     clearTimeout(timeout)
-    timeout = setTimeout(() => {
+    timeout = window.setTimeout(() => {
       scrolling.value = false
     }, 200)
   })
