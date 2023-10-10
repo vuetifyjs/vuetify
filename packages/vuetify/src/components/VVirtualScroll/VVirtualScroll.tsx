@@ -85,7 +85,10 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
         }
       }
 
-      onMounted(() => handleListeners(true))
+      onMounted(() => {
+        containerRef.value = getScrollParent(vm.vnode.el as HTMLElement, true)
+        handleListeners(true)
+      })
       onScopeDispose(handleListeners)
     })
 
