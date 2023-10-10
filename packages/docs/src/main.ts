@@ -82,6 +82,8 @@ const router = createRouter({
     },
   ],
   async scrollBehavior (to, from, savedPosition) {
+    if (appStore.scrolling) return
+
     let main = IN_BROWSER && document.querySelector('main')
     // For default & hash navigation
     let wait = 0
@@ -100,7 +102,7 @@ const router = createRouter({
     if (to.hash) {
       return {
         el: to.hash,
-        behavior: 'smooth',
+        behavior: main ? 'smooth' : undefined,
         top: main ? parseInt(getComputedStyle(main).getPropertyValue('--v-layout-top')) : 0,
       }
     } else if (savedPosition) return savedPosition
@@ -119,10 +121,6 @@ app.config.warnHandler = (err, vm, info) => {
 }
 
 router.beforeEach((to, from, next) => {
-  appStore.activeHeaders = {
-    hrefs: [],
-    temp: '',
-  }
   if (to.meta.locale !== from.meta.locale) {
     localeStore.locale = to.meta.locale as string
   }
