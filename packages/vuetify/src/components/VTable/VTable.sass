@@ -70,6 +70,8 @@
   // Do not inherit line-height
   line-height: $table-line-height
   max-width: 100%
+  display: flex
+  flex-direction: column
 
   > .v-table__wrapper
     > table
@@ -110,6 +112,7 @@
 .v-table__wrapper
   border-radius: inherit
   overflow: auto
+  flex: 1
 
 // Modifiers
 .v-table--has-top

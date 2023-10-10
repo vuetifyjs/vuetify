@@ -18,6 +18,7 @@ import { dateEmits, makeDateProps } from '../VDateInput/composables'
 import { useDate } from '@/labs/date'
 
 export const makeVDatePickerMonthProps = propsFactory({
+  allowedDates: [Array, Function],
   color: String,
   showAdjacentMonths: Boolean,
   hideWeekdays: Boolean,
@@ -109,10 +110,6 @@ export const VDatePickerMonth = genericComponent()({
       const endDate = validDates[1]
 
       return days.map((date, index) => {
-        const isDisabled = !!(
-          (props.min && adapter.isAfter(props.min, date)) ||
-          (props.max && adapter.isAfter(date, props.max))
-        )
         const isStart = startDate && adapter.isSameDay(date, startDate)
         const isEnd = endDate && adapter.isSameDay(date, endDate)
         const isAdjacent = !adapter.isSameMonth(date, month.value)
@@ -124,7 +121,7 @@ export const VDatePickerMonth = genericComponent()({
           formatted: adapter.format(date, 'keyboardDate'),
           year: adapter.getYear(date),
           month: adapter.getMonth(date),
-          isDisabled,
+          isDisabled: isDisabled(date),
           isWeekStart: index % 7 === 0,
           isWeekEnd: index % 7 === 6,
           isSelected: isStart || isEnd,
@@ -152,6 +149,23 @@ export const VDatePickerMonth = genericComponent()({
     })
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
+
+    function isDisabled (value: any) {
+      const date = adapter.date(value)
+
+      if (props.min && adapter.isAfter(props.min, date)) return true
+      if (props.max && adapter.isAfter(date, props.max)) return true
+
+      if (Array.isArray(props.allowedDates)) {
+        return !props.allowedDates.some(d => adapter.isSameDay(adapter.date(d), date))
+      }
+
+      if (typeof props.allowedDates === 'function') {
+        return !props.allowedDates(date)
+      }
+
+      return false
+    }
 
     function selectDate (date: any) {
       let newModel = props.modelValue.slice()

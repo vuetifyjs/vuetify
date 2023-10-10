@@ -11,6 +11,7 @@ import { setupLayouts } from 'virtual:generated-layouts'
 // Plugins
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import { createHead } from '@vueuse/head'
 import { installPinia, pinia } from '@/plugins/pinia'
 import { installGlobalComponents } from '@/plugins/global-components'
 import { installAuth0 } from '@/plugins/auth'
@@ -105,6 +106,7 @@ const router = createRouter({
   },
 })
 
+app.use(createHead())
 app.use(router)
 
 app.config.errorHandler = (err, vm, info) => {
