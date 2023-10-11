@@ -3,7 +3,7 @@ export default {
   close: 'Fermer',
   dataIterator: {
     noResultsText: 'Aucun enregistrement correspondant trouvé',
-    loadingText: `Chargement de l'élément...`,
+    loadingText: `Chargement de l'élément…`,
   },
   dataTable: {
     itemsPerPageText: 'Lignes par page :',
@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '{0} de plus',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} fichier(s)',
     counterSize: '{0} fichier(s) ({1} au total)',
@@ -66,4 +71,5 @@ export default {
       icon: 'Note de {0} sur {1}',
     },
   },
+  loading: 'Chargement…',
 }

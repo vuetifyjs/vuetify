@@ -80,7 +80,7 @@ export default baseMixins.extend<options>().extend({
       this.$emit('click', e)
     },
     genIcon () {
-      const icon = getSlot(this, 'actions') ||
+      const icon = getSlot(this, 'actions', { open: this.isActive }) ||
         [this.$createElement(VIcon, this.expandIcon)]
 
       return this.$createElement(VFadeTransition, [

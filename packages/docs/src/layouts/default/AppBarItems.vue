@@ -5,24 +5,16 @@
     <template v-if="$vuetify.breakpoint.smAndUp">
       <vertical-divider />
 
-      <learn-menu />
-
       <support-menu />
 
       <enterprise-link />
 
       <template v-if="$vuetify.breakpoint.mdAndUp">
-        <team-link />
-
         <vertical-divider />
 
         <store-link />
 
         <settings-toggle />
-
-        <jobs-link />
-
-        <notifications-menu />
       </template>
     </template>
 

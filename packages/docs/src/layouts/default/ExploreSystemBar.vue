@@ -24,7 +24,7 @@
       color="primary"
       dark
       depressed
-      href="https://next.vuetifyjs.com/"
+      href="https://vuetifyjs.com/"
       target="_blank"
     >
       <span class="d-none d-md-block">Start exploring</span>

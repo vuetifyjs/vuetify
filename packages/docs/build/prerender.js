@@ -91,7 +91,7 @@ function render ({ routes, template, bundle, clientManifest }) {
     const start = performance.now()
 
     const context = {
-      hostname: 'https://vuetifyjs.com', // TODO
+      hostname: 'https://v2.vuetifyjs.com', // TODO
       hreflangs: availableLanguages.reduce((acc, lang) => {
         const href = path.normalize(`/${lang}/${route.path}`)
         return acc + `<link rel="alternate" hreflang="${lang}" href="${href}">`

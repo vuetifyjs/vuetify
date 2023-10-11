@@ -15,7 +15,7 @@ related:
 
 Version 2 contains non backwards compatible breaking changes. This includes previously deprecated functionality from v1.x.x. These breaking changes are noted in the console for the corresponding components.
 
-The existing grid is still operational and has an [eslint plugin](https://github.com/vuetifyjs/eslint-plugin-vuetify) to help with migration. This plugin can also be used to help upgrade to the [**new grid**](https://vuetifyjs.com/components/grids).
+The existing grid is still operational and has an [eslint plugin](https://github.com/vuetifyjs/eslint-plugin-vuetify) to help with migration. This plugin can also be used to help upgrade to the [**new grid**](/components/grids).
 
 ### Bootstrap
 
@@ -225,7 +225,7 @@ const opts = {
 }
 ```
 
-- Now defaults to use [mdi](https://materialdesignicons.com/) icons. For information on how to install please navigate [here](https://vuetifyjs.com/features/icon-fonts#install-material-design-icons)
+- Now defaults to use [mdi](https://materialdesignicons.com/) icons. For information on how to install please navigate [here](/features/icon-fonts#install-material-design-icons)
 - Is now located under the **icons** property of the Vuetify options
 
 If you want to use a custom iconfont, you must set it up in the initial Vuetify options now.
@@ -256,7 +256,7 @@ Vue.use(Vuetify, {
 
 ### Goto - scrolling helper
 
-Import location has changed. Must be explicitly bootstrapped with the Vuetify instance to use in **vue-router** scroll-behavior. Example of how to do this [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/docs/src/router/scroll-behavior.js). Reference documentation for scroll-behavior usage [here](https://vuetifyjs.com/en/features/scrolling/#use-with-router).
+Import location has changed. Must be explicitly bootstrapped with the Vuetify instance to use in **vue-router** scroll-behavior. Example of how to do this [here](https://github.com/vuetifyjs/vuetify/blob/v2-stable/packages/docs/src/router/scroll-behavior.js). Reference documentation for scroll-behavior usage [here](/features/scrolling/#use-with-router).
 
 ```js
 // v1.5

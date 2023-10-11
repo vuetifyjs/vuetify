@@ -21,7 +21,7 @@ class SitemapPlugin {
       })
     }
 
-    const plugin = new SitemapWebpackPlugin('https://vuetifyjs.com', paths)
+    const plugin = new SitemapWebpackPlugin('https://v2.vuetifyjs.com', paths)
 
     plugin.apply(compiler)
   }

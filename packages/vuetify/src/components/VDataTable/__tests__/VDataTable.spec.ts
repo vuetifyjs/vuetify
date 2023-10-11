@@ -957,11 +957,12 @@ describe('VDataTable.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  // https://github.com/vuetifyjs/vuetify/issues/11179
-  it('should return rows from columns that exclusively match custom filters', async () => {
+  // https://github.com/vuetifyjs/vuetify/issues/11600
+  it('should return rows from columns that match custom filters', async () => {
     const wrapper = mountFunction({
       propsData: {
         items: testItems,
+        filterMode: 'union',
         headers: [
           { text: 'Dessert (100g serving)', align: 'left', value: 'name' },
           { text: 'Calories', value: 'calories', filter: value => value === 159 },
@@ -973,6 +974,33 @@ describe('VDataTable.ts', () => {
       },
     })
 
+    wrapper.setProps({ search: 'eclair' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalCurrentItems).toHaveLength(2)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/11179
+  it('should return rows from columns that exclusively match custom filters', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: testItems,
+        filterMode: 'intersection',
+        headers: [
+          { text: 'Dessert (100g serving)', align: 'left', value: 'name' },
+          { text: 'Calories', value: 'calories', filter: value => value === 159 },
+          { text: 'Fat (g)', value: 'fat' },
+          { text: 'Carbs (g)', value: 'carbs' },
+          { text: 'Protein (g)', value: 'protein' },
+          { text: 'Iron (%)', value: 'iron' },
+        ],
+      },
+    })
+
+    wrapper.setProps({ search: 'eclair' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalCurrentItems).toHaveLength(0)
+
+    wrapper.setProps({ search: 'frozen' })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalCurrentItems).toHaveLength(1)
   })

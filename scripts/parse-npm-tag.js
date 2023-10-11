@@ -1,16 +1,24 @@
 const semver = require('semver')
 
-const version = process.argv[2]
+function parseTag (version) {
+  const prerelease = semver.prerelease(version)
 
-if (!semver.valid(version)) {
-  console.error(`Error: '${version}' is not a valid NPM version string`)
-  process.exit(9)
+  if (prerelease == null) {
+    return 'v2-stable'
+  } else {
+    return 'v2-dev'
+  }
 }
 
-const prerelease = semver.prerelease(version)
+module.exports = { parseTag }
 
-if (prerelease == null) {
-  console.log('latest')
-} else {
-  console.log('next')
+if (require.main === module) {
+  const version = process.argv[2]
+
+  if (!semver.valid(version)) {
+    console.error(`Error: '${version}' is not a valid NPM version string`)
+    process.exit(9)
+  }
+
+  console.log(parseTag(version))
 }

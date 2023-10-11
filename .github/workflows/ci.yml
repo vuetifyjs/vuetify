@@ -12,7 +12,7 @@ env:
 
 jobs:
   close:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: github.event_name == 'push' && (github.ref == 'refs/heads/v2-stable' || github.ref == 'refs/heads/v2-dev') && github.repository_owner == 'vuetifyjs'
     steps:
       - uses: vuetifyjs/close-action@master
@@ -20,8 +20,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
         with:
@@ -35,8 +38,11 @@ jobs:
       - run: yarn run lint
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
         with:
@@ -51,9 +57,12 @@ jobs:
 
   deploy:
     needs: [lint, test]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
     steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
         with:
@@ -93,9 +102,12 @@ jobs:
 
   publish-docs:
     needs: [lint, test]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/v2-stable' || github.ref == 'refs/heads/v2-dev')
     steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
         with:
@@ -103,7 +115,7 @@ jobs:
             node_modules
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
-      - run: yarn global add now
+      - run: yarn global add vercel
 
       - name: Download eo-UY
         uses: crowdin/github-action@1.1.2

@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '{0} més',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} fitxers',
     counterSize: '{0} fitxers ({1} en total)',
@@ -66,4 +71,5 @@ export default {
       icon: 'Puntuació {0} de {1}',
     },
   },
+  loading: 'Loading...',
 }

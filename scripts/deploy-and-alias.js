@@ -1,8 +1,8 @@
 const shell = require('shelljs')
 
 const alias = {
-  'refs/heads/v2-stable': 'vuetifyjs.com',
-  'refs/heads/dev': 'dev.vuetifyjs.com',
+  'refs/heads/v2-stable': 'v2.vuetifyjs.com',
+  'refs/heads/v2-dev': 'v2-dev.vuetifyjs.com',
 }[process.argv[2]]
 
 if (!alias) {
@@ -11,13 +11,17 @@ if (!alias) {
 }
 
 const options = {
-  env: process.env,
+  env: {
+    ...process.env,
+    VERCEL_PROJECT_ID: 'Qmc75Jx1hJ4tMQGbp1BJDgPLHxyzxRcU5SuK6UVVvvr3MD',
+    VERCEL_ORG_ID: 'team_MYQkaFitxJXQ2v3dioJaj2nx',
+  },
 }
 
-const child = shell.exec('now --scope=vuetifyjs --token=$NOW_TOKEN --confirm', options)
+const child = shell.exec('vercel --scope=vuetifyjs --token=$NOW_TOKEN --confirm', options)
 if (child.code !== 0) {
   process.exit(child.code)
 }
 const instanceUrl = child.stdout
 
-shell.exec(`now alias set ${instanceUrl} ${alias} --scope=vuetifyjs --token=$NOW_TOKEN`, options)
+shell.exec(`vercel alias set ${instanceUrl} ${alias} --scope=vuetifyjs --token=$NOW_TOKEN`, options)

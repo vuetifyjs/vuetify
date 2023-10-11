@@ -17,7 +17,7 @@ Vuetify is always under development. We are constantly working towards improving
 
 <alert type="info">
 
-  Find the latest information about upcoming releases [here](https://next.vuetifyjs.com/en/introduction/roadmap/)
+  Find the latest information about upcoming releases [here](https://vuetifyjs.com/en/introduction/roadmap/)
 
 </alert>
 

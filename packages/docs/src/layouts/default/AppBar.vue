@@ -4,6 +4,7 @@
     :color="dark ? undefined : 'white'"
     app
     class="v-bar--underline"
+    clipped-left
     flat
     v-bind="{ [`clipped-${rtl ? 'left' : 'right'}`]: true }"
   >
@@ -16,6 +17,12 @@
       v-if="$vuetify.breakpoint.smOnly || $vuetify.breakpoint.mdOnly"
       :to="{ name: 'Home' }"
       class="ml-0 mr-2 ml-md-2"
+    />
+
+    <vuetify-logo
+      v-else
+      :to="{ name: 'Home' }"
+      class="ml-2"
     />
 
     <default-app-bar-items />

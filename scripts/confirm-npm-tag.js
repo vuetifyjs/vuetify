@@ -1,7 +1,7 @@
-const semver = require('semver')
 const shell = require('shelljs')
 const inquirer = require('inquirer')
 const version = require('../lerna.json').version
+const { parseTag } = require('./parse-npm-tag')
 
 function exec (command) {
   const result = shell.exec(command, { silent: true })
@@ -14,7 +14,7 @@ function exec (command) {
 }
 
 const branch = exec('git symbolic-ref --short HEAD')
-const tag = semver.prerelease(version) == null ? 'latest' : branch
+const tag = parseTag(version)
 
 shell.echo(`Releasing ${version} on ${branch}`)
 shell.echo(`Tag: ${tag}`)

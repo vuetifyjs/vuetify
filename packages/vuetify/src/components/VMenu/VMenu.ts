@@ -27,7 +27,7 @@ import {
 import goTo from '../../services/goto'
 
 // Types
-import { VNode, VNodeDirective, VNodeData } from 'vue'
+import { VNode, VNodeDirective, VNodeData, PropType } from 'vue'
 
 const baseMixins = mixins(
   Dependent,
@@ -81,6 +81,10 @@ export default baseMixins.extend({
     transition: {
       type: [Boolean, String],
       default: 'v-menu-transition',
+    },
+    contentProps: {
+      type: Object as PropType<Record<string, any>>,
+      default: () => ({}),
     },
   },
 
@@ -340,6 +344,7 @@ export default baseMixins.extend({
       const options = {
         attrs: {
           ...this.getScopeIdAttrs(),
+          ...this.contentProps,
           role: 'role' in this.$attrs ? this.$attrs.role : 'menu',
         },
         staticClass: 'v-menu__content',
@@ -454,6 +459,8 @@ export default baseMixins.extend({
       if (tile.tabIndex === -1) this.nextTile()
     },
     onKeyDown (e: KeyboardEvent) {
+      if (this.disableKeys) return
+
       if (e.keyCode === keyCodes.esc) {
         // Wait for dependent elements to close first
         setTimeout(() => { this.isActive = false })

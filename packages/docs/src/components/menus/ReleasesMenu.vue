@@ -26,11 +26,15 @@
         return [
           { heading: this.$t('documentation') },
           {
-            title: '3.0.0',
-            href: 'https://next.vuetifyjs.com',
+            title: '3.x (latest)',
+            href: 'https://vuetifyjs.com',
           },
           {
-            title: '1.5.x',
+            title: '2.6.x (v2-stable)',
+            href: 'https://v2.vuetifyjs.com',
+          },
+          {
+            title: '1.5.x (v1-stable)',
             href: 'https://v15.vuetifyjs.com',
           },
           { divider: true },

@@ -17,7 +17,7 @@ Out of the box you get access to all colors in the [Material Design spec](https:
 
 ## Classes
 
-Each color from the spec gets converted to a **background** and **text** variant for styling within your application through a class, e.g. `<div class="red">` or `<span class="red--text">`. These class colors are defined [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_colors.scss).
+Each color from the spec gets converted to a **background** and **text** variant for styling within your application through a class, e.g. `<div class="red">` or `<span class="red--text">`. These class colors are defined [here](https://github.com/vuetifyjs/vuetify/blob/v2-stable/packages/vuetify/src/styles/settings/_colors.scss).
 
 <example file="color/classes" />
 

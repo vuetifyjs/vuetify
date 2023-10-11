@@ -1,11 +1,11 @@
-import Mouse from '../mouse'
+import Mouse from '../index'
 
 import {
   mount,
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
-import { ExtractVue } from '../../../../util/mixins'
+import { ExtractVue } from '../../../util/mixins'
 
 const Mock = Mouse.extend({
   render: h => h('div'),
