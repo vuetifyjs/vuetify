@@ -493,6 +493,31 @@ describe('VAutocomplete', () => {
       })
   })
 
+  it('should clear search query after selecting an item', () => {
+    const selectedItems = ref(undefined)
+
+    cy
+      .mount(() => (
+        <VAutocomplete
+          v-model={ selectedItems.value }
+          items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+          multiple
+          clearSearchOnSelection
+        />
+      ))
+      .get('.v-autocomplete')
+      .click()
+      .get('.v-list-item')
+      .should('have.length', 6)
+      .get('.v-autocomplete input')
+      .type('Cal')
+      .should('have.length', 1)
+      .get('.v-list-item').eq(0)
+      .click({ waitForAnimations: false })
+      .get('.v-list-item')
+      .should('have.length', 6)
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })
