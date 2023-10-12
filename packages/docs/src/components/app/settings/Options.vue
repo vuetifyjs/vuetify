@@ -18,8 +18,6 @@
 
     <api-option />
 
-    <pwa-option />
-
     <slash-search-option />
 
     <sync-option />
@@ -30,7 +28,6 @@
   // Components
   import ApiOption from '@/components/app/settings/options/ApiOption.vue'
   import CodeOption from '@/components/app/settings/options/CodeOption.vue'
-  import PwaOption from '@/components/app/settings/options/PwaOption.vue'
   import SettingsHeader from '@/components/app/settings/SettingsHeader.vue'
   import SlashSearchOption from '@/components/app/settings/options/SlashSearchOption.vue'
   import SyncOption from '@/components/app/settings/options/SyncOption.vue'
