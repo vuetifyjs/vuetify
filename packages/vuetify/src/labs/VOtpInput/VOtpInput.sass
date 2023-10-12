@@ -16,25 +16,25 @@
     height: 100%
 
 .v-otp-input__divider
-  margin: 0 8px
+  margin: $otp-input-divider-margin
 
 .v-otp-input__content
   align-items: center
   display: flex
   gap: $otp-input-content-gap
-  height: 64px
+  height: $otp-input-content-height
   padding: $otp-input-content-padding
   justify-content: center
-  max-width: 320px
+  max-width: $otp-input-content-max-width
   position: relative
   border-radius: inherit
 
   .v-otp-input--divided &
-    max-width: 360px
+    max-width: $otp-input-divided-content-max-width
 
 .v-otp-input__field
   color: inherit
-  font-size: 1.25rem
+  font-size: $otp-input-field-font-size
   height: 100%
   outline: none
   text-align: center

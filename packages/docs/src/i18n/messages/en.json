@@ -136,6 +136,8 @@
   "enable-inline-api-message": "Display API tables inline on documentation pages.",
   "enable-notifications": "Enable notifications",
   "enable-notifications-message": "Notifications are located at the top right of the screen in the actions bar and provide information about new releases, updates, and other important information.",
+  "enable-pwa-refresh": "Enable Refresh Prompt",
+  "enable-pwa-refresh-message": "Display the refresh prompt when new documentation updates have been downloaded.",
   "enterprise": "Enterprise",
   "email-address": "Email address",
   "esc": "Esc",

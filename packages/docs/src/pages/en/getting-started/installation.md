@@ -50,7 +50,7 @@ pnpm create vuetify
 ```
 
 ```bash [bun]
-bun create-vuetify
+bun create vuetify
 ```
 
 :::
@@ -147,6 +147,9 @@ Next, integrate the following entries into your `nuxt.config.ts` file:
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 export default defineNuxtConfig({
   //...
+  build: {
+    transpile: ['vuetify'],
+  },
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {

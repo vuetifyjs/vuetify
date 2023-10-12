@@ -73,6 +73,8 @@ export {
   mdiCheckboxBlankOutline,
   mdiCheckboxMarked,
   mdiCheckboxMarkedCircle,
+  mdiChevronDoubleLeft,
+  mdiChevronDoubleRight,
   mdiChevronDown,
   mdiChevronLeft,
   mdiChevronRight,

@@ -1,5 +1,5 @@
 import path from 'upath'
-import fs from 'fs'
+import fs from 'fs/promises'
 import { fileURLToPath } from 'url'
 
 import { defineConfig, loadEnv } from 'vite'
@@ -18,6 +18,7 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 import { configureMarkdown, parseMeta } from './build/markdown-it'
 import Api from './build/api-plugin'
 import { Examples } from './build/examples-plugin'
+import { genAppMetaInfo } from './src/util/metadata'
 
 const resolve = (file: string) => fileURLToPath(new URL(file, import.meta.url))
 
@@ -30,6 +31,8 @@ const ssrTransformCustomDirective = () => {
 
 export default defineConfig(({ command, mode, ssrBuild }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
+
+  let allRoutes: any[]
 
   return {
     logLevel: 'info',
@@ -139,7 +142,8 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
           }
         },
         onRoutesGenerated (routes) {
-          return routes.filter(route => !route.disabled)
+          allRoutes = routes.filter(route => !route.disabled)
+          return allRoutes
         },
         importMode (filepath) {
           return [
@@ -241,11 +245,49 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       },
 
       {
-        name: 'vuetify:fallback',
+        // lightweight head-only ssg
+        name: 'vuetify:ssg',
         enforce: 'post',
-        transformIndexHtml (html) {
-          fs.mkdirSync('dist', { recursive: true })
-          fs.writeFileSync(path.join('dist/_fallback.html'), html)
+        async transformIndexHtml (html) {
+          if (mode !== 'production') return html
+
+          await fs.mkdir('dist', { recursive: true })
+          await fs.writeFile(path.join('dist/_fallback.html'), html)
+
+          const routes = allRoutes.filter(({ path: route }) => {
+            return route !== '/' &&
+              !['/eo-UY/', '/api/', '/user/', ':', '*'].some(v => route.includes(v))
+          }).map(route => {
+            const meta = genAppMetaInfo({
+              title: `${route.meta.title}${route.path === '/en/' ? '' : ' — Vuetify'}`,
+              description: route.meta.description,
+              keywords: route.meta.keywords,
+            })
+            const metaContent = [
+              `<title>${meta.title}</title>`,
+              ...meta.meta.map((v: any) => {
+                const attrs = Object.keys(v).filter(k => k !== 'key').map(k => `${k}="${v[k]}"`).join(' ')
+                return `<meta ${attrs}>`
+              }),
+              ...meta.link.map((v: any) => {
+                const attrs = Object.keys(v).map(k => `${k}="${v[k]}"`).join(' ')
+                return `<link ${attrs}>`
+              }),
+            ].join('\n    ')
+            const content = html.replace('<!-- @inject-meta -->', metaContent)
+            return {
+              path: route.path,
+              content
+            }
+          })
+
+          for (const route of routes) {
+            const filename = path.join('dist', route.path, 'index.html')
+            await fs.mkdir(path.dirname(filename), { recursive: true })
+            await fs.writeFile(filename, route.content)
+          }
+
+          return routes.find(r => r.path === '/en/')?.content
         },
       },
 
@@ -253,18 +295,6 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 
       process.env.HTTPS === 'true' ? basicSsl() : undefined,
     ],
-
-    // https://github.com/antfu/vite-ssg
-    ssgOptions: {
-      script: 'sync',
-      formatting: 'minify',
-      crittersOptions: false,
-      includedRoutes (routes: string[]) {
-        return routes.filter(route => (route === '/' || route.startsWith('/en/')) &&
-          ['/eo-UY/', '/api/', ':', '*'].every(v => !route.includes(v))
-        )
-      },
-    },
 
     optimizeDeps: {
       include: [

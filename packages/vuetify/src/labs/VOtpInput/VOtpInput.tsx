@@ -29,7 +29,6 @@ export type VOtpInputSlots = {
 export const makeVOtpInputProps = propsFactory({
   autofocus: Boolean,
   divider: String,
-  fluid: Boolean,
   focusAll: Boolean,
   label: {
     type: String,
@@ -214,7 +213,6 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
             'v-otp-input',
             {
               'v-otp-input--divided': !!props.divider,
-              'v-otp-input--fluid': props.fluid,
             },
             props.class,
           ]}

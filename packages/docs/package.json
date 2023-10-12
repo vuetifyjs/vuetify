@@ -3,7 +3,7 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john@vuetifyjs.com>",
-  "version": "3.3.20",
+  "version": "3.3.21",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuetifyjs/vuetify.git",
@@ -11,8 +11,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite-ssg build && vite-ssg render",
-    "build:dev": "vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "preview-https": "HTTPS=true vite preview",
     "lint": "vue-tsc --noEmit --pretty && yarn lint:md && jest --no-cache",
@@ -39,7 +38,7 @@
     "vue-i18n": "^9.3.0-beta.16",
     "vue-instantsearch": "^4.8.8",
     "vue-prism-component": "^2.0.0",
-    "vuetify": "^3.3.20"
+    "vuetify": "^3.3.21"
   },
   "devDependencies": {
     "@emailjs/browser": "^3.10.0",
@@ -52,8 +51,7 @@
     "@vitejs/plugin-basic-ssl": "^1.0.1",
     "@vitejs/plugin-vue": "^4.2.2",
     "@vue/compiler-sfc": "^3.3.4",
-    "@vuetify/api-generator": "^3.3.20",
-    "@vuetify/vite-ssg": "^0.21.0",
+    "@vuetify/api-generator": "^3.3.21",
     "ajv": "^8.12.0",
     "async-es": "^3.2.4",
     "date-fns": "^2.29.3",

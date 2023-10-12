@@ -1,5 +1,5 @@
 // Utilities
-import { createRange } from '@/util'
+import { createRange, padStart } from '@/util'
 
 // Types
 import type { DateAdapter } from '../DateAdapter'
@@ -278,6 +278,21 @@ function format (value: Date, formatString: string, locale: string): string {
   return new Intl.DateTimeFormat(locale, options).format(date)
 }
 
+function toISO (adapter: DateAdapter<any>, value: any) {
+  const date = adapter.toJsDate(value)
+  const year = date.getFullYear()
+  const month = padStart(String(date.getMonth() + 1), 2, '0')
+  const day = padStart(String(date.getDate()), 2, '0')
+
+  return `${year}-${month}-${day}`
+}
+
+function parseISO (value: string) {
+  const [year, month, day] = value.split('-').map(Number)
+
+  return new Date(year, month - 1, day)
+}
+
 function addDays (date: Date, amount: number) {
   const d = new Date(date)
   d.setDate(d.getDate() + amount)
@@ -378,6 +393,14 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   toJsDate (date: Date) {
     return date
+  }
+
+  toISO (date: Date): string {
+    return toISO(this, date)
+  }
+
+  parseISO (date: string) {
+    return parseISO(date)
   }
 
   addDays (date: Date, amount: number) {
