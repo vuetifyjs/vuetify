@@ -78,6 +78,7 @@ async function matchPrecache (request) {
   const cacheKey = getCacheKeyForUrl(request.url)
   if (cacheKey) {
     response.then(response => {
+      response = ensureCacheableResponse(response)
       if (response.status === 200) {
         precache.put(cacheKey, response.clone())
       }
@@ -98,19 +99,19 @@ async function networkFirst (request) {
 
   let response
   try {
-    response = await fetch(request)
+    response = ensureCacheableResponse(await fetch(request))
   } catch (e) {
     console.warn('[SW] Failed to fetch', e)
   }
 
   if (response?.status === 200) {
-    cache.put(request, response.clone())
+    cache.put(request, response)
   } else {
     const cached = await caches.match(request)
     if (cached) return cached
   }
 
-  return response
+  return response.clone()
 }
 
 async function getFallbackDocument () {
@@ -120,6 +121,7 @@ async function getFallbackDocument () {
   const request = fetch('/_fallback.html')
   if (cacheKey) {
     request.then(response => {
+      response = ensureCacheableResponse(response)
       if (response.status === 200) {
         precache.put(cacheKey, response.clone())
       }
@@ -212,7 +214,7 @@ async function cacheManifestEntries (manifest) {
   }
   const cache = await openCache('precache')
   await eachLimit(urlsToCacheKeys, 10, async ([url, cacheKey]) => {
-    const response = await fetch(url)
+    const response = ensureCacheableResponse(await fetch(url))
     if (response.status === 200) {
       await cache.put(cacheKey, response)
     } else {
@@ -241,5 +243,20 @@ function messageSW (sw, data) {
       resolve(event.data)
     }
     sw.postMessage(data, [messageChannel.port2])
+  })
+}
+
+function ensureCacheableResponse (response) {
+  if (!response.redirected) return response
+
+  if (!response.url || new URL(response.url).origin !== location.origin) {
+    throw new Error('Uncacheable redirect', { cause: response })
+  }
+
+  const cloned = response.clone()
+  return new Response(cloned.body, {
+    headers: new Headers(cloned.headers),
+    status: cloned.status,
+    statusText: cloned.statusText,
   })
 }
