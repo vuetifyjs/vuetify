@@ -2,7 +2,7 @@
   <v-defaults-provider
     :defaults="{
       VIcon: {
-        color: user.api === 'inline' ? 'primary' : 'disabled'
+        color: user.pwaRefresh ? 'primary' : 'disabled'
       }
     }"
   >
