@@ -1,7 +1,7 @@
 <template>
   <app-sheet width="250">
     <v-skeleton-loader
-      :loading="isLoading"
+      :loading="isLoading || !user"
       type="image, paragraph, divider, list-item-avatar"
     >
       <div class="text-center py-4 flex-grow-1">
