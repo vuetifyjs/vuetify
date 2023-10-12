@@ -11,11 +11,13 @@ import { setupLayouts } from 'virtual:generated-layouts'
 // Plugins
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import { createHead } from '@vueuse/head'
 import { installPinia, pinia } from '@/plugins/pinia'
 import { installGlobalComponents } from '@/plugins/global-components'
 import { installAuth0 } from '@/plugins/auth'
 import { installGtag } from '@/plugins/gtag'
 import { installI18n } from '@/plugins/i18n'
+import { useAppStore } from '@/store/app'
 import { useLocaleStore } from '@/store/locale'
 import { installPwa } from '@/plugins/pwa'
 import { useUserStore } from '@/store/user'
@@ -37,6 +39,7 @@ import { IN_BROWSER } from '@/util/globals'
 
 const routes = setupLayouts(generatedRoutes)
 
+const appStore = useAppStore(pinia)
 const localeStore = useLocaleStore(pinia)
 const userStore = useUserStore(pinia)
 
@@ -79,6 +82,8 @@ const router = createRouter({
     },
   ],
   async scrollBehavior (to, from, savedPosition) {
+    if (appStore.scrolling) return
+
     let main = IN_BROWSER && document.querySelector('main')
     // For default & hash navigation
     let wait = 0
@@ -97,7 +102,7 @@ const router = createRouter({
     if (to.hash) {
       return {
         el: to.hash,
-        behavior: 'smooth',
+        behavior: main ? 'smooth' : undefined,
         top: main ? parseInt(getComputedStyle(main).getPropertyValue('--v-layout-top')) : 0,
       }
     } else if (savedPosition) return savedPosition
@@ -105,6 +110,7 @@ const router = createRouter({
   },
 })
 
+app.use(createHead())
 app.use(router)
 
 app.config.errorHandler = (err, vm, info) => {

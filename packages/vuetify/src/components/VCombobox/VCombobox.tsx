@@ -150,8 +150,8 @@ export const VCombobox = genericComponent<new <
       get: () => {
         return _search.value
       },
-      set: val => {
-        _search.value = val
+      set: (val: string | null) => {
+        _search.value = val ?? ''
         if (!props.multiple) {
           model.value = [transformItem(props, val)]
         }
