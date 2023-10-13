@@ -282,7 +282,6 @@ export const VSelect = genericComponent<new <
           item => model.value.some(s => props.valueComparator(s.value, item.value))
         )
         // IN_BROWSER && window.requestAnimationFrame(() => {
-        //   console.log('--no mate---', model.value)
         //   index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         // })
       }
