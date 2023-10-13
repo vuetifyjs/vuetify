@@ -134,7 +134,7 @@ async function getFallbackDocument () {
   const fallback = await precache.match(cacheKey)
 
   if (!fallback) {
-    return request
+    return request.then(ensureCacheableResponse)
   }
 
   return fallback
