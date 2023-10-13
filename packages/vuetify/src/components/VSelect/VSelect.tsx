@@ -195,9 +195,10 @@ export const VSelect = genericComponent<new <
       }
 
       if (['ArrowUp'].includes(e.key)) {
-        vVirtualScrollRef.value?.scrollToIndex(displayItems.value.length - 1)
         window.requestAnimationFrame(() => {
-          listRef.value?.focus('last')
+          vVirtualScrollRef.value?.scrollToIndex(displayItems.value.length - 1)?.then(_ => {
+            listRef.value?.focus('last')
+          })
         })
       }
 
@@ -280,9 +281,10 @@ export const VSelect = genericComponent<new <
         const index = displayItems.value.findIndex(
           item => model.value.some(s => props.valueComparator(s.value, item.value))
         )
-        IN_BROWSER && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
-        })
+        // IN_BROWSER && window.requestAnimationFrame(() => {
+        //   console.log('--no mate---', model.value)
+        //   index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
+        // })
       }
     })
 

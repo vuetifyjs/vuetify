@@ -30,6 +30,7 @@ export const makeVirtualProps = propsFactory({
 export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, offset?: Ref<number>) {
   const first = shallowRef(0)
   const baseItemHeight = shallowRef(props.itemHeight)
+  const isScrolling = shallowRef(false)
   const itemHeight = computed({
     get: () => parseInt(baseItemHeight.value ?? 0, 10),
     set (val) {
@@ -81,6 +82,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   function handleScroll () {
     if (!containerRef.value || !contentRect.value) return
 
+    isScrolling.value = true
     const height = contentRect.value.height - 56
     const scrollTop = containerRef.value.scrollTop
     const direction = scrollTop < lastScrollTop ? UP : DOWN
@@ -97,12 +99,25 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
 
     lastScrollTop = scrollTop
   }
+  function handleScrollEnd () {
+    isScrolling.value = false
+  }
 
-  function scrollToIndex (index: number) {
+  function scrollToIndex (index: number): Promise<boolean> | undefined {
     if (!containerRef.value) return
 
     const offset = calculateOffset(index)
     containerRef.value.scrollTop = offset
+    isScrolling.value = true
+    return new Promise((resolve: any) => {
+      watchEffect(() => {
+        if (!isScrolling.value) {
+          window.requestAnimationFrame(() => {
+            resolve(true)
+          })
+        }
+      })
+    })
   }
 
   const last = computed(() => Math.min(items.value.length, first.value + visibleItems.value))
@@ -135,6 +150,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     paddingBottom,
     scrollToIndex,
     handleScroll,
+    handleScrollEnd,
     handleItemResize,
   }
 }

@@ -63,6 +63,7 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
     const {
       containerRef,
       handleScroll,
+      handleScrollEnd,
       handleItemResize,
       scrollToIndex,
       paddingTop,
@@ -74,9 +75,11 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
       onMounted(() => {
         containerRef.value = getScrollParent(vm.vnode.el as HTMLElement, true)
         containerRef.value?.addEventListener('scroll', handleScroll)
+        containerRef.value?.addEventListener('scrollend', handleScrollEnd)
       })
       onScopeDispose(() => {
         containerRef.value?.removeEventListener('scroll', handleScroll)
+        containerRef.value?.removeEventListener('scrollend', handleScrollEnd)
       })
     })
 
