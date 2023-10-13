@@ -90,6 +90,8 @@
       "danger-zone-message": "The following settings are for development purposes."
     },
     "perks": {
+      "avatar": "Avatar",
+      "avatar-message": "Add a custom avatar image displayed on the user profile and user bar.",
       "disable-ads": "Disable Ads",
       "disable-ads-message": "Disable advertisements on all documentation pages.",
       "experience": "Experience",
