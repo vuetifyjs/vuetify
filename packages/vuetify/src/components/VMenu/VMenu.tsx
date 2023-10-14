@@ -136,7 +136,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
           focusChild(el, 'next')
         } else if (e.key === 'ArrowUp') {
           e.preventDefault()
-          // focusChild(el, 'prev')
+          focusChild(el, 'last')
         }
       } else if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
         isActive.value = true

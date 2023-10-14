@@ -196,9 +196,7 @@ export const VSelect = genericComponent<new <
 
       if (['ArrowUp'].includes(e.key)) {
         window.requestAnimationFrame(() => {
-          vVirtualScrollRef.value?.scrollToIndex(displayItems.value.length - 1)?.then(_ => {
-            listRef.value?.focus('last')
-          })
+          vVirtualScrollRef.value?.scrollToIndex(displayItems.value.length - 1)
         })
       }
 

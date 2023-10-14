@@ -39,16 +39,16 @@ export function useScrolling (
     })
   }
   async function onListKeydown (e: KeyboardEvent) {
-    if (e.key === 'ArrowUp' && listRef.value?.focusedIndex === undefined) {
-      virtualScrollRef.value?.scrollToIndex(displayItems.value.length - 1)
-      window.requestAnimationFrame(() => {
-        listRef.value?.focus('last')
+    if (e.key === 'ArrowUp' && listRef.value?.focusedIndex === 0) {
+      requestAnimationFrame(() => {
+        virtualScrollRef.value?.scrollToIndex(displayItems.value.length - 1)?.then(_ => {
+          listRef.value?.focus('last')
+        })
       })
     }
 
     if (e.key === 'ArrowDown' && listRef.value?.focusedIndex === undefined) {
-      virtualScrollRef.value?.scrollToIndex(0)
-      window.requestAnimationFrame(() => {
+      virtualScrollRef.value?.scrollToIndex(0)?.then(_ => {
         listRef.value?.focus('first')
       })
     }

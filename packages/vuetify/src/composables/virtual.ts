@@ -57,7 +57,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
 
   function handleItemResize (index: number, height: number) {
     itemHeight.value = Math.max(itemHeight.value, height)
-    sizes[index] = height
+    sizes[index] = itemHeight.value
     sizeMap.set(items.value[index], height)
   }
 
@@ -86,7 +86,6 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     const height = contentRect.value.height - 56
     const scrollTop = containerRef.value.scrollTop
     const direction = scrollTop < lastScrollTop ? UP : DOWN
-
     const midPointIndex = calculateMidPointIndex(scrollTop + height / 2)
     const buffer = Math.round(visibleItems.value / 3)
     const firstIndex = midPointIndex - buffer

@@ -186,7 +186,7 @@ export const VList = genericComponent<new <T>(
 
       if (e.key === 'ArrowDown') {
         focus('next')
-      } else if (e.key === 'ArrowUp') {
+      } else if (e.key === 'ArrowUp' && focusedIndex.value) {
         focus('prev')
       } else if (e.key === 'Home') {
         focus('first')
