@@ -359,6 +359,7 @@ export const VSelect = genericComponent<new <
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
+                      dynamicItems
                       onScrollPassive={ onListScroll }
                       tabindex="-1"
                       color={ props.itemColor ?? props.color }

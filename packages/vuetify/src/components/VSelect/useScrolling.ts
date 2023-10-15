@@ -47,7 +47,7 @@ export function useScrolling (
       })
     }
 
-    if (e.key === 'ArrowDown' && listRef.value?.focusedIndex === undefined) {
+    if (e.key === 'ArrowDown' && (listRef.value?.focusedIndex === undefined || listRef.value?.focusedIndex === 'last')) {
       virtualScrollRef.value?.scrollToIndex(0)?.then(_ => {
         listRef.value?.focus('first')
       })

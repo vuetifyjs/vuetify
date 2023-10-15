@@ -84,6 +84,10 @@ export const makeVListProps = propsFactory({
   activeClass: String,
   bgColor: String,
   disabled: Boolean,
+  dynamicItems: {
+    type: Boolean,
+    default: false,
+  },
   lines: {
     type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
     default: 'one',
@@ -125,9 +129,10 @@ export const VList = genericComponent<new <T>(
     'update:opened': (val: unknown[]) => true,
     'click:open': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
+    keydown: (value: KeyboardEvent) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { slots, emit }) {
     const { items } = useListItems(props)
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
@@ -182,17 +187,27 @@ export const VList = genericComponent<new <T>(
     }
 
     function onKeydown (e: KeyboardEvent) {
-      if (!contentRef.value) return
+      if (!contentRef.value ||
+        (props.dynamicItems &&
+          ((e.key === 'ArrowDown' && (focusedIndex.value === undefined || focusedIndex.value === 'last')) ||
+            (e.key === 'ArrowUp' && !focusedIndex.value)
+          )
+        )
+      ) {
+        emit('keydown', e)
+        return
+      }
 
       if (e.key === 'ArrowDown') {
         focus('next')
-      } else if (e.key === 'ArrowUp' && focusedIndex.value) {
+      } else if (e.key === 'ArrowUp') {
         focus('prev')
       } else if (e.key === 'Home') {
         focus('first')
       } else if (e.key === 'End') {
         focus('last')
       } else {
+        emit('keydown', e)
         return
       }
 

@@ -683,7 +683,8 @@ export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 
     const _el = getNextElement(focusable, location)
     if (_el) {
       _el.focus()
-      return focusable.indexOf(_el as HTMLElement)
+      const focusedIndex = focusable.indexOf(_el as HTMLElement)
+      return focusedIndex === focusable.length - 1 ? 'last' : focusedIndex
     } else focusChild(el, location === 'next' ? 'first' : 'last')
   }
   return undefined
