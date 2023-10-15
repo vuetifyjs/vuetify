@@ -23,7 +23,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, mergeProps, ref, shallowRef, watch } from 'vue'
+import { computed, mergeProps, ref, shallowRef } from 'vue'
 import {
   genericComponent,
   IN_BROWSER,
