@@ -189,8 +189,8 @@ export const VList = genericComponent<new <T>(
     function onKeydown (e: KeyboardEvent) {
       if (!contentRef.value ||
         (props.dynamicItems &&
-          ((e.key === 'ArrowDown' && (focusedIndex.value === undefined || focusedIndex.value === 'last')) ||
-            (e.key === 'ArrowUp' && !focusedIndex.value)
+          ((e.key === 'ArrowDown' && focusedIndex.value === 'last') ||
+            (e.key === 'ArrowUp' && focusedIndex.value === 0)
           )
         )
       ) {
@@ -214,7 +214,7 @@ export const VList = genericComponent<new <T>(
       e.preventDefault()
     }
 
-    function focus (location?: 'next' | 'prev' | 'first' | 'last') {
+    function focus (location?: 'next' | 'prev' | 'first' | 'last' | number) {
       if (contentRef.value) {
         focusedIndex.value = focusChild(contentRef.value, location)
       }

@@ -133,12 +133,12 @@ export const VMenu = genericComponent<OverlaySlots>()({
       if (el && isActive.value) {
         if (e.key === 'ArrowDown') {
           e.preventDefault()
-          focusChild(el, 'next')
+          focusChild(el, 'first')
         } else if (e.key === 'ArrowUp') {
           e.preventDefault()
           focusChild(el, 'last')
         }
-      } else if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
+      } else if (['Enter', 'ArrowDown', 'ArrowUp', ' '].includes(e.key)) {
         isActive.value = true
         e.preventDefault()
         setTimeout(() => setTimeout(() => onActivatorKeydown(e)))

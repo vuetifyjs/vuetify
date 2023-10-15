@@ -250,15 +250,21 @@ export const VCombobox = genericComponent<new <
         e.preventDefault()
       }
 
-      if (['Enter', 'ArrowDown'].includes(e.key)) {
-        menu.value = true
+      if (['Enter', ' '].includes(e.key)) {
+        // menu is opened in VMenu
+        autoFocusModelValue()
       }
 
       if (['ArrowUp'].includes(e.key)) {
-        vVirtualScrollRef.value?.scrollToIndex(displayItems.value.length - 1)
         window.requestAnimationFrame(() => {
-          listRef.value?.focus('last')
+          vVirtualScrollRef.value?.scrollToIndex(displayItems.value.length - 1)?.then(() => {
+            listRef.value?.focus('last')
+          })
         })
+      }
+
+      if (['ArrowDown'].includes(e.key)) {
+        listRef.value?.focus('first')
       }
 
       if (['Escape'].includes(e.key)) {
@@ -371,6 +377,18 @@ export const VCombobox = genericComponent<new <
     function onUpdateModelValue (v: any) {
       if (v == null || (v === '' && !props.multiple)) model.value = []
     }
+    function autoFocusModelValue () {
+      if (!props.hideSelected && menu.value && model.value.length) {
+        const index = displayItems.value.findIndex(
+          item => model.value.some(s => props.valueComparator(s.value, item.value))
+        )
+        IN_BROWSER && window.requestAnimationFrame(() => {
+          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)?.then(() => {
+            listRef.value?.focus(index)
+          })
+        })
+      }
+    }
 
     watch(filteredItems, val => {
       if (!val.length && props.hideNoData) menu.value = false
@@ -391,17 +409,6 @@ export const VCombobox = genericComponent<new <
       } else if (props.multiple && search.value) {
         model.value = [...model.value, transformItem(props, search.value)]
         search.value = ''
-      }
-    })
-
-    watch(menu, () => {
-      if (!props.hideSelected && menu.value && model.value.length) {
-        const index = displayItems.value.findIndex(
-          item => model.value.some(s => props.valueComparator(s.value, item.value))
-        )
-        IN_BROWSER && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
-        })
       }
     })
 
@@ -465,6 +472,7 @@ export const VCombobox = genericComponent<new <
                   { hasList && (
                     <VList
                       ref={ listRef }
+                      dynamicItems
                       selected={ selectedValues.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }

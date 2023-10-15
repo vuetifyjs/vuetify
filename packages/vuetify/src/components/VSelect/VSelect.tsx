@@ -190,14 +190,21 @@ export const VSelect = genericComponent<new <
         e.preventDefault()
       }
 
-      if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
-        menu.value = true
+      if (['Enter', ' '].includes(e.key)) {
+        // menu is opened in VMenu
+        autoFocusModelValue()
       }
 
       if (['ArrowUp'].includes(e.key)) {
         window.requestAnimationFrame(() => {
-          vVirtualScrollRef.value?.scrollToIndex(displayItems.value.length - 1)
+          vVirtualScrollRef.value?.scrollToIndex(displayItems.value.length - 1)?.then(() => {
+            listRef.value?.focus('last')
+          })
         })
+      }
+
+      if (['ArrowDown'].includes(e.key)) {
+        listRef.value?.focus('first')
       }
 
       if (['Escape', 'Tab'].includes(e.key)) {
@@ -273,17 +280,18 @@ export const VSelect = genericComponent<new <
         vTextFieldRef.value.value = ''
       }
     }
-
-    watch(menu, () => {
+    function autoFocusModelValue () {
       if (!props.hideSelected && menu.value && model.value.length) {
         const index = displayItems.value.findIndex(
           item => model.value.some(s => props.valueComparator(s.value, item.value))
         )
-        // IN_BROWSER && window.requestAnimationFrame(() => {
-        //   index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
-        // })
+        IN_BROWSER && window.requestAnimationFrame(() => {
+          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)?.then(() => {
+            listRef.value?.focus(index)
+          })
+        })
       }
-    })
+    }
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
