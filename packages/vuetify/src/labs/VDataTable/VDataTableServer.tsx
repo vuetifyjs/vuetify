@@ -157,7 +157,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
                 </thead>
                 { slots.thead?.(slotProps.value) }
                 <tbody class="v-data-table__tbody" role="rowgroup">
-                  { slots['body.prepend'] ? slots['body.prepend'](slotProps.value) : undefined }
+                  { slots['body.prepend']?.(slotProps.value) }
                   { slots.body ? slots.body(slotProps.value) : (
                     <VDataTableRows
                       { ...dataTableRowsProps }
@@ -165,7 +165,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
                       v-slots={ slots }
                     />
                   )}
-                  { slots['body.append'] ? slots['body.append'](slotProps.value) : undefined }
+                  { slots['body.append']?.(slotProps.value) }
                 </tbody>
                 { slots.tbody?.(slotProps.value) }
                 { slots.tfoot?.(slotProps.value) }
