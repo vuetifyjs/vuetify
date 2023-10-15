@@ -131,8 +131,18 @@ router.afterEach((to, from) => {
     setTimeout(() => window.location.reload(), 100)
   }
 })
-router.onError(err => {
-  console.error(err)
+router.onError((err, to) => {
+  if (err?.message?.includes?.('Failed to fetch dynamically imported module')) {
+    if (!localStorage.getItem('vuetify:dynamic-reload')) {
+      console.log('Reloading page to fix dynamic import error')
+      localStorage.setItem('vuetify:dynamic-reload', 'true')
+      location.assign(to.fullPath)
+    } else {
+      console.error('Dynamic import error, reloading page did not fix it', err)
+    }
+  } else {
+    console.error(err)
+  }
 })
 
 installGlobalComponents(app)
@@ -144,5 +154,6 @@ installPinia(app, router)
 installVuetify(app)
 
 router.isReady().then(() => {
+  localStorage.removeItem('vuetify:dynamic-reload')
   app.mount('#app')
 })

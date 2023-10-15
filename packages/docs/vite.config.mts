@@ -52,6 +52,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       sourcemap: mode === 'development',
       modulePreload: false,
       cssCodeSplit: false,
+      minify: false,
       rollupOptions: {
         output: ssrBuild ? { inlineDynamicImports: true } : {
           // TODO: these options currently cause a request cascade

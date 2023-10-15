@@ -90,6 +90,8 @@
       "danger-zone-message": "The following settings are for development purposes."
     },
     "perks": {
+      "avatar": "Avatar",
+      "avatar-message": "Add a custom avatar image displayed on the user profile and user bar.",
       "disable-ads": "Disable Ads",
       "disable-ads-message": "Disable advertisements on all documentation pages.",
       "experience": "Experience",
@@ -106,7 +108,7 @@
   "data-and-display": "Data & display",
   "grids": "Grids",
   "details": "Details",
-  "developer-mode": "Developer Mode",
+  "developer-mode": "Developer mode",
   "developer-mode-message": "Developer mode enables new features and functionality within the documentation that are still in development.",
   "device": "Device",
   "design-spec": "Design Specification",
@@ -232,12 +234,6 @@
   "progress": "Progress",
   "providers": "Providers",
   "published": "Published: {date}",
-  "pwa": {
-    "install": "Install Vuetify Documentation",
-    "new-content-available": "New content is available. Click **Refresh** to update.",
-    "refresh": "Refresh",
-    "ignore": "Don't ask again"
-  },
   "range": "Range",
   "read": "View Read ({number})",
   "ready-text": "Continue your learning with related content selected by the {team} or move between pages by using the navigation links below.",
