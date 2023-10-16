@@ -362,12 +362,12 @@ export const VSelect = genericComponent<new <
                   { hasList && (
                     <VList
                       ref={ listRef }
+                      dynamicItems
                       selected={ selectedValues.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
-                      dynamicItems
                       onScrollPassive={ onListScroll }
                       tabindex="-1"
                       color={ props.itemColor ?? props.color }

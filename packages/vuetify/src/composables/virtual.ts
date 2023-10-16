@@ -112,7 +112,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
       watchEffect(() => {
         if (!isScrolling.value) {
           window.requestAnimationFrame(() => {
-            resolve(true)
+            resolve()
           })
         }
       })
