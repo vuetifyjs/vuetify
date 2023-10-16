@@ -8,7 +8,6 @@ export function genAppMetaInfo (defaults: any) {
   const metadata = (genMetaInfo as any)(...Object.values(defaults))
 
   metadata.link.push(...genLink())
-  metadata.meta.push(...genMeta())
 
   return metadata
 }
@@ -104,14 +103,6 @@ function parseMeta (
   }
 
   return meta
-}
-
-function genMeta () {
-  return [
-    { charset: 'utf-8' },
-    { name: 'mobile-web-app-capable', content: 'yes' },
-    { name: 'theme-color', content: '#1867c0' },
-  ]
 }
 
 function genTwitterMetaInfo () {

@@ -26,4 +26,6 @@ Check out these amazing projects built using Vuetify.
 
 <made-with-vuetify pagination />
 
+<br />
+
 <made-with-vue-attribution />

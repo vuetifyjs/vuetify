@@ -8,8 +8,6 @@
 
     <app-drawer />
 
-    <app-pwa-snackbar />
-
     <v-main>
       <slot>
         <v-container
@@ -52,13 +50,23 @@
   import AppBar from '@/components/app/bar/Bar.vue'
   import AppDrawer from '@/components/app/drawer/Drawer.vue'
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
-  import AppPwaSnackbar from '@/components/app/PwaSnackbar.vue'
   import UserProfile from '@/components/user/UserProfile.vue'
-
   import UserTabs from '@/components/user/UserTabs.vue'
 
   // Composables
-  import { useRoute } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
+  import { useAuth0 } from '@/plugins/auth'
+
+  // Utilities
+  import { watch } from 'vue'
 
   const route = useRoute()
+  const router = useRouter()
+  const { isLoading, isAuthenticated } = useAuth0()
+
+  watch(isLoading, val => {
+    if (val || isAuthenticated.value) return
+
+    router.push('/')
+  }, { immediate: true })
 </script>

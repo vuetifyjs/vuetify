@@ -50,7 +50,7 @@ pnpm create vuetify
 ```
 
 ```bash [bun]
-bun create-vuetify
+bun create vuetify
 ```
 
 :::
@@ -120,7 +120,7 @@ and then install the required Vuefity modules as dependencies:
 ::: tabs
 
 ```bash [yarn]
-yarn add dev vuetify vite-plugin-vuetify
+yarn add -D vuetify vite-plugin-vuetify
 yarn add @mdi/font
 ```
 
@@ -147,6 +147,9 @@ Next, integrate the following entries into your `nuxt.config.ts` file:
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 export default defineNuxtConfig({
   //...
+  build: {
+    transpile: ['vuetify'],
+  },
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
@@ -257,6 +260,7 @@ app.use(vuetify).mount('#app')
 Follow these steps if for example you are adding Vuetify to an existing project, or simply do not want to use a scaffolding tool.
 
 ::: tabs
+
 ```bash [yarn]
 yarn add vuetify
 ```
@@ -272,6 +276,7 @@ pnpm i vuetify
 ```bash [bun]
 bun add vuetify
 ```
+
 :::
 
 ::: tip

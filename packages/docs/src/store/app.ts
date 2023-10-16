@@ -5,11 +5,20 @@ import { defineStore } from 'pinia'
 import data from '@/data/nav.json'
 
 // Types
+export type Category = {
+  icon: string
+  color: string
+}
+
 export type RootState = {
   apiSearch: string
   drawer: boolean | null
-  settings: boolean
   toc: boolean | null
+  scrolling: boolean
+  items: NavItem[]
+  pages: string[]
+  settings: boolean
+  categories: Record<string, Category>
 }
 
 type NavItem = {
@@ -27,6 +36,7 @@ export const useAppStore = defineStore({
     apiSearch: '',
     drawer: null,
     toc: null,
+    scrolling: false,
     items: Array.from(data),
     pages: getPages(data as NavItem[]),
     settings: false,
@@ -70,6 +80,10 @@ export const useAppStore = defineStore({
       themes: {
         icon: 'mdi-script-text-outline',
         color: 'pink',
+      },
+      labs: {
+        icon: 'mdi-beaker-outline',
+        color: 'purple',
       },
     },
   } as RootState),
