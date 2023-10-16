@@ -84,7 +84,7 @@ export const makeVListProps = propsFactory({
   activeClass: String,
   bgColor: String,
   disabled: Boolean,
-  dynamicItems: {
+  virtualItems: {
     type: Boolean,
     default: false,
   },
@@ -188,7 +188,7 @@ export const VList = genericComponent<new <T>(
 
     function onKeydown (e: KeyboardEvent) {
       if (!contentRef.value ||
-        (props.dynamicItems &&
+        (props.virtualItems &&
           ((e.key === 'ArrowDown' && focusedIndex.value === 'last') ||
             (e.key === 'ArrowUp' && focusedIndex.value === 0)
           )
