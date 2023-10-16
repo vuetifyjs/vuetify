@@ -28,7 +28,7 @@
 
   .v-field--dirty
     .v-autocomplete__selection
-      margin-inline-end: $autocomplete-dirty-selection-margin-inline-end
+      margin-inline-end: $autocomplete-selection-gap
 
   .v-autocomplete__selection-text
     overflow: hidden
@@ -50,7 +50,7 @@
     align-items: center
     letter-spacing: inherit
     line-height: inherit
-    max-width: calc(100% - $autocomplete-dirty-selection-margin-inline-end)
+    max-width: calc(100% - $autocomplete-selection-gap)
 
   &__selection
     margin-top: var(--v-input-chips-margin-top)
