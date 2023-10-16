@@ -237,6 +237,7 @@ export const VCombobox = genericComponent<new <
       }
       menu.value = !menu.value
     }
+    // eslint-disable-next-line complexity
     function onKeydown (e: KeyboardEvent) {
       if (props.readonly || form?.isReadonly.value) return
 
@@ -256,7 +257,7 @@ export const VCombobox = genericComponent<new <
       }
 
       if (['ArrowUp'].includes(e.key)) {
-        window.requestAnimationFrame(() => {
+        IN_BROWSER && window.requestAnimationFrame(() => {
           vVirtualScrollRef.value?.scrollToIndex(displayItems.value.length - 1)?.then(() => {
             listRef.value?.focus('last')
           })
@@ -378,16 +379,17 @@ export const VCombobox = genericComponent<new <
       if (v == null || (v === '' && !props.multiple)) model.value = []
     }
     function autoFocusModelValue () {
-      if (!props.hideSelected && menu.value && model.value.length) {
-        const index = displayItems.value.findIndex(
-          item => model.value.some(s => props.valueComparator(s.value, item.value))
-        )
-        IN_BROWSER && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)?.then(() => {
-            listRef.value?.focus(index)
-          })
+      if (props.hideSelected || !menu.value || !model.value.length) return
+
+      const index = displayItems.value.findIndex(
+        item => model.value.some(s => props.valueComparator(s.value, item.value))
+      )
+
+      IN_BROWSER && window.requestAnimationFrame(() => {
+        index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)?.then(() => {
+          listRef.value?.focus(index)
         })
-      }
+      })
     }
 
     watch(filteredItems, val => {

@@ -220,7 +220,7 @@ export const VAutocomplete = genericComponent<new <
       }
 
       if (['ArrowUp'].includes(e.key)) {
-        window.requestAnimationFrame(() => {
+        IN_BROWSER && window.requestAnimationFrame(() => {
           vVirtualScrollRef.value?.scrollToIndex(displayItems.value.length - 1)?.then(() => {
             listRef.value?.focus('last')
           })
@@ -351,16 +351,17 @@ export const VAutocomplete = genericComponent<new <
       }
     }
     function autoFocusModelValue () {
-      if (!props.hideSelected && menu.value && model.value.length) {
-        const index = displayItems.value.findIndex(
-          item => model.value.some(s => props.valueComparator(s.value, item.value))
-        )
-        IN_BROWSER && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)?.then(() => {
-            listRef.value?.focus(index)
-          })
+      if (props.hideSelected || !menu.value || !model.value.length) return
+
+      const index = displayItems.value.findIndex(
+        item => model.value.some(s => props.valueComparator(s.value, item.value))
+      )
+
+      IN_BROWSER && window.requestAnimationFrame(() => {
+        index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)?.then(() => {
+          listRef.value?.focus(index)
         })
-      }
+      })
     }
 
     watch(isFocused, (val, oldVal) => {

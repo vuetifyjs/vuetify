@@ -1,5 +1,6 @@
 // Utilities
 import { shallowRef, watch } from 'vue'
+import { IN_BROWSER } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -40,7 +41,7 @@ export function useScrolling (
   }
   async function onListKeydown (e: KeyboardEvent) {
     if (e.key === 'ArrowUp' && listRef.value?.focusedIndex === 0) {
-      requestAnimationFrame(() => {
+      IN_BROWSER && requestAnimationFrame(() => {
         virtualScrollRef.value?.scrollToIndex(displayItems.value.length - 1)?.then(() => {
           listRef.value?.focus('last')
         })
@@ -48,7 +49,7 @@ export function useScrolling (
     }
 
     if (e.key === 'ArrowDown' && listRef.value?.focusedIndex === 'last') {
-      requestAnimationFrame(() => {
+      IN_BROWSER && requestAnimationFrame(() => {
         virtualScrollRef.value?.scrollToIndex(0)?.then(() => {
           listRef.value?.focus('first')
         })

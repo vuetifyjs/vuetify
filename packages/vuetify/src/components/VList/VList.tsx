@@ -84,10 +84,7 @@ export const makeVListProps = propsFactory({
   activeClass: String,
   bgColor: String,
   disabled: Boolean,
-  virtualItems: {
-    type: Boolean,
-    default: false,
-  },
+  virtualItems: Boolean,
   lines: {
     type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
     default: 'one',

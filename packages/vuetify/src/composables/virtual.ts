@@ -7,6 +7,7 @@ import { computed, ref, shallowRef, watch, watchEffect } from 'vue'
 import {
   clamp,
   createRange,
+  IN_BROWSER,
   propsFactory,
 } from '@/util'
 
@@ -111,7 +112,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
     return new Promise((resolve: any) => {
       watchEffect(() => {
         if (!isScrolling.value) {
-          window.requestAnimationFrame(() => {
+          IN_BROWSER && window.requestAnimationFrame(() => {
             resolve()
           })
         }
