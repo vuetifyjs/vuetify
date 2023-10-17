@@ -26,7 +26,7 @@ import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
-import { genericComponent, IN_BROWSER, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, IN_BROWSER, isComposingIgnoreKey, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -238,7 +238,7 @@ export const VCombobox = genericComponent<new <
       menu.value = !menu.value
     }
     function onKeydown (e: KeyboardEvent) {
-      if (props.readonly || form?.isReadonly.value) return
+      if (isComposingIgnoreKey(e) || props.readonly || form?.isReadonly.value) return
 
       const selectionStart = vTextFieldRef.value.selectionStart
       const length = model.value.length
