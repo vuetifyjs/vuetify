@@ -27,33 +27,32 @@
           :key="i"
           cols="auto"
         >
-          <v-hover v-model="hover">
-            <template #default="{ props }">
+          <v-hover>
+            <template #default="{ props: hoverProps, isHovering }">
               <v-badge :model-value="user.avatar === avatar">
                 <v-avatar
-                  v-bind="props"
-                  :style="styles"
+                  v-bind="hoverProps"
+                  :style="auth.isSubscriber ? {} : {
+                    filter: isHovering ? 'grayscale(0%)' : 'grayscale(100%)',
+                    opacity: isHovering ? '1' : '.12',
+                  }"
                   size="56"
                   class="cursor-pointer"
                   @click="onClick(avatar)"
                 >
                   <v-img :src="avatar">
-                    <v-fade-transition
-                      v-if="!auth.isSubscriber"
-                      hide-on-leave
+
+                    <div
+                      v-if="isHovering && !auth.isSubscriber"
+                      class="d-flex align-center justify-center h-100"
+                      @click.stop.prevent
                     >
-                      <div
-                        v-if="hover"
-                        class="d-flex align-center justify-center h-100"
-                        @click.stop.prevent
-                      >
-                        <v-icon
-                          color="white"
-                          icon="mdi-lock"
-                          size="small"
-                        />
-                      </div>
-                    </v-fade-transition>
+                      <v-icon
+                        color="white"
+                        icon="mdi-lock"
+                        size="small"
+                      />
+                    </div>
                   </v-img>
                 </v-avatar>
               </v-badge>
@@ -73,21 +72,9 @@
   import { useAuthStore } from '@/store/auth'
   import { useUserStore } from '@/store/user'
 
-  // Utilities
-  import { computed, shallowRef } from 'vue'
-
   const auth0 = useAuth0()
   const auth = useAuthStore()
   const user = useUserStore()
-
-  const hover = shallowRef(false)
-
-  const styles = computed(() => {
-    return auth.isSubscriber ? {} : {
-      filter: hover.value ? 'grayscale(0%)' : 'grayscale(100%)',
-      opacity: hover.value ? '1' : '.12',
-    }
-  })
 
   const avatars = [
     'https://cdn.vuetifyjs.com/docs/images/avatars/grass.png',
