@@ -40,6 +40,7 @@ export const rootTypes = {
   'list-item-avatar-two-line': 'avatar, sentences',
   'list-item-three-line': 'paragraph',
   'list-item-avatar-three-line': 'avatar, paragraph',
+  ossein: 'ossein',
   paragraph: 'text@3',
   sentences: 'text@2',
   subtitle: 'text',
@@ -118,7 +119,7 @@ export const makeVSkeletonLoaderProps = propsFactory({
       | VSkeletonLoaderType | (string & {})
       | ReadonlyArray<VSkeletonLoaderType | (string & {})>
     >,
-    default: 'image',
+    default: 'ossein',
   },
 
   ...makeDimensionProps(),

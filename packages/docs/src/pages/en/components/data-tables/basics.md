@@ -8,16 +8,23 @@ related:
   - /components/paginations/
   - /components/tables/
   - /components/lists/
+features:
+  github: /labs/VDataTable/
+  label: 'C: VDataTable'
+  report: true
+  spec: https://m2.material.io/components/data-tables
 ---
 
 # Data tables
 
 The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, grouping, and row selection.
 
-----
+<page-features />
 
 ::: warning
+
 This feature requires [v3.1.0 (Valkyrie)](/getting-started/release-notes/?version=v3.1.0)
+
 :::
 
 ## Usage

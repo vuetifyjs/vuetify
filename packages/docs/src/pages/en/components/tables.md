@@ -8,6 +8,11 @@ related:
   - /components/data-tables/basics/
   - /components/data-tables/headers/
   - /components/lists/
+features:
+  github: /components/VTable/
+  label: 'C: VTable'
+  report: true
+  spec: https://m2.material.io/components/data-tables
 ---
 
 # Tables
@@ -20,7 +25,7 @@ More advanced tables such as [v-data-table](/components/data-tables/basics/) are
 
 <!-- ![Table Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-table/v-table-entry.png) -->
 
----
+<page-features />
 
 ## Usage
 

@@ -1,5 +1,5 @@
 // Utilities
-import { createRange } from '@/util'
+import { createRange, padStart } from '@/util'
 
 // Types
 import type { DateAdapter } from '../DateAdapter'
@@ -163,8 +163,8 @@ function getWeekArray (date: Date, locale: string) {
   let currentWeek = []
   const firstDayOfMonth = startOfMonth(date)
   const lastDayOfMonth = endOfMonth(date)
-  const firstDayWeekIndex = firstDayOfMonth.getDay() - firstDay[locale.slice(-2).toUpperCase()]
-  const lastDayWeekIndex = lastDayOfMonth.getDay() - firstDay[locale.slice(-2).toUpperCase()]
+  const firstDayWeekIndex = (firstDayOfMonth.getDay() - firstDay[locale.slice(-2).toUpperCase()] + 7) % 7
+  const lastDayWeekIndex = (lastDayOfMonth.getDay() - firstDay[locale.slice(-2).toUpperCase()] + 7) % 7
 
   for (let i = 0; i < firstDayWeekIndex; i++) {
     const adjacentDay = new Date(firstDayOfMonth)
@@ -268,11 +268,29 @@ function format (value: Date, formatString: string, locale: string): string {
     case 'dayOfMonth':
       options = { day: 'numeric' }
       break
+    case 'shortDate':
+      options = { year: 'numeric' }
+      break
     default:
       options = { timeZone: 'UTC', timeZoneName: 'short' }
   }
 
   return new Intl.DateTimeFormat(locale, options).format(date)
+}
+
+function toISO (adapter: DateAdapter<any>, value: any) {
+  const date = adapter.toJsDate(value)
+  const year = date.getFullYear()
+  const month = padStart(String(date.getMonth() + 1), 2, '0')
+  const day = padStart(String(date.getDate()), 2, '0')
+
+  return `${year}-${month}-${day}`
+}
+
+function parseISO (value: string) {
+  const [year, month, day] = value.split('-').map(Number)
+
+  return new Date(year, month - 1, day)
 }
 
 function addDays (date: Date, amount: number) {
@@ -307,6 +325,8 @@ function isWithinRange (date: Date, range: [Date, Date]) {
 }
 
 function isValid (date: any) {
+  if (!date || date == null) return false
+
   const d = new Date(date)
 
   return d instanceof Date && !isNaN(d.getTime())
@@ -352,6 +372,14 @@ function setYear (date: Date, year: number) {
   return d
 }
 
+function startOfDay (date: Date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate())
+}
+
+function endOfDay (date: Date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999)
+}
+
 export class VuetifyDateAdapter implements DateAdapter<Date> {
   locale: string
 
@@ -365,6 +393,14 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   toJsDate (date: Date) {
     return date
+  }
+
+  toISO (date: Date): string {
+    return toISO(this, date)
+  }
+
+  parseISO (date: string) {
+    return parseISO(date)
   }
 
   addDays (date: Date, amount: number) {
@@ -437,6 +473,14 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   getMonth (date: Date) {
     return getMonth(date)
+  }
+
+  startOfDay (date: Date) {
+    return startOfDay(date)
+  }
+
+  endOfDay (date: Date) {
+    return endOfDay(date)
   }
 
   startOfYear (date: Date) {

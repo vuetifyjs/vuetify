@@ -7,9 +7,6 @@ $card-actions-flex: none !default;
 $card-actions-min-height: 52px !default;
 $card-actions-padding: .5rem !default;
 $card-append-padding-inline-start: 1rem !default;
-$card-avatar-align-self: flex-start !default;
-$card-avatar-header-padding: 0 !default;
-$card-avatar-padding: .5rem 1rem !default;
 $card-background: rgb(var(--v-theme-surface)) !default;
 $card-border-color: settings.$border-color-root !default;
 $card-border-radius: settings.$border-radius-root !default;
@@ -49,7 +46,6 @@ $card-title-letter-spacing: tools.map-deep-get(settings.$typography, 'h6', 'lett
 $card-title-line-height: tools.map-deep-get(settings.$typography, 'h6', 'line-height') !default;
 $card-title-overflow-wrap: normal !default;
 $card-title-overflow: hidden !default;
-$card-title-padding-top: 1rem !default;
 $card-title-padding: .5rem 1rem !default;
 $card-title-text-overflow: ellipsis !default;
 $card-title-text-transform: none !default;
@@ -82,7 +78,6 @@ $card-text-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size')
 $card-text-font-weight: tools.map-deep-get(settings.$typography, 'body-2', 'weight') !default;
 $card-text-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
 $card-text-line-height: tools.map-deep-get(settings.$typography, 'body-2', 'line-height') !default;
-$card-text-padding-bottom: 1rem !default;
 $card-text-padding: 1rem !default;
 $card-text-text-transform: tools.map-deep-get(settings.$typography, 'body-2', 'text-transform') !default;
 
@@ -122,3 +117,10 @@ $card-variants: (
   $card-plain-opacity,
   'v-card'
 ) !default;
+
+// Deprecated
+$card-avatar-align-self: flex-start !default;
+$card-avatar-header-padding: 0 !default;
+$card-avatar-padding: .5rem 1rem !default;
+$card-title-padding-top: 1rem !default;
+$card-text-padding-bottom: 1rem !default;

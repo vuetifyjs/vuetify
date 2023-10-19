@@ -1,5 +1,4 @@
 ---
-emphasized: true
 fluid: true
 meta:
   nav: Brand Kit

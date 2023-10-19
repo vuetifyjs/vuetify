@@ -45,7 +45,7 @@ export const makeVOtpInputProps = propsFactory({
   placeholder: String,
   type: {
     type: String as PropType<'text' | 'password' | 'number'>,
-    default: 'text',
+    default: 'number',
   },
 
   ...makeDimensionProps(),
@@ -107,7 +107,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       let target: any = null
 
       if (focusIndex.value > model.value.length) {
-        target = model.value.length + 1
+        target = model.value.length
       } else if (focusIndex.value + 1 !== Number(props.length)) {
         target = 'next'
       } else {
@@ -144,7 +144,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
           target = 'prev'
         } else {
           requestAnimationFrame(() => {
-            inputRef.value[index].select()
+            inputRef.value[index]?.select()
           })
         }
       }
@@ -183,6 +183,9 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
     provideDefaults({
       VField: {
+        color: computed(() => props.color),
+        bgColor: computed(() => props.color),
+        baseColor: computed(() => props.baseColor),
         disabled: computed(() => props.disabled),
         error: computed(() => props.error),
         variant: computed(() => props.variant),
@@ -190,14 +193,14 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     }, { scoped: true })
 
     watch(model, val => {
-      if (val.length === props.length) emit('finish', val.join(''))
+      if (val.length === Number(props.length)) emit('finish', val.join(''))
     }, { deep: true })
 
     watch(focusIndex, val => {
       if (val < 0) return
 
       IN_BROWSER && window.requestAnimationFrame(() => {
-        inputRef.value[val].select()
+        inputRef.value[val]?.select()
       })
     })
 

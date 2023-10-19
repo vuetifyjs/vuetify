@@ -10,7 +10,7 @@
   display: grid
   flex: none
   grid-template-areas: "prepend content append"
-  grid-template-columns: max-content auto max-content
+  grid-template-columns: max-content 1fr auto
   outline: none
   max-width: 100%
   padding: $list-item-padding
@@ -58,6 +58,11 @@
   &--link
     cursor: pointer
 
+  .v-navigation-drawer--rail:not(.v-navigation-drawer--expand-on-hover) &,
+  .v-navigation-drawer--rail.v-navigation-drawer--expand-on-hover:not(.v-navigation-drawer--is-hovering) &
+    .v-avatar
+      --v-avatar-height: 24px
+
 .v-list-item__prepend
   align-items: center
   align-self: center
@@ -94,6 +99,7 @@
 
   .v-list-item__spacer
     order: -1
+    transition: 150ms width settings.$standard-easing
 
   > .v-badge,
   > .v-icon,

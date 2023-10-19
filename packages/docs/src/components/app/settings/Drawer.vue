@@ -20,8 +20,10 @@
 
     <v-divider />
 
-    <v-container class="px-1 py-3">
+    <v-container class="px-3 py-3">
       <options />
+
+      <developer-mode />
     </v-container>
 
     <template #append>
@@ -33,30 +35,17 @@
 <script setup>
   // Components
   import AppSettingsAppend from './Append.vue'
+  import DeveloperMode from '@/components/app/settings/DeveloperMode.vue'
   import Options from '@/components/app/settings/Options.vue'
 
   // Composables
-  import { useAuth0 } from '@/plugins/auth'
   import { useRtl } from 'vuetify'
   import { useI18n } from 'vue-i18n'
 
   // Stores
   import { useAppStore } from '@/store/app'
-  import { useAuthStore } from '@/store/auth'
-
-  // Utilities
-  import { watch } from 'vue'
 
   const app = useAppStore()
-  const auth = useAuthStore()
-  const auth0 = useAuth0()
   const { t } = useI18n()
   const { isRtl } = useRtl()
-
-  watch(auth0.user, async val => {
-    if (!val?.sub) return
-
-    await auth.getUser()
-    auth.verifyUserSponsorship()
-  }, { immediate: true })
 </script>

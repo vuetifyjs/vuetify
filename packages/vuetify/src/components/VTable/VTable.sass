@@ -70,6 +70,8 @@
   // Do not inherit line-height
   line-height: $table-line-height
   max-width: 100%
+  display: flex
+  flex-direction: column
 
   > .v-table__wrapper
     > table
@@ -83,7 +85,9 @@
           > td,
           > th
             padding: $table-column-padding
-            transition: height settings.$standard-easing
+            transition-duration: $table-transition-duration
+            transition-property: $table-transition-property
+            transition-timing-function: $table-transition-timing-function
 
           > th
             font-weight: $table-header-font-weight
@@ -108,6 +112,7 @@
 .v-table__wrapper
   border-radius: inherit
   overflow: auto
+  flex: 1 1 auto
 
 // Modifiers
 .v-table--has-top

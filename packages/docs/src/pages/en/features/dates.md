@@ -8,18 +8,24 @@ related:
 - /features/blueprints/
 - /features/global-configuration/
 - /features/treeshaking/
+features:
+  github: /labs/date/
+  label: 'E: date'
+  report: true
 ---
 
 # Dates
 
 Easily hook up date libraries that are used for components that require date functionality.
 
+<page-features />
+
 <entry />
 
-----
-
 ::: warning
+
 This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
+
 :::
 
 ## Usage
@@ -64,6 +70,8 @@ The date composable supports the following date formatting options:
 * keyboardDate
 * monthAndDate
 * monthAndYear
+* dayOfMonth
+* shortDate
 
 The following example shows how to use the date composable to format a date string:
 
@@ -114,7 +122,11 @@ import type { DateAdapter } from 'vuetify/labs'
 export interface DateAdapter<Date> {
   date (value?: any): Date | null
   format (date: Date, formatString: string): string
+  parseISO (value: string): Date | null
+  toISO (date: Date): string
 
+  startOfDay (date: Date): Date
+  endOfDay (date: Date): Date
   startOfMonth (date: Date): Date
   endOfMonth (date: Date): Date
   startOfYear (date: Date): Date

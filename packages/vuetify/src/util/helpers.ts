@@ -60,7 +60,7 @@ export function deepEqual (a: any, b: any): boolean {
   return props.every(p => deepEqual(a[p], b[p]))
 }
 
-export function getObjectValueByPath (obj: any, path: string, fallback?: any): any {
+export function getObjectValueByPath (obj: any, path?: string | null, fallback?: any): any {
   // credit: http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key#comment55278413_6491621
   if (obj == null || !path || typeof path !== 'string') return fallback
   if (obj[path] !== undefined) return obj[path]
@@ -70,7 +70,7 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
 }
 
 export type SelectItemKey =
-  | boolean // Ignored
+  | boolean | null | undefined // Ignored
   | string // Lookup by key, can use dot notation for nested objects
   | (string | number)[] // Nested lookup by key, each array item is a key in the next level
   | ((item: Record<string, any>, fallback?: any) => any)
@@ -80,7 +80,9 @@ export function getPropertyFromItem (
   property: SelectItemKey,
   fallback?: any
 ): any {
-  if (property == null) return item === undefined ? fallback : item
+  if (property === true) return item === undefined ? fallback : item
+
+  if (property == null || typeof property === 'boolean') return fallback
 
   if (item !== Object(item)) {
     if (typeof property !== 'function') return fallback
@@ -318,6 +320,21 @@ const bubblingEvents = [
   'onTransitionstart',
   'onWheel',
 ]
+
+const compositionIgnoreKeys = [
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowRight',
+  'ArrowLeft',
+  'Enter',
+  'Escape',
+  'Tab',
+  ' ',
+]
+
+export function isComposingIgnoreKey (e: KeyboardEvent): boolean {
+  return e.isComposing && compositionIgnoreKeys.includes(e.key)
+}
 
 /**
  * Filter attributes that should be applied to

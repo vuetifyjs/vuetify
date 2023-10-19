@@ -33,6 +33,11 @@
       appendIcon: 'mdi-code-json',
     },
     {
+      title: t('colors'),
+      to: rpath('/styles/colors/#material-colors'),
+      appendIcon: 'mdi-palette-swatch-outline',
+    },
+    {
       title: t('components'),
       to: rpath('/components/all/'),
       appendIcon: 'mdi-view-dashboard-outline',
@@ -41,6 +46,11 @@
       title: t('feature-guides'),
       to: rpath('/introduction/why-vuetify/#feature-guides'),
       appendIcon: 'mdi-lightbulb-on-outline',
+    },
+    {
+      title: t('icons'),
+      to: rpath('/features/icon-fonts/#mdi-icon-search'),
+      appendIcon: 'mdi-emoticon-outline',
     },
     {
       title: t('labs'),

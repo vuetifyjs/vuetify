@@ -1,0 +1,6 @@
+{
+  "props": {
+    "itemsPerPage": "The number of items to display on each page.",
+    "page": "The current displayed page number (1-indexed)."
+  }
+}

@@ -8,11 +8,18 @@ related:
   - /components/dialogs/
   - /components/tooltips/
   - /styles/transitions/
+features:
+  github: /components/VMenu/
+  label: 'C: VMenu'
+  report: true
+  spec: https://m2.material.io/components/menus
 ---
 
 # Menus
 
 The `v-menu` component shows a menu at the position of the element used to activate it.
+
+<page-features />
 
 ## Usage
 
@@ -98,11 +105,11 @@ With the new `v-slot` syntax, nested activators such as those seen with a `v-men
 
 ### Misc
 
-#### Custom transitions
+#### Transitions
 
-Vuetify comes with 3 standard transitions, **scale**, **slide-x** and **slide-y**. You can also create your own and pass it as the transition argument. For an example of how the stock transitions are constructed, visit [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts).
+Vuetify comes with [several standard transitions](/styles/transitions#api) that you can use. You can also create your own and pass it as the transition argument. For an example of how the stock transitions are constructed, visit [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts).
 
-<example file="v-menu/misc-custom-transition" />
+<example file="v-menu/misc-transition" />
 
 #### Popover menu
 

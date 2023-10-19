@@ -116,11 +116,10 @@ export const VTab = genericComponent()({
           role="tab"
           aria-selected={ String(isSelected.value) }
           active={ false }
-          block={ props.fixed }
-          maxWidth={ props.fixed ? 300 : undefined }
-          rounded={ 0 }
           { ...btnProps }
           { ...attrs }
+          block={ props.fixed }
+          maxWidth={ props.fixed ? 300 : undefined }
           onGroup:selected={ updateSlider }
         >
           { slots.default?.() ?? props.text }

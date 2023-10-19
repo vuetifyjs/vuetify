@@ -7,6 +7,11 @@ related:
   - /components/buttons/
   - /features/dates/
   - /components/text-fields/
+features:
+  github: /labs/VDatePicker/
+  label: 'C: VDatePicker'
+  report: true
+  spec: https://material.io/components/date-pickers
 ---
 
 # Date pickers
@@ -15,10 +20,12 @@ related:
 
 <!-- ![Date picker Entry](https://cdn.vuetifyjs.com/docs/images/components/v-date-picker/v-date-picker-entry.png) -->
 
----
+<page-features />
 
 ::: warning
+
 This feature requires [v3.3.4](/getting-started/release-notes/?version=v3.3.4)
+
 :::
 
 ## Usage
@@ -107,7 +114,8 @@ Here is an example of switching the locale of the **v-date-picker** component.
 
 ```html
 <v-date-picker></v-date-picker>
-``` -->
+```
+-->
 
 ### Props
 
@@ -135,6 +143,12 @@ Date picker colors can be set using the **color** and **header-color** props. If
 
 <example file="v-date-picker/prop-colors" />
 
+#### Allowed dates
+
+Specify allowed dates using objects or functions. When using objects, accepts a date string in the format of YYYY-MM-DD. When using functions, accepts a date object as a parameter and should return a boolean.
+
+<example file="v-date-picker/prop-allowed-dates" />
+
 <!--
 ## Caveats
 
@@ -145,12 +159,6 @@ Date picker colors can be set using the **color** and **header-color** props. If
 ## Examples
 
 ### Props
-
-#### Allowed dates
-
-You can specify allowed dates using arrays, objects, and functions.
-
-<example file="v-date-picker/prop-allowed-dates" />
 
 #### Colors
 

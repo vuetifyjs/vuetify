@@ -8,10 +8,10 @@
       <v-row>
         <v-col cols="12">
           <v-img
+            :src="`https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-${theme.name.value}-slim.svg`"
             class="mx-auto"
             contain
             height="64"
-            src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-v3-slim-light.svg"
             width="64"
           />
         </v-col>
@@ -85,8 +85,10 @@
 <script setup>
 // Composables
   import { useI18n } from 'vue-i18n'
+  import { useTheme } from 'vuetify'
 
   const { t } = useI18n()
+  const theme = useTheme()
   const links = [
     {
       href: 'https://www.iubenda.com/privacy-policy/76325752',

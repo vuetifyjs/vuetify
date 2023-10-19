@@ -32,7 +32,7 @@ export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<Compo
       }
 
       // Skip internal properties
-      if (typeof key === 'symbol' || key.startsWith('__')) return
+      if (typeof key === 'symbol' || key.startsWith('$') || key.startsWith('__')) return
 
       for (const ref of refs) {
         if (ref.value && Reflect.has(ref.value, key)) {
@@ -49,7 +49,7 @@ export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<Compo
       }
 
       // Skip internal properties
-      if (typeof key === 'symbol' || key.startsWith('__')) return false
+      if (typeof key === 'symbol' || key.startsWith('$') || key.startsWith('__')) return false
 
       for (const ref of refs) {
         if (ref.value && Reflect.has(ref.value, key)) {
@@ -64,7 +64,7 @@ export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<Compo
       }
 
       // Skip internal properties
-      if (typeof key === 'symbol' || key.startsWith('__')) return false
+      if (typeof key === 'symbol' || key.startsWith('$') || key.startsWith('__')) return false
 
       for (const ref of refs) {
         if (ref.value && Reflect.has(ref.value, key)) {
@@ -79,7 +79,7 @@ export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<Compo
       if (descriptor) return descriptor
 
       // Skip internal properties
-      if (typeof key === 'symbol' || key.startsWith('__')) return
+      if (typeof key === 'symbol' || key.startsWith('$') || key.startsWith('__')) return
 
       // Check each ref's own properties
       for (const ref of refs) {

@@ -28,7 +28,7 @@
     <v-card-text>
       <v-text-field
         :disabled="!isEditing"
-        color="white"
+        base-color="white"
         label="Name"
       ></v-text-field>
 
@@ -36,7 +36,7 @@
         :disabled="!isEditing"
         :items="states"
         :custom-filter="customFilter"
-        color="white"
+        base-color="white"
         item-title="name"
         item-value="abbr"
         label="State"

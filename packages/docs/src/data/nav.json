@@ -33,6 +33,7 @@
     "inactiveIcon": "mdi-image-edit-outline",
     "activeIcon": "mdi-image-edit",
     "items": [
+      "accessibility",
       "aliasing",
       "application-layout",
       "blueprints",
@@ -75,7 +76,12 @@
     "activeIcon": "mdi-view-dashboard",
     "items": [
       "all",
-      { "title": "explorer", "subtitle": "browse-components" },
+      {
+        "title": "explorer",
+        "routeMatch": "explorer/:name(.*)",
+        "routePath": "explorer",
+        "subtitle": "browse-components"
+      },
       { "divider": true },
       { "subheader": "containment" },
       "buttons",
@@ -245,11 +251,12 @@
     "inactiveIcon": "mdi-human-male-board",
     "activeIcon": "mdi-human-male-board",
     "items": [
+      "brand-kit",
       "jobs-for-vue",
-      "ui-kits",
-      "themes",
+      "made-with-vuetify",
       "search-engine",
-      "brand-kit"
+      "themes",
+      "ui-kits"
     ]
   },
   {

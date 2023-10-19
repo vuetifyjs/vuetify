@@ -3,18 +3,20 @@
     v-model="selection"
     v-model:search="search"
     :items="filteredIcons"
+    :item-props="itemProps"
+    :placeholder="t('search.icons')"
     item-title="name"
     item-value="name"
-    placeholder="Search for icons (e.g. account, close)"
-    :item-props="itemProps"
     no-filter
+    variant="outlined"
   >
     <template #prepend-inner>
       <v-expand-x-transition>
-        <v-icon v-if="selection" color="primary" start>
+        <v-icon v-if="selection" start>
           {{ getIcon(selection) }}
         </v-icon>
       </v-expand-x-transition>
+
       <code class="me-n1">mdi-</code>
     </template>
 
@@ -23,9 +25,9 @@
         <template #append>
           <v-btn
             icon="mdi-content-copy"
-            variant="plain"
             size="small"
-            @click="copy(item.raw.name)"
+            variant="plain"
+            @click.stop="copy(item.raw.name)"
           />
         </template>
       </v-list-item>
@@ -34,7 +36,7 @@
     <template #append-inner>
       <v-expand-x-transition>
         <span v-if="copied" class="text-primary pt-1">
-          Copied
+          {{ t('copied') }}
         </span>
       </v-expand-x-transition>
     </template>
@@ -42,14 +44,22 @@
 </template>
 
 <script setup>
+  // Composables
+  import { useI18n } from 'vue-i18n'
+
+  // Utilities
+  import { camelize, computed, shallowRef, watch } from 'vue'
+  import { distance } from '@/util/helpers'
+
+  // Data
   import icons from '@mdi/svg/meta.json'
   import * as paths from '@mdi/js'
-  import { distance } from '@/util/helpers'
-  import { camelize, computed, ref, watch } from 'vue'
 
-  const copied = ref(false)
-  const selection = ref()
-  const search = ref('')
+  const { t } = useI18n()
+
+  const copied = shallowRef(false)
+  const selection = shallowRef()
+  const search = shallowRef('')
   const filteredIcons = computed(() => {
     if (!search.value) return icons
 

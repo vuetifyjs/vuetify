@@ -27,7 +27,7 @@
 
   .v-field--dirty
     .v-autocomplete__selection
-      margin-inline-end: 2px
+      margin-inline-end: $autocomplete-selection-gap
 
   .v-autocomplete__selection-text
     overflow: hidden
@@ -50,7 +50,7 @@
     height: calc($input-font-size * $input-line-height)
     letter-spacing: inherit
     line-height: inherit
-    max-width: 90%
+    max-width: calc(100% - $autocomplete-selection-gap)
 
   &__selection
     &:first-child
