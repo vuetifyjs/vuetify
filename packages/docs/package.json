@@ -11,8 +11,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite-ssg build && vite-ssg render",
-    "build:dev": "vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "preview-https": "HTTPS=true vite preview",
     "lint": "vue-tsc --noEmit --pretty && yarn lint:md && jest --no-cache",
@@ -53,7 +52,6 @@
     "@vitejs/plugin-vue": "^4.2.2",
     "@vue/compiler-sfc": "^3.3.4",
     "@vuetify/api-generator": "^3.4.0-alpha.1",
-    "@vuetify/vite-ssg": "^0.21.0",
     "ajv": "^8.12.0",
     "async-es": "^3.2.4",
     "date-fns": "^2.29.3",

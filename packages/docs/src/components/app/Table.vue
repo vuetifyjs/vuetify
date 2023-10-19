@@ -1,6 +1,7 @@
 <template>
   <app-sheet class="mb-4 app-table">
     <v-table
+      density="comfortable"
       v-bind="$attrs"
     >
       <slot />

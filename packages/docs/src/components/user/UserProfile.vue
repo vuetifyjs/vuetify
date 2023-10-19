@@ -1,11 +1,11 @@
 <template>
   <app-sheet width="250">
     <v-skeleton-loader
-      :loading="isLoading"
+      :loading="isLoading || !user"
       type="image, paragraph, divider, list-item-avatar"
     >
       <div class="text-center py-4 flex-grow-1">
-        <v-avatar :image="user.picture" size="80" />
+        <v-avatar :image="_user.avatar || user.picture" size="80" />
 
         <v-card-title class="mb-n2">{{ user.name }}</v-card-title>
 
@@ -66,6 +66,11 @@
   import { useAuth0 } from '@/plugins/auth'
   import { useI18n } from 'vue-i18n'
 
+  // Stores
+  import { useUserStore } from '@/store/user'
+
   const { isLoading, user } = useAuth0()
   const { t } = useI18n()
+
+  const _user = useUserStore()
 </script>

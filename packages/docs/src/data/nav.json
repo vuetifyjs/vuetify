@@ -33,6 +33,7 @@
     "inactiveIcon": "mdi-image-edit-outline",
     "activeIcon": "mdi-image-edit",
     "items": [
+      "accessibility",
       "aliasing",
       "application-layout",
       "blueprints",

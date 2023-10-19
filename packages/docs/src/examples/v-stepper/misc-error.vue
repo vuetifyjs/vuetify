@@ -11,7 +11,7 @@
 
       <v-stepper-item
         :rules="[() => false]"
-        title="Application Submission"
+        title="Submit Application"
         subtitle="Missing Details"
         value="2"
       ></v-stepper-item>
