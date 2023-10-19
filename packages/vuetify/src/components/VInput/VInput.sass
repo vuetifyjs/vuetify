@@ -1,4 +1,5 @@
 @use 'sass:math'
+@use 'sass:selector'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -91,3 +92,18 @@
 .v-input__control
   display: flex
   grid-area: control
+
+.v-input
+  &--plain-underlined
+    .v-input__details
+      padding: 0
+
+    .v-input__prepend,
+    .v-input__append
+      $this: &
+      align-items: flex-start
+
+      @at-root
+        @include tools.density('v-input', $input-density) using ($modifier)
+          @at-root #{selector.append(&, $this)}
+            padding-top: calc(var(--v-input-padding-top) + #{math.max(0px, 4px + $modifier * .25)})

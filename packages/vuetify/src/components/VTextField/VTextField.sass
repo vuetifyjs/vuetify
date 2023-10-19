@@ -28,7 +28,7 @@
 
     @at-root #{selector.append('.v-text-field--suffixed', &)}
       --v-field-padding-end: #{$text-field-input-padding-end}
-  
+
   .v-input__details
     padding-inline: $text-field-details-padding-inline
 
@@ -69,17 +69,4 @@
   &__suffix
     padding-inline-end: var(--v-field-padding-end)
 
-/* endregion */
-/* region MODIFIERS */
-.v-text-field
-  &--plain-underlined
-    --v-field-padding-top--plain-underlined: 0px
-
-    .v-input__details
-      padding: 0
-
-    .v-input__prepend,
-    .v-input__append
-      align-items: flex-start
-      padding-top: calc(var(--v-field-padding-top--plain-underlined) + var(--v-input-padding-top))
 /* endregion */

@@ -172,7 +172,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
             'v-file-input',
             {
               'v-file-input--chips': !!props.chips,
-              'v-text-field--plain-underlined': isPlainOrUnderlined.value,
+              'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
             props.class,
           ]}

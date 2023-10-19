@@ -96,12 +96,12 @@
     &.v-field
       --v-field-padding-start: 0px
       --v-field-padding-end: 0px
-      --v-field-padding-top: var(--v-field-padding-top--plain-underlined, 6px)
 
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
           --v-input-control-height: #{$field-control-underlined-height + $modifier}
+          --v-field-padding-top: #{math.max(0px, 4px + $modifier * .25)}
           --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)}
 
   &--flat
