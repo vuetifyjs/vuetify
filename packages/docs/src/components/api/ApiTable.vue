@@ -66,6 +66,7 @@
 
   // Utilities
   import { computed, PropType } from 'vue'
+  import { camelCase } from 'lodash-es'
 
   // Stores
   import { useAppStore } from '@/store/app'
@@ -91,7 +92,7 @@
   const filtered = computed(() => {
     if (!appStore.apiSearch) return props.items
 
-    const query = appStore.apiSearch.toLowerCase()
+    const query = camelCase(appStore.apiSearch).toLowerCase()
 
     return props.items.filter((item: any) => {
       return item.name.toLowerCase().includes(query)
