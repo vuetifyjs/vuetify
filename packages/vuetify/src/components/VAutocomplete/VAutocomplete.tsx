@@ -308,7 +308,8 @@ export const VAutocomplete = genericComponent<new <
     function onFocusout (e: FocusEvent) {
       listHasFocus.value = false
     }
-    function onUpdateModelValue (v: any) {
+    function onUpdateModelValue (v: string) {
+      search.value = v
       if (v == null || (v === '' && !props.multiple)) model.value = []
     }
 
