@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="space-around">
+  <v-row class="my-0" justify="space-around">
     <v-avatar color="info">
       <v-icon icon="mdi-account-circle"></v-icon>
     </v-avatar>
