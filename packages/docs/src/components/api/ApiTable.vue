@@ -89,11 +89,14 @@
   const user = useUserStore()
 
   const filtered = computed(() => {
-    if (!appStore.apiSearch) return props.items
+    const items = props.items.filter((item: any) => {
+      return user.dev || item.description !== '**FOR INTERNAL USE ONLY**'
+    })
+    if (!appStore.apiSearch) return items
 
     const query = appStore.apiSearch.toLowerCase()
 
-    return props.items.filter((item: any) => {
+    return items.filter((item: any) => {
       return item.name.toLowerCase().includes(query)
     })
   })
