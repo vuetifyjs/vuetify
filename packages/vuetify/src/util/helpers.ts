@@ -315,6 +315,21 @@ const bubblingEvents = [
   'onWheel',
 ]
 
+const compositionIgnoreKeys = [
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowRight',
+  'ArrowLeft',
+  'Enter',
+  'Escape',
+  'Tab',
+  ' ',
+]
+
+export function isComposingIgnoreKey (e: KeyboardEvent): boolean {
+  return e.isComposing && compositionIgnoreKeys.includes(e.key)
+}
+
 /**
  * Filter attributes that should be applied to
  * the root element of an input component. Remaining

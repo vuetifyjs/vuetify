@@ -105,13 +105,13 @@ async function networkFirst (request) {
   }
 
   if (response?.status === 200) {
-    cache.put(request, response)
+    cache.put(request, response.clone())
   } else {
     const cached = await caches.match(request)
     if (cached) return cached
   }
 
-  return response.clone()
+  return response
 }
 
 async function getFallbackDocument () {
@@ -134,7 +134,7 @@ async function getFallbackDocument () {
   const fallback = await precache.match(cacheKey)
 
   if (!fallback) {
-    return request
+    return request.then(ensureCacheableResponse)
   }
 
   return fallback
@@ -250,7 +250,8 @@ function ensureCacheableResponse (response) {
   if (!response.redirected) return response
 
   if (!response.url || new URL(response.url).origin !== location.origin) {
-    throw new Error('Uncacheable redirect', { cause: response })
+    console.error('[SW] Uncacheable redirect', response.url, response)
+    return Response.error()
   }
 
   const cloned = response.clone()

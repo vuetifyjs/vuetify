@@ -24,7 +24,7 @@
 
   <v-list-item
     v-else-if="user"
-    :prepend-avatar="user.picture"
+    :prepend-avatar="_user.avatar || user.picture"
     :subtitle="`@${user.nickname}`"
     class="px-4"
     rounded="0"
@@ -81,8 +81,10 @@
 
   // Stores
   import { useAppStore } from '@/store/app'
+  import { useUserStore } from '@/store/user'
 
   const app = useAppStore()
+  const _user = useUserStore()
   // TODO: update to isMobile when v3.4.0 is released
   const { mobile } = useDisplay()
   const { t } = useI18n()
