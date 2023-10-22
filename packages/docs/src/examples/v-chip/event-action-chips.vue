@@ -35,16 +35,19 @@
 
     <v-card-text class="d-flex justify-space-between">
       <v-chip
+        @click="lights"
         prepend-icon="mdi-brightness-5"
       >
         Turn on lights
       </v-chip>
       <v-chip
+        @click="alarm"
         prepend-icon="mdi-alarm-check"
       >
         Set alarm
       </v-chip>
       <v-chip
+        @click="blinds"
         icon="mdi-blinds"
       >
         Close blinds
@@ -52,3 +55,19 @@
     </v-card-text>
   </v-card>
 </template>
+
+<script>
+export default {
+  methods: {
+    alarm () {
+      alert('Turning on alarm...')
+    },
+    blinds () {
+      alert('Toggling blinds...')
+    },
+    lights () {
+      alert('Toggling lights...')
+    },
+  },
+}
+</script>
