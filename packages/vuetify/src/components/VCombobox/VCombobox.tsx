@@ -283,7 +283,7 @@ export const VCombobox = genericComponent<new <
 
         const originalSelectionIndex = selectionIndex.value
         const selectedItem = model.value[selectionIndex.value]
-        if (selectedItem && !selectedItem.props.disabled) select(selectedItem)
+        if (selectedItem && !selectedItem.props.disabled) select(selectedItem, true)
 
         selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
       }
@@ -327,14 +327,14 @@ export const VCombobox = genericComponent<new <
         vTextFieldRef.value?.focus()
       }
     }
-    function select (item: ListItem) {
+    function select (item: ListItem, deleteItem = false) {
       if (props.multiple) {
         const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
 
         if (index === -1) {
           model.value = [...model.value, item]
         } else {
-          const value = [...model.value]
+          const value = deleteItem ? [...model.value] : [...model.value, item]
           value.splice(index, 1)
           model.value = value
         }
