@@ -480,7 +480,7 @@ export const VCombobox = genericComponent<new <
                             ref: itemRef,
                             key: index,
                             active: (highlightFirst.value && index === 0) ? true : undefined,
-                            onClick: () => select(item),
+                            onClick: () => select(item, true),
                           })
 
                           return slots.item?.({
@@ -527,7 +527,7 @@ export const VCombobox = genericComponent<new <
                     e.stopPropagation()
                     e.preventDefault()
 
-                    select(item)
+                    select(item, true)
                   }
 
                   const slotProps = {
