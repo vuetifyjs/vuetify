@@ -8,6 +8,7 @@ import { VIcon } from '@/components/VIcon'
 // Composables
 import { useDisplay } from '@/composables'
 import { makeComponentProps } from '@/composables/component'
+import { useGoto } from '@/composables/goto'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { IconValue } from '@/composables/icons'
 import { useRtl } from '@/composables/locale'
@@ -18,8 +19,6 @@ import { makeTagProps } from '@/composables/tag'
 import { computed, shallowRef, watch } from 'vue'
 import { calculateCenteredOffset, calculateUpdatedOffset, getClientSize, getOffsetSize, getScrollPosition, getScrollSize } from './helpers'
 import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
-import { animateHorizontalScroll } from '@/util/animateHorizontalScroll'
-import { animateVerticalScroll } from '@/util/animateVerticalScroll'
 
 // Types
 import type { InjectionKey, PropType } from 'vue'
@@ -98,6 +97,10 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
     const { resizeRef: containerRef, contentRect: containerRect } = useResizeObserver()
     const { resizeRef: contentRef, contentRect } = useResizeObserver()
 
+    const goto = useGoto({
+      container: containerRef,
+    })
+
     const firstSelectedIndex = computed(() => {
       if (!group.selected.value.length) return -1
 
@@ -128,11 +131,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
             // TODO: Is this too naive? Should we store element references in group composable?
             const selectedElement = contentRef.value.children[lastSelectedIndex.value] as HTMLElement
 
-            if (props.centerActive) {
-              scrollToChildren(selectedElement, true)
-            } else if (isOverflowing.value) {
-              scrollToChildren(selectedElement)
-            }
+            scrollToChildren(selectedElement, props.centerActive)
           }
         })
       })
@@ -177,15 +176,14 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
       ) return
 
       if (isHorizontal.value) {
-        animateHorizontalScroll({
-          container: containerRef.value!,
-          left: newPosition,
+        goto.horizontal({
+          offset: newPosition,
           rtl: isRtl.value,
         })
       } else {
-        animateVerticalScroll({
-          container: containerRef.value!,
-          top: newPosition,
+        goto.vertical({
+          offset: newPosition,
+          rtl: isRtl.value,
         })
       }
     }
