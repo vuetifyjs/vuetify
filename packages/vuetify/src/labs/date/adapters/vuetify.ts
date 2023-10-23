@@ -257,7 +257,7 @@ function format (value: Date, formatString: string, locale: string): string {
       options = { weekday: 'short', day: 'numeric', month: 'short' }
       break
     case 'keyboardDate':
-      options = {}
+      options = { day: '2-digit', month: '2-digit', year: 'numeric' }
       break
     case 'monthAndDate':
       options = { month: 'long', day: 'numeric' }
