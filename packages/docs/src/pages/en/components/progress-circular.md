@@ -67,6 +67,8 @@ The `size` and `width` props allow you to easily alter the size and width of the
 
 ### Slots
 
+#### Default
+
 `default` slot can be used to replace the text inside the loader.
 
 <example file="v-progress-circular/prop-slot-default" />
