@@ -246,8 +246,6 @@ function getWeekdays (locale: string) {
 }
 
 function format (value: Date, formatString: string, locale: string): string {
-  const date = new Date(value)
-
   let options: Intl.DateTimeFormatOptions = {}
   switch (formatString) {
     case 'fullDateWithWeekday':
@@ -275,10 +273,10 @@ function format (value: Date, formatString: string, locale: string): string {
       options = { timeZone: 'UTC', timeZoneName: 'short' }
   }
 
-  return new Intl.DateTimeFormat(locale, options).format(date)
+  return new Intl.DateTimeFormat(locale, options).format(date(value) ?? undefined)
 }
 
-function toISO (adapter: DateAdapter<any>, value: any) {
+function toISO (adapter: DateAdapter<any>, value: Date) {
   const date = adapter.toJsDate(value)
   const year = date.getFullYear()
   const month = padStart(String(date.getMonth() + 1), 2, '0')
