@@ -56,7 +56,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
   const icons = createIcons(options.icons)
   const locale = createLocale(options.locale)
   const date = createDate(options.date)
-  const rules = createRules(options.rules)
+  const rules = createRules(locale, options.rules)
 
   const install = (app: App) => {
     for (const key in directives) {
