@@ -47,10 +47,11 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
     'update:options': (options: any) => true,
     'update:expanded': (options: any) => true,
     'update:groupBy': (value: any) => true,
+    'update:groupExpanded': (value: any) => true,
   },
 
   setup (props, { emit, slots }) {
-    const { groupBy } = createGroupBy(props)
+    const { groupBy, groupExpanded } = createGroupBy(props)
     const { sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
     const itemsLength = computed(() => parseInt(props.itemsLength, 10))
@@ -69,7 +70,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
 
     const { pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })
 
-    const { flatItems } = useGroupedItems(items, groupBy, opened)
+    const { flatItems } = useGroupedItems(items, groupBy, opened, groupExpanded)
 
     const { isSelected, select, selectAll, toggleSelect, someSelected, allSelected } = provideSelection(props, {
       allItems: items,

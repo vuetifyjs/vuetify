@@ -57,11 +57,12 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     'update:sortBy': (value: any) => true,
     'update:options': (value: any) => true,
     'update:groupBy': (value: any) => true,
+    'update:groupExpanded': (value: any) => true,
     'update:expanded': (value: any) => true,
   },
 
   setup (props, { emit, slots }) {
-    const { groupBy } = createGroupBy(props)
+    const { groupBy, groupExpanded } = createGroupBy(props)
     const { sortBy, multiSort, mustSort } = createSort(props)
 
     const { columns, headers } = createHeaders(props, {
@@ -78,7 +79,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups)
-    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
+    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened, groupExpanded)
 
     const allItems = computed(() => extractRows(flatItems.value))
 

@@ -72,6 +72,7 @@ export const VDataIterator = genericComponent<VDataIteratorSlots>()({
   emits: {
     'update:modelValue': (value: any[]) => true,
     'update:groupBy': (value: any) => true,
+    'update:groupExpanded': (value: any) => true,
     'update:page': (value: number) => true,
     'update:itemsPerPage': (value: number) => true,
     'update:sortBy': (value: any) => true,
@@ -81,6 +82,7 @@ export const VDataIterator = genericComponent<VDataIteratorSlots>()({
 
   setup (props, { slots }) {
     const groupBy = useProxiedModel(props, 'groupBy')
+    const groupExpanded = useProxiedModel(props, 'groupExpanded')
     const search = toRef(props, 'search')
 
     const { items } = useDataIteratorItems(props)
@@ -93,7 +95,7 @@ export const VDataIterator = genericComponent<VDataIteratorSlots>()({
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups)
-    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
+    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened, groupExpanded)
 
     const itemsLength = computed(() => flatItems.value.length)
 
