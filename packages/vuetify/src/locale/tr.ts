@@ -1,6 +1,6 @@
 export default {
   badge: 'rozet',
-  open: 'Open',
+  open: 'Aç',
   close: 'Kapat',
   dataIterator: {
     noResultsText: 'Eşleşen veri bulunamadı',
@@ -31,16 +31,16 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    ok: 'Tamam',
+    cancel: 'İptal',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Tarihleri Seç',
+      header: 'Tarihleri Gir',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Tarih Seç',
+    header: 'Tarih Gir',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Tarih Gir',
     },
   },
   noDataText: 'Bu görünümde veri yok.',
@@ -55,18 +55,18 @@ export default {
     moreEvents: '{0} tane daha',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Temizle {0}',
+    prependAction: '{0} önceki işlem',
+    appendAction: '{0} sonraki işlem',
+    otp: '{0}. sıradaki OTP karakterini giriniz',
   },
   fileInput: {
     counter: '{0} dosya',
     counterSize: '{0} dosya (toplamda {1})',
   },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
+    am: 'ÖÖ',
+    pm: 'ÖS',
   },
   pagination: {
     ariaLabel: {
@@ -75,22 +75,22 @@ export default {
       previous: 'Önceki sayfa',
       page: 'Sayfaya git {0}',
       currentPage: 'Geçerli Sayfa, Sayfa {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'İlk sayfa',
+      last: 'Son sayfa',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Sonraki',
+    prev: 'Önceki',
   },
   rating: {
     ariaLabel: {
       item: 'Rating {0} of {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Yükleniyor...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Daha fazla yükle',
+    empty: 'Daha fazla öğe yok',
   },
 }
