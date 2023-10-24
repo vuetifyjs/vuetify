@@ -23,7 +23,6 @@
     "version": "node scripts/confirm-npm-tag.js",
     "prepare": "node scripts/post-install.js",
     "postversion": "node scripts/post-release-merge.js",
-    "postinstall": "patch-package",
     "clean": "lerna clean",
     "changelog": "conventional-changelog -u -p vuetify",
     "all-checks": "yarn lint && lerna run test && lerna run cy:run && yarn build"

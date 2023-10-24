@@ -221,7 +221,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
               'v-text-field--suffixed': props.suffix,
               'v-textarea--auto-grow': props.autoGrow,
               'v-textarea--no-resize': props.noResize || props.autoGrow,
-              'v-text-field--plain-underlined': isPlainOrUnderlined.value,
+              'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
             props.class,
           ]}

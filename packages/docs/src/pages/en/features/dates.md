@@ -122,6 +122,8 @@ import type { DateAdapter } from 'vuetify/labs'
 export interface DateAdapter<Date> {
   date (value?: any): Date | null
   format (date: Date, formatString: string): string
+  parseISO (value: string): Date | null
+  toISO (date: Date): string
 
   startOfDay (date: Date): Date
   endOfDay (date: Date): Date

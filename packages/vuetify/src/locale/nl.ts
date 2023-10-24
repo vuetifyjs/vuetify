@@ -1,6 +1,6 @@
 export default {
   badge: 'insigne',
-  open: 'Open',
+  open: 'Openen',
   close: 'Sluiten',
   dataIterator: {
     noResultsText: 'Geen overeenkomende resultaten gevonden',
@@ -28,19 +28,19 @@ export default {
     pageText: '{0}-{1} van {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'tot',
   },
   datePicker: {
     ok: 'OK',
-    cancel: 'Cancel',
+    cancel: 'Annuleren',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Selecteer datums',
+      header: 'Voer datums in',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Selecteer datum',
+    header: 'Voer datum in',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Voer datum in',
     },
   },
   noDataText: 'Geen gegevens beschikbaar',
@@ -48,17 +48,17 @@ export default {
     prev: 'Vorig beeld',
     next: 'Volgend beeld',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Carrousel beeld {0} van {1}',
     },
   },
   calendar: {
     moreEvents: '{0} meer',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Maak {0} leeg',
+    prependAction: '{0} voorafgaande actie',
+    appendAction: '{0} bijgevoegde actie',
+    otp: 'Vul alsjeblieft OTP karakter {0} in',
   },
   fileInput: {
     counter: '{0} bestanden',
@@ -70,27 +70,27 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      root: 'Paginanavigatie',
+      root: 'Pagina navigatie',
       next: 'Volgende pagina',
       previous: 'Vorige pagina',
       page: 'Ga naar pagina {0}',
       currentPage: 'Huidige pagina, pagina {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Eerste pagina',
+      last: 'Laatste pagina',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Volgende',
+    prev: 'Vorige',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Beoordeling {0} van {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Aan het laden...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Laad meer',
+    empty: 'Niet meer',
   },
 }

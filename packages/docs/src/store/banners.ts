@@ -5,9 +5,6 @@ import { useDate } from 'vuetify/labs/date'
 // Utilities
 import { defineStore } from 'pinia'
 
-// Globals
-import { IS_PROD } from '@/util/globals'
-
 // Types
 interface Banner {
   status: 'published' | 'unpublished'
@@ -37,7 +34,7 @@ interface Banner {
       }
     }
     visible: {
-      key: 'home' | 'docs' | 'both'
+      key: 'home' | 'docs' | 'both' | 'server'
       value: 'home'
     }
   }
@@ -46,6 +43,8 @@ interface Banner {
 interface State {
   banners: Banner[]
   router: any
+  server?: Banner
+  banner?: Banner
 }
 
 export const useBannersStore = defineStore('banners', {
@@ -72,7 +71,7 @@ export const useBannersStore = defineStore('banners', {
             })
             .props('status,metadata,slug,title,modified_at')
             .sort('metadata.start_date')
-            .limit(2)
+            .limit(3)
         ) || {}
 
         this.banners = objects
@@ -80,17 +79,16 @@ export const useBannersStore = defineStore('banners', {
     },
   },
   getters: {
-    banner: state => {
+    banner (state) {
       const name = state.router.currentRoute.value.meta.page
       const date = useDate()
+
+      if (this.server) return this.server
 
       return state.banners.find(({
         metadata: { visible },
         modified_at: modifiedAt,
-        status,
       }) => {
-        if (IS_PROD && status !== 'published') return false
-
         if (!date.isBefore(date.date(modifiedAt), date.endOfDay(new Date()))) return false
 
         if (visible.key === 'both') return true
@@ -98,6 +96,18 @@ export const useBannersStore = defineStore('banners', {
         if (visible.key === 'home' && name === '') return true
 
         return visible.key === 'docs' && name !== 'home'
+      })
+    },
+    server (state) {
+      const date = useDate()
+
+      return state.banners.find(({
+        metadata: { visible },
+        modified_at: modifiedAt,
+      }) => {
+        if (!date.isBefore(date.date(modifiedAt), date.endOfDay(new Date()))) return false
+
+        return visible.key === 'server'
       })
     },
   },

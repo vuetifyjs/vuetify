@@ -17,7 +17,7 @@ export const useAuthStore = defineStore('auth', () => {
   const sponsor = ref([])
 
   const isSubscriber = computed(() => {
-    return !url || !!sponsor.value.find((s: any) => s.monthlyPriceInDollars >= 1) || admin.value
+    return !url || !!sponsor.value.find((s: any) => s.tier.monthlyPriceInDollars >= 1) || admin.value
   })
 
   user.$subscribe(() => {

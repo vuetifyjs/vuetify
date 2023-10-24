@@ -58,7 +58,7 @@ export const makeVDataTableFooterProps = propsFactory({
     default: '$vuetify.dataFooter.lastPage',
   },
   itemsPerPageOptions: {
-    type: Array as PropType<readonly { title: string, value: number }[]>,
+    type: Array as PropType<readonly (number | { title: string, value: number })[]>,
     default: () => ([
       { value: 10, title: '10' },
       { value: 25, title: '25' },
@@ -80,10 +80,21 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
     const { page, pageCount, startIndex, stopIndex, itemsLength, itemsPerPage, setItemsPerPage } = usePagination()
 
     const itemsPerPageOptions = computed(() => (
-      props.itemsPerPageOptions.map(option => ({
-        ...option,
-        title: t(option.title),
-      }))
+      props.itemsPerPageOptions.map(option => {
+        if (typeof option === 'number') {
+          return {
+            value: option,
+            title: option === -1
+              ? t('$vuetify.dataFooter.itemsPerPageAll')
+              : String(option),
+          }
+        }
+
+        return {
+          ...option,
+          title: t(option.title),
+        }
+      })
     ))
 
     return () => (

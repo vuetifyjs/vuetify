@@ -181,3 +181,5 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
     return {}
   },
 })
+
+export type VStepperItem = InstanceType<typeof VStepperItem>

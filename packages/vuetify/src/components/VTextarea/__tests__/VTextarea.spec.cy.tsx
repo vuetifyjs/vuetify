@@ -16,7 +16,7 @@ describe('VTextarea', () => {
       .type('Eos')
       .should(el => expect(el.outerHeight()).to.equal(56))
       .type('u')
-      .should(el => expect(el.outerHeight()).to.equal(78))
+      .should(el => expect(el.outerHeight()).to.equal(80))
   })
 
   it('should respect max-rows', () => {
@@ -27,8 +27,8 @@ describe('VTextarea', () => {
       .should(el => expect(el.outerHeight()).to.equal(56))
       .click()
       .type('Lorem ipsum dolor sit amet consectetur adipisicing elit. ')
-      .should(el => expect(el.outerHeight()).to.equal(78))
+      .should(el => expect(el.outerHeight()).to.equal(80))
       .type('Lorem ipsum dolor sit amet consectetur adipisicing elit. ')
-      .should(el => expect(el.outerHeight()).to.equal(78))
+      .should(el => expect(el.outerHeight()).to.equal(80))
   })
 })
