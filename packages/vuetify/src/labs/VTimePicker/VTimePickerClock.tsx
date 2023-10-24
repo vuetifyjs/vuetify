@@ -25,8 +25,8 @@ interface Point {
 
 interface options extends Vue {
   $refs: {
-    clock: HTMLElement
-    innerClock: HTMLElement
+    clockRef: HTMLElement
+    innerClockRef: HTMLElement
   }
 }
 
@@ -38,7 +38,7 @@ export const makeVTimePickerClockProps = propsFactory({
   format: {
     type: Function,
     default: (val: string | number) => val,
-  } as PropValidator<(val: string | number) => string | number>,
+  } as PropValue<(val: string | number) => string | number>,
   max: {
     type: Number,
     required: true,
@@ -57,7 +57,7 @@ export const makeVTimePickerClockProps = propsFactory({
     type: Number,
     default: 1,
   },
-  value: Number,
+  modelValue: Number,
 
   ...makeDateProps(),
 }, 'VTimePickerClock')
@@ -76,9 +76,9 @@ export const VTimePickerClock = genericComponent()({
   ],
 
   setup (props, { emit, slots }) {
-    const clock = ref(null)
-    const innerClock = ref(null)
-    const inputValue = ref(props.value)
+    const clockRef = ref(null)
+    const innerClockRef = ref(null)
+    const inputValue = ref(props.modelValue)
     const isDragging = ref(false)
     const valueOnMouseDown = ref(null as number | null)
     const valueOnMouseUp = ref(null as number | null)
@@ -86,10 +86,9 @@ export const VTimePickerClock = genericComponent()({
     const count = computed(() => props.max - props.min + 1)
     const degreesPerUnit = computed(() => 360 / roundCount.value)
     const degrees = computed(() => degreesPerUnit.value * Math.PI / 180)
-    const displayedValue = computed(() => props.value == null ? props.min : props.value)
+    const displayedValue = computed(() => props.modelValue == null ? props.min : props.modelValue)
     const innerRadiusScale = computed(() => 0.62)
     const roundCount = computed(() => props.double ? (count.value / 2) : count.value)
-
 
     const wheel = (e: WheelEvent) => {
       e.preventDefault()
@@ -101,8 +100,8 @@ export const VTimePickerClock = genericComponent()({
         value = (value - props.min + count.value) % count.value + props.min
       } while (!isAllowed(value) && value !== displayedValue.value)
 
-      if (value !== this.displayedValue) {
-        this.update(value)
+      if (value !== props.displayedValue) {
+        update(value)
       }
     }
     const isInner = (value: number) => {
@@ -147,25 +146,27 @@ export const VTimePickerClock = genericComponent()({
     }
     const onDragMove = (e: MouseEvent | TouchEvent) => {
       e.preventDefault()
-      if ((!isDragging.value && e.type !== 'click') || !clock.value) return
-
-      const { width, top, left } = clock.value.getBoundingClientRect()
-      const { width: innerWidth } = innerClock.value.getBoundingClientRect()
+      if ((!isDragging.value && e.type !== 'click') || !clockRef.value) return
+      const { width, top, left } = clockRef.value.getBoundingClientRect()
+      const { width: innerWidth } = innerClockRef.value.getBoundingClientRect()
       const { clientX, clientY } = 'touches' in e ? e.touches[0] : e
       const center = { x: width / 2, y: -width / 2 }
       const coords = { x: clientX - left, y: top - clientY }
-      const handAngle = Math.round(angle(center, coords) - this.rotate + 360) % 360
+      const handAngle = Math.round(angle(center, coords) - props.rotate + 360) % 360
       const insideClick = props.double && euclidean(center, coords) < (innerWidth + innerWidth * innerRadiusScale.value) / 4
       const checksCount = Math.ceil(15 / degreesPerUnit.value)
+      console.log(center, coords, angle(center, coords), handAngle, insideClick, checksCount)
       let value
 
       for (let i = 0; i < checksCount; i++) {
         value = angleToValue(handAngle + i * degreesPerUnit.value, insideClick)
+        console.log(value, isAllowed(value))
         if (isAllowed(value)) return setMouseDownValue(value)
 
         value = angleToValue(handAngle - i * degreesPerUnit.value, insideClick)
         if (isAllowed(value)) return setMouseDownValue(value)
       }
+      console.log(value)
     }
     const angleToValue = (angle: number, insideClick: boolean): number => {
       const value = (
@@ -211,27 +212,27 @@ export const VTimePickerClock = genericComponent()({
       return children
     })
     
-    watch(props.value, val => {
+    watch(props.modelValue, val => {
       inputValue.value = val
     })
 
     useRender(() => {
       return (
-        <div class={['v-time-picker-clock', { 'v-time-picker-clock--indeterminate': props.value == null } ]}
-          onMousedown={ onMouseDown }
-          onMouseup={ onMouseUp }
+        <div class={['v-time-picker-clock', { 'v-time-picker-clock--indeterminate': props.modelValue == null } ]}
+          onMousedown={ (e: MouseEvent) => onMouseDown(e) }
+          onMouseup={ (e: MouseEvent) => onMouseUp(e) }
           onMouseleave={ (e: MouseEvent) => (isDragging && onMouseUp(e)) }
-          onTouchstart={ onMouseDown }
-          onTouchend={ onMouseUp }
-          onMousemove={ onDragMove }
-          onTouchmove={ onDragMove }
+          onTouchstart={ (e: MouseEvent) => onMouseDown(e) }
+          onTouchend={ (e: MouseEvent) => onMouseUp(e) }
+          onMousemove={ (e: DragEvent) => onDragMove(e) }
+          onTouchmove={ (e: DragEvent) => onDragMove(e) }
           onWheel={ (e: WheelEvent) => (props.scrollable && wheel(e)) }
-          ref="clock"
+          ref={ clockRef }
         >
-          <div class="v-time-picker-clock__inner" ref="innerClock">
+          <div class="v-time-picker-clock__inner" ref={ innerClockRef }>
             <div 
-              class={['v-time-picker-clock__hand', {'v-time-picker-clock__hand--inner': isInner(props.value) } ]}
-              style={ `background: ${(props.value != null) && (props.color || 'accent')}; transform: rotate(${props.rotate + degreesPerUnit.value * (displayedValue.value - props.min)}deg ${`scaleY(${handScale(displayedValue.value)})`})` }
+              class={['v-time-picker-clock__hand', {'v-time-picker-clock__hand--inner': isInner(props.modelValue) } ]}
+              style={ `background: ${(props.modelValue != null) && (props.color || 'accent')}; transform: rotate(${props.rotate + degreesPerUnit.value * (displayedValue.value - props.min)}deg ${`scaleY(${handScale(displayedValue.value)})`})` }
             ></div>
             {
               genChildren.value.map(value => (
@@ -242,7 +243,7 @@ export const VTimePickerClock = genericComponent()({
                       'v-time-picker-clock__item--disabled': props.disabled || !isAllowed(value)
                     }
                   ]}
-                  style={ { ...getTransform(value), color: value === props.value && (props.color || 'accent')} }
+                  style={ { ...getTransform(value), color: value === props.modelValue && (props.color || 'accent')} }
                 ><span>{ props.format(value) }</span></div>
               ))
             }

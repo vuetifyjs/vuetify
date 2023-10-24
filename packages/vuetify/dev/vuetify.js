@@ -20,7 +20,6 @@ export default createVuetify({
   },
   directives,
   ssr: !!process.env.VITE_SSR,
-  date,
   defaults,
   icons,
   locale,

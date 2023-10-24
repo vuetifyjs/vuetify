@@ -41,7 +41,11 @@ export const VTimePickerTitle = genericComponent()({
 
   props: makeVTimePickerTitleProps(),
 
-  setup (props, { slots }) {
+  emits: [
+    'update:selecting',
+  ],
+
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
 
     useRender(() => {
@@ -52,14 +56,14 @@ export const VTimePickerTitle = genericComponent()({
       return (
         <div class="v-time-picker-title">
           <div class="v-time-picker-title__time">
-            <span>{ props.hour == null ? '--' : props.ampm ? String(hour) : pad(hour) }</span>
-            <span>:</span>
-            <span>{ props.minute == null ? '--' : pad(props.minute) }</span>
+            <v-btn variant="flat" onClick={ () => emit('update:selecting', SelectingTimes.Hour) }>{ props.hour == null ? '--' : props.ampm ? String(hour) : pad(hour) }</v-btn>
+            <v-btn disabled={true}>:</v-btn>
+            <v-btn variant="flat" onClick={ () => emit('update:selecting', SelectingTimes.Minute) }>{ props.minute == null ? '--' : pad(props.minute) }</v-btn>
             {
               props.useSeconds && (
                 <template>
                   <span>:</span>
-                  <span>{ props.second == null ? '--' : pad(props.second) }</span>
+                  <v-btn variant="flat" onClick={ emit('update:selecting', SelectingTimes.Second) }>{ props.second == null ? '--' : pad(props.second) }</v-btn>
                 </template>
               )
             }
@@ -67,11 +71,11 @@ export const VTimePickerTitle = genericComponent()({
               props.ampm && (
                 <div
                   class={['v-time-picker-title__ampm', {
-                    'v-time-picker-title__ampm--readonly': this.ampmReadonly,
+                    'v-time-picker-title__ampm--readonly': props.ampmReadonly,
                   }]}
                 >
-                  { (!this.ampmReadonly || this.period === 'am') ?<span>{ t('$vuetify.timePicker.am') }</span> : '' }
-                  { (!this.ampmReadonly || this.period === 'pm') ? <span>{ t('$vuetify.timePicker.pm') }</span> : '' }
+                  { (!props.ampmReadonly || props.period === 'am') ?<span>{ t('$vuetify.timePicker.am') }</span> : '' }
+                  { (!props.ampmReadonly || props.period === 'pm') ? <span>{ t('$vuetify.timePicker.pm') }</span> : '' }
                 </div>
               )
             }

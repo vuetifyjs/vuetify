@@ -21,6 +21,12 @@ import pad from '../VDatePicker/util/pad'
 // Types
 // import { VNode, PropType } from 'vue'
 import { SelectingTimes } from './SelectingTimes'
+interface options extends Vue {
+  $refs: {
+    clockRef: HTMLElement
+    titleRef: HTMLElement
+  }
+}
 
 // Utilities
 import { computed, onMounted, ref, shallowRef, watch } from 'vue'
@@ -53,7 +59,8 @@ export const makeVTimePickerProps = propsFactory({
   readonly: Boolean,
   scrollable: Boolean,
   useSeconds: Boolean,
-  value: null as any as PropType<any>,
+  // value: null as any as PropType<any>,
+  modelValue: null as any as PropType<any>,
   ampmInTitle: Boolean,
   ...makeVPickerProps({ title: ''})
 }, 'VTimePicker')
@@ -65,10 +72,11 @@ export const VTimePicker = genericComponent()({
 
   emits: [
     'input',
-    'click:hours',
-    'click:minutes',
-    'click:seconds',
+    'click:hour',
+    'click:minute',
+    'click:second',
     'update:period',
+    'update:modelValue',
     'change'
   ],
 
@@ -91,23 +99,23 @@ export const VTimePicker = genericComponent()({
         return selecting.value === SelectingTimes.Hour
       },
       set (v: boolean) {
-        this.selecting = SelectingTimes.Hour
+        selecting.value = SelectingTimes.Hour
       },
     })
     const selectingMinute = computed({
       get (): boolean {
-        return this.selecting === SelectingTimes.Minute
+        return selecting.value === SelectingTimes.Minute
       },
       set (v: boolean) {
-        this.selecting = SelectingTimes.Minute
+        selecting.value = SelectingTimes.Minute
       },
     })
     const selectingSecond = computed({
       get (): boolean {
-        return this.selecting === SelectingTimes.Second
+        return selecting.value === SelectingTimes.Second
       },
       set (v: boolean) {
-        this.selecting = SelectingTimes.Second
+        selecting.value = SelectingTimes.Second
       },
     })
     const isAllowedHourCb = computed((): AllowFunction => {
@@ -133,7 +141,7 @@ export const VTimePicker = genericComponent()({
     const isAllowedMinuteCb = computed((): AllowFunction => {
       let cb: AllowFunction
 
-      const isHourAllowed = !isAllowedHourCb.value || inputHour.value === null || isAllowedHourCb.value(this.inputHour)
+      const isHourAllowed = !isAllowedHourCb.value || inputHour.value === null || isAllowedHourCb.value(inputHour.value)
       if (props.allowedMinutes instanceof Array) {
         cb = (val: number) => (props.allowedMinutes as number[]).includes(val)
       } else {
@@ -206,12 +214,13 @@ export const VTimePicker = genericComponent()({
       useSeconds: props.useSeconds,
       selecting: selecting.value,
     }))
+    const titleRef = ref<typeof VTimePickerTitle>(null)
+    const clockRef = ref<typeof VTimePickerClock>(null)
 
-    watch(props.value, val => setInputData(val))
+    watch(props.modelValue, val => setInputData(val))
 
     onMounted(() => {
-      setInputData(props.value)
-      // this.$on('update:period', this.setPeriod)
+      setInputData(props.modelValue)
     })
 
     const genValue = () => {
@@ -223,7 +232,7 @@ export const VTimePicker = genericComponent()({
     }
     const emitValue = () => {
       const value = genValue()
-      if (value !== null) emit('input', value)
+      if (value !== null) emit('update:modelValue', value)
     }
     const setPeriod = (period: Period) => {
       period.value = period
@@ -245,7 +254,7 @@ export const VTimePicker = genericComponent()({
       } else {
         const [, hour, minute, , second, period] = value.trim().toLowerCase().match(/^(\d+):(\d+)(:(\d+))?([ap]m)?$/) || new Array(6)
 
-        inputHour.value = period ? this.convert12to24(parseInt(hour, 10), period as Period) : parseInt(hour, 10)
+        inputHour.value = period ? convert12to24(parseInt(hour, 10), period as Period) : parseInt(hour, 10)
         inputMinute.value = parseInt(minute, 10)
         inputSecond.value = parseInt(second || 0, 10)
       }
@@ -269,6 +278,7 @@ export const VTimePicker = genericComponent()({
       emitValue()
     }
     const onChange = (value: number) => {
+      console.log(selecting.value, value)
       emit(`click:${selectingNames[selecting.value]}`, value)
 
       const emitChange = selecting.value === (props.useSeconds ? SelectingTimes.Second : SelectingTimes.Minute)
@@ -315,7 +325,6 @@ export const VTimePicker = genericComponent()({
       const [pickerProps] = VPicker.filterProps(props)
       return (
         <VPicker
-          { ...pickerProps }
           class={[ 'v-time-picker', props.class ]}
           style={ props.style }
           title={ title.value }
@@ -324,10 +333,12 @@ export const VTimePicker = genericComponent()({
             title: () => (
               <VTimePickerTitle
                 key="header"
-                { ...titleSlotProps.value }
+                hour={ inputHour.value }
+                minute={ inputMinute.value }
+                second={ inputSecond.value }
                 onUpdate:selecting={ (value: 1 | 2 | 3) => (selecting.value = value) }
-                onUpdate:period={ (period: string) => emit('update:period', period) }
-                ref="title"
+                onUpdate:period={ (period: string) => setPeriod(period) && emit('update:period', period) }
+                ref={ titleRef }
               ></VTimePickerTitle>
             ),
             default: () => (
@@ -362,14 +373,15 @@ export const VTimePicker = genericComponent()({
                   scrollable={ props.scrollable }
                   size={20}
                   step={ selecting.value === SelectingTimes.Hour ? 1 : 5 }
-                  value={ selecting.value === SelectingTimes.Hour
+                  modelValue={ selecting.value === SelectingTimes.Hour
                     ? inputHour.value
                     : (selecting.value === SelectingTimes.Minute
                       ? inputMinute.value
                       : inputSecond.value) }
                   onInput={ onInput }
-                  OnChange={ onChange }
-                  ref="clock"
+                  onUpdate:modelValue={ onInput }
+                  onChange={ onChange }
+                  ref={ clockRef }
                 ></VTimePickerClock>
               </div>
             )
