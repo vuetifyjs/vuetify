@@ -11,7 +11,7 @@ related:
   - /components/menus/
 features:
   label: 'C: VBottomSheet'
-  github: /labs/VBottomSheet/
+  github: /components/VBottomSheet/
   report: true
   spec: https://m2.material.io/components/sheets-bottom
 ---
