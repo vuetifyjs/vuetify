@@ -70,11 +70,11 @@ Due to the massive differences in display and functionality between horizontal a
 | Component | Description |
 | - | - |
 | [v-stepper](/api/v-stepper/) | Primary Component |
+| [v-stepper-actions](/api/v-stepper-actions/) | Actions for stepper |
 | [v-stepper-header](/api/v-stepper-header/) | Container for stepper items |
 | [v-stepper-item](/api/v-stepper-item/) | Primary Component |
 | [v-stepper-window](/api/v-stepper-window/) | Window container for stepper window items |
 | [v-stepper-window-item](/api/v-stepper-window-item/) | Items for stepper window |
-| [v-stepper-actions](/api/v-stepper-actions/) | Actions for stepper |
 
 <api-inline hide-links />
 
