@@ -74,6 +74,7 @@ Due to the massive differences in display and functionality between horizontal a
 | [v-stepper-item](/api/v-stepper-item/) | Primary Component |
 | [v-stepper-window](/api/v-stepper-window/) | Window container for stepper window items |
 | [v-stepper-window-item](/api/v-stepper-window-item/) | Items for stepper window |
+| [v-stepper-actions](/api/v-stepper-actions/) | Actions for stepper |
 
 <api-inline hide-links />
 
