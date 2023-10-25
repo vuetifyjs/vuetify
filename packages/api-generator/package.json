@@ -18,7 +18,7 @@
     "prettier": "^2.8.7",
     "rimraf": "^3.0.2",
     "ts-morph": "^18.0.0",
-    "vue": "^3.3.4",
+    "vue": "^3.3.7",
     "vuetify": "^3.3.23"
   },
   "devDependencies": {
