@@ -97,8 +97,6 @@ The following is a list of available and up-and-coming components for use with L
 | [v-infinite-scroll](/api/v-infinite-scroll/) | Primary Component | |
 | **OTP input** | [Usage](/components/otp-input/) | [v3.3.11&nbsp;(Icarus)](/getting-started/release-notes/?version=v3.3.11) |
 | [v-otp-input](/api/v-otp-input/) | Primary Component | |
-| **Skeleton loader** | [Usage](/components/skeleton-loaders/) | [v3.2.0&nbsp;(Orion)](/getting-started/release-notes/?version=v3.2.0) |
-| [v-skeleton-loader](/api/v-skeleton-loader/) | Primary Component | |
 
 ### Up Next
 

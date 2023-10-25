@@ -394,7 +394,7 @@ These components are used to provide feedback to the user within content, over c
 
 </components-list-item>
 
-<components-list-item name="Skeleton loader component" src="skeleton-loaders" labs>
+<components-list-item name="Skeleton loader component" src="skeleton-loaders">
 
   Displays a content, enhancing perceived performance during data-fetching & rendering
 

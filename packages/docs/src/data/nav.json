@@ -147,6 +147,7 @@
       "progress-circular",
       "progress-linear",
       "ratings",
+      "skeleton-loaders",
       "snackbars",
       "timelines",
       { "divider": true },
@@ -232,10 +233,6 @@
       },
       {
         "title": "otp-input",
-        "subfolder": "components"
-      },
-      {
-        "title": "skeleton-loaders",
         "subfolder": "components"
       }
     ]
