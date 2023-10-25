@@ -33,7 +33,7 @@
     "prismjs": "^1.29.0",
     "roboto-fontface": "^0.10.0",
     "vee-validate": "^4.8.4",
-    "vue": "^3.3.4",
+    "vue": "^3.3.7",
     "vue-gtag-next": "^1.14.0",
     "vue-i18n": "^9.3.0-beta.16",
     "vue-instantsearch": "^4.8.8",
