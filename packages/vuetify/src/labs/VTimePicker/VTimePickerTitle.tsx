@@ -23,6 +23,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 export const makeVTimePickerTitleProps = propsFactory({
   ampm: Boolean,
   ampmReadonly: Boolean,
+  color: String,
   disabled: Boolean,
   hour: Number,
   minute: Number,
@@ -42,6 +43,7 @@ export const VTimePickerTitle = genericComponent()({
   props: makeVTimePickerTitleProps(),
 
   emits: [
+    'update:period',
     'update:selecting',
   ],
 
@@ -55,16 +57,54 @@ export const VTimePickerTitle = genericComponent()({
       }
       return (
         <div class="v-time-picker-title">
-          <div class="v-time-picker-title__time">
-            <v-btn variant="flat" onClick={ () => emit('update:selecting', SelectingTimes.Hour) }>{ props.hour == null ? '--' : props.ampm ? String(hour) : pad(hour) }</v-btn>
-            <v-btn disabled={true}>:</v-btn>
-            <v-btn variant="flat" onClick={ () => emit('update:selecting', SelectingTimes.Minute) }>{ props.minute == null ? '--' : pad(props.minute) }</v-btn>
+          <div class="v-time-picker-title__text" style="width: 100%">
+            { t('$vuetify.timePicker.select') }
+          </div>
+          <div
+            class="v-time-picker-title__time"
+            class={{ 'v-time-picker-title__time--with-seconds': props.useSeconds }}
+          >
+            <v-btn
+              variant="tonal"
+              onClick={ () => emit('update:selecting', SelectingTimes.Hour) }
+              class="v-time-picker-title__time__btn"
+              class={{ 
+                'v-time-picker-title__time__btn__active': props.selecting === 1,
+                'v-time-picker-title__time--with-seconds__btn': props.useSeconds
+              }}
+            >
+              { props.hour == null ? '--' : pad(hour) }
+            </v-btn>
+            <span class="v-time-picker-title__time__btn">:</span>
+            <v-btn
+              variant="tonal"
+              onClick={ () => emit('update:selecting', SelectingTimes.Minute) }
+              class="v-time-picker-title__time__btn"
+              class={{
+                'v-time-picker-title__time__btn__active': props.selecting === 2,
+                'v-time-picker-title__time--with-seconds__btn': props.useSeconds
+              }}
+            >
+              { props.minute == null ? '--' : pad(props.minute) }
+            </v-btn>
             {
               props.useSeconds && (
-                <template>
-                  <span>:</span>
-                  <v-btn variant="flat" onClick={ emit('update:selecting', SelectingTimes.Second) }>{ props.second == null ? '--' : pad(props.second) }</v-btn>
-                </template>
+                <span class="v-time-picker-title__time__btn">:</span>
+              )
+            }
+            {
+              props.useSeconds && (
+                <v-btn
+                  variant="tonal"
+                  onClick={ () => emit('update:selecting', SelectingTimes.Second) }
+                  class="v-time-picker-title__time__btn"
+                  class={{
+                    'v-time-picker-title__time__btn__active': props.selecting === 3,
+                    'v-time-picker-title__time--with-seconds__btn': props.useSeconds
+                  }}
+                >
+                  { props.second == null ? '--' : pad(props.second) }
+                </v-btn>
               )
             }
             {
@@ -74,8 +114,22 @@ export const VTimePickerTitle = genericComponent()({
                     'v-time-picker-title__ampm--readonly': props.ampmReadonly,
                   }]}
                 >
-                  { (!props.ampmReadonly || props.period === 'am') ?<span>{ t('$vuetify.timePicker.am') }</span> : '' }
-                  { (!props.ampmReadonly || props.period === 'pm') ? <span>{ t('$vuetify.timePicker.pm') }</span> : '' }
+                  <v-btn
+                    variant="tonal"
+                    onClick={ () => emit('update:period', 'am') }
+                    class="v-time-picker-title__ampm__btn"
+                    class={{ 'v-time-picker-title__ampm__btn__active': props.period === 'am' }}
+                  >
+                    { t('$vuetify.timePicker.am') }
+                  </v-btn>
+                  <v-btn
+                    variant="tonal"
+                    onClick={ () => emit('update:period', 'pm') }
+                    class="v-time-picker-title__ampm__btn"
+                    class={{ 'v-time-picker-title__ampm__btn__active': props.period === 'pm' }}
+                  >
+                    { t('$vuetify.timePicker.pm') }
+                  </v-btn>
                 </div>
               )
             }

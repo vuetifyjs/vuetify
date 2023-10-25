@@ -38,7 +38,7 @@ export const makeVTimePickerClockProps = propsFactory({
   format: {
     type: Function,
     default: (val: string | number) => val,
-  } as PropValue<(val: string | number) => string | number>,
+  } as PropType<(val: string | number) => string | number>,
   max: {
     type: Number,
     required: true,
@@ -155,18 +155,15 @@ export const VTimePickerClock = genericComponent()({
       const handAngle = Math.round(angle(center, coords) - props.rotate + 360) % 360
       const insideClick = props.double && euclidean(center, coords) < (innerWidth + innerWidth * innerRadiusScale.value) / 4
       const checksCount = Math.ceil(15 / degreesPerUnit.value)
-      console.log(center, coords, angle(center, coords), handAngle, insideClick, checksCount)
       let value
 
       for (let i = 0; i < checksCount; i++) {
         value = angleToValue(handAngle + i * degreesPerUnit.value, insideClick)
-        console.log(value, isAllowed(value))
         if (isAllowed(value)) return setMouseDownValue(value)
 
         value = angleToValue(handAngle - i * degreesPerUnit.value, insideClick)
         if (isAllowed(value)) return setMouseDownValue(value)
       }
-      console.log(value)
     }
     const angleToValue = (angle: number, insideClick: boolean): number => {
       const value = (
@@ -231,8 +228,10 @@ export const VTimePickerClock = genericComponent()({
         >
           <div class="v-time-picker-clock__inner" ref={ innerClockRef }>
             <div 
-              class={['v-time-picker-clock__hand', {'v-time-picker-clock__hand--inner': isInner(props.modelValue) } ]}
-              style={ `background: ${(props.modelValue != null) && (props.color || 'accent')}; transform: rotate(${props.rotate + degreesPerUnit.value * (displayedValue.value - props.min)}deg ${`scaleY(${handScale(displayedValue.value)})`})` }
+              class={['v-time-picker-clock__hand', { 'v-time-picker-clock__hand--inner': isInner(props.modelValue) } ]}
+              style={{
+                background: props.modelValue != null ? props.color ? props.color : 'accent' : '',
+                transform: `rotate(${props.rotate + degreesPerUnit.value * (displayedValue.value - props.min)}deg) scaleY(${handScale(displayedValue.value)})` }}
             ></div>
             {
               genChildren.value.map(value => (

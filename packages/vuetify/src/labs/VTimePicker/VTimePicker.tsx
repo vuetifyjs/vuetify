@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 // Components
-import { VTimePickerTitle } from './VTimePickerTitle'
+import { makeVTimePickerTitleProps, VTimePickerTitle } from './VTimePickerTitle'
 import { VTimePickerClock } from './VTimePickerClock'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
@@ -59,10 +59,9 @@ export const makeVTimePickerProps = propsFactory({
   readonly: Boolean,
   scrollable: Boolean,
   useSeconds: Boolean,
-  // value: null as any as PropType<any>,
   modelValue: null as any as PropType<any>,
   ampmInTitle: Boolean,
-  ...makeVPickerProps({ title: ''})
+  ...makeVPickerProps({ title: '' })
 }, 'VTimePicker')
 
 export const VTimePicker = genericComponent()({
@@ -202,18 +201,7 @@ export const VTimePicker = genericComponent()({
       return props.format === 'ampm'
     })
 
-    const titleSlotProps = computed(() => ({
-      ampm: props.ampm,
-      ampmReadonly: props.ampmReadonly && !props.ampmInTitle,
-      disabled: props.disabled,
-      hour: props.hour,
-      minute: props.minute,
-      second: props.second,
-      period: period.value,
-      readonly: props.readonly,
-      useSeconds: props.useSeconds,
-      selecting: selecting.value,
-    }))
+    
     const titleRef = ref<typeof VTimePickerTitle>(null)
     const clockRef = ref<typeof VTimePickerClock>(null)
 
@@ -234,10 +222,10 @@ export const VTimePicker = genericComponent()({
       const value = genValue()
       if (value !== null) emit('update:modelValue', value)
     }
-    const setPeriod = (period: Period) => {
-      period.value = period
+    const setPeriod = (val: Period) => {
+      period.value = val
       if (inputHour.value != null) {
-        const newHour = inputHour.value! + (period === 'am' ? -12 : 12)
+        const newHour = inputHour.value! + (period.value === 'am' ? -12 : 12)
         inputHour.value = firstAllowed('hour', newHour)
         emitValue()
       }
@@ -252,7 +240,7 @@ export const VTimePicker = genericComponent()({
         inputMinute.value = value.getMinutes()
         inputSecond.value = value.getSeconds()
       } else {
-        const [, hour, minute, , second, period] = value.trim().toLowerCase().match(/^(\d+):(\d+)(:(\d+))?([ap]m)?$/) || new Array(6)
+        const [hour, minute, , second, period] = value.trim().toLowerCase().match(/^(\d+):(\d+)(:(\d+))?([ap]m)?$/) || new Array(6)
 
         inputHour.value = period ? convert12to24(parseInt(hour, 10), period as Period) : parseInt(hour, 10)
         inputMinute.value = parseInt(minute, 10)
@@ -278,7 +266,6 @@ export const VTimePicker = genericComponent()({
       emitValue()
     }
     const onChange = (value: number) => {
-      console.log(selecting.value, value)
       emit(`click:${selectingNames[selecting.value]}`, value)
 
       const emitChange = selecting.value === (props.useSeconds ? SelectingTimes.Second : SelectingTimes.Minute)
@@ -323,6 +310,7 @@ export const VTimePicker = genericComponent()({
 
     useRender(() => {
       const [pickerProps] = VPicker.filterProps(props)
+      // const [titleSlotProps] = makeVTimeTitleSlotProps.filterProps(props)
       return (
         <VPicker
           class={[ 'v-time-picker', props.class ]}
@@ -333,24 +321,24 @@ export const VTimePicker = genericComponent()({
             title: () => (
               <VTimePickerTitle
                 key="header"
+                ampm={ isAmPm.value || props.ampmInTitle }
+                ampmReadonly={ props.ampmReadonly && !props.ampmInTitle }
+                color={ props.color }
+                disabled={ props.disabled }
                 hour={ inputHour.value }
                 minute={ inputMinute.value }
+                period={ period.value }
+                readonly={ props.readonly }
                 second={ inputSecond.value }
+                selecting={ selecting.value }
+                useSeconds={ props.useSeconds}
                 onUpdate:selecting={ (value: 1 | 2 | 3) => (selecting.value = value) }
-                onUpdate:period={ (period: string) => setPeriod(period) && emit('update:period', period) }
+                onUpdate:period={ (val: string) => setPeriod(val) && emit('update:period', val) }
                 ref={ titleRef }
               ></VTimePickerTitle>
             ),
             default: () => (
               <div class="v-time-picker-clock__container" key={selecting.value}>
-                {
-                  !props.ampmInTitle && isAmPm.value ? (
-                    <div class="v-time-picker-clock__ampm" style={ `color: ${props.color || 'primary'}`}>
-                      <span>{ t('$vuetify.timePicker.am') }</span>
-                      <span>{ t('$vuetify.timePicker.pm') }</span>
-                    </div>
-                  ) : ''
-                }
                 <VTimePickerClock
                   allowedValues={
                     selecting.value === SelectingTimes.Hour

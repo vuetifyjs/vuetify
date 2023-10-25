@@ -1,14 +1,34 @@
 @import './_variables.scss'
 
 // Theme
+.v-time-picker-clock
+  background: rgb(var(--v-theme-background))
+
+  .v-time-picker-clock__item--disabled
+    color: rgb(var(--v-theme-primary))
+
+    &.v-time-picker-clock__item--active
+      color: rgb(var(--v-theme-primary))
+
+  
+  .v-time-picker-clock__hand
+    background-color: rgb(var(--v-theme-primary))
+
+  &:after
+    color: rgb(var(--v-theme-primary))
+
+  .v-time-picker-clock__item--active
+    background-color: rgb(var(--v-theme-primary))
 
 .v-time-picker-clock
-  border-radius: 100%
+  background: rgb(var(--v-theme-on-surface-variant))
+  border-radius: 50%
   position: relative
   transition: none
   user-select: none
-  width: 100%
-  padding-top: 100%
+  width: 90%
+  padding-top: 90%
+  margin-left: 5%
   flex: 1 0 auto
 
   &__container
@@ -17,19 +37,6 @@
     flex-basis: 290px
     justify-content: center
     padding: $time-picker-clock-padding
-
-  &__ampm
-    display: flex
-    flex-direction: row
-    justify-content: space-between
-    align-items: flex-end
-    position: absolute
-    width: 100%
-    height: 100%
-    top: 0
-    left: 0
-    margin: 0
-    padding: $time-picker-ampm-padding
 
   &__hand
     height: $time-picker-clock-hand-height
@@ -125,6 +132,3 @@
   .v-time-picker-clock
     &__container
       flex-direction: row
-
-    &__ampm
-      flex-direction: column
