@@ -99,12 +99,6 @@ The following is a list of available and up-and-coming components for use with L
 | [v-otp-input](/api/v-otp-input/) | Primary Component | |
 | **Skeleton loader** | [Usage](/components/skeleton-loaders/) | [v3.2.0&nbsp;(Orion)](/getting-started/release-notes/?version=v3.2.0) |
 | [v-skeleton-loader](/api/v-skeleton-loader/) | Primary Component | |
-| **Steppers** | [Usage](/components/steppers/) | [v3.3.11&nbsp;(Icarus)](/getting-started/release-notes/?version=v3.3.11) |
-| [v-stepper](/api/v-stepper/) | Primary Component | |
-| [v-stepper-header](/api/v-stepper-header/) | Container for stepper items | |
-| [v-stepper-item](/api/v-stepper-item/) | Primary Component | |
-| [v-stepper-window](/api/v-stepper-window/) | Window container for stepper window items | |
-| [v-stepper-window-item](/api/v-stepper-window-item/) | Items for stepper window | |
 
 ### Up Next
 

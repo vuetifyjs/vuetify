@@ -308,7 +308,7 @@ These components allow a user to select one or multiple items from a list of opt
 
 </components-list-item>
 
-<components-list-item name="Stepper components" src="steppers" labs>
+<components-list-item name="Stepper components" src="steppers">
 
   The stepper component is a linear progress control used to break lengthy forms into smaller logical sections
 
