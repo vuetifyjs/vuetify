@@ -9,6 +9,10 @@
   display: grid
   grid-template-rows: min-content min-content min-content min-content min-content min-content min-content
   grid-row-gap: 4px
+  font-size: .875rem
+
+  + .v-date-picker-month__days
+    grid-row-gap: 0
 
 .v-date-picker-month__weekday
   font-size: .875rem
@@ -21,48 +25,21 @@
   justify-content: space-around
 
 .v-date-picker-month__day
-  position: relative
-  display: flex
   align-items: center
+  display: flex
   justify-content: center
+  position: relative
+
+  &--selected
+    .v-btn
+      background-color: rgb(var(--v-theme-surface-variant))
+      color: rgb(var(--v-theme-on-surface-variant))
+
+  &--week
+    font-size: var(--v-btn-size)
 
 .v-date-picker-month__day--adjacent
   opacity: 0.5
 
 .v-date-picker-month__day--hide-adjacent
   opacity: 0
-
-.v-date-picker-month__day--range
-  position: absolute
-  width: 100%
-  height: calc(100% - var(--v-date-picker-month-day-diff) * 2)
-  opacity: 0.5
-
-.v-date-picker-month__day--hover
-  position: absolute
-  width: 100%
-  height: calc(100% - var(--v-date-picker-month-day-diff) * 2)
-  border-style: dashed
-  border-top-width: 1px
-  border-bottom-width: 1px
-  border-left: none
-  border-right: none
-
-.v-date-picker-month__day--start, .v-date-picker-month__day--week-start
-  .v-date-picker-month__day--range
-    border-bottom-left-radius: 50%
-    border-top-left-radius: 50%
-    left: var(--v-date-picker-month-day-diff)
-    width: calc(100% - var(--v-date-picker-month-day-diff))
-
-.v-date-picker-month__day--end, .v-date-picker-month__day--week-end
-  .v-date-picker-month__day--range
-    border-bottom-right-radius: 50%
-    border-top-right-radius: 50%
-    right: var(--v-date-picker-month-day-diff)
-    width: calc(100% - var(--v-date-picker-month-day-diff))
-
-.v-date-picker-month__day--selected.v-date-picker-month__day--end.v-date-picker-month__day--week-start,
-.v-date-picker-month__day--selected.v-date-picker-month__day--start.v-date-picker-month__day--week-end
-  .v-date-picker-month__day--range
-    display: none

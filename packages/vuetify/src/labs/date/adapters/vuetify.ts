@@ -158,40 +158,22 @@ const firstDay: Record<string, number> = {
   ZW: 0,
 }
 
-function getWeekArray (date: Date, locale: string) {
-  const weeks = []
-  let currentWeek = []
-  const firstDayOfMonth = startOfMonth(date)
-  const lastDayOfMonth = endOfMonth(date)
-  const firstDayWeekIndex = (firstDayOfMonth.getDay() - firstDay[locale.slice(-2).toUpperCase()] + 7) % 7
-  const lastDayWeekIndex = (lastDayOfMonth.getDay() - firstDay[locale.slice(-2).toUpperCase()] + 7) % 7
+function getWeekArray (value: Date, locale: string): Date[][] {
+  const weeks: Date[][] = []
+  const firstDayIndex = firstDay[locale.slice(-2).toUpperCase()]
+  const currentDay = new Date(value.getFullYear(), value.getMonth(), 1)
+  const startDayIndex = (currentDay.getDay() - firstDayIndex + 7) % 7
 
-  for (let i = 0; i < firstDayWeekIndex; i++) {
-    const adjacentDay = new Date(firstDayOfMonth)
-    adjacentDay.setDate(adjacentDay.getDate() - (firstDayWeekIndex - i))
-    currentWeek.push(adjacentDay)
-  }
+  currentDay.setDate(currentDay.getDate() - startDayIndex)
 
-  for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
-    const day = new Date(date.getFullYear(), date.getMonth(), i)
-
-    // Add the day to the current week
-    currentWeek.push(day)
-
-    // If the current week has 7 days, add it to the weeks array and start a new week
-    if (currentWeek.length === 7) {
-      weeks.push(currentWeek)
-      currentWeek = []
+  for (let i = 0; i < 6; i++) {
+    const week: Date[] = []
+    for (let j = 0; j < 7; j++) {
+      week.push(new Date(currentDay))
+      currentDay.setDate(currentDay.getDate() + 1)
     }
+    weeks.push(week)
   }
-
-  for (let i = 1; i < 7 - lastDayWeekIndex; i++) {
-    const adjacentDay = new Date(lastDayOfMonth)
-    adjacentDay.setDate(adjacentDay.getDate() + i)
-    currentWeek.push(adjacentDay)
-  }
-
-  weeks.push(currentWeek)
 
   return weeks
 }
@@ -263,10 +245,16 @@ function format (value: Date, formatString: string, locale: string): string {
     case 'monthAndYear':
       options = { month: 'long', year: 'numeric' }
       break
+    case 'month':
+      options = { month: 'long' }
+      break
     case 'dayOfMonth':
       options = { day: 'numeric' }
       break
     case 'shortDate':
+      options = { year: '2-digit', month: 'numeric', day: 'numeric' }
+      break
+    case 'year':
       options = { year: 'numeric' }
       break
     default:
@@ -292,23 +280,29 @@ function parseISO (value: string) {
 }
 
 function addDays (date: Date, amount: number) {
-  const d = new Date(date)
-  d.setDate(d.getDate() + amount)
-  return d
+  date.setDate(date.getDate() + amount)
+  return date
 }
 
 function addMonths (date: Date, amount: number) {
-  const d = new Date(date)
-  d.setMonth(d.getMonth() + amount)
-  return d
+  date.setMonth(date.getMonth() + amount)
+  return date
 }
 
 function getYear (date: Date) {
   return date.getFullYear()
 }
 
+function getNextYear (date: Date) {
+  return new Date(date.getFullYear() + 1, date.getMonth(), date.getDate())
+}
+
 function getMonth (date: Date) {
   return date.getMonth()
+}
+
+function getNextMonth (date: Date) {
+  return new Date(date.getFullYear(), date.getMonth() + 1, 1)
 }
 
 function startOfYear (date: Date) {
@@ -364,10 +358,14 @@ function getDiff (date: Date, comparing: Date | string, unit?: string) {
   return Math.floor((d.getTime() - c.getTime()) / (1000 * 60 * 60 * 24))
 }
 
+function setMonth (date: Date, count: number) {
+  date.setMonth(count)
+  return date
+}
+
 function setYear (date: Date, year: number) {
-  const d = new Date(date)
-  d.setFullYear(year)
-  return d
+  date.setFullYear(year)
+  return date
 }
 
 function startOfDay (date: Date) {
@@ -453,6 +451,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return isSameMonth(date, comparing)
   }
 
+  setMonth (date: Date, count: number) {
+    return setMonth(date, count)
+  }
+
   setYear (date: Date, year: number) {
     return setYear(date, year)
   }
@@ -469,8 +471,16 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return getYear(date)
   }
 
+  getNextYear (date: Date) {
+    return getNextYear(date)
+  }
+
   getMonth (date: Date) {
     return getMonth(date)
+  }
+
+  getNextMonth (date: Date) {
+    return getNextMonth(date)
   }
 
   startOfDay (date: Date) {
