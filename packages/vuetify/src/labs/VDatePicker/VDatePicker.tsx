@@ -220,7 +220,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
     }
 
     watch(month, () => {
-      if (viewMode.value === 'months') onClickYear()
+      if (viewMode.value === 'months') onClickMonth()
     })
 
     watch(year, () => {
@@ -251,7 +251,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
           { ...pickerProps }
           class={[
             'v-date-picker',
-            `v-date-picker--${props.viewMode}`,
+            `v-date-picker--${viewMode.value}`,
             props.class,
           ]}
           style={ props.style }
@@ -274,17 +274,15 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
             ),
             default: () => props.inputMode === 'calendar' ? (
               <>
-                { (props.variant !== 'classic' || viewMode.value !== 'year') && (
-                  <VDatePickerControls
-                    { ...datePickerControlsProps }
-                    disabled={ disabled.value }
-                    text={ text.value }
-                    onClick:next={ onClickNext }
-                    onClick:prev={ onClickPrev }
-                    onClick:month={ onClickMonth }
-                    onClick:year={ onClickYear }
-                  />
-                )}
+                <VDatePickerControls
+                  { ...datePickerControlsProps }
+                  disabled={ disabled.value }
+                  text={ text.value }
+                  onClick:next={ onClickNext }
+                  onClick:prev={ onClickPrev }
+                  onClick:month={ onClickMonth }
+                  onClick:year={ onClickYear }
+                />
 
                 <VFadeTransition hideOnLeave>
                   { viewMode.value === 'months' ? (
