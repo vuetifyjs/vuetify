@@ -86,7 +86,7 @@ The recommended placement of elements inside of `v-stepper` is:
 * Place `v-stepper-window` or other forms of content below the stepper header
 * Place `v-stepper-actions` after the stepper window
 
-![Pending graphic](https://cdn.vuetifyjs.com/docs/images/components/v-stepper/v-stepper-anatomy.png "Stepper Anatomy"){ height=500 }
+![Pending graphic](https://cdn.vuetifyjs.com/docs/images/components/v-stepper/v-stepper-anatomy.png "Stepper Anatomy")
 
 | Element / Area | Description |
 | - | - |
