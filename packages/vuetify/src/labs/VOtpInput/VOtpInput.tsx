@@ -14,8 +14,8 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, watch } from 'vue'
-import { filterInputAttrs, focusChild, genericComponent, IN_BROWSER, only, propsFactory, useRender } from '@/util'
+import { computed, nextTick, ref, watch } from 'vue'
+import { filterInputAttrs, focusChild, genericComponent, only, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -97,6 +97,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     const current = computed(() => inputRef.value[focusIndex.value])
 
     function onInput () {
+      if (model.value.length === Number(props.length)) return
+
       const array = model.value.slice()
       const value = current.value.value
 
@@ -110,14 +112,20 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         target = model.value.length
       } else if (focusIndex.value + 1 !== Number(props.length)) {
         target = 'next'
-      } else {
-        requestAnimationFrame(() => current.value?.blur())
       }
 
       if (target) focusChild(contentRef.value!, target)
     }
 
     function onKeydown (e: KeyboardEvent) {
+      // input type number ignores maxlength attribute,
+      // following logic manually prevents user type more than one digits
+      if (props.type === 'number' && !isNaN(Number(e.key)) && current.value.value.length === 1) {
+        e.preventDefault()
+        current.value.value = e.key
+        return
+      }
+
       const array = model.value.slice()
       const index = focusIndex.value
       let target: 'next' | 'prev' | 'first' | 'last' | number | null = null
@@ -199,7 +207,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     watch(focusIndex, val => {
       if (val < 0) return
 
-      IN_BROWSER && window.requestAnimationFrame(() => {
+      nextTick(() => {
         inputRef.value[val]?.select()
       })
     })
