@@ -263,10 +263,16 @@ function format (value: Date, formatString: string, locale: string): string {
     case 'monthAndYear':
       options = { month: 'long', year: 'numeric' }
       break
+    case 'month':
+      options = { month: 'long' }
+      break
     case 'dayOfMonth':
       options = { day: 'numeric' }
       break
     case 'shortDate':
+      options = { year: '2-digit', month: 'numeric', day: 'numeric' }
+      break
+    case 'year':
       options = { year: 'numeric' }
       break
     default:
@@ -307,8 +313,16 @@ function getYear (date: Date) {
   return date.getFullYear()
 }
 
+function getNextYear (date: Date) {
+  return new Date(date.getFullYear() + 1, date.getMonth(), date.getDate())
+}
+
 function getMonth (date: Date) {
   return date.getMonth()
+}
+
+function getNextMonth (date: Date) {
+  return new Date(date.getFullYear(), date.getMonth() + 1, 1)
 }
 
 function startOfYear (date: Date) {
@@ -362,6 +376,12 @@ function getDiff (date: Date, comparing: Date | string, unit?: string) {
   }
 
   return Math.floor((d.getTime() - c.getTime()) / (1000 * 60 * 60 * 24))
+}
+
+function setMonth (date: Date, count: number) {
+  const d = new Date(date)
+  d.setMonth(count)
+  return d
 }
 
 function setYear (date: Date, year: number) {
@@ -453,6 +473,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return isSameMonth(date, comparing)
   }
 
+  setMonth (date: Date, count: number) {
+    return setMonth(date, count)
+  }
+
   setYear (date: Date, year: number) {
     return setYear(date, year)
   }
@@ -469,8 +493,16 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return getYear(date)
   }
 
+  getNextYear (date: Date) {
+    return getNextYear(date)
+  }
+
   getMonth (date: Date) {
     return getMonth(date)
+  }
+
+  getNextMonth (date: Date) {
+    return getNextMonth(date)
   }
 
   startOfDay (date: Date) {
