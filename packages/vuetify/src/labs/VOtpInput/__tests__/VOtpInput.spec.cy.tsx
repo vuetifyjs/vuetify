@@ -7,7 +7,7 @@ import { VOtpInput } from '../VOtpInput'
 import { keyValues } from '@/util'
 
 describe('VOtpInput', () => {
-  it('enters value and moves to next input and focus the last input at end', () => {
+  it('enters value and moves to next input and focuses the last input at end', () => {
     cy.mount(() => (<VOtpInput />))
       .get('.v-otp-input input').eq(0)
       .type('1')
