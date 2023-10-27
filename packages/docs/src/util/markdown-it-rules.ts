@@ -42,7 +42,7 @@ function addImageRules (md: MarkdownIt) {
     const src = placeholder ?? token.attrGet('src')
     const title = token.attrGet('title') ?? ''
     const isEntry = alt.toLowerCase().includes('entry')
-    const height = token.attrGet('height') ?? (isEntry ? 305 : '')
+    const height = token.attrGet('height') ?? ''
 
     return `
 <div>
