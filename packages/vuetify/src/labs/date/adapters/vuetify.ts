@@ -158,27 +158,40 @@ const firstDay: Record<string, number> = {
   ZW: 0,
 }
 
-function getWeekArray (value: Date, locale: string): Date[][] {
-  const weeks: Date[][] = []
-  const firstDayIndex = firstDay[locale.slice(-2).toUpperCase()]
-  const currentDay = new Date(value.getFullYear(), value.getMonth(), 1)
-  const currentMonth = value.getMonth()
-  const startDayIndex = (currentDay.getDay() - firstDayIndex + 7) % 7
+function getWeekArray (date: Date, locale: string) {
+  const weeks = []
+  let currentWeek = []
+  const firstDayOfMonth = startOfMonth(date)
+  const lastDayOfMonth = endOfMonth(date)
+  const firstDayWeekIndex = (firstDayOfMonth.getDay() - firstDay[locale.slice(-2).toUpperCase()] + 7) % 7
+  const lastDayWeekIndex = (lastDayOfMonth.getDay() - firstDay[locale.slice(-2).toUpperCase()] + 7) % 7
 
-  currentDay.setDate(currentDay.getDate() - startDayIndex)
+  for (let i = 0; i < firstDayWeekIndex; i++) {
+    const adjacentDay = new Date(firstDayOfMonth)
+    adjacentDay.setDate(adjacentDay.getDate() - (firstDayWeekIndex - i))
+    currentWeek.push(adjacentDay)
+  }
 
-  for (let i = 0; i < 6; i++) {
-    const week: Date[] = []
-    for (let j = 0; j < 7; j++) {
-      if (currentDay.getMonth() === currentMonth) {
-        week.push(new Date(currentDay))
-      }
-      currentDay.setDate(currentDay.getDate() + 1)
-    }
-    if (week.length > 0) {
-      weeks.push(week)
+  for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
+    const day = new Date(date.getFullYear(), date.getMonth(), i)
+
+    // Add the day to the current week
+    currentWeek.push(day)
+
+    // If the current week has 7 days, add it to the weeks array and start a new week
+    if (currentWeek.length === 7) {
+      weeks.push(currentWeek)
+      currentWeek = []
     }
   }
+
+  for (let i = 1; i < 7 - lastDayWeekIndex; i++) {
+    const adjacentDay = new Date(lastDayOfMonth)
+    adjacentDay.setDate(adjacentDay.getDate() + i)
+    currentWeek.push(adjacentDay)
+  }
+
+  weeks.push(currentWeek)
 
   return weeks
 }
@@ -285,13 +298,15 @@ function parseISO (value: string) {
 }
 
 function addDays (date: Date, amount: number) {
-  date.setDate(date.getDate() + amount)
-  return date
+  const d = new Date(date)
+  d.setDate(d.getDate() + amount)
+  return d
 }
 
 function addMonths (date: Date, amount: number) {
-  date.setMonth(date.getMonth() + amount)
-  return date
+  const d = new Date(date)
+  d.setMonth(d.getMonth() + amount)
+  return d
 }
 
 function getYear (date: Date) {
@@ -364,13 +379,15 @@ function getDiff (date: Date, comparing: Date | string, unit?: string) {
 }
 
 function setMonth (date: Date, count: number) {
-  date.setMonth(count)
-  return date
+  const d = new Date(date)
+  d.setMonth(count)
+  return d
 }
 
 function setYear (date: Date, year: number) {
-  date.setFullYear(year)
-  return date
+  const d = new Date(date)
+  d.setFullYear(year)
+  return d
 }
 
 function startOfDay (date: Date) {

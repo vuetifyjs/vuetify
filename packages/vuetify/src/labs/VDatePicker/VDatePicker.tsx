@@ -121,7 +121,9 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
 
     const isReversing = shallowRef(false)
     const header = computed(() => {
-      return adapter.isValid(model.value[0]) ? adapter.format(model.value[0], 'normalDateWithWeekday') : t(props.header)
+      return model.value[0] && adapter.isValid(model.value[0])
+        ? adapter.format(model.value[0], 'normalDateWithWeekday')
+        : t(props.header)
     })
     const text = computed(() => {
       return adapter.format(
@@ -148,10 +150,10 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
       if (viewMode.value !== 'month') {
         targets.push(...['prev', 'next'])
       } else {
-        const _date = adapter.date()
+        let _date = adapter.date()
 
-        adapter.setYear(_date, year.value)
-        adapter.setMonth(_date, month.value)
+        _date = adapter.setYear(_date, year.value)
+        _date = adapter.setMonth(_date, month.value)
 
         if (minDate.value) {
           const date = adapter.addDays(adapter.startOfMonth(_date), -1)

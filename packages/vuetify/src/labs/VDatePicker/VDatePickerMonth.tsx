@@ -79,9 +79,9 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       'year',
       undefined,
       v => {
-        const date = adapter.date(_model.value)
+        let date = adapter.date(_model.value)
 
-        if (v != null) adapter.setYear(date, Number(v))
+        if (v != null) date = adapter.setYear(date, Number(v))
 
         return adapter.startOfYear(date)
       },
@@ -92,11 +92,11 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       'month',
       undefined,
       v => {
-        const date = adapter.date(_model.value)
+        let date = adapter.date(_model.value)
 
-        if (v != null) adapter.setMonth(date, Number(v))
+        if (v != null) date = adapter.setMonth(date, Number(v))
 
-        adapter.setYear(date, adapter.getYear(year.value))
+        date = adapter.setYear(date, adapter.getYear(year.value))
 
         return date
       },
