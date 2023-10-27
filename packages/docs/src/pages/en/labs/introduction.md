@@ -93,8 +93,6 @@ The following is a list of available and up-and-coming components for use with L
 | [useDate](/api/use-date/) | The date composable is used by components that require date functionality | |
 | **Date picker** | [Usage](/components/date-pickers/) | [v3.3.4&nbsp;(Icarus)](/getting-started/release-notes/?version=v3.3.4) |
 | [v-date-picker](/api/v-date-picker/) | Primary Component | |
-| **Infinite scroll** | [Usage](/components/infinite-scroller/) | [v3.2.0&nbsp;(Orion)](/getting-started/release-notes/?version=v3.2.0) |
-| [v-infinite-scroll](/api/v-infinite-scroll/) | Primary Component | |
 | **OTP input** | [Usage](/components/otp-input/) | [v3.3.11&nbsp;(Icarus)](/getting-started/release-notes/?version=v3.3.11) |
 | [v-otp-input](/api/v-otp-input/) | Primary Component | |
 

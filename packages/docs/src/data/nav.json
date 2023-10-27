@@ -124,6 +124,7 @@
       "textareas",
       { "divider": true },
       { "subheader": "data-and-display" },
+      "infinite-scroller",
       "tables",
       "virtual-scroller",
       { "divider": true },
@@ -225,10 +226,6 @@
       },
       {
         "title": "date-pickers",
-        "subfolder": "components"
-      },
-      {
-        "title": "infinite-scroller",
         "subfolder": "components"
       },
       {

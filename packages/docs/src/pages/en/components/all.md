@@ -336,7 +336,7 @@ These components are used to display data and information in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="Infinite scroll component"  src="infinite-scroller" labs>
+<components-list-item name="Infinite scroll component"  src="infinite-scroller">
 
   The Infinite scroll component is a container that loads more items when scrolling
 
