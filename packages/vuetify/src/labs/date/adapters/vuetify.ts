@@ -266,6 +266,9 @@ function format (value: Date, formatString: string, locale: string): string {
     case 'month':
       options = { month: 'long' }
       break
+    case 'monthShort':
+      options = { month: 'short' }
+      break
     case 'dayOfMonth':
       options = { day: 'numeric' }
       break

@@ -49,7 +49,7 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
       let date = adapter.startOfYear(adapter.date())
 
       return createRange(12).map(i => {
-        const text = adapter.format(date, 'month')
+        const text = adapter.format(date, 'monthShort')
         date = adapter.getNextMonth(date)
 
         return {
