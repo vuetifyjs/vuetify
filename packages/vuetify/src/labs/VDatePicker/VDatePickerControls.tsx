@@ -34,10 +34,6 @@ export const makeVDatePickerControlsProps = propsFactory({
     default: '$subgroup',
   },
   text: String,
-  variant: {
-    type: String,
-    default: 'modern',
-  },
   viewMode: {
     type: String as PropType<'month' | 'months' | 'year'>,
     default: 'month',
@@ -104,31 +100,28 @@ export const VDatePickerControls = genericComponent()({
         <div
           class={[
             'v-date-picker-controls',
-            `v-date-picker-controls--variant-${props.variant}`,
           ]}
         >
-          { props.variant === 'modern' && (
-            <>
-              <VBtn
-                disabled={ disableMonth.value }
-                text={ props.text }
-                variant="text"
-                rounded
-                onClick={ onClickMonth }
-              ></VBtn>
+          <VBtn
+            class="v-date-picker-controls__month-btn"
+            disabled={ disableMonth.value }
+            text={ props.text }
+            variant="text"
+            rounded
+            onClick={ onClickMonth }
+          ></VBtn>
 
-              <VBtn
-                key="mode-btn"
-                disabled={ disableYear.value }
-                density="comfortable"
-                icon={ props.modeIcon }
-                variant="text"
-                onClick={ onClickYear }
-              />
+          <VBtn
+            key="mode-btn"
+            class="v-date-picker-controls__mode-btn"
+            disabled={ disableYear.value }
+            density="comfortable"
+            icon={ props.modeIcon }
+            variant="text"
+            onClick={ onClickYear }
+          />
 
-              <VSpacer key="mode-spacer" />
-            </>
-          )}
+          <VSpacer key="mode-spacer" />
 
           <div
             key="month-buttons"
@@ -140,8 +133,6 @@ export const VDatePickerControls = genericComponent()({
               variant="text"
               onClick={ onClickPrev }
             />
-
-            { props.variant === 'classic' && displayDate }
 
             <VBtn
               disabled={ disableNext.value }
