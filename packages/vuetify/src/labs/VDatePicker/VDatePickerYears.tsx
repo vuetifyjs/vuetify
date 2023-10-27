@@ -68,7 +68,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
 
       let date = adapter.startOfYear(adapter.date())
 
-      date = date.setYear(min)
+      date = adapter.setYear(date, min)
 
       return createRange(max - min + 1, min).map(i => {
         const text = adapter.format(date, 'year')
