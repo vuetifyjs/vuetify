@@ -2,8 +2,8 @@
 @use './variables' as *
 
 .v-picker.v-sheet
-  @include tools.elevation(2)
-  @include tools.rounded(4px)
+  @include tools.elevation($picker-elevation)
+  @include tools.rounded($picker-border-radius)
 
   display: grid
   grid-auto-rows: min-content
