@@ -162,6 +162,7 @@ function getWeekArray (value: Date, locale: string): Date[][] {
   const weeks: Date[][] = []
   const firstDayIndex = firstDay[locale.slice(-2).toUpperCase()]
   const currentDay = new Date(value.getFullYear(), value.getMonth(), 1)
+  const currentMonth = value.getMonth()
   const startDayIndex = (currentDay.getDay() - firstDayIndex + 7) % 7
 
   currentDay.setDate(currentDay.getDate() - startDayIndex)
@@ -169,10 +170,14 @@ function getWeekArray (value: Date, locale: string): Date[][] {
   for (let i = 0; i < 6; i++) {
     const week: Date[] = []
     for (let j = 0; j < 7; j++) {
-      week.push(new Date(currentDay))
+      if (currentDay.getMonth() === currentMonth) {
+        week.push(new Date(currentDay))
+      }
       currentDay.setDate(currentDay.getDate() + 1)
     }
-    weeks.push(week)
+    if (week.length > 0) {
+      weeks.push(week)
+    }
   }
 
   return weeks
