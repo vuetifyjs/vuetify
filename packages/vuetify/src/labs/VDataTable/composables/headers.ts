@@ -18,6 +18,7 @@ export const makeDataTableHeaderProps = propsFactory({
 export const VDataTableHeadersSymbol: InjectionKey<{
   headers: Ref<InternalDataTableHeader[][]>
   columns: Ref<InternalDataTableHeader[]>
+  hasHorizontalScroll: Ref<boolean>
 }> = Symbol.for('vuetify:data-table-headers')
 
 type HeaderProps = {
@@ -100,6 +101,53 @@ function getDepth (item: InternalDataTableHeader, depth = 0): number {
   return Math.max(depth, ...item.children.map(child => getDepth(child, depth + 1)))
 }
 
+function parseFixedColumns (items: InternalDataTableHeader[]) {
+  let fixed = false
+  function setFixed (item: InternalDataTableHeader) {
+    if (!item) return
+
+    if (item.children) {
+      for (let i = item.children.length - 1; i >= 0; i--) {
+        setFixed(item.children[i])
+      }
+    }
+
+    if (item.fixed && !fixed) {
+      item.lastFixed = true
+      fixed = true
+    } else if (fixed) {
+      item.fixed = true
+    }
+  }
+
+  for (let i = items.length - 1; i >= 0; i--) {
+    setFixed(items[i])
+  }
+
+  function setFixedOffset (item: InternalDataTableHeader, fixedOffset = 0) {
+    if (!item) return fixedOffset
+
+    if (item.children) {
+      item.fixedOffset = fixedOffset
+      for (const child of item.children) {
+        fixedOffset = setFixedOffset(child, fixedOffset)
+      }
+    }
+
+    if (item.fixed && !item.children) {
+      item.fixedOffset = fixedOffset
+      fixedOffset += parseInt(item.width ?? '0', 10)
+    }
+
+    return fixedOffset
+  }
+
+  let fixedOffset = 0
+  for (const item of items) {
+    fixedOffset = setFixedOffset(item, fixedOffset)
+  }
+}
+
 function parse (items: InternalDataTableHeader[], maxDepth: number) {
   const headers: InternalDataTableHeader[][] = []
   let currentDepth = 0
@@ -167,6 +215,7 @@ export function createHeaders (
 ) {
   const headers = ref<InternalDataTableHeader[][]>([])
   const columns = ref<InternalDataTableHeader[]>([])
+  const hasHorizontalScroll = ref(false)
 
   watchEffect(() => {
     const items = props.headers.slice()
@@ -186,6 +235,8 @@ export function createHeaders (
 
     const internalHeaders = convertToInternalHeaders(items)
 
+    parseFixedColumns(internalHeaders)
+
     const maxDepth = Math.max(...internalHeaders.map(item => getDepth(item))) + 1
     const parsed = parse(internalHeaders, maxDepth)
 
@@ -193,7 +244,7 @@ export function createHeaders (
     columns.value = parsed.columns
   })
 
-  const data = { headers, columns }
+  const data = { headers, columns, hasHorizontalScroll }
 
   provide(VDataTableHeadersSymbol, data)
 
