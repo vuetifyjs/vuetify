@@ -1,87 +1,85 @@
-// @ts-nocheck
-/* eslint-disable */
-
 // Components
-import { makeVTimePickerTitleProps, VTimePickerTitle } from './VTimePickerTitle'
 import { VTimePickerClock } from './VTimePickerClock'
+import { VTimePickerControls } from './VTimePickerControls'
+import { VBtn } from '@/components/VBtn'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
-
-// Mixins
-// import Picker from '../../mixins/picker'
-// import PickerButton from '../../mixins/picker-button'
 
 // Composables
 import { useLocale } from '@/composables/locale'
 
-// Utils
-import { createRange } from '../../util/helpers'
-import pad from '../VDatePicker/util/pad'
-// import mixins from '../../util/mixins'
+// Utilities
+import { computed, onMounted, ref, watch } from 'vue'
+import { SelectingTimes } from './SelectingTimes'
+import { createRange, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-// import { VNode, PropType } from 'vue'
-import { SelectingTimes } from './SelectingTimes'
-interface options extends Vue {
-  $refs: {
-    clockRef: HTMLElement
-    titleRef: HTMLElement
-  }
-}
-
-// Utilities
-import { computed, onMounted, ref, shallowRef, watch } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import type { PropType } from 'vue'
+import { pad } from '../VDatePicker/util'
+import type { VPickerSlots } from '@/labs/VPicker/VPicker'
+type Period = 'am' | 'pm'
+type AllowFunction = (val: number) => boolean
 
 const rangeHours24 = createRange(24)
 const rangeHours12am = createRange(12)
 const rangeHours12pm = rangeHours12am.map(v => v + 12)
 const range60 = createRange(60)
 const selectingNames = { 1: 'hour', 2: 'minute', 3: 'second' }
+
 export { SelectingTimes }
 
-type Period = 'am' | 'pm'
-type AllowFunction = (val: number) => boolean
+export type VTimePickerSlots = Omit<VPickerSlots, 'header'>
 
 export const makeVTimePickerProps = propsFactory({
   allowedHours: [Function, Array] as PropType<AllowFunction | number[]>,
   allowedMinutes: [Function, Array] as PropType<AllowFunction | number[]>,
   allowedSeconds: [Function, Array] as PropType<AllowFunction | number[]>,
+  ampmInTitle: Boolean,
+  cancelText: {
+    type: String,
+    default: '$vuetify.datePicker.cancel',
+  },
   disabled: Boolean,
   format: {
     type: String as PropType<'ampm' | '24hr'>,
     default: 'ampm',
-    validator (val: any) {
-      return ['ampm', '24hr'].includes(val)
-    },
   },
-  min: String,
+  header: {
+    type: String,
+    default: '$vuetify.timePicker.select',
+  },
+  hideActions: Boolean,
   max: String,
+  min: String,
+  modelValue: null as any as PropType<any>,
   readonly: Boolean,
   scrollable: Boolean,
+  okText: {
+    type: String,
+    default: '$vuetify.datePicker.ok',
+  },
   useSeconds: Boolean,
-  modelValue: null as any as PropType<any>,
-  ampmInTitle: Boolean,
-  ...makeVPickerProps({ title: '' })
+  ...makeVPickerProps({ title: '$vuetify.timePicker.title' }),
 }, 'VTimePicker')
 
-export const VTimePicker = genericComponent()({
+export const VTimePicker = genericComponent<VTimePickerSlots>()({
   name: 'VTimePicker',
 
   props: makeVTimePickerProps(),
 
-  emits: [
-    'input',
-    'click:hour',
-    'click:minute',
-    'click:second',
-    'update:period',
-    'update:modelValue',
-    'change'
-  ],
+  emits: {
+    change: (val: string) => val,
+    'click:cancel': () => true,
+    'click:hour': (val: number) => val,
+    'click:minute': (val: number) => val,
+    'update:period': (val: Period) => val,
+    'click:save': () => true,
+    'click:second': (val: number) => val,
+    input: () => true,
+    'update:modelValue': (val: string) => val,
+  },
 
-  setup (props, { emit, slots } ) {
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
-    // Data
     const inputHour = ref(null as number | null)
     const inputMinute = ref(null as number | null)
     const inputSecond = ref(null as number | null)
@@ -92,38 +90,55 @@ export const VTimePicker = genericComponent()({
     const selecting = ref(SelectingTimes.Hour)
 
     // Computeds
-    const title = computed(() => t(props.title))
-    const selectingHour = computed({
-      get (): boolean {
-        return selecting.value === SelectingTimes.Hour
-      },
-      set (v: boolean) {
-        selecting.value = SelectingTimes.Hour
-      },
-    })
-    const selectingMinute = computed({
-      get (): boolean {
-        return selecting.value === SelectingTimes.Minute
-      },
-      set (v: boolean) {
-        selecting.value = SelectingTimes.Minute
-      },
-    })
-    const selectingSecond = computed({
-      get (): boolean {
-        return selecting.value === SelectingTimes.Second
-      },
-      set (v: boolean) {
-        selecting.value = SelectingTimes.Second
-      },
-    })
+    // const model = useProxiedModel(
+    //   props,
+    //   'modelValue',
+    //   undefined,
+    //   v => v
+    // )
+
+    function onClickCancel () {
+      emit('click:cancel')
+    }
+
+    function onClickSave () {
+      emit('click:save')
+    }
+
+    // const selectingHour = computed({
+    //   get (): boolean {
+    //     return selecting.value === SelectingTimes.Hour
+    //   },
+    //   set (v: boolean) {
+    //     selecting.value = SelectingTimes.Hour
+    //   },
+    // })
+
+    // const selectingMinute = computed({
+    //   get (): boolean {
+    //     return selecting.value === SelectingTimes.Minute
+    //   },
+    //   set (v: boolean) {
+    //     selecting.value = SelectingTimes.Minute
+    //   },
+    // })
+
+    // const selectingSecond = computed({
+    //   get (): boolean {
+    //     return selecting.value === SelectingTimes.Second
+    //   },
+    //   set (v: boolean) {
+    //     selecting.value = SelectingTimes.Second
+    //   },
+    // })
+
     const isAllowedHourCb = computed((): AllowFunction => {
       let cb: AllowFunction
 
       if (props.allowedHours instanceof Array) {
         cb = (val: number) => (props.allowedHours as number[]).includes(val)
       } else {
-        cb = props.allowedHours
+        cb = props.allowedHours as AllowFunction
       }
 
       if (!props.min && !props.max) return cb
@@ -137,6 +152,7 @@ export const VTimePicker = genericComponent()({
           (!cb || cb(val))
       }
     })
+
     const isAllowedMinuteCb = computed((): AllowFunction => {
       let cb: AllowFunction
 
@@ -144,7 +160,7 @@ export const VTimePicker = genericComponent()({
       if (props.allowedMinutes instanceof Array) {
         cb = (val: number) => (props.allowedMinutes as number[]).includes(val)
       } else {
-        cb = props.allowedMinutes
+        cb = props.allowedMinutes as AllowFunction
       }
 
       if (!props.min && !props.max) {
@@ -164,6 +180,7 @@ export const VTimePicker = genericComponent()({
           (!cb || cb(val))
       }
     })
+
     const isAllowedSecondCb = computed((): AllowFunction => {
       let cb: AllowFunction
 
@@ -177,7 +194,7 @@ export const VTimePicker = genericComponent()({
       if (props.allowedSeconds instanceof Array) {
         cb = (val: number) => (props.allowedSeconds as number[]).includes(val)
       } else {
-        cb = props.allowedSeconds
+        cb = props.allowedSeconds as AllowFunction
       }
 
       if (!props.min && !props.max) {
@@ -197,39 +214,19 @@ export const VTimePicker = genericComponent()({
           (!cb || cb(val))
       }
     })
+
+    const convert24to12 = (hour: number) => {
+      return hour ? ((hour - 1) % 12 + 1) : 12
+    }
+
+    const convert12to24 = (hour: number, period: Period) => {
+      return hour % 12 + (period === 'pm' ? 12 : 0)
+    }
+
     const isAmPm = computed((): boolean => {
       return props.format === 'ampm'
     })
 
-    
-    const titleRef = ref<typeof VTimePickerTitle>(null)
-    const clockRef = ref<typeof VTimePickerClock>(null)
-
-    watch(props.modelValue, val => setInputData(val))
-
-    onMounted(() => {
-      setInputData(props.modelValue)
-    })
-
-    const genValue = () => {
-      if (inputHour.value != null && inputMinute.value != null && (!props.useSeconds || inputSecond.value != null)) {
-        return `${pad(inputHour.value)}:${pad(inputMinute.value)}` + (props.useSeconds ? `:${pad(inputSecond.value!)}` : '')
-      }
-
-      return null
-    }
-    const emitValue = () => {
-      const value = genValue()
-      if (value !== null) emit('update:modelValue', value)
-    }
-    const setPeriod = (val: Period) => {
-      period.value = val
-      if (inputHour.value != null) {
-        const newHour = inputHour.value! + (period.value === 'am' ? -12 : 12)
-        inputHour.value = firstAllowed('hour', newHour)
-        emitValue()
-      }
-    }
     const setInputData = (value: string | null | Date) => {
       if (value == null || value === '') {
         inputHour.value = null
@@ -249,12 +246,57 @@ export const VTimePicker = genericComponent()({
 
       period.value = (inputHour.value == null || inputHour.value < 12) ? 'am' : 'pm'
     }
-    const convert24to12 = (hour: number) => {
-      return hour ? ((hour - 1) % 12 + 1) : 12
+
+    const controlsRef = ref<VTimePickerControls | null>(null)
+    const clockRef = ref<VTimePickerClock | null>(null)
+
+    watch(() => props.modelValue, val => setInputData(val))
+
+    onMounted(() => {
+      setInputData(props.modelValue)
+    })
+
+    const genValue = () => {
+      if (inputHour.value != null && inputMinute.value != null && (!props.useSeconds || inputSecond.value != null)) {
+        return `${pad(inputHour.value)}:${pad(inputMinute.value)}` + (props.useSeconds ? `:${pad(inputSecond.value!)}` : '')
+      }
+
+      return null
     }
-    const convert12to24 = (hour: number, period: Period) => {
-      return hour % 12 + (period === 'pm' ? 12 : 0)
+
+    const firstAllowed = (type: 'hour' | 'minute' | 'second', value: number) => {
+      const allowedFn = type === 'hour' ? isAllowedHourCb.value : (type === 'minute' ? isAllowedMinuteCb.value : isAllowedSecondCb.value)
+      if (!allowedFn) return value
+
+      // TODO: clean up
+      const range = type === 'minute'
+        ? range60
+        : (type === 'second'
+          ? range60
+          : (isAmPm.value
+            ? (value < 12
+              ? rangeHours12am
+              : rangeHours12pm)
+            : rangeHours24))
+      const first = range.find(v => allowedFn((v + value) % range.length + range[0]))
+      return ((first || 0) + value) % range.length + range[0]
     }
+
+    const emitValue = () => {
+      const value = genValue()
+      if (value !== null) emit('update:modelValue', value)
+    }
+
+    const setPeriod = (val: Period) => {
+      period.value = val
+      if (inputHour.value != null) {
+        const newHour = inputHour.value! + (period.value === 'am' ? -12 : 12)
+        inputHour.value = firstAllowed('hour', newHour)
+        emitValue()
+      }
+      return true
+    }
+
     const onInput = (value: number) => {
       if (selecting.value === SelectingTimes.Hour) {
         inputHour.value = isAmPm.value ? convert12to24(value, period.value) : value
@@ -265,8 +307,9 @@ export const VTimePicker = genericComponent()({
       }
       emitValue()
     }
+
     const onChange = (value: number) => {
-      emit(`click:${selectingNames[selecting.value]}`, value)
+      emit(`click:${selectingNames[selecting.value] as 'hour' | 'minute' | 'second'}`, value)
 
       const emitChange = selecting.value === (props.useSeconds ? SelectingTimes.Second : SelectingTimes.Minute)
 
@@ -290,56 +333,47 @@ export const VTimePicker = genericComponent()({
 
       emitChange && emit('change', time)
     }
-    const firstAllowed = (type: 'hour' | 'minute' | 'second', value: number) => {
-      const allowedFn = type === 'hour' ? isAllowedHourCb.value : (type === 'minute' ? isAllowedMinuteCb.value : isAllowedSecondCb.value)
-      if (!allowedFn) return value
-
-      // TODO: clean up
-      const range = type === 'minute'
-        ? range60
-        : (type === 'second'
-          ? range60
-          : (isAmPm.value
-            ? (value < 12
-              ? rangeHours12am
-              : rangeHours12pm)
-            : rangeHours24))
-      const first = range.find(v => allowedFn((v + value) % range.length + range[0]))
-      return ((first || 0) + value) % range.length + range[0]
-    }
 
     useRender(() => {
       const [pickerProps] = VPicker.filterProps(props)
-      // const [titleSlotProps] = makeVTimeTitleSlotProps.filterProps(props)
+      const [timePickerControlsProps] = VTimePickerControls.filterProps(props)
+      const [timePickerClockProps] = VTimePickerClock.filterProps(omit(props, ['format', 'modelValue', 'min', 'max']))
+
       return (
         <VPicker
-          class={[ 'v-time-picker', props.class ]}
+          { ...pickerProps }
+          class={[
+            'v-time-picker',
+            props.class,
+          ]}
           style={ props.style }
-          title={ title.value }
-          width={360}
+          width={ 360 }
           v-slots={{
-            title: () => (
-              <VTimePickerTitle
-                key="header"
-                ampm={ isAmPm.value || props.ampmInTitle }
-                ampmReadonly={ props.ampmReadonly && !props.ampmInTitle }
-                color={ props.color }
-                disabled={ props.disabled }
-                hour={ inputHour.value }
-                minute={ inputMinute.value }
-                period={ period.value }
-                readonly={ props.readonly }
-                second={ inputSecond.value }
-                selecting={ selecting.value }
-                useSeconds={ props.useSeconds}
-                onUpdate:selecting={ (value: 1 | 2 | 3) => (selecting.value = value) }
-                onUpdate:period={ (val: string) => setPeriod(val) && emit('update:period', val) }
-                ref={ titleRef }
-              ></VTimePickerTitle>
+            title: () => slots.title?.() ?? (
+              <div class="v-time-picker__title">
+                { t(props.title) }
+              </div>
             ),
             default: () => (
-              <div class="v-time-picker-clock__container" key={selecting.value}>
+              <>
+                <VTimePickerControls
+                  {
+                    ...timePickerControlsProps
+                  }
+                  ampm={ isAmPm.value || props.ampmInTitle }
+                  ampmReadonly={ isAmPm.value && !props.ampmInTitle }
+                  hour={ inputHour.value as number }
+                  minute={ inputMinute.value as number }
+                  period={ period.value }
+                  second={ inputSecond.value as number }
+                  selecting={ selecting.value }
+                  onUpdate:period={ (val: Period) => setPeriod(val) && emit('update:period', val) }
+                  onUpdate:selecting={ (value: 1 | 2 | 3) => (selecting.value = value) }
+                  ref={ controlsRef }
+                />
+
                 <VTimePickerClock
+                  { ...timePickerClockProps }
                   allowedValues={
                     selecting.value === SelectingTimes.Hour
                       ? isAllowedHourCb.value
@@ -347,40 +381,52 @@ export const VTimePicker = genericComponent()({
                         ? isAllowedMinuteCb.value
                         : isAllowedSecondCb.value)
                       }
-                  color={ props.color }
-                  dark={ props.dark }
-                  disabled={ props.disabled }
                   double={ selecting.value === SelectingTimes.Hour && !isAmPm.value }
-                  format={ selecting.value === SelectingTimes.Hour 
+                  format={ selecting.value === SelectingTimes.Hour
                     ? (isAmPm.value ? convert24to12 : (val: number) => val)
-                    : (val: number) => pad(val, 2) }
-                  light={ props.light }
+                    : (val: number) => pad(val, 2)
+                  }
                   max={ selecting.value === SelectingTimes.Hour ? (isAmPm.value && period.value === 'am' ? 11 : 23) : 59 }
                   min={ selecting.value === SelectingTimes.Hour && isAmPm.value && period.value === 'pm' ? 12 : 0 }
-                  readonly={ props.readonly }
-                  scrollable={ props.scrollable }
-                  size={20}
+                  size={ 20 }
                   step={ selecting.value === SelectingTimes.Hour ? 1 : 5 }
-                  modelValue={ selecting.value === SelectingTimes.Hour
-                    ? inputHour.value
+                  value={ selecting.value === SelectingTimes.Hour
+                    ? inputHour.value as number
                     : (selecting.value === SelectingTimes.Minute
-                      ? inputMinute.value
-                      : inputSecond.value) }
+                      ? inputMinute.value as number
+                      : inputSecond.value as number)
+                  }
+                  onChange={ onChange }
                   onInput={ onInput }
                   onUpdate:modelValue={ onInput }
-                  onChange={ onChange }
                   ref={ clockRef }
-                ></VTimePickerClock>
-              </div>
-            )
+                />
+              </>
+            ),
+            actions: () => !props.hideActions ? (
+              slots.actions?.() ?? (
+                <div>
+                  <VBtn
+                    // disabled={ isPristine.value }
+                    variant="text"
+                    color={ props.color }
+                    onClick={ onClickCancel }
+                    text={ t(props.cancelText) }
+                  />
+
+                  <VBtn
+                    // disabled={ isPristine.value }
+                    variant="text"
+                    color={ props.color }
+                    onClick={ onClickSave }
+                    text={ t(props.okText) }
+                  />
+                </div>
+              )
+            ) : undefined,
           }}
-        >
-        </VPicker>
+        />
       )
     })
-
-
-  }
+  },
 })
-
-export type VTimePicker = InstanceType<typeof VTimePicker>

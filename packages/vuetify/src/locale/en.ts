@@ -67,8 +67,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    select: 'Select Time',
-    input: 'Input time',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
