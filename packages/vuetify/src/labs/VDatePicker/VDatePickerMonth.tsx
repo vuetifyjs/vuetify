@@ -10,7 +10,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { getWeek, useDate } from '@/labs/date/date'
 
 // Utilities
-import { computed, onBeforeMount, ref, shallowRef, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { genericComponent, propsFactory, wrapInArray } from '@/util'
 
 // Types

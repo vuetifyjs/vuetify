@@ -92,10 +92,6 @@ export const VDatePickerControls = genericComponent()({
     }
 
     useRender(() => {
-      const displayDate = (
-        <div class="v-date-picker-controls__date">{ props.text }</div>
-      )
-
       return (
         <div
           class={[
