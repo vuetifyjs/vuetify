@@ -29,47 +29,45 @@ This feature requires [v3.1.0 (Valkyrie)](/getting-started/release-notes/?versio
 
 ## Usage
 
-There are three variants of the data table available depending on your requirements.
-
-<entry />
-
-### v-data-table
-
 The standard data table presumes that the entire data set is available locally. Sorting, pagination, and filtering is supported and done internally by the component itself.
 
-<example file="v-data-table/usage" />
+<usage name="v-data-table" />
 
-### v-data-table-server
-
-This variant of the data table is meant to be used when the data set you are displaying comes directly from a server, and you don't want to load all rows at mount. Sorting, pagination, and filtering is supported, but none of it is handled by the component. Instead it is meant to be handled by the server.
-
-You can find more information and examples [here](/components/data-tables/server-side-tables).
-
-<example file="v-data-table/server" />
-
-### v-data-table-virtual
-
-The virtual variant of the data table relies, like the standard variant, on all data being available locally. But unlike the standard variant it uses virtualization to only render a small portion of the rows. This makes it well suited for displaying large data sets. It supports sorting and filtering, but not pagination.
-
-You can find more information and examples [here](/components/data-tables/virtual-tables).
-
-<example file="v-data-table/virtual" />
+<entry />
 
 ## API
 
 | Component | Description |
 | - | - |
 | [v-data-table](/api/v-data-table/) | Primary Component |
-| [v-data-table-server](/api/v-data-table-server/) | Specialized Data-table for displaying results from a server |
-| [v-data-table-virtual](/api/v-data-table-virtual/) | Data-table with built in row virtualization |
 | [v-data-table-footer](/api/v-data-table-footer/) | Functional Component used to display Data-table headers |
 | [v-checkbox-btn](/api/v-checkbox-btn/) | Reusable lightweight [v-checkbox](/components/checkboxes) |
 
 <api-inline hide-links />
 
-## Examples
+### Server side tables
+
+This variant of the data table is meant to be used when the data set you are displaying comes directly from a server, and you don't want to load all rows at mount. Sorting, pagination, and filtering is supported, but none of it is handled by the component. Instead it is meant to be handled by the server.
+
+Find more information and examples on the [Server side tables](/components/data-tables/server-side-tables) page.
+
+<example file="v-data-table/server" />
+
+### Virtual tables
+
+The virtual variant of the data table relies, like the standard variant, on all data being available locally. But unlike the standard variant it uses virtualization to only render a small portion of the rows. This makes it well suited for displaying large data sets. It supports sorting and filtering, but not pagination.
+
+Find more information and examples on the [Virtual tables](/components/data-tables/virtual-tables) page.
+
+<example file="v-data-table/virtual" />
+
+## Guide
+
+The `v-data-table` component is a simple and powerful table manipulation component. It is perfect for showing large amounts of tabular data.
 
 ### Props
+
+There are no shortable of properties available for customizing various aspects of the Data table components.
 
 #### Density
 

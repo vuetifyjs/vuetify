@@ -127,8 +127,6 @@
       { "divider": true },
       { "subheader": "data-and-display" },
       "data-iterators",
-      "infinite-scroller",
-      "tables",
       {
         "title": "data-tables",
         "subfolder": "components",
@@ -146,6 +144,8 @@
           "virtual-tables"
         ]
       },
+      "infinite-scroller",
+      "tables",
       "virtual-scroller",
       { "divider": true },
       { "subheader": "grids" },

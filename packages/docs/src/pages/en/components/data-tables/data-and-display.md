@@ -10,13 +10,15 @@ related:
   - /components/tables/
 ---
 
-# Data table - Filtering
+# Data and Display
 
 Data table filtering is key feature that allows users to quickly find the data they are looking for.
 
 <entry />
 
-## Examples
+## Filtering examples
+
+These examples demonstrate various ways that you can utilize the **search** prop to filter results.
 
 ### Search
 
@@ -42,21 +44,19 @@ In the example below, the custom filter will only match inputs that are in compl
 
 <example file="v-data-table/prop-custom-filter" />
 
-## Data table - Pagination
+## Pagination examples
 
 Pagination is used to split up large amounts of data into smaller chunks.
 
-<entry />
-
-### Examples
-
-#### External pagination
+### External pagination
 
 Pagination can be controlled externally by using the individual props, or by using the **options** prop. Remember that you must apply the **.sync** modifier.
 
 <example file="v-data-table/misc-external-paginate" />
 
-## Data table - Selection
+## Selection examples
+
+Selection allows you to select/deselect rows and retrieve information about which rows have been selected.
 
 ### Item value
 
@@ -74,15 +74,13 @@ The current selection of the data-table can be accessed through the **v-model** 
 
 <entry />
 
-### Examples
-
-#### Selectable rows
+### Selectable rows
 
 Use the **item-selectable** prop to designate a property on your items that controls if the item should be selectable or not.
 
 <example file="v-data-table/prop-item-selectable" />
 
-#### Select strategies
+### Select strategies
 
 Data-tables support three different select strategies.
 
@@ -94,15 +92,13 @@ Data-tables support three different select strategies.
 
 <example file="v-data-table/prop-select-strategy" />
 
-## Data table - Sorting
+## Sorting examples
 
 Data tables can sort rows by a column value.
 
 <entry />
 
-### Examples
-
-#### Basic sorting
+### Basic sorting
 
 The sorting of your table can be controlled by the **sort-by** prop. This prop takes an array of objects, where each object has a **key** and **order** property, describing how the table is to be sorted.
 
@@ -112,7 +108,7 @@ Unless you are using the **multi-sort** prop seen below, this array will almost 
 
 <example file="v-data-table/prop-sort-by" />
 
-#### Multi sort
+### Multi sort
 
 Using the **multi-sort** prop will enable you to sort on multiple columns at the same time.
 

@@ -36,6 +36,8 @@ Before diving into the guides and examples, let's take a moment to understand th
 | [v-data-table-footer](/api/v-data-table-footer/) | Functional Component used to display Data-table headers |
 | [v-checkbox-btn](/api/v-checkbox-btn/) | Reusable lightweight [v-checkbox](/components/checkboxes) |
 
+<api-inline hide-links />
+
 ## Guides
 
 Explore data table pages that provide detailed explanations and code samples for various functionalities and use cases.
