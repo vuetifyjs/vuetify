@@ -70,8 +70,11 @@ The date composable supports the following date formatting options:
 * keyboardDate
 * monthAndDate
 * monthAndYear
+* month
+* monthShort
 * dayOfMonth
 * shortDate
+* year
 
 The following example shows how to use the date composable to format a date string:
 
@@ -81,7 +84,7 @@ The following example shows how to use the date composable to format a date stri
 
   const date = useDate()
 
-  const formatted = date.format('2010-04-13 00:00:00', 'fullDateWithWeekday')
+  const formatted = date.format('2010-04-13', 'fullDateWithWeekday')
 
   console.log(formatted) // Tuesday, April 13, 2010
 </script>
@@ -122,7 +125,8 @@ import type { DateAdapter } from 'vuetify/labs'
 export interface DateAdapter<Date> {
   date (value?: any): Date | null
   format (date: Date, formatString: string): string
-  parseISO (value: string): Date | null
+  toJsDate (value: Date): Date
+  parseISO (date: string): Date
   toISO (date: Date): string
 
   startOfDay (date: Date): Date
@@ -132,6 +136,7 @@ export interface DateAdapter<Date> {
   startOfYear (date: Date): Date
   endOfYear (date: Date): Date
 
+  isBefore (date: Date, comparing: Date): boolean
   isAfter (date: Date, comparing: Date): boolean
   isEqual (date: Date, comparing: Date): boolean
   isSameDay (date: Date, comparing: Date): boolean
@@ -143,11 +148,13 @@ export interface DateAdapter<Date> {
   addMonths (date: Date, amount: number): Date
 
   getYear (date: Date): number
+  getNextYear (date: Date): Date
   setYear (date: Date, year: number): Date
   getDiff (date: Date, comparing: Date | string, unit?: string): number
-  getWeek (date: Date): number
-  getWeekArray (date: Date): (Date | null)[][]
+  getWeekArray (date: Date): Date[][]
   getWeekdays (): string[]
   getMonth (date: Date): number
+  setMonth (date: Date, month: number): Date
+  getNextMonth (date: Date): Date
 }
 ```
