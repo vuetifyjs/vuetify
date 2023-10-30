@@ -185,7 +185,7 @@ In addition to [Button groups](/components/button-groups/), the `v-btn` componen
 
 <example file="v-btn/misc-group-survey" hide-invert />
 
-### Tax form comfirmation
+### Tax form confirmation
 
 This example utilizes the [v-text-field](/components/text-fields/) component to collect data from the user and the **loading** prop of `v-btn` when submitting the form.
 
