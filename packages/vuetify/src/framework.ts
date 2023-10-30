@@ -1,10 +1,10 @@
 // Composables
+import { createDate, DateAdapterSymbol } from '@/composables/date'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createIcons, IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
-import { createDate, DateAdapterSymbol } from '@/labs/date/date'
 
 // Utilities
 import { nextTick, reactive } from 'vue'
@@ -12,15 +12,14 @@ import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
+import type { DateOptions } from '@/composables/date'
 import type { DefaultsOptions } from '@/composables/defaults'
 import type { DisplayOptions, SSROptions } from '@/composables/display'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
-import type { DateOptions } from '@/labs/date'
-
 export * from './composables'
-export type { DateOptions, DateInstance } from '@/labs/date'
+export type { DateOptions, DateInstance } from '@/composables/date'
 
 export interface VuetifyOptions {
   aliases?: Record<string, any>

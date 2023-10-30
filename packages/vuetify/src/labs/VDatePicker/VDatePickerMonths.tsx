@@ -5,8 +5,8 @@ import './VDatePickerMonths.sass'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
+import { useDate } from '@/composables/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useDate } from '@/labs/date'
 
 // Utilities
 import { computed, watchEffect } from 'vue'

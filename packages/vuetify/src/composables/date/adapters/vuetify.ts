@@ -370,6 +370,10 @@ function isSameMonth (date: Date, comparing: Date) {
     date.getFullYear() === comparing.getFullYear()
 }
 
+function getDate (date: Date) {
+  return date.getDate()
+}
+
 function getDiff (date: Date, comparing: Date | string, unit?: string) {
   const d = new Date(date)
   const c = new Date(comparing)
@@ -482,6 +486,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   setYear (date: Date, year: number) {
     return setYear(date, year)
+  }
+
+  getDate (date: Date) {
+    return getDate(date)
   }
 
   getDiff (date: Date, comparing: Date | string, unit?: string) {

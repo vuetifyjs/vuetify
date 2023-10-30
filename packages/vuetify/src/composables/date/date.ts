@@ -113,26 +113,17 @@ export function useDate () {
   return instance
 }
 
-export function toIso (adapter: DateAdapter<any>, value: any) {
-  const date = adapter.toJsDate(value)
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-}
-
-function getMondayOfFirstWeekOfYear (year: number) {
-  return new Date(year, 0, 1)
-}
-
 // https://stackoverflow.com/questions/274861/how-do-i-calculate-the-week-number-given-a-date/275024#275024
 export function getWeek (adapter: DateAdapter<any>, value: any) {
   const date = adapter.toJsDate(value)
-  let year = date.getFullYear()
-  let d1w1 = getMondayOfFirstWeekOfYear(year)
+  let year = adapter.getYear(date)
+  let d1w1 = adapter.startOfYear(date)
 
   if (date < d1w1) {
     year = year - 1
-    d1w1 = getMondayOfFirstWeekOfYear(year)
+    d1w1 = adapter.startOfYear(adapter.setYear(date, year))
   } else {
-    const tv = getMondayOfFirstWeekOfYear(year + 1)
+    const tv = adapter.startOfYear(adapter.setYear(date, year + 1))
     if (date >= tv) {
       year = year + 1
       d1w1 = tv

@@ -1,5 +1,5 @@
 // Composables
-import { makeDateProps, useDate } from '../date'
+import { getWeek, makeDateProps, useDate } from '../date'
 import { createVuetify } from '@/framework'
 
 // Utilities
@@ -30,12 +30,8 @@ describe('date.ts', () => {
   })
 
   it('should have the correct days in a month', () => {
-    const wrapper = mount(Component, {
-      global: {
-        plugins: [vuetify],
-      },
-    })
+    const adapter = new VuetifyDateAdapter({ locale: 'en-US' })
 
-    expect(wrapper).toBeTruthy()
+    expect(getWeek(adapter, adapter.date('2023-10-10'))).toBe(41)
   })
 })

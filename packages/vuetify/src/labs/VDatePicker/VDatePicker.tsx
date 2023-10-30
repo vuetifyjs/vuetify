@@ -13,9 +13,9 @@ import { VTextField } from '@/components/VTextField'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
+import { useDate } from '@/composables/date'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useDate } from '@/labs/date'
 
 // Utilities
 import { computed, ref, shallowRef, watch } from 'vue'

@@ -6,8 +6,8 @@ import { VBtn } from '@/components/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
+import { getWeek, useDate } from '@/composables/date/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { getWeek, useDate } from '@/labs/date/date'
 
 // Utilities
 import { computed, ref } from 'vue'
