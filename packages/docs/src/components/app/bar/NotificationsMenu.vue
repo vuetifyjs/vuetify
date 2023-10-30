@@ -116,8 +116,7 @@
 
   // Composables
   import { useCosmic } from '@/composables/cosmic'
-  import { useDate } from 'vuetify/labs/date'
-  import { useDisplay } from 'vuetify'
+  import { useDate, useDisplay } from 'vuetify'
   import { useGtag } from 'vue-gtag-next'
   import { useI18n } from 'vue-i18n'
 

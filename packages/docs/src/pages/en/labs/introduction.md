@@ -89,8 +89,6 @@ The following is a list of available and up-and-coming components for use with L
 | [v-data-table-row](/api/v-data-table-row/) | Data table reusable row component | |
 | [v-data-table-rows](/api/v-data-table-rows/) | Data table reusable rows component | |
 | [v-data-table-column](/api/v-data-table-column/) | Data table reusable column component | |
-| **Dates** | [Usage](/features/dates/) | [v3.2.0&nbsp;(Orion)](/getting-started/release-notes/?version=v3.2.0) |
-| [useDate](/api/use-date/) | The date composable is used by components that require date functionality | |
 | **Date picker** | [Usage](/components/date-pickers/) | [v3.3.4&nbsp;(Icarus)](/getting-started/release-notes/?version=v3.3.4) |
 | [v-date-picker](/api/v-date-picker/) | Primary Component | |
 | **OTP input** | [Usage](/components/otp-input/) | [v3.3.11&nbsp;(Icarus)](/getting-started/release-notes/?version=v3.3.11) |
