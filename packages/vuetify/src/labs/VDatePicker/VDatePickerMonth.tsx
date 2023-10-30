@@ -3,76 +3,105 @@ import './VDatePickerMonth.sass'
 
 // Components
 import { VBtn } from '@/components/VBtn'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
-import { useDatePicker } from './composables'
-import { useBackgroundColor } from '@/composables/color'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { getWeek, useDate } from '@/labs/date/date'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { genericComponent, omit, propsFactory } from '@/util'
+import { genericComponent, propsFactory, wrapInArray } from '@/util'
 
 // Types
-import { getWeek, toIso } from '../date/date'
-import { dateEmits, makeDateProps } from '../VDateInput/composables'
-import { useDate } from '@/labs/date'
+import type { PropType } from 'vue'
+
+export type VDatePickerMonthSlots = {
+  day: {
+    props: {
+      onClick: () => void
+    }
+    item: any
+    i: number
+  }
+}
 
 export const makeVDatePickerMonthProps = propsFactory({
   allowedDates: [Array, Function],
   color: String,
-  showAdjacentMonths: Boolean,
+  month: [Number, String],
   hideWeekdays: Boolean,
-  showWeek: Boolean,
-  hoverDate: null,
-  multiple: Boolean,
-  side: {
-    type: String,
-  },
-  min: [Number, String, Date],
   max: [Number, String, Date],
-
-  ...omit(makeDateProps(), ['inputMode', 'viewMode']),
+  min: [Number, String, Date],
+  modelValue: null as unknown as PropType<string[] | string>,
+  multiple: Boolean,
+  showAdjacentMonths: Boolean,
+  showWeek: Boolean,
+  year: [Number, String],
 }, 'VDatePickerMonth')
 
-export const VDatePickerMonth = genericComponent()({
+export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
   name: 'VDatePickerMonth',
 
-  props: makeVDatePickerMonthProps({ color: 'surface-variant' }),
+  props: makeVDatePickerMonthProps(),
 
   emits: {
-    ...omit(dateEmits, ['update:inputMode', 'update:viewMode']),
-    'update:hoverDate': (date: any) => true,
+    'update:modelValue': (date: any) => true,
+    'update:month': (date: any) => true,
+    'update:year': (date: any) => true,
   },
 
   setup (props, { emit, slots }) {
+    const daysRef = ref()
+
     const adapter = useDate()
-    const { isDragging, dragHandle, hasScrolled } = useDatePicker()
+    // model comes in always as array
+    // leaves as array if multiple
+    const model = useProxiedModel(
+      props,
+      'modelValue',
+      [],
+      v => wrapInArray(v),
+      v => {
+        const array = wrapInArray(v).map(date => adapter.toISO(adapter.date(date)))
 
-    const month = computed(() => props.displayDate)
-
-    const findClosestDate = (date: any, dates: any[]) => {
-      const { isSameDay, getDiff } = adapter
-      const [startDate, endDate] = dates
-
-      if (isSameDay(startDate, endDate)) {
-        return getDiff(date, startDate, 'days') > 0 ? endDate : startDate
+        return props.multiple ? array : array[0]
       }
+    )
+    // shorthand to access the first value in the model or a fresh date
+    const _model = computed(() => {
+      const value = model.value?.[0]
 
-      const distStart = Math.abs(getDiff(date, startDate))
-      const distEnd = Math.abs(getDiff(date, endDate))
+      return adapter.isValid(value) ? value : adapter.date()
+    })
+    const year = useProxiedModel(
+      props,
+      'year',
+      undefined,
+      v => {
+        let date = adapter.date(_model.value)
 
-      return distStart < distEnd ? startDate : endDate
-    }
+        if (v != null) date = adapter.setYear(date, Number(v))
 
-    // const hoverRange = computed<[any, any] | null>(() => {
-    //   if (!props.hoverDate) return null
+        return adapter.startOfYear(date)
+      },
+      v => adapter.getYear(v)
+    )
+    const month = useProxiedModel(
+      props,
+      'month',
+      undefined,
+      v => {
+        let date = adapter.date(_model.value)
 
-    //   const closestDate = findClosestDate(props.hoverDate, props.modelValue)
+        if (v != null) date = adapter.setMonth(date, Number(v))
 
-    //   if (!closestDate) return null
+        date = adapter.setYear(date, adapter.getYear(year.value))
 
-    //   return adapter.isAfter(props.hoverDate, closestDate) ? [closestDate, props.hoverDate] : [props.hoverDate, closestDate]
-    // })
+        return date
+      },
+      v => adapter.getMonth(v)
+    )
 
     const weeksInMonth = computed(() => {
       const weeks = adapter.getWeekArray(month.value)
@@ -100,43 +129,27 @@ export const VDatePickerMonth = genericComponent()({
     })
 
     const daysInMonth = computed(() => {
-      const validDates = props.modelValue.filter(v => !!v)
-      const isRange = validDates.length > 1
-
       const days = weeksInMonth.value.flat()
       const today = adapter.date()
 
-      const startDate = validDates[0]
-      const endDate = validDates[1]
-
       return days.map((date, index) => {
-        const isStart = startDate && adapter.isSameDay(date, startDate)
-        const isEnd = endDate && adapter.isSameDay(date, endDate)
+        const isoDate = adapter.toISO(date)
         const isAdjacent = !adapter.isSameMonth(date, month.value)
-        const isSame = validDates.length === 2 && adapter.isSameDay(startDate, endDate)
 
         return {
           date,
-          isoDate: toIso(adapter, date),
+          isoDate,
           formatted: adapter.format(date, 'keyboardDate'),
           year: adapter.getYear(date),
           month: adapter.getMonth(date),
           isDisabled: isDisabled(date),
           isWeekStart: index % 7 === 0,
           isWeekEnd: index % 7 === 6,
-          isSelected: isStart || isEnd,
-          isStart,
-          isEnd,
+          isSelected: model.value.includes(isoDate),
           isToday: adapter.isSameDay(date, today),
           isAdjacent,
           isHidden: isAdjacent && !props.showAdjacentMonths,
-          inRange: isRange &&
-            !isSame &&
-            (isStart || isEnd || (validDates.length === 2 && adapter.isWithinRange(date, validDates as [any, any]))),
-          // isHovered: props.hoverDate === date,
-          // inHover: hoverRange.value && isWithinRange(date, hoverRange.value),
           isHovered: false,
-          inHover: false,
           localized: adapter.format(date, 'dayOfMonth'),
         }
       })
@@ -147,8 +160,6 @@ export const VDatePickerMonth = genericComponent()({
         return getWeek(adapter, week[0])
       })
     })
-
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
     function isDisabled (value: any) {
       const date = adapter.date(value)
@@ -167,125 +178,20 @@ export const VDatePickerMonth = genericComponent()({
       return false
     }
 
-    function selectDate (date: any) {
-      let newModel = props.modelValue.slice()
-
+    function onClick (string: any) {
       if (props.multiple) {
-        if (isDragging.value && dragHandle.value != null) {
-          const otherIndex = (dragHandle.value + 1) % 2
-          const fn = otherIndex === 0 ? 'isBefore' : 'isAfter'
-          if (adapter[fn](date, newModel[otherIndex])) {
-            newModel[dragHandle.value] = newModel[otherIndex]
-            newModel[otherIndex] = date
-            dragHandle.value = otherIndex
-          } else {
-            newModel[dragHandle.value] = date
-          }
-        } else {
-          if (newModel.find(d => adapter.isSameDay(d, date))) {
-            newModel = newModel.filter(v => !adapter.isSameDay(v, date))
-          } else if (newModel.length === 2) {
-            let index: number | undefined
-            if (!props.side || adapter.isSameMonth(newModel[0], newModel[1])) {
-              const closest = findClosestDate(date, newModel)
-              index = newModel.indexOf(closest)
-            } else {
-              index = props.side === 'start' ? 0 : props.side === 'end' ? 1 : undefined
-            }
+        const index = model.value.findIndex(selection => selection === string)
 
-            newModel = newModel.map((v, i) => i === index ? date : v)
-          } else {
-            if (newModel[0] && adapter.isBefore(newModel[0], date)) {
-              newModel = [newModel[0], date]
-            } else {
-              newModel = [date, newModel[0]]
-            }
-          }
+        if (index === -1) {
+          model.value = [...model.value, string]
+        } else {
+          const value = [...model.value]
+          value.splice(index, 1)
+          model.value = value
         }
       } else {
-        newModel = [date]
+        model.value = string
       }
-
-      emit('update:modelValue', newModel.filter(v => !!v))
-    }
-
-    const daysRef = ref()
-
-    function findElement (el: HTMLElement | null): any {
-      if (!el || el === daysRef.value) return null
-
-      if ('vDate' in el.dataset) {
-        return adapter.date(el.dataset.vDate)
-      }
-
-      return findElement(el.parentElement)
-    }
-
-    function findDate (e: MouseEvent | TouchEvent) {
-      const x = 'changedTouches' in e ? e.changedTouches[0]?.clientX : e.clientX
-      const y = 'changedTouches' in e ? e.changedTouches[0]?.clientY : e.clientY
-      const el = document.elementFromPoint(x, y) as HTMLElement
-
-      return findElement(el)
-    }
-
-    let canDrag = false
-    function handleMousedown (e: MouseEvent | TouchEvent) {
-      hasScrolled.value = false
-
-      const selected = findDate(e)
-
-      if (!selected) return
-
-      const modelIndex = props.modelValue.findIndex(d => adapter.isEqual(d, selected))
-
-      if (modelIndex >= 0) {
-        canDrag = true
-        dragHandle.value = modelIndex
-
-        window.addEventListener('touchmove', handleTouchmove, { passive: false })
-        window.addEventListener('mousemove', handleTouchmove, { passive: false })
-
-        e.preventDefault()
-      }
-
-      window.addEventListener('touchend', handleTouchend, { passive: false })
-      window.addEventListener('mouseup', handleTouchend, { passive: false })
-    }
-
-    function handleTouchmove (e: MouseEvent | TouchEvent) {
-      if (!canDrag) return
-
-      e.preventDefault()
-
-      isDragging.value = true
-
-      const over = findDate(e)
-
-      if (!over) return
-
-      selectDate(over)
-    }
-
-    function handleTouchend (e: MouseEvent | TouchEvent) {
-      if (e.cancelable) e.preventDefault()
-
-      window.removeEventListener('touchmove', handleTouchmove)
-      window.removeEventListener('mousemove', handleTouchmove)
-      window.removeEventListener('touchend', handleTouchend)
-      window.removeEventListener('mouseup', handleTouchend)
-
-      const end = findDate(e)
-
-      if (!end) return
-
-      if (!hasScrolled.value) {
-        selectDate(end)
-      }
-
-      isDragging.value = false
-      dragHandle.value = null
-      canDrag = false
     }
 
     return () => (
@@ -309,8 +215,6 @@ export const VDatePickerMonth = genericComponent()({
         <div
           ref={ daysRef }
           class="v-date-picker-month__days"
-          onMousedown={ handleMousedown }
-          onTouchstart={ handleMousedown }
         >
           { !props.hideWeekdays && adapter.getWeekdays().map(weekDay => (
             <div
@@ -321,63 +225,53 @@ export const VDatePickerMonth = genericComponent()({
             >{ weekDay }</div>
           ))}
 
-          { daysInMonth.value.map((item, index) => {
-            const color = (item.isSelected || item.isToday)
-              ? props.color
-              : (item.isHovered || item.isDisabled)
-                ? undefined
-                : 'transparent'
-            const variant = item.isDisabled
-              ? 'text'
-              : (item.isToday || item.isHovered) && !item.isSelected
-                ? 'outlined'
-                : 'flat'
+          { daysInMonth.value.map((item, i) => {
+            const slotProps = {
+              props: {
+                onClick: () => onClick(item.isoDate),
+              },
+              item,
+              i,
+            } as const
 
             return (
               <div
                 class={[
                   'v-date-picker-month__day',
                   {
-                    'v-date-picker-month__day--selected': item.isSelected,
-                    'v-date-picker-month__day--start': item.isStart,
-                    'v-date-picker-month__day--end': item.isEnd,
                     'v-date-picker-month__day--adjacent': item.isAdjacent,
                     'v-date-picker-month__day--hide-adjacent': item.isHidden,
-                    'v-date-picker-month__day--week-start': item.isWeekStart,
-                    'v-date-picker-month__day--week-end': item.isWeekEnd,
                     'v-date-picker-month__day--hovered': item.isHovered,
+                    'v-date-picker-month__day--selected': item.isSelected,
+                    'v-date-picker-month__day--week-end': item.isWeekEnd,
+                    'v-date-picker-month__day--week-start': item.isWeekStart,
                   },
                 ]}
-                data-v-date={ !item.isHidden && !item.isDisabled ? item.isoDate : undefined }
+                data-v-date={ !item.isDisabled ? item.isoDate : undefined }
               >
-                { item.inRange && (
-                  <div
-                    key="in-range"
-                    class={[
-                      'v-date-picker-month__day--range',
-                      backgroundColorClasses.value,
-                    ]}
-                    style={ backgroundColorStyles.value }
-                  />
-                )}
-
-                { item.inHover && !item.isStart && !item.isEnd && !item.isHovered && !item.inRange && (
-                  <div
-                    key="in-hover"
-                    class="v-date-picker-month__day--hover"
-                  />
-                )}
 
                 { (props.showAdjacentMonths || !item.isAdjacent) && (
-                  <VBtn
-                    color={ (!item.isToday || item.isSelected) ? color : undefined }
-                    disabled={ item.isDisabled }
-                    icon
-                    ripple={ false } /* ripple not working correctly since we preventDefault in touchend */
-                    variant={ variant }
+                  <VDefaultsProvider
+                    defaults={{
+                      VBtn: {
+                        color: (item.isSelected || item.isToday) && !item.isDisabled
+                          ? props.color
+                          : undefined,
+                        disabled: item.isDisabled,
+                        icon: true,
+                        ripple: false,
+                        text: item.localized,
+                        variant: item.isDisabled
+                          ? 'text'
+                          : item.isToday && !item.isSelected ? 'outlined' : 'flat',
+                        onClick: () => onClick(item.isoDate),
+                      },
+                    }}
                   >
-                    { item.localized }
-                  </VBtn>
+                    { slots.day?.(slotProps) ?? (
+                      <VBtn { ...slotProps.props } />
+                    )}
+                  </VDefaultsProvider>
                 )}
               </div>
             )

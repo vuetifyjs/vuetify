@@ -79,7 +79,7 @@ export const VPicker = genericComponent<VPickerSlots>()({
             { slots.default?.() }
           </div>
 
-          { slots.actions?.()[0]?.children && (
+          { slots.actions && (
             <VDefaultsProvider
               defaults={{
                 VBtn: {
