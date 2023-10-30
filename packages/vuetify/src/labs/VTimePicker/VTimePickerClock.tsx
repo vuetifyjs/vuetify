@@ -1,4 +1,4 @@
-// Styles
+// StylesthisValue
 import './VTimePickerClock.sass'
 
 // Utilities
@@ -43,9 +43,8 @@ export const makeVTimePickerClockProps = propsFactory({
     type: Number,
     default: 1,
   },
-  value: {
+  modelValue: {
     type: Number,
-    required: true,
   },
 }, 'VTimePickerClock')
 
@@ -56,12 +55,13 @@ export const VTimePickerClock = genericComponent()({
 
   emits: {
     change: (val: number) => val,
+    input: (val: number) => val,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { emit }) {
     const clockRef = ref<HTMLElement | null>(null)
     const innerClockRef = ref<HTMLElement | null>(null)
-    const inputValue = ref(props.value)
+    const inputValue = ref<number | undefined>(undefined)
     const isDragging = ref(false)
     const valueOnMouseDown = ref(null as number | null)
     const valueOnMouseUp = ref(null as number | null)
@@ -70,13 +70,13 @@ export const VTimePickerClock = genericComponent()({
     const roundCount = computed(() => props.double ? (count.value / 2) : count.value)
     const degreesPerUnit = computed(() => 360 / roundCount.value)
     const degrees = computed(() => degreesPerUnit.value * Math.PI / 180)
-    const displayedValue = computed(() => props.value == null ? props.min : props.value)
+    const displayedValue = computed(() => props.modelValue == null ? props.min : props.modelValue)
     const innerRadiusScale = computed(() => 0.62)
 
     const update = (value: number) => {
       if (inputValue.value !== value) {
         inputValue.value = value
-        emit('change', value)
+        emit('input', value)
       }
     }
 
@@ -204,7 +204,7 @@ export const VTimePickerClock = genericComponent()({
       return children
     })
 
-    watch(() => props.value, val => {
+    watch(() => props.modelValue, val => {
       inputValue.value = val
     })
 
@@ -213,7 +213,7 @@ export const VTimePickerClock = genericComponent()({
         <div
           class={{
             'v-time-picker-clock': true,
-            'v-time-picker-clock--indeterminate': props.value == null,
+            'v-time-picker-clock--indeterminate': props.modelValue == null,
           }}
           onMousedown={ (e: MouseEvent) => onMouseDown(e) }
           onMouseup={ (e: MouseEvent) => onMouseUp(e) }
@@ -227,9 +227,9 @@ export const VTimePickerClock = genericComponent()({
         >
           <div class="v-time-picker-clock__inner" ref={ innerClockRef }>
             <div
-              class={{ 'v-time-picker-clock__hand': true, 'v-time-picker-clock__hand--inner': isInner(props.value) }}
+              class={{ 'v-time-picker-clock__hand': true, 'v-time-picker-clock__hand--inner': isInner(props.modelValue as number) }}
               style={{
-                background: props.value != null ? props.color ? props.color : 'accent' : '',
+                background: props.modelValue != null ? props.color ? props.color : 'accent' : '',
                 transform: `rotate(${props.rotate + degreesPerUnit.value * (displayedValue.value - props.min)}deg) scaleY(${handScale(displayedValue.value)})`,
               }}
             ></div>
@@ -243,7 +243,7 @@ export const VTimePickerClock = genericComponent()({
                   }}
                   style={{
                     ...getTransform(value),
-                    color: value === props.value
+                    color: value === props.modelValue
                       ? props.color
                         ? props.color
                         : 'accent'
