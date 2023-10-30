@@ -25,7 +25,7 @@ The `v-infinite-scroll` component displays a potentially infinite list, by loadi
 
 ::: success
 
-This feature was introduced in [v3.4.0 (Orion)](/getting-started/release-notes/?version=v3.4.0)
+This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
 
 :::
 
