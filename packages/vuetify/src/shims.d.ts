@@ -4,7 +4,6 @@ import type { ComponentPublicInstance, FunctionalComponent, UnwrapNestedRefs, VN
 
 // @skip-build
 import type { DateOptions, DefaultsInstance, DisplayInstance, IconOptions, LocaleInstance, RtlInstance, ThemeInstance } from './framework'
-// @skip-build
 
 declare global {
   namespace JSX {
