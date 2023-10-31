@@ -148,24 +148,27 @@ export const VImg = genericComponent<VImgSlots>()({
       nextTick(() => {
         emit('loadstart', image.value?.currentSrc || normalisedSrc.value.src)
 
-        if (image.value?.complete) {
-          if (!image.value.naturalWidth) {
-            onError()
+        setTimeout(() => {
+          if (image.value?.complete) {
+            if (!image.value.naturalWidth) {
+              onError()
+            }
+
+            if (state.value === 'error') return
+
+            if (!aspectRatio.value) pollForSize(image.value, null)
+            if (state.value === 'loading') onLoad()
+          } else {
+            if (!aspectRatio.value) pollForSize(image.value!)
+            getSrc()
           }
-
-          if (state.value === 'error') return
-
-          if (!aspectRatio.value) pollForSize(image.value, null)
-          onLoad()
-        } else {
-          if (!aspectRatio.value) pollForSize(image.value!)
-          getSrc()
-        }
+        })
       })
     }
 
     function onLoad () {
       getSrc()
+      pollForSize(image.value!)
       state.value = 'loaded'
       emit('load', image.value?.currentSrc || normalisedSrc.value.src)
     }
