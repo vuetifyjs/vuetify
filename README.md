@@ -204,6 +204,14 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
       </td>
       <td>The official Vuetify Store where you can download free digital products, purchase pre-made themes, and more</td>
     </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/Simon-He95/vscode-common-intellisense">
+          🛒 vscode-common-intellisense
+        </a>
+      </td>
+      <td>A VS Code extension that provides better intellisense to Vuetify developers</td>
+    </tr>
   </tbody>
 </table>
 
