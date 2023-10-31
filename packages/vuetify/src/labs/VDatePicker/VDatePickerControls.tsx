@@ -13,7 +13,10 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 import type { PropType } from 'vue'
 
 export const makeVDatePickerControlsProps = propsFactory({
-  displayDate: String,
+  active: {
+    type: [String, Array] as PropType<string | string[]>,
+    default: undefined,
+  },
   disabled: {
     type: [Boolean, String, Array] as PropType<boolean | string | string[]>,
     default: false,
@@ -30,12 +33,9 @@ export const makeVDatePickerControlsProps = propsFactory({
     type: [String],
     default: '$subgroup',
   },
-  variant: {
-    type: String,
-    default: 'modern',
-  },
+  text: String,
   viewMode: {
-    type: String as PropType<'month' | 'year'>,
+    type: String as PropType<'month' | 'months' | 'year'>,
     default: 'month',
   },
 }, 'VDatePickerControls')
@@ -46,13 +46,20 @@ export const VDatePickerControls = genericComponent()({
   props: makeVDatePickerControlsProps(),
 
   emits: {
-    'click:mode': () => true,
+    'click:year': () => true,
+    'click:month': () => true,
     'click:prev': () => true,
     'click:next': () => true,
+    'click:text': () => true,
   },
 
   setup (props, { emit }) {
-    const disableMode = computed(() => {
+    const disableMonth = computed(() => {
+      return Array.isArray(props.disabled)
+        ? props.disabled.includes('text')
+        : !!props.disabled
+    })
+    const disableYear = computed(() => {
       return Array.isArray(props.disabled)
         ? props.disabled.includes('mode')
         : !!props.disabled
@@ -76,38 +83,41 @@ export const VDatePickerControls = genericComponent()({
       emit('click:next')
     }
 
-    function onClickMode () {
-      emit('click:mode')
+    function onClickYear () {
+      emit('click:year')
+    }
+
+    function onClickMonth () {
+      emit('click:month')
     }
 
     useRender(() => {
-      const displayDate = (
-        <div class="v-date-picker-controls__date">{ props.displayDate }</div>
-      )
-
       return (
         <div
           class={[
             'v-date-picker-controls',
-            `v-date-picker-controls--variant-${props.variant}`,
           ]}
         >
-          { props.variant === 'modern' && (
-            <>
-              { displayDate }
+          <VBtn
+            class="v-date-picker-controls__month-btn"
+            disabled={ disableMonth.value }
+            text={ props.text }
+            variant="text"
+            rounded
+            onClick={ onClickMonth }
+          ></VBtn>
 
-              <VBtn
-                key="mode-btn"
-                disabled={ disableMode.value }
-                density="comfortable"
-                icon={ props.modeIcon }
-                variant="text"
-                onClick={ onClickMode }
-              />
+          <VBtn
+            key="mode-btn"
+            class="v-date-picker-controls__mode-btn"
+            disabled={ disableYear.value }
+            density="comfortable"
+            icon={ props.modeIcon }
+            variant="text"
+            onClick={ onClickYear }
+          />
 
-              <VSpacer key="mode-spacer" />
-            </>
-          )}
+          <VSpacer key="mode-spacer" />
 
           <div
             key="month-buttons"
@@ -119,8 +129,6 @@ export const VDatePickerControls = genericComponent()({
               variant="text"
               onClick={ onClickPrev }
             />
-
-            { props.variant === 'classic' && displayDate }
 
             <VBtn
               disabled={ disableNext.value }

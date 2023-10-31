@@ -78,7 +78,7 @@ export const VPicker = genericComponent<VPickerSlots>()({
             { slots.default?.() }
           </div>
 
-          { slots.actions?.()[0]?.children && (
+          { slots.actions && (
             <div class="v-picker__actions">
               { slots.actions() }
             </div>
