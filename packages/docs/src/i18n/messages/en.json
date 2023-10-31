@@ -194,7 +194,16 @@
   "light": "Light",
   "link-only": "Link Only",
   "load-more": "Load more...",
-  "login-with-github": "Login with GitHub",
+  "login": {
+    "login": "Log in",
+    "to-vuetify": "Log in to Vuetify",
+    "tagline": "Sign in with GitHub or Discord to save your settings and unlock exclusive subscriber perks.",
+    "last-used": "Last used",
+    "with-github": "Continue with GitHub",
+    "with-discord": "Continue with Discord",
+    "connect-github": "Connect GitHub",
+    "connect-discord": "Connect Discord"
+  },
   "logo": "Logo",
   "ltr": "LTR",
   "marked-read": "Mark all read",

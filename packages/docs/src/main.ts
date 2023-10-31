@@ -14,7 +14,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { createHead } from '@vueuse/head'
 import { installPinia, pinia } from '@/plugins/pinia'
 import { installGlobalComponents } from '@/plugins/global-components'
-import { installAuth0 } from '@/plugins/auth'
 import { installGtag } from '@/plugins/gtag'
 import { installI18n } from '@/plugins/i18n'
 import { useAppStore } from '@/store/app'
@@ -146,7 +145,6 @@ router.onError((err, to) => {
 })
 
 installGlobalComponents(app)
-installAuth0(app)
 installGtag(app, router)
 installI18n(app)
 installPwa(router)
