@@ -220,11 +220,11 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     paddingBottom.value = calculateOffset(items.value.length) - calculateOffset(last.value)
   }
 
-  function scrollToIndex (index: number, position: string) {
+  function scrollToIndex (index: number, position?: string) {
     const offset = calculateOffset(index)
     if (!containerRef.value || (index && !offset)) {
       targetScrollIndex = index
-      targetScrollPosition = position
+      targetScrollPosition = position || 'start'
     } else {
       if (position === 'center') {
         containerRef.value.scrollTop = offset - (viewportHeight.value / 2) + (getSize(index) / 2)
