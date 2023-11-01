@@ -31,7 +31,6 @@
       density="compact"
     >
       <v-btn
-        :disabled="showArchived ? unread.length < 1 : read.length < 1"
         class="px-2 ms-n1 text-none font-weight-regular"
         size="small"
         variant="text"
@@ -117,8 +116,7 @@
 
   // Composables
   import { useCosmic } from '@/composables/cosmic'
-  import { useDate } from 'vuetify/labs/date'
-  import { useDisplay } from 'vuetify'
+  import { useDate, useDisplay } from 'vuetify'
   import { useGtag } from 'vue-gtag-next'
   import { useI18n } from 'vue-i18n'
 

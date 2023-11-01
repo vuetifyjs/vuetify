@@ -29,6 +29,18 @@ describe('VOtpInput', () => {
       .should('not.be.focused')
   })
 
+  it('enters value and moves to next input when focused index is not next', () => {
+    cy.mount(() => (<VOtpInput />))
+      .get('.v-otp-input input').eq(0)
+      .type('1')
+      .get('.v-otp-input input').eq(1)
+      .should('be.focused')
+      .get('.v-otp-input input').eq(3)
+      .type('2')
+      .get('.v-otp-input input').eq(2)
+      .should('be.focused')
+  })
+
   it('removes value and stays on current input when using delete', () => {
     cy.mount(() => (<VOtpInput />))
       .get('.v-otp-input input').eq(0)

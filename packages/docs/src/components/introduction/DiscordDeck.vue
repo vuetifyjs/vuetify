@@ -113,7 +113,7 @@
         },
         {
           name: '#subscriber-help',
-          text: 'Get priority help in our Subscriber only help channel. *Response not guaranteed*',
+          text: 'Get priority help in our Subscriber only help channel.',
           emoji: '🚑',
         },
       ],
@@ -151,12 +151,12 @@
         },
         {
           name: 'Private Help Channel',
-          text: 'Get a private help channel where you can ask questions to the Core Team. *Response Guaranteed*.',
+          text: 'Get a private help channel where you can ask questions to the Core Team.',
           emoji: '🔨',
         },
         {
           name: 'Priority GitHub Issues',
-          text: 'Get priority on your GitHub reported issues',
+          text: 'Get priority on your GitHub reported issues.',
           emoji: '🚨',
         },
       ],
@@ -176,7 +176,7 @@
         },
         {
           name: 'Extra Developers',
-          text: 'Get a private help channel where up to 3 developers you can ask questions directly to the Core Team. *Response Guaranteed*.',
+          text: 'Get a private help channel where up to 3 developers can ask questions directly to the Core Team.',
           emoji: '🛠️',
         },
         {

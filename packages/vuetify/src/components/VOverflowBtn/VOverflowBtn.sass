@@ -43,19 +43,10 @@
 
     input
       cursor: pointer
-
-      +ltr()
-        margin-left: $overflow-dense-input-margin-x
-
-      +rtl()
-        margin-right: $overflow-dense-input-margin-x
+      margin-inline-start: $overflow-dense-input-margin-x
 
   .v-select__selection--comma:first-child
-    +ltr()
-      margin-left: $overflow-selection-comma-margin-x
-
-    +rtl()
-      margin-right: $overflow-selection-comma-margin-x
+    margin-inline-start: $overflow-selection-comma-margin-x
 
   .v-input__slot
     transition: .3s map-get($transition, 'swing')
@@ -66,12 +57,7 @@
 
   .v-label
     top: $overflow-label-top
-
-    +ltr()
-      margin-left: $overflow-label-margin-x
-
-    +rtl()
-      margin-right: $overflow-label-margin-x
+    margin-inline-start: $overflow-label-margin-x
 
   .v-input__append-inner
     align-items: center
@@ -128,11 +114,7 @@
         width: 100%
 
         // push past the input's padding
-        +ltr()
-          margin-right: $overflow-segmented-selections-btn-margin-x
-
-        +rtl()
-          margin-left: $overflow-segmented-selections-btn-margin-x
+        margin-inline-end: $overflow-segmented-selections-btn-margin-x
 
         &__content
           justify-content: start

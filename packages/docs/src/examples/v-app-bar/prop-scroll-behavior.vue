@@ -12,7 +12,7 @@
             v-bind="props"
             style="position: sticky"
             scroll-target="#scroll-behavior-layout > .v-main__scroller"
-            color="accent"
+            color="secondary"
           >
             <template v-slot:prepend>
               <v-app-bar-nav-icon></v-app-bar-nav-icon>

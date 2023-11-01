@@ -10,6 +10,7 @@ import { reactive, toRefs } from 'vue'
 export type RootState = {
   v: 2 | 3 | 4
   api: 'link-only' | 'inline'
+  avatar: string
   dev: boolean
   disableAds: boolean
   composition: ('options' | 'composition')
@@ -93,6 +94,7 @@ type SavedState = {
 export const DEFAULT_USER: RootState = {
   v: 4,
   api: 'link-only',
+  avatar: '',
   dev: false,
   disableAds: false,
   composition: 'options',

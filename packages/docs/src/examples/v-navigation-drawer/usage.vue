@@ -7,6 +7,7 @@
   >
     <div>
       <v-navigation-drawer
+        permanent
         v-bind="props"
       >
         <v-list-item title="My Application" subtitle="Vuetify"></v-list-item>

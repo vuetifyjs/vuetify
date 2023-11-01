@@ -161,6 +161,7 @@ app.use(vuetify)
 - `shaped` prop has been removed.
 - `icon-color` has been removed.
 - `single-line` has been replaced with `lines="one"`.
+- `color` now applies to the icon and action text. Use `bg-color` to change the background color.
 
 ### v-btn/v-btn-toggle
 
@@ -195,6 +196,11 @@ app.use(vuetify)
 - `v-list-item` `inactive` prop has been replaced with `:active="false" :link="false"`.
 - `v-subheader`  has been renamed to `v-list-subheader`.
 - `v-list-item`'s `active` scoped slot prop has been renamed to `isActive`
+
+### v-rating
+
+- `color` has been renamed to `active-color`.
+- `background-color` has been renamed to `color`.
 
 ### v-select/v-combobox/v-autocomplete
 

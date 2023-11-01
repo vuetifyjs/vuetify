@@ -1,5 +1,5 @@
 // Utilities
-import { camelize, capitalize, computed, Fragment, reactive, toRefs, unref, watchEffect } from 'vue'
+import { camelize, capitalize, Comment, computed, Fragment, isVNode, reactive, toRefs, unref, watchEffect } from 'vue'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -13,6 +13,7 @@ import type {
   Slots,
   ToRefs,
   VNode,
+  VNodeArrayChildren,
   VNodeChild,
 } from 'vue'
 
@@ -134,10 +135,16 @@ export function isObject (obj: any): obj is object {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
 }
 
-export function refElement<T extends object | undefined> (obj: T): Exclude<T, ComponentPublicInstance> | HTMLElement {
-  return obj && '$el' in obj
-    ? obj.$el as HTMLElement
-    : obj as HTMLElement
+export function refElement (obj?: ComponentPublicInstance<any> | HTMLElement): HTMLElement | undefined {
+  if (obj && '$el' in obj) {
+    const el = obj.$el as HTMLElement
+    if (el?.nodeType === Node.TEXT_NODE) {
+      // Multi-root component, use the first element
+      return el.nextElementSibling as HTMLElement
+    }
+    return el
+  }
+  return obj as HTMLElement
 }
 
 // KeyboardEvent.keyCode aliases
@@ -314,6 +321,21 @@ const bubblingEvents = [
   'onTransitionstart',
   'onWheel',
 ]
+
+const compositionIgnoreKeys = [
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowRight',
+  'ArrowLeft',
+  'Enter',
+  'Escape',
+  'Tab',
+  ' ',
+]
+
+export function isComposingIgnoreKey (e: KeyboardEvent): boolean {
+  return e.isComposing && compositionIgnoreKeys.includes(e.key)
+}
 
 /**
  * Filter attributes that should be applied to
@@ -706,4 +728,15 @@ export function matchesSelector (el: Element | undefined, selector: string): boo
   } catch (err) {
     return null
   }
+}
+
+export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildren | null {
+  return vnodes.some(child => {
+    if (!isVNode(child)) return true
+    if (child.type === Comment) return false
+    return child.type !== Fragment ||
+      ensureValidVNode(child.children as VNodeArrayChildren)
+  })
+    ? vnodes
+    : null
 }

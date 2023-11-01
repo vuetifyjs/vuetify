@@ -5,10 +5,16 @@
   align-items: center
   justify-content: space-between
   font-size: .875rem
-  padding-inline-start: 24px
   padding-top: 4px
   padding-bottom: 4px
+  padding-inline-start: 6px
   padding-inline-end: 12px
+
+  > .v-btn:first-child
+    text-transform: none
+    font-weight: 400
+    line-height: initial
+    letter-spacing: initial
 
   &--variant-classic
     padding-inline-start: 12px
@@ -28,7 +34,7 @@
     margin-inline-start: 4px
 
   .v-date-picker--year &
-    > .v-btn
+    .v-date-picker-controls__mode-btn
       transform: rotate(180deg)
 
 .v-date-picker-controls__date

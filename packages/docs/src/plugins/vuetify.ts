@@ -18,9 +18,9 @@ import * as mdiSvg from './icons'
 import { en, sv } from 'vuetify/locale'
 
 // Types
-import type { ViteSSGContext } from '@vuetify/vite-ssg'
+import type { App } from 'vue'
 
-export function installVuetify ({ app }: ViteSSGContext) {
+export function installVuetify (app: App) {
   const vuetify = createVuetify({
     aliases: {
       PageFeatureChip: components.VChip,
@@ -99,6 +99,7 @@ export function installVuetify ({ app }: ViteSSGContext) {
       themes: {
         light: {
           colors: {
+            'surface-variant-alt': '#dedede',
             primary: '#1867c0',
             secondary: '#5CBBF6',
             tertiary: '#E57373',
@@ -109,6 +110,7 @@ export function installVuetify ({ app }: ViteSSGContext) {
         },
         dark: {
           colors: {
+            'surface-variant-alt': '#333333',
             primary: '#2196F3',
             secondary: '#424242',
             tertiary: '#E57373',

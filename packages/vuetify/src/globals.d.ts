@@ -70,6 +70,26 @@ declare global {
     sourceCapabilities?: { firesTouchEvents: boolean }
   }
 
+  interface ColorSelectionOptions {
+    signal?: AbortSignal
+  }
+
+  interface ColorSelectionResult {
+    sRGBHex: string
+  }
+
+  interface EyeDropper {
+    open: (options?: ColorSelectionOptions) => Promise<ColorSelectionResult>
+  }
+
+  interface EyeDropperConstructor {
+    new (): EyeDropper
+  }
+
+  interface Window {
+    EyeDropper: EyeDropperConstructor
+  }
+
   function parseInt(s: string | number, radix?: number): number
   function parseFloat(string: string | number): number
 
@@ -106,6 +126,10 @@ declare module '@vue/runtime-core' {
 
   export interface App {
     $nuxt?: { hook: (name: string, fn: () => void) => void }
+  }
+
+  export interface VNode {
+    ctx: ComponentInternalInstance | null
   }
 }
 
