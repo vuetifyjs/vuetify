@@ -2,6 +2,10 @@ export default {
   badge: 'Odznaka',
   open: 'Otwórz',
   close: 'Zamknij',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Anuluj',
+  },
   dataIterator: {
     noResultsText: 'Nie znaleziono danych odpowiadających wyszukiwaniu',
     loadingText: 'Wczytywanie danych...',
@@ -31,8 +35,6 @@ export default {
     divider: 'do',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Anuluj',
     range: {
       title: 'Wybór zakresu dat',
       header: 'Wprowadź zakres dat',

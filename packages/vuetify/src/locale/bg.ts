@@ -2,6 +2,10 @@ export default {
   badge: 'Значка',
   open: 'Отвори',
   close: 'Затвори',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Отмяна',
+  },
   dataIterator: {
     noResultsText: 'Не са намерени записи',
     loadingText: 'Зареждане на елементи...',
@@ -31,8 +35,6 @@ export default {
     divider: 'до',
   },
   datePicker: {
-    ok: 'ОК',
-    cancel: 'Отмяна',
     range: {
       title: 'Избор на дати',
       header: 'Въвеждане на дати',

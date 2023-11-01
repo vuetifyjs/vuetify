@@ -2,6 +2,10 @@ export default {
   badge: 'Bricka',
   open: 'Open',
   close: 'Stäng',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Avbryt',
+  },
   dataIterator: {
     noResultsText: 'Hittade inga poster',
     loadingText: 'Laddar data...',
@@ -31,8 +35,6 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Avbryt',
     range: {
       title: 'Välj datum',
       header: 'Välj datum',

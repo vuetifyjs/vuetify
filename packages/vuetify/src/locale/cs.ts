@@ -2,6 +2,10 @@ export default {
   badge: 'Odznak',
   open: 'Open',
   close: 'Zavřít',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Nenalezeny žádné záznamy',
     loadingText: 'Načítám položky...',
@@ -31,8 +35,6 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
     range: {
       title: 'Select dates',
       header: 'Enter dates',
