@@ -1,5 +1,5 @@
 // Utilities
-import { camelize, capitalize, Comment, computed, Fragment, isVNode, reactive, toRefs, watchEffect } from 'vue'
+import { camelize, capitalize, Comment, computed, Fragment, isVNode, reactive, toRefs, unref, watchEffect } from 'vue'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -389,12 +389,17 @@ export function searchItems<T extends any = any> (items: T[], search: string): T
   return items.filter((item: any) => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
 }
 
-export function debounce (fn: Function, delay: number) {
+export function debounce (fn: Function, delay: MaybeRef<number>) {
   let timeoutId = 0 as any
-  return (...args: any[]) => {
+  const wrap = (...args: any[]) => {
     clearTimeout(timeoutId)
-    timeoutId = setTimeout(() => fn(...args), delay)
+    timeoutId = setTimeout(() => fn(...args), unref(delay))
   }
+  wrap.clear = () => {
+    clearTimeout(timeoutId)
+  }
+  wrap.immediate = fn
+  return wrap
 }
 
 export function throttle<T extends (...args: any[]) => any> (fn: T, limit: number) {

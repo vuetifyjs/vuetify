@@ -10,6 +10,7 @@ import { useSelection } from './composables/select'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
+import { Fragment } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -135,7 +136,7 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
             }
 
             return (
-              <>
+              <Fragment key={ itemSlotProps.props.key }>
                 { slots.item ? slots.item(itemSlotProps) : (
                   <VDataTableRow
                     { ...itemSlotProps.props }
@@ -144,7 +145,7 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
                 )}
 
                 { isExpanded(item) && slots['expanded-row']?.(slotProps) }
-              </>
+              </Fragment>
             )
           })}
         </>
