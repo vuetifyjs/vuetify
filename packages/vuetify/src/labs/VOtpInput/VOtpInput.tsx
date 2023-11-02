@@ -110,8 +110,6 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         target = model.value.length
       } else if (focusIndex.value + 1 !== Number(props.length)) {
         target = 'next'
-      } else {
-        requestAnimationFrame(() => current.value?.blur())
       }
 
       if (target) focusChild(contentRef.value!, target)
