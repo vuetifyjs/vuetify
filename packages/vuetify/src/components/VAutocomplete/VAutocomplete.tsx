@@ -26,6 +26,7 @@ import { makeTransitionProps } from '@/composables/transition'
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
+  ensureValidVNode,
   genericComponent,
   IN_BROWSER,
   matchesSelector,
@@ -525,6 +526,17 @@ export const VAutocomplete = genericComponent<new <
                     'onUpdate:modelValue': undefined,
                   }
 
+                  const hasSlot = hasChips ? !!slots.chip : !!slots.selection
+                  const slotContent = hasSlot
+                    ? ensureValidVNode(
+                      hasChips
+                        ? slots.chip!({ item, index, props: slotProps })
+                        : slots.selection!({ item, index })
+                    )
+                    : undefined
+
+                  if (hasSlot && !slotContent) return undefined
+
                   return (
                     <div
                       key={ item.value }
@@ -558,11 +570,11 @@ export const VAutocomplete = genericComponent<new <
                               },
                             }}
                           >
-                            { slots.chip?.({ item, index, props: slotProps }) }
+                            { slotContent }
                           </VDefaultsProvider>
                         )
                       ) : (
-                        slots.selection?.({ item, index }) ?? (
+                        slotContent ?? (
                           <span class="v-autocomplete__selection-text">
                             { item.title }
                             { props.multiple && (index < model.value.length - 1) && (

@@ -1,3 +1,4 @@
+@forward '../VInput/variables';
 @use '../../styles/settings';
 
 // Defaults
@@ -8,5 +9,5 @@ $autocomplete-line-height: 1.75 !default;
 $autocomplete-selection-gap: 2px !default;
 $autocomplete-transition: .2s settings.$standard-easing !default;
 $autocomplete-chips-control-min-height: 64px !default;
-$autocomplete-chips-margin-top: 2px !default;
-$autocomplete-chips-margin-bottom: ('default': 0, 'comfortable': 1, 'compact': 2) !default;
+$autocomplete-chips-margin-top: null !default;
+$autocomplete-chips-margin-bottom: null !default;

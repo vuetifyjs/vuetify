@@ -27,8 +27,8 @@ $field-control-solo-inverted-focused-color: rgb(var(--v-theme-on-surface-variant
 $field-control-filled-background: rgba(var(--v-theme-on-surface), var(--v-idle-opacity)) !default;
 $field-control-padding-start: 16px !default;
 $field-control-padding-end: 16px !default;
-$field-control-padding-top: 10px !default;
-$field-control-padding-bottom: 5px !default;
+$field-control-padding-top: 8px !default;
+$field-control-padding-bottom: 4px !default;
 $field-control-affixed-padding: 12px !default;
 $field-control-affixed-inner-padding: 6px !default;
 $field-control-underlined-height: 48px !default;
@@ -39,10 +39,12 @@ $field-control-height: 56px !default;
 $field-input-opacity: var(--v-high-emphasis-opacity) !default;
 $field-input-min-height: #{max(
   var(--v-input-control-height, $input-control-height),
-  calc($input-font-size * $input-line-height + var(--v-field-input-padding-top) + var(--v-field-input-padding-bottom) + var(--v-input-chips-margin-bottom) + $input-chips-margin-top)
+  calc($input-font-size * $input-line-height + var(--v-field-input-padding-top) + var(--v-field-input-padding-bottom))
 )} !default;
 $field-input-padding-top: calc(var(--v-field-padding-top, $field-control-padding-top) + var(--v-input-padding-top, 0)) !default;
 $field-input-padding-bottom: var(--v-field-padding-bottom, $field-control-padding-bottom) !default;
+$field-input-column-gap: 2px !default;
+$field-input-row-gap: 8px !default;
 
 // LABEL
 $field-label-floating-scale: .75 !default;

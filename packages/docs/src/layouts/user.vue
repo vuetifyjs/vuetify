@@ -8,38 +8,38 @@
 
     <app-drawer />
 
+    <app-snackbar-queue />
+
     <v-main>
-      <slot>
-        <v-container
-          fluid
-          tag="section"
-        >
-          <v-row justify="center" justify-md="start">
-            <v-col cols="auto">
-              <user-profile />
-            </v-col>
+      <v-container
+        fluid
+        tag="section"
+      >
+        <v-row justify="center" justify-md="start">
+          <v-col cols="auto">
+            <user-profile />
+          </v-col>
 
-            <v-col
-              class="me-auto"
-              cols="12"
-              sm="10"
-              md="7"
-            >
-              <user-tabs />
+          <v-col
+            class="me-auto"
+            cols="12"
+            sm="10"
+            md="7"
+          >
+            <user-tabs />
 
-              <br>
+            <br>
 
-              <router-view v-slot="{ Component }">
-                <v-fade-transition hide-on-leave>
-                  <div :key="route.name">
-                    <component :is="Component" />
-                  </div>
-                </v-fade-transition>
-              </router-view>
-            </v-col>
-          </v-row>
-        </v-container>
-      </slot>
+            <router-view v-slot="{ Component }">
+              <v-fade-transition hide-on-leave>
+                <div :key="route.name">
+                  <component :is="Component" />
+                </div>
+              </v-fade-transition>
+            </router-view>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -52,21 +52,25 @@
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
   import UserProfile from '@/components/user/UserProfile.vue'
   import UserTabs from '@/components/user/UserTabs.vue'
+  import AppSnackbarQueue from '@/components/app/SnackbarQueue.vue'
 
   // Composables
-  import { useRoute, useRouter } from 'vue-router'
-  import { useAuth0 } from '@/plugins/auth'
+  import { onBeforeRouteUpdate, useRoute } from 'vue-router'
+
+  // Stores
+  import { useAuthStore } from '@/store/auth'
 
   // Utilities
-  import { watch } from 'vue'
+  import { onMounted } from 'vue'
 
   const route = useRoute()
-  const router = useRouter()
-  const { isLoading, isAuthenticated } = useAuth0()
+  const auth = useAuthStore()
 
-  watch(isLoading, val => {
-    if (val || isAuthenticated.value) return
+  onMounted(async () => {
+    await auth.verify()
+  })
 
-    router.push('/')
-  }, { immediate: true })
+  onBeforeRouteUpdate(async () => {
+    await auth.verify()
+  })
 </script>

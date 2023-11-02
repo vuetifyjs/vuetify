@@ -161,6 +161,7 @@ app.use(vuetify)
 - `shaped` prop has been removed.
 - `icon-color` has been removed.
 - `single-line` has been replaced with `lines="one"`.
+- `color` now applies to the icon and action text. Use `bg-color` to change the background color.
 
 ### v-btn/v-btn-toggle
 

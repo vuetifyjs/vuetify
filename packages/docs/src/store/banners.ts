@@ -1,6 +1,6 @@
 // Composables
 import { useCosmic } from '@/composables/cosmic'
-import { useDate } from 'vuetify/labs/date'
+import { useDate } from 'vuetify'
 
 // Utilities
 import { defineStore } from 'pinia'

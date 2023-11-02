@@ -102,7 +102,9 @@
     > .v-expansion-panel-title
       border-bottom-left-radius: 0
       border-bottom-right-radius: 0
-      min-height: $expansion-panel-active-title-min-height
+
+      &:not(.v-expansion-panel-title--static)
+        min-height: $expansion-panel-active-title-min-height
 
 .v-expansion-panel__shadow
   @include tools.absolute()
