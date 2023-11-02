@@ -7,7 +7,6 @@
       "why-vuetify",
       "long-term-support",
       "roadmap",
-      "meet-the-team",
       "sponsors-and-backers",
       { "divider": true },
       { "subheader": "professional-support" },
@@ -22,6 +21,7 @@
       "installation",
       "frequently-asked-questions",
       "wireframes",
+      "unit-testing",
       "browser-support",
       "upgrade-guide",
       "release-notes",
@@ -33,6 +33,7 @@
     "inactiveIcon": "mdi-image-edit-outline",
     "activeIcon": "mdi-image-edit",
     "items": [
+      "accessibility",
       "aliasing",
       "application-layout",
       "blueprints",
@@ -75,6 +76,12 @@
     "activeIcon": "mdi-view-dashboard",
     "items": [
       "all",
+      {
+        "title": "explorer",
+        "routeMatch": "explorer/:name(.*)",
+        "routePath": "explorer",
+        "subtitle": "browse-components"
+      },
       { "divider": true },
       { "subheader": "containment" },
       "buttons",
@@ -117,6 +124,7 @@
       { "divider": true },
       { "subheader": "data-and-display" },
       "tables",
+      "virtual-scroller",
       { "divider": true },
       { "subheader": "grids" },
       "grids",
@@ -187,6 +195,14 @@
     "items": [
       "introduction",
       {
+        "title": "bottom-sheets",
+        "subfolder": "components"
+      },
+      {
+        "title": "data-iterators",
+        "subfolder": "components"
+      },
+      {
         "title": "data-tables",
         "subfolder": "components",
         "activeIcon": "",
@@ -194,6 +210,7 @@
         "items": [
           "basics",
           "headers",
+          "selection",
           "sorting",
           "pagination",
           "filtering",
@@ -204,11 +221,27 @@
         ]
       },
       {
+        "title": "dates",
+        "subfolder": "features"
+      },
+      {
+        "title": "date-pickers",
+        "subfolder": "components"
+      },
+      {
+        "title": "infinite-scroller",
+        "subfolder": "components"
+      },
+      {
+        "title": "otp-input",
+        "subfolder": "components"
+      },
+      {
         "title": "skeleton-loaders",
         "subfolder": "components"
       },
       {
-        "title": "virtual-scroller",
+        "title": "steppers",
         "subfolder": "components"
       }
     ]
@@ -218,9 +251,12 @@
     "inactiveIcon": "mdi-human-male-board",
     "activeIcon": "mdi-human-male-board",
     "items": [
+      "brand-kit",
       "jobs-for-vue",
-      "ui-kits",
-      "themes"
+      "made-with-vuetify",
+      "search-engine",
+      "themes",
+      "ui-kits"
     ]
   },
   {
@@ -228,6 +264,7 @@
     "inactiveIcon": "$vuetify-outline",
     "activeIcon": "$vuetify",
     "items": [
+      "meet-the-team",
       "security-disclosure",
       "code-of-conduct"
     ]

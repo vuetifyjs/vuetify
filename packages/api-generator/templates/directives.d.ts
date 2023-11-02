@@ -1,5 +1,5 @@
 import type { DirectiveBinding } from 'vue'
-import type * as directives from '../../vuetify/lib/directives/index'
+import type * as directives from '../../vuetify/lib/directives/index.d.mts'
 
 type ExtractDirectiveBindings<T> = T extends object
   ? {

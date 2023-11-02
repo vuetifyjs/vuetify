@@ -1,5 +1,6 @@
 // Utilities
-import { camelize, capitalize, computed, Fragment, reactive, toRefs, watchEffect } from 'vue'
+import { camelize, capitalize, Comment, computed, Fragment, isVNode, reactive, toRefs, watchEffect } from 'vue'
+import { IN_BROWSER } from '@/util/globals'
 
 // Types
 import type {
@@ -12,6 +13,7 @@ import type {
   Slots,
   ToRefs,
   VNode,
+  VNodeArrayChildren,
   VNodeChild,
 } from 'vue'
 
@@ -59,7 +61,7 @@ export function deepEqual (a: any, b: any): boolean {
   return props.every(p => deepEqual(a[p], b[p]))
 }
 
-export function getObjectValueByPath (obj: any, path: string, fallback?: any): any {
+export function getObjectValueByPath (obj: any, path?: string | null, fallback?: any): any {
   // credit: http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key#comment55278413_6491621
   if (obj == null || !path || typeof path !== 'string') return fallback
   if (obj[path] !== undefined) return obj[path]
@@ -69,7 +71,7 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
 }
 
 export type SelectItemKey =
-  | boolean // Ignored
+  | boolean | null | undefined // Ignored
   | string // Lookup by key, can use dot notation for nested objects
   | (string | number)[] // Nested lookup by key, each array item is a key in the next level
   | ((item: Record<string, any>, fallback?: any) => any)
@@ -79,7 +81,9 @@ export function getPropertyFromItem (
   property: SelectItemKey,
   fallback?: any
 ): any {
-  if (property == null) return item === undefined ? fallback : item
+  if (property === true) return item === undefined ? fallback : item
+
+  if (property == null || typeof property === 'boolean') return fallback
 
   if (item !== Object(item)) {
     if (typeof property !== 'function') return fallback
@@ -131,8 +135,10 @@ export function isObject (obj: any): obj is object {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
 }
 
-export function isComponentInstance (obj: any): obj is ComponentPublicInstance {
-  return obj?.$el
+export function refElement<T extends object | undefined> (obj: T): Exclude<T, ComponentPublicInstance> | HTMLElement {
+  return obj && '$el' in obj
+    ? obj.$el as HTMLElement
+    : obj as HTMLElement
 }
 
 // KeyboardEvent.keyCode aliases
@@ -180,6 +186,10 @@ export function keys<O extends {}> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }
 
+export function has<T extends string> (obj: object, key: T[]): obj is Record<T, unknown> {
+  return key.every(k => obj.hasOwnProperty(k))
+}
+
 type MaybePick<
   T extends object,
   U extends Extract<keyof T, string>
@@ -188,17 +198,20 @@ type MaybePick<
 // Array of keys
 export function pick<
   T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: U[]): [yes: MaybePick<T, U>, no: Omit<T, U>]
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: U[], exclude?: E[]): [yes: MaybePick<T, Exclude<U, E>>, no: Omit<T, Exclude<U, E>>]
 // Array of keys or RegExp to test keys against
 export function pick<
   T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>]
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[], exclude?: E[]): [yes: Partial<T>, no: Partial<T>]
 export function pick<
   T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>] {
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[], exclude?: E[]): [yes: Partial<T>, no: Partial<T>] {
   const found = Object.create(null)
   const rest = Object.create(null)
 
@@ -207,7 +220,7 @@ export function pick<
       paths.some(path => path instanceof RegExp
         ? path.test(key)
         : path === key
-      )
+      ) && !exclude?.some(path => path === key)
     ) {
       found[key] = obj[key]
     } else {
@@ -229,13 +242,107 @@ export function omit<
   return clone
 }
 
+export function only<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, include: U[]): Pick<T, U> {
+  const clone = {} as T
+
+  include.forEach(prop => clone[prop] = obj[prop])
+
+  return clone
+}
+
+const onRE = /^on[^a-z]/
+export const isOn = (key: string) => onRE.test(key)
+
+const bubblingEvents = [
+  'onAfterscriptexecute',
+  'onAnimationcancel',
+  'onAnimationend',
+  'onAnimationiteration',
+  'onAnimationstart',
+  'onAuxclick',
+  'onBeforeinput',
+  'onBeforescriptexecute',
+  'onChange',
+  'onClick',
+  'onCompositionend',
+  'onCompositionstart',
+  'onCompositionupdate',
+  'onContextmenu',
+  'onCopy',
+  'onCut',
+  'onDblclick',
+  'onFocusin',
+  'onFocusout',
+  'onFullscreenchange',
+  'onFullscreenerror',
+  'onGesturechange',
+  'onGestureend',
+  'onGesturestart',
+  'onGotpointercapture',
+  'onInput',
+  'onKeydown',
+  'onKeypress',
+  'onKeyup',
+  'onLostpointercapture',
+  'onMousedown',
+  'onMousemove',
+  'onMouseout',
+  'onMouseover',
+  'onMouseup',
+  'onMousewheel',
+  'onPaste',
+  'onPointercancel',
+  'onPointerdown',
+  'onPointerenter',
+  'onPointerleave',
+  'onPointermove',
+  'onPointerout',
+  'onPointerover',
+  'onPointerup',
+  'onReset',
+  'onSelect',
+  'onSubmit',
+  'onTouchcancel',
+  'onTouchend',
+  'onTouchmove',
+  'onTouchstart',
+  'onTransitioncancel',
+  'onTransitionend',
+  'onTransitionrun',
+  'onTransitionstart',
+  'onWheel',
+]
+
+const compositionIgnoreKeys = [
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowRight',
+  'ArrowLeft',
+  'Enter',
+  'Escape',
+  'Tab',
+  ' ',
+]
+
+export function isComposingIgnoreKey (e: KeyboardEvent): boolean {
+  return e.isComposing && compositionIgnoreKeys.includes(e.key)
+}
+
 /**
  * Filter attributes that should be applied to
- * the root element of a an input component. Remaining
+ * the root element of an input component. Remaining
  * attributes should be passed to the <input> element inside.
  */
 export function filterInputAttrs (attrs: Record<string, unknown>) {
-  return pick(attrs, ['class', 'style', 'id', /^data-/])
+  const [events, props] = pick(attrs, [onRE])
+  const inputEvents = omit(events, bubblingEvents)
+  const [rootAttrs, inputAttrs] = pick(props, ['class', 'style', 'id', /^data-/])
+  Object.assign(rootAttrs, events)
+  Object.assign(inputAttrs, inputEvents)
+  return [rootAttrs, inputAttrs]
 }
 
 /**
@@ -249,39 +356,16 @@ export function arrayDiff (a: any[], b: any[]): any[] {
   return diff
 }
 
-interface ItemGroup<T> {
-  name: string
-  items: T[]
-}
-
-export function groupItems<T extends any = any> (
-  items: T[],
-  groupBy: string[],
-  groupDesc: boolean[]
-): ItemGroup<T>[] {
-  const key = groupBy[0]
-  const groups: ItemGroup<T>[] = []
-  let current
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i]
-    const val = getObjectValueByPath(item, key, null)
-    if (current !== val) {
-      current = val
-      groups.push({
-        name: val ?? '',
-        items: [],
-      })
-    }
-    groups[groups.length - 1].items.push(item)
-  }
-  return groups
-}
-
-export function wrapInArray<T> (v: T | T[] | null | undefined): T[] {
+type IfAny<T, Y, N> = 0 extends (1 & T) ? Y : N;
+export function wrapInArray<T> (
+  v: T | null | undefined
+): T extends readonly any[]
+    ? IfAny<T, T[], T>
+    : NonNullable<T>[] {
   return v == null
     ? []
     : Array.isArray(v)
-      ? v : [v]
+      ? v as any : [v]
 }
 
 export function defaultFilter (value: any, search: string | null, item: any) {
@@ -347,6 +431,10 @@ export function getDecimals (value: number) {
 
 export function padEnd (str: string, length: number, char = '0') {
   return str + char.repeat(Math.max(0, length - str.length))
+}
+
+export function padStart (str: string, length: number, char = '0') {
+  return char.repeat(Math.max(0, length - str.length)) + str
 }
 
 export function chunk (str: string, size = 1) {
@@ -549,18 +637,19 @@ export function includes (arr: readonly any[], val: any) {
   return arr.includes(val)
 }
 
-const onRE = /^on[^a-z]/
-export const isOn = (key: string) => onRE.test(key)
+export function eventName (propName: string) {
+  return propName[2].toLowerCase() + propName.slice(3)
+}
 
-export type EventProp<T = (...args: any[]) => any> = T | T[]
-export const EventProp = [Function, Array] as PropType<EventProp>
+export type EventProp<T extends any[] = any[], F = (...args: T) => any> = F | F[]
+export const EventProp = <T extends any[] = any[]>() => [Function, Array] as PropType<EventProp<T>>
 
 export function hasEvent (props: Record<string, any>, name: string) {
   name = 'on' + capitalize(name)
   return !!(props[name] || props[`${name}Once`] || props[`${name}Capture`] || props[`${name}OnceCapture`] || props[`${name}CaptureOnce`])
 }
 
-export function callEvent (handler: EventProp | undefined, ...args: any[]) {
+export function callEvent<T extends any[]> (handler: EventProp<T> | undefined, ...args: T) {
   if (Array.isArray(handler)) {
     for (const h of handler) {
       h(...args)
@@ -568,4 +657,75 @@ export function callEvent (handler: EventProp | undefined, ...args: any[]) {
   } else if (typeof handler === 'function') {
     handler(...args)
   }
+}
+
+export function focusableChildren (el: Element, filterByTabIndex = true) {
+  const targets = ['button', '[href]', 'input:not([type="hidden"])', 'select', 'textarea', '[tabindex]']
+    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled])`)
+    .join(', ')
+  return [...el.querySelectorAll(targets)] as HTMLElement[]
+}
+
+export function getNextElement (elements: HTMLElement[], location?: 'next' | 'prev', condition?: (el: HTMLElement) => boolean) {
+  let _el
+  let idx = elements.indexOf(document.activeElement as HTMLElement)
+  const inc = location === 'next' ? 1 : -1
+  do {
+    idx += inc
+    _el = elements[idx]
+  } while ((!_el || _el.offsetParent == null || !(condition?.(_el) ?? true)) && idx < elements.length && idx >= 0)
+  return _el
+}
+
+export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last' | number) {
+  const focusable = focusableChildren(el)
+
+  if (!location) {
+    if (el === document.activeElement || !el.contains(document.activeElement)) {
+      focusable[0]?.focus()
+    }
+  } else if (location === 'first') {
+    focusable[0]?.focus()
+  } else if (location === 'last') {
+    focusable.at(-1)?.focus()
+  } else if (typeof location === 'number') {
+    focusable[location]?.focus()
+  } else {
+    const _el = getNextElement(focusable, location)
+    if (_el) _el.focus()
+    else focusChild(el, location === 'next' ? 'first' : 'last')
+  }
+}
+
+export function isEmpty (val: any): boolean {
+  return val === null || val === undefined || (typeof val === 'string' && val.trim() === '')
+}
+
+export function noop () {}
+
+/** Returns null if the selector is not supported or we can't check */
+export function matchesSelector (el: Element | undefined, selector: string): boolean | null {
+  const supportsSelector = IN_BROWSER &&
+    typeof CSS !== 'undefined' &&
+    typeof CSS.supports !== 'undefined' &&
+    CSS.supports(`selector(${selector})`)
+
+  if (!supportsSelector) return null
+
+  try {
+    return !!el && el.matches(selector)
+  } catch (err) {
+    return null
+  }
+}
+
+export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildren | null {
+  return vnodes.some(child => {
+    if (!isVNode(child)) return true
+    if (child.type === Comment) return false
+    return child.type !== Fragment ||
+      ensureValidVNode(child.children as VNodeArrayChildren)
+  })
+    ? vnodes
+    : null
 }

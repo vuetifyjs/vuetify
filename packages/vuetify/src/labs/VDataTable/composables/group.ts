@@ -1,31 +1,47 @@
+// Composables
+import { useProxiedModel } from '@/composables/proxiedModel'
+
 // Utilities
 import { computed, inject, provide, ref } from 'vue'
 import { getObjectValueByPath, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
-import type { DataTableItem, GroupHeaderItem } from '../types'
 import type { SortItem } from './sort'
-import { useProxiedModel } from '@/composables/proxiedModel'
+import type { DataTableItem } from '../types'
+
+export interface GroupableItem<T = any> {
+  type: 'item'
+  raw: T
+}
+
+export interface Group<T = any> {
+  type: 'group'
+  depth: number
+  id: string
+  key: string
+  value: any
+  items: readonly (T | Group<T>)[]
+}
 
 export const makeDataTableGroupProps = propsFactory({
   groupBy: {
-    type: Array as PropType<SortItem[]>,
+    type: Array as PropType<readonly SortItem[]>,
     default: () => ([]),
   },
-}, 'data-table-group')
+}, 'DataTable-group')
 
 const VDataTableGroupSymbol: InjectionKey<{
   opened: Ref<Set<string>>
-  toggleGroup: (group: GroupHeaderItem) => void
-  isGroupOpen: (group: GroupHeaderItem) => boolean
+  toggleGroup: (group: Group) => void
+  isGroupOpen: (group: Group) => boolean
   sortByWithGroups: Ref<SortItem[]>
   groupBy: Ref<readonly SortItem[]>
-  extractRows: (items: (DataTableItem | GroupHeaderItem)[]) => DataTableItem[]
+  extractRows: (items: (DataTableItem | Group<DataTableItem>)[]) => DataTableItem[]
 }> = Symbol.for('vuetify:data-table-group')
 
 type GroupProps = {
-  groupBy: SortItem[]
+  groupBy: readonly SortItem[]
   'onUpdate:groupBy': ((value: SortItem[]) => void) | undefined
 }
 
@@ -46,11 +62,11 @@ export function provideGroupBy (options: { groupBy: Ref<readonly SortItem[]>, so
     })).concat(sortBy.value)
   })
 
-  function isGroupOpen (group: GroupHeaderItem) {
+  function isGroupOpen (group: Group) {
     return opened.value.has(group.id)
   }
 
-  function toggleGroup (group: GroupHeaderItem) {
+  function toggleGroup (group: Group) {
     const newOpened = new Set(opened.value)
     if (!isGroupOpen(group)) newOpened.add(group.id)
     else newOpened.delete(group.id)
@@ -58,20 +74,21 @@ export function provideGroupBy (options: { groupBy: Ref<readonly SortItem[]>, so
     opened.value = newOpened
   }
 
-  function extractRows (items: (DataTableItem | GroupHeaderItem)[]) {
-    function dive (group: GroupHeaderItem): DataTableItem[] {
+  function extractRows <T extends GroupableItem> (items: readonly (T | Group<T>)[]) {
+    function dive (group: Group<T>): T[] {
       const arr = []
 
       for (const item of group.items) {
-        if (item.type === 'item') arr.push(item)
-        else {
+        if ('type' in item && item.type === 'group') {
           arr.push(...dive(item))
+        } else {
+          arr.push(item as T)
         }
       }
 
       return arr
     }
-    return dive({ type: 'group-header', items, id: 'dummy', key: 'dummy', value: 'dummy', depth: 0 })
+    return dive({ type: 'group', items, id: 'dummy', key: 'dummy', value: 'dummy', depth: 0 })
   }
 
   // onBeforeMount(() => {
@@ -95,10 +112,10 @@ export function useGroupBy () {
   return data
 }
 
-function groupItemsByProperty (items: DataTableItem[], groupBy: string) {
+function groupItemsByProperty <T extends GroupableItem> (items: readonly T[], groupBy: string) {
   if (!items.length) return []
 
-  const groups = new Map<any, DataTableItem[]>()
+  const groups = new Map<any, T[]>()
   for (const item of items) {
     const value = getObjectValueByPath(item.raw, groupBy)
 
@@ -111,11 +128,11 @@ function groupItemsByProperty (items: DataTableItem[], groupBy: string) {
   return groups
 }
 
-function groupItems (items: DataTableItem[], groupBy: string[], depth = 0, prefix = 'root') {
+function groupItems <T extends GroupableItem> (items: readonly T[], groupBy: readonly string[], depth = 0, prefix = 'root') {
   if (!groupBy.length) return []
 
   const groupedItems = groupItemsByProperty(items, groupBy[0])
-  const groups: GroupHeaderItem[] = []
+  const groups: Group<T>[] = []
 
   const rest = groupBy.slice(1)
   groupedItems.forEach((items, value) => {
@@ -127,19 +144,19 @@ function groupItems (items: DataTableItem[], groupBy: string[], depth = 0, prefi
       key,
       value,
       items: rest.length ? groupItems(items, rest, depth + 1, id) : items,
-      type: 'group-header',
+      type: 'group',
     })
   })
 
   return groups
 }
 
-function flattenItems (items: (DataTableItem | GroupHeaderItem)[], opened: Set<string>) {
-  const flatItems: (DataTableItem | GroupHeaderItem)[] = []
+function flattenItems <T extends GroupableItem> (items: readonly (T | Group<T>)[], opened: Set<string>): readonly (T | Group<T>)[] {
+  const flatItems: (T | Group<T>)[] = []
 
   for (const item of items) {
     // TODO: make this better
-    if (item.type === 'group-header') {
+    if ('type' in item && item.type === 'group') {
       if (item.value != null) {
         flatItems.push(item)
       }
@@ -155,7 +172,11 @@ function flattenItems (items: (DataTableItem | GroupHeaderItem)[], opened: Set<s
   return flatItems
 }
 
-export function useGroupedItems (items: Ref<DataTableItem[]>, groupBy: Ref<readonly SortItem[]>, opened: Ref<Set<string>>) {
+export function useGroupedItems <T extends GroupableItem> (
+  items: Ref<T[]>,
+  groupBy: Ref<readonly SortItem[]>,
+  opened: Ref<Set<string>>
+) {
   const flatItems = computed(() => {
     if (!groupBy.value.length) return items.value
 

@@ -15,6 +15,35 @@
   </v-row>
 </template>
 
+<script setup>
+  import { onMounted, ref } from 'vue'
+
+  const calendar = ref()
+
+  const events = [
+    {
+      name: 'Weekly Meeting',
+      start: '2019-01-07 09:00',
+      end: '2019-01-07 10:00',
+    },
+    {
+      name: `Thomas' Birthday`,
+      start: '2019-01-10',
+    },
+    {
+      name: 'Mash Potatoes',
+      start: '2019-01-09 12:30',
+      end: '2019-01-09 15:30',
+    },
+  ]
+
+  const today = ref('2019-01-08')
+
+  onMounted(() => {
+    calendar.value.scrollToTime('08:00')
+  })
+</script>
+
 <script>
   export default {
     data: () => ({

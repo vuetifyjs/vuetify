@@ -1,5 +1,6 @@
 export default {
   badge: 'Badge',
+  open: 'Ouvrir',
   close: 'Fermer',
   dataIterator: {
     noResultsText: 'Aucun enregistrement correspondant trouvé',
@@ -26,12 +27,21 @@ export default {
     lastPage: 'Dernière page',
     pageText: '{0}-{1} de {2}',
   },
+  dateRangeInput: {
+    divider: 'à',
+  },
   datePicker: {
-    itemsSelected: '{0} sélectionné(s)',
-    nextMonthAriaLabel: 'Le mois prochain',
-    nextYearAriaLabel: `L'année prochaine`,
-    prevMonthAriaLabel: 'Le mois précédent',
-    prevYearAriaLabel: 'Année précédente',
+    ok: 'OK',
+    cancel: 'Annuler',
+    range: {
+      title: 'Sélectionner des dates',
+      header: 'Entrer des dates',
+    },
+    title: 'Sélectionner une date',
+    header: 'Entrer une date',
+    input: {
+      placeholder: 'Entrer une date',
+    },
   },
   noDataText: 'Aucune donnée disponible',
   carousel: {
@@ -45,9 +55,10 @@ export default {
     moreEvents: '{0} de plus',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: 'Vider {0}',
+    prependAction: '{0} action avant',
+    appendAction: '{0} action après',
+    otp: 'Caractère {0} du mot de passe à usage unique',
   },
   fileInput: {
     counter: '{0} fichier(s)',
@@ -64,14 +75,22 @@ export default {
       previous: 'Page précédente',
       page: 'Aller à la page {0}',
       currentPage: 'Page actuelle, Page {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Première page',
+      last: 'Dernière page',
     },
+  },
+  stepper: {
+    next: 'Suivant',
+    prev: 'Précédent',
   },
   rating: {
     ariaLabel: {
       item: 'Note de {0} sur {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Chargement...',
+  infiniteScroll: {
+    loadMore: 'Charger plus',
+    empty: 'Aucune donnée supplémentaire',
+  },
 }

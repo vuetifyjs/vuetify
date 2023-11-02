@@ -2,6 +2,7 @@
 import Alert from '@/components/Alert.vue'
 import ApiInline from '@/components/api/Inline.vue'
 import ApiLinks from '@/components/api/Links.vue'
+import ApiSearch from '@/components/api/Search.vue'
 import ApiSection from '@/components/api/Section.vue'
 import AppBtn from '@/components/app/Btn.vue'
 import AppCaption from '@/components/app/Caption.vue'
@@ -10,9 +11,10 @@ import AppFigure from '@/components/app/Figure.vue'
 import AppHeading from '@/components/app/Heading.vue'
 import AppHeadline from '@/components/app/Headline.vue'
 import AppLink from '@/components/app/Link.vue'
+import AppLinkListItem from '@/components/app/list/LinkListItem.vue'
 import AppMarkdown from '@/components/app/Markdown.vue'
-import AppMenu from '@/components/app/menu/Menu.vue'
 import AppMarkup from '@/components/app/Markup.vue'
+import AppMenu from '@/components/app/menu/Menu.vue'
 import AppSheet from '@/components/app/Sheet.vue'
 import AppTable from '@/components/app/Table.vue'
 import AppTextField from '@/components/app/TextField.vue'
@@ -23,9 +25,11 @@ import BreakpointsTable from '@/components/features/BreakpointsTable.vue'
 import Carbon from '@/components/promoted/Carbon.vue'
 import ColorPalette from '@/components/features/ColorPalette.vue'
 import Discovery from '@/components/promoted/Discovery.vue'
+import DocTabs from '@/components/doc/Tabs.vue'
 import Entry from '@/components/promoted/Entry.vue'
 import Example from '@/components/examples/Example.vue'
 import Inline from '@/components/promoted/Inline.vue'
+import PageFeatures from '@/components/PageFeatures.vue'
 import Promoted from '@/components/promoted/Promoted.vue'
 import Random from '@/components/promoted/Random.vue'
 import Sponsors from '@/components//sponsor/Sponsors.vue'
@@ -36,15 +40,16 @@ import VueFile from '@/components/examples/VueFile.vue'
 import Vuetify from '@/components/promoted/Vuetify.vue'
 
 // Types
-import type { GlobalComponentsPlugin } from '@/types'
+import type { App } from 'vue'
 
-export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
+export function installGlobalComponents (app: App) {
   app
     .component('AppBtn', AppBtn)
     .component('AppCaption', AppCaption)
     .component('AppDivider', AppDivider)
     .component('AppHeading', AppHeading)
     .component('AppHeadline', AppHeadline)
+    .component('AppLinkListItem', AppLinkListItem)
     .component('AppLink', AppLink)
     .component('AppMarkdown', AppMarkdown)
     .component('AppMarkup', AppMarkup)
@@ -62,14 +67,17 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
     .component('ApiInline', ApiInline)
     .component('ApiLinks', ApiLinks)
     .component('ApiSection', ApiSection)
+    .component('ApiSearch', ApiSearch)
     .component('Backmatter', Backmatter)
     .component('BreakpointsTable', BreakpointsTable)
     .component('ColorPalette', ColorPalette)
     .component('Carbon', Carbon)
     .component('Discovery', Discovery)
+    .component('DocTabs', DocTabs)
     .component('Entry', Entry)
     .component('Example', Example)
     .component('Inline', Inline)
+    .component('PageFeatures', PageFeatures)
     .component('Promoted', Promoted)
     .component('Random', Random)
     .component('Sponsors', Sponsors)

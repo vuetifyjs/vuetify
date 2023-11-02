@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-toolbar
-      :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
       border="b"
       class="ps-1"
       flat
@@ -49,9 +48,24 @@
       <v-tooltip location="bottom">
         <template #activator="{ props: activatorProps }">
           <v-btn
-            :icon="!show ? 'mdi-code-tags' : 'mdi-chevron-up'"
             class="me-1 text-medium-emphasis"
             density="comfortable"
+            :href="playgroundLink"
+            icon="$vuetify-play"
+            target="_blank"
+            v-bind="activatorProps"
+          />
+        </template>
+
+        <span>{{ t('edit-in-playground') }}</span>
+      </v-tooltip>
+
+      <v-tooltip location="bottom">
+        <template #activator="{ props: activatorProps }">
+          <v-btn
+            class="me-1 text-medium-emphasis"
+            density="comfortable"
+            :icon="!show ? 'mdi-code-tags' : 'mdi-chevron-up'"
             v-bind="activatorProps"
             @click="show = !show"
           />
@@ -64,7 +78,7 @@
     <v-layout :class="['border-b', !show && 'border-opacity-0']">
       <v-main>
         <v-sheet
-          class="pa-14 d-flex align-center"
+          class="py-14 px-4 d-flex align-center"
           min-height="300"
           rounded="0"
         >
@@ -102,9 +116,13 @@
     </v-layout>
 
     <v-expand-transition>
-      <div v-if="show && display.mdAndUp.value">
-        <div class="pa-3">
+      <div v-if="show">
+        <div class="pa-2">
           <app-markup :code="code" />
+        </div>
+
+        <div v-if="script" class="pa-2 pt-0">
+          <app-markup :code="script" language="js" />
         </div>
       </div>
     </v-expand-transition>
@@ -113,8 +131,9 @@
 
 <script setup>
   // Composables
-  import { useDisplay, useTheme } from 'vuetify'
+  import { useDisplay } from 'vuetify'
   import { useI18n } from 'vue-i18n'
+  import { usePlayground } from '@/composables/playground'
 
   // Utilities
   import { computed, ref } from 'vue'
@@ -132,18 +151,15 @@
       default: () => ([]),
       required: true,
     },
+    script: String,
   })
   const emit = defineEmits(['update:modelValue', 'update:tuneValue'])
 
   const display = useDisplay()
   const { t } = useI18n()
-  const theme = useTheme()
 
   const tune = ref(true)
   const show = ref(true)
-  const isDark = computed(() => {
-    return theme.current.value.dark
-  })
 
   const model = computed({
     get () {
@@ -153,6 +169,13 @@
       emit('update:modelValue', val)
     },
   })
+  const playgroundLink = computed(() => usePlayground([
+    {
+      name: 'template',
+      language: 'html',
+      content: `<template>\n  <v-app>\n    <v-container>\n      ${props.code.replaceAll('\n', '\n      ')}\n    </v-container>\n  </v-app>\n</template>`,
+    },
+  ]))
 </script>
 
 <style lang="sass">

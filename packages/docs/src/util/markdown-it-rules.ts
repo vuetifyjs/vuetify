@@ -1,5 +1,8 @@
+import container from 'markdown-it-container'
+import Token from 'markdown-it/lib/token'
 import type MarkdownIt from 'markdown-it'
 import type Renderer from 'markdown-it/lib/renderer'
+import type { RenderRule } from 'markdown-it/lib/renderer'
 
 function addCodeRules (md: MarkdownIt) {
   const fence = md.renderer.rules.fence
@@ -22,16 +25,24 @@ function addCodeRules (md: MarkdownIt) {
 
     return `<code ${attrs}>${md.utils.escapeHtml(token.content)}</code>`
   }
+
+  createContainer(md, 'error')
+  createContainer(md, 'info')
+  createContainer(md, 'success')
+  createContainer(md, 'warning')
+  createContainer(md, 'tip', 'TIP')
+  createTabs(md)
 }
 
 function addImageRules (md: MarkdownIt) {
   md.renderer.rules.image = (tokens, idx, options, env, self) => {
     const token = tokens[idx]
     const alt = token.content
-    const src = token.attrGet('src')
+    const placeholder = token.attrGet('placeholder') ? 'https://cdn.vuetifyjs.com/docs/images/graphics/placeholder.png' : undefined
+    const src = placeholder ?? token.attrGet('src')
     const title = token.attrGet('title') ?? ''
-    const isEntry = alt.toLowerCase().includes('entry')
-    const height = token.attrGet('height') ?? (isEntry ? 305 : '')
+    // const isEntry = alt.toLowerCase().includes('entry')
+    const height = token.attrGet('height') ?? ''
 
     return `
 <div>
@@ -116,3 +127,95 @@ export default [
   addTableRules,
   addUnderlineRules,
 ]
+
+/**
+ * Inspired by vitepress
+ * https://github.com/vuejs/vitepress/blob/f9cfd16/src/node/markdown/plugins/containers.ts
+ */
+function createContainer (md: MarkdownIt, type: string, title?: string) {
+  md.use(container, type, {
+    render (tokens, idx) {
+      const token = tokens[idx]
+      if (token.nesting === 1) {
+        return `<alert type="${type}">\n` + (title ? `<p><strong>${title}:</strong></p>\n` : '')
+      } else {
+        return `</alert>\n`
+      }
+    },
+  } satisfies { render: RenderRule })
+}
+
+function createTabs (md: MarkdownIt) {
+  // Inject "::: tab" around code blocks
+  md.core.ruler.push('tabs', state => {
+    let inTabs = false
+    let level = 0
+    for (let i = 0; i < state.tokens.length; i++) {
+      const token = state.tokens[i]
+
+      if (token.type === 'container_tabs_open') {
+        inTabs = true
+        level = token.level
+      } else if (token.type === 'container_tabs_close') {
+        inTabs = false
+      } else if (inTabs && token.level === level + 1 && token.type === 'fence' && token.tag === 'code') {
+        const title = extractTitle(token.info)
+        token.level += 1
+        const openToken = new Token('container_tab_open', 'div', 1)
+        openToken.info = ` tab ${title}`
+        openToken.markup = ':::'
+        openToken.block = true
+        openToken.level = level + 1
+        const closeToken = new Token('container_tab_close', 'div', -1)
+        closeToken.level = level + 1
+        closeToken.block = true
+        state.tokens.splice(i, 0, openToken)
+        state.tokens.splice(i + 2, 0, closeToken)
+        i += 2
+      }
+    }
+  })
+
+  md.use(container, 'tabs', {
+    render (tokens, idx) {
+      if (tokens[idx].nesting === 1) {
+        let tabs = ''
+        for (let i = idx + 1; i < tokens.length; i++) {
+          const token = tokens[i]
+
+          if (token.type === 'container_tab_open') {
+            const title = token.info.trim().slice('tab'.length).trim()
+            tabs += `<v-tab value="${title}" variant="plain" class="text-none">${title}</v-tab>\n`
+          } else if (token.type === 'container_tabs_close') break
+        }
+
+        return `<DocTabs>\n<template #tabs>\n${tabs}</template>\n<template #content>\n`
+      } else {
+        return `</template>\n</DocTabs>\n`
+      }
+    },
+  } satisfies { render: RenderRule })
+
+  md.use(container, 'tab', {
+    render (tokens, idx) {
+      if (tokens[idx].nesting === 1) {
+        const title = tokens[idx].info.trim().slice('tab'.length).trim()
+        return `<v-window-item value="${title}">\n`
+      } else {
+        return `\n</v-window-item>\n`
+      }
+    },
+  } satisfies { render: RenderRule })
+}
+
+function extractTitle (info: string) {
+  return info.match(/\[(.*)\]/)?.[1] || extractLang(info) || 'txt'
+}
+
+function extractLang (info: string) {
+  return info
+    .trim()
+    .replace(/:(no-)?line-numbers({| |$).*/, '')
+    .replace(/(-vue|{| ).*$/, '')
+    .replace(/^vue-html$/, 'template')
+}

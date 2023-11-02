@@ -5,8 +5,8 @@ import { VPagination } from '..'
 import { VLocaleProvider } from '@/components/VLocaleProvider'
 
 // Utilities
-import { keyValues } from '@/util'
 import { defineComponent, ref } from 'vue'
+import { keyValues } from '@/util'
 
 describe('VPagination', () => {
   it('should render set length', () => {

@@ -29,7 +29,7 @@
   const clear = ref(false)
   const chips = ref(false)
   const multiple = ref(false)
-  const options = ['solo', 'underlined']
+  const options = ['outlined', 'underlined', 'solo', 'solo-filled', 'solo-inverted']
   const props = computed(() => {
     return {
       clearable: clear.value || undefined,

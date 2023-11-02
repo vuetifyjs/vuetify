@@ -1,6 +1,6 @@
 ---
-nav: Checkboxes
 meta:
+  nav: Checkboxes
   title: Checkbox component
   description: The checkbox component permits users to select between two values.
   keywords: checkbox, checkbox component, vuetify checkbox component, vue checkbox component
@@ -8,15 +8,18 @@ related:
   - /components/switches
   - /components/forms
   - /components/text-fields
+features:
+  label: 'C: VCheckbox'
+  report: true
+  github: /components/VCheckbox/
+  spec: https://m2.material.io/components/checkboxes
 ---
 
 # Checkboxes
 
-The `v-checkbox` component provides users the ability to choose between two distinct values. These are very similar to a switch and can be used in complex forms and checklists. A simpler version, `v-simple-checkbox` is used primarily as a lightweight alternative in data-table components to select rows or display inline boolean data.
+The `v-checkbox` component provides users the ability to choose between two distinct values. These are very similar to a switch and can be used in complex forms and checklists.
 
-<!-- ![checkbox Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-checkbox/v-checkbox-entry.png) -->
-
----
+<page-features />
 
 ## Usage
 
@@ -25,6 +28,12 @@ A `v-checkbox` in its simplest form provides a toggle between 2 values.
 <usage name="v-checkbox" />
 
 <entry />
+
+::: tip
+
+A simpler version, `v-simple-checkbox` is used primarily as a lightweight alternative in data-table components to select rows or display inline boolean data.
+
+:::
 
 ## API
 

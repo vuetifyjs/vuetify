@@ -38,11 +38,63 @@ You can also customize flex utilities to apply based upon various breakpoints.
 
 ### Caveats
 
-<alert type="info">
-
+::: info
 It is important to note that using any of the display classes above will result in any display style previously added being overwritten. This is because of the classes using `!important` in their display styling.
+:::
 
-</alert>
+## Flex shorthand
+
+The flex utility classes can be used to modify the **flex** css property. This makes it easy to position flex items within a flex container.
+
+<example file="flex/flex-flex" />
+
+There are also responsive variations for `flex`:
+
+- **.flex-fill**
+- **.flex-sm-fill**
+- **.flex-md-fill**
+- **.flex-lg-fill**
+- **.flex-xl-fill**
+- **.flex-1-1**
+- **.flex-sm-1-1**
+- **.flex-md-1-1**
+- **.flex-lg-1-1**
+- **.flex-xl-1-1**
+- **.flex-1-0**
+- **.flex-sm-1-0**
+- **.flex-md-1-0**
+- **.flex-lg-1-0**
+- **.flex-xl-1-0**
+- **.flex-0-1**
+- **.flex-sm-0-1**
+- **.flex-md-0-1**
+- **.flex-lg-0-1**
+- **.flex-xl-0-1**
+- **.flex-0-0**
+- **.flex-sm-0-0**
+- **.flex-md-0-0**
+- **.flex-lg-0-0**
+- **.flex-xl-0-0**
+- **.flex-1-1-100**
+- **.flex-sm-1-1-100**
+- **.flex-md-1-1-100**
+- **.flex-lg-1-1-100**
+- **.flex-xl-1-1-100**
+- **.flex-1-0-100**
+- **.flex-sm-1-0-100**
+- **.flex-md-1-0-100**
+- **.flex-lg-1-0-100**
+- **.flex-xl-1-0-100**
+- **.flex-0-1-100**
+- **.flex-sm-0-1-100**
+- **.flex-md-0-1-100**
+- **.flex-lg-0-1-100**
+- **.flex-xl-0-1-100**
+- **.flex-0-0-100**
+- **.flex-sm-0-0-100**
+- **.flex-md-0-0-100**
+- **.flex-lg-0-0-100**
+- **.flex-xl-0-0-100**
 
 ## Flex direction
 

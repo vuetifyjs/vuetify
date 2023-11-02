@@ -1,4 +1,4 @@
-// Utils
+// Utilities
 import { SUPPORTS_INTERSECTION } from '@/util'
 
 // Types

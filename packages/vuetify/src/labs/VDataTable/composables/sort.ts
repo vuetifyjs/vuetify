@@ -1,33 +1,35 @@
 // Composables
+import { useLocale } from '@/composables'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject, provide, toRef } from 'vue'
-import { getObjectValueByPath, propsFactory } from '@/util'
+import { getObjectValueByPath, isEmpty, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
-import type { InternalItem } from '@/composables/items'
-import type { DataTableCompareFunction, DataTableItem, InternalDataTableHeader } from '../types'
+import type { DataTableCompareFunction, InternalDataTableHeader } from '../types'
 
 export const makeDataTableSortProps = propsFactory({
   sortBy: {
-    type: Array as PropType<SortItem[]>,
+    type: Array as PropType<readonly SortItem[]>,
     default: () => ([]),
   },
+  customKeySort: Object as PropType<Record<string, DataTableCompareFunction>>,
   multiSort: Boolean,
   mustSort: Boolean,
-}, 'v-data-table-sort')
+}, 'DataTable-sort')
 
 const VDataTableSortSymbol: InjectionKey<{
   sortBy: Ref<readonly SortItem[]>
-  toggleSort: (key: string) => void
+  toggleSort: (column: InternalDataTableHeader) => void
+  isSorted: (column: InternalDataTableHeader) => boolean
 }> = Symbol.for('vuetify:data-table-sort')
 
 export type SortItem = { key: string, order?: boolean | 'asc' | 'desc' }
 
 type SortProps = {
-  sortBy: SortItem[]
+  sortBy: readonly SortItem[]
   'onUpdate:sortBy': ((value: any) => void) | undefined
   mustSort: boolean
   multiSort: boolean
@@ -49,18 +51,20 @@ export function provideSort (options: {
 }) {
   const { sortBy, mustSort, multiSort, page } = options
 
-  const toggleSort = (key: string) => {
+  const toggleSort = (column: InternalDataTableHeader) => {
+    if (column.key == null) return
+
     let newSortBy = sortBy.value.map(x => ({ ...x })) ?? []
-    const item = newSortBy.find(x => x.key === key)
+    const item = newSortBy.find(x => x.key === column.key)
 
     if (!item) {
-      if (multiSort.value) newSortBy = [...newSortBy, { key, order: 'asc' }]
-      else newSortBy = [{ key, order: 'asc' }]
+      if (multiSort.value) newSortBy = [...newSortBy, { key: column.key, order: 'asc' }]
+      else newSortBy = [{ key: column.key, order: 'asc' }]
     } else if (item.order === 'desc') {
       if (mustSort.value) {
         item.order = 'asc'
       } else {
-        newSortBy = newSortBy.filter(x => x.key !== key)
+        newSortBy = newSortBy.filter(x => x.key !== column.key)
       }
     } else {
       item.order = 'desc'
@@ -70,7 +74,11 @@ export function provideSort (options: {
     if (page) page.value = 1
   }
 
-  const data = { sortBy, toggleSort }
+  function isSorted (column: InternalDataTableHeader) {
+    return !!sortBy.value.find(item => item.key === column.key)
+  }
+
+  const data = { sortBy, toggleSort, isSorted }
 
   provide(VDataTableSortSymbol, data)
 
@@ -85,26 +93,22 @@ export function useSort () {
   return data
 }
 
-export function useSortedItems (items: Ref<DataTableItem[]>, sortBy: Ref<readonly SortItem[]>, columns: Ref<InternalDataTableHeader[]>) {
-  // TODO: Put this in separate prop customKeySort to match filter composable?
-  const customSorters = computed(() => {
-    return columns.value.reduce<Record<string, DataTableCompareFunction>>((obj, item) => {
-      if (item.sort) obj[item.key] = item.sort
-
-      return obj
-    }, {})
-  })
-
+export function useSortedItems <T extends Record<string, any>> (
+  props: { customKeySort?: Record<string, DataTableCompareFunction> },
+  items: Ref<T[]>,
+  sortBy: Ref<readonly SortItem[]>,
+) {
+  const locale = useLocale()
   const sortedItems = computed(() => {
     if (!sortBy.value.length) return items.value
 
-    return sortItems(items.value, sortBy.value, 'en', customSorters.value)
+    return sortItems(items.value, sortBy.value, locale.current.value, props.customKeySort)
   })
 
   return { sortedItems }
 }
 
-export function sortItems<T extends InternalItem> (
+export function sortItems<T extends Record<string, any>> (
   items: T[],
   sortByItems: readonly SortItem[],
   locale: string,
@@ -115,7 +119,7 @@ export function sortItems<T extends InternalItem> (
   return [...items].sort((a, b) => {
     for (let i = 0; i < sortByItems.length; i++) {
       const sortKey = sortByItems[i].key
-      const sortOrder = sortByItems[i].order
+      const sortOrder = sortByItems[i].order ?? 'asc'
 
       if (sortOrder === false) continue
 
@@ -134,19 +138,17 @@ export function sortItems<T extends InternalItem> (
         return customResult
       }
 
-      // Check if both cannot be evaluated
-      if (sortA == null || sortB == null) {
-        continue
-      }
-
       // Dates should be compared numerically
       if (sortA instanceof Date && sortB instanceof Date) {
         return sortA.getTime() - sortB.getTime()
       }
 
-      [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
+      [sortA, sortB] = [sortA, sortB].map(s => s != null ? s.toString().toLocaleLowerCase() : s)
 
       if (sortA !== sortB) {
+        if (isEmpty(sortA) && isEmpty(sortB)) return 0
+        if (isEmpty(sortA)) return -1
+        if (isEmpty(sortB)) return 1
         if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
         return stringCollator.compare(sortA, sortB)
       }

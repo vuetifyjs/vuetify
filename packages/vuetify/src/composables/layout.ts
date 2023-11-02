@@ -12,6 +12,7 @@ import {
   provide,
   reactive,
   ref,
+  shallowRef,
 } from 'vue'
 import { convertToUnit, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory } from '@/util'
 
@@ -117,7 +118,7 @@ export function useLayoutItem (options: {
 
   provide(VuetifyLayoutItemKey, { id })
 
-  const isKeptAlive = ref(false)
+  const isKeptAlive = shallowRef(false)
   onDeactivated(() => isKeptAlive.value = true)
   onActivated(() => isKeptAlive.value = false)
 
@@ -246,7 +247,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
   const rootVm = getCurrentInstance('createLayout')
 
-  const isMounted = ref(false)
+  const isMounted = shallowRef(false)
   onMounted(() => {
     isMounted.value = true
   })
@@ -349,7 +350,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
   ])
 
   const layoutStyles = computed(() => ({
-    zIndex: rootZIndex.value,
+    zIndex: parentLayout ? rootZIndex.value : undefined,
     position: parentLayout ? 'relative' as const : undefined,
     overflow: parentLayout ? 'hidden' : undefined,
   }))

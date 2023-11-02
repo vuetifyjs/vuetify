@@ -26,6 +26,17 @@
   </div>
 </template>
 
+<script setup>
+  import { mergeProps } from 'vue'
+
+  const items = [
+    { title: 'Click Me 1' },
+    { title: 'Click Me 2' },
+    { title: 'Click Me 3' },
+    { title: 'Click Me 4' },
+  ]
+</script>
+
 <script>
   import { mergeProps } from 'vue'
 
@@ -43,7 +54,3 @@
     },
   }
 </script>
-
-<codepen-additional>
-const { mergeProps } = Vue
-</codepen-additional>

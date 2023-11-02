@@ -15,6 +15,9 @@ export const md3: Blueprint = {
     VBanner: {
       color: 'primary',
     },
+    VBottomSheet: {
+      contentClass: 'rounded-t-xl overflow-hidden',
+    },
     VBtn: {
       color: 'primary',
       rounded: 'xl',
@@ -28,6 +31,7 @@ export const md3: Blueprint = {
     },
     VCheckbox: {
       color: 'secondary',
+      inset: true,
     },
     VChip: {
       rounded: 'sm',
@@ -57,6 +61,11 @@ export const md3: Blueprint = {
     },
     VTextField: {
       variant: 'filled',
+    },
+    VToolbar: {
+      VBtn: {
+        color: null,
+      },
     },
   },
   icons: {

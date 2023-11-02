@@ -113,7 +113,7 @@ export function useGroupItem (
   }
 
   const value = toRef(props, 'value')
-  const disabled = computed(() => group.disabled.value || props.disabled)
+  const disabled = computed(() => !!(group.disabled.value || props.disabled))
 
   group.register({
     id,
@@ -310,32 +310,32 @@ function getItemIndex (items: UnwrapRef<GroupItem[]>, value: unknown) {
 }
 
 function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
-  const ids = []
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i]
+  const ids: number[] = []
 
-    if (item.value != null) {
-      if (modelValue.find(value => deepEqual(value, item.value)) != null) {
-        ids.push(item.id)
-      }
-    } else if (modelValue.includes(i)) {
+  modelValue.forEach(value => {
+    const item = items.find(item => deepEqual(value, item.value))
+    const itemByIndex = items[value]
+
+    if (item?.value != null) {
       ids.push(item.id)
+    } else if (itemByIndex != null) {
+      ids.push(itemByIndex.id)
     }
-  }
+  })
 
   return ids
 }
 
 function getValues (items: UnwrapRef<GroupItem[]>, ids: any[]) {
-  const values = []
+  const values: unknown[] = []
 
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i]
-
-    if (ids.includes(item.id)) {
-      values.push(item.value != null ? item.value : i)
+  ids.forEach(id => {
+    const itemIndex = items.findIndex(item => item.id === id)
+    if (~itemIndex) {
+      const item = items[itemIndex]
+      values.push(item.value != null ? item.value : itemIndex)
     }
-  }
+  })
 
   return values
 }

@@ -17,6 +17,27 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const items = [
+    {
+      text: 'Item 1',
+      disabled: false,
+    },
+    {
+      text: 'Item 2',
+      disabled: true,
+    },
+    {
+      text: 'Item 3',
+      disabled: false,
+    },
+  ]
+
+  const model = ref(0)
+</script>
+
 <script>
   export default {
     data: () => ({

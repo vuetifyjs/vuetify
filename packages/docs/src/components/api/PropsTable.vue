@@ -1,11 +1,11 @@
 <template>
   <ApiTable :headers="headers">
-    <template #row="{ props, ...item }">
+    <template #row="{ props, item }">
       <tr v-bind="props">
-        <NameCell section="props" :name="kebabCase(item.name)" />
+        <NameCell section="props" :name="kebabCase(item.name)" :new-in="item.newIn" />
 
         <td>
-          <PrismCell :code="getType(item)" />
+          <PrismCell :code="item.formatted" />
         </td>
 
         <td>
@@ -23,7 +23,6 @@
   import PrismCell from './PrismCell.vue'
 
   // Utilities
-  import { getType } from './utils'
   import { kebabCase } from 'lodash-es'
 
   const headers = ['name', 'type', 'default']

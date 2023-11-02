@@ -27,6 +27,11 @@
   const items = computed(() => ([
     { subheader: t('social') },
     {
+      title: 'X',
+      href: 'https://x.com/vuetifyjs',
+      appendIcon: '$x',
+    },
+    {
       title: 'Discord',
       href: 'https://community.vuetifyjs.com/',
       appendIcon: 'mdi-discord',
@@ -37,11 +42,6 @@
       appendIcon: 'mdi-github',
     },
     {
-      title: 'twitter',
-      href: 'https://twitter.com/vuetifyjs',
-      appendIcon: 'mdi-twitter',
-    },
-    {
       title: 'reddit',
       href: 'https://reddit.com/r/vuetifyjs',
       appendIcon: 'mdi-reddit',
@@ -49,41 +49,44 @@
     { divider: true },
     { subheader: t('tools') },
     {
-      title: 'jobs',
-      to: rpath('/resources/jobs-for-vue/'),
-      appendIcon: 'mdi-briefcase-variant-outline',
+      title: 'awesome',
+      href: 'https://github.com/vuetifyjs/awesome-vuetify',
+      appendIcon: 'mdi-creation-outline',
     },
     {
-      title: 'themes',
-      href: 'https://store.vuetifyjs.com/collections/vuetify-3',
-      appendIcon: 'mdi-shape-outline',
+      title: 'brand-kit',
+      to: rpath('/resources/brand-kit/'),
+      appendIcon: '$vuetify-outline',
     },
     {
-      title: 'ui-kits',
-      to: rpath('/resources/ui-kits/'),
-      appendIcon: 'mdi-vector-difference-ab',
+      title: 'create',
+      href: 'https://tryvuetify.com/',
+      appendIcon: 'mdi-widgets-outline',
+    },
+    {
+      title: 'pastebin',
+      href: 'https://bin.vuetifyjs.com/',
+      appendIcon: 'mdi-delete-outline',
     },
     {
       title: 'playground',
       href: 'https://play.vuetifyjs.com/',
       appendIcon: 'mdi-play-circle-outline',
     },
-    { divider: true },
-    { subheader: t('documentation') },
     {
-      title: '3.x (latest)',
-      href: 'https://vuetifyjs.com/',
-      appendIcon: 'mdi-numeric-3-box',
+      title: 'jobs',
+      to: rpath('/resources/jobs-for-vue/'),
+      appendIcon: 'mdi-briefcase-variant-outline',
     },
     {
-      title: '2.6.x (v2-stable)',
-      href: 'https://v2.vuetifyjs.com/',
-      appendIcon: 'mdi-numeric-2-box',
+      title: 'themes',
+      to: rpath('/resources/themes/'),
+      appendIcon: 'mdi-shape-outline',
     },
     {
-      title: '1.5.x (v1-stable)',
-      href: 'https://v15.vuetifyjs.com/',
-      appendIcon: 'mdi-numeric-1-box',
+      title: 'ui-kits',
+      to: rpath('/resources/ui-kits/'),
+      appendIcon: 'mdi-vector-difference-ab',
     },
   ]))
 </script>

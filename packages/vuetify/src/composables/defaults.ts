@@ -1,9 +1,9 @@
 // Utilities
-import { computed, inject, provide, ref, unref } from 'vue'
-import { mergeDeep } from '@/util'
+import { computed, inject, provide, ref, shallowRef, unref, watchEffect } from 'vue'
+import { getCurrentInstance, injectSelf, mergeDeep, toKebabCase } from '@/util'
 
 // Types
-import type { ComputedRef, InjectionKey, Ref } from 'vue'
+import type { ComputedRef, InjectionKey, Ref, VNode } from 'vue'
 import type { MaybeRef } from '@/util'
 
 export type DefaultsInstance = undefined | {
@@ -19,7 +19,7 @@ export function createDefaults (options?: DefaultsInstance): Ref<DefaultsInstanc
   return ref(options)
 }
 
-export function useDefaults () {
+export function injectDefaults () {
   const defaults = inject(DefaultsSymbol)
 
   if (!defaults) throw new Error('[Vuetify] Could not find defaults instance')
@@ -32,11 +32,11 @@ export function provideDefaults (
   options?: {
     disabled?: MaybeRef<boolean | undefined>
     reset?: MaybeRef<number | string | undefined>
-    root?: MaybeRef<boolean | undefined>
+    root?: MaybeRef<boolean | string | undefined>
     scoped?: MaybeRef<boolean | undefined>
   }
 ) {
-  const injectedDefaults = useDefaults()
+  const injectedDefaults = injectDefaults()
   const providedDefaults = ref(defaults)
 
   const newDefaults = computed(() => {
@@ -47,6 +47,8 @@ export function provideDefaults (
     const scoped = unref(options?.scoped)
     const reset = unref(options?.reset)
     const root = unref(options?.root)
+
+    if (providedDefaults.value == null && !(scoped || reset || root)) return injectedDefaults.value
 
     let properties = mergeDeep(providedDefaults.value, { prev: injectedDefaults.value })
 
@@ -63,6 +65,10 @@ export function provideDefaults (
         properties = properties.prev
       }
 
+      if (properties && typeof root === 'string' && root in properties) {
+        properties = mergeDeep(mergeDeep(properties, { prev: properties }), properties[root])
+      }
+
       return properties
     }
 
@@ -74,4 +80,68 @@ export function provideDefaults (
   provide(DefaultsSymbol, newDefaults)
 
   return newDefaults
+}
+
+function propIsDefined (vnode: VNode, prop: string) {
+  return typeof vnode.props?.[prop] !== 'undefined' ||
+    typeof vnode.props?.[toKebabCase(prop)] !== 'undefined'
+}
+
+export function internalUseDefaults (
+  props: Record<string, any> = {},
+  name?: string,
+  defaults = injectDefaults()
+) {
+  const vm = getCurrentInstance('useDefaults')
+
+  name = name ?? vm.type.name ?? vm.type.__name
+  if (!name) {
+    throw new Error('[Vuetify] Could not determine component name')
+  }
+
+  const componentDefaults = computed(() => defaults.value?.[props._as ?? name])
+  const _props = new Proxy(props, {
+    get (target, prop) {
+      const propValue = Reflect.get(target, prop)
+      if (prop === 'class' || prop === 'style') {
+        return [componentDefaults.value?.[prop], propValue].filter(v => v != null)
+      } else if (typeof prop === 'string' && !propIsDefined(vm.vnode, prop)) {
+        return componentDefaults.value?.[prop] ?? defaults.value?.global?.[prop] ?? propValue
+      }
+      return propValue
+    },
+  })
+
+  const _subcomponentDefaults = shallowRef()
+  watchEffect(() => {
+    if (componentDefaults.value) {
+      const subComponents = Object.entries(componentDefaults.value).filter(([key]) => key.startsWith(key[0].toUpperCase()))
+      _subcomponentDefaults.value = subComponents.length ? Object.fromEntries(subComponents) : undefined
+    } else {
+      _subcomponentDefaults.value = undefined
+    }
+  })
+
+  function provideSubDefaults () {
+    const injected = injectSelf(DefaultsSymbol, vm)
+    provide(DefaultsSymbol, computed(() => {
+      return _subcomponentDefaults.value ? mergeDeep(
+        injected?.value ?? {},
+        _subcomponentDefaults.value
+      ) : injected?.value
+    }))
+  }
+
+  return { props: _props, provideSubDefaults }
+}
+
+export function useDefaults<T extends Record<string, any>> (props: T, name?: string): T
+export function useDefaults (props?: undefined, name?: string): Record<string, any>
+export function useDefaults (
+  props: Record<string, any> = {},
+  name?: string,
+) {
+  const { props: _props, provideSubDefaults } = internalUseDefaults(props, name)
+  provideSubDefaults()
+  return _props
 }

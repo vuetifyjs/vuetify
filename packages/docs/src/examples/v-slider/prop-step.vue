@@ -8,6 +8,12 @@
   ></v-slider>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const value = ref(0)
+</script>
+
 <script>
   export default {
     data () {

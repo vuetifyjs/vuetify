@@ -1,18 +1,18 @@
 // Utilities
-import { inject, provide, ref, watch } from 'vue'
+import { inject, provide, ref, watchEffect } from 'vue'
 import { createRange, propsFactory } from '@/util'
 
 // Types
-import type { InjectionKey, PropType, Ref } from 'vue'
-import type { DataTableHeader, InternalDataTableHeader } from '../types'
+import type { DeepReadonly, InjectionKey, PropType, Ref } from 'vue'
 import type { SortItem } from './sort'
+import type { DataTableHeader, InternalDataTableHeader } from '../types'
 
 export const makeDataTableHeaderProps = propsFactory({
   headers: {
-    type: Array as PropType<DataTableHeader[] | DataTableHeader[][]>,
+    type: Array as PropType<DeepReadonly<DataTableHeader[] | DataTableHeader[][]>>,
     default: () => ([]),
   },
-}, 'v-data-table-header')
+}, 'DataTable-header')
 
 export const VDataTableHeadersSymbol: InjectionKey<{
   headers: Ref<InternalDataTableHeader[][]>
@@ -20,7 +20,7 @@ export const VDataTableHeadersSymbol: InjectionKey<{
 }> = Symbol.for('vuetify:data-table-headers')
 
 type HeaderProps = {
-  headers: DataTableHeader[] | DataTableHeader[][]
+  headers: DeepReadonly<DataTableHeader[] | DataTableHeader[][]>
 }
 
 export function createHeaders (
@@ -34,13 +34,16 @@ export function createHeaders (
   const headers = ref<InternalDataTableHeader[][]>([])
   const columns = ref<InternalDataTableHeader[]>([])
 
-  watch(() => props.headers, () => {
+  watchEffect(() => {
     const wrapped = !props.headers.length
       ? []
       : Array.isArray(props.headers[0])
         ? props.headers as DataTableHeader[][]
         : [props.headers as DataTableHeader[]]
-    const flat = wrapped.flatMap((row, index) => row.map(column => ({ column, row: index })))
+    const flat = wrapped.flatMap((row, index) => row.map(column => ({
+      column,
+      row: index,
+    })))
 
     const rowCount = wrapped.length
     const defaultHeader = { title: '', sortable: false }
@@ -67,18 +70,19 @@ export function createHeaders (
     const fixedRows: InternalDataTableHeader[][] = createRange(rowCount).map(() => [])
     const fixedOffsets = createRange(rowCount).fill(0)
 
-    let count = 0
     flat.forEach(({ column, row }) => {
-      const id = column.key ?? `data-table-column-${count++}`
+      const key = column.key ?? (typeof column.value === 'string' ? column.value : null)
+      const value = column.value ?? column.key ?? null
       for (let i = row; i <= row + (column.rowspan ?? 1) - 1; i++) {
         fixedRows[i].push({
           ...column,
-          key: id,
+          key,
+          value,
           fixedOffset: fixedOffsets[i],
-          sortable: column.sortable ?? !!column.key,
+          sortable: column.sortable ?? key != null,
         })
 
-        fixedOffsets[i] += column.width ?? 0
+        fixedOffsets[i] += Number(column.width ?? 0)
       }
     })
 
@@ -105,9 +109,6 @@ export function createHeaders (
     })
 
     columns.value = fixedRows.at(-1) ?? []
-  }, {
-    deep: true,
-    immediate: true,
   })
 
   const data = { headers, columns }

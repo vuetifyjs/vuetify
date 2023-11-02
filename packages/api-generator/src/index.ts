@@ -6,7 +6,7 @@ import importMapLabs from 'vuetify/dist/json/importMap-labs.json' assert { type:
 import { kebabCase } from './helpers/text'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
 import Piscina from 'piscina'
-import { addDescriptions, addDirectiveDescriptions, stringifyProps } from './utils'
+import { addDescriptions, addDirectiveDescriptions, addPropData, stringifyProps } from './utils'
 import * as os from 'os'
 import mkdirp from 'mkdirp'
 import { createVeturApi } from './vetur'
@@ -14,14 +14,7 @@ import rimraf from 'rimraf'
 import { createWebTypesApi } from './web-types'
 import inspector from 'inspector'
 import yargs from 'yargs'
-import { execSync } from 'child_process'
-import { fileURLToPath } from 'url'
-
-type TranslationData = {
-  [type in 'props' | 'events' | 'slots' | 'exposed']?: {
-    [name in string]?: string
-  }
-}
+import { parseSassVariables } from './helpers/sass'
 
 const yar = yargs(process.argv.slice(2))
   .option('components', {
@@ -33,9 +26,10 @@ const yar = yargs(process.argv.slice(2))
   .option('skip-composables', {
     type: 'boolean',
   })
-  .option('missing-descriptions', {
-    type: 'boolean',
-  })
+
+const reset = '\x1b[0m'
+const red = '\x1b[31m'
+const blue = '\x1b[34m'
 
 const componentsInfo = {
   ...importMap.components,
@@ -44,7 +38,8 @@ const componentsInfo = {
 
 const run = async () => {
   const argv = await yar.argv
-  const locales = ['en']
+
+  const locales = await fs.readdir('./src/locale', 'utf-8')
 
   // Components
   const pool = new Piscina({
@@ -55,6 +50,8 @@ const run = async () => {
 
   const template = await fs.readFile('./templates/component.d.ts', 'utf-8')
 
+  rimraf.sync(path.resolve('./dist'))
+  await fs.mkdir(path.resolve('./dist'))
   await mkdirp('./templates/tmp')
   for (const component in components) {
     // await fs.writeFile(`./templates/tmp/${component}.d.ts`, template.replaceAll('__component__', component))
@@ -64,93 +61,37 @@ const run = async () => {
     )
   }
 
-  const outPath = fileURLToPath(new URL('../../docs/src/api/data/', import.meta.url))
+  const outPath = path.resolve('./dist/api')
+  await mkdirp(outPath)
 
   const componentData = await Promise.all(
-    Object.entries(components).map(([componentName, componentInstance]) => {
+    Object.entries(components).map(async ([componentName, componentInstance]) => {
       if (argv.components && !argv.components.includes(componentName)) return null
 
-      return pool.run(
-        JSON.stringify({
-          componentName,
-          componentProps: stringifyProps(componentInstance.props),
-          locales,
-          outPath,
-        })
-      )
+      const data = await pool.run(componentName)
+      const componentProps = stringifyProps(componentInstance.props)
+      const sources = addPropData(componentName, data, componentProps)
+      await addDescriptions(componentName, data, locales, sources)
+      const sass = parseSassVariables(componentName)
+
+      const component = { displayName: componentName, fileName: kebabCase(componentName), ...data, sass }
+      await fs.writeFile(path.resolve(outPath, `${componentName}.json`), JSON.stringify(component, null, 2))
+
+      return component
     }).filter(Boolean)
   )
-
-  // Missing descriptions
-  if (argv.missingDescriptions) {
-    const currentBranch = execSync('git branch --show-current', { encoding: 'utf-8' }).trim()
-    const translations: { [filename in string]?: TranslationData } = {}
-
-    async function readData (filename: string): Promise<TranslationData> {
-      if (!(filename in translations)) {
-        try {
-          const data = JSON.parse(await fs.readFile(filename, 'utf-8'))
-
-          for (const type of ['props', 'events', 'slots', 'exposed']) {
-            for (const item in data[type] ?? {}) {
-              if (data[type][item].startsWith('MISSING DESCRIPTION')) {
-                delete data[type][item]
-              }
-            }
-          }
-
-          translations[filename] = data
-        } catch (e) {
-          translations[filename] = {}
-        }
-      }
-
-      return translations[filename]
-    }
-
-    for (const component of componentData) {
-      for (const type of ['props', 'events', 'slots', 'exposed']) {
-        for (const name in component[type]) {
-          if (type === 'props' && !component[type][name].source) {
-            console.warn(`Missing source for ${component.kebabName} ${type}: ${name}`)
-          }
-
-          const filename = type === 'props'
-            ? kebabCase(component[type][name].source ?? component.componentName)
-            : component.kebabName
-
-          for (const locale of locales) {
-            const sourceData = await readData(`./src/locale/${locale}/${filename}.json`)
-            const githubUrl = `https://github.com/vuetifyjs/vuetify/tree/${currentBranch}/packages/api-generator/src/locale/${locale}/${filename}.json`
-
-            sourceData[type] ??= {}
-            sourceData[type][name] ??= `MISSING DESCRIPTION ([edit in github](${githubUrl}))`
-          }
-        }
-      }
-    }
-
-    for (const filename in translations) {
-      try {
-        await fs.writeFile(filename, JSON.stringify(translations[filename], null, 2) + '\n')
-      } catch (e: unknown) {
-        console.error(filename, e)
-      }
-    }
-
-    process.exit()
-  }
 
   // Composables
   if (!argv.skipComposables) {
     const composables = await Promise.all(generateComposableDataFromTypes().map(async composable => {
+      console.log(blue, composable.name, reset)
       const kebabName = kebabCase(composable.name)
-      await addDescriptions(composable.name, composable.data, [kebabName], locales)
+      await addDescriptions(composable.name, composable.data, locales)
       return { fileName: kebabName, displayName: composable.name, ...composable }
     }))
 
     for (const { displayName, fileName, data } of composables) {
-      await fs.writeFile(path.resolve(outPath, `${fileName}.json`), JSON.stringify({ displayName, fileName, ...data }, null, 2))
+      await fs.writeFile(path.resolve(outPath, `${displayName}.json`), JSON.stringify({ displayName, fileName, ...data }, null, 2))
     }
   }
 
@@ -158,10 +99,11 @@ const run = async () => {
   let directives: any[] = []
   if (!argv.skipDirectives) {
     directives = await Promise.all(generateDirectiveDataFromTypes().map(async directive => {
-      const kebabName = kebabCase(directive.name)
-      await addDirectiveDescriptions(directive.name, directive, [kebabName], locales)
+      const name = `v-${kebabCase(directive.name)}`
+      console.log(blue, name, reset)
+      await addDirectiveDescriptions(name, directive, locales)
 
-      return { fileName: kebabName, displayName: `v-${kebabName}`, ...directive }
+      return { fileName: name, displayName: name, ...directive }
     }))
 
     for (const { displayName, fileName, ...directive } of directives) {
@@ -169,8 +111,6 @@ const run = async () => {
     }
   }
 
-  rimraf.sync(path.resolve('./dist'))
-  await fs.mkdir(path.resolve('./dist'))
   createVeturApi(componentData)
   createWebTypesApi(componentData, directives)
   await fs.mkdir(path.resolve('../vuetify/dist/json'), { recursive: true })

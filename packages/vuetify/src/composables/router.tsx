@@ -1,5 +1,4 @@
 // Utilities
-import { getCurrentInstance, hasEvent, IN_BROWSER, propsFactory } from '@/util'
 import {
   computed,
   nextTick,
@@ -7,6 +6,7 @@ import {
   resolveDynamicComponent,
   toRef,
 } from 'vue'
+import { getCurrentInstance, hasEvent, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref, SetupContext } from 'vue'

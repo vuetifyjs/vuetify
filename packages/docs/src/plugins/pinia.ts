@@ -3,11 +3,12 @@ import { createPinia } from 'pinia'
 import { markRaw } from 'vue'
 
 // Types
-import type { PiniaPlugin } from '@/types'
+import type { App } from 'vue'
+import type { Router } from 'vue-router'
 
 export const pinia = createPinia()
 
-export const usePinia: PiniaPlugin = ({ app, router }) => {
+export function installPinia (app: App, router: Router) {
   pinia.use(({ store }) => {
     store.router = markRaw(router)
   })

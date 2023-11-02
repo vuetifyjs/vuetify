@@ -6,10 +6,10 @@
     :name="name"
   >
     <div>
-      <v-radio-group v-bind="props">
-        <v-radio label="Radio 1" value="1"></v-radio>
-        <v-radio label="Radio 2" value="2"></v-radio>
-        <v-radio label="Radio 3" value="3"></v-radio>
+      <v-radio-group v-bind="props" hide-details>
+        <v-radio label="Radio One" value="one"></v-radio>
+        <v-radio label="Radio Two" value="two"></v-radio>
+        <v-radio label="Radio Three" value="three"></v-radio>
       </v-radio-group>
     </div>
 
@@ -37,9 +37,9 @@
 
   const slots = computed(() => {
     return `
-  <v-radio label="Radio 1" value="1"></v-radio>
-  <v-radio label="Radio 2" value="2"></v-radio>
-  <v-radio label="Radio 3" value="3"></v-radio>
+  <v-radio label="Radio One" value="one"></v-radio>
+  <v-radio label="Radio Two" value="two"></v-radio>
+  <v-radio label="Radio Three" value="three"></v-radio>
 `
   })
 

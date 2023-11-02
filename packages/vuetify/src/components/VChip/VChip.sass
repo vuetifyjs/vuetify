@@ -8,6 +8,7 @@
   display: inline-flex
   font-weight: $chip-font-weight
   max-width: $chip-max-width
+  min-width: 0
   overflow: hidden
   position: relative
   text-decoration: none
@@ -36,6 +37,15 @@
     @include tools.rounded($chip-label-border-radius)
 
 // Elements
+.v-chip__content
+  align-items: center
+  display: inline-flex
+
+  .v-autocomplete__selection &,
+  .v-combobox__selection &,
+  .v-select__selection &
+    overflow: hidden
+
 .v-chip__filter,
 .v-chip__prepend,
 .v-chip__append,

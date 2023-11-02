@@ -31,6 +31,12 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const color = ref(null)
+</script>
+
 <script>
   export default {
     data: () => ({

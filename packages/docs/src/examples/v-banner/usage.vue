@@ -62,7 +62,7 @@
     return {
       avatar: avatar.value ? 'smirk.png' : undefined,
       color: color.value ? color.value : undefined,
-      icon: icon.value ? 'mdi-vuetify' : undefined,
+      icon: icon.value ? '$vuetify' : undefined,
       lines: model.value !== 'default' ? model.value.toLocaleLowerCase().split(' ')[0] : undefined,
       text: '...',
       stacked: stacked.value,

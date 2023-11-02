@@ -1,65 +1,59 @@
 /* eslint-disable sonarjs/no-identical-functions */
 /// <reference types="../../../../types/cypress" />
 
-import { ref } from 'vue'
-import { Application } from '../../../../cypress/templates'
+// Components
 import { VForm } from '../'
+import { Application } from '../../../../cypress/templates'
 import { VBtn } from '@/components/VBtn'
 import { VTextField } from '@/components/VTextField'
+
+// Utilities
+import { ref } from 'vue'
+
+// Types
 import type { SubmitEventPromise } from '@/composables'
 
 describe('VForm', () => {
-  it('should emit when inputs are updated', () => {
+  it('emits when inputs are updated', () => {
     cy.mount(() => (
       <Application>
         <VForm>
-          <VTextField label="Name" rules={[v => v.length > 10 || 'Name should be longer than 10 characters']}></VTextField>
+          <VTextField label="Name" rules={[v => v?.length > 10 || 'Name should be longer than 10 characters']}></VTextField>
         </VForm>
       </Application>
     ))
 
-    cy.get('.v-text-field').type('Something')
     cy.emitted(VForm, 'update:modelValue')
-      .then(emits => {
-        expect(emits).to.deep.equal([
-          [false],
-        ])
-      })
-      .get('.v-text-field').type(' and something else')
+      .should('be.undefined')
+    cy.get('.v-text-field').type('Something!!')
     cy.emitted(VForm, 'update:modelValue')
-      .then(emits => {
-        expect(emits).to.deep.equal([
-          [false],
-          [true],
-        ])
-      })
+      .should('deep.equal', [[false], [true]])
+    cy.get('.v-text-field').type('{backspace}{backspace}')
+    cy.emitted(VForm, 'update:modelValue')
+      .should('deep.equal', [[false], [true], [false]])
   })
 
-  it('should only emit true if all inputs are explicitly valid', () => {
+  it('only emits true if all inputs are explicitly valid', () => {
     cy.mount(() => (
       <Application>
         <VForm>
-          <VTextField label="Name" rules={[v => v.length < 10 || 'Name should be longer than 10 characters']}></VTextField>
-          <VTextField label="Email" rules={[v => v.length < 10 || 'E-mail should be longer than 10 characters']}></VTextField>
+          <VTextField label="Name" rules={[v => v?.length < 10 || 'Name should be longer than 10 characters']}></VTextField>
+          <VTextField label="Email" rules={[v => v?.length < 10 || 'E-mail should be longer than 10 characters']}></VTextField>
         </VForm>
       </Application>
     ))
 
+    cy.emitted(VForm, 'update:modelValue')
+      .should('be.undefined')
     cy.get('.v-text-field').eq(0).type('Valid')
     cy.emitted(VForm, 'update:modelValue')
-      .then(emits => {
-        expect(emits).to.be.undefined
-      })
-      .get('.v-text-field').eq(1).type('Valid')
+      .should('be.undefined')
+    cy.get('.v-text-field').eq(1).type('Valid')
     cy.emitted(VForm, 'update:modelValue')
-      .then(emits => {
-        expect(emits).to.deep.equal([
-          [true],
-        ])
-      })
+      .should('deep.equal', [[true]])
   })
 
-  it('should expose validate function', () => {
+  it('exposes validate function', () => {
     const form = ref()
     cy.mount(() => (
       <Application>
@@ -77,12 +71,12 @@ describe('VForm', () => {
       .get('.v-text-field').should('have.class', 'v-input--error')
   })
 
-  it('should expose reset function', () => {
+  it('exposes reset function', () => {
     const form = ref()
     cy.mount(() => (
       <Application>
         <VForm ref={ form }>
-          <VTextField label="Name" rules={[v => v.length > 10 || 'Name should be longer than 10 characters']}></VTextField>
+          <VTextField label="Name" rules={[v => v?.length > 10 || 'Name should be longer than 10 characters']}></VTextField>
         </VForm>
       </Application>
     ))
@@ -90,46 +84,42 @@ describe('VForm', () => {
     cy.get('.v-text-field')
       .type('Something')
       .should('have.class', 'v-input--error')
-      .emitted(VForm, 'update:modelValue')
-      .then(emits => {
-        expect(emits).to.deep.equal([[false]])
-      })
-      .get('.v-form').then(() => {
-        form.value.reset()
-      })
-      .get('.v-text-field').should('have.not.class', 'v-input--error').find('input').should('have.value', '')
-      .emitted(VForm, 'update:modelValue')
-      .then(emits => {
-        expect(emits).to.deep.equal([[false], [null]])
-      })
+    cy.get('.v-form').then(() => {
+      form.value.reset()
+    })
+    cy.get('.v-text-field')
+      .should('have.not.class', 'v-input--error')
+      .find('input')
+      .should('have.value', '')
   })
 
-  it('should expose resetValidation function', () => {
+  it('exposes resetValidation function', () => {
     const form = ref()
     cy.mount(() => (
       <Application>
         <VForm ref={ form }>
-          <VTextField label="Name" rules={[v => v.length > 10 || 'Name should be longer than 10 characters']}></VTextField>
+          <VTextField label="Name" rules={[v => v?.length > 10 || 'Name should be longer than 10 characters']}></VTextField>
         </VForm>
       </Application>
     ))
 
-    cy.get('.v-text-field').type('Something').should('have.class', 'v-input--error')
-      .emitted(VForm, 'update:modelValue')
-      .then(emits => {
-        expect(emits).to.deep.equal([[false]])
-      })
-      .get('.v-form').then(() => {
-        form.value.resetValidation()
-      })
-      .get('.v-text-field').should('have.not.class', 'v-input--error').find('input').should('have.value', 'Something')
-      .emitted(VForm, 'update:modelValue')
-      .then(emits => {
-        expect(emits).to.deep.equal([[false], [null]])
-      })
+    cy.get('.v-text-field')
+      .type('Something')
+      .should('have.class', 'v-input--error')
+    cy.emitted(VForm, 'update:modelValue')
+      .should('deep.equal', [[false]])
+    cy.get('.v-form').then(() => {
+      form.value.resetValidation()
+    })
+    cy.get('.v-text-field')
+      .should('have.not.class', 'v-input--error')
+      .find('input')
+      .should('have.value', 'Something')
+    cy.emitted(VForm, 'update:modelValue')
+      .should('deep.equal', [[false], [null]])
   })
 
-  it('should not submit form if validation fails', () => {
+  it('does not submit form if validation fails', () => {
     cy.mount(() => (
       <VForm action="/action">
         <VTextField rules={[v => !!v || 'Field required']} />
@@ -141,7 +131,7 @@ describe('VForm', () => {
       .get('.v-text-field').should('have.class', 'v-input--error').find('.v-messages').should('have.text', 'Field required')
   })
 
-  it('should emit a SubmitEventPromise', () => {
+  it('emits a SubmitEventPromise', () => {
     cy.mount(() => (
       <Application>
         <VForm action="/action" onSubmit={ onSubmit }>
@@ -163,13 +153,13 @@ describe('VForm', () => {
       })
   })
 
-  it('should expose errors reactively', () => {
+  it('exposes errors reactively', () => {
     const form = ref()
 
     cy.mount(() => (
       <Application>
         <VForm ref={ form }>
-          <VTextField rules={[v => v.length < 4 || 'Error']} />
+          <VTextField rules={[v => v?.length < 4 || 'Error']} />
         </VForm>
       </Application>
     ))
@@ -186,10 +176,49 @@ describe('VForm', () => {
       })
   })
 
+  it('provides validate-on prop to child inputs', () => {
+    const form = ref()
+
+    cy.mount(() => (
+      <Application>
+        <VForm ref={ form } validateOn="lazy">
+          <VTextField name="empty" rules={[v => v?.length > 5 || 'Error']} modelValue="" />
+        </VForm>
+      </Application>
+    ))
+
+    cy.then(() => {
+      expect(form.value.isValid).to.be.null
+    })
+      .get('.v-text-field').should('not.have.class', 'v-input--error')
+      .get('.v-text-field input')
+      .type('Hello')
+      .then(() => {
+        expect(form.value.isValid).to.be.false
+      })
+      .get('.v-text-field').should('have.class', 'v-input--error')
+  })
+
+  it('validates inputs to true if there are no rules', () => {
+    const model = ref(false)
+    cy.mount(() => (
+      <Application>
+        <VForm v-model={ model.value }>
+          <VTextField></VTextField>
+          <VTextField rules={[]}></VTextField>
+        </VForm>
+      </Application>
+    ))
+
+    cy.then(() => {
+      expect(model.value).to.be.true
+    })
+  })
+
   // TODO: This test has to be the last one,
   // because subsequent tests in the same file
   // will break due to the page change
-  it('should submit form if validation passes', () => {
+  it('submits form if validation passes', () => {
     cy.mount(() => (
       <VForm action="/__cypress/src/action">
         <VTextField modelValue="foo" rules={[v => !!v || 'Field required']} />

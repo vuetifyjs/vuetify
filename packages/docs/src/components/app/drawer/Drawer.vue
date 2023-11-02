@@ -2,55 +2,73 @@
   <v-navigation-drawer
     id="app-drawer"
     v-model="app.drawer"
+    :rail="railEnabled"
+    :expand-on-hover="railEnabled"
+    :image="image"
     :order="mobile ? -1 : undefined"
     width="300"
+    @update:rail="onUpdateRail"
   >
-    <template #append>
-      <v-divider />
-
-      <div class="text-medium-emphasis text-caption py-2 px-3 d-flex align-center">
-        <div class="d-inline-flex align-center">
-          <v-icon start>mdi-label</v-icon>
-          Latest release:
-        </div>
-
-        <v-btn
-          :href="`https://github.com/vuetifyjs/vuetify/releases/tag/v${version}`"
-          class="text-none px-2 ms-auto"
-          density="compact"
-          rel="noopener noreferrer"
-          target="_blank"
-          variant="text"
-        >
-          v{{ version }}
-
-          <v-icon size="xs" end>mdi-open-in-new</v-icon>
-        </v-btn>
-      </div>
-    </template>
-
-    <app-list :items="app.items" nav>
+    <app-list v-model:opened="opened" :items="app.items" nav>
       <template #divider>
         <v-divider class="my-3 mb-4 ms-16" />
       </template>
     </app-list>
+
+    <template #append>
+      <app-drawer-append />
+    </template>
   </v-navigation-drawer>
 </template>
 
 <script setup>
   // Components
+  import AppDrawerAppend from './Append.vue'
   import AppList from '@/components/app/list/List.vue'
 
   // Composables
-  import { useAppStore } from '@/store/app'
-  import { useDisplay, version } from 'vuetify'
+  import { useDisplay, useTheme } from 'vuetify'
 
   // Utilities
-  import { onMounted } from 'vue'
+  import { computed, onMounted, ref, watch } from 'vue'
   import { wait } from '@/util/helpers'
 
+  // Stores
+  import { useAppStore } from '@/store/app'
+  import { useUserStore } from '@/store/user'
+
   const app = useAppStore()
+  const user = useUserStore()
+
   const { mobile } = useDisplay()
+  const theme = useTheme()
+
+  const railEnabled = computed(() => user.railDrawer)
+
+  const rail = ref(railEnabled.value)
+  const _opened = ref([])
+  const opened = computed({
+    get: () => rail.value ? [] : _opened.value,
+    set: val => {
+      _opened.value = val
+    },
+  })
+
+  watch(railEnabled, val => {
+    rail.value = val
+  })
+
+  function onUpdateRail (val) {
+    if (railEnabled.value) {
+      rail.value = val
+    }
+  }
+
+  const image = computed(() => {
+    if (['dark', 'light'].includes(theme.name.value)) return undefined
+
+    return `https://cdn.vuetifyjs.com/docs/images/themes/${theme.name.value}-app-drawer.png`
+  })
 
   onMounted(async () => {
     await wait(1000)
@@ -60,7 +78,6 @@
     if (!element) return
 
     element.scrollIntoView({
-      behavior: 'smooth',
       block: 'center',
       inline: 'center',
     })

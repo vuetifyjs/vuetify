@@ -134,6 +134,20 @@
             </template>
           </div>
         </template>
+
+        <v-chip
+          v-if="member.joined"
+          :text="t('joined', { date: member.joined })"
+          border
+          prepend-icon="mdi-calendar"
+          label
+          size="small"
+          variant="text"
+        >
+          <template #prepend>
+            <v-icon color="medium-emphasis" size="small" />
+          </template>
+        </v-chip>
       </div>
     </div>
   </v-lazy>
@@ -171,10 +185,10 @@
 
     if (props.member.twitter) {
       links.push({
-        color: '#40BBF4',
-        href: `https://twitter.com/${props.member.twitter}`,
-        icon: 'mdi-twitter',
-        tooltip: 'Twitter',
+        color: '#212121',
+        href: `https://x.com/${props.member.twitter}`,
+        icon: '$x',
+        tooltip: 'X',
       })
     }
 

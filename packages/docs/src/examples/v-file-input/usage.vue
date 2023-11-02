@@ -24,7 +24,7 @@
 
   const name = 'v-file-input'
   const model = ref('default')
-  const options = ['solo', 'underlined']
+  const options = ['outlined', 'underlined', 'solo', 'solo-filled', 'solo-inverted']
   const clear = ref(false)
   const counter = ref(false)
   const disabled = ref(false)

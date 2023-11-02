@@ -4,25 +4,21 @@
   "trailingSlash": true,
   "rewrites": [
     {
-      "source": "/eo-UY/(.*)",
-      "destination": "/_crowdin"
-    },
-    {
       "source": "/(.*)",
       "destination": "$1"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!assets/).*)",
       "destination": "/_fallback"
     }
   ],
   "headers": [
     {
-      "source": "/service-worker.js",
+      "source": "/(.*)",
       "headers" : [
         {
           "key" : "Cache-Control",
-          "value" : "public, max-age=0, must-revalidate"
+          "value" : "public, max-age=3600, must-revalidate"
         }
       ]
     },
@@ -36,11 +32,15 @@
       ]
     },
     {
-      "source": "/(.*)",
+      "source": "/service-worker.js",
       "headers" : [
         {
           "key" : "Cache-Control",
-          "value" : "public, max-age=3600, must-revalidate"
+          "value" : "public, max-age=0, s-maxage=0, must-revalidate"
+        },
+        {
+          "key" : "CDN-Cache-Control",
+          "value" : "max-age=0"
         }
       ]
     }

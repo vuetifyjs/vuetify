@@ -1,7 +1,11 @@
 /// <reference types="../../../../types/cypress" />
 
-import { Application } from '../../../../cypress/templates'
+// Components
 import { VDataTable } from '..'
+import { Application } from '../../../../cypress/templates'
+
+// Utilities
+import { ref } from 'vue'
 
 const DESSERT_HEADERS = [
   { title: 'Dessert (100g serving)', key: 'name' },
@@ -127,7 +131,8 @@ describe('VDataTable', () => {
 
     const headers = [
       {
-        key: 'foo.bar',
+        key: 'unique',
+        value: 'foo.bar',
         title: 'Column',
       },
     ]
@@ -178,5 +183,163 @@ describe('VDataTable', () => {
       .then(() => {
         expect(onClick).to.be.calledOnce
       })
+  })
+
+  it('should show no-data-text if there are no items', () => {
+    cy.mount(() => (
+      <Application>
+        <VDataTable items={[]} headers={ DESSERT_HEADERS } />
+      </Application>
+    ))
+
+    cy.get('.v-data-table tbody tr').should('have.text', 'No data available')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/17226
+  it('should change page if we are trying to display a page beyond current page count', () => {
+    const items = ref(DESSERT_ITEMS.slice())
+    cy.mount(() => (
+      <Application>
+        <VDataTable items={ items.value } headers={ DESSERT_HEADERS } itemsPerPage={ 5 }></VDataTable>
+      </Application>
+    ))
+
+    cy.get('[aria-label="Next page"]')
+      .click()
+      .then(() => {
+        items.value = DESSERT_ITEMS.slice(0, 5)
+      })
+      .emitted(VDataTable, 'update:page')
+      .should('deep.equal', [[2], [1]])
+  })
+
+  describe('slots', () => {
+    it('should have top slot', () => {
+      cy.mount(() => (
+        <Application>
+          <VDataTable>
+            {{
+              top: _ => <div id="top">TOP</div>,
+            }}
+          </VDataTable>
+        </Application>
+      ))
+
+      cy.get('.v-data-table').find('#top').should('have.text', 'TOP')
+    })
+
+    it('should have bottom slot (and should overwrite footer)', () => {
+      cy.mount(() => (
+        <Application>
+          <VDataTable>
+            {{
+              bottom: _ => <div id="bottom">BOTTOM</div>,
+            }}
+          </VDataTable>
+        </Application>
+      ))
+
+      cy.get('.v-data-table').find('#bottom').should('have.text', 'BOTTOM')
+      cy.get('.v-data-table-footer').should('not.exist')
+    })
+
+    it('should have headers slot (and overwrite default headers)', () => {
+      cy.mount(() => (
+        <Application>
+          <VDataTable>
+            {{
+              headers: _ => <div id="headers">headers</div>,
+            }}
+          </VDataTable>
+        </Application>
+      ))
+
+      cy.get('.v-data-table').find('#headers').should('have.text', 'headers')
+      cy.get('.v-data-table__th').should('not.exist')
+    })
+
+    it('should have colgroup slot', () => {
+      cy.mount(() => (
+        <Application>
+          <VDataTable items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS }>
+            {{
+              colgroup: ({ columns }) => (
+                <colgroup>
+                  { columns.map(column => (
+                    <col id={ column.key! }></col>
+                  ))}
+                </colgroup>
+              ),
+            }}
+          </VDataTable>
+        </Application>
+      ))
+
+      cy.get('colgroup').should('exist')
+    })
+
+    it('should have column.* slots', () => {
+      cy.mount(() => (
+        <Application>
+          <VDataTable items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS } showSelect showExpand>
+            {{
+              'column.data-table-expand': () => <h1>expand</h1>,
+              'column.data-table-select': () => <h2>select</h2>,
+              'column.name': ({ column }) => (
+                <h3>{ column.title }</h3>
+              ),
+            }}
+          </VDataTable>
+        </Application>
+      ))
+
+      cy.get('.v-data-table__th').find('h1').should('exist')
+      cy.get('.v-data-table__th').find('h2').should('exist')
+      cy.get('.v-data-table__th').find('h3').should('exist')
+    })
+
+    it('should have item slot', () => {
+      cy.mount(() => (
+        <Application>
+          <VDataTable items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS } itemsPerPage={ 10 }>
+            {{
+              item: ({ columns, internalItem }) => (
+                <tr class="custom-row">
+                  { columns.map(column => (
+                    column.key != null ? (
+                      <td>
+                        <h1>{ internalItem.columns[column.key] }</h1>
+                      </td>
+                    ) : null
+                  ))}
+                </tr>
+              ),
+            }}
+          </VDataTable>
+        </Application>
+      ))
+
+      cy.get('.custom-row').should('have.length', 10)
+    })
+
+    it('should have item.* slots', () => {
+      cy.mount(() => (
+        <Application>
+          <VDataTable items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS } showSelect showExpand>
+            {{
+              'item.data-table-expand': () => <h1>expand</h1>,
+              'item.data-table-select': () => <h2>select</h2>,
+              'item.name': ({ value }) => (
+                <h3>{ value }</h3>
+              ),
+            }}
+          </VDataTable>
+        </Application>
+      ))
+
+      cy.get('.v-data-table').find('h1').should('exist')
+      cy.get('.v-data-table').find('h2').should('exist')
+      cy.get('.v-data-table').find('h3').should('exist')
+    })
   })
 })

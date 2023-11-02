@@ -35,6 +35,15 @@
   </v-row>
 </template>
 
+<script setup>
+  const bars = [
+    { class: '' },
+    { class: '', dark: true },
+    { class: 'primary', dark: true },
+    { class: 'elevation-0' },
+  ]
+</script>
+
 <script>
   export default {
     data: () => ({

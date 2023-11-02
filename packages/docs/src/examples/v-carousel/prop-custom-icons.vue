@@ -31,6 +31,23 @@
   </v-card>
 </template>
 
+<script setup>
+  const colors = [
+    'green',
+    'secondary',
+    'yellow darken-4',
+    'red lighten-2',
+    'orange darken-1',
+  ]
+  const slides = [
+    'First',
+    'Second',
+    'Third',
+    'Fourth',
+    'Fifth',
+  ]
+</script>
+
 <script>
   export default {
     data () {

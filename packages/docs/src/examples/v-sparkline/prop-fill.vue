@@ -107,6 +107,25 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const gradients = [
+    ['#222'],
+    ['#42b3f4'],
+    ['red', 'orange', 'yellow'],
+    ['purple', 'violet'],
+    ['#00c6ff', '#F0F', '#FF0'],
+    ['#f72047', '#ffd200', '#1feaea'],
+  ]
+  const fill = ref(true)
+  const selectedGradient = ref(gradients[4])
+  const padding = ref(8)
+  const radius = ref(10)
+  const value = ref([0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0])
+  const width = ref(2)
+</script>
+
 <script>
   const gradients = [
     ['#222'],

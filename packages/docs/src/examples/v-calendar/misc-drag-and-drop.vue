@@ -17,10 +17,10 @@
           @mouseup:time="endDrag"
           @mouseleave="cancelDrag"
         >
-          <template v-slot:event="{ event, timed, eventSummary }">
-            <div class="v-event-draggable">
+          <template v-slot:event="{ event, timed /*, eventSummary */ }">
+            <!--<div class="v-event-draggable">
               <component :is="{ render: eventSummary }"></component>
-            </div>
+            </div>-->
             <div
               v-if="timed"
               class="v-event-drag-bottom"

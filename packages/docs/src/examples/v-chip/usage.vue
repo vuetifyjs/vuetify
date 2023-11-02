@@ -44,8 +44,8 @@
       block: block.value || undefined,
       closable: closable.value || undefined,
       stacked: stacked.value || undefined,
-      'prepend-icon': prepend.value ? 'mdi-vuetify' : undefined,
-      'append-icon': append.value ? 'mdi-vuetify' : undefined,
+      'prepend-icon': prepend.value ? '$vuetify' : undefined,
+      'append-icon': append.value ? '$vuetify' : undefined,
       variant: variants.includes(model.value) ? model.value : undefined,
     }
   })

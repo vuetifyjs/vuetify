@@ -1,5 +1,6 @@
 <template>
   <app-btn
+    v-if="!hasToggle"
     :icon="icon"
     color="medium-emphasis"
     path="theme"
@@ -25,6 +26,7 @@
     ? 'mdi-weather-night'
     : 'mdi-weather-sunny'
   )
+  const hasToggle = computed(() => !['dark', 'light'].includes(theme.name.value))
 
   function onClick () {
     gtagClick('app-bar', 'theme-toggle', name)

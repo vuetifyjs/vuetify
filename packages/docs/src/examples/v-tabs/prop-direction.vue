@@ -91,6 +91,12 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const tab = ref('option-1')
+</script>
+
 <script>
   export default {
     data: () => ({

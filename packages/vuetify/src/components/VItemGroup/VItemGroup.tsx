@@ -2,26 +2,40 @@
 import './VItemGroup.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { Suspense } from 'vue'
-import { genericComponent } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 export const VItemGroupSymbol = Symbol.for('vuetify:v-item-group')
 
-export const VItemGroup = genericComponent()({
+export const makeVItemGroupProps = propsFactory({
+  ...makeComponentProps(),
+  ...makeGroupProps({
+    selectedClass: 'v-item--selected',
+  }),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'VItemGroup')
+
+type VItemGroupSlots = {
+  default: {
+    isSelected: (id: number) => boolean
+    select: (id: number, value: boolean) => void
+    next: () => void
+    prev: () => void
+    selected: readonly number[]
+  }
+}
+
+export const VItemGroup = genericComponent<VItemGroupSlots>()({
   name: 'VItemGroup',
 
-  props: {
-    ...makeGroupProps({
-      selectedClass: 'v-item--selected',
-    }),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVItemGroupProps(),
 
   emits: {
     'update:modelValue': (value: any) => true,
@@ -36,7 +50,9 @@ export const VItemGroup = genericComponent()({
         class={[
           'v-item-group',
           themeClasses.value,
+          props.class,
         ]}
+        style={ props.style }
       >
         <Suspense>
           <>

@@ -1,8 +1,8 @@
 {
   "props": {
-    "selectStrategy": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/nested.json))",
-    "openStrategy": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/nested.json))",
-    "opened": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/nested.json))",
-    "selected": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/nested.json))"
+    "opened": "An array containing the values of currently opened groups. Can be two-way bound with `v-model:opened`.",
+    "openStrategy": "Affects how items with children behave when expanded.\n- **multiple:** Any number of groups can be open at once.\n- **single:** Only one group at each level can be open, opening a group will cause others to close.\n- **list:** Multiple, but all other groups will close when an item is selected.",
+    "selected": "An array containing the values of currently selected items. Can be two-way bound with `v-model:selected`.",
+    "selectStrategy": "Affects how items with children behave when selected.\n- **leaf:** Only leaf nodes (items without children) can be selected.\n- **independent:** All nodes can be selected whether they have children or not.\n- **classic:** Selecting a parent node will cause all children to be selected, parent nodes will be displayed as selected if all their descendants are selected. Only leaf nodes will be added to the model."
   }
 }

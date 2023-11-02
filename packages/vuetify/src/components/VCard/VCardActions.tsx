@@ -1,16 +1,16 @@
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-// Types
-import type { SlotsToProps } from '@/util'
-
-export const VCardActions = defineComponent<SlotsToProps<{ default: [] }>>({
+export const VCardActions = genericComponent()({
   name: 'VCardActions',
 
-  setup (_, { slots }) {
+  props: makeComponentProps(),
+
+  setup (props, { slots }) {
     provideDefaults({
       VBtn: {
         variant: 'text',
@@ -18,7 +18,13 @@ export const VCardActions = defineComponent<SlotsToProps<{ default: [] }>>({
     })
 
     useRender(() => (
-      <div class="v-card-actions">
+      <div
+        class={[
+          'v-card-actions',
+          props.class,
+        ]}
+        style={ props.style }
+      >
         { slots.default?.() }
       </div>
     ))

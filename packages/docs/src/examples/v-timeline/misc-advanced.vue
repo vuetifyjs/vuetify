@@ -150,6 +150,30 @@
   </v-container>
 </template>
 
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const events = ref([])
+  const input = ref(null)
+  const nonce = ref(0)
+
+  const timeline = computed(() => {
+    return events.value.slice().reverse()
+  })
+
+  function comment () {
+    const time = (new Date()).toTimeString()
+    events.value.push({
+      id: nonce.value++,
+      text: input.value,
+      time: time.replace(/:\d{2}\sGMT-\d{4}\s\((.*)\)/, (match, contents, offset) => {
+        return ` ${contents.split(' ').map(v => v.charAt(0)).join('')}`
+      }),
+    })
+    input.value = null
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

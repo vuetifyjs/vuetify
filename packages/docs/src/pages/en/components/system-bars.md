@@ -1,6 +1,6 @@
 ---
-nav: System bars
 meta:
+  nav: System bars
   title: System-bar component
   description: The system bar component creates an android style status bar that rests on the very top of your application.
   keywords: system bars, vuetify system bar component, vue system bar component, android status bar, status bar
@@ -8,6 +8,11 @@ related:
   - /components/buttons/
   - /components/toolbars/
   - /components/tabs/
+features:
+  figma: true
+  label: 'C: VSystemBar'
+  report: true
+  github: /components/VSystemBar/
 ---
 
 # System bars
@@ -16,7 +21,7 @@ The `v-system-bar` component can be used for displaying statuses to the user. It
 
 ![System Bar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-system-bar/v-system-bar-entry.png)
 
----
+<page-features />
 
 ## Usage
 

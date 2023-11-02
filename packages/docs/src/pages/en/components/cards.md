@@ -1,6 +1,6 @@
 ---
-nav: Cards
 meta:
+  nav: Cards
   title: Card component
   description: The v-card component is a versatile and enhanced sheet of paper that provides a simple interface for headings, text, images, and actions.
   keywords: cards, vuetify card component, vue card component, v-card
@@ -8,15 +8,21 @@ related:
   - /components/buttons
   - /components/images
   - /styles/text-and-typography
+features:
+  figma: true
+  label: 'C: VCard'
+  github: /components/VCard/
+  report: true
+  spec: https://m2.material.io/components/cards
 ---
 
 # Cards
 
- The `v-card` component is a versatile an enhanced version of [v-sheet](/components/sheets/) that provides a simple interface for headings, text, images, icons, and more <inline slug="scrimba-cards" />
+ The `v-card` component is a versatile and enhanced version of [v-sheet](/components/sheets/) that provides a simple interface for headings, text, images, icons, and more.
 
 ![Card Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-card/v-card-entry.png)
 
----
+<page-features />
 
 ## Usage
 
@@ -69,23 +75,40 @@ Use slots if you need to render more complex content. If you need full control o
 
 In some cases it is possible to combine the different options, like the example below where props, slots and markup have all been used.
 
-<alert type="info">
-
+::: info
   In general slots take precedence over props. So if you provide both **text** prop and use **text** slot, then only the slot content will be rendered.
-
-</alert>
+:::
 
 <example file="v-card/basics-combine" />
+
+### Content overflow
+
+`v-card` does not allow its content to overflow outside the card by default. It also establishes a z-index stacking context, which prevents its content from displaying on top of elements outside the `v-card`, even when it sets a higher z-index value. To override this default behavior, apply the following usage: `<v-card style="overflow: initial; z-index: initial">`.
 
 ## Examples
 
 ### Props
 
-#### Outlined
+#### Variants
 
-A card with the **variant** prop set to `outlined` has zero elevation.
+The **variant** prop gives you easy access to several different card styles. Available variants are: **elevated**(default), **flat**, **tonal**, **outlined**, **text**, and **plain**.
 
-<example file="v-card/prop-outlined" />
+| Value        | Description                                                 |
+|--------------|-------------------------------------------------------------|
+| **elevated** | Elevates the card with a shadow                             |
+| **flat**     | Removes card shadow and border                              |
+| **tonal**    | Background color is a lowered opacity of the color          |
+| **outlined** | Applies a thin border and card has zero elevation           |
+| **text**     | Removes the background and removes shadow                   |
+| **plain**    | Removes the background and lowers the opacity until hovered |
+
+<example file="v-card/prop-variant" />
+
+#### Color
+
+Cards can be colored by using any of the builtin colors and contextual names using the **color** prop.
+
+<example file="v-card/prop-color" />
 
 ### Misc
 

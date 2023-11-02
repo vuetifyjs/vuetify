@@ -1,6 +1,6 @@
 ---
-nav: Click outside
 meta:
+  nav: Click outside
   title: Click outside directive
   description: The v-click-outside directive calls a function when something outside of the target element is clicked on.,
   keywords: click outside, click directive, vue click directive, vuetify click directives

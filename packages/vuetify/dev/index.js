@@ -1,16 +1,17 @@
+import App from './App.vue'
+import vuetify from './vuetify'
+
+import { createHead } from '@vueuse/head'
+import { routes } from './router'
+import viteSSR from 'vite-ssr/vue'
+
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 
-import viteSSR from 'vite-ssr/vue'
-import { createHead } from '@vueuse/head'
-import App from './App.vue'
-import vuetify from './vuetify'
-import { routes } from './router'
-
 library.add(fas)
 
-viteSSR(App, { routes }, ({ app }) => {
+export default viteSSR(App, { routes }, ({ app }) => {
   const head = createHead()
 
   // app.config.performance = true

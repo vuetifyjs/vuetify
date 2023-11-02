@@ -1,5 +1,6 @@
 export default {
   badge: 'Distintivo',
+  open: 'Apri',
   close: 'Chiudi',
   dataIterator: {
     noResultsText: 'Nessun risultato trovato',
@@ -26,28 +27,38 @@ export default {
     lastPage: 'Ultima pagina',
     pageText: '{0}-{1} di {2}',
   },
+  dateRangeInput: {
+    divider: 'a',
+  },
   datePicker: {
-    itemsSelected: '{0} selezionati',
-    nextMonthAriaLabel: 'Il prossimo mese',
-    nextYearAriaLabel: `L'anno prossimo`,
-    prevMonthAriaLabel: 'Il mese scorso',
-    prevYearAriaLabel: `L'anno scorso`,
+    ok: 'OK',
+    cancel: 'Annulla',
+    range: {
+      title: 'Seleziona date',
+      header: 'Inserisci date',
+    },
+    title: 'Seleziona data',
+    header: 'Inserisci data',
+    input: {
+      placeholder: 'Inserisci data',
+    },
   },
   noDataText: 'Nessun elemento disponibile',
   carousel: {
     prev: 'Vista precedente',
     next: 'Prossima vista',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} di {1}',
+      delimiter: 'Slide carosello {0} di {1}',
     },
   },
   calendar: {
     moreEvents: '{0} di più',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: 'Cancella {0}',
+    prependAction: 'Azione precedente {0}',
+    appendAction: 'Azione successiva {0}',
+    otp: 'Inserisci il codice OTP {0}',
   },
   fileInput: {
     counter: '{0} file',
@@ -64,14 +75,22 @@ export default {
       previous: 'Pagina precedente',
       page: 'Vai alla pagina {0}',
       currentPage: 'Pagina corrente, pagina {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Prima pagina',
+      last: 'Ultima pagina',
     },
+  },
+  stepper: {
+    next: 'Successivo',
+    prev: 'Precedente',
   },
   rating: {
     ariaLabel: {
       item: 'Valutazione {0} di {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Caricamento...',
+  infiniteScroll: {
+    loadMore: 'Carica altro',
+    empty: 'Nessun elemento',
+  },
 }

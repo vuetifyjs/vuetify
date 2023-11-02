@@ -1,5 +1,6 @@
 export default {
   badge: 'Odznaka',
+  open: 'Otwórz',
   close: 'Zamknij',
   dataIterator: {
     noResultsText: 'Nie znaleziono danych odpowiadających wyszukiwaniu',
@@ -26,12 +27,21 @@ export default {
     lastPage: 'Ostatnia strona',
     pageText: '{0}-{1} z {2}',
   },
+  dateRangeInput: {
+    divider: 'do',
+  },
   datePicker: {
-    itemsSelected: '{0} dat(y)',
-    nextMonthAriaLabel: 'Następny miesiąc',
-    nextYearAriaLabel: 'Następny rok',
-    prevMonthAriaLabel: 'Poprzedni miesiąc',
-    prevYearAriaLabel: 'Poprzedni rok',
+    ok: 'OK',
+    cancel: 'Anuluj',
+    range: {
+      title: 'Wybór zakresu dat',
+      header: 'Wprowadź zakres dat',
+    },
+    title: 'Wybór daty',
+    header: 'Wprowadź datę',
+    input: {
+      placeholder: 'Wprowadź datę',
+    },
   },
   noDataText: 'Brak danych',
   carousel: {
@@ -48,6 +58,7 @@ export default {
     clear: 'Wyczyść {0}',
     prependAction: '{0} dodatkowa akcja',
     appendAction: '{0} dodatkowa akcja',
+    otp: 'Proszę wprowadzić znak nr {0}',
   },
   fileInput: {
     counter: 'Liczba plików: {0}',
@@ -68,10 +79,18 @@ export default {
       last: 'Ostatnia strona',
     },
   },
+  stepper: {
+    next: 'Następny',
+    prev: 'Poprzedni',
+  },
   rating: {
     ariaLabel: {
       item: 'Ocena {0} na {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Wczytywanie danych...',
+  infiniteScroll: {
+    loadMore: 'Wczytaj więcej',
+    empty: 'Brak kolejnych danych',
+  },
 }

@@ -1,20 +1,20 @@
 <template>
   <component :is="tag" class="v-markdown">
-    <component :is="{ template: markdown }" />
+    <component :is="template" />
   </component>
 </template>
 
 <script setup>
   // Utilities
   import { computed } from 'vue'
-  import MarkdownIt from 'markdown-it'
   import { configureMarkdown } from '@/util/markdown-it'
+  import MarkdownIt from 'markdown-it'
 
   const md = configureMarkdown(MarkdownIt({
     html: true,
     linkify: true,
     typographer: true,
-  }))
+  }), { headerSections: false })
 
   md.core.ruler.after('linkify', 'gh_links', state => {
     const blockTokens = state.tokens
@@ -95,6 +95,13 @@
     }
   })
 
+  const fence = md.renderer.rules.fence
+  md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+    return fence(tokens, idx, options, env, self)
+      .replaceAll('{{', '&lbrace;&lbrace;')
+      .replaceAll('}}', '&rbrace;&rbrace;')
+  }
+
   const props = defineProps({
     tag: {
       type: String,
@@ -104,4 +111,5 @@
   })
 
   const markdown = computed(() => md.render(props.content, {}))
+  const template = computed(() => ({ template: markdown.value }))
 </script>

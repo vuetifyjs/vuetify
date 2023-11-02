@@ -13,15 +13,23 @@ related:
 
 Stuck on a particular problem? Check some of these common gotchas before creating a ticket. If you still cannot find what you are looking for, you can submit an [issue](https://issues.vuetifyjs.com/) on GitHub or ask in our [community](https://community.vuetifyjs.com/).
 
-<entry />
+<promoted slug="discord-subscriber-help" />
 
 ## Questions
 
-<promoted slug="vuetify-discord" />
+The following responses are a collection of common questions asked by the Vuetify community.
 
 * **What is Vuetify?** { #what-is-vuetify }
 
   Vuetify is a Vue.js framework that helps to create beautiful and responsive user interfaces. It includes a wide variety of customizable and reusable components for building modern applications.
+
+* **Does Vuetify provide support?** { #does-vuetify-provide-support }
+
+  Vuetify is a free to use Open Source project released under the [MIT](http://opensource.org/licenses/MIT) license. There are multiple ways to receive support for Vuetify:
+
+  * Join our [Discord Community](https://community.vuetifyjs.com/) - (Free/Paid)
+  * Ask a question on [GitHub Discussions](https://discussions.vuetifyjs.com/) - (Free)
+  * Get [Direct Support](/introduction/enterprise-support/) from Vuetify - (Paid)
 
 * **What is the difference between Vuetify and Vue?** { #what-is-the-difference-between-vuetify-and-vue }
 
@@ -29,7 +37,7 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 
 * **What versions of Vue.js are compatible with Vuetify?** { #what-versions-of-vuejs-are-compatible-with-vuetify }
 
-  Vuetify is compatible with Vue.js 2.6.0 and above.
+  Vuetify is compatible with Vue.js 3.0.0 and above.
 
 * **Can I use Vuetify with other CSS frameworks?** { #can-i-use-vuetify-with-other-css-frameworks }
 
@@ -65,6 +73,26 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 
 * **Is there still support for IE11 in Vuetify 3?** { #is-there-still-support-for-ie11-in-vuetify-3 }
 
-  No. If you need to support IE11, you will need to use Vuetify 2.
+  No. If you need to support IE11, use [Vuetify 2](https://v2.vuetifyjs.com/).
+
+* **Is there support for Nuxt 3?** { #is-there-support-for-nuxt-3 }
+
+  Yes, Vuetify 3 is compatible with Nuxt 3 but does not currently have a community Nuxt module.
+
+* **What is Vuetify Labs?** { #what-is-vuetify-labs }
+
+  Vuetify Labs is a collection of components that are still in development. They are not considered stable and may change at any time. They are not included in the default Vuetify installation and must be imported individually. See the [Labs](/labs/introduction/) page for more information.
+
+* **Does Vuetify have Nightly Builds?** { #does-vuetify-have-nightly-builds }
+
+  Yes, Vuetify has nightly builds. See the [Nightly Builds](/getting-started/installation/#nightly-builds) page for more information.
+
+* **I found a bug, what should I do?** { #i-found-a-bug-what-should-i-do }
+
+  Please create a new [issue](https://issues.vuetifyjs.com/) with our Issue Generator. Please make sure to check for existing issues before creating a new one.
+
+* **Why did Vuetify 3 change `value` to `model-value`?**
+
+  The `value` prop was changed in Vue 3 to support a new `v-model` syntax. See the official Vue docs for more information on [Component v-model](https://vuejs.org/guide/components/v-model.html).
 
 <promoted type="theme" />

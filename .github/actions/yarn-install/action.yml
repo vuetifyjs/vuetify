@@ -1,0 +1,17 @@
+name: Yarn install
+description: Restore node_modules and cache, then run yarn install
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/cache@v2
+      with:
+        path: |
+          node_modules
+          **/node_modules
+          /home/runner/.config/yarn
+          /home/runner/.cache/yarn
+          /home/runner/.cache/Cypress
+        key: yarn-${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+    - run: yarn --frozen-lockfile --non-interactive
+      shell: bash

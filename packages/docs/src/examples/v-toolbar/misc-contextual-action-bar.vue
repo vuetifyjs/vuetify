@@ -57,6 +57,14 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const items = ['Foo', 'Bar', 'Fizz', 'Buzz']
+
+  const selection = ref([])
+</script>
+
 <script>
   export default {
     data: () => ({

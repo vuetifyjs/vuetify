@@ -42,24 +42,6 @@ declare module 'markdown-it-link-attributes' {
 
 declare module 'markdown-it-emoji/bare.js'
 
-declare module 'cosmicjs' {
-  interface Cosmic<T> {
-    bucket (params: {
-      slug: string
-      read_key: string
-      write_key?: string
-    }): Bucket<T>
-  }
-  interface BucketObjects<T> {
-    [key: string]: (params: Record<string, any> | string | number) => BucketObjects<T>
-    objects?: T[]
-  }
-  interface Bucket<T> {
-    objects: BucketObjects<T>
-  }
-  export default function Cosmic<T> (): Cosmic<T>
-}
-
 declare module 'virtual:examples' {
   import type { Component } from 'vue'
 

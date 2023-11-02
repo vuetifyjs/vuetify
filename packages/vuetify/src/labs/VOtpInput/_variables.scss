@@ -1,0 +1,11 @@
+@use '../../styles/settings';
+@use '../../styles/tools';
+
+$otp-input-content-gap: .5rem !default;
+$otp-input-content-height: 64px !default;
+$otp-input-content-max-width: 320px !default;
+$otp-input-content-padding: .5rem !default;
+$otp-input-divided-content-max-width: 360px !default;
+$otp-input-divider-margin: 0 8px !default;
+$otp-input-field-font-size: 1.25rem !default;
+$otp-input-padding: .5rem 0 !default;

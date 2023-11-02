@@ -29,6 +29,12 @@
       />
     </template>
 
+    <template #subtitle="{ item }">
+      <span v-if="item.subtitle" class="text-high-emphasis">
+        {{ item.subtitle }}
+      </span>
+    </template>
+
     <template #subheader="{ props: subheaderProps }">
       <slot
         name="subheader"
@@ -59,6 +65,7 @@
 
   export type Item = {
     title?: string
+    subtitle?: string
     appendIcon?: string
     activeIcon?: string
     inactiveIcon?: string
@@ -69,18 +76,20 @@
     href?: string
     subfolder?: string
     disabled?: boolean
+    routeMatch?: string
+    routePath?: string
   }
 
   function generateApiItems (locale: string) {
     return (routes as RouteRecordRaw[])
       .filter(route => route.path.includes(`${locale}/api/`))
-      .sort((a, b) => a.path.localeCompare(b.path))
       .map(route => {
         return {
           title: (route.meta!.title as string).slice(0, -4),
           to: route.path,
         }
       })
+      .sort((a, b) => a.title.localeCompare(b.title))
   }
 
   function generateListItem (item: string | Item, path = '', locale = 'en', t = (key: string) => key): any {
@@ -94,12 +103,19 @@
 
       if (litem.subfolder) path = litem.subfolder
 
-      const route = routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.title}/`))
+      const route = litem.routeMatch
+        ? routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.routeMatch}/`))
+        : routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.title}/`))
+
+      const to = litem.routePath
+        ? `/${locale}/${path}/${litem.routePath}/`
+        : route?.path
 
       return {
         title: route?.meta?.nav ?? route?.meta?.title ?? litem.title,
+        subtitle: litem.subtitle && te(litem.subtitle) ? t(litem.subtitle) : litem.subtitle,
         emphasized: route?.meta?.emphasized ?? false,
-        to: route?.path,
+        to,
         disabled: !route,
       }
     } else if (item.divider) {

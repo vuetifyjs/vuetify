@@ -1,0 +1,25 @@
+@use './variables' as *
+
+.v-infinite-scroll--horizontal
+  display: flex
+  flex-direction: row
+  overflow-x: auto
+
+  .v-infinite-scroll-intersect
+    height: 100%
+    width: 1px
+
+.v-infinite-scroll--vertical
+  display: flex
+  flex-direction: column
+  overflow-y: auto
+
+  .v-infinite-scroll-intersect
+    height: 1px
+    width: 100%
+
+.v-infinite-scroll__side
+  align-items: center
+  display: flex
+  justify-content: center
+  padding: $infinite-scroll-side-padding

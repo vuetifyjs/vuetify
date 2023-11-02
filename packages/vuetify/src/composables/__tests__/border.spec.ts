@@ -2,8 +2,8 @@
 import { makeBorderProps, useBorder } from '../border'
 
 // Utilities
-import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
 
 // Types
 import type { BorderProps } from '../border'

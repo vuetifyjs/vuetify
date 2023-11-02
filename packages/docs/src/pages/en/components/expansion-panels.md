@@ -1,6 +1,6 @@
 ---
-nav: Expansion panels
 meta:
+  nav: Expansion panels
   title: Expansion panel component
   description: The expansion panel component is a lightweight container that hides information behind expandable and contractable containers.
   keywords: expansion panels, vuetify expansion panel component, vue expansion panel component
@@ -8,6 +8,11 @@ related:
   - /components/cards/
   - /components/data-tables/basics/
   - /components/lists/
+features:
+  github: /components/VExpansionPanel/
+  label: 'C: VExpansionPanels'
+  report: true
+  spec: https://m1.material.io/components/expansion-panels.html
 ---
 
 # Expansion panels
@@ -16,7 +21,7 @@ The `v-expansion-panel` component is useful for reducing vertical space with lar
 
 <!-- ![expansion-panels Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-expansion-panels/v-expansion-panels-entry.png) -->
 
----
+<page-features />
 
 ## Usage
 

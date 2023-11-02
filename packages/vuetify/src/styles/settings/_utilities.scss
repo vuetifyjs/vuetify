@@ -58,7 +58,17 @@ $utilities: () !default;
       "flex": (
         responsive: true,
         property: flex,
-        values: (fill: 1 1 auto)
+        values: (
+          fill: 1 1 auto,
+          '1-1': 1 1 auto,
+          '1-0': 1 0 auto,
+          '0-1': 0 1 auto,
+          '0-0': 0 0 auto,
+          '1-1-100': 1 1 100%,
+          '1-0-100': 1 0 100%,
+          '0-1-100': 0 1 100%,
+          '0-0-100': 0 0 100%
+        )
       ),
       "flex-direction": (
         responsive: true,

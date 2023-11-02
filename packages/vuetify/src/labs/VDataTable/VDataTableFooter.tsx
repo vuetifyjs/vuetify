@@ -6,83 +6,95 @@ import { VBtn } from '@/components/VBtn'
 import { VSelect } from '@/components/VSelect'
 
 // Composables
-import { useLocale } from '@/composables/locale'
 import { usePagination } from './composables/paginate'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { InternalItem } from '@/composables/items'
 
-export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
+export const makeVDataTableFooterProps = propsFactory({
+  prevIcon: {
+    type: String,
+    default: '$prev',
+  },
+  nextIcon: {
+    type: String,
+    default: '$next',
+  },
+  firstIcon: {
+    type: String,
+    default: '$first',
+  },
+  lastIcon: {
+    type: String,
+    default: '$last',
+  },
+  itemsPerPageText: {
+    type: String,
+    default: '$vuetify.dataFooter.itemsPerPageText',
+  },
+  pageText: {
+    type: String,
+    default: '$vuetify.dataFooter.pageText',
+  },
+  firstPageLabel: {
+    type: String,
+    default: '$vuetify.dataFooter.firstPage',
+  },
+  prevPageLabel: {
+    type: String,
+    default: '$vuetify.dataFooter.prevPage',
+  },
+  nextPageLabel: {
+    type: String,
+    default: '$vuetify.dataFooter.nextPage',
+  },
+  lastPageLabel: {
+    type: String,
+    default: '$vuetify.dataFooter.lastPage',
+  },
+  itemsPerPageOptions: {
+    type: Array as PropType<readonly (number | { title: string, value: number })[]>,
+    default: () => ([
+      { value: 10, title: '10' },
+      { value: 25, title: '25' },
+      { value: 50, title: '50' },
+      { value: 100, title: '100' },
+      { value: -1, title: '$vuetify.dataFooter.itemsPerPageAll' },
+    ]),
+  },
+  showCurrentPage: Boolean,
+}, 'VDataTableFooter')
+
+export const VDataTableFooter = genericComponent<{ prepend: never }>()({
   name: 'VDataTableFooter',
 
-  props: {
-    prevIcon: {
-      type: String,
-      default: '$prev',
-    },
-    nextIcon: {
-      type: String,
-      default: '$next',
-    },
-    firstIcon: {
-      type: String,
-      default: '$first',
-    },
-    lastIcon: {
-      type: String,
-      default: '$last',
-    },
-    itemsPerPageText: {
-      type: String,
-      default: '$vuetify.dataFooter.itemsPerPageText',
-    },
-    pageText: {
-      type: String,
-      default: '$vuetify.dataFooter.pageText',
-    },
-    firstPageLabel: {
-      type: String,
-      default: '$vuetify.dataFooter.firstPage',
-    },
-    prevPageLabel: {
-      type: String,
-      default: '$vuetify.dataFooter.prevPage',
-    },
-    nextPageLabel: {
-      type: String,
-      default: '$vuetify.dataFooter.nextPage',
-    },
-    lastPageLabel: {
-      type: String,
-      default: '$vuetify.dataFooter.lastPage',
-    },
-    itemsPerPageOptions: {
-      type: Array as PropType<InternalItem[]>,
-      default: () => ([
-        { value: 10, title: '10' },
-        { value: 25, title: '25' },
-        { value: 50, title: '50' },
-        { value: 100, title: '100' },
-        { value: -1, title: '$vuetify.dataFooter.itemsPerPageAll' },
-      ]),
-    },
-    showCurrentPage: Boolean,
-  },
+  props: makeVDataTableFooterProps(),
 
   setup (props, { slots }) {
     const { t } = useLocale()
     const { page, pageCount, startIndex, stopIndex, itemsLength, itemsPerPage, setItemsPerPage } = usePagination()
 
     const itemsPerPageOptions = computed(() => (
-      props.itemsPerPageOptions.map(option => ({
-        ...option,
-        title: t(option.title),
-      }))
+      props.itemsPerPageOptions.map(option => {
+        if (typeof option === 'number') {
+          return {
+            value: option,
+            title: option === -1
+              ? t('$vuetify.dataFooter.itemsPerPageAll')
+              : String(option),
+          }
+        }
+
+        return {
+          ...option,
+          title: t(option.title),
+        }
+      })
     ))
 
     return () => (

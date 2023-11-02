@@ -2,64 +2,66 @@
 import './VTabs.sass'
 
 // Components
-import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'
 import { VTab } from './VTab'
+import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'
 
 // Composables
-import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeTagProps } from '@/composables/tag'
-import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
+import { provideDefaults } from '@/composables/defaults'
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, isObject, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import { VTabsSymbol } from './shared'
 
-export type TabItem = string | Record<string, any>
+export type TabItem = string | number | Record<string, any>
 
-function parseItems (items: TabItem[] | undefined) {
+function parseItems (items: readonly TabItem[] | undefined) {
   if (!items) return []
 
   return items.map(item => {
-    if (typeof item === 'string') return { title: item, value: item }
+    if (!isObject(item)) return { text: item, value: item }
 
     return item
   })
 }
 
+export const makeVTabsProps = propsFactory({
+  alignTabs: {
+    type: String as PropType<'start' | 'title' | 'center' | 'end'>,
+    default: 'start',
+  },
+  color: String,
+  fixedTabs: Boolean,
+  items: {
+    type: Array as PropType<readonly TabItem[]>,
+    default: () => ([]),
+  },
+  stacked: Boolean,
+  bgColor: String,
+  grow: Boolean,
+  height: {
+    type: [Number, String],
+    default: undefined,
+  },
+  hideSlider: Boolean,
+  sliderColor: String,
+
+  ...makeVSlideGroupProps({ mandatory: 'force' as const }),
+  ...makeDensityProps(),
+  ...makeTagProps(),
+}, 'VTabs')
+
 export const VTabs = genericComponent()({
   name: 'VTabs',
 
-  props: {
-    alignTabs: {
-      type: String as PropType<'start' | 'title' | 'center' | 'end'>,
-      default: 'start',
-    },
-    color: String,
-    fixedTabs: Boolean,
-    items: {
-      type: Array as PropType<TabItem[]>,
-      default: () => ([]),
-    },
-    stacked: Boolean,
-    bgColor: String,
-    grow: Boolean,
-    height: {
-      type: [Number, String],
-      default: undefined,
-    },
-    hideSlider: Boolean,
-    sliderColor: String,
-
-    ...makeVSlideGroupProps({ mandatory: 'force' as const }),
-    ...makeDensityProps(),
-    ...makeTagProps(),
-  },
+  props: makeVTabsProps(),
 
   emits: {
     'update:modelValue': (v: unknown) => true,
@@ -100,16 +102,18 @@ export const VTabs = genericComponent()({
             },
             densityClasses.value,
             backgroundColorClasses.value,
+            props.class,
           ]}
           style={[
             { '--v-tabs-height': convertToUnit(props.height) },
             backgroundColorStyles.value,
+            props.style,
           ]}
           role="tablist"
           symbol={ VTabsSymbol }
         >
           { slots.default ? slots.default() : parsedItems.value.map(item => (
-            <VTab { ...item } key={ item.title } />
+            <VTab { ...item } key={ item.text } />
           ))}
         </VSlideGroup>
       )

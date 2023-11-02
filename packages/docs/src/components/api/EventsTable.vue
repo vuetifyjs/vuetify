@@ -1,11 +1,11 @@
 <template>
   <ApiTable :headers="headers">
-    <template #row="{ props, ...item }">
+    <template #row="{ props, item }">
       <tr v-bind="props">
-        <NameCell section="events" :name="item.name" />
+        <NameCell section="events" :name="item.name" :new-in="item.newIn" />
 
         <td>
-          <PrismCell :code="getType(item)" />
+          <PrismCell :code="item.formatted" />
         </td>
       </tr>
     </template>
@@ -17,9 +17,6 @@
   import ApiTable from './ApiTable.vue'
   import NameCell from './NameCell.vue'
   import PrismCell from './PrismCell.vue'
-
-  // Utilities
-  import { getType } from './utils'
 
   const headers = ['name', 'type']
 </script>

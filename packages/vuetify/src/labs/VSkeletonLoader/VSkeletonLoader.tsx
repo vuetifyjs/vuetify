@@ -2,15 +2,15 @@
 import './VSkeletonLoader.sass'
 
 // Composables
+import { useBackgroundColor } from '@/composables/color'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { genericComponent, useRender, wrapInArray } from '@/util'
+import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -19,9 +19,6 @@ type VSkeletonBone<T> = T | VSkeletonBone<T>[]
 
 export type VSkeletonBones = VSkeletonBone<VNode>
 export type VSkeletonLoaderType = keyof typeof rootTypes
-export type VSkeletonLoaderSlots = {
-  default: []
-}
 
 export const rootTypes = {
   actions: 'button@2',
@@ -34,6 +31,7 @@ export const rootTypes = {
   'date-picker': 'list-item, heading, divider, date-picker-options, date-picker-days, actions',
   'date-picker-options': 'text, avatar@2',
   'date-picker-days': 'avatar@28',
+  divider: 'divider',
   heading: 'heading',
   image: 'image',
   'list-item': 'text',
@@ -42,6 +40,7 @@ export const rootTypes = {
   'list-item-avatar-two-line': 'avatar, sentences',
   'list-item-three-line': 'paragraph',
   'list-item-avatar-three-line': 'avatar, paragraph',
+  ossein: 'ossein',
   paragraph: 'text@3',
   sentences: 'text@2',
   subtitle: 'text',
@@ -107,26 +106,31 @@ function mapBones (bones: string) {
   return bones.replace(/\s/g, '').split(',').map(genStructure)
 }
 
-export const VSkeletonLoader = genericComponent<VSkeletonLoaderSlots>()({
+export const makeVSkeletonLoaderProps = propsFactory({
+  boilerplate: Boolean,
+  color: String,
+  loading: Boolean,
+  loadingText: {
+    type: String,
+    default: '$vuetify.loading',
+  },
+  type: {
+    type: [String, Array] as PropType<
+      | VSkeletonLoaderType | (string & {})
+      | ReadonlyArray<VSkeletonLoaderType | (string & {})>
+    >,
+    default: 'ossein',
+  },
+
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeThemeProps(),
+}, 'VSkeletonLoader')
+
+export const VSkeletonLoader = genericComponent()({
   name: 'VSkeletonLoader',
 
-  props: {
-    boilerplate: Boolean,
-    color: String,
-    loading: Boolean,
-    loadingText: {
-      type: String,
-      default: '$vuetify.loading',
-    },
-    type: {
-      type: [String, Array] as PropType<VSkeletonLoaderType | VSkeletonLoaderType[]>,
-      default: 'image',
-    },
-
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVSkeletonLoaderProps(),
 
   setup (props, { slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))

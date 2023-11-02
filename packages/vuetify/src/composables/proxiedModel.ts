@@ -1,7 +1,9 @@
+// Composables
+import { useToggleScope } from '@/composables/toggleScope'
+
 // Utilities
 import { computed, ref, toRaw, watch } from 'vue'
 import { getCurrentInstance, toKebabCase } from '@/util'
-import { useToggleScope } from '@/composables/toggleScope'
 
 // Types
 import type { Ref } from 'vue'

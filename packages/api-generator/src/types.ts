@@ -1,5 +1,6 @@
 import type { Node, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
+import { prettifyType } from './utils'
 
 const project = new Project({
   tsConfigFilePath: './tsconfig.json',
@@ -13,9 +14,12 @@ function inspect (project: Project, node?: Node<ts.Node>) {
   if (kind === ts.SyntaxKind.TypeAliasDeclaration) {
     const definition = generateDefinition(node, [], project) as ObjectDefinition
     if (definition.properties) {
-      // Exclude private properties
-      definition.properties = Object.fromEntries(Object.entries(definition.properties)
-        .filter(([name]) => !name.startsWith('$') && !name.startsWith('_') && !name.startsWith('Ψ')))
+      definition.properties = Object.fromEntries(
+        Object.entries(definition.properties)
+          // Exclude private properties
+          .filter(([name]) => !name.startsWith('$') && !name.startsWith('_') && !name.startsWith('Ψ'))
+          .map(([name, prop]) => [name, prettifyType(name, prop)])
+      )
     }
     return definition
   }
@@ -30,14 +34,21 @@ export function generateComposableDataFromTypes () {
 
   return Object.entries(composables.properties).map(([name, data]) => {
     const returnType = (data as FunctionDefinition).returnType
-    let exposed
+    let exposed: Record<string, Definition>
     if (returnType.type === 'allOf') {
-      exposed = returnType.items.reduce((obj, item) => {
+      exposed = returnType.items.reduce((acc, item) => {
         const props = (item as ObjectDefinition).properties
-        return { ...obj, ...props }
+        Object.assign(acc, props)
+        return acc
       }, {})
     } else if (returnType.type === 'object') {
       exposed = returnType.properties
+    }
+    if (exposed) {
+      exposed = Object.fromEntries(
+        Object.entries(exposed)
+          .map(([name, prop]) => [name, prettifyType(name, prop)])
+      )
     }
 
     return {
@@ -57,7 +68,7 @@ export function generateDirectiveDataFromTypes () {
   return Object.entries(directives.properties).map(([name, data]) => {
     return {
       name,
-      argument: { value: (data as ObjectDefinition).properties.value },
+      argument: { value: prettifyType(name, (data as ObjectDefinition).properties.value) },
       modifiers: ((data as ObjectDefinition).properties.modifiers as ObjectDefinition).properties,
     }
   }) as { name: string, argument: { value: Definition }, modifiers: Record<string, Definition> }[]
@@ -78,6 +89,12 @@ export async function generateComponentDataFromTypes (component: string) {
     item.source = undefined
   })
 
+  for (const [name, { formatted }] of Object.entries(props.properties)) {
+    if (formatted.length > 400) {
+      console.log(`\x1b[33mLong prop type (${formatted.length}): ${component}.${name}\x1b[0m`)
+    }
+  }
+
   return {
     props: props.properties,
     events: events.properties,
@@ -91,6 +108,7 @@ type BaseDefinition = {
   formatted: string
   source?: string
   description?: Record<string, string>
+  descriptionSource?: Record<string, string>
   default?: string
   optional?: boolean
 }
@@ -225,6 +243,7 @@ function count (arr: string[], needle: string) {
   }, 0)
 }
 
+// Types that are displayed as links
 const allowedRefs = [
   'Anchor',
   'LocationStrategyFn',
@@ -237,12 +256,25 @@ const allowedRefs = [
   'ValidationRule',
   'FormValidationResult',
   'SortItem',
-  'InternalItem',
-  'InternalDataTableItem',
+  'ListItem',
+  'Group',
   'DataTableItem',
   'DataTableHeader',
   'InternalDataTableHeader',
   'FilterFunction',
+  'DataIteratorItem',
+]
+
+// Types that displayed without their generic arguments
+const plainRefs = [
+  'Component',
+  'ComponentPublicInstance',
+  'ComponentInternalInstance',
+  'FunctionalComponent',
+  'DataTableItem',
+  'ListItem',
+  'Group',
+  'DataIteratorItem',
 ]
 
 function formatDefinition (definition: Definition) {
@@ -275,12 +307,13 @@ function formatDefinition (definition: Definition) {
       break
     case 'object':
       formatted = `{ ${Object.entries(definition.properties).reduce<string[]>((arr, [name, prop]) => {
+        if (name.includes(':') || name.includes('-')) name = `'${name}'`
         arr.push(`${name}: ${prop.formatted}`)
         return arr
       }, []).join('; ')} }`
       break
     case 'ref':
-      if (['Component', 'ComponentPublicInstance', 'ComponentInternalInstance', 'FunctionalComponent'].includes(definition.ref)) {
+      if (plainRefs.includes(definition.ref)) {
         formatted = definition.ref
       } else {
         formatted = definition.text
@@ -298,8 +331,8 @@ function formatDefinition (definition: Definition) {
 
   definition.formatted = formatted
 
-  if (allowedRefs.includes(definition.text)) {
-    definition.formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/master/packages/${definition.source}" target="_blank">${definition.text}</a>`
+  if (allowedRefs.includes(formatted)) {
+    definition.formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/master/packages/${definition.source}" target="_blank">${formatted}</a>`
   }
 }
 
@@ -326,7 +359,7 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
 
   if (
     count(recursed, type.getText()) > 1 ||
-    allowedRefs.includes(type.getAliasSymbol()?.getName()) ||
+    allowedRefs.includes(symbol?.getName()) ||
     isExternalDeclaration(declaration, definition.text)
   ) {
     definition = definition as RefDefinition

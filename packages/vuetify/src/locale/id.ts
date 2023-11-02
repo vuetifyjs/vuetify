@@ -1,5 +1,6 @@
 export default {
   badge: 'Lencana',
+  open: 'Open',
   close: 'Tutup',
   dataIterator: {
     noResultsText: 'Tidak ditemukan catatan yang cocok',
@@ -26,12 +27,21 @@ export default {
     lastPage: 'Halaman terakhir',
     pageText: '{0}-{1} dari {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} dipilih',
-    nextMonthAriaLabel: 'Bulan depan',
-    nextYearAriaLabel: 'Tahun depan',
-    prevMonthAriaLabel: 'Bulan sebelumnya',
-    prevYearAriaLabel: 'Tahun sebelumnya',
+    ok: 'OK',
+    cancel: 'Cancel',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Tidak ada data tersedia',
   carousel: {
@@ -48,6 +58,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} berkas',
@@ -68,10 +79,18 @@ export default {
       last: 'Last page',
     },
   },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
+  },
   rating: {
     ariaLabel: {
       item: 'Rating {0} of {1}',
     },
   },
   loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
+  },
 }

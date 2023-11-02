@@ -1,6 +1,6 @@
 ---
-nav: Switches
 meta:
+  nav: Switches
   title: Switch component
   description: The switch component is a simple and eloquent toggle used to select between two values.
   keywords: switch, switch component, vuetify switch component, vue switch component
@@ -8,11 +8,18 @@ related:
   - /components/checkboxes/
   - /components/forms/
   - /components/radio-buttons/
+features:
+  label: 'C: VSwitch'
+  report: true
+  github: /components/VSwitch/
+  spec: https://m2.material.io/components/switches
 ---
 
 # Switches
 
 The `v-switch` component provides users the ability to choose between two distinct values. These are very similar to a toggle, or on/off switch, though aesthetically different than a checkbox.
+
+<page-features />
 
 ## Usage
 

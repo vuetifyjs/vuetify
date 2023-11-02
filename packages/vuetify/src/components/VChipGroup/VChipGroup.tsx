@@ -2,37 +2,51 @@
 import './VChipGroup.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
+import { provideDefaults } from '@/composables/defaults'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
-import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { Suspense, toRef } from 'vue'
-import { deepEqual, genericComponent, useRender } from '@/util'
+import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
 export const VChipGroupSymbol = Symbol.for('vuetify:v-chip-group')
 
-export const VChipGroup = genericComponent()({
+export const makeVChipGroupProps = propsFactory({
+  column: Boolean,
+  filter: Boolean,
+  valueComparator: {
+    type: Function as PropType<typeof deepEqual>,
+    default: deepEqual,
+  },
+
+  ...makeComponentProps(),
+  ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'tonal' } as const),
+}, 'VChipGroup')
+
+type VChipGroupSlots = {
+  default: {
+    isSelected: (id: number) => boolean
+    select: (id: number, value: boolean) => void
+    next: () => void
+    prev: () => void
+    selected: readonly number[]
+  }
+}
+
+export const VChipGroup = genericComponent<VChipGroupSlots>()({
   name: 'VChipGroup',
 
-  props: {
-    column: Boolean,
-    filter: Boolean,
-    valueComparator: {
-      type: Function as PropType<typeof deepEqual>,
-      default: deepEqual,
-    },
-
-    ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'tonal' } as const),
-  },
+  props: makeVChipGroupProps(),
 
   emits: {
     'update:modelValue': (value: any) => true,
@@ -59,7 +73,9 @@ export const VChipGroup = genericComponent()({
             'v-chip-group--column': props.column,
           },
           themeClasses.value,
+          props.class,
         ]}
+        style={ props.style }
       >
         <Suspense>
           <>

@@ -11,6 +11,19 @@
   </v-sheet>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const firstName = ref('')
+
+  const rules = [
+    value => {
+      if (value) return true
+      return 'You must enter a first name.'
+    },
+  ]
+</script>
+
 <script>
   export default {
     data: () => ({

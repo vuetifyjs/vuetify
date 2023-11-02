@@ -1,6 +1,6 @@
 ---
-nav: Carousels
 meta:
+  nav: Carousels
   title: Carousel component
   description: The carousel component is used to cycle through visual content such as images or slides of text.
   keywords: carousels, vuetify carousel component, vue carousel component
@@ -8,6 +8,10 @@ related:
   - /components/parallax/
   - /components/images/
   - /components/windows/
+features:
+  github: /components/VCarousel/
+  label: 'C: VCarousel'
+  report: true
 ---
 
 # Carousels
@@ -16,7 +20,7 @@ The `v-carousel` component is used to display large numbers of visual content on
 
 <!-- ![carousel Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-carousel/v-carousel-entry.png) -->
 
-----
+<page-features />
 
 ## Usage
 

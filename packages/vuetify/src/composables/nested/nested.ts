@@ -1,6 +1,8 @@
+// Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { getCurrentInstance, getUid, propsFactory } from '@/util'
-import { computed, inject, onBeforeUnmount, provide, ref, toRaw } from 'vue'
+
+// Utilities
+import { computed, inject, onBeforeUnmount, provide, ref, shallowRef, toRaw } from 'vue'
 import { listOpenStrategy, multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import {
   classicSelectStrategy,
@@ -9,11 +11,12 @@ import {
   leafSelectStrategy,
   leafSingleSelectStrategy,
 } from './selectStrategies'
+import { getCurrentInstance, getUid, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
-import type { SelectStrategyFn } from './selectStrategies'
 import type { OpenStrategy } from './openStrategies'
+import type { SelectStrategyFn } from './selectStrategies'
 
 export type SelectStrategy = 'single-leaf' | 'leaf' | 'independent' | 'single-independent' | 'classic' | SelectStrategyFn
 export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
@@ -21,8 +24,8 @@ export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
 export interface NestedProps {
   selectStrategy: SelectStrategy | undefined
   openStrategy: OpenStrategyProp | undefined
-  selected: unknown[] | undefined
-  opened: unknown[] | undefined
+  selected: readonly unknown[] | undefined
+  opened: readonly unknown[] | undefined
   mandatory: boolean
   'onUpdate:selected': ((val: unknown[]) => void) | undefined
   'onUpdate:opened': ((val: unknown[]) => void) | undefined
@@ -48,7 +51,7 @@ type NestedProvide = {
 export const VNestedSymbol: InjectionKey<NestedProvide> = Symbol.for('vuetify:nested')
 
 export const emptyNested: NestedProvide = {
-  id: ref(),
+  id: shallowRef(),
   root: {
     register: () => null,
     unregister: () => null,
@@ -66,8 +69,8 @@ export const emptyNested: NestedProvide = {
 export const makeNestedProps = propsFactory({
   selectStrategy: [String, Function] as PropType<SelectStrategy>,
   openStrategy: [String, Object] as PropType<OpenStrategyProp>,
-  opened: Array as PropType<unknown[]>,
-  selected: Array as PropType<unknown[]>,
+  opened: Array as PropType<readonly unknown[]>,
+  selected: Array as PropType<readonly unknown[]>,
   mandatory: Boolean,
 }, 'nested')
 
@@ -129,7 +132,7 @@ export const useNested = (props: NestedProps) => {
   const vm = getCurrentInstance('nested')
 
   const nested: NestedProvide = {
-    id: ref(),
+    id: shallowRef(),
     root: {
       opened,
       selected,
@@ -218,7 +221,7 @@ export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
   const parent = inject(VNestedSymbol, emptyNested)
 
   const uidSymbol = Symbol(getUid())
-  const computedId = computed(() => id.value ?? uidSymbol)
+  const computedId = computed(() => id.value !== undefined ? id.value : uidSymbol)
 
   const item = {
     ...parent,

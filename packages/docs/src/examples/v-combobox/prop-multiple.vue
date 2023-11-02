@@ -58,6 +58,19 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const select = ref(['Vuetify', 'Programming'])
+
+  const items = [
+    'Programming',
+    'Design',
+    'Vue',
+    'Vuetify',
+  ]
+</script>
+
 <script>
   export default {
     data () {

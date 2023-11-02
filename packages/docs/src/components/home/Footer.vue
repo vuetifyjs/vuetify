@@ -2,21 +2,24 @@
   <v-footer
     id="footer"
     class="d-block py-6"
-    theme="dark"
+    color="surface-bright"
   >
     <v-container class="text-center">
       <v-row>
         <v-col cols="12">
           <v-img
+            :src="`https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-${theme.name.value}-slim.svg`"
             class="mx-auto"
             contain
             height="64"
-            src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-v3-slim-light.svg"
             width="64"
           />
         </v-col>
 
-        <v-col cols="12" class="pb-0">
+        <v-col
+          cols="12"
+          class="pb-0"
+        >
           <a
             v-for="(social, i) in socials"
             :key="i"
@@ -27,7 +30,10 @@
             rel="noopener"
             target="_blank"
           >
-            <v-icon :icon="social.icon" color="white" />
+            <v-icon
+              :icon="social.icon"
+              color="medium-emphasis"
+            />
           </a>
         </v-col>
 
@@ -41,7 +47,7 @@
           </v-responsive>
         </v-col>
 
-        <v-col cols="12">
+        <v-col class="text-medium-emphasis" cols="12">
           <div>
             {{ t('released-under-the') }}
             <a
@@ -57,7 +63,10 @@
             {{ t('copyright') }} &copy; 2016-{{ (new Date()).getFullYear() }} {{ t('vuetify') }}
           </div>
 
-          <template v-for="(link, i) in links" :key="i">
+          <template
+            v-for="(link, i) in links"
+            :key="i"
+          >
             <a
               :href="link.href"
               class="text-medium-emphasis"
@@ -74,10 +83,12 @@
 </template>
 
 <script setup>
-  // Composables
+// Composables
   import { useI18n } from 'vue-i18n'
+  import { useTheme } from 'vuetify'
 
   const { t } = useI18n()
+  const theme = useTheme()
   const links = [
     {
       href: 'https://www.iubenda.com/privacy-policy/76325752',
@@ -88,7 +99,7 @@
       path: 'cookie-policy',
     },
     {
-      href: 'mailto:support@vuetifyjs.com',
+      href: 'mailto:hello@vuetifyjs.com',
       path: 'contact-us',
     },
   ]
@@ -104,9 +115,9 @@
       title: 'github',
     },
     {
-      icon: 'mdi-twitter',
-      href: 'https://twitter.com/vuetifyjs',
-      title: 'twitter',
+      icon: '$x',
+      href: 'https://x.com/vuetifyjs',
+      title: 'x',
     },
     {
       icon: 'mdi-discord',

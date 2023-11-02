@@ -7,7 +7,7 @@
       >
         <v-menu
           ref="menu1"
-          v-model="menu1"
+          v-model="menu1Active"
           :close-on-content-click="false"
           transition="scale-transition"
           offset-y
@@ -70,6 +70,36 @@
     </v-row>
   </v-container>
 </template>
+
+<script setup>
+  import { computed, ref, watch } from 'vue'
+
+  const menu1 = ref()
+
+  const date = ref((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10))
+  const dateFormatted = ref(formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)))
+  const menu1Active = ref(false)
+  const menu2 = ref(false)
+
+  const computedDateFormatted = computed(() => {
+    return formatDate(date.value)
+  })
+
+  watch(date, val => {
+    dateFormatted.value = formatDate(val)
+  })
+
+  function formatDate (date) {
+    if (!date) return null
+    const [year, month, day] = date.split('-')
+    return `${month}/${day}/${year}`
+  }
+  function parseDate (date) {
+    if (!date) return null
+    const [month, day, year] = date.split('/')
+    return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+  }
+</script>
 
 <script>
   export default {

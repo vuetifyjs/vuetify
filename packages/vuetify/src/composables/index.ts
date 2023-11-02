@@ -3,6 +3,7 @@
  * Imports in our code should be to the composable directly, not this file
  */
 
+export { useDefaults } from './defaults'
 export { useDisplay } from './display'
 export { useLayout } from './layout'
 export { useLocale, useRtl } from './locale'

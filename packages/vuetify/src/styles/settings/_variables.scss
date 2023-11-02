@@ -300,9 +300,9 @@ $flat-typography: () !default;
 // fast-in-fast-out -> accelerated
 // swing -> standard
 
-$standard-easing: cubic-bezier(0.4, 0, 0.2, 1);
-$decelerated-easing: cubic-bezier(0.0, 0, 0.2, 1); // Entering
-$accelerated-easing: cubic-bezier(0.4, 0, 1, 1); // Leaving
+$standard-easing: cubic-bezier(0.4, 0, 0.2, 1) !default;
+$decelerated-easing: cubic-bezier(0.0, 0, 0.2, 1) !default; // Entering
+$accelerated-easing: cubic-bezier(0.4, 0, 1, 1) !default; // Leaving
 
 // Elements
 $bootable-transition: 0.2s $decelerated-easing !default;

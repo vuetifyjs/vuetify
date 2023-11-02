@@ -1,8 +1,11 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
+import { VTab, VTabs } from '../'
+
+// Utilities
 import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import { VTab, VTabs } from '../'
 
 describe('VTabs', () => {
   it('should respond to clicks', () => {

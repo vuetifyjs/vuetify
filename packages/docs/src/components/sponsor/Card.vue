@@ -15,7 +15,6 @@
       :alt="sponsor?.metadata.name"
       :src="src"
       :width="imgWidth"
-      class="d-inline-block"
       contain
       max-height="64"
     />

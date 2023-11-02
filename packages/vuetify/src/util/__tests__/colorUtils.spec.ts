@@ -1,4 +1,8 @@
+// Utilities
 import { describe, expect, it } from '@jest/globals'
+import { APCAcontrast } from '../color/APCA'
+import * as transformCIELAB from '../color/transformCIELAB'
+import * as transformSRGB from '../color/transformSRGB'
 import {
   classToHex,
   getContrast,
@@ -7,9 +11,6 @@ import {
   parseColor,
   parseGradient,
 } from '../colorUtils'
-import * as transformSRGB from '../color/transformSRGB'
-import * as transformCIELAB from '../color/transformCIELAB'
-import { APCAcontrast } from '../color/APCA'
 
 const colors = {
   red: {
@@ -43,9 +44,71 @@ describe('parseColor', () => {
     expect(parseColor('fff')).toEqual({ r: 0xff, g: 0xff, b: 0xff, a: undefined })
   })
 
+  it('should parse a CSS color string', () => {
+    expect(parseColor('rgb(255, 0, 0)')).toEqual({ r: 255, g: 0, b: 0, a: undefined })
+    expect(parseColor('rgba(255, 0, 0, 0.5)')).toEqual({ r: 255, g: 0, b: 0, a: 0.5 })
+    expect(parseColor('hsl(100, 50%, 25%)')).toEqual({ r: 53, g: 96, b: 32, a: undefined })
+    expect(parseColor('hsla(100, 50%, 25%, 0.5)')).toEqual({ r: 53, g: 96, b: 32, a: 0.5 })
+  })
+
+  it('should parse rgb object', () => {
+    const rgb = { r: 128, g: 128, b: 0 }
+    expect(parseColor(rgb)).toEqual(expect.objectContaining({
+      r: expect.any(Number),
+      g: expect.any(Number),
+      b: expect.any(Number),
+    }))
+
+    const rgba = { r: 128, g: 0, b: 255, a: 0.2 }
+    expect(parseColor(rgba)).toEqual(expect.objectContaining({
+      r: expect.any(Number),
+      g: expect.any(Number),
+      b: expect.any(Number),
+      a: 0.2,
+    }))
+  })
+
+  it('should parse hsl object', () => {
+    const hsl = { h: 220, s: 0.5, l: 1 }
+    expect(parseColor(hsl)).toEqual(expect.objectContaining({
+      r: expect.any(Number),
+      g: expect.any(Number),
+      b: expect.any(Number),
+    }))
+
+    const hsla = { h: 220, s: 0.5, l: 1, a: 0.4 }
+    expect(parseColor(hsla)).toEqual(expect.objectContaining({
+      r: expect.any(Number),
+      g: expect.any(Number),
+      b: expect.any(Number),
+      a: 0.4,
+    }))
+  })
+
+  it('should parse hsv object', () => {
+    const hsv = { h: 220, s: 0.5, v: 1 }
+    expect(parseColor(hsv)).toEqual(expect.objectContaining({
+      r: expect.any(Number),
+      g: expect.any(Number),
+      b: expect.any(Number),
+    }))
+
+    const hsva = { h: 220, s: 0.5, v: 1, a: 0.4 }
+    expect(parseColor(hsva)).toEqual(expect.objectContaining({
+      r: expect.any(Number),
+      g: expect.any(Number),
+      b: expect.any(Number),
+      a: 0.4,
+    }))
+  })
+
   it('should reject invalid formats', async () => {
-    expect(() => parseColor([])).toThrow('Colors can only be numbers or strings, recieved Array instead')
-    expect(() => parseColor(() => {})).toThrow('Colors can only be numbers or strings, recieved Function instead')
+    // @ts-expect-error
+    expect(() => parseColor([]))
+      .toThrow('Invalid color: Array\nExpected #hex, #hexa, rgb(), rgba(), hsl(), hsla(), object or number')
+    // @ts-expect-error
+    expect(() => parseColor(() => {}))
+      .toThrow('Invalid color: () => {}\nExpected #hex, #hexa, rgb(), rgba(), hsl(), hsla(), object or number')
 
     parseColor(-1)
     parseColor('#1000000')

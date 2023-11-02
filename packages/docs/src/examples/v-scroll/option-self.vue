@@ -30,6 +30,15 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const scrollInvoked = ref(0)
+  function onScroll () {
+    scrollInvoked.value++
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

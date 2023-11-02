@@ -41,6 +41,20 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const value = ref([
+    423,
+    446,
+    675,
+    510,
+    590,
+    610,
+    760,
+  ])
+</script>
+
 <script>
   export default {
     data: () => ({

@@ -1,22 +1,32 @@
-// Composables
-import { makeDelayProps, useDelay } from '@/composables/delay'
+// Components
 import { VMenuSymbol } from '@/components/VMenu/shared'
 
+// Composables
+import { makeDelayProps, useDelay } from '@/composables/delay'
+
 // Utilities
-import { getCurrentInstance, IN_BROWSER, isComponentInstance, propsFactory, SUPPORTS_FOCUS_VISIBLE } from '@/util'
 import {
   computed,
   effectScope,
   inject,
+  mergeProps,
   nextTick,
   onScopeDispose,
   ref,
   watch,
   watchEffect,
 } from 'vue'
+import {
+  bindProps,
+  getCurrentInstance,
+  IN_BROWSER,
+  matchesSelector,
+  propsFactory,
+  refElement,
+  unbindProps,
+} from '@/util'
 
 // Types
-import type { DelayProps } from '@/composables/delay'
 import type {
   ComponentInternalInstance,
   ComponentPublicInstance,
@@ -24,6 +34,7 @@ import type {
   PropType,
   Ref,
 } from 'vue'
+import type { DelayProps } from '@/composables/delay'
 
 interface ActivatorProps extends DelayProps {
   activator?: 'parent' | string | Element | ComponentPublicInstance
@@ -56,7 +67,7 @@ export const makeActivatorProps = propsFactory({
   closeOnContentClick: Boolean,
 
   ...makeDelayProps(),
-}, 'v-overlay-activator')
+}, 'VOverlay-activator')
 
 export function useActivator (
   props: ActivatorProps,
@@ -86,25 +97,24 @@ export function useActivator (
   })
 
   const availableEvents = {
-    click: (e: MouseEvent) => {
+    onClick: (e: MouseEvent) => {
       e.stopPropagation()
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
       isActive.value = !isActive.value
     },
-    mouseenter: (e: MouseEvent) => {
+    onMouseenter: (e: MouseEvent) => {
+      if (e.sourceCapabilities?.firesTouchEvents) return
+
       isHovered = true
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
       runOpenDelay()
     },
-    mouseleave: (e: MouseEvent) => {
+    onMouseleave: (e: MouseEvent) => {
       isHovered = false
       runCloseDelay()
     },
-    focus: (e: FocusEvent) => {
-      if (
-        SUPPORTS_FOCUS_VISIBLE &&
-        !(e.target as HTMLElement).matches(':focus-visible')
-      ) return
+    onFocus: (e: FocusEvent) => {
+      if (matchesSelector(e.target as HTMLElement, ':focus-visible') === false) return
 
       isFocused = true
       e.stopPropagation()
@@ -112,7 +122,7 @@ export function useActivator (
 
       runOpenDelay()
     },
-    blur: (e: FocusEvent) => {
+    onBlur: (e: FocusEvent) => {
       isFocused = false
       e.stopPropagation()
 
@@ -124,37 +134,48 @@ export function useActivator (
     const events: Partial<typeof availableEvents> = {}
 
     if (openOnClick.value) {
-      events.click = availableEvents.click
+      events.onClick = availableEvents.onClick
     }
     if (props.openOnHover) {
-      events.mouseenter = availableEvents.mouseenter
-      events.mouseleave = availableEvents.mouseleave
+      events.onMouseenter = availableEvents.onMouseenter
+      events.onMouseleave = availableEvents.onMouseleave
     }
     if (openOnFocus.value) {
-      events.focus = availableEvents.focus
-      events.blur = availableEvents.blur
+      events.onFocus = availableEvents.onFocus
+      events.onBlur = availableEvents.onBlur
     }
 
     return events
   })
 
   const contentEvents = computed(() => {
-    const events: Partial<typeof availableEvents> = {}
+    const events: Record<string, EventListener> = {}
 
     if (props.openOnHover) {
-      events.mouseenter = () => {
+      events.onMouseenter = () => {
         isHovered = true
         runOpenDelay()
       }
-      events.mouseleave = () => {
+      events.onMouseleave = () => {
         isHovered = false
+        runCloseDelay()
+      }
+    }
+
+    if (openOnFocus.value) {
+      events.onFocusin = () => {
+        isFocused = true
+        runOpenDelay()
+      }
+      events.onFocusout = () => {
+        isFocused = false
         runCloseDelay()
       }
     }
 
     if (props.closeOnContentClick) {
       const menu = inject(VMenuSymbol, null)
-      events.click = () => {
+      events.onClick = () => {
         isActive.value = false
         menu?.closeParents()
       }
@@ -164,16 +185,17 @@ export function useActivator (
   })
 
   const scrimEvents = computed(() => {
-    const events: Partial<typeof availableEvents> = {}
+    const events: Record<string, EventListener> = {}
+
     if (props.openOnHover) {
-      events.mouseenter = () => {
+      events.onMouseenter = () => {
         if (firstEnter) {
           isHovered = true
           firstEnter = false
           runOpenDelay()
         }
       }
-      events.mouseleave = () => {
+      events.onMouseleave = () => {
         isHovered = false
         runCloseDelay()
       }
@@ -196,8 +218,7 @@ export function useActivator (
     if (!activatorRef.value) return
 
     nextTick(() => {
-      const activator = activatorRef.value
-      activatorEl.value = isComponentInstance(activator) ? activator.$el : activator
+      activatorEl.value = refElement(activatorRef.value)
     })
   })
 
@@ -247,29 +268,13 @@ function _useActivator (
   function bindActivatorProps (el = getActivator(), _props = props.activatorProps) {
     if (!el) return
 
-    Object.entries(activatorEvents.value).forEach(([name, cb]) => {
-      el.addEventListener(name, cb as (e: Event) => void)
-    })
-
-    Object.keys(_props).forEach(k => {
-      if (_props[k] == null) {
-        el.removeAttribute(k)
-      } else {
-        el.setAttribute(k, _props[k])
-      }
-    })
+    bindProps(el, mergeProps(activatorEvents.value, _props))
   }
 
   function unbindActivatorProps (el = getActivator(), _props = props.activatorProps) {
     if (!el) return
 
-    Object.entries(activatorEvents.value).forEach(([name, cb]) => {
-      el.removeEventListener(name, cb as (e: Event) => void)
-    })
-
-    Object.keys(_props).forEach(k => {
-      el.removeAttribute(k)
-    })
+    unbindProps(el, mergeProps(activatorEvents.value, _props))
   }
 
   function getActivator (selector = props.activator): HTMLElement | undefined {
@@ -277,7 +282,7 @@ function _useActivator (
     if (selector) {
       if (selector === 'parent') {
         let el = vm?.proxy?.$el?.parentNode
-        while (el.hasAttribute('data-no-activator')) {
+        while (el?.hasAttribute('data-no-activator')) {
           el = el.parentNode
         }
         activator = el

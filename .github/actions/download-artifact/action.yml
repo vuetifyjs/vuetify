@@ -1,0 +1,31 @@
+name: Download artifact
+description: Wrapper around GitHub's official action, with additional extraction before download
+# https://github.com/actions/upload-artifact/issues/199#issuecomment-1516555821
+
+inputs:
+  name:
+    description: Artifact name
+    required: true
+  path:
+    description: Destination path
+    required: false
+    default: .
+
+runs:
+  using: composite
+  steps:
+    - name: Download artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{ inputs.name }}
+        path: ${{ inputs.path }}
+
+    - name: Extract artifacts
+      run: tar -xvf ${{ inputs.name }}.tar
+      shell: bash
+      working-directory: ${{ inputs.path }}
+
+    - name: Remove archive
+      run: rm -f ${{ inputs.name }}.tar
+      shell: bash
+      working-directory: ${{ inputs.path }}

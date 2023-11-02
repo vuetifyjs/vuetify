@@ -11,6 +11,12 @@
   </v-switch>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const switchMe = ref(false)
+</script>
+
 <script>
   export default {
     data () {

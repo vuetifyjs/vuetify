@@ -1,7 +1,10 @@
 /// <reference types="../../../../types/cypress" />
 
-import { ref } from 'vue'
+// Components
 import { VCheckboxBtn } from '../'
+
+// Utilities
+import { ref } from 'vue'
 
 describe('VCheckboxBtn', () => {
   it('should function without v-model', () => {
@@ -9,11 +12,11 @@ describe('VCheckboxBtn', () => {
       <VCheckboxBtn />
     ))
 
-    cy.get('.v-checkbox-btn').click()
+    cy.get('.v-checkbox-btn').click(20, 20)
 
     cy.get('input').should('be.checked')
 
-    cy.get('.v-checkbox-btn').click()
+    cy.get('.v-checkbox-btn').click(20, 20)
 
     cy.get('input').should('not.be.checked')
   })
@@ -24,13 +27,13 @@ describe('VCheckboxBtn', () => {
       <VCheckboxBtn v-model={ model.value } />
     ))
 
-    cy.get('.v-checkbox-btn').click()
+    cy.get('.v-checkbox-btn').click(20, 20)
 
     cy.get('input').should('be.checked').then(() => {
       expect(model.value).to.be.true
     })
 
-    cy.get('.v-checkbox-btn').click()
+    cy.get('.v-checkbox-btn').click(20, 20)
 
     cy.get('input').should('not.be.checked').then(() => {
       expect(model.value).to.be.false

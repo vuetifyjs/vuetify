@@ -20,7 +20,7 @@ export default {
       validate: validateTimestamp,
     },
     weekdays: {
-      type: [Array, String] as PropType<number[] | string>,
+      type: [Array, String] as PropType<readonly number[] | string>,
       default: () => [0, 1, 2, 3, 4, 5, 6],
       validate: validateWeekdays,
     },
@@ -126,7 +126,7 @@ export default {
   },
   category: {
     categories: {
-      type: [Array, String] as PropType<CalendarCategory[] | string>,
+      type: [Array, String] as PropType<readonly CalendarCategory[] | string>,
       default: '',
     },
     categoryText: {

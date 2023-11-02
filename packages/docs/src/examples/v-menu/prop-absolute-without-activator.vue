@@ -32,6 +32,31 @@
   </div>
 </template>
 
+<script setup>
+  import { nextTick, ref } from 'vue'
+
+  const items = [
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me 2' },
+  ]
+
+  const showMenu = ref(false)
+  const x = ref(0)
+  const y = ref(0)
+
+  function show (e) {
+    e.preventDefault()
+    showMenu.value = false
+    x.value = e.clientX
+    y.value = e.clientY
+    nextTick(() => {
+      showMenu.value = true
+    })
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

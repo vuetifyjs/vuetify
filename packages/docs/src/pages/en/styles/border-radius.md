@@ -21,11 +21,9 @@ Use border utilities to quickly style the border-radius of any element.
 
 ## Caveats
 
-<alert type="info">
-
+::: info
   The values **sm**, **md**, **lg**, and **xl** correlate to the border radius *size* and are not affected by breakpoints.
-
-</alert>
+:::
 
 ## SASS Variables
 
@@ -60,11 +58,9 @@ $rounded: (
 
 ### Misc
 
-<alert type="info">
-
+::: info
   Logical values `start` and `end` are only used in the inline direction (left and right) to avoid confusion
-
-</alert>
+:::
 
 #### Pill and circle
 

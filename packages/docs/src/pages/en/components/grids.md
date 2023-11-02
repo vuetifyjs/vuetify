@@ -1,6 +1,6 @@
 ---
-nav: Grids
 meta:
+  nav: Grids
   title: Grid system
   description: Vuetify supports the 12 point Material Design grid for laying out and controlling breakpoints for your application.
   keywords: grids, vuetify grid component, layout component, flex component
@@ -8,6 +8,11 @@ related:
   - /styles/flex
   - /features/display-and-platform/
   - /styles/display
+features:
+  github: /components/VGrid/
+  label: 'C: VGrid'
+  report: true
+  spec: https://m2.material.io/design/layout/responsive-layout-grid
 ---
 
 # Grid system
@@ -16,7 +21,7 @@ Vuetify comes with a 12 point grid system built using flexbox.
 
 The grid is used to create specific layouts within an application's content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations: **xs**, **sm**, **md**, **lg** and **xl**. These breakpoints are defined below in the Viewport Breakpoints table and can be modified by customizing the [Breakpoint service](/features/display-and-platform).
 
-----
+<page-features />
 
 ## Usage
 
@@ -26,7 +31,7 @@ The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstra
 
 <breakpoints-table />
 
-<promoted slug="vuemastery-grids" />
+<entry />
 
 ## API
 
@@ -63,14 +68,12 @@ The class `fill-height` applies `height: 100%` to an element. When applied to `v
 
 ## Caveats
 
-<alert type="info">
-
+::: info
   Breakpoints based props on grid components work in an `andUp` fashion. With this in mind the **xs** breakpoint is assumed and has been removed from the props context. This applies to **offset**, **justify**, **align**, and single breakpoint props on `v-col`
 
 - Props like **justify-sm** and **justify-md** exist, but **justify-xs** does not, it is simply **justify**
 - The **xs** prop does not exist on `v-col`. The equivalent to this is the **cols** prop
-
-</alert>
+:::
 
 ## Examples
 

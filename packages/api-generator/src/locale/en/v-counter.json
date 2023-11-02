@@ -1,7 +1,0 @@
-{
-  "props": {
-    "value": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-counter.json))",
-    "active": "Determines whether the counter is visible or not",
-    "max": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-counter.json))"
-  }
-}

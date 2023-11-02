@@ -57,7 +57,7 @@
     // ensure that default
     // v-icon size is 24px
     &.v-btn--size-default
-      font-size: $button-icon-font-size
+      --v-btn-size: #{$button-icon-font-size}
 
     @at-root &
       @include button-density(('width', 'height'), $button-icon-density)
@@ -83,6 +83,8 @@
 
     @if ($button-colored-disabled)
       opacity: $button-disabled-opacity
+      &:hover
+        opacity: $button-disabled-opacity
     @else
       opacity: 1
       &.v-btn
@@ -145,6 +147,9 @@
 
   &--rounded
     @include tools.rounded($button-rounded-border-radius)
+
+    &.v-btn--icon
+      @include tools.rounded($button-border-radius)
 
   .v-icon
     --v-icon-size-multiplier: #{calc(18/21)}
@@ -216,7 +221,7 @@
   .v-card-actions &
     padding: $button-card-actions-padding
 
-  ~ .v-btn
+  ~ .v-btn:not(.v-btn-toggle .v-btn)
     .v-card-actions &
       margin-inline-start: $button-card-actions-margin
 

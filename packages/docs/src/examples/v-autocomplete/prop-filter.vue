@@ -28,7 +28,7 @@
     <v-card-text>
       <v-text-field
         :disabled="!isEditing"
-        color="white"
+        base-color="white"
         label="Name"
       ></v-text-field>
 
@@ -36,7 +36,7 @@
         :disabled="!isEditing"
         :items="states"
         :custom-filter="customFilter"
-        color="white"
+        base-color="white"
         item-title="name"
         item-value="abbr"
         label="State"
@@ -68,12 +68,37 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const states = [
+    { name: 'Florida', abbr: 'FL', id: 1 },
+    { name: 'Georgia', abbr: 'GA', id: 2 },
+    { name: 'Nebraska', abbr: 'NE', id: 3 },
+    { name: 'California', abbr: 'CA', id: 4 },
+    { name: 'New York', abbr: 'NY', id: 5 },
+  ]
+
+  const hasSaved = ref(false)
+  const isEditing = ref(null)
+
+  function customFilter (itemTitle, queryText, item) {
+    const textOne = item.raw.name.toLowerCase()
+    const textTwo = item.raw.abbr.toLowerCase()
+    const searchText = queryText.toLowerCase()
+    return textOne.indexOf(searchText) > -1 || textTwo.indexOf(searchText) > -1
+  }
+  function save () {
+    isEditing.value = !isEditing.value
+    hasSaved.value = true
+  }
+</script>
+
 <script>
   export default {
     data: () => ({
       hasSaved: false,
       isEditing: null,
-      model: null,
       states: [
         { name: 'Florida', abbr: 'FL', id: 1 },
         { name: 'Georgia', abbr: 'GA', id: 2 },
@@ -84,9 +109,9 @@
     }),
 
     methods: {
-      customFilter (item, queryText, itemText) {
-        const textOne = item.name.toLowerCase()
-        const textTwo = item.abbr.toLowerCase()
+      customFilter (itemTitle, queryText, item) {
+        const textOne = item.raw.name.toLowerCase()
+        const textTwo = item.raw.abbr.toLowerCase()
         const searchText = queryText.toLowerCase()
 
         return textOne.indexOf(searchText) > -1 ||

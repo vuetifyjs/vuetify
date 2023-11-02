@@ -50,64 +50,54 @@
   </form>
 </template>
 
-<script>
-  import { reactive, ref } from 'vue'
+<script setup>
+  import { reactive } from 'vue'
   import { useVuelidate } from '@vuelidate/core'
   import { email, required } from '@vuelidate/validators'
 
-  export default {
-    setup () {
-      const initialState = {
-        name: '',
-        email: '',
-        select: null,
-        checkbox: null,
-      }
+  const initialState = {
+    name: '',
+    email: '',
+    select: null,
+    checkbox: null,
+  }
 
-      const state = reactive({
-        ...initialState,
-      })
+  const state = reactive({
+    ...initialState,
+  })
 
-      const items = ref([
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4',
-      ])
+  const items = [
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+  ]
 
-      const rules = {
-        name: { required },
-        email: { required, email },
-        select: { required },
-        items: { required },
-        checkbox: { required },
-      }
+  const rules = {
+    name: { required },
+    email: { required, email },
+    select: { required },
+    items: { required },
+    checkbox: { required },
+  }
 
-      const v$ = useVuelidate(rules, state)
+  const v$ = useVuelidate(rules, state)
 
-      function clear () {
-        v$.value.$reset()
+  function clear () {
+    v$.value.$reset()
 
-        for (const [key, value] of Object.entries(initialState)) {
-          state[key] = value
-        }
-      }
-
-      return { state, items, clear, v$ }
-    },
+    for (const [key, value] of Object.entries(initialState)) {
+      state[key] = value
+    }
   }
 </script>
 
-<codepen-resources lang="json">
+<playground-resources lang="json">
   {
-    "js": [
-      "https://cdn.jsdelivr.net/npm/@vuelidate/core/dist/index.js",
-      "https://cdn.jsdelivr.net/npm/@vuelidate/validators/dist/index.js"
-    ],
     "imports": {
       "vue-demi": "https://cdn.jsdelivr.net/npm/vue-demi/lib/index.mjs",
       "@vuelidate/core": "https://cdn.jsdelivr.net/npm/@vuelidate/core/dist/index.esm.js",
       "@vuelidate/validators": "https://cdn.jsdelivr.net/npm/@vuelidate/validators/dist/index.esm.js"
     }
   }
-</codepen-resources>
+</playground-resources>
