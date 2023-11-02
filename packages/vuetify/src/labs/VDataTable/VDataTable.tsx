@@ -100,11 +100,12 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
     'update:sortBy': (value: any) => true,
     'update:options': (value: any) => true,
     'update:groupBy': (value: any) => true,
+    'update:groupExpanded': (value: any) => true,
     'update:expanded': (value: any) => true,
   },
 
   setup (props, { emit, slots }) {
-    const { groupBy } = createGroupBy(props)
+    const { groupBy, groupExpanded } = createGroupBy(props)
     const { sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
 
@@ -123,7 +124,7 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups)
-    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
+    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened, groupExpanded)
     const itemsLength = computed(() => flatItems.value.length)
 
     const { startIndex, stopIndex, pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })

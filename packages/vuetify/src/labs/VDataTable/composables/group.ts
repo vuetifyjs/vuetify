@@ -29,6 +29,10 @@ export const makeDataTableGroupProps = propsFactory({
     type: Array as PropType<readonly SortItem[]>,
     default: () => ([]),
   },
+  groupExpanded: {
+    type: Boolean,
+    default: () => false,
+  },
 }, 'DataTable-group')
 
 const VDataTableGroupSymbol: InjectionKey<{
@@ -43,12 +47,15 @@ const VDataTableGroupSymbol: InjectionKey<{
 type GroupProps = {
   groupBy: readonly SortItem[]
   'onUpdate:groupBy': ((value: SortItem[]) => void) | undefined
+  groupExpanded: Boolean
+  'onUpdate:groupExpanded': ((value: boolean) => void) | undefined
 }
 
 export function createGroupBy (props: GroupProps) {
   const groupBy = useProxiedModel(props, 'groupBy')
+  const groupExpanded = useProxiedModel(props, 'groupExpanded')
 
-  return { groupBy }
+  return { groupBy, groupExpanded }
 }
 
 export function provideGroupBy (options: { groupBy: Ref<readonly SortItem[]>, sortBy: Ref<readonly SortItem[]> }) {
@@ -151,7 +158,11 @@ function groupItems <T extends GroupableItem> (items: readonly T[], groupBy: rea
   return groups
 }
 
-function flattenItems <T extends GroupableItem> (items: readonly (T | Group<T>)[], opened: Set<string>): readonly (T | Group<T>)[] {
+function flattenItems <T extends GroupableItem> (
+  items: readonly (T | Group<T>)[],
+  opened: Set<string>,
+  groupExpanded: Boolean): readonly (T | Group<T>
+  )[] {
   const flatItems: (T | Group<T>)[] = []
 
   for (const item of items) {
@@ -161,8 +172,8 @@ function flattenItems <T extends GroupableItem> (items: readonly (T | Group<T>)[
         flatItems.push(item)
       }
 
-      if (opened.has(item.id) || item.value == null) {
-        flatItems.push(...flattenItems(item.items, opened))
+      if (opened.has(item.id) || item.value == null || groupExpanded) {
+        flatItems.push(...flattenItems(item.items, opened, groupExpanded))
       }
     } else {
       flatItems.push(item)
@@ -175,14 +186,15 @@ function flattenItems <T extends GroupableItem> (items: readonly (T | Group<T>)[
 export function useGroupedItems <T extends GroupableItem> (
   items: Ref<T[]>,
   groupBy: Ref<readonly SortItem[]>,
-  opened: Ref<Set<string>>
+  opened: Ref<Set<string>>,
+  groupExpanded: Ref<Boolean>
 ) {
   const flatItems = computed(() => {
     if (!groupBy.value.length) return items.value
 
     const groupedItems = groupItems(items.value, groupBy.value.map(item => item.key))
 
-    return flattenItems(groupedItems, opened.value)
+    return flattenItems(groupedItems, opened.value, groupExpanded.value)
   })
 
   return { flatItems }
