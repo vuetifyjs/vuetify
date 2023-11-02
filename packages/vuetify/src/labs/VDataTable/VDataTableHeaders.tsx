@@ -73,11 +73,21 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
 
   props: makeVDataTableHeadersProps(),
 
-  setup (props, { slots, emit }) {
+  setup (props, { slots }) {
     const { toggleSort, sortBy, isSorted } = useSort()
     const { someSelected, allSelected, selectAll, showSelectAll } = useSelection()
-    const { columns, headers, hasHorizontalScroll } = useHeaders()
+    const { columns, headers } = useHeaders()
     const { loaderClasses } = useLoader(props)
+
+    function getFixedStyles (column: InternalDataTableHeader, y: number): CSSProperties | undefined {
+      if (!props.sticky && !column.fixed) return undefined
+
+      return {
+        position: 'sticky',
+        left: column.fixed ? convertToUnit(column.fixedOffset) : undefined,
+        top: props.sticky ? `calc(var(--v-table-header-height) * ${y})` : undefined,
+      }
+    }
 
     function getSortIcon (column: InternalDataTableHeader) {
       const item = sortBy.value.find(item => item.key === column.key)
@@ -120,12 +130,12 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           style={{
             width: convertToUnit(column.width),
             minWidth: convertToUnit(column.width),
-            left: column.fixed ? convertToUnit(column.fixedOffset) : undefined,
+            ...getFixedStyles(column, y),
           }}
           colspan={ column.colspan }
           rowspan={ column.rowspan }
           onClick={ column.sortable ? () => toggleSort(column) : undefined }
-          lastFixed={ hasHorizontalScroll.value && column.lastFixed }
+          lastFixed={ column.lastFixed }
           noPadding={ noPadding }
         >
           {{

@@ -1,6 +1,6 @@
 // Utilities
 import { inject, provide, ref, watchEffect } from 'vue'
-import { propsFactory } from '@/util'
+import { consoleError, propsFactory } from '@/util'
 
 // Types
 import type { DeepReadonly, InjectionKey, PropType, Ref } from 'vue'
@@ -18,7 +18,6 @@ export const makeDataTableHeaderProps = propsFactory({
 export const VDataTableHeadersSymbol: InjectionKey<{
   headers: Ref<InternalDataTableHeader[][]>
   columns: Ref<InternalDataTableHeader[]>
-  hasHorizontalScroll: Ref<boolean>
 }> = Symbol.for('vuetify:data-table-headers')
 
 type HeaderProps = {
@@ -102,21 +101,35 @@ function getDepth (item: InternalDataTableHeader, depth = 0): number {
 }
 
 function parseFixedColumns (items: InternalDataTableHeader[]) {
-  let fixed = false
-  function setFixed (item: InternalDataTableHeader) {
+  let seenFixed = false
+  function setFixed (item: InternalDataTableHeader, parentFixed = false) {
     if (!item) return
 
-    if (item.children) {
-      for (let i = item.children.length - 1; i >= 0; i--) {
-        setFixed(item.children[i])
-      }
+    if (parentFixed) {
+      item.fixed = true
     }
 
-    if (item.fixed && !fixed) {
-      item.lastFixed = true
-      fixed = true
-    } else if (fixed) {
-      item.fixed = true
+    if (item.fixed) {
+      if (item.children) {
+        for (let i = item.children.length - 1; i >= 0; i--) {
+          setFixed(item.children[i], true)
+        }
+      } else {
+        if (!seenFixed) {
+          item.lastFixed = true
+        } else if (isNaN(+item.width!)) {
+          consoleError(`Multiple fixed columns should have a static width (key: ${item.key})`)
+        }
+        seenFixed = true
+      }
+    } else {
+      if (item.children) {
+        for (let i = item.children.length - 1; i >= 0; i--) {
+          setFixed(item.children[i])
+        }
+      } else {
+        seenFixed = false
+      }
     }
   }
 
@@ -132,11 +145,9 @@ function parseFixedColumns (items: InternalDataTableHeader[]) {
       for (const child of item.children) {
         fixedOffset = setFixedOffset(child, fixedOffset)
       }
-    }
-
-    if (item.fixed && !item.children) {
+    } else if (item.fixed) {
       item.fixedOffset = fixedOffset
-      fixedOffset += parseInt(item.width ?? '0', 10)
+      fixedOffset += parseFloat(item.width || '0') || 0
     }
 
     return fixedOffset
@@ -215,7 +226,6 @@ export function createHeaders (
 ) {
   const headers = ref<InternalDataTableHeader[][]>([])
   const columns = ref<InternalDataTableHeader[]>([])
-  const hasHorizontalScroll = ref(false)
 
   watchEffect(() => {
     const items = props.headers.slice()
@@ -244,7 +254,7 @@ export function createHeaders (
     columns.value = parsed.columns
   })
 
-  const data = { headers, columns, hasHorizontalScroll }
+  const data = { headers, columns }
 
   provide(VDataTableHeadersSymbol, data)
 

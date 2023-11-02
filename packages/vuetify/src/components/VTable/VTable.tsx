@@ -34,10 +34,6 @@ export const VTable = genericComponent<VTableSlots>()({
 
   props: makeVTableProps(),
 
-  emits: {
-    scroll: (event: Event) => true,
-  },
-
   setup (props, { slots, emit }) {
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
@@ -66,7 +62,6 @@ export const VTable = genericComponent<VTableSlots>()({
           <div
             class="v-table__wrapper"
             style={{ height: convertToUnit(props.height) }}
-            onScrollPassive={ e => emit('scroll', e) }
           >
             <table>
               { slots.default() }

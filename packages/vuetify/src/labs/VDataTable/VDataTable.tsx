@@ -108,7 +108,7 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
     const { sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
 
-    const { columns, headers, hasHorizontalScroll } = createHeaders(props, {
+    const { columns, headers } = createHeaders(props, {
       groupBy,
       showSelect: toRef(props, 'showSelect'),
       showExpand: toRef(props, 'showExpand'),
@@ -199,10 +199,6 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
             props.class,
           ]}
           style={ props.style }
-          onScroll={ e => {
-            const target = e.target as HTMLElement
-            hasHorizontalScroll.value = target?.scrollLeft > 0
-          }}
           { ...tableProps }
         >
           {{

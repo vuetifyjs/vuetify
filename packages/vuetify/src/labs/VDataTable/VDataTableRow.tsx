@@ -35,7 +35,7 @@ export const VDataTableRow = genericComponent<VDataTableRowSlots>()({
   setup (props, { slots }) {
     const { isSelected, toggleSelect } = useSelection()
     const { isExpanded, toggleExpand } = useExpanded()
-    const { columns, hasHorizontalScroll } = useHeaders()
+    const { columns } = useHeaders()
 
     useRender(() => (
       <tr
@@ -52,7 +52,7 @@ export const VDataTableRow = genericComponent<VDataTableRowSlots>()({
             align={ column.align }
             fixed={ column.fixed }
             fixedOffset={ column.fixedOffset }
-            lastFixed={ hasHorizontalScroll.value && column.lastFixed }
+            lastFixed={ column.lastFixed }
             noPadding={ column.key === 'data-table-select' || column.key === 'data-table-expand' }
             width={ column.width }
           >
