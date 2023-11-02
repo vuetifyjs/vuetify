@@ -14,8 +14,8 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, watch } from 'vue'
-import { filterInputAttrs, focusChild, genericComponent, IN_BROWSER, only, propsFactory, useRender } from '@/util'
+import { computed, nextTick, ref, watch } from 'vue'
+import { filterInputAttrs, focusChild, genericComponent, only, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -197,7 +197,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     watch(focusIndex, val => {
       if (val < 0) return
 
-      IN_BROWSER && window.requestAnimationFrame(() => {
+      nextTick(() => {
         inputRef.value[val]?.select()
       })
     })
