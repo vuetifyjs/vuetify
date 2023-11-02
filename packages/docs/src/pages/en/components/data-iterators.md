@@ -9,7 +9,7 @@ related:
   - /components/simple-tables/
   - /components/toolbars/
 features:
-  github: /labs/VDataIterator/
+  github: /components/VDataIterator/
   label: 'C: VDataIterator'
   report: true
 ---
@@ -22,9 +22,9 @@ The `v-data-iterator` component is used for displaying arbitrary data, and share
 
 <page-features />
 
-::: warning
+::: success
 
-This feature requires [v3.3.0 (Icarus)](/getting-started/release-notes/?version=v3.3.0)
+This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
 
 :::
 
@@ -35,20 +35,6 @@ The `v-data-iterator` allows you to customize exactly how to display your data. 
 <usage name="v-data-iterator" />
 
 <entry />
-
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VDataIterator } from 'vuetify/labs/VDataIterator'
-
-export default createVuetify({
-  components: {
-    VDataIterator,
-  },
-})
-```
 
 ## API
 
@@ -66,12 +52,12 @@ The recommended placement of elements inside of a `v-data-iterator` are:
 * Place content after the header
 * Place a [v-pagination](/components/paginations/) below the main content
 
-![Data iterator Anatomy](https://cdn.vuetifyjs.com/docs/images/components/v-data-iterator/v-data-iterator-entry.png){ placeholder=true }
+![Data iterator Anatomy](https://cdn.vuetifyjs.com/docs/images/components/v-data-iterator/v-data-iterator-anatomy.png){ height=392 }
 
 | Element / Area | Description |
 | - | - |
-| 1. Container | The container is the root element of the component |
-| 2. Header (optional) | The header is used to display a title and actions |
+| 1. Header (optional) | The header is used to display a title and actions |
+| 2. Container | The container is the root element of the component |
 | 3. Footer (optional) | The footer is used to display pagination |
 
 ## Guide
@@ -94,7 +80,11 @@ The following code snippet is an example of a basic `v-data-iterator` component:
 
 ## Examples
 
+The following are a collection of examples that demonstrate more advanced and real world use of the `v-data-iterator` component.
+
 ### Slots
+
+The `v-data-iterator` component has 3 main slots
 
 #### Default
 
@@ -107,8 +97,6 @@ The `v-data-iterator` has internal state for both selection and expansion, just 
 The `v-data-iterator` has both a **header** and **footer** slot for adding extra content.
 
 <example file="v-data-iterator/slot-header-and-footer" />
-
-### Misc
 
 #### Controllable props
 
