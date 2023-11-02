@@ -4,6 +4,8 @@ import { createRange, padStart } from '@/util'
 // Types
 import type { DateAdapter } from '../DateAdapter'
 
+type CustomDateFormat = Intl.DateTimeFormatOptions | ((date: Date, formatString: string, locale: string) => string)
+
 const firstDay: Record<string, number> = {
   '001': 1,
   AD: 1,
@@ -245,7 +247,19 @@ function getWeekdays (locale: string) {
   })
 }
 
-function format (value: Date, formatString: string, locale: string): string {
+function format (
+  value: Date,
+  formatString: string,
+  locale: string,
+  formats?: Record<string, CustomDateFormat>
+): string {
+  const newDate = date(value) ?? new Date()
+  const customFormat = formats?.[formatString]
+
+  if (typeof customFormat === 'function') {
+    return customFormat(newDate, formatString, locale)
+  }
+
   let options: Intl.DateTimeFormatOptions = {}
   switch (formatString) {
     case 'fullDateWithWeekday':
@@ -279,10 +293,10 @@ function format (value: Date, formatString: string, locale: string): string {
       options = { year: 'numeric' }
       break
     default:
-      options = { timeZone: 'UTC', timeZoneName: 'short' }
+      options = customFormat ?? { timeZone: 'UTC', timeZoneName: 'short' }
   }
 
-  return new Intl.DateTimeFormat(locale, options).format(date(value) ?? undefined)
+  return new Intl.DateTimeFormat(locale, options).format(newDate)
 }
 
 function toISO (adapter: DateAdapter<any>, value: Date) {
@@ -407,9 +421,11 @@ function endOfDay (date: Date) {
 
 export class VuetifyDateAdapter implements DateAdapter<Date> {
   locale: string
+  formats?: Record<string, CustomDateFormat>
 
-  constructor (options: { locale: string }) {
+  constructor (options: { locale: string, formats?: Record<string, CustomDateFormat> }) {
     this.locale = options.locale
+    this.formats = options.formats
   }
 
   date (value?: any) {
@@ -449,7 +465,7 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
   }
 
   format (date: Date, formatString: string) {
-    return format(date, formatString, this.locale)
+    return format(date, formatString, this.locale, this.formats)
   }
 
   isEqual (date: Date, comparing: Date) {
