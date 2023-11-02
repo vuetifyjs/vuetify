@@ -80,8 +80,6 @@ The following is a list of available and up-and-coming components for use with L
 
 | Component | Description | Min Version |
 | - | - | - |
-| **Data iterators** | [Usage](/components/data-itterators/) | [v3.3.0&nbsp;(Icarus)](/getting-started/release-notes/?version=v3.3.0) |
-| [v-data-iterator](/api/v-data-iterator/) | Primary Component | |
 | **Data table** | [Basics](/components/data-tables/basics/) - [Headers](/components/data-tables/headers/) - [Sorting](/components/data-tables/sorting/) - [Pagination](/components/data-tables/pagination/) - [Filtering](/components/data-tables/filtering/) - [Grouping](/components/data-tables/grouping/) | [v3.1.0&nbsp;(Valkyrie)](/getting-started/release-notes/?version=v3.1.0) |
 | [v-data-table](/api/v-data-table/) | Primary Component | |
 | [v-data-table-server](/api/v-data-table-server/) | Data table component for handling data from a remote server | |

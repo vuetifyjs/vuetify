@@ -324,7 +324,7 @@ These components are used to display data and information in a variety of ways.
 
 <v-row>
 
-<components-list-item name="Data iterator component" src="data-iterators" labs>
+<components-list-item name="Data iterator component" src="data-iterators">
 
   The data iterator component provides an easy interface for paginating and sorting data
 

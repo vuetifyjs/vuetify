@@ -125,6 +125,7 @@
       "textareas",
       { "divider": true },
       { "subheader": "data-and-display" },
+      "data-iterators",
       "infinite-scroller",
       "tables",
       "virtual-scroller",
@@ -199,10 +200,6 @@
     "activeIcon": "mdi-beaker",
     "items": [
       "introduction",
-      {
-        "title": "data-iterators",
-        "subfolder": "components"
-      },
       {
         "title": "data-tables",
         "subfolder": "components",
