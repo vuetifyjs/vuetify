@@ -100,10 +100,37 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  let isReacting = false
+  async function setReaction (reaction: string, release: number | undefined) {
+    if (isReacting || !url || !reaction || !release || !auth?.user.value) return
+
+    const token = await auth.getAccessTokenSilently({ detailedResponse: true })
+    console.log(token)
+    isReacting = true
+
+    try {
+      await fetch(`${url}/api/user/reaction?release=${release}`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token.id_token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          reaction,
+        }),
+      })
+    } catch (e) {
+      //
+    } finally {
+      isReacting = false
+    }
+  }
+
   return {
     admin,
     getUser,
     isSubscriber,
+    setReaction,
     sponsor,
     verifyUserSponsorship,
   }

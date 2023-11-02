@@ -17,23 +17,7 @@
       return-object
     >
       <template #selection>
-        <div class="d-flex align-center">
-          <div class="me-1">{{ model?.tag_name }}</div>
-
-          <template v-if="model?.reactions?.total_count">
-            &mdash;
-          </template>
-
-          <template v-for="(value, key) in reactions" :key="key">
-            <template v-if="model?.reactions?.[key]">
-              <span class="d-inline-flex align-center text-body-2 me-2">
-                {{ value }}
-
-                <span class="text-caption">{{ model.reactions[key] }}</span>
-              </span>
-            </template>
-          </template>
-        </div>
+        <div class="me-1">{{ model?.tag_name }}</div>
       </template>
 
       <template #item="{ item, props: itemProps }">
@@ -75,19 +59,63 @@
         v-if="model?.author"
         class="d-flex justify-space-between"
       >
+      
         <v-list-item v-if="publishedOn" lines="two">
-          <v-list-item-title class="d-flex align-center">
-            <i18n-t keypath="published" scope="global">
-              <template #date>
-                <v-chip
-                  :text="publishedOn"
-                  class="ms-2 text-caption"
-                  density="comfortable"
-                  label
-                  variant="flat"
-                />
+          <v-list-item-title class="d-flex flex-column justify-center">
+            <div class="d-flex align-center">
+              <i18n-t keypath="published" scope="global">
+                <template #date>
+                  <v-chip
+                    :text="publishedOn"
+                    class="ms-2 text-caption"
+                    density="comfortable"
+                    label
+                    variant="flat"
+                  />
+                </template>
+              </i18n-t>
+            </div>
+            
+            <div v-if="model?.reactions?.total_count" class="mt-2">
+              <v-chip
+                v-if="isAuthenticated"
+                class="px-1 mx-1"
+                size="small"
+                variant="outlined"
+                @click="null"
+              >
+                <v-icon icon="mdi-emoticon-outline" />
+                <v-menu activator="parent" location="bottom" offset="8, 8">
+                  <v-sheet class="d-flex">
+                    <v-btn
+                      v-for="(value, key) in reactions"
+                      :key="key"
+                      class="rounded ma-1"
+                      icon
+                      size="x-small"
+                      :text="value"
+                      variant="flat"
+                      @click="react(key)"
+                    />
+                  </v-sheet>
+                </v-menu>
+              </v-chip>
+              
+              <template v-for="(value, key) in reactions" :key="key">
+                <template v-if="model?.reactions?.[key]">
+                  <v-chip
+                    class="mx-1 px-2"
+                    size="small"
+                    :style="!isAuthenticated ? 'pointer-events: none' : ''"
+                    variant="outlined"
+                    @click="react(key)"
+                  >
+                    {{ value }}
+                    <span class="text-caption pl-1">{{ model.reactions[key] }}</span>
+                  </v-chip>
+                </template>
               </template>
-            </i18n-t>
+            </div>
           </v-list-item-title>
         </v-list-item>
 
@@ -131,12 +159,14 @@
 
 <script setup lang="ts">
   // Composables
+  import { useAuth0 } from '@/plugins/auth'
   import { useDate } from 'vuetify/labs/date'
   import { useI18n } from 'vue-i18n'
   import { useDisplay, version } from 'vuetify'
   import { useRoute, useRouter } from 'vue-router'
 
   // Stores
+  import { useAuthStore } from '@/store/auth'
   import { Release, useReleasesStore } from '@/store/releases'
 
   // Utilities
@@ -152,8 +182,10 @@
     eyes: '👀',
   }
 
+  const { isAuthenticated } = useAuth0() as any
   const { smAndUp } = useDisplay()
   const { t } = useI18n()
+  const authStore = useAuthStore()
   const date = useDate()
   const route = useRoute()
   const router = useRouter()
@@ -250,6 +282,11 @@
     clearTimeout(timeout)
 
     timeout = setTimeout(() => store.find(val), 500)
+  }
+
+  async function react(value: string) {
+    await authStore.setReaction(value, model?.value?.id)
+    await store.find(search.value)
   }
 </script>
 
