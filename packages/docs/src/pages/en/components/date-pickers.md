@@ -88,7 +88,7 @@ createVuetify({
 
 The components also use the [i18n](/features/internationalization) feature to know which locale should be used for dates. If you are using the built-in date adapter, then everything should work automatically.
 
-However if you are not using the built in date adapter, then you will need to set up a mapping from the [i18n](/features/internationalization) locale string to the date library locale in the vuetify options.
+If you're not using the built-in date adapter, set up a mapping from the [i18n](/features/internationalization) locale string to the date library locale in the Vuetify options.
 
 ```js
 import DateFnsAdapter from '@date-io/date-fns'
@@ -110,11 +110,11 @@ Here is an example of switching the locale of the **v-date-picker** component.
 
 <example file="v-date-picker/guide-locale" />
 
-If you need to customize the date formatting, you can provide a `formats` object to the date options. The keys are the formats documented [here](/features/dates/#format-options), and the value can be either a [DateTimeFormatOptions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat#using_options) object, or a method that should return a string.
+To customize date formatting, provide a `formats` object to the date options. The keys align with the formats documented [here](/features/dates/#format-options). The value can be either a `[DateTimeFormatOptions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat#using_options)` object or a method that returns a string.
 
 ::: warning
 
-Keep in mind that this `formats` object is only valid when using the built-in date adapter. If you are using any other [date-io](https://github.com/dmtrKovalenko/date-io) adapter then you will need to follow that library's formatting documentation.
+Keep in mind that the `formats` object is only valid when using the **built-in** date adapter. When using any other [date-io](https://github.com/dmtrKovalenko/date-io) adapter, make sure to follow that library's formatting documentation.
 
 :::
 
