@@ -1,5 +1,6 @@
 @use '../../styles/settings'
 @use '../../styles/tools'
+@use '../../components/VTable/variables' as *
 @use './variables' as *
 
 .v-data-table
@@ -60,7 +61,7 @@
                   opacity: 0.5
 
 .v-data-table-column--fixed
-  background: rgba(var(--v-theme-surface))
+  background: $table-background
   position: sticky
   left: 0
 
