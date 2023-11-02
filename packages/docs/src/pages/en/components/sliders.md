@@ -1,18 +1,25 @@
 ---
 meta:
+  nav: Sliders
   title: Slider component
   description: The slider component can be used as an alternative visualization instead of a number input.
   keywords: sliders, vuetify slider component, vue slider component
-nav: Sliders
 related:
   - /components/forms/
   - /components/selects/
   - /components/range-sliders/
+features:
+  label: 'C: VSlider'
+  report: true
+  github: /components/VSlider/
+  spec: https://m2.material.io/components/sliders
 ---
 
 # Sliders
 
 The `v-slider` component can be used as an alternative visualization instead of a number input.
+
+<page-features />
 
 ## Usage
 

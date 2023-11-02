@@ -1,6 +1,11 @@
 export default {
   badge: 'สัญลักษณ์',
+  open: 'Open',
   close: 'ปิด',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'ไม่พบข้อมูลที่ค้นหา',
     loadingText: 'กำลังโหลดข้อมูล...',
@@ -26,12 +31,19 @@ export default {
     lastPage: 'หน้าสุดท้าย',
     pageText: '{0}-{1} จาก {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: 'เลือก {0} วัน',
-    nextMonthAriaLabel: 'เดือนถัดไป',
-    nextYearAriaLabel: 'ปีถัดไป',
-    prevMonthAriaLabel: 'เดือนก่อนหน้า',
-    prevYearAriaLabel: 'ปีก่อนหน้า',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'ไม่มีข้อมูล',
   carousel: {
@@ -48,6 +60,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} ไฟล์',
@@ -67,6 +80,10 @@ export default {
       first: 'First page',
       last: 'Last page',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

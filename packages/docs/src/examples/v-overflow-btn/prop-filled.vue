@@ -2,7 +2,7 @@
   <v-container id="dropdown-example-1">
     <v-overflow-btn
       class="my-2"
-      :items="dropdown_font"
+      :items="dropdownFont"
       label="Overflow Btn - filled"
       filled
       target="#dropdown-example-1"
@@ -10,10 +10,16 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const dropdownFont = ref(['Arial', 'Calibri', 'Courier', 'Verdana'])
+</script>
+
 <script>
   export default {
     data: () => ({
-      dropdown_font: ['Arial', 'Calibri', 'Courier', 'Verdana'],
+      dropdownFont: ['Arial', 'Calibri', 'Courier', 'Verdana'],
     }),
   }
 </script>

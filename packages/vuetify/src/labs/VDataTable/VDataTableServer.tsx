@@ -1,27 +1,26 @@
 // Components
+import { makeDataTableProps } from './VDataTable'
 import { makeVDataTableFooterProps, VDataTableFooter } from './VDataTableFooter'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableRows } from './VDataTableRows'
 import { VTable } from '@/components/VTable'
 
 // Composables
+import { provideExpanded } from './composables/expand'
 import { createGroupBy, provideGroupBy, useGroupedItems } from './composables/group'
 import { createHeaders } from './composables/headers'
-import { createPagination, makeDataTablePaginateProps, providePagination } from './composables/paginate'
-import { createSort, provideSort } from './composables/sort'
-import { makeDataTableProps } from './VDataTable'
-import { provideDefaults } from '@/composables/defaults'
-import { provideExpanded } from './composables/expand'
-import { provideSelection } from './composables/select'
 import { useDataTableItems } from './composables/items'
 import { useOptions } from './composables/options'
+import { createPagination, makeDataTablePaginateProps, providePagination } from './composables/paginate'
+import { provideSelection } from './composables/select'
+import { createSort, provideSort } from './composables/sort'
+import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, provide, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { DataTableItem } from './types'
 import type { VDataTableSlotProps, VDataTableSlots } from './VDataTable'
 
 export const makeVDataTableServerProps = propsFactory({
@@ -33,7 +32,7 @@ export const makeVDataTableServerProps = propsFactory({
   ...makeDataTablePaginateProps(),
   ...makeDataTableProps(),
   ...makeVDataTableFooterProps(),
-}, 'v-data-table-server')
+}, 'VDataTableServer')
 
 export const VDataTableServer = genericComponent<VDataTableSlots>()({
   name: 'VDataTableServer',
@@ -48,7 +47,6 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
     'update:options': (options: any) => true,
     'update:expanded': (options: any) => true,
     'update:groupBy': (value: any) => true,
-    'click:row': (e: Event, value: { item: DataTableItem }) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -67,15 +65,20 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
 
     const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
 
-    const { opened, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
+    const { opened, isGroupOpen, toggleGroup, extractRows } = provideGroupBy({ groupBy, sortBy })
 
     const { pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })
 
     const { flatItems } = useGroupedItems(items, groupBy, opened)
 
-    const { isSelected, select, selectAll, toggleSelect, someSelected, allSelected } = provideSelection(props, items)
+    const { isSelected, select, selectAll, toggleSelect, someSelected, allSelected } = provideSelection(props, {
+      allItems: items,
+      currentPage: items,
+    })
 
     const { isExpanded, toggleExpand } = provideExpanded(props)
+
+    const itemsWithoutGroups = computed(() => extractRows(items.value))
 
     useOptions({
       page,
@@ -116,7 +119,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
       toggleExpand,
       isGroupOpen,
       toggleGroup,
-      items: items.value,
+      items: itemsWithoutGroups.value,
       groupedItems: flatItems.value,
       columns: columns.value,
       headers: headers.value,

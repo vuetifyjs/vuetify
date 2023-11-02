@@ -8,9 +8,7 @@
       lg="4"
     >
       <router-link
-        :to="{
-          name: `wireframes-${wireframe}`
-        }"
+        :to="rpath(`/wireframes/${wireframe}/`)"
         class="text-decoration-none"
         rel="nofollow noopener"
         target="_blank"
@@ -30,6 +28,7 @@
 <script setup>
   // Utilities
   import kebabCase from 'lodash/kebabCase'
+  import { rpath } from '@/util/routes'
 
   const wireframes = [
     'Baseline',
@@ -40,5 +39,6 @@
     'Side navigation',
     'Three column',
     'Discord',
+    'Steam',
   ].map(wireframe => ([wireframe, kebabCase(wireframe)]))
 </script>

@@ -1,35 +1,16 @@
-import fs from 'fs/promises'
-import path from 'path'
-import { kebabCase } from './helpers/text'
 import { generateComponentDataFromTypes } from './types'
-import { addDescriptions, addPropData } from './utils'
-import mkdirp from 'mkdirp'
-import { parseSassVariables } from './helpers/sass'
 
-export default async (json: string) => {
-  const { componentName, componentProps, locales, outPath } = JSON.parse(json)
+const reset = '\x1b[0m'
+const red = '\x1b[31m'
+const blue = '\x1b[34m'
 
-  console.log(componentName)
+export default async (componentName: string) => {
+  console.log(blue, componentName, reset)
 
   try {
-    const kebabName = kebabCase(componentName)
-    const componentData = await generateComponentDataFromTypes(componentName)
-
-    const sources = addPropData(kebabName, componentData as any, componentProps)
-
-    await addDescriptions(kebabName, componentData as any, sources, locales)
-
-    const sass = parseSassVariables(componentName)
-
-    await mkdirp(outPath)
-
-    const component = { displayName: kebabName, fileName: kebabName, ...componentData, sass }
-
-    await fs.writeFile(path.resolve(outPath, `${component.fileName}.json`), JSON.stringify(component, null, 2))
-
-    return component
+    return await generateComponentDataFromTypes(componentName)
   } catch (err) {
-    console.error(`${componentName}: ${err}`, err.stack)
+    console.error(red, `${componentName}: ${err}`, err.stack, reset)
     return null
   }
 }

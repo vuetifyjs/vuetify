@@ -55,6 +55,14 @@
   </v-container>
 </template>
 
+<script setup>
+  const user = {
+    initials: 'JD',
+    fullName: 'John Doe',
+    email: 'john.doe@doe.com',
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

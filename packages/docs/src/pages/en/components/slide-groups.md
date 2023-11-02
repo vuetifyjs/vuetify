@@ -1,6 +1,6 @@
 ---
-nav: Slide groups
 meta:
+  nav: Slide groups
   title: Slide group component
   description: The slide group component is similar to item groups in that you can make selectable content out of elements but does so in a single line fashion.
   keywords: slide groups, slideable groups, vuetify slide group component, vue slide group component
@@ -8,11 +8,17 @@ related:
   - /components/icons/
   - /components/carousels/
   - /components/tabs/
+features:
+  github: /components/VSlideGroup/
+  label: 'C: VSlideGroup'
+  report: true
 ---
 
 # Slide groups
 
 The `v-slide-group` component is used to display pseudo paginated information. It uses [v-item-group](/components/item-groups) at its core and provides a baseline for components such as [v-tabs](/components/tabs) and [v-chip-group](/components/chip-groups).
+
+<page-features />
 
 ## Usage
 

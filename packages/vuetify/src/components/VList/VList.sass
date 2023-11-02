@@ -6,6 +6,7 @@
   overflow: auto
   padding: $list-padding
   position: relative
+  outline: none
 
   @include tools.border($list-border...)
   @include tools.elevation($list-elevation)
@@ -17,12 +18,7 @@
     user-select: none
 
   &--nav
-    padding-inline-start: $list-nav-padding
-    padding-inline-end: $list-nav-padding
-
-  .v-navigation-drawer--rail:not(.v-navigation-drawer--is-hovering) &
-    .v-avatar
-      --v-avatar-height: 24px
+    padding-inline: $list-nav-padding
 
   &--rounded
     @include tools.rounded($list-rounded-border-radius)

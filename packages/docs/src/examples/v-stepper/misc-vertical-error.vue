@@ -99,6 +99,12 @@
   </v-stepper>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const e13 = ref(2)
+</script>
+
 <script>
   export default {
     data () {

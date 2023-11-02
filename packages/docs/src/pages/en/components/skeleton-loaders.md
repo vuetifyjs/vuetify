@@ -1,7 +1,7 @@
 ---
 emphasized: true
-nav: Skeleton loaders
 meta:
+  nav: Skeleton loaders
   title: Skeleton loader component
   description:  The skeleton loader component provides a placeholder loading state for when content is being fetched from a server or loaded asynchronously. It can be used in a variety of contexts, including cards, lists, and tables.
   keywords: skeleton loaders, vuetify skeleton loader component, vue skeleton loader
@@ -9,6 +9,11 @@ related:
   - /components/cards/
   - /components/progress-circular/
   - /components/buttons/
+features:
+  figma: true
+  label: 'C: VSkeletonLoader'
+  github: /components/VSkeletonLoader/
+  report: true
 ---
 
 # Skeleton loaders
@@ -17,7 +22,13 @@ Skeleton loaders provide a simple way to display loading placeholders in your ap
 
 ![Skeleton loader Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-skeleton-loader/v-skeleton-loader-entry.png)
 
-----
+<page-features />
+
+::: success
+
+This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
+
+:::
 
 ## Usage
 
@@ -61,7 +72,7 @@ The `v-skeleton-loader` component has a small API mainly used to configure the r
 
 #### Type
 
-The **type** property is used to define the type of skeleton loader. Types can be combined to create more complex skeletons. For example, the **card** type is a combination of the **image** and **card-heading** types.
+The **type** property is used to define the type of skeleton loader. Types can be combined to create more complex skeletons. For example, the **card** type is a combination of the **image** and **heading** types.
 
 <example file="v-skeleton-loader/prop-type" />
 
@@ -73,11 +84,10 @@ The following built-in types are available:
 | **article** | heading, paragraph |
 | **avatar** | avatar |
 | **button** | button |
-| **card** | image, card-heading |
+| **card** | image, heading |
 | **card-avatar** | image, list-item-avatar |
-| **card-heading** | heading |
 | **chip** | chip |
-| **date-picker** | list-item, card-heading, divider, date-picker-options, date-picker-days, actions |
+| **date-picker** | list-item, heading, divider, date-picker-options, date-picker-days, actions |
 | **date-picker-options** | text, avatar@2 |
 | **date-picker-days** | avatar@28 |
 | **divider** | divider |
@@ -89,6 +99,7 @@ The following built-in types are available:
 | **list-item-avatar-two-line** | avatar, sentences |
 | **list-item-three-line** | paragraph |
 | **list-item-avatar-three-line** | avatar, paragraph |
+| **ossein** | ossein |
 | **paragraph** | text@3 |
 | **sentences** | text@2 |
 | **subtitle** | text |

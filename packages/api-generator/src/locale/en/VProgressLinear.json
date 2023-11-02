@@ -1,0 +1,20 @@
+{
+  "props": {
+    "absolute": "Applies position: absolute to the component.",
+    "active": "Reduce the height to 0, hiding component.",
+    "bgOpacity": "Background opacity, if null it defaults to 0.3 if background color is not specified or 1 otherwise.",
+    "bottom": "Aligns the component towards the bottom.",
+    "bufferValue": "The percentage value for the buffer.",
+    "clickable": "Clicking on the progress track will automatically set the value.",
+    "indeterminate": "Constantly animates, use when loading progress is unknown.",
+    "max": "Sets the maximum value the progress can reach.",
+    "reverse": "Displays reversed progress (right to left in LTR mode and left to right in RTL).",
+    "roundedBar": "Applies a border radius to the progress bar.",
+    "stream": "An alternative style for portraying loading that works in tandem with **buffer-value**.",
+    "striped": "Adds a stripe background to the filled portion of the progress component.",
+    "top": "Aligns the content towards the top."
+  },
+  "slots": {
+    "default": "Provides the current value of the component."
+  }
+}

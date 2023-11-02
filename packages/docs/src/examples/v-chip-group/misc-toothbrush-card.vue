@@ -44,6 +44,12 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const selection = ref(2)
+</script>
+
 <script>
   export default {
     data: () => ({

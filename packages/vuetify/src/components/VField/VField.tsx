@@ -2,19 +2,19 @@
 import './VField.sass'
 
 // Components
+import { VFieldLabel } from './VFieldLabel'
 import { VExpandXTransition } from '@/components/transitions'
 import { useInputIcon } from '@/components/VInput/InputIcon'
-import { VFieldLabel } from './VFieldLabel'
 
 // Composables
-import { IconValue } from '@/composables/icons'
-import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { IconValue } from '@/composables/icons'
+import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
+import { useRtl } from '@/composables/locale'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
@@ -33,9 +33,9 @@ import {
 } from '@/util'
 
 // Types
+import type { PropType, Ref } from 'vue'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
-import type { PropType, Ref } from 'vue'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled', 'plain'] as const
 type Variant = typeof allowedVariants[number]
@@ -93,15 +93,15 @@ export const makeVFieldProps = propsFactory({
   ...makeLoaderProps(),
   ...makeRoundedProps(),
   ...makeThemeProps(),
-}, 'v-field')
+}, 'VField')
 
 export type VFieldSlots = {
-  clear: []
-  'prepend-inner': [DefaultInputSlot]
-  'append-inner': [DefaultInputSlot]
-  label: [DefaultInputSlot & { label: string | undefined, props: Record<string, any> }]
-  loader: [LoaderSlotProps]
-  default: [VFieldSlot]
+  clear: never
+  'prepend-inner': DefaultInputSlot
+  'append-inner': DefaultInputSlot
+  label: DefaultInputSlot & { label: string | undefined, props: Record<string, any> }
+  loader: LoaderSlotProps
+  default: VFieldSlot
 }
 
 export const VField = genericComponent<new <T>(
@@ -253,7 +253,6 @@ export const VField = genericComponent<new <T>(
           ]}
           style={[
             backgroundColorStyles.value,
-            textColorStyles.value,
             props.style,
           ]}
           onClick={ onClick }
@@ -264,7 +263,7 @@ export const VField = genericComponent<new <T>(
           <LoaderSlot
             name="v-field"
             active={ !!props.loading }
-            color={ props.error ? 'error' : props.color }
+            color={ props.error ? 'error' : (typeof props.loading === 'string' ? props.loading : props.color) }
             v-slots={{ default: slots.loader }}
           />
 
@@ -286,6 +285,7 @@ export const VField = genericComponent<new <T>(
                 class={[textColorClasses.value]}
                 floating
                 for={ id.value }
+                style={ textColorStyles.value }
               >
                 { label }
               </VFieldLabel>
@@ -340,6 +340,7 @@ export const VField = genericComponent<new <T>(
               'v-field__outline',
               textColorClasses.value,
             ]}
+            style={ textColorStyles.value }
           >
             { isOutlined && (
               <>

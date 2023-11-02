@@ -57,6 +57,12 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const loading = ref(true)
+</script>
+
 <script>
   export default {
     data: () => ({

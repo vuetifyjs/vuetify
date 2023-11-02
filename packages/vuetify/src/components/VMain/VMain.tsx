@@ -3,9 +3,9 @@ import './VMain.sass'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
-import { makeTagProps } from '@/composables/tag'
 import { useLayout } from '@/composables/layout'
 import { useSsrBoot } from '@/composables/ssrBoot'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
@@ -15,7 +15,7 @@ export const makeVMainProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeTagProps({ tag: 'main' }),
-}, 'v-main')
+}, 'VMain')
 
 export const VMain = genericComponent()({
   name: 'VMain',

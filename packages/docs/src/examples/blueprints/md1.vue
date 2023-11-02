@@ -20,7 +20,7 @@
         <template v-slot:prepend>
           <!-- rounded added due to bug -->
           <v-avatar
-            icon="mdi-vuetify"
+            icon="$vuetify"
             class="text-white"
             rounded="circle"
           ></v-avatar>

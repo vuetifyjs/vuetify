@@ -1,14 +1,15 @@
 <template>
   <v-app-bar
     id="app-bar"
+    :image="image"
     border="b"
     flat
   >
     <template #prepend>
       <app-bar-logo />
 
-      <v-btn
-        v-if="name !== 'home' && mdAndDown"
+      <app-btn
+        v-if="route.meta.layout !== 'home' && mdAndDown"
         icon="mdi-menu"
         @click="app.drawer = !app.drawer"
       />
@@ -26,28 +27,26 @@
 
         <app-bar-team-link v-if="lgAndUp" />
 
-        <app-bar-playground-link v-if="lgAndUp" />
-
-        <app-bar-sponsor-link />
+        <app-bar-playground-link />
 
         <app-bar-enterprise-link />
       </template>
 
-      <app-vertical-divider />
+      <template v-if="!user.quickbar">
+        <app-vertical-divider v-if="mdAndUp" />
 
-      <app-bar-theme-toggle />
+        <app-bar-theme-toggle />
 
-      <app-vertical-divider />
+        <app-bar-store-link v-if="lgAndUp" />
 
-      <app-bar-store-link />
+        <app-bar-jobs-link v-if="lgAndUp" />
 
-      <app-bar-jobs-link v-if="lgAndUp" />
+        <app-bar-notifications-menu />
 
-      <app-bar-notifications-menu />
+        <app-bar-settings-toggle />
 
-      <app-bar-settings-toggle />
-
-      <app-bar-language-menu v-if="smAndUp" />
+        <app-bar-language-menu v-if="smAndUp" />
+      </template>
     </template>
   </v-app-bar>
 </template>
@@ -63,7 +62,6 @@
   import AppBarNotificationsMenu from './NotificationsMenu.vue'
   import AppBarPlaygroundLink from './PlaygroundLink.vue'
   import AppBarSettingsToggle from './SettingsToggle.vue'
-  import AppBarSponsorLink from './SponsorLink.vue'
   import AppBarStoreLink from './StoreLink.vue'
   import AppBarSupportMenu from './SupportMenu.vue'
   import AppBarTeamLink from './TeamLink.vue'
@@ -73,10 +71,24 @@
 
   // Composables
   import { useAppStore } from '@/store/app'
-  import { useDisplay } from 'vuetify'
+  import { useDisplay, useTheme } from 'vuetify'
   import { useRoute } from 'vue-router'
 
+  // Stores
+  import { useUserStore } from '@/store/user'
+
+  // Utilities
+  import { computed } from 'vue'
+
   const app = useAppStore()
+  const user = useUserStore()
   const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
-  const { name } = useRoute()
+  const route = useRoute()
+  const theme = useTheme()
+
+  const image = computed(() => {
+    if (['dark', 'light'].includes(theme.name.value)) return undefined
+
+    return `https://cdn.vuetifyjs.com/docs/images/themes/${theme.name.value}-app-bar.png`
+  })
 </script>

@@ -26,6 +26,7 @@ export default Vue.extend({
   name: 'mouse',
 
   methods: {
+    // TODO: this has been partially ported to v3 in util/events
     getDefaultMouseEventHandlers (suffix: string, getEvent: MouseHandler): MouseEventsMap {
       const listeners = Object.keys(this.$listeners)
         .filter(key => key.endsWith(suffix))

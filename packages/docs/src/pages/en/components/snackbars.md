@@ -1,6 +1,6 @@
 ---
-nav: Snackbars
 meta:
+  nav: Snackbars
   title: Snackbar component
   description: The snackbar component informs user of a process that your application has performed is will perform. It can be temporary and often contains actions. Timer will stop when user hovers over the snackbar.
   keywords: snackbars, vuetify snackbar component, vue snackbar component
@@ -8,11 +8,18 @@ related:
   - /components/buttons/
   - /styles/colors/
   - /components/forms/
+features:
+  github: /components/VSnackbar/
+  label: 'C: VSnackbar'
+  report: true
+  spec: https://m2.material.io/components/snackbars
 ---
 
 # Snackbars
 
 The `v-snackbar` component is used to display a quick message to a user. Snackbars support positioning, removal delay, and callbacks.
+
+<page-features />
 
 ## Usage
 

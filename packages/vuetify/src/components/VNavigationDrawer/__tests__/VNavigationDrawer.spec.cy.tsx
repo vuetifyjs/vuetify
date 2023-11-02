@@ -1,9 +1,12 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VLayout } from '@/components/VLayout'
-import { VMain } from '@/components/VMain'
-import { VLocaleProvider } from '@/components/VLocaleProvider'
+// Components
 import { VNavigationDrawer } from '..'
+import { VLayout } from '@/components/VLayout'
+import { VLocaleProvider } from '@/components/VLocaleProvider'
+import { VMain } from '@/components/VMain'
+
+// Utilities
 import { ref } from 'vue'
 
 describe('VNavigationDrawer', () => {

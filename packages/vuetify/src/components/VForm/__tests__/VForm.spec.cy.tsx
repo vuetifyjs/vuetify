@@ -1,11 +1,16 @@
 /* eslint-disable sonarjs/no-identical-functions */
 /// <reference types="../../../../types/cypress" />
 
-import { ref } from 'vue'
-import { Application } from '../../../../cypress/templates'
+// Components
 import { VForm } from '../'
+import { Application } from '../../../../cypress/templates'
 import { VBtn } from '@/components/VBtn'
 import { VTextField } from '@/components/VTextField'
+
+// Utilities
+import { ref } from 'vue'
+
+// Types
 import type { SubmitEventPromise } from '@/composables'
 
 describe('VForm', () => {

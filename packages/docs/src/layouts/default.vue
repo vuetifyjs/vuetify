@@ -4,8 +4,6 @@
 
     <app-banner />
 
-    <app-v2-banner />
-
     <app-bar />
 
     <app-drawer />
@@ -14,7 +12,7 @@
 
     <app-back-to-top />
 
-    <app-pwa-snackbar />
+    <app-snackbar-queue />
 
     <v-main>
       <slot>
@@ -32,7 +30,7 @@
             </v-fade-transition>
           </router-view>
 
-          <backmatter v-if="!isApi" :key="route.name" />
+          <backmatter v-if="hasBackmatter" :key="route.name" />
         </v-container>
       </slot>
     </v-main>
@@ -43,12 +41,11 @@
   // Components
   import AppBanner from '@/components/app/Banner.vue'
   import AppBackToTop from '@/components/app/BackToTop.vue'
-  import AppV2Banner from '@/components/app/V2Banner.vue'
   import AppBar from '@/components/app/bar/Bar.vue'
   import AppDrawer from '@/components/app/drawer/Drawer.vue'
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
   import AppToc from '@/components/app/Toc.vue'
-  import AppPwaSnackbar from '@/components/app/PwaSnackbar.vue'
+  import AppSnackbarQueue from '@/components/app/SnackbarQueue.vue'
 
   // Composables
   import { useRoute } from 'vue-router'
@@ -58,6 +55,8 @@
 
   const route = useRoute()
 
-  const isApi = computed(() => route.name?.toString().startsWith('api-'))
-  const style = computed(() => ({ maxWidth: isApi.value ? '1368px' : '960px' }))
+  const isApi = computed(() => route.meta?.category === 'api')
+  const isDashboard = computed(() => route.meta?.category === 'user')
+  const style = computed(() => ({ maxWidth: isApi.value || isDashboard.value ? '1368px' : '960px' }))
+  const hasBackmatter = computed(() => !isApi.value && route.meta?.backmatter !== false)
 </script>

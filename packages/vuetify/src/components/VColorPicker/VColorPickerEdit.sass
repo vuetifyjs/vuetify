@@ -3,6 +3,7 @@
 
 .v-color-picker-edit
   display: flex
+  margin-top: $color-picker-input-margin-top
 
 .v-color-picker-edit__input
   width: 100%
@@ -12,11 +13,7 @@
   text-align: center
 
   &:not(:last-child)
-    +tools.ltr()
-      margin-right: $color-picker-input-margin
-
-    +tools.rtl()
-      margin-left: $color-picker-input-margin
+    margin-inline-end: $color-picker-input-margin
 
   input
     border-radius: $color-picker-border-radius

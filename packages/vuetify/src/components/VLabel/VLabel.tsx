@@ -14,7 +14,7 @@ export const makeVLabelProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeThemeProps(),
-}, 'v-label')
+}, 'VLabel')
 
 export const VLabel = genericComponent()({
   name: 'VLabel',

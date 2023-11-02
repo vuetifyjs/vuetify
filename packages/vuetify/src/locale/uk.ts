@@ -1,6 +1,11 @@
 export default {
   badge: 'Знак',
+  open: 'Open',
   close: 'Закрити',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'В результаті пошуку нічого не знайдено',
     loadingText: 'Завантаження...',
@@ -26,12 +31,19 @@ export default {
     lastPage: 'Остання сторінка',
     pageText: '{0}-{1} з {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} вибрано',
-    nextMonthAriaLabel: 'Наступного місяця',
-    nextYearAriaLabel: 'Наступного року',
-    prevMonthAriaLabel: 'Попередній місяць',
-    prevYearAriaLabel: 'Попередній рік',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Немає даних для відображення',
   carousel: {
@@ -48,6 +60,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} файлів',
@@ -67,6 +80,10 @@ export default {
       first: 'First page',
       last: 'Last page',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

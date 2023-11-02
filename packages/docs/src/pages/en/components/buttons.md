@@ -1,6 +1,6 @@
 ---
-nav: Buttons
 meta:
+  nav: Buttons
   title: Button component
   description: The button component communicates actions that a user can take and are typically placed in dialogs, forms, cards and toolbars.
   keywords: buttons, vuetify button component, vue button component
@@ -8,15 +8,21 @@ related:
   - /components/button-groups/
   - /components/icons/
   - /components/cards/
+features:
+  figma: true
+  github: /components/VBtn/
+  label: 'C: VBtn'
+  report: true
+  spec: https://m2.material.io/components/buttons
 ---
 
 # Buttons
 
-The `v-btn` component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color. <inline slug="scrimba-buttons" />
+The `v-btn` component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color.
 
 ![Button Entry](https://cdn.vuetifyjs.com/docs/images/components/v-btn/v-btn-entry.png)
 
----
+<page-features />
 
 ## Usage
 
@@ -81,11 +87,9 @@ Block buttons extend the full available width of their container. This is useful
 
 <example file="v-btn/prop-block" />
 
-<alert type="info">
-
+::: info
 Block applies **width: 100%** which can cause overflow issues inside a flex container.
-
-</alert>
+:::
 
 #### Rounded
 
@@ -278,7 +282,7 @@ The `v-banner-actions` component applies the **text** variant and reduces button
 | - | - |
 | [Banners](/components/banners/) | [v-banner-actions](/api/v-banner-actions/) |  |
 
-<!-- <example file="v-btn/defaults-card-actions" /> -->
+<example file="v-btn/defaults-banner-actions" />
 
 The following properties are modified when used within a `v-banner-actions` component:
 

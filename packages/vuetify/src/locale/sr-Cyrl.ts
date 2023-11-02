@@ -1,6 +1,11 @@
 export default {
   badge: 'Значка',
+  open: 'Open',
   close: 'Затвори',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Ни један запис није пронађен',
     loadingText: 'Учитавање ставке...',
@@ -26,12 +31,19 @@ export default {
     lastPage: 'Последња страница',
     pageText: '{0}-{1} од {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} одабрано',
-    nextMonthAriaLabel: 'Следећег месеца',
-    nextYearAriaLabel: 'Следеће године',
-    prevMonthAriaLabel: 'Претходни месец',
-    prevYearAriaLabel: 'Претходна година',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Нема доступних података',
   carousel: {
@@ -48,6 +60,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} фајлова',
@@ -67,6 +80,10 @@ export default {
       first: 'First page',
       last: 'Last page',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

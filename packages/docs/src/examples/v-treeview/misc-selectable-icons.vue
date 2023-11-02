@@ -14,7 +14,7 @@
         <v-card-text>
           <v-treeview
             v-model="tree"
-            :load-children="fetch"
+            :load-children="load"
             :items="items"
             selected-color="indigo"
             open-on-click
@@ -94,11 +94,58 @@
   </v-card>
 </template>
 
+<script setup>
+  import { computed, ref, watch } from 'vue'
+
+  const breweries = ref([])
+  const tree = ref([])
+  const types = ref([])
+  const items = computed(() => {
+    const children = types.value.map(type => ({
+      id: type,
+      name: getName(type),
+      children: getChildren(type),
+    }))
+    return [{
+      id: 1,
+      name: 'All Breweries',
+      children,
+    }]
+  })
+  function load () {
+    if (breweries.value.length) return
+
+    return fetch('https://api.openbrewerydb.org/breweries').then(res => res.json()).then(data => (breweries.value = data)).catch(err => console.log(err))
+  }
+  function getChildren (type) {
+    const _breweries = []
+    for (const brewery of breweries.value) {
+      if (brewery.brewery_type !== type) continue
+      _breweries.push({
+        ...brewery,
+        name: getName(brewery.name),
+      })
+    }
+    return _breweries.sort((a, b) => {
+      return a.name > b.name ? 1 : -1
+    })
+  }
+  function getName (name) {
+    return `${name.charAt(0).toUpperCase()}${name.slice(1)}`
+  }
+  watch(breweries, val => {
+    types.value = val.reduce((acc, cur) => {
+      const type = cur.brewery_type
+      if (!acc.includes(type)) acc.push(type)
+      return acc
+    }, []).sort()
+  })
+</script>
+
 <script>
   export default {
     data: () => ({
       breweries: [],
-      isLoading: false,
       tree: [],
       types: [],
     }),
@@ -117,9 +164,6 @@
           children,
         }]
       },
-      shouldShowTree () {
-        return this.breweries.length > 0 && !this.isLoading
-      },
     },
 
     watch: {
@@ -135,7 +179,7 @@
     },
 
     methods: {
-      fetch () {
+      load () {
         if (this.breweries.length) return
 
         return fetch('https://api.openbrewerydb.org/breweries')

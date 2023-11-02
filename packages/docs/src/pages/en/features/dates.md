@@ -1,5 +1,5 @@
 ---
-emphasized: false
+emphasized: true
 meta:
   title: Dates
   description: Vuetify has first party date support that can easily be swapped for another date library
@@ -8,13 +8,25 @@ related:
 - /features/blueprints/
 - /features/global-configuration/
 - /features/treeshaking/
+features:
+  github: /composables/date/
+  label: 'E: date'
+  report: true
 ---
 
 # Dates
 
-Easily hook up date libraries that are used for components that require date functionality.
+Easily hook up date libraries that are used for components such as Date Picker and Calendar that require date functionality.
+
+<page-features />
 
 <entry />
+
+::: success
+
+This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
+
+:::
 
 ## Usage
 
@@ -24,7 +36,7 @@ The following example demonstrates explicitly importing the Vuetify date adapter
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
-import { VuetifyDateAdapter } from 'vuetify/labs/date/adapters/vuetify'
+import { VuetifyDateAdapter } from 'vuetify/date/adapters/vuetify'
 
 export default createVuetify({
   date: {
@@ -36,24 +48,20 @@ export default createVuetify({
 Within your application, import the **useDate** function and use it to access the date composable.
 
 ```html { resource="src/views/Date.vue" }
-<script>
-  import { useDate } from 'vuetify/labs/date'
+<script setup>
+  import { useDate } from 'vuetify'
 
-  export default {
-    setup () {
-      const date = useDate()
+  const date = useDate()
 
-      console.log(date.getMonth(new Date('March 1, 2021'))) // 3
-    },
-  }
+  console.log(date.getMonth(new Date('March 1, 2021'))) // 3
 </script>
 ```
 
-<alert type="info">
+::: info
 
 For a list of all supported date adapters, visit the [date-io](https://github.com/dmtrKovalenko/date-io#projects) project repository.
 
-</alert>
+:::
 
 ### Format options
 
@@ -64,22 +72,23 @@ The date composable supports the following date formatting options:
 * keyboardDate
 * monthAndDate
 * monthAndYear
+* month
+* monthShort
+* dayOfMonth
+* shortDate
+* year
 
 The following example shows how to use the date composable to format a date string:
 
 ```html { resource="src/views/Date.vue" }
-<script>
-  import { useDate } from 'vuetify/labs/date'
+<script setup>
+  import { useDate } from 'vuetify'
 
-  export default {
-    setup () {
-      const date = useDate()
+  const date = useDate()
 
-      const formatted = date.format('2010-04-13 00:00:00', 'fullDateWithWeekday')
+  const formatted = date.format('2010-04-13', 'fullDateWithWeekday')
 
-      console.log(formatted) // Tuesday, April 13, 2010
-    },
-  }
+  console.log(formatted) // Tuesday, April 13, 2010
 </script>
 ```
 
@@ -118,12 +127,18 @@ import type { DateAdapter } from 'vuetify/labs'
 export interface DateAdapter<Date> {
   date (value?: any): Date | null
   format (date: Date, formatString: string): string
+  toJsDate (value: Date): Date
+  parseISO (date: string): Date
+  toISO (date: Date): string
 
+  startOfDay (date: Date): Date
+  endOfDay (date: Date): Date
   startOfMonth (date: Date): Date
   endOfMonth (date: Date): Date
   startOfYear (date: Date): Date
   endOfYear (date: Date): Date
 
+  isBefore (date: Date, comparing: Date): boolean
   isAfter (date: Date, comparing: Date): boolean
   isEqual (date: Date, comparing: Date): boolean
   isSameDay (date: Date, comparing: Date): boolean
@@ -135,11 +150,14 @@ export interface DateAdapter<Date> {
   addMonths (date: Date, amount: number): Date
 
   getYear (date: Date): number
+  getNextYear (date: Date): Date
   setYear (date: Date, year: number): Date
+  getDate (date: Date): number
   getDiff (date: Date, comparing: Date | string, unit?: string): number
-  getWeek (date: Date): number
-  getWeekArray (date: Date): (Date | null)[][]
+  getWeekArray (date: Date): Date[][]
   getWeekdays (): string[]
   getMonth (date: Date): number
+  setMonth (date: Date, month: number): Date
+  getNextMonth (date: Date): Date
 }
 ```

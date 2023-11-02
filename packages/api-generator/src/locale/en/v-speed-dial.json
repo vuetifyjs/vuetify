@@ -1,6 +1,0 @@
-{
-  "props": {
-    "direction": "Direction in which speed-dial content will show. Possible values are `top`, `bottom`, `left`, `right`.",
-    "openOnHover": "Opens speed-dial on hover"
-  }
-}

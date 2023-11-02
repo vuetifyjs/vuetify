@@ -114,6 +114,13 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const amenities = ref([1, 4])
+  const neighborhoods = ref([1])
+</script>
+
 <script>
   export default {
     data: () => ({

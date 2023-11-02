@@ -1,23 +1,23 @@
 // Components
-import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VExpandTransition } from '@/components/transitions'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
-import { IconValue } from '@/composables/icons'
-import { makeComponentProps } from '@/composables/component'
-import { makeTagProps } from '@/composables/tag'
-import { MaybeTransition } from '@/composables/transition'
 import { useList } from './list'
+import { makeComponentProps } from '@/composables/component'
+import { IconValue } from '@/composables/icons'
 import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
 import { useSsrBoot } from '@/composables/ssrBoot'
+import { makeTagProps } from '@/composables/tag'
+import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, toRef } from 'vue'
 import { defineComponent, genericComponent, propsFactory, useRender } from '@/util'
 
 export type VListGroupSlots = {
-  default: []
-  activator: [{ isOpen: boolean, props: Record<string, unknown> }]
+  default: never
+  activator: { isOpen: boolean, props: Record<string, unknown> }
 }
 
 const VListGroupActivator = defineComponent({
@@ -52,7 +52,7 @@ export const makeVListGroupProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeTagProps(),
-}, 'v-list-group')
+}, 'VListGroup')
 
 export const VListGroup = genericComponent<VListGroupSlots>()({
   name: 'VListGroup',

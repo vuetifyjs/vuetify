@@ -21,6 +21,15 @@
   </v-footer>
 </template>
 
+<script setup>
+  const icons = [
+    'mdi-facebook',
+    'mdi-twitter',
+    'mdi-linkedin',
+    'mdi-instagram',
+  ]
+</script>
+
 <script>
   export default {
     data: () => ({

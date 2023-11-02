@@ -1,10 +1,10 @@
+// Utilities
+import { keys } from '@/util'
+
 // Types
 import type {
   DirectiveBinding,
 } from 'vue'
-
-// Utilities
-import { keys } from '@/util'
 
 export interface TouchHandlers {
   start?: (wrapperEvent: { originalEvent: TouchEvent } & TouchData) => void

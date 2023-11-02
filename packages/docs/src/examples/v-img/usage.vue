@@ -25,8 +25,8 @@
       <v-slider
         v-model="width"
         label="Width"
-        min="200"
-        max="500"
+        min="100"
+        max="400"
       ></v-slider>
     </template>
   </usage-example>

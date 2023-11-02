@@ -1,6 +1,6 @@
 ---
-nav: Forms
 meta:
+  nav: Forms
   title: Form component
   description: The form component provides a wrapper that makes it easy to process and control validation states of input components.
   keywords: forms, vuetify form component, vue form component, form validation
@@ -8,17 +8,27 @@ related:
   - /components/selects/
   - /components/switches/
   - /components/text-fields/
+features:
+  label: 'C: VForm'
+  report: true
+  github: /components/VForm/
 ---
 
 # Forms
 
-Vuetify offers a simple built-in form validation system based on functions as rules, making it easy for developers to get set up quickly. If you prefer using a 3rd party validation plugin, we also provide examples for integrating both [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/vuelidate/vuelidate).
+Vuetify offers a simple built-in form validation system based on functions as rules, making it easy for developers to get set up quickly.
 
-<promoted slug="vuemastery-forms" />
+<page-features />
 
 ## Usage
 
 The `v-form` component makes it easy to add validation to form inputs. All input components have a **rules** prop that can be used to specify conditions in which the input is either *valid* or *invalid*.
+
+::: tip
+
+If you prefer using a 3rd party validation plugin, we also provide examples for integrating both [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/vuelidate/vuelidate).
+
+:::
 
 Whenever the value of an input is changed, each rule receives a new value and is re-evaluated. If a rule returns `false` or a `string`, validation has failed and the `string` value is presented as an error message.
 

@@ -1,6 +1,11 @@
 export default {
   badge: 'バッジ',
+  open: 'Open',
   close: '閉じる',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: '検索結果が見つかりません。',
     loadingText: '項目をロード中です...',
@@ -26,12 +31,19 @@ export default {
     lastPage: '最後のページ',
     pageText: '{0}-{1} 件目 / {2}件',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0}日付選択',
-    nextMonthAriaLabel: '来月',
-    nextYearAriaLabel: '来年',
-    prevMonthAriaLabel: '前月',
-    prevYearAriaLabel: '前年',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'データはありません。',
   carousel: {
@@ -48,6 +60,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} ファイル',
@@ -67,6 +80,10 @@ export default {
       first: 'First page',
       last: 'Last page',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

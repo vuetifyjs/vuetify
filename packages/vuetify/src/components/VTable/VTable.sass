@@ -7,6 +7,10 @@
 .v-table
   @include tools.theme($table-theme...)
 
+  transition-duration: $table-transition-duration
+  transition-property: $table-transition-property
+  transition-timing-function: $table-transition-timing-function
+
   .v-table-divider
     border-right: $table-border
 
@@ -66,6 +70,8 @@
   // Do not inherit line-height
   line-height: $table-line-height
   max-width: 100%
+  display: flex
+  flex-direction: column
 
   > .v-table__wrapper
     > table
@@ -79,7 +85,9 @@
           > td,
           > th
             padding: $table-column-padding
-            transition: height settings.$standard-easing
+            transition-duration: $table-transition-duration
+            transition-property: $table-transition-property
+            transition-timing-function: $table-transition-timing-function
 
           > th
             font-weight: $table-header-font-weight
@@ -104,6 +112,7 @@
 .v-table__wrapper
   border-radius: inherit
   overflow: auto
+  flex: 1 1 auto
 
 // Modifiers
 .v-table--has-top
@@ -142,19 +151,21 @@
   > .v-table__wrapper
     > table
       > thead
+        position: sticky
+        top: 0
+        z-index: 1
         > tr
           > th
             border-bottom: 0px !important
-            position: sticky
-            top: 0
 
 .v-table--fixed-footer
   > .v-table__wrapper
     > table
       > tfoot
         > tr
+          position: sticky
+          bottom: 0
+          z-index: 1
           > td,
           > th
               border-top: 0px !important
-              position: sticky
-              bottom: 0

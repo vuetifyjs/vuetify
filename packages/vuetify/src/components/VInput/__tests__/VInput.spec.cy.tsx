@@ -1,8 +1,11 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
 import { VInput } from '../VInput'
-import { generate } from '../../../../cypress/templates'
+
+// Utilities
 import { cloneVNode } from 'vue'
+import { generate } from '../../../../cypress/templates'
 
 const densities = ['default', 'comfortable', 'compact']
 
@@ -10,7 +13,7 @@ const stories = Object.fromEntries(Object.entries({
   Default: <VInput />,
   Disabled: <VInput disabled />,
   Affixes: <VInput prefix="prefix" suffix="suffix" />,
-  PrependAppend: <VInput prependIcon="mdi-vuetify" appendIcon="mdi-vuetify" />,
+  PrependAppend: <VInput prependIcon="$vuetify" appendIcon="$vuetify" />,
   Hint: <VInput hint="hint" persistentHint />,
   Messages: <VInput messages="messages" />,
 }).map(([k, v]) => [k, (

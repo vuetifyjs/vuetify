@@ -2,12 +2,18 @@
 @use '../../styles/tools'
 @use 'sass:math'
 
-@at-root
-  @include tools.density('v-input', $file-input-chips-margin-bottom) using ($modifier)
-    --file-input-chips-margin-bottom: #{0px + math.div($modifier, 2)}
-
 // Block
 .v-file-input
+
+  &--chips.v-input--density-compact
+    .v-field--variant-solo,
+    .v-field--variant-solo-inverted,
+    .v-field--variant-filled,
+    .v-field--variant-solo-filled
+      .v-label.v-field-label
+        &--floating
+          top: 0px
+
   input[type="file"]
     height: 100%
     left: 0
@@ -16,12 +22,6 @@
     top: 0
     width: 100%
     z-index: 1
- 
-  &--chips,
-  &--selection-slot
-    .v-field__input
-      min-height: calc(var(--v-field-input-min-height) + var(--file-input-chips-margin-bottom) + $file-input-chips-margin-top)
 
-  .v-chip
-    margin-top: $file-input-chips-margin-top
-    margin-bottom: var(--file-input-chips-margin-bottom)
+  .v-input__details
+    padding-inline: $file-input-details-padding-inline

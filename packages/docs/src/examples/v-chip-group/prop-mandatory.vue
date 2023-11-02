@@ -21,6 +21,20 @@
   </v-row>
 </template>
 
+<script setup>
+  const tags = [
+    'Work',
+    'Home Improvement',
+    'Vacation',
+    'Food',
+    'Drawers',
+    'Shopping',
+    'Art',
+    'Tech',
+    'Creative Writing',
+  ]
+</script>
+
 <script>
   export default {
     data: () => ({

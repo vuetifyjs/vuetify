@@ -21,6 +21,7 @@ export type Member = {
   github?: string
   team: string
   twitter?: string
+  joined?: string
 }
 
 export type GithubMember = {
@@ -50,8 +51,8 @@ export const useTeamStore = defineStore('team', () => {
       }) === 0)
 
       return {
-        ...member,
         avatar: record?.avatar_url,
+        ...member,
       }
     })
   })

@@ -1,8 +1,9 @@
 // Utilities
+import { APCAcontrast } from './color/APCA'
 import { consoleWarn } from './console'
 import { chunk, has, padEnd } from './helpers'
-import * as sRGB from '@/util/color/transformSRGB'
 import * as CIELAB from '@/util/color/transformCIELAB'
+import * as sRGB from '@/util/color/transformSRGB'
 
 // Types
 import type { Colors } from '@/composables/theme'
@@ -17,6 +18,10 @@ export type Color = string | number | HSV | RGB | HSL
 
 export function isCssColor (color?: string | null | false): boolean {
   return !!color && /^(#|var\(--|(rgb|hsl)a?\()/.test(color)
+}
+
+export function isParsableColor (color: string): boolean {
+  return isCssColor(color) && !/^((rgb|hsl)a?\()?var\(--/.test(color)
 }
 
 const cssColorRe = /^(?<fn>(?:rgb|hsl)a?)\((?<values>.+)\)/
@@ -279,4 +284,21 @@ export function getContrast (first: Color, second: Color) {
   const dark = Math.min(l1, l2)
 
   return (light + 0.05) / (dark + 0.05)
+}
+
+export function getForeground (color: Color) {
+  const blackContrast = Math.abs(APCAcontrast(parseColor(0), parseColor(color)))
+  const whiteContrast = Math.abs(APCAcontrast(parseColor(0xffffff), parseColor(color)))
+
+  // TODO: warn about poor color selections
+  // const contrastAsText = Math.abs(APCAcontrast(colorVal, colorToInt(theme.colors.background)))
+  // const minContrast = Math.max(blackContrast, whiteContrast)
+  // if (minContrast < 60) {
+  //   consoleInfo(`${key} theme color ${color} has poor contrast (${minContrast.toFixed()}%)`)
+  // } else if (contrastAsText < 60 && !['background', 'surface'].includes(color)) {
+  //   consoleInfo(`${key} theme color ${color} has poor contrast as text (${contrastAsText.toFixed()}%)`)
+  // }
+
+  // Prefer white text if both have an acceptable contrast ratio
+  return whiteContrast > Math.min(blackContrast, 50) ? '#fff' : '#000'
 }

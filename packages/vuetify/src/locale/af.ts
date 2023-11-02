@@ -1,6 +1,11 @@
 export default {
   badge: 'badge',
+  open: 'Open',
   close: 'Close',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Geen ooreenstemmende resultate is gevind nie',
     loadingText: 'Loading item...',
@@ -26,12 +31,19 @@ export default {
     lastPage: 'Laaste bladsy',
     pageText: '{0}-{1} van {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} gekies',
-    nextMonthAriaLabel: 'Volgende maand',
-    nextYearAriaLabel: 'Volgende jaar',
-    prevMonthAriaLabel: 'Vorige maand',
-    prevYearAriaLabel: 'Vorige jaar',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Geen data is beskikbaar nie',
   carousel: {
@@ -48,6 +60,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} files',
@@ -67,6 +80,10 @@ export default {
       first: 'First page',
       last: 'Last page',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

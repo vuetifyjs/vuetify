@@ -1,6 +1,6 @@
 ---
-nav: Textareas
 meta:
+  nav: Textareas
   title: Textarea component
   description: The textarea component is a text field that accepts lengthy textual input from users.
   keywords: textareas, vuetify textarea component, vue textarea component
@@ -8,11 +8,18 @@ related:
   - /components/forms/
   - /components/selects/
   - /components/text-fields/
+features:
+  label: 'C: VTextarea'
+  report: true
+  github: /components/VTextarea/
+  spec: https://m2.material.io/components/text-fields#input-types
 ---
 
 # Textareas
 
 Textarea components are used for collecting large amounts of textual data.
+
+<page-features />
 
 ## Usage
 

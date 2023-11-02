@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="mx-auto mt-5"
+    class="mx-auto"
     color="#36393f"
     max-width="650"
     min-height="350"
@@ -104,10 +104,10 @@
 
         <v-spacer></v-spacer>
 
-        <v-icon
-          class="me-3"
+        <v-btn
           icon="mdi-dots-horizontal"
-        ></v-icon>
+          variant="text"
+        ></v-btn>
 
         <v-btn
           class="me-2 text-none"

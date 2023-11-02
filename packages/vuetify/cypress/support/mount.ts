@@ -4,6 +4,7 @@ import type { VueWrapper } from '@vue/test-utils'
 import { mount as cyMount } from 'cypress/vue'
 import { createVuetify } from '../../src/framework'
 import { mergeDeep } from '../../src/util'
+import { aliases } from '../../src/iconsets/mdi-svg'
 
 /**
  * @example
@@ -17,7 +18,9 @@ Cypress.Commands.add('mount', (component, options, vuetifyOptions) => {
     root.classList.add('v-locale--is-ltr')
   }
 
-  const vuetify = createVuetify(vuetifyOptions)
+  const vuetify = createVuetify(mergeDeep({
+    icons: { aliases },
+  }, vuetifyOptions))
   const defaultOptions = {
     global: {
       stubs: {

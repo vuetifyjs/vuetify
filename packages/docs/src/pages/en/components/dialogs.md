@@ -1,6 +1,6 @@
 ---
-nav: Dialogs
 meta:
+  nav: Dialogs
   title: Dialog component
   description: The dialog component informs a user about a specific task and may contain critical information or require the user to take a specific action.
   keywords: dialogs, vuetify dialog component, vue dialog component
@@ -8,6 +8,11 @@ related:
   - /components/buttons
   - /components/cards
   - /components/menus
+features:
+  github: /components/VDialog/
+  label: 'C: VDialog'
+  report: true
+  spec: https://m2.material.io/components/dialogs
 ---
 
 # Dialogs
@@ -16,13 +21,13 @@ The `v-dialog` component inform users about a specific task and may contain crit
 
 <!-- ![dialog Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-dialog/v-dialog-entry.png) -->
 
----
+<page-features />
 
 ## Usage
 
 In this basic example we use the **activator** slot to render a button that is used to open the dialog. When using the **activator** slot it is important that you bind the **props** object from the slot (using `v-bind`) to the element that will activate the dialog. See the examples below for more ways of activating a dialog.
 
-<example file="v-dialog/usage" />
+<usage name="v-dialog" />
 
 <entry />
 

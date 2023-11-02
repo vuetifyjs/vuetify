@@ -1,6 +1,6 @@
 ---
-nav: Timelines
 meta:
+  nav: Timelines
   title: Timeline component
   description: The timeline component is used to display chronological information either vertically or horizontally.
   keywords: timelines, vuetify timeline component, vue timeline component
@@ -8,14 +8,17 @@ related:
   - /components/cards/
   - /components/icons/
   - /components/grids/
-
+features:
+  github: /components/VTimeline/
+  label: 'C: VTimeline'
+  report: true
 ---
 
 # Timelines
 
 The `v-timeline` is useful for stylistically displaying chronological information.
 
-<entry />
+<page-features />
 
 <!--
 ## Usage
@@ -24,6 +27,8 @@ The `v-timeline` is useful for stylistically displaying chronological informatio
 
 <example file="v-timeline/usage" />
 -->
+
+<entry />
 
 ## API
 

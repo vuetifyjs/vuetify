@@ -2,23 +2,28 @@
 import './VSliderThumb.sass'
 
 // Components
-import { VScaleTransition } from '../transitions'
 import { VSliderSymbol } from './slider'
+import { VScaleTransition } from '../transitions'
+
+// Composables
+import { useTextColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { useElevation } from '@/composables/elevation'
+import { useRtl } from '@/composables/locale'
 
 // Directives
 import Ripple from '@/directives/ripple'
-
-// Composables
-import { makeComponentProps } from '@/composables/component'
-import { useElevation } from '@/composables/elevation'
-import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, inject } from 'vue'
 import { convertToUnit, genericComponent, keyValues, propsFactory, useRender } from '@/util'
 
+// Types
+import type { PropType } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
+
 export type VSliderThumbSlots = {
-  'thumb-label': [{ modelValue: number }]
+  'thumb-label': { modelValue: number }
 }
 
 export const makeVSliderThumbProps = propsFactory({
@@ -40,12 +45,12 @@ export const makeVSliderThumbProps = propsFactory({
     required: true,
   },
   ripple: {
-    type: Boolean,
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
 
   ...makeComponentProps(),
-}, 'v-slider-thumb')
+}, 'VSliderThumb')
 
 export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
   name: 'VSliderThumb',
@@ -60,23 +65,23 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
 
   setup (props, { slots, emit }) {
     const slider = inject(VSliderSymbol)
-
+    const { isRtl, rtlClasses } = useRtl()
     if (!slider) throw new Error('[Vuetify] v-slider-thumb must be used inside v-slider or v-range-slider')
 
     const {
       thumbColor,
       step,
-      vertical,
       disabled,
       thumbSize,
       thumbLabel,
       direction,
+      isReversed,
+      vertical,
       readonly,
       elevation,
-      isReversed,
-      horizontalDirection,
       mousePressed,
       decimals,
+      indexFromEnd,
     } = slider
 
     const { textColorClasses, textColorStyles } = useTextColor(thumbColor)
@@ -97,7 +102,9 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       const _step = step.value || 0.1
       const steps = (props.max - props.min) / _step
       if ([left, right, down, up].includes(e.key)) {
-        const increase = horizontalDirection.value === 'rtl' ? [left, up] : [right, up]
+        const increase = vertical.value
+          ? [isRtl.value ? left : right, isReversed.value ? down : up]
+          : indexFromEnd.value !== isRtl.value ? [left, up] : [right, up]
         const direction = increase.includes(e.key) ? 1 : -1
         const multiplier = e.shiftKey ? 2 : (e.ctrlKey ? 1 : 0)
 
@@ -121,7 +128,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
     }
 
     useRender(() => {
-      const positionPercentage = convertToUnit((vertical.value || isReversed.value) ? 100 - props.position : props.position, '%')
+      const positionPercentage = convertToUnit(indexFromEnd.value ? 100 - props.position : props.position, '%')
       const { elevationClasses } = useElevation(computed(() => !disabled.value ? elevation.value : undefined))
 
       return (
@@ -133,6 +140,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
               'v-slider-thumb--pressed': props.focused && mousePressed.value,
             },
             props.class,
+            rtlClasses.value,
           ]}
           style={[
             {

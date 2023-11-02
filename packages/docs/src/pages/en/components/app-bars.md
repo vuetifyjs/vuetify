@@ -1,6 +1,6 @@
 ---
-nav: App bars
 meta:
+  nav: App bars
   title: App-bar component
   description: The app bar component is a supercharged toolbar with advanced scrolling techniques and application layout support.
   keywords: app bars, vuetify app bar component, vue app bar component
@@ -8,6 +8,12 @@ related:
   - /components/buttons/
   - /components/icons/
   - /components/toolbars/
+features:
+  figma: true
+  label: 'C: VAppBar'
+  report: true
+  github: /components/VAppBar/
+  spec: https://m2.material.io/components/app-bars-top
 ---
 
 <script setup>
@@ -16,11 +22,11 @@ related:
 
 # App bars
 
-The `v-app-bar` component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation. The app-bar component works great in conjunction with a [v-navigation-drawer](/components/navigation-drawers) for providing site navigation in your application.
+The `v-app-bar` component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.
 
 ![App Bar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-app-bar/v-app-bar-entry.png)
 
----
+<page-features />
 
 ## Usage
 
@@ -39,6 +45,12 @@ The `v-app-bar` component is used for application-wide actions and information.
 | [v-app-bar-title](/api/v-app-bar-title/) | An extension of `v-toolbar-title` that is used for scrolling techniques |
 
 <api-inline hide-links />
+
+::: tip
+
+The app-bar component works great in conjunction with a [v-navigation-drawer](/components/navigation-drawers) for providing site navigation in your application.
+
+:::
 
 ## Anatomy
 
@@ -59,15 +71,19 @@ The recommended placement of elements inside of `v-app-bar` is:
 | 4. Action items (optional) | Used to highlight certain actions not in the overflow menu |
 | 5. Overflow menu (optional) | Place less often used action items into a hidden menu |
 
-<alert type="warning">
+::: warning
 
-  When a `v-btn` with the `icon` prop is used inside of `v-toolbar` and `v-app-bar` they will automatically have their size increased and negative margin applied to ensure proper spacing according to the Material Design Specification. If you choose to wrap your buttons in any container, such as a `div`, you will need to apply negative margin to that container in order to properly align them.
+When a `v-btn` with the `icon` prop is used inside of `v-toolbar` and `v-app-bar` they will automatically have their size increased and negative margin applied to ensure proper spacing according to the Material Design Specification. If you choose to wrap your buttons in any container, such as a `div`, you will need to apply negative margin to that container in order to properly align them.
 
-</alert>
+:::
 
 ## Examples
 
+The following are a collection of examples that demonstrate more advanced and real world use of the `v-app-bar` component.
+
 ### Props
+
+The `v-app-bar` component has a variety of props that allow you to customize its look and feel, density, scroll behavior, and more.
 
 #### Scroll behavior
 

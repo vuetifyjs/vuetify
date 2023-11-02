@@ -87,13 +87,9 @@ The following example demonstrates how to use the **theme** prop to toggle the t
 </script>
 ```
 
-<alert type="success">
-
-  **TIP**
-
+::: tip
   All components support to override the currently inherited theme locally using the **theme** prop.
-
-</alert>
+:::
 
 ## API
 
@@ -120,8 +116,6 @@ The following components are compatible with the [Application layout](/features/
 
 <app-figure src="https://cdn.vuetifyjs.com/images/layouts/app.png" alt="Vuetify Application" />
 
-<alert type="info">
-
+::: info
   More information on how to interact with the root sizing and styling is on the [Application](/features/application-layout/) page.
-
-</alert>
+:::

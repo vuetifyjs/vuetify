@@ -8,4 +8,6 @@ type ExtractComposables<T> = T extends object
   }
   : never
 
-export type Composables = ExtractComposables<typeof vuetify>
+export type Composables = Prettify<ExtractComposables<typeof vuetify>>
+
+type Prettify<T> = { [K in keyof T]: T[K] } & {}

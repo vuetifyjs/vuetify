@@ -1,6 +1,6 @@
 ---
-nav: Tabs
 meta:
+  nav: Tabs
   title: Tabs component
   description: The tabs component provides a way to organize and navigate between groups of content that are related at the same level of hierarchy.
   keywords: tabs, vuetify tabs component, vue tabs component
@@ -8,11 +8,19 @@ related:
   - /components/icons/
   - /components/toolbars/
   - /components/windows/
+features:
+  figma: true
+  label: 'C: VTabs'
+  report: true
+  github: /components/VTabs/
+  spec: https://m2.material.io/components/tabs
 ---
 
 # Tabs
 
 The `v-tabs` component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation for a page, where the tabs are links and the tab-items are the content.
+
+<page-features />
 
 ## Usage
 
@@ -35,23 +43,23 @@ The `v-tabs` component is a styled extension of [v-slide-group](/components/slid
 
 ### Props
 
-#### Align with title
+#### Align tabs
 
-Make `v-tabs` line up with the `v-toolbar-title` component using the **align** prop (`v-app-bar-nav-icon` or `v-btn` must be used in `v-toolbar`).
-
-<example file="v-tabs/prop-align-tabs-title" />
-
-#### Align end
-
-The **align** prop can also align tabs to the center or end.
+The **align-tabs** prop will align tabs to the `start`, `center`, or `end` of its container.
 
 <example file="v-tabs/prop-align-tabs-center" />
 
 <example file="v-tabs/prop-align-tabs-end" />
 
+#### Align tabs with title
+
+Make `v-tabs` line up with the `v-toolbar-title` component by setting the **align-tabs** prop to `title` (`v-app-bar-nav-icon` or `v-btn` must be used in `v-toolbar`).
+
+<example file="v-tabs/prop-align-tabs-title" />
+
 #### Center active
 
-The **center-active** prop will make the active tab always centered
+The **center-active** prop will make the active tab always centered.
 
 <example file="v-tabs/prop-center-active" />
 

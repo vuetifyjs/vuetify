@@ -7,27 +7,32 @@
   .v-label
     padding-inline-start: $switch-label-margin-inline-start
 
+  .v-switch__thumb
+    background-color: $switch-thumb-background
+    color: $switch-thumb-color
+
 .v-switch__loader
   display: flex
 
+  .v-progress-circular
+    color: $switch-loader-color
+
 .v-switch__track,
 .v-switch__thumb
-  background-color: currentColor
   transition: none
 
   .v-selection-control--error:not(.v-selection-control--disabled) &
     background-color: $switch-error-background-color
-
-.v-switch__thumb
-  .v-selection-control--dirty &
-    color: currentColor
+    color: $switch-error-color
 
 .v-switch__track
+  background-color: $switch-track-background
   border-radius: $switch-track-radius
   height: $switch-track-height
   opacity: $switch-track-opacity
   width: $switch-track-width
   cursor: pointer
+  transition: $switch-track-transition
 
   .v-switch--inset &
     border-radius: $switch-inset-track-border-radius
@@ -37,24 +42,30 @@
 .v-switch__thumb
   align-items: center
   border-radius: $switch-thumb-radius
-  color: rgb(var(--v-theme-surface))
   display: flex
   height: $switch-thumb-height
   justify-content: center
   width: $switch-thumb-width
   pointer-events: none
-  transition: $switch-control-input-transition
+  transition: $switch-thumb-transition
+  position: relative
+  overflow: hidden
 
   @include tools.elevation($switch-thumb-elevation)
 
   .v-switch--inset &
+    height: $switch-inset-thumb-height
+    width: $switch-inset-thumb-width
+    transform: scale(calc($switch-inset-thumb-off-height / $switch-inset-thumb-height))
+
     @include tools.elevation(0)
 
-  .v-switch:not(.v-switch--loading) .v-icon ~ &
-    display: none
+    &--filled
+      transform: none
 
-.v-switch--loading .v-selection-control__input > .v-icon
-  display: none
+  .v-switch--inset .v-selection-control--dirty &
+    transform: none
+    transition: .15s .05s transform settings.$decelerated-easing
 
 .v-switch
   $switch-thumb-transform: $switch-track-width * .5 - $switch-thumb-width * .5 + $switch-thumb-offset
@@ -67,6 +78,9 @@
     transition: $switch-control-input-transition
     transform: translateX(-$switch-thumb-transform)
     position: absolute
+
+    .v-icon
+      position: absolute
 
   .v-selection-control--dirty
     .v-selection-control__input

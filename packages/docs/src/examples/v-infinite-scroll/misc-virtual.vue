@@ -19,6 +19,34 @@
   </v-infinite-scroll>
 </template>
 
+<script setup>
+  import { nextTick, ref } from 'vue'
+
+  const infinite = ref()
+
+  const size = ref(300)
+  const virtualLength = ref(12)
+  const cards = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+
+  function createRange (length, start) {
+    return Array.from({ length }).map((_, i) => i + start)
+  }
+  function load ({ side, done }) {
+    const halfVirtualLength = virtualLength.value / 2
+    if (side === 'start') {
+      const arr = createRange(halfVirtualLength, cards.value[0] - halfVirtualLength)
+      cards.value = [...arr, ...cards.value.slice(0, halfVirtualLength)]
+      nextTick(() => {
+        infinite.value.$el.scrollTop = infinite.value.$el.scrollHeight - (halfVirtualLength * size.value) - infinite.value.$el.scrollTop
+      })
+    } else {
+      const arr = createRange(halfVirtualLength, cards.value.at(-1) + 1)
+      cards.value = [...cards.value.slice(halfVirtualLength), ...arr]
+    }
+    done('ok')
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

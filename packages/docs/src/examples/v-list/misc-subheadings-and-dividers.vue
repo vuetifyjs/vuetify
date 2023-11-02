@@ -110,6 +110,12 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const settings = ref([])
+</script>
+
 <script>
   export default {
     data: () => ({

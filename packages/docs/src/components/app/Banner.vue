@@ -4,7 +4,7 @@
     id="app-banner-bar"
     :color="banner.metadata.color"
     :height="height"
-    :image="banner.metadata.images.bg.url"
+    :image="banner.metadata.images.bg?.url"
     :theme="banner.metadata.theme.key"
     :model-value="hasPromotion"
     flat
@@ -17,28 +17,28 @@
       v-bind="banner.metadata.attributes"
       @click="onClick"
     >
-      <v-list-item lines="three">
-        <template #prepend>
+      <v-list-item lines="two">
+        <template v-if="banner.metadata.images.logo" #prepend>
           <v-avatar :image="banner.metadata.images.logo.url" size="x-large" />
         </template>
 
-        <v-list-item-title class="text-subtitle-1 text-md-h6 font-weight-medium mb-1">
-          <app-markdown
-            v-if="banner.metadata.text"
-            :content="banner.metadata.text"
-          />
+        <v-list-item-title
+          v-if="banner.metadata.text"
+          class="text-subtitle-2 text-md-subtitle-1 font-weight-medium"
+        >
+          <app-markdown :content="banner.metadata.text" />
         </v-list-item-title>
 
-        <v-list-item-subtitle
-          v-if="banner.metadata.subtext"
-          v-text="banner.metadata.subtext"
-        />
+        <v-list-item-subtitle v-if="banner.metadata.subtext" class="mt-n2">
+          <app-markdown :content="banner.metadata.subtext" />
+        </v-list-item-subtitle>
       </v-list-item>
+
       <v-spacer />
     </a>
 
-    <template v-if="mdAndUp" #append>
-      <v-hover>
+    <template #append>
+      <v-hover v-if="mdAndUp && banner.metadata.link">
         <template #default="{ isHovering, props }">
           <v-btn
             :color="banner.metadata.link_color"
@@ -81,34 +81,33 @@
 
   // Utilities
   import { computed, onBeforeMount } from 'vue'
-  import { differenceInHours } from 'date-fns'
 
   const { event } = useGtag()
   const { mdAndUp } = useDisplay()
   const { name } = useRoute()
-  const { notifications } = useUserStore()
+  const user = useUserStore()
   const banners = useBannersStore()
 
   const banner = computed(() => banners.banner)
-  const height = computed(() => banner.value?.metadata.subtext ? 80 : 64)
+  const height = computed(() => banner.value?.metadata.subtext ? 72 : 48)
   const hasPromotion = computed(() => {
-    if (!banner.value) return false
-
-    const now = Date.now()
-
-    return differenceInHours(now, Number(notifications.last.banner)) > 1
+    return !banner.value || !user.notifications.last.banner.includes(banner.value.slug)
   })
 
   function onClick () {
+    if (!banner.value) return
+
     event('click', {
       event_category: 'vuetify-banner',
-      event_label: banner.value?.metadata.label,
+      event_label: banner.value.slug,
       value: name?.toString().toLowerCase(),
     })
   }
 
   function onClose () {
-    notifications.last.banner = Date.now()
+    if (!banner.value) return
+
+    user.notifications.last.banner.push(banner.value.slug)
   }
 
   onBeforeMount(banners.fetch)

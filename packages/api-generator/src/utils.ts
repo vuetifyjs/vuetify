@@ -1,8 +1,8 @@
-import { fileURLToPath } from 'url'
+import { execSync } from 'child_process'
 import stringifyObject from 'stringify-object'
 import prettier from 'prettier'
 import typescriptParser from 'prettier/esm/parser-typescript.mjs'
-import type { Definition, ObjectDefinition } from './types'
+import type { Definition } from './types'
 
 function parseFunctionParams (func: string) {
   const [, regular] = /function\s\((.*)\)\s\{.*/i.exec(func) || []
@@ -53,7 +53,7 @@ type ComponentData = {
 }
 
 export function addPropData (
-  kebabName: string,
+  name: string,
   componentData: ComponentData,
   componentProps: any
 ) {
@@ -64,7 +64,7 @@ export function addPropData (
     ;(propObj as any).default = instancePropObj?.default
     ;(propObj as any).source = instancePropObj?.source
 
-    sources.add(instancePropObj?.source ?? kebabName)
+    sources.add(instancePropObj?.source ?? name)
   }
 
   return [...sources.values()]
@@ -98,67 +98,85 @@ export function stringifyProps (props: any) {
   )
 }
 
-async function loadLocale (componentName: string, locale: string, fallback = {}): Promise<Record<string, string | Record<string, string>>> {
+const localeCache = new Map<string, object>()
+async function loadLocale (componentName: string, locale: string): Promise<Record<string, string | Record<string, string>>> {
+  const cacheKey = `${locale}/${componentName}`
+  if (localeCache.has(cacheKey)) {
+    return localeCache.get(cacheKey) as any
+  }
   try {
-    const data = await import(`../src/locale/${locale}/${componentName}.json`, {
+    const data = await import(`../src/locale/${cacheKey}.json`, {
       assert: { type: 'json' },
     })
-    return Object.assign(fallback, data.default)
+    localeCache.set(cacheKey, data.default)
+    return data.default
   } catch (err) {
     if (err.code === 'ERR_MODULE_NOT_FOUND') {
-      console.error(`Missing locale for ${componentName} in ${locale}`)
+      console.error(`\x1b[35mMissing locale for ${cacheKey}\x1b[0m`)
+      localeCache.set(cacheKey, {})
     } else {
-      console.error(err.message)
+      console.error('\x1b[31m', err.message, '\x1b[0m')
     }
-    return fallback
+    return {}
   }
 }
 
-async function getSources (kebabName: string, sources: string[], locale: string) {
+const currentBranch = execSync('git branch --show-current', { encoding: 'utf-8' }).trim()
+
+async function getSources (name: string, locale: string, sources: string[]) {
   const arr = await Promise.all([
-    loadLocale(kebabName, locale),
+    loadLocale(name, locale),
     ...sources.map(source => loadLocale(source, locale)),
     loadLocale('generic', locale),
   ])
+  const sourcesMap = [name, ...sources, 'generic']
 
   return {
-    find: (section: string, key?: string) => {
-      return arr.reduce((str, source) => {
-        if (str) return str
-        return key ? source?.[section]?.[key] : source?.[section]
-      }, null) ?? 'MISSING DESCRIPTION'
+    find: (section: string, key: string, ogSource = name) => {
+      for (let i = 0; i < arr.length; i++) {
+        const source = arr[i]
+        const found: string | undefined = source?.[section]?.[key]
+        if (found) {
+          return { text: found, source: sourcesMap[i] }
+        }
+      }
+      const githubUrl = `https://github.com/vuetifyjs/vuetify/tree/${currentBranch}/packages/api-generator/src/locale/${locale}/${ogSource}.json`
+      return { text: `MISSING DESCRIPTION ([edit in github](${githubUrl}))`, source: name }
     },
   }
 }
 
-export async function addDescriptions (kebabName: string, componentData: ComponentData, sources: string[], locales: string[]) {
+export async function addDescriptions (name: string, componentData: ComponentData, locales: string[], sources: string[] = []) {
   for (const locale of locales) {
-    const descriptions = await getSources(kebabName, sources, locale)
+    const descriptions = await getSources(name, locale, sources)
 
     for (const section of ['props', 'slots', 'events', 'exposed'] as const) {
       for (const [propName, propObj] of Object.entries(componentData[section] ?? {})) {
-        (propObj as any).description = (propObj as any).description ?? {}
+        propObj.description = propObj.description ?? {}
+        propObj.descriptionSource = propObj.descriptionSource ?? {}
 
-        ;(propObj as any).description[locale] = descriptions.find(section, propName)
+        const found = descriptions.find(section, propName, propObj.source)
+        propObj.description![locale] = found.text
+        propObj.descriptionSource![locale] = found.source
       }
     }
   }
 }
 
 export async function addDirectiveDescriptions (
-  kebabName: string,
+  name: string,
   componentData: { argument: { value: Definition }, modifiers: Record<string, Definition> },
-  sources: string[],
-  locales: string[]
+  locales: string[],
+  sources: string[] = [],
 ) {
   for (const locale of locales) {
-    const descriptions = await getSources(kebabName, sources, locale)
+    const descriptions = await getSources(name, locale, sources)
 
     if (componentData.argument) {
       for (const [name, arg] of Object.entries(componentData.argument)) {
         arg.description = arg.description ?? {}
 
-        arg.description[locale] = descriptions.find('argument', name)
+        arg.description[locale] = descriptions.find('argument', name)?.text
       }
     }
 
@@ -166,7 +184,7 @@ export async function addDirectiveDescriptions (
       for (const [name, modifier] of Object.entries(componentData.modifiers)) {
         modifier.description = modifier.description ?? {}
 
-        modifier.description[locale] = descriptions.find('modifiers', name)
+        modifier.description[locale] = descriptions.find('modifiers', name)?.text
       }
     }
   }
@@ -210,7 +228,7 @@ export function prettifyType (name: string, item: Definition) {
       trailingComma: 'all',
     })
   } catch (err) {
-    console.error(`${name}:`, err.message)
+    console.error('\x1b[31m', `${name}:`, err.message, '\x1b[0m')
     return item
   }
 

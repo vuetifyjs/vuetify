@@ -1,5 +1,7 @@
 @use 'sass:list'
+@use 'sass:map'
 @use 'sass:math'
+@use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -8,7 +10,7 @@
   display: grid
   flex: none
   grid-template-areas: "prepend content append"
-  grid-template-columns: max-content auto max-content
+  grid-template-columns: max-content 1fr auto
   outline: none
   max-width: 100%
   padding: $list-item-padding
@@ -20,14 +22,28 @@
   @include tools.rounded($list-item-border-radius)
   @include tools.variant($list-item-variants...)
 
+  @supports selector(:focus-visible)
+    &::after
+      @include tools.absolute(true)
+      pointer-events: none
+      border: 2px solid currentColor
+      border-radius: 4px
+      opacity: 0
+      transition: opacity .2s ease-in-out
+
+    &:focus-visible::after
+      opacity: calc(.15 * var(--v-theme-overlay-multiplier))
+
   &__prepend,
   &__append
+    > .v-badge .v-icon,
     > .v-icon
       opacity: #{$list-item-icon-opacity}
 
   &--active
     .v-list-item__prepend,
     .v-list-item__append
+      > .v-badge .v-icon,
       > .v-icon
         opacity: #{$list-item-icon-active-opacity}
 
@@ -42,17 +58,35 @@
   &--link
     cursor: pointer
 
+  .v-navigation-drawer--rail:not(.v-navigation-drawer--expand-on-hover) &,
+  .v-navigation-drawer--rail.v-navigation-drawer--expand-on-hover:not(.v-navigation-drawer--is-hovering) &
+    .v-avatar
+      --v-avatar-height: 24px
+
 .v-list-item__prepend
   align-items: center
   align-self: center
   display: flex
   grid-area: prepend
 
-  > .v-avatar
-    margin-inline-end: $list-item-avatar-margin-end
+  > .v-badge,
+  > .v-icon,
+  > .v-tooltip
+    ~ .v-list-item__spacer
+      width: $list-item-icon-margin-start
 
-  > .v-icon
-    margin-inline-end: $list-item-icon-margin-end
+  > .v-avatar ~ .v-list-item__spacer
+    width: $list-item-avatar-margin-start
+
+  .v-list-item--slim &
+    > .v-badge,
+    > .v-icon,
+    > .v-tooltip
+      ~ .v-list-item__spacer
+        width: $list-item-slim-spacer-width
+
+    > .v-avatar ~ .v-list-item__spacer
+      width: $list-item-slim-avatar-spacer-width
 
   .v-list-item--three-line &
     align-self: start
@@ -63,11 +97,28 @@
   align-items: center
   grid-area: append
 
-  > .v-avatar
-    margin-inline-start: $list-item-avatar-margin-start
+  .v-list-item__spacer
+    order: -1
+    transition: 150ms width settings.$standard-easing
 
-  > .v-icon
-    margin-inline-start: $list-item-icon-margin-start
+  > .v-badge,
+  > .v-icon,
+  > .v-tooltip
+    ~ .v-list-item__spacer
+      width: $list-item-icon-margin-end
+
+  > .v-avatar ~ .v-list-item__spacer
+    width: $list-item-avatar-margin-end
+
+  .v-list-item--slim &
+    > .v-badge,
+    > .v-icon,
+    > .v-tooltip
+      ~ .v-list-item__spacer
+        width: $list-item-slim-spacer-width
+
+    > .v-avatar ~ .v-list-item__spacer
+      width: $list-item-slim-avatar-spacer-width
 
   .v-list-item--three-line &
     align-self: start
@@ -185,20 +236,16 @@
 
       &:not(.v-list-item--nav)
         &.v-list-item--one-line
-          padding-inline-start: list.nth($list-item-padding, 2)
-          padding-inline-end: list.nth($list-item-padding, 2)
+          padding-inline: list.nth($list-item-padding, 2)
 
         &.v-list-item--two-line
-          padding-inline-start: list.nth($list-item-two-line-padding, 2)
-          padding-inline-end: list.nth($list-item-two-line-padding, 2)
+          padding-inline: list.nth($list-item-two-line-padding, 2)
 
         &.v-list-item--three-line
-          padding-inline-start: list.nth($list-item-three-line-padding, 2)
-          padding-inline-end: list.nth($list-item-three-line-padding, 2)
+          padding-inline: list.nth($list-item-three-line-padding, 2)
 
   &--nav
-    padding-inline-start: $list-nav-padding
-    padding-inline-end: $list-nav-padding
+    padding-inline: $list-nav-padding
 
     .v-list &
       &:not(:only-child)
@@ -249,6 +296,11 @@ $base-padding: list.nth($list-item-padding, 2)
 .v-list-group__items .v-list-item
   padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
 
-.v-list-group__header.v-list-item--active:not(:focus-visible)
-  .v-list-item__overlay
-    opacity: 0
+.v-list-group__header.v-list-item--active
+  &:not(:focus-visible)
+    .v-list-item__overlay
+      opacity: 0
+
+  &:hover
+    .v-list-item__overlay
+      opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))

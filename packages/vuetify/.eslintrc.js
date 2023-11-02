@@ -17,6 +17,7 @@ module.exports = {
     // 'vue/html-closing-bracket-spacing': 'off',
     // 'local-rules/no-render-string-reference': 'error',
     'local-rules/no-components-index': 'error',
+    'local-rules/no-nullish-coalescing-in-condition': 'error',
 
     'no-restricted-imports': ['error', {
       paths: [{
@@ -24,12 +25,18 @@ module.exports = {
         importNames: ['defineComponent'],
         message: 'Please use wrapped function from @/util instead'
       }]
-    }]
+    }],
 
     // 'import/no-cycle': 'warn',
     // 'import/no-self-import': 'warn',
   },
   overrides: [
+    {
+      files: 'src/**/*',
+      rules: {
+        'local-rules/sort-imports': 'warn',
+      },
+    },
     {
       files: 'dev/Playground.vue',
       rules: {

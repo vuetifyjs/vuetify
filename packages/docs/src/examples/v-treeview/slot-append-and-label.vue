@@ -18,6 +18,75 @@
   </v-treeview>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const initiallyOpen = ref(['public'])
+  const files = ref({
+    html: 'mdi-language-html5',
+    js: 'mdi-nodejs',
+    json: 'mdi-code-json',
+    md: 'mdi-language-markdown',
+    pdf: 'mdi-file-pdf-box',
+    png: 'mdi-file-image',
+    txt: 'mdi-file-document-outline',
+    xls: 'mdi-file-excel',
+  })
+  const tree = ref([])
+  const items = ref([
+    {
+      name: '.git',
+    },
+    {
+      name: 'node_modules',
+    },
+    {
+      name: 'public',
+      children: [
+        {
+          name: 'static',
+          children: [{
+            name: 'logo.png',
+            file: 'png',
+          }],
+        },
+        {
+          name: 'favicon.ico',
+          file: 'png',
+        },
+        {
+          name: 'index.html',
+          file: 'html',
+        },
+      ],
+    },
+    {
+      name: '.gitignore',
+      file: 'txt',
+    },
+    {
+      name: 'babel.config.js',
+      file: 'js',
+    },
+    {
+      name: 'package.json',
+      file: 'json',
+    },
+    {
+      name: 'README.md',
+      file: 'md',
+    },
+    {
+      name: 'vue.config.js',
+      file: 'js',
+    },
+    {
+      name: 'yarn.lock',
+      file: 'txt',
+    },
+  ])
+</script>
+
 <script>
   export default {
     data: () => ({

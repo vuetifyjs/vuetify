@@ -1,15 +1,14 @@
 // Composables
 import { useCosmic } from '@/composables/cosmic'
+import { useDate } from 'vuetify'
 
 // Utilities
 import { defineStore } from 'pinia'
 
-// Globals
-import { IS_PROD } from '@/util/globals'
-
 // Types
 interface Banner {
   status: 'published' | 'unpublished'
+  modified_at: string
   slug: string
   title: string
   metadata: {
@@ -35,7 +34,7 @@ interface Banner {
       }
     }
     visible: {
-      key: 'home' | 'docs' | 'both'
+      key: 'home' | 'docs' | 'both' | 'server'
       value: 'home'
     }
   }
@@ -44,6 +43,8 @@ interface Banner {
 interface State {
   banners: Banner[]
   router: any
+  server?: Banner
+  banner?: Banner
 }
 
 export const useBannersStore = defineStore('banners', {
@@ -55,25 +56,22 @@ export const useBannersStore = defineStore('banners', {
     async fetch () {
       if (this.banners.length) return
 
-      const { bucket } = useCosmic<Banner>()
+      const { bucket } = useCosmic()
 
       const today = (new Date()).toISOString().substring(0, 10)
 
       try {
-        const { objects = [] } = (
+        const { objects = [] }: { objects: Banner[] } = (
           await bucket?.objects
             .find({
               type: 'banners',
               'metadata.start_date': {
                 $lte: today,
               },
-              'metadata.end_date': {
-                $gte: today,
-              },
             })
-            .props('status,metadata,slug,title')
+            .props('status,metadata,slug,title,modified_at')
             .sort('metadata.start_date')
-            .limit(1)
+            .limit(3)
         ) || {}
 
         this.banners = objects
@@ -81,16 +79,35 @@ export const useBannersStore = defineStore('banners', {
     },
   },
   getters: {
-    banner: state => {
-      const name = state.router.currentRoute.value.name
+    banner (state) {
+      const name = state.router.currentRoute.value.meta.page
+      const date = useDate()
 
-      return state.banners.find(({ metadata: { visible }, status }) => {
-        if (IS_PROD && status !== 'published') return false
+      if (this.server) return this.server
+
+      return state.banners.find(({
+        metadata: { visible },
+        modified_at: modifiedAt,
+      }) => {
+        if (!date.isBefore(date.date(modifiedAt), date.endOfDay(new Date()))) return false
 
         if (visible.key === 'both') return true
-        if (visible.key === 'home' && name === 'home') return true
+        // '' is home
+        if (visible.key === 'home' && name === '') return true
 
         return visible.key === 'docs' && name !== 'home'
+      })
+    },
+    server (state) {
+      const date = useDate()
+
+      return state.banners.find(({
+        metadata: { visible },
+        modified_at: modifiedAt,
+      }) => {
+        if (!date.isBefore(date.date(modifiedAt), date.endOfDay(new Date()))) return false
+
+        return visible.key === 'server'
       })
     },
   },

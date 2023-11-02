@@ -2,28 +2,28 @@
 import './VSlider.sass'
 
 // Components
-import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { VLabel } from '@/components/VLabel'
 import { VSliderThumb } from './VSliderThumb'
 import { VSliderTrack } from './VSliderTrack'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { VLabel } from '@/components/VLabel'
 
 // Composables
 import { makeSliderProps, useSlider, useSteps } from './slider'
 import { makeFocusProps, useFocus } from '@/composables/focus'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRtl } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { VSliderThumbSlots } from './VSliderThumb'
+import type { VSliderTrackSlots } from './VSliderTrack'
 import type { VInputSlot, VInputSlots } from '@/components/VInput/VInput'
 
-export type VSliderSlots = VInputSlots & {
-  label: [VInputSlot]
-  'tick-label': []
-  'thumb-label': []
+export type VSliderSlots = VInputSlots & VSliderThumbSlots & VSliderTrackSlots & {
+  label: VInputSlot
 }
 
 export const makeVSliderProps = propsFactory({
@@ -35,7 +35,7 @@ export const makeVSliderProps = propsFactory({
     type: [Number, String],
     default: 0,
   },
-}, 'v-slider')
+}, 'VSlider')
 
 export const VSlider = genericComponent<VSliderSlots>()({
   name: 'VSlider',
@@ -59,10 +59,8 @@ export const VSlider = genericComponent<VSliderSlots>()({
       props,
       'modelValue',
       undefined,
-      v => {
-        const value = typeof v === 'string' ? parseFloat(v) : v == null ? steps.min.value : v
-
-        return steps.roundValue(value)
+      value => {
+        return steps.roundValue(value == null ? steps.min.value : value)
       },
     )
 
@@ -120,15 +118,16 @@ export const VSlider = genericComponent<VSliderSlots>()({
             ...slots,
             prepend: hasPrepend ? slotProps => (
               <>
-                { slots.label?.(slotProps) ?? props.label
-                  ? (
-                    <VLabel
-                      id={ slotProps.id.value }
-                      class="v-slider__label"
-                      text={ props.label }
-                    />
-                  ) : undefined
-                }
+                { slots.label?.(slotProps) ?? (
+                  props.label
+                    ? (
+                      <VLabel
+                        id={ slotProps.id.value }
+                        class="v-slider__label"
+                        text={ props.label }
+                      />
+                    ) : undefined
+                )}
 
                 { slots.prepend?.(slotProps) }
               </>

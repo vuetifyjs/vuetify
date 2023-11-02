@@ -1,20 +1,13 @@
 <template>
   <app-btn
     :to="rpath('/introduction/enterprise-support/')"
-    class="ms-1"
-    color="medium-emphasis"
-    variant="text"
+    class="ms-1 me-4"
+    color="primary"
+    variant="outlined"
     @click="gtagClick('app-bar', 'enterprise', name)"
   >
 
-    {{ t('enterprise') }}
-
-    <!-- <v-badge
-      class="ms-n1 mb-4"
-      color="success"
-      dot
-      inline
-    /> -->
+    {{ t('get-help') }}
   </app-btn>
 </template>
 

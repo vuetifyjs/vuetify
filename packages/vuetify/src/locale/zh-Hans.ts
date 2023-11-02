@@ -1,6 +1,11 @@
 export default {
   badge: '徽章',
+  open: 'Open',
   close: '关闭',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: '没有符合条件的结果',
     loadingText: '加载中……',
@@ -26,12 +31,19 @@ export default {
     lastPage: '尾页',
     pageText: '{0}-{1} 共 {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '已选择 {0}',
-    nextMonthAriaLabel: '下个月',
-    nextYearAriaLabel: '明年',
-    prevMonthAriaLabel: '前一个月',
-    prevYearAriaLabel: '前一年',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: '没有数据',
   carousel: {
@@ -48,6 +60,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} 个文件',
@@ -67,6 +80,10 @@ export default {
       first: 'First page',
       last: 'Last page',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

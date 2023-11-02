@@ -1,6 +1,6 @@
 ---
-nav: Virtual scrollers
 meta:
+  nav: Virtual scrollers
   title: Virtual scroll component
   description: The Virtual scroll component is a container that renders only visible elements. It is useful when you need to display large amounts of uniform data.
   keywords: virtual scroll, vuetify virtual scroll component, vue virtual scroll component, v-virtual-scroll component
@@ -8,6 +8,10 @@ related:
   - /components/lists/
   - /components/data-tables/virtual-tables/
   - /components/combobox/
+features:
+  github: /components/VVirtualScroller/
+  label: 'C: VVirtualScroller'
+  report: true
 ---
 
 # Virtual scrollers
@@ -16,7 +20,11 @@ The `v-virtual-scroll` component displays a virtual, _infinite_ list. It support
 
 ![Virtual scroll Entry](https://cdn.vuetifyjs.com/docs/images/components/v-virtual-scroll/v-virtual-scroll-entry.png)
 
-----
+<page-features />
+
+::: warning
+This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
+:::
 
 ## Usage
 
@@ -31,7 +39,6 @@ The virtual scroller displays just enough records to fill the viewport and uses 
 | Component | Description |
 | - | - |
 | [v-virtual-scroll](/api/v-virtual-scroll/) | Primary Component |
-| [v-virtual-scroll-item](/api/v-virtual-scroll-item/) | Wraps content and communicates height to parent |
 
 <api-inline hide-links />
 

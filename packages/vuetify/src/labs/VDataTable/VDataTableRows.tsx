@@ -1,55 +1,32 @@
 // Components
-import { VDataTableGroupHeaderRow, type VDataTableGroupHeaderRowSlots } from './VDataTableGroupHeaderRow'
+import { VDataTableGroupHeaderRow } from './VDataTableGroupHeaderRow'
 import { VDataTableRow } from './VDataTableRow'
 
 // Composables
-import { useLocale } from '@/composables/locale'
 import { useExpanded } from './composables/expand'
+import { useGroupBy } from './composables/group'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
-import { useGroupBy } from './composables/group'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { Fragment, mergeProps } from 'vue'
+import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { Group, provideGroupBy } from './composables/group'
-import type { provideExpanded } from './composables/expand'
-import type { provideSelection } from './composables/select'
-import type { DataTableItem, InternalDataTableHeader } from './types'
+import type { Group } from './composables/group'
+import type { DataTableItem, GroupHeaderSlot, ItemSlot } from './types'
+import type { VDataTableGroupHeaderRowSlots } from './VDataTableGroupHeaderRow'
+import type { VDataTableRowSlots } from './VDataTableRow'
 
-type GroupHeaderSlot = {
-  index: number
-  item: Group
-  columns: InternalDataTableHeader[]
-  isExpanded: ReturnType<typeof provideExpanded>['isExpanded']
-  toggleExpand: ReturnType<typeof provideExpanded>['toggleExpand']
-  isSelected: ReturnType<typeof provideSelection>['isSelected']
-  toggleSelect: ReturnType<typeof provideSelection>['toggleSelect']
-  toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
-  isGroupOpen: ReturnType<typeof provideGroupBy>['toggleGroup']
+export type VDataTableRowsSlots = VDataTableGroupHeaderRowSlots & VDataTableRowSlots & {
+  item: ItemSlot & { props: Record<string, any> }
+  loading: never
+  'group-header': GroupHeaderSlot
+  'no-data': never
+  'expanded-row': ItemSlot
 }
-
-type ItemSlot = {
-  index: number
-  item: DataTableItem
-  columns: InternalDataTableHeader[]
-  isExpanded: ReturnType<typeof provideExpanded>['isExpanded']
-  toggleExpand: ReturnType<typeof provideExpanded>['toggleExpand']
-  isSelected: ReturnType<typeof provideSelection>['isSelected']
-  toggleSelect: ReturnType<typeof provideSelection>['toggleSelect']
-}
-
-export type VDataTableRowsSlots = VDataTableGroupHeaderRowSlots & {
-  item: [ItemSlot]
-  loading: []
-  'group-header': [GroupHeaderSlot]
-  'no-data': []
-  'expanded-row': [ItemSlot]
-  'item.data-table-select': [ItemSlot]
-  'item.data-table-expand': [ItemSlot]
-} & { [key: `item.${string}`]: [ItemSlot] }
 
 export const makeVDataTableRowsProps = propsFactory({
   loading: [Boolean, String],
@@ -67,15 +44,16 @@ export const makeVDataTableRowsProps = propsFactory({
     default: '$vuetify.noDataText',
   },
   rowHeight: Number,
-  'onClick:row': Function as PropType<(e: Event, value: { item: DataTableItem }) => void>,
-}, 'v-data-table-rows')
+}, 'VDataTableRows')
 
 export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
   name: 'VDataTableRows',
 
+  inheritAttrs: false,
+
   props: makeVDataTableRowsProps(),
 
-  setup (props, { emit, slots }) {
+  setup (props, { attrs, slots }) {
     const { columns } = useHeaders()
     const { expandOnClick, toggleExpand, isExpanded } = useExpanded()
     const { isSelected, toggleSelect } = useSelection()
@@ -83,14 +61,14 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
     const { t } = useLocale()
 
     useRender(() => {
-      if (props.loading && slots.loading) {
+      if (props.loading) {
         return (
           <tr
             class="v-data-table-rows-loading"
             key="loading"
           >
             <td colspan={ columns.value.length }>
-              { slots.loading() }
+              { slots.loading?.() ?? t(props.loadingText) }
             </td>
           </tr>
         )
@@ -113,7 +91,7 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
         <>
           { props.items.map((item, index) => {
             if (item.type === 'group') {
-              return slots['group-header'] ? slots['group-header']({
+              const slotProps = {
                 index,
                 item,
                 columns: columns.value,
@@ -123,10 +101,13 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
                 toggleSelect,
                 toggleGroup,
                 isGroupOpen,
-              } as GroupHeaderSlot) : (
+              } satisfies GroupHeaderSlot
+
+              return slots['group-header'] ? slots['group-header'](slotProps) : (
                 <VDataTableGroupHeaderRow
                   key={ `group-header_${item.id}` }
                   item={ item }
+                  { ...getPrefixedEventHandlers(attrs, ':group-header', () => slotProps) }
                   v-slots={ slots }
                 />
               )
@@ -134,33 +115,41 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
 
             const slotProps = {
               index,
-              item,
+              item: item.raw,
+              internalItem: item,
               columns: columns.value,
               isExpanded,
               toggleExpand,
               isSelected,
               toggleSelect,
-            } as ItemSlot
+            } satisfies ItemSlot
+
+            const itemSlotProps = {
+              ...slotProps,
+              props: mergeProps(
+                {
+                  key: `item_${item.key ?? item.index}`,
+                  onClick: expandOnClick.value ? () => {
+                    toggleExpand(item)
+                  } : undefined,
+                  index,
+                  item,
+                },
+                getPrefixedEventHandlers(attrs, ':row', () => slotProps)
+              ),
+            }
 
             return (
-              <>
-                { slots.item ? slots.item(slotProps) : (
+              <Fragment key={ itemSlotProps.props.key as string }>
+                { slots.item ? slots.item(itemSlotProps) : (
                   <VDataTableRow
-                    key={ `item_${item.value}` }
-                    onClick={ expandOnClick.value || props['onClick:row'] ? (event: Event) => {
-                      if (expandOnClick.value) {
-                        toggleExpand(item)
-                      }
-                      props['onClick:row']?.(event, { item })
-                    } : undefined }
-                    index={ index }
-                    item={ item }
+                    { ...itemSlotProps.props }
                     v-slots={ slots }
                   />
                 )}
 
                 { isExpanded(item) && slots['expanded-row']?.(slotProps) }
-              </>
+              </Fragment>
             )
           })}
         </>

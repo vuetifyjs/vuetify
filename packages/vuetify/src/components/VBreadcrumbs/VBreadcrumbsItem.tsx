@@ -1,8 +1,8 @@
 // Composables
+import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
-import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed } from 'vue'
@@ -19,7 +19,7 @@ export const makeVBreadcrumbsItemProps = propsFactory({
   ...makeComponentProps(),
   ...makeRouterProps(),
   ...makeTagProps({ tag: 'li' }),
-}, 'v-breadcrumbs-item')
+}, 'VBreadcrumbsItem')
 
 export const VBreadcrumbsItem = genericComponent()({
   name: 'VBreadcrumbsItem',
@@ -34,16 +34,13 @@ export const VBreadcrumbsItem = genericComponent()({
     const { textColorClasses, textColorStyles } = useTextColor(color)
 
     useRender(() => {
-      const Tag = link.isLink.value ? 'a' : props.tag
-
       return (
-        <Tag
+        <props.tag
           class={[
             'v-breadcrumbs-item',
             {
               'v-breadcrumbs-item--active': isActive.value,
               'v-breadcrumbs-item--disabled': props.disabled,
-              'v-breadcrumbs-item--link': link.isLink.value,
               [`${props.activeClass}`]: isActive.value && props.activeClass,
             },
             textColorClasses.value,
@@ -53,15 +50,21 @@ export const VBreadcrumbsItem = genericComponent()({
             textColorStyles.value,
             props.style,
           ]}
-          href={ link.href.value }
           aria-current={ isActive.value ? 'page' : undefined }
-          onClick={ link.navigate }
         >
-          { slots.default?.() ?? props.title }
-        </Tag>
+          { !link.isLink.value ? slots.default?.() ?? props.title : (
+            <a
+              class="v-breadcrumbs-item--link"
+              href={ link.href.value }
+              aria-current={ isActive.value ? 'page' : undefined }
+              onClick={ link.navigate }
+            >
+              { slots.default?.() ?? props.title }
+            </a>
+          )}
+        </props.tag>
       )
     })
-
     return {}
   },
 })

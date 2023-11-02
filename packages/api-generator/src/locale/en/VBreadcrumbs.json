@@ -1,0 +1,14 @@
+{
+  "props": {
+    "divider": "Specifies the dividing character between items.",
+    "icons": "Specifies that the dividers between items are [v-icon](/components/icons)s.",
+    "justifyCenter": "Align the breadcrumbs center.",
+    "justifyEnd": "Align the breadcrumbs at the end.",
+    "large": "Increase the font-size of the breadcrumb item text to 16px (14px default)."
+  },
+  "slots": {
+    "divider": "The slot used for dividers.",
+    "prepend": "The slot used for prepend content.",
+    "title": "The slot used to display the title of each breadcrumb."
+  }
+}

@@ -1,6 +1,11 @@
 export default {
   badge: 'Odznak',
+  open: 'Open',
   close: 'Zavrieť',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Neboli nájdené žiadne záznamy',
     loadingText: 'Načítavam položky...',
@@ -26,12 +31,19 @@ export default {
     lastPage: 'Posledná stránka',
     pageText: '{0}–{1} z {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} vybrané',
-    nextMonthAriaLabel: 'Ďalší mesiac',
-    nextYearAriaLabel: 'Ďalší rok',
-    prevMonthAriaLabel: 'Predchádzajúci mesiac',
-    prevYearAriaLabel: 'Predchádzajúci rok',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Nie sú dostupné žiadne dáta',
   carousel: {
@@ -48,6 +60,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} súborov',
@@ -67,6 +80,10 @@ export default {
       first: 'First page',
       last: 'Last page',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

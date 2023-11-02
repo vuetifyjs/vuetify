@@ -1,6 +1,6 @@
 ---
-nav: Overlays
 meta:
+  nav: Overlays
   title: Overlay component
   description: The overlay component makes it easy to create a scrim over components or your entire application.
   keywords: overlays, vuetify overlay component, vue overlay component
@@ -8,11 +8,17 @@ related:
   - /components/dialogs/
   - /components/menus/
   - /components/tooltips/
+features:
+  github: /components/VOverlay/
+  label: 'C: VOverlay'
+  report: true
 ---
 
 # Overlays
 
 `v-overlay` is the base for components that float over the rest of the page, such as `v-menu` and `v-dialog`. It can also be used on its own and comes with everything you need to create a custom popover component.
+
+<page-features />
 
 ## Usage
 

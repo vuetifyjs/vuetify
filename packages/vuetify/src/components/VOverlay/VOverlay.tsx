@@ -2,28 +2,37 @@
 import './VOverlay.sass'
 
 // Composables
-import { makeActivatorProps, useActivator } from './useActivator'
-import { makeComponentProps } from '@/composables/component'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { makeLocationStrategyProps, useLocationStrategies } from './locationStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { useBackButton, useRouter } from '@/composables/router'
+import { makeActivatorProps, useActivator } from './useActivator'
 import { useBackgroundColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { useHydration } from '@/composables/hydration'
-import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { useRtl } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { useBackButton, useRouter } from '@/composables/router'
 import { useScopeId } from '@/composables/scopeId'
 import { useStack } from '@/composables/stack'
 import { useTeleport } from '@/composables/teleport'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useToggleScope } from '@/composables/toggleScope'
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Directives
 import { ClickOutside } from '@/directives/click-outside'
 
 // Utilities
+import {
+  computed,
+  mergeProps,
+  ref,
+  Teleport,
+  toRef,
+  Transition,
+  watch,
+} from 'vue'
 import {
   animate,
   convertToUnit,
@@ -34,20 +43,10 @@ import {
   standardEasing,
   useRender,
 } from '@/util'
-import {
-  computed,
-  mergeProps,
-  ref,
-  Teleport,
-  toHandlers,
-  toRef,
-  Transition,
-  watch,
-} from 'vue'
 
 // Types
-import type { BackgroundColorData } from '@/composables/color'
 import type { PropType, Ref } from 'vue'
+import type { BackgroundColorData } from '@/composables/color'
 
 interface ScrimProps {
   [key: string]: unknown
@@ -73,8 +72,8 @@ function Scrim (props: ScrimProps) {
 }
 
 export type OverlaySlots = {
-  default: [{ isActive: Ref<boolean> }]
-  activator: [{ isActive: boolean, props: Record<string, any> }]
+  default: { isActive: Ref<boolean> }
+  activator: { isActive: boolean, props: Record<string, any> }
 }
 
 export const makeVOverlayProps = propsFactory({
@@ -92,7 +91,7 @@ export const makeVOverlayProps = propsFactory({
   modelValue: Boolean,
   persistent: Boolean,
   scrim: {
-    type: [String, Boolean],
+    type: [Boolean, String],
     default: true,
   },
   zIndex: {
@@ -108,7 +107,7 @@ export const makeVOverlayProps = propsFactory({
   ...makeScrollStrategyProps(),
   ...makeThemeProps(),
   ...makeTransitionProps(),
-}, 'v-overlay')
+}, 'VOverlay')
 
 export const VOverlay = genericComponent<OverlaySlots>()({
   name: 'VOverlay',
@@ -145,7 +144,13 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
     const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'), props._disableGlobalStack)
-    const { activatorEl, activatorRef, activatorEvents, contentEvents, scrimEvents } = useActivator(props, { isActive, isTop: localTop })
+    const {
+      activatorEl, activatorRef,
+      target, targetEl, targetRef,
+      activatorEvents,
+      contentEvents,
+      scrimEvents,
+    } = useActivator(props, { isActive, isTop: localTop })
     const { dimensionStyles } = useDimension(props)
     const isMounted = useHydration()
     const { scopeId } = useScopeId()
@@ -159,13 +164,13 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     const { contentStyles, updateLocation } = useLocationStrategies(props, {
       isRtl,
       contentEl,
-      activatorEl,
+      target,
       isActive,
     })
     useScrollStrategies(props, {
       root,
       contentEl,
-      activatorEl,
+      targetEl,
       isActive,
       updateLocation,
     })
@@ -193,6 +198,9 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       if (e.key === 'Escape' && globalTop.value) {
         if (!props.persistent) {
           isActive.value = false
+          if (contentEl.value?.contains(document.activeElement)) {
+            activatorEl.value?.focus()
+          }
         } else animateClick()
       }
     }
@@ -240,68 +248,67 @@ export const VOverlay = genericComponent<OverlaySlots>()({
           isActive: isActive.value,
           props: mergeProps({
             ref: activatorRef,
-          }, toHandlers(activatorEvents.value), props.activatorProps),
+            targetRef,
+          }, activatorEvents.value, props.activatorProps),
         })}
 
-        { isMounted.value && (
+        { isMounted.value && hasContent.value && (
           <Teleport
             disabled={ !teleportTarget.value }
             to={ teleportTarget.value }
           >
-            { hasContent.value && (
-              <div
-                class={[
-                  'v-overlay',
-                  {
-                    'v-overlay--absolute': props.absolute || props.contained,
-                    'v-overlay--active': isActive.value,
-                    'v-overlay--contained': props.contained,
-                  },
-                  themeClasses.value,
-                  rtlClasses.value,
-                  props.class,
-                ]}
-                style={[
-                  stackStyles.value,
-                  { top: convertToUnit(top.value) },
-                  props.style,
-                ]}
-                ref={ root }
-                { ...scopeId }
-                { ...attrs }
+            <div
+              class={[
+                'v-overlay',
+                {
+                  'v-overlay--absolute': props.absolute || props.contained,
+                  'v-overlay--active': isActive.value,
+                  'v-overlay--contained': props.contained,
+                },
+                themeClasses.value,
+                rtlClasses.value,
+                props.class,
+              ]}
+              style={[
+                stackStyles.value,
+                { top: convertToUnit(top.value) },
+                props.style,
+              ]}
+              ref={ root }
+              { ...scopeId }
+              { ...attrs }
+            >
+              <Scrim
+                color={ scrimColor }
+                modelValue={ isActive.value && !!props.scrim }
+                { ...scrimEvents.value }
+              />
+              <MaybeTransition
+                appear
+                persisted
+                transition={ props.transition }
+                target={ target.value }
+                onAfterLeave={ () => { onAfterLeave(); emit('afterLeave') } }
               >
-                <Scrim
-                  color={ scrimColor }
-                  modelValue={ isActive.value && !!props.scrim }
-                  { ...toHandlers(scrimEvents.value) }
-                />
-                <MaybeTransition
-                  appear
-                  persisted
-                  transition={ props.transition }
-                  target={ activatorEl.value }
-                  onAfterLeave={ () => { onAfterLeave(); emit('afterLeave') } }
+                <div
+                  ref={ contentEl }
+                  v-show={ isActive.value }
+                  v-click-outside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
+                  class={[
+                    'v-overlay__content',
+                    props.contentClass,
+                  ]}
+                  style={[
+                    dimensionStyles.value,
+                    contentStyles.value,
+                  ]}
+                  { ...contentEvents.value }
+                  { ...props.contentProps }
                 >
-                  <div
-                    ref={ contentEl }
-                    v-show={ isActive.value }
-                    v-click-outside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
-                    class={[
-                      'v-overlay__content',
-                      props.contentClass,
-                    ]}
-                    style={[
-                      dimensionStyles.value,
-                      contentStyles.value,
-                    ]}
-                    { ...toHandlers(contentEvents.value) }
-                    { ...props.contentProps }
-                  >
-                    { slots.default?.({ isActive }) }
-                  </div>
-                </MaybeTransition>
-              </div>
-            )}
+                  { slots.default?.({ isActive }) }
+                </div>
+              </MaybeTransition>
+            </div>
           </Teleport>
         )}
       </>
@@ -309,6 +316,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     return {
       activatorEl,
+      target,
       animateClick,
       contentEl,
       globalTop,

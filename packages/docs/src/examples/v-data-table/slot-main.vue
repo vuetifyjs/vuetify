@@ -72,9 +72,9 @@
 
       <template
         v-if="isEnabled('item.<name>')"
-        v-slot:item.name="{ item }"
+        v-slot:item.name="{ value }"
       >
-        {{ item.name.toUpperCase() }}
+        {{ value.toUpperCase() }}
       </template>
 
       <template
@@ -95,9 +95,9 @@
         <tbody>
           <tr
             v-for="item in items"
-            :key="item.name"
+            :key="item.raw.name"
           >
-            <td>{{ item.name }}</td>
+            <td>{{ item.raw.name }}</td>
             <td>CONTENT</td>
             <td>CONTENT</td>
             <td>CONTENT</td>
@@ -284,7 +284,7 @@
           this.search = '...'
         } else {
           this.search = null
-          this.items = desserts
+          this.itemsArray = desserts
         }
       },
     },

@@ -1,9 +1,9 @@
 import { makeGroupProps, useGroup, useGroupItem } from '../group'
 
 // Utilities
-import { defineComponent, h, nextTick, reactive } from 'vue'
-import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
+import { defineComponent, h, nextTick, reactive } from 'vue'
 
 describe('group', () => {
   describe('with complex values', () => {

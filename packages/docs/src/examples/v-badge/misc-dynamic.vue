@@ -25,12 +25,18 @@
         color="green"
       >
         <v-icon size="large">
-          mdi-vuetify
+          $vuetify
         </v-icon>
       </v-badge>
     </v-row>
   </v-container>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const messages = ref(0)
+</script>
 
 <script>
   export default {

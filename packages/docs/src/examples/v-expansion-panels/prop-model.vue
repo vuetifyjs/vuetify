@@ -36,6 +36,18 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const panel = ref([])
+  function all () {
+    panel.value = ['foo', 'bar', 'baz']
+  }
+  function none () {
+    panel.value = []
+  }
+</script>
+
 <script>
   export default {
     data () {

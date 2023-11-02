@@ -60,12 +60,15 @@ $list-item-avatar-margin-end: 16px !default;
 $list-item-avatar-margin-start: 16px !default;
 $list-item-avatar-size: 40px !default;
 $list-item-avatar-margin-y: 4px !default;
+$list-item-slim-spacer-width: 8px !default;
+$list-item-slim-avatar-spacer-width: 4px !default;
 
 $list-item-action-margin-end: 12px !default;
 $list-item-action-margin-start: 12px !default;
 
 $list-item-icon-margin-end: 32px !default;
 $list-item-icon-margin-start: 32px !default;
+$list-item-slim-icon-margin: 8px !default;
 $list-item-icon-size: 16px !default;
 
 $list-item-media-margin-bottom: 0 !default;
@@ -103,7 +106,7 @@ $list-item-title-letter-spacing: tools.map-deep-get(settings.$typography, 'subti
 $list-item-title-line-height: tools.map-deep-get(settings.$typography, 'body-1', 'line-height') !default;
 $list-item-title-overflow-wrap: normal !default;
 $list-item-title-padding: 0 !default;
-$list-item-title-text-overflow: ellipsis;
+$list-item-title-text-overflow: ellipsis !default;
 $list-item-title-text-transform: none !default;
 $list-item-title-word-break: normal !default;
 $list-item-title-word-wrap: break-word !default;
@@ -135,7 +138,7 @@ $list-item-title-typography: (
   $list-item-title-letter-spacing,
   $list-item-title-line-height,
   $list-item-title-text-transform
-);
+) !default;
 
 $list-item-subtitle-typography: (
   $list-item-subtitle-font-size,
@@ -143,7 +146,7 @@ $list-item-subtitle-typography: (
   $list-item-subtitle-letter-spacing,
   $list-item-subtitle-line-height,
   $list-item-subtitle-text-transform
-);
+) !default;
 
 $list-item-nav-title-typography: (
   $list-item-nav-title-font-size,
@@ -151,7 +154,7 @@ $list-item-nav-title-typography: (
   $list-item-nav-title-letter-spacing,
   $list-item-nav-title-line-height,
   null
-);
+) !default;
 
 $list-item-nav-subtitle-typography: (
   $list-item-nav-subtitle-font-size,
@@ -159,7 +162,7 @@ $list-item-nav-subtitle-typography: (
   $list-item-nav-subtitle-letter-spacing,
   $list-item-nav-subtitle-line-height,
   null
-);
+) !default;
 
 $list-item-variants: (
   $list-background,
@@ -167,4 +170,4 @@ $list-item-variants: (
   $list-item-elevation,
   $list-item-plain-opacity,
   'v-list-item'
-);
+) !default;

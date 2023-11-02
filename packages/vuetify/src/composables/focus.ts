@@ -1,4 +1,4 @@
-// Components
+// Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities

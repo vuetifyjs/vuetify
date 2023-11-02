@@ -2,19 +2,22 @@
 import './VSliderTrack.sass'
 
 // Components
-import { type Tick, VSliderSymbol } from './slider'
+import { VSliderSymbol } from './slider'
 
 // Composables
-import { makeComponentProps } from '@/composables/component'
 import { useBackgroundColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
 import { useRounded } from '@/composables/rounded'
 
 // Utilities
 import { computed, inject } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
+// Types
+import type { Tick } from './slider'
+
 export type VSliderTrackSlots = {
-  'tick-label': [{ tick: Tick, index: number }]
+  'tick-label': { tick: Tick, index: number }
 }
 
 export const makeVSliderTrackProps = propsFactory({
@@ -28,7 +31,7 @@ export const makeVSliderTrackProps = propsFactory({
   },
 
   ...makeComponentProps(),
-}, 'v-slider-track')
+}, 'VSliderTrack')
 
 export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
   name: 'VSliderTrack',
@@ -44,7 +47,6 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
 
     const {
       color,
-      horizontalDirection,
       parsedTicks,
       rounded,
       showTicks,
@@ -55,6 +57,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
       vertical,
       min,
       max,
+      indexFromEnd,
     } = slider
 
     const { roundedClasses } = useRounded(rounded)
@@ -69,7 +72,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
       backgroundColorStyles: trackColorStyles,
     } = useBackgroundColor(trackColor)
 
-    const startDir = computed(() => `inset-${vertical.value ? 'block-end' : 'inline-start'}`)
+    const startDir = computed(() => `inset-${vertical.value ? 'block' : 'inline'}-${indexFromEnd.value ? 'end' : 'start'}`)
     const endDir = computed(() => vertical.value ? 'height' : 'width')
 
     const backgroundStyles = computed(() => {
@@ -94,7 +97,6 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
       const ticks = vertical.value ? parsedTicks.value.slice().reverse() : parsedTicks.value
 
       return ticks.map((tick, index) => {
-        const directionProperty = vertical.value ? 'bottom' : 'margin-inline-start'
         const directionValue = tick.value !== min.value && tick.value !== max.value ? convertToUnit(tick.position, '%') : undefined
 
         return (
@@ -108,7 +110,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
                 'v-slider-track__tick--last': tick.value === max.value,
               },
             ]}
-            style={{ [directionProperty]: directionValue }}
+            style={{ [startDir.value]: directionValue }}
           >
             {
               (tick.label || slots['tick-label']) && (
@@ -134,7 +136,6 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
             {
               '--v-slider-track-size': convertToUnit(trackSize.value),
               '--v-slider-tick-size': convertToUnit(tickSize.value),
-              direction: !vertical.value ? horizontalDirection.value : undefined,
             },
             props.style,
           ]}

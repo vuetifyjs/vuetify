@@ -4,10 +4,6 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-@at-root
-  @include tools.density('v-input', $select-chips-margin-bottom) using ($modifier)
-    --select-chips-margin-bottom: #{0px + math.div($modifier, 2)}
-
 .v-select
   .v-field
     .v-text-field__prefix,
@@ -15,9 +11,6 @@
     .v-field__input,
     &.v-field
       cursor: pointer
-
-    &--variant-outlined
-      --select-chips-margin-bottom: #{$select-chips-margin-top}
 
   .v-field
     .v-field__input
@@ -29,16 +22,16 @@
         width: 100%
         transition: none
         pointer-events: none
+        caret-color: transparent
 
   .v-field--dirty
     .v-select__selection
       margin-inline-end: 2px
 
-  .v-field--single-line
-    .v-select__selection-text
-      overflow: hidden
-      text-overflow: ellipsis
-      white-space: nowrap
+  .v-select__selection-text
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
 
   &__content
     overflow: hidden
@@ -48,21 +41,14 @@
 
   &__selection
     display: inline-flex
+    align-items: center
     letter-spacing: inherit
     line-height: inherit
     max-width: 100%
 
-  &--chips,
-  &--selection-slot
-    .v-field__input
-      min-height: calc(var(--v-field-input-min-height) + var(--select-chips-margin-bottom) + $select-chips-margin-top)
-
-    .v-select__selection
-      margin-top: $select-chips-margin-top
-      margin-bottom: var(--select-chips-margin-bottom)
-
-      &:first-child
-        margin-inline-start: 0
+  .v-select__selection
+    &:first-child
+      margin-inline-start: 0
 
   &--selected
     .v-field

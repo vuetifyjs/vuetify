@@ -40,7 +40,7 @@ export function LoaderSlot (
     name: string
     color?: string
   } & ExtractPropTypes<SlotsToProps<{
-    default: [LoaderSlotProps]
+    default: LoaderSlotProps
   }>>,
   { slots }: SetupContext,
 ) {

@@ -45,14 +45,18 @@
   </v-bottom-sheet>
 </template>
 
-<script>
+<script setup>
   import { useDisplay } from 'vuetify'
 
-  export default {
-    setup () {
-      const display = useDisplay()
+  const display = useDisplay()
+</script>
 
-      return { display }
+<script>
+  export default {
+    computed: {
+      display () {
+        return this.$vuetify.display
+      },
     },
   }
 </script>

@@ -2,6 +2,7 @@
 
 exports[`VList should match a snapshot 1`] = `
 <div class="v-list v-theme--light v-list--density-default v-list--one-line"
+     tabindex="0"
      role="listbox"
 >
 </div>

@@ -12,7 +12,6 @@
   transition-duration: $navigation-drawer-transition-duration
   transition-property: $navigation-drawer-transition-property
   transition-timing-function: $navigation-drawer-transition-timing-function
-  will-change: $navigation-drawer-will-change
   position: absolute
 
   @include tools.border($navigation-drawer-border...)
@@ -86,3 +85,8 @@
   opacity: $navigation-drawer-scrim-opacity
   transition: opacity $navigation-drawer-transition-duration $navigation-drawer-transition-timing-function
   z-index: 1
+
+.v-navigation-drawer__prepend,
+.v-navigation-drawer__append
+  flex: none
+  overflow: hidden

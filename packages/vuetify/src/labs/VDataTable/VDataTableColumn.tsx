@@ -1,4 +1,7 @@
+// Utilities
 import { convertToUnit, defineFunctionalComponent } from '@/util'
+
+// Types
 import type { PropType } from 'vue'
 
 export const VDataTableColumn = defineFunctionalComponent({

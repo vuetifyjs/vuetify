@@ -12,7 +12,6 @@
 <script setup>
   // Composables
   import { useTheme } from 'vuetify'
-
   // Utilities
   import { computed } from 'vue'
 
@@ -23,6 +22,6 @@
   const theme = useTheme()
 
   const logo = computed(() => {
-    return `vuetify-logo-v3-${theme.name.value}.svg`
+    return `vuetify-logo-${theme.name.value}-atom.svg`
   })
 </script>

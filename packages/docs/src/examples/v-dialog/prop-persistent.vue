@@ -40,6 +40,12 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const dialog = ref(false)
+</script>
+
 <script>
   export default {
     data () {

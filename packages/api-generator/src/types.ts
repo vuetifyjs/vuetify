@@ -34,14 +34,21 @@ export function generateComposableDataFromTypes () {
 
   return Object.entries(composables.properties).map(([name, data]) => {
     const returnType = (data as FunctionDefinition).returnType
-    let exposed
+    let exposed: Record<string, Definition>
     if (returnType.type === 'allOf') {
-      exposed = returnType.items.reduce((obj, item) => {
+      exposed = returnType.items.reduce((acc, item) => {
         const props = (item as ObjectDefinition).properties
-        return { ...obj, ...props }
+        Object.assign(acc, props)
+        return acc
       }, {})
     } else if (returnType.type === 'object') {
       exposed = returnType.properties
+    }
+    if (exposed) {
+      exposed = Object.fromEntries(
+        Object.entries(exposed)
+          .map(([name, prop]) => [name, prettifyType(name, prop)])
+      )
     }
 
     return {
@@ -61,7 +68,7 @@ export function generateDirectiveDataFromTypes () {
   return Object.entries(directives.properties).map(([name, data]) => {
     return {
       name,
-      argument: { value: (data as ObjectDefinition).properties.value },
+      argument: { value: prettifyType(name, (data as ObjectDefinition).properties.value) },
       modifiers: ((data as ObjectDefinition).properties.modifiers as ObjectDefinition).properties,
     }
   }) as { name: string, argument: { value: Definition }, modifiers: Record<string, Definition> }[]
@@ -84,7 +91,7 @@ export async function generateComponentDataFromTypes (component: string) {
 
   for (const [name, { formatted }] of Object.entries(props.properties)) {
     if (formatted.length > 400) {
-      console.log(`Long prop type (${formatted.length}): ${component}.${name}`)
+      console.log(`\x1b[33mLong prop type (${formatted.length}): ${component}.${name}\x1b[0m`)
     }
   }
 
@@ -101,6 +108,7 @@ type BaseDefinition = {
   formatted: string
   source?: string
   description?: Record<string, string>
+  descriptionSource?: Record<string, string>
   default?: string
   optional?: boolean
 }
@@ -235,6 +243,7 @@ function count (arr: string[], needle: string) {
   }, 0)
 }
 
+// Types that are displayed as links
 const allowedRefs = [
   'Anchor',
   'LocationStrategyFn',
@@ -255,12 +264,15 @@ const allowedRefs = [
   'FilterFunction',
   'DataIteratorItem',
 ]
+
+// Types that displayed without their generic arguments
 const plainRefs = [
   'Component',
   'ComponentPublicInstance',
   'ComponentInternalInstance',
   'FunctionalComponent',
   'DataTableItem',
+  'ListItem',
   'Group',
   'DataIteratorItem',
 ]
@@ -295,6 +307,7 @@ function formatDefinition (definition: Definition) {
       break
     case 'object':
       formatted = `{ ${Object.entries(definition.properties).reduce<string[]>((arr, [name, prop]) => {
+        if (name.includes(':') || name.includes('-')) name = `'${name}'`
         arr.push(`${name}: ${prop.formatted}`)
         return arr
       }, []).join('; ')} }`

@@ -9,8 +9,8 @@ import { makeComponentProps } from '@/composables/component'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, propsFactory, useRender } from '@/util'
 import { modes, nullColor } from './util'
+import { defineComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -42,7 +42,7 @@ export const makeVColorPickerEditProps = propsFactory({
   },
 
   ...makeComponentProps(),
-}, 'v-color-picker-edit')
+}, 'VColorPickerEdit')
 
 export const VColorPickerEdit = defineComponent({
   name: 'VColorPickerEdit',

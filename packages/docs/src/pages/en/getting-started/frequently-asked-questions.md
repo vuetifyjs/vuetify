@@ -13,15 +13,23 @@ related:
 
 Stuck on a particular problem? Check some of these common gotchas before creating a ticket. If you still cannot find what you are looking for, you can submit an [issue](https://issues.vuetifyjs.com/) on GitHub or ask in our [community](https://community.vuetifyjs.com/).
 
-<entry />
+<promoted slug="discord-subscriber-help" />
 
 ## Questions
 
-<promoted slug="vuetify-discord" />
+The following responses are a collection of common questions asked by the Vuetify community.
 
 * **What is Vuetify?** { #what-is-vuetify }
 
   Vuetify is a Vue.js framework that helps to create beautiful and responsive user interfaces. It includes a wide variety of customizable and reusable components for building modern applications.
+
+* **Does Vuetify provide support?** { #does-vuetify-provide-support }
+
+  Vuetify is a free to use Open Source project released under the [MIT](http://opensource.org/licenses/MIT) license. There are multiple ways to receive support for Vuetify:
+
+  * Join our [Discord Community](https://community.vuetifyjs.com/) - (Free/Paid)
+  * Ask a question on [GitHub Discussions](https://discussions.vuetifyjs.com/) - (Free)
+  * Get [Direct Support](/introduction/enterprise-support/) from Vuetify - (Paid)
 
 * **What is the difference between Vuetify and Vue?** { #what-is-the-difference-between-vuetify-and-vue }
 
@@ -82,5 +90,9 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 * **I found a bug, what should I do?** { #i-found-a-bug-what-should-i-do }
 
   Please create a new [issue](https://issues.vuetifyjs.com/) with our Issue Generator. Please make sure to check for existing issues before creating a new one.
+
+* **Why did Vuetify 3 change `value` to `model-value`?**
+
+  The `value` prop was changed in Vue 3 to support a new `v-model` syntax. See the official Vue docs for more information on [Component v-model](https://vuejs.org/guide/components/v-model.html).
 
 <promoted type="theme" />

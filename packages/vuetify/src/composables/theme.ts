@@ -3,7 +3,6 @@ import {
   computed,
   inject,
   provide,
-  reactive,
   ref,
   watch,
   watchEffect,
@@ -12,6 +11,7 @@ import {
   createRange,
   darken,
   getCurrentInstance,
+  getForeground,
   getLuma,
   IN_BROWSER,
   lighten,
@@ -20,11 +20,10 @@ import {
   propsFactory,
   RGBtoHex,
 } from '@/util'
-import { APCAcontrast } from '@/util/color/APCA'
 
 // Types
-import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 import type { HeadClient } from '@vueuse/head'
+import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
@@ -114,11 +113,12 @@ const defaultThemeOptions: Exclude<ThemeOptions, false> = {
       colors: {
         background: '#FFFFFF',
         surface: '#FFFFFF',
+        'surface-bright': '#FFFFFF',
         'surface-variant': '#424242',
         'on-surface-variant': '#EEEEEE',
-        primary: '#6200EE',
-        'primary-darken-1': '#3700B3',
-        secondary: '#03DAC6',
+        primary: '#1867C0',
+        'primary-darken-1': '#1F5592',
+        secondary: '#48A9A6',
         'secondary-darken-1': '#018786',
         error: '#B00020',
         info: '#2196F3',
@@ -149,12 +149,13 @@ const defaultThemeOptions: Exclude<ThemeOptions, false> = {
       colors: {
         background: '#121212',
         surface: '#212121',
-        'surface-variant': '#BDBDBD',
+        'surface-bright': '#ccbfd6',
+        'surface-variant': '#a3a3a3',
         'on-surface-variant': '#424242',
-        primary: '#BB86FC',
-        'primary-darken-1': '#3700B3',
-        secondary: '#03DAC5',
-        'secondary-darken-1': '#03DAC5',
+        primary: '#2196F3',
+        'primary-darken-1': '#277CC1',
+        secondary: '#54B6B2',
+        'secondary-darken-1': '#48A9A6',
         error: '#CF6679',
         info: '#2196F3',
         success: '#4CAF50',
@@ -201,7 +202,7 @@ function parseThemeOptions (options: ThemeOptions = defaultThemeOptions): Intern
 
 // Composables
 export function createTheme (options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
-  const parsedOptions = reactive(parseThemeOptions(options))
+  const parsedOptions = parseThemeOptions(options)
   const name = ref(parsedOptions.defaultTheme)
   const themes = ref(parsedOptions.themes)
 
@@ -236,20 +237,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         const onColor = `on-${color}` as keyof OnColors
         const colorVal = parseColor(theme.colors[color]!)
 
-        const blackContrast = Math.abs(APCAcontrast(parseColor(0), colorVal))
-        const whiteContrast = Math.abs(APCAcontrast(parseColor(0xffffff), colorVal))
-
-        // TODO: warn about poor color selections
-        // const contrastAsText = Math.abs(APCAcontrast(colorVal, colorToInt(theme.colors.background)))
-        // const minContrast = Math.max(blackContrast, whiteContrast)
-        // if (minContrast < 60) {
-        //   consoleInfo(`${key} theme color ${color} has poor contrast (${minContrast.toFixed()}%)`)
-        // } else if (contrastAsText < 60 && !['background', 'surface'].includes(color)) {
-        //   consoleInfo(`${key} theme color ${color} has poor contrast as text (${contrastAsText.toFixed()}%)`)
-        // }
-
-        // Prefer white text if both have an acceptable contrast ratio
-        theme.colors[onColor] = whiteContrast > Math.min(blackContrast, 50) ? '#fff' : '#000'
+        theme.colors[onColor] = getForeground(colorVal)
       }
     }
 
@@ -307,11 +295,15 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   }
 
   function install (app: App) {
+    if (parsedOptions.isDisabled) return
+
     const head = app._context.provides.usehead as HeadClient | undefined
     if (head) {
       if (head.push) {
         const entry = head.push(getHead)
-        watch(styles, () => { entry.patch(getHead) })
+        if (IN_BROWSER) {
+          watch(styles, () => { entry.patch(getHead) })
+        }
       } else {
         if (IN_BROWSER) {
           head.addHeadObjs(computed(getHead))
@@ -325,11 +317,13 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         ? document.getElementById('vuetify-theme-stylesheet')
         : null
 
-      watch(styles, updateStyles, { immediate: true })
+      if (IN_BROWSER) {
+        watch(styles, updateStyles, { immediate: true })
+      } else {
+        updateStyles()
+      }
 
       function updateStyles () {
-        if (parsedOptions.isDisabled) return
-
         if (typeof document !== 'undefined' && !styleEl) {
           const el = document.createElement('style')
           el.type = 'text/css'
@@ -371,14 +365,16 @@ export function provideTheme (props: { theme?: string }) {
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
   const name = computed<string>(() => {
-    return props.theme ?? theme?.name.value
+    return props.theme ?? theme.name.value
   })
+  const current = computed(() => theme.themes.value[name.value])
 
   const themeClasses = computed(() => theme.isDisabled ? undefined : `v-theme--${name.value}`)
 
   const newTheme: ThemeInstance = {
     ...theme,
     name,
+    current,
     themeClasses,
   }
 

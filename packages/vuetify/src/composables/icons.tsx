@@ -50,6 +50,7 @@ export interface IconAliases {
   file: IconValue
   plus: IconValue
   minus: IconValue
+  calendar: IconValue
 }
 
 export interface IconProps {
@@ -65,9 +66,9 @@ export interface IconSet {
 }
 
 export type IconOptions = {
-  defaultSet: string
+  defaultSet?: string
   aliases?: Partial<IconAliases>
-  sets: Record<string, IconSet>
+  sets?: Record<string, IconSet>
 }
 
 type IconInstance = {
@@ -75,7 +76,7 @@ type IconInstance = {
   icon?: IconValue
 }
 
-export const IconSymbol: InjectionKey<IconOptions> = Symbol.for('vuetify:icons')
+export const IconSymbol: InjectionKey<Required<IconOptions>> = Symbol.for('vuetify:icons')
 
 export const makeIconProps = propsFactory({
   icon: {
@@ -183,7 +184,16 @@ export function createIcons (options?: IconOptions) {
       ...defaultSets,
       mdi,
     },
-    aliases,
+    aliases: {
+      ...aliases,
+      /* eslint-disable max-len */
+      vuetify: [
+        'M8.2241 14.2009L12 21L22 3H14.4459L8.2241 14.2009Z',
+        ['M7.26303 12.4733L7.00113 12L2 3H12.5261C12.5261 3 12.5261 3 12.5261 3L7.26303 12.4733Z', 0.6],
+      ],
+      'vuetify-outline': 'svg:M7.26 12.47 12.53 3H2L7.26 12.47ZM14.45 3 8.22 14.2 12 21 22 3H14.45ZM18.6 5 12 16.88 10.51 14.2 15.62 5ZM7.26 8.35 5.4 5H9.13L7.26 8.35Z',
+      /* eslint-enable max-len */
+    },
   }, options)
 }
 

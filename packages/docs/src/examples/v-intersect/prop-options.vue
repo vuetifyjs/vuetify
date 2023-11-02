@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex align-center text-center justify-center">
       <v-avatar
-        :color="isIntersecting ? 'green-lighten-1' : 'red-darken-2'"
+        :color="intersecting ? 'green-lighten-1' : 'red-darken-2'"
         variant="flat"
         class="me-3 swing-transition"
         size="32"
@@ -43,6 +43,15 @@
     </v-sheet>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const intersecting = ref(false)
+  function onIntersect (isIntersecting, entries, observer) {
+    intersecting.value = entries[0].intersectionRatio >= 0.5
+  }
+</script>
 
 <script>
   export default {

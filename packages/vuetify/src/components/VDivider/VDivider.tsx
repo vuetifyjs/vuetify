@@ -2,9 +2,9 @@
 import './VDivider.sass'
 
 // Composables
+import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -22,7 +22,7 @@ export const makeVDividerProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeThemeProps(),
-}, 'v-divider')
+}, 'VDivider')
 
 export const VDivider = genericComponent()({
   name: 'VDivider',
