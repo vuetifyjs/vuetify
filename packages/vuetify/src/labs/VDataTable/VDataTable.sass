@@ -1,5 +1,6 @@
 @use '../../styles/settings'
 @use '../../styles/tools'
+@use '../../components/VTable/variables' as *
 @use './variables' as *
 
 .v-data-table
@@ -44,6 +45,9 @@
           > th
             align-items: center
 
+          > th.v-data-table__th--fixed
+              position: sticky
+
           > th.v-data-table__th--sortable:hover
               cursor: pointer
               color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
@@ -57,8 +61,8 @@
                   opacity: 0.5
 
 .v-data-table-column--fixed
+  background: $table-background
   position: sticky
-  z-index: 2
   left: 0
 
 .v-data-table-column--last-fixed

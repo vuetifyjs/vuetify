@@ -10,10 +10,7 @@ export type DataTableCompareFunction<T = any> = (a: T, b: T) => number
 export type DataTableHeader = {
   key?: 'data-table-group' | 'data-table-select' | 'data-table-expand' | (string & {})
   value?: SelectItemKey
-  title: string
-
-  colspan?: number
-  rowspan?: number
+  title?: string
 
   fixed?: boolean
   align?: 'start' | 'end' | 'center'
@@ -24,14 +21,19 @@ export type DataTableHeader = {
 
   sortable?: boolean
   sort?: DataTableCompareFunction
+
+  children?: DataTableHeader[]
 }
 
-export type InternalDataTableHeader = Omit<DataTableHeader, 'key' | 'value'> & {
+export type InternalDataTableHeader = Omit<DataTableHeader, 'key' | 'value' | 'children'> & {
   key: string | null
   value: SelectItemKey | null
   sortable: boolean
   fixedOffset?: number
   lastFixed?: boolean
+  colspan?: number
+  rowspan?: number
+  children?: InternalDataTableHeader[]
 }
 
 export interface DataTableItem<T = any> extends InternalItem<T>, GroupableItem<T>, SelectableItem {
