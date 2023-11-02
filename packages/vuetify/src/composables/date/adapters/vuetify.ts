@@ -247,14 +247,17 @@ function getWeekdays (locale: string) {
   })
 }
 
-function format (value: Date, formatString: string, locale: string, formats?: Record<string, CustomDateFormat>): string {
+function format (
+  value: Date,
+  formatString: string,
+  locale: string,
+  formats?: Record<string, CustomDateFormat>
+): string {
+  const newDate = date(value) ?? new Date()
   const customFormat = formats?.[formatString]
-  if (customFormat) {
-    if (typeof customFormat === 'function') {
-      return customFormat(date(value) ?? new Date(), formatString, locale)
-    } else {
-      return new Intl.DateTimeFormat(locale, customFormat).format(date(value) ?? undefined)
-    }
+
+  if (typeof customFormat === 'function') {
+    return customFormat(newDate, formatString, locale)
   }
 
   let options: Intl.DateTimeFormatOptions = {}
@@ -290,10 +293,10 @@ function format (value: Date, formatString: string, locale: string, formats?: Re
       options = { year: 'numeric' }
       break
     default:
-      options = { timeZone: 'UTC', timeZoneName: 'short' }
+      options = customFormat ?? { timeZone: 'UTC', timeZoneName: 'short' }
   }
 
-  return new Intl.DateTimeFormat(locale, options).format(date(value) ?? undefined)
+  return new Intl.DateTimeFormat(locale, options).format(newDate)
 }
 
 function toISO (adapter: DateAdapter<any>, value: Date) {
