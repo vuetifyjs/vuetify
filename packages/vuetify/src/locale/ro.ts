@@ -2,6 +2,10 @@ export default {
   badge: 'Insignă',
   open: 'Open',
   close: 'Închideți',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Anulează',
+  },
   dataIterator: {
     noResultsText: 'Nu s-au găsit înregistrări corespunzătoare',
     loadingText: 'Se încarcă articolele...',
@@ -31,8 +35,6 @@ export default {
     divider: 'până la',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Anulează',
     range: {
       title: 'Selectați datele',
       header: 'Introduceți datele',

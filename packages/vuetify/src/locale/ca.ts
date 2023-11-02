@@ -2,6 +2,10 @@ export default {
   badge: 'Insígnia',
   open: 'Open',
   close: 'Tancar',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Sense dades per mostrar',
     loadingText: 'Carregant...',
@@ -31,8 +35,6 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
     range: {
       title: 'Select dates',
       header: 'Enter dates',

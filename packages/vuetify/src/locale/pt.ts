@@ -2,6 +2,10 @@ export default {
   badge: 'Distintivo',
   open: 'Open',
   close: 'Fechar',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Nenhum dado encontrado',
     loadingText: 'Carregando itens...',
@@ -31,8 +35,6 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
     range: {
       title: 'Select dates',
       header: 'Enter dates',

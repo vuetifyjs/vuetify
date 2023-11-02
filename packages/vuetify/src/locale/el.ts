@@ -2,6 +2,10 @@ export default {
   badge: 'Σήμα',
   open: 'Open',
   close: 'Close',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Δε βρέθηκαν αποτελέσματα',
     loadingText: 'Loading item...',
@@ -31,8 +35,6 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
     range: {
       title: 'Select dates',
       header: 'Enter dates',

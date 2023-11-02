@@ -8,7 +8,6 @@ import { makeVDatePickerMonthProps, VDatePickerMonth } from './VDatePickerMonth'
 import { makeVDatePickerMonthsProps, VDatePickerMonths } from './VDatePickerMonths'
 import { makeVDatePickerYearsProps, VDatePickerYears } from './VDatePickerYears'
 import { VFadeTransition } from '@/components/transitions'
-import { VBtn } from '@/components/VBtn'
 import { VTextField } from '@/components/VTextField'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
@@ -43,14 +42,6 @@ export const makeVDatePickerProps = propsFactory({
     type: String,
     default: '$edit',
   },
-  cancelText: {
-    type: String,
-    default: '$vuetify.datePicker.cancel',
-  },
-  okText: {
-    type: String,
-    default: '$vuetify.datePicker.ok',
-  },
   inputMode: {
     type: String as PropType<'calendar' | 'keyboard'>,
     default: 'calendar',
@@ -67,7 +58,6 @@ export const makeVDatePickerProps = propsFactory({
     type: String,
     default: '$vuetify.datePicker.header',
   },
-  hideActions: Boolean,
 
   ...makeVDatePickerControlsProps(),
   ...makeVDatePickerMonthProps(),
@@ -87,8 +77,6 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
     'update:year': (date: any) => true,
     'update:inputMode': (date: any) => true,
     'update:viewMode': (date: any) => true,
-    'click:cancel': () => true,
-    'click:save': () => true,
   },
 
   setup (props, { emit, slots }) {
@@ -108,12 +96,6 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
       const value = adapter.date(internal.value?.[0])
 
       return adapter.isValid(value) ? value : adapter.date()
-    })
-    const isPristine = computed(() => {
-      const value = adapter.date(wrapInArray(model.value)?.[0])
-      const ivalue = adapter.date(wrapInArray(internal.value)[0])
-
-      return adapter.isSameDay(value, ivalue)
     })
 
     const month = ref(Number(props.month ?? adapter.getMonth(adapter.startOfMonth(_model.value))))
@@ -171,16 +153,6 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
       return targets
     })
 
-    function onClickCancel () {
-      emit('click:cancel')
-    }
-
-    function onClickSave () {
-      model.value = internal.value
-
-      emit('click:save')
-    }
-
     function onClickAppend () {
       inputMode.value = inputMode.value === 'calendar' ? 'keyboard' : 'calendar'
     }
@@ -232,8 +204,6 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
       const after = adapter.date(wrapInArray(oldVal)[0])
 
       isReversing.value = adapter.isBefore(before, after)
-
-      if (!props.hideActions) return
 
       model.value = val
     })
@@ -322,27 +292,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
                 />
               </div>
             ),
-            actions: () => !props.hideActions ? (
-              slots.actions?.() ?? (
-                <div>
-                  <VBtn
-                    disabled={ isPristine.value }
-                    variant="text"
-                    color={ props.color }
-                    onClick={ onClickCancel }
-                    text={ t(props.cancelText) }
-                  />
-
-                  <VBtn
-                    disabled={ isPristine.value }
-                    variant="text"
-                    color={ props.color }
-                    onClick={ onClickSave }
-                    text={ t(props.okText) }
-                  />
-                </div>
-              )
-            ) : undefined,
+            actions: slots.actions,
           }}
         />
       )

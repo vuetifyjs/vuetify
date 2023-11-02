@@ -2,6 +2,10 @@ export default {
   badge: 'Huy hiệu',
   open: 'Open',
   close: 'Đóng',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Không tìm thấy kết quả nào',
     loadingText: 'Đang tải...',
@@ -31,8 +35,6 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
     range: {
       title: 'Select dates',
       header: 'Enter dates',
