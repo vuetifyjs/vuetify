@@ -31,7 +31,6 @@ export type HeadersSlotProps = {
   toggleSort: ReturnType<typeof provideSort>['toggleSort']
   selectAll: ReturnType<typeof provideSelection>['selectAll']
   getSortIcon: (column: InternalDataTableHeader) => IconValue
-  getFixedStyles: (column: InternalDataTableHeader, y: number) => CSSProperties | undefined
   isSorted: ReturnType<typeof provideSort>['isSorted']
 }
 
@@ -74,19 +73,18 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
 
   props: makeVDataTableHeadersProps(),
 
-  setup (props, { slots, emit }) {
+  setup (props, { slots }) {
     const { toggleSort, sortBy, isSorted } = useSort()
     const { someSelected, allSelected, selectAll, showSelectAll } = useSelection()
     const { columns, headers } = useHeaders()
     const { loaderClasses } = useLoader(props)
 
-    const getFixedStyles = (column: InternalDataTableHeader, y: number): CSSProperties | undefined => {
+    function getFixedStyles (column: InternalDataTableHeader, y: number): CSSProperties | undefined {
       if (!props.sticky && !column.fixed) return undefined
 
       return {
         position: 'sticky',
-        zIndex: column.fixed ? 4 : props.sticky ? 3 : undefined, // TODO: This needs to account for possible previous fixed columns.
-        left: column.fixed ? convertToUnit(column.fixedOffset) : undefined, // TODO: This needs to account for possible row/colspan of previous columns
+        left: column.fixed ? convertToUnit(column.fixedOffset) : undefined,
         top: props.sticky ? `calc(var(--v-table-header-height) * ${y})` : undefined,
       }
     }
@@ -111,7 +109,6 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       allSelected: allSelected.value,
       selectAll,
       getSortIcon,
-      getFixedStyles,
     } satisfies HeadersSlotProps))
 
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
@@ -126,6 +123,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
             {
               'v-data-table__th--sortable': column.sortable,
               'v-data-table__th--sorted': isSorted(column),
+              'v-data-table__th--fixed': column.fixed,
             },
             loaderClasses.value,
           ]}

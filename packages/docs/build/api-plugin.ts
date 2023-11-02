@@ -147,7 +147,8 @@ async function generateFiles () {
 export default function Api (): Plugin {
   return {
     name: 'vuetify:api',
-    async configResolved () {
+    enforce: 'pre',
+    async config () {
       rimraf.sync(API_PAGES_ROOT)
 
       await generateFiles()

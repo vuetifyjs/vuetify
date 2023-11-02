@@ -73,7 +73,6 @@
     "./locale/adapters/*": "./lib/locale/adapters/*.mjs",
     "./iconsets/*": "./lib/iconsets/*.mjs",
     "./labs/components": "./lib/labs/components.mjs",
-    "./labs/date/adapters/*": "./lib/labs/date/adapters/*.mjs",
     "./labs/*": "./lib/labs/*/index.mjs",
     "./*": "./*"
   },

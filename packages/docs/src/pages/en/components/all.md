@@ -94,7 +94,7 @@ Containment components wrap other components and provide additional functionalit
 
 </components-list-item>
 
-<components-list-item name="Bottom Sheet component" src="bottom-sheets" labs>
+<components-list-item name="Bottom Sheet component" src="bottom-sheets">
 
   The bottom sheet component is a modified dialog that slides from the bottom of the screen
 
@@ -308,7 +308,7 @@ These components allow a user to select one or multiple items from a list of opt
 
 </components-list-item>
 
-<components-list-item name="Stepper components" src="steppers" labs>
+<components-list-item name="Stepper components" src="steppers">
 
   The stepper component is a linear progress control used to break lengthy forms into smaller logical sections
 
@@ -324,7 +324,7 @@ These components are used to display data and information in a variety of ways.
 
 <v-row>
 
-<components-list-item name="Data iterator component" src="data-iterators" labs>
+<components-list-item name="Data iterator component" src="data-iterators">
 
   The data iterator component provides an easy interface for paginating and sorting data
 
@@ -336,7 +336,7 @@ These components are used to display data and information in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="Infinite scroll component"  src="infinite-scroller" labs>
+<components-list-item name="Infinite scroll component"  src="infinite-scroller">
 
   The Infinite scroll component is a container that loads more items when scrolling
 
@@ -394,7 +394,7 @@ These components are used to provide feedback to the user within content, over c
 
 </components-list-item>
 
-<components-list-item name="Skeleton loader component" src="skeleton-loaders" labs>
+<components-list-item name="Skeleton loader component" src="skeleton-loaders">
 
   Displays a content, enhancing perceived performance during data-fetching & rendering
 

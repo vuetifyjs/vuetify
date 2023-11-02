@@ -18,7 +18,7 @@ features:
 
 `v-date-picker` is a fully featured date selection component that lets users select a date, or range of dates.
 
-<!-- ![Date picker Entry](https://cdn.vuetifyjs.com/docs/images/components/v-date-picker/v-date-picker-entry.png) -->
+![Date picker Entry](https://cdn.vuetifyjs.com/docs/images/components/v-date-picker/v-date-picker-entry.png)
 
 <page-features />
 
@@ -155,6 +155,12 @@ Date picker colors can be set using the **color** and **header-color** props. If
 
 <example file="v-date-picker/prop-colors" />
 
+#### Allowed dates
+
+Specify allowed dates using objects or functions. When using objects, accepts a date string in the format of YYYY-MM-DD. When using functions, accepts a date object as a parameter and should return a boolean.
+
+<example file="v-date-picker/prop-allowed-dates" />
+
 <!--
 ## Caveats
 
@@ -165,12 +171,6 @@ Date picker colors can be set using the **color** and **header-color** props. If
 ## Examples
 
 ### Props
-
-#### Allowed dates
-
-You can specify allowed dates using arrays, objects, and functions.
-
-<example file="v-date-picker/prop-allowed-dates" />
 
 #### Colors
 

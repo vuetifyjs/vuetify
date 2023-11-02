@@ -2,6 +2,10 @@ export default {
   badge: 'Emblem',
   open: 'Open',
   close: 'Luk',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Ingen matchende data fundet',
     loadingText: 'Indhenter data...',
@@ -31,8 +35,6 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
     range: {
       title: 'Select dates',
       header: 'Enter dates',

@@ -1,6 +1,6 @@
 <template>
   <v-icon
-    v-if="auth.admin"
+    v-if="auth.user.isAdmin"
     color="primary"
     icon="$vuetify"
   />

@@ -197,6 +197,11 @@ app.use(vuetify)
 - `v-subheader`  has been renamed to `v-list-subheader`.
 - `v-list-item`'s `active` scoped slot prop has been renamed to `isActive`
 
+### v-rating
+
+- `color` has been renamed to `active-color`.
+- `background-color` has been renamed to `color`.
+
 ### v-select/v-combobox/v-autocomplete
 
 - v-model values not present in `items` will now be rendered instead of being ignored.

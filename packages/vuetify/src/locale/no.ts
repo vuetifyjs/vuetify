@@ -2,6 +2,10 @@ export default {
   badge: 'Skilt',
   open: 'Open',
   close: 'Lukk',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Avbryt',
+  },
   dataIterator: {
     noResultsText: 'Fant ingen matchende elementer.',
     loadingText: 'Laster elementer...',
@@ -31,8 +35,6 @@ export default {
     divider: 'til',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Avbryt',
     range: {
       title: 'Velg datoer',
       header: 'Velg datoer',

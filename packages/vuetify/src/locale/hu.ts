@@ -2,6 +2,10 @@ export default {
   badge: 'Jelvény',
   open: 'Open',
   close: 'Bezárás',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Nincs egyező találat',
     loadingText: 'Betöltés...',
@@ -31,8 +35,6 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
     range: {
       title: 'Select dates',
       header: 'Enter dates',

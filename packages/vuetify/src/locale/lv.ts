@@ -2,6 +2,10 @@ export default {
   badge: 'Žetons',
   open: 'Open',
   close: 'Aizvērt',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Nekas netika atrasts',
     loadingText: 'Ielādē...',
@@ -31,8 +35,6 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
     range: {
       title: 'Select dates',
       header: 'Enter dates',

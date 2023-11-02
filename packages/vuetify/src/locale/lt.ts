@@ -2,6 +2,10 @@ export default {
   badge: 'Ženklelis',
   open: 'Open',
   close: 'Uždaryti',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Nerasta atitinkančių įrašų',
     loadingText: 'Kraunama...',
@@ -31,8 +35,6 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
     range: {
       title: 'Select dates',
       header: 'Enter dates',
