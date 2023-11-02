@@ -59,7 +59,6 @@
         v-if="model?.author"
         class="d-flex justify-space-between"
       >
-      
         <v-list-item v-if="publishedOn" lines="two">
           <v-list-item-title class="d-flex flex-column justify-center">
             <div class="d-flex align-center">
@@ -75,7 +74,7 @@
                 </template>
               </i18n-t>
             </div>
-            
+
             <div v-if="model?.reactions?.total_count" class="mt-2">
               <v-chip
                 v-if="isAuthenticated"
@@ -100,7 +99,7 @@
                   </v-sheet>
                 </v-menu>
               </v-chip>
-              
+
               <template v-for="(value, key) in reactions" :key="key">
                 <template v-if="model?.reactions?.[key]">
                   <v-chip
@@ -284,7 +283,7 @@
     timeout = setTimeout(() => store.find(val), 500)
   }
 
-  async function react(value: string) {
+  async function react (value: string) {
     await authStore.setReaction(value, model?.value?.id)
     await store.find(search.value)
   }
