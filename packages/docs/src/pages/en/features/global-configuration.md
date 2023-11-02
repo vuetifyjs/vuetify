@@ -259,7 +259,7 @@ In your template, assign the return value of `defineProps` to a variable and pas
 </script>
 ```
 
-Notice that we have to explicltly use the `props` object in the template. This is because Vue automatically unwraps the values in `defineProps`.
+Notice that we have to explicitly use the `props` object in the template. This is because Vue automatically unwraps the values in `defineProps`.
 
 ```diff
 -<div>I am {{ foo }}</div>

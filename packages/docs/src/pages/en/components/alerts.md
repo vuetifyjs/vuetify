@@ -61,7 +61,7 @@ The recommended placement of elements inside of `v-alert` is:
 
 ## Guide
 
-The `v-alert` component is a callout element designed to attact the attention of a user. Unlike [v-banner](/components/banners/), the `v-alert` component is intended to be used and re-used throughout your application. An alert's color is derived from its **type** property which corresponds to your application's contextual [theme colors](/features/theme/#custom-theme-colors) and [iconfont aliases](/features/icon-fonts/#creating-a-custom-icon-set).
+The `v-alert` component is a callout element designed to attract the attention of a user. Unlike [v-banner](/components/banners/), the `v-alert` component is intended to be used and re-used throughout your application. An alert's color is derived from its **type** property which corresponds to your application's contextual [theme colors](/features/theme/#custom-theme-colors) and [iconfont aliases](/features/icon-fonts/#creating-a-custom-icon-set).
 
 ### Props
 

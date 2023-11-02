@@ -7,7 +7,7 @@ import { VOtpInput } from '../VOtpInput'
 import { keyValues } from '@/util'
 
 describe('VOtpInput', () => {
-  it('enters value and moves to next input and blurs at end', () => {
+  it('enters value and moves to next input', () => {
     cy.mount(() => (<VOtpInput />))
       .get('.v-otp-input input').eq(0)
       .type('1')
@@ -26,7 +26,7 @@ describe('VOtpInput', () => {
       .get('.v-otp-input input').eq(5)
       .should('be.focused')
       .type('6')
-      .should('not.be.focused')
+      .should('be.focused')
   })
 
   it('enters value and moves to next input when focused index is not next', () => {

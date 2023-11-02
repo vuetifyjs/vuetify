@@ -14,8 +14,8 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, watch } from 'vue'
-import { filterInputAttrs, focusChild, genericComponent, IN_BROWSER, only, propsFactory, useRender } from '@/util'
+import { computed, nextTick, ref, watch } from 'vue'
+import { filterInputAttrs, focusChild, genericComponent, only, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -90,7 +90,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     )
     const { t } = useLocale()
 
-    const fields = computed(() => Array(Number(props.length)).fill(0))
+    const length = computed(() => Number(props.length))
+    const fields = computed(() => Array(length.value).fill(0))
     const focusIndex = ref(-1)
     const contentRef = ref<HTMLElement>()
     const inputRef = ref<HTMLInputElement[]>([])
@@ -100,19 +101,18 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       const array = model.value.slice()
       const value = current.value.value
 
-      array[focusIndex.value] = value
-
-      model.value = array
+      // Use the last character in the updated value
+      array[focusIndex.value] = value?.[1] ?? value
 
       let target: any = null
 
       if (focusIndex.value > model.value.length) {
-        target = model.value.length
-      } else if (focusIndex.value + 1 !== Number(props.length)) {
+        target = model.value.length + 1
+      } else if (focusIndex.value + 1 !== length.value) {
         target = 'next'
-      } else {
-        requestAnimationFrame(() => current.value?.blur())
       }
+
+      model.value = array
 
       if (target) focusChild(contentRef.value!, target)
     }
@@ -193,13 +193,13 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     }, { scoped: true })
 
     watch(model, val => {
-      if (val.length === Number(props.length)) emit('finish', val.join(''))
+      if (val.length === length.value) emit('finish', val.join(''))
     }, { deep: true })
 
     watch(focusIndex, val => {
       if (val < 0) return
 
-      IN_BROWSER && window.requestAnimationFrame(() => {
+      nextTick(() => {
         inputRef.value[val]?.select()
       })
     })
