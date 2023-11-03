@@ -35,6 +35,8 @@ export type VDataTableVirtualSlots = VDataTableRowsSlots & VDataTableHeadersSlot
   top: VDataTableVirtualSlotProps
   headers: VDataTableHeadersSlots['headers']
   bottom: VDataTableVirtualSlotProps
+  'body.prepend': VDataTableVirtualSlotProps
+  'body.append': VDataTableVirtualSlotProps
   item: {
     itemRef: Ref<HTMLElement | undefined>
   }
@@ -178,6 +180,8 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                       <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
                     </tr>
 
+                    { slots['body.prepend']?.(slotProps.value) }
+
                     <VDataTableRows
                       { ...dataTableRowsProps }
                       items={ displayItems.value }
@@ -204,6 +208,8 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                         ),
                       }}
                     </VDataTableRows>
+
+                    { slots['body.append']?.(slotProps.value) }
 
                     <tr style={{ height: convertToUnit(paddingBottom.value), border: 0 }}>
                       <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
