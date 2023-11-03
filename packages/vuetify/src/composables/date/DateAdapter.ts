@@ -1,4 +1,4 @@
-export interface DateAdapter<T> {
+export interface DateAdapter<T = unknown> {
   date (value?: any): T | null
   format (date: T, formatString: string): string
   toJsDate (value: T): Date

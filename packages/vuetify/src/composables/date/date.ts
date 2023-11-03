@@ -1,22 +1,27 @@
-// Composables
-import { useLocale } from '@/composables/locale'
-
 // Utilities
 import { inject, reactive, watch } from 'vue'
-import { mergeDeep, propsFactory } from '@/util'
+import { mergeDeep } from '@/util'
+
+// Types
+import type { DateAdapter } from './DateAdapter'
+import type { LocaleInstance } from '@/composables/locale'
 
 // Adapters
 import { VuetifyDateAdapter } from './adapters/vuetify'
 
 // Types
-import type { InjectionKey, PropType } from 'vue'
-import type { DateAdapter } from './DateAdapter'
+import type { InjectionKey } from 'vue'
 
-export interface DateInstance<T> extends DateAdapter<T> {
+export interface DateInstance<T = DateInstanceType['instanceType']> extends DateAdapter<T> {
   locale?: any
 }
 
-export type InternalDateOptions<T = any> = {
+/** Supports module augmentation to specify date object types */
+export interface DateInstanceType {
+  instanceType: unknown
+}
+
+export type InternalDateOptions<T = unknown> = {
   adapter: (new (options: { locale: any, formats?: any }) => DateInstance<T>) | DateInstance<T>
   formats?: Record<string, any>
   locale: Record<string, any>
@@ -24,16 +29,10 @@ export type InternalDateOptions<T = any> = {
 
 export type DateOptions<T = any> = Partial<InternalDateOptions<T>>
 
-export const DateAdapterSymbol: InjectionKey<InternalDateOptions> = Symbol.for('vuetify:date-adapter')
+export const DateAdapterSymbol: InjectionKey<DateInstance> = Symbol.for('vuetify:date-adapter')
 
-export interface DateProps {
-  displayDate: any
-  hideAdjacentMonths: boolean
-  modelValue: readonly any[]
-}
-
-export function createDate (options?: DateOptions) {
-  return mergeDeep({
+export function createDate (options: DateOptions | undefined, locale: LocaleInstance) {
+  const date = mergeDeep({
     adapter: VuetifyDateAdapter,
     locale: {
       af: 'af-ZA',
@@ -78,40 +77,30 @@ export function createDate (options?: DateOptions) {
       zhHans: 'zh-CN',
       zhHant: 'zh-TW',
     },
-  }, options)
-}
+  }, options) as InternalDateOptions
 
-// TODO: revisit this after it starts being implemented
-export const makeDateProps = propsFactory({
-  displayDate: {
-    type: Object as PropType<Date>,
-    default: new Date(),
-  },
-  hideAdjacentMonths: Boolean,
-  modelValue: {
-    type: null as unknown as PropType<readonly any[]>,
-    default: () => [],
-  },
-}, 'date')
-
-export function useDate () {
-  const date = inject(DateAdapterSymbol)
-  const locale = useLocale()
-
-  if (!date) throw new Error('[Vuetify] Could not find injected date')
-
-  const instance = reactive(typeof date.adapter === 'function'
+  const instance = reactive(
+    typeof date.adapter === 'function'
     // eslint-disable-next-line new-cap
-    ? new date.adapter({
-      locale: date.locale?.[locale.current.value] ?? locale.current.value,
-      formats: date.formats,
-    })
-    : date.adapter)
+      ? new date.adapter({
+        locale: date.locale?.[locale.current.value] ?? locale.current.value,
+        formats: date.formats,
+      })
+      : date.adapter
+  )
 
   watch(locale.current, value => {
     const newLocale = date.locale ? date.locale[value] : value
     instance.locale = newLocale ?? instance.locale
   })
+
+  return instance
+}
+
+export function useDate () {
+  const instance = inject(DateAdapterSymbol)
+
+  if (!instance) throw new Error('[Vuetify] Could not find injected date adapter')
 
   return instance
 }
