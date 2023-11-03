@@ -16,9 +16,10 @@ import { computed } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { CSSProperties, UnwrapRef } from 'vue'
+import type { CSSProperties, PropType, UnwrapRef } from 'vue'
 import type { provideSelection } from './composables/select'
 import type { provideSort } from './composables/sort'
+
 import type { InternalDataTableHeader } from './types'
 import type { LoaderSlotProps } from '@/composables/loader'
 
@@ -66,6 +67,8 @@ export const makeVDataTableHeadersProps = propsFactory({
   },
 
   ...makeLoaderProps(),
+  'onClick:columnHeader': Function as PropType<(e: Event, value: { column: InternalDataTableHeader }) => void>,
+
 }, 'VDataTableHeaders')
 
 export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
@@ -134,7 +137,12 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           }}
           colspan={ column.colspan }
           rowspan={ column.rowspan }
-          onClick={ column.sortable ? () => toggleSort(column) : undefined }
+          onClick={ column.sortable || props['onClick:columnHeader'] ? (event: Event) => {
+            if (column.sortable) {
+              toggleSort(column)
+            }
+            props['onClick:columnHeader']?.(event, { column })
+          } : undefined }
           lastFixed={ column.lastFixed }
           noPadding={ noPadding }
         >
