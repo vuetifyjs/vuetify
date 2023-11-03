@@ -16,7 +16,7 @@ import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } f
 // Types
 import type { PropType } from 'vue'
 import type { Group } from './composables/group'
-import type { DataTableItem, GroupHeaderSlot, ItemSlot } from './types'
+import type { CellProps, DataTableItem, GroupHeaderSlot, ItemSlot, RowProps } from './types'
 import type { VDataTableGroupHeaderRowSlots } from './VDataTableGroupHeaderRow'
 import type { VDataTableRowSlots } from './VDataTableRow'
 
@@ -44,6 +44,8 @@ export const makeVDataTableRowsProps = propsFactory({
     default: '$vuetify.noDataText',
   },
   rowHeight: Number,
+  rowProps: [Object, Function] as PropType<RowProps>,
+  cellProps: [Object, Function] as PropType<CellProps>,
 }, 'VDataTableRows')
 
 export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
@@ -134,8 +136,16 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
                   } : undefined,
                   index,
                   item,
+                  cellProps: props.cellProps,
                 },
-                getPrefixedEventHandlers(attrs, ':row', () => slotProps)
+                getPrefixedEventHandlers(attrs, ':row', () => slotProps),
+                typeof props.rowProps === 'function'
+                  ? props.rowProps({
+                    item: slotProps.item,
+                    index: slotProps.index,
+                    internalItem: slotProps.internalItem,
+                  })
+                  : props.rowProps,
               ),
             }
 

@@ -16,7 +16,7 @@ export const VDataTableColumn = defineFunctionalComponent({
   noPadding: Boolean,
   tag: String,
   width: [Number, String],
-}, (props, { slots, attrs }) => {
+}, (props, { slots }) => {
   const Tag = props.tag ?? 'td'
   return (
     <Tag
@@ -34,7 +34,6 @@ export const VDataTableColumn = defineFunctionalComponent({
         width: convertToUnit(props.width),
         left: convertToUnit(props.fixedOffset || null),
       }}
-      { ...attrs }
     >
       { slots.default?.() }
     </Tag>

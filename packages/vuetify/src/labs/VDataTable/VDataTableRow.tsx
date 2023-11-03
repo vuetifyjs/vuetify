@@ -14,7 +14,7 @@ import { genericComponent, getObjectValueByPath, propsFactory, useRender } from 
 
 // Types
 import type { PropType } from 'vue'
-import type { DataTableItem, ItemKeySlot } from './types'
+import type { CellProps, DataTableItem, ItemKeySlot } from './types'
 
 export type VDataTableRowSlots = {
   'item.data-table-select': Omit<ItemKeySlot, 'value'>
@@ -24,6 +24,7 @@ export type VDataTableRowSlots = {
 export const makeVDataTableRowProps = propsFactory({
   index: Number,
   item: Object as PropType<DataTableItem>,
+  cellProps: [Object, Function] as PropType<CellProps>,
   onClick: Function as PropType<(e: MouseEvent) => void>,
 }, 'VDataTableRow')
 
@@ -47,59 +48,83 @@ export const VDataTableRow = genericComponent<VDataTableRowSlots>()({
         ]}
         onClick={ props.onClick }
       >
-        { props.item && columns.value.map((column, i) => (
-          <VDataTableColumn
-            align={ column.align }
-            fixed={ column.fixed }
-            fixedOffset={ column.fixedOffset }
-            lastFixed={ column.lastFixed }
-            noPadding={ column.key === 'data-table-select' || column.key === 'data-table-expand' }
-            width={ column.width }
-          >
-            {{
-              default: () => {
-                const item = props.item!
-                const slotName = `item.${column.key}` as const
-                const slotProps = {
-                  index: props.index!,
-                  item: item.raw,
-                  internalItem: item,
-                  value: getObjectValueByPath(item.columns, column.key),
-                  column,
-                  isSelected,
-                  toggleSelect,
-                  isExpanded,
-                  toggleExpand,
-                } satisfies ItemKeySlot
+        { props.item && columns.value.map((column, i) => {
+          const item = props.item!
+          const slotName = `item.${column.key}` as const
+          const slotProps = {
+            index: props.index!,
+            item: item.raw,
+            internalItem: item,
+            value: getObjectValueByPath(item.columns, column.key),
+            column,
+            isSelected,
+            toggleSelect,
+            isExpanded,
+            toggleExpand,
+          } satisfies ItemKeySlot
 
-                if (slots[slotName]) return slots[slotName]!(slotProps)
+          const cellProps = typeof props.cellProps === 'function'
+            ? props.cellProps({
+              index: slotProps.index,
+              item: slotProps.item,
+              internalItem: slotProps.internalItem,
+              value: slotProps.value,
+              column,
+            })
+            : props.cellProps
+          const columnCellProps = typeof column.cellProps === 'function'
+            ? column.cellProps({
+              index: slotProps.index,
+              item: slotProps.item,
+              internalItem: slotProps.internalItem,
+              value: slotProps.value,
+            })
+            : column.cellProps
 
-                if (column.key === 'data-table-select') {
-                  return slots['item.data-table-select']?.(slotProps) ?? (
-                    <VCheckboxBtn
-                      disabled={ !item.selectable }
-                      modelValue={ isSelected([item]) }
-                      onClick={ withModifiers(() => toggleSelect(item), ['stop']) }
-                    />
-                  )
-                }
+          console.log(cellProps, columnCellProps)
 
-                if (column.key === 'data-table-expand') {
-                  return slots['item.data-table-expand']?.(slotProps) ?? (
-                    <VBtn
-                      icon={ isExpanded(item) ? '$collapse' : '$expand' }
-                      size="small"
-                      variant="text"
-                      onClick={ withModifiers(() => toggleExpand(item), ['stop']) }
-                    />
-                  )
-                }
+          return (
+            <VDataTableColumn
+              align={ column.align }
+              fixed={ column.fixed }
+              fixedOffset={ column.fixedOffset }
+              lastFixed={ column.lastFixed }
+              noPadding={ column.key === 'data-table-select' || column.key === 'data-table-expand' }
+              width={ column.width }
+              { ...cellProps }
+              { ...columnCellProps }
+            >
+              {{
+                default: () => {
+                  if (slots[slotName]) return slots[slotName]!(slotProps)
 
-                return toDisplayString(slotProps.value)
-              },
-            }}
-          </VDataTableColumn>
-        ))}
+                  if (column.key === 'data-table-select') {
+                    return slots['item.data-table-select']?.(slotProps) ?? (
+                      <VCheckboxBtn
+                        disabled={ !item.selectable }
+                        modelValue={ isSelected([item]) }
+                        onClick={ withModifiers(() => toggleSelect(item), ['stop']) }
+                      />
+                    )
+                  }
+
+                  if (column.key === 'data-table-expand') {
+                    return slots['item.data-table-expand']?.(slotProps) ?? (
+                      <VBtn
+                        icon={ isExpanded(item) ? '$collapse' : '$expand' }
+                        size="small"
+                        variant="text"
+                        onClick={ withModifiers(() => toggleExpand(item), ['stop']) }
+                      />
+                    )
+                  }
+
+                  return toDisplayString(slotProps.value)
+                },
+              }}
+            </VDataTableColumn>
+          )
+        })}
       </tr>
     ))
   },
