@@ -73,7 +73,7 @@ export function getObjectValueByPath (obj: any, path?: string | null, fallback?:
 export type SelectItemKey =
   | boolean | null | undefined // Ignored
   | string // Lookup by key, can use dot notation for nested objects
-  | (string | number)[] // Nested lookup by key, each array item is a key in the next level
+  | readonly (string | number)[] // Nested lookup by key, each array item is a key in the next level
   | ((item: Record<string, any>, fallback?: any) => any)
 
 export function getPropertyFromItem (

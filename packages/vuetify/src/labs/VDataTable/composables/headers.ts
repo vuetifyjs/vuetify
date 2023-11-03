@@ -6,7 +6,6 @@ import { consoleError, propsFactory } from '@/util'
 import type { DeepReadonly, InjectionKey, PropType, Ref } from 'vue'
 import type { SortItem } from './sort'
 import type { DataTableHeader, InternalDataTableHeader } from '../types'
-import type { SelectItemKey } from '@/util'
 
 export const makeDataTableHeaderProps = propsFactory({
   headers: {
@@ -202,10 +201,12 @@ function convertToInternalHeaders (items: DeepReadonly<DataTableHeader[]>) {
   const internalHeaders: InternalDataTableHeader[] = []
   for (const item of items) {
     const defaultItem = { ...getDefaultItem(item), ...item }
+    const key = defaultItem.key ?? (typeof defaultItem.value === 'string' ? defaultItem.value : null)
+    const value = defaultItem.value ?? key ?? null
     const internalItem: InternalDataTableHeader = {
       ...defaultItem,
-      key: defaultItem.key ?? null,
-      value: (defaultItem.key ?? defaultItem.value ?? null) as any as SelectItemKey,
+      key,
+      value,
       sortable: defaultItem.sortable ?? defaultItem.key != null,
       children: defaultItem.children ? convertToInternalHeaders(defaultItem.children) : undefined,
     }
