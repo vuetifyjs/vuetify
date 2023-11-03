@@ -1,5 +1,5 @@
 // Utilities
-import { inject, provide, ref, watchEffect } from 'vue'
+import { capitalize, inject, provide, ref, watchEffect } from 'vue'
 import { consoleError, propsFactory } from '@/util'
 
 // Types
@@ -8,10 +8,7 @@ import type { SortItem } from './sort'
 import type { DataTableHeader, InternalDataTableHeader } from '../types'
 
 export const makeDataTableHeaderProps = propsFactory({
-  headers: {
-    type: Array as PropType<DeepReadonly<DataTableHeader[]>>,
-    default: () => ([]),
-  },
+  headers: Array as PropType<DeepReadonly<DataTableHeader[]>>,
 }, 'DataTable-header')
 
 export const VDataTableHeadersSymbol: InjectionKey<{
@@ -20,7 +17,8 @@ export const VDataTableHeadersSymbol: InjectionKey<{
 }> = Symbol.for('vuetify:data-table-headers')
 
 type HeaderProps = {
-  headers: DeepReadonly<DataTableHeader[]>
+  headers: DeepReadonly<DataTableHeader[]> | undefined
+  items: any[]
 }
 
 const defaultHeader = { title: '', sortable: false }
@@ -229,7 +227,10 @@ export function createHeaders (
   const columns = ref<InternalDataTableHeader[]>([])
 
   watchEffect(() => {
-    const items = props.headers.slice()
+    const _headers = props.headers ||
+      Object.keys(props.items[0] ?? {}).map(key => ({ key, title: capitalize(key) })) as never
+
+    const items = _headers.slice()
     const keys = extractKeys(items)
 
     if (options?.groupBy?.value.length && !keys.has('data-table-group')) {

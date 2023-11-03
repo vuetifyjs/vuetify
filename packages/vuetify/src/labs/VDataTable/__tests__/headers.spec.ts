@@ -6,6 +6,7 @@ import { describe, expect, it } from '@jest/globals'
 describe('VDataTable headers', () => {
   it('flattens 2d headers', () => {
     const { headers, columns } = createHeaders({
+      items: [],
       headers: [
         { key: 'foo' },
         { key: 'bar', children: [{ key: 'fizz' }, { key: 'buzz' }] },
@@ -22,6 +23,7 @@ describe('VDataTable headers', () => {
 
   it('orders sibling columns correctly', () => {
     const { headers, columns } = createHeaders({
+      items: [],
       headers: [
         {
           key: 'left',
