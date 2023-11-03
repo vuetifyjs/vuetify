@@ -35,6 +35,7 @@ export default {
     divider: 'à',
   },
   datePicker: {
+    itemsSelected: '{0} selected',
     range: {
       title: 'Sélectionner des dates',
       header: 'Entrer des dates',

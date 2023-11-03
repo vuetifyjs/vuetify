@@ -35,6 +35,7 @@ export default {
     divider: 'до',
   },
   datePicker: {
+    itemsSelected: '{0} selected',
     range: {
       title: 'Избор на дати',
       header: 'Въвеждане на дати',

@@ -35,6 +35,7 @@ export default {
     divider: 'până la',
   },
   datePicker: {
+    itemsSelected: '{0} selected',
     range: {
       title: 'Selectați datele',
       header: 'Introduceți datele',

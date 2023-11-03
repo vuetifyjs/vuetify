@@ -35,6 +35,7 @@ export default {
     divider: 'til',
   },
   datePicker: {
+    itemsSelected: '{0} selected',
     range: {
       title: 'Velg datoer',
       header: 'Velg datoer',

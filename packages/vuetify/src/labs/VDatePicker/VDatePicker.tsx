@@ -103,9 +103,11 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
 
     const isReversing = shallowRef(false)
     const header = computed(() => {
-      return model.value[0] && adapter.isValid(model.value[0])
-        ? adapter.format(model.value[0], 'normalDateWithWeekday')
-        : t(props.header)
+      return props.multiple && model.value.length > 1
+        ? t('$vuetify.datePicker.itemsSelected', model.value.length)
+        : model.value[0] && adapter.isValid(model.value[0])
+          ? adapter.format(model.value[0], 'normalDateWithWeekday')
+          : t(props.header)
     })
     const text = computed(() => {
       return adapter.format(

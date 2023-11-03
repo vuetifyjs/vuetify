@@ -35,6 +35,7 @@ export default {
     divider: 'do',
   },
   datePicker: {
+    itemsSelected: '{0} selected',
     range: {
       title: 'Wybór zakresu dat',
       header: 'Wprowadź zakres dat',

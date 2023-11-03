@@ -35,6 +35,7 @@ export default {
     divider: 'tot',
   },
   datePicker: {
+    itemsSelected: '{0} selected',
     range: {
       title: 'Selecteer datums',
       header: 'Voer datums in',
