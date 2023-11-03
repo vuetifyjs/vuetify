@@ -97,27 +97,43 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     const inputRef = ref<HTMLInputElement[]>([])
     const current = computed(() => inputRef.value[focusIndex.value])
 
-    function onInput () {
+    function onInput (e: Event) {
       const array = model.value.slice()
-      const value = current.value.value
 
-      // Use the last character in the updated value
-      array[focusIndex.value] = value?.[1] ?? value
+      array[focusIndex.value] = (e as InputEvent).data!
+      model.value = array
 
+      moveFocus()
+    }
+
+    function moveFocus () {
       let target: any = null
 
       if (focusIndex.value > model.value.length) {
-        target = model.value.length + 1
+        target = model.value.length
       } else if (focusIndex.value + 1 !== length.value) {
         target = 'next'
       }
-
-      model.value = array
 
       if (target) focusChild(contentRef.value!, target)
     }
 
     function onKeydown (e: KeyboardEvent) {
+      // input tag with type number ignores maxlength attribute,
+      // manually prevents user type more than one digits
+      if (
+        props.type === 'number' &&
+        !isNaN(Number(e.key)) &&
+        current.value.value.length === 1 // input already has one digit
+      ) {
+        if (model.value[focusIndex.value] === e.key) {
+          e.preventDefault() // prevent trigger onInput
+          moveFocus()
+        }
+        current.value.value = e.key
+        return
+      }
+
       const array = model.value.slice()
       const index = focusIndex.value
       let target: 'next' | 'prev' | 'first' | 'last' | number | null = null
