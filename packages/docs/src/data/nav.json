@@ -129,6 +129,25 @@
       "data-iterators",
       "infinite-scroller",
       "tables",
+      {
+        "title": "data-tables",
+        "subfolder": "components",
+        "activeIcon": "",
+        "inactiveIcon": "",
+        "emphasized": true,
+        "items": [
+          "basics",
+          "headers",
+          "selection",
+          "sorting",
+          "pagination",
+          "filtering",
+          "grouping",
+          "slots",
+          "virtual-tables",
+          "server-side-tables"
+        ]
+      },
       "virtual-scroller",
       { "divider": true },
       { "subheader": "grids" },
@@ -201,24 +220,6 @@
     "activeIcon": "mdi-beaker",
     "items": [
       "introduction",
-      {
-        "title": "data-tables",
-        "subfolder": "components",
-        "activeIcon": "",
-        "inactiveIcon": "",
-        "items": [
-          "basics",
-          "headers",
-          "selection",
-          "sorting",
-          "pagination",
-          "filtering",
-          "grouping",
-          "slots",
-          "virtual-tables",
-          "server-side-tables"
-        ]
-      },
       {
         "title": "date-pickers",
         "subfolder": "components"

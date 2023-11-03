@@ -4,8 +4,8 @@ import { getPropertyFromItem, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { GroupableItem } from '@/labs/VDataTable/composables/group'
-import type { SelectableItem } from '@/labs/VDataTable/composables/select'
+import type { GroupableItem } from '@/components/VDataTable/composables/group'
+import type { SelectableItem } from '@/components/VDataTable/composables/select'
 import type { SelectItemKey } from '@/util'
 
 export interface DataIteratorItemProps {

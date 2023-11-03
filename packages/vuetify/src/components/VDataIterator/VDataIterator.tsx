@@ -1,15 +1,22 @@
+// Components
+import { makeDataTableExpandProps, provideExpanded } from '@/components/VDataTable/composables/expand'
+import { makeDataTableGroupProps, provideGroupBy, useGroupedItems } from '@/components/VDataTable/composables/group'
+import { useOptions } from '@/components/VDataTable/composables/options'
+import {
+  createPagination,
+  makeDataTablePaginateProps,
+  providePagination,
+  usePaginatedItems,
+} from '@/components/VDataTable/composables/paginate'
+import { makeDataTableSelectProps, provideSelection } from '@/components/VDataTable/composables/select'
+import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from '@/components/VDataTable/composables/sort'
+
 // Composables
 import { makeDataIteratorItemsProps, useDataIteratorItems } from './composables/items'
 import { makeComponentProps } from '@/composables/component'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTagProps } from '@/composables/tag'
-import { makeDataTableExpandProps, provideExpanded } from '@/labs/VDataTable/composables/expand'
-import { makeDataTableGroupProps, provideGroupBy, useGroupedItems } from '@/labs/VDataTable/composables/group'
-import { useOptions } from '@/labs/VDataTable/composables/options'
-import { createPagination, makeDataTablePaginateProps, providePagination, usePaginatedItems } from '@/labs/VDataTable/composables/paginate'
-import { makeDataTableSelectProps, provideSelection } from '@/labs/VDataTable/composables/select'
-import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from '@/labs/VDataTable/composables/sort'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -17,8 +24,8 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { DataIteratorItem } from './composables/items'
-import type { Group } from '@/labs/VDataTable/composables/group'
-import type { SortItem } from '@/labs/VDataTable/composables/sort'
+import type { Group } from '@/components/VDataTable/composables/group'
+import type { SortItem } from '@/components/VDataTable/composables/sort'
 
 type VDataIteratorSlotProps = {
   page: number
