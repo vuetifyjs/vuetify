@@ -110,7 +110,7 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
     const { sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
 
-    const { columns, headers } = createHeaders(props, {
+    const { columns, headers, sortFunctions, filterFunctions } = createHeaders(props, {
       groupBy,
       showSelect: toRef(props, 'showSelect'),
       showExpand: toRef(props, 'showExpand'),
@@ -119,12 +119,15 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
     const { items } = useDataTableItems(props, columns)
 
     const search = toRef(props, 'search')
-    const { filteredItems } = useFilter(props, items, search, { transform: item => item.columns })
+    const { filteredItems } = useFilter(props, items, search, {
+      transform: item => item.columns,
+      customKeyFilter: filterFunctions,
+    })
 
     const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
 
-    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, headers)
+    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, sortFunctions)
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
     const itemsLength = computed(() => flatItems.value.length)
 

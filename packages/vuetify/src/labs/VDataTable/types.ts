@@ -2,7 +2,7 @@
 import type { provideExpanded } from './composables/expand'
 import type { Group, GroupableItem, provideGroupBy } from './composables/group'
 import type { provideSelection, SelectableItem } from './composables/select'
-import type { InternalItem } from '@/composables/filter'
+import type { FilterFunction, InternalItem } from '@/composables/filter'
 import type { SelectItemKey } from '@/util'
 
 export type DataTableCompareFunction<T = any> = (a: T, b: T) => number
@@ -24,6 +24,7 @@ export type DataTableHeader = {
 
   sortable?: boolean
   sort?: DataTableCompareFunction
+  filter?: FilterFunction
 
   children?: DataTableHeader[]
 }

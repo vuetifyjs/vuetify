@@ -24,7 +24,6 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 
 // Types
 import type { Ref } from 'vue'
-import type { DataTableItem } from './types'
 import type { VDataTableSlotProps } from './VDataTable'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
@@ -66,7 +65,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     const { groupBy } = createGroupBy(props)
     const { sortBy, multiSort, mustSort } = createSort(props)
 
-    const { columns, headers } = createHeaders(props, {
+    const { columns, headers, sortFunctions, filterFunctions } = createHeaders(props, {
       groupBy,
       showSelect: toRef(props, 'showSelect'),
       showExpand: toRef(props, 'showExpand'),
@@ -74,12 +73,15 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     const { items } = useDataTableItems(props, columns)
 
     const search = toRef(props, 'search')
-    const { filteredItems } = useFilter<DataTableItem>(props, items, search, { transform: item => item.columns })
+    const { filteredItems } = useFilter(props, items, search, {
+      transform: item => item.columns,
+      customKeyFilter: filterFunctions,
+    })
 
     const { toggleSort } = provideSort({ sortBy, multiSort, mustSort })
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
 
-    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, headers)
+    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, sortFunctions)
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
 
     const allItems = computed(() => extractRows(flatItems.value))
