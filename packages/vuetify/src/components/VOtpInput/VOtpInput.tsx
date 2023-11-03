@@ -98,8 +98,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     const current = computed(() => inputRef.value[focusIndex.value])
 
     function onInput () {
-      // maxlength doesn't work for number type,
-      // so the input type always uses 'text' but simulates the 'number' type behavior here.
+      // The maxlength attribute doesn't work for the number type input, so the text type is used.
+      // The following logic simulates the behavior of a number input.
       if (props.type === 'number' && /[^0-9]/g.test(current.value.value)) {
         current.value.value = ''
         return
