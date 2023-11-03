@@ -1,6 +1,7 @@
 {
   "props": {
     "autoGrow": "Automatically grow the textarea depending on amount of text.",
+    "counterValue": "Display the input length but do not provide any validation.",
     "noResize": "Remove resize handle.",
     "rowHeight": "Height value for each row. Requires the use of the **auto-grow** prop.",
     "rows": "Default row count."
