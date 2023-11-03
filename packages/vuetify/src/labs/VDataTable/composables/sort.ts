@@ -94,15 +94,19 @@ export function useSort () {
 }
 
 export function useSortedItems <T extends Record<string, any>> (
-  props: { customKeySort?: Record<string, DataTableCompareFunction> },
+  props: { customKeySort: Record<string, DataTableCompareFunction> | undefined },
   items: Ref<T[]>,
   sortBy: Ref<readonly SortItem[]>,
+  sortFunctions?: Ref<Record<string, DataTableCompareFunction> | undefined>,
 ) {
   const locale = useLocale()
   const sortedItems = computed(() => {
     if (!sortBy.value.length) return items.value
 
-    return sortItems(items.value, sortBy.value, locale.current.value, props.customKeySort)
+    return sortItems(items.value, sortBy.value, locale.current.value, {
+      ...props.customKeySort,
+      ...sortFunctions?.value,
+    })
   })
 
   return { sortedItems }

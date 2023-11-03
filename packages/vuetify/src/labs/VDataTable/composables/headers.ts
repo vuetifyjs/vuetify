@@ -5,7 +5,8 @@ import { consoleError, propsFactory } from '@/util'
 // Types
 import type { DeepReadonly, InjectionKey, PropType, Ref } from 'vue'
 import type { SortItem } from './sort'
-import type { DataTableHeader, InternalDataTableHeader } from '../types'
+import type { DataTableCompareFunction, DataTableHeader, InternalDataTableHeader } from '../types'
+import type { FilterKeyFunctions } from '@/composables/filter'
 
 export const makeDataTableHeaderProps = propsFactory({
   headers: Array as PropType<DeepReadonly<DataTableHeader[]>>,
@@ -205,7 +206,7 @@ function convertToInternalHeaders (items: DeepReadonly<DataTableHeader[]>) {
       ...defaultItem,
       key,
       value,
-      sortable: defaultItem.sortable ?? defaultItem.key != null,
+      sortable: defaultItem.sortable ?? (defaultItem.key != null || !!defaultItem.sort),
       children: defaultItem.children ? convertToInternalHeaders(defaultItem.children) : undefined,
     }
 
@@ -225,6 +226,8 @@ export function createHeaders (
 ) {
   const headers = ref<InternalDataTableHeader[][]>([])
   const columns = ref<InternalDataTableHeader[]>([])
+  const sortFunctions = ref<Record<string, DataTableCompareFunction>>()
+  const filterFunctions = ref<FilterKeyFunctions>()
 
   watchEffect(() => {
     const _headers = props.headers ||
@@ -254,9 +257,25 @@ export function createHeaders (
 
     headers.value = parsed.headers
     columns.value = parsed.columns
+
+    const flatHeaders = parsed.headers.flat(1)
+
+    sortFunctions.value = flatHeaders.reduce((acc, header) => {
+      if (header.sortable && header.key && header.sort) {
+        acc[header.key] = header.sort
+      }
+      return acc
+    }, {} as Record<string, DataTableCompareFunction>)
+
+    filterFunctions.value = flatHeaders.reduce((acc, header) => {
+      if (header.key && header.filter) {
+        acc[header.key] = header.filter
+      }
+      return acc
+    }, {} as FilterKeyFunctions)
   })
 
-  const data = { headers, columns }
+  const data = { headers, columns, sortFunctions, filterFunctions }
 
   provide(VDataTableHeadersSymbol, data)
 
