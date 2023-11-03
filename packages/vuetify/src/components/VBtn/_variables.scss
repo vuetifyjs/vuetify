@@ -4,7 +4,7 @@
 @use '../../styles/tools';
 
 // Defaults
-/** if false, disabled buttons will be greyed out */
+// if false, disabled buttons will be greyed out
 $button-colored-disabled: true !default;
 
 $button-background: rgb(var(--v-theme-surface)) !default;
