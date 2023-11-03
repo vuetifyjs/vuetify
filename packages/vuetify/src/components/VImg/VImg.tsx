@@ -85,6 +85,7 @@ export const makeVImgProps = propsFactory({
     | 'unsafe-url'
   >,
   srcset: String,
+  position: String,
 
   ...makeVResponsiveProps(),
   ...makeComponentProps(),
@@ -229,6 +230,7 @@ export const VImg = genericComponent<VImgSlots>()({
       const img = (
         <img
           class={['v-img__img', containClasses.value]}
+          style={{ objectPosition: props.position }}
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
           alt={ props.alt }
@@ -263,6 +265,7 @@ export const VImg = genericComponent<VImgSlots>()({
         { normalisedSrc.value.lazySrc && state.value !== 'loaded' && (
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
+            style={{ objectPosition: props.position }}
             src={ normalisedSrc.value.lazySrc }
             alt={ props.alt }
             crossorigin={ props.crossorigin }
