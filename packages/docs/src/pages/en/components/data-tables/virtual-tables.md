@@ -21,7 +21,7 @@ The v-data-table-virtual component relies on all data being available locally. B
 Labs components require a manual import and installation of the component.
 
 ```js { resource="src/plugins/vuetify.js" }
-import { VDataTableVirtual } from 'vuetify/labs/VDataTableVirtual'
+import { VDataTableVirtual } from 'vuetify/labs/components'
 
 export default createVuetify({
   components: {
