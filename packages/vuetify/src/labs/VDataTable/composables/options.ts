@@ -29,14 +29,15 @@ export function useOptions ({
     search: search.value,
   }))
 
-  // Reset page when searching
-  watch(() => search?.value, () => {
-    page.value = 1
-  })
-
-  let oldOptions: unknown = null
+  let oldOptions: typeof options.value | null = null
   watch(options, () => {
     if (deepEqual(oldOptions, options.value)) return
+
+    // Reset page when searching
+    if (oldOptions?.search !== options.value.search) {
+      page.value = 1
+    }
+
     vm.emit('update:options', options.value)
     oldOptions = options.value
   }, { deep: true, immediate: true })

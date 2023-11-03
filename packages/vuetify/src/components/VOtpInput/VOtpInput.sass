@@ -1,37 +1,56 @@
 // Imports
-@import './_variables.scss'
-
-// Theme
-+theme(v-otp-input) using ($material)
-  .v-input
-    .v-input__control
-      .v-input__slot
-        background: map-get($material, 'bg-color')
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-otp-input
+  @include tools.rounded(4px)
+
+  align-items: center
   display: flex
-  flex-wrap: wrap
-  flex: 1 1 auto
-  margin-right: -$otp-gutter
-  margin-left: -$otp-gutter
+  justify-content: center
+  padding: $otp-input-padding
+  position: relative
 
-  input
-    text-align: center
+  .v-field
+    height: 100%
 
-  .v-input
+.v-otp-input__divider
+  margin: $otp-input-divider-margin
+
+.v-otp-input__content
+  align-items: center
+  display: flex
+  gap: $otp-input-content-gap
+  height: $otp-input-content-height
+  padding: $otp-input-content-padding
+  justify-content: center
+  max-width: $otp-input-content-max-width
+  position: relative
+  border-radius: inherit
+
+  .v-otp-input--divided &
+    max-width: $otp-input-divided-content-max-width
+
+.v-otp-input__field
+  color: inherit
+  font-size: $otp-input-field-font-size
+  height: 100%
+  outline: none
+  text-align: center
+  width: 100%
+
+  &[type=number]::-webkit-outer-spin-button,
+  &[type=number]::-webkit-inner-spin-button
+    -webkit-appearance: none
     margin: 0
-    flex: 1 0 $otp-width + $otp-gutter * 2
-    max-width: 100%
-    width: 100%
-    padding: $otp-gutter
 
-    &.v-otp-input--plain
-      fieldset
-        display: none
+  &[type=number]
+    -moz-appearance: textfield
 
-    input[type=number]::-webkit-outer-spin-button,
-    input[type=number]::-webkit-inner-spin-button
-      -webkit-appearance: none
-      margin: 0
-    input[type=number]
-      -moz-appearance: textfield
+.v-otp-input__loader
+  align-items: center
+  display: flex
+  height: 100%
+  justify-content: center
+  width: 100%

@@ -10,7 +10,7 @@ related:
   - /components/forms/
 features:
   label: 'C: VOtpInput'
-  github: /labs/VOtpInput/
+  github: /components/VOtpInput/
   report: true
 ---
 
@@ -18,19 +18,13 @@ features:
 
 The OTP input is used for MFA procedure of authenticating users by a one-time password.
 
-![Otp input Entry](https://cdn.vuetifyjs.com/docs/images/components/v-otp-input/v-otp-input-entry.png){ height=300 }
+![Otp input Entry](https://cdn.vuetifyjs.com/docs/images/components/v-otp-input/v-otp-input-entry.png)
 
 <page-features />
 
 ::: success
 
-This component is feature complete and is pending release in [v3.4.0 (Blackguard)](/introduction/roadmap/#v3-4-blackguard)
-
-:::
-
-::: warning
-
-This feature requires [v3.3.11](/getting-started/release-notes/?version=v3.3.11)
+This feature was introduced in [v3.4.0 (Blackguard)](/introduction/roadmap/#v3-4-blackguard)
 
 :::
 
@@ -41,20 +35,6 @@ Here we display a list of settings that could be applied within an application.
 <usage name="v-otp-input" />
 
 <entry />
-
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VOtpInput } from 'vuetify/labs/VOtpInput'
-
-export default createVuetify({
-  components: {
-    VOtpInput,
-  },
-})
-```
 
 ## API
 

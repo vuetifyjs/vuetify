@@ -15,7 +15,7 @@ describe('VDatePicker', () => {
         <VDatePicker v-model={ model.value } hideActions />
       </Application>
     ))
-      .get('div[data-v-date="2023-1-2"]')
+      .get('div[data-v-date="2023-01-02"]')
       .click()
       .vue()
       .then(wrapper => {
@@ -32,7 +32,7 @@ describe('VDatePicker', () => {
         <VDatePicker v-model={ model.value } />
       </Application>
     ))
-      .get('div[data-v-date="2023-1-2"]')
+      .get('div[data-v-date="2023-01-02"]')
       .click()
       .vue()
       .then(wrapper => {

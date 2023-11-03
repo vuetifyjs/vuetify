@@ -105,7 +105,7 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
     'update:expanded': (value: any) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { attrs, slots }) {
     const { groupBy } = createGroupBy(props)
     const { sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
@@ -219,6 +219,7 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
                   { slots['body.prepend']?.(slotProps.value) }
                   { slots.body ? slots.body(slotProps.value) : (
                     <VDataTableRows
+                      { ...attrs }
                       { ...dataTableRowsProps }
                       items={ paginatedItems.value }
                       v-slots={ slots }

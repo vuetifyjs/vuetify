@@ -32,7 +32,7 @@
   <rail-drawer-option />
 </template>
 
-<script setup>
+<script setup lang="ts">
   // Components
   import AdOption from '@/components/app/settings/options/AdOption.vue'
   import AvatarOption from '@/components/app/settings/options/AvatarOption.vue'

@@ -13,6 +13,7 @@ related:
   import { defineAsyncComponent } from 'vue'
 
   const IconList = defineAsyncComponent(() => import('@/components/doc/IconList.vue'))
+  const IconTable = defineAsyncComponent(() => import('@/components/doc/IconTable.vue'))
 </script>
 
 # Icon Fonts
@@ -438,6 +439,12 @@ app.mount('#app')
   <v-icon icon="fas fa-home" />
 </template>
 ```
+
+## Built-in aliases
+
+The following icons are available as aliases for use in Vuetify components:
+
+<icon-table />
 
 ## Multiple icon sets
 

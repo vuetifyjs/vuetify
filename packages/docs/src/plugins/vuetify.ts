@@ -99,6 +99,7 @@ export function installVuetify (app: App) {
       themes: {
         light: {
           colors: {
+            'surface-variant-alt': '#dedede',
             primary: '#1867c0',
             secondary: '#5CBBF6',
             tertiary: '#E57373',
@@ -109,6 +110,7 @@ export function installVuetify (app: App) {
         },
         dark: {
           colors: {
+            'surface-variant-alt': '#333333',
             primary: '#2196F3',
             secondary: '#424242',
             tertiary: '#E57373',

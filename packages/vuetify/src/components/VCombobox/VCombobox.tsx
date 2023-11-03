@@ -26,7 +26,17 @@ import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
-import { genericComponent, IN_BROWSER, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import {
+  ensureValidVNode,
+  genericComponent,
+  IN_BROWSER,
+  isComposingIgnoreKey,
+  noop,
+  omit,
+  propsFactory,
+  useRender,
+  wrapInArray,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -238,7 +248,7 @@ export const VCombobox = genericComponent<new <
       menu.value = !menu.value
     }
     function onKeydown (e: KeyboardEvent) {
-      if (props.readonly || form?.isReadonly.value) return
+      if (isComposingIgnoreKey(e) || props.readonly || form?.isReadonly.value) return
 
       const selectionStart = vTextFieldRef.value.selectionStart
       const length = model.value.length
@@ -540,6 +550,17 @@ export const VCombobox = genericComponent<new <
                     'onUpdate:modelValue': undefined,
                   }
 
+                  const hasSlot = hasChips ? !!slots.chip : !!slots.selection
+                  const slotContent = hasSlot
+                    ? ensureValidVNode(
+                      hasChips
+                        ? slots.chip!({ item, index, props: slotProps })
+                        : slots.selection!({ item, index })
+                    )
+                    : undefined
+
+                  if (hasSlot && !slotContent) return undefined
+
                   return (
                     <div
                       key={ item.value }
@@ -573,11 +594,11 @@ export const VCombobox = genericComponent<new <
                               },
                             }}
                           >
-                            { slots.chip?.({ item, index, props: slotProps }) }
+                            { slotContent }
                           </VDefaultsProvider>
                         )
                       ) : (
-                        slots.selection?.({ item, index }) ?? (
+                        slotContent ?? (
                           <span class="v-combobox__selection-text">
                             { item.title }
                             { props.multiple && (index < model.value.length - 1) && (

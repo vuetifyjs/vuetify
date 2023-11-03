@@ -51,6 +51,10 @@ export type VImgSlots = {
 export const makeVImgProps = propsFactory({
   alt: String,
   cover: Boolean,
+  draggable: {
+    type: [Boolean, String] as PropType<boolean | 'true' | 'false'>,
+    default: undefined,
+  },
   eager: Boolean,
   gradient: String,
   lazySrc: String,
@@ -69,6 +73,17 @@ export const makeVImgProps = propsFactory({
     type: [String, Object] as PropType<string | srcObject>,
     default: '',
   },
+  crossorigin: String as PropType<'' | 'anonymous' | 'use-credentials'>,
+  referrerpolicy: String as PropType<
+    | 'no-referrer'
+    | 'no-referrer-when-downgrade'
+    | 'origin'
+    | 'origin-when-cross-origin'
+    | 'same-origin'
+    | 'strict-origin'
+    | 'strict-origin-when-cross-origin'
+    | 'unsafe-url'
+  >,
   srcset: String,
 
   ...makeVResponsiveProps(),
@@ -148,24 +163,27 @@ export const VImg = genericComponent<VImgSlots>()({
       nextTick(() => {
         emit('loadstart', image.value?.currentSrc || normalisedSrc.value.src)
 
-        if (image.value?.complete) {
-          if (!image.value.naturalWidth) {
-            onError()
+        setTimeout(() => {
+          if (image.value?.complete) {
+            if (!image.value.naturalWidth) {
+              onError()
+            }
+
+            if (state.value === 'error') return
+
+            if (!aspectRatio.value) pollForSize(image.value, null)
+            if (state.value === 'loading') onLoad()
+          } else {
+            if (!aspectRatio.value) pollForSize(image.value!)
+            getSrc()
           }
-
-          if (state.value === 'error') return
-
-          if (!aspectRatio.value) pollForSize(image.value, null)
-          onLoad()
-        } else {
-          if (!aspectRatio.value) pollForSize(image.value!)
-          getSrc()
-        }
+        })
       })
     }
 
     function onLoad () {
       getSrc()
+      pollForSize(image.value!)
       state.value = 'loaded'
       emit('load', image.value?.currentSrc || normalisedSrc.value.src)
     }
@@ -214,6 +232,9 @@ export const VImg = genericComponent<VImgSlots>()({
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
           alt={ props.alt }
+          crossorigin={ props.crossorigin }
+          referrerpolicy={ props.referrerpolicy }
+          draggable={ props.draggable }
           sizes={ props.sizes }
           ref={ image }
           onLoad={ onLoad }
@@ -244,6 +265,9 @@ export const VImg = genericComponent<VImgSlots>()({
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
             src={ normalisedSrc.value.lazySrc }
             alt={ props.alt }
+            crossorigin={ props.crossorigin }
+            referrerpolicy={ props.referrerpolicy }
+            draggable={ props.draggable }
           />
         )}
       </MaybeTransition>

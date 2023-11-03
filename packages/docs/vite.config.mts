@@ -308,14 +308,11 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
     },
 
     ssr: {
-      noExternal: ['vue-i18n', '@vuelidate/core', 'pinia', '@auth0/auth0-vue'],
+      noExternal: ['vue-i18n', '@vuelidate/core', 'pinia'],
     },
 
     server: {
-      port: +(process.env.PORT ?? 8080),
-      proxy: {
-        '/api': process.env.PROXY ?? 'http://localhost:3005'
-      }
+      port: +(process.env.PORT ?? 8095),
     },
 
     preview: {

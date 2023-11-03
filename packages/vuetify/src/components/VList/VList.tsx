@@ -88,6 +88,7 @@ export const makeVListProps = propsFactory({
     type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
     default: 'one',
   },
+  slim: Boolean,
   nav: Boolean,
 
   ...makeNestedProps({
@@ -159,6 +160,7 @@ export const VList = genericComponent<new <T>(
         disabled: toRef(props, 'disabled'),
         lines: toRef(props, 'lines'),
         nav: toRef(props, 'nav'),
+        slim: toRef(props, 'slim'),
         variant: toRef(props, 'variant'),
       },
     })

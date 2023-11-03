@@ -8,7 +8,6 @@
   import { useI18n } from 'vue-i18n'
   import { useRoute, useRouter } from 'vue-router'
   import { useTheme } from 'vuetify'
-  import { useAuth0 } from '@/plugins/auth'
 
   // Stores
   import { useAuthStore } from '@/store/auth'
@@ -28,7 +27,6 @@
   const theme = useTheme()
   const { locale } = useI18n()
   const auth = useAuthStore()
-  const auth0 = useAuth0()
 
   const path = computed(() => route.path.replace(`/${locale.value}/`, ''))
 
@@ -71,12 +69,7 @@
   if (IN_BROWSER) {
     let media: MediaQueryList
 
-    watch(auth0!.user, async val => {
-      if (!val?.sub) return
-
-      await auth.getUser()
-      auth.verifyUserSponsorship()
-    }, { immediate: true })
+    auth.verify()
 
     watch(() => user.theme, val => {
       if (val === 'system') {

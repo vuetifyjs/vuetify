@@ -1,9 +1,10 @@
+@use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
 
 .v-picker.v-sheet
-  @include tools.elevation(2)
-  @include tools.rounded(4px)
+  @include tools.elevation($picker-elevation)
+  @include tools.rounded($picker-border-radius)
 
   display: grid
   grid-auto-rows: min-content
@@ -27,8 +28,6 @@
   justify-content: flex-end
 
   .v-btn
-    padding-inline-start: 8px
-    padding-inline-end: 8px
     min-width: 48px
 
     &:not(:last-child)
@@ -44,8 +43,7 @@
   text-transform: uppercase
   font-size: .75rem
   grid-area: title
-  padding-inline-start: 24px
-  padding-inline-end: 12px
+  padding-inline: 24px 12px
   padding-top: 16px
   padding-bottom: 16px
   font-weight: 600

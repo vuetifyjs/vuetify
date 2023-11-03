@@ -37,6 +37,7 @@
       "aliasing",
       "application-layout",
       "blueprints",
+      "dates",
       "display-and-platform",
       "global-configuration",
       "icon-fonts",
@@ -84,6 +85,7 @@
       },
       { "divider": true },
       { "subheader": "containment" },
+      "bottom-sheets",
       "buttons",
       "cards",
       "chips",
@@ -114,6 +116,7 @@
       "file-inputs",
       "forms",
       "inputs",
+      "otp-input",
       "radio-buttons",
       "range-sliders",
       "selects",
@@ -123,6 +126,8 @@
       "textareas",
       { "divider": true },
       { "subheader": "data-and-display" },
+      "data-iterators",
+      "infinite-scroller",
       "tables",
       "virtual-scroller",
       { "divider": true },
@@ -135,6 +140,7 @@
       "chip-groups",
       "item-groups",
       "slide-groups",
+      "steppers",
       "windows",
       { "divider": true },
       { "subheader": "feedback" },
@@ -145,6 +151,7 @@
       "progress-circular",
       "progress-linear",
       "ratings",
+      "skeleton-loaders",
       "snackbars",
       "timelines",
       { "divider": true },
@@ -195,14 +202,6 @@
     "items": [
       "introduction",
       {
-        "title": "bottom-sheets",
-        "subfolder": "components"
-      },
-      {
-        "title": "data-iterators",
-        "subfolder": "components"
-      },
-      {
         "title": "data-tables",
         "subfolder": "components",
         "activeIcon": "",
@@ -221,27 +220,7 @@
         ]
       },
       {
-        "title": "dates",
-        "subfolder": "features"
-      },
-      {
         "title": "date-pickers",
-        "subfolder": "components"
-      },
-      {
-        "title": "infinite-scroller",
-        "subfolder": "components"
-      },
-      {
-        "title": "otp-input",
-        "subfolder": "components"
-      },
-      {
-        "title": "skeleton-loaders",
-        "subfolder": "components"
-      },
-      {
-        "title": "steppers",
         "subfolder": "components"
       }
     ]

@@ -22,6 +22,7 @@ export const VBannerActions = genericComponent()({
       VBtn: {
         color: props.color,
         density: props.density,
+        slim: true,
         variant: 'text',
       },
     })
