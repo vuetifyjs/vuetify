@@ -79,7 +79,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     const { toggleSort } = provideSort({ sortBy, multiSort, mustSort })
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
 
-    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups)
+    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, headers)
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
 
     const allItems = computed(() => extractRows(flatItems.value))

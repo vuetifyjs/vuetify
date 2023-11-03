@@ -205,7 +205,7 @@ function convertToInternalHeaders (items: DeepReadonly<DataTableHeader[]>) {
       ...defaultItem,
       key,
       value,
-      sortable: defaultItem.sortable ?? defaultItem.key != null,
+      sortable: defaultItem.sortable ?? (defaultItem.key != null || !!defaultItem.sort),
       children: defaultItem.children ? convertToInternalHeaders(defaultItem.children) : undefined,
     }
 

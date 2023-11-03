@@ -97,12 +97,21 @@ export function useSortedItems <T extends Record<string, any>> (
   props: { customKeySort?: Record<string, DataTableCompareFunction> },
   items: Ref<T[]>,
   sortBy: Ref<readonly SortItem[]>,
+  headers: Ref<InternalDataTableHeader[][]>,
 ) {
   const locale = useLocale()
+  const sortFunctions = computed(() => {
+    return headers.value.flat(1).reduce((acc, header) => {
+      if (header.sortable && header.key && header.sort) {
+        acc[header.key] = header.sort
+      }
+      return acc
+    }, props.customKeySort || {})
+  })
   const sortedItems = computed(() => {
     if (!sortBy.value.length) return items.value
 
-    return sortItems(items.value, sortBy.value, locale.current.value, props.customKeySort)
+    return sortItems(items.value, sortBy.value, locale.current.value, sortFunctions.value)
   })
 
   return { sortedItems }
