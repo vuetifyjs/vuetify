@@ -98,11 +98,16 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     const current = computed(() => inputRef.value[focusIndex.value])
 
     function onInput () {
+      // maxlength doesn't work for number type,
+      // so the input type always uses 'text' but simulates the 'number' type behavior here.
+      if (props.type === 'number' && /[^0-9]/g.test(current.value.value)) {
+        current.value.value = ''
+        return
+      }
       const array = model.value.slice()
       const value = current.value.value
 
-      // Use the last character in the updated value
-      array[focusIndex.value] = value?.[1] ?? value
+      array[focusIndex.value] = value
 
       let target: any = null
 
@@ -254,7 +259,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                           min={ props.type === 'number' ? 0 : undefined }
                           maxlength="1"
                           placeholder={ props.placeholder }
-                          type={ props.type }
+                          type={ props.type === 'number' ? 'text' : props.type }
                           value={ model.value[i] }
                           onInput={ onInput }
                           onFocus={ e => onFocus(e, i) }
