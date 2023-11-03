@@ -62,6 +62,8 @@ export type VDataTableSlots = VDataTableRowsSlots & VDataTableHeadersSlots & {
   thead: VDataTableSlotProps
   tfoot: VDataTableSlotProps
   bottom: VDataTableSlotProps
+  'body.prepend': VDataTableSlotProps
+  'body.append': VDataTableSlotProps
   'footer.prepend': never
 }
 
@@ -214,6 +216,7 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
                 </thead>
                 { slots.thead?.(slotProps.value) }
                 <tbody>
+                  { slots['body.prepend']?.(slotProps.value) }
                   { slots.body ? slots.body(slotProps.value) : (
                     <VDataTableRows
                       { ...attrs }
@@ -222,6 +225,7 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
                       v-slots={ slots }
                     />
                   )}
+                  { slots['body.append']?.(slotProps.value) }
                 </tbody>
                 { slots.tbody?.(slotProps.value) }
                 { slots.tfoot?.(slotProps.value) }
