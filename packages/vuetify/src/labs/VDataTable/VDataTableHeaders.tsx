@@ -137,6 +137,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           onClick={ column.sortable ? () => toggleSort(column) : undefined }
           lastFixed={ column.lastFixed }
           noPadding={ noPadding }
+          { ...column.headerProps }
         >
           {{
             default: () => {
@@ -200,11 +201,11 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           { slots.headers
             ? slots.headers(slotProps.value)
             : headers.value.map((row, y) => (
-            <tr>
-              { row.map((column, x) => (
-                <VDataTableHeaderCell column={ column } x={ x } y={ y } />
-              ))}
-            </tr>
+              <tr>
+                { row.map((column, x) => (
+                  <VDataTableHeaderCell column={ column } x={ x } y={ y } />
+                ))}
+              </tr>
             ))}
 
           { props.loading && (

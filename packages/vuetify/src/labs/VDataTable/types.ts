@@ -19,6 +19,9 @@ export type DataTableHeader = {
   minWidth?: string
   maxWidth?: string
 
+  headerProps?: Record<string, any>
+  cellProps?: HeaderCellProps
+
   sortable?: boolean
   sort?: DataTableCompareFunction
 
@@ -74,3 +77,15 @@ export type ItemKeySlot<T = any> = ItemSlotBase<T> & {
   value: any
   column: InternalDataTableHeader
 }
+
+export type RowProps =
+  | Record<string, any>
+  | ((data: Pick<ItemKeySlot, 'index' | 'item' | 'internalItem'>) => Record<string, any>)
+
+export type CellProps =
+  | Record<string, any>
+  | ((data: Pick<ItemKeySlot, 'index' | 'item' | 'internalItem' | 'value' | 'column'>) => Record<string, any>)
+
+export type HeaderCellProps =
+  | Record<string, any>
+  | ((data: Pick<ItemKeySlot, 'index' | 'item' | 'internalItem' | 'value'>) => Record<string, any>)
