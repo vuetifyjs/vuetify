@@ -81,8 +81,6 @@ export const VDataTableRow = genericComponent<VDataTableRowSlots>()({
             })
             : column.cellProps
 
-          console.log(cellProps, columnCellProps)
-
           return (
             <VDataTableColumn
               align={ column.align }
