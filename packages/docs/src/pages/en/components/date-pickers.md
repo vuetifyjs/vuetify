@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Date pickers
   description: The date picker component is a stand-alone interface that allows the selection of a date, month and year.
@@ -8,7 +9,7 @@ related:
   - /features/dates/
   - /components/text-fields/
 features:
-  github: /labs/VDatePicker/
+  github: /components/VDatePicker/
   label: 'C: VDatePicker'
   report: true
   spec: https://material.io/components/date-pickers
@@ -35,20 +36,6 @@ Date pickers come in two orientation variations, portrait **(default)** and land
 <usage name="v-date-picker" />
 
 <entry />
-
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VDatePicker } from 'vuetify/labs/VDatePicker'
-
-export default createVuetify({
-  components: {
-    VDatePicker,
-  },
-})
-```
 
 ## API
 

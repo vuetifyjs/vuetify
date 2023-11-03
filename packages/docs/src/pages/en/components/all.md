@@ -492,7 +492,7 @@ These components are used to select a value from a specifically styled set of op
 
 </components-list-item>
 
-<components-list-item name="Date picker component" src="date-pickers" labs>
+<components-list-item name="Date picker component" src="date-pickers">
 
   The date picker component is used to select a single date from a calendar month / year.
 

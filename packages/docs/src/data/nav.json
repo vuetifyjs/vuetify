@@ -183,6 +183,7 @@
       { "divider": true },
       { "subheader": "pickers" },
       "color-pickers",
+      "date-pickers",
       { "divider": true },
       { "subheader": "providers" },
       "defaults-providers",
@@ -219,11 +220,7 @@
     "inactiveIcon": "mdi-beaker-outline",
     "activeIcon": "mdi-beaker",
     "items": [
-      "introduction",
-      {
-        "title": "date-pickers",
-        "subfolder": "components"
-      }
+      "introduction"
     ]
   },
   {

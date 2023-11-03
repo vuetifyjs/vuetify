@@ -80,8 +80,6 @@ The following is a list of available and up-and-coming components for use with L
 
 | Component | Description | Min Version |
 | - | - | - |
-| **Date picker** | [Usage](/components/date-pickers/) | [v3.3.4&nbsp;(Icarus)](/getting-started/release-notes/?version=v3.3.4) |
-| [v-date-picker](/api/v-date-picker/) | Primary Component | |
 
 ### Up Next
 
