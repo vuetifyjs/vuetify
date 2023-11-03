@@ -74,6 +74,7 @@
     "./iconsets/*": "./lib/iconsets/*.mjs",
     "./labs/components": "./lib/labs/components.mjs",
     "./labs/*": "./lib/labs/*/index.mjs",
+    "./util/colors": "./lib/util/colors.mjs",
     "./*": "./*"
   },
   "typesVersions": {

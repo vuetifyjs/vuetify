@@ -108,4 +108,5 @@ export default [
   createTypesConfig('locale/index.d.ts', 'lib/locale/index.d.mts'),
   createTypesConfig('locale/adapters/*.d.ts', 'lib/locale/adapters/*.d.mts'),
   createTypesConfig('iconsets/*.d.ts', 'lib/iconsets/*.d.mts'),
+  createTypesConfig('util/colors.d.ts', 'lib/util/colors.d.mts'),
 ].flat()
