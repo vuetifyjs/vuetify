@@ -89,8 +89,6 @@ The following is a list of available and up-and-coming components for use with L
 | [v-data-table-column](/api/v-data-table-column/) | Data table reusable column component | |
 | **Date picker** | [Usage](/components/date-pickers/) | [v3.3.4&nbsp;(Icarus)](/getting-started/release-notes/?version=v3.3.4) |
 | [v-date-picker](/api/v-date-picker/) | Primary Component | |
-| **OTP input** | [Usage](/components/otp-input/) | [v3.3.11&nbsp;(Icarus)](/getting-started/release-notes/?version=v3.3.11) |
-| [v-otp-input](/api/v-otp-input/) | Primary Component | |
 
 ### Up Next
 

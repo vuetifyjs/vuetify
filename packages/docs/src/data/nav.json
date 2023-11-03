@@ -116,6 +116,7 @@
       "file-inputs",
       "forms",
       "inputs",
+      "otp-input",
       "radio-buttons",
       "range-sliders",
       "selects",
@@ -220,10 +221,6 @@
       },
       {
         "title": "date-pickers",
-        "subfolder": "components"
-      },
-      {
-        "title": "otp-input",
         "subfolder": "components"
       }
     ]

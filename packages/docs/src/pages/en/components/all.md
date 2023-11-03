@@ -228,7 +228,7 @@ Form components are used to collect user input in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="OTP Input component" src="otp-input" labs>
+<components-list-item name="OTP Input component" src="otp-input" >
 
   The OTP input component is used for MFA authentication via input field
 
