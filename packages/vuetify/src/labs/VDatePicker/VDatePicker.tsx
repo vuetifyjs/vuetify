@@ -23,6 +23,7 @@ import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/
 // Types
 import type { PropType } from 'vue'
 import type { VPickerSlots } from '@/labs/VPicker/VPicker'
+import type { GenericProps } from '@/util'
 
 // Types
 export type VDatePickerSlots = Omit<VPickerSlots, 'header'> & {
@@ -68,7 +69,14 @@ export const makeVDatePickerProps = propsFactory({
   modelValue: null,
 }, 'VDatePicker')
 
-export const VDatePicker = genericComponent<VDatePickerSlots>()({
+export const VDatePicker = genericComponent<new <T, Multiple extends boolean = false> (
+  props: {
+    modelValue?: Multiple extends true ? T[] : T
+    'onUpdate:modelValue'?: (value: Multiple extends true ? T[] : T) => void
+    multiple?: Multiple
+  },
+  slots: VDatePickerSlots
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VDatePicker',
 
   props: makeVDatePickerProps(),
