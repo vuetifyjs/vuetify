@@ -13,6 +13,9 @@ import { computed, nextTick, onMounted, ref, watchEffect } from 'vue'
 import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
+
+// Types
 export type VDatePickerYearsSlots = {
   year: {
     year: {
@@ -34,9 +37,9 @@ export type VDatePickerYearsSlots = {
 export const makeVDatePickerYearsProps = propsFactory({
   color: String,
   height: [String, Number],
-  min: [Number, String, Date],
-  max: [Number, String, Date],
-  modelValue: [Number, String],
+  min: null as any as PropType<unknown>,
+  max: null as any as PropType<unknown>,
+  modelValue: Number,
 }, 'VDatePickerYears')
 
 export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
@@ -45,11 +48,10 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
   props: makeVDatePickerYearsProps(),
 
   emits: {
-    'update:modelValue': (date: any) => true,
-    'click:mode': () => true,
+    'update:modelValue': (year: number) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { slots }) {
     const adapter = useDate()
     const model = useProxiedModel(props, 'modelValue')
     const years = computed(() => {
@@ -107,12 +109,8 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
               rounded: true,
               text: year.text,
               variant: model.value === year.value ? 'flat' : 'text',
-              onClick: () => onClick(i),
+              onClick: () => model.value = year.value,
             } as const
-
-            function onClick (i: number) {
-              model.value = i
-            }
 
             return slots.year?.({
               year,
@@ -122,7 +120,6 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
               <VBtn
                 key="month"
                 { ...btnProps }
-                onClick={ () => onClick(year.value) }
               />
             )
           })}

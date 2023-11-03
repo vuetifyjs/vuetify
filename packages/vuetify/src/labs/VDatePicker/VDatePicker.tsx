@@ -17,7 +17,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, shallowRef, watch } from 'vue'
+import { computed, ref, shallowRef, watch, watchEffect } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -64,6 +64,8 @@ export const makeVDatePickerProps = propsFactory({
   ...omit(makeVDatePickerMonthsProps(), ['modelValue']),
   ...omit(makeVDatePickerYearsProps(), ['modelValue']),
   ...makeVPickerProps({ title: '$vuetify.datePicker.title' }),
+
+  modelValue: null,
 }, 'VDatePicker')
 
 export const VDatePicker = genericComponent<VDatePickerSlots>()({
@@ -87,9 +89,14 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
       props,
       'modelValue',
       undefined,
-      v => wrapInArray(v)
+      v => wrapInArray(v),
+      v => props.multiple ? v : v[0],
     )
     const internal = ref(model.value)
+    watchEffect(() => {
+      internal.value = model.value
+    })
+
     const viewMode = useProxiedModel(props, 'viewMode')
     const inputMode = useProxiedModel(props, 'inputMode')
     const _model = computed(() => {

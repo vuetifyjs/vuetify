@@ -31,9 +31,9 @@ export const makeVDatePickerMonthProps = propsFactory({
   color: String,
   month: [Number, String],
   hideWeekdays: Boolean,
-  max: [Number, String, Date],
-  min: [Number, String, Date],
-  modelValue: null as unknown as PropType<string[] | string>,
+  max: null as any as PropType<unknown>,
+  min: null as any as PropType<unknown>,
+  modelValue: Array as PropType<unknown[]>,
   multiple: Boolean,
   showAdjacentMonths: Boolean,
   showWeek: Boolean,
@@ -62,11 +62,6 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       'modelValue',
       [],
       v => wrapInArray(v),
-      v => {
-        const array = wrapInArray(v).map(date => adapter.toISO(adapter.date(date)))
-
-        return props.multiple ? array : array[0]
-      }
     )
     // shorthand to access the first value in the model or a fresh date
     const _model = computed(() => {
@@ -145,7 +140,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
           isDisabled: isDisabled(date),
           isWeekStart: index % 7 === 0,
           isWeekEnd: index % 7 === 6,
-          isSelected: model.value.includes(isoDate),
+          isSelected: model.value.some(value => adapter.isSameDay(date, value)),
           isToday: adapter.isSameDay(date, today),
           isAdjacent,
           isHidden: isAdjacent && !props.showAdjacentMonths,
@@ -161,7 +156,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       })
     })
 
-    function isDisabled (value: any) {
+    function isDisabled (value: unknown) {
       const date = adapter.date(value)
 
       if (props.min && adapter.isAfter(props.min, date)) return true
@@ -178,19 +173,19 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       return false
     }
 
-    function onClick (string: any) {
+    function onClick (value: unknown) {
       if (props.multiple) {
-        const index = model.value.findIndex(selection => selection === string)
+        const index = model.value.findIndex(selection => adapter.isSameDay(selection, value))
 
         if (index === -1) {
-          model.value = [...model.value, string]
+          model.value = [...model.value, value]
         } else {
           const value = [...model.value]
           value.splice(index, 1)
           model.value = value
         }
       } else {
-        model.value = string
+        model.value = [value]
       }
     }
 
@@ -228,7 +223,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
           { daysInMonth.value.map((item, i) => {
             const slotProps = {
               props: {
-                onClick: () => onClick(item.isoDate),
+                onClick: () => onClick(item.date),
               },
               item,
               i,
@@ -264,7 +259,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                         variant: item.isDisabled
                           ? 'text'
                           : item.isToday && !item.isSelected ? 'outlined' : 'flat',
-                        onClick: () => onClick(item.isoDate),
+                        onClick: () => onClick(item.date),
                       },
                     }}
                   >

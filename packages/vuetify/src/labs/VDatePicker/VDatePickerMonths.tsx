@@ -29,7 +29,7 @@ export type VDatePickerMonthsSlots = {
 export const makeVDatePickerMonthsProps = propsFactory({
   color: String,
   height: [String, Number],
-  modelValue: [String, Number],
+  modelValue: Number,
 }, 'VDatePickerMonths')
 
 export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
