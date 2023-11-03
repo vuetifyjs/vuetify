@@ -95,7 +95,7 @@ export const VDatePicker = genericComponent<VDatePickerSlots>()({
     const _model = computed(() => {
       const value = adapter.date(internal.value?.[0])
 
-      return adapter.isValid(value) ? value : adapter.date()
+      return value && adapter.isValid(value) ? value : adapter.date()
     })
 
     const month = ref(Number(props.month ?? adapter.getMonth(adapter.startOfMonth(_model.value))))

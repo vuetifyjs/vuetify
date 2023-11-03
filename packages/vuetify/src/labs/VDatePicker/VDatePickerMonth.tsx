@@ -72,7 +72,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     const _model = computed(() => {
       const value = model.value?.[0]
 
-      return adapter.isValid(value) ? value : adapter.date()
+      return value && adapter.isValid(value) ? value : adapter.date()
     })
     const year = useProxiedModel(
       props,
