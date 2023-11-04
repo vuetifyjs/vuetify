@@ -25,6 +25,7 @@ export const makeVPickerProps = propsFactory({
   bgColor: String,
   landscape: Boolean,
   title: String,
+  hideHeader: Boolean,
 
   ...makeVSheetProps(),
 }, 'VPicker')
@@ -54,32 +55,35 @@ export const VPicker = genericComponent<VPickerSlots>()({
           ]}
           style={ props.style }
         >
-          <div
-            class={[
-              backgroundColorClasses.value,
-            ]}
-            style={[
-              backgroundColorStyles.value,
-            ]}
-          >
-            { hasTitle && (
-              <VPickerTitle key="picker-title">
-                { slots.title?.() ?? props.title }
-              </VPickerTitle>
-            )}
+          { !props.hideHeader && (
+            <div
+              key="header"
+              class={[
+                backgroundColorClasses.value,
+              ]}
+              style={[
+                backgroundColorStyles.value,
+              ]}
+            >
+              { hasTitle && (
+                <VPickerTitle key="picker-title">
+                  { slots.title?.() ?? props.title }
+                </VPickerTitle>
+              )}
 
-            { slots.header && (
-              <div class="v-picker__header">
-                { slots.header() }
-              </div>
-            )}
-          </div>
+              { slots.header && (
+                <div class="v-picker__header">
+                  { slots.header() }
+                </div>
+              )}
+            </div>
+          )}
 
           <div class="v-picker__body">
             { slots.default?.() }
           </div>
 
-          { slots.actions?.()[0]?.children && (
+          { slots.actions && (
             <VDefaultsProvider
               defaults={{
                 VBtn: {

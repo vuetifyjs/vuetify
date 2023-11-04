@@ -8,40 +8,38 @@
 
     <app-drawer />
 
-    <app-pwa-snackbar />
+    <app-snackbar-queue />
 
     <v-main>
-      <slot>
-        <v-container
-          fluid
-          tag="section"
-        >
-          <v-row justify="center" justify-md="start">
-            <v-col cols="auto">
-              <user-profile />
-            </v-col>
+      <v-container
+        fluid
+        tag="section"
+      >
+        <v-row justify="center" justify-md="start">
+          <v-col cols="auto">
+            <user-profile />
+          </v-col>
 
-            <v-col
-              class="me-auto"
-              cols="12"
-              sm="10"
-              md="7"
-            >
-              <user-tabs />
+          <v-col
+            class="me-auto"
+            cols="12"
+            sm="10"
+            md="7"
+          >
+            <user-tabs />
 
-              <br>
+            <br>
 
-              <router-view v-slot="{ Component }">
-                <v-fade-transition hide-on-leave>
-                  <div :key="route.name">
-                    <component :is="Component" />
-                  </div>
-                </v-fade-transition>
-              </router-view>
-            </v-col>
-          </v-row>
-        </v-container>
-      </slot>
+            <router-view v-slot="{ Component }">
+              <v-fade-transition hide-on-leave>
+                <div :key="route.name">
+                  <component :is="Component" />
+                </div>
+              </v-fade-transition>
+            </router-view>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -52,13 +50,27 @@
   import AppBar from '@/components/app/bar/Bar.vue'
   import AppDrawer from '@/components/app/drawer/Drawer.vue'
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
-  import AppPwaSnackbar from '@/components/app/PwaSnackbar.vue'
   import UserProfile from '@/components/user/UserProfile.vue'
-
   import UserTabs from '@/components/user/UserTabs.vue'
+  import AppSnackbarQueue from '@/components/app/SnackbarQueue.vue'
 
   // Composables
-  import { useRoute } from 'vue-router'
+  import { onBeforeRouteUpdate, useRoute } from 'vue-router'
+
+  // Stores
+  import { useAuthStore } from '@/store/auth'
+
+  // Utilities
+  import { onMounted } from 'vue'
 
   const route = useRoute()
+  const auth = useAuthStore()
+
+  onMounted(async () => {
+    await auth.verify()
+  })
+
+  onBeforeRouteUpdate(async () => {
+    await auth.verify()
+  })
 </script>

@@ -57,7 +57,7 @@
   "components/chips": ["VChip", "VChipGroup"],
   "components/color-pickers": ["VColorPicker"],
   "components/combobox": ["VCombobox"],
-  "components/data-iterators": ["VDataIterator", "VDataFooter"],
+  "components/data-iterators": ["VDataIterator"],
   "components/data-tables": [
     "VDataTable",
     "VDataTableFooter",

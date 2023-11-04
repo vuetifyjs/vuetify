@@ -1,5 +1,5 @@
 // Utilities
-import { camelize, capitalize, computed, Fragment, reactive, toRefs, watchEffect } from 'vue'
+import { camelize, capitalize, Comment, computed, Fragment, isVNode, reactive, toRefs, unref, watchEffect } from 'vue'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -13,6 +13,7 @@ import type {
   Slots,
   ToRefs,
   VNode,
+  VNodeArrayChildren,
   VNodeChild,
 } from 'vue'
 
@@ -72,7 +73,7 @@ export function getObjectValueByPath (obj: any, path?: string | null, fallback?:
 export type SelectItemKey =
   | boolean | null | undefined // Ignored
   | string // Lookup by key, can use dot notation for nested objects
-  | (string | number)[] // Nested lookup by key, each array item is a key in the next level
+  | readonly (string | number)[] // Nested lookup by key, each array item is a key in the next level
   | ((item: Record<string, any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
@@ -321,6 +322,21 @@ const bubblingEvents = [
   'onWheel',
 ]
 
+const compositionIgnoreKeys = [
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowRight',
+  'ArrowLeft',
+  'Enter',
+  'Escape',
+  'Tab',
+  ' ',
+]
+
+export function isComposingIgnoreKey (e: KeyboardEvent): boolean {
+  return e.isComposing && compositionIgnoreKeys.includes(e.key)
+}
+
 /**
  * Filter attributes that should be applied to
  * the root element of an input component. Remaining
@@ -373,12 +389,17 @@ export function searchItems<T extends any = any> (items: T[], search: string): T
   return items.filter((item: any) => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
 }
 
-export function debounce (fn: Function, delay: number) {
+export function debounce (fn: Function, delay: MaybeRef<number>) {
   let timeoutId = 0 as any
-  return (...args: any[]) => {
+  const wrap = (...args: any[]) => {
     clearTimeout(timeoutId)
-    timeoutId = setTimeout(() => fn(...args), delay)
+    timeoutId = setTimeout(() => fn(...args), unref(delay))
   }
+  wrap.clear = () => {
+    clearTimeout(timeoutId)
+  }
+  wrap.immediate = fn
+  return wrap
 }
 
 export function throttle<T extends (...args: any[]) => any> (fn: T, limit: number) {
@@ -707,4 +728,15 @@ export function matchesSelector (el: Element | undefined, selector: string): boo
   } catch (err) {
     return null
   }
+}
+
+export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildren | null {
+  return vnodes.some(child => {
+    if (!isVNode(child)) return true
+    if (child.type === Comment) return false
+    return child.type !== Fragment ||
+      ensureValidVNode(child.children as VNodeArrayChildren)
+  })
+    ? vnodes
+    : null
 }

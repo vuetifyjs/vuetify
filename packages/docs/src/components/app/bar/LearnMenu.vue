@@ -48,6 +48,11 @@
       appendIcon: 'mdi-lightbulb-on-outline',
     },
     {
+      title: t('icons'),
+      to: rpath('/features/icon-fonts/#mdi-icon-search'),
+      appendIcon: 'mdi-emoticon-outline',
+    },
+    {
       title: t('labs'),
       to: rpath('/labs/introduction/'),
       appendIcon: 'mdi-beaker-outline',

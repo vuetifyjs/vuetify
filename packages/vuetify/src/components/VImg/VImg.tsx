@@ -85,6 +85,7 @@ export const makeVImgProps = propsFactory({
     | 'unsafe-url'
   >,
   srcset: String,
+  position: String,
 
   ...makeVResponsiveProps(),
   ...makeComponentProps(),
@@ -163,24 +164,27 @@ export const VImg = genericComponent<VImgSlots>()({
       nextTick(() => {
         emit('loadstart', image.value?.currentSrc || normalisedSrc.value.src)
 
-        if (image.value?.complete) {
-          if (!image.value.naturalWidth) {
-            onError()
+        setTimeout(() => {
+          if (image.value?.complete) {
+            if (!image.value.naturalWidth) {
+              onError()
+            }
+
+            if (state.value === 'error') return
+
+            if (!aspectRatio.value) pollForSize(image.value, null)
+            if (state.value === 'loading') onLoad()
+          } else {
+            if (!aspectRatio.value) pollForSize(image.value!)
+            getSrc()
           }
-
-          if (state.value === 'error') return
-
-          if (!aspectRatio.value) pollForSize(image.value, null)
-          onLoad()
-        } else {
-          if (!aspectRatio.value) pollForSize(image.value!)
-          getSrc()
-        }
+        })
       })
     }
 
     function onLoad () {
       getSrc()
+      pollForSize(image.value!)
       state.value = 'loaded'
       emit('load', image.value?.currentSrc || normalisedSrc.value.src)
     }
@@ -226,6 +230,7 @@ export const VImg = genericComponent<VImgSlots>()({
       const img = (
         <img
           class={['v-img__img', containClasses.value]}
+          style={{ objectPosition: props.position }}
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
           alt={ props.alt }
@@ -260,6 +265,7 @@ export const VImg = genericComponent<VImgSlots>()({
         { normalisedSrc.value.lazySrc && state.value !== 'loaded' && (
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
+            style={{ objectPosition: props.position }}
             src={ normalisedSrc.value.lazySrc }
             alt={ props.alt }
             crossorigin={ props.crossorigin }

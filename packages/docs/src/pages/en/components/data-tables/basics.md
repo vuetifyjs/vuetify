@@ -9,7 +9,7 @@ related:
   - /components/tables/
   - /components/lists/
 features:
-  github: /labs/VDataTable/
+  github: /components/VDataTable/
   label: 'C: VDataTable'
   report: true
   spec: https://m2.material.io/components/data-tables
@@ -32,26 +32,6 @@ This feature requires [v3.1.0 (Valkyrie)](/getting-started/release-notes/?versio
 There are three variants of the data table available depending on your requirements.
 
 <entry />
-
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import {
-  VDataTable,
-  VDataTableServer,
-  VDataTableVirtual,
-} from "vuetify/labs/VDataTable";
-
-export default createVuetify({
-  components: {
-    VDataTable,
-    VDataTableServer,
-    VDataTableVirtual,
-  },
-})
-```
 
 ### v-data-table
 

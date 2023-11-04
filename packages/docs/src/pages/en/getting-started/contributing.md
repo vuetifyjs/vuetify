@@ -86,7 +86,7 @@ The build process compiles all the Vuetify packages for development and may take
 
 ### Vuetify
 
-The Vuetify library is located in `packages/vuetify`. In `packages/vuetify/dev` you will find a `Playground.vue` file; running `yarn dev` from the project root will start a dev server on **localhost:5173** with this file loaded. Test your changes in the Playground.vue file you copied, then paste its contents into your pull request when you're ready.
+The Vuetify library is located in `packages/vuetify`. In `packages/vuetify/dev` you will find a `Playground.vue` file; running `yarn dev` from the project root will start a dev server on **localhost:8090** with this file loaded. Test your changes in the Playground.vue file you copied, then paste its contents into your pull request when you're ready.
 
 You can also test Vuetify in your own project using [`yarn link`](https://classic.yarnpkg.com/en/docs/cli/link/):
 
@@ -103,9 +103,11 @@ The **Playground** file is a cleanroom used for Vuetify development and is the r
 
 ```html
 <template>
-  <v-container>
-    <!--  -->
-  </v-container>
+  <v-app>
+    <v-container>
+      <!--  -->
+    </v-container>
+  </v-app>
 </template>
 
 <script setup>
@@ -113,11 +115,9 @@ The **Playground** file is a cleanroom used for Vuetify development and is the r
 </script>
 ```
 
-The **App.vue** file used for Vuetify development is located in `packages/vuetify/dev`. It contains a [v-app](/api/v-app/) and [v-main](/api/v-main/) component and the local Playground.vue file.
-
 ### Documentation
 
-The documentation is located in `packages/docs` but also uses some files from `packages/api-generator`. A dev server for the documentation can be started by running `yarn dev docs` from the project root and will be available on [localhost:8080](http://localhost:8080/) by default.
+The documentation is located in `packages/docs` but also uses some files from `packages/api-generator`. A dev server for the documentation can be started by running `yarn dev docs` from the project root and will be available on [localhost:8095](http://localhost:8095/) by default.
 
 If you want to see changes from Vuetify in the documentation you need to run `yarn build:lib` in the vuetify package before starting the documentation server.
 
@@ -125,7 +125,7 @@ If you want to see changes from Vuetify in the documentation you need to run `ya
 
 All api descriptions are managed via the api-generator package. This package must be built prior to running or building the docs. Descriptions can be updated via the JSON files located in the `src/locale/en` folder. Some general guidelines to follow when handling api descriptions are:
 
-- `en` language only.
+- `en` language only. Translations are handled via [Crowdin](https://crowdin.com/project/vuetify).
 - Prop names should be formatted using bold markdown eg: **prop-name**.
 - Slot and other code related text should be formatted using code markdown eg: `some-slot`.
 - Description keys should be in camelCase, except for `slot` keys which should be kebab-case.

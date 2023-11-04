@@ -2,7 +2,7 @@
 meta:
   nav: Mutation observer
   title: Mutation observer directive
-  description: The mutation observer directive utilizes the Mutation observer API. It allows you to invoke a callback when targetted elements are updated.
+  description: The mutation observer directive utilizes the Mutation observer API. It allows you to invoke a callback when targeted elements are updated.
   keywords: mutate, vuetify mutate directive, mutation observer directive, mutation observer
 related:
   - /components/sheets/
