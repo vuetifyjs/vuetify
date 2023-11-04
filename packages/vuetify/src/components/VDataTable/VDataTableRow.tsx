@@ -10,7 +10,7 @@ import { VDataTableColumn } from './VDataTableColumn'
 
 // Utilities
 import { toDisplayString, withModifiers } from 'vue'
-import { genericComponent, getObjectValueByPath, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, getObjectValueByPath, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -25,7 +25,9 @@ export const makeVDataTableRowProps = propsFactory({
   index: Number,
   item: Object as PropType<DataTableItem>,
   cellProps: [Object, Function] as PropType<CellProps>,
-  onClick: Function as PropType<(e: MouseEvent) => void>,
+  onClick: EventProp<[MouseEvent]>(),
+  onContextmenu: EventProp<[MouseEvent]>(),
+  onDblclick: EventProp<[MouseEvent]>(),
 }, 'VDataTableRow')
 
 export const VDataTableRow = genericComponent<VDataTableRowSlots>()({
@@ -43,10 +45,12 @@ export const VDataTableRow = genericComponent<VDataTableRowSlots>()({
         class={[
           'v-data-table__tr',
           {
-            'v-data-table__tr--clickable': !!props.onClick,
+            'v-data-table__tr--clickable': !!(props.onClick || props.onContextmenu || props.onDblclick),
           },
         ]}
-        onClick={ props.onClick }
+        onClick={ props.onClick as any }
+        onContextmenu={ props.onContextmenu as any }
+        onDblclick={ props.onDblclick as any }
       >
         { props.item && columns.value.map((column, i) => {
           const item = props.item!
