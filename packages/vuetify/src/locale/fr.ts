@@ -19,7 +19,7 @@ export default {
     sortBy: 'Trier par',
   },
   dataFooter: {
-    itemsPerPageText: 'Élements par page :',
+    itemsPerPageText: 'Éléments par page :',
     itemsPerPageAll: 'Tous',
     nextPage: 'Page suivante',
     prevPage: 'Page précédente',
