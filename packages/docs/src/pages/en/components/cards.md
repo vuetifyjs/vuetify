@@ -118,6 +118,8 @@ The **elevation** property provides up to 24 levels of shadow depth. By default,
 
 #### Hover
 
+When using the **hover** prop, the cards will increase its elevation when the mouse is hovered over them.
+
 <example file="v-card/prop-hover" />
 
 #### Href
