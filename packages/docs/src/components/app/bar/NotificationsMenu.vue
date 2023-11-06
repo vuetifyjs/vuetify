@@ -31,7 +31,6 @@
       density="compact"
     >
       <v-btn
-        :disabled="showArchived ? unread.length < 1 : read.length < 1"
         class="px-2 ms-n1 text-none font-weight-regular"
         size="small"
         variant="text"
@@ -174,7 +173,7 @@
   const width = computed(() => mobile.value ? 420 : 520)
 
   function format (str: string) {
-    return date.format(new Date(str), 'normalDateWithWeekday')
+    return date.format(new Date(str), 'fullDateWithWeekday')
   }
   function onClick (notification: Notification) {
     toggle(notification)

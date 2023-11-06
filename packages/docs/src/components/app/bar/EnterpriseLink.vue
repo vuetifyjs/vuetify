@@ -3,18 +3,11 @@
     :to="rpath('/introduction/enterprise-support/')"
     class="ms-1 me-4"
     color="primary"
-    variant="flat"
+    variant="outlined"
     @click="gtagClick('app-bar', 'enterprise', name)"
   >
 
     {{ t('get-help') }}
-
-    <!-- <v-badge
-      class="ms-n1 mb-4"
-      color="success"
-      dot
-      inline
-    /> -->
   </app-btn>
 </template>
 

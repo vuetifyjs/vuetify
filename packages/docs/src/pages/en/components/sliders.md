@@ -8,11 +8,18 @@ related:
   - /components/forms/
   - /components/selects/
   - /components/range-sliders/
+features:
+  label: 'C: VSlider'
+  report: true
+  github: /components/VSlider/
+  spec: https://m2.material.io/components/sliders
 ---
 
 # Sliders
 
 The `v-slider` component can be used as an alternative visualization instead of a number input.
+
+<page-features />
 
 ## Usage
 

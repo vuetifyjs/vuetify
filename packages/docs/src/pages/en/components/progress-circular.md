@@ -64,3 +64,11 @@ The `rotate` prop gives you the ability to customize the `v-progress-circular`'s
 The `size` and `width` props allow you to easily alter the size and width of the `v-progress-circular` component.
 
 <example file="v-progress-circular/prop-size-and-width" />
+
+### Slots
+
+#### Default
+
+`default` slot can be used to replace the text inside the loader.
+
+<example file="v-progress-circular/prop-slot-default" />

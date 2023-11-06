@@ -25,7 +25,6 @@
         > tr
           > td,
             th
-            background: rgb(var(--v-theme-surface))
 
             &.v-data-table-column--align-end
               text-align: end
@@ -67,7 +66,8 @@
 
 .v-data-table-group-header-row
   td
-    background: lightgrey
+    background: rgba(var(--v-theme-surface))
+    color: rgba(var(--v-theme-on-surface))
 
     > span
       padding-left: 5px

@@ -43,7 +43,7 @@ The continued development and maintenance of Vuetify is made possible by these g
 
 Check out these beautiful apps, plugins, and themes built using Vuetify.{style="max-width: 568px" .mx-auto .px-4}
 
-<made-with-vuetify />
+<made-with-vuetify class="pa-3" />
 
 <made-with-vuetify-link />
 

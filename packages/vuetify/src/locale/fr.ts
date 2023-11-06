@@ -1,6 +1,6 @@
 export default {
   badge: 'Badge',
-  open: 'Open',
+  open: 'Ouvrir',
   close: 'Fermer',
   dataIterator: {
     noResultsText: 'Aucun enregistrement correspondant trouvé',
@@ -28,19 +28,19 @@ export default {
     pageText: '{0}-{1} de {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'à',
   },
   datePicker: {
     ok: 'OK',
-    cancel: 'Cancel',
+    cancel: 'Annuler',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Sélectionner des dates',
+      header: 'Entrer des dates',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Sélectionner une date',
+    header: 'Entrer une date',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Entrer une date',
     },
   },
   noDataText: 'Aucune donnée disponible',
@@ -55,10 +55,10 @@ export default {
     moreEvents: '{0} de plus',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Vider {0}',
+    prependAction: '{0} action avant',
+    appendAction: '{0} action après',
+    otp: 'Caractère {0} du mot de passe à usage unique',
   },
   fileInput: {
     counter: '{0} fichier(s)',
@@ -75,22 +75,22 @@ export default {
       previous: 'Page précédente',
       page: 'Aller à la page {0}',
       currentPage: 'Page actuelle, Page {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Première page',
+      last: 'Dernière page',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Suivant',
+    prev: 'Précédent',
   },
   rating: {
     ariaLabel: {
       item: 'Note de {0} sur {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Chargement...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Charger plus',
+    empty: 'Aucune donnée supplémentaire',
   },
 }

@@ -8,20 +8,23 @@
 
     <app-drawer />
 
-    <app-pwa-snackbar />
-
     <v-main>
       <slot>
         <v-container
           fluid
           tag="section"
         >
-          <v-row>
-            <v-col cols="12" md="auto">
+          <v-row justify="center" justify-md="start">
+            <v-col cols="auto">
               <user-profile />
             </v-col>
 
-            <v-col cols="8">
+            <v-col
+              class="me-auto"
+              cols="12"
+              sm="10"
+              md="7"
+            >
               <user-tabs />
 
               <br>
@@ -47,13 +50,23 @@
   import AppBar from '@/components/app/bar/Bar.vue'
   import AppDrawer from '@/components/app/drawer/Drawer.vue'
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
-  import AppPwaSnackbar from '@/components/app/PwaSnackbar.vue'
   import UserProfile from '@/components/user/UserProfile.vue'
-
   import UserTabs from '@/components/user/UserTabs.vue'
 
   // Composables
-  import { useRoute } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
+  import { useAuth0 } from '@/plugins/auth'
+
+  // Utilities
+  import { watch } from 'vue'
 
   const route = useRoute()
+  const router = useRouter()
+  const { isLoading, isAuthenticated } = useAuth0()
+
+  watch(isLoading, val => {
+    if (val || isAuthenticated.value) return
+
+    router.push('/')
+  }, { immediate: true })
 </script>

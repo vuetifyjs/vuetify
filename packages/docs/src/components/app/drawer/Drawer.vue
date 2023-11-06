@@ -27,12 +27,14 @@
   import AppList from '@/components/app/list/List.vue'
 
   // Composables
-  import { useAppStore } from '@/store/app'
   import { useDisplay, useTheme } from 'vuetify'
 
   // Utilities
   import { computed, onMounted, ref, watch } from 'vue'
   import { wait } from '@/util/helpers'
+
+  // Stores
+  import { useAppStore } from '@/store/app'
   import { useUserStore } from '@/store/user'
 
   const app = useAppStore()
@@ -76,7 +78,6 @@
     if (!element) return
 
     element.scrollIntoView({
-      behavior: 'smooth',
       block: 'center',
       inline: 'center',
     })

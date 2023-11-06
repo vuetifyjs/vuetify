@@ -90,6 +90,8 @@
       "danger-zone-message": "The following settings are for development purposes."
     },
     "perks": {
+      "avatar": "Avatar",
+      "avatar-message": "Add a custom avatar image displayed on the user profile and user bar.",
       "disable-ads": "Disable Ads",
       "disable-ads-message": "Disable advertisements on all documentation pages.",
       "experience": "Experience",
@@ -106,7 +108,7 @@
   "data-and-display": "Data & display",
   "grids": "Grids",
   "details": "Details",
-  "developer-mode": "Developer Mode",
+  "developer-mode": "Developer mode",
   "developer-mode-message": "Developer mode enables new features and functionality within the documentation that are still in development.",
   "device": "Device",
   "design-spec": "Design Specification",
@@ -136,8 +138,11 @@
   "enable-inline-api-message": "Display API tables inline on documentation pages.",
   "enable-notifications": "Enable notifications",
   "enable-notifications-message": "Notifications are located at the top right of the screen in the actions bar and provide information about new releases, updates, and other important information.",
+  "enable-pwa-refresh": "Enable Refresh Prompt",
+  "enable-pwa-refresh-message": "Display the refresh prompt when new documentation updates have been downloaded.",
   "enterprise": "Enterprise",
   "email-address": "Email address",
+  "esc": "Esc",
   "extra-extra-large": "Extra extra large",
   "extra-large": "Extra large",
   "extra-small": "Extra small",
@@ -168,6 +173,7 @@
   "hide-source": "Hide source",
   "homepage": "Vuetify Home Page",
   "icon": "Icon",
+  "icons": "Icons",
   "images-and-icons": "Images & icons",
   "inline": "Inline",
   "introduction": "Introduction",
@@ -228,12 +234,6 @@
   "progress": "Progress",
   "providers": "Providers",
   "published": "Published: {date}",
-  "pwa": {
-    "install": "Install Vuetify Documentation",
-    "new-content-available": "New content is available. Click **Refresh** to update.",
-    "refresh": "Refresh",
-    "ignore": "Don't ask again"
-  },
   "range": "Range",
   "read": "View Read ({number})",
   "ready-text": "Continue your learning with related content selected by the {team} or move between pages by using the navigation links below.",
@@ -255,6 +255,7 @@
   "scroll-to-top": "Scroll to top",
   "sass-variables": "SASS Variables",
   "search": {
+    "icons": "Search for icons (e.g. account, close)",
     "label": "Search",
     "looking": "Looking for",
     "key-hint": "Ctrl+K",
