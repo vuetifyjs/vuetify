@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.4.0-alpha.1",
+  "version": "3.4.0-beta.0",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -74,6 +74,7 @@
     "./iconsets/*": "./lib/iconsets/*.mjs",
     "./labs/components": "./lib/labs/components.mjs",
     "./labs/*": "./lib/labs/*/index.mjs",
+    "./util/colors": "./lib/util/colors.mjs",
     "./*": "./*"
   },
   "typesVersions": {

@@ -1,5 +1,2 @@
-export * from './VDataIterator'
-export * from './VDataTable'
-export * from './VDatePicker'
-export * from './VOtpInput'
+export * from './VConfirmEdit'
 export * from './VPicker'

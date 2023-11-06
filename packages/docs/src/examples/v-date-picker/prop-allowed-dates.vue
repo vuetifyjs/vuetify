@@ -15,7 +15,7 @@
   import { useDate } from 'vuetify'
   import { ref } from 'vue'
 
-  const date = ref('2018-03-02')
+  const date = ref(new Date('2018-03-02'))
   const adapter = useDate()
 
   function allowedDates (val) {
@@ -26,7 +26,7 @@
 <script>
   export default {
     data: () => ({
-      date: '2018-03-02',
+      date: new Date('2018-03-02'),
     }),
 
     methods: {

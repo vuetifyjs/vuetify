@@ -94,6 +94,14 @@
   grid-area: control
 
 .v-input
+  &--hide-spin-buttons
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button
+      -webkit-appearance: none
+      margin: 0
+    input[type=number]
+      -moz-appearance: textfield
+
   &--plain-underlined
     .v-input__details
       padding: 0

@@ -228,7 +228,7 @@ Form components are used to collect user input in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="OTP Input component" src="otp-input" labs>
+<components-list-item name="OTP Input component" src="otp-input" >
 
   The OTP input component is used for MFA authentication via input field
 
@@ -324,13 +324,13 @@ These components are used to display data and information in a variety of ways.
 
 <v-row>
 
-<components-list-item name="Data iterator component" src="data-iterators" labs>
+<components-list-item name="Data iterator component" src="data-iterators">
 
   The data iterator component provides an easy interface for paginating and sorting data
 
 </components-list-item>
 
-<components-list-item name="Data table component"  src="data-tables/basics" labs>
+<components-list-item name="Data table component"  src="data-tables/basics">
 
   Data tables are used to display large amounts of data in a small amount of space
 
@@ -342,13 +342,13 @@ These components are used to display data and information in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="Server-side table component"  src="data-tables/server-side-tables" labs>
+<components-list-item name="Server-side table component"  src="data-tables/server-side-tables">
 
   Server side data tables are intended to be used with a server side data source
 
 </components-list-item>
 
-<components-list-item name="Virtual Data table component"  src="data-tables/virtual-tables" labs>
+<components-list-item name="Virtual Data table component"  src="data-tables/virtual-tables">
 
   The virtual data table component is used to display very large subsets of data
 
@@ -492,7 +492,7 @@ These components are used to select a value from a specifically styled set of op
 
 </components-list-item>
 
-<components-list-item name="Date picker component" src="date-pickers" labs>
+<components-list-item name="Date picker component" src="date-pickers">
 
   The date picker component is used to select a single date from a calendar month / year.
 
