@@ -110,6 +110,54 @@ Cards can be colored by using any of the builtin colors and contextual names usi
 
 <example file="v-card/prop-color" />
 
+#### Elevation
+
+The **elevation** property provides up to 24 levels of shadow depth. By default, cards rest at 2dp.
+
+<example file="v-card/prop-elevation" />
+
+#### Hover
+
+When using the **hover** prop, the cards will increase its elevation when the mouse is hovered over them.
+
+<example file="v-card/prop-hover" />
+
+#### Href
+
+The card becomes an anchor with the **href** prop.
+
+<example file="v-card/prop-href" />
+
+#### Link
+
+Add the **link** prop for the same style without adding an anchor.
+
+<example file="v-card/prop-link" />
+
+#### Disabled
+
+The **disabled** prop can be added in order to prevent a user from interacting with the card.
+
+<example file="v-card/prop-disabled" />
+
+#### Image
+
+Apply a specific background image to the Card.
+
+<example file="v-card/prop-image" />
+
+### Slots
+
+The `v-card` component provides slots that enable you to customize content created by its props or to add additional content.
+
+Slots give you greater control to customize the content of the `v-card` component while still taking advantage of the easy-to-use props.
+
+#### Avatar and icon
+
+You can use the **prepend-avatar**, **append-avatar**, **prepend-icon** and **append-icon** props or the **prepend** and **append** slots to place a [v-icon](/components/icons/) that automatically injects the designated icon.
+
+<example file="v-card/slot-prepend-append" />
+
 ### Misc
 
 #### Card Reveal
@@ -132,13 +180,13 @@ With a simple conditional, you can easily add supplementary text that is hidden 
 
 #### Grids
 
-Using grids, you can create beautiful layouts.
+Using [grids](/components/grids/), you can create beautiful layouts.
 
 <example file="v-card/misc-grids" />
 
 #### Horizontal cards
 
-TODO: better description
+You can also play with the card layout using [layout flex](/styles/flex/).
 
 <example file="v-card/misc-horizontal-cards" />
 
