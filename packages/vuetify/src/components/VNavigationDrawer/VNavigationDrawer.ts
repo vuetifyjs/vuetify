@@ -93,6 +93,7 @@ export default baseMixins.extend({
       },
     },
     temporary: Boolean,
+    top: Boolean,
     touchless: Boolean,
     width: {
       type: [Number, String],
@@ -135,6 +136,7 @@ export default baseMixins.extend({
         'v-navigation-drawer--open-on-hover': this.expandOnHover,
         'v-navigation-drawer--right': this.right,
         'v-navigation-drawer--temporary': this.temporary,
+        'v-navigation-drawer--top': this.top,
         ...this.themeClasses,
       }
     },
@@ -165,6 +167,7 @@ export default baseMixins.extend({
     computedTransform (): number {
       if (this.isActive) return 0
       if (this.isBottom) return 100
+      if (this.isTop) return -100
       return this.right ? 100 : -100
     },
     computedWidth (): string | number {
@@ -178,6 +181,9 @@ export default baseMixins.extend({
     },
     isBottom (): boolean {
       return this.bottom && this.isMobile
+    },
+    isTop (): boolean {
+      return this.top && this.isMobile
     },
     isMiniVariant (): boolean {
       return (
@@ -229,9 +235,9 @@ export default baseMixins.extend({
       )
     },
     styles (): object {
-      const translate = this.isBottom ? 'translateY' : 'translateX'
+      const translate = this.isBottom || this.isTop ? 'translateY' : 'translateX'
       return {
-        height: convertToUnit(this.height),
+        height: !this.isTop ? convertToUnit(this.height) : 'auto',
         top: !this.isBottom ? convertToUnit(this.computedTop) : 'auto',
         maxHeight: this.computedMaxHeight != null
           ? `calc(100% - ${convertToUnit(this.computedMaxHeight)})`
