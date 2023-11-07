@@ -16,6 +16,12 @@ The data table component is used for displaying tabular data in a way that is ea
 
 <entry />
 
+::: success
+
+This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
+
+:::
+
 ## Components
 
 Before diving into the guides and examples, let's take a moment to understand the core components available for data tables. These are variations optimized for different scenarios.

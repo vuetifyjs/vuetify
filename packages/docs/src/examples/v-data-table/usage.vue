@@ -8,7 +8,6 @@
     <div>
       <v-data-table
         v-bind="props"
-        :headers="headers"
         :items="items"
       ></v-data-table>
     </div>
@@ -22,13 +21,6 @@
   const name = 'v-data-table'
   const model = ref('default')
   const options = []
-
-  const headers = [
-    { title: 'Animal Name', align: 'start', key: 'name' },
-    { title: 'Species', align: 'end', key: 'species' },
-    { title: 'Diet', align: 'end', key: 'diet' },
-    { title: 'Habitat', align: 'end', key: 'habitat' },
-  ]
 
   const items = [
     {
@@ -95,26 +87,14 @@
 
   const props = computed(() => {
     return {
-      ':headers': 'headers',
       ':items': 'items',
-      'items-per-page': 5,
     }
   })
 
   // eslint doesn't like the script tag inside the template
   const script = computed(() => {
     return `<script setup>
-  import { ref } from 'vue'
-
-  const page = ref(1)
-  const headers = ref([
-    { title: 'Animal Name', align: 'start', key: 'name' },
-    { title: 'Species', align: 'end', key: 'species' },
-    { title: 'Diet', align: 'end', key: 'diet' },
-    { title: 'Habitat', align: 'end', key: 'habitat' },
-  ])
-
-  const items = ref([
+  const items = [
     {
       name: 'African Elephant',
       species: 'Loxodonta africana',
@@ -122,7 +102,7 @@
       habitat: 'Savanna, Forests',
     },
     // ... more items
-  ])
+  ]
 <` + '/script>'
   })
 

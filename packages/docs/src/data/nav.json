@@ -130,6 +130,7 @@
       {
         "title": "data-tables",
         "subfolder": "components",
+        "emphasized": true,
         "activeIcon": "",
         "inactiveIcon": "",
         "items": [
@@ -137,9 +138,7 @@
           { "subheader": "guide" },
           "basics",
           "data-and-display",
-          "structure",
           { "subheader": "types" },
-          "data-tables",
           "server-side-tables",
           "virtual-tables"
         ]
