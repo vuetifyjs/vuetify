@@ -26,9 +26,7 @@ The `v-stepper` component displays progress through numbered steps.
 <page-features />
 
 ::: success
-
-This feature was introduced in [v3.4.0](/getting-started/release-notes/?version=v3.4.0)
-
+This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
 :::
 
 ## Usage
