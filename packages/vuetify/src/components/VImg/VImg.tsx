@@ -16,6 +16,7 @@ import {
   computed,
   nextTick,
   onBeforeMount,
+  onBeforeUnmount,
   ref,
   shallowRef,
   vShow,
@@ -183,17 +184,22 @@ export const VImg = genericComponent<VImgSlots>()({
       if (img) currentSrc.value = img.currentSrc || img.src
     }
 
-    let timer = -1
+    let timer: ReturnType<typeof setTimeout> | undefined
+
+    onBeforeUnmount(() => clearTimeout(timer))
+
     function pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {
         clearTimeout(timer)
+        timer = undefined
+
         const { naturalHeight: imgHeight, naturalWidth: imgWidth } = img
 
         if (imgHeight || imgWidth) {
           naturalWidth.value = imgWidth
           naturalHeight.value = imgHeight
         } else if (!img.complete && state.value === 'loading' && timeout != null) {
-          timer = window.setTimeout(poll, timeout)
+          timer = setTimeout(poll, timeout)
         } else if (img.currentSrc.endsWith('.svg') || img.currentSrc.startsWith('data:image/svg+xml')) {
           naturalWidth.value = 1
           naturalHeight.value = 1
