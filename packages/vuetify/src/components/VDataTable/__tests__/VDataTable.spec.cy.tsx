@@ -278,14 +278,14 @@ describe('VDataTable', () => {
       cy.get('colgroup').should('exist')
     })
 
-    it('should have column.* slots', () => {
+    it('should have header.* slots', () => {
       cy.mount(() => (
         <Application>
           <VDataTable items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS } showSelect showExpand>
             {{
-              'column.data-table-expand': () => <h1>expand</h1>,
-              'column.data-table-select': () => <h2>select</h2>,
-              'column.name': ({ column }) => (
+              'header.data-table-expand': () => <h1>expand</h1>,
+              'header.data-table-select': () => <h2>select</h2>,
+              'header.name': ({ column }) => (
                 <h3>{ column.title }</h3>
               ),
             }}

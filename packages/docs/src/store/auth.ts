@@ -83,10 +83,7 @@ export const useAuthStore = defineStore('auth', () => {
           console.error(res.statusText)
         }
       },
-      err => {
-        app.snackbar(err.message, { color: 'error' })
-        console.error(err)
-      }
+      () => {},
     ).then(() => {
       isLoading.value = false
       verify.promise = null

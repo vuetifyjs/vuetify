@@ -119,17 +119,18 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
       toggleExpand,
       isGroupOpen,
       toggleGroup,
-      items: itemsWithoutGroups.value,
+      items: itemsWithoutGroups.value.map(item => item.raw),
+      internalItems: itemsWithoutGroups.value,
       groupedItems: flatItems.value,
       columns: columns.value,
       headers: headers.value,
     }))
 
     useRender(() => {
-      const [dataTableFooterProps] = VDataTableFooter.filterProps(props)
-      const [dataTableHeadersProps] = VDataTableHeaders.filterProps(props)
-      const [dataTableRowsProps] = VDataTableRows.filterProps(props)
-      const [tableProps] = VTable.filterProps(props)
+      const dataTableFooterProps = VDataTableFooter.filterProps(props)
+      const dataTableHeadersProps = VDataTableHeaders.filterProps(props)
+      const dataTableRowsProps = VDataTableRows.filterProps(props)
+      const tableProps = VTable.filterProps(props)
 
       return (
         <VTable

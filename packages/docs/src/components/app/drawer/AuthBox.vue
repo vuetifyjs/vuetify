@@ -16,28 +16,32 @@
       </template>
 
       <v-dialog activator="parent" max-width="480">
-        <v-card class="text-center">
-          <v-card-title class="text-h3 py-8">{{ t('login.to-vuetify') }}</v-card-title>
-          <v-card-subtitle class="text-wrap">{{ t('login.tagline') }}</v-card-subtitle>
+        <v-card class="pt-6 pb-1 pb-sm-4 px-4 px-sm-8">
           <v-img
-            :src="`https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-${theme.name.value}-slim.svg`"
-            width="100"
-            height="100"
-            class="mx-auto mt-8"
+            :src="`https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-v3-slim-text-${theme.name.value}.svg`"
+            class="mb-4"
+            height="30"
           />
-          <v-card-text class="text-start my-4">
-            <v-list class="mx-auto" style="max-width: 300px">
-              <GithubLogin />
-              <DiscordLogin />
-            </v-list>
-          </v-card-text>
+
+          <div class="text-center mb-6">
+            <v-card-title class="text-h5 mb-1 text-md-h4 font-weight-bold">
+              {{ auth.lastLoginProvider() ? t('login.welcome-back') : t('login.to-vuetify') }}
+            </v-card-title>
+
+            <v-card-subtitle class="text-wrap">{{ t('login.tagline') }}</v-card-subtitle>
+          </div>
+
+          <v-list class="mx-auto" max-width="300" width="100%">
+            <GithubLogin class="mb-3" />
+
+            <DiscordLogin />
+          </v-list>
         </v-card>
       </v-dialog>
     </v-list-item>
   </div>
   <v-list-item
     v-else
-    :title="auth.user.name"
     :prepend-avatar="user.avatar || auth.user.picture || ''"
     class="px-4"
     rounded="0"
@@ -48,13 +52,15 @@
       <v-avatar size="small" class="me-n2" />
     </template>
 
-    <template #subtitle>
+    <template #title>
+      <div>{{ auth.user.name }}</div>
+
       <user-badges size="12" />
     </template>
 
     <template #append>
       <v-btn
-        to="/user/dashboard"
+        to="/user/dashboard/"
         :color="isDashboard ? 'primary' : undefined"
         :icon="`mdi-view-dashboard${isDashboard ? '' : '-outline'}`"
         :style="{

@@ -25,9 +25,7 @@ The bottom sheet is a modified `v-dialog` that slides from the bottom of the scr
 <page-features />
 
 ::: success
-
 This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
-
 :::
 
 ## Usage

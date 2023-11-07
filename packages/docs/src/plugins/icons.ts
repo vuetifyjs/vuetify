@@ -344,6 +344,7 @@ export {
   mdiUpdate,
   mdiUpload,
   mdiVectorDifferenceAb,
+  mdiVideoInputComponent,
   mdiVideoVintage,
   mdiViewDashboard,
   mdiViewDashboardOutline,

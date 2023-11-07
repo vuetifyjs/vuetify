@@ -49,7 +49,7 @@ export const VStepperWindow = genericComponent()({
     })
 
     useRender(() => {
-      const [windowProps] = VWindow.filterProps(props)
+      const windowProps = VWindow.filterProps(props)
 
       return (
         <VWindow

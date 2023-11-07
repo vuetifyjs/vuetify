@@ -15,7 +15,7 @@ export const VStepperWindowItem = genericComponent()({
 
   setup (props, { slots }) {
     useRender(() => {
-      const [windowItemProps] = VWindowItem.filterProps(props)
+      const windowItemProps = VWindowItem.filterProps(props)
 
       return (
         <VWindowItem

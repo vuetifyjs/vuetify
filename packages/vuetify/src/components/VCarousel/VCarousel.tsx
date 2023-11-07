@@ -96,7 +96,7 @@ export const VCarousel = genericComponent<VCarouselSlots>()({
     }
 
     useRender(() => {
-      const [windowProps] = VWindow.filterProps(props)
+      const windowProps = VWindow.filterProps(props)
 
       return (
         <VWindow

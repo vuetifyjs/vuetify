@@ -204,16 +204,33 @@ type MaybePick<
 // Array of keys
 export function pick<
   T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, paths: U[]): MaybePick<T, U> {
+  const found: any = {}
+
+  const keys = new Set(Object.keys(obj))
+  for (const path of paths) {
+    if (keys.has(path)) {
+      found[path] = obj[path]
+    }
+  }
+
+  return found
+}
+
+// Array of keys
+export function pickWithRest<
+  T extends object,
   U extends Extract<keyof T, string>,
   E extends Extract<keyof T, string>
 > (obj: T, paths: U[], exclude?: E[]): [yes: MaybePick<T, Exclude<U, E>>, no: Omit<T, Exclude<U, E>>]
 // Array of keys or RegExp to test keys against
-export function pick<
+export function pickWithRest<
   T extends object,
   U extends Extract<keyof T, string>,
   E extends Extract<keyof T, string>
 > (obj: T, paths: (U | RegExp)[], exclude?: E[]): [yes: Partial<T>, no: Partial<T>]
-export function pick<
+export function pickWithRest<
   T extends object,
   U extends Extract<keyof T, string>,
   E extends Extract<keyof T, string>
@@ -343,9 +360,9 @@ export function isComposingIgnoreKey (e: KeyboardEvent): boolean {
  * attributes should be passed to the <input> element inside.
  */
 export function filterInputAttrs (attrs: Record<string, unknown>) {
-  const [events, props] = pick(attrs, [onRE])
+  const [events, props] = pickWithRest(attrs, [onRE])
   const inputEvents = omit(events, bubblingEvents)
-  const [rootAttrs, inputAttrs] = pick(props, ['class', 'style', 'id', /^data-/])
+  const [rootAttrs, inputAttrs] = pickWithRest(props, ['class', 'style', 'id', /^data-/])
   Object.assign(rootAttrs, events)
   Object.assign(inputAttrs, inputEvents)
   return [rootAttrs, inputAttrs]

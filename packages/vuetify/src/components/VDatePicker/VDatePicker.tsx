@@ -226,12 +226,12 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
     })
 
     useRender(() => {
-      const [pickerProps] = VPicker.filterProps(props)
-      const [datePickerControlsProps] = VDatePickerControls.filterProps(props)
-      const [datePickerHeaderProps] = VDatePickerHeader.filterProps(props)
-      const [datePickerMonthProps] = VDatePickerMonth.filterProps(props)
-      const [datePickerMonthsProps] = VDatePickerMonths.filterProps(omit(props, ['modelValue']))
-      const [datePickerYearsProps] = VDatePickerYears.filterProps(omit(props, ['modelValue']))
+      const pickerProps = VPicker.filterProps(props)
+      const datePickerControlsProps = VDatePickerControls.filterProps(props)
+      const datePickerHeaderProps = VDatePickerHeader.filterProps(props)
+      const datePickerMonthProps = VDatePickerMonth.filterProps(props)
+      const datePickerMonthsProps = omit(VDatePickerMonths.filterProps(props), ['modelValue'])
+      const datePickerYearsProps = omit(VDatePickerYears.filterProps(props), ['modelValue'])
 
       return (
         <VPicker

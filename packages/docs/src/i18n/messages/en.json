@@ -197,6 +197,7 @@
   "login": {
     "login": "Log in",
     "to-vuetify": "Log in to Vuetify",
+    "welcome-back": "Welcome back!",
     "tagline": "Sign in with GitHub or Discord to save your settings and unlock exclusive subscriber perks.",
     "last-used": "Last used",
     "with-github": "Continue with GitHub",
@@ -315,6 +316,7 @@
   "transition": "Transition",
   "translations": "Translations",
   "type": "Type | Types",
+  "types": "Types",
   "twitter": "Twitter",
   "ui-components": "UI Components",
   "ui-kits": "UI Kits",

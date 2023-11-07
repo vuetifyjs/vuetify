@@ -126,7 +126,7 @@ export const VStepper = genericComponent<VStepperSlots>()({
     })
 
     useRender(() => {
-      const [sheetProps] = VSheet.filterProps(props)
+      const sheetProps = VSheet.filterProps(props)
 
       const hasHeader = !!(slots.header || props.items.length)
       const hasWindow = props.items.length > 0

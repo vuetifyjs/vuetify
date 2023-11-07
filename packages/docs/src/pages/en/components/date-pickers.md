@@ -23,10 +23,8 @@ features:
 
 <page-features />
 
-::: warning
-
-This feature requires [v3.3.4](/getting-started/release-notes/?version=v3.3.4)
-
+::: success
+This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
 :::
 
 ## Usage

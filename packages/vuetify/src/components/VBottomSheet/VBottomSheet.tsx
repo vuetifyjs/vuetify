@@ -34,7 +34,7 @@ export const VBottomSheet = genericComponent<OverlaySlots>()({
     const isActive = useProxiedModel(props, 'modelValue')
 
     useRender(() => {
-      const [dialogProps] = VDialog.filterProps(props)
+      const dialogProps = VDialog.filterProps(props)
 
       return (
         <VDialog

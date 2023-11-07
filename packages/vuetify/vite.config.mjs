@@ -36,6 +36,11 @@ export default defineConfig(({ mode }) => {
       port: process.env.CYPRESS ? undefined : process.env.PORT,
       strictPort: !!process.env.PORT && !process.env.CYPRESS,
     },
+    preview: {
+      host: process.env.HOST,
+      port: process.env.PORT,
+      strictPort: !!process.env.PORT,
+    },
     resolve: {
       alias: [
         { find: /^vuetify$/, replacement: resolve('./src/framework.ts') },
