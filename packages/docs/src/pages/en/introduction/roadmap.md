@@ -60,7 +60,7 @@ The following are the already released **minor** and **major** version updates. 
 
 - **Released:** November 2023
 - **Target Release:** Q3 2023
-- **Notes:** [v3.3 Release](/getting-started/release-notes/?version=v3.4.0)
+- **Notes:** [v3.4 Release](/getting-started/release-notes/?version=v3.4.0)
 - **Overview:** Introduced 8 updated components to the main framework from Labs: VBottomSheet, VDataIterator, VDataTable, VDatePicker, VInfiniteScroll, VOtpInput, VSkeletonLoader, and VStepper.
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/61)
 
