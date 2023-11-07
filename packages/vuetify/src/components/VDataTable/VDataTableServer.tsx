@@ -126,10 +126,10 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
     }))
 
     useRender(() => {
-      const [dataTableFooterProps] = VDataTableFooter.filterProps(props)
-      const [dataTableHeadersProps] = VDataTableHeaders.filterProps(props)
-      const [dataTableRowsProps] = VDataTableRows.filterProps(props)
-      const [tableProps] = VTable.filterProps(props)
+      const dataTableFooterProps = VDataTableFooter.filterProps(props)
+      const dataTableHeadersProps = VDataTableHeaders.filterProps(props)
+      const dataTableRowsProps = VDataTableRows.filterProps(props)
+      const tableProps = VTable.filterProps(props)
 
       return (
         <VTable

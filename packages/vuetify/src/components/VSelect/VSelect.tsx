@@ -289,7 +289,7 @@ export const VSelect = genericComponent<new <
         slots['no-data']
       )
       const isDirty = model.value.length > 0
-      const [textFieldProps] = VTextField.filterProps(props)
+      const textFieldProps = VTextField.filterProps(props)
 
       const placeholder = isDirty || (
         !isFocused.value &&

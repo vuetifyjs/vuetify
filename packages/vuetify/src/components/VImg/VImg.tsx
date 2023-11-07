@@ -322,7 +322,7 @@ export const VImg = genericComponent<VImgSlots>()({
     }
 
     useRender(() => {
-      const [responsiveProps] = VResponsive.filterProps(props)
+      const responsiveProps = VResponsive.filterProps(props)
       return (
         <VResponsive
           class={[

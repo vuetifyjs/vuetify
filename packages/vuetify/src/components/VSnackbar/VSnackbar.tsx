@@ -147,7 +147,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     }
 
     useRender(() => {
-      const [overlayProps] = VOverlay.filterProps(props)
+      const overlayProps = VOverlay.filterProps(props)
       const hasContent = !!(slots.default || slots.text || props.text)
 
       return (

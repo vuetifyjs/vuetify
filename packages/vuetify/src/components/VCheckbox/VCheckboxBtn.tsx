@@ -58,21 +58,21 @@ export const VCheckboxBtn = genericComponent<VSelectionControlSlots>()({
     })
 
     useRender(() => {
-      const controlProps = omit(VSelectionControl.filterProps(props)[0], ['modelValue'])
+      const controlProps = omit(VSelectionControl.filterProps(props), ['modelValue'])
       return (
         <VSelectionControl
           { ...controlProps }
           v-model={ model.value }
-        class={[
-          'v-checkbox-btn',
-          props.class,
-        ]}
-        style={ props.style }
+          class={[
+            'v-checkbox-btn',
+            props.class,
+          ]}
+          style={ props.style }
           type="checkbox"
           onUpdate:modelValue={ onChange }
           falseIcon={ falseIcon.value }
           trueIcon={ trueIcon.value }
-        aria-checked={ indeterminate.value ? 'mixed' : undefined }
+          aria-checked={ indeterminate.value ? 'mixed' : undefined }
           v-slots={ slots }
         />
       )

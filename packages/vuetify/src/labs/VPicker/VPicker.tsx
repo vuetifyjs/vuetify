@@ -38,7 +38,7 @@ export const VPicker = genericComponent<VPickerSlots>()({
   setup (props, { slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     useRender(() => {
-      const [sheetProps] = VSheet.filterProps(props)
+      const sheetProps = VSheet.filterProps(props)
       const hasTitle = !!(props.title || slots.title)
 
       return (

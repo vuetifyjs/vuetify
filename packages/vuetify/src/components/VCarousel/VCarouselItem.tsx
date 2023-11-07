@@ -22,8 +22,8 @@ export const VCarouselItem = genericComponent<VImgSlots>()({
 
   setup (props, { slots, attrs }) {
     useRender(() => {
-      const [imgProps] = VImg.filterProps(props)
-      const [windowItemProps] = VWindowItem.filterProps(props)
+      const imgProps = VImg.filterProps(props)
+      const windowItemProps = VWindowItem.filterProps(props)
 
       return (
         <VWindowItem

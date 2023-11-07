@@ -141,9 +141,9 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     }))
 
     useRender(() => {
-      const [dataTableHeadersProps] = VDataTableHeaders.filterProps(props)
-      const [dataTableRowsProps] = VDataTableRows.filterProps(props)
-      const [tableProps] = VTable.filterProps(props)
+      const dataTableHeadersProps = VDataTableHeaders.filterProps(props)
+      const dataTableRowsProps = VDataTableRows.filterProps(props)
+      const tableProps = VTable.filterProps(props)
 
       return (
         <VTable

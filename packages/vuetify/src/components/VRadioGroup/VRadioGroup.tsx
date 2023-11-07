@@ -67,8 +67,8 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
 
     useRender(() => {
       const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
-      const [inputProps, _1] = VInput.filterProps(props)
-      const [controlProps, _2] = VSelectionControl.filterProps(props)
+      const inputProps = VInput.filterProps(props)
+      const controlProps = VSelectionControl.filterProps(props)
       const label = slots.label
         ? slots.label({
           label: props.label,

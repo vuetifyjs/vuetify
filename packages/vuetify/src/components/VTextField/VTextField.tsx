@@ -157,8 +157,8 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       const hasCounter = !!(slots.counter || (props.counter !== false && props.counter != null))
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [{ modelValue: _, ...inputProps }] = VInput.filterProps(props)
-      const [fieldProps] = filterFieldProps(props)
+      const { modelValue: _, ...inputProps } = VInput.filterProps(props)
+      const fieldProps = filterFieldProps(props)
 
       return (
         <VInput
