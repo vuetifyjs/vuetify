@@ -47,7 +47,8 @@ export type VDataTableSlotProps = {
   toggleExpand: ReturnType<typeof provideExpanded>['toggleExpand']
   isGroupOpen: ReturnType<typeof provideGroupBy>['isGroupOpen']
   toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
-  items: readonly DataTableItem[]
+  items: readonly any[]
+  internalItems: readonly DataTableItem[]
   groupedItems: readonly (DataTableItem | Group<DataTableItem>)[]
   columns: InternalDataTableHeader[]
   headers: InternalDataTableHeader[][]
@@ -181,7 +182,8 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
       toggleExpand,
       isGroupOpen,
       toggleGroup,
-      items: paginatedItemsWithoutGroups.value,
+      items: paginatedItemsWithoutGroups.value.map(item => item.raw),
+      internalItems: paginatedItemsWithoutGroups.value,
       groupedItems: paginatedItems.value,
       columns: columns.value,
       headers: headers.value,
