@@ -208,8 +208,9 @@ export function pick<
 > (obj: T, paths: U[]): MaybePick<T, U> {
   const found: any = {}
 
+  const keys = new Set(Object.keys(obj))
   for (const path of paths) {
-    if (obj.hasOwnProperty(path)) {
+    if (keys.has(path)) {
       found[path] = obj[path]
     }
   }
