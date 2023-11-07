@@ -26,11 +26,11 @@ The data table exposes a **search** prop that allows you to filter your data.
 
 <example file="v-data-table/prop-search" />
 
-<!-- ### Filterable
+### Filterable
 
 You can easily disable specific columns from being included when searching through table rows by setting the property **filterable** to false on the header item(s). In the example below the dessert name column is no longer searchable.
 
-<example file="v-data-table/prop-filterable" /> -->
+<example file="v-data-table/prop-filterable" />
 
 ### Custom filter
 
