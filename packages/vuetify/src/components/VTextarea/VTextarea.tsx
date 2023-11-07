@@ -234,6 +234,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isDirty,
               isReadonly,
@@ -250,6 +251,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
                 { ...fieldProps }
+                id={ id.value }
                 active={ isActive.value || isDirty.value }
                 centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
                 dirty={ isDirty.value || props.dirty }
