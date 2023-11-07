@@ -62,11 +62,15 @@
 
 .v-data-table-column--fixed
   background: $table-background
-  position: sticky
+  position: sticky !important
   left: 0
+  z-index: 1
 
 .v-data-table-column--last-fixed
   border-right: 1px solid rgba(var(--v-border-color), var(--v-border-opacity))
+
+.v-data-table.v-table--fixed-header > .v-table__wrapper > table > thead > tr > th.v-data-table-column--fixed
+  z-index: 2
 
 .v-data-table-group-header-row
   td
