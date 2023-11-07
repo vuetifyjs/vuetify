@@ -4,6 +4,7 @@ import { VBtn } from '@/components/VBtn'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 
 // Composables
+import { useExpanded } from './composables/expand'
 import { useGroupBy } from './composables/group'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
@@ -15,17 +16,19 @@ import { genericComponent, propsFactory } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { Group } from './composables/group'
+import type { GroupHeaderSlot } from './types'
 
 export type VDataTableGroupHeaderRowSlots = {
   'data-table-group': { item: Group, count: number, props: Record<string, unknown> }
   'data-table-select': { props: Record<string, unknown> }
-}
+} & { [key: `group.${string}`]: GroupHeaderSlot }
 
 export const makeVDataTableGroupHeaderRowProps = propsFactory({
   item: {
     type: Object as PropType<Group>,
     required: true,
   },
+  index: Number as PropType<Number>,
 }, 'VDataTableGroupHeaderRow')
 
 export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRowSlots>()({
@@ -35,7 +38,8 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
 
   setup (props, { slots }) {
     const { isGroupOpen, toggleGroup, extractRows } = useGroupBy()
-    const { isSelected, isSomeSelected, select } = useSelection()
+    const { isSelected, isSomeSelected, select, toggleSelect } = useSelection()
+    const { isExpanded, toggleExpand } = useExpanded()
     const { columns } = useHeaders()
 
     const rows = computed(() => {
@@ -64,6 +68,34 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
                 />
                 <span>{ props.item.value }</span>
                 <span>({ rows.value.length })</span>
+              </VDataTableColumn>
+            )
+          }
+
+          const slotName = `group.${column.key}` as const
+          if (slots[slotName]) {
+            const slotProps = {
+              index: props.index as number,
+              item: props.item,
+              columns: columns.value,
+              isExpanded,
+              toggleExpand,
+              isSelected,
+              toggleSelect,
+              toggleGroup,
+              isGroupOpen,
+            } satisfies GroupHeaderSlot
+
+            return (
+              <VDataTableColumn
+                align={ column.align }
+                fixed={ column.fixed }
+                fixedOffset={ column.fixedOffset }
+                lastFixed={ column.lastFixed }
+                noPadding={ column.key === 'data-table-select' || column.key === 'data-table-expand' }
+                width={ column.width }
+              >
+                { slots[slotName]!(slotProps) }
               </VDataTableColumn>
             )
           }
