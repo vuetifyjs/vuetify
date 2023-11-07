@@ -4,7 +4,6 @@
     :items="desserts"
     :group-by="groupBy"
     item-value="name"
-    class="elevation-1"
   >
     <template v-slot:group-header="{ item, columns, toggleGroup, isGroupOpen }">
       <tr>
