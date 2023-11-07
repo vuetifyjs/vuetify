@@ -25,8 +25,8 @@
       </template>
 
       <template
-        v-if="isEnabled('column.data-table-select')"
-        v-slot:column.data-table-select="{ on, props }"
+        v-if="isEnabled('header.data-table-select')"
+        v-slot:header.data-table-select="{ on, props }"
       >
         <v-checkbox-btn
           color="purple"

@@ -97,13 +97,13 @@ When wanting to use a checkbox component inside of a slot template in your data 
 
 ### Slots
 
-#### Column slot
+#### Header slot
 
-You can use the dynamic slots `column.<key>` to customize only certain columns. `<key>` corresponds to the **key** property in the items found in the **headers** prop.
+You can use the dynamic slots `header.<key>` to customize only certain columns. `<key>` corresponds to the **key** property in the items found in the **headers** prop.
 
 ::: info
 
-There are two built-in slots for customizing both the select (`column.data-table-select`) and expand (`column.data-table-expand`) columns when using **show-select** and **show-expand** props respectively.
+There are two built-in slots for customizing both the select (`header.data-table-select`) and expand (`header.data-table-expand`) columns when using **show-select** and **show-expand** props respectively.
 
 :::
 

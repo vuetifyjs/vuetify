@@ -1,6 +1,6 @@
 <template>
   <v-data-table :items="items">
-    <template v-slot:column.id="{ column }">
+    <template v-slot:header.id="{ column }">
       {{ column.title.toUpperCase() }}
     </template>
   </v-data-table>

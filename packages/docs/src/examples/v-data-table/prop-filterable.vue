@@ -20,7 +20,7 @@
 
     <v-divider></v-divider>
     <v-data-table v-model:search="search" :items="items">
-      <template v-slot:column.stock>
+      <template v-slot:header.stock>
         <div class="text-end">Stock</div>
       </template>
 

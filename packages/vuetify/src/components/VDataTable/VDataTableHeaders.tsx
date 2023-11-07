@@ -48,9 +48,9 @@ type VDataTableHeaderCellColumnSlotProps = {
 export type VDataTableHeadersSlots = {
   headers: HeadersSlotProps
   loader: LoaderSlotProps
-  'column.data-table-select': VDataTableHeaderCellColumnSlotProps
-  'column.data-table-expand': VDataTableHeaderCellColumnSlotProps
-} & { [key: `column.${string}`]: VDataTableHeaderCellColumnSlotProps }
+  'header.data-table-select': VDataTableHeaderCellColumnSlotProps
+  'header.data-table-expand': VDataTableHeaderCellColumnSlotProps
+} & { [key: `header.${string}`]: VDataTableHeaderCellColumnSlotProps }
 
 export const makeVDataTableHeadersProps = propsFactory({
   color: String,
@@ -142,7 +142,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         >
           {{
             default: () => {
-              const columnSlotName = `column.${column.key}` as const
+              const columnSlotName = `header.${column.key}` as const
               const columnSlotProps: VDataTableHeaderCellColumnSlotProps = {
                 column,
                 selectAll,
@@ -157,7 +157,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               if (slots[columnSlotName]) return slots[columnSlotName]!(columnSlotProps)
 
               if (column.key === 'data-table-select') {
-                return slots['column.data-table-select']?.(columnSlotProps) ?? (showSelectAll && (
+                return slots['header.data-table-select']?.(columnSlotProps) ?? (showSelectAll && (
                   <VCheckboxBtn
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
