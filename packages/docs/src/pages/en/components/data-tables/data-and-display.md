@@ -6,7 +6,7 @@ meta:
   keywords: data tables, vuetify data table component, vue data table component
 related:
   - /components/data-tables/basics/
-  - /components/data-tables/pagination/
+  - /components/paginations/
   - /components/tables/
 ---
 

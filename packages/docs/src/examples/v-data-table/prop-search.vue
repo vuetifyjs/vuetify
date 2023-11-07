@@ -1,16 +1,19 @@
 <template>
-  <v-card>
-    <v-card-title>
-      Nutrition
-      <v-spacer></v-spacer>
+  <v-card
+    flat
+    title="Nutrition"
+  >
+    <template v-slot:text>
       <v-text-field
         v-model="search"
-        append-icon="mdi-magnify"
         label="Search"
+        prepend-inner-icon="mdi-magnify"
         single-line
+        variant="outlined"
         hide-details
       ></v-text-field>
-    </v-card-title>
+    </template>
+
     <v-data-table
       :headers="headers"
       :items="desserts"
@@ -23,7 +26,6 @@
   import { ref } from 'vue'
 
   const search = ref('')
-
   const headers = [
     {
       align: 'start',

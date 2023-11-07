@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card flat>
     <v-card-title class="d-flex align-center pe-2">
       <v-icon icon="mdi-video-input-component"></v-icon> &nbsp;
       Find a Graphics Card
@@ -40,6 +40,7 @@
           color="orange-darken-2"
           density="compact"
           size="small"
+          readonly
         ></v-rating>
       </template>
 

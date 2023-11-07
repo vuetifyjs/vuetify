@@ -1,6 +1,5 @@
 <template>
   <v-data-table
-    class="elevation-1"
     :headers="headers"
     :items="desserts"
     items-per-page="5"
