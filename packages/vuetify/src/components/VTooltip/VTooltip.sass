@@ -1,7 +1,10 @@
 @use '../../styles/settings'
+@use '../../styles/tools'
 @use './variables' as *
 
 .v-tooltip
+  @include tools.speechbubble($tooltip-speech-bubble...)
+
   > .v-overlay__content
     background: $tooltip-background-color
     color: $tooltip-text-color

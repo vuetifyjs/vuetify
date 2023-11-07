@@ -1,0 +1,36 @@
+@use 'sass:map'
+@use '../settings'
+
+@mixin speechbubble ($background, $z, $name)
+  &--speech-bubble
+    &-bottom:not(.#{$name}__container--elevated)
+      padding-bottom: calc(5px + var(--speech-bubble-pointer-height)) !important
+      clip-path: polygon(0 0,100% 0, 100% calc(100% - var(--speech-bubble-pointer-height)), calc(var(--speech-bubble-pointer-position) - var(--speech-bubble-pointer-width)/2) calc(100% - var(--speech-bubble-pointer-height)), var(--speech-bubble-pointer-position) 100%, calc(var(--speech-bubble-pointer-position) + var(--speech-bubble-pointer-width)/2) calc(100% - var(--speech-bubble-pointer-height)), 0 calc(100% - var(--speech-bubble-pointer-height)))
+
+    &-top:not(.#{$name}__container--elevated)
+      padding-top: calc(5px + var(--speech-bubble-pointer-height)) !important
+      clip-path: polygon(0 var(--speech-bubble-pointer-height), calc(var(--speech-bubble-pointer-position) - var(--speech-bubble-pointer-width)/2) var(--speech-bubble-pointer-height), var(--speech-bubble-pointer-position) 0, calc(var(--speech-bubble-pointer-position) + var(--speech-bubble-pointer-width)/2) var(--speech-bubble-pointer-height), 100% var(--speech-bubble-pointer-height), 100% 100%,0 100%)
+
+    &-left:not(.#{$name}__container--elevated)
+      padding-left: calc(16px + var(--speech-bubble-pointer-width)) !important
+      clip-path: polygon(100% 0,100% 100%, var(--speech-bubble-pointer-width) 100%, var(--speech-bubble-pointer-width) calc(var(--speech-bubble-pointer-position) - var(--speech-bubble-pointer-height)/2), 0 var(--speech-bubble-pointer-position), var(--speech-bubble-pointer-width) calc(var(--speech-bubble-pointer-position) + var(--speech-bubble-pointer-height)/2), var(--speech-bubble-pointer-width) 0)
+
+    &-right:not(.#{$name}__container--elevated)
+      padding-right: calc(16px + var(--speech-bubble-pointer-width)) !important
+      clip-path: polygon(0 100%,0 0, calc(100% - var(--speech-bubble-pointer-width)) 0, calc(100% - var(--speech-bubble-pointer-width)) calc(var(--speech-bubble-pointer-position) - var(--speech-bubble-pointer-height)/2),100% var(--speech-bubble-pointer-position),calc(100% - var(--speech-bubble-pointer-width)) calc(var(--speech-bubble-pointer-position) + var(--speech-bubble-pointer-height)/2),calc(100% - var(--speech-bubble-pointer-width)) 100%)
+
+  &--variant-outlined:is(.#{$name}--speech-bubble)
+    background: $background
+    border: none
+
+  &__container
+    &--elevated
+      overflow: auto
+      filter: drop-shadow(map.get(settings.$drop-shadow-key-umbra, $z)) drop-shadow(map.get(settings.$drop-shadow-key-penumbra, $z)) drop-shadow(map.get(settings.$drop-shadow-key-ambient, $z))
+
+    &--outlined:is(.#{$name}--speech-bubble)
+      padding: 0 !important
+      width: fit-content
+      margin: auto
+      background: currentColor
+      border: thin solid currentColor
