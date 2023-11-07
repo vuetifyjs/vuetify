@@ -60,6 +60,14 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
     const { isFocused, focus, blur } = useFocus(props)
     const control = ref<VSelectionControl>()
 
+    const color = computed(() => {
+      return (
+        model.value &&
+        !props.error &&
+        !props.disabled
+      ) ? props.color : undefined
+    })
+
     const loaderColor = computed(() => {
       return typeof props.loading === 'string' && props.loading !== ''
         ? props.loading
@@ -87,6 +95,7 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
 
       return (
         <VInput
+          id={ id.value }
           class={[
             'v-switch',
             { 'v-switch--inset': props.inset },
@@ -94,11 +103,12 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
             loaderClasses.value,
             props.class,
           ]}
+          focused={ isFocused.value }
           style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
-          id={ id.value }
-          focused={ isFocused.value }
+          baseColor={ color.value }
+          color={ color.value }
         >
           {{
             ...slots,

@@ -43,6 +43,14 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
     const uid = getUid()
     const id = computed(() => props.id || `checkbox-${uid}`)
 
+    const color = computed(() => {
+      return (
+        model.value &&
+        !props.error &&
+        !props.disabled
+      ) ? props.color : undefined
+    })
+
     useRender(() => {
       const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
       const [inputProps, _1] = VInput.filterProps(props)
@@ -56,6 +64,8 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
           ]}
           { ...rootAttrs }
           { ...inputProps }
+          baseColor={ color.value }
+          color={ color.value }
           v-model={ model.value }
           id={ id.value }
           focused={ isFocused.value }

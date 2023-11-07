@@ -91,6 +91,14 @@ export const VSlider = genericComponent<VSliderSlots>()({
     })
 
     const { isFocused, focus, blur } = useFocus(props)
+
+    const color = computed(() => {
+      return (
+        !props.error &&
+        !props.disabled
+      ) ? props.color : undefined
+    })
+
     const trackStop = computed(() => position(model.value))
 
     useRender(() => {
@@ -110,9 +118,11 @@ export const VSlider = genericComponent<VSliderSlots>()({
             rtlClasses.value,
             props.class,
           ]}
+          focused={ isFocused.value }
           style={ props.style }
           { ...inputProps }
-          focused={ isFocused.value }
+          baseColor={ color.value }
+          color={ color.value }
         >
           {{
             ...slots,

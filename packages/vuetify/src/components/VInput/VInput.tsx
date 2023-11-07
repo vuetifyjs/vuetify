@@ -6,6 +6,7 @@ import { useInputIcon } from '@/components/VInput/InputIcon'
 import { VMessages } from '@/components/VMessages/VMessages'
 
 // Composables
+import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
@@ -41,6 +42,8 @@ export const makeVInputProps = propsFactory({
     type: Boolean,
     default: true,
   },
+  color: String,
+  baseColor: String,
   prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hint: String,
@@ -105,6 +108,12 @@ export const VInput = genericComponent<VInputSlots>()({
       validationClasses,
     } = useValidation(props, 'v-input', id)
 
+    const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
+      return props.error || props.disabled ? undefined
+        : props.focused ? props.color
+        : props.baseColor
+    }))
+
     const slotProps = computed<VInputSlot>(() => ({
       id,
       messagesId,
@@ -154,7 +163,7 @@ export const VInput = genericComponent<VInputSlots>()({
           style={ props.style }
         >
           { hasPrepend && (
-            <div key="prepend" class="v-input__prepend">
+            <div key="prepend" class={['v-input__prepend', textColorClasses.value]} style={ textColorStyles.value }>
               { slots.prepend?.(slotProps.value) }
 
               { props.prependIcon && (
@@ -173,7 +182,7 @@ export const VInput = genericComponent<VInputSlots>()({
           )}
 
           { hasAppend && (
-            <div key="append" class="v-input__append">
+            <div key="append" class={['v-input__append', textColorClasses.value]} style={ textColorStyles.value }>
               { props.appendIcon && (
                 <InputIcon
                   key="append-icon"
