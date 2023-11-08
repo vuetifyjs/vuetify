@@ -6,6 +6,8 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvi
 import { useLocale } from '@/composables/locale'
 
 // Utilities
+import { inject } from 'vue'
+import { VStepperSymbol } from './VStepperWindow'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -54,6 +56,19 @@ export const VStepperActions = genericComponent<VStepperActionsSlots>()({
 
     function onClickNext () {
       emit('click:next')
+    }
+
+    const group = inject(VStepperSymbol, null)
+
+    // Overwrite prev/next methods in group in case of user defined actions
+    if (group) {
+      group.prev = () => {
+        onClickPrev()
+      }
+
+      group.next = () => {
+        onClickNext()
+      }
     }
 
     useRender(() => {
