@@ -325,6 +325,8 @@ export const VAutocomplete = genericComponent<new <
           value.splice(index, 1)
           model.value = value
         }
+
+        search.value = ''
       } else {
         model.value = [item]
 
