@@ -16,7 +16,7 @@ jobs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
       - id: skip_check
-        if: ${{ !startswith(github.ref, 'refs/tags/v') }}
+        if: ${{ !startswith(github.ref, 'refs/tags/v') && github.ref != 'refs/heads/master' }}
         uses: fkirc/skip-duplicate-actions@master
         with:
           skip_after_successful_duplicate: 'true'
