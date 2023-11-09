@@ -243,7 +243,12 @@
   transform-origin: left center
   transition: $field-transition-timing
   transition-property: opacity, transform
+  width: calc(100% - var(--v-field-padding-start))
   z-index: 1
+
+  & > *
+    text-overflow: ellipsis
+    overflow: hidden
 
   .v-field--variant-underlined &,
   .v-field--variant-plain &
