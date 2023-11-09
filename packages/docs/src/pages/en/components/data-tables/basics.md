@@ -41,7 +41,7 @@ The standard data table presumes that the entire data set is available locally. 
 
 ### Server side tables
 
-This variant of the data table is meant to be used when the data set you are displaying comes directly from a server, and you don't want to load all rows at mount. Sorting, pagination, and filtering is supported, but none of it is handled by the component. Instead it is meant to be handled by the server.
+This variant of the data table is meant to be used for very large datasets, where it would be inefficient to load all the data into the client. It supports sorting, filtering, pagination, and selection like a standard data table, but all the logic must be handled externally by your backend or database.
 
 Find more information and examples on the [Server side tables](/components/data-tables/server-side-tables) page.
 
@@ -49,7 +49,7 @@ Find more information and examples on the [Server side tables](/components/data-
 
 ### Virtual tables
 
-The virtual variant of the data table relies, like the standard variant, on all data being available locally. But unlike the standard variant it uses virtualization to only render a small portion of the rows. This makes it well suited for displaying large data sets. It supports sorting and filtering, but not pagination.
+The virtual variant of the data table relies, like the standard variant, on all data being available locally. But unlike the standard variant it uses virtualization to only render a small portion of the rows. This makes it well suited for displaying large data sets. It supports client-side sorting and filtering, but not pagination.
 
 Find more information and examples on the [Virtual tables](/components/data-tables/virtual-tables) page.
 
@@ -58,6 +58,70 @@ Find more information and examples on the [Virtual tables](/components/data-tabl
 ## Guide
 
 The `v-data-table` component is a simple and powerful table manipulation component. It is perfect for showing large amounts of tabular data.
+
+### Items
+
+Table items can be objects with almost any shape or number of properties. The only requirement is some form of unique identifier if row selection is being utilized.
+
+### Headers
+
+The headers array is the core of the table. It defines which properties to display, their associated labels, how they should be sorted, and what they should look like.
+<br>
+All properties are optional, but at least one of **title**, **value**, or **key** should be present to display more than just an empty column:
+
+```js
+headers = [
+  { title: 'No data, just a label' },
+  { key: 'quantity' },
+  { value: 'price' },
+]
+```
+Without any headers defined, the table will use all the keys of the first item as headers.
+
+Headers can also be a tree structure with a **children** property to create multi-row header labels with rowspan and colspan calculated automatically.
+<br>
+Leaf nodes (objects without **children**) will be used as columns for each item.
+<br>
+Branch nodes (objects with **children**) support all the same sorting and filtering options as leaf nodes, but cannot be used as columns.
+
+<example file="v-data-table/headers-multiple" />
+
+#### Keys and values
+
+The **key** property is used to identify the column in slots, events, filters, and sort functions. It will default to the **value** property if **value** is a string.
+<br>
+**value** maps the column to a property in the items array. If **value** is not defined it will default to **key**, so key and value are interchangeable in most cases. The exception to this is reserved keys like `data-table-select` and `data-table-expand` which must be defined as **key** to work properly.
+<br>
+**key** and **value** both support dot notation to access properties of nested objects, and **value** can also be a function to combine multiple properties or do other custom formatting. If **value** is not a string then **key** must be defined.
+
+```js
+items = [
+  {
+    id: 1,
+    name: {
+      first: 'John',
+      last: 'Doe',
+    },
+  }
+]
+headers = [
+  { title: 'First Name', value: 'name.first' },
+  { title: 'Last Name', key: 'name.last' },
+  {
+    title: 'Full Name',
+    key: 'fullName',
+    value: item => `${item.name.first} ${item.name.last}`,
+  },
+]
+```
+
+#### Sorting, filtering, pagination
+
+See [Data and display](/components/data-tables/data-and-display).
+
+#### Customisation
+
+Other options are available for setting **width**, **align**, **fixed**, or pass custom props to the header element with **headerProps** and row cells with **cellProps**.
 
 ### Props
 
@@ -132,32 +196,6 @@ You can use the dynamic slots `item.<key>` to customize only certain columns. `<
 When using the **group-by** prop, you can customize the group header with the `group-header` slot.
 
 <example file="v-data-table/slot-group-header" />
-
-## Headers and columns
-
-In Data table components, **headers** and **columns** serve unique purposes. You supply **headers** to the component as either a single or double array, defining one or more header rows. Whereas **columns** represent a single array extracted from the final row of headers, denoting the actual columns in the table.
-
-For example, the following code snippet is a basic header array:
-
-```javascript
-const headers = [
-  {
-    text: 'Pyramid',
-    align: 'start',
-    sortable: false,
-    value: 'name'
-  },
-  { text: 'Location', value: 'location' },
-  { text: 'Height (m)', value: 'height' },
-  { text: 'Base (m)', value: 'base' },
-  { text: 'Volume (cu m)', value: 'volume' },
-  { text: 'Construction Date', value: 'constructionDate' },
-]
-```
-
-Consider the following `data-table` with multi-row headers utilizing `colspan` and `rowspan` attributes. The **Properties** header isn't included in the **columns** array since it's not in the last row. Conversely, **Dessert (100g serving)** is included because it extends across both rows with `rowspan`.
-
-<example file="v-data-table/headers-multiple" />
 
 ## Examples
 

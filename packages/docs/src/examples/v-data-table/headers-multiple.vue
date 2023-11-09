@@ -8,6 +8,21 @@
 </template>
 
 <script setup>
+  const headers = [
+    { title: 'Pyramid', value: 'name' },
+    { title: 'Location', value: 'location' },
+    { title: 'Construction Date', value: 'constructionDate' },
+    {
+      title: 'Dimensions',
+      align: 'center',
+      children: [
+        { title: 'Height (m)', value: 'height' },
+        { title: 'Base (m)', value: 'base' },
+        { title: 'Volume (m³)', value: 'volume' },
+      ],
+    },
+  ]
+
   const items = [
     {
       name: 'Great Pyramid of Giza',
@@ -50,24 +65,25 @@
       constructionDate: 'c. 200 CE',
     },
   ]
-  const headers = [
-    {
-      text: 'Pyramid',
-      align: 'start',
-      sortable: false,
-      value: 'name',
-    },
-    { text: 'Location', value: 'location' },
-    { text: 'Height (m)', value: 'height' },
-    { text: 'Base (m)', value: 'base' },
-    { text: 'Volume (cu m)', value: 'volume' },
-    { text: 'Construction Date', value: 'constructionDate' },
-  ]
 </script>
 
 <script>
   export default {
     data: () => ({
+      headers: [
+        { title: 'Pyramid', value: 'name' },
+        { title: 'Location', value: 'location' },
+        { title: 'Construction Date', value: 'constructionDate' },
+        {
+          title: 'Dimensions',
+          align: 'center',
+          children: [
+            { title: 'Height (m)', value: 'height' },
+            { title: 'Base (m)', value: 'base' },
+            { title: 'Volume (m³)', value: 'volume' },
+          ],
+        },
+      ],
       desserts: [
         {
           name: 'Great Pyramid of Giza',
@@ -109,19 +125,6 @@
           volume: '1237097',
           constructionDate: 'c. 200 CE',
         },
-      ],
-      headers: [
-        {
-          text: 'Pyramid',
-          align: 'start',
-          sortable: false,
-          value: 'name',
-        },
-        { text: 'Location', value: 'location' },
-        { text: 'Height (m)', value: 'height' },
-        { text: 'Base (m)', value: 'base' },
-        { text: 'Volume (cu m)', value: 'volume' },
-        { text: 'Construction Date', value: 'constructionDate' },
       ],
     }),
   }
