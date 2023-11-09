@@ -8,7 +8,7 @@ import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from 
 import Piscina from 'piscina'
 import { addDescriptions, addDirectiveDescriptions, addPropData, stringifyProps } from './utils'
 import * as os from 'os'
-import mkdirp from 'mkdirp'
+import { mkdirp } from 'mkdirp'
 import { createVeturApi } from './vetur'
 import rimraf from 'rimraf'
 import { createWebTypesApi } from './web-types'
@@ -31,7 +31,7 @@ const reset = '\x1b[0m'
 const red = '\x1b[31m'
 const blue = '\x1b[34m'
 
-const componentsInfo = {
+const componentsInfo: Record<string, { from: string }> = {
   ...importMap.components,
   ...importMapLabs.components,
 }
@@ -43,7 +43,7 @@ const run = async () => {
 
   // Components
   const pool = new Piscina({
-    filename: './lib/worker.mjs',
+    filename: path.resolve('./src/worker.ts'),
     niceIncrement: 10,
     maxThreads: inspector.url() ? 1 : Math.max(1, Math.floor(Math.min(os.cpus().length / 2, os.freemem() / (1.1 * 1024 ** 3)))),
   })
@@ -83,7 +83,7 @@ const run = async () => {
 
   // Composables
   if (!argv.skipComposables) {
-    const composables = await Promise.all(generateComposableDataFromTypes().map(async composable => {
+    const composables = await Promise.all((await generateComposableDataFromTypes()).map(async composable => {
       console.log(blue, composable.name, reset)
       const kebabName = kebabCase(composable.name)
       await addDescriptions(composable.name, composable.data, locales)
@@ -98,7 +98,7 @@ const run = async () => {
   // Directives
   let directives: any[] = []
   if (!argv.skipDirectives) {
-    directives = await Promise.all(generateDirectiveDataFromTypes().map(async directive => {
+    directives = await Promise.all((await generateDirectiveDataFromTypes()).map(async directive => {
       const name = `v-${kebabCase(directive.name)}`
       console.log(blue, name, reset)
       await addDirectiveDescriptions(name, directive, locales)
