@@ -76,6 +76,7 @@ headers = [
   { value: 'price' },
 ]
 ```
+
 Without any headers defined, the table will use all the keys of the first item as headers.
 
 Headers can also be a tree structure with a **children** property to create multi-row header labels with rowspan and colspan calculated automatically.
@@ -166,9 +167,7 @@ When wanting to use a checkbox component inside of a slot template in your data 
 You can use the dynamic slots `header.<key>` to customize only certain columns. `<key>` corresponds to the **key** property in the items found in the **headers** prop.
 
 ::: info
-
 There are two built-in slots for customizing both the select (`header.data-table-select`) and expand (`header.data-table-expand`) columns when using **show-select** and **show-expand** props respectively.
-
 :::
 
 <example file="v-data-table/slot-header" />
