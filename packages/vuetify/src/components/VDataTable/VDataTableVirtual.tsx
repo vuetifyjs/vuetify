@@ -61,7 +61,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     'update:expanded': (value: any) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { attrs, slots }) {
     const { groupBy } = createGroupBy(props)
     const { sortBy, multiSort, mustSort } = createSort(props)
 
@@ -186,6 +186,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                     { slots['body.prepend']?.(slotProps.value) }
 
                     <VDataTableRows
+                      { ...attrs }
                       { ...dataTableRowsProps }
                       items={ displayItems.value }
                     >

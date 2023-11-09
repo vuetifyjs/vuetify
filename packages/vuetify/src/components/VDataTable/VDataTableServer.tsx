@@ -49,7 +49,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
     'update:groupBy': (value: any) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { attrs, slots }) {
     const { groupBy } = createGroupBy(props)
     const { sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
@@ -161,6 +161,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
                   { slots['body.prepend']?.(slotProps.value) }
                   { slots.body ? slots.body(slotProps.value) : (
                     <VDataTableRows
+                      { ...attrs }
                       { ...dataTableRowsProps }
                       items={ flatItems.value }
                       v-slots={ slots }
