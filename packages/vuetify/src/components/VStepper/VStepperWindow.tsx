@@ -6,7 +6,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey } from 'vue'
@@ -15,9 +15,7 @@ import type { GroupProvide } from '@/composables/group'
 export const VStepperSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-stepper')
 
 export const makeVStepperWindowProps = propsFactory({
-  ...makeVWindowProps({
-    mandatory: false as const,
-  }),
+  ...omit(makeVWindowProps(), ['continuous', 'nextIcon', 'prevIcon', 'showArrows', 'touch', 'mandatory']),
 }, 'VStepperWindow')
 
 export const VStepperWindow = genericComponent()({
@@ -53,9 +51,12 @@ export const VStepperWindow = genericComponent()({
 
       return (
         <VWindow
+          _as="VStepperWindow"
           { ...windowProps }
           v-model={ model.value }
           class="v-stepper-window"
+          mandatory={ false }
+          touch={ false }
           v-slots={ slots }
         />
       )
