@@ -199,6 +199,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
             props.style,
           ]}
           disabled={ isDisabled.value || undefined }
+          tabindex={ props.loading ? '-1' : undefined }
           href={ link.href.value }
           v-ripple={[
             !isDisabled.value && props.ripple,
