@@ -4,7 +4,6 @@
     :headers="headers"
     :items="desserts"
     :sort-by="sortBy"
-    class="elevation-1"
     item-value="name"
   ></v-data-table>
 </template>

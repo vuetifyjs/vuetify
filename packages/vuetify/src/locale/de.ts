@@ -2,6 +2,10 @@ export default {
   badge: 'Abzeichen',
   open: 'Öffnen',
   close: 'Schließen',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Abbrechen',
+  },
   dataIterator: {
     noResultsText: 'Keine Elemente gefunden',
     loadingText: 'Lade Elemente...',
@@ -31,8 +35,7 @@ export default {
     divider: 'bis',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Abbrechen',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Daten auswählen',
       header: 'Daten eingeben',

@@ -1,237 +1,53 @@
-@import './_variables.scss'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
 
-+theme(v-stepper) using ($material)
-  background: map-get($material, 'bg-color')
+.v-stepper.v-sheet
+  @include tools.elevation($stepper-elevation)
+  @include tools.rounded($stepper-border-radius)
 
-  .v-stepper__step
-    &:not(.v-stepper__step--active):not(.v-stepper__step--complete):not(.v-stepper__step--error)
-      .v-stepper__step__step
-        background: rgba(map-get($material, 'fg-color'), map-get($material, 'disabledORhints-text-percent'))
-
-    &__step
-      color: map-deep-get($material, 'stepper', 'active')
-
-      .v-icon
-        color: map-deep-get($material, 'stepper', 'active')
-
-  .v-stepper__header
-    .v-divider
-      border-color: rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
-
-  .v-stepper__step
-    &--active
-      .v-stepper__label
-        text-shadow: 0px 0px 0px rgba(map-get($material, 'fg-color'), 1)
-
-    &--editable:hover
-      background: rgba(map-get($material, 'fg-color'), .06)
-
-      .v-stepper__label
-        text-shadow: 0px 0px 0px rgba(map-get($material, 'fg-color'), 1)
-
-    &--complete
-      .v-stepper__label
-        color: map-deep-get($material, 'stepper', 'completed')
-
-    &--inactive
-      &.v-stepper__step--editable:not(.v-stepper__step--error)
-        &:hover
-          .v-stepper__step__step
-            background: map-deep-get($material, 'stepper', 'hover')
-
-  .v-stepper__label
-    color: rgba(map-get($material, 'fg-color'), map-get($material, 'disabledORhints-text-percent'))
-
-    small
-      color: rgba(map-get($material, 'fg-color'), map-get($material, 'secondary-text-percent'))
-
-  &--non-linear
-    .v-stepper__step:not(.v-stepper__step--complete):not(.v-stepper__step--error)
-      .v-stepper__label
-        color: rgba(map-get($material, 'fg-color'), map-get($material, 'secondary-text-percent'))
-
-  &--vertical
-    .v-stepper__content:not(:last-child)
-      +ltr()
-        border-left: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
-
-      +rtl()
-        border-right: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
-
-+sheet(v-stepper, $stepper-elevation, $stepper-border-radius, $stepper-shaped-border-radius)
-
-.v-stepper
-  border-radius: $stepper-border-radius
   overflow: hidden
-  position: relative
 
-  &__header
-    height: $stepper-header-height
-    align-items: stretch
-    display: flex
-    flex-wrap: wrap
-    justify-content: space-between
-    +elevation($stepper-header-elevation)
+  &.v-stepper--flat
+    @include tools.elevation(0)
+
+.v-stepper-header
+  @include tools.elevation($stepper-header-elevation)
+
+  align-items: center
+  display: flex
+  position: relative
+  overflow-x: auto
+  justify-content: space-between
+  z-index: 1
+
+  .v-divider
+    margin: $stepper-header-divider-margin
+
+    &:last-child
+      margin-inline-end: 0
+
+    &:first-child
+      margin-inline-start: 0
+
+  .v-stepper--alt-labels &
+    height: auto
 
     .v-divider
-      align-self: center
-      margin: $stepper-header-divider-margin
+      align-self: flex-start
+      margin: $stepper-alt-labels-header-divider
 
-  &__items
-    position: relative
-    overflow: hidden
+.v-stepper-window
+  margin: $stepper-window-margin
 
-  &__step__step
-    align-items: center
-    border-radius: 50%
-    display: inline-flex
-    font-size: $stepper-step-step-font-size
-    justify-content: center
-    height: $stepper-step-step-height
-    min-width: $stepper-step-step-min-width
-    width: $stepper-step-step-width
-    transition: .3s map-get($transition, 'fast-in-fast-out')
+.v-stepper-actions
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: $stepper-actions-padding
 
-    +ltr()
-      margin-right: $stepper-step-step-margin
+  .v-stepper &
+    padding: $stepper-actions-stepper-padding
 
-    +rtl()
-      margin-left: $stepper-step-step-margin
-
-    .v-icon.v-icon
-      font-size: $stepper-step-step-icon-font-size
-
-      &.v-icon--svg
-        height: $stepper-step-step-icon-font-size
-        width: $stepper-step-step-icon-font-size
-
-  &__step
-    align-items: center
-    display: flex
-    flex-direction: row
-    padding: $stepper-step-padding
-    position: relative
-
-    &--active
-      .v-stepper__label
-        transition: .3s map-get($transition, 'ease-in-out')
-
-    &--editable
-      cursor: pointer
-
-    &.v-stepper__step--error
-      .v-stepper__step__step
-        background: transparent
-        color: inherit
-
-        .v-icon
-          font-size: $stepper-step-error-icon-font-size
-          color: inherit
-
-      .v-stepper & .v-stepper__label
-        color: inherit
-        text-shadow: none
-        font-weight: 500
-
-        small
-          color: inherit
-
-  &__label
-    display: block
-    flex-grow: 1
-    line-height: $stepper-label-line-height
-
-    +ltr()
-      text-align: left
-
-    +rtl()
-      text-align: right
-
-    small
-      display: block
-      font-size: $stepper-label-small-font-size
-      font-weight: $stepper-label-small-font-weight
-      text-shadow: none
-
-  &__wrapper
-    overflow: hidden
-    transition: none
-
-  &__content
-    top: 0
-    padding: $stepper-content-padding
-    flex: 1 0 auto
-    // Chrome has an issue with overflow hidden for rendering
-    // Originally used translateZ but this messes up fixed
-    // elements within the stepper
-    // Fix for #512 and #620
-    // overflow: hidden
-    width: 100%
-
-    > .v-btn
-      margin: $stepper-content-btn-margin
-
-  &--flat
-    +elevation(0, true)
-
-  &--is-booted
-    .v-stepper__content, .v-stepper__wrapper
-      transition: .3s map-get($transition, 'swing')
-
-  &--vertical
-    padding-bottom: $stepper-vertical-padding-bottom
-
-    .v-stepper__content
-      +ltr()
-        padding: $stepper-vertical-content-ltr-padding
-      +rtl()
-        padding: $stepper-vertical-content-rtl-padding
-
-      width: auto
-      +ltr()
-        margin: $stepper-vertical-content-ltr-margin
-
-      +rtl()
-        margin: $stepper-vertical-content-rtl-margin
-
-    .v-stepper__step
-      padding: $stepper-vertical-step-padding
-
-    .v-stepper__step__step
-      +ltr()
-        margin-right: $stepper-vertical-step-step-margin
-
-      +rtl()
-        margin-left: $stepper-vertical-step-step-margin
-
-  &--alt-labels
-    .v-stepper__header
-      height: auto
-
-      .v-divider
-        margin: $stepper-alt-labels-header-divider
-        align-self: flex-start
-
-    .v-stepper__step
-      flex-direction: column
-      justify-content: flex-start
-      align-items: center
-      flex-basis: $stepper-alt-labels-flex-basis
-
-      small
-        text-align: center
-
-    .v-stepper__step__step
-      margin-bottom: $stepper-alt-labels-step-step-margin-bottom
-      margin-left: 0
-      margin-right: 0
-
-// TODO: use md-and-up
-@media #{map-get($display-breakpoints, 'sm-and-down')}
-  .v-stepper:not(.v-stepper--vertical)
-    .v-stepper__label
-      display: none
-
-    .v-stepper__step__step
-      margin-left: 0
-      margin-right: 0
+  .v-stepper-window-item &
+    padding: $stepper-actions-stepper-window-item-padding

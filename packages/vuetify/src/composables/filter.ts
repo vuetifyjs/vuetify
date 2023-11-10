@@ -136,6 +136,7 @@ export function useFilter <T extends InternalItem> (
   query: Ref<string | undefined> | (() => string | undefined),
   options?: {
     transform?: (item: T) => {}
+    customKeyFilter?: MaybeRef<FilterKeyFunctions | undefined>
   }
 ) {
   const filteredItems: Ref<T[]> = ref([])
@@ -157,7 +158,10 @@ export function useFilter <T extends InternalItem> (
       transformedItems.value,
       strQuery,
       {
-        customKeyFilter: props.customKeyFilter,
+        customKeyFilter: {
+          ...props.customKeyFilter,
+          ...unref(options?.customKeyFilter),
+        },
         default: props.customFilter,
         filterKeys: props.filterKeys,
         filterMode: props.filterMode,

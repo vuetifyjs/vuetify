@@ -130,8 +130,7 @@
     .v-btn__append,
     .v-btn__content > .v-icon--start,
     .v-btn__content > .v-icon--end
-      margin-inline-start: 0
-      margin-inline-end: 0
+      margin-inline: 0
 
     .v-btn__prepend,
     .v-btn__content > .v-icon--start
@@ -144,6 +143,9 @@
     @at-root
       @include button-sizes($button-stacked-sizes, true)
       @include button-density('height', $button-stacked-density)
+
+  &--slim
+    padding: $button-slim-padding
 
   &--rounded
     @include tools.rounded($button-rounded-border-radius)
@@ -181,13 +183,11 @@
 
 .v-btn__prepend
   grid-area: prepend
-  margin-inline-start: $button-margin-start
-  margin-inline-end: $button-margin-end
+  margin-inline: $button-margin-start $button-margin-end
 
 .v-btn__append
   grid-area: append
-  margin-inline-start: $button-margin-end
-  margin-inline-end: $button-margin-start
+  margin-inline: $button-margin-end $button-margin-start
 
 .v-btn__content
   grid-area: content
@@ -195,12 +195,10 @@
   white-space: $button-white-space
 
   > .v-icon--start
-    margin-inline-start: $button-margin-start
-    margin-inline-end: $button-margin-end
+    margin-inline: $button-margin-start $button-margin-end
 
   > .v-icon--end
-    margin-inline-start: $button-margin-end
-    margin-inline-end: $button-margin-start
+    margin-inline: $button-margin-end $button-margin-start
 
   .v-btn--stacked &
     white-space: normal
@@ -218,17 +216,9 @@
 
 // VCard
 .v-btn
-  .v-card-actions &
-    padding: $button-card-actions-padding
-
   ~ .v-btn:not(.v-btn-toggle .v-btn)
     .v-card-actions &
       margin-inline-start: $button-card-actions-margin
-
-// VBanner
-.v-btn
-  .v-banner-actions &
-    padding: $button-banner-actions-padding
 
 // VPagination
 .v-btn
@@ -240,8 +230,3 @@
 
     .v-pagination__item--is-active &
       opacity: $button-pagination-active-overlay-opacity
-
-// VSnackbar
-.v-btn
-  .v-snackbar-actions &
-    padding: $button-snackbar-action-padding

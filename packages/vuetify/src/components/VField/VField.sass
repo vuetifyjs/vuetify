@@ -85,7 +85,7 @@
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
-          --v-field-padding-bottom: #{15px + $modifier * .5}
+          --v-field-padding-bottom: #{16px + $modifier * .5}
 
   &--variant-plain,
   &--variant-underlined
@@ -96,12 +96,12 @@
     &.v-field
       --v-field-padding-start: 0px
       --v-field-padding-end: 0px
-      --v-field-padding-top: var(--v-field-padding-top--plain-underlined, 6px)
 
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
           --v-input-control-height: #{$field-control-underlined-height + $modifier}
+          --v-field-padding-top: #{math.max(0px, 4px + $modifier * .25)}
           --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)}
 
   &--flat
@@ -121,19 +121,27 @@
 /* endregion */
 /* region ELEMENTS */
 .v-field__input
+  align-items: center
   color: inherit
+  column-gap: $field-input-column-gap
   display: flex
   flex-wrap: wrap
   letter-spacing: $field-letter-spacing
   opacity: $field-input-opacity
   min-height: $field-input-min-height
   min-width: 0
-  padding-inline-start: var(--v-field-padding-start)
-  padding-inline-end: var(--v-field-padding-end)
+  padding-inline: var(--v-field-padding-start) var(--v-field-padding-end)
   padding-top: var(--v-field-input-padding-top)
   padding-bottom: var(--v-field-input-padding-bottom)
   position: relative
   width: 100%
+
+  $root: &
+
+  @at-root
+    @include tools.density('v-input', $input-density) using ($modifier)
+      @at-root #{selector.nest(&, $root)}
+        row-gap: #{$field-input-row-gap + $modifier * .25}
 
   input
     letter-spacing: inherit
@@ -217,8 +225,7 @@
   cursor: pointer
   opacity: 0
   overflow: hidden
-  margin-inline-start: $field-clearable-margin
-  margin-inline-end: $field-clearable-margin
+  margin-inline: $field-clearable-margin
   transition: $field-transition-timing
   transition-property: opacity, transform, width
 
@@ -366,24 +373,16 @@
       border-top-width: var(--v-field-border-width)
       border-bottom-width: var(--v-field-border-width)
       border-inline-start-width: var(--v-field-border-width)
+      border-start-start-radius: inherit
+      border-start-end-radius: 0
+      border-end-end-radius: 0
+      border-end-start-radius: inherit
 
       @at-root
         #{selector.append('.v-field--rounded', &)},
         #{selector.append('[class^="rounded-"]', &)},
         #{selector.append('[class*=" rounded-"]', &)}
           flex-basis: calc(var(--v-input-control-height) / 2 + 2px)
-
-      @include tools.ltr()
-        border-top-left-radius: inherit
-        border-top-right-radius: 0
-        border-bottom-right-radius: 0
-        border-bottom-left-radius: inherit
-
-      @include tools.rtl()
-        border-top-left-radius: 0
-        border-top-right-radius: inherit
-        border-bottom-right-radius: inherit
-        border-bottom-left-radius: 0
 
     &__notch
       flex: none
@@ -412,18 +411,11 @@
       border-top-width: var(--v-field-border-width)
       border-bottom-width: var(--v-field-border-width)
       border-inline-end-width: var(--v-field-border-width)
+      border-start-start-radius: 0
+      border-start-end-radius: inherit
+      border-end-end-radius: inherit
+      border-end-start-radius: 0
 
-      @include tools.ltr()
-        border-top-left-radius: 0
-        border-top-right-radius: inherit
-        border-bottom-right-radius: inherit
-        border-bottom-left-radius: 0
-
-      @include tools.rtl()
-        border-top-left-radius: inherit
-        border-top-right-radius: 0
-        border-bottom-right-radius: 0
-        border-bottom-left-radius: inherit
 /* endregion */
 /* region LOADER */
 .v-field__loader
@@ -500,11 +492,7 @@
     flex-direction: row-reverse
 
   .v-field__input, input
-    @include tools.ltr()
-      text-align: right
-
-    @include tools.rtl()
-      text-align: left
+    text-align: end
 
 .v-field--variant-filled,
 .v-field--variant-underlined

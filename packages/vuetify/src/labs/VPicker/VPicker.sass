@@ -1,3 +1,4 @@
+@use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -27,8 +28,6 @@
   justify-content: flex-end
 
   .v-btn
-    padding-inline-start: 8px
-    padding-inline-end: 8px
     min-width: 48px
 
     &:not(:last-child)
@@ -44,8 +43,7 @@
   text-transform: uppercase
   font-size: .75rem
   grid-area: title
-  padding-inline-start: 24px
-  padding-inline-end: 12px
+  padding-inline: 24px 12px
   padding-top: 16px
   padding-bottom: 16px
   font-weight: 600

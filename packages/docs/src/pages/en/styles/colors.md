@@ -32,7 +32,7 @@ Vuetify has an optional javascript color pack that you can import and use within
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
 
-import colors from 'vuetify/lib/util/colors'
+import colors from 'vuetify/util/colors'
 
 export default createVuetify({
   theme: {

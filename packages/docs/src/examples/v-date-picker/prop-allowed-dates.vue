@@ -12,12 +12,11 @@
 </template>
 
 <script setup>
-  import { useDate } from 'vuetify/labs/date'
+  import { useDate } from 'vuetify'
   import { ref } from 'vue'
 
+  const date = ref(new Date('2018-03-02'))
   const adapter = useDate()
-
-  const date = ref('2018-03-02')
 
   function allowedDates (val) {
     return parseInt(adapter.toISO(val).split('-')[2], 10) % 2 === 0
@@ -25,18 +24,14 @@
 </script>
 
 <script>
-  import { useDate } from 'vuetify/labs/date'
-
-  const adapter = useDate()
-
   export default {
     data: () => ({
-      date: '2018-03-02',
+      date: new Date('2018-03-02'),
     }),
 
     methods: {
       allowedDates: val => {
-        return parseInt(adapter.toISO(val).split('-')[2], 10) % 2 === 0
+        return parseInt(this.$vuetify.date.toISO(val).split('-')[2], 10) % 2 === 0
       },
     },
   }

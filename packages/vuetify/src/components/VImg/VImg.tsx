@@ -52,6 +52,10 @@ export type VImgSlots = {
 export const makeVImgProps = propsFactory({
   alt: String,
   cover: Boolean,
+  draggable: {
+    type: [Boolean, String] as PropType<boolean | 'true' | 'false'>,
+    default: undefined,
+  },
   eager: Boolean,
   gradient: String,
   lazySrc: String,
@@ -70,7 +74,19 @@ export const makeVImgProps = propsFactory({
     type: [String, Object] as PropType<string | srcObject>,
     default: '',
   },
+  crossorigin: String as PropType<'' | 'anonymous' | 'use-credentials'>,
+  referrerpolicy: String as PropType<
+    | 'no-referrer'
+    | 'no-referrer-when-downgrade'
+    | 'origin'
+    | 'origin-when-cross-origin'
+    | 'same-origin'
+    | 'strict-origin'
+    | 'strict-origin-when-cross-origin'
+    | 'unsafe-url'
+  >,
   srcset: String,
+  position: String,
 
   ...makeVResponsiveProps(),
   ...makeComponentProps(),
@@ -220,9 +236,13 @@ export const VImg = genericComponent<VImgSlots>()({
       const img = (
         <img
           class={['v-img__img', containClasses.value]}
+          style={{ objectPosition: props.position }}
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
           alt={ props.alt }
+          crossorigin={ props.crossorigin }
+          referrerpolicy={ props.referrerpolicy }
+          draggable={ props.draggable }
           sizes={ props.sizes }
           ref={ image }
           onLoad={ onLoad }
@@ -251,8 +271,12 @@ export const VImg = genericComponent<VImgSlots>()({
         { normalisedSrc.value.lazySrc && state.value !== 'loaded' && (
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
+            style={{ objectPosition: props.position }}
             src={ normalisedSrc.value.lazySrc }
             alt={ props.alt }
+            crossorigin={ props.crossorigin }
+            referrerpolicy={ props.referrerpolicy }
+            draggable={ props.draggable }
           />
         )}
       </MaybeTransition>
@@ -304,7 +328,7 @@ export const VImg = genericComponent<VImgSlots>()({
     }
 
     useRender(() => {
-      const [responsiveProps] = VResponsive.filterProps(props)
+      const responsiveProps = VResponsive.filterProps(props)
       return (
         <VResponsive
           class={[

@@ -78,6 +78,7 @@
     disabled?: boolean
     routeMatch?: string
     routePath?: string
+    emphasized?: boolean
   }
 
   function generateApiItems (locale: string) {
@@ -131,6 +132,7 @@
       const p = item.subfolder ? `${item.subfolder}/${item.title}` : path
       return {
         title: t(item.title!),
+        emphasized: item.emphasized,
         children: item.items.map(item => generateListItem(item, p, locale, t)),
       }
     }

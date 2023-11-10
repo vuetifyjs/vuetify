@@ -9,7 +9,7 @@ import { makeBorderProps, useBorder } from '@/composables/border'
 import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
-import { useDisplay } from '@/composables/display'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -80,6 +80,7 @@ export const makeVNavigationDrawerProps = propsFactory({
 
   ...makeBorderProps(),
   ...makeComponentProps(),
+  ...makeDisplayProps(),
   ...makeElevationProps(),
   ...makeLayoutItemProps(),
   ...makeRoundedProps(),
@@ -103,7 +104,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const { borderClasses } = useBorder(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { elevationClasses } = useElevation(props)
-    const { mobile } = useDisplay()
+    const { displayClasses, mobile } = useDisplay(props)
     const { roundedClasses } = useRounded(props)
     const router = useRouter()
     const isActive = useProxiedModel(props, 'modelValue', null, v => !!v)
@@ -230,6 +231,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               themeClasses.value,
               backgroundColorClasses.value,
               borderClasses.value,
+              displayClasses.value,
               elevationClasses.value,
               roundedClasses.value,
               props.class,

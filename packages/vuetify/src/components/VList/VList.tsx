@@ -22,7 +22,7 @@ import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
 import { computed, ref, shallowRef, toRef } from 'vue'
-import { focusChild, genericComponent, getPropertyFromItem, pick, propsFactory, useRender } from '@/util'
+import { focusChild, genericComponent, getPropertyFromItem, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -43,7 +43,9 @@ function transformItem (props: ItemProps & { itemType: string }, item: any): Int
   const title = isPrimitive(item) ? item : getPropertyFromItem(item, props.itemTitle)
   const value = getPropertyFromItem(item, props.itemValue, undefined)
   const children = getPropertyFromItem(item, props.itemChildren)
-  const itemProps = props.itemProps === true ? pick(item, ['children'])[1] : getPropertyFromItem(item, props.itemProps)
+  const itemProps = props.itemProps === true
+    ? omit(item, ['children'])
+    : getPropertyFromItem(item, props.itemProps)
 
   const _props = {
     title,
@@ -88,6 +90,7 @@ export const makeVListProps = propsFactory({
     type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
     default: 'one',
   },
+  slim: Boolean,
   nav: Boolean,
 
   ...makeNestedProps({
@@ -159,6 +162,7 @@ export const VList = genericComponent<new <T>(
         disabled: toRef(props, 'disabled'),
         lines: toRef(props, 'lines'),
         nav: toRef(props, 'nav'),
+        slim: toRef(props, 'slim'),
         variant: toRef(props, 'variant'),
       },
     })

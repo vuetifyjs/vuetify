@@ -1,5 +1,5 @@
 // Utilities
-import { camelize, capitalize, Comment, computed, Fragment, isVNode, reactive, toRefs, watchEffect } from 'vue'
+import { camelize, capitalize, Comment, computed, Fragment, isVNode, reactive, toRefs, unref, watchEffect } from 'vue'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -73,7 +73,7 @@ export function getObjectValueByPath (obj: any, path?: string | null, fallback?:
 export type SelectItemKey =
   | boolean | null | undefined // Ignored
   | string // Lookup by key, can use dot notation for nested objects
-  | (string | number)[] // Nested lookup by key, each array item is a key in the next level
+  | readonly (string | number)[] // Nested lookup by key, each array item is a key in the next level
   | ((item: Record<string, any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
@@ -135,10 +135,16 @@ export function isObject (obj: any): obj is object {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
 }
 
-export function refElement<T extends object | undefined> (obj: T): Exclude<T, ComponentPublicInstance> | HTMLElement {
-  return obj && '$el' in obj
-    ? obj.$el as HTMLElement
-    : obj as HTMLElement
+export function refElement (obj?: ComponentPublicInstance<any> | HTMLElement): HTMLElement | undefined {
+  if (obj && '$el' in obj) {
+    const el = obj.$el as HTMLElement
+    if (el?.nodeType === Node.TEXT_NODE) {
+      // Multi-root component, use the first element
+      return el.nextElementSibling as HTMLElement
+    }
+    return el
+  }
+  return obj as HTMLElement
 }
 
 // KeyboardEvent.keyCode aliases
@@ -198,16 +204,33 @@ type MaybePick<
 // Array of keys
 export function pick<
   T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, paths: U[]): MaybePick<T, U> {
+  const found: any = {}
+
+  const keys = new Set(Object.keys(obj))
+  for (const path of paths) {
+    if (keys.has(path)) {
+      found[path] = obj[path]
+    }
+  }
+
+  return found
+}
+
+// Array of keys
+export function pickWithRest<
+  T extends object,
   U extends Extract<keyof T, string>,
   E extends Extract<keyof T, string>
 > (obj: T, paths: U[], exclude?: E[]): [yes: MaybePick<T, Exclude<U, E>>, no: Omit<T, Exclude<U, E>>]
 // Array of keys or RegExp to test keys against
-export function pick<
+export function pickWithRest<
   T extends object,
   U extends Extract<keyof T, string>,
   E extends Extract<keyof T, string>
 > (obj: T, paths: (U | RegExp)[], exclude?: E[]): [yes: Partial<T>, no: Partial<T>]
-export function pick<
+export function pickWithRest<
   T extends object,
   U extends Extract<keyof T, string>,
   E extends Extract<keyof T, string>
@@ -337,9 +360,9 @@ export function isComposingIgnoreKey (e: KeyboardEvent): boolean {
  * attributes should be passed to the <input> element inside.
  */
 export function filterInputAttrs (attrs: Record<string, unknown>) {
-  const [events, props] = pick(attrs, [onRE])
+  const [events, props] = pickWithRest(attrs, [onRE])
   const inputEvents = omit(events, bubblingEvents)
-  const [rootAttrs, inputAttrs] = pick(props, ['class', 'style', 'id', /^data-/])
+  const [rootAttrs, inputAttrs] = pickWithRest(props, ['class', 'style', 'id', /^data-/])
   Object.assign(rootAttrs, events)
   Object.assign(inputAttrs, inputEvents)
   return [rootAttrs, inputAttrs]
@@ -383,12 +406,17 @@ export function searchItems<T extends any = any> (items: T[], search: string): T
   return items.filter((item: any) => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
 }
 
-export function debounce (fn: Function, delay: number) {
+export function debounce (fn: Function, delay: MaybeRef<number>) {
   let timeoutId = 0 as any
-  return (...args: any[]) => {
+  const wrap = (...args: any[]) => {
     clearTimeout(timeoutId)
-    timeoutId = setTimeout(() => fn(...args), delay)
+    timeoutId = setTimeout(() => fn(...args), unref(delay))
   }
+  wrap.clear = () => {
+    clearTimeout(timeoutId)
+  }
+  wrap.immediate = fn
+  return wrap
 }
 
 export function throttle<T extends (...args: any[]) => any> (fn: T, limit: number) {

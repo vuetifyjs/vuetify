@@ -144,7 +144,13 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
     const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'), props._disableGlobalStack)
-    const { activatorEl, activatorRef, activatorEvents, contentEvents, scrimEvents } = useActivator(props, { isActive, isTop: localTop })
+    const {
+      activatorEl, activatorRef,
+      target, targetEl, targetRef,
+      activatorEvents,
+      contentEvents,
+      scrimEvents,
+    } = useActivator(props, { isActive, isTop: localTop })
     const { dimensionStyles } = useDimension(props)
     const isMounted = useHydration()
     const { scopeId } = useScopeId()
@@ -158,13 +164,13 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     const { contentStyles, updateLocation } = useLocationStrategies(props, {
       isRtl,
       contentEl,
-      activatorEl,
+      target,
       isActive,
     })
     useScrollStrategies(props, {
       root,
       contentEl,
-      activatorEl,
+      targetEl,
       isActive,
       updateLocation,
     })
@@ -242,6 +248,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
           isActive: isActive.value,
           props: mergeProps({
             ref: activatorRef,
+            targetRef,
           }, activatorEvents.value, props.activatorProps),
         })}
 
@@ -280,7 +287,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 appear
                 persisted
                 transition={ props.transition }
-                target={ activatorEl.value }
+                target={ target.value }
                 onAfterLeave={ () => { onAfterLeave(); emit('afterLeave') } }
               >
                 <div
@@ -309,6 +316,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     return {
       activatorEl,
+      target,
       animateClick,
       contentEl,
       globalTop,

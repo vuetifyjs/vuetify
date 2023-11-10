@@ -203,6 +203,8 @@
     // TODO: handle this differently
     &.v-theme--blackguard,
     &.v-theme--dark
+      --prism-interpolation: var(--prism-operator)
+
       code,
       pre
         color: #ccc !important

@@ -6,7 +6,6 @@
     :items-length="totalItems"
     :items="serverItems"
     :loading="loading"
-    class="elevation-1"
     item-value="name"
     @update:options="loadItems"
   >

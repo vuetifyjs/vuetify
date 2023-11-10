@@ -11,13 +11,13 @@
   >
     <v-item-group>
       <v-row dense>
-        <v-col cols="auto">
-          <v-badge :model-value="user.avatar === auth0.user.value.picture">
+        <v-col v-if="auth.user" cols="auto">
+          <v-badge :model-value="user.avatar == null">
             <v-avatar
-              :image="auth0.user.value.picture"
+              :image="auth.user.picture"
               class="cursor-pointer"
               size="56"
-              @click="onClick(auth0.user.value.picture)"
+              @click="onClick(null)"
             />
           </v-badge>
         </v-col>
@@ -37,7 +37,7 @@
                     opacity: isHovering ? '1' : '.12',
                   }"
                   size="56"
-                  class="cursor-pointer"
+                  :class="{ 'cursor-pointer': auth.isSubscriber }"
                   @click="onClick(avatar)"
                 >
                   <v-img :src="avatar">
@@ -65,14 +65,10 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useAuth0 } from '@/plugins/auth'
-
   // Stores
   import { useAuthStore } from '@/store/auth'
   import { useUserStore } from '@/store/user'
 
-  const auth0 = useAuth0()
   const auth = useAuthStore()
   const user = useUserStore()
 

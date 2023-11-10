@@ -70,6 +70,26 @@ declare global {
     sourceCapabilities?: { firesTouchEvents: boolean }
   }
 
+  interface ColorSelectionOptions {
+    signal?: AbortSignal
+  }
+
+  interface ColorSelectionResult {
+    sRGBHex: string
+  }
+
+  interface EyeDropper {
+    open: (options?: ColorSelectionOptions) => Promise<ColorSelectionResult>
+  }
+
+  interface EyeDropperConstructor {
+    new (): EyeDropper
+  }
+
+  interface Window {
+    EyeDropper: EyeDropperConstructor
+  }
+
   function parseInt(s: string | number, radix?: number): number
   function parseFloat(string: string | number): number
 
@@ -107,6 +127,10 @@ declare module '@vue/runtime-core' {
   export interface App {
     $nuxt?: { hook: (name: string, fn: () => void) => void }
   }
+
+  export interface VNode {
+    ctx: ComponentInternalInstance | null
+  }
 }
 
 declare module '@vue/runtime-dom' {
@@ -129,7 +153,9 @@ declare module '@vue/runtime-dom' {
     [K in keyof E]?: E[K] extends Function ? E[K] : (payload: E[K]) => void
   }
 
-  export interface HTMLAttributes extends EventHandlers<ModifiedEvents> {}
+  export interface HTMLAttributes extends EventHandlers<ModifiedEvents> {
+    onScrollend?: (e: Event) => void
+  }
 
   type CustomProperties = {
     [k in `--${string}`]: any

@@ -2,6 +2,10 @@ export default {
   badge: 'Badge',
   open: 'Ouvrir',
   close: 'Fermer',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Annuler',
+  },
   dataIterator: {
     noResultsText: 'Aucun enregistrement correspondant trouvé',
     loadingText: `Chargement de l'élément...`,
@@ -31,8 +35,7 @@ export default {
     divider: 'à',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Annuler',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Sélectionner des dates',
       header: 'Entrer des dates',

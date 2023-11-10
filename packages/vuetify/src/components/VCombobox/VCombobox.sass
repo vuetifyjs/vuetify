@@ -15,7 +15,6 @@
   .v-field
     .v-field__input
       > input
-        align-self: flex-start
         flex: 1 1
 
   .v-field
@@ -48,16 +47,23 @@
   &__selection
     display: inline-flex
     align-items: center
+    height: calc($input-font-size * $input-line-height)
     letter-spacing: inherit
     line-height: inherit
     max-width: 90%
 
   &__selection
-    margin-top: var(--v-input-chips-margin-top)
-    margin-bottom: var(--v-input-chips-margin-bottom)
-
     &:first-child
       margin-inline-start: 0
+
+  &--chips.v-input--density-compact
+    .v-field--variant-solo,
+    .v-field--variant-solo-inverted,
+    .v-field--variant-filled,
+    .v-field--variant-solo-filled
+      .v-label.v-field-label
+        &--floating
+          top: 0px
 
   &--selecting-index
     .v-combobox__selection
@@ -76,13 +82,7 @@
       left: 0
       right: 0
       width: 100%
-      padding-inline-start: inherit
-      padding-inline-end: inherit
-
-    .v-field--variant-outlined
-      input
-        top: 50%
-        transform: translateY(calc(-50% - (var(--v-input-chips-margin-top) + var(--v-input-chips-margin-bottom))/2))
+      padding-inline: inherit
 
     .v-field--active
       input
