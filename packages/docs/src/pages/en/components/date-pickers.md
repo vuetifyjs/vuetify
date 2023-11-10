@@ -100,6 +100,8 @@ createVuetify({
 })
 ```
 
+## Examples
+
 ### Props
 
 #### Elevation
