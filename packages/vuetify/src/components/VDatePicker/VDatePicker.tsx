@@ -144,7 +144,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       return props.max && adapter.isValid(date) ? date : null
     })
     const disabled = computed(() => {
-      const targets = []
+      let targets = []
 
       if (viewMode.value !== 'month') {
         targets.push(...['prev', 'next'])
@@ -165,6 +165,10 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
 
           adapter.isAfter(date, maxDate.value) && targets.push('next')
         }
+      }
+
+      if (props.disabled) {
+        targets = ['prev', 'next', 'mode', 'text']
       }
 
       return targets
@@ -279,6 +283,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                       v-model={ month.value }
                       min={ minDate.value }
                       max={ maxDate.value }
+                      disabled={ props.disabled }
                     />
                   ) : viewMode.value === 'year' ? (
                     <VDatePickerYears
@@ -287,6 +292,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                       v-model={ year.value }
                       min={ minDate.value }
                       max={ maxDate.value }
+                      disabled={ props.disabled }
                     />
                   ) : (
                     <VDatePickerMonth
@@ -297,6 +303,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                       v-model:year={ year.value }
                       min={ minDate.value }
                       max={ maxDate.value }
+                      disabled={ props.disabled }
                     />
                   )}
                 </VFadeTransition>

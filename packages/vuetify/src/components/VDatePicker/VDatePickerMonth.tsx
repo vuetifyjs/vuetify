@@ -38,6 +38,7 @@ export const makeVDatePickerMonthProps = propsFactory({
   showAdjacentMonths: Boolean,
   showWeek: Boolean,
   year: [Number, String],
+  disabled: Boolean,
 }, 'VDatePickerMonth')
 
 export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
@@ -159,6 +160,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     function isDisabled (value: unknown) {
       const date = adapter.date(value)
 
+      if (props.disabled) return true
       if (props.min && adapter.isAfter(props.min, date)) return true
       if (props.max && adapter.isAfter(date, props.max)) return true
 
@@ -216,6 +218,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
               class={[
                 'v-date-picker-month__day',
                 'v-date-picker-month__weekday',
+                { 'v-date-picker-month__weekday--disabled': props.disabled },
               ]}
             >{ weekDay }</div>
           ))}

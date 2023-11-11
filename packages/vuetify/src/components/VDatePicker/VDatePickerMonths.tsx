@@ -30,6 +30,7 @@ export const makeVDatePickerMonthsProps = propsFactory({
   color: String,
   height: [String, Number],
   modelValue: Number,
+  disabled: Boolean,
 }, 'VDatePickerMonths')
 
 export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
@@ -79,6 +80,7 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
               text: month.text,
               variant: model.value === month.value ? 'flat' : 'text',
               onClick: () => onClick(i),
+              disabled: props.disabled,
             } as const
 
             function onClick (i: number) {

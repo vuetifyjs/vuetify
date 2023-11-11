@@ -40,6 +40,7 @@ export const makeVDatePickerYearsProps = propsFactory({
   min: null as any as PropType<unknown>,
   max: null as any as PropType<unknown>,
   modelValue: Number,
+  disabled: Boolean,
 }, 'VDatePickerYears')
 
 export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
@@ -110,6 +111,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
               text: year.text,
               variant: model.value === year.value ? 'flat' : 'text',
               onClick: () => model.value = year.value,
+              disabled: props.disabled,
             } as const
 
             return slots.year?.({
