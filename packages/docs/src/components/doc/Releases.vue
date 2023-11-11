@@ -131,9 +131,8 @@
 
 <script setup lang="ts">
   // Composables
-  import { useDate } from 'vuetify/labs/date'
   import { useI18n } from 'vue-i18n'
-  import { useDisplay, version } from 'vuetify'
+  import { useDate, useDisplay, version } from 'vuetify'
   import { useRoute, useRouter } from 'vue-router'
 
   // Stores

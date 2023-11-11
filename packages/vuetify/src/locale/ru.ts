@@ -2,6 +2,10 @@ export default {
   badge: 'знак',
   open: 'Open',
   close: 'Закрыть',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Не найдено подходящих записей',
     loadingText: 'Запись загружается...',
@@ -31,8 +35,7 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Select dates',
       header: 'Enter dates',

@@ -76,11 +76,7 @@
 .v-treeview-node__checkbox
   width: $treeview-node-level-width
   user-select: none
-
-  +ltr()
-    margin-left: $treeview-node-margin
-  +rtl()
-    margin-right: $treeview-node-margin
+  margin-inline-start: $treeview-node-margin
 
 .v-treeview-node__toggle
   width: $treeview-node-level-width
@@ -101,19 +97,11 @@
 
 .v-treeview-node__prepend
   min-width: $treeview-node-level-width
-
-  +ltr()
-    margin-right: $treeview-node-margin
-  +rtl()
-    margin-left: $treeview-node-margin
+  margin-inline-end: $treeview-node-margin
 
 .v-treeview-node__append
   min-width: $treeview-node-level-width
-
-  +ltr()
-    margin-left: $treeview-node-margin
-  +rtl()
-    margin-right: $treeview-node-margin
+  margin-inline-start: $treeview-node-margin
 
 .v-treeview-node__level
   width: $treeview-node-level-width
@@ -132,13 +120,9 @@
   flex-grow: 1
   flex-shrink: 0
   min-width: 0
+  margin-inline-start: $treeview-node-margin
 
   // TODO: this is temporary fix for d-flex * shenanigans
   .v-btn
     flex-grow: 0 !important
     flex-shrink: 1 !important
-
-  +ltr()
-    margin-left: $treeview-node-margin
-  +rtl()
-    margin-right: $treeview-node-margin

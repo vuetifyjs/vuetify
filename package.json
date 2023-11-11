@@ -70,7 +70,7 @@
     "jest-serializer-html": "^7.1.0",
     "lerna": "^3.22.1",
     "magic-string": "^0.30.0",
-    "mkdirp": "^1.0.4",
+    "mkdirp": "^3.0.1",
     "moment": "^2.29.4",
     "patch-package": "^6.5.1",
     "sass": "^1.60.0",

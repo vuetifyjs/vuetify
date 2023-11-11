@@ -5,7 +5,11 @@ type StripProps = keyof VNodeProps | keyof AllowedComponentProps | 'v-slots' | '
 type Event = `on${string}`
 
 type Props<T> = T extends { $props: infer P extends object }
-  ? { [K in Exclude<keyof P, StripProps | Event>]: P[K] }
+  ? {
+    [K in Exclude<keyof P, StripProps | Event>]: Exclude<P[K], undefined> extends VNodeProps
+      ? unknown
+      : P[K]
+  }
   : never
 
 type Events<T> = T extends { $props: infer P extends object }
@@ -13,8 +17,8 @@ type Events<T> = T extends { $props: infer P extends object }
     [K in Exclude<keyof P, StripProps> as K extends `on${infer N}`
       ? Uncapitalize<N>
       : never
-    ]: P[K] extends ((...args: any[]) => any)
-      ? Parameters<P[K]>
+    ]: Exclude<P[K], undefined> extends ((...args: any[]) => any)
+      ? Parameters<Exclude<P[K], undefined>>
       : never
   }
   : never
@@ -38,7 +42,7 @@ type Slots<
   T extends { $props: any },
   S = '$children' extends keyof T['$props'] ? Exclude<T['$props']['$children'], VNodeChild> : never
 > = '$children' extends keyof T['$props']
-  ? ExcludeEmpty<{ [K in keyof S]: S[K] extends Slot<infer A> ? A[0] : never }>
+  ? ExcludeEmpty<{ [K in keyof S]-?: Exclude<S[K], undefined> extends Slot<infer A> ? A[0] : never }>
   : never
 
 type AtLeastOne<T, U = {[K in keyof T]: Pick<T, K> }> = Partial<T> & U[keyof U]

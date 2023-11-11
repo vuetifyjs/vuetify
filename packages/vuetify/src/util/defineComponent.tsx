@@ -108,9 +108,9 @@ export function defineComponent (options: ComponentOptions) {
 
   if (options._setup) {
     options.props = propsFactory(options.props ?? {}, options.name)()
-    const propKeys = Object.keys(options.props)
+    const propKeys = Object.keys(options.props).filter(key => key !== 'class' && key !== 'style')
     options.filterProps = function filterProps (props: Record<string, any>) {
-      return pick(props, propKeys, ['class', 'style'])
+      return pick(props, propKeys)
     }
 
     options.props._as = String
@@ -292,5 +292,5 @@ export interface FilterPropsOptions<PropsOptions extends Readonly<ComponentProps
   filterProps<
     T extends Partial<Props>,
     U extends Exclude<keyof Props, Exclude<keyof Props, keyof T>>
-  > (props: T): [yes: Partial<Pick<T, U>>, no: Omit<T, U>]
+  > (props: T): Partial<Pick<T, U>>
 }

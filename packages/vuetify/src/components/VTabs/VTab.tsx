@@ -101,7 +101,7 @@ export const VTab = genericComponent()({
     }
 
     useRender(() => {
-      const [btnProps] = VBtn.filterProps(props)
+      const btnProps = VBtn.filterProps(props)
 
       return (
         <VBtn

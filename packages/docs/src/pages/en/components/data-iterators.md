@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Data iterators
   title: Data iterator component
@@ -23,9 +24,7 @@ The `v-data-iterator` component is used for displaying arbitrary data, and share
 <page-features />
 
 ::: success
-
 This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
-
 :::
 
 ## Usage

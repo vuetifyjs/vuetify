@@ -45,8 +45,8 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
 
     useRender(() => {
       const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
-      const [inputProps, _1] = VInput.filterProps(props)
-      const [checkboxProps, _2] = VCheckboxBtn.filterProps(props)
+      const inputProps = VInput.filterProps(props)
+      const checkboxProps = VCheckboxBtn.filterProps(props)
 
       return (
         <VInput

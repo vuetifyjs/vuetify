@@ -1,7 +1,6 @@
 <template>
   <v-data-table
     v-model="selected"
-    class="elevation-1"
     :headers="headers"
     :items="desserts"
     items-per-page="5"
@@ -9,9 +8,8 @@
     return-object
     show-select
   ></v-data-table>
-  <v-card class="mt-2 pa-2">
-    <pre>{{ selected }}</pre>
-  </v-card>
+
+  <pre>{{ selected }}</pre>
 </template>
 
 <script setup>
@@ -19,7 +17,7 @@
 
   const selected = ref([])
 
-  const headers = [
+  const headers = ref([
     {
       title: 'Dessert (100g serving)',
       align: 'start',
@@ -30,8 +28,8 @@
     { title: 'Carbs (g)', align: 'end', key: 'carbs' },
     { title: 'Protein (g)', align: 'end', key: 'protein' },
     { title: 'Iron (%)', align: 'end', key: 'iron' },
-  ]
-  const desserts = [
+  ])
+  const desserts = ref([
     {
       name: 'Frozen Yogurt',
       calories: 159,
@@ -112,7 +110,7 @@
       protein: 7,
       iron: 6,
     },
-  ]
+  ])
 </script>
 
 <script>

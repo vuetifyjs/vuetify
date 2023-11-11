@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Skeleton loaders
   title: Skeleton loader component
@@ -9,8 +10,9 @@ related:
   - /components/progress-circular/
   - /components/buttons/
 features:
+  figma: true
   label: 'C: VSkeletonLoader'
-  github: /labs/VSkeletonLoader/
+  github: /components/VSkeletonLoader/
   report: true
 ---
 
@@ -22,10 +24,8 @@ Skeleton loaders provide a simple way to display loading placeholders in your ap
 
 <page-features />
 
-::: warning
-
-This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
-
+::: success
+This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
 :::
 
 ## Usage
@@ -35,20 +35,6 @@ The `v-skeleton-loader` component provides a user with a visual indicator that c
 <usage name="v-skeleton-loader" />
 
 <entry />
-
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VSkeletonLoader } from 'vuetify/labs/VSkeletonLoader'
-
-export default createVuetify({
-  components: {
-    VSkeletonLoader,
-  },
-})
-```
 
 ## API
 

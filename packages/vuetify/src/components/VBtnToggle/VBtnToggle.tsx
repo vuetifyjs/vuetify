@@ -41,7 +41,7 @@ export const VBtnToggle = genericComponent<VBtnToggleSlots>()({
     const { isSelected, next, prev, select, selected } = useGroup(props, VBtnToggleSymbol)
 
     useRender(() => {
-      const [btnGroupProps] = VBtnGroup.filterProps(props)
+      const btnGroupProps = VBtnGroup.filterProps(props)
 
       return (
         <VBtnGroup

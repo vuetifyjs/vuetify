@@ -1,6 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import { deepEqual, getPropertyFromItem, pick, propsFactory } from '@/util'
+import { deepEqual, getPropertyFromItem, omit, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -63,7 +63,7 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any): List
   const itemProps = props.itemProps === true
     ? typeof item === 'object' && item != null && !Array.isArray(item)
       ? 'children' in item
-        ? pick(item, ['children'])[1]
+        ? omit(item, ['children'])
         : item
       : undefined
     : getPropertyFromItem(item, props.itemProps)

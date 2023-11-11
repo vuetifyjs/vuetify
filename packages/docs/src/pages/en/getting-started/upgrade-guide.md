@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Upgrade guide
   title: Upgrade guide
@@ -28,14 +29,9 @@ This page contains a detailed list of breaking changes and the steps required to
   Not all Vuetify 2 components are currently available in Vuetify 3; These components will be released as their development is completed via [Vuetify Labs](https://vuetifyjs.com/en/labs/introduction/).
 
 - [calendar](https://github.com/vuetifyjs/vuetify/issues/13469)
-- [date-picker](/components/date-pickers/)
-- [data-table](/components/data-tables/basics/)
-- [otp-input](/components/otp-input/)
 - [overflow-btn](https://github.com/vuetifyjs/vuetify/issues/13493)
-- [skeleton-loader](/components/skeleton-loaders/)
 - [sparkline](https://github.com/vuetifyjs/vuetify/issues/13507)
 - [speed-dial](https://github.com/vuetifyjs/vuetify/issues/13508)
-- [stepper](/components/steppers/)
 - [time-picker](https://github.com/vuetifyjs/vuetify/issues/13516)
 - [treeview](https://github.com/vuetifyjs/vuetify/issues/13518)
 :::
@@ -161,6 +157,7 @@ app.use(vuetify)
 - `shaped` prop has been removed.
 - `icon-color` has been removed.
 - `single-line` has been replaced with `lines="one"`.
+- `color` now applies to the icon and action text. Use `bg-color` to change the background color.
 
 ### v-btn/v-btn-toggle
 
@@ -179,6 +176,14 @@ app.use(vuetify)
 - `on-icon` and `off-icon` props have been renamed to `true-icon` and `false-icon`.
 - `on-value` and `off-value` props have been renamed to `true-value` and `false-value`.
 - `v-checkbox`'s label slot should no longer contain a `<label>` as it is already wrapped with one
+
+### v-date-picker
+
+- Uses `Date` objects instead of strings. Some utility functions are included to help convert between the two, see [dates](/features/dates/).
+- `locale`, `locale-first-day-of-year`, `first-day-of-week`, `day-format`, `weekday-format`, `month-format`, `year-format`, `header-date-format`, and `title-date-format` are now part of the date adapter and use the globally configured [locale](/features/internationalization/) instead of being passed as props.
+- `active-picker` has been renamed to `view-mode`.
+- `picker-date` has been replaced with separate `month` and `year` props.
+- `range` is not currently implemented, will be added as a separate component in the future.
 
 ### v-form
 
@@ -223,6 +228,19 @@ app.use(vuetify)
 ### v-simple-table
 
 - `v-simple-table` has been renamed to `v-table`
+
+### v-data-table
+
+- Headers objects:
+  - `text` property has been renamed to `title`.
+  - `data-table-select` and `data-table-expand` must be defined as `key` instead of `value`.
+  - `class` has been replaced with `headerProps`.
+  - `cellClass` has been replaced with `cellProps` and now accepts either a function or an object.
+- Server side tables using `server-items-length` must be replaced with `<v-data-table-server items-length />`.
+- Argument order for `@click:*` events is now consistently `(event, data)`.
+  - `onRowClick (item, data, event)` should be changed to `onRowClick (event, { item })`.
+- `item-class` and `item-style` have been combined into `row-props`, and `cell-props` has been added.
+- `sort-desc` and `group-desc` have been combined into `sort-by` and `group-by`. These properties now take an array of `{ key: string, order: 'asc' | 'desc' }` objects instead of strings.
 
 ### v-slider/v-range-slider
 

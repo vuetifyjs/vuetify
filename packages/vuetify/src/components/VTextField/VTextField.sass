@@ -28,19 +28,9 @@
 
     @at-root #{selector.append('.v-text-field--suffixed', &)}
       --v-field-padding-end: #{$text-field-input-padding-end}
-  
-    input
-      margin-top: var(--v-input-chips-margin-top)
-      margin-bottom: var(--v-input-chips-margin-bottom)
-
-  input.v-field__input
-    min-height: calc($field-input-min-height - var(--v-input-chips-margin-top) - var(--v-input-chips-margin-bottom))
-    padding-top: calc(var(--v-input-chips-margin-top) + var(--v-field-input-padding-top))
-    padding-bottom: calc(var(--v-input-chips-margin-bottom) + var(--v-field-input-padding-bottom))
 
   .v-input__details
-    padding-inline-start: $text-field-details-padding-inline
-    padding-inline-end: $text-field-details-padding-inline
+    padding-inline: $text-field-details-padding-inline
 
   .v-field--no-label,
   .v-field--active
@@ -67,10 +57,6 @@
     padding-top: calc(var(--v-field-padding-top, 4px) + var(--v-input-padding-top, 0))
     padding-bottom: var(--v-field-padding-bottom, 6px)
 
-    &__text
-      margin-top: var(--v-input-chips-margin-top)
-      margin-bottom: var(--v-input-chips-margin-bottom)
-
     .v-field--active &
       opacity: 1
 
@@ -83,17 +69,4 @@
   &__suffix
     padding-inline-end: var(--v-field-padding-end)
 
-/* endregion */
-/* region MODIFIERS */
-.v-text-field
-  &--plain-underlined
-    --v-field-padding-top--plain-underlined: 6px
-
-    .v-input__details
-      padding: 0
-
-    .v-input__prepend,
-    .v-input__append
-      align-items: flex-start
-      padding-top: calc(var(--v-field-padding-top--plain-underlined) + var(--v-input-padding-top))
 /* endregion */

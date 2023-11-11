@@ -82,8 +82,8 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
 
     useRender(() => {
       const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
-      const [inputProps, _1] = VInput.filterProps(props)
-      const [controlProps, _2] = VSelectionControl.filterProps(props)
+      const inputProps = VInput.filterProps(props)
+      const controlProps = VSelectionControl.filterProps(props)
 
       return (
         <VInput

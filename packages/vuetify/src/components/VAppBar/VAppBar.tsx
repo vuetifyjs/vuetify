@@ -133,7 +133,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
     })
 
     useRender(() => {
-      const [toolbarProps] = VToolbar.filterProps(props)
+      const toolbarProps = VToolbar.filterProps(props)
 
       return (
         <VToolbar

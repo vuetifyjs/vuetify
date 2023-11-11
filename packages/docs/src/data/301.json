@@ -116,15 +116,14 @@
   "about/sponsors-and-backers": "/introduction/sponsors-and-backers",
   "components/application": "/features/application-layout",
   "components/simple-tables": "/components/tables",
-  "components/data-tables": "/labs/introduction",
+  "components/data-tables": "/components/data-tables/basics",
   "components/date-pickers-month": "/introduction/roadmap",
   "components/time-pickers": "/introduction/roadmap",
-  "components/treeview": "/introduction/roadmap",
   "components/calendars": "/introduction/roadmap",
   "components/overflow-btns": "/introduction/roadmap",
   "components/sparklines": "/introduction/roadmap",
-  "components/server-side-data-tables": "/labs/introduction",
+  "components/server-side-data-tables": "/components/data-tables/server-side-tables",
   "components/skeleton-loaders": "/introduction/roadmap",
   "components/speed-dials": "/introduction/roadmap",
-  "components/virtual-data-tables": "/labs/introduction"
+  "components/virtual-data-tables": "/components/data-tables/virtual-tables"
 }

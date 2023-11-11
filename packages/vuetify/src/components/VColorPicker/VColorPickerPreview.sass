@@ -33,12 +33,7 @@
   background: $color-picker-checkerboard
   border-radius: 50%
   overflow: hidden
-
-  +tools.ltr()
-    margin-right: $color-picker-preview-dot-margin
-
-  +tools.rtl()
-    margin-left: $color-picker-preview-dot-margin
+  margin-inline-end: $color-picker-preview-dot-margin
 
   > div
     width: 100%
@@ -66,3 +61,7 @@
   align-items: center
   display: flex
   margin-bottom: $color-picker-preview-margin-bottom
+
+.v-color-picker-preview__eye-dropper
+  position: relative
+  margin-right: $color-picker-preview-dropper-margin

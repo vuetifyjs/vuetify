@@ -3,7 +3,6 @@
     :headers="headers"
     :items="desserts"
     item-value="name"
-    class="elevation-1"
   >
     <template v-slot:headers="{ columns, isSorted, getSortIcon, toggleSort }">
       <tr>

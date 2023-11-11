@@ -28,7 +28,7 @@
               cols="3"
             >
               <v-sheet
-                color="grey-lighten-2"
+                color="surface-variant-alt"
                 height="96"
               ></v-sheet>
             </v-col>

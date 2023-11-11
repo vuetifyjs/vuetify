@@ -224,9 +224,23 @@ Using the _dynamic_ display values, we are able to adjust the minimum height of 
 
 ## Component Mobile Breakpoints
 
-Some components within Vuetify have a **mobile-breakpoint** property which allows you to override the default value. These components reference the global mobileBreakpoint value that is generated at runtime using the provided options in the `vuetify.js` file. By default, **mobileBreakpoint** is set to `md`, which means that if the window is less than _1280_ pixels in width (which is the default value for the **md** threshold), then the **useDisplay** composable will update its **mobile** value to `true`.
+::: success
+This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
+:::
 
-For example, the [v-banner](/components/banners/) component implements different styling based upon the value of **mobile** on the **useDisplay** composable. In the following example, The first banner uses the global **mobile-breakpoint** value of `md` while the second overrides this default with `580`. If the screen width is 1024 pixels, the second banner would not convert into its mobile state:
+Some components within Vuetify have a **mobile-breakpoint** property which allows you to override the default value. These components reference the global mobileBreakpoint value that is generated at runtime using the provided options in the `vuetify.js` file.
+
+The following components have built in support for the **mobile-breakpoint** property:
+
+| Component |
+| - |
+| [v-banner](/components/banners/) |
+| [v-navigation-drawer](/components/navigation-drawers/) |
+| [v-slide-group](/components/slide-groups/) |
+
+By default, **mobileBreakpoint** is set to **lg**, which means that if the window is less than _1280_ pixels in width (which is the default value for the **lg** threshold), then the **useDisplay** composable will update its **mobile** value to `true`.
+
+For example, the [v-banner](/components/banners/) component implements different styling when its mobile versus desktop. In the following example, The first banner uses the global **mobile-breakpoint** value of **lg** while the second overrides this default with **580**:
 
 ```html { resource="Component.vue" }
 <template>
@@ -251,5 +265,67 @@ For example, the [v-banner](/components/banners/) component implements different
     console.log(width.value) // 960
     console.log(mobile.value) // true
   })
+</script>
+```
+
+If the screen width is 1024 pixels, the second banner would not convert into its mobile state.
+
+### useDisplay overrides
+
+Specify a custom **mobileBreakpoint** value directly to the [useDisplay](/api/use-display/) composable and override the global value. In the following example we use a custom mobileBreakpoint value of **580**:
+
+```html { resource="Component.vue" }
+<script setup>
+  import { onMounted } from 'vue'
+  import { useDisplay } from 'vuetify'
+
+  const { mobile } = useDisplay({ mobileBreakpoint })
+
+  // Given a viewport width of 960px
+  onMounted(() => {
+    console.log(mobile.value) // false
+  })
+</script>
+```
+
+If you supply a value for the **name** argument, utilize the **displayClasses** property to apply the appropriate classes to your component. In the next example, the following classes would be applied to the root element of the component:
+
+```html { resource="Component.vue" }
+<template>
+  <div
+    :class="[
+      'v-component',
+      displayClasses,
+    ]"
+  >
+    <!-- v-component--mobile -->
+  </div>
+</template>
+
+<script setup>
+  import { defineName } from 'vue'
+  import { useDisplay } from 'vuetify'
+
+  const { displayClasses } = useDisplay({ mobileBreakpoint }, 'v-component')
+</script>
+```
+
+If you leave out the name argument, displayClasses will use the default name set by Vue. The following example uses the default name of the local component:
+
+```html { resource="AppDrawer.vue" }
+<template>
+  <v-navigation-drawer
+    :class="[
+      displayClasses, // 'app-drawer--mobile'
+    ]"
+  >
+    ...
+  </v-navigation-drawer>
+</template>
+
+<script setup>
+  import { useDisplay } from 'vuetify'
+
+  const { displayClasses } = useDisplay({ mobileBreakpoint })
 </script>
 ```

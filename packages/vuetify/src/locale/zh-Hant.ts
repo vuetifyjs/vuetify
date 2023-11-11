@@ -2,6 +2,10 @@ export default {
   badge: '徽章',
   open: 'Open',
   close: '關閉',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: '沒有符合條件的結果',
     loadingText: '讀取中...',
@@ -31,8 +35,7 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Select dates',
       header: 'Enter dates',
