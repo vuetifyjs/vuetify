@@ -103,12 +103,14 @@ async function networkFirst (request) {
   } catch (e) {
     console.warn('[SW] Failed to fetch', e)
   }
-
+  const is400 = response?.status >= 400 && response?.status < 500
   if (response?.status === 200) {
     cache.put(request, response.clone())
-  } else {
+  } else if (!is400) {
     const cached = await caches.match(request)
     if (cached) return cached
+  } else {
+    await cache.delete(request)
   }
 
   return response
