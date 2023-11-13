@@ -213,7 +213,7 @@ function parseLocalDate (value: string): Date {
   return new Date(parts[0], parts[1] - 1, parts[2])
 }
 
-const _YYYMMDD = /([12]\d{3}-([1-9]|0[1-9]|1[0-2])-([1-9]|0[1-9]|[12]\d|3[01]))/
+const _YYYMMDD = /^([12]\d{3}-([1-9]|0[1-9]|1[0-2])-([1-9]|0[1-9]|[12]\d|3[01]))$/
 
 function date (value?: any): Date | null {
   if (value == null) return new Date()
