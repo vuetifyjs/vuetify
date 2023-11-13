@@ -200,7 +200,7 @@ export const VImg = genericComponent<VImgSlots>()({
       if (img) currentSrc.value = img.currentSrc || img.src
     }
 
-    let timer: ReturnType<typeof setTimeout> | undefined
+    let timer: number | undefined
 
     onBeforeUnmount(() => clearTimeout(timer))
 
@@ -215,7 +215,7 @@ export const VImg = genericComponent<VImgSlots>()({
           naturalWidth.value = imgWidth
           naturalHeight.value = imgHeight
         } else if (!img.complete && state.value === 'loading' && timeout != null) {
-          timer = setTimeout(poll, timeout)
+          timer = window.setTimeout(poll, timeout)
         } else if (img.currentSrc.endsWith('.svg') || img.currentSrc.startsWith('data:image/svg+xml')) {
           naturalWidth.value = 1
           naturalHeight.value = 1
