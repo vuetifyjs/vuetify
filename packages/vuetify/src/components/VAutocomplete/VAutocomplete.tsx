@@ -43,7 +43,7 @@ import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { FilterMatch } from '@/composables/filter'
 import type { ListItem } from '@/composables/list-items'
-import type { GenericProps } from '@/util'
+import type { GenericProps, SelectItemKey } from '@/util'
 
 function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {
   if (matches == null) return text
@@ -87,19 +87,24 @@ export const makeVAutocompleteProps = propsFactory({
   ...makeTransitionProps({ transition: false }),
 }, 'VAutocomplete')
 
+type ItemType<T> = T extends readonly (infer U)[] ? U : never
+
 export const VAutocomplete = genericComponent<new <
   T extends readonly any[],
-  Item = T extends readonly (infer U)[] ? U : never,
+  Item = ItemType<T>,
   ReturnObject extends boolean = false,
   Multiple extends boolean = false,
   V extends Value<Item, ReturnObject, Multiple> = Value<Item, ReturnObject, Multiple>
 >(
   props: {
     items?: T
+    itemTitle?: SelectItemKey<ItemType<T>>
+    itemValue?: SelectItemKey<ItemType<T>>
+    itemProps?: SelectItemKey<ItemType<T>>
     returnObject?: ReturnObject
     multiple?: Multiple
     modelValue?: V | null
-    'onUpdate:modelValue'?: (val: V) => void
+    'onUpdate:modelValue'?: (value: V) => void
   },
   slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
     item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
@@ -116,9 +121,9 @@ export const VAutocomplete = genericComponent<new <
 
   emits: {
     'update:focused': (focused: boolean) => true,
-    'update:search': (val: any) => true,
-    'update:modelValue': (val: any) => true,
-    'update:menu': (val: boolean) => true,
+    'update:search': (value: any) => true,
+    'update:modelValue': (value: any) => true,
+    'update:menu': (value: boolean) => true,
   },
 
   setup (props, { slots }) {

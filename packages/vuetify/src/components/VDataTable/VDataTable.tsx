@@ -26,11 +26,12 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import type { UnwrapRef } from 'vue'
 import type { Group } from './composables/group'
-import type { DataTableItem, InternalDataTableHeader } from './types'
+import type { CellProps, DataTableItem, InternalDataTableHeader, RowProps } from './types'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
+import type { GenericProps, SelectItemKey } from '@/util'
 
-export type VDataTableSlotProps = {
+export type VDataTableSlotProps<T> = {
   page: number
   itemsPerPage: number
   sortBy: UnwrapRef<ReturnType<typeof provideSort>['sortBy']>
@@ -47,24 +48,24 @@ export type VDataTableSlotProps = {
   toggleExpand: ReturnType<typeof provideExpanded>['toggleExpand']
   isGroupOpen: ReturnType<typeof provideGroupBy>['isGroupOpen']
   toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
-  items: readonly any[]
+  items: readonly T[]
   internalItems: readonly DataTableItem[]
-  groupedItems: readonly (DataTableItem | Group<DataTableItem>)[]
+  groupedItems: readonly (DataTableItem<T> | Group<DataTableItem<T>>)[]
   columns: InternalDataTableHeader[]
   headers: InternalDataTableHeader[][]
 }
 
-export type VDataTableSlots = VDataTableRowsSlots & VDataTableHeadersSlots & {
-  default: VDataTableSlotProps
-  colgroup: VDataTableSlotProps
-  top: VDataTableSlotProps
-  body: VDataTableSlotProps
-  tbody: VDataTableSlotProps
-  thead: VDataTableSlotProps
-  tfoot: VDataTableSlotProps
-  bottom: VDataTableSlotProps
-  'body.prepend': VDataTableSlotProps
-  'body.append': VDataTableSlotProps
+export type VDataTableSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
+  default: VDataTableSlotProps<T>
+  colgroup: VDataTableSlotProps<T>
+  top: VDataTableSlotProps<T>
+  body: VDataTableSlotProps<T>
+  tbody: VDataTableSlotProps<T>
+  thead: VDataTableSlotProps<T>
+  tfoot: VDataTableSlotProps<T>
+  bottom: VDataTableSlotProps<T>
+  'body.prepend': VDataTableSlotProps<T>
+  'body.append': VDataTableSlotProps<T>
   'footer.prepend': never
 }
 
@@ -91,7 +92,20 @@ export const makeVDataTableProps = propsFactory({
   ...makeVDataTableFooterProps(),
 }, 'VDataTable')
 
-export const VDataTable = genericComponent<VDataTableSlots>()({
+type ItemType<T> = T extends readonly (infer U)[] ? U : never
+
+export const VDataTable = genericComponent<new <T extends readonly any[], V>(
+  props: {
+    items?: T
+    itemValue?: SelectItemKey<ItemType<T>>
+    rowProps?: RowProps<ItemType<T>>
+    cellProps?: CellProps<ItemType<T>>
+    itemSelectable?: SelectItemKey<ItemType<T>>
+    modelValue?: V
+    'onUpdate:modelValue'?: (value: V) => void
+  },
+  slots: VDataTableSlots<ItemType<T>>,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VDataTable',
 
   props: makeVDataTableProps(),
@@ -165,7 +179,7 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
       },
     })
 
-    const slotProps = computed<VDataTableSlotProps>(() => ({
+    const slotProps = computed<VDataTableSlotProps<any>>(() => ({
       page: page.value,
       itemsPerPage: itemsPerPage.value,
       sortBy: sortBy.value,

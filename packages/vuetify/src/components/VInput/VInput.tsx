@@ -19,6 +19,7 @@ import { EventProp, genericComponent, getUid, propsFactory, useRender } from '@/
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
 import type { VMessageSlot } from '@/components/VMessages/VMessages'
+import type { GenericProps } from '@/util'
 
 export interface VInputSlot {
   id: ComputedRef<string>
@@ -72,7 +73,13 @@ export type VInputSlots = {
   message: VMessageSlot
 }
 
-export const VInput = genericComponent<VInputSlots>()({
+export const VInput = genericComponent<new <T>(
+  props: {
+    modelValue?: T | null
+    'onUpdate:modelValue'?: (value: T | null) => void
+  },
+  slots: VInputSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VInput',
 
   props: {
@@ -80,7 +87,7 @@ export const VInput = genericComponent<VInputSlots>()({
   },
 
   emits: {
-    'update:modelValue': (val: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { attrs, slots, emit }) {

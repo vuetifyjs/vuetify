@@ -185,6 +185,11 @@ type DefineComponentWithGenericProps<T extends (new (props: Record<string, any>,
   P = III extends Record<'$props', any>
     ? Omit<PropsOptions, keyof III['$props']>
     : PropsOptions,
+  EEE extends EmitsOptions = E extends any[]
+    ? E
+    : III extends Record<'$props', any>
+      ? Omit<E, ToListeners<keyof III['$props']>>
+      : E,
   Base = DefineComponent<
     P,
     RawBindings,
@@ -193,10 +198,10 @@ type DefineComponentWithGenericProps<T extends (new (props: Record<string, any>,
     M,
     Mixin,
     Extends,
-    E extends any[] ? E : III extends Record<'$props', any> ? Omit<E, ToListeners<keyof III['$props']>> : E,
+    EEE,
     EE,
     PublicProps,
-    ExtractPropTypes<P> & ({} extends E ? {} : EmitsToProps<E>),
+    ExtractPropTypes<P> & ({} extends E ? {} : EmitsToProps<EEE>),
     ExtractDefaultPropTypes<P>,
     S
   >

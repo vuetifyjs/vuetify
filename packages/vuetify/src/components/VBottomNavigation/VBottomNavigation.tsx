@@ -22,6 +22,9 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { computed, toRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
+// Types
+import type { GenericProps } from '@/util'
+
 export const makeVBottomNavigationProps = propsFactory({
   bgColor: String,
   color: String,
@@ -53,7 +56,13 @@ export const makeVBottomNavigationProps = propsFactory({
   ...makeThemeProps(),
 }, 'VBottomNavigation')
 
-export const VBottomNavigation = genericComponent()({
+export const VBottomNavigation = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: { default: never },
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VBottomNavigation',
 
   props: makeVBottomNavigationProps(),

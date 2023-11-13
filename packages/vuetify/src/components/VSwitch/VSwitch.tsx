@@ -21,6 +21,7 @@ import { filterInputAttrs, genericComponent, getUid, propsFactory, useRender } f
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
 import type { LoaderSlotProps } from '@/composables/loader'
+import type { GenericProps } from '@/util'
 
 export type VSwitchSlots =
   & VInputSlots
@@ -40,7 +41,13 @@ export const makeVSwitchProps = propsFactory({
   ...makeVSelectionControlProps(),
 }, 'VSwitch')
 
-export const VSwitch = genericComponent<VSwitchSlots>()({
+export const VSwitch = genericComponent<new <T>(
+  props: {
+    modelValue?: T | null
+    'onUpdate:modelValue'?: (value: T | null) => void
+  },
+  slots: VSwitchSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSwitch',
 
   inheritAttrs: false,
@@ -49,8 +56,8 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
 
   emits: {
     'update:focused': (focused: boolean) => true,
-    'update:modelValue': () => true,
-    'update:indeterminate': (val: boolean) => true,
+    'update:modelValue': (value: any) => true,
+    'update:indeterminate': (value: boolean) => true,
   },
 
   setup (props, { attrs, slots }) {

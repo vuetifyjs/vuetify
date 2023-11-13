@@ -107,7 +107,7 @@ export type VFieldSlots = {
 export const VField = genericComponent<new <T>(
   props: {
     modelValue?: T
-    'onUpdate:modelValue'?: (val: T) => any
+    'onUpdate:modelValue'?: (value: T) => void
   },
   slots: VFieldSlots
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -124,7 +124,7 @@ export const VField = genericComponent<new <T>(
 
   emits: {
     'update:focused': (focused: boolean) => true,
-    'update:modelValue': (val: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
