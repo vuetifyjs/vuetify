@@ -94,11 +94,12 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
             loaderClasses.value,
             props.class,
           ]}
-          style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
+          v-model={ model.value }
           id={ id.value }
           focused={ isFocused.value }
+          style={ props.style }
         >
           {{
             ...slots,
