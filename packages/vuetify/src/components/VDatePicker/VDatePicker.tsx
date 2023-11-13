@@ -8,6 +8,7 @@ import { makeVDatePickerMonthProps, VDatePickerMonth } from './VDatePickerMonth'
 import { makeVDatePickerMonthsProps, VDatePickerMonths } from './VDatePickerMonths'
 import { makeVDatePickerYearsProps, VDatePickerYears } from './VDatePickerYears'
 import { VFadeTransition } from '@/components/transitions'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VTextField } from '@/components/VTextField'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
@@ -29,7 +30,7 @@ import type { GenericProps } from '@/util'
 export type VDatePickerSlots = Omit<VPickerSlots, 'header'> & {
   header: {
     header: string
-    appendIcon: string
+    transition: string
     'onClick:append': () => void
   }
 }
@@ -233,6 +234,12 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       const datePickerMonthsProps = omit(VDatePickerMonths.filterProps(props), ['modelValue'])
       const datePickerYearsProps = omit(VDatePickerYears.filterProps(props), ['modelValue'])
 
+      const headerProps = {
+        header: header.value,
+        transition: headerTransition.value,
+        'onClick:append': onClickAppend,
+      }
+
       return (
         <VPicker
           { ...pickerProps }
@@ -249,13 +256,19 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                 { t(props.title) }
               </div>
             ),
-            header: () => (
+            header: () => slots.header ? (
+              <VDefaultsProvider
+                defaults={{
+                  VDatePickerHeader: { ...headerProps },
+                }}
+              >
+                { slots.header?.(headerProps) }
+              </VDefaultsProvider>
+            ) : (
               <VDatePickerHeader
                 key="header"
                 { ...datePickerHeaderProps }
-                header={ header.value }
-                transition={ headerTransition.value }
-                onClick:append={ onClickAppend }
+                { ...headerProps }
                 v-slots={ slots }
               />
             ),
