@@ -102,9 +102,6 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       v => props.multiple ? v : v[0],
     )
     const internal = ref(model.value)
-    watchEffect(() => {
-      internal.value = model.value
-    })
 
     const viewMode = useProxiedModel(props, 'viewMode')
     const inputMode = useProxiedModel(props, 'inputMode')
@@ -224,6 +221,12 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       isReversing.value = adapter.isBefore(before, after)
 
       model.value = val
+    })
+
+    watch(model, val => {
+      if (val[0] === internal.value[0]) return
+
+      internal.value = val
     })
 
     useRender(() => {
