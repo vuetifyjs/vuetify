@@ -28,6 +28,7 @@ export type VDatePickerMonthSlots = {
 
 export const makeVDatePickerMonthProps = propsFactory({
   allowedDates: [Array, Function],
+  disabled: Boolean,
   color: String,
   month: [Number, String],
   hideWeekdays: Boolean,
@@ -157,6 +158,8 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     })
 
     function isDisabled (value: unknown) {
+      if (props.disabled) return true
+
       const date = adapter.date(value)
 
       if (props.min && adapter.isAfter(props.min, date)) return true

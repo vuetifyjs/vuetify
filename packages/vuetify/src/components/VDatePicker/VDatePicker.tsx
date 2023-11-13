@@ -142,6 +142,8 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       return props.max && adapter.isValid(date) ? date : null
     })
     const disabled = computed(() => {
+      if (props.disabled) return true
+
       const targets = []
 
       if (viewMode.value !== 'month') {
