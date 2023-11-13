@@ -15,22 +15,29 @@ import { EventProp, genericComponent, getObjectValueByPath, propsFactory, useRen
 // Types
 import type { PropType } from 'vue'
 import type { CellProps, DataTableItem, ItemKeySlot } from './types'
+import type { GenericProps } from '@/util'
 
-export type VDataTableRowSlots = {
-  'item.data-table-select': Omit<ItemKeySlot, 'value'>
-  'item.data-table-expand': Omit<ItemKeySlot, 'value'>
-} & { [key: `item.${string}`]: ItemKeySlot }
+export type VDataTableRowSlots<T> = {
+  'item.data-table-select': Omit<ItemKeySlot<T>, 'value'>
+  'item.data-table-expand': Omit<ItemKeySlot<T>, 'value'>
+} & { [key: `item.${string}`]: ItemKeySlot<T> }
 
 export const makeVDataTableRowProps = propsFactory({
   index: Number,
   item: Object as PropType<DataTableItem>,
-  cellProps: [Object, Function] as PropType<CellProps>,
+  cellProps: [Object, Function] as PropType<CellProps<any>>,
   onClick: EventProp<[MouseEvent]>(),
   onContextmenu: EventProp<[MouseEvent]>(),
   onDblclick: EventProp<[MouseEvent]>(),
 }, 'VDataTableRow')
 
-export const VDataTableRow = genericComponent<VDataTableRowSlots>()({
+export const VDataTableRow = genericComponent<new <T>(
+  props: {
+    item?: DataTableItem<T>
+    cellProps?: CellProps<T>
+  },
+  slots: VDataTableRowSlots<T>,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VDataTableRow',
 
   props: makeVDataTableRowProps(),
@@ -65,7 +72,7 @@ export const VDataTableRow = genericComponent<VDataTableRowSlots>()({
             toggleSelect,
             isExpanded,
             toggleExpand,
-          } satisfies ItemKeySlot
+          } satisfies ItemKeySlot<any>
 
           const cellProps = typeof props.cellProps === 'function'
             ? props.cellProps({

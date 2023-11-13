@@ -22,6 +22,8 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VDataTableSlotProps, VDataTableSlots } from './VDataTable'
+import type { CellProps, RowProps } from '@/components/VDataTable/types'
+import type { GenericProps, SelectItemKey } from '@/util'
 
 export const makeVDataTableServerProps = propsFactory({
   itemsLength: {
@@ -34,7 +36,20 @@ export const makeVDataTableServerProps = propsFactory({
   ...makeVDataTableFooterProps(),
 }, 'VDataTableServer')
 
-export const VDataTableServer = genericComponent<VDataTableSlots>()({
+type ItemType<T> = T extends readonly (infer U)[] ? U : never
+
+export const VDataTableServer = genericComponent<new <T extends readonly any[], V>(
+  props: {
+    items?: T
+    itemValue?: SelectItemKey<ItemType<T>>
+    rowProps?: RowProps<ItemType<T>>
+    cellProps?: CellProps<ItemType<T>>
+    itemSelectable?: SelectItemKey<ItemType<T>>
+    modelValue?: V
+    'onUpdate:modelValue'?: (value: V) => void
+  },
+  slots: VDataTableSlots<ItemType<T>>,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VDataTableServer',
 
   props: makeVDataTableServerProps(),
@@ -102,7 +117,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
       },
     })
 
-    const slotProps = computed<VDataTableSlotProps>(() => ({
+    const slotProps = computed<VDataTableSlotProps<any>>(() => ({
       page: page.value,
       itemsPerPage: itemsPerPage.value,
       sortBy: sortBy.value,

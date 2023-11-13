@@ -20,6 +20,7 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 import type { PropType } from 'vue'
 import type { VWindowSlots } from '@/components/VWindow/VWindow'
 import type { GroupProvide } from '@/composables/group'
+import type { GenericProps } from '@/util'
 
 export const makeVCarouselProps = propsFactory({
   color: String,
@@ -60,13 +61,19 @@ type VCarouselSlots = VWindowSlots & {
   }
 }
 
-export const VCarousel = genericComponent<VCarouselSlots>()({
+export const VCarousel = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: VCarouselSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VCarousel',
 
   props: makeVCarouselProps(),
 
   emits: {
-    'update:modelValue': (val: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { slots }) {

@@ -70,11 +70,11 @@ export function getObjectValueByPath (obj: any, path?: string | null, fallback?:
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
-export type SelectItemKey =
+export type SelectItemKey<T = Record<string, any>> =
   | boolean | null | undefined // Ignored
   | string // Lookup by key, can use dot notation for nested objects
   | readonly (string | number)[] // Nested lookup by key, each array item is a key in the next level
-  | ((item: Record<string, any>, fallback?: any) => any)
+  | ((item: T, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: any,
@@ -669,7 +669,7 @@ export function eventName (propName: string) {
   return propName[2].toLowerCase() + propName.slice(3)
 }
 
-export type EventProp<T extends any[] = any[], F = (...args: T) => any> = F | F[]
+export type EventProp<T extends any[] = any[], F = (...args: T) => void> = F
 export const EventProp = <T extends any[] = any[]>() => [Function, Array] as PropType<EventProp<T>>
 
 export function hasEvent (props: Record<string, any>, name: string) {
