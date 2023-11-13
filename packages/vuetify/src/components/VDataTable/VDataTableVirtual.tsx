@@ -225,6 +225,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                                   { ...itemSlotProps.props }
                                   ref={ itemRef }
                                   key={ itemSlotProps.internalItem.index }
+                                  index={ itemSlotProps.internalItem.index }
                                   v-slots={ slots }
                                 />
                               )
