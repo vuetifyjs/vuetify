@@ -241,6 +241,7 @@
 /* region LABEL */
 .v-label.v-field-label
   contain: layout paint
+  display: block
   margin-inline-start: var(--v-field-padding-start)
   margin-inline-end: var(--v-field-padding-end)
   max-width: calc(100% - var(--v-field-padding-start) - var(--v-field-padding-end))
@@ -252,10 +253,6 @@
   transition-property: opacity, transform
   width: calc(100% - var(--v-field-padding-start))
   z-index: 1
-
-  & > *
-    text-overflow: ellipsis
-    overflow: hidden
 
   .v-field--variant-underlined &,
   .v-field--variant-plain &

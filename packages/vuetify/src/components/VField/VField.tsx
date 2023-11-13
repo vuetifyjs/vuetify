@@ -221,7 +221,7 @@ export const VField = genericComponent<new <T>(
           label: props.label,
           props: { for: id.value },
         })
-        : <span>{ props.label }</span>
+        : props.label
 
       return (
         <div
