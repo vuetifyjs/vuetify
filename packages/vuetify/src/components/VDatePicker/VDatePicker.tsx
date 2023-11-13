@@ -249,7 +249,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
             props.class,
           ]}
           style={ props.style }
-          width={ props.showWeek ? 408 : 360 }
+          width={ props.width ?? (props.showWeek ? 408 : 360) }
           v-slots={{
             title: () => slots.title?.() ?? (
               <div class="v-date-picker__title">
