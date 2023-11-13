@@ -122,40 +122,38 @@ To create your own date adapter, implement the **DateAdapter** interface:
 ```ts
 import type { DateAdapter } from 'vuetify/labs'
 
-export interface DateAdapter<Date> {
-  date (value?: any): Date | null
-  format (date: Date, formatString: string): string
-  toJsDate (value: Date): Date
-  parseISO (date: string): Date
-  toISO (date: Date): string
+export interface DateAdapter<TDate> {
+  date (value?: any): TDate | null
+  format (date: TDate, formatString: string): string
+  toJsTDate (value: TDate): TDate
+  parseISO (date: string): TDate
+  toISO (date: TDate): string
 
-  startOfDay (date: Date): Date
-  endOfDay (date: Date): Date
-  startOfMonth (date: Date): Date
-  endOfMonth (date: Date): Date
-  startOfYear (date: Date): Date
-  endOfYear (date: Date): Date
+  startOfDay (date: TDate): TDate
+  endOfDay (date: TDate): TDate
+  startOfMonth (date: TDate): TDate
+  endOfMonth (date: TDate): TDate
+  startOfYear (date: TDate): TDate
+  endOfYear (date: TDate): TDate
 
-  isBefore (date: Date, comparing: Date): boolean
-  isAfter (date: Date, comparing: Date): boolean
-  isEqual (date: Date, comparing: Date): boolean
-  isSameDay (date: Date, comparing: Date): boolean
-  isSameMonth (date: Date, comparing: Date): boolean
+  isBefore (date: TDate, comparing: TDate): boolean
+  isAfter (date: TDate, comparing: TDate): boolean
+  isEqual (date: TDate, comparing: TDate): boolean
+  isSameDay (date: TDate, comparing: TDate): boolean
+  isSameMonth (date: TDate, comparing: TDate): boolean
   isValid (date: any): boolean
-  isWithinRange (date: Date, range: [Date, Date]): boolean
+  isWithinRange (date: TDate, range: [TDate, TDate]): boolean
 
-  addDays (date: Date, amount: number): Date
-  addMonths (date: Date, amount: number): Date
+  addDays (date: TDate, amount: number): TDate
+  addMonths (date: TDate, amount: number): TDate
 
-  getYear (date: Date): number
-  getNextYear (date: Date): Date
-  setYear (date: Date, year: number): Date
-  getDate (date: Date): number
-  getDiff (date: Date, comparing: Date | string, unit?: string): number
-  getWeekArray (date: Date): Date[][]
+  getYear (date: TDate): number
+  setYear (date: TDate, year: number): TDate
+  getDiff (date: TDate, comparing: TDate | string, unit?: string): number
+  getWeekArray (date: TDate): TDate[][]
   getWeekdays (): string[]
-  getMonth (date: Date): number
-  setMonth (date: Date, month: number): Date
-  getNextMonth (date: Date): Date
+  getMonth (date: TDate): number
+  setMonth (date: TDate, month: number): TDate
+  getNextMonth (date: TDate): TDate
 }
 ```

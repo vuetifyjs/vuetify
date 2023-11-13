@@ -330,10 +330,6 @@ function getYear (date: Date) {
   return date.getFullYear()
 }
 
-function getNextYear (date: Date) {
-  return new Date(date.getFullYear() + 1, date.getMonth(), date.getDate())
-}
-
 function getMonth (date: Date) {
   return date.getMonth()
 }
@@ -380,10 +376,6 @@ function isSameDay (date: Date, comparing: Date) {
 function isSameMonth (date: Date, comparing: Date) {
   return date.getMonth() === comparing.getMonth() &&
     date.getFullYear() === comparing.getFullYear()
-}
-
-function getDate (date: Date) {
-  return date.getDate()
 }
 
 function getDiff (date: Date, comparing: Date | string, unit?: string) {
@@ -502,10 +494,6 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return setYear(date, year)
   }
 
-  getDate (date: Date) {
-    return getDate(date)
-  }
-
   getDiff (date: Date, comparing: Date | string, unit?: string) {
     return getDiff(date, comparing, unit)
   }
@@ -516,10 +504,6 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   getYear (date: Date) {
     return getYear(date)
-  }
-
-  getNextYear (date: Date) {
-    return getNextYear(date)
   }
 
   getMonth (date: Date) {

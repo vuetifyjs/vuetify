@@ -90,7 +90,7 @@ export function useSelectionControl (
       const val = group ? group.modelValue.value : modelValue.value
 
       return isMultiple.value
-        ? val.some((v: any) => props.valueComparator(v, trueValue.value))
+        ? wrapInArray(val).some((v: any) => props.valueComparator(v, trueValue.value))
         : props.valueComparator(val, trueValue.value)
     },
     set (val: boolean) {
