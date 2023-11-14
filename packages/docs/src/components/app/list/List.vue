@@ -79,6 +79,7 @@
     routeMatch?: string
     routePath?: string
     emphasized?: boolean
+    onClick?: () => void
   }
 
   function generateApiItems (locale: string) {
@@ -168,6 +169,7 @@
         to: item?.to,
         href: item?.href,
       }),
+      onClick: item?.onClick,
       rel: item.href ? 'noopener noreferrer' : undefined,
       target: item.href ? '_blank' : undefined,
       children: item.title === 'api' ? generateApiItems(locale.value) : generateListItems(item, item.title!, locale.value, t),

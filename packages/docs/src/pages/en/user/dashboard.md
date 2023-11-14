@@ -13,10 +13,4 @@ meta:
 
 ### Perks
 
-::: info
-
-Support Vuetify and gain access to exclusive documentation perks and features for only [$1 per month](https://github.com/sponsors/johnleider)
-
-:::
-
 <PerksOptions />
