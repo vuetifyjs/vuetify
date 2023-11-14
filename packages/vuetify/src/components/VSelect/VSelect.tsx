@@ -268,6 +268,12 @@ export const VSelect = genericComponent<new <
         vTextFieldRef.value.value = ''
       }
     }
+    
+    watch(items, () => {
+      if(isFocused && !menuDisabled.value && props.hideNoData) {
+        menu.value = !menu.value;
+      }
+    })
 
     watch(menu, () => {
       if (!props.hideSelected && menu.value && model.value.length) {
