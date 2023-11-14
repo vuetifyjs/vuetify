@@ -28,6 +28,7 @@ export type VDatePickerMonthSlots = {
 
 export const makeVDatePickerMonthProps = propsFactory({
   allowedDates: [Array, Function],
+  disabled: Boolean,
   color: String,
   month: [Number, String],
   hideWeekdays: Boolean,
@@ -106,7 +107,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       // Make sure there's always 6 weeks in month (6 * 7 days)
       // But only do it if we're not hiding adjacent months?
       const daysInMonth = 6 * 7
-      if (days.length < daysInMonth && props.showAdjacentMonths) {
+      if (days.length < daysInMonth) {
         const lastDay = days[days.length - 1]
 
         let week = []
@@ -157,6 +158,8 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     })
 
     function isDisabled (value: unknown) {
+      if (props.disabled) return true
+
       const date = adapter.date(value)
 
       if (props.min && adapter.isAfter(props.min, date)) return true

@@ -28,7 +28,7 @@ import { focusChild, genericComponent, getPropertyFromItem, omit, propsFactory, 
 import type { PropType } from 'vue'
 import type { VListChildrenSlots } from './VListChildren'
 import type { ItemProps, ListItem } from '@/composables/list-items'
-import type { GenericProps } from '@/util'
+import type { GenericProps, SelectItemKey } from '@/util'
 
 export interface InternalListItem<T = any> extends ListItem<T> {
   type?: 'item' | 'subheader' | 'divider'
@@ -113,19 +113,33 @@ export const makeVListProps = propsFactory({
   ...makeVariantProps({ variant: 'text' } as const),
 }, 'VList')
 
-export const VList = genericComponent<new <T>(
+type ItemType<T> = T extends readonly (infer U)[] ? U : never
+
+export const VList = genericComponent<new <
+  T extends readonly any[],
+  S = unknown,
+  O = unknown
+>(
   props: {
-    items?: T[]
+    items?: T
+    itemTitle?: SelectItemKey<ItemType<T>>
+    itemValue?: SelectItemKey<ItemType<T>>
+    itemChildren?: SelectItemKey<ItemType<T>>
+    itemProps?: SelectItemKey<ItemType<T>>
+    selected?: readonly S[]
+    'onUpdate:selected'?: (value: S[]) => void
+    opened?: readonly O[]
+    'onUpdate:opened'?: (value: O[]) => void
   },
-  slots: VListChildrenSlots<T>
+  slots: VListChildrenSlots<ItemType<T>>
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VList',
 
   props: makeVListProps(),
 
   emits: {
-    'update:selected': (val: unknown[]) => true,
-    'update:opened': (val: unknown[]) => true,
+    'update:selected': (value: unknown[]) => true,
+    'update:opened': (value: unknown[]) => true,
     'click:open': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },

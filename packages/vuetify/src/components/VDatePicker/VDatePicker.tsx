@@ -8,6 +8,7 @@ import { makeVDatePickerMonthProps, VDatePickerMonth } from './VDatePickerMonth'
 import { makeVDatePickerMonthsProps, VDatePickerMonths } from './VDatePickerMonths'
 import { makeVDatePickerYearsProps, VDatePickerYears } from './VDatePickerYears'
 import { VFadeTransition } from '@/components/transitions'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VTextField } from '@/components/VTextField'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
@@ -17,8 +18,8 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, shallowRef, watch, watchEffect } from 'vue'
-import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { computed, ref, shallowRef, watch } from 'vue'
+import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -29,7 +30,7 @@ import type { GenericProps } from '@/util'
 export type VDatePickerSlots = Omit<VPickerSlots, 'header'> & {
   header: {
     header: string
-    appendIcon: string
+    transition: string
     'onClick:append': () => void
   }
 }
@@ -100,21 +101,17 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       v => wrapInArray(v),
       v => props.multiple ? v : v[0],
     )
-    const internal = ref(model.value)
-    watchEffect(() => {
-      internal.value = model.value
-    })
 
     const viewMode = useProxiedModel(props, 'viewMode')
     const inputMode = useProxiedModel(props, 'inputMode')
-    const _model = computed(() => {
-      const value = adapter.date(internal.value?.[0])
+    const internal = computed(() => {
+      const value = adapter.date(model.value?.[0])
 
       return value && adapter.isValid(value) ? value : adapter.date()
     })
 
-    const month = ref(Number(props.month ?? adapter.getMonth(adapter.startOfMonth(_model.value))))
-    const year = ref(Number(props.year ?? adapter.getYear(adapter.startOfYear(adapter.setMonth(_model.value, month.value)))))
+    const month = ref(Number(props.month ?? adapter.getMonth(adapter.startOfMonth(internal.value))))
+    const year = ref(Number(props.year ?? adapter.getYear(adapter.startOfYear(adapter.setMonth(internal.value, month.value)))))
 
     const isReversing = shallowRef(false)
     const header = computed(() => {
@@ -144,6 +141,8 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       return props.max && adapter.isValid(date) ? date : null
     })
     const disabled = computed(() => {
+      if (props.disabled) return true
+
       const targets = []
 
       if (viewMode.value !== 'month') {
@@ -216,13 +215,11 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       if (viewMode.value === 'year') onClickYear()
     })
 
-    watch(internal, (val, oldVal) => {
+    watch(model, (val, oldVal) => {
       const before = adapter.date(wrapInArray(val)[0])
       const after = adapter.date(wrapInArray(oldVal)[0])
 
       isReversing.value = adapter.isBefore(before, after)
-
-      model.value = val
     })
 
     useRender(() => {
@@ -233,29 +230,43 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       const datePickerMonthsProps = omit(VDatePickerMonths.filterProps(props), ['modelValue'])
       const datePickerYearsProps = omit(VDatePickerYears.filterProps(props), ['modelValue'])
 
+      const headerProps = {
+        header: header.value,
+        transition: headerTransition.value,
+        'onClick:append': onClickAppend,
+      }
+
       return (
         <VPicker
           { ...pickerProps }
           class={[
             'v-date-picker',
             `v-date-picker--${viewMode.value}`,
+            {
+              'v-date-picker--show-week': props.showWeek,
+            },
             props.class,
           ]}
           style={ props.style }
-          width={ props.showWeek ? 408 : 360 }
           v-slots={{
             title: () => slots.title?.() ?? (
               <div class="v-date-picker__title">
                 { t(props.title) }
               </div>
             ),
-            header: () => (
+            header: () => slots.header ? (
+              <VDefaultsProvider
+                defaults={{
+                  VDatePickerHeader: { ...headerProps },
+                }}
+              >
+                { slots.header?.(headerProps) }
+              </VDefaultsProvider>
+            ) : (
               <VDatePickerHeader
                 key="header"
                 { ...datePickerHeaderProps }
-                header={ header.value }
-                transition={ headerTransition.value }
-                onClick:append={ onClickAppend }
+                { ...headerProps }
                 v-slots={ slots }
               />
             ),
@@ -292,7 +303,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                     <VDatePickerMonth
                       key="date-picker-month"
                       { ...datePickerMonthProps }
-                      v-model={ internal.value }
+                      v-model={ model.value }
                       v-model:month={ month.value }
                       v-model:year={ year.value }
                       min={ minDate.value }

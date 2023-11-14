@@ -40,7 +40,7 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
       bg: 'bg-BG',
       ca: 'ca-ES',
       ckb: '',
-      cs: '',
+      cs: 'cs-CZ',
       de: 'de-DE',
       el: 'el-GR',
       en: 'en-US',

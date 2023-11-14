@@ -19,13 +19,14 @@ import type { Group } from './composables/group'
 import type { CellProps, DataTableItem, GroupHeaderSlot, ItemSlot, RowProps } from './types'
 import type { VDataTableGroupHeaderRowSlots } from './VDataTableGroupHeaderRow'
 import type { VDataTableRowSlots } from './VDataTableRow'
+import type { GenericProps } from '@/util'
 
-export type VDataTableRowsSlots = VDataTableGroupHeaderRowSlots & VDataTableRowSlots & {
-  item: ItemSlot & { props: Record<string, any> }
+export type VDataTableRowsSlots<T> = VDataTableGroupHeaderRowSlots & VDataTableRowSlots<T> & {
+  item: ItemSlot<T> & { props: Record<string, any> }
   loading: never
   'group-header': GroupHeaderSlot
   'no-data': never
-  'expanded-row': ItemSlot
+  'expanded-row': ItemSlot<T>
 }
 
 export const makeVDataTableRowsProps = propsFactory({
@@ -44,11 +45,16 @@ export const makeVDataTableRowsProps = propsFactory({
     default: '$vuetify.noDataText',
   },
   rowHeight: Number,
-  rowProps: [Object, Function] as PropType<RowProps>,
-  cellProps: [Object, Function] as PropType<CellProps>,
+  rowProps: [Object, Function] as PropType<RowProps<any>>,
+  cellProps: [Object, Function] as PropType<CellProps<any>>,
 }, 'VDataTableRows')
 
-export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
+export const VDataTableRows = genericComponent<new <T>(
+  props: {
+    items?: readonly (DataTableItem<T> | Group<T>)[]
+  },
+  slots: VDataTableRowsSlots<T>,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VDataTableRows',
 
   inheritAttrs: false,
@@ -124,7 +130,7 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
               toggleExpand,
               isSelected,
               toggleSelect,
-            } satisfies ItemSlot
+            } satisfies ItemSlot<any>
 
             const itemSlotProps = {
               ...slotProps,
