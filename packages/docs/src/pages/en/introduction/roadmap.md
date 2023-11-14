@@ -21,7 +21,9 @@ Vuetify is always under development. We are constantly working towards improving
 The following releases are currently under development:
 
 ::: warning
-  This is not an exhaustive list and is subject to change at any time without notice
+
+This is not an exhaustive list and is subject to change at any time without notice
+
 :::
 
 <promoted slug="vuetify-github-sponsors" />
@@ -29,20 +31,12 @@ The following releases are currently under development:
 ### v3.5
 
 - **Target Release:** Q1 2024
-- **Overview:** Date range picker, time picker, maybe calendar.
+- **Overview:** A maintenance cycle post v3.4 that will focus on bug fixes and general improvements.
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/70)
-
-### v4.0
-
-- **Target Release:** Q2 2024
-- **Overview:**
-  - CSS cascade layers and replacing sass variables with custom properties.
-  - Some small prop consistency changes.
-- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/62)
 
 ### Labs release schedule
 
-Information regarding upcoming Labs components is located on the [Labs introduction](/labs/introduction/) page.
+Information regarding upcoming 🧪 Labs components is located on the [Labs introduction](/labs/introduction/) page.
 
 ----
 
@@ -59,6 +53,7 @@ The following are the already released **minor** and **major** version updates. 
 ### v3.4 (Blackguard)
 
 - **Released:** November 2023
+- **Hero:** [Banner](https://vuetifyjs.b-cdn.net/docs/images/release-banners/blackguard-34.png)
 - **Target Release:** Q3 2023
 - **Notes:** [v3.4 Release](/getting-started/release-notes/?version=v3.4.0)
 - **Overview:** Introduced 8 updated components to the main framework from Labs: VBottomSheet, VDataIterator, VDataTable, VDatePicker, VInfiniteScroll, VOtpInput, VSkeletonLoader, and VStepper.
