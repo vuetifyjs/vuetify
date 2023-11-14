@@ -19,7 +19,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, shallowRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -101,18 +101,17 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       v => wrapInArray(v),
       v => props.multiple ? v : v[0],
     )
-    const internal = ref(model.value)
 
     const viewMode = useProxiedModel(props, 'viewMode')
     const inputMode = useProxiedModel(props, 'inputMode')
-    const _model = computed(() => {
-      const value = adapter.date(internal.value?.[0])
+    const internal = computed(() => {
+      const value = adapter.date(model.value?.[0])
 
       return value && adapter.isValid(value) ? value : adapter.date()
     })
 
-    const month = ref(Number(props.month ?? adapter.getMonth(adapter.startOfMonth(_model.value))))
-    const year = ref(Number(props.year ?? adapter.getYear(adapter.startOfYear(adapter.setMonth(_model.value, month.value)))))
+    const month = ref(Number(props.month ?? adapter.getMonth(adapter.startOfMonth(internal.value))))
+    const year = ref(Number(props.year ?? adapter.getYear(adapter.startOfYear(adapter.setMonth(internal.value, month.value)))))
 
     const isReversing = shallowRef(false)
     const header = computed(() => {
@@ -216,19 +215,11 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       if (viewMode.value === 'year') onClickYear()
     })
 
-    watch(internal, (val, oldVal) => {
+    watch(model, (val, oldVal) => {
       const before = adapter.date(wrapInArray(val)[0])
       const after = adapter.date(wrapInArray(oldVal)[0])
 
       isReversing.value = adapter.isBefore(before, after)
-
-      model.value = val
-    })
-
-    watch(model, val => {
-      if (val[0] === internal.value[0]) return
-
-      internal.value = val
     })
 
     useRender(() => {
@@ -312,7 +303,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                     <VDatePickerMonth
                       key="date-picker-month"
                       { ...datePickerMonthProps }
-                      v-model={ internal.value }
+                      v-model={ model.value }
                       v-model:month={ month.value }
                       v-model:year={ year.value }
                       min={ minDate.value }
