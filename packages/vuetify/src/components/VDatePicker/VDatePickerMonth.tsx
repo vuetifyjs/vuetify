@@ -107,7 +107,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       // Make sure there's always 6 weeks in month (6 * 7 days)
       // But only do it if we're not hiding adjacent months?
       const daysInMonth = 6 * 7
-      if (days.length < daysInMonth && props.showAdjacentMonths) {
+      if (days.length < daysInMonth) {
         const lastDay = days[days.length - 1]
 
         let week = []
