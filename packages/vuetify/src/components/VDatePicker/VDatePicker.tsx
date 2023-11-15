@@ -18,7 +18,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, shallowRef, toRefs, watch } from 'vue'
+import { computed, ref, shallowRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -110,18 +110,8 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       return value && adapter.isValid(value) ? value : adapter.date()
     })
 
-    const { month: localMonth, year: localYear } = toRefs(props)
-
-    const internalMonth = ref<number>(Number(localMonth.value))
-    const internalYear = ref<number>(Number(localYear.value))
-
-    watch(localMonth, () => {
-      internalMonth.value = Number(localMonth.value)
-    })
-
-    watch(localYear, () => {
-      internalYear.value = Number(localYear.value)
-    })
+    const internalMonth = ref<number>(Number(props.month))
+    const internalYear = ref<number>(Number(props.year))
 
     const month = ref(Number(internalMonth.value ?? adapter.getMonth(adapter.startOfMonth(internal.value))))
     const year = ref(Number(internalYear.value ?? adapter.getYear(adapter.startOfYear(adapter.setMonth(internal.value, month.value)))))
@@ -230,8 +220,16 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       if (viewMode.value === 'months') onClickMonth()
     })
 
+    watch(() => props.month, () => {
+      internalMonth.value = Number(props.month)
+    })
+
     watch(year, () => {
       if (viewMode.value === 'year') onClickYear()
+    })
+
+    watch(() => props.year, () => {
+      internalYear.value = Number(props.year)
     })
 
     watch(model, (val, oldVal) => {
