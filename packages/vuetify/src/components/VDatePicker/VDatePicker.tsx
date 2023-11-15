@@ -18,8 +18,8 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, shallowRef, watch } from 'vue'
-import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { computed, ref, shallowRef, toRefs, watch } from 'vue'
+import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -110,8 +110,21 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       return value && adapter.isValid(value) ? value : adapter.date()
     })
 
-    const month = ref(Number(props.month ?? adapter.getMonth(adapter.startOfMonth(internal.value))))
-    const year = ref(Number(props.year ?? adapter.getYear(adapter.startOfYear(adapter.setMonth(internal.value, month.value)))))
+    const { month: localMonth, year: localYear } = toRefs(props)
+
+    const internalMonth = ref<number>(Number(localMonth.value))
+    const internalYear = ref<number>(Number(localYear.value))
+
+    watch(localMonth, () => {
+      internalMonth.value = Number(localMonth.value)
+    })
+
+    watch(localYear, () => {
+      internalYear.value = Number(localYear.value)
+    })
+
+    const month = ref(Number(internalMonth.value ?? adapter.getMonth(adapter.startOfMonth(internal.value))))
+    const year = ref(Number(internalYear.value ?? adapter.getYear(adapter.startOfYear(adapter.setMonth(internal.value, month.value)))))
 
     const isReversing = shallowRef(false)
     const header = computed(() => {
@@ -123,7 +136,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
     })
     const text = computed(() => {
       return adapter.format(
-        adapter.setYear(adapter.setMonth(adapter.date(), month.value), year.value),
+        adapter.setYear(adapter.setMonth(adapter.date(), Number(internalMonth.value)), Number(internalYear.value)),
         'monthAndYear',
       )
     })
@@ -176,11 +189,14 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
     function onClickNext () {
       if (month.value < 11) {
         month.value++
+        internalMonth.value++
 
         emit('update:month', month.value)
       } else {
         year.value++
+        internalYear.value = year.value
         month.value = 0
+        internalMonth.value = month.value
 
         emit('update:year', year.value)
       }
@@ -189,11 +205,14 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
     function onClickPrev () {
       if (month.value > 0) {
         month.value--
+        internalMonth.value--
 
         emit('update:month', month.value)
       } else {
         year.value--
+        internalYear.value = year.value
         month.value = 11
+        internalMonth.value = month.value
 
         emit('update:year', month.value)
       }
@@ -287,7 +306,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                     <VDatePickerMonths
                       key="date-picker-months"
                       { ...datePickerMonthsProps }
-                      v-model={ month.value }
+                      v-model={ internalMonth.value }
                       min={ minDate.value }
                       max={ maxDate.value }
                     />
@@ -295,7 +314,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                     <VDatePickerYears
                       key="date-picker-years"
                       { ...datePickerYearsProps }
-                      v-model={ year.value }
+                      v-model={ internalYear.value }
                       min={ minDate.value }
                       max={ maxDate.value }
                     />
@@ -304,8 +323,8 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                       key="date-picker-month"
                       { ...datePickerMonthProps }
                       v-model={ model.value }
-                      v-model:month={ month.value }
-                      v-model:year={ year.value }
+                      v-model:month={ internalMonth.value }
+                      v-model:year={ internalYear.value }
                       min={ minDate.value }
                       max={ maxDate.value }
                     />
