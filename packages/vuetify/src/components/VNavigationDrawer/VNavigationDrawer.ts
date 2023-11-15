@@ -385,7 +385,7 @@ export default baseMixins.extend({
     genContent () {
       return this.$createElement('div', {
         staticClass: 'v-navigation-drawer__content',
-      }, this.$slots.default)
+      }, getSlot(this))
     },
     genBorder () {
       return this.$createElement('div', {
