@@ -1,6 +1,6 @@
 // Composables
+import { transformItems } from '../composables/items'
 import { sortItems } from '../composables/sort'
-import { transformItems } from '@/composables/list-items'
 
 // Utilities
 import { describe, expect, it } from '@jest/globals'
@@ -12,6 +12,9 @@ describe('VDataTable - sorting', () => {
       { string: 'bar', number: 2 },
       { string: 'baz', number: 4 },
       { string: 'fizzbuzz', number: 3 },
+    ], [
+      { key: 'string', value: 'string', sortable: true },
+      { key: 'number', value: 'number', sortable: true },
     ])
 
     expect(
@@ -76,7 +79,13 @@ describe('VDataTable - sorting', () => {
   })
 
   it('should sort items with deep structure', () => {
-    const items = transformItems({} as any, [{ foo: { bar: { baz: 3 } } }, { foo: { bar: { baz: 1 } } }, { foo: { bar: { baz: 2 } } }])
+    const items = transformItems({} as any, [
+      { foo: { bar: { baz: 3 } } },
+      { foo: { bar: { baz: 1 } } },
+      { foo: { bar: { baz: 2 } } },
+    ], [
+      { key: 'foo.bar.baz', value: 'foo.bar.baz', sortable: true },
+    ])
 
     expect(
       sortItems(items, [{ key: 'foo.bar.baz', order: 'asc' }], 'en')
@@ -90,6 +99,9 @@ describe('VDataTable - sorting', () => {
       { string: 'bar', number: 3 },
       { string: 'baz', number: 2 },
       { string: 'baz', number: 1 },
+    ], [
+      { key: 'string', value: 'string', sortable: true },
+      { key: 'number', value: 'number', sortable: true },
     ])
 
     expect(
@@ -212,6 +224,9 @@ describe('VDataTable - sorting', () => {
       { string: 'foobar', number: 5 },
       { string: 'barbaz', number: undefined },
       { string: 'foobarbuzz', number: '' },
+    ], [
+      { key: 'string', value: 'string', sortable: true },
+      { key: 'number', value: 'number', sortable: true },
     ])
 
     expect(
