@@ -128,8 +128,10 @@ export function sortItems<T, I extends DataTableItem<T>|DataIteratorItem<T>> (
 
       if (sortOrder === false) continue
 
-      let sortA = getObjectValueByPath(a.raw, sortKey)
-      let sortB = getObjectValueByPath(b.raw, sortKey)
+      // @ts-expect-error Property 'columns' does not exist on type 'DataIteratorItem<T>'
+      let sortA = getObjectValueByPath(a.columns ?? a.raw, sortKey)
+      // @ts-expect-error Property 'columns' does not exist on type 'DataIteratorItem<T>'
+      let sortB = getObjectValueByPath(b.columns ?? b.raw, sortKey)
 
       if (sortOrder === 'desc') {
         [sortA, sortB] = [sortB, sortA]
