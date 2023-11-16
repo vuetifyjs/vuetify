@@ -177,11 +177,9 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
     }
 
     function onClickNext () {
-      if (month.value < 11) {
+      if (internalMonth.value < 11) {
         month.value++
         internalMonth.value++
-
-        emit('update:month', month.value)
       } else {
         year.value++
         internalYear.value = year.value
@@ -190,14 +188,14 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
 
         emit('update:year', year.value)
       }
+
+      emit('update:month', internalMonth.value)
     }
 
     function onClickPrev () {
-      if (month.value > 0) {
+      if (internalMonth.value > 0) {
         month.value--
         internalMonth.value--
-
-        emit('update:month', month.value)
       } else {
         year.value--
         internalYear.value = year.value
@@ -206,6 +204,8 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
 
         emit('update:year', month.value)
       }
+
+      emit('update:month', internalMonth.value)
     }
 
     function onClickMonth () {
@@ -216,20 +216,14 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       viewMode.value = viewMode.value === 'year' ? 'month' : 'year'
     }
 
-    watch(month, () => {
-      if (viewMode.value === 'months') onClickMonth()
-    })
-
     watch(() => props.month, () => {
       internalMonth.value = Number(props.month)
-    })
-
-    watch(year, () => {
-      if (viewMode.value === 'year') onClickYear()
+      if (viewMode.value === 'months') onClickMonth()
     })
 
     watch(() => props.year, () => {
       internalYear.value = Number(props.year)
+      if (viewMode.value === 'year') onClickYear()
     })
 
     watch(model, (val, oldVal) => {
