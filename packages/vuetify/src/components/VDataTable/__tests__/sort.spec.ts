@@ -93,6 +93,21 @@ describe('VDataTable - sorting', () => {
     ).toStrictEqual([{ foo: { bar: { baz: 1 } } }, { foo: { bar: { baz: 2 } } }, { foo: { bar: { baz: 3 } } }])
   })
 
+  it('should sort items with value function in column', () => {
+    const items = transformItems({} as any, [
+      { foo: { bar: { baz: 3 } } },
+      { foo: { bar: { baz: 1 } } },
+      { foo: { bar: { baz: 2 } } },
+    ], [
+      { key: 'foobarbaz', value: v => v.foo.bar.baz, sortable: true },
+    ])
+
+    expect(
+      sortItems(items, [{ key: 'foobarbaz', order: 'asc' }], 'en')
+        .map(i => i.raw)
+    ).toStrictEqual([{ foo: { bar: { baz: 1 } } }, { foo: { bar: { baz: 2 } } }, { foo: { bar: { baz: 3 } } }])
+  })
+
   it('should sort items by multiple columns', () => {
     const items = transformItems({} as any, [
       { string: 'foo', number: 1 },
