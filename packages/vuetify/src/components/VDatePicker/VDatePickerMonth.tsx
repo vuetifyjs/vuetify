@@ -162,8 +162,8 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
 
       const date = adapter.date(value)
 
-      if (props.min && adapter.isAfter(props.min, date)) return true
-      if (props.max && adapter.isAfter(date, props.max)) return true
+      if (props.min && adapter.isAfter(adapter.date(props.min), date)) return true
+      if (props.max && adapter.isAfter(date, adapter.date(props.max))) return true
 
       if (Array.isArray(props.allowedDates)) {
         return !props.allowedDates.some(d => adapter.isSameDay(adapter.date(d), date))
