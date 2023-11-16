@@ -64,37 +64,34 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       [],
       v => wrapInArray(v),
     )
-    // shorthand to access the first value in the model or a fresh date
-    const _model = computed(() => {
-      const value = model.value?.[0]
+    const displayDate = computed(() => {
+      if (model.value.length > 0) return adapter.date(model.value[0])
+      if (props.min) return adapter.date(props.min)
+      if (Array.isArray(props.allowedDates)) return adapter.date(props.allowedDates[0])
 
-      return value && adapter.isValid(value) ? value : adapter.date()
+      return adapter.date()
     })
     const year = useProxiedModel(
       props,
       'year',
       undefined,
       v => {
-        let date = adapter.date(_model.value)
+        const value = v != null ? Number(v) : adapter.getYear(displayDate.value)
 
-        if (v != null) date = adapter.setYear(date, Number(v))
-
-        return adapter.startOfYear(date)
+        return adapter.startOfYear(adapter.setYear(adapter.date(), value))
       },
       v => adapter.getYear(v)
     )
+
     const month = useProxiedModel(
       props,
       'month',
       undefined,
       v => {
-        let date = adapter.date(_model.value)
+        const value = v != null ? Number(v) : adapter.getMonth(displayDate.value)
+        const date = adapter.setYear(adapter.date(), adapter.getYear(year.value))
 
-        if (v != null) date = adapter.setMonth(date, Number(v))
-
-        date = adapter.setYear(date, adapter.getYear(year.value))
-
-        return date
+        return adapter.setMonth(date, value)
       },
       v => adapter.getMonth(v)
     )
@@ -165,7 +162,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       if (props.min && adapter.isAfter(adapter.date(props.min), date)) return true
       if (props.max && adapter.isAfter(date, adapter.date(props.max))) return true
 
-      if (Array.isArray(props.allowedDates)) {
+      if (Array.isArray(props.allowedDates) && props.allowedDates.length > 0) {
         return !props.allowedDates.some(d => adapter.isSameDay(adapter.date(d), date))
       }
 
