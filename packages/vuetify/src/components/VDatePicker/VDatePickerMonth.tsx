@@ -10,7 +10,7 @@ import { getWeek, useDate } from '@/composables/date/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { genericComponent, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -64,19 +64,20 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       [],
       v => wrapInArray(v),
     )
-    const displayDate = computed(() => {
+    const displayValue = computed(() => {
       if (model.value.length > 0) return adapter.date(model.value[0])
       if (props.min) return adapter.date(props.min)
       if (Array.isArray(props.allowedDates)) return adapter.date(props.allowedDates[0])
 
       return adapter.date()
     })
+
     const year = useProxiedModel(
       props,
       'year',
       undefined,
       v => {
-        const value = v != null ? Number(v) : adapter.getYear(displayDate.value)
+        const value = v != null ? Number(v) : adapter.getYear(displayValue.value)
 
         return adapter.startOfYear(adapter.setYear(adapter.date(), value))
       },
@@ -88,7 +89,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       'month',
       undefined,
       v => {
-        const value = v != null ? Number(v) : adapter.getMonth(displayDate.value)
+        const value = v != null ? Number(v) : adapter.getMonth(displayValue.value)
         const date = adapter.setYear(adapter.date(), adapter.getYear(year.value))
 
         return adapter.setMonth(date, value)
@@ -188,6 +189,11 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
         model.value = [value]
       }
     }
+
+    watch(displayValue, val => {
+      month.value = val
+      year.value = val
+    })
 
     return () => (
       <div class="v-date-picker-month">
