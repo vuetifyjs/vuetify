@@ -202,7 +202,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
         month.value = 11
         internalMonth.value = month.value
 
-        emit('update:year', month.value)
+        emit('update:year', year.value)
       }
 
       emit('update:month', internalMonth.value)
