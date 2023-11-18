@@ -180,7 +180,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     useRender(() => {
       const Tag = isLink.value ? 'a' : props.tag
       const hasTitle = (slots.title || props.title)
-      const hasSubtitle = (slots.subtitle || props.subtitle)
+      const hasSubtitle = (slots.subtitle || props.subtitle !== undefined)
       const hasAppendMedia = !!(props.appendAvatar || props.appendIcon)
       const hasAppend = !!(hasAppendMedia || slots.append)
       const hasPrependMedia = !!(props.prependAvatar || props.prependIcon)
