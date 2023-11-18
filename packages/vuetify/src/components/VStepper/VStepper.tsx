@@ -68,7 +68,10 @@ export const makeVStepperProps = propsFactory({
   mobile: Boolean,
   nonLinear: Boolean,
   flat: Boolean,
-
+  rules: {
+    type: Array as PropType<readonly StepperItem[]>,
+    default: 'rules',
+  },
   ...makeGroupProps({
     mandatory: 'force' as const,
     selectedClass: 'v-stepper-item--selected',
@@ -93,10 +96,12 @@ export const VStepper = genericComponent<VStepperSlots>()({
     const items = computed(() => props.items.map((item, index) => {
       const title = getPropertyFromItem(item, props.itemTitle, item)
       const value = getPropertyFromItem(item, props.itemValue, index + 1)
+      const rules = getPropertyFromItem(item, props.rules, [() => true])
 
       return {
         title,
         value,
+        rules,
         raw: item,
       }
     }))
@@ -104,10 +109,13 @@ export const VStepper = genericComponent<VStepperSlots>()({
       return _items.value.findIndex(item => selected.value.includes(item.id))
     })
     const disabled = computed(() => {
+      if(activeIndex.value !== -1) {
+        const rulesCheck = items.value[activeIndex.value].rules.every((rule: any) => rule())
+        if(!rulesCheck) return true;
+      }
       if (props.disabled) return props.disabled
       if (activeIndex.value === 0) return 'prev'
       if (activeIndex.value === _items.value.length - 1) return 'next'
-
       return false
     })
 
