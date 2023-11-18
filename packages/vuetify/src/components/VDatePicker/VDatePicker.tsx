@@ -19,7 +19,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, shallowRef, watch } from 'vue'
-import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -176,27 +176,27 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
     function onClickNext () {
       if (month.value < 11) {
         month.value++
-
-        emit('update:month', month.value)
       } else {
         year.value++
         month.value = 0
 
         emit('update:year', year.value)
       }
+
+      emit('update:month', month.value)
     }
 
     function onClickPrev () {
       if (month.value > 0) {
         month.value--
-
-        emit('update:month', month.value)
       } else {
         year.value--
         month.value = 11
 
-        emit('update:year', month.value)
+        emit('update:year', year.value)
       }
+
+      emit('update:month', month.value)
     }
 
     function onClickMonth () {

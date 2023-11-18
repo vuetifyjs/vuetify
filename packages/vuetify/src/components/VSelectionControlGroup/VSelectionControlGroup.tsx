@@ -46,7 +46,10 @@ export const makeSelectionControlGroupProps = propsFactory({
     default: null,
   },
   name: String,
-  readonly: Boolean,
+  readonly: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
   modelValue: null,
   type: String,
   valueComparator: {

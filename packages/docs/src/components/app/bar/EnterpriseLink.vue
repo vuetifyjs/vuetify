@@ -1,13 +1,11 @@
 <template>
   <app-btn
     :to="rpath('/introduction/enterprise-support/')"
-    class="ms-1 me-4"
-    color="primary"
-    variant="outlined"
+    class="ms-1"
     @click="gtagClick('app-bar', 'enterprise', name)"
   >
 
-    {{ t('get-help') }}
+    {{ t('enterprise') }}
   </app-btn>
 </template>
 
