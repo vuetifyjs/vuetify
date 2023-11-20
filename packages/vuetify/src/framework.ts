@@ -1,6 +1,5 @@
 // Composables
-import { createDate, DateAdapterSymbol } from '@/composables/date'
-import { DateOptionsSymbol } from '@/composables/date/date'
+import { createDate, DateAdapterSymbol, DateOptionsSymbol } from '@/composables/date/date'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createIcons, IconSymbol } from '@/composables/icons'
