@@ -1,8 +1,9 @@
+// Composables
+import { useDate } from '@/composables/date'
+
 // Utilities
 import { ref } from 'vue'
 import { genericComponent, useRender } from '@/util'
-
-import { useDate } from '@/labs/date'
 import { VBtn, VSpacer } from '../allComponents'
 
 export const VCalendarHeader = genericComponent()({

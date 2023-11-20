@@ -1,13 +1,15 @@
 // Styles
 import './VCalendar.sass'
 
+// Composables
+import { useDate } from '@/composables/date'
+import { getWeek } from '@/composables/date/date'
+
 // Utilities
 import { computed } from 'vue'
 import { VCalendarDay } from './VCalendarDay'
 import { VCalendarHeader } from './VCalendarHeader'
 import { VCalendarMonthDay } from './VCalendarMonthDay'
-import { getWeek, toIso } from '../date/date'
-import { useDate } from '@/labs/date'
 import { chunkArray, genericComponent, useRender } from '@/util'
 
 export const VCalendar = genericComponent()({
@@ -144,7 +146,7 @@ export const VCalendar = genericComponent()({
       const startDate = computed(() => validDates.value[0])
       const endDate = computed(() => validDates.value[1])
 
-      return days.filter((date, index) => props.weekdays.includes(date.getDay())).map((date, index) => {
+      return days.filter((date: Date, index) => props.weekdays.includes(date.getDay())).map((date, index) => {
         const isStart = startDate.value && adapter.isSameDay(date, startDate.value)
         const isEnd = endDate.value && adapter.isSameDay(date, endDate.value)
         const isAdjacent = !adapter.isSameMonth(date, props.modelValue)
@@ -152,7 +154,7 @@ export const VCalendar = genericComponent()({
 
         return {
           date,
-          isoDate: toIso(adapter, date),
+          isoDate: adapter.toISO(date),
           formatted: adapter.format(date, 'keyboardDate'),
           year: adapter.getYear(date),
           month: adapter.getMonth(date),

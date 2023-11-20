@@ -7,6 +7,8 @@ export interface DateAdapter<T = unknown> {
 
   startOfDay (date: T): T
   endOfDay (date: T): T
+  startOfWeek (date: T): T
+  endOfWeek (date: T): T
   startOfMonth (date: T): T
   endOfMonth (date: T): T
   startOfYear (date: T): T
@@ -20,7 +22,10 @@ export interface DateAdapter<T = unknown> {
   isValid (date: any): boolean
   isWithinRange (date: T, range: [T, T]): boolean
 
+  addMinutes (date: T, amount: number): T
+  addHours (date: T, amount: number): T
   addDays (date: T, amount: number): T
+  addWeeks (date: T, amount: number): T
   addMonths (date: T, amount: number): T
 
   getYear (date: T): number
@@ -31,4 +36,8 @@ export interface DateAdapter<T = unknown> {
   getMonth (date: T): number
   setMonth (date: T, month: number): T
   getNextMonth (date: T): T
+  getHours (date: T): number
+  setHours (date: T, hours: number): T
+  getMinutes (date: T): number
+  setMinutes (date: T, minutes: number): T
 }

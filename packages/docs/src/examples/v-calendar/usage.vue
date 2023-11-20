@@ -37,7 +37,7 @@
 </template>
 
 <script>
-  import { useDate } from 'vuetify/labs/date'
+  import { useDate } from 'vuetify/src/composables/date'
 
   export default {
     data: () => ({

@@ -1,10 +1,12 @@
 // Styles
 import './VCalendarDay.sass'
 
+// Composables
+import { useDate } from '@/composables/date'
+
 // Utilities
 import { computed } from 'vue'
 import { VCalendarInterval } from './VCalendarInterval'
-import { useDate } from '@/labs/date'
 import { genericComponent, useRender } from '@/util'
 
 export const VCalendarDay = genericComponent()({

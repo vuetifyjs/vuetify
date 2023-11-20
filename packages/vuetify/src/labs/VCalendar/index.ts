@@ -1,3 +1,6 @@
 export { VCalendar } from './VCalendar'
-export { VCalendarMonthDay } from './VCalendarMonthDay'
+export { VCalendarDay } from './VCalendarDay'
 export { VCalendarHeader } from './VCalendarHeader'
+export { VCalendarInterval } from './VCalendarInterval'
+export { VCalendarIntervalEvent } from './VCalendarIntervalEvent'
+export { VCalendarMonthDay } from './VCalendarMonthDay'

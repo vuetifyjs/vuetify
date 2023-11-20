@@ -1,8 +1,10 @@
 // Components
 import { VSheet } from '@/components/VSheet'
 
+// Composables
+import { useDate } from '@/composables/date'
+
 // Utilities
-import { useDate } from '@/labs/date'
 import { genericComponent, useRender } from '@/util'
 
 export const VCalendarIntervalEvent = genericComponent()({
