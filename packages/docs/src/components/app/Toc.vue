@@ -103,16 +103,16 @@
             />
           </v-col>
 
-          <!-- <v-col cols="12">
+          <v-col cols="12">
             <a
-              href="https://themeselection.com/item/category/vuejs-admin-templates/?utm_source=vuetify&utm_medium=banner&utm_campaign=category_page&utm_id=12"
+              href="https://adminmart.com/product/modernize-vuetify-vue-admin-dashboard/?ref=7"
               target="_blank"
               rel="noopener noreferrer sponsored"
-              @click="onClickPromotion"
+              @click="gtagClick('toc', 'promotion', 'adminmart')"
             >
-              <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/theme-selection-dashboard-2023/vuetify-ad-banner.png" />
+              <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/wp-nov-23/wp-nov-23.png" />
             </a>
-          </v-col> -->
+          </v-col>
         </v-row>
       </v-container>
     </template>
@@ -132,6 +132,7 @@
 
   // Utilities
   import { computed, nextTick, onMounted, onScopeDispose, ref, watch } from 'vue'
+  import { gtagClick } from '@/util/analytics'
   import { rpath } from '@/util/routes'
 
   type TocItem = {
