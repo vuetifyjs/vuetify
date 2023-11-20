@@ -277,7 +277,6 @@ export const VCombobox = genericComponent<new <
         if (highlightFirst.value && ['Enter', 'Tab'].includes(e.key)) {
           select(filteredItems.value[0])
         }
-
         isPristine.value = true
       }
 
@@ -332,7 +331,7 @@ export const VCombobox = genericComponent<new <
       }
 
       if (e.key === 'Enter' && search.value) {
-        select(transformItem(props, search.value))
+        select(transformItem(props, search.value), true)
         search.value = ''
       }
     }
@@ -342,7 +341,7 @@ export const VCombobox = genericComponent<new <
         vTextFieldRef.value?.focus()
       }
     }
-    function select (item: ListItem) {
+    function select(item: ListItem, enterKey: Boolean = false) {
       if (props.multiple) {
         const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
 
@@ -350,7 +349,9 @@ export const VCombobox = genericComponent<new <
           model.value = [...model.value, item]
         } else {
           const value = [...model.value]
-          value.splice(index, 1)
+          if (!enterKey) {
+            value.splice(index, 1)
+          }
           model.value = value
         }
 
