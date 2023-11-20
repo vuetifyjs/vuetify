@@ -46,7 +46,7 @@
             :elevation="isHovering ? 8 : 0"
             v-bind="{ ...props, ...banner.metadata.attributes }"
             append-icon="mdi-open-in-new"
-            class="text-none"
+            class="text-none me-2"
             rel="noopener"
             target="_blank"
             variant="elevated"
