@@ -1,16 +1,17 @@
+// Composables
+import { useLocale } from '@/composables/locale'
+
 // Utilities
 import { inject, reactive, watch } from 'vue'
 import { mergeDeep } from '@/util'
 
 // Types
+import type { InjectionKey } from 'vue'
 import type { DateAdapter } from './DateAdapter'
 import type { LocaleInstance } from '@/composables/locale'
 
 // Adapters
 import { VuetifyDateAdapter } from './adapters/vuetify'
-
-// Types
-import type { InjectionKey } from 'vue'
 
 export interface DateInstance<T = DateInstanceType['instanceType']> extends DateAdapter<T> {
   locale?: any
@@ -29,10 +30,11 @@ export type InternalDateOptions<T = unknown> = {
 
 export type DateOptions<T = any> = Partial<InternalDateOptions<T>>
 
+export const DateOptionsSymbol: InjectionKey<InternalDateOptions> = Symbol.for('vuetify:date-options')
 export const DateAdapterSymbol: InjectionKey<DateInstance> = Symbol.for('vuetify:date-adapter')
 
 export function createDate (options: DateOptions | undefined, locale: LocaleInstance) {
-  const date = mergeDeep({
+  const _options = mergeDeep({
     adapter: VuetifyDateAdapter,
     locale: {
       af: 'af-ZA',
@@ -79,30 +81,38 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
     },
   }, options) as InternalDateOptions
 
+  return {
+    options: _options,
+    instance: createInstance(_options, locale),
+  }
+}
+
+function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
   const instance = reactive(
-    typeof date.adapter === 'function'
-    // eslint-disable-next-line new-cap
-      ? new date.adapter({
-        locale: date.locale?.[locale.current.value] ?? locale.current.value,
-        formats: date.formats,
+    typeof options.adapter === 'function'
+      // eslint-disable-next-line new-cap
+      ? new options.adapter({
+        locale: options.locale[locale.current.value] ?? locale.current.value,
+        formats: options.formats,
       })
-      : date.adapter
+      : options.adapter
   )
 
   watch(locale.current, value => {
-    const newLocale = date.locale ? date.locale[value] : value
-    instance.locale = newLocale ?? instance.locale
+    instance.locale = options.locale[value] ?? value ?? instance.locale
   })
 
   return instance
 }
 
 export function useDate () {
-  const instance = inject(DateAdapterSymbol)
+  const options = inject(DateOptionsSymbol)
 
-  if (!instance) throw new Error('[Vuetify] Could not find injected date adapter')
+  if (!options) throw new Error('[Vuetify] Could not find injected date options')
 
-  return instance
+  const locale = useLocale()
+
+  return createInstance(options, locale)
 }
 
 // https://stackoverflow.com/questions/274861/how-do-i-calculate-the-week-number-given-a-date/275024#275024

@@ -3,7 +3,6 @@
     <v-chip
       class="ma-2"
       color="indigo"
-      text-color="white"
       prepend-icon="mdi-account-circle"
     >
       Mike
@@ -12,7 +11,6 @@
     <v-chip
       class="ma-2"
       color="orange"
-      text-color="white"
       append-icon="mdi-star"
     >
       Premium
@@ -21,7 +19,6 @@
     <v-chip
       class="ma-2"
       color="primary"
-      text-color="white"
       append-icon="mdi-cake-variant"
     >
       1 Year
@@ -30,7 +27,6 @@
     <v-chip
       class="ma-2"
       color="green"
-      text-color="white"
     >
       <template v-slot:prepend>
         <v-avatar
@@ -46,7 +42,6 @@
       class="ma-2"
       closable
       color="teal"
-      text-color="white"
       prepend-icon="mdi-checkbox-marked-circle"
       :model-value="true"
     >
@@ -57,7 +52,6 @@
       class="ma-2"
       closable
       color="teal"
-      text-color="white"
       close-icon="mdi-delete"
       prepend-icon="mdi-checkbox-marked-circle"
       :model-value="true"
