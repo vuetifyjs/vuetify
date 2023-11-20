@@ -341,7 +341,7 @@ export const VCombobox = genericComponent<new <
         vTextFieldRef.value?.focus()
       }
     }
-    function select(item: ListItem, enterKey: Boolean = false) {
+    function select (item: ListItem, enterKey: Boolean = false) {
       if (props.multiple) {
         const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
 
