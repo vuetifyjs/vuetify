@@ -151,7 +151,10 @@ export const VCarousel = genericComponent<new <T>(
                           const props = {
                             id: `carousel-item-${item.id}`,
                             'aria-label': t('$vuetify.carousel.ariaLabel.delimiter', index + 1, group.items.value.length),
-                            class: [group.isSelected(item.id) && 'v-btn--active'],
+                            class: [
+                              'v-carousel__controls__item',
+                              group.isSelected(item.id) && 'v-btn--active',
+                            ],
                             onClick: () => group.select(item.id, true),
                           }
 
