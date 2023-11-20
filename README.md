@@ -235,17 +235,17 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/vuetifyjs/vuetify-loader/tree/next">
+        <a href="https://github.com/vuetifyjs/vuetify-loader/tree/master">
           📦 vuetify-loader
         </a>
       </td>
       <td>
-        <a href="https://www.npmjs.com/package/@vuetify/cli-plugin-utils">
-          <img src="https://img.shields.io/npm/v/@vuetify/cli-plugin-utils.svg" alt="Version">
+        <a href="https://www.npmjs.com/package/vuetify-loader">
+          <img src="https://img.shields.io/npm/v/vuetify-loader.svg" alt="Version">
         </a>
       </td>
       <td>
-        A collection of helper utilities for creating Vue CLI plugins
+        Compiler plugins for autoloading Vuetify components
       </td>
     </tr>
     <tr>

@@ -8,11 +8,11 @@
   >
     <v-switch
       v-model="user.dev"
-      class="ps-3 flex-0-0"
+      :messages="t('developer-mode-message')"
+      class="ps-1"
       color="error"
       density="comfortable"
       inset
-      messages="Development mode enables new features and functionality within the documentation that are still in development."
 
       true-icon="mdi-check"
       false-icon="$close"

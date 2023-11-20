@@ -16,6 +16,7 @@ import {
   computed,
   nextTick,
   onBeforeMount,
+  onBeforeUnmount,
   ref,
   shallowRef,
   vShow,
@@ -25,6 +26,7 @@ import {
 import {
   convertToUnit,
   genericComponent,
+  getCurrentInstance,
   propsFactory,
   SUPPORTS_INTERSECTION,
   useRender,
@@ -85,6 +87,7 @@ export const makeVImgProps = propsFactory({
     | 'unsafe-url'
   >,
   srcset: String,
+  position: String,
 
   ...makeVResponsiveProps(),
   ...makeComponentProps(),
@@ -105,6 +108,8 @@ export const VImg = genericComponent<VImgSlots>()({
   },
 
   setup (props, { emit, slots }) {
+    const vm = getCurrentInstance('VImg')
+
     const currentSrc = shallowRef('') // Set from srcset
     const image = ref<HTMLImageElement>()
     const state = shallowRef<'idle' | 'loading' | 'loaded' | 'error'>(props.eager ? 'loading' : 'idle')
@@ -163,29 +168,38 @@ export const VImg = genericComponent<VImgSlots>()({
       nextTick(() => {
         emit('loadstart', image.value?.currentSrc || normalisedSrc.value.src)
 
-        if (image.value?.complete) {
-          if (!image.value.naturalWidth) {
-            onError()
+        setTimeout(() => {
+          if (vm.isUnmounted) return
+
+          if (image.value?.complete) {
+            if (!image.value.naturalWidth) {
+              onError()
+            }
+
+            if (state.value === 'error') return
+
+            if (!aspectRatio.value) pollForSize(image.value, null)
+            if (state.value === 'loading') onLoad()
+          } else {
+            if (!aspectRatio.value) pollForSize(image.value!)
+            getSrc()
           }
-
-          if (state.value === 'error') return
-
-          if (!aspectRatio.value) pollForSize(image.value, null)
-          onLoad()
-        } else {
-          if (!aspectRatio.value) pollForSize(image.value!)
-          getSrc()
-        }
+        })
       })
     }
 
     function onLoad () {
+      if (vm.isUnmounted) return
+
       getSrc()
+      pollForSize(image.value!)
       state.value = 'loaded'
       emit('load', image.value?.currentSrc || normalisedSrc.value.src)
     }
 
     function onError () {
+      if (vm.isUnmounted) return
+
       state.value = 'error'
       emit('error', image.value?.currentSrc || normalisedSrc.value.src)
     }
@@ -196,9 +210,16 @@ export const VImg = genericComponent<VImgSlots>()({
     }
 
     let timer = -1
+
+    onBeforeUnmount(() => {
+      clearTimeout(timer)
+    })
+
     function pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {
         clearTimeout(timer)
+        if (vm.isUnmounted) return
+
         const { naturalHeight: imgHeight, naturalWidth: imgWidth } = img
 
         if (imgHeight || imgWidth) {
@@ -226,6 +247,7 @@ export const VImg = genericComponent<VImgSlots>()({
       const img = (
         <img
           class={['v-img__img', containClasses.value]}
+          style={{ objectPosition: props.position }}
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
           alt={ props.alt }
@@ -260,6 +282,7 @@ export const VImg = genericComponent<VImgSlots>()({
         { normalisedSrc.value.lazySrc && state.value !== 'loaded' && (
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
+            style={{ objectPosition: props.position }}
             src={ normalisedSrc.value.lazySrc }
             alt={ props.alt }
             crossorigin={ props.crossorigin }
@@ -316,7 +339,7 @@ export const VImg = genericComponent<VImgSlots>()({
     }
 
     useRender(() => {
-      const [responsiveProps] = VResponsive.filterProps(props)
+      const responsiveProps = VResponsive.filterProps(props)
       return (
         <VResponsive
           class={[

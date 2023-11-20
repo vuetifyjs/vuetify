@@ -81,8 +81,8 @@ export const VTab = genericComponent()({
           : Math.sign(delta) < 0 ? (isHorizontal.value ? 'left' : 'top')
           : 'center'
         const size = Math.abs(delta) + (Math.sign(delta) < 0 ? prevBox[widthHeight] : nextBox[widthHeight])
-        const scale = size / Math.max(prevBox[widthHeight], nextBox[widthHeight])
-        const initialScale = prevBox[widthHeight] / nextBox[widthHeight]
+        const scale = size / Math.max(prevBox[widthHeight], nextBox[widthHeight]) || 0
+        const initialScale = prevBox[widthHeight] / nextBox[widthHeight] || 0
 
         const sigma = 1.5
         animate(nextEl, {
@@ -101,7 +101,7 @@ export const VTab = genericComponent()({
     }
 
     useRender(() => {
-      const [btnProps] = VBtn.filterProps(props)
+      const btnProps = VBtn.filterProps(props)
 
       return (
         <VBtn
@@ -116,11 +116,10 @@ export const VTab = genericComponent()({
           role="tab"
           aria-selected={ String(isSelected.value) }
           active={ false }
-          block={ props.fixed }
-          maxWidth={ props.fixed ? 300 : undefined }
-          rounded={ 0 }
           { ...btnProps }
           { ...attrs }
+          block={ props.fixed }
+          maxWidth={ props.fixed ? 300 : undefined }
           onGroup:selected={ updateSlider }
         >
           { slots.default?.() ?? props.text }

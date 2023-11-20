@@ -94,6 +94,12 @@ Containment components wrap other components and provide additional functionalit
 
 </components-list-item>
 
+<components-list-item name="Bottom Sheet component" src="bottom-sheets">
+
+  The bottom sheet component is a modified dialog that slides from the bottom of the screen
+
+</components-list-item>
+
 <components-list-item name="Sheet component" src="sheets">
 
   The sheet component is a simple piece of paper that can be used to style and customize a block of content
@@ -222,7 +228,7 @@ Form components are used to collect user input in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="OTP Input component" src="otp-input">
+<components-list-item name="OTP Input component" src="otp-input" >
 
   The OTP input component is used for MFA authentication via input field
 
@@ -296,9 +302,15 @@ These components allow a user to select one or multiple items from a list of opt
 
 </components-list-item>
 
-<components-list-item name="Window  components" src="windows">
+<components-list-item name="Window components" src="windows">
 
   The window component is used to display a block of content based upon a model
+
+</components-list-item>
+
+<components-list-item name="Stepper components" src="steppers">
+
+  The stepper component is a linear progress control used to break lengthy forms into smaller logical sections
 
 </components-list-item>
 
@@ -330,12 +342,6 @@ These components are used to display data and information in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="Skeleton loader component" src="skeleton-loaders">
-
-  Displays a content, enhancing perceived performance during data-fetching & rendering
-
-</components-list-item>
-
 <components-list-item name="Server-side table component"  src="data-tables/server-side-tables">
 
   Server side data tables are intended to be used with a server side data source
@@ -354,7 +360,7 @@ These components are used to display data and information in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="Virtual scroll component"  src="virtual-scroller" >
+<components-list-item name="Virtual scroll component"  src="virtual-scroller">
 
   The virtual scroller component makes it possible to render large amounts of data without sacrificing performance
 
@@ -385,6 +391,12 @@ These components are used to provide feedback to the user within content, over c
 <components-list-item name="Banner component" src="banners">
 
   Banners are used to communicate important information to the user
+
+</components-list-item>
+
+<components-list-item name="Skeleton loader component" src="skeleton-loaders">
+
+  Displays a content, enhancing perceived performance during data-fetching & rendering
 
 </components-list-item>
 
@@ -477,6 +489,12 @@ These components are used to select a value from a specifically styled set of op
 <components-list-item name="Color picker component"  src="color-pickers">
 
   The color picker component is used to select a color from a palette
+
+</components-list-item>
+
+<components-list-item name="Date picker component" src="date-pickers">
+
+  The date picker component is used to select a single date from a calendar month / year.
 
 </components-list-item>
 

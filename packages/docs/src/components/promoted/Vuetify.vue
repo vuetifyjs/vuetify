@@ -1,11 +1,11 @@
 <template>
   <promoted-base
+    v-if="ad"
     border
     class="v-vuetify"
     density="comfortable"
   >
     <v-list-item
-      v-if="ad"
       :prepend-avatar="src"
       :title="ad.title"
       :append-icon="smAndUp ? 'mdi-open-in-new' : undefined"

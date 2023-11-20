@@ -21,10 +21,10 @@
           <slot
             name="row"
             v-bind="{
-              ...item,
               props: {
-                class: theme.dark ? 'bg-grey-darken-3' : 'bg-grey-lighten-4'
-              }
+                class: 'bg-surface-bright'
+              },
+              item,
             }"
           />
 
@@ -41,6 +41,10 @@
 
               <p v-if="user.dev && item.source">
                 <strong>source: {{ item.source }}</strong>
+                <template v-if="user.dev && item.descriptionSource && item.source !== item.descriptionSource">
+                  <br>
+                  <strong>description source: {{ item.descriptionSource }}</strong>
+                </template>
               </p>
             </td>
           </tr>
@@ -59,7 +63,6 @@
 <script setup lang="ts">
   // Composables
   import { useI18n } from 'vue-i18n'
-  import { useTheme } from 'vuetify'
 
   // Utilities
   import { computed, PropType } from 'vue'
@@ -80,18 +83,20 @@
     },
   })
 
-  const { current: theme } = useTheme()
   const { t } = useI18n()
   const appStore = useAppStore()
   const localeStore = useLocaleStore()
   const user = useUserStore()
 
   const filtered = computed(() => {
-    if (!appStore.apiSearch) return props.items
+    const items = props.items.filter((item: any) => {
+      return user.dev || item.description !== '**FOR INTERNAL USE ONLY**'
+    })
+    if (!appStore.apiSearch) return items
 
     const query = appStore.apiSearch.toLowerCase()
 
-    return props.items.filter((item: any) => {
+    return items.filter((item: any) => {
       return item.name.toLowerCase().includes(query)
     })
   })

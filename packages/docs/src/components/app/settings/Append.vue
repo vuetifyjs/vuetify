@@ -1,15 +1,18 @@
 <template>
-  <div class="pb-2 pe-2">
-    <documentation-build />
-
+  <div>
     <v-divider />
 
-    <developer-mode hide-details />
+    <latest-release />
+
+    <documentation-build />
+
+    <latest-commit />
   </div>
 </template>
 
 <script setup>
   // Components
-  import DeveloperMode from '@/components/app/settings/DeveloperMode.vue'
   import DocumentationBuild from '@/components/app/settings/DocumentationBuild.vue'
+  import LatestCommit from '@/components/app/settings/LatestCommit.vue'
+  import LatestRelease from '@/components/app/settings/LatestRelease.vue'
 </script>

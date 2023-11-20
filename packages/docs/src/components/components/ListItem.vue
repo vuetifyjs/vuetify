@@ -12,7 +12,20 @@
       height="164"
     >
       <template #image>
-        <v-img @error="hasError = true" />
+        <v-img @error="hasError = true">
+          <v-chip
+            v-if="labs"
+            :to="rpath('/labs/introduction/')"
+            color="success"
+            label
+            prepend-icon="mdi-beaker-outline"
+            rounded="bs-0 te-0"
+            size="small"
+            text="Labs Component"
+            variant="flat"
+            @click.stop
+          />
+        </v-img>
       </template>
     </v-card>
 
@@ -31,6 +44,7 @@
 
   const props = defineProps({
     name: String,
+    labs: Boolean,
     src: String,
   })
 

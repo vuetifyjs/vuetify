@@ -1,16 +1,16 @@
 {
   "events": {
-    "submit": "Emitted when form is submitted",
-    "update:modelValue": "Event emitted when the form's validity changes"
+    "submit": "Emitted when form is submitted.",
+    "update:modelValue": "Event emitted when the form's validity changes."
   },
   "exposed": {
     "errors": "Contains all current form input errors.",
     "isDisabled": "Indicates if form is disabled or not.",
-    "isReadonly": "Indicates if form is readonly or not",
+    "isReadonly": "Indicates if form is readonly or not.",
     "isValidating": "Indicates if form is currently being validated or not.",
     "items": "Array of all registered inputs.",
-    "validate": "Validates all registered inputs.",
     "reset": "Resets validation of all registered inputs, and clears their values.",
-    "resetValidation": "Resets validation of all registered inputs without modifying their values."
+    "resetValidation": "Resets validation of all registered inputs without modifying their values.",
+    "validate": "Validates all registered inputs."
   }
 }

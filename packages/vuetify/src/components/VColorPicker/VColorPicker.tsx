@@ -126,7 +126,7 @@ export const VColorPicker = defineComponent({
     })
 
     useRender(() => {
-      const [sheetProps] = VSheet.filterProps(props)
+      const sheetProps = VSheet.filterProps(props)
 
       return (
         <VSheet

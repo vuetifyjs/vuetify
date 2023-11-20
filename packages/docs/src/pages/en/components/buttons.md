@@ -8,6 +8,12 @@ related:
   - /components/button-groups/
   - /components/icons/
   - /components/cards/
+features:
+  figma: true
+  github: /components/VBtn/
+  label: 'C: VBtn'
+  report: true
+  spec: https://m2.material.io/components/buttons
 ---
 
 # Buttons
@@ -16,7 +22,7 @@ The `v-btn` component replaces the standard html button with a material design t
 
 ![Button Entry](https://cdn.vuetifyjs.com/docs/images/components/v-btn/v-btn-entry.png)
 
----
+<page-features />
 
 ## Usage
 
@@ -24,7 +30,7 @@ Buttons in their simplest form contain uppercase text, a slight elevation, hover
 
 <usage name="v-btn" />
 
-<promoted slug="enterprise-support" />
+<entry />
 
 ## API
 
@@ -179,7 +185,7 @@ In addition to [Button groups](/components/button-groups/), the `v-btn` componen
 
 <example file="v-btn/misc-group-survey" hide-invert />
 
-### Tax form comfirmation
+### Tax form confirmation
 
 This example utilizes the [v-text-field](/components/text-fields/) component to collect data from the user and the **loading** prop of `v-btn` when submitting the form.
 
@@ -276,7 +282,7 @@ The `v-banner-actions` component applies the **text** variant and reduces button
 | - | - |
 | [Banners](/components/banners/) | [v-banner-actions](/api/v-banner-actions/) |  |
 
-<!-- <example file="v-btn/defaults-card-actions" /> -->
+<example file="v-btn/defaults-banner-actions" />
 
 The following properties are modified when used within a `v-banner-actions` component:
 

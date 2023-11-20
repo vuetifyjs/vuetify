@@ -7,8 +7,18 @@
 .v-table
   @include tools.theme($table-theme...)
 
+  font-size: $table-font-size
+  transition-duration: $table-transition-duration
+  transition-property: $table-transition-property
+  transition-timing-function: $table-transition-timing-function
+
   .v-table-divider
     border-right: $table-border
+
+  .v-icon
+    font-size: $table-icon-size
+    height: $table-icon-size
+    width: $table-icon-size
 
   .v-table__wrapper
     > table
@@ -16,7 +26,6 @@
         > tr
           > th
             border-bottom: $table-border
-            color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
 
       > tbody
         > tr
@@ -37,8 +46,13 @@
       > table
         > tbody
           > tr
-            &:hover td
+            > td
+              position: relative
+
+            &:hover > td::after
+              @include tools.absolute(true)
               background: $table-hover-color
+              pointer-events: none
 
   &.v-table--fixed-header
     > .v-table__wrapper
@@ -66,6 +80,8 @@
   // Do not inherit line-height
   line-height: $table-line-height
   max-width: 100%
+  display: flex
+  flex-direction: column
 
   > .v-table__wrapper
     > table
@@ -79,7 +95,9 @@
           > td,
           > th
             padding: $table-column-padding
-            transition: height settings.$standard-easing
+            transition-duration: $table-transition-duration
+            transition-property: $table-transition-property
+            transition-timing-function: $table-transition-timing-function
 
           > th
             font-weight: $table-header-font-weight
@@ -104,6 +122,7 @@
 .v-table__wrapper
   border-radius: inherit
   overflow: auto
+  flex: 1 1 auto
 
 // Modifiers
 .v-table--has-top
@@ -144,7 +163,7 @@
       > thead
         position: sticky
         top: 0
-        z-index: 1
+        z-index: 2
         > tr
           > th
             border-bottom: 0px !important

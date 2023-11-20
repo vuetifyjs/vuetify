@@ -8,15 +8,20 @@ related:
   - /components/badges/
   - /components/icons/
   - /components/lists/
+features:
+  figma: true
+  github: /components/VAvatar/
+  label: 'C: VAvatar'
+  report: true
 ---
 
 # Avatars
 
-The `v-avatar` component is typically used to display circular user profile pictures. This component will allow you to dynamically size and add a border radius of responsive images, icons, and text. A **tile** variation is available for displaying an avatar without border radius.
+The `v-avatar` component is typically used to display circular user profile pictures. This component will allow you to dynamically size and add a border radius of responsive images, icons, and text.  When **rounded** prop set to `0` will display an avatar without border radius.
 
 ![Avatar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-avatar/v-avatar-entry.png)
 
----
+<page-features />
 
 ## Usage
 
@@ -87,6 +92,6 @@ Another example combining avatar with menu.
 
 #### Profile Card
 
-Using the **tile** prop, we can create a sleek hard-lined profile card.
+Using the **rounded** prop value `0`, we can create a sleek hard-lined profile card.
 
 <example file="v-avatar/misc-profile-card" />

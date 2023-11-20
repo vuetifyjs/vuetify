@@ -5,24 +5,19 @@
     }"
     scoped
   >
-    <v-sheet
-      border
-      class="mb-9 overflow-hidden"
-      rounded
-    >
+    <app-sheet class="mb-9">
       <v-lazy
         v-if="!preview"
         v-model="hasRendered"
         min-height="44"
       >
         <v-toolbar
-          :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
           border="b"
           class="px-1"
           flat
           height="44"
         >
-          <v-fade-transition>
+          <v-fade-transition hide-on-leave>
             <div v-if="showCode">
               <v-btn
                 v-for="(section, i) of sections"
@@ -37,6 +32,15 @@
                   {{ upperFirst(section.name) }}
                 </span>
               </v-btn>
+            </div>
+
+            <div
+              v-else-if="user.dev && file"
+              class="text-body-2 ma-1 text-medium-emphasis"
+            >
+              <v-icon icon="mdi-file-tree" />
+
+              {{ file }}.vue
             </div>
           </v-fade-transition>
 
@@ -92,7 +96,7 @@
           <component :is="ExampleComponent" v-if="isLoaded" />
         </v-theme-provider>
       </div>
-    </v-sheet>
+    </app-sheet>
   </v-defaults-provider>
 </template>
 
@@ -104,6 +108,8 @@
   import { useDisplay, useTheme } from 'vuetify'
   import { useI18n } from 'vue-i18n'
   import { usePlayground } from '@/composables/playground'
+
+  // Stores
   import { useUserStore } from '@/store/user'
 
   // Utilities
@@ -114,7 +120,7 @@
 
   const { xs } = useDisplay()
   const { t } = useI18n()
-  const userStore = useUserStore()
+  const user = useUserStore()
 
   const props = defineProps({
     inline: Boolean,
@@ -153,8 +159,8 @@
   const sections = computed(() => {
     const _code = code.value
     if (!_code) return []
-    const scriptContent = parseTemplate(userStore.composition, _code) ??
-      parseTemplate({ composition: 'options', options: 'composition' }[userStore.composition], _code)
+    const scriptContent = parseTemplate(user.composition, _code) ??
+      parseTemplate({ composition: 'options', options: 'composition' }[user.composition], _code)
 
     return [
       {
@@ -199,11 +205,6 @@
     get: () => _theme.value ?? parentTheme.name.value,
     set: val => _theme.value = val,
   })
-  const toggleTheme = () => theme.value = theme.value === 'light' ? 'dark' : 'light'
-
-  const isDark = computed(() => {
-    return parentTheme.current.value.dark
-  })
 
   const playgroundLink = computed(() => {
     if (!isLoaded.value || isError.value) return null
@@ -225,7 +226,7 @@
       onClick: toggleTheme,
     },
     {
-      icon: '$vuetifyPlay',
+      icon: '$vuetify-play',
       path: 'edit-in-playground',
       href: playgroundLink.value,
       target: '_blank',
@@ -264,4 +265,12 @@
   ])
 
   watch(showCode, val => val && (isEager.value = true))
+
+  function toggleTheme () {
+    if (theme.value === parentTheme.name.value) {
+      theme.value = parentTheme.current.value.dark ? 'light' : 'dark'
+    } else {
+      theme.value = parentTheme.name.value
+    }
+  }
 </script>

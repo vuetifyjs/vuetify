@@ -1,6 +1,6 @@
 <template>
-  <v-responsive class="text-xs-center pb-4">
-    <v-container grid-list-xl>
+  <v-responsive class="text-xs-center">
+    <v-container>
       <v-row justify="center">
         <v-col
           v-for="(feature, i) in features"

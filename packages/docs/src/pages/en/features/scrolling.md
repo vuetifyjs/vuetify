@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Programmatic scrolling
   description: Programmatic scrolling within an application can be handled using the goTo method included in the vuetify object.

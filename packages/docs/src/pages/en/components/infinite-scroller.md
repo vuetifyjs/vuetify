@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Infinite scrollers
   title: Infinite scroller component
@@ -8,16 +9,22 @@ related:
   - /components/lists/
   - /components/data-tables/basics/
   - /components/data-iterators/
+features:
+  github: /components/VInfiniteScroll/
+  label: 'C: VInfiniteScroll'
+  report: true
 ---
 
-# Infinite scroller
+# Infinite scrollers
 
 The `v-infinite-scroll` component displays a potentially infinite list, by loading more items of the list when scrolling. It supports either vertical or horizontal scrolling.
 
-----
+![Infinite scroll Entry](https://cdn.vuetifyjs.com/docs/images/components/v-infinite-scroll/v-infinite-scroll-entry.png)
 
-::: warning
-This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
+<page-features />
+
+::: success
+This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
 :::
 
 ## Usage
@@ -46,9 +53,26 @@ A **load** event will be emitted when the component needs to load more content. 
 | - | - |
 | [v-infinite-scroll](/api/v-infinite-scroll/) | Primary Component |
 
-## Examples
+<api-inline hide-links />
+
+## Anatomy
+
+The `v-infinite-scroll` works with any content in its default slot.
+
+![Infinite scroll Anatomy](https://cdn.vuetifyjs.com/docs/images/components/v-infinite-scroll/v-infinite-scroll-anatomy.png)
+
+| Element / Area | Description                                                              |
+|----------------|-----------------------------------------|
+| 1. Container   | The infinite scroller content container |
+| 2. Loader      | The loader content area                 |
+
+## Guide
+
+The `v-infinite-scroll` component is a container that allows you to react to a user reaching the end of content area. It is useful when you need to display an unknown but large number of items, and you don't want to load them all at once.
 
 ### Props
+
+The `v-infinite-scroll` component has a number of props that can be used to customize its behaviour.
 
 #### Mode
 
@@ -82,6 +106,18 @@ The default load more button and loading spinner can be colored with the **color
 
 ### Slots
 
+The `v-infinite-scroll` component exposes a number of slots that allow you to further customize its behaviour.
+
+![Infinite scroll Slots](https://cdn.vuetifyjs.com/docs/images/components/v-infinite-scroll/v-infinite-scroll-slots.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The default slot |
+| 2. Load-more | The slot shown when mode is set to `manual` and status is not `loading` |
+| 3. Loading | The slot shown when mode is set to `manual` and status is `loading` |
+| 4. Empty | The slot shown when status is `empty` |
+| 5. Error | The slot shown when status is `error` |
+
 #### Loading
 
 You can customize the loading message with the **loading** slot.
@@ -106,7 +142,9 @@ The **error** slot is shown if the status `'error'` is returned from the `done` 
 
 <example file="v-infinite-scroll/slot-error" />
 
-### Misc
+### Examples
+
+The following are a collection of examples that demonstrate more advanced and real world use of the `v-infinite-scroll` component.
 
 #### Virtualized infinite scroller
 

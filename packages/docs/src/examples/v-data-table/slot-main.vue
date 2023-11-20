@@ -25,8 +25,8 @@
       </template>
 
       <template
-        v-if="isEnabled('column.data-table-select')"
-        v-slot:column.data-table-select="{ on, props }"
+        v-if="isEnabled('header.data-table-select')"
+        v-slot:header.data-table-select="{ on, props }"
       >
         <v-checkbox-btn
           color="purple"
@@ -72,9 +72,9 @@
 
       <template
         v-if="isEnabled('item.<name>')"
-        v-slot:item.name="{ item }"
+        v-slot:item.name="{ value }"
       >
-        {{ item.name.toUpperCase() }}
+        {{ value.toUpperCase() }}
       </template>
 
       <template
@@ -95,9 +95,9 @@
         <tbody>
           <tr
             v-for="item in items"
-            :key="item.name"
+            :key="item.raw.name"
           >
-            <td>{{ item.name }}</td>
+            <td>{{ item.raw.name }}</td>
             <td>CONTENT</td>
             <td>CONTENT</td>
             <td>CONTENT</td>

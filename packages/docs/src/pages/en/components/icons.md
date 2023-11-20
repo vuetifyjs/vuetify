@@ -11,13 +11,19 @@ related:
 assets:
   - https://use.fontawesome.com/releases/v5.0.13/css/all.css
   - https://fonts.googleapis.com/icon?family=Material+Icons
+features:
+  figma: true
+  github: /components/VIcon/
+  label: 'C: VIcon'
+  report: true
+  spec: https://m2.material.io/design/iconography/system-icons.html
 ---
 
 # Icons
 
 The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. For a list of all available icons, visit the official [Material Design Icons](https://materialdesignicons.com/) page. To use any of these icons simply use the `mdi-` prefix followed by the icon name.
 
-----
+<page-features />
 
 ## Usage
 
@@ -129,20 +135,14 @@ If your icons are purely decorative, you’ll need to manually add an attribute 
 
 Apply accessibility attributes to the [v-icon](/components/icons/) component, such as `role="img"`, to give it a semantic meaning.
 
-```html
+```html { resource="Component.vue" }
 <v-icon aria-label="My Account" role="img" aria-hidden="false">
   mdiAccount
 </v-icon>
 
-<script>
+<script setup>
 import { mdiAccount } from "@mdi/js";
 
-export default {
-  data: () => ({
-    icons: {
-      mdiAccount
-    }
-  })
-};
+const icons = { mdiAccount }
 </script>
 ```

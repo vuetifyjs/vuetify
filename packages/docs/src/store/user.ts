@@ -8,15 +8,20 @@ import { defineStore } from 'pinia'
 import { reactive, toRefs } from 'vue'
 
 export type RootState = {
-  v: 2
+  v: 2 | 3 | 4
   api: 'link-only' | 'inline'
+  avatar: string
   dev: boolean
+  disableAds: boolean
   composition: ('options' | 'composition')
   pwaRefresh: boolean
+  slashSearch: boolean
+  syncSettings: boolean
   theme: string
   mixedTheme: boolean
   direction: 'rtl' | 'ltr'
   quickbar: boolean
+  railDrawer: boolean
   notifications: {
     show: boolean
     read: string[]
@@ -72,7 +77,6 @@ type SavedState = {
   theme: string
   mixedTheme: boolean
   direction: 'rtl' | 'ltr'
-  quickbar?: boolean
   notifications: {
     show?: boolean
     read: string[]
@@ -87,30 +91,37 @@ type SavedState = {
   }
 } | RootState
 
-export const useUserStore = defineStore('user', () => {
-  const state = reactive<RootState>({
-    v: 2,
-    api: 'link-only',
-    dev: false,
-    composition: 'options',
-    pwaRefresh: true,
-    theme: 'system',
-    mixedTheme: true,
-    direction: 'ltr',
-    quickbar: true,
-    notifications: {
-      show: true,
-      read: [],
-      last: {
-        banner: [],
-        v2banner: null,
-        install: null,
-        notification: null,
-        promotion: null,
-        jobs: null,
-      },
+export const DEFAULT_USER: RootState = {
+  v: 4,
+  api: 'link-only',
+  avatar: '',
+  dev: false,
+  disableAds: false,
+  composition: 'options',
+  pwaRefresh: true,
+  theme: 'system',
+  mixedTheme: true,
+  direction: 'ltr',
+  slashSearch: false,
+  syncSettings: true,
+  quickbar: false,
+  railDrawer: false,
+  notifications: {
+    show: true,
+    read: [],
+    last: {
+      banner: [],
+      v2banner: null,
+      install: null,
+      notification: null,
+      promotion: null,
+      jobs: null,
     },
-  })
+  },
+}
+
+export const useUserStore = defineStore('user', () => {
+  const state = reactive(merge({}, DEFAULT_USER))
 
   function load () {
     if (!IN_BROWSER) return
@@ -152,6 +163,16 @@ export const useUserStore = defineStore('user', () => {
       }
     }
 
+    if (data.v === 2) {
+      data.syncSettings = true
+      data.disableAds = false
+      data.v = 3
+    }
+
+    if (data.v === 3) {
+      data.quickbar = false
+    }
+
     data.v = state.v
     Object.assign(state, merge(state, data))
     if (needsRefresh) {
@@ -165,7 +186,20 @@ export const useUserStore = defineStore('user', () => {
     localStorage.setItem('vuetify@user', JSON.stringify(state, null, 2))
   }
 
+  function reset () {
+    if (!IN_BROWSER) return
+
+    Object.assign(state, merge({}, DEFAULT_USER))
+
+    save()
+  }
+
   load()
 
-  return { ...toRefs(state), load, save }
+  return {
+    ...toRefs(state),
+    load,
+    save,
+    reset,
+  }
 })

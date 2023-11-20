@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Skeleton loaders
   title: Skeleton loader component
@@ -8,6 +9,11 @@ related:
   - /components/cards/
   - /components/progress-circular/
   - /components/buttons/
+features:
+  figma: true
+  label: 'C: VSkeletonLoader'
+  github: /components/VSkeletonLoader/
+  report: true
 ---
 
 # Skeleton loaders
@@ -16,10 +22,10 @@ Skeleton loaders provide a simple way to display loading placeholders in your ap
 
 ![Skeleton loader Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-skeleton-loader/v-skeleton-loader-entry.png)
 
-----
+<page-features />
 
-::: warning
-This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
+::: success
+This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
 :::
 
 ## Usage
@@ -91,6 +97,7 @@ The following built-in types are available:
 | **list-item-avatar-two-line** | avatar, sentences |
 | **list-item-three-line** | paragraph |
 | **list-item-avatar-three-line** | avatar, paragraph |
+| **ossein** | ossein |
 | **paragraph** | text@3 |
 | **sentences** | text@2 |
 | **subtitle** | text |

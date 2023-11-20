@@ -75,7 +75,19 @@ const validate = ajv.compile({
     },
     disabled: { type: 'boolean' }, // The page is not published
     emphasized: { type: 'boolean' }, // The page is emphasized in the navigation
-    fluid: { type: 'boolean' }, // The page is emphasized in the navigation
+    fluid: { type: 'boolean' }, // Hide the Toc
+    backmatter: { type: 'boolean' }, // Hide the backmatter
+    features: {
+      type: 'object',
+      additionalProperties: false,
+      properties: {
+        figma: { type: 'boolean' },
+        label: { type: 'string' },
+        report: { type: 'boolean' },
+        github: { type: 'string' },
+        spec: { type: 'string' },
+      },
+    },
   },
 })
 

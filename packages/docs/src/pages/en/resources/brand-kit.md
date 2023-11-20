@@ -1,5 +1,5 @@
 ---
-emphasized: true
+fluid: true
 meta:
   nav: Brand Kit
   title: Brand Kit & Assets

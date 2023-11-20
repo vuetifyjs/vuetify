@@ -15,6 +15,7 @@ import { deepEqual, genericComponent, getUid, propsFactory, useRender } from '@/
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
+import type { GenericProps } from '@/util'
 
 export interface VSelectionGroupContext {
   modelValue: Ref<any>
@@ -45,7 +46,10 @@ export const makeSelectionControlGroupProps = propsFactory({
     default: null,
   },
   name: String,
-  readonly: Boolean,
+  readonly: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
   modelValue: null,
   type: String,
   valueComparator: {
@@ -64,13 +68,19 @@ export const makeVSelectionControlGroupProps = propsFactory({
   }),
 }, 'VSelectionControlGroup')
 
-export const VSelectionControlGroup = genericComponent()({
+export const VSelectionControlGroup = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: { default: never },
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelectionControlGroup',
 
   props: makeVSelectionControlGroupProps(),
 
   emits: {
-    'update:modelValue': (val: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { slots }) {

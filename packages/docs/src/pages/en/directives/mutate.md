@@ -2,7 +2,7 @@
 meta:
   nav: Mutation observer
   title: Mutation observer directive
-  description: The mutation observer directive utilizes the Mutation observer API. It allows you to invoke a callback when targetted elements are updated.
+  description: The mutation observer directive utilizes the Mutation observer API. It allows you to invoke a callback when targeted elements are updated.
   keywords: mutate, vuetify mutate directive, mutation observer directive, mutation observer
 related:
   - /components/sheets/
@@ -31,7 +31,7 @@ The `v-mutate` directive utilizes the [Mutation Observer API](https://developer.
 
 By default, `v-mutate` enables `.attr`, `.char`, `.child`, and `.sub` unless you manually apply one; in which case the undefined options are set to false:
 
-```html
+```html { resource="Component.vue" }
 <template>
   <div>
     <!-- attr, char, child, and sub are true -->
@@ -45,7 +45,7 @@ By default, `v-mutate` enables `.attr`, `.char`, `.child`, and `.sub` unless you
 
 In addition to the _modifier_ syntax, the `v-mutate` directive is configurable via a custom object containing a **handler** and **options** key. The following example demonstrates how both processes achieve the same result:
 
-```html
+```html { resource="Component.vue" }
 <template>
   <div>
     <div v-mutate="{
@@ -63,11 +63,9 @@ In addition to the _modifier_ syntax, the `v-mutate` directive is configurable v
   </div>
 </template>
 
-<script>
-  export default {
-    methods: {
-      onMutate () {}
-    },
+<script setup>
+  function onMutate () {
+    //
   }
 </script>
 ```
@@ -80,7 +78,7 @@ In addition to the _modifier_ syntax, the `v-mutate` directive is configurable v
 
 There may be times where your callback should only fire once. In these scenarios, use the **once** option to disconnect the observer after the first detected mutation. In the next example, we bind data value _content_ to 2 separate [v-card](/components/cards/) components and an `input`; then track the number of mutations that occur as we type:
 
-```html
+```html { resource="Component.vue" }
 <template>
   <div>
     <input type="text" v-model="content">
@@ -91,30 +89,26 @@ There may be times where your callback should only fire once. In these scenarios
   </div>
 </template>
 
-<script>
-  export default {
-    data: () => ({
-      content: 'Foo',
-      mutations: 0,
-    }),
+<script setup>
+  import { onMounted, shallowRef } from 'vue'
 
-    mounted () {
-      this.content = 'Bar'
+  const content = shallowRef('Foo')
+  const mutations = shallowRef(0)
 
-      console.log(this.mutations) // 2
+  onMounted(() => {
+    content.value = 'Bar'
 
-      setTimeout(() => {
-        this.content = 'Foobar'
+    console.log(mutations.value) // 2
 
-        console.log(this.mutations) // 3
-      }, 200)
-    },
+    setTimeout(() => {
+      content.value = 'Foobar'
 
-    methods: {
-      onMutate (mutations, observer) {
-        this.mutations++
-      },
-    },
+      console.log(mutations.value) // 3
+    }, 200)
+  })
+
+  function onMutate () {
+    mutations.value++
   }
 </script>
 ```
@@ -125,24 +119,22 @@ When the value of content changes, both cards immediately call _onMutate_ and it
 
 Unlike the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver), the provided callback is **not** immediately invoked when a Mutation Observer is created. Vuetify normalizes this behavior with the **immediate** option. In the following example, the `v-mutate` directive invokes the _onMutate_ method when the element is initially mounted in the DOM **and** with every mutation; based upon the provided options.
 
-```html
+```html { resource="Component.vue" }
 <template>
   <div v-mutate.immediate="onMutate">...</div>
 </template>
 
-<script>
-  export default {
-    data: () => ({ mutations: 0 }),
+<script setup>
+  import { onMounted, shallowRef } from 'vue'
 
-    mounted () {
-      console.log(this.mutations) // 1
-    },
+  const mutations = shallowRef(0)
 
-    methods: {
-      onMutate (mutations, observer) {
-        this.mutations++
-      },
-    },
+  onMounted(() => {
+    console.log(mutations.value) // 1
+  })
+
+  function onMutate () {
+    mutations.value++
   }
 </script>
 ```

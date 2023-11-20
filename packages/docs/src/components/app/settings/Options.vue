@@ -1,42 +1,35 @@
 <template>
-  <div class="ps-3 mb-6">
-    <v-label class="mb-2 font-weight-medium">Theme</v-label>
-
-    <v-messages
-      active
-      messages="Customize your documentation experience with light and dark themes, as well as a combination of both named"
-      class="mb-n3"
+  <div>
+    <settings-header
+      title="theme"
+      text="theme-message"
     />
-  </div>
 
-  <theme-option />
+    <theme-option />
 
-  <br>
+    <v-divider class="mt-4 mb-3" />
 
-  <v-divider class="mb-4" />
-
-  <div class="ps-3">
-    <v-label class="mb-2 font-weight-medium">General</v-label>
-
-    <v-messages
-      active
-      messages="Enable composition API for examples, show component API inline, and more."
-      class="mb-n3"
+    <settings-header
+      title="general"
+      text="general-message"
     />
+
+    <code-option />
+
+    <api-option />
+
+    <slash-search-option />
+
+    <sync-option />
   </div>
-
-  <br>
-
-  <code-option />
-
-  <br>
-
-  <api-option />
 </template>
 
 <script setup>
   // Components
   import ApiOption from '@/components/app/settings/options/ApiOption.vue'
   import CodeOption from '@/components/app/settings/options/CodeOption.vue'
+  import SettingsHeader from '@/components/app/settings/SettingsHeader.vue'
+  import SlashSearchOption from '@/components/app/settings/options/SlashSearchOption.vue'
+  import SyncOption from '@/components/app/settings/options/SyncOption.vue'
   import ThemeOption from '@/components/app/settings/options/ThemeOption.vue'
 </script>

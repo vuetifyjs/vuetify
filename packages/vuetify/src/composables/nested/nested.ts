@@ -17,6 +17,7 @@ import { getCurrentInstance, getUid, propsFactory } from '@/util'
 import type { InjectionKey, PropType, Ref } from 'vue'
 import type { OpenStrategy } from './openStrategies'
 import type { SelectStrategyFn } from './selectStrategies'
+import type { EventProp } from '@/util'
 
 export type SelectStrategy = 'single-leaf' | 'leaf' | 'independent' | 'single-independent' | 'classic' | SelectStrategyFn
 export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
@@ -27,8 +28,8 @@ export interface NestedProps {
   selected: readonly unknown[] | undefined
   opened: readonly unknown[] | undefined
   mandatory: boolean
-  'onUpdate:selected': ((val: unknown[]) => void) | undefined
-  'onUpdate:opened': ((val: unknown[]) => void) | undefined
+  'onUpdate:selected': EventProp<[unknown[]]> | undefined
+  'onUpdate:opened': EventProp<[unknown[]]> | undefined
 }
 
 type NestedProvide = {

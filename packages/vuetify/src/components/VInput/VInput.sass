@@ -1,4 +1,5 @@
 @use 'sass:math'
+@use 'sass:selector'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -9,18 +10,13 @@
   font-weight: $input-font-weight
   line-height: $input-line-height
 
-  --v-input-chips-margin-top: #{$input-chips-margin-top}
-
   &--disabled
     pointer-events: none
 
   @at-root
     @include tools.density('v-input', $input-density) using ($modifier)
       --v-input-control-height: #{$input-control-height + $modifier}
-      --v-input-padding-top: #{15px + $modifier * .5}
-
-    @include tools.density('v-input', $input-chips-margin-bottom) using ($modifier)
-      --v-input-chips-margin-bottom: #{0px + math.div($modifier, 2)}
+      --v-input-padding-top: #{16px + $modifier * .5}
 
 .v-input--vertical
   grid-template-areas: "append" "control" "prepend"
@@ -96,3 +92,26 @@
 .v-input__control
   display: flex
   grid-area: control
+
+.v-input
+  &--hide-spin-buttons
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button
+      -webkit-appearance: none
+      margin: 0
+    input[type=number]
+      -moz-appearance: textfield
+
+  &--plain-underlined
+    .v-input__details
+      padding: 0
+
+    .v-input__prepend,
+    .v-input__append
+      $this: &
+      align-items: flex-start
+
+      @at-root
+        @include tools.density('v-input', $input-density) using ($modifier)
+          @at-root #{selector.append(&, $this)}
+            padding-top: calc(var(--v-input-padding-top) + #{math.max(0px, 4px + $modifier * .25)})

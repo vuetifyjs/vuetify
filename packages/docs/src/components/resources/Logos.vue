@@ -20,7 +20,7 @@
             width="125"
           />
 
-          <div class="d-flex justify-center mt-n2">
+          <div class="d-flex justify-center">
             <v-btn
               :href="`${logo.src}.svg`"
               class="mx-1"
@@ -61,7 +61,7 @@
             cover
           />
 
-          <div class="d-flex justify-center mt-n2">
+          <div class="d-flex justify-center">
             <v-btn
               :href="`${logo.src}.svg`"
               class="mx-1"
@@ -87,17 +87,22 @@
 
       <v-col cols="12" class="pb-0 font-weight-bold">{{ t('icon') }}</v-col>
 
-      <v-col v-for="icon in icons" :key="icon.title" cols="auto">
+      <v-col
+        v-for="icon in icons"
+        :key="icon.title"
+        cols="12"
+        sm="6"
+      >
         <v-sheet
           rounded
           border
-          class="pa-4"
+          class="pa-2"
         >
           <div class="text-center">
             <v-icon
               :color="icon.color"
               :icon="icon.icon"
-              size="125"
+              size="88"
             />
           </div>
 
@@ -151,10 +156,9 @@
       code: '<v-icon icon="$vuetify" />',
     },
     {
-      title: 'Vuetify Icon Themed',
-      icon: '$vuetify',
-      color: 'primary',
-      code: '<v-icon color="primary" icon="$vuetify" />',
+      title: 'Vuetify Outlined Icon',
+      icon: '$vuetify-outline',
+      code: '<v-icon icon="$vuetify-outline" />',
     },
   ]
 </script>

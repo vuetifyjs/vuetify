@@ -11,6 +11,7 @@ import {
   createRange,
   darken,
   getCurrentInstance,
+  getForeground,
   getLuma,
   IN_BROWSER,
   lighten,
@@ -19,7 +20,6 @@ import {
   propsFactory,
   RGBtoHex,
 } from '@/util'
-import { APCAcontrast } from '@/util/color/APCA'
 
 // Types
 import type { HeadClient } from '@vueuse/head'
@@ -113,6 +113,7 @@ const defaultThemeOptions: Exclude<ThemeOptions, false> = {
       colors: {
         background: '#FFFFFF',
         surface: '#FFFFFF',
+        'surface-bright': '#FFFFFF',
         'surface-variant': '#424242',
         'on-surface-variant': '#EEEEEE',
         primary: '#1867C0',
@@ -148,7 +149,8 @@ const defaultThemeOptions: Exclude<ThemeOptions, false> = {
       colors: {
         background: '#121212',
         surface: '#212121',
-        'surface-variant': '#BDBDBD',
+        'surface-bright': '#ccbfd6',
+        'surface-variant': '#a3a3a3',
         'on-surface-variant': '#424242',
         primary: '#2196F3',
         'primary-darken-1': '#277CC1',
@@ -235,20 +237,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         const onColor = `on-${color}` as keyof OnColors
         const colorVal = parseColor(theme.colors[color]!)
 
-        const blackContrast = Math.abs(APCAcontrast(parseColor(0), colorVal))
-        const whiteContrast = Math.abs(APCAcontrast(parseColor(0xffffff), colorVal))
-
-        // TODO: warn about poor color selections
-        // const contrastAsText = Math.abs(APCAcontrast(colorVal, colorToInt(theme.colors.background)))
-        // const minContrast = Math.max(blackContrast, whiteContrast)
-        // if (minContrast < 60) {
-        //   consoleInfo(`${key} theme color ${color} has poor contrast (${minContrast.toFixed()}%)`)
-        // } else if (contrastAsText < 60 && !['background', 'surface'].includes(color)) {
-        //   consoleInfo(`${key} theme color ${color} has poor contrast as text (${contrastAsText.toFixed()}%)`)
-        // }
-
-        // Prefer white text if both have an acceptable contrast ratio
-        theme.colors[onColor] = whiteContrast > Math.min(blackContrast, 50) ? '#fff' : '#000'
+        theme.colors[onColor] = getForeground(colorVal)
       }
     }
 
@@ -376,14 +365,16 @@ export function provideTheme (props: { theme?: string }) {
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
   const name = computed<string>(() => {
-    return props.theme ?? theme?.name.value
+    return props.theme ?? theme.name.value
   })
+  const current = computed(() => theme.themes.value[name.value])
 
   const themeClasses = computed(() => theme.isDisabled ? undefined : `v-theme--${name.value}`)
 
   const newTheme: ThemeInstance = {
     ...theme,
     name,
+    current,
     themeClasses,
   }
 

@@ -8,6 +8,11 @@ related:
   - /components/buttons/
   - /components/footers/
   - /components/tabs/
+features:
+  github: /components/VToolbar/
+  label: 'C: VToolbar'
+  report: true
+  spec: https://m1.material.io/components/toolbars.html
 ---
 
 # Toolbars
@@ -16,7 +21,7 @@ The `v-toolbar` component is pivotal to any graphical user interface (GUI), as i
 
 <!-- ![Toolbar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-toolbar/v-toolbar-entry.png) -->
 
----
+<page-features />
 
 ## Usage
 

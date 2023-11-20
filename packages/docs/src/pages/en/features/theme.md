@@ -127,7 +127,7 @@ export default createVuetify({
 
 This is used when you need to change the theme during runtime
 
-```html
+```html { resource="src/App.vue" }
 <template>
   <v-app>
     <v-btn @click="toggleTheme">toggle theme</v-btn>
@@ -135,18 +135,13 @@ This is used when you need to change the theme during runtime
   </v-app>
 </template>
 
-<script>
+<script setup>
 import { useTheme } from 'vuetify'
 
-export default {
-  setup () {
-    const theme = useTheme()
+const theme = useTheme()
 
-    return {
-      theme,
-      toggleTheme: () => theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
-    }
-  },
+function toggleTheme () {
+  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
 }
 </script>
 ```

@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.4.0-alpha.0",
+  "version": "3.4.2",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -73,8 +73,8 @@
     "./locale/adapters/*": "./lib/locale/adapters/*.mjs",
     "./iconsets/*": "./lib/iconsets/*.mjs",
     "./labs/components": "./lib/labs/components.mjs",
-    "./labs/date/adapters/*": "./lib/labs/date/adapters/*.mjs",
     "./labs/*": "./lib/labs/*/index.mjs",
+    "./util/colors": "./lib/util/colors.mjs",
     "./*": "./*"
   },
   "typesVersions": {
@@ -178,7 +178,7 @@
   "peerDependencies": {
     "typescript": ">=4.7",
     "vite-plugin-vuetify": "^1.0.0-alpha.12",
-    "vue": "^3.2.0",
+    "vue": "^3.3.0",
     "vue-i18n": "^9.0.0",
     "webpack-plugin-vuetify": "^2.0.0-alpha.11"
   },

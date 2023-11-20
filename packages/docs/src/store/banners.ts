@@ -1,18 +1,18 @@
 // Composables
 import { useCosmic } from '@/composables/cosmic'
+import { useDate } from 'vuetify'
 
 // Utilities
 import { defineStore } from 'pinia'
 
-// Globals
-import { IS_PROD } from '@/util/globals'
-
 // Types
 interface Banner {
   status: 'published' | 'unpublished'
+  modified_at: string
   slug: string
   title: string
   metadata: {
+    active: boolean
     closable: boolean
     color: string
     label: string
@@ -22,6 +22,8 @@ interface Banner {
     link_text: string
     link_color: string
     attributes: Record<string, any>
+    start_date: string
+    end_date: string
     theme: {
       key: 'light' | 'dark'
       value: 'Light' | 'Dark'
@@ -35,7 +37,7 @@ interface Banner {
       }
     }
     visible: {
-      key: 'home' | 'docs' | 'both'
+      key: 'home' | 'docs' | 'both' | 'server'
       value: 'home'
     }
   }
@@ -44,6 +46,8 @@ interface Banner {
 interface State {
   banners: Banner[]
   router: any
+  server?: Banner
+  banner?: Banner
 }
 
 export const useBannersStore = defineStore('banners', {
@@ -67,13 +71,10 @@ export const useBannersStore = defineStore('banners', {
               'metadata.start_date': {
                 $lte: today,
               },
-              'metadata.end_date': {
-                $gte: today,
-              },
             })
-            .props('status,metadata,slug,title')
+            .props('status,metadata,slug,title,modified_at')
             .sort('metadata.start_date')
-            .limit(1)
+            .limit(3)
         ) || {}
 
         this.banners = objects
@@ -81,17 +82,59 @@ export const useBannersStore = defineStore('banners', {
     },
   },
   getters: {
-    banner: state => {
+    banner (state) {
       const name = state.router.currentRoute.value.meta.page
+      const date = useDate()
 
-      return state.banners.find(({ metadata: { visible }, status }) => {
-        if (IS_PROD && status !== 'published') return false
+      if (this.server) return this.server
+
+      return state.banners.find(({
+        metadata: {
+          visible,
+          start_date: startDate,
+          end_date: endDate,
+          active,
+        },
+      }) => {
+        const start = date.startOfDay(date.date(startDate))
+        const end = date.endOfDay(date.date(endDate))
+        const today = date.endOfDay(date.date())
+
+        if (
+          !active ||
+          date.isBefore(today, start) ||
+          date.isAfter(today, end)
+        ) return false
 
         if (visible.key === 'both') return true
         // '' is home
         if (visible.key === 'home' && name === '') return true
 
         return visible.key === 'docs' && name !== 'home'
+      })
+    },
+    server (state) {
+      const date = useDate()
+
+      return state.banners.find(({
+        metadata: {
+          visible,
+          start_date: startDate,
+          end_date: endDate,
+          active,
+        },
+      }) => {
+        const start = date.startOfDay(date.date(startDate))
+        const end = date.endOfDay(date.date(endDate))
+        const today = date.endOfDay(date.date())
+
+        if (
+          !active ||
+          date.isBefore(today, start) ||
+          date.isAfter(today, end)
+        ) return false
+
+        return visible.key === 'server'
       })
     },
   },

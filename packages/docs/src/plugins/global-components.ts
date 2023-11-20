@@ -10,11 +10,11 @@ import AppDivider from '@/components/app/Divider.vue'
 import AppFigure from '@/components/app/Figure.vue'
 import AppHeading from '@/components/app/Heading.vue'
 import AppHeadline from '@/components/app/Headline.vue'
-import AppLinkListItem from '@/components/app/list/LinkListItem.vue'
 import AppLink from '@/components/app/Link.vue'
+import AppLinkListItem from '@/components/app/list/LinkListItem.vue'
 import AppMarkdown from '@/components/app/Markdown.vue'
-import AppMenu from '@/components/app/menu/Menu.vue'
 import AppMarkup from '@/components/app/Markup.vue'
+import AppMenu from '@/components/app/menu/Menu.vue'
 import AppSheet from '@/components/app/Sheet.vue'
 import AppTable from '@/components/app/Table.vue'
 import AppTextField from '@/components/app/TextField.vue'
@@ -29,6 +29,7 @@ import DocTabs from '@/components/doc/Tabs.vue'
 import Entry from '@/components/promoted/Entry.vue'
 import Example from '@/components/examples/Example.vue'
 import Inline from '@/components/promoted/Inline.vue'
+import PageFeatures from '@/components/PageFeatures.vue'
 import Promoted from '@/components/promoted/Promoted.vue'
 import Random from '@/components/promoted/Random.vue'
 import Sponsors from '@/components//sponsor/Sponsors.vue'
@@ -39,9 +40,9 @@ import VueFile from '@/components/examples/VueFile.vue'
 import Vuetify from '@/components/promoted/Vuetify.vue'
 
 // Types
-import type { ViteSSGContext } from '@vuetify/vite-ssg'
+import type { App } from 'vue'
 
-export function installGlobalComponents ({ app }: ViteSSGContext) {
+export function installGlobalComponents (app: App) {
   app
     .component('AppBtn', AppBtn)
     .component('AppCaption', AppCaption)
@@ -76,6 +77,7 @@ export function installGlobalComponents ({ app }: ViteSSGContext) {
     .component('Entry', Entry)
     .component('Example', Example)
     .component('Inline', Inline)
+    .component('PageFeatures', PageFeatures)
     .component('Promoted', Promoted)
     .component('Random', Random)
     .component('Sponsors', Sponsors)

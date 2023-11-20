@@ -6,39 +6,36 @@
       }
     }"
   >
-    <v-switch
+    <settings-switch
       v-model="user.notifications.show"
-      class="ps-3 flex-0-0"
-      inset
-      color="primary"
-      label="Enable Notifications"
-      messages="Notifications are located at the top right of the screen in the actions bar and provide information about new releases, updates, and other important information."
-      density="compact"
-      true-icon="mdi-check"
-      false-icon="$close"
+      :label="t('enable-notifications')"
+      :messages="t('enable-notifications-message')"
     >
       <template #append>
         <v-btn
-          :color="isDisabled ? undefined : 'error'"
+          :color="isDisabled ? undefined : 'primary'"
           :disabled="isDisabled"
-          variant="outlined"
+          :text="t('reset')"
           size="small"
+          variant="outlined"
           @click="onResetNotifications"
-        >
-          Reset
-        </v-btn>
+        />
       </template>
-    </v-switch>
+    </settings-switch>
   </v-defaults-provider>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed } from 'vue'
+  // Composables
+  import { useI18n } from 'vue-i18n'
 
   // Stores
   import { useUserStore } from '@/store/user'
 
+  // Utilities
+  import { computed } from 'vue'
+
+  const { t } = useI18n()
   const user = useUserStore()
 
   const isDisabled = computed(() => user.notifications.read.length === 0)

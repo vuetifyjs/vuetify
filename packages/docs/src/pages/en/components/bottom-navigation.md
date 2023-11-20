@@ -8,13 +8,19 @@ related:
   - /components/buttons/
   - /components/icons/
   - /components/tabs/
+features:
+  figma: true
+  label: 'C: VBottomNavigation'
+  report: true
+  github: /components/VBottomNavigation/
+  spec: https://m2.material.io/components/bottom-navigation
 ---
 
 # Bottom navigation
 
 The `v-bottom-navigation` component is an alternative to the sidebar. It is primarily used for mobile applications and comes in three variants, **icons** and **text**, and **shift**.
 
-----
+<page-features />
 
 ## Usage
 

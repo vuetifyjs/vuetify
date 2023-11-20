@@ -52,7 +52,7 @@ type SliderProvide = {
   parsedTicks: Ref<Tick[]>
   hasLabels: Ref<boolean>
   isReversed: Ref<boolean>
-  horizontalDirection: Ref<'ltr' | 'rtl'>
+  indexFromEnd: Ref<boolean>
 }
 
 export const VSliderSymbol: InjectionKey<SliderProvide> = Symbol.for('vuetify:v-slider')
@@ -184,15 +184,8 @@ export const useSlider = ({
 }) => {
   const { isRtl } = useRtl()
   const isReversed = toRef(props, 'reverse')
-  const horizontalDirection = computed(() => {
-    let hd: 'ltr' | 'rtl' = isRtl.value ? 'rtl' : 'ltr'
-
-    if (props.reverse) {
-      hd = hd === 'rtl' ? 'ltr' : 'rtl'
-    }
-
-    return hd
-  })
+  const vertical = computed(() => props.direction === 'vertical')
+  const indexFromEnd = computed(() => vertical.value !== isReversed.value)
 
   const { min, max, step, decimals, roundValue } = steps
 
@@ -201,7 +194,6 @@ export const useSlider = ({
   const trackSize = computed(() => parseInt(props.trackSize, 10))
   const numTicks = computed(() => (max.value - min.value) / step.value)
   const disabled = toRef(props, 'disabled')
-  const vertical = computed(() => props.direction === 'vertical')
 
   const thumbColor = computed(() => props.error || props.disabled ? undefined : props.thumbColor ?? props.color)
   const trackColor = computed(() => props.error || props.disabled ? undefined : props.trackColor ?? props.color)
@@ -228,7 +220,7 @@ export const useSlider = ({
     // It is possible for left to be NaN, force to number
     let clickPos = Math.min(Math.max((clickOffset - trackStart - startOffset.value) / trackLength, 0), 1) || 0
 
-    if (vertical || horizontalDirection.value === 'rtl') clickPos = 1 - clickPos
+    if (vertical ? indexFromEnd.value : indexFromEnd.value !== isRtl.value) clickPos = 1 - clickPos
 
     return roundValue(min.value + clickPos * (max.value - min.value))
   }
@@ -333,8 +325,8 @@ export const useSlider = ({
     direction: toRef(props, 'direction'),
     elevation: toRef(props, 'elevation'),
     hasLabels,
-    horizontalDirection,
     isReversed,
+    indexFromEnd,
     min,
     max,
     mousePressed,

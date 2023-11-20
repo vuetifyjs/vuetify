@@ -14,6 +14,8 @@ related:
 
 The v-data-table-virtual component relies on all data being available locally. But unlike the standard data-table it uses virtualization to only render a small portion of the rows. This makes it well suited for displaying large data sets. It supports sorting and filtering, but not pagination.
 
+<entry />
+
 ## Examples
 
 ### Basic example

@@ -3,16 +3,15 @@
     :headers="headers"
     :items="desserts"
     item-value="name"
-    class="elevation-1"
   >
     <template v-slot:item="{ item }">
       <tr>
-        <td>{{ item.columns.name }}</td>
-        <td>{{ item.columns.calories }}</td>
-        <td>{{ item.columns.fat }}</td>
-        <td>{{ item.columns.carbs }}</td>
-        <td>{{ item.columns.protein }}</td>
-        <td>{{ item.columns.iron }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.calories }}</td>
+        <td>{{ item.fat }}</td>
+        <td>{{ item.carbs }}</td>
+        <td>{{ item.protein }}</td>
+        <td>{{ item.iron }}</td>
       </tr>
     </template>
   </v-data-table>

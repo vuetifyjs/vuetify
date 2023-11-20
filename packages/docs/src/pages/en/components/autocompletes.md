@@ -8,11 +8,19 @@ related:
   - /components/combobox/
   - /components/forms/
   - /components/selects/
+features:
+  figma: true
+  label: 'C: VAutocomplete'
+  report: true
+  github: /components/VAutocomplete/
+  spec: https://m2.material.io/components/text-fields
 ---
 
 # Autocompletes
 
 The `v-autocomplete` component offers simple and flexible type-ahead functionality. This is useful when searching large sets of data or even dynamically requesting information from an API.
+
+<page-features />
 
 ## Usage
 
@@ -33,15 +41,9 @@ The autocomplete component extends `v-select` and adds the ability to filter ite
 ## Caveats
 
 ::: error
-  When using objects for the **items** prop, you must associate **item-title** and **item-value** with existing properties on your objects. These values are defaulted to **title** and **value** and can be changed.
-:::
 
-::: warning
-  The **auto** property of **menu-props** is only supported for the default input style.
-:::
+When using objects for the **items** prop, you must associate **item-title** and **item-value** with existing properties on your objects. These values are defaulted to **title** and **value** and can be changed.
 
-::: info
-  Browser autocomplete is set to off by default, may vary by browser and may be ignored. [MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)
 :::
 
 ## Examples
@@ -52,13 +54,13 @@ Below is a collection of simple to complex examples.
 
 #### Density
 
-You can use `density` prop to adjusts vertical spacing within the component.
+You can use `density` prop to adjust vertical spacing within the component.
 
 <example file="v-autocomplete/prop-density" />
 
 #### Filter
 
-The `filter` prop can be used to filter each individual item with custom logic. In this example we filter items by name.
+The `custom-filter` prop can be used to filter each individual item with custom logic. In this example we filter items by name.
 
 <example file="v-autocomplete/prop-filter" />
 
@@ -72,11 +74,13 @@ With the power of slots, you can customize the visual output of the select. In t
 
 ### Misc
 
+<!--
 #### Asynchronous items
 
 Sometimes you need to load data externally based upon a search query. Use the `search-input` prop with the **.sync** modifier when using the `autocomplete` prop. We also make use of the new `cache-items` prop. This will keep a unique list of all items that have been passed to the `items` prop and is **REQUIRED** when using asynchronous items and the **multiple** prop.
 
 <example file="v-autocomplete/misc-asynchronous-items" />
+-->
 
 #### State selector
 
