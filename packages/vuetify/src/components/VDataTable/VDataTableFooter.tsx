@@ -2,7 +2,7 @@
 import './VDataTableFooter.sass'
 
 // Components
-import { VBtn } from '@/components/VBtn'
+import { VPagination } from '@/components/VPagination'
 import { VSelect } from '@/components/VSelect'
 
 // Composables
@@ -11,7 +11,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -97,13 +97,13 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
       })
     ))
 
-    return () => (
-      <div
-        class="v-data-table-footer"
-      >
+    useRender(() => (
+      <div class="v-data-table-footer">
         { slots.prepend?.() }
+
         <div class="v-data-table-footer__items-per-page">
           <span>{ t(props.itemsPerPageText) }</span>
+
           <VSelect
             items={ itemsPerPageOptions.value }
             modelValue={ itemsPerPage.value }
@@ -113,45 +113,31 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
             hide-details
           />
         </div>
+
         <div class="v-data-table-footer__info">
           <div>
             { t(props.pageText, !itemsLength.value ? 0 : startIndex.value + 1, stopIndex.value, itemsLength.value) }
           </div>
         </div>
+
         <div class="v-data-table-footer__pagination">
-          <VBtn
-            icon={ props.firstIcon }
+          <VPagination
+            v-model={ page.value }
+            density="comfortable"
+            first-aria-label={ props.firstPageLabel }
+            last-aria-label={ props.lastPageLabel }
+            length={ pageCount.value }
+            next-aria-label={ props.nextPageLabel }
+            prev-aria-label={ props.prevPageLabel }
+            rounded
+            show-first-last-page
+            total-visible={ props.showCurrentPage ? 1 : 0 }
             variant="plain"
-            onClick={ () => page.value = 1 }
-            disabled={ page.value === 1 }
-            aria-label={ t(props.firstPageLabel) }
-          />
-          <VBtn
-            icon={ props.prevIcon }
-            variant="plain"
-            onClick={ () => page.value = Math.max(1, page.value - 1) }
-            disabled={ page.value === 1 }
-            aria-label={ t(props.prevPageLabel) }
-          />
-          { props.showCurrentPage && (
-            <span key="page" class="v-data-table-footer__page">{ page.value }</span>
-          )}
-          <VBtn
-            icon={ props.nextIcon }
-            variant="plain"
-            onClick={ () => page.value = Math.min(pageCount.value, page.value + 1) }
-            disabled={ page.value === pageCount.value }
-            aria-label={ t(props.nextPageLabel) }
-          />
-          <VBtn
-            icon={ props.lastIcon }
-            variant="plain"
-            onClick={ () => page.value = pageCount.value }
-            disabled={ page.value === pageCount.value }
-            aria-label={ t(props.lastPageLabel) }
-          />
+          ></VPagination>
         </div>
       </div>
-    )
+    ))
+
+    return {}
   },
 })
