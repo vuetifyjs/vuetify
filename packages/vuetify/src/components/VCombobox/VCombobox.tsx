@@ -187,6 +187,11 @@ export const VCombobox = genericComponent<new <
         isPristine.value = !val
       },
     })
+    const counterValue = computed(() => {
+      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
+        : typeof props.counterValue === 'number' ? props.counterValue
+        : (props.multiple ? model.value.length : search.value.length)
+    })
     watch(_search, value => {
       if (cleared) {
         // wait for clear to finish, VTextField sets _search to null
@@ -432,7 +437,7 @@ export const VCombobox = genericComponent<new <
           onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
-          counterValue={ props.multiple ? model.value.length : search.value.length }
+          counterValue={ counterValue.value }
           dirty={ isDirty }
           class={[
             'v-combobox',
