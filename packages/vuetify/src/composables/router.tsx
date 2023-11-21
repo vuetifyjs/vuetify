@@ -6,7 +6,7 @@ import {
   resolveDynamicComponent,
   toRef,
 } from 'vue'
-import { getCurrentInstance, hasEvent, IN_BROWSER, propsFactory } from '@/util'
+import { deepEqual, getCurrentInstance, hasEvent, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref, SetupContext } from 'vue'
@@ -66,13 +66,19 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
   }
 
   const link = props.to ? RouterLink.useLink(props as UseLinkOptions) : undefined
+  const route = useRoute()
 
   return {
     isLink,
     isClickable,
     route: link?.route,
     navigate: link?.navigate,
-    isActive: link && computed(() => props.exact ? link.isExactActive?.value : link.isActive?.value),
+    isActive: link && computed(() => {
+      if (!props.exact) return link.isActive?.value
+      if (!route.value) return link.isExactActive?.value
+
+      return link.isExactActive?.value && deepEqual(link.route.value.query, route.value.query)
+    }),
     href: computed(() => props.to ? link?.route.value.href : props.href),
   }
 }
