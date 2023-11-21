@@ -228,8 +228,10 @@
       "brand-kit",
       "jobs-for-vue",
       "made-with-vuetify",
-      "search-engine",
       "themes",
+      { "divider": true },
+      { "subheader": "guides" },
+      "search-engine",
       "ui-kits"
     ]
   },

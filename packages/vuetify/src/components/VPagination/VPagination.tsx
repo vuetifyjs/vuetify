@@ -174,7 +174,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
     const start = computed(() => parseInt(props.start, 10))
 
     const totalVisible = computed(() => {
-      if (props.totalVisible) return parseInt(props.totalVisible, 10)
+      if (props.totalVisible != null) return parseInt(props.totalVisible, 10)
       else if (maxButtons.value >= 0) return maxButtons.value
       return getMax(width.value, 58)
     })

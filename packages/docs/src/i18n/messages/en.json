@@ -95,6 +95,7 @@
       "avatar-message": "Add a custom avatar image displayed on the user profile and user bar.",
       "disable-ads": "Disable Ads",
       "disable-ads-message": "Disable advertisements on all documentation pages.",
+      "enable-ads": "Enable Ads",
       "experience": "Experience",
       "experience-message": "These options change your browsing experience within the documentation.",
       "layout": "Layout",
