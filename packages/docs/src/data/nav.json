@@ -240,9 +240,10 @@
     "inactiveIcon": "$vuetify-outline",
     "activeIcon": "$vuetify",
     "items": [
+      "code-of-conduct",
+      "licensing",
       "meet-the-team",
-      "security-disclosure",
-      "code-of-conduct"
+      "security-disclosure"
     ]
   }
 ]
