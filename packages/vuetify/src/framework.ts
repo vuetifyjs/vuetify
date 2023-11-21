@@ -5,7 +5,7 @@ import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createIcons, IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
-import { createRules, RulesSymbol } from '@/labs/rules/rules
+import { createRules, RulesSymbol } from '@/labs/rules/rules'
 
 // Utilities
 import { nextTick, reactive } from 'vue'
