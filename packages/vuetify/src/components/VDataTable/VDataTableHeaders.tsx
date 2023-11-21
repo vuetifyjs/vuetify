@@ -129,7 +129,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           ]}
           style={{
             width: convertToUnit(column.width),
-            minWidth: convertToUnit(column.width),
+            minWidth: convertToUnit(column.minWidth),
             ...getFixedStyles(column, y),
           }}
           colspan={ column.colspan }
