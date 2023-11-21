@@ -21,31 +21,22 @@ Vuetify is always under development. We are constantly working towards improving
 The following releases are currently under development:
 
 ::: warning
-  This is not an exhaustive list and is subject to change at any time without notice
+
+This is not an exhaustive list and is subject to change at any time without notice
+
 :::
 
 <promoted slug="vuetify-github-sponsors" />
 
-### v3.4 (Blackguard)
+### v3.5
 
-- **Release Banner:** [View](https://cdn.vuetifyjs.com/docs/images/release-banners/blackguard-34.png)
-- **Target Release:** Q3 2023
-- **Overview:** This release will introduce 9 new components to the main framework from Labs in addition to other bug fixes and improvements.:
-  - [v-bottom-sheet](/components/bottom-sheets/)
-  - [v-data-iterator](/components/data-iterators/)
-  - [v-data-table](/components/data-tables/basics/)
-  - [v-date-picker](/components/date-pickers/)
-  - [v-infinite-scroll](/components/infinite-scroller/)
-  - [v-otp-input](/components/otp-input/)
-  - [v-skeleton-loader](/components/skeleton-loaders/)
-  - [v-stepper](/components/steppers/)
-  - `<v-speed-dial>`
-  - `<v-overflow-btn>`
-- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/61)
+- **Target Release:** Q1 2024
+- **Overview:** A maintenance cycle post v3.4 that will focus on bug fixes and general improvements.
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/70)
 
 ### Labs release schedule
 
-Information regarding upcoming Labs components is located on the [Labs introduction](/labs/introduction/) page.
+Information regarding upcoming 🧪 Labs components is located on the [Labs introduction](/labs/introduction/) page.
 
 ----
 
@@ -58,6 +49,15 @@ The following versions have continued maintenance for backwards compatible fixes
 ## Released
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
+
+### v3.4 (Blackguard)
+
+- **Released:** November 2023
+- **Hero:** [Banner](https://vuetifyjs.b-cdn.net/docs/images/release-banners/blackguard-34.png)
+- **Target Release:** Q3 2023
+- **Notes:** [v3.4 Release](/getting-started/release-notes/?version=v3.4.0)
+- **Overview:** Introduced 8 updated components to the main framework from Labs: VBottomSheet, VDataIterator, VDataTable, VDatePicker, VInfiniteScroll, VOtpInput, VSkeletonLoader, and VStepper.
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/61)
 
 ### v2.7 (Nirvana)
 

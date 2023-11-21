@@ -90,6 +90,7 @@
       "danger-zone-message": "The following settings are for development purposes."
     },
     "perks": {
+      "alert": "Support Vuetify and gain access to exclusive documentation perks and features for only",
       "avatar": "Avatar",
       "avatar-message": "Add a custom avatar image displayed on the user profile and user bar.",
       "disable-ads": "Disable Ads",
@@ -194,7 +195,18 @@
   "light": "Light",
   "link-only": "Link Only",
   "load-more": "Load more...",
-  "login-with-github": "Login with GitHub",
+  "login": {
+    "login": "Log in",
+    "logout": "Log out",
+    "to-vuetify": "Log in to Vuetify",
+    "welcome-back": "Welcome back!",
+    "tagline": "Sign in with GitHub or Discord to save your settings and unlock exclusive subscriber perks.",
+    "last-used": "Last used",
+    "with-github": "Continue with GitHub",
+    "with-discord": "Continue with Discord",
+    "connect-github": "Connect GitHub",
+    "connect-discord": "Connect Discord"
+  },
   "logo": "Logo",
   "ltr": "LTR",
   "marked-read": "Mark all read",
@@ -306,6 +318,7 @@
   "transition": "Transition",
   "translations": "Translations",
   "type": "Type | Types",
+  "types": "Types",
   "twitter": "Twitter",
   "ui-components": "UI Components",
   "ui-kits": "UI Kits",

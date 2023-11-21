@@ -1,10 +1,12 @@
 <template>
-  <div>
-    <v-list-item
-      :prepend-icon="icon"
-      @click="onClick"
-    />
-  </div>
+  <v-btn
+    :icon="icon"
+    height="28"
+    rounded
+    size="small"
+    variant="text"
+    @click="onClick"
+  />
 </template>
 
 <script setup>

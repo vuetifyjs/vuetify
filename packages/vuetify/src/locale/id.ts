@@ -2,6 +2,10 @@ export default {
   badge: 'Lencana',
   open: 'Open',
   close: 'Tutup',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Tidak ditemukan catatan yang cocok',
     loadingText: 'Memuat data...',
@@ -31,8 +35,7 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Select dates',
       header: 'Enter dates',

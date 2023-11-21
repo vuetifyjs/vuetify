@@ -2,6 +2,10 @@ export default {
   badge: 'Značka',
   open: 'Open',
   close: 'Zatvori',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Nijedan zapis nije pronađen',
     loadingText: 'Učitavanje stavke...',
@@ -31,8 +35,7 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Select dates',
       header: 'Enter dates',

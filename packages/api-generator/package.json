@@ -1,12 +1,10 @@
 {
   "name": "@vuetify/api-generator",
-  "version": "3.3.21",
+  "version": "3.4.2",
   "private": true,
   "description": "",
   "scripts": {
-    "build": "yarn pre-build && yarn start",
-    "pre-build": "babel src --out-dir lib --source-maps --extensions \".ts\" --out-file-extension .mjs",
-    "start": "node --no-warnings lib/index.mjs",
+    "build": "node --loader tsx --no-warnings src/index.ts",
     "lint": "eslint --ext .ts src -f codeframe --max-warnings 0",
     "lint:fix": "yarn lint --fix"
   },
@@ -14,14 +12,15 @@
   "license": "ISC",
   "dependencies": {
     "deepmerge": "^4.3.1",
-    "piscina": "^3.2.0",
-    "prettier": "^2.8.7",
+    "piscina": "^4.1.0",
+    "prettier": "^3.0.3",
     "rimraf": "^3.0.2",
     "ts-morph": "^18.0.0",
+    "tsx": "^3.14.0",
     "vue": "^3.3.4",
-    "vuetify": "^3.3.21"
+    "vuetify": "^3.4.2"
   },
   "devDependencies": {
-    "@babel/node": "^7.20.7"
+    "@types/stringify-object": "^4.0.5"
   }
 }

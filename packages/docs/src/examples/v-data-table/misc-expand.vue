@@ -5,7 +5,6 @@
     :items="desserts"
     item-value="name"
     show-expand
-    class="elevation-1"
   >
     <template v-slot:top>
       <v-toolbar flat>

@@ -1,6 +1,6 @@
 // Composables
 import { useCosmic } from '@/composables/cosmic'
-import { useDate } from 'vuetify/labs/date'
+import { useDate } from 'vuetify'
 
 // Utilities
 import { defineStore } from 'pinia'
@@ -12,6 +12,7 @@ interface Banner {
   slug: string
   title: string
   metadata: {
+    active: boolean
     closable: boolean
     color: string
     label: string
@@ -21,6 +22,8 @@ interface Banner {
     link_text: string
     link_color: string
     attributes: Record<string, any>
+    start_date: string
+    end_date: string
     theme: {
       key: 'light' | 'dark'
       value: 'Light' | 'Dark'
@@ -86,10 +89,22 @@ export const useBannersStore = defineStore('banners', {
       if (this.server) return this.server
 
       return state.banners.find(({
-        metadata: { visible },
-        modified_at: modifiedAt,
+        metadata: {
+          visible,
+          start_date: startDate,
+          end_date: endDate,
+          active,
+        },
       }) => {
-        if (!date.isBefore(date.date(modifiedAt), date.endOfDay(new Date()))) return false
+        const start = date.startOfDay(date.date(startDate))
+        const end = date.endOfDay(date.date(endDate))
+        const today = date.endOfDay(date.date())
+
+        if (
+          !active ||
+          date.isBefore(today, start) ||
+          date.isAfter(today, end)
+        ) return false
 
         if (visible.key === 'both') return true
         // '' is home
@@ -102,10 +117,22 @@ export const useBannersStore = defineStore('banners', {
       const date = useDate()
 
       return state.banners.find(({
-        metadata: { visible },
-        modified_at: modifiedAt,
+        metadata: {
+          visible,
+          start_date: startDate,
+          end_date: endDate,
+          active,
+        },
       }) => {
-        if (!date.isBefore(date.date(modifiedAt), date.endOfDay(new Date()))) return false
+        const start = date.startOfDay(date.date(startDate))
+        const end = date.endOfDay(date.date(endDate))
+        const today = date.endOfDay(date.date())
+
+        if (
+          !active ||
+          date.isBefore(today, start) ||
+          date.isAfter(today, end)
+        ) return false
 
         return visible.key === 'server'
       })

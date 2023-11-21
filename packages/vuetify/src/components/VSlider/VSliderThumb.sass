@@ -93,13 +93,7 @@
   .v-slider-thumb
     top: 50%
     transform: translateY(-50%)
-
-    +tools.ltr()
-      left: calc(var(--v-slider-thumb-position) - var(--v-slider-thumb-size) / 2)
-      right: unset
-    +tools.rtl()
-      left: unset
-      right: calc(var(--v-slider-thumb-position) - var(--v-slider-thumb-size) / 2)
+    inset-inline-start: calc(var(--v-slider-thumb-position) - var(--v-slider-thumb-size) / 2)
 
   .v-slider-thumb__label-container
     left: calc(var(--v-slider-thumb-size) / 2)

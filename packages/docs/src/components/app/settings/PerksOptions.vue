@@ -1,8 +1,16 @@
 <template>
-  <promoted
-    permanent
-    slug="vuetify-github-sponsors"
-  />
+  <template v-if="!auth.isSubscriber">
+    <alert type="info">
+      {{ t('dashboard.perks.alert') }}
+
+      <app-link href="https://github.com/sponsors/johnleider">$1 per month</app-link>
+    </alert>
+
+    <promoted
+      permanent
+      slug="vuetify-github-sponsors"
+    />
+  </template>
 
   <settings-header
     title="dashboard.perks.experience"
@@ -32,11 +40,20 @@
   <rail-drawer-option />
 </template>
 
-<script setup>
+<script setup lang="ts">
   // Components
   import AdOption from '@/components/app/settings/options/AdOption.vue'
   import AvatarOption from '@/components/app/settings/options/AvatarOption.vue'
   import QuickbarOption from '@/components/app/settings/options/QuickbarOption.vue'
   import RailDrawerOption from '@/components/app/settings/options/RailDrawerOption.vue'
   import SettingsHeader from '@/components/app/settings/SettingsHeader.vue'
+
+  // Composables
+  import { useI18n } from 'vue-i18n'
+
+  // Stores
+  import { useAuthStore } from '@/store/auth'
+
+  const auth = useAuthStore()
+  const { t } = useI18n()
 </script>

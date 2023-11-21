@@ -4,25 +4,26 @@
     :headers="headers"
     :items="desserts"
     :items-per-page="itemsPerPage"
-    hide-default-footer
-    class="elevation-1"
   >
+    <template v-slot:top>
+      <v-text-field
+        :model-value="itemsPerPage"
+        class="pa-2"
+        hide-details
+        label="Items per page"
+        min="-1"
+        max="15"
+        type="number"
+        @update:model-value="itemsPerPage = parseInt($event, 10)"
+      ></v-text-field>
+    </template>
+
     <template v-slot:bottom>
       <div class="text-center pt-2">
         <v-pagination
           v-model="page"
           :length="pageCount"
         ></v-pagination>
-        <v-text-field
-          :model-value="itemsPerPage"
-          class="pa-2"
-          label="Items per page"
-          type="number"
-          min="-1"
-          max="15"
-          hide-details
-          @update:model-value="itemsPerPage = parseInt($event, 10)"
-        ></v-text-field>
       </div>
     </template>
   </v-data-table>

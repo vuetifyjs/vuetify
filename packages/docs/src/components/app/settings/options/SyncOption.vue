@@ -1,6 +1,6 @@
 <template>
   <v-defaults-provider
-    v-if="isAuthenticated"
+    v-if="auth.user"
     :defaults="{
       VIcon: {
         color: user.syncSettings ? 'primary' : 'disabled'
@@ -17,13 +17,13 @@
 
 <script setup>
   // Composables
-  import { useAuth0 } from '@/plugins/auth'
   import { useI18n } from 'vue-i18n'
 
   // Stores
   import { useUserStore } from '@/store/user'
+  import { useAuthStore } from '@/store/auth'
 
   const { t } = useI18n()
   const user = useUserStore()
-  const { isAuthenticated } = useAuth0()
+  const auth = useAuthStore()
 </script>

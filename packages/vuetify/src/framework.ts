@@ -1,11 +1,11 @@
 // Composables
+import { createDate, DateAdapterSymbol, DateOptionsSymbol } from '@/composables/date/date'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createIcons, IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
-import { createDate, DateAdapterSymbol } from '@/labs/date/date'
-import { createRules, RulesSymbol } from '@/labs/rules/rules'
+import { createRules, RulesSymbol } from '@/labs/rules/rules
 
 // Utilities
 import { nextTick, reactive } from 'vue'
@@ -13,16 +13,15 @@ import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
+import type { DateOptions } from '@/composables/date'
 import type { DefaultsOptions } from '@/composables/defaults'
 import type { DisplayOptions, SSROptions } from '@/composables/display'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
-import type { DateOptions } from '@/labs/date'
 import type { RulesOptions } from '@/labs/rules/rules'
-
 export * from './composables'
-export type { DateOptions, DateInstance } from '@/labs/date'
+export type { DateOptions, DateInstance } from '@/composables/date'
 
 export interface VuetifyOptions {
   aliases?: Record<string, any>
@@ -55,8 +54,8 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
   const theme = createTheme(options.theme)
   const icons = createIcons(options.icons)
   const locale = createLocale(options.locale)
-  const date = createDate(options.date)
   const rules = createRules(options.rules, locale)
+  const date = createDate(options.date, locale)
 
   const install = (app: App) => {
     for (const key in directives) {
@@ -82,8 +81,9 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     app.provide(ThemeSymbol, theme)
     app.provide(IconSymbol, icons)
     app.provide(LocaleSymbol, locale)
-    app.provide(DateAdapterSymbol, date)
     app.provide(RulesSymbol, rules)
+    app.provide(DateOptionsSymbol, date.options)
+    app.provide(DateAdapterSymbol, date.instance)
 
     if (IN_BROWSER && options.ssr) {
       if (app.$nuxt) {

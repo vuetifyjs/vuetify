@@ -27,32 +27,35 @@
 
         <app-bar-team-link v-if="lgAndUp" />
 
-        <app-bar-playground-link />
+        <app-bar-playground-link v-if="lgAndUp" />
 
         <app-bar-enterprise-link />
       </template>
 
       <template v-if="!user.quickbar">
-        <app-vertical-divider v-if="mdAndUp" />
+        <app-vertical-divider v-if="smAndUp" class="ms-3 me-2" />
 
-        <app-bar-theme-toggle />
+        <app-bar-store-link v-if="smAndUp" />
 
-        <app-bar-store-link v-if="lgAndUp" />
-
-        <app-bar-jobs-link v-if="lgAndUp" />
+        <app-bar-jobs-link v-if="smAndUp" />
 
         <app-bar-notifications-menu />
 
-        <app-bar-settings-toggle />
-
         <app-bar-language-menu v-if="smAndUp" />
+
+        <app-bar-settings-toggle />
       </template>
+
+      <app-vertical-divider v-if="lgAndUp" class="ms-2 me-3" />
+
+      <app-bar-auth-dialog />
     </template>
   </v-app-bar>
 </template>
 
 <script setup>
   // Components
+  import AppBarAuthDialog from './AuthDialog.vue'
   import AppBarEcosystemMenu from './EcosystemMenu.vue'
   import AppBarEnterpriseLink from './EnterpriseLink.vue'
   import AppBarJobsLink from './JobsLink.vue'
@@ -65,7 +68,6 @@
   import AppBarStoreLink from './StoreLink.vue'
   import AppBarSupportMenu from './SupportMenu.vue'
   import AppBarTeamLink from './TeamLink.vue'
-  import AppBarThemeToggle from './ThemeToggle.vue'
   import AppSearch from '@/components/app/search/Search.vue'
   import AppVerticalDivider from '@/components/app/VerticalDivider.vue'
 

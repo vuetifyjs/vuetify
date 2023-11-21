@@ -6,8 +6,8 @@ const project = new Project({
   tsConfigFilePath: './tsconfig.json',
 })
 
-function inspect (project: Project, node?: Node<ts.Node>) {
-  if (!node) return null
+async function inspect (project: Project, node?: Node<ts.Node>) {
+  if (!node) throw new Error('No node provided')
 
   const kind = node.getKind()
 
@@ -15,77 +15,85 @@ function inspect (project: Project, node?: Node<ts.Node>) {
     const definition = generateDefinition(node, [], project) as ObjectDefinition
     if (definition.properties) {
       definition.properties = Object.fromEntries(
-        Object.entries(definition.properties)
-          // Exclude private properties
-          .filter(([name]) => !name.startsWith('$') && !name.startsWith('_') && !name.startsWith('Ψ'))
-          .map(([name, prop]) => [name, prettifyType(name, prop)])
+        await Promise.all(
+          Object.entries(definition.properties)
+            // Exclude private properties
+            .filter(([name]) => !name.startsWith('$') && !name.startsWith('_') && !name.startsWith('Ψ'))
+            .map(async ([name, prop]) => [name, await prettifyType(name, prop)])
+        )
       )
     }
     return definition
   }
 
-  return null
+  throw new Error(`Unsupported node kind: ${kind}`)
 }
 
-export function generateComposableDataFromTypes () {
+export async function generateComposableDataFromTypes () {
   const sourceFile = project.addSourceFileAtPath('./templates/composables.d.ts')
 
-  const composables = inspect(project, sourceFile.getTypeAlias('Composables'))
+  const composables = await inspect(project, sourceFile.getTypeAlias('Composables'))
 
-  return Object.entries(composables.properties).map(([name, data]) => {
-    const returnType = (data as FunctionDefinition).returnType
-    let exposed: Record<string, Definition>
-    if (returnType.type === 'allOf') {
-      exposed = returnType.items.reduce((acc, item) => {
-        const props = (item as ObjectDefinition).properties
-        Object.assign(acc, props)
-        return acc
-      }, {})
-    } else if (returnType.type === 'object') {
-      exposed = returnType.properties
-    }
-    if (exposed) {
-      exposed = Object.fromEntries(
-        Object.entries(exposed)
-          .map(([name, prop]) => [name, prettifyType(name, prop)])
-      )
-    }
+  return await Promise.all(
+    Object.entries(composables.properties).map(async ([name, data]) => {
+      const returnType = (data as FunctionDefinition).returnType
+      let exposed: Record<string, Definition> | undefined
+      if (returnType.type === 'allOf') {
+        exposed = returnType.items.reduce((acc, item) => {
+          const props = (item as ObjectDefinition).properties
+          Object.assign(acc, props)
+          return acc
+        }, {})
+      } else if (returnType.type === 'object') {
+        exposed = returnType.properties
+      }
+      if (exposed) {
+        exposed = Object.fromEntries(
+          await Promise.all(
+            Object.entries(exposed)
+              .map(async ([name, prop]) => [name, await prettifyType(name, prop)])
+          )
+        )
+      }
 
-    return {
-      name,
-      data: {
-        exposed,
-      },
-    }
-  }) as { name: string, data: { exposed: Record<string, Definition> } }[]
+      return {
+        name,
+        data: {
+          exposed,
+        },
+      }
+    })
+  ) as { name: string, data: { exposed: Record<string, Definition> } }[]
 }
 
-export function generateDirectiveDataFromTypes () {
+export async function generateDirectiveDataFromTypes () {
   const sourceFile = project.addSourceFileAtPath('./templates/directives.d.ts')
 
-  const directives = inspect(project, sourceFile.getTypeAlias('Directives'))
+  const directives = await inspect(project, sourceFile.getTypeAlias('Directives'))
 
-  return Object.entries(directives.properties).map(([name, data]) => {
-    return {
-      name,
-      argument: { value: prettifyType(name, (data as ObjectDefinition).properties.value) },
-      modifiers: ((data as ObjectDefinition).properties.modifiers as ObjectDefinition).properties,
-    }
-  }) as { name: string, argument: { value: Definition }, modifiers: Record<string, Definition> }[]
+  return await Promise.all(
+    Object.entries(directives.properties).map(async ([name, data]) => {
+      return {
+        name,
+        argument: { value: await prettifyType(name, (data as ObjectDefinition).properties.value) },
+        modifiers: ((data as ObjectDefinition).properties.modifiers as ObjectDefinition).properties,
+      }
+    })
+  ) as { name: string, argument: { value: Definition }, modifiers: Record<string, Definition> }[]
 }
 
 export async function generateComponentDataFromTypes (component: string) {
   const sourceFile = project.addSourceFileAtPath(`./templates/tmp/${component}.d.ts`)
 
-  const props = inspect(project, sourceFile.getTypeAlias('ComponentProps'))
-  const events = inspect(project, sourceFile.getTypeAlias('ComponentEvents'))
-  const slots = inspect(project, sourceFile.getTypeAlias('ComponentSlots'))
-  const exposed = inspect(project, sourceFile.getTypeAlias('ComponentExposed'))
+  const props = await inspect(project, sourceFile.getTypeAlias('ComponentProps'))
+  const events = await inspect(project, sourceFile.getTypeAlias('ComponentEvents'))
+  const slots = await inspect(project, sourceFile.getTypeAlias('ComponentSlots'))
+  const exposed = await inspect(project, sourceFile.getTypeAlias('ComponentExposed'))
 
   const sections = [props, events, slots, exposed]
 
   sections.forEach(item => {
-    item.text = undefined
+    item.text = undefined!
     item.source = undefined
   })
 
@@ -201,7 +209,7 @@ function isExternalDeclaration (declaration?: Node<ts.Node>, definitionText?: st
     /(Record|Map|Set|NonNullable)<.*?>/.test(definitionText ?? '')
   )) return false
 
-  if (filePath?.includes('/@vue/') && /^ToRefs<.*?>/.test(definitionText)) {
+  if (filePath?.includes('/@vue/') && /^ToRefs<.*?>/.test(definitionText!)) {
     return false
   }
 
@@ -246,23 +254,24 @@ function count (arr: string[], needle: string) {
 // Types that are displayed as links
 const allowedRefs = [
   'Anchor',
+  'DataIteratorItem',
+  'DataTableHeader',
+  'DataTableItem',
+  'FilterFunction',
+  'FormValidationResult',
+  'Group',
+  'InternalDataTableHeader',
+  'ListItem',
   'LocationStrategyFn',
   'OpenSelectStrategyFn',
   'OpenStrategyFn',
   'ScrollStrategyFn',
   'SelectItemKey',
   'SelectStrategyFn',
-  'SubmitEventPromise',
-  'ValidationRule',
-  'FormValidationResult',
   'SortItem',
-  'ListItem',
-  'Group',
-  'DataTableItem',
-  'DataTableHeader',
-  'InternalDataTableHeader',
-  'FilterFunction',
-  'DataIteratorItem',
+  'SubmitEventPromise',
+  'TouchHandlers',
+  'ValidationRule',
 ]
 
 // Types that displayed without their generic arguments
@@ -285,12 +294,16 @@ function formatDefinition (definition: Definition) {
       formatted = `${definition.items.map(item => item.formatted).join(' & ')}`
       break
     case 'anyOf': {
-      const formattedItems = definition.items.map(item => ['function', 'constructor'].includes(item.type) ? `(${item.formatted})` : item.formatted)
+      const formattedItems = definition.items.map(item => (
+        ['function', 'constructor'].includes(item.type) ? `(${item.formatted})` : item.formatted
+      )).filter(item => item !== 'null' && item !== 'undefined')
       formatted = `${formattedItems.join(' | ')}`
       break
     }
     case 'array': {
-      const formattedItems = definition.items.map(item => ['function', 'constructor', 'allOf', 'anyOf'].includes(item.type) ? `(${item.formatted})` : item.formatted)
+      const formattedItems = definition.items.map(item => (
+        ['function', 'constructor', 'allOf', 'anyOf'].includes(item.type) ? `(${item.formatted})` : item.formatted)
+      ).filter(item => item !== 'null' && item !== 'undefined')
       if (definition.length) {
         formatted = `[${formattedItems.join(', ')}]`
       } else {
@@ -359,7 +372,7 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
 
   if (
     count(recursed, type.getText()) > 1 ||
-    allowedRefs.includes(symbol?.getName()) ||
+    allowedRefs.includes(symbol?.getName() as string) ||
     isExternalDeclaration(declaration, definition.text)
   ) {
     definition = definition as RefDefinition
@@ -503,7 +516,7 @@ function getUnionTypes (type: Type<ts.Type>): Type<ts.Type>[] {
 
   if (compilerType.origin) {
     return compilerType.origin.types
-      .map(unionType => (type as any)._context.compilerFactory.getType(unionType))
+      .map((unionType: any) => (type as any)._context.compilerFactory.getType(unionType))
   } else {
     return type.getUnionTypes()
   }
@@ -551,7 +564,7 @@ function getRecursiveTypes (recursiveTypes: string[], type: Type<ts.Type>) {
   return recursiveTypes.slice().concat(findPotentialRecursiveTypes(type))
 }
 
-function findPotentialRecursiveTypes (type: Type<ts.Type>) {
+function findPotentialRecursiveTypes (type?: Type<ts.Type>): string[] {
   if (type == null) return []
 
   const recursiveTypes = []

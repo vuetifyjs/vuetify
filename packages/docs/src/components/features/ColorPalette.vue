@@ -66,7 +66,7 @@
 <script>
   // Utilities
   import kebabCase from 'lodash/kebabCase'
-  import colors from 'vuetify/lib/util/colors'
+  import colors from 'vuetify/util/colors'
 
   export default {
     name: 'ColorPalette',

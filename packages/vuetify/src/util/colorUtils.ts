@@ -20,6 +20,10 @@ export function isCssColor (color?: string | null | false): boolean {
   return !!color && /^(#|var\(--|(rgb|hsl)a?\()/.test(color)
 }
 
+export function isParsableColor (color: string): boolean {
+  return isCssColor(color) && !/^((rgb|hsl)a?\()?var\(--/.test(color)
+}
+
 const cssColorRe = /^(?<fn>(?:rgb|hsl)a?)\((?<values>.+)\)/
 const mappers = {
   rgb: (r: number, g: number, b: number, a?: number) => ({ r, g, b, a }),
