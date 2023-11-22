@@ -126,6 +126,8 @@ const defaultThemeOptions: Exclude<ThemeOptions, false> = {
         warning: '#FB8C00',
       },
       variables: {
+        anchor: '#6200EE',
+        'anchor-hover': '#3700B3',
         'border-color': '#000000',
         'border-opacity': 0.12,
         'high-emphasis-opacity': 0.87,
@@ -162,6 +164,8 @@ const defaultThemeOptions: Exclude<ThemeOptions, false> = {
         warning: '#FB8C00',
       },
       variables: {
+        anchor: '#BB86FC',
+        'anchor-hover': '#B39DDB',
         'border-color': '#FFFFFF',
         'border-opacity': 0.12,
         'high-emphasis-opacity': 1,

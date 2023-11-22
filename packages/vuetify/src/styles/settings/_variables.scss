@@ -13,6 +13,9 @@ $border-color-root: rgba(var(--v-border-color), var(--v-border-opacity)) !defaul
 $border-radius-root: 4px !default;
 $border-style-root: solid !default;
 
+$anchor-color: rgb(var(--v-anchor)) !default;
+$anchor-hover-color: rgb(var(--v-anchor-hover)) !default;
+
 $borders: () !default;
 $borders: map-deep-merge(
   (
