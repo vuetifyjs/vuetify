@@ -48,7 +48,7 @@ This makes it possible for Vuetify to implement Material Design concepts such as
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createApp } from 'vue'
-import { createVuetify, ThemeDefinition } from 'vuetify'
+import { createVuetify } from 'vuetify'
 
 const myCustomLightTheme = {
   dark: false,
