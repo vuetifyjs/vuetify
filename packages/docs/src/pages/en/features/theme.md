@@ -95,7 +95,7 @@ When using Typescript you may use the `ThemeDefinition` type to get type hints f
 
 ```ts { resource="src/plugins/vuetify.ts" }
 import { createApp } from 'vue'
-import { createVuetify, ThemeDefinition } from 'vuetify'
+import { createVuetify, type ThemeDefinition } from 'vuetify'
 
 const myCustomLightTheme: ThemeDefinition = {
   dark: false,
