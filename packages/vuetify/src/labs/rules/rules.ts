@@ -35,7 +35,7 @@ const parseRulesOptions = (options?: RulesOptions) => {
   }, options)
 }
 
-export function createRules (options?: RulesOptions, locale: LocaleInstance) {
+export function createRules (options: RulesOptions | undefined, locale: LocaleInstance) {
   // @ts-expect-error
   const _options = parseRulesOptions(options)
   const { t } = locale
