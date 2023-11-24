@@ -44,7 +44,6 @@ export const makeVDataTableRowsProps = propsFactory({
     type: String,
     default: '$vuetify.noDataText',
   },
-  rowHeight: Number,
   rowProps: [Object, Function] as PropType<RowProps<any>>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
 }, 'VDataTableRows')
