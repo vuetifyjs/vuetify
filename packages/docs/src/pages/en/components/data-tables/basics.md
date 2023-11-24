@@ -130,7 +130,7 @@ There are no shortable of properties available for customizing various aspects o
 
 #### Density
 
-Using the **dense** prop you are able to give your data tables an alternate style.
+Using the **density** prop you are able to give your data tables an alternate style.
 
 <example file="v-data-table/prop-dense" />
 
