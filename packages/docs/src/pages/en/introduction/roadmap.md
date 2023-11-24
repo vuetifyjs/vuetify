@@ -53,7 +53,7 @@ The following are the already released **minor** and **major** version updates. 
 ### v3.4 (Blackguard)
 
 - **Released:** November 2023
-- **Hero:** [Banner](https://vuetifyjs.b-cdn.net/docs/images/release-banners/blackguard-34.png)
+- **Hero:** [Banner](https://cdn.vuetifyjs.com/docs/images/release-banners/blackguard-34.png)
 - **Target Release:** Q3 2023
 - **Notes:** [v3.4 Release](/getting-started/release-notes/?version=v3.4.0)
 - **Overview:** Introduced 8 updated components to the main framework from Labs: VBottomSheet, VDataIterator, VDataTable, VDatePicker, VInfiniteScroll, VOtpInput, VSkeletonLoader, and VStepper.

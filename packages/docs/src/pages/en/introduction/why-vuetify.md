@@ -91,6 +91,7 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 | [Accessibility (a11y)](/features/accessibility) | Intermediate | 10 min |
 | [Aliasing](/features/aliasing/) | Intermediate | 5 min |
 | [Application layout](/features/application-layout/) | Intermediate | 15 min |
+| [Dates](/features/dates/) | Intermediate | 10 min |
 | [Display & Platform](/features/display-and-platform/) | Intermediate | 15 min |
 | [Internationalization (i18n)](/features/internationalization/) | Intermediate | 5 min |
 | [SASS variables](/features/sass-variables/) | Intermediate | 10 min |
