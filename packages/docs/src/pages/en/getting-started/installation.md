@@ -89,7 +89,7 @@ Start off creating a nuxt app by executing the following commands:
 ::: tabs
 
 ```bash [yarn]
-yarn create nuxt-app <project-name>
+npx nuxi@latest init <project-name>
 cd <project-name>
 yarn
 ```
@@ -174,7 +174,9 @@ Nuxt allows you to change its Vite config by using its built-in hook `vite:exten
 In the next step, initialize Vuetify and add it to the main Vue app instance. This can be done in the `plugins` folder as any plugin that is placed in this folder will be automatically loaded by Nuxt at startup.
 
 ```ts { data-resource="~/plugins/vuetify.ts" }
+// import this after install `@mdi/font` package
 import '@mdi/font/css/materialdesignicons.css'
+
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 
