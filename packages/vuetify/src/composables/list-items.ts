@@ -110,7 +110,7 @@ export function useItems (props: ItemProps) {
         // Don't look up existing items if the model value is a string
         return transformItem(props, v)
       }
-      return items.value.find(item => props.valueComparator(v, item.value))
+      return items.value.find(item => props.valueComparator(v, props.returnObject ? item.raw : item.value))
     }).filter(v => !!v) as ListItem[]
   }
 
