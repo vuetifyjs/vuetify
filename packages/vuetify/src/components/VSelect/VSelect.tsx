@@ -177,6 +177,11 @@ export const VSelect = genericComponent<new <
       props.readonly || form?.isReadonly.value
     ))
 
+    const validationValue = computed(() => {
+      if (!props.modelValue) return null
+      return model.value.length ? model.value : null
+    })
+
     const listRef = ref<VList>()
     const { onListScroll, onListKeydown } = useScrolling(listRef, vTextFieldRef)
     function onClear (e: MouseEvent) {
@@ -309,7 +314,7 @@ export const VSelect = genericComponent<new <
           modelValue={ model.value.map(v => v.props.value).join(', ') }
           onUpdate:modelValue={ onModelUpdate }
           v-model:focused={ isFocused.value }
-          validationValue={ model.externalValue }
+          validationValue={ validationValue.value }
           counterValue={ model.value.length }
           dirty={ isDirty }
           class={[

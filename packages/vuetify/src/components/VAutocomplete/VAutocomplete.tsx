@@ -161,6 +161,11 @@ export const VAutocomplete = genericComponent<new <
     const form = useForm()
     const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
 
+    const validationValue = computed(() => {
+      if (!props.modelValue) return null
+      return model.value.length ? model.value : null
+    })
+
     const displayItems = computed(() => {
       if (props.hideSelected) {
         return filteredItems.value.filter(filteredItem => !model.value.some(s => s.value === filteredItem.value))
@@ -405,7 +410,7 @@ export const VAutocomplete = genericComponent<new <
           modelValue={ search.value }
           onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
-          validationValue={ model.externalValue }
+          validationValue={ validationValue.value }
           counterValue={ model.value.length }
           dirty={ isDirty }
           onInput={ onInput }
