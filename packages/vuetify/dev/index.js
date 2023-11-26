@@ -1,5 +1,5 @@
-import App from './App.vue'
 import vuetify from './vuetify'
+import App from './App.vue'
 
 import { createHead } from '@vueuse/head'
 import { routes } from './router'

@@ -5,6 +5,7 @@ import './VDataTable.sass'
 import { makeVDataTableFooterProps, VDataTableFooter } from './VDataTableFooter'
 import { makeVDataTableHeadersProps, VDataTableHeaders } from './VDataTableHeaders'
 import { makeVDataTableRowsProps, VDataTableRows } from './VDataTableRows'
+import { VDivider } from '@/components/VDivider'
 import { makeVTableProps, VTable } from '@/components/VTable/VTable'
 
 // Composables
@@ -252,6 +253,8 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
             ),
             bottom: () => slots.bottom ? slots.bottom(slotProps.value) : (
               <>
+                <VDivider />
+
                 <VDataTableFooter
                   { ...dataTableFooterProps }
                   v-slots={{
