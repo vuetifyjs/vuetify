@@ -392,8 +392,9 @@ describe('VAutocomplete', () => {
   })
 
   it('should conditionally show placeholder', () => {
+    const items = ['Foobar']
     cy.mount(props => (
-      <VAutocomplete placeholder="Placeholder" { ...props } />
+      <VAutocomplete items={ items } placeholder="Placeholder" { ...props } />
     ))
       .get('.v-autocomplete input')
       .should('have.attr', 'placeholder', 'Placeholder')
