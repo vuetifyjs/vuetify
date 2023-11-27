@@ -279,28 +279,28 @@ export const VPagination = genericComponent<VPaginationSlots>()({
 
       return {
         first: props.showFirstLastPage ? {
-          icon: isRtl.value ? props.lastIcon : props.firstIcon,
+          icon: isRtl ? props.lastIcon : props.firstIcon,
           onClick: (e: Event) => setValue(e, start.value, 'first'),
           disabled: prevDisabled,
           ariaLabel: t(props.firstAriaLabel),
           ariaDisabled: prevDisabled,
         } : undefined,
         prev: {
-          icon: isRtl.value ? props.nextIcon : props.prevIcon,
+          icon: isRtl ? props.nextIcon : props.prevIcon,
           onClick: (e: Event) => setValue(e, page.value - 1, 'prev'),
           disabled: prevDisabled,
           ariaLabel: t(props.previousAriaLabel),
           ariaDisabled: prevDisabled,
         },
         next: {
-          icon: isRtl.value ? props.prevIcon : props.nextIcon,
+          icon: isRtl ? props.prevIcon : props.nextIcon,
           onClick: (e: Event) => setValue(e, page.value + 1, 'next'),
           disabled: nextDisabled,
           ariaLabel: t(props.nextAriaLabel),
           ariaDisabled: nextDisabled,
         },
         last: props.showFirstLastPage ? {
-          icon: isRtl.value ? props.firstIcon : props.lastIcon,
+          icon: isRtl ? props.firstIcon : props.lastIcon,
           onClick: (e: Event) => setValue(e, start.value + length.value - 1, 'last'),
           disabled: nextDisabled,
           ariaLabel: t(props.lastAriaLabel),

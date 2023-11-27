@@ -156,7 +156,7 @@ export const VInput = genericComponent<new <T>(
               'v-input--hide-spin-buttons': props.hideSpinButtons,
             },
             densityClasses.value,
-            rtlClasses.value,
+            rtlClasses,
             validationClasses.value,
             props.class,
           ]}

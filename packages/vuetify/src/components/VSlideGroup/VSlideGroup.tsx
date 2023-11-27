@@ -141,7 +141,7 @@ export const VSlideGroup = genericComponent<new <T>(
                 selectedElement,
                 containerSize: containerSize.value,
                 contentSize: contentSize.value,
-                isRtl: isRtl.value,
+                isRtl: isRtl,
                 isHorizontal: isHorizontal.value,
               })
             } else if (isOverflowing.value) {
@@ -149,7 +149,7 @@ export const VSlideGroup = genericComponent<new <T>(
                 selectedElement,
                 containerSize: containerSize.value,
                 contentSize: contentSize.value,
-                isRtl: isRtl.value,
+                isRtl: isRtl,
                 currentScrollOffset: scrollOffset.value,
                 isHorizontal: isHorizontal.value,
               })
@@ -166,7 +166,7 @@ export const VSlideGroup = genericComponent<new <T>(
 
     function onTouchstart (e: TouchEvent) {
       const sizeProperty = isHorizontal.value ? 'clientX' : 'clientY'
-      const sign = isRtl.value && isHorizontal.value ? -1 : 1
+      const sign = isRtl && isHorizontal.value ? -1 : 1
       startOffset = sign * scrollOffset.value
       startTouch = e.touches[0][sizeProperty]
       disableTransition.value = true
@@ -176,7 +176,7 @@ export const VSlideGroup = genericComponent<new <T>(
       if (!isOverflowing.value) return
 
       const sizeProperty = isHorizontal.value ? 'clientX' : 'clientY'
-      const sign = isRtl.value && isHorizontal.value ? -1 : 1
+      const sign = isRtl && isHorizontal.value ? -1 : 1
       scrollOffset.value = sign * (startOffset + startTouch - e.touches[0][sizeProperty])
     }
 
@@ -213,7 +213,7 @@ export const VSlideGroup = genericComponent<new <T>(
               selectedElement: item as HTMLElement,
               containerSize: containerSize.value,
               contentSize: contentSize.value,
-              isRtl: isRtl.value,
+              isRtl: isRtl,
               currentScrollOffset: scrollOffset.value,
               isHorizontal: isHorizontal.value,
             })
@@ -239,9 +239,9 @@ export const VSlideGroup = genericComponent<new <T>(
 
       if (isHorizontal.value) {
         if (e.key === 'ArrowRight') {
-          focus(isRtl.value ? 'prev' : 'next')
+          focus(isRtl ? 'prev' : 'next')
         } else if (e.key === 'ArrowLeft') {
-          focus(isRtl.value ? 'next' : 'prev')
+          focus(isRtl ? 'next' : 'prev')
         }
       } else {
         if (e.key === 'ArrowDown') {
@@ -296,7 +296,7 @@ export const VSlideGroup = genericComponent<new <T>(
         scrollAmount = bias(-scrollOffset.value)
       }
 
-      const sign = isRtl.value && isHorizontal.value ? -1 : 1
+      const sign = isRtl && isHorizontal.value ? -1 : 1
       return {
         transform: `translate${isHorizontal.value ? 'X' : 'Y'}(${sign * scrollAmount}px)`,
         transition: disableTransition.value ? 'none' : '',
@@ -375,7 +375,7 @@ export const VSlideGroup = genericComponent<new <T>(
           >
             { slots.prev?.(slotProps.value) ?? (
               <VFadeTransition>
-                <VIcon icon={ isRtl.value ? props.nextIcon : props.prevIcon }></VIcon>
+                <VIcon icon={ isRtl ? props.nextIcon : props.prevIcon }></VIcon>
               </VFadeTransition>
             )}
           </div>
@@ -413,7 +413,7 @@ export const VSlideGroup = genericComponent<new <T>(
           >
             { slots.next?.(slotProps.value) ?? (
               <VFadeTransition>
-                <VIcon icon={ isRtl.value ? props.prevIcon : props.nextIcon }></VIcon>
+                <VIcon icon={ isRtl ? props.prevIcon : props.nextIcon }></VIcon>
               </VFadeTransition>
             )}
           </div>

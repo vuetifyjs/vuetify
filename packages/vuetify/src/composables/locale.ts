@@ -83,6 +83,7 @@ export const RtlSymbol: InjectionKey<RtlInstance> = Symbol.for('vuetify:rtl')
 
 export function createRtl (i18n: LocaleInstance, options?: RtlOptions): RtlInstance {
   const rtl = options?.rtl ?? defaultRtl
+  // @ts-expect-error
   const isRtl = rtl[i18n.current.value] ?? false
   const rtlClasses = isRtl ? 'v-locale--is-rtl' : 'v-locale--is-ltr'
 

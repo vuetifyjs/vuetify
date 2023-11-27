@@ -33,7 +33,7 @@ export const VApp = genericComponent()({
           'v-application',
           theme.themeClasses.value,
           layoutClasses.value,
-          rtlClasses.value,
+          rtlClasses,
           props.class,
         ]}
         style={[

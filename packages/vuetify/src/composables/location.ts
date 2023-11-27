@@ -35,7 +35,7 @@ export function useLocation (props: LocationProps, opposite = false, offset?: (s
       props.location.split(' ').length > 1
         ? props.location
         : `${props.location} center` as Anchor,
-      isRtl.value
+      isRtl
     )
 
     function getOffset (side: string) {
