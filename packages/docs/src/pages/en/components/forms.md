@@ -26,7 +26,7 @@ The `v-form` component makes it easy to add validation to form inputs. All input
 
 ::: tip
 
-If you prefer using a 3rd party validation plugin, we also provide examples for integrating both [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/vuelidate/vuelidate).
+If you prefer using a 3rd party validation plugin, we provide [examples](#vee-validate) further down the page for integrating both [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/vuelidate/vuelidate) validation libraries.
 
 :::
 

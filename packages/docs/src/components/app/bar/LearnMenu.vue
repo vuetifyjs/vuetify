@@ -58,6 +58,11 @@
       appendIcon: 'mdi-beaker-outline',
     },
     {
+      title: t('licensing'),
+      to: rpath('/about/licensing/'),
+      appendIcon: 'mdi-file-document-outline',
+    },
+    {
       title: t('roadmap'),
       to: rpath('/introduction/roadmap/'),
       appendIcon: 'mdi-compass-outline',

@@ -12,7 +12,7 @@ related:
 
 # Sponsor Vuetify development
 
-Vuetify is an [MIT licensed](https://opensource.org/licenses/MIT) open-source project that's completely free to use.
+Vuetify is an [MIT licensed](https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md) open-source project that's completely free to use.
 
 <entry />
 

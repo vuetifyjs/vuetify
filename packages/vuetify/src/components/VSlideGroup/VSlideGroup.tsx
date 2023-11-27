@@ -371,7 +371,7 @@ export const VSlideGroup = genericComponent<new <T>(
               'v-slide-group__prev',
               { 'v-slide-group__prev--disabled': !hasPrev.value },
             ]}
-            onClick={ () => scrollTo('prev') }
+            onClick={ () => hasPrev.value && scrollTo('prev') }
           >
             { slots.prev?.(slotProps.value) ?? (
               <VFadeTransition>
@@ -409,7 +409,7 @@ export const VSlideGroup = genericComponent<new <T>(
               'v-slide-group__next',
               { 'v-slide-group__next--disabled': !hasNext.value },
             ]}
-            onClick={ () => scrollTo('next') }
+            onClick={ () => hasNext.value && scrollTo('next') }
           >
             { slots.next?.(slotProps.value) ?? (
               <VFadeTransition>

@@ -2,8 +2,7 @@
   "props": {
     "loading": "Displays `loading` slot if set to `true`",
     "loadingText": "Text shown when the data is loading.",
-    "multiSort": "Allows sorting by multiple columns.",
-    "rowHeight": "Height of each row in pixels."
+    "multiSort": "Allows sorting by multiple columns."
   },
   "events": {
     "click:row": "Emitted when a row is clicked. Native event is passed as the first argument, row data as the second."
