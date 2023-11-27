@@ -343,21 +343,20 @@ export const VCombobox = genericComponent<new <
       }
     }
     function select (item: ListItem, add = true) {
+      const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
       if (props.multiple) {
-        const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
-
         if (~index) {
           const value = add ? [...model.value, item] : [...model.value]
           value.splice(index, 1)
           model.value = value
-        } else if (add) {
+        } else {
           model.value = [...model.value, item]
         }
 
         search.value = ''
       } else {
-        model.value = add ? [item] : []
-        _search.value = add ? item.title : ''
+        model.value = !~index ? [item] : []
+        _search.value = !~index ? item.title : ''
 
         // watch for search watcher to trigger
         nextTick(() => {
@@ -494,7 +493,7 @@ export const VCombobox = genericComponent<new <
                             ref: itemRef,
                             key: index,
                             active: (highlightFirst.value && index === 0) ? true : undefined,
-                            onClick: () => select(item),
+                            onClick: () => select(item, false),
                           })
 
                           return slots.item?.({
