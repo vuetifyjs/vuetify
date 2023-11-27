@@ -22,6 +22,7 @@ import {
 } from '@/util'
 
 // Types
+import type { VueHeadClient } from '@unhead/vue'
 import type { HeadClient } from '@vueuse/head'
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 
@@ -297,7 +298,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   function install (app: App) {
     if (parsedOptions.isDisabled) return
 
-    const head = app._context.provides.usehead as HeadClient | undefined
+    const head = app._context.provides.usehead as HeadClient & VueHeadClient<any> | undefined
     if (head) {
       if (head.push) {
         const entry = head.push(getHead)
