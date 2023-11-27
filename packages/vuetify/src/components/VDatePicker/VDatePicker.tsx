@@ -25,6 +25,7 @@ import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/
 import type { PropType } from 'vue'
 import type { VPickerSlots } from '@/labs/VPicker/VPicker'
 import type { GenericProps } from '@/util'
+
 // Types
 export type VDatePickerSlots = Omit<VPickerSlots, 'header'> & {
   header: {
