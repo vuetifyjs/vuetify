@@ -616,6 +616,23 @@ describe('VCombobox', () => {
       .should('have.length', 6)
   })
 
+  it(`doesn't add duplicate values`, () => {
+    cy
+      .mount(() => (
+        <VCombobox multiple />
+      ))
+      .get('.v-combobox input')
+      .click()
+      .type('foo{enter}')
+      .type('bar{enter}')
+      .get('.v-combobox__selection')
+      .should('have.length', 2)
+      .get('.v-combobox input')
+      .type('foo{enter}')
+      .get('.v-combobox__selection')
+      .should('have.length', 2)
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })
