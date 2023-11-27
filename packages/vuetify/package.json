@@ -118,10 +118,6 @@
     "cy:open": "cypress open --component -b electron",
     "cy:run": "percy exec -- cypress run --component"
   },
-  "dependencies": {
-    "@date-io/core": "2.14.0",
-    "@date-io/date-fns": "2.14.0"
-  },
   "devDependencies": {
     "@date-io/core": "2.17.0",
     "@date-io/date-fns": "2.17.0",
