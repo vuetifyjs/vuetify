@@ -19,6 +19,7 @@ import { en, sv } from 'vuetify/locale'
 
 // Types
 import type { App } from 'vue'
+import type { IconProps } from 'vuetify'
 
 export function installVuetify (app: App) {
   const vuetify = createVuetify({
@@ -79,7 +80,7 @@ export function installVuetify (app: App) {
         md,
         mdiSvg: mdi,
         mdi: {
-          component: props => {
+          component: (props: IconProps) => {
             const icon = mdiSvg[camelize(props.icon as string) as keyof typeof mdiSvg]
             return h(components.VSvgIcon, { ...props, icon })
           },

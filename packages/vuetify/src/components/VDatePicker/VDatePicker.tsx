@@ -9,7 +9,6 @@ import { makeVDatePickerMonthsProps, VDatePickerMonths } from './VDatePickerMont
 import { makeVDatePickerYearsProps, VDatePickerYears } from './VDatePickerYears'
 import { VFadeTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VTextField } from '@/components/VTextField'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
@@ -22,7 +21,6 @@ import { computed, ref, shallowRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
 import type { VPickerSlots } from '@/labs/VPicker/VPicker'
 import type { GenericProps } from '@/util'
 
@@ -31,31 +29,31 @@ export type VDatePickerSlots = Omit<VPickerSlots, 'header'> & {
   header: {
     header: string
     transition: string
-    'onClick:append': () => void
   }
 }
 
 export const makeVDatePickerProps = propsFactory({
-  calendarIcon: {
-    type: String,
-    default: '$calendar',
-  },
-  keyboardIcon: {
-    type: String,
-    default: '$edit',
-  },
-  inputMode: {
-    type: String as PropType<'calendar' | 'keyboard'>,
-    default: 'calendar',
-  },
-  inputText: {
-    type: String,
-    default: '$vuetify.datePicker.input.placeholder',
-  },
-  inputPlaceholder: {
-    type: String,
-    default: 'dd/mm/yyyy',
-  },
+  // TODO: implement in v3.5
+  // calendarIcon: {
+  //   type: String,
+  //   default: '$calendar',
+  // },
+  // keyboardIcon: {
+  //   type: String,
+  //   default: '$edit',
+  // },
+  // inputMode: {
+  //   type: String as PropType<'calendar' | 'keyboard'>,
+  //   default: 'calendar',
+  // },
+  // inputText: {
+  //   type: String,
+  //   default: '$vuetify.datePicker.input.placeholder',
+  // },
+  // inputPlaceholder: {
+  //   type: String,
+  //   default: 'dd/mm/yyyy',
+  // },
   header: {
     type: String,
     default: '$vuetify.datePicker.header',
@@ -86,7 +84,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
     'update:modelValue': (date: any) => true,
     'update:month': (date: any) => true,
     'update:year': (date: any) => true,
-    'update:inputMode': (date: any) => true,
+    // 'update:inputMode': (date: any) => true,
     'update:viewMode': (date: any) => true,
   },
 
@@ -103,7 +101,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
     )
 
     const viewMode = useProxiedModel(props, 'viewMode')
-    const inputMode = useProxiedModel(props, 'inputMode')
+    // const inputMode = useProxiedModel(props, 'inputMode')
     const internal = computed(() => {
       const value = adapter.date(model.value?.[0])
 
@@ -127,7 +125,6 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
         'monthAndYear',
       )
     })
-    // TODO: implement in v3.5
     // const headerIcon = computed(() => props.inputMode === 'calendar' ? props.keyboardIcon : props.calendarIcon)
     const headerTransition = computed(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
     const minDate = computed(() => {
@@ -169,9 +166,9 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       return targets
     })
 
-    function onClickAppend () {
-      inputMode.value = inputMode.value === 'calendar' ? 'keyboard' : 'calendar'
-    }
+    // function onClickAppend () {
+    //   inputMode.value = inputMode.value === 'calendar' ? 'keyboard' : 'calendar'
+    // }
 
     function onClickNext () {
       if (month.value < 11) {
@@ -233,7 +230,6 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       const headerProps = {
         header: header.value,
         transition: headerTransition.value,
-        'onClick:append': onClickAppend,
       }
 
       return (
@@ -270,7 +266,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                 v-slots={ slots }
               />
             ),
-            default: () => props.inputMode === 'calendar' ? (
+            default: () => (
               <>
                 <VDatePickerControls
                   { ...datePickerControlsProps }
@@ -312,13 +308,6 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                   )}
                 </VFadeTransition>
               </>
-            ) : (
-              <div class="v-date-picker__input">
-                <VTextField
-                  label={ t(props.inputText) }
-                  placeholder={ props.inputPlaceholder }
-                />
-              </div>
             ),
             actions: slots.actions,
           }}

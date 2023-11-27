@@ -342,22 +342,25 @@ export const VCombobox = genericComponent<new <
         vTextFieldRef.value?.focus()
       }
     }
-    function select (item: ListItem) {
+    /** @param set - null means toggle */
+    function select (item: ListItem, set: boolean | null = true) {
       if (props.multiple) {
         const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
+        const add = set == null ? !~index : set
 
-        if (index === -1) {
-          model.value = [...model.value, item]
-        } else {
-          const value = [...model.value]
+        if (~index) {
+          const value = add ? [...model.value, item] : [...model.value]
           value.splice(index, 1)
           model.value = value
+        } else if (add) {
+          model.value = [...model.value, item]
         }
 
         search.value = ''
       } else {
-        model.value = [item]
-        _search.value = item.title
+        const add = set !== false
+        model.value = add ? [item] : []
+        _search.value = add ? item.title : ''
 
         // watch for search watcher to trigger
         nextTick(() => {
@@ -397,8 +400,7 @@ export const VCombobox = genericComponent<new <
       ) {
         select(displayItems.value[0])
       } else if (props.multiple && search.value) {
-        model.value = [...model.value, transformItem(props, search.value)]
-        search.value = ''
+        select(transformItem(props, search.value))
       }
     })
 
@@ -495,7 +497,7 @@ export const VCombobox = genericComponent<new <
                             ref: itemRef,
                             key: index,
                             active: (highlightFirst.value && index === 0) ? true : undefined,
-                            onClick: () => select(item),
+                            onClick: () => select(item, null),
                           })
 
                           return slots.item?.({
@@ -542,7 +544,7 @@ export const VCombobox = genericComponent<new <
                     e.stopPropagation()
                     e.preventDefault()
 
-                    select(item)
+                    select(item, false)
                   }
 
                   const slotProps = {

@@ -30,15 +30,15 @@ Components available through Labs are considered **NOT** production ready and on
 
 ## Usage
 
-Using a Labs component is as simple as importing from `vuetify/labs`. The following example shows how to import and bootstrap `v-data-table` in your component:
+Using a Labs component is as simple as importing from `vuetify/labs`. The following example shows how to import and bootstrap `v-picker` in your component:
 
 ```html
 <template>
-  <v-data-table />
+  <v-picker />
 </template>
 
 <script setup>
-  import { VDataTable } from 'vuetify/labs/VDataTable'
+  import { VPicker } from 'vuetify/labs/VPicker'
 </script>
 ```
 
@@ -46,16 +46,16 @@ Alternatively you can make the component available globally by importing it in y
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
-import { VDataTable } from 'vuetify/labs/VDataTable'
+import { VPicker } from 'vuetify/labs/VPicker'
 
 export default createVuetify({
   components: {
-    VDataTable,
+    VPicker,
   },
 })
 ```
 
-When Vuetify instantiates it will register `VDataTable` as a usable component within templates.
+When Vuetify instantiates it will register `VPicker` as a usable component within templates.
 
 If you wish to install all available Vuetify components use the following code snippet:
 

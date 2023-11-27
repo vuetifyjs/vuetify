@@ -1,6 +1,6 @@
 {
   "name": "@vuetify/api-generator",
-  "version": "3.4.2",
+  "version": "3.4.3",
   "private": true,
   "description": "",
   "scripts": {
@@ -12,13 +12,12 @@
   "license": "ISC",
   "dependencies": {
     "deepmerge": "^4.3.1",
-    "piscina": "^4.1.0",
-    "prettier": "^3.0.3",
-    "rimraf": "^3.0.2",
-    "ts-morph": "^18.0.0",
-    "tsx": "^3.14.0",
-    "vue": "^3.3.4",
-    "vuetify": "^3.4.2"
+    "piscina": "^4.2.0",
+    "prettier": "^3.1.0",
+    "ts-morph": "^20.0.0",
+    "tsx": "^4.5.0",
+    "vue": "^3.3.9",
+    "vuetify": "^3.4.3"
   },
   "devDependencies": {
     "@types/stringify-object": "^4.0.5"
