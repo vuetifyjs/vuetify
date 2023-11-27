@@ -157,6 +157,11 @@ export const VSelect = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
+    const counterValue = computed(() => {
+      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
+        : typeof props.counterValue === 'number' ? props.counterValue
+        : model.value.length
+    })
     const form = useForm()
     const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
@@ -310,7 +315,7 @@ export const VSelect = genericComponent<new <
           onUpdate:modelValue={ onModelUpdate }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
-          counterValue={ model.value.length }
+          counterValue={ counterValue.value }
           dirty={ isDirty }
           class={[
             'v-select',
