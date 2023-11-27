@@ -342,11 +342,11 @@ export const VCombobox = genericComponent<new <
         vTextFieldRef.value?.focus()
       }
     }
-    function select (item: ListItem, add = true) {
+    function select (item: ListItem, possibleCustomInput = true) {
       const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
       if (props.multiple) {
         if (~index) {
-          const value = add ? [...model.value, item] : [...model.value]
+          const value = possibleCustomInput ? [...model.value, item] : [...model.value]
           value.splice(index, 1)
           model.value = value
         } else {
@@ -394,9 +394,9 @@ export const VCombobox = genericComponent<new <
         !listHasFocus.value &&
         !model.value.some(({ value }) => value === displayItems.value[0].value)
       ) {
-        select(displayItems.value[0])
+        select(displayItems.value[0], false)
       } else if (props.multiple && search.value) {
-        select(transformItem(props, search.value))
+        select(transformItem(props, search.value), false)
       }
     })
 
