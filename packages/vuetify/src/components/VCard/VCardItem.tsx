@@ -25,8 +25,8 @@ export const makeCardItemProps = propsFactory({
   appendIcon: IconValue,
   prependAvatar: String,
   prependIcon: IconValue,
-  subtitle: String,
-  title: String,
+  subtitle: [String, Number],
+  title: [String, Number],
 
   ...makeComponentProps(),
   ...makeDensityProps(),
@@ -43,8 +43,8 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
       const hasPrepend = !!(hasPrependMedia || slots.prepend)
       const hasAppendMedia = !!(props.appendAvatar || props.appendIcon)
       const hasAppend = !!(hasAppendMedia || slots.append)
-      const hasTitle = !!(props.title || slots.title)
-      const hasSubtitle = !!(props.subtitle || slots.subtitle)
+      const hasTitle = !!(props.title !== null || slots.title)
+      const hasSubtitle = !!(props.subtitle !== null || slots.subtitle)
 
       return (
         <div
