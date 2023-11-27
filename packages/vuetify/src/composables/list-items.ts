@@ -97,7 +97,7 @@ export function useItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
   const hasNullItem = computed(() => items.value.some(item => item.value === null))
 
-  function transformIn (value: any[], allowTransformString = false): ListItem[] {
+  function transformIn (value: any[], allowTransformStr = false): ListItem[] {
     if (!hasNullItem.value) {
       // When the model value is null, return an InternalItem
       // based on null only if null is one of the items
@@ -105,7 +105,7 @@ export function useItems (props: ItemProps) {
     }
 
     return value.map(v => {
-      if (allowTransformString && typeof v === 'string') {
+      if (allowTransformStr && typeof v === 'string') {
         // String model value means value is a custom input value from combobox
         // Don't look up existing items if the model value is a string
         return transformItem(props, v)
