@@ -1,72 +1,85 @@
+// Styles
+import './VCalendarHeader.sass'
+
+// Components
+import { VBtn } from '@/components/VBtn'
+
 // Composables
-import { useDate } from '@/composables/date'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { ref } from 'vue'
 import { genericComponent, useRender } from '@/util'
-import { VBtn, VSpacer } from '../allComponents'
 
 export const VCalendarHeader = genericComponent()({
   name: 'VCalendarHeader',
 
   props: {
-    end: Date,
-    start: Date,
-    view: {
+    nextIcon: {
+      type: [String],
+      default: '$next',
+    },
+    prevIcon: {
+      type: [String],
+      default: '$prev',
+    },
+    title: String,
+    text: {
+      type: String,
+      default: '$vuetify.calendar.today',
+    },
+    viewMode: {
       type: String,
       default: 'month',
     },
   },
 
   emits: {
-    prev: null,
-    next: null,
+    'click:prev': () => true,
+    'click:next': () => true,
   },
 
-  setup (props, { emit, slots }) {
-    useRender(() => {
-      const date = useDate()
+  setup (props, { emit }) {
+    const { t } = useLocale()
 
-      const displayTitle = ref('')
-      // eslint-disable-next-line sonarjs/no-all-duplicated-branches
-      switch (props.view) {
-        case 'month':
-          displayTitle.value = date.format(props.start, 'monthAndYear')
-          break
-        case 'week':
-          displayTitle.value = ''
-          break
-        case 'day':
-          displayTitle.value = ''
-          break
-        default:
-          displayTitle.value = ''
-          break
-      }
+    function prev () {
+      emit('click:prev')
+    }
 
-      const prev = () => {
-        emit('prev')
-      }
-      const next = () => {
-        emit('next')
-      }
+    function next () {
+      emit('click:next')
+    }
 
-      return (
-        <div style="min-height: 64px">
-          { slots.title?.() ?? (
-            <div class="d-flex" >
-              <VBtn icon="$prev" onClick={ prev } />
-              <VSpacer />
-              <div class="text-h4 text-center">{ displayTitle.value }</div>
-              <VSpacer />
-              <VBtn icon="$next" onClick={ next } />
-            </div>
-          )}
-        </div>
-      )
-    })
+    useRender(() => (
+      <div class="v-calendar-header">
+        { props.text && (
+          <VBtn
+            class="v-calendar-header__today"
+            key="today"
+            text={ t(props.text) }
+            variant="outlined"
+          />
+        )}
+
+        <VBtn
+          icon={ props.prevIcon }
+          onClick={ prev }
+          density="comfortable"
+          variant="text"
+        />
+
+        <VBtn
+          icon={ props.nextIcon }
+          onClick={ next }
+          density="comfortable"
+          variant="text"
+        />
+
+        <div class="v-calendar-header__title">{ props.title }</div>
+      </div>
+    ))
+
+    return {}
   },
-
 })
 
 export type VCalendarHeader = InstanceType<typeof VCalendarHeader>
