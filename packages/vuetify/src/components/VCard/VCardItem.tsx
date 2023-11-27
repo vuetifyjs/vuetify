@@ -43,8 +43,8 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
       const hasPrepend = !!(hasPrependMedia || slots.prepend)
       const hasAppendMedia = !!(props.appendAvatar || props.appendIcon)
       const hasAppend = !!(hasAppendMedia || slots.append)
-      const hasTitle = !!(props.title !== null || slots.title)
-      const hasSubtitle = !!(props.subtitle !== null || slots.subtitle)
+      const hasTitle = !!(props.title != null || slots.title)
+      const hasSubtitle = !!(props.subtitle != null || slots.subtitle)
 
       return (
         <div

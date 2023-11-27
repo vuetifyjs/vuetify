@@ -115,8 +115,8 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
         !hasError.value &&
         !props.disabled
       )
-      const hasTitle = !!(props.title !== null || slots.title)
-      const hasSubtitle = !!(props.subtitle !== null || slots.subtitle)
+      const hasTitle = !!(props.title != null || slots.title)
+      const hasSubtitle = !!(props.subtitle != null || slots.subtitle)
 
       function onClick () {
         group?.toggle()
