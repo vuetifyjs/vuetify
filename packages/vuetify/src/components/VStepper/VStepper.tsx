@@ -34,7 +34,7 @@ export type VStepperSlot = {
 
 export type VStepperSlots = {
   actions: VStepperSlot
-  default: StepperItem
+  default: VStepperSlot
   header: StepperItem
   'header-item': StepperItemSlot
   icon: StepperItemSlot
