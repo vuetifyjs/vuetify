@@ -30,83 +30,38 @@ import type {
   VNodeChild,
 } from 'vue'
 
-// // No props
-// export function defineComponent<
-//   Props = {},
-//   RawBindings = {},
-//   D = {},
-//   C extends ComputedOptions = {},
-//   M extends MethodOptions = {},
-//   Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
-//   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
-//   E extends EmitsOptions = {},
-//   EE extends string = string,
-//   I extends {} = {},
-//   II extends string = string,
-//   S extends SlotsType = {},
-// >(
-//   options: ComponentOptionsWithoutProps<
-//     Props,
-//     RawBindings,
-//     D,
-//     C,
-//     M,
-//     Mixin,
-//     Extends,
-//     E,
-//     EE,
-//     I,
-//     II,
-//     S
-//   >
-// ): DefineComponent<Props, RawBindings, D, C, M, Mixin, Extends, E, EE>
-
-// // Object Props
-// export function defineComponent<
-//   PropsOptions extends Readonly<ComponentPropsOptions>,
-//   RawBindings,
-//   D,
-//   C extends ComputedOptions = {},
-//   M extends MethodOptions = {},
-//   Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
-//   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
-//   E extends EmitsOptions = {},
-//   EE extends string = string,
-//   I extends {} = {},
-//   II extends string = string,
-//   S extends SlotsType = {},
-// >(
-//   options: ComponentOptionsWithObjectProps<
-//     PropsOptions,
-//     RawBindings,
-//     D,
-//     C,
-//     M,
-//     Mixin,
-//     Extends,
-//     E,
-//     EE,
-//     I,
-//     II,
-//     S
-//   >
-// ): DefineComponent<PropsOptions, RawBindings, D, C, M0, Mixin, Extends, E, EE> & FilterPropsOptions<PropsOptions>
-
 export function defineComponent<
-Props = undefined,
-RawBindings = {},
-D = {},
-C extends ComputedOptions = {},
-M extends MethodOptions = {},
-Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
-Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
-E extends EmitsOptions = {},
-EE extends string = string,
-I extends ComponentInjectOptions = {},
-II extends string = string,
-S extends SlotsType = {},
-Options extends Record<PropertyKey, any> = {}>(options: DefineComponentOptions<
-  Props,
+  Props = undefined,
+  RawBindings = {},
+  D = {},
+  C extends ComputedOptions = {},
+  M extends MethodOptions = {},
+  Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
+  Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
+  E extends EmitsOptions = {},
+  EE extends string = string,
+  I extends ComponentInjectOptions = {},
+  II extends string = string,
+  S extends SlotsType = {},
+  Options extends Record<PropertyKey, any> = {}
+>(
+  options: DefineComponentOptions<
+    Props,
+    RawBindings,
+    D,
+    C,
+    M,
+    Mixin,
+    Extends,
+    E,
+    EE,
+    I,
+    II,
+    S,
+    Options
+  >
+): DefineComponentFromOptions<
+  undefined extends Props ? {} : Props,
   RawBindings,
   D,
   C,
@@ -119,20 +74,6 @@ Options extends Record<PropertyKey, any> = {}>(options: DefineComponentOptions<
   II,
   S,
   Options
->): DefineComponentFromOptions<
-undefined extends Props ? {} : Props,
-RawBindings,
-D,
-C,
-M,
-Mixin,
-Extends,
-E,
-EE,
-I,
-II,
-S,
-Options
 > & (Props extends Readonly<ComponentPropsOptions> ? FilterPropsOptions<Props> : {})
 
 // Implementation
@@ -203,23 +144,39 @@ export type GenericProps<Props, Slots extends Record<string, unknown>> = {
 
 type DefineComponentWithGenericProps<T extends (new (props: Record<string, any>, slots: RawSlots) => {
   $props?: Record<string, any>
-})>
-= <
-Props = undefined,
-RawBindings = {},
-D = {},
-C extends ComputedOptions = {},
-M extends MethodOptions = {},
-Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
-Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
-E extends EmitsOptions = {},
-EE extends string = string,
-I extends ComponentInjectOptions = {},
-II extends string = string,
+})> = <
+  Props = undefined,
+  RawBindings = {},
+  D = {},
+  C extends ComputedOptions = {},
+  M extends MethodOptions = {},
+  Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
+  Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
+  E extends EmitsOptions = {},
+  EE extends string = string,
+  I extends ComponentInjectOptions = {},
+  II extends string = string,
   Slots extends RawSlots = ConstructorParameters<T>[1],
   S extends SlotsType = SlotsType<Partial<MakeSlots<Slots>>>,
-Options extends Record<PropertyKey, any> = {}>(options: DefineComponentOptions<
-  Props,
+  Options extends Record<PropertyKey, any> = {}
+>(
+  options: DefineComponentOptions<
+    Props,
+    RawBindings,
+    D,
+    C,
+    M,
+    Mixin,
+    Extends,
+    E,
+    EE,
+    I,
+    II,
+    S,
+    Options
+  >
+) => DefineComponentFromOptions<
+  undefined extends Props ? {} : Props,
   RawBindings,
   D,
   C,
@@ -232,39 +189,40 @@ Options extends Record<PropertyKey, any> = {}>(options: DefineComponentOptions<
   II,
   S,
   Options
->) => DefineComponentFromOptions<
-undefined extends Props ? {} : Props,
-RawBindings,
-D,
-C,
-M,
-Mixin,
-Extends,
-E,
-EE,
-I,
-II,
-S,
-Options
 > & T & (Props extends Readonly<ComponentPropsOptions> ? FilterPropsOptions<Props> : {})
 
 type DefineComponentWithSlots<Slots extends RawSlots> = <
-Props = undefined,
-RawBindings = {},
-D = {},
-C extends ComputedOptions = {},
-M extends MethodOptions = {},
-Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
-Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
-E extends EmitsOptions = {},
-EE extends string = string,
-I extends ComponentInjectOptions = {},
-II extends string = string,
-S extends SlotsType = SlotsType<Partial<MakeSlots<Slots>>>,
-Options extends Record<PropertyKey, any> = {}
+  Props = undefined,
+  RawBindings = {},
+  D = {},
+  C extends ComputedOptions = {},
+  M extends MethodOptions = {},
+  Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
+  Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
+  E extends EmitsOptions = {},
+  EE extends string = string,
+  I extends ComponentInjectOptions = {},
+  II extends string = string,
+  S extends SlotsType = SlotsType<Partial<MakeSlots<Slots>>>,
+  Options extends Record<PropertyKey, any> = {}
 >(
   options: DefineComponentOptions<
-  Props,
+    Props,
+    RawBindings,
+    D,
+    C,
+    M,
+    Mixin,
+    Extends,
+    E,
+    EE,
+    I,
+    II,
+    S,
+    Options
+  >
+) => DefineComponentFromOptions<
+  undefined extends Props ? {} : Props,
   RawBindings,
   D,
   C,
@@ -277,21 +235,6 @@ Options extends Record<PropertyKey, any> = {}
   II,
   S,
   Options
->
-) => DefineComponentFromOptions<
-undefined extends Props ? {} : Props,
-RawBindings,
-D,
-C,
-M,
-Mixin,
-Extends,
-E,
-EE,
-I,
-II,
-S,
-Options
 > & (Props extends Readonly<ComponentPropsOptions> ? FilterPropsOptions<Props> : {})
 
 // No argument - simple default slot
