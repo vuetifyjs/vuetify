@@ -222,7 +222,7 @@ type DefineComponentWithSlots<Slots extends RawSlots> = <
     Options
   >
 ) => DefineComponentFromOptions<
-  (undefined extends Props ? {} : Props) & SlotsToProps<Slots>,
+  ExtractPropTypes<(undefined extends Props ? {} : Props)> & SlotsToProps<Slots>,
   RawBindings,
   D,
   C,
