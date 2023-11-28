@@ -24,8 +24,8 @@ export type StepperItemSlot = {
   canEdit: boolean
   hasError: boolean
   hasCompleted: boolean
-  title?: string
-  subtitle?: string
+  title?: string | number
+  subtitle?: string | number
   step: any
 }
 
@@ -115,8 +115,8 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
         !hasError.value &&
         !props.disabled
       )
-      const hasTitle = !!(props.title || slots.title)
-      const hasSubtitle = !!(props.subtitle || slots.subtitle)
+      const hasTitle = !!(props.title != null || slots.title)
+      const hasSubtitle = !!(props.subtitle != null || slots.subtitle)
 
       function onClick () {
         group?.toggle()
