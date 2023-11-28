@@ -141,7 +141,7 @@ export const VSlideGroup = genericComponent<new <T>(
                 selectedElement,
                 containerSize: containerSize.value,
                 contentSize: contentSize.value,
-                isRtl: isRtl,
+                isRtl,
                 isHorizontal: isHorizontal.value,
               })
             } else if (isOverflowing.value) {
@@ -149,7 +149,7 @@ export const VSlideGroup = genericComponent<new <T>(
                 selectedElement,
                 containerSize: containerSize.value,
                 contentSize: contentSize.value,
-                isRtl: isRtl,
+                isRtl,
                 currentScrollOffset: scrollOffset.value,
                 isHorizontal: isHorizontal.value,
               })
@@ -213,7 +213,7 @@ export const VSlideGroup = genericComponent<new <T>(
               selectedElement: item as HTMLElement,
               containerSize: containerSize.value,
               contentSize: contentSize.value,
-              isRtl: isRtl,
+              isRtl,
               currentScrollOffset: scrollOffset.value,
               isHorizontal: isHorizontal.value,
             })
