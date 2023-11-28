@@ -2,7 +2,7 @@
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import {computed, ComputedRef, nextTick, onScopeDispose, ref, watch, WritableComputedRef} from 'vue'
+import { computed, nextTick, onScopeDispose, ref, watch } from 'vue'
 import { anchorToPoint, getOffset } from './util/point'
 import {
   clamp,
@@ -23,7 +23,7 @@ import {
 import { Box, getOverflow, getTargetBox } from '@/util/box'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type { ComputedRef, PropType, Ref, WritableComputedRef } from 'vue'
 import type { Anchor } from '@/util'
 
 export interface LocationStrategyData {
@@ -72,12 +72,12 @@ export const makeLocationStrategyProps = propsFactory({
   offset: [Number, String, Array] as PropType<StrategyProps['offset']>,
 }, 'VOverlay-location-strategies')
 
-export function useLocationStrategies(
+export function useLocationStrategies (
   props: StrategyProps,
   data: {
-    contentEl: Ref<HTMLElement | undefined>;
-    isActive: WritableComputedRef<any>;
-    isRtl: boolean;
+    contentEl: Ref<HTMLElement | undefined>
+    isActive: WritableComputedRef<any>
+    isRtl: Ref<boolean>
     target: ComputedRef<[x: number, y: number] | undefined | HTMLElement>
   }
 ) {
