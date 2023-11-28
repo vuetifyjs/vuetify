@@ -176,7 +176,7 @@ type DefineComponentWithGenericProps<T extends (new (props: Record<string, any>,
     Options
   >
 ) => DefineComponentFromOptions<
-  undefined extends Props ? {} : Props,
+  LooseOptional<ExtractPropTypes<(undefined extends Props ? {} : Omit<Props, keyof InstanceType<T>['$props']>)>>,
   RawBindings,
   D,
   C,
@@ -222,7 +222,7 @@ type DefineComponentWithSlots<Slots extends RawSlots> = <
     Options
   >
 ) => DefineComponentFromOptions<
-  ExtractPropTypes<(undefined extends Props ? {} : Props)> & SlotsToProps<Slots>,
+  LooseOptional<ExtractPropTypes<(undefined extends Props ? {} : Props)>> & SlotsToProps<Slots>,
   RawBindings,
   D,
   C,
