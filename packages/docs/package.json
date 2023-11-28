@@ -68,7 +68,7 @@
     "markdown-it-meta": "^0.0.1",
     "markdown-it-prism": "^2.3.0",
     "markdownlint-cli": "^0.37.0",
-    "unplugin-fonts": "^1.1.1",
+    "unplugin-fonts": "1.0.3",
     "unplugin-vue-components": "^0.25.2",
     "vite": "^4.5.0",
     "vite-plugin-md": "^0.21.5",
