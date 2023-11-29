@@ -263,7 +263,10 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                 key="header"
                 { ...datePickerHeaderProps }
                 { ...headerProps }
-                v-slots={ slots }
+                v-slots={{
+                  ...slots,
+                  default: undefined,
+                }}
               />
             ),
             default: () => (
