@@ -38,14 +38,14 @@
   &__append
     > .v-badge .v-icon,
     > .v-icon
-      opacity: #{$list-item-icon-opacity}
+      --v-icon-opacity: #{$list-item-icon-opacity}
 
   &--active
     .v-list-item__prepend,
     .v-list-item__append
       > .v-badge .v-icon,
       > .v-icon
-        opacity: #{$list-item-icon-active-opacity}
+        --v-icon-opacity: #{$list-item-icon-active-opacity}
 
   &--rounded
     @include tools.rounded($list-item-rounded-border-radius)
