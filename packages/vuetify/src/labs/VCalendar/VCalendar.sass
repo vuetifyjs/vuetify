@@ -79,6 +79,7 @@
   min-height: 0
 
 .v-calendar-month__weeknumber
+  padding-top: 6px
   background: rgb(var(--v-theme-on-surface-variant))
   border-bottom: 1px solid #e0e0e0
   text-align: center
@@ -135,23 +136,23 @@
       border-right: none
   &.days-with-weeknumbers__2
     grid-template-columns: 24px repeat(2, 1fr)
-    > .v-calendar-month__day:nth-child(2n)
+    > .v-calendar-month__day:nth-child(3n)
       border-right: none
   &.days-with-weeknumbers__3
     grid-template-columns: 24px repeat(3, 1fr)
-    > .v-calendar-month__day:nth-child(3n)
+    > .v-calendar-month__day:nth-child(4n)
       border-right: none
   &.days-with-weeknumbers__4
     grid-template-columns: 24px repeat(4, 1fr)
-    > .v-calendar-month__day:nth-child(4n)
+    > .v-calendar-month__day:nth-child(5n)
       border-right: none
   &.days-with-weeknumbers__5
     grid-template-columns: 24px repeat(5, 1fr)
-    > .v-calendar-month__day:nth-child(5n)
+    > .v-calendar-month__day:nth-child(6n)
       border-right: none
   &.days-with-weeknumbers__6
     grid-template-columns: 24px repeat(6, 1fr)
-    > .v-calendar-month__day:nth-child(6n)
+    > .v-calendar-month__day:nth-child(7n)
       border-right: none
   &.days-with-weeknumbers__7
     grid-template-columns: 24px repeat(7, 1fr)

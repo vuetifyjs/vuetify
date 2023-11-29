@@ -3,6 +3,7 @@ import './VCalendar.sass'
 
 // Composables
 import { getWeek, useDate } from '@/composables/date/date'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed } from 'vue'
@@ -68,14 +69,22 @@ export const VCalendar = genericComponent()({
 
   setup (props, { emit, slots }) {
     const adapter = useDate()
+
+    const model = useProxiedModel(
+      props,
+      'modelValue',
+      new Date(),
+      v => v,
+    )
+
     const dayNames = adapter.getWeekdays()
     const weeksIn = computed(() => {
       if (props.type === 'day') {
-        return [[props.modelValue]]
+        return [[model.value]]
       }
       if (props.type === 'week') {
         // get Start of week
-        const lastDay = adapter.startOfWeek(props.modelValue)
+        const lastDay = adapter.startOfWeek(model.value)
         const week = []
         for (let day = 0; day <= 6; day++) {
           week.push(adapter.addDays(lastDay, day))
@@ -83,11 +92,11 @@ export const VCalendar = genericComponent()({
 
         return [week]
       }
-      const weeks = adapter.getWeekArray(props.modelValue)
+      const weeks = adapter.getWeekArray(model.value)
 
       const days = weeks.flat()
 
-      // Make sure there's always 6 weeks in month (6 * 7 days)
+      // Make sure there's always 5 weeks in month (5 * 7 days)
       // But only do it if we're not hiding adjacent months?
       const daysInMonth = 5 * 7
       if (days.length < daysInMonth && props.showAdjacentMonths) {
@@ -109,31 +118,31 @@ export const VCalendar = genericComponent()({
 
     function onClickPrev () {
       if (props.type === 'month') {
-        emit('update:modelValue', adapter.addMonths(props.modelValue, -1))
+        model.value = adapter.addMonths(model.value, -1)
       }
       if (props.type === 'week') {
-        emit('update:modelValue', adapter.addDays(props.modelValue, -7))
+        model.value = adapter.addDays(model.value, -7)
       }
       if (props.type === 'day') {
-        emit('update:modelValue', adapter.addDays(props.modelValue, -1))
+        model.value = adapter.addDays(model.value, -1)
       }
     }
 
     function onClickNext () {
       if (props.type === 'month') {
-        emit('update:modelValue', adapter.addMonths(props.modelValue, 1))
+        model.value = adapter.addMonths(model.value, 1)
       }
       if (props.type === 'week') {
-        emit('update:modelValue', adapter.addDays(props.modelValue, 7))
+        model.value = adapter.addDays(model.value, 7)
       }
       if (props.type === 'day') {
-        emit('update:modelValue', adapter.addDays(props.modelValue, 1))
+        model.value = adapter.addDays(model.value, 1)
       }
     }
 
     const validDates = computed(() => [
-      adapter.startOfMonth(props.modelValue),
-      adapter.endOfMonth(props.modelValue),
+      adapter.startOfMonth(model.value),
+      adapter.endOfMonth(model.value),
     ])
     const daysIn = computed(() => {
       const isRange = validDates.value.length > 1
@@ -149,7 +158,7 @@ export const VCalendar = genericComponent()({
         .map((date, index) => {
           const isStart = startDate.value && adapter.isSameDay(date, startDate.value)
           const isEnd = endDate.value && adapter.isSameDay(date, endDate.value)
-          const isAdjacent = !adapter.isSameMonth(date, props.modelValue)
+          const isAdjacent = !adapter.isSameMonth(date, model.value)
           const isSame = validDates.value.length === 2 && adapter.isSameDay(startDate.value, endDate.value)
 
           return {
@@ -186,7 +195,7 @@ export const VCalendar = genericComponent()({
     })
 
     const title = computed(() => {
-      return adapter.format(props.modelValue, 'monthAndYear')
+      return adapter.format(model.value, 'monthAndYear')
     })
 
     useRender(() => (
