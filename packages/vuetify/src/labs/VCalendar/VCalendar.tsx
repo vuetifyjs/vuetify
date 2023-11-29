@@ -225,7 +225,7 @@ export const VCalendar = genericComponent()({
               { !props.hideWeekNumber ? <div key="weekNumber0" class="v-calendar-weekly__head-weeknumber"></div> : '' }
               {
                 props.weekdays.sort((a, b) => a - b).map(weekday => (
-                  <div class="v-calendar-weekly__head-weekday">
+                  <div class={ `v-calendar-weekly__head-weekday${!props.hideWeekNumber ? '-with-weeknumber' : ''}` }>
                     { dayNames[weekday] }
                   </div>
                 ))
@@ -239,7 +239,7 @@ export const VCalendar = genericComponent()({
               class={
                 [
                   'v-calendar-month__days',
-                  `days__${props.weekdays.length}`,
+                  `days${!props.hideWeekNumber ? '-with-weeknumbers' : ''}__${props.weekdays.length}`,
                   ...(!props.hideWeekNumber ? ['v-calendar-month__weeknumbers'] : []),
                 ]
               }
