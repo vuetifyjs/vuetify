@@ -89,7 +89,7 @@ export const VCalendar = genericComponent()({
 
       // Make sure there's always 6 weeks in month (6 * 7 days)
       // But only do it if we're not hiding adjacent months?
-      const daysInMonth = 6 * 7
+      const daysInMonth = 5 * 7
       if (days.length < daysInMonth && props.showAdjacentMonths) {
         const lastDay = days[days.length - 1]
 
