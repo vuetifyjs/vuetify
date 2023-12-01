@@ -97,7 +97,7 @@ export function useItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
   const hasNullItem = computed(() => items.value.some(item => item.value === null))
 
-  function transformIn (value: any[], allowTransformStr = false): ListItem[] {
+  function transformIn (value: any[]): ListItem[] {
     if (!hasNullItem.value) {
       // When the model value is null, return an InternalItem
       // based on null only if null is one of the items
@@ -105,13 +105,13 @@ export function useItems (props: ItemProps) {
     }
 
     return value.map(v => {
-      if (allowTransformStr && typeof v === 'string') {
+      if (props.returnObject && typeof v === 'string') {
         // String model value means value is a custom input value from combobox
         // Don't look up existing items if the model value is a string
         return transformItem(props, v)
       }
-      return items.value.find(item => props.valueComparator(v, props.returnObject ? item.raw : item.value))
-    }).filter(v => !!v) as ListItem[]
+      return items.value.find(item => props.valueComparator(v, item.value)) || transformItem(props, v)
+    })
   }
 
   function transformOut (value: ListItem[]): any[] {
