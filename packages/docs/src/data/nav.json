@@ -217,7 +217,11 @@
     "inactiveIcon": "mdi-beaker-outline",
     "activeIcon": "mdi-beaker",
     "items": [
-      "introduction"
+      "introduction",
+      {
+        "title": "rules",
+        "subfolder": "features"
+      }
     ]
   },
   {
