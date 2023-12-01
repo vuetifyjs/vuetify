@@ -153,7 +153,7 @@ export const VCombobox = genericComponent<new <
       props,
       'modelValue',
       [],
-      v => transformIn(wrapInArray(v), true),
+      v => transformIn(wrapInArray(v)),
       v => {
         const transformed = transformOut(v)
         return props.multiple ? transformed : (transformed[0] ?? null)
@@ -342,25 +342,21 @@ export const VCombobox = genericComponent<new <
         vTextFieldRef.value?.focus()
       }
     }
-    /** @param set - null means toggle */
-    function select (item: ListItem, set: boolean | null = true) {
+    function select (item: ListItem, possibleCustomInput = true) {
+      const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
       if (props.multiple) {
-        const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
-        const add = set == null ? !~index : set
-
         if (~index) {
-          const value = add ? [...model.value, item] : [...model.value]
+          const value = possibleCustomInput ? [...model.value, item] : [...model.value]
           value.splice(index, 1)
           model.value = value
-        } else if (add) {
+        } else {
           model.value = [...model.value, item]
         }
 
         search.value = ''
       } else {
-        const add = set !== false
-        model.value = add ? [item] : []
-        _search.value = add ? item.title : ''
+        model.value = !~index ? [item] : []
+        _search.value = !~index ? item.title : ''
 
         // watch for search watcher to trigger
         nextTick(() => {
@@ -398,9 +394,9 @@ export const VCombobox = genericComponent<new <
         !listHasFocus.value &&
         !model.value.some(({ value }) => value === displayItems.value[0].value)
       ) {
-        select(displayItems.value[0])
+        select(displayItems.value[0], false)
       } else if (props.multiple && search.value) {
-        select(transformItem(props, search.value))
+        select(transformItem(props, search.value), false)
       }
     })
 
@@ -497,7 +493,7 @@ export const VCombobox = genericComponent<new <
                             ref: itemRef,
                             key: index,
                             active: (highlightFirst.value && index === 0) ? true : undefined,
-                            onClick: () => select(item, null),
+                            onClick: () => select(item, false),
                           })
 
                           return slots.item?.({

@@ -176,11 +176,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       } else {
         year.value++
         month.value = 0
-
-        emit('update:year', year.value)
       }
-
-      emit('update:month', month.value)
     }
 
     function onClickPrev () {
@@ -189,11 +185,11 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       } else {
         year.value--
         month.value = 11
-
-        emit('update:year', year.value)
       }
+    }
 
-      emit('update:month', month.value)
+    function onClickDate () {
+      viewMode.value = 'month'
     }
 
     function onClickMonth () {
@@ -206,10 +202,14 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
 
     watch(month, () => {
       if (viewMode.value === 'months') onClickMonth()
+
+      emit('update:month', month.value)
     })
 
     watch(year, () => {
       if (viewMode.value === 'year') onClickYear()
+
+      emit('update:year', year.value)
     })
 
     watch(model, (val, oldVal) => {
@@ -263,6 +263,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                 key="header"
                 { ...datePickerHeaderProps }
                 { ...headerProps }
+                onClick={ viewMode.value !== 'month' ? onClickDate : undefined }
                 v-slots={ slots }
               />
             ),

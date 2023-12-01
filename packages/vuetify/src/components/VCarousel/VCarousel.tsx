@@ -79,7 +79,7 @@ export const VCarousel = genericComponent<new <T>(
   setup (props, { slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const { t } = useLocale()
-    const windowRef = ref<typeof VWindow>()
+    const windowRef = ref<VWindow>()
 
     let slideTimeout = -1
     watch(model, restartTimeout)

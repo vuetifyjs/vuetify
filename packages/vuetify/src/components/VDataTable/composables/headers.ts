@@ -179,7 +179,7 @@ function parse (items: InternalDataTableHeader[], maxDepth: number) {
       if (item.children) {
         for (const child of item.children) {
           // This internally sorts items that are on the same priority "row"
-          const sort = priority % 1 + (fraction / Math.pow(10, currentDepth + 1))
+          const sort = priority % 1 + (fraction / Math.pow(10, currentDepth + 2))
           queue.enqueue(child, currentDepth + diff + sort)
         }
       }

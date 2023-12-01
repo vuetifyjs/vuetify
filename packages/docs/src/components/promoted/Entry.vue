@@ -1,8 +1,10 @@
 <template>
   <carbon v-if="!user.disableAds" />
 
+  <br>
+
   <app-btn
-    v-if="!user.disableAds || user.dev"
+    v-if="false"
     :text="user.disableAds ? 'dashboard.perks.enable-ads' : 'dashboard.perks.disable-ads'"
     class="text-caption text-none mb-5 mt-2"
     color="surface-variant"

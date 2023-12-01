@@ -10,7 +10,7 @@ import { addDescriptions, addDirectiveDescriptions, addPropData, stringifyProps 
 import * as os from 'os'
 import { mkdirp } from 'mkdirp'
 import { createVeturApi } from './vetur'
-import rimraf from 'rimraf'
+import { rimraf } from 'rimraf'
 import { createWebTypesApi } from './web-types'
 import inspector from 'inspector'
 import yargs from 'yargs'
@@ -50,7 +50,7 @@ const run = async () => {
 
   const template = await fs.readFile('./templates/component.d.ts', 'utf-8')
 
-  rimraf.sync(path.resolve('./dist'))
+  await rimraf(path.resolve('./dist'))
   await fs.mkdir(path.resolve('./dist'))
   await mkdirp('./templates/tmp')
   for (const component in components) {
