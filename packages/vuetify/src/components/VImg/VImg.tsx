@@ -5,7 +5,9 @@ import './VImg.sass'
 import { makeVResponsiveProps, VResponsive } from '@/components/VResponsive/VResponsive'
 
 // Composables
+import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Directives
@@ -18,6 +20,7 @@ import {
   onBeforeMount,
   ref,
   shallowRef,
+  toRef,
   vShow,
   watch,
   withDirectives,
@@ -51,6 +54,7 @@ export type VImgSlots = {
 export const makeVImgProps = propsFactory({
   alt: String,
   cover: Boolean,
+  color: String,
   draggable: {
     type: [Boolean, String] as PropType<boolean | 'true' | 'false'>,
     default: undefined,
@@ -89,6 +93,7 @@ export const makeVImgProps = propsFactory({
 
   ...makeVResponsiveProps(),
   ...makeComponentProps(),
+  ...makeRoundedProps(),
   ...makeTransitionProps(),
 }, 'VImg')
 
@@ -106,6 +111,9 @@ export const VImg = genericComponent<VImgSlots>()({
   },
 
   setup (props, { emit, slots }) {
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { roundedClasses } = useRounded(props)
+
     const currentSrc = shallowRef('') // Set from srcset
     const image = ref<HTMLImageElement>()
     const state = shallowRef<'idle' | 'loading' | 'loaded' | 'error'>(props.eager ? 'loading' : 'idle')
@@ -328,10 +336,13 @@ export const VImg = genericComponent<VImgSlots>()({
           class={[
             'v-img',
             { 'v-img--booting': !isBooted.value },
+            backgroundColorClasses.value,
+            roundedClasses.value,
             props.class,
           ]}
           style={[
             { width: convertToUnit(props.width === 'auto' ? naturalWidth.value : props.width) },
+            backgroundColorStyles.value,
             props.style,
           ]}
           { ...responsiveProps }
