@@ -39,6 +39,7 @@ export function LoaderSlot (
     active: boolean
     name: string
     color?: string
+    absolute?: boolean
   } & ExtractPropTypes<SlotsToProps<{
     default: LoaderSlotProps
   }>>,
@@ -55,6 +56,7 @@ export function LoaderSlot (
           color={ props.color }
           height="2"
           indeterminate
+          absolute={ props.absolute }
         />
       )}
     </div>

@@ -217,6 +217,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                   active
                   color={ typeof props.loading === 'boolean' ? undefined : props.loading }
                   indeterminate
+                  absolute
                   v-slots={{ default: slots.loader }}
                 />
               </th>
