@@ -29,8 +29,8 @@
           <app-markdown :content="banner.metadata.text" />
         </v-list-item-title>
 
-        <v-list-item-subtitle v-if="banner.metadata.subtext" class="mt-n2">
-          <app-markdown :content="banner.metadata.subtext" />
+        <v-list-item-subtitle v-if="banner.metadata.subtext">
+          {{ banner.metadata.subtext }}
         </v-list-item-subtitle>
       </v-list-item>
 
@@ -89,7 +89,7 @@
   const banners = useBannersStore()
 
   const banner = computed(() => banners.banner)
-  const height = computed(() => banner.value?.metadata.subtext ? 72 : 48)
+  const height = computed(() => banner.value?.metadata.subtext ? 88 : 48)
   const hasPromotion = computed(() => {
     return !banner.value || !user.notifications.last.banner.includes(banner.value.slug)
   })
