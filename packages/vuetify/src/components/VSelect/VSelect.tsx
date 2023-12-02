@@ -314,7 +314,7 @@ export const VSelect = genericComponent<new <
           modelValue={ model.value.map(v => v.props.value).join(', ') }
           onUpdate:modelValue={ onModelUpdate }
           v-model:focused={ isFocused.value }
-          validationValue={ model.value.length ? model.externalValue : null }
+          validationValue={ model.externalValue }
           counterValue={ counterValue.value }
           dirty={ isDirty }
           class={[
