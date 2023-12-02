@@ -1,0 +1,12 @@
+@use 'sass:selector'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+.v-data-iterator__loader
+  display: flex
+  align-items: center
+  justify-content: center
+
+  .v-progress-circular
+    color: $data-iterator-loader-color
