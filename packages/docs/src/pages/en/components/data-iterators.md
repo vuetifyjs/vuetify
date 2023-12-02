@@ -83,7 +83,7 @@ The following are a collection of examples that demonstrate more advanced and re
 
 ### Slots
 
-The `v-data-iterator` component has 3 main slots
+The `v-data-iterator` component has 4 main slots
 
 #### Default
 
@@ -102,3 +102,10 @@ The `v-data-iterator` has both a **header** and **footer** slot for adding extra
 Sorting, filters and pagination can be controlled externally by using the individual props
 
 <example file="v-data-iterator/misc-filter" />
+
+
+#### Loader props
+
+Loader can be used to change loader on "loading" prop
+
+<example file="v-data-iterator/slot-loader" />
