@@ -187,6 +187,11 @@ export const VCombobox = genericComponent<new <
         isPristine.value = !val
       },
     })
+    const counterValue = computed(() => {
+      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
+        : typeof props.counterValue === 'number' ? props.counterValue
+        : (props.multiple ? model.value.length : search.value.length)
+    })
     watch(_search, value => {
       if (cleared) {
         // wait for clear to finish, VTextField sets _search to null
@@ -342,9 +347,11 @@ export const VCombobox = genericComponent<new <
         vTextFieldRef.value?.focus()
       }
     }
-    function select (item: ListItem, add = true) {
+    /** @param set - null means toggle */
+    function select (item: ListItem, set: boolean | null = true) {
       if (props.multiple) {
         const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
+        const add = set == null ? !~index : set
 
         if (~index) {
           const value = add ? [...model.value, item] : [...model.value]
@@ -356,6 +363,7 @@ export const VCombobox = genericComponent<new <
 
         search.value = ''
       } else {
+        const add = set !== false
         model.value = add ? [item] : []
         _search.value = add ? item.title : ''
 
@@ -431,7 +439,7 @@ export const VCombobox = genericComponent<new <
           onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
-          counterValue={ props.multiple ? model.value.length : search.value.length }
+          counterValue={ counterValue.value }
           dirty={ isDirty }
           class={[
             'v-combobox',
@@ -494,7 +502,7 @@ export const VCombobox = genericComponent<new <
                             ref: itemRef,
                             key: index,
                             active: (highlightFirst.value && index === 0) ? true : undefined,
-                            onClick: () => select(item),
+                            onClick: () => select(item, null),
                           })
 
                           return slots.item?.({

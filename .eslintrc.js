@@ -7,6 +7,7 @@ module.exports = {
     project: './tsconfig.eslint.json',
     tsconfigRootDir: __dirname,
     extraFileExtensions: ['.vue'],
+    suppressDeprecatedPropertyWarnings: true,
   },
   extends: [
     'standard',
@@ -190,7 +191,7 @@ module.exports = {
         // '@typescript-eslint/no-unnecessary-condition': 'error',
         '@typescript-eslint/prefer-includes': 'error',
         // '@typescript-eslint/prefer-nullish-coalescing': 'warn',
-        '@typescript-eslint/prefer-optional-chain': 'warn',
+        // '@typescript-eslint/prefer-optional-chain': 'warn',
         '@typescript-eslint/prefer-string-starts-ends-with': 'error',
         '@typescript-eslint/prefer-ts-expect-error': 'warn',
         '@typescript-eslint/restrict-plus-operands': 'error',
