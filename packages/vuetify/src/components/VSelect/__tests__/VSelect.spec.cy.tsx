@@ -378,9 +378,8 @@ describe('VSelect', () => {
   })
 
   it('should conditionally show placeholder', () => {
-    const items = ['Foobar']
     cy.mount(props => (
-      <VSelect items={ items } placeholder="Placeholder" { ...props } />
+      <VSelect placeholder="Placeholder" { ...props } />
     ))
       .get('.v-select input')
       .should('have.attr', 'placeholder', 'Placeholder')
