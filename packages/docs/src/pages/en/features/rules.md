@@ -32,10 +32,12 @@ Existing rules’ error messages can also be customized on the fly, to fit speci
 <usage name="rules" />
 
 ## Guide
+
 The `useRules` composable doesn't return rules directly but RuleBuilders that allows to customize
 error messages and to provide options when necessary.
 
 ### Error message
+
 Default error messages can be field-level redefined.
 
 ```html { resource="src/App.vue" }
@@ -48,6 +50,7 @@ Default error messages can be field-level redefined.
 ```
 
 ### Options
+
 Some RuleBuilders need options to work. For exemple `maxLength` needs a number as first parameter:
 
 ```html { resource="src/App.vue" }
