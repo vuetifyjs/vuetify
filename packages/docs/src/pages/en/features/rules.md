@@ -63,6 +63,7 @@ Some RuleBuilders need options to work. For exemple `maxLength` needs a number a
 ```
 
 In this case, error message can be redefined as second parameter:
+
 ```html { resource="src/App.vue" }
 <v-form>
   <v-text-field
