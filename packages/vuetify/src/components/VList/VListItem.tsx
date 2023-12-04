@@ -42,11 +42,11 @@ type ListItemSlot = {
 }
 
 export type ListItemTitleSlot = {
-  title?: string | number | boolean
+  title?: string | number
 }
 
 export type ListItemSubtitleSlot = {
-  subtitle?: string | number | boolean
+  subtitle?: string | number
 }
 
 export type VListItemSlots = {
@@ -82,8 +82,8 @@ export const makeVListItemProps = propsFactory({
     default: true,
   },
   slim: Boolean,
-  subtitle: [String, Number, Boolean],
-  title: [String, Number, Boolean],
+  subtitle: [String, Number],
+  title: [String, Number],
   value: null,
 
   onClick: EventProp<[MouseEvent]>(),
@@ -179,8 +179,8 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
     useRender(() => {
       const Tag = isLink.value ? 'a' : props.tag
-      const hasTitle = (slots.title || props.title)
-      const hasSubtitle = (slots.subtitle || props.subtitle)
+      const hasTitle = (slots.title || props.title != null)
+      const hasSubtitle = (slots.subtitle || props.subtitle != null)
       const hasAppendMedia = !!(props.appendAvatar || props.appendIcon)
       const hasAppend = !!(hasAppendMedia || slots.append)
       const hasPrependMedia = !!(props.prependAvatar || props.prependIcon)

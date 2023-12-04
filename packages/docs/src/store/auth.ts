@@ -45,6 +45,9 @@ export const useAuthStore = defineStore('auth', () => {
     user.value?.isAdmin ||
     user.value?.sponsorships.some(s => s.isActive)
   ))
+  const isOneSubscriber = computed(() => (
+    user.value?.sponsorships.some(s => s.tierName === 'Vuetify One' && s.isActive)
+  ))
 
   let externalUpdate = false
   watch(user, user => {
@@ -202,6 +205,7 @@ export const useAuthStore = defineStore('auth', () => {
     login,
     logout,
     isSubscriber,
+    isOneSubscriber,
     lastLoginProvider,
   }
 })

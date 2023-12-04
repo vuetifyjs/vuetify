@@ -24,7 +24,9 @@ features:
 <page-features />
 
 ::: success
+
 This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
+
 :::
 
 ## Usage
@@ -43,6 +45,8 @@ Date pickers come in two orientation variations, portrait **(default)** and land
 
 <api-inline hide-links />
 
+## Guide
+
 The `v-date-picker` component is a stand-alone interface that allows the selection of a date, month and year. This component is built using the [Date composable](/features/dates/).
 
 All date components support the [date-io](https://github.com/dmtrKovalenko/date-io) abstraction layer for date management. By default they will use a built-in adapter that uses the native Date object, but it is possible to use any of the date-io adapters. See the [dates](/features/dates/) page for more information.
@@ -53,56 +57,13 @@ import DayJsAdapter from '@date-io/dayjs'
 createVuetify({
   date: {
     adapter: DayJsAdapter,
-  }
-})
-```
-
-The components also use the [i18n](/features/internationalization) feature to know which locale should be used for dates. If you are using the built-in date adapter, then everything should work automatically.
-
-If you're not using the built-in date adapter, set up a mapping from the [i18n](/features/internationalization) locale string to the date library locale in the Vuetify options.
-
-```js
-import DateFnsAdapter from '@date-io/date-fns'
-import enUS from 'date-fns/locale/en-US'
-import svSE from 'date-fns/locale/sv'
-
-createVuetify({
-  date: {
-    adapter: DateFnsAdapter,
-    locale: {
-      en: enUS,
-      sv: svSE,
-    },
   },
 })
 ```
 
-Here is an example of switching the locale of the **v-date-picker** component.
-
-<example file="v-date-picker/guide-locale" />
-
-To customize date formatting, provide a `formats` object to the date options. The keys align with the formats documented [here](/features/dates/#format-options). The value can be either a `[DateTimeFormatOptions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat#using_options)` object or a method that returns a string.
-
-::: warning
-
-Keep in mind that the `formats` object is only valid when using the **built-in** date adapter. When using any other [date-io](https://github.com/dmtrKovalenko/date-io) adapter, make sure to follow that library's formatting documentation.
-
-:::
-
-```js
-createVuetify({
-  date: {
-    formats: {
-      keyboardDate: { year: 'numeric', month: 'long', day: 'numeric' },
-      dayOfMonth: (date, formatString, locale) => date.getDate(),
-    }
-  }
-})
-```
-
-## Examples
-
 ### Props
+
+The `v-date-picker` component supports multiple props for configuring dates that can be selected, date formats, translations and more.
 
 #### Elevation
 
@@ -133,3 +94,41 @@ Date picker colors can be set using the **color** props.
 Specify allowed dates using objects or functions. When using objects, accepts a date string in the format of YYYY-MM-DD. When using functions, accepts a date object as a parameter and should return a boolean.
 
 <example file="v-date-picker/prop-allowed-dates" />
+
+### Internationalization
+
+Vuetify components can localize date formats by utilizing the [i18n](/features/internationalization) feature. This determines the appropriate locale for date display. When the default date adapter is in use, localization is managed automatically.
+
+For those not using the default date adapter, you need to create a mapping between the i18n locale string and your chosen date library's locale. This can be done in the Vuetify options as shown below:
+
+```js
+import DateFnsAdapter from '@date-io/date-fns'
+import enUS from 'date-fns/locale/en-US'
+import svSE from 'date-fns/locale/sv'
+
+createVuetify({
+  date: {
+    adapter: DateFnsAdapter,
+    locale: {
+      en: enUS,
+      sv: svSE,
+    },
+  },
+})
+```
+
+### Parsing dates
+
+It's recommended that you use the [Date composable](/features/dates/) for parsing and formatting when working with string dates. The following example uses the parseISO function to convert a string date to a Date object.
+
+```js
+import { useDate } from 'vuetify'
+
+const adapter = useDate()
+const date = '2023-11-30'
+
+console.log(new Date(date)) // Wed Nov 29 2023 18:00:00 GMT-0600
+console.log(adapter.parseISO(date)) // Thu Nov 30 2023 00:00:00 GMT-0600
+```
+
+Using this function ensures that the date is parsed correctly regardless of the user's timezone.

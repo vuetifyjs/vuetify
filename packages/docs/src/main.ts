@@ -11,7 +11,7 @@ import { setupLayouts } from 'virtual:generated-layouts'
 // Plugins
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import { createHead } from '@vueuse/head'
+import { createHead } from '@unhead/vue'
 import { installPinia, pinia } from '@/plugins/pinia'
 import { installGlobalComponents } from '@/plugins/global-components'
 import { installGtag } from '@/plugins/gtag'
