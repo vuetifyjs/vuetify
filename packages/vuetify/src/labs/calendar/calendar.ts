@@ -131,5 +131,10 @@ export function useCalendar (props: CalendarProps) {
     return false
   }
 
-  return { daysInMonth, weeksInMonth, weekNumbers }
+  return {
+    displayValue,
+    daysInMonth,
+    weeksInMonth,
+    weekNumbers,
+  }
 }
