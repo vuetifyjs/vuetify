@@ -359,7 +359,7 @@ export const VAutocomplete = genericComponent<new <
 
         nextTick(() => isSelecting.value = false)
       } else {
-        if (!props.multiple && !search.value) model.value = []
+        if (!props.multiple && search.value == null) model.value = []
         else if (
           highlightFirst.value &&
           !listHasFocus.value &&
