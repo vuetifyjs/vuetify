@@ -118,7 +118,7 @@ export const VWindow = genericComponent<new <T>(
     const group = useGroup(props, VWindowGroupSymbol)
 
     const rootRef = ref()
-    const isRtlReverse = computed(() => isRtl.value ? !props.reverse : props.reverse)
+    const isRtlReverse = computed(() => isRtl ? !props.reverse : props.reverse)
     const isReversed = shallowRef(false)
     const transition = computed(() => {
       const axis = props.direction === 'vertical' ? 'y' : 'x'
@@ -172,7 +172,7 @@ export const VWindow = genericComponent<new <T>(
       const arrows = []
 
       const prevProps = {
-        icon: isRtl.value ? props.nextIcon : props.prevIcon,
+        icon: isRtl ? props.nextIcon : props.prevIcon,
         class: `v-window__${isRtlReverse.value ? 'right' : 'left'}`,
         onClick: group.prev,
         ariaLabel: t('$vuetify.carousel.prev'),
@@ -186,7 +186,7 @@ export const VWindow = genericComponent<new <T>(
       )
 
       const nextProps = {
-        icon: isRtl.value ? props.prevIcon : props.nextIcon,
+        icon: isRtl ? props.prevIcon : props.nextIcon,
         class: `v-window__${isRtlReverse.value ? 'left' : 'right'}`,
         onClick: group.next,
         ariaLabel: t('$vuetify.carousel.next'),

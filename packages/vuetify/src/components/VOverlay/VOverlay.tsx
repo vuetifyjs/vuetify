@@ -266,7 +266,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                   'v-overlay--contained': props.contained,
                 },
                 themeClasses.value,
-                rtlClasses.value,
+                rtlClasses,
                 props.class,
               ]}
               style={[

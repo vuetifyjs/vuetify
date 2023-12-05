@@ -120,7 +120,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
         : Number(props.rail ? props.railWidth : props.width)
     })
     const location = computed(() => {
-      return toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'bottom'
+      return toPhysical(props.location, isRtl) as 'left' | 'right' | 'bottom'
     })
     const isTemporary = computed(() => !props.permanent && (mobile.value || props.temporary))
     const isSticky = computed(() =>

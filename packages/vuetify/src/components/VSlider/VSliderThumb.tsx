@@ -103,8 +103,8 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       const steps = (props.max - props.min) / _step
       if ([left, right, down, up].includes(e.key)) {
         const increase = vertical.value
-          ? [isRtl.value ? left : right, isReversed.value ? down : up]
-          : indexFromEnd.value !== isRtl.value ? [left, up] : [right, up]
+          ? [isRtl ? left : right, isReversed.value ? down : up]
+          : indexFromEnd.value !== isRtl ? [left, up] : [right, up]
         const direction = increase.includes(e.key) ? 1 : -1
         const multiplier = e.shiftKey ? 2 : (e.ctrlKey ? 1 : 0)
 
@@ -140,7 +140,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
               'v-slider-thumb--pressed': props.focused && mousePressed.value,
             },
             props.class,
-            rtlClasses.value,
+            rtlClasses,
           ]}
           style={[
             {

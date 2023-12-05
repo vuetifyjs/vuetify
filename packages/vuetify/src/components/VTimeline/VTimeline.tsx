@@ -115,7 +115,7 @@ export const VTimeline = genericComponent()({
           themeClasses.value,
           densityClasses.value,
           sideClasses.value,
-          rtlClasses.value,
+          rtlClasses,
           props.class,
         ]}
         style={[
