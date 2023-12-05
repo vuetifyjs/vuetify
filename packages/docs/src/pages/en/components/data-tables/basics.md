@@ -196,6 +196,12 @@ When using the **group-by** prop, you can customize the group header with the `g
 
 <example file="v-data-table/slot-group-header" />
 
+#### Loading slot
+
+The `loading` slot allows you to customize your table's display state when fetching data. In this example we utilize the [v-skeleton-loader](/components/skeleton-loaders) component to display a loading animation.
+
+<example file="v-data-table/slot-loading" />
+
 ## Examples
 
 The following are a collection of examples that demonstrate more advanced and real world use of the `v-data-table` component.
