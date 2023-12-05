@@ -7,7 +7,7 @@ import { propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { useProxiedModel } from '../../composables/proxiedModel'
+import { useProxiedModel } from './proxiedModel'
 
 // Types
 export interface CalendarProps {

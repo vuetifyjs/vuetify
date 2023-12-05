@@ -1,7 +1,7 @@
-/// <reference types="../../../../types/cypress" />
+/// <reference types="../../../types/cypress" />
 
 // Composables
-import { makeCalendarProps, useCalendar } from '../calendar'
+import { makeCalendarProps, useCalendar } from '@/composables/calendar'
 import { useDate } from '@/composables/date'
 
 // Utilities
