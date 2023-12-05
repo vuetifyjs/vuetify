@@ -17,9 +17,13 @@ export interface CalendarProps {
   modelValue: unknown[]
   max: unknown
   min: unknown
-  showAdjacentMonths: boolean
+  showAdjacentMonths?: boolean
+  month: number | string
+  year: number | string
 
   'onUpdate:modelValue': (value: unknown[]) => void
+  'onUpdate:month': (value: number) => void
+  'onUpdate:year': (value: number) => void
 }
 
 // Composables
@@ -27,10 +31,12 @@ export const makeCalendarProps = propsFactory({
   allowedDates: [Array, Function],
   disabled: Boolean,
   displayValue: null as any as PropType<unknown>,
-  modelValue: Array as PropType<unknown[]>,
+  modelValue: Array as PropType<unknown[] | undefined>,
+  month: [Number, String],
   max: null as any as PropType<unknown>,
   min: null as any as PropType<unknown>,
   showAdjacentMonths: Boolean,
+  year: [Number, String],
 }, 'calendar')
 
 export function useCalendar (props: CalendarProps) {
@@ -50,8 +56,33 @@ export function useCalendar (props: CalendarProps) {
     return adapter.date()
   })
 
+  const year = useProxiedModel(
+    props,
+    'year',
+    undefined,
+    v => {
+      const value = v != null ? Number(v) : adapter.getYear(displayValue.value)
+
+      return adapter.startOfYear(adapter.setYear(adapter.date(), value))
+    },
+    v => adapter.getYear(v)
+  )
+
+  const month = useProxiedModel(
+    props,
+    'month',
+    undefined,
+    v => {
+      const value = v != null ? Number(v) : adapter.getMonth(displayValue.value)
+      const date = adapter.setYear(adapter.date(), adapter.getYear(year.value))
+
+      return adapter.setMonth(date, value)
+    },
+    v => adapter.getMonth(v)
+  )
+
   const weeksInMonth = computed(() => {
-    const weeks = adapter.getWeekArray(displayValue.value)
+    const weeks = adapter.getWeekArray(month.value)
 
     const days = weeks.flat()
 
@@ -81,10 +112,10 @@ export function useCalendar (props: CalendarProps) {
 
     return days.map((date, index) => {
       const isoDate = adapter.toISO(date)
-      const isAdjacent = !adapter.isSameMonth(date, displayValue.value)
-      const isStart = adapter.isSameDay(date, adapter.startOfMonth(displayValue.value))
-      const isEnd = adapter.isSameDay(date, adapter.endOfMonth(displayValue.value))
-      const isSame = adapter.isSameDay(date, displayValue.value)
+      const isAdjacent = !adapter.isSameMonth(date, month.value)
+      const isStart = adapter.isSameDay(date, adapter.startOfMonth(month.value))
+      const isEnd = adapter.isSameDay(date, adapter.endOfMonth(month.value))
+      const isSame = adapter.isSameDay(date, month.value)
 
       return {
         date,
@@ -99,6 +130,7 @@ export function useCalendar (props: CalendarProps) {
         isAdjacent,
         isHidden: isAdjacent && !props.showAdjacentMonths,
         isStart,
+        isSelected: model.value.some(value => adapter.isSameDay(date, value)),
         isEnd,
         isSame,
         localized: adapter.format(date, 'dayOfMonth'),
@@ -134,6 +166,7 @@ export function useCalendar (props: CalendarProps) {
   return {
     displayValue,
     daysInMonth,
+    model,
     weeksInMonth,
     weekNumbers,
   }
