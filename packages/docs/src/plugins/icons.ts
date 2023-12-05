@@ -160,6 +160,7 @@ export {
   mdiFolder,
   mdiFolderOpen,
   mdiFolderOutline,
+  mdiFolderZipOutline,
   mdiFoodApple,
   mdiFormatAlignCenter,
   mdiFormatAlignJustify,
