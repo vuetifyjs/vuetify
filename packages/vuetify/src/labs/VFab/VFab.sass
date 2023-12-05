@@ -1,0 +1,59 @@
+@use '../../styles/tools'
+@use '../../styles/settings'
+@use 'sass:math'
+@use 'sass:map'
+@use './variables' as *
+@use './mixins' as *
+
+.v-fab
+  display: inline-flex
+  transition-duration: $fab-transition-duration
+  transition-timing-function: $fab-transition-timing-function
+
+  .v-btn
+    @include tools.elevation(3)
+
+  &--app
+    display: flex
+
+    .v-btn
+      margin: 4px
+
+  &--left,
+  &--right,
+  &--start,
+  &--end
+    flex-direction: column
+
+    .v-btn--fab-center
+      margin-top: auto
+      margin-bottom: auto
+
+    .v-btn--fab-start
+      margin-bottom: auto
+
+    .v-btn--fab-end
+      margin-top: auto
+
+  &--bottom,
+  &--top
+    flex-direction: row
+
+    .v-btn--fab-center
+      margin-inline-start: auto
+      margin-inline-end: auto
+
+    .v-btn--fab-start
+      margin-inline-end: auto
+
+    .v-btn--fab-end
+      margin-inline-start: auto
+
+  &--extended
+    .v-btn
+      // min-height: 56px
+      // min-width: 80px
+      border-radius: 9999px !important
+
+  @at-root
+    @include fab-sizes()
