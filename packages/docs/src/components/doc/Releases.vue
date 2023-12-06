@@ -73,22 +73,21 @@
     >
       <div
         v-if="model?.author"
-        class="d-flex justify-space-between px-4 pt-4"
+        class="d-flex align-center justify-space-between pa-4 bg-grey-lighten-5"
       >
-        <h1 class="text-h4 d-flex align-center">
-          {{ model.name }}
+        <div class="d-flex align-center text-caption">
+          <i18n-t v-if="publishedOn" keypath="published" scope="global">
+            <template #date>
+              <border-chip
+                :text="publishedOn"
+                class="ms-1"
+                prepend-icon="mdi-calendar"
+              />
+            </template>
+          </i18n-t>
+        </div>
 
-          <v-chip
-            v-if="model.tag_name === `v${version}`"
-            :text="t('latest-release')"
-            variant="outlined"
-            class="ms-2"
-            color="success"
-            size="small"
-          />
-        </h1>
-
-        <div class="d-flex align-center flex-1-0-auto">
+        <div class="d-flex align-center">
           <app-tooltip-btn
             v-for="(tooltip, i) in tooltips"
             :key="i"
@@ -104,18 +103,6 @@
             @click="tooltip?.onClick?.()"
           />
         </div>
-      </div>
-
-      <div class="d-flex align-center px-4 py-2 text-caption">
-        <i18n-t v-if="publishedOn" keypath="published" scope="global">
-          <template #date>
-            <border-chip
-              :text="publishedOn"
-              class="ms-1"
-              prepend-icon="mdi-calendar"
-            />
-          </template>
-        </i18n-t>
       </div>
 
       <template v-if="model?.body">
