@@ -107,7 +107,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
               'v-slider--pressed': mousePressed.value,
               'v-slider--disabled': props.disabled,
             },
-            rtlClasses.value,
+            rtlClasses,
             props.class,
           ]}
           style={ props.style }

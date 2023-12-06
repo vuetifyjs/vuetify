@@ -250,7 +250,7 @@ export const VField = genericComponent<new <T>(
             focusClasses.value,
             loaderClasses.value,
             roundedClasses.value,
-            rtlClasses.value,
+            rtlClasses,
             props.class,
           ]}
           style={[

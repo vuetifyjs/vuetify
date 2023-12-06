@@ -32,7 +32,7 @@ export const VContainer = genericComponent()({
         class={[
           'v-container',
           { 'v-container--fluid': props.fluid },
-          rtlClasses.value,
+          rtlClasses,
           props.class,
         ]}
         style={ props.style }

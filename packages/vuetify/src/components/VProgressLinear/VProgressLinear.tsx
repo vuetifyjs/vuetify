@@ -83,7 +83,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     const height = computed(() => parseInt(props.height, 10))
     const normalizedBuffer = computed(() => parseFloat(props.bufferValue) / max.value * 100)
     const normalizedValue = computed(() => parseFloat(progress.value) / max.value * 100)
-    const isReversed = computed(() => isRtl.value !== props.reverse)
+    const isReversed = computed(() => isRtl !== props.reverse)
     const transition = computed(() => props.indeterminate ? 'fade-transition' : 'slide-x-transition')
     const opacity = computed(() => {
       return props.bgOpacity == null
@@ -115,7 +115,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           },
           roundedClasses.value,
           themeClasses.value,
-          rtlClasses.value,
+          rtlClasses,
           props.class,
         ]}
         style={[

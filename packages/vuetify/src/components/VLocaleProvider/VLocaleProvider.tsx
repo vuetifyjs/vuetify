@@ -32,7 +32,7 @@ export const VLocaleProvider = genericComponent()({
       <div
         class={[
           'v-locale-provider',
-          rtlClasses.value,
+          rtlClasses,
           props.class,
         ]}
         style={ props.style }
