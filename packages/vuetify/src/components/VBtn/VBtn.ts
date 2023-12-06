@@ -18,6 +18,7 @@ import Sizeable from '../../mixins/sizeable'
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
 import { breaking } from '../../util/console'
+import { getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -167,7 +168,7 @@ export default baseMixins.extend<options>().extend({
     genContent (): VNode {
       return this.$createElement('span', {
         staticClass: 'v-btn__content',
-      }, this.$slots.default)
+      }, getSlot(this))
     },
     genLoader (): VNode {
       return this.$createElement('span', {
