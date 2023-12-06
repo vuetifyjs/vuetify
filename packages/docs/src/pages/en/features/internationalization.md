@@ -241,6 +241,7 @@ Currently Vuetify provides translations in the following languages:
 - **id** - Indonesian (Indonesian)
 - **it** - Italian (Italiano)
 - **ja** - Japanese (日本語)
+- **km** - Khmer (ខ្មែរ)
 - **ko** - Korean (한국어)
 - **lt** - Lithuanian (lietuvių kalba)
 - **lv** - Latvian (latviešu valoda)
