@@ -84,13 +84,12 @@
               <div class="text-medium-emphasis text-caption">
                 <app-markdown :content="notification.metadata.text" class="mb-n3" />
 
-                <app-link
+                <border-chip
                   :href="notification.metadata.action"
-                  class="border px-2 py-1 rounded"
+                  :text="notification.metadata.action_text"
+                  append-icon="mdi-open-in-new"
                   @click="onClick(notification)"
-                >
-                  {{ notification.metadata.action_text }}
-                </app-link>
+                />
               </div>
 
               <template v-if="!showArchived" #append>
