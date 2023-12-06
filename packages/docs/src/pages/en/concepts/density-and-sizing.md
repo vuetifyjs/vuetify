@@ -24,7 +24,7 @@ This property reduces or increases the vertical and horizontal width a component
 - large
 - x-large
 
-### Example
+**Example**
 
 The following example shows the size for various components:
 
@@ -38,7 +38,7 @@ Reduces vertical padding and sometimes font size. Square/round components like i
 - comfortable
 - compact
 
-### Example
+**Example**
 
 The following example shows the density for various components:
 
@@ -54,8 +54,8 @@ Not all components have a default transition that animates height when changing 
 
 Combine the **size** and **density** props to easily change the overall size of a component.
 
-### Example
+**Example**
 
 The following example shows the size and density for various components:
 
-TODO
+<example file="concepts/density-and-size" preview />

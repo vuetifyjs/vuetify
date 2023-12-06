@@ -102,20 +102,20 @@
 
         <v-avatar
           :size="size"
+          image="https://cdn.vuetifyjs.com/docs/images/avatars/dark.png"
           class="mb-2 me-2"
-          color="surface-variant"
         ></v-avatar>
 
         <v-avatar
           :size="size"
+          image="https://cdn.vuetifyjs.com/docs/images/avatars/blackhole.png"
           class="mb-2 me-2"
-          color="surface-variant"
         ></v-avatar>
 
         <v-avatar
           :size="size"
+          image="https://cdn.vuetifyjs.com/docs/images/avatars/meteor.png"
           class="mb-2 me-2"
-          color="surface-variant"
         ></v-avatar>
       </v-col>
     </v-row>
