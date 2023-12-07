@@ -11,7 +11,7 @@
 
   <v-data-table :loading="loading" :items="items">
     <template v-slot:loading>
-      <v-skeleton-loader type="table-row@6"></v-skeleton-loader>
+      <v-skeleton-loader type="table-row@10"></v-skeleton-loader>
     </template>
   </v-data-table>
 </template>

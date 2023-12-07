@@ -162,7 +162,7 @@ If you are building custom Vuetify components that need to hook into the locale 
 ```
 
 ::: warning
-  The Vuetify locale service only provides a basic translation function `t`, and should really only be used for internal or custom Vuetify components. It is recommended that you use a proper i18n library such as [vue-i18n](https://kazupon.github.io/vue-i18n/) in your own application. Vuetify does provide support for integrating with other libraries.
+  The Vuetify locale service only provides a basic translation function `t`, and should really only be used for internal or custom Vuetify components. It is recommended that you use a proper i18n library such as [vue-i18n](https://vue-i18n.intlify.dev/) in your own application. Vuetify does provide support for integrating with other libraries.
 :::
 
 ## vue-i18n
@@ -174,10 +174,12 @@ import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n'
 import { createI18n, useI18n } from 'vue-i18n'
+import { en, sv } from 'vuetify/locale'
 
 const messages = {
   en: {
     $vuetify: {
+      ...en,
       dataIterator: {
         rowsPerPageText: 'Items per page:',
         pageText: '{0}-{1} of {2}',
@@ -186,6 +188,7 @@ const messages = {
   },
   sv: {
     $vuetify: {
+      ...sv,
       dataIterator: {
         rowsPerPageText: 'Element per sida:',
         pageText: '{0}-{1} av {2}',
@@ -194,7 +197,7 @@ const messages = {
   },
 }
 
-const i18n = new createI18n({
+const i18n = createI18n({
   legacy: false, // Vuetify does not support the legacy mode of vue-i18n
   locale: 'sv',
   fallbackLocale: 'en',

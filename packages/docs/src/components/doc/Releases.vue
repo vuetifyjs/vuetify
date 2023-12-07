@@ -73,25 +73,21 @@
     >
       <div
         v-if="model?.author"
-        class="d-flex justify-space-between"
+        class="d-flex align-center justify-space-between pa-4 bg-grey-lighten-5"
       >
-        <v-list-item v-if="publishedOn" lines="two">
-          <v-list-item-title class="d-flex align-center">
-            <i18n-t keypath="published" scope="global">
-              <template #date>
-                <v-chip
-                  :text="publishedOn"
-                  class="ms-2 text-caption"
-                  density="comfortable"
-                  label
-                  variant="flat"
-                />
-              </template>
-            </i18n-t>
-          </v-list-item-title>
-        </v-list-item>
+        <div class="d-flex align-center text-caption">
+          <i18n-t v-if="publishedOn" keypath="published" scope="global">
+            <template #date>
+              <border-chip
+                :text="publishedOn"
+                class="ms-1"
+                prepend-icon="mdi-calendar"
+              />
+            </template>
+          </i18n-t>
+        </div>
 
-        <div class="pe-3 d-flex align-center flex-1-0-auto">
+        <div class="d-flex align-center">
           <app-tooltip-btn
             v-for="(tooltip, i) in tooltips"
             :key="i"
@@ -118,6 +114,38 @@
             class="releases"
           />
         </div>
+
+        <template v-if="model.zipball_url && model.tarball_url">
+          <v-divider class="my-2" />
+
+          <div class="px-4 pb-4">
+            <h2 class="text-h6 font-weight-bold">Assets</h2>
+
+            <app-sheet>
+              <v-list-item
+                :href="model.zipball_url"
+                target="_blank"
+                prepend-icon="mdi-folder-zip-outline"
+                title="Source code (zip)"
+                slim
+                nav
+                append-icon="mdi-download-box-outline"
+              />
+
+              <v-divider />
+
+              <v-list-item
+                :href="model.tarball_url"
+                target="_blank"
+                prepend-icon="mdi-folder-zip-outline"
+                title="Source code (tar.gz)"
+                slim
+                nav
+                append-icon="mdi-download-box-outline"
+              />
+            </app-sheet>
+          </div>
+        </template>
       </template>
 
       <v-skeleton-loader
@@ -153,7 +181,7 @@
 
   const { smAndUp } = useDisplay()
   const { t } = useI18n()
-  const date = useDate()
+  const adapter = useDate()
   const route = useRoute()
   const router = useRouter()
   const store = useReleasesStore()
@@ -215,7 +243,7 @@
   const publishedOn = computed(() => {
     if (!model.value?.published_at) return undefined
 
-    return date.format(new Date(model.value.published_at), smAndUp.value ? 'fullDateWithWeekday' : 'normalDateWithWeekday')
+    return adapter.format(new Date(model.value.published_at), smAndUp.value ? 'fullDateWithWeekday' : 'normalDateWithWeekday')
   })
 
   onBeforeMount(async () => {
@@ -250,6 +278,29 @@
 
     timeout = setTimeout(() => store.find(val), 500)
   }
+
+  // function timeAgo (string: string): string {
+  //   const date = adapter.toJsDate(adapter.date(string))
+  //   const now = new Date()
+  //   const seconds = Math.floor((now.getTime() - date.getTime()) / 1000)
+
+  //   let interval = seconds / 31536000
+  //   if (interval > 1) return `${Math.floor(interval)} years ago`
+
+  //   interval = seconds / 2592000
+  //   if (interval > 1) return `${Math.floor(interval)} months ago`
+
+  //   interval = seconds / 86400
+  //   if (interval > 1) return `${Math.floor(interval)} days ago`
+
+  //   interval = seconds / 3600
+  //   if (interval > 1) return `${Math.floor(interval)} hours ago`
+
+  //   interval = seconds / 60
+  //   if (interval > 1) return `${Math.floor(interval)} minutes ago`
+
+  //   return `${Math.floor(seconds)} seconds ago`
+  // }
 </script>
 
 <style lang="sass">

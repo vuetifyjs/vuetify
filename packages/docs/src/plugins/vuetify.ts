@@ -24,6 +24,7 @@ import type { IconProps } from 'vuetify'
 export function installVuetify (app: App) {
   const vuetify = createVuetify({
     aliases: {
+      BorderChip: components.VChip,
       PageFeatureChip: components.VChip,
       NewInChip: components.VChip,
       SettingsSwitch: components.VSwitch,
@@ -64,6 +65,17 @@ export function installVuetify (app: App) {
         inset: true,
         trueIcon: 'mdi-check',
         falseIcon: '$close',
+      },
+      BorderChip: {
+        border: true,
+        label: true,
+        size: 'small',
+        variant: 'text',
+
+        VIcon: {
+          color: 'medium-emphasis',
+          size: 'small',
+        },
       },
     },
     locale: {

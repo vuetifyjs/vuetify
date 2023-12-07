@@ -40,12 +40,14 @@
     :items="items"
     :open-on-hover="false"
   >
-    <template #activator="{ props }">
-      <v-avatar
-        v-bind="props"
-        :image="user.avatar || auth.user.picture || ''"
-        class="ms-1 cursor-pointer"
-      />
+    <template #activator="{ props: activatorProps }">
+      <v-btn
+        v-bind="activatorProps"
+        class="ms-1"
+        icon
+      >
+        <v-avatar :image="user.avatar || auth.user.picture || ''" />
+      </v-btn>
     </template>
   </app-menu>
 </template>

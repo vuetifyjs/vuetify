@@ -71,6 +71,14 @@ Theme Selection offers an array of visually appealing, user-friendly UI kits and
 
 <br>
 
+## CodedThemes
+
+Craft powerful web applications and products effortlessly with CodedThemes. Explore our ready-to-use Vue Admin Templates, UI Kits, Themes, and Dashboards to streamline your development process and enhance your digital projects.
+
+<ThemeVendor name="CodedThemes" />
+
+<br>
+
 ::: success
 
 Want to feature your themes here? [Contact us!](mailto:hello@vuetifyjs.com?subject=Theme+affiliation) to learn more about becoming a vendor.

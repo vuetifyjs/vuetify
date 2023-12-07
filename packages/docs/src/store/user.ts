@@ -159,6 +159,8 @@ export const useUserStore = defineStore('user', () => {
         data.composition = 'composition'
       }
       if (!Array.isArray(data.notifications.last.banner)) {
+        data.notifications = data.notifications || {}
+        data.notifications.last = data.notifications.last || {}
         data.notifications.last.banner = []
       }
     }
