@@ -61,15 +61,15 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
   <tbody>
     <tr>
       <td>
-        <a href="https://github.com/sponsors/johnleider" target="_blank">
-          Your Logo Here
+        <a href="https://www.teamwork.com/" target="_blank">
+          <img height="35px" src="https://cdn.cosmicjs.com/4fbb7ab0-612e-11ed-af1a-0faa4245afee-teamwork.png">
         </a>
       </td>
     </tr>
   </tbody>
 </table>
 
-<h3 align="center"><b>Palladium Sponsors</b></h3>
+<h3 align="center"><b>Diamond Sponsors</b></h3>
 
 <table>
   <tbody>
@@ -117,11 +117,6 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
         </a>
       </td>
       <td>
-        <a href="https://netticasinohex.com/">
-          <img height="30px" src="https://cdn.cosmicjs.com/4442ad40-1fdc-11ed-a5bd-ef15a2e468ca-hex-ca-light-sm.png">
-        </a>
-      </td>
-      <td>
         <a href="https://crosswordanswers911.net/">
           <img height="30px" src="https://cdn.cosmicjs.com/ef6ea2a0-7ee1-11ed-8730-d9eebcd39d9f-crossword-answers-911.jpg">
         </a>
@@ -129,6 +124,11 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
       <td style="text-align: center;">
         <a href="https://www.muenchen.de/">
           <img height="40px" src="https://imgix.cosmicjs.com/af2ce530-eaa2-11ed-ba82-019c4666da06-itm-logo.png">
+        </a>
+      </td>
+      <td>
+        <a href="https://justanotherpanel.com/">
+          <img height="30px" src="https://cdn.cosmicjs.com/8d038320-6382-11ee-b975-cb0cfadd93ad-jap.png">
         </a>
       </td>
     </tr>
