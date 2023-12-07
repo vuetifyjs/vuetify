@@ -1,6 +1,6 @@
 <template>
   <app-btn
-    v-if="!auth.user"
+    v-if="!auth.user && !auth.isLoading"
     v-bind="{
       [`${lgAndUp ? 'append-' : ''}icon`]: 'mdi-login',
       text: lgAndUp ? 'login.login' : undefined,
@@ -35,21 +35,26 @@
     </v-dialog>
   </app-btn>
 
-  <app-menu
+  <v-btn
     v-else
-    :items="items"
-    :open-on-hover="false"
+    id="login-btn"
+    :loading="auth.isLoading"
+    class="ms-1"
+    icon
   >
-    <template #activator="{ props: activatorProps }">
-      <v-btn
-        v-bind="activatorProps"
-        class="ms-1"
-        icon
-      >
-        <v-avatar :image="user.avatar || auth.user.picture || ''" />
-      </v-btn>
+    <app-menu
+      :disabled="!auth.user || auth.isLoading"
+      :items="items"
+      :open-on-hover="false"
+      activator="parent"
+    />
+
+    <v-avatar :image="user.avatar || auth.user?.picture || ''" />
+
+    <template #loader>
+      <v-skeleton-loader type="avatar" />
     </template>
-  </app-menu>
+  </v-btn>
 </template>
 
 <script setup lang="ts">
@@ -93,3 +98,14 @@
     },
   ]
 </script>
+
+<style lang="sass">
+  #login-btn
+    .v-skeleton-loader__avatar
+      min-height: 40px
+      height: 40px
+      width: 40px
+      max-height: 40px
+      min-width: 40px
+      max-width: 40px
+</style>
