@@ -69,7 +69,7 @@
   if (IN_BROWSER) {
     let media: MediaQueryList
 
-    auth.verify()
+    if (!auth.user && auth.lastLoginProvider()) auth.verify()
 
     watch(() => user.theme, val => {
       if (val === 'system') {

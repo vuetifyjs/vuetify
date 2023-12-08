@@ -45,6 +45,7 @@ interface Banner {
 
 interface State {
   banners: Banner[]
+  isLoading: boolean
   router: any
   server?: Banner
   banner?: Banner
@@ -53,6 +54,7 @@ interface State {
 export const useBannersStore = defineStore('banners', {
   state: (): State => ({
     banners: [],
+    isLoading: false,
     router: null,
   }),
   actions: {
@@ -61,15 +63,22 @@ export const useBannersStore = defineStore('banners', {
 
       const { bucket } = useCosmic()
 
-      const today = (new Date()).toISOString().substring(0, 10)
+      const adapter = useDate()
+      const today = adapter.startOfDay(adapter.date())
+      const tomorrow = adapter.endOfDay(today)
 
       try {
+        this.isLoading = true
+
         const { objects = [] }: { objects: Banner[] } = (
           await bucket?.objects
             .find({
               type: 'banners',
               'metadata.start_date': {
                 $lte: today,
+              },
+              'metadata.end_date': {
+                $gte: tomorrow,
               },
             })
             .props('status,metadata,slug,title,modified_at')
@@ -78,33 +87,26 @@ export const useBannersStore = defineStore('banners', {
         ) || {}
 
         this.banners = objects
-      } catch (e) {}
+      } catch (e) {
+        console.error(e)
+      } finally {
+        this.isLoading = false
+      }
     },
   },
   getters: {
     banner (state) {
       const name = state.router.currentRoute.value.meta.page
-      const date = useDate()
 
       if (this.server) return this.server
 
       return state.banners.find(({
         metadata: {
           visible,
-          start_date: startDate,
-          end_date: endDate,
           active,
         },
       }) => {
-        const start = date.startOfDay(date.date(startDate))
-        const end = date.endOfDay(date.date(endDate))
-        const today = date.endOfDay(date.date())
-
-        if (
-          !active ||
-          date.isBefore(today, start) ||
-          date.isAfter(today, end)
-        ) return false
+        if (!active) return false
 
         if (visible.key === 'both') return true
         // '' is home
@@ -114,25 +116,13 @@ export const useBannersStore = defineStore('banners', {
       })
     },
     server (state) {
-      const date = useDate()
-
       return state.banners.find(({
         metadata: {
           visible,
-          start_date: startDate,
-          end_date: endDate,
           active,
         },
       }) => {
-        const start = date.startOfDay(date.date(startDate))
-        const end = date.endOfDay(date.date(endDate))
-        const today = date.endOfDay(date.date())
-
-        if (
-          !active ||
-          date.isBefore(today, start) ||
-          date.isAfter(today, end)
-        ) return false
+        if (!active) return false
 
         return visible.key === 'server'
       })
