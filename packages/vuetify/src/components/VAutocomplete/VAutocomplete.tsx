@@ -289,10 +289,6 @@ export const VAutocomplete = genericComponent<new <
       }
     }
 
-    function onInput (e: InputEvent) {
-      search.value = (e.target as HTMLInputElement).value
-    }
-
     function onChange (e: Event) {
       if (matchesSelector(vTextFieldRef.value, ':autofill') || matchesSelector(vTextFieldRef.value, ':-webkit-autofill')) {
         const item = items.value.find(item => item.title === (e.target as HTMLInputElement).value)
@@ -407,13 +403,12 @@ export const VAutocomplete = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          modelValue={ search.value }
+          v-model={ search.value }
           onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
           counterValue={ counterValue.value }
           dirty={ isDirty }
-          onInput={ onInput }
           onChange={ onChange }
           class={[
             'v-autocomplete',
