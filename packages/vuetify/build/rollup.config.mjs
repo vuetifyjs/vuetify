@@ -27,6 +27,10 @@ function fixWindowsPath(path) {
   return path.replace(/^[^:]+:\\/, '\\').replaceAll('\\', '/')
 }
 
+function generateNamesTypeExport(typeName, types) {
+  return `export type ${typeName} =\n${types.map(name => `\t${name}`).join(' |\n')};`
+}
+
 export default [
   {
     input: 'src/entry-bundler.ts',
@@ -161,6 +165,19 @@ export default [
               }])),
               directives,
             }, null, 2),
+          })
+
+          const componentExport = 'ComponentNames'
+          const directiveExport = 'DirectiveNames'
+          const wrapToQuotes = name => `"${name}"`
+          this.emitFile({
+            type: 'asset',
+            fileName: 'components-name.d.ts',
+            source: [
+              generateNamesTypeExport(componentExport, Object.keys(components).map(wrapToQuotes)),
+              generateNamesTypeExport(directiveExport, directives.map(wrapToQuotes)),
+              generateNamesTypeExport('ComponentAndDirectiveNames', [componentExport, directiveExport]),
+            ].join('\n')
           })
 
           this.emitFile({
