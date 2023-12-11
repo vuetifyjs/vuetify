@@ -5,7 +5,7 @@
   "description": "",
   "scripts": {
     "build": "node --loader tsx --no-warnings src/index.ts",
-    "lint": "eslint --ext .ts src -f codeframe --max-warnings 0",
+    "lint": "eslint --ext .ts,.json src -f codeframe --max-warnings 0",
     "lint:fix": "yarn lint --fix"
   },
   "author": "",

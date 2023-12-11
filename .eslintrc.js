@@ -6,7 +6,7 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.eslint.json',
     tsconfigRootDir: __dirname,
-    extraFileExtensions: ['.vue'],
+    extraFileExtensions: ['.vue', '.json'],
     suppressDeprecatedPropertyWarnings: true,
   },
   extends: [
@@ -237,6 +237,17 @@ module.exports = {
       files: '**/*.d.ts',
       rules: {
         'import/no-duplicates': 'off',
+      },
+    },
+    {
+      files: '**/*.json',
+      rules: {
+        quotes: ['error', 'double'],
+        'comma-dangle': ['error', 'never'],
+        'quote-props': ['error', 'always'],
+        'max-len': 'off',
+        'no-unused-expressions': 'off',
+        'no-template-curly-in-string': 'off',
       },
     },
   ],
