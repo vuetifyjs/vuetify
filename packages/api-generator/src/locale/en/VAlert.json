@@ -12,10 +12,10 @@
     "maxWidth": "Sets the maximum width for the component.",
     "minHeight": "Sets the minimum height for the component.",
     "minWidth": "Sets the minimum width for the component.",
+    "modelValue": "Controls whether the component is visible or hidden.",
     "prominent": "Displays a larger vertically centered icon to draw more attention.",
     "tile": "Removes the component's border-radius.",
     "type": "Create a specialized alert that uses a contextual color and has a pre-defined icon.",
-    "model-value": "Controls whether the component is visible or hidden.",
     "width": "Sets the width for the component."
   },
   "slots": {

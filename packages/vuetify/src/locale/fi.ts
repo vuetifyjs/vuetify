@@ -2,6 +2,10 @@ export default {
   badge: 'Infopiste',
   open: 'Open',
   close: 'Sulje',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Ei osumia',
     loadingText: 'Ladataan kohteita...',
@@ -31,8 +35,7 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Select dates',
       header: 'Enter dates',

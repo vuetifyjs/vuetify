@@ -1,27 +1,33 @@
 {
   "props": {
-    "start": "Specify the starting page",
-    "length": "The number of pages",
-    "totalVisible": "Specify the total visible pagination numbers",
-    "firstIcon": "The icon to use for the first button",
-    "prevIcon": "The icon to use for the prev button",
-    "nextIcon": "The icon to use for the next button",
-    "lastIcon": "The icon to use for the last button",
-    "ariaLabel": "Label for the root element",
-    "pageAriaLabel": "Label for each page button",
-    "currentPageAriaLabel": "Label for the currently selected page",
-    "firstAriaLabel": "Label for the go to first button",
-    "previousAriaLabel": "Label for the previous button",
-    "nextAriaLabel": "Label for the next button",
-    "lastAriaLabel": "Label for the go to last button",
-    "color": "Applies specified color to the selected page button - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
-    "ellipsis": "Text to show between page buttons when truncating the list",
-    "showFirstLastPage": "Show buttons for going to first and last page"
+    "ariaLabel": "Label for the root element.",
+    "color": "Applies specified color to the selected page button - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
+    "currentPageAriaLabel": "Label for the currently selected page.",
+    "ellipsis": "Text to show between page buttons when truncating the list.",
+    "firstAriaLabel": "Label for the go to first button.",
+    "firstIcon": "The icon to use for the first button.",
+    "lastAriaLabel": "Label for the go to last button.",
+    "lastIcon": "The icon to use for the last button.",
+    "length": "The number of pages.",
+    "nextAriaLabel": "Label for the next button.",
+    "nextIcon": "The icon to use for the next button.",
+    "pageAriaLabel": "Label for each page button.",
+    "prevIcon": "The icon to use for the prev button.",
+    "previousAriaLabel": "Label for the previous button.",
+    "showFirstLastPage": "Show buttons for going to first and last page.",
+    "start": "Specify the starting page.",
+    "totalVisible": "Specify the total visible pagination numbers."
+  },
+  "slots": {
+    "first": "Define a custom appearance for the first button.",
+    "last": "Define a custom appearance for the last button.",
+    "next": "Define a custom appearance for the next button.",
+    "prev": "Define a custom appearance for the previous button."
   },
   "events": {
-    "first": "Emitted when clicking on go to first button",
-    "previous": "Emitted when clicking on go to previous button",
-    "next": "Emitted when clicking on go to next button",
-    "last": "Emitted when clicking on go to last button"
+    "first": "Emitted when clicking on go to first button.",
+    "last": "Emitted when clicking on go to last button.",
+    "next": "Emitted when clicking on go to next button.",
+    "prev": "Emitted when clicking on go to previous button."
   }
 }

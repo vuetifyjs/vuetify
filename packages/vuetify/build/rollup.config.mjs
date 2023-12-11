@@ -1,5 +1,5 @@
 import { posix as path } from 'path'
-import mkdirp from 'mkdirp'
+import { mkdirp } from 'mkdirp'
 import { writeFile } from 'fs/promises'
 import { fileURLToPath } from 'url'
 

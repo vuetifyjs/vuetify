@@ -15,7 +15,7 @@
     >
       <template #append>
         <v-btn
-          :color="isDisabled ? undefined : 'error'"
+          :color="isDisabled ? undefined : 'primary'"
           :disabled="isDisabled"
           :text="t('reset')"
           variant="outlined"

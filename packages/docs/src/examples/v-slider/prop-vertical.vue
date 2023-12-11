@@ -1,4 +1,3 @@
-
 <template>
   <v-slider
     v-model="value"

@@ -24,7 +24,7 @@
 
   const name = 'v-pagination'
   const model = ref('default')
-  const length = ref(6)
+  const length = ref(4)
   const options = []
 
   const props = computed(() => {

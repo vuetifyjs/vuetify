@@ -59,6 +59,7 @@ export const makeVBtnProps = propsFactory({
   appendIcon: IconValue,
 
   block: Boolean,
+  slim: Boolean,
   stacked: Boolean,
 
   ripple: {
@@ -127,10 +128,11 @@ export const VBtn = genericComponent<VBtnSlots>()({
       return props.variant === 'elevated' && !(props.disabled || props.flat || props.border)
     })
     const valueAttr = computed(() => {
-      if (props.value === undefined) return undefined
+      if (props.value === undefined || typeof props.value === 'symbol') return undefined
 
       return Object(props.value) === props.value
-        ? JSON.stringify(props.value, null, 0) : props.value
+        ? JSON.stringify(props.value, null, 0)
+        : props.value
     })
 
     function onClick (e: MouseEvent) {
@@ -175,6 +177,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
               'v-btn--flat': props.flat,
               'v-btn--icon': !!props.icon,
               'v-btn--loading': props.loading,
+              'v-btn--slim': props.slim,
               'v-btn--stacked': props.stacked,
             },
             themeClasses.value,

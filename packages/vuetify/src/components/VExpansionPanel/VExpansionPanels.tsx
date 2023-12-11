@@ -24,6 +24,7 @@ type Variant = typeof allowedVariants[number]
 
 export const makeVExpansionPanelsProps = propsFactory({
   color: String,
+  static: Boolean,
   variant: {
     type: String as PropType<Variant>,
     default: 'default',
@@ -56,9 +57,8 @@ export const VExpansionPanels = genericComponent()({
     provideDefaults({
       VExpansionPanel: {
         color: toRef(props, 'color'),
-      },
-      VExpansionPanelTitle: {
         readonly: toRef(props, 'readonly'),
+        static: toRef(props, 'static'),
       },
     })
 

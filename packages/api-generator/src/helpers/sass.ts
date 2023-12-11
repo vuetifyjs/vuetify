@@ -4,11 +4,11 @@ function processVariableFile (filePath: string) {
   if (fs.existsSync(filePath)) {
     const varFile = fs.readFileSync(filePath, 'utf8')
     const vars = varFile.replace(/\/\/.+[\r\n]+/g, '').split(/;[\n]*/g)
-    const varValues = {}
+    const varValues: Record<string, { default: string }> = {}
     for (const [index, variable] of vars.entries()) {
       const varArr = variable.split(':')
       if (varArr.length >= 2 && varArr[0].startsWith('$')) {
-        const varName = varArr.shift().trim()
+        const varName = varArr.shift()!.trim()
         const varDefault = (vars[index + 1].startsWith('@'))
           ? vars[index + 1]
           : varArr.join(':')

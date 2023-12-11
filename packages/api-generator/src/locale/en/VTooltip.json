@@ -1,13 +1,20 @@
 {
   "props": {
-    "closeDelay": "Delay (in ms) after which menu closes (when open-on-hover prop is set to true)",
-    "debounce": "Duration before tooltip is shown and hidden when hovered",
-    "internalActivator": "Designates whether to use an internal activator",
-    "openDelay": "Delay (in ms) after which tooltip opens (when `open-on-hover` prop is set to **true**)",
-    "openOnClick": "Designates whether the tooltip should open on activator click",
-    "openOnHover": "Designates whether the tooltip should open on activator hover",
-    "tag": "Specifies a custom tag for the activator wrapper"
+    "closeDelay": "Delay (in ms) after which menu closes (when open-on-hover prop is set to true).",
+    "debounce": "Duration before tooltip is shown and hidden when hovered.",
+    "id": "HTML id attribute of the tooltip overlay. If not set, a globally unique id will be used.",
+    "internalActivator": "Designates whether to use an internal activator.",
+    "openDelay": "Delay (in ms) after which tooltip opens (when `open-on-hover` prop is set to **true**).",
+    "openOnClick": "Designates whether the tooltip should open on activator click.",
+    "openOnHover": "Designates whether the tooltip should open on activator hover.",
+    "tag": "Specifies a custom tag for the activator wrapper."
   },
   "exposed": {
+    "activatorEl": "Ref to the current activator element.",
+    "animateClick": "Function invoked when user clicks outside.",
+    "contentEl": "Ref to the current content element.",
+    "globalTop": "Used by activator to determine a components position in the global stack order.",
+    "localTop": "Used by activator to determine a components position in the local stack order.",
+    "updateLocation": "Function used for locationStrategy positioning."
   }
 }

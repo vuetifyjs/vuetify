@@ -1,10 +1,12 @@
 <!-- eslint-disable vue/attribute-hyphenation  -->
 <template>
+  <!-- possible bug with dialog overflow with scrollable -->
   <v-dialog
     v-model="model"
-    height="700"
+    content-class="overflow-visible align-self-start mt-16"
+    max-height="900"
     scrollable
-    width="500"
+    width="600"
     @after-leave="searchString = ''"
   >
     <template #activator="{ props: activatorProps }">
@@ -33,35 +35,23 @@
       </app-btn>
     </template>
 
-    <v-card height="100%">
-      <v-toolbar color="primary" class="ps-3 pe-4">
-        <v-icon icon="$vuetify" size="x-large" />
-
-        <v-toolbar-title class="ms-2">
-          {{ t('search.label') }} Vuetify
-        </v-toolbar-title>
-
-        <v-spacer />
-
-        <v-btn
-          class="me-n2"
-          icon="mdi-close"
-          size="x-small"
-          variant="text"
-          @click="model = false"
-        />
-      </v-toolbar>
-
+    <v-card>
       <app-text-field
         v-model="searchString"
         :placeholder="`${t('search.looking') }...`"
         autofocus
-        class="flex-grow-0"
+        class="flex-grow-0 mb-4"
         variant="filled"
-      />
+      >
+        <template #append-inner>
+          <app-btn border size="small">
+            <span class="text-caption text-disabled">{{ t('esc') }}</span>
+          </app-btn>
+        </template>
+      </app-text-field>
 
-      <v-card-text class="pa-4">
-        <div v-if="!searchString" class="mt-16 pt-16 text-center">
+      <v-card-text :class="['px-4 py-0 d-flex justify-center', searchString ? 'align-start' : 'align-center']">
+        <div v-if="!searchString" class="text-center">
           <v-icon
             class="mb-6 mx-auto text-disabled"
             icon="mdi-text-box-search-outline"
@@ -77,9 +67,10 @@
 
         <ais-instant-search
           v-else
+          class="flex-grow-1"
           :search-client="searchClient"
-          :search-function="searchFunction"
           index-name="vuetifyjs-v3"
+          @state-change="searchFunction"
         >
           <ais-configure
             :facetFilters="[`lang:${locale}`]"
@@ -92,6 +83,8 @@
           </ais-hits>
         </ais-instant-search>
       </v-card-text>
+
+      <v-divider class="my-4" />
 
       <AisPoweredBy class="ms-auto me-4 mb-2" />
     </v-card>

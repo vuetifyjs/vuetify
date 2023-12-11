@@ -2,7 +2,7 @@
   <v-navigation-drawer
     v-if="!route.meta.fluid"
     id="app-toc"
-    v-model="app.toc"
+    v-model="tocDrawer"
     color="background"
     floating
     location="right"
@@ -29,10 +29,9 @@
       >
         <li
           :class="[
-            'ps-3 text-body-2 py-1 font-weight-regular',
+            'ps-3 text-medium-emphasis text-body-2 py-1 font-weight-regular',
             {
-              'text-primary router-link-active': route.hash === to,
-              'text-medium-emphasis': route.hash !== to,
+              'text-primary router-link-active': activeItem === to.slice(1),
               'ps-6': level === 3,
               'ps-9': level === 4,
               'ps-12': level === 5,
@@ -104,16 +103,16 @@
             />
           </v-col>
 
-          <!-- <v-col cols="12">
+          <v-col cols="12">
             <a
-              href="https://themeselection.com/item/category/vuejs-admin-templates/?utm_source=vuetify&utm_medium=banner&utm_campaign=category_page&utm_id=12"
+              href="https://adminmart.com/product/modernize-vuetify-vue-admin-dashboard/?ref=7"
               target="_blank"
               rel="noopener noreferrer sponsored"
-              @click="onClickPromotion"
+              @click="gtagClick('toc', 'promotion', 'adminmart')"
             >
-              <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/theme-selection-dashboard-2023/vuetify-ad-banner.png" />
+              <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/wp-nov-23/wp-nov-23.png" />
             </a>
-          </v-col> -->
+          </v-col>
         </v-row>
       </v-container>
     </template>
@@ -125,14 +124,15 @@
   import SponsorCard from '@/components/sponsor/Card.vue'
 
   // Composables
-  import { RouteLocation, Router, useRoute, useRouter } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
+  import { storeToRefs } from 'pinia'
   import { useAppStore } from '@/store/app'
-  // import { useGtag } from 'vue-gtag-next'
   import { useSponsorsStore } from '@/store/sponsors'
   import { useTheme } from 'vuetify'
 
   // Utilities
-  import { computed, ref } from 'vue'
+  import { computed, nextTick, onMounted, onScopeDispose, ref, watch } from 'vue'
+  import { gtagClick } from '@/util/analytics'
   import { rpath } from '@/util/routes'
 
   type TocItem = {
@@ -141,123 +141,77 @@
     level: number;
   }
 
-  const app = useAppStore()
-
-  function useUpdateHashOnScroll (route: RouteLocation, router: Router) {
-    const scrolling = ref(false)
-    let offsets: number[] = []
-    let timeout: any = 0
-
-    function calculateOffsets () {
-      const offsets = []
-      const toc = route.meta.toc as any[]
-
-      for (const item of toc.slice().reverse()) {
-        const section = document.getElementById(item.to.slice(1))
-
-        if (!section) continue
-
-        offsets.push(section.offsetTop - 48)
-      }
-
-      return offsets
-    }
-
-    async function findActiveHash () {
-      const toc = route.meta.toc as any[]
-      // if (this.$vuetify.breakpoint.mobile) return
-
-      const currentOffset = (
-        window.pageYOffset ||
-        document.documentElement.offsetTop ||
-        0
-      )
-
-      // If we are at the top of the page
-      // reset the offset
-      if (currentOffset === 0) {
-        if (route.hash) {
-          router.replace({ path: route.path })
-        }
-
-        return
-      }
-
-      if (
-        offsets.length !== toc.length
-      ) {
-        offsets = calculateOffsets()
-      }
-
-      const index = offsets.findIndex(offset => {
-        return offset < currentOffset
-      })
-
-      let tindex = index > -1
-        ? offsets.length - 1 - index
-        : 0
-
-      if (currentOffset + window.innerHeight === document.documentElement.offsetHeight) {
-        tindex = toc.length - 1
-      }
-
-      const hash = toc[tindex].to
-
-      if (hash === route.hash) return
-
-      scrolling.value = true
-
-      await router.replace({
-        path: route.path,
-        hash,
-      })
-
-      scrolling.value = false
-    }
-
-    function onScroll () {
-      const toc = route.meta.toc as any[]
-
-      clearTimeout(timeout)
-
-      if (
-        scrolling.value ||
-        !toc.length
-      ) return
-
-      timeout = setTimeout(findActiveHash, 17)
-    }
-
-    return { onScroll, scrolling }
-  }
+  const { toc: tocDrawer, scrolling } = storeToRefs(useAppStore())
 
   const route = useRoute()
   const router = useRouter()
   const theme = useTheme()
-  // const { event } = useGtag()
 
-  const { scrolling } = useUpdateHashOnScroll(route, router)
+  const routeToc = computed(() => route.meta.toc as TocItem[] | undefined)
+
+  const activeStack = [] as string[]
+  const activeItem = ref('')
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        activeStack.push(entry.target.id)
+      } else if (activeStack.includes(entry.target.id)) {
+        activeStack.splice(activeStack.indexOf(entry.target.id), 1)
+      }
+    })
+    activeItem.value = activeStack.at(-1) || activeItem.value || routeToc.value?.[0]?.to.slice(1) || ''
+  }, { rootMargin: '-10% 0px -75%' })
+
+  async function observeToc () {
+    scrolling.value = false
+    activeStack.length = 0
+    activeItem.value = ''
+    observer.disconnect()
+    await nextTick()
+    routeToc.value?.forEach(v => {
+      const el = document.querySelector(v.to)
+      el && observer.observe(el)
+    })
+  }
+
+  watch(routeToc, observeToc)
+  onMounted(() => {
+    observeToc()
+  })
+  onScopeDispose(() => {
+    observer.disconnect()
+  })
+
+  let internalScrolling = false
+  let timeout = -1
+  watch(activeItem, async val => {
+    if (!val || internalScrolling) return
+
+    scrolling.value = true
+
+    if (val === routeToc.value?.[0]?.to.slice(1) && route.hash) {
+      router.replace({ path: route.path })
+    } else {
+      const toc = routeToc.value?.find(v => v.to.slice(1) === val)
+      if (toc) {
+        await router.replace({ path: route.path, hash: toc.to })
+      }
+    }
+    clearTimeout(timeout)
+    timeout = window.setTimeout(() => {
+      scrolling.value = false
+    }, 200)
+  })
 
   async function onClick (hash: string) {
     if (route.hash === hash) return
 
-    scrolling.value = true
-
-    router.replace({ path: route.path, hash })
-
-    // await this.$vuetify.goTo(hash)
-    // await wait(200)
-
-    scrolling.value = false
+    internalScrolling = true
+    await router.replace({ path: route.path, hash })
+    setTimeout(() => {
+      internalScrolling = false
+    }, 1000)
   }
-
-  // function onClickPromotion () {
-  //   event('click', {
-  //     event_category: 'vuetify-toc',
-  //     event_label: 'promotion',
-  //     value: 'theme-selection',
-  //   })
-  // }
 
   const sponsorStore = useSponsorsStore()
 
@@ -282,17 +236,13 @@
       list-style-type: none
 
     li
-      border-left: 2px solid #E5E5E5
+      border-left: 2px solid rgb(var(--v-theme-on-surface-variant))
 
       &.router-link-active
         border-left-color: currentColor
 
     .v-toc-link
       color: inherit
-
-    &.theme--dark
-      li:not(.router-link-active)
-        border-left-color: rgba(255, 255, 255, 0.5)
 
     :deep(.v-navigation-drawer__content)
       height: auto

@@ -8,11 +8,18 @@ related:
   - /components/grids
   - /components/buttons
   - /components/toolbars
+features:
+  figma: true
+  label: 'C: VFooter'
+  report: true
+  github: /components/VFooter/
 ---
 
 # Footers
 
 The `v-footer` component is used for displaying general information that a user might want to access from any page within your site.
+
+<page-features />
 
 ## Usage
 

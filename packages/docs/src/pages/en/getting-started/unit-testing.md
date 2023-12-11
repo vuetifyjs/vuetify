@@ -33,10 +33,12 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   test: {
-    global: true,
+    globals: true,
     environment: 'jsdom',
-    deps: {
-      inline: ['vuetify'],
+    server: {
+      deps: {
+        inline: ['vuetify'],
+      },
     },
   },
 })
@@ -58,6 +60,10 @@ npm install @vue/test-utils vitest resize-observer-polyfill --save-dev
 
 ```bash [pnpm]
 pnpm add @vue/test-utils vitest resize-observer-polyfill --save-dev
+```
+
+```bash [bun]
+bun add @vue/test-utils vitest resize-observer-polyfill --dev
 ```
 
 :::

@@ -205,8 +205,8 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [{ modelValue: _, ...inputProps }] = VInput.filterProps(props)
-      const [fieldProps] = filterFieldProps(props)
+      const { modelValue: _, ...inputProps } = VInput.filterProps(props)
+      const fieldProps = filterFieldProps(props)
 
       return (
         <VInput
@@ -221,7 +221,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
               'v-text-field--suffixed': props.suffix,
               'v-textarea--auto-grow': props.autoGrow,
               'v-textarea--no-resize': props.noResize || props.autoGrow,
-              'v-text-field--plain-underlined': isPlainOrUnderlined.value,
+              'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
             props.class,
           ]}
@@ -234,6 +234,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isDirty,
               isReadonly,
@@ -250,6 +251,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
                 { ...fieldProps }
+                id={ id.value }
                 active={ isActive.value || isDirty.value }
                 centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
                 dirty={ isDirty.value || props.dirty }

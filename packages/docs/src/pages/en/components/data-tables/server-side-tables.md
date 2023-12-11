@@ -16,20 +16,6 @@ Server-side Data tables are used for showing data coming from an API.
 
 <entry />
 
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VDataTableServer } from 'vuetify/labs/VDataTable'
-
-export default createVuetify({
-  components: {
-    VDataTableServer,
-  },
-})
-```
-
 ## Examples
 
 ### Server-side paginate and sort

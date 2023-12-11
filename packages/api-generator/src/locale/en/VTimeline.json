@@ -1,9 +1,14 @@
 {
   "props": {
-    "direction": "Display timeline in a **vertical** or **horizontal** direction",
-    "mirror": "Mirror the before/after ordering of timeline items",
-    "singleSide": "Display all timeline items on one side of the timeline, either **before** or **after**",
-    "truncateLine": "Truncate timeline directly at the **start** or **end** of the line, or on **both** ends",
-    "linePosition": "Shift the position of the line. By default the line will evenly split items before/after."
+    "align": "Places the timeline dot at the top or center of the timeline item.",
+    "direction": "Display timeline in a **vertical** or **horizontal** direction.",
+    "justify": "Places timeline line at the center or automatically on the left or right side.",
+    "lineColor": "Color of the timeline line.",
+    "lineInset": "Specifies the distance between the line and the dot of timeline items.",
+    "linePosition": "Shift the position of the line. By default the line will evenly split items before/after.",
+    "lineThickness": "Thickness of the timeline line.",
+    "mirror": "Mirror the before/after ordering of timeline items.",
+    "side": "Display all timeline items on one side of the timeline, either **before** or **after**.",
+    "truncateLine": "Truncate timeline directly at the **start** or **end** of the line, or on **both** ends."
   }
 }
