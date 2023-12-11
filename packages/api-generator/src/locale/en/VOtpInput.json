@@ -1,23 +1,18 @@
 {
   "props": {
-    "autofocus": "Enables autofocus.",
-    "dark": "Applies the dark theme variant to the component. This will default the components color to _white_ unless you've configured your [application theme](/customization/theme) to **dark** or if you are using the **color** prop on the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
-    "divider": "Adds a divider text between each field.",
-    "focusAll": "Shows all fields as focused when one of them is focused.",
+    "autofocus": "Automatically focuses the first input on page load",
+    "divider": "Specifies the dividing character between items.",
+    "focusAll": "Puts all inputs into a focus state when any are focused",
     "length": "The OTP field's length.",
-    "placeholder": "Sets the placeholder for all fields.",
-    "plain": "Outlined style applied by default to the input, set to `true` to apply plain style.",
+    "placeholder": "Sets the input’s placeholder text.",
     "type": "Supported types: `text`, `password`, `number`."
   },
   "events": {
-    "change": "Emitted when the input is changed by user interaction.",
-    "finish": "Emitted when the input is filled completely and cursor is blurred.",
-    "focus": "Emitted when component is focused.",
-    "keydown": "Emitted when **any** key is pressed."
+    "finish": "Emitted when the input is filled completely and cursor is blurred."
   },
   "exposed": {
-    "blur": "Blurs the input.",
-    "focus": "Focuses the input.",
-    "reset": "Resets the input's value."
+    "blur": "Forces the input to lose focus.",
+    "focus": "Focuses the first field in the input",
+    "reset": "Reset's the input model to an empty array"
   }
 }

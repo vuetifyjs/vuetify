@@ -1,101 +1,211 @@
-// Composables
-import { useAuth0 } from '@/plugins/auth'
-
 // Stores
 import { useUserStore } from './user'
+import { useAppStore } from './app'
 
 // Utilities
 import { defineStore } from 'pinia'
-import { ref, shallowRef } from 'vue'
+import { computed, shallowRef, watch } from 'vue'
+
+interface User {
+  id: string
+  isAdmin: boolean
+  name: string
+  picture: string | null
+  settings: Record<string, any> | null
+  identities: {
+    id: string
+    emails: string[]
+    provider: string
+    userId: string
+    userHandle: string
+    primary: boolean
+  }[]
+  sponsorships: {
+    id: string
+    platform: string
+    target: string
+    tierName: string
+    amount: number
+    isActive: boolean
+    firstPayment: Date
+    lastPayment: Date
+  }[]
+}
+
+const url = import.meta.env.VITE_API_SERVER_URL
 
 export const useAuthStore = defineStore('auth', () => {
-  const auth = useAuth0()
-  const user = useUserStore()
+  const app = useAppStore()
+  const userStore = useUserStore()
+  const user = shallowRef<User | null>(null)
+  const isLoading = shallowRef(false)
 
-  const isUpdating = shallowRef(false)
-  const admin = shallowRef(false)
-  const sponsor = ref(false)
-  const url = import.meta.env.VITE_COSMIC_USER_URL
+  const isSubscriber = computed(() => (
+    !url ||
+    user.value?.isAdmin ||
+    user.value?.sponsorships.some(s => s.isActive)
+  ))
+  const isOneSubscriber = computed(() => (
+    user.value?.sponsorships.some(s => s.tierName === 'Vuetify One' && s.isActive)
+  ))
 
-  user.$subscribe(() => {
-    updateUser()
+  let externalUpdate = false
+  watch(user, user => {
+    if (!user?.settings) return
+    const local = localStorage.getItem('vuetify@user') || '{}'
+    if (JSON.stringify(user.settings, null, 2) === local) return
+    externalUpdate = true
+    Object.assign(userStore, user.settings)
   })
 
-  async function updateUser () {
-    const local = localStorage.getItem('vuetify@user')
-    if (!auth?.user?.value?.sub || !url || !local || isUpdating.value) return
+  userStore.$subscribe(() => {
+    if (!externalUpdate) {
+      pushSettings()
+    }
+    externalUpdate = false
+  })
 
-    const settings = JSON.parse(local)
+  async function verify (force = false) {
+    if (verify.promise) return verify.promise
 
-    if (!settings.syncSettings) return
+    isLoading.value = true
 
-    const token = await auth.getAccessTokenSilently({ detailedResponse: true })
-
-    isUpdating.value = true
-
-    fetch(`${url}/api/user/update?sub=${auth?.user.value.sub}`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token.id_token}`,
+    verify.promise = fetch(`${url}/auth/verify`, {
+      credentials: 'include',
+      headers: force ? {
+        'Cache-Control': 'no-cache',
+      } : undefined,
+    }).then(
+      async res => {
+        if (res.ok) {
+          user.value = (await res.json()).user
+        } else if (res.status === 401) {
+          user.value = null
+        } else {
+          app.snackbar(res.statusText, { color: 'error' })
+          console.error(res.statusText)
+        }
       },
-      body: JSON.stringify({
-        settings,
-      }),
-    }).finally(() => {
-      isUpdating.value = false
+      () => {},
+    ).then(() => {
+      isLoading.value = false
+      verify.promise = null
     })
   }
+  verify.promise = null as Promise<void> | null
 
-  async function getUser () {
-    if (!auth?.user?.value?.sub || !user.syncSettings || !url) return
-
-    const token = await auth.getAccessTokenSilently({ detailedResponse: true })
-
+  async function pushSettings () {
     try {
-      const { object } = await fetch(`${url}/api/user/get?sub=${auth?.user.value.sub}`, {
+      await fetch(`${url}/user/settings`, {
+        method: 'POST',
+        credentials: 'include',
         headers: {
-          Authorization: `Bearer ${token.id_token}`,
+          'Content-Type': 'application/json',
         },
-      }).then(res => res.json())
-
-      const settings = object.metadata.settings
-      const local = localStorage.getItem('vuetify@user') || '{}'
-
-      admin.value = object.metadata.admin
-      sponsor.value = object.metadata.sponsor
-
-      // Local already matches remote
-      if (!settings || JSON.stringify(settings, null, 2) === local) return
-
-      Object.assign(user, settings)
-    } catch (e) {
-      updateUser()
+        body: JSON.stringify({
+          settings: userStore.$state,
+        }),
+      })
+    } catch (err: any) {
+      app.snackbar(err.message, { color: 'error' })
+      console.error(err)
     }
   }
 
-  async function verifyUserSponsorship () {
-    if (!auth?.user?.value?.sub || !url) return
+  async function login (provider: 'github' | 'discord' = 'github') {
+    isLoading.value = true
+    const redirectUrl = `${url}/auth/${provider}/redirect`
 
-    const token = await auth.getAccessTokenSilently({ detailedResponse: true })
+    const width = 400
+    const height = 600
+    const left = window.screenX + (window.innerWidth - width) / 2
+    const top = window.screenY + (window.innerHeight - height) / 2
 
+    const ctx = window.open(
+      '',
+      'vuetify:authorize:popup',
+      `popup,left=${left},top=${top},width=${width},height=${height},resizable`
+    )
+
+    if (!ctx) {
+      app.snackbar('Failed to open popup', { color: 'error' })
+      console.error('Failed to open popup')
+      return
+    }
+
+    ctx.location.href = redirectUrl
+
+    let interval = -1
+    let timeout = -1
+    function messageHandler (e: MessageEvent) {
+      if (e.origin !== url) return
+      if (e.data?.type !== 'auth-response') return
+      if (e.data.status === 'success') {
+        if (!user.value) {
+          window.localStorage.setItem('vuetify@lastLoginProvider', provider)
+        }
+        user.value = e.data.body.user
+      } else {
+        app.snackbar(e.data.message, { color: 'error' })
+        console.error(e.data.message)
+      }
+
+      cleanup()
+    }
+
+    function cleanup () {
+      window.removeEventListener('message', messageHandler)
+      window.clearInterval(interval)
+      window.clearTimeout(timeout)
+      ctx?.close()
+      isLoading.value = false
+    }
+
+    window.addEventListener('message', messageHandler)
+    interval = window.setInterval(() => {
+      if (!ctx || ctx.closed) {
+        console.error('Auth popup closed')
+        cleanup()
+      } else {
+        ctx.postMessage({ type: 'auth-request' }, '*')
+      }
+    }, 1000)
+    timeout = window.setTimeout(() => {
+      cleanup()
+      app.snackbar('Auth timed out', { color: 'warning' })
+      console.error('Auth timed out')
+    }, 120 * 1000)
+  }
+
+  async function logout () {
+    isLoading.value = true
     try {
-      const res = await fetch(`${url}/api/sponsors/verify?user=${auth?.user.value.nickname}&sub=${auth?.user.value.sub}`, {
-        headers: {
-          Authorization: `Bearer ${token.id_token}`,
-        },
-      }).then(res => res.json())
-
-      sponsor.value = res.sponsor
-    } catch (e) {
-      //
+      await fetch(`${url}/auth/logout`, {
+        method: 'POST',
+        credentials: 'include',
+      })
+      await verify(true)
+      user.value = null
+    } catch (err: any) {
+      app.snackbar(err.message, { color: 'error' })
+      console.error(err)
+    } finally {
+      isLoading.value = false
     }
   }
+
+  const lastLoginProvider = () => (
+    localStorage.getItem('vuetify@lastLoginProvider')
+  )
 
   return {
-    admin,
-    sponsor,
-    isUpdating,
-    getUser,
-    verifyUserSponsorship,
+    user,
+    isLoading,
+    verify,
+    login,
+    logout,
+    isSubscriber,
+    isOneSubscriber,
+    lastLoginProvider,
   }
 })

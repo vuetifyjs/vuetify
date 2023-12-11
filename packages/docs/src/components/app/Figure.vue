@@ -2,7 +2,6 @@
   <figure>
     <v-img
       class="rounded bg-surface"
-      cover
       v-bind="$attrs"
     />
 

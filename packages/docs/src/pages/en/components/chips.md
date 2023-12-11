@@ -40,9 +40,13 @@ Chips come in the following variations: closeable, filter, outlined, pill. The d
 
 <api-inline hide-links />
 
-## Examples
+## Guide
+
+The `v-chip` component is used to convey small pieces of information. Using the `close` property, the chip becomes interactive, allowing user interaction. This component is used by the [v-chip-group](/components/chip-groups) for advanced selection options.
 
 ### Props
+
+Similar to other components such as [v-btn](/components/buttons/) and [v-list](/components/lists/), the `v-chip` component has a large selection of props for customizing the appearance.
 
 #### Closable
 
@@ -50,23 +54,34 @@ Closable chips can be controlled with a v-model. You can also listen to the `cli
 
 <example file="v-chip/prop-closable" />
 
-#### Colored
+#### Color and variants
 
 Any color from the Material Design palette can be used to change a chips color.
 
 <example file="v-chip/prop-colored" />
+
+The **variant** prop gives you easy access to several different button styles. Available variants are: **elevated**, **flat**, **tonal** (default), **outlined**, **text**, and **plain**.
+
+| Value        | Example                                                  | Description                                                     |
+|--------------|----------------------------------------------------------|-----------------------------------------------------------------|
+| **elevated** | <v-chip color="primary" variant="elevated">Chip</v-chip> | Elevates the chip with a shadow                               |
+| **flat**     | <v-chip color="primary" variant="flat">Chip</v-chip>     | Removes chip shadow                                           |
+| **tonal**    | <v-chip color="primary" variant="tonal">Chip</v-chip>    | Background color is a lowered opacity of the current text color |
+| **outlined** | <v-chip color="primary" variant="outlined">Chip</v-chip> | Applies a thin border with the current text color               |
+| **text**     | <v-chip color="primary" variant="text">Chip</v-chip>     | Removes the background and removes shadow                       |
+| **plain**    | <v-chip color="primary" variant="plain">Chip</v-chip>    | Removes the background and lowers the opacity until hovered     |
+
+#### Size and density
+
+Chips can have various sizes from `x-small` to `x-large`. `density` is used to adjust the vertical spacing without affecting width or font size.
+
+<example file="v-chip/prop-sizes" />
 
 #### Draggable
 
 `draggable` `v-chip` component can be dragged by mouse.
 
 <example file="v-chip/prop-draggable" />
-
-<!-- #### Filter
-
-`v-chip` component has `filter` option which shows an additional icon to you if chip is active. It can be customized using `filter-icon`.
-
-<example file="v-chip/prop-filter" /> -->
 
 #### Label
 
@@ -86,20 +101,6 @@ Outlined chips inherit their border color from the current text color.
 
 <example file="v-chip/prop-outlined" />
 
-#### Sizes
-
-`v-chip` component can have various sizes from `x-small` to `x-large`.
-
-<example file="v-chip/prop-sizes" />
-
-### Events
-
-#### Action chips
-
-Chips can be used as actionable items. Provided with a _click_ event, the chip becomes interactive and can invoke methods.
-
-<example file="v-chip/event-action-chips" />
-
 ### Slots
 
 #### Icon
@@ -108,7 +109,15 @@ Chips can use text or any icon available in the Material Icons font library.
 
 <example file="v-chip/slot-icon" />
 
-### Misc
+## Examples
+
+The following are a collection of examples that demonstrate more advanced and real world use of the `v-chip` component.
+
+### Action chips
+
+Chips can be used as actionable items. Provided with a _click_ event, the chip becomes interactive and can invoke methods.
+
+<example file="v-chip/event-action-chips" />
 
 #### Custom list
 

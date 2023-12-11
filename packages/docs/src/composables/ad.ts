@@ -10,6 +10,14 @@ import { computed } from 'vue'
 import { kebabCase } from 'lodash-es'
 import { leadingSlash, trailingSlash } from '@/util/routes'
 
+interface AdProps {
+  medium: string
+  slug?: string
+  type?: string
+  compact?: boolean
+  permanent?: boolean
+}
+
 export const createAdProps = () => ({
   medium: {
     type: String,
@@ -18,9 +26,10 @@ export const createAdProps = () => ({
   slug: String,
   type: String,
   compact: Boolean,
+  permanent: Boolean,
 })
 
-export const useAd = (props: { medium: string, slug?: string, type?: string, compact?: boolean }) => {
+export const useAd = (props: AdProps) => {
   const { locale } = useI18n()
   const store = useAdsStore()
   const user = useUserStore()
@@ -30,7 +39,7 @@ export const useAd = (props: { medium: string, slug?: string, type?: string, com
   })
 
   const ad = computed(() => {
-    if (user.disableAds) return undefined
+    if (user.disableAds && !props.permanent) return undefined
     if (props.slug) return store.ads?.find(ad => ad.slug === props.slug)
 
     return ads.value[Math.floor(Math.random() * ads.value.length)]

@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Bottom sheets
   title: Bottom sheet component
@@ -10,7 +11,7 @@ related:
   - /components/menus/
 features:
   label: 'C: VBottomSheet'
-  github: /labs/VBottomSheet/
+  github: /components/VBottomSheet/
   report: true
   spec: https://m2.material.io/components/sheets-bottom
 ---
@@ -24,15 +25,7 @@ The bottom sheet is a modified `v-dialog` that slides from the bottom of the scr
 <page-features />
 
 ::: success
-
-This component is feature complete and is pending release in [v3.4.0 (Blackguard)](/introduction/roadmap/#v3-4-blackguard)
-
-:::
-
-::: warning
-
-This feature requires [v3.3.0 (Icarus)](/getting-started/release-notes/?version=v3.3.0)
-
+This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
 :::
 
 ## Usage
@@ -42,20 +35,6 @@ Whereas a bottom navigation component is for buttons and specific application le
 <usage name="v-bottom-sheet" />
 
 <entry />
-
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VBottomSheet } from 'vuetify/labs/VBottomSheet'
-
-export default createVuetify({
-  components: {
-    VBottomSheet,
-  },
-})
-```
 
 ## API
 

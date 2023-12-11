@@ -31,7 +31,6 @@
       density="compact"
     >
       <v-btn
-        :disabled="showArchived ? unread.length < 1 : read.length < 1"
         class="px-2 ms-n1 text-none font-weight-regular"
         size="small"
         variant="text"
@@ -85,13 +84,12 @@
               <div class="text-medium-emphasis text-caption">
                 <app-markdown :content="notification.metadata.text" class="mb-n3" />
 
-                <app-link
+                <border-chip
                   :href="notification.metadata.action"
-                  class="border px-2 py-1 rounded"
+                  :text="notification.metadata.action_text"
+                  append-icon="mdi-open-in-new"
                   @click="onClick(notification)"
-                >
-                  {{ notification.metadata.action_text }}
-                </app-link>
+                />
               </div>
 
               <template v-if="!showArchived" #append>
@@ -117,8 +115,7 @@
 
   // Composables
   import { useCosmic } from '@/composables/cosmic'
-  import { useDate } from 'vuetify/labs/date'
-  import { useDisplay } from 'vuetify'
+  import { useDate, useDisplay } from 'vuetify'
   import { useGtag } from 'vue-gtag-next'
   import { useI18n } from 'vue-i18n'
 
@@ -174,7 +171,7 @@
   const width = computed(() => mobile.value ? 420 : 520)
 
   function format (str: string) {
-    return date.format(new Date(str), 'normalDateWithWeekday')
+    return date.format(new Date(str), 'fullDateWithWeekday')
   }
   function onClick (notification: Notification) {
     toggle(notification)

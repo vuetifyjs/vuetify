@@ -48,9 +48,19 @@
       appendIcon: 'mdi-lightbulb-on-outline',
     },
     {
+      title: t('icons'),
+      to: rpath('/features/icon-fonts/#mdi-icon-search'),
+      appendIcon: 'mdi-emoticon-outline',
+    },
+    {
       title: t('labs'),
       to: rpath('/labs/introduction/'),
       appendIcon: 'mdi-beaker-outline',
+    },
+    {
+      title: t('licensing'),
+      to: rpath('/about/licensing/'),
+      appendIcon: 'mdi-file-document-outline',
     },
     {
       title: t('roadmap'),

@@ -15,6 +15,7 @@ import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { GenericProps } from '@/util'
 
 export const VChipGroupSymbol = Symbol.for('vuetify:v-chip-group')
 
@@ -43,7 +44,13 @@ type VChipGroupSlots = {
   }
 }
 
-export const VChipGroup = genericComponent<VChipGroupSlots>()({
+export const VChipGroup = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: VChipGroupSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VChipGroup',
 
   props: makeVChipGroupProps(),

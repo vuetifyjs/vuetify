@@ -18,11 +18,13 @@ import * as mdiSvg from './icons'
 import { en, sv } from 'vuetify/locale'
 
 // Types
-import type { ViteSSGContext } from '@vuetify/vite-ssg'
+import type { App } from 'vue'
+import type { IconProps } from 'vuetify'
 
-export function installVuetify ({ app }: ViteSSGContext) {
+export function installVuetify (app: App) {
   const vuetify = createVuetify({
     aliases: {
+      BorderChip: components.VChip,
       PageFeatureChip: components.VChip,
       NewInChip: components.VChip,
       SettingsSwitch: components.VSwitch,
@@ -64,6 +66,17 @@ export function installVuetify ({ app }: ViteSSGContext) {
         trueIcon: 'mdi-check',
         falseIcon: '$close',
       },
+      BorderChip: {
+        border: true,
+        label: true,
+        size: 'small',
+        variant: 'text',
+
+        VIcon: {
+          color: 'medium-emphasis',
+          size: 'small',
+        },
+      },
     },
     locale: {
       locale: 'en',
@@ -79,7 +92,7 @@ export function installVuetify ({ app }: ViteSSGContext) {
         md,
         mdiSvg: mdi,
         mdi: {
-          component: props => {
+          component: (props: IconProps) => {
             const icon = mdiSvg[camelize(props.icon as string) as keyof typeof mdiSvg]
             return h(components.VSvgIcon, { ...props, icon })
           },
@@ -99,6 +112,7 @@ export function installVuetify ({ app }: ViteSSGContext) {
       themes: {
         light: {
           colors: {
+            'surface-variant-alt': '#dedede',
             primary: '#1867c0',
             secondary: '#5CBBF6',
             tertiary: '#E57373',
@@ -109,6 +123,7 @@ export function installVuetify ({ app }: ViteSSGContext) {
         },
         dark: {
           colors: {
+            'surface-variant-alt': '#333333',
             primary: '#2196F3',
             secondary: '#424242',
             tertiary: '#E57373',

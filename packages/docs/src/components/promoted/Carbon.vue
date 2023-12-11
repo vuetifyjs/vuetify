@@ -32,8 +32,6 @@
 
     <promotion-card v-else />
   </v-responsive>
-
-  <br>
 </template>
 
 <script setup lang="ts">

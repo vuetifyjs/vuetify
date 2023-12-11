@@ -1,9 +1,7 @@
 {
   "props": {
     "autoGrow": "Automatically grow the textarea depending on amount of text.",
-    "autofocus": "Enables autofocus.",
-    "counterValue": "Function returns the counter display text.",
-    "maxRows": "Maximum number of rows.",
+    "counterValue": "Display the input length but do not provide any validation.",
     "noResize": "Remove resize handle.",
     "persistentPlaceholder": "Forces placeholder to always be visible.",
     "prefix": "Displays prefix text.",

@@ -34,7 +34,7 @@ export const VTable = genericComponent<VTableSlots>()({
 
   props: makeVTableProps(),
 
-  setup (props, { slots }) {
+  setup (props, { slots, emit }) {
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
 

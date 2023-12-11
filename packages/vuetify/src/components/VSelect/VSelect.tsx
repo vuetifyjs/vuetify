@@ -25,6 +25,7 @@ import { makeTransitionProps } from '@/composables/transition'
 // Utilities
 import { computed, mergeProps, ref, shallowRef, watch } from 'vue'
 import {
+  ensureValidVNode,
   genericComponent,
   IN_BROWSER,
   matchesSelector,
@@ -39,7 +40,7 @@ import type { Component, PropType } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { ListItem } from '@/composables/list-items'
-import type { GenericProps } from '@/util'
+import type { GenericProps, SelectItemKey } from '@/util'
 
 type Primitive = string | number | boolean | symbol
 
@@ -94,19 +95,24 @@ export const makeVSelectProps = propsFactory({
   ...makeTransitionProps({ transition: { component: VDialogTransition as Component } }),
 }, 'VSelect')
 
+type ItemType<T> = T extends readonly (infer U)[] ? U : never
+
 export const VSelect = genericComponent<new <
   T extends readonly any[],
-  Item = T extends readonly (infer U)[] ? U : never,
+  Item = ItemType<T>,
   ReturnObject extends boolean = false,
   Multiple extends boolean = false,
   V extends Value<Item, ReturnObject, Multiple> = Value<Item, ReturnObject, Multiple>
 >(
   props: {
     items?: T
+    itemTitle?: SelectItemKey<ItemType<T>>
+    itemValue?: SelectItemKey<ItemType<T>>
+    itemProps?: SelectItemKey<ItemType<T>>
     returnObject?: ReturnObject
     multiple?: Multiple
     modelValue?: V | null
-    'onUpdate:modelValue'?: (val: V) => void
+    'onUpdate:modelValue'?: (value: V) => void
   },
   slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
     item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
@@ -123,8 +129,8 @@ export const VSelect = genericComponent<new <
 
   emits: {
     'update:focused': (focused: boolean) => true,
-    'update:modelValue': (val: any) => true,
-    'update:menu': (val: boolean) => true,
+    'update:modelValue': (value: any) => true,
+    'update:menu': (ue: boolean) => true,
   },
 
   setup (props, { slots }) {
@@ -151,6 +157,11 @@ export const VSelect = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
+    const counterValue = computed(() => {
+      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
+        : typeof props.counterValue === 'number' ? props.counterValue
+        : model.value.length
+    })
     const form = useForm()
     const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
@@ -288,7 +299,7 @@ export const VSelect = genericComponent<new <
         slots['no-data']
       )
       const isDirty = model.value.length > 0
-      const [textFieldProps] = VTextField.filterProps(props)
+      const textFieldProps = VTextField.filterProps(props)
 
       const placeholder = isDirty || (
         !isFocused.value &&
@@ -304,6 +315,7 @@ export const VSelect = genericComponent<new <
           onUpdate:modelValue={ onModelUpdate }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
+          counterValue={ counterValue.value }
           dirty={ isDirty }
           class={[
             'v-select',
@@ -375,7 +387,7 @@ export const VSelect = genericComponent<new <
                             index,
                             props: itemProps,
                           }) ?? (
-                            <VListItem { ...itemProps }>
+                            <VListItem { ...itemProps } role="option">
                               {{
                                 prepend: ({ isSelected }) => (
                                   <>
@@ -422,6 +434,17 @@ export const VSelect = genericComponent<new <
                     'onUpdate:modelValue': undefined,
                   }
 
+                  const hasSlot = hasChips ? !!slots.chip : !!slots.selection
+                  const slotContent = hasSlot
+                    ? ensureValidVNode(
+                      hasChips
+                        ? slots.chip!({ item, index, props: slotProps })
+                        : slots.selection!({ item, index })
+                    )
+                    : undefined
+
+                  if (hasSlot && !slotContent) return undefined
+
                   return (
                     <div key={ item.value } class="v-select__selection">
                       { hasChips ? (
@@ -445,11 +468,11 @@ export const VSelect = genericComponent<new <
                               },
                             }}
                           >
-                            { slots.chip?.({ item, index, props: slotProps }) }
+                            { slotContent }
                           </VDefaultsProvider>
                         )
                       ) : (
-                        slots.selection?.({ item, index }) ?? (
+                        slotContent ?? (
                           <span class="v-select__selection-text">
                             { item.title }
                             { props.multiple && (index < model.value.length - 1) && (

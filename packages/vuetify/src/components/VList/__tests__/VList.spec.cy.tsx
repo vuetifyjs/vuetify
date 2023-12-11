@@ -6,6 +6,7 @@ import { VList, VListItem } from '..'
 import { CenteredGrid } from '@/../cypress/templates'
 
 // Utilities
+import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 describe('VList', () => {
@@ -231,5 +232,31 @@ describe('VList', () => {
     cy.get('.v-list').then(() => router.push('/other'))
 
     cy.get('.v-list-item').eq(1).should('not.have.class', 'v-list-item--active')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/18304
+  it('should support return-object', () => {
+    const selectedItem = ref([])
+    const items = [
+      { id: '1', title: 'Events' },
+      { id: '2', title: 'Labour' },
+      { id: '3', title: 'Equipment' },
+    ]
+
+    cy.mount(() => (
+      <VList
+        items={ items }
+        returnObject
+        onUpdate:selected={ (val: any) => selectedItem.value = val }
+        item-value="id"
+        item-title="title"
+      >
+      </VList>
+    ))
+
+    cy.get('.v-list-item').eq(1).trigger('click')
+      .then(_ => {
+        expect(selectedItem.value).to.deep.equal([items[1]])
+      })
   })
 })

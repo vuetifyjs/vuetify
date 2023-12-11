@@ -1,0 +1,118 @@
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use '../../components/VTable/variables' as *
+@use './variables' as *
+
+.v-data-table
+  width: 100%
+
+.v-data-table__table
+  width: 100%
+  border-collapse: separate
+  border-spacing: 0
+
+.v-data-table__tr
+  &--focus
+    border: 1px dotted black
+
+  &--clickable
+    cursor: pointer
+
+.v-data-table
+  .v-table__wrapper
+    > table
+      > thead,
+        tbody
+        > tr
+          > td,
+            th
+
+            &.v-data-table-column--align-end
+              text-align: end
+
+              .v-data-table-header__content
+                flex-direction: row-reverse
+
+            &.v-data-table-column--align-center
+              text-align: center
+
+              .v-data-table-header__content
+                justify-content: center
+
+            &.v-data-table-column--no-padding
+              padding: 0 8px
+
+          > th
+            align-items: center
+
+          > th.v-data-table__th--fixed
+              position: sticky
+
+          > th.v-data-table__th--sortable:hover
+              cursor: pointer
+              color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+
+          > th:not(.v-data-table__th--sorted)
+              .v-data-table-header__sort-icon
+                opacity: 0
+
+              &:hover
+                .v-data-table-header__sort-icon
+                  opacity: 0.5
+
+.v-data-table-column--fixed
+  background: $table-background
+  position: sticky !important
+  left: 0
+  z-index: 1
+
+.v-data-table-column--last-fixed
+  border-right: 1px solid rgba(var(--v-border-color), var(--v-border-opacity))
+
+.v-data-table.v-table--fixed-header > .v-table__wrapper > table > thead > tr > th.v-data-table-column--fixed
+  z-index: 2
+
+.v-data-table-group-header-row
+  td
+    background: rgba(var(--v-theme-surface))
+    color: rgba(var(--v-theme-on-surface))
+
+    > span
+      padding-left: 5px
+
+.v-data-table--loading
+  .v-data-table__td
+    opacity: 0.3
+
+.v-data-table-group-header-row__column
+  padding-left: calc(var(--v-data-table-group-header-row-depth) * 16px) !important
+
+.v-data-table-header__content
+  display: flex
+  align-items: center
+
+.v-data-table-header__sort-badge
+  display: inline-flex
+  justify-content: center
+  align-items: center
+  font-size: 0.875rem
+  padding: 4px
+  border-radius: 50%
+  background: $data-table-header-sort-badge-color
+  min-width: $data-table-header-sort-badge-size
+  min-height: $data-table-header-sort-badge-size
+  width: $data-table-header-sort-badge-size
+  height: $data-table-header-sort-badge-size
+
+.v-data-table-progress
+  > th
+    border: none !important
+    height: auto !important
+    padding: 0 !important
+
+.v-data-table-progress__loader
+  position: relative
+
+.v-data-table-rows-loading,
+.v-data-table-rows-no-data
+  text-align: center

@@ -20,7 +20,8 @@ type DirectiveData = {
 }
 
 export const createWebTypesApi = (componentData: ComponentData[], directiveData: DirectiveData[]) => {
-  const getDocUrl = (cmp, heading = null) => `https://vuetifyjs.com/api/${cmp}` + (heading ? `#${heading}` : '')
+  const getDocUrl = (cmp: string, heading?: string) =>
+    `https://vuetifyjs.com/api/${cmp}` + (heading ? `#${heading}` : '')
 
   const createTypedEntity = (name: string, type: string) => {
     return {
@@ -50,7 +51,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
       }
     }
 
-    const createTagValue = type => {
+    const createTagValue = (type: string) => {
       return {
         kind: 'expression',
         type,
@@ -89,7 +90,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
   }
 
   const createAttribute = (directive: DirectiveData) => {
-    const createAttributeVueArgument = argument => {
+    const createAttributeVueArgument = (argument: any) => {
       return {
         pattern: undefined,
         description: argument.description.en,
@@ -107,7 +108,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
       }
     }
 
-    const createAttributeValue = argument => {
+    const createAttributeValue = (argument: any) => {
       return {
         kind: 'expression',
         type: argument.type,

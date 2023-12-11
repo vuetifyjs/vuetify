@@ -34,7 +34,7 @@ To begin modifying Vuetify's internal variables, install the [sass](https://sass
 ::: tabs
 
 ```bash [yarn]
-  yarn install -D sass
+  yarn add -D sass
 ```
 
 ```bash [npm]
@@ -82,6 +82,14 @@ Customising variables used in components is a bit more complex and requires the 
 
 Follow the plugin setup guide from [treeshaking](/features/treeshaking/) then add `styles.configFile` to the plugin options:
 
+```js { resource="vite.config.js" }
+vuetify({
+  styles: {
+    configFile: 'src/styles/settings.scss',
+  },
+})
+```
+
 ```scss { resource="src/styles/settings.scss" }
 @use 'vuetify/settings' with (
   $button-height: 40px,
@@ -89,8 +97,12 @@ Follow the plugin setup guide from [treeshaking](/features/treeshaking/) then ad
 ```
 
 `configFile` will be resolved relative to the project root, and loaded before each of vuetify's stylesheets.
-If you were using the basic technique from above, make sure to remove it and switch back to `import 'vuetify/styles'`.
-You can keep `main.scss` for other style overrides but don't do both or you'll end up with duplicated styles.
+If you were using the basic technique from above, make sure to either:
+
+- Remove it and switch back to `import 'vuetify/styles'`, or
+- Add `@use './settings'` before `@use 'vuetify'` in `main.scss` and remove the `with` block from `@use 'vuetify'`.
+
+You can keep `main.scss` for other style overrides but don't do both `@use 'vuetify'` and `import 'vuetify/styles'` or you'll end up with duplicated styles.
 
 ## Variable API
 

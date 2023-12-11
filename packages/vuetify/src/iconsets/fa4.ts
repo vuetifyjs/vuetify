@@ -44,6 +44,7 @@ const aliases: IconAliases = {
   plus: 'fa-plus',
   minus: 'fa-minus',
   calendar: 'fa-calendar',
+  eyeDropper: 'fa-eye-dropper',
 }
 
 const fa: IconSet = {
