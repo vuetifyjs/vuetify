@@ -1,20 +1,12 @@
 <template>
-  <v-defaults-provider
-    :defaults="{
-      VTab: {
-        class: 'text-none text-body-2 font-weight-regular',
-        color: 'medium-emphasis'
-      }
-    }"
-  >
-    <v-tabs color="primary">
-      <v-tab
-        v-for="(tab, i) in tabs"
-        :key="i"
-        v-bind="tab"
-      />
-    </v-tabs>
-  </v-defaults-provider>
+  <v-tabs color="primary">
+    <v-tab
+      v-for="(tab, i) in tabs"
+      :key="i"
+      class="text-none text-body-2 font-weight-regular"
+      v-bind="tab"
+    />
+  </v-tabs>
 </template>
 
 <script setup>
@@ -31,6 +23,11 @@
       prependIcon: 'mdi-cog-outline',
       text: 'Options',
       to: rpath('/user/options/'),
+    },
+    {
+      prependIcon: '$vuetify',
+      text: 'Subscriptions',
+      to: rpath('/user/subscriptions/'),
     },
   ]
 </script>

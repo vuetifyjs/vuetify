@@ -4,7 +4,15 @@ import { useAppStore } from './app'
 
 // Utilities
 import { defineStore } from 'pinia'
-import { computed, shallowRef, watch } from 'vue'
+import { computed, ref, shallowRef, watch } from 'vue'
+
+interface Subscription {
+  subscriptionId: string
+  isActive: boolean
+  downloadUrl: string
+  manageUrl: string
+  createdAt: Date
+}
 
 interface User {
   id: string
@@ -30,24 +38,31 @@ interface User {
     firstPayment: Date
     lastPayment: Date
   }[]
+  subscription: Subscription
 }
 
 const url = import.meta.env.VITE_API_SERVER_URL
 
 export const useAuthStore = defineStore('auth', () => {
+  const params = new URLSearchParams(window.location.search)
+  const key = params.get('key')
+
   const app = useAppStore()
   const userStore = useUserStore()
-  const user = shallowRef<User | null>(null)
+  const user = ref<User | null>(null)
   const isLoading = shallowRef(false)
 
+  const subscription = computed(() => {
+    return user.value?.sponsorships.find(s => s.platform === 'store')
+  })
   const isSubscriber = computed(() => (
     !url ||
     user.value?.isAdmin ||
     user.value?.sponsorships.some(s => s.isActive)
   ))
-  const isOneSubscriber = computed(() => (
-    user.value?.sponsorships.some(s => s.tierName === 'Vuetify One' && s.isActive)
-  ))
+  const isOneSubscriber = computed(() => {
+    return subscription.value?.isActive
+  })
 
   let externalUpdate = false
   watch(user, user => {
@@ -90,6 +105,10 @@ export const useAuthStore = defineStore('auth', () => {
     ).then(() => {
       isLoading.value = false
       verify.promise = null
+
+      if (!key) return
+
+      activate(key)
     })
   }
   verify.promise = null as Promise<void> | null
@@ -110,6 +129,33 @@ export const useAuthStore = defineStore('auth', () => {
       app.snackbar(err.message, { color: 'error' })
       console.error(err)
     }
+  }
+
+  async function activate (key: String) {
+    if (!user.value) return
+
+    const res = await fetch(`${url}/one/activate`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ key }),
+    }).then(res => res.json())
+
+    user.value = res
+  }
+
+  async function manage (orderId: string) {
+    if (!user.value) return
+
+    return fetch(`${url}/one/manage?orderId=${orderId}`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(res => res.json())
   }
 
   async function login (provider: 'github' | 'discord' = 'github') {
@@ -200,7 +246,10 @@ export const useAuthStore = defineStore('auth', () => {
 
   return {
     user,
+    subscription,
     isLoading,
+    activate,
+    manage,
     verify,
     login,
     logout,
