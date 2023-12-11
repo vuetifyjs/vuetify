@@ -390,7 +390,7 @@ The `v-btn` component is an extension of the native `button` element and support
 
 ### ARIA Attributes
 
-By default, the `v-btn` component includes relevant [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) attributes to enhance accessibility. The component is automatically assigned the `role="button"` attribute, which indicates its purpose as a button to assistive technologies.
+By default, the `v-btn` component includes relevant [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) attributes to enhance accessibility. The component is automatically assigned the `type="button"` attribute, which indicates its purpose as a button to assistive technologies.
 
 ### Keyboard Navigation
 
