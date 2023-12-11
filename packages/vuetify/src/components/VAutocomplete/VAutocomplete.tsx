@@ -321,6 +321,8 @@ export const VAutocomplete = genericComponent<new <
     const isSelecting = shallowRef(false)
 
     function select (item: ListItem, add = true) {
+      if (item.props.disabled) return
+  
       if (props.multiple) {
         const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
 
