@@ -44,25 +44,16 @@ interface User {
 const url = import.meta.env.VITE_API_SERVER_URL
 
 export const useAuthStore = defineStore('auth', () => {
-  const params = new URLSearchParams(window.location.search)
-  const key = params.get('key')
-
   const app = useAppStore()
   const userStore = useUserStore()
   const user = ref<User | null>(null)
   const isLoading = shallowRef(false)
 
-  const subscription = computed(() => {
-    return user.value?.sponsorships.find(s => s.platform === 'store')
-  })
   const isSubscriber = computed(() => (
     !url ||
     user.value?.isAdmin ||
     user.value?.sponsorships.some(s => s.isActive)
   ))
-  const isOneSubscriber = computed(() => {
-    return subscription.value?.isActive
-  })
 
   let externalUpdate = false
   watch(user, user => {
@@ -105,10 +96,6 @@ export const useAuthStore = defineStore('auth', () => {
     ).then(() => {
       isLoading.value = false
       verify.promise = null
-
-      if (!key) return
-
-      activate(key)
     })
   }
   verify.promise = null as Promise<void> | null
@@ -129,21 +116,6 @@ export const useAuthStore = defineStore('auth', () => {
       app.snackbar(err.message, { color: 'error' })
       console.error(err)
     }
-  }
-
-  async function activate (key: String) {
-    if (!user.value) return
-
-    const res = await fetch(`${url}/one/activate`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ key }),
-    }).then(res => res.json())
-
-    user.value = res
   }
 
   async function manage (orderId: string) {
@@ -246,15 +218,13 @@ export const useAuthStore = defineStore('auth', () => {
 
   return {
     user,
-    subscription,
+    url,
     isLoading,
-    activate,
     manage,
     verify,
     login,
     logout,
     isSubscriber,
-    isOneSubscriber,
     lastLoginProvider,
   }
 })

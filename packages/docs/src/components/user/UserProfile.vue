@@ -56,46 +56,21 @@
     </v-skeleton-loader>
   </app-sheet>
 
-  <v-card
-    v-if="auth.isOneSubscriber"
-    image="https://cdn.vuetifyjs.com/docs/images/one/banners/one-sub-banner.png"
-    class="pa-4 text-white font-weight-bold d-flex align-start flex-column mt-2"
-    flat
-    width="250"
-  >
-    <div>
-      Vuetify One
-
-      <span class="font-weight-light">Subscriber</span>
-    </div>
-
-    <div class="text-caption font-weight-regular text-grey-lighten-2 mb-2">
-      Since {{ memberSince }}
-    </div>
-
-    <border-chip
-      :to="rpath('/user/subscriptions/')"
-      target="_blank"
-      rel="noopener noreferrer"
-      text="Manage Subscription"
-      theme="dark"
-    />
-  </v-card>
+  <one-sub-card />
 </template>
 
 <script setup lang="ts">
   // Components
   import DiscordLogin from '@/components/user/DiscordLogin.vue'
   import GithubLogin from '@/components/user/GithubLogin.vue'
+  import OneSubCard from '@/components/user/OneSubCard.vue'
   import UserBadges from '@/components/user/UserBadges.vue'
 
   // Composables
-  import { useDate } from 'vuetify'
   import { useI18n } from 'vue-i18n'
 
   // Utilities
   import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
 
   // Stores
   import { useAuthStore } from '@/store/auth'
@@ -105,17 +80,6 @@
   const user = useUserStore()
 
   const { t } = useI18n()
-  const adapter = useDate()
-
-  const memberSince = computed(() => {
-    if (!auth.subscription) return ''
-
-    const createdAt = auth.subscription.firstPayment
-
-    if (!adapter.isValid(createdAt)) return ''
-
-    return adapter.format(adapter.date(createdAt), 'monthAndYear')
-  })
 
   const loginButtons = computed(() => {
     if (!auth.user) {

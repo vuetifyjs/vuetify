@@ -9,7 +9,9 @@
         <div class="d-flex align-center">
           <v-icon :icon="`mdi-${item.value}`" color="medium-emphasis" class="me-1" />
 
-          {{ t(item.value) }}
+          <span class="text-capitalize">
+            {{ item.value }}
+          </span>
         </div>
       </template>
 
@@ -19,10 +21,10 @@
           class="text-none text-caption"
           size="small"
           variant="outlined"
-          width="90"
+          width="100"
           @click="onClick(item)"
         >
-          {{ item.status ? t('Disconnect') : t('Connect') }}
+          {{ item.status ? 'Disconnect' : 'Connect' }}
         </v-btn>
       </template>
 
@@ -33,12 +35,13 @@
 </template>
 
 <script setup>
-  import { computed, ref } from 'vue'
+  // Stores
   import { useAuthStore } from '@/store/auth'
-  import { useI18n } from 'vue-i18n'
+
+  // Utilities
+  import { computed, ref } from 'vue'
 
   const auth = useAuthStore()
-  const { t } = useI18n()
   const headers = ref([
     { title: 'Provider', key: 'provider' },
     { title: 'Status', key: 'status', align: 'end' },

@@ -1,51 +1,54 @@
 <template>
   <v-list-item
-    title="Subscription Status"
-    :subtitle="order?.state ?? 'Inactive'"
-    flat
-    slim
-    lines="two"
     border
+    lines="two"
     prepend-icon="$vuetify"
+    rounded
   >
+    <template #prepend>
+      <div class="pe-2">
+        <v-icon :color="one.isSubscriber ? 'primary' : undefined" />
+      </div>
+    </template>
+
+    <template #title>
+      Subscription Status
+    </template>
+
+    <template #subtitle>
+      {{ one.isSubscriber ? 'Active' : 'Inactive' }}
+    </template>
+
     <template #append>
       <v-btn
-        :href="manageUrl"
-        color="primary"
-        text="Manage"
-        target="_blank"
-        size="small"
-        width="90"
+        :color="one.isSubscriber ? 'error' : 'primary'"
+        :loading="one.isLoading"
+        :text="one.isSubscriber ? 'Cancel' : 'Subscribe'"
         class="text-none"
+        size="small"
+        slim
         variant="outlined"
-      />
-
+        @click="onClick"
+      >
+        <template #loader>
+          <v-progress-circular
+            indeterminate
+            size="16"
+            width="1"
+          />
+        </template>
+      </v-btn>
     </template>
   </v-list-item>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, onBeforeMount, ref } from 'vue'
-
   // Store
-  import { useAuthStore } from '@/store/auth'
+  import { useOneStore } from '@/store/one'
 
-  const auth = useAuthStore()
+  const one = useOneStore()
 
-  const order = ref(null)
-
-  const manageUrl = computed(() => {
-    return order.value?.subscription_management_url
-  })
-
-  onBeforeMount(async () => {
-    await auth.verify()
-
-    if (!auth.isOneSubscriber) return
-
-    const orderId = auth.subscription.tierName
-
-    order.value = await auth.manage(orderId)
-  })
+  function onClick () {
+    one.isSubscriber ? one.cancel() : one.subscribe()
+  }
 </script>
