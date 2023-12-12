@@ -118,18 +118,6 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  async function manage (orderId: string) {
-    if (!user.value) return
-
-    return fetch(`${url}/one/manage?orderId=${orderId}`, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then(res => res.json())
-  }
-
   async function login (provider: 'github' | 'discord' = 'github') {
     isLoading.value = true
     const redirectUrl = `${url}/auth/${provider}/redirect`
@@ -220,7 +208,6 @@ export const useAuthStore = defineStore('auth', () => {
     user,
     url,
     isLoading,
-    manage,
     verify,
     login,
     logout,
