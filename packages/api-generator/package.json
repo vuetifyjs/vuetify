@@ -4,7 +4,7 @@
   "private": true,
   "description": "",
   "scripts": {
-    "build": "node --loader tsx --no-warnings src/index.ts",
+    "build": "node --import tsx --no-warnings src/index.ts",
     "lint": "eslint --ext .ts,.json src -f codeframe --max-warnings 0",
     "lint:fix": "yarn lint --fix"
   },
@@ -15,7 +15,7 @@
     "piscina": "^4.2.0",
     "prettier": "^3.1.0",
     "ts-morph": "^20.0.0",
-    "tsx": "^4.5.0",
+    "tsx": "^4.6.2",
     "vue": "^3.3.9",
     "vuetify": "^3.4.6"
   },
