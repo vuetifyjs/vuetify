@@ -41,7 +41,7 @@
   const memberSince = computed(() => {
     if (!one.subscription) return ''
 
-    const createdAt = one.subscription.firstPayment
+    const createdAt = one.subscription.createdAt
 
     if (!adapter.isValid(createdAt)) return ''
 

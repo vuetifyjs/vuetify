@@ -89,7 +89,7 @@
       Object.entries({
         github: GithubLogin,
         discord: DiscordLogin,
-      }).filter(([k, v]) => !auth.user!.identities.some(i => i.provider === k))
+      }).filter(([k, v]) => !auth.user!.identities.some((i: any) => i.provider === k))
     )
   })
 </script>
