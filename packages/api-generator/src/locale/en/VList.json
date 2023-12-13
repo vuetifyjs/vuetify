@@ -5,6 +5,7 @@
     "lines": "Designates a **minimum-height** for all children `v-list-item` components. This prop uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers.",
     "link": "Applies `v-list-item` hover styles. Useful when using the item is an _activator_.",
     "nav": "An alternative styling that reduces `v-list-item` width and rounds the corners. Typically used with **[v-navigation-drawer](/components/navigation-drawers)**.",
-    "subheader": "Removes the top padding from `v-list-subheader` components. When used as a **String**, renders a subheader for you."
+    "subheader": "Removes the top padding from `v-list-subheader` components. When used as a **String**, renders a subheader for you.",
+    "slim": "Reduces horizontal spacing for badges, icons, tooltips, and avatars within slim list items to create a more compact visual representation."
   }
 }
