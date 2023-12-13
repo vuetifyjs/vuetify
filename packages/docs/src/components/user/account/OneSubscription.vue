@@ -1,5 +1,6 @@
 <template>
   <v-list-item
+    :disabled="!auth.user"
     border
     lines="two"
     prepend-icon="$vuetify"
@@ -24,10 +25,12 @@
         :color="one.isSubscriber ? 'error' : 'primary'"
         :loading="one.isLoading"
         :text="one.isSubscriber ? 'Cancel' : 'Subscribe'"
-        class="text-none"
+        border
+        class="text-none border-error border-opacity-100"
         size="small"
         slim
-        variant="outlined"
+        width="80"
+        :variant="one.isSubscriber ? 'plain' : 'outlined'"
         @click="onClick"
       >
         <template #loader>
@@ -44,8 +47,10 @@
 
 <script setup>
   // Store
+  import { useAuthStore } from '@/store/auth'
   import { useOneStore } from '@/store/one'
 
+  const auth = useAuthStore()
   const one = useOneStore()
 
   function onClick () {
