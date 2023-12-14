@@ -11,7 +11,7 @@
   >
     <template v-for="(group, i) in props.groups">
       <app-sheet border :class="['pa-3', i !== 0 && 'mt-4']">
-        <div class="text-high-emphasis font-weight-bold d-flex align-center text-h6">
+        <div class="text-high-emphasis font-weight-bold d-flex align-center text-h6 mb-2">
           <v-icon
             :icon="getIcon(group)"
             color="medium-emphasis"
@@ -24,17 +24,13 @@
 
         <template v-for="(child, ci) in group.items">
           <v-list-item
-            v-if="child.items[0]._highlightResult.hierarchy.lvl1.matchLevel === 'full'"
-            :key="`search-${i}-${ci}`"
             :to="getPathname(child)"
             class="mb-0"
             append-icon="mdi-chevron-right"
             prepend-icon="mdi-home-outline"
+            slim
+            @click="onSearchClick(child.name, getPathname(child))"
           >
-            <template #prepend>
-              <v-icon class="me-n6" size="18" />
-            </template>
-
             <template #append>
               <v-icon size="16" />
             </template>
@@ -48,17 +44,19 @@
             </v-list-item-title>
           </v-list-item>
 
-          <template v-else>
+          <template v-if="child.items[0]._highlightResult.hierarchy.lvl1.matchLevel !== 'full'">
             <v-list-item
               v-for="(item, it) in child.items"
               :key="`search-${i}-${ci}-${it}-children`"
               :to="item.url"
               :prepend-icon="item.url.indexOf('#') > -1 ? 'mdi-pound' : undefined"
               :append-icon="item.url.indexOf('#') > -1 ? 'mdi-chevron-right' : undefined"
-              class="ps-4 mb-0"
+              class="ps-6 mb-0"
+              slim
+              @click="onSearchClick(child.name, item.url)"
             >
               <template #prepend>
-                <v-icon size="14" class="me-n6 ms-1" />
+                <v-icon size="14" />
               </template>
 
               <template #append>
@@ -67,7 +65,7 @@
 
               <v-list-item-subtitle
                 class="text-wrap font-weight-bold"
-                v-html="makeBreadcrumbs(item)"
+                v-html="makeBreadcrumbs(item._highlightResult.hierarchy)"
               />
 
               <v-list-item-subtitle
@@ -91,14 +89,14 @@
   import { useAppStore } from '@/store/app'
 
   const props = defineProps<{ groups: any[] }>()
+  const emit = defineEmits(['click:result'])
 
   const app = useAppStore()
 
   const rootEl = ref<VList>()
   defineExpose({ rootEl })
 
-  function makeBreadcrumbs (item: any) {
-    const hierarchy = item._highlightResult.hierarchy
+  function makeBreadcrumbs (hierarchy: any) {
     let str = ''
 
     for (const lvl of Object.keys(hierarchy).slice(2)) {
@@ -132,6 +130,13 @@
     if (name === 'styles-and-animations') name = 'styles'
 
     return app.categories?.[name]?.icon ?? '$vuetify'
+  }
+  function onSearchClick (name: string, url: string) {
+    emit('click:result', {
+      name,
+      hash: url.indexOf('#') > -1 ? url.split('#')[1] : undefined,
+      url,
+    })
   }
 </script>
 

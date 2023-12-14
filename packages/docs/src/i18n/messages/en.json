@@ -277,7 +277,8 @@
     "key-hint-mac": "Cmd+K",
     "key-hint-slash": "Press /",
     "results": "Your search results will appear here",
-    "no-results": "No results found"
+    "no-results": "No results found",
+    "recent": "Recent"
   },
   "search-api": "Search API",
   "search-jobs": "Search Jobs",
