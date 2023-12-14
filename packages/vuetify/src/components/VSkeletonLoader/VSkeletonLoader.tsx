@@ -54,58 +54,6 @@ export const rootTypes = {
   text: 'text',
 } as const
 
-function genBone (type: string, children: VSkeletonBones = []) {
-  return (
-    <div
-      class={[
-        'v-skeleton-loader__bone',
-        `v-skeleton-loader__${type}`,
-      ]}
-    >
-      { children }
-    </div>
-  )
-}
-
-function genBones (bone: string) {
-  // e.g. 'text@3'
-  const [type, length] = bone.split('@') as [VSkeletonLoaderType, number]
-
-  // Generate a length array based upon
-  // value after @ in the bone string
-  return Array.from({ length }).map(() => genStructure(type))
-}
-
-function genStructure (type?: string): VSkeletonBones {
-  let children: VSkeletonBones = []
-
-  if (!type) return children
-
-  // TODO: figure out a better way to type this
-  const bone = (rootTypes as Record<string, string>)[type]
-
-  // End of recursion, do nothing
-  /* eslint-disable-next-line no-empty, brace-style */
-  if (type === bone) {}
-  // Array of values - e.g. 'heading, paragraph, text@2'
-  else if (type.includes(',')) return mapBones(type)
-  // Array of values - e.g. 'paragraph@4'
-  else if (type.includes('@')) return genBones(type)
-  // Array of values - e.g. 'card@2'
-  else if (bone.includes(',')) children = mapBones(bone)
-  // Array of values - e.g. 'list-item@2'
-  else if (bone.includes('@')) children = genBones(bone)
-  // Single value - e.g. 'card-heading'
-  else if (bone) children.push(genStructure(bone))
-
-  return [genBone(type, children)]
-}
-
-function mapBones (bones: string) {
-  // Remove spaces and return array of structures
-  return bones.replace(/\s/g, '').split(',').map(genStructure)
-}
-
 export const makeVSkeletonLoaderProps = propsFactory({
   boilerplate: Boolean,
   color: String,
@@ -120,6 +68,10 @@ export const makeVSkeletonLoaderProps = propsFactory({
       | ReadonlyArray<VSkeletonLoaderType | (string & {})>
     >,
     default: 'ossein',
+  },
+  types: {
+    type: Object as PropType<Record<string, string>>,
+    default: () => ({}),
   },
 
   ...makeDimensionProps(),
@@ -138,6 +90,61 @@ export const VSkeletonLoader = genericComponent()({
     const { elevationClasses } = useElevation(props)
     const { themeClasses } = provideTheme(props)
     const { t } = useLocale()
+
+    // Merge custom types into the root types for use throughout genX functions
+    // TODO: figure out a better way to type this
+    const mergedTypes = computed(() => ({ ...(rootTypes as Record<string, string>), ...props.types }))
+
+    function genBone (type: string, children: VSkeletonBones = []) {
+      return (
+        <div
+          class={[
+            'v-skeleton-loader__bone',
+            `v-skeleton-loader__${type}`,
+          ]}
+        >
+          { children }
+        </div>
+      )
+    }
+
+    function genBones (bone: string) {
+      // e.g. 'text@3'
+      const [type, length] = bone.split('@') as [VSkeletonLoaderType, number]
+
+      // Generate a length array based upon
+      // value after @ in the bone string
+      return Array.from({ length }).map(() => genStructure(type))
+    }
+
+    function genStructure (type?: string): VSkeletonBones {
+      let children: VSkeletonBones = []
+
+      if (!type) return children
+
+      const bone = mergedTypes.value[type]
+
+      // End of recursion, do nothing
+      /* eslint-disable-next-line no-empty, brace-style */
+      if (type === bone) {}
+      // Array of values - e.g. 'heading, paragraph, text@2'
+      else if (type.includes(',')) return mapBones(type)
+      // Array of values - e.g. 'paragraph@4'
+      else if (type.includes('@')) return genBones(type)
+      // Array of values - e.g. 'card@2'
+      else if (bone.includes(',')) children = mapBones(bone)
+      // Array of values - e.g. 'list-item@2'
+      else if (bone.includes('@')) children = genBones(bone)
+      // Single value - e.g. 'card-heading'
+      else if (bone) children.push(genStructure(bone))
+
+      return [genBone(type, children)]
+    }
+
+    function mapBones (bones: string) {
+      // Remove spaces and return array of structures
+      return bones.replace(/\s/g, '').split(',').map(genStructure)
+    }
 
     const items = computed(() => genStructure(wrapInArray(props.type).join(',')))
 
