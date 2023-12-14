@@ -1,5 +1,6 @@
 // Composables
 import { getWeek, useDate } from '@/composables/date/date'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed } from 'vue'
@@ -7,7 +8,6 @@ import { propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { useProxiedModel } from './proxiedModel'
 
 // Types
 export interface CalendarProps {
@@ -48,7 +48,7 @@ export function useCalendar (props: CalendarProps) {
     v => wrapInArray(v),
   )
   const displayValue = computed(() => {
-    if (adapter.isValid(props.displayValue)) return adapter.date(props.displayValue)
+    if (props.displayValue) return adapter.date(props.displayValue)
     if (model.value.length > 0) return adapter.date(model.value[0])
     if (props.min) return adapter.date(props.min)
     if (Array.isArray(props.allowedDates)) return adapter.date(props.allowedDates[0])
