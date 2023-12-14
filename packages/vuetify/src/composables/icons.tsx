@@ -178,12 +178,16 @@ export const defaultSets: Record<string, IconSet> = {
 
 // Composables
 export function createIcons (options?: IconOptions) {
+  const sets = { ...defaultSets }
+  const defaultSet = options?.defaultSet ?? 'mdi'
+
+  if (defaultSet === 'mdi') {
+    sets.mdi = mdi
+  }
+
   return mergeDeep({
-    defaultSet: 'mdi',
-    sets: {
-      ...defaultSets,
-      mdi,
-    },
+    defaultSet,
+    sets,
     aliases: {
       ...aliases,
       /* eslint-disable max-len */
