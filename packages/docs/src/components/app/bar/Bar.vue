@@ -48,14 +48,13 @@
 
       <app-vertical-divider v-if="lgAndUp" class="ms-2 me-3" />
 
-      <app-bar-auth-dialog />
+      <vo-auth-dialog @click:dashboard="onClickDashboard" />
     </template>
   </v-app-bar>
 </template>
 
 <script setup>
   // Components
-  import AppBarAuthDialog from './AuthDialog.vue'
   import AppBarEcosystemMenu from './EcosystemMenu.vue'
   import AppBarEnterpriseLink from './EnterpriseLink.vue'
   import AppBarJobsLink from './JobsLink.vue'
@@ -74,18 +73,20 @@
   // Composables
   import { useAppStore } from '@/store/app'
   import { useDisplay, useTheme } from 'vuetify'
-  import { useRoute } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
 
   // Stores
   import { useUserStore } from '@/store/user'
 
   // Utilities
   import { computed } from 'vue'
+  import { rpath } from '@/util/routes'
 
   const app = useAppStore()
   const user = useUserStore()
   const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
   const route = useRoute()
+  const router = useRouter()
   const theme = useTheme()
 
   const image = computed(() => {
@@ -93,4 +94,8 @@
 
     return `https://cdn.vuetifyjs.com/docs/images/themes/${theme.name.value}-app-bar.png`
   })
+
+  function onClickDashboard () {
+    router.push(rpath('/user/dashboard/'))
+  }
 </script>
