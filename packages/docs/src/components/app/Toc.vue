@@ -103,7 +103,10 @@
             />
           </v-col>
 
-          <v-col cols="12">
+          <v-col
+            v-if="!user.disableAds"
+            cols="12"
+          >
             <a
               href="https://adminmart.com/product/modernize-vuetify-vue-admin-dashboard/?ref=7"
               target="_blank"
@@ -125,15 +128,18 @@
 
   // Composables
   import { useRoute, useRouter } from 'vue-router'
-  import { storeToRefs } from 'pinia'
-  import { useAppStore } from '@/store/app'
-  import { useSponsorsStore } from '@/store/sponsors'
   import { useTheme } from 'vuetify'
+
+  // Stores
+  import { useAppStore } from '@/store/app'
+  import { useUserStore } from '@/store/user'
+  import { useSponsorsStore } from '@/store/sponsors'
 
   // Utilities
   import { computed, nextTick, onMounted, onScopeDispose, ref, watch } from 'vue'
   import { gtagClick } from '@/util/analytics'
   import { rpath } from '@/util/routes'
+  import { storeToRefs } from 'pinia'
 
   type TocItem = {
     to: string;
@@ -146,6 +152,7 @@
   const route = useRoute()
   const router = useRouter()
   const theme = useTheme()
+  const user = useUserStore()
 
   const routeToc = computed(() => route.meta.toc as TocItem[] | undefined)
 
