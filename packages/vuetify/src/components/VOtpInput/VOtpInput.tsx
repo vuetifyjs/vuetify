@@ -212,6 +212,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     useRender(() => {
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
 
+      const { loader: _, ...vFieldSlots } = slots
+
       return (
         <div
           class={[
@@ -244,7 +246,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                   key={ i }
                 >
                   {{
-                    ...slots,
+                    ...vFieldSlots,
                     default: () => {
                       return (
                         <input
@@ -285,7 +287,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
             <VOverlay
               contained
               content-class="v-otp-input__loader"
-              model-value={ !!props.loading }
+              modelValue={ !!props.loading }
               persistent
             >
               { slots.loader?.() ?? (
