@@ -104,16 +104,16 @@
           </v-col>
 
           <v-col
-            v-if="!user.disableAds"
+            v-if="!user.disableAds && spot.spot"
             cols="12"
           >
             <a
-              href="https://adminmart.com/product/modernize-vuetify-vue-admin-dashboard/?ref=7"
+              :href="spot.spot.href"
               target="_blank"
               rel="noopener noreferrer sponsored"
-              @click="gtagClick('toc', 'promotion', 'adminmart')"
+              @click="gtagClick('toc', 'promotion', spot.spot.sponsor)"
             >
-              <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/wp-nov-23/wp-nov-23.png" />
+              <v-img :src="spot.spot.image.url" />
             </a>
           </v-col>
         </v-row>
@@ -134,6 +134,7 @@
   import { useAppStore } from '@/store/app'
   import { useUserStore } from '@/store/user'
   import { useSponsorsStore } from '@/store/sponsors'
+  import { useSpotStore } from '@/store/spot'
 
   // Utilities
   import { computed, nextTick, onMounted, onScopeDispose, ref, watch } from 'vue'
@@ -151,6 +152,7 @@
 
   const route = useRoute()
   const router = useRouter()
+  const spot = useSpotStore()
   const theme = useTheme()
   const user = useUserStore()
 
