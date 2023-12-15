@@ -5,6 +5,6 @@
     "icon": "Apply a specific icon using the [v-icon](/components/icons/) component. The button will become _round_.",
     "plain": "Removes the default background change applied when hovering over the button.",
     "stacked": "Displays the button as a flex-column.",
-    "slim": "Reduces padding to 0 8px"
+    "slim": "Reduces padding to 0 8px."
   }
 }
