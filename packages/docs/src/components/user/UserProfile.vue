@@ -70,8 +70,7 @@
   import { computed } from 'vue'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
-  import { useUserStore } from '@/store/user'
+  import { useAuthStore, useUserStore } from '@vuetify/one'
 
   const auth = useAuthStore()
   const user = useUserStore()
@@ -86,7 +85,7 @@
       Object.entries({
         github: GithubLogin,
         discord: DiscordLogin,
-      }).filter(([k, v]) => !auth.user!.identities.some(i => i.provider === k))
+      }).filter(([k, v]) => !auth.user!.identities.some((i: any) => i.provider === k))
     )
   })
 </script>

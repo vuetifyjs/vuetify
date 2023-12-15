@@ -16,14 +16,13 @@
 <script setup>
   // Composables
   import { useRouter } from 'vue-router'
-  import { useUserStore } from '@/store/user'
   import { useI18n } from 'vue-i18n'
 
   // Utilities
   import { rpath } from '@/util/routes'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
+  import { useAuthStore, useUserStore } from '@vuetify/one'
 
   const auth = useAuthStore()
   const router = useRouter()

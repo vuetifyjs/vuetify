@@ -20,7 +20,7 @@ import { installI18n } from '@/plugins/i18n'
 import { useAppStore } from '@/store/app'
 import { useLocaleStore } from '@/store/locale'
 import { installPwa } from '@/plugins/pwa'
-import { useUserStore } from '@/store/user'
+import { useUserStore } from '@vuetify/one'
 import { installVuetify } from '@/plugins/vuetify'
 
 // Utilities

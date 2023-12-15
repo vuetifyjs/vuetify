@@ -132,7 +132,7 @@
 
   // Stores
   import { useAppStore } from '@/store/app'
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
   import { useSponsorsStore } from '@/store/sponsors'
   import { useSpotStore } from '@/store/spot'
 

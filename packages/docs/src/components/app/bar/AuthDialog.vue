@@ -67,8 +67,7 @@
   import { useI18n } from 'vue-i18n'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
-  import { useUserStore } from '@/store/user'
+  import { useAuthStore, useUserStore } from '@vuetify/one'
 
   // Utilities
   import { rpath } from '@/util/routes'

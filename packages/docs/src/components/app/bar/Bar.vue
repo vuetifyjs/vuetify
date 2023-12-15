@@ -76,7 +76,7 @@
   import { useRoute, useRouter } from 'vue-router'
 
   // Stores
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed } from 'vue'

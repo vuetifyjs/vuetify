@@ -71,7 +71,7 @@
   // Stores
   import { useAppStore } from '@/store/app'
   import { useLocaleStore } from '@/store/locale'
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   const props = defineProps({
     headers: {
