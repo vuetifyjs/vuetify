@@ -54,6 +54,8 @@ export {
   mdiBrightness5,
   mdiBroadcast,
   mdiBrush,
+  mdiBullhorn,
+  mdiBullhornOutline,
   mdiBugOutline,
   mdiCached,
   mdiCakeVariant,
