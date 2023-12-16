@@ -2,6 +2,7 @@
 import './VCalendar.sass'
 
 // Composables
+import { makeCalendarProps, useCalendar } from '@/composables/calendar'
 import { getWeek, useDate } from '@/composables/date/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -10,56 +11,54 @@ import { computed } from 'vue'
 import { VCalendarDay } from './VCalendarDay'
 import { VCalendarHeader } from './VCalendarHeader'
 import { VCalendarMonthDay } from './VCalendarMonthDay'
-import { chunkArray, genericComponent, useRender } from '@/util'
+import { chunkArray, genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVCalendarProps = propsFactory({
+  events: Array<any>,
+  hideDayHeader: Boolean,
+  hideHeader: Boolean,
+  hideWeekNumber: Boolean,
+  intervalDivisions: {
+    type: Number,
+    default: 2,
+  },
+  intervalDuration: {
+    type: Number,
+    default: 60,
+  },
+  intervalHeight: {
+    type: Number,
+    default: 48,
+  },
+  intervalLabel: [String, Function],
+  intervals: {
+    type: Number,
+    default: 24,
+  },
+  intervalStart: {
+    type: Number,
+    default: 0,
+  },
+  title: String,
+  type: {
+    type: String,
+    default: 'month',
+    validator (val: string) {
+      return ['month', 'week', 'day'].includes(val)
+    },
+  },
+  weekdays: {
+    type: Array<number>,
+    default: () => [0, 1, 2, 3, 4, 5, 6],
+  },
+
+  ...makeCalendarProps(),
+}, 'VCalender')
 
 export const VCalendar = genericComponent()({
   name: 'VCalendar',
 
-  props: {
-    disabled: Array<Date>,
-    events: Array<any>,
-    hideDayHeader: Boolean,
-    hideHeader: Boolean,
-    hideWeekNumber: Boolean,
-    intervalDivisions: {
-      type: Number,
-      default: 2,
-    },
-    intervalDuration: {
-      type: Number,
-      default: 60,
-    },
-    intervalHeight: {
-      type: Number,
-      default: 48,
-    },
-    intervalLabel: [String, Function],
-    intervals: {
-      type: Number,
-      default: 24,
-    },
-    intervalStart: {
-      type: Number,
-      default: 0,
-    },
-    showAdjacentMonths: Boolean,
-    title: String,
-    type: {
-      type: String,
-      default: 'month',
-      validator (val: string) {
-        return ['month', 'week', 'day'].includes(val)
-      },
-    },
-    modelValue: {
-      type: Date,
-      default: new Date(),
-    },
-    weekdays: {
-      type: Array<number>,
-      default: () => [0, 1, 2, 3, 4, 5, 6],
-    },
-  },
+  props: makeCalendarProps(),
 
   emits: {
     next: null,
@@ -70,12 +69,7 @@ export const VCalendar = genericComponent()({
   setup (props, { emit, slots }) {
     const adapter = useDate()
 
-    const model = useProxiedModel(
-      props,
-      'modelValue',
-      new Date(),
-      v => v,
-    )
+    const { daysInMonth, model, weekNumbers } = useCalendar(props as any)
 
     const dayNames = adapter.getWeekdays()
     const weeksIn = computed(() => {
@@ -118,25 +112,25 @@ export const VCalendar = genericComponent()({
 
     function onClickPrev () {
       if (props.type === 'month') {
-        model.value = adapter.addMonths(model.value, -1)
+        model.value = [adapter.addMonths(model.value[0], -1)]
       }
       if (props.type === 'week') {
-        model.value = adapter.addDays(model.value, -7)
+        model.value = [adapter.addDays(model.value[0], -7)]
       }
       if (props.type === 'day') {
-        model.value = adapter.addDays(model.value, -1)
+        model.value = [adapter.addDays(model.value[0], -1)]
       }
     }
 
     function onClickNext () {
       if (props.type === 'month') {
-        model.value = adapter.addMonths(model.value, 1)
+        model.value = [adapter.addMonths(model.value[0], 1)]
       }
       if (props.type === 'week') {
-        model.value = adapter.addDays(model.value, 7)
+        model.value = [adapter.addDays(model.value[0], 7)]
       }
       if (props.type === 'day') {
-        model.value = adapter.addDays(model.value, 1)
+        model.value = [adapter.addDays(model.value[0], 1)]
       }
     }
 
@@ -253,7 +247,7 @@ export const VCalendar = genericComponent()({
                 ]
               }
             >
-              { chunkArray(daysIn.value, props.weekdays.length).map((week, wi) => (
+              { chunkArray(daysInMonth.value, props.weekdays.length).map((week, wi) => (
                 [
                   !props.hideWeekNumber ? <div class="v-calendar-month__weeknumber">{ weeks.value[wi] }</div> : '',
                   week.map(day => (
