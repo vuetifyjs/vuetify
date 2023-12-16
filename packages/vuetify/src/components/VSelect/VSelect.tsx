@@ -90,7 +90,7 @@ export const makeVSelectProps = propsFactory({
   ...makeSelectProps(),
   ...omit(makeVTextFieldProps({
     modelValue: null,
-    role: 'button',
+    role: 'combobox',
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
   ...makeTransitionProps({ transition: { component: VDialogTransition as Component } }),
 }, 'VSelect')
@@ -157,6 +157,11 @@ export const VSelect = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
+    const counterValue = computed(() => {
+      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
+        : typeof props.counterValue === 'number' ? props.counterValue
+        : model.value.length
+    })
     const form = useForm()
     const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
@@ -176,6 +181,16 @@ export const VSelect = genericComponent<new <
       (props.hideNoData && !items.value.length) ||
       props.readonly || form?.isReadonly.value
     ))
+
+    const computedMenuProps = computed(() => {
+      return {
+        ...props.menuProps,
+        activatorProps: {
+          ...(props.menuProps?.activatorProps || {}),
+          'aria-haspopup': 'listbox', // Set aria-haspopup to 'listbox'
+        },
+      }
+    })
 
     const listRef = ref<VList>()
     const { onListScroll, onListKeydown } = useScrolling(listRef, vTextFieldRef)
@@ -310,7 +325,7 @@ export const VSelect = genericComponent<new <
           onUpdate:modelValue={ onModelUpdate }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
-          counterValue={ model.value.length }
+          counterValue={ counterValue.value }
           dirty={ isDirty }
           class={[
             'v-select',
@@ -349,7 +364,7 @@ export const VSelect = genericComponent<new <
                   closeOnContentClick={ false }
                   transition={ props.transition }
                   onAfterLeave={ onAfterLeave }
-                  { ...props.menuProps }
+                  { ...computedMenuProps.value }
                 >
                   { hasList && (
                     <VList
@@ -382,7 +397,7 @@ export const VSelect = genericComponent<new <
                             index,
                             props: itemProps,
                           }) ?? (
-                            <VListItem { ...itemProps }>
+                            <VListItem { ...itemProps } role="option">
                               {{
                                 prepend: ({ isSelected }) => (
                                   <>

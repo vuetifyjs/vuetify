@@ -29,8 +29,8 @@
           <app-markdown :content="banner.metadata.text" />
         </v-list-item-title>
 
-        <v-list-item-subtitle v-if="banner.metadata.subtext" class="mt-n2">
-          <app-markdown :content="banner.metadata.subtext" />
+        <v-list-item-subtitle v-if="banner.metadata.subtext">
+          {{ banner.metadata.subtext }}
         </v-list-item-subtitle>
       </v-list-item>
 
@@ -46,7 +46,7 @@
             :elevation="isHovering ? 8 : 0"
             v-bind="{ ...props, ...banner.metadata.attributes }"
             append-icon="mdi-open-in-new"
-            class="text-none"
+            class="text-none me-2"
             rel="noopener"
             target="_blank"
             variant="elevated"
@@ -77,7 +77,7 @@
   import { useDisplay } from 'vuetify'
   import { useGtag } from 'vue-gtag-next'
   import { useRoute } from 'vue-router'
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed, onBeforeMount } from 'vue'
@@ -89,7 +89,7 @@
   const banners = useBannersStore()
 
   const banner = computed(() => banners.banner)
-  const height = computed(() => banner.value?.metadata.subtext ? 72 : 48)
+  const height = computed(() => banner.value?.metadata.subtext ? 88 : 48)
   const hasPromotion = computed(() => {
     return !banner.value || !user.notifications.last.banner.includes(banner.value.slug)
   })

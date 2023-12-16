@@ -52,7 +52,7 @@
             {{ t('released-under-the') }}
             <a
               class="text-medium-emphasis text-decoration-underline"
-              href="https://opensource.org/licenses/MIT"
+              href="https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md"
               path="mit-license"
               rel="noopener"
               target="_blank"

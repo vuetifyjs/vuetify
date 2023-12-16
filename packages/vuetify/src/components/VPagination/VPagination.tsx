@@ -174,7 +174,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
     const start = computed(() => parseInt(props.start, 10))
 
     const totalVisible = computed(() => {
-      if (props.totalVisible) return parseInt(props.totalVisible, 10)
+      if (props.totalVisible != null) return parseInt(props.totalVisible, 10)
       else if (maxButtons.value >= 0) return maxButtons.value
       return getMax(width.value, 58)
     })
@@ -190,7 +190,8 @@ export const VPagination = genericComponent<VPaginationSlots>()({
     const range = computed(() => {
       if (length.value <= 0 || isNaN(length.value) || length.value > Number.MAX_SAFE_INTEGER) return []
 
-      if (totalVisible.value <= 1) return [page.value]
+      if (totalVisible.value <= 0) return []
+      else if (totalVisible.value === 1) return [page.value]
 
       if (length.value <= totalVisible.value) {
         return createRange(length.value, start.value)

@@ -103,14 +103,17 @@
             />
           </v-col>
 
-          <v-col cols="12">
+          <v-col
+            v-if="!user.disableAds && spot.spot"
+            cols="12"
+          >
             <a
-              href="https://adminmart.com/product/modernize-vuetify-vue-admin-dashboard/?ref=7"
+              :href="spot.spot.href"
               target="_blank"
               rel="noopener noreferrer sponsored"
-              @click="gtagClick('toc', 'promotion', 'adminmart')"
+              @click="gtagClick('toc', 'promotion', spot.spot.sponsor)"
             >
-              <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/wp-nov-23/wp-nov-23.png" />
+              <v-img :src="spot.spot.image.url" />
             </a>
           </v-col>
         </v-row>
@@ -125,15 +128,19 @@
 
   // Composables
   import { useRoute, useRouter } from 'vue-router'
-  import { storeToRefs } from 'pinia'
-  import { useAppStore } from '@/store/app'
-  import { useSponsorsStore } from '@/store/sponsors'
   import { useTheme } from 'vuetify'
+
+  // Stores
+  import { useAppStore } from '@/store/app'
+  import { useUserStore } from '@vuetify/one'
+  import { useSponsorsStore } from '@/store/sponsors'
+  import { useSpotStore } from '@/store/spot'
 
   // Utilities
   import { computed, nextTick, onMounted, onScopeDispose, ref, watch } from 'vue'
   import { gtagClick } from '@/util/analytics'
   import { rpath } from '@/util/routes'
+  import { storeToRefs } from 'pinia'
 
   type TocItem = {
     to: string;
@@ -145,7 +152,9 @@
 
   const route = useRoute()
   const router = useRouter()
+  const spot = useSpotStore()
   const theme = useTheme()
+  const user = useUserStore()
 
   const routeToc = computed(() => route.meta.toc as TocItem[] | undefined)
 

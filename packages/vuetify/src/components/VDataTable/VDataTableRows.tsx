@@ -44,7 +44,6 @@ export const makeVDataTableRowsProps = propsFactory({
     type: String,
     default: '$vuetify.noDataText',
   },
-  rowHeight: Number,
   rowProps: [Object, Function] as PropType<RowProps<any>>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
 }, 'VDataTableRows')
@@ -69,7 +68,7 @@ export const VDataTableRows = genericComponent<new <T>(
     const { t } = useLocale()
 
     useRender(() => {
-      if (props.loading) {
+      if (props.loading && (!props.items.length || slots.loading)) {
         return (
           <tr
             class="v-data-table-rows-loading"

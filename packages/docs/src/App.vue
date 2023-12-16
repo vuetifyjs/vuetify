@@ -4,14 +4,13 @@
 
 <script setup lang="ts">
   // Composables
-  import { useHead } from '@vueuse/head'
+  import { useHead } from '@unhead/vue'
   import { useI18n } from 'vue-i18n'
   import { useRoute, useRouter } from 'vue-router'
   import { useTheme } from 'vuetify'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
-  import { useUserStore } from '@/store/user'
+  import { useAuthStore, useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed, nextTick, onBeforeMount, ref, watch, watchEffect } from 'vue'

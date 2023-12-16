@@ -236,11 +236,15 @@
   @media (hover: hover)
     .v-field:hover &
       opacity: 1
+  
+  @media (hover: none)
+    opacity: 1
 
 /* endregion */
 /* region LABEL */
 .v-label.v-field-label
   contain: layout paint
+  display: block
   margin-inline-start: var(--v-field-padding-start)
   margin-inline-end: var(--v-field-padding-end)
   max-width: calc(100% - var(--v-field-padding-start) - var(--v-field-padding-end))
@@ -387,6 +391,7 @@
     &__notch
       flex: none
       position: relative
+      max-width: calc(100% - $field-control-affixed-padding)
 
       &::before,
       &::after

@@ -193,7 +193,9 @@ function getWeekArray (date: Date, locale: string) {
     currentWeek.push(adjacentDay)
   }
 
-  weeks.push(currentWeek)
+  if (currentWeek.length > 0) {
+    weeks.push(currentWeek)
+  }
 
   return weeks
 }

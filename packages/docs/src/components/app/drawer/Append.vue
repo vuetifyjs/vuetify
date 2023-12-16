@@ -6,6 +6,7 @@
 
     <div class="d-flex ms-auto overflow-hidden">
       <v-btn
+        v-if="commits.latest"
         :text="commits.latest?.sha.slice(0, 7)"
         :href="`https://github.com/vuetifyjs/vuetify/commit/${commits.latest?.sha}`"
         class="text-caption me-2"
@@ -35,7 +36,7 @@
   import DrawerToggleRail from '@/components/app/drawer/DrawerToggleRail.vue'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
+  import { useAuthStore } from '@vuetify/one'
   import { useCommitsStore } from '@/store/commits'
 
   // Utilities

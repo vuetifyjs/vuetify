@@ -187,6 +187,11 @@ export const VCombobox = genericComponent<new <
         isPristine.value = !val
       },
     })
+    const counterValue = computed(() => {
+      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
+        : typeof props.counterValue === 'number' ? props.counterValue
+        : (props.multiple ? model.value.length : search.value.length)
+    })
     watch(_search, value => {
       if (cleared) {
         // wait for clear to finish, VTextField sets _search to null
@@ -298,7 +303,7 @@ export const VCombobox = genericComponent<new <
 
         const originalSelectionIndex = selectionIndex.value
         const selectedItem = model.value[selectionIndex.value]
-        if (selectedItem && !selectedItem.props.disabled) select(selectedItem)
+        if (selectedItem && !selectedItem.props.disabled) select(selectedItem, false)
 
         selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
       }
@@ -342,22 +347,25 @@ export const VCombobox = genericComponent<new <
         vTextFieldRef.value?.focus()
       }
     }
-    function select (item: ListItem) {
+    /** @param set - null means toggle */
+    function select (item: ListItem, set: boolean | null = true) {
       if (props.multiple) {
         const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
+        const add = set == null ? !~index : set
 
-        if (index === -1) {
-          model.value = [...model.value, item]
-        } else {
-          const value = [...model.value]
+        if (~index) {
+          const value = add ? [...model.value, item] : [...model.value]
           value.splice(index, 1)
           model.value = value
+        } else if (add) {
+          model.value = [...model.value, item]
         }
 
         search.value = ''
       } else {
-        model.value = [item]
-        _search.value = item.title
+        const add = set !== false
+        model.value = add ? [item] : []
+        _search.value = add ? item.title : ''
 
         // watch for search watcher to trigger
         nextTick(() => {
@@ -397,8 +405,7 @@ export const VCombobox = genericComponent<new <
       ) {
         select(displayItems.value[0])
       } else if (props.multiple && search.value) {
-        model.value = [...model.value, transformItem(props, search.value)]
-        search.value = ''
+        select(transformItem(props, search.value))
       }
     })
 
@@ -432,7 +439,7 @@ export const VCombobox = genericComponent<new <
           onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
-          counterValue={ props.multiple ? model.value.length : search.value.length }
+          counterValue={ counterValue.value }
           dirty={ isDirty }
           class={[
             'v-combobox',
@@ -495,7 +502,7 @@ export const VCombobox = genericComponent<new <
                             ref: itemRef,
                             key: index,
                             active: (highlightFirst.value && index === 0) ? true : undefined,
-                            onClick: () => select(item),
+                            onClick: () => select(item, null),
                           })
 
                           return slots.item?.({
@@ -542,7 +549,7 @@ export const VCombobox = genericComponent<new <
                     e.stopPropagation()
                     e.preventDefault()
 
-                    select(item)
+                    select(item, false)
                   }
 
                   const slotProps = {
