@@ -2,8 +2,8 @@
 import './VCalendar.sass'
 
 // Composables
-import { useDate } from '@/composables/date'
-import { getWeek } from '@/composables/date/date'
+import { getWeek, useDate } from '@/composables/date/date'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed } from 'vue'
@@ -66,18 +66,25 @@ export const VCalendar = genericComponent()({
     prev: null,
     'update:modelValue': null,
   },
-  expose: ['prev', 'next'],
 
   setup (props, { emit, slots }) {
     const adapter = useDate()
+
+    const model = useProxiedModel(
+      props,
+      'modelValue',
+      new Date(),
+      v => v,
+    )
+
     const dayNames = adapter.getWeekdays()
     const weeksIn = computed(() => {
       if (props.type === 'day') {
-        return [[props.modelValue]]
+        return [[model.value]]
       }
       if (props.type === 'week') {
         // get Start of week
-        const lastDay = adapter.startOfWeek(props.modelValue)
+        const lastDay = adapter.startOfWeek(model.value)
         const week = []
         for (let day = 0; day <= 6; day++) {
           week.push(adapter.addDays(lastDay, day))
@@ -85,13 +92,13 @@ export const VCalendar = genericComponent()({
 
         return [week]
       }
-      const weeks = adapter.getWeekArray(props.modelValue)
+      const weeks = adapter.getWeekArray(model.value)
 
       const days = weeks.flat()
 
-      // Make sure there's always 6 weeks in month (6 * 7 days)
+      // Make sure there's always 5 weeks in month (5 * 7 days)
       // But only do it if we're not hiding adjacent months?
-      const daysInMonth = 6 * 7
+      const daysInMonth = 5 * 7
       if (days.length < daysInMonth && props.showAdjacentMonths) {
         const lastDay = days[days.length - 1]
 
@@ -109,33 +116,33 @@ export const VCalendar = genericComponent()({
       return weeks
     })
 
-    const prev = () => {
+    function onClickPrev () {
       if (props.type === 'month') {
-        emit('update:modelValue', adapter.addMonths(props.modelValue, -1))
+        model.value = adapter.addMonths(model.value, -1)
       }
       if (props.type === 'week') {
-        emit('update:modelValue', adapter.addDays(props.modelValue, -7))
+        model.value = adapter.addDays(model.value, -7)
       }
       if (props.type === 'day') {
-        emit('update:modelValue', adapter.addDays(props.modelValue, -1))
+        model.value = adapter.addDays(model.value, -1)
       }
     }
 
-    const next = () => {
+    function onClickNext () {
       if (props.type === 'month') {
-        emit('update:modelValue', adapter.addMonths(props.modelValue, 1))
+        model.value = adapter.addMonths(model.value, 1)
       }
       if (props.type === 'week') {
-        emit('update:modelValue', adapter.addDays(props.modelValue, 7))
+        model.value = adapter.addDays(model.value, 7)
       }
       if (props.type === 'day') {
-        emit('update:modelValue', adapter.addDays(props.modelValue, 1))
+        model.value = adapter.addDays(model.value, 1)
       }
     }
 
     const validDates = computed(() => [
-      adapter.startOfMonth(props.modelValue),
-      adapter.endOfMonth(props.modelValue),
+      adapter.startOfMonth(model.value),
+      adapter.endOfMonth(model.value),
     ])
     const daysIn = computed(() => {
       const isRange = validDates.value.length > 1
@@ -146,43 +153,49 @@ export const VCalendar = genericComponent()({
       const startDate = computed(() => validDates.value[0])
       const endDate = computed(() => validDates.value[1])
 
-      return days.filter((date: Date, index) => props.weekdays.includes(date.getDay())).map((date, index) => {
-        const isStart = startDate.value && adapter.isSameDay(date, startDate.value)
-        const isEnd = endDate.value && adapter.isSameDay(date, endDate.value)
-        const isAdjacent = !adapter.isSameMonth(date, props.modelValue)
-        const isSame = validDates.value.length === 2 && adapter.isSameDay(startDate.value, endDate.value)
+      return days
+        .filter((date: any) => props.weekdays.includes(date.getDay()))
+        .map((date, index) => {
+          const isStart = startDate.value && adapter.isSameDay(date, startDate.value)
+          const isEnd = endDate.value && adapter.isSameDay(date, endDate.value)
+          const isAdjacent = !adapter.isSameMonth(date, model.value)
+          const isSame = validDates.value.length === 2 && adapter.isSameDay(startDate.value, endDate.value)
 
-        return {
-          date,
-          isoDate: adapter.toISO(date),
-          formatted: adapter.format(date, 'keyboardDate'),
-          year: adapter.getYear(date),
-          month: adapter.getMonth(date),
-          isWeekStart: index % 7 === 0,
-          isWeekEnd: index % 7 === 6,
-          isSelected: isStart || isEnd,
-          isStart,
-          isEnd,
-          isToday: adapter.isSameDay(date, today),
-          isAdjacent,
-          isHidden: isAdjacent && !props.showAdjacentMonths,
-          inRange: isRange &&
-            !isSame &&
-            (isStart || isEnd || (validDates.value.length === 2 && adapter.isWithinRange(date, validDates.value as [any, any]))),
-          // isHovered: props.hoverDate === date,
-          // inHover: hoverRange.value && isWithinRange(date, hoverRange.value),
-          isHovered: false,
-          inHover: false,
-          localized: adapter.format(date, 'dayOfMonth'),
-          events: props.events?.filter(event => adapter.isSameDay(event.start, date) || adapter.isSameDay(event.end, date)) ?? [],
-        }
-      })
+          return {
+            date,
+            isoDate: adapter.toISO(date),
+            formatted: adapter.format(date, 'keyboardDate'),
+            year: adapter.getYear(date),
+            month: adapter.getMonth(date),
+            isWeekStart: index % 7 === 0,
+            isWeekEnd: index % 7 === 6,
+            isSelected: isStart || isEnd,
+            isStart,
+            isEnd,
+            isToday: adapter.isSameDay(date, today),
+            isAdjacent,
+            isHidden: isAdjacent && !props.showAdjacentMonths,
+            inRange: isRange &&
+              !isSame &&
+              (isStart || isEnd || (validDates.value.length === 2 && adapter.isWithinRange(date, validDates.value as [any, any]))),
+            // isHovered: props.hoverDate === date,
+            // inHover: hoverRange.value && isWithinRange(date, hoverRange.value),
+            isHovered: false,
+            inHover: false,
+            localized: adapter.format(date, 'dayOfMonth'),
+            events: props.events?.filter(event => adapter.isSameDay(event.start, date) || adapter.isSameDay(event.end, date)) ?? [],
+          }
+        })
     })
 
     const weeks = computed(() => {
       return weeksIn.value.map(week => {
         return week.length ? getWeek(adapter, week[0]) : null
       })
+    })
+
+    const title = computed(() => {
+      return adapter.format(model.value, 'monthAndYear')
     })
 
     useRender(() => (
@@ -196,20 +209,18 @@ export const VCalendar = genericComponent()({
       ]}
       >
         <div>
-          { !props.hideHeader ? (
+          { !props.hideHeader && (
             <VCalendarHeader
-              key="calendarHeader"
-              title={ props.title }
-              start={ validDates.value[0] }
-              end={ validDates.value[1] }
-              onPrev={ prev }
-              onNext={ next }
+              key="calendar-header"
+              title={ title.value }
+              onClick:next={ onClickNext }
+              onClick:prev={ onClickPrev }
             />
-          ) : '' }
+          )}
         </div>
+
         <div class="v-calendar__container">
-        { props.type === 'month' && !props.hideDayHeader
-          ? (
+          { props.type === 'month' && !props.hideDayHeader && (
             <div
               class={
                 [
@@ -223,47 +234,63 @@ export const VCalendar = genericComponent()({
               { !props.hideWeekNumber ? <div key="weekNumber0" class="v-calendar-weekly__head-weeknumber"></div> : '' }
               {
                 props.weekdays.sort((a, b) => a - b).map(weekday => (
-                  <div class="v-calendar-weekly__head-weekday">
+                  <div class={ `v-calendar-weekly__head-weekday${!props.hideWeekNumber ? '-with-weeknumber' : ''}` }>
                     { dayNames[weekday] }
                   </div>
                 ))
               }
             </div>
-          ) : ''
-        }
-        { props.type === 'month' ? (
-          <div
-            key="VCalendarMonth"
-            class={
-              [
-                'v-calendar-month__days',
-                `days__${props.weekdays.length}`,
-                ...(!props.hideWeekNumber ? ['v-calendar-month__weeknumbers'] : []),
-              ]
-            }
-          >
-            { chunkArray(daysIn.value, props.weekdays.length).map((week, wi) => (
-              [
-                !props.hideWeekNumber ? <div class="v-calendar-month__weeknumber">{ weeks.value[wi] }</div> : '',
-                week.map(day => (
-                  <VCalendarMonthDay
-                    color={ adapter.isSameDay(new Date(), day.date) ? 'primary' : undefined }
-                    day={ day }
-                    disabled={ day ? props.disabled?.includes(day.date) : false }
-                    title={ day ? adapter.format(day.date, 'dayOfMonth') : 'NaN' }
-                    events={ day.events }
-                  ></VCalendarMonthDay>
-                )),
-              ]
-            ))}
-          </div>
-        ) : '' }
-        { props.type === 'week' ? (
-          daysIn.value.map((day, i) => (
+          )}
+
+          { props.type === 'month' && (
+            <div
+              key="VCalendarMonth"
+              class={
+                [
+                  'v-calendar-month__days',
+                  `days${!props.hideWeekNumber ? '-with-weeknumbers' : ''}__${props.weekdays.length}`,
+                  ...(!props.hideWeekNumber ? ['v-calendar-month__weeknumbers'] : []),
+                ]
+              }
+            >
+              { chunkArray(daysIn.value, props.weekdays.length).map((week, wi) => (
+                [
+                  !props.hideWeekNumber ? <div class="v-calendar-month__weeknumber">{ weeks.value[wi] }</div> : '',
+                  week.map(day => (
+                    <VCalendarMonthDay
+                      color={ adapter.isSameDay(new Date(), day.date) ? 'primary' : undefined }
+                      day={ day }
+                      disabled={ day ? props.disabled?.includes(day.date) : false }
+                      title={ day ? adapter.format(day.date, 'dayOfMonth') : 'NaN' }
+                      events={ day.events }
+                    ></VCalendarMonthDay>
+                  )),
+                ]
+              ))}
+            </div>
+          )}
+
+          { props.type === 'week' && (
+            daysIn.value.map((day, i) => (
+              <VCalendarDay
+                day={ day }
+                dayIndex={ i }
+                events={ day.events }
+                hideDayHeader={ props.hideDayHeader }
+                intervalDivisions={ props.intervalDivisions }
+                intervalDuration={ props.intervalDuration }
+                intervalHeight={ props.intervalHeight }
+                intervalLabel={ props.intervalLabel }
+                intervals={ props.intervals }
+                intervalStart={ props.intervalStart }
+              ></VCalendarDay>
+            ))
+          )}
+
+          { props.type === 'day' && (
             <VCalendarDay
-              day={ day }
-              dayIndex={ i }
-              events={ day.events }
+              day={ daysIn.value[0] }
+              events={ daysIn.value[0].events }
               hideDayHeader={ props.hideDayHeader }
               intervalDivisions={ props.intervalDivisions }
               intervalDuration={ props.intervalDuration }
@@ -272,21 +299,7 @@ export const VCalendar = genericComponent()({
               intervals={ props.intervals }
               intervalStart={ props.intervalStart }
             ></VCalendarDay>
-          ))
-        ) : '' }
-        { props.type === 'day' ? (
-          <VCalendarDay
-            day={ daysIn.value[0] }
-            events={ daysIn.value[0].events }
-            hideDayHeader={ props.hideDayHeader }
-            intervalDivisions={ props.intervalDivisions }
-            intervalDuration={ props.intervalDuration }
-            intervalHeight={ props.intervalHeight }
-            intervalLabel={ props.intervalLabel }
-            intervals={ props.intervals }
-            intervalStart={ props.intervalStart }
-          ></VCalendarDay>
-        ) : '' }
+          )}
         </div>
       </div>
     ))

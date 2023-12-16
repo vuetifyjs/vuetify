@@ -55,6 +55,7 @@ export default {
     },
   },
   calendar: {
+    today: 'Today',
     moreEvents: '{0} more',
   },
   input: {
