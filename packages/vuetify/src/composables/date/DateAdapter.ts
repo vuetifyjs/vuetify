@@ -24,9 +24,7 @@ export interface DateAdapter<T = unknown> {
   addMonths (date: T, amount: number): T
 
   getYear (date: T): number
-  getNextYear (date: T): T
   setYear (date: T, year: number): T
-  getDate (date: T): number
   getDiff (date: T, comparing: T | string, unit?: string): number
   getWeekArray (date: T): T[][]
   getWeekdays (): string[]

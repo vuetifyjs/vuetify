@@ -18,6 +18,7 @@ import {
   computed,
   nextTick,
   onBeforeMount,
+  onBeforeUnmount,
   ref,
   shallowRef,
   toRef,
@@ -28,6 +29,7 @@ import {
 import {
   convertToUnit,
   genericComponent,
+  getCurrentInstance,
   propsFactory,
   SUPPORTS_INTERSECTION,
   useRender,
@@ -113,6 +115,7 @@ export const VImg = genericComponent<VImgSlots>()({
   setup (props, { emit, slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { roundedClasses } = useRounded(props)
+    const vm = getCurrentInstance('VImg')
 
     const currentSrc = shallowRef('') // Set from srcset
     const image = ref<HTMLImageElement>()
@@ -173,6 +176,8 @@ export const VImg = genericComponent<VImgSlots>()({
         emit('loadstart', image.value?.currentSrc || normalisedSrc.value.src)
 
         setTimeout(() => {
+          if (vm.isUnmounted) return
+
           if (image.value?.complete) {
             if (!image.value.naturalWidth) {
               onError()
@@ -191,6 +196,8 @@ export const VImg = genericComponent<VImgSlots>()({
     }
 
     function onLoad () {
+      if (vm.isUnmounted) return
+
       getSrc()
       pollForSize(image.value!)
       state.value = 'loaded'
@@ -198,6 +205,8 @@ export const VImg = genericComponent<VImgSlots>()({
     }
 
     function onError () {
+      if (vm.isUnmounted) return
+
       state.value = 'error'
       emit('error', image.value?.currentSrc || normalisedSrc.value.src)
     }
@@ -208,9 +217,16 @@ export const VImg = genericComponent<VImgSlots>()({
     }
 
     let timer = -1
+
+    onBeforeUnmount(() => {
+      clearTimeout(timer)
+    })
+
     function pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {
         clearTimeout(timer)
+        if (vm.isUnmounted) return
+
         const { naturalHeight: imgHeight, naturalWidth: imgWidth } = img
 
         if (imgHeight || imgWidth) {

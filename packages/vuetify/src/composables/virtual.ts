@@ -4,13 +4,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, nextTick, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
-import {
-  clamp,
-  createRange,
-  debounce,
-  IN_BROWSER,
-  propsFactory,
-} from '@/util'
+import { clamp, debounce, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -75,9 +69,8 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     return !!(containerRef.value && markerRef.value && viewportHeight.value && itemHeight.value)
   })
 
-  const sizeMap = new Map<any, number>()
   let sizes = Array.from<number | null>({ length: items.value.length })
-  const offsets = Array.from<number>({ length: items.value.length })
+  let offsets = Array.from<number>({ length: items.value.length })
   const updateTime = shallowRef(0)
   let targetScrollIndex = -1
 
@@ -130,7 +123,6 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
 
     if (prevHeight !== height || prevMinHeight !== itemHeight.value) {
       sizes[index] = height
-      sizeMap.set(items.value[index], height)
       updateOffsets()
     }
   }
@@ -234,18 +226,12 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     }))
   })
 
-  watch(() => items.value.length, () => {
-    sizes = createRange(items.value.length).map(() => itemHeight.value)
-    sizeMap.forEach((height, item) => {
-      const index = items.value.indexOf(item)
-      if (index === -1) {
-        sizeMap.delete(item)
-      } else {
-        sizes[index] = height
-      }
-    })
+  watch(items, () => {
+    sizes = Array.from({ length: items.value.length })
+    offsets = Array.from({ length: items.value.length })
+    updateOffsets.immediate()
     calculateVisibleItems()
-  })
+  }, { deep: true })
 
   return {
     containerRef,

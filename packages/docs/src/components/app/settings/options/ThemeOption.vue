@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
   // Composables
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
   import { useI18n } from 'vue-i18n'
   import { useTheme } from 'vuetify'
 

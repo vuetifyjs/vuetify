@@ -23,6 +23,8 @@
     <v-container class="px-3 py-3">
       <options />
 
+      <ad-option v-if="auth.isSubscriber" />
+
       <developer-mode />
     </v-container>
 
@@ -34,6 +36,7 @@
 
 <script setup>
   // Components
+  import AdOption from '@/components/app/settings/options/AdOption.vue'
   import AppSettingsAppend from './Append.vue'
   import DeveloperMode from '@/components/app/settings/DeveloperMode.vue'
   import Options from '@/components/app/settings/Options.vue'
@@ -44,8 +47,11 @@
 
   // Stores
   import { useAppStore } from '@/store/app'
+  import { useAuthStore } from '@vuetify/one'
 
   const app = useAppStore()
+  const auth = useAuthStore()
+
   const { t } = useI18n()
   const { isRtl } = useRtl()
 </script>

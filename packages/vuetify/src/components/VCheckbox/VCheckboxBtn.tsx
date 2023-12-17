@@ -11,6 +11,7 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
+import type { GenericProps } from '@/util'
 
 export const makeVCheckboxBtnProps = propsFactory({
   indeterminate: Boolean,
@@ -25,14 +26,20 @@ export const makeVCheckboxBtnProps = propsFactory({
   }),
 }, 'VCheckboxBtn')
 
-export const VCheckboxBtn = genericComponent<VSelectionControlSlots>()({
+export const VCheckboxBtn = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: VSelectionControlSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VCheckboxBtn',
 
   props: makeVCheckboxBtnProps(),
 
   emits: {
     'update:modelValue': (value: any) => true,
-    'update:indeterminate': (val: boolean) => true,
+    'update:indeterminate': (value: boolean) => true,
   },
 
   setup (props, { slots }) {

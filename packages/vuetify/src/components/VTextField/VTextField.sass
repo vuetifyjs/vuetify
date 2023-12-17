@@ -31,6 +31,8 @@
 
   .v-input__details
     padding-inline: $text-field-details-padding-inline
+    @at-root #{selector.append('.v-input--plain-underlined', &)}
+      padding-inline: 0
 
   .v-field--no-label,
   .v-field--active

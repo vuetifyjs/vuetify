@@ -1,6 +1,7 @@
 @use './variables' as *
 @use '../../styles/tools'
 @use 'sass:math'
+@use 'sass:selector'
 
 // Block
 .v-file-input
@@ -25,3 +26,5 @@
 
   .v-input__details
     padding-inline: $file-input-details-padding-inline
+    @at-root #{selector.append('.v-input--plain-underlined', &)}
+      padding-inline: 0

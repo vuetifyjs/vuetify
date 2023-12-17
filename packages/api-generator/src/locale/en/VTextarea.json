@@ -3,10 +3,17 @@
     "autoGrow": "Automatically grow the textarea depending on amount of text.",
     "counterValue": "Display the input length but do not provide any validation.",
     "noResize": "Remove resize handle.",
+    "persistentPlaceholder": "Forces placeholder to always be visible.",
+    "prefix": "Displays prefix text.",
     "rowHeight": "Height value for each row. Requires the use of the **auto-grow** prop.",
-    "rows": "Default row count."
+    "rows": "Default row count.",
+    "suffix": "Displays suffix text."
   },
   "events": {
-    "keydown": "Emitted when **any** key is pressed, textarea must be focused."
+    "keydown": "Emitted when **any** key is pressed, textarea must be focused.",
+    "mousedown:control": "Event that is emitted when using mousedown on the main control area."
+  },
+  "slots": {
+    "counter": "Slot for the input’s counter text."
   }
 }

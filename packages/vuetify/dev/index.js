@@ -1,7 +1,7 @@
-import App from './App.vue'
 import vuetify from './vuetify'
+import App from './App.vue'
 
-import { createHead } from '@vueuse/head'
+import { createHead } from '@unhead/vue'
 import { routes } from './router'
 import viteSSR from 'vite-ssr/vue'
 

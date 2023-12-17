@@ -10,7 +10,7 @@ import { getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/uti
 
 // Types
 import type { PropType } from 'vue'
-import type { MaybeRef } from '@/util'
+import type { EventProp, MaybeRef } from '@/util'
 
 export type ValidationResult = string | boolean
 export type ValidationRule =
@@ -32,7 +32,7 @@ export interface ValidationProps {
   readonly: boolean | null
   rules: readonly ValidationRule[]
   modelValue: any
-  'onUpdate:modelValue': ((val: any) => void) | undefined
+  'onUpdate:modelValue': EventProp | undefined
   validateOn?: ValidateOnValue | `${ValidateOnValue} lazy` | `lazy ${ValidateOnValue}` | 'lazy'
   validationValue: any
 }

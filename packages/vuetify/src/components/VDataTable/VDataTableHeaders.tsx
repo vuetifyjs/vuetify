@@ -129,7 +129,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           ]}
           style={{
             width: convertToUnit(column.width),
-            minWidth: convertToUnit(column.width),
+            minWidth: convertToUnit(column.minWidth),
             ...getFixedStyles(column, y),
           }}
           colspan={ column.colspan }
@@ -214,6 +214,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               <th colspan={ columns.value.length }>
                 <LoaderSlot
                   name="v-data-table-progress"
+                  absolute
                   active
                   color={ typeof props.loading === 'boolean' ? undefined : props.loading }
                   indeterminate

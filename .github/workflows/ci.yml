@@ -8,6 +8,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
   CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 jobs:
   pre_job:
@@ -16,7 +17,7 @@ jobs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
       - id: skip_check
-        if: ${{ !startswith(github.ref, 'refs/tags/v') }}
+        if: ${{ !startswith(github.ref, 'refs/tags/v') && github.ref != 'refs/heads/master' }}
         uses: fkirc/skip-duplicate-actions@master
         with:
           skip_after_successful_duplicate: 'true'

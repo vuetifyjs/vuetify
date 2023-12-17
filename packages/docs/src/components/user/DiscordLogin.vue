@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
   import { useI18n } from 'vue-i18n'
-  import { useAuthStore } from '@/store/auth'
+  import { useAuthStore } from '@vuetify/one'
 
   const auth = useAuthStore()
 

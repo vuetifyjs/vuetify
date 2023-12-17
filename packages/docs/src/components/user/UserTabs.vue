@@ -32,10 +32,5 @@
       text: 'Options',
       to: rpath('/user/options/'),
     },
-    {
-      prependIcon: 'mdi-power',
-      text: 'Advanced Options',
-      to: rpath('/user/advanced-options/'),
-    },
   ]
 </script>

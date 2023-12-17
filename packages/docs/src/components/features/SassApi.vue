@@ -45,7 +45,7 @@
 
   const code = computed(() => {
     const $parsed = model.value.map(variable => {
-      return `  ${variable}: null`
+      return `  ${variable.title}: ${variable.value}`
     }).join(',\n')
 
     return `@use 'vuetify' with (\n${$parsed},\n);`
@@ -75,7 +75,7 @@
         for (const variable in component.sass) {
           variables.value.push({
             title: variable,
-            value: variable,
+            value: component.sass[variable]?.default || null,
             subtitle: name,
           })
         }

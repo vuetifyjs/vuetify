@@ -71,7 +71,7 @@
   // Composables
   import { useI18n } from 'vue-i18n'
   import { useTheme } from 'vuetify'
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   // Utilities
   import { ComponentPublicInstance, computed, ref, watchEffect } from 'vue'

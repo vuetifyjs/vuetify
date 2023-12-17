@@ -8,6 +8,7 @@
     "dense": "Reduces the input height.",
     "height": "Sets the height of the input.",
     "hint": "Displays hint text below the input when focused. Force this always open with the [persistent-hint](#props-persistent-hint) property.",
+    "id": "Sets the DOM id on the component.",
     "loading": "Displays linear progress bar. Can either be a String which specifies which color is applied to the progress bar (any material color or theme color - **primary**, **secondary**, **success**, **info**, **warning**, **error**) or a Boolean which uses the component **color** (set by color prop - if it's supported by the component) or the primary color.",
     "persistentHint": "Forces [hint](#props-hint) to always be visible.",
     "placeholder": "Sets the input's placeholder text.",
@@ -24,5 +25,10 @@
     "click:prepend": "Emitted when prepended icon is clicked.",
     "mousedown": "Emitted when click is pressed.",
     "mouseup": "Emitted when click is released."
+  },
+  "exposed": {
+    "reset": "Resets the input value.",
+    "resetValidation": "Resets validation of the input without modifying its value.",
+    "validate": "Validates the input's value."
   }
 }

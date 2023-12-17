@@ -28,8 +28,8 @@ export const makeDataTableItemsProps = propsFactory({
     type: [String, Array, Function] as PropType<SelectItemKey>,
     default: null,
   },
-  rowProps: [Object, Function] as PropType<RowProps>,
-  cellProps: [Object, Function] as PropType<CellProps>,
+  rowProps: [Object, Function] as PropType<RowProps<any>>,
+  cellProps: [Object, Function] as PropType<CellProps<any>>,
   returnObject: Boolean,
 }, 'DataTable-items')
 
