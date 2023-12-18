@@ -10,8 +10,7 @@
   import { useTheme } from 'vuetify'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
-  import { useUserStore } from '@/store/user'
+  import { useAuthStore, useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed, nextTick, onBeforeMount, ref, watch, watchEffect } from 'vue'

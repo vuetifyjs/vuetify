@@ -77,7 +77,7 @@
   import { useDisplay } from 'vuetify'
   import { useGtag } from 'vue-gtag-next'
   import { useRoute } from 'vue-router'
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed, onBeforeMount } from 'vue'

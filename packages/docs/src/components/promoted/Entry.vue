@@ -1,15 +1,14 @@
 <template>
-  <carbon v-if="!user.disableAds" />
+  <carbon
+    v-if="!user.disableAds"
+    class="mb-4"
+  />
 
-  <br>
-
-  <app-btn
-    v-if="false"
-    :text="user.disableAds ? 'dashboard.perks.enable-ads' : 'dashboard.perks.disable-ads'"
-    class="text-caption text-none mb-5 mt-2"
-    color="surface-variant"
-    prepend-icon="$vuetify"
-    variant="flat"
+  <border-chip
+    v-if="auth.isSubscriber && (!user.disableAds || user.dev)"
+    :prepend-icon="user.disableAds ? 'mdi-bullhorn-outline' : 'mdi-bullhorn'"
+    :text="t('toggle', [t('ads')])"
+    class="mb-2"
     @click="onClickDisableAds"
   />
 </template>
@@ -17,17 +16,18 @@
 <script setup>
   // Composables
   import { useRouter } from 'vue-router'
-  import { useUserStore } from '@/store/user'
+  import { useI18n } from 'vue-i18n'
 
   // Utilities
   import { rpath } from '@/util/routes'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
+  import { useAuthStore, useUserStore } from '@vuetify/one'
 
   const auth = useAuthStore()
   const router = useRouter()
   const user = useUserStore()
+  const { t } = useI18n()
 
   function onClickDisableAds () {
     if (!auth.isSubscriber) {

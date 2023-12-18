@@ -52,7 +52,7 @@
   import { useI18n } from 'vue-i18n'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
+  import { useAuthStore } from '@vuetify/one'
 
   const auth = useAuthStore()
   const { t } = useI18n()

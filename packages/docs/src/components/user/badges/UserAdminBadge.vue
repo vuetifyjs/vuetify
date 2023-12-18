@@ -16,7 +16,7 @@
 
 <script setup>
   // Stores
-  import { useAuthStore } from '@/store/auth'
+  import { useAuthStore } from '@vuetify/one'
 
   const auth = useAuthStore()
 </script>

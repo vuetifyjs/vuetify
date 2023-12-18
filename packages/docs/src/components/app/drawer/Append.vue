@@ -36,7 +36,7 @@
   import DrawerToggleRail from '@/components/app/drawer/DrawerToggleRail.vue'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
+  import { useAuthStore } from '@vuetify/one'
   import { useCommitsStore } from '@/store/commits'
 
   // Utilities

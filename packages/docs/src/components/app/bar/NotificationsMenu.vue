@@ -120,7 +120,7 @@
   import { useI18n } from 'vue-i18n'
 
   // Stores
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed, onMounted, ref } from 'vue'
@@ -184,7 +184,7 @@
   }
   function toggle ({ slug }: Notification) {
     user.notifications.read = user.notifications.read.includes(slug)
-      ? user.notifications.read.filter(n => n !== slug)
+      ? user.notifications.read.filter((n: any) => n !== slug)
       : [...user.notifications.read, slug]
   }
 
