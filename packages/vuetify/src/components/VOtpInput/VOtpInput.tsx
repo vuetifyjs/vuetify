@@ -212,8 +212,6 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     useRender(() => {
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
 
-      const { loader: _, ...vFieldSlots } = slots
-
       return (
         <div
           class={[
@@ -246,7 +244,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                   key={ i }
                 >
                   {{
-                    ...vFieldSlots,
+                    ...slots,
+                    loader: undefined,
                     default: () => {
                       return (
                         <input
