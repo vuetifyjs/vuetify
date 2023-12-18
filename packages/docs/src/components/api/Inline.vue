@@ -40,7 +40,7 @@
   // Composables
   import { useI18n } from 'vue-i18n'
   import { useRoute } from 'vue-router'
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed, onBeforeMount, ref } from 'vue'

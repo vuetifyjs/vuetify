@@ -120,7 +120,7 @@
   import algoliasearch from 'algoliasearch'
 
   // Stores
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   // Types
   import type { AlgoliaSearchHelper } from 'algoliasearch-helper'
