@@ -40,8 +40,8 @@ type ControlSlot = {
   icon: IconValue
   onClick: (e: Event) => void
   disabled: boolean
-  ariaLabel: string
-  ariaDisabled: boolean
+  'aria-label': string
+  'aria-disabled': boolean
 }
 
 export type VPaginationSlots = {
