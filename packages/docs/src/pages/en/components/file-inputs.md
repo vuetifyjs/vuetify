@@ -8,11 +8,17 @@ related:
   - /components/text-fields/
   - /components/forms/
   - /components/icons/
+features:
+  label: 'C: VFileInput'
+  report: true
+  github: /components/VFileInput/
 ---
 
 # File inputs
 
 The `v-file-input` component is a specialized input that provides a clean interface for selecting files, showing detailed selection information and upload progress. It is meant to be a direct replacement for a standard file input.
+
+<page-features />
 
 ## Usage
 

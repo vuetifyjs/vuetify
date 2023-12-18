@@ -130,8 +130,7 @@
     .v-btn__append,
     .v-btn__content > .v-icon--start,
     .v-btn__content > .v-icon--end
-      margin-inline-start: 0
-      margin-inline-end: 0
+      margin-inline: 0
 
     .v-btn__prepend,
     .v-btn__content > .v-icon--start
@@ -184,13 +183,11 @@
 
 .v-btn__prepend
   grid-area: prepend
-  margin-inline-start: $button-margin-start
-  margin-inline-end: $button-margin-end
+  margin-inline: $button-margin-start $button-margin-end
 
 .v-btn__append
   grid-area: append
-  margin-inline-start: $button-margin-end
-  margin-inline-end: $button-margin-start
+  margin-inline: $button-margin-end $button-margin-start
 
 .v-btn__content
   grid-area: content
@@ -198,12 +195,10 @@
   white-space: $button-white-space
 
   > .v-icon--start
-    margin-inline-start: $button-margin-start
-    margin-inline-end: $button-margin-end
+    margin-inline: $button-margin-start $button-margin-end
 
   > .v-icon--end
-    margin-inline-start: $button-margin-end
-    margin-inline-end: $button-margin-start
+    margin-inline: $button-margin-end $button-margin-start
 
   .v-btn--stacked &
     white-space: normal
@@ -229,6 +224,10 @@
 .v-btn
   .v-pagination &
     @include tools.rounded($button-pagination-border-radius)
+
+  &--rounded
+    .v-pagination &
+      @include tools.rounded($button-pagination-rounded-border-radius)
 
   &__overlay
     transition: none

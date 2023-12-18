@@ -76,6 +76,10 @@
     href?: string
     subfolder?: string
     disabled?: boolean
+    routeMatch?: string
+    routePath?: string
+    emphasized?: boolean
+    onClick?: () => void
   }
 
   function generateApiItems (locale: string) {
@@ -101,13 +105,19 @@
 
       if (litem.subfolder) path = litem.subfolder
 
-      const route = routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.title}/`))
+      const route = litem.routeMatch
+        ? routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.routeMatch}/`))
+        : routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.title}/`))
+
+      const to = litem.routePath
+        ? `/${locale}/${path}/${litem.routePath}/`
+        : route?.path
 
       return {
         title: route?.meta?.nav ?? route?.meta?.title ?? litem.title,
         subtitle: litem.subtitle && te(litem.subtitle) ? t(litem.subtitle) : litem.subtitle,
         emphasized: route?.meta?.emphasized ?? false,
-        to: route?.path,
+        to,
         disabled: !route,
       }
     } else if (item.divider) {
@@ -123,6 +133,7 @@
       const p = item.subfolder ? `${item.subfolder}/${item.title}` : path
       return {
         title: t(item.title!),
+        emphasized: item.emphasized,
         children: item.items.map(item => generateListItem(item, p, locale, t)),
       }
     }
@@ -158,6 +169,7 @@
         to: item?.to,
         href: item?.href,
       }),
+      onClick: item?.onClick,
       rel: item.href ? 'noopener noreferrer' : undefined,
       target: item.href ? '_blank' : undefined,
       children: item.title === 'api' ? generateApiItems(locale.value) : generateListItems(item, item.title!, locale.value, t),

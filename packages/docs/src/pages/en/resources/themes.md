@@ -1,6 +1,6 @@
 ---
 meta:
-  nav: Vuetify Themes
+  nav: Themes
   title: Free & Premium Vuetify themes
   description: Vuetify offers numerous pre-build starter and premium themes. Kickstart your next application today, no design skills needed.
   keywords: vuetify themes, pre-built material themes, premium themes
@@ -68,6 +68,14 @@ Create web apps and products using WrapPixel's product ready Vue Admin Templates
 Theme Selection offers an array of visually appealing, user-friendly UI kits and themes. Catering to a variety of platforms, they deliver efficient design solutions for a streamlined digital experience.
 
 <ThemeVendor name="ThemeSelection" />
+
+<br>
+
+## CodedThemes
+
+Craft powerful web applications and products effortlessly with CodedThemes. Explore our ready-to-use Vue Admin Templates, UI Kits, Themes, and Dashboards to streamline your development process and enhance your digital projects.
+
+<ThemeVendor name="CodedThemes" />
 
 <br>
 

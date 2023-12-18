@@ -8,11 +8,17 @@ related:
   - /components/aspect-ratios/
   - /components/cards/
   - /components/images/
+features:
+  github: /components/VParallax/
+  label: 'C: VParallax'
+  report: true
 ---
 
 # Parallax
 
 The `v-parallax` component creates a 3d effect that makes an image appear to scroll slower than the window.
+
+<page-features />
 
 ## Usage
 

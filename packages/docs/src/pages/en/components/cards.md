@@ -8,6 +8,12 @@ related:
   - /components/buttons
   - /components/images
   - /styles/text-and-typography
+features:
+  figma: true
+  label: 'C: VCard'
+  github: /components/VCard/
+  report: true
+  spec: https://m2.material.io/components/cards
 ---
 
 # Cards
@@ -16,7 +22,7 @@ related:
 
 ![Card Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-card/v-card-entry.png)
 
----
+<page-features />
 
 ## Usage
 
@@ -83,11 +89,74 @@ In some cases it is possible to combine the different options, like the example 
 
 ### Props
 
-#### Outlined
+#### Variants
 
-A card with the **variant** prop set to `outlined` has zero elevation.
+The **variant** prop gives you easy access to several different card styles. Available variants are: **elevated**(default), **flat**, **tonal**, **outlined**, **text**, and **plain**.
 
-<example file="v-card/prop-outlined" />
+| Value        | Description                                                 |
+|--------------|-------------------------------------------------------------|
+| **elevated** | Elevates the card with a shadow                             |
+| **flat**     | Removes card shadow and border                              |
+| **tonal**    | Background color is a lowered opacity of the color          |
+| **outlined** | Applies a thin border and card has zero elevation           |
+| **text**     | Removes the background and removes shadow                   |
+| **plain**    | Removes the background and lowers the opacity until hovered |
+
+<example file="v-card/prop-variant" />
+
+#### Color
+
+Cards can be colored by using any of the builtin colors and contextual names using the **color** prop.
+
+<example file="v-card/prop-color" />
+
+#### Elevation
+
+The **elevation** property provides up to 24 levels of shadow depth. By default, cards rest at 2dp.
+
+<example file="v-card/prop-elevation" />
+
+#### Hover
+
+When using the **hover** prop, the cards will increase its elevation when the mouse is hovered over them.
+
+<example file="v-card/prop-hover" />
+
+#### Href
+
+The card becomes an anchor with the **href** prop.
+
+<example file="v-card/prop-href" />
+
+#### Link
+
+Add the **link** prop for the same style without adding an anchor.
+
+<example file="v-card/prop-link" />
+
+#### Disabled
+
+The **disabled** prop can be added in order to prevent a user from interacting with the card.
+
+<example file="v-card/prop-disabled" />
+
+#### Image
+
+Apply a specific background image to the Card.
+
+<example file="v-card/prop-image" />
+
+### Slots
+
+The `v-card` component provides slots that enable you to customize content created by its props or to add additional content.
+
+Slots give you greater control to customize the content of the `v-card` component while still taking advantage of the easy-to-use props.
+
+#### Avatar and icon
+
+You can use the **prepend-avatar**, **append-avatar**, **prepend-icon** and **append-icon** props or the **prepend** and **append** slots to place a [v-icon](/components/icons/) that automatically injects the designated icon.
+
+<example file="v-card/slot-prepend-append" />
 
 ### Misc
 
@@ -111,13 +180,13 @@ With a simple conditional, you can easily add supplementary text that is hidden 
 
 #### Grids
 
-Using grids, you can create beautiful layouts.
+Using [grids](/components/grids/), you can create beautiful layouts.
 
 <example file="v-card/misc-grids" />
 
 #### Horizontal cards
 
-TODO: better description
+You can also play with the card layout using [layout flex](/styles/flex/).
 
 <example file="v-card/misc-horizontal-cards" />
 

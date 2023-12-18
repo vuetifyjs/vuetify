@@ -29,8 +29,8 @@
   import { computed } from 'vue'
 
   const props = defineProps({ team: String })
-  const team = useTeamStore()
-  const members = computed(() => team.members.filter(member => member.team === props.team))
+  const teams = useTeamStore()
+  const members = computed(() => teams.members.filter(member => member.team === props.team))
 </script>
 
 <style lang="sass">

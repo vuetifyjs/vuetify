@@ -10,7 +10,6 @@
     :headers="headers"
     :items-per-page="5"
     :items="desserts"
-    class="elevation-1"
     item-key="name"
   ></v-data-table>
 </template>

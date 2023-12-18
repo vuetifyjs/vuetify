@@ -10,7 +10,7 @@
       </p>
       <p>adjective</p>
       <div class="text--primary">
-        relating to or dependent on charity; charitable.<br>
+        relating to or dependent on charity; charitable; charitable donations. Pertaining to alms.<br>
         "an eleemosynary educational institution."
       </div>
     </v-card-text>

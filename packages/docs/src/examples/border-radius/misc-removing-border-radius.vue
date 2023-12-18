@@ -1,4 +1,3 @@
-
 <template>
   <div class="d-flex justify-space-around">
     <div class="pa-4 text-center bg-secondary rounded-0">

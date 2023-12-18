@@ -12,11 +12,13 @@
     width: calc(100% - #{$dialog-margin * 2})
     max-width: calc(100% - #{$dialog-margin * 2})
     margin: $dialog-margin
-    display: flex
-    flex-direction: column
 
     &,
     > form
+      display: flex
+      flex-direction: column
+      min-height: 0
+
       > .v-card,
       > .v-sheet
         --v-scrollbar-offset: 0px
@@ -68,7 +70,6 @@
   &,
   > form
     display: flex
-    overflow: hidden
 
     > .v-card
       display: flex

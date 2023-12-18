@@ -14,6 +14,7 @@ import { animate, genericComponent, omit, propsFactory, standardEasing, useRende
 
 // Types
 import type { PropType } from 'vue'
+import type { VBtnSlots } from '@/components/VBtn/VBtn'
 
 export const makeVTabProps = propsFactory({
   fixed: Boolean,
@@ -39,7 +40,7 @@ export const makeVTabProps = propsFactory({
   ]),
 }, 'VTab')
 
-export const VTab = genericComponent()({
+export const VTab = genericComponent<VBtnSlots>()({
   name: 'VTab',
 
   props: makeVTabProps(),
@@ -101,7 +102,7 @@ export const VTab = genericComponent()({
     }
 
     useRender(() => {
-      const [btnProps] = VBtn.filterProps(props)
+      const btnProps = VBtn.filterProps(props)
 
       return (
         <VBtn
@@ -116,25 +117,31 @@ export const VTab = genericComponent()({
           role="tab"
           aria-selected={ String(isSelected.value) }
           active={ false }
-          block={ props.fixed }
-          maxWidth={ props.fixed ? 300 : undefined }
-          rounded={ 0 }
           { ...btnProps }
           { ...attrs }
+          block={ props.fixed }
+          maxWidth={ props.fixed ? 300 : undefined }
           onGroup:selected={ updateSlider }
         >
-          { slots.default?.() ?? props.text }
+          {{
+            ...slots,
+            default: () => (
+              <>
+                { slots.default?.() ?? props.text }
 
-          { !props.hideSlider && (
-            <div
-              ref={ sliderEl }
-              class={[
-                'v-tab__slider',
-                sliderColorClasses.value,
-              ]}
-              style={ sliderColorStyles.value }
-            />
-          )}
+                { !props.hideSlider && (
+                  <div
+                    ref={ sliderEl }
+                    class={[
+                      'v-tab__slider',
+                      sliderColorClasses.value,
+                    ]}
+                    style={ sliderColorStyles.value }
+                  />
+                )}
+              </>
+            ),
+          }}
         </VBtn>
       )
     })

@@ -56,9 +56,9 @@ export const makeVCardProps = propsFactory({
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
-  subtitle: String,
-  text: String,
-  title: String,
+  subtitle: [String, Number],
+  text: [String, Number],
+  title: [String, Number],
 
   ...makeBorderProps(),
   ...makeComponentProps(),
@@ -113,14 +113,14 @@ export const VCard = genericComponent<VCardSlots>()({
 
     useRender(() => {
       const Tag = isLink.value ? 'a' : props.tag
-      const hasTitle = !!(slots.title || props.title)
-      const hasSubtitle = !!(slots.subtitle || props.subtitle)
+      const hasTitle = !!(slots.title || props.title != null)
+      const hasSubtitle = !!(slots.subtitle || props.subtitle != null)
       const hasHeader = hasTitle || hasSubtitle
       const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
       const hasImage = !!(slots.image || props.image)
       const hasCardItem = hasHeader || hasPrepend || hasAppend
-      const hasText = !!(slots.text || props.text)
+      const hasText = !!(slots.text || props.text != null)
 
       return (
         <Tag

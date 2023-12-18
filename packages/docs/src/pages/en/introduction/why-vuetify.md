@@ -25,7 +25,7 @@ Since its initial release in 2014, [Vue.js](https://vuejs.org/) has grown to be 
 
 ## Getting started
 
-The fastest way to try Vuetify is in the browser at 🎮[play.vuetifyjs.com](https://play.vuetifyjs.com/). For a complete list of installation options please navigate to the [Installation page](/getting-started/installation/).
+The fastest way to try Vuetify is in the browser at [Vuetify Play](https://play.vuetifyjs.com/). For a complete list of installation options please navigate to the [Installation page](/getting-started/installation/).
 
 ## Why Vuetify? { id="why-vuetify" }
 
@@ -91,6 +91,7 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 | [Accessibility (a11y)](/features/accessibility) | Intermediate | 10 min |
 | [Aliasing](/features/aliasing/) | Intermediate | 5 min |
 | [Application layout](/features/application-layout/) | Intermediate | 15 min |
+| [Dates](/features/dates/) | Intermediate | 10 min |
 | [Display & Platform](/features/display-and-platform/) | Intermediate | 15 min |
 | [Internationalization (i18n)](/features/internationalization/) | Intermediate | 5 min |
 | [SASS variables](/features/sass-variables/) | Intermediate | 10 min |

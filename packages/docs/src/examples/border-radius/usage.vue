@@ -1,4 +1,3 @@
-
 <template>
   <div class="text-center">
     <v-row class="pa-4">

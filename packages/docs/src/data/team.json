@@ -1,6 +1,6 @@
 {
   "johnleider": {
-    "discord": "johnleider#0001",
+    "discord": "johnleider",
     "focus": [
       "[vuetifyjs/*](https://github.com/vuetifyjs)"
     ],
@@ -21,7 +21,7 @@
     "joined": "Jun 2016"
   },
   "heatherleider": {
-    "discord": "heatherleider#7788",
+    "discord": "heatherleider",
     "focus": [
       "[vuetifyjs/*](https://github.com/vuetifyjs)"
     ],
@@ -36,7 +36,7 @@
     "joined": "Nov 2019"
   },
   "KaelWD": {
-    "discord": "Kaelwd#6373",
+    "discord": "kaelwd",
     "focus": [
       "[vuetifyjs/*](https://github.com/vuetifyjs)",
       "[vuetify-loader](https://github.com/vuetifyjs/vuetify-loader)",
@@ -44,7 +44,8 @@
     ],
     "funding": [
       "[GitHub Sponsors](https://github.com/sponsors/kaelwd)",
-      "[Patreon](https://patreon.com/kaelwd)"
+      "[Patreon](https://patreon.com/kaelwd)",
+      "[Open Collective](https://opencollective.com/vuetify)"
     ],
     "languages": [
       "English"
@@ -53,10 +54,10 @@
     "name": "Kael Watts-Deuchar",
     "team": "core",
     "twitter": "kaelwd",
-    "joined": "Dec 2017"
+    "joined": "Oct 2017"
   },
   "nekosaur": {
-    "discord": "nekosaur#5406",
+    "discord": ".nekosaur",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],
@@ -67,10 +68,10 @@
     "location": "Malmö, Sweden",
     "name": "Albert Kaaman",
     "team": "core",
-    "joined": "Dec 2017"
+    "joined": "Jun 2017"
   },
   "MajesticPotatoe": {
-    "discord": "MajesticPotatoe#4997",
+    "discord": "majesticpotatoe",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)",
       "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
@@ -90,7 +91,7 @@
     "joined": "Dec 2018"
   },
   "blalan05": {
-    "discord": "blalan05#3967",
+    "discord": "blalan05",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],
@@ -104,8 +105,9 @@
     "work": "CEO at Foundational Technologies LLC",
     "joined": "Feb 2021"
   },
-  "": {
-    "discord": "Elvina Garcia#0203",
+  "elvinagarcia": {
+    "avatar": "https://pbs.twimg.com/profile_images/1641112338995748866/lVvo6nob_400x400.png",
+    "discord": "elvinagarcia",
     "focus": [
       "Design/Animations"
     ],
@@ -117,29 +119,8 @@
     "team": "core",
     "joined": "Feb 2023"
   },
-  "santiagoaloi": {
-    "discord": "lannister#9474",
-    "focus": [
-      "[vuetifyjs/Community Suppport](https://discord.com/invite/vuetify-340160225338195969)",
-      "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
-    ],
-    "funding": [
-      "[GitHub Sponsors](https://github.com/sponsors/santiagoaloi/)"
-    ],
-    "languages": [
-      "Swedish",
-      "English",
-      "Spanish"
-    ],
-    "linkedin": "santiagoaloi",
-    "location": "Stockholm, Sweden",
-    "name": "Santiago Aloi",
-    "team": "core",
-    "work": "Product Specialist @ DataTalks",
-    "joined": "Feb 2023"
-  },
   "yuwu9145": {
-    "discord": "yuchao#8454",
+    "discord": "yuwu9145",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],

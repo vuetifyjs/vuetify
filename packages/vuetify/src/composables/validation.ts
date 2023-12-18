@@ -10,7 +10,7 @@ import { getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/uti
 
 // Types
 import type { PropType } from 'vue'
-import type { MaybeRef } from '@/util'
+import type { EventProp, MaybeRef } from '@/util'
 
 export type ValidationResult = string | boolean
 export type ValidationRule =
@@ -24,7 +24,7 @@ type ValidateOnValue = 'blur' | 'input' | 'submit'
 export interface ValidationProps {
   disabled: boolean | null
   error: boolean
-  errorMessages: string | readonly string[]
+  errorMessages: string | readonly string[] | null
   focused: boolean
   maxErrors: string | number
   name: string | undefined
@@ -32,7 +32,7 @@ export interface ValidationProps {
   readonly: boolean | null
   rules: readonly ValidationRule[]
   modelValue: any
-  'onUpdate:modelValue': ((val: any) => void) | undefined
+  'onUpdate:modelValue': EventProp | undefined
   validateOn?: ValidateOnValue | `${ValidateOnValue} lazy` | `lazy ${ValidateOnValue}` | 'lazy'
   validationValue: any
 }
@@ -44,7 +44,7 @@ export const makeValidationProps = propsFactory({
   },
   error: Boolean,
   errorMessages: {
-    type: [Array, String] as PropType<string | readonly string[]>,
+    type: [Array, String] as PropType<string | readonly string[] | null>,
     default: () => ([]),
   },
   maxErrors: {
@@ -85,8 +85,8 @@ export function useValidation (
   const isDisabled = computed(() => !!(props.disabled ?? form?.isDisabled.value))
   const isReadonly = computed(() => !!(props.readonly ?? form?.isReadonly.value))
   const errorMessages = computed(() => {
-    return props.errorMessages.length
-      ? wrapInArray(props.errorMessages).slice(0, Math.max(0, +props.maxErrors))
+    return props.errorMessages?.length
+      ? wrapInArray(props.errorMessages).concat(internalErrorMessages.value).slice(0, Math.max(0, +props.maxErrors))
       : internalErrorMessages.value
   })
   const validateOn = computed(() => {
@@ -102,7 +102,7 @@ export function useValidation (
     }
   })
   const isValid = computed(() => {
-    if (props.error || props.errorMessages.length) return false
+    if (props.error || props.errorMessages?.length) return false
     if (!props.rules.length) return true
     if (isPristine.value) {
       return internalErrorMessages.value.length || validateOn.value.lazy ? null : true

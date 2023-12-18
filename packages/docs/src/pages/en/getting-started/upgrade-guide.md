@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Upgrade guide
   title: Upgrade guide
@@ -12,27 +13,27 @@ related:
 
 # Upgrade Guide
 
-## Introduction
-
 This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
-Many of these changes can be applied automatically by [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)
+
+::: error
+  <span class="text-h6">Many of the changes on this page can be applied automatically using [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)</span>
+:::
 
 <entry />
 
-::: warning
+::: info
   This page is incomplete. Please check back later for more information, or submit a PR if you notice something missing. If you have additional questions, reach out to us in [Discord](https://community.vuetifyjs.com/)
 :::
 
 ::: warning
   Not all Vuetify 2 components are currently available in Vuetify 3; These components will be released as their development is completed via [Vuetify Labs](https://vuetifyjs.com/en/labs/introduction/).
 
-- v-calendar
-- [v-date-picker](/components/date-pickers/)
-- [v-data-table](/components/data-tables/basics/)
-- [v-skeleton-loader](/components/skeleton-loaders/)
-- v-stepper
-- v-time-picker
-- v-treeview
+- [calendar](https://github.com/vuetifyjs/vuetify/issues/13469)
+- [overflow-btn](https://github.com/vuetifyjs/vuetify/issues/13493)
+- [sparkline](https://github.com/vuetifyjs/vuetify/issues/13507)
+- [speed-dial](https://github.com/vuetifyjs/vuetify/issues/13508)
+- [time-picker](https://github.com/vuetifyjs/vuetify/issues/13516)
+- [treeview](https://github.com/vuetifyjs/vuetify/issues/13518)
 :::
 
 ## Setup
@@ -87,14 +88,26 @@ app.use(vuetify)
   - Custom properties are now also an rgb list instead of hex so `rgb()` or `rgba()` must be used to access them, for example `color: rgb(var(--v-theme-primary))` instead of `color: var(--v-primary-base)`.
 - Theme colors in the theme config are now nested inside a `colors` property, e.g. `const myTheme = { theme: { themes: { light: { colors: { primary: '#ccc' } } } } }`
 
-### SCSS
+### SASS variables
 
 - `$headings` was merged with `$typography`: Access font-size of subtitle-2 with `map-get($typography, 'subtitle-2', 'size')`
 - If you imported variables from `~vuetify/src/styles/settings/_variables` in v2, you have to replace it with `vuetify/settings`
-- Component variables that previously lived in e.g. `~/vuetify/src/components/VIcon/VIcon.sass` can now be imported from `vuetify/settings` directly too
-- `$displayBreakpoints` no longer includes `{breakpoint}-only` variables (e.g. xs-only), use `@media #{map-get(v.$display-breakpoints, 'xs')}` instead
+- Component variables that previously lived in e.g. `~/vuetify/src/components/VIcon/VIcon.sass` can now be imported from `vuetify/settings` directly too.
+- `$display-breakpoints` no longer includes `{breakpoint}-only` variables (e.g. xs-only), use `@media #{map-get(v.$display-breakpoints, 'xs')}` instead.
 - The `$transition` map has been removed, replaced with individual `$standard-easing`, `$decelerated-easing`, `$accelerated-easing` variables.
-- `$container-padding-x` is now 16px instead of 12px as in v2. You can replace it with `$spacer * 3` to get to the previous look
+- `$container-padding-x` is now 16px instead of 12px as in v2. You can replace it with `$spacer * 3` to get to the previous look.
+- Too many component variables to list have been renamed or removed. There is no automated way to update these as the element structure has changed significantly, you will need to manually update these along with any custom styles.
+
+### Styles and utility classes
+
+- `.hidden-{breakpoint}-only` has been renamed to `.hidden-{breakpoint}`
+- `.text-xs-{alignment}` has been renamed to `.text-{alignment}` to reflect the fact that it applies to all breakpoints.
+- Typography classes are have been renamed for consistency and are all prefixed with `text-`, for example `.display-4` is now `.text-h1`
+- Transition easing classes have been removed.
+
+:::info
+  An complete list of class changes will not be provided, please use [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/) to automatically fix them.
+:::
 
 ## Components
 
@@ -138,6 +151,14 @@ app.use(vuetify)
 - Transition props `mode` and `origin` have been removed.
 - `avatar` prop is no longer needed and has been removed.
 
+### v-banner
+
+- The `actions` slot no longer provides a dismiss function.
+- `shaped` prop has been removed.
+- `icon-color` has been removed.
+- `single-line` has been replaced with `lines="one"`.
+- `color` now applies to the icon and action text. Use `bg-color` to change the background color.
+
 ### v-btn/v-btn-toggle
 
 - `active-class` prop has been renamed to `selected-class`
@@ -156,6 +177,14 @@ app.use(vuetify)
 - `on-value` and `off-value` props have been renamed to `true-value` and `false-value`.
 - `v-checkbox`'s label slot should no longer contain a `<label>` as it is already wrapped with one
 
+### v-date-picker
+
+- Uses `Date` objects instead of strings. Some utility functions are included to help convert between the two, see [dates](/features/dates/).
+- `locale`, `locale-first-day-of-year`, `first-day-of-week`, `day-format`, `weekday-format`, `month-format`, `year-format`, `header-date-format`, and `title-date-format` are now part of the date adapter and use the globally configured [locale](/features/internationalization/) instead of being passed as props.
+- `active-picker` has been renamed to `view-mode`.
+- `picker-date` has been replaced with separate `month` and `year` props.
+- `range` is not currently implemented, will be added as a separate component in the future.
+
 ### v-form
 
 - `validate()` now returns a [`Promise<FormValidationResult>`](/api/v-form/#exposed-validate) instead of a boolean. Await the promise then check `result.valid` to determine form state.
@@ -171,6 +200,11 @@ app.use(vuetify)
 - `v-list-item` `inactive` prop has been replaced with `:active="false" :link="false"`.
 - `v-subheader`  has been renamed to `v-list-subheader`.
 - `v-list-item`'s `active` scoped slot prop has been renamed to `isActive`
+
+### v-rating
+
+- `color` has been renamed to `active-color`.
+- `background-color` has been renamed to `color`.
 
 ### v-select/v-combobox/v-autocomplete
 
@@ -194,6 +228,19 @@ app.use(vuetify)
 ### v-simple-table
 
 - `v-simple-table` has been renamed to `v-table`
+
+### v-data-table
+
+- Headers objects:
+  - `text` property has been renamed to `title`.
+  - `data-table-select` and `data-table-expand` must be defined as `key` instead of `value`.
+  - `class` has been replaced with `headerProps`.
+  - `cellClass` has been replaced with `cellProps` and now accepts either a function or an object.
+- Server side tables using `server-items-length` must be replaced with `<v-data-table-server items-length />`.
+- Argument order for `@click:*` events is now consistently `(event, data)`.
+  - `onRowClick (item, data, event)` should be changed to `onRowClick (event, { item })`.
+- `item-class` and `item-style` have been combined into `row-props`, and `cell-props` has been added.
+- `sort-desc` and `group-desc` have been combined into `sort-by` and `group-by`. These properties now take an array of `{ key: string, order: 'asc' | 'desc' }` objects instead of strings.
 
 ### v-slider/v-range-slider
 
@@ -230,3 +277,9 @@ app.use(vuetify)
 ### v-card
 
 - `v-card` does not allow content to overflow or use higher `z-index` values to display on top of elements outside it. To disable this behavior, use `<v-card style="overflow: initial; z-index: initial">` ([#17593](https://github.com/vuetifyjs/vuetify/issues/17593), [#17628](https://github.com/vuetifyjs/vuetify/issues/17628))
+
+## Directives
+
+### v-intersect
+
+- Handler argument order has changed from `entries, observer, isIntersecting` to `isIntersecting, entries, observer`

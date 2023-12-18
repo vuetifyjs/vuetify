@@ -19,6 +19,7 @@ import { EventProp, genericComponent, getUid, propsFactory, useRender } from '@/
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
 import type { VMessageSlot } from '@/components/VMessages/VMessages'
+import type { GenericProps } from '@/util'
 
 export interface VInputSlot {
   id: ComputedRef<string>
@@ -43,6 +44,7 @@ export const makeVInputProps = propsFactory({
   },
   prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
+  hideSpinButtons: Boolean,
   hint: String,
   persistentHint: Boolean,
   messages: {
@@ -71,7 +73,13 @@ export type VInputSlots = {
   message: VMessageSlot
 }
 
-export const VInput = genericComponent<VInputSlots>()({
+export const VInput = genericComponent<new <T>(
+  props: {
+    modelValue?: T | null
+    'onUpdate:modelValue'?: (value: T | null) => void
+  },
+  slots: VInputSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VInput',
 
   props: {
@@ -79,7 +87,7 @@ export const VInput = genericComponent<VInputSlots>()({
   },
 
   emits: {
-    'update:modelValue': (val: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { attrs, slots, emit }) {
@@ -145,6 +153,7 @@ export const VInput = genericComponent<VInputSlots>()({
             `v-input--${props.direction}`,
             {
               'v-input--center-affix': props.centerAffix,
+              'v-input--hide-spin-buttons': props.hideSpinButtons,
             },
             densityClasses.value,
             rtlClasses.value,
@@ -205,6 +214,8 @@ export const VInput = genericComponent<VInputSlots>()({
       reset,
       resetValidation,
       validate,
+      isValid,
+      errorMessages,
     }
   },
 })

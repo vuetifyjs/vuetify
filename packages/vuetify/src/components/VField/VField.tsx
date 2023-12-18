@@ -107,7 +107,7 @@ export type VFieldSlots = {
 export const VField = genericComponent<new <T>(
   props: {
     modelValue?: T
-    'onUpdate:modelValue'?: (val: T) => any
+    'onUpdate:modelValue'?: (value: T) => void
   },
   slots: VFieldSlots
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -124,7 +124,7 @@ export const VField = genericComponent<new <T>(
 
   emits: {
     'update:focused': (focused: boolean) => true,
-    'update:modelValue': (val: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
@@ -215,13 +215,15 @@ export const VField = genericComponent<new <T>(
       const hasPrepend = (slots['prepend-inner'] || props.prependInnerIcon)
       const hasClear = !!(props.clearable || slots.clear)
       const hasAppend = !!(slots['append-inner'] || props.appendInnerIcon || hasClear)
-      const label = slots.label
-        ? slots.label({
-          ...slotProps.value,
-          label: props.label,
-          props: { for: id.value },
-        })
-        : props.label
+      const label = () => (
+        slots.label
+          ? slots.label({
+            ...slotProps.value,
+            label: props.label,
+            props: { for: id.value },
+          })
+          : props.label
+      )
 
       return (
         <div
@@ -240,7 +242,7 @@ export const VField = genericComponent<new <T>(
               'v-field--prepended': hasPrepend,
               'v-field--reverse': props.reverse,
               'v-field--single-line': props.singleLine,
-              'v-field--no-label': !label,
+              'v-field--no-label': !label(),
               [`v-field--variant-${props.variant}`]: true,
             },
             themeClasses.value,
@@ -287,12 +289,12 @@ export const VField = genericComponent<new <T>(
                 for={ id.value }
                 style={ textColorStyles.value }
               >
-                { label }
+                { label() }
               </VFieldLabel>
             )}
 
             <VFieldLabel ref={ labelRef } for={ id.value }>
-              { label }
+              { label() }
             </VFieldLabel>
 
             { slots.default?.({
@@ -349,7 +351,7 @@ export const VField = genericComponent<new <T>(
                 { hasLabel.value && (
                   <div class="v-field__outline__notch">
                     <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
-                      { label }
+                      { label() }
                     </VFieldLabel>
                   </div>
                 )}
@@ -360,7 +362,7 @@ export const VField = genericComponent<new <T>(
 
             { isPlainOrUnderlined.value && hasLabel.value && (
               <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
-                { label }
+                { label() }
               </VFieldLabel>
             )}
           </div>

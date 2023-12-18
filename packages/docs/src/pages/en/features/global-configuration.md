@@ -112,6 +112,10 @@ export default createVuetify({
 })
 ```
 
+::: warning
+  `class` and `style` cannot be used in the `global` object, only in specific components.
+:::
+
 ## Using with virtual components
 
 Whether you are developing a wrapper framework or just a design system for your application, [virtual components](/features/aliasing/#virtual-component-defaults) are a powerful ally. Within the Vuetify defaults system, classes and styles are treated just like regular props but instead of being overwritten at the template level, they are merged.
@@ -259,7 +263,7 @@ In your template, assign the return value of `defineProps` to a variable and pas
 </script>
 ```
 
-Notice that we have to explicltly use the `props` object in the template. This is because Vue automatically unwraps the values in `defineProps`.
+Notice that we have to explicitly use the `props` object in the template. This is because Vue automatically unwraps the values in `defineProps`.
 
 ```diff
 -<div>I am {{ foo }}</div>

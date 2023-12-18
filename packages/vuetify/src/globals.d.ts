@@ -153,7 +153,9 @@ declare module '@vue/runtime-dom' {
     [K in keyof E]?: E[K] extends Function ? E[K] : (payload: E[K]) => void
   }
 
-  export interface HTMLAttributes extends EventHandlers<ModifiedEvents> {}
+  export interface HTMLAttributes extends EventHandlers<ModifiedEvents> {
+    onScrollend?: (e: Event) => void
+  }
 
   type CustomProperties = {
     [k in `--${string}`]: any

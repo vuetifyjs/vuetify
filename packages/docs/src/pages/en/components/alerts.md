@@ -8,6 +8,11 @@ related:
   - /components/buttons/
   - /components/icons/
   - /components/snackbars/
+features:
+  figma: true
+  github: /components/VAlert/
+  label: 'C: VAlert'
+  report: true
 ---
 
 # Alerts
@@ -16,7 +21,7 @@ The `v-alert` component is used to convey important information to the user thro
 
 ![Alert Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-alert/v-alert-entry.png)
 
-----
+<page-features />
 
 ## Usage
 
@@ -56,7 +61,7 @@ The recommended placement of elements inside of `v-alert` is:
 
 ## Guide
 
-The `v-alert` component is a callout element designed to attact the attention of a user. Unlike [v-banner](/components/banners/), the `v-alert` component is intended to be used and re-used throughout your application. An alert's color is derived from its **type** property which corresponds to your application's contextual [theme colors](/features/theme/#custom-theme-colors) and [iconfont aliases](/features/icon-fonts/#creating-a-custom-icon-set).
+The `v-alert` component is a callout element designed to attract the attention of a user. Unlike [v-banner](/components/banners/), the `v-alert` component is intended to be used and re-used throughout your application. An alert's color is derived from its **type** property which corresponds to your application's contextual [theme colors](/features/theme/#custom-theme-colors) and [iconfont aliases](/features/icon-fonts/#creating-a-custom-icon-set).
 
 ### Props
 
