@@ -3917,10 +3917,10 @@
     find-cache-dir "^3.3.2"
     upath "^2.0.1"
 
-"@vuetify/one@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@vuetify/one/-/one-0.0.6.tgz#e000d47211675d8a970373c8d65d02dfe68898d6"
-  integrity sha512-VtfckfRhX8iV/87Qeb5TZTKk2yjcyeqlyg7Om+Uu8TuuFnhyVSPH7bGQsiZeK4RIFJSiAtN6jgFgJMUbkcfcUQ==
+"@vuetify/one@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@vuetify/one/-/one-0.1.0.tgz#ab2dac01ab851b6ed4019f20604127eb4c2e3921"
+  integrity sha512-esq7ujV0d6YWUP+PLuPaqKyjxznSOXNrl1JM7qk12Sr3M+bNBfgpwPu9joVbMIUq05nKlxXi+J/vCvt26qLv7Q==
   dependencies:
     "@mdi/js" "6.2.95"
     core-js "^3.29.0"
