@@ -167,21 +167,23 @@ export const VClassIcon = defineComponent({
 })
 export type VClassIcon = InstanceType<typeof VClassIcon>
 
-export const defaultSets: Record<string, IconSet> = {
-  svg: {
-    component: VSvgIcon,
-  },
-  class: {
-    component: VClassIcon,
-  },
+function genDefaults (): Record<string, IconSet> {
+  return {
+    svg: {
+      component: VSvgIcon,
+    },
+    class: {
+      component: VClassIcon,
+    },
+  }
 }
 
 // Composables
 export function createIcons (options?: IconOptions) {
-  const sets = { ...defaultSets }
+  const sets = genDefaults()
   const defaultSet = options?.defaultSet ?? 'mdi'
 
-  if (defaultSet === 'mdi') {
+  if (defaultSet === 'mdi' && !sets.mdi) {
     sets.mdi = mdi
   }
 
@@ -239,7 +241,7 @@ export const useIcon = (props: Ref<IconValue | undefined>) => {
       setName => typeof icon === 'string' && icon.startsWith(`${setName}:`)
     )
 
-    const iconName = iconSetName ? icon.slice(iconSetName.length + 1) : icon
+    const iconName = iconSetName?.startsWith('svg') ? icon.slice(iconSetName.length + 1) : icon.replace(':', '-')
     const iconSet = icons.sets[iconSetName ?? icons.defaultSet]
 
     return {
