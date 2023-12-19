@@ -264,8 +264,8 @@ export const VPagination = genericComponent<VPaginationSlots>()({
               icon: true,
               disabled: !!props.disabled || +props.length < 2,
               color: isActive ? props.activeColor : props.color,
-              ariaCurrent: isActive,
-              ariaLabel: t(isActive ? props.currentPageAriaLabel : props.pageAriaLabel, item),
+              'aria-current': isActive,
+              'aria-label': t(isActive ? props.currentPageAriaLabel : props.pageAriaLabel, item),
               onClick: (e: Event) => setValue(e, item),
             },
           }
