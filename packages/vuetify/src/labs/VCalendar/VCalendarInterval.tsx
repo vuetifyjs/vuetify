@@ -7,7 +7,7 @@ import { useDate } from '@/composables/date'
 // Utilities
 import { computed } from 'vue'
 import { VCalendarIntervalEvent } from './VCalendarIntervalEvent'
-import { genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
 export const VCalendarInterval = genericComponent()({
   name: 'VCalendarInterval',
@@ -77,7 +77,7 @@ export const VCalendarInterval = genericComponent()({
     useRender(() => {
       return (
         props.dayIndex === 0 ? (
-          <div class="v-calendar-day__row-with-label" style={ `height: ${props.intervalHeight}px` }>
+          <div class="v-calendar-day__row-with-label" style={ `height: ${convertToUnit(props.intervalHeight, 'px')}` }>
             <div class="v-calendar-day__row-label">
               <slot name="intervalLabel" interval={ interval.value }>
                 { props.index
@@ -109,7 +109,7 @@ export const VCalendarInterval = genericComponent()({
             </div>
           </div>
         ) : (
-          <div class="v-calendar-day__row-without-label" style={ `height: ${props.intervalHeight}px` }>
+          <div class="v-calendar-day__row-without-label" style={ `height: ${convertToUnit(props.intervalHeight, 'px')}` }>
             <div class={['v-calendar-day__row-content', interval.value.events.some(e => !e.last)
               ? 'v-calendar-day__row-content-through'
               : '']}

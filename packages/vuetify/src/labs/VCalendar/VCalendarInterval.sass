@@ -1,14 +1,16 @@
+@import './_variables.scss'
+
 .v-calendar-day__row-with-label
   display: grid
   grid-template-columns: 48px 8px 1fr
-  border-right: 1px solid #e0e0e0
+  border-right: $calendar-line-width solid $calendar-line-color
 
   .v-calendar-day__row-hairline
     position: relative
-    border-right: 1px solid #e0e0e0
+    border-right: $calendar-line-width solid $calendar-line-color
     &:after
       content: ''
-      border-bottom: 1px solid #e0e0e0
+      border-bottom: $calendar-line-width solid $calendar-line-color
       position: absolute
       width: 100%
       margin-top: -1px
@@ -21,17 +23,17 @@
     position: relative
     top: -8px
   .v-calendar-day__row-content
-    border-bottom: 1px solid #e0e0e0
+    border-bottom: $calendar-line-width solid $calendar-line-color
     &.v-calendar-day__row-content-through
       border-bottom: none
 
 .v-calendar-day__row-without-label
   display: grid
   grid-template-columns: 1fr
-  border-right: 1px solid #e0e0e0
+  border-right: $calendar-line-width solid $calendar-line-color
   
   .v-calendar-day__row-content
-    border-bottom: 1px solid #e0e0e0
+    border-bottom: $calendar-line-width solid $calendar-line-color
 
     &.v-calendar-day__row-content-through
       border-bottom: none

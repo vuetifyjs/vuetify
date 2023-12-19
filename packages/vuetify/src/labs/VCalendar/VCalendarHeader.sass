@@ -1,11 +1,13 @@
+@import './_variables.scss'
+
 .v-calendar-header
-  align-items: center
-  display: flex
-  min-height: 64px
+  align-items: $calendar-header-align
+  display: $calendar-header-display
+  min-height: $calendar-header-min-height
 
 .v-calendar-header__today
-  margin-inline-end: 24px
+  margin-inline-end: $calendar-header-today-margin-end
 
 .v-calendar-header__title
-  font-size: 1.5rem
-  margin-inline-start: 24px
+  font-size: $calendar-header-title-font-size
+  margin-inline-start: $calendar-header-title-margin-start

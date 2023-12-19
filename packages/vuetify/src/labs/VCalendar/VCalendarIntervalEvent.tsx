@@ -5,7 +5,7 @@ import { VSheet } from '@/components/VSheet'
 import { useDate } from '@/composables/date'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
 export const VCalendarIntervalEvent = genericComponent()({
   name: 'VCalendarIntervalEvent',
@@ -32,12 +32,15 @@ export const VCalendarIntervalEvent = genericComponent()({
     const adapter = useDate()
     const calcHeight = () => {
       if ((!props.event?.first && !props.event?.last) || adapter.isEqual(props.event?.start, props.interval?.start)) {
-        return { height: '100%', margin: '0px' }
+        return { height: '100%', margin: convertToUnit(0, 'px') }
       } else {
         const { height, margin } = Array.from({ length: props.intervalDivisions },
           (x: number) => x * (props.intervalDuration / props.intervalDivisions)).reduce((total, div, index) => {
           if (adapter.isBefore(adapter.addMinutes(props.interval?.start, div), props.event?.start)) {
-            return { height: `${(props.intervalHeight / props.intervalDivisions) * index}px`, margin: `${(props.intervalHeight / props.intervalDivisions) * index}px` }
+            return {
+              height: convertToUnit((props.intervalHeight / props.intervalDivisions) * index, 'px'),
+              margin: convertToUnit((props.intervalHeight / props.intervalDivisions) * index, 'px'),
+            }
           }
           return { height: total.height, margin: total.margin }
         }, { height: '', margin: '' })
