@@ -31,7 +31,10 @@ export const VCalendarDay = genericComponent()({
       type: Number,
       required: true,
     },
-    intervalHeight: Number,
+    intervalHeight: {
+      type: Number,
+      required: true,
+    },
     intervalLabel: [String, Function],
     intervals: {
       type: Number,

@@ -34,8 +34,9 @@ export const VCalendarHeader = genericComponent()({
   },
 
   emits: {
-    'click:prev': () => true,
     'click:next': () => true,
+    'click:prev': () => true,
+    'click:toToday': () => true,
   },
 
   setup (props, { emit }) {
@@ -49,6 +50,10 @@ export const VCalendarHeader = genericComponent()({
       emit('click:next')
     }
 
+    function toToday () {
+      emit('click:toToday')
+    }
+
     useRender(() => (
       <div class="v-calendar-header">
         { props.text && (
@@ -57,6 +62,7 @@ export const VCalendarHeader = genericComponent()({
             key="today"
             text={ t(props.text) }
             variant="outlined"
+            onClick={ toToday }
           />
         )}
 
