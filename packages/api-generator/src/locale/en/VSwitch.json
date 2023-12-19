@@ -8,6 +8,7 @@
   },
   "events": {
     "change": "Emitted when the input is changed by user interaction.",
+    "update:indeterminate": "Event that is emitted when the component's indeterminate state changes.",
     "click": "Emitted when input is clicked. **Note:** the **change** event should be used instead of **click** when monitoring state change."
   }
 }
