@@ -7,7 +7,8 @@
     "prefix": "Displays prefix text.",
     "rowHeight": "Height value for each row. Requires the use of the **auto-grow** prop.",
     "rows": "Default row count.",
-    "suffix": "Displays suffix text."
+    "suffix": "Displays suffix text.",
+    "maxRows": "Specifies the maximum number of row count"
   },
   "events": {
     "keydown": "Emitted when **any** key is pressed, textarea must be focused.",

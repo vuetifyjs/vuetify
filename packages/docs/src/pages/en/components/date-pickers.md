@@ -12,7 +12,7 @@ features:
   github: /components/VDatePicker/
   label: 'C: VDatePicker'
   report: true
-  spec: https://material.io/components/date-pickers
+  spec: https://m2.material.io/components/date-pickers
 ---
 
 # Date pickers

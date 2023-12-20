@@ -1,7 +1,14 @@
-import { install } from '@vuetify/one'
+// Styles
+import '@vuetify/one/styles'
 
+// Plugins
+import { createOne } from '@vuetify/one'
+
+// Types
 import type { App } from 'vue'
 
 export function installOne (app: App) {
-  app.use(install as any)
+  const one = createOne()
+
+  return app.use(one as any)
 }
