@@ -3917,10 +3917,10 @@
     find-cache-dir "^3.3.2"
     upath "^2.0.1"
 
-"@vuetify/one@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@vuetify/one/-/one-0.0.2.tgz#d5a6d430a6268e859ef9cef6026e3680895a0a61"
-  integrity sha512-x3OnnSAMw07/pQfrgTCa6XCCd/2bWEtGNvkj9DGhT0VQpyKIUuBRG/7R4A5J34m6n8bQAfMJwd8Fc4yiMzx3YQ==
+"@vuetify/one@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@vuetify/one/-/one-0.1.0.tgz#ab2dac01ab851b6ed4019f20604127eb4c2e3921"
+  integrity sha512-esq7ujV0d6YWUP+PLuPaqKyjxznSOXNrl1JM7qk12Sr3M+bNBfgpwPu9joVbMIUq05nKlxXi+J/vCvt26qLv7Q==
   dependencies:
     "@mdi/js" "6.2.95"
     core-js "^3.29.0"
@@ -13974,10 +13974,10 @@ tsutils@^3.21.0:
   dependencies:
     tslib "^1.8.1"
 
-tsx@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/tsx/-/tsx-4.5.0.tgz#47384fffbd9d2e0273cfa6cf8b4caa4bb83dc742"
-  integrity sha512-hgxdziy9KLaHh9KE+a6tIZFP6kb0MLq/1D0sJVifbGP4QVEYhy6+2FNn7MyCm1pMc63p9CW/L1OzdqTNPxs6rg==
+tsx@^4.6.2:
+  version "4.6.2"
+  resolved "https://registry.yarnpkg.com/tsx/-/tsx-4.6.2.tgz#8e9c1456ad4f1102c5c42c5be7fd428259b7d39b"
+  integrity sha512-QPpBdJo+ZDtqZgAnq86iY/PD2KYCUPSUGIunHdGwyII99GKH+f3z3FZ8XNFLSGQIA4I365ui8wnQpl8OKLqcsg==
   dependencies:
     esbuild "~0.18.20"
     get-tsconfig "^4.7.2"

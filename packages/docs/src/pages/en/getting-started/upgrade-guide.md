@@ -22,7 +22,9 @@ This page contains a detailed list of breaking changes and the steps required to
 <entry />
 
 ::: info
-  This page is incomplete. Please check back later for more information, or submit a PR if you notice something missing. If you have additional questions, reach out to us in [Discord](https://community.vuetifyjs.com/)
+
+Before upgrading, make sure to consult the Official [Vue 3 Migration Guide](https://v3-migration.vuejs.org/)
+
 :::
 
 ::: warning

@@ -28,7 +28,7 @@
     "all-checks": "yarn lint && lerna run test && lerna run cy:run && yarn build"
   },
   "engines": {
-    "node": ">=12",
+    "node": ">=18.19.0 || >=20.6.0",
     "yarn": "^1.19"
   },
   "devDependencies": {

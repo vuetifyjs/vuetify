@@ -12,7 +12,7 @@
   // Composables
   import { useRoute } from 'vue-router'
   import { useTheme } from 'vuetify'
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed } from 'vue'

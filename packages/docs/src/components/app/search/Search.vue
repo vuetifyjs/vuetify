@@ -50,20 +50,29 @@
         </template>
       </app-text-field>
 
-      <v-card-text :class="['px-4 py-0 d-flex justify-center', searchString ? 'align-start' : 'align-center']">
-        <div v-if="!searchString" class="text-center">
-          <v-icon
-            class="mb-6 mx-auto text-disabled"
-            icon="mdi-text-box-search-outline"
-            size="150"
-          />
+      <v-card-text :class="['px-4 py-0 d-flex flex-wrap justify-center', searchString ? 'align-start' : 'align-center']">
 
-          <br>
+        <search-recent
+          v-if="searches.length && !searchString"
+          :searches="searches"
+          @click:delete="onClickDelete"
+        />
 
-          <v-list-subheader class="d-inline-flex">
-            {{ t('search.results') }}
-          </v-list-subheader>
-        </div>
+        <template v-else-if="!searchString">
+          <div class="text-center">
+            <v-icon
+              class="mb-6 mx-auto text-disabled"
+              icon="mdi-text-box-search-outline"
+              size="150"
+            />
+
+            <br>
+
+            <v-list-subheader class="d-inline-flex">
+              {{ t('search.results') }}
+            </v-list-subheader>
+          </div>
+        </template>
 
         <ais-instant-search
           v-else
@@ -79,7 +88,11 @@
           />
 
           <ais-hits v-slot="{ items }">
-            <search-results ref="list" :groups="transformItems(items)" />
+            <search-results
+              ref="list"
+              :groups="transformItems(items)"
+              @click:result="onClickResult"
+            />
           </ais-hits>
         </ais-instant-search>
       </v-card-text>
@@ -93,6 +106,7 @@
 
 <script setup lang="ts">
   // Components
+  import SearchRecent from './SearchRecent.vue'
   import SearchResults from './SearchResults.vue'
 
   // Composables
@@ -102,11 +116,11 @@
 
   // Utilities
   import { AisConfigure, AisHits, AisInstantSearch, AisPoweredBy } from 'vue-instantsearch/vue3/es/src/instantsearch.js'
-  import { onBeforeUnmount, onMounted, ref } from 'vue'
+  import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
   import algoliasearch from 'algoliasearch'
 
   // Stores
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   // Types
   import type { AlgoliaSearchHelper } from 'algoliasearch-helper'
@@ -123,8 +137,13 @@
     'NHT6C0IV19', // docsearch app ID
     'ffa344297924c76b0f4155384aff7ef2' // vuetify API key
   )
+  const searches = ref(JSON.parse(localStorage.getItem('searches') || '[]'))
 
   const locale = 'en'
+
+  watch(searches, val => {
+    localStorage.setItem('searches', JSON.stringify(val))
+  })
 
   onMounted(() => {
     document.addEventListener('keydown', onDocumentKeydown)
@@ -197,6 +216,21 @@
 
       list.value?.rootEl?.focus()
     }
+  }
+  function onClickDelete (index: number) {
+    const array = searches.value.slice(0, 6)
+
+    array.splice(index, 1)
+
+    searches.value = array
+  }
+
+  function onClickResult (result: any) {
+    const array = searches.value.slice(0, 6)
+
+    array.unshift(result)
+
+    searches.value = array
   }
 </script>
 

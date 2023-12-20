@@ -14,12 +14,6 @@ related:
 
 Experiment and use in-development components before they're released.
 
-![Labs Entry](https://cdn.vuetifyjs.com/docs/images/entry/labs-entry.png)
-
-----
-
-<entry />
-
 ## What is Labs? { id=what-is-labs }
 
 Labs is a new way for developers to use unfinished components in an alpha state.
@@ -72,7 +66,7 @@ export default createVuetify({
 })
 ```
 
-<promoted slug="vuetify-discord" />
+<entry />
 
 ## Available Components
 
@@ -86,6 +80,9 @@ The following is a list of available and up-and-coming components for use with L
 | Component | Release Target |
 | - | - |
 | v-calendar | ~~Q1~~ ~~Q2~~ Soon™️ 2023 |
+| v-fab | Q1 2024 |
+| v-split-btn | Q1 2024 |
+| v-speed-dial | Q1 2024 |
 
 ::: warning
 Lab component APIs are **NOT** finalized and can and will change. You should **EXPECT** for things to break during the course of development.

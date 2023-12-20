@@ -47,7 +47,7 @@
 
   // Stores
   import { useAppStore } from '@/store/app'
-  import { useAuthStore } from '@/store/auth'
+  import { useAuthStore } from '@vuetify/one'
 
   const app = useAppStore()
   const auth = useAuthStore()

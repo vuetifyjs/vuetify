@@ -128,7 +128,7 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
             last-aria-label={ props.lastPageLabel }
             length={ pageCount.value }
             next-aria-label={ props.nextPageLabel }
-            prev-aria-label={ props.prevPageLabel }
+            previous-aria-label={ props.prevPageLabel }
             rounded
             show-first-last-page
             total-visible={ props.showCurrentPage ? 1 : 0 }
