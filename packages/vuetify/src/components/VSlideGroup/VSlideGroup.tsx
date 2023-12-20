@@ -22,6 +22,7 @@ import { clamp, focusableChildren, genericComponent, IN_BROWSER, propsFactory, u
 // Types
 import type { InjectionKey, PropType } from 'vue'
 import type { GroupProvide } from '@/composables/group'
+import type { GenericProps } from '@/util'
 
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
 
@@ -75,7 +76,13 @@ export const makeVSlideGroupProps = propsFactory({
   }),
 }, 'VSlideGroup')
 
-export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
+export const VSlideGroup = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: VSlideGroupSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSlideGroup',
 
   props: makeVSlideGroupProps(),
@@ -364,7 +371,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
               'v-slide-group__prev',
               { 'v-slide-group__prev--disabled': !hasPrev.value },
             ]}
-            onClick={ () => scrollTo('prev') }
+            onClick={ () => hasPrev.value && scrollTo('prev') }
           >
             { slots.prev?.(slotProps.value) ?? (
               <VFadeTransition>
@@ -402,7 +409,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
               'v-slide-group__next',
               { 'v-slide-group__next--disabled': !hasNext.value },
             ]}
-            onClick={ () => scrollTo('next') }
+            onClick={ () => hasNext.value && scrollTo('next') }
           >
             { slots.next?.(slotProps.value) ?? (
               <VFadeTransition>

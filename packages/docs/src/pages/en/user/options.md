@@ -8,6 +8,7 @@ meta:
 ---
 
 <script setup>
+  import AdvancedOptions from '@/components/app/settings/AdvancedOptions.vue'
   import Options from '@/components/app/settings/Options.vue'
 </script>
 
@@ -18,3 +19,13 @@ Adjust options that modify your Documentation experience
 ----
 
 <options />
+
+<br>
+
+### Advanced Options
+
+Adjust advanced options that modify your Documentation experience
+
+----
+
+<advanced-options />

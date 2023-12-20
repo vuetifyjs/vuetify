@@ -30,10 +30,10 @@ import {
 // Types
 import type { CSSProperties, ExtractPropTypes, Ref, VNode, WritableComputedRef } from 'vue'
 import type { IconValue } from '@/composables/icons'
-import type { GenericProps } from '@/util'
+import type { EventProp, GenericProps } from '@/util'
 
 export type SelectionControlSlot = {
-  model: WritableComputedRef<any>
+  model: WritableComputedRef<boolean>
   textColorClasses: Ref<string[]>
   textColorStyles: Ref<CSSProperties>
   backgroundColorClasses: Ref<string[]>
@@ -69,7 +69,7 @@ export const makeVSelectionControlProps = propsFactory({
 
 export function useSelectionControl (
   props: ExtractPropTypes<ReturnType<typeof makeVSelectionControlProps>> & {
-    'onUpdate:modelValue': ((val: any) => void) | undefined
+    'onUpdate:modelValue': EventProp | undefined
   }
 ) {
   const group = inject(VSelectionControlGroupSymbol, undefined)
@@ -90,7 +90,7 @@ export function useSelectionControl (
       const val = group ? group.modelValue.value : modelValue.value
 
       return isMultiple.value
-        ? val.some((v: any) => props.valueComparator(v, trueValue.value))
+        ? wrapInArray(val).some((v: any) => props.valueComparator(v, trueValue.value))
         : props.valueComparator(val, trueValue.value)
     },
     set (val: boolean) {
@@ -144,7 +144,7 @@ export function useSelectionControl (
 export const VSelectionControl = genericComponent<new <T>(
   props: {
     modelValue?: T
-    'onUpdate:modelValue'?: (val: T) => any
+    'onUpdate:modelValue'?: (value: T) => void
   },
   slots: VSelectionControlSlots,
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -157,7 +157,7 @@ export const VSelectionControl = genericComponent<new <T>(
   props: makeVSelectionControlProps(),
 
   emits: {
-    'update:modelValue': (val: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { attrs, slots }) {

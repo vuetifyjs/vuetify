@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <v-list-item
-      :prepend-icon="icon"
-      @click="onClick"
-    />
-  </div>
+  <v-btn
+    :icon="icon"
+    height="28"
+    rounded
+    size="small"
+    variant="text"
+    @click="onClick"
+  />
 </template>
 
 <script setup>
   // Stores
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed } from 'vue'

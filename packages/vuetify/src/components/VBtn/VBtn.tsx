@@ -128,10 +128,11 @@ export const VBtn = genericComponent<VBtnSlots>()({
       return props.variant === 'elevated' && !(props.disabled || props.flat || props.border)
     })
     const valueAttr = computed(() => {
-      if (props.value === undefined) return undefined
+      if (props.value === undefined || typeof props.value === 'symbol') return undefined
 
       return Object(props.value) === props.value
-        ? JSON.stringify(props.value, null, 0) : props.value
+        ? JSON.stringify(props.value, null, 0)
+        : props.value
     })
 
     function onClick (e: MouseEvent) {

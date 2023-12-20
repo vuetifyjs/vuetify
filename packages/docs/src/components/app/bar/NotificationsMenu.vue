@@ -84,13 +84,12 @@
               <div class="text-medium-emphasis text-caption">
                 <app-markdown :content="notification.metadata.text" class="mb-n3" />
 
-                <app-link
+                <border-chip
                   :href="notification.metadata.action"
-                  class="border px-2 py-1 rounded"
+                  :text="notification.metadata.action_text"
+                  append-icon="mdi-open-in-new"
                   @click="onClick(notification)"
-                >
-                  {{ notification.metadata.action_text }}
-                </app-link>
+                />
               </div>
 
               <template v-if="!showArchived" #append>
@@ -121,7 +120,7 @@
   import { useI18n } from 'vue-i18n'
 
   // Stores
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed, onMounted, ref } from 'vue'
@@ -185,7 +184,7 @@
   }
   function toggle ({ slug }: Notification) {
     user.notifications.read = user.notifications.read.includes(slug)
-      ? user.notifications.read.filter(n => n !== slug)
+      ? user.notifications.read.filter((n: any) => n !== slug)
       : [...user.notifications.read, slug]
   }
 

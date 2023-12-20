@@ -1,1 +1,18 @@
-{}
+{
+  "props": {
+    "max": "Sets the maximum allowed value.",
+    "min": "Sets the minimum allowed value.",
+    "reverse": "Reverses the slider direction.",
+    "showTicks": "Show track ticks. If `true` it shows ticks when using slider. If set to `'always'` it always shows ticks.",
+    "step": "If greater than 0, sets step interval for ticks.",
+    "thumbColor": "Sets the thumb and thumb label color.",
+    "thumbLabel": "Show thumb label. If `true` it shows label when using slider. If set to `'always'` it always shows label.",
+    "thumbSize": "Controls the size of the thumb label.",
+    "ticks": "Show track ticks. If `true` it shows ticks when using slider. If set to `'always'` it always shows ticks.",
+    "tickLabels": "When provided with Array<string>, will attempt to map the labels to each step in index order.",
+    "tickSize": "Controls the size of **ticks**",
+    "trackColor": "Sets the track's color",
+    "trackFillColor": "Sets the track's fill color",
+    "trackSize": "Sets the track's size (height)."
+  }
+}

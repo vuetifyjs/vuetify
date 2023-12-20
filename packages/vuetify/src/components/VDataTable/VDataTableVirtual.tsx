@@ -27,15 +27,23 @@ import type { Ref } from 'vue'
 import type { VDataTableSlotProps } from './VDataTable'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
+import type { CellProps, RowProps } from '@/components/VDataTable/types'
+import type { GenericProps, SelectItemKey } from '@/util'
 
-type VDataTableVirtualSlotProps = Omit<VDataTableSlotProps, 'setItemsPerPage' | 'page' | 'pageCount' | 'itemsPerPage'>
+type VDataTableVirtualSlotProps<T> = Omit<
+  VDataTableSlotProps<T>,
+  | 'setItemsPerPage'
+  | 'page'
+  | 'pageCount'
+  | 'itemsPerPage'
+>
 
-export type VDataTableVirtualSlots = VDataTableRowsSlots & VDataTableHeadersSlots & {
-  top: VDataTableVirtualSlotProps
+export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
+  top: VDataTableVirtualSlotProps<T>
   headers: VDataTableHeadersSlots['headers']
-  bottom: VDataTableVirtualSlotProps
-  'body.prepend': VDataTableVirtualSlotProps
-  'body.append': VDataTableVirtualSlotProps
+  bottom: VDataTableVirtualSlotProps<T>
+  'body.prepend': VDataTableVirtualSlotProps<T>
+  'body.append': VDataTableVirtualSlotProps<T>
   item: {
     itemRef: Ref<HTMLElement | undefined>
   }
@@ -48,7 +56,20 @@ export const makeVDataTableVirtualProps = propsFactory({
   ...makeFilterProps(),
 }, 'VDataTableVirtual')
 
-export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
+type ItemType<T> = T extends readonly (infer U)[] ? U : never
+
+export const VDataTableVirtual = genericComponent<new <T extends readonly any[], V>(
+  props: {
+    items?: T
+    itemValue?: SelectItemKey<ItemType<T>>
+    rowProps?: RowProps<ItemType<T>>
+    cellProps?: CellProps<ItemType<T>>
+    itemSelectable?: SelectItemKey<ItemType<T>>
+    modelValue?: V
+    'onUpdate:modelValue'?: (value: V) => void
+  },
+  slots: VDataTableVirtualSlots<ItemType<T>>,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VDataTableVirtual',
 
   props: makeVDataTableVirtualProps(),
@@ -121,7 +142,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
       },
     })
 
-    const slotProps = computed<VDataTableVirtualSlotProps>(() => ({
+    const slotProps = computed<VDataTableVirtualSlotProps<any>>(() => ({
       sortBy: sortBy.value,
       toggleSort,
       someSelected: someSelected.value,
@@ -204,6 +225,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                                   { ...itemSlotProps.props }
                                   ref={ itemRef }
                                   key={ itemSlotProps.internalItem.index }
+                                  index={ itemSlotProps.internalItem.index }
                                   v-slots={ slots }
                                 />
                               )

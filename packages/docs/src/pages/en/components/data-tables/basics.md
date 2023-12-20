@@ -130,7 +130,7 @@ There are no shortable of properties available for customizing various aspects o
 
 #### Density
 
-Using the **dense** prop you are able to give your data tables an alternate style.
+Using the **density** prop you are able to give your data tables an alternate style.
 
 <example file="v-data-table/prop-dense" />
 
@@ -195,6 +195,12 @@ You can use the dynamic slots `item.<key>` to customize only certain columns. `<
 When using the **group-by** prop, you can customize the group header with the `group-header` slot.
 
 <example file="v-data-table/slot-group-header" />
+
+#### Loading slot
+
+The `loading` slot allows you to customize your table's display state when fetching data. In this example we utilize the [v-skeleton-loader](/components/skeleton-loaders) component to display a loading animation.
+
+<example file="v-data-table/slot-loading" />
 
 ## Examples
 

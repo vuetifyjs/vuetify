@@ -1,6 +1,11 @@
 name: Yarn install
 description: Restore node_modules and cache, then run yarn install
 
+inputs:
+  npm-token:
+    description: 'NPM token'
+    required: true
+
 runs:
   using: composite
   steps:

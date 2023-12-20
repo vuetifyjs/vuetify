@@ -110,7 +110,7 @@
   import { usePlayground } from '@/composables/playground'
 
   // Stores
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed, mergeProps, onMounted, ref, shallowRef, watch } from 'vue'
@@ -160,7 +160,7 @@
     const _code = code.value
     if (!_code) return []
     const scriptContent = parseTemplate(user.composition, _code) ??
-      parseTemplate({ composition: 'options', options: 'composition' }[user.composition], _code)
+      parseTemplate(({ composition: 'options', options: 'composition' } as any)[user.composition], _code)
 
     return [
       {

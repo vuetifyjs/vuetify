@@ -58,7 +58,7 @@
   import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
+  import { useAuthStore } from '@vuetify/one'
 
   // Utilities
   import { onMounted } from 'vue'
