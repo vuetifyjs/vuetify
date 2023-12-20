@@ -1,10 +1,9 @@
 ---
 layout: user
 meta:
-  nav: Dashboard
   title: User Options
-  description: User Options
-  keywords: user options
+  description: This page provides options for adjusting and configuring your Documentation experience, including advanced options and developer mode.
+  keywords: user options, advanced options, developer mode
 ---
 
 <script setup>
