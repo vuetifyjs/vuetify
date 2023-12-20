@@ -1,23 +1,17 @@
 <template>
   <v-list-item
     :disabled="!auth.user"
+    :subtitle="one.isSubscriber ? 'Active' : 'Inactive'"
     border
     lines="two"
     prepend-icon="$vuetify"
     rounded
+    title="Subscription Status"
   >
     <template #prepend>
       <div class="pe-2">
         <v-icon :color="one.isSubscriber ? 'primary' : undefined" />
       </div>
-    </template>
-
-    <template #title>
-      Subscription Status
-    </template>
-
-    <template #subtitle>
-      {{ one.isSubscriber ? 'Active' : 'Inactive' }}
     </template>
 
     <template #append>
