@@ -14,12 +14,6 @@ related:
 
 Experiment and use in-development components before they're released.
 
-![Labs Entry](https://cdn.vuetifyjs.com/docs/images/entry/labs-entry.png)
-
-----
-
-<entry />
-
 ## What is Labs? { id=what-is-labs }
 
 Labs is a new way for developers to use unfinished components in an alpha state.
@@ -30,15 +24,15 @@ Components available through Labs are considered **NOT** production ready and on
 
 ## Usage
 
-Using a Labs component is as simple as importing from `vuetify/labs`. The following example shows how to import and bootstrap `v-data-table` in your component:
+Using a Labs component is as simple as importing from `vuetify/labs`. The following example shows how to import and bootstrap `v-picker` in your component:
 
 ```html
 <template>
-  <v-data-table />
+  <v-picker />
 </template>
 
 <script setup>
-  import { VDataTable } from 'vuetify/labs/VDataTable'
+  import { VPicker } from 'vuetify/labs/VPicker'
 </script>
 ```
 
@@ -46,16 +40,16 @@ Alternatively you can make the component available globally by importing it in y
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
-import { VDataTable } from 'vuetify/labs/VDataTable'
+import { VPicker } from 'vuetify/labs/VPicker'
 
 export default createVuetify({
   components: {
-    VDataTable,
+    VPicker,
   },
 })
 ```
 
-When Vuetify instantiates it will register `VDataTable` as a usable component within templates.
+When Vuetify instantiates it will register `VPicker` as a usable component within templates.
 
 If you wish to install all available Vuetify components use the following code snippet:
 
@@ -72,7 +66,7 @@ export default createVuetify({
 })
 ```
 
-<promoted slug="vuetify-discord" />
+<entry />
 
 ## Available Components
 
@@ -86,6 +80,9 @@ The following is a list of available and up-and-coming components for use with L
 | Component | Release Target |
 | - | - |
 | v-calendar | ~~Q1~~ ~~Q2~~ Soon™️ 2023 |
+| v-fab | Q1 2024 |
+| v-split-btn | Q1 2024 |
+| v-speed-dial | Q1 2024 |
 
 ::: warning
 Lab component APIs are **NOT** finalized and can and will change. You should **EXPECT** for things to break during the course of development.

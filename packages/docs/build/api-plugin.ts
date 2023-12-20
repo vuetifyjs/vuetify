@@ -6,7 +6,7 @@ import { startCase } from 'lodash-es'
 import locales from '../src/i18n/locales.json'
 import pageToApi from '../src/data/page-to-api.json'
 import type { Plugin } from 'vite'
-import rimraf from 'rimraf'
+import { rimraf } from 'rimraf'
 
 const API_ROOT = resolve('../api-generator/dist/api')
 const API_PAGES_ROOT = resolve('./node_modules/.cache/api-pages')
@@ -149,7 +149,7 @@ export default function Api (): Plugin {
     name: 'vuetify:api',
     enforce: 'pre',
     async config () {
-      rimraf.sync(API_PAGES_ROOT)
+      await rimraf(API_PAGES_ROOT)
 
       await generateFiles()
     },

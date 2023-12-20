@@ -46,8 +46,7 @@ Before diving into the guides and examples, let's take a moment to understand th
 
 Explore data table pages that provide detailed explanations and code samples for various functionalities and use cases.
 
-| Guide                                                     | Description                                                |
-|-----------------------------------------------------------|------------------------------------------------------------|
-| [Basics](/guides/data-tables/basics/)                     | Understand the fundamental building blocks of Data Tables. |
-| [Data and Display](/guides/data-tables/data-and-display/) | Learn how to manipulate and display data effectively.      |
-| [Structure](/guides/data-tables/structure/)               | Dive into the inner workings and structure of Data Tables. |
+| Guide                                                         | Description                                                |
+|---------------------------------------------------------------|------------------------------------------------------------|
+| [Basics](/components/data-tables/basics/)                     | Understand the fundamental building blocks of Data Tables. |
+| [Data and Display](/components/data-tables/data-and-display/) | Learn how to manipulate and display data effectively.      |

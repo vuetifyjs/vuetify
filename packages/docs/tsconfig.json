@@ -27,6 +27,7 @@
       "vite-plugin-pwa/client",
       "vue-router"
     ],
+    "outDir": "./dist"
   },
   "exclude": ["dist", "node_modules"],
 }

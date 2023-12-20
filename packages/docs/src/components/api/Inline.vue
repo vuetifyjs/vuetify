@@ -1,5 +1,12 @@
 <template>
-  <div v-if="components">
+  <border-chip
+    :prepend-icon="user.api === 'inline' ? 'mdi-flask-outline' : 'mdi-flask-empty-outline'"
+    :text="t('toggle', [`${t('inline')} ${t('api')}`])"
+    class="mb-2"
+    @click="onClick"
+  />
+
+  <div v-if="components" :class="showInline && 'mt-4'">
     <api-links v-if="!showInline && !hideLinks" :components="components" />
 
     <div v-if="showInline">
@@ -33,7 +40,7 @@
   // Composables
   import { useI18n } from 'vue-i18n'
   import { useRoute } from 'vue-router'
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed, onBeforeMount, ref } from 'vue'
@@ -47,8 +54,8 @@
   })
 
   const route = useRoute()
-  const { locale } = useI18n()
-  const store = useUserStore()
+  const { t, locale } = useI18n()
+  const user = useUserStore()
   const name = ref()
   const sections = ['props', 'slots', 'events', 'functions']
 
@@ -59,9 +66,13 @@
     return pageToApi[path as keyof typeof pageToApi]
   })
 
-  const showInline = computed(() => store.api === 'inline')
+  const showInline = computed(() => user.api === 'inline')
 
   onBeforeMount(() => {
     name.value = components.value?.[0] ?? ''
   })
+
+  function onClick () {
+    user.api = user.api === 'inline' ? 'link-only' : 'inline'
+  }
 </script>

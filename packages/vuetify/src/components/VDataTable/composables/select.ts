@@ -8,6 +8,7 @@ import { deepEqual, propsFactory, wrapInArray } from '@/util'
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
 import type { DataTableItemProps } from './items'
+import type { EventProp } from '@/util'
 
 export interface SelectableItem {
   value: any
@@ -37,7 +38,7 @@ type SelectionProps = Pick<DataTableItemProps, 'itemValue'> & {
   modelValue: readonly any[]
   selectStrategy: 'single' | 'page' | 'all'
   valueComparator: typeof deepEqual
-  'onUpdate:modelValue': ((value: any[]) => void) | undefined
+  'onUpdate:modelValue': EventProp<[any[]]> | undefined
 }
 
 const singleSelectStrategy: DataTableSelectStrategy = {

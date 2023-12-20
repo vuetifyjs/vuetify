@@ -4,7 +4,7 @@
     :title="`v${version}`"
     :label="t('latest-release')"
     append-icon="mdi-page-next"
-    prepend-icon="mdi-label"
+    prepend-icon="mdi-tag-outline"
     @click="onClick"
   />
 </template>

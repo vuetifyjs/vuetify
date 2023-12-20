@@ -66,11 +66,12 @@
 
   // Utilities
   import { computed, PropType } from 'vue'
+  import { camelCase } from 'lodash-es'
 
   // Stores
   import { useAppStore } from '@/store/app'
   import { useLocaleStore } from '@/store/locale'
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   const props = defineProps({
     headers: {
@@ -94,7 +95,7 @@
     })
     if (!appStore.apiSearch) return items
 
-    const query = appStore.apiSearch.toLowerCase()
+    const query = camelCase(appStore.apiSearch).toLowerCase()
 
     return items.filter((item: any) => {
       return item.name.toLowerCase().includes(query)

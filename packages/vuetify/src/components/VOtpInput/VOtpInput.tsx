@@ -255,6 +255,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                           class={[
                             'v-otp-input__field',
                           ]}
+                          disabled={ props.disabled }
                           inputmode={ props.type === 'number' ? 'numeric' : 'text' }
                           min={ props.type === 'number' ? 0 : undefined }
                           maxlength="1"

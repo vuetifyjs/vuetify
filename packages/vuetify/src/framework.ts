@@ -1,5 +1,5 @@
 // Composables
-import { createDate, DateAdapterSymbol } from '@/composables/date'
+import { createDate, DateAdapterSymbol, DateOptionsSymbol } from '@/composables/date/date'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createIcons, IconSymbol } from '@/composables/icons'
@@ -77,7 +77,8 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     app.provide(ThemeSymbol, theme)
     app.provide(IconSymbol, icons)
     app.provide(LocaleSymbol, locale)
-    app.provide(DateAdapterSymbol, date)
+    app.provide(DateOptionsSymbol, date.options)
+    app.provide(DateAdapterSymbol, date.instance)
 
     if (IN_BROWSER && options.ssr) {
       if (app.$nuxt) {

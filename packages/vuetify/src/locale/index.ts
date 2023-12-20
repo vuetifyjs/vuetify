@@ -19,6 +19,7 @@ export { default as he } from './he'
 export { default as id } from './id'
 export { default as it } from './it'
 export { default as ja } from './ja'
+export { default as km } from './km'
 export { default as ko } from './ko'
 export { default as lv } from './lv'
 export { default as lt } from './lt'
@@ -62,6 +63,7 @@ export const defaultRtl = {
   id: false,
   it: false,
   ja: false,
+  km: false,
   ko: false,
   lv: false,
   lt: false,

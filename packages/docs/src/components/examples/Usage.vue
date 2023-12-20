@@ -1,5 +1,5 @@
 <template>
-  <app-sheet class="mb-6">
+  <app-sheet class="mb-4">
     <vue-file :file="`${name}/usage`" />
   </app-sheet>
 </template>

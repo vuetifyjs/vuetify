@@ -60,7 +60,7 @@ export type GroupHeaderSlot = {
   isGroupOpen: ReturnType<typeof provideGroupBy>['isGroupOpen']
 }
 
-type ItemSlotBase<T = any> = {
+type ItemSlotBase<T> = {
   index: number
   item: T
   internalItem: DataTableItem<T>
@@ -70,23 +70,23 @@ type ItemSlotBase<T = any> = {
   toggleSelect: ReturnType<typeof provideSelection>['toggleSelect']
 }
 
-export type ItemSlot<T = any> = ItemSlotBase<T> & {
+export type ItemSlot<T> = ItemSlotBase<T> & {
   columns: InternalDataTableHeader[]
 }
 
-export type ItemKeySlot<T = any> = ItemSlotBase<T> & {
+export type ItemKeySlot<T> = ItemSlotBase<T> & {
   value: any
   column: InternalDataTableHeader
 }
 
-export type RowProps =
+export type RowProps<T> =
   | Record<string, any>
-  | ((data: Pick<ItemKeySlot, 'index' | 'item' | 'internalItem'>) => Record<string, any>)
+  | ((data: Pick<ItemKeySlot<T>, 'index' | 'item' | 'internalItem'>) => Record<string, any>)
 
-export type CellProps =
+export type CellProps<T> =
   | Record<string, any>
-  | ((data: Pick<ItemKeySlot, 'index' | 'item' | 'internalItem' | 'value' | 'column'>) => Record<string, any>)
+  | ((data: Pick<ItemKeySlot<T>, 'index' | 'item' | 'internalItem' | 'value' | 'column'>) => Record<string, any>)
 
 export type HeaderCellProps =
   | Record<string, any>
-  | ((data: Pick<ItemKeySlot, 'index' | 'item' | 'internalItem' | 'value'>) => Record<string, any>)
+  | ((data: Pick<ItemKeySlot<any>, 'index' | 'item' | 'internalItem' | 'value'>) => Record<string, any>)
