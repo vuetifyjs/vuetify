@@ -8,7 +8,6 @@ meta:
 ---
 
 <script setup>
-import ConnectedAccounts from '@/components/user/account/ConnectedAccounts.vue'
 import OneSubscription from '@/components/user/account/OneSubscription.vue'
 </script>
 

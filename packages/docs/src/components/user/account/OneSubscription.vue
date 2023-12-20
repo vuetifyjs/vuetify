@@ -47,8 +47,7 @@
 
 <script setup>
   // Store
-  import { useAuthStore } from '@/store/auth'
-  import { useOneStore } from '@/store/one'
+  import { useAuthStore, useOneStore } from '@vuetify/one'
 
   const auth = useAuthStore()
   const one = useOneStore()

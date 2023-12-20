@@ -29,7 +29,7 @@
   import { useDate } from 'vuetify'
 
   // Stores
-  import { useOneStore } from '@/store/one'
+  import { useOneStore } from '@vuetify/one'
 
   // Utilities
   import { computed } from 'vue'

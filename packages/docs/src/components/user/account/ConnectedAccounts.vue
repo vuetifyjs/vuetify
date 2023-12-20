@@ -36,7 +36,7 @@
 
 <script setup>
   // Stores
-  import { useAuthStore } from '@/store/auth'
+  import { useAuthStore } from '@vuetify/one'
 
   // Utilities
   import { computed, ref } from 'vue'
