@@ -1,6 +1,6 @@
 @use './variables' as *
+@use '../VDivider/variables' as *
   
-/* region Block */
 .v-number-input
   padding-inline-end: 0 !important
 
@@ -11,6 +11,13 @@
     &::-webkit-inner-spin-button
       -webkit-appearance: none
 
-  .v-field__append-inner
-    .v-btn
-      height: 100%
+  /* region Block */
+  &__control
+    display: flex
+    height: 100%
+    border-left: 1px solid rgba(0, 0, 0, $divider-opacity)
+
+    &--stacked 
+      flex-direction: column
+      .v-btn
+        flex: 1
