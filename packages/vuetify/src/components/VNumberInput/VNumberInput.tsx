@@ -14,12 +14,22 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
 type VNumberInputSlots = Omit<VInputSlots & VFieldSlots, 'default'>
 
+type ControlVariant = 'default' | 'stacked' | 'split'
+
 const makeVNumberInputProps = propsFactory({
+  controlReversed: Boolean,
+  controlVariant: {
+    type: String as PropType<ControlVariant>,
+    default: 'default',
+  },
+  inset: Boolean,
+  hideInput: Boolean,
   ...makeVInputProps(),
   ...makeVFieldProps(),
 }, 'VNumberInput')
@@ -45,6 +55,67 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const model = useProxiedModel(props, 'modelValue')
 
     useRender(() => {
+      const defaultControl = () => (
+        <div
+          class={[
+            'v-number-input__control',
+            'v-number-input__control--default',
+          ]}
+        >
+          <VBtn
+            icon="mdi-chevron-down"
+            rounded="0"
+            height="100%"
+            size="small"
+            onClick={ () => model.value-- }
+            flat
+          />
+          <VDivider vertical />
+          <VBtn
+            icon="mdi-chevron-up"
+            height="100%"
+            rounded="0"
+            size="small"
+            onClick={ () => model.value++ }
+            flat
+          />
+        </div>
+      )
+
+      const stackedControl = () => (
+        <div
+          class={[
+            'v-number-input__control',
+            'v-number-input__control--stacked',
+          ]}
+        >
+          <VBtn
+            flat
+            height="auto"
+            icon="mdi-chevron-down"
+            rounded="0"
+            size="small"
+            onClick={ () => model.value-- }
+          />
+          <VDivider />
+          <VBtn
+            flat
+            height="auto"
+            icon="mdi-chevron-up"
+            onClick={ () => model.value++ }
+            rounded="0"
+            size="small"
+          />
+        </div>
+      )
+
+      const getControlNode = () => {
+        if (props.controlVariant === 'stacked') {
+          return stackedControl
+        } else {
+          return defaultControl
+        }
+      }
       return (
           <VInput
             class={[
@@ -71,26 +142,30 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                         class={ fieldClass }
                       />
                     ),
-                    'append-inner': () => (
+                    'append-inner': props.controlVariant === 'split' ? () => (
                       <>
-                        <VDivider vertical />
                         <VBtn
+                          flat
+                          height="auto"
                           icon="mdi-chevron-down"
                           rounded="0"
                           size="small"
                           onClick={ () => model.value-- }
-                          flat
                         />
-                        <VDivider vertical />
+                      </>
+                    ) : (!props.controlReversed ? getControlNode() : undefined),
+                    'prepend-inner': props.controlVariant === 'split' ? () => (
+                      <>
                         <VBtn
+                          flat
+                          height="auto"
                           icon="mdi-chevron-up"
                           rounded="0"
                           size="small"
-                          onClick={ () => model.value++ }
-                          flat
+                          onClick={ () => model.value-- }
                         />
                       </>
-                    ),
+                    ) : (props.controlReversed ? getControlNode() : undefined),
                   }}
                 </VField>
               ),
