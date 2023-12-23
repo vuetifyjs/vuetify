@@ -62,67 +62,38 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     useRender(() => {
-      const defaultControl = () => (
-        <div
-          class={[
-            'v-number-input__control',
-            'v-number-input__control--default',
-          ]}
-        >
-          <VBtn
-            icon="mdi-chevron-down"
-            rounded="0"
-            height="100%"
-            size="small"
-            onClick={ decrementalClick }
-            flat
-          />
-          <VDivider vertical />
-          <VBtn
-            icon="mdi-chevron-up"
-            height="100%"
-            rounded="0"
-            size="small"
-            onClick={ incrementalClick }
-            flat
-          />
-        </div>
+      const controlNode = () => (
+          <div
+            class={[
+              'v-number-input__control',
+              {
+                'v-number-input__control--default': props.controlVariant === 'default',
+                'v-number-input__control--stacked': props.controlVariant === 'stacked',
+              },
+            ]}
+          >
+            <VBtn
+              flat
+              height={ props.controlVariant === 'stacked' ? 'auto' : '100%' }
+              icon="mdi-chevron-down"
+              rounded="0"
+              size="small"
+              onClick={ decrementalClick }
+            />
+            <VDivider
+              vertical={ props.controlVariant !== 'stacked' }
+            />
+            <VBtn
+              flat
+              height={ props.controlVariant === 'stacked' ? 'auto' : '100%' }
+              icon="mdi-chevron-up"
+              onClick={ incrementalClick }
+              rounded="0"
+              size="small"
+            />
+          </div>
       )
 
-      const stackedControl = () => (
-        <div
-          class={[
-            'v-number-input__control',
-            'v-number-input__control--stacked',
-          ]}
-        >
-          <VBtn
-            flat
-            height="auto"
-            icon="mdi-chevron-down"
-            rounded="0"
-            size="small"
-            onClick={ decrementalClick }
-          />
-          <VDivider />
-          <VBtn
-            flat
-            height="auto"
-            icon="mdi-chevron-up"
-            onClick={ incrementalClick }
-            rounded="0"
-            size="small"
-          />
-        </div>
-      )
-
-      const getControlNode = () => {
-        if (props.controlVariant === 'stacked') {
-          return stackedControl
-        } else {
-          return defaultControl
-        }
-      }
       return (
           <VInput
             class={[
@@ -153,26 +124,26 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                       <>
                         <VBtn
                           flat
-                          height="auto"
+                          height="100%"
                           icon="mdi-chevron-down"
                           rounded="0"
                           size="small"
                           onClick={ incrementalClick }
                         />
                       </>
-                    ) : (!props.controlReversed ? getControlNode() : undefined),
+                    ) : (!props.controlReversed ? controlNode : undefined),
                     'prepend-inner': props.controlVariant === 'split' ? () => (
                       <>
                         <VBtn
                           flat
-                          height="auto"
+                          height="100%"
                           icon="mdi-chevron-up"
                           rounded="0"
                           size="small"
                           onClick={ decrementalClick }
                         />
                       </>
-                    ) : (props.controlReversed ? getControlNode() : undefined),
+                    ) : (props.controlReversed ? controlNode : undefined),
                   }}
                 </VField>
               ),
