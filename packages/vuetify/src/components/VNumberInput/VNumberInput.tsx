@@ -54,6 +54,13 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
 
+    function incrementalClick () {
+      model.value++
+    }
+    function decrementalClick () {
+      model.value--
+    }
+
     useRender(() => {
       const defaultControl = () => (
         <div
@@ -67,7 +74,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             rounded="0"
             height="100%"
             size="small"
-            onClick={ () => model.value-- }
+            onClick={ decrementalClick }
             flat
           />
           <VDivider vertical />
@@ -76,7 +83,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             height="100%"
             rounded="0"
             size="small"
-            onClick={ () => model.value++ }
+            onClick={ incrementalClick }
             flat
           />
         </div>
@@ -95,14 +102,14 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             icon="mdi-chevron-down"
             rounded="0"
             size="small"
-            onClick={ () => model.value-- }
+            onClick={ decrementalClick }
           />
           <VDivider />
           <VBtn
             flat
             height="auto"
             icon="mdi-chevron-up"
-            onClick={ () => model.value++ }
+            onClick={ incrementalClick }
             rounded="0"
             size="small"
           />
@@ -150,7 +157,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                           icon="mdi-chevron-down"
                           rounded="0"
                           size="small"
-                          onClick={ () => model.value-- }
+                          onClick={ incrementalClick }
                         />
                       </>
                     ) : (!props.controlReversed ? getControlNode() : undefined),
@@ -162,7 +169,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                           icon="mdi-chevron-up"
                           rounded="0"
                           size="small"
-                          onClick={ () => model.value-- }
+                          onClick={ decrementalClick }
                         />
                       </>
                     ) : (props.controlReversed ? getControlNode() : undefined),
