@@ -1,6 +1,8 @@
 @use './variables' as *
 @use '../VDivider/variables' as *
-  
+
+$control-border: 1px solid rgba(0, 0, 0, $divider-opacity)
+
 .v-number-input
   padding-inline-end: 0 !important
 
@@ -15,9 +17,13 @@
   &__control
     display: flex
     height: 100%
-    border-left: 1px solid rgba(0, 0, 0, $divider-opacity)
+    border-left: $control-border
 
     &--stacked 
-      flex-direction: column
+      flex-direction: column-reverse
       .v-btn
         flex: 1
+
+    &--reverse
+      border-left: none
+      border-right: $control-border

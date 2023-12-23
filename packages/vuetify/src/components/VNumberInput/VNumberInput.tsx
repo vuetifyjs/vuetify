@@ -121,28 +121,35 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                       />
                     ),
                     'append-inner': props.controlVariant === 'split' ? () => (
-                      <>
+                      <div
+                        class={[
+                          'v-number-input__control',
+                        ]}
+                      >
                         <VBtn
                           flat
                           height="100%"
-                          icon="mdi-chevron-down"
+                          icon="mdi-plus"
                           rounded="0"
-                          size="small"
                           onClick={ incrementalClick }
                         />
-                      </>
+                      </div>
                     ) : (!props.controlReversed ? controlNode : undefined),
                     'prepend-inner': props.controlVariant === 'split' ? () => (
-                      <>
+                      <div
+                        class={[
+                          'v-number-input__control',
+                          'v-number-input__control--reverse',
+                        ]}
+                      >
                         <VBtn
                           flat
                           height="100%"
-                          icon="mdi-chevron-up"
+                          icon="mdi-minus"
                           rounded="0"
-                          size="small"
                           onClick={ decrementalClick }
                         />
-                      </>
+                      </div>
                     ) : (props.controlReversed ? controlNode : undefined),
                   }}
                 </VField>
