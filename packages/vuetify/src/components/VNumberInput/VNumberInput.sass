@@ -1,10 +1,10 @@
+@use 'sass:selector'
 @use './variables' as *
 @use '../VDivider/variables' as *
 
 $control-border: 1px solid rgba(0, 0, 0, $divider-opacity)
 
 .v-number-input
-  padding-inline-end: 0 !important
 
   input[type="number"]
     -moz-appearance: textfield
@@ -13,17 +13,21 @@ $control-border: 1px solid rgba(0, 0, 0, $divider-opacity)
     &::-webkit-inner-spin-button
       -webkit-appearance: none
 
-  /* region Block */
-  &__control
-    display: flex
-    height: 100%
-    border-left: $control-border
+  .v-field
+    padding-inline-end: 0 !important
+    padding-inline-start: 0 !important
 
-    &--stacked 
+  &--stacked 
+    @at-root #{selector.nest(&, '.v-number-input__control')}
       flex-direction: column-reverse
       .v-btn
         flex: 1
 
+  &__control
+    display: flex
+    height: 100%
+    border-left: $control-border
+  
     &--reverse
       border-left: none
       border-right: $control-border

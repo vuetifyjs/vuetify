@@ -66,10 +66,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
           <div
             class={[
               'v-number-input__control',
-              {
-                'v-number-input__control--default': props.controlVariant === 'default',
-                'v-number-input__control--stacked': props.controlVariant === 'stacked',
-              },
             ]}
           >
             <VBtn
@@ -98,16 +94,16 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
           <VInput
             class={[
               'v-number-input',
-              props.class,
+              {
+                'v-number-input--default': props.controlVariant === 'default',
+                'v-number-input--stacked': props.controlVariant === 'stacked',
+              },
             ]}
             style={ props.style }
           >
             {{
               default: () => (
                 <VField
-                  class={[
-                    'v-number-input',
-                  ]}
                   variant="outlined"
                 >
                   {{
