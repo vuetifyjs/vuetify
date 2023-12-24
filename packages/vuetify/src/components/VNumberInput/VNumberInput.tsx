@@ -11,6 +11,7 @@ import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
+import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -54,6 +55,14 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
 
+    const controlClasses = computed(() => {
+      const classes: string[] = ['v-number-input__control']
+
+      if (props.inset) classes.push('v-number-input__control--inset')
+
+      return classes
+    })
+
     function incrementalClick () {
       model.value++
     }
@@ -64,9 +73,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     useRender(() => {
       const controlNode = () => (
           <div
-            class={[
-              'v-number-input__control',
-            ]}
+            class={ controlClasses.value }
           >
             <VBtn
               flat
@@ -118,10 +125,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                     ),
                     'append-inner': props.controlVariant === 'split' ? () => (
                       <div
-                        class={[
-                          'v-number-input__control',
-                        ]}
+                        class={ controlClasses.value }
                       >
+                        <VDivider vertical />
                         <VBtn
                           flat
                           height="100%"
@@ -133,10 +139,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                     ) : (!props.controlReversed ? controlNode : undefined),
                     'prepend-inner': props.controlVariant === 'split' ? () => (
                       <div
-                        class={[
-                          'v-number-input__control',
-                          'v-number-input__control--reverse',
-                        ]}
+                        class={ controlClasses.value }
                       >
                         <VBtn
                           flat
@@ -145,6 +148,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                           rounded="0"
                           onClick={ decrementalClick }
                         />
+                        <VDivider vertical />
                       </div>
                     ) : (props.controlReversed ? controlNode : undefined),
                   }}
