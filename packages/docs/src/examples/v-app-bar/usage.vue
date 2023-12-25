@@ -71,6 +71,9 @@
   })
 
   const code = computed(() => {
-    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+    return `<${name}${propsToString(props.value)}>
+    <v-app-bar-nav-icon></v-app-bar-nav-icon>
+    <v-app-bar-title>Application Bar</v-app-bar-title>
+    ${slots.value}</${name}>`
   })
 </script>
