@@ -1,4 +1,5 @@
 // Types
+import 'vue/jsx'
 import type { Events, VNode } from 'vue'
 import type { TouchStoredHandlers } from './directives/touch'
 
