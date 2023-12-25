@@ -5,6 +5,7 @@
 $control-border: 1px solid rgba(0, 0, 0, $divider-opacity)
 
 .v-number-input
+  $root: &
 
   input[type="number"]
     -moz-appearance: textfield
@@ -17,8 +18,13 @@ $control-border: 1px solid rgba(0, 0, 0, $divider-opacity)
     padding-inline-end: 0 !important
     padding-inline-start: 0 !important
 
+  &--control-reverse
+    &:not(#{selector.append($root, '--split')})
+      input
+        text-align: right
+  
   &--stacked 
-    @at-root #{selector.nest(&, '.v-number-input__control')}
+    #{selector.append($root, '__control')}
       flex-direction: column-reverse
       .v-btn
         flex: 1
@@ -27,7 +33,11 @@ $control-border: 1px solid rgba(0, 0, 0, $divider-opacity)
     display: flex
     height: 100%
     border-left: $control-border
-  
+
+    @at-root #{selector.nest(selector.append($root, '--control-reverse'), &)}
+      border-right: $control-border
+
+
     &--inset
       border-left: none
       border-right: none
