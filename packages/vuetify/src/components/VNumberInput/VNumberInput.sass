@@ -22,6 +22,9 @@ $control-border: 1px solid rgba(0, 0, 0, $divider-opacity)
     &:not(#{selector.append($root, '--split')})
       input
         text-align: right
+      #{selector.append($root, '__control')}
+        border-left: none
+        border-right: $control-border
   
   &--stacked 
     #{selector.append($root, '__control')}
@@ -41,13 +44,14 @@ $control-border: 1px solid rgba(0, 0, 0, $divider-opacity)
     height: 100%
     border-left: $control-border
 
-    @at-root #{selector.nest(selector.append($root, '--control-reverse'), &)}
-      border-right: $control-border
+    .v-btn
+      background-color: transparent
 
+    &--borderless
+      border: none
 
     &--inset
-      border-left: none
-      border-right: none
+      border: none 
       .v-divider
         height: 55%
         width: 55%

@@ -4,7 +4,7 @@ import './VNumberInput.sass'
 // Components
 import { VBtn } from '../VBtn'
 import { VDivider } from '../VDivider'
-import { makeVFieldProps, VField } from '@/components/VField/VField'
+import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
@@ -18,6 +18,9 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 import type { PropType } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
+
+const allowedVariants = ['outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled'] as const
+type Variant = typeof allowedVariants[number]
 
 type VNumberInputSlots = Omit<VInputSlots & VFieldSlots, 'default'>
 
@@ -33,6 +36,11 @@ const makeVNumberInputProps = propsFactory({
   hideInput: Boolean,
   ...makeVInputProps(),
   ...makeVFieldProps(),
+  variant: {
+    type: String as PropType<Variant>,
+    default: 'filled',
+    validator: (v: any) => allowedVariants.includes(v),
+  },
 }, 'VNumberInput')
 
 export const VNumberInput = genericComponent<VNumberInputSlots>()({
@@ -64,6 +72,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       const classes: string[] = ['v-number-input__control']
 
       if (props.inset) classes.push('v-number-input__control--inset')
+      if (props.hideInput) classes.push('v-number-input__control--borderless')
 
       return classes
     })
@@ -102,6 +111,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
           </div>
       )
 
+      const fieldProps = filterFieldProps(props)
+
       return (
           <VInput
             class={[
@@ -119,7 +130,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             {{
               default: () => (
                 <VField
-                  variant="outlined"
+                  { ...fieldProps }
                 >
                   {{
                     default: ({
@@ -133,7 +144,12 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                     ),
                     'append-inner': controlVariant.value === 'split' ? () => (
                       <div
-                        class={ controlClasses.value }
+                        class={
+                          [
+                            'v-number-input__control--borderless',
+                            ...controlClasses.value,
+                          ]
+                        }
                       >
                         <VDivider vertical />
                         <VBtn
@@ -147,7 +163,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                     ) : (!props.controlReverse ? controlNode : undefined),
                     'prepend-inner': controlVariant.value === 'split' ? () => (
                       <div
-                        class={ controlClasses.value }
+                        class={[
+                          'v-number-input__control--borderless',
+                          ...controlClasses.value,
+                        ]}
                       >
                         <VBtn
                           flat
