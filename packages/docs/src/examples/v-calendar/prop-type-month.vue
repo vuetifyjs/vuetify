@@ -16,7 +16,7 @@
 
 <script setup>
   import { onMounted, ref } from 'vue'
-  import { useDate } from 'vuetify/src/composables/date'
+  import { useDate } from 'vuetify'
 
   const calendar = ref()
 
@@ -57,7 +57,7 @@
 </script>
 
 <script>
-  import { useDate } from 'vuetify/src/composables/date'
+  import { useDate } from 'vuetify'
 
   export default {
     data: () => ({
