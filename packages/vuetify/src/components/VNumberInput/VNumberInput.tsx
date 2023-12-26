@@ -55,6 +55,11 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
 
+    const controlVariant = computed(() => {
+      if (props.hideInput) return 'stacked'
+      return props.controlVariant
+    })
+
     const controlClasses = computed(() => {
       const classes: string[] = ['v-number-input__control']
 
@@ -77,18 +82,18 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
           >
             <VBtn
               flat
-              height={ props.controlVariant === 'stacked' ? 'auto' : '100%' }
+              height={ controlVariant.value === 'stacked' ? 'auto' : '100%' }
               icon="mdi-chevron-down"
               rounded="0"
               size="small"
               onClick={ decrementalClick }
             />
             <VDivider
-              vertical={ props.controlVariant !== 'stacked' }
+              vertical={ controlVariant.value !== 'stacked' }
             />
             <VBtn
               flat
-              height={ props.controlVariant === 'stacked' ? 'auto' : '100%' }
+              height={ controlVariant.value === 'stacked' ? 'auto' : '100%' }
               icon="mdi-chevron-up"
               onClick={ incrementalClick }
               rounded="0"
@@ -102,10 +107,11 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             class={[
               'v-number-input',
               {
-                'v-number-input--default': props.controlVariant === 'default',
-                'v-number-input--stacked': props.controlVariant === 'stacked',
-                'v-number-input--split': props.controlVariant === 'split',
                 'v-number-input--control-reverse': props.controlReverse,
+                'v-number-input--default': controlVariant.value === 'default',
+                'v-number-input--hide-input': props.hideInput,
+                'v-number-input--split': controlVariant.value === 'split',
+                'v-number-input--stacked': controlVariant.value === 'stacked',
               },
             ]}
             style={ props.style }
@@ -125,7 +131,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                         class={ fieldClass }
                       />
                     ),
-                    'append-inner': props.controlVariant === 'split' ? () => (
+                    'append-inner': controlVariant.value === 'split' ? () => (
                       <div
                         class={ controlClasses.value }
                       >
@@ -139,7 +145,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                         />
                       </div>
                     ) : (!props.controlReverse ? controlNode : undefined),
-                    'prepend-inner': props.controlVariant === 'split' ? () => (
+                    'prepend-inner': controlVariant.value === 'split' ? () => (
                       <div
                         class={ controlClasses.value }
                       >
