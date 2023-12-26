@@ -492,7 +492,7 @@ export const VCombobox = genericComponent<new <
                     >
                       { slots['prepend-item']?.() }
 
-                      { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
+                      { !displayItems.value.length &&  search.value?.length >= 1 && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />
                       ))}
 
