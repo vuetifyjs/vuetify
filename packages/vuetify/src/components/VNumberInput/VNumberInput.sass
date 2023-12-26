@@ -29,6 +29,13 @@ $control-border: 1px solid rgba(0, 0, 0, $divider-opacity)
       .v-btn
         flex: 1
 
+  &--hide-input
+    .v-field
+      flex: none
+      &__input
+        width: 0
+        padding-inline: 0
+
   &__control
     display: flex
     height: 100%
@@ -45,7 +52,3 @@ $control-border: 1px solid rgba(0, 0, 0, $divider-opacity)
         height: 55%
         width: 55%
         align-self: center
-
-    &--reverse
-      border-left: none
-      border-right: $control-border
