@@ -255,13 +255,16 @@ function date (value?: any): Date | null {
 
 const sundayJanuarySecond2000 = new Date(2000, 0, 2)
 
+// The number of letters returned by getWeekday() varies by date library
+// So we've opted for 3-letter abbreviations for all locales
 function getWeekdays (locale: string) {
   const daysFromSunday = firstDay[locale.slice(-2).toUpperCase()]
 
   return createRange(7).map(i => {
     const weekday = new Date(sundayJanuarySecond2000)
     weekday.setDate(sundayJanuarySecond2000.getDate() + daysFromSunday + i)
-    return new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(weekday)
+    const formattedDay = new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(weekday)
+    return formattedDay.charAt(0).toUpperCase() + formattedDay.slice(1)
   })
 }
 
