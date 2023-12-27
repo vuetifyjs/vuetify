@@ -2,6 +2,7 @@
 import './VCombobox.sass'
 
 // Components
+import { VAvatar } from '@/components/VAvatar'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
@@ -525,6 +526,10 @@ export const VCombobox = genericComponent<new <
 
                                   { item.props.prependIcon && (
                                     <VIcon icon={ item.props.prependIcon } />
+                                  )}
+
+                                  { item.props.prependAvatar && (
+                                    <VAvatar image={ item.props.prependAvatar } />
                                   )}
                                 </>
                               ),

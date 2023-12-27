@@ -3,6 +3,7 @@ import './VSelect.sass'
 
 // Components
 import { VDialogTransition } from '@/components/transitions'
+import { VAvatar } from '@/components/VAvatar'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
@@ -412,6 +413,10 @@ export const VSelect = genericComponent<new <
 
                                     { item.props.prependIcon && (
                                       <VIcon icon={ item.props.prependIcon } />
+                                    )}
+
+                                    { item.props.prependAvatar && (
+                                      <VAvatar image={ item.props.prependAvatar } />
                                     )}
                                   </>
                                 ),
