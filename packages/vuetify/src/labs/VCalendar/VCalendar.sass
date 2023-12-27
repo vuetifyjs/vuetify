@@ -68,6 +68,10 @@
   &:last-child
     border-right: none
 
+  // TODO change this
+  > div .v-btn
+    font-size: 1.5rem
+
 .v-calendar-weekly__head-weeknumber
   background: rgb(var(--v-theme-on-surface-variant))
 
@@ -125,7 +129,7 @@
     grid-template-columns: repeat(7, 1fr)
     > .v-calendar-month__day:nth-child(7n)
       border-right: none
-    
+
   &.days-with-weeknumbers__0
     grid-template-columns: $calendar-weekly-weeknumber-flex-basis 1fr
     > .v-calendar-month__day

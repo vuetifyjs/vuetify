@@ -3,6 +3,7 @@ import './VCalendarDay.sass'
 
 // Components
 import { makeVCalendarIntervalProps, VCalendarInterval } from './VCalendarInterval'
+import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { useDate } from '@/composables/date'
@@ -44,6 +45,14 @@ export const VCalendarDay = genericComponent()({
               class="v-calendar-weekly__head-weekday"
             >
               { adapter.format(props.day.date, 'weekdayShort') }
+
+              <div>
+                <VBtn
+                  icon
+                  text={ adapter.format(props.day.date, 'dayOfMonth') }
+                  variant="text"
+                />
+              </div>
             </div>
           )}
 

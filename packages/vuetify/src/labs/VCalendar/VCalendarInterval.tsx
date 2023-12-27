@@ -30,7 +30,10 @@ export const makeVCalendarIntervalProps = propsFactory({
     type: Number,
     default: 48,
   },
-  intervalLabel: [String, Function],
+  intervalFormat: {
+    type: [String, Function],
+    default: 'fullTime12h',
+  },
   intervalStart: {
     type: Number,
     default: 0,
@@ -86,12 +89,12 @@ export const VCalendarInterval = genericComponent()({
         props.dayIndex === 0 ? (
           <div class="v-calendar-day__row-with-label" style={ `height: ${convertToUnit(props.intervalHeight)}` }>
             <div class="v-calendar-day__row-label">
-              <slot name="intervalLabel" interval={ interval.value }>
+              <slot name="intervalFormat" interval={ interval.value }>
                 { props.index
-                  ? props.intervalLabel
-                    ? typeof props.intervalLabel === 'string'
-                      ? props.intervalLabel
-                      : props.intervalLabel(interval.value)
+                  ? props.intervalFormat
+                    ? typeof props.intervalFormat === 'string'
+                      ? adapter.format(interval.value.start, 'hours12h')
+                      : props.intervalFormat(interval.value)
                     : interval.value.label
                   : ''
                 }
