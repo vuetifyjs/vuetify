@@ -3,7 +3,7 @@ import './VCalendar.sass'
 
 // Composables
 import { makeCalendarProps, useCalendar } from '@/composables/calendar'
-import { useDate } from '@/composables/date/date'
+import { getDay, useDate } from '@/composables/date/date'
 
 // Utilities
 import { computed } from 'vue'
@@ -169,11 +169,11 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
               }
             >
               { chunkArray(daysInMonth.value
-                .filter(day => props.weekdays.includes(adapter.getDay(day.date))), props.weekdays.length)
+                .filter(day => props.weekdays.includes(getDay(adapter, day.date))), props.weekdays.length)
                 .map((week, wi) => (
                   [
                     !props.hideWeekNumber ? <div class="v-calendar-month__weeknumber">{ weekNumbers.value[wi] }</div> : '',
-                    week.filter(day => props.weekdays.includes(adapter.getDay(day.date))).map(day => (
+                    week.filter(day => props.weekdays.includes(getDay(adapter, day.date))).map(day => (
                       <VCalendarMonthDay
                         color={ adapter.isSameDay(new Date(), day.date) ? 'primary' : undefined }
                         day={ day }
