@@ -32,6 +32,7 @@ import {
   Teleport,
   toRef,
   Transition,
+  unref,
   watch,
 } from 'vue'
 import {
@@ -48,6 +49,7 @@ import {
 // Types
 import type { PropType, Ref } from 'vue'
 import type { BackgroundColorData } from '@/composables/color'
+import type { DimensionProps } from '@/composables/dimensions'
 
 interface ScrimProps {
   [key: string]: unknown
@@ -254,6 +256,21 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       emit('afterLeave')
     }
 
+    const mergedStyle = computed(() => {
+      const result: Partial<DimensionProps> = {}
+      const dimension = unref(dimensionStyles)
+      let key: keyof DimensionProps
+      for (key in dimension) {
+        if (dimension[key] !== undefined) {
+          result[key] = dimension[key]
+        }
+      }
+      return [
+        contentStyles.value,
+        result,
+      ]
+    })
+
     useRender(() => (
       <>
         { slots.activator?.({
@@ -310,10 +327,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                     'v-overlay__content',
                     props.contentClass,
                   ]}
-                  style={[
-                    dimensionStyles.value,
-                    contentStyles.value,
-                  ]}
+                  style={ mergedStyle.value }
                   { ...contentEvents.value }
                   { ...props.contentProps }
                 >
