@@ -283,6 +283,9 @@ function format (
     case 'fullDateWithWeekday':
       options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }
       break
+    case 'hours12h':
+      options = { hour: 'numeric', hour12: true }
+      break
     case 'normalDateWithWeekday':
       options = { weekday: 'short', day: 'numeric', month: 'short' }
       break
@@ -306,6 +309,9 @@ function format (
       break
     case 'shortDate':
       options = { year: '2-digit', month: 'numeric', day: 'numeric' }
+      break
+    case 'weekdayShort':
+      options = { weekday: 'short' }
       break
     case 'year':
       options = { year: 'numeric' }
