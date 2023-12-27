@@ -6,7 +6,7 @@ import { VCalendarEvent } from './VCalendarEvent'
 import { VBtn } from '@/components/VBtn'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 export type VCalendarMonthDaySlots = {
   default: never
@@ -14,17 +14,19 @@ export type VCalendarMonthDaySlots = {
   title: { title?: number | string }
 }
 
+export const makeVCalendarMonthDayProps = propsFactory({
+  active: Boolean,
+  color: String,
+  day: Object,
+  disabled: Boolean,
+  events: Array<any>,
+  title: [Number, String],
+}, 'VCalendarMonthDay')
+
 export const VCalendarMonthDay = genericComponent< VCalendarMonthDaySlots >()({
   name: 'VCalendarMonthDay',
 
-  props: {
-    active: Boolean,
-    color: String,
-    day: Object,
-    disabled: Boolean,
-    events: Array<any>,
-    title: [Number, String],
-  },
+  props: makeVCalendarMonthDayProps(),
 
   setup (props, { emit, slots }) {
     useRender(() => {

@@ -1,52 +1,32 @@
 // Styles
 import './VCalendarDay.sass'
 
+// Components
+import { makeVCalendarIntervalProps, VCalendarInterval } from './VCalendarInterval'
+
 // Composables
 import { useDate } from '@/composables/date'
 
 // Utilities
 import { computed } from 'vue'
-import { VCalendarInterval } from './VCalendarInterval'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVCalendarDayProps = propsFactory({
+  hideDayHeader: Boolean,
+  intervals: {
+    type: Number,
+    default: 24,
+  },
+
+  ...makeVCalendarIntervalProps(),
+}, 'VCalendarDay')
 
 export const VCalendarDay = genericComponent()({
   name: 'VCalendarDay',
 
-  props: {
-    day: {
-      type: Object,
-      required: true,
-    },
-    dayIndex: {
-      type: Number,
-      default: 0,
-    },
-    events: Array<any>,
-    hideDayHeader: Boolean,
-    intervalDivisions: {
-      type: Number,
-      required: true,
-    },
-    intervalDuration: {
-      type: Number,
-      required: true,
-    },
-    intervalHeight: {
-      type: Number,
-      required: true,
-    },
-    intervalLabel: [String, Function],
-    intervals: {
-      type: Number,
-      required: true,
-    },
-    intervalStart: {
-      type: Number,
-      required: true,
-    },
-  },
+  props: makeVCalendarDayProps(),
 
-  setup (props, { emit, slots }) {
+  setup (props) {
     const adapter = useDate()
     const intervals = computed(() => [
       ...Array.from({ length: props.intervals }, (v, i) => i)
@@ -54,24 +34,23 @@ export const VCalendarDay = genericComponent()({
     ])
 
     useRender(() => {
+      const calendarIntervalProps = VCalendarInterval.filterProps(props)
+
       return (
         <div class="v-calendar-day__container">
-          { !props.hideDayHeader ? (
-            <div key="calenderWeekName" class="v-calendar-weekly__head-weekday">
+          { !props.hideDayHeader && (
+            <div
+              key="calender-week-name"
+              class="v-calendar-weekly__head-weekday"
+            >
               { adapter.format(props.day.date, 'weekdayShort') }
             </div>
-          ) : '' }
+          )}
+
           { intervals.value.map((_, index) => (
             <VCalendarInterval
-              day={ props.day }
-              dayIndex={ props.dayIndex }
-              events={ props.events }
               index={ index }
-              intervalDivisions={ props.intervalDivisions }
-              intervalDuration={ props.intervalDuration }
-              intervalHeight={ props.intervalHeight }
-              intervalLabel={ props.intervalLabel }
-              intervalStart={ props.intervalStart }
+              { ...calendarIntervalProps }
             ></VCalendarInterval>
           ))
           }

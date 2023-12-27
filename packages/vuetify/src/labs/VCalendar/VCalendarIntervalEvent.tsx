@@ -5,41 +5,43 @@ import { VSheet } from '@/components/VSheet'
 import { useDate } from '@/composables/date'
 
 // Utilities
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVCalendarIntervalEventProps = propsFactory({
+  allDay: Boolean,
+  interval: Object,
+  intervalDivisions: {
+    type: Number,
+    required: true,
+  },
+  intervalDuration: {
+    type: Number,
+    required: true,
+  },
+  intervalHeight: {
+    type: Number,
+    required: true,
+  },
+  event: Object,
+}, 'VCalendarIntervalEvent')
 
 export const VCalendarIntervalEvent = genericComponent()({
   name: 'VCalendarIntervalEvent',
 
-  props: {
-    allDay: Boolean,
-    interval: Object,
-    intervalDivisions: {
-      type: Number,
-      required: true,
-    },
-    intervalDuration: {
-      type: Number,
-      required: true,
-    },
-    intervalHeight: {
-      type: Number,
-      required: true,
-    },
-    event: Object,
-  },
+  props: makeVCalendarIntervalEventProps(),
 
-  setup (props, { emit, slots }) {
+  setup (props) {
     const adapter = useDate()
     const calcHeight = () => {
       if ((!props.event?.first && !props.event?.last) || adapter.isEqual(props.event?.start, props.interval?.start)) {
-        return { height: '100%', margin: convertToUnit(0, 'px') }
+        return { height: '100%', margin: convertToUnit(0) }
       } else {
         const { height, margin } = Array.from({ length: props.intervalDivisions },
           (x: number) => x * (props.intervalDuration / props.intervalDivisions)).reduce((total, div, index) => {
           if (adapter.isBefore(adapter.addMinutes(props.interval?.start, div), props.event?.start)) {
             return {
-              height: convertToUnit((props.intervalHeight / props.intervalDivisions) * index, 'px'),
-              margin: convertToUnit((props.intervalHeight / props.intervalDivisions) * index, 'px'),
+              height: convertToUnit((props.intervalHeight / props.intervalDivisions) * index),
+              margin: convertToUnit((props.intervalHeight / props.intervalDivisions) * index),
             }
           }
           return { height: total.height, margin: total.margin }
@@ -68,6 +70,8 @@ export const VCalendarIntervalEvent = genericComponent()({
         </VSheet>
       )
     })
+
+    return {}
   },
 
 })

@@ -3,32 +3,38 @@ import { VBadge } from '@/components/VBadge'
 import { VChip } from '@/components/VChip'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVCalendarEventProps = propsFactory({
+  allDay: Boolean,
+  day: Object,
+  event: Object,
+}, 'VCalendarEvent')
 
 export const VCalendarEvent = genericComponent()({
   name: 'VCalendarEvent',
 
-  props: {
-    allDay: Boolean,
-    day: Object,
-    event: Object,
-  },
+  props: makeVCalendarEventProps(),
 
-  setup (props, { emit, slots }) {
-    useRender(() => {
-      return (
-        <VChip
-          density="comfortable"
-          style="width: 100%;"
-          class="align-center"
-          color={ props.allDay ? 'primary' : undefined }
-          label={ props.allDay }
-        >
-          <VBadge inline dot color={ props.event?.color } ></VBadge>
-          { props.event?.title }
-        </VChip>
-      )
-    })
+  setup (props) {
+    useRender(() => (
+      <VChip
+        color={ props.allDay ? 'primary' : undefined }
+        density="comfortable"
+        label={ props.allDay }
+        width="100%"
+      >
+        <VBadge
+          inline
+          dot
+          color={ props.event?.color }
+        />
+
+        { props.event?.title }
+      </VChip>
+    ))
+
+    return {}
   },
 
 })

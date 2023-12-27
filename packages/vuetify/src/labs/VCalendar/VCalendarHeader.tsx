@@ -8,30 +8,32 @@ import { VBtn } from '@/components/VBtn'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVCalendarHeaderProps = propsFactory({
+  nextIcon: {
+    type: [String],
+    default: '$next',
+  },
+  prevIcon: {
+    type: [String],
+    default: '$prev',
+  },
+  title: String,
+  text: {
+    type: String,
+    default: '$vuetify.calendar.today',
+  },
+  viewMode: {
+    type: String,
+    default: 'month',
+  },
+}, 'VCalendarHeader')
 
 export const VCalendarHeader = genericComponent()({
   name: 'VCalendarHeader',
 
-  props: {
-    nextIcon: {
-      type: [String],
-      default: '$next',
-    },
-    prevIcon: {
-      type: [String],
-      default: '$prev',
-    },
-    title: String,
-    text: {
-      type: String,
-      default: '$vuetify.calendar.today',
-    },
-    viewMode: {
-      type: String,
-      default: 'month',
-    },
-  },
+  props: makeVCalendarHeaderProps(),
 
   emits: {
     'click:next': () => true,
@@ -58,8 +60,8 @@ export const VCalendarHeader = genericComponent()({
       <div class="v-calendar-header">
         { props.text && (
           <VBtn
-            class="v-calendar-header__today"
             key="today"
+            class="v-calendar-header__today"
             text={ t(props.text) }
             variant="outlined"
             onClick={ toToday }
@@ -67,17 +69,17 @@ export const VCalendarHeader = genericComponent()({
         )}
 
         <VBtn
-          icon={ props.prevIcon }
-          onClick={ prev }
           density="comfortable"
+          icon={ props.prevIcon }
           variant="text"
+          onClick={ prev }
         />
 
         <VBtn
-          icon={ props.nextIcon }
-          onClick={ next }
           density="comfortable"
+          icon={ props.nextIcon }
           variant="text"
+          onClick={ next }
         />
 
         <div class="v-calendar-header__title">{ props.title }</div>
