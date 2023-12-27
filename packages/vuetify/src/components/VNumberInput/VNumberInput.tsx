@@ -71,8 +71,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const controlClasses = computed(() => {
       const classes: string[] = ['v-number-input__control']
 
-      if (props.inset) classes.push('v-number-input__control--inset')
-      if (props.hideInput) classes.push('v-number-input__control--borderless')
+      if (props.hideInput || props.inset) classes.push('v-number-input__control--borderless')
 
       return classes
     })
@@ -121,6 +120,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                 'v-number-input--control-reverse': props.controlReverse,
                 'v-number-input--default': controlVariant.value === 'default',
                 'v-number-input--hide-input': props.hideInput,
+                'v-number-input--inset': props.inset,
                 'v-number-input--split': controlVariant.value === 'split',
                 'v-number-input--stacked': controlVariant.value === 'stacked',
               },
