@@ -22,7 +22,7 @@ The `v-calendar` component is used to display information in a daily, weekly, mo
 <page-features />
 
 ::: warning
-This feature requires [v3.4.9](/getting-started/release-notes/?version=v3.4.10)
+This feature requires [v3.4.9](/getting-started/release-notes/?version=v3.4.9)
 :::
 
 ## Usage
