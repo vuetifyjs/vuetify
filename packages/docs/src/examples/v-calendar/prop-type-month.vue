@@ -1,55 +1,13 @@
 <template>
   <v-row class="fill-height">
     <v-col>
-      <v-sheet height="64">
-        <v-toolbar flat>
-          <v-btn
-            variant="outlined"
-            class="me-4"
-            color="grey-darken-2"
-            @click="setToday"
-          >
-            Today
-          </v-btn>
-          <v-btn
-            fab
-            variant="text"
-            size="small"
-            color="grey-darken-2"
-            @click="prev"
-          >
-            <v-icon size="small">
-              mdi-chevron-left
-            </v-icon>
-          </v-btn>
-          <v-btn
-            fab
-            variant="text"
-            size="small"
-            color="grey-darken-2"
-            @click="next"
-          >
-            <v-icon size="small">
-              mdi-chevron-right
-            </v-icon>
-          </v-btn>
-          <v-toolbar-title v-if="calendar">
-            {{ calendar.title }}
-          </v-toolbar-title>
-          <v-spacer></v-spacer>
-        </v-toolbar>
-      </v-sheet>
       <v-sheet height="600">
         <v-calendar
           ref="calendar"
-          v-model="focus"
+          v-model="today"
           color="primary"
-          type="category"
-          category-show-all
-          :categories="categories"
+          type="month"
           :events="events"
-          :event-color="getEventColor"
-          @change="fetchEvents"
         ></v-calendar>
       </v-sheet>
     </v-col>
@@ -58,35 +16,23 @@
 
 <script setup>
   import { onMounted, ref } from 'vue'
+  import { useDate } from 'vuetify'
 
   const calendar = ref()
 
-  const focus = ref('')
+  const today = ref(new Date())
   const events = ref([])
   const colors = ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1']
   const names = ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party']
-  const categories = ['John Smith', 'Tori Walker']
 
   onMounted(() => {
-    calendar.value.checkChange()
+    const adapter = useDate()
+    fetchEvents({ start: adapter.startOfDay(adapter.startOfMonth(new Date())), end: adapter.endOfDay(adapter.endOfMonth(new Date())) })
   })
-
-  function getEventColor (event) {
-    return event.color
-  }
-  function setToday () {
-    focus.value = ''
-  }
-  function prev () {
-    calendar.value.prev()
-  }
-  function next () {
-    calendar.value.next()
-  }
   function fetchEvents ({ start, end }) {
     const _events = []
-    const min = new Date(`${start.date}T00:00:00`)
-    const max = new Date(`${end.date}T23:59:59`)
+    const min = start
+    const max = end
     const days = (max.getTime() - min.getTime()) / 86400000
     const eventCount = rnd(days, days + 20)
     for (let i = 0; i < eventCount; i++) {
@@ -96,12 +42,11 @@
       const secondTimestamp = rnd(2, allDay ? 288 : 8) * 900000
       const second = new Date(first.getTime() + secondTimestamp)
       _events.push({
-        name: names[rnd(0, names.length - 1)],
+        title: names[rnd(0, names.length - 1)],
         start: first,
         end: second,
         color: colors[rnd(0, colors.length - 1)],
-        timed: !allDay,
-        category: categories[rnd(0, categories.length - 1)],
+        allDay: !allDay,
       })
     }
     events.value = _events
@@ -112,35 +57,28 @@
 </script>
 
 <script>
+  import { useDate } from 'vuetify'
+
   export default {
     data: () => ({
       focus: '',
       events: [],
       colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
       names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
-      categories: ['John Smith', 'Tori Walker'],
     }),
     mounted () {
-      this.$refs.calendar.checkChange()
+      const adapter = useDate()
+      this.fetchEvents({ start: adapter.startOfDay(adapter.startOfMonth(new Date())), end: adapter.endOfDay(adapter.endOfMonth(new Date())) })
     },
     methods: {
       getEventColor (event) {
         return event.color
       },
-      setToday () {
-        this.focus = ''
-      },
-      prev () {
-        this.$refs.calendar.prev()
-      },
-      next () {
-        this.$refs.calendar.next()
-      },
       fetchEvents ({ start, end }) {
         const events = []
 
-        const min = new Date(`${start.date}T00:00:00`)
-        const max = new Date(`${end.date}T23:59:59`)
+        const min = start
+        const max = end
         const days = (max.getTime() - min.getTime()) / 86400000
         const eventCount = this.rnd(days, days + 20)
 
@@ -152,12 +90,11 @@
           const second = new Date(first.getTime() + secondTimestamp)
 
           events.push({
-            name: this.names[this.rnd(0, this.names.length - 1)],
+            title: this.names[this.rnd(0, this.names.length - 1)],
             start: first,
             end: second,
             color: this.colors[this.rnd(0, this.colors.length - 1)],
-            timed: !allDay,
-            category: this.categories[this.rnd(0, this.categories.length - 1)],
+            allDay: !allDay,
           })
         }
 

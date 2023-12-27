@@ -56,6 +56,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} dalších',
+    today: 'Today',
   },
   input: {
     clear: 'Vymazat {0}',

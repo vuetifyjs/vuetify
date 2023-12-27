@@ -119,7 +119,6 @@
   "components/data-tables": "/components/data-tables/basics",
   "components/date-pickers-month": "/introduction/roadmap",
   "components/time-pickers": "/introduction/roadmap",
-  "components/calendars": "/introduction/roadmap",
   "components/overflow-btns": "/introduction/roadmap",
   "components/sparklines": "/introduction/roadmap",
   "components/server-side-data-tables": "/components/data-tables/server-side-tables",

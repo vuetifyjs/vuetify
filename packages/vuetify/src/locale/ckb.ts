@@ -56,6 +56,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} زیاتر',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',

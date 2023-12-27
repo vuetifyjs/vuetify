@@ -74,12 +74,13 @@ The following is a list of available and up-and-coming components for use with L
 
 | Component | Description | Min Version |
 | - | - | - |
+| **Calendar** | [Usage](/components/calendars/) | [v3.3.9](/getting-started/release-notes/?version=v3.3.9) |
+| [v-calendar](/api/v-calendar/) | Primary Component | — |
 
 ### Up Next
 
 | Component | Release Target |
 | - | - |
-| v-calendar | ~~Q1~~ ~~Q2~~ Soon™️ 2023 |
 | v-fab | Q1 2024 |
 | v-split-btn | Q1 2024 |
 | v-speed-dial | Q1 2024 |
