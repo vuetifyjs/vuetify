@@ -3,9 +3,11 @@
 @use '../VDivider/variables' as *
 
 $control-border: 1px solid rgba(0, 0, 0, $divider-opacity)
+$inset-divider-size: 55%
 
 .v-number-input
   $root: &
+  $control-root: #{selector.append($root, '__control')}
 
   input[type="number"]
     -moz-appearance: textfield
@@ -22,12 +24,19 @@ $control-border: 1px solid rgba(0, 0, 0, $divider-opacity)
     &:not(#{selector.append($root, '--split')})
       input
         text-align: right
-      #{selector.append($root, '__control')}
-        border-left: none
-        border-right: $control-border
+      #{$control-root}
+        &:not(#{selector.append($control-root, '--borderless')})
+          border-left: none
+          border-right: $control-border
   
+  &--inset
+    .v-divider
+      height: $inset-divider-size
+      width: $inset-divider-size
+      align-self: center
+
   &--stacked 
-    #{selector.append($root, '__control')}
+    #{$control-root}
       flex-direction: column-reverse
       .v-btn
         flex: 1
@@ -42,17 +51,9 @@ $control-border: 1px solid rgba(0, 0, 0, $divider-opacity)
   &__control
     display: flex
     height: 100%
-    border-left: $control-border
+
+    &:not(#{selector.append($control-root, '--borderless')})
+      border-left: $control-border
 
     .v-btn
       background-color: transparent
-
-    &--borderless
-      border: none
-
-    &--inset
-      border: none 
-      .v-divider
-        height: 55%
-        width: 55%
-        align-self: center
