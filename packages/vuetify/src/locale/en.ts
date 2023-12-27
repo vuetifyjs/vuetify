@@ -55,8 +55,8 @@ export default {
     },
   },
   calendar: {
-    today: 'Today',
     moreEvents: '{0} more',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',
