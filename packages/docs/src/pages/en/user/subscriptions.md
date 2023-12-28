@@ -5,6 +5,7 @@ meta:
   description: Manage all of your Vuetify subscriptions in one place
   keywords: vuetify one, subscriptions, ad free, support
 ---
+
 <script setup>
   import OneSubscription from '@/components/user/account/OneSubscription.vue'
 </script>
