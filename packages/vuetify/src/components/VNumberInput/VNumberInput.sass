@@ -1,9 +1,5 @@
 @use 'sass:selector'
 @use './variables' as *
-@use '../VDivider/variables' as *
-
-$control-border: 1px solid rgba(0, 0, 0, $divider-opacity)
-$inset-divider-size: 55%
 
 .v-number-input
   $root: &
@@ -17,8 +13,8 @@ $inset-divider-size: 55%
       -webkit-appearance: none
 
   .v-field
-    padding-inline-end: 0 !important
-    padding-inline-start: 0 !important
+    padding-inline-end: 0
+    padding-inline-start: 0
 
   &--control-reverse
     &:not(#{selector.append($root, '--split')})
@@ -27,12 +23,12 @@ $inset-divider-size: 55%
       #{$control-root}
         &:not(#{selector.append($control-root, '--borderless')})
           border-left: none
-          border-right: $control-border
+          border-right: $number-input-control-border
   
   &--inset
     .v-divider
-      height: $inset-divider-size
-      width: $inset-divider-size
+      height: $number-input-inset-divider-size
+      width: $number-input-inset-divider-size
       align-self: center
 
   &--stacked 
@@ -53,7 +49,7 @@ $inset-divider-size: 55%
     height: 100%
 
     &:not(#{selector.append($control-root, '--borderless')})
-      border-left: $control-border
+      border-left: $number-input-control-border
 
     .v-btn
       background-color: transparent
