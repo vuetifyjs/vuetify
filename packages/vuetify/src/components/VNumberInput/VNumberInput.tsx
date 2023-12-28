@@ -4,7 +4,7 @@ import './VNumberInput.sass'
 // Components
 import { VBtn } from '../VBtn'
 import { VDivider } from '../VDivider'
-import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
+import { allowedVariants, filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
@@ -16,11 +16,8 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { VFieldSlots } from '@/components/VField/VField'
+import type { Variant, VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
-
-const allowedVariants = ['outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled'] as const
-type Variant = typeof allowedVariants[number]
 
 type VNumberInputSlots = Omit<VInputSlots & VFieldSlots, 'default'>
 
