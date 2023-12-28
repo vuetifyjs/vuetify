@@ -37,8 +37,8 @@ import type { PropType, Ref } from 'vue'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
 
-const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled', 'plain'] as const
-type Variant = typeof allowedVariants[number]
+export const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled', 'plain'] as const
+export type Variant = typeof allowedVariants[number]
 
 export interface DefaultInputSlot {
   isActive: Ref<boolean>
