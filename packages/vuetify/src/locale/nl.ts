@@ -35,7 +35,7 @@ export default {
     divider: 'tot',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} geselecteerd',
     range: {
       title: 'Selecteer datums',
       header: 'Voer datums in',
@@ -56,7 +56,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} meer',
-    today: 'Today',
+    today: 'Vandaag',
   },
   input: {
     clear: 'Maak {0} leeg',
