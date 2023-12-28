@@ -38,7 +38,12 @@
     "VBtnToggle"
   ],
   "components/calendars": [
-    "VCalendar"
+    "VCalendar",
+    "VCalendarDay",
+    "VCalendarHeader",
+    "VCalendarInterval",
+    "VCalendarIntervalEvent",
+    "VCalendarMonthDay"
   ],
   "components/cards": [
     "VCard",
