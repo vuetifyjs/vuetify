@@ -10,13 +10,16 @@ import { useLocale } from '@/composables/locale'
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
 
+// Types
+import type { PropType } from 'vue'
+
 export const makeVCalendarHeaderProps = propsFactory({
   nextIcon: {
-    type: [String],
+    type: String,
     default: '$next',
   },
   prevIcon: {
-    type: [String],
+    type: String,
     default: '$prev',
   },
   title: String,
@@ -25,7 +28,7 @@ export const makeVCalendarHeaderProps = propsFactory({
     default: '$vuetify.calendar.today',
   },
   viewMode: {
-    type: String,
+    type: String as PropType<'month' | 'week' | 'day'>,
     default: 'month',
   },
 }, 'VCalendarHeader')

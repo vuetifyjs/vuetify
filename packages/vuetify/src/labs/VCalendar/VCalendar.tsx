@@ -3,7 +3,7 @@ import './VCalendar.sass'
 
 // Components
 import { makeVCalendarDayProps, VCalendarDay } from './VCalendarDay'
-import { VCalendarHeader } from './VCalendarHeader'
+import { makeVCalendarHeaderProps, VCalendarHeader } from './VCalendarHeader'
 import { VCalendarMonthDay } from './VCalendarMonthDay'
 
 // Composables
@@ -17,14 +17,6 @@ import { chunkArray, genericComponent, propsFactory, useRender } from '@/util'
 export const makeVCalendarProps = propsFactory({
   hideHeader: Boolean,
   hideWeekNumber: Boolean,
-  title: String,
-  type: {
-    type: String,
-    default: 'month',
-    validator (val: string) {
-      return ['month', 'week', 'day'].includes(val)
-    },
-  },
   weekdays: {
     type: Array<number>,
     default: () => [0, 1, 2, 3, 4, 5, 6],
@@ -32,6 +24,7 @@ export const makeVCalendarProps = propsFactory({
 
   ...makeCalendarProps(),
   ...makeVCalendarDayProps(),
+  ...makeVCalendarHeaderProps(),
 }, 'VCalender')
 
 export type VCalendarSlots = {
@@ -57,25 +50,25 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
     const dayNames = adapter.getWeekdays()
 
     function onClickNext () {
-      if (props.type === 'month') {
+      if (props.viewMode === 'month') {
         model.value = [adapter.addMonths(model.value[0], 1)]
       }
-      if (props.type === 'week') {
+      if (props.viewMode === 'week') {
         model.value = [adapter.addDays(model.value[0], 7)]
       }
-      if (props.type === 'day') {
+      if (props.viewMode === 'day') {
         model.value = [adapter.addDays(model.value[0], 1)]
       }
     }
 
     function onClickPrev () {
-      if (props.type === 'month') {
+      if (props.viewMode === 'month') {
         model.value = [adapter.addMonths(model.value[0], -1)]
       }
-      if (props.type === 'week') {
+      if (props.viewMode === 'week') {
         model.value = [adapter.addDays(model.value[0], -7)]
       }
-      if (props.type === 'day') {
+      if (props.viewMode === 'day') {
         model.value = [adapter.addDays(model.value[0], -1)]
       }
     }
@@ -90,14 +83,15 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
 
     useRender(() => {
       const calendarDayProps = VCalendarDay.filterProps(props)
+      const calendarHeaderProps = VCalendarHeader.filterProps(props)
 
       return (
         <div class={[
           'v-calendar',
           {
-            'v-calendar-monthly': props.type === 'month',
-            'v-calendar-weekly': props.type === 'week',
-            'v-calendar-day': props.type === 'day',
+            'v-calendar-monthly': props.viewMode === 'month',
+            'v-calendar-weekly': props.viewMode === 'week',
+            'v-calendar-day': props.viewMode === 'day',
           },
         ]}
         >
@@ -106,6 +100,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
               !slots.header ? (
                 <VCalendarHeader
                   key="calendar-header"
+                  { ...calendarHeaderProps }
                   title={ title.value }
                   onClick:next={ onClickNext }
                   onClick:prev={ onClickPrev }
@@ -118,7 +113,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
           </div>
 
           <div class="v-calendar__container">
-            { props.type === 'month' && !props.hideDayHeader && (
+            { props.viewMode === 'month' && !props.hideDayHeader && (
               <div
                 class={
                   [
@@ -140,7 +135,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
               </div>
             )}
 
-            { props.type === 'month' && (
+            { props.viewMode === 'month' && (
               <div
                 key="VCalendarMonth"
                 class={
@@ -169,7 +164,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
               </div>
             )}
 
-            { props.type === 'week' && (
+            { props.viewMode === 'week' && (
               daysInWeek.value.map((day, i) => (
                 <VCalendarDay
                   { ...calendarDayProps }
@@ -180,7 +175,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
               ))
             )}
 
-            { props.type === 'day' && (
+            { props.viewMode === 'day' && (
               <VCalendarDay
                 { ...calendarDayProps }
                 day={ genDays([model.value[0] as Date], adapter.date() as Date)[0] }
