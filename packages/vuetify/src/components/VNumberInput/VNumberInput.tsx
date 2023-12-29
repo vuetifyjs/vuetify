@@ -12,7 +12,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -74,13 +74,33 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     })
 
     function incrementalClick () {
-      model.value++
+      const min = parseInt(attrs.min as string, 10)
+      if (!isNaN(min) && model.value < min) {
+        model.value = min
+        return
+      }
+
+      const max = parseInt(attrs.max as string, 10)
+      if (isNaN(max) || (!isNaN(max) && model.value < max)) {
+        model.value++
+      }
     }
+
     function decrementalClick () {
-      model.value--
+      const max = parseInt(attrs.max as string, 10)
+      if (!isNaN(max) && model.value > max) {
+        model.value = max
+        return
+      }
+
+      const min = parseInt(attrs.min as string, 10)
+      if (isNaN(min) || (!isNaN(min) && model.value > min)) {
+        model.value--
+      }
     }
 
     useRender(() => {
+      const [ rootAttrs, inputAttrs ] = filterInputAttrs(attrs)
       const controlNode = () => (
           <div
             class={ controlClasses.value }
@@ -122,7 +142,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                 'v-number-input--stacked': controlVariant.value === 'stacked',
               },
             ]}
-            style={ props.style }
+            { ...rootAttrs }
           >
             {{
               default: () => (
@@ -137,6 +157,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                         type="number"
                         value={ model.value }
                         class={ fieldClass }
+                        { ...inputAttrs }
                       />
                     ),
                     'append-inner': controlVariant.value === 'split' ? () => (
