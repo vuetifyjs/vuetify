@@ -376,6 +376,7 @@ export const VSelect = genericComponent<new <
                       onFocusin={ onFocusin }
                       onScrollPassive={ onListScroll }
                       tabindex="-1"
+                      aria-live="polite"
                       color={ props.itemColor ?? props.color }
                     >
                       { slots['prepend-item']?.() }
