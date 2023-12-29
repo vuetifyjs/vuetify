@@ -112,7 +112,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
             )}
           </div>
 
-          <div class="v-calendar__container">
+          <div class={['v-calendar__container', `days__${props.weekdays.length}`]}>
             { props.viewMode === 'month' && !props.hideDayHeader && (
               <div
                 class={
@@ -165,7 +165,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
             )}
 
             { props.viewMode === 'week' && (
-              daysInWeek.value.map((day, i) => (
+              daysInWeek.value.filter(day => props.weekdays.includes(getDay(adapter, day.date))).map((day, i) => (
                 <VCalendarDay
                   { ...calendarDayProps }
                   day={ day }
