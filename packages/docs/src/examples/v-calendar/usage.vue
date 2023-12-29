@@ -12,7 +12,7 @@
         variant="outlined"
         hide-details
         class="ma-2"
-        label="type"
+        label="View Mode"
       ></v-select>
       <v-select
         v-model="weekday"
@@ -29,7 +29,7 @@
         ref="calendar"
         v-model="value"
         :weekdays="weekday"
-        :type="type"
+        :view-mode="type"
         :events="events"
       ></v-calendar>
     </v-sheet>
@@ -50,7 +50,7 @@
         { title: 'Mon - Fri', value: [1, 2, 3, 4, 5] },
         { title: 'Mon, Wed, Fri', value: [1, 3, 5] },
       ],
-      value: new Date(),
+      value: [new Date()],
       events: [],
       colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
       titles: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
