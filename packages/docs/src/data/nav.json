@@ -117,6 +117,7 @@
       "forms",
       "inputs",
       "otp-input",
+      "number-input",
       "radio-buttons",
       "range-sliders",
       "selects",
