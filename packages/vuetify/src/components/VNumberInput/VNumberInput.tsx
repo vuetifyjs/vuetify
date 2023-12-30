@@ -77,12 +77,14 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       return classes
     })
 
-    function incrementalClick () {
-      inputRef.value?.stepUp()
-    }
+    function toggleUpDown (increment = true) {
+      if (increment) {
+        inputRef.value?.stepUp()
+      } else {
+        inputRef.value?.stepDown()
+      }
 
-    function decrementalClick () {
-      inputRef.value?.stepDown()
+      if (inputRef.value) model.value = parseInt(inputRef.value.value, 10)
     }
 
     useRender(() => {
@@ -97,7 +99,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
               icon="mdi-chevron-down"
               rounded="0"
               size="small"
-              onClick={ decrementalClick }
+              onClick={ () => toggleUpDown(false) }
             />
             <VDivider
               vertical={ controlVariant.value !== 'stacked' }
@@ -106,7 +108,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
               flat
               height={ controlVariant.value === 'stacked' ? 'auto' : '100%' }
               icon="mdi-chevron-up"
-              onClick={ incrementalClick }
+              onClick={ () => toggleUpDown() }
               rounded="0"
               size="small"
             />
@@ -165,7 +167,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                           height="100%"
                           icon="mdi-plus"
                           rounded="0"
-                          onClick={ incrementalClick }
+                          onClick={ () => toggleUpDown() }
                         />
                       </div>
                     ) : (!props.controlReverse ? controlNode : undefined),
@@ -181,7 +183,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                           height="100%"
                           icon="mdi-minus"
                           rounded="0"
-                          onClick={ decrementalClick }
+                          onClick={ () => toggleUpDown(false) }
                         />
                         <VDivider vertical />
                       </div>
