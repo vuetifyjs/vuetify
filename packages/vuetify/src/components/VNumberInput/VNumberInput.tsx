@@ -8,11 +8,12 @@ import { allowedVariants, filterFieldProps, makeVFieldProps, VField } from '@/co
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -35,7 +36,7 @@ const makeVNumberInputProps = propsFactory({
   max: Number,
   step: Number,
   ...makeVInputProps(),
-  ...makeVFieldProps(),
+  ...omit(makeVFieldProps(), ['appendInnerIcon', 'clearable', 'clearIcon', 'persistentClear', 'prependInnerIcon']),
   variant: {
     type: String as PropType<Variant>,
     default: 'filled',
@@ -62,7 +63,12 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
+    const { isFocused, focus, blur } = useFocus(props)
     const inputRef = ref<HTMLInputElement>()
+
+    function onFocus () {
+      if (!isFocused.value) focus()
+    }
 
     const controlVariant = computed(() => {
       if (props.hideInput) return 'stacked'
@@ -116,6 +122,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       )
 
       const fieldProps = filterFieldProps(props)
+      const { modelValue: _, ...inputProps } = VInput.filterProps(props)
 
       return (
           <VInput
@@ -131,11 +138,15 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
               },
             ]}
             { ...rootAttrs }
+            { ...inputProps }
+            focused={ isFocused.value }
           >
             {{
               default: () => (
                 <VField
                   { ...fieldProps }
+                  active
+                  focused={ isFocused.value }
                 >
                   {{
                     default: ({
@@ -149,6 +160,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                         max={ props.max }
                         min={ props.min }
                         step={ props.step }
+                        onFocus={ onFocus }
+                        onBlur={ blur }
                         { ...inputAttrs }
                       />
                     ),
