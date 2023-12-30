@@ -1,18 +1,17 @@
 ---
 layout: user
 meta:
-  nav: Dashboard
   title: Subscriptions
-  description: Subscriptions
-  keywords: Subscriptions
+  description: Manage all of your Vuetify subscriptions in one place
+  keywords: vuetify one, subscriptions, ad free, support
 ---
 
 <script setup>
-import OneSubscription from '@/components/user/account/OneSubscription.vue'
+  import OneSubscription from '@/components/user/account/OneSubscription.vue'
 </script>
 
 ### Vuetify One Subscription
 
-Support Vuetify and gain access to exclusive documentation perks and features for only $1 per month
+Sign-up for Vuetify One and enjoy an ad-free documentation experience.
 
 <OneSubscription />
