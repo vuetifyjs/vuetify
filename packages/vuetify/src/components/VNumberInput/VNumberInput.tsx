@@ -20,7 +20,7 @@ import type { PropType } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
-type VNumberInputSlots = Omit<VInputSlots & VFieldSlots, 'default'>
+type VNumberInputSlots = Omit<VInputSlots & VFieldSlots, 'default' | 'prepend-inner' | 'append-inner'>
 
 type ControlVariant = 'default' | 'stacked' | 'split'
 
@@ -37,11 +37,6 @@ const makeVNumberInputProps = propsFactory({
   step: Number,
   ...makeVInputProps(),
   ...makeVFieldProps(),
-  // variant: {
-  //   type: String as PropType<Variant>,
-  //   default: 'filled',
-  //   validator: (v: any) => allowedVariants.includes(v),
-  // },
 }, 'VNumberInput')
 
 export const VNumberInput = genericComponent<VNumberInputSlots>()({
