@@ -11,7 +11,7 @@ import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -31,6 +31,9 @@ const makeVNumberInputProps = propsFactory({
   },
   inset: Boolean,
   hideInput: Boolean,
+  min: Number,
+  max: Number,
+  step: Number,
   ...makeVInputProps(),
   ...makeVFieldProps(),
   variant: {
@@ -59,6 +62,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
+    const inputRef = ref<HTMLInputElement>()
 
     const controlVariant = computed(() => {
       if (props.hideInput) return 'stacked'
@@ -74,33 +78,15 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     })
 
     function incrementalClick () {
-      const min = parseInt(attrs.min as string, 10)
-      if (!isNaN(min) && model.value < min) {
-        model.value = min
-        return
-      }
-
-      const max = parseInt(attrs.max as string, 10)
-      if (isNaN(max) || (!isNaN(max) && model.value < max)) {
-        model.value++
-      }
+      inputRef.value?.stepUp()
     }
 
     function decrementalClick () {
-      const max = parseInt(attrs.max as string, 10)
-      if (!isNaN(max) && model.value > max) {
-        model.value = max
-        return
-      }
-
-      const min = parseInt(attrs.min as string, 10)
-      if (isNaN(min) || (!isNaN(min) && model.value > min)) {
-        model.value--
-      }
+      inputRef.value?.stepDown()
     }
 
     useRender(() => {
-      const [ rootAttrs, inputAttrs ] = filterInputAttrs(attrs)
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const controlNode = () => (
           <div
             class={ controlClasses.value }
@@ -154,9 +140,13 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                       props: { class: fieldClass, ...slotProps },
                     }) => (
                       <input
+                        ref={ inputRef }
                         type="number"
                         value={ model.value }
                         class={ fieldClass }
+                        max={ props.max }
+                        min={ props.min }
+                        step={ props.step }
                         { ...inputAttrs }
                       />
                     ),
