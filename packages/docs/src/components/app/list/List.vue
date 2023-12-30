@@ -9,48 +9,62 @@
     item-props
     slim
   >
-    <template #divider>
-      <slot name="divider" />
+    <v-list
+      v-model:opened="opened"
+      :nav="nav"
+      :items="computedItems"
+      :lines="false"
+      color="primary"
+      density="compact"
+      item-props
+      slim
+    >
+      <template v-if="$slots.item" #item="itemProps">
+        <slot name="item" v-bind="itemProps" />
+      </template>
 
-      <v-divider
-        v-if="!$slots.divider"
-        class="my-3 mb-4 ms-2 me-n2"
-      />
-    </template>
+      <template #divider>
+        <slot name="divider" />
 
-    <template #title="{ item }">
-      {{ item.title }}
+        <v-divider
+          v-if="!$slots.divider"
+          class="my-3 mb-4 ms-2 me-n2"
+        />
+      </template>
 
-      <v-badge
-        v-if="item.emphasized"
-        class="ms-n1"
-        color="success"
-        dot
-        inline
-      />
-    </template>
+      <template #title="{ item }">
+        {{ item.title }}
 
-    <template #subtitle="{ item }">
-      <span v-if="item.subtitle" class="text-high-emphasis">
-        {{ item.subtitle }}
-      </span>
-    </template>
+        <v-badge
+          v-if="item.emphasized"
+          class="ms-n1"
+          color="success"
+          dot
+          inline
+        />
+      </template>
 
-    <template #subheader="{ props: subheaderProps }">
-      <slot
-        name="subheader"
-        v-bind="{ subheaderProps }"
-      />
+      <template #subtitle="{ item }">
+        <span v-if="item.subtitle" class="text-high-emphasis">
+          {{ item.subtitle }}
+        </span>
+      </template>
 
-      <v-list-subheader
-        v-if="!$slots.subheader"
-        class="text-high-emphasis text-uppercase font-weight-black"
-      >
-        {{ subheaderProps.title }}
-      </v-list-subheader>
-    </template>
-  </v-list>
-</template>
+      <template #subheader="{ props: subheaderProps }">
+        <slot
+          name="subheader"
+          v-bind="{ subheaderProps }"
+        />
+
+        <v-list-subheader
+          v-if="!$slots.subheader"
+          class="text-high-emphasis text-uppercase font-weight-black"
+        >
+          {{ subheaderProps.title }}
+        </v-list-subheader>
+      </template>
+    </v-list>
+  </v-list></template>
 
 <script setup lang="ts">
   // Composables
