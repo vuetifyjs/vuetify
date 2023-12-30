@@ -4,19 +4,20 @@ import './VNumberInput.sass'
 // Components
 import { VBtn } from '../VBtn'
 import { VDivider } from '../VDivider'
-import { allowedVariants, filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
-import { makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { makeVFieldProps } from '@/components/VField/VField'
+import { makeVInputProps } from '@/components/VInput/VInput'
+import { VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { Variant, VFieldSlots } from '@/components/VField/VField'
+import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
 type VNumberInputSlots = Omit<VInputSlots & VFieldSlots, 'default'>
@@ -36,17 +37,15 @@ const makeVNumberInputProps = propsFactory({
   step: Number,
   ...makeVInputProps(),
   ...makeVFieldProps(),
-  variant: {
-    type: String as PropType<Variant>,
-    default: 'filled',
-    validator: (v: any) => allowedVariants.includes(v),
-  },
+  // variant: {
+  //   type: String as PropType<Variant>,
+  //   default: 'filled',
+  //   validator: (v: any) => allowedVariants.includes(v),
+  // },
 }, 'VNumberInput')
 
 export const VNumberInput = genericComponent<VNumberInputSlots>()({
   name: 'VNumberInput',
-
-  inheritAttrs: false,
 
   props: {
     ...makeVNumberInputProps(),
@@ -60,9 +59,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     'update:modelValue': (val: number) => true,
   },
 
-  setup (props, { attrs, emit, slots }) {
+  setup (props, { slots }) {
     const model = useProxiedModel(props, 'modelValue')
-    const inputRef = ref<HTMLInputElement>()
+    const vTextFieldRef = ref<VTextField>()
 
     const controlVariant = computed(() => {
       if (props.hideInput) return 'stacked'
@@ -78,15 +77,14 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     })
 
     function incrementalClick () {
-      inputRef.value?.stepUp()
+      vTextFieldRef.value?.stepUp()
     }
 
     function decrementalClick () {
-      inputRef.value?.stepDown()
+      vTextFieldRef.value?.stepDown()
     }
 
     useRender(() => {
-      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const controlNode = () => (
           <div
             class={ controlClasses.value }
@@ -113,10 +111,12 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
           </div>
       )
 
-      const fieldProps = filterFieldProps(props)
+      const textFieldProps = VTextField.filterProps(props)
 
       return (
-          <VInput
+          <VTextField
+            ref={ vTextFieldRef }
+            { ...textFieldProps }
             class={[
               'v-number-input',
               {
@@ -127,70 +127,54 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                 'v-number-input--split': controlVariant.value === 'split',
                 'v-number-input--stacked': controlVariant.value === 'stacked',
               },
+              props.class,
             ]}
-            { ...rootAttrs }
+            type="number"
+            max={ props.max }
+            min={ props.min }
+            step={ props.step }
+            v-model={ model.value }
           >
             {{
-              default: () => (
-                <VField
-                  { ...fieldProps }
+              ...slots,
+              'append-inner': controlVariant.value === 'split' ? () => (
+                <div
+                  class={
+                    [
+                      'v-number-input__control--borderless',
+                      ...controlClasses.value,
+                    ]
+                  }
                 >
-                  {{
-                    default: ({
-                      props: { class: fieldClass, ...slotProps },
-                    }) => (
-                      <input
-                        ref={ inputRef }
-                        type="number"
-                        value={ model.value }
-                        class={ fieldClass }
-                        max={ props.max }
-                        min={ props.min }
-                        step={ props.step }
-                        { ...inputAttrs }
-                      />
-                    ),
-                    'append-inner': controlVariant.value === 'split' ? () => (
-                      <div
-                        class={
-                          [
-                            'v-number-input__control--borderless',
-                            ...controlClasses.value,
-                          ]
-                        }
-                      >
-                        <VDivider vertical />
-                        <VBtn
-                          flat
-                          height="100%"
-                          icon="mdi-plus"
-                          rounded="0"
-                          onClick={ incrementalClick }
-                        />
-                      </div>
-                    ) : (!props.controlReverse ? controlNode : undefined),
-                    'prepend-inner': controlVariant.value === 'split' ? () => (
-                      <div
-                        class={[
-                          'v-number-input__control--borderless',
-                          ...controlClasses.value,
-                        ]}
-                      >
-                        <VBtn
-                          flat
-                          height="100%"
-                          icon="mdi-minus"
-                          rounded="0"
-                          onClick={ decrementalClick }
-                        />
-                        <VDivider vertical />
-                      </div>
-                    ) : (props.controlReverse ? controlNode : undefined),
-                  }}
-                </VField>
-              ),
+                  <VDivider vertical />
+                  <VBtn
+                    flat
+                    height="100%"
+                    icon="mdi-plus"
+                    rounded="0"
+                    onClick={ incrementalClick }
+                  />
+                </div>
+              ) : (!props.controlReverse ? controlNode : undefined),
+              'prepend-inner': controlVariant.value === 'split' ? () => (
+                <div
+                  class={[
+                    'v-number-input__control--borderless',
+                    ...controlClasses.value,
+                  ]}
+                >
+                  <VBtn
+                    flat
+                    height="100%"
+                    icon="mdi-minus"
+                    rounded="0"
+                    onClick={ decrementalClick }
+                  />
+                  <VDivider vertical />
+                </div>
+              ) : (props.controlReverse ? controlNode : undefined),
             }}
-          </VInput>
+          </VTextField>
       )
     })
   },
