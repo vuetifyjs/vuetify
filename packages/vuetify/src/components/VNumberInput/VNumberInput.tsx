@@ -8,12 +8,12 @@ import { allowedVariants, filterFieldProps, makeVFieldProps, VField } from '@/co
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
-import { useFocus } from '@/composables/focus'
+import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, only, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -35,8 +35,32 @@ const makeVNumberInputProps = propsFactory({
   min: Number,
   max: Number,
   step: Number,
-  ...makeVInputProps(),
-  ...omit(makeVFieldProps(), ['appendInnerIcon', 'clearable', 'clearIcon', 'persistentClear', 'prependInnerIcon']),
+  ...only(makeVInputProps(), [
+    'density',
+    'disabled',
+    'focused',
+    'hideDetails',
+    'hint',
+    'label',
+    'persistentHint',
+    'readonly',
+  ]),
+  ...only(makeVFieldProps({
+    variant: 'outlined' as const,
+  }), [
+    'baseColor',
+    'bgColor',
+    'class',
+    'color',
+    'disabled',
+    'error',
+    'loading',
+    'rounded',
+    'style',
+    'theme',
+    'variant',
+  ]),
+  ...makeFocusProps(),
   variant: {
     type: String as PropType<Variant>,
     default: 'filled',
@@ -142,6 +166,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             focused={ isFocused.value }
           >
             {{
+              ...slots,
               default: () => (
                 <VField
                   { ...fieldProps }
@@ -149,6 +174,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                   focused={ isFocused.value }
                 >
                   {{
+                    ...slots,
                     default: ({
                       props: { class: fieldClass, ...slotProps },
                     }) => (
