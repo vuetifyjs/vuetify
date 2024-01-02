@@ -11,7 +11,7 @@
   >
     <app-list v-model:opened="opened" :items="app.items" nav>
       <template #divider>
-        <v-divider class="my-3 mb-4 ms-16" />
+        <v-divider class="my-3 mb-4 ms-10" />
       </template>
     </app-list>
 
