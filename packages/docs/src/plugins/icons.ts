@@ -234,6 +234,7 @@ export {
   mdiMenuDown,
   mdiMenuLeft,
   mdiMenuRight,
+  mdiMenuUp,
   mdiMessage,
   mdiMessageOutline,
   mdiMessageText,
