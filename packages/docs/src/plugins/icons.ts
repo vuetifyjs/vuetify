@@ -285,6 +285,7 @@ export {
   mdiPhone,
   mdiPhoneInTalk,
   mdiPin,
+  mdiPinOff,
   mdiPinOutline,
   mdiPlay,
   mdiPlayCircleOutline,

@@ -1,6 +1,7 @@
 <template>
   <div class="mb-8">
     <page-feature-chip
+      v-if="one.isSubscriber"
       :prepend-icon="`mdi-pin${!pinned ? '-outline' : ''}`"
       text="Pin"
       @click="onClickPin"
@@ -83,12 +84,14 @@
   import { useRoute } from 'vue-router'
 
   // Utilities
-  import { computed, shallowRef } from 'vue'
+  import { computed } from 'vue'
   import { getBranch } from '@/util/helpers'
 
   // Stores
+  import { useOneStore } from '@vuetify/one'
   import { usePinsStore } from '@/store/pins'
 
+  const one = useOneStore()
   const pins = usePinsStore()
   const route = useRoute()
   const { t } = useI18n()

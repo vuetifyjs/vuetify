@@ -1,4 +1,14 @@
+// Pinia
 import { defineStore } from 'pinia'
+
+// Composables
+import { useRoute } from 'vue-router'
+
+// Utilities
+import { computed, ref, shallowRef, watch } from 'vue'
+
+// Stores
+import { useUserStore } from '@vuetify/one'
 
 export type Pin = {
   category: string
@@ -6,29 +16,41 @@ export type Pin = {
   to: string
 }
 
-interface State {
-  pins: Pin[]
-}
+export const usePinsStore = defineStore('pins', () => {
+  const user = useUserStore()
+  const route = useRoute()
 
-export const usePinsStore = defineStore('pins', {
-  state: (): State => ({
-    pins: [],
-  }),
-  actions: {
-    toggle (value: boolean, pin: Pin) {
-      if (value) {
-        this.pins.push(pin)
-      } else {
-        this.pins = this.pins.filter(p => p.to !== pin.to)
-      }
+  const pins = ref<Pin[]>([])
+  const isPinning = shallowRef(false)
 
-      this.save()
-    },
-    load () {
-      this.pins = JSON.parse(localStorage.getItem('pins') || '[]')
-    },
-    save () {
-      localStorage.setItem('pins', JSON.stringify(this.pins))
-    },
-  },
+  const pageIsPinned = computed(() => pins.value.some(p => p.to === route.path))
+
+  watch(isPinning, save)
+
+  function toggle (value: boolean, pin: Pin) {
+    if (value) {
+      pins.value.push(pin)
+    } else {
+      pins.value = pins.value.filter(p => p.to !== pin.to)
+    }
+
+    save()
+  }
+
+  function load () {
+    pins.value = user.pinned || []
+  }
+
+  function save () {
+    user.pinned = pins.value
+  }
+
+  return {
+    pins,
+    isPinning,
+    pageIsPinned,
+    toggle,
+    load,
+    save,
+  }
 })
