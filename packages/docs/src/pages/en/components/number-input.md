@@ -23,14 +23,14 @@ The VNumberInput extends the standard HTML number-type input, ensuring style con
 <page-features />
 
 ::: success
-This feature was introduced in [v3.4.0 (Blackguard)](/introduction/roadmap/#v3-4-blackguard)
+This feature requires [v3.5.0](/introduction/roadmap/#v3-5)
 :::
 
 ## Usage
 
 Here we display a list of settings that could be applied within an application.
 
-<usage name="v-otp-input" />
+<usage name="v-number-input" />
 
 <entry />
 
@@ -38,20 +38,9 @@ Here we display a list of settings that could be applied within an application.
 
 | Component | Description |
 | - | - |
-| [v-otp-input](/api/v-otp-input/) | Primary Component |
+| [v-number-input](/api/v-number-input/) | Primary Component |
 
 <api-inline hide-links />
-
-## Anatomy
-
-The `v-otp-input` component is a collection of [v-field](/api/v-field/) components that combine to create a single input.
-
-![Otp input Anatomy](https://cdn.vuetifyjs.com/docs/images/components/v-otp-input/v-otp-input-anatomy.png "OTP input Anatomy")
-
-| Element / Area | Description |
-| - | - |
-| 1. Container | The OTP input container holds a number of `v-field` components  |
-| 2. Field | The `v-field` component is used to create a single input field |
 
 ## Guide
 
