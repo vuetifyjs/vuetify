@@ -331,6 +331,7 @@ export const VChip = genericComponent<VChipSlots>()({
             <button
               key="close"
               class="v-chip__close"
+              type="button"
               { ...closeProps.value }
             >
               { !slots.close ? (
