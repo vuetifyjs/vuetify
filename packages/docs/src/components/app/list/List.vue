@@ -7,6 +7,7 @@
     color="primary"
     density="compact"
     item-props
+    slim
   >
     <template #divider>
       <slot name="divider" />

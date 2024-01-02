@@ -231,6 +231,7 @@ export const VList = genericComponent<new <
             {
               'v-list--disabled': props.disabled,
               'v-list--nav': props.nav,
+              'v-list--slim': props.slim,
             },
             themeClasses.value,
             backgroundColorClasses.value,
