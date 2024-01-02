@@ -1,7 +1,6 @@
 // Imports
 import { createPinia } from 'pinia'
 import { markRaw } from 'vue'
-import { one } from '@vuetify/one'
 
 // Types
 import type { App } from 'vue'
@@ -12,9 +11,8 @@ export const pinia = createPinia()
 export function installPinia (app: App, router: Router) {
   pinia.use(({ store }) => {
     store.router = markRaw(router)
+    store.url = import.meta.env.VITE_API_SERVER_URL
   })
-
-  pinia.use(one)
 
   app.use(pinia)
 }

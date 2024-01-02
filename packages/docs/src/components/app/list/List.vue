@@ -1,64 +1,55 @@
 <template>
-  <v-defaults-provider
-    :defaults="{
-      VListGroup: {
-        expandIcon: 'mdi-menu-down',
-        collapseIcon: 'mdi-menu-up',
-      }
-    }"
+  <v-list
+    v-model:opened="opened"
+    :nav="nav"
+    :items="computedItems"
+    :lines="false"
+    color="primary"
+    density="compact"
+    item-props
+    slim
   >
-    <v-list
-      v-model:opened="opened"
-      :nav="nav"
-      :items="computedItems"
-      :lines="false"
-      color="primary"
-      density="compact"
-      item-props
-      slim
-    >
-      <template #divider>
-        <slot name="divider" />
+    <template #divider>
+      <slot name="divider" />
 
-        <v-divider
-          v-if="!$slots.divider"
-          class="my-3 mb-4 ms-2 me-n2"
-        />
-      </template>
+      <v-divider
+        v-if="!$slots.divider"
+        class="my-3 mb-4 ms-2 me-n2"
+      />
+    </template>
 
-      <template #title="{ item }">
-        {{ item.title }}
+    <template #title="{ item }">
+      {{ item.title }}
 
-        <v-badge
-          v-if="item.emphasized"
-          class="ms-n1"
-          color="success"
-          dot
-          inline
-        />
-      </template>
+      <v-badge
+        v-if="item.emphasized"
+        class="ms-n1"
+        color="success"
+        dot
+        inline
+      />
+    </template>
 
-      <template #subtitle="{ item }">
-        <span v-if="item.subtitle" class="text-high-emphasis">
-          {{ item.subtitle }}
-        </span>
-      </template>
+    <template #subtitle="{ item }">
+      <span v-if="item.subtitle" class="text-high-emphasis">
+        {{ item.subtitle }}
+      </span>
+    </template>
 
-      <template #subheader="{ props: subheaderProps }">
-        <slot
-          name="subheader"
-          v-bind="{ subheaderProps }"
-        />
+    <template #subheader="{ props: subheaderProps }">
+      <slot
+        name="subheader"
+        v-bind="{ subheaderProps }"
+      />
 
-        <v-list-subheader
-          v-if="!$slots.subheader"
-          class="text-high-emphasis text-uppercase font-weight-black"
-        >
-          {{ subheaderProps.title }}
-        </v-list-subheader>
-      </template>
-    </v-list>
-  </v-defaults-provider>
+      <v-list-subheader
+        v-if="!$slots.subheader"
+        class="text-high-emphasis text-uppercase font-weight-black"
+      >
+        {{ subheaderProps.title }}
+      </v-list-subheader>
+    </template>
+  </v-list>
 </template>
 
 <script setup lang="ts">
