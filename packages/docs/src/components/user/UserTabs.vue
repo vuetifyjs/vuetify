@@ -10,18 +10,12 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useAuthStore, useUserStore } from '@vuetify/one'
-
   // Utilities
   import { computed } from 'vue'
   import { rpath } from '@/util/routes'
 
-  const auth = useAuthStore()
-  const user = useUserStore()
-
   const tabs = computed(() => {
-    const array = [
+    return [
       {
         prependIcon: 'mdi-view-dashboard-outline',
         text: 'Dashboard',
@@ -32,16 +26,11 @@
         text: 'Options',
         to: rpath('/user/options/'),
       },
-    ]
-
-    if (auth.user && user.dev) {
-      array.push({
+      {
         prependIcon: '$vuetify',
         text: 'Subscriptions',
         to: rpath('/user/subscriptions/'),
-      })
-    }
-
-    return array
+      },
+    ]
   })
 </script>
