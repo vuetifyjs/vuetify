@@ -104,7 +104,7 @@ app.use(vuetify)
 
 - `.hidden-{breakpoint}-only` has been renamed to `.hidden-{breakpoint}`
 - `.text-xs-{alignment}` has been renamed to `.text-{alignment}` to reflect the fact that it applies to all breakpoints.
-- Typography classes are have been renamed for consistency and are all prefixed with `text-`, for example `.display-4` is now `.text-h1`
+- Typography classes have been renamed for consistency and are all prefixed with `text-`, for example `.display-4` is now `.text-h1`
 - Transition easing classes have been removed.
 
 :::info
