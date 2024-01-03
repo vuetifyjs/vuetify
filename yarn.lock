@@ -3822,10 +3822,10 @@
     find-cache-dir "^3.3.2"
     upath "^2.0.1"
 
-"@vuetify/one@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@vuetify/one/-/one-0.3.0.tgz#852680288bcc6bf10777762648630e84fa2a5be3"
-  integrity sha512-5EXuwWKU9qE9rJWBtu9CaiQo2k2JXr9n4bLWjpuI21bks723jbJ1MtpAdfgD1DOmmpmw1Y/K9hNvtHdBM7Kh3Q==
+"@vuetify/one@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@vuetify/one/-/one-0.4.0.tgz#cc8bc1d20f2e495fc92b4d892550f216daa14c35"
+  integrity sha512-ShfEKZq6Z+IsnXcEAlq4qWpczr7M+hxAw74b00BrFwkZdvjw2zSSMJLcOVblFEK/p/GZ9vLDV0M0uny9/E+TUA==
 
 "@vueuse/head@^1.3.1":
   version "1.3.1"
