@@ -23,7 +23,7 @@
 
     &:not(.v-field--focused)
       input
-        display: none
+        min-width: 0
 
   .v-field--dirty
     .v-autocomplete__selection
@@ -50,7 +50,7 @@
     height: calc($input-font-size * $input-line-height)
     letter-spacing: inherit
     line-height: inherit
-    max-width: calc(100% - $autocomplete-selection-gap)
+    max-width: calc(100% - $autocomplete-selection-gap * 2)
 
   &__selection
     &:first-child
