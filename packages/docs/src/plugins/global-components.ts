@@ -30,6 +30,7 @@ import DocTabs from '@/components/doc/Tabs.vue'
 import Entry from '@/components/promoted/Entry.vue'
 import Example from '@/components/examples/Example.vue'
 import Inline from '@/components/promoted/Inline.vue'
+import OneSubscription from '@/components/user/account/OneSubscription.vue'
 import PageFeatures from '@/components/PageFeatures.vue'
 import Promoted from '@/components/promoted/Promoted.vue'
 import Random from '@/components/promoted/Random.vue'
@@ -79,6 +80,7 @@ export function installGlobalComponents (app: App) {
     .component('Entry', Entry)
     .component('Example', Example)
     .component('Inline', Inline)
+    .component('OneSubscription', OneSubscription)
     .component('PageFeatures', PageFeatures)
     .component('Promoted', Promoted)
     .component('Random', Random)
