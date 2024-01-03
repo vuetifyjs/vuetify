@@ -38,7 +38,8 @@ export const usePinsStore = defineStore('pins', () => {
   }
 
   function load () {
-    pins.value = user.pinned || []
+    // TODO: remove next one release
+    pins.value = (user.pinned || []) as any
   }
 
   function save () {
