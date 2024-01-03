@@ -13,6 +13,8 @@ related:
 
 Control the layout of flex containers with alignment, justification and more with responsive flexbox utilities.
 
+<page-features />
+
 <entry />
 
 ## Enabling flexbox

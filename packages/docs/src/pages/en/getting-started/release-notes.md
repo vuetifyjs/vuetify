@@ -17,6 +17,8 @@ related:
 
 The Vuetify team performs releases on a weekly basis.
 
+<page-features />
+
 <releases />
 
 <entry />

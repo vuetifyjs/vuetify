@@ -13,6 +13,8 @@ related:
 
 Applies a custom float across any breakpoint with responsive float utilities.
 
+<page-features />
+
 <entry />
 
 ## Overview

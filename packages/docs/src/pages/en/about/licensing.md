@@ -15,6 +15,8 @@ related:
 
 This document provides comprehensive details about the licensing of the Vuetify framework.
 
+<page-features />
+
 <entry />
 
 ## Overview

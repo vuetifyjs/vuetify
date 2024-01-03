@@ -13,6 +13,8 @@ related:
 
 Opinionated base styles for Vuetify projects.
 
+<page-features />
+
 <entry />
 
 ## Bootstrapping

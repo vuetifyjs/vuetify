@@ -13,6 +13,8 @@ related:
 
 Vuetify features an application layout system that allows you to easily create complex website designs.
 
+<page-features />
+
 <entry />
 
 The system is built around an outside-in principle, where each application layout component reserves space for itself in one of four directions (left, right, up, down), leaving the available free space for any subsequent layout component(s) to occupy.

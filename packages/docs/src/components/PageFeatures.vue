@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-8">
+  <div class="mb-4">
     <page-feature-chip
       v-if="one.isSubscriber"
       :prepend-icon="`mdi-pin${!pinned ? '-outline' : ''}`"
