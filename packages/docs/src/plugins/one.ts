@@ -8,7 +8,5 @@ import { createOne } from '@vuetify/one'
 import type { App } from 'vue'
 
 export function installOne (app: App) {
-  const one = createOne()
-
-  return app.use(one as any)
+  return app.use(createOne())
 }

@@ -48,7 +48,7 @@
 
       <app-vertical-divider v-if="lgAndUp" class="ms-2 me-3" />
 
-      <vo-auth-dialog @click:dashboard="onClickDashboard" />
+      <vo-auth-dialog />
     </template>
   </v-app-bar>
 </template>
@@ -94,8 +94,4 @@
 
     return `https://cdn.vuetifyjs.com/docs/images/themes/${theme.name.value}-app-bar.png`
   })
-
-  function onClickDashboard () {
-    router.push(rpath('/user/dashboard/'))
-  }
 </script>
