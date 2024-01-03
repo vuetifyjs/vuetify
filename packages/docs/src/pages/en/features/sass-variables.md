@@ -17,6 +17,8 @@ related:
 
 Vuetify uses **SASS/SCSS** to craft the style and appearance of all aspects of the framework.
 
+<page-features />
+
 <entry />
 
 ::: info

@@ -14,6 +14,8 @@ related:
 
 The `v-scroll` directive allows you to provide callbacks when the window, specified target or element itself (with `.self` modifier) is scrolled.
 
+<page-features />
+
 <entry />
 
 <!-- ## Usage

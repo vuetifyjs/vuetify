@@ -13,6 +13,8 @@ related:
 
 Out of the box you get access to all colors in the [Material Design specification](https://material.io/design/color/the-color-system.html) through **sass** and **javascript**. These values can be used within your style sheets, your component files and on actual components via the **color** prop.
 
+<page-features />
+
 <entry />
 
 ## Classes

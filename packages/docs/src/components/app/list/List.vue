@@ -9,6 +9,10 @@
     item-props
     slim
   >
+    <template v-if="$slots.item" #item="itemProps">
+      <slot name="item" v-bind="itemProps" />
+    </template>
+
     <template #divider>
       <slot name="divider" />
 

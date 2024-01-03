@@ -21,6 +21,8 @@ related:
 
 Let the experts at Vuetify help you get the most out of your application with a customized support plan from the team behind the framework.
 
+<page-features />
+
 ## For Enterprise
 
 Vuetify offers a variety of support options to meet any need.

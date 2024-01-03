@@ -48,6 +48,7 @@ function genHeader (componentName: string) {
   const header = [
     genFrontMatter(componentName),
     `# ${componentName} API`,
+    '<page-features />',
   ]
 
   return `${header.join('\n\n')}\n\n`

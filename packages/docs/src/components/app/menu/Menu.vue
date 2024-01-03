@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
   // Components
-  import AppList, { Item } from '@/components/app/list/List.vue'
+  import { Item } from '@/components/app/list/List.vue'
 
   // Utilities
   import { PropType } from 'vue'

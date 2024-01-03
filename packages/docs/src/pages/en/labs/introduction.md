@@ -14,6 +14,8 @@ related:
 
 Experiment and use in-development components before they're released.
 
+<page-features />
+
 ## What is Labs? { id=what-is-labs }
 
 Labs is a new way for developers to use unfinished components in an alpha state.

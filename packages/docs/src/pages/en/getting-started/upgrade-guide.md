@@ -15,6 +15,8 @@ related:
 
 This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
 
+<page-features />
+
 ::: error
   <span class="text-h6">Many of the changes on this page can be applied automatically using [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)</span>
 :::

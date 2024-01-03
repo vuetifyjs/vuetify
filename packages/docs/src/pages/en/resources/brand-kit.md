@@ -20,6 +20,8 @@ related:
 
 Explore the Vuetify Brand Kit, your source for official logos and branding assets.
 
+<page-features />
+
 <entry />
 
 ## Vuetify Logo

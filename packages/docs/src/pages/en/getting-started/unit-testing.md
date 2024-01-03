@@ -14,6 +14,8 @@ related:
 
 Add regression protection by adding unit tests to your Vuetify application
 
+<page-features />
+
 <entry />
 
 ## Usage
