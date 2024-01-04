@@ -19,6 +19,8 @@
 
   <ad-option />
 
+  <pin-option />
+
   <v-divider class="mt-4 mb-3" />
 
   <settings-header
@@ -44,6 +46,7 @@
   // Components
   import AdOption from '@/components/app/settings/options/AdOption.vue'
   import AvatarOption from '@/components/app/settings/options/AvatarOption.vue'
+  import PinOption from '@/components/app/settings/options/PinOption.vue'
   import QuickbarOption from '@/components/app/settings/options/QuickbarOption.vue'
   import RailDrawerOption from '@/components/app/settings/options/RailDrawerOption.vue'
   import SettingsHeader from '@/components/app/settings/SettingsHeader.vue'

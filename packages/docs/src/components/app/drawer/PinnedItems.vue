@@ -1,6 +1,6 @@
 <template>
   <app-list
-    v-if="one.isSubscriber"
+    v-if="auth.isSubscriber && user.pins"
     :items="pinned"
     class="pb-0 mb-n2"
     nav
@@ -39,11 +39,12 @@
   import { computed, onBeforeMount } from 'vue'
 
   // Stores
-  import { useOneStore } from '@vuetify/one'
+  import { useAuthStore, useUserStore } from '@vuetify/one'
   import { usePinsStore } from '@/store/pins'
 
-  const one = useOneStore()
+  const auth = useAuthStore()
   const pins = usePinsStore()
+  const user = useUserStore()
   const router = useRouter()
 
   const pinned = computed(() => ([{
