@@ -1,16 +1,12 @@
 <template>
-  <template v-if="!auth.isSubscriber">
-    <alert type="info">
-      {{ t('dashboard.perks.alert') }}
+  <alert
+    v-if="!auth.isSubscriber"
+    type="success"
+  >
+    {{ t('dashboard.perks.alert') }}
 
-      <app-link href="https://github.com/sponsors/johnleider">$1 per month</app-link>
-    </alert>
-
-    <promoted
-      permanent
-      slug="vuetify-github-sponsors"
-    />
-  </template>
+    <app-link :href="rpath('/user/subscriptions/')">$1 per month</app-link>
+  </alert>
 
   <settings-header
     title="dashboard.perks.experience"
@@ -53,6 +49,9 @@
 
   // Composables
   import { useI18n } from 'vue-i18n'
+
+  // Utilities
+  import { rpath } from '@/util/routes'
 
   // Stores
   import { useAuthStore } from '@vuetify/one'
