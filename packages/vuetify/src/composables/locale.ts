@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, provide, ref } from 'vue'
+import { computed, inject, provide } from 'vue'
 import { defaultRtl } from '@/locale'
 import { createVuetifyAdapter } from '@/locale/adapters/vuetify'
 
@@ -75,15 +75,18 @@ export interface RtlProps {
 
 export interface RtlInstance {
   isRtl: Ref<boolean>
-  rtl: Ref<Record<string, boolean>>
+  rtl: Record<string, boolean>
   rtlClasses: Ref<string>
 }
 
 export const RtlSymbol: InjectionKey<RtlInstance> = Symbol.for('vuetify:rtl')
 
 export function createRtl (i18n: LocaleInstance, options?: RtlOptions): RtlInstance {
-  const rtl = ref<Record<string, boolean>>(options?.rtl ?? defaultRtl)
-  const isRtl = computed(() => rtl.value[i18n.current.value] ?? false)
+  const rtl = options?.rtl ?? defaultRtl
+  const isRtl = computed(() => {
+      const key = i18n.current.value as keyof typeof rtl;
+      return rtl[key] ?? false
+  })
 
   return {
     isRtl,
@@ -93,7 +96,10 @@ export function createRtl (i18n: LocaleInstance, options?: RtlOptions): RtlInsta
 }
 
 export function provideRtl (locale: LocaleInstance, rtl: RtlInstance['rtl'], props: RtlProps): RtlInstance {
-  const isRtl = computed(() => props.rtl ?? rtl.value[locale.current.value] ?? false)
+  const isRtl = computed(() => {
+    const key = locale.current.value as keyof typeof rtl;
+    return rtl[key] ?? false
+  })
 
   return {
     isRtl,
