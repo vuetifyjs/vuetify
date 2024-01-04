@@ -44,23 +44,17 @@ Here we display a list of settings that could be applied within an application.
 
 ## Guide
 
-The `v-otp-input` component is a collection of `v-field` components that combine to create a single input. It is used to validate a one-time password (OTP) that is sent to the user via email or SMS.
-
-The following code snippet is an example of a basic `v-otp-input` component.
-
-```html
-<v-otp-input></v-otp-input>
-```
+The `v-number-input` component is built upon the `v-field` and `v-input` components. It is used as a replacement for `<input type="number">`, accepting numeric values from the user.
 
 ### Props
 
-The `v-otp-input` component has support for most of `v-field`'s props and is follows the same design patterns as other inputs.
+The `v-number-input` component has support for most of `v-field`'s props and is follows the same design patterns as other inputs.
 
-#### Length
+#### Control-variant
 
-The `length` prop determines the number of `v-field` components that are rendered. The default value is `6`.
+The `control-variant` prop offers an easy way to customize steppers button layout. The following values are valid options: **default**, **stacked** and **split**.
 
-<example file="v-otp-input/prop-length" />
+<example file="v-number-input/prop-control-variant" />
 
 #### Focus-all
 
