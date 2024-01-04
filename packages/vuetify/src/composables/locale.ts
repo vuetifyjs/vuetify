@@ -75,18 +75,15 @@ export interface RtlProps {
 
 export interface RtlInstance {
   isRtl: Ref<boolean>
-  rtl: Record<string, boolean>
+  rtl: Ref<Record<string, boolean>>
   rtlClasses: Ref<string>
 }
 
 export const RtlSymbol: InjectionKey<RtlInstance> = Symbol.for('vuetify:rtl')
 
 export function createRtl (i18n: LocaleInstance, options?: RtlOptions): RtlInstance {
-  const rtl = options?.rtl ?? defaultRtl
-  const isRtl = computed(() => {
-    const key = i18n.current.value as keyof typeof rtl
-    return rtl[key] ?? false
-  })
+  const rtl = computed<Record<string, boolean>>(() => options?.rtl ?? defaultRtl)
+  const isRtl = computed(() => rtl.value[i18n.current.value] ?? false)
 
   return {
     isRtl,
@@ -96,10 +93,7 @@ export function createRtl (i18n: LocaleInstance, options?: RtlOptions): RtlInsta
 }
 
 export function provideRtl (locale: LocaleInstance, rtl: RtlInstance['rtl'], props: RtlProps): RtlInstance {
-  const isRtl = computed(() => {
-    const key = locale.current.value as keyof typeof rtl
-    return rtl[key] ?? false
-  })
+  const isRtl = computed(() => props.rtl ?? rtl.value[locale.current.value] ?? false)
 
   return {
     isRtl,
