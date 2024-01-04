@@ -84,8 +84,8 @@ export const RtlSymbol: InjectionKey<RtlInstance> = Symbol.for('vuetify:rtl')
 export function createRtl (i18n: LocaleInstance, options?: RtlOptions): RtlInstance {
   const rtl = options?.rtl ?? defaultRtl
   const isRtl = computed(() => {
-      const key = i18n.current.value as keyof typeof rtl;
-      return rtl[key] ?? false
+    const key = i18n.current.value as keyof typeof rtl
+    return rtl[key] ?? false
   })
 
   return {
@@ -97,7 +97,7 @@ export function createRtl (i18n: LocaleInstance, options?: RtlOptions): RtlInsta
 
 export function provideRtl (locale: LocaleInstance, rtl: RtlInstance['rtl'], props: RtlProps): RtlInstance {
   const isRtl = computed(() => {
-    const key = locale.current.value as keyof typeof rtl;
+    const key = locale.current.value as keyof typeof rtl
     return rtl[key] ?? false
   })
 
