@@ -84,6 +84,8 @@
   const app = useAppStore()
   const user = useUserStore()
   const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
+  // TODO: maybe remove below
+  // eslint-disable-next-line no-unused-vars
   const route = useRoute()
   const theme = useTheme()
 
