@@ -56,54 +56,20 @@ The `control-variant` prop offers an easy way to customize steppers button layou
 
 <example file="v-number-input/prop-control-variant" />
 
-#### Focus-all
+#### Control-reverse
 
-The `autofocus` prop automatically focuses the first element in the `v-otp-input` component.
+The `control-reverse` prop automatically changes the stepper buttons' position to the opposite side for both the default and stacked control variants.
 
-<example file="v-otp-input/prop-focus-all" />
+<example file="v-number-input/prop-control-reverse" />
 
-#### Error
+#### Hide-input
 
-The `error` prop puts the `v-otp-input` into an error state. This is useful for displaying validation errors.
+The `hide-input` prop hides the input field, allowing only the stepper buttons to be visible. These stepper buttons follow a stacked control-variant layout.
 
-<example file="v-otp-input/prop-error" />
+<example file="v-number-input/prop-hide-input" />
 
-#### Variants
+#### Inset
 
-The `v-otp-input` component supports the same variants as `v-field`, `v-text-field` and other inputs.
+The `inset` prop adjusts the style of the stepper buttons by reducing the size of the button dividers.
 
-<example file="v-otp-input/prop-variant" />
-
-#### Loader
-
-The `loader` prop displays a loader when the `v-otp-input` component is in a loading state. When complete, emits a `finish` event.
-
-<example file="v-otp-input/prop-loader" />
-
-## Examples
-
-The following are a collection of examples that demonstrate more advanced and real world use of the `v-otp-input` component.
-
-### Card variants
-
-The following example is a detailed example of a `v-otp-input` component used within a card.
-
-<example file="v-otp-input/misc-card" />
-
-### Mobile text
-
-The following example is a detailed example of a `v-otp-input` component used with mobile text.
-
-<example file="v-otp-input/misc-mobile" />
-
-### Verify account
-
-The following example is a detailed example of a `v-otp-input` component used to verify a user's account.
-
-<example file="v-otp-input/misc-verify" />
-
-### Divider
-
-The following example is a detailed example of a `v-otp-input` component used with a divider.
-
-<example file="v-otp-input/misc-divider" />
+<example file="v-number-input/prop-inset" />

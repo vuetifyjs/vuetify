@@ -1,0 +1,11 @@
+<template>
+  <v-container>
+    <v-row>
+      <v-col>
+        <v-number-input
+          hide-input
+        ></v-number-input>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>

@@ -5,12 +5,14 @@
         <h5>Default</h5>
         <v-number-input
           control-variant="default"
+          control-reverse
         ></v-number-input>
       </v-col>
       <v-col cols="12" sm="4" md="4">
         <h5>Stacked</h5>
         <v-number-input
           control-variant="stacked"
+          control-reverse
         ></v-number-input>
       </v-col>
       <v-col cols="12" sm="4" md="4">
