@@ -92,7 +92,7 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
 
         return {
           ...option,
-          title: t(option.title),
+          title: !isNaN(option.title as any) ? option.title : t(option.title),
         }
       })
     ))
