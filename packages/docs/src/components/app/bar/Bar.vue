@@ -73,20 +73,18 @@
   // Composables
   import { useAppStore } from '@/store/app'
   import { useDisplay, useTheme } from 'vuetify'
-  import { useRoute, useRouter } from 'vue-router'
+  import { useRoute } from 'vue-router'
 
   // Stores
   import { useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
 
   const app = useAppStore()
   const user = useUserStore()
   const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
   const route = useRoute()
-  const router = useRouter()
   const theme = useTheme()
 
   const image = computed(() => {
