@@ -73,3 +73,13 @@ The `hide-input` prop hides the input field, allowing only the stepper buttons t
 The `inset` prop adjusts the style of the stepper buttons by reducing the size of the button dividers.
 
 <example file="v-number-input/prop-inset" />
+
+#### Min/Max
+The `min` and `max` props specify the minimum and maximum values accepted by v-number-input, behaving identically to the native min and max attributes for `<input type="number">`.
+
+<example file="v-number-input/prop-min-max" />
+
+#### Step
+The `step` prop behaves the same as the `step` attribute in the `<input type="number">`, it defines the incremental steps for adjusting the numeric value.
+
+<example file="v-number-input/prop-step" />
