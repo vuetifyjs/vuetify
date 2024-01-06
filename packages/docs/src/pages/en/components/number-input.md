@@ -22,7 +22,7 @@ The VNumberInput extends the standard HTML number-type input, ensuring style con
 
 <page-features />
 
-::: success
+::: warning
 This feature requires [v3.5.0](/introduction/roadmap/#v3-5)
 :::
 
