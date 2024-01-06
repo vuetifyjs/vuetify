@@ -11,6 +11,7 @@
     <div class="text-subtitle-2 font-weight-light mb-3">Please enter the verification code sent to your mobile</div>
 
     <v-otp-input
+      v-model="otp"
       class="mb-8"
       divider="•"
       length="4"
