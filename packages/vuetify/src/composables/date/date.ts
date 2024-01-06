@@ -137,9 +137,3 @@ export function getWeek (adapter: DateAdapter<any>, value: any) {
 
   return Math.floor(diffDays / 7) + 1
 }
-
-export function getDay (adapter: DateAdapter<any>, value: any) {
-  const date = adapter.toJsDate(value)
-
-  return date.getDay()
-}
