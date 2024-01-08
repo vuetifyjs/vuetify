@@ -524,12 +524,12 @@ export const VCombobox = genericComponent<new <
                                     />
                                   ) : undefined }
 
-                                  { item.props.prependIcon && (
-                                    <VIcon icon={ item.props.prependIcon } />
-                                  )}
-
                                   { item.props.prependAvatar && (
                                     <VAvatar image={ item.props.prependAvatar } />
+                                  )}
+
+                                  { item.props.prependIcon && (
+                                    <VIcon icon={ item.props.prependIcon } />
                                   )}
                                 </>
                               ),
