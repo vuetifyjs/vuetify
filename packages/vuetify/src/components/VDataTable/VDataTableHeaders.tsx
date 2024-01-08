@@ -124,6 +124,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               'v-data-table__th--sortable': column.sortable,
               'v-data-table__th--sorted': isSorted(column),
               'v-data-table__th--fixed': column.fixed,
+              'v-data-table__th--sticky': props.sticky,
             },
             loaderClasses.value,
           ]}
