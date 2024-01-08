@@ -97,46 +97,51 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
       })
     ))
 
-    useRender(() => (
-      <div class="v-data-table-footer">
-        { slots.prepend?.() }
+    useRender(() => {
+      const paginationProps = VPagination.filterProps(props)
 
-        <div class="v-data-table-footer__items-per-page">
-          <span>{ t(props.itemsPerPageText) }</span>
+      return (
+        <div class="v-data-table-footer">
+          { slots.prepend?.() }
 
-          <VSelect
-            items={ itemsPerPageOptions.value }
-            modelValue={ itemsPerPage.value }
-            onUpdate:modelValue={ v => setItemsPerPage(Number(v)) }
-            density="compact"
-            variant="outlined"
-            hide-details
-          />
-        </div>
+          <div class="v-data-table-footer__items-per-page">
+            <span>{ t(props.itemsPerPageText) }</span>
 
-        <div class="v-data-table-footer__info">
-          <div>
-            { t(props.pageText, !itemsLength.value ? 0 : startIndex.value + 1, stopIndex.value, itemsLength.value) }
+            <VSelect
+              items={ itemsPerPageOptions.value }
+              modelValue={ itemsPerPage.value }
+              onUpdate:modelValue={ v => setItemsPerPage(Number(v)) }
+              density="compact"
+              variant="outlined"
+              hide-details
+            />
+          </div>
+
+          <div class="v-data-table-footer__info">
+            <div>
+              { t(props.pageText, !itemsLength.value ? 0 : startIndex.value + 1, stopIndex.value, itemsLength.value) }
+            </div>
+          </div>
+
+          <div class="v-data-table-footer__pagination">
+            <VPagination
+              v-model={ page.value }
+              density="comfortable"
+              first-aria-label={ props.firstPageLabel }
+              last-aria-label={ props.lastPageLabel }
+              length={ pageCount.value }
+              next-aria-label={ props.nextPageLabel }
+              previous-aria-label={ props.prevPageLabel }
+              rounded
+              show-first-last-page
+              total-visible={ props.showCurrentPage ? 1 : 0 }
+              variant="plain"
+              { ...paginationProps }
+            ></VPagination>
           </div>
         </div>
-
-        <div class="v-data-table-footer__pagination">
-          <VPagination
-            v-model={ page.value }
-            density="comfortable"
-            first-aria-label={ props.firstPageLabel }
-            last-aria-label={ props.lastPageLabel }
-            length={ pageCount.value }
-            next-aria-label={ props.nextPageLabel }
-            previous-aria-label={ props.prevPageLabel }
-            rounded
-            show-first-last-page
-            total-visible={ props.showCurrentPage ? 1 : 0 }
-            variant="plain"
-          ></VPagination>
-        </div>
-      </div>
-    ))
+      )
+    })
 
     return {}
   },
