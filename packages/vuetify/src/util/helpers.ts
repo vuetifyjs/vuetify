@@ -763,3 +763,15 @@ export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildre
     ? vnodes
     : null
 }
+
+export function defer (timeout: number, cb: () => void) {
+  if (!IN_BROWSER || timeout === 0) {
+    cb()
+
+    return () => {}
+  }
+
+  const timeoutId = window.setTimeout(cb, timeout)
+
+  return () => window.clearTimeout(timeoutId)
+}
