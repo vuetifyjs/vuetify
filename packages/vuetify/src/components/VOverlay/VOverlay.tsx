@@ -90,6 +90,7 @@ export const makeVOverlayProps = propsFactory({
   noClickAnimation: Boolean,
   modelValue: Boolean,
   persistent: Boolean,
+  clickOutsideIgnore: [Function, String],
   scrim: {
     type: [Boolean, String],
     default: true,
@@ -293,7 +294,12 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 <div
                   ref={ contentEl }
                   v-show={ isActive.value }
-                  v-click-outside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
+                  v-click-outside={{
+                    handler: onClickOutside,
+                    closeConditional,
+                    include: () => [activatorEl.value],
+                    ignore: props.clickOutsideIgnore,
+                  }}
                   class={[
                     'v-overlay__content',
                     props.contentClass,
