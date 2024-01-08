@@ -1,5 +1,5 @@
 // Libraries
-import Vue from 'vue'
+import Vue, { h } from 'vue'
 import Vuetify from '../../../framework'
 
 // Components
@@ -231,5 +231,26 @@ describe('VForm.ts', () => {
     })
 
     expect(disabledInputs).toBe(inputs.length)
+  })
+
+  it('disables all inputs but one', async () => {
+    const inputs = {
+      functional: true,
+      render () {
+        return [h(VTextField), h(VTextField, { props: { disabled: false } })]
+      },
+    }
+
+    const wrapper = mountFunction({
+      propsData: { disabled: true },
+      slots: { default: inputs },
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.inputs).toEqual([
+      expect.objectContaining({ isDisabled: true }),
+      expect.objectContaining({ isDisabled: false }),
+    ])
   })
 })

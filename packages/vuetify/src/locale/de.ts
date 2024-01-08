@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '{0} mehr',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} Dateien',
     counterSize: '{0} Dateien ({1} gesamt)',
@@ -66,4 +71,5 @@ export default {
       icon: 'Rating {0} of {1}',
     },
   },
+  loading: 'Loading...',
 }

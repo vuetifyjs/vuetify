@@ -14,7 +14,8 @@ $rounded: map-deep-merge(
     'sm': $border-radius-root / 2,
     null: $border-radius-root,
     'lg': $border-radius-root * 2,
-    'xl': $border-radius-root * 6,
+    'xl': $border-radius-root * 4,
+    'xxl': $border-radius-root * 6,
     'pill': 9999px,
     'circle': 50%
   ),
@@ -22,7 +23,7 @@ $rounded: map-deep-merge(
 );
 
 $spacer: 4px !default;
-$spacers-steps: 16 !default; 
+$spacers-steps: 16 !default;
 
 $spacers: () !default;
 @if (type-of($spacers) == list) {

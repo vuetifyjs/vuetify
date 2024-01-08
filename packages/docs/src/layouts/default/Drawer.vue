@@ -21,25 +21,29 @@
     <template #append>
       <v-divider />
 
-      <div class="text--secondary text-caption py-2 px-3 d-flex align-center">
-        <div class="d-inline-flex align-center">
-          <v-icon left small>mdi-label</v-icon>
-          Latest release:
+      <v-toolbar height="40" flat>
+        <div class="text--secondary text-caption py-2 mx-n1 d-flex align-center flex-grow-1 justify-space-between">
+          <div class="d-inline-flex align-center">
+            <v-icon left size="18">mdi-label</v-icon>
+            Latest release
+          </div>
+
+          <v-btn
+            :href="`https://vuetifyjs.com/getting-started/release-notes/?version=v${version}`"
+            class="text-button px-2 ms-auto text--secondary"
+            rel="noopener noreferrer"
+            small
+            target="_blank"
+            text
+          >
+            <span class="text-none">
+              v{{ version }}
+            </span>
+
+            <v-icon small right>mdi-open-in-new</v-icon>
+          </v-btn>
         </div>
-
-        <v-btn
-          :href="`https://github.com/vuetifyjs/vuetify/releases/tag/v${version}`"
-          class="text-none px-2 ms-auto text--secondary"
-          small
-          rel="noopener noreferrer"
-          target="_blank"
-          text
-        >
-          v{{ version }}
-
-          <v-icon small right>mdi-open-in-new</v-icon>
-        </v-btn>
-      </div>
+      </v-toolbar>
     </template>
   </v-navigation-drawer>
 </template>

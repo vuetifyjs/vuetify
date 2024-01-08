@@ -11,7 +11,7 @@ export type Groupable<T extends string, C extends VueConstructor | null = null> 
   isActive: boolean
   disabled: boolean
   groupClasses: object
-  toggle (): void
+  toggle (e?: Event): void
 }>
 
 export function factory<T extends string, C extends VueConstructor | null = null> (
@@ -59,7 +59,14 @@ export function factory<T extends string, C extends VueConstructor | null = null
     },
 
     methods: {
-      toggle () {
+      toggle (e?: Event) {
+        if (this.disabled && e) {
+          // Prevent keyboard actions
+          // from children elements
+          // within disabled tabs
+          e.preventDefault()
+          return
+        }
         this.$emit('change')
       },
     },

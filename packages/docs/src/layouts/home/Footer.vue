@@ -35,49 +35,6 @@
         <v-col cols="12">
           <v-responsive
             class="mx-auto"
-            max-width="400"
-          >
-            <v-form
-              action="https://www.getrevue.co/profile/vuetify/add_subscriber"
-              method="post"
-              name="revue-form"
-              target="_blank"
-            >
-              <v-text-field
-                id="member_email"
-                v-model="email"
-                :label="$t('email-address')"
-                background-color="grey darken-3"
-                flat
-                name="member[email]"
-                rounded
-                solo
-                type="email"
-              >
-                <template #append>
-                  <v-btn
-                    color="secondary"
-                    name="member[subscribe]"
-                    type="submit"
-                    value="Subscribe"
-                  >
-                    {{ $t('subscribe') }}
-                  </v-btn>
-                </template>
-              </v-text-field>
-            </v-form>
-          </v-responsive>
-
-          <div class="text-center text-caption">
-            <i18n path="subscribe-to-our">
-              <strong>{{ $t('newsletter') }}</strong>
-            </i18n>
-          </div>
-        </v-col>
-
-        <v-col cols="12">
-          <v-responsive
-            class="mx-auto"
             max-width="70%"
             width="150px"
           >

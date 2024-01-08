@@ -263,6 +263,11 @@ export default baseMixins.extend<options>().extend({
           this.$refs.menu?.updateDimensions()
         })
       }
+      if (this.hideSelected) {
+        this.$nextTick(() => {
+          this.onScroll()
+        })
+      }
     },
     isMenuActive (val) {
       window.setTimeout(() => this.onMenuActiveChange(val))
@@ -519,14 +524,15 @@ export default baseMixins.extend<options>().extend({
       const props = this.$_menuProps as any
       props.activator = this.$refs['input-slot']
 
-      // Attach to root el so that
-      // menu covers prepend/append icons
-      if (
+      if ('attach' in props) void 0
+      else if (
         // TODO: make this a computed property or helper or something
         this.attach === '' || // If used as a boolean prop (<v-menu attach>)
         this.attach === true || // If bound to a boolean (<v-menu :attach="true">)
         this.attach === 'attach' // If bound as boolean prop in pug (v-menu(attach))
       ) {
+        // Attach to root el so that
+        // menu covers prepend/append icons
         props.attach = this.$el
       } else {
         props.attach = this.attach
@@ -748,7 +754,10 @@ export default baseMixins.extend<options>().extend({
     },
     onScroll () {
       if (!this.isMenuActive) {
-        requestAnimationFrame(() => (this.getContent().scrollTop = 0))
+        requestAnimationFrame(() => {
+          const content = this.getContent()
+          if (content) content.scrollTop = 0
+        })
       } else {
         if (this.lastItem > this.computedItems.length) return
 

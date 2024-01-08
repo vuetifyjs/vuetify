@@ -32,6 +32,10 @@ export default mixins(
   props: {
     boilerplate: Boolean,
     loading: Boolean,
+    loadingText: {
+      type: String,
+      default: '$vuetify.loading',
+    },
     tile: Boolean,
     transition: String,
     type: String,
@@ -45,12 +49,13 @@ export default mixins(
     attrs (): object {
       if (!this.isLoading) return this.$attrs
 
-      return !this.boilerplate ? {
-        'aria-busy': true,
-        'aria-live': 'polite',
-        role: 'alert',
+      return {
+        'aria-busy': !this.boilerplate ? true : undefined,
+        'aria-live': !this.boilerplate ? 'polite' : undefined,
+        'aria-label': !this.boilerplate ? this.$vuetify.lang.t(this.loadingText) : undefined,
+        role: !this.boilerplate ? 'alert' : undefined,
         ...this.$attrs,
-      } : {}
+      }
     },
     classes (): object {
       return {

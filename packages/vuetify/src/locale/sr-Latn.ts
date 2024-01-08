@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '{0} više',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} fajlova',
     counterSize: '{0} fajlova ({1} ukupno)',
@@ -66,4 +71,5 @@ export default {
       icon: 'Ocena {0} od {1}',
     },
   },
+  loading: 'Loading...',
 }

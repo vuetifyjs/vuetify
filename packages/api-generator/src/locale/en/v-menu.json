@@ -14,6 +14,7 @@
     "openOnHover": "Designates whether menu should open on activator hover",
     "origin": "Sets the transition origin on the element. You can find more information on the MDN documentation [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin).",
     "returnValue": "The value that is updated when the menu is closed - must be primitive. Dot notation is supported",
-    "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own."
+    "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own.",
+    "contentProps": "Applies props/attributes to the detached menu. This is useful because the content is moved to the beginning of the `v-app` component (unless the attach prop is provided) and is not targetable by classes passed directly on the component. You could use this for example for applying a `data-cy` for cypress testing purposes."
   }
 }

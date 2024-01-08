@@ -3,7 +3,9 @@ module.exports = {
     slots: [
       {
         name: 'default',
-        props: undefined,
+        props: {
+          open: 'boolean',
+        },
       },
     ],
   },

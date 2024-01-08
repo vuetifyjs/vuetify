@@ -34,6 +34,7 @@
         'md',
         'lg',
         'xl',
+        'xxl',
         'pill',
         'circle',
       ],

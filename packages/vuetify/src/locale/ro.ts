@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: 'încă {0}',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} fișiere',
     counterSize: '{0} fișiere ({1} în total)',
@@ -66,4 +71,5 @@ export default {
       icon: 'Rating de {0} din {1}',
     },
   },
+  loading: 'Loading...',
 }

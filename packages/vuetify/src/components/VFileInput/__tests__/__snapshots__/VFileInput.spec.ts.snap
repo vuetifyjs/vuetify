@@ -5,7 +5,7 @@ exports[`VFileInput.ts should be unclearable 1`] = `
   <div class="v-input__prepend-outer">
     <div class="v-input__icon v-input__icon--prepend">
       <button type="button"
-              aria-label="prepend icon"
+              aria-label=" prepended action"
               class="v-icon notranslate v-icon--link material-icons theme--light"
       >
         $file
@@ -40,7 +40,7 @@ exports[`VFileInput.ts should display file size 1`] = `
   <div class="v-input__prepend-outer">
     <div class="v-input__icon v-input__icon--prepend">
       <button type="button"
-              aria-label="prepend icon"
+              aria-label=" prepended action"
               class="v-icon notranslate v-icon--link material-icons theme--light"
       >
         $file
@@ -60,7 +60,7 @@ exports[`VFileInput.ts should display file size 1`] = `
       <div class="v-input__append-inner">
         <div class="v-input__icon v-input__icon--clear">
           <button type="button"
-                  aria-label="clear icon"
+                  aria-label="Clear "
                   tabindex="-1"
                   class="v-icon notranslate v-icon--link material-icons theme--light"
           >
@@ -87,7 +87,7 @@ exports[`VFileInput.ts should display file size 2`] = `
   <div class="v-input__prepend-outer">
     <div class="v-input__icon v-input__icon--prepend">
       <button type="button"
-              aria-label="prepend icon"
+              aria-label=" prepended action"
               class="v-icon notranslate v-icon--link material-icons theme--light"
       >
         $file
@@ -107,7 +107,7 @@ exports[`VFileInput.ts should display file size 2`] = `
       <div class="v-input__append-inner">
         <div class="v-input__icon v-input__icon--clear">
           <button type="button"
-                  aria-label="clear icon"
+                  aria-label="Clear "
                   tabindex="-1"
                   class="v-icon notranslate v-icon--link material-icons theme--light"
           >
@@ -134,7 +134,7 @@ exports[`VFileInput.ts should display total size in counter 1`] = `
   <div class="v-input__prepend-outer">
     <div class="v-input__icon v-input__icon--prepend">
       <button type="button"
-              aria-label="prepend icon"
+              aria-label=" prepended action"
               class="v-icon notranslate v-icon--link material-icons theme--light"
       >
         $file
@@ -154,7 +154,7 @@ exports[`VFileInput.ts should display total size in counter 1`] = `
       <div class="v-input__append-inner">
         <div class="v-input__icon v-input__icon--clear">
           <button type="button"
-                  aria-label="clear icon"
+                  aria-label="Clear "
                   tabindex="-1"
                   class="v-icon notranslate v-icon--link material-icons theme--light"
           >
@@ -184,7 +184,7 @@ exports[`VFileInput.ts should display total size in counter 2`] = `
   <div class="v-input__prepend-outer">
     <div class="v-input__icon v-input__icon--prepend">
       <button type="button"
-              aria-label="prepend icon"
+              aria-label=" prepended action"
               class="v-icon notranslate v-icon--link material-icons theme--light"
       >
         $file
@@ -204,7 +204,7 @@ exports[`VFileInput.ts should display total size in counter 2`] = `
       <div class="v-input__append-inner">
         <div class="v-input__icon v-input__icon--clear">
           <button type="button"
-                  aria-label="clear icon"
+                  aria-label="Clear "
                   tabindex="-1"
                   class="v-icon notranslate v-icon--link material-icons theme--light"
           >
@@ -234,7 +234,7 @@ exports[`VFileInput.ts should render 1`] = `
   <div class="v-input__prepend-outer">
     <div class="v-input__icon v-input__icon--prepend">
       <button type="button"
-              aria-label="prepend icon"
+              aria-label=" prepended action"
               class="v-icon notranslate v-icon--link material-icons theme--light"
       >
         $file
@@ -273,7 +273,7 @@ exports[`VFileInput.ts should render chips 1`] = `
   <div class="v-input__prepend-outer">
     <div class="v-input__icon v-input__icon--prepend">
       <button type="button"
-              aria-label="prepend icon"
+              aria-label=" prepended action"
               class="v-icon notranslate v-icon--link material-icons theme--light"
       >
         $file
@@ -297,7 +297,7 @@ exports[`VFileInput.ts should render chips 1`] = `
       <div class="v-input__append-inner">
         <div class="v-input__icon v-input__icon--clear">
           <button type="button"
-                  aria-label="clear icon"
+                  aria-label="Clear "
                   tabindex="-1"
                   class="v-icon notranslate v-icon--link material-icons theme--light"
           >
@@ -324,7 +324,7 @@ exports[`VFileInput.ts should render counter 1`] = `
   <div class="v-input__prepend-outer">
     <div class="v-input__icon v-input__icon--prepend">
       <button type="button"
-              aria-label="prepend icon"
+              aria-label=" prepended action"
               class="v-icon notranslate v-icon--link material-icons theme--light"
       >
         $file
@@ -344,7 +344,7 @@ exports[`VFileInput.ts should render counter 1`] = `
       <div class="v-input__append-inner">
         <div class="v-input__icon v-input__icon--clear">
           <button type="button"
-                  aria-label="clear icon"
+                  aria-label="Clear "
                   tabindex="-1"
                   class="v-icon notranslate v-icon--link material-icons theme--light"
           >
@@ -374,7 +374,7 @@ exports[`VFileInput.ts should render multiple 1`] = `
   <div class="v-input__prepend-outer">
     <div class="v-input__icon v-input__icon--prepend">
       <button type="button"
-              aria-label="prepend icon"
+              aria-label=" prepended action"
               class="v-icon notranslate v-icon--link material-icons theme--light"
       >
         $file
@@ -414,7 +414,7 @@ exports[`VFileInput.ts should render small chips 1`] = `
   <div class="v-input__prepend-outer">
     <div class="v-input__icon v-input__icon--prepend">
       <button type="button"
-              aria-label="prepend icon"
+              aria-label=" prepended action"
               class="v-icon notranslate v-icon--link material-icons theme--light"
       >
         $file
@@ -438,7 +438,7 @@ exports[`VFileInput.ts should render small chips 1`] = `
       <div class="v-input__append-inner">
         <div class="v-input__icon v-input__icon--clear">
           <button type="button"
-                  aria-label="clear icon"
+                  aria-label="Clear "
                   tabindex="-1"
                   class="v-icon notranslate v-icon--link material-icons theme--light"
           >
@@ -494,7 +494,7 @@ exports[`VFileInput.ts should set display none if hide-input prop is set 1`] = `
   <div class="v-input__prepend-outer">
     <div class="v-input__icon v-input__icon--prepend">
       <button type="button"
-              aria-label="prepend icon"
+              aria-label=" prepended action"
               class="v-icon notranslate v-icon--link material-icons theme--light"
       >
         $file
