@@ -216,6 +216,10 @@ export const VList = genericComponent<new <
       e.preventDefault()
     }
 
+    function onMousedown (e: MouseEvent) {
+      isFocused.value = true
+    }
+
     function focus (location?: 'next' | 'prev' | 'first' | 'last') {
       if (contentRef.value) {
         return focusChild(contentRef.value, location)
@@ -254,6 +258,7 @@ export const VList = genericComponent<new <
           onFocusout={ onFocusout }
           onFocus={ onFocus }
           onKeydown={ onKeydown }
+          onMousedown={ onMousedown }
         >
           <VListChildren
             items={ items.value }
