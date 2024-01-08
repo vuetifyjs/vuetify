@@ -8,7 +8,7 @@ import { VCalendarMonthDay } from './VCalendarMonthDay'
 
 // Composables
 import { makeCalendarProps, useCalendar } from '@/composables/calendar'
-import { getDay, useDate } from '@/composables/date/date'
+import { useDate } from '@/composables/date/date'
 
 // Utilities
 import { computed } from 'vue'
@@ -17,10 +17,6 @@ import { chunkArray, genericComponent, propsFactory, useRender } from '@/util'
 export const makeVCalendarProps = propsFactory({
   hideHeader: Boolean,
   hideWeekNumber: Boolean,
-  weekdays: {
-    type: Array<number>,
-    default: () => [0, 1, 2, 3, 4, 5, 6],
-  },
 
   ...makeCalendarProps(),
   ...makeVCalendarDayProps(),
@@ -112,7 +108,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
             )}
           </div>
 
-          <div class="v-calendar__container">
+          <div class={['v-calendar__container', `days__${props.weekdays.length}`]}>
             { props.viewMode === 'month' && !props.hideDayHeader && (
               <div
                 class={
@@ -146,12 +142,11 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                   ]
                 }
               >
-                { chunkArray(daysInMonth.value
-                  .filter(day => props.weekdays.includes(getDay(adapter, day.date))), props.weekdays.length)
+                { chunkArray(daysInMonth.value, props.weekdays.length)
                   .map((week, wi) => (
                     [
                       !props.hideWeekNumber ? <div class="v-calendar-month__weeknumber">{ weekNumbers.value[wi] }</div> : '',
-                      week.filter(day => props.weekdays.includes(getDay(adapter, day.date))).map(day => (
+                      week.map(day => (
                         <VCalendarMonthDay
                           color={ adapter.isSameDay(new Date(), day.date) ? 'primary' : undefined }
                           day={ day }

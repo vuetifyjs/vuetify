@@ -19,6 +19,7 @@ export interface CalendarProps {
   min: unknown
   showAdjacentMonths?: boolean
   month: number | string
+  weekdays: number[]
   year: number | string
 
   'onUpdate:modelValue': (value: unknown[]) => void
@@ -37,6 +38,10 @@ export const makeCalendarProps = propsFactory({
   min: null as any as PropType<unknown>,
   showAdjacentMonths: Boolean,
   year: [Number, String],
+  weekdays: {
+    type: Array<number>,
+    default: () => [0, 1, 2, 3, 4, 5, 6],
+  },
 }, 'calendar')
 
 export function useCalendar (props: CalendarProps) {
@@ -106,8 +111,10 @@ export function useCalendar (props: CalendarProps) {
     return weeks as Date[][]
   })
 
-  const genDays = (days: Date[], today: Date) => {
-    return days.map((date, index) => {
+  function genDays (days: Date[], today: Date) {
+    return days.filter(date => {
+      return props.weekdays.includes(date.getDay())
+    }).map((date, index) => {
       const isoDate = adapter.toISO(date)
       const isAdjacent = !adapter.isSameMonth(date, month.value)
       const isStart = adapter.isSameDay(date, adapter.startOfMonth(month.value))
