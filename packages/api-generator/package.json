@@ -12,11 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "deepmerge": "^4.3.1",
-    "piscina": "^4.2.0",
-    "prettier": "^3.1.0",
+    "piscina": "^4.2.1",
+    "prettier": "^3.1.1",
     "ts-morph": "^20.0.0",
     "tsx": "^4.6.2",
-    "vue": "^3.4.6",
+    "vue": "^3.4.7",
     "vuetify": "^3.4.9"
   },
   "devDependencies": {
