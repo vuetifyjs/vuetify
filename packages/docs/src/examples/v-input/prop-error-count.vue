@@ -1,6 +1,6 @@
 <template>
   <v-input
-    error-count="2"
+    max-errors="2"
     :error-messages="['Fatal error', 'Another error']"
     error
     disabled

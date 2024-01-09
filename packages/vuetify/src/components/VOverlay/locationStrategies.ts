@@ -1,28 +1,43 @@
+// Composables
+import { useToggleScope } from '@/composables/toggleScope'
+
 // Utilities
-import { computed, effectScope, nextTick, onScopeDispose, ref, watch, watchEffect } from 'vue'
+import { computed, nextTick, onScopeDispose, ref, watch } from 'vue'
+import { anchorToPoint, getOffset } from './util/point'
 import {
+  clamp,
+  consoleError,
   convertToUnit,
-  getScrollParent,
+  destructComputed,
+  flipAlign,
+  flipCorner,
+  flipSide,
+  getAxis,
+  getScrollParents,
   IN_BROWSER,
   isFixedPosition,
   nullifyTransforms,
-  oppositeAnchor,
   parseAnchor,
-  physicalAnchor,
   propsFactory,
 } from '@/util'
-import { Box } from '@/util/box'
-import { anchorToPoint, getOffset } from './util/point'
+import { Box, getOverflow, getTargetBox } from '@/util/box'
 
 // Types
-import type { EffectScope, PropType, Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { Anchor } from '@/util'
 
 export interface LocationStrategyData {
   contentEl: Ref<HTMLElement | undefined>
-  activatorEl: Ref<HTMLElement | undefined>
+  target: Ref<HTMLElement | [x: number, y: number] | undefined>
   isActive: Ref<boolean>
+  isRtl: Ref<boolean>
 }
+
+type LocationStrategyFn = (
+  data: LocationStrategyData,
+  props: StrategyProps,
+  contentStyles: Ref<Record<string, string>>
+) => undefined | { updateLocation: (e: Event) => void }
 
 const locationStrategies = {
   static: staticLocationStrategy, // specific viewport position, usually centered
@@ -30,16 +45,10 @@ const locationStrategies = {
 }
 
 export interface StrategyProps {
-  locationStrategy: keyof typeof locationStrategies | (
-    (
-      data: LocationStrategyData,
-      props: StrategyProps,
-      contentStyles: Ref<Record<string, string>>
-    ) => undefined | { updateLocation: (e: Event) => void }
-  )
+  locationStrategy: keyof typeof locationStrategies | LocationStrategyFn
   location: Anchor
   origin: Anchor | 'auto' | 'overlap'
-  offset?: number | string
+  offset?: number | string | number[]
   maxHeight?: number | string
   maxWidth?: number | string
   minHeight?: number | string
@@ -60,8 +69,8 @@ export const makeLocationStrategyProps = propsFactory({
     type: String as PropType<StrategyProps['origin']>,
     default: 'auto',
   },
-  offset: [Number, String],
-})
+  offset: [Number, String, Array] as PropType<StrategyProps['offset']>,
+}, 'VOverlay-location-strategies')
 
 export function useLocationStrategies (
   props: StrategyProps,
@@ -70,31 +79,23 @@ export function useLocationStrategies (
   const contentStyles = ref({})
   const updateLocation = ref<(e: Event) => void>()
 
-  let scope: EffectScope | undefined
-  watchEffect(async () => {
-    scope?.stop()
-    updateLocation.value = undefined
+  if (IN_BROWSER) {
+    useToggleScope(() => !!(data.isActive.value && props.locationStrategy), reset => {
+      watch(() => props.locationStrategy, reset)
+      onScopeDispose(() => {
+        window.removeEventListener('resize', onResize)
+        updateLocation.value = undefined
+      })
 
-    if (!(IN_BROWSER && data.isActive.value && props.locationStrategy)) return
+      window.addEventListener('resize', onResize, { passive: true })
 
-    scope = effectScope()
-    await nextTick()
-    scope.run(() => {
       if (typeof props.locationStrategy === 'function') {
         updateLocation.value = props.locationStrategy(data, props, contentStyles)?.updateLocation
       } else {
         updateLocation.value = locationStrategies[props.locationStrategy](data, props, contentStyles)?.updateLocation
       }
     })
-  })
-
-  IN_BROWSER && window.addEventListener('resize', onResize, { passive: true })
-
-  onScopeDispose(() => {
-    IN_BROWSER && window.removeEventListener('resize', onResize)
-    updateLocation.value = undefined
-    scope?.stop()
-  })
+  }
 
   function onResize (e: Event) {
     updateLocation.value?.(e)
@@ -110,46 +111,116 @@ function staticLocationStrategy () {
   // TODO
 }
 
+/** Get size of element ignoring max-width/max-height */
+function getIntrinsicSize (el: HTMLElement, isRtl: boolean) {
+  // const scrollables = new Map<Element, [number, number]>()
+  // el.querySelectorAll('*').forEach(el => {
+  //   const x = el.scrollLeft
+  //   const y = el.scrollTop
+  //   if (x || y) {
+  //     scrollables.set(el, [x, y])
+  //   }
+  // })
+
+  // const initialMaxWidth = el.style.maxWidth
+  // const initialMaxHeight = el.style.maxHeight
+  // el.style.removeProperty('max-width')
+  // el.style.removeProperty('max-height')
+
+  if (isRtl) {
+    el.style.removeProperty('left')
+  } else {
+    el.style.removeProperty('right')
+  }
+
+  /* eslint-disable-next-line sonarjs/prefer-immediate-return */
+  const contentBox = nullifyTransforms(el)
+
+  if (isRtl) {
+    contentBox.x += parseFloat(el.style.right || 0)
+  } else {
+    contentBox.x -= parseFloat(el.style.left || 0)
+  }
+  contentBox.y -= parseFloat(el.style.top || 0)
+
+  // el.style.maxWidth = initialMaxWidth
+  // el.style.maxHeight = initialMaxHeight
+  // scrollables.forEach((position, el) => {
+  //   el.scrollTo(...position)
+  // })
+
+  return contentBox
+}
+
 function connectedLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
-  const activatorFixed = isFixedPosition(data.activatorEl.value)
+  const activatorFixed = Array.isArray(data.target.value) || isFixedPosition(data.target.value)
   if (activatorFixed) {
     Object.assign(contentStyles.value, {
       position: 'fixed',
+      top: 0,
+      [data.isRtl.value ? 'right' : 'left']: 0,
     })
   }
 
-  const preferredAnchor = computed(() => parseAnchor(props.location))
-  const preferredOrigin = computed(() =>
-    props.origin === 'overlap' ? preferredAnchor.value
-    : props.origin === 'auto' ? oppositeAnchor(preferredAnchor.value)
-    : parseAnchor(props.origin)
-  )
-  const doesOverlap = computed(() => {
-    return preferredAnchor.value.side === preferredOrigin.value.side
+  const { preferredAnchor, preferredOrigin } = destructComputed(() => {
+    const parsedAnchor = parseAnchor(props.location, data.isRtl.value)
+    const parsedOrigin =
+      props.origin === 'overlap' ? parsedAnchor
+      : props.origin === 'auto' ? flipSide(parsedAnchor)
+      : parseAnchor(props.origin, data.isRtl.value)
+
+    // Some combinations of props may produce an invalid origin
+    if (parsedAnchor.side === parsedOrigin.side && parsedAnchor.align === flipAlign(parsedOrigin).align) {
+      return {
+        preferredAnchor: flipCorner(parsedAnchor),
+        preferredOrigin: flipCorner(parsedOrigin),
+      }
+    } else {
+      return {
+        preferredAnchor: parsedAnchor,
+        preferredOrigin: parsedOrigin,
+      }
+    }
   })
 
-  const configuredMaxHeight = computed(() => {
-    const val = parseFloat(props.maxHeight!)
-    return isNaN(val) ? Infinity : val
-  })
+  const [minWidth, minHeight, maxWidth, maxHeight] =
+    (['minWidth', 'minHeight', 'maxWidth', 'maxHeight'] as const).map(key => {
+      return computed(() => {
+        const val = parseFloat(props[key]!)
+        return isNaN(val) ? Infinity : val
+      })
+    })
 
-  const configuredMinWidth = computed(() => {
-    const val = parseFloat(props.minWidth!)
-    return isNaN(val) ? Infinity : val
+  const offset = computed(() => {
+    if (Array.isArray(props.offset)) {
+      return props.offset
+    }
+    if (typeof props.offset === 'string') {
+      const offset = props.offset.split(' ').map(parseFloat)
+      if (offset.length < 2) offset.push(0)
+      return offset
+    }
+    return typeof props.offset === 'number' ? [props.offset, 0] : [0, 0]
   })
 
   let observe = false
-  if (IN_BROWSER) {
-    const observer = new ResizeObserver(() => {
-      if (observe) updateLocation()
-    })
-    observer.observe(data.activatorEl.value!)
-    observer.observe(data.contentEl.value!)
+  const observer = new ResizeObserver(() => {
+    if (observe) updateLocation()
+  })
 
-    onScopeDispose(() => {
-      observer.disconnect()
-    })
-  }
+  watch([data.target, data.contentEl], ([newTarget, newContentEl], [oldTarget, oldContentEl]) => {
+    if (oldTarget && !Array.isArray(oldTarget)) observer.unobserve(oldTarget)
+    if (newTarget && !Array.isArray(newTarget)) observer.observe(newTarget)
+
+    if (oldContentEl) observer.unobserve(oldContentEl)
+    if (newContentEl) observer.observe(newContentEl)
+  }, {
+    immediate: true,
+  })
+
+  onScopeDispose(() => {
+    observer.disconnect()
+  })
 
   // eslint-disable-next-line max-statements
   function updateLocation () {
@@ -158,109 +229,223 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       requestAnimationFrame(() => observe = true)
     })
 
-    const targetBox = data.activatorEl.value!.getBoundingClientRect()
-    // TODO: offset shouldn't affect width
-    if (props.offset) {
-      targetBox.x -= +props.offset
-      targetBox.y -= +props.offset
-      targetBox.width += +props.offset * 2
-      targetBox.height += +props.offset * 2
-    }
+    if (!data.target.value || !data.contentEl.value) return
 
-    const scrollParent = getScrollParent(data.contentEl.value)
-    const viewportWidth = scrollParent.clientWidth
-    const viewportHeight = Math.min(scrollParent.clientHeight, window.innerHeight)
-
-    let contentBox
-    {
-      const scrollables = new Map<Element, [number, number]>()
-      data.contentEl.value!.querySelectorAll('*').forEach(el => {
-        const x = el.scrollLeft
-        const y = el.scrollTop
-        if (x || y) {
-          scrollables.set(el, [x, y])
-        }
-      })
-
-      const initialMaxWidth = data.contentEl.value!.style.maxWidth
-      const initialMaxHeight = data.contentEl.value!.style.maxHeight
-      data.contentEl.value!.style.removeProperty('max-width')
-      data.contentEl.value!.style.removeProperty('max-height')
-
-      contentBox = nullifyTransforms(data.contentEl.value!)
-      contentBox.x -= parseFloat(data.contentEl.value!.style.left) || 0
-      contentBox.y -= parseFloat(data.contentEl.value!.style.top) || 0
-
-      data.contentEl.value!.style.maxWidth = initialMaxWidth
-      data.contentEl.value!.style.maxHeight = initialMaxHeight
-      scrollables.forEach((position, el) => {
-        el.scrollTo(...position)
-      })
-    }
-
-    const contentHeight = Math.min(configuredMaxHeight.value, contentBox.height)
-
-    // Regard undefined maxWidth as maximally occupying whole remaining space by default
-    const maxFreeSpaceWidth = props.maxWidth === undefined ? Number.MAX_VALUE : parseInt(props.maxWidth ?? 0, 10)
-
+    const targetBox = getTargetBox(data.target.value)
+    const contentBox = getIntrinsicSize(data.contentEl.value, data.isRtl.value)
+    const scrollParents = getScrollParents(data.contentEl.value)
     const viewportMargin = 12
-    const freeSpace = {
-      top: targetBox.top - viewportMargin,
-      bottom: viewportHeight - targetBox.bottom - viewportMargin,
-      left: Math.min(targetBox.left - viewportMargin, maxFreeSpaceWidth),
-      right: Math.min(viewportWidth - targetBox.right - viewportMargin, maxFreeSpaceWidth),
+
+    if (!scrollParents.length) {
+      scrollParents.push(document.documentElement)
+      if (!(data.contentEl.value.style.top && data.contentEl.value.style.left)) {
+        contentBox.x -= parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-x') || 0)
+        contentBox.y -= parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-y') || 0)
+      }
     }
 
-    const fitsY = (preferredAnchor.value.side === 'bottom' && contentHeight <= freeSpace.bottom) ||
-      (preferredAnchor.value.side === 'top' && contentHeight <= freeSpace.top)
+    const viewport = scrollParents.reduce<Box>((box: Box | undefined, el) => {
+      const rect = el.getBoundingClientRect()
+      const scrollBox = new Box({
+        x: el === document.documentElement ? 0 : rect.x,
+        y: el === document.documentElement ? 0 : rect.y,
+        width: el.clientWidth,
+        height: el.clientHeight,
+      })
 
-    const anchor = fitsY ? preferredAnchor.value
-      : (preferredAnchor.value.side === 'bottom' && freeSpace.top > freeSpace.bottom) ||
-      (preferredAnchor.value.side === 'top' && freeSpace.bottom > freeSpace.top) ? oppositeAnchor(preferredAnchor.value)
-      : preferredAnchor.value
-    const origin = fitsY ? preferredOrigin.value : oppositeAnchor(anchor)
+      if (box) {
+        return new Box({
+          x: Math.max(box.left, scrollBox.left),
+          y: Math.max(box.top, scrollBox.top),
+          width: Math.min(box.right, scrollBox.right) - Math.max(box.left, scrollBox.left),
+          height: Math.min(box.bottom, scrollBox.bottom) - Math.max(box.top, scrollBox.top),
+        })
+      }
+      return scrollBox
+    }, undefined!)
+    viewport.x += viewportMargin
+    viewport.y += viewportMargin
+    viewport.width -= viewportMargin * 2
+    viewport.height -= viewportMargin * 2
 
-    const canFill = doesOverlap.value || ['center', 'top', 'bottom'].includes(anchor.side)
+    let placement = {
+      anchor: preferredAnchor.value,
+      origin: preferredOrigin.value,
+    }
 
-    const maxWidth = canFill ? Math.min(viewportWidth, Math.max(targetBox.width, viewportWidth - viewportMargin * 2))
-      : anchor.side === 'end' ? freeSpace.right
-      : anchor.side === 'start' ? freeSpace.left
-      : null
-    const minWidth = Math.min(configuredMinWidth.value, maxWidth!, targetBox.width)
-    const maxHeight = fitsY ? configuredMaxHeight.value : Math.min(
-      configuredMaxHeight.value,
-      Math.floor(anchor.side === 'top' ? freeSpace.top : freeSpace.bottom)
-    )
+    function checkOverflow (_placement: typeof placement) {
+      const box = new Box(contentBox)
+      const targetPoint = anchorToPoint(_placement.anchor, targetBox)
+      const contentPoint = anchorToPoint(_placement.origin, box)
 
-    const targetPoint = anchorToPoint(anchor, targetBox)
-    const contentPoint = anchorToPoint(origin, new Box({
-      ...contentBox,
-      height: Math.min(contentHeight, maxHeight),
-    }))
+      let { x, y } = getOffset(targetPoint, contentPoint)
 
-    const { x, y } = getOffset(targetPoint, contentPoint)
+      switch (_placement.anchor.side) {
+        case 'top': y -= offset.value[0]; break
+        case 'bottom': y += offset.value[0]; break
+        case 'left': x -= offset.value[0]; break
+        case 'right': x += offset.value[0]; break
+      }
+
+      switch (_placement.anchor.align) {
+        case 'top': y -= offset.value[1]; break
+        case 'bottom': y += offset.value[1]; break
+        case 'left': x -= offset.value[1]; break
+        case 'right': x += offset.value[1]; break
+      }
+
+      box.x += x
+      box.y += y
+
+      box.width = Math.min(box.width, maxWidth.value)
+      box.height = Math.min(box.height, maxHeight.value)
+
+      const overflows = getOverflow(box, viewport)
+
+      return { overflows, x, y }
+    }
+
+    let x = 0; let y = 0
+    const available = { x: 0, y: 0 }
+    const flipped = { x: false, y: false }
+    let resets = -1
+    while (true) {
+      if (resets++ > 10) {
+        consoleError('Infinite loop detected in connectedLocationStrategy')
+        break
+      }
+
+      const { x: _x, y: _y, overflows } = checkOverflow(placement)
+
+      x += _x
+      y += _y
+
+      contentBox.x += _x
+      contentBox.y += _y
+
+      // flip
+      {
+        const axis = getAxis(placement.anchor)
+        const hasOverflowX = overflows.x.before || overflows.x.after
+        const hasOverflowY = overflows.y.before || overflows.y.after
+
+        let reset = false
+        ;['x', 'y'].forEach(key => {
+          if (
+            (key === 'x' && hasOverflowX && !flipped.x) ||
+            (key === 'y' && hasOverflowY && !flipped.y)
+          ) {
+            const newPlacement = { anchor: { ...placement.anchor }, origin: { ...placement.origin } }
+            const flip = key === 'x'
+              ? axis === 'y' ? flipAlign : flipSide
+              : axis === 'y' ? flipSide : flipAlign
+            newPlacement.anchor = flip(newPlacement.anchor)
+            newPlacement.origin = flip(newPlacement.origin)
+            const { overflows: newOverflows } = checkOverflow(newPlacement)
+            if (
+              (newOverflows[key].before <= overflows[key].before &&
+                newOverflows[key].after <= overflows[key].after) ||
+              (newOverflows[key].before + newOverflows[key].after <
+                (overflows[key].before + overflows[key].after) / 2)
+            ) {
+              placement = newPlacement
+              reset = flipped[key] = true
+            }
+          }
+        })
+        if (reset) continue
+      }
+
+      // shift
+      if (overflows.x.before) {
+        x += overflows.x.before
+        contentBox.x += overflows.x.before
+      }
+      if (overflows.x.after) {
+        x -= overflows.x.after
+        contentBox.x -= overflows.x.after
+      }
+      if (overflows.y.before) {
+        y += overflows.y.before
+        contentBox.y += overflows.y.before
+      }
+      if (overflows.y.after) {
+        y -= overflows.y.after
+        contentBox.y -= overflows.y.after
+      }
+
+      // size
+      {
+        const overflows = getOverflow(contentBox, viewport)
+        available.x = viewport.width - overflows.x.before - overflows.x.after
+        available.y = viewport.height - overflows.y.before - overflows.y.after
+
+        x += overflows.x.before
+        contentBox.x += overflows.x.before
+        y += overflows.y.before
+        contentBox.y += overflows.y.before
+      }
+
+      break
+    }
+
+    const axis = getAxis(placement.anchor)
 
     Object.assign(contentStyles.value, {
-      '--v-overlay-anchor-origin': physicalAnchor(anchor, data.activatorEl.value!),
-      top: convertToUnit(Math.round(y)),
-      left: convertToUnit(Math.round(x)), // TODO: right for origin="end", rtl
-      transformOrigin: physicalAnchor(origin, data.activatorEl.value!),
-      minWidth: convertToUnit(minWidth),
-      maxWidth: convertToUnit(maxWidth),
-      maxHeight: convertToUnit(maxHeight),
+      '--v-overlay-anchor-origin': `${placement.anchor.side} ${placement.anchor.align}`,
+      transformOrigin: `${placement.origin.side} ${placement.origin.align}`,
+      // transform: `translate(${pixelRound(x)}px, ${pixelRound(y)}px)`,
+      top: convertToUnit(pixelRound(y)),
+      left: data.isRtl.value ? undefined : convertToUnit(pixelRound(x)),
+      right: data.isRtl.value ? convertToUnit(pixelRound(-x)) : undefined,
+      minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth.value, targetBox.width) : minWidth.value),
+      maxWidth: convertToUnit(pixelCeil(clamp(available.x, minWidth.value === Infinity ? 0 : minWidth.value, maxWidth.value))),
+      maxHeight: convertToUnit(pixelCeil(clamp(available.y, minHeight.value === Infinity ? 0 : minHeight.value, maxHeight.value))),
     })
+
+    return {
+      available,
+      contentBox,
+    }
   }
 
   watch(
-    () => [preferredAnchor.value, preferredOrigin.value, props.offset],
+    () => [
+      preferredAnchor.value,
+      preferredOrigin.value,
+      props.offset,
+      props.minWidth,
+      props.minHeight,
+      props.maxWidth,
+      props.maxHeight,
+    ],
     () => updateLocation(),
-    { immediate: !activatorFixed }
   )
 
-  if (activatorFixed) nextTick(() => updateLocation())
-  requestAnimationFrame(() => {
-    if (contentStyles.value.maxHeight) updateLocation()
+  nextTick(() => {
+    const result = updateLocation()
+
+    // TODO: overflowing content should only require a single updateLocation call
+    // Icky hack to make sure the content is positioned consistently
+    if (!result) return
+    const { available, contentBox } = result
+    if (contentBox.height > available.y) {
+      requestAnimationFrame(() => {
+        updateLocation()
+        requestAnimationFrame(() => {
+          updateLocation()
+        })
+      })
+    }
   })
 
   return { updateLocation }
+}
+
+function pixelRound (val: number) {
+  return Math.round(val * devicePixelRatio) / devicePixelRatio
+}
+
+function pixelCeil (val: number) {
+  return Math.ceil(val * devicePixelRatio) / devicePixelRatio
 }

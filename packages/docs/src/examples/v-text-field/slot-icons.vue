@@ -11,61 +11,55 @@
             variant="outlined"
           >
             <template v-slot:prepend>
-              <v-tooltip
-                bottom
-              >
-                <template v-slot:activator="{ on }">
-                  <v-icon v-on="on">
-                    mdi-help-circle-outline
-                  </v-icon>
+              <v-tooltip location="bottom">
+                <template v-slot:activator="{ props }">
+                  <v-icon v-bind="props" icon="mdi-help-circle-outline"></v-icon>
                 </template>
+
                 I'm a tooltip
               </v-tooltip>
             </template>
-            <template v-slot:append>
+
+            <template v-slot:append-inner>
               <v-fade-transition leave-absolute>
                 <v-progress-circular
                   v-if="loading"
-                  size="24"
                   color="info"
                   indeterminate
+                  size="24"
                 ></v-progress-circular>
+
                 <img
                   v-else
-                  width="24"
                   height="24"
+                  width="24"
                   src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
                   alt=""
                 >
               </v-fade-transition>
             </template>
-            <template v-slot:append-outer>
-              <v-menu
-                style="top: -12px"
-                offset-y
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    v-bind="attrs"
-                    v-on="on"
-                  >
-                    <v-icon start>
-                      mdi-menu
-                    </v-icon>
+
+            <template v-slot:append>
+              <v-menu>
+                <template v-slot:activator="{ props }">
+                  <v-btn v-bind="props" class="mt-n2">
+                    <v-icon icon="mdi-menu" start></v-icon>
+
                     Menu
                   </v-btn>
                 </template>
+
                 <v-card>
                   <v-card-text class="pa-6">
                     <v-btn
-                      large
-                      text
                       color="primary"
+                      size="large"
+                      variant="text"
                       @click="clickMe"
                     >
-                      <v-icon start>
-                        mdi-target
-                      </v-icon>Click me
+                      <v-icon icon="mdi-target" start></v-icon>
+
+                      Click me
                     </v-btn>
                   </v-card-text>
                 </v-card>
@@ -77,6 +71,22 @@
     </v-container>
   </v-form>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const message = ref('Hey!')
+  const loading = ref(false)
+
+  function clickMe () {
+    loading.value = true
+    message.value = 'Wait for it...'
+    setTimeout(() => {
+      loading.value = false
+      message.value = `You've clicked me!`
+    }, 2000)
+  }
+</script>
 
 <script>
   export default {

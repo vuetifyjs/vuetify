@@ -22,7 +22,7 @@
 
       <v-chip-group
         v-model="selection"
-        active-class="deep-purple--text text--accent-4"
+        selected-class="text-deep-purple-accent-4"
         mandatory
       >
         <v-chip
@@ -38,14 +38,28 @@
     <v-card-actions>
       <v-btn
         block
-        class="white--text"
-        color="deep-purple accent-4"
+        color="deep-purple-accent-4"
       >
         Add to Cart
       </v-btn>
     </v-card-actions>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const sizes = [
+    '04',
+    '06',
+    '08',
+    '10',
+    '12',
+    '14',
+  ]
+
+  const selection = ref('08')
+</script>
 
 <script>
   export default {

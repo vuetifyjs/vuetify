@@ -52,10 +52,12 @@
     transition: $progress-circular-intermediate-svg-transition
 
   .v-progress-circular__overlay
-    animation: $progress-circular-rotate-dash
+    animation: $progress-circular-rotate-dash, $progress-circular-rotate-animation
     stroke-dasharray: 25, 200
     stroke-dashoffset: 0
     stroke-linecap: round
+    transform-origin: center center
+    transform: $progress-circular-overlay-transform
 
 .v-progress-circular--disable-shrink
   > svg

@@ -8,7 +8,6 @@ export function genAppMetaInfo (defaults: any) {
   const metadata = (genMetaInfo as any)(...Object.values(defaults))
 
   metadata.link.push(...genLink())
-  metadata.meta.push(...genMeta())
 
   return metadata
 }
@@ -17,8 +16,9 @@ export function genMetaInfo (
   title: string,
   description: string,
   keywords: string,
+  assets: string[] = [],
 ) {
-  const length = description.length
+  const length = (description ?? '').length
 
   description = length <= 117
     ? description
@@ -31,7 +31,7 @@ export function genMetaInfo (
   }
 
   return {
-    link: [] as (Record<string, any>[]),
+    link: assets.map(href => ({ rel: 'stylesheet', href })),
     meta: [
       { key: 'description', name: 'description', content: description },
       { key: 'keywords', name: 'keywords', content: keywords },
@@ -78,7 +78,7 @@ function genLink () {
 function genOpenGraphMetaInfo (args: Metadata) {
   return parseMeta('og', {
     description: args.description,
-    image: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png',
+    image: 'https://cdn.vuetifyjs.com/docs/images/graphics/og-image.png',
     site_name: 'Vuetify',
     title: args.title,
     type: 'website',
@@ -105,21 +105,11 @@ function parseMeta (
   return meta
 }
 
-function genMeta () {
-  return [
-    { charset: 'utf-8' },
-    { name: 'mobile-web-app-capable', content: 'yes' },
-    {
-      name: 'viewport',
-      content: 'width=device-width, initial-scale=1, maximum-scale=5, minimal-ui',
-    },
-  ]
-}
-
 function genTwitterMetaInfo () {
   return parseMeta('twitter', {
-    card: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png',
+    image: 'https://cdn.vuetifyjs.com/docs/images/graphics/og-image.png',
+    card: 'summary_large_image',
     domain: 'https://vuetifyjs.com/',
-    site: 'Vuetify',
+    site: '@vuetifyjs',
   })
 }

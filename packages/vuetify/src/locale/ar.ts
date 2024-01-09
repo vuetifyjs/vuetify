@@ -1,24 +1,29 @@
 export default {
   badge: 'شارة',
+  open: 'Open',
   close: 'إغلاق',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
-    noResultsText: 'لا توجد سجلات مطابقة',
-    loadingText: 'تحميل العنصر...',
+    noResultsText: 'لم يتم إيجاد نتائج',
+    loadingText: 'يتم جلب العناصر...',
   },
   dataTable: {
-    itemsPerPageText: 'الصفوف لكل صفحة:',
+    itemsPerPageText: 'عدد الصفوف لكل صفحة:',
     ariaLabel: {
-      sortDescending: 'مفروز تنازلي. تنشيط لإزالة الفرز.',
-      sortAscending: 'مفروز تصاعدي. تنشيط للفرز التنازلي.',
-      sortNone: 'غير مفروزة. تفعيل لفرز تصاعدي.',
-      activateNone: 'Activate to remove sorting.',
-      activateDescending: 'Activate to sort descending.',
-      activateAscending: 'Activate to sort ascending.',
+      sortDescending: 'مرتب تنازلياً.',
+      sortAscending: 'مرتب تصاعدياً.',
+      sortNone: 'غير مرتب.',
+      activateNone: 'نشط لإزالة الترتيب.',
+      activateDescending: 'نشط للترتيب تنازلياً.',
+      activateAscending: 'نشط للترتيب تصاعدياً.',
     },
-    sortBy: 'مفروزة حسب',
+    sortBy: 'رتب حسب',
   },
   dataFooter: {
-    itemsPerPageText: 'العناصر لكل صفحة:',
+    itemsPerPageText: 'عدد العناصر لكل صفحة:',
     itemsPerPageAll: 'الكل',
     nextPage: 'الصفحة التالية',
     prevPage: 'الصفحة السابقة',
@@ -26,23 +31,38 @@ export default {
     lastPage: 'الصفحة الأخيرة',
     pageText: '{0}-{1} من {2}',
   },
-  datePicker: {
-    itemsSelected: '{0} مختارة',
-    nextMonthAriaLabel: 'الشهر القادم',
-    nextYearAriaLabel: 'العام القادم',
-    prevMonthAriaLabel: 'الشهر الماضى',
-    prevYearAriaLabel: 'السنة الماضية',
+  dateRangeInput: {
+    divider: 'to',
   },
-  noDataText: 'لا توجد بيانات متاحة',
+  datePicker: {
+    itemsSelected: '{0} selected',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
+  },
+  noDataText: 'لا توجد بيانات',
   carousel: {
-    prev: 'البصري السابق',
-    next: 'البصري التالي',
+    prev: 'المعروض السابق',
+    next: 'المعروض التالي',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'المعروض رقم {0} من {1}',
     },
   },
   calendar: {
     moreEvents: '{0} أكثر',
+    today: 'Today',
+  },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} ملفات',
@@ -54,18 +74,27 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      root: 'ترقيم الصفحات الملاحة',
+      root: 'الإنتقال بين الصفحات',
       next: 'الصفحة التالية',
       previous: 'الصفحة السابقة',
-      page: '{0} انتقل إلى صفحة',
-      currentPage: '{0} الصفحة الحالية ، الصفحة',
+      page: '{0} انتقل إلى الصفحة',
+      currentPage: '{0} الصفحة الحالية رقمها',
       first: 'First page',
       last: 'Last page',
     },
   },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
+  },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'القييم {0} من {1}',
     },
+  },
+  loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
   },
 }

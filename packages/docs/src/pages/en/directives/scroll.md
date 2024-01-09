@@ -1,29 +1,36 @@
 ---
-nav: Scroll
 meta:
+  nav: Scroll
   title: Scroll directive
   description: The scroll directive gives you the ability to conditionally invoke methods when the screen or an element are scrolled.
   keywords: scroll, vuetify scroll directive, vue scroll directive, window scroll directive
 related:
-  - /styles/scroll/
-  - /directives/touch-support/
+  - /components/app-bars/
+  - /components/bottom-navigation/
+  - /directives/touch/
 ---
 
 # Scroll directive
 
 The `v-scroll` directive allows you to provide callbacks when the window, specified target or element itself (with `.self` modifier) is scrolled.
 
+<page-features />
+
 <entry />
 
-## Usage
+<!-- ## Usage
 
 The default behavior is to bind to the window. If no additional configuration options are needed, you can simply pass your callback function.
 
-<example file="v-scroll/usage" />
+<example file="v-scroll/usage" /> -->
 
 ## API
 
-<api-inline />
+| Directive | Description |
+| - | - |
+| [v-scroll](/api/v-scroll/) | The scroll directive |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -40,5 +47,3 @@ The default behavior is to bind to the window. If no additional configuration op
 For a more fine tuned approach, you can designate the target to bind the scroll event listener.
 
 <example file="v-scroll/option-target" />
-
-<backmatter />

@@ -2,115 +2,148 @@
 import './VListItem.sass'
 
 // Components
-import { VListItemAvatar } from './VListItemAvatar'
-import { VListItemHeader } from './VListItemHeader'
-import { VListItemIcon } from './VListItemIcon'
 import { VListItemSubtitle } from './VListItemSubtitle'
 import { VListItemTitle } from './VListItemTitle'
+import { VAvatar } from '@/components/VAvatar'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { useList } from './list'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { IconValue } from '@/composables/icons'
+import { useNestedItem } from '@/composables/nested/nested'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useList } from './list'
-import { IconValue } from '@/composables/icons'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed, watch } from 'vue'
-import { genericComponent, useRender } from '@/util'
-import { useNestedItem } from '@/composables/nested/nested'
+import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 type ListItemSlot = {
   isActive: boolean
-  activate: (value: boolean) => void
   isSelected: boolean
+  isIndeterminate: boolean
   select: (value: boolean) => void
 }
 
 export type ListItemTitleSlot = {
-  title?: string
+  title?: string | number
 }
 
 export type ListItemSubtitleSlot = {
-  subtitle?: string
+  subtitle?: string | number
 }
 
-export const VListItem = genericComponent<new () => {
-  $slots: MakeSlots<{
-    prepend: [ListItemSlot]
-    append: [ListItemSlot]
-    default: [ListItemSlot]
-    title: [ListItemTitleSlot]
-    subtitle: [ListItemSubtitleSlot]
-  }>
-}>()({
+export type VListItemSlots = {
+  prepend: ListItemSlot
+  append: ListItemSlot
+  default: ListItemSlot
+  title: ListItemTitleSlot
+  subtitle: ListItemSubtitleSlot
+}
+
+export const makeVListItemProps = propsFactory({
+  active: {
+    type: Boolean,
+    default: undefined,
+  },
+  activeClass: String,
+  /* @deprecated */
+  activeColor: String,
+  appendAvatar: String,
+  appendIcon: IconValue,
+  baseColor: String,
+  disabled: Boolean,
+  lines: String as PropType<'one' | 'two' | 'three'>,
+  link: {
+    type: Boolean,
+    default: undefined,
+  },
+  nav: Boolean,
+  prependAvatar: String,
+  prependIcon: IconValue,
+  ripple: {
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
+    default: true,
+  },
+  slim: Boolean,
+  subtitle: [String, Number],
+  title: [String, Number],
+  value: null,
+
+  onClick: EventProp<[MouseEvent]>(),
+  onClickOnce: EventProp<[MouseEvent]>(),
+
+  ...makeBorderProps(),
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeRoundedProps(),
+  ...makeRouterProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'text' } as const),
+}, 'VListItem')
+
+export const VListItem = genericComponent<VListItemSlots>()({
   name: 'VListItem',
 
   directives: { Ripple },
 
-  props: {
-    active: Boolean,
-    activeColor: String,
-    activeClass: String,
-    appendAvatar: String,
-    appendIcon: IconValue,
-    disabled: Boolean,
-    lines: String as PropType<'one' | 'two' | 'three'>,
-    nav: Boolean,
-    prependAvatar: String,
-    prependIcon: IconValue,
-    subtitle: [String, Number, Boolean],
-    title: [String, Number, Boolean],
-    value: null,
-    link: Boolean,
+  props: makeVListItemProps(),
 
-    ...makeBorderProps(),
-    ...makeDensityProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeRoundedProps(),
-    ...makeRouterProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'text' } as const),
+  emits: {
+    click: (e: MouseEvent | KeyboardEvent) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { attrs, slots, emit }) {
     const link = useLink(props, attrs)
-    const id = computed(() => props.value ?? link.href.value)
-    const { select, isSelected, isIndeterminate, isGroupActivator, root, parent } = useNestedItem(id, false)
+    const id = computed(() => props.value === undefined ? link.href.value : props.value)
+    const { select, isSelected, isIndeterminate, isGroupActivator, root, parent, openOnSelect } = useNestedItem(id, false)
     const list = useList()
-    const isActive = computed(() => {
-      return props.active || link.isExactActive?.value || isSelected.value
-    })
+    const isActive = computed(() =>
+      props.active !== false &&
+      (props.active || link.isActive?.value || isSelected.value)
+    )
+    const isLink = computed(() => props.link !== false && link.isLink.value)
+    const isClickable = computed(() =>
+      !props.disabled &&
+      props.link !== false &&
+      (props.link || link.isClickable.value || (props.value != null && !!list))
+    )
+
     const roundedProps = computed(() => props.rounded || props.nav)
+    const color = computed(() => props.color ?? props.activeColor)
     const variantProps = computed(() => ({
-      color: isActive.value ? props.activeColor ?? props.color : props.color,
+      color: isActive.value ? color.value ?? props.baseColor : props.baseColor,
       variant: props.variant,
     }))
 
-    if (link.isExactActive?.value && parent.value != null) {
-      root.open(parent.value, true)
-    }
-
-    watch(() => link.isExactActive?.value, val => {
+    watch(() => link.isActive?.value, val => {
       if (val && parent.value != null) {
         root.open(parent.value, true)
       }
-    })
+
+      if (val) {
+        openOnSelect(val)
+      }
+    }, { immediate: true })
 
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
@@ -126,19 +159,38 @@ export const VListItem = genericComponent<new () => {
       select,
       isSelected: isSelected.value,
       isIndeterminate: isIndeterminate.value,
-    }))
+    } satisfies ListItemSlot))
+
+    function onClick (e: MouseEvent) {
+      emit('click', e)
+
+      if (isGroupActivator || !isClickable.value) return
+
+      link.navigate?.(e)
+      props.value != null && select(!isSelected.value, e)
+    }
+
+    function onKeyDown (e: KeyboardEvent) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        onClick(e as any as MouseEvent)
+      }
+    }
 
     useRender(() => {
-      const Tag = (link.isLink.value) ? 'a' : props.tag
-      const hasColor = !list || isSelected.value || isActive.value
-      const hasTitle = (slots.title || props.title)
-      const hasSubtitle = (slots.subtitle || props.subtitle)
-      const hasHeader = !!(hasTitle || hasSubtitle)
-      const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
-      const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
-      const isClickable = !props.disabled && (props.link || link.isClickable.value || (props.value != null && !!list))
+      const Tag = isLink.value ? 'a' : props.tag
+      const hasTitle = (slots.title || props.title != null)
+      const hasSubtitle = (slots.subtitle || props.subtitle != null)
+      const hasAppendMedia = !!(props.appendAvatar || props.appendIcon)
+      const hasAppend = !!(hasAppendMedia || slots.append)
+      const hasPrependMedia = !!(props.prependAvatar || props.prependIcon)
+      const hasPrepend = !!(hasPrependMedia || slots.prepend)
 
       list?.updateHasPrepend(hasPrepend)
+
+      if (props.activeColor) {
+        deprecate('active-color', ['color', 'base-color'])
+      }
 
       return (
         <Tag
@@ -147,102 +199,147 @@ export const VListItem = genericComponent<new () => {
             {
               'v-list-item--active': isActive.value,
               'v-list-item--disabled': props.disabled,
-              'v-list-item--link': isClickable,
+              'v-list-item--link': isClickable.value,
               'v-list-item--nav': props.nav,
               'v-list-item--prepend': !hasPrepend && list?.hasPrepend.value,
-              [`${props.activeClass}`]: isActive.value,
+              'v-list-item--slim': props.slim,
+              [`${props.activeClass}`]: props.activeClass && isActive.value,
             },
             themeClasses.value,
             borderClasses.value,
-            hasColor ? colorClasses.value : undefined,
+            colorClasses.value,
             densityClasses.value,
             elevationClasses.value,
             lineClasses.value,
             roundedClasses.value,
             variantClasses.value,
+            props.class,
           ]}
           style={[
-            hasColor ? colorStyles.value : undefined,
+            colorStyles.value,
             dimensionStyles.value,
+            props.style,
           ]}
           href={ link.href.value }
-          tabindex={ isClickable ? 0 : undefined }
-          onClick={ isClickable && ((e: MouseEvent) => {
-            if (isGroupActivator) return
-
-            link.navigate?.(e)
-            props.value != null && select(!isSelected.value, e)
-          })}
-          v-ripple={ isClickable }
+          tabindex={ isClickable.value ? (list ? -2 : 0) : undefined }
+          onClick={ onClick }
+          onKeydown={ isClickable.value && !isLink.value && onKeyDown }
+          v-ripple={ isClickable.value && props.ripple }
         >
-          { genOverlays(isClickable || isActive.value, 'v-list-item') }
+          { genOverlays(isClickable.value || isActive.value, 'v-list-item') }
 
           { hasPrepend && (
-            <>
-              { props.prependAvatar && (
-                <VListItemAvatar
-                  image={ props.prependAvatar }
-                  start
-                />
-              ) }
+            <div key="prepend" class="v-list-item__prepend">
+              { !slots.prepend ? (
+                <>
+                  { props.prependAvatar && (
+                    <VAvatar
+                      key="prepend-avatar"
+                      density={ props.density }
+                      image={ props.prependAvatar }
+                    />
+                  )}
 
-              { props.prependIcon && (
-                <VListItemIcon
-                  icon={ props.prependIcon }
-                  start
-                />
-              ) }
+                  { props.prependIcon && (
+                    <VIcon
+                      key="prepend-icon"
+                      density={ props.density }
+                      icon={ props.prependIcon }
+                    />
+                  )}
+                </>
+              ) : (
+                <VDefaultsProvider
+                  key="prepend-defaults"
+                  disabled={ !hasPrependMedia }
+                  defaults={{
+                    VAvatar: {
+                      density: props.density,
+                      image: props.prependAvatar,
+                    },
+                    VIcon: {
+                      density: props.density,
+                      icon: props.prependIcon,
+                    },
+                    VListItemAction: {
+                      start: true,
+                    },
+                  }}
+                >
+                  { slots.prepend?.(slotProps.value) }
+                </VDefaultsProvider>
+              )}
 
-              { slots.prepend?.(slotProps.value) }
-            </>
-          ) }
+              <div class="v-list-item__spacer" />
+            </div>
+          )}
 
-          { hasHeader && (
-            <VListItemHeader key="header">
-              { hasTitle && (
-                <VListItemTitle key="title">
-                  { slots.title
-                    ? slots.title({ title: props.title })
-                    : props.title
-                  }
-                </VListItemTitle>
-              ) }
+          <div class="v-list-item__content" data-no-activator="">
+            { hasTitle && (
+              <VListItemTitle key="title">
+                { slots.title?.({ title: props.title }) ?? props.title }
+              </VListItemTitle>
+            )}
 
-              { hasSubtitle && (
-                <VListItemSubtitle>
-                  { slots.subtitle
-                    ? slots.subtitle({ subtitle: props.subtitle })
-                    : props.subtitle
-                  }
-                </VListItemSubtitle>
-              ) }
-            </VListItemHeader>
-          ) }
+            { hasSubtitle && (
+              <VListItemSubtitle key="subtitle">
+                { slots.subtitle?.({ subtitle: props.subtitle }) ?? props.subtitle }
+              </VListItemSubtitle>
+            )}
 
-          { slots.default?.(slotProps.value) }
+            { slots.default?.(slotProps.value) }
+          </div>
 
           { hasAppend && (
-            <>
-              { slots.append?.(slotProps.value) }
+            <div key="append" class="v-list-item__append">
+              { !slots.append ? (
+                <>
+                  { props.appendIcon && (
+                    <VIcon
+                      key="append-icon"
+                      density={ props.density }
+                      icon={ props.appendIcon }
+                    />
+                  )}
 
-              { props.appendAvatar && (
-                <VListItemAvatar
-                  image={ props.appendAvatar }
-                  end
-                />
-              ) }
+                  { props.appendAvatar && (
+                    <VAvatar
+                      key="append-avatar"
+                      density={ props.density }
+                      image={ props.appendAvatar }
+                    />
+                  )}
+                </>
+              ) : (
+                <VDefaultsProvider
+                  key="append-defaults"
+                  disabled={ !hasAppendMedia }
+                  defaults={{
+                    VAvatar: {
+                      density: props.density,
+                      image: props.appendAvatar,
+                    },
+                    VIcon: {
+                      density: props.density,
+                      icon: props.appendIcon,
+                    },
+                    VListItemAction: {
+                      end: true,
+                    },
+                  }}
+                >
+                  { slots.append?.(slotProps.value) }
+                </VDefaultsProvider>
+              )}
 
-              { props.appendIcon && (
-                <VListItemIcon
-                  icon={ props.appendIcon }
-                  end
-                />
-              ) }
-            </>
-          ) }
+              <div class="v-list-item__spacer" />
+            </div>
+          )}
         </Tag>
       )
     })
+
+    return {}
   },
 })
 

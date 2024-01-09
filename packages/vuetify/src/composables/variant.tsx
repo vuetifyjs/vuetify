@@ -28,9 +28,9 @@ export interface VariantProps {
 export function genOverlays (isClickable: boolean, name: string) {
   return (
     <>
-      { isClickable && <div key="overlay" class={`${name}__overlay`} /> }
+      { isClickable && <span key="overlay" class={ `${name}__overlay` } /> }
 
-      <div key="underlay" class={`${name}__underlay`} />
+      <span key="underlay" class={ `${name}__underlay` } />
     </>
   )
 }

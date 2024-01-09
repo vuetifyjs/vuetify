@@ -1,8 +1,8 @@
 ---
-nav: Installation
 meta:
-  title: Get started with Vuetify 3 Beta
-  description: Details for v3 beta release - faq, changes, and upgrading.
+  nav: Installation
+  title: Get started with Vuetify 3
+  description: Details for v3 release - faq, changes, and upgrading.
   keywords: migration, releases, upgrading vuetify, beta, v3
 related:
   - /getting-started/contributing/
@@ -10,135 +10,294 @@ related:
   - /getting-started/release-notes/
 ---
 
-# Vuetify 3 Beta
+<script setup>
+  import { version } from 'vuetify'
+</script>
 
-Welcome to the Vuetify 3 Beta release. To get started, select an installation method below or review some of the most [Frequently Asked Questions](#frequently-asked-questions)
+# Get started with Vuetify 3
 
-<alert type="error">
+Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast applications.
 
-  The Vuetify 3 Beta is for testing purposes only and is not intended for production applications.
+<page-features />
 
-</alert>
+<entry />
 
 ## Installation
 
-### Vite
+Vuetify has support for multiple different installation paths with the most common scaffolding tool being [create-vuetify](https://github.com/vuetifyjs/create-vuetify)
 
-<vuetify slug="vs-video-vite" />
+For more information regarding supported package managers, please visit their official websites:
 
-First, use npm/yarn to create your Vite project:
+* [yarn](https://yarnpkg.com/)
+* [npm](https://npmjs.org/)
+* [pnpm](https://pnpm.io/)
+* [bun](https://bun.sh/package-manager)
 
-```bash
-# npm 6.x
-npm init @vitejs/app my-vuetify-app --template vue
+## Using Vite
 
-# npm 7+, extra double-dash is needed:
-npm init @vitejs/app my-vuetify-app -- --template vue
+To get started with Vuetify 3, simply paste the following code into your terminal:
 
-# yarn
-yarn create @vitejs/app my-vuetify-app --template vue
+::: tabs
+
+```bash [yarn]
+yarn create vuetify
 ```
 
-<alert type="info">
-
-  More detailed information can be found in the [Vite documentation](https://vitejs.dev/guide/#scaffolding-your-first-vite-project)
-
-</alert>
-
-For the next step you will need to have the **Vue CLI** installed. See their [installation guide](https://cli.vuejs.org/guide/installation.html)
-
-Navigate to your newly created project and then add vuetify using our **Vue CLI** plugin:
-
-```bash
-cd my-vuetify-app
-vue add vuetify
+```bash [npm]
+npm create vuetify
 ```
 
-Once prompted, choose **Preview (Vuetify 3 + Vite)**:
-
-```bash
-? Choose a preset:
-  Configure (advanced)
-  Default (recommended)
-❯ Vite Preview (Vuetify 3 + Vite)
-  Prototype (rapid development)
-  Vuetify 3 Preview (Vuetify 3)
+```bash [pnpm]
+pnpm create vuetify
 ```
 
-### Vue CLI
-
-<alert type="warning">
-
-  Vuetify 3 requires **Vue CLI 5.0** in order to install properly. For more information, visit the Vue CLI [installation guide](https://cli.vuejs.org/guide/installation.html).
-
-</alert>
-
-Generate a new Vue 3 application by entering the following command into your terminal:
-
-```bash
-vue create my-vuetify-app
+```bash [bun]
+bun create vuetify
 ```
 
-When prompted, select the **Vue 3 Preview** preset:
+:::
+
+This command prompts you with a few options before generating your scaffolded Vue / Vuetify 3 project.
 
 ```bash
-? Please pick a preset:
-    Default ([Vue 2] babel, eslint)
-  ❯ Default (Vue 3 Preview) ([Vue 3] babel, eslint)
-    Manually select features
+success Installed "create-vuetify@x.x.x" with binaries:
+    - create-vuetify
+
+? Project name: ❯ vuetify-project // the folder to generate your application
+? Use TypeScript?: ❯ No / Yes
+? Would you like to install dependencies with yarn, npm, or pnpm?:
+  ❯ yarn
+    npm
+    pnpm
+    bun
+    none
 ```
 
-After choosing your option, **Vue CLI** generates a new Vue 3 project located in the **my-vuetify-app** folder (or whatever name you provided).
+After making your selections, [create-vuetify](https://github.com/vuetifyjs/create-vuetify) will generate the structure for your new application.
 
-<alert type="info">
-
-  Before installing Vuetify, we **recommend** you commit your changes to `git` or whichever source control software you use. This allows you to rollback changes if you encounter an issue.
-
-</alert>
-
-Navigate to your new project's folder, and using **Vue CLI**, add the `vuetify` package:
+Once the scaffold is complete, start the vite development server by running the following commands:
 
 ```bash
-cd my-vuetify-app
-vue add vuetify
+cd vuetify-project
+yarn dev
 ```
 
-Once prompted, choose `Vuetify 3 Preview`:
+## Using Nuxt 3
 
-```bash
-? Choose a preset:
-  Configure (advanced)
-  Default (recommended)
-  Vite Preview (Vuetify 3 + Vite)
-  Prototype (rapid development)
-❯ Vuetify 3 Preview (Vuetify 3)
+[Nuxt](https://nuxt.com/) is an open-source framework that has helpful features to quickly get you started with developing a full-stack Vue app, such as file-based routing, SSR and component auto-imports. Nuxt is powered by Vite, so the steps to get Vuetify working in Nuxt 3 are quite similar to the manual steps described above.
+
+Start off creating a nuxt app by executing the following commands:
+
+::: tabs
+
+```bash [yarn]
+npx nuxi@latest init <project-name>
+cd <project-name>
+yarn
 ```
 
-### CDN
+```bash [npm]
+npx nuxi@latest init <project-name>
+cd <project-name>
+npm install
+```
 
-Coming soon™
+```bash [pnpm]
+pnpm dlx nuxi@latest init <project-name>
+# Make sure you have `shamefully-hoist=true` in `.npmrc` before running pnpm install
+cd <project-name>
+pnpm install
+```
 
-## Usage
+```bash [bun]
+bunx nuxi@latest init <project-name>
+cd <project-name>
+bun install
+```
 
-With Vue 3.0, the initialization process for Vue apps (and by extension Vuetify) has changed. With the new `createVuetify` method, the options passed to it have also changed. Please see the pages in the Features section of the documentation for further details.
+:::
+
+and then install the required Vuefity modules as dependencies:
+
+::: tabs
+
+```bash [yarn]
+yarn add -D vuetify vite-plugin-vuetify
+yarn add @mdi/font
+```
+
+```bash [npm]
+npm i -D vuetify vite-plugin-vuetify
+npm i @mdi/font
+```
+
+```bash [pnpm]
+pnpm i -D vuetify vite-plugin-vuetify
+pnpm i @mdi/font
+```
+
+```bash [bun]
+bun add -d vuetify vite-plugin-vuetify
+bun add @mdi/font
+```
+
+:::
+
+Next, integrate the following entries into your `nuxt.config.ts` file:
+
+```ts { data-resource="nuxt.config.ts" }
+import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+export default defineNuxtConfig({
+  //...
+  build: {
+    transpile: ['vuetify'],
+  },
+  modules: [
+    (_options, nuxt) => {
+      nuxt.hooks.hook('vite:extendConfig', (config) => {
+        // @ts-expect-error
+        config.plugins.push(vuetify({ autoImport: true }))
+      })
+    },
+    //...
+  ],
+  vite: {
+    vue: {
+      template: {
+        transformAssetUrls,
+      },
+    },
+  },
+})
+```
+
+Nuxt allows you to change its Vite config by using its built-in hook `vite:extendConfig`. In its callback function, add the Vuetify plugin to the array of Vite plugins. To resolve relative asset URLs that are passed to Vuetify components such as `VImg` (e.g. `~/assets/img/some.png`) the `transformAssetUrls` function needs to be added in the `vite` entry .
+
+In the next step, initialize Vuetify and add it to the main Vue app instance. This can be done in the `plugins` folder as any plugin that is placed in this folder will be automatically loaded by Nuxt at startup.
+
+```ts { data-resource="~/plugins/vuetify.ts" }
+// import this after install `@mdi/font` package
+import '@mdi/font/css/materialdesignicons.css'
+
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+
+export default defineNuxtPlugin((app) => {
+  const vuetify = createVuetify({
+    // ... your configuration
+  })
+  app.vueApp.use(vuetify)
+})
+```
+
+Finally, add Vuetify's root `VApp` component either in `~/app.vue` or `~/layouts/default.vue`, for example:
+
+```html { data-resource="app.vue" }
+<template>
+  <NuxtLayout>
+    <v-app>
+      <NuxtPage />
+    </v-app>
+  </NuxtLayout>
+</template>
+```
+
+or
+
+```html { data-resource="~/layouts/default.vue" }
+<template>
+  <v-app>
+    <!-- .... -->
+  </v-app>
+</template>
+```
+
+You should now have access to all Vuetify components and tools in Nuxt app.
+
+## Using Laravel Mix
 
 ```js
-import 'vuetify/styles' // Global CSS has to be imported
 import { createApp } from 'vue'
-import { createVuetify } from 'vuetify'
 import App from './App.vue'
 
-const app = createApp(App)
-const vuetify = createVuetify(...) // Replaces new Vuetify(...)
+// Vuetify
+import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
 
-app.use(vuetify)
+const vuetify = createVuetify({
+  components,
+  directives
+})
 
-app.mount('#app')
+createApp(App).use(vuetify).mount('#app')
 ```
 
-Components and directives are no longer included by default, they either have to imported separately or loaded automatically with the appropriate [Vite](https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin) or [Webpack](https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vuetify-loader) plugin.
+To import the fonts you need to add to webpack.mix.js:
 
 ```js
+mix.copy('node_modules/@mdi/font/fonts/', 'dist/fonts/')
+```
+
+## Using CDN
+
+We recommend using the latest version of Vuetify 3 from [jsdelivr](https://www.jsdelivr.com/). All components and styles are included.
+
+`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.css` { .text-truncate }
+
+`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.js` { .text-truncate }
+
+```js
+const { createApp } = Vue
+const { createVuetify } = Vuetify
+
+const vuetify = createVuetify()
+
+const app = createApp()
+app.use(vuetify).mount('#app')
+```
+
+## Existing projects
+
+Follow these steps if for example you are adding Vuetify to an existing project, or simply do not want to use a scaffolding tool.
+
+::: tabs
+
+```bash [yarn]
+yarn add vuetify
+```
+
+```bash [npm]
+npm i vuetify
+```
+
+```bash [pnpm]
+pnpm i vuetify
+```
+
+```bash [bun]
+bun add vuetify
+```
+
+:::
+
+::: tip
+
+If you are upgrading from an earlier version of Vuetify, make sure to check out our [Upgrade Guide](/getting-started/upgrade-guide/)
+
+:::
+
+In the file where you create the Vue application, add the following code
+
+```js
+import { createApp } from 'vue'
+import App from './App.vue'
+
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
@@ -146,49 +305,75 @@ const vuetify = createVuetify({
   components,
   directives,
 })
+
+createApp(App).use(vuetify).mount('#app')
 ```
 
-## Frequently asked questions
+This will include all components and directives regardless of whether or not you are using them. If you instead only want to include used components, have a look at the [Vite](https://npmjs.com/package/vite-plugin-vuetify) or [Webpack](https://npmjs.com/package/webpack-plugin-vuetify) plugins, depending on your setup. The plugins also makes it possible to customize SCSS variables.
 
-### Table of Contents
+Lastly, do not forget to install [icons](/features/icon-fonts/).
 
-- [What is included in the Beta?](#included)
-- [When will Vuetify 3 be released?](#version-3)
-- [Can I use it with Vite?](#use-vite)
+## SSR caveats
 
-### Questions
+Vue 3 has no way to automatically detect if SSR is used &mdash; so nuxt, gridsome, and other SSR frameworks must manually set the `ssr` option to `true` in order to properly render the application.
+
+```js { data-resource="src/plugins/vuetify.js" }
+import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
+
+const vuetify = createVuetify({
+  ssr: true,
+})
+```
+
+## Exposed exports
+
+The following export paths exist for the Vuetify framework:
+
+### JS / TS
+
+| Name                             | Description                                                                                                                                        |
+|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `vuetify`                        | Main entry point. Contains `createVuetify()` and public composables.                                                                               |
+| `vuetify/styles`                 | Precompiled global CSS (reset, utilities, etc.), no component styles. Will be redirected to SASS if `styles.configFile` is set in vite or webpack. |
+| `vuetify/components`             | All components. Not recommended as it will include all components during development, slowing down your build.                                     |
+| `vuetify/components/<name>`      | Individual components. Grouped by top-level name, for example VListItem, VListGroup, and VListItemTitle are all in `vuetify/components/VList`.     |
+| `vuetify/directives`             | All directives.                                                                                                                                    |
+| `vuetify/directives/<name>`      | Individual directives.                                                                                                                             |
+| `vuetify/blueprints/<name>`      | Preset collections of prop defaults.                                                                                                               |
+| `vuetify/locale`                 | Translations for strings in vuetify components. Each language is a named export.                                                                   |
+| `vuetify/locale/adapters/<name>` | Adapters to retrieve translations from other libraries such as vue-i18n.                                                                           |
+| `vuetify/iconsets/<name>`        | Icon presets, see [Icon Fonts](/features/icon-fonts/)                                                                                              |
+
+### SASS
+
+See [SASS Variables](/features/sass-variables/) for more information.
+
+| Name               | Description                                                                                     |
+|--------------------|-------------------------------------------------------------------------------------------------|
+| `vuetify`          | Global CSS (reset, utilities, etc.), no component styles. Equivalent to `vuetify/styles` in JS. |
+| `vuetify/settings` | All SASS variables, including component variables.                                              |
+| `vuetify/tools`    | Mixins and functions.                                                                           |
+
+## Nightly Builds
+
+The three development branches (`master`, `dev`, and `next`) are automatically published to NPM at 1200 UTC under the [`@vuetify/nightly`](https://www.npmjs.com/package/@vuetify/nightly?activeTab=versions) namespace. They may be outdated or buggy and are therefore not officially supported and are only supplied for testing purposes. These builds can be installed with a [package alias](https://docs.npmjs.com/cli/v8/commands/npm-install#:~:text=Install%20a%20package%20under%20a%20custom%20alias).
+
+| Branch name | Purpose          | package.json entry                         | Changelog                                                           |
+|-------------|------------------|--------------------------------------------|---------------------------------------------------------------------|
+| `master`    | Bug fixes        | `"vuetify": "npm:@vuetify/nightly@latest"` | [Changelog](https://unpkg.com/@vuetify/nightly@latest/CHANGELOG.md) |
+| `dev`       | New features     | `"vuetify": "npm:@vuetify/nightly@dev"`    | [Changelog](https://unpkg.com/@vuetify/nightly@dev/CHANGELOG.md)    |
+| `next`      | Breaking changes | `"vuetify": "npm:@vuetify/nightly@next"`   | [Changelog](https://unpkg.com/@vuetify/nightly@next/CHANGELOG.md)   |
+
+```diff
+ "devDependencies": {
+-  "vuetify": "^3.3.0"
++  "vuetify": "npm:@vuetify/nightly@3.3.0-master.2023-05-21"
+ }
+```
+
+## Questions
 
 Have a question that belongs here? Tell us in our [Discord Community](https://community.vuetifyjs.com/) or create a request on our [Issue Generator](https://issues.vuetifyjs.com/).
 
----
-
-- **What is included in the Beta?** { #included }
-
-  Currently most base functionality of Vuetify is included in the beta. This includes core services such as theme, configuration, and layout. A small subset of base components are also included such as grid system, sheets, and buttons. For full list of available components, visit the **UI Component** and **API** sections.
-
-- **When will Vuetify 3 be released?** { #version-3 }
-
-  Beta could take upwards of 2 months. Immediately following is a Release Candidate and then final release. Follow our progress via our project on [Github](https://github.com/orgs/vuetifyjs/projects/7) or read an overview of what's to come on our [Roadmap](/introduction/roadmap/).
-
-- **Can I use it with Vite?** { #use-vite }
-
-  Yes. We recommend creating a new project using the [vite](#vite) installation instructions.
-
-## How to report an issue or bug
-
-For bugs related to the Beta, please create an issue via our [Issue Generator](https://issues.vuetifyjs.com/) using the following [Reproduction Template](https://v3-template.vuetifyjs.com/). At this time we are only accepting bugs for the following:
-
-- Vuetify components and functions available in the Beta
-- Documentation content
-
-<alert type="info">
-
-  We ask that documentation issues remain related to content only. The `next` documentation is a work in progress and not fully updated to Vue 3. Some features may be missing or not functioning and will be constantly worked on as new components and functionality becomes available. We will begin fielding these bugs closer to Phase 3 as things become stable.
-
-</alert>
-
-## How to connect with Vuetify team
-
-The Vuetify team can be reached via [Discord Community](https://community.vuetifyjs.com/). If you have questions or would like to discuss Vuetify 3, come visit the #v3-discussion channel.
-
-<backmatter />
+<promoted slug="vuetify-discord" />

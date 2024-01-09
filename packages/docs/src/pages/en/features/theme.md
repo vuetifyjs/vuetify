@@ -13,15 +13,26 @@ related:
 
 Customize your application's default text colors, surfaces, and more. Easily modify your theme programmatically in real time. Vuetify comes with standard support for light and dark variants.
 
-<promoted slug="vuemastery-themes" />
+<page-features />
+
+<entry />
 
 ## API
 
-<api-inline />
+| Feature | Description |
+| - | - |
+| [useTheme](/api/use-theme/) | The theme composable allows you to get information about, and modify the current theme |
+| [v-theme-provider](/api/v-theme-provider/) | The theme provider component modifies the theme of all its children |
+
+<api-inline hide-links />
 
 ## Setup
 
 Vuetify comes with two themes pre-installed, `light` and `dark`. To set the default theme of your application, use the **defaultTheme** option.
+
+### Javascript
+
+Example with only the **defaultTheme** value
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createApp } from 'vue'
@@ -34,13 +45,59 @@ export default createVuetify({
 })
 ```
 
-Adding new themes is as easy as defining a new property in the **theme.themes** object. A theme is a collection of colors and options that change the overall look and feel of your application. One of these options designates the theme as being either a **light** or **dark** variation. This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://material.io/design/color/dark-theme.html) page.
+Adding new themes is as easy as defining a new property in the **theme.themes** object. A theme is a collection of colors and options that change the overall look and feel of your application. One of these options designates the theme as being either a **light** or **dark** variation.
+This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://material.io/design/color/dark-theme.html) page.
 
-Use the `ThemeDefinition` type to get type hints for the structure of the theme object.
+```js { resource="src/plugins/vuetify.js" }
+import { createApp } from 'vue'
+import { createVuetify } from 'vuetify'
+
+const myCustomLightTheme = {
+  dark: false,
+  colors: {
+    background: '#FFFFFF',
+    surface: '#FFFFFF',
+    primary: '#6200EE',
+    'primary-darken-1': '#3700B3',
+    secondary: '#03DAC6',
+    'secondary-darken-1': '#018786',
+    error: '#B00020',
+    info: '#2196F3',
+    success: '#4CAF50',
+    warning: '#FB8C00',
+  },
+}
+
+export default createVuetify({
+  theme: {
+    defaultTheme: 'myCustomLightTheme',
+    themes: {
+      myCustomLightTheme,
+    },
+  },
+})
+```
+
+### Typescript
+
+Example with only the **defaultTheme** value
 
 ```ts { resource="src/plugins/vuetify.ts" }
 import { createApp } from 'vue'
-import { createVuetify, ThemeDefinition } from 'vuetify'
+import { createVuetify } from 'vuetify'
+
+export default createVuetify({
+  theme: {
+    defaultTheme: 'dark',
+  },
+})
+```
+
+When using Typescript you may use the `ThemeDefinition` type to get type hints for the structure of the theme object.
+
+```ts { resource="src/plugins/vuetify.ts" }
+import { createApp } from 'vue'
+import { createVuetify, type ThemeDefinition } from 'vuetify'
 
 const myCustomLightTheme: ThemeDefinition = {
   dark: false,
@@ -55,7 +112,7 @@ const myCustomLightTheme: ThemeDefinition = {
     info: '#2196F3',
     success: '#4CAF50',
     warning: '#FB8C00',
-  }
+  },
 }
 
 export default createVuetify({
@@ -63,16 +120,16 @@ export default createVuetify({
     defaultTheme: 'myCustomLightTheme',
     themes: {
       myCustomLightTheme,
-    }
-  }
+    },
+  },
 })
 ```
 
 ## Changing theme
 
-To dynamically change theme during runtime.
+This is used when you need to change the theme during runtime
 
-```html
+```html { resource="src/App.vue" }
 <template>
   <v-app>
     <v-btn @click="toggleTheme">toggle theme</v-btn>
@@ -80,23 +137,18 @@ To dynamically change theme during runtime.
   </v-app>
 </template>
 
-<script>
+<script setup>
 import { useTheme } from 'vuetify'
 
-export default {
-  setup () {
-    const theme = useTheme()
+const theme = useTheme()
 
-    return {
-      theme,
-      toggleTheme: () => theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
-    }
-  }
+function toggleTheme () {
+  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
 }
 </script>
 ```
 
-Most components support the **theme** prop. When used, a new context is created for _that_ specific component and **all** of its children. In the following example, the [v-btn](/components/buttons/) uses the **dark** theme applied by its parent [v-card](/components/cards/).
+You should keep in mind that most of the Vuetify components support the **theme** prop. When used a new context is created for _that_ specific component and **all** of its children. In the following example, the [v-btn](/components/buttons/) uses the **dark** theme because it is applied to its parent [v-card](/components/cards/).
 
 ```html
 <template>
@@ -142,11 +194,11 @@ export default createVuetify({
         dark: false,
         colors: {
           ..., // We have omitted the standard color properties here to emphasize the custom one that we've added
-          something: '#00ff00'
-        }
-      }
-    }
-  }
+          something: '#00ff00',
+        },
+      },
+    },
+  },
 })
 ```
 
@@ -186,9 +238,9 @@ export default createVuetify({
       darken: 2,
     },
     themes: {
-      ...
-    }
-  }
+      //
+    },
+  },
 })
 ```
 
@@ -248,8 +300,30 @@ interface ThemeInstance {
 }
 ```
 
+## CSP Nonce
+
+Pages with the `script-src` or `style-src` CSP rules enabled may require a **nonce** to be specified for embedded style tags.
+
+```html
+<!-- Use with script-src -->
+Content-Security-Policy: script-src 'self' 'nonce-dQw4w9WgXcQ'
+
+<!-- Use with style-src -->
+Content-Security-Policy: style-src 'self' 'nonce-dQw4w9WgXcQ'
+```
+
+```ts
+// src/plugins/vuetify.js
+
+import {createVuetify} from 'vuetify'
+
+export const vuetify = createVuetify({
+  theme: {
+    cspNonce: 'dQw4w9WgXcQ',
+  },
+})
+```
+
 ## Implementation
 
 Vuetify generates theme styles at runtime according to the given configuration. The generated styles are injected into the `<head>` section of the DOM in a `<style>` tag with an **id** of `vuetify-theme-stylesheet`.
-
-<backmatter />

@@ -4,44 +4,90 @@ import './VSnackbar.sass'
 // Components
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
+import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
+import { VProgressLinear } from '@/components/VProgressLinear'
 
 // Composables
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { useScopeId } from '@/composables/scopeId'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
-import { onMounted, watch } from 'vue'
+import { mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch } from 'vue'
+import { genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
 
-export const VSnackbar = defineComponent({
+type VSnackbarSlots = {
+  activator: { isActive: boolean, props: Record<string, any> }
+  default: never
+  actions: never
+  text: never
+}
+
+function useCountdown (milliseconds: number) {
+  const time = shallowRef(milliseconds)
+  let timer = -1
+
+  function clear () {
+    clearInterval(timer)
+  }
+
+  function reset () {
+    clear()
+
+    nextTick(() => time.value = milliseconds)
+  }
+
+  function start (el?: HTMLElement) {
+    const style = el ? getComputedStyle(el) : { transitionDuration: 0.2 }
+    const interval = parseFloat(style.transitionDuration) * 1000 || 200
+
+    clear()
+
+    if (time.value <= 0) return
+
+    const startTime = performance.now()
+    timer = window.setInterval(() => {
+      const elapsed = performance.now() - startTime + interval
+      time.value = Math.max(milliseconds - elapsed, 0)
+
+      if (time.value <= 0) clear()
+    }, interval)
+  }
+
+  onScopeDispose(clear)
+
+  return { clear, time, start, reset }
+}
+
+export const makeVSnackbarProps = propsFactory({
+  multiLine: Boolean,
+  text: String,
+  timer: [Boolean, String],
+  timeout: {
+    type: [Number, String],
+    default: 5000,
+  },
+  vertical: Boolean,
+
+  ...makeLocationProps({ location: 'bottom' } as const),
+  ...makePositionProps(),
+  ...makeRoundedProps(),
+  ...makeVariantProps(),
+  ...makeThemeProps(),
+  ...omit(makeVOverlayProps({
+    transition: 'v-snackbar-transition',
+  }), ['persistent', 'noClickAnimation', 'scrim', 'scrollStrategy']),
+}, 'VSnackbar')
+
+export const VSnackbar = genericComponent<VSnackbarSlots>()({
   name: 'VSnackbar',
 
-  props: {
-    app: Boolean,
-    contentClass: {
-      type: String,
-      default: '',
-    },
-    multiLine: Boolean,
-    timeout: {
-      type: [Number, String],
-      default: 5000,
-    },
-    vertical: Boolean,
-
-    modelValue: Boolean,
-
-    ...makeLocationProps({ location: 'bottom' } as const),
-    ...makePositionProps(),
-    ...makeRoundedProps(),
-    ...makeVariantProps(),
-    ...makeTransitionProps({ transition: 'v-snackbar-transition' }),
-  },
+  props: makeVSnackbarProps(),
 
   emits: {
     'update:modelValue': (v: boolean) => true,
@@ -52,9 +98,14 @@ export const VSnackbar = defineComponent({
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
     const { scopeId } = useScopeId()
-
+    const { themeClasses } = provideTheme(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { roundedClasses } = useRounded(props)
+    const countdown = useCountdown(Number(props.timeout))
+
+    const overlay = ref<VOverlay>()
+    const timerRef = ref<VProgressLinear>()
+    const isHovering = shallowRef(false)
 
     watch(isActive, startTimeout)
     watch(() => props.timeout, startTimeout)
@@ -65,68 +116,106 @@ export const VSnackbar = defineComponent({
 
     let activeTimeout = -1
     function startTimeout () {
+      countdown.reset()
       window.clearTimeout(activeTimeout)
       const timeout = Number(props.timeout)
 
       if (!isActive.value || timeout === -1) return
+
+      const element = refElement(timerRef.value)
+
+      countdown.start(element)
 
       activeTimeout = window.setTimeout(() => {
         isActive.value = false
       }, timeout)
     }
 
-    function onPointerenter () {
+    function clearTimeout () {
+      countdown.reset()
       window.clearTimeout(activeTimeout)
     }
 
-    useRender(() => (
-      <VOverlay
-        v-model={ isActive.value }
-        class={[
-          'v-snackbar',
-          {
-            'v-snackbar--active': isActive.value,
-            'v-snackbar--multi-line': props.multiLine && !props.vertical,
-            'v-snackbar--vertical': props.vertical,
-          },
-          positionClasses.value,
-        ]}
-        style={[colorStyles.value]}
-        contentProps={{
-          style: locationStyles.value,
-        }}
-        persistent
-        noClickAnimation
-        scrim={ false }
-        scrollStrategy="none"
-        transition={ props.transition }
-        { ...scopeId }
-        v-slots={{ activator: slots.activator }}
-      >
-        <div
+    function onPointerenter () {
+      isHovering.value = true
+      clearTimeout()
+    }
+
+    function onPointerleave () {
+      isHovering.value = false
+      startTimeout()
+    }
+
+    useRender(() => {
+      const overlayProps = VOverlay.filterProps(props)
+      const hasContent = !!(slots.default || slots.text || props.text)
+
+      return (
+        <VOverlay
+          ref={ overlay }
           class={[
-            'v-snackbar__wrapper',
-            colorClasses.value,
-            roundedClasses.value,
-            variantClasses.value,
+            'v-snackbar',
+            {
+              'v-snackbar--active': isActive.value,
+              'v-snackbar--multi-line': props.multiLine && !props.vertical,
+              'v-snackbar--timer': !!props.timer,
+              'v-snackbar--vertical': props.vertical,
+            },
+            positionClasses.value,
+            props.class,
           ]}
-          onPointerenter={ onPointerenter }
-          onPointerleave={ startTimeout }
+          style={ props.style }
+          { ...overlayProps }
+          v-model={ isActive.value }
+          contentProps={ mergeProps({
+            class: [
+              'v-snackbar__wrapper',
+              themeClasses.value,
+              colorClasses.value,
+              roundedClasses.value,
+              variantClasses.value,
+            ],
+            style: [
+              locationStyles.value,
+              colorStyles.value,
+            ],
+            onPointerenter,
+            onPointerleave,
+          }, overlayProps.contentProps)}
+          persistent
+          noClickAnimation
+          scrim={ false }
+          scrollStrategy="none"
+          _disableGlobalStack
+          { ...scopeId }
+          v-slots={{ activator: slots.activator }}
         >
           { genOverlays(false, 'v-snackbar') }
 
-          { slots.default && (
+          { props.timer && (
+            <div key="timer" class="v-snackbar__timer">
+              <VProgressLinear
+                ref={ timerRef }
+                active={ !isHovering.value }
+                color={ typeof props.timer === 'string' ? props.timer : 'info' }
+                max={ props.timeout }
+                model-value={ countdown.time.value }
+              />
+            </div>
+          )}
+
+          { hasContent && (
             <div
-              class={[
-                'v-snackbar__content',
-                props.contentClass,
-              ]}
+              key="content"
+              class="v-snackbar__content"
               role="status"
               aria-live="polite"
             >
-              { slots.default() }
+              { slots.text?.() ?? props.text }
+
+              { slots.default?.() }
             </div>
-          ) }
+          )}
 
           { slots.actions && (
             <VDefaultsProvider
@@ -134,6 +223,7 @@ export const VSnackbar = defineComponent({
                 VBtn: {
                   variant: 'text',
                   ripple: false,
+                  slim: true,
                 },
               }}
             >
@@ -141,10 +231,12 @@ export const VSnackbar = defineComponent({
                 { slots.actions() }
               </div>
             </VDefaultsProvider>
-          ) }
-        </div>
-      </VOverlay>
-    ))
+          )}
+        </VOverlay>
+      )
+    })
+
+    return forwardRefs({}, overlay)
   },
 })
 

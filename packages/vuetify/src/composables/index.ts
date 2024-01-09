@@ -3,15 +3,17 @@
  * Imports in our code should be to the composable directly, not this file
  */
 
+export { useDate } from './date'
+export { useDefaults } from './defaults'
 export { useDisplay } from './display'
-export { useTheme } from './theme'
-export { provideRtl, useRtl } from './rtl'
 export { useLayout } from './layout'
+export { useLocale, useRtl } from './locale'
+export { useTheme } from './theme'
 
+export type { DateInstance } from './date'
 export type { DefaultsInstance } from './defaults'
 export type { DisplayBreakpoint, DisplayInstance, DisplayThresholds } from './display'
 export type { SubmitEventPromise } from './form'
 export type { IconAliases, IconProps, IconSet, IconOptions } from './icons'
-export type { LocaleAdapter } from './locale'
-export type { RtlInstance } from './rtl'
+export type { LocaleInstance, LocaleMessages, RtlInstance, LocaleOptions, RtlOptions } from './locale'
 export type { ThemeDefinition, ThemeInstance } from './theme'

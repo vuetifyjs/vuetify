@@ -2,17 +2,18 @@
   <div>
     <div class="d-flex align-center text-center justify-center">
       <v-avatar
-        :color="isIntersecting ? 'green lighten-1' : 'red darken-2'"
-        class="mr-3 swing-transition"
+        :color="intersecting ? 'green-lighten-1' : 'red-darken-2'"
+        variant="flat"
+        class="me-3 swing-transition"
         size="32"
       ></v-avatar>
     </div>
 
-    <v-responsive
+    <v-sheet
       class="overflow-y-auto"
       max-height="400"
     >
-      <v-responsive
+      <v-sheet
         height="200vh"
         class="d-flex align-center text-center pa-2"
       >
@@ -38,10 +39,19 @@
             culpa qui officia deserunt mollit anim id est laborum.
           </v-card-text>
         </v-card>
-      </v-responsive>
-    </v-responsive>
+      </v-sheet>
+    </v-sheet>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const intersecting = ref(false)
+  function onIntersect (isIntersecting, entries, observer) {
+    intersecting.value = entries[0].intersectionRatio >= 0.5
+  }
+</script>
 
 <script>
   export default {
@@ -50,7 +60,7 @@
     }),
 
     methods: {
-      onIntersect (entries, observer) {
+      onIntersect (isIntersecting, entries, observer) {
         // More information about these options
         // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
         this.isIntersecting = entries[0].intersectionRatio >= 0.5

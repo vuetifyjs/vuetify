@@ -2,13 +2,6 @@
   <Playground />
 </template>
 
-<script>
+<script setup>
   import Playground from './Playground.vue'
-
-  export default {
-    name: 'App',
-    components: {
-      Playground,
-    },
-  }
 </script>

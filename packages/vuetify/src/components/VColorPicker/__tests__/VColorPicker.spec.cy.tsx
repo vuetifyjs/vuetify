@@ -92,20 +92,16 @@ describe('VColorPicker', () => {
       </Application>
     ))
 
-    cy.get('.v-color-picker-canvas canvas').then(canvas => {
-      const width = canvas.width() ?? 0
-      const height = canvas.height() ?? 0
+    cy.get('.v-color-picker-canvas canvas')
+      .then(canvas => {
+        const width = canvas.width() ?? 0
+        const height = canvas.height() ?? 0
 
-      cy.wrap(canvas).click(width / 2, height / 2)
-    })
-
-    cy.vue().then(wrapper => {
-      const picker = wrapper.findComponent('.v-color-picker')
-      const emits = picker.emitted('update:modelValue')
-
-      expect(emits).to.have.length(1)
-      expect(emits[0][0]).to.have.length(7)
-    })
+        cy.wrap(canvas).click(width / 2, height / 2)
+      })
+    cy.emitted(VColorPicker, 'update:modelValue')
+      .should('have.length', 1)
+      .then(arr => expect(arr[0][0]).to.match(/^#[A-F0-9]{6}$/))
   })
 
   it('should emit hexa value if hexa value is provided', () => {
@@ -115,20 +111,16 @@ describe('VColorPicker', () => {
       </Application>
     ))
 
-    cy.get('.v-color-picker-canvas canvas').then(canvas => {
-      const width = canvas.width() ?? 0
-      const height = canvas.height() ?? 0
+    cy.get('.v-color-picker-canvas canvas')
+      .then(canvas => {
+        const width = canvas.width() ?? 0
+        const height = canvas.height() ?? 0
 
-      cy.wrap(canvas).click(width / 2, height / 2)
-    })
-
-    cy.vue().then(wrapper => {
-      const picker = wrapper.findComponent('.v-color-picker')
-      const emits = picker.emitted('update:modelValue')
-
-      expect(emits).to.have.length(1)
-      expect(emits[0][0]).to.have.length(9)
-    })
+        cy.wrap(canvas).click(width / 2, height / 2)
+      })
+    cy.emitted(VColorPicker, 'update:modelValue')
+      .should('have.length', 1)
+      .then(arr => expect(arr[0][0]).to.match(/^#[A-F0-9]{8}$/))
   })
 
   it('should emit hex value if hex value is provided', () => {
@@ -138,20 +130,16 @@ describe('VColorPicker', () => {
       </Application>
     ))
 
-    cy.get('.v-color-picker-canvas canvas').then(canvas => {
-      const width = canvas.width() ?? 0
-      const height = canvas.height() ?? 0
+    cy.get('.v-color-picker-canvas canvas')
+      .then(canvas => {
+        const width = canvas.width() ?? 0
+        const height = canvas.height() ?? 0
 
-      cy.wrap(canvas).click(width / 2, height / 2)
-    })
-
-    cy.vue().then(wrapper => {
-      const picker = wrapper.findComponent('.v-color-picker')
-      const emits = picker.emitted('update:modelValue')
-
-      expect(emits).to.have.length(1)
-      expect(emits[0][0]).to.have.length(7)
-    })
+        cy.wrap(canvas).click(width / 2, height / 2)
+      })
+    cy.emitted(VColorPicker, 'update:modelValue')
+      .should('have.length', 1)
+      .then(arr => expect(arr[0][0]).to.match(/^#[A-F0-9]{6}$/))
   })
 
   it('should emit hsla value if hsla value is provided', () => {
@@ -161,23 +149,21 @@ describe('VColorPicker', () => {
       </Application>
     ))
 
-    cy.get('.v-color-picker-canvas canvas').then(canvas => {
-      const width = canvas.width() ?? 0
-      const height = canvas.height() ?? 0
+    cy.get('.v-color-picker-canvas canvas')
+      .then(canvas => {
+        const width = canvas.width() ?? 0
+        const height = canvas.height() ?? 0
 
-      cy.wrap(canvas).click(width / 2, height / 2)
-    })
-
-    cy.vue().then(wrapper => {
-      const picker = wrapper.findComponent('.v-color-picker')
-      const emits = picker.emitted('update:modelValue')
-
-      expect(emits).to.have.length(1)
-      expect(emits[0][0]).to.haveOwnProperty('h')
-      expect(emits[0][0]).to.haveOwnProperty('s')
-      expect(emits[0][0]).to.haveOwnProperty('l')
-      expect(emits[0][0]).to.haveOwnProperty('a')
-    })
+        cy.wrap(canvas).click(width / 2, height / 2)
+      })
+    cy.emitted(VColorPicker, 'update:modelValue')
+      .should('have.length', 1)
+      .then(emits => {
+        expect(emits[0][0]).to.haveOwnProperty('h')
+        expect(emits[0][0]).to.haveOwnProperty('s')
+        expect(emits[0][0]).to.haveOwnProperty('l')
+        expect(emits[0][0]).to.haveOwnProperty('a')
+      })
   })
 
   it('should emit rgba value if rgba value is provided', () => {
@@ -187,23 +173,21 @@ describe('VColorPicker', () => {
       </Application>
     ))
 
-    cy.get('.v-color-picker-canvas canvas').then(canvas => {
-      const width = canvas.width() ?? 0
-      const height = canvas.height() ?? 0
+    cy.get('.v-color-picker-canvas canvas')
+      .then(canvas => {
+        const width = canvas.width() ?? 0
+        const height = canvas.height() ?? 0
 
-      cy.wrap(canvas).click(width / 2, height / 2)
-    })
-
-    cy.vue().then(wrapper => {
-      const picker = wrapper.findComponent('.v-color-picker')
-      const emits = picker.emitted('update:modelValue')
-
-      expect(emits).to.have.length(1)
-      expect(emits[0][0]).to.haveOwnProperty('r')
-      expect(emits[0][0]).to.haveOwnProperty('g')
-      expect(emits[0][0]).to.haveOwnProperty('b')
-      expect(emits[0][0]).to.haveOwnProperty('a')
-    })
+        cy.wrap(canvas).click(width / 2, height / 2)
+      })
+    cy.emitted(VColorPicker, 'update:modelValue')
+      .should('have.length', 1)
+      .then(emits => {
+        expect(emits[0][0]).to.haveOwnProperty('r')
+        expect(emits[0][0]).to.haveOwnProperty('g')
+        expect(emits[0][0]).to.haveOwnProperty('b')
+        expect(emits[0][0]).to.haveOwnProperty('a')
+      })
   })
 
   it('should hide mode switch if only one mode is enabled', () => {
@@ -229,45 +213,37 @@ describe('VColorPicker', () => {
   it('should emit value when changing hue slider', () => {
     cy.mount(() => (
       <Application>
-        <VColorPicker modelValue="#000ff" />
+        <VColorPicker modelValue="#0000ff" />
       </Application>
     ))
 
-    cy.get('.v-color-picker-preview__hue').then(slider => {
-      const width = slider.width() ?? 0
-      const height = slider.height() ?? 0
+    cy.get('.v-color-picker-preview__hue')
+      .then(slider => {
+        const width = slider.width() ?? 0
+        const height = slider.height() ?? 0
 
-      cy.wrap(slider).click(width / 2, height / 2)
-    })
-
-    cy.vue().then(wrapper => {
-      const picker = wrapper.findComponent('.v-color-picker')
-      const emits = picker.emitted('update:modelValue')
-
-      expect(emits[0][0]).to.not.equal('#0000ff')
-    })
+        cy.wrap(slider).click(width / 2, height / 2)
+      })
+    cy.emitted(VColorPicker, 'update:modelValue')
+      .then(emits => expect(emits[0][0]).to.not.equal('#0000ff'))
   })
 
   it('should emit value when changing alpha slider', () => {
     cy.mount(() => (
       <Application>
-        <VColorPicker modelValue="#000ff" />
+        <VColorPicker modelValue="#0000ff" />
       </Application>
     ))
 
-    cy.get('.v-color-picker-preview__alpha').then(slider => {
-      const width = slider.width() ?? 0
-      const height = slider.height() ?? 0
+    cy.get('.v-color-picker-preview__alpha')
+      .then(slider => {
+        const width = slider.width() ?? 0
+        const height = slider.height() ?? 0
 
-      cy.wrap(slider).click(width / 2, height / 2)
-    })
-
-    cy.vue().then(wrapper => {
-      const picker = wrapper.findComponent('.v-color-picker')
-      const emits = picker.emitted('update:modelValue')
-
-      expect(emits[0][0]).to.not.equal('#0000ff')
-    })
+        cy.wrap(slider).click(width / 2, height / 2)
+      })
+    cy.emitted(VColorPicker, 'update:modelValue')
+      .then(emits => expect(emits[0][0]).to.not.equal('#0000ff'))
   })
 
   it('should emit value when clicking on swatch', () => {
@@ -277,15 +253,63 @@ describe('VColorPicker', () => {
       </Application>
     ))
 
-    cy.get('.v-color-picker-swatches__swatch').eq(4).find('.v-color-picker-swatches__color').eq(0).as('color').click()
-
+    cy.get('.v-color-picker-swatches__swatch').eq(4)
+      .find('.v-color-picker-swatches__color').eq(0).as('color')
+      .click()
     cy.get('@color').find('.v-icon').should('exist')
+    cy.emitted(VColorPicker, 'update:modelValue')
+      .should('have.length', 1)
+  })
 
-    cy.vue().then(wrapper => {
-      const picker = wrapper.findComponent('.v-color-picker')
-      const emits = picker.emitted('update:modelValue')
-
-      expect(emits).to.have.length(1)
+  it('should not use global defaults for slider color', () => {
+    cy.mount(() => (
+      <Application>
+        <VColorPicker />
+      </Application>
+    ), null, {
+      defaults: {
+        VSlider: {
+          color: 'primary',
+          trackColor: 'primary',
+          trackFillColor: 'primary',
+        },
+      },
     })
+
+    cy.get('.bg-primary').should('not.exist')
+    cy.get('.text-primary').should('not.exist')
+  })
+
+  it('should not show dot or input values if no color is set', () => {
+    cy.mount(() => (
+      <Application>
+        <VColorPicker />
+      </Application>
+    ))
+
+    cy.get('.v-color-picker-canvas__dot').should('not.exist')
+    cy.get('.v-color-picker-edit__input input').should('have.value', '')
+    cy.get('.v-color-picker-canvas canvas').then(canvas => {
+      const width = canvas.width() ?? 0
+      const height = canvas.height() ?? 0
+
+      cy.wrap(canvas).click(width / 2, height / 2)
+    })
+    cy.get('.v-color-picker-canvas__dot').should('exist')
+    cy.get('.v-color-picker-edit__input input').invoke('val').should('not.be.empty')
+  })
+
+  it('should emit correct color when typing in hex field', () => {
+    cy.mount(() => (
+      <Application>
+        <VColorPicker mode="hexa" />
+      </Application>
+    ))
+
+    cy.get('.v-color-picker-edit__input input').as('input')
+      .type('FF00CC')
+    cy.get('@input').blur()
+    cy.emitted(VColorPicker, 'update:modelValue')
+      .should('deep.equal', [['#FF00CC']])
   })
 })

@@ -1,5 +1,5 @@
 // Types
-import type { DirectiveBinding, ObjectDirective } from 'vue'
+import type { DirectiveBinding } from 'vue'
 import type { MutationOptions } from '@/composables/mutationObserver'
 
 export interface MutationDirectiveBinding extends Omit<DirectiveBinding, 'modifiers' | 'value'> {
@@ -49,7 +49,7 @@ function unmounted (el: HTMLElement, binding: MutationDirectiveBinding) {
   delete el._mutate[binding.instance!.$.uid]
 }
 
-export const Mutate: ObjectDirective<HTMLElement> = {
+export const Mutate = {
   mounted,
   unmounted,
 }

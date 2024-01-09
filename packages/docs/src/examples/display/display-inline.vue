@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="d-inline pa-2 deep-purple accent-4 white--text">
+    <div class="d-inline pa-2 bg-deep-purple">
       d-inline
     </div>
-    <div class="d-inline pa-2 black white--text">
+    <div class="d-inline pa-2 bg-black">
       d-inline
     </div>
   </div>

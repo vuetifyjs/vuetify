@@ -1,15 +1,16 @@
-
 <template>
   <div class="text-center">
     <v-row class="pa-4">
-      <v-radio v-model="model" value="rounded-0" label="rounded-0"></v-radio>
-      <v-radio v-model="model" value="rounded-sm" label="rounded-sm"></v-radio>
-      <v-radio v-model="model" value="rounded" label="rounded"></v-radio>
-      <v-radio v-model="model" value="rounded-lg" label="rounded-lg"></v-radio>
-      <v-radio v-model="model" value="rounded-xl" label="rounded-xl"></v-radio>
-      <v-radio v-model="model" value="rounded-pill" label="rounded-pill"></v-radio>
-      <v-radio v-model="model" value="rounded-circle" label="rounded-circle"></v-radio>
-      <v-radio v-model="model" value="rounded-shaped" label="rounded-shaped"></v-radio>
+      <v-radio-group v-model="model" inline>
+        <v-radio value="rounded-0" label="rounded-0"></v-radio>
+        <v-radio value="rounded-sm" label="rounded-sm"></v-radio>
+        <v-radio value="rounded" label="rounded"></v-radio>
+        <v-radio value="rounded-lg" label="rounded-lg"></v-radio>
+        <v-radio value="rounded-xl" label="rounded-xl"></v-radio>
+        <v-radio value="rounded-pill" label="rounded-pill"></v-radio>
+        <v-radio value="rounded-circle" label="rounded-circle"></v-radio>
+        <v-radio value="rounded-shaped" label="rounded-shaped"></v-radio>
+      </v-radio-group>
     </v-row>
 
     <v-sheet

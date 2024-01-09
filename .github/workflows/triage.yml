@@ -1,7 +1,7 @@
 name: Issue triage
 on:
   issues:
-    types: [opened, labeled]
+    types: [opened, labeled, unlabeled]
 
 jobs:
   triage:

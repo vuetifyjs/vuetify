@@ -1,5 +1,8 @@
-import type { TouchStoredHandlers } from './directives/touch'
+import 'vue/jsx'
+
+// Types
 import type { Events, VNode } from 'vue'
+import type { TouchStoredHandlers } from './directives/touch'
 
 declare global {
   interface HTMLCollection {
@@ -65,11 +68,36 @@ declare global {
     ): void
   }
 
+  interface MouseEvent {
+    sourceCapabilities?: { firesTouchEvents: boolean }
+  }
+
+  interface ColorSelectionOptions {
+    signal?: AbortSignal
+  }
+
+  interface ColorSelectionResult {
+    sRGBHex: string
+  }
+
+  interface EyeDropper {
+    open: (options?: ColorSelectionOptions) => Promise<ColorSelectionResult>
+  }
+
+  interface EyeDropperConstructor {
+    new (): EyeDropper
+  }
+
+  interface Window {
+    EyeDropper: EyeDropperConstructor
+  }
+
   function parseInt(s: string | number, radix?: number): number
   function parseFloat(string: string | number): number
 
   export const __VUETIFY_VERSION__: string
   export const __REQUIRED_VUE__: string
+  export const __VUE_OPTIONS_API__: boolean | undefined
 
   namespace JSX {
     interface Element extends VNode {}
@@ -80,9 +108,30 @@ declare global {
 }
 
 declare module '@vue/runtime-core' {
+  export interface ComponentCustomProperties {
+    _: ComponentInternalInstance
+  }
+
   export interface ComponentInternalInstance {
-    ctx: Record<string, unknown>
     provides: Record<string, unknown>
+    setupState: any
+  }
+
+  export interface FunctionalComponent {
+    aliasName?: string
+  }
+
+  // eslint-disable-next-line max-len
+  export interface ComponentOptionsBase<Props, RawBindings, D, C extends ComputedOptions, M extends MethodOptions, Mixin extends ComponentOptionsMixin, Extends extends ComponentOptionsMixin, E extends EmitsOptions, EE extends string = string, Defaults = {}> {
+    aliasName?: string
+  }
+
+  export interface App {
+    $nuxt?: { hook: (name: string, fn: () => void) => void }
+  }
+
+  export interface VNode {
+    ctx: ComponentInternalInstance | null
   }
 }
 
@@ -106,11 +155,23 @@ declare module '@vue/runtime-dom' {
     [K in keyof E]?: E[K] extends Function ? E[K] : (payload: E[K]) => void
   }
 
-  export interface HTMLAttributes extends EventHandlers<ModifiedEvents> {}
+  export interface HTMLAttributes extends EventHandlers<ModifiedEvents> {
+    onScrollend?: (e: Event) => void
+  }
 
   type CustomProperties = {
     [k in `--${string}`]: any
   }
 
   export interface CSSProperties extends CustomProperties {}
+}
+
+declare module 'expect' {
+  interface Matchers<R> {
+    /** console.warn */
+    toHaveBeenTipped(): R
+
+    /** console.error */
+    toHaveBeenWarned(): R
+  }
 }

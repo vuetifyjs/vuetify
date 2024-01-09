@@ -1,15 +1,11 @@
 <template>
-  <app-sheet class="mb-6">
+  <app-sheet class="mb-4">
     <vue-file :file="`${name}/usage`" />
   </app-sheet>
 </template>
 
-<script>
-  export default {
-    name: 'Usage',
-
-    props: {
-      name: String,
-    },
-  }
+<script setup>
+  defineProps({
+    name: String,
+  })
 </script>

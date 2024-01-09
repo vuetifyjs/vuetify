@@ -1,18 +1,21 @@
 /// <reference types="../../../../types/cypress" />
 
-import { createRouter, createWebHistory } from 'vue-router'
-import { Application } from '../../../../cypress/templates'
+// Components
 import { VBreadcrumbs } from '..'
-import { VBreadcrumbsItem } from '../VBreadcrumbsItem'
+import { Application } from '../../../../cypress/templates'
 import { VBreadcrumbsDivider } from '../VBreadcrumbsDivider'
+import { VBreadcrumbsItem } from '../VBreadcrumbsItem'
+
+// Utilities
+import { createRouter, createWebHistory } from 'vue-router'
 
 describe('VBreadcrumbs', () => {
   it('should use item slot', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ ['hello', 'world']}>
+        <VBreadcrumbs items={['hello', 'world']}>
           {{
-            title: ({ item }: any) => `${item}!`,
+            title: ({ item }: any) => `${item.title}!`,
           }}
         </VBreadcrumbs>
       </Application>
@@ -24,7 +27,7 @@ describe('VBreadcrumbs', () => {
   it('should use divider slot', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ ['hello', 'world'] }>
+        <VBreadcrumbs items={['hello', 'world']}>
           {{
             divider: () => '-',
           }}
@@ -38,17 +41,17 @@ describe('VBreadcrumbs', () => {
   it('should render icon', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ ['hello', 'world'] } icon="mdi-home"></VBreadcrumbs>
+        <VBreadcrumbs items={['hello', 'world']} icon="mdi-home"></VBreadcrumbs>
       </Application>
     ))
 
-    cy.get('.v-icon').should('exist').should('have.class', 'mdi-home')
+    cy.get('.v-icon').should('exist').should('have.class', 'mdi-home').should('have.length', 1)
   })
 
   it('should use bg-color', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ ['hello', 'world'] } bgColor="primary"></VBreadcrumbs>
+        <VBreadcrumbs items={['hello', 'world']} bgColor="primary"></VBreadcrumbs>
       </Application>
     ))
 
@@ -58,7 +61,7 @@ describe('VBreadcrumbs', () => {
   it('should use color', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ ['hello', 'world'] } color="primary"></VBreadcrumbs>
+        <VBreadcrumbs items={['hello', 'world']} color="primary"></VBreadcrumbs>
       </Application>
     ))
 
@@ -68,11 +71,11 @@ describe('VBreadcrumbs', () => {
   it('should render link if href is set', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ [{ text: 'hello', href: '/hello' }, { text: 'world', href: '/world' }] }></VBreadcrumbs>
+        <VBreadcrumbs items={[{ title: 'hello', href: '/hello' }, { title: 'world', href: '/world' }]}></VBreadcrumbs>
       </Application>
     ))
 
-    cy.get('a.v-breadcrumbs-item').should('exist').should('have.attr', 'href')
+    cy.get('a.v-breadcrumbs-item--link').should('exist').should('have.attr', 'href')
   })
 
   it('should use router if to is set', () => {
@@ -92,7 +95,7 @@ describe('VBreadcrumbs', () => {
 
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ [{ text: 'about', to: '/about' }, { text: 'something', to: '/something' }] }></VBreadcrumbs>
+        <VBreadcrumbs items={[{ title: 'about', to: '/about' }, { title: 'something', to: '/something' }]}></VBreadcrumbs>
       </Application>
     ), {
       global: {
@@ -102,7 +105,8 @@ describe('VBreadcrumbs', () => {
 
     cy.get('.v-breadcrumbs').should('exist')
 
-    cy.get('.v-breadcrumbs-item').should('exist').eq(0).click().then(() => {
+    cy.get('.v-breadcrumbs-item').should('exist').eq(0).click()
+    cy.then(() => {
       expect(router.currentRoute.value.path).to.equal('/about')
     })
   })
@@ -148,7 +152,7 @@ describe('VBreadcrumbs', () => {
   it('should disabled last item by default if using items prop', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ ['foo', 'bar'] }></VBreadcrumbs>
+        <VBreadcrumbs items={['foo', 'bar']}></VBreadcrumbs>
       </Application>
     ))
 
@@ -158,10 +162,27 @@ describe('VBreadcrumbs', () => {
   it('should be possible to override last item disabled by default', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ ['foo', { text: 'bar', disabled: false }] }></VBreadcrumbs>
+        <VBreadcrumbs items={['foo', { title: 'bar', disabled: false }]}></VBreadcrumbs>
       </Application>
     ))
 
     cy.get('.v-breadcrumbs-item').last().should('not.have.class', 'v-breadcrumbs-item--disabled')
+  })
+
+  it('should provide default divider', () => {
+    cy.mount(() => (
+      <Application>
+        <VBreadcrumbs>
+          <VBreadcrumbsItem title="foo"></VBreadcrumbsItem>
+          <VBreadcrumbsDivider></VBreadcrumbsDivider>
+          <VBreadcrumbsItem title="bar"></VBreadcrumbsItem>
+          <VBreadcrumbsDivider divider="-"></VBreadcrumbsDivider>
+          <VBreadcrumbsItem title="fizz"></VBreadcrumbsItem>
+        </VBreadcrumbs>
+      </Application>
+    ))
+
+    cy.get('.v-breadcrumbs-divider').first().should('have.text', '/')
+    cy.get('.v-breadcrumbs-divider').last().should('have.text', '-')
   })
 })

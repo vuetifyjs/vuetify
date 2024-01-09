@@ -1,42 +1,19 @@
 <template>
-  <div class="d-none">
-    <!-- TODO: resolve style issues -->
-    <promoted-base>
-      <app-markdown
-        v-if="ad"
-        class="v-markdown--inline d-inline"
-        tag="span"
-        :content="description"
-      />
-    </promoted-base>
-  </div>
+  <app-markdown
+    v-if="ad"
+    :content="description"
+    class="v-markdown--inline d-inline"
+    tag="span"
+  />
 </template>
 
-<script>
-  // Mixins
-  import { defineComponent } from 'vue'
+<script setup>
+  // Composables
   import { createAdProps, useAd } from '@/composables/ad'
 
-  import PromotedBase from './Base.vue'
+  const props = defineProps(createAdProps())
 
-  export default defineComponent({
-    name: 'PromotedInline',
-
-    components: { PromotedBase },
-
-    props: {
-      ...createAdProps(),
-    },
-
-    setup (props) {
-      const { ad, description } = useAd(props)
-
-      return {
-        ad,
-        description,
-      }
-    },
-  })
+  const { ad, description } = useAd(props)
 </script>
 
 <style lang="sass">

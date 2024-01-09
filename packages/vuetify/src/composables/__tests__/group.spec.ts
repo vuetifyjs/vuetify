@@ -1,9 +1,9 @@
 import { makeGroupProps, useGroup, useGroupItem } from '../group'
 
 // Utilities
-import { defineComponent, h, nextTick, reactive } from 'vue'
-import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
+import { defineComponent, h, nextTick, reactive } from 'vue'
 
 describe('group', () => {
   describe('with complex values', () => {
@@ -12,6 +12,7 @@ describe('group', () => {
         value: Object,
       },
       setup (props) {
+        // @ts-expect-error missing emit
         const item = useGroupItem(props, Symbol.for('test'))
         return () => h('div', {
           class: {
@@ -27,6 +28,7 @@ describe('group', () => {
         modelValue: Object,
       },
       setup (props) {
+        // @ts-expect-error missing emit
         useGroup(props, Symbol.for('test'))
         return () => h('div', [
           h(GroupItemComponent, { value: { foo: 1 } }),
@@ -67,6 +69,7 @@ describe('group', () => {
         disabled: Boolean,
       },
       setup (props) {
+        // @ts-expect-error missing emit
         const item = useGroupItem(props, Symbol.for('test'))
         return () => h('div', {
           class: {
@@ -83,6 +86,7 @@ describe('group', () => {
         disabledItems: Array,
       },
       setup (props) {
+        // @ts-expect-error missing emit
         return useGroup(props, Symbol.for('test'))
       },
       render () {
@@ -158,7 +162,7 @@ describe('group', () => {
 
       expect(wrapper.emitted()['update:modelValue']).toEqual([
         [['two']],
-        [['one', 'two']],
+        [['two', 'one']],
       ])
     })
 
@@ -247,6 +251,7 @@ describe('group', () => {
         disabled: Boolean,
       },
       setup (props) {
+        // @ts-expect-error missing emit
         const item = useGroupItem(props, Symbol.for('test'))
         return () => h('div', {
           class: {
@@ -263,6 +268,7 @@ describe('group', () => {
         disabledItems: Array,
       },
       setup (props) {
+        // @ts-expect-error missing emit
         useGroup(props, Symbol.for('test'))
         return () => h('div', [
           h(GroupItemComponent, { disabled: !!props.disabledItems?.[0] }),
@@ -278,7 +284,7 @@ describe('group', () => {
 
       await item.trigger('click')
 
-      expect(wrapper.emitted('update:modelValue')).toHaveLength(1)
+      expect(wrapper.emitted('update:modelValue')).toStrictEqual([[0]])
       expect(wrapper.html()).toMatchSnapshot()
     })
 
@@ -290,11 +296,7 @@ describe('group', () => {
       await items[1].trigger('click')
       await items[0].trigger('click')
 
-      const events = wrapper.emitted<string>('update:modelValue')
-
-      expect(events).toHaveLength(2)
-      expect(Array.isArray(events[0][0])).toBe(false)
-      expect(Array.isArray(events[1][0])).toBe(false)
+      expect(wrapper.emitted('update:modelValue')).toStrictEqual([[1], [0]])
     })
 
     it('should allow multiple selection', async () => {
@@ -310,14 +312,10 @@ describe('group', () => {
       await items[1].trigger('click')
       await items[0].trigger('click')
 
-      const events = wrapper.emitted<string[]>('update:modelValue')
-
-      expect(events).toHaveLength(2)
-      expect(Array.isArray(events[0][0])).toBe(true)
-      expect(events[0][0]).toHaveLength(1)
-      expect(Array.isArray(events[1][0])).toBe(true)
-      expect(events[1][0]).toHaveLength(2)
-      expect(events[1][0][0]).not.toEqual(events[1][0][1])
+      expect(wrapper.emitted('update:modelValue')).toStrictEqual([
+        [[1]],
+        [[1, 0]],
+      ])
     })
 
     it('should set first non-disabled item as value when forced mandatory', async () => {
@@ -351,7 +349,7 @@ describe('group', () => {
 
       await items[0].trigger('click')
 
-      expect(wrapper.emitted()['update:modelValue']).toHaveLength(1)
+      expect(wrapper.emitted('update:modelValue')).toStrictEqual([[0]])
     })
 
     it('should not allow selection bigger than max', async () => {
@@ -370,10 +368,7 @@ describe('group', () => {
       await items[0].trigger('click')
       await items[1].trigger('click')
 
-      const events = wrapper.emitted<string[]>('update:modelValue')
-
-      expect(events).toHaveLength(1)
-      expect(events[0][0]).toHaveLength(1)
+      expect(wrapper.emitted('update:modelValue')).toStrictEqual([[[0]]])
     })
   })
 })

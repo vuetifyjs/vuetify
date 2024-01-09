@@ -1,8 +1,10 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VBtn } from '../VBtn'
-import { generate, gridOn } from '@/../cypress/templates'
+
+// Utilities
 import { createRouter, createWebHistory } from 'vue-router'
+import { generate, gridOn } from '@/../cypress/templates'
 
 const anchor = {
   href: '#my-anchor',
@@ -33,7 +35,7 @@ const stories = {
       <VBtn loading>Default Content</VBtn>
     </div>
   ),
-  Icon: <VBtn icon="mdi-vuetify" color="pink"></VBtn>,
+  Icon: <VBtn icon="$vuetify" color="pink"></VBtn>,
   'Density + size': gridOn(densities, sizes, (density, size) =>
     <VBtn size={ size } density={ density }>{ size }</VBtn>
   ),
@@ -44,7 +46,7 @@ const stories = {
     <VBtn disabled color={ color } variant={ variant }>{ variant }</VBtn>
   ),
   Stacked: gridOn([undefined], variants, (_, variant) =>
-    <VBtn stacked prependIcon="mdi-vuetify" variant={ variant }>{ variant }</VBtn>
+    <VBtn stacked prependIcon="$vuetify" variant={ variant }>{ variant }</VBtn>
   ),
 }
 
@@ -54,11 +56,11 @@ describe('VBtn', () => {
     it('supports default color props', () => {
       cy.mount(() => (
         <>
-          {colors.map(color => (
+          { colors.map(color => (
             <VBtn color={ color } class="text-capitalize">
               { color } button
             </VBtn>
-          )) }
+          ))}
         </>
       ))
         .get('button')
@@ -118,10 +120,10 @@ describe('VBtn', () => {
       cy.mount(<VBtn onClick={ click }>Click me</VBtn>)
         .get('button')
         .click()
-        .get('@click')
+      cy.get('@click')
         .should('have.been.called', 1)
-        .setProps({ href: undefined, to: '#my-anchor' })
-        .get('@click')
+      cy.setProps({ href: undefined, to: '#my-anchor' })
+      cy.get('@click')
         .should('have.been.called', 2)
     })
 
@@ -186,10 +188,10 @@ describe('VBtn', () => {
       cy.mount(<VBtn href={ anchor.href }>Click me</VBtn>)
         .get('.v-btn')
         .click()
-        .get('a')
+      cy.get('a')
         .should('contain.text', 'Click me')
         .should('have.focus')
-        .hash()
+      cy.hash()
         .should('contain', anchor.hash)
     })
 
@@ -211,26 +213,48 @@ describe('VBtn', () => {
       cy.mount(<VBtn to="/about">Click me</VBtn>, { global: { plugins: [router] } })
         .get('.v-btn')
         .click()
-        .get('a')
+      cy.get('a')
         .should('contain.text', 'Click me')
         .should('have.focus')
-        .url()
+      cy.url()
         .should('contain', '/about')
     })
   })
 
-  describe.skip('value', () => {
-    // none of the "value" props are implemented yet
-    it('should stringify non string|number values', () => {
-      const objectValue = { value: { hello: 'world' } }
-      const numberValue = { value: 2 }
+  describe('value', () => {
+    it('should pass string values', () => {
+      const stringValue = 'Foobar'
 
+      cy.mount(<VBtn value={ stringValue }></VBtn>)
+        .get('button')
+        .should('have.value', stringValue)
+    })
+
+    it('should stringify object', () => {
+      const objectValue = { value: {} }
       cy.mount(<VBtn value={ objectValue }></VBtn>)
         .get('button')
-        .should('contain.text', JSON.stringify(objectValue, null, 0))
-        .mount(<VBtn value={ numberValue } />)
+        .should('have.value', JSON.stringify(objectValue, null, 0))
+    })
+
+    it('should stringify number', () => {
+      const numberValue = 15
+      cy.mount(<VBtn value={ numberValue }></VBtn>)
         .get('button')
-        .should('contain.text', numberValue.value)
+        .should('have.value', JSON.stringify(numberValue, null, 0))
+    })
+
+    it('should stringify array', () => {
+      const arrayValue = ['foo', 'bar']
+      cy.mount(<VBtn value={ arrayValue }></VBtn>)
+        .get('button')
+        .should('have.value', JSON.stringify(arrayValue, null, 0))
+    })
+
+    it('should not generate a fallback value when not provided', () => {
+      cy.mount(<VBtn></VBtn>)
+        .get('button')
+        .should('not.have.value')
     })
   })
 
@@ -240,7 +264,8 @@ describe('VBtn', () => {
       cy.mount(<VBtn tile>My button</VBtn>)
         .get('button')
         .should('contain.class', 'v-btn--tile')
-        .setProps({ tile: false })
+      cy.setProps({ tile: false })
+      cy.get('button')
         .should('not.contain.class', 'v-btn--tile')
     })
 
@@ -248,15 +273,15 @@ describe('VBtn', () => {
       cy.mount(<VBtn color="success" disabled></VBtn>)
         .get('button')
         .should('have.class', 'v-btn--disabled')
-        .setProps({ disabled: false })
-        .get('button')
+      cy.setProps({ disabled: false })
+      cy.get('button')
         .should('not.have.class', 'v-btn--disabled')
     })
 
     it('activeClass', () => {
       cy.mount(<VBtn activeClass="my-active-class">Active Class</VBtn>)
         .setProps({ activeClass: 'different-class' })
-        .get('.different-class')
+      cy.get('.different-class')
         .should('not.exist')
     })
 
@@ -264,8 +289,8 @@ describe('VBtn', () => {
       cy.mount(<VBtn variant="plain">Plain</VBtn>)
         .get('button')
         .should('have.class', 'v-btn--variant-plain')
-        .setProps({ variant: 'default' })
-        .get('button')
+      cy.setProps({ variant: 'default' })
+      cy.get('button')
         .should('not.have.class', 'v-btn--variant-plain')
     })
   })

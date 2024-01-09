@@ -3,22 +3,22 @@
     <v-text-field
       v-model="newTask"
       label="What are you working on?"
-      solo
+      variant="solo"
       @keydown.enter="create"
     >
-      <template v-slot:append>
+      <template v-slot:append-inner>
         <v-fade-transition>
-          <v-icon
-            v-if="newTask"
+          <v-btn
+            v-show="newTask"
+            icon="mdi-plus-circle"
+            variant="text"
             @click="create"
-          >
-            add_circle
-          </v-icon>
+          ></v-btn>
         </v-fade-transition>
       </template>
     </v-text-field>
 
-    <h2 class="text-h4 success--text pl-4">
+    <h2 class="text-h4 text-success ps-4">
       Tasks:&nbsp;
       <v-fade-transition leave-absolute>
         <span :key="`tasks-${tasks.length}`">
@@ -33,21 +33,21 @@
       class="my-1"
       align="center"
     >
-      <strong class="mx-4 info--text text--darken-2">
+      <strong class="mx-4 text-info-darken-2">
         Remaining: {{ remainingTasks }}
       </strong>
 
       <v-divider vertical></v-divider>
 
-      <strong class="mx-4 success--text text--darken-2">
+      <strong class="mx-4 text-success-darken-2">
         Completed: {{ completedTasks }}
       </strong>
 
       <v-spacer></v-spacer>
 
       <v-progress-circular
-        :value="progress"
-        class="mr-2"
+        v-model="progress"
+        class="me-2"
       ></v-progress-circular>
     </v-row>
 
@@ -65,38 +65,61 @@
             :key="`${i}-divider`"
           ></v-divider>
 
-          <v-list-item>
-            <v-list-item-action>
-              <v-checkbox
-                v-model="task.done"
-                :color="task.done && 'grey' || 'primary'"
-              >
-                <template v-slot:label>
-                  <div
-                    :class="task.done && 'grey--text' || 'primary--text'"
-                    class="ml-4"
-                    v-text="task.text"
-                  ></div>
-                </template>
-              </v-checkbox>
-            </v-list-item-action>
+          <v-list-item @click="task.done = !task.done">
+            <template v-slot:prepend>
+              <v-checkbox-btn v-model="task.done" color="grey"></v-checkbox-btn>
+            </template>
 
-            <v-spacer></v-spacer>
+            <v-list-item-title>
+              <span :class="task.done ? 'text-grey' : 'text-primary'">{{ task.text }}</span>
+            </v-list-item-title>
 
-            <v-scroll-x-transition>
-              <v-icon
-                v-if="task.done"
-                color="success"
-              >
-                mdi-check
-              </v-icon>
-            </v-scroll-x-transition>
+            <template v-slot:append>
+              <v-expand-x-transition>
+                <v-icon v-if="task.done" color="success">
+                  mdi-check
+                </v-icon>
+              </v-expand-x-transition>
+            </template>
           </v-list-item>
         </template>
       </v-slide-y-transition>
     </v-card>
   </v-container>
 </template>
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const tasks = ref([
+    {
+      done: false,
+      text: 'Foobar',
+    },
+    {
+      done: false,
+      text: 'Fizzbuzz',
+    },
+  ])
+  const newTask = ref(null)
+
+  const completedTasks = computed(() => {
+    return tasks.value.filter(task => task.done).length
+  })
+  const progress = computed(() => {
+    return completedTasks.value / tasks.value.length * 100
+  })
+  const remainingTasks = computed(() => {
+    return tasks.value.length - completedTasks.value
+  })
+
+  function create () {
+    tasks.value.push({
+      done: false,
+      text: newTask.value,
+    })
+    newTask.value = null
+  }
+</script>
 
 <script>
   export default {

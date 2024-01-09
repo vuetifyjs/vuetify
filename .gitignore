@@ -1,6 +1,8 @@
 .DS_Store
 node_modules/
 .env
+.knit
+knit.lock
 
 # IDE user config
 .vscode/

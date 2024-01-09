@@ -12,11 +12,11 @@
         <v-select
           v-model="paddingDirection"
           :items="directions"
-          class="pr-2"
+          class="pe-2"
           label="Padding"
         >
           <template v-slot:prepend>
-            <strong class="primary--text py-1">p</strong>
+            <strong class="text-primary py-1">p</strong>
           </template>
 
           <template v-slot:append-outer>
@@ -41,11 +41,11 @@
         <v-select
           v-model="marginDirection"
           :items="directions"
-          class="pr-2"
+          class="pe-2"
           label="Margin"
         >
           <template v-slot:prepend>
-            <strong class="primary--text py-1">m</strong>
+            <strong class="text-primary py-1">m</strong>
           </template>
 
           <template v-slot:append-outer>
@@ -63,7 +63,7 @@
       </v-col>
 
       <v-col
-        class="orange lighten-3 pa-0"
+        class="bg-orange-lighten-3 pa-0"
         cols="12"
       >
         <v-sheet
@@ -73,10 +73,10 @@
         >
           <div
             :class="[computedPadding]"
-            class="light-green lighten-3"
+            class="bg-light-green-lighten-3"
           >
             <div
-              class="white text-center py-6"
+              class="bg-white text-center py-6"
               v-text="playgroundText"
             ></div>
           </div>

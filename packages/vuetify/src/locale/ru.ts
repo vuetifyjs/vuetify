@@ -1,6 +1,11 @@
 export default {
-  badge: 'знак',
+  badge: 'Знак',
+  open: 'Открыть',
   close: 'Закрыть',
+  confirmEdit: {
+    ok: 'ОК',
+    cancel: 'Отмена',
+  },
   dataIterator: {
     noResultsText: 'Не найдено подходящих записей',
     loadingText: 'Запись загружается...',
@@ -26,12 +31,20 @@ export default {
     lastPage: 'Последняя страница',
     pageText: '{0}-{1} из {2}',
   },
+  dateRangeInput: {
+    divider: 'до',
+  },
   datePicker: {
-    itemsSelected: '{0} выбран',
-    nextMonthAriaLabel: 'Следующий месяц',
-    nextYearAriaLabel: 'Следующий год',
-    prevMonthAriaLabel: 'Прошлый месяц',
-    prevYearAriaLabel: 'Предыдущий год',
+    itemsSelected: '{0} выбрано',
+    range: {
+      title: 'Выбранные даты',
+      header: 'Ввод дат',
+    },
+    title: 'Выбор даты',
+    header: 'Ввод даты',
+    input: {
+      placeholder: 'Введите дату',
+    },
   },
   noDataText: 'Отсутствуют данные',
   carousel: {
@@ -43,6 +56,13 @@ export default {
   },
   calendar: {
     moreEvents: 'Еще {0}',
+    today: 'Today',
+  },
+  input: {
+    clear: 'Очистить {0}',
+    prependAction: '{0} предварительных действий',
+    appendAction: '{0} добавочных действий',
+    otp: 'Пожалуйста введите символы OTP {0}',
   },
   fileInput: {
     counter: 'Файлов: {0}',
@@ -59,13 +79,22 @@ export default {
       previous: 'Предыдущая страница',
       page: 'Перейти на страницу {0}',
       currentPage: 'Текущая страница, Страница {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Первая страница',
+      last: 'Последняя страница',
     },
+  },
+  stepper: {
+    next: 'Следующий',
+    prev: 'Предыдущий',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Рейтинг {0} из {1}',
     },
+  },
+  loading: 'Загрузка...',
+  infiniteScroll: {
+    loadMore: 'Загрузить ещё',
+    empty: 'Больше нечего загружать',
   },
 }

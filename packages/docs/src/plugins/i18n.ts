@@ -1,19 +1,30 @@
+// Imports
+import { watch } from 'vue'
 import { createI18n } from 'vue-i18n'
-import type { I18nPlugin } from '@/types'
+import { useLocaleStore } from '@/store/locale'
+
+// Types
+import type { App } from 'vue'
 
 const messages = Object.fromEntries(
   Object.entries(
-    import.meta.globEager('../i18n/messages/*.json'))
+    import.meta.glob('../i18n/messages/*.json', { eager: true }))
     .map(([key, value]) => {
-      return [key.slice(key.lastIndexOf('/') + 1, -5), value.default]
+      return [key.slice(key.lastIndexOf('/') + 1, -5), (value as any).default]
     }),
 )
 
-export const useI18n: I18nPlugin = ({ app }) => {
+export function installI18n (app: App) {
+  const localeStore = useLocaleStore()
+
   const i18n = createI18n({
     legacy: false,
-    locale: 'en',
+    locale: localeStore.locale,
     messages,
+  })
+
+  watch(() => localeStore.locale, locale => {
+    i18n.global.locale.value = locale
   })
 
   app.use(i18n)

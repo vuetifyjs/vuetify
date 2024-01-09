@@ -1,25 +1,49 @@
 <template>
-  <v-container
-    class="px-0"
-    fluid
+  <usage-example
+    v-model="model"
+    :code="code"
+    :options="options"
+    :name="name"
   >
-    <v-radio-group v-model="radioGroup">
-      <v-radio
-        v-for="n in 3"
-        :key="n"
-        :label="`Radio ${n}`"
-        :value="n"
-      ></v-radio>
-    </v-radio-group>
-  </v-container>
+    <div>
+      <v-radio-group v-bind="props" hide-details>
+        <v-radio label="Radio One" value="one"></v-radio>
+        <v-radio label="Radio Two" value="two"></v-radio>
+        <v-radio label="Radio Three" value="three"></v-radio>
+      </v-radio-group>
+    </div>
+
+    <template v-slot:configuration>
+      <v-checkbox v-model="label" label="Radio group label"></v-checkbox>
+    </template>
+  </usage-example>
 </template>
 
-<script>
-  export default {
-    data () {
-      return {
-        radioGroup: 1,
-      }
-    },
-  }
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
+
+  const name = 'v-radio-group'
+  const model = ref('default')
+  const options = ['inline']
+  const label = ref(false)
+  const props = computed(() => {
+    return {
+      inline: model.value === 'inline' || undefined,
+      label: label.value ? 'Radio group label' : undefined,
+    }
+  })
+
+  const slots = computed(() => {
+    return `
+  <v-radio label="Radio One" value="one"></v-radio>
+  <v-radio label="Radio Two" value="two"></v-radio>
+  <v-radio label="Radio Three" value="three"></v-radio>
+`
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>

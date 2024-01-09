@@ -1,9 +1,9 @@
 @use 'sass:map'
+@use 'sass:math'
 @use 'sass:selector'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
-@use '../VInput/variables' as *
 
 /* region INPUT */
 .v-field
@@ -27,47 +27,46 @@
   --v-field-padding-end: #{$field-control-padding-end}
   --v-field-padding-top: #{$field-control-padding-top}
   --v-field-padding-bottom: #{$field-control-padding-bottom}
+  --v-field-input-padding-top: #{$field-input-padding-top}
+  --v-field-input-padding-bottom: #{$field-input-padding-bottom}
+
+  .v-chip
+    --v-chip-height: #{$field-chip-height}
 
 /* endregion */
 /* region MODIFIERS */
 .v-field
-  $root: &
-
   &--prepended
     padding-inline-start: $field-control-affixed-padding
-    --v-field-padding-start: #{$field-control-affixed-inner-padding}
-    --v-field-padding-end: #{$field-control-affixed-inner-padding}
 
   &--appended
     padding-inline-end: $field-control-affixed-padding
 
-  &--variant-solo
+  &--variant-solo,
+  &--variant-solo-filled
     background: $field-control-solo-background
     border-color: transparent
     color: $field-control-solo-color
 
     @include tools.elevation($field-control-solo-elevation)
 
+  &--variant-solo-inverted
+    background: $field-control-solo-background
+    border-color: transparent
+    color: $field-control-solo-inverted-color
+
+    @include tools.elevation($field-control-solo-elevation)
+
+    &.v-field--focused
+      color: $field-control-solo-inverted-focused-color
+
   &--variant-filled
     border-bottom-left-radius: 0
     border-bottom-right-radius: 0
 
-  &--variant-plain,
-  &--variant-underlined
-    border-radius: 0
-    padding: 0
-    --v-field-padding-start: 0
-    --v-field-padding-end: 0
-    --v-field-padding-top: 0
-
-    &.v-field--single-line
-      --v-field-padding-top: 0
-
-  &--variant-outlined,
-  &--single-line
-    --v-field-padding-top: 0
-
   &--variant-solo,
+  &--variant-solo-inverted,
+  &--variant-solo-filled,
   &--variant-filled
     $root: &
 
@@ -75,33 +74,84 @@
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
           --v-input-control-height: #{$field-control-height + $modifier}
-          --v-field-padding-bottom: #{$field-control-padding-bottom + $modifier * .5}
+          --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)}
 
-  &--variant-underlined
+  &--variant-outlined,
+  &--single-line,
+  &--no-label
+    --v-field-padding-top: 0px
     $root: &
 
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
+          --v-field-padding-bottom: #{16px + $modifier * .5}
+
+  &--variant-plain,
+  &--variant-underlined
+    $root: &
+    border-radius: 0
+    padding: 0
+
+    &.v-field
+      --v-field-padding-start: 0px
+      --v-field-padding-end: 0px
+
+    @at-root
+      @include tools.density('v-input', $input-density) using ($modifier)
+        @at-root #{selector.nest(&, $root)}
           --v-input-control-height: #{$field-control-underlined-height + $modifier}
-          --v-field-padding-bottom: #{$field-control-padding-bottom + $modifier * .25}
+          --v-field-padding-top: #{math.max(0px, 4px + $modifier * .25)}
+          --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)}
+
+  &--flat
+    box-shadow: none
+
+  &--rounded
+    @include tools.rounded($field-rounded-border-radius)
+
+  // These are separate so they can override the default variant styles
+  &.v-field
+    &--prepended
+      --v-field-padding-start: #{$field-control-affixed-inner-padding}
+
+    &--appended
+      --v-field-padding-end: #{$field-control-affixed-inner-padding}
 
 /* endregion */
 /* region ELEMENTS */
 .v-field__input
-  align-self: stretch
+  align-items: center
   color: inherit
+  column-gap: $field-input-column-gap
   display: flex
   flex-wrap: wrap
   letter-spacing: $field-letter-spacing
   opacity: $field-input-opacity
-  padding-inline-start: var(--v-field-padding-start)
-  padding-inline-end: var(--v-field-padding-end)
-  padding-top: var(--v-field-padding-top, $field-control-padding-top)
+  min-height: $field-input-min-height
+  min-width: 0
+  padding-inline: var(--v-field-padding-start) var(--v-field-padding-end)
+  padding-top: var(--v-field-input-padding-top)
+  padding-bottom: var(--v-field-input-padding-bottom)
+  position: relative
   width: 100%
+
+  $root: &
+
+  @at-root
+    @include tools.density('v-input', $input-density) using ($modifier)
+      @at-root #{selector.nest(&, $root)}
+        row-gap: #{$field-input-row-gap + $modifier * .25}
 
   input
     letter-spacing: inherit
+
+  @at-root
+    & input::placeholder,
+    input#{&}::placeholder,
+    textarea#{&}::placeholder
+      color: currentColor
+      opacity: var(--v-disabled-opacity)
 
   &:focus,
   &:active
@@ -113,10 +163,10 @@
 
 .v-field__field
   flex: 1 0
-  min-height: var(--v-input-control-height, $input-control-height)
   grid-area: field
-  padding-bottom: var(--v-field-padding-bottom, $field-control-padding-bottom)
   position: relative
+  align-items: flex-start
+  display: flex
 
 /* endregion */
 /* region AFFIXES */
@@ -131,13 +181,25 @@
   grid-area: append-inner
   padding-inline-start: var(--v-field-padding-after)
 
-.v-field__field,
-.v-field__prepend-inner,
 .v-field__append-inner,
-.v-field__clearable
-  align-items: flex-start
+.v-field__clearable,
+.v-field__prepend-inner
   display: flex
+  align-items: flex-start
   padding-top: var(--v-input-padding-top, $field-control-padding-top)
+
+  .v-field--center-affix &
+    align-items: center
+    padding-top: 0
+
+.v-field.v-field--variant-underlined,
+.v-field.v-field--variant-plain
+  .v-field__append-inner,
+  .v-field__clearable,
+  .v-field__prepend-inner
+    align-items: flex-start
+    padding-top: $field-input-padding-top
+    padding-bottom: $field-input-padding-bottom
 
 .v-field__prepend-inner,
 .v-field__append-inner
@@ -162,8 +224,8 @@
 .v-field__clearable
   cursor: pointer
   opacity: 0
-  margin-inline-start: $field-clearable-margin
-  margin-inline-end: $field-clearable-margin
+  overflow: hidden
+  margin-inline: $field-clearable-margin
   transition: $field-transition-timing
   transition-property: opacity, transform, width
 
@@ -174,24 +236,37 @@
   @media (hover: hover)
     .v-field:hover &
       opacity: 1
+  
+  @media (hover: none)
+    opacity: 1
 
 /* endregion */
 /* region LABEL */
 .v-label.v-field-label
   contain: layout paint
+  display: block
   margin-inline-start: var(--v-field-padding-start)
   margin-inline-end: var(--v-field-padding-end)
   max-width: calc(100% - var(--v-field-padding-start) - var(--v-field-padding-end))
   pointer-events: none
   position: absolute
+  top: var(--v-input-padding-top)
   transform-origin: left center
   transition: $field-transition-timing
   transition-property: opacity, transform
+  z-index: 1
+
+  .v-field--variant-underlined &,
+  .v-field--variant-plain &
+    top: calc(var(--v-input-padding-top) + var(--v-field-padding-top))
+
+  .v-field--center-affix &
+    top: 50%
+    transform: translateY(-50%)
 
   .v-field--active &
     visibility: hidden
 
-  .v-field--disabled &,
   .v-field--focused &,
   .v-field--error &
     opacity: 1
@@ -205,11 +280,16 @@
     visibility: hidden
     max-width: 100%
 
+    .v-field--center-affix &
+      transform: none
+
     .v-field.v-field--active &
-      visibility: visible
+      visibility: unset
 
     .v-field--variant-solo &,
-    .v-field--variant-filled &
+    .v-field--variant-solo-inverted &,
+    .v-field--variant-filled &,
+    .v-field--variant-solo-filled &
       $root: &
 
       @at-root
@@ -219,8 +299,9 @@
 
     .v-field--variant-plain &,
     .v-field--variant-underlined &
-      transform: translateY(-6px)
+      transform: translateY(-16px)
       margin: 0
+      top: var(--v-input-padding-top)
 
     .v-field--variant-outlined &
       transform: translateY(-50%)
@@ -260,6 +341,7 @@
   .v-field--variant-filled &,
   .v-field--variant-underlined &
     &::before
+      border-color: currentColor
       border-style: solid
       border-width: 0 0 var(--v-field-border-width)
       opacity: var(--v-field-border-opacity)
@@ -295,17 +377,21 @@
       border-top-width: var(--v-field-border-width)
       border-bottom-width: var(--v-field-border-width)
       border-inline-start-width: var(--v-field-border-width)
+      border-start-start-radius: inherit
+      border-start-end-radius: 0
+      border-end-end-radius: 0
+      border-end-start-radius: inherit
 
-      @include tools.ltr()
-        border-radius: $field-border-radius 0 0 $field-border-radius
-
-      @include tools.rtl()
-        border-radius: 0 $field-border-radius $field-border-radius 0
+      @at-root
+        #{selector.append('.v-field--rounded', &)},
+        #{selector.append('[class^="rounded-"]', &)},
+        #{selector.append('[class*=" rounded-"]', &)}
+          flex-basis: calc(var(--v-input-control-height) / 2 + 2px)
 
     &__notch
       flex: none
       position: relative
-      border-width: 0 0 var(--v-field-border-width)
+      max-width: calc(100% - $field-control-affixed-padding)
 
       &::before,
       &::after
@@ -330,51 +416,88 @@
       border-top-width: var(--v-field-border-width)
       border-bottom-width: var(--v-field-border-width)
       border-inline-end-width: var(--v-field-border-width)
+      border-start-start-radius: 0
+      border-start-end-radius: inherit
+      border-end-end-radius: inherit
+      border-end-start-radius: 0
 
-      @include tools.ltr()
-        border-radius: 0 $field-border-radius $field-border-radius 0
-
-      @include tools.rtl()
-        border-radius: $field-border-radius 0 0 $field-border-radius
 /* endregion */
 /* region LOADER */
 .v-field__loader
-  bottom: 0
+  top: calc(100% - 2px)
   left: 0
   position: absolute
   right: 0
   width: 100%
+  border-top-left-radius: 0
+  border-top-right-radius: 0
+  border-bottom-left-radius: inherit
+  border-bottom-right-radius: inherit
+  overflow: hidden
+
+  .v-field--variant-outlined &
+    top: calc(100% - 3px)
 
 /* endregion */
 /* region OVERLAY */
+.v-field__overlay
+  border-radius: inherit
+  pointer-events: none
+
+  @include tools.absolute()
+
 .v-field--variant-filled
   .v-field__overlay
     background-color: currentColor
-    border-radius: inherit
     opacity: $field-overlay-filled-opacity
-    pointer-events: none
     transition: opacity $field-subtle-transition-timing
-    @include tools.absolute()
 
   &.v-field--has-background .v-field__overlay
     opacity: 0
 
   @media (hover: hover)
     &:hover .v-field__overlay
-      opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
+      opacity: calc((#{$field-overlay-filled-opacity} + #{map.get(settings.$states, 'hover')}) * var(--v-theme-overlay-multiplier))
 
   &.v-field--focused .v-field__overlay
-    opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
+    opacity: calc((#{$field-overlay-filled-opacity} + #{map.get(settings.$states, 'focus')}) * var(--v-theme-overlay-multiplier))
+
+.v-field--variant-solo-filled
+  .v-field__overlay
+    background-color: currentColor
+    opacity: $field-overlay-filled-opacity
+    transition: opacity $field-subtle-transition-timing
+
+  @media (hover: hover)
+    &:hover .v-field__overlay
+      opacity: calc((#{$field-overlay-filled-opacity} + #{map.get(settings.$states, 'hover')}) * var(--v-theme-overlay-multiplier))
+
+  &.v-field--focused .v-field__overlay
+    opacity: calc((#{$field-overlay-filled-opacity} + #{map.get(settings.$states, 'focus')}) * var(--v-theme-overlay-multiplier))
+
+.v-field--variant-solo-inverted
+  .v-field__overlay
+    transition: opacity $field-subtle-transition-timing
+
+  &.v-field--has-background .v-field__overlay
+    opacity: 0
+
+  @media (hover: hover)
+    &:hover .v-field__overlay
+      opacity: calc((#{.04} + #{map.get(settings.$states, 'hover')}) * var(--v-theme-overlay-multiplier))
+
+  &.v-field--focused .v-field__overlay
+    background-color: $field-overlay-focused-background-color
+    opacity: 1
 
 /* endregion */
 /* region MODIFIERS */
 .v-field--reverse
-  .v-field__input
-    @include tools.ltr()
-      text-align: right
+  .v-field__field, .v-field__input
+    flex-direction: row-reverse
 
-    @include tools.rtl()
-      text-align: left
+  .v-field__input, input
+    text-align: end
 
 .v-field--variant-filled,
 .v-field--variant-underlined

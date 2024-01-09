@@ -15,7 +15,7 @@
       style="margin-top: -64px;"
     >
       <v-toolbar flat>
-        <v-toolbar-title class="grey--text">
+        <v-toolbar-title class="text-grey">
           Title
         </v-toolbar-title>
 

@@ -1,8 +1,21 @@
 // Utilities
-import { camelize, Fragment } from 'vue'
+import { camelize, capitalize, Comment, computed, Fragment, isVNode, reactive, toRefs, unref, watchEffect } from 'vue'
+import { IN_BROWSER } from '@/util/globals'
 
 // Types
-import type { ComponentInternalInstance, ComponentPublicInstance, InjectionKey, Ref, Slots, VNode, VNodeChild } from 'vue'
+import type {
+  ComponentInternalInstance,
+  ComponentPublicInstance,
+  ComputedGetter,
+  InjectionKey,
+  PropType,
+  Ref,
+  Slots,
+  ToRefs,
+  VNode,
+  VNodeArrayChildren,
+  VNodeChild,
+} from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
@@ -48,7 +61,7 @@ export function deepEqual (a: any, b: any): boolean {
   return props.every(p => deepEqual(a[p], b[p]))
 }
 
-export function getObjectValueByPath (obj: any, path: string, fallback?: any): any {
+export function getObjectValueByPath (obj: any, path?: string | null, fallback?: any): any {
   // credit: http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key#comment55278413_6491621
   if (obj == null || !path || typeof path !== 'string') return fallback
   if (obj[path] !== undefined) return obj[path]
@@ -57,16 +70,28 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
-export type SelectItemKey = boolean | string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any)
+export type SelectItemKey<T = Record<string, any>> =
+  | boolean | null | undefined // Ignored
+  | string // Lookup by key, can use dot notation for nested objects
+  | readonly (string | number)[] // Nested lookup by key, each array item is a key in the next level
+  | ((item: T, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: any,
   property: SelectItemKey,
   fallback?: any
 ): any {
-  if (property == null) return item === undefined ? fallback : item
+  if (property === true) return item === undefined ? fallback : item
 
-  if (item !== Object(item)) return fallback
+  if (property == null || typeof property === 'boolean') return fallback
+
+  if (item !== Object(item)) {
+    if (typeof property !== 'function') return fallback
+
+    const value = property(item, fallback)
+
+    return typeof value === 'undefined' ? fallback : value
+  }
 
   if (typeof property === 'string') return getObjectValueByPath(item, property, fallback)
 
@@ -92,29 +117,6 @@ export function getZIndex (el?: Element | null): number {
   return index
 }
 
-const tagsToReplace: Record<string, string> = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-}
-
-export function escapeHTML (str: string): string {
-  return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
-}
-
-export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { [N in K]: T[N] } {
-  const filtered = {} as { [N in K]: T[N] }
-
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i]
-    if (typeof obj[key] !== 'undefined') {
-      filtered[key] = obj[key]
-    }
-  }
-
-  return filtered
-}
-
 export function convertToUnit (str: number, unit?: string): string
 export function convertToUnit (str: string | number | null | undefined, unit?: string): string | undefined
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
@@ -133,8 +135,16 @@ export function isObject (obj: any): obj is object {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
 }
 
-export function isComponentInstance (obj: any): obj is ComponentPublicInstance {
-  return obj?.$el
+export function refElement (obj?: ComponentPublicInstance<any> | HTMLElement): HTMLElement | undefined {
+  if (obj && '$el' in obj) {
+    const el = obj.$el as HTMLElement
+    if (el?.nodeType === Node.TEXT_NODE) {
+      // Multi-root component, use the first element
+      return el.nextElementSibling as HTMLElement
+    }
+    return el
+  }
+  return obj as HTMLElement
 }
 
 // KeyboardEvent.keyCode aliases
@@ -158,7 +168,7 @@ export const keyCodes = Object.freeze({
   shift: 16,
 })
 
-export const keyValues = Object.freeze({
+export const keyValues: Record<string, string> = Object.freeze({
   enter: 'Enter',
   tab: 'Tab',
   delete: 'Delete',
@@ -178,8 +188,12 @@ export const keyValues = Object.freeze({
   shift: 'Shift',
 })
 
-export function keys<O> (o: O) {
+export function keys<O extends {}> (o: O) {
   return Object.keys(o) as (keyof O)[]
+}
+
+export function has<T extends string> (obj: object, key: T[]): obj is Record<T, unknown> {
+  return key.every(k => obj.hasOwnProperty(k))
 }
 
 type MaybePick<
@@ -187,18 +201,40 @@ type MaybePick<
   U extends Extract<keyof T, string>
 > = Record<string, unknown> extends T ? Partial<Pick<T, U>> : Pick<T, U>
 
+// Array of keys
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
-> (obj: T, paths: U[]): [yes: MaybePick<T, U>, no: Omit<T, U>]
-export function pick<
+> (obj: T, paths: U[]): MaybePick<T, U> {
+  const found: any = {}
+
+  const keys = new Set(Object.keys(obj))
+  for (const path of paths) {
+    if (keys.has(path)) {
+      found[path] = obj[path]
+    }
+  }
+
+  return found
+}
+
+// Array of keys
+export function pickWithRest<
   T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>]
-export function pick<
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: U[], exclude?: E[]): [yes: MaybePick<T, Exclude<U, E>>, no: Omit<T, Exclude<U, E>>]
+// Array of keys or RegExp to test keys against
+export function pickWithRest<
   T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>] {
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[], exclude?: E[]): [yes: Partial<T>, no: Partial<T>]
+export function pickWithRest<
+  T extends object,
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[], exclude?: E[]): [yes: Partial<T>, no: Partial<T>] {
   const found = Object.create(null)
   const rest = Object.create(null)
 
@@ -207,7 +243,7 @@ export function pick<
       paths.some(path => path instanceof RegExp
         ? path.test(key)
         : path === key
-      )
+      ) && !exclude?.some(path => path === key)
     ) {
       found[key] = obj[key]
     } else {
@@ -218,13 +254,118 @@ export function pick<
   return [found, rest]
 }
 
+export function omit<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, exclude: U[]): Omit<T, U> {
+  const clone = { ...obj }
+
+  exclude.forEach(prop => delete clone[prop])
+
+  return clone
+}
+
+export function only<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, include: U[]): Pick<T, U> {
+  const clone = {} as T
+
+  include.forEach(prop => clone[prop] = obj[prop])
+
+  return clone
+}
+
+const onRE = /^on[^a-z]/
+export const isOn = (key: string) => onRE.test(key)
+
+const bubblingEvents = [
+  'onAfterscriptexecute',
+  'onAnimationcancel',
+  'onAnimationend',
+  'onAnimationiteration',
+  'onAnimationstart',
+  'onAuxclick',
+  'onBeforeinput',
+  'onBeforescriptexecute',
+  'onChange',
+  'onClick',
+  'onCompositionend',
+  'onCompositionstart',
+  'onCompositionupdate',
+  'onContextmenu',
+  'onCopy',
+  'onCut',
+  'onDblclick',
+  'onFocusin',
+  'onFocusout',
+  'onFullscreenchange',
+  'onFullscreenerror',
+  'onGesturechange',
+  'onGestureend',
+  'onGesturestart',
+  'onGotpointercapture',
+  'onInput',
+  'onKeydown',
+  'onKeypress',
+  'onKeyup',
+  'onLostpointercapture',
+  'onMousedown',
+  'onMousemove',
+  'onMouseout',
+  'onMouseover',
+  'onMouseup',
+  'onMousewheel',
+  'onPaste',
+  'onPointercancel',
+  'onPointerdown',
+  'onPointerenter',
+  'onPointerleave',
+  'onPointermove',
+  'onPointerout',
+  'onPointerover',
+  'onPointerup',
+  'onReset',
+  'onSelect',
+  'onSubmit',
+  'onTouchcancel',
+  'onTouchend',
+  'onTouchmove',
+  'onTouchstart',
+  'onTransitioncancel',
+  'onTransitionend',
+  'onTransitionrun',
+  'onTransitionstart',
+  'onWheel',
+]
+
+const compositionIgnoreKeys = [
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowRight',
+  'ArrowLeft',
+  'Enter',
+  'Escape',
+  'Tab',
+  ' ',
+]
+
+export function isComposingIgnoreKey (e: KeyboardEvent): boolean {
+  return e.isComposing && compositionIgnoreKeys.includes(e.key)
+}
+
 /**
  * Filter attributes that should be applied to
- * the root element of a an input component. Remaining
+ * the root element of an input component. Remaining
  * attributes should be passed to the <input> element inside.
  */
 export function filterInputAttrs (attrs: Record<string, unknown>) {
-  return pick(attrs, ['class', 'style', 'id', /^data-/])
+  const [events, props] = pickWithRest(attrs, [onRE])
+  const inputEvents = omit(events, bubblingEvents)
+  const [rootAttrs, inputAttrs] = pickWithRest(props, ['class', 'style', 'id', /^data-/])
+  Object.assign(rootAttrs, events)
+  Object.assign(inputAttrs, inputEvents)
+  return [rootAttrs, inputAttrs]
 }
 
 /**
@@ -238,91 +379,16 @@ export function arrayDiff (a: any[], b: any[]): any[] {
   return diff
 }
 
-interface ItemGroup<T> {
-  name: string
-  items: T[]
-}
-
-export function groupItems<T extends any = any> (
-  items: T[],
-  groupBy: string[],
-  groupDesc: boolean[]
-): ItemGroup<T>[] {
-  const key = groupBy[0]
-  const groups: ItemGroup<T>[] = []
-  let current
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i]
-    const val = getObjectValueByPath(item, key, null)
-    if (current !== val) {
-      current = val
-      groups.push({
-        name: val ?? '',
-        items: [],
-      })
-    }
-    groups[groups.length - 1].items.push(item)
-  }
-  return groups
-}
-
-export function wrapInArray<T> (v: T | T[] | null | undefined): T[] {
+type IfAny<T, Y, N> = 0 extends (1 & T) ? Y : N;
+export function wrapInArray<T> (
+  v: T | null | undefined
+): T extends readonly any[]
+    ? IfAny<T, T[], T>
+    : NonNullable<T>[] {
   return v == null
     ? []
     : Array.isArray(v)
-      ? v : [v]
-}
-
-type DataTableCompareFunction<T = any> = (a: T, b: T) => number
-export function sortItems<T extends any, K extends keyof T> (
-  items: T[],
-  sortBy: string[],
-  sortDesc: boolean[],
-  locale: string,
-  customSorters?: Record<K, DataTableCompareFunction<T[K]>>
-): T[] {
-  if (sortBy === null || !sortBy.length) return items
-  const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
-
-  return items.sort((a, b) => {
-    for (let i = 0; i < sortBy.length; i++) {
-      const sortKey = sortBy[i]
-
-      let sortA = getObjectValueByPath(a, sortKey)
-      let sortB = getObjectValueByPath(b, sortKey)
-
-      if (sortDesc[i]) {
-        [sortA, sortB] = [sortB, sortA]
-      }
-
-      if (customSorters?.[sortKey as K]) {
-        const customResult = customSorters[sortKey as K](sortA, sortB)
-
-        if (!customResult) continue
-
-        return customResult
-      }
-
-      // Check if both cannot be evaluated
-      if (sortA === null && sortB === null) {
-        continue
-      }
-
-      // Dates should be compared numerically
-      if (sortA instanceof Date && sortB instanceof Date) {
-        return sortA.getTime() - sortB.getTime()
-      }
-
-      [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
-
-      if (sortA !== sortB) {
-        if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
-        return stringCollator.compare(sortA, sortB)
-      }
-    }
-
-    return 0
-  })
+      ? v as any : [v]
 }
 
 export function defaultFilter (value: any, search: string | null, item: any) {
@@ -340,12 +406,17 @@ export function searchItems<T extends any = any> (items: T[], search: string): T
   return items.filter((item: any) => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
 }
 
-export function debounce (fn: Function, delay: number) {
+export function debounce (fn: Function, delay: MaybeRef<number>) {
   let timeoutId = 0 as any
-  return (...args: any[]) => {
+  const wrap = (...args: any[]) => {
     clearTimeout(timeoutId)
-    timeoutId = setTimeout(() => fn(...args), delay)
+    timeoutId = setTimeout(() => fn(...args), unref(delay))
   }
+  wrap.clear = () => {
+    clearTimeout(timeoutId)
+  }
+  wrap.immediate = fn
+  return wrap
 }
 
 export function throttle<T extends (...args: any[]) => any> (fn: T, limit: number) {
@@ -379,8 +450,19 @@ export function clamp (value: number, min = 0, max = 1) {
   return Math.max(min, Math.min(max, value))
 }
 
+export function getDecimals (value: number) {
+  const trimmedStr = value.toString().trim()
+  return trimmedStr.includes('.')
+    ? (trimmedStr.length - trimmedStr.indexOf('.') - 1)
+    : 0
+}
+
 export function padEnd (str: string, length: number, char = '0') {
   return str + char.repeat(Math.max(0, length - str.length))
+}
+
+export function padStart (str: string, length: number, char = '0') {
+  return char.repeat(Math.max(0, length - str.length)) + str
 }
 
 export function chunk (str: string, size = 1) {
@@ -391,6 +473,12 @@ export function chunk (str: string, size = 1) {
     index += size
   }
   return chunked
+}
+
+export function chunkArray (array: any[], size = 1) {
+  return Array.from({ length: Math.ceil(array.length / size) }, (v, i) =>
+    array.slice(i * size, i * size + size)
+  )
 }
 
 export function humanReadableFileSize (bytes: number, base: 1000 | 1024 = 1000): string {
@@ -474,11 +562,15 @@ export const randomHexColor = () => {
 }
 
 export function toKebabCase (str = '') {
-  return str
+  if (toKebabCase.cache.has(str)) return toKebabCase.cache.get(str)!
+  const kebab = str
     .replace(/[^a-z]/gi, '-')
     .replace(/\B([A-Z])/g, '-$1')
     .toLowerCase()
+  toKebabCase.cache.set(str, kebab)
+  return kebab
 }
+toKebabCase.cache = new Map<string, string>()
 
 export type MaybeRef<T> = T | Ref<T>
 
@@ -552,4 +644,134 @@ export function getEventCoordinates (e: MouseEvent | TouchEvent) {
   }
 
   return { clientX: e.clientX, clientY: e.clientY }
+}
+
+// Only allow a single return type
+type NotAUnion<T> = [T] extends [infer U] ? _NotAUnion<U, U> : never
+type _NotAUnion<T, U> = U extends any ? [T] extends [U] ? unknown : never : never
+
+/**
+ * Convert a computed ref to a record of refs.
+ * The getter function must always return an object with the same keys.
+ */
+export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToRefs<T>
+export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
+  const refs = reactive({}) as T
+  const base = computed(getter)
+  watchEffect(() => {
+    for (const key in base.value) {
+      refs[key] = base.value[key]
+    }
+  }, { flush: 'sync' })
+  return toRefs(refs)
+}
+
+/** Array.includes but value can be any type */
+export function includes (arr: readonly any[], val: any) {
+  return arr.includes(val)
+}
+
+export function eventName (propName: string) {
+  return propName[2].toLowerCase() + propName.slice(3)
+}
+
+export type EventProp<T extends any[] = any[], F = (...args: T) => void> = F
+export const EventProp = <T extends any[] = any[]>() => [Function, Array] as PropType<EventProp<T>>
+
+export function hasEvent (props: Record<string, any>, name: string) {
+  name = 'on' + capitalize(name)
+  return !!(props[name] || props[`${name}Once`] || props[`${name}Capture`] || props[`${name}OnceCapture`] || props[`${name}CaptureOnce`])
+}
+
+export function callEvent<T extends any[]> (handler: EventProp<T> | undefined, ...args: T) {
+  if (Array.isArray(handler)) {
+    for (const h of handler) {
+      h(...args)
+    }
+  } else if (typeof handler === 'function') {
+    handler(...args)
+  }
+}
+
+export function focusableChildren (el: Element, filterByTabIndex = true) {
+  const targets = ['button', '[href]', 'input:not([type="hidden"])', 'select', 'textarea', '[tabindex]']
+    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled])`)
+    .join(', ')
+  return [...el.querySelectorAll(targets)] as HTMLElement[]
+}
+
+export function getNextElement (elements: HTMLElement[], location?: 'next' | 'prev', condition?: (el: HTMLElement) => boolean) {
+  let _el
+  let idx = elements.indexOf(document.activeElement as HTMLElement)
+  const inc = location === 'next' ? 1 : -1
+  do {
+    idx += inc
+    _el = elements[idx]
+  } while ((!_el || _el.offsetParent == null || !(condition?.(_el) ?? true)) && idx < elements.length && idx >= 0)
+  return _el
+}
+
+export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last' | number) {
+  const focusable = focusableChildren(el)
+
+  if (!location) {
+    if (el === document.activeElement || !el.contains(document.activeElement)) {
+      focusable[0]?.focus()
+    }
+  } else if (location === 'first') {
+    focusable[0]?.focus()
+  } else if (location === 'last') {
+    focusable.at(-1)?.focus()
+  } else if (typeof location === 'number') {
+    focusable[location]?.focus()
+  } else {
+    const _el = getNextElement(focusable, location)
+    if (_el) _el.focus()
+    else focusChild(el, location === 'next' ? 'first' : 'last')
+  }
+}
+
+export function isEmpty (val: any): boolean {
+  return val === null || val === undefined || (typeof val === 'string' && val.trim() === '')
+}
+
+export function noop () {}
+
+/** Returns null if the selector is not supported or we can't check */
+export function matchesSelector (el: Element | undefined, selector: string): boolean | null {
+  const supportsSelector = IN_BROWSER &&
+    typeof CSS !== 'undefined' &&
+    typeof CSS.supports !== 'undefined' &&
+    CSS.supports(`selector(${selector})`)
+
+  if (!supportsSelector) return null
+
+  try {
+    return !!el && el.matches(selector)
+  } catch (err) {
+    return null
+  }
+}
+
+export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildren | null {
+  return vnodes.some(child => {
+    if (!isVNode(child)) return true
+    if (child.type === Comment) return false
+    return child.type !== Fragment ||
+      ensureValidVNode(child.children as VNodeArrayChildren)
+  })
+    ? vnodes
+    : null
+}
+
+export function defer (timeout: number, cb: () => void) {
+  if (!IN_BROWSER || timeout === 0) {
+    cb()
+
+    return () => {}
+  }
+
+  const timeoutId = window.setTimeout(cb, timeout)
+
+  return () => window.clearTimeout(timeoutId)
 }

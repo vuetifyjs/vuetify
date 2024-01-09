@@ -2,6 +2,7 @@
 import { useBackgroundColor, useColor, useTextColor } from '../color'
 
 // Utilities
+import { describe, expect, it } from '@jest/globals'
 import { reactive, toRef } from 'vue'
 
 describe('color.ts', () => {
@@ -18,7 +19,7 @@ describe('color.ts', () => {
       [{ bg: null }, [[], {}]],
       [{ bg: '' }, [[], {}]],
       [{ bg: 'primary' }, [['bg-primary'], {}]],
-      [{ bg: '#FF00FF' }, [[], { backgroundColor: '#FF00FF' }]],
+      [{ bg: '#FF00FF' }, [[], { backgroundColor: '#FF00FF', color: '#fff', caretColor: '#fff' }]],
       // [{ bg: '#FF00FF' }, [[], { backgroundColor: '#FF00FF' }]],
     ])('should return correct color classes and styles', (value, [classes, styles]) => {
       const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(value as any, 'bg')
@@ -33,7 +34,7 @@ describe('color.ts', () => {
       [{ background: null }, [[], {}]],
       [{ background: '' }, [[], {}]],
       [{ background: 'primary' }, [['bg-primary'], {}]],
-      [{ background: '#FF00FF' }, [[], { backgroundColor: '#FF00FF' }]],
+      [{ background: '#FF00FF' }, [[], { backgroundColor: '#FF00FF', color: '#fff', caretColor: '#fff' }]],
       [{ text: null }, [[], {}]],
       [{ text: '' }, [[], {}]],
       [{ text: 'primary' }, [['text-primary'], {}]],

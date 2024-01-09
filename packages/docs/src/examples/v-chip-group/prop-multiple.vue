@@ -1,17 +1,13 @@
 <template>
   <v-row justify="space-around">
-    <v-col
-      cols="12"
-      sm="10"
-      md="8"
-    >
+    <v-col cols="auto">
       <v-sheet
         elevation="10"
         class="py-4 px-1"
       >
         <v-chip-group
           multiple
-          active-class="primary--text"
+          selected-class="text-primary"
         >
           <v-chip
             v-for="tag in tags"
@@ -24,6 +20,22 @@
     </v-col>
   </v-row>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const tags = ref([
+    'Work',
+    'Home Improvement',
+    'Vacation',
+    'Food',
+    'Drawers',
+    'Shopping',
+    'Art',
+    'Tech',
+    'Creative Writing',
+  ])
+</script>
 
 <script>
   export default {

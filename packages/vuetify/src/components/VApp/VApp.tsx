@@ -2,25 +2,29 @@
 import './VApp.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { createLayout, makeLayoutProps } from '@/composables/layout'
+import { useRtl } from '@/composables/locale'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useRtl } from '@/composables/rtl'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
 import { Suspense } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
-export const VApp = defineComponent({
+export const makeVAppProps = propsFactory({
+  ...makeComponentProps(),
+  ...makeLayoutProps({ fullHeight: true }),
+  ...makeThemeProps(),
+}, 'VApp')
+
+export const VApp = genericComponent()({
   name: 'VApp',
 
-  props: {
-    ...makeLayoutProps({ fullHeight: true }),
-    ...makeThemeProps(),
-  },
+  props: makeVAppProps(),
 
   setup (props, { slots }) {
     const theme = provideTheme(props)
-    const { layoutClasses, layoutStyles, getLayoutItem, items, layoutRef } = createLayout(props)
+    const { layoutClasses, getLayoutItem, items, layoutRef } = createLayout(props)
     const { rtlClasses } = useRtl()
 
     useRender(() => (
@@ -31,8 +35,11 @@ export const VApp = defineComponent({
           theme.themeClasses.value,
           layoutClasses.value,
           rtlClasses.value,
+          props.class,
         ]}
-        style={ layoutStyles.value }
+        style={[
+          props.style,
+        ]}
       >
         <div class="v-application__wrap">
           <Suspense>

@@ -7,13 +7,17 @@ $input-density: ('default': 0, 'comfortable': -2, 'compact': -4) !default;
 $input-control-height: 56px !default;
 $input-font-size: tools.map-deep-get(settings.$typography, 'body-1', 'size') !default;
 $input-font-weight: tools.map-deep-get(settings.$typography, 'body-1', 'weight') !default;
+$input-line-height: 1.5 !default;
+
+// CHIPS
+$input-chips-margin-top: null !default;
+$input-chips-margin-bottom: null !default;
 
 // DETAILS
 $input-details-font-size: .75rem !default;
 $input-details-font-weight: 400 !default;
 $input-details-letter-spacing: .0333333333em !default;
 $input-details-line-height: normal !default;
-$input-details-margin-bottom: 16px !default;
 $input-details-min-height: 22px !default;
 $input-details-padding-above: 6px !default;
 $input-details-transition: 150ms settings.$standard-easing !default;

@@ -1,12 +1,22 @@
+// Composables
+import { useDisplay } from '@/composables/display'
+
 // Utilities
-import { getCurrentInstance, IN_BROWSER } from '@/util'
-import { onMounted } from 'vue'
+import { onMounted, shallowRef } from 'vue'
+import { IN_BROWSER } from '@/util'
 
-export function useHydration (callback: () => void) {
-  if (!IN_BROWSER) return
+export function useHydration () {
+  if (!IN_BROWSER) return shallowRef(false)
 
-  const vm = getCurrentInstance('useHydration')
-  const rootEl = vm?.root?.appContext?.app?._container
+  const { ssr } = useDisplay()
 
-  return rootEl?.__vue_app__ ? callback() : onMounted(callback)
+  if (ssr) {
+    const isMounted = shallowRef(false)
+    onMounted(() => {
+      isMounted.value = true
+    })
+    return isMounted
+  } else {
+    return shallowRef(true)
+  }
 }

@@ -1,57 +1,60 @@
 <template>
-  <v-container class="fill-height">
-    <v-row
-      align="center"
-      justify="center"
+  <usage-example
+    v-model="model"
+    :code="code"
+    :name="name"
+    :options="options"
+  >
+    <v-bottom-sheet
+      v-bind="props"
     >
-      <v-bottom-sheet
-        v-model="sheet"
-        v-bind="$attrs"
-      >
-        <template v-slot:activator="{ on }">
+      <template v-slot:activator="{ props: activatorProps }">
+        <div class="pa-2 text-center">
           <v-btn
-            color="purple"
-            dark
-            v-on="on"
-          >
-            Open Playground
-          </v-btn>
-        </template>
-        <v-sheet
-          class="text-center"
-          height="200px"
-        >
-          <v-btn
-            class="my-6"
-            depressed
-            color="error"
-            @click="sheet = !sheet"
-          >
-            close
-          </v-btn>
-        </v-sheet>
-      </v-bottom-sheet>
-    </v-row>
-  </v-container>
+            v-bind="activatorProps"
+            size="x-large"
+            text="Click Me"
+          ></v-btn>
+        </div>
+      </template>
+
+      <v-card
+        title="Bottom Sheet"
+        text="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, eos? Nulla aspernatur odio rem, culpa voluptatibus eius debitis dolorem perspiciatis asperiores sed consectetur praesentium! Delectus et iure maxime eaque exercitationem!"
+      ></v-card>
+    </v-bottom-sheet>
+  </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'Usage',
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-    inheritAttrs: false,
+  const name = 'v-bottom-sheet'
+  const model = ref('default')
+  const options = ['inset']
 
-    data: () => ({
-      sheet: false,
-      defaults: {
-        'hide-overlay': false,
-        inset: false,
-        persistent: false,
-      },
-      options: {
-        booleans: ['hide-overlay', 'persistent'],
-      },
-      tabs: ['inset'],
-    }),
-  }
+  const props = computed(() => {
+    return {
+      inset: model.value === 'inset' || undefined,
+    }
+  })
+
+  const slots = computed(() => {
+    return `
+  <template v-slot:activator="{ props }">
+    <v-btn v-bind="props" text="Click Me"></v-btn>
+  </template>
+
+  <v-card
+    title="Bottom Sheet"
+    text="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, eos? Nulla aspernatur odio rem, culpa voluptatibus eius debitis dolorem perspiciatis asperiores sed consectetur praesentium! Delectus et iure maxime eaque exercitationem!"
+  ></v-card>
+`
+  })
+
+  const code = computed(() => {
+    return `<v-bottom-sheet${propsToString(props.value)}>${slots.value}</v-bottom-sheet>`
+  })
 </script>

@@ -14,23 +14,16 @@ $toolbar-border-width: 0 !default;
 $toolbar-btn-icon-size: 48px !default;
 $toolbar-collapsed-border-radius: 24px !default;
 $toolbar-collapsed-max-width: 112px !default;
-$toolbar-content-padding-x: 16px !default;
-$toolbar-content-padding-y: 4px !default;
-$toolbar-density: ( 'default': 0, 'comfortable': -1, 'compact': -2, 'prominent': -3 ) !default;
 $toolbar-elevation: 0 !default;
 $toolbar-flat-elevation: 0 !default;
-$toolbar-flex: 1 1 auto !default;
-$toolbar-padding-end: 16px !default;
-$toolbar-padding-start: 16px !default;
-$toolbar-padding: 16px !default;
-$toolbar-prepend-btn-margin-start: -12px !default;
-$toolbar-append-btn-margin-end: -12px !default;
+$toolbar-flex: none !default;
+$toolbar-prepend-btn-margin-start: 10px !default;
+$toolbar-append-btn-margin-end: 10px !default;
 $toolbar-rounded-border-radius: variables.$border-radius-root !default;
 $toolbar-transition: .2s variables.$standard-easing !default;
 
 // VToolbarTitle
-$toolbar-title-padding: 20px !default;
-$toolbar-title-extended-padding: 56px !default;
+$toolbar-title-margin: 16px !default;
 $toolbar-title-font-size: 1.25rem !default;
 $toolbar-title-font-weight: 400 !default;
 $toolbar-title-letter-spacing: 0 !default;
@@ -56,7 +49,7 @@ $toolbar-title-typography: (
   $toolbar-title-letter-spacing,
   $toolbar-title-line-height,
   $toolbar-title-text-transform
-);
+) !default;
 
 $toolbar-prominent-title-typography: (
   $toolbar-prominent-title-font-size,
@@ -64,9 +57,15 @@ $toolbar-prominent-title-typography: (
   $toolbar-prominent-title-letter-spacing,
   $toolbar-prominent-title-line-height,
   $toolbar-prominent-title-text-transform
-);
+) !default;
 
 $toolbar-theme: (
   $toolbar-background,
   $toolbar-color
 ) !default;
+
+
+// Deprecated
+$toolbar-content-padding-x: 16px !default;
+$toolbar-content-padding-y: 4px !default;
+$toolbar-title-extended-padding: 56px !default;

@@ -4,7 +4,7 @@
 import './VDatePickerTitle.sass'
 
 // Components
-import VIcon from '../VIcon'
+import VIcon from '@/components/VIcon'
 
 // Mixins
 import PickerButton from '../../mixins/picker-button'

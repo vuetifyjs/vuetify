@@ -24,7 +24,7 @@
             class="text-h2 font-weight-light"
             v-text="bpm"
           ></span>
-          <span class="subheading font-weight-light mr-1">BPM</span>
+          <span class="subheading font-weight-light me-1">BPM</span>
           <v-fade-transition>
             <v-avatar
               v-if="isPlaying"
@@ -82,11 +82,38 @@
   </v-card>
 </template>
 
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const bpm = ref(40)
+  const isPlaying = ref(false)
+
+  const color = computed(() => {
+    if (bpm.value < 100) return 'indigo'
+    if (bpm.value < 125) return 'teal'
+    if (bpm.value < 140) return 'green'
+    if (bpm.value < 175) return 'orange'
+    return 'red'
+  })
+  const animationDuration = computed(() => {
+    return `${60 / bpm.value}s`
+  })
+
+  function decrement () {
+    bpm.value--
+  }
+  function increment () {
+    bpm.value++
+  }
+  function toggle () {
+    isPlaying.value = !isPlaying.value
+  }
+</script>
+
 <script>
   export default {
     data: () => ({
       bpm: 40,
-      interval: null,
       isPlaying: false,
     }),
 

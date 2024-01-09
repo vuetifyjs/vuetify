@@ -1,6 +1,6 @@
 ---
-nav: Carousels
 meta:
+  nav: Carousels
   title: Carousel component
   description: The carousel component is used to cycle through visual content such as images or slides of text.
   keywords: carousels, vuetify carousel component, vue carousel component
@@ -8,33 +8,36 @@ related:
   - /components/parallax/
   - /components/images/
   - /components/windows/
+features:
+  github: /components/VCarousel/
+  label: 'C: VCarousel'
+  report: true
 ---
 
 # Carousels
 
 The `v-carousel` component is used to display large numbers of visual content on a rotating timer.
 
-![carousel Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-carousel/v-carousel-entry.png)
+<!-- ![carousel Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-carousel/v-carousel-entry.png) -->
 
----
+<page-features />
 
 ## Usage
 
 The `v-carousel` component expands upon `v-window` by providing additional features targeted at displaying images.
 
-<example file="v-carousel/usage" />
+<usage name="v-carousel" />
 
 <entry />
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-carousel](/api/v-carousel/) | Primary component |
+| [v-carousel-item](/api/v-carousel-item/) | Sub-component used for displaying the `v-carousel` state |
 
-<!-- ## Sub-components
-
-### v-carousel-item
-
-v-carousel-item description -->
+<api-inline hide-links />
 
 ## Examples
 
@@ -87,5 +90,3 @@ You can show a linear progress bar with the **progress** prop. It will indicate 
 You can control carousel with **v-model**.
 
 <example file="v-carousel/prop-model" />
-
-<backmatter />

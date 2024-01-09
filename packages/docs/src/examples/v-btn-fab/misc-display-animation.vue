@@ -16,11 +16,9 @@
                   v-show="!hidden"
                   color="pink"
                   fab
-                  dark
-                  small
+                  size="small"
                   absolute
-                  bottom
-                  left
+                  location="bottom left"
                 >
                   <v-icon>mdi-plus</v-icon>
                 </v-btn>
@@ -29,7 +27,7 @@
           </v-toolbar>
           <v-card-text
             style="height: 300px;"
-            class="grey lighten-5 text-center"
+            class="bg-grey-lighten-5 text-center"
           >
             <v-btn
               color="primary"
@@ -43,10 +41,8 @@
               <v-btn
                 v-show="!hidden"
                 color="pink"
-                dark
                 absolute
-                top
-                right
+                location="top right"
                 fab
               >
                 <v-icon>mdi-plus</v-icon>
@@ -58,6 +54,12 @@
     </v-row>
   </v-container>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const hidden = ref(false)
+</script>
 
 <script>
   export default {

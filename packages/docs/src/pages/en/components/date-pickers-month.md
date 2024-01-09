@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Month picker component
   description: The month picker component is a stand-alone interface that allows the selection of month or both month and year.
@@ -27,11 +28,9 @@ Month pickers come in two orientation variations, portrait **(default)** and lan
 
 ## Caveats
 
-<alert type="warning">
-
+::: warning
   `v-date-picker` accepts ISO 8601 **date** strings (*YYYY-MM-DD*). For more information regarding ISO 8601 and other standards, visit the official ISO (International Organization for Standardization) [International Standards](https://www.iso.org/standards.html) page.
-
-</alert>
+:::
 
 ## Examples
 
@@ -100,5 +99,3 @@ The month picker supports internationalization through the JavaScript Date objec
 Month pickers come in two orientation variations, portrait **(default)** and landscape.
 
 <example file="v-date-picker-month/misc-orientation" />
-
-<backmatter />

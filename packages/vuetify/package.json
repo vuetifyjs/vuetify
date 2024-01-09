@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.0.0-beta.4",
+  "version": "3.4.10",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -33,7 +33,7 @@
   "module": "lib/framework.mjs",
   "jsdelivr": "dist/vuetify.js",
   "unpkg": "dist/vuetify.js",
-  "types": "lib/index.d.ts",
+  "types": "lib/index.d.mts",
   "sass": "lib/styles/main.sass",
   "styles": "lib/styles/main.css",
   "sideEffects": [
@@ -45,39 +45,52 @@
   "files": [
     "dist/",
     "lib/",
+    "_settings.scss",
+    "_styles.scss",
+    "_tools.scss",
     "CHANGELOG.md"
   ],
   "exports": {
     ".": {
-      "import": "./lib/framework.mjs",
-      "require": "./dist/vuetify.js"
+      "sass": "./lib/styles/main.sass",
+      "style": "./lib/styles/main.css",
+      "types": "./lib/index.d.mts",
+      "default": "./lib/framework.mjs"
     },
-    "./styles": "./lib/styles/main.css",
+    "./styles": {
+      "sass": "./lib/styles/main.sass",
+      "default": "./lib/styles/main.css"
+    },
     "./styles/*": "./lib/styles/*",
     "./framework": "./lib/framework.mjs",
+    "./blueprints": "./lib/blueprints/index.mjs",
+    "./blueprints/*": "./lib/blueprints/*.mjs",
     "./components": "./lib/components/index.mjs",
     "./components/*": "./lib/components/*/index.mjs",
     "./directives": "./lib/directives/index.mjs",
-    "./directives/*": "./lib/directives/*/*.mjs",
+    "./directives/*": "./lib/directives/*/index.mjs",
     "./locale": "./lib/locale/index.mjs",
     "./locale/adapters/*": "./lib/locale/adapters/*.mjs",
     "./iconsets/*": "./lib/iconsets/*.mjs",
+    "./labs/components": "./lib/labs/components.mjs",
+    "./labs/*": "./lib/labs/*/index.mjs",
+    "./util/colors": "./lib/util/colors.mjs",
     "./*": "./*"
   },
   "typesVersions": {
     "*": {
       "lib/framework.mjs": [
-        "lib/index.d.ts"
+        "lib/index.d.mts"
       ],
       "framework": [
-        "lib/index.d.ts"
+        "lib/index.d.mts"
       ],
       "*": [
         "*",
         "dist/*",
         "lib/*",
-        "lib/*.d.ts",
-        "lib/*/index.d.ts"
+        "lib/*.d.mts",
+        "lib/*/index.d.mts"
       ]
     }
   },
@@ -87,12 +100,13 @@
   "scripts": {
     "watch": "yarn build:lib --watch",
     "dev": "cross-env NODE_ENV=development vite",
-    "dev:ssr": "cross-env NODE_ENV=development vite-ssr",
-    "build": "rimraf lib dist && concurrently \"yarn build:dist\" \"yarn build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && yarn build:json && yarn build:types",
-    "build:dist": "rollup --config build/rollup.config.js",
+    "dev:ssr": "cross-env NODE_ENV=development VITE_SSR=true vite-ssr",
+    "dev:prod": "concurrently \"cross-env NODE_ENV=production vite build -w\" \"vite preview\"",
+    "dev:typecheck": "vue-tsc --noEmit --skipLibCheck --project ./tsconfig.dev.json",
+    "build": "rimraf lib dist && concurrently \"yarn build:dist\" \"yarn build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && yarn build:types",
+    "build:dist": "rollup --config build/rollup.config.mjs",
     "build:lib": "cross-env NODE_ENV=lib babel src --out-dir lib --source-maps --extensions \".ts\",\".tsx\",\".snap\" --copy-files --no-copy-ignored --out-file-extension .mjs",
-    "build:types": "rimraf types-temp && tsc --pretty --emitDeclarationOnly -p tsconfig.dist.json && rollup --config build/rollup.types.config.js && rimraf types-temp",
-    "build:json": "node build/build-json.js",
+    "build:types": "rimraf types-temp && tsc --pretty --emitDeclarationOnly -p tsconfig.dist.json && rollup --config build/rollup.types.config.mjs && rimraf types-temp",
     "tsc": "tsc",
     "debug:test": "cross-env NODE_ENV=test node --inspect --inspect-brk ../../node_modules/jest/bin/jest.js --no-cache -i --verbose",
     "test": "node build/run-tests.js",
@@ -101,68 +115,73 @@
     "test:coverage": "yarn test --coverage",
     "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\"",
-    "cy:open": "cypress open --component -b chrome",
+    "cy:open": "cypress open --component -b electron",
     "cy:run": "percy exec -- cypress run --component"
   },
   "devDependencies": {
-    "@formatjs/intl": "^2.2.5",
-    "@fortawesome/fontawesome-svg-core": "^1.2.36",
-    "@fortawesome/free-solid-svg-icons": "^5.15.4",
-    "@fortawesome/vue-fontawesome": "^3.0.0-5",
-    "@percy/cli": "^1.3.1",
+    "@date-io/core": "2.17.0",
+    "@date-io/date-fns": "2.17.0",
+    "@formatjs/intl": "^2.9.9",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/vue-fontawesome": "^3.0.5",
+    "@percy/cli": "^1.27.7",
     "@percy/cypress": "^3.1.2",
-    "@rollup/plugin-alias": "^3.1.9",
-    "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-node-resolve": "^13.3.0",
-    "@rollup/plugin-typescript": "^8.3.2",
-    "@types/jest": "^26.0.24",
-    "@types/node": "^16.11.26",
-    "@types/resize-observer-browser": "^0.1.7",
-    "@vitejs/plugin-vue": "^2.3.3",
-    "@vitejs/plugin-vue-jsx": "^1.3.10",
-    "@vue/babel-plugin-jsx": "^1.1.1",
-    "@vue/test-utils": "2.0.0",
-    "@vueuse/head": "~0.7.6",
-    "acorn-walk": "^8.2.0",
-    "autoprefixer": "^10.4.7",
+    "@rollup/plugin-alias": "^5.1.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/jest": "^28.1.8",
+    "@types/node": "^20.10.8",
+    "@types/resize-observer-browser": "^0.1.11",
+    "@vitejs/plugin-vue": "^4.5.2",
+    "@vitejs/plugin-vue-jsx": "^3.1.0",
+    "@vue/babel-plugin-jsx": "^1.1.5",
+    "@vue/test-utils": "2.4.3",
+    "acorn-walk": "^8.3.1",
+    "autoprefixer": "^10.4.16",
     "babel-plugin-add-import-extension": "1.5.1",
-    "babel-plugin-module-resolver": "^4.1.0",
-    "babel-plugin-transform-define": "^2.0.1",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "babel-plugin-transform-define": "^2.1.4",
     "babel-polyfill": "^6.26.0",
-    "concurrently": "^4.1.1",
-    "cssnano": "^5.1.10",
+    "concurrently": "^8.2.2",
+    "cssnano": "^6.0.3",
     "cy-mobile-commands": "^0.3.0",
-    "cypress": "^10.2.0",
+    "cypress": "^13.6.2",
     "cypress-file-upload": "^5.0.8",
-    "cypress-real-events": "^1.7.0",
-    "dotenv": "^8.6.0",
-    "eslint-plugin-cypress": "^2.12.1",
+    "cypress-real-events": "^1.11.0",
+    "date-fns": "^2.30.0",
+    "dotenv": "^16.3.1",
+    "eslint-plugin-cypress": "^2.15.1",
     "eslint-plugin-jest": "^25.7.0",
+    "fast-glob": "^3.3.2",
     "identity-obj-proxy": "^3.0.0",
-    "jest-canvas-mock": "^2.3.1",
-    "postcss": "^8.4.14",
-    "rollup": "^2.75.3",
-    "rollup-plugin-dts": "^4.2.2",
-    "rollup-plugin-sass": "^1.2.12",
+    "jest-canvas-mock": "^2.5.2",
+    "micromatch": "^4.0.5",
+    "postcss": "^8.4.33",
+    "rollup": "^3.20.7",
+    "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-sass": "^1.12.21",
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-terser": "^7.0.2",
-    "vite": "^2.9.9",
-    "vite-ssr": "^0.16.0",
-    "vue-i18n": "^9.2.0-beta.35",
-    "vue-router": "^4.0.15"
+    "timezone-mock": "^1.3.6",
+    "vite": "^4.5.1",
+    "vite-ssr": "^0.17.1",
+    "vue-i18n": "^9.7.1",
+    "vue-router": "^4.2.5"
   },
   "peerDependencies": {
-    "@formatjs/intl": "^1.0.0 || ^2.0.0",
-    "vite-plugin-vuetify": "1.0.0-alpha.12",
-    "vue": "^3.2.0",
+    "typescript": ">=4.7",
+    "vite-plugin-vuetify": ">=1.0.0-alpha.12",
+    "vue": "^3.3.0",
     "vue-i18n": "^9.0.0",
-    "webpack-plugin-vuetify": "2.0.0-alpha.11"
+    "webpack-plugin-vuetify": ">=2.0.0-alpha.11"
   },
   "peerDependenciesMeta": {
-    "vue-i18n": {
+    "typescript": {
       "optional": true
     },
-    "@formatjs/intl": {
+    "vue-i18n": {
       "optional": true
     },
     "webpack-plugin-vuetify": {

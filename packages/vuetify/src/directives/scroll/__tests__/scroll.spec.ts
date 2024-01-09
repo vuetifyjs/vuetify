@@ -1,3 +1,7 @@
+// Directives
+import Scroll from '../'
+
+// Utilities
 import { describe, expect, it } from '@jest/globals'
 import {
   createApp,
@@ -5,9 +9,6 @@ import {
   h,
   withDirectives,
 } from 'vue'
-
-// Directives
-import Scroll from '../'
 import { scrollWindow } from '../../../../test'
 
 describe('v-scroll', () => {
@@ -15,11 +16,11 @@ describe('v-scroll', () => {
     $: { uid: 1 },
   }
   const el = document.createElement('div')
-  const mountFunction = (value: EventListenerOrEventListenerObject, selector?: string): HTMLElement => {
+  const mountFunction = (value: EventListenerOrEventListenerObject, selector = ''): HTMLElement => {
     const Test = defineComponent(() => () => withDirectives(h('div', { class: 'test' }), [[Scroll, value, selector]]))
 
     createApp(Test).mount(el)
-    return el.querySelector('.test')
+    return el.querySelector('.test')!
   }
 
   it('shoud bind event on inserted (selector)', () => {
@@ -27,17 +28,17 @@ describe('v-scroll', () => {
     const targetElement = { addEventListener: jest.fn(), removeEventListener: jest.fn() } as any as Element
     const el = {} as HTMLElement
     const querySelector = jest.spyOn(window.document, 'querySelector').mockImplementation(
-      selector => selector === '.selector' ? targetElement : undefined
+      selector => selector === '.selector' ? targetElement : null
     )
 
     Scroll.mounted(el, { value, arg: '.selector', instance } as any)
     expect(targetElement.addEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
-    Scroll.unmounted(el, { instance })
+    Scroll.unmounted(el, { instance } as any)
     expect(targetElement.removeEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
 
     Scroll.mounted(el, { value, arg: '.selector', instance } as any)
     expect(targetElement.addEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
-    Scroll.unmounted(el, { instance })
+    Scroll.unmounted(el, { instance } as any)
     expect(targetElement.removeEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
 
     querySelector.mockRestore()
@@ -51,7 +52,7 @@ describe('v-scroll', () => {
 
     Scroll.mounted(el as HTMLElement, { value, instance } as any)
     expect(addListener).toHaveBeenCalledWith('scroll', value, { passive: true })
-    Scroll.unmounted(el as HTMLElement, { instance })
+    Scroll.unmounted(el as HTMLElement, { instance } as any)
     expect(removeListener).toHaveBeenCalledWith('scroll', value, { passive: true })
 
     addListener.mockRestore()
@@ -81,7 +82,7 @@ describe('v-scroll', () => {
 
   it('should not fail when unbinding element without _onScroll', () => {
     expect(() => {
-      Scroll.unmounted({} as HTMLElement, { instance })
+      Scroll.unmounted({} as HTMLElement, { instance } as any)
     }).not.toThrow()
   })
 

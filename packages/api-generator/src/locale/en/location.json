@@ -1,0 +1,5 @@
+{
+  "props": {
+    "location": "Specifies the component's location. Can combine by using a space separated string."
+  }
+}

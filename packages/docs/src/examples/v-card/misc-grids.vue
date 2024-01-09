@@ -39,7 +39,7 @@
           <v-card>
             <v-img
               :src="card.src"
-              class="white--text align-end"
+              class="align-end"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               height="200px"
               cover
@@ -62,6 +62,14 @@
     </v-container>
   </v-card>
 </template>
+
+<script setup>
+  const cards = [
+    { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 12 },
+    { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 6 },
+    { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 6 },
+  ]
+</script>
 
 <script>
   export default {

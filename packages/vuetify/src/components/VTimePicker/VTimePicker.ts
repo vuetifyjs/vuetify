@@ -43,7 +43,7 @@ export default mixins(
     format: {
       type: String as PropType<'ampm' | '24hr'>,
       default: 'ampm',
-      validator (val) {
+      validator (val: any) {
         return ['ampm', '24hr'].includes(val)
       },
     },

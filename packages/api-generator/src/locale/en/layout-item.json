@@ -1,0 +1,7 @@
+{
+  "props": {
+    "absolute": "Applies **position: absolute** to the component.",
+    "name": "Assign a specific name for layout registration.",
+    "order": "Adjust the order of the component in relation to its registration order."
+  }
+}

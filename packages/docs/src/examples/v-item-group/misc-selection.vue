@@ -18,6 +18,7 @@
             <v-item v-slot="{ isSelected, toggle }">
               <v-img
                 :src="`https://cdn.vuetifyjs.com/images/${item.src}`"
+                cover
                 height="150"
                 class="text-right pa-2"
                 @click="toggle"
@@ -31,6 +32,27 @@
     </v-container>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const items = [
+    {
+      src: 'backgrounds/bg.jpg',
+    },
+    {
+      src: 'backgrounds/md.jpg',
+    },
+    {
+      src: 'backgrounds/bg-2.jpg',
+    },
+    {
+      src: 'backgrounds/md2.jpg',
+    },
+  ]
+
+  const selection = ref([])
+</script>
 
 <script>
   export default {

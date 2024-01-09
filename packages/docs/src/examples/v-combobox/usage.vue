@@ -1,62 +1,51 @@
 <template>
-  <v-container class="fill-height">
-    <v-row
-      align="center"
-      justify="center"
-    >
-      <v-combobox
-        hint="Comboboxes can receive custom values not present in items"
-        :items="items"
-        label="Add some tags"
-        v-bind="$attrs"
-      >
-        <template
-          v-if="$attrs.noData"
-          v-slot:no-data
-        >
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>
-                No results matching "<strong>{{ search }}</strong>". Press <kbd>enter</kbd> to create a new one
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </template>
-      </v-combobox>
-    </v-row>
-  </v-container>
+  <usage-example
+    v-model="model"
+    :code="code"
+    :options="options"
+    :name="name"
+  >
+    <div>
+      <v-combobox v-bind="props"></v-combobox>
+    </div>
+
+    <template v-slot:configuration>
+      <v-checkbox v-model="clear" label="Clearable"></v-checkbox>
+
+      <v-checkbox v-model="chips" label="Chips"></v-checkbox>
+
+      <v-checkbox v-model="multiple" label="Multiple"></v-checkbox>
+    </template>
+  </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'Usage',
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-    inheritAttrs: false,
+  const name = 'v-combobox'
+  const model = ref('default')
+  const clear = ref(false)
+  const chips = ref(false)
+  const multiple = ref(false)
+  const options = ['outlined', 'underlined', 'solo', 'solo-filled', 'solo-inverted']
+  const props = computed(() => {
+    return {
+      clearable: clear.value || undefined,
+      chips: chips.value || undefined,
+      multiple: multiple.value || undefined,
+      label: 'Combobox',
+      items: ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'],
+      variant: model.value === 'default' ? undefined : model.value,
+    }
+  })
 
-    data: () => ({
-      items: ['Gaming', 'Programming', 'Vue', 'Vuetify'],
-      search: null,
-      defaults: {
-        clearable: false,
-        dense: false,
-        filled: false,
-        'hide-selected': false,
-        multiple: false,
-        outlined: false,
-        'persistent-hint': false,
-        'small-chips': false,
-        solo: false,
-      },
-      options: {
-        booleans: [
-          'clearable',
-          'hide-selected',
-          'multiple',
-          'persistent-hint',
-          'small-chips',
-        ],
-      },
-      tabs: ['dense', 'filled', 'outlined', 'solo'],
-    }),
-  }
+  const slots = computed(() => {
+    return ``
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>

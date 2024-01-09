@@ -3,63 +3,42 @@
     :is="component"
     :class="classes"
   >
-    <a
+    <router-link
       v-if="href"
-      :href="href"
-      class="text-decoration-none text-right text-md-left"
-      @click="onClick"
+      :to="href"
+      class="text-decoration-none text-end text-md-start d-none d-sm-inline-block"
+      style="user-select: none"
+      aria-hidden="true"
     >
-      #
-    </a>
+      <span class="text-primary">#</span>
+    </router-link>
 
-    {{ content }}
+    <slot>
+      {{ content }}
+    </slot>
   </component>
 </template>
 
-<script>
+<script setup>
   // Utilities
-  import { computed, defineComponent } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
+  import { computed } from 'vue'
 
   const HEADING_CLASSES = {
-    1: 'text-h3 text-sm-h3 mb-4',
-    2: 'text-h4 text-sm-h4 mb-3',
-    3: 'text-h5 mb-2',
-    4: 'text-h6 mb-2',
-    5: 'text-subtitle-1 font-weight-medium mb-2',
+    1: 'text-h3 text-sm-h3',
+    2: 'text-h4 text-sm-h4',
+    3: 'text-h5',
+    4: 'text-h6',
+    5: 'text-subtitle-1 font-weight-medium',
   }
 
-  export default defineComponent({
-    name: 'Heading',
-
-    props: {
-      content: String,
-      href: String,
-      level: String,
-    },
-
-    setup (props) {
-      const router = useRouter()
-      const route = useRoute()
-
-      function onClick (e) {
-        e.preventDefault()
-
-        const hash = props.href
-
-        if (route.hash === hash) return
-
-        router.push({ hash })
-        document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' })
-        // this.$vuetify.goTo(hash)
-      }
-
-      const component = computed(() => `h${props.level}`)
-      const classes = computed(() => ['v-heading', HEADING_CLASSES[props.level]])
-
-      return { component, classes, onClick }
-    },
+  const props = defineProps({
+    content: String,
+    href: String,
+    level: String,
   })
+
+  const component = computed(() => `h${props.level}`)
+  const classes = computed(() => ['v-heading', 'mb-2', HEADING_CLASSES[props.level]])
 </script>
 
 <style lang="sass">
@@ -69,7 +48,7 @@
 
     > a
       bottom: 0
-      display: inline-block
+      font-size: .75em
       left: 0
       margin: 0 -.7em
       position: absolute

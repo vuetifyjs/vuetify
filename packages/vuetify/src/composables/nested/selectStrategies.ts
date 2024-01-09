@@ -1,24 +1,27 @@
 /* eslint-disable sonarjs/no-identical-functions */
+// Utilities
+import { toRaw } from 'vue'
+
 export type SelectStrategyFn = (data: {
-  id: string
+  id: unknown
   value: boolean
-  selected: Map<string, 'on' | 'off' | 'indeterminate'>
-  children: Map<string, string[]>
-  parents: Map<string, string>
+  selected: Map<unknown, 'on' | 'off' | 'indeterminate'>
+  children: Map<unknown, unknown[]>
+  parents: Map<unknown, unknown>
   event?: Event
-}) => Map<string, 'on' | 'off' | 'indeterminate'>
+}) => Map<unknown, 'on' | 'off' | 'indeterminate'>
 
 export type SelectStrategyTransformInFn = (
-  v: string[] | undefined,
-  children: Map<string, string[]>,
-  parents: Map<string, string>,
-) => Map<string, 'on' | 'off' | 'indeterminate'>
+  v: readonly unknown[] | undefined,
+  children: Map<unknown, unknown[]>,
+  parents: Map<unknown, unknown>,
+) => Map<unknown, 'on' | 'off' | 'indeterminate'>
 
 export type SelectStrategyTransformOutFn = (
-  v: Map<string, 'on' | 'off' | 'indeterminate'>,
-  children: Map<string, string[]>,
-  parents: Map<string, string>,
-) => any[]
+  v: Map<unknown, 'on' | 'off' | 'indeterminate'>,
+  children: Map<unknown, unknown[]>,
+  parents: Map<unknown, unknown>,
+) => unknown[]
 
 export type SelectStrategy = {
   select: SelectStrategyFn
@@ -29,10 +32,12 @@ export type SelectStrategy = {
 export const independentSelectStrategy = (mandatory?: boolean): SelectStrategy => {
   const strategy: SelectStrategy = {
     select: ({ id, value, selected }) => {
+      id = toRaw(id)
+
       // When mandatory and we're trying to deselect when id
       // is the only currently selected item then do nothing
       if (mandatory && !value) {
-        const on = Array.from(selected.entries()).reduce((arr, [key, value]) => value === 'on' ? [...arr, key] : arr, [] as string[])
+        const on = Array.from(selected.entries()).reduce((arr, [key, value]) => value === 'on' ? [...arr, key] : arr, [] as unknown[])
         if (on.length === 1 && on[0] === id) return selected
       }
 
@@ -74,6 +79,7 @@ export const independentSingleSelectStrategy = (mandatory?: boolean): SelectStra
 
   const strategy: SelectStrategy = {
     select: ({ selected, id, ...rest }) => {
+      id = toRaw(id)
       const singleSelected = selected.has(id) ? new Map([[id, selected.get(id)!]]) : new Map()
       return parentStrategy.select({ ...rest, id, selected: singleSelected })
     },
@@ -99,6 +105,7 @@ export const leafSelectStrategy = (mandatory?: boolean): SelectStrategy => {
 
   const strategy: SelectStrategy = {
     select: ({ id, selected, children, ...rest }) => {
+      id = toRaw(id)
       if (children.has(id)) return selected
 
       return parentStrategy.select({ id, selected, children, ...rest })
@@ -115,6 +122,7 @@ export const leafSingleSelectStrategy = (mandatory?: boolean): SelectStrategy =>
 
   const strategy: SelectStrategy = {
     select: ({ id, selected, children, ...rest }) => {
+      id = toRaw(id)
       if (children.has(id)) return selected
 
       return parentStrategy.select({ id, selected, children, ...rest })
@@ -129,6 +137,7 @@ export const leafSingleSelectStrategy = (mandatory?: boolean): SelectStrategy =>
 export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
   const strategy: SelectStrategy = {
     select: ({ id, value, selected, children, parents }) => {
+      id = toRaw(id)
       const original = new Map(selected)
 
       const items = [id]
@@ -158,7 +167,7 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
       // If mandatory and planned deselect results in no selected
       // items then we can't do it, so return original state
       if (mandatory && !value) {
-        const on = Array.from(selected.entries()).reduce((arr, [key, value]) => value === 'on' ? [...arr, key] : arr, [] as string[])
+        const on = Array.from(selected.entries()).reduce((arr, [key, value]) => value === 'on' ? [...arr, key] : arr, [] as unknown[])
         if (on.length === 0) return original
       }
 

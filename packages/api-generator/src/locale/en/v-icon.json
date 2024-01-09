@@ -1,8 +1,0 @@
-{
-  "props": {
-    "disabled": "Disable the input.",
-    "icon": "Designates a specific icon.",
-    "left": "Applies appropriate margins to the icon inside of a button when placed to the **left** of another element or text.",
-    "right": "Applies appropriate margins to the icon inside of a button when placed to the **right** of another element or text."
-  }
-}

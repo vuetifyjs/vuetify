@@ -1,6 +1,0 @@
-{
-  "props": {
-    "options": "Options that are passed to the [Intersection observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) constructor.",
-    "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own."
-  }
-}

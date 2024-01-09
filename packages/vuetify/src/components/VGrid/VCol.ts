@@ -2,16 +2,20 @@
 import './VGrid.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
+import { breakpoints } from '@/composables/display'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { capitalize, computed, h } from 'vue'
-import { defineComponent } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
-import type { Prop } from 'vue'
+import type { Prop, PropType } from 'vue'
+import type { Breakpoint } from '@/composables/display'
 
-const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
+type BreakpointOffset = `offset${Capitalize<Breakpoint>}`
+type BreakpointOrder = `order${Capitalize<Breakpoint>}`
 
 const breakpointProps = (() => {
   return breakpoints.reduce((props, val) => {
@@ -20,27 +24,29 @@ const breakpointProps = (() => {
       default: false,
     }
     return props
-  }, {} as Record<string, Prop<boolean | string | number, false>>)
+  }, {} as Record<Breakpoint, Prop<boolean | string | number, false>>)
 })()
 
 const offsetProps = (() => {
   return breakpoints.reduce((props, val) => {
-    props['offset' + capitalize(val)] = {
+    const offsetKey = ('offset' + capitalize(val)) as BreakpointOffset
+    props[offsetKey] = {
       type: [String, Number],
       default: null,
     }
     return props
-  }, {} as Record<string, Prop<string | number, null>>)
+  }, {} as Record<BreakpointOffset, Prop<string | number, null>>)
 })()
 
 const orderProps = (() => {
   return breakpoints.reduce((props, val) => {
-    props['order' + capitalize(val)] = {
+    const orderKey = ('order' + capitalize(val)) as BreakpointOrder
+    props[orderKey] = {
       type: [String, Number],
       default: null,
     }
     return props
-  }, {} as Record<string, Prop<string | number, null>>)
+  }, {} as Record<BreakpointOrder, Prop<string | number, null>>)
 })()
 
 const propMap = {
@@ -73,33 +79,38 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean
   return className.toLowerCase()
 }
 
-export const VCol = defineComponent({
+const ALIGN_SELF_VALUES = ['auto', 'start', 'end', 'center', 'baseline', 'stretch'] as const
+
+export const makeVColProps = propsFactory({
+  cols: {
+    type: [Boolean, String, Number],
+    default: false,
+  },
+  ...breakpointProps,
+  offset: {
+    type: [String, Number],
+    default: null,
+  },
+  ...offsetProps,
+  order: {
+    type: [String, Number],
+    default: null,
+  },
+  ...orderProps,
+  alignSelf: {
+    type: String as PropType<typeof ALIGN_SELF_VALUES[number]>,
+    default: null,
+    validator: (str: any) => ALIGN_SELF_VALUES.includes(str),
+  },
+
+  ...makeComponentProps(),
+  ...makeTagProps(),
+}, 'VCol')
+
+export const VCol = genericComponent()({
   name: 'VCol',
 
-  props: {
-    cols: {
-      type: [Boolean, String, Number],
-      default: false,
-    },
-    ...breakpointProps,
-    offset: {
-      type: [String, Number],
-      default: null,
-    },
-    ...offsetProps,
-    order: {
-      type: [String, Number],
-      default: null,
-    },
-    ...orderProps,
-    alignSelf: {
-      type: String,
-      default: null,
-      validator: (str: any) => ['auto', 'start', 'end', 'center', 'baseline', 'stretch'].includes(str),
-    },
-
-    ...makeTagProps(),
-  },
+  props: makeVColProps(),
 
   setup (props, { slots }) {
     const classes = computed(() => {
@@ -130,7 +141,13 @@ export const VCol = defineComponent({
     })
 
     return () => h(props.tag, {
-      class: classes.value,
+      class: [
+        classes.value,
+        props.class,
+      ],
+      style: props.style,
     }, slots.default?.())
   },
 })
+
+export type VCol = InstanceType<typeof VCol>

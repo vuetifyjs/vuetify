@@ -1,6 +1,11 @@
 export default {
   badge: 'نشان',
+  open: 'Open',
   close: 'بستن',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'لغو',
+  },
   dataIterator: {
     noResultsText: 'نتیجه‌ای یافت نشد',
     loadingText: 'در حال بارگذاری...',
@@ -26,12 +31,20 @@ export default {
     lastPage: 'صفحه‌ی آخر',
     pageText: '{0} تا {1} از {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} انتخاب شده',
-    nextMonthAriaLabel: 'ماه بعد',
-    nextYearAriaLabel: 'سال بعد',
-    prevMonthAriaLabel: 'ماه قبل',
-    prevYearAriaLabel: 'سال قبل',
+    itemsSelected: '{0} selected',
+    range: {
+      title: 'انتخاب تاریخ‌ها',
+      header: 'تاریخ‌ها را وارد کنید',
+    },
+    title: 'انتخاب تاریخ',
+    header: 'تاریخ را وارد کنید',
+    input: {
+      placeholder: 'تاریخ را وارد کنید',
+    },
   },
   noDataText: 'داده‌ای موجود نیست',
   carousel: {
@@ -43,6 +56,13 @@ export default {
   },
   calendar: {
     moreEvents: '{بیشتر {0',
+    today: 'Today',
+  },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} پرونده',
@@ -55,17 +75,26 @@ export default {
   pagination: {
     ariaLabel: {
       root: 'جهت یابی صفحه',
-      next: 'صفحه بعد',
-      previous: 'صفحه قبلی',
+      next: 'صفحه‌ی بعد',
+      previous: 'صفحه‌ی قبلی',
       page: 'برو صفحه {0}',
-      currentPage: '{0} صفحه فعلی ، صفحه',
-      first: 'First page',
-      last: 'Last page',
+      currentPage: '{0} صفحه‌ی فعلی ، صفحه‌ی',
+      first: 'صفحه‌ی اول',
+      last: 'صفحه‌ی آخر',
     },
+  },
+  stepper: {
+    next: 'بعدی',
+    prev: 'قبلی',
   },
   rating: {
     ariaLabel: {
       item: 'Rating {0} of {1}',
     },
+  },
+  loading: 'در حال بارگذاری...',
+  infiniteScroll: {
+    loadMore: 'بارگذاری بیشتر',
+    empty: 'پایان',
   },
 }

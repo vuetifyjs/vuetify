@@ -14,8 +14,9 @@
   user-select: none
 
   .v-label
+    white-space: normal
+    word-break: break-word
     height: 100%
-    width: 100%
 
   &--disabled
     opacity: var(--v-disabled-opacity)
@@ -33,6 +34,8 @@
   &--inline
     display: inline-flex
     flex: 0 0 auto
+    min-width: 0
+    max-width: 100%
 
     .v-label
       width: auto

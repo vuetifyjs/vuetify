@@ -2,16 +2,34 @@
 import { VExpansionPanelSymbol } from './VExpansionPanels'
 import { VIcon } from '@/components/VIcon'
 
+// Composables
+import { useBackgroundColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { IconValue } from '@/composables/icons'
+
 // Directives
 import { Ripple } from '@/directives/ripple'
 
-// Composables
-import { IconValue } from '@/composables/icons'
-import { useBackgroundColor } from '@/composables/color'
-
 // Utilities
 import { computed, inject } from 'vue'
-import { defineComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
+
+interface ExpansionPanelTitleSlot {
+  collapseIcon: IconValue
+  disabled: boolean | undefined
+  expanded: boolean
+  expandIcon: IconValue
+  readonly: boolean
+}
+
+export type VExpansionPanelTitleSlots = {
+  default: ExpansionPanelTitleSlot
+  actions: ExpansionPanelTitleSlot
+}
 
 export const makeVExpansionPanelTitleProps = propsFactory({
   color: String,
@@ -24,21 +42,22 @@ export const makeVExpansionPanelTitleProps = propsFactory({
     default: '$collapse',
   },
   hideActions: Boolean,
+  static: Boolean,
   ripple: {
-    type: [Boolean, Object],
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: false,
   },
   readonly: Boolean,
-})
 
-export const VExpansionPanelTitle = defineComponent({
+  ...makeComponentProps(),
+}, 'VExpansionPanelTitle')
+
+export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>()({
   name: 'VExpansionPanelTitle',
 
   directives: { Ripple },
 
-  props: {
-    ...makeVExpansionPanelTitleProps(),
-  },
+  props: makeVExpansionPanelTitleProps(),
 
   setup (props, { slots }) {
     const expansionPanel = inject(VExpansionPanelSymbol)
@@ -61,10 +80,15 @@ export const VExpansionPanelTitle = defineComponent({
           'v-expansion-panel-title',
           {
             'v-expansion-panel-title--active': expansionPanel.isSelected.value,
+            'v-expansion-panel-title--static': props.static,
           },
           backgroundColorClasses.value,
+          props.class,
         ]}
-        style={ backgroundColorStyles.value }
+        style={[
+          backgroundColorStyles.value,
+          props.style,
+        ]}
         type="button"
         tabindex={ expansionPanel.disabled.value ? -1 : undefined }
         disabled={ expansionPanel.disabled.value }
@@ -72,18 +96,18 @@ export const VExpansionPanelTitle = defineComponent({
         onClick={ !props.readonly ? expansionPanel.toggle : undefined }
         v-ripple={ props.ripple }
       >
-        <div class="v-expansion-panel-title__overlay" />
+        <span class="v-expansion-panel-title__overlay" />
 
         { slots.default?.(slotProps.value) }
 
         { !props.hideActions && (
-          <div class="v-expansion-panel-title__icon">
+          <span class="v-expansion-panel-title__icon">
             {
               slots.actions ? slots.actions(slotProps.value)
               : <VIcon icon={ expansionPanel.isSelected.value ? props.collapseIcon : props.expandIcon } />
             }
-          </div>
-        ) }
+          </span>
+        )}
       </button>
     ))
 

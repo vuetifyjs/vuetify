@@ -18,7 +18,7 @@
       <template v-slot:extension>
         <v-tabs
           v-model="tabs"
-          align-with-title
+          align-tabs="title"
         >
           <v-tab href="#one">
             Item One
@@ -53,10 +53,8 @@
         :key="activeFab.icon"
         :color="activeFab.color"
         fab
-        large
-        dark
-        bottom
-        left
+        size="large"
+        location="bottom left"
         class="v-btn--example"
       >
         <v-icon>{{ activeFab.icon }}</v-icon>
@@ -65,11 +63,23 @@
   </v-card>
 </template>
 
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const tabs = ref(null)
+  const activeFab = computed(() => {
+    switch (tabs.value) {
+      case 'one': return { color: 'success', icon: 'mdi-share-variant' }
+      case 'two': return { color: 'red', icon: 'mdi-pencil' }
+      case 'three': return { color: 'green', icon: 'mdi-chevron-up' }
+      default: return {}
+    }
+  })
+</script>
+
 <script>
   export default {
     data: () => ({
-      fab: false,
-      hidden: false,
       tabs: null,
     }),
 

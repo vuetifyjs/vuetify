@@ -8,13 +8,18 @@
   &--fluid
     max-width: 100%
 
+  &.fill-height
+    align-items: center
+    display: flex
+    flex-wrap: wrap
+
 // Row
 //
 // Rows contain and clear the floats of your columns.
 .v-row
   +make-row
 
-  & + .row
+  & + .v-row
     margin-top: settings.$grid-gutter * .5
 
     &--dense
@@ -34,6 +39,9 @@
     > .v-col,
     > [class*="v-col-"]
       padding: 0
+
+.v-spacer
+  flex-grow: 1
 
 // Columns
 //

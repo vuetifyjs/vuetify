@@ -1,6 +1,6 @@
 ---
-nav: System bars
 meta:
+  nav: System bars
   title: System-bar component
   description: The system bar component creates an android style status bar that rests on the very top of your application.
   keywords: system bars, vuetify system bar component, vue system bar component, android status bar, status bar
@@ -8,6 +8,11 @@ related:
   - /components/buttons/
   - /components/toolbars/
   - /components/tabs/
+features:
+  figma: true
+  label: 'C: VSystemBar'
+  report: true
+  github: /components/VSystemBar/
 ---
 
 # System bars
@@ -16,7 +21,7 @@ The `v-system-bar` component can be used for displaying statuses to the user. It
 
 ![System Bar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-system-bar/v-system-bar-entry.png)
 
----
+<page-features />
 
 ## Usage
 
@@ -25,6 +30,14 @@ The `v-system-bar` component can be used for displaying statuses to the user. It
 <usage name="v-system-bar" />
 
 <entry />
+
+## API
+
+| Component | Description |
+| - | - |
+| [v-system-bar](/api/v-system-bar/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Anatomy
 
@@ -41,11 +54,7 @@ The recommended placement of elements inside of `v-system-bar` is:
 | 2. Icon items (optional) | Used to convey information through the use of icons |
 | 3. Text (optional) | Textual content that is typically used to show time |
 
-## API
-
-| Component | Description |
-| - | - |
-| [v-system-bar](/api/v-system-bar/) | Primary component |
+<api-inline hide-links />
 
 ## Examples
 
@@ -62,5 +71,3 @@ You can optionally change the color of the `v-system-bar` by using the `color` p
 A window bar with window controls and status info.
 
 <example file="v-system-bar/prop-window" />
-
-<backmatter />

@@ -4,8 +4,10 @@
     align="center"
     justify="center"
   >
-    <v-subheader>Window Size</v-subheader>
-    {{ windowSize }}
+    <v-col class="text-center">
+      <div class="text-subtitle-2">Window Size</div>
+      {{ windowSize }}
+    </v-col>
   </v-row>
 </template>
 

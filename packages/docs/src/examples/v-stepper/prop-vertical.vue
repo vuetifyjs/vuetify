@@ -13,7 +13,7 @@
 
     <v-stepper-content step="1">
       <v-card
-        color="grey lighten-1"
+        color="grey-lighten-1"
         class="mb-12"
         height="200px"
       ></v-card>
@@ -23,7 +23,7 @@
       >
         Continue
       </v-btn>
-      <v-btn text>
+      <v-btn variant="text">
         Cancel
       </v-btn>
     </v-stepper-content>
@@ -37,7 +37,7 @@
 
     <v-stepper-content step="2">
       <v-card
-        color="grey lighten-1"
+        color="grey-lighten-1"
         class="mb-12"
         height="200px"
       ></v-card>
@@ -47,7 +47,7 @@
       >
         Continue
       </v-btn>
-      <v-btn text>
+      <v-btn variant="text">
         Cancel
       </v-btn>
     </v-stepper-content>
@@ -61,7 +61,7 @@
 
     <v-stepper-content step="3">
       <v-card
-        color="grey lighten-1"
+        color="grey-lighten-1"
         class="mb-12"
         height="200px"
       ></v-card>
@@ -71,7 +71,7 @@
       >
         Continue
       </v-btn>
-      <v-btn text>
+      <v-btn variant="text">
         Cancel
       </v-btn>
     </v-stepper-content>
@@ -81,7 +81,7 @@
     </v-stepper-step>
     <v-stepper-content step="4">
       <v-card
-        color="grey lighten-1"
+        color="grey-lighten-1"
         class="mb-12"
         height="200px"
       ></v-card>
@@ -91,12 +91,18 @@
       >
         Continue
       </v-btn>
-      <v-btn text>
+      <v-btn variant="text">
         Cancel
       </v-btn>
     </v-stepper-content>
   </v-stepper>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const e6 = ref(1)
+</script>
 
 <script>
   export default {

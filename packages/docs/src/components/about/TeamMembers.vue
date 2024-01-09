@@ -18,29 +18,19 @@
   </v-container>
 </template>
 
-<script lang="ts">
-  // Utilities
-  import { computed, defineComponent } from 'vue'
-  import { useTeamStore } from '@/store/team'
-
+<script setup>
+  // Components
   import TeamMember from './TeamMember.vue'
 
-  export default defineComponent({
-    name: 'TeamMembers',
+  // Composables
+  import { useTeamStore } from '@/store/team'
 
-    components: {
-      TeamMember,
-    },
+  // Utilities
+  import { computed } from 'vue'
 
-    props: { team: String },
-
-    setup (props) {
-      const team = useTeamStore()
-      const members = computed(() => team.members.filter(member => member.team === props.team))
-
-      return { members }
-    },
-  })
+  const props = defineProps({ team: String })
+  const teams = useTeamStore()
+  const members = computed(() => teams.members.filter(member => member.team === props.team))
 </script>
 
 <style lang="sass">

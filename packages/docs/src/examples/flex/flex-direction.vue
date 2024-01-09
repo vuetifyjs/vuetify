@@ -1,41 +1,15 @@
-<script>
-// TODO
-// @ts-disable
-</script>
-
 <template>
   <div>
-    <v-card
-      class="d-flex flex-row mb-6"
-      :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
-      flat
-      tile
-    >
-      <v-card
-        v-for="n in 3"
-        :key="n"
-        class="pa-2"
-        outlined
-        tile
-      >
-        Flex item {{ n }}
-      </v-card>
-    </v-card>
-    <v-card
-      class="d-flex flex-row-reverse"
-      :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
-      flat
-      tile
-    >
-      <v-card
-        v-for="n in 3"
-        :key="n"
-        class="pa-2"
-        outlined
-        tile
-      >
-        Flex item {{ n }}
-      </v-card>
-    </v-card>
+    <div class="d-flex flex-row mb-6 bg-surface-variant">
+      <v-sheet class="ma-2 pa-2">Flex item 1</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item 2</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item 3</v-sheet>
+    </div>
+
+    <div class="d-flex flex-row-reverse mb-6 bg-surface-variant">
+      <v-sheet class="ma-2 pa-2">Flex item 1</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item 2</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item 3</v-sheet>
+    </div>
   </div>
 </template>

@@ -1,16 +1,7 @@
 <template>
-  <vuetify />
+  <vuetify class="mb-5" />
 </template>
 
-<script>
-  // Extensions
-  import Vuetify from '@/components/promoted/Vuetify.vue'
-
-  export default {
-    name: 'PromotedRandom',
-
-    components: {
-      Vuetify,
-    },
-  }
+<script setup>
+  //
 </script>

@@ -6,212 +6,236 @@ meta:
 related:
   - /styles/colors/
   - /features/theme/
-  - /features/presets/
+  - /features/treeshaking/
 ---
+
+<script setup>
+  import SassApi from '@/components/features/SassApi.vue'
+</script>
 
 # SASS variables
 
 Vuetify uses **SASS/SCSS** to craft the style and appearance of all aspects of the framework.
 
-Utilizing the sass/scss data option of your `vue.config.js` file, you can optionally pass in custom variables to overwrite the global defaults. A list of available variables is located within each component's API section and in the [Variable API](#variable-api) of this page. This functionality is automatically handled by [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify).
+<page-features />
 
 <entry />
 
-<alert type="warning">
+::: info
 
-  Note: SASS/SCSS variables are only supported using when using the [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader). This is done automatically when using the [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/vue-cli-plugin-vuetify) plugin.
+It is recommended to familiarize yourself with the [Treeshaking](/features/treeshaking/) guide before continuing.
 
-</alert>
+:::
 
-## Vue CLI install
+## Installation
 
-If you have not installed Vuetify, check out the [quick-start guide](/getting-started/installation#vue-cli-3-install). Once installed, create a folder called `sass`, `scss` or `styles` in your src directory with a file named `variables.scss` or `variables.sass`. The **vuetify-loader** will automatically bootstrap your variables into Vue CLI's compilation process, overwriting the framework defaults.
+Vuetify works out of the box without any additional compilers needing to be installed but does support advanced use-cases such as modifying the underlying variables of the framework. Vite provides built-in support for sass, less and stylus files without the need to install Vite-specific plugins for them; just the corresponding pre-processor itself.
 
-When you run yarn serve, the vuetify-cli-plugin will automatically hoist the global Vuetify variables to all of your sass/scss files. When making changes to individual component variables, you will still need to manually include its variables file. You can find an example of a [custom variables](#example-variable-file) file below.
+To begin modifying Vuetify's internal variables, install the [sass](https://sass-lang.com/) pre-processor:
 
-## Nuxt install
+::: tabs
 
-This section assumes that you have already followed our Nuxt guide on the [Quick start](/getting-started/installation/#nuxt-install) page. The Nuxt Vuetify module exposes a `vuetify` property where you can configure the module. Ensure that you enable the `treeShake` option first. This option will use [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) to enable automatic [treeshaking](/features/treeshaking). This is required for custom SASS variables to work. Then provide the `customVariables` file path option to customize SASS variables.
+```bash [yarn]
+  yarn add -D sass
+```
 
-```js { resource="nuxt.config.js" }
-export default {
-  vuetify: {
-    customVariables: ['~/assets/variables.scss'],
-    treeShake: true
+```bash [npm]
+  npm install -D sass-loader sass
+```
+
+```bash [pnpm]
+  pnpm install -D sass-loader sass
+```
+
+```bash [bun]
+  bun add -D sass-loader sass
+```
+
+:::
+
+For additional details about css-pre-processors, please refer to the official vite page at: https://vitejs.dev/guide/features.html#css-pre-processors or official vue-cli-page at: https://cli.vuejs.org/guide/css.html#pre-processors
+
+## Basic usage
+
+Create a **main.scss** file in your **src/styles** directory and update the style import within your **vuetify.js** file:
+
+```scss { resource="src/styles/main.scss" }
+@use 'vuetify' with (
+  $variable: false,
+);
+```
+
+```diff { resource="src/plugins/vuetify.js" }
+- import 'vuetify/styles'
++ import '@/styles/main.scss'
+```
+
+Within your style file, import the Vuetify styles and specify the variables you want to override, that's it.
+
+::: warning
+
+`'vuetify/styles'` should not be used in sass files as it resolves to precompiled css ([vitejs/vite#7809](https://github.com/vitejs/vite/issues/7809)). `'vuetify'` and `'vuetify/settings'` are valid and safe to use
+
+:::
+
+## Component specific variables
+
+Customising variables used in components is a bit more complex and requires the use of a special build plugin.
+
+Follow the plugin setup guide from [treeshaking](/features/treeshaking/) then add `styles.configFile` to the plugin options:
+
+```js { resource="vite.config.js" }
+vuetify({
+  styles: {
+    configFile: 'src/styles/settings.scss',
   },
-}
+})
 ```
 
-```scss { resource="assets/variables.scss" }
-// Variables you want to modify
-$btn-border-radius: 0px;
-
-// Modifying a SASS map variable
-$material-light: ( cards: blue );
+```scss { resource="src/styles/settings.scss" }
+@use 'vuetify/settings' with (
+  $button-height: 40px,
+);
 ```
 
-## Webpack install
+`configFile` will be resolved relative to the project root, and loaded before each of vuetify's stylesheets.
+If you were using the basic technique from above, make sure to either:
 
-This section assumes you have already followed our Webpack guide on the [Quick start](/getting-started/installation#webpack-install) page. The option can vary depending upon the version of [sass-loader](https://github.com/webpack-contrib/sass-loader) you are use using. Ensure that you use the proper syntax when setting up the SASS/SCSS data options as they have different line endings. You can find more information about [additionalData](https://github.com/webpack-contrib/sass-loader#additionaldata) or [prependData](https://github.com/webpack-contrib/sass-loader/tree/v8.0.0#prependdata) on sass-loader's GitHub page.
+- Remove it and switch back to `import 'vuetify/styles'`, or
+- Add `@use './settings'` before `@use 'vuetify'` in `main.scss` and remove the `with` block from `@use 'vuetify'`.
 
-```js { resource="webpack.config.js" }
-module.exports = {
-  module: {
-    rules: [
-      // SASS has different line endings than SCSS
-      // and cannot use semicolons in the markup
-      {
-        test: /\.sass$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          {
-            loader: 'sass-loader',
-            // Requires sass-loader@^7.0.0
-            options: {
-              // This is the path to your variables
-              data: "@import '@/styles/variables.scss'"
-            },
-            // Requires sass-loader@^8.0.0
-            options: {
-              // This is the path to your variables
-              prependData: "@import '@/styles/variables.scss'"
-            },
-            // Requires >= sass-loader@^9.0.0
-            options: {
-              // This is the path to your variables
-              additionalData: "@import '@/styles/variables.scss'"
-            },
-          },
-        ],
-      },
-      // SCSS has different line endings than SASS
-      // and needs a semicolon after the import.
-      {
-        test: /\.scss$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          {
-            loader: 'sass-loader',
-            // Requires sass-loader@^7.0.0
-            options: {
-              // This is the path to your variables
-              data: "@import '@/styles/variables.scss';"
-            },
-            // Requires sass-loader@^8.0.0
-            options: {
-              // This is the path to your variables
-              prependData: "@import '@/styles/variables.scss';"
-            },
-            // Requires sass-loader@^9.0.0
-            options: {
-              // This is the path to your variables
-              additionalData: "@import '@/styles/variables.scss';"
-            },
-          },
-        ],
-      },
-    ],
-  },
-}
-```
+You can keep `main.scss` for other style overrides but don't do both `@use 'vuetify'` and `import 'vuetify/styles'` or you'll end up with duplicated styles.
 
 ## Variable API
 
 There are many SASS/SCSS variables that can be customized across the entire Vuetify framework. You can browse all the variables using the tool below:
 
-<alert type="info">
+<sass-api />
 
-  Some color-related variables for components are defined in the global material-theme variables: `$material-light` / `$material-dark`
+Available SASS variables are located on each component's API page.
 
-</alert>
-
-<!-- <sass-api /> -->
-
-## Example variable file
-
-Below is an example of what a custom variable file could look like:
-
-```scss { resource="src/sass/variables.scss" }
-// Globals
-$body-font-family: 'Work Sans', serif;
-$border-radius-root: 6px;
-$font-size-root: 14px;
-
-// Variables must come before the import
-$btn-letter-spacing: 0;
-$btn-font-weight: 400;
-$list-item-title-font-size: 0.929rem;
-$list-item-dense-title-font-size: 0.929rem;
-$list-item-dense-title-font-weight: initial;
-$fab-icon-sizes: (
-  'small': 20
-);
-$btn-sizes: (
-  'default': 41,
-  'large': 54
-);
-
-$typography: (
-  'h1': (
-    'size': 3.3125rem,
-    'line-height': 1.15em
-  ),
-  'h2': (
-    'size': 2.25rem,
-    'line-height': 1.5em
-  )
-);
-```
+![image](https://github.com/vuetifyjs/vuetify/assets/9064066/967da002-5a9e-4bce-8285-1fa9b849e36d "VBtn SASS Variables")
 
 ## Usage in templates
 
-You can access [global](/api/vuetify/) and **per** component variables in Vue templates by importing from the Vuetify package.
+You can access [global](/api/vuetify/) and per-component variables in Vue templates simply by importing the settings file:
 
-<alert type="info">
-
-  Importing variable files works the same in **SASS** and **SCSS** style templates
-
-</alert>
-
-### Global variables
-
-To access global SASS variables, import the main `styles.sass` file.
-
-```html
-<style lang="sass">
-  @import '~vuetify/src/styles/styles.sass'
-
-  @media #{map-get($display-breakpoints, 'md-and-down')}
-    .custom-class
-      display: none
-</style>
-```
-
-A complete list of global variables is located on the [$vuetify](/api/vuetify/) API page.
-
-### Component variables
-
-To access per component SASS variables you must import its style file from the Vuetify package.
-
-```html
+```html { resource="Comp1.vue" }
 <style lang="scss">
-  @import '~vuetify/src/components/VStepper/_variables.scss';
+  @use './settings';
 
-  .custom-class {
-    padding: $stepper-step-padding;
+  .my-button {
+    height: settings.$button-height;
   }
 </style>
 ```
 
-Detailed variable information is located on each component's API page; e.g. [v-alert](/api/v-alert/#sass-variables).
+Keep in mind that to obtain settings from Vuetify, you must forward its variables from within your local stylesheet. In the following example we modify `settings.scss` to **forward** instead of **use**:
 
-<alert type="warning">
+```diff { resource="src/styles/settings.scss" }
+- @use 'vuetify/settings' with (
++ @forward 'vuetify/settings' with (
+```
 
-  When importing Vuetify styles, ensure that your import is prefixed with a tilde **~**; e.g. `~vuetify/src/.../_variables.scss`
+## Disabling utility classes
 
-</alert>
+Utility classes are a powerful feature of Vuetify, but they can also be unnecessary for some projects. Each utility class is generated with a set of options that are defined [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_utilities.scss). Disable individual classes by setting their corresponding variable to `false`:
+
+```scss { resource="src/styles/settings.scss" }
+@forward 'vuetify/settings' with (
+  $utilities: (
+    "align-content": false,
+    "align-items": false,
+    "align-self": false,
+    "border-bottom": false,
+    "border-end": false,
+    "border-opacity": false,
+    "border-start": false,
+    "border-style": false,
+    "border-top": false,
+    "border": false,
+    "display": false,
+    "flex-direction": false,
+    "flex-grow": false,
+    "flex-shrink": false,
+    "flex-wrap": false,
+    "flex": false,
+    "float-ltr": false,
+    "float-rtl": false,
+    "float": false,
+    "font-italic": false,
+    "font-weight": false,
+    "justify-content": false,
+    "margin-bottom": false,
+    "margin-end": false,
+    "margin-left": false,
+    "margin-right": false,
+    "margin-start": false,
+    "margin-top": false,
+    "margin-x": false,
+    "margin-y": false,
+    "margin": false,
+    "negative-margin-bottom": false,
+    "negative-margin-end": false,
+    "negative-margin-left": false,
+    "negative-margin-right": false,
+    "negative-margin-start": false,
+    "negative-margin-top": false,
+    "negative-margin-x": false,
+    "negative-margin-y": false,
+    "negative-margin": false,
+    "order": false,
+    "overflow-wrap": false,
+    "overflow-x": false,
+    "overflow-y": false,
+    "overflow": false,
+    "padding-bottom": false,
+    "padding-end": false,
+    "padding-left": false,
+    "padding-right": false,
+    "padding-start": false,
+    "padding-top": false,
+    "padding-x": false,
+    "padding-y": false,
+    "padding": false,
+    "rounded-bottom-end": false,
+    "rounded-bottom-start": false,
+    "rounded-bottom": false,
+    "rounded-end": false,
+    "rounded-start": false,
+    "rounded-top-end": false,
+    "rounded-top-start": false,
+    "rounded-top": false,
+    "rounded": false,
+    "text-align": false,
+    "text-decoration": false,
+    "text-mono": false,
+    "text-opacity": false,
+    "text-overflow": false,
+    "text-transform": false,
+    "typography": false,
+    "white-space": false,
+  ),
+);
+```
+
+To disable all utility classes, set the entire `$utilities` variable to `false`:
+
+```scss { resource="src/styles/settings.scss" }
+@forward 'vuetify/settings' with (
+  $utilities: false,
+);
+```
+
+## Disabling color packs
+
+Color packs are handy for quickly applying a color to a component but mostly unused in production. To disable them, set the `$color-pack` variable to `false`:
+
+```scss { resource="src/styles/settings.scss" }
+@forward 'vuetify/settings' with (
+  $color-pack: false,
+);
+```
 
 ## Caveats
 
@@ -219,39 +243,18 @@ When using sass variables, there are a few considerations to be aware of.
 
 ### Duplicated CSS
 
-Importing a regular stylesheet into a `variables` file will cause massive style duplication. In the following snippet, we have an `overrides.sass` file to modify the **text-transform** CSS property of [v-btn](/components/buttons/).
+Placing actual styles or importing a regular stylesheet into the settings file will cause them to be duplicated everywhere the file is imported.
+Only put variables, mixins, and functions in the settings file, styles should be placed in the main stylesheet or loaded another way.
 
-```sass { resource="src/styles/overrides.sass" }
-.v-btn
-  text-transform: capitalize
-```
+### Build performance
 
-The following snippet is an example of what **NOT** to do.
+Vuetify loads precompiled CSS by default, enabling variable customisation will switch to the base SASS files instead which must be recompiled with your project.
+This can be a performance hit if you're using more than a few vuetify components, and also forces you to use the same SASS compiler version as us.
 
-```scss { resource="src/styles/variables.scss" }
-// The following import will cause style duplication
-@import './overrides.sass';
+### Symlinks
 
-$card-border-radius: 6px;
-$typography: (
-  'h1': (
-    'font-size': 2rem
-  )
-);
-```
+PNPM and Yarn 2+ create symlinks to library files instead of copying them to node_modules, sass doesn't seem to like this and sometimes doesn't apply the configuration.
 
-### Compilation time
+### sass-loader with `api: 'modern'`
 
-When using variables, the initial compilation of your application will increase. This is due to the fact that styles are updated in real time whenever you make a modification to a hoisted variable file. This is only experienced with the initial compilation step and can be improved by changing where you import Vuetify from. Keep in mind this _will not_ work if your application is affected by any of the [Vuetify loader limitations](/features/treeshaking/#limitations); your application will still work, but not receive the performance increase.
-
-```js { resource="src/plugins/vuetify.js" }
-// CORRECT
-import Vuetify from 'vuetify/lib/framework'
-
-// INCORRECT
-import Vuetify, { VRow } from 'vuetify/lib/framework'
-
-export default new Vuetify()
-```
-
-<backmatter />
+You might have to write a custom importer plugin to load the settings file.

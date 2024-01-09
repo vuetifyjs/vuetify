@@ -6,12 +6,17 @@
           v-model="value"
           disabled
           label="Disabled"
-          value="30"
         ></v-range-slider>
       </v-col>
     </v-row>
   </v-container>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const value = ref([30, 60])
+</script>
 
 <script>
   export default {

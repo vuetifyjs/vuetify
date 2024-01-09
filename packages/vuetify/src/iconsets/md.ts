@@ -1,8 +1,8 @@
+// Composables
+import { VLigatureIcon } from '@/composables/icons'
+
 // Utilities
 import { h } from 'vue'
-
-// Components
-import { VLigatureIcon } from '@/composables/icons'
 
 // Types
 import type { IconAliases, IconSet } from '@/composables/icons'
@@ -24,7 +24,8 @@ const aliases: IconAliases = {
   checkboxOff: 'check_box_outline_blank',
   checkboxIndeterminate: 'indeterminate_check_box',
   delimiter: 'fiber_manual_record', // for carousel
-  sort: 'arrow_upward',
+  sortAsc: 'arrow_upward',
+  sortDesc: 'arrow_downward',
   expand: 'keyboard_arrow_down',
   menu: 'menu',
   subgroup: 'arrow_drop_down',
@@ -42,6 +43,8 @@ const aliases: IconAliases = {
   file: 'attach_file',
   plus: 'add',
   minus: 'remove',
+  calendar: 'event',
+  eyeDropper: 'colorize',
 }
 
 const md: IconSet = {

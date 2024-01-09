@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-system-bar app>
+    <v-system-bar>
       <v-spacer></v-spacer>
 
       <v-icon>mdi-square</v-icon>
@@ -11,112 +11,269 @@
     </v-system-bar>
 
     <v-app-bar
-      app
-      clipped-left
+      color="grey-lighten-4"
       flat
+      height="72"
     >
       <v-avatar
-        v-for="n in 2"
-        :key="`avatar--${n}`"
-        class="mr-3"
-        color="grey lighten-1"
-        size="36"
+        class="ms-2"
+        color="surface-variant"
+        size="32"
+        variant="flat"
+      ></v-avatar>
+      <v-avatar
+        class="mx-2"
+        color="surface-variant"
+        size="32"
+        variant="flat"
       ></v-avatar>
 
-      <div class="mx-2"></div>
+      <v-btn
+        class="me-2"
+        color="grey"
+        height="40"
+        variant="flat"
+        width="80"
+      ></v-btn>
 
       <v-btn
-        v-for="n in 4"
-        :key="n"
-        class="mr-3"
-        color="grey lighten-1"
-        depressed
-        min-width="96"
-        rounded
-        small
-      >
-      </v-btn>
+        class="me-2"
+        color="grey"
+        height="40"
+        variant="flat"
+        width="100"
+      ></v-btn>
+
+      <v-btn
+        class="me-2"
+        color="grey"
+        height="40"
+        variant="flat"
+        width="120"
+      ></v-btn>
+
+      <v-btn
+        class="me-2"
+        color="grey"
+        height="40"
+        variant="flat"
+        width="120"
+      ></v-btn>
 
       <v-spacer></v-spacer>
-
     </v-app-bar>
 
-    <v-navigation-drawer
-      v-model="drawer"
+    <v-footer
       app
-      class="pa-2"
-      clipped
-      width="300"
-    >
-      <div class="d-flex align-center pa-1">
+      color="grey"
+      height="44"
+    ></v-footer>
 
-        <v-btn rounded depressed color="grey lighten-3" class="grow"></v-btn>
-
+    <v-navigation-drawer floating>
+      <div class="d-flex px-2 my-2">
         <v-btn
-          min-width="0"
-          depressed
-          class="ml-3"
-          color="grey lighten-3"
+          class="flex-grow-1"
+          color="grey"
+          height="40"
+          variant="flat"
         ></v-btn>
+
+        <v-avatar
+          class="ms-2"
+          color="surface-variant"
+          rounded
+          variant="flat"
+        ></v-avatar>
       </div>
 
-      <div class="d-flex align-center pa-1">
-        <v-btn rounded depressed color="grey lighten-3" class="grow"></v-btn>
-
+      <div class="d-flex px-2 my-2 align-center">
         <v-btn
-          v-for="n in 2"
-          :key="`btn--${n}`"
-          class="ml-3"
-          color="grey lighten-1"
-          fab
-          x-small
-          depressed
+          color="grey-lighten-4"
+          variant="flat"
+          height="40"
+          class="flex-grow-1 me-2"
         ></v-btn>
+
+        <v-avatar
+          color="surface-variant"
+          size="18"
+        ></v-avatar>
+
+        <v-avatar
+          class="ms-1"
+          color="surface-variant"
+          size="18"
+        ></v-avatar>
       </div>
 
-      <div class="pa-1 mb-4">
+      <div class="px-2 my-2">
         <v-text-field
-          dense
+          class="mb-4"
+          density="compact"
           flat
           hide-details
-          rounded
-          solo-inverted
+          prepend-inner-icon="mdi-magnify"
+          variant="solo-filled"
         ></v-text-field>
+
+        <v-sheet
+          class="mb-2"
+          color="surface-variant"
+          height="24"
+          rounded="pill"
+          width="50%"
+        ></v-sheet>
+
+        <v-sheet
+          class="mb-1"
+          color="grey-lighten-1"
+          height="12"
+          rounded="pill"
+          width="40%"
+        ></v-sheet>
+
+        <v-sheet
+          class="mb-1"
+          color="grey-lighten-1"
+          height="12"
+          rounded="pill"
+          width="20%"
+        ></v-sheet>
+
+        <v-sheet
+          class="mb-1"
+          color="grey-lighten-1"
+          height="12"
+          rounded="pill"
+          width="90%"
+        ></v-sheet>
+
+        <v-sheet
+          color="grey-lighten-1"
+          height="12"
+          rounded="pill"
+          width="70%"
+        ></v-sheet>
+
+        <v-divider class="my-6"></v-divider>
+
+        <v-sheet
+          class="mb-2"
+          color="surface-variant"
+          height="24"
+          rounded="pill"
+          width="30%"
+        ></v-sheet>
+
+        <v-sheet
+          class="mb-1"
+          color="grey-lighten-1"
+          height="12"
+          rounded="pill"
+          width="65%"
+        ></v-sheet>
+
+        <v-sheet
+          class="mb-1"
+          color="grey-lighten-1"
+          height="12"
+          rounded="pill"
+          width="70%"
+        ></v-sheet>
+
+        <v-sheet
+          class="mb-1"
+          color="grey-lighten-1"
+          height="12"
+          rounded="pill"
+          width="40%"
+        ></v-sheet>
+
+        <v-sheet
+          color="grey-lighten-1"
+          height="12"
+          rounded="pill"
+          width="100%"
+        ></v-sheet>
+
+        <v-divider class="my-6"></v-divider>
       </div>
     </v-navigation-drawer>
 
     <v-main>
-      <!--  -->
-    </v-main>
+      <v-sheet
+        class="mx-auto pa-2 pt-6"
+        color="grey-lighten-4"
+      >
+        <v-sheet
+          color="grey-lighten-2"
+          height="24"
+          rounded="pill"
+          width="88"
+        ></v-sheet>
 
-    <v-footer
-      app
-      color="transparent"
-      height="72"
-      inset
-    >
-      <v-text-field
-        background-color="grey lighten-1"
-        dense
-        flat
-        hide-details
-        rounded
-        solo
-      ></v-text-field>
-    </v-footer>
+        <v-slide-group show-arrows>
+          <v-slide-group-item
+            v-for="n in 5"
+            :key="n"
+          >
+            <v-sheet
+              class="ma-3"
+              color="grey-lighten-1"
+              height="200"
+              rounded
+              width="250"
+            ></v-sheet>
+          </v-slide-group-item>
+        </v-slide-group>
+      </v-sheet>
+
+      <v-sheet
+        class="mx-auto pa-2 pt-6"
+        color="grey-lighten-2"
+      >
+        <v-sheet
+          color="grey"
+          height="24"
+          rounded="pill"
+          width="88"
+        ></v-sheet>
+
+        <v-slide-group show-arrows>
+          <v-slide-group-item
+            v-for="n in 15"
+            :key="n"
+          >
+            <v-sheet
+              :width="n === 1 ? 300 : 150"
+              color="grey-lighten-1"
+              class="ma-3"
+              height="200"
+              rounded
+            ></v-sheet>
+          </v-slide-group-item>
+        </v-slide-group>
+
+        <v-container fluid>
+          <v-row>
+            <v-col
+              v-for="n in 24"
+              :key="n"
+              cols="2"
+            >
+              <v-sheet
+                color="grey-lighten-1"
+                height="200"
+                rounded
+              ></v-sheet>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-sheet>
+    </v-main>
   </v-app>
 </template>
 
-<script>
-  export default {
-    data: () => ({
-      drawer: null,
-      links: [
-        'Store',
-        'Library',
-        'Community',
-        'Profile',
-      ],
-    }),
-  }
+<script setup>
+  //
 </script>

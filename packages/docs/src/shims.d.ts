@@ -40,20 +40,7 @@ declare module 'markdown-it-link-attributes' {
   export default MarkdownItLinkAttributes
 }
 
-declare module 'cosmicjs' {
-  interface Cosmic {
-    bucket (params: {
-      slug: string
-      read_key: string
-      write_key?: string
-    }): Bucket
-  }
-  interface Bucket {
-    getObject<T>(params: Record<string, any>): Promise<{ object: T }>
-    getObjects<T>(params: Record<string, any>): Promise<{ objects: T[] }>
-  }
-  export default function Cosmic (): Cosmic
-}
+declare module 'markdown-it-emoji/bare.js'
 
 declare module 'virtual:examples' {
   import type { Component } from 'vue'
@@ -63,3 +50,20 @@ declare module 'virtual:examples' {
     source: string
   }>
 }
+
+declare module '@emailjs/browser' {
+  interface emailjs {
+    sendForm (
+      service_id: string,
+      template_id: string,
+      el: HTMLFormElement,
+      public_key: string
+    ): Promise<EmailJSResponseStatus>
+  }
+
+  const client: emailjs
+
+  export default client
+}
+
+declare module 'vue-instantsearch/vue3/es/src/instantsearch.js'

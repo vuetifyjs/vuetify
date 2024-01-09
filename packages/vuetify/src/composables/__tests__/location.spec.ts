@@ -2,8 +2,8 @@
 import { useLocation } from '../location'
 
 // Utilities
-import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
 
 // Types
 import { createVuetify } from '@/framework'
@@ -16,7 +16,8 @@ describe('location', () => {
     ['end', { right: 0, top: '50%', transform: 'translateY(-50%)' }],
     ['center', { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }],
     ['top start', { top: 0, left: 0 }],
-  ])('placement=%s', (location, styles) => {
+  ] as const)('placement=%s', (...args) => {
+    const [location, styles] = args
     mount({
       setup () {
         const { locationStyles } = useLocation({ location })

@@ -3,9 +3,9 @@ import { VItem } from '../VItem'
 import { VItemGroup } from '../VItemGroup'
 
 // Utilities
-import { h } from 'vue'
-import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { createVuetify } from '@/framework'
 
 describe('VItemGroup', () => {
@@ -85,7 +85,7 @@ describe('VItemGroup', () => {
 
     expect(events).toEqual([
       [[]],
-      [['foo', 'bar']],
+      [['bar']],
     ])
   })
 

@@ -1,7 +1,13 @@
 /* eslint-disable jest/no-commented-out-tests */
 
+// Composables
 import { createTheme } from '../theme'
+
+// Utilities
+import { describe, expect, it } from '@jest/globals'
 import { createApp } from 'vue'
+
+// Types
 import type { App } from 'vue'
 
 describe('createTheme', () => {
@@ -14,19 +20,25 @@ describe('createTheme', () => {
   })
 
   it('should create style element', async () => {
-    createTheme(app)
+    const { install } = createTheme()
+
+    install(app)
 
     expect(document.head).toMatchSnapshot()
   })
 
   it('should not generate style element if disabled', async () => {
-    createTheme(app, false)
+    const { install } = createTheme(false)
+
+    install(app)
 
     expect(document.head).toMatchSnapshot()
   })
 
   it('should generate on-* colors', async () => {
-    const theme = createTheme(app)
+    const theme = createTheme()
+
+    theme.install(app)
 
     const colors = [
       'on-background',
@@ -45,13 +57,15 @@ describe('createTheme', () => {
   })
 
   it('should generate color variants', async () => {
-    const theme = createTheme(app, {
+    const theme = createTheme({
       variations: {
         colors: ['primary', 'secondary'],
         lighten: 2,
         darken: 2,
       },
     })
+
+    theme.install(app)
 
     for (const color of ['primary', 'secondary']) {
       for (const variant of ['lighten', 'darken']) {
@@ -64,9 +78,11 @@ describe('createTheme', () => {
   })
 
   it('should update existing theme', async () => {
-    const theme = createTheme(app, {
+    const theme = createTheme({
       variations: false,
     })
+
+    theme.install(app)
 
     expect(theme.computedThemes.value.light.colors.background).not.toBe('#FF0000')
 
@@ -79,6 +95,58 @@ describe('createTheme', () => {
     }
 
     expect(theme.computedThemes.value.light.colors.background).toBe('#FF0000')
+  })
+
+  it('should set a CSP nonce if configured', async () => {
+    const { install } = createTheme({ cspNonce: 'my-csp-nonce' })
+
+    install(app)
+
+    const styleElement = document.getElementById('vuetify-theme-stylesheet')
+    expect(styleElement?.getAttribute('nonce')).toBe('my-csp-nonce')
+  })
+
+  it('should not set a CSP nonce if option was left blank', async () => {
+    const { install } = createTheme({})
+
+    install(app)
+
+    const styleElement = document.getElementById('vuetify-theme-stylesheet')
+    expect(styleElement?.getAttribute('nonce')).toBeNull()
+  })
+
+  it('should merge custom theme based upon the supplied dark property', async () => {
+    for (const dark of [true, false, undefined]) {
+      const theme = createTheme({
+        defaultTheme: 'myTheme',
+        themes: { myTheme: { dark } },
+      })
+
+      theme.install(app)
+
+      expect(theme.computedThemes.value.myTheme.dark).toBe(dark)
+      expect(theme.computedThemes.value.myTheme.colors).toHaveProperty('primary')
+    }
+  })
+
+  it('should generate variations for custom color keys', async () => {
+    const theme = createTheme({
+      themes: {
+        light: {
+          colors: { color2: '#1697f6' },
+        },
+      },
+      variations: {
+        colors: ['color2'],
+        lighten: 1,
+        darken: 1,
+      },
+    })
+
+    theme.install(app)
+
+    expect(theme.computedThemes.value.light.colors).toHaveProperty('color2-darken-1')
+    expect(theme.computedThemes.value.light.colors).toHaveProperty('color2-lighten-1')
   })
 
   // it('should use vue-meta@2.3 functionality', () => {

@@ -1,13 +1,13 @@
 <template>
   <v-file-input
     v-model="files"
-    color="deep-purple accent-4"
+    color="deep-purple-accent-4"
     counter
     label="File input"
     multiple
     placeholder="Select your files"
     prepend-icon="mdi-paperclip"
-    outlined
+    variant="outlined"
     :show-size="1000"
   >
     <template v-slot:selection="{ fileNames }">
@@ -17,7 +17,7 @@
           color="deep-purple-accent-4"
           label
           size="small"
-          class="mr-2"
+          class="me-2"
         >
           {{ fileName }}
         </v-chip>
@@ -32,6 +32,12 @@
     </template>
   </v-file-input>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const files = ref([])
+</script>
 
 <script>
   export default {

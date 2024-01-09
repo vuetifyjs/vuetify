@@ -1,6 +1,6 @@
 ---
-nav: Avatars
 meta:
+  nav: Avatars
   title: Avatar component
   description: The avatar component is used to control the size and border radius of an image. It can be used with numerous components to provide better visual context.
   keywords: avatars, vuetify avatar component, vue avatar component
@@ -8,15 +8,20 @@ related:
   - /components/badges/
   - /components/icons/
   - /components/lists/
+features:
+  figma: true
+  github: /components/VAvatar/
+  label: 'C: VAvatar'
+  report: true
 ---
 
 # Avatars
 
-The `v-avatar` component is typically used to display circular user profile pictures. This component will allow you to dynamically size and add a border radius of responsive images, icons, and text. A **tile** variation is available for displaying an avatar without border radius.
+The `v-avatar` component is typically used to display circular user profile pictures. This component will allow you to dynamically size and add a border radius of responsive images, icons, and text.  When **rounded** prop set to `0` will display an avatar without border radius.
 
 ![Avatar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-avatar/v-avatar-entry.png)
 
----
+<page-features />
 
 ## Usage
 
@@ -25,6 +30,12 @@ Avatars in their simplest form display content within a circular container.
 <usage name="v-avatar" />
 
 <entry />
+
+## API
+
+| Component | Description |
+| - | - |
+| [v-avatar](/api/v-avatar/) | Primary Component |
 
 ## Anatomy
 
@@ -39,11 +50,7 @@ The recommended placement of elements inside of `v-avatar` is:
 | - | - |
 | 1. Container | The Avatar container that typically holds a [v-icon](/components/icons/) or [v-img](/components/images/) component |
 
-## API
-
-| Component | Description |
-| - | - |
-| [v-avatar](/api/v-avatar/) | Primary Component |
+<api-inline hide-links />
 
 ## Examples
 
@@ -69,7 +76,7 @@ The `v-avatar` default slot allows you to render content such as `v-icon` compon
 
 <example file="v-avatar/slot-default" />
 
-<discovery />
+<promoted />
 
 ### Misc
 
@@ -85,8 +92,6 @@ Another example combining avatar with menu.
 
 #### Profile Card
 
-Using the **tile** prop, we can create a sleek hard-lined profile card.
+Using the **rounded** prop value `0`, we can create a sleek hard-lined profile card.
 
 <example file="v-avatar/misc-profile-card" />
-
-<backmatter />

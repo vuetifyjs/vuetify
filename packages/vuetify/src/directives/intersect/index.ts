@@ -1,10 +1,9 @@
-// Utils
+// Utilities
 import { SUPPORTS_INTERSECTION } from '@/util'
 
 // Types
 import type {
   DirectiveBinding,
-  ObjectDirective,
 } from 'vue'
 
 type ObserveHandler = (
@@ -72,7 +71,7 @@ function unmounted (el: HTMLElement, binding: ObserveDirectiveBinding) {
   delete el._observe![binding.instance!.$.uid]
 }
 
-export const Intersect: ObjectDirective<HTMLElement> = {
+export const Intersect = {
   mounted,
   unmounted,
 }

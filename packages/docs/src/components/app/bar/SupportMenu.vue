@@ -1,88 +1,81 @@
 <template>
-  <app-btn variant="text">
+  <app-btn
+    color="medium-emphasis"
+    class="ms-1"
+  >
     {{ title }}
+
     <chevron-down />
 
     <app-menu
-      min-width="180"
-      activator="parent"
       :items="items"
+      activator="parent"
+      width="220"
     />
   </app-btn>
 </template>
 
-<script lang="ts">
-  import { computed, defineComponent } from 'vue'
-  import { useI18n } from 'vue-i18n'
+<script setup>
+  // Components
   import ChevronDown from '@/components/icons/ChevronDown.vue'
-  import AppMenu from '@/components/app/menu/Menu.vue'
 
-  export default defineComponent({
-    name: 'SupportMenu',
+  // Composables
+  import { useI18n } from 'vue-i18n'
 
-    components: { ChevronDown, AppMenu },
+  // Utilities
+  import { computed } from 'vue'
+  import { rpath } from '@/util/routes'
 
-    setup () {
-      const { t } = useI18n()
-
-      return {
-        title: t('support'),
-        items: computed(() => ([
-          // { heading: t('professional-support') },
-          {
-            title: 'direct-support',
-            // to: {
-            //   name: 'Documentation',
-            //   params: {
-            //     category: 'introduction',
-            //     page: 'support',
-            //   },
-            // },
-          },
-          {
-            title: 'enterprise',
-            // to: {
-            //   name: 'Documentation',
-            //   params: {
-            //     category: 'introduction',
-            //     page: 'enterprise',
-            //   },
-            // },
-          },
-          // { divider: true },
-          // { heading: t('community-support') },
-          {
-            title: 'Discord',
-            href: 'https://community.vuetifyjs.com/',
-          },
-          {
-            title: 'github-discussions',
-            href: 'https://discussions.vuetifyjs.com/',
-          },
-          // { divider: true },
-          // { heading: t('resources-and-tools') },
-          {
-            title: 'file-a-bug-report',
-            href: 'https://issues.vuetifyjs.com/',
-          },
-          {
-            title: 'codepen-template',
-            href: 'https://template.vuetifyjs.com/',
-          },
-          {
-            title: 'github-issues',
-            href: 'https://github.com/vuetifyjs/vuetify/issues/',
-          },
-          {
-            title: 'documentation-status',
-            href: 'https://status.vuetifyjs.com/',
-          },
-          {
-            title: 'stack-overflow',
-            href: 'https://stackoverflow.com/search?q=vuetify',
-          },
-        ])),
-      }
+  const { t } = useI18n()
+  const title = t('support')
+  const items = computed(() => ([
+    { subheader: t('help-and-support') },
+    {
+      title: 'for-enterprise',
+      to: rpath('/introduction/enterprise-support/'),
+      appendIcon: 'mdi-shield-star-outline',
     },
-  })
+    {
+      title: 'file-a-bug-report',
+      href: 'https://issues.vuetifyjs.com/',
+      appendIcon: 'mdi-bug-outline',
+    },
+    {
+      title: 'faq',
+      to: rpath('/getting-started/frequently-asked-questions/'),
+      appendIcon: 'mdi-head-question-outline',
+    },
+    {
+      title: 'upgrade-guide',
+      to: rpath('/getting-started/upgrade-guide/'),
+      appendIcon: 'mdi-update',
+    },
+    {
+      title: 'github-discussions',
+      href: 'https://github.com/vuetifyjs/vuetify/discussions',
+      appendIcon: 'mdi-message-text-outline',
+    },
+    {
+      title: 'stack-overflow',
+      href: 'https://stackoverflow.com/search?q=vuetify',
+      appendIcon: 'mdi-layers-outline',
+    },
+    { divider: true },
+    { subheader: t('resources') },
+    {
+      title: 'github-issues',
+      href: 'https://github.com/vuetifyjs/vuetify/issues/',
+      appendIcon: 'mdi-alert-circle-outline',
+    },
+    {
+      title: 'documentation-status',
+      href: 'https://status.vuetifyjs.com/',
+      appendIcon: 'mdi-cloud-outline',
+    },
+    {
+      title: 'latest-releases',
+      href: 'https://github.com/vuetifyjs/vuetify/releases',
+      appendIcon: 'mdi-package-variant',
+    },
+  ]))
 </script>

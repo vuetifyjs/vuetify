@@ -44,19 +44,19 @@ $red: map-deep-merge(
 $text-on-red: () !default;
 $text-on-red: map-deep-merge(
   (
-    'base': map-get($shades, 'black'),
+    'base': map-get($shades, 'white'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
     'lighten-3': map-get($shades, 'black'),
-    'lighten-2': map-get($shades, 'black'),
-    'lighten-1': map-get($shades, 'black'),
-    'darken-1': map-get($shades, 'black'),
+    'lighten-2': map-get($shades, 'white'),
+    'lighten-1': map-get($shades, 'white'),
+    'darken-1': map-get($shades, 'white'),
     'darken-2': map-get($shades, 'white'),
     'darken-3': map-get($shades, 'white'),
     'darken-4': map-get($shades, 'white'),
     'accent-1': map-get($shades, 'black'),
-    'accent-2': map-get($shades, 'black'),
-    'accent-3': map-get($shades, 'black'),
+    'accent-2': map-get($shades, 'white'),
+    'accent-3': map-get($shades, 'white'),
     'accent-4': map-get($shades, 'white')
   ),
   $text-on-red
@@ -86,19 +86,19 @@ $pink: map-deep-merge(
 $text-on-pink: () !default;
 $text-on-pink: map-deep-merge(
   (
-    'base': map-get($shades, 'black'),
+    'base': map-get($shades, 'white'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
     'lighten-3': map-get($shades, 'black'),
-    'lighten-2': map-get($shades, 'black'),
-    'lighten-1': map-get($shades, 'black'),
+    'lighten-2': map-get($shades, 'white'),
+    'lighten-1': map-get($shades, 'white'),
     'darken-1': map-get($shades, 'white'),
     'darken-2': map-get($shades, 'white'),
     'darken-3': map-get($shades, 'white'),
     'darken-4': map-get($shades, 'white'),
-    'accent-1': map-get($shades, 'black'),
-    'accent-2': map-get($shades, 'black'),
-    'accent-3': map-get($shades, 'black'),
+    'accent-1': map-get($shades, 'white'),
+    'accent-2': map-get($shades, 'white'),
+    'accent-3': map-get($shades, 'white'),
     'accent-4': map-get($shades, 'white')
   ),
   $text-on-pink
@@ -128,19 +128,19 @@ $purple: map-deep-merge(
 $text-on-purple: () !default;
 $text-on-purple: map-deep-merge(
   (
+    'base': map-get($shades, 'white'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
-    'lighten-3': map-get($shades, 'black'),
-    'lighten-2': map-get($shades, 'black'),
+    'lighten-3': map-get($shades, 'white'),
+    'lighten-2': map-get($shades, 'white'),
     'lighten-1': map-get($shades, 'white'),
-    'base': map-get($shades, 'white'),
     'darken-1': map-get($shades, 'white'),
     'darken-2': map-get($shades, 'white'),
     'darken-3': map-get($shades, 'white'),
     'darken-4': map-get($shades, 'white'),
-    'accent-1': map-get($shades, 'black'),
-    'accent-2': map-get($shades, 'black'),
-    'accent-3': map-get($shades, 'black'),
+    'accent-1': map-get($shades, 'white'),
+    'accent-2': map-get($shades, 'white'),
+    'accent-3': map-get($shades, 'white'),
     'accent-4': map-get($shades, 'white')
   ),
   $text-on-purple
@@ -170,17 +170,17 @@ $deep-purple: map-deep-merge(
 $text-on-deep-purple: () !default;
 $text-on-deep-purple: map-deep-merge(
   (
+    'base': map-get($shades, 'white'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
-    'lighten-3': map-get($shades, 'black'),
-    'lighten-2': map-get($shades, 'black'),
+    'lighten-3': map-get($shades, 'white'),
+    'lighten-2': map-get($shades, 'white'),
     'lighten-1': map-get($shades, 'white'),
-    'base': map-get($shades, 'white'),
     'darken-1': map-get($shades, 'white'),
     'darken-2': map-get($shades, 'white'),
     'darken-3': map-get($shades, 'white'),
     'darken-4': map-get($shades, 'white'),
-    'accent-1': map-get($shades, 'black'),
+    'accent-1': map-get($shades, 'white'),
     'accent-2': map-get($shades, 'white'),
     'accent-3': map-get($shades, 'white'),
     'accent-4': map-get($shades, 'white')
@@ -212,18 +212,18 @@ $indigo: map-deep-merge(
 $text-on-indigo: () !default;
 $text-on-indigo: map-deep-merge(
   (
+    'base': map-get($shades, 'white'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
-    'lighten-3': map-get($shades, 'black'),
-    'lighten-2': map-get($shades, 'black'),
+    'lighten-3': map-get($shades, 'white'),
+    'lighten-2': map-get($shades, 'white'),
     'lighten-1': map-get($shades, 'white'),
-    'base': map-get($shades, 'white'),
     'darken-1': map-get($shades, 'white'),
     'darken-2': map-get($shades, 'white'),
     'darken-3': map-get($shades, 'white'),
     'darken-4': map-get($shades, 'white'),
-    'accent-1': map-get($shades, 'black'),
-    'accent-2': map-get($shades, 'black'),
+    'accent-1': map-get($shades, 'white'),
+    'accent-2': map-get($shades, 'white'),
     'accent-3': map-get($shades, 'white'),
     'accent-4': map-get($shades, 'white')
   ),
@@ -246,7 +246,7 @@ $blue: map-deep-merge(
     'accent-1': #82B1FF,
     'accent-2': #448AFF,
     'accent-3': #2979FF,
-    'accent-4': #2962FF
+    'accent-4': #2962FF,
   ),
   $blue
 );
@@ -254,19 +254,19 @@ $blue: map-deep-merge(
 $text-on-blue: () !default;
 $text-on-blue: map-deep-merge(
   (
+    'base': map-get($shades, 'white'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
     'lighten-3': map-get($shades, 'black'),
     'lighten-2': map-get($shades, 'black'),
-    'lighten-1': map-get($shades, 'black'),
-    'base': map-get($shades, 'black'),
-    'darken-1': map-get($shades, 'black'),
+    'lighten-1': map-get($shades, 'white'),
+    'darken-1': map-get($shades, 'white'),
     'darken-2': map-get($shades, 'white'),
     'darken-3': map-get($shades, 'white'),
     'darken-4': map-get($shades, 'white'),
     'accent-1': map-get($shades, 'black'),
-    'accent-2': map-get($shades, 'black'),
-    'accent-3': map-get($shades, 'black'),
+    'accent-2': map-get($shades, 'white'),
+    'accent-3': map-get($shades, 'white'),
     'accent-4': map-get($shades, 'white')
   ),
   $text-on-blue
@@ -296,20 +296,20 @@ $light-blue: map-deep-merge(
 $text-on-light-blue: () !default;
 $text-on-light-blue: map-deep-merge(
   (
+    'base': map-get($shades, 'white'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
     'lighten-3': map-get($shades, 'black'),
     'lighten-2': map-get($shades, 'black'),
     'lighten-1': map-get($shades, 'black'),
-    'base': map-get($shades, 'black'),
-    'darken-1': map-get($shades, 'black'),
-    'darken-2': map-get($shades, 'black'),
+    'darken-1': map-get($shades, 'white'),
+    'darken-2': map-get($shades, 'white'),
     'darken-3': map-get($shades, 'white'),
     'darken-4': map-get($shades, 'white'),
     'accent-1': map-get($shades, 'black'),
     'accent-2': map-get($shades, 'black'),
-    'accent-3': map-get($shades, 'black'),
-    'accent-4': map-get($shades, 'black')
+    'accent-3': map-get($shades, 'white'),
+    'accent-4': map-get($shades, 'white')
   ),
   $text-on-light-blue
 );
@@ -338,20 +338,20 @@ $cyan: map-deep-merge(
 $text-on-cyan: () !default;
 $text-on-cyan: map-deep-merge(
   (
+    'base': map-get($shades, 'black'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
     'lighten-3': map-get($shades, 'black'),
     'lighten-2': map-get($shades, 'black'),
     'lighten-1': map-get($shades, 'black'),
-    'base': map-get($shades, 'black'),
-    'darken-1': map-get($shades, 'black'),
-    'darken-2': map-get($shades, 'black'),
-    'darken-3': map-get($shades, 'black'),
+    'darken-1': map-get($shades, 'white'),
+    'darken-2': map-get($shades, 'white'),
+    'darken-3': map-get($shades, 'white'),
     'darken-4': map-get($shades, 'white'),
     'accent-1': map-get($shades, 'black'),
     'accent-2': map-get($shades, 'black'),
     'accent-3': map-get($shades, 'black'),
-    'accent-4': map-get($shades, 'black')
+    'accent-4': map-get($shades, 'white')
   ),
   $text-on-cyan
 );
@@ -380,20 +380,20 @@ $teal: map-deep-merge(
 $text-on-teal: () !default;
 $text-on-teal: map-deep-merge(
   (
+    'base': map-get($shades, 'white'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
     'lighten-3': map-get($shades, 'black'),
-    'lighten-2': map-get($shades, 'black'),
-    'lighten-1': map-get($shades, 'black'),
-    'base': map-get($shades, 'black'),
-    'darken-1': map-get($shades, 'black'),
+    'lighten-2': map-get($shades, 'white'),
+    'lighten-1': map-get($shades, 'white'),
+    'darken-1': map-get($shades, 'white'),
     'darken-2': map-get($shades, 'white'),
     'darken-3': map-get($shades, 'white'),
     'darken-4': map-get($shades, 'white'),
     'accent-1': map-get($shades, 'black'),
     'accent-2': map-get($shades, 'black'),
     'accent-3': map-get($shades, 'black'),
-    'accent-4': map-get($shades, 'black')
+    'accent-4': map-get($shades, 'white')
   ),
   $text-on-teal
 );
@@ -422,19 +422,19 @@ $green: map-deep-merge(
 $text-on-green: () !default;
 $text-on-green: map-deep-merge(
   (
+    'base': map-get($shades, 'white'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
     'lighten-3': map-get($shades, 'black'),
     'lighten-2': map-get($shades, 'black'),
-    'lighten-1': map-get($shades, 'black'),
-    'base': map-get($shades, 'black'),
-    'darken-1': map-get($shades, 'black'),
-    'darken-2': map-get($shades, 'black'),
+    'lighten-1': map-get($shades, 'white'),
+    'darken-1': map-get($shades, 'white'),
+    'darken-2': map-get($shades, 'white'),
     'darken-3': map-get($shades, 'white'),
     'darken-4': map-get($shades, 'white'),
     'accent-1': map-get($shades, 'black'),
-    'accent-2': map-get($shades, 'white'),
-    'accent-3': map-get($shades, 'white'),
+    'accent-2': map-get($shades, 'black'),
+    'accent-3': map-get($shades, 'black'),
     'accent-4': map-get($shades, 'black')
   ),
   $text-on-green
@@ -464,15 +464,15 @@ $light-green: map-deep-merge(
 $text-on-light-green: () !default;
 $text-on-light-green: map-deep-merge(
   (
+    'base': map-get($shades, 'black'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
     'lighten-3': map-get($shades, 'black'),
     'lighten-2': map-get($shades, 'black'),
     'lighten-1': map-get($shades, 'black'),
-    'base': map-get($shades, 'black'),
-    'darken-1': map-get($shades, 'black'),
-    'darken-2': map-get($shades, 'black'),
-    'darken-3': map-get($shades, 'black'),
+    'darken-1': map-get($shades, 'white'),
+    'darken-2': map-get($shades, 'white'),
+    'darken-3': map-get($shades, 'white'),
     'darken-4': map-get($shades, 'white'),
     'accent-1': map-get($shades, 'black'),
     'accent-2': map-get($shades, 'black'),
@@ -506,16 +506,16 @@ $lime: map-deep-merge(
 $text-on-lime: () !default;
 $text-on-lime: map-deep-merge(
   (
+    'base': map-get($shades, 'black'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
     'lighten-3': map-get($shades, 'black'),
     'lighten-2': map-get($shades, 'black'),
     'lighten-1': map-get($shades, 'black'),
-    'base': map-get($shades, 'black'),
     'darken-1': map-get($shades, 'black'),
     'darken-2': map-get($shades, 'black'),
-    'darken-3': map-get($shades, 'black'),
-    'darken-4': map-get($shades, 'black'),
+    'darken-3': map-get($shades, 'white'),
+    'darken-4': map-get($shades, 'white'),
     'accent-1': map-get($shades, 'black'),
     'accent-2': map-get($shades, 'black'),
     'accent-3': map-get($shades, 'black'),
@@ -548,16 +548,16 @@ $yellow: map-deep-merge(
 $text-on-yellow: () !default;
 $text-on-yellow: map-deep-merge(
   (
+    'base': map-get($shades, 'black'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
     'lighten-3': map-get($shades, 'black'),
     'lighten-2': map-get($shades, 'black'),
     'lighten-1': map-get($shades, 'black'),
-    'base': map-get($shades, 'black'),
     'darken-1': map-get($shades, 'black'),
     'darken-2': map-get($shades, 'black'),
     'darken-3': map-get($shades, 'black'),
-    'darken-4': map-get($shades, 'black'),
+    'darken-4': map-get($shades, 'white'),
     'accent-1': map-get($shades, 'black'),
     'accent-2': map-get($shades, 'black'),
     'accent-3': map-get($shades, 'black'),
@@ -590,16 +590,16 @@ $amber: map-deep-merge(
 $text-on-amber: () !default;
 $text-on-amber: map-deep-merge(
   (
+    'base': map-get($shades, 'black'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
     'lighten-3': map-get($shades, 'black'),
     'lighten-2': map-get($shades, 'black'),
     'lighten-1': map-get($shades, 'black'),
-    'base': map-get($shades, 'black'),
     'darken-1': map-get($shades, 'black'),
     'darken-2': map-get($shades, 'black'),
     'darken-3': map-get($shades, 'black'),
-    'darken-4': map-get($shades, 'black'),
+    'darken-4': map-get($shades, 'white'),
     'accent-1': map-get($shades, 'black'),
     'accent-2': map-get($shades, 'black'),
     'accent-3': map-get($shades, 'black'),
@@ -632,58 +632,61 @@ $orange: map-deep-merge(
 $text-on-orange: () !default;
 $text-on-orange: map-deep-merge(
   (
+    'base': map-get($shades, 'black'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
     'lighten-3': map-get($shades, 'black'),
     'lighten-2': map-get($shades, 'black'),
     'lighten-1': map-get($shades, 'black'),
-    'base': map-get($shades, 'black'),
-    'darken-1': map-get($shades, 'black'),
-    'darken-2': map-get($shades, 'black'),
-    'darken-3': map-get($shades, 'black'),
-    'darken-4': map-get($shades, 'black'),
+    'darken-1': map-get($shades, 'white'),
+    'darken-2': map-get($shades, 'white'),
+    'darken-3': map-get($shades, 'white'),
+    'darken-4': map-get($shades, 'white'),
     'accent-1': map-get($shades, 'black'),
     'accent-2': map-get($shades, 'black'),
     'accent-3': map-get($shades, 'black'),
-    'accent-4': map-get($shades, 'black')
+    'accent-4': map-get($shades, 'white')
   ),
   $text-on-orange
 );
 
 $deep-orange: () !default;
-$deep-orange: (
-  'base': #ff5722,
-  'lighten-5': #fbe9e7,
-  'lighten-4': #ffccbc,
-  'lighten-3': #ffab91,
-  'lighten-2': #ff8a65,
-  'lighten-1': #ff7043,
-  'darken-1': #f4511e,
-  'darken-2': #e64a19,
-  'darken-3': #d84315,
-  'darken-4': #bf360c,
-  'accent-1': #ff9e80,
-  'accent-2': #ff6e40,
-  'accent-3': #ff3d00,
-  'accent-4': #dd2c00
+$deep-orange: map-deep-merge(
+  (
+    'base': #ff5722,
+    'lighten-5': #fbe9e7,
+    'lighten-4': #ffccbc,
+    'lighten-3': #ffab91,
+    'lighten-2': #ff8a65,
+    'lighten-1': #ff7043,
+    'darken-1': #f4511e,
+    'darken-2': #e64a19,
+    'darken-3': #d84315,
+    'darken-4': #bf360c,
+    'accent-1': #ff9e80,
+    'accent-2': #ff6e40,
+    'accent-3': #ff3d00,
+    'accent-4': #dd2c00
+  ),
+  $deep-orange
 );
 
 $text-on-deep-orange: () !default;
 $text-on-deep-orange: map-deep-merge(
   (
+    'base': map-get($shades, 'white'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
     'lighten-3': map-get($shades, 'black'),
     'lighten-2': map-get($shades, 'black'),
-    'lighten-1': map-get($shades, 'black'),
-    'base': map-get($shades, 'black'),
-    'darken-1': map-get($shades, 'black'),
-    'darken-2': map-get($shades, 'black'),
-    'darken-3': map-get($shades, 'black'),
+    'lighten-1': map-get($shades, 'white'),
+    'darken-1': map-get($shades, 'white'),
+    'darken-2': map-get($shades, 'white'),
+    'darken-3': map-get($shades, 'white'),
     'darken-4': map-get($shades, 'white'),
     'accent-1': map-get($shades, 'black'),
-    'accent-2': map-get($shades, 'black'),
-    'accent-3': map-get($shades, 'black'),
+    'accent-2': map-get($shades, 'white'),
+    'accent-3': map-get($shades, 'white'),
     'accent-4': map-get($shades, 'white')
   ),
   $text-on-deep-orange
@@ -709,12 +712,12 @@ $brown: map-deep-merge(
 $text-on-brown: () !default;
 $text-on-brown: map-deep-merge(
   (
+    'base': map-get($shades, 'white'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
     'lighten-3': map-get($shades, 'black'),
-    'lighten-2': map-get($shades, 'black'),
+    'lighten-2': map-get($shades, 'white'),
     'lighten-1': map-get($shades, 'white'),
-    'base': map-get($shades, 'white'),
     'darken-1': map-get($shades, 'white'),
     'darken-2': map-get($shades, 'white'),
     'darken-3': map-get($shades, 'white'),
@@ -743,12 +746,12 @@ $blue-grey: map-deep-merge(
 $text-on-blue-grey: () !default;
 $text-on-blue-grey: map-deep-merge(
   (
+    'base': map-get($shades, 'white'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
     'lighten-3': map-get($shades, 'black'),
-    'lighten-2': map-get($shades, 'black'),
-    'lighten-1': map-get($shades, 'black'),
-    'base': map-get($shades, 'black'),
+    'lighten-2': map-get($shades, 'white'),
+    'lighten-1': map-get($shades, 'white'),
     'darken-1': map-get($shades, 'white'),
     'darken-2': map-get($shades, 'white'),
     'darken-3': map-get($shades, 'white'),
@@ -777,12 +780,12 @@ $grey: map-deep-merge(
 $text-on-grey: () !default;
 $text-on-grey: map-deep-merge(
   (
+    'base': map-get($shades, 'white'),
     'lighten-5': map-get($shades, 'black'),
     'lighten-4': map-get($shades, 'black'),
     'lighten-3': map-get($shades, 'black'),
     'lighten-2': map-get($shades, 'black'),
     'lighten-1': map-get($shades, 'black'),
-    'base': map-get($shades, 'black'),
     'darken-1': map-get($shades, 'white'),
     'darken-2': map-get($shades, 'white'),
     'darken-3': map-get($shades, 'white'),

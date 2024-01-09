@@ -12,7 +12,7 @@
       </v-col>
 
       <v-col cols="6">
-        <v-container class="pa-0 pl-2 my-n1">
+        <v-container class="pa-0 ps-2 my-n1">
           <v-row>
             <v-col
               class="d-flex"
@@ -103,7 +103,7 @@
             :label="copied ? 'Link copied' : 'Click to copy link'"
             class="pa-4"
             readonly
-            value="https://g.co/kgs/nkrK43"
+            model-value="https://g.co/kgs/nkrK43"
             @click="copy"
           ></v-text-field>
         </v-card>
@@ -113,7 +113,7 @@
     <v-divider></v-divider>
 
     <v-card-actions>
-      <span class="pl-2 text-grey-darken-2 font-weight-light text-caption">16,544 reviews</span>
+      <span class="ps-2 text-grey-darken-2 font-weight-light text-caption">16,544 reviews</span>
 
       <v-spacer></v-spacer>
 
@@ -124,7 +124,7 @@
       >
         <template v-slot:item="props">
           <v-icon
-            large
+            size="large"
             :color="props.isFilled ? 'purple-darken-4' : ''"
             :icon="`mdi-numeric-${props.index}-box`"
           ></v-icon>
@@ -136,6 +136,22 @@
     </div>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const link = ref()
+
+  const copied = ref(false)
+  const dialog = ref(false)
+  const rating = ref(10)
+
+  function copy () {
+    link.value.focus()
+    document.execCommand('selectAll', false, null)
+    copied.value = document.execCommand('copy')
+  }
+</script>
 
 <script>
   export default {

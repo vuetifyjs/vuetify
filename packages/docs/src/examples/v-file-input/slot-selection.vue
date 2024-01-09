@@ -12,7 +12,7 @@
           size="small"
           label
           color="primary"
-          class="mr-2"
+          class="me-2"
         >
           {{ fileName }}
         </v-chip>
@@ -20,6 +20,12 @@
     </template>
   </v-file-input>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const files = ref([])
+</script>
 
 <script>
   export default {

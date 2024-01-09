@@ -2,35 +2,40 @@
 import './VLocaleProvider.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { provideLocale } from '@/composables/locale'
-import { provideRtl } from '@/composables/rtl'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
-export const VLocaleProvider = defineComponent({
-  name: 'VLocaleProvider',
-
-  props: {
-    locale: String,
-    fallbackLocale: String,
-    messages: Object,
-    rtl: {
-      type: Boolean,
-      default: undefined,
-    },
+export const makeVLocaleProviderProps = propsFactory({
+  locale: String,
+  fallbackLocale: String,
+  messages: Object,
+  rtl: {
+    type: Boolean,
+    default: undefined,
   },
 
+  ...makeComponentProps(),
+}, 'VLocaleProvider')
+
+export const VLocaleProvider = genericComponent()({
+  name: 'VLocaleProvider',
+
+  props: makeVLocaleProviderProps(),
+
   setup (props, { slots }) {
-    const localeInstance = provideLocale(props)
-    const { rtlClasses } = provideRtl(props, localeInstance)
+    const { rtlClasses } = provideLocale(props)
 
     useRender(() => (
       <div
         class={[
           'v-locale-provider',
           rtlClasses.value,
+          props.class,
         ]}
+        style={ props.style }
       >
         { slots.default?.() }
       </div>
@@ -39,3 +44,5 @@ export const VLocaleProvider = defineComponent({
     return {}
   },
 })
+
+export type VLocaleProvider = InstanceType<typeof VLocaleProvider>

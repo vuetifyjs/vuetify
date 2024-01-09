@@ -1,6 +1,8 @@
+// Utilities
 import { defineStore } from 'pinia'
-import { IN_BROWSER } from '@/util/globals'
+import { preferredLocale } from '@/util/routes'
 
+// Types
 export type RootState = {
   locale: string
 }
@@ -8,6 +10,6 @@ export type RootState = {
 export const useLocaleStore = defineStore({
   id: 'locale',
   state: () => ({
-    locale: (IN_BROWSER && window.localStorage.getItem('currentLocale')) || 'en',
+    locale: preferredLocale(),
   } as RootState),
 })

@@ -1,162 +1,109 @@
 <template>
-  <validation-observer
-    ref="observer"
-    v-slot="{ invalid }"
-  >
-    <form @submit.prevent="submit">
-      <validation-provider
-        v-slot="{ errors }"
-        name="Name"
-        rules="required|max:10"
-      >
-        <v-text-field
-          v-model="name"
-          :counter="10"
-          :error-messages="errors"
-          label="Name"
-          required
-        ></v-text-field>
-      </validation-provider>
-      <validation-provider
-        v-slot="{ errors }"
-        name="phoneNumber"
-        :rules="{
-          required: true,
-          digits: 7,
-          regex: '^(71|72|74|76|81|82|84|85|86|87|88|89)\\d{5}$'
-        }"
-      >
-        <v-text-field
-          v-model="phoneNumber"
-          :counter="7"
-          :error-messages="errors"
-          label="Phone Number"
-          required
-        ></v-text-field>
-      </validation-provider>
-      <validation-provider
-        v-slot="{ errors }"
-        name="email"
-        rules="required|email"
-      >
-        <v-text-field
-          v-model="email"
-          :error-messages="errors"
-          label="E-mail"
-          required
-        ></v-text-field>
-      </validation-provider>
-      <validation-provider
-        v-slot="{ errors }"
-        name="select"
-        rules="required"
-      >
-        <v-select
-          v-model="select"
-          :items="items"
-          :error-messages="errors"
-          label="Select"
-          data-vv-name="select"
-          required
-        ></v-select>
-      </validation-provider>
-      <validation-provider
-        v-slot="{ errors }"
-        rules="required"
-        name="checkbox"
-      >
-        <v-checkbox
-          v-model="checkbox"
-          :error-messages="errors"
-          value="1"
-          label="Option"
-          type="checkbox"
-          required
-        ></v-checkbox>
-      </validation-provider>
+  <form @submit.prevent="submit">
+    <v-text-field
+      v-model="name.value.value"
+      :counter="10"
+      :error-messages="name.errorMessage.value"
+      label="Name"
+    ></v-text-field>
 
-      <v-btn
-        class="mr-4"
-        type="submit"
-        :disabled="invalid"
-      >
-        submit
-      </v-btn>
-      <v-btn @click="clear">
-        clear
-      </v-btn>
-    </form>
-  </validation-observer>
+    <v-text-field
+      v-model="phone.value.value"
+      :counter="7"
+      :error-messages="phone.errorMessage.value"
+      label="Phone Number"
+    ></v-text-field>
+
+    <v-text-field
+      v-model="email.value.value"
+      :error-messages="email.errorMessage.value"
+      label="E-mail"
+    ></v-text-field>
+
+    <v-select
+      v-model="select.value.value"
+      :items="items"
+      :error-messages="select.errorMessage.value"
+      label="Select"
+    ></v-select>
+
+    <v-checkbox
+      v-model="checkbox.value.value"
+      :error-messages="checkbox.errorMessage.value"
+      value="1"
+      label="Option"
+      type="checkbox"
+    ></v-checkbox>
+
+    <v-btn
+      class="me-4"
+      type="submit"
+    >
+      submit
+    </v-btn>
+
+    <v-btn @click="handleReset">
+      clear
+    </v-btn>
+  </form>
 </template>
 
-<script>
-  // import { required, digits, email, max, regex } from 'vee-validate/dist/rules'
-  // import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
+<script setup>
+  import { ref } from 'vue'
+  import { useField, useForm } from 'vee-validate'
 
-  // setInteractionMode('eager')
+  const { handleSubmit, handleReset } = useForm({
+    validationSchema: {
+      name (value) {
+        if (value?.length >= 2) return true
 
-  // extend('digits', {
-  //   ...digits,
-  //   message: '{_field_} needs to be {length} digits. ({_value_})',
-  // })
-
-  // extend('required', {
-  //   ...required,
-  //   message: '{_field_} can not be empty',
-  // })
-
-  // extend('max', {
-  //   ...max,
-  //   message: '{_field_} may not be greater than {length} characters',
-  // })
-
-  // extend('regex', {
-  //   ...regex,
-  //   message: '{_field_} {_value_} does not match {regex}',
-  // })
-
-  // extend('email', {
-  //   ...email,
-  //   message: 'Email must be valid',
-  // })
-
-  export default {
-    components: {
-      // ValidationProvider,
-      // ValidationObserver,
-    },
-    data: () => ({
-      name: '',
-      phoneNumber: '',
-      email: '',
-      select: null,
-      items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4',
-      ],
-      checkbox: null,
-    }),
-
-    methods: {
-      submit () {
-        this.$refs.observer.validate()
+        return 'Name needs to be at least 2 characters.'
       },
-      clear () {
-        this.name = ''
-        this.phoneNumber = ''
-        this.email = ''
-        this.select = null
-        this.checkbox = null
-        this.$refs.observer.reset()
+      phone (value) {
+        if (value?.length > 9 && /[0-9-]+/.test(value)) return true
+
+        return 'Phone number needs to be at least 9 digits.'
+      },
+      email (value) {
+        if (/^[a-z.-]+@[a-z.-]+\.[a-z]+$/i.test(value)) return true
+
+        return 'Must be a valid e-mail.'
+      },
+      select (value) {
+        if (value) return true
+
+        return 'Select an item.'
+      },
+      checkbox (value) {
+        if (value === '1') return true
+
+        return 'Must be checked.'
       },
     },
-  }
+  })
+  const name = useField('name')
+  const phone = useField('phone')
+  const email = useField('email')
+  const select = useField('select')
+  const checkbox = useField('checkbox')
+
+  const items = ref([
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+  ])
+
+  const submit = handleSubmit(values => {
+    alert(JSON.stringify(values, null, 2))
+  })
 </script>
 
-<codepen-resources lang="json">
+<playground-resources lang="json">
   {
-    "js": ["https://cdn.jsdelivr.net/npm/vee-validate@3.x/dist/vee-validate.js"]
+    "imports": {
+      "vee-validate": "https://cdn.jsdelivr.net/npm/vee-validate@4.8.4/dist/vee-validate.esm.js",
+      "@vue/devtools-api": "https://cdn.jsdelivr.net/npm/@vue/devtools-api@6.5.0/lib/esm/index.js"
+    }
   }
-</codepen-resources>
+</playground-resources>

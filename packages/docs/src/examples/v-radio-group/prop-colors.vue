@@ -18,9 +18,9 @@
                 value="red"
               ></v-radio>
               <v-radio
-                label="red darken-3"
-                color="red darken-3"
-                value="red darken-3"
+                label="red-darken-3"
+                color="red-darken-3"
+                value="red-darken-3"
               ></v-radio>
               <v-radio
                 label="indigo"
@@ -28,9 +28,9 @@
                 value="indigo"
               ></v-radio>
               <v-radio
-                label="indigo darken-3"
-                color="indigo darken-3"
-                value="indigo darken-3"
+                label="indigo-darken-3"
+                color="indigo-darken-3"
+                value="indigo-darken-3"
               ></v-radio>
               <v-radio
                 label="orange"
@@ -38,9 +38,9 @@
                 value="orange"
               ></v-radio>
               <v-radio
-                label="orange darken-3"
-                color="orange darken-3"
-                value="orange darken-3"
+                label="orange-darken-3"
+                color="orange-darken-3"
+                value="orange-darken-3"
               ></v-radio>
             </v-radio-group>
           </v-col>
@@ -90,6 +90,13 @@
     </v-card-text>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const ex7 = ref('red')
+  const ex8 = ref('primary')
+</script>
 
 <script>
   export default {

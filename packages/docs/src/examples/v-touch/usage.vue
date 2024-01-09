@@ -7,12 +7,14 @@
       down: () => swipe('Down')
     }"
     align="center"
-    class="grey lighten-2"
+    class="bg-grey-lighten-2"
     justify="center"
     style="height: 500px"
   >
-    <v-subheader>Swipe Direction</v-subheader>
-    {{ swipeDirection }}
+    <v-col class="text-center">
+      <div class="text-subtitle-2">Swipe Direction</div>
+      {{ swipeDirection }}
+    </v-col>
   </v-row>
 </template>
 

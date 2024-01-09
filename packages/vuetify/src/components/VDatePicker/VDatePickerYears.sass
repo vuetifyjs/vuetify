@@ -1,30 +1,14 @@
-@import './_variables.scss'
-
 .v-date-picker-years
-  font-size: $date-picker-years-font-size
-  font-weight: $date-picker-years-font-weight
-  height: $date-picker-years-portrait-height
-  list-style-type: none
-  overflow: auto
-  text-align: $date-picker-years-item-align
+  height: 320px
+  overflow-y: scroll
 
-  &.v-date-picker-years
-    padding: 0
+.v-date-picker-years__content
+  display: grid
+  flex: 1 1
+  justify-content: space-around
+  grid-template-columns: repeat(3, 1fr)
+  gap: 8px 24px
+  padding-inline: 36px
 
-  li
-    cursor: pointer
-    padding: $date-picker-years-item-padding
-    transition: none
-
-    &.active
-      font-size: $date-picker-years-active-font-size
-      font-weight: $date-picker-years-active-font-weight
-      padding: $date-picker-years-active-padding
-
-    &:hover
-      background: $date-picker-years-item-hover-background
-
-.v-picker--landscape
-  .v-date-picker-years
-    padding: 0
-    height: $date-picker-years-landscape-height
+  .v-btn
+    padding-inline: 8px

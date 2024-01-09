@@ -1,12 +1,16 @@
+// Composables
+import { makeComponentProps } from '@/composables/component'
+
+// Utilities
 import { camelize, capitalize, h } from 'vue'
-import { defineComponent } from './defineComponent'
+import { genericComponent } from './defineComponent'
 
 export function createSimpleFunctional (
   klass: string,
   tag = 'div',
   name?: string
 ) {
-  return defineComponent({
+  return genericComponent()({
     name: name ?? capitalize(camelize(klass.replace(/__/g, '-'))),
 
     props: {
@@ -14,12 +18,17 @@ export function createSimpleFunctional (
         type: String,
         default: tag,
       },
+
+      ...makeComponentProps(),
     },
 
     setup (props, { slots }) {
-      return () => h(props.tag, {
-        class: klass,
-      }, slots.default?.())
+      return () => {
+        return h(props.tag, {
+          class: [klass, props.class],
+          style: props.style,
+        }, slots.default?.())
+      }
     },
   })
 }

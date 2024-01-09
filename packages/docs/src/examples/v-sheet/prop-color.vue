@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row class="flex-child">
+    <v-row class="flex-child text-subtitle-2">
       <v-col
         class="d-flex"
         cols="12"
@@ -8,7 +8,7 @@
       >
         <v-sheet
           class="d-flex"
-          color="grey lighten-3"
+          color="grey-lighten-3"
           height="424"
         >
           <sheet-footer>
@@ -16,6 +16,7 @@
           </sheet-footer>
         </v-sheet>
       </v-col>
+
       <v-col
         class="d-flex"
         cols="12"
@@ -25,7 +26,7 @@
           <v-col cols="6">
             <v-sheet
               class="d-flex"
-              color="green lighten-3"
+              color="green-lighten-3"
               height="150"
             >
               <sheet-footer>
@@ -37,7 +38,7 @@
           <v-col cols="6">
             <v-sheet
               class="d-flex"
-              color="yellow lighten-3"
+              color="yellow-lighten-3"
               height="150"
             >
               <sheet-footer>
@@ -49,7 +50,7 @@
           <v-col cols="12">
             <v-sheet
               class="d-flex"
-              color="red lighten-3"
+              color="red-lighten-3"
               height="250"
             >
               <sheet-footer>
@@ -66,7 +67,7 @@
       >
         <v-sheet
           class="d-flex"
-          color="teal lighten-3"
+          color="teal-lighten-3"
           height="300"
         >
           <sheet-footer>
@@ -82,7 +83,7 @@
       >
         <v-sheet
           class="d-flex mt-auto"
-          color="purple lighten-3"
+          color="purple-lighten-3"
           height="300"
         >
           <sheet-footer>
@@ -94,6 +95,20 @@
   </v-container>
 </template>
 
+<script setup>
+  import { h } from 'vue'
+
+  const SheetFooter = {
+    setup (_, { slots }) {
+      return () => h('v-sheet', {
+        class: 'ma-auto px-4',
+        color: 'rgba(0, 0, 0, .36)',
+        height: 50,
+      }, slots.default())
+    },
+  }
+</script>
+
 <script>
   import { h } from 'vue'
 
@@ -103,12 +118,9 @@
       SheetFooter: {
         setup (_, { slots }) {
           return () => h('v-sheet', {
-            staticClass: 'mt-auto align-center justify-center d-flex px-2',
-            props: {
-              color: 'rgba(0, 0, 0, .36)',
-              dark: true,
-              height: 50,
-            },
+            class: 'ma-auto px-4',
+            color: 'rgba(0, 0, 0, .36)',
+            height: 50,
           }, slots.default())
         },
       },

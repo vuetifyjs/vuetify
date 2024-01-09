@@ -1,55 +1,62 @@
 <template>
-  <div class="text-center">
-    <v-bottom-sheet inset>
-      <template v-slot:activator="{ on, attrs }">
+  <v-bottom-sheet inset>
+    <template v-slot:activator="{ props }">
+      <div class="text-center">
         <v-btn
+          v-bind="props"
           color="red"
-          dark
-          v-bind="attrs"
-          v-on="on"
-        >
-          Open Player
-        </v-btn>
-      </template>
-      <v-card tile>
-        <v-progress-linear
-          :value="50"
-          class="my-0"
-          height="3"
-        ></v-progress-linear>
+          size="x-large"
+          text="Click Me"
+        ></v-btn>
+      </div>
+    </template>
 
-        <v-list>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>The Walker</v-list-item-title>
-              <v-list-item-subtitle>Fitz & The Trantrums</v-list-item-subtitle>
-            </v-list-item-content>
+    <v-sheet>
+      <v-progress-linear model-value="50"></v-progress-linear>
 
-            <v-spacer></v-spacer>
+      <v-list>
+        <v-list-item>
+          <v-list-item-title>The Walker</v-list-item-title>
 
-            <v-list-item-icon>
-              <v-btn icon>
-                <v-icon>mdi-rewind</v-icon>
-              </v-btn>
-            </v-list-item-icon>
+          <v-list-item-subtitle>Fitz & The Trantrums</v-list-item-subtitle>
 
-            <v-list-item-icon :class="{ 'mx-5': $vuetify.display.mdAndUp }">
-              <v-btn icon>
-                <v-icon>mdi-pause</v-icon>
-              </v-btn>
-            </v-list-item-icon>
+          <template v-slot:append>
+            <v-btn
+              icon="mdi-rewind"
+              variant="text"
+            ></v-btn>
 
-            <v-list-item-icon
-              class="ml-0"
-              :class="{ 'mr-3': $vuetify.display.mdAndUp }"
-            >
-              <v-btn icon>
-                <v-icon>mdi-fast-forward</v-icon>
-              </v-btn>
-            </v-list-item-icon>
-          </v-list-item>
-        </v-list>
-      </v-card>
-    </v-bottom-sheet>
-  </div>
+            <v-btn
+              :class="{ 'mx-5': display.mdAndUp.value }"
+              icon="mdi-pause"
+              variant="text"
+            ></v-btn>
+
+            <v-btn
+              :class="{ 'me-3': display.mdAndUp.value }"
+              class="ms-0"
+              icon="mdi-fast-forward"
+              variant="text"
+            ></v-btn>
+          </template>
+        </v-list-item>
+      </v-list>
+    </v-sheet>
+  </v-bottom-sheet>
 </template>
+
+<script setup>
+  import { useDisplay } from 'vuetify'
+
+  const display = useDisplay()
+</script>
+
+<script>
+  export default {
+    computed: {
+      display () {
+        return this.$vuetify.display
+      },
+    },
+  }
+</script>

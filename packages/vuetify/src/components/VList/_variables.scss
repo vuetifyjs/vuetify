@@ -2,7 +2,7 @@
 @use '../../styles/settings';
 @use '../../styles/tools';
 
-// Defaults
+// VList
 $list-background: rgba(var(--v-theme-surface)) !default;
 $list-border-color: settings.$border-color-root !default;
 $list-border-radius: 0 !default;
@@ -19,10 +19,12 @@ $list-indent-size: 16px !default;
 $list-nav-padding: 8px !default;
 $list-nav-subheader-font-size: .75rem !default;
 
+// VListSubheader
+$list-subheader-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $list-subheader-font-size: .875rem !default;
-$list-subheader-font-weight: 500 !default;
+$list-subheader-font-weight: 400 !default;
 $list-subheader-inset-margin: 56px !default;
-$list-subheader-inset-padding-start: 72px !default;
+$list-subheader-inset-padding-start: 56px !default;
 $list-subheader-line-height: 1.375rem !default;
 $list-subheader-min-height: 40px !default;
 $list-subheader-padding-end: 16px !default;
@@ -32,17 +34,23 @@ $list-subheader-min-height-multiplier: 1 !default;
 $list-subheader-text-opacity: var(--v-medium-emphasis-opacity) !default;
 $list-subheader-transition: 0.2s min-height settings.$standard-easing !default;
 
+// VListItem
 $list-item-border-color: settings.$border-color-root !default;
 $list-item-border-radius: 0 !default;
 $list-item-border-style: settings.$border-style-root !default;
 $list-item-border-width: 0 !default;
 $list-item-border-thin-width: thin !default;
 $list-item-elevation: 1 !default;
+$list-item-icon-opacity: var(--v-medium-emphasis-opacity) !default;
+$list-item-icon-active-opacity: 1 !default;
 $list-item-min-height: 40px !default;
-$list-item-padding: 8px 16px !default;
+$list-item-padding: 4px 16px !default;
+$list-item-prepend-size: 40px !default;
+$list-item-slim-prepend-size: 16px !default;
 $list-item-plain-opacity: .62 !default;
 $list-item-rounded-border-radius: map.get(settings.$rounded, null) !default;
-$list-item-transition: .2s settings.$standard-easing !default;
+$list-item-one-line-min-height: 48px !default;
+$list-item-one-line-padding: 8px 16px !default;
 $list-item-two-line-min-height: 64px !default;
 $list-item-two-line-padding: 12px 16px !default;
 $list-item-three-line-min-height: 88px !default;
@@ -53,12 +61,15 @@ $list-item-avatar-margin-end: 16px !default;
 $list-item-avatar-margin-start: 16px !default;
 $list-item-avatar-size: 40px !default;
 $list-item-avatar-margin-y: 4px !default;
+$list-item-slim-spacer-width: 8px !default;
+$list-item-slim-avatar-spacer-width: 4px !default;
 
 $list-item-action-margin-end: 12px !default;
 $list-item-action-margin-start: 12px !default;
 
 $list-item-icon-margin-end: 32px !default;
 $list-item-icon-margin-start: 32px !default;
+$list-item-slim-icon-margin: 8px !default;
 $list-item-icon-size: 16px !default;
 
 $list-item-media-margin-bottom: 0 !default;
@@ -96,7 +107,7 @@ $list-item-title-letter-spacing: tools.map-deep-get(settings.$typography, 'subti
 $list-item-title-line-height: tools.map-deep-get(settings.$typography, 'body-1', 'line-height') !default;
 $list-item-title-overflow-wrap: normal !default;
 $list-item-title-padding: 0 !default;
-$list-item-title-text-overflow: ellipsis;
+$list-item-title-text-overflow: ellipsis !default;
 $list-item-title-text-transform: none !default;
 $list-item-title-word-break: normal !default;
 $list-item-title-word-wrap: break-word !default;
@@ -128,7 +139,7 @@ $list-item-title-typography: (
   $list-item-title-letter-spacing,
   $list-item-title-line-height,
   $list-item-title-text-transform
-);
+) !default;
 
 $list-item-subtitle-typography: (
   $list-item-subtitle-font-size,
@@ -136,7 +147,7 @@ $list-item-subtitle-typography: (
   $list-item-subtitle-letter-spacing,
   $list-item-subtitle-line-height,
   $list-item-subtitle-text-transform
-);
+) !default;
 
 $list-item-nav-title-typography: (
   $list-item-nav-title-font-size,
@@ -144,7 +155,7 @@ $list-item-nav-title-typography: (
   $list-item-nav-title-letter-spacing,
   $list-item-nav-title-line-height,
   null
-);
+) !default;
 
 $list-item-nav-subtitle-typography: (
   $list-item-nav-subtitle-font-size,
@@ -152,7 +163,7 @@ $list-item-nav-subtitle-typography: (
   $list-item-nav-subtitle-letter-spacing,
   $list-item-nav-subtitle-line-height,
   null
-);
+) !default;
 
 $list-item-variants: (
   $list-background,
@@ -160,4 +171,4 @@ $list-item-variants: (
   $list-item-elevation,
   $list-item-plain-opacity,
   'v-list-item'
-);
+) !default;

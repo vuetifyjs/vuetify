@@ -4,8 +4,7 @@
     max-width="344"
   >
     <v-toolbar
-      color="deep-purple accent-4"
-      dark
+      color="deep-purple-accent-4"
       prominent
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
@@ -14,11 +13,9 @@
 
       <v-btn
         absolute
-        bottom
+        location="bottom left"
         color="white"
         fab
-        left
-        light
       >
         <v-icon>mdi-plus</v-icon>
       </v-btn>
@@ -52,7 +49,7 @@
         </v-col>
         <v-col cols="6">
           <v-progress-linear
-            color="deep-purple accent-4"
+            color="deep-purple-accent-4"
             indeterminate
             rounded
             height="6"

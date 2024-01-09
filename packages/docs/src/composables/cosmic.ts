@@ -1,14 +1,13 @@
-/* eslint-disable camelcase */
-import Cosmic from 'cosmicjs'
+// Imports
+import { createBucketClient } from '@cosmicjs/sdk'
 
-export const useCosmic = () => {
-  const api = Cosmic()
-  const read_key = import.meta.env.VITE_COSMIC_BUCKET_READ_KEY as string | undefined
-  const slug = import.meta.env.VITE_COSMIC_BUCKET_SLUG as string | undefined
-
-  const bucket = read_key && slug
-    ? api.bucket({ slug, read_key })
-    : { getObjects: () => Promise.resolve([]) } as never
-
-  return { bucket }
+export function useCosmic<T> (
+  bucketSlug = import.meta.env.VITE_COSMIC_2_BUCKET_SLUG as string | undefined,
+  readKey = import.meta.env.VITE_COSMIC_2_BUCKET_READ_KEY as string | undefined,
+) {
+  return {
+    bucket: (readKey && bucketSlug)
+      ? createBucketClient({ bucketSlug, readKey })
+      : undefined,
+  }
 }

@@ -1,7 +1,0 @@
-{
-  "props": {
-    "alt": "Attaches an alt property to the parallax image",
-    "src": "The image to parallax",
-    "srcset": "A set of alternate images to use based on device size. [Read more...](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset)"
-  }
-}

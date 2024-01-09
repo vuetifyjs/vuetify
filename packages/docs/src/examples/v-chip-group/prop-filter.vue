@@ -5,7 +5,7 @@
   >
     <v-toolbar
       flat
-      color="deep-purple accent-4"
+      color="deep-purple-accent-4"
       dark
     >
       <v-btn icon>
@@ -26,37 +26,37 @@
       >
         <v-chip
           filter
-          outlined
+          variant="outlined"
         >
           Elevator
         </v-chip>
         <v-chip
           filter
-          outlined
+          variant="outlined"
         >
           Washer / Dryer
         </v-chip>
         <v-chip
           filter
-          outlined
+          variant="outlined"
         >
           Fireplace
         </v-chip>
         <v-chip
           filter
-          outlined
+          variant="outlined"
         >
           Wheelchair access
         </v-chip>
         <v-chip
           filter
-          outlined
+          variant="outlined"
         >
           Dogs ok
         </v-chip>
         <v-chip
           filter
-          outlined
+          variant="outlined"
         >
           Cats ok
         </v-chip>
@@ -75,37 +75,37 @@
       >
         <v-chip
           filter
-          outlined
+          variant="outlined"
         >
           Snowy Rock Place
         </v-chip>
         <v-chip
           filter
-          outlined
+          variant="outlined"
         >
           Honeylane Circle
         </v-chip>
         <v-chip
           filter
-          outlined
+          variant="outlined"
         >
           Donna Drive
         </v-chip>
         <v-chip
           filter
-          outlined
+          variant="outlined"
         >
           Elaine Street
         </v-chip>
         <v-chip
           filter
-          outlined
+          variant="outlined"
         >
           Court Street
         </v-chip>
         <v-chip
           filter
-          outlined
+          variant="outlined"
         >
           Kennedy Park
         </v-chip>
@@ -113,6 +113,13 @@
     </v-card-text>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const amenities = ref([1, 4])
+  const neighborhoods = ref([1])
+</script>
 
 <script>
   export default {

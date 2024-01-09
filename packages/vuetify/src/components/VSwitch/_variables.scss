@@ -1,18 +1,33 @@
 @use '../../styles/settings';
 
 // VSwitch
-$switch-control-input-transition: .15s transform settings.$standard-easing !default;
+$switch-control-input-transition: .2s transform settings.$standard-easing !default;
 $switch-error-background-color: rgb(var(--v-theme-error)) !default;
-$switch-inset-track-border-radius: 14px !default;
-$switch-inset-track-height: 28px !default;
-$switch-inset-track-width: 48px !default;
+$switch-error-color: rgb(var(--v-theme-on-error)) !default;
+
+$switch-inset-thumb-height: 24px !default;
+$switch-inset-thumb-width: 24px !default;
+$switch-inset-thumb-off-height: 16px !default;
+$switch-inset-thumb-off-width: 16px !default;
+$switch-inset-track-border-radius: 9999px !default;
+$switch-inset-track-height: 32px !default;
+$switch-inset-track-width: 52px !default;
+
 $switch-label-margin-inline-start: 10px !default;
+$switch-loader-color: rgb(var(--v-theme-surface)) !default;
+
+$switch-thumb-background: rgb(var(--v-theme-surface-bright)) !default;
+$switch-thumb-color: rgb(var(--v-theme-on-surface-bright)) !default;
 $switch-thumb-elevation: 4 !default;
 $switch-thumb-height: 20px !default;
 $switch-thumb-width: 20px !default;
 $switch-thumb-offset: 2px !default;
 $switch-thumb-radius: 50% !default;
-$switch-track-radius: 8px !default;
+$switch-thumb-transition: .15s .05s transform settings.$decelerated-easing, .2s color settings.$standard-easing, .2s background-color settings.$standard-easing !default;
+
+$switch-track-background: rgb(var(--v-theme-surface-variant)) !default;
+$switch-track-radius: 9999px !default;
+$switch-track-width: 36px !default;
 $switch-track-height: 14px !default;
 $switch-track-opacity: .6 !default;
-$switch-track-width: 36px !default;
+$switch-track-transition: .2s background-color settings.$standard-easing !default;

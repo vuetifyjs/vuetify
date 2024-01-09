@@ -1,39 +1,27 @@
 <template>
-  <app-tooltip-btn
+  <app-btn
+    color="medium-emphasis"
     href="https://store.vuetifyjs.com/?utm_source=vuetifyjs.com&utm_medium=toolbar"
-    icon="mdi-shopping-outline"
-    path="store"
+    icon="mdi-cart-outline"
     rel="noopener"
     target="_blank"
     @click="onClick"
   />
 </template>
 
-<script lang="ts">
-  // Utilities
-  import { defineComponent } from 'vue'
-  // import { useRoute } from 'vue-router'
-  import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
+<script setup>
+  // Composables
+  import { useGtag } from 'vue-gtag-next'
+  import { useRoute } from 'vue-router'
 
-  export default defineComponent({
-    name: 'TeamLink',
+  const { event } = useGtag()
+  const { name } = useRoute()
 
-    components: { AppTooltipBtn },
-
-    setup () {
-      // const route = useRoute()
-
-      function onClick () {
-        // this.$gtag.event('click', {
-        //   event_category: 'toolbar',
-        //   event_label: 'store',
-        //   value: route.name,
-        // })
-      }
-
-      return {
-        onClick,
-      }
-    },
-  })
+  function onClick () {
+    event('click', {
+      event_category: 'app-bar',
+      event_label: 'store',
+      value: name,
+    })
+  }
 </script>

@@ -1,35 +1,52 @@
 <template>
-  <v-bottom-navigation
-    v-model="value"
-    :background-color="color"
-    dark
-    shift
-  >
-    <v-btn>
-      <span>Video</span>
 
-      <v-icon>mdi-television-play</v-icon>
-    </v-btn>
+  <v-layout class="overflow-visible" style="height: 56px;">
+    <v-bottom-navigation
+      v-model="value"
+      :bg-color="color"
+      mode="shift"
+    >
+      <v-btn>
+        <v-icon>mdi-television-play</v-icon>
 
-    <v-btn>
-      <span>Music</span>
+        <span>Video</span>
+      </v-btn>
 
-      <v-icon>mdi-music-note</v-icon>
-    </v-btn>
+      <v-btn>
+        <v-icon>mdi-music-note</v-icon>
 
-    <v-btn>
-      <span>Book</span>
+        <span>Music</span>
+      </v-btn>
 
-      <v-icon>mdi-book</v-icon>
-    </v-btn>
+      <v-btn>
+        <v-icon>mdi-book</v-icon>
 
-    <v-btn>
-      <span>Image</span>
+        <span>Book</span>
+      </v-btn>
 
-      <v-icon>mdi-image</v-icon>
-    </v-btn>
-  </v-bottom-navigation>
+      <v-btn>
+        <v-icon>mdi-image</v-icon>
+
+        <span>Image</span>
+      </v-btn>
+    </v-bottom-navigation>
+  </v-layout>
 </template>
+
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const value = ref(1)
+  const color = computed(() => {
+    switch (value.value) {
+      case 0: return 'blue-grey'
+      case 1: return 'teal'
+      case 2: return 'brown'
+      case 3: return 'indigo'
+      default: return 'blue-grey'
+    }
+  })
+</script>
 
 <script>
   export default {

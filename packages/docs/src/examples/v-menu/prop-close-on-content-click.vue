@@ -5,7 +5,7 @@
       label="Close on content click"
     ></v-switch>
     <v-menu
-      top
+      location="top"
       :close-on-content-click="closeOnContentClick"
     >
       <template v-slot:activator="{ props }">
@@ -29,6 +29,19 @@
     </v-menu>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const items = [
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me 2' },
+  ]
+
+  const closeOnContentClick = ref(true)
+</script>
 
 <script>
   export default {

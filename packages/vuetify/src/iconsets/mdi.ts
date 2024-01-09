@@ -1,8 +1,8 @@
+// Composables
+import { VClassIcon } from '@/composables/icons'
+
 // Utilities
 import { h } from 'vue'
-
-// Components
-import { VClassIcon } from '@/composables/icons'
 
 // Types
 import type { IconAliases, IconSet } from '@/composables/icons'
@@ -24,7 +24,8 @@ const aliases: IconAliases = {
   checkboxOff: 'mdi-checkbox-blank-outline',
   checkboxIndeterminate: 'mdi-minus-box',
   delimiter: 'mdi-circle', // for carousel
-  sort: 'mdi-arrow-up',
+  sortAsc: 'mdi-arrow-up',
+  sortDesc: 'mdi-arrow-down',
   expand: 'mdi-chevron-down',
   menu: 'mdi-menu',
   subgroup: 'mdi-menu-down',
@@ -42,6 +43,8 @@ const aliases: IconAliases = {
   file: 'mdi-paperclip',
   plus: 'mdi-plus',
   minus: 'mdi-minus',
+  calendar: 'mdi-calendar',
+  eyeDropper: 'mdi-eyedropper',
 }
 
 const mdi: IconSet = {

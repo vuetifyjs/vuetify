@@ -15,21 +15,24 @@
   .v-field
     .v-field__input
       > input
-        align-self: flex-start
         flex: 1 1
 
-    .v-field__append-inner
-      > .v-icon
-        margin-inline-start: 4px
-        transition: $combobox-transition
-
-  .v-field:not(.v-field--focused)
+  .v-field
     input
-      min-width: 0
+      min-width: $combobox-focused-input
+
+    &:not(.v-field--focused)
+      input
+        min-width: 0
 
   .v-field--dirty
     .v-combobox__selection
-      margin-inline-end: 2px
+      margin-inline-end: $combobox-selection-gap
+
+  .v-combobox__selection-text
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
 
 .v-combobox
   &__content
@@ -43,19 +46,24 @@
 
   &__selection
     display: inline-flex
+    align-items: center
+    height: calc($input-font-size * $input-line-height)
     letter-spacing: inherit
     line-height: inherit
+    max-width: calc(100% - $combobox-selection-gap - $combobox-input-buffer)
 
-  &--active-menu
-    .v-field__append-inner
-      > .v-icon
-        opacity: var(--v-high-emphasis-opacity)
-        transform: rotate(180deg)
+  &__selection
+    &:first-child
+      margin-inline-start: 0
 
-  &--chips
-    .v-combobox__selection
-      &:first-child
-        margin-inline-start: 0
+  &--chips.v-input--density-compact
+    .v-field--variant-solo,
+    .v-field--variant-solo-inverted,
+    .v-field--variant-filled,
+    .v-field--variant-solo-filled
+      .v-label.v-field-label
+        &--floating
+          top: 0px
 
   &--selecting-index
     .v-combobox__selection
@@ -65,16 +73,16 @@
         opacity: 1
 
     .v-field__input > input
-      caret-color: transparent !important
+      caret-color: transparent
 
   &--single
-    &.v-text-field input
+    &.v-text-field .v-field--focused input
       flex: 1 1
       position: absolute
       left: 0
       right: 0
-      padding-inline-start: inherit
-      padding-inline-end: inherit
+      width: 100%
+      padding-inline: inherit
 
     .v-field--active
       input
@@ -87,3 +95,11 @@
     .v-field--focused
       .v-combobox__selection
         opacity: 0
+
+  &__menu-icon
+    margin-inline-start: 4px
+    transition: $combobox-transition
+
+    .v-combobox--active-menu &
+      opacity: var(--v-high-emphasis-opacity)
+      transform: rotate(180deg)

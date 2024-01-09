@@ -1,15 +1,14 @@
 <template>
   <v-sheet
     ref="root"
-    :theme="isDark ? 'dark' : 'light'"
-    :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
+    :color="theme.name.value === 'light' && !user.mixedTheme ? 'surface-bright' : undefined"
+    :rounded="rounded"
+    :theme="theme.name.value === 'light' && user.mixedTheme ? 'dark' : theme.name.value"
     class="app-markup overflow-hidden"
     dir="ltr"
-    outlined
-    rounded
-    v-bind="$attrs"
   >
     <v-toolbar
+      v-if="resource"
       class="px-1"
       height="44"
     >
@@ -24,25 +23,28 @@
 
         {{ resource }}
       </v-sheet>
-
-      <v-spacer />
-
-      <v-tooltip location="bottom">
-        <template #activator="{ props }">
-          <v-btn
-            :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text'"
-            class="mr-1 text-disabled"
-            density="comfortable"
-            v-bind="props"
-            @click="copy"
-          />
-        </template>
-
-        <span>{{ t('copy-example-source') }}</span>
-      </v-tooltip>
     </v-toolbar>
 
-    <div class="pa-4">
+    <v-tooltip location="start">
+      <template #activator="{ props: activatorProps }">
+        <v-fade-transition hide-on-leave>
+          <v-btn
+            :key="icon"
+            :icon="icon"
+            class="text-disabled me-3 mt-1 app-markup-btn"
+            density="comfortable"
+            style="position: absolute; right: 0; top: 0;"
+            v-bind="activatorProps"
+            variant="text"
+            @click="copy"
+          />
+        </v-fade-transition>
+      </template>
+
+      <span>{{ t('copy-source') }}</span>
+    </v-tooltip>
+
+    <div class="pa-4 pe-12">
       <slot>
         <pre v-if="inline" :class="className">
           <code :class="className" v-html="highlighted" />
@@ -54,18 +56,8 @@
   </v-sheet>
 </template>
 
-<script lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-  import { useTheme } from 'vuetify'
-  import { useUserStore } from '@/store/user'
-
-  // Utilities
-  import { ComponentPublicInstance, computed, defineComponent, ref } from 'vue'
-  import { IN_BROWSER } from '@/util/globals'
-  import { wait } from '@/util/helpers'
-
-  // Imports
+<script setup lang="ts">
+  // Styles
   import Prism from 'prismjs'
   import 'prismjs/themes/prism.css'
   import 'prismjs/components/prism-bash.js'
@@ -76,86 +68,81 @@
   import 'prismjs/components/prism-scss.js'
   import 'prismjs/components/prism-typescript.js'
 
-  export default defineComponent({
-    name: 'Markup',
+  // Composables
+  import { useI18n } from 'vue-i18n'
+  import { useTheme } from 'vuetify'
+  import { useUserStore } from '@vuetify/one'
 
-    inheritAttrs: false,
+  // Utilities
+  import { ComponentPublicInstance, computed, ref, watchEffect } from 'vue'
+  import { wait } from '@/util/helpers'
+  import { stripLinks } from '@/components/api/utils'
 
-    props: {
-      resource: String,
-      code: String,
-      inline: Boolean,
-      language: {
-        type: String,
-        default: 'markup',
-      },
+  const props = defineProps({
+    resource: String,
+    code: null,
+    inline: Boolean,
+    language: {
+      type: String,
+      default: 'markup',
     },
-
-    setup (props) {
-      const user = useUserStore()
-      const theme = useTheme()
-      const clicked = ref(false)
-      const root = ref<ComponentPublicInstance>()
-      const type = ref('js')
-      const { t } = useI18n()
-
-      const highlighted = computed(() => (
-        props.code && props.language && Prism.highlight(props.code, Prism.languages[props.language], props.language)
-      ))
-      const className = computed(() => `langauge-${props.language}`)
-
-      async function copy () {
-        if (!IN_BROWSER || !root.value) return
-
-        const el = root.value.$el.querySelector('code')
-
-        if (!el) return
-
-        el.setAttribute('contenteditable', 'true')
-        el.focus()
-
-        document.execCommand('selectAll', false, undefined)
-        document.execCommand('copy')
-
-        el.removeAttribute('contenteditable')
-
-        clicked.value = true
-
-        await wait(500)
-
-        window.getSelection()?.removeAllRanges()
-
-        clicked.value = false
-      }
-
-      const isDark = computed(() => {
-        return user.mixedTheme || theme.current.value.dark
-      })
-
-      return {
-        root,
-        isDark,
-        highlighted,
-        className,
-        clicked,
-        copy,
-        type,
-        t,
-      }
+    rounded: {
+      type: Boolean,
+      default: true,
     },
   })
+
+  // Transform inline links in typescript into actual links
+  Prism.languages.insertBefore('typescript', 'string', {
+    hyperlink: /<a.*?>(.*?)<\/a>/g,
+  })
+  Prism.hooks.add('wrap', env => {
+    if (env.type === 'hyperlink' && env.tag !== 'a') {
+      env.tag = 'a'
+      env.content = env.content.replaceAll('&lt;', '<')
+      env.attributes.href = /href="(.*?)"/.exec(env.content)?.[1] || ''
+      env.attributes.target = '_blank'
+      env.content = stripLinks(env.content)[0]
+    }
+  })
+
+  const user = useUserStore()
+  const theme = useTheme()
+  const { t } = useI18n()
+  const clicked = ref(false)
+  const root = ref<ComponentPublicInstance>()
+
+  const highlighted = ref('')
+  watchEffect(async () => {
+    highlighted.value = props.code && props.language && Prism.highlight(await props.code, Prism.languages[props.language], props.language)
+  })
+
+  const className = computed(() => `language-${props.language}`)
+  const icon = computed(() => clicked.value ? 'mdi-check' : 'mdi-clipboard-text-outline')
+
+  async function copy () {
+    const el = root.value?.$el.querySelector('code')
+
+    navigator.clipboard.writeText(props.code || el?.innerText || '')
+
+    clicked.value = true
+
+    await wait(2000)
+
+    clicked.value = false
+  }
 </script>
 
 <style lang="sass">
   .v-sheet.app-markup
-    // margin: 16px 0
     position: relative
+
+    &:not(:hover)
+      .app-markup-btn
+        opacity: 0 !important
 
     &:not(:hover) .v-btn--copy .v-icon
       opacity: .4
-
-    > pre
-      border-radius: inherit
 
     code,
     pre
@@ -176,15 +163,17 @@
       word-spacing: normal
       word-wrap: normal
 
-    pre
+    pre,
+    code
       &::after
         bottom: .5rem
         color: hsla(0, 0%, 19%, 0.5)
         font-family: inherit
         font-size: 0.7rem
         font-weight: 700
+        pointer-events: none
         position: absolute
-        right: 12px
+        right: 1rem
         text-transform: uppercase
 
     pre.language-bash::after
@@ -194,7 +183,7 @@
       content: 'html'
 
     pre.language-js::after
-      content: 'js'
+      content: ' js '
 
     pre.language-json::after
       content: 'json'
@@ -202,16 +191,20 @@
     pre.language-sass::after
       content: 'sass'
 
-    pre.language-scss::after
+    code.language-scss::after
       content: 'scss'
 
     pre.language-ts::after
-      content: 'ts'
+      content: ' ts '
 
     pre.language-vue::after
       content: 'vue'
 
+    // TODO: handle this differently
+    &.v-theme--blackguard,
     &.v-theme--dark
+      --prism-interpolation: var(--prism-operator)
+
       code,
       pre
         color: #ccc !important
@@ -219,6 +212,7 @@
         &::selection, ::selection
           background-color: #113663
 
+      code,
       pre
         &::after
           color: hsla(0, 0%, 50%, 1)

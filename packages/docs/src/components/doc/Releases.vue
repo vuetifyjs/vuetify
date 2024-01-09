@@ -1,156 +1,306 @@
 <template>
-  <div>
+  <div class="border rounded my-6">
     <v-autocomplete
-      v-model="search"
+      ref="autocomplete"
+      v-model="model"
+      v-model:search="search"
       :items="releases"
-      class="mt-8"
-      item-title="name"
-      hide-details
-      label="Select Release Version"
       :menu-props="menuProps"
+      :placeholder="tag"
+      hide-details
+      hide-no-data
+      density="comfortable"
+      item-title="name"
+      label="Select Release Version"
+      persistent-placeholder
       prepend-inner-icon="mdi-text-box-search-outline"
       return-object
-      variant="filled"
-      @blur="resetSearch"
-      @focus="onFocus"
-    />
+    >
+      <template #selection>
+        <div class="d-flex align-center">
+          <div class="me-1">{{ model?.tag_name }}</div>
+
+          <template v-if="model?.reactions?.total_count">
+            &mdash;
+          </template>
+
+          <template v-for="(value, key) in reactions" :key="key">
+            <template v-if="model?.reactions?.[key]">
+              <span class="d-inline-flex align-center text-body-2 me-2">
+                {{ value }}
+
+                <span class="text-caption">{{ model.reactions[key] }}</span>
+              </span>
+            </template>
+          </template>
+        </div>
+      </template>
+
+      <template #item="{ item, props: itemProps }">
+        <v-list-item
+          v-if="item?.title"
+          v-bind="itemProps"
+        >
+          <template v-if="item.raw?.reactions" #append>
+            {{ genEmoji(item.raw.reactions.total_count) }}
+          </template>
+        </v-list-item>
+
+        <template v-else>
+          <v-divider />
+
+          <v-list-item
+            :title="t('load-more')"
+            class="mb-n2"
+            @click="store.fetch"
+          />
+        </template>
+      </template>
+
+      <template #append-inner>
+        <v-progress-circular
+          v-if="store.isLoading"
+          indeterminate="disable-shrink"
+          size="18"
+          width="2"
+        />
+      </template>
+    </v-autocomplete>
 
     <v-card
-      min-height="180"
-      flat
-      border="t-0"
+      variant="flat"
       rounded="t-0 b"
     >
       <div
-        v-if="!!search"
-        class="d-flex justify-space-between"
+        v-if="model?.author"
+        class="d-flex align-center justify-space-between pa-4 bg-grey-lighten-5"
       >
-        <v-list-item>
-          <v-list-item-avatar size="48" class="mr-4 mt-2 mb-2">
-            <v-img :src="search.author.avatar_url" />
-          </v-list-item-avatar>
+        <div class="d-flex align-center text-caption">
+          <i18n-t v-if="publishedOn" keypath="published" scope="global">
+            <template #date>
+              <border-chip
+                :text="publishedOn"
+                class="ms-1"
+                prepend-icon="mdi-calendar"
+              />
+            </template>
+          </i18n-t>
+        </div>
 
-          <v-list-item-header>
-            <v-list-item-title class="mb-1 text-h6">
-              <i18n-t keypath="released-by">
-                <template #author>
-                  <app-link :href="search.author.html_url">
-                    {{ search.author.login }}
-                  </app-link>
-                </template>
-              </i18n-t>
-            </v-list-item-title>
-
-            <v-list-item-subtitle>
-              <i18n-t keypath="published-on">
-                <template #date>
-                  <strong v-text="search.published_at" />
-                </template>
-              </i18n-t>
-            </v-list-item-subtitle>
-          </v-list-item-header>
-        </v-list-item>
-
-        <div class="pr-3 d-flex align-center flex-1-0-auto">
+        <div class="d-flex align-center">
           <app-tooltip-btn
             v-for="(tooltip, i) in tooltips"
             :key="i"
             :href="tooltip.href"
             :icon="tooltip.icon"
             :path="tooltip.path"
+            :color="tooltip.color ?? 'text-high-emphasis'"
             :target="tooltip.href ? '_blank' : undefined"
+            class="text-white ms-2"
+            density="comfortable"
+            size="small"
+            variant="flat"
+            @click="tooltip?.onClick?.()"
           />
         </div>
       </div>
 
-      <v-divider />
+      <template v-if="model?.body">
+        <v-divider />
 
-      <div class="pa-4">
-        <app-markdown class="releases" :content="search ? search.body : ''" />
-      </div>
+        <div class="px-4 pt-4">
+          <app-markdown
+            :content="model.body"
+            class="releases"
+          />
+        </div>
+
+        <template v-if="model.zipball_url && model.tarball_url">
+          <v-divider class="my-2" />
+
+          <div class="px-4 pb-4">
+            <h2 class="text-h6 font-weight-bold">Assets</h2>
+
+            <app-sheet>
+              <v-list-item
+                :href="model.zipball_url"
+                target="_blank"
+                prepend-icon="mdi-folder-zip-outline"
+                title="Source code (zip)"
+                slim
+                nav
+                append-icon="mdi-download-box-outline"
+              />
+
+              <v-divider />
+
+              <v-list-item
+                :href="model.tarball_url"
+                target="_blank"
+                prepend-icon="mdi-folder-zip-outline"
+                title="Source code (tar.gz)"
+                slim
+                nav
+                append-icon="mdi-download-box-outline"
+              />
+            </app-sheet>
+          </div>
+        </template>
+      </template>
+
+      <v-skeleton-loader
+        v-if="!model && store.isLoading"
+        type="heading, article, heading, subtitle, text, sentences"
+        class="pa-4"
+      />
     </v-card>
   </div>
 </template>
 
 <script setup lang="ts">
+  // Composables
+  import { useI18n } from 'vue-i18n'
+  import { useDate, useDisplay, version } from 'vuetify'
+  import { useRoute, useRouter } from 'vue-router'
+
+  // Stores
+  import { Release, useReleasesStore } from '@/store/releases'
+
   // Utilities
-  import { computed, nextTick, onMounted, ref } from 'vue'
+  import { computed, onBeforeMount, ref, shallowRef, watch } from 'vue'
+  import { wait } from '@/util/helpers'
 
-  const isFocused = ref(false)
-  const isLoading = ref(true)
-  const isSearching = ref(false)
-  const releases = ref<any[]>([])
-  const search = ref<any>()
-  let timeout = -1
-
-  const onFocus = () => {
-    clearTimeout(timeout)
-
-    isFocused.value = true
+  const reactions = {
+    '+1': '👍',
+    hooray: '🎉',
+    rocket: '🚀',
+    laugh: '😂',
+    heart: '❤️',
+    eyes: '👀',
   }
 
-  const resetSearch = async () => {
-    clearTimeout(timeout)
+  const { smAndUp } = useDisplay()
+  const { t } = useI18n()
+  const adapter = useDate()
+  const route = useRoute()
+  const router = useRouter()
+  const store = useReleasesStore()
 
-    await nextTick(() => {
-      isSearching.value = false
-
-      timeout = window.setTimeout(() => (isFocused.value = false), timeout)
-    })
-  }
+  const autocomplete = ref()
+  const clicked = ref('copy-link')
+  const model = ref<Release>()
+  const search = shallowRef('')
+  let timeout = -1 as any
 
   const menuProps = computed(() => {
     return {
       contentClass: 'notes-autocomplete rounded-b-lg',
+      maxHeight: 300,
     }
   })
 
   const tooltips = computed(() => {
     return [
       {
+        color: '#3b5998',
+        icon: clicked.value === 'copied' ? 'mdi-check' : 'mdi-share-variant-outline',
+        async onClick () {
+          navigator.clipboard.writeText(`${window.location.origin}/getting-started/release-notes/?version=${model.value!.tag_name}`)
+
+          clicked.value = 'copied'
+
+          await wait(1500)
+
+          clicked.value = 'copy-link'
+        },
+        path: clicked.value,
+      },
+      {
+        color: '#738ADB',
         icon: 'mdi-discord',
         href: 'https://discord.gg/QHWSAbA',
         path: 'discuss-on-discord',
       },
       {
+        color: '#212121',
+        href: model.value!.html_url,
         icon: 'mdi-github',
-        href: `https://github.com/vuetifyjs/vuetify/discussions?discussions_q=${search.value.tag_name}`,
-        path: 'discuss-on-github',
-      },
-      {
-        icon: 'mdi-alert-circle-outline',
-        href: 'https://issues.vuetifyjs.com/',
-        path: 'file-a-bug-report',
-      },
-      {
-        icon: 'mdi-open-in-new',
-        href: search.value.html_url,
         path: 'open-github-release',
       },
     ]
   })
 
-  onMounted(async () => {
-    const filteredReleases = []
-    const res = await Promise.all([
-      fetch('https://api.github.com/repos/vuetifyjs/vuetify/releases', { method: 'GET' }),
-      fetch('https://api.github.com/repos/vuetifyjs/vuetify/releases?page=2', { method: 'GET' }),
-      // fetch('https://api.github.com/repos/vuetifyjs/vuetify/releases?page=3', { method: 'GET' }),
-    ]).then(v => Promise.all(v.map(res => res.json())))
+  const releases = computed(() => {
+    const releases = store.releases.slice()
 
-    for (const release of res.flat()) {
-      if (release.name.startsWith('v2')) continue
+    releases.push(null as any)
 
-      filteredReleases.push({
-        ...release,
-        published_at: new Date(release.published_at).toDateString(),
-      })
-    }
-
-    isLoading.value = false
-    releases.value = filteredReleases
-    search.value = filteredReleases[0]
+    return releases
   })
+
+  const tag = computed(() => (route.query.version ?? `v${version}`) as string)
+
+  const publishedOn = computed(() => {
+    if (!model.value?.published_at) return undefined
+
+    return adapter.format(new Date(model.value.published_at), smAndUp.value ? 'fullDateWithWeekday' : 'normalDateWithWeekday')
+  })
+
+  onBeforeMount(async () => {
+    await store.fetch()
+
+    model.value = await store.find(tag.value)
+  })
+
+  watch(model, val => {
+    const version = val?.tag_name ?? tag.value
+
+    if (!version) return
+
+    router.push({ query: { version } })
+
+    autocomplete.value?.blur()
+  })
+
+  watch(search, onSearch)
+
+  function genEmoji (count: number) {
+    switch (true) {
+      case (count >= 100): return '💫'
+      case (count > 50): return '🔥'
+      case (count > 30): return '🌶️'
+      default: return undefined
+    }
+  }
+
+  async function onSearch (val: string) {
+    clearTimeout(timeout)
+
+    timeout = setTimeout(() => store.find(val), 500)
+  }
+
+  // function timeAgo (string: string): string {
+  //   const date = adapter.toJsDate(adapter.date(string))
+  //   const now = new Date()
+  //   const seconds = Math.floor((now.getTime() - date.getTime()) / 1000)
+
+  //   let interval = seconds / 31536000
+  //   if (interval > 1) return `${Math.floor(interval)} years ago`
+
+  //   interval = seconds / 2592000
+  //   if (interval > 1) return `${Math.floor(interval)} months ago`
+
+  //   interval = seconds / 86400
+  //   if (interval > 1) return `${Math.floor(interval)} days ago`
+
+  //   interval = seconds / 3600
+  //   if (interval > 1) return `${Math.floor(interval)} hours ago`
+
+  //   interval = seconds / 60
+  //   if (interval > 1) return `${Math.floor(interval)} minutes ago`
+
+  //   return `${Math.floor(seconds)} seconds ago`
+  // }
 </script>
 
 <style lang="sass">

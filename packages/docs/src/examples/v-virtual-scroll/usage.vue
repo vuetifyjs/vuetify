@@ -1,55 +1,48 @@
 <template>
-  <div class="py-6 grow">
-    <v-slider
-      v-model="count"
-      hide-details
-      min="7000"
-      max="15000"
-    ></v-slider>
-    <div class="text-center font-weight-bold">
-      {{ items.length }} Total Items
-    </div>
-
-    <v-card outlined>
-      <v-virtual-scroll
-        :items="items"
-        v-bind="$attrs"
-      >
+  <usage-example
+    v-model="model"
+    :code="code"
+    :name="name"
+    :options="options"
+  >
+    <div>
+      <v-virtual-scroll v-bind="props" :items="items">
         <template v-slot:default="{ item }">
-          <div class="px-2">
-            I'm item number {{ item }}
-          </div>
+          Item {{ item }}
         </template>
       </v-virtual-scroll>
-    </v-card>
-  </div>
+    </div>
+
+    <!-- <template v-slot:configuration>
+    </template> -->
+  </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'Usage',
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-    inheritAttrs: false,
+  const name = 'v-virtual-scroll'
+  const model = ref('default')
+  const items = Array.from({ length: 1000 }, (k, v) => v + 1)
+  const options = []
+  const props = computed(() => {
+    return {
+      height: 300,
+      items: Array.from({ length: 1000 }, (k, v) => v + 1).slice(0, 30),
+    }
+  })
 
-    data: () => ({
-      count: 10000,
-      defaults: {
-        height: 100,
-        'item-height': 20,
-      },
-      options: {
-        sliders: {
-          height: [100, 175],
-          'item-height': [20, 50],
-        },
-      },
-      tabs: [],
-    }),
+  const slots = computed(() => {
+    return `
+  <template v-slot:default="{ item }">
+    Item {{ item }}
+  </template>
+`
+  })
 
-    computed: {
-      items () {
-        return Array.from({ length: this.count }, (k, v) => v + 1)
-      },
-    },
-  }
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>

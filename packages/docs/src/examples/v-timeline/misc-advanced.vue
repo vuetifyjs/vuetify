@@ -6,7 +6,7 @@
     >
       <v-timeline-item
         fill-dot
-        class="white--text mb-12"
+        class="mb-12"
         dot-color="orange"
         size="large"
       >
@@ -32,9 +32,7 @@
         </v-text-field>
       </v-timeline-item>
 
-      <v-slide-x-transition
-        group
-      >
+      <v-slide-x-transition group>
         <v-timeline-item
           v-for="event in timeline"
           :key="event.id"
@@ -79,7 +77,7 @@
         <div class="d-flex justify-space-between flex-grow-1">
           <div>
             <v-chip
-              class="white--text ml-0"
+              class="ms-0"
               color="purple"
               label
               size="small"
@@ -101,7 +99,7 @@
       >
         <div class="d-flex justify-space-between flex-grow-1">
           <div>
-            Order confirmation email was sent to John Leider (john@vuetifyjs.com).
+            Order confirmation email was sent to John Leider (john@google.com).
           </div>
           <div class="flex-shrink-0">
             15:25 EDT
@@ -151,6 +149,30 @@
     </v-timeline>
   </v-container>
 </template>
+
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const events = ref([])
+  const input = ref(null)
+  const nonce = ref(0)
+
+  const timeline = computed(() => {
+    return events.value.slice().reverse()
+  })
+
+  function comment () {
+    const time = (new Date()).toTimeString()
+    events.value.push({
+      id: nonce.value++,
+      text: input.value,
+      time: time.replace(/:\d{2}\sGMT-\d{4}\s\((.*)\)/, (match, contents, offset) => {
+        return ` ${contents.split(' ').map(v => v.charAt(0)).join('')}`
+      }),
+    })
+    input.value = null
+  }
+</script>
 
 <script>
   export default {

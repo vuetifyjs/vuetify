@@ -1,19 +1,21 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VLayout } from '@/components/VLayout'
+// Components
 import { VSystemBar } from '..'
-import { generate } from '@/../cypress/templates'
+import { VLayout } from '@/components/VLayout'
 
-const props = {}
-
-const stories = {
-  Default: (
-    <VLayout>
-      <VSystemBar />
-    </VLayout>
-  ),
-}
 // Tests
 describe('VSystemBar', () => {
-  generate({ stories, props, component: VSystemBar })
+  it('supports default themes', () => {
+    cy.mount((props: any) => (
+      <VLayout>
+        <VSystemBar { ...props }>Content</VSystemBar>
+      </VLayout>
+    ))
+      .get('.v-system-bar')
+      .should('have.class', 'v-theme--light')
+      .setProps({ theme: 'dark' })
+      .get('.v-system-bar')
+      .should('have.class', 'v-theme--dark')
+  })
 })

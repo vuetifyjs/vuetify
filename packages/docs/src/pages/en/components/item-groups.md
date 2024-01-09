@@ -1,6 +1,6 @@
 ---
-nav: Item groups
 meta:
+  nav: Item groups
   title: Item group component
   description: The item group components provides the ability to create a group of selectable items out of any component.
   keywords: item groups, vuetify item group component, vue item group component
@@ -8,13 +8,17 @@ related:
   - /components/button-groups
   - /components/carousels
   - /components/tabs
+features:
+  github: /components/VItemGroup/
+  label: 'C: VItemGroup'
+  report: true
 ---
 
 # Item groups
 
 The `v-item-group` provides the ability to create a group of selectable items out of any component. This is the baseline functionality for components such as `v-tabs` and `v-carousel`.
 
-<entry />
+<page-features />
 
 ## Usage
 
@@ -22,15 +26,16 @@ The core usage of the `v-item-group` is to create groups of anything that should
 
 <!-- <example file="v-item-group/usage" /> -->
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-item-group](/api/v-item-group/) | The item group component. |
+| [v-item](/api/v-item/) | Sub-component used for modifying the `v-item-group` state |
 
-<!-- ## Sub-components
-
-### v-item
-
-v-item description -->
+<api-inline hide-links />
 
 ## Examples
 
@@ -67,5 +72,3 @@ Easily hook up a custom chip group.
 Icons can be used as toggle buttons when they allow selection, or deselection, of a single choice, such as marking an item as a favorite.
 
 <example file="v-item-group/misc-selection" />
-
-<backmatter />

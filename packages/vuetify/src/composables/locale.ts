@@ -1,189 +1,111 @@
-// Locales
-import en from '@/locale/en'
-
-// Composables
-import { createRtl, RtlSymbol } from '@/composables/rtl'
-
 // Utilities
 import { computed, inject, provide, ref } from 'vue'
-import { consoleError, consoleWarn, getObjectValueByPath } from '@/util'
+import { defaultRtl } from '@/locale'
+import { createVuetifyAdapter } from '@/locale/adapters/vuetify'
 
 // Types
-import type { RtlOptions } from '@/composables/rtl'
-import type { App, InjectionKey, Ref } from 'vue'
-import type { MaybeRef } from '@/util'
+import type { InjectionKey, Ref } from 'vue'
 
 export interface LocaleMessages {
   [key: string]: LocaleMessages | string
 }
 
 export interface LocaleOptions {
-  defaultLocale?: string
-  fallbackLocale?: string
   messages?: LocaleMessages
-}
-
-export interface LocaleProps {
   locale?: string
-  fallbackLocale?: string
-  messages?: LocaleMessages
+  fallback?: string
+  adapter?: LocaleInstance
 }
 
 export interface LocaleInstance {
+  name: string
+  messages: Ref<LocaleMessages>
   current: Ref<string>
   fallback: Ref<string>
-  messages: Ref<LocaleMessages>
   t: (key: string, ...params: unknown[]) => string
   n: (value: number) => string
+  provide: (props: LocaleOptions) => LocaleInstance
 }
 
-export interface LocaleAdapter {
-  createRoot: (app?: App) => LocaleInstance
-  getScope: () => LocaleInstance
-  createScope: (options?: LocaleProps) => LocaleInstance
+export const LocaleSymbol: InjectionKey<LocaleInstance & RtlInstance> = Symbol.for('vuetify:locale')
+
+function isLocaleInstance (obj: any): obj is LocaleInstance {
+  return obj.name != null
 }
 
-export const LocaleAdapterSymbol: InjectionKey<LocaleAdapter> = Symbol.for('vuetify:locale-adapter')
-export const VuetifyLocaleSymbol: InjectionKey<LocaleInstance> = Symbol.for('vuetify:locale')
+export function createLocale (options?: LocaleOptions & RtlOptions) {
+  const i18n = options?.adapter && isLocaleInstance(options?.adapter) ? options?.adapter : createVuetifyAdapter(options)
+  const rtl = createRtl(i18n, options)
 
-export function provideLocale (props?: LocaleProps) {
-  const adapter = inject(LocaleAdapterSymbol)
-
-  if (!adapter) throw new Error('[Vuetify] Could not find injected locale adapter')
-
-  return adapter.createScope(props)
+  return { ...i18n, ...rtl }
 }
 
 export function useLocale () {
-  const adapter = inject(LocaleAdapterSymbol)
+  const locale = inject(LocaleSymbol)
 
-  if (!adapter) throw new Error('[Vuetify] Could not find injected locale adapter')
+  if (!locale) throw new Error('[Vuetify] Could not find injected locale instance')
 
-  return adapter.getScope()
+  return locale
 }
 
-function isLocaleAdapter (x: any): x is LocaleAdapter {
-  return !!x && x.hasOwnProperty('getScope') && x.hasOwnProperty('createScope') && x.hasOwnProperty('createRoot')
+export function provideLocale (props: LocaleOptions & RtlProps) {
+  const locale = inject(LocaleSymbol)
+
+  if (!locale) throw new Error('[Vuetify] Could not find injected locale instance')
+
+  const i18n = locale.provide(props)
+  const rtl = provideRtl(i18n, locale.rtl, props)
+
+  const data = { ...i18n, ...rtl }
+
+  provide(LocaleSymbol, data)
+
+  return data
 }
 
-export function createLocale (
-  app: App,
-  options?: (LocaleOptions & RtlOptions) | (LocaleAdapter & RtlOptions),
-) {
-  const adapter = isLocaleAdapter(options) ? options : createDefaultLocaleAdapter(options)
-  const instance = adapter.createRoot(app)
+// RTL
 
-  app?.provide(RtlSymbol, createRtl(instance, options))
-
-  return adapter
+export interface RtlOptions {
+  rtl?: Record<string, boolean>
 }
 
-const LANG_PREFIX = '$vuetify.'
-
-const replace = (str: string, params: unknown[]) => {
-  return str.replace(/\{(\d+)\}/g, (match: string, index: string) => {
-    /* istanbul ignore next */
-    return String(params[+index])
-  })
+export interface RtlProps {
+  rtl?: boolean
 }
 
-const createTranslateFunction = (
-  current: Ref<string>,
-  fallback: Ref<string>,
-  messages: Ref<LocaleMessages>,
-) => {
-  return (key: string, ...params: unknown[]) => {
-    if (!key.startsWith(LANG_PREFIX)) {
-      return replace(key, params)
-    }
-
-    const shortKey = key.replace(LANG_PREFIX, '')
-    const currentLocale = current.value && messages.value[current.value]
-    const fallbackLocale = fallback.value && messages.value[fallback.value]
-
-    let str: string = getObjectValueByPath(currentLocale, shortKey, null)
-
-    if (!str) {
-      consoleWarn(`Translation key "${key}" not found in "${current.value}", trying fallback locale`)
-      str = getObjectValueByPath(fallbackLocale, shortKey, null)
-    }
-
-    if (!str) {
-      consoleError(`Translation key "${key}" not found in fallback`)
-      str = key
-    }
-
-    if (typeof str !== 'string') {
-      consoleError(`Translation key "${key}" has a non-string value`)
-      str = key
-    }
-
-    return replace(str, params)
-  }
+export interface RtlInstance {
+  isRtl: Ref<boolean>
+  rtl: Ref<Record<string, boolean>>
+  rtlClasses: Ref<string>
 }
 
-function createNumberFunction (current: Ref<string>, fallback: Ref<string>) {
-  return (value: number, options?: Intl.NumberFormatOptions) => {
-    const numberFormat = new Intl.NumberFormat([current.value, fallback.value], options)
+export const RtlSymbol: InjectionKey<RtlInstance> = Symbol.for('vuetify:rtl')
 
-    return numberFormat.format(value)
-  }
-}
-
-export function createDefaultLocaleAdapter (options?: LocaleOptions): LocaleAdapter {
-  const createScope = (options: {
-    current: MaybeRef<string>
-    fallback: MaybeRef<string>
-    messages: MaybeRef<LocaleMessages>
-  }) => {
-    const current = ref(options.current)
-    const fallback = ref(options.fallback)
-    const messages = ref(options.messages)
-
-    return {
-      current,
-      fallback,
-      messages,
-      t: createTranslateFunction(current, fallback, messages),
-      n: createNumberFunction(current, fallback),
-    }
-  }
+export function createRtl (i18n: LocaleInstance, options?: RtlOptions): RtlInstance {
+  const rtl = ref<Record<string, boolean>>(options?.rtl ?? defaultRtl)
+  const isRtl = computed(() => rtl.value[i18n.current.value] ?? false)
 
   return {
-    createRoot: app => {
-      const rootScope = createScope({
-        current: options?.defaultLocale ?? 'en',
-        fallback: options?.fallbackLocale ?? 'en',
-        messages: options?.messages ?? { en },
-      })
-
-      if (!app) throw new Error('[Vuetify] Could not find default app instance')
-
-      app.provide(VuetifyLocaleSymbol, rootScope)
-
-      return rootScope
-    },
-    getScope: () => {
-      const currentScope = inject(VuetifyLocaleSymbol)
-
-      if (!currentScope) throw new Error('[Vuetify] Could not find injected locale instance')
-
-      return currentScope
-    },
-    createScope: options => {
-      const currentScope = inject(VuetifyLocaleSymbol)
-
-      if (!currentScope) throw new Error('[Vuetify] Could not find injected locale instance')
-
-      const newScope = createScope({
-        current: computed(() => options?.locale ?? currentScope.current.value),
-        fallback: computed(() => options?.locale ?? currentScope.fallback.value),
-        messages: computed(() => options?.messages ?? currentScope.messages.value),
-      })
-
-      provide(VuetifyLocaleSymbol, newScope)
-
-      return newScope
-    },
+    isRtl,
+    rtl,
+    rtlClasses: computed(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
   }
+}
+
+export function provideRtl (locale: LocaleInstance, rtl: RtlInstance['rtl'], props: RtlProps): RtlInstance {
+  const isRtl = computed(() => props.rtl ?? rtl.value[locale.current.value] ?? false)
+
+  return {
+    isRtl,
+    rtl,
+    rtlClasses: computed(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
+  }
+}
+
+export function useRtl () {
+  const locale = inject(LocaleSymbol)
+
+  if (!locale) throw new Error('[Vuetify] Could not find injected rtl instance')
+
+  return { isRtl: locale.isRtl, rtlClasses: locale.rtlClasses }
 }

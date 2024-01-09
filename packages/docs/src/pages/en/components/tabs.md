@@ -1,6 +1,6 @@
 ---
-nav: Tabs
 meta:
+  nav: Tabs
   title: Tabs component
   description: The tabs component provides a way to organize and navigate between groups of content that are related at the same level of hierarchy.
   keywords: tabs, vuetify tabs component, vue tabs component
@@ -8,13 +8,19 @@ related:
   - /components/icons/
   - /components/toolbars/
   - /components/windows/
+features:
+  figma: true
+  label: 'C: VTabs'
+  report: true
+  github: /components/VTabs/
+  spec: https://m2.material.io/components/tabs
 ---
 
 # Tabs
 
 The `v-tabs` component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation for a page, where the tabs are links and the tab-items are the content.
 
-<entry />
+<page-features />
 
 ## Usage
 
@@ -22,25 +28,38 @@ The `v-tabs` component is a styled extension of [v-slide-group](/components/slid
 
 <example file="v-tabs/usage" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-tabs](/api/v-tabs/) | Primary Component |
+| [v-tab](/api/v-tab/) | Sub-component used for modifying the `v-tabs` state |
+
+<api-inline hide-links />
 
 ## Examples
 
 ### Props
 
-#### Align with title
+#### Align tabs
 
-Make `v-tabs` line up with the `v-toolbar-title` component using the **align-with-title** prop (`v-app-bar-nav-icon` or `v-btn` must be used in `v-toolbar`).
+The **align-tabs** prop will align tabs to the `start`, `center`, or `end` of its container.
 
-<example file="v-tabs/prop-align-with-title" />
+<example file="v-tabs/prop-align-tabs-center" />
 
-<promoted slug="vuetify-zero-theme-pro" />
+<example file="v-tabs/prop-align-tabs-end" />
+
+#### Align tabs with title
+
+Make `v-tabs` line up with the `v-toolbar-title` component by setting the **align-tabs** prop to `title` (`v-app-bar-nav-icon` or `v-btn` must be used in `v-toolbar`).
+
+<example file="v-tabs/prop-align-tabs-title" />
 
 #### Center active
 
-The **center-active** prop will make the active tab always centered
+The **center-active** prop will make the active tab always centered.
 
 <example file="v-tabs/prop-center-active" />
 
@@ -52,7 +71,7 @@ The **center-active** prop will make the active tab always centered
 
 #### Fixed tabs
 
-The **fixed-tabs** prop forces `v-tab` items to take up all available space up to their maximum width (300px).
+The **fixed-tabs** prop forces `v-tab` items to take up all available space up to their maximum width (300px), and centers them.
 
 <example file="v-tabs/prop-fixed-tabs" />
 
@@ -64,7 +83,7 @@ The **grow** prop will make the tab items take up all available space with no li
 
 #### Stacked
 
-Using **stacked** prop you can have buttons that use both icons and text.
+Using **stacked** increases the `v-tabs` height to 72px to allow for both icons and text to be displayed.
 
 <example file="v-tabs/prop-stacked" />
 
@@ -74,17 +93,11 @@ If the tab items overflow their container, pagination controls will appear on de
 
 <example file="v-tabs/misc-pagination" />
 
-#### Right
+#### Vertical tabs
 
-The **end** prop aligns the tabs to the right.
+The **direction** prop allows for `v-tab` components to stack vertically.
 
-<example file="v-tabs/prop-end" />
-
-#### Vertical Tabs
-
-The **vertical** prop allows for `v-tab` components to stack vertically.
-
-<example file="v-tabs/prop-vertical" />
+<example file="v-tabs/prop-direction" />
 
 ### Misc
 
@@ -111,5 +124,3 @@ Tabs can be dynamically added and removed. In this example when we add a new tab
 You can use a menu to hold additional tabs, swapping them out on the fly.
 
 <example file="v-tabs/misc-overflow-to-menu" />
-
-<backmatter />

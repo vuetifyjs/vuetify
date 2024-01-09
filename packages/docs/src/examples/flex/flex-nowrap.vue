@@ -1,21 +1,14 @@
 <template>
-  <div>
-    <v-card
-      class="d-flex flex-nowrap py-3"
-      color="grey lighten-2"
-      flat
-      tile
-      width="125"
+  <v-sheet
+    class="d-flex flex-nowrap py-3 bg-surface-variant"
+    width="125"
+  >
+    <v-sheet
+      v-for="n in 5"
+      :key="n"
+      class="ma-2 pa-2"
     >
-      <v-card
-        v-for="n in 5"
-        :key="n"
-        class="pa-2"
-        outlined
-        tile
-      >
-        Flex item
-      </v-card>
-    </v-card>
-  </div>
+      Flex item
+    </v-sheet>
+  </v-sheet>
 </template>

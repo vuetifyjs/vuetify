@@ -1,66 +1,82 @@
-import { computed, watch } from 'vue'
+// Composables
+import { useProxiedModel } from '@/composables/proxiedModel'
+
+// Utilities
+import { watch } from 'vue'
 
 // Types
-import type { Composer, I18n, useI18n } from 'vue-i18n'
-import type { LocaleAdapter, LocaleInstance } from '@/composables/locale'
-import type { RtlOptions } from '@/composables/rtl'
+import type { Ref } from 'vue'
+import type { I18n, useI18n } from 'vue-i18n'
+import type { LocaleInstance, LocaleMessages, LocaleOptions } from '@/composables/locale'
 
 type VueI18nAdapterParams = {
-  i18n: I18n<{}, {}, {}, string, false>
+  i18n: I18n<any, {}, {}, string, false>
   useI18n: typeof useI18n
-} & RtlOptions
+}
 
-function wrapScope (scope: Composer): LocaleInstance {
-  return {
-    current: scope.locale,
-    fallback: computed(() => {
-      // TODO: Handle this better?
-      return typeof scope.fallbackLocale.value !== 'string' ? 'en'
-        : scope.fallbackLocale.value
-    }),
-    // TODO: Can this be fixed?
-    messages: scope.messages as any,
-    t: scope.t,
-    n: scope.n,
+function useProvided <T> (props: any, prop: string, provided: Ref<T>) {
+  const internal = useProxiedModel(props, prop)
+
+  internal.value = props[prop] ?? provided.value
+
+  watch(provided, v => {
+    if (props[prop] == null) {
+      internal.value = v
+    }
+  })
+
+  return internal as Ref<T>
+}
+
+function createProvideFunction (data: {
+  current: Ref<string>
+  fallback: Ref<string>
+  messages: Ref<LocaleMessages>
+  useI18n: typeof useI18n
+}) {
+  return (props: LocaleOptions): LocaleInstance => {
+    const current = useProvided(props, 'locale', data.current)
+    const fallback = useProvided(props, 'fallback', data.fallback)
+    const messages = useProvided(props, 'messages', data.messages)
+
+    const i18n = data.useI18n({
+      locale: current.value,
+      fallbackLocale: fallback.value,
+      messages: messages.value as any,
+      useScope: 'local',
+      legacy: false,
+      inheritLocale: false,
+    })
+
+    watch(current, v => {
+      i18n.locale.value = v
+    })
+
+    return {
+      name: 'vue-i18n',
+      current,
+      fallback,
+      messages,
+      t: (key: string, ...params: unknown[]) => i18n.t(key, params),
+      n: i18n.n,
+      provide: createProvideFunction({ current, fallback, messages, useI18n: data.useI18n }),
+    }
   }
 }
 
-export function createVueI18nAdapter ({ i18n, useI18n, ...rest }: VueI18nAdapterParams): (LocaleAdapter & RtlOptions) {
+export function createVueI18nAdapter ({ i18n, useI18n }: VueI18nAdapterParams): LocaleInstance {
+  const current = i18n.global.locale
+  const fallback = i18n.global.fallbackLocale as Ref<any>
+  const messages = i18n.global.messages
+
   return {
-    createRoot: () => {
-      return wrapScope(i18n.global)
-    },
-    getScope: () => {
-      const scope = useI18n({ legacy: false, useScope: 'parent' }) as Composer
-
-      return wrapScope(scope)
-    },
-    createScope: (props = {}) => {
-      const scope = useI18n({
-        legacy: false,
-        useScope: 'local',
-        messages: (props.messages ?? i18n.global.messages) as any, // TODO: Fix this
-        locale: props.locale,
-        fallbackLocale: props.fallbackLocale,
-        inheritLocale: !props.locale,
-      }) as Composer
-
-      watch(() => props.locale, () => {
-        if (props.locale) {
-          scope.locale.value = props.locale
-        } else {
-          scope.inheritLocale = true
-        }
-      })
-
-      watch(() => props.fallbackLocale, () => {
-        if (props.fallbackLocale) {
-          scope.fallbackLocale.value = props.fallbackLocale
-        }
-      })
-
-      return wrapScope(scope)
-    },
-    ...rest,
+    name: 'vue-i18n',
+    current,
+    fallback,
+    messages,
+    // @ts-expect-error Type instantiation is excessively deep and possibly infinite
+    t: (key: string, ...params: unknown[]) => i18n.global.t(key, params),
+    n: i18n.global.n,
+    provide: createProvideFunction({ current, fallback, messages, useI18n }),
   }
 }

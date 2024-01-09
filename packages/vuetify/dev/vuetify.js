@@ -1,24 +1,20 @@
 import '@mdi/font/css/materialdesignicons.css'
-import { createVuetify } from 'vuetify/src/entry-bundler'
-import { aliases, mdi } from 'vuetify/src/iconsets/mdi'
-import { fa } from 'vuetify/src/iconsets/fa-svg'
-import { ar, en, ja, sv } from 'vuetify/src/locale'
+import 'vuetify/src/styles/main.sass'
+
+import { createVuetify } from 'vuetify/src/framework'
+import * as directives from 'vuetify/src/directives'
+
+import date from './vuetify/date'
+import defaults from './vuetify/defaults'
+import icons from './vuetify/icons'
+import locale from './vuetify/locale'
 
 export default createVuetify({
-  locale: {
-    messages: {
-      en,
-      ar,
-      sv,
-      ja,
-    },
-  },
-  icons: {
-    defaultSet: 'mdi',
-    aliases,
-    sets: {
-      mdi,
-      fa,
-    },
-  },
+  directives,
+  ssr: !!process.env.VITE_SSR,
+  date,
+  defaults,
+  icons,
+  locale,
+  theme: { defaultTheme: 'light' },
 })

@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Programmatic scrolling
   description: Programmatic scrolling within an application can be handled using the goTo method included in the vuetify object.
@@ -13,6 +14,8 @@ related:
 
 You can programmatically trigger scrolling in your application by using the **goTo** method found on the `$vuetify` object. This method supports several different types of target selectors, and options including smooth scrolling using built-in easing functions.
 
+<page-features />
+
 <entry />
 
 ## Usage
@@ -23,7 +26,11 @@ The **goTo** method takes two parameters **target** and **options**. **target** 
 
 ## API
 
-<api-inline />
+| Directive | Description |
+| - | - |
+| [scroll](/api/v-scroll/) | The scroll directive |
+
+<api-inline hide-links />
 
 ## Use with router
 
@@ -50,5 +57,3 @@ export default new Router({
   ],
 })
 ```
-
-<backmatter />

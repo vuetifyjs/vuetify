@@ -6911,7 +6911,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
                 </i>
               </span>
             </button>
-            name: Frozen Yogurt
+            Dessert (100g serving): Frozen Yogurt
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -6941,7 +6941,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
                 </i>
               </span>
             </button>
-            name: Ice cream sandwich
+            Dessert (100g serving): Ice cream sandwich
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8312,16 +8312,16 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
       </thead>
       <tbody>
         <div>
-          {"group":0,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"isMobile":true,"items":[{"name":"Jelly bean","calories":375,"fat":0,"carbs":94,"protein":0,"iron":"0%"},{"name":"Lollipop","calories":392,"fat":0.2,"carbs":98,"protein":0,"iron":"2%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
+          {"group":0,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[false],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"isMobile":true,"items":[{"name":"Jelly bean","calories":375,"fat":0,"carbs":94,"protein":0,"iron":"0%"},{"name":"Lollipop","calories":392,"fat":0.2,"carbs":98,"protein":0,"iron":"2%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"group":3.9,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"isMobile":true,"items":[{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
+          {"group":3.9,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[false],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"isMobile":true,"items":[{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"group":4,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"isMobile":true,"items":[{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%","class":"test"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
+          {"group":4,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[false],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"isMobile":true,"items":[{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%","class":"test"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"group":4.3,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"isMobile":true,"items":[{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%","class":["test","second"]}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
+          {"group":4.3,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[false],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"isMobile":true,"items":[{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%","class":["test","second"]}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
         </div>
       </tbody>
     </table>
@@ -8477,7 +8477,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 </i>
               </span>
             </button>
-            calories: 159
+            Calories: 159
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8551,7 +8551,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 </i>
               </span>
             </button>
-            calories: 237
+            Calories: 237
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8625,7 +8625,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 </i>
               </span>
             </button>
-            calories: 262
+            Calories: 262
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8699,7 +8699,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 </i>
               </span>
             </button>
-            calories: 305
+            Calories: 305
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8773,7 +8773,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 </i>
               </span>
             </button>
-            calories: 356
+            Calories: 356
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8988,7 +8988,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 </i>
               </span>
             </button>
-            protein: 0
+            Protein (g): 0
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -9099,7 +9099,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 </i>
               </span>
             </button>
-            protein: 3.9
+            Protein (g): 3.9
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -9168,7 +9168,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 </i>
               </span>
             </button>
-            protein: 4
+            Protein (g): 4
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -9237,7 +9237,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 </i>
               </span>
             </button>
-            protein: 4.3
+            Protein (g): 4.3
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -11644,7 +11644,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
                 </i>
               </span>
             </button>
-            name: Assistance
+            Name: Assistance
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -11681,7 +11681,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
                 </i>
               </span>
             </button>
-            name: Candidat
+            Name: Candidat
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -11856,7 +11856,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
                 </i>
               </span>
             </button>
-            name: Candidat
+            Name: Candidat
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >

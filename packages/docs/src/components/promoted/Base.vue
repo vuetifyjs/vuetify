@@ -1,49 +1,46 @@
 <template>
-  <v-sheet
-    :style="styles"
-    class="v-app-ad d-inline-flex flex-child-1 grow-shrink-0 mt-2 mb-4"
-    :color="dark ? undefined : 'grey-lighten-5'"
-    rounded
-    width="100%"
-    v-bind="$attrs"
+  <v-lazy
+    :min-height="minHeight"
+    class="d-flex"
   >
-    <slot />
-  </v-sheet>
+    <v-sheet
+      v-bind="$attrs"
+      :min-height="minHeight"
+      color="surface-bright"
+      class="v-app-ad d-inline-flex flex-child-1 grow-shrink-0"
+      rounded
+      width="100%"
+    >
+      <slot />
+    </v-sheet>
+  </v-lazy>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
-  import { useTheme } from 'vuetify'
+<script setup>
+  // Utilities
+  import { computed } from 'vue'
 
-  export default defineComponent({
-    name: 'PromotedBase',
-
-    inheritAttrs: false,
-
-    props: {
-      compact: Boolean,
-      comfortable: Boolean,
+  const props = defineProps({
+    density: {
+      type: String,
+      default: 'default',
     },
-
-    computed: {
-      minHeight () {
-        if (this.compact) return 52
-        if (this.comfortable) return 74
-
-        return 118
-      },
-      styles () {
-        return {
-          minHeight: `${this.minHeight}px`,
-        }
-      },
-      dark () {
-        const theme = useTheme()
-
-        return theme.current.value.dark
-      },
-    },
+    minHeight: [Number, String],
   })
+
+  const minHeight = computed(() => {
+    if (props.minHeight) return props.minHeight
+    if (props.density === 'compact') return 56
+    if (props.density === 'comfortable') return 74
+
+    return 118
+  })
+</script>
+
+<script>
+  export default {
+    inheritAttrs: false,
+  }
 </script>
 
 <style lang="sass">

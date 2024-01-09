@@ -2,7 +2,7 @@
   <v-card
     class="mx-auto"
     max-width="434"
-    tile
+    rounded="0"
   >
     <v-img
       height="100%"
@@ -14,7 +14,7 @@
         size="150"
         rounded="0"
       >
-        <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
+        <v-img cover src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
       </v-avatar>
       <v-list-item
         class="text-white"

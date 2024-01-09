@@ -1,12 +1,8 @@
 {
   "props": {
-    "modelValue": "Represents the selected item(s). Will be an array if **multiple** prop is used.",
-    "mandatory": "Forces at least one item to always be selected (if available).",
+    "disabled": "Puts all children components into a disabled state.",
     "max": "Sets a maximum number of selections that can be made.",
-    "multiple": "Allows one to select mulitple items.",
-    "selectedClass": "Configure the selected CSS class."
-  },
-  "events": {
-    "update:modelValue": "Emitted when selection changes"
+    "multiple": "Allows one to select multiple items.",
+    "value": "The value used when the component is selected within a group. If not provided, the render index is used."
   }
 }

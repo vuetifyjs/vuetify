@@ -23,7 +23,7 @@
 
       <v-chip-group
         v-model="selection"
-        active-class="deep-purple--text text--accent-4"
+        selected-class="text-deep-purple-accent-4"
         mandatory
       >
         <v-chip>Extra Soft</v-chip>
@@ -36,14 +36,19 @@
     <v-card-actions>
       <v-btn
         block
-        class="white--text"
-        color="deep-purple accent-4"
+        color="deep-purple-accent-4"
       >
         Add to Cart
       </v-btn>
     </v-card-actions>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const selection = ref(2)
+</script>
 
 <script>
   export default {

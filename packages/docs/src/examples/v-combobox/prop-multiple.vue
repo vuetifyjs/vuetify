@@ -24,22 +24,23 @@
           :items="items"
           label="I use a scoped slot"
           multiple
-          chips
         >
           <template v-slot:selection="data">
             <v-chip
               :key="JSON.stringify(data.item)"
               v-bind="data.attrs"
-              :input-value="data.selected"
+              :model-value="data.selected"
               :disabled="data.disabled"
+              size="small"
               @click:close="data.parent.selectItem(data.item)"
             >
-              <v-avatar
-                class="accent white--text"
-                left
-                v-text="data.item.slice(0, 1).toUpperCase()"
-              ></v-avatar>
-              {{ data.item }}
+              <template v-slot:prepend>
+                <v-avatar
+                  class="bg-accent text-uppercase"
+                  start
+                >{{ data.item.title.slice(0, 1) }}</v-avatar>
+              </template>
+              {{ data.item.title }}
             </v-chip>
           </template>
         </v-combobox>
@@ -56,6 +57,19 @@
     </v-row>
   </v-container>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const select = ref(['Vuetify', 'Programming'])
+
+  const items = [
+    'Programming',
+    'Design',
+    'Vue',
+    'Vuetify',
+  ]
+</script>
 
 <script>
   export default {

@@ -5,7 +5,7 @@
         <v-slider
           inverse-label
           label="Inverse label"
-          value="30"
+          model-value="30"
         ></v-slider>
       </v-col>
     </v-row>

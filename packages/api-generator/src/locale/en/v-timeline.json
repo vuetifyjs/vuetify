@@ -1,9 +1,0 @@
-{
-  "props": {
-    "direction": "Display timeline in a **vertical** or **horizontal** direction",
-    "mirror": "Mirror the before/after ordering of timeline items",
-    "singleSide": "Display all timeline items on one side of the timeline, either **before** or **after**",
-    "truncateLine": "Truncate timeline directly at the **start** or **end** of the line, or on **both** ends",
-    "linePosition": "Shift the position of the line. By default the line will evenly split items before/after."
-  }
-}

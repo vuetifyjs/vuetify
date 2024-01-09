@@ -11,8 +11,7 @@
         rounded="xl"
       >
         <v-sheet
-          class="pa-3 primary text-right"
-          dark
+          class="pa-3 bg-primary text-right"
           rounded="t-xl"
         >
           <v-btn icon>
@@ -20,7 +19,7 @@
           </v-btn>
 
           <v-btn
-            class="ml-2"
+            class="ms-2"
             icon
           >
             <v-icon>mdi-check-bold</v-icon>
@@ -29,7 +28,7 @@
 
         <div class="pa-4">
           <v-chip-group
-            active-class="primary--text"
+            selected-class="text-primary"
             column
           >
             <v-chip
@@ -44,6 +43,20 @@
     </v-col>
   </v-row>
 </template>
+
+<script setup>
+  const tags = [
+    'Work',
+    'Home Improvement',
+    'Vacation',
+    'Food',
+    'Drawers',
+    'Shopping',
+    'Art',
+    'Tech',
+    'Creative Writing',
+  ]
+</script>
 
 <script>
   export default {

@@ -7,6 +7,7 @@
 
 // Theme
 .v-slider-thumb
+  touch-action: none
   color: rgb(var(--v-theme-surface-variant))
 
   .v-input--error:not(.v-input--disabled) &
@@ -37,6 +38,8 @@
     transition: 0.3s settings.$standard-easing
     content: ''
     color: inherit
+    top: 0
+    left: 0
     width: 100%
     height: 100%
     border-radius: $slider-thumb-border-radius
@@ -90,6 +93,7 @@
   .v-slider-thumb
     top: 50%
     transform: translateY(-50%)
+    inset-inline-start: calc(var(--v-slider-thumb-position) - var(--v-slider-thumb-size) / 2)
 
   .v-slider-thumb__label-container
     left: calc(var(--v-slider-thumb-size) / 2)
@@ -111,6 +115,9 @@
 
 // Vertical
 .v-slider.v-input--vertical
+  .v-slider-thumb
+    top: calc(var(--v-slider-thumb-position) - var(--v-slider-thumb-size) / 2)
+
   .v-slider-thumb__label-container
     top: calc(var(--v-slider-thumb-size) / 2)
     right: 0
@@ -126,13 +133,10 @@
       left: -$slider-thumb-label-wedge-size
 
 // Modifiers
-.v-slider-thumb--focused, .v-slider-thumb:hover
-  .v-slider-thumb__surface::before
-    transform: scale(2)
-
 .v-slider-thumb--focused
   .v-slider-thumb__surface::before
-      opacity: $slider-thumb-focus-opacity
+    transform: scale(2)
+    opacity: $slider-thumb-focus-opacity
 
 .v-slider-thumb--pressed
   transition: none
@@ -140,6 +144,11 @@
   .v-slider-thumb__surface::before
     opacity: $slider-thumb-pressed-opacity
 
-.v-slider-thumb:hover:not(.v-slider-thumb--focused)
-  .v-slider-thumb__surface::before
-    opacity: $slider-thumb-hover-opacity
+@media (hover: hover)
+  .v-slider-thumb:hover
+    .v-slider-thumb__surface::before
+      transform: scale(2)
+
+  .v-slider-thumb:hover:not(.v-slider-thumb--focused)
+    .v-slider-thumb__surface::before
+      opacity: $slider-thumb-hover-opacity

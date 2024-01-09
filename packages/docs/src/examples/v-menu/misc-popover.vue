@@ -58,14 +58,14 @@
           <v-spacer></v-spacer>
 
           <v-btn
-            text
+            variant="text"
             @click="menu = false"
           >
             Cancel
           </v-btn>
           <v-btn
             color="primary"
-            text
+            variant="text"
             @click="menu = false"
           >
             Save
@@ -75,6 +75,15 @@
     </v-menu>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const fav = ref(true)
+  const menu = ref(false)
+  const message = ref(false)
+  const hints = ref(true)
+</script>
 
 <script>
   export default {

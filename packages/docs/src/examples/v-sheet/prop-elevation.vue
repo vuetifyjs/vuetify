@@ -9,7 +9,7 @@
       >
         <v-sheet
           class="pa-12"
-          color="grey lighten-3"
+          color="grey-lighten-3"
         >
           <v-sheet
             :elevation="elevation"
@@ -23,10 +23,14 @@
   </v-container>
 </template>
 
+<script setup>
+  const elevations = [0, 4, 8, 12, 16, 20]
+</script>
+
 <script>
   export default {
     data: () => ({
-      elevations: [6, 12, 18],
+      elevations: [0, 4, 8, 12, 16, 20],
     }),
   }
 </script>

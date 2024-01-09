@@ -3,6 +3,7 @@
     <v-dialog
       v-model="dialog"
       scrollable
+      width="auto"
     >
       <template v-slot:activator="{ props }">
         <v-btn
@@ -98,14 +99,14 @@
         <v-card-actions>
           <v-btn
             color="blue-darken-1"
-            text
+            variant="text"
             @click="dialog = false"
           >
             Close
           </v-btn>
           <v-btn
             color="blue-darken-1"
-            text
+            variant="text"
             @click="dialog = false"
           >
             Save
@@ -115,6 +116,13 @@
     </v-dialog>
   </v-row>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const dialogm1 = ref('')
+  const dialog = ref(false)
+</script>
 
 <script>
   export default {

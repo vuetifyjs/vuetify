@@ -1,6 +1,11 @@
 export default {
   badge: 'Odznaka',
+  open: 'Otwórz',
   close: 'Zamknij',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Anuluj',
+  },
   dataIterator: {
     noResultsText: 'Nie znaleziono danych odpowiadających wyszukiwaniu',
     loadingText: 'Wczytywanie danych...',
@@ -26,23 +31,38 @@ export default {
     lastPage: 'Ostatnia strona',
     pageText: '{0}-{1} z {2}',
   },
+  dateRangeInput: {
+    divider: 'do',
+  },
   datePicker: {
-    itemsSelected: '{0} dat(y)',
-    nextMonthAriaLabel: 'Następny miesiąc',
-    nextYearAriaLabel: 'Następny rok',
-    prevMonthAriaLabel: 'Poprzedni miesiąc',
-    prevYearAriaLabel: 'Poprzedni rok',
+    itemsSelected: '{0} selected',
+    range: {
+      title: 'Wybór zakresu dat',
+      header: 'Wprowadź zakres dat',
+    },
+    title: 'Wybór daty',
+    header: 'Wprowadź datę',
+    input: {
+      placeholder: 'Wprowadź datę',
+    },
   },
   noDataText: 'Brak danych',
   carousel: {
     prev: 'Poprzedni obraz',
     next: 'Następny obraz',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Obraz {0} z {1}',
     },
   },
   calendar: {
     moreEvents: '{0} więcej',
+    today: 'Today',
+  },
+  input: {
+    clear: 'Wyczyść {0}',
+    prependAction: '{0} dodatkowa akcja',
+    appendAction: '{0} dodatkowa akcja',
+    otp: 'Proszę wprowadzić znak nr {0}',
   },
   fileInput: {
     counter: 'Liczba plików: {0}',
@@ -59,13 +79,22 @@ export default {
       previous: 'Poprzednia strona',
       page: 'Idź do strony {0}',
       currentPage: 'Bieżąca strona, strona {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Pierwsza strona',
+      last: 'Ostatnia strona',
     },
+  },
+  stepper: {
+    next: 'Następny',
+    prev: 'Poprzedni',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Ocena {0} na {1}',
     },
+  },
+  loading: 'Wczytywanie danych...',
+  infiniteScroll: {
+    loadMore: 'Wczytaj więcej',
+    empty: 'Brak kolejnych danych',
   },
 }

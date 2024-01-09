@@ -1,38 +1,41 @@
 <template>
   <div class="text-center">
-    <v-bottom-sheet
-      v-model="sheet"
-      inset
-    >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="orange"
-          dark
-          v-bind="attrs"
-          v-on="on"
-        >
-          Open Inset
-        </v-btn>
-      </template>
-      <v-sheet
+    <v-btn
+      text="Click Me"
+      size="x-large"
+      @click="sheet = !sheet"
+    ></v-btn>
+
+    <v-bottom-sheet v-model="sheet" inset>
+      <v-card
         class="text-center"
-        height="200px"
+        height="200"
       >
-        <v-btn
-          class="mt-6"
-          text
-          color="error"
-          @click="sheet = !sheet"
-        >
-          close
-        </v-btn>
-        <div class="my-3">
-          This is a bottom sheet using the inset prop
-        </div>
-      </v-sheet>
+        <v-card-text>
+          <v-btn
+            variant="text"
+            @click="sheet = !sheet"
+          >
+            close
+          </v-btn>
+
+          <br>
+          <br>
+
+          <div>
+            This is a bottom sheet that is using the inset prop
+          </div>
+        </v-card-text>
+      </v-card>
     </v-bottom-sheet>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const sheet = ref(false)
+</script>
 
 <script>
   export default {

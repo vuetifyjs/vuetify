@@ -3,7 +3,7 @@
     class="mx-auto"
     max-width="500"
   >
-    <v-sheet class="pa-4 primary lighten-2">
+    <v-sheet class="pa-4 bg-primary-lighten-2">
       <v-text-field
         v-model="search"
         label="Search Company Directory"
@@ -38,6 +38,83 @@
     </v-card-text>
   </v-card>
 </template>
+
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const items = ref([
+    {
+      id: 1,
+      name: 'Vuetify Human Resources',
+      children: [
+        {
+          id: 2,
+          name: 'Core team',
+          children: [
+            {
+              id: 201,
+              name: 'John',
+            },
+            {
+              id: 202,
+              name: 'Kael',
+            },
+            {
+              id: 203,
+              name: 'Nekosaur',
+            },
+            {
+              id: 204,
+              name: 'Jacek',
+            },
+            {
+              id: 205,
+              name: 'Andrew',
+            },
+          ],
+        },
+        {
+          id: 3,
+          name: 'Administrators',
+          children: [
+            {
+              id: 301,
+              name: 'Mike',
+            },
+            {
+              id: 302,
+              name: 'Hunt',
+            },
+          ],
+        },
+        {
+          id: 4,
+          name: 'Contributors',
+          children: [
+            {
+              id: 401,
+              name: 'Phlow',
+            },
+            {
+              id: 402,
+              name: 'Brandon',
+            },
+            {
+              id: 403,
+              name: 'Sean',
+            },
+          ],
+        },
+      ],
+    },
+  ])
+  const open = ref([1, 2])
+  const search = ref(null)
+  const caseSensitive = ref(false)
+  const filter = computed(() => {
+    return caseSensitive.value ? (item, search, textKey) => item[textKey].indexOf(search) > -1 : undefined
+  })
+</script>
 
 <script>
   export default {

@@ -1,6 +1,6 @@
 ---
-nav: Dialogs
 meta:
+  nav: Dialogs
   title: Dialog component
   description: The dialog component informs a user about a specific task and may contain critical information or require the user to take a specific action.
   keywords: dialogs, vuetify dialog component, vue dialog component
@@ -8,27 +8,36 @@ related:
   - /components/buttons
   - /components/cards
   - /components/menus
+features:
+  github: /components/VDialog/
+  label: 'C: VDialog'
+  report: true
+  spec: https://m2.material.io/components/dialogs
 ---
 
 # Dialogs
 
 The `v-dialog` component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.
 
-![dialog Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-dialog/v-dialog-entry.png)
+<!-- ![dialog Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-dialog/v-dialog-entry.png) -->
 
----
+<page-features />
 
 ## Usage
 
 In this basic example we use the **activator** slot to render a button that is used to open the dialog. When using the **activator** slot it is important that you bind the **props** object from the slot (using `v-bind`) to the element that will activate the dialog. See the examples below for more ways of activating a dialog.
 
-<example file="v-dialog/usage" />
+<usage name="v-dialog" />
 
 <entry />
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-dialog](/api/v-dialog/) | Primary component |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -101,5 +110,3 @@ Modals that do not fit within the available window space will scroll the contain
 If for some reason you are unable to use the activator slot, be sure to add the `.stop` modifier to the event that triggers the dialog.
 
 <example file="v-dialog/misc-without-activator" /> -->
-
-<backmatter />

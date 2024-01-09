@@ -1,6 +1,6 @@
 ---
-nav: Menus
 meta:
+  nav: Menus
   title: Menu component
   description: The menu component exposes a dropdown of potential selections or actions that the user can make.
   keywords: menus, vuetify menu component, vue menu component
@@ -8,13 +8,18 @@ related:
   - /components/dialogs/
   - /components/tooltips/
   - /styles/transitions/
+features:
+  github: /components/VMenu/
+  label: 'C: VMenu'
+  report: true
+  spec: https://m2.material.io/components/menus
 ---
 
 # Menus
 
 The `v-menu` component shows a menu at the position of the element used to activate it.
 
-<entry />
+<page-features />
 
 ## Usage
 
@@ -28,9 +33,17 @@ The third one is to supply a CSS selector string to **activator** prop. This all
 
 <example file="v-menu/usage" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-menu](/api/v-menu/) | Primary Component |
+| [v-btn](/api/v-btn/) | Sub-component often used for the `v-menu` activator |
+| [v-list-item](/api/v-list-item/) | Sub-component often used for the `v-menu` content |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -84,21 +97,19 @@ Menus can be accessed using hover instead of clicking with the **open-on-hover**
 
 With the new `v-slot` syntax, nested activators such as those seen with a `v-menu` and `v-tooltip` attached to the same activator button, need a particular setup in order to function correctly.
 
-<alert type="info">
-
+::: info
   This same syntax is used for other nested activators such as `v-dialog` with `v-tooltip`
-
-</alert>
+:::
 
 <example file="v-menu/slot-activator-and-tooltip" />
 
 ### Misc
 
-#### Custom transitions
+#### Transitions
 
-Vuetify comes with 3 standard transitions, **scale**, **slide-x** and **slide-y**. You can also create your own and pass it as the transition argument. For an example of how the stock transitions are constructed, visit [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts).
+Vuetify comes with [several standard transitions](/styles/transitions#api) that you can use. You can also create your own and pass it as the transition argument. For an example of how the stock transitions are constructed, visit [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts).
 
-<example file="v-menu/misc-custom-transition" />
+<example file="v-menu/misc-transition" />
 
 #### Popover menu
 
@@ -106,14 +117,8 @@ A menu can be configured to be static when opened, allowing it to function as a 
 
 <example file="v-menu/misc-popover" />
 
-<!-- #### Use In components
+#### Use In components
 
 Menus can be placed within almost any component.
 
-<example file="v-menu/misc-use-in-components" /> -->
-
-## Accessibility
-
-By default, `v-menu` components are _detached_ and moved to the root of your application. In order to properly support [inserting dynamic content into the DOM](https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR26), you _must_ use the **attach** prop. This will ensure that focus transfers from the activator to the content when pressing the <kbd>tab</kbd> key.
-
-<backmatter />
+<example file="v-menu/misc-use-in-components" />

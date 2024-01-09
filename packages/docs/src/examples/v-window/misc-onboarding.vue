@@ -2,7 +2,7 @@
   <v-card
     theme="dark"
     flat
-    tile
+    rounded="0"
   >
     <v-window v-model="onboarding">
       <v-window-item
@@ -54,11 +54,25 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const length = ref(3)
+  const onboarding = ref(1)
+
+  function next () {
+    onboarding.value = onboarding.value + 1 > length.value ? 1 : onboarding.value + 1
+  }
+  function prev () {
+    onboarding.value = onboarding.value - 1 <= 0 ? length.value : onboarding.value - 1
+  }
+</script>
+
 <script>
   export default {
     data: () => ({
       length: 3,
-      onboarding: 0,
+      onboarding: 1,
     }),
 
     methods: {

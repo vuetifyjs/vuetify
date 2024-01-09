@@ -1,9 +1,12 @@
 /* eslint-disable sonarjs/no-identical-functions */
 /// <reference types="../../../../types/cypress" />
 
+// Components
+import { VSlideGroup, VSlideGroupItem } from '../'
 import { Application, CenteredGrid } from '../../../../cypress/templates'
 import { VCard } from '@/components/VCard'
-import { VSlideGroup, VSlideGroupItem } from '../'
+
+// Utilities
 import { createRange } from '@/util'
 
 describe('VSlideGroup', () => {
@@ -14,17 +17,15 @@ describe('VSlideGroup', () => {
           <VSlideGroup showArrows="always" selectedClass="bg-primary">
             { createRange(6).map(i => (
               <VSlideGroupItem key={ i } value={ i }>
-                {{
-                  default: props => (
-                    <VCard
-                      class={ ['ma-4', props.selectedClass] }
-                      color="grey"
-                      width="50"
-                      height="100"
-                      onClick={ props.toggle }
-                    >{ i }</VCard>
-                  ),
-                }}
+                { props => (
+                  <VCard
+                    class={['ma-4', props.selectedClass]}
+                    color="grey"
+                    width="50"
+                    height="100"
+                    onClick={ props.toggle }
+                  >{ i }</VCard>
+                )}
               </VSlideGroupItem>
             ))}
           </VSlideGroup>
@@ -65,8 +66,8 @@ describe('VSlideGroup', () => {
         <CenteredGrid width="400px">
           <VSlideGroup showArrows="always">
             {{
-              prev: props => <div {...props}>prev</div>,
-              next: props => <div {...props}>next</div>,
+              prev: props => <div { ...props }>prev</div>,
+              next: props => <div { ...props }>next</div>,
               default: () => createRange(6).map(i => (
                 <VSlideGroupItem key={ i }>
                   <VCard class="ma-4" color="grey" width="50" height="100">{ i }</VCard>
@@ -192,9 +193,7 @@ describe('VSlideGroup', () => {
           <VSlideGroup modelValue={ 7 } showArrows="always" selectedClass="bg-primary">
             { createRange(10).map(i => (
               <VSlideGroupItem key={ i } value={ i }>
-                {{
-                  default: props => <VCard color="grey" width="50" height="100" class={ ['ma-4', props.selectedClass] }>{ i }</VCard>,
-                }}
+                { props => <VCard color="grey" width="50" height="100" class={['ma-4', props.selectedClass]}>{ i }</VCard> }
               </VSlideGroupItem>
             ))}
           </VSlideGroup>
@@ -212,9 +211,7 @@ describe('VSlideGroup', () => {
           <VSlideGroup selectedClass="bg-primary">
             { createRange(8).map(i => (
               <VSlideGroupItem key={ i } value={ i }>
-                {{
-                  default: props => <VCard color="grey" width="50" height="100" class={ ['ma-4', props.selectedClass, `item-${i}`] }>{ i }</VCard>,
-                }}
+                { props => <VCard color="grey" width="50" height="100" class={['ma-4', props.selectedClass, `item-${i}`]}>{ i }</VCard> }
               </VSlideGroupItem>
             ))}
           </VSlideGroup>
@@ -226,5 +223,30 @@ describe('VSlideGroup', () => {
 
     cy.get('.item-1').should('not.be.visible')
     cy.get('.item-7').should('be.visible')
+  })
+
+  it('should support rtl', () => {
+    cy.mount(() => (
+      <Application rtl>
+        <CenteredGrid width="400px">
+          <VSlideGroup selectedClass="bg-primary" showArrows>
+            { createRange(8).map(i => (
+              <VSlideGroupItem key={ i } value={ i }>
+                { props => <VCard color="grey" width="50" height="100" class={['ma-4', props.selectedClass, `item-${i}`]}>{ i }</VCard> }
+              </VSlideGroupItem>
+            ))}
+          </VSlideGroup>
+        </CenteredGrid>
+      </Application>
+    ))
+
+    cy.get('.item-7').should('exist').should('not.be.visible')
+
+    cy.get('.v-slide-group__prev--disabled').should('exist')
+    cy.get('.v-slide-group__next--disabled').should('not.exist')
+
+    cy.get('.v-slide-group__next').click().click()
+
+    cy.get('.item-7').should('exist').should('be.visible')
   })
 })

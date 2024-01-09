@@ -1,12 +1,13 @@
 /// <reference types="../../../../types/cypress" />
 
-// Component
+// Components
 import { VToolbar } from '..'
+import { VBtn } from '@/components/VBtn'
 
 // Utilities
 const colors = ['success', 'info', 'warning', 'error', 'invalid']
 
-describe('VListItem', () => {
+describe('VToolbar', () => {
   function mountFunction (content: JSX.Element) {
     return cy.mount(() => content)
   }
@@ -23,7 +24,7 @@ describe('VListItem', () => {
       <>
         { colors.map(color => (
           <VToolbar color={ color } title={ color } />
-        )) }
+        ))}
       </>
     ))
       .get('.v-toolbar')
@@ -33,5 +34,22 @@ describe('VListItem', () => {
           expect(subject).to.contain(colors[idx])
         })
       })
+  })
+
+  it('aligns prepend / append slot content center', () => {
+    const wrapper = mountFunction((
+      <VToolbar>
+        <slot name="prepend">
+          <VBtn>Prepend</VBtn>
+        </slot>
+
+        <slot name="append">
+          <VBtn>Append</VBtn>
+        </slot>
+      </VToolbar>
+    ))
+
+    wrapper.get('[name="prepend"] > .v-btn').should('have.length', 1)
+    wrapper.get('[name="append"] > .v-btn').should('have.length', 1)
   })
 })

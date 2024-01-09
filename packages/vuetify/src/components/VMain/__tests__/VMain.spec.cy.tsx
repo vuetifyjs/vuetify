@@ -1,7 +1,8 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VApp } from '@/components/VApp'
+// Components
 import { VMain } from '..'
+import { VApp } from '@/components/VApp'
 
 describe('VAppBar', () => {
   it('should allow custom height', () => {

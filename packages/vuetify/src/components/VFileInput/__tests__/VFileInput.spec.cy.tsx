@@ -1,11 +1,52 @@
 /// <reference types="../../../../types/cypress" />
 
-import { CenteredGrid } from '@/../cypress/templates'
-import { ref } from 'vue'
+import { CenteredGrid, generate } from '@/../cypress/templates'
+
+// Components
 import { VFileInput } from '../VFileInput'
+
+// Utilities
+import { cloneVNode, ref } from 'vue'
 
 const oneMBFile = new File([new ArrayBuffer(1021576)], '1MB file')
 const twoMBFile = new File([new ArrayBuffer(2021152)], '2MB file')
+
+const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
+const densities = ['default', 'comfortable', 'compact'] as const
+const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'] as const
+
+const stories = Object.fromEntries(Object.entries({
+  'Default input': <VFileInput />,
+  Disabled: <VFileInput items={ items } disabled />,
+  Affixes: <VFileInput items={ items } prefix="prefix" suffix="suffix" />,
+  'Prepend/append': <VFileInput items={ items } prependIcon="$vuetify" appendIcon="$vuetify" />,
+  'Prepend/append inner': <VFileInput items={ items } prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
+  Placeholder: <VFileInput items={ items } placeholder="placeholder" persistentPlaceholder />,
+}).map(([k, v]) => [k, (
+  <div class="d-flex flex-column flex-grow-1">
+    { variants.map(variant => (
+      densities.map(density => (
+        <div class="d-flex align-start" style="gap: 0.4rem; height: 100px;">
+          { cloneVNode(v, { variant, density, label: `${variant} ${density}` }) }
+          { cloneVNode(v, { variant, density, label: `with value`, modelValue: [oneMBFile, twoMBFile] }) }
+          { cloneVNode(v, { variant, density, label: `chips`, chips: true, modelValue: [oneMBFile, twoMBFile] }) }
+          <VFileInput
+            variant={ variant }
+            density={ density }
+            modelValue={[oneMBFile, twoMBFile]}
+            label="selection slot"
+            { ...v.props }
+          >{{
+            selection: ({ fileNames }) => {
+              return fileNames.map(f => f)
+            },
+          }}
+          </VFileInput>
+        </div>
+      ))
+    )).flat()}
+  </div>
+)]))
 
 describe('VFileInput', () => {
   it('should add file', () => {
@@ -54,19 +95,19 @@ describe('VFileInput', () => {
     const model = ref([oneMBFile, twoMBFile])
     cy.mount(() => (
       <CenteredGrid width="400px">
-        <VFileInput label="foo" v-model={model.value} />
+        <VFileInput label="foo" v-model={ model.value } />
       </CenteredGrid>
     ))
       .get('.v-field__clearable > .v-icon')
       .click()
-      .get('.v-input input')
+    cy.get('.v-input input')
       .should('have.value', '')
   })
 
   it('should support removing clearable icon', () => {
     cy.mount(() => (
       <CenteredGrid width="400px">
-        <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} clearable={false} />
+        <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} clearable={ false } />
       </CenteredGrid>
     ))
       .get('.v-field__append-inner > .v-btn')
@@ -117,14 +158,14 @@ describe('VFileInput', () => {
         'onUpdate:modelValue': update,
       },
     })
-      .get('.v-file-input input')
+      .get('.v-file-input input').as('input')
       .focus()
-      .attachFile('text.txt')
-      .blur()
-      .then(() => {
-        expect(change).to.be.calledOnce
-        expect(update).to.be.calledOnce
-      })
+    cy.get('@input').attachFile('text.txt')
+    cy.get('@input').blur()
+    cy.then(() => {
+      expect(change).to.be.calledOnce
+      expect(update).to.be.calledOnce
+    })
   })
 
   it('should put extra attributes on input', () => {
@@ -135,5 +176,62 @@ describe('VFileInput', () => {
     ))
       .get('.v-file-input input')
       .should('have.attr', 'accept', 'image/*')
+  })
+
+  /**
+   * https://github.com/vuetifyjs/vuetify/issues/16486
+   */
+  it('should reset the underlying HTMLInput when model is controlled input', () => {
+    function TestWrapper () {
+      const files = ref<File[]>([])
+      const onReset = () => {
+        files.value = []
+      }
+      return (
+        <CenteredGrid width="400px">
+          <VFileInput modelValue={ files.value } />
+          <button onClick={ onReset }>Reset Model Value</button>
+        </CenteredGrid>
+      )
+    }
+
+    cy.mount(() => (
+      <TestWrapper />
+    ))
+      .get('.v-file-input input').as('input')
+      .should($res => {
+        const input = $res[0] as HTMLInputElement
+        expect(input.files).to.have.length(0)
+      })
+    // add file
+    cy.get('@input').attachFile('text.txt')
+      .should($res => {
+        const input = $res[0] as HTMLInputElement
+        expect(input.files).to.have.length(1)
+      })
+    // reset input from wrapper/parent component
+    cy.get('button').click()
+    cy.get('@input')
+      .should($res => {
+        const input = $res[0] as HTMLInputElement
+        expect(input.files).to.have.length(0)
+      })
+      // add same file again
+      .attachFile('text.txt')
+      .should($res => {
+        const input = $res[0] as HTMLInputElement
+        expect(input.files).to.have.length(1)
+      })
+    // reset input from wrapper/parent component
+    cy.get('button').click()
+    cy.get('@input')
+      .should($res => {
+        const input = $res[0] as HTMLInputElement
+        expect(input.files).to.have.length(0)
+      })
+  })
+
+  describe('Showcase', () => {
+    generate({ stories })
   })
 })

@@ -1,99 +1,48 @@
 <template>
-  <div class="d-flex justify-center align-baseline" style="gap: 1rem">
-    <v-btn
-      :loading="loading[1]"
-      :disabled="loading[1]"
-      color="secondary"
-      @click="load(1)"
-    >
-      Accept Terms
-    </v-btn>
+  <v-card
+    class="mx-auto"
+    max-width="450"
+    title="Strengthen your passwords"
+    text="Update your weak or re-used passwords with Password Checkup. It's free and only takes a few minutes. Click the Take Checkup button to get started."
+  >
 
-    <v-btn
-      :loading="loading[2]"
-      :disabled="loading[2]"
-      color="blue-grey"
-      prepend-icon="mdi-cloud-upload"
-      @click="load(2)"
-    >
-      Upload
-    </v-btn>
+    <template v-slot:actions>
+      <v-btn height="48">
+        No Thanks
+      </v-btn>
 
-    <v-btn
-      :loading="loading[3]"
-      :disabled="loading[3]"
-      color="info"
-      @click="load(3)"
-    >
-      Custom Loader
-      <template v-slot:loader>
-        <span class="custom-loader">
-          <v-icon light>mdi-cached</v-icon>
-        </span>
-      </template>
-    </v-btn>
-
-    <v-btn
-      :loading="loading[4]"
-      :disabled="loading[4]"
-      color="blue-grey"
-      icon="mdi-cloud-upload"
-      @click="load(4)"
-    ></v-btn>
-  </div>
+      <v-btn
+        :loading="loading"
+        class="flex-grow-1"
+        height="48"
+        variant="tonal"
+        @click="load"
+      >
+        Take Checkup
+      </v-btn>
+    </template>
+  </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const loading = ref(false)
+  function load () {
+    loading.value = true
+    setTimeout(() => (loading.value = false), 3000)
+  }
+</script>
 
 <script>
   export default {
-    data () {
-      return {
-        loading: [],
-      }
-    },
+    data: () => ({ loading: false }),
+
     methods: {
-      load (i) {
-        this.loading[i] = true
-        setTimeout(() => (this.loading[i] = false), 3000)
+      load () {
+        this.loading = true
+        setTimeout(() => (this.loading = false), 3000)
       },
     },
   }
 </script>
-
-<style>
-  .custom-loader {
-    animation: loader 1s infinite;
-    display: flex;
-  }
-  @-moz-keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  @-webkit-keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  @-o-keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  @keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-</style>

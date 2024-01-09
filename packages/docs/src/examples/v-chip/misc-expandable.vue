@@ -1,58 +1,61 @@
 <template>
   <v-card
-    max-width="400"
     class="mx-auto"
+    max-width="400"
   >
-    <v-system-bar></v-system-bar>
-
     <v-row
-      class="px-6 py-3"
       align="center"
+      class="pa-6"
     >
-      <span class="mr-4">To</span>
+      <span class="me-4">To</span>
+
       <v-menu
         v-model="menu"
-        bottom
-        right
+        location="top start"
+        origin="top start"
         transition="scale-transition"
-        origin="top left"
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ props }">
           <v-chip
             pill
-            v-on="on"
+            v-bind="props"
+            link
           >
-            <v-avatar left>
+            <v-avatar start>
               <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
             </v-avatar>
+
             John Leider
           </v-chip>
         </template>
+
         <v-card width="300">
-          <v-list dark>
+          <v-list bg-color="black">
             <v-list-item>
-              <v-list-item-avatar>
-                <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
-              </v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title>John Leider</v-list-item-title>
-                <v-list-item-subtitle>john@vuetifyjs.com</v-list-item-subtitle>
-              </v-list-item-content>
-              <v-list-item-action>
-                <v-btn
-                  icon
-                  @click="menu = false"
-                >
-                  <v-icon>mdi-close-circle</v-icon>
-                </v-btn>
-              </v-list-item-action>
+              <template v-slot:prepend>
+                <v-avatar image="https://cdn.vuetifyjs.com/images/john.png"></v-avatar>
+              </template>
+
+              <v-list-item-title>John Leider</v-list-item-title>
+
+              <v-list-item-subtitle>john@google.com</v-list-item-subtitle>
+
+              <template v-slot:append>
+                <v-list-item-action>
+                  <v-btn
+                    icon
+                    variant="text"
+                    @click="menu = false"
+                  >
+                    <v-icon>mdi-close-circle</v-icon>
+                  </v-btn>
+                </v-list-item-action>
+              </template>
             </v-list-item>
           </v-list>
+
           <v-list>
-            <v-list-item @click="() => {}">
-              <v-list-item-action>
-                <v-icon>mdi-briefcase</v-icon>
-              </v-list-item-action>
+            <v-list-item link prepend-icon="mdi-briefcase">
               <v-list-item-subtitle>john@gmail.com</v-list-item-subtitle>
             </v-list-item>
           </v-list>
@@ -62,20 +65,28 @@
 
     <v-divider></v-divider>
 
-    <v-text-field
-      full-width
-      value="Re: Vacation Request"
-      label="Subject"
-      single-line
-    ></v-text-field>
+    <div class="pa-3">
+      <v-text-field
+        label="Subject"
+        model-value="Re: Vacation Request"
+        single-line
+        variant="underlined"
+      ></v-text-field>
 
-    <v-textarea
-      full-width
-      single-line
-      label="Message"
-    ></v-textarea>
+      <v-textarea
+        label="Message"
+        single-line
+        variant="underlined"
+      ></v-textarea>
+    </div>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const menu = ref(false)
+</script>
 
 <script>
   export default {

@@ -1,23 +1,22 @@
-// Types
-import type {
-  DirectiveBinding,
-  ObjectDirective,
-} from 'vue'
-
 // Utilities
 import { keys } from '@/util'
 
+// Types
+import type {
+  DirectiveBinding,
+} from 'vue'
+
 export interface TouchHandlers {
-  start?: (wrapperEvent: { originalEvent: TouchEvent } & TouchWrapper) => void
-  end?: (wrapperEvent: { originalEvent: TouchEvent } & TouchWrapper) => void
-  move?: (wrapperEvent: { originalEvent: TouchEvent } & TouchWrapper) => void
-  left?: (wrapper: TouchWrapper) => void
-  right?: (wrapper: TouchWrapper) => void
-  up?: (wrapper: TouchWrapper) => void
-  down?: (wrapper: TouchWrapper) => void
+  start?: (wrapperEvent: { originalEvent: TouchEvent } & TouchData) => void
+  end?: (wrapperEvent: { originalEvent: TouchEvent } & TouchData) => void
+  move?: (wrapperEvent: { originalEvent: TouchEvent } & TouchData) => void
+  left?: (wrapper: TouchData) => void
+  right?: (wrapper: TouchData) => void
+  up?: (wrapper: TouchData) => void
+  down?: (wrapper: TouchData) => void
 }
 
-export interface TouchWrapper extends TouchHandlers {
+export interface TouchData {
   touchstartX: number
   touchstartY: number
   touchmoveX: number
@@ -27,6 +26,8 @@ export interface TouchWrapper extends TouchHandlers {
   offsetX: number
   offsetY: number
 }
+
+export type TouchWrapper = TouchHandlers & TouchData
 
 export interface TouchValue extends TouchHandlers {
   parent?: boolean
@@ -146,7 +147,7 @@ function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   delete target._touchHandlers[uid]
 }
 
-export const Touch: ObjectDirective = {
+export const Touch = {
   mounted,
   unmounted,
 }

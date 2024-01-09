@@ -1,20 +1,20 @@
 <template>
   <v-card
     class="mx-auto"
-    color="grey lighten-4"
+    color="grey-lighten-4"
     max-width="600"
   >
     <v-card-title>
       <v-icon
         :color="checking ? 'red lighten-2' : 'indigo'"
-        class="mr-12"
+        class="me-12"
         size="64"
         @click="takePulse"
       >
         mdi-heart-pulse
       </v-icon>
       <v-row align="start">
-        <div class="text-caption grey--text text-uppercase">
+        <div class="text-caption text-grey text-uppercase">
           Heart rate
         </div>
         <div>
@@ -50,6 +50,30 @@
     </v-sheet>
   </v-card>
 </template>
+
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const exhale = ms => new Promise(resolve => setTimeout(resolve, ms))
+  const checking = ref(false)
+  const heartbeats = ref([])
+  const avg = computed(() => {
+    const sum = heartbeats.value.reduce((acc, cur) => acc + cur, 0)
+    const length = heartbeats.value.length
+    if (!sum && !length) return 0
+    return Math.ceil(sum / length)
+  })
+  function heartbeat () {
+    return Math.ceil(Math.random() * (120 - 80) + 80)
+  }
+  async function takePulse (inhale = true) {
+    checking.value = true
+    inhale && await exhale(1000)
+    heartbeats.value = Array.from({ length: 20 }, heartbeat)
+    checking.value = false
+  }
+  takePulse(false)
+</script>
 
 <script>
   const exhale = ms =>

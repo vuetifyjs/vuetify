@@ -58,7 +58,17 @@ $utilities: () !default;
       "flex": (
         responsive: true,
         property: flex,
-        values: (fill: 1 1 auto)
+        values: (
+          fill: 1 1 auto,
+          '1-1': 1 1 auto,
+          '1-0': 1 0 auto,
+          '0-1': 0 1 auto,
+          '0-0': 0 0 auto,
+          '1-1-100': 1 1 100%,
+          '1-0-100': 1 0 100%,
+          '0-1-100': 0 1 100%,
+          '0-0-100': 0 0 100%
+        )
       ),
       "flex-direction": (
         responsive: true,
@@ -124,6 +134,7 @@ $utilities: () !default;
           center: center,
           space-between: space-between,
           space-around: space-around,
+          space-evenly: space-evenly,
           stretch: stretch,
         )
       ),
@@ -159,6 +170,26 @@ $utilities: () !default;
           12: 12,
           last: 13,
         ),
+      ),
+
+      // gap utilities
+      "gap": (
+        responsive: true,
+        property: gap,
+        class: ga,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+      "gap-row": (
+        responsive: true,
+        property: row-gap,
+        class: gr,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+      "gap-column": (
+        responsive: true,
+        property: column-gap,
+        class: gc,
+        values: map.merge(variables.$spacers, (auto: auto))
       ),
 
       // Margin utilities
@@ -442,23 +473,18 @@ $utilities: () !default;
         values: (break: break-word)
       ),
       "text-opacity": (
-        property: opacity,
+        property: color,
         class: text,
         values: (
-          high-emphasis: var(--v-high-emphasis-opacity),
-          medium-emphasis: var(--v-medium-emphasis-opacity),
-          disabled: var(--v-disabled-opacity)
+          high-emphasis: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity)),
+          medium-emphasis: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity)),
+          disabled: rgba(var(--v-theme-on-background), var(--v-disabled-opacity)),
         )
       ),
       "text-overflow": (
         property: white-space overflow text-overflow,
         class: text,
         values: (truncate: nowrap hidden ellipsis)
-      ),
-      "text-transform": (
-        property: text-transform,
-        class: text,
-        values: none capitalize lowercase uppercase
       ),
       "typography": (
         responsive: true,
@@ -476,6 +502,28 @@ $utilities: () !default;
           line-height
         ),
         values: variables.$flat-typography
+      ),
+      "text-transform": (
+        property: text-transform,
+        class: text,
+        values: none capitalize lowercase uppercase
+      ),
+      "font-weight": (
+        property: font-weight,
+        class: font-weight,
+        values: variables.$font-weights
+      ),
+      "font-italic": (
+        property: font-style,
+        class: font,
+        values: italic
+      ),
+      "text-mono": (
+        property: font-family,
+        class: text,
+        values: (
+          mono: monospace
+        )
       ),
       // Position
       "position": (
@@ -502,6 +550,13 @@ $utilities: () !default;
           50: 50%,
           75: 75%,
           100: 100%
+        )
+      ),
+      "height-screen": (
+        property: height,
+        class: h,
+        values: (
+          screen: 100dvh
         )
       ),
       "width": (

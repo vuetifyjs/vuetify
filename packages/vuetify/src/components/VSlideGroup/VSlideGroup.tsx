@@ -6,61 +6,86 @@ import { VFadeTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeGroupProps, useGroup } from '@/composables/group'
-import { makeTagProps } from '@/composables/tag'
-import { useDisplay } from '@/composables'
+import { IconValue } from '@/composables/icons'
+import { useRtl } from '@/composables/locale'
 import { useResizeObserver } from '@/composables/resizeObserver'
-import { useRtl } from '@/composables/rtl'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
+import { computed, shallowRef, watch } from 'vue'
 import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
-import { clamp, defineComponent, IN_BROWSER, useRender } from '@/util'
-import { computed, ref, watch } from 'vue'
+import { clamp, focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
+import type { InjectionKey, PropType } from 'vue'
 import type { GroupProvide } from '@/composables/group'
-import type { InjectionKey } from 'vue'
+import type { GenericProps } from '@/util'
 
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
 
-export const VSlideGroup = defineComponent({
+interface SlideGroupSlot {
+  next: GroupProvide['next']
+  prev: GroupProvide['prev']
+  select: GroupProvide['select']
+  isSelected: GroupProvide['isSelected']
+}
+
+type VSlideGroupSlots = {
+  default: SlideGroupSlot
+  prev: SlideGroupSlot
+  next: SlideGroupSlot
+}
+
+export const makeVSlideGroupProps = propsFactory({
+  centerActive: Boolean,
+  direction: {
+    type: String as PropType<'horizontal' | 'vertical'>,
+    default: 'horizontal',
+  },
+  symbol: {
+    type: null,
+    default: VSlideGroupSymbol,
+  },
+  nextIcon: {
+    type: IconValue,
+    default: '$next',
+  },
+  prevIcon: {
+    type: IconValue,
+    default: '$prev',
+  },
+  showArrows: {
+    type: [Boolean, String],
+    validator: (v: any) => (
+      typeof v === 'boolean' || [
+        'always',
+        'desktop',
+        'mobile',
+      ].includes(v)
+    ),
+  },
+
+  ...makeComponentProps(),
+  ...makeDisplayProps(),
+  ...makeTagProps(),
+  ...makeGroupProps({
+    selectedClass: 'v-slide-group-item--active',
+  }),
+}, 'VSlideGroup')
+
+export const VSlideGroup = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: VSlideGroupSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSlideGroup',
 
-  props: {
-    centerActive: Boolean,
-    direction: {
-      type: String,
-      default: 'horizontal',
-    },
-    symbol: {
-      type: null,
-      default: VSlideGroupSymbol,
-    },
-    nextIcon: {
-      type: IconValue,
-      default: '$next',
-    },
-    prevIcon: {
-      type: IconValue,
-      default: '$prev',
-    },
-    showArrows: {
-      type: [Boolean, String],
-      validator: (v: any) => (
-        typeof v === 'boolean' || [
-          'always',
-          'desktop',
-          'mobile',
-        ].includes(v)
-      ),
-    },
-
-    ...makeTagProps(),
-    ...makeGroupProps({
-      selectedClass: 'v-slide-group-item--active',
-    }),
-  },
+  props: makeVSlideGroupProps(),
 
   emits: {
     'update:modelValue': (value: any) => true,
@@ -68,12 +93,12 @@ export const VSlideGroup = defineComponent({
 
   setup (props, { slots }) {
     const { isRtl } = useRtl()
-    const { mobile } = useDisplay()
+    const { displayClasses, mobile } = useDisplay(props)
     const group = useGroup(props, props.symbol)
-    const isOverflowing = ref(false)
-    const scrollOffset = ref(0)
-    const containerSize = ref(0)
-    const contentSize = ref(0)
+    const isOverflowing = shallowRef(false)
+    const scrollOffset = shallowRef(0)
+    const containerSize = shallowRef(0)
+    const contentSize = shallowRef(0)
     const isHorizontal = computed(() => props.direction === 'horizontal')
 
     const { resizeRef: containerRef, contentRect: containerRect } = useResizeObserver()
@@ -134,14 +159,15 @@ export const VSlideGroup = defineComponent({
       })
     }
 
-    const disableTransition = ref(false)
+    const disableTransition = shallowRef(false)
 
     let startTouch = 0
     let startOffset = 0
 
     function onTouchstart (e: TouchEvent) {
       const sizeProperty = isHorizontal.value ? 'clientX' : 'clientY'
-      startOffset = scrollOffset.value
+      const sign = isRtl.value && isHorizontal.value ? -1 : 1
+      startOffset = sign * scrollOffset.value
       startTouch = e.touches[0][sizeProperty]
       disableTransition.value = true
     }
@@ -150,34 +176,29 @@ export const VSlideGroup = defineComponent({
       if (!isOverflowing.value) return
 
       const sizeProperty = isHorizontal.value ? 'clientX' : 'clientY'
-      scrollOffset.value = startOffset + startTouch - e.touches[0][sizeProperty]
+      const sign = isRtl.value && isHorizontal.value ? -1 : 1
+      scrollOffset.value = sign * (startOffset + startTouch - e.touches[0][sizeProperty])
     }
 
     function onTouchend (e: TouchEvent) {
       const maxScrollOffset = contentSize.value - containerSize.value
 
-      if (isRtl.value) {
-        if (scrollOffset.value > 0 || !isOverflowing.value) {
-          scrollOffset.value = 0
-        } else if (scrollOffset.value <= -maxScrollOffset) {
-          scrollOffset.value = -maxScrollOffset
-        }
-      } else {
-        if (scrollOffset.value < 0 || !isOverflowing.value) {
-          scrollOffset.value = 0
-        } else if (scrollOffset.value >= maxScrollOffset) {
-          scrollOffset.value = maxScrollOffset
-        }
+      if (scrollOffset.value < 0 || !isOverflowing.value) {
+        scrollOffset.value = 0
+      } else if (scrollOffset.value >= maxScrollOffset) {
+        scrollOffset.value = maxScrollOffset
       }
 
       disableTransition.value = false
     }
 
     function onScroll () {
-      containerRef.value && (containerRef.value.scrollLeft = 0)
+      if (!containerRef.value) return
+
+      containerRef.value[isHorizontal.value ? 'scrollLeft' : 'scrollTop'] = 0
     }
 
-    const isFocused = ref(false)
+    const isFocused = shallowRef(false)
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
 
@@ -216,11 +237,21 @@ export const VSlideGroup = defineComponent({
     function onKeydown (e: KeyboardEvent) {
       if (!contentRef.value) return
 
-      if (e.key === (isHorizontal.value ? 'ArrowRight' : 'ArrowDown')) {
-        focus('next')
-      } else if (e.key === (isHorizontal.value ? 'ArrowLeft' : 'ArrowUp')) {
-        focus('prev')
-      } else if (e.key === 'Home') {
+      if (isHorizontal.value) {
+        if (e.key === 'ArrowRight') {
+          focus(isRtl.value ? 'prev' : 'next')
+        } else if (e.key === 'ArrowLeft') {
+          focus(isRtl.value ? 'next' : 'prev')
+        }
+      } else {
+        if (e.key === 'ArrowDown') {
+          focus('next')
+        } else if (e.key === 'ArrowUp') {
+          focus('prev')
+        }
+      }
+
+      if (e.key === 'Home') {
         focus('first')
       } else if (e.key === 'End') {
         focus('last')
@@ -231,10 +262,7 @@ export const VSlideGroup = defineComponent({
       if (!contentRef.value) return
 
       if (!location) {
-        contentRef.value.querySelector('[tabindex]')
-        const focusable = [...contentRef.value.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        )].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
+        const focusable = focusableChildren(contentRef.value)
         focusable[0]?.focus()
       } else if (location === 'next') {
         const el = contentRef.value.querySelector(':focus')?.nextElementSibling as HTMLElement | undefined
@@ -252,22 +280,25 @@ export const VSlideGroup = defineComponent({
     }
 
     function scrollTo (location: 'prev' | 'next') {
-      const sign = isRtl.value ? -1 : 1
-      const newAbosluteOffset = sign * scrollOffset.value +
-        (location === 'prev' ? -1 : 1) * containerSize.value
+      const newAbsoluteOffset = scrollOffset.value + (location === 'prev' ? -1 : 1) * containerSize.value
 
-      scrollOffset.value = sign * clamp(newAbosluteOffset, 0, contentSize.value - containerSize.value)
+      scrollOffset.value = clamp(newAbsoluteOffset, 0, contentSize.value - containerSize.value)
     }
 
     const contentStyles = computed(() => {
-      const scrollAmount = scrollOffset.value <= 0
-        ? bias(-scrollOffset.value)
-        : scrollOffset.value > contentSize.value - containerSize.value
-          ? -(contentSize.value - containerSize.value) + bias(contentSize.value - containerSize.value - scrollOffset.value)
-          : -scrollOffset.value
+      // This adds friction when scrolling the 'wrong' way when at max offset
+      let scrollAmount = scrollOffset.value > contentSize.value - containerSize.value
+        ? -(contentSize.value - containerSize.value) + bias(contentSize.value - containerSize.value - scrollOffset.value)
+        : -scrollOffset.value
 
+      // This adds friction when scrolling the 'wrong' way when at min offset
+      if (scrollOffset.value <= 0) {
+        scrollAmount = bias(-scrollOffset.value)
+      }
+
+      const sign = isRtl.value && isHorizontal.value ? -1 : 1
       return {
-        transform: `translate${isHorizontal.value ? 'X' : 'Y'}(${scrollAmount}px)`,
+        transform: `translate${isHorizontal.value ? 'X' : 'Y'}(${sign * scrollAmount}px)`,
         transition: disableTransition.value ? 'none' : '',
         willChange: disableTransition.value ? 'transform' : '',
       }
@@ -309,12 +340,10 @@ export const VSlideGroup = defineComponent({
     })
 
     const hasPrev = computed(() => {
-      return hasAffixes.value && scrollOffset.value > 0
+      return Math.abs(scrollOffset.value) > 0
     })
 
     const hasNext = computed(() => {
-      if (!hasAffixes.value) return false
-
       // Check one scroll ahead to know the width of right-most item
       return contentSize.value > Math.abs(scrollOffset.value) + containerSize.value
     })
@@ -328,7 +357,10 @@ export const VSlideGroup = defineComponent({
             'v-slide-group--has-affixes': hasAffixes.value,
             'v-slide-group--is-overflowing': isOverflowing.value,
           },
+          displayClasses.value,
+          props.class,
         ]}
+        style={ props.style }
         tabindex={ (isFocused.value || group.selected.value.length) ? -1 : 0 }
         onFocus={ onFocus }
       >
@@ -339,15 +371,15 @@ export const VSlideGroup = defineComponent({
               'v-slide-group__prev',
               { 'v-slide-group__prev--disabled': !hasPrev.value },
             ]}
-            onClick={ () => scrollTo('prev') }
+            onClick={ () => hasPrev.value && scrollTo('prev') }
           >
             { slots.prev?.(slotProps.value) ?? (
               <VFadeTransition>
-                <VIcon icon={ props.prevIcon }></VIcon>
+                <VIcon icon={ isRtl.value ? props.nextIcon : props.prevIcon }></VIcon>
               </VFadeTransition>
-            ) }
+            )}
           </div>
-        ) }
+        )}
 
         <div
           key="container"
@@ -377,15 +409,15 @@ export const VSlideGroup = defineComponent({
               'v-slide-group__next',
               { 'v-slide-group__next--disabled': !hasNext.value },
             ]}
-            onClick={ () => scrollTo('next') }
+            onClick={ () => hasNext.value && scrollTo('next') }
           >
             { slots.next?.(slotProps.value) ?? (
               <VFadeTransition>
-                <VIcon icon={ props.nextIcon }></VIcon>
+                <VIcon icon={ isRtl.value ? props.prevIcon : props.nextIcon }></VIcon>
               </VFadeTransition>
-            ) }
+            )}
           </div>
-        ) }
+        )}
       </props.tag>
     ))
 

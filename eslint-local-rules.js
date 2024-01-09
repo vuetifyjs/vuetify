@@ -1,60 +1,12 @@
 'use strict'
 
 module.exports = {
-  'no-render-string-reference': {
-    create: require('./scripts/no-render-string-reference'),
-  },
-  'jsx-condition-key': {
-    create (context) {
-      return {
-        JSXExpressionContainer (node) {
-          if (!['LogicalExpression', 'ConditionalExpression'].includes(node.expression.type)) return
-
-          if (
-            node.parent.type !== 'JSXElement' ||
-            node.parent.children.slice(node.parent.children.indexOf(node))
-              .every(child => child === node || child.type === 'JSXText')
-          ) return
-
-          const test = node.expression.type === 'LogicalExpression'
-            ? node.expression.left
-            : node.expression.test
-          if (
-            (
-              test.type === 'ChainExpression' &&
-              test.expression.type === 'CallExpression' &&
-              test.expression.callee.type === 'MemberExpression' &&
-              test.expression.callee.object.name === 'slots'
-            ) || (
-              test.type === 'MemberExpression' &&
-              test.object.name === 'slots'
-            ) || (
-              test.type === 'CallExpression' &&
-              test.callee.type === 'MemberExpression' &&
-              test.callee.object.name === 'slots'
-            )
-          ) return
-
-          const tags = node.expression.type === 'LogicalExpression'
-            ? [node.expression.right]
-            : [node.expression.consequent, node.expression.alternate]
-
-          tags.forEach(tag => {
-            if (tag.type !== 'JSXElement') return
-
-            const key = tag.openingElement.attributes.find(attr => attr.type === 'JSXAttribute' && attr.name.name === 'key')
-            if (!key) {
-              context.report({
-                loc: {
-                  start: tag.openingElement.loc.start,
-                  end: tag.openingElement.name.loc.end,
-                },
-                message: 'Conditional JSX elements must have a key attribute',
-              })
-            }
-          })
-        },
-      }
-    },
-  },
+  'no-render-string-reference': require('./scripts/rules/no-render-string-reference'),
+  'no-components-index': require('./scripts/rules/no-components-index'),
+  'jsx-condition-key': require('./scripts/rules/jsx-condition-key'),
+  'jsx-curly-spacing': require('./scripts/rules/jsx-curly-spacing'),
+  'jest-global-imports': require('./scripts/rules/jest-global-imports'),
+  'cypress-types-reference': require('./scripts/rules/cypress-types-reference'),
+  'sort-imports': require('./scripts/rules/sort-imports'),
+  'no-nullish-coalescing-in-condition': require('./scripts/rules/no-nullish-coalescing-in-condition'),
 }

@@ -2,14 +2,17 @@
 import { aliases, mdi } from '@/iconsets/mdi'
 
 // Utilities
-import { computed, inject, isRef } from 'vue'
-import { defineComponent, mergeDeep, propsFactory } from '@/util'
+import { computed, inject, unref } from 'vue'
+import { defineComponent, genericComponent, mergeDeep, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, JSXComponent, PropType, Ref } from 'vue'
 
-export type IconValue = string | JSXComponent
-export const IconValue = [String, Function, Object] as PropType<IconValue>
+export type IconValue =
+  | string
+  | (string | [path: string, opacity: number])[]
+  | JSXComponent
+export const IconValue = [String, Function, Object, Array] as PropType<IconValue>
 
 export interface IconAliases {
   [name: string]: IconValue
@@ -28,7 +31,8 @@ export interface IconAliases {
   checkboxOff: IconValue
   checkboxIndeterminate: IconValue
   delimiter: IconValue
-  sort: IconValue
+  sortAsc: IconValue
+  sortDesc: IconValue
   expand: IconValue
   menu: IconValue
   subgroup: IconValue
@@ -46,11 +50,12 @@ export interface IconAliases {
   file: IconValue
   plus: IconValue
   minus: IconValue
+  calendar: IconValue
 }
 
 export interface IconProps {
   tag: string
-  icon: IconValue
+  icon?: IconValue
   disabled?: Boolean
 }
 
@@ -61,22 +66,21 @@ export interface IconSet {
 }
 
 export type IconOptions = {
-  defaultSet: string
+  defaultSet?: string
   aliases?: Partial<IconAliases>
-  sets: Record<string, IconSet>
+  sets?: Record<string, IconSet>
 }
 
 type IconInstance = {
   component: IconComponent
-  icon: IconValue
+  icon?: IconValue
 }
 
-export const IconSymbol: InjectionKey<IconOptions> = Symbol.for('vuetify:icons')
+export const IconSymbol: InjectionKey<Required<IconOptions>> = Symbol.for('vuetify:icons')
 
 export const makeIconProps = propsFactory({
   icon: {
     type: IconValue,
-    required: true,
   },
   // Could not remove this and use makeTagProps, types complained because it is not required
   tag: {
@@ -85,21 +89,23 @@ export const makeIconProps = propsFactory({
   },
 }, 'icon')
 
-export const VComponentIcon = defineComponent({
+export const VComponentIcon = genericComponent()({
   name: 'VComponentIcon',
 
   props: makeIconProps(),
 
-  setup (props) {
+  setup (props, { slots }) {
     return () => {
+      const Icon = props.icon as JSXComponent
       return (
         <props.tag>
-          <props.icon />
+          { props.icon ? <Icon /> : slots.default?.() }
         </props.tag>
       )
     }
   },
 })
+export type VComponentIcon = InstanceType<typeof VComponentIcon>
 
 export const VSvgIcon = defineComponent({
   name: 'VSvgIcon',
@@ -119,13 +125,21 @@ export const VSvgIcon = defineComponent({
             role="img"
             aria-hidden="true"
           >
-            <path d={ props.icon as string }></path>
+            { Array.isArray(props.icon)
+              ? props.icon.map(path => (
+                Array.isArray(path)
+                  ? <path d={ path[0] as string } fill-opacity={ path[1] }></path>
+                  : <path d={ path as string }></path>
+              ))
+              : <path d={ props.icon as string }></path>
+            }
           </svg>
         </props.tag>
       )
     }
   },
 })
+export type VSvgIcon = InstanceType<typeof VSvgIcon>
 
 export const VLigatureIcon = defineComponent({
   name: 'VLigatureIcon',
@@ -138,6 +152,7 @@ export const VLigatureIcon = defineComponent({
     }
   },
 })
+export type VLigatureIcon = InstanceType<typeof VLigatureIcon>
 
 export const VClassIcon = defineComponent({
   name: 'VClassIcon',
@@ -150,6 +165,7 @@ export const VClassIcon = defineComponent({
     }
   },
 })
+export type VClassIcon = InstanceType<typeof VClassIcon>
 
 export const defaultSets: Record<string, IconSet> = {
   svg: {
@@ -168,29 +184,47 @@ export function createIcons (options?: IconOptions) {
       ...defaultSets,
       mdi,
     },
-    aliases,
+    aliases: {
+      ...aliases,
+      /* eslint-disable max-len */
+      vuetify: [
+        'M8.2241 14.2009L12 21L22 3H14.4459L8.2241 14.2009Z',
+        ['M7.26303 12.4733L7.00113 12L2 3H12.5261C12.5261 3 12.5261 3 12.5261 3L7.26303 12.4733Z', 0.6],
+      ],
+      'vuetify-outline': 'svg:M7.26 12.47 12.53 3H2L7.26 12.47ZM14.45 3 8.22 14.2 12 21 22 3H14.45ZM18.6 5 12 16.88 10.51 14.2 15.62 5ZM7.26 8.35 5.4 5H9.13L7.26 8.35Z',
+      /* eslint-enable max-len */
+    },
   }, options)
 }
 
-export const useIcon = (props: Ref<string | undefined> | { icon?: IconValue }) => {
+export const useIcon = (props: Ref<IconValue | undefined>) => {
   const icons = inject(IconSymbol)
 
   if (!icons) throw new Error('Missing Vuetify Icons provide!')
 
-  const iconData: Ref<IconInstance> = computed(() => {
-    const iconAlias = isRef(props) ? props.value : props.icon
+  const iconData = computed<IconInstance>(() => {
+    const iconAlias = unref(props)
 
-    if (!iconAlias) throw new Error('Icon value is undefined or null')
+    if (!iconAlias) return { component: VComponentIcon }
 
     let icon: IconValue | undefined = iconAlias
 
-    if (typeof iconAlias === 'string' && iconAlias.includes('$')) {
-      icon = icons.aliases?.[iconAlias.slice(iconAlias.indexOf('$') + 1)]
+    if (typeof icon === 'string') {
+      icon = icon.trim()
+
+      if (icon.startsWith('$')) {
+        icon = icons.aliases?.[icon.slice(1)]
+      }
     }
 
     if (!icon) throw new Error(`Could not find aliased icon "${iconAlias}"`)
 
-    if (typeof icon !== 'string') {
+    if (Array.isArray(icon)) {
+      return {
+        component: VSvgIcon,
+        icon,
+      }
+    } else if (typeof icon !== 'string') {
       return {
         component: VComponentIcon,
         icon,

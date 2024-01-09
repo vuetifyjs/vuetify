@@ -1,6 +1,6 @@
 ---
-nav: Custom Overlays
 meta:
+  nav: Overlays
   title: Overlay component
   description: The overlay component makes it easy to create a scrim over components or your entire application.
   keywords: overlays, vuetify overlay component, vue overlay component
@@ -8,13 +8,17 @@ related:
   - /components/dialogs/
   - /components/menus/
   - /components/tooltips/
+features:
+  github: /components/VOverlay/
+  label: 'C: VOverlay'
+  report: true
 ---
 
 # Overlays
 
 `v-overlay` is the base for components that float over the rest of the page, such as `v-menu` and `v-dialog`. It can also be used on its own and comes with everything you need to create a custom popover component.
 
-<entry />
+<page-features />
 
 ## Usage
 
@@ -22,9 +26,15 @@ In its simplest form, the `v-overlay` component will add a dimmed layer over you
 
 <example file="v-overlay/usage" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-overlay](/api/v-overlay/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Activator
 
@@ -85,6 +95,38 @@ The connected strategy is used by [v-menu](/components/menus) and [v-tooltip](/c
 
 ## Scroll Strategies
 
+### Block (default)
+
+`scroll-strategy="block"`
+
+Scrolling is blocked while the overlay is active, and the scrollbar is hidden. If `contained` is also set, scrolling will only be blocked up to the overlay's [`offsetParent`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent).
+
+<example file="v-overlay/scroll-block" />
+
+### Close
+
+`scroll-strategy="close"`
+
+Scrolling when the overlay is active will de-activate it.
+
+<example file="v-overlay/scroll-close" />
+
+### Reposition
+
+`scroll-strategy="reposition"`
+
+When using the `connected` location strategy, this scroll strategy will reposition the overlay element to always respect the activator location.
+
+<example file="v-overlay/scroll-reposition" />
+
+### None
+
+`scroll-strategy="none"`
+
+No scroll strategy is used.
+
+<example file="v-overlay/scroll-none" />
+
 ## Examples
 
 ### Props
@@ -108,5 +150,3 @@ Using the [v-hover](/components/hover), we are able to add a nice scrim over the
 Using the `v-overlay` as a background, add a progress component to easily create a custom loader.
 
 <example file="v-overlay/misc-loader" />
-
-<backmatter />

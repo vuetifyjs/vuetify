@@ -1,0 +1,26 @@
+{
+  "exposed": {
+    "height": "The inner height of the browser window.",
+    "lg": "Returns **true** if the current browser breakpoint is **lg**.",
+    "lgAndDown": "Returns **true** if the current browser breakpoint is **lg** or lower.",
+    "lgAndUp": "Returns **true** if the current browser breakpoint is **lg** or higher.",
+    "md": "Returns **true** if the current browser breakpoint is **md**.",
+    "mdAndDown": "Returns **true** if the current browser breakpoint is **md** or lower.",
+    "mdAndUp": "Returns **true** if the current browser breakpoint is **md** or higher.",
+    "mobile": "Returns **true** if the current browser breakpoint is considered to be a mobile breakpoint.",
+    "mobileBreakpoint": "Controls which named breakpoint (**lg**, **md**, etc) or browser width (in px) is considered to be mobile.",
+    "name": "Name of the current breakpoint.",
+    "platform": "Name of the current platform.",
+    "sm": "Returns **true** if the current browser breakpoint is **sm**.",
+    "smAndDown": "Returns **true** if the current browser breakpoint is **sm** or lower.",
+    "smAndUp": "Returns **true** if the current browser breakpoint is **sm** or higher.",
+    "thresholds": "An object describing the width values of each breakpoint.",
+    "update": "Function that updates the current width and height values.",
+    "width": "The inner width of the browser window.",
+    "xl": "Returns **true** if the current browser breakpoint is **xl**.",
+    "xlAndDown": "Returns **true** if the current browser breakpoint is **xl** or lower.",
+    "xlAndUp": "Returns **true** if the current browser breakpoint is **xl** or higher.",
+    "xs": "Returns **true** if the current browser breakpoint is **xs**.",
+    "xxl": "Returns **true** if the current browser breakpoint is **xxl**."
+  }
+}

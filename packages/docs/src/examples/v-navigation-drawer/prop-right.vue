@@ -7,7 +7,7 @@
       >
         <template v-slot:prepend>
           <v-list-item
-            two-line
+            lines="two"
             prepend-avatar="https://randomuser.me/api/portraits/women/81.jpg"
             title="Jane Smith"
             subtitle="Logged in"
@@ -26,17 +26,3 @@
     </v-layout>
   </v-card>
 </template>
-
-<script>
-  export default {
-    data () {
-      return {
-        items: [
-          { title: 'Home', icon: 'mdi-home-city' },
-          { title: 'My Account', icon: 'mdi-account' },
-          { title: 'Users', icon: 'mdi-account-group-outline' },
-        ],
-      }
-    },
-  }
-</script>

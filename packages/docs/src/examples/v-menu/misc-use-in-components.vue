@@ -6,23 +6,14 @@
       offset-sm="3"
     >
       <v-card height="200px">
-        <v-card-title class="blue white--text">
+        <v-card-title class="bg-blue">
           <span class="text-h5">Menu</span>
 
           <v-spacer></v-spacer>
 
-          <v-menu
-            bottom
-            left
-          >
+          <v-menu>
             <template v-slot:activator="{ props }">
-              <v-btn
-                dark
-                icon
-                v-bind="props"
-              >
-                <v-icon>mdi-dots-vertical</v-icon>
-              </v-btn>
+              <v-btn icon="mdi-dots-vertical" v-bind="props"></v-btn>
             </template>
 
             <v-list>
@@ -41,6 +32,15 @@
     </v-col>
   </v-row>
 </template>
+
+<script setup>
+  const items = [
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me 2' },
+  ]
+</script>
 
 <script>
   export default {

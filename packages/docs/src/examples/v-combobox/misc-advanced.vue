@@ -3,14 +3,14 @@
     <v-combobox
       v-model="model"
       v-model:search-input="search"
-      :filter="filter"
+      :custom-filter="filter"
       :hide-no-data="!search"
       :items="items"
       hide-selected
       label="Search for an option"
       multiple
       small-chips
-      solo
+      variant="solo"
     >
       <template v-slot:no-data>
         <v-list-item>
@@ -29,15 +29,15 @@
           v-if="item === Object(item)"
           v-bind="attrs"
           :color="`${item.color} lighten-3`"
-          :input-value="selected"
+          :model-value="selected"
           label
           small
         >
-          <span class="pr-2">
+          <span class="pe-2">
             {{ item.text }}
           </span>
           <v-icon
-            small
+            size="small"
             @click="parent.selectItem(item)"
           >
             $delete
@@ -50,9 +50,9 @@
           v-model="editing.text"
           autofocus
           flat
-          background-color="transparent"
+          bg-color="transparent"
           hide-details
-          solo
+          variant="solo"
           @keyup.enter="edit(index, item)"
         ></v-text-field>
         <v-chip

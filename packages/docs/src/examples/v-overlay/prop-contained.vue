@@ -1,6 +1,7 @@
 <template>
   <v-row
     align="center"
+    class="ma-4"
     justify="center"
   >
     <v-card
@@ -16,7 +17,11 @@
           Show Overlay
         </v-btn>
 
-        <v-overlay v-model="overlay" contained class="align-center justify-center">
+        <v-overlay
+          v-model="overlay"
+          contained
+          class="align-center justify-center"
+        >
           <v-btn
             color="success"
             @click="overlay = false"
@@ -28,6 +33,12 @@
     </v-card>
   </v-row>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const overlay = ref(false)
+</script>
 
 <script>
   export default {

@@ -1,7 +1,8 @@
-import { describe, expect, it } from '@jest/globals'
-
 // Directives
 import ClickOutside from '../'
+
+// Utilities
+import { describe, expect, it } from '@jest/globals'
 import { wait } from '../../../../test'
 
 function bootstrap (args?: object) {
@@ -75,37 +76,41 @@ describe('click-outside.js within the Shadow DOM', () => {
   })
 
   it('should call the callback when closeConditional returns true and event target is outside the shadow DOM', async () => {
-    const { outsideClickHandler, callback, outsideEl } = bootstrap({ closeConditional: () => true })
+    const { outsideClickHandler, outsideMousedownHandler, callback, outsideEl } = bootstrap({ closeConditional: () => true })
     const event = { target: outsideEl }
 
+    outsideMousedownHandler({ target: document.body })
     outsideClickHandler(event)
     await wait()
     expect(callback).toHaveBeenCalledWith(event)
   })
 
   it('should call the callback when closeConditional returns true and event target is within the shadow DOM', async () => {
-    const { shadowClickHandler, callback, shadowRoot } = bootstrap({ closeConditional: () => true })
+    const { shadowClickHandler, outsideMousedownHandler, callback, shadowRoot } = bootstrap({ closeConditional: () => true })
     const event = { target: shadowRoot }
 
+    outsideMousedownHandler({ target: document.body })
     shadowClickHandler(event)
     await wait()
     expect(callback).toHaveBeenCalledWith(event)
   })
 
   it('should not call the callback when closeConditional is not provided', async () => {
-    const { shadowClickHandler, callback, shadowEl } = bootstrap()
+    const { shadowClickHandler, outsideMousedownHandler, callback, shadowEl } = bootstrap()
 
+    outsideMousedownHandler({ target: document.body })
     shadowClickHandler({ target: shadowEl })
     await wait()
     expect(callback).not.toHaveBeenCalled()
   })
 
   it('should not call the callback when clicked in element within the shadow DOM', async () => {
-    const { shadowClickHandler, callback, shadowEl } = bootstrap({ closeConditional: () => true })
+    const { shadowClickHandler, outsideMousedownHandler, callback, shadowEl } = bootstrap({ closeConditional: () => true })
 
+    outsideMousedownHandler({ target: document.body })
     shadowClickHandler({ target: shadowEl })
     await wait()
-    expect(callback).not.toHaveBeenCalledWith()
+    expect(callback).not.toHaveBeenCalled()
   })
 
   it('should not call the callback when mousedown was on the element within the shadow DOM', async () => {

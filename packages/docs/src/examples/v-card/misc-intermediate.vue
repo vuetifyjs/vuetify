@@ -12,7 +12,7 @@
 
         <v-col
           cols="auto"
-          class="text-center pl-0"
+          class="text-center ps-0"
         >
           <v-row
             class="flex-column ma-0 fill-height"
@@ -41,7 +41,3 @@
     </v-container>
   </v-card>
 </template>
-
-<script>
-  export default {}
-</script>

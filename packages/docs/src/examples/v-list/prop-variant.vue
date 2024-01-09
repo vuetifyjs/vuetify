@@ -1,53 +1,57 @@
 <template>
-  <div class="d-flex flex-row">
-    <v-card
-      class="mx-auto"
-      max-width="300"
-    >
-      <v-list>
-        <v-list-subheader>REPORTS</v-list-subheader>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :value="item"
-          active-color="primary"
-          variant="plain"
-        >
-          <v-list-item-avatar start>
-            <v-icon :icon="item.icon"></v-icon>
-          </v-list-item-avatar>
-          <v-list-item-title v-text="item.text"></v-list-item-title>
-        </v-list-item>
-      </v-list>
+  <v-card
+    class="mx-auto"
+    max-width="300"
+  >
+    <v-list>
+      <v-list-subheader>Plain Variant</v-list-subheader>
 
-    </v-card>
-    <v-card
-      class="mx-auto"
-      max-width="300"
-    >
-      <v-list>
-        <v-list-subheader>REPORTS</v-list-subheader>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :value="item"
-          active-color="primary"
-          variant="elevated"
-        >
-          <v-list-item-avatar start>
-            <v-icon :icon="item.icon"></v-icon>
-          </v-list-item-avatar>
-          <v-list-item-title v-text="item.text"></v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-card>
-  </div>
+      <v-list-item
+        v-for="(item, i) in items"
+        :key="i"
+        :value="item"
+        color="primary"
+        variant="plain"
+      >
+        <template v-slot:prepend>
+          <v-icon :icon="item.icon"></v-icon>
+        </template>
+
+        <v-list-item-title v-text="item.text"></v-list-item-title>
+      </v-list-item>
+    </v-list>
+
+    <v-list>
+      <v-list-subheader>Tonal Variant</v-list-subheader>
+
+      <v-list-item
+        v-for="(item, i) in items"
+        :key="i"
+        :value="item"
+        color="primary"
+        variant="tonal"
+      >
+        <template v-slot:prepend>
+          <v-icon :icon="item.icon"></v-icon>
+        </template>
+
+        <v-list-item-title v-text="item.text"></v-list-item-title>
+      </v-list-item>
+    </v-list>
+  </v-card>
 </template>
+
+<script setup>
+  const items = [
+    { text: 'Real-Time', icon: 'mdi-clock' },
+    { text: 'Audience', icon: 'mdi-account' },
+    { text: 'Conversions', icon: 'mdi-flag' },
+  ]
+</script>
 
 <script>
   export default {
     data: () => ({
-      selectedItem: 1,
       items: [
         { text: 'Real-Time', icon: 'mdi-clock' },
         { text: 'Audience', icon: 'mdi-account' },

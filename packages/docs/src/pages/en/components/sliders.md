@@ -1,30 +1,41 @@
 ---
 meta:
+  nav: Sliders
   title: Slider component
   description: The slider component can be used as an alternative visualization instead of a number input.
   keywords: sliders, vuetify slider component, vue slider component
-nav: Sliders
 related:
   - /components/forms/
   - /components/selects/
   - /components/range-sliders/
+features:
+  label: 'C: VSlider'
+  report: true
+  github: /components/VSlider/
+  spec: https://m2.material.io/components/sliders
 ---
 
 # Sliders
 
 The `v-slider` component can be used as an alternative visualization instead of a number input.
 
-<entry />
+<page-features />
 
 ## Usage
 
 Sliders reflect a range of values along a track, from which users may select a single value. They are ideal for adjusting settings such as volume, brightness, or applying image filters.
 
-<!-- <usage name="v-slider" /> -->
+<usage name="v-slider" />
+
+<entry />
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-slider](/api/v-slider/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -53,12 +64,6 @@ Using the **step** prop you can control the precision of the slider, and how muc
 You can add icons to the slider with the **append-icon** and **prepend-icon** props. With `@click:append` and `@click:prepend` you can trigger a callback function when click the icon.
 
 <example file="v-slider/prop-icons" />
-
-#### Inverse label
-
-`v-slider` with **inverse-label** property displays label at the end of it.
-
-<example file="v-slider/prop-inverse-label" />
 
 #### Min and max
 
@@ -109,5 +114,3 @@ Use slots such as `append` and `prepend` to easily customize the `v-slider` to f
 Sliders can be combined with other components in its `append` slot, such as `v-text-field`, to add additional functionality to the component.
 
 <example file="v-slider/slot-append-text-field" />
-
-<backmatter />

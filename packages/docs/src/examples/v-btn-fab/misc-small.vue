@@ -12,7 +12,7 @@
           extended
         >
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
-          <v-toolbar-title class="white--text">
+          <v-toolbar-title class="text-white">
             My files
           </v-toolbar-title>
           <v-spacer></v-spacer>
@@ -25,9 +25,8 @@
           <template v-slot:extension>
             <v-btn
               fab
-              color="cyan accent-2"
-              bottom
-              left
+              color="cyan-accent-2"
+              location="bottom left"
               absolute
               @click="dialog = !dialog"
             >
@@ -36,12 +35,12 @@
           </template>
         </v-toolbar>
         <v-list
-          two-line
+          lines="two"
           subheader
         >
-          <v-subheader inset>
+          <v-list-subheader inset>
             Folders
-          </v-subheader>
+          </v-list-subheader>
 
           <v-list-item
             v-for="item in items"
@@ -62,7 +61,7 @@
 
             <v-list-item-action>
               <v-btn icon>
-                <v-icon color="grey lighten-1">
+                <v-icon color="grey-lighten-1">
                   mdi-information
                 </v-icon>
               </v-btn>
@@ -71,9 +70,9 @@
 
           <v-divider inset></v-divider>
 
-          <v-subheader inset>
+          <v-list-subheader inset>
             Files
-          </v-subheader>
+          </v-list-subheader>
 
           <v-list-item
             v-for="item in items2"
@@ -97,7 +96,7 @@
                 icon
                 ripple
               >
-                <v-icon color="grey lighten-1">
+                <v-icon color="grey-lighten-1">
                   mdi-information
                 </v-icon>
               </v-btn>
@@ -113,14 +112,14 @@
             <v-card-text>
               <v-text-field label="File name"></v-text-field>
 
-              <small class="grey--text">* This doesn't actually save.</small>
+              <small class="text-grey">* This doesn't actually save.</small>
             </v-card-text>
 
             <v-card-actions>
               <v-spacer></v-spacer>
 
               <v-btn
-                text
+                variant="text"
                 color="primary"
                 @click="dialog = false"
               >
@@ -133,6 +132,21 @@
     </v-col>
   </v-row>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const dialog = ref(false)
+  const items = ref([
+    { icon: 'mdi-folder', iconClass: 'grey lighten-1 white--text', title: 'Photos', subtitle: 'Jan 9, 2014' },
+    { icon: 'mdi-folder', iconClass: 'grey lighten-1 white--text', title: 'Recipes', subtitle: 'Jan 17, 2014' },
+    { icon: 'mdi-folder', iconClass: 'grey lighten-1 white--text', title: 'Work', subtitle: 'Jan 28, 2014' },
+  ])
+  const items2 = ref([
+    { icon: 'mdi-clipboard-text', iconClass: 'blue white--text', title: 'Vacation itinerary', subtitle: 'Jan 20, 2014' },
+    { icon: 'mdi-gesture-tap-button', iconClass: 'amber white--text', title: 'Kitchen remodel', subtitle: 'Jan 10, 2014' },
+  ])
+</script>
 
 <script>
   export default {

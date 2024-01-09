@@ -1,143 +1,54 @@
 <template>
-  <v-form>
-    <v-container>
-      <v-row>
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Regular"
-          ></v-text-field>
-        </v-col>
+  <usage-example
+    v-model="model"
+    :code="code"
+    :options="options"
+    :name="name"
+  >
+    <div>
+      <v-text-field v-bind="props" v-model="field"></v-text-field>
+    </div>
 
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Regular"
-            placeholder="Placeholder"
-          ></v-text-field>
-        </v-col>
+    <template v-slot:configuration>
+      <v-text-field v-model="label" label="Label"></v-text-field>
 
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Solo"
-            variant="solo"
-          ></v-text-field>
-        </v-col>
+      <v-checkbox v-model="prepend" label="Prepend icon"></v-checkbox>
 
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Solo"
-            variant="solo"
-            placeholder="Placeholder"
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Filled"
-            variant="filled"
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Filled"
-            placeholder="Placeholder"
-            variant="filled"
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Outlined"
-            variant="outlined"
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Outlined"
-            placeholder="Placeholder"
-            variant="outlined"
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Plain"
-            variant="plain"
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Plain"
-            placeholder="Placeholder"
-            variant="plain"
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Underlined"
-            variant="underlined"
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Underlined"
-            placeholder="Placeholder"
-            variant="underlined"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-form>
+      <v-checkbox v-model="clearable" label="Clearable"></v-checkbox>
+    </template>
+  </usage-example>
 </template>
+
+<script setup>
+  // Utilities
+  import { computed, ref, watch } from 'vue'
+  import { propsToString } from '@/util/helpers'
+
+  const name = 'v-text-field'
+  const model = ref('default')
+  const clearable = ref(false)
+  const field = ref()
+  const label = ref('Label')
+  const prepend = ref(false)
+  const options = ['outlined', 'underlined', 'solo', 'solo-filled', 'solo-inverted']
+  const props = computed(() => {
+    return {
+      clearable: clearable.value || undefined,
+      label: label.value,
+      'prepend-icon': prepend.value ? '$vuetify' : undefined,
+      variant: model.value === 'default' ? undefined : model.value,
+    }
+  })
+
+  const slots = computed(() => {
+    return ``
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
+
+  watch(clearable, () => {
+    if (!field.value) field.value = 'Hover to Clear me'
+  })
+</script>

@@ -7,12 +7,6 @@
   />
 </template>
 
-<script>
-// Utilities
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({
-    name: 'AppVerticalDivider',
-
-  })
+<script setup>
+  //
 </script>

@@ -1,39 +1,57 @@
 <template>
   <div>
-    <v-card
-      v-for="j in justify"
-      :key="j"
-      class="d-flex mb-6"
-      color="grey lighten-2"
-      flat
+    <v-sheet
+      class="d-flex mb-6 bg-surface-variant"
       height="100"
-      tile
     >
-      <v-card
-        v-for="n in 3"
-        :key="n"
-        class="pa-2"
-        :class="[n === 2 && `align-self-${j}`]"
-        outlined
-        tile
-      >
-        {{ n === 2 ? 'Aligned flex item' : 'Flex item' }}
-      </v-card>
-    </v-card>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2 align-self-start">align-self-start</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+    </v-sheet>
+
+    <v-sheet
+      class="d-flex mb-6 bg-surface-variant"
+      height="100"
+    >
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2 align-self-end">align-self-end</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+    </v-sheet>
+
+    <v-sheet
+      class="d-flex mb-6 bg-surface-variant"
+      height="100"
+    >
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2 align-self-center">align-self-center</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+    </v-sheet>
+
+    <v-sheet
+      class="d-flex mb-6 bg-surface-variant"
+      height="100"
+    >
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2 align-self-baseline">align-self-baseline</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+    </v-sheet>
+
+    <v-sheet
+      class="d-flex mb-6 bg-surface-variant"
+      height="100"
+    >
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2 align-self-auto">align-self-auto</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+    </v-sheet>
+
+    <v-sheet
+      class="d-flex mb-6 bg-surface-variant"
+      height="100"
+    >
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2 align-self-stretch">align-self-stretch</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+    </v-sheet>
   </div>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-      justify: [
-        'start',
-        'end',
-        'center',
-        'baseline',
-        'auto',
-        'stretch',
-      ],
-    }),
-  }
-</script>

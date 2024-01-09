@@ -1,5 +1,0 @@
-{
-  "props": {
-    "density": "Adjusts the spacing within the component. Available options are: **default**, **comfortable**, and **compact**."
-  }
-}

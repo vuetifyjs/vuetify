@@ -1,59 +1,125 @@
 ---
-nav: Forms
 meta:
+  nav: Forms
   title: Form component
   description: The form component provides a wrapper that makes it easy to process and control validation states of input components.
   keywords: forms, vuetify form component, vue form component, form validation
 related:
   - /components/selects/
-  - /components/selection-controls/
+  - /components/switches/
   - /components/text-fields/
+features:
+  label: 'C: VForm'
+  report: true
+  github: /components/VForm/
 ---
 
 # Forms
 
-When it comes to form validation, Vuetify has a multitude of integrations and baked in functionality. Want to use a 3rd party validation plugin? Out of the box you can use [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/vuelidate/vuelidate).
+Vuetify offers a simple built-in form validation system based on functions as rules, making it easy for developers to get set up quickly.
 
-<promoted slug="vuemastery-forms" />
+<page-features />
 
 ## Usage
 
-The internal `v-form` component makes it easy to add validation to form inputs. All input components have a **rules** prop which accepts a mixed array of types `function`, `boolean` and `string`. These allow you to specify conditions in which the input is _valid_ or _invalid_. Whenever the value of an input is changed, each function in the array will receive the new value and each array element will be evaluated. If a function or array element returns `false` or a `string`, validation has failed and the `string` value will be presented as an error message.
+The `v-form` component makes it easy to add validation to form inputs. All input components have a **rules** prop that can be used to specify conditions in which the input is either *valid* or *invalid*.
+
+::: tip
+
+If you prefer using a 3rd party validation plugin, we provide [examples](#vee-validate) further down the page for integrating both [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/vuelidate/vuelidate) validation libraries.
+
+:::
+
+Whenever the value of an input is changed, each rule receives a new value and is re-evaluated. If a rule returns `false` or a `string`, validation has failed and the `string` value is presented as an error message.
 
 <example file="v-form/usage" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-form](/api/v-form/) | Primary Component |
+
+<api-inline hide-links />
+
+## Rules
+
+Rules allow you to apply custom validation on all form components. These are validated sequentially, and components display a *maximum* of 1 error at a time; so make sure you order your rules accordingly.
+
+The most basic of rules is a simple function that checks if an input has a value or not; i.e. it makes it a required input.
+
+<example file="v-form/rules-required" />
+
+However, you can make rules as complicated as needed, even allowing for asynchronous input validation. In the example below, the input is checked against a fake API service that takes some time to respond. Wait for the `submit` event promise to resolve and see the validation in action.
+
+<example file="v-form/rules-async" />
+
+The submit event is a combination of a native `SubmitEvent` with a promise, so it can be `await`ed or used with `.then()` to get the result of the validation.
+<br>
+This also demonstrates the **validate-on** prop, which tells the `v-form` component when validation should happen. Here we set it to `'submit lazy'` so that we only call the API service when the button is clicked.
+
+## Validation state
+
+By default, all inputs run their validation rules when mounted but do not display errors to the user.
+<br>
+When rules run is controlled with the **validate-on** prop which accepts a string containing `input`, `blur`, `submit`, or `lazy`.
+<br>
+`input`, `blur`, and `submit` set when a validation error can first be displayed to the user, while `lazy` disables validation on mount (useful for async rules).
+<br>
+`lazy` can be combined with other options, and implies `input` on its own.
+
+| `validate-on=` | `"input"` | `"blur"` | `"submit"` | `"lazy"` |
+|----------------|:---------:|:--------:|:----------:|:--------:|
+| On mount       |     ✅     |    ✅     |     ✅      |    ❌     |
+| On input       |     ✅     |    ❌     |     ❌      |    *     |
+| On blur        |     ✅     |    ✅     |     ❌      |    *     |
+| On submit      |     ✅     |    ✅     |     ✅      |    *     |
+<p class="text-caption">* Uses the behavior of whatever it's combined with.</p>
+
+The form's current validation status is accessed using `v-model` or the submit event. It can be in one of three states:
+
+- `true`: All inputs with validation rules have been successfully validated.
+- `false`: At least one input has failed validation either by interaction or manual validation.
+- `null`: At least one input has failed validation without interaction or has not been validated yet due to `lazy` validation.
+
+This allows you to either check for any validation failure with `!valid`, or only errors that are displayed to the user with `valid === false`{.text-no-wrap}.
 
 ## Examples
 
 ### Props
 
-#### Rules
+#### Disabled
 
-Rules allow you to apply custom validation on all form components. These are validated sequentially and will display a **maximum** of 1 error at a time, so make sure you order your rules accordingly.
+You can easily disable all input components in a `v-form` by setting the **disabled** prop.
 
-<example file="v-form/prop-rules" />
+<example file="v-form/prop-disabled" />
+
+#### Fast fail
+
+When the **fast-fail** prop is set, validation will short-circuit after the first invalid input is found. This can be useful if some of your rules are computationally heavy and can take a long time. In this example, notice how when the submit button is clicked, the second input does not show validation errors even though it does not satisfy the rules.
+
+<example file="v-form/prop-fast-fail" />
 
 ### Misc
 
-#### Validation with submit & clear
+#### Exposed properties
 
-The `v-form` component has **three** functions that can be accessed by setting a _ref_ on the component. A ref allows us to access internal methods on a component, for example, `<v-form ref="form">`. **this.$refs.form.validate()** will validate all inputs and return if they are all valid or not. **this.$refs.form.reset()** will clear all inputs and reset their validation errors. **this.$refs.form.resetValidation()** will only reset input validation and not alter their state.
+The `v-form` component has a number of exposed properties that can be accessed by setting a **ref** on the component. A ref allows us to access internal methods on a component. You can find all of them on the API page, but some of the more commonly used ones are `validate()`, `reset()`, and `resetValidation()`.
 
-<example file="v-form/misc-validation-with-submit-and-clear" />
+The difference between `reset()` and `resetValidation()` is that the former resets both input values and validation state, while the latter only resets validation state.
+
+<example file="v-form/misc-exposed" />
 
 #### Vee-validate
 
-**vee-validate** is a template Based Validation Framework for Vue.js. [Documentation](https://vee-validate.logaretm.com/v3)
+**vee-validate** documentation can be found [here](https://vee-validate.logaretm.com/v4/).
 
 <example file="v-form/misc-vee-validate" />
 
 #### Vuelidate
 
-**vuelidate** is a simple, lightweight model-based validation for Vue.js. [Documentation](https://vuelidate.netlify.com/)
+**vuelidate** documentation can be found [here](https://vuelidate-next.netlify.app/).
 
 <example file="v-form/misc-vuelidate" />
-
-<backmatter />

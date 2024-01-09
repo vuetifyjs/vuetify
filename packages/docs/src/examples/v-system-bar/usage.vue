@@ -1,41 +1,48 @@
 <template>
   <usage-example
     v-model="model"
+    :name="name"
     :options="options"
-    name="v-system-bar"
+    :code="code"
   >
-    <v-defaults-provider
-      :defaults="{
-        VSystemBar: {
-          window: model === 'window',
-        }
-      }"
+    <v-layout
+      class="elevation-2 rounded mx-auto bg-white"
+      style="max-width: 448px; height: 150px"
     >
-      <v-layout
-        class="elevation-2 rounded mx-auto bg-white"
-        style="max-width: 448px; height: 150px"
-      >
-        <v-system-bar>
-          <v-icon icon="mdi-wifi-strength-4"></v-icon>
-          <v-icon icon="mdi-signal" class="ml-2"></v-icon>
-          <v-icon icon="mdi-battery" class="ml-2"></v-icon>
+      <v-system-bar v-bind="props">
+        <v-icon icon="mdi-wifi-strength-4"></v-icon>
+        <v-icon icon="mdi-signal" class="ms-2"></v-icon>
+        <v-icon icon="mdi-battery" class="ms-2"></v-icon>
 
-          <span class="ml-2">3:13PM</span>
-        </v-system-bar>
+        <span class="ms-2">3:13PM</span>
+      </v-system-bar>
 
-        <v-main></v-main>
-      </v-layout>
-    </v-defaults-provider>
+      <v-main></v-main>
+    </v-layout>
   </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'VSystemBarUsageExample',
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-    data: () => ({
-      model: 'default',
-      options: ['window'],
-    }),
-  }
+  const name = 'v-system-bar'
+  const model = ref('default')
+  const options = ['window']
+
+  const props = computed(() => {
+    return {
+      window: model.value === 'window' || undefined,
+    }
+  })
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>
+  <v-icon icon="mdi-wifi-strength-4"></v-icon>
+  <v-icon icon="mdi-signal" class="ms-2"></v-icon>
+  <v-icon icon="mdi-battery" class="ms-2"></v-icon>
+
+  <span class="ms-2">3:13PM</span>
+</${name}>`
+  })
 </script>

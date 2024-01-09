@@ -1,74 +1,58 @@
 <template>
-  <v-container>
-    <v-row justify="center">
-      <v-col
-        v-for="({ icon, text, ...attrs }, i) in buttons"
-        :key="`home-btn-${i}`"
-        cols="auto"
+  <v-row :justify="mdAndDown ? 'center' : undefined">
+    <v-col
+      v-for="({ icon, text, ...attrs }, i) in buttons"
+      :key="`home-btn-${i}`"
+      cols="auto"
+    >
+      <v-btn
+        :min-width="btnWidth"
+        v-bind="attrs"
+        class="text-none"
+        size="x-large"
       >
-        <v-btn
-          :min-width="btnWidth"
-          v-bind="attrs"
-          size="x-large"
-        >
-          <v-icon :icon="icon" start />
-          {{ t(text) }}
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
+        <v-icon :icon="icon" start />
+        {{ t(text) }}
+      </v-btn>
+    </v-col>
+  </v-row>
 </template>
 
-<script lang="ts">
-  // Utilities
-  import { defineComponent } from 'vue'
+<script setup>
+  // Composables
+  import { rpath } from '@/util/routes'
+  import { useDisplay } from 'vuetify'
   import { useI18n } from 'vue-i18n'
 
-  export default defineComponent({
-    name: 'ActionBtns',
+  const { mdAndDown } = useDisplay()
 
-    setup () {
-      const { locale, t } = useI18n()
+  const { t } = useI18n()
 
-      // data
-      const buttons = [
-        {
-          color: 'primary',
-          flat: true,
-          icon: 'mdi-speedometer',
-          text: 'home.get-started',
-          to: {
-            name: `${locale.value}-getting-started-installation`,
-          },
-        },
-        {
-          color: 'primary',
-          icon: 'mdi-vuetify',
-          variant: 'outlined',
-          text: 'home.why-vuetify',
-          to: {
-            name: `${locale.value}-introduction-why-vuetify`,
-          },
-        },
-        {
-          color: '#212121',
-          theme: 'dark',
-          flat: true,
-          href: 'https://github.com/vuetifyjs/vuetify',
-          icon: 'mdi-github',
-          rel: 'noopener',
-          target: '_blank',
-          text: 'github',
-        },
-      ] as const
-      const btnWidth = 228
-
-      return {
-        buttons,
-        btnWidth,
-        t,
-      }
+  const buttons = [
+    {
+      color: 'primary',
+      flat: true,
+      icon: 'mdi-speedometer',
+      text: 'home.get-started',
+      to: rpath('/getting-started/installation/'),
     },
-
-  })
+    {
+      color: 'primary',
+      icon: '$vuetify',
+      variant: 'outlined',
+      text: 'home.why-vuetify',
+      to: rpath('/introduction/why-vuetify/'),
+    },
+    {
+      color: '#212121',
+      theme: 'dark',
+      flat: true,
+      href: 'https://github.com/vuetifyjs/vuetify',
+      icon: 'mdi-github',
+      rel: 'noopener',
+      target: '_blank',
+      text: 'github',
+    },
+  ]
+  const btnWidth = 215
 </script>

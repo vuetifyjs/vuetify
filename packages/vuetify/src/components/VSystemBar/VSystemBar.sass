@@ -8,7 +8,7 @@
   height: $system-bar-height
   justify-content: $system-bar-justify-content
   max-width: 100%
-  padding: $system-bar-padding
+  padding-inline: $system-bar-padding-x
   position: relative
   text-align: $system-bar-text-align
   width: 100%
@@ -26,3 +26,6 @@
 
   &--window
     height: $system-bar-window-height
+
+  &:not(.v-system-bar--absolute)
+    padding-inline-end: calc(var(--v-scrollbar-offset) + #{$system-bar-padding-x})

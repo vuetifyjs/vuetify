@@ -1,0 +1,12 @@
+{
+  "exposed": {
+    "computedThemes": "Object containing all parsed theme definitions.",
+    "current": "Current theme object.",
+    "global": "Reference to the global theme instance.",
+    "isDisabled": "Indicates if theming is disabled.",
+    "name": "Name of current theme.",
+    "styles": "**FOR INTERNAL USE ONLY**",
+    "themeClasses": "**FOR INTERNAL USE ONLY**",
+    "themes": "Raw theme definitions."
+  }
+}

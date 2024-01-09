@@ -2,11 +2,17 @@
   <div class="text-center">
     <v-rating
       v-model="rating"
-      bg-color="orange-lighten-1"
-      color="blue"
+      color="orange-lighten-1"
+      active-color="blue"
     ></v-rating>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const rating = ref(3)
+</script>
 
 <script>
   export default {

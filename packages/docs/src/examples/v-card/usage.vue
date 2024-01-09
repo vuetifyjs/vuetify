@@ -1,52 +1,72 @@
 <template>
   <usage-example
     v-model="model"
+    :code="code"
     :options="options"
-    name="v-card"
+    :name="name"
   >
-    <v-defaults-provider
-      :defaults="{
-        VCard: {
-          variant: model === 'default' ? undefined : model,
-        }
-      }"
-    >
-      <v-card
-        class="mx-auto"
-        max-width="344"
-      >
-        <v-card-header>
-          <v-card-header-text>
-            <v-card-title>Card title</v-card-title>
+    <div>
 
-            <v-card-subtitle>Subtitle text</v-card-subtitle>
-          </v-card-header-text>
-        </v-card-header>
+      <v-card v-bind="props">
+        <template v-slot:text>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
+        </template>
 
-        <v-card-text>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam earum, est illo quae fugit voluptatum fuga magni hic maiores ipsa, illum, tenetur accusamus cupiditate? Dolorem ad nisi eveniet officia voluptatibus.
-        </v-card-text>
-
-        <v-card-actions>
-          <v-btn
-            v-for="n in 2"
-            :key="n"
-          >
-            Action {{ n }}
-          </v-btn>
+        <v-card-actions v-if="actions">
+          <v-btn>Click me</v-btn>
         </v-card-actions>
       </v-card>
-    </v-defaults-provider>
+    </div>
+
+    <template v-slot:configuration>
+      <v-checkbox v-model="title" label="Show title"></v-checkbox>
+
+      <v-checkbox v-model="subtitle" label="Show subtitle"></v-checkbox>
+
+      <v-checkbox v-model="actions" label="Show actions"></v-checkbox>
+
+      <v-checkbox v-model="loading" label="Loading"></v-checkbox>
+    </template>
   </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'VCardUsageExample',
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-    data: () => ({
-      model: 'default',
-      options: ['tonal', 'plain'],
-    }),
-  }
+  const name = 'v-card'
+  const model = ref('default')
+  const actions = ref(false)
+  const loading = ref(false)
+  const subtitle = ref(false)
+  const title = ref(false)
+  const options = ['outlined', 'tonal']
+  const props = computed(() => {
+    return {
+      loading: loading.value || undefined,
+      title: title.value ? 'Card title' : undefined,
+      subtitle: subtitle.value ? 'Subtitle' : undefined,
+      text: '...',
+      variant: ['outlined', 'tonal'].includes(model.value) ? model.value : undefined,
+    }
+  })
+
+  const slots = computed(() => {
+    let str = ''
+
+    if (actions.value) {
+      str += `
+  <v-card-actions>
+    <v-btn>Click me</v-btn>
+  </v-card-actions>
+`
+    }
+
+    return str
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>

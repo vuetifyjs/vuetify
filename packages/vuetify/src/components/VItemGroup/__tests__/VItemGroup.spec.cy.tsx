@@ -10,12 +10,12 @@ describe('VItemGroup', () => {
       <VItemGroup selected-class="font-weight-bold" class="d-flex text-center justify-center">
         <VItem value="foo" selected-class="bg-blue">
           {{
-            default: props => <VCard width="100" class={props.selectedClass} onClick={props.toggle}>Foo</VCard>,
+            default: props => <VCard width="100" class={ props.selectedClass } onClick={ props.toggle }>Foo</VCard>,
           }}
         </VItem>
         <VItem value="bar" selected-class="bg-orange">
           {{
-            default: props => <VCard width="100" class={props.selectedClass} onClick={props.toggle}>Bar</VCard>,
+            default: props => <VCard width="100" class={ props.selectedClass } onClick={ props.toggle }>Bar</VCard>,
           }}
         </VItem>
       </VItemGroup>

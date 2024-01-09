@@ -2,22 +2,38 @@
 import './VLayout.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { createLayout, makeLayoutProps } from '@/composables/layout'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 import { Suspense } from 'vue'
 
-export const VLayout = defineComponent({
+export const makeVLayoutProps = propsFactory({
+  ...makeComponentProps(),
+  ...makeLayoutProps(),
+}, 'VLayout')
+
+export const VLayout = genericComponent()({
   name: 'VLayout',
 
-  props: makeLayoutProps(),
+  props: makeVLayoutProps(),
 
   setup (props, { slots }) {
     const { layoutClasses, layoutStyles, getLayoutItem, items, layoutRef } = createLayout(props)
 
     useRender(() => (
-      <div ref={ layoutRef } class={ layoutClasses.value } style={ layoutStyles.value }>
+      <div
+        ref={ layoutRef }
+        class={[
+          layoutClasses.value,
+          props.class,
+        ]}
+        style={[
+          layoutStyles.value,
+          props.style,
+        ]}
+      >
         <Suspense>
           <>
             { slots.default?.() }

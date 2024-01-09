@@ -2,33 +2,36 @@
 import './VDivider.sass'
 
 // Composables
+import { useTextColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
-// Types
 type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'maxHeight' | 'maxWidth'
 type DividerStyles = Partial<Record<DividerKey, string>>
 
-export const VDivider = defineComponent({
+export const makeVDividerProps = propsFactory({
+  color: String,
+  inset: Boolean,
+  length: [Number, String],
+  thickness: [Number, String],
+  vertical: Boolean,
+
+  ...makeComponentProps(),
+  ...makeThemeProps(),
+}, 'VDivider')
+
+export const VDivider = genericComponent()({
   name: 'VDivider',
 
-  props: {
-    color: String,
-    inset: Boolean,
-    length: [Number, String],
-    thickness: [Number, String],
-    vertical: Boolean,
-
-    ...makeThemeProps(),
-  },
+  props: makeVDividerProps(),
 
   setup (props, { attrs }) {
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
     const dividerStyles = computed(() => {
       const styles: DividerStyles = {}
 
@@ -52,21 +55,25 @@ export const VDivider = defineComponent({
             'v-divider--vertical': props.vertical,
           },
           themeClasses.value,
-          backgroundColorClasses.value,
+          textColorClasses.value,
+          props.class,
         ]}
         style={[
           dividerStyles.value,
-          backgroundColorStyles.value,
+          textColorStyles.value,
+          props.style,
         ]}
         aria-orientation={
           !attrs.role || attrs.role === 'separator'
             ? props.vertical ? 'vertical' : 'horizontal'
             : undefined
         }
-        role={`${attrs.role || 'separator'}`}
+        role={ `${attrs.role || 'separator'}` }
       />
     ))
 
     return {}
   },
 })
+
+export type VDivider = InstanceType<typeof VDivider>

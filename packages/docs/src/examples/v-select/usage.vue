@@ -1,72 +1,51 @@
 <template>
-  <v-container fluid>
-    <v-row align="center">
-      <v-col
-        class="d-flex"
-        cols="12"
-        sm="6"
-      >
-        <v-select
-          :items="items"
-          label="Standard variant"
-        ></v-select>
-      </v-col>
+  <usage-example
+    v-model="model"
+    :code="code"
+    :options="options"
+    :name="name"
+  >
+    <div>
+      <v-select v-bind="props"></v-select>
+    </div>
 
-      <v-col
-        class="d-flex"
-        cols="12"
-        sm="6"
-      >
-        <v-select
-          :items="items"
-          variant="plain"
-          label="Plain variant"
-        ></v-select>
-      </v-col>
+    <template v-slot:configuration>
+      <v-checkbox v-model="clear" label="Clearable"></v-checkbox>
 
-      <v-col
-        class="d-flex"
-        cols="12"
-        sm="6"
-      >
-        <v-select
-          :items="items"
-          label="Outlined variant"
-          variant="outlined"
-        ></v-select>
-      </v-col>
+      <v-checkbox v-model="chips" label="Chips"></v-checkbox>
 
-      <v-col
-        class="d-flex"
-        cols="12"
-        sm="6"
-      >
-        <v-select
-          :items="items"
-          label="Underlined variant"
-          variant="underlined"
-        ></v-select>
-      </v-col>
-
-      <v-col
-        class="d-flex"
-        cols="12"
-        sm="6"
-      >
-        <v-select
-          :items="items"
-          label="Solo variant"
-          variant="solo"
-        ></v-select>
-      </v-col>
-    </v-row>
-  </v-container>
+      <v-checkbox v-model="multiple" label="Multiple"></v-checkbox>
+    </template>
+  </usage-example>
 </template>
 
-<script>
-  export default {
-    data: () => ({
-      items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
-    }),
-  }
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
+
+  const name = 'v-select'
+  const model = ref('default')
+  const clear = ref(false)
+  const chips = ref(false)
+  const multiple = ref(false)
+  const options = ['outlined', 'underlined', 'solo', 'solo-filled', 'solo-inverted']
+  const props = computed(() => {
+    return {
+      clearable: clear.value || undefined,
+      chips: chips.value || undefined,
+      label: 'Select',
+      items: ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'],
+      multiple: multiple.value || undefined,
+      variant: model.value === 'default' ? undefined : model.value,
+    }
+  })
+
+  const slots = computed(() => {
+    return ``
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>

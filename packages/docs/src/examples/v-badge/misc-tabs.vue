@@ -1,7 +1,6 @@
 <template>
   <v-tabs
-    dark
-    background-color="primary"
+    bg-color="primary"
     grow
   >
     <v-tab>
@@ -25,7 +24,7 @@
     <v-tab>
       <v-badge
         color="deep-purple-accent-4"
-        icon="mdi-vuetify"
+        icon="$vuetify"
       >
         Item Three
       </v-badge>

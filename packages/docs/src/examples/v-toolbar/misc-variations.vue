@@ -9,7 +9,7 @@
       class="my-4"
     >
       <v-card
-        color="grey lighten-4"
+        color="grey-lighten-4"
         flat
         height="200px"
       >
@@ -34,6 +34,15 @@
     </v-col>
   </v-row>
 </template>
+
+<script setup>
+  const bars = [
+    { class: '' },
+    { class: '', dark: true },
+    { class: 'primary', dark: true },
+    { class: 'elevation-0' },
+  ]
+</script>
 
 <script>
   export default {

@@ -41,11 +41,11 @@
       border-top-left-radius: 0 !important
       border-top-right-radius: 0 !important
 
-    > :first-child:not(.v-expansion-panel--active):not(.v-expansion-panel--before-active)
+    > :first-child:not(:last-child):not(.v-expansion-panel--active):not(.v-expansion-panel--before-active)
       border-bottom-left-radius: 0 !important
       border-bottom-right-radius: 0 !important
 
-    > :last-child:not(.v-expansion-panel--active):not(.v-expansion-panel--after-active)
+    > :last-child:not(:first-child):not(.v-expansion-panel--active):not(.v-expansion-panel--after-active)
       border-top-left-radius: 0 !important
       border-top-right-radius: 0 !important
 
@@ -102,7 +102,9 @@
     > .v-expansion-panel-title
       border-bottom-left-radius: 0
       border-bottom-right-radius: 0
-      min-height: $expansion-panel-active-title-min-height
+
+      &:not(.v-expansion-panel-title--static)
+        min-height: $expansion-panel-active-title-min-height
 
 .v-expansion-panel__shadow
   @include tools.absolute()
@@ -112,6 +114,7 @@
 
 .v-expansion-panel-title
   align-items: center
+  text-align: start
   border-radius: inherit
   display: flex
   font-size: $expansion-panel-title-font-size

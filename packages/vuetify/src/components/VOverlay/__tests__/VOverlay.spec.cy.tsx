@@ -1,11 +1,14 @@
 /// <reference types="../../../../types/cypress" />
 
-import { ref } from 'vue'
-import { VLayout, VLayoutItem } from '@/components/VLayout'
-import { VOverlay } from '../VOverlay'
+// Components
 import { Application } from '../../../../cypress/templates'
-import { VNavigationDrawer } from '@/components/VNavigationDrawer'
+import { VOverlay } from '../VOverlay'
+import { VLayout } from '@/components/VLayout'
 import { VMain } from '@/components/VMain'
+import { VNavigationDrawer } from '@/components/VNavigationDrawer'
+
+// Utilities
+import { ref } from 'vue'
 
 describe('VOverlay', () => {
   it('without activator', () => {

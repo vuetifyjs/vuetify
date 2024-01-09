@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Overflow button component
   description: The overflow button component creates an interface for a select that contains additional features and functionality.
@@ -88,5 +89,3 @@ You can set underlying `v-menu` props using `menu-props` property
 `segmented` `v-overflow-btn` has and additional divider between the content and the icon
 
 <example file="v-overflow-btn/prop-segmented" />
-
-<backmatter />

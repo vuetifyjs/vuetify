@@ -1,4 +1,4 @@
-@import './_variables.scss'
+@use './variables' as *
 
 .v-date-picker-title
   display: flex
@@ -8,11 +8,7 @@
   line-height: 1
 
   .v-picker__title__btn
-    +ltr()
-      text-align: left
-
-    +rtl()
-      text-align: right
+    text-align: start
 
   &__year
       align-items: center

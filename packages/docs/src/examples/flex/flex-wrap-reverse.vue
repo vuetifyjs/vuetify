@@ -1,20 +1,11 @@
 <template>
-  <div>
-    <v-card
-      class="d-flex flex-wrap-reverse"
-      color="grey lighten-2"
-      flat
-      tile
+  <v-sheet class="d-flex flex-wrap-reverse bg-surface-variant">
+    <v-sheet
+      v-for="n in 20"
+      :key="n"
+      class="ma-2 pa-2"
     >
-      <v-card
-        v-for="n in 20"
-        :key="n"
-        class="pa-2"
-        outlined
-        tile
-      >
-        Flex item {{ n }}
-      </v-card>
-    </v-card>
-  </div>
+      Flex item {{ n }}
+    </v-sheet>
+  </v-sheet>
 </template>

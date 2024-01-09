@@ -1,7 +1,8 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VLayout } from '@/components/VLayout'
+// Components
 import { VBottomNavigation } from '..'
+import { VLayout } from '@/components/VLayout'
 
 describe('VBottomNavigation', () => {
   it('should allow custom height', () => {
@@ -22,14 +23,10 @@ describe('VBottomNavigation', () => {
     ))
 
     cy.get('.v-bottom-navigation').should('have.css', 'height', '56px')
-
-    cy.vue().then(wrapper => wrapper.setProps({ density: 'comfortable' }))
-
-    cy.get('.v-bottom-navigation').should('have.css', 'height', '48px')
-
-    cy.vue().then(wrapper => wrapper.setProps({ density: 'compact' }))
-
-    cy.get('.v-bottom-navigation').should('have.css', 'height', '40px')
+      .setProps({ density: 'comfortable' })
+      .get('.v-bottom-navigation').should('have.css', 'height', '48px')
+      .setProps({ density: 'compact' })
+      .get('.v-bottom-navigation').should('have.css', 'height', '40px')
   })
 
   it('should not be visible if modelValue is false', () => {

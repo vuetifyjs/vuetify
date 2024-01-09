@@ -1,8 +1,8 @@
 <template>
   <v-row
-    v-if="sponsors.length"
+    v-if="sponsors?.length"
     align="center"
-    class="v-sponsors"
+    class="v-sponsors mb-0"
     justify="start"
   >
     <v-col
@@ -18,41 +18,45 @@
       />
     </v-col>
   </v-row>
+
+  <div v-else class="mb-4">
+    <app-btn
+      text="become-a-sponsor"
+      href="https://github.com/sponsors/johnleider"
+      border
+      target="_blank"
+      rel="noopener"
+      append-icon="mdi-open-in-new"
+    />
+  </div>
 </template>
 
-<script lang="ts">
-  // Utilities
-  import { computed, defineComponent, onBeforeMount } from 'vue'
-  import { useSponsorsStore } from '../../store/sponsors'
-
+<script setup lang="ts">
+  // Components
   import SponsorCard from '@/components/sponsor/Card.vue'
 
-  export default defineComponent({
-    name: 'Sponsors',
+  // Composables
+  import { useSponsorsStore } from '@/store/sponsors'
 
-    components: {
-      SponsorCard,
-    },
+  // Utilities
+  import { computed } from 'vue'
 
-    props: {
-      tier: {
-        type: [Number, String],
-        required: true,
-      },
-    },
-
-    setup (props) {
-      const sponsorStore = useSponsorsStore()
-
-      onBeforeMount(async () => sponsorStore.load())
-
-      const sponsors = computed(() => {
-        return sponsorStore.byTier[props.tier]
-      })
-
-      return {
-        sponsors,
-      }
+  const props = defineProps({
+    tier: {
+      type: [Number, String],
+      required: true,
     },
   })
+
+  const sponsorStore = useSponsorsStore()
+
+  const sponsors = computed(() => {
+    return sponsorStore.byTier[props.tier]
+  })
+</script>
+
+<script lang="ts">
+  export default {
+    inheritAttrs: false,
+  }
 </script>

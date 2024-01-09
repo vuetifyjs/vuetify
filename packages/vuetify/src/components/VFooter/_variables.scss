@@ -1,18 +1,31 @@
 @use 'sass:map';
 @use '../../styles/settings';
+@use "../../styles/settings/variables";
 
 // VFooter
 $footer-background: rgb(var(--v-theme-surface)) !default;
+$footer-border-color: settings.$border-color-root !default;
+$footer-border-style: settings.$border-style-root !default;
+$footer-border-thin-width: thin !default;
+$footer-border-width: 0 !default;
 $footer-border-radius: map.get(settings.$rounded, 0) !default;
 $footer-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $footer-flex: 1 1 auto !default;
-$footer-font-size: 14px;
+$footer-font-size: 14px !default;
 $footer-elevation: 0 !default;
 $footer-padding: 8px 16px !default;
 $footer-positions: absolute fixed !default;
 $footer-rounded-border-radius: settings.$border-radius-root !default;
+$footer-transition: .2s variables.$standard-easing !default;
 
 // Lists
+$footer-border: (
+  $footer-border-color,
+  $footer-border-style,
+  $footer-border-width,
+  $footer-border-thin-width
+) !default;
+
 $footer-theme: (
   $footer-background,
   $footer-color

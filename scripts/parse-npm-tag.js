@@ -8,9 +8,14 @@ if (!semver.valid(version)) {
 }
 
 const prerelease = semver.prerelease(version)
+const major = semver.major(version)
 
 if (prerelease == null) {
-  console.log('latest')
+  if (major > 3) {
+    console.log('next')
+  } else {
+    console.log('latest')
+  }
 } else {
   console.log('next')
 }

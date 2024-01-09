@@ -5,7 +5,7 @@
 // VSystemBar
 $system-bar-background: rgba(var(--v-theme-on-surface-variant)) !default;
 $system-bar-border-radius: map.get(settings.$rounded, 0) !default;
-$system-bar-color: rgba(var(--v-theme-on-variant), var(--v-medium-emphasis-opacity)) !default;
+$system-bar-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $system-bar-elevation: 0 !default;
 $system-bar-flex: 1 1 auto !default;
 $system-bar-font-size: tools.map-deep-get(settings.$typography, 'caption', 'size') !default;
@@ -16,7 +16,7 @@ $system-bar-justify-content: flex-end !default;
 $system-bar-letter-spacing: tools.map-deep-get(settings.$typography, 'caption', 'letter-spacing') !default;
 $system-bar-lights-out-background: rgba(var(--v-theme-background), 0.7) !default;
 $system-bar-line-height: tools.map-deep-get(settings.$typography, 'caption', 'line-height') !default;
-$system-bar-padding: 0 8px !default;
+$system-bar-padding-x: 8px !default;
 $system-bar-positions: absolute fixed !default;
 $system-bar-text-align: end !default;
 $system-bar-text-transform: tools.map-deep-get(settings.$typography, 'caption', 'text-transform') !default;
@@ -26,7 +26,7 @@ $system-bar-window-height: 32px !default;
 $system-bar-theme: (
   $system-bar-background,
   $system-bar-color
-);
+) !default;
 
 $system-bar-typography: (
   $system-bar-font-size,
@@ -34,4 +34,7 @@ $system-bar-typography: (
   $system-bar-letter-spacing,
   $system-bar-line-height,
   $system-bar-text-transform
-);
+) !default;
+
+// Deprecated
+$system-bar-padding: 0 8px !default;

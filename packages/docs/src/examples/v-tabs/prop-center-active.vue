@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-tabs
-      background-color="deep-purple-darken-4"
+      bg-color="deep-purple-darken-4"
       center-active
     >
       <v-tab>One</v-tab>

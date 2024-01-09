@@ -2,7 +2,7 @@
   <div>
     <v-progress-linear
       v-model="valueDeterminate"
-      color="deep-purple accent-4"
+      color="deep-purple-accent-4"
     ></v-progress-linear>
     <br>
     <v-progress-linear
@@ -12,7 +12,7 @@
     <br>
     <v-progress-linear
       v-model="valueDeterminate"
-      color="indigo darken-2"
+      color="indigo-darken-2"
     ></v-progress-linear>
     <br>
     <v-progress-linear
@@ -21,6 +21,12 @@
     ></v-progress-linear>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const valueDeterminate = ref(50)
+</script>
 
 <script>
   export default {

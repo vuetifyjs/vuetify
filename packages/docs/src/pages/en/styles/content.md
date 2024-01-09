@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Content styles
+  title: Content
   description: Vuetify provides custom styling for various HTML elements.
   keywords: content, html, markup
 related:
@@ -12,6 +12,8 @@ related:
 # Content
 
 Vuetify has custom styling for multiple standard elements.
+
+<page-features />
 
 <entry />
 
@@ -36,5 +38,3 @@ Example of an inline `<code>` element.
 ## User input
 
 To install Vuetify, type <kbd>npm install vuetify</kbd> into your console. Once complete, type <kbd>cd `<project name>`</kbd> and run <kbd>npm install</kbd>
-
-<backmatter />

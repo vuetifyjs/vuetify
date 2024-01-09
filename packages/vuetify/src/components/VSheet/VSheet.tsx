@@ -3,6 +3,8 @@ import './VSheet.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { useBackgroundColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLocationProps, useLocation } from '@/composables/location'
@@ -10,27 +12,29 @@ import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { defineComponent } from '@/util'
 import { toRef } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
-export const VSheet = defineComponent({
+export const makeVSheetProps = propsFactory({
+  color: String,
+
+  ...makeBorderProps(),
+  ...makeComponentProps(),
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeLocationProps(),
+  ...makePositionProps(),
+  ...makeRoundedProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'VSheet')
+
+export const VSheet = genericComponent()({
   name: 'VSheet',
 
-  props: {
-    color: String,
-
-    ...makeBorderProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeLocationProps(),
-    ...makePositionProps(),
-    ...makeRoundedProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVSheetProps(),
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
@@ -42,7 +46,7 @@ export const VSheet = defineComponent({
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
 
-    return () => (
+    useRender(() => (
       <props.tag
         class={[
           'v-sheet',
@@ -52,14 +56,20 @@ export const VSheet = defineComponent({
           elevationClasses.value,
           positionClasses.value,
           roundedClasses.value,
+          props.class,
         ]}
         style={[
           backgroundColorStyles.value,
           dimensionStyles.value,
           locationStyles.value,
+          props.style,
         ]}
         v-slots={ slots }
       />
-    )
+    ))
+
+    return {}
   },
 })
+
+export type VSheet = InstanceType<typeof VSheet>

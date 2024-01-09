@@ -1,0 +1,13 @@
+@use '../tools';
+@use '../settings';
+
+@if (settings.$utilities != false and length(settings.$utilities) > 0) {
+  $z: 24;
+  @while $z >= 0 {
+    .elevation-#{$z} {
+      @include tools.elevation($z, $important: true);
+    }
+
+    $z: $z - 1;
+  }
+}

@@ -1,22 +1,23 @@
 // Utilities
-import { inject, nextTick, reactive, ref, toRefs, watchEffect } from 'vue'
-import { mergeDeep } from '@/util'
-
-// Globals
+import { computed, inject, reactive, shallowRef, toRefs, watchEffect } from 'vue'
+import { getCurrentInstanceName, mergeDeep, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
-import type { InjectionKey, ToRefs } from 'vue'
+import type { InjectionKey, PropType, Ref } from 'vue'
 
-export type DisplayBreakpoint = keyof DisplayThresholds
+export const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
 
-export interface DisplayThresholds {
-  xs: number
-  sm: number
-  md: number
-  lg: number
-  xl: number
-  xxl: number
+export type Breakpoint = typeof breakpoints[number]
+
+export type DisplayBreakpoint = 'xs' | Breakpoint
+
+export type DisplayThresholds = {
+  [key in DisplayBreakpoint]: number
+}
+
+export interface DisplayProps {
+  mobileBreakpoint?: number | DisplayBreakpoint
 }
 
 export interface DisplayOptions {
@@ -27,6 +28,11 @@ export interface DisplayOptions {
 export interface InternalDisplayOptions {
   mobileBreakpoint: number | DisplayBreakpoint
   thresholds: DisplayThresholds
+}
+
+export type SSROptions = boolean | {
+  clientWidth: number
+  clientHeight?: number
 }
 
 export interface DisplayPlatform {
@@ -46,30 +52,35 @@ export interface DisplayPlatform {
 }
 
 export interface DisplayInstance {
-  xs: boolean
-  sm: boolean
-  md: boolean
-  lg: boolean
-  xl: boolean
-  xxl: boolean
-  smAndUp: boolean
-  mdAndUp: boolean
-  lgAndUp: boolean
-  xlAndUp: boolean
-  smAndDown: boolean
-  mdAndDown: boolean
-  lgAndDown: boolean
-  xlAndDown: boolean
-  name: DisplayBreakpoint
-  height: number
-  width: number
-  mobile: boolean
-  mobileBreakpoint: number | DisplayBreakpoint
-  platform: DisplayPlatform
-  thresholds: DisplayThresholds
+  xs: Ref<boolean>
+  sm: Ref<boolean>
+  md: Ref<boolean>
+  lg: Ref<boolean>
+  xl: Ref<boolean>
+  xxl: Ref<boolean>
+  smAndUp: Ref<boolean>
+  mdAndUp: Ref<boolean>
+  lgAndUp: Ref<boolean>
+  xlAndUp: Ref<boolean>
+  smAndDown: Ref<boolean>
+  mdAndDown: Ref<boolean>
+  lgAndDown: Ref<boolean>
+  xlAndDown: Ref<boolean>
+  name: Ref<DisplayBreakpoint>
+  height: Ref<number>
+  width: Ref<number>
+  mobile: Ref<boolean>
+  mobileBreakpoint: Ref<number | DisplayBreakpoint>
+  platform: Ref<DisplayPlatform>
+  thresholds: Ref<DisplayThresholds>
+
+  /** @internal */
+  ssr: boolean
+
+  update (): void
 }
 
-export const DisplaySymbol: InjectionKey<ToRefs<DisplayInstance>> = Symbol.for('vuetify:display')
+export const DisplaySymbol: InjectionKey<DisplayInstance> = Symbol.for('vuetify:display')
 
 const defaultDisplayOptions: DisplayOptions = {
   mobileBreakpoint: 'lg',
@@ -87,20 +98,22 @@ const parseDisplayOptions = (options: DisplayOptions = defaultDisplayOptions) =>
   return mergeDeep(defaultDisplayOptions, options) as InternalDisplayOptions
 }
 
-function getClientWidth (isHydrate?: boolean) {
-  return IN_BROWSER && !isHydrate
+function getClientWidth (ssr?: SSROptions) {
+  return IN_BROWSER && !ssr
     ? window.innerWidth
-    : 0
+    : (typeof ssr === 'object' && ssr.clientWidth) || 0
 }
 
-function getClientHeight (isHydrate?: boolean) {
-  return IN_BROWSER && !isHydrate
+function getClientHeight (ssr?: SSROptions) {
+  return IN_BROWSER && !ssr
     ? window.innerHeight
-    : 0
+    : (typeof ssr === 'object' && ssr.clientHeight) || 0
 }
 
-function getPlatform (): DisplayPlatform {
-  const userAgent = IN_BROWSER ? window.navigator.userAgent : 'ssr'
+function getPlatform (ssr?: SSROptions): DisplayPlatform {
+  const userAgent = IN_BROWSER && !ssr
+    ? window.navigator.userAgent
+    : 'ssr'
 
   function match (regexp: RegExp) {
     return Boolean(userAgent.match(regexp))
@@ -117,7 +130,6 @@ function getPlatform (): DisplayPlatform {
   const win = match(/win/i)
   const mac = match(/mac/i)
   const linux = match(/linux/i)
-  const ssr = match(/ssr/i)
 
   return {
     android,
@@ -132,25 +144,25 @@ function getPlatform (): DisplayPlatform {
     mac,
     linux,
     touch: SUPPORTS_TOUCH,
-    ssr,
+    ssr: userAgent === 'ssr',
   }
 }
 
-export function createDisplay (options?: DisplayOptions, isHydrate?: boolean): ToRefs<DisplayInstance> {
+export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): DisplayInstance {
   const { thresholds, mobileBreakpoint } = parseDisplayOptions(options)
 
-  const height = ref(getClientHeight(isHydrate))
-  const platform = getPlatform()
+  const height = shallowRef(getClientHeight(ssr))
+  const platform = shallowRef(getPlatform(ssr))
   const state = reactive({} as DisplayInstance)
-  const width = ref(getClientWidth(isHydrate))
+  const width = shallowRef(getClientWidth(ssr))
 
-  function onResize () {
+  function updateSize () {
     height.value = getClientHeight()
     width.value = getClientWidth()
   }
-
-  if (isHydrate) {
-    nextTick(() => onResize())
+  function update () {
+    updateSize()
+    platform.value = getPlatform()
   }
 
   // eslint-disable-next-line max-statements
@@ -169,9 +181,7 @@ export function createDisplay (options?: DisplayOptions, isHydrate?: boolean): T
       : xl ? 'xl'
       : 'xxl'
     const breakpointValue = typeof mobileBreakpoint === 'number' ? mobileBreakpoint : thresholds[mobileBreakpoint]
-    const mobile = !platform.ssr
-      ? width.value < breakpointValue
-      : platform.android || platform.ios || platform.opera
+    const mobile = width.value < breakpointValue
 
     state.xs = xs
     state.sm = sm
@@ -192,21 +202,44 @@ export function createDisplay (options?: DisplayOptions, isHydrate?: boolean): T
     state.width = width.value
     state.mobile = mobile
     state.mobileBreakpoint = mobileBreakpoint
-    state.platform = platform
+    state.platform = platform.value
     state.thresholds = thresholds
   })
 
   if (IN_BROWSER) {
-    window.addEventListener('resize', onResize, { passive: true })
+    window.addEventListener('resize', updateSize, { passive: true })
   }
 
-  return toRefs(state)
+  return { ...toRefs(state), update, ssr: !!ssr }
 }
 
-export function useDisplay () {
+export const makeDisplayProps = propsFactory({
+  mobileBreakpoint: [Number, String] as PropType<number | DisplayBreakpoint>,
+}, 'display')
+
+export function useDisplay (
+  props: DisplayProps = {},
+  name = getCurrentInstanceName(),
+) {
   const display = inject(DisplaySymbol)
 
   if (!display) throw new Error('Could not find Vuetify display injection')
 
-  return display
+  const mobile = computed(() => {
+    if (!props.mobileBreakpoint) return display.mobile.value
+
+    const breakpointValue = typeof props.mobileBreakpoint === 'number'
+      ? props.mobileBreakpoint
+      : display.thresholds.value[props.mobileBreakpoint]
+
+    return display.width.value < breakpointValue
+  })
+
+  const displayClasses = computed(() => {
+    if (!name) return {}
+
+    return { [`${name}--mobile`]: mobile.value }
+  })
+
+  return { ...display, displayClasses, mobile }
 }

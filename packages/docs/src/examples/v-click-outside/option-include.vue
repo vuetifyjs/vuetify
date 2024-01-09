@@ -1,45 +1,64 @@
 <template>
-  <v-list class="pa-0" outlined>
-    <v-list-item class="included" @click="() => null">
-      <v-list-item-title>Included</v-list-item-title>
-    </v-list-item>
+  <v-card
+    v-click-outside="{
+      handler: onClickOutside,
+      include
+    }"
+    :color="active ? 'primary' : undefined"
+    :dark="active"
+    class="mx-auto"
+    height="256"
+    rounded="xl"
+    width="256"
+    @click="active = true"
+  >
+    <div class="text-h6 text-md-h4 fill-height d-flex align-center justify-center">
+      {{ active ? 'Click Outside' : 'Click Me' }}
+    </div>
+  </v-card>
 
-    <v-divider></v-divider>
-
-    <v-list-item @click="() => null">
-      <v-list-item-title>Not included</v-list-item-title>
-    </v-list-item>
-
-    <v-divider></v-divider>
-
-    <v-list-item
-      v-click-outside="{
-        handler: onClickOutsideStandard,
-        include: include,
-      }"
-      @click="models.base = true"
+  <div class="d-flex justify-center">
+    <v-card
+      rounded="lg"
+      class="ma-2 included"
     >
-      <v-list-item-title>Default Click Outside</v-list-item-title>
+      <v-card-text class="text-h6">
+        This element is included
+      </v-card-text>
+    </v-card>
 
-      <v-list-item-action>
-        <v-icon :color="models.base ? 'green' : 'red'">
-          mdi-record
-        </v-icon>
-      </v-list-item-action>
-    </v-list-item>
-  </v-list>
+    <v-card
+      rounded="lg"
+      class="ma-2"
+    >
+      <v-card-text class="text-h6">
+        This element is not included
+      </v-card-text>
+    </v-card>
+  </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const active = ref(false)
+
+  function onClickOutside () {
+    active.value = false
+  }
+  function include () {
+    return [document.querySelector('.included')]
+  }
+</script>
 
 <script>
   export default {
     data: () => ({
-      models: {
-        base: false,
-      },
+      active: false,
     }),
     methods: {
-      onClickOutsideStandard () {
-        this.models.base = false
+      onClickOutside () {
+        this.active = false
       },
       include () {
         return [document.querySelector('.included')]

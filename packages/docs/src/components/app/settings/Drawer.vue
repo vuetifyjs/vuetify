@@ -4,62 +4,54 @@
     v-model="app.settings"
     :location="isRtl ? 'left' : 'right'"
     disable-route-watcher
-    position="fixed"
-    hide-overlay
     temporary
-    width="300"
+    touchless
+    width="350"
   >
-    <v-toolbar flat>
-      <v-toolbar-title text="Settings" class="pl-0" />
-
+    <v-toolbar :title="t('settings')" flat>
       <template #append>
-        <v-btn icon="mdi-close" @click="app.settings = false" />
+        <v-btn
+          icon="mdi-close"
+          variant="flat"
+          @click="app.settings = false"
+        />
       </template>
     </v-toolbar>
 
     <v-divider />
 
-    <v-container>
-      <app-settings-theme />
+    <v-container class="px-3 py-3">
+      <options />
 
-      <v-divider class="mt-4 mb-3 mx-n3" />
+      <ad-option v-if="auth.isSubscriber" />
 
-      <app-settings-rtl />
-
-      <v-divider class="mt-4 mb-3 mx-n3" />
-
-      <app-settings-api />
+      <developer-mode />
     </v-container>
+
+    <template #append>
+      <app-settings-append />
+    </template>
   </v-navigation-drawer>
 </template>
 
-<script>
+<script setup>
   // Components
-  import AppSettingsApi from './Api.vue'
-  import AppSettingsRtl from './Rtl.vue'
-  import AppSettingsTheme from './Theme.vue'
+  import AdOption from '@/components/app/settings/options/AdOption.vue'
+  import AppSettingsAppend from './Append.vue'
+  import DeveloperMode from '@/components/app/settings/DeveloperMode.vue'
+  import Options from '@/components/app/settings/Options.vue'
 
   // Composables
-  import { useAppStore } from '@/store/app'
   import { useRtl } from 'vuetify'
+  import { useI18n } from 'vue-i18n'
 
-  export default {
-    name: 'AppSettingsDrawer',
+  // Stores
+  import { useAppStore } from '@/store/app'
+  import { useAuthStore } from '@vuetify/one'
 
-    components: {
-      AppSettingsApi,
-      AppSettingsRtl,
-      AppSettingsTheme,
-    },
+  const app = useAppStore()
+  const auth = useAuthStore()
 
-    setup () {
-      const { isRtl } = useRtl()
-      const app = useAppStore()
-
-      return {
-        app,
-        isRtl,
-      }
-    },
-  }
+  const { t } = useI18n()
+  const { isRtl } = useRtl()
 </script>

@@ -1,58 +1,51 @@
 <template>
-  <v-autocomplete
-    :items="items"
-    v-bind="$attrs"
+  <usage-example
+    v-model="model"
+    :code="code"
+    :options="options"
+    :name="name"
   >
-  </v-autocomplete>
+    <div>
+      <v-autocomplete v-bind="props"></v-autocomplete>
+    </div>
+
+    <template v-slot:configuration>
+      <v-checkbox v-model="clear" label="Clearable"></v-checkbox>
+
+      <v-checkbox v-model="chips" label="Chips"></v-checkbox>
+
+      <v-checkbox v-model="multiple" label="Multiple"></v-checkbox>
+    </template>
+  </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'Usage',
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-    inheritAttrs: false,
+  const name = 'v-autocomplete'
+  const model = ref('default')
+  const clear = ref(false)
+  const chips = ref(false)
+  const multiple = ref(false)
+  const options = ['outlined', 'underlined', 'solo', 'solo-filled', 'solo-inverted']
+  const props = computed(() => {
+    return {
+      clearable: clear.value || undefined,
+      chips: chips.value || undefined,
+      label: 'Autocomplete',
+      items: ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'],
+      multiple: multiple.value || undefined,
+      variant: model.value === 'default' ? undefined : model.value,
+    }
+  })
 
-    data: () => ({
-      items: [
-        'Alabama', 'Alaska', 'American Samoa', 'Arizona',
-        'Arkansas', 'California', 'Colorado', 'Connecticut',
-        'Delaware', 'District of Columbia', 'Federated States of Micronesia',
-        'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho',
-        'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-        'Louisiana', 'Maine', 'Marshall Islands', 'Maryland',
-        'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-        'Missouri', 'Montana', 'Nebraska', 'Nevada',
-        'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
-        'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
-        'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
-        'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
-        'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
-        'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',
-      ],
-      defaults: {
-        'auto-select-first': false,
-        chips: false,
-        clearable: false,
-        dense: false,
-        'deletable-chips': false,
-        filled: false,
-        multiple: false,
-        rounded: false,
-        'small-chips': false,
-        solo: false,
-        'solo-inverted': false,
-      },
-      options: {
-        booleans: [
-          'auto-select-first',
-          'clearable',
-          'chips',
-          'deletable-chips',
-          'multiple',
-          'small-chips',
-        ],
-      },
-      tabs: ['dense', 'filled', 'rounded', 'solo', 'solo-inverted'],
-    }),
-  }
+  const slots = computed(() => {
+    return ``
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>

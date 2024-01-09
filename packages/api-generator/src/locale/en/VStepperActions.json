@@ -1,0 +1,14 @@
+{
+  "props": {
+    "nextText": "The text used for the Next button.",
+    "prevText": "The text used for the Prev button."
+  },
+  "events": {
+    "click:next": "Event emitted when clicking the next button.",
+    "click:prev": "Event emitted when clicking the prev button."
+  },
+  "slots": {
+    "next": "Slot for customizing the next step functionailty",
+    "prev": "Slot for customizing the prev step functionality"
+  }
+}

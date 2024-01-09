@@ -2,7 +2,7 @@
   <div>
     <v-progress-linear
       model-value="100"
-      color="red darken-2"
+      color="red-darken-2"
       rounded
     ></v-progress-linear>
     <br>
@@ -20,7 +20,7 @@
     <br>
     <v-progress-linear
       model-value="100"
-      color="cyan darken-2"
+      color="cyan-darken-2"
       rounded
     ></v-progress-linear>
   </div>

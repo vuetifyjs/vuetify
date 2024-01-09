@@ -1,52 +1,76 @@
 <template>
   <usage-example
     v-model="model"
+    :code="code"
+    :name="name"
     :options="options"
-    name="v-app-bar"
   >
-    <v-defaults-provider
-      :defaults="{
-        VAppBar: {
-          collapse: model === 'collapse',
-        }
-      }"
-    >
-      <v-sheet color="surface-variant" class="pa-4 mx-auto" max-width="448" rounded>
-        <v-layout>
-          <v-app-bar :model-value="model !== 'hidden'" rounded="t">
-            <template v-slot:prepend>
-              <v-app-bar-nav-icon></v-app-bar-nav-icon>
-            </template>
+    <v-layout class="overflow-visible">
+      <v-app-bar v-bind="props">
+        <template v-slot:prepend>
+          <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        </template>
 
-            <v-app-bar-title>Application Bar</v-app-bar-title>
+        <v-app-bar-title>Application Bar</v-app-bar-title>
 
-            <template v-slot:append>
-              <v-btn icon="mdi-heart"></v-btn>
+        <template v-if="actions" v-slot:append>
+          <v-btn icon="mdi-heart"></v-btn>
 
-              <v-btn icon="mdi-magnify"></v-btn>
+          <v-btn icon="mdi-magnify"></v-btn>
 
-              <v-btn icon="mdi-dots-vertical"></v-btn>
-            </template>
-          </v-app-bar>
+          <v-btn icon="mdi-dots-vertical"></v-btn>
+        </template>
+      </v-app-bar>
 
-          <v-main
-            class="bg-surface rounded"
-            style="height: 250px;"
-          >
-          </v-main>
-        </v-layout>
-      </v-sheet>
-    </v-defaults-provider>
+      <v-main style="height: 75px;"></v-main>
+    </v-layout>
+
+    <template v-slot:configuration>
+      <v-checkbox v-model="actions" label="Actions"></v-checkbox>
+
+      <v-slider v-model="elevation" label="Elevation" step="1" min="0" max="24"></v-slider>
+    </template>
   </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'VAppBarUsageExample',
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-    data: () => ({
-      model: 'default',
-      options: ['collapse'],
-    }),
-  }
+  const name = 'v-app-bar'
+  const model = ref('default')
+  const actions = ref(false)
+  const elevation = ref(2)
+  const options = ['collapse', 'rounded']
+
+  const props = computed(() => {
+    return {
+      collapse: model.value === 'collapse' ? true : undefined,
+      elevation: elevation.value === 4 ? undefined : elevation.value,
+      rounded: model.value === 'rounded' ? true : undefined,
+    }
+  })
+
+  const slots = computed(() => {
+    let str = ''
+
+    if (actions.value) {
+      str += `
+  <template v-slot:append>
+    <v-btn icon="mdi-heart"></v-btn>
+
+    <v-btn icon="mdi-magnify"></v-btn>
+
+    <v-btn icon="mdi-dots-vertical"></v-btn>
+  </template>
+`
+    }
+
+    return str
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>

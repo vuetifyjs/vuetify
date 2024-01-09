@@ -12,7 +12,6 @@
   transition-duration: $navigation-drawer-transition-duration
   transition-property: $navigation-drawer-transition-property
   transition-timing-function: $navigation-drawer-transition-timing-function
-  will-change: $navigation-drawer-will-change
   position: absolute
 
   @include tools.border($navigation-drawer-border...)
@@ -23,39 +22,38 @@
   &--rounded
     @include tools.rounded($navigation-drawer-rounded-border-radius)
 
+  &--top
+    top: 0
+    border-bottom-width: $navigation-drawer-border-thin-width
+
   &--bottom
     left: 0
     border-top-width: $navigation-drawer-border-thin-width
 
-  &--start
+  &--left
     top: 0
-    border-inline-end-width: $navigation-drawer-border-thin-width
+    left: 0
+    right: auto
+    border-right-width: $navigation-drawer-border-thin-width
 
-    @include tools.ltr()
-      left: 0
-      right: auto
-
-    @include tools.rtl()
-      left: auto
-      right: 0
-
-  &--end
+  &--right
     top: 0
-    border-inline-start-width: $navigation-drawer-border-thin-width
-
-    @include tools.ltr()
-      left: auto
-      right: 0
-
-    @include tools.rtl()
-      left: 0
-      right: auto
+    left: auto
+    right: 0
+    border-left-width: $navigation-drawer-border-thin-width
 
   &--floating
     border: none
 
   &--temporary
     @include tools.elevation($navigation-drawer-temporary-elevation)
+
+  &--sticky
+    height: auto
+    transition: box-shadow, transform, visibility, width, height, left, right
+
+  .v-list
+    overflow: hidden
 
 .v-navigation-drawer__content
   flex: 0 1 auto
@@ -79,9 +77,16 @@
 
 .v-navigation-drawer__scrim
   position: absolute
+  top: 0
+  left: 0
   width: 100%
   height: 100%
   background: black
-  opacity: .2
+  opacity: $navigation-drawer-scrim-opacity
   transition: opacity $navigation-drawer-transition-duration $navigation-drawer-transition-timing-function
   z-index: 1
+
+.v-navigation-drawer__prepend,
+.v-navigation-drawer__append
+  flex: none
+  overflow: hidden

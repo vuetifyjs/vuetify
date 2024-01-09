@@ -1,7 +1,7 @@
 <template>
   <v-sheet elevation="6">
     <v-tabs
-      background-color="indigo"
+      bg-color="indigo"
       next-icon="mdi-arrow-right-bold-box-outline"
       prev-icon="mdi-arrow-left-bold-box-outline"
       show-arrows

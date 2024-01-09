@@ -1,54 +1,51 @@
 <template>
-  <v-list>
-    <v-list-item
-      v-click-outside="onClickOutsideStandard"
-      @click="models.base = true"
-    >
-      <v-list-item-title>Default Click Outside</v-list-item-title>
-
-      <v-list-item-action>
-        <v-icon :color="models.base ? 'green' : 'red'">
-          mdi-record
-        </v-icon>
-      </v-list-item-action>
-    </v-list-item>
-
-    <v-list-item
-      v-click-outside="{
-        handler: onClickOutsideWithConditional,
-        closeConditional,
-      }"
-      @click="models.conditional = true"
-    >
-      <v-list-item-title>Default w/ Close Conditional</v-list-item-title>
-
-      <v-list-item-action>
-        <v-icon :color="models.conditional ? 'green' : 'red'">
-          mdi-record
-        </v-icon>
-      </v-list-item-action>
-    </v-list-item>
-  </v-list>
+  <v-switch v-model="clickOutsideEnabled" :label="`Click outside ${clickOutsideEnabled ? 'enabled' : 'disabled'}`"></v-switch>
+  <v-card
+    v-click-outside="{
+      handler: onClickOutside,
+      closeConditional: onCloseConditional
+    }"
+    :color="active ? 'primary' : undefined"
+    :dark="active"
+    class="mx-auto"
+    height="256"
+    rounded="xl"
+    width="256"
+    @click="active = true"
+  >
+    <div class="text-h6 text-md-h4 fill-height d-flex align-center justify-center">
+      {{ active ? 'Click Outside' : 'Click Me' }}
+    </div>
+  </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const active = ref(false)
+  const clickOutsideEnabled = ref(false)
+
+  function onClickOutside () {
+    active.value = false
+  }
+  function onCloseConditional (e) {
+    return clickOutsideEnabled.value
+  }
+</script>
 
 <script>
   export default {
     data: () => ({
-      models: {
-        base: false,
-        conditional: false,
-      },
+      active: false,
+      clickOutsideEnabled: false,
     }),
 
     methods: {
-      onClickOutsideStandard () {
-        this.models.base = false
+      onClickOutside () {
+        this.active = false
       },
-      onClickOutsideWithConditional () {
-        this.models.conditional = false
-      },
-      closeConditional (e) {
-        return this.models.conditional
+      onCloseConditional (e) {
+        return this.clickOutsideEnabled
       },
     },
   }

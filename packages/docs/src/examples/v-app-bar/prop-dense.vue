@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar
-      color="deep-purple accent-4"
+      color="deep-purple-accent-4"
       dense
       dark
     >
@@ -19,10 +19,7 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
-      <v-menu
-        left
-        bottom
-      >
+      <v-menu>
         <template v-slot:activator="{ props }">
           <v-btn
             icon

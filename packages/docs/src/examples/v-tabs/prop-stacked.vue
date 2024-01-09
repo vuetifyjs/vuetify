@@ -2,7 +2,7 @@
   <v-card>
     <v-tabs
       v-model="tab"
-      background-color="deep-purple-accent-4"
+      bg-color="deep-purple-accent-4"
       centered
       stacked
     >
@@ -35,6 +35,14 @@
     </v-window>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const tab = ref(null)
+
+  const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+</script>
 
 <script>
   export default {

@@ -2,18 +2,20 @@
  * Utilities for generating formatted mount functions
  * Some utility functions for mounting these generated examples inside of tests
  */
+import { FunctionalComponent, JSXComponent } from 'vue'
 
 const _ = Cypress._
 
 type Stories = Record<string, JSX.Element>
 type Props = Record<string, Boolean | any[]>
 type GenerateConfiguration = {
-  props: Props,
-  component: unknown
-  stories?: Stories,
+  props: Props
+  component: JSXComponent
+  stories?: Stories
 } | {
-  component?: unknown
-  stories?: Stories,
+  props?: never
+  component?: never
+  stories: Stories
 }
 
 type Example = {
@@ -25,10 +27,10 @@ type Example = {
 const title = (key: string) => <h4 class="my-4">{ key }</h4>
 
 // Spacing between content
-const grid = (content: JSX.Element | JSX.Element[]) => <div style="display: flex; grid-gap: 0.8rem;">{ content }</div>
+const grid = (content: JSX.Element | JSX.Element[]) => <div style="display: flex; gap: 0.8rem;">{ content }</div>
 
 // Spacing between mounted components
-const wrapper = <div class="ma-4"></div>
+const Wrapper: FunctionalComponent = (_, { slots }) => <div class="ma-4">{ slots.default?.() }</div>
 
 /**
  * Generate an array of Examples by iterating over Stories.
@@ -42,10 +44,10 @@ export const makeExamplesFromStories = (stories: Stories): Example[] => {
   return Object.entries(stories).reduce((acc: Example[], [key, value]) => {
     acc.push({
       name: key,
-      mount: <wrapper>
+      mount: <Wrapper>
         { title(key) }
         { grid(value) }
-      </wrapper>,
+      </Wrapper>,
     })
     return acc
   }, [])
@@ -54,35 +56,35 @@ export const makeExamplesFromStories = (stories: Stories): Example[] => {
 /**
  * Generate a list of Examples by iterating over all passed in Props.
  * @param props A configuration object of props to call
- * @param component The component to be mounted with those specific props.
+ * @param Component The component to be mounted with those specific props.
  * @returns
  * @example makeExamplesFromProps({
     color: ['success', 'error' ],
     icon: true
    }, VBtn)
  */
-export const makeExamplesFromProps = (props: Props, component: JSX.Element): Example[] => {
+export const makeExamplesFromProps = (props: Props, Component: JSXComponent): Example[] => {
   return Object.entries(props).reduce((acc: Example[], [key, value]) => {
     // Collect an array of examples by prop.
     const variants: JSX.Element[] = []
 
     // Props with boolean values should be rendered with both their true/false states
     if (_.isBoolean(value)) {
-      variants.push(<component { ...{ [key]: true } }>Is { key }</component>)
-      variants.push(<component { ...{ [key]: false } }>Is not { key }</component>)
+      variants.push(<Component { ...{ [key]: true } }>Is { key }</Component>)
+      variants.push(<Component { ...{ [key]: false } }>Is not { key }</Component>)
     } else if (_.isArray(value)) {
       // Props with array values should be iterated over
       value.forEach((v) => {
-        variants.push(<component { ... { [key]: v } }>{ v }</component>)
+        variants.push(<Component { ... { [key]: v } }>{ v }</Component>)
       })
     }
 
     acc.push({
       name: key,
-      mount: <wrapper>
+      mount: <Wrapper>
         { title(key) }
         { grid(variants) }
-      </wrapper>
+      </Wrapper>
     })
     return acc
   }, [])
@@ -136,7 +138,7 @@ export const generateByExample = (stories: Stories) => {
  * @param component
  * @returns
  */
-export const generateByProps = (props: Props, component: JSX.Element) => {
+export const generateByProps = (props: Props, component: JSXComponent) => {
   return makeExamplesFromProps(props, component).map(({ mount, name }) => {
     return it(name, () => { cy.mount(() => <>{ mount }</>) })
   })

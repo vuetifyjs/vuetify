@@ -1,39 +1,42 @@
 {
   "johnleider": {
-    "discord": "johnleider#0001",
+    "discord": "johnleider",
     "focus": [
       "[vuetifyjs/*](https://github.com/vuetifyjs)"
     ],
     "funding": [
       "[GitHub Sponsors](https://github.com/sponsors/johnleider)",
-      "[Patreon](https://patreon.com/vuetify)"
+      "[Patreon](https://patreon.com/vuetify)",
+      "[Paypal](https://paypal.me/vuetify)"
     ],
     "languages": [
       "English"
     ],
     "linkedin": "john-leider-626183a2",
-    "location": "Fort Worth, TX, USA",
+    "location": "Keller, TX, USA",
     "name": "John Leider",
     "team": "company",
     "twitter": "zeroskillz",
-    "work": "CEO @ Vuetify"
+    "work": "Engineer @ Vuetify",
+    "joined": "Jun 2016"
   },
   "heatherleider": {
-    "discord": "heatherleider#7788",
+    "discord": "heatherleider",
     "focus": [
       "[vuetifyjs/*](https://github.com/vuetifyjs)"
     ],
     "languages": [
       "English"
     ],
-    "location": "Fort Worth, TX, USA",
+    "location": "Keller, TX, USA",
     "name": "Heather Leider",
     "team": "company",
     "twitter": "grneyedgrl01",
-    "work": "COO @ Vuetify"
+    "work": "COO @ Vuetify",
+    "joined": "Nov 2019"
   },
   "KaelWD": {
-    "discord": "Kaelwd#6373",
+    "discord": "kaelwd",
     "focus": [
       "[vuetifyjs/*](https://github.com/vuetifyjs)",
       "[vuetify-loader](https://github.com/vuetifyjs/vuetify-loader)",
@@ -41,7 +44,8 @@
     ],
     "funding": [
       "[GitHub Sponsors](https://github.com/sponsors/kaelwd)",
-      "[Patreon](https://patreon.com/kaelwd)"
+      "[Patreon](https://patreon.com/kaelwd)",
+      "[Open Collective](https://opencollective.com/vuetify)"
     ],
     "languages": [
       "English"
@@ -49,10 +53,11 @@
     "location": "Melbourne, Australia",
     "name": "Kael Watts-Deuchar",
     "team": "core",
-    "twitter": "kaelwd"
+    "twitter": "kaelwd",
+    "joined": "Oct 2017"
   },
   "nekosaur": {
-    "discord": "nekosaur#5406",
+    "discord": ".nekosaur",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],
@@ -62,23 +67,11 @@
     ],
     "location": "Malmö, Sweden",
     "name": "Albert Kaaman",
-    "team": "core"
-  },
-  "jacekkarczmarczyk": {
-    "discord": "jacek#3542",
-    "focus": [
-      "[vuetifyjs](https://github.com/vuetifyjs)"
-    ],
-    "languages": [
-      "Polish",
-      "English"
-    ],
-    "location": "Warsaw, Poland",
-    "name": "Jacek Karczmarczyk",
-    "team": "core"
+    "team": "core",
+    "joined": "Jun 2017"
   },
   "MajesticPotatoe": {
-    "discord": "MajesticPotatoe#4997",
+    "discord": "majesticpotatoe",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)",
       "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
@@ -94,10 +87,11 @@
     "location": "Rochester, NY, USA",
     "name": "Andrew Henry",
     "team": "core",
-    "twitter": "SeeMWhyK"
+    "twitter": "SeeMWhyK",
+    "joined": "Dec 2018"
   },
   "blalan05": {
-    "discord": "blalan05#3967",
+    "discord": "blalan05",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],
@@ -107,22 +101,36 @@
     "linkedin": "blalan05",
     "location": "Wisconsin, USA",
     "name": "Blaine Landowski",
-    "team": "core"
+    "team": "core",
+    "work": "CEO at Foundational Technologies LLC",
+    "joined": "Feb 2021"
   },
-  "ElijahKotyluk": {
-    "discord": "edk#4363",
-    "funding": [
-      "[GitHub Sponsors](https://github.com/sponsors/ElijahKotyluk)"
-    ],
+  "elvinagarcia": {
+    "avatar": "https://pbs.twimg.com/profile_images/1641112338995748866/lVvo6nob_400x400.png",
+    "discord": "elvinagarcia",
     "focus": [
-      "[vuetifyjs](https://github.com/vuetifyjs)",
-      "[vuetifyjs/vue-cli-plugins](https://github.com/vuetifyjs/vue-cli-plugins)"
+      "Design/Animations"
     ],
     "languages": [
       "English"
     ],
-    "location": "USA",
-    "name": "Elijah Kotyluk",
-    "team": "core"
+    "location": "Virginia, USA",
+    "name": "Elvina Garcia",
+    "team": "core",
+    "joined": "Feb 2023"
+  },
+  "yuwu9145": {
+    "discord": "yuwu9145",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English",
+      "Chinese(Mandarin)"
+    ],
+    "location": "Melbourne, Australia",
+    "name": "Yuchao Wu",
+    "team": "core",
+    "joined": "Mar 2023"
   }
 }

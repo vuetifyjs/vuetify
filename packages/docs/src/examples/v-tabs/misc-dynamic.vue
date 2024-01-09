@@ -2,7 +2,7 @@
   <v-card>
     <v-tabs
       v-model="tab"
-      background-color="red-lighten-2"
+      bg-color="red-lighten-2"
     >
       <v-tab
         v-for="n in length"
@@ -15,7 +15,7 @@
     <v-card-text class="text-center">
       <v-btn
         :disabled="!length"
-        text
+        variant="text"
         @click="length--"
       >
         Remove Tab
@@ -25,7 +25,7 @@
         vertical
       ></v-divider>
       <v-btn
-        text
+        variant="text"
         @click="length++"
       >
         Add Tab
@@ -33,6 +33,17 @@
     </v-card-text>
   </v-card>
 </template>
+
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const length = ref(15)
+  const tab = ref(null)
+
+  watch(length, val => {
+    tab.value = val - 1
+  })
+</script>
 
 <script>
   export default {

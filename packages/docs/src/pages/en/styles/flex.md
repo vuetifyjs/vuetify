@@ -1,6 +1,6 @@
 ---
 meta:
-  title: CSS Flex helpers
+  title: Flex
   description: Flex helper classes allow you to modify flexbox parents and children.
   keywords: flex helper classes, flex classes, vuetify flex
 related:
@@ -12,6 +12,8 @@ related:
 # Flex
 
 Control the layout of flex containers with alignment, justification and more with responsive flexbox utilities.
+
+<page-features />
 
 <entry />
 
@@ -36,13 +38,73 @@ You can also customize flex utilities to apply based upon various breakpoints.
 - **.d-xl-flex**
 - **.d-xl-inline-flex**
 
+### Caveats
+
+::: info
+It is important to note that using any of the display classes above will result in any display style previously added being overwritten. This is because of the classes using `!important` in their display styling.
+:::
+
+## Flex shorthand
+
+The flex utility classes can be used to modify the **flex** css property. This makes it easy to position flex items within a flex container.
+
+<example file="flex/flex-flex" />
+
+There are also responsive variations for `flex`:
+
+- **.flex-fill**
+- **.flex-sm-fill**
+- **.flex-md-fill**
+- **.flex-lg-fill**
+- **.flex-xl-fill**
+- **.flex-1-1**
+- **.flex-sm-1-1**
+- **.flex-md-1-1**
+- **.flex-lg-1-1**
+- **.flex-xl-1-1**
+- **.flex-1-0**
+- **.flex-sm-1-0**
+- **.flex-md-1-0**
+- **.flex-lg-1-0**
+- **.flex-xl-1-0**
+- **.flex-0-1**
+- **.flex-sm-0-1**
+- **.flex-md-0-1**
+- **.flex-lg-0-1**
+- **.flex-xl-0-1**
+- **.flex-0-0**
+- **.flex-sm-0-0**
+- **.flex-md-0-0**
+- **.flex-lg-0-0**
+- **.flex-xl-0-0**
+- **.flex-1-1-100**
+- **.flex-sm-1-1-100**
+- **.flex-md-1-1-100**
+- **.flex-lg-1-1-100**
+- **.flex-xl-1-1-100**
+- **.flex-1-0-100**
+- **.flex-sm-1-0-100**
+- **.flex-md-1-0-100**
+- **.flex-lg-1-0-100**
+- **.flex-xl-1-0-100**
+- **.flex-0-1-100**
+- **.flex-sm-0-1-100**
+- **.flex-md-0-1-100**
+- **.flex-lg-0-1-100**
+- **.flex-xl-0-1-100**
+- **.flex-0-0-100**
+- **.flex-sm-0-0-100**
+- **.flex-md-0-0-100**
+- **.flex-lg-0-0-100**
+- **.flex-xl-0-0-100**
+
 ## Flex direction
 
 By default, `d-flex` applies `flex-direction: row` and can generally be omitted. However, there may be situations where you need to explicitly define it.
 
 <example file="flex/flex-direction" />
 
-The `flex-column` and `flex-column-reverse` utility classes can be used to change the orientation of the flexbox container. Keep in mind that **IE11** and **Safari** may have issues with the column direction.
+The `flex-column` and `flex-column-reverse` utility classes can be used to change the orientation of the flexbox container.
 
 <example file="flex/flex-column" />
 
@@ -71,7 +133,7 @@ There are also responsive variations for `flex-direction`.
 
 ## Flex justify
 
-The `justify-content` flex setting can be changed using the flex justify classes. This by default will modify the flexbox items on the **x-axis** but is reversed when using `flex-direction: column`, modifying the **y-axis**. Choose from `start` (browser default), `end`, `center`, `space-between`, or `space-around`.
+The `justify-content` flex setting can be changed using the flex justify classes. This by default will modify the flexbox items on the **x-axis** but is reversed when using `flex-direction: column`, modifying the **y-axis**. Choose from `start` (browser default), `end`, `center`, `space-between`, `space-around`, or `space-evenly`.
 
 <example file="flex/flex-justify" />
 
@@ -82,36 +144,35 @@ There are also responsive variations for `justify-content`.
 - **.justify-center**
 - **.justify-space-between**
 - **.justify-space-around**
+- **.justify-space-evenly**
 - **.justify-sm-start**
 - **.justify-sm-end**
 - **.justify-sm-center**
 - **.justify-sm-space-between**
 - **.justify-sm-space-around**
+- **.justify-sm-space-evenly**
 - **.justify-md-start**
 - **.justify-md-end**
 - **.justify-md-center**
 - **.justify-md-space-between**
 - **.justify-md-space-around**
+- **.justify-md-space-evenly**
 - **.justify-lg-start**
 - **.justify-lg-end**
 - **.justify-lg-center**
 - **.justify-lg-space-between**
 - **.justify-lg-space-around**
+- **.justify-lg-space-evenly**
 - **.justify-xl-start**
 - **.justify-xl-end**
 - **.justify-xl-center**
 - **.justify-xl-space-between**
 - **.justify-xl-space-around**
+- **.justify-xl-space-evenly**
 
 ## Flex align
 
 The `align-items` flex setting can be changed using the flex align classes. This by default will modify the flexbox items on the **y-axis** but is reversed when using `flex-direction: column`, modifying the **x-axis**. Choose from `start`, `end`, `center`, `baseline`, or `stretch` (browser default).
-
-<alert type="info">
-
-  When using flex align with IE11 you will need to set an explicit `height` as `min-height` will not suffice and cause undesired results.
-
-</alert>
 
 <example file="flex/flex-align" />
 
@@ -145,7 +206,7 @@ There are also responsive variations for `align-items`.
 
 ## Flex align self
 
-The `align-self` flex setting can be changed using the flex align-self classes. This by default will modify the flexbox items on the **x-axis** but is reversed when using `flex-direction: column`, modifying the **y-axis**. Choose from `start`, `end`, `center`, `baseline`, `auto`, or `stretch` (browser default).
+The `align-self` flex setting can be changed using the flex align-self classes. This by default will modify individual flexbox items across the **y-axis** but is reversed when using `flex-direction: column`, modifying the **x-axis**. Choose from `start`, `end`, `center`, `baseline`, `stretch`, or `auto` (browser default, applies align-items property from flex container).
 
 <example file="flex/flex-align-self" />
 
@@ -185,12 +246,6 @@ There are also responsive variations for `align-self-items`.
 ## Auto margins
 
 Using the margin helper classes in a flexbox container, you can control the positioning of flex items on the **x-axis** or **y-axis** when using `flex-row` or `flex-column` respectively.
-
-<alert type="error">
-
-  **IE11** does not properly support auto margins on flex items that have a parent with a non-default `justify-content` value. [See this StackOverflow answer](https://stackoverflow.com/a/37535548) for more details.
-
-</alert>
 
 <example file="flex/margins" />
 
@@ -297,7 +352,7 @@ There are also responsive variations for `order`.
 - **.order-lg-11**
 - **.order-lg-12**
 - **.order-lg-last**
-- **.order-lg-first**
+- **.order-xl-first**
 - **.order-xl-0**
 - **.order-xl-1**
 - **.order-xl-2**
@@ -315,7 +370,7 @@ There are also responsive variations for `order`.
 
 ## Flex align content
 
-The `align-content` flex setting can be changed using the flex align-content classes. This by default will modify the flexbox items on the **x-axis** but is reversed when using `flex-direction: column`, modifying the **y-axis**. Choose from `start` (browser default), `end`, `center`, `between`, `around` or `stretch`.
+The `align-content` flex setting can be changed using the flex align-content classes. This by default will modify the wrapped flexbox content across the **y-axis** but is reversed when using `flex-direction: column`, modifying the **x-axis**. Choose from `start`, `end`, `center`, `space-between`, `space-around`, `space-evenly` or `stretch` (browser default).
 
 <example file="flex/flex-align-content-start" />
 
@@ -334,31 +389,36 @@ There are also responsive variations for `align-content`.
 - **align-content-center**
 - **align-content-space-between**
 - **align-content-space-around**
+- **align-content-space-evenly**
 - **align-content-stretch**
-- **align-sm-content-start**
-- **align-sm-content-end**
-- **align-sm-content-center**
-- **align-sm-content-space-between**
-- **align-sm-content-space-around**
-- **align-sm-content-stretch**
-- **align-md-content-start**
-- **align-md-content-end**
-- **align-md-content-center**
-- **align-md-content-space-between**
-- **align-md-content-space-around**
-- **align-md-content-stretch**
-- **align-lg-content-start**
-- **align-lg-content-end**
-- **align-lg-content-center**
-- **align-lg-content-space-between**
-- **align-lg-content-space-around**
-- **align-lg-content-stretch**
-- **align-xl-content-start**
-- **align-xl-content-end**
-- **align-xl-content-center**
-- **align-xl-content-space-between**
-- **align-xl-content-space-around**
-- **align-xl-content-stretch**
+- **align-content-sm-start**
+- **align-content-sm-end**
+- **align-content-sm-center**
+- **align-content-sm-space-between**
+- **align-content-sm-space-around**
+- **align-content-sm-space-evenly**
+- **align-content-sm-stretch**
+- **align-content-md-start**
+- **align-content-md-end**
+- **align-content-md-center**
+- **align-content-md-space-between**
+- **align-content-md-space-around**
+- **align-content-md-space-evenly**
+- **align-content-md-stretch**
+- **align-content-lg-start**
+- **align-content-lg-end**
+- **align-content-lg-center**
+- **align-content-lg-space-between**
+- **align-content-lg-space-around**
+- **align-content-lg-space-evenly**
+- **align-content-lg-stretch**
+- **align-content-xl-start**
+- **align-content-xl-end**
+- **align-content-xl-center**
+- **align-content-xl-space-between**
+- **align-content-xl-space-around**
+- **align-content-xl-space-evenly**
+- **align-content-xl-stretch**
 
 ## Flex grow and shrink
 
@@ -389,5 +449,3 @@ These helper classes can also be applied in the format `flex-{breakpoint}-{condi
 - **flex-md-shrink-1**
 - **flex-lg-shrink-1**
 - **flex-xl-shrink-1**
-
-<backmatter />

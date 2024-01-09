@@ -4,5 +4,11 @@
     "src",
     "dev",
     "cypress"
-  ]
+  ],
+  "compilerOptions": {
+    "allowJs": true
+  },
+  "vueCompilerOptions": {
+    "strictTemplates": true
+  }
 }

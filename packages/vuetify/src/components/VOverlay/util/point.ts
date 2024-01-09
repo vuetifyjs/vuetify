@@ -1,3 +1,4 @@
+// Types
 import type { ParsedAnchor } from '@/util'
 import type { Box } from '@/util/box'
 
@@ -39,9 +40,9 @@ export function anchorToPoint (anchor: ParsedAnchor, box: Box): ViewportPoint {
     const { side, align } = anchor
 
     const x: number =
-      align === 'start' ? 0
+      align === 'left' ? 0
       : align === 'center' ? box.width / 2
-      : align === 'end' ? box.width
+      : align === 'right' ? box.width
       : align
     const y: number =
       side === 'top' ? 0
@@ -49,12 +50,12 @@ export function anchorToPoint (anchor: ParsedAnchor, box: Box): ViewportPoint {
       : side
 
     return elementToViewport({ x, y } as ElementPoint, box)
-  } else if (anchor.side === 'start' || anchor.side === 'end') {
+  } else if (anchor.side === 'left' || anchor.side === 'right') {
     const { side, align } = anchor
 
     const x: number =
-      side === 'start' ? 0
-      : side === 'end' ? box.width
+      side === 'left' ? 0
+      : side === 'right' ? box.width
       : side
     const y: number =
       align === 'top' ? 0

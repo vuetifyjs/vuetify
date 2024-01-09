@@ -1,7 +1,0 @@
-{
-  "props": {
-    "disabled": "Prevents the item from becoming active when using the \"next\" and \"prev\" buttons or the `toggle` method",
-    "reverseTransition": "Sets the reverse transition",
-    "transition": "The transition used when the component progressing through items. Can be one of the [built in transitions](/styles/transitions) or one your own."
-  }
-}

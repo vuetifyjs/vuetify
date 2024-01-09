@@ -3,7 +3,7 @@
     <v-col class="pa-12">
       <v-range-slider
         :ticks="seasons"
-        :value="[0, 1]"
+        :model-value="[0, 1]"
         min="0"
         max="3"
         :step="1"
@@ -18,6 +18,26 @@
     </v-col>
   </v-row>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const seasons = ref({
+    0: 'Winter',
+    1: 'Spring',
+    2: 'Summer',
+    3: 'Fall',
+  })
+  const icons = ref([
+    'mdi-snowflake',
+    'mdi-leaf',
+    'mdi-fire',
+    'mdi-water',
+  ])
+  function season (val) {
+    return icons.value[val]
+  }
+</script>
 
 <script>
   export default {

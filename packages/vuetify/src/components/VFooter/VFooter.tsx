@@ -3,36 +3,40 @@ import './VFooter.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { useBackgroundColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
+import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor } from '@/composables/color'
-import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, ref, toRef } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { computed, shallowRef, toRef } from 'vue'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
-export const VFooter = defineComponent({
+export const makeVFooterProps = propsFactory({
+  app: Boolean,
+  color: String,
+  height: {
+    type: [Number, String],
+    default: 'auto',
+  },
+
+  ...makeBorderProps(),
+  ...makeComponentProps(),
+  ...makeElevationProps(),
+  ...makeLayoutItemProps(),
+  ...makeRoundedProps(),
+  ...makeTagProps({ tag: 'footer' }),
+  ...makeThemeProps(),
+}, 'VFooter')
+
+export const VFooter = genericComponent()({
   name: 'VFooter',
 
-  props: {
-    app: Boolean,
-    color: String,
-    height: {
-      type: [Number, String],
-      default: 'auto',
-    },
-
-    ...makeBorderProps(),
-    ...makeElevationProps(),
-    ...makeLayoutItemProps(),
-    ...makeRoundedProps(),
-    ...makeTagProps({ tag: 'footer' }),
-    ...makeThemeProps(),
-  },
+  props: makeVFooterProps(),
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
@@ -41,7 +45,7 @@ export const VFooter = defineComponent({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
 
-    const autoHeight = ref(32)
+    const autoHeight = shallowRef(32)
     const { resizeRef } = useResizeObserver(entries => {
       if (!entries.length) return
       autoHeight.value = entries[0].target.clientHeight
@@ -67,10 +71,14 @@ export const VFooter = defineComponent({
           borderClasses.value,
           elevationClasses.value,
           roundedClasses.value,
+          props.class,
         ]}
         style={[
-          backgroundColorStyles,
-          props.app ? layoutItemStyles.value : undefined,
+          backgroundColorStyles.value,
+          props.app ? layoutItemStyles.value : {
+            height: convertToUnit(props.height),
+          },
+          props.style,
         ]}
         v-slots={ slots }
       />
@@ -79,3 +87,5 @@ export const VFooter = defineComponent({
     return props.app ? layoutIsReady : {}
   },
 })
+
+export type VFooter = InstanceType<typeof VFooter>

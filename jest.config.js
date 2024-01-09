@@ -1,6 +1,9 @@
 module.exports = {
   verbose: false,
-  testEnvironment: 'jest-environment-jsdom-fourteen',
+  testEnvironment: 'jsdom',
+  testEnvironmentOptions: {
+    customExportConditions: ['node', 'node-addons'],
+  },
   roots: [
     '<rootDir>/src',
   ],
@@ -22,8 +25,6 @@ module.exports = {
     '\\.(css|sass|scss)$': 'identity-obj-proxy',
   },
   transform: {
-    '\\.(styl)$': 'jest-css-modules',
-    '\\.(sass|scss)$': 'jest-css-modules',
     '.*\\.(j|t)sx?$': 'babel-jest',
   },
   collectCoverageFrom: [

@@ -2,17 +2,25 @@
 import './VMain.sass'
 
 // Composables
-import { makeTagProps } from '@/composables/tag'
+import { makeComponentProps } from '@/composables/component'
 import { useLayout } from '@/composables/layout'
 import { useSsrBoot } from '@/composables/ssrBoot'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
-export const VMain = defineComponent({
+export const makeVMainProps = propsFactory({
+  scrollable: Boolean,
+
+  ...makeComponentProps(),
+  ...makeTagProps({ tag: 'main' }),
+}, 'VMain')
+
+export const VMain = genericComponent()({
   name: 'VMain',
 
-  props: makeTagProps({ tag: 'main' }),
+  props: makeVMainProps(),
 
   setup (props, { slots }) {
     const { mainStyles, layoutIsReady } = useLayout()
@@ -20,18 +28,30 @@ export const VMain = defineComponent({
 
     useRender(() => (
       <props.tag
-        class="v-main"
+        class={[
+          'v-main',
+          { 'v-main--scrollable': props.scrollable },
+          props.class,
+        ]}
         style={[
           mainStyles.value,
           ssrBootStyles.value,
+          props.style,
         ]}
       >
-        <div class="v-main__wrap">
-          { slots.default?.() }
-        </div>
+        { props.scrollable
+          ? (
+            <div class="v-main__scroller">
+              { slots.default?.() }
+            </div>
+          )
+          : slots.default?.()
+        }
       </props.tag>
     ))
 
-    return layoutIsReady
+    return { layoutIsReady }
   },
 })
+
+export type VMain = InstanceType<typeof VMain>

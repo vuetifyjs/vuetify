@@ -1,11 +1,11 @@
 @use 'sass:string'
 @use 'sass:map'
 @use 'sass:meta'
-@use './display.sass'
-@use './screenreaders.sass'
-@use './text.sass'
 @use '../settings'
 @use '../tools'
+@use './display'
+@use './elevation'
+@use './screenreaders'
 
 // Utilities
 @each $breakpoint in map.keys(settings.$grid-breakpoints)

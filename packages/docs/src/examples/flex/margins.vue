@@ -1,56 +1,21 @@
 <template>
   <div>
-    <v-card
-      class="d-flex mb-6"
-      color="grey lighten-2"
-      flat
-      tile
-    >
-      <v-card
-        v-for="n in 3"
-        :key="n"
-        class="pa-2"
-        outlined
-        tile
-      >
-        Flex item
-      </v-card>
-    </v-card>
+    <v-sheet class="d-flex mb-6 bg-surface-variant">
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+    </v-sheet>
 
-    <v-card
-      class="d-flex mb-6"
-      color="grey lighten-2"
-      flat
-      tile
-    >
-      <v-card
-        v-for="n in 3"
-        :key="n"
-        :class="n === 1 && 'mr-auto'"
-        class="pa-2"
-        outlined
-        tile
-      >
-        Flex item
-      </v-card>
-    </v-card>
+    <v-sheet class="d-flex mb-6 bg-surface-variant">
+      <v-sheet class="ma-2 pa-2 me-auto">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+    </v-sheet>
 
-    <v-card
-      class="d-flex mb-6"
-      color="grey lighten-2"
-      flat
-      tile
-    >
-      <v-card
-        v-for="n in 3"
-        :key="n"
-        :class="n === 3 && 'ml-auto'"
-        class="pa-2"
-        outlined
-        tile
-      >
-        Flex item
-      </v-card>
-    </v-card>
+    <v-sheet class="d-flex mb-6 bg-surface-variant">
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+    </v-sheet>
   </div>
 </template>

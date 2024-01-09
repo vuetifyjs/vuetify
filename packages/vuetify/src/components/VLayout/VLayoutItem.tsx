@@ -2,30 +2,35 @@
 import './VLayoutItem.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { defineComponent } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
-export const VLayoutItem = defineComponent({
+export const makeVLayoutItemProps = propsFactory({
+  position: {
+    type: String as PropType<'top' | 'right' | 'bottom' | 'left'>,
+    required: true,
+  },
+  size: {
+    type: [Number, String],
+    default: 300,
+  },
+  modelValue: Boolean,
+
+  ...makeComponentProps(),
+  ...makeLayoutItemProps(),
+}, 'VLayoutItem')
+
+export const VLayoutItem = genericComponent()({
   name: 'VLayoutItem',
 
-  props: {
-    position: {
-      type: String as PropType<'top' | 'right' | 'bottom' | 'left'>,
-      required: true,
-    },
-    size: {
-      type: [Number, String],
-      default: 300,
-    },
-    modelValue: Boolean,
-    ...makeLayoutItemProps(),
-  },
+  props: makeVLayoutItemProps(),
 
   setup (props, { slots }) {
     const { layoutItemStyles } = useLayoutItem({
@@ -42,11 +47,17 @@ export const VLayoutItem = defineComponent({
       <div
         class={[
           'v-layout-item',
+          props.class,
         ]}
-        style={ layoutItemStyles.value }
+        style={[
+          layoutItemStyles.value,
+          props.style,
+        ]}
       >
         { slots.default?.() }
       </div>
     )
   },
 })
+
+export type VLayoutItem = InstanceType<typeof VLayoutItem>

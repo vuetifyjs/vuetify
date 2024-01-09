@@ -1,18 +1,33 @@
 ---
+backmatter: false
+emphasized: true
+fluid: true
 meta:
+  nav: Made with Vuetify
   title: Made with Vuetify
-  description: todo
-  keywords: todo
+  description: Check out these amazing projects built using Vuetify.
+  keywords: made with vuetify, vuetify projects, vuetify apps, vuetify plugins, vuetify themes
 related:
-  - /getting-started/wireframes/
-  - /features/theme/
-  - /about/sponsors-and-backers/
+  - /getting-started/installation/
+  - /resources/themes/
+  - /resources/ui-kits/
 ---
+
+<script setup>
+  import MadeWithVuetify from '@/components/doc/MadeWithVuetify.vue'
+  import MadeWithVueAttribution from '@/components/doc/MadeWithVueAttribution.vue'
+</script>
 
 # Made with Vuetify
 
-A collection of projects made with Vuetify. See what others are creating in the ecosystem. Powered by [made with vue.js](https://madewithvuejs.com/vuetify?ref=vuetifyjs.com).
+Check out these amazing projects built using Vuetify.
 
-<!-- <vuetify-projects /> -->
+<page-features />
 
-<backmatter />
+<entry />
+
+<made-with-vuetify pagination />
+
+<br />
+
+<made-with-vue-attribution />

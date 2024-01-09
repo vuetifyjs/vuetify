@@ -3,9 +3,11 @@
 
 .v-color-picker-canvas
   $root: &
+  display: flex
   position: relative
   overflow: hidden
-  contain: strict
+  contain: content
+  touch-action: none
 
   &__dot
     position: absolute

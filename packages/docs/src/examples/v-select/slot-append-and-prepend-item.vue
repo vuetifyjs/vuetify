@@ -1,66 +1,124 @@
 <template>
-  <v-container fluid>
-    <v-select
-      v-model="selectedFruits"
-      :items="fruits"
-      label="Favorite Fruits"
-      multiple
-    >
-      <template v-slot:prepend-item>
-        <v-list-item
-          ripple
-          @click="toggle"
-        >
-          <v-list-item-action>
-            <v-icon :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''">
-              {{ icon }}
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>
-              Select All
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-divider class="mt-2"></v-divider>
-      </template>
-      <template v-slot:append-item>
-        <v-divider class="mb-2"></v-divider>
-        <v-list-item disabled>
-          <v-list-item-avatar color="grey lighten-3">
-            <v-icon>
-              mdi-food-apple
-            </v-icon>
-          </v-list-item-avatar>
+  <v-select
+    v-model="selectedFruits"
+    :items="fruits"
+    label="Favorite Fruits"
+    multiple
+  >
+    <template v-slot:prepend-item>
+      <v-list-item
+        title="Select All"
+        @click="toggle"
+      >
+        <template v-slot:prepend>
+          <v-checkbox-btn
+            :color="likesSomeFruit ? 'indigo-darken-4' : undefined"
+            :indeterminate="likesSomeFruit && !likesAllFruit"
+            :model-value="likesSomeFruit"
+          ></v-checkbox-btn>
+        </template>
+      </v-list-item>
 
-          <v-list-item-content v-if="likesAllFruit">
-            <v-list-item-title>
-              Holy smokes, someone call the fruit police!
-            </v-list-item-title>
-          </v-list-item-content>
+      <v-divider class="mt-2"></v-divider>
+    </template>
 
-          <v-list-item-content v-else-if="likesSomeFruit">
-            <v-list-item-title>
-              Fruit Count
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              {{ selectedFruits.length }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
+    <template v-slot:append-item>
+      <v-divider class="mb-2"></v-divider>
 
-          <v-list-item-content v-else>
-            <v-list-item-title>
-              How could you not like fruit?
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              Go ahead, make a selection above!
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </template>
-    </v-select>
-  </v-container>
+      <v-list-item
+        :subtitle="subtitle"
+        :title="title"
+        disabled
+      >
+        <template v-slot:prepend>
+          <v-avatar icon="mdi-food-apple" color="primary">
+            mdi-food-apple
+          </v-avatar>
+        </template>
+      </v-list-item>
+    </template>
+  </v-select>
 </template>
+
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const fruits = [
+    'Apples',
+    'Apricots',
+    'Avocado',
+    'Bananas',
+    'Blueberries',
+    'Blackberries',
+    'Boysenberries',
+    'Bread fruit',
+    'Cantaloupes (cantalope)',
+    'Cherries',
+    'Cranberries',
+    'Cucumbers',
+    'Currants',
+    'Dates',
+    'Eggplant',
+    'Figs',
+    'Grapes',
+    'Grapefruit',
+    'Guava',
+    'Honeydew melons',
+    'Huckleberries',
+    'Kiwis',
+    'Kumquat',
+    'Lemons',
+    'Limes',
+    'Mangos',
+    'Mulberries',
+    'Muskmelon',
+    'Nectarines',
+    'Olives',
+    'Oranges',
+    'Papaya',
+    'Peaches',
+    'Pears',
+    'Persimmon',
+    'Pineapple',
+    'Plums',
+    'Pomegranate',
+    'Raspberries',
+    'Rose Apple',
+    'Starfruit',
+    'Strawberries',
+    'Tangerines',
+    'Tomatoes',
+    'Watermelons',
+    'Zucchini',
+  ]
+
+  const selectedFruits = ref([])
+
+  const likesAllFruit = computed(() => {
+    return selectedFruits.value.length === fruits.length
+  })
+  const likesSomeFruit = computed(() => {
+    return selectedFruits.value.length > 0
+  })
+  const title = computed(() => {
+    if (likesAllFruit.value) return 'Holy smokes, someone call the fruit police!'
+    if (likesSomeFruit.value) return 'Fruit Count'
+    return 'How could you not like fruit?'
+  })
+  const subtitle = computed(() => {
+    if (likesAllFruit.value) return undefined
+    if (likesSomeFruit.value) return selectedFruits.value.length
+    return 'Go ahead, make a selection above!'
+  })
+
+  function toggle () {
+    if (likesAllFruit.value) {
+      selectedFruits.value = []
+    } else {
+      selectedFruits.value = fruits.slice()
+    }
+  }
+</script>
 
 <script>
   export default {
@@ -121,24 +179,31 @@
         return this.selectedFruits.length === this.fruits.length
       },
       likesSomeFruit () {
-        return this.selectedFruits.length > 0 && !this.likesAllFruit
+        return this.selectedFruits.length > 0
       },
-      icon () {
-        if (this.likesAllFruit) return 'mdi-close-box'
-        if (this.likesSomeFruit) return 'mdi-minus-box'
-        return 'mdi-checkbox-blank-outline'
+      title () {
+        if (this.likesAllFruit) return 'Holy smokes, someone call the fruit police!'
+
+        if (this.likesSomeFruit) return 'Fruit Count'
+
+        return 'How could you not like fruit?'
+      },
+      subtitle () {
+        if (this.likesAllFruit) return undefined
+
+        if (this.likesSomeFruit) return this.selectedFruits.length
+
+        return 'Go ahead, make a selection above!'
       },
     },
 
     methods: {
       toggle () {
-        this.$nextTick(() => {
-          if (this.likesAllFruit) {
-            this.selectedFruits = []
-          } else {
-            this.selectedFruits = this.fruits.slice()
-          }
-        })
+        if (this.likesAllFruit) {
+          this.selectedFruits = []
+        } else {
+          this.selectedFruits = this.fruits.slice()
+        }
       },
     },
   }

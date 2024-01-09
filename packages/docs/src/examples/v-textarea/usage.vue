@@ -1,49 +1,54 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col
-        cols="12"
-        md="6"
-      >
-        <v-textarea
-          name="input-7-1"
-          label="Default style"
-          value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
-          hint="Hint text"
-        ></v-textarea>
-      </v-col>
-      <v-col
-        cols="12"
-        md="6"
-      >
-        <v-textarea
-          solo
-          name="input-7-4"
-          label="Solo textarea"
-        ></v-textarea>
-      </v-col>
-      <v-col
-        cols="12"
-        md="6"
-      >
-        <v-textarea
-          filled
-          name="input-7-4"
-          label="Filled textarea"
-          value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
-        ></v-textarea>
-      </v-col>
-      <v-col
-        cols="12"
-        md="6"
-      >
-        <v-textarea
-          outlined
-          name="input-7-4"
-          label="Outlined textarea"
-          value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
-        ></v-textarea>
-      </v-col>
-    </v-row>
-  </v-container>
+  <usage-example
+    v-model="model"
+    :code="code"
+    :options="options"
+    :name="name"
+  >
+    <div>
+      <v-textarea v-bind="props" v-model="field" hide-details></v-textarea>
+    </div>
+
+    <template v-slot:configuration>
+      <v-text-field v-model="label" label="Label"></v-text-field>
+
+      <v-checkbox v-model="prepend" label="Prepend icon"></v-checkbox>
+
+      <v-checkbox v-model="clearable" label="Clearable"></v-checkbox>
+    </template>
+  </usage-example>
 </template>
+
+<script setup>
+  // Utilities
+  import { computed, ref, watch } from 'vue'
+  import { propsToString } from '@/util/helpers'
+
+  const name = 'v-textarea'
+  const model = ref('default')
+  const clearable = ref(false)
+  const field = ref()
+  const label = ref('Label')
+  const prepend = ref(false)
+  const options = ['outlined', 'underlined', 'solo', 'solo-filled', 'solo-inverted']
+  const props = computed(() => {
+    return {
+      clearable: clearable.value || undefined,
+      label: label.value,
+      'prepend-icon': prepend.value ? '$vuetify' : undefined,
+      variant: model.value === 'default' ? undefined : model.value,
+    }
+  })
+
+  const slots = computed(() => {
+    return ``
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
+
+  watch(clearable, () => {
+    if (!field.value) field.value = 'Hover to Clear me'
+  })
+</script>

@@ -17,9 +17,9 @@
         <v-card-text>
           <v-text-field
             label="Email"
-            placeholder="john@vuetifyjs.com"
+            placeholder="john@google.com"
           ></v-text-field>
-          <span class="text-caption grey--text text--darken-1">
+          <span class="text-caption text-grey-darken-1">
             This is the email you will use to login to your Vuetify account
           </span>
         </v-card-text>
@@ -35,7 +35,7 @@
             label="Confirm Password"
             type="password"
           ></v-text-field>
-          <span class="text-caption grey--text text--darken-1">
+          <span class="text-caption text-grey-darken-1">
             Please enter a password for your account
           </span>
         </v-card-text>
@@ -52,7 +52,7 @@
           <h3 class="text-h6 font-weight-light mb-2">
             Welcome to Vuetify
           </h3>
-          <span class="text-caption grey--text">Thanks for signing up!</span>
+          <span class="text-caption text-grey">Thanks for signing up!</span>
         </div>
       </v-window-item>
     </v-window>
@@ -62,7 +62,7 @@
     <v-card-actions>
       <v-btn
         v-if="step > 1"
-        text
+        variant="text"
         @click="step--"
       >
         Back
@@ -71,7 +71,7 @@
       <v-btn
         v-if="step < 3"
         color="primary"
-        depressed
+        variant="flat"
         @click="step++"
       >
         Next
@@ -79,6 +79,20 @@
     </v-card-actions>
   </v-card>
 </template>
+
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const step = ref(1)
+
+  const currentTitle = computed(() => {
+    switch (step.value) {
+      case 1: return 'Sign-up'
+      case 2: return 'Create a password'
+      default: return 'Account created'
+    }
+  })
+</script>
 
 <script>
   export default {

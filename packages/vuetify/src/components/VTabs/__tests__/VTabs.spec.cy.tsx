@@ -1,7 +1,11 @@
 /// <reference types="../../../../types/cypress" />
 
-import { createRouter, createWebHistory } from 'vue-router'
+// Components
 import { VTab, VTabs } from '../'
+
+// Utilities
+import { ref } from 'vue'
+import { createRouter, createWebHistory } from 'vue-router'
 
 describe('VTabs', () => {
   it('should respond to clicks', () => {
@@ -15,16 +19,11 @@ describe('VTabs', () => {
     ))
 
     cy.get('.v-tab').eq(1).click()
-
-    cy.vue().then(wrapper => {
-      const tabs = wrapper.findComponent('.v-tabs')
-      const emits = tabs.emitted('update:modelValue')
-
-      expect(emits).to.deep.equal([
+      .emitted(VTabs, 'update:modelValue')
+      .should('deep.equal', [
         ['foo'], // tabs will have initially set first tab as selected because of mandatory
         ['bar'],
       ])
-    })
   })
 
   it('should render slider', () => {
@@ -36,8 +35,7 @@ describe('VTabs', () => {
     ))
 
     cy.get('.v-tab').eq(0).find('.v-tab__slider').should('exist')
-
-    cy.get('.v-tab').eq(1).click().find('.v-tab__slider').should('exist')
+      .get('.v-tab').eq(1).click().find('.v-tab__slider').should('exist')
   })
 
   it('should hide slider', () => {
@@ -49,26 +47,25 @@ describe('VTabs', () => {
     ))
 
     cy.get('.v-tab').eq(0).find('.v-tab__slider').should('not.exist')
-
-    cy.get('.v-tab').eq(1).click().find('.v-tab__slider').should('not.exist')
+      .get('.v-tab').eq(1).click().find('.v-tab__slider').should('not.exist')
   })
 
   it('should respond to v-model changes', () => {
-    cy.mount(({ modelValue }: any) => (
+    cy.mount(({ modelValue }: { modelValue: string }) => (
       <VTabs modelValue={ modelValue }>
         <VTab value="foo">foo</VTab>
         <VTab value="bar">bar</VTab>
       </VTabs>
-    ))
-
-    cy.get('.v-tab').eq(0).should('have.class', 'v-tab--selected')
-
-    cy.vue().then(wrapper => {
-      wrapper.setProps({ modelValue: 'bar' })
+    ), {
+      props: {
+        modelValue: 'foo',
+      },
     })
 
-    cy.get('.v-tab').eq(0).should('not.have.class', 'v-tab--selected')
-    cy.get('.v-tab').eq(1).should('have.class', 'v-tab--selected')
+    cy.get('.v-tab').eq(0).should('have.class', 'v-tab--selected')
+      .setProps({ modelValue: 'bar' })
+      .get('.v-tab').eq(0).should('not.have.class', 'v-tab--selected')
+      .get('.v-tab').eq(1).should('have.class', 'v-tab--selected')
   })
 
   it('should react to router changes', () => {
@@ -97,16 +94,16 @@ describe('VTabs', () => {
       },
     })
 
-    cy.get('.v-tab').eq(1).click().then(() => {
-      expect(router.currentRoute.value.path).to.equal('/about')
-    })
-
-    cy.get('.v-tabs').then(() => {
-      router.push('/')
-    })
-
-    cy.get('.v-tab').eq(0).should('not.have.class', 'v-tab--selected')
-    cy.get('.v-tab').eq(1).should('have.class', 'v-tab--selected')
+    cy.get('.v-tab').eq(1).click()
+      .then(() => {
+        expect(router.currentRoute.value.path).to.equal('/about')
+      })
+      .get('.v-tabs')
+      .then(() => {
+        router.push('/')
+      })
+      .get('.v-tab').eq(0).should('not.have.class', 'v-tab--selected')
+      .get('.v-tab').eq(1).should('have.class', 'v-tab--selected')
   })
 
   it('should render tabs vertically', () => {
@@ -118,7 +115,34 @@ describe('VTabs', () => {
     ))
 
     cy.get('.v-tabs').should('have.class', 'v-tabs--vertical')
+      .get('.v-tab').eq(1).click().should('have.class', 'v-tab--selected')
+  })
 
-    cy.get('.v-tab').eq(1).click().should('have.class', 'v-tab--selected')
+  // https://github.com/vuetifyjs/vuetify/issues/15237
+  it('should not change model value if tab items are hidden with v-show', () => {
+    const model = ref('B')
+    cy.mount(({ show = true }: { show?: boolean }) => (
+      <div v-show={ show }>
+        <VTabs modelValue={ model.value } onUpdate:modelValue={ v => model.value = v as string }>
+          <VTab value="A">A</VTab>
+          <VTab value="B">B</VTab>
+          <VTab value="C">C</VTab>
+        </VTabs>
+      </div>
+    ))
+      .get('.v-tabs').should('be.visible')
+      .then(() => {
+        expect(model.value).to.equal('B')
+      })
+      .setProps({ show: false })
+      .get('.v-tabs').should('not.be.visible')
+      .then(() => {
+        expect(model.value).to.equal('B')
+      })
+      .setProps({ show: true })
+      .get('.v-tabs').should('be.visible')
+      .then(() => {
+        expect(model.value).to.equal('B')
+      })
   })
 })

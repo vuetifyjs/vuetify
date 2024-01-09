@@ -1,101 +1,95 @@
 <template>
   <v-app-bar
     id="app-bar"
-    app
-    class="border-b"
+    :image="image"
+    border="b"
     flat
   >
-    <app-bar-logo
-      :alt="lgAndUp"
-      class="mr-2"
-    />
+    <template #prepend>
+      <app-bar-logo />
 
-    <v-app-bar-nav-icon
-      class="hidden-lg-and-up"
-      @click="app.drawer = !app.drawer"
-    />
+      <app-btn
+        v-if="route.meta.layout !== 'home' && mdAndDown"
+        icon="mdi-menu"
+        @click="app.drawer = !app.drawer"
+      />
 
-    <v-spacer />
+      <app-search />
+    </template>
 
-    <template v-if="smAndUp">
-      <app-vertical-divider />
-
-      <app-bar-learn-menu />
-
-      <app-bar-support-menu />
-
+    <template #append>
       <template v-if="mdAndUp">
-        <app-bar-team-link />
+        <app-bar-learn-menu />
 
-        <app-vertical-divider />
+        <app-bar-support-menu />
 
-        <app-bar-store-link />
+        <app-bar-ecosystem-menu />
 
-        <app-bar-jobs-link />
+        <app-bar-team-link v-if="lgAndUp" />
 
-        <!-- <app-bar-notifications-menu /> -->
+        <app-bar-playground-link v-if="lgAndUp" />
 
-        <app-vertical-divider />
+        <app-bar-enterprise-link />
+      </template>
+
+      <template v-if="!user.quickbar">
+        <app-vertical-divider v-if="smAndUp" class="ms-3 me-2" />
+
+        <app-bar-store-link v-if="smAndUp" />
+
+        <app-bar-jobs-link v-if="smAndUp" />
+
+        <app-bar-notifications-menu />
+
+        <app-bar-language-menu v-if="smAndUp" />
 
         <app-bar-settings-toggle />
-
-        <app-bar-language-menu />
       </template>
+
+      <app-vertical-divider v-if="lgAndUp" class="ms-2 me-3" />
+
+      <vo-auth-dialog />
     </template>
   </v-app-bar>
 </template>
 
-<script lang="ts">
+<script setup>
   // Components
+  import AppBarEcosystemMenu from './EcosystemMenu.vue'
+  import AppBarEnterpriseLink from './EnterpriseLink.vue'
   import AppBarJobsLink from './JobsLink.vue'
   import AppBarLanguageMenu from './LanguageMenu.vue'
   import AppBarLearnMenu from './LearnMenu.vue'
   import AppBarLogo from './Logo.vue'
-  // import AppBarNotificationsMenu from './NotificationsMenu.vue'
+  import AppBarNotificationsMenu from './NotificationsMenu.vue'
+  import AppBarPlaygroundLink from './PlaygroundLink.vue'
   import AppBarSettingsToggle from './SettingsToggle.vue'
   import AppBarStoreLink from './StoreLink.vue'
   import AppBarSupportMenu from './SupportMenu.vue'
   import AppBarTeamLink from './TeamLink.vue'
+  import AppSearch from '@/components/app/search/Search.vue'
   import AppVerticalDivider from '@/components/app/VerticalDivider.vue'
 
   // Composables
   import { useAppStore } from '@/store/app'
-  import { useDisplay } from 'vuetify'
+  import { useDisplay, useTheme } from 'vuetify'
+  import { useRoute } from 'vue-router'
+
+  // Stores
+  import { useUserStore } from '@vuetify/one'
 
   // Utilities
-  import { defineComponent } from 'vue'
+  import { computed } from 'vue'
 
-  export default defineComponent({
-    name: 'AppBar',
+  const app = useAppStore()
+  const user = useUserStore()
+  const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
+  const route = useRoute()
+  const theme = useTheme()
 
-    components: {
-      AppBarJobsLink,
-      AppBarLanguageMenu,
-      AppBarLearnMenu,
-      AppBarLogo,
-      // AppBarNotificationsMenu,
-      AppBarSettingsToggle,
-      AppBarStoreLink,
-      AppBarSupportMenu,
-      AppBarTeamLink,
-      AppVerticalDivider,
-    },
+  const image = computed(() => {
+    if (['dark', 'light'].includes(theme.name.value)) return undefined
 
-    setup () {
-      const { lgAndUp, smAndUp, mdAndUp } = useDisplay()
-      const app = useAppStore()
-
-      // data
-      const dark = false
-
-      return {
-        app,
-        dark,
-        lgAndUp,
-        mdAndUp,
-        smAndUp,
-      }
-    },
-
+    return `https://cdn.vuetifyjs.com/docs/images/themes/${theme.name.value}-app-bar.png`
   })
 </script>

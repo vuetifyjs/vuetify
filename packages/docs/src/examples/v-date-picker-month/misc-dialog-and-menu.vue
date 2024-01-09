@@ -6,7 +6,7 @@
     >
       <v-menu
         ref="menu"
-        v-model="menu"
+        v-model="menuActive"
         v-model:return-value="date"
         :close-on-content-click="false"
         transition="scale-transition"
@@ -32,16 +32,16 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            text
+            variant="text"
             color="primary"
             @click="menu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            text
+            variant="text"
             color="primary"
-            @click="$refs.menu.save(date)"
+            @click="menu.save(date)"
           >
             OK
           </v-btn>
@@ -77,16 +77,16 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            text
+            variant="text"
             color="primary"
             @click="modal = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            text
+            variant="text"
             color="primary"
-            @click="$refs.dialog.save(date)"
+            @click="dialog.save(date)"
           >
             OK
           </v-btn>
@@ -96,11 +96,22 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const menu = ref()
+  const dialog = ref()
+
+  const date = ref(new Date().toISOString().substr(0, 7))
+  const menuActive = ref(false)
+  const modal = ref(false)
+</script>
+
 <script>
   export default {
     data: () => ({
       date: new Date().toISOString().substr(0, 7),
-      menu: false,
+      menuActive: false,
       modal: false,
     }),
   }

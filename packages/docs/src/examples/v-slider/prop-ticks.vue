@@ -4,7 +4,7 @@
 
     <v-slider
       step="10"
-      ticks
+      show-ticks
     ></v-slider>
 
     <div class="text-caption">Always show ticks</div>
@@ -33,6 +33,15 @@
     ></v-slider>
   </div>
 </template>
+
+<script setup>
+  const tickLabels = {
+    0: 'Figs',
+    1: 'Lemon',
+    2: 'Pear',
+    3: 'Apple',
+  }
+</script>
 
 <script>
   export default {

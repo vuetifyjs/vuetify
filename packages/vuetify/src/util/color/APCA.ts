@@ -3,6 +3,8 @@
  * @licence https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
  * @see https://www.w3.org/WAI/GL/task-forces/silver/wiki/Visual_Contrast_of_Text_Subgroup
  */
+// Types
+import type { RGB } from '@/util'
 
 // MAGICAL NUMBERS
 
@@ -40,15 +42,15 @@ const loConFactor = 12.82051282051282 // = 1/0.078,
 const loConOffset = 0.06 // The simple offset
 const loClip = 0.001 // Output clip (lint trap #2)
 
-export function APCAcontrast (text: number, background: number) {
+export function APCAcontrast (text: RGB, background: RGB) {
   // Linearize sRGB
-  const Rtxt = ((text >> 16 & 0xff) / 255) ** mainTRC
-  const Gtxt = ((text >> 8 & 0xff) / 255) ** mainTRC
-  const Btxt = ((text >> 0 & 0xff) / 255) ** mainTRC
+  const Rtxt = (text.r / 255) ** mainTRC
+  const Gtxt = (text.g / 255) ** mainTRC
+  const Btxt = (text.b / 255) ** mainTRC
 
-  const Rbg = ((background >> 16 & 0xff) / 255) ** mainTRC
-  const Gbg = ((background >> 8 & 0xff) / 255) ** mainTRC
-  const Bbg = ((background >> 0 & 0xff) / 255) ** mainTRC
+  const Rbg = (background.r / 255) ** mainTRC
+  const Gbg = (background.g / 255) ** mainTRC
+  const Bbg = (background.b / 255) ** mainTRC
 
   // Apply the standard coefficients and sum to Y
   let Ytxt = (Rtxt * Rco) + (Gtxt * Gco) + (Btxt * Bco)

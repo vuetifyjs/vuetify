@@ -1,21 +1,21 @@
 export type OpenStrategyFn = (data: {
-  id: string
+  id: unknown
   value: boolean
-  opened: Set<string>
-  children: Map<string, string[]>
-  parents: Map<string, string>
+  opened: Set<unknown>
+  children: Map<unknown, unknown[]>
+  parents: Map<unknown, unknown>
   event?: Event
-}) => Set<string>
+}) => Set<unknown>
 
 export type OpenSelectStrategyFn = (data: {
-  id: string
+  id: unknown
   value: boolean
-  opened: Set<string>
-  selected: Map<string, 'on' | 'off' | 'indeterminate'>
-  children: Map<string, string[]>
-  parents: Map<string, string>
+  opened: Set<unknown>
+  selected: Map<unknown, 'on' | 'off' | 'indeterminate'>
+  children: Map<unknown, unknown[]>
+  parents: Map<unknown, unknown>
   event?: Event
-}) => Set<string> | null
+}) => Set<unknown> | null
 
 export type OpenStrategy = {
   open: OpenStrategyFn
@@ -25,7 +25,7 @@ export type OpenStrategy = {
 export const singleOpenStrategy: OpenStrategy = {
   open: ({ id, value, opened, parents }) => {
     if (value) {
-      const newOpened = new Set<string>()
+      const newOpened = new Set<unknown>()
       newOpened.add(id)
 
       let parent = parents.get(id)
@@ -69,7 +69,7 @@ export const listOpenStrategy: OpenStrategy = {
   select: ({ id, value, opened, parents }) => {
     if (!value) return opened
 
-    const path: string[] = []
+    const path: unknown[] = []
 
     let parent = parents.get(id)
 

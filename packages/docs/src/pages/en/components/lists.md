@@ -1,38 +1,50 @@
 ---
-nav: Lists
 meta:
+  nav: Lists
   title: List component
   description: The list component is a continuous group of text, images and icons that may contain primary or supplemental actions.
   keywords: lists, vuetify list component, vue list component
 related:
   - /components/item-groups/
-  - /components/list-item-groups/
-  - /components/subheaders/
+  - /components/avatars/
+  - /components/sheets/
+features:
+  figma: true
+  github: /components/VList/
+  label: 'C: VList'
+  report: true
+  spec: https://m2.material.io/components/lists
 ---
 
 # Lists
 
 The `v-list` component is used to display information. It can contain an avatar, content, actions, subheaders and much more. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a consistent styling for organizing groups of text and images.
 
-<entry />
+<page-features />
 
 ## Usage
 
 Lists come in three main variations. **single-line** (default), **two-line** and **three-line**. The line declaration specifies the minimum height of the item and can also be controlled from `v-list` with the same prop.
 
-<example file="v-list/usage" />
+<usage name="v-list" />
+
+<entry />
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-list](/api/v-list/) | Primary Component |
+| [v-list-group](/api/v-list-group/) | Sub-component used to display or hide groups of items |
+| [v-list-subheader](/api/v-list-subheader/) | Sub-component used to separate groups of items |
+| [v-list-item](/api/v-list-item/) | Sub-component used to display a single item or modify the `v-list` state |
+| [v-list-item-title](/api/v-list-item-title/) | Sub-component used to display the title of a list item. Wraps the `#title` slot |
+| [v-list-item-subtitle](/api/v-list-item-subtitle/) | Sub-component used to display the subtitle of a list item. Wraps the `#subtitle` slot |
+| [v-list-item-action](/api/v-list-item-action/) | Sub-component used to display [v-checkbox](/components/checkboxes/) or [v-switch](/components/switches/) |
+| [v-list-img](/api/v-list-img/) | Sub-component that is used to wrap a the [v-img](/components/images/) component |
+| [v-list-item-media](/api/v-list-item-media/) | Sub-component that is used to wrap a the [v-img](/components/images/) component |
 
-<!-- ## Caveats
-
-<alert type="info">
-
-  If you are looking for stateful list items, please check out [v-list-item-group](/components/list-item-groups).
-
-</alert> -->
+<api-inline hide-links />
 
 ## Examples
 
@@ -121,41 +133,3 @@ Lists can contain subheaders, dividers, and can contain 1 or more lines. The sub
 A **three-line** list with actions. Utilizing **v-list-group**, easily connect actions to your tiles.
 
 <example file="v-list/misc-action-and-item-groups" />
-
-<!-- #### Action stack
-
-A list can contain a stack within an action. This is useful when you need to display meta text next to your action item.
-
-<example file="v-list/misc-action-stack" />
-
-#### Card list
-
-A list can be combined with a card.
-
-<example file="v-list/misc-card-list" />
-
-#### Card list
-
-A list can be combined with a card.
-
-<example file="v-list/misc-card-list" />
-
-#### Simple avatar list
-
-A simple list utilizing `v-list-item-icon`, `v-list-item-title` and `v-list-item-avatar`.
-
-<example file="v-list/misc-simple-avatar-list" />
-
-#### Single line list
-
-Here we combine **v-list-item-avatar** and **v-list-item-icon** in a single-line list.
-
-<example file="v-list/misc-single-line-list" />
-
-#### Subheadings and dividers
-
-Lists can contain multiple subheaders and dividers.
-
-<example file="v-list/misc-subheadings-and-dividers" /> -->
-
-<backmatter />

@@ -1,6 +1,7 @@
 import type { Plugin } from 'vite'
 import path from 'path'
 import fs from 'fs/promises'
+import { fileURLToPath } from 'url'
 
 const ID = '@vuetify-examples'
 
@@ -17,7 +18,7 @@ export function Examples (): Plugin {
     async load (id) {
       if (!id.startsWith(ID)) return
 
-      const examplesDir = path.resolve(__dirname, '../src/examples')
+      const examplesDir = fileURLToPath(new URL('../src/examples', import.meta.url))
 
       if (id === ID) {
         const dirs = (await fs.readdir(examplesDir, { encoding: 'utf8' }))

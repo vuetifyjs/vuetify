@@ -22,20 +22,45 @@
       <div class="text-h6 font-weight-light mb-2">
         User Registrations
       </div>
-      <div class="subheading font-weight-light grey--text">
+      <div class="subheading font-weight-light text-grey">
         Last Campaign Performance
       </div>
       <v-divider class="my-2"></v-divider>
       <v-icon
-        class="mr-2"
-        small
+        class="me-2"
+        size="small"
       >
         mdi-clock
       </v-icon>
-      <span class="text-caption grey--text font-weight-light">last registration 26 minutes ago</span>
+      <span class="text-caption text-grey font-weight-light">last registration 26 minutes ago</span>
     </v-card-text>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const labels = ref([
+    '12am',
+    '3am',
+    '6am',
+    '9am',
+    '12pm',
+    '3pm',
+    '6pm',
+    '9pm',
+  ])
+  const value = ref([
+    200,
+    675,
+    410,
+    390,
+    310,
+    460,
+    250,
+    240,
+  ])
+</script>
 
 <script>
   export default {

@@ -1,49 +1,41 @@
 <template>
-  <v-row justify="space-around">
-    <v-col cols="12">
-      <v-slider
-        v-model="slider"
-        label="Slider"
-        v-bind="$attrs"
-      ></v-slider>
-    </v-col>
-  </v-row>
+  <usage-example
+    v-model="model"
+    :code="code"
+    :options="options"
+    :name="name"
+  >
+    <div>
+      <v-slider v-bind="props"></v-slider>
+    </div>
+
+    <template v-slot:configuration>
+      <v-checkbox v-model="disabled" label="Disabled"></v-checkbox>
+    </template>
+  </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'Usage',
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-    inheritAttrs: false,
+  const name = 'v-slider'
+  const model = ref('default')
+  const options = ['vertical']
+  const disabled = ref(false)
+  const props = computed(() => {
+    return {
+      direction: model.value === 'vertical' ? 'vertical' : undefined,
+      disabled: disabled.value || undefined,
+    }
+  })
 
-    data: () => ({
-      slider: 0,
-      defaults: {
-        dense: false,
-        disabled: false,
-        'hide-details': false,
-        hint: 'Im a hint',
-        'inverse-label': false,
-        max: 50,
-        min: -50,
-        'persistent-hint': false,
-        readonly: false,
-        vertical: false,
-      },
-      options: {
-        booleans: [
-          'disabled',
-          'hide-details',
-          'inverse-label',
-          'persistent-hint',
-          'readonly',
-        ],
-        sliders: {
-          min: [-100, 100],
-          max: [-100, 100],
-        },
-      },
-      tabs: ['dense', 'vertical'],
-    }),
-  }
+  const slots = computed(() => {
+    return ``
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>

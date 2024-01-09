@@ -1,5 +1,4 @@
 // Utilities
-import { getCurrentInstance, IN_BROWSER, propsFactory } from '@/util'
 import {
   computed,
   nextTick,
@@ -7,6 +6,7 @@ import {
   resolveDynamicComponent,
   toRef,
 } from 'vue'
+import { deepEqual, getCurrentInstance, hasEvent, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref, SetupContext } from 'vue'
@@ -17,7 +17,9 @@ import type {
   RouteLocationNormalizedLoaded,
   RouteLocationRaw,
   Router,
+  UseLinkOptions,
 } from 'vue-router'
+import type { EventProp } from '@/util'
 
 export function useRoute (): Ref<RouteLocationNormalizedLoaded | undefined> {
   const vm = getCurrentInstance('useRoute')
@@ -30,9 +32,15 @@ export function useRouter (): Router | undefined {
 }
 
 export interface LinkProps {
-  href?: string
-  replace?: boolean
-  to?: RouteLocationRaw
+  href: string | undefined
+  replace: boolean | undefined
+  to: RouteLocationRaw | undefined
+  exact: boolean | undefined
+}
+
+export interface LinkListeners {
+  onClick?: EventProp | undefined
+  onClickOnce?: EventProp | undefined
 }
 
 export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'> {
@@ -41,12 +49,12 @@ export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'hre
   href: Ref<string | undefined>
 }
 
-export function useLink (props: LinkProps, attrs: SetupContext['attrs']): UseLink {
+export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['attrs']): UseLink {
   const RouterLink = resolveDynamicComponent('RouterLink') as typeof _RouterLink | string
 
   const isLink = computed(() => !!(props.href || props.to))
   const isClickable = computed(() => {
-    return isLink?.value || !!(attrs.onClick || attrs.onClickOnce)
+    return isLink?.value || hasEvent(attrs, 'click') || hasEvent(props, 'click')
   })
 
   if (typeof RouterLink === 'string') {
@@ -57,12 +65,20 @@ export function useLink (props: LinkProps, attrs: SetupContext['attrs']): UseLin
     }
   }
 
-  const link = props.to ? RouterLink.useLink(props as Required<LinkProps>) : undefined
+  const link = props.to ? RouterLink.useLink(props as UseLinkOptions) : undefined
+  const route = useRoute()
 
   return {
-    ...link,
     isLink,
     isClickable,
+    route: link?.route,
+    navigate: link?.navigate,
+    isActive: link && computed(() => {
+      if (!props.exact) return link.isActive?.value
+      if (!route.value) return link.isExactActive?.value
+
+      return link.isExactActive?.value && deepEqual(link.route.value.query, route.value.query)
+    }),
     href: computed(() => props.to ? link?.route.value.href : props.href),
   }
 }
@@ -71,6 +87,7 @@ export const makeRouterProps = propsFactory({
   href: String,
   replace: Boolean,
   to: [String, Object] as PropType<RouteLocationRaw>,
+  exact: Boolean,
 }, 'router')
 
 let inTransition = false

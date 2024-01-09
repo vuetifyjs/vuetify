@@ -1,36 +1,53 @@
-import type { PropType } from 'vue'
+// Utilities
 import { Transition } from 'vue'
-import { acceleratedEasing, deceleratedEasing, defineComponent, nullifyTransforms, standardEasing } from '@/util'
+import {
+  acceleratedEasing,
+  animate,
+  deceleratedEasing,
+  genericComponent,
+  nullifyTransforms,
+  propsFactory,
+  standardEasing,
+} from '@/util'
+import { getTargetBox } from '@/util/box'
 
-export const VDialogTransition = defineComponent({
+// Types
+import type { PropType } from 'vue'
+
+export const makeVDialogTransitionProps = propsFactory({
+  target: [Object, Array] as PropType<HTMLElement | [x: number, y: number]>,
+}, 'v-dialog-transition')
+
+export const VDialogTransition = genericComponent()({
   name: 'VDialogTransition',
 
-  props: {
-    target: Object as PropType<HTMLElement>,
-  },
+  props: makeVDialogTransitionProps(),
 
   setup (props, { slots }) {
     const functions = {
       onBeforeEnter (el: Element) {
         (el as HTMLElement).style.pointerEvents = 'none'
+        ;(el as HTMLElement).style.visibility = 'hidden'
       },
       async onEnter (el: Element, done: () => void) {
         await new Promise(resolve => requestAnimationFrame(resolve))
+        await new Promise(resolve => requestAnimationFrame(resolve))
+        ;(el as HTMLElement).style.visibility = ''
 
         const { x, y, sx, sy, speed } = getDimensions(props.target!, el as HTMLElement)
 
-        const animation = el.animate([
+        const animation = animate(el, [
           { transform: `translate(${x}px, ${y}px) scale(${sx}, ${sy})`, opacity: 0 },
-          { transform: '' },
+          {},
         ], {
           duration: 225 * speed,
           easing: deceleratedEasing,
         })
         getChildren(el)?.forEach(el => {
-          el.animate([
+          animate(el, [
             { opacity: 0 },
             { opacity: 0, offset: 0.33 },
-            { opacity: 1 },
+            {},
           ], {
             duration: 225 * 2 * speed,
             easing: standardEasing,
@@ -49,8 +66,8 @@ export const VDialogTransition = defineComponent({
 
         const { x, y, sx, sy, speed } = getDimensions(props.target!, el as HTMLElement)
 
-        const animation = el.animate([
-          { transform: '' },
+        const animation = animate(el, [
+          {},
           { transform: `translate(${x}px, ${y}px) scale(${sx}, ${sy})`, opacity: 0 },
         ], {
           duration: 125 * speed,
@@ -58,7 +75,7 @@ export const VDialogTransition = defineComponent({
         })
         animation.finished.then(() => done())
         getChildren(el)?.forEach(el => {
-          el.animate([
+          animate(el, [
             {},
             { opacity: 0, offset: 0.2 },
             { opacity: 0 },
@@ -94,8 +111,8 @@ function getChildren (el: Element) {
   return els && [...els]
 }
 
-function getDimensions (target: HTMLElement, el: HTMLElement) {
-  const targetBox = target.getBoundingClientRect()
+function getDimensions (target: HTMLElement | [x: number, y: number], el: HTMLElement) {
+  const targetBox = getTargetBox(target)
   const elBox = nullifyTransforms(el)
   const [originX, originY] = getComputedStyle(el).transformOrigin.split(' ').map(v => parseFloat(v))
 
@@ -118,8 +135,8 @@ function getDimensions (target: HTMLElement, el: HTMLElement) {
   const tsx = targetBox.width / elBox.width
   const tsy = targetBox.height / elBox.height
   const maxs = Math.max(1, tsx, tsy)
-  const sx = tsx / maxs
-  const sy = tsy / maxs
+  const sx = tsx / maxs || 0
+  const sy = tsy / maxs || 0
 
   // Animate elements larger than 12% of the screen area up to 1.5x slower
   const asa = (elBox.width * elBox.height) / (window.innerWidth * window.innerHeight)
@@ -135,3 +152,5 @@ function getDimensions (target: HTMLElement, el: HTMLElement) {
     speed,
   }
 }
+
+export type VDialogTransition = InstanceType<typeof VDialogTransition>

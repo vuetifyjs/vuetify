@@ -1,85 +1,55 @@
 <template>
-  <v-form>
-    <v-container>
-      <v-row>
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            density="default"
-            label="Default"
-            placeholder="Default"
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            density="comfortable"
-            label="Comfortable"
-            placeholder="Comfortable"
-            variant="filled"
-            rounded
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            density="compact"
-            label="Compact"
-            placeholder="Compact"
-            variant="solo"
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            density="default"
-            label="Default"
-            placeholder="Default"
-            variant="underlined"
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            density="comfortable"
-            label="Comfortable"
-            placeholder="Comfortable"
-            variant="plain"
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            density="compact"
-            label="Compact"
-            placeholder="Compact"
-            variant="outlined"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-form>
+  <v-card
+    class="mx-auto"
+    color="grey-lighten-3"
+    max-width="400"
+  >
+    <v-card-text>
+      <v-text-field
+        :loading="loading"
+        density="compact"
+        variant="solo"
+        label="Search templates"
+        append-inner-icon="mdi-magnify"
+        single-line
+        hide-details
+        @click:append-inner="onClick"
+      ></v-text-field>
+    </v-card-text>
+  </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const loaded = ref(false)
+  const loading = ref(false)
+
+  function onClick () {
+    loading.value = true
+    setTimeout(() => {
+      loading.value = false
+      loaded.value = true
+    }, 2000)
+  }
+</script>
+
+<script>
+  export default {
+    data: () => ({
+      loaded: false,
+      loading: false,
+    }),
+
+    methods: {
+      onClick () {
+        this.loading = true
+
+        setTimeout(() => {
+          this.loading = false
+          this.loaded = true
+        }, 2000)
+      },
+    },
+  }
+</script>

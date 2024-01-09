@@ -1,5 +1,5 @@
 <template>
-  <v-container class="grey lighten-5">
+  <v-container class="bg-grey-lighten-5">
     <v-row
       class="mb-6"
       justify="center"
@@ -8,8 +8,8 @@
       <v-col lg="2">
         <v-card
           class="pa-2"
-          outlined
-          tile
+          variant="outlined"
+          rounded="0"
         >
           1 of 3
         </v-card>
@@ -17,8 +17,8 @@
       <v-col md="auto">
         <v-card
           class="pa-2"
-          outlined
-          tile
+          variant="outlined"
+          rounded="0"
         >
           Variable width content
         </v-card>
@@ -26,8 +26,8 @@
       <v-col lg="2">
         <v-card
           class="pa-2"
-          outlined
-          tile
+          variant="outlined"
+          rounded="0"
         >
           3 of 3
         </v-card>
@@ -37,8 +37,8 @@
       <v-col>
         <v-card
           class="pa-2"
-          outlined
-          tile
+          variant="outlined"
+          rounded="0"
         >
           1 of 3
         </v-card>
@@ -46,8 +46,8 @@
       <v-col md="auto">
         <v-card
           class="pa-2"
-          outlined
-          tile
+          variant="outlined"
+          rounded="0"
         >
           Variable width content
         </v-card>
@@ -55,8 +55,8 @@
       <v-col lg="2">
         <v-card
           class="pa-2"
-          outlined
-          tile
+          variant="outlined"
+          rounded="0"
         >
           3 of 3
         </v-card>

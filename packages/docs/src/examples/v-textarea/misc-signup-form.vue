@@ -3,29 +3,8 @@
     class="mx-auto"
     style="max-width: 500px;"
   >
-    <v-system-bar
-      color="deep-purple darken-4"
-      dark
-    >
-      <v-spacer></v-spacer>
-      <v-icon small>
-        mdi-square
-      </v-icon>
-      <v-icon
-        class="ml-1"
-        small
-      >
-        mdi-circle
-      </v-icon>
-      <v-icon
-        class="ml-1"
-        small
-      >
-        mdi-triangle
-      </v-icon>
-    </v-system-bar>
     <v-toolbar
-      color="deep-purple accent-4"
+      color="deep-purple-accent-4"
       cards
       dark
       flat
@@ -46,13 +25,13 @@
     </v-toolbar>
     <v-form
       ref="form"
-      v-model="form"
+      v-model="isValid"
       class="pa-4 pt-6"
     >
       <v-text-field
         v-model="password"
         :rules="[rules.password, rules.length(6)]"
-        filled
+        variant="filled"
         color="deep-purple"
         counter="6"
         label="Password"
@@ -61,14 +40,14 @@
       ></v-text-field>
       <v-text-field
         v-model="phone"
-        filled
+        variant="filled"
         color="deep-purple"
         label="Phone number"
       ></v-text-field>
       <v-text-field
         v-model="email"
         :rules="[rules.email]"
-        filled
+        variant="filled"
         color="deep-purple"
         label="Email address"
         type="email"
@@ -76,7 +55,7 @@
       <v-textarea
         v-model="bio"
         auto-grow
-        filled
+        variant="filled"
         color="deep-purple"
         label="Bio"
         rows="1"
@@ -103,30 +82,27 @@
     <v-divider></v-divider>
     <v-card-actions>
       <v-btn
-        text
-        @click="$refs.form.reset()"
+        variant="text"
+        @click="form.reset()"
       >
         Clear
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn
-        :disabled="!form"
+        :disabled="!isValid"
         :loading="isLoading"
-        class="white--text"
-        color="deep-purple accent-4"
-        depressed
+        color="deep-purple-accent-4"
       >
         Submit
       </v-btn>
     </v-card-actions>
     <v-dialog
       v-model="dialog"
-      absolute
       max-width="400"
       persistent
     >
       <v-card>
-        <v-card-title class="text-h5 grey lighten-3">
+        <v-card-title class="text-h5 bg-grey-lighten-3">
           Legal
         </v-card-title>
         <v-card-text>
@@ -135,15 +111,15 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-btn
-            text
+            variant="text"
             @click="agreement = false, dialog = false"
           >
             No
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn
-            class="white--text"
-            color="deep-purple accent-4"
+            color="deep-purple"
+            variant="tonal"
             @click="agreement = true, dialog = false"
           >
             Yes
@@ -154,6 +130,28 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const rules = {
+    email: v => !!(v || '').match(/@/) || 'Please enter a valid email',
+    length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
+    password: v => !!(v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) || 'Password must contain an upper case letter, a numeric character, and a special character',
+    required: v => !!v || 'This field is required',
+  }
+
+  const form = ref()
+
+  const agreement = ref(false)
+  const bio = ref('Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts')
+  const dialog = ref(false)
+  const email = ref()
+  const isValid = ref(false)
+  const isLoading = ref(false)
+  const password = ref()
+  const phone = ref()
+</script>
+
 <script>
   export default {
     data: () => ({
@@ -161,7 +159,7 @@
       bio: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts',
       dialog: false,
       email: undefined,
-      form: false,
+      isValid: false,
       isLoading: false,
       password: undefined,
       phone: undefined,

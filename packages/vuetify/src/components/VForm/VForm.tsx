@@ -1,20 +1,28 @@
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { createForm, makeFormProps } from '@/composables/form'
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { ref } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { SubmitEventPromise } from '@/composables/form'
 
-export const VForm = defineComponent({
+export const makeVFormProps = propsFactory({
+  ...makeComponentProps(),
+  ...makeFormProps(),
+}, 'VForm')
+
+type VFormSlots = {
+  default: ReturnType<typeof createForm>
+}
+
+export const VForm = genericComponent<VFormSlots>()({
   name: 'VForm',
 
-  props: {
-    ...makeFormProps(),
-  },
+  props: makeVFormProps(),
 
   emits: {
     'update:modelValue': (val: boolean | null) => true,
@@ -54,7 +62,11 @@ export const VForm = defineComponent({
     useRender(() => ((
       <form
         ref={ formRef }
-        class="v-form"
+        class={[
+          'v-form',
+          props.class,
+        ]}
+        style={ props.style }
         novalidate
         onReset={ onReset }
         onSubmit={ onSubmit }
@@ -63,7 +75,7 @@ export const VForm = defineComponent({
       </form>
     )))
 
-    return useForwardRef(form, formRef)
+    return forwardRefs(form, formRef)
   },
 })
 

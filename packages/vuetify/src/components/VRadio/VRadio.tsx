@@ -1,32 +1,33 @@
 // Components
-import { VSelectionControl } from '@/components/VSelectionControl'
-
-// Composables
-import { IconValue } from '@/composables/icons'
+import { makeVSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
-export const VRadio = defineComponent({
+// Types
+import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
+
+export const makeVRadioProps = propsFactory({
+  ...makeVSelectionControlProps({
+    falseIcon: '$radioOff',
+    trueIcon: '$radioOn',
+  }),
+}, 'VRadio')
+
+export const VRadio = genericComponent<VSelectionControlSlots>()({
   name: 'VRadio',
 
-  props: {
-    falseIcon: {
-      type: IconValue,
-      default: '$radioOff',
-    },
-    trueIcon: {
-      type: IconValue,
-      default: '$radioOn',
-    },
-  },
+  props: makeVRadioProps(),
 
   setup (props, { slots }) {
     useRender(() => (
       <VSelectionControl
-        class="v-radio"
-        trueIcon={ props.trueIcon }
-        falseIcon={ props.falseIcon }
+        { ...props }
+        class={[
+          'v-radio',
+          props.class,
+        ]}
+        style={ props.style }
         type="radio"
         v-slots={ slots }
       />

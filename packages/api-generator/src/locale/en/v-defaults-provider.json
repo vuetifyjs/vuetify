@@ -1,5 +1,0 @@
-{
-  "props": {
-    "defaults": "Specify new default prop values for components. Keep in mind that this will be merged with previously defined values"
-  }
-}

@@ -33,13 +33,27 @@
     <v-card-actions class="justify-center">
       <v-btn
         block
-        text
+        variant="text"
       >
         Go to Report
       </v-btn>
     </v-card-actions>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const value = ref([
+    423,
+    446,
+    675,
+    510,
+    590,
+    610,
+    760,
+  ])
+</script>
 
 <script>
   export default {

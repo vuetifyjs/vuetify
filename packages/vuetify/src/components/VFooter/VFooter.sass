@@ -7,9 +7,11 @@
   flex: $footer-flex
   padding: $footer-padding
   position: relative
+  transition: $footer-transition
+  transition-property: height, width, transform, max-width, left, right, top, bottom
 
   // missing from variables
-  // @include tools.border($footer-query)
+  @include tools.border($footer-border...)
   @include tools.elevation($footer-elevation)
   @include tools.position($footer-positions)
   @include tools.rounded($footer-border-radius)

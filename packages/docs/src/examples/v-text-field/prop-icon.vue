@@ -22,8 +22,8 @@
           ></v-text-field>
 
           <v-text-field
-            label="Append outer"
-            append-outer-icon="mdi-map-marker"
+            label="Append inner"
+            append-inner-icon="mdi-map-marker"
           ></v-text-field>
         </v-col>
 
@@ -50,8 +50,8 @@
           ></v-text-field>
 
           <v-text-field
-            label="Append outer"
-            append-outer-icon="mdi-map-marker"
+            label="Append inner"
+            append-inner-icon="mdi-map-marker"
             variant="solo"
           ></v-text-field>
         </v-col>
@@ -79,8 +79,8 @@
           ></v-text-field>
 
           <v-text-field
-            label="Append outer"
-            append-outer-icon="mdi-map-marker"
+            label="Append inner"
+            append-inner-icon="mdi-map-marker"
             variant="outlined"
           ></v-text-field>
         </v-col>
@@ -109,8 +109,8 @@
 
           <v-text-field
             variant="underlined"
-            label="Append outer"
-            append-outer-icon="mdi-map-marker"
+            label="Append inner"
+            append-inner-icon="mdi-map-marker"
           ></v-text-field>
         </v-col>
       </v-row>

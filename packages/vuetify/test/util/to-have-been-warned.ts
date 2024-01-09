@@ -1,4 +1,4 @@
-import { expect } from '@jest/globals'
+import { afterEach, beforeAll, beforeEach, expect, jest } from '@jest/globals'
 
 // From Vue, slightly modified
 function noop () { }
@@ -63,12 +63,12 @@ function toHaveBeenWarnedInit () {
       const warned = (msg: string) => asserted.some(assertedMsg => msg.toString().includes(assertedMsg))
       for (const args of (console as any)[type].mock.calls) {
         if (!warned(args[0])) {
-          done.fail(`Unexpected console.${type} message: ${args[0]}`)
+          done!(new Error(`Unexpected console.${type} message: ${args[0]}`))
           return
         }
       }
     }
-    done()
+    done!()
   })
 }
 

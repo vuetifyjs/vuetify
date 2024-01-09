@@ -11,7 +11,7 @@
         <v-card-title :class="['text-h6', `bg-${item.color}`]">
           Lorem Ipsum Dolor
         </v-card-title>
-        <v-card-text class="white text--primary">
+        <v-card-text class="bg-white text--primary">
           <p>Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.</p>
           <v-btn
             :color="item.color"
@@ -24,6 +24,27 @@
     </v-timeline-item>
   </v-timeline>
 </template>
+
+<script setup>
+  const items = [
+    {
+      color: 'red-lighten-2',
+      icon: 'mdi-star',
+    },
+    {
+      color: 'purple-lighten-2',
+      icon: 'mdi-book-variant',
+    },
+    {
+      color: 'green-lighten-1',
+      icon: 'mdi-airballoon',
+    },
+    {
+      color: 'indigo-lighten-2',
+      icon: 'mdi-layers-triple',
+    },
+  ]
+</script>
 
 <script>
   export default {
@@ -43,7 +64,7 @@
         },
         {
           color: 'indigo-lighten-2',
-          icon: 'mdi-buffer',
+          icon: 'mdi-layers-triple',
         },
       ],
     }),

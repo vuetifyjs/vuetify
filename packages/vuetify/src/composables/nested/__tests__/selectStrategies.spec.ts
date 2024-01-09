@@ -1,5 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable sonarjs/no-identical-functions */
+// Utilities
+import { describe, expect, it } from '@jest/globals'
 import { classicSelectStrategy, independentSelectStrategy, independentSingleSelectStrategy, leafSelectStrategy, leafSingleSelectStrategy } from '../selectStrategies'
 
 describe('selectStrategies', () => {

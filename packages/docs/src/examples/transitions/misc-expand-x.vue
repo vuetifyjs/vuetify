@@ -18,7 +18,7 @@
           v-show="expand"
           height="100"
           width="100"
-          class="mx-auto secondary"
+          class="mx-auto bg-secondary"
         ></v-card>
       </v-expand-transition>
     </v-col>
@@ -39,12 +39,19 @@
           v-show="expand2"
           height="100"
           width="100"
-          class="mx-auto secondary"
+          class="mx-auto bg-secondary"
         ></v-card>
       </v-expand-x-transition>
     </v-col>
   </v-row>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const expand = ref(false)
+  const expand2 = ref(false)
+</script>
 
 <script>
   export default {

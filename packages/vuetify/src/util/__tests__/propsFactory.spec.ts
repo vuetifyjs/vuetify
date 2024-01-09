@@ -1,4 +1,6 @@
 import { propsFactory } from '../propsFactory'
+
+// Utilities
 import { describe, expect, it } from '@jest/globals'
 
 describe('propsFactory', () => {
@@ -14,6 +16,7 @@ describe('propsFactory', () => {
     [null, undefined, { type: null }],
   ])('propsFactory %#', (definition, defaults, result) => {
     expect(
+      // @ts-expect-error
       propsFactory({ foo: definition })(
         defaults === undefined ? defaults : { foo: defaults }
       )
@@ -27,6 +30,7 @@ describe('propsFactory', () => {
     [[Boolean, String], 'bar', { type: [Boolean, String], source: 'bar' }],
   ])('should set source property %#', (definition, source, result) => {
     expect(
+      // @ts-expect-error
       propsFactory({ foo: definition }, source)()
     ).toStrictEqual({ foo: result })
   })

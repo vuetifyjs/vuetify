@@ -1,56 +1,55 @@
 <template>
-  <v-card
-    height="400"
-    width="256"
-    class="mx-auto"
+  <usage-example
+    v-model="model"
+    :code="code"
+    :options="options"
+    :name="name"
   >
-    <v-navigation-drawer permanent>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">
-            Application
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            subtext
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider></v-divider>
-
-      <v-list
-        dense
-        nav
+    <div>
+      <v-navigation-drawer
+        permanent
+        v-bind="props"
       >
-        <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          link
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
+        <v-list-item title="My Application" subtitle="Vuetify"></v-list-item>
+        <v-divider></v-divider>
+        <v-list-item link title="List Item 1"></v-list-item>
+        <v-list-item link title="List Item 2"></v-list-item>
+        <v-list-item link title="List Item 3"></v-list-item>
+      </v-navigation-drawer>
+    </div>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-  </v-card>
+    <template v-slot:configuration>
+      <v-slider v-model="width" label="Width" min="100" max="400" step="1"></v-slider>
+    </template>
+  </usage-example>
 </template>
 
-<script>
-  export default {
-    data () {
-      return {
-        items: [
-          { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-          { title: 'Photos', icon: 'mdi-image' },
-          { title: 'About', icon: 'mdi-help-box' },
-        ],
-        right: null,
-      }
-    },
-  }
+<script setup>
+  // Utilities
+  import { computed, ref, shallowRef } from 'vue'
+  import { propsToString } from '@/util/helpers'
+
+  const name = 'v-navigation-drawer'
+  const model = ref('default')
+  const width = shallowRef(256)
+  const options = []
+  const props = computed(() => {
+    return {
+      width: width.value === 256 ? undefined : width.value || undefined,
+    }
+  })
+
+  const slots = computed(() => {
+    return `
+  <v-list-item title="My Application" subtitle="Vuetify"></v-list-item>
+  <v-divider></v-divider>
+  <v-list-item link title="List Item 1"></v-list-item>
+  <v-list-item link title="List Item 2"></v-list-item>
+  <v-list-item link title="List Item 3"></v-list-item>
+`
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>

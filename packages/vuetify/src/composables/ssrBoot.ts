@@ -1,9 +1,9 @@
 // Utilities
-import { computed, onMounted, readonly, ref } from 'vue'
+import { computed, onMounted, readonly, shallowRef } from 'vue'
 
 // Composables
 export function useSsrBoot () {
-  const isBooted = ref(false)
+  const isBooted = shallowRef(false)
 
   onMounted(() => {
     window.requestAnimationFrame(() => {

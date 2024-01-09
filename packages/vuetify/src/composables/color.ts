@@ -1,6 +1,6 @@
 // Utilities
 import { computed, isRef } from 'vue'
-import { isCssColor } from '@/util'
+import { destructComputed, getForeground, isCssColor, isParsableColor, parseColor } from '@/util'
 
 // Types
 import type { CSSProperties, Ref } from 'vue'
@@ -19,39 +19,39 @@ export interface BackgroundColorData {
 
 // Composables
 export function useColor (colors: Ref<{ background?: ColorValue, text?: ColorValue }>) {
-  const backgroundIsCssColor = computed(() => isCssColor(colors.value.background))
-  const textIsCssColor = computed(() => isCssColor(colors.value.text))
-
-  const colorClasses = computed(() => {
+  return destructComputed(() => {
     const classes: string[] = []
-
-    if (colors.value.background && !backgroundIsCssColor.value) {
-      classes.push(`bg-${colors.value.background}`)
-    }
-
-    if (colors.value.text && !textIsCssColor.value) {
-      classes.push(`text-${colors.value.text}`)
-    }
-
-    return classes
-  })
-
-  const colorStyles = computed(() => {
     const styles: CSSProperties = {}
 
-    if (colors.value.background && backgroundIsCssColor.value) {
-      styles.backgroundColor = colors.value.background
+    if (colors.value.background) {
+      if (isCssColor(colors.value.background)) {
+        styles.backgroundColor = colors.value.background
+
+        if (!colors.value.text && isParsableColor(colors.value.background)) {
+          const backgroundColor = parseColor(colors.value.background)
+          if (backgroundColor.a == null || backgroundColor.a === 1) {
+            const textColor = getForeground(backgroundColor)
+
+            styles.color = textColor
+            styles.caretColor = textColor
+          }
+        }
+      } else {
+        classes.push(`bg-${colors.value.background}`)
+      }
     }
 
-    if (colors.value.text && textIsCssColor.value) {
-      styles.color = colors.value.text
-      styles.caretColor = colors.value.text
+    if (colors.value.text) {
+      if (isCssColor(colors.value.text)) {
+        styles.color = colors.value.text
+        styles.caretColor = colors.value.text
+      } else {
+        classes.push(`text-${colors.value.text}`)
+      }
     }
 
-    return styles
+    return { colorClasses: classes, colorStyles: styles }
   })
-
-  return { colorClasses, colorStyles }
 }
 
 export function useTextColor (color: Ref<ColorValue>): TextColorData

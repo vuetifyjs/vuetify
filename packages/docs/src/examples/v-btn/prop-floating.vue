@@ -4,7 +4,7 @@
       class="mx-2"
       fab
       dark
-      small
+      size="small"
       color="primary"
     >
       <v-icon dark>
@@ -16,7 +16,7 @@
       class="mx-2"
       fab
       dark
-      small
+      size="small"
       color="pink"
     >
       <v-icon dark>
@@ -50,7 +50,7 @@
       class="mx-2"
       fab
       dark
-      large
+      size="large"
       color="cyan"
     >
       <v-icon dark>
@@ -62,7 +62,7 @@
       class="mx-2"
       fab
       dark
-      large
+      size="large"
       color="purple"
     >
       <v-icon dark>

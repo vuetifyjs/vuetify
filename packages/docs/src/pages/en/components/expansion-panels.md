@@ -1,34 +1,46 @@
 ---
-nav: Expansion panels
 meta:
+  nav: Expansion panels
   title: Expansion panel component
   description: The expansion panel component is a lightweight container that hides information behind expandable and contractable containers.
   keywords: expansion panels, vuetify expansion panel component, vue expansion panel component
 related:
   - /components/cards/
-  - /components/data-tables/
+  - /components/data-tables/basics/
   - /components/lists/
+features:
+  github: /components/VExpansionPanel/
+  label: 'C: VExpansionPanels'
+  report: true
+  spec: https://m1.material.io/components/expansion-panels.html
 ---
 
 # Expansion panels
 
 The `v-expansion-panel` component is useful for reducing vertical space with large amounts of information. The default functionality of the component is to only display one expansion-panel body at a time; however, with the `multiple` property, the expansion-panel can remain open until explicitly closed.
 
-![expansion-panels Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-expansion-panels/v-expansion-panels-entry.png)
+<!-- ![expansion-panels Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-expansion-panels/v-expansion-panels-entry.png) -->
 
----
+<page-features />
 
 ## Usage
 
 Expansion panels in their simplest form display a list of expandable items. You can either declare the markup explicitly, or use the **title** and **text** props.
 
-<example file="v-expansion-panels/usage" />
+<usage name="v-expansion-panels" />
 
 <entry />
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-expansion-panels](/api/v-expansion-panels/) | Primary component |
+| [v-expansion-panel](/api/v-expansion-panel/) | Sub-component that wraps `v-expansion-panel-text` and `v-expansion-panel-title` |
+| [v-expansion-panel-title](/api/v-expansion-panel-title/) | Sub-component used to display the Expansion Panel's title. Wraps the `#title` slot |
+| [v-expansion-panel-text](/api/v-expansion-panel-text/) | Sub-component used to display the Expanion Panel's text. Wraps the `#text` slot |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -77,5 +89,3 @@ The expansion panel component provides a rich playground to build truly advanced
 Expand action icon can be customized with **expand-icon** prop or the `actions` slot.
 
 <example file="v-expansion-panels/misc-custom-icons" />
-
-<backmatter />

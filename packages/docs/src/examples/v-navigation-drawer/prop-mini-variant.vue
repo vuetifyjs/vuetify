@@ -10,6 +10,7 @@
         <v-list-item
           prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
           title="John Leider"
+          nav
         >
           <template v-slot:append>
             <v-btn
@@ -33,16 +34,18 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const drawer = ref(true)
+  const rail = ref(true)
+</script>
+
 <script>
   export default {
     data () {
       return {
         drawer: true,
-        items: [
-          { title: 'Home', icon: 'mdi-home-city' },
-          { title: 'My Account', icon: 'mdi-account' },
-          { title: 'Users', icon: 'mdi-account-group-outline' },
-        ],
         rail: true,
       }
     },

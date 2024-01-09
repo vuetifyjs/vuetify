@@ -6,7 +6,8 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.eslint.json',
     tsconfigRootDir: __dirname,
-    extraFileExtensions: ['.vue'],
+    extraFileExtensions: ['.vue', '.json'],
+    suppressDeprecatedPropertyWarnings: true,
   },
   extends: [
     'standard',
@@ -23,6 +24,7 @@ module.exports = {
     '@typescript-eslint',
     'sonarjs',
     'react',
+    'eslint-plugin-local-rules',
   ],
   rules: {
     'no-var': 'error',
@@ -178,13 +180,18 @@ module.exports = {
         '@typescript-eslint/no-inferrable-types': 'error',
         '@typescript-eslint/unified-signatures': 'error',
         '@typescript-eslint/no-invalid-this': 'error',
-        '@typescript-eslint/consistent-type-imports': 'error',
+        '@typescript-eslint/consistent-type-imports': ['error', {
+          prefer: 'type-imports',
+          fixStyle: 'separate-type-imports',
+        }],
+        'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
+        'import/no-duplicates': ['error', { 'prefer-inline': false }],
         '@typescript-eslint/no-non-null-asserted-optional-chain': 'error',
         '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'error',
         // '@typescript-eslint/no-unnecessary-condition': 'error',
         '@typescript-eslint/prefer-includes': 'error',
         // '@typescript-eslint/prefer-nullish-coalescing': 'warn',
-        '@typescript-eslint/prefer-optional-chain': 'warn',
+        // '@typescript-eslint/prefer-optional-chain': 'warn',
         '@typescript-eslint/prefer-string-starts-ends-with': 'error',
         '@typescript-eslint/prefer-ts-expect-error': 'warn',
         '@typescript-eslint/restrict-plus-operands': 'error',
@@ -200,6 +207,16 @@ module.exports = {
 
         // https://github.com/yannickcr/eslint-plugin-react/issues/2415
         // 'react/jsx-curly-spacing': ['error', { when: 'always', spacing: { objectLiterals: 'never' } }],
+        'local-rules/jsx-condition-key': 'error',
+        'local-rules/jsx-curly-spacing': ['error', {
+          when: 'always',
+          spacing: {
+            objectLiterals: 'never',
+            arrayLiterals: 'never',
+            multilineClose: 'never',
+          },
+          children: true,
+        }],
 
         'react/jsx-equals-spacing': 'error',
         'react/jsx-first-prop-new-line': 'error',
@@ -220,6 +237,17 @@ module.exports = {
       files: '**/*.d.ts',
       rules: {
         'import/no-duplicates': 'off',
+      },
+    },
+    {
+      files: '**/*.json',
+      rules: {
+        quotes: ['error', 'double'],
+        'comma-dangle': ['error', 'never'],
+        'quote-props': ['error', 'always'],
+        'max-len': 'off',
+        'no-unused-expressions': 'off',
+        'no-template-curly-in-string': 'off',
       },
     },
   ],

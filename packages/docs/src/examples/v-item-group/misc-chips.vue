@@ -12,19 +12,19 @@
       <v-text-field
         variant="filled"
         label="Title"
-        value="My new post"
+        model-value="My new post"
       ></v-text-field>
 
       <v-textarea
         variant="filled"
         label="Text"
-        value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse"
+        model-value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse"
       ></v-textarea>
 
       <v-divider class="my-2"></v-divider>
 
       <v-item-group multiple selected-class="bg-purple">
-        <v-subheader>Tags</v-subheader>
+        <div class="text-caption mb-2">Tags</div>
         <v-item
           v-for="n in 8"
           :key="n"
@@ -52,11 +52,3 @@
     </v-card-actions>
   </v-card>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-      //
-    }),
-  }
-</script>

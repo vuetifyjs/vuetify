@@ -3,6 +3,7 @@
     <v-dialog
       v-model="dialog"
       persistent
+      width="1024"
     >
       <template v-slot:activator="{ props }">
         <v-btn
@@ -92,14 +93,14 @@
           <v-spacer></v-spacer>
           <v-btn
             color="blue-darken-1"
-            text
+            variant="text"
             @click="dialog = false"
           >
             Close
           </v-btn>
           <v-btn
             color="blue-darken-1"
-            text
+            variant="text"
             @click="dialog = false"
           >
             Save
@@ -109,6 +110,12 @@
     </v-dialog>
   </v-row>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const dialog = ref(false)
+</script>
 
 <script>
   export default {

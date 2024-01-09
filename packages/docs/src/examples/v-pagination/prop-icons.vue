@@ -9,6 +9,12 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const page = ref(1)
+</script>
+
 <script>
   export default {
     data () {

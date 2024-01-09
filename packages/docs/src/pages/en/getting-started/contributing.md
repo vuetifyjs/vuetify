@@ -6,12 +6,16 @@ meta:
 related:
   - /getting-started/unit-testing/
   - /about/code-of-conduct/
-  - /getting-started/frequently-asked-questions/
+  - /introduction/roadmap/
 ---
 
 # Contributing
 
 Vuetify is made possible by an amazing community that submits issues, creates pull requests, and provides invaluable feedback.
+
+<page-features />
+
+<entry />
 
 It is our job to enable you to create amazing applications. A lot of the time, you come across something that can be made better. Maybe you find a bug, or you have an idea for additional functionality. That's great! It's as easy as cloning the Vuetify repository to get started working in a development environment.
 
@@ -21,23 +25,20 @@ It is our job to enable you to create amazing applications. A lot of the time, y
 
 The issue list of this repo is exclusively for bug reports and feature requests. Non-conforming issues will be closed immediately. Before reporting an issue:
 
-- Search for similar [issues](https://github.com/vuetifyjs/vuetify/issues), it may have been answered already.
-- Try to reproduce with the [latest](https://github.com/vuetifyjs/vuetify/releases/latest) version in a [codepen](https://template.vuetifyjs.com/) or repository that can be cloned to produce the expected behavior.
-- Make sure that the reproduction is **MINIMAL** and concise
+- Search for similar [issues], it may have been answered already.
+  > If a similar issue already exists, you do not need to open another issue for this, if you want to help with it in any way, you can help by giving appropriate information in the already existing issue.
+- Try to reproduce with the [latest](https://github.com/vuetifyjs/vuetify/releases/latest) version in [Vuetify Play](https://play.vuetifyjs.com/) or a repository that can be cloned to produce the expected behavior.
+- Make sure that the reproduction is **MINIMAL** and **CONCISE**
 
-These steps ensure that we have all the information necessary to quickly triage and resolve your issue. Once your reproduction is complete, submit a new issue using the [Vuetify Issue Creator](https://issues.vuetifyjs.com/).
+These steps ensure that we have all the information necessary to quickly triage and resolve your issue. Once your reproduction is complete, submit a new issue using the [Vuetify Issue Creator](https://issues.vuetifyjs.com/). Using this issue creator is required, otherwise the issue will be closed automatically.
 
 When writing an issue please provide as much detail as possible. Note that "reproduction steps" should be a series of actions another developer should take after clicking your reproduction link, not a recollection of how you discovered the bug.
 
 Issues that are convoluted and lacking a proper reproduction may be closed by a member of the [Core Team]. For additional questions regarding reporting issues and creating reproductions, join the official Vuetify Discord [community].
 
-<alert type="success">
-
-  **TIP**
-
-  When you create a reproduction, exclude all **elements, properties, and data variables** that are not needed for the reproduction. This helps drastically reduce the time it takes to triage the issue and ultimately resolve it.
-
-</alert>
+::: tip
+When you create a reproduction, exclude all **elements, properties, and data variables** that are not needed for the reproduction. This helps drastically reduce the time it takes to triage the issue and ultimately resolve it.
+:::
 
 In the next section you will learn step-by-step how to set up your local environment and how to configure Vuetify for development.
 
@@ -65,11 +66,9 @@ git clone https://github.com/vuetifyjs/vuetify.git
 git clone git@github.com:vuetifyjs/vuetify.git
 ```
 
-<alert type="info">
-
+::: info
 [Which remote URL should I use?](https://docs.github.com/en/free-pro-team@latest/github/using-git/which-remote-url-should-i-use)
-
-</alert>
+:::
 
 Then install dependencies and perform an initial build to link all the packages together:
 
@@ -81,16 +80,17 @@ cd vuetify
 yarn
 
 # Build the packages
-yarn build
+yarn build vuetify
+yarn build api
 ```
 
 The build process compiles all the Vuetify packages for development and may take a while (grab some ☕). Once the packages are built, you can start developing.
 
 ### Vuetify
 
-The Vuetify library is located in `packages/vuetify`. In `packages/vuetify/dev` you will find a `Playground.vue` file; running `yarn dev` from the project root will start a dev server on [localhost:8080](http://localhost:8080/) with this file loaded. You can test your changes in the playground then copy its contents into your pull request when you're ready.
+The Vuetify library is located in `packages/vuetify`. In `packages/vuetify/dev` you will find a `Playground.vue` file; running `yarn dev` from the project root will start a dev server on **localhost:8090** with this file loaded. Test your changes in the Playground.vue file you copied, then paste its contents into your pull request when you're ready.
 
-You can also test vuetify in your own project using [`yarn link`](https://classic.yarnpkg.com/en/docs/cli/link/):
+You can also test Vuetify in your own project using [`yarn link`](https://classic.yarnpkg.com/en/docs/cli/link/):
 
 - Navigate to `packages/vuetify`
 - Run `yarn link`
@@ -105,27 +105,34 @@ The **Playground** file is a cleanroom used for Vuetify development and is the r
 
 ```html
 <template>
-  <v-container>
-    <!--  -->
-  </v-container>
+  <v-app>
+    <v-container>
+      <!--  -->
+    </v-container>
+  </v-app>
 </template>
 
-<script>
-  export default {
-    data: () => ({
-      //
-    }),
-  }
+<script setup>
+  //
 </script>
 ```
 
-The **App.vue** file used for Vuetify development is located in `packages/vuetify/dev`. It contains a [v-app](/api/v-app/) and [v-main](/api/v-main/) component and the local Playground.vue file.
-
 ### Documentation
 
-The documentation is located in `packages/docs` but also uses some files from `packages/api-generator`. A dev server for the documentation can be started by running `yarn dev docs` from the project root and will be available on [localhost:8080](http://localhost:8080/) by default.
+The documentation is located in `packages/docs` but also uses some files from `packages/api-generator`. A dev server for the documentation can be started by running `yarn dev docs` from the project root and will be available on [localhost:8095](http://localhost:8095/) by default.
 
 If you want to see changes from Vuetify in the documentation you need to run `yarn build:lib` in the vuetify package before starting the documentation server.
+
+### API Generator
+
+All api descriptions are managed via the api-generator package. This package must be built prior to running or building the docs. Descriptions can be updated via the JSON files located in the `src/locale/en` folder. Some general guidelines to follow when handling api descriptions are:
+
+- `en` language only. Translations are handled via [Crowdin](https://crowdin.com/project/vuetify).
+- Prop names should be formatted using bold markdown eg: **prop-name**.
+- Slot and other code related text should be formatted using code markdown eg: `some-slot`.
+- Description keys should be in camelCase, except for `slot` keys which should be kebab-case.
+- Put keys in alphabetical order.
+- Descriptions utilize a hierarchy of `generic.json` < `Source.json` < `Component.json` to reduce duplication. Source can be viewed using the **Developer Mode** in docs settings.
 
 ### Submitting Changes / Pull Requests
 
@@ -145,16 +152,22 @@ git remote add fork git@github.com:YOUR_USERNAME/vuetify.git
 
 Before starting development you should know which branch to base your changes on. If in doubt use master as changes to master can usually be merged into a different branch without rebasing.
 
-| Type of change | Branch |
-| --- | --- |
-| Documentation | `master` |
-| Bug fixes | `master` |
-| New features | `dev` |
-| Features with breaking changes | `next` |
+| Version | Type of change | Branch |
+| - | - | - |
+| Vuetify 3 | Documentation | `master` |
+| Vuetify 3 | Bug fixes | `master` |
+| Vuetify 3 | New features | `dev` |
+| Vuetify 3 | Features with breaking changes| `next` |
+| Vuetify 2 | Documentation|  `v2-stable` |
+| Vuetify 2 | Bug fixes | `v2-stable` |
+| Vuetify 2 | New features | `v2-dev` |
 
 ```bash
 # Switch to the desired branch
+# v3
 git switch master
+# v2
+git switch v2-stable
 
 # Pull down any upstream changes
 git pull
@@ -163,19 +176,19 @@ git pull
 git switch --create fix/1234-some-issue
 ```
 
-<alert type="warning">Never commit directly to the base branches, always create a feature branch to work on</alert>
+::: warning
+Never commit directly to the base branches, always create a feature branch to work on
+:::
 
 Commit your changes following [our guidelines](#commit-guidelines), then push the branch to your fork with `git push -u fork` and open a pull request on the Vuetify repository following the provided template.
 
-<alert type="warning">
-
-  Pull requests that include unrelated commits or your local merges may be **closed** without notice.
-
-</alert>
+::: error
+Pull requests that include unrelated commits or your local merges will be **CLOSED** without notice
+:::
 
 ## Working with GitHub
 
-Vuetify's repository lives on [GitHub](https://github.com/vuetifyjs/vuetify) and is the primary location for all development related information. In addition, we have a public GitHub project with a detailed overview of what we are currently working on in [Vuetify 3](https://titan.vuetifyjs.com).
+Vuetify's repository lives on [GitHub](https://github.com/vuetifyjs/vuetify) and is the primary location for all development related information.
 
 Some of the more notable links within these services include:
 
@@ -183,10 +196,8 @@ Some of the more notable links within these services include:
 
 - [Issues]
 - [Discussions](https://github.com/vuetifyjs/vuetify/discussions)
-- [Projects](https://github.com/vuetifyjs/vuetify/projects)
-- [Coding Guidelines](https://github.com/vuetifyjs/vuetify/wiki/coding-guidelines)
 
----
+----
 
 The following sections are designed to familiarize you with our standard operating procedures for Vuetify development.
 
@@ -209,49 +220,13 @@ We **do not** accept PRs for any documentation changes pertaining to languages o
 
 ### Requesting new features
 
-Vuetify uses the **RFC** (request for comments) process for new feature suggestions. It is intended to provide a consistent and controlled path for new features to enter the framework.
-
-Many changes, including bug fixes and documentation improvements can be implemented and reviewed via the normal GitHub pull request workflow.
-
-Some changes though are _substantial_, and we ask that these be put through a bit of a design process and produce a consensus among the Vuetify [Core Team](/about/meet-the-team/) and the [community](https://discord.gg/eXubxyJ).
-
-#### Getting started
-
-In order to get a major feature added to Vuetify you must get your RFC merged into this repository as a `.md` file. The following is a guide on how to get started:
-
-- Fork the Vuetify RFC repo https://github.com/vuetifyjs/rfcs
-
-- Copy `0000-template.md` to `active-rfcs/0000-my-feature.md` (where **my-feature** is descriptive. **do not** assign an RFC number yet).
-
-- Fill in the RFC. Be detailed and put care into the details.
-
-  <alert type="error">
-
-    RFCs that do not present convincing motivation, demonstrate understanding of the impact of the design, or are disingenuous about the drawbacks or alternatives tend to be poorly-received
-
-  </alert>
-
-- Submit a pull request. As a pull request the RFC will receive design feedback from the larger community, and the author should be prepared to revise it in response. New RFC pull requests start in the **Pending** stage.
-
-- Build consensus and integrate feedback. RFCs that have broad support are much more likely to make progress than those that don't receive any comments.
-
-- Eventually, the [Core Team] will decide whether the RFC is a candidate for inclusion in Vuetify.
-
-- An RFC can be modified based upon feedback from the [Core Team] and [community]. Significant modifications may trigger a new _final comment_ period.
-
-- An RFC may be rejected after public discussion has settled and comments have been made summarizing the rationale for rejection. A [Core Team] member will close the RFCs associated pull request, at which point the RFC will enter the **Rejected** stage.
-
-- An RFC may be accepted at the close of its _final comment_ period. A [Core Team] member will merge the RFCs associated pull request, at which point the RFC will enter the **Active** stage.
-
-Once an RFC is merged and the corresponding functionality implemented within the Vuetify repository, it will be part of the next _major_ or _minor_ release. Once released, the RFC will enter the **Released** stage and be locked.
-
-For more information regarding RFCs, see the official repository: https://github.com/vuetifyjs/rfcs
+Pending
 
 ### Commit guidelines
 
 All commit messages are required to follow the [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog) standard using the _angular_ preset. This standard format consists of 2 types of commits:
 
-- With scope: `\<type\>(scope): \<subject\>`
+- With scope: `<type>(scope): <subject>`
 
   ```bash
   fix(VSelect): don't close when a detachable child is clicked
@@ -259,7 +234,7 @@ All commit messages are required to follow the [conventional-changelog](https://
   fixes #12354
   ```
 
-- Without scope: `\<type\>: \<subject\>`
+- Without scope: `<type>: <subject>`
 
   ```bash
   docs: restructure nav components
@@ -301,33 +276,6 @@ The following is a list of **commit types** used in the _angular_ preset:
 
 <promoted slug="vuetify-reddit" />
 
-#### Commitizen
-
-The [Vuetify team](/about/meet-the-team/) uses [commitizen] for all repository commits. This allows for easy to read and organized commits with minimal change to normal commit functions. Commitizen provides a fluid interface for handling semantic versioning and makes it easier to write [release notes](https://github.com/vuetifyjs/vuetify/releases).
-
-To get started, [globally install the commitizen package](https://github.com/commitizen/cz-cli#conventional-commit-messages-as-a-global-utility) using [yarn](https://yarnpkg.com/) by running the following commands in your terminal:
-
-```bash
-# Install commitizen and the conventional changelog adapter
-yarn global add commitizen cz-conventional-changelog
-
-# Then create a .czrc file that tells commitizen
-# which adapter to use globally.
-echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
-```
-
-<alert type="warning">
-
-  Sometimes creating a `.czrc` file does not work using the **command prompt**. If you get unexpected results, create the file in your user folder located in the home directory. This is typically located on your primary harddrive in the `Users` folder.
-
-</alert>
-
-Once complete, instead of using <kbd>git commit</kbd> you will run the command <kbd>git cz</kbd> in your terminal. From here, you are presented with a series of prompts used to build the commit message. For additional information, please review our guidlines on [commits](#commit-guidelines).
-
-<backmatter />
-
-[commitizen]: https://github.com/commitizen/cz-cli
 [community]: https://community.vuetifyjs.com/
-[Core Team]: /about/meet-the-team/
-[pull request]: https://github.com/vuetifyjs/vuetify/pulls
-[Issues]: https://github.com/vuetifyjs/vuetify/issues
+[core team]: /about/meet-the-team/
+[issues]: https://github.com/vuetifyjs/vuetify/issues

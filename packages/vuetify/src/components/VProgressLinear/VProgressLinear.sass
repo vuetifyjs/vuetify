@@ -9,6 +9,9 @@
   transition: $progress-linear-transition
   width: 100%
 
+  &--rounded
+    @include tools.rounded($progress-linear-border-radius)
+
 // Elements
 .v-progress-linear__background
   background: $progress-linear-background
@@ -45,7 +48,7 @@
 .v-progress-linear__indeterminate
   .long, .short
     animation-play-state: paused
-    animation-duration: $progress-linear-indeteminate-animation-duration
+    animation-duration: $progress-linear-indeterminate-animation-duration
     animation-iteration-count: infinite
     bottom: 0
     height: inherit
@@ -136,13 +139,8 @@
     @include tools.rounded($progress-linear-border-radius)
 
   .v-progress-linear__determinate
-    @include tools.ltr()
-      border-top-left-radius: 0
-      border-bottom-left-radius: 0
-
-    @include tools.rtl()
-      border-top-right-radius: 0
-      border-bottom-right-radius: 0
+    border-start-start-radius: 0
+    border-end-start-radius: 0
 
 // Keyframes
 @keyframes indeterminate-ltr

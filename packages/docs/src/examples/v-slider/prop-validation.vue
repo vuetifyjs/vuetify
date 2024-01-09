@@ -3,7 +3,7 @@
     flat
     color="transparent"
   >
-    <v-subheader>Rules</v-subheader>
+    <div class="text-subtitle-2">Rules</div>
 
     <v-card-text class="pt-0">
       <v-slider
@@ -16,7 +16,7 @@
       ></v-slider>
     </v-card-text>
 
-    <v-subheader>Persistent hint</v-subheader>
+    <div class="text-subtitle-2">Persistent hint</div>
 
     <v-card-text class="pt-0">
       <v-slider
@@ -32,6 +32,16 @@
     </v-card-text>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const value = ref(30)
+
+  const rules = [
+    v => v <= 40 || 'Only 40 in stock',
+  ]
+</script>
 
 <script>
   export default {

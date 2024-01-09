@@ -1,30 +1,41 @@
 ---
-nav: Pagination
 meta:
+  nav: Pagination
   title: Pagination component
   description: The pagination component is used to separate long sets of data so that it is easier for a user to consume information.
   keywords: pagination, vuetify pagination component, vue pagination component
 related:
-  - /components/data-iterator/
-  - /components/data-tables/
-  - /components/lists/
+  - /components/data-tables/basics/
+  - /components/data-tables/pagination/
+  - /components/tables/
+features:
+  figma: true
+  label: 'C: VPagination'
+  report: true
+  github: /components/VPagination/
 ---
 
 # Pagination
 
-The `v-pagination` component is used to separate long sets of data so that it is easier for a user to consume information. Depending on the length provided, the pagination component will automatically scale. To maintain the current page, simply supply a **v-model** attribute.
+The `v-pagination` component is used to separate long sets of data so that it is easier for a user to consume information.
 
-<entry />
+<page-features />
 
 ## Usage
 
-Pagination by default displays the number of pages based on the set **length** prop, with **prev** and **next** buttons surrounding to help you navigate.
+Pagination by default displays the number of pages based on the set **length** prop, with **prev** and **next** buttons surrounding to help you navigate. Depending on the length provided, the pagination component will automatically scale. To maintain the current page, simply supply a **v-model** attribute.
 
-<example file="v-pagination/usage" />
+<usage name="v-pagination" />
+
+<entry />
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-pagination](/api/v-pagination/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -59,5 +70,3 @@ Using the **length** prop you can set the length of `v-pagination`, if the numbe
 You can also manually set the maximum number of visible page buttons with the **total-visible** prop.
 
 <example file="v-pagination/prop-total-visible" />
-
-<backmatter />

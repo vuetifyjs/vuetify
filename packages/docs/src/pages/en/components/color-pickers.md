@@ -1,28 +1,38 @@
 ---
-nav: Color pickers
 meta:
+  nav: Color pickers
   title: Color picker component
   description: The color picker component allows users to select a from pre-defined or custom colors using a variety of different inputs and formats.
   keywords: color pickers, vuetify color picker component, vue color picker component
 related:
-  - /components/menu/
+  - /components/menus/
   - /styles/colors/
   - /features/theme/
+features:
+  github: /components/VColorPicker/
+  label: 'C: VColorPicker'
+  report: true
 ---
 
 # Color pickers
 
 The `v-color-picker` allows you to select a color using a variety of input methods.
 
-<entry />
+<page-features />
 
 ## Usage
 
 <usage name="v-color-picker" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-color-picker](/api/v-color-picker/) | Primary component |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -57,5 +67,3 @@ The `v-color-picker` uses the `v-model` prop to control the color displayed. It 
 Using the `show-swatches` prop you can display an array of color swatches that users can pick from. It is also possible to customize what colors are shown using the `swatches` prop. This prop accepts a two-dimensional array, where the first dimension defines a column, and second dimension defines the swatches from top to bottom by providing rgba hex strings. You can also set the max height of the swatches section with the `swatches-max-height` prop.
 
 <example file="v-color-picker/prop-swatches" />
-
-<backmatter />

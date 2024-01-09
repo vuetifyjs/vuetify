@@ -1,28 +1,37 @@
 <template>
-  <v-bottom-navigation
-    :value="value"
-    color="primary"
-    horizontal
-  >
-    <v-btn>
-      <span>Recents</span>
 
-      <v-icon>mdi-history</v-icon>
-    </v-btn>
+  <v-layout class="overflow-visible" style="height: 56px;">
+    <v-bottom-navigation
+      v-model="value"
+      color="primary"
+      horizontal
+    >
+      <v-btn>
+        <v-icon>mdi-history</v-icon>
 
-    <v-btn>
-      <span>Favorites</span>
+        Recents
+      </v-btn>
 
-      <v-icon>mdi-heart</v-icon>
-    </v-btn>
+      <v-btn>
+        <v-icon>mdi-heart</v-icon>
 
-    <v-btn>
-      <span>Nearby</span>
+        Favorites
+      </v-btn>
 
-      <v-icon>mdi-map-marker</v-icon>
-    </v-btn>
-  </v-bottom-navigation>
+      <v-btn>
+        <v-icon>mdi-map-marker</v-icon>
+
+        Nearby
+      </v-btn>
+    </v-bottom-navigation>
+  </v-layout>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const value = ref(1)
+</script>
 
 <script>
   export default {

@@ -1,5 +1,0 @@
-{
-  "props": {
-    "delimiters": "Accepts an array of strings that will trigger a new tag when typing. Does not replace the normal Tab and Enter keys."
-  }
-}

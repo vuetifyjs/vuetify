@@ -1,5 +1,8 @@
-import type { ColorInt, XYZ } from '../colorUtils'
-import { clamp } from '../../util/helpers'
+// Utilities
+import { clamp } from '@/util/helpers'
+
+// Types
+import type { RGB, XYZ } from '../colorUtils'
 
 // For converting XYZ to sRGB
 const srgbForwardMatrix = [
@@ -29,13 +32,14 @@ const srgbReverseTransform = (C: number): number => (
     : ((C + 0.055) / 1.055) ** 2.4
 )
 
-export function fromXYZ (xyz: XYZ): ColorInt {
+export function fromXYZ (xyz: XYZ): RGB {
   const rgb = Array(3)
   const transform = srgbForwardTransform
   const matrix = srgbForwardMatrix
 
   // Matrix transform, then gamma adjustment
   for (let i = 0; i < 3; ++i) {
+    // Rescale back to [0, 255]
     rgb[i] = Math.round(clamp(transform(
       matrix[i][0] * xyz[0] +
       matrix[i][1] * xyz[1] +
@@ -43,19 +47,22 @@ export function fromXYZ (xyz: XYZ): ColorInt {
     )) * 255)
   }
 
-  // Rescale back to [0, 255]
-  return (rgb[0] << 16) + (rgb[1] << 8) + (rgb[2] << 0)
+  return {
+    r: rgb[0],
+    g: rgb[1],
+    b: rgb[2],
+  }
 }
 
-export function toXYZ (rgb: ColorInt): XYZ {
+export function toXYZ ({ r, g, b }: RGB): XYZ {
   const xyz: XYZ = [0, 0, 0]
   const transform = srgbReverseTransform
   const matrix = srgbReverseMatrix
 
   // Rescale from [0, 255] to [0, 1] then adjust sRGB gamma to linear RGB
-  const r = transform((rgb >> 16 & 0xff) / 255)
-  const g = transform((rgb >> 8 & 0xff) / 255)
-  const b = transform((rgb >> 0 & 0xff) / 255)
+  r = transform(r / 255)
+  g = transform(g / 255)
+  b = transform(b / 255)
 
   // Matrix color space transform
   for (let i = 0; i < 3; ++i) {

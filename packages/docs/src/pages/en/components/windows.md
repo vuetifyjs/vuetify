@@ -1,20 +1,24 @@
 ---
 meta:
+  nav: Windows
   title: Window component
   description: The window component is a wrapper container that allows transitioning between content. It serves as the baseline for tabs and carousels.
   keywords: windows, vuetify window component, vue window component
-nav: Windows
 related:
-    - /components/carousels
-    - /components/steppers
-    - /components/tabs
+    - /components/carousels/
+    - /components/sheets/
+    - /components/tabs/
+features:
+  github: /components/VWindow/
+  label: 'C: VWindow'
+  report: true
 ---
 
 # Windows
 
 The `v-window` component provides the baseline functionality for transitioning content from one pane to another. Other components such as `v-tabs`, `v-carousel` and `v-stepper` utilize this component at their core.
 
-<entry />
+<page-features />
 
 ## Usage
 
@@ -22,9 +26,16 @@ Designed to easily cycle through content, `v-window` provides a simple interface
 
 <example file="v-window/usage" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-window](/api/v-window/) | Primary Component |
+| [v-window-item](/api/v-window-item/) | Sub-component used to display a single window item |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -67,5 +78,3 @@ Create rich forms with smooth animations. `v-window` automatically tracks the cu
 `v-window` makes it easy to create custom components such as a differently styled stepper.
 
 <example file="v-window/misc-onboarding" />
-
-<backmatter />

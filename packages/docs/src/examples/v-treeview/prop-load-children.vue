@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-card-title class="indigo white--text text-h5">
+    <v-card-title class="bg-indigo text-white text-h5">
       User Directory
     </v-card-title>
     <v-row
@@ -34,7 +34,7 @@
         <v-scroll-y-transition mode="out-in">
           <div
             v-if="!selected"
-            class="text-h6 grey--text text--lighten-1 font-weight-light"
+            class="text-h6 text-grey-lighten-1 font-weight-light"
             style="align-self: center;"
           >
             Select a User
@@ -59,10 +59,10 @@
               <h3 class="text-h5 mb-2">
                 {{ selected.name }}
               </h3>
-              <div class="blue--text mb-2">
+              <div class="text-blue mb-2">
                 {{ selected.email }}
               </div>
-              <div class="blue--text subheading font-weight-bold">
+              <div class="text-blue subheading font-weight-bold">
                 {{ selected.username }}
               </div>
             </v-card-text>
@@ -72,7 +72,7 @@
               tag="v-card-text"
             >
               <v-col
-                class="text-right mr-4 mb-2"
+                class="text-right me-4 mb-2"
                 tag="strong"
                 cols="5"
               >
@@ -80,7 +80,7 @@
               </v-col>
               <v-col>{{ selected.company.name }}</v-col>
               <v-col
-                class="text-right mr-4 mb-2"
+                class="text-right me-4 mb-2"
                 tag="strong"
                 cols="5"
               >
@@ -93,7 +93,7 @@
                 >{{ selected.website }}</a>
               </v-col>
               <v-col
-                class="text-right mr-4 mb-2"
+                class="text-right me-4 mb-2"
                 tag="strong"
                 cols="5"
               >
@@ -107,6 +107,48 @@
     </v-row>
   </v-card>
 </template>
+
+<script setup>
+  import { computed, ref, watch } from 'vue'
+
+  const avatars = [
+    '?accessoriesType=Blank&avatarStyle=Circle&clotheColor=PastelGreen&clotheType=ShirtScoopNeck&eyeType=Wink&eyebrowType=UnibrowNatural&facialHairColor=Black&facialHairType=MoustacheMagnum&hairColor=Platinum&mouthType=Concerned&skinColor=Tanned&topType=Turban',
+    '?accessoriesType=Sunglasses&avatarStyle=Circle&clotheColor=Gray02&clotheType=ShirtScoopNeck&eyeType=EyeRoll&eyebrowType=RaisedExcited&facialHairColor=Red&facialHairType=BeardMagestic&hairColor=Red&hatColor=White&mouthType=Twinkle&skinColor=DarkBrown&topType=LongHairBun',
+    '?accessoriesType=Prescription02&avatarStyle=Circle&clotheColor=Black&clotheType=ShirtVNeck&eyeType=Surprised&eyebrowType=Angry&facialHairColor=Blonde&facialHairType=Blank&hairColor=Blonde&hatColor=PastelOrange&mouthType=Smile&skinColor=Black&topType=LongHairNotTooLong',
+    '?accessoriesType=Round&avatarStyle=Circle&clotheColor=PastelOrange&clotheType=Overall&eyeType=Close&eyebrowType=AngryNatural&facialHairColor=Blonde&facialHairType=Blank&graphicType=Pizza&hairColor=Black&hatColor=PastelBlue&mouthType=Serious&skinColor=Light&topType=LongHairBigHair',
+    '?accessoriesType=Kurt&avatarStyle=Circle&clotheColor=Gray01&clotheType=BlazerShirt&eyeType=Surprised&eyebrowType=Default&facialHairColor=Red&facialHairType=Blank&graphicType=Selena&hairColor=Red&hatColor=Blue02&mouthType=Twinkle&skinColor=Pale&topType=LongHairCurly',
+  ]
+  const pause = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+  const active = ref([])
+  const avatar = ref(null)
+  const open = ref([])
+  const users = ref([])
+
+  const items = computed(() => {
+    return [
+      {
+        name: 'Users',
+        children: users.value,
+      },
+    ]
+  })
+  const selected = computed(() => {
+    if (!active.value.length) return undefined
+    const id = active.value[0]
+    return users.value.find(user => user.id === id)
+  })
+
+  watch(selected, randomAvatar)
+
+  async function fetchUsers (item) {
+    await pause(1500)
+    return fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json()).then(json => (item.children.push(...json))).catch(err => console.warn(err))
+  }
+  function randomAvatar () {
+    avatar.value = avatars[Math.floor(Math.random() * avatars.length)]
+  }
+</script>
 
 <script>
   const avatars = [

@@ -13,9 +13,11 @@
   line-height: $icon-line-height
   position: relative
   text-indent: $icon-text-indent
+  text-align: center
   user-select: none
   vertical-align: $icon-vertical-align
   width: $icon-size
+  min-width: $icon-size
 
   &--clickable
     cursor: pointer
@@ -32,23 +34,5 @@
 .v-icon--start
   margin-inline-end: $icon-margin-start
 
-  .v-btn:not(.v-btn--icon) &
-    margin-inline-start: $icon-btn-margin-start
-    margin-inline-end: $icon-btn-margin-end
-
-  .v-btn.v-btn--stacked &
-    margin-inline-start: 0
-    margin-inline-end: 0
-    margin-bottom: $icon-btn-stacked-margin
-
 .v-icon--end
   margin-inline-start: $icon-margin-end
-
-  .v-btn:not(.v-btn--icon) &
-    margin-inline-start: $icon-btn-margin-end
-    margin-inline-end: $icon-btn-margin-start
-
-  .v-btn.v-btn--stacked &
-    margin-inline-start: 0
-    margin-inline-end: 0
-    margin-top: $icon-btn-stacked-margin

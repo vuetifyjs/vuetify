@@ -1,0 +1,20 @@
+name: Close issues
+on:
+  push:
+    branches:
+    - dev
+    - next
+    - v2-stable
+    - v2-dev
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  close:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'vuetifyjs'
+    steps:
+      - uses: vuetifyjs/close-action@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,14 +1,15 @@
 <template>
   <v-lazy min-height="128">
     <div class="d-flex">
-      <v-avatar v-if="member.avatar" size="72">
-        <v-img :src="member.avatar" />
+      <v-avatar color="grey-lighten-2" size="72">
+        <v-img v-if="member.avatar" :src="member.avatar" />
+        <v-icon v-else color="grey" size="35"> mdi-image</v-icon>
       </v-avatar>
 
-      <div class="pl-6 font-weight-medium">
+      <div class="ps-6 font-weight-medium">
         <div class="text-h5 mb-1 font-weight-bold d-flex align-center">
           <span
-            class="mr-3"
+            class="me-3"
             v-text="member.name"
           />
 
@@ -18,25 +19,26 @@
               :key="link.href || link.copyText"
               location="bottom"
             >
-              <template #activator="{ props }">
+              <template #activator="{ props: activatorProps }">
                 <a
                   v-if="link.href"
                   :href="link.href"
-                  class="d-inline-flex text-decoration-none mr-1"
+                  class="d-inline-flex text-decoration-none me-1"
                   rel="noopener"
                   target="_blank"
-                  v-bind="props"
+                  v-bind="activatorProps"
                 >
                   <v-icon
-                    size="small"
                     :color="link.color"
                     :icon="link.icon"
+                    size="small"
                   />
                 </a>
+
                 <div
                   v-else
                   class="cursor-pointer"
-                  v-bind="props"
+                  v-bind="activatorProps"
                   @click.prevent="copyTextToClipboard(link.copyText)"
                 >
                   <v-icon
@@ -46,6 +48,7 @@
                   />
                 </div>
               </template>
+
               <span>{{ link.tooltip }}</span>
             </v-tooltip>
           </template>
@@ -131,90 +134,90 @@
             </template>
           </div>
         </template>
+
+        <border-chip
+          v-if="member.joined"
+          :text="t('joined', { date: member.joined })"
+          prepend-icon="mdi-calendar"
+        />
       </div>
     </div>
   </v-lazy>
 </template>
 
-<script lang="ts">
-  import { computed, defineComponent } from 'vue'
-  import type { PropType } from 'vue'
-  import type { Member } from '@/store/team'
+<script setup lang="ts">
+  // Composables
   import { useI18n } from 'vue-i18n'
 
-  export default defineComponent({
-    name: 'TeamMember',
+  // Utilities
+  import { computed } from 'vue'
 
-    props: {
-      member: {
-        type: Object as PropType<Member>,
-        default: () => ({}),
-      },
-    },
+  // Types
+  import type { Member } from '@/store/team'
+  import type { PropType } from 'vue'
 
-    setup (props) {
-      const { t } = useI18n()
-
-      const links = computed(() => {
-        const links = []
-
-        if (props.member.twitter) {
-          links.push({
-            color: '#40BBF4',
-            href: `https://twitter.com/${props.member.twitter}`,
-            icon: 'mdi-twitter',
-            tooltip: 'Twitter',
-          })
-        }
-
-        if (props.member.github) {
-          links.push({
-            color: '#24292E',
-            href: `https://github.com/${props.member.github}`,
-            icon: 'mdi-github',
-            tooltip: 'GitHub',
-          })
-        }
-
-        if (props.member.linkedin) {
-          links.push({
-            color: '#0077B5',
-            href: `https://linkedin.com/in/${props.member.linkedin}`,
-            icon: 'mdi-linkedin',
-            tooltip: 'LinkedIn',
-          })
-        }
-
-        if (props.member.discord) {
-          links.push({
-            color: '#738ADB',
-            copyText: props.member.discord,
-            icon: 'mdi-discord',
-            tooltip: `Discord: ${props.member.discord} (click to copy)`,
-          })
-        }
-
-        return links
-      })
-
-      function copyTextToClipboard (copyText?: string) {
-        if (!copyText) return
-        navigator.clipboard.writeText(copyText)
-      }
-
-      return {
-        t,
-        icons: {
-          languages: 'mdi-translate',
-          location: 'mdi-map-marker-outline',
-          work: 'mdi-briefcase-variant-outline',
-        },
-        links,
-        copyTextToClipboard,
-        fields: ['work', 'location', 'languages'] as const,
-      }
+  const props = defineProps({
+    member: {
+      type: Object as PropType<Member>,
+      default: () => ({}),
     },
   })
+
+  const { t } = useI18n()
+
+  const icons = {
+    languages: 'mdi-translate',
+    location: 'mdi-map-marker-outline',
+    work: 'mdi-briefcase-variant-outline',
+  }
+  const fields = ['work', 'location', 'languages'] as const
+
+  const links = computed(() => {
+    const links = []
+
+    if (props.member.twitter) {
+      links.push({
+        color: '#212121',
+        href: `https://x.com/${props.member.twitter}`,
+        icon: '$x',
+        tooltip: 'X',
+      })
+    }
+
+    if (props.member.github) {
+      links.push({
+        color: '#24292E',
+        href: `https://github.com/${props.member.github}`,
+        icon: 'mdi-github',
+        tooltip: 'GitHub',
+      })
+    }
+
+    if (props.member.linkedin) {
+      links.push({
+        color: '#0077B5',
+        href: `https://linkedin.com/in/${props.member.linkedin}`,
+        icon: 'mdi-linkedin',
+        tooltip: 'LinkedIn',
+      })
+    }
+
+    if (props.member.discord) {
+      links.push({
+        color: '#738ADB',
+        copyText: props.member.discord,
+        icon: 'mdi-discord',
+        tooltip: `Discord: ${props.member.discord} (click to copy)`,
+      })
+    }
+
+    return links
+  })
+
+  function copyTextToClipboard (copyText?: string) {
+    if (!copyText) return
+    navigator.clipboard.writeText(copyText)
+  }
 </script>
 
 <style>

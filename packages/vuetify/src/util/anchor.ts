@@ -1,7 +1,10 @@
+// Utilities
+import { includes } from '@/util/helpers'
+
 const block = ['top', 'bottom'] as const
-const inline = ['start', 'end'] as const
+const inline = ['start', 'end', 'left', 'right'] as const
 type Tblock = typeof block[number]
-type Tinline = typeof inline [number]
+type Tinline = typeof inline[number]
 export type Anchor =
   | Tblock
   | Tinline
@@ -11,50 +14,64 @@ export type Anchor =
   | `${Tinline} ${Tblock | 'center'}`
 export type ParsedAnchor =
   | { side: 'center', align: 'center' }
-  | { side: Tblock, align: Tinline | 'center' }
-  | { side: Tinline, align: Tblock | 'center' }
+  | { side: Tblock, align: 'left' | 'right' | 'center' }
+  | { side: 'left' | 'right', align: Tblock | 'center' }
 
 /** Parse a raw anchor string into an object */
-export function parseAnchor (anchor: Anchor) {
-  let [side, align] = anchor.split(' ')
+export function parseAnchor (anchor: Anchor, isRtl: boolean) {
+  let [side, align] = anchor.split(' ') as [Tblock | Tinline | 'center', Tblock | Tinline | 'center' | undefined]
   if (!align) {
     align =
-      side === 'top' || side === 'bottom' ? 'start'
-      : side === 'start' || side === 'end' ? 'top'
+      includes(block, side) ? 'start'
+      : includes(inline, side) ? 'top'
       : 'center'
   }
+
   return {
-    side,
-    align,
+    side: toPhysical(side, isRtl),
+    align: toPhysical(align, isRtl),
   } as ParsedAnchor
 }
 
-/** Get an anchor directly opposite, with the same alignment */
-export function oppositeAnchor (anchor: ParsedAnchor) {
+export function toPhysical (str: 'center' | Tblock | Tinline, isRtl: boolean) {
+  if (str === 'start') return isRtl ? 'right' : 'left'
+  if (str === 'end') return isRtl ? 'left' : 'right'
+  return str
+}
+
+export function flipSide (anchor: ParsedAnchor) {
   return {
     side: {
       center: 'center',
       top: 'bottom',
       bottom: 'top',
-      start: 'end',
-      end: 'start',
+      left: 'right',
+      right: 'left',
     }[anchor.side],
     align: anchor.align,
   } as ParsedAnchor
 }
 
-/** Convert start/end into left/right */
-export function physicalAnchor (anchor: ParsedAnchor, el: HTMLElement) {
-  const { side, align } = anchor
-  const { direction } = window.getComputedStyle(el)
+export function flipAlign (anchor: ParsedAnchor) {
+  return {
+    side: anchor.side,
+    align: {
+      center: 'center',
+      top: 'bottom',
+      bottom: 'top',
+      left: 'right',
+      right: 'left',
+    }[anchor.align],
+  } as ParsedAnchor
+}
 
-  const map: Record<string, string | undefined> = direction === 'ltr' ? {
-    start: 'left',
-    end: 'right',
-  } : {
-    start: 'right',
-    end: 'left',
-  }
+export function flipCorner (anchor: ParsedAnchor) {
+  return {
+    side: anchor.align,
+    align: anchor.side,
+  } as ParsedAnchor
+}
 
-  return (map[side] ?? side) + ' ' + (map[align] ?? align)
+export function getAxis (anchor: ParsedAnchor) {
+  return includes(block, anchor.side) ? 'y' : 'x'
 }

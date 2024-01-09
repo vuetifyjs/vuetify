@@ -9,6 +9,7 @@
 
     <v-dialog
       v-model="dialog"
+      width="auto"
     >
       <v-card>
         <v-card-text>
@@ -21,6 +22,12 @@
     </v-dialog>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const dialog = ref(false)
+</script>
 
 <script>
   export default {

@@ -1,9 +1,9 @@
 <template>
   <v-card
-    color="grey lighten-4"
+    color="grey-lighten-4"
     flat
     height="200px"
-    tile
+    rounded="0"
   >
     <v-toolbar extended>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>

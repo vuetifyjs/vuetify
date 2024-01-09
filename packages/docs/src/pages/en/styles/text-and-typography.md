@@ -6,12 +6,14 @@ meta:
 related:
   - /styles/display/
   - /styles/content/
-  - /components/subheaders/
+  - /features/internationalization/
 ---
 
 # Text and typography
 
-Control text size, alignment, wrapping, overflow, transforms and more. <inline slug="scrimba-typography" />
+Control text size, alignment, wrapping, overflow, transforms and more. By default, Vuetify uses the Material Design specification [Roboto Font](https://fonts.google.com/specimen/Roboto).
+
+<page-features />
 
 <entry />
 
@@ -77,11 +79,9 @@ You can prevent wrapping text with the `.text-no-wrap` utility class.
 
 Longer content can be truncated with a text ellipsis using the `.text-truncate` utility class.
 
-<alert type="info">
-
+::: info
   **Requires** `display: inline-block` **or** `display: block`.
-
-</alert>
+:::
 
 <example file="text-and-typography/text-truncate" />
 
@@ -92,5 +92,3 @@ When using [RTL](/features/bidirectionality), you may want to keep the alignment
 If instead you want the alignment to respond to the current text direction, use `start` and `end`.
 
 <example file="text-and-typography/text-rtl" />
-
-<backmatter />

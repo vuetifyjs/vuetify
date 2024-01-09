@@ -1,69 +1,41 @@
 <template>
-  <v-btn
-    :icon="smAndDown"
-    class="text--secondary px-0 px-md-2"
-    variant="text"
+  <app-menu
+    key="language-menu"
+    :open-on-hover="false"
+    :items="items"
   >
-    <v-icon icon="mdi-translate" />
-    <chevron-down />
-
-    <app-menu
-      key="language-menu"
-      activator="parent"
-      :items="items"
-    >
-      <template #item="{ item }">
-        <v-list-item
-          :key="item.locale"
-          link
-          @click="changeLocale(item.locale)"
-        >
-          <v-list-item-title v-text="item.title" />
-        </v-list-item>
-      </template>
-    </app-menu>
-  </v-btn>
+    <template #activator="{ props }">
+      <app-btn
+        color="medium-emphasis"
+        icon="mdi-translate"
+        v-bind="props"
+      />
+    </template>
+  </app-menu>
 </template>
 
-<script lang="ts">
-  // Utilities
-  import { computed, defineComponent } from 'vue'
+<script setup lang="ts">
+  // Composables
   import { useI18n } from 'vue-i18n'
-  import { useDisplay } from 'vuetify'
-  import { useRoute, useRouter } from 'vue-router'
+  import { useRoute } from 'vue-router'
+
+  // Utilities
+  import { computed } from 'vue'
 
   // Language
   import locales from '@/i18n/locales.json'
-  import { useLocaleStore } from '@/store/locale'
 
-  import AppMenu from '@/components/app/menu/Menu.vue'
-  import ChevronDown from '@/components/icons/ChevronDown.vue'
+  const { t } = useI18n()
+  const route = useRoute()
 
-  export default defineComponent({
-    name: 'LanguageMenu',
-
-    components: { ChevronDown, AppMenu },
-
-    setup () {
-      const { t } = useI18n()
-      const display = useDisplay()
-      const localeStore = useLocaleStore()
-      const router = useRouter()
-      const route = useRoute()
-
+  const items = computed(() => ([
+    { subheader: t('translations') },
+    ...locales.filter(locale => locale.enabled).map(locale => {
       return {
-        smAndDown: display.smAndDown,
-        items: computed(() => ([
-          { heading: t('translations') },
-          ...locales.filter((locale: { enabled: boolean }) => locale.enabled),
-        ])),
-        changeLocale: (locale: string) => {
-          console.log('click', locale)
-          localeStore.locale = locale
-          console.log(route.path)
-          router.push({ path: route.path.replace(/^\/[a-zA-Z-]+/, `/${locale}`) })
-        },
+        title: locale.title,
+        to: route.fullPath.replace(/^\/[a-zA-Z-]+/, `/${locale.alternate || locale.locale}`),
       }
-    },
-  })
+    }),
+    { title: t('more-coming-soon'), disabled: true },
+  ]))
 </script>

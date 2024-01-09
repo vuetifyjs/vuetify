@@ -7,7 +7,7 @@
           sm="6"
           md="4"
         >
-          <v-subheader>Options</v-subheader>
+          <div class="text-subheader-2 pa-2">Options</div>
           <v-checkbox
             v-model="hover"
             label="Open on hover"
@@ -19,7 +19,7 @@
           sm="6"
           md="4"
         >
-          <v-subheader>FAB location</v-subheader>
+          <div class="text-subheader-2 pa-2">FAB location</div>
           <v-checkbox
             v-model="top"
             label="Top"
@@ -46,7 +46,7 @@
           sm="6"
           md="4"
         >
-          <v-subheader>Speed dial direction</v-subheader>
+          <div class="text-subheader-2 pa-2">Speed dial direction</div>
           <v-radio-group
             v-model="direction"
             hide-details
@@ -74,7 +74,7 @@
           sm="6"
           md="4"
         >
-          <v-subheader>Transition</v-subheader>
+          <div class="text-subheader-2 pa-2">Transition</div>
           <v-radio-group
             v-model="transition"
             hide-details
@@ -116,7 +116,7 @@
       <template v-slot:activator>
         <v-btn
           v-model="fab"
-          color="blue darken-2"
+          color="blue-darken-2"
           dark
           fab
         >
@@ -131,7 +131,7 @@
       <v-btn
         fab
         dark
-        small
+        size="small"
         color="green"
       >
         <v-icon>mdi-pencil</v-icon>
@@ -139,7 +139,7 @@
       <v-btn
         fab
         dark
-        small
+        size="small"
         color="indigo"
       >
         <v-icon>mdi-plus</v-icon>
@@ -147,7 +147,7 @@
       <v-btn
         fab
         dark
-        small
+        size="small"
         color="red"
       >
         <v-icon>mdi-delete</v-icon>
@@ -156,14 +156,37 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const direction = ref('top')
+  const fab = ref(false)
+  const hover = ref(false)
+  const top = ref(false)
+  const right = ref(true)
+  const bottom = ref(true)
+  const left = ref(false)
+  const transition = ref('slide-y-reverse-transition')
+  watch(top, val => {
+    bottom.value = !val
+  })
+  watch(right, val => {
+    left.value = !val
+  })
+  watch(bottom, val => {
+    top.value = !val
+  })
+  watch(left, val => {
+    right.value = !val
+  })
+</script>
+
 <script>
   export default {
     data: () => ({
       direction: 'top',
       fab: false,
-      fling: false,
       hover: false,
-      tabs: null,
       top: false,
       right: true,
       bottom: true,

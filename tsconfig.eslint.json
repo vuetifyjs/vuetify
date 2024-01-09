@@ -2,9 +2,11 @@
   "extends": "./tsconfig.json",
   "include": [
     "**/*.ts",
+    "**/*.tsx",
     "**/*.js",
     "**/.*.ts",
     "**/.*.js",
-    "**/*.vue"
+    "**/*.vue",
+    "**/*.json"
   ]
 }

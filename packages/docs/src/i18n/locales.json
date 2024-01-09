@@ -14,11 +14,35 @@
     "title": "简体中文",
     "locale": "zh-CN",
     "alternate": "zh-Hans",
+    "enabled": true
+  },
+  {
+    "title": "Deutsch",
+    "locale": "de-DE",
+    "alternate": "de",
+    "enabled": false
+  },
+  {
+    "title": "Français",
+    "locale": "fr-FR",
+    "alternate": "fr",
+    "enabled": false
+  },
+  {
+    "title": "Русский",
+    "locale": "ru-RU",
+    "alternate": "ru",
+    "enabled": false
+  },
+  {
+    "title": "한국어",
+    "locale": "ko-KR",
+    "alternate": "ko",
     "enabled": false
   },
   {
     "title": "Help translate",
     "locale": "eo-UY",
-    "enabled": false
+    "enabled": true
   }
 ]

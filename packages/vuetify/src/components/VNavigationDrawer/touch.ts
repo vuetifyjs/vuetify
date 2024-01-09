@@ -2,7 +2,7 @@
 import { useVelocity } from '@/composables/touch'
 
 // Utilities
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, shallowRef } from 'vue'
 
 // Types
 import type { Ref } from 'vue'
@@ -12,7 +12,7 @@ export function useTouch ({ isActive, isTemporary, width, touchless, position }:
   isTemporary: Ref<boolean>
   width: Ref<number>
   touchless: Ref<boolean>
-  position: Ref<'left' | 'right' | 'bottom'>
+  position: Ref<'left' | 'right' | 'top' | 'bottom'>
 }) {
   onMounted(() => {
     window.addEventListener('touchstart', onTouchstart, { passive: true })
@@ -26,19 +26,20 @@ export function useTouch ({ isActive, isTemporary, width, touchless, position }:
     window.removeEventListener('touchend', onTouchend)
   })
 
-  const isHorizontal = computed(() => position.value !== 'bottom')
+  const isHorizontal = computed(() => ['left', 'right'].includes(position.value))
 
   const { addMovement, endTouch, getVelocity } = useVelocity()
   let maybeDragging = false
-  const isDragging = ref(false)
-  const dragProgress = ref(0)
-  const offset = ref(0)
+  const isDragging = shallowRef(false)
+  const dragProgress = shallowRef(0)
+  const offset = shallowRef(0)
   let start: [number, number] | undefined
 
   function getOffset (pos: number, active: boolean): number {
     return (
       position.value === 'left' ? pos
       : position.value === 'right' ? document.documentElement.clientWidth - pos
+      : position.value === 'top' ? pos
       : position.value === 'bottom' ? document.documentElement.clientHeight - pos
       : oops()
     ) - (active ? width.value : 0)
@@ -48,6 +49,7 @@ export function useTouch ({ isActive, isTemporary, width, touchless, position }:
     const progress = (
       position.value === 'left' ? (pos - offset.value) / width.value
       : position.value === 'right' ? (document.documentElement.clientWidth - pos - offset.value) / width.value
+      : position.value === 'top' ? (pos - offset.value) / width.value
       : position.value === 'bottom' ? (document.documentElement.clientHeight - pos - offset.value) / width.value
       : oops()
     )
@@ -64,12 +66,14 @@ export function useTouch ({ isActive, isTemporary, width, touchless, position }:
     const inTouchZone: boolean =
       position.value === 'left' ? touchX < touchZone
       : position.value === 'right' ? touchX > document.documentElement.clientWidth - touchZone
+      : position.value === 'top' ? touchY < touchZone
       : position.value === 'bottom' ? touchY > document.documentElement.clientHeight - touchZone
       : oops()
 
     const inElement: boolean = isActive.value && (
       position.value === 'left' ? touchX < width.value
       : position.value === 'right' ? touchX > document.documentElement.clientWidth - width.value
+      : position.value === 'top' ? touchY < width.value
       : position.value === 'bottom' ? touchY > document.documentElement.clientHeight - width.value
       : oops()
     )
@@ -150,6 +154,7 @@ export function useTouch ({ isActive, isTemporary, width, touchless, position }:
       isActive.value = velocity.direction === ({
         left: 'right',
         right: 'left',
+        top: 'down',
         bottom: 'up',
       }[position.value] || oops())
     } else {
@@ -162,6 +167,7 @@ export function useTouch ({ isActive, isTemporary, width, touchless, position }:
       transform:
         position.value === 'left' ? `translateX(calc(-100% + ${dragProgress.value * width.value}px))`
         : position.value === 'right' ? `translateX(calc(100% - ${dragProgress.value * width.value}px))`
+        : position.value === 'top' ? `translateY(calc(-100% + ${dragProgress.value * width.value}px))`
         : position.value === 'bottom' ? `translateY(calc(100% - ${dragProgress.value * width.value}px))`
         : oops(),
       transition: 'none',

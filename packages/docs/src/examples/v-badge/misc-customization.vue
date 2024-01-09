@@ -7,7 +7,7 @@
     >
       <v-btn
         color="error"
-        flat
+        variant="flat"
       >
         Lock Account
       </v-btn>
@@ -15,7 +15,7 @@
 
     <v-badge
       bordered
-      location="bottom-end"
+      location="bottom end"
       color="deep-purple-accent-4"
       dot
       offset-x="2"

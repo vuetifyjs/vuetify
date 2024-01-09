@@ -17,7 +17,7 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-icon
-        large
+        size="large"
         @click="next"
       >
         mdi-chevron-right
@@ -25,6 +25,12 @@
     </v-card-actions>
   </v-card>
 </template>
+
+<script setup>
+  function next () {
+    alert('You clicked next!')
+  }
+</script>
 
 <script>
   export default {

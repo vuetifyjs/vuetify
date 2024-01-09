@@ -1,5 +1,3 @@
-@import '../../styles/styles.sass';
-
 $date-picker-years-font-size: 16px !default;
 $date-picker-years-font-weight: 400 !default;
 $date-picker-years-portrait-height: 290px !default;
@@ -18,17 +16,14 @@ $date-picker-title-date-font-size: 34px !default;
 $date-picker-title-date-font-weight: 500 !default;
 
 $date-picker-header-padding: 4px 16px !default;
-$date-picker-header-value-transition: $primary-transition !default;
 $date-picker-header-button-font-weight: bold !default;
 $date-picker-header-button-padding: 0.5rem !default;
-$date-picker-header-button-transition: $primary-transition !default;
 
 $date-picker-table-padding: 0 12px !default;
 $date-picker-table-height: 242px !default;
 $date-picker-table-font-size: 12px !default;
 $date-picker-table-date-button-width: 32px !default;
 $date-picker-table-date-button-height: 32px !default;
-$date-picker-table-active-date-color: map-get($shades, 'white') !default;
 $date-picker-table-month-height: 56px !default;
 $date-picker-table-month-min-width: 40px !default;
 $date-picker-table-month-max-width: 140px !default;
