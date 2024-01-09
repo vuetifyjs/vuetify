@@ -489,6 +489,7 @@ export const VCombobox = genericComponent<new <
                       onFocusout={ onFocusout }
                       onScrollPassive={ onListScroll }
                       tabindex="-1"
+                      aria-live="polite"
                       color={ props.itemColor ?? props.color }
                     >
                       { slots['prepend-item']?.() }
