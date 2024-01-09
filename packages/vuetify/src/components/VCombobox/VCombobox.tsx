@@ -389,10 +389,6 @@ export const VCombobox = genericComponent<new <
       if (v == null || (v === '' && !props.multiple)) model.value = []
     }
 
-    watch(filteredItems, val => {
-      if (!val.length && props.hideNoData) menu.value = false
-    })
-
     watch(isFocused, (val, oldVal) => {
       if (val || val === oldVal) return
 
@@ -418,6 +414,18 @@ export const VCombobox = genericComponent<new <
         IN_BROWSER && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
+      }
+    })
+
+    watch(displayItems, (val, oldVal) => {
+      if (!isFocused.value) return
+
+      if (!val.length && props.hideNoData) {
+        menu.value = false
+      }
+
+      if (!oldVal.length && val.length) {
+        menu.value = true
       }
     })
 
