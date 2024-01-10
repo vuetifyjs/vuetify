@@ -32,3 +32,9 @@ The core development team are Open Source developers that help guide the directi
 <promoted slug="vuetify-open-collective" />
 
 <team-members team="core" />
+
+## Legends
+
+Legends are inactive members of the core team. They have contributed a significant amount of time and effort to the project and are recognized for their contributions.
+
+<team-members team="legends" />
