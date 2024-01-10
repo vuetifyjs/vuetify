@@ -292,7 +292,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
       )
     })
 
-    return {}
+    return { group }
   },
 })
 
