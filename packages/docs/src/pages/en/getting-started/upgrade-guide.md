@@ -245,6 +245,7 @@ app.use(vuetify)
   - `onRowClick (item, data, event)` should be changed to `onRowClick (event, { item })`.
 - `item-class` and `item-style` have been combined into `row-props`, and `cell-props` has been added.
 - `sort-desc` and `group-desc` have been combined into `sort-by` and `group-by`. These properties now take an array of `{ key: string, order: 'asc' | 'desc' }` objects instead of strings.
+- `current-items` event has been renamed to `update:current-items`.
 
 ### v-slider/v-range-slider
 
