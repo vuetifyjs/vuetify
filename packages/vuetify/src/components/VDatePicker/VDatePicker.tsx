@@ -264,7 +264,10 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                 { ...datePickerHeaderProps }
                 { ...headerProps }
                 onClick={ viewMode.value !== 'month' ? onClickDate : undefined }
-                v-slots={ slots }
+                v-slots={{
+                  ...slots,
+                  default: undefined,
+                }}
               />
             ),
             default: () => (

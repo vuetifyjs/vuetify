@@ -15,6 +15,8 @@ related:
 
 This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
 
+<page-features />
+
 ::: error
   <span class="text-h6">Many of the changes on this page can be applied automatically using [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)</span>
 :::
@@ -22,7 +24,9 @@ This page contains a detailed list of breaking changes and the steps required to
 <entry />
 
 ::: info
-  This page is incomplete. Please check back later for more information, or submit a PR if you notice something missing. If you have additional questions, reach out to us in [Discord](https://community.vuetifyjs.com/)
+
+Before upgrading, make sure to consult the Official [Vue 3 Migration Guide](https://v3-migration.vuejs.org/)
+
 :::
 
 ::: warning
@@ -102,7 +106,7 @@ app.use(vuetify)
 
 - `.hidden-{breakpoint}-only` has been renamed to `.hidden-{breakpoint}`
 - `.text-xs-{alignment}` has been renamed to `.text-{alignment}` to reflect the fact that it applies to all breakpoints.
-- Typography classes are have been renamed for consistency and are all prefixed with `text-`, for example `.display-4` is now `.text-h1`
+- Typography classes have been renamed for consistency and are all prefixed with `text-`, for example `.display-4` is now `.text-h1`
 - Transition easing classes have been removed.
 
 :::info

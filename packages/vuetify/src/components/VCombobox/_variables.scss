@@ -5,7 +5,9 @@
 $combobox-content-border-radius: 4px !default;
 $combobox-content-elevation: 4 !default;
 $combobox-focused-input: 64px !default;
+$combobox-input-buffer: 2px !default;
 $combobox-line-height: 1.75 !default;
+$combobox-selection-gap: 2px !default;
 $combobox-transition: .2s settings.$standard-easing !default;
 $combobox-chips-control-min-height: null !default;
 $combobox-chips-margin-top: null !default;

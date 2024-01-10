@@ -14,6 +14,8 @@ related:
 
 Vuetify is an [MIT licensed](https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md) open-source project that's completely free to use.
 
+<page-features />
+
 <entry />
 
 ## Preamble

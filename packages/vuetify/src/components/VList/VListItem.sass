@@ -281,6 +281,9 @@ $base-padding: list.nth($list-item-padding, 2)
   --parent-padding: var(--indent-padding)
   --prepend-width: #{$list-item-prepend-size}
 
+  .v-list--slim &
+    --prepend-width: #{$list-item-slim-prepend-size}
+
   &--fluid
     --list-indent-size: 0px
 

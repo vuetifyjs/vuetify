@@ -475,6 +475,12 @@ export function chunk (str: string, size = 1) {
   return chunked
 }
 
+export function chunkArray (array: any[], size = 1) {
+  return Array.from({ length: Math.ceil(array.length / size) }, (v, i) =>
+    array.slice(i * size, i * size + size)
+  )
+}
+
 export function humanReadableFileSize (bytes: number, base: 1000 | 1024 = 1000): string {
   if (bytes < base) {
     return `${bytes} B`
@@ -756,4 +762,16 @@ export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildre
   })
     ? vnodes
     : null
+}
+
+export function defer (timeout: number, cb: () => void) {
+  if (!IN_BROWSER || timeout === 0) {
+    cb()
+
+    return () => {}
+  }
+
+  const timeoutId = window.setTimeout(cb, timeout)
+
+  return () => window.clearTimeout(timeoutId)
 }

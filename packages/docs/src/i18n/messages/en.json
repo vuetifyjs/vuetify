@@ -104,7 +104,9 @@
       "rail-drawer": "Rail drawer",
       "rail-drawer-message": "Show the navigation drawer as a rail that expands on hover",
       "disable-quickbar": "Disable Quickbar",
-      "disable-quickbar-message": "Hide the Quickbar actions located on the top right of the documentation"
+      "disable-quickbar-message": "Hide the Quickbar actions located on the top right of the documentation",
+      "enable-pins": "Enable pins",
+      "enable-pins-message": "Bookmark and access vital documentation pages for a more efficient workflow."
     }
   },
   "data-tables": "Data tables",

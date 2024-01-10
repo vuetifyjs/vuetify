@@ -46,6 +46,7 @@ $list-item-icon-active-opacity: 1 !default;
 $list-item-min-height: 40px !default;
 $list-item-padding: 4px 16px !default;
 $list-item-prepend-size: 40px !default;
+$list-item-slim-prepend-size: 16px !default;
 $list-item-plain-opacity: .62 !default;
 $list-item-rounded-border-radius: map.get(settings.$rounded, null) !default;
 $list-item-one-line-min-height: 48px !default;

@@ -1,16 +1,12 @@
 <template>
-  <template v-if="!auth.isSubscriber">
-    <alert type="info">
-      {{ t('dashboard.perks.alert') }}
+  <alert
+    v-if="!auth.isSubscriber"
+    type="success"
+  >
+    {{ t('dashboard.perks.alert') }}
 
-      <app-link href="https://github.com/sponsors/johnleider">$1 per month</app-link>
-    </alert>
-
-    <promoted
-      permanent
-      slug="vuetify-github-sponsors"
-    />
-  </template>
+    <app-link :href="rpath('/user/subscriptions/')">$1 per month</app-link>
+  </alert>
 
   <settings-header
     title="dashboard.perks.experience"
@@ -18,6 +14,8 @@
   />
 
   <ad-option />
+
+  <pin-option />
 
   <v-divider class="mt-4 mb-3" />
 
@@ -44,12 +42,16 @@
   // Components
   import AdOption from '@/components/app/settings/options/AdOption.vue'
   import AvatarOption from '@/components/app/settings/options/AvatarOption.vue'
+  import PinOption from '@/components/app/settings/options/PinOption.vue'
   import QuickbarOption from '@/components/app/settings/options/QuickbarOption.vue'
   import RailDrawerOption from '@/components/app/settings/options/RailDrawerOption.vue'
   import SettingsHeader from '@/components/app/settings/SettingsHeader.vue'
 
   // Composables
   import { useI18n } from 'vue-i18n'
+
+  // Utilities
+  import { rpath } from '@/util/routes'
 
   // Stores
   import { useAuthStore } from '@vuetify/one'
