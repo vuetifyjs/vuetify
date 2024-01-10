@@ -128,7 +128,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
             elevationClasses.value,
             roundedClasses.value,
             themeClasses.value,
-            rtlClasses.value,
+            rtlClasses,
             props.class,
           ]}
           style={[
