@@ -2,6 +2,7 @@ import {
   arrayDiff,
   convertToUnit,
   deepEqual,
+  defer,
   destructComputed,
   getNestedValue,
   getObjectValueByPath,
@@ -329,6 +330,38 @@ describe('helpers', () => {
       expect(isEmpty(' ')).toBeTruthy()
       expect(isEmpty('sample text')).toBeFalsy()
       expect(isEmpty(12345)).toBeFalsy()
+    })
+  })
+
+  describe('defer', () => {
+    beforeAll(() => {
+      jest.useFakeTimers()
+    })
+
+    it('executes callback immediately if timeout is 0', () => {
+      const mockCallback = jest.fn()
+      defer(0, mockCallback)()
+
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('executes callback after specified timeout', () => {
+      const mockCallback = jest.fn()
+      defer(1000, mockCallback)
+
+      expect(mockCallback).not.toHaveBeenCalled()
+      jest.advanceTimersByTime(1000)
+      expect(mockCallback).toHaveBeenCalled()
+    })
+
+    it('provides a function to clear the timeout', () => {
+      const mockCallback = jest.fn()
+      const clear = defer(1000, mockCallback)
+
+      clear()
+      jest.advanceTimersByTime(1000)
+
+      expect(mockCallback).not.toHaveBeenCalled()
     })
   })
 })

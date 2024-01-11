@@ -8,18 +8,15 @@ import { mount } from '@vue/test-utils'
 import { h } from 'vue'
 import { createVuetify } from '@/framework'
 
-// Types
-import type { VueWrapper } from '@vue/test-utils'
-
 describe('VItemGroup', () => {
   const vuetify = createVuetify()
   const mountFunction = (options = {}) => {
-    return mount<any>(VItemGroup, {
+    return mount(VItemGroup, {
       ...options,
       global: {
         plugins: [vuetify],
       },
-    }) as VueWrapper<VItemGroup>
+    })
   }
 
   const defaultSlot = () => [

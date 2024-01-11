@@ -14,15 +14,11 @@
   ],
   "headers": [
     {
-      "source": "/service-worker.js",
+      "source": "/(.*)",
       "headers" : [
         {
           "key" : "Cache-Control",
-          "value" : "public, max-age=0, s-maxage=0, must-revalidate"
-        },
-        {
-          "key" : "CDN-Cache-Control",
-          "value" : "max-age=0"
+          "value" : "public, max-age=3600, must-revalidate"
         }
       ]
     },
@@ -36,11 +32,15 @@
       ]
     },
     {
-      "source": "/(.*)",
+      "source": "/service-worker.js",
       "headers" : [
         {
           "key" : "Cache-Control",
-          "value" : "public, max-age=3600, must-revalidate"
+          "value" : "public, max-age=0, s-maxage=0, must-revalidate"
+        },
+        {
+          "key" : "CDN-Cache-Control",
+          "value" : "max-age=0"
         }
       ]
     }

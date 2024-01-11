@@ -8,11 +8,19 @@ related:
   - /components/cards/
   - /components/progress-circular/
   - /components/lists/
+features:
+  figma: true
+  github: /components/VProgressLinear/
+  label: 'C: VProgressLinear'
+  report: true
+  spec: https://m2.material.io/components/progress-indicators
 ---
 
 # Progress linear
 
 The `v-progress-linear` component is used to convey data visually to users. It supports both indeterminate amounts, such as loading or processing, and finite amounts of progress (including separate buffer values).
+
+<page-features />
 
 ## Usage
 

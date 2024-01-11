@@ -8,11 +8,19 @@ related:
   - /components/autocompletes/
   - /components/forms/
   - /components/selects/
+features:
+  figma: true
+  label: 'C: VCombobox'
+  report: true
+  github: /components/VCombobox/
+  spec: https://m2.material.io/components/text-fields
 ---
 
 # Combobox
 
 The `v-combobox` component is a [v-text-field](/components/text-fields) that allows the user to select values from a provided **items** array, or to enter their own value. Created items will be returned as strings.
+
+<page-features />
 
 ## Usage
 
@@ -27,6 +35,8 @@ With Combobox, you can allow a user to create new values that may not be present
 | Component | Description |
 | - | - |
 | [v-combobox](/api/v-combobox/) | Primary component |
+| [v-autocomplete](/api/v-autocomplete/) | A select component that allows for advanced filtering |
+| [v-select](/api/v-select/) | A replacement for the HTML <select></select> |
 
 <api-inline hide-links />
 

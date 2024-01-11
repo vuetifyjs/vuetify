@@ -6,7 +6,6 @@
     :items="serverItems"
     :loading="loading"
     :search="search"
-    class="elevation-1"
     item-value="name"
     @update:options="loadItems"
   ></v-data-table-server>

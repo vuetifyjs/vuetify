@@ -13,6 +13,8 @@ related:
 
 Use border utilities to quickly style the border-radius of any element.
 
+<page-features />
+
 <entry />
 
 ## Usage

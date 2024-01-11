@@ -13,6 +13,7 @@ export const VCardActions = genericComponent()({
   setup (props, { slots }) {
     provideDefaults({
       VBtn: {
+        slim: true,
         variant: 'text',
       },
     })

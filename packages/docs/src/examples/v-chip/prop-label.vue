@@ -11,7 +11,6 @@
       class="ma-2"
       color="pink"
       label
-      text-color="white"
     >
       <v-icon start icon="mdi-label"></v-icon>
       Tags

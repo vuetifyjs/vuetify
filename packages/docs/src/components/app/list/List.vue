@@ -7,7 +7,12 @@
     color="primary"
     density="compact"
     item-props
+    slim
   >
+    <template v-if="$slots.item" #item="itemProps">
+      <slot name="item" v-bind="itemProps" />
+    </template>
+
     <template #divider>
       <slot name="divider" />
 
@@ -78,6 +83,8 @@
     disabled?: boolean
     routeMatch?: string
     routePath?: string
+    emphasized?: boolean
+    onClick?: () => void
   }
 
   function generateApiItems (locale: string) {
@@ -131,6 +138,7 @@
       const p = item.subfolder ? `${item.subfolder}/${item.title}` : path
       return {
         title: t(item.title!),
+        emphasized: item.emphasized,
         children: item.items.map(item => generateListItem(item, p, locale, t)),
       }
     }
@@ -166,6 +174,7 @@
         to: item?.to,
         href: item?.href,
       }),
+      onClick: item?.onClick,
       rel: item.href ? 'noopener noreferrer' : undefined,
       target: item.href ? '_blank' : undefined,
       children: item.title === 'api' ? generateApiItems(locale.value) : generateListItems(item, item.title!, locale.value, t),

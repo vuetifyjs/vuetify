@@ -99,9 +99,9 @@
               <template v-slot:item="{ props, item }">
                 <v-list-item
                   v-bind="props"
-                  :prepend-avatar="item?.raw?.avatar"
-                  :title="item?.raw?.name"
-                  :subtitle="item?.raw?.group"
+                  :prepend-avatar="item.raw.avatar"
+                  :title="item.raw.name"
+                  :subtitle="item.raw.group"
                 ></v-list-item>
               </template>
             </v-autocomplete>

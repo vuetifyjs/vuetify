@@ -8,17 +8,22 @@ related:
   - /components/data-tables/basics/
   - /components/data-tables/pagination/
   - /components/tables/
+features:
+  figma: true
+  label: 'C: VPagination'
+  report: true
+  github: /components/VPagination/
 ---
 
 # Pagination
 
-The `v-pagination` component is used to separate long sets of data so that it is easier for a user to consume information. Depending on the length provided, the pagination component will automatically scale. To maintain the current page, simply supply a **v-model** attribute.
+The `v-pagination` component is used to separate long sets of data so that it is easier for a user to consume information.
 
-----
+<page-features />
 
 ## Usage
 
-Pagination by default displays the number of pages based on the set **length** prop, with **prev** and **next** buttons surrounding to help you navigate.
+Pagination by default displays the number of pages based on the set **length** prop, with **prev** and **next** buttons surrounding to help you navigate. Depending on the length provided, the pagination component will automatically scale. To maintain the current page, simply supply a **v-model** attribute.
 
 <usage name="v-pagination" />
 

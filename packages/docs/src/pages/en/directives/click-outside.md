@@ -14,6 +14,8 @@ related:
 
 The `v-click-outside` directive calls a function when something outside of the target element is clicked on. This is used internally by components like `v-menu` and `v-dialog`.
 
+<page-features />
+
 <entry />
 
 ## Usage

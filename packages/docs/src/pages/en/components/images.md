@@ -8,13 +8,17 @@ related:
   - /components/grids
   - /components/aspect-ratios
   - /components/parallax
+features:
+  github: /components/VImg/
+  label: 'C: VImg'
+  report: true
 ---
 
 # Images
 
 The `v-img` component is packed with features to support rich media. Combined with the [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader), you can add dynamic progressive images to provide a better user experience.
 
-----
+<page-features />
 
 ## Usage
 

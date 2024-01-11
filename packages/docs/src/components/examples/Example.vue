@@ -5,11 +5,7 @@
     }"
     scoped
   >
-    <v-sheet
-      border
-      class="mb-9 overflow-hidden"
-      rounded
-    >
+    <app-sheet class="mb-9">
       <v-lazy
         v-if="!preview"
         v-model="hasRendered"
@@ -21,7 +17,7 @@
           flat
           height="44"
         >
-          <v-fade-transition>
+          <v-fade-transition hide-on-leave>
             <div v-if="showCode">
               <v-btn
                 v-for="(section, i) of sections"
@@ -36,6 +32,15 @@
                   {{ upperFirst(section.name) }}
                 </span>
               </v-btn>
+            </div>
+
+            <div
+              v-else-if="user.dev && file"
+              class="text-body-2 ma-1 text-medium-emphasis"
+            >
+              <v-icon icon="mdi-file-tree" />
+
+              {{ file }}.vue
             </div>
           </v-fade-transition>
 
@@ -91,7 +96,7 @@
           <component :is="ExampleComponent" v-if="isLoaded" />
         </v-theme-provider>
       </div>
-    </v-sheet>
+    </app-sheet>
   </v-defaults-provider>
 </template>
 
@@ -103,7 +108,9 @@
   import { useDisplay, useTheme } from 'vuetify'
   import { useI18n } from 'vue-i18n'
   import { usePlayground } from '@/composables/playground'
-  import { useUserStore } from '@/store/user'
+
+  // Stores
+  import { useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed, mergeProps, onMounted, ref, shallowRef, watch } from 'vue'
@@ -113,7 +120,7 @@
 
   const { xs } = useDisplay()
   const { t } = useI18n()
-  const userStore = useUserStore()
+  const user = useUserStore()
 
   const props = defineProps({
     inline: Boolean,
@@ -152,8 +159,8 @@
   const sections = computed(() => {
     const _code = code.value
     if (!_code) return []
-    const scriptContent = parseTemplate(userStore.composition, _code) ??
-      parseTemplate({ composition: 'options', options: 'composition' }[userStore.composition], _code)
+    const scriptContent = parseTemplate(user.composition, _code) ??
+      parseTemplate(({ composition: 'options', options: 'composition' } as any)[user.composition], _code)
 
     return [
       {

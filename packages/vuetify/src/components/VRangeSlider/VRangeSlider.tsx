@@ -125,7 +125,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
     const trackStop = computed(() => position(model.value[1]))
 
     useRender(() => {
-      const [inputProps, _] = VInput.filterProps(props)
+      const inputProps = VInput.filterProps(props)
       const hasPrepend = !!(props.label || slots.label || slots.prepend)
 
       return (
@@ -151,14 +151,15 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
             ...slots,
             prepend: hasPrepend ? slotProps => (
               <>
-                { slots.label?.(slotProps) ?? props.label
-                  ? (
-                    <VLabel
-                      class="v-slider__label"
-                      text={ props.label }
-                    />
-                  ) : undefined
-                }
+                { slots.label?.(slotProps) ?? (
+                  props.label
+                    ? (
+                      <VLabel
+                        class="v-slider__label"
+                        text={ props.label }
+                      />
+                    ) : undefined
+                )}
 
                 { slots.prepend?.(slotProps) }
               </>
@@ -225,6 +226,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                   min={ min.value }
                   max={ model.value[1] }
                   position={ trackStart.value }
+                  ripple={ props.ripple }
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>
@@ -259,6 +261,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                   min={ model.value[0] }
                   max={ max.value }
                   position={ trackStop.value }
+                  ripple={ props.ripple }
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>

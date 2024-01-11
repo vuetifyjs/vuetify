@@ -5,11 +5,27 @@ import { defineStore } from 'pinia'
 import data from '@/data/nav.json'
 
 // Types
+export type Category = {
+  icon: string
+  color: string
+}
+
+export type Notification = {
+  message: string
+  timeout?: number
+  color?: string
+}
+
 export type RootState = {
   apiSearch: string
   drawer: boolean | null
-  settings: boolean
   toc: boolean | null
+  scrolling: boolean
+  items: NavItem[]
+  pages: string[]
+  settings: boolean
+  notifications: Notification[]
+  categories: Record<string, Category>
 }
 
 type NavItem = {
@@ -27,9 +43,11 @@ export const useAppStore = defineStore({
     apiSearch: '',
     drawer: null,
     toc: null,
+    scrolling: false,
     items: Array.from(data),
     pages: getPages(data as NavItem[]),
     settings: false,
+    notifications: [],
     categories: {
       api: {
         icon: 'mdi-flask-outline',
@@ -71,8 +89,17 @@ export const useAppStore = defineStore({
         icon: 'mdi-script-text-outline',
         color: 'pink',
       },
+      labs: {
+        icon: 'mdi-beaker-outline',
+        color: 'purple',
+      },
     },
   } as RootState),
+  actions: {
+    snackbar (message: string, options: Partial<Notification> = {}) {
+      this.notifications.push({ message, ...options })
+    },
+  },
 })
 
 function getPage (item: NavItem, parent = ''): string[] {

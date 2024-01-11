@@ -13,6 +13,8 @@ related:
 
 Configure how content overflows when it becomes out of container bounds.
 
+<page-features />
+
 <entry />
 
 ## How it works

@@ -1,5 +1,4 @@
 import type vuetify from '../../vuetify/lib/index.d.mts'
-import type { useDate } from '../../vuetify/lib/labs/date/index.d.mts'
 
 type IsComposable<T extends string | number | symbol> = T extends `use${Capitalize<infer _>}` ? T : never;
 
@@ -9,6 +8,6 @@ type ExtractComposables<T> = T extends object
   }
   : never
 
-export type Composables = Prettify<ExtractComposables<typeof vuetify> & { useDate: typeof useDate }>
+export type Composables = Prettify<ExtractComposables<typeof vuetify>>
 
 type Prettify<T> = { [K in keyof T]: T[K] } & {}

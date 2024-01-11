@@ -21,6 +21,7 @@ import { filterInputAttrs, genericComponent, getUid, propsFactory, useRender } f
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
 import type { LoaderSlotProps } from '@/composables/loader'
+import type { GenericProps } from '@/util'
 
 export type VSwitchSlots =
   & VInputSlots
@@ -40,7 +41,13 @@ export const makeVSwitchProps = propsFactory({
   ...makeVSelectionControlProps(),
 }, 'VSwitch')
 
-export const VSwitch = genericComponent<VSwitchSlots>()({
+export const VSwitch = genericComponent<new <T>(
+  props: {
+    modelValue?: T | null
+    'onUpdate:modelValue'?: (value: T | null) => void
+  },
+  slots: VSwitchSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSwitch',
 
   inheritAttrs: false,
@@ -49,8 +56,8 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
 
   emits: {
     'update:focused': (focused: boolean) => true,
-    'update:modelValue': () => true,
-    'update:indeterminate': (val: boolean) => true,
+    'update:modelValue': (value: any) => true,
+    'update:indeterminate': (value: boolean) => true,
   },
 
   setup (props, { attrs, slots }) {
@@ -82,8 +89,8 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
 
     useRender(() => {
       const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
-      const [inputProps, _1] = VInput.filterProps(props)
-      const [controlProps, _2] = VSelectionControl.filterProps(props)
+      const inputProps = VInput.filterProps(props)
+      const controlProps = VSelectionControl.filterProps(props)
 
       return (
         <VInput
@@ -94,11 +101,12 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
             loaderClasses.value,
             props.class,
           ]}
-          style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
+          v-model={ model.value }
           id={ id.value }
           focused={ isFocused.value }
+          style={ props.style }
         >
           {{
             ...slots,

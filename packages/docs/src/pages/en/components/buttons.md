@@ -8,6 +8,12 @@ related:
   - /components/button-groups/
   - /components/icons/
   - /components/cards/
+features:
+  figma: true
+  github: /components/VBtn/
+  label: 'C: VBtn'
+  report: true
+  spec: https://m2.material.io/components/buttons
 ---
 
 # Buttons
@@ -16,7 +22,7 @@ The `v-btn` component replaces the standard html button with a material design t
 
 ![Button Entry](https://cdn.vuetifyjs.com/docs/images/components/v-btn/v-btn-entry.png)
 
----
+<page-features />
 
 ## Usage
 
@@ -179,7 +185,7 @@ In addition to [Button groups](/components/button-groups/), the `v-btn` componen
 
 <example file="v-btn/misc-group-survey" hide-invert />
 
-### Tax form comfirmation
+### Tax form confirmation
 
 This example utilizes the [v-text-field](/components/text-fields/) component to collect data from the user and the **loading** prop of `v-btn` when submitting the form.
 
@@ -270,13 +276,13 @@ There are instances where a set of default properties are injected or custom sty
 
 ### Banners
 
-The `v-banner-actions` component applies the **text** variant and reduces button x-axis padding to **8px**.
+The `v-banner-actions` component applies the **text** variant and **slim** prop, reducing button x-axis padding to **8px**.
 
 | Documentation | API |
 | - | - |
 | [Banners](/components/banners/) | [v-banner-actions](/api/v-banner-actions/) |  |
 
-<!-- <example file="v-btn/defaults-card-actions" /> -->
+<example file="v-btn/defaults-banner-actions" />
 
 The following properties are modified when used within a `v-banner-actions` component:
 
@@ -284,6 +290,7 @@ The following properties are modified when used within a `v-banner-actions` comp
 | - | - |
 | **color** | provided by `v-banner-actions` |
 | **density** | provided by `v-banner-actions` |
+| **slim** | `true` |
 | **variant** | `text` |
 
 ### Bottom navigation
@@ -327,7 +334,7 @@ The following properties are modified when used within a `v-btn-group` component
 
 ### Cards
 
-The `v-card-actions` component applies the **text** variant, reduces button x-axis padding to **8px**, and applies a start margin for all siblings. This is to ensure the text from the button lines up with the text and title of the card and that there is space between its actions.
+The `v-card-actions` component applies the **text** variant and **slim** prop, reducing button x-axis padding to **8px**, and applies a start margin for all siblings. This is to ensure the text from the button lines up with the text and title of the card and that there is space between its actions.
 
 | Documentation | API |
 | - | - |
@@ -339,11 +346,12 @@ The following properties are modified when used within a `v-card-actions` compon
 
 | Property | Value |
 | - | - |
+| **slim** | `true` |
 | **variant** | `text` |
 
 ### Snackbars
 
-The `v-snackbar` component applies the **text** variant and removes ripples from all `v-btn` components.
+The `v-snackbar` component applies the **text** variant, **slim** prop, and removes ripples from all `v-btn` components.
 
 | Documentation | API |
 | - | - |
@@ -355,6 +363,7 @@ The following properties are modified when used within the **actions** slot of t
 
 | Property | Value |
 | - | - |
+| **slim** | `true` |
 | **ripple** | `false` |
 | **variant** | `text` |
 
@@ -381,7 +390,7 @@ The `v-btn` component is an extension of the native `button` element and support
 
 ### ARIA Attributes
 
-By default, the `v-btn` component includes relevant [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) attributes to enhance accessibility. The component is automatically assigned the `role="button"` attribute, which indicates its purpose as a button to assistive technologies.
+By default, the `v-btn` component includes relevant [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) attributes to enhance accessibility. The component is automatically assigned the `type="button"` attribute, which indicates its purpose as a button to assistive technologies.
 
 ### Keyboard Navigation
 

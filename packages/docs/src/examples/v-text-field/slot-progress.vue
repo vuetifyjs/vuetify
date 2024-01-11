@@ -16,7 +16,6 @@
           :active="custom"
           :model-value="progress"
           :color="color"
-          absolute
           height="7"
           indeterminate
         ></v-progress-linear>

@@ -10,7 +10,7 @@ import team from '@/data/team.json'
 
 export type Member = {
   discord?: string
-  focus: string[]
+  focus?: string[]
   funding?: string[]
   languages: string[]
   linkedin?: string
@@ -51,8 +51,8 @@ export const useTeamStore = defineStore('team', () => {
       }) === 0)
 
       return {
-        ...member,
         avatar: record?.avatar_url,
+        ...member,
       }
     })
   })

@@ -6,7 +6,8 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.eslint.json',
     tsconfigRootDir: __dirname,
-    extraFileExtensions: ['.vue'],
+    extraFileExtensions: ['.vue', '.json'],
+    suppressDeprecatedPropertyWarnings: true,
   },
   extends: [
     'standard',
@@ -190,7 +191,7 @@ module.exports = {
         // '@typescript-eslint/no-unnecessary-condition': 'error',
         '@typescript-eslint/prefer-includes': 'error',
         // '@typescript-eslint/prefer-nullish-coalescing': 'warn',
-        '@typescript-eslint/prefer-optional-chain': 'warn',
+        // '@typescript-eslint/prefer-optional-chain': 'warn',
         '@typescript-eslint/prefer-string-starts-ends-with': 'error',
         '@typescript-eslint/prefer-ts-expect-error': 'warn',
         '@typescript-eslint/restrict-plus-operands': 'error',
@@ -236,6 +237,17 @@ module.exports = {
       files: '**/*.d.ts',
       rules: {
         'import/no-duplicates': 'off',
+      },
+    },
+    {
+      files: '**/*.json',
+      rules: {
+        quotes: ['error', 'double'],
+        'comma-dangle': ['error', 'never'],
+        'quote-props': ['error', 'always'],
+        'max-len': 'off',
+        'no-unused-expressions': 'off',
+        'no-template-curly-in-string': 'off',
       },
     },
   ],

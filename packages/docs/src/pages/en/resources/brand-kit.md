@@ -1,5 +1,4 @@
 ---
-emphasized: true
 fluid: true
 meta:
   nav: Brand Kit
@@ -20,6 +19,8 @@ related:
 # Brand Kit
 
 Explore the Vuetify Brand Kit, your source for official logos and branding assets.
+
+<page-features />
 
 <entry />
 

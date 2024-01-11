@@ -1,33 +1,31 @@
 {
   "props": {
-    "autocomplete": "Filter the items in the list based on user input",
+    "autocomplete": "Filter the items in the list based on user input.",
     "cacheItems": "Keeps a local _unique_ copy of all items that have been passed through the **items** prop.",
-    "chips": "Changes display of selections to chips",
-    "closableChips": "Enables the [closable](/api/v-chip/#props-closable) prop on all [v-chip](/components/chips/) components",
-    "combobox": "The single select variant of **tags**",
-    "hideSelected": "Do not display in the select menu items that are already selected",
-    "itemColor": "Sets color of selected items",
-    "itemDisabled": "Set property of **items**'s disabled value",
-    "items": "Can be an array of objects or array of strings. When using objects, will look for a title, value and disabled keys. This can be changed using the **item-title**, **item-value** and **item-disabled** props.  Objects that have a **header** or **divider** property are considered special cases and generate a list header or divider; these items are not selectable.",
-    "itemText": "Set property of **items**'s title value",
-    "itemValue": "Set property of **items**'s value - **must be primitive**. Dot notation is supported. **Note:** This is currently not supported with `v-combobox` [GitHub Issue](https://github.com/vuetifyjs/vuetify/issues/5479)",
-    "minWidth": "Sets the minimum width of the select's `v-menu` content",
-    "multiple": "Changes select to multiple. Accepts array for value",
-    "multiLine": "Causes label to float when the select component is focused or dirty",
-    "openOnClear": "When using the **clearable** prop, once cleared, the select menu will either open or stay open, depending on the current state",
-    "overflow": "Creates an overflow button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
-    "searchInput": "Use the **.sync** modifier to catch user input from the search input",
-    "segmented": "Creates a segmented button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
-    "smallChips": "Changes display of selections to chips with the **small** property",
-    "tags": "Tagging functionality, allows the user to create new values not available from the **items** prop"
+    "chips": "Changes display of selections to chips.",
+    "closableChips": "Enables the [closable](/api/v-chip/#props-closable) prop on all [v-chip](/components/chips/) components.",
+    "combobox": "The single select variant of **tags**.",
+    "hideSelected": "Do not display in the select menu items that are already selected.",
+    "itemColor": "Sets color of selected items.",
+    "itemDisabled": "Set property of **items**'s disabled value.",
+    "items": "Can be an array of objects or strings. By default objects should have **title** and **value** properties, and can optionally have a **props** property containing any [VListItem props](/api/v-list-item/#props). Keys to use for these can be changed with the **item-title**, **item-value**, and **item-props** props.",
+    "itemText": "Set property of **items**'s title value.",
+    "itemValue": "Set property of **items**'s value - **must be primitive**. Dot notation is supported. **Note:** This is currently not supported with `v-combobox` [GitHub Issue](https://github.com/vuetifyjs/vuetify/issues/5479).",
+    "minWidth": "Sets the minimum width of the select's `v-menu` content.",
+    "multiple": "Changes select to multiple. Accepts array for value.",
+    "multiLine": "Causes label to float when the select component is focused or dirty.",
+    "openOnClear": "When using the **clearable** prop, once cleared, the select menu will either open or stay open, depending on the current state.",
+    "overflow": "Creates an overflow button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons).",
+    "searchInput": "Use the **.sync** modifier to catch user input from the search input.",
+    "segmented": "Creates a segmented button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons).",
+    "smallChips": "Changes display of selections to chips with the **small** property.",
+    "tags": "Tagging functionality, allows the user to create new values not available from the **items** prop."
   },
   "events": {
-    "update:list-index": "Emitted when menu item is selected using keyboard arrows",
-    "update:search-input": "The `search-input.sync` event"
+    "update:listIndex": "Emitted when menu item is selected using keyboard arrows.",
+    "update:searchInput": "The `search-input.sync` event."
   },
   "slots": {
     "item": "Define a custom item appearance. The root element of this slot must be a **v-list-item** with `v-bind=\"props\"` applied. `props` includes everything required for the default select list behaviour - including title, value, click handlers, virtual scrolling, and anything else that has been added with [`item-props`](api/v-select/#props-item-props)."
-  },
-  "exposed": {
   }
 }

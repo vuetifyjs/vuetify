@@ -1,10 +1,12 @@
 <!-- eslint-disable vue/attribute-hyphenation  -->
 <template>
+  <!-- possible bug with dialog overflow with scrollable -->
   <v-dialog
     v-model="model"
-    height="700"
+    content-class="overflow-visible align-self-start mt-16"
+    max-height="900"
     scrollable
-    width="500"
+    width="600"
     @after-leave="searchString = ''"
   >
     <template #activator="{ props: activatorProps }">
@@ -33,53 +35,51 @@
       </app-btn>
     </template>
 
-    <v-card height="100%">
-      <v-toolbar color="primary" class="ps-3 pe-4">
-        <v-icon icon="$vuetify" size="x-large" />
-
-        <v-toolbar-title class="ms-2">
-          {{ t('search.label') }} Vuetify
-        </v-toolbar-title>
-
-        <v-spacer />
-
-        <v-btn
-          class="me-n2"
-          icon="mdi-close"
-          size="x-small"
-          variant="text"
-          @click="model = false"
-        />
-      </v-toolbar>
-
+    <v-card>
       <app-text-field
         v-model="searchString"
         :placeholder="`${t('search.looking') }...`"
         autofocus
-        class="flex-grow-0"
+        class="flex-grow-0 mb-4"
         variant="filled"
-      />
+      >
+        <template #append-inner>
+          <app-btn border size="small">
+            <span class="text-caption text-disabled">{{ t('esc') }}</span>
+          </app-btn>
+        </template>
+      </app-text-field>
 
-      <v-card-text class="pa-4">
-        <div v-if="!searchString" class="mt-16 pt-16 text-center">
-          <v-icon
-            class="mb-6 mx-auto text-disabled"
-            icon="mdi-text-box-search-outline"
-            size="150"
-          />
+      <v-card-text :class="['px-4 py-0 d-flex flex-wrap justify-center', searchString ? 'align-start' : 'align-center']">
 
-          <br>
+        <search-recent
+          v-if="searches.length && !searchString"
+          :searches="searches"
+          @click:delete="onClickDelete"
+        />
 
-          <v-list-subheader class="d-inline-flex">
-            {{ t('search.results') }}
-          </v-list-subheader>
-        </div>
+        <template v-else-if="!searchString">
+          <div class="text-center">
+            <v-icon
+              class="mb-6 mx-auto text-disabled"
+              icon="mdi-text-box-search-outline"
+              size="150"
+            />
+
+            <br>
+
+            <v-list-subheader class="d-inline-flex">
+              {{ t('search.results') }}
+            </v-list-subheader>
+          </div>
+        </template>
 
         <ais-instant-search
           v-else
+          class="flex-grow-1"
           :search-client="searchClient"
-          :search-function="searchFunction"
           index-name="vuetifyjs-v3"
+          @state-change="searchFunction"
         >
           <ais-configure
             :facetFilters="[`lang:${locale}`]"
@@ -88,10 +88,16 @@
           />
 
           <ais-hits v-slot="{ items }">
-            <search-results ref="list" :groups="transformItems(items)" />
+            <search-results
+              ref="list"
+              :groups="transformItems(items)"
+              @click:result="onClickResult"
+            />
           </ais-hits>
         </ais-instant-search>
       </v-card-text>
+
+      <v-divider class="my-4" />
 
       <AisPoweredBy class="ms-auto me-4 mb-2" />
     </v-card>
@@ -100,6 +106,7 @@
 
 <script setup lang="ts">
   // Components
+  import SearchRecent from './SearchRecent.vue'
   import SearchResults from './SearchResults.vue'
 
   // Composables
@@ -109,11 +116,11 @@
 
   // Utilities
   import { AisConfigure, AisHits, AisInstantSearch, AisPoweredBy } from 'vue-instantsearch/vue3/es/src/instantsearch.js'
-  import { onBeforeUnmount, onMounted, ref } from 'vue'
+  import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
   import algoliasearch from 'algoliasearch'
 
   // Stores
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   // Types
   import type { AlgoliaSearchHelper } from 'algoliasearch-helper'
@@ -130,8 +137,13 @@
     'NHT6C0IV19', // docsearch app ID
     'ffa344297924c76b0f4155384aff7ef2' // vuetify API key
   )
+  const searches = ref(JSON.parse(localStorage.getItem('searches') || '[]'))
 
   const locale = 'en'
+
+  watch(searches, val => {
+    localStorage.setItem('searches', JSON.stringify(val))
+  })
 
   onMounted(() => {
     document.addEventListener('keydown', onDocumentKeydown)
@@ -204,6 +216,21 @@
 
       list.value?.rootEl?.focus()
     }
+  }
+  function onClickDelete (index: number) {
+    const array = searches.value.slice(0, 6)
+
+    array.splice(index, 1)
+
+    searches.value = array
+  }
+
+  function onClickResult (result: any) {
+    const array = searches.value.slice(0, 6)
+
+    array.unshift(result)
+
+    searches.value = array
   }
 </script>
 
