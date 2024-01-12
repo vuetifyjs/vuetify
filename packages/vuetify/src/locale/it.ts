@@ -2,6 +2,10 @@ export default {
   badge: 'Distintivo',
   open: 'Apri',
   close: 'Chiudi',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Annulla',
+  },
   dataIterator: {
     noResultsText: 'Nessun risultato trovato',
     loadingText: 'Caricamento in corso...',
@@ -31,8 +35,7 @@ export default {
     divider: 'a',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Annulla',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Seleziona date',
       header: 'Inserisci date',
@@ -53,6 +56,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} di più',
+    today: 'Today',
   },
   input: {
     clear: 'Cancella {0}',

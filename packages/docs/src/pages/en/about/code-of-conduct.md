@@ -9,6 +9,8 @@ meta:
 
 For questions or concerns regarding our *Code of Conduct*, please reach out to us at [support@vuetifyjs.com](mailto:support@vuetifyjs.com).
 
+<page-features />
+
 <entry />
 
 ## Our Pledge

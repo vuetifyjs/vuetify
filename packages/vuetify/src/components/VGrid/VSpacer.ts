@@ -1,3 +1,6 @@
+// Styles
+import './VGrid.sass'
+
 // Utilities
 import { createSimpleFunctional } from '@/util'
 

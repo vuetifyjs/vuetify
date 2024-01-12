@@ -5,7 +5,6 @@
     :items-length="totalItems"
     :items="serverItems"
     :loading="loading"
-    class="elevation-1"
     item-value="name"
     @update:options="loadItems"
   ></v-data-table-server>
@@ -14,95 +13,86 @@
 <script setup>
   import { ref } from 'vue'
 
-  const desserts = [
+  const cars = [
     {
-      name: 'Frozen Yogurt',
-      calories: 159,
-      fat: 6,
-      carbs: 24,
-      protein: 4,
-      iron: '1',
+      name: 'Ford Mustang',
+      horsepower: 450,
+      fuel: 'Gasoline',
+      origin: 'USA',
+      price: 55000,
     },
     {
-      name: 'Jelly bean',
-      calories: 375,
-      fat: 0,
-      carbs: 94,
-      protein: 0,
-      iron: '0',
+      name: 'Tesla Model S',
+      horsepower: 670,
+      fuel: 'Electric',
+      origin: 'USA',
+      price: 79999,
     },
     {
-      name: 'KitKat',
-      calories: 518,
-      fat: 26,
-      carbs: 65,
-      protein: 7,
-      iron: '6',
+      name: 'BMW M3',
+      horsepower: 503,
+      fuel: 'Gasoline',
+      origin: 'Germany',
+      price: 70000,
     },
     {
-      name: 'Eclair',
-      calories: 262,
-      fat: 16,
-      carbs: 23,
-      protein: 6,
-      iron: '7',
+      name: 'Audi RS6',
+      horsepower: 591,
+      fuel: 'Gasoline',
+      origin: 'Germany',
+      price: 109000,
     },
     {
-      name: 'Gingerbread',
-      calories: 356,
-      fat: 16,
-      carbs: 49,
-      protein: 3.9,
-      iron: '16',
+      name: 'Chevrolet Camaro',
+      horsepower: 650,
+      fuel: 'Gasoline',
+      origin: 'USA',
+      price: 62000,
     },
     {
-      name: 'Ice cream sandwich',
-      calories: 237,
-      fat: 9,
-      carbs: 37,
-      protein: 4.3,
-      iron: '1',
+      name: 'Porsche 911',
+      horsepower: 379,
+      fuel: 'Gasoline',
+      origin: 'Germany',
+      price: 101000,
     },
     {
-      name: 'Lollipop',
-      calories: 392,
-      fat: 0.2,
-      carbs: 98,
-      protein: 0,
-      iron: '2',
+      name: 'Jaguar F-Type',
+      horsepower: 575,
+      fuel: 'Gasoline',
+      origin: 'UK',
+      price: 61000,
     },
     {
-      name: 'Cupcake',
-      calories: 305,
-      fat: 3.7,
-      carbs: 67,
-      protein: 4.3,
-      iron: '8',
+      name: 'Mazda MX-5',
+      horsepower: 181,
+      fuel: 'Gasoline',
+      origin: 'Japan',
+      price: 26000,
     },
     {
-      name: 'Honeycomb',
-      calories: 408,
-      fat: 3.2,
-      carbs: 87,
-      protein: 6.5,
-      iron: '45',
+      name: 'Nissan GT-R',
+      horsepower: 565,
+      fuel: 'Gasoline',
+      origin: 'Japan',
+      price: 113540,
     },
     {
-      name: 'Donut',
-      calories: 452,
-      fat: 25,
-      carbs: 51,
-      protein: 4.9,
-      iron: '22',
+      name: 'Mercedes-AMG GT',
+      horsepower: 523,
+      fuel: 'Gasoline',
+      origin: 'Germany',
+      price: 115900,
     },
   ]
+
   const FakeAPI = {
     async fetch ({ page, itemsPerPage, sortBy }) {
       return new Promise(resolve => {
         setTimeout(() => {
           const start = (page - 1) * itemsPerPage
           const end = start + itemsPerPage
-          const items = desserts.slice()
+          const items = cars.slice()
           if (sortBy.length) {
             const sortKey = sortBy[0].key
             const sortOrder = sortBy[0].order
@@ -120,17 +110,11 @@
   }
   const itemsPerPage = ref(5)
   const headers = ref([
-    {
-      title: 'Dessert (100g serving)',
-      align: 'start',
-      sortable: false,
-      key: 'name',
-    },
-    { title: 'Calories', key: 'calories', align: 'end' },
-    { title: 'Fat (g)', key: 'fat', align: 'end' },
-    { title: 'Carbs (g)', key: 'carbs', align: 'end' },
-    { title: 'Protein (g)', key: 'protein', align: 'end' },
-    { title: 'Iron (%)', key: 'iron', align: 'end' },
+    { title: 'Car Model', key: 'name', align: 'start' },
+    { title: 'Horsepower', key: 'horsepower', align: 'end' },
+    { title: 'Fuel Type', key: 'fuel', align: 'start' },
+    { title: 'Origin', key: 'origin', align: 'start' },
+    { title: 'Price ($)', key: 'price', align: 'end' },
   ])
   const serverItems = ref([])
   const loading = ref(true)

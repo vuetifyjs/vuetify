@@ -26,15 +26,7 @@ The `v-stepper` component displays progress through numbered steps.
 <page-features />
 
 ::: success
-
-This component is feature complete and is pending release in [v3.4.0 (Blackguard)](/introduction/roadmap/#v3-4-blackguard)
-
-:::
-
-::: warning
-
-This feature requires [v3.3.11](/getting-started/release-notes/?version=v3.3.11)
-
+This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
 :::
 
 ## Usage
@@ -45,21 +37,7 @@ A stepper can be used for a multitude of scenarios, including shopping carts, re
 
 <entry />
 
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VStepper } from 'vuetify/labs/VStepper'
-
-export default createVuetify({
-  components: {
-    VStepper,
-  },
-})
-```
-
-::: info
+::: warning
 
 Due to the massive differences in display and functionality between horizontal and vertical steppers, the **vertical** property is moving to a new component `v-stepper-vertical`.
 

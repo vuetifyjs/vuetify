@@ -31,7 +31,7 @@
 <script setup lang="ts">
   import { useRoute } from 'vue-router'
   import { rpath } from '@/util/routes'
-  import { useHead } from '@vueuse/head'
+  import { useHead } from '@unhead/vue'
   import DefaultLayout from '@/layouts/default.vue'
 
   const route = useRoute()

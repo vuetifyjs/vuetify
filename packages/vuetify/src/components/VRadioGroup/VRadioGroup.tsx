@@ -17,6 +17,7 @@ import { filterInputAttrs, genericComponent, getUid, omit, propsFactory, useRend
 
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
+import type { GenericProps } from '@/util'
 
 export type VRadioGroupSlots = Omit<VInputSlots, 'default'> & {
   default: never
@@ -49,7 +50,13 @@ export const makeVRadioGroupProps = propsFactory({
   },
 }, 'VRadioGroup')
 
-export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
+export const VRadioGroup = genericComponent<new <T>(
+  props: {
+    modelValue?: T | null
+    'onUpdate:modelValue'?: (value: T | null) => void
+  },
+  slots: VRadioGroupSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VRadioGroup',
 
   inheritAttrs: false,
@@ -57,7 +64,7 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
   props: makeVRadioGroupProps(),
 
   emits: {
-    'update:modelValue': (val: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { attrs, slots }) {
@@ -67,8 +74,8 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
 
     useRender(() => {
       const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
-      const [inputProps, _1] = VInput.filterProps(props)
-      const [controlProps, _2] = VSelectionControl.filterProps(props)
+      const inputProps = VInput.filterProps(props)
+      const controlProps = VSelectionControl.filterProps(props)
       const label = slots.label
         ? slots.label({
           label: props.label,

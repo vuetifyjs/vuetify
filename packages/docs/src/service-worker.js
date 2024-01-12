@@ -24,8 +24,14 @@ self.addEventListener('install', event => {
   console.log('[SW] Installed')
   event.waitUntil((async () => {
     if (self.registration.active) {
-      previousManifest = await messageSW(self.registration.active, { type: 'GET_MANIFEST' })
-      console.log('[SW] Recieved manifest')
+      await Promise.race([
+        new Promise(resolve => setTimeout(resolve, 500)),
+        messageSW(self.registration.active, { type: 'GET_MANIFEST' })
+          .then(manifest => {
+            previousManifest = manifest
+            console.log('[SW] Recieved manifest')
+          }),
+      ])
     }
     self.skipWaiting()
   })())
@@ -103,12 +109,14 @@ async function networkFirst (request) {
   } catch (e) {
     console.warn('[SW] Failed to fetch', e)
   }
-
+  const is400 = response?.status >= 400 && response?.status < 500
   if (response?.status === 200) {
     cache.put(request, response.clone())
-  } else {
+  } else if (!is400) {
     const cached = await caches.match(request)
     if (cached) return cached
+  } else {
+    await cache.delete(request)
   }
 
   return response

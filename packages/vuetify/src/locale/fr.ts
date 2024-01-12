@@ -2,6 +2,10 @@ export default {
   badge: 'Badge',
   open: 'Ouvrir',
   close: 'Fermer',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Annuler',
+  },
   dataIterator: {
     noResultsText: 'Aucun enregistrement correspondant trouvé',
     loadingText: `Chargement de l'élément...`,
@@ -19,7 +23,7 @@ export default {
     sortBy: 'Trier par',
   },
   dataFooter: {
-    itemsPerPageText: 'Élements par page :',
+    itemsPerPageText: 'Éléments par page :',
     itemsPerPageAll: 'Tous',
     nextPage: 'Page suivante',
     prevPage: 'Page précédente',
@@ -31,8 +35,7 @@ export default {
     divider: 'à',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Annuler',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Sélectionner des dates',
       header: 'Entrer des dates',
@@ -53,6 +56,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} de plus',
+    today: 'Today',
   },
   input: {
     clear: 'Vider {0}',

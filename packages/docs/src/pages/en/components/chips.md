@@ -54,11 +54,28 @@ Closable chips can be controlled with a v-model. You can also listen to the `cli
 
 <example file="v-chip/prop-closable" />
 
-#### Colored
+#### Color and variants
 
 Any color from the Material Design palette can be used to change a chips color.
 
 <example file="v-chip/prop-colored" />
+
+The **variant** prop gives you easy access to several different button styles. Available variants are: **elevated**, **flat**, **tonal** (default), **outlined**, **text**, and **plain**.
+
+| Value        | Example                                                  | Description                                                     |
+|--------------|----------------------------------------------------------|-----------------------------------------------------------------|
+| **elevated** | <v-chip color="primary" variant="elevated">Chip</v-chip> | Elevates the chip with a shadow                               |
+| **flat**     | <v-chip color="primary" variant="flat">Chip</v-chip>     | Removes chip shadow                                           |
+| **tonal**    | <v-chip color="primary" variant="tonal">Chip</v-chip>    | Background color is a lowered opacity of the current text color |
+| **outlined** | <v-chip color="primary" variant="outlined">Chip</v-chip> | Applies a thin border with the current text color               |
+| **text**     | <v-chip color="primary" variant="text">Chip</v-chip>     | Removes the background and removes shadow                       |
+| **plain**    | <v-chip color="primary" variant="plain">Chip</v-chip>    | Removes the background and lowers the opacity until hovered     |
+
+#### Size and density
+
+Chips can have various sizes from `x-small` to `x-large`. `density` is used to adjust the vertical spacing without affecting width or font size.
+
+<example file="v-chip/prop-sizes" />
 
 #### Draggable
 
@@ -83,25 +100,6 @@ Label chips use the `v-card` border-radius.
 Outlined chips inherit their border color from the current text color.
 
 <example file="v-chip/prop-outlined" />
-
-#### Sizes
-
-`v-chip` component can have various sizes from `x-small` to `x-large`.
-
-<example file="v-chip/prop-sizes" />
-
-#### Variants
-
-The **variant** prop gives you easy access to several different button styles. Available variants are: **elevated**(default), **flat**, **tonal**, **outlined**, **text**, and **plain**.
-
-| Value        | Example                                                  | Description                                                     |
-|--------------|----------------------------------------------------------|-----------------------------------------------------------------|
-| **elevated** | <v-chip color="primary" variant="elevated">Chip</v-chip> | Elevates the chip with a shadow                               |
-| **flat**     | <v-chip color="primary" variant="flat">Chip</v-chip>     | Removes chip shadow                                           |
-| **tonal**    | <v-chip color="primary" variant="tonal">Chip</v-chip>    | Background color is a lowered opacity of the current text color |
-| **outlined** | <v-chip color="primary" variant="outlined">Chip</v-chip> | Applies a thin border with the current text color               |
-| **text**     | <v-chip color="primary" variant="text">Chip</v-chip>     | Removes the background and removes shadow                       |
-| **plain**    | <v-chip color="primary" variant="plain">Chip</v-chip>    | Removes the background and lowers the opacity until hovered     |
 
 ### Slots
 

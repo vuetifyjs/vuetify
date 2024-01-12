@@ -13,6 +13,8 @@ related:
 
 Customize your application's default text colors, surfaces, and more. Easily modify your theme programmatically in real time. Vuetify comes with standard support for light and dark variants.
 
+<page-features />
+
 <entry />
 
 ## API
@@ -48,7 +50,7 @@ This makes it possible for Vuetify to implement Material Design concepts such as
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createApp } from 'vue'
-import { createVuetify, ThemeDefinition } from 'vuetify'
+import { createVuetify } from 'vuetify'
 
 const myCustomLightTheme = {
   dark: false,
@@ -95,7 +97,7 @@ When using Typescript you may use the `ThemeDefinition` type to get type hints f
 
 ```ts { resource="src/plugins/vuetify.ts" }
 import { createApp } from 'vue'
-import { createVuetify, ThemeDefinition } from 'vuetify'
+import { createVuetify, type ThemeDefinition } from 'vuetify'
 
 const myCustomLightTheme: ThemeDefinition = {
   dark: false,

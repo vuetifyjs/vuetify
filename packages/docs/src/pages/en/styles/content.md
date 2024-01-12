@@ -13,6 +13,8 @@ related:
 
 Vuetify has custom styling for multiple standard elements.
 
+<page-features />
+
 <entry />
 
 ## Block quote

@@ -16,6 +16,7 @@ import {
   computed,
   nextTick,
   onBeforeMount,
+  onBeforeUnmount,
   ref,
   shallowRef,
   vShow,
@@ -25,6 +26,7 @@ import {
 import {
   convertToUnit,
   genericComponent,
+  getCurrentInstance,
   propsFactory,
   SUPPORTS_INTERSECTION,
   useRender,
@@ -51,6 +53,10 @@ export type VImgSlots = {
 export const makeVImgProps = propsFactory({
   alt: String,
   cover: Boolean,
+  draggable: {
+    type: [Boolean, String] as PropType<boolean | 'true' | 'false'>,
+    default: undefined,
+  },
   eager: Boolean,
   gradient: String,
   lazySrc: String,
@@ -69,7 +75,19 @@ export const makeVImgProps = propsFactory({
     type: [String, Object] as PropType<string | srcObject>,
     default: '',
   },
+  crossorigin: String as PropType<'' | 'anonymous' | 'use-credentials'>,
+  referrerpolicy: String as PropType<
+    | 'no-referrer'
+    | 'no-referrer-when-downgrade'
+    | 'origin'
+    | 'origin-when-cross-origin'
+    | 'same-origin'
+    | 'strict-origin'
+    | 'strict-origin-when-cross-origin'
+    | 'unsafe-url'
+  >,
   srcset: String,
+  position: String,
 
   ...makeVResponsiveProps(),
   ...makeComponentProps(),
@@ -90,6 +108,8 @@ export const VImg = genericComponent<VImgSlots>()({
   },
 
   setup (props, { emit, slots }) {
+    const vm = getCurrentInstance('VImg')
+
     const currentSrc = shallowRef('') // Set from srcset
     const image = ref<HTMLImageElement>()
     const state = shallowRef<'idle' | 'loading' | 'loaded' | 'error'>(props.eager ? 'loading' : 'idle')
@@ -149,6 +169,8 @@ export const VImg = genericComponent<VImgSlots>()({
         emit('loadstart', image.value?.currentSrc || normalisedSrc.value.src)
 
         setTimeout(() => {
+          if (vm.isUnmounted) return
+
           if (image.value?.complete) {
             if (!image.value.naturalWidth) {
               onError()
@@ -167,6 +189,8 @@ export const VImg = genericComponent<VImgSlots>()({
     }
 
     function onLoad () {
+      if (vm.isUnmounted) return
+
       getSrc()
       pollForSize(image.value!)
       state.value = 'loaded'
@@ -174,6 +198,8 @@ export const VImg = genericComponent<VImgSlots>()({
     }
 
     function onError () {
+      if (vm.isUnmounted) return
+
       state.value = 'error'
       emit('error', image.value?.currentSrc || normalisedSrc.value.src)
     }
@@ -184,9 +210,16 @@ export const VImg = genericComponent<VImgSlots>()({
     }
 
     let timer = -1
+
+    onBeforeUnmount(() => {
+      clearTimeout(timer)
+    })
+
     function pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {
         clearTimeout(timer)
+        if (vm.isUnmounted) return
+
         const { naturalHeight: imgHeight, naturalWidth: imgWidth } = img
 
         if (imgHeight || imgWidth) {
@@ -214,9 +247,13 @@ export const VImg = genericComponent<VImgSlots>()({
       const img = (
         <img
           class={['v-img__img', containClasses.value]}
+          style={{ objectPosition: props.position }}
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
           alt={ props.alt }
+          crossorigin={ props.crossorigin }
+          referrerpolicy={ props.referrerpolicy }
+          draggable={ props.draggable }
           sizes={ props.sizes }
           ref={ image }
           onLoad={ onLoad }
@@ -245,8 +282,12 @@ export const VImg = genericComponent<VImgSlots>()({
         { normalisedSrc.value.lazySrc && state.value !== 'loaded' && (
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
+            style={{ objectPosition: props.position }}
             src={ normalisedSrc.value.lazySrc }
             alt={ props.alt }
+            crossorigin={ props.crossorigin }
+            referrerpolicy={ props.referrerpolicy }
+            draggable={ props.draggable }
           />
         )}
       </MaybeTransition>
@@ -298,7 +339,7 @@ export const VImg = genericComponent<VImgSlots>()({
     }
 
     useRender(() => {
-      const [responsiveProps] = VResponsive.filterProps(props)
+      const responsiveProps = VResponsive.filterProps(props)
       return (
         <VResponsive
           class={[

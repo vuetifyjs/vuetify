@@ -1,5 +1,5 @@
 ---
-emphasized: false
+emphasized: true
 meta:
   title: Dates
   description: Vuetify has first party date support that can easily be swapped for another date library
@@ -9,23 +9,21 @@ related:
 - /features/global-configuration/
 - /features/treeshaking/
 features:
-  github: /labs/date/
+  github: /composables/date/
   label: 'E: date'
   report: true
 ---
 
 # Dates
 
-Easily hook up date libraries that are used for components that require date functionality.
+Easily hook up date libraries that are used for components such as Date Picker and Calendar that require date functionality.
 
 <page-features />
 
 <entry />
 
-::: warning
-
-This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
-
+::: success
+This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
 :::
 
 ## Usage
@@ -36,7 +34,7 @@ The following example demonstrates explicitly importing the Vuetify date adapter
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
-import { VuetifyDateAdapter } from 'vuetify/labs/date/adapters/vuetify'
+import { VuetifyDateAdapter } from 'vuetify/date/adapters/vuetify'
 
 export default createVuetify({
   date: {
@@ -49,7 +47,7 @@ Within your application, import the **useDate** function and use it to access th
 
 ```html { resource="src/views/Date.vue" }
 <script setup>
-  import { useDate } from 'vuetify/labs/date'
+  import { useDate } from 'vuetify'
 
   const date = useDate()
 
@@ -58,7 +56,9 @@ Within your application, import the **useDate** function and use it to access th
 ```
 
 ::: info
+
 For a list of all supported date adapters, visit the [date-io](https://github.com/dmtrKovalenko/date-io#projects) project repository.
+
 :::
 
 ### Format options
@@ -80,7 +80,7 @@ The following example shows how to use the date composable to format a date stri
 
 ```html { resource="src/views/Date.vue" }
 <script setup>
-  import { useDate } from 'vuetify/labs/date'
+  import { useDate } from 'vuetify'
 
   const date = useDate()
 
@@ -122,39 +122,38 @@ To create your own date adapter, implement the **DateAdapter** interface:
 ```ts
 import type { DateAdapter } from 'vuetify/labs'
 
-export interface DateAdapter<Date> {
-  date (value?: any): Date | null
-  format (date: Date, formatString: string): string
-  toJsDate (value: Date): Date
-  parseISO (date: string): Date
-  toISO (date: Date): string
+export interface DateAdapter<TDate> {
+  date (value?: any): TDate | null
+  format (date: TDate, formatString: string): string
+  toJsTDate (value: TDate): TDate
+  parseISO (date: string): TDate
+  toISO (date: TDate): string
 
-  startOfDay (date: Date): Date
-  endOfDay (date: Date): Date
-  startOfMonth (date: Date): Date
-  endOfMonth (date: Date): Date
-  startOfYear (date: Date): Date
-  endOfYear (date: Date): Date
+  startOfDay (date: TDate): TDate
+  endOfDay (date: TDate): TDate
+  startOfMonth (date: TDate): TDate
+  endOfMonth (date: TDate): TDate
+  startOfYear (date: TDate): TDate
+  endOfYear (date: TDate): TDate
 
-  isBefore (date: Date, comparing: Date): boolean
-  isAfter (date: Date, comparing: Date): boolean
-  isEqual (date: Date, comparing: Date): boolean
-  isSameDay (date: Date, comparing: Date): boolean
-  isSameMonth (date: Date, comparing: Date): boolean
+  isBefore (date: TDate, comparing: TDate): boolean
+  isAfter (date: TDate, comparing: TDate): boolean
+  isEqual (date: TDate, comparing: TDate): boolean
+  isSameDay (date: TDate, comparing: TDate): boolean
+  isSameMonth (date: TDate, comparing: TDate): boolean
   isValid (date: any): boolean
-  isWithinRange (date: Date, range: [Date, Date]): boolean
+  isWithinRange (date: TDate, range: [TDate, TDate]): boolean
 
-  addDays (date: Date, amount: number): Date
-  addMonths (date: Date, amount: number): Date
+  addDays (date: TDate, amount: number): TDate
+  addMonths (date: TDate, amount: number): TDate
 
-  getYear (date: Date): number
-  getNextYear (date: Date): Date
-  setYear (date: Date, year: number): Date
-  getDiff (date: Date, comparing: Date | string, unit?: string): number
-  getWeekArray (date: Date): Date[][]
+  getYear (date: TDate): number
+  setYear (date: TDate, year: number): TDate
+  getDiff (date: TDate, comparing: TDate | string, unit?: string): number
+  getWeekArray (date: TDate): TDate[][]
   getWeekdays (): string[]
-  getMonth (date: Date): number
-  setMonth (date: Date, month: number): Date
-  getNextMonth (date: Date): Date
+  getMonth (date: TDate): number
+  setMonth (date: TDate, month: number): TDate
+  getNextMonth (date: TDate): TDate
 }
 ```

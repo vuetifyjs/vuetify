@@ -26,13 +26,13 @@ export function createVeturApi (componentData: ComponentData[]) {
     const attrs = Object.entries(component.props ?? {}).reduce((curr, [name, prop]) => {
       curr[`${component.fileName}/${kebabCase(name)}`] = {
         type: prop.formatted,
-        description: prop.description.en || '',
+        description: prop.description!.en || '',
       }
 
       return curr
-    }, {})
-
-    return { ...obj, ...attrs }
+    }, {} as Record<string, { type: string, description: string }>)
+    Object.assign(obj, attrs)
+    return obj
   }, {})
 
   fs.writeFileSync('dist/tags.json', JSON.stringify(tags, null, 2))

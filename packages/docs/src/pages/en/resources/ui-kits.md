@@ -13,6 +13,8 @@ related:
 
 Easily create design prototypes with Figma components that match Vuetify's.
 
+<page-features />
+
 <entry />
 
 ----

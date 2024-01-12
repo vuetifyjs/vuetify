@@ -4,21 +4,22 @@
 @use '../../styles/tools';
 
 // Defaults
-/** if false, disabled buttons will be greyed out */
+// if false, disabled buttons will be greyed out
 $button-colored-disabled: true !default;
 
 $button-background: rgb(var(--v-theme-surface)) !default;
 $button-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
-$button-banner-actions-padding: 0 8px !default;
+$button-banner-actions-padding: 0 8px !default; // @deprecated
 $button-pagination-active-overlay-opacity: var(--v-border-opacity) !default;
 $button-pagination-border-radius: settings.$border-radius-root !default;
+$button-pagination-rounded-border-radius: map.get(settings.$rounded, 'circle') !default;
 $button-border-color: settings.$border-color-root !default;
 $button-border-radius: settings.$border-radius-root !default;
 $button-border-style: settings.$border-style-root !default;
 $button-border-thin-width: thin !default;
 $button-border-width: 0 !default;
 $button-card-actions-margin: .5rem !default;
-$button-card-actions-padding: 0 8px !default;
+$button-card-actions-padding: 0 8px !default; // @deprecated
 $button-content-transition: transform, opacity .2s settings.$standard-easing !default;
 $button-disabled-opacity: 0.26 !default;
 $button-disabled-overlay: 0.12 !default;
@@ -46,7 +47,8 @@ $button-text-transform: tools.map-deep-get(settings.$typography, 'button', 'text
 $button-transition-property: box-shadow, transform, opacity, background !default;
 $button-vertical-align: middle !default;
 $button-width-ratio: math.div(16, 9) !default;
-$button-snackbar-action-padding: 0 8px !default;
+$button-snackbar-action-padding: 0 8px !default; // @deprecated
+$button-slim-padding: 0 8px !default;
 $button-stacked-width-ratio: 1 !default;
 $button-rounded-border-radius: map.get(settings.$rounded, 'xl') !default;
 $button-white-space: nowrap !default;

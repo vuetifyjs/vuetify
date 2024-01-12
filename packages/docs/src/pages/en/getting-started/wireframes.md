@@ -16,6 +16,8 @@ related:
 
 The Vuetify **layout system** makes it easy to rapidly scaffold an application's UI regions with little effort.
 
+<page-features />
+
 <entry />
 
 ## Examples

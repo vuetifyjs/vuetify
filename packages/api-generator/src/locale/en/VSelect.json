@@ -8,7 +8,7 @@
     "hideSelected": "Do not display in the select menu items that are already selected.",
     "itemColor": "Sets color of selected items.",
     "itemDisabled": "Set property of **items**'s disabled value.",
-    "items": "Can be an array of objects or array of strings. When using objects, will look for a title, value and disabled keys. This can be changed using the **item-title**, **item-value** and **item-disabled** props.  Objects that have a **header** or **divider** property are considered special cases and generate a list header or divider; these items are not selectable.",
+    "items": "Can be an array of objects or strings. By default objects should have **title** and **value** properties, and can optionally have a **props** property containing any [VListItem props](/api/v-list-item/#props). Keys to use for these can be changed with the **item-title**, **item-value**, and **item-props** props.",
     "itemText": "Set property of **items**'s title value.",
     "itemValue": "Set property of **items**'s value - **must be primitive**. Dot notation is supported. **Note:** This is currently not supported with `v-combobox` [GitHub Issue](https://github.com/vuetifyjs/vuetify/issues/5479).",
     "minWidth": "Sets the minimum width of the select's `v-menu` content.",
