@@ -233,7 +233,6 @@ export const VAutocomplete = genericComponent<new <
 
       if (['ArrowUp'].includes(e.key)) {
         IN_BROWSER && window.requestAnimationFrame(() => {
-          console.log('--ArrowUp---', displayItems.value.length - 1)
           vVirtualScrollRef.value?.scrollToIndex(displayItems.value.length - 1)?.then(() => {
             listRef.value?.focus('last')
           })
@@ -241,7 +240,6 @@ export const VAutocomplete = genericComponent<new <
       }
 
       if (['ArrowDown'].includes(e.key)) {
-        console.log('--ArrowDown---')
         listRef.value?.focus('first')
       }
 
