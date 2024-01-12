@@ -411,7 +411,10 @@ export const VCombobox = genericComponent<new <
 
       IN_BROWSER && window.requestAnimationFrame(() => {
         index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)?.then(() => {
-          listRef.value?.focus(index)
+          const computedIndex =  vVirtualScrollRef.value?.computedItems.findIndex(
+            item => model.value.some(s => props.valueComparator(s.value, item.raw.value))
+          )
+          listRef.value?.focus(computedIndex)
         })
       })
     }
