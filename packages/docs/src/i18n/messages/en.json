@@ -5,6 +5,7 @@
   },
   "about": "About",
   "accessibility": "Accessibility (a11y)",
+  "ads": "Ads",
   "ads-via-vuetify": "ads via Vuetify",
   "all-components": "All Components",
   "alpha": "Alpha",
@@ -90,10 +91,12 @@
       "danger-zone-message": "The following settings are for development purposes."
     },
     "perks": {
+      "alert": "Support Vuetify and gain access to exclusive documentation perks and features for only",
       "avatar": "Avatar",
       "avatar-message": "Add a custom avatar image displayed on the user profile and user bar.",
       "disable-ads": "Disable Ads",
       "disable-ads-message": "Disable advertisements on all documentation pages.",
+      "enable-ads": "Enable Ads",
       "experience": "Experience",
       "experience-message": "These options change your browsing experience within the documentation.",
       "layout": "Layout",
@@ -101,7 +104,9 @@
       "rail-drawer": "Rail drawer",
       "rail-drawer-message": "Show the navigation drawer as a rail that expands on hover",
       "disable-quickbar": "Disable Quickbar",
-      "disable-quickbar-message": "Hide the Quickbar actions located on the top right of the documentation"
+      "disable-quickbar-message": "Hide the Quickbar actions located on the top right of the documentation",
+      "enable-pins": "Enable pins",
+      "enable-pins-message": "Bookmark and access vital documentation pages for a more efficient workflow."
     }
   },
   "data-tables": "Data tables",
@@ -169,6 +174,7 @@
   "grid": "Grid",
   "groups": "Groups",
   "guide": "Guide",
+  "guides": "Guides",
   "help-and-support": "Help and support",
   "hide-source": "Hide source",
   "homepage": "Vuetify Home Page",
@@ -191,10 +197,22 @@
   "layout": "Layout",
   "layout-link": "Link to layout for {name}",
   "learn": "Learn",
+  "licensing": "Licensing",
   "light": "Light",
   "link-only": "Link Only",
   "load-more": "Load more...",
-  "login-with-github": "Login with GitHub",
+  "login": {
+    "login": "Log in",
+    "logout": "Log out",
+    "to-vuetify": "Log in to Vuetify",
+    "welcome-back": "Welcome back!",
+    "tagline": "Sign in with GitHub or Discord to save your settings and unlock exclusive subscriber perks.",
+    "last-used": "Last used",
+    "with-github": "Continue with GitHub",
+    "with-discord": "Continue with Discord",
+    "connect-github": "Connect GitHub",
+    "connect-discord": "Connect Discord"
+  },
   "logo": "Logo",
   "ltr": "LTR",
   "marked-read": "Mark all read",
@@ -262,7 +280,8 @@
     "key-hint-mac": "Cmd+K",
     "key-hint-slash": "Press /",
     "results": "Your search results will appear here",
-    "no-results": "No results found"
+    "no-results": "No results found",
+    "recent": "Recent"
   },
   "search-api": "Search API",
   "search-jobs": "Search Jobs",
@@ -302,10 +321,12 @@
     "demo": "Request a demo",
     "more": "Learn more"
   },
+  "toggle": "Toggle {0}",
   "tools": "Tools",
   "transition": "Transition",
   "translations": "Translations",
   "type": "Type | Types",
+  "types": "Types",
   "twitter": "Twitter",
   "ui-components": "UI Components",
   "ui-kits": "UI Kits",

@@ -13,6 +13,8 @@ related:
 
 Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small bundle size may be a requirement.
 
+<page-features />
+
 <entry />
 
 ## Automatic treeshaking

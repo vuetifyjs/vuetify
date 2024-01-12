@@ -10,7 +10,7 @@ import { getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/uti
 
 // Types
 import type { PropType } from 'vue'
-import type { MaybeRef } from '@/util'
+import type { EventProp, MaybeRef } from '@/util'
 
 export type ValidationResult = string | boolean
 export type ValidationRule =
@@ -32,7 +32,7 @@ export interface ValidationProps {
   readonly: boolean | null
   rules: readonly ValidationRule[]
   modelValue: any
-  'onUpdate:modelValue': ((val: any) => void) | undefined
+  'onUpdate:modelValue': EventProp | undefined
   validateOn?: ValidateOnValue | `${ValidateOnValue} lazy` | `lazy ${ValidateOnValue}` | 'lazy'
   validationValue: any
 }
@@ -86,7 +86,7 @@ export function useValidation (
   const isReadonly = computed(() => !!(props.readonly ?? form?.isReadonly.value))
   const errorMessages = computed(() => {
     return props.errorMessages?.length
-      ? wrapInArray(props.errorMessages).slice(0, Math.max(0, +props.maxErrors))
+      ? wrapInArray(props.errorMessages).concat(internalErrorMessages.value).slice(0, Math.max(0, +props.maxErrors))
       : internalErrorMessages.value
   })
   const validateOn = computed(() => {

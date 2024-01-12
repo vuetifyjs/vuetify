@@ -4,7 +4,6 @@
     :items="desserts"
     hide-default-header
     hide-default-footer
-    class="elevation-1"
   ></v-data-table>
 </template>
 

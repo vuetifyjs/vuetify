@@ -2,6 +2,10 @@ export default {
   badge: 'Placa',
   open: 'Open',
   close: 'Cerrar',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Ningún elemento coincide con la búsqueda',
     loadingText: 'Cargando...',
@@ -31,8 +35,7 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Select dates',
       header: 'Enter dates',
@@ -53,6 +56,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} más',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',

@@ -13,6 +13,8 @@ related:
 
 Out of the box you get access to all colors in the [Material Design specification](https://material.io/design/color/the-color-system.html) through **sass** and **javascript**. These values can be used within your style sheets, your component files and on actual components via the **color** prop.
 
+<page-features />
+
 <entry />
 
 ## Classes
@@ -32,7 +34,7 @@ Vuetify has an optional javascript color pack that you can import and use within
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
 
-import colors from 'vuetify/lib/util/colors'
+import colors from 'vuetify/util/colors'
 
 export default createVuetify({
   theme: {

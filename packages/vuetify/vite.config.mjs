@@ -33,8 +33,13 @@ export default defineConfig(({ mode }) => {
     root: resolve('dev'),
     server: {
       host: process.env.HOST,
-      port: process.env.CYPRESS ? undefined : process.env.PORT,
+      port: process.env.CYPRESS ? undefined : +(process.env.PORT ?? 8090),
       strictPort: !!process.env.PORT && !process.env.CYPRESS,
+    },
+    preview: {
+      host: process.env.HOST,
+      port: +(process.env.PORT ?? 8090),
+      strictPort: !!process.env.PORT,
     },
     resolve: {
       alias: [

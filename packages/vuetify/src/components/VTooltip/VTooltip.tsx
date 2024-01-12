@@ -87,7 +87,7 @@ export const VTooltip = genericComponent<OverlaySlots>()({
     )
 
     useRender(() => {
-      const [overlayProps] = VOverlay.filterProps(props)
+      const overlayProps = VOverlay.filterProps(props)
 
       return (
         <VOverlay

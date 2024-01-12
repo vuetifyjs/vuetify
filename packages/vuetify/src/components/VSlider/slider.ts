@@ -134,6 +134,10 @@ export const makeSliderProps = propsFactory({
   ...makeElevationProps({
     elevation: 2,
   }),
+  ripple: {
+    type: Boolean,
+    default: true,
+  },
 }, 'Slider')
 
 type SliderProps = ExtractPropTypes<ReturnType<typeof makeSliderProps>>

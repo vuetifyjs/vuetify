@@ -35,6 +35,8 @@ The autocomplete component extends `v-select` and adds the ability to filter ite
 | Component | Description |
 | - | - |
 | [v-autocomplete](/api/v-autocomplete/) | Primary Component |
+| [v-combobox](/api/v-combobox/) | A select component that allows for filtering and custom values |
+| [v-select](/api/v-select/) | A replacement for the HTML <select></select> |
 
 <api-inline hide-links />
 
@@ -91,9 +93,7 @@ Using a combination of `v-autocomplete` slots and transitions, you can create a 
 #### New tab
 
 ::: success
-
 This feature was introduced in [v3.3.0 (Icarus)](/getting-started/release-notes/?version=v3.3.0)
-
 :::
 
 The **auto-select-first** property highlights the first result when searching, allowing you to press <v-kbd>tab</v-kbd> or <v-kbd>enter</v-kbd> to quickly select it.

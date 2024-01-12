@@ -9,7 +9,7 @@ export default async (componentName: string) => {
 
   try {
     return await generateComponentDataFromTypes(componentName)
-  } catch (err) {
+  } catch (err: any) {
     console.error(red, `${componentName}: ${err}`, err.stack, reset)
     return null
   }

@@ -9,11 +9,12 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import { useDisplay } from '@/composables/display'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { IconValue } from '@/composables/icons'
 import { makeLocationProps, useLocation } from '@/composables/location'
@@ -38,6 +39,7 @@ export type VBannerSlots = {
 
 export const makeVBannerProps = propsFactory({
   avatar: String,
+  bgColor: String,
   color: String,
   icon: IconValue,
   lines: String as PropType<'one' | 'two' | 'three'>,
@@ -49,6 +51,7 @@ export const makeVBannerProps = propsFactory({
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeDimensionProps(),
+  ...makeDisplayProps(),
   ...makeElevationProps(),
   ...makeLocationProps(),
   ...makePositionProps(),
@@ -63,9 +66,10 @@ export const VBanner = genericComponent<VBannerSlots>()({
   props: makeVBannerProps(),
 
   setup (props, { slots }) {
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'bgColor')
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
-    const { mobile } = useDisplay()
+    const { displayClasses, mobile } = useDisplay(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { locationStyles } = useLocation(props)
@@ -93,15 +97,18 @@ export const VBanner = genericComponent<VBannerSlots>()({
               'v-banner--sticky': props.sticky,
               [`v-banner--${props.lines}-line`]: !!props.lines,
             },
+            themeClasses.value,
+            backgroundColorClasses.value,
             borderClasses.value,
             densityClasses.value,
+            displayClasses.value,
             elevationClasses.value,
             positionClasses.value,
             roundedClasses.value,
-            themeClasses.value,
             props.class,
           ]}
           style={[
+            backgroundColorStyles.value,
             dimensionStyles.value,
             locationStyles.value,
             props.style,

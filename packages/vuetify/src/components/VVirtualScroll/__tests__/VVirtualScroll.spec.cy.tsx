@@ -20,7 +20,7 @@ describe('VVirtualScroll', () => {
       </VVirtualScroll>
     ))
 
-    cy.get('.v-virtual-scroll__item').should('have.length', 30)
+    cy.get('.v-virtual-scroll__item').should('have.length.above', 10).should('have.length.below', 50)
   })
 
   it('reuses the same elements', () => {

@@ -13,11 +13,14 @@ related:
   import { defineAsyncComponent } from 'vue'
 
   const IconList = defineAsyncComponent(() => import('@/components/doc/IconList.vue'))
+  const IconTable = defineAsyncComponent(() => import('@/components/doc/IconTable.vue'))
 </script>
 
 # Icon Fonts
 
 Out of the box, Vuetify supports 4 popular icon font libraries—[Material Design Icons](https://materialdesignicons.com/), [Material Icons](https://fonts.google.com/icons), [Font Awesome 4](https://fontawesome.com/v4.7.0/) and [Font Awesome 5](https://fontawesome.com/).
+
+<page-features />
 
 <entry />
 
@@ -438,6 +441,12 @@ app.mount('#app')
   <v-icon icon="fas fa-home" />
 </template>
 ```
+
+## Built-in aliases
+
+The following icons are available as aliases for use in Vuetify components:
+
+<icon-table />
 
 ## Multiple icon sets
 

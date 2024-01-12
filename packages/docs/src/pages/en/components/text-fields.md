@@ -196,7 +196,7 @@ When **hide-details** is set to `auto` messages will be rendered only if there's
 
 #### Hint
 
-The **hint** property on text fields adds the provided string beneath the text field. Using **persistent-hint** keeps the hint visible when the text field is not focused. Hint prop is _**not**_ supported in solo mode.
+The **hint** property on text fields adds the provided string beneath the text field. Using **persistent-hint** keeps the hint visible when the text field is not focused.
 
 <example file="v-text-field/prop-hint" />
 

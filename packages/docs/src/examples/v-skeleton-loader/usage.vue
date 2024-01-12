@@ -16,7 +16,7 @@
     <template v-slot:configuration>
       <v-select
         v-model="type"
-        :items="items"
+        :items="types"
         clearable
         label="Type"
       ></v-select>
@@ -49,8 +49,8 @@
   const elevation = ref()
   const color = ref()
   const colors = ['primary', 'secondary', 'success', 'info', 'warning', 'error']
-  const items = ['card', 'paragraph', 'list-item-avatar', 'article', 'card-avatar']
-  const type = ref()
+  const type = ref('card')
+  const types = ['card', 'paragraph', 'list-item-avatar', 'article', 'card-avatar']
 
   const props = computed(() => {
     return {

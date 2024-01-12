@@ -1,0 +1,9 @@
+{
+  "props": {
+    "hideDayHeader": "Determines whether the day header is visible in the calendar day view.",
+    "intervals": "Specifies the total number of time intervals for the day in the calendar view."
+  },
+  "exposed": {
+    "intervals": "Computed reference containing details about each interval in the day view."
+  }
+}

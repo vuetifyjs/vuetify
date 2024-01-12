@@ -1,7 +1,8 @@
 {
   "props": {
     "autoSelectFirst": "When searching, will always highlight the first option and select it on blur. `exact` will only highlight and select exact matches.",
-    "delimiters": "Accepts an array of strings that will trigger a new tag when typing. Does not replace the normal Tab and Enter keys."
+    "delimiters": "Accepts an array of strings that will trigger a new tag when typing. Does not replace the normal Tab and Enter keys.",
+    "items": "Can be an array of objects or strings. By default objects should have **title** and **value** properties, and can optionally have a **props** property containing any [VListItem props](/api/v-list-item/#props). Keys to use for these can be changed with the **item-title**, **item-value**, and **item-props** props."
   },
   "slots": {
     "item": "Define a custom item appearance. The root element of this slot must be a **v-list-item** with `v-bind=\"props\"` applied. `props` includes everything required for the default select list behaviour - including title, value, click handlers, virtual scrolling, and anything else that has been added with `item-props`."

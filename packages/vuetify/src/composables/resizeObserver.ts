@@ -34,11 +34,11 @@ export function useResizeObserver (callback?: ResizeObserverCallback, box: 'cont
 
     watch(resizeRef, (newValue, oldValue) => {
       if (oldValue) {
-        observer.unobserve(refElement(oldValue))
+        observer.unobserve(refElement(oldValue) as Element)
         contentRect.value = undefined
       }
 
-      if (newValue) observer.observe(refElement(newValue))
+      if (newValue) observer.observe(refElement(newValue) as Element)
     }, {
       flush: 'post',
     })
