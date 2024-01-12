@@ -265,9 +265,9 @@ app.use(vuetify)
 ### v-menu
 
 - `rounded` prop has been removed. Apply a rounded css class to the menu content element instead. e.g. `.rounded-te`
-- `internal-activator` prop has been removed without replacement
-- `offset-y` and `offset-x` props have been removed. Use `offset` prop instead
-- `absolute` variant has been removed. For absolute positioning use css instead
+- `internal-activator` prop has been removed, use a ref or unique selector instead.
+- `absolute`, `offset-y` and `offset-x` props have been removed. Manual positioning is now done by passing a `[x, y]` array to the `target` prop.
+- `nudge-*` props have been removed. There is no direct replacement but `offset` can be used to achieve similar results.
 
 ### v-snackbar
 
