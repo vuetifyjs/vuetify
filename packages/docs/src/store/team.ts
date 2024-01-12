@@ -10,7 +10,7 @@ import team from '@/data/team.json'
 
 export type Member = {
   discord?: string
-  focus: string[]
+  focus?: string[]
   funding?: string[]
   languages: string[]
   linkedin?: string

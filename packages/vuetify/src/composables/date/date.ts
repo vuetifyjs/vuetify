@@ -118,14 +118,14 @@ export function useDate () {
 // https://stackoverflow.com/questions/274861/how-do-i-calculate-the-week-number-given-a-date/275024#275024
 export function getWeek (adapter: DateAdapter<any>, value: any) {
   const date = adapter.toJsDate(value)
-  let year = adapter.getYear(date)
-  let d1w1 = adapter.startOfYear(date)
+  let year = date.getFullYear()
+  let d1w1 = new Date(year, 0, 1)
 
   if (date < d1w1) {
     year = year - 1
-    d1w1 = adapter.startOfYear(adapter.setYear(date, year))
+    d1w1 = new Date(year, 0, 1)
   } else {
-    const tv = adapter.startOfYear(adapter.setYear(date, year + 1))
+    const tv = new Date(year + 1, 0, 1)
     if (date >= tv) {
       year = year + 1
       d1w1 = tv
