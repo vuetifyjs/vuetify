@@ -128,9 +128,9 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
     }
 
     const elevationProps = computed(() => !disabled.value ? elevation.value : undefined)
+    const { elevationClasses } = useElevation(elevationProps)
     useRender(() => {
       const positionPercentage = convertToUnit(indexFromEnd.value ? 100 - props.position : props.position, '%')
-      const { elevationClasses } = useElevation(elevationProps)
 
       return (
         <div
