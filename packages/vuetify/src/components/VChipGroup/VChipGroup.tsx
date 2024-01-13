@@ -29,12 +29,12 @@ export const makeVChipGroupProps = propsFactory({
     default: deepEqual,
   },
 
+  ...makeVSlideGroupProps(),
   ...makeComponentProps(),
   ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'tonal' } as const),
-  ...makeVSlideGroupProps({ mandatory: false as const }),
 }, 'VChipGroup')
 
 type VChipGroupSlots = {
@@ -57,7 +57,6 @@ export const VChipGroup = genericComponent<VChipGroupSlots>()({
   },
 
   setup (props, { slots }) {
-    const [slideGroupProps] = VSlideGroup.filterProps(props)
     const { themeClasses } = provideTheme(props)
     const { isSelected, select, next, prev, selected } = useGroup(props, VChipGroupSymbol)
 
@@ -70,28 +69,32 @@ export const VChipGroup = genericComponent<VChipGroupSlots>()({
       },
     })
 
-    useRender(() => (
-      <VSlideGroup
-        { ...slideGroupProps }
-        class={[
-          'v-chip-group',
-          {
-            'v-chip-group--column': props.column,
-          },
-          themeClasses.value,
-          props.class,
-        ]}
-        style={ props.style }
-      >
-        { slots.default?.({
-          isSelected,
-          select,
-          next,
-          prev,
-          selected: selected.value,
-        })}
-      </VSlideGroup>
-    ))
+    useRender(() => {
+      const [slideGroupProps] = VSlideGroup.filterProps(props)
+
+      return (
+        <VSlideGroup
+          { ...slideGroupProps }
+          class={[
+            'v-chip-group',
+            {
+              'v-chip-group--column': props.column,
+            },
+            themeClasses.value,
+            props.class,
+          ]}
+          style={ props.style }
+        >
+          { slots.default?.({
+            isSelected,
+            select,
+            next,
+            prev,
+            selected: selected.value,
+          })}
+        </VSlideGroup>
+      )
+    })
 
     return {}
   },
