@@ -84,6 +84,8 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       indexFromEnd,
     } = slider
 
+    const elevationProps = computed(() => !disabled.value ? elevation.value : undefined)
+    const { elevationClasses } = useElevation(elevationProps)
     const { textColorClasses, textColorStyles } = useTextColor(thumbColor)
 
     const { pageup, pagedown, end, home, left, right, down, up } = keyValues
@@ -127,8 +129,6 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       newValue != null && emit('update:modelValue', newValue)
     }
 
-    const elevationProps = computed(() => !disabled.value ? elevation.value : undefined)
-    const { elevationClasses } = useElevation(elevationProps)
     useRender(() => {
       const positionPercentage = convertToUnit(indexFromEnd.value ? 100 - props.position : props.position, '%')
 
