@@ -78,6 +78,10 @@ export const makeVComboboxProps = propsFactory({
   autoSelectFirst: {
     type: [Boolean, String] as PropType<boolean | 'exact'>,
   },
+  clearOnSelect: {
+    type: Boolean,
+    default: true,
+  },
   delimiters: Array as PropType<readonly string[]>,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
@@ -362,7 +366,9 @@ export const VCombobox = genericComponent<new <
           model.value = [...model.value, item]
         }
 
-        search.value = ''
+        if (props.clearOnSelect) {
+          search.value = ''
+        }
       } else {
         const add = set !== false
         model.value = add ? [item] : []

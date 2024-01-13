@@ -77,6 +77,7 @@ export const makeVAutocompleteProps = propsFactory({
   autoSelectFirst: {
     type: [Boolean, String] as PropType<boolean | 'exact'>,
   },
+  clearOnSelect: Boolean,
   search: String,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
@@ -333,6 +334,10 @@ export const VAutocomplete = genericComponent<new <
           const value = [...model.value]
           value.splice(index, 1)
           model.value = value
+        }
+
+        if (props.clearOnSelect) {
+          search.value = ''
         }
       } else {
         model.value = add ? [item] : []
