@@ -474,6 +474,7 @@ export const VAutocomplete = genericComponent<new <
                       tabindex="-1"
                       aria-live="polite"
                       color={ props.itemColor ?? props.color }
+                      { ...props.listProps }
                     >
                       { slots['prepend-item']?.() }
 
