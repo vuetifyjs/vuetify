@@ -263,7 +263,7 @@ function getWeekdays (locale: string) {
   return createRange(7).map(i => {
     const weekday = new Date(sundayJanuarySecond2000)
     weekday.setDate(sundayJanuarySecond2000.getDate() + daysFromSunday + i)
-    return new Intl.DateTimeFormat(locale, { weekday: 'narrow' }).format(weekday)
+    return new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(weekday)
   })
 }
 
