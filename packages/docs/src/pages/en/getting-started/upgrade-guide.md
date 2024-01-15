@@ -246,6 +246,7 @@ app.use(vuetify)
 - `item-class` and `item-style` have been combined into `row-props`, and `cell-props` has been added.
 - `sort-desc` and `group-desc` have been combined into `sort-by` and `group-by`. These properties now take an array of `{ key: string, order: 'asc' | 'desc' }` objects instead of strings.
 - `current-items` event has been renamed to `update:current-items`.
+- `custom-sort` can now be done using the **sort** key in the headers object or by using the `custom-key-sort` prop.
 
 ### v-slider/v-range-slider
 
