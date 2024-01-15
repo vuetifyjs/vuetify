@@ -55,7 +55,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
   const icons = createIcons(options.icons)
   const locale = createLocale(options.locale)
   const date = createDate(options.date, locale)
-  const goTo = createGoTo(options.goTo)
+  const goTo = createGoTo(options.goTo, locale)
 
   const install = (app: App) => {
     for (const key in directives) {

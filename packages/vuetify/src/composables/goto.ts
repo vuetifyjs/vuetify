@@ -3,25 +3,25 @@ import { inject } from 'vue'
 import { mergeDeep } from '@/util'
 
 // Types
-import type { InjectionKey } from 'vue'
+import type { InjectionKey, Ref } from 'vue'
+import type { LocaleInstance, RtlInstance } from './locale'
 
 export interface GoToInstance {
-  container: HTMLElement
+  rtl: Ref<boolean>
   options: GoToOptions
 }
 
 export interface GoToOptions {
-  container?: string | Element
-  duration?: number
+  duration: number
   offset?: number
-  easing?: string | ((t: number) => number)
+  easing: string | ((t: number) => number)
+  patterns: Record<string, (t: number) => number>
 }
 
 export const GoToSymbol: InjectionKey<GoToInstance> = Symbol.for('vuetify:goto')
 
 function genDefaults () {
   return {
-    container: (document.scrollingElement as HTMLElement | null) || document.body || document.documentElement,
     duration: 500,
     offset: 0,
     easing: 'easeInOutCubic',
@@ -56,77 +56,128 @@ function getElement (el: any) {
     return (el.$el) as HTMLElement
   }
 
-  throw typeof el === 'string'
-    ? new Error(`Container element "${el}" not found.`)
-    : new TypeError(`Container must be a Selector/HTMLElement/VueComponent, received ${el} instead.`)
+  return null
 }
 
-function getOffset (target: any): number {
+function getContainer (el?: any) {
+  return (el ? getElement(el) : null) ?? (
+    document.scrollingElement || document.body || document.documentElement
+  ) as HTMLElement
+}
+
+function getOffset (target: any, horizontal?: boolean): number {
   if (typeof target === 'number') return target
 
   let el = getElement(target)
   let totalOffset = 0
   while (el) {
-    totalOffset += el.offsetTop
+    totalOffset += (horizontal ? el.scrollLeft : el.offsetTop)
     el = el.offsetParent as HTMLElement
   }
 
   return totalOffset
 }
 
-export function createGoTo (options: GoToOptions | undefined) {
-  const _options = mergeDeep(genDefaults(), options)
+export function createGoTo (options: Partial<GoToOptions>, locale: LocaleInstance & RtlInstance) {
+  const _options = mergeDeep(genDefaults(), options) as GoToOptions
 
   return {
+    rtl: locale.isRtl,
     options: _options,
   }
 }
 
-export function useGoTo (options?: Partial<GoToOptions>, container?: HTMLElement) {
+async function scrollTo (
+  target: HTMLElement | number,
+  container: HTMLElement,
+  options: GoToOptions,
+  horizontal?: boolean
+) {
+  const ease = typeof options.easing === 'function'
+    ? options.easing
+    : options.patterns[options.easing]
+
+  if (!ease) throw new TypeError(`Easing function "${options.easing}" not found.`)
+
+  let targetLocation: number
+  if (typeof target === 'number') {
+    targetLocation = getOffset(target, horizontal)
+  } else {
+    targetLocation = getOffset(target, horizontal) - getOffset(container, horizontal)
+  }
+
+  const startLocation = (horizontal ? container.scrollLeft : container.scrollTop) ?? 0
+
+  if (targetLocation === startLocation) return Promise.resolve(targetLocation)
+
+  const startTime = performance.now()
+
+  return new Promise(resolve => requestAnimationFrame(function step (currentTime: number) {
+    const timeElapsed = currentTime - startTime
+    const progress = Math.abs(options.duration ? Math.min(timeElapsed / options.duration, 1) : 1)
+    const location = Math.floor(startLocation + (targetLocation - startLocation) * ease(progress))
+
+    container[horizontal ? 'scrollLeft' : 'scrollTop'] = location
+
+    if (progress === 1) return resolve(targetLocation)
+
+    let clientSize
+    let reachEnd
+
+    if (!horizontal) {
+      clientSize = container === document.body ? document.documentElement.clientHeight : container.clientHeight
+      reachEnd = clientSize + container.scrollTop >= container.scrollHeight
+
+      if (targetLocation > container.scrollTop && reachEnd) {
+        return resolve(targetLocation)
+      }
+    } else {
+      clientSize = container === document.body ? document.documentElement.clientWidth : container.clientWidth
+      reachEnd = clientSize + container.scrollLeft >= container.scrollWidth
+
+      if (targetLocation > container.scrollLeft && reachEnd) {
+        return resolve(targetLocation)
+      }
+    }
+
+    requestAnimationFrame(step)
+  }))
+}
+
+async function vertical (
+  target: HTMLElement | string | number,
+  container: HTMLElement | string | 'parent' = getContainer(),
+  options: GoToOptions
+) {
+  const _target = (typeof target === 'number' ? target : getElement(target)) ?? 0
+  const _container = container === 'parent' && _target instanceof HTMLElement ? _target.parentElement! : getContainer(container)
+
+  return scrollTo(_target, _container, options)
+}
+
+async function horizontal (
+  target: HTMLElement | string | number,
+  container: HTMLElement | string | 'parent' = 'parent',
+  options: GoToOptions
+) {
+  const _target = (typeof target === 'number' ? target : getElement(target)) ?? 0
+  const _container = container === 'parent' && _target instanceof HTMLElement ? _target.parentElement! : getContainer(container)
+
+  return scrollTo(_target, _container, options, true)
+}
+
+export function useGoTo (options?: Partial<GoToOptions>) {
   const goTo = inject(GoToSymbol)
 
   if (!goTo) throw new Error('[Vuetify] Could not find injected goto instance')
 
-  const _options = !options ? goTo.options : mergeDeep(options, goTo.options)
-  const _container = getElement(container ?? _options.container)
-
-  if (!_container) throw new Error('[Vuetify] Container element not found.')
-
-  return async function (target: HTMLElement | string | number) {
-    const startTime = performance.now()
-
-    let targetLocation: number
-    if (typeof target === 'number') {
-      targetLocation = getOffset(target)
-    } else {
-      targetLocation = getOffset(target) - getOffset(_container)
-    }
-
-    const startLocation = _container.scrollTop
-    if (targetLocation === startLocation) return Promise.resolve(targetLocation)
-
-    const ease = typeof _options.easing === 'function'
-      ? _options.easing
-      : _options.patterns[_options.easing]
-    if (!ease) throw new TypeError(`Easing function "${_options.easing}" not found.`)
-
-    return new Promise(resolve => requestAnimationFrame(function step (currentTime: number) {
-      const timeElapsed = currentTime - startTime
-      const progress = Math.abs(_options.duration ? Math.min(timeElapsed / _options.duration, 1) : 1)
-
-      _container.scrollTop = Math.floor(startLocation + (targetLocation - startLocation) * ease(progress))
-
-      const clientHeight = _container === document.body ? document.documentElement.clientHeight : _container.clientHeight
-      const reachBottom = clientHeight + _container.scrollTop >= _container.scrollHeight
-      if (
-        progress === 1 ||
-        // Need to go lower but reach bottom
-        (targetLocation > _container.scrollTop && reachBottom)
-      ) {
-        return resolve(targetLocation)
-      }
-
-      requestAnimationFrame(step)
-    }))
+  async function go (target: HTMLElement | string | number, container: HTMLElement | string | 'parent') {
+    return vertical(target, container, mergeDeep(options, goTo?.options) as GoToOptions)
   }
+
+  go.horizontal = async (target: HTMLElement | string | number, container: HTMLElement | string | 'parent') => {
+    return horizontal(target, container, mergeDeep(options, goTo?.options) as GoToOptions)
+  }
+
+  return go
 }
