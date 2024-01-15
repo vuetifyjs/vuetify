@@ -1,20 +1,5 @@
 [
   {
-    "title": "introduction",
-    "icon": "$mdiScriptTextOutline:$mdiScriptText",
-    "items": [
-      "why-vuetify",
-      "long-term-support",
-      "roadmap",
-      { "divider": true },
-      { "heading": "professional-support" },
-      {
-        "title": "enterprise",
-        "href": "https://vuetifyjs.com/en/introduction/enterprise-support/"
-      }
-    ]
-  },
-  {
     "title": "getting-started",
     "icon": "$mdiSpeedometerMedium:$mdiSpeedometer",
     "items": [
@@ -198,25 +183,6 @@
       "ripple",
       "scroll",
       "touch"
-    ]
-  },
-  {
-    "title": "resources",
-    "icon": "$mdiHumanMaleBoard",
-    "items": [
-      "jobs-for-vue",
-      "themes",
-      "ui-kits"
-    ]
-  },
-  {
-    "title": "about",
-    "icon": "$mdiVuetify",
-    "items": [
-      "meet-the-team",
-      "sponsors-and-backers",
-      "security-disclosure",
-      "code-of-conduct"
     ]
   }
 ]
