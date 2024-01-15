@@ -14,7 +14,7 @@ describe('vuetify date adapter', () => {
 
     instance = new VuetifyDateAdapter({ locale: 'sv-se' })
 
-    expect(instance.getWeekdays()).toStrictEqual(['Mån', 'Tis', 'Ons', 'Tors', 'Fre', 'Lör', 'Sön'])
+    expect(instance.getWeekdays()).toStrictEqual(['mån', 'tis', 'ons', 'tors', 'fre', 'lör', 'sön'])
   })
 
   it('should format dates', () => {

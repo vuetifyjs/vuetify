@@ -121,7 +121,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
     })
     const text = computed(() => {
       return adapter.format(
-        adapter.setYear(adapter.setMonth(adapter.date(), month.value), year.value),
+        adapter.setYear(adapter.setMonth(adapter.startOfMonth(adapter.date()), month.value), year.value),
         'monthAndYear',
       )
     })
