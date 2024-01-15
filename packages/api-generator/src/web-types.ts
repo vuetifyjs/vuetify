@@ -54,7 +54,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
     const createTagValue = (type: string) => {
       return {
         kind: 'expression',
-        type,
+        type: type?.trim(),
       }
     }
 
@@ -111,7 +111,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
     const createAttributeValue = (argument: any) => {
       return {
         kind: 'expression',
-        type: argument.type,
+        type: argument.type?.trim(),
       }
     }
 
