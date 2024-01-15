@@ -22,10 +22,11 @@ export const useDirectiveComponent = (
 
   return {
     mounted (el: HTMLElement, binding: DirectiveBinding, vnode: VNode) {
-      const { value } = binding
+      const text = binding.value?.text ?? binding.value
+      const value = Object(binding.value) === binding.value ? binding.value : undefined
 
       // Get the children from the props or directive value, or the element's children
-      const children = props.text || value.text || el.innerHTML
+      const children = () => text || el.innerHTML
 
       // If vnode.ctx is the same as the instance, then we're bound to a plain element
       // and need to find the nearest parent component instance to inherit provides from
