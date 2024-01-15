@@ -13,6 +13,8 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-surface-overlay-multiplier: 1;
       --v-theme-surface-bright: 255,255,255;
       --v-theme-surface-bright-overlay-multiplier: 1;
+      --v-theme-surface-light: 238,238,238;
+      --v-theme-surface-light-overlay-multiplier: 1;
       --v-theme-surface-variant: 66,66,66;
       --v-theme-surface-variant-overlay-multiplier: 2;
       --v-theme-on-surface-variant: 238,238,238;
@@ -35,6 +37,7 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-on-background: 0,0,0;
       --v-theme-on-surface: 0,0,0;
       --v-theme-on-surface-bright: 0,0,0;
+      --v-theme-on-surface-light: 0,0,0;
       --v-theme-on-primary: 255,255,255;
       --v-theme-on-primary-darken-1: 255,255,255;
       --v-theme-on-secondary: 255,255,255;
@@ -68,6 +71,8 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-surface-overlay-multiplier: 1;
       --v-theme-surface-bright: 255,255,255;
       --v-theme-surface-bright-overlay-multiplier: 1;
+      --v-theme-surface-light: 238,238,238;
+      --v-theme-surface-light-overlay-multiplier: 1;
       --v-theme-surface-variant: 66,66,66;
       --v-theme-surface-variant-overlay-multiplier: 2;
       --v-theme-on-surface-variant: 238,238,238;
@@ -90,6 +95,7 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-on-background: 0,0,0;
       --v-theme-on-surface: 0,0,0;
       --v-theme-on-surface-bright: 0,0,0;
+      --v-theme-on-surface-light: 0,0,0;
       --v-theme-on-primary: 255,255,255;
       --v-theme-on-primary-darken-1: 255,255,255;
       --v-theme-on-secondary: 255,255,255;
@@ -123,6 +129,8 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-surface-overlay-multiplier: 1;
       --v-theme-surface-bright: 204,191,214;
       --v-theme-surface-bright-overlay-multiplier: 2;
+      --v-theme-surface-light: 66,66,66;
+      --v-theme-surface-light-overlay-multiplier: 1;
       --v-theme-surface-variant: 163,163,163;
       --v-theme-surface-variant-overlay-multiplier: 2;
       --v-theme-on-surface-variant: 66,66,66;
@@ -145,6 +153,7 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-on-background: 255,255,255;
       --v-theme-on-surface: 255,255,255;
       --v-theme-on-surface-bright: 0,0,0;
+      --v-theme-on-surface-light: 255,255,255;
       --v-theme-on-primary: 255,255,255;
       --v-theme-on-primary-darken-1: 255,255,255;
       --v-theme-on-secondary: 255,255,255;
@@ -184,6 +193,11 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-overlay-multiplier: var(--v-theme-surface-bright-overlay-multiplier);
       background-color: rgb(var(--v-theme-surface-bright)) !important;
       color: rgb(var(--v-theme-on-surface-bright)) !important;
+    }
+    .bg-surface-light {
+      --v-theme-overlay-multiplier: var(--v-theme-surface-light-overlay-multiplier);
+      background-color: rgb(var(--v-theme-surface-light)) !important;
+      color: rgb(var(--v-theme-on-surface-light)) !important;
     }
     .bg-surface-variant {
       --v-theme-overlay-multiplier: var(--v-theme-surface-variant-overlay-multiplier);
@@ -247,6 +261,12 @@ exports[`createTheme should create style element 1`] = `
     }
     .border-surface-bright {
       --v-border-color: var(--v-theme-surface-bright);
+    }
+    .text-surface-light {
+      color: rgb(var(--v-theme-surface-light)) !important;
+    }
+    .border-surface-light {
+      --v-border-color: var(--v-theme-surface-light);
     }
     .text-surface-variant {
       color: rgb(var(--v-theme-surface-variant)) !important;
@@ -313,6 +333,9 @@ exports[`createTheme should create style element 1`] = `
     }
     .on-surface-bright {
       color: rgb(var(--v-theme-on-surface-bright)) !important;
+    }
+    .on-surface-light {
+      color: rgb(var(--v-theme-on-surface-light)) !important;
     }
     .on-primary {
       color: rgb(var(--v-theme-on-primary)) !important;

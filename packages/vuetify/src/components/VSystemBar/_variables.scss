@@ -3,9 +3,9 @@
 @use '../../styles/tools';
 
 // VSystemBar
-$system-bar-background: rgba(var(--v-theme-on-surface-variant)) !default;
+$system-bar-background: rgba(var(--v-theme-surface-light)) !default;
 $system-bar-border-radius: map.get(settings.$rounded, 0) !default;
-$system-bar-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+$system-bar-color: rgba(var(--v-theme-on-surface-light), var(--v-high-emphasis-opacity)) !default;
 $system-bar-elevation: 0 !default;
 $system-bar-flex: 1 1 auto !default;
 $system-bar-font-size: tools.map-deep-get(settings.$typography, 'caption', 'size') !default;
