@@ -77,7 +77,8 @@ export const VChipGroup = genericComponent<new <T>(
     })
 
     useRender(() => {
-      const [slideGroupProps] = VSlideGroup.filterProps(props)
+      // TODO: fix type
+      const [slideGroupProps] = VSlideGroup.filterProps(props) as any
 
       return (
         <VSlideGroup
