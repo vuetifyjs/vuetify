@@ -56,6 +56,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} ទៀត',
+    today: 'Today',
   },
   input: {
     clear: 'សម្អាត {0}',
