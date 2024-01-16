@@ -142,7 +142,7 @@ export function useGoTo (options?: Partial<GoToOptions>) {
 
   if (!goTo) throw new Error('[Vuetify] Could not find injected goto instance')
 
-  async function go (target: HTMLElement | string | number, container: HTMLElement | string | 'parent') {
+  async function go (target: HTMLElement | string | number, container: HTMLElement | string | 'parent' = 'parent') {
     return scrollTo(target, container, mergeDeep(goTo?.options, options) as GoToOptions, false, goTo?.rtl.value)
   }
 
