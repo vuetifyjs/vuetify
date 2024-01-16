@@ -58,16 +58,13 @@
   },
   "nekosaur": {
     "discord": ".nekosaur",
-    "focus": [
-      "[vuetifyjs](https://github.com/vuetifyjs)"
-    ],
     "languages": [
       "Swedish",
       "English"
     ],
     "location": "Malmö, Sweden",
     "name": "Albert Kaaman",
-    "team": "core",
+    "team": "legends",
     "joined": "Jun 2017"
   },
   "MajesticPotatoe": {
@@ -106,7 +103,7 @@
     "joined": "Feb 2021"
   },
   "elvinagarcia": {
-    "avatar": "https://pbs.twimg.com/profile_images/1641112338995748866/lVvo6nob_400x400.png",
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/elvinagarcia.png",
     "discord": "elvinagarcia",
     "focus": [
       "Design/Animations"
@@ -132,5 +129,75 @@
     "name": "Yuchao Wu",
     "team": "core",
     "joined": "Mar 2023"
+  },
+  "jacekkarczmarczyk": {
+    "discord": "jacek#3542",
+    "languages": [
+      "Polish",
+      "English"
+    ],
+    "location": "Warsaw, Poland",
+    "name": "Jacek Karczmarczyk",
+    "team": "legends"
+  },
+  "chewy94": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/chewy94.jpg",
+    "discord": "Sean Kimball#0001",
+    "languages": [
+      "English"
+    ],
+    "linkedin": "sean-kimball-b50922126",
+    "location": "Goodyear, Arizona, USA",
+    "name": "Sean Kimball",
+    "team": "legends"
+  },
+  "bdeo": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/bdeo.jpg",
+    "discord": "brandondeo#0001",
+    "languages": [
+      "English"
+    ],
+    "linkedin": "brandondeo",
+    "location": "Philadelphia, PA, USA",
+    "name": "Brandon Deo",
+    "team": "legends"
+  },
+  "ElijahKotyluk": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/ElijahKotyluk.jpg",
+    "discord": "edk#4363",
+    "languages": [
+      "English"
+    ],
+    "location": "USA",
+    "name": "Elijah Kotyluk",
+    "team": "legends"
+  },
+  "santiagoaloi": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/santiagoaloi.jpg",
+    "discord": "lannnister",
+    "languages": [
+      "Swedish",
+      "English",
+      "Spanish"
+    ],
+    "linkedin": "santiagoaloi",
+    "location": "Stockholm, Sweden",
+    "name": "Santiago Aloi",
+    "team": "legends",
+    "joined": "Feb 2023"
+  },
+  "yooneskh": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/yooneskh.png",
+    "discord": "YoonesKh#7826",
+    "languages": [
+      "English",
+      "Persian"
+    ],
+    "twitter": "yooneskh",
+    "linkedin": "yooneskh ",
+    "location": "Iran",
+    "name": "Yoones Khoshghadam",
+    "team": "legends",
+    "joined": "January 2023"
   }
 }

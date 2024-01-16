@@ -6,9 +6,10 @@ import { makeVBtnProps, VBtn } from '@/components/VBtn/VBtn'
 
 // Composables
 import { useTextColor } from '@/composables/color'
+import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
-import { computed, ref, shallowRef } from 'vue'
+import { computed, ref } from 'vue'
 import { VTabsSymbol } from './shared'
 import { animate, genericComponent, omit, propsFactory, standardEasing, useRender } from '@/util'
 
@@ -47,15 +48,14 @@ export const VTab = genericComponent<VBtnSlots>()({
 
   setup (props, { slots, attrs }) {
     const { textColorClasses: sliderColorClasses, textColorStyles: sliderColorStyles } = useTextColor(props, 'sliderColor')
-    const isHorizontal = computed(() => props.direction === 'horizontal')
-    const isSelected = shallowRef(false)
 
     const rootEl = ref<VBtn>()
     const sliderEl = ref<HTMLElement>()
 
-    function updateSlider ({ value }: { value: boolean }) {
-      isSelected.value = value
+    const isHorizontal = computed(() => props.direction === 'horizontal')
+    const isSelected = computed(() => rootEl.value?.group?.isSelected.value ?? false)
 
+    function updateSlider ({ value }: { value: boolean }) {
       if (value) {
         const prevEl: HTMLElement | undefined = rootEl.value?.$el.parentElement?.querySelector('.v-tab--selected .v-tab__slider')
         const nextEl = sliderEl.value
@@ -146,7 +146,7 @@ export const VTab = genericComponent<VBtnSlots>()({
       )
     })
 
-    return {}
+    return forwardRefs({}, rootEl)
   },
 })
 

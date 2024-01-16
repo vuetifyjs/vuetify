@@ -225,9 +225,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
   // eslint-disable-next-line max-statements
   function updateLocation () {
     observe = false
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => observe = true)
-    })
+    requestAnimationFrame(() => observe = true)
 
     if (!data.target.value || !data.contentEl.value) return
 

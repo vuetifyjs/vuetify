@@ -173,10 +173,11 @@ export const VSelectionControl = genericComponent<new <T>(
       trueValue,
     } = useSelectionControl(props)
     const uid = getUid()
-    const id = computed(() => props.id || `input-${uid}`)
     const isFocused = shallowRef(false)
     const isFocusVisible = shallowRef(false)
     const input = ref<HTMLInputElement>()
+    const id = computed(() => props.id || `input-${uid}`)
+    const isInteractive = computed(() => !props.disabled && !props.readonly)
 
     group?.onForceUpdate(() => {
       if (input.value) {
@@ -185,6 +186,8 @@ export const VSelectionControl = genericComponent<new <T>(
     })
 
     function onFocus (e: FocusEvent) {
+      if (!isInteractive.value) return
+
       isFocused.value = true
       if (matchesSelector(e.target as HTMLElement, ':focus-visible') !== false) {
         isFocusVisible.value = true
@@ -197,6 +200,8 @@ export const VSelectionControl = genericComponent<new <T>(
     }
 
     function onInput (e: Event) {
+      if (!isInteractive.value) return
+
       if (props.readonly && group) {
         nextTick(() => group.forceUpdate())
       }
@@ -216,12 +221,12 @@ export const VSelectionControl = genericComponent<new <T>(
         <input
           ref={ input }
           checked={ model.value }
-          disabled={ !!(props.readonly || props.disabled) }
+          disabled={ !!props.disabled }
           id={ id.value }
           onBlur={ onBlur }
           onFocus={ onFocus }
           onInput={ onInput }
-          aria-disabled={ !!(props.readonly || props.disabled) }
+          aria-disabled={ !!props.disabled }
           type={ props.type }
           value={ trueValue.value }
           name={ props.name }
