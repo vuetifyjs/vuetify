@@ -158,11 +158,11 @@ export function useGoTo (options?: Partial<GoToOptions>) {
   if (!goTo) throw new Error('[Vuetify] Could not find injected goto instance')
 
   async function go (target: HTMLElement | string | number, container: HTMLElement | string | 'parent') {
-    return vertical(target, container, mergeDeep(options, goTo?.options) as GoToOptions)
+    return vertical(target, container, mergeDeep(goTo?.options, options) as GoToOptions)
   }
 
   go.horizontal = async (target: HTMLElement | string | number, container: HTMLElement | string | 'parent') => {
-    return horizontal(target, container, mergeDeep(options, goTo?.options) as GoToOptions)
+    return horizontal(target, container, mergeDeep(goTo?.options, options) as GoToOptions)
   }
 
   return go
