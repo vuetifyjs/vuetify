@@ -536,7 +536,7 @@ $utilities: () !default;
       "cursor": (
         property: cursor,
         class: cursor,
-        values: auto default pointer text progress wait not-allowed grab grabbing help
+        values: auto default pointer wait text move help not-allowed progress grab grabbing none
       ),
       // Sizing
       "fill-height": (
