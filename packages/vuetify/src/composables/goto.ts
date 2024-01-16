@@ -43,35 +43,25 @@ function genDefaults () {
   }
 }
 
-function getElement (el: any) {
-  if (typeof el === 'string') {
-    return document.querySelector<HTMLElement>(el)
-  }
-
-  if (el instanceof HTMLElement) {
-    return el
-  }
-
-  if (el?.$el instanceof HTMLElement) {
-    return (el.$el) as HTMLElement
-  }
+function getTarget (el: any) {
+  if (typeof el === 'string') return document.querySelector<HTMLElement>(el)
+  if (el instanceof HTMLElement) return el
+  if (el?.$el instanceof HTMLElement) return (el.$el) as HTMLElement
 
   return null
 }
 
 function getContainer (el?: any) {
-  return (el ? getElement(el) : null) ?? (
-    document.scrollingElement || document.body || document.documentElement
-  ) as HTMLElement
+  return getTarget(el) ?? (document.scrollingElement || document.body) as HTMLElement
 }
 
 function getOffset (target: any, horizontal?: boolean): number {
   if (typeof target === 'number') return target
 
-  let el = getElement(target)
+  let el = getTarget(target)
   let totalOffset = 0
   while (el) {
-    totalOffset += (horizontal ? el.scrollLeft : el.offsetTop)
+    totalOffset += horizontal ? el.scrollLeft : el.offsetTop
     el = el.offsetParent as HTMLElement
   }
 
@@ -79,11 +69,9 @@ function getOffset (target: any, horizontal?: boolean): number {
 }
 
 export function createGoTo (options: Partial<GoToOptions>, locale: LocaleInstance & RtlInstance) {
-  const _options = mergeDeep(genDefaults(), options) as GoToOptions
-
   return {
     rtl: locale.isRtl,
-    options: _options,
+    options: mergeDeep(genDefaults(), options),
   }
 }
 
@@ -91,11 +79,9 @@ async function scrollTo (
   target: HTMLElement | number,
   container: HTMLElement,
   options: GoToOptions,
-  horizontal?: boolean
+  horizontal?: boolean,
 ) {
-  const ease = typeof options.easing === 'function'
-    ? options.easing
-    : options.patterns[options.easing]
+  const ease = typeof options.easing === 'function' ? options.easing : options.patterns[options.easing]
 
   if (!ease) throw new TypeError(`Easing function "${options.easing}" not found.`)
 
@@ -147,9 +133,9 @@ async function scrollTo (
 async function vertical (
   target: HTMLElement | string | number,
   container: HTMLElement | string | 'parent' = getContainer(),
-  options: GoToOptions
+  options: GoToOptions,
 ) {
-  const _target = (typeof target === 'number' ? target : getElement(target)) ?? 0
+  const _target = (typeof target === 'number' ? target : getTarget(target)) ?? 0
   const _container = container === 'parent' && _target instanceof HTMLElement ? _target.parentElement! : getContainer(container)
 
   return scrollTo(_target, _container, options)
@@ -158,9 +144,9 @@ async function vertical (
 async function horizontal (
   target: HTMLElement | string | number,
   container: HTMLElement | string | 'parent' = 'parent',
-  options: GoToOptions
+  options: GoToOptions,
 ) {
-  const _target = (typeof target === 'number' ? target : getElement(target)) ?? 0
+  const _target = (typeof target === 'number' ? target : getTarget(target)) ?? 0
   const _container = container === 'parent' && _target instanceof HTMLElement ? _target.parentElement! : getContainer(container)
 
   return scrollTo(_target, _container, options, true)
