@@ -70,7 +70,7 @@ function getOffset (target: any, horizontal?: boolean, rtl?: boolean): number {
   return totalOffset
 }
 
-export function createGoTo (options: Partial<GoToOptions>, locale: LocaleInstance & RtlInstance) {
+export function createGoTo (options: Partial<GoToOptions> | undefined, locale: LocaleInstance & RtlInstance) {
   return {
     rtl: locale.isRtl,
     options: mergeDeep(genDefaults(), options),
