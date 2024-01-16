@@ -55,8 +55,10 @@ function getContainer (el?: any) {
   return getTarget(el) ?? (document.scrollingElement || document.body) as HTMLElement
 }
 
-function getOffset (target: any, horizontal?: boolean): number {
-  if (typeof target === 'number') return target
+function getOffset (target: any, horizontal?: boolean, rtl?: boolean): number {
+  if (typeof target === 'number') {
+    return horizontal && rtl ? -target : target
+  }
 
   let el = getTarget(target)
   let totalOffset = 0
@@ -76,20 +78,23 @@ export function createGoTo (options: Partial<GoToOptions>, locale: LocaleInstanc
 }
 
 async function scrollTo (
-  target: HTMLElement | number,
-  container: HTMLElement,
+  _target: HTMLElement | number | string,
+  _container: HTMLElement | string | 'parent',
   options: GoToOptions,
   horizontal?: boolean,
+  rtl?: boolean,
 ) {
+  const target = (typeof _target === 'number' ? _target : getTarget(_target)) ?? 0
+  const container = _container === 'parent' && _target instanceof HTMLElement ? _target.parentElement! : getContainer(_container)
   const ease = typeof options.easing === 'function' ? options.easing : options.patterns[options.easing]
 
   if (!ease) throw new TypeError(`Easing function "${options.easing}" not found.`)
 
   let targetLocation: number
   if (typeof target === 'number') {
-    targetLocation = getOffset(target, horizontal)
+    targetLocation = getOffset(target, horizontal, rtl)
   } else {
-    targetLocation = getOffset(target, horizontal) - getOffset(container, horizontal)
+    targetLocation = getOffset(target, horizontal, rtl) - getOffset(container, horizontal, rtl)
   }
 
   const startLocation = (horizontal ? container.scrollLeft : container.scrollTop) ?? 0
@@ -130,39 +135,17 @@ async function scrollTo (
   }))
 }
 
-async function vertical (
-  target: HTMLElement | string | number,
-  container: HTMLElement | string | 'parent' = getContainer(),
-  options: GoToOptions,
-) {
-  const _target = (typeof target === 'number' ? target : getTarget(target)) ?? 0
-  const _container = container === 'parent' && _target instanceof HTMLElement ? _target.parentElement! : getContainer(container)
-
-  return scrollTo(_target, _container, options)
-}
-
-async function horizontal (
-  target: HTMLElement | string | number,
-  container: HTMLElement | string | 'parent' = 'parent',
-  options: GoToOptions,
-) {
-  const _target = (typeof target === 'number' ? target : getTarget(target)) ?? 0
-  const _container = container === 'parent' && _target instanceof HTMLElement ? _target.parentElement! : getContainer(container)
-
-  return scrollTo(_target, _container, options, true)
-}
-
 export function useGoTo (options?: Partial<GoToOptions>) {
   const goTo = inject(GoToSymbol)
 
   if (!goTo) throw new Error('[Vuetify] Could not find injected goto instance')
 
   async function go (target: HTMLElement | string | number, container: HTMLElement | string | 'parent') {
-    return vertical(target, container, mergeDeep(goTo?.options, options) as GoToOptions)
+    return scrollTo(target, container, mergeDeep(goTo?.options, options) as GoToOptions, false, goTo?.rtl.value)
   }
 
   go.horizontal = async (target: HTMLElement | string | number, container: HTMLElement | string | 'parent') => {
-    return horizontal(target, container, mergeDeep(goTo?.options, options) as GoToOptions)
+    return scrollTo(target, container, mergeDeep(goTo?.options, options) as GoToOptions, true, goTo?.rtl.value)
   }
 
   return go
