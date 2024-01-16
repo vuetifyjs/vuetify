@@ -60,9 +60,9 @@ export default {
   },
   input: {
     clear: 'Vymazať {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Prosím vložte {0}. znak pre jednorazový verifikačný kód',
+    prependAction: 'Akcia pred {0}',
+    appendAction: 'Akcia za {0}',
+    otp: 'Prosím zadajte OTP znak {0}',
   },
   fileInput: {
     counter: '{0} súborov',
