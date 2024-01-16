@@ -13,7 +13,7 @@ export interface GoToInstance {
 
 export interface GoToOptions {
   duration: number
-  offset?: number
+  offset: number
   easing: string | ((t: number) => number)
   patterns: Record<string, (t: number) => number>
 }
@@ -96,6 +96,8 @@ async function scrollTo (
   } else {
     targetLocation = getOffset(target, horizontal, rtl) - getOffset(container, horizontal, rtl)
   }
+
+  targetLocation += options.offset
 
   const startLocation = (horizontal ? container.scrollLeft : container.scrollTop) ?? 0
 
