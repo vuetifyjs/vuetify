@@ -1,10 +1,10 @@
 export default {
   badge: 'Odznak',
-  open: 'Open',
+  open: 'Otevřiť',
   close: 'Zavřít',
   confirmEdit: {
     ok: 'OK',
-    cancel: 'Cancel',
+    cancel: 'Zrušit',
   },
   dataIterator: {
     noResultsText: 'Nenalezeny žádné záznamy',
@@ -32,18 +32,18 @@ export default {
     pageText: '{0}-{1} z {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'do',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} vybrán',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Vyberte datumy',
+      header: 'Zadejte datumy',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Vyberte datum',
+    header: 'Zadejte datum',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Zadejte datum',
     },
   },
   noDataText: 'Nejsou dostupná žádná data',
@@ -51,17 +51,18 @@ export default {
     prev: 'Předchozí obrázek',
     next: 'Další obrázek',
     ariaLabel: {
-      delimiter: 'Slide {0} z {1}',
+      delimiter: 'Obrázek {0} z {1}',
     },
   },
   calendar: {
     moreEvents: '{0} dalších',
+    today: 'Today',
   },
   input: {
-    clear: 'Clear {0}',
+    clear: 'Vymazat {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    otp: 'Vložte výhradně OTP znaky {0}',
   },
   fileInput: {
     counter: '{0} souborů',
@@ -78,22 +79,22 @@ export default {
       previous: 'Předchozí strana',
       page: 'Přejít na stránku {0}',
       currentPage: 'Aktuální stránka, stránka {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'První stránka',
+      last: 'Poslední stránka',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Další',
+    prev: 'Předchozí',
   },
   rating: {
     ariaLabel: {
       item: 'Hodnocení {0} z {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Načítám...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Načíst více',
+    empty: 'Žádné další',
   },
 }

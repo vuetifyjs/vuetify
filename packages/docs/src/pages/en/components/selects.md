@@ -31,7 +31,9 @@ Select fields components are used for collecting user provided information from 
 
 | Component | Description |
 | - | - |
-| [v-select](/api/v-select/) | The select component. |
+| [v-select](/api/v-select/) | Primary Component |
+| [v-autocomplete](/api/v-autocomplete/) | A select component that allows for advanced filtering |
+| [v-combobox](/api/v-combobox/) | A select component that allows for filtering and custom values |
 
 <api-inline hide-links />
 

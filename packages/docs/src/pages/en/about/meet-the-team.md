@@ -13,6 +13,8 @@ related:
 
 Vuetify is _not_ a one person show. We have a very active and engaged team that is **constantly striving** to bring developers a better experience. Keep in mind the below is not an exhaustive list of all the individuals that help make Vuetify great.
 
+<page-features />
+
 <entry />
 
 ## Company
@@ -30,3 +32,9 @@ The core development team are Open Source developers that help guide the directi
 <promoted slug="vuetify-open-collective" />
 
 <team-members team="core" />
+
+## Legends
+
+Legends are inactive members of the core team. They have contributed a significant amount of time and effort to the project and are recognized for their contributions.
+
+<team-members team="legends" />

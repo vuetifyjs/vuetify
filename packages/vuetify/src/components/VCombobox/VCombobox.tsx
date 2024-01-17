@@ -2,6 +2,7 @@
 import './VCombobox.sass'
 
 // Components
+import { VAvatar } from '@/components/VAvatar'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
@@ -76,6 +77,10 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
 export const makeVComboboxProps = propsFactory({
   autoSelectFirst: {
     type: [Boolean, String] as PropType<boolean | 'exact'>,
+  },
+  clearOnSelect: {
+    type: Boolean,
+    default: true,
   },
   delimiters: Array as PropType<readonly string[]>,
 
@@ -230,7 +235,7 @@ export const VCombobox = genericComponent<new <
     })
 
     const menuDisabled = computed(() => (
-      (props.hideNoData && !items.value.length) ||
+      (props.hideNoData && !displayItems.value.length) ||
       props.readonly || form?.isReadonly.value
     ))
 
@@ -361,7 +366,9 @@ export const VCombobox = genericComponent<new <
           model.value = [...model.value, item]
         }
 
-        search.value = ''
+        if (props.clearOnSelect) {
+          search.value = ''
+        }
       } else {
         const add = set !== false
         model.value = add ? [item] : []
@@ -388,10 +395,6 @@ export const VCombobox = genericComponent<new <
       if (v == null || (v === '' && !props.multiple)) model.value = []
     }
 
-    watch(filteredItems, val => {
-      if (!val.length && props.hideNoData) menu.value = false
-    })
-
     watch(isFocused, (val, oldVal) => {
       if (val || val === oldVal) return
 
@@ -417,6 +420,18 @@ export const VCombobox = genericComponent<new <
         IN_BROWSER && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
+      }
+    })
+
+    watch(displayItems, (val, oldVal) => {
+      if (!isFocused.value) return
+
+      if (!val.length && props.hideNoData) {
+        menu.value = false
+      }
+
+      if (!oldVal.length && val.length) {
+        menu.value = true
       }
     })
 
@@ -488,7 +503,9 @@ export const VCombobox = genericComponent<new <
                       onFocusout={ onFocusout }
                       onScrollPassive={ onListScroll }
                       tabindex="-1"
+                      aria-live="polite"
                       color={ props.itemColor ?? props.color }
+                      { ...props.listProps }
                     >
                       { slots['prepend-item']?.() }
 
@@ -522,6 +539,10 @@ export const VCombobox = genericComponent<new <
                                       tabindex="-1"
                                     />
                                   ) : undefined }
+
+                                  { item.props.prependAvatar && (
+                                    <VAvatar image={ item.props.prependAvatar } />
+                                  )}
 
                                   { item.props.prependIcon && (
                                     <VIcon icon={ item.props.prependIcon } />

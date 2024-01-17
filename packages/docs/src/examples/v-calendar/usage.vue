@@ -5,13 +5,6 @@
       height="54"
       class="d-flex"
     >
-      <v-btn
-        icon
-        class="ma-2"
-        @click="$refs.calendar.prev()"
-      >
-        <v-icon>mdi-chevron-left</v-icon>
-      </v-btn>
       <v-select
         v-model="type"
         :items="types"
@@ -19,16 +12,7 @@
         variant="outlined"
         hide-details
         class="ma-2"
-        label="type"
-      ></v-select>
-      <v-select
-        v-model="mode"
-        :items="modes"
-        dense
-        variant="outlined"
-        hide-details
-        label="event-overlap-mode"
-        class="ma-2"
+        label="View Mode"
       ></v-select>
       <v-select
         v-model="weekday"
@@ -39,56 +23,48 @@
         label="weekdays"
         class="ma-2"
       ></v-select>
-      <v-spacer></v-spacer>
-      <v-btn
-        icon
-        class="ma-2"
-        @click="$refs.calendar.next()"
-      >
-        <v-icon>mdi-chevron-right</v-icon>
-      </v-btn>
     </v-sheet>
-    <v-sheet height="600">
+    <v-sheet>
       <v-calendar
         ref="calendar"
         v-model="value"
         :weekdays="weekday"
-        :type="type"
+        :view-mode="type"
         :events="events"
-        :event-overlap-mode="mode"
-        :event-overlap-threshold="30"
-        :event-color="getEventColor"
-        @change="getEvents"
       ></v-calendar>
     </v-sheet>
   </div>
 </template>
 
 <script>
+  import { useDate } from 'vuetify'
+
   export default {
     data: () => ({
       type: 'month',
-      types: ['month', 'week', 'day', '4day'],
-      mode: 'stack',
-      modes: ['stack', 'column'],
+      types: ['month', 'week', 'day'],
       weekday: [0, 1, 2, 3, 4, 5, 6],
       weekdays: [
-        { text: 'Sun - Sat', value: [0, 1, 2, 3, 4, 5, 6] },
-        { text: 'Mon - Sun', value: [1, 2, 3, 4, 5, 6, 0] },
-        { text: 'Mon - Fri', value: [1, 2, 3, 4, 5] },
-        { text: 'Mon, Wed, Fri', value: [1, 3, 5] },
+        { title: 'Sun - Sat', value: [0, 1, 2, 3, 4, 5, 6] },
+        { title: 'Mon - Sun', value: [1, 2, 3, 4, 5, 6, 0] },
+        { title: 'Mon - Fri', value: [1, 2, 3, 4, 5] },
+        { title: 'Mon, Wed, Fri', value: [1, 3, 5] },
       ],
-      value: '',
+      value: [new Date()],
       events: [],
       colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
-      names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
+      titles: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
     }),
+    mounted () {
+      const adapter = useDate()
+      this.getEvents({ start: adapter.startOfDay(adapter.startOfMonth(new Date())), end: adapter.endOfDay(adapter.endOfMonth(new Date())) })
+    },
     methods: {
       getEvents ({ start, end }) {
         const events = []
 
-        const min = new Date(`${start.date}T00:00:00`)
-        const max = new Date(`${end.date}T23:59:59`)
+        const min = start
+        const max = end
         const days = (max.getTime() - min.getTime()) / 86400000
         const eventCount = this.rnd(days, days + 20)
 
@@ -100,11 +76,11 @@
           const second = new Date(first.getTime() + secondTimestamp)
 
           events.push({
-            name: this.names[this.rnd(0, this.names.length - 1)],
+            title: this.titles[this.rnd(0, this.titles.length - 1)],
             start: first,
             end: second,
             color: this.colors[this.rnd(0, this.colors.length - 1)],
-            timed: !allDay,
+            allDay: !allDay,
           })
         }
 

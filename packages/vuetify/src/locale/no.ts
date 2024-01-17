@@ -56,6 +56,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} flere',
+    today: 'Today',
   },
   input: {
     clear: 'Fjern {0}',

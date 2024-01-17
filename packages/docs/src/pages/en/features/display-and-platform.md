@@ -16,6 +16,8 @@ related:
 
 The display composable provides a multitude of information about the current device
 
+<page-features />
+
 <entry />
 
 ## Usage

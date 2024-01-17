@@ -1,6 +1,5 @@
 // Utilities
 import { computed, inject, provide, ref } from 'vue'
-import { defaultRtl } from '@/locale'
 import { createVuetifyAdapter } from '@/locale/adapters/vuetify'
 
 // Types
@@ -81,8 +80,55 @@ export interface RtlInstance {
 
 export const RtlSymbol: InjectionKey<RtlInstance> = Symbol.for('vuetify:rtl')
 
+function genDefaults () {
+  return {
+    af: false,
+    ar: true,
+    bg: false,
+    ca: false,
+    ckb: false,
+    cs: false,
+    de: false,
+    el: false,
+    en: false,
+    es: false,
+    et: false,
+    fa: true,
+    fi: false,
+    fr: false,
+    hr: false,
+    hu: false,
+    he: true,
+    id: false,
+    it: false,
+    ja: false,
+    km: false,
+    ko: false,
+    lv: false,
+    lt: false,
+    nl: false,
+    no: false,
+    pl: false,
+    pt: false,
+    ro: false,
+    ru: false,
+    sk: false,
+    sl: false,
+    srCyrl: false,
+    srLatn: false,
+    sv: false,
+    th: false,
+    tr: false,
+    az: false,
+    uk: false,
+    vi: false,
+    zhHans: false,
+    zhHant: false,
+  }
+}
+
 export function createRtl (i18n: LocaleInstance, options?: RtlOptions): RtlInstance {
-  const rtl = ref<Record<string, boolean>>(options?.rtl ?? defaultRtl)
+  const rtl = ref<Record<string, boolean>>(options?.rtl ?? genDefaults())
   const isRtl = computed(() => rtl.value[i18n.current.value] ?? false)
 
   return {

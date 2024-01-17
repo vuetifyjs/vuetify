@@ -35,6 +35,8 @@ With Combobox, you can allow a user to create new values that may not be present
 | Component | Description |
 | - | - |
 | [v-combobox](/api/v-combobox/) | Primary component |
+| [v-autocomplete](/api/v-autocomplete/) | A select component that allows for advanced filtering |
+| [v-select](/api/v-select/) | A replacement for the HTML <select></select> |
 
 <api-inline hide-links />
 

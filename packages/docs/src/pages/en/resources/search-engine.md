@@ -12,6 +12,8 @@ related:
 
 Add Vuetify as a browser search engine for quick access to the documentation.
 
+<page-features />
+
 <entry />
 
 ## Setup

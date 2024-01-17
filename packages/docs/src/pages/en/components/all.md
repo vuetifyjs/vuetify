@@ -14,6 +14,8 @@ meta:
 
 Vuetify Components are interactive building blocks for creating user interfaces.
 
+<page-features />
+
 <entry />
 
 ## Containment

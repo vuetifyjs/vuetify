@@ -22,6 +22,8 @@ related:
 
 Check out these amazing projects built using Vuetify.
 
+<page-features />
+
 <entry />
 
 <made-with-vuetify pagination />

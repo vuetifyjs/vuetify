@@ -13,6 +13,8 @@ related:
 
 Update your layout without creating new classes. Spacing helpers are useful for modifying the padding and margin of an element.
 
+<page-features />
+
 <entry />
 
 Use the playground to get a feel for what the different helper classes can do. For an explanation of **how they work**, see the How it works section below.

@@ -12,6 +12,7 @@ import AppHeading from '@/components/app/Heading.vue'
 import AppHeadline from '@/components/app/Headline.vue'
 import AppLink from '@/components/app/Link.vue'
 import AppLinkListItem from '@/components/app/list/LinkListItem.vue'
+import AppList from '@/components/app/list/List.vue'
 import AppMarkdown from '@/components/app/Markdown.vue'
 import AppMarkup from '@/components/app/Markup.vue'
 import AppMenu from '@/components/app/menu/Menu.vue'
@@ -29,6 +30,7 @@ import DocTabs from '@/components/doc/Tabs.vue'
 import Entry from '@/components/promoted/Entry.vue'
 import Example from '@/components/examples/Example.vue'
 import Inline from '@/components/promoted/Inline.vue'
+import OneSubscription from '@/components/user/account/OneSubscription.vue'
 import PageFeatures from '@/components/PageFeatures.vue'
 import Promoted from '@/components/promoted/Promoted.vue'
 import Random from '@/components/promoted/Random.vue'
@@ -51,6 +53,7 @@ export function installGlobalComponents (app: App) {
     .component('AppHeadline', AppHeadline)
     .component('AppLinkListItem', AppLinkListItem)
     .component('AppLink', AppLink)
+    .component('AppList', AppList)
     .component('AppMarkdown', AppMarkdown)
     .component('AppMarkup', AppMarkup)
     .component('AppMenu', AppMenu)
@@ -77,6 +80,7 @@ export function installGlobalComponents (app: App) {
     .component('Entry', Entry)
     .component('Example', Example)
     .component('Inline', Inline)
+    .component('OneSubscription', OneSubscription)
     .component('PageFeatures', PageFeatures)
     .component('Promoted', Promoted)
     .component('Random', Random)

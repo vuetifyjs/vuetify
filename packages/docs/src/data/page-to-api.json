@@ -39,9 +39,11 @@
   ],
   "components/calendars": [
     "VCalendar",
-    "VCalendarDaily",
-    "VCalendarMonthly",
-    "VCalendarWeekly"
+    "VCalendarDay",
+    "VCalendarHeader",
+    "VCalendarInterval",
+    "VCalendarIntervalEvent",
+    "VCalendarMonthDay"
   ],
   "components/cards": [
     "VCard",

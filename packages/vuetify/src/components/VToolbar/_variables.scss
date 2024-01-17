@@ -4,8 +4,8 @@
 @use "../../styles/tools/functions";
 
 // VToolbar
-$toolbar-background: rgb(var(--v-theme-on-surface-variant)) !default;
-$toolbar-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$toolbar-background: rgb(var(--v-theme-surface-light)) !default;
+$toolbar-color: rgba(var(--v-theme-on-surface-light), var(--v-high-emphasis-opacity)) !default;
 $toolbar-border-color: settings.$border-color-root !default;
 $toolbar-border-radius: map.get(settings.$rounded, 0) !default;
 $toolbar-border-style: settings.$border-style-root !default;

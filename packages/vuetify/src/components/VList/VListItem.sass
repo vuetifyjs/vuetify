@@ -168,6 +168,7 @@
   overflow: hidden
   padding: $list-item-subtitle-padding
   text-overflow: ellipsis
+  word-break: $list-item-subtitle-word-break
 
   .v-list-item--one-line &
     -webkit-line-clamp: 1
@@ -280,6 +281,9 @@ $base-padding: list.nth($list-item-padding, 2)
   --list-indent-size: #{$list-indent-size}
   --parent-padding: var(--indent-padding)
   --prepend-width: #{$list-item-prepend-size}
+
+  .v-list--slim &
+    --prepend-width: #{$list-item-slim-prepend-size}
 
   &--fluid
     --list-indent-size: 0px

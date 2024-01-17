@@ -14,6 +14,8 @@ related:
 
 Learn more about what Vuetify is, how to create an application from scratch, browse API references, sample code, tutorials, and more.
 
+<page-features />
+
 <entry />
 
 ## What is Vuetify?

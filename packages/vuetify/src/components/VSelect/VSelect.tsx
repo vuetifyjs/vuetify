@@ -3,6 +3,7 @@ import './VSelect.sass'
 
 // Components
 import { VDialogTransition } from '@/components/transitions'
+import { VAvatar } from '@/components/VAvatar'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
@@ -67,6 +68,9 @@ export const makeSelectProps = propsFactory({
   eager: Boolean,
   hideNoData: Boolean,
   hideSelected: Boolean,
+  listProps: {
+    type: Object as PropType<VList['$props']>,
+  },
   menu: Boolean,
   menuIcon: {
     type: IconValue,
@@ -178,7 +182,7 @@ export const VSelect = genericComponent<new <
     })
 
     const menuDisabled = computed(() => (
-      (props.hideNoData && !items.value.length) ||
+      (props.hideNoData && !displayItems.value.length) ||
       props.readonly || form?.isReadonly.value
     ))
 
@@ -300,6 +304,18 @@ export const VSelect = genericComponent<new <
       }
     })
 
+    watch(displayItems, (val, oldVal) => {
+      if (!isFocused.value) return
+
+      if (!val.length && props.hideNoData) {
+        menu.value = false
+      }
+
+      if (!oldVal.length && val.length) {
+        menu.value = true
+      }
+    })
+
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
       const hasList = !!(
@@ -376,7 +392,9 @@ export const VSelect = genericComponent<new <
                       onFocusin={ onFocusin }
                       onScrollPassive={ onListScroll }
                       tabindex="-1"
+                      aria-live="polite"
                       color={ props.itemColor ?? props.color }
+                      { ...props.listProps }
                     >
                       { slots['prepend-item']?.() }
 
@@ -409,6 +427,10 @@ export const VSelect = genericComponent<new <
                                         tabindex="-1"
                                       />
                                     ) : undefined }
+
+                                    { item.props.prependAvatar && (
+                                      <VAvatar image={ item.props.prependAvatar } />
+                                    )}
 
                                     { item.props.prependIcon && (
                                       <VIcon icon={ item.props.prependIcon } />

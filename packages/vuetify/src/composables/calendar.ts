@@ -19,6 +19,7 @@ export interface CalendarProps {
   min: unknown
   showAdjacentMonths?: boolean
   month: number | string
+  weekdays: number[]
   year: number | string
 
   'onUpdate:modelValue': (value: unknown[]) => void
@@ -37,6 +38,10 @@ export const makeCalendarProps = propsFactory({
   min: null as any as PropType<unknown>,
   showAdjacentMonths: Boolean,
   year: [Number, String],
+  weekdays: {
+    type: Array<number>,
+    default: () => [0, 1, 2, 3, 4, 5, 6],
+  },
 }, 'calendar')
 
 export function useCalendar (props: CalendarProps) {
@@ -81,7 +86,7 @@ export function useCalendar (props: CalendarProps) {
     v => adapter.getMonth(v)
   )
 
-  const weeksInMonth = computed(() => {
+  const weeksInMonth = computed<Date[][]>((): Date[][] => {
     const weeks = adapter.getWeekArray(month.value)
 
     const days = weeks.flat()
@@ -103,14 +108,13 @@ export function useCalendar (props: CalendarProps) {
       }
     }
 
-    return weeks
+    return weeks as Date[][]
   })
 
-  const daysInMonth = computed(() => {
-    const days = weeksInMonth.value.flat()
-    const today = adapter.date()
-
-    return days.map((date, index) => {
+  function genDays (days: Date[], today: Date) {
+    return days.filter(date => {
+      return props.weekdays.includes(adapter.toJsDate(date).getDay())
+    }).map((date, index) => {
       const isoDate = adapter.toISO(date)
       const isAdjacent = !adapter.isSameMonth(date, month.value)
       const isStart = adapter.isSameDay(date, adapter.startOfMonth(month.value))
@@ -136,6 +140,27 @@ export function useCalendar (props: CalendarProps) {
         localized: adapter.format(date, 'dayOfMonth'),
       }
     })
+  }
+
+  const daysInWeek = computed(() => {
+    const lastDay = adapter.startOfWeek(model.value)
+    const week = []
+    for (let day = 0; day <= 6; day++) {
+      week.push(adapter.addDays(lastDay, day))
+    }
+
+    const days = week as Date[]
+
+    const today = adapter.date() as Date
+
+    return genDays(days, today)
+  })
+
+  const daysInMonth = computed(() => {
+    const days = weeksInMonth.value.flat()
+    const today = adapter.date() as Date
+
+    return genDays(days, today)
   })
 
   const weekNumbers = computed(() => {
@@ -166,6 +191,8 @@ export function useCalendar (props: CalendarProps) {
   return {
     displayValue,
     daysInMonth,
+    daysInWeek,
+    genDays,
     model,
     weeksInMonth,
     weekNumbers,

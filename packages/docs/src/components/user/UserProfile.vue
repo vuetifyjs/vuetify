@@ -55,12 +55,15 @@
       </template>
     </v-skeleton-loader>
   </app-sheet>
+
+  <one-sub-card />
 </template>
 
 <script setup lang="ts">
   // Components
   import DiscordLogin from '@/components/user/DiscordLogin.vue'
   import GithubLogin from '@/components/user/GithubLogin.vue'
+  import OneSubCard from '@/components/user/OneSubCard.vue'
   import UserBadges from '@/components/user/UserBadges.vue'
 
   // Composables
