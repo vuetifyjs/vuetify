@@ -94,7 +94,7 @@ type ItemType<T> = T extends readonly (infer U)[] ? U : never
 export const VCombobox = genericComponent<new <
   T extends readonly any[],
   Item = ItemType<T>,
-  ReturnObject extends boolean = true,
+  ReturnObject extends boolean = false,
   Multiple extends boolean = false,
   V extends Value<Item, ReturnObject, Multiple> = Value<Item, ReturnObject, Multiple>
 >(
