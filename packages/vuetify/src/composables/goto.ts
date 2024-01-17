@@ -3,7 +3,7 @@ import { inject } from 'vue'
 import { mergeDeep } from '@/util'
 
 // Types
-import type { InjectionKey, Ref } from 'vue'
+import type { ComponentPublicInstance, InjectionKey, Ref } from 'vue'
 import type { LocaleInstance, RtlInstance } from './locale'
 
 export interface GoToInstance {
@@ -43,15 +43,15 @@ function genDefaults () {
   }
 }
 
-function getTarget (el: any) {
+function getTarget (el: ComponentPublicInstance | HTMLElement | string | undefined) {
   if (typeof el === 'string') return document.querySelector<HTMLElement>(el)
   if (el instanceof HTMLElement) return el
-  if (el?.$el instanceof HTMLElement) return (el.$el) as HTMLElement
+  if (el && '$el' in el && el?.$el instanceof HTMLElement) return (el.$el) as HTMLElement
 
   return null
 }
 
-function getContainer (el?: any) {
+function getContainer (el?: ComponentPublicInstance | HTMLElement | string) {
   return getTarget(el) ?? (document.scrollingElement || document.body) as HTMLElement
 }
 
@@ -78,8 +78,8 @@ export function createGoTo (options: Partial<GoToOptions> | undefined, locale: L
 }
 
 async function scrollTo (
-  _target: HTMLElement | number | string,
-  _container: HTMLElement | string | 'parent',
+  _target: ComponentPublicInstance | HTMLElement | number | string,
+  _container: ComponentPublicInstance | HTMLElement | string | 'parent',
   options: GoToOptions,
   horizontal?: boolean,
   rtl?: boolean,
@@ -142,11 +142,17 @@ export function useGoTo (options?: Partial<GoToOptions>) {
 
   if (!goTo) throw new Error('[Vuetify] Could not find injected goto instance')
 
-  async function go (target: HTMLElement | string | number, container: HTMLElement | string | 'parent' = 'parent') {
+  async function go (
+    target: ComponentPublicInstance | HTMLElement | string | number,
+    container: ComponentPublicInstance | HTMLElement | string | 'parent' = 'parent'
+  ) {
     return scrollTo(target, container, mergeDeep(goTo?.options, options) as GoToOptions, false, goTo?.rtl.value)
   }
 
-  go.horizontal = async (target: HTMLElement | string | number, container: HTMLElement | string | 'parent') => {
+  go.horizontal = async (
+    target: ComponentPublicInstance | HTMLElement | string | number,
+    container: ComponentPublicInstance | HTMLElement | string | 'parent' = 'parent'
+  ) => {
     return scrollTo(target, container, mergeDeep(goTo?.options, options) as GoToOptions, true, goTo?.rtl.value)
   }
 
