@@ -39,6 +39,7 @@ type VDataTableVirtualSlotProps<T> = Omit<
 >
 
 export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
+  colgroup: VDataTableVirtualSlotProps<T>
   top: VDataTableVirtualSlotProps<T>
   headers: VDataTableHeadersSlots['headers']
   bottom: VDataTableVirtualSlotProps<T>
@@ -192,6 +193,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                 }}
               >
                 <table>
+                  { slots.colgroup?.(slotProps.value) }
                   <thead>
                     <VDataTableHeaders
                       { ...dataTableHeadersProps }
