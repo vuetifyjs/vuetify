@@ -47,6 +47,7 @@ export const makeVOtpInputProps = propsFactory({
     type: String as PropType<'text' | 'password' | 'number'>,
     default: 'number',
   },
+  numeric: Boolean,
 
   ...makeDimensionProps(),
   ...makeFocusProps(),
@@ -101,6 +102,12 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       // The maxlength attribute doesn't work for the number type input, so the text type is used.
       // The following logic simulates the behavior of a number input.
       if (props.type === 'number' && /[^0-9]/g.test(current.value.value)) {
+        current.value.value = ''
+        return
+      }
+      // If there is type numeric, then this will make sure that the entered value is a digit.
+      // Helpful to restrict values when using with some predefined type like password.
+      if (props.numeric && /[^0-9]/g.test(current.value.value)) {
         current.value.value = ''
         return
       }
