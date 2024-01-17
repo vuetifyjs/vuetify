@@ -12,8 +12,8 @@ import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 
 // Utilities
-import { computed } from 'vue'
-import { convertToUnit, genericComponent, mergeDeep, propsFactory, useRender } from '@/util'
+import { computed, mergeProps } from 'vue'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { CSSProperties, PropType, UnwrapRef } from 'vue'
@@ -67,6 +67,7 @@ export const makeVDataTableHeadersProps = propsFactory({
   headerProps: {
     type: Object as PropType<Record<string, any>>,
   },
+
   ...makeLoaderProps(),
 }, 'VDataTableHeaders')
 
@@ -115,6 +116,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
 
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
       const noPadding = column.key === 'data-table-select' || column.key === 'data-table-expand'
+      const headerProps = mergeProps(props.headerProps ?? {}, column.headerProps ?? {})
 
       return (
         <VDataTableColumn
@@ -141,9 +143,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           fixed={ column.fixed }
           lastFixed={ column.lastFixed }
           noPadding={ noPadding }
-          {
-            ...mergeDeep(props.headerProps, column.headerProps)
-          }
+          { ...headerProps }
         >
           {{
             default: () => {
