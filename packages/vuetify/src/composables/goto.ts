@@ -1,6 +1,6 @@
 // Utilities
 import { inject } from 'vue'
-import { mergeDeep } from '@/util'
+import { mergeDeep, refElement } from '@/util'
 
 // Types
 import type { ComponentPublicInstance, InjectionKey, Ref } from 'vue'
@@ -45,10 +45,7 @@ function genDefaults () {
 
 function getTarget (el: ComponentPublicInstance | HTMLElement | string | undefined) {
   if (typeof el === 'string') return document.querySelector<HTMLElement>(el)
-  if (el instanceof HTMLElement) return el
-  if (el && '$el' in el && el?.$el instanceof HTMLElement) return (el.$el) as HTMLElement
-
-  return null
+  return refElement(el)
 }
 
 function getContainer (el?: ComponentPublicInstance | HTMLElement | string) {
