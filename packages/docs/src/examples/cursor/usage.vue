@@ -28,3 +28,24 @@
     'wait',
   ]
 </script>
+
+<script>
+  export default {
+    data: () => ({
+      cursors: [
+        'auto',
+        'default',
+        'grab',
+        'grabbing',
+        'help',
+        'move',
+        'none',
+        'not-allowed',
+        'pointer',
+        'progress',
+        'text',
+        'wait',
+      ],
+    }),
+  }
+</script>
