@@ -30,6 +30,8 @@ export type VSwitchSlots =
   & VSelectionControlSlots
   & { loader: LoaderSlotProps }
   & {
+    'prepend-inner': never
+    'append-inner': never
     thumb: { icon?: IconValue }
   }
 
@@ -147,7 +149,19 @@ export const VSwitch = genericComponent<new <T>(
                       ]}
                       style={ backgroundColorStyles.value }
                       onClick={ onTrackClick }
-                    ></div>
+                    >
+                      { slots['prepend-inner'] && (
+                        <div key="prepend" class="v-switch__prepend-inner">
+                          { slots['prepend-inner']() }
+                        </div>
+                      )}
+
+                      { slots['append-inner'] && (
+                        <div key="append" class="v-switch__append-inner">
+                          { slots['append-inner']() }
+                        </div>
+                      )}
+                    </div>
                   ),
                   input: ({ inputNode, icon, backgroundColorClasses, backgroundColorStyles }) => (
                     <>
