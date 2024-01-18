@@ -8,7 +8,8 @@ import { getObjectValueByPath, isEmpty, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
-import type { DataTableCompareFunction, InternalDataTableHeader } from '../types'
+import type { DataTableCompareFunction, DataTableItem, InternalDataTableHeader } from '../types'
+import type { DataIteratorItem } from '@/components/VDataIterator/composables/items'
 
 export const makeDataTableSortProps = propsFactory({
   sortBy: {
@@ -93,9 +94,9 @@ export function useSort () {
   return data
 }
 
-export function useSortedItems <T extends Record<string, any>> (
+export function useSortedItems <T, I extends DataTableItem<T>|DataIteratorItem<T>> (
   props: { customKeySort: Record<string, DataTableCompareFunction> | undefined },
-  items: Ref<T[]>,
+  items: Ref<I[]>,
   sortBy: Ref<readonly SortItem[]>,
   sortFunctions?: Ref<Record<string, DataTableCompareFunction> | undefined>,
 ) {
@@ -112,12 +113,12 @@ export function useSortedItems <T extends Record<string, any>> (
   return { sortedItems }
 }
 
-export function sortItems<T extends Record<string, any>> (
-  items: T[],
+export function sortItems<T, I extends DataTableItem<T>|DataIteratorItem<T>> (
+  items: I[],
   sortByItems: readonly SortItem[],
   locale: string,
   customSorters?: Record<string, DataTableCompareFunction>
-): T[] {
+): I[] {
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
 
   return [...items].sort((a, b) => {
@@ -127,8 +128,10 @@ export function sortItems<T extends Record<string, any>> (
 
       if (sortOrder === false) continue
 
-      let sortA = getObjectValueByPath(a.raw, sortKey)
-      let sortB = getObjectValueByPath(b.raw, sortKey)
+      // @ts-expect-error Property 'columns' does not exist on type 'DataIteratorItem<T>'
+      let sortA = getObjectValueByPath(a.columns ?? a.raw, sortKey)
+      // @ts-expect-error Property 'columns' does not exist on type 'DataIteratorItem<T>'
+      let sortB = getObjectValueByPath(b.columns ?? b.raw, sortKey)
 
       if (sortOrder === 'desc') {
         [sortA, sortB] = [sortB, sortA]
