@@ -7,11 +7,20 @@ import { useGoTo } from '../goto'
 import { useRender } from '@/util'
 
 const ComponentA = defineComponent({
-  setup () {
+  props: {
+    id: String,
+    target: String,
+  },
+
+  setup (props) {
     const goTo = useGoTo()
 
+    function onClick () {
+      return goTo(props.target!)
+    }
+
     useRender(() => (
-      <button id="top" onClick={ () => goTo('#bottom') }>Click me</button>
+      <button id={ props.id } onClick={ onClick }>Click me</button>
     ))
 
     return {}
@@ -19,11 +28,21 @@ const ComponentA = defineComponent({
 })
 
 const ComponentB = defineComponent({
-  setup () {
+  props: {
+    id: String,
+    target: String,
+    container: String,
+  },
+
+  setup (props) {
     const goTo = useGoTo()
 
+    function onClick () {
+      return goTo.horizontal(props.target!, { container: props.container })
+    }
+
     useRender(() => (
-      <button id="bottom" onClick={ () => goTo('#top') }>Click me</button>
+      <button id={ props.id } onClick={ onClick }>Click me</button>
     ))
 
     return {}
@@ -35,22 +54,42 @@ describe('goto', () => {
     cy
       .mount(() => (
         <div>
-          <div style="height: 1000px">
-            <ComponentA />
-          </div>
+          <ComponentA id="top" target="#bottom" />
 
-          <div style="height: 1000px">
-            <ComponentB />
-          </div>
+          <div style="height: 2000px;" />
+
+          <ComponentA id="bottom" target="#top" />
         </div>
       ))
       .get('#top').click()
       .window().should(win => {
-        expect(win.scrollY).to.equal(1000)
+        expect(win.scrollY).to.equal(1223)
       })
       .get('#bottom').click()
       .window().should(win => {
         expect(win.scrollY).to.equal(0)
+      })
+  })
+
+  // TODO: find a better way to test this
+  it('should scroll horizontal', () => {
+    cy
+      .mount(() => (
+        <div id="container" style="overflow-x: auto;">
+          <ComponentB id="start" target="#end" container="parent" />
+
+          <ComponentB id="end" target="#start" container="parent" style="margin-inline-start: 2000px;" />
+        </div>
+      ))
+      .get('#start').click()
+      .wait(500)
+      .get('#container').then($el => {
+        expect($el[0].scrollLeft).to.equal(975)
+      })
+      .get('#end').click()
+      .wait(500)
+      .get('#container').then($el => {
+        expect($el[0].scrollLeft).to.equal(0)
       })
   })
 })

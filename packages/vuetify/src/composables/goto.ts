@@ -12,6 +12,7 @@ export interface GoToInstance {
 }
 
 export interface GoToOptions {
+  container: ComponentPublicInstance | HTMLElement | string
   duration: number
   offset: number
   easing: string | ((t: number) => number)
@@ -22,6 +23,7 @@ export const GoToSymbol: InjectionKey<GoToInstance> = Symbol.for('vuetify:goto')
 
 function genDefaults () {
   return {
+    container: undefined,
     duration: 500,
     offset: 0,
     easing: 'easeInOutCubic',
@@ -60,7 +62,7 @@ function getOffset (target: any, horizontal?: boolean, rtl?: boolean): number {
   let el = getTarget(target)
   let totalOffset = 0
   while (el) {
-    totalOffset += horizontal ? el.scrollLeft : el.offsetTop
+    totalOffset += horizontal ? el.offsetLeft : el.offsetTop
     el = el.offsetParent as HTMLElement
   }
 
@@ -76,13 +78,16 @@ export function createGoTo (options: Partial<GoToOptions> | undefined, locale: L
 
 async function scrollTo (
   _target: ComponentPublicInstance | HTMLElement | number | string,
-  _container: ComponentPublicInstance | HTMLElement | string | 'parent',
-  options: GoToOptions,
+  _options: Partial<GoToOptions>,
   horizontal?: boolean,
-  rtl?: boolean,
+  goTo?: GoToInstance,
 ) {
+  const options = mergeDeep(goTo?.options, _options)
+  const rtl = goTo?.rtl.value
   const target = (typeof _target === 'number' ? _target : getTarget(_target)) ?? 0
-  const container = _container === 'parent' && _target instanceof HTMLElement ? _target.parentElement! : getContainer(_container)
+  const container = options.container === 'parent' && target instanceof HTMLElement
+    ? target.parentElement!
+    : getContainer(options.container)
   const ease = typeof options.easing === 'function' ? options.easing : options.patterns[options.easing]
 
   if (!ease) throw new TypeError(`Easing function "${options.easing}" not found.`)
@@ -134,23 +139,23 @@ async function scrollTo (
   }))
 }
 
-export function useGoTo (options?: Partial<GoToOptions>) {
+export function useGoTo (_options: Partial<GoToOptions> = {}) {
   const goTo = inject(GoToSymbol)
 
   if (!goTo) throw new Error('[Vuetify] Could not find injected goto instance')
 
   async function go (
     target: ComponentPublicInstance | HTMLElement | string | number,
-    container: ComponentPublicInstance | HTMLElement | string | 'parent' = 'parent'
+    options?: Partial<GoToOptions>,
   ) {
-    return scrollTo(target, container, mergeDeep(goTo?.options, options) as GoToOptions, false, goTo?.rtl.value)
+    return scrollTo(target, mergeDeep(_options, options), false, goTo)
   }
 
   go.horizontal = async (
     target: ComponentPublicInstance | HTMLElement | string | number,
-    container: ComponentPublicInstance | HTMLElement | string | 'parent' = 'parent'
+    options?: Partial<GoToOptions>,
   ) => {
-    return scrollTo(target, container, mergeDeep(goTo?.options, options) as GoToOptions, true, goTo?.rtl.value)
+    return scrollTo(target, mergeDeep(_options, options), true, goTo)
   }
 
   return go
