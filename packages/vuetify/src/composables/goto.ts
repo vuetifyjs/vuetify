@@ -25,7 +25,7 @@ export const GoToSymbol: InjectionKey<GoToInstance> = Symbol.for('vuetify:goto')
 function genDefaults () {
   return {
     container: undefined,
-    duration: 500,
+    duration: 300,
     layout: false,
     offset: 0,
     easing: 'easeInOutCubic',
