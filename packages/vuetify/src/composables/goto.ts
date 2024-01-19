@@ -14,6 +14,7 @@ export interface GoToInstance {
 export interface GoToOptions {
   container: ComponentPublicInstance | HTMLElement | string
   duration: number
+  layout: boolean
   offset: number
   easing: string | ((t: number) => number)
   patterns: Record<string, (t: number) => number>
@@ -25,6 +26,7 @@ function genDefaults () {
   return {
     container: undefined,
     duration: 500,
+    layout: false,
     offset: 0,
     easing: 'easeInOutCubic',
     patterns: {
@@ -98,11 +100,13 @@ async function scrollTo (
   } else {
     targetLocation = getOffset(target, horizontal, rtl) - getOffset(container, horizontal, rtl)
 
-    const styles = window.getComputedStyle(target)
-    const layoutOffset = styles.getPropertyValue('--v-layout-top')
+    if (options.layout) {
+      const styles = window.getComputedStyle(target)
+      const layoutOffset = styles.getPropertyValue('--v-layout-top')
 
-    if (layoutOffset) {
-      targetLocation -= parseInt(layoutOffset, 10)
+      if (layoutOffset) {
+        targetLocation -= parseInt(layoutOffset, 10)
+      }
     }
   }
 
