@@ -8,6 +8,10 @@ related:
   - /directives/scroll/
   - /features/application-layout/
   - /components/slide-groups/
+features:
+  github: /composables/goto.ts
+  label: 'E: goto'
+  report: true
 ---
 
 # Programmatic scrolling
@@ -24,15 +28,15 @@ The **goTo** method takes two parameters **target** and **options**. **target** 
 
 <example file="scroll/usage" />
 
-<!--## API
+## API
 
 | Directive | Description |
 | - | - |
-| [scroll](/api/v-scroll/) | The scroll directive |
+| [useGoTo](/api/use-go-to/) | The useGoTo composable |
 
 <api-inline hide-links />
 
-## Use with router
+<!--## Use with router
 
 The **goTo** function can be individually imported and invoked anywhere. This is particularly useful when hooking up to [vue-router](https://router.vuejs.org/).
 
