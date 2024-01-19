@@ -22,11 +22,9 @@ Handle scrolling within your application by using the **goTo** function.
 
 The **goTo** method takes two parameters **target** and **options**. **target** can be either a pixel offset from the top of the page, a valid css selector, or an element reference. **options** is an object that includes **duration**, **easing**, **container**, and **offset**.
 
-TODO
+<example file="scroll/usage" />
 
-<!-- <example file="scroll/usage" />
-
-## API
+<!--## API
 
 | Directive | Description |
 | - | - |
