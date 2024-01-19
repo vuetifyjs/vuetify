@@ -19,6 +19,7 @@ import { computed, ref } from 'vue'
 import { filterInputAttrs, genericComponent, getUid, propsFactory, useRender } from '@/util'
 
 // Types
+import type { ComputedRef, Ref } from 'vue'
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
 import type { IconValue } from '@/composables/icons'
@@ -26,8 +27,8 @@ import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
 
 export type VSwitchSlot = {
-  model: boolean
-  isValid: boolean | null
+  model: Ref<boolean>
+  isValid: ComputedRef<boolean | null>
 }
 
 export type VSwitchSlots =
@@ -130,8 +131,8 @@ export const VSwitch = genericComponent<new <T>(
               isValid,
             }) => {
               const slotProps = {
-                model: model.value,
-                isValid: isValid.value,
+                model,
+                isValid,
               }
 
               return (
@@ -199,8 +200,13 @@ export const VSwitch = genericComponent<new <T>(
                           ) : (
                             <VScaleTransition>
                               { !props.loading ? (
-                                (icon && (<VIcon key={ icon as any } icon={ icon } size="x-small" />))
-                              ) : (
+                                (icon && (
+                                  <VIcon
+                                    key={ String(icon) }
+                                    icon={ icon }
+                                    size="x-small"
+                                  />
+                                ))) : (
                                 <LoaderSlot
                                   name="v-switch"
                                   active
