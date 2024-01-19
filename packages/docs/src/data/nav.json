@@ -42,6 +42,7 @@
       "global-configuration",
       "icon-fonts",
       "internationalization",
+      "scrolling",
       "sass-variables",
       "theme",
       "treeshaking"
