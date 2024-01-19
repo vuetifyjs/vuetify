@@ -53,21 +53,23 @@
 </script>
 
 <script>
-  function sortRaw (a, b) {
-    if (a.location < b.location) return -1
-    if (a.location > b.location) return 1
-
-    const dateA = a.constructed.split('-').pop().trim()
-    const dateB = b.constructed.split('-').pop().trim()
-
-    return dateA.localeCompare(dateB, undefined, { numeric: true, sensitivity: 'base' })
-  }
-
   export default {
     data: () => ({
       headers: [
         { title: 'Name', key: 'name' },
-        { title: 'Location', key: 'location', sortRaw },
+        {
+          title: 'Location',
+          key: 'location',
+          sortRaw (a, b) {
+            if (a.location < b.location) return -1
+            if (a.location > b.location) return 1
+
+            const dateA = a.constructed.split('-').pop().trim()
+            const dateB = b.constructed.split('-').pop().trim()
+
+            return dateA.localeCompare(dateB, undefined, { numeric: true, sensitivity: 'base' })
+          },
+        },
         { title: 'Constructed', key: 'constructed' },
         { title: 'Description', key: 'description' },
       ],
