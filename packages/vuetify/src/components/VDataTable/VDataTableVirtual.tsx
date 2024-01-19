@@ -87,7 +87,13 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     const { groupBy } = createGroupBy(props)
     const { sortBy, multiSort, mustSort } = createSort(props)
 
-    const { columns, headers, sortFunctions, filterFunctions } = createHeaders(props, {
+    const {
+      columns,
+      headers,
+      filterFunctions,
+      sortFunctions,
+      sortRawFunctions,
+    } = createHeaders(props, {
       groupBy,
       showSelect: toRef(props, 'showSelect'),
       showExpand: toRef(props, 'showExpand'),
@@ -103,7 +109,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     const { toggleSort } = provideSort({ sortBy, multiSort, mustSort })
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
 
-    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, sortFunctions)
+    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, sortFunctions, sortRawFunctions)
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
 
     const allItems = computed(() => extractRows(flatItems.value))

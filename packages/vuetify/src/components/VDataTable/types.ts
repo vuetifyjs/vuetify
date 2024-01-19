@@ -24,6 +24,7 @@ export type DataTableHeader = {
 
   sortable?: boolean
   sort?: DataTableCompareFunction
+  sortRaw?: DataTableCompareFunction
   filter?: FilterFunction
 
   children?: DataTableHeader[]
