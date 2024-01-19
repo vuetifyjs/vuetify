@@ -101,7 +101,9 @@ async function scrollTo (
     const styles = window.getComputedStyle(target)
     const layoutOffset = styles.getPropertyValue('--v-layout-top')
 
-    targetLocation -= parseInt(layoutOffset, 10)
+    if (layoutOffset) {
+      targetLocation -= parseInt(layoutOffset, 10)
+    }
   }
 
   targetLocation += options.offset
