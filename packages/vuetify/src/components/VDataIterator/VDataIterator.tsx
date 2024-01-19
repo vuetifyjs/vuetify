@@ -2,7 +2,7 @@
 import './VDataIterator.sass'
 
 // Components
-import { VProgressCircular, VSlideYTransition } from '@/components'
+import { VSlideYTransition } from '@/components/transitions'
 import { makeDataTableExpandProps, provideExpanded } from '@/components/VDataTable/composables/expand'
 import { makeDataTableGroupProps, provideGroupBy, useGroupedItems } from '@/components/VDataTable/composables/group'
 import { useOptions } from '@/components/VDataTable/composables/options'
@@ -14,24 +14,27 @@ import {
 } from '@/components/VDataTable/composables/paginate'
 import { makeDataTableSelectProps, provideSelection } from '@/components/VDataTable/composables/select'
 import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from '@/components/VDataTable/composables/sort'
+import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
 import { makeDataIteratorItemsProps, useDataIteratorItems } from './composables/items'
 import { makeComponentProps } from '@/composables/component'
 import { makeFilterProps, useFilter } from '@/composables/filter'
+import { LoaderSlot } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTagProps } from '@/composables/tag'
-import { LoaderSlot, LoaderSlotProps } from '@/composables/loader'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { Component, computed, toRef } from 'vue'
+import { computed, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { Component } from 'vue'
 import type { DataIteratorItem } from './composables/items'
 import type { Group } from '@/components/VDataTable/composables/group'
 import type { SortItem } from '@/components/VDataTable/composables/sort'
+import type { LoaderSlotProps } from '@/composables/loader'
 
 type VDataIteratorSlotProps = {
   page: number
@@ -79,7 +82,7 @@ export const makeVDataIteratorProps = propsFactory({
   ...makeTransitionProps({
     transition: {
       component: VSlideYTransition as Component,
-      hideOnLeave: true
+      hideOnLeave: true,
     },
   }),
 }, 'VDataIterator')
@@ -185,9 +188,9 @@ export const VDataIterator = genericComponent<VDataIteratorSlots>()({
         <MaybeTransition transition={ props.transition }>
           { props.loading ? (
             <LoaderSlot name="v-data-iterator" active>
-              {slotProps => (
+              { slotProps => (
                 slots.loader
-                  ? slots.loader?.(slotProps.value)
+                  ? slots.loader?.(slotProps)
                   : (
                     <VProgressCircular
                       color={ typeof props.loading === 'boolean' ? undefined : props.loading }
@@ -200,7 +203,7 @@ export const VDataIterator = genericComponent<VDataIteratorSlots>()({
             </LoaderSlot>
           ) : (
             <div>
-              {!paginatedItems.value.length
+              { !paginatedItems.value.length
                 ? slots['no-data']?.()
                 : slots.default?.(slotProps.value)
               }
