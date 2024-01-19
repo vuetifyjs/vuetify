@@ -47,19 +47,16 @@ function genDefaults () {
   }
 }
 
-function getTarget (el: ComponentPublicInstance | HTMLElement | string | undefined) {
-  if (typeof el === 'string') return document.querySelector<HTMLElement>(el)
-  return refElement(el)
-}
-
 function getContainer (el?: ComponentPublicInstance | HTMLElement | string) {
   return getTarget(el) ?? (document.scrollingElement || document.body) as HTMLElement
 }
 
+function getTarget (el: ComponentPublicInstance | HTMLElement | string | undefined) {
+  return (typeof el === 'string') ? document.querySelector<HTMLElement>(el) : refElement(el)
+}
+
 function getOffset (target: any, horizontal?: boolean, rtl?: boolean): number {
-  if (typeof target === 'number') {
-    return horizontal && rtl ? -target : target
-  }
+  if (typeof target === 'number') return horizontal && rtl ? -target : target
 
   let el = getTarget(target)
   let totalOffset = 0
@@ -104,9 +101,7 @@ async function scrollTo (
       const styles = window.getComputedStyle(target)
       const layoutOffset = styles.getPropertyValue('--v-layout-top')
 
-      if (layoutOffset) {
-        targetLocation -= parseInt(layoutOffset, 10)
-      }
+      if (layoutOffset) targetLocation -= parseInt(layoutOffset, 10)
     }
   }
 
@@ -134,16 +129,12 @@ async function scrollTo (
       clientSize = container === document.body ? document.documentElement.clientHeight : container.clientHeight
       reachEnd = clientSize + container.scrollTop >= container.scrollHeight
 
-      if (targetLocation > container.scrollTop && reachEnd) {
-        return resolve(targetLocation)
-      }
+      if (targetLocation > container.scrollTop && reachEnd) return resolve(targetLocation)
     } else {
       clientSize = container === document.body ? document.documentElement.clientWidth : container.clientWidth
       reachEnd = clientSize + container.scrollLeft >= container.scrollWidth
 
-      if (targetLocation > container.scrollLeft && reachEnd) {
-        return resolve(targetLocation)
-      }
+      if (targetLocation > container.scrollLeft && reachEnd) return resolve(targetLocation)
     }
 
     requestAnimationFrame(step)
