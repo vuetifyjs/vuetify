@@ -199,7 +199,7 @@
 
   const goTo = useGoTo()
 
-  const duration = ref(500)
+  const duration = ref(300)
   const number = ref(500)
   const offset = ref(0)
   const cards = {
@@ -264,7 +264,7 @@
 
   function onClickReset () {
     component.value = 'card3'
-    duration.value = 500
+    duration.value = 300
     easing.value = 'easeInOutCubic'
     number.value = 500
     offset.value = 0
@@ -281,7 +281,7 @@
   export default {
     data () {
       return {
-        duration: 500,
+        duration: 300,
         number: 500,
         offset: 0,
         cards: {
@@ -351,7 +351,7 @@
       },
       onClickReset () {
         this.component = 'card3'
-        this.duration = 500
+        this.duration = 300
         this.easing = 'easeInOutCubic'
         this.number = 500
         this.offset = 0
