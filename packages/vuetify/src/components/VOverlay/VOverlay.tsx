@@ -242,7 +242,6 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       contentEl.value && animate(contentEl.value, [
         { transformOrigin: 'center' },
         { transform: 'scale(1.03)' },
-        { transformOrigin: 'center' },
       ], {
         duration: 150,
         easing: standardEasing,
