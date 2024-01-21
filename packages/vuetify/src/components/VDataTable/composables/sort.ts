@@ -93,11 +93,13 @@ export function useSort () {
   return data
 }
 
+// TODO: abstract into project composable
 export function useSortedItems <T extends Record<string, any>> (
   props: { customKeySort: Record<string, DataTableCompareFunction> | undefined },
   items: Ref<T[]>,
   sortBy: Ref<readonly SortItem[]>,
   sortFunctions?: Ref<Record<string, DataTableCompareFunction> | undefined>,
+  sortRawFunctions?: Ref<Record<string, DataTableCompareFunction> | undefined>,
 ) {
   const locale = useLocale()
   const sortedItems = computed(() => {
@@ -106,7 +108,7 @@ export function useSortedItems <T extends Record<string, any>> (
     return sortItems(items.value, sortBy.value, locale.current.value, {
       ...props.customKeySort,
       ...sortFunctions?.value,
-    })
+    }, sortRawFunctions?.value)
   })
 
   return { sortedItems }
@@ -116,7 +118,8 @@ export function sortItems<T extends Record<string, any>> (
   items: T[],
   sortByItems: readonly SortItem[],
   locale: string,
-  customSorters?: Record<string, DataTableCompareFunction>
+  customSorters?: Record<string, DataTableCompareFunction>,
+  customRawSorters?: Record<string, DataTableCompareFunction>,
 ): T[] {
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
 
@@ -129,9 +132,20 @@ export function sortItems<T extends Record<string, any>> (
 
       let sortA = getObjectValueByPath(a.raw, sortKey)
       let sortB = getObjectValueByPath(b.raw, sortKey)
+      let sortARaw = a.raw
+      let sortBRaw = b.raw
 
       if (sortOrder === 'desc') {
         [sortA, sortB] = [sortB, sortA]
+        ;[sortARaw, sortBRaw] = [sortBRaw, sortARaw]
+      }
+
+      if (customRawSorters?.[sortKey]) {
+        const customResult = customRawSorters[sortKey](sortARaw, sortBRaw)
+
+        if (!customResult) continue
+
+        return customResult
       }
 
       if (customSorters?.[sortKey]) {

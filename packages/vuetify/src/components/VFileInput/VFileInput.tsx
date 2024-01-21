@@ -53,12 +53,12 @@ export const makeVFileInputProps = propsFactory({
   },
   multiple: Boolean,
   showSize: {
-    type: [Boolean, Number] as PropType<boolean | 1000 | 1024>,
+    type: [Boolean, Number, String] as PropType<boolean | 1000 | 1024>,
     default: false,
     validator: (v: boolean | number) => {
       return (
         typeof v === 'boolean' ||
-        [1000, 1024].includes(v)
+        [1000, 1024].includes(Number(v))
       )
     },
   },

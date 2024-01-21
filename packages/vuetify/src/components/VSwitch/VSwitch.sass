@@ -25,24 +25,42 @@
     background-color: $switch-error-background-color
     color: $switch-error-color
 
+.v-switch__track-true
+  margin-inline-end: auto
+
+  .v-selection-control:not(.v-selection-control--dirty) &
+    opacity: 0
+
+.v-switch__track-false
+  margin-inline-start: auto
+
+  .v-selection-control--dirty &
+    opacity: 0
+
 .v-switch__track
+  display: inline-flex
+  align-items: center
+  font-size: .5rem
+  padding: 0 5px
   background-color: $switch-track-background
   border-radius: $switch-track-radius
   height: $switch-track-height
   opacity: $switch-track-opacity
-  width: $switch-track-width
+  min-width: $switch-track-width
   cursor: pointer
   transition: $switch-track-transition
 
   .v-switch--inset &
     border-radius: $switch-inset-track-border-radius
+    font-size: .75rem
     height: $switch-inset-track-height
-    width: $switch-inset-track-width
+    min-width: $switch-inset-track-width
 
 .v-switch__thumb
   align-items: center
   border-radius: $switch-thumb-radius
   display: flex
+  font-size: .75rem
   height: $switch-thumb-height
   justify-content: center
   width: $switch-thumb-width

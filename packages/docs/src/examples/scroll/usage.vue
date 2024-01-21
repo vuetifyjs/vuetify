@@ -1,133 +1,365 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col cols="12">
-        <h3
-          ref="radio"
-          class="text-h5"
-        >
-          Target
-        </h3>
+  <v-sheet rounded="b" border>
+    <v-container fluid>
+      <v-row>
+        <v-col cols="12" md="6">
+          <v-select
+            v-model="target"
+            :items="targets"
+            hide-details
+            label="Target"
+            prepend-inner-icon="mdi-bullseye"
+            variant="outlined"
+          ></v-select>
+        </v-col>
 
-        <v-radio-group
-          v-model="type"
-          row
-        >
-          <v-radio
+        <v-col cols="12" md="6">
+          <v-text-field
+            v-if="target === 'By Number'"
+            v-model.number="number"
+            hide-details
             label="Number"
-            value="number"
-          ></v-radio>
+            max="2000"
+            min="0"
+            prepend-inner-icon="mdi-numeric"
+            step="1"
+            type="number"
+            variant="outlined"
+            @keydown.enter="onClick"
+          ></v-text-field>
 
-          <v-radio
-            label="Selector"
-            value="selector"
-          ></v-radio>
+          <v-select
+            v-else-if="target === 'By Query Selector'"
+            v-model="query"
+            :items="queries"
+            hide-details
+            label="Query Selector"
+            prepend-inner-icon="mdi-format-header-1"
+            variant="outlined"
+          ></v-select>
 
-          <v-radio
-            label="DOMElement"
-            value="element"
-          ></v-radio>
-        </v-radio-group>
+          <v-select
+            v-else
+            v-model="component"
+            :items="components"
+            hide-details
+            label="Component / Element"
+            prepend-inner-icon="mdi-card-bulleted"
+            variant="outlined"
+          ></v-select>
+        </v-col>
 
-        <v-text-field
-          v-if="type === 'number'"
-          v-model="number"
-          type="number"
-          label="Number"
-        ></v-text-field>
+        <v-col cols="12" md="6">
+          <v-select
+            v-model="easing"
+            :items="easings"
+            hide-details
+            label="Easing"
+            prepend-inner-icon="mdi-sine-wave"
+            variant="outlined"
+          ></v-select>
+        </v-col>
 
-        <v-select
-          v-if="type === 'selector'"
-          v-model="selector"
-          label="Selector"
-          :items="selections"
-        ></v-select>
+        <v-col cols="12" md="6">
+          <v-text-field
+            v-model.number="duration"
+            hide-details
+            label="Duration"
+            max="2000"
+            min="50"
+            prepend-inner-icon="mdi-timer-sand"
+            step="1"
+            type="number"
+            variant="outlined"
+          ></v-text-field>
+        </v-col>
 
-        <v-select
-          v-if="type === 'element'"
-          v-model="selected"
-          :items="elements"
-          label="DOMElement"
-        ></v-select>
-      </v-col>
+        <v-col cols="12">
+          <v-slider
+            v-model="offset"
+            append-icon="mdi-axis-arrow"
+            hide-details
+            label="Offset"
+            max="100"
+            min="-100"
+            step="1"
+            thumb-label
+          ></v-slider>
+        </v-col>
 
-      <v-col cols="12">
-        <h3 class="text-h5">
-          Options
-        </h3>
+        <v-divider class="my-3 mx-n1"></v-divider>
 
-        <v-select
-          v-model="easing"
-          :items="easings"
-          label="Easing"
-        ></v-select>
+        <v-col cols="10" class="mt-n2">
+          <v-btn
+            block
+            color="surface-variant"
+            variant="flat"
+            text="Go To"
+            @click="onClick"
+          ></v-btn>
+        </v-col>
 
-        <v-slider
-          v-model="duration"
-          min="0"
-          max="1000"
-          label="Duration"
-          thumb-label
-        ></v-slider>
+        <v-col cols="2" class="mt-n2">
+          <v-btn
+            block
+            text="Reset"
+            variant="outlined"
+            color="error"
+            @click="onClickReset"
+          ></v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
 
-        <v-slider
-          v-model="offset"
-          min="-500"
-          max="500"
-          label="Offset"
-          thumb-label
-        ></v-slider>
-      </v-col>
+    <v-divider></v-divider>
 
-      <v-col>
+    <div
+      id="goto-container-example"
+      class="overflow-auto"
+      style="max-height: 400px;"
+    >
+      <v-sheet
+        class="pa-4"
+        color="surface-light"
+      >
+        <div id="heading-1" class="text-h5">Heading 1</div>
+
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!</p>
+
+        <br>
+
+        <v-card
+          :ref="instance => cards.card1 = instance"
+          flat
+          title="Card 1"
+          text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!"
+        ></v-card>
+
+        <div style="height: 420px;"></div>
+
+        <div id="heading-2" class="text-h5">Heading 2</div>
+
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!</p>
+
+        <br>
+
+        <v-card
+          :ref="instance => cards.card2 = instance"
+          flat
+          title="Card 2"
+          text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!"
+        ></v-card>
+
+        <div style="height: 420px;"></div>
+
+        <div id="heading-3" class="text-h5">Heading 3</div>
+
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!</p>
+
+        <br>
+
+        <v-card
+          :ref="instance => cards.card3 = instance"
+          flat
+          title="Card 3"
+          text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!"
+        ></v-card>
+
+        <div style="height: 420px;"></div>
+
+        <div id="heading-4" class="text-h5">Heading 4</div>
+
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!</p>
+
+        <br>
+
+        <v-card
+          :ref="instance => cards.card4 = instance"
+          flat
+          title="Card 4"
+          text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!"
+        ></v-card>
+
+        <div style="height: 180px;"></div>
+
         <v-btn
-          ref="button"
-          block
-          color="primary"
-          @click="$vuetify.goTo(target, options)"
-        >
-          scroll
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
+          append-icon="mdi-arrow-up-bold"
+          text="Back to Top"
+          variant="tonal"
+          @click="goTo(0, { container: '#goto-container-example' })"
+        ></v-btn>
+      </v-sheet>
+    </div>
+  </v-sheet>
 </template>
 
+<script setup>
+  import { computed, ref } from 'vue'
+  import { useGoTo } from 'vuetify'
+
+  const goTo = useGoTo()
+
+  const duration = ref(300)
+  const number = ref(500)
+  const offset = ref(0)
+  const cards = {
+    card1: ref(null),
+    card2: ref(null),
+    card3: ref(null),
+    card4: ref(null),
+  }
+  const component = ref('card3')
+  const components = [
+    { title: 'Card 1', value: 'card1' },
+    { title: 'Card 2', value: 'card2' },
+    { title: 'Card 3', value: 'card3' },
+    { title: 'Card 4', value: 'card4' },
+  ]
+  const query = ref('#heading-3')
+  const queries = [
+    '#heading-1',
+    '#heading-2',
+    '#heading-3',
+    '#heading-4',
+  ]
+  const target = ref('By Number')
+  const targets = [
+    'By Number',
+    'By Query Selector',
+    'By Component / Element',
+  ]
+  const easing = ref('easeInOutCubic')
+  const easings = [
+    'linear',
+    'easeInQuad',
+    'easeOutQuad',
+    'easeInOutQuad',
+    'easeInCubic',
+    'easeOutCubic',
+    'easeInOutCubic',
+    'easeInQuart',
+    'easeOutQuart',
+    'easeInOutQuart',
+    'easeInQuint',
+    'easeOutQuint',
+    'easeInOutQuint',
+  ]
+
+  const options = computed(() => ({
+    container: '#goto-container-example',
+    duration: duration.value,
+    easing: easing.value,
+    offset: offset.value,
+  }))
+
+  function onClick () {
+    if (target.value === 'By Number') {
+      goTo(number.value, options.value)
+    } else if (target.value === 'By Query Selector') {
+      goTo(query.value, options.value)
+    } else if (target.value === 'By Component / Element') {
+      goTo(cards[component.value].$el, options.value)
+    }
+  }
+
+  function onClickReset () {
+    component.value = 'card3'
+    duration.value = 300
+    easing.value = 'easeInOutCubic'
+    number.value = 500
+    offset.value = 0
+    query.value = '#heading-3'
+    target.value = 'By Number'
+
+    goTo(0, { container: '#goto-container-example' })
+  }
+</script>
+
 <script>
-  import * as easings from 'vuetify/lib/services/goto/easing-patterns'
+  import { useGoTo } from 'vuetify'
 
   export default {
     data () {
       return {
-        type: 'number',
-        number: 9999,
-        selector: '#first',
-        selections: ['#first', '#second', '#third'],
-        selected: 'Button',
-        elements: ['Button', 'Radio group'],
         duration: 300,
+        number: 500,
         offset: 0,
+        cards: {
+          card1: null,
+          card2: null,
+          card3: null,
+          card4: null,
+        },
+        component: 'card3',
+        components: [
+          { title: 'Card 1', value: 'card1' },
+          { title: 'Card 2', value: 'card2' },
+          { title: 'Card 3', value: 'card3' },
+          { title: 'Card 4', value: 'card4' },
+        ],
+        query: '#heading-3',
+        queries: [
+          '#heading-1',
+          '#heading-2',
+          '#heading-3',
+          '#heading-4',
+        ],
+        target: 'By Number',
+        targets: [
+          'By Number',
+          'By Query Selector',
+          'By Component / Element',
+        ],
         easing: 'easeInOutCubic',
-        easings: Object.keys(easings),
+        easings: [
+          'linear',
+          'easeInQuad',
+          'easeOutQuad',
+          'easeInOutQuad',
+          'easeInCubic',
+          'easeOutCubic',
+          'easeInOutCubic',
+          'easeInQuart',
+          'easeOutQuart',
+          'easeInOutQuart',
+          'easeInQuint',
+          'easeOutQuint',
+          'easeInOutQuint',
+        ],
       }
     },
     computed: {
-      target () {
-        const value = this[this.type]
-        if (!isNaN(value)) return Number(value)
-        else return value
-      },
       options () {
         return {
+          container: '#goto-container-example',
           duration: this.duration,
-          offset: this.offset,
           easing: this.easing,
+          offset: this.offset,
         }
       },
-      element () {
-        if (this.selected === 'Button') return this.$refs.button
-        else if (this.selected === 'Radio group') return this.$refs.radio
-        else return null
+    },
+    methods: {
+      onClick () {
+        const goTo = useGoTo()
+        if (this.target === 'By Number') {
+          goTo(this.number, this.options)
+        } else if (this.target === 'By Query Selector') {
+          goTo(this.query, this.options)
+        } else if (this.target === 'By Component / Element') {
+          goTo(this.cards[this.component].$el, this.options)
+        }
+      },
+      onClickReset () {
+        this.component = 'card3'
+        this.duration = 300
+        this.easing = 'easeInOutCubic'
+        this.number = 500
+        this.offset = 0
+        this.query = '#heading-3'
+        this.target = 'By Number'
+
+        const goTo = useGoTo()
+        goTo(0, { container: '#goto-container-example' })
       },
     },
   }

@@ -532,6 +532,12 @@ $utilities: () !default;
         class: position,
         values: static relative fixed absolute sticky
       ),
+      // Cursor
+      "cursor": (
+        property: cursor,
+        class: cursor,
+        values: auto default pointer wait text move help not-allowed progress grab grabbing none
+      ),
       // Sizing
       "fill-height": (
         property: height,
