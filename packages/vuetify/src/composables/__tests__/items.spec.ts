@@ -3,6 +3,7 @@ import { useItems } from '../list-items'
 
 // Utilities
 import { describe, expect, it } from '@jest/globals'
+import { deepEqual } from '@/util'
 
 describe('items', () => {
   const defaults = {
@@ -11,6 +12,7 @@ describe('items', () => {
     itemChildren: 'children',
     itemProps: () => ({}),
     returnObject: false,
+    valueComparator: deepEqual,
   }
 
   it('should do nothing to empty array', () => {

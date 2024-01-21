@@ -9,12 +9,13 @@ import {
   propsFactory,
   standardEasing,
 } from '@/util'
+import { getTargetBox } from '@/util/box'
 
 // Types
 import type { PropType } from 'vue'
 
 export const makeVDialogTransitionProps = propsFactory({
-  target: Object as PropType<HTMLElement>,
+  target: [Object, Array] as PropType<HTMLElement | [x: number, y: number]>,
 }, 'v-dialog-transition')
 
 export const VDialogTransition = genericComponent()({
@@ -110,8 +111,8 @@ function getChildren (el: Element) {
   return els && [...els]
 }
 
-function getDimensions (target: HTMLElement, el: HTMLElement) {
-  const targetBox = target.getBoundingClientRect()
+function getDimensions (target: HTMLElement | [x: number, y: number], el: HTMLElement) {
+  const targetBox = getTargetBox(target)
   const elBox = nullifyTransforms(el)
   const [originX, originY] = getComputedStyle(el).transformOrigin.split(' ').map(v => parseFloat(v))
 

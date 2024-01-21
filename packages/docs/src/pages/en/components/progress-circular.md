@@ -8,11 +8,18 @@ related:
   - /components/cards/
   - /components/progress-linear/
   - /components/lists/
+features:
+  github: /components/VProgressCircular/
+  label: 'C: VProgressCircular'
+  report: true
+  spec: https://m2.material.io/components/progress-indicators
 ---
 
 # Progress circular
 
 The `v-progress-circular` component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.
+
+<page-features />
 
 ## Usage
 
@@ -57,3 +64,11 @@ The `rotate` prop gives you the ability to customize the `v-progress-circular`'s
 The `size` and `width` props allow you to easily alter the size and width of the `v-progress-circular` component.
 
 <example file="v-progress-circular/prop-size-and-width" />
+
+### Slots
+
+#### Default
+
+`default` slot can be used to replace the text inside the loader.
+
+<example file="v-progress-circular/prop-slot-default" />

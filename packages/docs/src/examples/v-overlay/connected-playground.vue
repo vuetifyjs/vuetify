@@ -5,13 +5,12 @@
         <code>{{ code }}</code>
 
         <v-tooltip
-          :model-value="true"
           :location="location"
           :origin="origin"
           no-click-animation
         >
           <template v-slot:activator="{ props }">
-            <v-btn v-bind="props" class="my-12"></v-btn>
+            <v-btn v-bind="props" class="my-12" text="Hover Me"></v-btn>
           </template>
 
           <div>Overlay content</div>

@@ -12,7 +12,9 @@ related:
 
 # Sponsor Vuetify development
 
-Vuetify is an [MIT licensed](https://opensource.org/licenses/MIT) open-source project that's completely free to use.
+Vuetify is an [MIT licensed](https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md) open-source project that's completely free to use.
+
+<page-features />
 
 <entry />
 
@@ -37,35 +39,51 @@ We thank all of our project sponsors for their continued support of Vuetify. If 
 
 ### Special
 
-<sponsors tier="-1" width="240" />
+Thank you to our special sponsor. Your support is greatly appreciated.
 
-### Palladium
+<sponsors tier="-2" width="240" />
 
-<sponsors tier="0" />
+<br>
 
-<!-- ### Diamond
+### Diamond
 
-<sponsors tier="1" /> -->
+These sponsors have pledged $1,500 per month.
+
+<sponsors tier="1" />
+
+<br>
 
 ### Platinum
 
+These sponsors have pledged $500 per month.
+
 <sponsors tier="2" />
+
+<br>
 
 ### Gold
 
+These sponsors have pledged $250 per month.
+
 <sponsors tier="3" />
 
-### Silver
-
-<sponsors tier="4" />
-
-### Affiliate
-
-<sponsors tier="5" />
+<br>
 
 ### Service
 
+These sponsors help keep the lights on by providing free services to the Vuetify project.
+
 <sponsors tier="6" />
+
+<br>
+
+### Affiliate
+
+We work with these companies to provide you with the best possible experience.
+
+<sponsors tier="5" />
+
+<br>
 
 ## Bottom line
 

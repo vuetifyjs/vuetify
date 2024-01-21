@@ -31,13 +31,11 @@
   const { name } = useRoute()
   const { t } = useI18n()
 
-  const onClick = () =>
-
-    function onClick () {
-      event('click', {
-        event_category: 'toolbar',
-        event_label: 'sponsors',
-        value: name,
-      })
-    }
+  function onClick () {
+    event('click', {
+      event_category: 'button',
+      event_label: 'sponsors',
+      value: name,
+    })
+  }
 </script>

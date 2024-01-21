@@ -8,11 +8,18 @@ related:
   - /components/buttons/
   - /styles/colors/
   - /components/forms/
+features:
+  github: /components/VSnackbar/
+  label: 'C: VSnackbar'
+  report: true
+  spec: https://m2.material.io/components/snackbars
 ---
 
 # Snackbars
 
 The `v-snackbar` component is used to display a quick message to a user. Snackbars support positioning, removal delay, and callbacks.
+
+<page-features />
 
 ## Usage
 

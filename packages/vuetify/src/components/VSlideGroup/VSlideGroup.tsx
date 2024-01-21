@@ -6,9 +6,9 @@ import { VFadeTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { useDisplay } from '@/composables'
 import { makeComponentProps } from '@/composables/component'
-import { useGoto } from '@/composables/goto'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
+import { useGoTo } from '@/composables/goto'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { IconValue } from '@/composables/icons'
 import { useRtl } from '@/composables/locale'
@@ -17,12 +17,14 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, shallowRef, watch } from 'vue'
-import { calculateCenteredOffset, calculateUpdatedOffset, getClientSize, getOffsetSize, getScrollPosition, getScrollSize } from './helpers'
+import { calculateCenteredTarget, calculateUpdatedTarget, getClientSize, getOffsetSize, getScrollPosition, getScrollSize } from './helpers'
 import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType } from 'vue'
+import type { GoToOptions } from '@/composables/goto'
 import type { GroupProvide } from '@/composables/group'
+import type { GenericProps } from '@/util'
 
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
 
@@ -69,13 +71,20 @@ export const makeVSlideGroupProps = propsFactory({
   },
 
   ...makeComponentProps(),
+  ...makeDisplayProps(),
   ...makeTagProps(),
   ...makeGroupProps({
     selectedClass: 'v-slide-group-item--active',
   }),
 }, 'VSlideGroup')
 
-export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
+export const VSlideGroup = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: VSlideGroupSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSlideGroup',
 
   props: makeVSlideGroupProps(),
@@ -86,7 +95,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
 
   setup (props, { slots }) {
     const { isRtl } = useRtl()
-    const { mobile } = useDisplay()
+    const { displayClasses, mobile } = useDisplay(props)
     const group = useGroup(props, props.symbol)
     const isOverflowing = shallowRef(false)
     const scrollOffset = shallowRef(0)
@@ -97,8 +106,15 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
     const { resizeRef: containerRef, contentRect: containerRect } = useResizeObserver()
     const { resizeRef: contentRef, contentRect } = useResizeObserver()
 
-    const goto = useGoto({
-      container: containerRef,
+    let ignoreFocusEvent = false
+
+    const goTo = useGoTo()
+    const goToOptions = computed<Partial<GoToOptions>>(() => {
+      return {
+        container: containerRef.value,
+        duration: 200,
+        easing: 'easeOutQuart',
+      }
     })
 
     const firstSelectedIndex = computed(() => {
@@ -140,26 +156,24 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
     const isFocused = shallowRef(false)
 
     function scrollToChildren (children: HTMLElement, center?: boolean) {
-      if (!containerRef.value) return
-
-      let newPosition = scrollOffset.value
+      let target = 0
 
       if (center) {
-        newPosition = calculateCenteredOffset({
-          containerElement: containerRef.value,
-          selectedElement: children,
+        target = calculateCenteredTarget({
+          containerElement: containerRef.value!,
           isHorizontal: isHorizontal.value,
+          selectedElement: children,
         })
       } else {
-        newPosition = calculateUpdatedOffset({
-          containerElement: containerRef.value,
-          selectedElement: children,
+        target = calculateUpdatedTarget({
+          containerElement: containerRef.value!,
           isHorizontal: isHorizontal.value,
           isRtl: isRtl.value,
+          selectedElement: children,
         })
       }
 
-      scrollToPosition(newPosition)
+      scrollToPosition(target)
     }
 
     function scrollToPosition (newPosition: number) {
@@ -175,16 +189,16 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
         Math.abs(newPosition - scrollPosition) < 16
       ) return
 
+      if (isHorizontal.value && isRtl.value && containerRef.value) {
+        const { scrollWidth, offsetWidth: containerWidth } = containerRef.value!
+
+        newPosition = (scrollWidth - containerWidth) - newPosition
+      }
+
       if (isHorizontal.value) {
-        goto.horizontal({
-          offset: newPosition,
-          rtl: isRtl.value,
-        })
+        goTo.horizontal(newPosition, goToOptions.value)
       } else {
-        goto.vertical({
-          offset: newPosition,
-          rtl: isRtl.value,
-        })
+        goTo(newPosition, goToOptions.value)
       }
     }
 
@@ -216,9 +230,19 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
 
     function onFocus (e: FocusEvent) {
       if (
+        !ignoreFocusEvent &&
         !isFocused.value &&
         !(e.relatedTarget && contentRef.value?.contains(e.relatedTarget as Node))
       ) focus()
+
+      ignoreFocusEvent = false
+    }
+
+    /**
+     * Affixes clicks produce onFocus that we have to ignore to avoid extra scrollToChildren
+     */
+    function onFocusAffixes () {
+      ignoreFocusEvent = true
     }
 
     function onKeydown (e: KeyboardEvent) {
@@ -284,6 +308,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
 
       let newPosition = scrollOffset.value + offsetStep
 
+      // TODO: improve it
       if (isHorizontal.value && isRtl.value && containerRef.value) {
         const { scrollWidth, offsetWidth: containerWidth } = containerRef.value!
 
@@ -354,6 +379,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
             'v-slide-group--has-affixes': hasAffixes.value,
             'v-slide-group--is-overflowing': isOverflowing.value,
           },
+          displayClasses.value,
           props.class,
         ]}
         style={ props.style }
@@ -367,7 +393,8 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
               'v-slide-group__prev',
               { 'v-slide-group__prev--disabled': !hasPrev.value },
             ]}
-            onClick={ () => scrollTo('prev') }
+            onMousedown={ onFocusAffixes }
+            onClick={ () => hasPrev.value && scrollTo('prev') }
           >
             { slots.prev?.(slotProps.value) ?? (
               <VFadeTransition>
@@ -401,7 +428,8 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
               'v-slide-group__next',
               { 'v-slide-group__next--disabled': !hasNext.value },
             ]}
-            onClick={ () => scrollTo('next') }
+            onMousedown={ onFocusAffixes }
+            onClick={ () => hasNext.value && scrollTo('next') }
           >
             { slots.next?.(slotProps.value) ?? (
               <VFadeTransition>

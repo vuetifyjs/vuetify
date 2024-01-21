@@ -5,7 +5,6 @@
     :items="desserts"
     item-value="name"
     show-expand
-    class="elevation-1"
   >
     <template v-slot:top>
       <v-toolbar flat>
@@ -15,7 +14,7 @@
     <template v-slot:expanded-row="{ columns, item }">
       <tr>
         <td :colspan="columns.length">
-          More info about {{ item.raw.name }}
+          More info about {{ item.name }}
         </td>
       </tr>
     </template>

@@ -493,6 +493,25 @@ describe('VAutocomplete', () => {
       })
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/18796
+  it('should allow deleting selection via closable-chips', () => {
+    const selectedItem = ref('California')
+
+    cy.mount(() => (
+      <VAutocomplete
+        chips
+        v-model={ selectedItem.value }
+        closable-chips
+        items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+      />
+    ))
+      .get('.v-chip__close')
+      .click()
+      .then(_ => {
+        expect(selectedItem.value).to.equal(null)
+      })
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })

@@ -6,7 +6,8 @@ import { startCase } from 'lodash-es'
 import locales from '../src/i18n/locales.json'
 import pageToApi from '../src/data/page-to-api.json'
 import type { Plugin } from 'vite'
-import rimraf from 'rimraf'
+import { rimraf } from 'rimraf'
+import { mkdirp } from 'mkdirp'
 
 const API_ROOT = resolve('../api-generator/dist/api')
 const API_PAGES_ROOT = resolve('./node_modules/.cache/api-pages')
@@ -48,6 +49,7 @@ function genHeader (componentName: string) {
   const header = [
     genFrontMatter(componentName),
     `# ${componentName} API`,
+    '<page-features />',
   ]
 
   return `${header.join('\n\n')}\n\n`
@@ -147,8 +149,10 @@ async function generateFiles () {
 export default function Api (): Plugin {
   return {
     name: 'vuetify:api',
-    async configResolved () {
-      rimraf.sync(API_PAGES_ROOT)
+    enforce: 'pre',
+    async config () {
+      await rimraf(API_PAGES_ROOT)
+      await mkdirp(API_PAGES_ROOT)
 
       await generateFiles()
     },

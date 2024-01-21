@@ -27,7 +27,7 @@
   </a>
 </p>
 
-<h2 align="center">Supporting Vuetify</h2>
+### 💖 Supporting Vuetify
 
 Vuetify is a [MIT licensed](http://opensource.org/licenses/MIT) project that is developed and maintained full-time by [John Leider](https://github.com/johnleider) and [Heather Leider](https://github.com/heatherleider); with support from the entire [Core Team](https://vuetifyjs.com/about/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
 
@@ -55,7 +55,21 @@ Vuetify is a [MIT licensed](http://opensource.org/licenses/MIT) project that is 
 
 Funds donated through GitHub Sponsors and Patreon go directly to support John and Heather's full-time work on Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
 
-<h3 align="center"><b>Special Sponsor</b></h3>
+<h3><b>Special Sponsor</b></h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <a href="https://www.teamwork.com/" target="_blank">
+          <img height="35px" src="https://cdn.cosmicjs.com/4fbb7ab0-612e-11ed-af1a-0faa4245afee-teamwork.png">
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3><b>Diamond Sponsors</b></h3>
 
 <table>
   <tbody>
@@ -69,21 +83,7 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
   </tbody>
 </table>
 
-<h3 align="center"><b>Palladium Sponsors</b></h3>
-
-<table>
-  <tbody>
-    <tr>
-      <td>
-        <a href="https://github.com/sponsors/johnleider" target="_blank">
-          Your Logo Here
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 align="center"><b>Platinum Sponsors</b></h3>
+<h3><b>Platinum Sponsors</b></h3>
 
 <table>
   <tbody>
@@ -117,11 +117,6 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
         </a>
       </td>
       <td>
-        <a href="https://netticasinohex.com/">
-          <img height="30px" src="https://cdn.cosmicjs.com/4442ad40-1fdc-11ed-a5bd-ef15a2e468ca-hex-ca-light-sm.png">
-        </a>
-      </td>
-      <td>
         <a href="https://crosswordanswers911.net/">
           <img height="30px" src="https://cdn.cosmicjs.com/ef6ea2a0-7ee1-11ed-8730-d9eebcd39d9f-crossword-answers-911.jpg">
         </a>
@@ -131,11 +126,46 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
           <img height="40px" src="https://imgix.cosmicjs.com/af2ce530-eaa2-11ed-ba82-019c4666da06-itm-logo.png">
         </a>
       </td>
+      <td>
+        <a href="https://justanotherpanel.com/">
+          <img height="30px" src="https://cdn.cosmicjs.com/8d038320-6382-11ee-b975-cb0cfadd93ad-jap.png">
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>
 
 <br>
+
+### ⚡ Quick Start
+
+Getting started with Vuetify is easy. To create a new project, choose your package manager and run one of the following commands:
+
+Using [yarn](https://yarnpkg.com/)
+
+```bash
+yarn create vuetify
+```
+
+Using [npm](https://npmjs.com/)
+
+```bash
+npm create vuetify
+```
+
+Using [pnpm](https://pnpm.io/)
+
+```bash
+pnpm create vuetify
+```
+
+Using [bun](https://bun.sh/)
+
+```bash
+bun create vuetify
+```
+
+For more information on how to get started, such as using Nuxt or Laravel, check out the official [Installation guide](/getting-started/installation/).
 
 ### 🚀 Introduction
 
@@ -167,7 +197,7 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
     <tr>
       <td>
         <a href="https://support.vuetifyjs.com/?ref=github">
-          💫 Enterprise Support
+          💫&nbsp;Enterprise&nbsp;Support
         </a>
       </td>
       <td>Let the experts at Vuetify help you get the most out of your application with a customized support plan from the the team behind the framework</td>
@@ -175,7 +205,7 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
     <tr>
       <td>
         <a href="https://community.vuetifyjs.com/?ref=github">
-          💭 Discord Community
+          💭&nbsp;Discord&nbsp;Community
         </a>
       </td>
       <td>Our massive and inclusive Discord server where you can ask questions, share feedback, and connect with other Vuetify developers</td>
@@ -183,7 +213,7 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
     <tr>
       <td>
         <a href="https://play.vuetifyjs.com/?ref=github">
-          🎮 Vuetify Play
+          🎮&nbsp;Vuetify&nbsp;Play
         </a>
       </td>
       <td>A Vuetify 3 playground built using <a href="https://github.com/vuejs/repl">vuejs/repl</a> where you can play with our components</td>
@@ -191,7 +221,7 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
     <tr>
       <td>
         <a href="https://issues.vuetifyjs.com/?ref=github">
-          🐛 Vuetify Issues
+          🐛&nbsp;Vuetify&nbsp;Issues
         </a>
       </td>
       <td>A web application for reporting bugs and issues with Vuetify, Documentation, or one of our other packages</td>
@@ -199,7 +229,7 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
     <tr>
       <td>
         <a href="https://store.vuetifyjs.com/?ref=github">
-          🛒 Vuetify Store
+          🛒&nbsp;Vuetify&nbsp;Store
         </a>
       </td>
       <td>The official Vuetify Store where you can download free digital products, purchase pre-made themes, and more</td>

@@ -10,6 +10,7 @@ $table-density: ('default': 0, 'comfortable': -2, 'compact': -4) !default;
 $table-header-height: 56px !default;
 $table-header-font-weight: 500 !default;
 $table-header-font-size: tools.map-deep-get(settings.$typography, 'caption', 'size') !default;
+$table-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size') !default;
 $table-row-height: var(--v-table-row-height, 52px) !default;
 $table-row-font-size: tools.map-deep-get(settings.$typography, 'subtitle-2', 'size') !default;
 $table-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
@@ -17,6 +18,9 @@ $table-border: thin solid $table-border-color !default;
 $table-hover-color: rgba(var(--v-border-color), var(--v-hover-opacity)) !default;
 $table-line-height: 1.5 !default;
 $table-column-padding: 0 16px !default;
+$table-transition-duration: 0.28s !default;
+$table-transition-property: box-shadow, opacity, background, height !default;
+$table-transition-timing-function: settings.$standard-easing !default;
 
 // Lists
 $table-theme: (

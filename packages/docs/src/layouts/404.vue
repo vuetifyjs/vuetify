@@ -29,24 +29,13 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted } from 'vue'
   import { useRoute } from 'vue-router'
   import { rpath } from '@/util/routes'
-  import { usePwaStore } from '@/store/pwa'
-  import { useHead } from '@vueuse/head'
+  import { useHead } from '@unhead/vue'
   import DefaultLayout from '@/layouts/default.vue'
 
   const route = useRoute()
-  const pwa = usePwaStore()
   useHead({
     title: 'Page not found',
-  })
-
-  onMounted(async () => {
-    const sw = await navigator.serviceWorker?.getRegistration()
-    await sw?.update()
-    if (sw?.waiting) {
-      pwa.update()
-    }
   })
 </script>

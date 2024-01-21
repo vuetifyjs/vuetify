@@ -39,7 +39,7 @@ export const usePromotionsStore = defineStore('promotions', () => {
     const { objects = [] }: { objects: Promotion[] } = (
       await bucket?.objects
         .find({ type: 'promotions' })
-        .props('slug,title,metadata')
+        .props('metadata,slug,title')
         .status('published')
     ) || {}
 

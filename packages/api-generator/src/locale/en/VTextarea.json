@@ -1,29 +1,20 @@
 {
   "props": {
-    "autoGrow": "Automatically grow the textarea depending on amount of text",
-    "noResize": "Remove resize handle",
+    "autoGrow": "Automatically grow the textarea depending on amount of text.",
+    "counterValue": "Display the input length but do not provide any validation.",
+    "noResize": "Remove resize handle.",
+    "persistentPlaceholder": "Forces placeholder to always be visible.",
+    "prefix": "Displays prefix text.",
     "rowHeight": "Height value for each row. Requires the use of the **auto-grow** prop.",
-    "rows": "Default row count",
-    "autofocus": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-textarea.json))",
-    "prefix": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-textarea.json))",
-    "placeholder": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-textarea.json))",
-    "persistentPlaceholder": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-textarea.json))",
-    "maxRows": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-textarea.json))",
-    "suffix": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-textarea.json))"
+    "rows": "Default row count.",
+    "suffix": "Displays suffix text.",
+    "maxRows": "Specifies the maximum number of row count"
   },
   "events": {
-    "keydown": "Emitted when **any** key is pressed, textarea must be focused",
-    "click:prepend": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-textarea.json))",
-    "click:append": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-textarea.json))",
-    "click:clear": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-textarea.json))",
-    "click:appendInner": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-textarea.json))",
-    "click:prependInner": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-textarea.json))",
-    "click:control": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-textarea.json))",
-    "update:focused": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-textarea.json))"
+    "keydown": "Emitted when **any** key is pressed, textarea must be focused.",
+    "mousedown:control": "Event that is emitted when using mousedown on the main control area."
   },
-  "exposed": {
-    "reset": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-textarea.json))",
-    "resetValidation": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-textarea.json))",
-    "validate": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-textarea.json))"
+  "slots": {
+    "counter": "Slot for the input’s counter text."
   }
 }

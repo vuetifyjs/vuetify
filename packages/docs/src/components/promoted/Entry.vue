@@ -1,9 +1,12 @@
 <template>
   <carbon v-if="!user.disableAds" />
+
+  <br>
 </template>
 
 <script setup>
-  import { useUserStore } from '@/store/user'
+  // Stores
+  import { useUserStore } from '@vuetify/one'
 
   const user = useUserStore()
 </script>

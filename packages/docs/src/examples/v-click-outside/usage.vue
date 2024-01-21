@@ -1,4 +1,3 @@
-
 <template>
   <v-card
     v-click-outside="onClickOutside"

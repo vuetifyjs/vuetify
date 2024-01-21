@@ -1,31 +1,10 @@
 <template>
-  <div class="ps-1 mb-3">
-    <v-label :text="t('display')" class="mb-2 font-weight-medium" />
-
-    <v-messages :messages="t('display-message')" active />
-  </div>
-
-  <ad-option />
-
-  <br>
-
-  <quickbar-option />
-
-  <br>
-
-  <v-divider />
-
-  <br>
-
-  <div class="ps-1 mb-3">
-    <v-label :text="t('communication')" class="mb-2 font-weight-medium" />
-
-    <v-messages :messages="t('communication-message')" active />
-  </div>
+  <settings-header
+    title="communication"
+    text="communication-message"
+  />
 
   <banner-option />
-
-  <br>
 
   <notifications-option />
 
@@ -33,45 +12,70 @@
 
   <div class="d-flex justify-end">
     <v-btn
+      :disabled="isDisabled"
       :text="t('reset-all')"
       color="error"
       size="small"
-      variant="flat"
-      @click="onResetAll"
+      variant="outlined"
+      @click="onResetAllNotifications"
     />
   </div>
 
-  <br>
+  <v-divider class="my-3" />
 
-  <v-divider />
-
-  <br>
+  <settings-header
+    title="dashboard.advanced-options.danger-zone"
+    text="dashboard.advanced-options.danger-zone-message"
+  />
 
   <developer-mode />
+
+  <br>
+
+  <div class="d-flex justify-end">
+    <v-btn
+      :text="t('reset-all-settings')"
+      color="error"
+      prepend-icon="mdi-alert-circle-outline"
+      size="small"
+      variant="flat"
+      @click="onResetAllSettings"
+    />
+  </div>
 </template>
 
 <script setup>
   // Components
-  import AdOption from './options/AdOption.vue'
   import BannerOption from './options/BannerOption.vue'
   import DeveloperMode from './DeveloperMode.vue'
   import NotificationsOption from './options/NotificationsOption.vue'
-  import QuickbarOption from './options/QuickbarOption.vue'
+  import SettingsHeader from '@/components/app/settings/SettingsHeader.vue'
 
   // Composables
   import { useI18n } from 'vue-i18n'
 
   // Stores
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
+
+  // Utilities
+  import { computed } from 'vue'
 
   const { t } = useI18n()
   const user = useUserStore()
 
-  function onResetAll () {
+  const isDisabled = computed(() => (
+    user.notifications.last.banner.length === 0 &&
+    user.notifications.read.length === 0
+  ))
+
+  function onResetAllNotifications () {
     user.banner = true
     user.notifications.read = []
     user.notifications.show = true
     user.notifications.last.banner = []
-    user.quickbar = true
+  }
+
+  function onResetAllSettings () {
+    user.reset()
   }
 </script>

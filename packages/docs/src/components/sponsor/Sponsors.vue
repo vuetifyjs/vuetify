@@ -18,6 +18,17 @@
       />
     </v-col>
   </v-row>
+
+  <div v-else class="mb-4">
+    <app-btn
+      text="become-a-sponsor"
+      href="https://github.com/sponsors/johnleider"
+      border
+      target="_blank"
+      rel="noopener"
+      append-icon="mdi-open-in-new"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">

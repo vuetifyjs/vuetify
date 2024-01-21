@@ -2,14 +2,16 @@
   <v-defaults-provider
     :defaults="{
       VIcon: {
-        color: user.quickbar ? 'primary' : 'disabled'
+        color: user.quickbar && auth.isSubscriber ? 'primary' : 'disabled'
       }
     }"
   >
     <settings-switch
       v-model="user.quickbar"
-      :label="t('enable-quickbar')"
-      :messages="t('enable-quickbar-message')"
+      :disabled="!auth.isSubscriber"
+      :label="t('dashboard.perks.disable-quickbar')"
+      :messages="t('dashboard.perks.disable-quickbar-message')"
+      :readonly="!auth.isSubscriber"
     />
   </v-defaults-provider>
 </template>
@@ -19,8 +21,9 @@
   import { useI18n } from 'vue-i18n'
 
   // Stores
-  import { useUserStore } from '@/store/user'
+  import { useAuthStore, useUserStore } from '@vuetify/one'
 
   const { t } = useI18n()
+  const auth = useAuthStore()
   const user = useUserStore()
 </script>

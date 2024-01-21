@@ -9,7 +9,7 @@ import { makeBorderProps, useBorder } from '@/composables/border'
 import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
-import { useDisplay } from '@/composables/display'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -19,6 +19,7 @@ import { useScopeId } from '@/composables/scopeId'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, ref, shallowRef, toRef, Transition, watch } from 'vue'
@@ -79,6 +80,7 @@ export const makeVNavigationDrawerProps = propsFactory({
 
   ...makeBorderProps(),
   ...makeComponentProps(),
+  ...makeDisplayProps(),
   ...makeElevationProps(),
   ...makeLayoutItemProps(),
   ...makeRoundedProps(),
@@ -102,7 +104,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const { borderClasses } = useBorder(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { elevationClasses } = useElevation(props)
-    const { mobile } = useDisplay()
+    const { displayClasses, mobile } = useDisplay(props)
     const { roundedClasses } = useRounded(props)
     const router = useRouter()
     const isActive = useProxiedModel(props, 'modelValue', null, v => !!v)
@@ -127,17 +129,17 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       location.value !== 'bottom'
     )
 
-    if (props.expandOnHover && props.rail != null) {
+    useToggleScope(() => props.expandOnHover && props.rail != null, () => {
       watch(isHovering, val => emit('update:rail', !val))
-    }
+    })
 
-    if (!props.disableResizeWatcher) {
+    useToggleScope(() => !props.disableResizeWatcher, () => {
       watch(isTemporary, val => !props.permanent && (nextTick(() => isActive.value = !val)))
-    }
+    })
 
-    if (!props.disableRouteWatcher && router) {
-      watch(router.currentRoute, () => isTemporary.value && (isActive.value = false))
-    }
+    useToggleScope(() => !props.disableRouteWatcher && !!router, () => {
+      watch(router!.currentRoute, () => isTemporary.value && (isActive.value = false))
+    })
 
     watch(() => props.permanent, val => {
       if (val) isActive.value = true
@@ -229,6 +231,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               themeClasses.value,
               backgroundColorClasses.value,
               borderClasses.value,
+              displayClasses.value,
               elevationClasses.value,
               roundedClasses.value,
               props.class,

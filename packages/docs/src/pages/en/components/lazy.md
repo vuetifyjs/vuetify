@@ -8,13 +8,17 @@ related:
   - /components/badges/
   - /components/icons/
   - /components/lists/
+features:
+  github: /components/VLazy/
+  label: 'C: VLazy'
+  report: true
 ---
 
 # Lazy
 
 The `v-lazy` component is used to dynamically load components based upon an elements visibility.
 
-----
+<page-features />
 
 ## Usage
 
