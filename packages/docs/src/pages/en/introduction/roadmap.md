@@ -22,19 +22,11 @@ Vuetify is always under development. We are constantly working towards improving
 
 The following releases are currently under development:
 
-::: warning
-
-This is not an exhaustive list and is subject to change at any time without notice
-
-:::
-
 <promoted slug="vuetify-github-sponsors" />
 
-### v3.5
+### 2024 Roadmap
 
-- **Target Release:** Q1 2024
-- **Overview:** A maintenance cycle post v3.4 that will focus on bug fixes and general improvements.
-- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/70)
+TBA at [Vue.js Nation 2024](https://vue.school/vuetify-vn)
 
 ### Labs release schedule
 
@@ -52,13 +44,31 @@ The following versions have continued maintenance for backwards compatible fixes
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
 
+### v3.5 (Polaris)
+
+- **Released:** January 2024
+- **Hero:** [Banner](https://cdn.vuetifyjs.com/docs/images/release-banners/polaris-35.png)
+- **Target Release:** Q1 2024
+- **Notes:** [v3.5 Release](/getting-started/release-notes/?version=v3.5.0)
+- **Overview:** A maintenance cycle post v3.4 that will focus on bug fixes and general improvements.
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/70)
+
 ### v3.4 (Blackguard)
 
 - **Released:** November 2023
 - **Hero:** [Banner](https://cdn.vuetifyjs.com/docs/images/release-banners/blackguard-34.png)
 - **Target Release:** Q3 2023
 - **Notes:** [v3.4 Release](/getting-started/release-notes/?version=v3.4.0)
-- **Overview:** Introduced 8 updated components to the main framework from Labs: VBottomSheet, VDataIterator, VDataTable, VDatePicker, VInfiniteScroll, VOtpInput, VSkeletonLoader, and VStepper.
+<!-- - **Overview:** Introduced 8 updated components to the main framework from Labs: VBottomSheet, VDataIterator, VDataTable, VDatePicker, VInfiniteScroll, VOtpInput, VSkeletonLoader, and VStepper. -->
+- **Overview:** Introduced 8 updated components to the main framework from Labs:
+  - [VBottomSheet](/components/bottom-sheets/)
+  - [VDataIterator](/components/data-iterators/)
+  - [VDataTable](/components/data-tables/)
+  - [VDatePicker](/components/date-pickers/)
+  - [VInfiniteScroll](/components/infinite-scroller/)
+  - [VOtpInput](/components/otp-input/)
+  - [VSkeletonLoader](/components/skeleton-loaders/)
+  - [VStepper](/components/steppers/).
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/61)
 
 ### v2.7 (Nirvana)
