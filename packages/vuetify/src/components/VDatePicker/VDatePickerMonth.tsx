@@ -30,7 +30,6 @@ export const makeVDatePickerMonthProps = propsFactory({
   color: String,
   hideWeekdays: Boolean,
   multiple: [Boolean, Number, String] as PropType<boolean | 'range' | string | number>,
-  range: Boolean,
   showWeek: Boolean,
 
   ...makeCalendarProps(),
