@@ -1,6 +1,7 @@
 // Composables
 import { useCosmic } from '@/composables/cosmic'
 import { useDate } from 'vuetify'
+import { useUserStore } from '@vuetify/one'
 
 // Utilities
 import { defineStore } from 'pinia'
@@ -16,6 +17,7 @@ interface Banner {
     closable: boolean
     color: string
     label: string
+    height: number
     text: string
     subtext: string
     link: string
@@ -96,17 +98,21 @@ export const useBannersStore = defineStore('banners', {
   },
   getters: {
     banner (state) {
+      const user = useUserStore()
       const name = state.router.currentRoute.value.meta.page
 
       if (this.server) return this.server
 
       return state.banners.find(({
+        slug,
         metadata: {
           visible,
           active,
         },
       }) => {
         if (!active) return false
+
+        if (user.notifications.last.banner.includes(slug)) return false
 
         if (visible.key === 'both') return true
         // '' is home
