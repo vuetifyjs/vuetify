@@ -44,18 +44,9 @@ export const makeVSparklineProps = propsFactory({
     type: String,
     default: 'ease',
   },
-  autoLineWidth: {
-    type: Boolean,
-    default: false,
-  },
-  color: {
-    type: String,
-    default: 'primary',
-  },
-  fill: {
-    type: Boolean,
-    default: false,
-  },
+  autoLineWidth: Boolean,
+  color: String,
+  fill: Boolean,
   gradient: {
     type: Array as PropType<string[]>,
     default: () => ([]),
@@ -126,7 +117,7 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
       )
     })
 
-    const totalHeight = computed<number>(() => {
+    const totalHeight = computed(() => {
       let height = parseInt(props.height, 10)
 
       if (hasLabels.value) height += parseInt(props.labelSize, 10) * 1.5
@@ -134,7 +125,7 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
       return height
     })
 
-    const _lineWidth = computed(() => {
+    const lineWidth = computed(() => {
       if (props.autoLineWidth && props.type !== 'trend') {
         const totalPadding = Number(props.padding) * (props.modelValue.length + 1)
         return (Number(props.width) - totalPadding) / props.modelValue.length
@@ -143,8 +134,8 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
       }
     })
 
-    const totalWidth = computed<number>(() => props.type === 'bar'
-      ? Math.max(props.modelValue.length * _lineWidth.value, Number(props.width))
+    const totalWidth = computed(() => props.type === 'bar'
+      ? Math.max(props.modelValue.length * lineWidth.value, Number(props.width))
       : Number(props.width))
 
     const boundary = computed<Boundary>(() => {
@@ -167,10 +158,10 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
       }
     })
 
-    const genBars = (
+    function genBars (
       values: number[],
       boundary: Boundary
-    ): Bar[] => {
+    ): Bar[] {
       const { minX, maxX, minY, maxY } = boundary
       const totalValues = values.length
       let maxValue = Math.max(...values)
@@ -196,10 +187,10 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
       })
     }
 
-    const genPoints = (
+    function genPoints (
       values: number[],
       boundary: Boundary
-    ): Point[] => {
+    ): Point[] {
       const { minX, maxX, minY, maxY } = boundary
       const totalValues = values.length
       const maxValue = Math.max(...values)
@@ -281,14 +272,13 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
     })
 
     const bars = computed(() => genBars(props.modelValue.map(item => (typeof item === 'number' ? item : item.value)), boundary.value))
-    const offsetX = computed(() => (Math.abs(bars.value[0].x - bars.value[1].x) - _lineWidth.value) / 2)
+    const offsetX = computed(() => (Math.abs(bars.value[0].x - bars.value[1].x) - lineWidth.value) / 2)
 
     useRender(() => {
       const gradientData = !props.gradient.slice().length ? [''] : props.gradient.slice().reverse()
 
       return (
         <svg
-          class="text-black"
           {
             ...{
               ...attrs,
@@ -299,7 +289,7 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
               } : {
                 ...attrs,
                 display: 'block',
-                viewBox: `0 0 ${Math.max(props.modelValue.length * _lineWidth.value, Number(props.width))} ${hasLabels.value
+                viewBox: `0 0 ${Math.max(props.modelValue.length * lineWidth.value, Number(props.width))} ${hasLabels.value
                   ? parseInt(props.height, 10) + parseInt(props.labelSize, 10) * 1.5
                   : parseInt(props.height, 10)}`,
               }),
@@ -325,6 +315,7 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
                     }
                   </linearGradient>
                 </defs>
+
                 { hasLabels.value && (
                   <g
                     style={ `fontSize: 8; textAnchor: 'middle'; dominantBaseline: 'mathematical'; fill: 'currentColor'` }
@@ -332,7 +323,7 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
                     {
                       parsedLabels.value.map((item, i) => (
                         <text
-                          x={ item.x + (_lineWidth.value / 2) + _lineWidth.value / 2 }
+                          x={ item.x + (lineWidth.value / 2) + lineWidth.value / 2 }
                           y={ (props.type === 'trend'
                             ? parseInt(props.height, 10) - 4
                             : parseInt(props.height, 10)
@@ -347,6 +338,7 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
                     }
                   </g>
                 )}
+
                 { genPoints.length && (
                   <path
                     d={ genPath(
@@ -382,13 +374,14 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
                     }
                   </linearGradient>
                 </defs>
+
                 <clipPath id={ `sparkline-bar-${1}-clip` }>
                   {
                     bars.value.map(item => (
                       <rect
                         x={ item.x + offsetX.value }
                         y={ item.y }
-                        width={ _lineWidth.value }
+                        width={ lineWidth.value }
                         height={ item.height }
                         rx={ typeof props.smooth === 'number'
                           ? props.smooth
@@ -412,14 +405,15 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
                     ))
                   }
                 </clipPath>
-                { hasLabels.value ? (
+
+                { hasLabels.value && (
                   <g
                     style={ `fontSize: 8; textAnchor: 'middle'; dominantBaseline: 'mathematical'; fill: 'currentColor'` }
                   >
                     {
                       parsedLabels.value.map((item, i) => (
                         <text
-                          x={ item.x + (offsetX.value / 2) + _lineWidth.value / 2 }
+                          x={ item.x + (offsetX.value / 2) + lineWidth.value / 2 }
                           y={ (props.type === 'trend'
                             ? parseInt(props.height, 10) - 4
                             : parseInt(props.height, 10)
@@ -433,7 +427,8 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
                       ))
                     }
                   </g>
-                ) : undefined as never }
+                )}
+
                 <g
                   clip-path={ `url(#sparkline-bar-${1}-clip)` }
                   fill={ `url(#${1})` }
@@ -441,7 +436,7 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
                   <rect
                     x={ 0 }
                     y={ 0 }
-                    width={ Math.max(props.modelValue.length * _lineWidth.value, Number(props.width)) }
+                    width={ Math.max(props.modelValue.length * lineWidth.value, Number(props.width)) }
                     height={ props.height }
                   ></rect>
                 </g>
