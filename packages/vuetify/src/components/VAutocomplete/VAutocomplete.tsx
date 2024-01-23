@@ -78,6 +78,10 @@ export const makeVAutocompleteProps = propsFactory({
     type: [Boolean, String] as PropType<boolean | 'exact'>,
   },
   clearOnSelect: Boolean,
+  showSelectionSlot: {
+    type: Boolean,
+    default: false,
+  },
   search: String,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
@@ -243,7 +247,7 @@ export const VAutocomplete = genericComponent<new <
         listRef.value?.focus('next')
       }
 
-      if (!props.multiple) return
+      if (!props.multiple && !props.showSelectionSlot) return
 
       if (['Backspace', 'Delete'].includes(e.key)) {
         if (selectionIndex.value < 0) {
@@ -257,7 +261,7 @@ export const VAutocomplete = genericComponent<new <
         const originalSelectionIndex = selectionIndex.value
 
         const selectedItem = model.value[selectionIndex.value]
-        if (selectedItem && !selectedItem.props.disabled) select(selectedItem)
+        if (selectedItem && !selectedItem.props.disabled) select(selectedItem, !props.showSelectionSlot)
 
         selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
       }
@@ -344,7 +348,9 @@ export const VAutocomplete = genericComponent<new <
 
         isSelecting.value = true
 
-        search.value = add ? item.title : ''
+        if (!props.showSelectionSlot) {
+          search.value = add ? item.title : ''
+        }
 
         menu.value = false
         isPristine.value = true
@@ -358,7 +364,15 @@ export const VAutocomplete = genericComponent<new <
 
       if (val) {
         isSelecting.value = true
-        search.value = props.multiple ? '' : String(model.value.at(-1)?.props.title ?? '')
+
+        if (props.multiple) {
+          search.value = ''
+        } else {
+          if (!props.showSelectionSlot) {
+            search.value = String(model.value.at(-1)?.props.title ?? '')
+          }
+        }
+
         isPristine.value = true
 
         nextTick(() => isSelecting.value = false)
@@ -432,12 +446,12 @@ export const VAutocomplete = genericComponent<new <
           onChange={ onChange }
           class={[
             'v-autocomplete',
-            `v-autocomplete--${props.multiple ? 'multiple' : 'single'}`,
             {
               'v-autocomplete--active-menu': menu.value,
               'v-autocomplete--chips': !!props.chips,
               'v-autocomplete--selection-slot': !!slots.selection,
               'v-autocomplete--selecting-index': selectionIndex.value > -1,
+              [`v-autocomplete--${props.multiple ? 'multiple' : 'single'}`]: !props.showSelectionSlot,
             },
             props.class,
           ]}

@@ -82,6 +82,10 @@ export const makeVComboboxProps = propsFactory({
     type: Boolean,
     default: true,
   },
+  showSelectionSlot: {
+    type: Boolean,
+    default: false,
+  },
   delimiters: Array as PropType<readonly string[]>,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
@@ -209,7 +213,7 @@ export const VCombobox = genericComponent<new <
       emit('update:search', value)
     })
     watch(model, value => {
-      if (!props.multiple) {
+      if (!props.multiple && !props.showSelectionSlot) {
         _search.value = value[0]?.title ?? ''
       }
     })
@@ -295,7 +299,7 @@ export const VCombobox = genericComponent<new <
         listRef.value?.focus('next')
       }
 
-      if (!props.multiple) return
+      if (!props.multiple && !props.showSelectionSlot) return
 
       if (['Backspace', 'Delete'].includes(e.key)) {
         if (selectionIndex.value < 0) {
@@ -372,7 +376,9 @@ export const VCombobox = genericComponent<new <
       } else {
         const add = set !== false
         model.value = add ? [item] : []
-        _search.value = add ? item.title : ''
+        if (!props.showSelectionSlot) {
+          _search.value = add ? item.title : ''
+        }
 
         // watch for search watcher to trigger
         nextTick(() => {
@@ -463,7 +469,7 @@ export const VCombobox = genericComponent<new <
               'v-combobox--chips': !!props.chips,
               'v-combobox--selection-slot': !!slots.selection,
               'v-combobox--selecting-index': selectionIndex.value > -1,
-              [`v-combobox--${props.multiple ? 'multiple' : 'single'}`]: true,
+              [`v-autocomplete--${props.multiple ? 'multiple' : 'single'}`]: !props.showSelectionSlot,
             },
             props.class,
           ]}
