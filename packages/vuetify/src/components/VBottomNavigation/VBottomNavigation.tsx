@@ -26,6 +26,7 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 import type { GenericProps } from '@/util'
 
 export const makeVBottomNavigationProps = propsFactory({
+  baseColor: String,
   bgColor: String,
   color: String,
   grow: Boolean,
@@ -99,6 +100,7 @@ export const VBottomNavigation = genericComponent<new <T>(
 
     provideDefaults({
       VBtn: {
+        baseColor: toRef(props, 'baseColor'),
         color: toRef(props, 'color'),
         density: toRef(props, 'density'),
         stacked: computed(() => props.mode !== 'horizontal'),
