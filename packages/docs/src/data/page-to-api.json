@@ -153,9 +153,9 @@
   "directives/touch": ["v-touch"],
   "features/dates": ["useDate"],
   "features/display-and-platform": ["useDisplay"],
+  "features/scrolling": ["useGoTo"],
   "features/global-configuration": ["VDefaultsProvider"],
   "features/internationalization": ["useLocale", "VLocaleProvider"],
-  "features/scrolling": ["$vuetify"],
   "features/theme": ["VThemeProvider"],
   "styles/transitions": [
     "VDialogBottomTransition",

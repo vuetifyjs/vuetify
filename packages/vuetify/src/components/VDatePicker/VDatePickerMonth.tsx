@@ -10,8 +10,11 @@ import { makeCalendarProps, useCalendar } from '@/composables/calendar'
 import { useDate } from '@/composables/date/date'
 
 // Utilities
-import { ref } from 'vue'
+import { computed, ref, shallowRef } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
 
 export type VDatePickerMonthSlots = {
   day: {
@@ -26,7 +29,7 @@ export type VDatePickerMonthSlots = {
 export const makeVDatePickerMonthProps = propsFactory({
   color: String,
   hideWeekdays: Boolean,
-  multiple: Boolean,
+  multiple: [Boolean, Number, String] as PropType<boolean | 'range' | string | number>,
   showWeek: Boolean,
 
   ...makeCalendarProps(),
@@ -46,24 +49,71 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
   setup (props, { emit, slots }) {
     const daysRef = ref()
 
-    const {
-      daysInMonth,
-      model,
-      weekNumbers,
-    } = useCalendar(props as any) // TODO: fix typing
+    const { daysInMonth, model, weekNumbers } = useCalendar(props as any) // TODO: fix typing
     const adapter = useDate()
 
-    function onClick (value: unknown) {
-      if (props.multiple) {
-        const index = model.value.findIndex(selection => adapter.isSameDay(selection, value))
+    const rangeStart = shallowRef()
+    const rangeStop = shallowRef()
 
-        if (index === -1) {
-          model.value = [...model.value, value]
+    const atMax = computed(() => {
+      const max = ['number', 'string'].includes(typeof props.multiple) ? Number(props.multiple) : Infinity
+
+      return model.value.length >= max
+    })
+
+    function onRangeClick (value: unknown) {
+      const _value = adapter.startOfDay(value)
+
+      if (!rangeStart.value) {
+        rangeStart.value = _value
+        model.value = [rangeStart.value]
+      } else if (!rangeStop.value) {
+        if (adapter.isSameDay(value, rangeStart.value)) {
+          rangeStart.value = undefined
+          model.value = []
+          return
+        } else if (adapter.isBefore(value, rangeStart.value)) {
+          rangeStop.value = rangeStart.value
+          rangeStart.value = _value
         } else {
-          const value = [...model.value]
-          value.splice(index, 1)
-          model.value = value
+          rangeStop.value = _value
         }
+
+        const diff = adapter.getDiff(rangeStop.value, rangeStart.value)
+        const datesInRange = [rangeStart.value]
+
+        for (let i = 1; i < diff; i++) {
+          const nextDate = adapter.addDays(rangeStart.value, i)
+          datesInRange.push(nextDate)
+        }
+
+        datesInRange.push(rangeStop.value)
+
+        model.value = datesInRange
+      } else {
+        rangeStart.value = value
+        rangeStop.value = undefined
+        model.value = [rangeStart.value]
+      }
+    }
+
+    function onMultipleClick (value: unknown) {
+      const index = model.value.findIndex(selection => adapter.isSameDay(selection, value))
+
+      if (index === -1) {
+        model.value = [...model.value, value]
+      } else {
+        const value = [...model.value]
+        value.splice(index, 1)
+        model.value = value
+      }
+    }
+
+    function onClick (value: unknown) {
+      if (props.multiple === 'range') {
+        onRangeClick(value)
+      } else if (props.multiple) {
+        onMultipleClick(value)
       } else {
         model.value = [value]
       }
@@ -108,6 +158,10 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
               item,
               i,
             } as const
+
+            if (atMax.value && !item.isSelected) {
+              item.isDisabled = true
+            }
 
             return (
               <div
