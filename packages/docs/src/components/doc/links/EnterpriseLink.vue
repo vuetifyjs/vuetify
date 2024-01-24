@@ -4,6 +4,7 @@
     path="enterprise"
     active
     color="primary"
+    class="ml-2"
     @click="onClick"
   >
     <i18n path="get-help" />
