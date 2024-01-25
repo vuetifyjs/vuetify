@@ -147,7 +147,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                 'v-date-picker-month__day',
                 'v-date-picker-month__weekday',
               ]}
-            >{ weekDay[0] }</div>
+            >{ weekDay }</div>
           ))}
 
           { daysInMonth.value.map((item, i) => {

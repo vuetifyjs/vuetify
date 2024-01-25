@@ -7,17 +7,17 @@ import { VuetifyDateAdapter } from '../vuetify'
 import type { TimeZone } from 'timezone-mock'
 
 describe('vuetify date adapter', () => {
-  it('should return weekdays based on locale', () => {
+  it('returns weekdays based on locale', () => {
     let instance = new VuetifyDateAdapter({ locale: 'en-us' })
 
-    expect(instance.getWeekdays()).toStrictEqual(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'])
+    expect(instance.getWeekdays()).toStrictEqual(['S', 'M', 'T', 'W', 'T', 'F', 'S'])
 
     instance = new VuetifyDateAdapter({ locale: 'sv-se' })
 
-    expect(instance.getWeekdays()).toStrictEqual(['mån', 'tis', 'ons', 'tors', 'fre', 'lör', 'sön'])
+    expect(instance.getWeekdays()).toStrictEqual(['M', 'T', 'O', 'T', 'F', 'L', 'S'])
   })
 
-  it('should format dates', () => {
+  it('formats dates', () => {
     let instance = new VuetifyDateAdapter({ locale: 'en-us' })
 
     expect(instance.format(new Date(2000, 0, 1), 'fullDateWithWeekday')).toBe('Saturday, January 1, 2000')
@@ -36,7 +36,7 @@ describe('vuetify date adapter', () => {
     'Etc/GMT-2',
     'Etc/GMT-4',
     'Etc/GMT+4',
-  ])('should handle timezone %s when parsing date without time', timezone => {
+  ])('handles timezone %s when parsing date without time', timezone => {
     // locale option here has no impact on timezone
     const instance = new VuetifyDateAdapter({ locale: 'en-us' })
 
