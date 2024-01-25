@@ -41,15 +41,15 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
   props: makeVDatePickerMonthProps(),
 
   emits: {
-    'update:modelValue': (date: any) => true,
-    'update:month': (date: any) => true,
-    'update:year': (date: any) => true,
+    'update:modelValue': (date: unknown) => true,
+    'update:month': (date: number) => true,
+    'update:year': (date: number) => true,
   },
 
   setup (props, { emit, slots }) {
     const daysRef = ref()
 
-    const { daysInMonth, model, weekNumbers } = useCalendar(props as any) // TODO: fix typing
+    const { daysInMonth, model, weekNumbers } = useCalendar(props)
     const adapter = useDate()
 
     const rangeStart = shallowRef()
