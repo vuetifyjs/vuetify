@@ -18,7 +18,7 @@
       <template v-slot:extension>
         <v-tabs
           v-model="model"
-          centered
+          alignTabs="center"
         >
           <v-tab
             v-for="i in 3"
