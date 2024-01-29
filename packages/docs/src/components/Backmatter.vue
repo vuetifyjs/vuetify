@@ -22,13 +22,9 @@
       </template>
     </i18n>
 
-    <related-pages />
-
     <app-divider class="mt-7 mb-5" />
 
     <up-next class="mb-4" />
-
-    <exit-ad class="mb-8" />
 
     <contribute />
   </section>

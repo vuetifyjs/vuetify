@@ -2,9 +2,12 @@
   <app-btn
     href="https://vuetifyjs.com/en/introduction/enterprise-support/"
     path="enterprise"
+    active
+    color="primary"
+    class="ml-2"
     @click="onClick"
   >
-    <i18n path="enterprise" />
+    <i18n path="get-help" />
   </app-btn>
 </template>
 
