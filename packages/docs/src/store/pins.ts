@@ -5,7 +5,7 @@ import { defineStore } from 'pinia'
 import { useRoute } from 'vue-router'
 
 // Utilities
-import { computed, ref, shallowRef, watch } from 'vue'
+import { computed, ref, shallowRef } from 'vue'
 
 // Stores
 import { useUserStore } from '@vuetify/one'
@@ -25,14 +25,22 @@ export const usePinsStore = defineStore('pins', () => {
 
   const pageIsPinned = computed(() => pins.value.some(p => p.to === route.path))
 
-  watch(isPinning, save)
-
   function toggle (value: boolean, pin: Pin) {
+    let array = pins.value.slice()
+
     if (value) {
-      pins.value.push(pin)
+      array.push(pin)
     } else {
-      pins.value = pins.value.filter(p => p.to !== pin.to)
+      array = array.filter(p => p.to !== pin.to)
     }
+
+    array.sort((a, b) => {
+      if (a.title > b.title) return 1
+      if (a.title < b.title) return -1
+      return 0
+    })
+
+    pins.value = array
 
     save()
   }

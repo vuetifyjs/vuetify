@@ -56,7 +56,9 @@
   const opened = computed({
     get: () => rail.value ? [] : _opened.value,
     set: val => {
-      _opened.value = pins.isPinning ? [] : val
+      if (pins.isPinning) return
+
+      _opened.value = val
     },
   })
   const railEnabled = computed(() => user.railDrawer)

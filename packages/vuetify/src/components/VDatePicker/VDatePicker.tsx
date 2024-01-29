@@ -68,10 +68,16 @@ export const makeVDatePickerProps = propsFactory({
   modelValue: null,
 }, 'VDatePicker')
 
-export const VDatePicker = genericComponent<new <T, Multiple extends boolean = false> (
+export const VDatePicker = genericComponent<new <
+  T,
+  Multiple extends boolean | 'range' | number | (string & {}) = false,
+  TModel = Multiple extends true | number | string
+    ? T[]
+    : T,
+> (
   props: {
-    modelValue?: Multiple extends true ? T[] : T
-    'onUpdate:modelValue'?: (value: Multiple extends true ? T[] : T) => void
+    modelValue?: TModel
+    'onUpdate:modelValue'?: (value: TModel) => void
     multiple?: Multiple
   },
   slots: VDatePickerSlots
