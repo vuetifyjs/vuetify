@@ -24,7 +24,7 @@ The `v-lazy` component is used to dynamically load components based upon an elem
 
 The `v-lazy` component by default will not render its contents until it has been intersected. Scroll down and watch the element render as you go past it.
 
-<usage name="v-lazy" />
+<example file="v-lazy/usage" />
 
 <entry />
 
@@ -35,3 +35,11 @@ The `v-lazy` component by default will not render its contents until it has been
 | [v-lazy](/api/v-lazy/) | Primary Component |
 
 <api-inline hide-links />
+
+## Examples
+
+### Lists
+
+The `v-lazy` component can be used to render lists of items. This is useful for long lists that may cause the page to become unresponsive while rendering.
+
+<example file="v-lazy/list" />
