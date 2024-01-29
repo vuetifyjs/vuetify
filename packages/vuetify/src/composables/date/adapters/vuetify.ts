@@ -305,8 +305,7 @@ function format (
       options = { month: 'short' }
       break
     case 'dayOfMonth':
-      options = { day: 'numeric' }
-      break
+      return new Intl.NumberFormat(locale).format(newDate.getDate())
     case 'shortDate':
       options = { year: '2-digit', month: 'numeric', day: 'numeric' }
       break
