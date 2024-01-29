@@ -12,6 +12,8 @@ $line-height-root: 1.5 !default;
 $border-color-root: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $border-radius-root: 4px !default;
 $border-style-root: solid !default;
+$transition-duration-root: 0.3s !default;
+$transition-move-duration-root: 0.5s !default;
 
 $borders: () !default;
 $borders: map-deep-merge(
