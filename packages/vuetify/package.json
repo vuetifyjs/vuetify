@@ -1,7 +1,7 @@
 {
-  "name": "vuetify",
+  "name": "@kickflow/vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.5.1",
+  "version": "3.5.1-kickflow3",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -11,7 +11,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuetifyjs/vuetify.git",
-    "directory": "packages/vuetify"
+    "directory": "packages/@kickflow/vuetify"
   },
   "keywords": [
     "vuetify",
