@@ -2,7 +2,7 @@
 import { useProxiedModel } from './proxiedModel'
 
 // Utilities
-import { computed, inject, isRef, onBeforeUnmount, onMounted, provide, reactive, toRef, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef, unref, watch } from 'vue'
 import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -179,10 +179,7 @@ export function useGroup (
     const children = findChildrenWithProvide(key, groupVm?.vnode)
     const index = children.indexOf(vm)
 
-    if (!unwrapped.value || (
-      isRef(unwrapped.value) &&
-      unwrapped.value.value == null
-    )) {
+    if (unref(unwrapped.value) == null) {
       unwrapped.value = index
     }
 
