@@ -16,15 +16,15 @@
 
     <template #append>
       <v-btn
-        :color="one.isSubscriber ? 'error' : 'primary'"
         :loading="one.isLoading"
-        :text="one.isSubscriber ? 'Cancel' : 'Subscribe'"
+        :text="hasBilling ? 'Manage' : 'Subscribe'"
         border
-        class="text-none border-error border-opacity-100"
+        class="text-none"
+        color="primary"
         size="small"
         slim
+        variant="outlined"
         width="80"
-        :variant="one.isSubscriber ? 'plain' : 'outlined'"
         @click="onClick"
       >
         <template #loader>
@@ -40,13 +40,22 @@
 </template>
 
 <script setup>
+  // Utilities
+  import { computed } from 'vue'
+
   // Store
-  import { useAuthStore, useOneStore } from '@vuetify/one'
+  import { useAuthStore, useHttpStore, useOneStore } from '@vuetify/one'
 
   const auth = useAuthStore()
+  const http = useHttpStore()
   const one = useOneStore()
 
+  const hasBilling = computed(() => !!one.subscription?.tierName)
+
   function onClick () {
-    one.isSubscriber ? one.cancel() : one.subscribe()
+    if (!hasBilling.value) return one.subscribe()
+
+    one.isLoading = true
+    window.location.href = http.url + '/one/manage'
   }
 </script>
