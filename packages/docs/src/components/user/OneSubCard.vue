@@ -12,15 +12,9 @@
       <span class="font-weight-light">Subscriber</span>
     </div>
 
-    <div class="text-caption font-weight-regular text-grey-lighten-2 mb-2">
+    <div class="text-caption font-weight-regular text-grey-lighten-2">
       Since {{ memberSince }}
     </div>
-
-    <border-chip
-      :to="rpath('/user/subscriptions/')"
-      text="Manage Subscription"
-      theme="dark"
-    />
   </v-card>
 </template>
 
@@ -33,7 +27,6 @@
 
   // Utilities
   import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
 
   const adapter = useDate()
   const one = useOneStore()
