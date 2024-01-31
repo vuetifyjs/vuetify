@@ -53,40 +53,47 @@ describe('vuetify date adapter', () => {
     timezoneMock.unregister()
   })
 
-  describe('isBeforeYear', () => {
-    let dateUtils: VuetifyDateAdapter
+  describe('isAfterDay', () => {
+    const dateUtils = new VuetifyDateAdapter({ locale: 'en-us' })
 
-    beforeEach(() => {
-      dateUtils = new VuetifyDateAdapter({ locale: 'en-us' })
+    it.each([
+      [new Date('2024-01-02'), new Date('2024-01-01'), true],
+      [new Date('2024-02-29'), new Date('2024-02-28'), true],
+      [new Date('2024-01-01'), new Date('2024-01-01'), false],
+      [new Date('2024-01-01'), new Date('2024-01-02'), false],
+    ])('returns %s when comparing %s and %s', (date, comparing, expected) => {
+      expect(dateUtils.isAfterDay(date, comparing)).toBe(expected)
     })
+  })
 
-    it('returns false when the first date is in the same year as the second date', () => {
-      expect(dateUtils.isBeforeYear(new Date('2024-12-31'), new Date('2024-01-02'))).toBe(false)
+  describe('getPreviousMonth', () => {
+    const dateUtils = new VuetifyDateAdapter({ locale: 'en-us' })
+
+    it.each([
+      [new Date('2024-03-15'), new Date('2024-02-01'), '2024-03-15 -> 2024-02-01'],
+      [new Date('2024-01-01'), new Date('2023-12-01'), '2024-01-01 -> 2023-12-01'],
+      [new Date('2025-01-31'), new Date('2024-12-01'), '2025-01-31 -> 2024-12-01'],
+      [new Date('2024-02-29'), new Date('2024-01-01'), '2024-02-29 -> 2024-01-01 (Leap Year)'],
+      [new Date('2023-03-01'), new Date('2023-02-01'), '2023-03-01 -> 2023-02-01'],
+    ])('correctly calculates the first day of the previous month: %s', (date, expected) => {
+      const result = dateUtils.getPreviousMonth(date)
+      expect(result.getFullYear()).toBe(expected.getFullYear())
+      expect(result.getMonth()).toBe(expected.getMonth())
+      expect(result.getDate()).toBe(expected.getDate())
     })
+  })
 
-    it('returns false when dates are in the same year', () => {
-      expect(dateUtils.isBeforeYear(new Date('2024-12-31'), new Date('2024-12-31'))).toBe(false)
-    })
+  describe('isSameYear', () => {
+    const dateUtils = new VuetifyDateAdapter({ locale: 'en-us' })
 
-    it('returns false when the first date is in a year after the second date', () => {
-      expect(dateUtils.isBeforeYear(new Date('2025-01-01'), new Date('2024-12-31'))).toBe(false)
-    })
-
-    describe('handles invalid dates', () => {
-      const validDate = new Date('2024-12-31')
-      const invalidDate = new Date('invalid-date')
-
-      it('returns false for invalid first date', () => {
-        expect(dateUtils.isBeforeYear(invalidDate, validDate)).toBe(false)
-      })
-
-      it('returns false for invalid second date', () => {
-        expect(dateUtils.isBeforeYear(validDate, invalidDate)).toBe(false)
-      })
-
-      it('returns false for both dates invalid', () => {
-        expect(dateUtils.isBeforeYear(invalidDate, invalidDate)).toBe(false)
-      })
+    it.each([
+      [new Date('2024-01-01'), new Date('2024-12-31'), true],
+      [new Date('2024-06-15'), new Date('2024-11-20'), true],
+      [new Date('2023-01-01'), new Date('2024-01-01'), false],
+      [new Date('2024-12-31'), new Date('2025-01-01'), false],
+      [new Date('2024-07-07'), new Date('2023-07-07'), false],
+    ])('returns %s when comparing %s and %s', (date1, date2, expected) => {
+      expect(dateUtils.isSameYear(date1, date2)).toBe(expected)
     })
   })
 })
