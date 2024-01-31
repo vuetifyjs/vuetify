@@ -87,6 +87,8 @@ export const makeVListProps = propsFactory({
   bgColor: String,
   disabled: Boolean,
   virtualItems: Boolean,
+  expandIcon: String,
+  collapseIcon: String,
   lines: {
     type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
     default: 'one',
@@ -169,6 +171,8 @@ export const VList = genericComponent<new <
         activeColor,
         baseColor,
         color,
+        expandIcon: toRef(props, 'expandIcon'),
+        collapseIcon: toRef(props, 'collapseIcon'),
       },
       VListItem: {
         activeClass: toRef(props, 'activeClass'),

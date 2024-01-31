@@ -11,28 +11,28 @@ import type { PropType } from 'vue'
 
 // Types
 export interface CalendarProps {
-  allowedDates: unknown[] | ((date: unknown) => boolean)
+  allowedDates: unknown[] | ((date: unknown) => boolean) | undefined
   disabled: boolean
   displayValue: unknown
-  modelValue: unknown[]
+  modelValue: unknown[] | undefined
   max: unknown
   min: unknown
-  showAdjacentMonths?: boolean
-  month: number | string
+  showAdjacentMonths: boolean
+  month: number | string | undefined
   weekdays: number[]
-  year: number | string
+  year: number | string | undefined
 
-  'onUpdate:modelValue': (value: unknown[]) => void
-  'onUpdate:month': (value: number) => void
-  'onUpdate:year': (value: number) => void
+  'onUpdate:modelValue': ((value: unknown[]) => void) | undefined
+  'onUpdate:month': ((value: number) => void) | undefined
+  'onUpdate:year': ((value: number) => void) | undefined
 }
 
 // Composables
 export const makeCalendarProps = propsFactory({
-  allowedDates: [Array, Function],
+  allowedDates: [Array, Function] as PropType<unknown[] | ((date: unknown) => boolean)>,
   disabled: Boolean,
   displayValue: null as any as PropType<unknown>,
-  modelValue: Array as PropType<unknown[] | undefined>,
+  modelValue: Array as PropType<unknown[]>,
   month: [Number, String],
   max: null as any as PropType<unknown>,
   min: null as any as PropType<unknown>,
@@ -79,7 +79,7 @@ export function useCalendar (props: CalendarProps) {
     undefined,
     v => {
       const value = v != null ? Number(v) : adapter.getMonth(displayValue.value)
-      const date = adapter.setYear(adapter.date(), adapter.getYear(year.value))
+      const date = adapter.setYear(adapter.startOfMonth(adapter.date()), adapter.getYear(year.value))
 
       return adapter.setMonth(date, value)
     },

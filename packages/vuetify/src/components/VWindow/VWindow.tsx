@@ -44,7 +44,7 @@ type ControlProps = {
   icon: IconValue
   class: string
   onClick: () => void
-  ariaLabel: string
+  'aria-label': string
 }
 
 export const VWindowSymbol: InjectionKey<WindowProvide> = Symbol.for('vuetify:v-window')
@@ -175,7 +175,7 @@ export const VWindow = genericComponent<new <T>(
         icon: isRtl.value ? props.nextIcon : props.prevIcon,
         class: `v-window__${isRtlReverse.value ? 'right' : 'left'}`,
         onClick: group.prev,
-        ariaLabel: t('$vuetify.carousel.prev'),
+        'aria-label': t('$vuetify.carousel.prev'),
       }
 
       arrows.push(canMoveBack.value
@@ -189,7 +189,7 @@ export const VWindow = genericComponent<new <T>(
         icon: isRtl.value ? props.prevIcon : props.nextIcon,
         class: `v-window__${isRtlReverse.value ? 'left' : 'right'}`,
         onClick: group.next,
-        ariaLabel: t('$vuetify.carousel.next'),
+        'aria-label': t('$vuetify.carousel.next'),
       }
 
       arrows.push(canMoveForward.value

@@ -3,7 +3,9 @@
     <a
       href="#"
       class="text-decoration-none"
-    >Non-underlined link</a>
+    >
+      Non-underlined link
+    </a>
 
     <div class="text-decoration-line-through">
       Line-through text

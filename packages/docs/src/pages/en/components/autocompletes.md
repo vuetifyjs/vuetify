@@ -66,6 +66,14 @@ The `custom-filter` prop can be used to filter each individual item with custom 
 
 <example file="v-autocomplete/prop-filter" />
 
+::: tip
+
+The **v-autocomplete** component updates the search model on focus/blur events. Focus sets search to the current model (if available), and blur clears it.
+
+Unlike **v-combobox**, it doesn't keep unlisted values. To prevent unnecessary API requests when querying, ensure that search is not empty and/or doesn't match the current model.
+
+:::
+
 ### Slots
 
 #### Item and selection

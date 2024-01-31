@@ -102,6 +102,7 @@ function genDefaults () {
     id: false,
     it: false,
     ja: false,
+    km: false,
     ko: false,
     lv: false,
     lt: false,

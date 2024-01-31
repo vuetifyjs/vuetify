@@ -61,7 +61,7 @@ Create a **main.scss** file in your **src/styles** directory and update the styl
 
 ```scss { resource="src/styles/main.scss" }
 @use 'vuetify' with (
-  $variable: false,
+  // variables go here
 );
 ```
 
