@@ -19,6 +19,7 @@ export interface DateAdapter<T = unknown> {
   isEqual (date: T, comparing: T): boolean
   isSameDay (date: T, comparing: T): boolean
   isSameMonth (date: T, comparing: T): boolean
+  isBeforeYear(date: T, comparing: T): boolean
   isValid (date: any): boolean
   isWithinRange (date: T, range: [T, T]): boolean
 

@@ -427,6 +427,10 @@ function isSameMonth (date: Date, comparing: Date) {
     date.getFullYear() === comparing.getFullYear()
 }
 
+function isBeforeYear (value: Date, comparing: Date): boolean {
+  return value.getFullYear() < comparing.getFullYear();
+}
+
 function getDiff (date: Date, comparing: Date | string, unit?: string) {
   const d = new Date(date)
   const c = new Date(comparing)
@@ -557,6 +561,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   isBefore (date: Date, comparing: Date) {
     return !isAfter(date, comparing) && !isEqual(date, comparing)
+  }
+
+  isBeforeYear(date: Date, comparing: Date): boolean {
+    return isBeforeYear(date, comparing);
   }
 
   isSameDay (date: Date, comparing: Date) {
