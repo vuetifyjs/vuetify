@@ -1,25 +1,25 @@
 <template>
   <div v-if="items?.length" class="mb-4">
     <!-- <div class="d-flex mb-2">
-      <app-text-field
+      <AppTextField
         clearable
         icon="$mdiMagnify"
         label="Filter"
         @input="filter = $event"
       />
     </div> -->
-    <app-headline v-if="showHeadline" :path="`api-headers.${section}`" />
+    <AppHeadline v-if="showHeadline" :path="`api-headers.${section}`" />
     <TableComponent :name="name" :items="items" />
   </div>
 </template>
 
 <script setup lang="ts">
   // Components
-  import EventsTable from './EventsTable.vue'
-  import ExposedTable from './ExposedTable.vue'
-  import PropsTable from './PropsTable.vue'
-  import SassTable from './SassTable.vue'
-  import SlotsTable from './SlotsTable.vue'
+  import EventsTable from '@/components/api/EventsTable.vue'
+  import ExposedTable from '@/components/api/ExposedTable.vue'
+  import PropsTable from '@/components/api/PropsTable.vue'
+  import SassTable from '@/components/api/SassTable.vue'
+  import SlotsTable from '@/components/api/SlotsTable.vue'
 
   // Composables
   import { useLocaleStore } from '@/store/locale'

@@ -1,5 +1,5 @@
 <template>
-  <app-list
+  <AppListList
     v-if="auth.isSubscriber && user.pins"
     v-model:opened="opened"
     :items="pinned"
@@ -29,7 +29,7 @@
         </template>
       </v-hover>
     </template>
-  </app-list>
+  </AppListList>
 </template>
 
 <script setup>

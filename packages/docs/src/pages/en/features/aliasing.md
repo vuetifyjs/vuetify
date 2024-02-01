@@ -13,9 +13,9 @@ related:
 
 Create virtual components that extend built-in Vuetify components using custom aliases.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Usage
 

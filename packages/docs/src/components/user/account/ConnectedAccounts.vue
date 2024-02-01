@@ -1,5 +1,5 @@
 <template>
-  <app-sheet>
+  <AppSheet>
     <v-data-table
       :headers="headers"
       :items="identities"
@@ -31,7 +31,7 @@
       <template #bottom />
     </v-data-table>
 
-  </app-sheet>
+  </AppSheet>
 </template>
 
 <script setup>

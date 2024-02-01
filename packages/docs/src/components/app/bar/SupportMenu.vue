@@ -1,24 +1,21 @@
 <template>
-  <app-btn
+  <AppBtn
     color="medium-emphasis"
     class="ms-1"
   >
     {{ title }}
 
-    <chevron-down />
+    <IconsChevronDown />
 
-    <app-menu
+    <AppMenuMenu
       :items="items"
       activator="parent"
       width="220"
     />
-  </app-btn>
+  </AppBtn>
 </template>
 
 <script setup>
-  // Components
-  import ChevronDown from '@/components/icons/ChevronDown.vue'
-
   // Composables
   import { useI18n } from 'vue-i18n'
 

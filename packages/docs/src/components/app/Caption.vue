@@ -1,5 +1,5 @@
 <template>
-  <app-headline
+  <AppHeadline
     :path="path"
     color="grey"
     size="caption"

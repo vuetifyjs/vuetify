@@ -18,9 +18,9 @@ features:
 
 The locale provider allows you to provide specific default prop values to components in a section of your application
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -28,7 +28,7 @@ The locale provider allows you to provide specific default prop values to compon
 | - | - |
 | [v-locale-provider](/api/v-locale-provider/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Examples
 

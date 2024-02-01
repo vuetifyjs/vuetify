@@ -1,5 +1,5 @@
 <template>
-  <app-markdown
+  <AppMarkdown
     class="v-example-missing text-center"
     v-text="t('missing', { file })"
   />

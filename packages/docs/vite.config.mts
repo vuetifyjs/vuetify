@@ -7,7 +7,7 @@ import Vue, { parseVueRequest } from '@vitejs/plugin-vue'
 import ViteFonts from 'unplugin-fonts/vite'
 import Pages from 'vite-plugin-pages'
 import Layouts from 'vite-plugin-vue-layouts'
-// import Components from 'unplugin-vue-components/vite'
+import Components from 'unplugin-vue-components/vite'
 import Markdown from 'vite-plugin-md'
 import { VitePWA } from 'vite-plugin-pwa'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
@@ -82,15 +82,10 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       Api(),
 
       // https://github.com/antfu/unplugin-vue-components
-      // Components({
-      //   deep: true,
-      //   dirs: ['src/components-v3'],
-      //   directoryAsNamespace: true,
-      //   globalNamespaces: ['icons'],
-      //   dts: true,
-      //   extensions: ['vue', 'md'],
-      //   include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-      // }),
+      Components({
+        directoryAsNamespace: true,
+        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+      }),
 
       // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
       Layouts({

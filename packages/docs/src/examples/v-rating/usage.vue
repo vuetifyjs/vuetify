@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="selectedOption"
     :code="code"
     :name="name"
@@ -25,7 +25,7 @@
       <v-select v-model="options.color" :items="colorOptions" label="Color"></v-select>
       <v-select v-model="options['active-color']" :items="colorOptions" label="Active color"></v-select>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>

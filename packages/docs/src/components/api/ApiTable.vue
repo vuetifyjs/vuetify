@@ -1,5 +1,5 @@
 <template>
-  <app-sheet>
+  <AppSheet>
     <v-table class="api-table" density="comfortable">
       <thead>
         <tr>
@@ -31,7 +31,7 @@
           <tr v-if="item.description || (user.dev && item.source)">
             <td colspan="3" class="text-mono pt-4">
               <template v-if="item.description">
-                <app-markdown
+                <AppMarkdown
                   v-if="localeStore.locale !== 'eo-UY'"
                   :content="item.description"
                   class="mb-0"
@@ -57,7 +57,7 @@
         </tr>
       </tbody>
     </v-table>
-  </app-sheet>
+  </AppSheet>
 </template>
 
 <script setup lang="ts">

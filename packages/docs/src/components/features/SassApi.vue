@@ -25,7 +25,7 @@
     </template>
   </v-autocomplete>
 
-  <app-markup
+  <AppMarkup
     v-if="model.length > 0"
     :code="code"
     class="mb-6"

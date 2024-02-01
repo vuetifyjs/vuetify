@@ -1,5 +1,5 @@
 <template>
-  <app-markdown
+  <AppMarkdown
     v-if="ad"
     :content="description"
     class="v-markdown--inline d-inline"

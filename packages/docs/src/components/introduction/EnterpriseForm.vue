@@ -31,7 +31,7 @@
 
           <v-row class="mb-4">
             <v-col cols="12" md="6">
-              <app-text-field
+              <AppTextField
                 v-model="name"
                 :rules="[rules.required]"
                 name="name"
@@ -41,7 +41,7 @@
             </v-col>
 
             <v-col cols="12" md="6">
-              <app-text-field
+              <AppTextField
                 v-model="email"
                 :placeholder="t('email-address')"
                 :rules="[rules.required, rules.email]"

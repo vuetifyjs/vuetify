@@ -2,9 +2,9 @@
   <td :id="`${section}-${name.replace('$', '')}`">
     <div class="d-inline-flex align-center">
       <kbd class="name-item text-mono">
-        <app-link :href="href" class="font-weight-bold">
+        <AppLink :href="href" class="font-weight-bold">
           {{ name }}
-        </app-link>
+        </AppLink>
       </kbd>
 
       <new-in-chip

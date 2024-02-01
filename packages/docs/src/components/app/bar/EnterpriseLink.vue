@@ -1,12 +1,12 @@
 <template>
-  <app-btn
+  <AppBtn
     :to="rpath('/introduction/enterprise-support/')"
     class="ms-1"
     @click="gtagClick('app-bar', 'enterprise', name)"
   >
 
     {{ t('enterprise') }}
-  </app-btn>
+  </AppBtn>
 </template>
 
 <script setup>

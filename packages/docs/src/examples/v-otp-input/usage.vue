@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :name="name"
@@ -16,7 +16,7 @@
       <v-checkbox v-model="loading" label="Loading"></v-checkbox>
       <v-slider v-model="length" min="4" max="8" step="1" label="Length"></v-slider>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>

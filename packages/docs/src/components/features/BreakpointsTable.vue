@@ -1,6 +1,6 @@
 <template>
-  <app-table>
-    <caption class="pa-4">{{ t('breakpoints-table.caption') }}</caption>
+  <AppTable>
+    <AppCaption class="pa-4">{{ t('breakpoints-table.caption') }}</AppCaption>
 
     <thead>
       <tr class="text-start">
@@ -59,7 +59,7 @@
         </td>
       </tr>
     </tfoot>
-  </app-table>
+  </AppTable>
 </template>
 
 <script setup>

@@ -11,7 +11,7 @@ function addCodeRules (md: MarkdownIt) {
     const handler = fence || self.renderToken
     const token = tokens[idx]
 
-    return `<app-markup resource="${token?.attrs?.[0][1] ?? ''}" class="mb-4">${handler(tokens, idx, options, env, self)}</app-markup>`
+    return `<AppMarkup resource="${token?.attrs?.[0][1] ?? ''}" class="mb-4">${handler(tokens, idx, options, env, self)}</AppMarkup>`
   }
   md.renderer.rules.code_inline = function (tokens, idx) {
     const token = tokens[idx]
@@ -46,7 +46,7 @@ function addImageRules (md: MarkdownIt) {
 
     return `
 <div>
-  <app-figure
+  <AppFigure
     ${alt ? `alt="${alt}"` : ''}
     ${src ? `src="${src}"` : ''}
     ${title ? `title="${title}"` : ''}
@@ -59,7 +59,7 @@ function addImageRules (md: MarkdownIt) {
 
 function addHrRules (md: MarkdownIt) {
   md.renderer.rules.hr = function (tokens, idx, options, env, self) {
-    return '<app-divider />'
+    return '<AppDivider />'
   }
 }
 
@@ -89,14 +89,14 @@ function addHeadingRules (md: MarkdownIt) {
       next.children = next.children.filter(token => !['link_open', 'link_close'].includes(token.type))
     }
 
-    tokens[idx].tag = 'app-heading'
+    tokens[idx].tag = 'AppHeading'
     tokens[idx].attrSet('href', href ?? '')
     tokens[idx].attrSet('level', level.toString())
 
     return self.renderToken(tokens, idx, options)
   }
   md.renderer.rules.heading_close = (tokens, idx, options, env, self) => {
-    tokens[idx].tag = 'app-heading'
+    tokens[idx].tag = 'AppHeading'
 
     return self.renderToken(tokens, idx, options)
   }
@@ -104,7 +104,7 @@ function addHeadingRules (md: MarkdownIt) {
 
 function addLinkRules (md: MarkdownIt) {
   md.renderer.rules.link_open = md.renderer.rules.link_close = (tokens, idx, options, env, self) => {
-    tokens[idx].tag = 'app-link'
+    tokens[idx].tag = 'AppLink'
 
     return self.renderToken(tokens, idx, options)
   }
@@ -112,7 +112,7 @@ function addLinkRules (md: MarkdownIt) {
 
 function addTableRules (md: MarkdownIt) {
   md.renderer.rules.table_open = md.renderer.rules.table_close = (tokens, idx, options, env, self) => {
-    tokens[idx].tag = 'app-table'
+    tokens[idx].tag = 'AppTable'
 
     return self.renderToken(tokens, idx, options)
   }
@@ -137,9 +137,9 @@ function createContainer (md: MarkdownIt, type: string, title?: string) {
     render (tokens, idx) {
       const token = tokens[idx]
       if (token.nesting === 1) {
-        return `<alert type="${type}">\n` + (title ? `<p><strong>${title}:</strong></p>\n` : '')
+        return `<Alert type="${type}">\n` + (title ? `<p><strong>${title}:</strong></p>\n` : '')
       } else {
-        return `</alert>\n`
+        return `</Alert>\n`
       }
     },
   } satisfies { render: RenderRule })

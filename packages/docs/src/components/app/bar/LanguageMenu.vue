@@ -1,17 +1,17 @@
 <template>
-  <app-menu
+  <AppMenuMenu
     key="language-menu"
     :open-on-hover="false"
     :items="items"
   >
     <template #activator="{ props }">
-      <app-btn
+      <AppBtn
         color="medium-emphasis"
         icon="mdi-translate"
         v-bind="props"
       />
     </template>
-  </app-menu>
+  </AppMenuMenu>
 </template>
 
 <script setup lang="ts">

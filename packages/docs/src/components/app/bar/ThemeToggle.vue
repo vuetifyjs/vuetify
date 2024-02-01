@@ -1,5 +1,5 @@
 <template>
-  <app-btn
+  <AppBtn
     v-if="!hasToggle"
     :icon="icon"
     color="medium-emphasis"

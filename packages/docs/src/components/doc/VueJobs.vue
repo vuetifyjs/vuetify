@@ -2,7 +2,7 @@
   <v-row>
     <v-col cols="12">
       <div class="d-flex">
-        <app-text-field
+        <AppTextField
           v-model="search"
           :append-inner-icon="view ? 'mdi-view-grid-outline' : 'mdi-view-list-outline'"
           :placeholder="placeholder"
@@ -72,7 +72,7 @@
         </v-list-item>
 
         <v-card-text class="text-medium-emphasis py-0">
-          <app-markdown :content="job.description" />
+          <AppMarkdown :content="job.description" />
         </v-card-text>
 
         <div class="text-end text-caption text-disabled mb-1 me-2">

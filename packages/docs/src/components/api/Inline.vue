@@ -7,7 +7,7 @@
   />
 
   <div v-if="components" :class="showInline && 'mt-4'">
-    <api-links v-if="!showInline && !hideLinks" :components="components" />
+    <ApiLinks v-if="!showInline && !hideLinks" :components="components" />
 
     <div v-if="showInline">
       <div class="d-flex justify-space-between align-center">
@@ -26,7 +26,7 @@
       </div>
 
       <template v-for="section of sections" :key="section">
-        <api-section
+        <ApiSection
           :name="name"
           :section="section"
           show-headline

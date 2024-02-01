@@ -1,5 +1,5 @@
 <template>
-  <carbon v-if="!user.disableAds" />
+  <PromotedCarbon v-if="!user.disableAds" />
 
   <br>
 </template>

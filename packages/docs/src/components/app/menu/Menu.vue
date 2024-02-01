@@ -9,17 +9,17 @@
       <slot name="activator" v-bind="{ props }" />
     </template>
 
-    <app-sheet>
+    <AppSheet>
       <slot v-if="$slots.default" />
 
-      <app-list v-else nav :items="items" />
-    </app-sheet>
+      <AppListList v-else nav :items="items" />
+    </AppSheet>
   </v-menu>
 </template>
 
 <script setup lang="ts">
   // Components
-  import { Item } from '@/components/app/list/List.vue'
+  import type { Item } from '@/components/app/list/List.vue'
 
   // Utilities
   import { PropType } from 'vue'

@@ -19,7 +19,7 @@ const localeList = locales
   .map(item => item.alternate || item.locale)
 
 function genApiLinks (componentName: string, header: string) {
-  const section = ['<entry />', '<api-search />']
+  const section = ['<promoted-entry />', '<api-search />']
   const links = (Object.keys(pageToApi) as (keyof typeof pageToApi)[])
     .filter(page => pageToApi[page].includes(componentName))
     .reduce<string[]>((acc, href) => {

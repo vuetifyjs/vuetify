@@ -13,7 +13,7 @@
         rel="nofollow noopener"
         target="_blank"
       >
-        <app-figure
+        <AppFigure
           :alt="`${name} layout`"
           :aspect-ratio="16/9"
           :title="name"

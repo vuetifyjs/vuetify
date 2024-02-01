@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :options="options"
@@ -10,7 +10,7 @@
         {{ new Date().getFullYear() }} — <strong>Vuetify, LLC</strong>
       </v-footer>
     </div>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>

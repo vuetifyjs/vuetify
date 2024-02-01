@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :name="name"
     :options="options"
@@ -19,7 +19,7 @@
 
       <v-main></v-main>
     </v-layout>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>

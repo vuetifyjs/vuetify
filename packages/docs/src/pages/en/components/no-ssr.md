@@ -15,7 +15,7 @@ The `v-no-ssr` component is a simple wrapper that allows a developer to designat
 
 <!-- ![No-Ssr Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-No-Ssr/v-No-Ssr-entry.png) -->
 
-<page-features />
+<PageFeatures />
 
 ## Usage
 
@@ -38,6 +38,6 @@ The `v-no-ssr` component prevents its content from rendering on the server side.
 | - | - |
 | [v-no-ssr](/api/v-no-ssr/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
-<entry />
+<PromotedEntry />

@@ -3,9 +3,9 @@
     <span class="font-weight-bold me-1 text-medium-emphasis">
       {{ t('edit-this-page') }}
     </span>
-    <app-link :href="href">
+    <AppLink :href="href">
       {{ t('github') }}
-    </app-link>
+    </AppLink>
   </div>
 </template>
 

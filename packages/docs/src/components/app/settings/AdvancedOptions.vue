@@ -4,9 +4,9 @@
     text="communication-message"
   />
 
-  <banner-option />
+  <AppSettingsBannerOption />
 
-  <notifications-option />
+  <AppSettingsNotificationsOption />
 
   <br>
 
@@ -23,12 +23,12 @@
 
   <v-divider class="my-3" />
 
-  <settings-header
+  <AppSettingsSettingsHeader
     title="dashboard.advanced-options.danger-zone"
     text="dashboard.advanced-options.danger-zone-message"
   />
 
-  <developer-mode />
+  <AppSettingsDeveloperMode />
 
   <br>
 
@@ -45,12 +45,6 @@
 </template>
 
 <script setup>
-  // Components
-  import BannerOption from './options/BannerOption.vue'
-  import DeveloperMode from './DeveloperMode.vue'
-  import NotificationsOption from './options/NotificationsOption.vue'
-  import SettingsHeader from '@/components/app/settings/SettingsHeader.vue'
-
   // Composables
   import { useI18n } from 'vue-i18n'
 

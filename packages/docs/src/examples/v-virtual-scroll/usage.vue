@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :name="name"
@@ -15,7 +15,7 @@
 
     <!-- <template v-slot:configuration>
     </template> -->
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>

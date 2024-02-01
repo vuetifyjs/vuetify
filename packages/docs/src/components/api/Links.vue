@@ -1,7 +1,7 @@
 <template>
   <div class="mb-4 d-flex flex-column">
     <div v-for="link in links" :key="link.name">
-      <app-link :href="link.href">{{ link.name }}</app-link>
+      <AppLink :href="link.href">{{ link.name }}</AppLink>
     </div>
   </div>
 </template>

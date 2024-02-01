@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :options="options"
@@ -22,7 +22,7 @@
     <template v-slot:configuration>
       <v-select v-model="color" label="Background color" :items="['primary', 'success', 'info']" clearable></v-select>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>

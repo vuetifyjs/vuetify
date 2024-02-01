@@ -5,7 +5,7 @@
     }"
     scoped
   >
-    <app-sheet class="mb-9">
+    <AppSheet class="mb-9">
       <v-lazy
         v-if="!preview"
         v-model="hasRendered"
@@ -78,7 +78,7 @@
               :eager="i === 0 || isEager"
             >
               <v-theme-provider :theme="theme">
-                <app-markup
+                <AppMarkup
                   :code="section.content"
                   :rounded="false"
                 />
@@ -96,13 +96,13 @@
           <component :is="ExampleComponent" v-if="isLoaded" />
         </v-theme-provider>
       </div>
-    </app-sheet>
+    </AppSheet>
   </v-defaults-provider>
 </template>
 
 <script setup lang="ts">
   // Components
-  import ExampleMissing from './ExampleMissing.vue'
+  import ExampleMissing from '@/components/examples/ExampleMissing.vue'
 
   // Composables
   import { useDisplay, useTheme } from 'vuetify'

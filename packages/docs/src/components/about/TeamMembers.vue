@@ -5,7 +5,7 @@
         <v-col
           cols="12"
         >
-          <team-member v-bind="{ member }" />
+          <AboutTeamMember v-bind="{ member }" />
         </v-col>
 
         <v-divider
@@ -19,9 +19,6 @@
 </template>
 
 <script setup>
-  // Components
-  import TeamMember from './TeamMember.vue'
-
   // Composables
   import { useTeamStore } from '@/store/team'
 

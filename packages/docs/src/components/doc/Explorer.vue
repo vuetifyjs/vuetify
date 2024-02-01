@@ -28,10 +28,10 @@
     </v-autocomplete>
 
     <template v-if="model">
-      <api-search ref="search" />
+      <ApiSearch ref="search" />
 
       <template v-for="(section, i) in sections" :key="i">
-        <api-section
+        <ApiSection
           :section="section"
           :name="model"
           show-headline

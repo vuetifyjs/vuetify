@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex mb-2">
-    <app-text-field
+    <AppTextField
       v-model="appStore.apiSearch"
       :placeholder="t('search-api')"
       clearable

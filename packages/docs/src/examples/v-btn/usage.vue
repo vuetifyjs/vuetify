@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :options="options"
@@ -17,7 +17,7 @@
       <v-checkbox v-model="append" label="Append icon"></v-checkbox>
       <v-checkbox v-model="stacked" label="Stacked"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>

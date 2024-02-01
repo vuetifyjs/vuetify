@@ -9,17 +9,13 @@ related:
   - /features/treeshaking/
 ---
 
-<script setup>
-  import SassApi from '@/components/features/SassApi.vue'
-</script>
-
 # SASS variables
 
 Vuetify uses **SASS/SCSS** to craft the style and appearance of all aspects of the framework.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ::: info
 
@@ -80,7 +76,7 @@ Within your style file, import the Vuetify styles and specify the variables you 
 
 ## Component specific variables
 
-Customising variables used in components is a bit more complex and requires the use of a special build plugin.
+Customizing variables used in components is a bit more complex and requires the use of a special build plugin.
 
 Follow the plugin setup guide from [treeshaking](/features/treeshaking/) then add `styles.configFile` to the plugin options:
 
@@ -110,7 +106,7 @@ You can keep `main.scss` for other style overrides but don't do both `@use 'vuet
 
 There are many SASS/SCSS variables that can be customized across the entire Vuetify framework. You can browse all the variables using the tool below:
 
-<sass-api />
+<FeaturesSassApi />
 
 Available SASS variables are located on each component's API page.
 

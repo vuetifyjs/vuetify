@@ -1,5 +1,5 @@
 <template>
-  <app-link-list-item
+  <AppListLinkListItem
     v-if="GITHUB_SHA"
     :append-icon="appendIcon"
     :href="`https://github.com/vuetifyjs/vuetify/commit/${GITHUB_SHA}`"

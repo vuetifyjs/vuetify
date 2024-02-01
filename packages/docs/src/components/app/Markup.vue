@@ -76,7 +76,7 @@
   // Utilities
   import { ComponentPublicInstance, computed, ref, watchEffect } from 'vue'
   import { wait } from '@/util/helpers'
-  import { stripLinks } from '@/components/api/utils'
+  import { stripLinks } from '@/util/api'
 
   const props = defineProps({
     resource: String,

@@ -1,6 +1,6 @@
 <template>
   <section id="material-colors" class="mb-4">
-    <app-text-field
+    <AppTextField
       v-model="search"
       class="mb-4"
     />

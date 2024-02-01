@@ -1,5 +1,5 @@
 <template>
-  <app-link-list-item
+  <AppListLinkListItem
     :to="rpath(`/getting-started/release-notes/?version=v${version}`)"
     :title="`v${version}`"
     :label="t('latest-release')"

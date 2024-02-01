@@ -1,5 +1,5 @@
 <template>
-  <app-link-list-item
+  <AppListLinkListItem
     v-if="commits.latest"
     :href="`https://github.com/vuetifyjs/vuetify/commit/${commits.latest?.sha}`"
     :title="commits.latest?.sha.slice(0, 7)"

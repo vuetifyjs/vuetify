@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :name="name"
     :code="code"
@@ -20,7 +20,7 @@
     <template v-slot:configuration>
       <v-checkbox v-model="avatar" label="Show avatars"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>

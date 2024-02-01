@@ -5,7 +5,7 @@
     dot
     location="top end"
   >
-    <app-btn
+    <AppBtn
       :to="rpath('/resources/jobs-for-vue/')"
       class="jobs-link"
       :icon="icon"

@@ -38,7 +38,7 @@
               class="d-block text-decoration-none"
               style="min-height: 205px;"
             >
-              <app-figure
+              <AppFigure
                 class="border"
                 :name="project.raw.title"
                 :src="project.raw.image"

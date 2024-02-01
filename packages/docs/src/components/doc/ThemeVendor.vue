@@ -10,7 +10,7 @@
     </v-col>
 
     <v-col class="text-center mb-8" cols="12">
-      <app-btn
+      <AppBtn
         :href="vendor.moreUrl"
         append-icon="mdi-open-in-new"
         color="primary"
@@ -20,7 +20,7 @@
         variant="outlined"
       >
         {{ t('see-more-themes-from', { vendor: vendor.name }) }}
-      </app-btn>
+      </AppBtn>
     </v-col>
   </v-row>
 </template>
