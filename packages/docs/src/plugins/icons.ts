@@ -116,6 +116,7 @@ export {
   mdiContentSaveCogOutline,
   mdiControllerClassicOutline,
   mdiCookie,
+  mdiCreditCardOutline,
   mdiCrosshairsGps,
   mdiCrown,
   mdiCupcake,
