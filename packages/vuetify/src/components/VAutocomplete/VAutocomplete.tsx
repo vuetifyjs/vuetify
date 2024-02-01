@@ -204,9 +204,6 @@ export const VAutocomplete = genericComponent<new <
       if (menuDisabled.value) return
 
       menu.value = true
-      nextTick(() => {
-        autoFocusModelValue()
-      })
     }
     function onMousedownMenuIcon (e: MouseEvent) {
       if (menuDisabled.value) return
@@ -244,7 +241,11 @@ export const VAutocomplete = genericComponent<new <
       }
 
       if (['ArrowDown'].includes(e.key)) {
-        listRef.value?.focus('first')
+        IN_BROWSER && window.requestAnimationFrame(() => {
+          vVirtualScrollRef.value?.scrollToIndex(0)?.then(() => {
+            listRef.value?.focus('first')
+          })
+        })
       }
 
       if (['Escape'].includes(e.key)) {
