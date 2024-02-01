@@ -33,6 +33,7 @@ export const makeVColorPickerProps = propsFactory({
     default: 10,
   },
   hideCanvas: Boolean,
+  hideEyeDropper: Boolean,
   hideSliders: Boolean,
   hideInputs: Boolean,
   mode: {
@@ -167,6 +168,7 @@ export const VColorPicker = defineComponent({
                   color={ currentColor.value }
                   onUpdate:color={ updateColor }
                   hideAlpha={ !mode.value.endsWith('a') }
+                  hideEyeDropper={ props.hideEyeDropper }
                   disabled={ props.disabled }
                 />
               )}
