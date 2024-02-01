@@ -204,6 +204,9 @@ export const VAutocomplete = genericComponent<new <
       if (menuDisabled.value) return
 
       menu.value = true
+      nextTick(() => {
+        autoFocusModelValue()
+      })
     }
     function onMousedownMenuIcon (e: MouseEvent) {
       if (menuDisabled.value) return
@@ -374,7 +377,7 @@ export const VAutocomplete = genericComponent<new <
 
       IN_BROWSER && window.requestAnimationFrame(() => {
         index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)?.then(() => {
-          const computedIndex =  vVirtualScrollRef.value?.computedItems.findIndex(
+          const computedIndex = vVirtualScrollRef.value?.computedItems.findIndex(
             item => model.value.some(s => props.valueComparator(s.value, item.raw.value))
           )
           listRef.value?.focus(computedIndex)
