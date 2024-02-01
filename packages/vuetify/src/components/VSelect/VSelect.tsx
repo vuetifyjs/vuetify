@@ -229,7 +229,11 @@ export const VSelect = genericComponent<new <
       }
 
       if (['ArrowDown'].includes(e.key)) {
-        listRef.value?.focus('first')
+        IN_BROWSER && window.requestAnimationFrame(() => {
+          vVirtualScrollRef.value?.scrollToIndex(0)?.then(() => {
+            listRef.value?.focus('first')
+          })
+        })
       }
 
       if (['Escape', 'Tab'].includes(e.key)) {
@@ -314,13 +318,24 @@ export const VSelect = genericComponent<new <
 
       IN_BROWSER && window.requestAnimationFrame(() => {
         index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)?.then(() => {
-          const computedIndex =  vVirtualScrollRef.value?.computedItems.findIndex(
+          const computedIndex = vVirtualScrollRef.value?.computedItems.findIndex(
             item => model.value.some(s => props.valueComparator(s.value, item.raw.value))
           )
           listRef.value?.focus(computedIndex)
         })
       })
     }
+
+    watch(menu, () => {
+      if (!props.hideSelected && menu.value && model.value.length) {
+        const index = displayItems.value.findIndex(
+          item => model.value.some(s => item.value === s.value)
+        )
+        IN_BROWSER && window.requestAnimationFrame(() => {
+          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
+        })
+      }
+    })
 
     watch(displayItems, (val, oldVal) => {
       if (!isFocused.value) return
