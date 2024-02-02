@@ -95,6 +95,7 @@
     "VListGroup",
     "VListItem",
     "VListItemAction",
+    "VListItemContent",
     "VListItemMedia",
     "VListItemSubtitle",
     "VListItemTitle",
