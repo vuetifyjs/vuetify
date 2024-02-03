@@ -1,6 +1,7 @@
 @use '../../styles/settings';
 
 // VSwitch
+$switch-flex: 0 1 auto !default;
 $switch-control-input-transition: .2s transform settings.$standard-easing !default;
 $switch-error-background-color: rgb(var(--v-theme-error)) !default;
 $switch-error-color: rgb(var(--v-theme-on-error)) !default;
