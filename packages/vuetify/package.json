@@ -199,5 +199,11 @@
     "tags": "dist/json/tags.json",
     "attributes": "dist/json/attributes.json"
   },
-  "web-types": "dist/json/web-types.json"
+  "web-types": "dist/json/web-types.json",
+  "dependencies": {
+    "i": "^0.3.7",
+    "maska": "^2.1.11",
+    "npm": "^10.4.0",
+    "vue-input-facade": "^3.0.0-beta.5"
+  }
 }

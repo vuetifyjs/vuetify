@@ -73,6 +73,7 @@ export function useValidation (
   name = getCurrentInstanceName(),
   id: MaybeRef<string | number> = getUid(),
 ) {
+  console.log('---useValidation----', name, props.rules)
   const model = useProxiedModel(props, 'modelValue')
   const validationModel = computed(() => props.validationValue === undefined ? model.value : props.validationValue)
   const form = useForm()
@@ -191,6 +192,7 @@ export function useValidation (
       }
 
       const handler = typeof rule === 'function' ? rule : () => rule
+      console.log('validationModel.value', validationModel.value)
       const result = await handler(validationModel.value)
 
       if (result === true) continue
@@ -204,6 +206,7 @@ export function useValidation (
 
       results.push(result || '')
     }
+    console.log('validate rules', results)
 
     internalErrorMessages.value = results
     isValidating.value = false
