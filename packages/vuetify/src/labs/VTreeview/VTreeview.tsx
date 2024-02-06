@@ -5,7 +5,6 @@ import { makeVListProps, useListItems, VList } from '@/components/VList/VList'
 // Composables
 import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
-import { IconValue } from '@/composables/icons'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -33,18 +32,12 @@ function flatten (items: ListItem[], flat: ListItem[] = []) {
 }
 
 export const makeVTreeviewProps = propsFactory({
-  collapseIcon: {
-    type: IconValue,
-    default: '$treeviewCollapse',
-  },
-  expandIcon: {
-    type: IconValue,
-    default: '$treeviewExpand',
-  },
   search: String,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...omit(makeVListProps({
+    collapseIcon: '$treeviewCollapse',
+    expandIcon: '$treeviewExpand',
     selectStrategy: 'independent' as const,
     openStrategy: 'multiple' as const,
   }), ['nav']),
@@ -135,7 +128,7 @@ export const VTreeview = genericComponent<new <T>(
     })
 
     useRender(() => {
-      const [listProps, _1] = VList.filterProps(props)
+      const listProps = VList.filterProps(props)
 
       return (
         <VList
