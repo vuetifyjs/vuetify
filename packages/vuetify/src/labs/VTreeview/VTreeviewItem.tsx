@@ -2,7 +2,8 @@
 import './VTreeviewItem.sass'
 
 // Components
-import { VIcon } from '@/components/VIcon'
+import { VBtn } from '@/components/VBtn'
+import { VListItemAction } from '@/components/VList'
 import { makeVListItemProps, VListItem } from '@/components/VList/VListItem'
 
 // Composables
@@ -11,7 +12,7 @@ import { useLink } from '@/composables/router'
 
 // Utilities
 import { computed, inject, ref } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './VTreeview'
@@ -19,7 +20,8 @@ import type { VListItemSlots } from '@/components/VList/VListItem'
 
 export const makeVTreeviewItemProps = propsFactory({
   toggleIcon: IconValue,
-  ...makeVListItemProps(),
+
+  ...makeVListItemProps({ slim: true }),
 }, 'VTreeviewItem')
 
 export const VTreeviewItem = genericComponent<VListItemSlots>()({
@@ -60,31 +62,42 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
     const visibleIds = inject(VTreeviewSymbol, { visibleIds: ref() }).visibleIds
 
     useRender(() => {
+      const listItemProps = VListItem.filterProps(props)
+      const hasPrepend = slots.prepend || props.toggleIcon
+
       return (
         <VListItem
           ref={ vListItemRef }
-          { ...omit(props, ['class']) }
+          { ...listItemProps }
           class={[
             'v-treeview-item',
-            props.class,
             {
               'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(id.value),
             },
+            props.class,
           ]}
           onClick={ onClick }
           onKeydown={ isClickable.value && onKeyDown }
         >
           {{
             ...slots,
-            prepend: slotProps => (
-              <>
-                <VIcon
-                  density={ props.density }
-                  icon={ props.toggleIcon }
-                />
-                { slots.prepend?.(slotProps) }
-              </>
-            ),
+            prepend: hasPrepend ? slotProps => {
+              return (
+                <>
+                  { props.toggleIcon && (
+                    <VListItemAction>
+                      <VBtn
+                        density="compact"
+                        icon={ props.toggleIcon }
+                        variant="text"
+                      />
+                    </VListItemAction>
+                  )}
+
+                  { slots.prepend?.(slotProps) }
+                </>
+              )
+            } : undefined,
           }}
         </VListItem>
       )
