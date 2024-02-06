@@ -44,6 +44,8 @@
     "<domevent>:year": "Emitted when the specified DOM event occurs on the year button.",
     "change": "Reactive date picker emits `input` even when any part of the date (year/month/day) changes, but `change` event is emitted only when the day (for date pickers) or month (for month pickers) changes. If `range` prop is set, date picker emits `change` when both [from, to] are selected.",
     "update:activePicker": "The `.sync` event for `active-picker` prop.",
+    "update:month:": "The `.sync` event for `month` prop.",
+    "update:viewMode": "The `.sync` event for `viewMode` prop.",
     "update:pickerDate": "The `.sync` event for `picker-date` prop."
   }
 }

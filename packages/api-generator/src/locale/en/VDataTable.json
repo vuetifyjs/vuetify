@@ -37,6 +37,7 @@
     "virtualRows": "Virtualizes the rendering of rows. Be aware that you can not use the `body`, `body.prepend` or `body.append` slots with this prop."
   },
   "slots": {
+    "[`header.${string}`]": "slot of table header functionalities, such as sorting and selection management.",
     "[`item.${string}`]": "Slot for custom rendering of a row cell.",
     "body": "Slot to replace the default table `<tbody>`.",
     "body.append": "Appends elements to the end of the default table `<tbody>`.",
@@ -52,8 +53,10 @@
     "group.header": "Slot to customize the default rendering of group headers.",
     "group.summary": "Slot to customize the default rendering of group summaries.",
     "heading": "Slot to add a custom header.",
+    "header.data-table-expand": "Slot to customize a specific header column.",
     "header.<name>": "Slot to customize a specific header column.",
-    "header.data-table-select": "Slot to replace the default `v-simple-checkbox` in header.",
+    "header.data-table-select": "Slot for custom rendering of a header cell with the select checkbox.",
+    "headers": "Slot to replace the default rendering of the `<thead>` element.",
     "item": "Slot to replace the default rendering of a row.",
     "item.data-table-select": "Slot to replace the default `v-simple-checkbox` used when selecting rows.",
     "item.data-table-expand": "Slot to replace the default `v-icon` used when expanding rows.",
@@ -62,6 +65,9 @@
     "no-data": "Defines content for when no items are provided.",
     "no-results": "Defines content for when `search` is provided but no results are found.",
     "progress": "Slot to replace the default `<v-progress-linear>` component.",
+    "tbody": "Slot to replace the default rendering of the `<tbody>` element.",
+    "tfoot": "Slot to replace the default rendering of the `<tfoot>` element.",
+    "thead": "Slot to replace the default rendering of the `<thead>` element.",
     "top": "Slot to add content above the table."
   },
   "events": {

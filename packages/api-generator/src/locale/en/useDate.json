@@ -1,7 +1,10 @@
 {
   "exposed": {
     "addDays": "Adds the specified number of days to the date.",
+    "addHours": "Adds the specified number of hours to the date.",
+    "addMinutes": "Adds the specified number of minutes to the date.",
     "addMonths": "Adds the specified number of months to the date.",
+    "addWeeks": "Adds the specified number of weeks to the date.",
     "date": "Takes any value and returns a date object.",
     "endOfDay": "Returns the last second of the day.",
     "endOfMonth": "Returns the last day of the month.",
@@ -9,7 +12,10 @@
     "endOfYear": "Returns the last day of the year.",
     "format": "Takes a date object and returns it in a specified format.",
     "getDiff": "Returns the difference between two dates in the specified unit.",
+    "getHours": "Returns the hour from the date.",
+    "getMinutes": "Returns the minute from the date.",
     "getMonth": "Returns the month of the date.",
+    "getNextMonth": "Returns the first day of the next month of the date.",
     "getWeek": "Returns the week of the year of the date.",
     "getWeekArray": "Returns an array of the days of the week of the date.",
     "getWeekdays": "Returns an array of the names of the days of the week.",
@@ -21,12 +27,17 @@
     "isValid": "Returns true if the date is valid.",
     "isWithinRange": "Returns true if the first date is within the range of the second and third dates.",
     "locale": "Returns the current locale being used.",
+    "parseISO": "Returns an ISO string into a date object.",
+    "setHours": "Sets the hour of the date.",
+    "setMinutes": "Sets the minutes of the date.",
+    "setMonth": "Sets the month of the date.",
     "getYear": "Returns the year of the date.",
     "setYear": "Sets the year of the date.",
     "startOfDay": "Returns the first second of the day.",
     "startOfMonth": "Returns first day of the month.",
     "startOfWeek": "Returns the first day of the week.",
     "startOfYear": "Returns the first day of the year.",
+    "toISO": "Converts the date to an ISO string.",
     "toJsDate": "Converts date value to a JS Date Object."
   }
 }

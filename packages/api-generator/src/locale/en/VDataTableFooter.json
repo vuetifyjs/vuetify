@@ -12,5 +12,8 @@
     "prevIcon": "Previous icon.",
     "prevPageLabel": "Label for previous page.",
     "showCurrentPage": "Show current page number between prev/next icons."
+  },
+  "slots": {
+    "[string]": "Slot of table footer."
   }
 }

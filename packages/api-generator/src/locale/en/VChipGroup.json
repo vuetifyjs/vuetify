@@ -2,6 +2,7 @@
   "props": {
     "centerActive": "Forces the selected chip to be centered.",
     "column": "Remove horizontal pagination and wrap items as needed.",
+    "direction": "Specifies the orientation of the component.",
     "filter": "Applies an checkmark icon in front of every chip for using it like a filter.",
     "mobileBreakpoint": "Sets the designated mobile breakpoint for the component.",
     "nextIcon": "Specify the icon to use for the next icon.",

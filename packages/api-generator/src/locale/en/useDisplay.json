@@ -1,5 +1,6 @@
 {
   "exposed": {
+    "displayClasses": "Returns a set of CSS classes based on the current breakpoint conditions.",
     "height": "The inner height of the browser window.",
     "lg": "Returns **true** if the current browser breakpoint is **lg**.",
     "lgAndDown": "Returns **true** if the current browser breakpoint is **lg** or lower.",
@@ -14,6 +15,7 @@
     "sm": "Returns **true** if the current browser breakpoint is **sm**.",
     "smAndDown": "Returns **true** if the current browser breakpoint is **sm** or lower.",
     "smAndUp": "Returns **true** if the current browser breakpoint is **sm** or higher.",
+    "ssr": "Returns **true** if the current environment is server-side rendering.",
     "thresholds": "An object describing the width values of each breakpoint.",
     "update": "Function that updates the current width and height values.",
     "width": "The inner width of the browser window.",
