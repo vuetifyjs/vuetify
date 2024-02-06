@@ -1,31 +1,21 @@
 <template>
-  <v-row justify="center">
+  <div class="text-center pa-4">
     <v-dialog
       v-model="dialog"
       fullscreen
-      :scrim="false"
-      transition="dialog-bottom-transition"
     >
-      <template v-slot:activator="{ props }">
-        <v-btn
-          color="primary"
-          dark
-          v-bind="props"
-        >
+      <template v-slot:activator="{ props: activatorProps }">
+        <v-btn v-bind="activatorProps">
           Open Dialog
         </v-btn>
       </template>
+
       <v-card>
-        <v-toolbar
-          dark
-          color="primary"
-        >
+        <v-toolbar>
           <v-btn
-            icon
-            dark
+            icon="mdi-close"
             @click="dialog = false"
           >
-            <v-icon>mdi-close</v-icon>
           </v-btn>
           <v-toolbar-title>Settings</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -70,7 +60,7 @@
         </v-list>
       </v-card>
     </v-dialog>
-  </v-row>
+  </div>
 </template>
 
 <script setup>

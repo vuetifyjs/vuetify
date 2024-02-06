@@ -49,14 +49,19 @@
 
   const props = computed(() => {
     return {
-      width: '500',
+      'max-width': '500',
     }
   })
 
   const slots = computed(() => {
     return `
-  <template v-slot:activator="{ props }">
-    <v-btn v-bind="props" text="Open Dialog"> </v-btn>
+  <template v-slot:activator="{ props: activatorProps }">
+    <v-btn
+      v-bind="activatorProps"
+      color="surface-variant"
+      text="Open Dialog"
+      variant="flat"
+    ></v-btn>
   </template>
 
   <template v-slot:default="{ isActive }">
