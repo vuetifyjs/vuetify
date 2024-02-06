@@ -23,6 +23,7 @@ import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
 import type { GroupItemProvide, GroupProvide } from '@/composables/group'
 import type { IconValue } from '@/composables/icons'
 import type { TouchHandlers } from '@/directives/touch'
+import type { GenericProps } from '@/util'
 
 export type VWindowSlots = {
   default: { group: GroupProvide }
@@ -43,7 +44,7 @@ type ControlProps = {
   icon: IconValue
   class: string
   onClick: () => void
-  ariaLabel: string
+  'aria-label': string
 }
 
 export const VWindowSymbol: InjectionKey<WindowProvide> = Symbol.for('vuetify:v-window')
@@ -90,7 +91,13 @@ export const makeVWindowProps = propsFactory({
   ...makeThemeProps(),
 }, 'VWindow')
 
-export const VWindow = genericComponent<VWindowSlots>()({
+export const VWindow = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: VWindowSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VWindow',
 
   directives: {
@@ -100,7 +107,7 @@ export const VWindow = genericComponent<VWindowSlots>()({
   props: makeVWindowProps(),
 
   emits: {
-    'update:modelValue': (v: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { slots }) {
@@ -168,7 +175,7 @@ export const VWindow = genericComponent<VWindowSlots>()({
         icon: isRtl.value ? props.nextIcon : props.prevIcon,
         class: `v-window__${isRtlReverse.value ? 'right' : 'left'}`,
         onClick: group.prev,
-        ariaLabel: t('$vuetify.carousel.prev'),
+        'aria-label': t('$vuetify.carousel.prev'),
       }
 
       arrows.push(canMoveBack.value
@@ -182,7 +189,7 @@ export const VWindow = genericComponent<VWindowSlots>()({
         icon: isRtl.value ? props.prevIcon : props.nextIcon,
         class: `v-window__${isRtlReverse.value ? 'left' : 'right'}`,
         onClick: group.next,
-        ariaLabel: t('$vuetify.carousel.next'),
+        'aria-label': t('$vuetify.carousel.next'),
       }
 
       arrows.push(canMoveForward.value

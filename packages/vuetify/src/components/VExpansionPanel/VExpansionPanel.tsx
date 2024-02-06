@@ -76,6 +76,9 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
       VExpansionPanelText: {
         eager: toRef(props, 'eager'),
       },
+      VExpansionPanelTitle: {
+        readonly: toRef(props, 'readonly'),
+      },
     })
 
     useRender(() => {

@@ -2,6 +2,10 @@ export default {
   badge: 'نشان',
   open: 'Open',
   close: 'بستن',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'لغو',
+  },
   dataIterator: {
     noResultsText: 'نتیجه‌ای یافت نشد',
     loadingText: 'در حال بارگذاری...',
@@ -31,8 +35,7 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'لغو',
+    itemsSelected: '{0} selected',
     range: {
       title: 'انتخاب تاریخ‌ها',
       header: 'تاریخ‌ها را وارد کنید',
@@ -53,6 +56,7 @@ export default {
   },
   calendar: {
     moreEvents: '{بیشتر {0',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',

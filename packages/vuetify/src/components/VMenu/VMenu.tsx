@@ -155,11 +155,12 @@ export const VMenu = genericComponent<OverlaySlots>()({
     )
 
     useRender(() => {
-      const [overlayProps] = VOverlay.filterProps(props)
+      const overlayProps = VOverlay.filterProps(props)
 
       return (
         <VOverlay
           ref={ overlay }
+          id={ id.value }
           class={[
             'v-menu',
             props.class,

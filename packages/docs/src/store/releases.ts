@@ -1,5 +1,4 @@
 // Plugins
-import octokit from '@/plugins/octokit'
 import type { components as octokitComponents } from '@octokit/openapi-types'
 
 // Utilities
@@ -12,6 +11,8 @@ export type State = {
   isLoading: boolean
   page: number
 }
+
+const url = import.meta.env.VITE_API_SERVER_URL
 
 export const useReleasesStore = defineStore('releases', {
   state: (): State => ({
@@ -33,11 +34,15 @@ export const useReleasesStore = defineStore('releases', {
     async fetch () {
       this.isLoading = true
 
-      const res = await octokit.request('GET /repos/vuetifyjs/vuetify/releases', {
-        page: this.page,
-        order: 'created_at',
-      })
-      const data = res.data
+      let data = []
+      try {
+        data = await fetch(`${url}/github/releases?page=${this.page}`, {
+          method: 'GET',
+          credentials: 'include',
+        }).then(res => res.json())
+      } catch (err: any) {
+        console.error(err)
+      }
 
       for (const release of data) {
         this.releases.push(this.format(release))
@@ -58,15 +63,22 @@ export const useReleasesStore = defineStore('releases', {
       let res: any
 
       if (tag.length >= 6) {
-        res = await octokit.request(`GET /repos/vuetifyjs/vuetify/releases/tags/${tag}`)
+        try {
+          res = await fetch(`${url}/github/releases/find?tag=${tag}`, {
+            method: 'GET',
+            credentials: 'include',
+          }).then(res => res.json())
+        } catch (err: any) {
+          console.error(err)
+        }
       }
 
       this.isLoading = false
 
-      if (res?.data) {
-        this.releases.push(this.format(res.data))
+      if (res) {
+        this.releases.push(this.format(res))
 
-        return res.data
+        return res
       }
     },
   },

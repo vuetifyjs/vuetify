@@ -1,6 +1,7 @@
 // Composables
 import { useCosmic } from '@/composables/cosmic'
-import { useDate } from 'vuetify/labs/date'
+import { useDate } from 'vuetify'
+import { useUserStore } from '@vuetify/one'
 
 // Utilities
 import { defineStore } from 'pinia'
@@ -12,15 +13,19 @@ interface Banner {
   slug: string
   title: string
   metadata: {
+    active: boolean
     closable: boolean
     color: string
     label: string
+    height: number
     text: string
     subtext: string
     link: string
     link_text: string
     link_color: string
     attributes: Record<string, any>
+    start_date: string
+    end_date: string
     theme: {
       key: 'light' | 'dark'
       value: 'Light' | 'Dark'
@@ -42,6 +47,7 @@ interface Banner {
 
 interface State {
   banners: Banner[]
+  isLoading: boolean
   router: any
   server?: Banner
   banner?: Banner
@@ -50,6 +56,7 @@ interface State {
 export const useBannersStore = defineStore('banners', {
   state: (): State => ({
     banners: [],
+    isLoading: false,
     router: null,
   }),
   actions: {
@@ -58,15 +65,22 @@ export const useBannersStore = defineStore('banners', {
 
       const { bucket } = useCosmic()
 
-      const today = (new Date()).toISOString().substring(0, 10)
+      const adapter = useDate()
+      const today = adapter.startOfDay(adapter.date())
+      const tomorrow = adapter.endOfDay(today)
 
       try {
+        this.isLoading = true
+
         const { objects = [] }: { objects: Banner[] } = (
           await bucket?.objects
             .find({
               type: 'banners',
               'metadata.start_date': {
                 $lte: today,
+              },
+              'metadata.end_date': {
+                $gte: tomorrow,
               },
             })
             .props('status,metadata,slug,title,modified_at')
@@ -75,21 +89,30 @@ export const useBannersStore = defineStore('banners', {
         ) || {}
 
         this.banners = objects
-      } catch (e) {}
+      } catch (e) {
+        console.error(e)
+      } finally {
+        this.isLoading = false
+      }
     },
   },
   getters: {
     banner (state) {
+      const user = useUserStore()
       const name = state.router.currentRoute.value.meta.page
-      const date = useDate()
 
       if (this.server) return this.server
 
       return state.banners.find(({
-        metadata: { visible },
-        modified_at: modifiedAt,
+        slug,
+        metadata: {
+          visible,
+          active,
+        },
       }) => {
-        if (!date.isBefore(date.date(modifiedAt), date.endOfDay(new Date()))) return false
+        if (!active) return false
+
+        if (user.notifications.last.banner.includes(slug)) return false
 
         if (visible.key === 'both') return true
         // '' is home
@@ -99,13 +122,13 @@ export const useBannersStore = defineStore('banners', {
       })
     },
     server (state) {
-      const date = useDate()
-
       return state.banners.find(({
-        metadata: { visible },
-        modified_at: modifiedAt,
+        metadata: {
+          visible,
+          active,
+        },
       }) => {
-        if (!date.isBefore(date.date(modifiedAt), date.endOfDay(new Date()))) return false
+        if (!active) return false
 
         return visible.key === 'server'
       })

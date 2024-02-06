@@ -1,5 +1,4 @@
 ---
-emphasized: true
 fluid: true
 meta:
   nav: For Enterprise
@@ -20,6 +19,8 @@ related:
 # Direct support from Vuetify
 
 Let the experts at Vuetify help you get the most out of your application with a customized support plan from the team behind the framework.
+
+<page-features />
 
 ## For Enterprise
 

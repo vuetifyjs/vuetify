@@ -13,6 +13,8 @@ related:
 
 Vuetify blueprints are a new way to pre-configure your entire application with a completely unique design system.
 
+<page-features />
+
 <entry />
 
 ## Usage

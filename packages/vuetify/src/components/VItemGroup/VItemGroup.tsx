@@ -11,6 +11,9 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { Suspense } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
+// Types
+import type { GenericProps } from '@/util'
+
 export const VItemGroupSymbol = Symbol.for('vuetify:v-item-group')
 
 export const makeVItemGroupProps = propsFactory({
@@ -32,7 +35,13 @@ type VItemGroupSlots = {
   }
 }
 
-export const VItemGroup = genericComponent<VItemGroupSlots>()({
+export const VItemGroup = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: VItemGroupSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VItemGroup',
 
   props: makeVItemGroupProps(),

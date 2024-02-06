@@ -78,6 +78,16 @@
   > .v-avatar ~ .v-list-item__spacer
     width: $list-item-avatar-margin-start
 
+  .v-list-item--slim &
+    > .v-badge,
+    > .v-icon,
+    > .v-tooltip
+      ~ .v-list-item__spacer
+        width: $list-item-slim-spacer-width
+
+    > .v-avatar ~ .v-list-item__spacer
+      width: $list-item-slim-avatar-spacer-width
+
   .v-list-item--three-line &
     align-self: start
 
@@ -99,6 +109,16 @@
 
   > .v-avatar ~ .v-list-item__spacer
     width: $list-item-avatar-margin-end
+
+  .v-list-item--slim &
+    > .v-badge,
+    > .v-icon,
+    > .v-tooltip
+      ~ .v-list-item__spacer
+        width: $list-item-slim-spacer-width
+
+    > .v-avatar ~ .v-list-item__spacer
+      width: $list-item-slim-avatar-spacer-width
 
   .v-list-item--three-line &
     align-self: start
@@ -148,6 +168,7 @@
   overflow: hidden
   padding: $list-item-subtitle-padding
   text-overflow: ellipsis
+  word-break: $list-item-subtitle-word-break
 
   .v-list-item--one-line &
     -webkit-line-clamp: 1
@@ -216,20 +237,16 @@
 
       &:not(.v-list-item--nav)
         &.v-list-item--one-line
-          padding-inline-start: list.nth($list-item-padding, 2)
-          padding-inline-end: list.nth($list-item-padding, 2)
+          padding-inline: list.nth($list-item-padding, 2)
 
         &.v-list-item--two-line
-          padding-inline-start: list.nth($list-item-two-line-padding, 2)
-          padding-inline-end: list.nth($list-item-two-line-padding, 2)
+          padding-inline: list.nth($list-item-two-line-padding, 2)
 
         &.v-list-item--three-line
-          padding-inline-start: list.nth($list-item-three-line-padding, 2)
-          padding-inline-end: list.nth($list-item-three-line-padding, 2)
+          padding-inline: list.nth($list-item-three-line-padding, 2)
 
   &--nav
-    padding-inline-start: $list-nav-padding
-    padding-inline-end: $list-nav-padding
+    padding-inline: $list-nav-padding
 
     .v-list &
       &:not(:only-child)
@@ -264,6 +281,9 @@ $base-padding: list.nth($list-item-padding, 2)
   --list-indent-size: #{$list-indent-size}
   --parent-padding: var(--indent-padding)
   --prepend-width: #{$list-item-prepend-size}
+
+  .v-list--slim &
+    --prepend-width: #{$list-item-slim-prepend-size}
 
   &--fluid
     --list-indent-size: 0px

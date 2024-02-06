@@ -16,6 +16,7 @@ import { filterInputAttrs, genericComponent, getUid, omit, propsFactory, useRend
 // Types
 import type { VSelectionControlSlots } from '../VSelectionControl/VSelectionControl'
 import type { VInputSlots } from '@/components/VInput/VInput'
+import type { GenericProps } from '@/util'
 
 export type VCheckboxSlots = Omit<VInputSlots, 'default'> & VSelectionControlSlots
 
@@ -24,7 +25,13 @@ export const makeVCheckboxProps = propsFactory({
   ...omit(makeVCheckboxBtnProps(), ['inline']),
 }, 'VCheckbox')
 
-export const VCheckbox = genericComponent<VCheckboxSlots>()({
+export const VCheckbox = genericComponent<new <T>(
+  props: {
+    modelValue?: T | null
+    'onUpdate:modelValue'?: (value: T | null) => void
+  },
+  slots: VCheckboxSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VCheckbox',
 
   inheritAttrs: false,
@@ -32,7 +39,7 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
   props: makeVCheckboxProps(),
 
   emits: {
-    'update:modelValue': (value: boolean) => true,
+    'update:modelValue': (value: any) => true,
     'update:focused': (focused: boolean) => true,
   },
 
@@ -45,8 +52,8 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
 
     useRender(() => {
       const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
-      const [inputProps, _1] = VInput.filterProps(props)
-      const [checkboxProps, _2] = VCheckboxBtn.filterProps(props)
+      const inputProps = VInput.filterProps(props)
+      const checkboxProps = VCheckboxBtn.filterProps(props)
 
       return (
         <VInput

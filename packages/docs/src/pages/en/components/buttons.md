@@ -276,7 +276,7 @@ There are instances where a set of default properties are injected or custom sty
 
 ### Banners
 
-The `v-banner-actions` component applies the **text** variant and reduces button x-axis padding to **8px**.
+The `v-banner-actions` component applies the **text** variant and **slim** prop, reducing button x-axis padding to **8px**.
 
 | Documentation | API |
 | - | - |
@@ -290,6 +290,7 @@ The following properties are modified when used within a `v-banner-actions` comp
 | - | - |
 | **color** | provided by `v-banner-actions` |
 | **density** | provided by `v-banner-actions` |
+| **slim** | `true` |
 | **variant** | `text` |
 
 ### Bottom navigation
@@ -333,7 +334,7 @@ The following properties are modified when used within a `v-btn-group` component
 
 ### Cards
 
-The `v-card-actions` component applies the **text** variant, reduces button x-axis padding to **8px**, and applies a start margin for all siblings. This is to ensure the text from the button lines up with the text and title of the card and that there is space between its actions.
+The `v-card-actions` component applies the **text** variant and **slim** prop, reducing button x-axis padding to **8px**, and applies a start margin for all siblings. This is to ensure the text from the button lines up with the text and title of the card and that there is space between its actions.
 
 | Documentation | API |
 | - | - |
@@ -345,11 +346,12 @@ The following properties are modified when used within a `v-card-actions` compon
 
 | Property | Value |
 | - | - |
+| **slim** | `true` |
 | **variant** | `text` |
 
 ### Snackbars
 
-The `v-snackbar` component applies the **text** variant and removes ripples from all `v-btn` components.
+The `v-snackbar` component applies the **text** variant, **slim** prop, and removes ripples from all `v-btn` components.
 
 | Documentation | API |
 | - | - |
@@ -361,6 +363,7 @@ The following properties are modified when used within the **actions** slot of t
 
 | Property | Value |
 | - | - |
+| **slim** | `true` |
 | **ripple** | `false` |
 | **variant** | `text` |
 
@@ -387,7 +390,7 @@ The `v-btn` component is an extension of the native `button` element and support
 
 ### ARIA Attributes
 
-By default, the `v-btn` component includes relevant [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) attributes to enhance accessibility. The component is automatically assigned the `role="button"` attribute, which indicates its purpose as a button to assistive technologies.
+By default, the `v-btn` component includes relevant [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) attributes to enhance accessibility. The component is automatically assigned the `type="button"` attribute, which indicates its purpose as a button to assistive technologies.
 
 ### Keyboard Navigation
 

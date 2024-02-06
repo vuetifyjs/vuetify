@@ -7,6 +7,7 @@
 .v-table
   @include tools.theme($table-theme...)
 
+  font-size: $table-font-size
   transition-duration: $table-transition-duration
   transition-property: $table-transition-property
   transition-timing-function: $table-transition-timing-function
@@ -20,7 +21,6 @@
         > tr
           > th
             border-bottom: $table-border
-            color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
 
       > tbody
         > tr
@@ -41,8 +41,13 @@
       > table
         > tbody
           > tr
-            &:hover td
+            > td
+              position: relative
+
+            &:hover > td::after
+              @include tools.absolute(true)
               background: $table-hover-color
+              pointer-events: none
 
   &.v-table--fixed-header
     > .v-table__wrapper
@@ -64,8 +69,6 @@
 
 // Block
 .v-table
-  --v-table-header-height: #{$table-header-height}
-
   border-radius: inherit
   // Do not inherit line-height
   line-height: $table-line-height
@@ -89,24 +92,19 @@
             transition-property: $table-transition-property
             transition-timing-function: $table-transition-timing-function
 
+          > td
+            height: var(--v-table-row-height)
+
           > th
+            height: var(--v-table-header-height)
             font-weight: $table-header-font-weight
             user-select: none
             text-align: start
 
   @at-root
     @include tools.density('v-table', $table-density) using ($modifier)
-      > .v-table__wrapper
-        > table
-          > tbody,
-          > thead,
-          > tfoot
-            > tr
-              > th
-                height: calc(var(--v-table-header-height) + $modifier)
-
-              > td
-                height: calc($table-row-height + $modifier)
+      --v-table-header-height: #{$table-header-height + $modifier}
+      --v-table-row-height: #{$table-row-height + $modifier}
 
 // Elements
 .v-table__wrapper
@@ -153,7 +151,7 @@
       > thead
         position: sticky
         top: 0
-        z-index: 1
+        z-index: 2
         > tr
           > th
             border-bottom: 0px !important

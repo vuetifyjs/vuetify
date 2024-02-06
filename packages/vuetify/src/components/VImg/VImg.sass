@@ -8,6 +8,9 @@
   &--booting .v-responsive__sizer
     transition: none
 
+  &--rounded
+    @include tools.rounded($img-rounded-border-radius)
+
 .v-img__img,
 .v-img__picture,
 .v-img__gradient,

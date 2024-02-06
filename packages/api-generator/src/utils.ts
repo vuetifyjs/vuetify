@@ -1,7 +1,7 @@
 import { execSync } from 'child_process'
 import stringifyObject from 'stringify-object'
 import prettier from 'prettier'
-import typescriptParser from 'prettier/esm/parser-typescript.mjs'
+import * as typescriptParser from 'prettier/plugins/typescript'
 import type { Definition } from './types'
 
 function parseFunctionParams (func: string) {
@@ -22,7 +22,9 @@ function getPropType (type: any | any[]): string | string[] {
   return type.name.toLowerCase()
 }
 
-function getPropDefault (def: any, type: string | string[]) {
+function getPropDefault (definition: any, type: string | string[]) {
+  const def = definition?.default
+
   if (typeof def === 'function' && type !== 'function') {
     return def.call({}, {})
   }
@@ -35,7 +37,7 @@ function getPropDefault (def: any, type: string | string[]) {
     return parseFunctionParams(def)
   }
 
-  if (def == null && (
+  if ((!definition || !('default' in definition)) && (
     type === 'boolean' ||
     (Array.isArray(type) && type.includes('boolean'))
   )) {
@@ -74,7 +76,7 @@ export function stringifyProps (props: any) {
   return Object.fromEntries(
     Object.entries<any>(props).map(([key, prop]) => {
       let def = typeof prop === 'object'
-        ? getPropDefault(prop?.default, getPropType(prop?.type))
+        ? getPropDefault(prop, getPropType(prop?.type))
         : getPropDefault(undefined, getPropType(prop))
 
       if (typeof def === 'object') {
@@ -110,7 +112,7 @@ async function loadLocale (componentName: string, locale: string): Promise<Recor
     })
     localeCache.set(cacheKey, data.default)
     return data.default
-  } catch (err) {
+  } catch (err: any) {
     if (err.code === 'ERR_MODULE_NOT_FOUND') {
       console.error(`\x1b[35mMissing locale for ${cacheKey}\x1b[0m`)
       localeCache.set(cacheKey, {})
@@ -134,7 +136,7 @@ async function getSources (name: string, locale: string, sources: string[]) {
   return {
     find: (section: string, key: string, ogSource = name) => {
       for (let i = 0; i < arr.length; i++) {
-        const source = arr[i]
+        const source = arr[i] as any
         const found: string | undefined = source?.[section]?.[key]
         if (found) {
           return { text: found, source: sourcesMap[i] }
@@ -214,12 +216,12 @@ export function insertLinks (str: string, stripped: Record<string, string>) {
   return str
 }
 
-export function prettifyType (name: string, item: Definition) {
+export async function prettifyType (name: string, item: Definition) {
   const prefix = 'type Type = '
   const [str, stripped] = stripLinks(item.formatted)
   let formatted
   try {
-    formatted = prettier.format(prefix + str, {
+    formatted = await prettier.format(prefix + str, {
       parser: 'typescript',
       plugins: [typescriptParser],
       bracketSpacing: true,
@@ -227,7 +229,7 @@ export function prettifyType (name: string, item: Definition) {
       singleQuote: true,
       trailingComma: 'all',
     })
-  } catch (err) {
+  } catch (err: any) {
     console.error('\x1b[31m', `${name}:`, err.message, '\x1b[0m')
     return item
   }

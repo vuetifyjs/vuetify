@@ -13,6 +13,8 @@ related:
 
 Vuetify is made possible by an amazing community that submits issues, creates pull requests, and provides invaluable feedback.
 
+<page-features />
+
 <entry />
 
 It is our job to enable you to create amazing applications. A lot of the time, you come across something that can be made better. Maybe you find a bug, or you have an idea for additional functionality. That's great! It's as easy as cloning the Vuetify repository to get started working in a development environment.
@@ -25,7 +27,7 @@ The issue list of this repo is exclusively for bug reports and feature requests.
 
 - Search for similar [issues], it may have been answered already.
   > If a similar issue already exists, you do not need to open another issue for this, if you want to help with it in any way, you can help by giving appropriate information in the already existing issue.
-- Try to reproduce with the [latest](https://github.com/vuetifyjs/vuetify/releases/latest) version in [🎮 Vuetify Play](https://play.vuetifyjs.com/) or a repository that can be cloned to produce the expected behavior.
+- Try to reproduce with the [latest](https://github.com/vuetifyjs/vuetify/releases/latest) version in [Vuetify Play](https://play.vuetifyjs.com/) or a repository that can be cloned to produce the expected behavior.
 - Make sure that the reproduction is **MINIMAL** and **CONCISE**
 
 These steps ensure that we have all the information necessary to quickly triage and resolve your issue. Once your reproduction is complete, submit a new issue using the [Vuetify Issue Creator](https://issues.vuetifyjs.com/). Using this issue creator is required, otherwise the issue will be closed automatically.

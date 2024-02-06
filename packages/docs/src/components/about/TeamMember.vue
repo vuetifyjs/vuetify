@@ -135,19 +135,11 @@
           </div>
         </template>
 
-        <v-chip
+        <border-chip
           v-if="member.joined"
           :text="t('joined', { date: member.joined })"
-          border
           prepend-icon="mdi-calendar"
-          label
-          size="small"
-          variant="text"
-        >
-          <template #prepend>
-            <v-icon color="medium-emphasis" size="small" />
-          </template>
-        </v-chip>
+        />
       </div>
     </div>
   </v-lazy>

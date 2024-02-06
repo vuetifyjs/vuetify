@@ -32,7 +32,7 @@
   import { useI18n } from 'vue-i18n'
 
   // Stores
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed } from 'vue'

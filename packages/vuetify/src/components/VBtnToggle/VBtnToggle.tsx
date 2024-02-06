@@ -14,6 +14,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import type { InjectionKey } from 'vue'
 import type { GroupProvide } from '@/composables/group'
+import type { GenericProps } from '@/util'
 
 export type BtnToggleSlotProps = 'isSelected' | 'select' | 'selected' | 'next' | 'prev'
 export interface DefaultBtnToggleSlot extends Pick<GroupProvide, BtnToggleSlotProps> {}
@@ -29,7 +30,13 @@ export const makeVBtnToggleProps = propsFactory({
   ...makeGroupProps(),
 }, 'VBtnToggle')
 
-export const VBtnToggle = genericComponent<VBtnToggleSlots>()({
+export const VBtnToggle = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: VBtnToggleSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VBtnToggle',
 
   props: makeVBtnToggleProps(),
@@ -42,7 +49,7 @@ export const VBtnToggle = genericComponent<VBtnToggleSlots>()({
     const { isSelected, next, prev, select, selected } = useGroup(props, VBtnToggleSymbol)
 
     useRender(() => {
-      const [btnGroupProps] = VBtnGroup.filterProps(props)
+      const btnGroupProps = VBtnGroup.filterProps(props)
 
       return (
         <VBtnGroup
@@ -61,7 +68,7 @@ export const VBtnToggle = genericComponent<VBtnToggleSlots>()({
                 prev,
                 select,
                 selected,
-              } as DefaultBtnToggleSlot)}
+              })}
             </>
           </Suspense>
         </VBtnGroup>

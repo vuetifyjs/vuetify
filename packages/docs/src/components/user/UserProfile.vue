@@ -1,76 +1,94 @@
 <template>
   <app-sheet width="250">
     <v-skeleton-loader
-      :loading="isLoading || !user"
+      :loading="auth.isLoading"
       type="image, paragraph, divider, list-item-avatar"
     >
-      <div class="text-center py-4 flex-grow-1">
-        <v-avatar :image="_user.avatar || user.picture" size="80" />
+      <template v-if="!auth.user">
+        <v-list class="flex-1-0 d-flex flex-column ga-2">
+          <template v-for="button in loginButtons" :key="button">
+            <component :is="button" class="mx-2 mb-0" />
+          </template>
+        </v-list>
+      </template>
 
-        <v-card-title class="mb-n2">{{ user.name }}</v-card-title>
+      <template v-else>
+        <div class="text-center py-4 flex-grow-1">
+          <v-avatar :image="user.avatar || auth.user.picture || ''" size="80" />
 
-        <a
-          :href="`https://github.com/${user.nickname}`"
-          class="text-decoration-none text-medium-emphasis d-flex align-center justify-center mb-2"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <v-card-subtitle class="px-0">@{{ user.nickname }}</v-card-subtitle>
+          <v-card-title class="mb-n2">{{ auth.user.name }}</v-card-title>
 
-          <v-icon
-            class="ms-1"
-            color="medium-emphasis"
-            icon="mdi-open-in-new"
-            size="13"
-          />
-        </a>
+          <user-badges />
+        </div>
 
-        <user-badges />
-      </div>
+        <v-divider />
 
-      <v-divider />
+        <v-list class="flex-grow-1">
+          <v-list-subheader class="text-high-emphasis">
+            {{ t('dashboard.connected-accounts') }}:
+          </v-list-subheader>
 
-      <v-list class="flex-grow-1">
-        <v-list-subheader class="text-high-emphasis">
-          {{ t('dashboard.connected-accounts') }}:
-        </v-list-subheader>
+          <template v-for="identity in auth.user.identities" :key="identity.id">
+            <v-list-item slim>
+              <template #prepend>
+                <v-avatar
+                  :icon="`mdi-${identity.provider}`"
+                  rounded="0"
+                  size="25"
+                />
+              </template>
 
-        <v-list-item>
-          <template #prepend>
-            <v-avatar
-              class="me-n3"
-              color="white"
-              image="https://cdn.vuetifyjs.com/docs/images/logos/github.png"
-              size="25"
-            />
+              <template #title>
+                <strong class="text-medium-emphasis">{{ t(identity.provider) }}:</strong>
+              </template>
+
+              <template #append>
+                <div class="text-caption text-medium-emphasis">{{ identity.userHandle }}</div>
+              </template>
+            </v-list-item>
           </template>
 
-          <template #title>
-            <strong class="text-medium-emphasis">{{ t('github') }}:</strong>
+          <template v-for="button in loginButtons" :key="button">
+            <component :is="button" class="mx-2" />
           </template>
-
-          <template #append>
-            <div class="text-caption text-medium-emphasis">{{ user.sub }}</div>
-          </template>
-        </v-list-item>
-      </v-list>
+        </v-list>
+      </template>
     </v-skeleton-loader>
   </app-sheet>
+
+  <one-sub-card />
 </template>
 
-<script setup>
+<script setup lang="ts">
   // Components
+  import DiscordLogin from '@/components/user/DiscordLogin.vue'
+  import GithubLogin from '@/components/user/GithubLogin.vue'
+  import OneSubCard from '@/components/user/OneSubCard.vue'
   import UserBadges from '@/components/user/UserBadges.vue'
 
   // Composables
-  import { useAuth0 } from '@/plugins/auth'
   import { useI18n } from 'vue-i18n'
 
-  // Stores
-  import { useUserStore } from '@/store/user'
+  // Utilities
+  import { computed } from 'vue'
 
-  const { isLoading, user } = useAuth0()
+  // Stores
+  import { useAuthStore, useUserStore } from '@vuetify/one'
+
+  const auth = useAuthStore()
+  const user = useUserStore()
+
   const { t } = useI18n()
 
-  const _user = useUserStore()
+  const loginButtons = computed(() => {
+    if (!auth.user) {
+      return [GithubLogin, DiscordLogin]
+    }
+    return Object.fromEntries(
+      Object.entries({
+        github: GithubLogin,
+        discord: DiscordLogin,
+      }).filter(([k, v]) => !auth.user!.identities.some((i: any) => i.provider === k))
+    )
+  })
 </script>

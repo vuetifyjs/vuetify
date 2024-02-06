@@ -19,12 +19,15 @@ import { en, sv } from 'vuetify/locale'
 
 // Types
 import type { App } from 'vue'
+import type { IconProps } from 'vuetify'
 
 export function installVuetify (app: App) {
   const vuetify = createVuetify({
     aliases: {
-      PageFeatureChip: components.VChip,
+      BorderChip: components.VChip,
       NewInChip: components.VChip,
+      PageFeatureChip: components.VChip,
+      PrimaryBtn: components.VBtn,
       SettingsSwitch: components.VSwitch,
     },
     components: {
@@ -35,12 +38,6 @@ export function installVuetify (app: App) {
     defaults: {
       global: {
         eager: false,
-      },
-      PageFeatureChip: {
-        variant: 'tonal',
-        border: true,
-        class: 'text-medium-emphasis me-2 mb-2',
-        size: 'small',
       },
       NewInChip: {
         appendIcon: 'mdi-page-next',
@@ -56,6 +53,26 @@ export function installVuetify (app: App) {
           size: 'small',
         },
       },
+      PageFeatureChip: {
+        variant: 'tonal',
+        border: true,
+        class: 'text-medium-emphasis me-2 mb-2',
+        size: 'small',
+      },
+      PrimaryBtn: {
+        border: true,
+        class: 'text-none',
+        color: 'primary',
+        slim: true,
+        size: 'small',
+        variant: 'outlined',
+
+        VProgressCircular: {
+          indeterminate: true,
+          size: 16,
+          width: 1,
+        },
+      },
       SettingsSwitch: {
         class: 'ps-1 mb-2',
         color: 'primary',
@@ -63,6 +80,17 @@ export function installVuetify (app: App) {
         inset: true,
         trueIcon: 'mdi-check',
         falseIcon: '$close',
+      },
+      BorderChip: {
+        border: true,
+        label: true,
+        size: 'small',
+        variant: 'text',
+
+        VIcon: {
+          color: 'medium-emphasis',
+          size: 'small',
+        },
       },
     },
     locale: {
@@ -79,7 +107,7 @@ export function installVuetify (app: App) {
         md,
         mdiSvg: mdi,
         mdi: {
-          component: props => {
+          component: (props: IconProps) => {
             const icon = mdiSvg[camelize(props.icon as string) as keyof typeof mdiSvg]
             return h(components.VSvgIcon, { ...props, icon })
           },
@@ -99,6 +127,7 @@ export function installVuetify (app: App) {
       themes: {
         light: {
           colors: {
+            'surface-variant-alt': '#dedede',
             primary: '#1867c0',
             secondary: '#5CBBF6',
             tertiary: '#E57373',
@@ -109,6 +138,7 @@ export function installVuetify (app: App) {
         },
         dark: {
           colors: {
+            'surface-variant-alt': '#333333',
             primary: '#2196F3',
             secondary: '#424242',
             tertiary: '#E57373',

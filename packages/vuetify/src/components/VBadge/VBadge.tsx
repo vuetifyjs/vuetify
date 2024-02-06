@@ -17,7 +17,7 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { toRef } from 'vue'
-import { genericComponent, pick, propsFactory, useRender } from '@/util'
+import { genericComponent, pickWithRest, propsFactory, useRender } from '@/util'
 
 export type VBadgeSlots = {
   default: never
@@ -85,7 +85,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
         : value <= +props.max ? value
         : `${props.max}+`
 
-      const [badgeAttrs, attrs] = pick(ctx.attrs as Record<string, any>, [
+      const [badgeAttrs, attrs] = pickWithRest(ctx.attrs as Record<string, any>, [
         'aria-atomic',
         'aria-label',
         'aria-live',

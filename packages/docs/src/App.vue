@@ -1,18 +1,20 @@
 <template>
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <v-fade-transition appear>
+      <component :is="Component" />
+    </v-fade-transition>
+  </router-view>
 </template>
 
 <script setup lang="ts">
   // Composables
-  import { useHead } from '@vueuse/head'
+  import { useHead } from '@unhead/vue'
   import { useI18n } from 'vue-i18n'
   import { useRoute, useRouter } from 'vue-router'
   import { useTheme } from 'vuetify'
-  import { useAuth0 } from '@/plugins/auth'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
-  import { useUserStore } from '@/store/user'
+  import { useAuthStore, useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed, nextTick, onBeforeMount, ref, watch, watchEffect } from 'vue'
@@ -28,7 +30,6 @@
   const theme = useTheme()
   const { locale } = useI18n()
   const auth = useAuthStore()
-  const auth0 = useAuth0()
 
   const path = computed(() => route.path.replace(`/${locale.value}/`, ''))
 
@@ -71,12 +72,7 @@
   if (IN_BROWSER) {
     let media: MediaQueryList
 
-    watch(auth0!.user, async val => {
-      if (!val?.sub) return
-
-      await auth.getUser()
-      auth.verifyUserSponsorship()
-    }, { immediate: true })
+    auth.verify()
 
     watch(() => user.theme, val => {
       if (val === 'system') {

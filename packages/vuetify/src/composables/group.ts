@@ -2,11 +2,12 @@
 import { useProxiedModel } from './proxiedModel'
 
 // Utilities
-import { computed, inject, nextTick, onBeforeUnmount, onMounted, provide, reactive, toRef, watch } from 'vue'
+import { computed, inject, nextTick, onBeforeUnmount, onMounted, provide, reactive, toRef, unref, watch } from 'vue'
 import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { ComponentInternalInstance, ComputedRef, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
+import type { EventProp } from '@/util'
 
 export interface GroupItem {
   id: number
@@ -21,7 +22,7 @@ export interface GroupProps {
   mandatory?: boolean | 'force' | undefined
   max?: number | undefined
   selectedClass: string | undefined
-  'onUpdate:modelValue': ((val: unknown) => void) | undefined
+  'onUpdate:modelValue': EventProp<[unknown]> | undefined
 }
 
 export interface GroupProvide {
@@ -73,7 +74,7 @@ export const makeGroupItemProps = propsFactory({
 }, 'group-item')
 
 export interface GroupItemProps extends ExtractPropTypes<ReturnType<typeof makeGroupItemProps>> {
-  'onGroup:selected': ((val: { value: boolean }) => void) | undefined
+  'onGroup:selected': EventProp<[{ value: boolean }]> | undefined
 }
 
 // Composables
@@ -181,6 +182,10 @@ export function useGroup (
     const key = Symbol.for(`${injectKey.description}:id`)
     const children = findChildrenWithProvide(key, groupVm?.vnode)
     const index = children.indexOf(vm)
+
+    if (unref(unwrapped.value) == null) {
+      unwrapped.value = index
+    }
 
     if (index > -1) {
       items.splice(index, 0, unwrapped)

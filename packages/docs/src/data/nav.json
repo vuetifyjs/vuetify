@@ -37,10 +37,12 @@
       "aliasing",
       "application-layout",
       "blueprints",
+      "dates",
       "display-and-platform",
       "global-configuration",
       "icon-fonts",
       "internationalization",
+      "scrolling",
       "sass-variables",
       "theme",
       "treeshaking"
@@ -60,6 +62,7 @@
       },
       "border-radius",
       "content",
+      "cursor",
       "display",
       "elevation",
       "flex",
@@ -84,6 +87,7 @@
       },
       { "divider": true },
       { "subheader": "containment" },
+      "bottom-sheets",
       "buttons",
       "cards",
       "chips",
@@ -114,6 +118,7 @@
       "file-inputs",
       "forms",
       "inputs",
+      "otp-input",
       "radio-buttons",
       "range-sliders",
       "selects",
@@ -123,6 +128,23 @@
       "textareas",
       { "divider": true },
       { "subheader": "data-and-display" },
+      "data-iterators",
+      {
+        "title": "data-tables",
+        "subfolder": "components",
+        "activeIcon": "",
+        "inactiveIcon": "",
+        "items": [
+          "introduction",
+          { "subheader": "guide" },
+          "basics",
+          "data-and-display",
+          { "subheader": "types" },
+          "server-side-tables",
+          "virtual-tables"
+        ]
+      },
+      "infinite-scroller",
       "tables",
       "virtual-scroller",
       { "divider": true },
@@ -135,6 +157,7 @@
       "chip-groups",
       "item-groups",
       "slide-groups",
+      "steppers",
       "windows",
       { "divider": true },
       { "subheader": "feedback" },
@@ -145,6 +168,7 @@
       "progress-circular",
       "progress-linear",
       "ratings",
+      "skeleton-loaders",
       "snackbars",
       "timelines",
       { "divider": true },
@@ -157,6 +181,7 @@
       { "divider": true },
       { "subheader": "pickers" },
       "color-pickers",
+      "date-pickers",
       { "divider": true },
       { "subheader": "providers" },
       "defaults-providers",
@@ -195,53 +220,7 @@
     "items": [
       "introduction",
       {
-        "title": "bottom-sheets",
-        "subfolder": "components"
-      },
-      {
-        "title": "data-iterators",
-        "subfolder": "components"
-      },
-      {
-        "title": "data-tables",
-        "subfolder": "components",
-        "activeIcon": "",
-        "inactiveIcon": "",
-        "items": [
-          "basics",
-          "headers",
-          "selection",
-          "sorting",
-          "pagination",
-          "filtering",
-          "grouping",
-          "slots",
-          "virtual-tables",
-          "server-side-tables"
-        ]
-      },
-      {
-        "title": "dates",
-        "subfolder": "features"
-      },
-      {
-        "title": "date-pickers",
-        "subfolder": "components"
-      },
-      {
-        "title": "infinite-scroller",
-        "subfolder": "components"
-      },
-      {
-        "title": "otp-input",
-        "subfolder": "components"
-      },
-      {
-        "title": "skeleton-loaders",
-        "subfolder": "components"
-      },
-      {
-        "title": "steppers",
+        "title": "calendars",
         "subfolder": "components"
       }
     ]
@@ -254,8 +233,10 @@
       "brand-kit",
       "jobs-for-vue",
       "made-with-vuetify",
-      "search-engine",
       "themes",
+      { "divider": true },
+      { "subheader": "guides" },
+      "search-engine",
       "ui-kits"
     ]
   },
@@ -264,9 +245,10 @@
     "inactiveIcon": "$vuetify-outline",
     "activeIcon": "$vuetify",
     "items": [
+      "code-of-conduct",
+      "licensing",
       "meet-the-team",
-      "security-disclosure",
-      "code-of-conduct"
+      "security-disclosure"
     ]
   }
 ]

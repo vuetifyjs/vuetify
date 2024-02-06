@@ -37,7 +37,8 @@ import type {
 import type { DelayProps } from '@/composables/delay'
 
 interface ActivatorProps extends DelayProps {
-  activator?: 'parent' | string | Element | ComponentPublicInstance
+  target: 'parent' | 'cursor' | (string & {}) | Element | ComponentPublicInstance | [x: number, y: number] | undefined
+  activator: 'parent' | (string & {}) | Element | ComponentPublicInstance | undefined
   activatorProps: Record<string, any>
 
   openOnClick: boolean | undefined
@@ -48,6 +49,7 @@ interface ActivatorProps extends DelayProps {
 }
 
 export const makeActivatorProps = propsFactory({
+  target: [String, Object] as PropType<ActivatorProps['target']>,
   activator: [String, Object] as PropType<ActivatorProps['activator']>,
   activatorProps: {
     type: Object as PropType<ActivatorProps['activatorProps']>,
@@ -73,6 +75,7 @@ export function useActivator (
   props: ActivatorProps,
   { isActive, isTop }: { isActive: Ref<boolean>, isTop: Ref<boolean> }
 ) {
+  const vm = getCurrentInstance('useActivator')
   const activatorEl = ref<HTMLElement>()
 
   let isHovered = false
@@ -96,10 +99,14 @@ export function useActivator (
     }
   })
 
+  const cursorTarget = ref<[x: number, y: number]>()
   const availableEvents = {
     onClick: (e: MouseEvent) => {
       e.stopPropagation()
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
+      if (!isActive.value) {
+        cursorTarget.value = [e.clientX, e.clientY]
+      }
       isActive.value = !isActive.value
     },
     onMouseenter: (e: MouseEvent) => {
@@ -213,7 +220,15 @@ export function useActivator (
     }
   })
 
-  const activatorRef = ref()
+  watch(isActive, val => {
+    if (!val) {
+      setTimeout(() => {
+        cursorTarget.value = undefined
+      })
+    }
+  }, { flush: 'post' })
+
+  const activatorRef = ref<HTMLElement>()
   watchEffect(() => {
     if (!activatorRef.value) return
 
@@ -222,7 +237,18 @@ export function useActivator (
     })
   })
 
-  const vm = getCurrentInstance('useActivator')
+  const targetRef = ref<HTMLElement>()
+  const target = computed(() => {
+    if (props.target === 'cursor' && cursorTarget.value) return cursorTarget.value
+    if (targetRef.value) return refElement(targetRef.value)
+    return getTarget(props.target, vm) || activatorEl.value
+  })
+  const targetEl = computed(() => {
+    return Array.isArray(target.value)
+      ? undefined
+      : target.value
+  })
+
   let scope: EffectScope
   watch(() => !!props.activator, val => {
     if (val && IN_BROWSER) {
@@ -239,7 +265,7 @@ export function useActivator (
     scope?.stop()
   })
 
-  return { activatorEl, activatorRef, activatorEvents, contentEvents, scrimEvents }
+  return { activatorEl, activatorRef, target, targetEl, targetRef, activatorEvents, contentEvents, scrimEvents }
 }
 
 function _useActivator (
@@ -278,29 +304,38 @@ function _useActivator (
   }
 
   function getActivator (selector = props.activator): HTMLElement | undefined {
-    let activator
-    if (selector) {
-      if (selector === 'parent') {
-        let el = vm?.proxy?.$el?.parentNode
-        while (el?.hasAttribute('data-no-activator')) {
-          el = el.parentNode
-        }
-        activator = el
-      } else if (typeof selector === 'string') {
-        // Selector
-        activator = document.querySelector(selector)
-      } else if ('$el' in selector) {
-        // Component (ref)
-        activator = selector.$el
-      } else {
-        // HTMLElement | Element
-        activator = selector
-      }
-    }
+    const activator = getTarget(selector, vm)
 
     // The activator should only be a valid element (Ignore comments and text nodes)
-    activatorEl.value = activator?.nodeType === Node.ELEMENT_NODE ? activator : null
+    activatorEl.value = activator?.nodeType === Node.ELEMENT_NODE ? activator : undefined
 
     return activatorEl.value
   }
+}
+
+function getTarget<T extends 'parent' | string | Element | ComponentPublicInstance | [x: number, y: number] | undefined> (
+  selector: T,
+  vm: ComponentInternalInstance
+): HTMLElement | undefined | (T extends any[] ? [x: number, y: number] : never) {
+  if (!selector) return
+
+  let target
+  if (selector === 'parent') {
+    let el = vm?.proxy?.$el?.parentNode
+    while (el?.hasAttribute('data-no-activator')) {
+      el = el.parentNode
+    }
+    target = el
+  } else if (typeof selector === 'string') {
+    // Selector
+    target = document.querySelector(selector)
+  } else if ('$el' in selector) {
+    // Component (ref)
+    target = selector.$el
+  } else {
+    // HTMLElement | Element | [x, y]
+    target = selector
+  }
+
+  return target
 }

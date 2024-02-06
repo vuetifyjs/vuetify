@@ -1,2 +1,5 @@
+@use '../../styles/settings';
+
+$checkbox-flex: 0 1 auto !default;
 $checkbox-disabled-color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity)) !default;
 $checkbox-error-color: rgb(var(--v-theme-error)) !default;

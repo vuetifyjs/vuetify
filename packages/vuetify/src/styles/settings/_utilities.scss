@@ -172,6 +172,26 @@ $utilities: () !default;
         ),
       ),
 
+      // gap utilities
+      "gap": (
+        responsive: true,
+        property: gap,
+        class: ga,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+      "gap-row": (
+        responsive: true,
+        property: row-gap,
+        class: gr,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+      "gap-column": (
+        responsive: true,
+        property: column-gap,
+        class: gc,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+
       // Margin utilities
       "margin": (
         responsive: true,
@@ -478,6 +498,7 @@ $utilities: () !default;
         ),
         class: text,
         unimportant: (
+          font-family,
           font-weight,
           line-height
         ),
@@ -510,6 +531,12 @@ $utilities: () !default;
         property: position,
         class: position,
         values: static relative fixed absolute sticky
+      ),
+      // Cursor
+      "cursor": (
+        property: cursor,
+        class: cursor,
+        values: auto default pointer wait text move help not-allowed progress grab grabbing none
       ),
       // Sizing
       "fill-height": (
