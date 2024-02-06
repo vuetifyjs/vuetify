@@ -264,7 +264,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
           }, activatorEvents.value, props.activatorProps),
         })}
 
-        { !props.disabled && isMounted.value && hasContent.value && (
+        { isMounted.value && hasContent.value && (
           <Teleport
             disabled={ !teleportTarget.value }
             to={ teleportTarget.value }
@@ -292,7 +292,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
             >
               <Scrim
                 color={ scrimColor }
-                modelValue={ !!props.scrim && isActive.value }
+                modelValue={ isActive.value && !!props.scrim }
                 { ...scrimEvents.value }
               />
               <MaybeTransition
