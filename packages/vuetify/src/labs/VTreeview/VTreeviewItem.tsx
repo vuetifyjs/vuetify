@@ -102,6 +102,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
         </VListItem>
       )
     })
+
     return {}
   },
 })

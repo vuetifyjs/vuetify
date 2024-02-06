@@ -56,11 +56,11 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
           }}
         </VTreeviewGroup>
       ) : (
-        slots.item ? slots.item({ props: itemProps }) : (
-        <VTreeviewItem
-          { ...itemProps }
-          v-slots={ slotsWithItem }
-        />
+        slots.item?.({ props: itemProps }) ?? (
+          <VTreeviewItem
+            { ...itemProps }
+            v-slots={ slotsWithItem }
+          />
         ))
     })
   },

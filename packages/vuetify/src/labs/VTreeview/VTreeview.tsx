@@ -133,12 +133,11 @@ export const VTreeview = genericComponent<new <T>(
       return (
         <VList
           ref={ vListRef }
-          { ...omit(listProps, ['items', 'class']) }
+          { ...listProps }
           class={[
             'v-treeview',
             props.class,
           ]}
-          items={ props.items }
           v-model:opened={ opened.value }
           v-model:selected={ selected.value }
         >
