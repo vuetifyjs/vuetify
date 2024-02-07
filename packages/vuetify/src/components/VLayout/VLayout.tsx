@@ -6,8 +6,8 @@ import { makeComponentProps } from '@/composables/component'
 import { createLayout, makeLayoutProps } from '@/composables/layout'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
 import { Suspense } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVLayoutProps = propsFactory({
   ...makeComponentProps(),

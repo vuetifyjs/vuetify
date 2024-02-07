@@ -13,6 +13,7 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { makeTagProps } from '@/composables/tag'
@@ -24,7 +25,6 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 
 // Types
 import type { GenericProps } from '@/util'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 export const makeVBottomNavigationProps = propsFactory({
   bgColor: String,

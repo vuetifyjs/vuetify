@@ -99,8 +99,8 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
         : undefined
     ))
     const height = computed(() => {
-      const height: number = Number(vToolbarRef.value?.contentHeight ?? props.height)
-      const extensionHeight: number = vToolbarRef.value?.extensionHeight ?? 0
+      const height = Number(vToolbarRef.value?.contentHeight ?? props.height)
+      const extensionHeight = Number(vToolbarRef.value?.extensionHeight ?? 0)
 
       return (height + extensionHeight)
     })
