@@ -120,8 +120,8 @@ Due to limited space, full-screen dialogs may be more appropriate for mobile dev
 
 <example file="v-dialog/prop-fullscreen" />
 
-<!-- #### Without activator
+### Invite dialog
 
-If for some reason you are unable to use the activator slot, be sure to add the `.stop` modifier to the event that triggers the dialog.
+This example demonstrates a dialog that is used to invite users to a group.
 
-<example file="v-dialog/misc-without-activator" /> -->
+<example file="v-dialog/misc-invite-dialog" />
