@@ -2,7 +2,7 @@
 import { useProxiedModel } from './proxiedModel'
 
 // Utilities
-import { computed, inject, nextTick, onBeforeUnmount, onMounted, provide, reactive, toRef, unref, watch } from 'vue'
+import { computed, inject, nextTick, onBeforeUnmount, provide, reactive, toRef, unref, watch } from 'vue'
 import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -28,6 +28,7 @@ export interface GroupProps {
 export interface GroupProvide {
   register: (item: GroupItem, cmp: ComponentInternalInstance) => void
   unregister: (id: number) => void
+  ready: () => void
   select: (id: number, value: boolean) => void
   selected: Ref<Readonly<number[]>>
   isSelected: (id: number) => boolean
@@ -215,9 +216,9 @@ export function useGroup (
     }
   }
 
-  onMounted(() => {
-    forceMandatoryValue()
-  })
+  function ready () {
+    nextTick(forceMandatoryValue)
+  }
 
   onBeforeUnmount(() => {
     isUnmounted = true
@@ -292,6 +293,7 @@ export function useGroup (
     unregister,
     selected,
     select,
+    ready,
     disabled: toRef(props, 'disabled'),
     prev: () => step(items.length - 1),
     next: () => step(1),

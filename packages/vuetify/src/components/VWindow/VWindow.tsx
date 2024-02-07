@@ -243,7 +243,7 @@ export const VWindow = genericComponent<new <T>(
             height: transitionHeight.value,
           }}
         >
-          <Suspense>
+          <Suspense onResolve={ group.ready }>
             <>
               { slots.default?.({ group }) }
             </>

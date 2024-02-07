@@ -95,7 +95,7 @@ export const VBottomNavigation = genericComponent<new <T>(
       absolute: toRef(props, 'absolute'),
     })
 
-    useGroup(props, VBtnToggleSymbol)
+    const group = useGroup(props, VBtnToggleSymbol)
 
     provideDefaults({
       VBtn: {
@@ -136,7 +136,7 @@ export const VBottomNavigation = genericComponent<new <T>(
           ]}
         >
           <div class="v-bottom-navigation__content">
-            <Suspense>
+            <Suspense onResolve={ group.ready }>
               <>
                 { slots.default?.() }
               </>

@@ -48,7 +48,7 @@ export const VExpansionPanels = genericComponent()({
   },
 
   setup (props, { slots }) {
-    useGroup(props, VExpansionPanelSymbol)
+    const group = useGroup(props, VExpansionPanelSymbol)
 
     const { themeClasses } = provideTheme(props)
 
@@ -72,7 +72,7 @@ export const VExpansionPanels = genericComponent()({
         ]}
         style={ props.style }
       >
-        <Suspense>
+        <Suspense onResolve={ group.ready }>
           <>
             { slots.default?.() }
           </>

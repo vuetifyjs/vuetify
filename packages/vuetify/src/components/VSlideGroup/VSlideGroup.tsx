@@ -398,7 +398,7 @@ export const VSlideGroup = genericComponent<new <T>(
             onFocusout={ onFocusout }
             onKeydown={ onKeydown }
           >
-            <Suspense>
+            <Suspense onResolve={ group.ready }>
               <>
                 { slots.default?.(slotProps.value) }
               </>

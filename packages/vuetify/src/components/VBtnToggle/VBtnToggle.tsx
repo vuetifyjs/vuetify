@@ -46,7 +46,7 @@ export const VBtnToggle = genericComponent<new <T>(
   },
 
   setup (props, { slots }) {
-    const { isSelected, next, prev, select, selected } = useGroup(props, VBtnToggleSymbol)
+    const { isSelected, next, prev, select, selected, ready } = useGroup(props, VBtnToggleSymbol)
 
     useRender(() => {
       const btnGroupProps = VBtnGroup.filterProps(props)
@@ -60,7 +60,7 @@ export const VBtnToggle = genericComponent<new <T>(
           { ...btnGroupProps }
           style={ props.style }
         >
-          <Suspense>
+          <Suspense onResolve={ ready }>
             <>
               { slots.default?.({
                 isSelected,

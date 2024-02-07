@@ -65,7 +65,7 @@ export const VChipGroup = genericComponent<new <T>(
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
-    const { isSelected, select, next, prev, selected } = useGroup(props, VChipGroupSymbol)
+    const { isSelected, select, next, prev, selected, ready } = useGroup(props, VChipGroupSymbol)
 
     provideDefaults({
       VChip: {
@@ -92,7 +92,7 @@ export const VChipGroup = genericComponent<new <T>(
           ]}
           style={ props.style }
         >
-          <Suspense>
+          <Suspense onResolve={ ready }>
             <>
               { slots.default?.({
                 isSelected,

@@ -52,7 +52,7 @@ export const VItemGroup = genericComponent<new <T>(
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
-    const { isSelected, select, next, prev, selected } = useGroup(props, VItemGroupSymbol)
+    const { isSelected, select, next, prev, selected, ready } = useGroup(props, VItemGroupSymbol)
 
     return () => (
       <props.tag
@@ -63,7 +63,7 @@ export const VItemGroup = genericComponent<new <T>(
         ]}
         style={ props.style }
       >
-        <Suspense>
+        <Suspense onResolve={ ready }>
           <>
             { slots.default?.({
               isSelected,
