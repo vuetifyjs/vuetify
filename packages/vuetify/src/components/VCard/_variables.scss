@@ -6,7 +6,7 @@
 $card-actions-flex: none !default;
 $card-actions-min-height: 52px !default;
 $card-actions-padding: .5rem !default;
-$card-append-padding-inline-start: 1rem !default;
+$card-append-padding-inline-start: .5rem !default;
 $card-background: rgb(var(--v-theme-surface)) !default;
 $card-border-color: settings.$border-color-root !default;
 $card-border-radius: settings.$border-radius-root !default;
@@ -26,7 +26,7 @@ $card-overflow-wrap: break-word !default;
 $card-padding: 0 !default;
 $card-plain-opacity: .62 !default;
 $card-positions: absolute fixed !default;
-$card-prepend-padding-inline-end: 1rem !default;
+$card-prepend-padding-inline-end: .5rem !default;
 $card-transition-duration: 0.28s !default;
 $card-transition-property: box-shadow, opacity, background !default;
 $card-transition-timing-function: settings.$standard-easing !default;

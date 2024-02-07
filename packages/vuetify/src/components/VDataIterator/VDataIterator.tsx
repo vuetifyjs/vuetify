@@ -84,6 +84,7 @@ export const VDataIterator = genericComponent<VDataIteratorSlots>()({
     'update:sortBy': (value: any) => true,
     'update:options': (value: any) => true,
     'update:expanded': (value: any) => true,
+    'update:currentItems': (value: any) => true,
   },
 
   setup (props, { slots }) {

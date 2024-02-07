@@ -162,7 +162,7 @@ export function useValidation (
     })
   })
 
-  watch(isValid, () => {
+  watch([isValid, errorMessages], () => {
     form?.update(uid.value, isValid.value, errorMessages.value)
   })
 

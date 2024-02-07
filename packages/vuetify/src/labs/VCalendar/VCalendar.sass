@@ -73,7 +73,8 @@
     font-size: 1.5rem
 
 .v-calendar-weekly__head-weeknumber
-  background: rgb(var(--v-theme-on-surface-variant))
+  background: $calendar-weekly-weeknumber-background
+  color: $calendar-weekly-weeknumber-color
 
 .v-calendar-weekly__week
   display: flex
@@ -84,8 +85,9 @@
 
 .v-calendar-month__weeknumber
   padding-top: $calendar-weekly-weeknumber-padding-top
-  background: rgb(var(--v-theme-on-surface-variant))
+  background: $calendar-month-weeknumber-background
   border-bottom: $calendar-line-width solid $calendar-line-color
+  color: $calendar-month-weeknumber-color
   text-align: center
   font-size: $calendar-weekly-weeknumber-font-size
   font-weight: $calendar-weekly-weeknumber-font-weight

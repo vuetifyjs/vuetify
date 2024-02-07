@@ -5,7 +5,7 @@
   >
     {{ t('dashboard.perks.alert') }}
 
-    <app-link :href="rpath('/user/subscriptions/')">$1 per month</app-link>
+    <app-link :href="rpath('/user/subscriptions/')">$2.99 per month</app-link>
   </alert>
 
   <settings-header

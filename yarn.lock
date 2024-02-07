@@ -1444,12 +1444,24 @@
   resolved "https://registry.yarnpkg.com/@date-io/core/-/core-2.17.0.tgz#360a4d0641f069776ed22e457876e8a8a58c205e"
   integrity sha512-+EQE8xZhRM/hsY0CDTVyayMDDY5ihc4MqXCrPxooKw19yAzUIC6uUqsZeaOFNL9YKTNxYKrJP5DFgE8o5xRCOw==
 
+"@date-io/core@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@date-io/core/-/core-3.0.0.tgz#9fd2375383b5791b7211dfce3e576211f9ddce5e"
+  integrity sha512-S3j+IAQVBYNkQzchVVhX40eBkGDreBpScy9RXwTS5j2+k07+62pMVPisQ44Gq76Rqy5AOG/EZXCwBpY/jbemvA==
+
 "@date-io/date-fns@2.17.0":
   version "2.17.0"
   resolved "https://registry.yarnpkg.com/@date-io/date-fns/-/date-fns-2.17.0.tgz#1d9d0a02e0137524331819c9576a4e8e19a6142b"
   integrity sha512-L0hWZ/mTpy3Gx/xXJ5tq5CzHo0L7ry6KEO9/w/JWiFWFLZgiNVo3ex92gOl3zmzjHqY/3Ev+5sehAr8UnGLEng==
   dependencies:
     "@date-io/core" "^2.17.0"
+
+"@date-io/dayjs@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@date-io/dayjs/-/dayjs-3.0.0.tgz#46cf595d10639fe00b89e8c23cbcac22c0d542bb"
+  integrity sha512-vy7DSwoQiPA2L0stRqW3le7lcEBMjoMMEmbpCNkyoX3xXizKInFvhbnOBmCyusIQ7tL/WsNC4X5bVgdNWX0JLA==
+  dependencies:
+    "@date-io/core" "^3.0.0"
 
 "@emailjs/browser@^3.11.0":
   version "3.11.0"
@@ -4269,10 +4281,10 @@
     find-cache-dir "^3.3.2"
     upath "^2.0.1"
 
-"@vuetify/one@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@vuetify/one/-/one-0.6.0.tgz#51bc4c1024ff261cc56880216bea0cc9d0a0650c"
-  integrity sha512-SQyzFPun/SrqaJ1YY6ok2uogcT4HsTh1YvfMHv0b/Bq/mXEELrs90baqqI/RbrzNpJ2C6ns1WzIKnXmV/CepjQ==
+"@vuetify/one@^0.6.3":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@vuetify/one/-/one-0.6.3.tgz#9c8b7664650b033b8b9a027548b96829b2ec73c6"
+  integrity sha512-3OCfIUstwsj1y2nDJG3wBBW8b7Sl0rSumTf0FcGN2Z1GKlGe/1wn+byckKAPUXrjGWK4jFOgSob6ky6X+FwBuQ==
 
 "@vueuse/head@^1.3.1":
   version "1.3.1"

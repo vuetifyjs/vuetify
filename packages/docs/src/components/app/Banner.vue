@@ -38,7 +38,7 @@
     </a>
 
     <template #append>
-      <v-hover v-if="mdAndUp && banner.metadata.link">
+      <v-hover v-if="mdAndUp && banner.metadata.link && banner.metadata.link_text">
         <template #default="{ isHovering, props }">
           <v-btn
             :color="banner.metadata.link_color"
@@ -89,7 +89,7 @@
   const banners = useBannersStore()
 
   const banner = computed(() => banners.banner)
-  const height = computed(() => banner.value?.metadata.subtext ? 88 : 48)
+  const height = computed(() => banner.value?.metadata.height || (banner.value?.metadata.subtext ? 88 : 48))
   const hasPromotion = computed(() => {
     return !banner.value || !user.notifications.last.banner.includes(banner.value.slug)
   })

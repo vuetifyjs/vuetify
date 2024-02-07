@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Infinite scrollers
   title: Infinite scroller component
