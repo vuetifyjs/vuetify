@@ -40,6 +40,7 @@ interface ActivatorProps extends DelayProps {
   target: 'parent' | 'cursor' | (string & {}) | Element | ComponentPublicInstance | [x: number, y: number] | undefined
   activator: 'parent' | (string & {}) | Element | ComponentPublicInstance | undefined
   activatorProps: Record<string, any>
+  disabled: boolean
 
   openOnClick: boolean | undefined
   openOnHover: boolean
@@ -55,6 +56,7 @@ export const makeActivatorProps = propsFactory({
     type: Object as PropType<ActivatorProps['activatorProps']>,
     default: () => ({}),
   },
+  disabled: Boolean,
 
   openOnClick: {
     type: Boolean,
@@ -136,6 +138,13 @@ export function useActivator (
       runCloseDelay()
     },
   }
+
+  const activatorAttrs = computed(() => {
+    return {
+      role: !props.disabled ? 'button' : undefined,
+      tabindex: !props.disabled ? 0 : undefined,
+    }
+  })
 
   const activatorEvents = computed(() => {
     const events: Partial<typeof availableEvents> = {}
@@ -254,7 +263,7 @@ export function useActivator (
     if (val && IN_BROWSER) {
       scope = effectScope()
       scope.run(() => {
-        _useActivator(props, vm, { activatorEl, activatorEvents })
+        _useActivator(props, vm, { activatorEl, activatorAttrs, activatorEvents })
       })
     } else if (scope) {
       scope.stop()
@@ -265,13 +274,17 @@ export function useActivator (
     scope?.stop()
   })
 
-  return { activatorEl, activatorRef, target, targetEl, targetRef, activatorEvents, contentEvents, scrimEvents }
+  return { activatorEl, activatorRef, target, targetEl, targetRef, activatorAttrs, activatorEvents, contentEvents, scrimEvents }
 }
 
 function _useActivator (
   props: ActivatorProps,
   vm: ComponentInternalInstance,
-  { activatorEl, activatorEvents }: Pick<ReturnType<typeof useActivator>, 'activatorEl' | 'activatorEvents'>
+  {
+    activatorEl,
+    activatorAttrs,
+    activatorEvents,
+  }: Pick<ReturnType<typeof useActivator>, 'activatorEl' | 'activatorAttrs' | 'activatorEvents'>
 ) {
   watch(() => props.activator, (val, oldVal) => {
     if (oldVal && val !== oldVal) {
@@ -294,13 +307,13 @@ function _useActivator (
   function bindActivatorProps (el = getActivator(), _props = props.activatorProps) {
     if (!el) return
 
-    bindProps(el, mergeProps(activatorEvents.value, _props))
+    bindProps(el, mergeProps(activatorAttrs.value, activatorEvents.value, _props))
   }
 
   function unbindActivatorProps (el = getActivator(), _props = props.activatorProps) {
     if (!el) return
 
-    unbindProps(el, mergeProps(activatorEvents.value, _props))
+    unbindProps(el, mergeProps(activatorAttrs.value, activatorEvents.value, _props))
   }
 
   function getActivator (selector = props.activator): HTMLElement | undefined {
