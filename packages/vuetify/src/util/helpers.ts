@@ -547,6 +547,8 @@ export function findChildrenWithProvide (
     } else if (vnode.component.subTree) {
       return findChildrenWithProvide(key, vnode.component.subTree).flat(1)
     }
+  } else if (vnode.suspense) {
+    return findChildrenWithProvide(key, vnode.suspense.activeBranch ?? vnode.suspense.pendingBranch)
   }
 
   return []
