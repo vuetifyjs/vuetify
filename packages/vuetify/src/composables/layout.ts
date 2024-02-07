@@ -14,7 +14,7 @@ import {
   ref,
   shallowRef,
 } from 'vue'
-import { convertToUnit, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory } from '@/util'
+import { convertToUnit, eagerComputed, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory } from '@/util'
 
 // Types
 import type { ComponentInternalInstance, CSSProperties, InjectionKey, Prop, Ref } from 'vue'
@@ -183,7 +183,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
   const disabledTransitions = reactive(new Map<string, Ref<boolean>>())
   const { resizeRef, contentRect: layoutRect } = useResizeObserver()
 
-  const layers = computed(() => {
+  const layers = eagerComputed(() => {
     const uniquePriorities = [...new Set([...priorities.values()].map(p => p.value))].sort((a, b) => a - b)
     const layout = []
     for (const p of uniquePriorities) {
@@ -211,7 +211,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     }
   })
 
-  const items = computed(() => {
+  const items = eagerComputed(() => {
     return layers.value.slice(1).map(({ id }, index) => {
       const { layer } = layers.value[index]
       const size = layoutSizes.get(id)
