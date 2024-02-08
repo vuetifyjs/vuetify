@@ -1,6 +1,5 @@
 ---
 backmatter: false
-emphasized: true
 fluid: true
 meta:
   nav: Made with Vuetify

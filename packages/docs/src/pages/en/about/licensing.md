@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Licensing
   title: Licensing

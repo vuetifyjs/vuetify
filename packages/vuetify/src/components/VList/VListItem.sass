@@ -78,6 +78,9 @@
   > .v-avatar ~ .v-list-item__spacer
     width: $list-item-avatar-margin-start
 
+  > .v-list-item-action ~ .v-list-item__spacer
+    width: $list-item-action-spacer-width
+
   .v-list-item--slim &
     > .v-badge,
     > .v-icon,
@@ -87,6 +90,9 @@
 
     > .v-avatar ~ .v-list-item__spacer
       width: $list-item-slim-avatar-spacer-width
+
+    > .v-list-item-action ~ .v-list-item__spacer
+      width: $list-item-slim-action-spacer-width
 
   .v-list-item--three-line &
     align-self: start
@@ -110,6 +116,9 @@
   > .v-avatar ~ .v-list-item__spacer
     width: $list-item-avatar-margin-end
 
+  > .v-list-item-action ~ .v-list-item__spacer
+    width: $list-item-action-spacer-width
+
   .v-list-item--slim &
     > .v-badge,
     > .v-icon,
@@ -119,6 +128,9 @@
 
     > .v-avatar ~ .v-list-item__spacer
       width: $list-item-slim-avatar-spacer-width
+
+    > .v-list-item-action ~ .v-list-item__spacer
+      width: $list-item-slim-action-spacer-width
 
   .v-list-item--three-line &
     align-self: start
@@ -132,16 +144,17 @@
   align-self: center
   display: flex
   align-items: center
-  grid-area: prepend
   flex: none
   transition: inherit
   transition-property: height, width
 
   &--start
-    margin-inline-end: $list-item-action-margin-start
+    margin-inline-end: $list-item-action-margin-end
+    margin-inline-start: -$list-item-action-margin-start
 
   &--end
-    margin-inline-start: $list-item-action-margin-end
+    margin-inline-start: $list-item-action-margin-start
+    margin-inline-end: -$list-item-action-margin-end
 
 .v-list-item-media
   margin-top: $list-item-media-margin-top

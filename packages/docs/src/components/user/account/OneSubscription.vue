@@ -15,38 +15,52 @@
     </template>
 
     <template #append>
-      <v-btn
-        :color="one.isSubscriber ? 'error' : 'primary'"
+      <PrimaryBtn
+        v-if="!one.isSubscriber"
         :loading="one.isLoading"
-        :text="one.isSubscriber ? 'Cancel' : 'Subscribe'"
-        border
-        class="text-none border-error border-opacity-100"
-        size="small"
-        slim
-        width="80"
-        :variant="one.isSubscriber ? 'plain' : 'outlined'"
-        @click="onClick"
+        color="success"
+        prepend-icon="mdi-check"
+        text="Activate"
+        @click="one.subscribe"
       >
         <template #loader>
-          <v-progress-circular
-            indeterminate
-            size="16"
-            width="1"
-          />
+          <v-progress-circular />
         </template>
-      </v-btn>
+      </PrimaryBtn>
+
+      <PrimaryBtn
+        v-if="hasBilling"
+        :loading="billing"
+        class="ms-2"
+        prepend-icon="mdi-credit-card-outline"
+        text="Billing"
+        @click="onClickBilling"
+      >
+        <template #loader>
+          <v-progress-circular />
+        </template>
+      </PrimaryBtn>
     </template>
   </v-list-item>
 </template>
 
 <script setup>
+  // Utilities
+  import { computed, shallowRef } from 'vue'
+
   // Store
-  import { useAuthStore, useOneStore } from '@vuetify/one'
+  import { useAuthStore, useHttpStore, useOneStore } from '@vuetify/one'
 
   const auth = useAuthStore()
+  const http = useHttpStore()
   const one = useOneStore()
 
-  function onClick () {
-    one.isSubscriber ? one.cancel() : one.subscribe()
+  const hasBilling = computed(() => !!one.subscription?.tierName)
+
+  const billing = shallowRef(false)
+
+  function onClickBilling () {
+    billing.value = true
+    window.location.href = http.url + '/one/manage'
   }
 </script>

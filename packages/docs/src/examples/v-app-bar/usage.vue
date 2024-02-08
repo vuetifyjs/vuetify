@@ -55,6 +55,14 @@
   const slots = computed(() => {
     let str = ''
 
+    str += `
+  <template v-slot:prepend>
+    <v-app-bar-nav-icon></v-app-bar-nav-icon>
+  </template>
+
+  <v-app-bar-title>Application Bar</v-app-bar-title>
+`
+
     if (actions.value) {
       str += `
   <template v-slot:append>
