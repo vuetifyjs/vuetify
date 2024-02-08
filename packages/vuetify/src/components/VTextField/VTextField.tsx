@@ -89,8 +89,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       return props.counter
     })
 
-    useMask(props)
-
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
 
     function onIntersect (
@@ -105,6 +103,8 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VField>()
     const inputRef = ref<HTMLInputElement>()
+
+    const { maskedValue } = useMask(props, model)
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
       props.persistentPlaceholder ||
@@ -163,6 +163,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
       const fieldProps = filterFieldProps(props)
+      const inputValue = props.mask ? maskedValue.value : model.value
 
       return (
         <VInput
@@ -216,7 +217,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                     const inputNode = (
                       <input
                         ref={ inputRef }
-                        value={ model.value }
+                        value={ inputValue }
                         onInput={ onInput }
                         v-intersect={[{
                           handler: onIntersect,
