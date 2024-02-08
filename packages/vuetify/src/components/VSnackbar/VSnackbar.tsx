@@ -22,10 +22,13 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { computed, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
 
+// Types
+import type { Ref } from 'vue'
+
 type VSnackbarSlots = {
   activator: { isActive: boolean, props: Record<string, any> }
   default: never
-  actions: never
+  actions: { isActive: Ref<boolean> }
   text: never
 }
 
@@ -252,7 +255,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
               }}
             >
               <div class="v-snackbar__actions">
-                { slots.actions() }
+                { slots.actions({ isActive }) }
               </div>
             </VDefaultsProvider>
           )}
