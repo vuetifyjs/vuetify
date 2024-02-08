@@ -520,6 +520,7 @@ export const VAutocomplete = genericComponent<new <
                                       modelValue={ isSelected }
                                       ripple={ false }
                                       tabindex="-1"
+                                      aria-label={ isSelected ? 'checked' : 'not checked' }
                                     />
                                   ) : undefined }
 
