@@ -145,7 +145,7 @@ export const VBottomNavigation = genericComponent<new <T>(
       )
     })
 
-    return { layoutIsReady }
+    return layoutIsReady
   },
 })
 

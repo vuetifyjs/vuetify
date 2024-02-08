@@ -50,7 +50,7 @@ export const VMain = genericComponent()({
       </props.tag>
     ))
 
-    return { layoutIsReady }
+    return layoutIsReady
   },
 })
 

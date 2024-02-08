@@ -284,10 +284,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       )
     })
 
-    return {
-      layoutIsReady,
-      isStuck,
-    }
+    return layoutIsReady.then(() => ({ isStuck }))
   },
 })
 

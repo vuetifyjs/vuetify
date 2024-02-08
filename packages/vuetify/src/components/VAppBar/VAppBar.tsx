@@ -160,7 +160,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       )
     })
 
-    return { layoutIsReady }
+    return layoutIsReady
   },
 })
 
