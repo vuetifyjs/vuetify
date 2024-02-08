@@ -9,6 +9,7 @@ import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 // Composables
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
+import { makeMaskProps, useMask } from '@/composables/mask'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
@@ -44,6 +45,7 @@ export const makeVTextFieldProps = propsFactory({
 
   ...makeVInputProps(),
   ...makeVFieldProps(),
+  ...makeMaskProps(),
 }, 'VTextField')
 
 export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
@@ -86,6 +88,8 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
 
       return props.counter
     })
+
+    useMask(props)
 
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
 
