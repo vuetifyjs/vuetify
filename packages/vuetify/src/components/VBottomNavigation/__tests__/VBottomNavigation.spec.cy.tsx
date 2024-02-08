@@ -32,7 +32,7 @@ describe('VBottomNavigation', () => {
   it('should not be visible if modelValue is false', () => {
     cy.mount(() => (
       <VLayout>
-        <VBottomNavigation modelValue={false}></VBottomNavigation>
+        <VBottomNavigation modelValue={ false }></VBottomNavigation>
       </VLayout>
     ))
 
