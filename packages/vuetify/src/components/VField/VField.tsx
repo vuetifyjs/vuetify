@@ -73,6 +73,7 @@ export const makeVFieldProps = propsFactory({
     type: Boolean,
     default: null,
   },
+  labelId: { type: String, default: undefined },
   error: Boolean,
   flat: Boolean,
   label: String,
@@ -303,7 +304,7 @@ export const VField = genericComponent<new <T>(
               </VFieldLabel>
             )}
 
-            <VFieldLabel ref={ labelRef } for={ id.value }>
+            <VFieldLabel id={ props.labelId } ref={ labelRef } for={ id.value }>
               { label() }
             </VFieldLabel>
 

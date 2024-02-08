@@ -375,7 +375,6 @@ export const VSelect = genericComponent<new <
           onMousedown:control={ onMousedownControl }
           onBlur={ onBlur }
           onKeydown={ onKeydown }
-          aria-label={ t(label.value) }
           title={ t(label.value) }
         >
           {{
