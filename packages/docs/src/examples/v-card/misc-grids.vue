@@ -3,32 +3,6 @@
     class="mx-auto"
     max-width="500"
   >
-    <!-- <v-system-bar
-      color="indigo darken-2"
-      dark
-    >
-      <v-spacer></v-spacer>
-
-      <v-icon icon="mdi-window-minimize"></v-icon>
-
-      <v-icon icon="mdi-window-maximize"></v-icon>
-
-      <v-icon icon="mdi-close"></v-icon>
-    </v-system-bar>
-
-    <v-toolbar
-      color="indigo"
-      dark
-    >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-      <v-toolbar-title>Discover</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon="mdi-magnify"></v-btn>
-    </v-toolbar> -->
-
     <v-container fluid>
       <v-row dense>
         <v-col
