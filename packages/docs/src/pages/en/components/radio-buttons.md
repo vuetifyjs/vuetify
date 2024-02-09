@@ -49,7 +49,7 @@ Using the **v-model** (or **model-value**) you can access and control the select
 <example file="v-radio-group/prop-model-group" />
 
 ::: info
-  If you are using integer values with **model-value**, you will need to use `:value` to set the value of the child `v-radio` otherwise it will be evaluated as a sting.
+  If you are using integer values with **model-value**, you will need to use `:value` to set the value of the child `v-radio` otherwise it will be evaluated as a string.
 :::
 
 #### Model (radio)
