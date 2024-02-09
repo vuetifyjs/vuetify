@@ -1,5 +1,5 @@
 // Utilities
-import { computed, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
@@ -62,7 +62,7 @@ const convert = (mask: MaskType, char: string): string => {
 
 const maskText = (text: string | null | undefined, masked: string | string[]): string => {
   if (text == null) return ''
-  text = String(text)
+
   if (!masked.length || !text.length) return text
   if (!Array.isArray(masked)) masked = masked.split('')
 
@@ -93,7 +93,7 @@ const maskText = (text: string | null | undefined, masked: string | string[]): s
 
     maskIndex++
   }
-
+  console.log('--maskText---', newText)
   return newText
 }
 
@@ -101,15 +101,60 @@ const unmaskText = (text: string): string => {
   return text ? String(text).replace(new RegExp(defaultDelimiters.source, 'g'), '') : text
 }
 
-export function useMask (props: MaskProps, model: Ref<any>) {
+export function useMask (props: MaskProps, model: Ref<any>, inputRef: Ref<HTMLInputElement | undefined>) {
+  const masks = computed(() => props.mask ? props.mask.split('') : [])
+  const selection = ref(0)
+  const lazySelection = ref(0)
+  const lazyValue = computed(() => unmaskText(model.value))
+  // const maskedValue = computed(() => maskText(lazyValue.value, masks.value))
   const maskedValue = ref('')
-  const masked = computed(() => props.mask ? props.mask.split('') : [])
 
   watch(model, val => {
-    maskedValue.value = maskText(val, masked.value)
+    console.log('-watch model-', lazyValue.value)
+    maskedValue.value = maskText(val, masks.value)
+    nextTick(() => {
+      updateRange()
+    })
   })
 
+  function setCaretPosition (newSelection: number) {
+    selection.value = newSelection
+    inputRef.value && inputRef.value.setSelectionRange(selection.value, selection.value)
+  }
+
+  function updateRange () {
+    if (!inputRef.value) return
+
+    let selection = 0
+    const newValue = inputRef.value.value
+
+    // console.log('updateRange:newValue', newValue)
+    if (newValue) {
+      for (let index = 0; index < newValue.length; index++) {
+        // console.log('updateRange: loop lazySelection', lazySelection.value)
+        if (lazySelection.value <= 0) break
+        isMaskDelimiter(newValue[index]) || lazySelection.value--
+        selection++
+      }
+    }
+    // console.log('updateRange:', selection)
+    setCaretPosition(selection)
+  }
+
+  function resetSelections () {
+    if (!inputRef.value?.selectionEnd) return
+
+    selection.value = inputRef.value.selectionEnd
+    lazySelection.value = 0
+
+    for (let index = 0; index < selection.value; index++) {
+      isMaskDelimiter(inputRef.value.value[index]) || lazySelection.value++
+    }
+  }
+
   return {
+    lazyValue,
     maskedValue,
+    resetSelections,
   }
 }

@@ -70,7 +70,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
   },
 
   setup (props, { attrs, emit, slots }) {
-    const model = useProxiedModel(props, 'modelValue')
+    
     const { isFocused, focus, blur } = useFocus(props)
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function' ? props.counterValue(model.value)
@@ -104,7 +104,22 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     const vFieldRef = ref<VField>()
     const inputRef = ref<HTMLInputElement>()
 
-    const { maskedValue } = useMask(props, model)
+    const { maskedValue, lazyValue, resetSelections } = useMask(props, model, inputRef)
+
+    const model = useProxiedModel(
+      props,
+      'modelValue',
+      null,
+      val => {
+        console.log('tranform in', val)
+        return val
+      },
+      val => {
+        console.log('tranform out', val)
+        return lazyValue.value
+      },
+    )
+
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
       props.persistentPlaceholder ||
@@ -143,6 +158,8 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       })
     }
     function onInput (e: Event) {
+      console.log('onInput', e.target.value)
+      resetSelections()
       const el = e.target as HTMLInputElement
       model.value = el.value
       if (
@@ -164,6 +181,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
       const fieldProps = filterFieldProps(props)
       const inputValue = props.mask ? maskedValue.value : model.value
+      console.log('--re-render', inputValue, lazyValue.value)
 
       return (
         <VInput
