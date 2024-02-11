@@ -114,14 +114,17 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       },
       val => {
         if (props.mask && val !== lazyValue.value) {
-          // In case of token is #-# and input value comes as '2-23'
-          const enforcedMaskedValue = maskText(unmaskText(val)) // enforce token format, in this case, '2-2'
-          const newLazyValue = unmaskText(enforcedMaskedValue) // extract lazy value from above enforced formmated masked value, in this case, '22'
+          // In case of token is #-# and the input value is '2-23'
+          // Create a variable that holds the enforced token format; in this case, '2-2'
+          const enforcedMaskedValue = maskText(unmaskText(val))
+          // Extract the lazy value from the previously enforced formatted masked value; in this case, '22'
+          const newLazyValue = unmaskText(enforcedMaskedValue)
+
           if (newLazyValue === lazyValue.value) {
-            // When new lazy value equals to previous lazy value,
-            // v-model remains the same (no mutation), so render function doesn't trigger,
-            // so input tag value must be re-enforced with enforced masked value.
-            // In this case, enforce '2-23' to '2-2'
+            // When the newLazyValue is equal to the previous lazy value
+            // the v-model remains unchanged, as a result, the render function doesn't trigger,
+            // the input tag value must be reinforced with the enforced masked value.
+            // In this case, '2-23' is enforced to '2-2'
             inputRef.value!.value = enforcedMaskedValue
             return lazyValue.value
           }
