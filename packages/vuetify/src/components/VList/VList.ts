@@ -95,6 +95,7 @@ export default VSheet.extend<options>().extend({
         role: this.isInNav || this.isInMenu ? undefined : 'list',
         ...this.attrs$,
       },
+      on: this.listeners$,
     }
 
     return h(this.tag, this.setBackgroundColor(this.color, data), getSlot(this))
