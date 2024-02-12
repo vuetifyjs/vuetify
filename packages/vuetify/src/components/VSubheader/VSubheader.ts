@@ -4,6 +4,7 @@ import './VSubheader.sass'
 // Mixins
 import Themeable from '../../mixins/themeable'
 import mixins from '../../util/mixins'
+import { getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -27,6 +28,6 @@ export default mixins(
       },
       attrs: this.$attrs,
       on: this.$listeners,
-    }, this.$slots.default)
+    }, getSlot(this))
   },
 })

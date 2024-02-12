@@ -9,6 +9,7 @@ import VIcon from '../VIcon'
 // Mixins
 import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
+import { getSlot } from '../../util/helpers'
 
 const baseMixins = mixins(
   Colorable,
@@ -52,14 +53,10 @@ export default baseMixins.extend<options>().extend({
     genBody () {
       return this.$createElement('div', {
         staticClass: 'v-timeline-item__body',
-      }, this.$slots.default)
+      }, getSlot(this))
     },
     genIcon (): VNode | VNode[] {
-      if (this.$slots.icon) {
-        return this.$slots.icon
-      }
-
-      return this.$createElement(VIcon, {
+      return getSlot(this, 'icon') || this.$createElement(VIcon, {
         props: {
           color: this.iconColor,
           dark: !this.theme.isDark,
@@ -96,7 +93,7 @@ export default baseMixins.extend<options>().extend({
     genOpposite () {
       return this.$createElement('div', {
         staticClass: 'v-timeline-item__opposite',
-      }, this.$slots.opposite)
+      }, getSlot(this, 'opposite'))
     },
   },
 

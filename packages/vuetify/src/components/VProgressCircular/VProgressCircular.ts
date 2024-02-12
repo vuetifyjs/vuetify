@@ -8,7 +8,7 @@ import intersect from '../../directives/intersect'
 import Colorable from '../../mixins/colorable'
 
 // Utils
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlot } from '../../util/helpers'
 
 // Types
 import { VNode, VNodeChildren } from 'vue'
@@ -136,7 +136,7 @@ export default Colorable.extend({
     genInfo (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-progress-circular__info',
-      }, this.$slots.default)
+      }, getSlot(this))
     },
     onObserve (entries: IntersectionObserverEntry[], observer: IntersectionObserver, isIntersecting: boolean) {
       this.isVisible = isIntersecting

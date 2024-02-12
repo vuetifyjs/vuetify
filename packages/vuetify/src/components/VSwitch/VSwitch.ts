@@ -14,7 +14,7 @@ import { VFabTransition } from '../transitions'
 import VProgressCircular from '../VProgressCircular/VProgressCircular'
 
 // Helpers
-import { keyCodes } from '../../util/helpers'
+import { getSlot, keyCodes } from '../../util/helpers'
 
 // Types
 import { VNode, VNodeData } from 'vue'
@@ -109,7 +109,7 @@ export default Selectable.extend({
       return this.$createElement(VFabTransition, {}, [
         this.loading === false
           ? null
-          : this.$slots.progress || this.$createElement(VProgressCircular, {
+          : getSlot(this, 'progress') || this.$createElement(VProgressCircular, {
             props: {
               color: (this.loading === true || this.loading === '')
                 ? (this.color || 'primary')

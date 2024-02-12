@@ -8,6 +8,7 @@ import Toggleable from './../../mixins/toggleable'
 
 // Utilities
 import mixins from '../../util/mixins'
+import { getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -75,7 +76,7 @@ export default mixins(
     genContent () {
       return this.$createElement('div', {
         staticClass: 'v-overlay__content',
-      }, this.$slots.default)
+      }, getSlot(this))
     },
   },
 

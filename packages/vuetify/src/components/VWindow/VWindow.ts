@@ -13,6 +13,7 @@ import Touch from '../../directives/touch'
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 import { BaseItemGroup } from '../VItemGroup/VItemGroup'
+import { getSlot } from '../../util/helpers'
 
 /* @vue/component */
 export default BaseItemGroup.extend({
@@ -118,7 +119,7 @@ export default BaseItemGroup.extend({
 
   methods: {
     genDefaultSlot () {
-      return this.$slots.default
+      return getSlot(this)
     },
     genContainer (): VNode {
       const children = [this.genDefaultSlot()]

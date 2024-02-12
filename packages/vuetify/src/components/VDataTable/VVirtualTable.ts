@@ -9,7 +9,7 @@ import { PropValidator } from 'vue/types/options'
 import mixins from '../../util/mixins'
 
 // Utiltiies
-import { convertToUnit, debounce } from '../../util/helpers'
+import { convertToUnit, debounce, getSlot } from '../../util/helpers'
 
 // Types
 const baseMixins = mixins(VSimpleTable)
@@ -155,9 +155,9 @@ export default baseMixins.extend<options>().extend({
       staticClass: 'v-data-table v-virtual-table',
       class: this.classes,
     }, [
-      this.$slots.top,
+      getSlot(this, 'top'),
       this.genWrapper(),
-      this.$slots.bottom,
+      getSlot(this, 'bottom'),
     ])
   },
 })
