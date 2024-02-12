@@ -48,10 +48,19 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
           { ...treeviewGroupProps }
         >
           {{
-            activator: ({ props: activatorProps }) =>
-              <VTreeviewItem { ...itemProps } { ...activatorProps } v-slots={ slotsWithItem } />,
+            activator: ({ props: activatorProps }) => (
+              <VTreeviewItem
+                { ...itemProps }
+                { ...activatorProps }
+                v-slots={ slotsWithItem }
+              />
+            ),
             default: () => (
-              <VTreeviewChildren { ...props } items={ children } v-slots={ slots } />
+              <VTreeviewChildren
+                { ...props }
+                items={ children }
+                v-slots={ slots }
+              />
             ),
           }}
         </VTreeviewGroup>

@@ -111,9 +111,8 @@ export const VTreeview = genericComponent<new <T>(
         activeColor,
         baseColor,
         color,
-        collapseIcon: props.collapseIcon,
-        expandIcon: props.expandIcon,
-        subgroup: true,
+        collapseIcon: toRef(props, 'collapseIcon'),
+        expandIcon: toRef(props, 'expandIcon'),
       },
       VTreeviewItem: {
         activeClass: toRef(props, 'activeClass'),
@@ -138,10 +137,14 @@ export const VTreeview = genericComponent<new <T>(
             'v-treeview',
             props.class,
           ]}
+          style={ props.style }
           v-model:opened={ opened.value }
           v-model:selected={ selected.value }
         >
-          <VTreeviewChildren items={ items.value } v-slots={ slots }></VTreeviewChildren>
+          <VTreeviewChildren
+            items={ items.value }
+            v-slots={ slots }
+          ></VTreeviewChildren>
         </VList>
       )
     })

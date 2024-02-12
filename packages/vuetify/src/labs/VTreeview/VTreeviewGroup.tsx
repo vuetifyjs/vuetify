@@ -34,28 +34,32 @@ export const VTreeviewGroup = genericComponent<VListGroupSlots>()({
       },
     }))
 
-    useRender(() => (
-      <VListGroup
-        ref={ vListGroupRef }
-        { ...omit(props, ['class']) }
-        class={[
-          'v-treeview-group',
-          props.class,
-        ]}
-        subgroup
-      >
-        {{
-          ...slots,
-          activator: slots.activator ? slotProps => (
-            <>
-              <VDefaultsProvider defaults={ activatorDefaults.value }>
-                { slots.activator?.(slotProps) }
-              </VDefaultsProvider>
-            </>
-          ) : undefined,
-        }}
-      </VListGroup>
-    ))
+    useRender(() => {
+      const listGroupProps = VListGroup.filterProps(props)
+
+      return (
+        <VListGroup
+          { ...listGroupProps }
+          ref={ vListGroupRef }
+          class={[
+            'v-treeview-group',
+            props.class,
+          ]}
+          subgroup
+        >
+          {{
+            ...slots,
+            activator: slots.activator ? slotProps => (
+              <>
+                <VDefaultsProvider defaults={ activatorDefaults.value }>
+                  { slots.activator?.(slotProps) }
+                </VDefaultsProvider>
+              </>
+            ) : undefined,
+          }}
+        </VListGroup>
+      )
+    })
 
     return {}
   },
