@@ -85,7 +85,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
               return (
                 <>
                   { props.toggleIcon && (
-                    <VListItemAction>
+                    <VListItemAction start={ false }>
                       <VBtn
                         density="compact"
                         icon={ props.toggleIcon }

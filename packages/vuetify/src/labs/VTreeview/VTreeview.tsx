@@ -40,6 +40,7 @@ export const makeVTreeviewProps = propsFactory({
     expandIcon: '$treeviewExpand',
     selectStrategy: 'independent' as const,
     openStrategy: 'multiple' as const,
+    slim: true,
   }), ['nav']),
 }, 'VTreeview')
 
