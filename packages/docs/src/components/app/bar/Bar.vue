@@ -54,17 +54,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useAppStore } from '@/store/app'
-  import { useDisplay, useTheme } from 'vuetify'
-  import { useRoute } from 'vue-router'
-
-  // Stores
-  import { useUserStore } from '@vuetify/one'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const app = useAppStore()
   const user = useUserStore()
   const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()

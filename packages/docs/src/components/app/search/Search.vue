@@ -108,18 +108,9 @@
   // Types
   import SearchResults from '@/components/app/drawer/SearchResults.vue'
 
-  // Composables
-  import { useDisplay } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
-  import { onBeforeRouteLeave, useRoute } from 'vue-router'
-
   // Utilities
   import { AisConfigure, AisHits, AisInstantSearch, AisPoweredBy } from 'vue-instantsearch/vue3/es/src/instantsearch.js'
-  import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
   import algoliasearch from 'algoliasearch'
-
-  // Stores
-  import { useUserStore } from '@vuetify/one'
 
   // Types
   import type { AlgoliaSearchHelper } from 'algoliasearch-helper'

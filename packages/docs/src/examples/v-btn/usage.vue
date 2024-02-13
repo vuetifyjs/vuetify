@@ -21,10 +21,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref, watch } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const variants = ['outlined', 'tonal', 'text', 'plain']
   const name = 'v-btn'
   const model = ref('default')

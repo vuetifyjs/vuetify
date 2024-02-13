@@ -17,9 +17,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed } from 'vue'
-
   const props = defineProps({
     density: {
       type: String,

@@ -15,13 +15,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-  import { useRoute } from 'vue-router'
-
-  // Utilities
-  import { computed } from 'vue'
-
   // Language
   import locales from '@/i18n/locales.json'
 

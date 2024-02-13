@@ -84,14 +84,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-  import { useJobsStore } from '@/store/jobs'
-
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { useGtag } from 'vue-gtag-next'
-
   const { event } = useGtag()
   const { jobs } = useJobsStore()
   const { t } = useI18n()

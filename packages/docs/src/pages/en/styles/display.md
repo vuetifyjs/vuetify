@@ -17,7 +17,7 @@ The display helpers allow you to control the display of content. This includes b
 
 <PromotedEntry />
 
-<breakpoints-table />
+<FeaturesBreakpointsTable />
 
 ## Display
 

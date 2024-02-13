@@ -35,13 +35,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useDisplay } from 'vuetify'
-  import { useSponsorsStore } from '@/store/sponsors'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const { smAndDown } = useDisplay()
   const sponsorStore = useSponsorsStore()
 

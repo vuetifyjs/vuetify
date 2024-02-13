@@ -17,13 +17,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const props = defineProps({
     section: String,
     name: String,

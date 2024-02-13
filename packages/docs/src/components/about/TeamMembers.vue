@@ -19,12 +19,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useTeamStore } from '@/store/team'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const props = defineProps({ team: String })
   const teams = useTeamStore()
   const members = computed(() => teams.members.filter(member => member.team === props.team))

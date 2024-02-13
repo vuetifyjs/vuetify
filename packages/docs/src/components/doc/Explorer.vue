@@ -56,11 +56,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { camelize, nextTick, ref, shallowRef, watch } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
-  import { kebabCase } from 'lodash-es'
-
   const route = useRoute()
   const router = useRouter()
 

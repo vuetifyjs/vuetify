@@ -8,9 +8,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { createAdProps, useAd } from '@/composables/ad'
-
   const props = defineProps(createAdProps())
 
   const { ad, description } = useAd(props)

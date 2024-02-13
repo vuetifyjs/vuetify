@@ -24,10 +24,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useDisplay } from 'vuetify'
-  import { createAdProps, useAd } from '@/composables/ad'
-
   const props = defineProps({
     color: String,
 

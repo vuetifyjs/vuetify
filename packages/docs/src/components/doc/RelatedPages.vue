@@ -16,8 +16,5 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useRoute } from 'vue-router'
-
   const related = useRoute().meta.related
 </script>

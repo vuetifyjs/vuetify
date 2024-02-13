@@ -24,10 +24,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-toolbar'
   const model = ref('default')
   const collapse = ref()

@@ -26,18 +26,6 @@
 </template>
 
 <script setup>
-  // Components
-  import ThemeCard from './ThemeCard.vue'
-
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-
-  // Stores
-  import { useShopifyStore } from '@/store/shopify'
-
   const { t } = useI18n()
   const store = useShopifyStore()
 

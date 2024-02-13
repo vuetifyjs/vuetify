@@ -58,16 +58,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useDisplay, useTheme } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
-
-  // Stores
-  import { useAuthStore, useUserStore } from '@vuetify/one'
-
-  // Utilities
-  import { rpath } from '@/util/routes'
-
   const auth = useAuthStore()
   const user = useUserStore()
 

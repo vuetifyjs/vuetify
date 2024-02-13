@@ -72,16 +72,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useBannersStore } from '@/store/banners'
-  import { useDisplay } from 'vuetify'
-  import { useGtag } from 'vue-gtag-next'
-  import { useRoute } from 'vue-router'
-  import { useUserStore } from '@vuetify/one'
-
-  // Utilities
-  import { computed, onBeforeMount } from 'vue'
-
   const { event } = useGtag()
   const { mdAndUp } = useDisplay()
   const { name } = useRoute()

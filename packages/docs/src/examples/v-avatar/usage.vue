@@ -29,10 +29,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const model = ref('default')
   const icon = ref(false)
   const image = ref(false)

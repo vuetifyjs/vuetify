@@ -29,10 +29,11 @@
 </template>
 
 <script setup lang="ts">
-  import { useRoute } from 'vue-router'
-  import { rpath } from '@/util/routes'
-  import { useHead } from '@unhead/vue'
+  // Components
   import DefaultLayout from '@/layouts/default.vue'
+
+  // Utilities
+  import { useHead } from '@unhead/vue'
 
   const route = useRoute()
   useHead({

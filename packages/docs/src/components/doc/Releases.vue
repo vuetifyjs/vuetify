@@ -159,16 +159,10 @@
 
 <script setup lang="ts">
   // Composables
-  import { useI18n } from 'vue-i18n'
-  import { useDate, useDisplay, version } from 'vuetify'
-  import { useRoute, useRouter } from 'vue-router'
+  import { version } from 'vuetify'
 
-  // Stores
-  import { Release, useReleasesStore } from '@/store/releases'
-
-  // Utilities
-  import { computed, onBeforeMount, ref, shallowRef, watch } from 'vue'
-  import { wait } from '@/util/helpers'
+  // Types
+  import type { Release } from '@/stores/releases'
 
   const reactions = {
     '+1': '👍',

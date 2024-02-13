@@ -31,10 +31,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-progress-linear'
   const model = ref('default')
   const color = ref()

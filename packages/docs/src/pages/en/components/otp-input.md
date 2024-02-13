@@ -29,7 +29,7 @@ This feature was introduced in [v3.4.0 (Blackguard)](/introduction/roadmap/#v3-4
 
 Here we display a list of settings that could be applied within an application.
 
-<ExamplesUsagename="v-otp-input" />
+ExamplesUsage name="v-otp-input" />
 
 <PromotedEntry />
 

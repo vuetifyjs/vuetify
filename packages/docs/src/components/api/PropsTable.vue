@@ -17,8 +17,5 @@
 </template>
 
 <script setup lang="ts">
-  // Utilities
-  import { kebabCase } from 'lodash-es'
-
   const headers = ['name', 'type', 'default']
 </script>

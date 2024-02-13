@@ -26,10 +26,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-defaults-provider'
   const model = ref('default')
   const button = ref(false)

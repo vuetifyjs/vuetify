@@ -27,7 +27,7 @@ The `v-divider` component is used to separate sections of lists or layouts.
 
 Dividers in their simplest form display a horizontal line.
 
-<ExamplesUsagename="v-divider" />
+ExamplesUsage name="v-divider" />
 
 ::: info
 

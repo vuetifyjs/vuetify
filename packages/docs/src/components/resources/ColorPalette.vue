@@ -19,9 +19,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
   const { t } = useI18n()
 
   const colors = [

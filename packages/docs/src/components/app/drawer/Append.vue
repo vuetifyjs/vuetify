@@ -32,12 +32,7 @@
 </template>
 
 <script setup lang="ts">
-  // Stores
-  import { useAuthStore } from '@vuetify/one'
-  import { useCommitsStore } from '@/store/commits'
-
   // Utilities
-  import { rpath } from '@/util/routes'
   import { version } from 'vuetify'
 
   const auth = useAuthStore()

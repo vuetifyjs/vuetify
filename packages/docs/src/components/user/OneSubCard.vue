@@ -19,15 +19,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useDate } from 'vuetify'
-
-  // Stores
-  import { useOneStore } from '@vuetify/one'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const adapter = useDate()
   const one = useOneStore()
 

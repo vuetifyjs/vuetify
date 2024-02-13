@@ -37,12 +37,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed } from 'vue'
-
-  // Stores
-  import { usePromotionsStore } from '@/store/promotions'
-
   const props = defineProps({
     color: String,
     slug: String,

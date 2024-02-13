@@ -45,15 +45,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { onBeforeRouteUpdate, useRoute } from 'vue-router'
-
-  // Stores
-  import { useAuthStore } from '@vuetify/one'
-
-  // Utilities
-  import { onMounted } from 'vue'
-
   const route = useRoute()
   const auth = useAuthStore()
 

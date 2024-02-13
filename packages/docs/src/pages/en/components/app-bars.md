@@ -32,7 +32,7 @@ The `v-app-bar` component is pivotal to any graphical user interface (GUI), as i
 
 The `v-app-bar` component is used for application-wide actions and information.
 
-<ExamplesUsagename="v-app-bar" />
+<ExamplesUsage name="v-app-bar" />
 
 <PromotedEntry />
 

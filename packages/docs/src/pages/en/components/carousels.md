@@ -26,7 +26,7 @@ The `v-carousel` component is used to display large numbers of visual content on
 
 The `v-carousel` component expands upon `v-window` by providing additional features targeted at displaying images.
 
-<ExamplesUsagename="v-carousel" />
+ExamplesUsage name="v-carousel" />
 
 <PromotedEntry />
 

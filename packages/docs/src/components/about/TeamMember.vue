@@ -146,14 +146,8 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-
   // Types
-  import type { Member } from '@/store/team'
+  import type { Member } from '@/stores/team'
   import type { PropType } from 'vue'
 
   const props = defineProps({

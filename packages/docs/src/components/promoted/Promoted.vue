@@ -45,14 +45,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { createAdProps, useAd } from '@/composables/ad'
-  import { useGtag } from 'vue-gtag-next'
-  import { useRoute } from 'vue-router'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const props = defineProps({
     ...createAdProps(),
 

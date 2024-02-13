@@ -26,7 +26,7 @@ The `v-badge` component superscripts or subscripts an avatar-like icon or text o
 
 Badges in their simplest form display to the upper right of the content that it wraps and requires the badge slot.
 
-<ExamplesUsagename="v-badge" />
+ExamplesUsage name="v-badge" />
 
 <PromotedEntry />
 

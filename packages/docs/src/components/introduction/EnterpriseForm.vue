@@ -140,13 +140,7 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
   // Utilities
-  import { computed, ref, watch } from 'vue'
-  import { rpath } from '@/util/routes'
-  import { useTheme } from 'vuetify'
   import emailjs from '@emailjs/browser'
 
   const theme = useTheme()

@@ -13,13 +13,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const { t } = useI18n()
   const title = t('learn')
   const items = computed(() => ([

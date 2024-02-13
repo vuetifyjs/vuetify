@@ -63,9 +63,6 @@
 </template>
 
 <script setup>
-  // eslint-disable
-  import { useDisplay } from 'vuetify'
-
   const { mdAndUp } = useDisplay()
 
   const items = [

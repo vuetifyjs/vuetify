@@ -27,10 +27,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-carousel'
   const model = ref('default')
   const options = ['Hide delimiters', 'Show arrows on hover']

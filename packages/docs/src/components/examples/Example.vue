@@ -104,19 +104,8 @@
   // Components
   import ExampleMissing from '@/components/examples/ExampleMissing.vue'
 
-  // Composables
-  import { useDisplay, useTheme } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
-  import { usePlayground } from '@/composables/playground'
-
-  // Stores
-  import { useUserStore } from '@vuetify/one'
-
   // Utilities
-  import { computed, mergeProps, onMounted, ref, shallowRef, watch } from 'vue'
-  import { getBranch, wait } from '@/util/helpers'
   import { getExample } from 'virtual:examples'
-  import { upperFirst } from 'lodash-es'
 
   const { xs } = useDisplay()
   const { t } = useI18n()

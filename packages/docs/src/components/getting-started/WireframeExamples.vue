@@ -26,10 +26,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import kebabCase from 'lodash/kebabCase'
-  import { rpath } from '@/util/routes'
-
   const wireframes = [
     'Baseline',
     'Extended toolbar',

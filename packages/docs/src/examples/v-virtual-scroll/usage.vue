@@ -19,10 +19,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-virtual-scroll'
   const model = ref('default')
   const items = Array.from({ length: 1000 }, (k, v) => v + 1)

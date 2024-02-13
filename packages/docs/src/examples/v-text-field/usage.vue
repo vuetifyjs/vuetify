@@ -20,10 +20,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref, watch } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-text-field'
   const model = ref('default')
   const clearable = ref(false)

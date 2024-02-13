@@ -63,9 +63,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { shallowRef } from 'vue'
-
   const isCopying = shallowRef(false)
 
   function copy () {

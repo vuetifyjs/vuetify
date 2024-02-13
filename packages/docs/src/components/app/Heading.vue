@@ -20,9 +20,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed } from 'vue'
-
   const HEADING_CLASSES = {
     1: 'text-h3 text-sm-h3',
     2: 'text-h4 text-sm-h4',

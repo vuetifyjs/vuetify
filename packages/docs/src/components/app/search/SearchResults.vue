@@ -82,11 +82,8 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  // Types
   import type { VList } from 'vuetify/components'
-
-  // Stores
-  import { useAppStore } from '@/store/app'
 
   const props = defineProps<{ groups: any[] }>()
   const emit = defineEmits(['click:result'])

@@ -123,22 +123,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useRoute, useRouter } from 'vue-router'
-  import { useTheme } from 'vuetify'
-
-  // Stores
-  import { useAppStore } from '@/store/app'
-  import { useUserStore } from '@vuetify/one'
-  import { useSponsorsStore } from '@/store/sponsors'
-  import { useSpotStore } from '@/store/spot'
-
-  // Utilities
-  import { computed, nextTick, onMounted, onScopeDispose, ref, watch } from 'vue'
-  import { gtagClick } from '@/util/analytics'
-  import { rpath } from '@/util/routes'
-  import { storeToRefs } from 'pinia'
-
   type TocItem = {
     to: string;
     text: string;

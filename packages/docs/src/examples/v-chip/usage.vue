@@ -26,10 +26,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref, watch } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const variants = ['outlined', 'elevated', 'text', 'plain']
   const name = 'v-chip'
   const model = ref('default')

@@ -27,7 +27,7 @@ The `v-chip-group` supercharges the `v-chip` component by providing groupable fu
 
 Chip groups make it easy for users to select filtering options for more complex implementations. By default `v-chip-group` will overflow to the right but can be changed to a **column** only mode.
 
-<ExamplesUsagename="v-chip-group" />
+ExamplesUsage name="v-chip-group" />
 
 <PromotedEntry />
 

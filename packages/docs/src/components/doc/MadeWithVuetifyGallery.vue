@@ -67,12 +67,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useMadeWithVuetifyStore } from '@/store/made-with-vuetify'
-
-  // Utilities
-  import { computed, ref } from 'vue'
-
   defineProps({
     itemsPerPage: {
       type: [Number, String],

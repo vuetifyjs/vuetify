@@ -21,12 +21,8 @@
   import SassTable from '@/components/api/SassTable.vue'
   import SlotsTable from '@/components/api/SlotsTable.vue'
 
-  // Composables
-  import { useLocaleStore } from '@/store/locale'
-
-  // Utilities
-  import { Item } from './utils'
-  import { computed, ref, watch } from 'vue'
+  // Types
+  import type { Item } from './utils'
 
   // Data
   import newIn from '@/data/new-in.json'

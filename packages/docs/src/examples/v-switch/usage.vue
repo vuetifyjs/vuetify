@@ -16,10 +16,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref, watch } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-switch'
   const model = ref('default')
   const indeterminate = ref(false)

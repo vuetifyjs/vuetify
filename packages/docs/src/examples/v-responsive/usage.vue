@@ -21,10 +21,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-responsive'
   const model = ref('default')
   const options = ['16 / 9', '4 / 3']

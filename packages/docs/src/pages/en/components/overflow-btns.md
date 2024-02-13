@@ -20,7 +20,7 @@ related:
 
 `v-overflow-btn` is used for creating selection lists
 
-<ExamplesUsagename="v-overflow-btn" />
+ExamplesUsage name="v-overflow-btn" />
 
 ## API
 

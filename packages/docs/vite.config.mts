@@ -3,6 +3,7 @@ import fs from 'fs/promises'
 import { fileURLToPath } from 'url'
 
 import { defineConfig, loadEnv } from 'vite'
+import AutoImport from 'unplugin-auto-import/vite'
 import Vue, { parseVueRequest } from '@vitejs/plugin-vue'
 import ViteFonts from 'unplugin-fonts/vite'
 import Pages from 'vite-plugin-pages'
@@ -18,7 +19,7 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 import { configureMarkdown, parseMeta } from './build/markdown-it'
 import Api from './build/api-plugin'
 import { Examples } from './build/examples-plugin'
-import { genAppMetaInfo } from './src/util/metadata'
+import { genAppMetaInfo } from './src/utils/metadata'
 
 const resolve = (file: string) => fileURLToPath(new URL(file, import.meta.url))
 
@@ -69,6 +70,32 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       },
     },
     plugins: [
+      // https://github.com/unplugin/unplugin-auto-import
+      AutoImport({
+        dirs: [
+          './src/composables/**',
+          './src/stores/**',
+          './src/utils/**',
+        ],
+        imports: [
+          {
+            '@vuetify/one': ['createOne', 'useAuthStore', 'useHttpStore', 'useOneStore', 'useUserStore'],
+            'lodash-es': ['camelCase', 'kebabCase', 'upperFirst'],
+            pinia: ['defineStore', 'storeToRefs'],
+            vue: [
+              'camelize', 'computed', 'h', 'mergeProps', 'nextTick',
+              'onBeforeMount', 'onBeforeUnmount', 'onMounted', 'onScopeDispose', 'onServerPrefetch',
+              'ref', 'shallowRef', 'useAttrs', 'watch', 'watchEffect'
+            ],
+            vuetify: ['useDate', 'useDisplay', 'useGoTo', 'useRtl', 'useTheme'],
+            'vue-gtag-next': ['useGtag'],
+            'vue-i18n': ['useI18n'],
+            'vue-router': ['onBeforeRouteLeave', 'onBeforeRouteUpdate', 'useRoute', 'useRouter'],
+          }
+        ],
+        vueTemplate: true,
+      }),
+      
       // https://github.com/stafyniaksacha/vite-plugin-fonts
       ViteFonts({
         google: {

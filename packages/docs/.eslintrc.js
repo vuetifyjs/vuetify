@@ -3,6 +3,7 @@ module.exports = {
     'vue/setup-compiler-macros': true,
   },
   rules: {
+    'no-undef': 'off',
     'vue/multi-word-component-names': 'off',
   },
   overrides: [
@@ -37,7 +38,7 @@ module.exports = {
         // 'vuetify/grid-unknown-attributes': 'error',
         // 'vuetify/no-legacy-grid': 'error',
         'import/newline-after-import': ['error', { count: 1 }],
-
+        
         // Script blocks normally both run and render, but in examples we
         // remove the options block so it is safe to import things in both
         'import/first': 'off',

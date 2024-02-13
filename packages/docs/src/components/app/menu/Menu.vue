@@ -20,9 +20,7 @@
 <script setup lang="ts">
   // Components
   import type { Item } from '@/components/app/list/List.vue'
-
-  // Utilities
-  import { PropType } from 'vue'
+  import type { PropType } from 'vue'
 
   defineProps({
     items: {

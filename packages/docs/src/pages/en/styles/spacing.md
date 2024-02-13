@@ -87,7 +87,7 @@ The **size** controls the increment of the property in 4px intervals:
 
 Vuetify comes with a 12 point grid system built using Flexbox. Spacing is used to create specific layouts within an application's content. It consists of 5 media breakpoints used to target specific screen sizes or orientations: **xs**, **sm**, **md**, **lg** and **xl**. The default resolutions are defined below in the *Viewport Breakpoints* table and can be modified by customizing the [breakpoint service config](/features/display-and-platform/).
 
-<breakpoints-table />
+<FeaturesBreakpointsTable />
 
 The helper classes apply **margin** or **padding** at a given breakpoint. These classes can be applied using the following format: `{property}{direction}-{breakpoint}-{size}`. This does not apply to **xs** as it is inferred; e.g. `ma-xs-2` equals `ma-2`.
 

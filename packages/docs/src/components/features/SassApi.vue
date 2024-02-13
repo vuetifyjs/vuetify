@@ -35,9 +35,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-
   const files = import.meta.glob('../../../../api-generator/dist/api/*.json')
 
   const variables = ref([])

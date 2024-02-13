@@ -5,8 +5,5 @@
 </template>
 
 <script setup>
-  // Stores
-  import { useUserStore } from '@vuetify/one'
-
   const user = useUserStore()
 </script>

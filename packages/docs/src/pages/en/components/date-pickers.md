@@ -32,7 +32,7 @@ This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-no
 
 Date pickers come in two orientation variations, portrait **(default)** and landscape. By default they are emitting `input` event when the day (for date picker) or month (for month picker), but with **reactive** prop they can update the model even after clicking year/month.
 
-<ExamplesUsagename="v-date-picker" />
+ExamplesUsage name="v-date-picker" />
 
 <PromotedEntry />
 

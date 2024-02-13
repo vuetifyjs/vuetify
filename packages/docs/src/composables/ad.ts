@@ -1,15 +1,3 @@
-// Composables
-import { useAdsStore } from '@/store/ads'
-import { useI18n } from 'vue-i18n'
-
-// Stores
-import { useUserStore } from '@vuetify/one'
-
-// Utilities
-import { computed } from 'vue'
-import { kebabCase } from 'lodash-es'
-import { leadingSlash, trailingSlash } from '@/util/routes'
-
 interface AdProps {
   medium: string
   slug?: string
@@ -54,7 +42,7 @@ export const useAd = (props: AdProps) => {
       return leadingSlash(trailingSlash(`${locale.value}${url}`))
     }
 
-    if (query && query.indexOf('utm_source') !== -1) {
+    if (query && query.includes('utm_source')) {
       return `${url}?${query}`
     }
 

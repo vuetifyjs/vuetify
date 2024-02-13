@@ -13,15 +13,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Stores
-  import { useCommitsStore } from '@/store/commits'
-
-  // Utilities
-  import { onBeforeMount } from 'vue'
-
   const commits = useCommitsStore()
   const { t } = useI18n()
 

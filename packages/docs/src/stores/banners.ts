@@ -1,11 +1,3 @@
-// Composables
-import { useCosmic } from '@/composables/cosmic'
-import { useDate } from 'vuetify'
-import { useUserStore } from '@vuetify/one'
-
-// Utilities
-import { defineStore } from 'pinia'
-
 // Types
 interface Banner {
   status: 'published' | 'unpublished'

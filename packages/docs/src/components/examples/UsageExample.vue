@@ -130,15 +130,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useDisplay } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
-  import { usePlayground } from '@/composables/playground'
-
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { upperFirst } from 'lodash-es'
-
   const props = defineProps({
     name: String,
     code: String,

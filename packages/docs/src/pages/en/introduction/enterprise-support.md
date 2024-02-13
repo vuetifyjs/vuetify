@@ -29,4 +29,4 @@ Vuetify offers a variety of support options to meet any need.
 
 Get direct access to the Vuetify team through our private [Discord server](https://community.vuetifyjs.com/). Ask questions, get help, and chat with the team.
 
-<DiscordDeckDiscordDeck />
+<IntroductionDiscordDeck />

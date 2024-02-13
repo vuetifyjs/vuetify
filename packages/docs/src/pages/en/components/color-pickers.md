@@ -22,7 +22,7 @@ The `v-color-picker` allows you to select a color using a variety of input metho
 
 ## Usage
 
-<ExamplesUsagename="v-color-picker" />
+ExamplesUsage name="v-color-picker" />
 
 <PromotedEntry />
 

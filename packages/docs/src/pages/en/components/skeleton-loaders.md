@@ -31,7 +31,7 @@ This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-no
 
 The `v-skeleton-loader` component provides a user with a visual indicator that content is coming / loading. This is better received than traditional full-screen loaders.
 
-<ExamplesUsagename="v-skeleton-loader" />
+ExamplesUsage name="v-skeleton-loader" />
 
 <PromotedEntry />
 

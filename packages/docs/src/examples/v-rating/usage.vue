@@ -29,10 +29,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, reactive, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const selectedOption = ref()
 
   const options = reactive({

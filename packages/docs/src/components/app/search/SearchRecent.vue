@@ -42,9 +42,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
   defineProps({
     searches: {
       type: Array,

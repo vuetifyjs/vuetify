@@ -39,15 +39,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { rpath } from '@/util/routes'
-
-  // Stores
-  import { useAuthStore } from '@vuetify/one'
-
   const auth = useAuthStore()
   const { t } = useI18n()
 </script>

@@ -35,12 +35,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useTheme } from 'vuetify'
-
-  // Utilities
-  import { computed, onBeforeUnmount, onMounted, onScopeDispose, shallowRef, watch } from 'vue'
-
   const error1 = shallowRef(false)
   const error2 = shallowRef(false)
   const script = shallowRef(null)

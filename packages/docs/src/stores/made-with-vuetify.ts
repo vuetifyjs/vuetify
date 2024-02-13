@@ -1,7 +1,3 @@
-// Utilities
-import { defineStore } from 'pinia'
-import { onBeforeMount, ref } from 'vue'
-
 export const useMadeWithVuetifyStore = defineStore('made-with-vuetify', () => {
   const items = ref([])
 

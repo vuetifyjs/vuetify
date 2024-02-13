@@ -25,7 +25,7 @@ The `v-data-table` component is used for displaying tabular data. Features inclu
 
 The standard data table presumes that the entire data set is available locally. Sorting, pagination, and filtering is supported and done internally by the component itself.
 
-<ExamplesUsagename="v-data-table" />
+ExamplesUsage name="v-data-table" />
 
 <PromotedEntry />
 

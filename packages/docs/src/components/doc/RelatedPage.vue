@@ -20,17 +20,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useRouter } from 'vue-router'
-
-  // Store
-  import { useAppStore } from '@/store/app'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-  import { upperFirst } from 'lodash-es'
-
   const appStore = useAppStore()
   const props = defineProps({ to: String })
   const routes = useRouter().getRoutes()

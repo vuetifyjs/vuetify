@@ -8,15 +8,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useRoute } from 'vue-router'
-
-  // Stores
-  import { useAppStore } from '@/store/app'
-
-  // Utilities
-  import { gtagClick } from '@/util/analytics'
-
   const app = useAppStore()
   const { name } = useRoute()
 

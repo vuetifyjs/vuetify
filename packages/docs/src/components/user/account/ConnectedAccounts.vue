@@ -35,12 +35,6 @@
 </template>
 
 <script setup>
-  // Stores
-  import { useAuthStore } from '@vuetify/one'
-
-  // Utilities
-  import { computed, ref } from 'vue'
-
   const auth = useAuthStore()
   const headers = ref([
     { title: 'Provider', key: 'provider' },

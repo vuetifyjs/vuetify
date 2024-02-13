@@ -32,12 +32,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useSponsorsStore } from '@/store/sponsors'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const props = defineProps({
     tier: {
       type: [Number, String],

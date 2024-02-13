@@ -15,9 +15,6 @@
 </template>
 
 <script setup>
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-data-table'
   const model = ref('default')
   const options = []

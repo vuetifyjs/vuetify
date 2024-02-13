@@ -11,7 +11,7 @@
   defineProps({
     path: {
       type: String,
-      required: true,
+      default: '',
     },
   })
 </script>

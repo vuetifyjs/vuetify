@@ -20,10 +20,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-icon'
   const model = ref('default')
   const icon = ref()

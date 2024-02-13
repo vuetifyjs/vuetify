@@ -7,13 +7,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-  import { useRoute } from 'vue-router'
-
-  // Utilities
-  import { computed } from 'vue'
-
   // Data
   import pageToApi from '@/data/page-to-api.json'
 

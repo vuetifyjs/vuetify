@@ -17,12 +17,6 @@
 </template>
 
 <script setup>
-  // Stores
-  import { useSponsorsStore } from '@/store/sponsors'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const store = useSponsorsStore()
 
   const hasSpecialSponsor = computed(() => store.byTier[-2]?.length > 0)

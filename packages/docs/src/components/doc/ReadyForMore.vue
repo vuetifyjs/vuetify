@@ -22,11 +22,5 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { rpath } from '@/util/routes'
-
   const { t } = useI18n()
 </script>

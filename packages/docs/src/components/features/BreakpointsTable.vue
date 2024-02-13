@@ -63,9 +63,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
   const breakpoints = [
     {
       icon: 'mdi-cellphone',

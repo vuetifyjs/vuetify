@@ -11,12 +11,6 @@ related:
 ---
 
 <script setup>
-  // Utilities
-  import { onMounted } from 'vue'
-
-  // Stores
-  import { useShopifyStore } from '@/store/shopify'
-
   const store = useShopifyStore()
 
   onMounted(() => {

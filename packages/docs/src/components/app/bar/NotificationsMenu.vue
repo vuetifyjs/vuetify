@@ -110,18 +110,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useCosmic } from '@/composables/cosmic'
-  import { useDate, useDisplay } from 'vuetify'
-  import { useGtag } from 'vue-gtag-next'
-  import { useI18n } from 'vue-i18n'
-
-  // Stores
-  import { useUserStore } from '@vuetify/one'
-
-  // Utilities
-  import { computed, onMounted, ref } from 'vue'
-
   // Types
   interface Notification {
     metadata: {

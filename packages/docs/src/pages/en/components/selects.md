@@ -23,7 +23,7 @@ Select fields components are used for collecting user provided information from 
 
 ## Usage
 
-<ExamplesUsagename="v-select" />
+ExamplesUsage name="v-select" />
 
 <PromotedEntry />
 

@@ -9,13 +9,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { onBeforeUnmount } from 'vue'
-  import { useI18n } from 'vue-i18n'
-
-  // Stores
-  import { useAppStore } from '@/store/app'
-
   const appStore = useAppStore()
   const { t } = useI18n()
 

@@ -61,17 +61,8 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed, PropType } from 'vue'
-  import { camelCase } from 'lodash-es'
-
-  // Stores
-  import { useAppStore } from '@/store/app'
-  import { useLocaleStore } from '@/store/locale'
-  import { useUserStore } from '@vuetify/one'
+  // Types
+  import type { PropType } from 'vue'
 
   const props = defineProps({
     headers: {

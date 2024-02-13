@@ -18,10 +18,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-pagination'
   const model = ref('default')
   const length = ref(4)

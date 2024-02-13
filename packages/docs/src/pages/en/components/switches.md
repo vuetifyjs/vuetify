@@ -25,7 +25,7 @@ The `v-switch` component provides users the ability to choose between two distin
 
 A `v-switch` in its simplest form provides a toggle between 2 values.
 
-<ExamplesUsagename="v-switch" />
+ExamplesUsage name="v-switch" />
 
 <PromotedEntry />
 

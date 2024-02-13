@@ -21,7 +21,7 @@ Applies a custom float across any breakpoint with responsive float utilities.
 
 Float utility classes apply floating based upon the current viewport size using the [CSS float property](https://developer.mozilla.org/en-US/docs/Web/CSS/float).
 
-<breakpoints-table />
+<FeaturesBreakpointsTable />
 
 ## Classes
 

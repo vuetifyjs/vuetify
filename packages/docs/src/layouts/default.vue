@@ -38,12 +38,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useRoute } from 'vue-router'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const route = useRoute()
 
   const isApi = computed(() => route.meta?.category === 'api')

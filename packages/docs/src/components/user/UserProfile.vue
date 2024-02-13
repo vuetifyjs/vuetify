@@ -64,15 +64,6 @@
   import DiscordLogin from '@/components/user/DiscordLogin.vue'
   import GithubLogin from '@/components/user/GithubLogin.vue'
 
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-
-  // Stores
-  import { useAuthStore, useUserStore } from '@vuetify/one'
-
   const auth = useAuthStore()
   const user = useUserStore()
 

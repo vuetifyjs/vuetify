@@ -1,10 +1,3 @@
-// Composables
-import { useCosmic } from '@/composables/cosmic'
-
-// Utilities
-import { defineStore } from 'pinia'
-import { onBeforeMount, ref } from 'vue'
-
 // Types
 type CosmicImage = {
   url: string

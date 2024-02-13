@@ -77,8 +77,6 @@ The following example demonstrates how to use the **theme** prop to toggle the t
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
   const theme = ref('light')
 
   function onClick () {

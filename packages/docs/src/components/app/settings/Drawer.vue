@@ -35,14 +35,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useRtl } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
-
-  // Stores
-  import { useAppStore } from '@/store/app'
-  import { useAuthStore } from '@vuetify/one'
-
   const app = useAppStore()
   const auth = useAuthStore()
 

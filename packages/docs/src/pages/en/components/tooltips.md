@@ -25,7 +25,7 @@ The `v-tooltip` component is useful for conveying information when a user hovers
 
 Tooltips can wrap any element.
 
-<ExamplesUsagename="v-tooltip" />
+ExamplesUsage name="v-tooltip" />
 
 <PromotedEntry />
 

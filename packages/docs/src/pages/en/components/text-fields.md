@@ -27,7 +27,7 @@ Text field components are used for collecting user provided information.
 
 A simple text field with placeholder and/or label.
 
-<ExamplesUsagename="v-text-field" />
+ExamplesUsage name="v-text-field" />
 
 <PromotedEntry />
 

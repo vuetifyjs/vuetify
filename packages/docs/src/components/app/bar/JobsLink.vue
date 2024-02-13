@@ -15,14 +15,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useGtag } from 'vue-gtag-next'
-  import { useRoute, useRouter } from 'vue-router'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const { currentRoute } = useRouter()
   const { event } = useGtag()
   const { name } = useRoute()

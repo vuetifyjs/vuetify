@@ -28,18 +28,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useDisplay, useTheme } from 'vuetify'
-
-  // Utilities
-  import { computed, onMounted, ref, watch } from 'vue'
-  import { wait } from '@/util/helpers'
-
-  // Stores
-  import { useAppStore } from '@/store/app'
-  import { usePinsStore } from '@/store/pins'
-  import { useUserStore } from '@vuetify/one'
-
   const app = useAppStore()
   const pins = usePinsStore()
   const user = useUserStore()

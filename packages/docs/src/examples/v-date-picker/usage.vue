@@ -19,10 +19,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-date-picker'
   const model = ref('default')
   const date = ref()

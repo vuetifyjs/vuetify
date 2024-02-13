@@ -36,11 +36,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useUserStore } from '@vuetify/one'
-  import { useI18n } from 'vue-i18n'
-  import { useTheme } from 'vuetify'
-
   const { t } = useI18n()
   const theme = useTheme()
   const user = useUserStore()

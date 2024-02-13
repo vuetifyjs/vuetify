@@ -25,10 +25,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref, shallowRef } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-navigation-drawer'
   const model = ref('default')
   const width = shallowRef(256)

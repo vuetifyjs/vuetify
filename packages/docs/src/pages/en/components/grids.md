@@ -29,7 +29,7 @@ The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstra
 
 <ExamplesExample file="grid/usage" />
 
-<breakpoints-table />
+<FeaturesBreakpointsTable />
 
 <PromotedEntry />
 
