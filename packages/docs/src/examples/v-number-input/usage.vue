@@ -15,7 +15,7 @@
         label="Control Variant"
         :items="controlVariantOptions"
       ></v-select>
-      <v-checkbox v-model="controlReverse" label="ControlReverse"></v-checkbox>
+      <v-checkbox v-model="reverse" label="Reverse"></v-checkbox>
       <v-checkbox v-model="inset" label="Inset"></v-checkbox>
       <v-checkbox v-model="hideInput" label="HideInput"></v-checkbox>
       <v-text-field v-model="label" label="Label" clearable></v-text-field>
@@ -32,7 +32,7 @@
   const model = ref('outlined')
   const options = ['outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled']
   const controlVariantOptions = ['default', 'stacked', 'split']
-  const controlReverse = ref(false)
+  const reverse = ref(false)
   const controlVariant = ref('default')
   const disabled = ref(false)
   const loading = ref(false)
@@ -42,7 +42,7 @@
 
   const props = computed(() => {
     return {
-      controlReverse: controlReverse.value,
+      reverse: reverse.value,
       controlVariant: controlVariant.value,
       disabled: disabled.value || undefined,
       label: label.value,

@@ -56,11 +56,11 @@ The `control-variant` prop offers an easy way to customize steppers button layou
 
 <example file="v-number-input/prop-control-variant" />
 
-#### Control-reverse
+#### Reverse
 
-The `control-reverse` prop automatically changes the stepper buttons' position to the opposite side for both the default and stacked control variants.
+The `reverse` prop automatically changes the stepper buttons' position to the opposite side for both the default and stacked control variants.
 
-<example file="v-number-input/prop-control-reverse" />
+<example file="v-number-input/prop-reverse" />
 
 #### Hide-input
 

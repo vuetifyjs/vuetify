@@ -16,13 +16,8 @@
     padding-inline-end: 0
     padding-inline-start: 0
 
-  &--control-reverse
-    .v-label.v-field-label
-      right: 0
-
+  &--reverse
     &:not(#{selector.append($root, '--split')})
-      input
-        text-align: right
       #{$control-root}
         &:not(#{selector.append($control-root, '--borderless')})
           border-left: none
