@@ -276,7 +276,7 @@ export const VChip = genericComponent<VChipSlots>()({
             </div>
           )}
 
-          <div class="v-chip__content">
+          <div class="v-chip__content" data-no-activator="">
             { slots.default?.({
               isSelected: group?.isSelected.value,
               selectedClass: group?.selectedClass.value,

@@ -88,6 +88,7 @@ export const makeVOverlayProps = propsFactory({
   contentClass: null,
   contentProps: null,
   disabled: Boolean,
+  opacity: [Number, String],
   noClickAnimation: Boolean,
   modelValue: Boolean,
   persistent: Boolean,
@@ -283,7 +284,10 @@ export const VOverlay = genericComponent<OverlaySlots>()({
               ]}
               style={[
                 stackStyles.value,
-                { top: convertToUnit(top.value) },
+                {
+                  '--v-overlay-opacity': props.opacity,
+                  top: convertToUnit(top.value),
+                },
                 props.style,
               ]}
               ref={ root }

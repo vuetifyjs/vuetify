@@ -13,6 +13,7 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { makeTagProps } from '@/composables/tag'
@@ -84,8 +85,8 @@ export const VBottomNavigation = genericComponent<new <T>(
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ))
-    const isActive = toRef(props, 'active')
-    const { layoutItemStyles } = useLayoutItem({
+    const isActive = useProxiedModel(props, 'modelValue', props.modelValue)
+    const { layoutItemStyles, layoutIsReady } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
       position: computed(() => 'bottom'),
@@ -146,7 +147,7 @@ export const VBottomNavigation = genericComponent<new <T>(
       )
     })
 
-    return {}
+    return layoutIsReady
   },
 })
 
