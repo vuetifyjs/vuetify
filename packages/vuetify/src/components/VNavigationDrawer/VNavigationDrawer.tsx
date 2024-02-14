@@ -22,7 +22,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, nextTick, onBeforeMount, ref, shallowRef, toRef, Transition, watch } from 'vue'
+import { computed, nextTick, ref, shallowRef, toRef, Transition, watch } from 'vue'
 import { genericComponent, propsFactory, toPhysical, useRender } from '@/util'
 
 // Types
@@ -145,11 +145,9 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       if (val) isActive.value = true
     })
 
-    onBeforeMount(() => {
-      if (props.modelValue != null || isTemporary.value) return
-
+    if (props.modelValue == null && !isTemporary.value) {
       isActive.value = props.permanent || !mobile.value
-    })
+    }
 
     const { isDragging, dragProgress, dragStyles } = useTouch({
       isActive,
@@ -166,8 +164,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
 
       return isDragging.value ? size * dragProgress.value : size
     })
-
-    const { layoutItemStyles, layoutItemScrimStyles } = useLayoutItem({
+    const { layoutItemStyles, layoutItemScrimStyles, layoutIsReady } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
       position: location,
@@ -287,9 +284,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       )
     })
 
-    return {
-      isStuck,
-    }
+    return layoutIsReady.then(() => ({ isStuck }))
   },
 })
 
