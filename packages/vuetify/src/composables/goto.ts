@@ -1,9 +1,10 @@
 // Utilities
-import { inject } from 'vue'
+import { computed, inject } from 'vue'
 import { mergeDeep, refElement } from '@/util'
 
 // Types
 import type { ComponentPublicInstance, InjectionKey, Ref } from 'vue'
+import { useRtl } from './locale'
 import type { LocaleInstance, RtlInstance } from './locale'
 
 export interface GoToInstance {
@@ -107,6 +108,10 @@ async function scrollTo (
 
   targetLocation += options.offset
 
+  /** clamp start */
+  targetLocation = clampTarget(container, targetLocation, !!rtl, !!horizontal)
+  /** clamp end */
+
   const startLocation = (horizontal ? container.scrollLeft : container.scrollTop) ?? 0
 
   if (targetLocation === startLocation) return Promise.resolve(targetLocation)
@@ -142,9 +147,16 @@ async function scrollTo (
 }
 
 export function useGoTo (_options: Partial<GoToOptions> = {}) {
-  const goTo = inject(GoToSymbol)
+  const goToInstance = inject(GoToSymbol)
+  const { isRtl } = useRtl()
 
-  if (!goTo) throw new Error('[Vuetify] Could not find injected goto instance')
+  if (!goToInstance) throw new Error('[Vuetify] Could not find injected goto instance')
+
+  const goTo = {
+    ...goToInstance,
+    // can be set via VLocaleProvider
+    rtl: computed(() => goToInstance.rtl.value || isRtl.value),
+  }
 
   async function go (
     target: ComponentPublicInstance | HTMLElement | string | number,
@@ -161,4 +173,42 @@ export function useGoTo (_options: Partial<GoToOptions> = {}) {
   }
 
   return go
+}
+
+/**
+ * Clamp target value to achieve a smooth scroll animation
+ * when the value goes outside the scroll container size
+ */
+function clampTarget (
+  container: HTMLElement,
+  value: number,
+  rtl: boolean,
+  horizontal: boolean,
+) {
+  const {
+    offsetWidth: containerWidth,
+    offsetHeight: containerHeight,
+    scrollWidth,
+    scrollHeight,
+  } = container
+
+  let min = -Infinity
+  let max = Infinity
+
+  if (horizontal) {
+    if (rtl) {
+      min = -(scrollWidth - containerWidth)
+      max = 0
+    } else {
+      min = 0
+      max = scrollWidth - containerWidth
+    }
+  } else {
+    min = 0
+    max = scrollHeight + -containerHeight
+  }
+
+  console.log({ min, max, value })
+
+  return Math.max(Math.min(value, max), min)
 }
