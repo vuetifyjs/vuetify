@@ -13,6 +13,8 @@ related:
 
 Control text size, alignment, wrapping, overflow, transforms and more. By default, Vuetify uses the Material Design specification [Roboto Font](https://fonts.google.com/specimen/Roboto).
 
+<page-features />
+
 <entry />
 
 ## Typography

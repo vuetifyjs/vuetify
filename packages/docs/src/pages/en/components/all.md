@@ -14,6 +14,8 @@ meta:
 
 Vuetify Components are interactive building blocks for creating user interfaces.
 
+<page-features />
+
 <entry />
 
 ## Containment
@@ -91,12 +93,6 @@ Containment components wrap other components and provide additional functionalit
 <components-list-item name="Tooltip component" src="tooltips">
 
   Tooltips provide additional information about an element when the user hovers over it
-
-</components-list-item>
-
-<components-list-item name="Bottom Sheet component" src="bottom-sheets">
-
-  The bottom sheet component is a modified dialog that slides from the bottom of the screen
 
 </components-list-item>
 

@@ -35,6 +35,8 @@ The autocomplete component extends `v-select` and adds the ability to filter ite
 | Component | Description |
 | - | - |
 | [v-autocomplete](/api/v-autocomplete/) | Primary Component |
+| [v-combobox](/api/v-combobox/) | A select component that allows for filtering and custom values |
+| [v-select](/api/v-select/) | A replacement for the HTML <select></select> |
 
 <api-inline hide-links />
 
@@ -63,6 +65,14 @@ You can use `density` prop to adjust vertical spacing within the component.
 The `custom-filter` prop can be used to filter each individual item with custom logic. In this example we filter items by name.
 
 <example file="v-autocomplete/prop-filter" />
+
+::: tip
+
+The **v-autocomplete** component updates the search model on focus/blur events. Focus sets search to the current model (if available), and blur clears it.
+
+Unlike **v-combobox**, it doesn't keep unlisted values. To prevent unnecessary API requests when querying, ensure that search is not empty and/or doesn't match the current model.
+
+:::
 
 ### Slots
 

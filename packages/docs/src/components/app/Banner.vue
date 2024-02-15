@@ -38,7 +38,7 @@
     </a>
 
     <template #append>
-      <v-hover v-if="mdAndUp && banner.metadata.link">
+      <v-hover v-if="mdAndUp && banner.metadata.link && banner.metadata.link_text">
         <template #default="{ isHovering, props }">
           <v-btn
             :color="banner.metadata.link_color"
@@ -77,7 +77,7 @@
   import { useDisplay } from 'vuetify'
   import { useGtag } from 'vue-gtag-next'
   import { useRoute } from 'vue-router'
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed, onBeforeMount } from 'vue'
@@ -89,7 +89,7 @@
   const banners = useBannersStore()
 
   const banner = computed(() => banners.banner)
-  const height = computed(() => banner.value?.metadata.subtext ? 88 : 48)
+  const height = computed(() => banner.value?.metadata.height || (banner.value?.metadata.subtext ? 88 : 48))
   const hasPromotion = computed(() => {
     return !banner.value || !user.notifications.last.banner.includes(banner.value.slug)
   })

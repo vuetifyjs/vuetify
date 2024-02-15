@@ -42,7 +42,7 @@
     @include tools.rounded($autocomplete-content-border-radius)
 
   &__mask
-    background: rgb(var(--v-theme-on-surface-variant))
+    background: rgb(var(--v-theme-surface-light))
 
   &__selection
     display: inline-flex
@@ -50,7 +50,7 @@
     height: calc($input-font-size * $input-line-height)
     letter-spacing: inherit
     line-height: inherit
-    max-width: calc(100% - $autocomplete-selection-gap)
+    max-width: calc(100% - $autocomplete-selection-gap - $autocomplete-input-buffer)
 
   &__selection
     &:first-child
@@ -76,7 +76,7 @@
       caret-color: transparent
 
   &--single
-    &.v-text-field input
+    &.v-text-field .v-field--focused input
       flex: 1 1
       position: absolute
       left: 0

@@ -25,6 +25,13 @@
       "end": "3.2.0"
     }
   },
+  "VSwitch": {
+    "slots": {
+      "thumb": "3.5.0",
+      "track-false": "3.5.0",
+      "track-true": "3.5.0"
+    }
+  },
   "VTab": {
     "props": {
       "text": "3.2.0"

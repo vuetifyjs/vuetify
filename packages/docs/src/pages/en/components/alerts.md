@@ -143,11 +143,11 @@ The close icon automatically applies a default `aria-label` and is configurable 
 
 The following is a collection of `v-alert` examples that demonstrate how different the properties work in an application.
 
-### Colored border
+### Border color
 
-The **colored-border** prop removes the alert background in order to accent the **border** prop. If a **type** is set, it will use the type's default color. If no **color** or **type** is set, the color will default to the inverted color of the applied theme (black for light and white/gray for dark).
+The **border-color** prop removes the alert background in order to accent the **border** prop. If a **type** is set, it will use the type's default color. If no **color** or **type** is set, the color will default to the inverted color of the applied theme (black for light and white/gray for dark).
 
-<example file="v-alert/prop-colored-border" />
+<example file="v-alert/prop-border-color" />
 
 ### Icon
 

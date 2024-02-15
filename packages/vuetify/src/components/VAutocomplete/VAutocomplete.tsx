@@ -2,6 +2,7 @@
 import './VAutocomplete.sass'
 
 // Components
+import { VAvatar } from '@/components/VAvatar'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
@@ -76,6 +77,7 @@ export const makeVAutocompleteProps = propsFactory({
   autoSelectFirst: {
     type: [Boolean, String] as PropType<boolean | 'exact'>,
   },
+  clearOnSelect: Boolean,
   search: String,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
@@ -185,7 +187,7 @@ export const VAutocomplete = genericComponent<new <
     })
 
     const menuDisabled = computed(() => (
-      (props.hideNoData && !items.value.length) ||
+      (props.hideNoData && !displayItems.value.length) ||
       props.readonly || form?.isReadonly.value
     ))
 
@@ -289,10 +291,6 @@ export const VAutocomplete = genericComponent<new <
       }
     }
 
-    function onInput (e: InputEvent) {
-      search.value = (e.target as HTMLInputElement).value
-    }
-
     function onChange (e: Event) {
       if (matchesSelector(vTextFieldRef.value, ':autofill') || matchesSelector(vTextFieldRef.value, ':-webkit-autofill')) {
         const item = items.value.find(item => item.title === (e.target as HTMLInputElement).value)
@@ -324,7 +322,9 @@ export const VAutocomplete = genericComponent<new <
 
     const isSelecting = shallowRef(false)
 
-    function select (item: ListItem) {
+    function select (item: ListItem, add = true) {
+      if (item.props.disabled) return
+
       if (props.multiple) {
         const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
 
@@ -335,12 +335,16 @@ export const VAutocomplete = genericComponent<new <
           value.splice(index, 1)
           model.value = value
         }
+
+        if (props.clearOnSelect) {
+          search.value = ''
+        }
       } else {
-        model.value = [item]
+        model.value = add ? [item] : []
 
         isSelecting.value = true
 
-        search.value = item.title
+        search.value = add ? item.title : ''
 
         menu.value = false
         isPristine.value = true
@@ -359,7 +363,7 @@ export const VAutocomplete = genericComponent<new <
 
         nextTick(() => isSelecting.value = false)
       } else {
-        if (!props.multiple && !search.value) model.value = []
+        if (!props.multiple && search.value == null) model.value = []
         else if (
           highlightFirst.value &&
           !listHasFocus.value &&
@@ -392,6 +396,18 @@ export const VAutocomplete = genericComponent<new <
       }
     })
 
+    watch(displayItems, (val, oldVal) => {
+      if (!isFocused.value) return
+
+      if (!val.length && props.hideNoData) {
+        menu.value = false
+      }
+
+      if (!oldVal.length && val.length) {
+        menu.value = true
+      }
+    })
+
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
       const hasList = !!(
@@ -407,13 +423,12 @@ export const VAutocomplete = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          modelValue={ search.value }
+          v-model={ search.value }
           onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
           counterValue={ counterValue.value }
           dirty={ isDirty }
-          onInput={ onInput }
           onChange={ onChange }
           class={[
             'v-autocomplete',
@@ -462,7 +477,9 @@ export const VAutocomplete = genericComponent<new <
                       onFocusout={ onFocusout }
                       onScrollPassive={ onListScroll }
                       tabindex="-1"
+                      aria-live="polite"
                       color={ props.itemColor ?? props.color }
+                      { ...props.listProps }
                     >
                       { slots['prepend-item']?.() }
 
@@ -497,6 +514,10 @@ export const VAutocomplete = genericComponent<new <
                                     />
                                   ) : undefined }
 
+                                  { item.props.prependAvatar && (
+                                    <VAvatar image={ item.props.prependAvatar } />
+                                  )}
+
                                   { item.props.prependIcon && (
                                     <VIcon icon={ item.props.prependIcon } />
                                   )}
@@ -523,7 +544,7 @@ export const VAutocomplete = genericComponent<new <
                     e.stopPropagation()
                     e.preventDefault()
 
-                    select(item)
+                    select(item, false)
                   }
 
                   const slotProps = {

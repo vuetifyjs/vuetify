@@ -1,6 +1,5 @@
 ---
 backmatter: false
-emphasized: true
 fluid: true
 meta:
   nav: Made with Vuetify
@@ -21,6 +20,8 @@ related:
 # Made with Vuetify
 
 Check out these amazing projects built using Vuetify.
+
+<page-features />
 
 <entry />
 

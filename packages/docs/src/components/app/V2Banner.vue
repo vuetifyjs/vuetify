@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
   import { computed } from 'vue'
 
   const user = useUserStore()

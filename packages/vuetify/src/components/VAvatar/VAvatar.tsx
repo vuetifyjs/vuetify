@@ -2,6 +2,7 @@
 import './VAvatar.sass'
 
 // Components
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 import { VImg } from '@/components/VImg'
 
@@ -68,12 +69,28 @@ export const VAvatar = genericComponent()({
           props.style,
         ]}
       >
-        { props.image
-          ? (<VImg key="image" src={ props.image } alt="" cover />)
-          : props.icon
-            ? (<VIcon key="icon" icon={ props.icon } />)
-            : slots.default?.() ?? props.text
-        }
+        { !slots.default ? (
+          props.image
+            ? (<VImg key="image" src={ props.image } alt="" cover />)
+            : props.icon
+              ? (<VIcon key="icon" icon={ props.icon } />)
+              : props.text
+        ) : (
+          <VDefaultsProvider
+            key="content-defaults"
+            defaults={{
+              VImg: {
+                cover: true,
+                image: props.image,
+              },
+              VIcon: {
+                icon: props.icon,
+              },
+            }}
+          >
+            { slots.default() }
+          </VDefaultsProvider>
+        )}
 
         { genOverlays(false, 'v-avatar') }
       </props.tag>

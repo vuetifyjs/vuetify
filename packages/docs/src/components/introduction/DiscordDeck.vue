@@ -82,7 +82,7 @@
       name: 'Grass Tier',
       price: 'Free',
       href: 'https://community.vuetifyjs.com/',
-      src: 'https://github.com/vuetifyjs/vuetify/assets/9064066/893a650f-dad4-4d66-a421-6fae024526e3',
+      src: 'https://cdn.vuetifyjs.com/docs/images/discord/tiers/grass.png',
       text: 'Ask questions in our public Discord help channels.',
       benefits: [
         {
@@ -103,7 +103,7 @@
       suffix: '/mo',
       trial: true,
       href: 'https://discord.com/invite/jZq4rzazEr',
-      src: 'https://github.com/vuetifyjs/vuetify/assets/9064066/7e75915c-2dd3-4270-a96e-598d4058f19a',
+      src: 'https://cdn.vuetifyjs.com/docs/images/discord/tiers/wood.png',
       text: 'Get access to sponsor only chat and help channels.',
       benefits: [
         {
@@ -123,8 +123,8 @@
       price: '$19.99',
       suffix: '/mo',
       href: 'https://discord.com/invite/jZq4rzazEr',
-      src: 'https://cdn.discordapp.com/app-assets/1049506068704796702/store/1052024886706569216',
-      text: 'Get acecss to our daily Vuetify development updates.',
+      src: 'https://cdn.vuetifyjs.com/docs/images/discord/tiers/gold.png',
+      text: 'Get access to our daily Vuetify development updates.',
       benefits: [
         {
           text: 'Every channel in Wood Tier plus:',
@@ -142,7 +142,7 @@
       price: '$99.99',
       suffix: '/mo',
       href: 'https://discord.com/invite/jZq4rzazEr',
-      src: 'https://cdn.discordapp.com/app-assets/1049506068704796702/store/1050199948609728567',
+      src: 'https://cdn.vuetifyjs.com/docs/images/discord/tiers/planetary.png',
       text: 'Get help directly from the Core team with a private help channel.',
       benefits: [
         {
@@ -167,7 +167,7 @@
       price: '$199.99',
       suffix: '/mo',
       href: 'mailto:support@vuetifyjs.com?subject=Galaxy%20Tier%20Support%20Request',
-      src: 'https://github.com/vuetifyjs/vuetify/assets/9064066/8a654a9c-bda3-4744-818f-7034aa91417a',
+      src: 'https://cdn.vuetifyjs.com/docs/images/discord/tiers/galaxy.png',
       text: 'Get support for up to 3 developers with a private help channel.',
       benefits: [
         {

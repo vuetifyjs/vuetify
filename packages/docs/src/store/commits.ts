@@ -1,5 +1,4 @@
 // Plugins
-import octokit from '@/plugins/octokit'
 import type { components as octokitComponents } from '@octokit/openapi-types'
 
 // Utilities
@@ -13,6 +12,8 @@ export type State = {
   isLoading: boolean
 }
 
+const url = import.meta.env.VITE_API_SERVER_URL
+
 export const useCommitsStore = defineStore('commits', {
   state: (): State => ({
     latest: null,
@@ -24,13 +25,15 @@ export const useCommitsStore = defineStore('commits', {
     async fetch () {
       this.isLoading = true
 
-      const res = await octokit.request('GET /repos/vuetifyjs/vuetify/commits/master', {
-        page: 1,
-        order: 'created_at',
-      })
-      const data = res.data
+      try {
+        this.latest = await fetch(`${url}/github/commits`, {
+          method: 'GET',
+          credentials: 'include',
+        }).then(res => res.json())
+      } catch (err: any) {
+        console.error(err)
+      }
 
-      this.latest = data
       this.isLoading = false
     },
   },

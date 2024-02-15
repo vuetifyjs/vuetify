@@ -14,6 +14,8 @@ related:
 
 The `v-touch` directive allows you to capture swipe gestures and apply directional callbacks.
 
+<page-features />
+
 <entry />
 
 ## Usage

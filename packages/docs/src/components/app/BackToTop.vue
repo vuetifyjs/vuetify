@@ -15,7 +15,7 @@
           elevation="8"
           icon="mdi-chevron-up"
           size="large"
-          @click="onClick"
+          @click="goTo(0)"
         />
       </v-fab-transition>
     </div>
@@ -23,19 +23,18 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  // Composables
+  import { useGoTo } from 'vuetify'
 
-  const model = ref(false)
+  // Utilities
+  import { shallowRef } from 'vue'
+
+  const goTo = useGoTo({ layout: true })
+
+  const model = shallowRef(false)
 
   function onScroll () {
     model.value = window.scrollY > 200
-  }
-
-  function onClick () {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
   }
 </script>
 

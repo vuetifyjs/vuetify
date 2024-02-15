@@ -17,6 +17,8 @@ related:
 
 Vuetify uses **SASS/SCSS** to craft the style and appearance of all aspects of the framework.
 
+<page-features />
+
 <entry />
 
 ::: info
@@ -59,7 +61,7 @@ Create a **main.scss** file in your **src/styles** directory and update the styl
 
 ```scss { resource="src/styles/main.scss" }
 @use 'vuetify' with (
-  $variable: false,
+  // variables go here
 );
 ```
 

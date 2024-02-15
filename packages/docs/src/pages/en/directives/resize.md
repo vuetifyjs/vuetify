@@ -14,6 +14,8 @@ related:
 
 The `v-resize` directive can be used for calling specific functions when the window resizes.
 
+<page-features />
+
 <entry />
 
 ## Usage

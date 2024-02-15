@@ -9,9 +9,10 @@
       :alt="product.title"
       :name="product.title"
       :src="product.src"
-      height="185"
-      max-height="185"
-      min-height="185"
+      cover
+      height="230"
+      max-height="230"
+      min-height="230"
     >
       <figcaption class="d-flex text-subtitle-2 align-center text-capitalize mt-3">
         <span v-text="product.title" />

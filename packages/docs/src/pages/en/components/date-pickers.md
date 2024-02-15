@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Date pickers
   description: The date picker component is a stand-alone interface that allows the selection of a date, month and year.
@@ -12,12 +11,12 @@ features:
   github: /components/VDatePicker/
   label: 'C: VDatePicker'
   report: true
-  spec: https://material.io/components/date-pickers
+  spec: https://m2.material.io/components/date-pickers
 ---
 
 # Date pickers
 
-`v-date-picker` is a fully featured date selection component that lets users select a date, or range of dates.
+`v-date-picker` is a fully featured date selection component that lets users select a date.
 
 ![Date picker Entry](https://cdn.vuetifyjs.com/docs/images/components/v-date-picker/v-date-picker-entry.png)
 

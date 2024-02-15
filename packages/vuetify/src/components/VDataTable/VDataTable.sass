@@ -60,7 +60,8 @@
                 .v-data-table-header__sort-icon
                   opacity: 0.5
 
-.v-data-table-column--fixed
+.v-data-table-column--fixed,
+.v-data-table__th--sticky
   background: $table-background
   position: sticky !important
   left: 0
@@ -109,6 +110,9 @@
     border: none !important
     height: auto !important
     padding: 0 !important
+
+.v-data-table-progress__loader
+  position: relative
 
 .v-data-table-rows-loading,
 .v-data-table-rows-no-data

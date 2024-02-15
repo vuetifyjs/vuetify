@@ -48,14 +48,13 @@
 
       <app-vertical-divider v-if="lgAndUp" class="ms-2 me-3" />
 
-      <app-bar-auth-dialog />
+      <vo-auth-dialog />
     </template>
   </v-app-bar>
 </template>
 
 <script setup>
   // Components
-  import AppBarAuthDialog from './AuthDialog.vue'
   import AppBarEcosystemMenu from './EcosystemMenu.vue'
   import AppBarEnterpriseLink from './EnterpriseLink.vue'
   import AppBarJobsLink from './JobsLink.vue'
@@ -77,7 +76,7 @@
   import { useRoute } from 'vue-router'
 
   // Stores
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@vuetify/one'
 
   // Utilities
   import { computed } from 'vue'

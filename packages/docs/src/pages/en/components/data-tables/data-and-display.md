@@ -113,3 +113,15 @@ Unless you are using the **multi-sort** prop seen below, this array will almost 
 Using the **multi-sort** prop will enable you to sort on multiple columns at the same time.
 
 <example file="v-data-table/prop-multi-sort" />
+
+### Sort by raw
+
+::: success
+
+This feature was introduced in [v3.5.0 (Polaris)](/getting-started/release-notes/?version=v3.5.0)
+
+:::
+
+Using a *sortRaw* key in your headers object gives you access to all values on the item. This is useful if you want to sort by a value that is not displayed in the table or a combination of multiple values.
+
+<example file="v-data-table/prop-headers-sort-raw" />

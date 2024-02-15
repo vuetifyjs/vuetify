@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Licensing
   title: Licensing
@@ -14,6 +13,8 @@ related:
 # Licensing
 
 This document provides comprehensive details about the licensing of the Vuetify framework.
+
+<page-features />
 
 <entry />
 

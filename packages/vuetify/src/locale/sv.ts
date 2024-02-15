@@ -56,6 +56,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} fler',
+    today: 'Today',
   },
   input: {
     clear: 'Rensa {0}',
