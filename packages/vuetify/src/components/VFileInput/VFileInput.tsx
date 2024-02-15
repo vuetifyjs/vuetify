@@ -127,7 +127,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       if (!isFocused.value) focus()
     }
     function onClickPrepend (e: MouseEvent) {
-      onControlClick(e)
+      inputRef.value?.click()
     }
     function onControlMousedown (e: MouseEvent) {
       emit('mousedown:control', e)
