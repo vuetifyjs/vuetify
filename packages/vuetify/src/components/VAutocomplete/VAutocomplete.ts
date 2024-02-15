@@ -337,9 +337,13 @@ export default VSelect.extend({
     onClick (e: MouseEvent) {
       if (!this.isInteractive) return
 
-      this.selectedIndex > -1
-        ? (this.selectedIndex = -1)
-        : this.onFocus()
+      if (this.selectedIndex > -1) {
+        this.selectedIndex = -1
+      }
+      if (!this.isFocused) {
+        this.isFocused = true
+        this.$emit('focus')
+      }
 
       if (!this.isAppendInner(e.target)) this.activateMenu()
     },
