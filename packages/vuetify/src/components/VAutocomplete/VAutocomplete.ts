@@ -355,7 +355,7 @@ export default VSelect.extend({
       // If typing and menu is not currently active
       if (target.value) this.activateMenu()
 
-      if (!this.multiple && value === '') this.deleteCurrentItem()
+      if (!this.multiple && !this.hasChips && value === '') this.deleteCurrentItem()
 
       this.internalSearch = value
       this.badInput = target.validity && target.validity.badInput
