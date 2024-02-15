@@ -144,7 +144,7 @@ export const VColorPickerCanvas = defineComponent({
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       const valueGradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
-      valueGradient.addColorStop(0, 'hsla(0, 0%, 100%, 0)') // transparent
+      valueGradient.addColorStop(0, 'hsla(0, 0%, 0%, 0)') // transparent
       valueGradient.addColorStop(1, 'hsla(0, 0%, 0%, 1)') // black
       ctx.fillStyle = valueGradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)

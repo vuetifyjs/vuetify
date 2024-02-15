@@ -79,7 +79,7 @@ export function useCalendar (props: CalendarProps) {
     undefined,
     v => {
       const value = v != null ? Number(v) : adapter.getMonth(displayValue.value)
-      const date = adapter.setYear(adapter.date(), adapter.getYear(year.value))
+      const date = adapter.setYear(adapter.startOfMonth(adapter.date()), adapter.getYear(year.value))
 
       return adapter.setMonth(date, value)
     },

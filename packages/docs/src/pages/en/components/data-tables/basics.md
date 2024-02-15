@@ -150,7 +150,7 @@ You can apply the **hide-default-header** and **hide-default-footer** props to r
 
 The **show-select** prop will render a checkbox in the default header to toggle all rows, and a checkbox for each row.
 
-For more information and examples, see the [selection](/components/data-tables/selection) page.
+For more information and examples, see the [selection examples](/components/data-tables/data-and-display/#selection-examples) page.
 
 <example file="v-data-table/prop-row-selection" />
 

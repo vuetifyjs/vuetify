@@ -88,6 +88,7 @@ export const makeVOverlayProps = propsFactory({
   contentClass: null,
   contentProps: null,
   disabled: Boolean,
+  opacity: [Number, String],
   noClickAnimation: Boolean,
   modelValue: Boolean,
   persistent: Boolean,
@@ -264,7 +265,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
           }, activatorEvents.value, props.activatorProps),
         })}
 
-        { !props.disabled && isMounted.value && hasContent.value && (
+        { isMounted.value && hasContent.value && (
           <Teleport
             disabled={ !teleportTarget.value }
             to={ teleportTarget.value }
@@ -283,7 +284,10 @@ export const VOverlay = genericComponent<OverlaySlots>()({
               ]}
               style={[
                 stackStyles.value,
-                { top: convertToUnit(top.value) },
+                {
+                  '--v-overlay-opacity': props.opacity,
+                  top: convertToUnit(top.value),
+                },
                 props.style,
               ]}
               ref={ root }
@@ -292,7 +296,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
             >
               <Scrim
                 color={ scrimColor }
-                modelValue={ !!props.scrim && isActive.value }
+                modelValue={ isActive.value && !!props.scrim }
                 { ...scrimEvents.value }
               />
               <MaybeTransition

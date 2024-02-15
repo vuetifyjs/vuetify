@@ -25,8 +25,9 @@ export function installVuetify (app: App) {
   const vuetify = createVuetify({
     aliases: {
       BorderChip: components.VChip,
-      PageFeatureChip: components.VChip,
       NewInChip: components.VChip,
+      PageFeatureChip: components.VChip,
+      PrimaryBtn: components.VBtn,
       SettingsSwitch: components.VSwitch,
     },
     components: {
@@ -37,12 +38,6 @@ export function installVuetify (app: App) {
     defaults: {
       global: {
         eager: false,
-      },
-      PageFeatureChip: {
-        variant: 'tonal',
-        border: true,
-        class: 'text-medium-emphasis me-2 mb-2',
-        size: 'small',
       },
       NewInChip: {
         appendIcon: 'mdi-page-next',
@@ -56,6 +51,26 @@ export function installVuetify (app: App) {
         VIcon: {
           class: 'ms-2',
           size: 'small',
+        },
+      },
+      PageFeatureChip: {
+        variant: 'tonal',
+        border: true,
+        class: 'text-medium-emphasis me-2 mb-2',
+        size: 'small',
+      },
+      PrimaryBtn: {
+        border: true,
+        class: 'text-none',
+        color: 'primary',
+        slim: true,
+        size: 'small',
+        variant: 'outlined',
+
+        VProgressCircular: {
+          indeterminate: true,
+          size: 16,
+          width: 1,
         },
       },
       SettingsSwitch: {

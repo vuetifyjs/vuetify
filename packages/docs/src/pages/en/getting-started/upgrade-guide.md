@@ -205,6 +205,10 @@ app.use(vuetify)
 - `v-subheader`  has been renamed to `v-list-subheader`.
 - `v-list-item`'s `active` scoped slot prop has been renamed to `isActive`
 
+### v-navigation-drawer
+
+- `stateless` prop has been removed, manually control state using `model-value` or `v-model` instead.
+
 ### v-rating
 
 - `color` has been renamed to `active-color`.

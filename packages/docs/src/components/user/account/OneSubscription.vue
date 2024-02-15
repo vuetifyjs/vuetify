@@ -15,33 +15,38 @@
     </template>
 
     <template #append>
-      <v-btn
+      <PrimaryBtn
+        v-if="!one.isSubscriber"
         :loading="one.isLoading"
-        :text="hasBilling ? 'Manage' : 'Subscribe'"
-        border
-        class="text-none"
-        color="primary"
-        size="small"
-        slim
-        variant="outlined"
-        width="80"
-        @click="onClick"
+        color="success"
+        prepend-icon="mdi-check"
+        text="Activate"
+        @click="one.subscribe"
       >
         <template #loader>
-          <v-progress-circular
-            indeterminate
-            size="16"
-            width="1"
-          />
+          <v-progress-circular />
         </template>
-      </v-btn>
+      </PrimaryBtn>
+
+      <PrimaryBtn
+        v-if="hasBilling"
+        :loading="billing"
+        class="ms-2"
+        prepend-icon="mdi-credit-card-outline"
+        text="Billing"
+        @click="onClickBilling"
+      >
+        <template #loader>
+          <v-progress-circular />
+        </template>
+      </PrimaryBtn>
     </template>
   </v-list-item>
 </template>
 
 <script setup>
   // Utilities
-  import { computed } from 'vue'
+  import { computed, shallowRef } from 'vue'
 
   // Store
   import { useAuthStore, useHttpStore, useOneStore } from '@vuetify/one'
@@ -52,10 +57,10 @@
 
   const hasBilling = computed(() => !!one.subscription?.tierName)
 
-  function onClick () {
-    if (!hasBilling.value) return one.subscribe()
+  const billing = shallowRef(false)
 
-    one.isLoading = true
+  function onClickBilling () {
+    billing.value = true
     window.location.href = http.url + '/one/manage'
   }
 </script>
