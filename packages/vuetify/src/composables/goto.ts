@@ -1,6 +1,6 @@
 // Utilities
 import { inject } from 'vue'
-import { clamp, consoleWarn, mergeDeep, refElement } from '@/util'
+import { consoleWarn, mergeDeep, refElement } from '@/util'
 
 // Types
 import type { ComponentPublicInstance, InjectionKey, Ref } from 'vue'
