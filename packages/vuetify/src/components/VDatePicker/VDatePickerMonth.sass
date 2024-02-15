@@ -1,26 +1,28 @@
+@use './variables' as *
+
 .v-date-picker-month
   display: flex
   justify-content: center
-  min-width: 328px
+  padding: $date-picker-month-padding
 
   --v-date-picker-month-day-diff: 4px
 
 .v-date-picker-month__weeks
   display: grid
   grid-template-rows: min-content min-content min-content min-content min-content min-content min-content
-  row-gap: 4px
-  font-size: .875rem
+  column-gap: $date-picker-month-column-gap
+  font-size: $date-picker-month-font-size
 
   + .v-date-picker-month__days
     grid-row-gap: 0
 
 .v-date-picker-month__weekday
-  font-size: .875rem
+  font-size: $date-picker-month-font-size
 
 .v-date-picker-month__days
   display: grid
   grid-template-columns: min-content min-content min-content min-content min-content min-content min-content
-  row-gap: 4px
+  column-gap: $date-picker-month-column-gap
   flex: 1 1
   justify-content: space-around
 
@@ -29,11 +31,17 @@
   display: flex
   justify-content: center
   position: relative
+  height: $date-picker-month-day-size
+  width: $date-picker-month-day-size
 
   &--selected
     .v-btn
       background-color: rgb(var(--v-theme-surface-variant))
       color: rgb(var(--v-theme-on-surface-variant))
+
+  .v-btn.v-date-picker-month__day-btn
+    --v-btn-height: #{$date-picker-month-btn-height}
+    --v-btn-size: #{$date-picker-month-btn-size}
 
   &--week
     font-size: var(--v-btn-size)
