@@ -6,5 +6,8 @@
     "plain": "Removes the default background change applied when hovering over the button.",
     "stacked": "Displays the button as a flex-column.",
     "slim": "Reduces padding to 0 8px."
+  },
+  "exposed": {
+    "group": "Internal representation when used in VBtnToggle."
   }
 }
