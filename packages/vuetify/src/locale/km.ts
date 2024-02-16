@@ -97,4 +97,17 @@ export default {
     loadMore: 'ទាញយកបន្ថែម',
     empty: 'គ្មានទំព័រទៀត',
   },
+  rules: {
+    required: 'This field is required',
+    email: 'Please enter a valid email',
+    number: 'This field can only contain numbers',
+    integer: 'This field can only contain integer values',
+    capital: 'This field can only contain uppercase letters',
+    maxLength: 'You must enter a maximum of {0} characters',
+    minLength: 'You must enter a minimum of {0} characters',
+    strictLength: 'The length of the entered field is invalid',
+    exclude: 'The {0} character is not allowed',
+    notEmpty: 'Please choose at least one value',
+    pattern: 'Invalid format',
+  },
 }
