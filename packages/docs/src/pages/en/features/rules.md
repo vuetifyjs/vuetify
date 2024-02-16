@@ -21,7 +21,7 @@ The rules composable provide a multitude of validation rules to be used with for
 <entry />
 
 ::: success
-This feature was introduced in [v3.5.0](/getting-started/release-notes/?version=v3.5.0)
+This feature was introduced in [v3.7.0](/getting-started/release-notes/?version=v3.7.0)
 :::
 
 ## Usage
@@ -69,6 +69,33 @@ In this case, error message can be redefined as second parameter:
   <v-text-field
     label="Username"
     :rules="[rules.maxLength(10, 'You can\'t write over 10 characters')]"
+  ></v-text-field>
+</v-form>
+```
+
+## Aliases
+
+Rules can also be used in inputs using the alias names syntax:
+
+```html { resource="src/App.vue" }
+<v-form>
+  <v-text-field
+    label="Username"
+    :rules="['$required']"
+  ></v-text-field>
+</v-form>
+```
+
+RuleBuilders parameters can also be passed using an Array:
+
+```html { resource="src/App.vue" }
+<v-form>
+  <v-text-field
+    label="Username"
+    :rules="[
+      ['$required', 'This field is mandatory'],
+      ['$maxLength', 10, 'You can\'t write over 10 characters']
+    ]"
   ></v-text-field>
 </v-form>
 ```
