@@ -73,7 +73,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
     }
   }
 
-  const createAttribute = (directive: DirectiveData) => {
+  const createVueDirective = (directive: DirectiveData) => {
     const createAttributeVueArgument = (argument: any) => {
       return {
         pattern: undefined,
@@ -99,17 +99,19 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
       }
     }
 
+    const directiveName = directive.displayName.slice(2)
+
     return {
-      name: directive.displayName,
+      name: directiveName,
       aliases: undefined,
       description: '', // TODO: we should probably include directive description in locale files
       'doc-url': getDocUrl(directive.pathName),
       default: '',
       required: false,
-      value: createAttributeValue(directive.argument),
+      'attribute-value': createAttributeValue(directive.argument),
       source: {
         module: './src/directives/index.ts',
-        symbol: capitalize(directive.displayName.slice(2)),
+        symbol: capitalize(directiveName),
       },
       'vue-argument': directive.argument?.value && createAttributeVueArgument(directive.argument?.value), // TODO: how to use this in comparison to value?
       'vue-modifiers': directive.modifiers &&
@@ -118,7 +120,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
   }
 
   const tags = componentData.map(createTag)
-  const attributes = directiveData.map(createAttribute)
+  const vueDirectives = directiveData.map(createVueDirective)
 
   const webTypes = {
     $schema: 'http://json.schemastore.org/web-types',
@@ -130,7 +132,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
         'types-syntax': 'typescript',
         'description-markup': 'markdown',
         tags,
-        attributes,
+        'vue-directives': vueDirectives,
       },
     },
   }
