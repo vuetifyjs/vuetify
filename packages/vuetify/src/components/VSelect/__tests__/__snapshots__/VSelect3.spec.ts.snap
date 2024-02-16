@@ -19,6 +19,7 @@ exports[`VSelect.ts should add color to selected index 1`] = `
                  type="text"
                  aria-readonly="false"
                  autocomplete="off"
+                 style="min-width: 0 !important; max-width: 0 !important; width: 0px !important; min-height: 0 !important; max-height: 0 !important; height: 0px;"
           >
         </div>
         <div class="v-input__append-inner">

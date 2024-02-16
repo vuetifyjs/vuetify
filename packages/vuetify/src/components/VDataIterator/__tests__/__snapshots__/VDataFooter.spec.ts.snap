@@ -23,6 +23,7 @@ exports[`VDataFooter.ts should disable last page button if no items 1`] = `
                      type="text"
                      aria-readonly="false"
                      autocomplete="off"
+                     style="min-width: 0 !important; max-width: 0 !important; width: 0px !important; min-height: 0 !important; max-height: 0 !important; height: 0px;"
               >
             </div>
             <div class="v-input__append-inner">
@@ -124,6 +125,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
                      type="text"
                      aria-readonly="false"
                      autocomplete="off"
+                     style="min-width: 0 !important; max-width: 0 !important; width: 0px !important; min-height: 0 !important; max-height: 0 !important; height: 0px;"
               >
             </div>
             <div class="v-input__append-inner">
@@ -221,6 +223,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
                      type="text"
                      aria-readonly="false"
                      autocomplete="off"
+                     style="min-width: 0 !important; max-width: 0 !important; width: 0px !important; min-height: 0 !important; max-height: 0 !important; height: 0px;"
               >
             </div>
             <div class="v-input__append-inner">
@@ -318,6 +321,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
                      type="text"
                      aria-readonly="false"
                      autocomplete="off"
+                     style="min-width: 0 !important; max-width: 0 !important; width: 0px !important; min-height: 0 !important; max-height: 0 !important; height: 0px;"
               >
             </div>
             <div class="v-input__append-inner">
@@ -394,6 +398,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
                      type="text"
                      aria-readonly="false"
                      autocomplete="off"
+                     style="min-width: 0 !important; max-width: 0 !important; width: 0px !important; min-height: 0 !important; max-height: 0 !important; height: 0px;"
               >
             </div>
             <div class="v-input__append-inner">

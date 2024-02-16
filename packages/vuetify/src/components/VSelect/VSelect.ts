@@ -20,7 +20,7 @@ import Filterable from '../../mixins/filterable'
 import ClickOutside from '../../directives/click-outside'
 
 // Utilities
-import mergeData from '../../util/mergeData'
+import mergeData, { mergeStyles } from '../../util/mergeData'
 import { getPropertyFromItem, getObjectValueByPath, keyCodes } from '../../util/helpers'
 import { consoleError } from '../../util/console'
 
@@ -416,6 +416,16 @@ export default baseMixins.extend<options>().extend({
       // Otherwise push it into children
       } else {
         selections.children = selections.children || []
+        if (selections.children.length > 0) {
+          input.data!.style = mergeStyles(input.data!.style, {
+            minWidth: '0 !important',
+            maxWidth: '0 !important',
+            width: '0 !important',
+            minHeight: '0 !important',
+            maxHeight: '0 !important',
+            height: '0 !important',
+          })
+        }
         selections.children.push(input)
       }
 
