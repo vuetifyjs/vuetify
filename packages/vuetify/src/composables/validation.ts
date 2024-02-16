@@ -62,7 +62,7 @@ export const makeValidationProps = propsFactory({
     default: null,
   },
   rules: {
-    type: Array as PropType<readonly (ValidationRule | string)[]>,
+    type: Array as PropType<readonly (ValidationRule | ValidationAlias)[]>,
     default: () => ([]),
   },
   modelValue: null,
