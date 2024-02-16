@@ -233,3 +233,5 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     })
   },
 })
+
+export type VDataTableHeaders = InstanceType<typeof VDataTableHeaders>
