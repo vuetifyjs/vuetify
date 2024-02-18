@@ -117,7 +117,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
     })
 
     function onClickOutside (e: MouseEvent) {
-      if (e && !isClickInsideElement(e, overlay.value!.contentEl!)) {
+      if (!isClickInsideElement(e, overlay.value!.contentEl!)) {
         parent?.closeParents()
       }
     }
