@@ -74,9 +74,11 @@ export const VMenu = genericComponent<OverlaySlots>()({
       unregister () {
         --openChildren.value
       },
-      closeParents () {
+      closeParents (e) {
         setTimeout(() => {
-          if (!openChildren.value) {
+          if (!openChildren.value &&
+            (e == null || (e && !isClickInsideElement(e, overlay.value!.contentEl!)))
+          ) {
             isActive.value = false
             parent?.closeParents()
           }
@@ -117,9 +119,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
     })
 
     function onClickOutside (e: MouseEvent) {
-      if (!isClickInsideElement(e, overlay.value!.contentEl!)) {
-        parent?.closeParents()
-      }
+      parent?.closeParents(e)
     }
 
     function onKeydown (e: KeyboardEvent) {
