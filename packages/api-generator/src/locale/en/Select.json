@@ -5,6 +5,7 @@
     "closableChips": "Enables the [closable](/api/v-chip/#props-closable) prop on all [v-chip](/components/chips/) components.",
     "hideSelected": "Do not display in the select menu items that are already selected.",
     "itemColor": "Sets color of selected items.",
+    "listProps": "Pass props through to the `v-list` component. Accepts an object with anything from [v-list](/api/v-list/#props) props, camelCase keys are recommended.",
     "menuProps": "Pass props through to the `v-menu` component. Accepts an object with anything from [v-menu](/api/v-menu/#props) props, camelCase keys are recommended.",
     "multiple": "Changes select to multiple. Accepts array for value.",
     "openOnClear": "Open's the menu whenever the clear icon is clicked.",

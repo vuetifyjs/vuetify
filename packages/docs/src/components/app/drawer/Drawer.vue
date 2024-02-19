@@ -28,6 +28,9 @@
 </template>
 
 <script setup>
+  // Composables
+  import { scrollTo } from 'vuetify/lib/composables/goto'
+
   const app = useAppStore()
   const pins = usePinsStore()
   const user = useUserStore()
@@ -47,6 +50,19 @@
   })
   const railEnabled = computed(() => user.railDrawer)
 
+  // Restore scroll position when drawer is expanded
+  let scrollingElement
+  let lastScroll = 0
+  watch(rail, val => {
+    if (val) {
+      lastScroll = scrollingElement.scrollTop
+    } else {
+      scrollTo(lastScroll, {
+        container: scrollingElement,
+      })
+    }
+  })
+
   const image = computed(() => {
     if (['dark', 'light'].includes(theme.name.value)) return undefined
 
@@ -58,6 +74,8 @@
   })
 
   onMounted(async () => {
+    scrollingElement = document.querySelector('#app-drawer .v-navigation-drawer__content')
+
     if (pins.pageIsPinned) {
       _opened.value = []
 

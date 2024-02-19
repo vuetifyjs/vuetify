@@ -14,7 +14,7 @@ import { useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { extractColor, modes, nullColor } from './util'
 import { consoleWarn, defineComponent, HSVtoCSS, omit, parseColor, propsFactory, RGBtoHSV, useRender } from '@/util'
 
@@ -77,8 +77,8 @@ export const VColorPicker = defineComponent({
 
   setup (props) {
     const mode = useProxiedModel(props, 'mode')
-    const lastPickedColor = ref<HSV | null>(null)
-    const currentColor = useProxiedModel(
+    const hue = ref<number | null>(null)
+    const model = useProxiedModel(
       props,
       'modelValue',
       undefined,
@@ -93,11 +93,6 @@ export const VColorPicker = defineComponent({
           return null
         }
 
-        if (lastPickedColor.value) {
-          c = { ...c, h: lastPickedColor.value.h }
-          lastPickedColor.value = null
-        }
-
         return c
       },
       v => {
@@ -106,11 +101,28 @@ export const VColorPicker = defineComponent({
         return extractColor(v, props.modelValue)
       }
     )
+    const currentColor = computed(() => {
+      return model.value
+        ? { ...model.value, h: hue.value ?? model.value.h }
+        : null
+    })
     const { rtlClasses } = useRtl()
 
+    let externalChange = true
+    watch(model, v => {
+      if (!externalChange) {
+        // prevent hue shift from rgb conversion inaccuracy
+        externalChange = true
+        return
+      }
+      if (!v) return
+      hue.value = v.h
+    }, { immediate: true })
+
     const updateColor = (hsva: HSV) => {
-      currentColor.value = hsva
-      lastPickedColor.value = hsva
+      externalChange = false
+      hue.value = hsva.h
+      model.value = hsva
     }
 
     onMounted(() => {

@@ -127,7 +127,7 @@ export const VDatePicker = genericComponent<new <
     })
     const text = computed(() => {
       return adapter.format(
-        adapter.parseISO(`${year.value}-${month.value + 1}-01`),
+        adapter.date(new Date(year.value, month.value, 1)),
         'monthAndYear',
       )
     })
