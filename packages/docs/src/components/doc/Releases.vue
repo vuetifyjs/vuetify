@@ -88,7 +88,7 @@
         </div>
 
         <div class="d-flex align-center">
-          <app-tooltip-btn
+          <AppTooltipBtn
             v-for="(tooltip, i) in tooltips"
             :key="i"
             :href="tooltip.href"
@@ -109,7 +109,7 @@
         <v-divider />
 
         <div class="px-4 pt-4">
-          <app-markdown
+          <AppMarkdown
             :content="model.body"
             class="releases"
           />
@@ -121,7 +121,7 @@
           <div class="px-4 pb-4">
             <h2 class="text-h6 font-weight-bold">Assets</h2>
 
-            <app-sheet>
+            <AppSheet>
               <v-list-item
                 :href="model.zipball_url"
                 target="_blank"
@@ -143,7 +143,7 @@
                 nav
                 append-icon="mdi-download-box-outline"
               />
-            </app-sheet>
+            </AppSheet>
           </div>
         </template>
       </template>
@@ -159,16 +159,10 @@
 
 <script setup lang="ts">
   // Composables
-  import { useI18n } from 'vue-i18n'
-  import { useDate, useDisplay, version } from 'vuetify'
-  import { useRoute, useRouter } from 'vue-router'
+  import { version } from 'vuetify'
 
-  // Stores
-  import { Release, useReleasesStore } from '@/store/releases'
-
-  // Utilities
-  import { computed, onBeforeMount, ref, shallowRef, watch } from 'vue'
-  import { wait } from '@/util/helpers'
+  // Types
+  import type { Release } from '@/stores/releases'
 
   const reactions = {
     '+1': '👍',

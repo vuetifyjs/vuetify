@@ -28,10 +28,10 @@
     </v-autocomplete>
 
     <template v-if="model">
-      <api-search ref="search" />
+      <ApiSearch ref="search" />
 
       <template v-for="(section, i) in sections" :key="i">
-        <api-section
+        <ApiSection
           :section="section"
           :name="model"
           show-headline
@@ -56,11 +56,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { camelize, nextTick, ref, shallowRef, watch } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
-  import { kebabCase } from 'lodash-es'
-
   const route = useRoute()
   const router = useRouter()
 

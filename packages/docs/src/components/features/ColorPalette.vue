@@ -1,6 +1,6 @@
 <template>
   <section id="material-colors" class="mb-4">
-    <app-text-field
+    <AppTextField
       v-model="search"
       class="mb-4"
     />
@@ -64,10 +64,6 @@
 </template>
 
 <script>
-  // Utilities
-  import kebabCase from 'lodash/kebabCase'
-  import colors from 'vuetify/util/colors'
-
   export default {
     name: 'ColorPalette',
 

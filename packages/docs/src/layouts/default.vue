@@ -1,18 +1,18 @@
 <template>
   <v-app>
-    <app-settings-drawer />
+    <AppSettingsDrawer />
 
-    <app-banner />
+    <AppBanner />
 
-    <app-bar />
+    <AppBarBar />
 
-    <app-drawer />
+    <AppDrawerDrawer />
 
-    <app-toc />
+    <AppToc />
 
-    <app-back-to-top />
+    <AppBackToTop />
 
-    <app-snackbar-queue />
+    <AppSnackbarQueue />
 
     <v-main>
       <slot>
@@ -30,7 +30,7 @@
             </v-fade-transition>
           </router-view>
 
-          <backmatter v-if="hasBackmatter" :key="route.name" />
+          <Backmatter v-if="hasBackmatter" :key="route.name" />
         </v-container>
       </slot>
     </v-main>
@@ -38,21 +38,6 @@
 </template>
 
 <script setup>
-  // Components
-  import AppBanner from '@/components/app/Banner.vue'
-  import AppBackToTop from '@/components/app/BackToTop.vue'
-  import AppBar from '@/components/app/bar/Bar.vue'
-  import AppDrawer from '@/components/app/drawer/Drawer.vue'
-  import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
-  import AppToc from '@/components/app/Toc.vue'
-  import AppSnackbarQueue from '@/components/app/SnackbarQueue.vue'
-
-  // Composables
-  import { useRoute } from 'vue-router'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const route = useRoute()
 
   const isApi = computed(() => route.meta?.category === 'api')

@@ -15,8 +15,5 @@
 </template>
 
 <script setup>
-  // Stores
-  import { useOneStore } from '@vuetify/one'
-
   const one = useOneStore()
 </script>

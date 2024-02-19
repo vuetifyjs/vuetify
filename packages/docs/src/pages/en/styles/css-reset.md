@@ -13,9 +13,9 @@ related:
 
 Opinionated base styles for Vuetify projects.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Bootstrapping
 

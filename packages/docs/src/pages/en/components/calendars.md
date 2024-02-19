@@ -19,7 +19,7 @@ features:
 
 The `v-calendar` component is used to display information in a daily, weekly, monthly. The daily view has slots for all day or timed elements, and the weekly and monthly view has a slot for each day.
 
-<page-features />
+<PageFeatures />
 
 ::: warning
 This feature requires [v3.4.9](/getting-started/release-notes/?version=v3.4.9)
@@ -29,9 +29,9 @@ This feature requires [v3.4.9](/getting-started/release-notes/?version=v3.4.9)
 
 A calendar has a type and a value which determines what type of calendar is shown over what span of time. This shows the bare minimum configuration, an array of events with **title**, **start** and **end** properties. **end** is optional, it defaults to the **start**. If the **start** has a time it's considered a timed event and will be shown accordingly in the day views. An event can span multiple days and will be rendered accordingly.
 
-<example file="v-calendar/usage" />
+<ExamplesExample file="v-calendar/usage" />
 
-<entry />
+<PromotedEntry />
 
 ## Installation
 
@@ -53,7 +53,7 @@ export default createVuetify({
 | - | - |
 | [v-calendar](/api/v-calendar/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Guide
 
@@ -67,16 +67,16 @@ The `v-calendar` component is equipped with a range of props that allow you to t
 
 This is a calendar with the type of `month`
 
-<example file="v-calendar/prop-type-month" />
+<ExamplesExample file="v-calendar/prop-type-month" />
 
 #### Type week
 
 This is a calendar with the type of `week`
 
-<example file="v-calendar/prop-type-week" />
+<ExamplesExample file="v-calendar/prop-type-week" />
 
 #### Type day
 
 This is a calendar with the type of `day`
 
-<example file="v-calendar/prop-type-day" />
+<ExamplesExample file="v-calendar/prop-type-day" />

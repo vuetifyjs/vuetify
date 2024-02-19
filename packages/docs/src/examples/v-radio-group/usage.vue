@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :options="options"
@@ -16,14 +16,10 @@
     <template v-slot:configuration>
       <v-checkbox v-model="label" label="Radio group label"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-radio-group'
   const model = ref('default')
   const options = ['inline']

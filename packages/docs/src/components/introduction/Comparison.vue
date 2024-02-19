@@ -6,9 +6,9 @@
     rounded
   >
     <v-table>
-      <caption class="pa-4 text-h6">
+      <AppCaption class="pa-4 text-h6">
         {{ t('comparison.caption', { year: (new Date()).getFullYear() }) }}
-      </caption>
+      </AppCaption>
 
       <thead>
         <tr>
@@ -83,9 +83,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
   // Types
   type Framework = {
     a11y?: boolean,

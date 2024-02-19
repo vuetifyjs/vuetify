@@ -7,10 +7,6 @@ meta:
   keywords: user dashboard
 ---
 
-<script setup>
-  import PerksOptions from '@/components/app/settings/PerksOptions.vue'
-</script>
-
 ### Perks
 
-<PerksOptions />
+<AppSettingsPerksOptions />

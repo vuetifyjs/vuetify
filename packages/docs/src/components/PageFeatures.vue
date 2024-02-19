@@ -79,18 +79,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-  import { useRoute } from 'vue-router'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { getBranch } from '@/util/helpers'
-
-  // Stores
-  import { useOneStore } from '@vuetify/one'
-  import { usePinsStore } from '@/store/pins'
-
   const one = useOneStore()
   const pins = usePinsStore()
   const route = useRoute()

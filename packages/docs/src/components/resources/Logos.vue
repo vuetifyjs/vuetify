@@ -1,5 +1,5 @@
 <template>
-  <app-btn
+  <AppBtn
     border
     href="https://cdn.vuetifyjs.com/docs/images/brand-kit/vuetify-brand-kit.zip"
     prepend-icon="mdi-download-box-outline"
@@ -13,7 +13,7 @@
 
       <v-col v-for="logo in logos" :key="logo.title" cols="auto">
         <v-sheet rounded border class="pa-4">
-          <app-figure
+          <AppFigure
             :src="`${logo.src}.svg`"
             :title="logo.title"
             class="mb-4 mx-auto"
@@ -54,7 +54,7 @@
           rounded
           width="300"
         >
-          <app-figure
+          <AppFigure
             :src="`${logo.src}.svg`"
             :title="logo.title"
             class="mb-4"
@@ -110,7 +110,7 @@
             {{ icon.title }}
           </figcaption>
 
-          <app-markup :code="icon.code" />
+          <AppMarkup :code="icon.code" />
         </v-sheet>
       </v-col>
     </v-row>
@@ -118,9 +118,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
   const { t } = useI18n()
 
   const logos = [

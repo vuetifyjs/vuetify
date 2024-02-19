@@ -18,15 +18,15 @@ features:
 
 `v-overlay` is the base for components that float over the rest of the page, such as `v-menu` and `v-dialog`. It can also be used on its own and comes with everything you need to create a custom popover component.
 
-<page-features />
+<PageFeatures />
 
 ## Usage
 
 In its simplest form, the `v-overlay` component will add a dimmed layer over your application.
 
-<example file="v-overlay/usage" />
+<ExamplesExample file="v-overlay/usage" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -34,7 +34,7 @@ In its simplest form, the `v-overlay` component will add a dimmed layer over you
 | - | - |
 | [v-overlay](/api/v-overlay/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Activator
 
@@ -91,7 +91,7 @@ The connected strategy is used by [v-menu](/components/menus) and [v-tooltip](/c
 
 `location` selects a point on the activator, and `origin` a point on the overlay content. The content element will be positioned so the two points overlap.
 
-<example file="v-overlay/connected-playground" />
+<ExamplesExample file="v-overlay/connected-playground" />
 
 ## Scroll Strategies
 
@@ -101,7 +101,7 @@ The connected strategy is used by [v-menu](/components/menus) and [v-tooltip](/c
 
 Scrolling is blocked while the overlay is active, and the scrollbar is hidden. If `contained` is also set, scrolling will only be blocked up to the overlay's [`offsetParent`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent).
 
-<example file="v-overlay/scroll-block" />
+<ExamplesExample file="v-overlay/scroll-block" />
 
 ### Close
 
@@ -109,7 +109,7 @@ Scrolling is blocked while the overlay is active, and the scrollbar is hidden. I
 
 Scrolling when the overlay is active will de-activate it.
 
-<example file="v-overlay/scroll-close" />
+<ExamplesExample file="v-overlay/scroll-close" />
 
 ### Reposition
 
@@ -117,7 +117,7 @@ Scrolling when the overlay is active will de-activate it.
 
 When using the `connected` location strategy, this scroll strategy will reposition the overlay element to always respect the activator location.
 
-<example file="v-overlay/scroll-reposition" />
+<ExamplesExample file="v-overlay/scroll-reposition" />
 
 ### None
 
@@ -125,7 +125,7 @@ When using the `connected` location strategy, this scroll strategy will repositi
 
 No scroll strategy is used.
 
-<example file="v-overlay/scroll-none" />
+<ExamplesExample file="v-overlay/scroll-none" />
 
 ## Examples
 
@@ -135,7 +135,7 @@ No scroll strategy is used.
 
 A **contained** overlay is positioned absolutely and contained inside its parent element.
 
-<example file="v-overlay/prop-contained" />
+<ExamplesExample file="v-overlay/prop-contained" />
 
 ### Misc
 
@@ -143,10 +143,10 @@ A **contained** overlay is positioned absolutely and contained inside its parent
 
 Using the [v-hover](/components/hover), we are able to add a nice scrim over the information card with additional actions the user can take.
 
-<example file="v-overlay/misc-advanced" />
+<ExamplesExample file="v-overlay/misc-advanced" />
 
 #### Loader
 
 Using the `v-overlay` as a background, add a progress component to easily create a custom loader.
 
-<example file="v-overlay/misc-loader" />
+<ExamplesExample file="v-overlay/misc-loader" />

@@ -14,13 +14,13 @@ related:
 
 Utilities for controlling the cursor styling when hovering over elements.
 
-<page-features />
+<PageFeatures />
 
 ## Usage
 
 Apply custom cursor styling to a component or element.
 
-<example file="cursor/usage" />
+<ExamplesExample file="cursor/usage" />
 
 | Class | Properties | |
 | - | - | - |
@@ -37,7 +37,7 @@ Apply custom cursor styling to a component or element.
 | **cursor-text** | cursor: text; | |
 | **cursor-wait** | cursor: wait; | |
 
-<entry />
+<PromotedEntry />
 
 ## Disable
 

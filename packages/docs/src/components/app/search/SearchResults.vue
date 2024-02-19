@@ -10,7 +10,7 @@
     nav
   >
     <template v-for="(group, i) in props.groups">
-      <app-sheet border :class="['pa-3', i !== 0 && 'mt-4']">
+      <AppSheet border :class="['pa-3', i !== 0 && 'mt-4']">
         <div class="text-high-emphasis font-weight-bold d-flex align-center text-h6 mb-2">
           <v-icon
             :icon="getIcon(group)"
@@ -76,17 +76,14 @@
             </v-list-item>
           </template>
         </template>
-      </app-sheet>
+      </AppSheet>
     </template>
   </v-list>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  // Types
   import type { VList } from 'vuetify/components'
-
-  // Stores
-  import { useAppStore } from '@/store/app'
 
   const props = defineProps<{ groups: any[] }>()
   const emit = defineEmits(['click:result'])

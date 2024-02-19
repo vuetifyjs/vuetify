@@ -1,9 +1,3 @@
-// Composables
-import { useCosmic } from '@/composables/cosmic'
-
-// Utilities
-import { defineStore } from 'pinia'
-
 interface Product {
   href: string
   title: string

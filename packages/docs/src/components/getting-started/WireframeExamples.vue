@@ -13,7 +13,7 @@
         rel="nofollow noopener"
         target="_blank"
       >
-        <app-figure
+        <AppFigure
           :alt="`${name} layout`"
           :aspect-ratio="16/9"
           :title="name"
@@ -26,10 +26,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import kebabCase from 'lodash/kebabCase'
-  import { rpath } from '@/util/routes'
-
   const wireframes = [
     'Baseline',
     'Extended toolbar',

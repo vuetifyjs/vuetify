@@ -65,9 +65,6 @@
 </template>
 
 <script setup>
-  // Stores
-  import { useAuthStore, useUserStore } from '@vuetify/one'
-
   const auth = useAuthStore()
   const user = useUserStore()
 

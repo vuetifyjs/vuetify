@@ -14,7 +14,7 @@ related:
 
 Data table filtering is key feature that allows users to quickly find the data they are looking for.
 
-<entry />
+<PromotedEntry />
 
 ## Filtering examples
 
@@ -24,13 +24,13 @@ These examples demonstrate various ways that you can utilize the **search** prop
 
 The data table exposes a **search** prop that allows you to filter your data.
 
-<example file="v-data-table/prop-search" />
+<ExamplesExample file="v-data-table/prop-search" />
 
 ### Filterable
 
 You can easily disable specific columns from being included when searching through table rows by setting the property **filterable** to false on the header item(s). In the example below the dessert name column is no longer searchable.
 
-<example file="v-data-table/prop-filterable" />
+<ExamplesExample file="v-data-table/prop-filterable" />
 
 ### Custom filter
 
@@ -42,7 +42,7 @@ You can override the default filtering used with the **search** prop by supplyin
 
 In the example below, the custom filter will only match inputs that are in completely in upper case.
 
-<example file="v-data-table/prop-custom-filter" />
+<ExamplesExample file="v-data-table/prop-custom-filter" />
 
 ## Pagination examples
 
@@ -52,7 +52,7 @@ Pagination is used to split up large amounts of data into smaller chunks.
 
 Pagination can be controlled externally by using the individual props, or by using the **options** prop. Remember that you must apply the **.sync** modifier.
 
-<example file="v-data-table/misc-external-paginate" />
+<ExamplesExample file="v-data-table/misc-external-paginate" />
 
 ## Selection examples
 
@@ -64,21 +64,21 @@ For the selection feature to work, the data table must be able to differentiate 
 
 You can also supply a function, if for example the unique value needs to be a composite of several properties. The function receives each item as its first argument.
 
-<example file="v-data-table/prop-item-value" />
+<ExamplesExample file="v-data-table/prop-item-value" />
 
 ### Selected values
 
 The current selection of the data-table can be accessed through the **v-model** prop. The array will consist of the unique values found in the property you set using the **item-value** prop (or the value returned by the function you passed). You can use **return-object** prop if you want the array to consist of the actual objects instead.
 
-<example file="v-data-table/prop-return-object" />
+<ExamplesExample file="v-data-table/prop-return-object" />
 
-<entry />
+<PromotedEntry />
 
 ### Selectable rows
 
 Use the **item-selectable** prop to designate a property on your items that controls if the item should be selectable or not.
 
-<example file="v-data-table/prop-item-selectable" />
+<ExamplesExample file="v-data-table/prop-item-selectable" />
 
 ### Select strategies
 
@@ -90,13 +90,13 @@ Data-tables support three different select strategies.
 |`'page'`|Multiple rows can be selected. Clicking on the select all checkbox in the header selects all (selectable) rows on the current page|
 |`'all'`|Multiple rows can be selected. Clicking on the select all checkbox in the header selects all (selectable) rows in the entire data set|
 
-<example file="v-data-table/prop-select-strategy" />
+<ExamplesExample file="v-data-table/prop-select-strategy" />
 
 ## Sorting examples
 
 Data tables can sort rows by a column value.
 
-<entry />
+<PromotedEntry />
 
 ### Basic sorting
 
@@ -106,13 +106,13 @@ The **key** corresponds to a column defined in the **headers** array, and **orde
 
 Unless you are using the **multi-sort** prop seen below, this array will almost always just have a single object in it.
 
-<example file="v-data-table/prop-sort-by" />
+<ExamplesExample file="v-data-table/prop-sort-by" />
 
 ### Multi sort
 
 Using the **multi-sort** prop will enable you to sort on multiple columns at the same time.
 
-<example file="v-data-table/prop-multi-sort" />
+<ExamplesExample file="v-data-table/prop-multi-sort" />
 
 ### Sort by raw
 
@@ -124,4 +124,4 @@ This feature was introduced in [v3.5.0 (Polaris)](/getting-started/release-notes
 
 Using a *sortRaw* key in your headers object gives you access to all values on the item. This is useful if you want to sort by a value that is not displayed in the table or a combination of multiple values.
 
-<example file="v-data-table/prop-headers-sort-raw" />
+<ExamplesExample file="v-data-table/prop-headers-sort-raw" />

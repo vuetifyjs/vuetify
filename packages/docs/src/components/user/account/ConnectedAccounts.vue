@@ -1,5 +1,5 @@
 <template>
-  <app-sheet>
+  <AppSheet>
     <v-data-table
       :headers="headers"
       :items="identities"
@@ -31,16 +31,10 @@
       <template #bottom />
     </v-data-table>
 
-  </app-sheet>
+  </AppSheet>
 </template>
 
 <script setup>
-  // Stores
-  import { useAuthStore } from '@vuetify/one'
-
-  // Utilities
-  import { computed, ref } from 'vue'
-
   const auth = useAuthStore()
   const headers = ref([
     { title: 'Provider', key: 'provider' },

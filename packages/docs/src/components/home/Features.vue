@@ -43,9 +43,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { rpath } from '@/util/routes'
-
   const features = [
     {
       text: 'When you run into a roadblock, you need assistance right away. Vuetify offers support in our massive community on Discord.',

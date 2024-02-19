@@ -63,18 +63,16 @@
     </v-container>
 
     <div class="px-4 pb-3 text-medium-emphasis text-caption">
-      *View more detailed information on our <app-link
+      *View more detailed information on our <AppLink
         href="https://discord.com/servers/vuetify-340160225338195969"
       >
         Discord Welcome Page
-      </app-link>
+      </AppLink>
     </div>
   </v-sheet>
 </template>
 
 <script setup>
-  import { useDisplay } from 'vuetify'
-
   const { mdAndUp } = useDisplay()
 
   const tiers = [

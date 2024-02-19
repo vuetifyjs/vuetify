@@ -1,7 +1,3 @@
-// Utilities
-import { defineStore } from 'pinia'
-import { onBeforeMount, ref } from 'vue'
-
 // Types
 type Job = {
   id: number

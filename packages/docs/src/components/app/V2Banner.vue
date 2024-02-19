@@ -36,9 +36,6 @@
 </template>
 
 <script setup>
-  import { useUserStore } from '@vuetify/one'
-  import { computed } from 'vue'
-
   const user = useUserStore()
 
   const showBanner = computed(() => !user.notifications.last.v2banner)

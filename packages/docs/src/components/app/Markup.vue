@@ -68,15 +68,8 @@
   import 'prismjs/components/prism-scss.js'
   import 'prismjs/components/prism-typescript.js'
 
-  // Composables
-  import { useI18n } from 'vue-i18n'
-  import { useTheme } from 'vuetify'
-  import { useUserStore } from '@vuetify/one'
-
-  // Utilities
-  import { ComponentPublicInstance, computed, ref, watchEffect } from 'vue'
-  import { wait } from '@/util/helpers'
-  import { stripLinks } from '@/components/api/utils'
+  // Types
+  import type { ComponentPublicInstance } from 'vue'
 
   const props = defineProps({
     resource: String,

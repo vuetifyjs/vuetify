@@ -2,9 +2,9 @@
   <td :id="`${section}-${name.replace('$', '')}`">
     <div class="d-inline-flex align-center">
       <kbd class="name-item text-mono">
-        <app-link :href="href" class="font-weight-bold">
+        <AppLink :href="href" class="font-weight-bold">
           {{ name }}
-        </app-link>
+        </AppLink>
       </kbd>
 
       <new-in-chip
@@ -17,13 +17,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const props = defineProps({
     section: String,
     name: String,
