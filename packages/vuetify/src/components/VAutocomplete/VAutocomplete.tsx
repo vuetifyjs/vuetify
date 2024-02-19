@@ -322,13 +322,14 @@ export const VAutocomplete = genericComponent<new <
 
     const isSelecting = shallowRef(false)
 
-    function select (item: ListItem, add = true) {
+    function select (item: ListItem) {
       if (item.props.disabled) return
 
-      if (props.multiple) {
-        const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
+      const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
+      const add = index === -1
 
-        if (index === -1) {
+      if (props.multiple) {
+        if (add) {
           model.value = [...model.value, item]
         } else {
           const value = [...model.value]
@@ -544,7 +545,7 @@ export const VAutocomplete = genericComponent<new <
                     e.stopPropagation()
                     e.preventDefault()
 
-                    select(item, false)
+                    select(item)
                   }
 
                   const slotProps = {
