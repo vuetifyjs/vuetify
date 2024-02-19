@@ -6,7 +6,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 // Types
 export type VBarlineSlots = {
   default: void
-  label: void
+  label: { index: number, value: string }
 }
 
 export type SparklineItem = number | { value: number }
@@ -127,9 +127,6 @@ export const VBarline = genericComponent<VBarlineSlots>()({
       return (
         <svg
           display="block"
-          viewBox={ `0 0 ${Math.max(props.modelValue.length * lineWidth.value, Number(props.width))} ${hasLabels.value
-                  ? parseInt(props.height, 10) + parseInt(props.labelSize, 10) * 1.5
-                  : parseInt(props.height, 10)}` }
         >
           <defs>
             <linearGradient
@@ -183,7 +180,6 @@ export const VBarline = genericComponent<VBarlineSlots>()({
             <g
               key="labels"
               style={{
-                fontSize: 8,
                 textAnchor: 'middle',
                 dominantBaseline: 'mathematical',
                 fill: 'currentColor',
@@ -192,13 +188,11 @@ export const VBarline = genericComponent<VBarlineSlots>()({
               {
                 parsedLabels.value.map((item, i) => (
                   <text
-                    x={ item.x + (offsetX.value / 2) + lineWidth.value / 2 }
-                    y={ (parseInt(props.height, 10)) + (parseInt(props.labelSize, 10) || 7 * 0.75) }
+                    x={ item.x + offsetX.value + lineWidth.value / 2 }
+                    y={ (parseInt(props.height, 10) - 2) + (parseInt(props.labelSize, 10) || 7 * 0.75) }
                     font-size={ Number(props.labelSize) || 7 }
                   >
-                    <slot name="label" index={ i } value={ item.value } >
-                      { item.value }
-                    </slot>
+                    { slots.label?.({ index: i, value: item.value }) ?? item.value }
                   </text>
                 ))
               }

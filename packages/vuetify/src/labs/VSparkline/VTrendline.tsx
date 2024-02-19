@@ -7,7 +7,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 // Types
 export type VTrendlineSlots = {
   default: void
-  label: void
+  label: { index: number, value: string }
 }
 
 export type SparklineItem = number | { value: number }
@@ -71,13 +71,6 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
         props.labels.length > 0 ||
         !!slots?.label
       )
-    })
-    const totalHeight = computed(() => {
-      let height = parseInt(props.height, 10)
-
-      if (hasLabels.value) height += parseInt(props.labelSize, 10) * 1.5
-
-      return height
     })
     const lineWidth = computed(() => {
       return parseFloat(props.lineWidth) || 4
@@ -154,7 +147,6 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
         <svg
           display="block"
           stroke-width={ parseFloat(props.lineWidth) ?? 4 }
-          viewBox={ `0 0 ${props.width} ${parseInt(totalHeight.value, 10)}` }
         >
           <defs>
             <linearGradient
@@ -177,7 +169,6 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
             <g
               key="labels"
               style={{
-                fontSize: 8,
                 textAnchor: 'middle',
                 dominantBaseline: 'mathematical',
                 fill: 'currentColor',
@@ -190,9 +181,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
                     y={ (parseInt(props.height, 10) - 4) + (parseInt(props.labelSize, 10) || 7 * 0.75) }
                     font-size={ Number(props.labelSize) || 7 }
                   >
-                    <slot name="label" index={ i } value={ item.value } >
-                      { item.value }
-                    </slot>
+                    { slots.label?.({ index: i, value: item.value }) ?? item.value }
                   </text>
                 ))
               }
