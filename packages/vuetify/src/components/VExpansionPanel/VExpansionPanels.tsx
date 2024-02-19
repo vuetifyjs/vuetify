@@ -60,6 +60,8 @@ export const VExpansionPanels = genericComponent()({
       VExpansionPanel: {
         color: toRef(props, 'color'),
         readonly: toRef(props, 'readonly'),
+      },
+      VExpansionPanelTitle: {
         static: toRef(props, 'static'),
       },
     })
