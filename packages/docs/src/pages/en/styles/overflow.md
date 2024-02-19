@@ -13,9 +13,9 @@ related:
 
 Configure how content overflows when it becomes out of container bounds.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## How it works
 
@@ -39,10 +39,10 @@ here is a list of properties:
 
 `overflow-auto` is used to add scrollbars to an element when its content overflows the bounds. while `overflow-hidden` is used to clip any content that overflows the bounds. `overflow-visible` will prevent content from being clipped even when it overflows the bounds.
 
-<example file="overflow/overflow" />
+<ExamplesExample file="overflow/overflow" />
 
 ### Overflow X property
 
 **overflow-x** can be used to specify horizontal overflows to an element if needed.
 
-<example file="overflow/overflow-x" />
+<ExamplesExample file="overflow/overflow-x" />

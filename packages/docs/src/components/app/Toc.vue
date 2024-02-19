@@ -10,10 +10,10 @@
     width="256"
   >
     <template
-      v-if="toc?.length"
+      v-if="routeToc?.length"
       #prepend
     >
-      <app-headline
+      <AppHeadline
         class="mt-4 mb-2 ms-4"
         path="contents"
       />
@@ -21,7 +21,7 @@
 
     <ul class="ms-5">
       <router-link
-        v-for="{ to, level, text } in toc"
+        v-for="{ to, level, text } in routeToc"
         v-slot="{ href }"
         :key="text"
         :to="to"
@@ -50,7 +50,7 @@
 
     <template #append>
       <v-container>
-        <app-headline
+        <AppHeadline
           v-if="sponsors.length"
           :to="rpath('/introduction/sponsors-and-backers/')"
           class="mb-1 mt-n1 text-high-emphasis text-decoration-none"
@@ -123,25 +123,6 @@
 </template>
 
 <script setup lang="ts">
-  // Components
-  import SponsorCard from '@/components/sponsor/Card.vue'
-
-  // Composables
-  import { useRoute, useRouter } from 'vue-router'
-  import { useTheme } from 'vuetify'
-
-  // Stores
-  import { useAppStore } from '@/store/app'
-  import { useUserStore } from '@vuetify/one'
-  import { useSponsorsStore } from '@/store/sponsors'
-  import { useSpotStore } from '@/store/spot'
-
-  // Utilities
-  import { computed, nextTick, onMounted, onScopeDispose, ref, watch } from 'vue'
-  import { gtagClick } from '@/util/analytics'
-  import { rpath } from '@/util/routes'
-  import { storeToRefs } from 'pinia'
-
   type TocItem = {
     to: string;
     text: string;
@@ -224,7 +205,7 @@
 
   const sponsorStore = useSponsorsStore()
 
-  const toc = computed(() => route.meta.toc as TocItem[])
+  // const toc = computed(() => route.meta.toc as TocItem[])
 
   const sponsors = computed(() => (
     sponsorStore.sponsors

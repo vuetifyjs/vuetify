@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :name="name"
     :code="code"
@@ -20,14 +20,10 @@
     <template v-slot:configuration>
       <v-checkbox v-model="avatar" label="Show avatars"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-list'
   const model = ref('default')
   const options = ['two-lines', 'three-lines']

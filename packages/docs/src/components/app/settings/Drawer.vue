@@ -21,34 +21,20 @@
     <v-divider />
 
     <v-container class="px-3 py-3">
-      <options />
+      <AppSettingsOptions />
 
-      <ad-option v-if="auth.isSubscriber" />
+      <AppSettingsOptionsAdOption v-if="auth.isSubscriber" />
 
-      <developer-mode />
+      <AppSettingsDeveloperMode />
     </v-container>
 
     <template #append>
-      <app-settings-append />
+      <AppSettingsAppend />
     </template>
   </v-navigation-drawer>
 </template>
 
 <script setup>
-  // Components
-  import AdOption from '@/components/app/settings/options/AdOption.vue'
-  import AppSettingsAppend from './Append.vue'
-  import DeveloperMode from '@/components/app/settings/DeveloperMode.vue'
-  import Options from '@/components/app/settings/Options.vue'
-
-  // Composables
-  import { useRtl } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
-
-  // Stores
-  import { useAppStore } from '@/store/app'
-  import { useAuthStore } from '@vuetify/one'
-
   const app = useAppStore()
   const auth = useAuthStore()
 

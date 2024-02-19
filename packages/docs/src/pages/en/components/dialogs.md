@@ -21,15 +21,15 @@ The `v-dialog` component inform users about a specific task and may contain crit
 
 <!-- ![dialog Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-dialog/v-dialog-entry.png) -->
 
-<page-features />
+<PageFeatures />
 
 ## Usage
 
 In this basic example we use the **activator** slot to render a button that is used to open the dialog. When using the **activator** slot it is important that you bind the **props** object from the slot (using `v-bind`) to the element that will activate the dialog. See the examples below for more ways of activating a dialog.
 
-<usage name="v-dialog" />
+ExamplesUsage name="v-dialog" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -37,7 +37,7 @@ In this basic example we use the **activator** slot to render a button that is u
 | - | - |
 | [v-dialog](/api/v-dialog/) | Primary component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Examples
 
@@ -47,37 +47,37 @@ In this basic example we use the **activator** slot to render a button that is u
 
 In addition using the **activator** slot, we can instead use the **activator** prop to activate a dialog. By placing the dialog component inside the button, and setting the **activator** prop value to **"parent"** we can designate the parent (button) as the activator.
 
-<example file="v-dialog/prop-activator" />
+<ExamplesExample file="v-dialog/prop-activator" />
 
 ### v-model
 
 You can also trigger a dialog by simply updating the v-model, without using either **activator** slot or prop. In this case, the dialog will not appear to be activated by any specific element, and will simply appear in the middle of the screen.
 
-<example file="v-dialog/prop-model" />
+<ExamplesExample file="v-dialog/prop-model" />
 
 #### Fullscreen
 
 Due to limited space, full-screen dialogs may be more appropriate for mobile devices than dialogs used on devices with larger screens.
 
-<example file="v-dialog/prop-fullscreen" />
+<ExamplesExample file="v-dialog/prop-fullscreen" />
 
 #### Transitions
 
 You can make the dialog appear from the top or the bottom.
 
-<example file="v-dialog/prop-transitions" />
+<ExamplesExample file="v-dialog/prop-transitions" />
 
 #### Persistent
 
 Persistent dialogs are not dismissed when touching outside or pressing the **esc** key.
 
-<example file="v-dialog/prop-persistent" />
+<ExamplesExample file="v-dialog/prop-persistent" />
 
 #### Scrollable
 
 Example of a dialog with scrollable content.
 
-<example file="v-dialog/prop-scrollable" />
+<ExamplesExample file="v-dialog/prop-scrollable" />
 
 ### Misc
 
@@ -85,28 +85,28 @@ Example of a dialog with scrollable content.
 
 A simple example of a form in a dialog.
 
-<example file="v-dialog/misc-form" />
+<ExamplesExample file="v-dialog/misc-form" />
 
 #### Loader
 
 The `v-dialog` component makes it easy to create a customized loading experience for your application.
 
-<example file="v-dialog/misc-loader" />
+<ExamplesExample file="v-dialog/misc-loader" />
 
 #### Nesting
 
 Dialogs can be nested: you can open one dialog from another.
 
-<example file="v-dialog/misc-nesting" />
+<ExamplesExample file="v-dialog/misc-nesting" />
 
 #### Overflowed
 
 Modals that do not fit within the available window space will scroll the container.
 
-<example file="v-dialog/misc-overflowed" />
+<ExamplesExample file="v-dialog/misc-overflowed" />
 
 <!-- #### Without activator
 
 If for some reason you are unable to use the activator slot, be sure to add the `.stop` modifier to the event that triggers the dialog.
 
-<example file="v-dialog/misc-without-activator" /> -->
+<ExamplesExample file="v-dialog/misc-without-activator" /> -->

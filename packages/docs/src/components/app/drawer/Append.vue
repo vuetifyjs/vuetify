@@ -2,7 +2,7 @@
   <v-divider />
 
   <div class="d-flex align-center text-caption text-medium-emphasis pa-2">
-    <drawer-toggle-rail v-if="auth.isSubscriber" class="me-2" />
+    <AppDrawerDrawerToggleRail v-if="auth.isSubscriber" class="me-2" />
 
     <div class="d-flex ms-auto overflow-hidden">
       <v-btn
@@ -32,15 +32,7 @@
 </template>
 
 <script setup lang="ts">
-  // Components
-  import DrawerToggleRail from '@/components/app/drawer/DrawerToggleRail.vue'
-
-  // Stores
-  import { useAuthStore } from '@vuetify/one'
-  import { useCommitsStore } from '@/store/commits'
-
   // Utilities
-  import { rpath } from '@/util/routes'
   import { version } from 'vuetify'
 
   const auth = useAuthStore()

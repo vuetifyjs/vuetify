@@ -14,15 +14,15 @@ related:
 
 The `v-touch` directive allows you to capture swipe gestures and apply directional callbacks.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Usage
 
 On a mobile device, try swiping in various directions.
 
-<example file="v-touch/usage" />
+<ExamplesExample file="v-touch/usage" />
 
 ## API
 
@@ -30,4 +30,4 @@ On a mobile device, try swiping in various directions.
 | - | - |
 | [v-touch](/api/v-touch/) | The touch directive |
 
-<api-inline hide-links />
+<ApiInline hide-links />

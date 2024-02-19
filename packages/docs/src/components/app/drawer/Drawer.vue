@@ -9,9 +9,9 @@
     width="300"
     @update:rail="onUpdateRail"
   >
-    <pinned-items />
+    <AppDrawerPinnedItems />
 
-    <app-list
+    <AppListList
       v-model:opened="opened"
       :items="app.items"
       nav
@@ -19,31 +19,17 @@
       <template #divider>
         <v-divider class="my-3 mb-4 ms-10" />
       </template>
-    </app-list>
+    </AppListList>
 
     <template #append>
-      <app-drawer-append />
+      <AppDrawerAppend />
     </template>
   </v-navigation-drawer>
 </template>
 
 <script setup>
-  // Components
-  import AppDrawerAppend from './Append.vue'
-  import PinnedItems from './PinnedItems.vue'
-
   // Composables
-  import { useDisplay, useTheme } from 'vuetify'
   import { scrollTo } from 'vuetify/lib/composables/goto'
-
-  // Utilities
-  import { computed, onMounted, ref, watch } from 'vue'
-  import { wait } from '@/util/helpers'
-
-  // Stores
-  import { useAppStore } from '@/store/app'
-  import { usePinsStore } from '@/store/pins'
-  import { useUserStore } from '@vuetify/one'
 
   const app = useAppStore()
   const pins = usePinsStore()

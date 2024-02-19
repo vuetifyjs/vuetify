@@ -13,13 +13,13 @@ related:
 
 Use border utilities to quickly style the border-radius of any element.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Usage
 
-<example file="border-radius/usage" />
+<ExamplesExample file="border-radius/usage" />
 
 ## Caveats
 
@@ -68,7 +68,7 @@ $rounded: (
 
 You can create pills with the `.rounded-pill` class and circles with the `.rounded-circle` class.
 
-<example file="border-radius/misc-pill-and-circle" />
+<ExamplesExample file="border-radius/misc-pill-and-circle" />
 
 #### Rounding by side
 
@@ -76,7 +76,7 @@ Border radius is configurable on a per-side basis using the infix classes `-t`, 
 
 E.g. `.rounded-b-xl` and `.rounded-t`.
 
-<example file="border-radius/misc-rounding-by-side" />
+<ExamplesExample file="border-radius/misc-rounding-by-side" />
 
 #### Rounding by corner
 
@@ -84,10 +84,10 @@ Border radius is configurable on a per-corner basis using the infix classes, `-t
 
 E.g. `.rounded-be-xl` and `.rounded-te`.
 
-<example file="border-radius/misc-rounding-by-corner" />
+<ExamplesExample file="border-radius/misc-rounding-by-corner" />
 
 #### Removing Border Radius
 
 Use the `.rounded-0` helper class to remove all border radius on an element, or select by side or corner; e.g. `.rounded-s-0` and `.rounded-te-0`.
 
-<example file="border-radius/misc-removing-border-radius" />
+<ExamplesExample file="border-radius/misc-removing-border-radius" />

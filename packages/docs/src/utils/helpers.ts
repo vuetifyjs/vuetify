@@ -1,6 +1,3 @@
-// Globals
-import { IN_BROWSER } from '@/util/globals'
-
 export function copyElementContent (el: HTMLElement) {
   if (!IN_BROWSER) return
 

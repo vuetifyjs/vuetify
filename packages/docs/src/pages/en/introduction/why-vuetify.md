@@ -14,9 +14,9 @@ related:
 
 Learn more about what Vuetify is, how to create an application from scratch, browse API references, sample code, tutorials, and more.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## What is Vuetify?
 
@@ -55,7 +55,7 @@ Vuetify has a large ecosystem of supporting tools that enrich the development ex
 
 When you develop with Vuetify, you are never alone. Stuck on a problem? Take advantage of our massive [Discord community](https://community.vuetifyjs.com/) and collaborate with other Vuetify developers in one of our public help channels. Need a more personalized support solution? Vuetify offers [Enterprise support](/introduction/enterprise-support/) with options tailored to individuals and businesses. Check out some other ways to [Sponsor Vuetify development](/introduction/sponsors-and-backers/).
 
-<promoted slug="vuetify-discord" />
+<PromotedPromoted slug="vuetify-discord" />
 
 ### Professional and Enterprise support
 

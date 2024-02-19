@@ -1,5 +1,5 @@
 <template>
-  <app-headline
+  <AppHeadline
     :path="path"
     color="grey"
     size="caption"
@@ -11,7 +11,7 @@
   defineProps({
     path: {
       type: String,
-      required: true,
+      default: '',
     },
   })
 </script>

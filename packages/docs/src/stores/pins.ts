@@ -1,15 +1,3 @@
-// Pinia
-import { defineStore } from 'pinia'
-
-// Composables
-import { useRoute } from 'vue-router'
-
-// Utilities
-import { computed, ref, shallowRef } from 'vue'
-
-// Stores
-import { useUserStore } from '@vuetify/one'
-
 export type Pin = {
   category: string
   title: string

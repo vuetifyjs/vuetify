@@ -44,13 +44,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { camelize, computed, shallowRef, watch } from 'vue'
-  import { distance } from '@/util/helpers'
-
   // Data
   import icons from '@mdi/svg/meta.json'
   import * as paths from '@mdi/js'

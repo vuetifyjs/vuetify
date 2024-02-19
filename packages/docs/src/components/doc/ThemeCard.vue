@@ -5,7 +5,7 @@
     rel="noopener"
     target="_blank"
   >
-    <app-figure
+    <AppFigure
       :alt="product.title"
       :name="product.title"
       :src="product.src"
@@ -32,7 +32,7 @@
           v-text="`$${product.price}`"
         />
       </figcaption>
-    </app-figure>
+    </AppFigure>
   </a>
 </template>
 

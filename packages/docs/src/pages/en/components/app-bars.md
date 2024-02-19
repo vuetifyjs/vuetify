@@ -26,15 +26,15 @@ The `v-app-bar` component is pivotal to any graphical user interface (GUI), as i
 
 ![App Bar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-app-bar/v-app-bar-entry.png)
 
-<page-features />
+<PageFeatures />
 
 ## Usage
 
 The `v-app-bar` component is used for application-wide actions and information.
 
-<usage name="v-app-bar" />
+<ExamplesUsage name="v-app-bar" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -44,7 +44,7 @@ The `v-app-bar` component is used for application-wide actions and information.
 | [v-app-bar-nav-icon](/api/v-app-bar-nav-icon/) | A customized [v-btn](/components/buttons/) component that uses a default *icon* value of **$menu** |
 | [v-app-bar-title](/api/v-app-bar-title/) | An extension of `v-toolbar-title` that is used for scrolling techniques |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ::: tip
 
@@ -105,16 +105,16 @@ A scroll listener is added to `window` by default, but can be changed to a custo
 
 You can make **app-bar** dense. A dense app bar has lower height than regular one.
 
-<example file="v-app-bar/prop-density" />
+<ExamplesExample file="v-app-bar/prop-density" />
 
 #### Images
 
 `v-app-bar` can contain background images. You can set source via the `image` prop. If you need to customize the `v-img` properties, the app-bar provides you with an **image** slot.
 
-<example file="v-app-bar/prop-image" />
+<ExamplesExample file="v-app-bar/prop-image" />
 
 #### Prominent
 
 An `v-app-bar` with the `density="prominent"` prop can opt to have its height shrunk as the user scrolls down. This provides a smooth transition to taking up less visual space when the user is scrolling through content. Shrink height has 2 possible options, **compact** (48px) and **comfortable** (56px) sizes.
 
-<example file="v-app-bar/prop-prominent" />
+<ExamplesExample file="v-app-bar/prop-prominent" />

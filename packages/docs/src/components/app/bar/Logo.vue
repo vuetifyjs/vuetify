@@ -15,14 +15,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useDisplay, useTheme } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   defineProps({
     alt: Boolean,
   })

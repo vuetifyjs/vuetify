@@ -38,10 +38,6 @@
 </template>
 
 <script setup lang="ts">
-  // Utilities
-  import { computed, shallowRef } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const props = defineProps({
     name: String,
     labs: Boolean,

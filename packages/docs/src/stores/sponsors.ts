@@ -1,10 +1,3 @@
-// Composables
-import { useCosmic } from '@/composables/cosmic'
-
-// Utilities
-import { defineStore } from 'pinia'
-import { computed, onBeforeMount, onServerPrefetch, ref } from 'vue'
-
 // Types
 export interface Sponsor {
   metadata: {

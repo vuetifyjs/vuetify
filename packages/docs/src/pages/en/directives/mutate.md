@@ -14,9 +14,9 @@ related:
 
 The `v-mutate` directive utilizes the [Mutation Observer API](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver). It provides an easy to use interface for detecting when elements are updated.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Usage
 
@@ -151,10 +151,10 @@ Unlike the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/
 | - | - |
 | [v-mutate](/api/v-mutate/) | The mutation observer directive |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Examples
 
-<example file="v-mutate/usage" />
+<ExamplesExample file="v-mutate/usage" />
 
-<example file="v-mutate/option-modifiers" />
+<ExamplesExample file="v-mutate/option-modifiers" />
