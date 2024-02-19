@@ -26,6 +26,7 @@ export const makeVExpansionPanelsProps = propsFactory({
   color: String,
   flat: Boolean,
   static: Boolean,
+  tile: Boolean,
   variant: {
     type: String as PropType<Variant>,
     default: 'default',
@@ -69,6 +70,7 @@ export const VExpansionPanels = genericComponent()({
           'v-expansion-panels',
           {
             'v-expansion-panels--flat': props.flat,
+            'v-expansion-panels--tile': props.tile,
           },
           themeClasses.value,
           variantClass.value,
