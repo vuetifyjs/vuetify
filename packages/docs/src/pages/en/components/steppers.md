@@ -32,7 +32,7 @@ This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-no
 
 A stepper can be used for a multitude of scenarios, including shopping carts, record creation and more.
 
-ExamplesUsage name="v-stepper" />
+<ExamplesUsage name="v-stepper" />
 
 <PromotedEntry />
 

@@ -24,7 +24,7 @@ The defaults provider allows you to provide specific default prop values to comp
 
 The `v-defaults-provider` component is used to provide default props to components within its scope. It hooks into the [Global configuration](/features/global-configuration/) feature and makes it easy to assign multiple properties at once or scope out all incoming changes to any children.
 
-ExamplesUsage name="v-defaults-provider" />
+<ExamplesUsage name="v-defaults-provider" />
 
 <PromotedEntry />
 

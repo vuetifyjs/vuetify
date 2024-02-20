@@ -25,7 +25,7 @@ Textarea components are used for collecting large amounts of textual data.
 
 `v-textarea` in its simplest form is a multi-line text-field, useful for larger amounts of text.
 
-ExamplesUsage name="v-textarea" />
+<ExamplesUsage name="v-textarea" />
 
 <PromotedEntry />
 

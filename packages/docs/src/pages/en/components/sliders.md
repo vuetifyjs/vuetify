@@ -25,7 +25,7 @@ The `v-slider` component can be used as an alternative visualization instead of 
 
 Sliders reflect a range of values along a track, from which users may select a single value. They are ideal for adjusting settings such as volume, brightness, or applying image filters.
 
-ExamplesUsage name="v-slider" />
+<ExamplesUsage name="v-slider" />
 
 <PromotedEntry />
 

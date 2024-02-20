@@ -31,7 +31,7 @@ This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-no
 
 Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet is meant to contain anything.
 
-ExamplesUsage name="v-bottom-sheet" />
+<ExamplesUsage name="v-bottom-sheet" />
 
 <PromotedEntry />
 

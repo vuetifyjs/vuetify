@@ -30,7 +30,7 @@ This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-no
 
 The `v-data-iterator` allows you to customize exactly how to display your data. In this example we are using a grid with cards.
 
-ExamplesUsage name="v-data-iterator" />
+<ExamplesUsage name="v-data-iterator" />
 
 <PromotedEntry />
 

@@ -18,7 +18,7 @@ The `v-btn` component can be used as a floating action button. This provides an 
 
 Floating action buttons can be attached to material to signify a promoted action in your application. The default size will be used in most cases, whereas the `small` variant can be used to maintain continuity with similar sized elements.
 
-ExamplesUsage name="v-btn-fab" alt="v-btn" />
+<ExamplesUsage name="v-btn-fab" alt="v-btn" />
 
 <PromotedEntry />
 

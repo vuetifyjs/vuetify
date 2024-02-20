@@ -27,7 +27,7 @@ The `v-expansion-panel` component is useful for reducing vertical space with lar
 
 Expansion panels in their simplest form display a list of expandable items. You can either declare the markup explicitly, or use the **title** and **text** props.
 
-ExamplesUsage name="v-expansion-panels" />
+<ExamplesUsage name="v-expansion-panels" />
 
 <PromotedEntry />
 
