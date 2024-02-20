@@ -43,7 +43,7 @@
         :smooth="16"
         :gradient="['#f72047', '#ffd200', '#1feaea']"
         :line-width="3"
-        :value="heartbeats"
+        :model-value="heartbeats"
         auto-draw
         stroke-linecap="round"
       ></v-sparkline>

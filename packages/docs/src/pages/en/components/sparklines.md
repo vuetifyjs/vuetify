@@ -1,7 +1,7 @@
 ---
-disabled: true
+emphasized: true
 meta:
-  title: Sparkline component
+  title: Sparklines
   description: The sparkline component creates beautiful and expressive simple graphs for displaying numerical data.
   keywords: sparklines, vuetify sparkline component, vue sparkline component, sparkline, graph, chart, line
 related:

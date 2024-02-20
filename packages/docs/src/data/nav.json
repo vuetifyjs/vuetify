@@ -222,6 +222,10 @@
       {
         "title": "calendars",
         "subfolder": "components"
+      },
+      {
+        "title": "sparklines",
+        "subfolder": "components"
       }
     ]
   },
