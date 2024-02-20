@@ -2,7 +2,7 @@
 import { computed, nextTick, ref, watch } from 'vue'
 import { makeLineProps } from './util/line'
 import { genPath } from './util/path'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, getUid, propsFactory, useRender } from '@/util'
 
 // Types
 export type VTrendlineSlots = {
@@ -42,6 +42,9 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
   props: makeVTrendlineProps(),
 
   setup (props, { slots }) {
+    const uid = getUid()
+    const id = computed(() => props.id || `trendline-${uid}`)
+
     const lastLength = ref(0)
     const path = ref<SVGPathElement | null>(null)
 
@@ -150,7 +153,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
         >
           <defs>
             <linearGradient
-              id="1"
+              id={ id.value }
               gradientUnits="userSpaceOnUse"
               x1={ props.gradientDirection === 'left' ? '100%' : '0' }
               y1={ props.gradientDirection === 'top' ? '100%' : '0' }
@@ -198,8 +201,8 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
               props.fill,
               parseInt(props.height, 10)
             )}
-            fill={ props.fill ? `url(#1)` : 'none' }
-            stroke={ props.fill ? 'none' : `url(#1)` }
+            fill={ props.fill ? `url(#${id.value})` : 'none' }
+            stroke={ props.fill ? 'none' : `url(#${id.value})` }
             ref="path"
           />
         </svg>

@@ -1,7 +1,7 @@
 // Utilities
 import { computed } from 'vue'
 import { makeLineProps } from './util/line'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, getUid, propsFactory, useRender } from '@/util'
 
 // Types
 export type VBarlineSlots = {
@@ -42,6 +42,9 @@ export const VBarline = genericComponent<VBarlineSlots>()({
   props: makeVBarlineProps(),
 
   setup (props, { slots }) {
+    const uid = getUid()
+    const id = computed(() => props.id || `trendline-${uid}`)
+
     const hasLabels = computed(() => {
       return Boolean(
         props.showLabels ||
@@ -130,7 +133,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
         >
           <defs>
             <linearGradient
-              id="1"
+              id={ id.value }
               gradientUnits="userSpaceOnUse"
               x1={ props.gradientDirection === 'left' ? '100%' : '0' }
               y1={ props.gradientDirection === 'top' ? '100%' : '0' }
@@ -145,7 +148,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
             </linearGradient>
           </defs>
 
-          <clipPath id={ `sparkline-bar-${1}-clip` }>
+          <clipPath id={ `${id.value}-clip` }>
             {
               bars.value.map(item => (
                 <rect
@@ -200,8 +203,8 @@ export const VBarline = genericComponent<VBarlineSlots>()({
           )}
 
           <g
-            clip-path={ `url(#sparkline-bar-${1}-clip)` }
-            fill={ `url(#${1})` }
+            clip-path={ `url(#${id.value}-clip)` }
+            fill={ `url(#${id.value})` }
           >
             <rect
               x={ 0 }
