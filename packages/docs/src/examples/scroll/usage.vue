@@ -279,6 +279,10 @@
   import { useGoTo } from 'vuetify'
 
   export default {
+    setup () {
+      const goTo = useGoTo()
+      return { goTo }
+    },
     data () {
       return {
         duration: 300,
@@ -340,13 +344,12 @@
     },
     methods: {
       onClick () {
-        const goTo = useGoTo()
         if (this.target === 'By Number') {
-          goTo(this.number, this.options)
+          this.goTo(this.number, this.options)
         } else if (this.target === 'By Query Selector') {
-          goTo(this.query, this.options)
+          this.goTo(this.query, this.options)
         } else if (this.target === 'By Component / Element') {
-          goTo(this.cards[this.component].$el, this.options)
+          this.goTo(this.cards[this.component].$el, this.options)
         }
       },
       onClickReset () {
@@ -358,8 +361,7 @@
         this.query = '#heading-3'
         this.target = 'By Number'
 
-        const goTo = useGoTo()
-        goTo(0, { container: '#goto-container-example' })
+        this.goTo(0, { container: '#goto-container-example' })
       },
     },
   }
