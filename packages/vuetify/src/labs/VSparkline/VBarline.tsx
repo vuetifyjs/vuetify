@@ -43,7 +43,8 @@ export const VBarline = genericComponent<VBarlineSlots>()({
 
   setup (props, { slots }) {
     const uid = getUid()
-    const id = computed(() => props.id || `trendline-${uid}`)
+    const id = computed(() => props.id || `barline-${uid}`)
+    const autoDrawDuration = computed(() => Number(props.autoDrawDuration) || 500)
 
     const hasLabels = computed(() => {
       return Boolean(
@@ -165,14 +166,14 @@ export const VBarline = genericComponent<VBarlineSlots>()({
                         attributeName="y"
                         from={ item.y + item.height }
                         to={ item.y }
-                        dur={ `${props.autoDrawDuration}ms` }
+                        dur={ `${autoDrawDuration.value}ms` }
                         fill="freeze"
                       />
                       <animate
                         attributeName="height"
                         from="0"
                         to={ item.height }
-                        dur={ `${props.autoDrawDuration}ms` }
+                        dur={ `${autoDrawDuration.value}ms` }
                         fill="freeze"
                       />
                     </>

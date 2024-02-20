@@ -44,6 +44,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
   setup (props, { slots }) {
     const uid = getUid()
     const id = computed(() => props.id || `trendline-${uid}`)
+    const autoDrawDuration = computed(() => Number(props.autoDrawDuration) || (props.fill ? 500 : 2000))
 
     const lastLength = ref(0)
     const path = ref<SVGPathElement | null>(null)
@@ -126,22 +127,28 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
       const length = pathRef.getTotalLength()
 
       if (!props.fill) {
-        pathRef.style.transition = 'none'
-        pathRef.style.strokeDasharray = `${length} ${length}`
-        pathRef.style.strokeDashoffset = Math.abs(length - (lastLength.value || 0)).toString()
+        // Initial setup to "hide" the line by using the stroke dash array
+        pathRef.style.strokeDasharray = `${length}`
+        pathRef.style.strokeDashoffset = `${length}`
+
+        // Force reflow to ensure the transition starts from this state
         pathRef.getBoundingClientRect()
-        pathRef.style.transition = `stroke-dashoffset ${props.autoDrawDuration}ms ${props.autoDrawEasing}`
+
+        // Animate the stroke dash offset to "draw" the line
+        pathRef.style.transition = `stroke-dashoffset ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
         pathRef.style.strokeDashoffset = '0'
       } else {
+        // Your existing logic for filled paths remains the same
         pathRef.style.transformOrigin = 'bottom center'
         pathRef.style.transition = 'none'
         pathRef.style.transform = `scaleY(0)`
         pathRef.getBoundingClientRect()
-        pathRef.style.transition = `transform ${props.autoDrawDuration}ms ${props.autoDrawEasing}`
+        pathRef.style.transition = `transform ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
         pathRef.style.transform = `scaleY(1)`
       }
+
       lastLength.value = length
-    })
+    }, { immediate: true })
 
     useRender(() => {
       const gradientData = !props.gradient.slice().length ? [''] : props.gradient.slice().reverse()
@@ -192,6 +199,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
           )}
 
           <path
+            ref={ path }
             d={ genPath(
               genPoints(
                 props.modelValue.map(item => (typeof item === 'number' ? item : item.value)),
@@ -203,7 +211,6 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
             )}
             fill={ props.fill ? `url(#${id.value})` : 'none' }
             stroke={ props.fill ? 'none' : `url(#${id.value})` }
-            ref="path"
           />
         </svg>
       )

@@ -57,7 +57,7 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
 
       return (
         <Tag
-          key="trendline"
+          key={ props.type }
           class={ textColorClasses.value }
           style={ textColorStyles.value }
           viewBox={ `0 0 ${props.width} ${parseInt(totalHeight.value, 10)}` }

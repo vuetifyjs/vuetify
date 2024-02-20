@@ -8,10 +8,7 @@ export type SparklineItem = number | { value: number }
 
 export const makeLineProps = propsFactory({
   autoDraw: Boolean,
-  autoDrawDuration: {
-    type: Number,
-    default: 300,
-  },
+  autoDrawDuration: [Number, String],
   autoDrawEasing: {
     type: String,
     default: 'ease',
