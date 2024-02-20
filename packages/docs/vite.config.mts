@@ -95,7 +95,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         ],
         vueTemplate: true,
       }),
-      
+
       // https://github.com/stafyniaksacha/vite-plugin-fonts
       ViteFonts({
         google: {

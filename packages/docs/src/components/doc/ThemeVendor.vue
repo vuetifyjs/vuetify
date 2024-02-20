@@ -6,7 +6,7 @@
       cols="12"
       sm="6"
     >
-      <ThemeCard :product="product" />
+      <DocThemeCard :product="product" />
     </v-col>
 
     <v-col class="text-center mb-8" cols="12">
