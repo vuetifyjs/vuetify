@@ -11,6 +11,9 @@ related:
 ---
 
 <script setup>
+  import { onMounted } from 'vue'
+  import { useShopifyStore } from '@/stores/shopify'
+
   const store = useShopifyStore()
 
   onMounted(() => {
