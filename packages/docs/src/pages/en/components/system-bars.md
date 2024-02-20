@@ -27,7 +27,7 @@ The `v-system-bar` component can be used for displaying statuses to the user. It
 
 `v-system-bar` in its simplest form displays a small container with default theme.
 
-ExamplesUsage name="v-system-bar" />
+<ExamplesUsage name="v-system-bar" />
 
 <PromotedEntry />
 

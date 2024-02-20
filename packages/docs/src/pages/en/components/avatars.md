@@ -27,7 +27,7 @@ The `v-avatar` component is typically used to display circular user profile pict
 
 Avatars in their simplest form display content within a circular container.
 
-ExamplesUsage name="v-avatar" />
+<ExamplesUsage name="v-avatar" />
 
 <PromotedEntry />
 

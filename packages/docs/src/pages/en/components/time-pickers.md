@@ -20,7 +20,7 @@ The `v-time-picker` is stand-alone component that can be utilized in many existi
 
 Time pickers have the light theme enabled by default.
 
-ExamplesUsage name="v-time-picker" />
+<ExamplesUsage name="v-time-picker" />
 
 ## API
 
