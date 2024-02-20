@@ -14,7 +14,6 @@
           padding="24"
           stroke-linecap="round"
           smooth
-          type="bar"
         >
           <template v-slot:label="item">
             ${{ item.value }}

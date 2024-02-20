@@ -14,8 +14,6 @@ related:
 
 The sparkline component can be used to create simple graphs, like GitHub's contribution chart.
 
-Any [SVG attribute](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute) may be used in addition to the ones listed below.
-
 <PromotedEntry />
 
 ## Usage
@@ -26,7 +24,11 @@ A sparkline is a tiny chart that provides a visual representation of data. The s
 
 ## API
 
-<ApiInline />
+| Component | Description |
+| - | - |
+| [v-sparkline](/api/v-sparkline/) | Primary Component |
+
+<ApiInline hide-links />
 
 ## Examples
 
