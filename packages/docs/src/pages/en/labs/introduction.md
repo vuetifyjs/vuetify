@@ -14,7 +14,7 @@ related:
 
 Experiment and use in-development components before they're released.
 
-<page-features />
+<PageFeatures />
 
 ## What is Labs? { id=what-is-labs }
 
@@ -68,7 +68,7 @@ export default createVuetify({
 })
 ```
 
-<entry />
+<PromotedEntry />
 
 ## Available Components
 

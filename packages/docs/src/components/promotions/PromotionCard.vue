@@ -1,5 +1,5 @@
 <template>
-  <promoted-base
+  <PromotedBase
     v-if="promotion"
     border
     class="v-promotion-card"
@@ -23,7 +23,7 @@
 
           <v-col>
             <div class="px-2">
-              <app-markdown :content="promotion.metadata.text" />
+              <AppMarkdown :content="promotion.metadata.text" />
             </div>
           </v-col>
         </v-row>
@@ -33,19 +33,10 @@
         ADS VIA VUETIFY
       </span>
     </a>
-  </promoted-base>
+  </PromotedBase>
 </template>
 
 <script setup>
-  // Components
-  import PromotedBase from '@/components/promoted/Base.vue'
-
-  // Utilities
-  import { computed } from 'vue'
-
-  // Stores
-  import { usePromotionsStore } from '@/store/promotions'
-
   const props = defineProps({
     color: String,
     slug: String,

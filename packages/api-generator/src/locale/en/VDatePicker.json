@@ -1,6 +1,5 @@
 {
   "props": {
-    "activePicker": "Determines which picker in the date or month picker is being displayed. Allowed values: `'DATE'`, `'MONTH'`, `'YEAR'`.",
     "allowedDates": "Restricts which dates can be selected.",
     "calendarIcon": "The icon shown in the header when in 'input' **input-mode**.",
     "dayFormat": "Allows you to customize the format of the day string that appears in the date table. Called with date (ISO 8601 **date** string) arguments.",
@@ -18,6 +17,7 @@
     "localeFirstDayOfYear": "Sets the day that determines the first week of the year, starting with 0 for **Sunday**. For ISO 8601 this should be 4.",
     "max": "Maximum allowed date/month (ISO 8601 format).",
     "min": "Minimum allowed date/month (ISO 8601 format).",
+    "modeIcon": "Icon displayed next to the current month and year, toggles year selection when clicked.",
     "monthFormat": "Formatting function used for displaying months in the months table. Called with date (ISO 8601 **date** string) arguments.",
     "multiple": "Allow the selection of multiple dates. The **range** value selects all dates between two selections.",
     "nextIcon": "Sets the icon for next month/year button.",
@@ -33,6 +33,7 @@
     "titleDateFormat": "Allows you to customize the format of the date string that appears in the title of the date picker. Called with date (ISO 8601 **date** string) arguments.",
     "type": "Determines the type of the picker - `date` for date picker, `month` for month picker.",
     "value": "Date picker model (ISO 8601 format, YYYY-mm-dd or YYYY-mm).",
+    "viewMode": "Determines which picker in the date or month picker is being displayed. Allowed values: `'month'`, `'months'`, `'year'`.",
     "weekdayFormat": "Allows you to customize the format of the weekday string that appears in the body of the calendar. Called with date (ISO 8601 **date** string) arguments.",
     "width": "Width of the picker.",
     "yearFormat": "Allows you to customize the format of the year string that appears in the header of the calendar. Called with date (ISO 8601 **date** string) arguments.",
@@ -43,7 +44,6 @@
     "<domevent>:month": "Emitted when the specified DOM event occurs on the month button.",
     "<domevent>:year": "Emitted when the specified DOM event occurs on the year button.",
     "change": "Reactive date picker emits `input` even when any part of the date (year/month/day) changes, but `change` event is emitted only when the day (for date pickers) or month (for month pickers) changes. If `range` prop is set, date picker emits `change` when both [from, to] are selected.",
-    "update:activePicker": "The `.sync` event for `active-picker` prop.",
     "update:pickerDate": "The `.sync` event for `picker-date` prop."
   }
 }

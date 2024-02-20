@@ -45,12 +45,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, shallowRef } from 'vue'
-
-  // Store
-  import { useAuthStore, useHttpStore, useOneStore } from '@vuetify/one'
-
   const auth = useAuthStore()
   const http = useHttpStore()
   const one = useOneStore()

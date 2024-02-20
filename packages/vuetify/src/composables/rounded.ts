@@ -22,6 +22,7 @@ export const makeRoundedProps = propsFactory({
     type: [Boolean, Number, String],
     default: undefined,
   },
+  tile: Boolean,
 }, 'rounded')
 
 export function useRounded (
@@ -30,6 +31,7 @@ export function useRounded (
 ): RoundedData {
   const roundedClasses = computed(() => {
     const rounded = isRef(props) ? props.value : props.rounded
+    const tile = isRef(props) ? props.value : props.tile
     const classes: string[] = []
 
     if (rounded === true || rounded === '') {
@@ -41,6 +43,8 @@ export function useRounded (
       for (const value of String(rounded).split(' ')) {
         classes.push(`rounded-${value}`)
       }
+    } else if (tile) {
+      classes.push('rounded-0')
     }
 
     return classes

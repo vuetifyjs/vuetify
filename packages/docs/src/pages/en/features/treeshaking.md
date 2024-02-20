@@ -13,9 +13,9 @@ related:
 
 Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small bundle size may be a requirement.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Automatic treeshaking
 
@@ -87,7 +87,7 @@ And that's it! Vuetify components and directives will be automatically imported 
 - import * as directives from 'vuetify/directives'
 ```
 
-<promoted />
+<PromotedPromoted />
 
 ## Manual imports
 

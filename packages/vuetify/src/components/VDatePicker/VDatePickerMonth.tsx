@@ -182,6 +182,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                   <VDefaultsProvider
                     defaults={{
                       VBtn: {
+                        class: 'v-date-picker-month__day-btn',
                         color: (item.isSelected || item.isToday) && !item.isDisabled
                           ? props.color
                           : undefined,

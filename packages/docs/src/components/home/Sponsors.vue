@@ -16,7 +16,7 @@
           class="d-flex align-center justify-center"
           cols="auto"
         >
-          <sponsor-card
+          <SponsorCard
             :comfortable="Number(sponsor.metadata.tier) === 2"
             :compact="Number(sponsor.metadata.tier) > 2"
             :sponsor="sponsor"
@@ -30,22 +30,11 @@
     <br>
     <br>
 
-    <sponsor-link size="large" />
+    <SponsorLink size="large" />
   </v-sheet>
 </template>
 
 <script setup>
-  // Components
-  import SponsorCard from '@/components/sponsor/Card.vue'
-  import SponsorLink from '@/components/sponsor/Link.vue'
-
-  // Composables
-  import { useDisplay } from 'vuetify'
-  import { useSponsorsStore } from '@/store/sponsors'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const { smAndDown } = useDisplay()
   const sponsorStore = useSponsorsStore()
 

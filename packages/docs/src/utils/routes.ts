@@ -3,9 +3,6 @@ import locales from '@/i18n/locales.json'
 import generatedPages from 'virtual:generated-pages'
 import redirects from '@/data/301.json'
 
-// Globals
-import { IN_BROWSER } from '@/util/globals'
-
 // Regexp
 // const genericLocaleRegexp = /[a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3}/
 export const languagePattern = locales.filter(l => l.enabled).map(lang => lang.alternate || lang.locale).join('|')

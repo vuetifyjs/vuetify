@@ -32,9 +32,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
   // Types
   import type { PropType } from 'vue'
   import type { VBtn } from 'vuetify/components'

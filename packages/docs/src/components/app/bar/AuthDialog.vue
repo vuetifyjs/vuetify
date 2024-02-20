@@ -1,5 +1,5 @@
 <template>
-  <app-btn
+  <AppBtn
     v-if="!auth.user && !auth.isLoading"
     v-bind="{
       [`${lgAndUp ? 'append-' : ''}icon`]: 'mdi-login',
@@ -33,7 +33,7 @@
         </v-list>
       </v-card>
     </v-dialog>
-  </app-btn>
+  </AppBtn>
 
   <v-btn
     v-else
@@ -42,7 +42,7 @@
     class="ms-1"
     icon
   >
-    <app-menu
+    <AppMenuMenu
       :disabled="!auth.user || auth.isLoading"
       :items="items"
       :open-on-hover="false"
@@ -58,20 +58,6 @@
 </template>
 
 <script setup lang="ts">
-  // Components
-  import GithubLogin from '@/components/user/GithubLogin.vue'
-  import DiscordLogin from '@/components/user/DiscordLogin.vue'
-
-  // Composables
-  import { useDisplay, useTheme } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
-
-  // Stores
-  import { useAuthStore, useUserStore } from '@vuetify/one'
-
-  // Utilities
-  import { rpath } from '@/util/routes'
-
   const auth = useAuthStore()
   const user = useUserStore()
 

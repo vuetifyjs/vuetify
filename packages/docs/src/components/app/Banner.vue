@@ -26,7 +26,7 @@
           v-if="banner.metadata.text"
           class="text-subtitle-2 text-md-subtitle-1 font-weight-medium"
         >
-          <app-markdown :content="banner.metadata.text" />
+          <AppMarkdown :content="banner.metadata.text" />
         </v-list-item-title>
 
         <v-list-item-subtitle v-if="banner.metadata.subtext">
@@ -72,16 +72,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useBannersStore } from '@/store/banners'
-  import { useDisplay } from 'vuetify'
-  import { useGtag } from 'vue-gtag-next'
-  import { useRoute } from 'vue-router'
-  import { useUserStore } from '@vuetify/one'
-
-  // Utilities
-  import { computed, onBeforeMount } from 'vue'
-
   const { event } = useGtag()
   const { mdAndUp } = useDisplay()
   const { name } = useRoute()

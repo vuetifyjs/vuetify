@@ -1,11 +1,3 @@
-// Composables
-import { useCosmic } from '@/composables/cosmic'
-import { useDate } from 'vuetify'
-
-// Utilities
-import { defineStore } from 'pinia'
-import { computed, onBeforeMount, ref } from 'vue'
-
 // Types
 interface Spot {
   slug: string

@@ -22,15 +22,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useGtag } from 'vue-gtag-next'
-  import { useRoute } from 'vue-router'
-  import { useSponsorsStore } from '@/store/sponsors'
-  import { useTheme } from 'vuetify'
-
-  // Utilities
-  import { computed, ref, watch } from 'vue'
-
   const props = defineProps({
     slug: String,
     sponsor: Object,

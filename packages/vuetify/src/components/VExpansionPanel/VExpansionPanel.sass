@@ -173,3 +173,17 @@
 
     &--active
       max-width: $expansion-panel-inset-active-max-width
+
+.v-expansion-panels--flat
+  > .v-expansion-panel
+    &::after
+      border-top: none
+
+    .v-expansion-panel__shadow
+      display: none
+
+.v-expansion-panels--tile
+  border-radius: 0
+
+  > .v-expansion-panel
+    border-radius: 0

@@ -5,7 +5,7 @@
     dot
     location="top end"
   >
-    <app-btn
+    <AppBtn
       :to="rpath('/resources/jobs-for-vue/')"
       class="jobs-link"
       :icon="icon"
@@ -15,14 +15,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useGtag } from 'vue-gtag-next'
-  import { useRoute, useRouter } from 'vue-router'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const { currentRoute } = useRouter()
   const { event } = useGtag()
   const { name } = useRoute()

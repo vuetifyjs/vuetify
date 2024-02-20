@@ -1,9 +1,6 @@
 // Plugins
 import type { components as octokitComponents } from '@octokit/openapi-types'
 
-// Utilities
-import { defineStore } from 'pinia'
-
 export type Commit = octokitComponents['schemas']['commit']
 
 export type State = {

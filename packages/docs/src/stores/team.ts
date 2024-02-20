@@ -1,10 +1,6 @@
 // Plugins
 import octokit from '@/plugins/octokit'
 
-// Utilities
-import { defineStore } from 'pinia'
-import { onBeforeMount, ref } from 'vue'
-
 // Data
 import team from '@/data/team.json'
 

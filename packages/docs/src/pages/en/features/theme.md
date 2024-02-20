@@ -13,9 +13,9 @@ related:
 
 Customize your application's default text colors, surfaces, and more. Easily modify your theme programmatically in real time. Vuetify comes with standard support for light and dark variants.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -24,7 +24,7 @@ Customize your application's default text colors, surfaces, and more. Easily mod
 | [useTheme](/api/use-theme/) | The theme composable allows you to get information about, and modify the current theme |
 | [v-theme-provider](/api/v-theme-provider/) | The theme provider component modifies the theme of all its children |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Setup
 

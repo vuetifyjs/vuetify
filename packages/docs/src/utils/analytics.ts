@@ -1,8 +1,5 @@
 /* eslint-disable camelcase */
 
-// Composables
-import { useGtag } from 'vue-gtag-next'
-
 export function gtagClick (
   event_category: string,
   event_label: string,
