@@ -153,27 +153,30 @@ export const VBarline = genericComponent<VBarlineSlots>()({
               bars.value.map(item => (
                 <rect
                   x={ item.x + offsetX.value }
-                  y={ item.y }
+                  y={ item.y + item.height }
                   width={ lineWidth.value }
-                  height={ item.height }
-                  rx={ typeof props.smooth === 'number'
-                    ? props.smooth
-                    : props.smooth ? 2 : 0 }
-                  ry={ typeof props.smooth === 'number'
-                    ? props.smooth
-                    : props.smooth ? 2 : 0 }
+                  height="0"
+                  rx={ typeof props.smooth === 'number' ? props.smooth : props.smooth ? 2 : 0 }
+                  ry={ typeof props.smooth === 'number' ? props.smooth : props.smooth ? 2 : 0 }
                 >
-                  {
-                    props.autoDraw ? (
+                  { props.autoDraw && (
+                    <>
+                      <animate
+                        attributeName="y"
+                        from={ item.y + item.height }
+                        to={ item.y }
+                        dur={ `${props.autoDrawDuration}ms` }
+                        fill="freeze"
+                      />
                       <animate
                         attributeName="height"
                         from="0"
                         to={ item.height }
                         dur={ `${props.autoDrawDuration}ms` }
                         fill="freeze"
-                      ></animate>
-                    ) : undefined as never
-                  }
+                      />
+                    </>
+                  )}
                 </rect>
               ))
             }
