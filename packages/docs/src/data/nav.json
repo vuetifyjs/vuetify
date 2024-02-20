@@ -226,6 +226,10 @@
       {
         "title": "sparklines",
         "subfolder": "components"
+      },
+      {
+        "title": "empty-states",
+        "subfolder": "components"
       }
     ]
   },
