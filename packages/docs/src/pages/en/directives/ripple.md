@@ -26,11 +26,11 @@ Basic ripple functionality can be enabled just by using `v-ripple` directive on 
 
 ## API
 
-| Directive | Description |
-| - | - |
-| [v-ripple](/api/v-ripple/) | The ripple directive |
+| Directive                            | Description          |
+|--------------------------------------|----------------------|
+| [v-ripple](/api/v-ripple-directive/) | The ripple directive |
 
-<ApiInline  hide-links />
+<ApiInline hide-links />
 
 ## Examples
 

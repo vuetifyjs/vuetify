@@ -8,6 +8,7 @@ import pageToApi from '../src/data/page-to-api.json'
 import type { Plugin } from 'vite'
 import { rimraf } from 'rimraf'
 import { mkdirp } from 'mkdirp'
+import type { ComponentData, DirectiveData } from '../../api-generator/src/types'
 
 const API_ROOT = resolve('../api-generator/dist/api')
 const API_PAGES_ROOT = resolve('./node_modules/.cache/api-pages')
@@ -73,24 +74,25 @@ async function loadMessages (locale: string) {
   }
 }
 
-async function createMdFile (component: Record<string, any>, locale: string) {
+async function createMdFile (component: (ComponentData | DirectiveData), locale: string) {
   const messages = await loadMessages(locale)
   let str = ''
 
   str += genHeader(component.displayName)
   str += genApiLinks(component.displayName, messages.links)
 
-  for (const section of ['props', 'events', 'slots', 'exposed', 'sass', 'options', 'argument', 'modifiers']) {
+  const sections = ['props', 'events', 'slots', 'exposed', 'sass', 'argument', 'modifiers'] as const
+  for (const section of sections) {
     if (Object.keys(component[section] ?? {}).length) {
       str += `## ${messages[section]} {#${section}}\n\n`
-      str += `<api-section name="${component.displayName}" section="${section}" />\n\n`
+      str += `<api-section name="${component.fileName}" section="${section}" />\n\n`
     }
   }
 
   return str
 }
 
-async function writeFile (componentApi: Record<string, any>, locale: string) {
+async function writeFile (componentApi: (ComponentData | DirectiveData), locale: string) {
   if (!componentApi?.fileName) return
 
   const folder = resolve(API_PAGES_ROOT, locale, 'api')
@@ -99,22 +101,17 @@ async function writeFile (componentApi: Record<string, any>, locale: string) {
     fs.mkdirSync(folder, { recursive: true })
   }
 
-  fs.writeFileSync(resolve(folder, `${sanitize(componentApi.fileName)}.md`), await createMdFile(componentApi, locale))
+  fs.writeFileSync(resolve(folder, `${sanitize(componentApi.pathName)}.md`), await createMdFile(componentApi, locale))
 }
 
 function getApiData () {
   const files = fs.readdirSync(API_ROOT)
-  const data: Record<string, any>[] = []
+  const data: (ComponentData | DirectiveData)[] = []
 
   for (const file of files) {
-    const name = path.basename(file.slice(file.lastIndexOf('/') + 1), '.json')
     const obj = JSON.parse(fs.readFileSync(resolve(API_ROOT, file), 'utf-8'))
 
-    data.push({
-      name,
-      displayName: name,
-      ...obj,
-    })
+    data.push(obj)
   }
 
   return data

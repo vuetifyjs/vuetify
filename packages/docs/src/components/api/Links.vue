@@ -23,7 +23,7 @@
 
     return apis.map(name => ({
       name,
-      href: `/${locale.value}/api/${name}`,
+      href: `/${locale.value}/api/` + (name.startsWith('v-') ? `${name}-directive` : name),
     }))
   })
 </script>

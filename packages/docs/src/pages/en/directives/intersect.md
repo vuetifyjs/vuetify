@@ -26,9 +26,9 @@ Scroll the window and watch the colored dot. Notice as the [v-card](/components/
 
 ## API
 
-| Directive | Description |
-| - | - |
-| [v-intersect](/api/v-intersect/) | The intersection observer directive |
+| Directive                                  | Description                         |
+|--------------------------------------------|-------------------------------------|
+| [v-intersect](/api/v-intersect-directive/) | The intersection observer directive |
 
 <ApiInline hide-links />
 

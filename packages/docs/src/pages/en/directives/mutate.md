@@ -147,9 +147,9 @@ Unlike the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/
 
 ## API
 
-| Directive | Description |
-| - | - |
-| [v-mutate](/api/v-mutate/) | The mutation observer directive |
+| Directive                            | Description                     |
+|--------------------------------------|---------------------------------|
+| [v-mutate](/api/v-mutate-directive/) | The mutation observer directive |
 
 <ApiInline hide-links />
 
