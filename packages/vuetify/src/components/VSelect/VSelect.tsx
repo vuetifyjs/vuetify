@@ -255,6 +255,7 @@ export const VSelect = genericComponent<new <
     function select (item: ListItem) {
       const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
       const add = index === -1
+
       if (props.multiple) {
         if (add) {
           model.value = [...model.value, item]
