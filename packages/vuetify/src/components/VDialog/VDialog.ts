@@ -6,6 +6,7 @@ import { VThemeProvider } from '../VThemeProvider'
 
 // Mixins
 import Activatable from '../../mixins/activatable'
+import BindsAttrs from '../../mixins/binds-attrs'
 import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
 import Overlayable from '../../mixins/overlayable'
@@ -27,6 +28,7 @@ import {
 import { VNode, VNodeData } from 'vue'
 
 const baseMixins = mixins(
+  BindsAttrs,
   Dependent,
   Detachable,
   Overlayable,
@@ -40,6 +42,8 @@ export default baseMixins.extend({
   name: 'v-dialog',
 
   directives: { ClickOutside },
+
+  inheritAttrs: false,
 
   props: {
     dark: Boolean,
@@ -254,6 +258,7 @@ export default baseMixins.extend({
               role: 'dialog',
               'aria-modal': this.hideOverlay ? undefined : 'true',
               ...this.getScopeIdAttrs(),
+              ...this.attrs$,
             },
             on: { keydown: this.onKeydown },
             style: { zIndex: this.activeZIndex },
