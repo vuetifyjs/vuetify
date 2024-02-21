@@ -191,7 +191,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                         ripple: false,
                         text: item.localized,
                         variant: item.isDisabled
-                          ? 'text'
+                          ? item.isToday ? 'outlined' : 'text'
                           : item.isToday && !item.isSelected ? 'outlined' : 'flat',
                         onClick: () => onClick(item.date),
                       },
