@@ -8,6 +8,7 @@ import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
 import { useFocus } from '@/composables/focus'
+import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -70,6 +71,8 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
+    const form = useForm()
+    const readonly = computed(() => props.readonly || form?.isReadonly.value)
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function' ? props.counterValue(model.value)
         : typeof props.counterValue === 'number' ? props.counterValue
@@ -128,6 +131,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       emit('click:control', e)
     }
     function onClear (e: MouseEvent) {
+      if (readonly.value) return
       e.stopPropagation()
 
       onFocus()
