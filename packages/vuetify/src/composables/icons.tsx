@@ -241,7 +241,7 @@ export const useIcon = (props: Ref<IconValue | undefined>) => {
       setName => typeof icon === 'string' && icon.startsWith(`${setName}:`)
     )
 
-    const iconName = iconSetName?.startsWith('svg') ? icon.slice(iconSetName.length + 1) : icon.replace(':', '-')
+    const iconName = iconSetName ? icon.slice(iconSetName.length + 1) : icon
     const iconSet = icons.sets[iconSetName ?? icons.defaultSet]
 
     return {
