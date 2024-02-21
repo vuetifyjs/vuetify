@@ -253,10 +253,11 @@ export const VSelect = genericComponent<new <
       }
     }
     function select (item: ListItem) {
-      if (props.multiple) {
-        const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
+      const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
+      const add = index === -1
 
-        if (index === -1) {
+      if (props.multiple) {
+        if (add) {
           model.value = [...model.value, item]
         } else {
           const value = [...model.value]
@@ -264,7 +265,7 @@ export const VSelect = genericComponent<new <
           model.value = value
         }
       } else {
-        model.value = [item]
+        model.value = add ? [item] : []
         menu.value = false
       }
     }
