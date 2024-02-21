@@ -340,6 +340,12 @@ These components are used to display data and information in a variety of ways.
 
 </ComponentsListItem>
 
+<ComponentsListItem name="Sparkline component" src="sparkline" labs>
+
+  The sparkline component creates beautiful and expressive simple graphs for displaying numerical data
+
+</ComponentsListItem>
+
 <ComponentsListItem name="Virtual Data table component"  src="data-tables/virtual-tables">
 
   The virtual data table component is used to display very large subsets of data

@@ -1,6 +1,6 @@
 <template>
   <v-sparkline
-    :value="value"
+    :model-value="value"
     :gradient="gradient"
     :smooth="radius || false"
     :padding="padding"
