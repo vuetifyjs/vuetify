@@ -34,7 +34,6 @@ Before upgrading, make sure to consult the Official [Vue 3 Migration Guide](http
 
 - [calendar](https://github.com/vuetifyjs/vuetify/issues/13469)
 - [overflow-btn](https://github.com/vuetifyjs/vuetify/issues/13493)
-- [sparkline](https://github.com/vuetifyjs/vuetify/issues/13507)
 - [speed-dial](https://github.com/vuetifyjs/vuetify/issues/13508)
 - [time-picker](https://github.com/vuetifyjs/vuetify/issues/13516)
 - [treeview](https://github.com/vuetifyjs/vuetify/issues/13518)
@@ -287,6 +286,10 @@ app.use(vuetify)
 ### v-card
 
 - `v-card` does not allow content to overflow or use higher `z-index` values to display on top of elements outside it. To disable this behavior, use `<v-card style="overflow: initial; z-index: initial">` ([#17593](https://github.com/vuetifyjs/vuetify/issues/17593), [#17628](https://github.com/vuetifyjs/vuetify/issues/17628))
+
+### v-sparkline
+
+- `value` is now `model-value`
 
 ## Directives
 
