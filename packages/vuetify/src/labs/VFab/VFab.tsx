@@ -6,39 +6,34 @@ import { makeVBtnProps, VBtn } from '@/components/VBtn/VBtn'
 
 // Composables
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
-import { makeLocationProps, useLocation } from '@/composables/location'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, onMounted, ref, shallowRef, toRef, toRefs, watch, watchEffect } from 'vue'
-import { useRtl } from '../entry-bundler'
-import { convertToUnit, genericComponent, propsFactory, toPhysical, useRender } from '@/util'
+import { computed, ref, shallowRef, toRef } from 'vue'
+import { genericComponent, propsFactory, useRender, omit } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { ComputedRef, PropType } from 'vue'
+import type { Position } from '@/composables/layout'
 
 const locations = ['start', 'end', 'left', 'right', 'top', 'bottom'] as const
 
 export const makeVFabProps = propsFactory({
-  app: {
+  app: Boolean,
+  extended: Boolean,
+  location: {
     type: String as PropType<typeof locations[number]>,
+    default: 'bottom end',
     validator: (value: any) => locations.includes(value),
   },
-  extended: Boolean,
   modelValue: {
     type: Boolean,
     default: true,
   },
 
-  ...makeVBtnProps(),
+  ...omit(makeVBtnProps(), ['location']),
   ...makeLayoutItemProps(),
-
-  location: {
-    type: String as PropType<typeof locations[number]>,
-    default: 'bottom',
-    validator: (value: any) => locations.includes(value),
-  },
 }, 'VFab')
 
 export const VFab = genericComponent()({
@@ -52,14 +47,20 @@ export const VFab = genericComponent()({
 
   setup (props, { slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
-    const { isRtl } = useRtl()
     const height = shallowRef(56)
     const { resizeRef } = useResizeObserver(entries => {
       if (!entries.length) return
       height.value = entries[0].target.clientHeight
     })
     const position = computed(() => {
-      return toPhysical(props.app, isRtl.value) as 'top' | 'right' | 'bottom' | 'left'
+      if (!props.app || !props.location) return false
+
+      return props.location.split(' ').shift()
+    }) as ComputedRef<Position>
+    const orientation = computed(() => {
+      if (!props.app || !props.location) return false
+
+      return props.location.split(' ')[1] ?? 'end'
     })
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
@@ -84,7 +85,7 @@ export const VFab = genericComponent()({
             {
               'v-fab--app': !!props.app,
               'v-fab--extended': props.extended,
-              [`v-fab--${props.app}`]: !!props.app,
+              [`v-fab--${orientation.value}`]: !!props.app,
             },
             props.class,
           ]}
@@ -101,11 +102,6 @@ export const VFab = genericComponent()({
           <VBtn
             ref={ resizeRef }
             { ...btnProps }
-            class={[
-              {
-                [`v-btn--fab-${props.location}`]: !!props.location,
-              },
-            ]}
             location={ undefined }
             v-slots={ slots }
           />
@@ -116,3 +112,5 @@ export const VFab = genericComponent()({
     return {}
   },
 })
+
+export type VFab = InstanceType<typeof VFab>
