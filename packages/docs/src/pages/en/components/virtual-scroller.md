@@ -30,7 +30,7 @@ This feature was introduced in [v3.2.0 (Orion)](/getting-started/release-notes/?
 
 The virtual scroller displays just enough records to fill the viewport and uses the existing component, rehydrating it with new data.
 
-ExamplesUsage name="v-virtual-scroll" />
+<ExamplesUsage name="v-virtual-scroll" />
 
 <PromotedEntry />
 

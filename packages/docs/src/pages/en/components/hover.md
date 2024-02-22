@@ -24,7 +24,7 @@ The `v-hover` component provides a simple interface for handling hover states fo
 
  `v-hover` is a renderless component that uses the default slot to provide scoped access to its internal model; as well as mouse event listeners to modify it. To explicitly control the internal state, use the **model-value** property.
 
-ExamplesUsage name="v-hover" />
+<ExamplesUsage name="v-hover" />
 
 <PromotedEntry />
 

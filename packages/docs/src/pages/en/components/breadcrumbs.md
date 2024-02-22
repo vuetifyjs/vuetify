@@ -27,7 +27,7 @@ The `v-breadcrumbs` component is used as a navigational helper and hierarchy for
 
 By default, breadcrumbs use a text divider. This can be any string.
 
-ExamplesUsage name="v-breadcrumbs" />
+<ExamplesUsage name="v-breadcrumbs" />
 
 <PromotedEntry />
 

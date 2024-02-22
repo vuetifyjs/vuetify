@@ -25,7 +25,7 @@ The `v-checkbox` component provides users the ability to choose between two dist
 
 A `v-checkbox` in its simplest form provides a toggle between 2 values.
 
-ExamplesUsage name="v-checkbox" />
+<ExamplesUsage name="v-checkbox" />
 
 <PromotedEntry />
 

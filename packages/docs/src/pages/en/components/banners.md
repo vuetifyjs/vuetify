@@ -28,7 +28,7 @@ The `v-banner` component is used as a middle-interrupting message to the user wi
 
 Banners come in two variations **single-line** and **multi-line** (implicit). These can have icons and actions that you can use with your message.
 
-ExamplesUsage name="v-banner" />
+<ExamplesUsage name="v-banner" />
 
 <PromotedEntry />
 

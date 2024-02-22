@@ -30,7 +30,7 @@ This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-no
 
 When scrolling towards the bottom, new items will be rendered either automatically, or manually with the click of a button.
 
-ExamplesUsage name="v-infinite-scroll" />
+<ExamplesUsage name="v-infinite-scroll" />
 
 A **load** event will be emitted when the component needs to load more content. The argument passed is an object with two properties.
 

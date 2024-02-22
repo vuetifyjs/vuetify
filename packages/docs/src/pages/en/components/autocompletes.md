@@ -26,7 +26,7 @@ The `v-autocomplete` component offers simple and flexible type-ahead functionali
 
 The autocomplete component extends `v-select` and adds the ability to filter items.
 
-ExamplesUsage name="v-autocomplete" />
+<ExamplesUsage name="v-autocomplete" />
 
 <PromotedEntry />
 

@@ -25,7 +25,7 @@ The `v-range-slider` component complements the `v-slider` component nicely when 
 
 Sliders reflect a range of values along a bar, from which users may select a single value. They are ideal for adjusting settings such as volume, brightness, or applying image filters.
 
-ExamplesUsage name="v-range-slider" />
+<ExamplesUsage name="v-range-slider" />
 
 <PromotedEntry />
 

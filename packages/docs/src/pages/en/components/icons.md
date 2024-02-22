@@ -29,7 +29,7 @@ The `v-icon` component provides a large set of glyphs to provide context to vari
 
 Icons come in two themes (light and dark), and five different sizes (x-small, small, medium (default), large, and x-large).
 
-ExamplesUsage name="v-icon" />
+<ExamplesUsage name="v-icon" />
 
 <PromotedEntry />
 

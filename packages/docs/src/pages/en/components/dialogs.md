@@ -27,7 +27,7 @@ The `v-dialog` component inform users about a specific task and may contain crit
 
 In this basic example we use the **activator** slot to render a button that is used to open the dialog. When using the **activator** slot it is important that you bind the **props** object from the slot (using `v-bind`) to the element that will activate the dialog. See the examples below for more ways of activating a dialog.
 
-ExamplesUsage name="v-dialog" />
+<ExamplesUsage name="v-dialog" />
 
 <PromotedEntry />
 

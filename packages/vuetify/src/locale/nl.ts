@@ -1,5 +1,5 @@
 export default {
-  badge: 'insigne',
+  badge: 'Insigne',
   open: 'Openen',
   close: 'Sluiten',
   confirmEdit: {

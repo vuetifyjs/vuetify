@@ -6,7 +6,7 @@
       :line-width="width"
       :padding="padding"
       :smooth="radius || false"
-      :value="value"
+      :model-value="value"
       auto-draw
     ></v-sparkline>
 

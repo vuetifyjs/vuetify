@@ -17,7 +17,7 @@
       >
         <v-row justify="center" justify-md="start">
           <v-col cols="auto">
-            <user-profile />
+            <UserUserProfile />
           </v-col>
 
           <v-col

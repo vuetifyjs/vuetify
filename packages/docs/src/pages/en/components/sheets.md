@@ -26,7 +26,7 @@ The `v-sheet` component is a transformable piece of _paper_ that provides a basi
 
 The sheet component has support for elevation, rounded corners, color, and more. It can be used as a container for other components or as a standalone.
 
-ExamplesUsage name="v-sheet" />
+<ExamplesUsage name="v-sheet" />
 
 <PromotedEntry />
 

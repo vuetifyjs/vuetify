@@ -182,7 +182,9 @@ export const VDatePicker = genericComponent<new <
       } else {
         year.value++
         month.value = 0
+        onUpdateYear(year.value)
       }
+      onUpdateMonth(month.value)
     }
 
     function onClickPrev () {
@@ -191,7 +193,9 @@ export const VDatePicker = genericComponent<new <
       } else {
         year.value--
         month.value = 11
+        onUpdateYear(year.value)
       }
+      onUpdateMonth(month.value)
     }
 
     function onClickDate () {
@@ -206,17 +210,17 @@ export const VDatePicker = genericComponent<new <
       viewMode.value = viewMode.value === 'year' ? 'month' : 'year'
     }
 
-    watch(month, () => {
+    function onUpdateMonth (value: number) {
       if (viewMode.value === 'months') onClickMonth()
 
-      emit('update:month', month.value)
-    })
+      emit('update:month', value)
+    }
 
-    watch(year, () => {
+    function onUpdateYear (value: number) {
       if (viewMode.value === 'year') onClickYear()
 
-      emit('update:year', year.value)
-    })
+      emit('update:year', value)
+    }
 
     watch(model, (val, oldVal) => {
       const before = adapter.date(wrapInArray(val)[0])
@@ -294,6 +298,7 @@ export const VDatePicker = genericComponent<new <
                       key="date-picker-months"
                       { ...datePickerMonthsProps }
                       v-model={ month.value }
+                      onUpdate:modelValue={ onUpdateMonth }
                       min={ minDate.value }
                       max={ maxDate.value }
                     />
@@ -302,6 +307,7 @@ export const VDatePicker = genericComponent<new <
                       key="date-picker-years"
                       { ...datePickerYearsProps }
                       v-model={ year.value }
+                      onUpdate:modelValue={ onUpdateYear }
                       min={ minDate.value }
                       max={ maxDate.value }
                     />
@@ -312,6 +318,8 @@ export const VDatePicker = genericComponent<new <
                       v-model={ model.value }
                       v-model:month={ month.value }
                       v-model:year={ year.value }
+                      onUpdate:month={ onUpdateMonth }
+                      onUpdate:year={ onUpdateYear }
                       min={ minDate.value }
                       max={ maxDate.value }
                     />

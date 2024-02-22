@@ -24,7 +24,7 @@ The `v-lazy` component is used to dynamically load components based upon an elem
 
 The `v-lazy` component by default will not render its contents until it has been intersected. Scroll down and watch the element render as you go past it.
 
-ExamplesUsage name="v-lazy" />
+<ExamplesUsage name="v-lazy" />
 
 <PromotedEntry />
 

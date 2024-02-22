@@ -63,50 +63,33 @@
   </section>
 </template>
 
-<script>
-  export default {
-    name: 'ColorPalette',
+<script setup>
+  import colors from 'vuetify/util/colors'
 
-    data: () => ({
-      colors,
-      search: '',
-    }),
+  const search = shallowRef('')
 
-    computed: {
-      computedColors () {
-        const colors = {}
-        const search = this.search.toLowerCase()
+  const computedColors = computed(() => {
+    const _colors = {}
+    const _search = search.value.toLowerCase()
 
-        Object.keys(this.colors).forEach(key => {
-          const kebabKey = kebabCase(key).toLowerCase()
+    Object.keys(colors).forEach(key => {
+      const kebabKey = kebabCase(key).toLowerCase()
 
-          if (kebabKey.indexOf(search) > -1) {
-            colors[kebabKey] = this.colors[key]
-          }
-        })
+      if (kebabKey.indexOf(_search) > -1) {
+        _colors[kebabKey] = colors[key]
+      }
+    })
 
-        return colors
-      },
-    },
+    return _colors
+  })
 
-    methods: {
-      convertToClass (base, variant) {
-        if (variant === 'base') return base
+  function convertToClass (base, variant) {
+    if (variant === 'base') return base
 
-        const lastChar = variant.at(-1)
+    const lastChar = variant.at(-1)
 
-        if (isNaN(Number(lastChar))) return variant
+    if (isNaN(Number(lastChar))) return variant
 
-        return `${base}-${variant.slice(0, -1)}-${lastChar}`
-      },
-      getColorClass (key) {
-        if (['white', 'transparent'].includes(key) ||
-          key.indexOf('light') > -1 ||
-          key.indexOf('accent') > -1
-        ) return 'black--text'
-
-        return 'white--text'
-      },
-    },
+    return `${base}-${variant.slice(0, -1)}-${lastChar}`
   }
 </script>

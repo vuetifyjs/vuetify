@@ -26,7 +26,7 @@ The `v-bottom-navigation` component is an alternative to the sidebar. It is prim
 
 While `v-bottom navigation` is meant to be used with [vue-router](https://router.vuejs.org/), you can also programmatically control the active state of the buttons by using the **value** property. A button is given a default value of its _index_ with `v-bottom-navigation`.
 
-ExamplesUsage name="v-bottom-navigation" />
+<ExamplesUsage name="v-bottom-navigation" />
 
 <PromotedEntry />
 

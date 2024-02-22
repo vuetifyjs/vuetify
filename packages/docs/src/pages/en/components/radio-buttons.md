@@ -25,7 +25,7 @@ The `v-radio` component is a simple radio button. When combined with  the `v-rad
 
 Although `v-radio` can be used on its own, it is best used in conjunction with `v-radio-group`.
 
-ExamplesUsage name="v-radio-group" />
+<ExamplesUsage name="v-radio-group" />
 
 <PromotedEntry />
 
