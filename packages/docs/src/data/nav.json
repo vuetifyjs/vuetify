@@ -224,6 +224,10 @@
         "subfolder": "components"
       },
       {
+        "title": "floating-action-buttons",
+        "subfolder": "components"
+      },
+      {
         "title": "sparklines",
         "subfolder": "components"
       }
