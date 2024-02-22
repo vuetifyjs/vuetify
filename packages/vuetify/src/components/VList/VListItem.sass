@@ -245,15 +245,12 @@
         &.v-list-item--three-line
           padding-inline: list.nth($list-item-three-line-padding, 2)
 
-      .v-navigation-drawer &.v-list-item--density-default 
-        padding-inline: list.nth($list-item-padding, 2)
+  .v-list &
+    &--nav
+      padding-inline: $list-nav-padding
 
-  &--nav
-    padding-inline: $list-nav-padding
-
-    .v-list &
-      &:not(:only-child)
-        margin-bottom: $list-item-nav-margin-top
+    &:not(:only-child)
+      margin-bottom: $list-item-nav-margin-top
 
 .v-list-item__underlay
   position: absolute
