@@ -1,6 +1,6 @@
 // Utilities
 import { inject } from 'vue'
-import { consoleWarn, mergeDeep, refElement } from '@/util'
+import { clamp, consoleWarn, mergeDeep, refElement } from '@/util'
 
 // Types
 import type { ComponentPublicInstance, InjectionKey, Ref } from 'vue'
@@ -120,7 +120,7 @@ export async function scrollTo (
     const location = Math.floor(
       startLocation +
       (targetLocation - startLocation) *
-      ease(Math.max(progress, 1))
+      ease(clamp(progress, 0, 1))
     )
 
     container[property] = location
