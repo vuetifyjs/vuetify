@@ -1,4 +1,5 @@
 export { VDataTable } from './VDataTable'
+export { VDataTableHeaders } from './VDataTableHeaders'
 export { VDataTableFooter } from './VDataTableFooter'
 export { VDataTableRows } from './VDataTableRows'
 export { VDataTableRow } from './VDataTableRow'
