@@ -533,7 +533,7 @@ describe('VSelect', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/19235
-  it('should update v-model value when click closable chip', () => {
+  it('should update v-model when click closable chip', () => {
     const selectedItem = ref('abc')
 
     cy.mount(() => (
@@ -553,7 +553,7 @@ describe('VSelect', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/19261
-  it('should not toggle v-model to null when clicking already selected item in selection mode', () => {
+  it('should not toggle v-model to null when clicking already selected item in single selection mode', () => {
     const selectedItem = ref('abc')
 
     cy.mount(() => (
@@ -567,7 +567,7 @@ describe('VSelect', () => {
 
     cy.get('.v-list-item').should('have.length', 2)
     cy.get('.v-list-item').eq(0).click({ waitForAnimations: false }).should(() => {
-      expect(selectedItem.value).to.deep.equal('abc')
+      expect(selectedItem.value).equal('abc')
     })
   })
 
