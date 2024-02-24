@@ -252,11 +252,10 @@ export const VSelect = genericComponent<new <
         model.value = [item]
       }
     }
-    function select (item: ListItem) {
-      const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
-      const add = index === -1
-
+    function select (item: ListItem, add = true) {
       if (props.multiple) {
+        const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
+        add = index === -1
         if (add) {
           model.value = [...model.value, item]
         } else {
@@ -454,7 +453,7 @@ export const VSelect = genericComponent<new <
                     e.stopPropagation()
                     e.preventDefault()
 
-                    select(item)
+                    select(item, false)
                   }
 
                   const slotProps = {

@@ -532,6 +532,45 @@ describe('VSelect', () => {
       .should('not.have.class', 'v-select--active-menu')
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/19235
+  it('should update v-model when click closable chip', () => {
+    const selectedItem = ref('abc')
+
+    cy.mount(() => (
+      <VSelect
+        v-model={ selectedItem.value }
+        chips
+        closable-chips
+        items={['abc', 'def']}
+      />
+    ))
+
+    cy.get('.v-chip__close')
+      .click()
+      .then(_ => {
+        expect(selectedItem.value).equal(null)
+      })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/19261
+  it('should not toggle v-model to null when clicking already selected item in single selection mode', () => {
+    const selectedItem = ref('abc')
+
+    cy.mount(() => (
+      <VSelect
+        v-model={ selectedItem.value }
+        items={['abc', 'def']}
+      />
+    ))
+
+    cy.get('.v-select').click()
+
+    cy.get('.v-list-item').should('have.length', 2)
+    cy.get('.v-list-item').eq(0).click({ waitForAnimations: false }).should(() => {
+      expect(selectedItem.value).equal('abc')
+    })
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })
