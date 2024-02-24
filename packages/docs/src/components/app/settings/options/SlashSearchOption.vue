@@ -6,7 +6,7 @@
       }
     }"
   >
-    <settings-switch
+    <SettingsSwitch
       v-model="user.slashSearch"
       :label="t('slash-search')"
       :messages="t('slash-search-message')"

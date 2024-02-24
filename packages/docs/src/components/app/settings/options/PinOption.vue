@@ -6,7 +6,7 @@
       }
     }"
   >
-    <settings-switch
+    <SettingsSwitch
       v-model="user.pins"
       :disabled="!auth.isSubscriber"
       :messages="t('dashboard.perks.enable-pins-message')"
@@ -22,7 +22,7 @@
           variant="outlined"
         />
       </template>
-    </settings-switch>
+    </SettingsSwitch>
   </v-defaults-provider>
 </template>
 

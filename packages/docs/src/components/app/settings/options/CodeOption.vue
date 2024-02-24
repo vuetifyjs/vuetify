@@ -6,7 +6,7 @@
       }
     }"
   >
-    <settings-switch
+    <SettingsSwitch
       v-model="user.composition"
       :label="t('enable-composition')"
       :messages="t('enable-composition-message')"

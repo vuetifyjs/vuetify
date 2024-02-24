@@ -1,12 +1,12 @@
 <template>
-  <settings-header
+  <AppSettingsSettingsHeader
     title="communication"
     text="communication-message"
   />
 
-  <AppSettingsBannerOption />
+  <AppSettingsOptionsBannerOption />
 
-  <AppSettingsNotificationsOption />
+  <AppSettingsOptionsNotificationsOption />
 
   <br>
 
