@@ -7,7 +7,7 @@
       }
     }"
   >
-    <settings-switch
+    <SettingsSwitch
       v-model="user.syncSettings"
       :label="t('sync-settings')"
       :messages="t('sync-settings-message')"

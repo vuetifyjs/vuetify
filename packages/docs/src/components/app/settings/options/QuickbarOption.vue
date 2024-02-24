@@ -6,7 +6,7 @@
       }
     }"
   >
-    <settings-switch
+    <SettingsSwitch
       v-model="user.quickbar"
       :disabled="!auth.isSubscriber"
       :label="t('dashboard.perks.disable-quickbar')"

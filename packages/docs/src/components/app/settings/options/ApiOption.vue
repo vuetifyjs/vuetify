@@ -6,7 +6,7 @@
       }
     }"
   >
-    <settings-switch
+    <SettingsSwitch
       v-model="user.api"
       :label="t('enable-inline-api')"
       :messages="t('enable-inline-api-message')"
