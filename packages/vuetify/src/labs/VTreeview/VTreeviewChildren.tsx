@@ -41,6 +41,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       }
 
       const treeviewGroupProps = VTreeviewGroup.filterProps(itemProps)
+      const treeviewChildrenProps = VTreeviewChildren.filterProps(props)
 
       return children ? (
         <VTreeviewGroup
@@ -57,7 +58,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
             ),
             default: () => (
               <VTreeviewChildren
-                { ...props }
+                { ...treeviewChildrenProps }
                 items={ children }
                 v-slots={ slots }
               />

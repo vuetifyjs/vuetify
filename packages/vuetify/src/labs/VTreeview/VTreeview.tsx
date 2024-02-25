@@ -12,16 +12,10 @@ import { computed, provide, ref, toRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, InjectionKey } from 'vue'
+import { VTreeviewSymbol } from './shared'
 import type { VListChildrenSlots } from '@/components/VList/VListChildren'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps } from '@/util'
-
-export interface TreeViewProvide {
-  visibleIds: ComputedRef<Set<unknown> | null>
-}
-
-export const VTreeviewSymbol: InjectionKey<TreeViewProvide> = Symbol.for('vuetify:v-treeview')
 
 function flatten (items: ListItem[], flat: ListItem[] = []) {
   for (const item of items) {

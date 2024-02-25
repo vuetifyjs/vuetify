@@ -15,7 +15,7 @@ import { computed, inject, ref } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import { VTreeviewSymbol } from './VTreeview'
+import { VTreeviewSymbol } from './shared'
 import type { VListItemSlots } from '@/components/VList/VListItem'
 
 export const makeVTreeviewItemProps = propsFactory({
