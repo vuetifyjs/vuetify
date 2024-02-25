@@ -8,13 +8,13 @@
     <template #prepend>
       <app-bar-logo />
 
-      <app-btn
+      <AppBtn
         v-if="route.meta.layout !== 'home' && mdAndDown"
         icon="mdi-menu"
         @click="app.drawer = !app.drawer"
       />
 
-      <app-search />
+      <AppSearchSearch />
     </template>
 
     <template #append>
@@ -54,33 +54,6 @@
 </template>
 
 <script setup>
-  // Components
-  import AppBarEcosystemMenu from './EcosystemMenu.vue'
-  import AppBarEnterpriseLink from './EnterpriseLink.vue'
-  import AppBarJobsLink from './JobsLink.vue'
-  import AppBarLanguageMenu from './LanguageMenu.vue'
-  import AppBarLearnMenu from './LearnMenu.vue'
-  import AppBarLogo from './Logo.vue'
-  import AppBarNotificationsMenu from './NotificationsMenu.vue'
-  import AppBarPlaygroundLink from './PlaygroundLink.vue'
-  import AppBarSettingsToggle from './SettingsToggle.vue'
-  import AppBarStoreLink from './StoreLink.vue'
-  import AppBarSupportMenu from './SupportMenu.vue'
-  import AppBarTeamLink from './TeamLink.vue'
-  import AppSearch from '@/components/app/search/Search.vue'
-  import AppVerticalDivider from '@/components/app/VerticalDivider.vue'
-
-  // Composables
-  import { useAppStore } from '@/store/app'
-  import { useDisplay, useTheme } from 'vuetify'
-  import { useRoute } from 'vue-router'
-
-  // Stores
-  import { useUserStore } from '@vuetify/one'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const app = useAppStore()
   const user = useUserStore()
   const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()

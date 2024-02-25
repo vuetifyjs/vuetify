@@ -6,7 +6,7 @@
       }
     }"
   >
-    <settings-switch
+    <SettingsSwitch
       v-model="user.notifications.show"
       :label="t('enable-notifications')"
       :messages="t('enable-notifications-message')"
@@ -21,20 +21,11 @@
           @click="onResetNotifications"
         />
       </template>
-    </settings-switch>
+    </SettingsSwitch>
   </v-defaults-provider>
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Stores
-  import { useUserStore } from '@vuetify/one'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const { t } = useI18n()
   const user = useUserStore()
 

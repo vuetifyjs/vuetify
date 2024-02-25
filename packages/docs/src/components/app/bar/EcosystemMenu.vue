@@ -1,28 +1,18 @@
 <template>
-  <app-btn>
+  <AppBtn>
     Ecosystem
 
-    <chevron-down />
+    <IconsChevronDown />
 
-    <app-menu
+    <AppMenuMenu
       :items="items"
       activator="parent"
       width="200"
     />
-  </app-btn>
+  </AppBtn>
 </template>
 
 <script setup>
-  // Components
-  import ChevronDown from '@/components/icons/ChevronDown.vue'
-
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const { t } = useI18n()
   const items = computed(() => ([
     { subheader: t('social') },

@@ -10,4 +10,4 @@ meta:
 
 Sign-up for Vuetify One and enjoy an ad-free documentation experience.
 
-<OneSubscription />
+<UserAccountOneSubscription />

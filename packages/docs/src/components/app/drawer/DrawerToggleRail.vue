@@ -10,12 +10,6 @@
 </template>
 
 <script setup>
-  // Stores
-  import { useUserStore } from '@vuetify/one'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const user = useUserStore()
 
   const icon = computed(() => {

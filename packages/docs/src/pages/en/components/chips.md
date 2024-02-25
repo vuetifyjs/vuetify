@@ -22,15 +22,15 @@ The `v-chip` component is used to convey small pieces of information. Using the 
 
 ![Chips Entry](https://cdn.vuetifyjs.com/docs/images/components/v-chip/v-chip-entry.png)
 
-<page-features />
+<PageFeatures />
 
 ## Usage
 
 Chips come in the following variations: closeable, filter, outlined, pill. The default slot of `v-chip` will also accept avatars and icons alongside text.
 
-<usage name="v-chip" />
+<ExamplesUsage name="v-chip" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -38,7 +38,7 @@ Chips come in the following variations: closeable, filter, outlined, pill. The d
 | - | - |
 | [v-chip](/api/v-chip/) | Primary component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Guide
 
@@ -52,13 +52,13 @@ Similar to other components such as [v-btn](/components/buttons/) and [v-list](/
 
 Closable chips can be controlled with a v-model. You can also listen to the `click:close` event if you want to know when a chip has been closed.
 
-<example file="v-chip/prop-closable" />
+<ExamplesExample file="v-chip/prop-closable" />
 
 #### Color and variants
 
 Any color from the Material Design palette can be used to change a chips color.
 
-<example file="v-chip/prop-colored" />
+<ExamplesExample file="v-chip/prop-colored" />
 
 The **variant** prop gives you easy access to several different button styles. Available variants are: **elevated**, **flat**, **tonal** (default), **outlined**, **text**, and **plain**.
 
@@ -75,31 +75,31 @@ The **variant** prop gives you easy access to several different button styles. A
 
 Chips can have various sizes from `x-small` to `x-large`. `density` is used to adjust the vertical spacing without affecting width or font size.
 
-<example file="v-chip/prop-sizes" />
+<ExamplesExample file="v-chip/prop-sizes" />
 
 #### Draggable
 
 `draggable` `v-chip` component can be dragged by mouse.
 
-<example file="v-chip/prop-draggable" />
+<ExamplesExample file="v-chip/prop-draggable" />
 
 #### Label
 
 Label chips use the `v-card` border-radius.
 
-<example file="v-chip/prop-label" />
+<ExamplesExample file="v-chip/prop-label" />
 
 #### No ripple
 
 `v-chip` can be rendered without ripple if `ripple` prop is set to `false`.
 
-<example file="v-chip/prop-no-ripple" />
+<ExamplesExample file="v-chip/prop-no-ripple" />
 
 #### Outlined
 
 Outlined chips inherit their border color from the current text color.
 
-<example file="v-chip/prop-outlined" />
+<ExamplesExample file="v-chip/prop-outlined" />
 
 ### Slots
 
@@ -107,7 +107,7 @@ Outlined chips inherit their border color from the current text color.
 
 Chips can use text or any icon available in the Material Icons font library.
 
-<example file="v-chip/slot-icon" />
+<ExamplesExample file="v-chip/slot-icon" />
 
 ## Examples
 
@@ -117,28 +117,28 @@ The following are a collection of examples that demonstrate more advanced and re
 
 Chips can be used as actionable items. Provided with a _click_ event, the chip becomes interactive and can invoke methods.
 
-<example file="v-chip/event-action-chips" />
+<ExamplesExample file="v-chip/event-action-chips" />
 
 #### Custom list
 
 In this example we opt to use a customized list instead of [v-autocomplete](/components/autocompletes). This allows us to always display the options available while still providing the same functionality of search and selection.
 
-<example file="v-chip/misc-custom-list" />
+<ExamplesExample file="v-chip/misc-custom-list" />
 
 #### Expandable
 
 Chips can be combined with `v-menu` to enable a specific set of actions for a chip.
 
-<example file="v-chip/misc-expandable" />
+<ExamplesExample file="v-chip/misc-expandable" />
 
 #### Filtering
 
 Chips are great for providing supplementary actions to a particular task. In this instance, we are searching a list of items and collecting a subset of information to display available keywords.
 
-<example file="v-chip/misc-filtering" />
+<ExamplesExample file="v-chip/misc-filtering" />
 
 #### In selects
 
 Selects can use chips to display the selected data. Try adding your own tags below.
 
-<example file="v-chip/misc-in-selects" />
+<ExamplesExample file="v-chip/misc-in-selects" />

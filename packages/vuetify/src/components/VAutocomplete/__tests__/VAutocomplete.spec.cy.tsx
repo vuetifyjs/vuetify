@@ -494,6 +494,7 @@ describe('VAutocomplete', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/18796
+  // https://github.com/vuetifyjs/vuetify/issues/19235
   it('should allow deleting selection via closable-chips', () => {
     const selectedItem = ref('California')
 
@@ -510,6 +511,25 @@ describe('VAutocomplete', () => {
       .then(_ => {
         expect(selectedItem.value).to.equal(null)
       })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/19261
+  it('should not toggle v-model to null when clicking already selected item in single selection mode', () => {
+    const selectedItem = ref('abc')
+
+    cy.mount(() => (
+      <VAutocomplete
+        v-model={ selectedItem.value }
+        items={['abc', 'def']}
+      />
+    ))
+
+    cy.get('.v-autocomplete').click()
+
+    cy.get('.v-list-item').should('have.length', 2)
+    cy.get('.v-list-item').eq(0).click({ waitForAnimations: false }).should(() => {
+      expect(selectedItem.value).equal('abc')
+    })
   })
 
   describe('Showcase', () => {

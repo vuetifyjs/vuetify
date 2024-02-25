@@ -83,10 +83,6 @@
 </template>
 
 <script setup>
-// Composables
-  import { useI18n } from 'vue-i18n'
-  import { useTheme } from 'vuetify'
-
   const { t } = useI18n()
   const theme = useTheme()
   const links = [

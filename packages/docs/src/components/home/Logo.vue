@@ -10,11 +10,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useTheme } from 'vuetify'
-  // Utilities
-  import { computed } from 'vue'
-
   defineProps({
     size: String,
   })

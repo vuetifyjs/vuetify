@@ -38,7 +38,7 @@
               class="d-block text-decoration-none"
               style="min-height: 205px;"
             >
-              <app-figure
+              <AppFigure
                 class="border"
                 :name="project.raw.title"
                 :src="project.raw.image"
@@ -67,12 +67,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useMadeWithVuetifyStore } from '@/store/made-with-vuetify'
-
-  // Utilities
-  import { computed, ref } from 'vue'
-
   defineProps({
     itemsPerPage: {
       type: [Number, String],

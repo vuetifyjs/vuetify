@@ -23,12 +23,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useGoTo } from 'vuetify'
-
-  // Utilities
-  import { shallowRef } from 'vue'
-
   const goTo = useGoTo({ layout: true })
 
   const model = shallowRef(false)

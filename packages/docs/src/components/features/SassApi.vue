@@ -25,7 +25,7 @@
     </template>
   </v-autocomplete>
 
-  <app-markup
+  <AppMarkup
     v-if="model.length > 0"
     :code="code"
     class="mb-6"
@@ -35,9 +35,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-
   const files = import.meta.glob('../../../../api-generator/dist/api/*.json')
 
   const variables = ref([])

@@ -5,7 +5,7 @@
       justify="center"
     >
       <v-col cols="auto">
-        <home-logo size="300" />
+        <HomeLogo size="300" />
       </v-col>
 
       <v-col cols="auto" class="text-center text-lg-start">
@@ -17,7 +17,7 @@
           Vuetify is a no design skills required Open Source UI Library with beautifully handcrafted Vue Components.
         </p>
 
-        <home-action-btns />
+        <HomeActionBtns />
 
         <br>
 
@@ -63,13 +63,6 @@
 </template>
 
 <script setup>
-  // Components
-  import HomeLogo from '@/components/home/Logo.vue'
-  import HomeActionBtns from '@/components/home/ActionBtns.vue'
-
-  // Utilities
-  import { shallowRef } from 'vue'
-
   const isCopying = shallowRef(false)
 
   function copy () {

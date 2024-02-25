@@ -192,11 +192,10 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
         >
           { genOverlays(false, 'v-snackbar') }
 
-          { props.timer && (
+          { props.timer && !isHovering.value && (
             <div key="timer" class="v-snackbar__timer">
               <VProgressLinear
                 ref={ timerRef }
-                active={ !isHovering.value }
                 color={ typeof props.timer === 'string' ? props.timer : 'info' }
                 max={ props.timeout }
                 model-value={ countdown.time.value }

@@ -1,5 +1,5 @@
 <template>
-  <app-list
+  <AppListList
     v-if="auth.isSubscriber && user.pins"
     v-model:opened="opened"
     :items="pinned"
@@ -29,20 +29,10 @@
         </template>
       </v-hover>
     </template>
-  </app-list>
+  </AppListList>
 </template>
 
 <script setup>
-  // Composables
-  import { useRouter } from 'vue-router'
-
-  // Utilities
-  import { computed, onBeforeMount, ref, watch } from 'vue'
-
-  // Stores
-  import { useAuthStore, useUserStore } from '@vuetify/one'
-  import { usePinsStore } from '@/store/pins'
-
   const auth = useAuthStore()
   const pins = usePinsStore()
   const user = useUserStore()

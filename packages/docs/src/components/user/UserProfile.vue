@@ -1,5 +1,5 @@
 <template>
-  <app-sheet width="250">
+  <AppSheet width="250">
     <v-skeleton-loader
       :loading="auth.isLoading"
       type="image, paragraph, divider, list-item-avatar"
@@ -18,7 +18,7 @@
 
           <v-card-title class="mb-n2">{{ auth.user.name }}</v-card-title>
 
-          <user-badges />
+          <UserUserBadges />
         </div>
 
         <v-divider />
@@ -54,26 +54,15 @@
         </v-list>
       </template>
     </v-skeleton-loader>
-  </app-sheet>
+  </AppSheet>
 
-  <one-sub-card />
+  <UserOneSubCard />
 </template>
 
 <script setup lang="ts">
   // Components
   import DiscordLogin from '@/components/user/DiscordLogin.vue'
   import GithubLogin from '@/components/user/GithubLogin.vue'
-  import OneSubCard from '@/components/user/OneSubCard.vue'
-  import UserBadges from '@/components/user/UserBadges.vue'
-
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-
-  // Stores
-  import { useAuthStore, useUserStore } from '@vuetify/one'
 
   const auth = useAuthStore()
   const user = useUserStore()

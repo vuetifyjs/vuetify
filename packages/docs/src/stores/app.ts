@@ -1,6 +1,3 @@
-// Utilities
-import { defineStore } from 'pinia'
-
 // Data
 import data from '@/data/nav.json'
 

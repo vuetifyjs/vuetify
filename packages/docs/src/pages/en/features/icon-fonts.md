@@ -9,20 +9,13 @@ related:
   - /components/avatars
 ---
 
-<script setup>
-  import { defineAsyncComponent } from 'vue'
-
-  const IconList = defineAsyncComponent(() => import('@/components/doc/IconList.vue'))
-  const IconTable = defineAsyncComponent(() => import('@/components/doc/IconTable.vue'))
-</script>
-
 # Icon Fonts
 
 Out of the box, Vuetify supports 4 popular icon font libraries—[Material Design Icons](https://materialdesignicons.com/), [Material Icons](https://fonts.google.com/icons), [Font Awesome 4](https://fontawesome.com/v4.7.0/) and [Font Awesome 5](https://fontawesome.com/).
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Usage
 
@@ -203,7 +196,7 @@ export default createVuetify({
 
 Use this tool to search for any Material Design Icons and copy them to your clipboard by clicking the item.
 
-<icon-list />
+<DocIconList />
 
 ### Material Icons
 
@@ -446,7 +439,7 @@ app.mount('#app')
 
 The following icons are available as aliases for use in Vuetify components:
 
-<icon-table />
+<DocIconTable />
 
 ## Multiple icon sets
 

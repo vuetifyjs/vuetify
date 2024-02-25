@@ -19,6 +19,8 @@
           prepend-icon="mdi-earth"
           title="Select Country"
         >
+          <v-divider class="mt-3"></v-divider>
+
           <v-card-text class="px-4" style="height: 300px;">
             <v-radio-group
               v-model="dialog"

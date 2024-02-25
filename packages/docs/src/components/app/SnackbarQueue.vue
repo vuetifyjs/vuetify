@@ -12,11 +12,8 @@
 </template>
 
 <script setup lang="ts">
-  // Utilities
-  import { nextTick, ref, shallowRef, watch } from 'vue'
-
-  // Stores
-  import { type Notification, useAppStore } from '@/store/app'
+  // Types
+  import type { Notification } from '@/stores/app'
 
   const store = useAppStore()
   const isActive = ref(false)

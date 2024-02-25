@@ -327,8 +327,8 @@ export const VAutocomplete = genericComponent<new <
 
       if (props.multiple) {
         const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
-
-        if (index === -1) {
+        add = index === -1
+        if (add) {
           model.value = [...model.value, item]
         } else {
           const value = [...model.value]
@@ -501,7 +501,7 @@ export const VAutocomplete = genericComponent<new <
                             index,
                             props: itemProps,
                           }) ?? (
-                            <VListItem { ...itemProps }>
+                            <VListItem { ...itemProps } role="option">
                             {{
                               prepend: ({ isSelected }) => (
                                 <>

@@ -10,10 +10,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const tabs = computed(() => {
     return [
       {

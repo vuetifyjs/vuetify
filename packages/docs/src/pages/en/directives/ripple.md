@@ -14,23 +14,23 @@ related:
 
 The `v-ripple` directive is used to show action from a user. It can be applied to any block level element. Numerous components come with the ripple directive built in, such as the `v-btn`, `v-tabs-item` and many more.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Usage
 
 Basic ripple functionality can be enabled just by using `v-ripple` directive on a component or an HTML element
 
-<example file="v-ripple/usage" />
+<ExamplesExample file="v-ripple/usage" />
 
 ## API
 
-| Directive | Description |
-| - | - |
-| [v-ripple](/api/v-ripple/) | The ripple directive |
+| Directive                            | Description          |
+|--------------------------------------|----------------------|
+| [v-ripple](/api/v-ripple-directive/) | The ripple directive |
 
-<api-inline  hide-links />
+<ApiInline hide-links />
 
 ## Examples
 
@@ -38,7 +38,7 @@ Basic ripple functionality can be enabled just by using `v-ripple` directive on 
 
 If multiple elements have the ripple directive applied, only the inner one will show the effect. This can also be done without having a visible ripple by using `v-ripple.stop` to prevent ripples in the outer element if the inner element is clicked on. `v-ripple.stop` will not actually stop propagation of the mousedown/touchstart events unlike other workarounds.
 
-<example file="v-ripple/stop" />
+<ExamplesExample file="v-ripple/stop" />
 
 ### Options
 
@@ -46,7 +46,7 @@ If multiple elements have the ripple directive applied, only the inner one will 
 
 When a `center` option is used ripple will always originate from the center of the target.
 
-<example file="v-ripple/option-center" />
+<ExamplesExample file="v-ripple/option-center" />
 
 ### Misc
 
@@ -54,10 +54,10 @@ When a `center` option is used ripple will always originate from the center of t
 
 Using a helper class, you can change the color of the ripple.
 
-<example file="v-ripple/misc-custom-color" />
+<ExamplesExample file="v-ripple/misc-custom-color" />
 
 #### Ripple in components
 
 Some components provide the `ripple` prop that allows you to control the ripple effect. You can turn it off or customize the behavior by using `class` or `center` options.
 
-<example file="v-ripple/misc-ripple-in-components" />
+<ExamplesExample file="v-ripple/misc-ripple-in-components" />

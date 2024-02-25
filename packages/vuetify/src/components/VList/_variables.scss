@@ -46,7 +46,7 @@ $list-item-icon-active-opacity: 1 !default;
 $list-item-min-height: 40px !default;
 $list-item-padding: 4px 16px !default;
 $list-item-prepend-size: 40px !default;
-$list-item-slim-prepend-size: 16px !default;
+$list-item-slim-prepend-size: 28px !default;
 $list-item-plain-opacity: .62 !default;
 $list-item-rounded-border-radius: map.get(settings.$rounded, null) !default;
 $list-item-one-line-min-height: 48px !default;
@@ -56,16 +56,18 @@ $list-item-two-line-padding: 12px 16px !default;
 $list-item-three-line-min-height: 88px !default;
 $list-item-three-line-padding: 16px 16px !default;
 
+$list-item-action-spacer-width: 16px !default;
+$list-item-slim-action-spacer-width: 4px !default;
 $list-item-avatar-align-self: flex-start !default;
 $list-item-avatar-margin-end: 16px !default;
 $list-item-avatar-margin-start: 16px !default;
 $list-item-avatar-size: 40px !default;
 $list-item-avatar-margin-y: 4px !default;
-$list-item-slim-spacer-width: 8px !default;
+$list-item-slim-spacer-width: 20px !default;
 $list-item-slim-avatar-spacer-width: 4px !default;
 
-$list-item-action-margin-end: 12px !default;
-$list-item-action-margin-start: 12px !default;
+$list-item-action-margin-end: 8px !default;
+$list-item-action-margin-start: 8px !default;
 
 $list-item-icon-margin-end: 32px !default;
 $list-item-icon-margin-start: 32px !default;
@@ -98,7 +100,8 @@ $list-item-subtitle-letter-spacing: tools.map-deep-get(settings.$typography, 'bo
 $list-item-subtitle-line-height: 1rem !default;
 $list-item-subtitle-padding: 0 !default;
 $list-item-subtitle-text-transform: none !default;
-$list-item-subtitle-word-break: break-all !default;
+$list-item-subtitle-overflow-wrap: break-word !default;
+$list-item-subtitle-word-break: initial !default;
 
 $list-item-title-font-size: tools.map-deep-get(settings.$typography, 'body-1', 'size') !default;
 $list-item-title-font-weight: tools.map-deep-get(settings.$typography, 'body-1', 'weight') !default;

@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :options="options"
@@ -14,14 +14,10 @@
         <v-chip>Chip 3</v-chip>
       </v-chip-group>
     </div>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-chip-group'
   const model = ref('default')
   const options = ['filter']

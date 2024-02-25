@@ -5,7 +5,7 @@
     }"
     scoped
   >
-    <app-sheet class="mb-9">
+    <AppSheet class="mb-9">
       <v-lazy
         v-if="!preview"
         v-model="hasRendered"
@@ -78,7 +78,7 @@
               :eager="i === 0 || isEager"
             >
               <v-theme-provider :theme="theme">
-                <app-markup
+                <AppMarkup
                   :code="section.content"
                   :rounded="false"
                 />
@@ -96,27 +96,16 @@
           <component :is="ExampleComponent" v-if="isLoaded" />
         </v-theme-provider>
       </div>
-    </app-sheet>
+    </AppSheet>
   </v-defaults-provider>
 </template>
 
 <script setup lang="ts">
   // Components
-  import ExampleMissing from './ExampleMissing.vue'
-
-  // Composables
-  import { useDisplay, useTheme } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
-  import { usePlayground } from '@/composables/playground'
-
-  // Stores
-  import { useUserStore } from '@vuetify/one'
+  import ExampleMissing from '@/components/examples/ExampleMissing.vue'
 
   // Utilities
-  import { computed, mergeProps, onMounted, ref, shallowRef, watch } from 'vue'
-  import { getBranch, wait } from '@/util/helpers'
   import { getExample } from 'virtual:examples'
-  import { upperFirst } from 'lodash-es'
 
   const { xs } = useDisplay()
   const { t } = useI18n()

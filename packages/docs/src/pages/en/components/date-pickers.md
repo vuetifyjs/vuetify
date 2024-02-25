@@ -20,7 +20,7 @@ features:
 
 ![Date picker Entry](https://cdn.vuetifyjs.com/docs/images/components/v-date-picker/v-date-picker-entry.png)
 
-<page-features />
+<PageFeatures />
 
 ::: success
 
@@ -32,9 +32,9 @@ This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-no
 
 Date pickers come in two orientation variations, portrait **(default)** and landscape. By default they are emitting `input` event when the day (for date picker) or month (for month picker), but with **reactive** prop they can update the model even after clicking year/month.
 
-<usage name="v-date-picker" />
+<ExamplesUsage name="v-date-picker" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -42,7 +42,7 @@ Date pickers come in two orientation variations, portrait **(default)** and land
 | - | - |
 | [v-date-picker](/api/v-date-picker/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Guide
 
@@ -68,31 +68,31 @@ The `v-date-picker` component supports multiple props for configuring dates that
 
 The `v-date-picker` component supports elevation up to a maximum value of 24. For more information on elevations, visit the official [Material Design elevations](https://material.io/design/environment/elevation.html) page.
 
-<example file="v-date-picker/prop-elevation" />
+<ExamplesExample file="v-date-picker/prop-elevation" />
 
 #### Width
 
 You can specify the picker's width or make it full width.
 
-<example file="v-date-picker/prop-width" />
+<ExamplesExample file="v-date-picker/prop-width" />
 
 #### Show sibling months
 
 By default days from previous and next months are not visible. They can be displayed using the **show-adjacent-months** prop.
 
-<example file="v-date-picker/prop-show-adjacent-months" />
+<ExamplesExample file="v-date-picker/prop-show-adjacent-months" />
 
 #### Colors
 
 Date picker colors can be set using the **color** props.
 
-<example file="v-date-picker/prop-colors" />
+<ExamplesExample file="v-date-picker/prop-colors" />
 
 #### Allowed dates
 
 Specify allowed dates using objects or functions. When using objects, accepts a date string in the format of YYYY-MM-DD. When using functions, accepts a date object as a parameter and should return a boolean.
 
-<example file="v-date-picker/prop-allowed-dates" />
+<ExamplesExample file="v-date-picker/prop-allowed-dates" />
 
 ### Internationalization
 

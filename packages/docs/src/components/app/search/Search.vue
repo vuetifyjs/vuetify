@@ -10,7 +10,7 @@
     @after-leave="searchString = ''"
   >
     <template #activator="{ props: activatorProps }">
-      <app-btn
+      <AppBtn
         :active="model"
         :icon="xs ? 'mdi-magnify' : undefined"
         :prepend-icon="smAndUp ? 'mdi-magnify' : undefined"
@@ -32,11 +32,11 @@
             </span>
           </span>
         </span>
-      </app-btn>
+      </AppBtn>
     </template>
 
     <v-card>
-      <app-text-field
+      <AppTextField
         v-model="searchString"
         :placeholder="`${t('search.looking') }...`"
         autofocus
@@ -44,15 +44,15 @@
         variant="filled"
       >
         <template #append-inner>
-          <app-btn border size="small">
+          <AppBtn border size="small">
             <span class="text-caption text-disabled">{{ t('esc') }}</span>
-          </app-btn>
+          </AppBtn>
         </template>
-      </app-text-field>
+      </AppTextField>
 
       <v-card-text :class="['px-4 py-0 d-flex flex-wrap justify-center', searchString ? 'align-start' : 'align-center']">
 
-        <search-recent
+        <AppSearchSearchRecent
           v-if="searches.length && !searchString"
           :searches="searches"
           @click:delete="onClickDelete"
@@ -88,7 +88,7 @@
           />
 
           <ais-hits v-slot="{ items }">
-            <search-results
+            <AppSearchSearchResults
               ref="list"
               :groups="transformItems(items)"
               @click:result="onClickResult"
@@ -105,22 +105,12 @@
 </template>
 
 <script setup lang="ts">
-  // Components
-  import SearchRecent from './SearchRecent.vue'
-  import SearchResults from './SearchResults.vue'
-
-  // Composables
-  import { useDisplay } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
-  import { onBeforeRouteLeave, useRoute } from 'vue-router'
+  // Types
+  import SearchResults from '@/components/app/drawer/SearchResults.vue'
 
   // Utilities
   import { AisConfigure, AisHits, AisInstantSearch, AisPoweredBy } from 'vue-instantsearch/vue3/es/src/instantsearch.js'
-  import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
   import algoliasearch from 'algoliasearch'
-
-  // Stores
-  import { useUserStore } from '@vuetify/one'
 
   // Types
   import type { AlgoliaSearchHelper } from 'algoliasearch-helper'

@@ -8,7 +8,7 @@
       md="5"
       xl="4"
     >
-      <app-sheet class="text-center px-10 py-8">
+      <AppSheet class="text-center px-10 py-8">
         <v-avatar size="x-large" :image="person.image" />
 
         <div class="text-h6 text-high-emphasis mb-8">
@@ -38,7 +38,7 @@
         >
           Book Now
         </v-btn>
-      </app-sheet>
+      </AppSheet>
     </v-col>
   </v-row>
 </template>

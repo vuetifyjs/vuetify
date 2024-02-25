@@ -1,6 +1,6 @@
 <template>
-  <app-sheet class="mb-6">
-    <usage-example
+  <AppSheet class="mb-6">
+    <ExamplesUsageExample
       v-model="model"
       :code="code"
       :name="name"
@@ -39,15 +39,11 @@
         <v-checkbox v-model="selectedBehaviors" value="inverted" label="Inverted"></v-checkbox>
         <v-slider v-model="scrollThreshold" label="Threshold" step="1" min="0" max="1000"></v-slider>
       </template>
-    </usage-example>
-  </app-sheet>
+    </ExamplesUsageExample>
+  </AppSheet>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-app-bar'
   const model = ref('default')
   const options = []

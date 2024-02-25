@@ -2,7 +2,6 @@
   <div class="pa-4 text-center">
     <v-dialog
       v-model="dialog"
-      persistent
       max-width="600"
     >
       <template v-slot:activator="{ props: activatorProps }">

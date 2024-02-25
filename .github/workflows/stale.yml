@@ -1,0 +1,19 @@
+name: 'Close stale issues'
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '08 11 * * *'
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          days-before-stale: 180
+          days-before-close: 14
+          only-labels: 'S: triage'
+          stale-issue-label: 'S: stale'
+          stale-pr-label: 'S: stale'
+          exempt-all-milestones: true
+          exempt-draft-pr: true

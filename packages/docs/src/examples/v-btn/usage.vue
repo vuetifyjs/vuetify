@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :options="options"
@@ -17,14 +17,10 @@
       <v-checkbox v-model="append" label="Append icon"></v-checkbox>
       <v-checkbox v-model="stacked" label="Stacked"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref, watch } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const variants = ['outlined', 'tonal', 'text', 'plain']
   const name = 'v-btn'
   const model = ref('default')

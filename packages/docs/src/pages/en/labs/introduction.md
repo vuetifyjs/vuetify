@@ -14,7 +14,7 @@ related:
 
 Experiment and use in-development components before they're released.
 
-<page-features />
+<PageFeatures />
 
 ## What is Labs? { id=what-is-labs }
 
@@ -68,7 +68,7 @@ export default createVuetify({
 })
 ```
 
-<entry />
+<PromotedEntry />
 
 ## Available Components
 
@@ -76,15 +76,8 @@ The following is a list of available and up-and-coming components for use with L
 
 | Component | Description | Min Version |
 | - | - | - |
-
-### Up Next
-
-| Component | Release Target |
-| - | - |
-| v-calendar | ~~Q1~~ ~~Q2~~ Soon™️ 2023 |
-| v-fab | Q1 2024 |
-| v-split-btn | Q1 2024 |
-| v-speed-dial | Q1 2024 |
+| [v-calendar](/components/calendars/) | A calendar component | [v3.4.9](/getting-started/release-notes/?version=v3.4.9) |
+| [v-sparkline](/components/sparklines/) | A basic data display component | [v3.5.5](/getting-started/release-notes/?version=v3.5.5) |
 
 ::: warning
 Lab component APIs are **NOT** finalized and can and will change. You should **EXPECT** for things to break during the course of development.

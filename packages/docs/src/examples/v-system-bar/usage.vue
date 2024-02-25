@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :name="name"
     :options="options"
@@ -19,14 +19,10 @@
 
       <v-main></v-main>
     </v-layout>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-system-bar'
   const model = ref('default')
   const options = ['window']

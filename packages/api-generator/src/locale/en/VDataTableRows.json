@@ -1,8 +1,10 @@
 {
   "props": {
+    "cellProps": "An object of additional props to be passed to each `<td>` in the table body. Also accepts a function that will be called for each cell. If the same prop is defined both here and in `cellProps` in a headers object, the value from the headers object will be used.",
     "loading": "Displays `loading` slot if set to `true`",
     "loadingText": "Text shown when the data is loading.",
-    "multiSort": "Allows sorting by multiple columns."
+    "multiSort": "Allows sorting by multiple columns.",
+    "rowProps": "An object of additional props to be passed to each `<tr>` in the table body. Also accepts a function that will be called for each row."
   },
   "events": {
     "click:row": "Emitted when a row is clicked. Native event is passed as the first argument, row data as the second."
