@@ -1,13 +1,15 @@
 $empty-state-actions-btn-background-color: rgb(var(--v-theme-surface-variant)) !default;
 $empty-state-actions-btn-color: rgb(var(--v-theme-on-surface-variant)) !default;
 $empty-state-actions-gap: 8px !default;
+$empty-state-actions-padding: 16px !default;
+$empty-state-image-padding: 16px !default;
 $empty-state-content-padding: 24px 0 !default;
 $empty-state-min-height: 100% !default;
-$empty-state-padding: 32px !default;
+$empty-state-padding: 16px !default;
 $empty-state-subtitle-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $empty-state-subtitle-font-size: 2rem !default;
 $empty-state-subtitle-line-height: 2.5rem !default;
 $empty-state-text-font-size: .875rem !default;
-$empty-state-text-padding: 16px !default;
+$empty-state-text-padding: 0 16px !default;
 $empty-state-title-font-size: 3.75rem !default;
 $empty-state-title-line-height: 3.75rem !default;

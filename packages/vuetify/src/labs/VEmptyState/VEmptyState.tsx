@@ -79,7 +79,7 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
       const hasSubtitle = !!(slots.subtitle || props.subtitle)
       const hasText = !!(slots.text || props.text)
       const hasMedia = !!(slots.media || props.image || props.icon)
-      const size = props.size || (props.image ? 300 : 96)
+      const size = props.size || (props.image ? 200 : 96)
 
       return (
         <div
@@ -106,7 +106,7 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
                     <VImg
                       key="image"
                       src={ props.image }
-                      width={ size }
+                      height={ size }
                     />
                   ) : props.icon ? (
                     <VIcon
@@ -120,9 +120,9 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
                 <VDefaultsProvider
                   key="media-defaults"
                   defaults={{
-                    VImage: {
+                    VImg: {
                       src: props.image,
-                      width: size,
+                      height: size,
                     },
                     VIcon: {
                       size,
