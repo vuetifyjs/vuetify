@@ -7,7 +7,9 @@
 
 .v-fab
   display: flex
+  flex: 1 1 auto
   pointer-events: none
+  position: relative
   transition-duration: $fab-transition-duration
   transition-timing-function: $fab-transition-timing-function
 
@@ -18,9 +20,6 @@
 
   &--app
     display: flex
-
-    .v-btn
-      margin: 4px
 
   &--start,
   &--left
@@ -46,5 +45,30 @@
       // min-width: 80px
       border-radius: 9999px !important
 
-  @at-root
-    @include fab-sizes()
+.v-fab__container
+  align-self: center
+  display: inline-flex
+
+  .v-fab--absolute &
+    position: absolute
+    z-index: 4
+
+  .v-fab--offset.v-fab--top &
+    transform: translateY(-50%)
+
+  .v-fab--offset.v-fab--bottom &
+    transform: translateY(50%)
+
+  .v-fab--top &
+    top: 0
+
+  .v-fab--bottom &
+    bottom: 0
+
+  .v-fab--left &,
+  .v-fab--start &
+    left: 0
+
+  .v-fab--right &,
+  .v-fab--end &
+    right: 0
