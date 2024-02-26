@@ -16,13 +16,6 @@
     padding-inline-end: 0
     padding-inline-start: 0
 
-  &--reverse
-    &:not(#{selector.append($root, '--split')})
-      #{$control-root}
-        &:not(#{selector.append($control-root, '--borderless')})
-          border-left: none
-          border-right: $number-input-control-border
-  
   &--inset
     .v-divider
       height: $number-input-inset-divider-size
@@ -45,9 +38,6 @@
   &__control
     display: flex
     height: 100%
-
-    &:not(#{selector.append($control-root, '--borderless')})
-      border-left: $number-input-control-border
 
     .v-btn
       background-color: transparent

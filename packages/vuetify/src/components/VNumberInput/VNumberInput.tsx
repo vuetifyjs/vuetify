@@ -99,14 +99,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       return props.controlVariant
     })
 
-    const controlClasses = computed(() => {
-      const classes: string[] = ['v-number-input__control']
-
-      if (props.hideInput || props.inset) classes.push('v-number-input__control--borderless')
-
-      return classes
-    })
-
     function toggleUpDown (increment = true) {
       if (increment) {
         inputRef.value?.stepUp()
@@ -120,9 +112,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     useRender(() => {
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const controlNode = () => (
-          <div
-            class={ controlClasses.value }
-          >
+          <div class="v-number-input__control">
             <VBtn
               flat
               height={ controlVariant.value === 'stacked' ? 'auto' : '100%' }
@@ -144,6 +134,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             />
           </div>
       )
+
+      const dividerNode = () => !props.hideInput && !props.inset ? <VDivider v-if={ !props.hideInput } vertical /> : undefined
 
       const fieldProps = filterFieldProps(props)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
@@ -192,14 +184,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                       />
                     ),
                     'append-inner': controlVariant.value === 'split' ? () => (
-                      <div
-                        class={
-                          [
-                            'v-number-input__control--borderless',
-                            ...controlClasses.value,
-                          ]
-                        }
-                      >
+                      <div class="v-number-input__control">
                         <VDivider vertical />
                         <VBtn
                           flat
@@ -209,14 +194,11 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                           onClick={ () => toggleUpDown() }
                         />
                       </div>
-                    ) : (!props.reverse ? controlNode : undefined),
+                    ) : (!props.reverse
+                      ? () => <>{ dividerNode() }{ controlNode() }</>
+                      : undefined),
                     'prepend-inner': controlVariant.value === 'split' ? () => (
-                      <div
-                        class={[
-                          'v-number-input__control--borderless',
-                          ...controlClasses.value,
-                        ]}
-                      >
+                      <div class="v-number-input__control">
                         <VBtn
                           flat
                           height="100%"
@@ -226,7 +208,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                         />
                         <VDivider vertical />
                       </div>
-                    ) : (props.reverse ? controlNode : undefined),
+                    ) : (props.reverse
+                      ? () => <>{ controlNode() }{ dividerNode() }</>
+                      : undefined),
                   }}
                 </VField>
               ),
