@@ -7,7 +7,7 @@
     </template>
 
     <template v-slot:text>
-      <div class="text-caption mt-n3">
+      <div class="text-caption">
         Track and receive your incoming inventory from suppliers
       </div>
     </template>

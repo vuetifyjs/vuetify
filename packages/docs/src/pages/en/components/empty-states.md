@@ -19,6 +19,16 @@ The `v-empty-state` component is used to indicate that a list is empty or that n
 
 <PageFeatures />
 
+```js { resource="src/plugins/vuetify.js" }
+import { VEmptyState } from 'vuetify/labs/VEmptyState'
+
+export default createVuetify({
+  components: {
+    VEmptyState,
+  },
+})
+```
+
 ## Usage
 
 A basic empty state is composed of a title and a description. It can also include an icon and a button.
@@ -91,3 +101,19 @@ It's simple to customize the font-sizing of the title using utility classes.
 By default, only 1 action is displayed through configuration. To add more options, utilize the **actions** slot.
 
 <ExamplesExample file="v-empty-state/slot-actions" />
+
+## Examples
+
+The following are a collection of examples that demonstrate more advanced and real world use of the `v-empty-state` component.
+
+### Astro dog
+
+This example demonstrates how to use the `v-empty-state` component to create a fun and engaging empty state.
+
+<ExamplesExample file="v-empty-state/misc-astro-dog" />
+
+### Astro cat
+
+This example utilizes components such as [v-tabs](/components/tabs/) and [v-window](/components/windows/) to create a more complex empty state.
+
+<ExamplesExample file="v-empty-state/misc-astro-cat" />
