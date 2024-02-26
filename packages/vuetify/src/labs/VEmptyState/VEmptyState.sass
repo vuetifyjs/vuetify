@@ -1,20 +1,47 @@
 @use './variables' as *
 
 .v-empty-state
-  min-height: 100%
-  display: flex
   align-items: center
-  justify-content: center
+  display: flex
   flex-direction: column
+  justify-content: center
+  min-height: $empty-state-min-height
+  padding: $empty-state-padding
+
+  &--start
+    align-items: flex-start
+
+  &--center
+    align-items: center
+
+  &--end
+    align-items: flex-end
+
+.v-empty-state__media
+  //
 
 .v-empty-state__title
   font-size: $empty-state-title-font-size
+  line-height: $empty-state-title-line-height
 
 .v-empty-state__subtitle
+  color: $empty-state-subtitle-color
   font-size: $empty-state-subtitle-font-size
+  line-height: $empty-state-subtitle-line-height
+  text-align: center
 
 .v-empty-state__text
   font-size: $empty-state-text-font-size
+  padding: $empty-state-text-padding
+  text-align: center
 
 .v-empty-state__content
   padding: $empty-state-content-padding
+
+.v-empty-state__actions
+  display: flex
+  gap: $empty-state-actions-gap
+
+.v-empty-state__action-btn.v-btn
+  background-color: $empty-state-actions-btn-background-color
+  color: $empty-state-actions-btn-color
