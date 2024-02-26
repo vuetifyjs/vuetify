@@ -12,7 +12,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, ref, shallowRef, toRef } from 'vue'
+import { computed, ref, shallowRef, toRef, watchEffect } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -82,7 +82,9 @@ export const VFab = genericComponent()({
         absolute: toRef(props, 'absolute'),
       })
 
-      layoutItemStyles.value = layout.layoutItemStyles
+      watchEffect(() => {
+        layoutItemStyles.value = layout.layoutItemStyles.value
+      })
     })
 
     const vFabRef = ref()
@@ -116,9 +118,9 @@ export const VFab = genericComponent()({
           ]}
         >
           <div class="v-fab__container">
-            <VFabTransition>
+            <VFabTransition disabled={ props.app }>
               <VBtn
-                v-show={ isActive.value }
+                v-show={ props.app ? true : isActive.value }
                 ref={ resizeRef }
                 { ...btnProps }
                 location={ undefined }
