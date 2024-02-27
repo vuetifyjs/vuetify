@@ -354,6 +354,8 @@ export const VCombobox = genericComponent<new <
     }
     /** @param set - null means toggle */
     function select (item: ListItem, set: boolean | null = true) {
+      if (item.props.disabled) return
+
       if (props.multiple) {
         const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
         const add = set == null ? !~index : set
