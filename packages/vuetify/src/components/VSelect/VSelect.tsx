@@ -304,16 +304,10 @@ export const VSelect = genericComponent<new <
       }
     })
 
-    watch(displayItems, (val, oldVal) => {
-      if (!isFocused.value) return
+    watch(() => props.items, val => {
+      if (!isFocused.value || !val.length || menu.value) return
 
-      if (!val.length && props.hideNoData) {
-        menu.value = false
-      }
-
-      if (!oldVal.length && val.length) {
-        menu.value = true
-      }
+      menu.value = true
     })
 
     useRender(() => {
