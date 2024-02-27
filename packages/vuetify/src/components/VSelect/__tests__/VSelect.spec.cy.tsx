@@ -571,6 +571,19 @@ describe('VSelect', () => {
     })
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/18556
+  it('should show menu if focused and items are added', () => {
+    cy
+      .mount(props => (<VSelect { ...props } />))
+      .get('.v-select input')
+      .focus()
+      .get('.v-overlay')
+      .should('not.exist')
+      .setProps({ items: ['Foo', 'Bar'] })
+      .get('.v-overlay')
+      .should('exist')
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })
