@@ -96,7 +96,7 @@ It's simple to customize the font-sizing of the title using utility classes.
 
 <ExamplesExample file="v-empty-state/slot-title" />
 
-#### Actions
+#### Custom Actions
 
 By default, only 1 action is displayed through configuration. To add more options, utilize the **actions** slot.
 
