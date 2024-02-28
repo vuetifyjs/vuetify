@@ -175,6 +175,9 @@ export const VAutocomplete = genericComponent<new <
       return filteredItems.value
     })
 
+    const hasChips = computed(() => !!(props.chips || slots.chip))
+    const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
+
     const selectedValues = computed(() => model.value.map(selection => selection.props.value))
 
     const highlightFirst = computed(() => {
@@ -343,7 +346,6 @@ export const VAutocomplete = genericComponent<new <
       } else {
         const add = set !== false
         model.value = add ? [item] : []
-        search.value = add ? item.title : ''
 
         // watch for search watcher to trigger
         nextTick(() => {
@@ -358,7 +360,7 @@ export const VAutocomplete = genericComponent<new <
 
       if (val) {
         isSelecting.value = true
-        search.value = props.multiple ? '' : String(model.value.at(-1)?.props.title ?? '')
+        search.value = (props.multiple || hasSelectionSlot.value) ? '' : String(model.value.at(-1)?.props.title ?? '')
         isPristine.value = true
 
         nextTick(() => isSelecting.value = false)
@@ -403,7 +405,6 @@ export const VAutocomplete = genericComponent<new <
     })
 
     useRender(() => {
-      const hasChips = !!(props.chips || slots.chip)
       const hasList = !!(
         (!props.hideNoData || displayItems.value.length) ||
         slots['prepend-item'] ||
@@ -430,7 +431,7 @@ export const VAutocomplete = genericComponent<new <
             {
               'v-autocomplete--active-menu': menu.value,
               'v-autocomplete--chips': !!props.chips,
-              'v-autocomplete--selection-slot': !!slots.selection,
+              'v-autocomplete--selection-slot': !!hasSelectionSlot.value,
               'v-autocomplete--selecting-index': selectionIndex.value > -1,
             },
             props.class,
@@ -551,10 +552,10 @@ export const VAutocomplete = genericComponent<new <
                     'onUpdate:modelValue': undefined,
                   }
 
-                  const hasSlot = hasChips ? !!slots.chip : !!slots.selection
+                  const hasSlot = hasChips.value ? !!slots.chip : !!slots.selection
                   const slotContent = hasSlot
                     ? ensureValidVNode(
-                      hasChips
+                      hasChips.value
                         ? slots.chip!({ item, index, props: slotProps })
                         : slots.selection!({ item, index })
                     )
@@ -574,7 +575,7 @@ export const VAutocomplete = genericComponent<new <
                       ]}
                       style={ index === selectionIndex.value ? textColorStyles.value : {} }
                     >
-                      { hasChips ? (
+                      { hasChips.value ? (
                         !slots.chip ? (
                           <VChip
                             key="chip"

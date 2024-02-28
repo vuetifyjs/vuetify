@@ -165,14 +165,20 @@ export const VCombobox = genericComponent<new <
       }
     )
     const form = useForm()
-    const _search = shallowRef(!props.multiple ? model.value[0]?.title ?? '' : '')
+
+    const hasChips = computed(() => !!(props.chips || slots.chip))
+
+    const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
+
+    const _search = shallowRef(!props.multiple && !hasSelectionSlot.value ? model.value[0]?.title ?? '' : '')
+
     const search = computed<string>({
       get: () => {
         return _search.value
       },
       set: (val: string | null) => {
         _search.value = val ?? ''
-        if (!props.multiple) {
+        if (!props.multiple && !hasSelectionSlot.value) {
           model.value = [transformItem(props, val)]
         }
 
@@ -208,8 +214,9 @@ export const VCombobox = genericComponent<new <
 
       emit('update:search', value)
     })
+
     watch(model, value => {
-      if (!props.multiple) {
+      if (!props.multiple && !hasSelectionSlot.value) {
         _search.value = value[0]?.title ?? ''
       }
     })
@@ -295,6 +302,11 @@ export const VCombobox = genericComponent<new <
         listRef.value?.focus('next')
       }
 
+      if (e.key === 'Enter' && search.value) {
+        select(transformItem(props, search.value))
+        search.value = ''
+      }
+
       if (!props.multiple) return
 
       if (['Backspace', 'Delete'].includes(e.key)) {
@@ -340,11 +352,6 @@ export const VCombobox = genericComponent<new <
           vTextFieldRef.value.setSelectionRange(0, 0)
         }
       }
-
-      if (e.key === 'Enter' && search.value) {
-        select(transformItem(props, search.value))
-        search.value = ''
-      }
     }
     function onAfterLeave () {
       if (isFocused.value) {
@@ -374,7 +381,7 @@ export const VCombobox = genericComponent<new <
       } else {
         const add = set !== false
         model.value = add ? [item] : []
-        _search.value = add ? item.title : ''
+        _search.value = ''
 
         // watch for search watcher to trigger
         nextTick(() => {
@@ -432,7 +439,6 @@ export const VCombobox = genericComponent<new <
     })
 
     useRender(() => {
-      const hasChips = !!(props.chips || slots.chip)
       const hasList = !!(
         (!props.hideNoData || displayItems.value.length) ||
         slots['prepend-item'] ||
@@ -457,7 +463,7 @@ export const VCombobox = genericComponent<new <
             {
               'v-combobox--active-menu': menu.value,
               'v-combobox--chips': !!props.chips,
-              'v-combobox--selection-slot': !!slots.selection,
+              'v-combobox--selection-slot': !!hasSelectionSlot.value,
               'v-combobox--selecting-index': selectionIndex.value > -1,
               [`v-combobox--${props.multiple ? 'multiple' : 'single'}`]: true,
             },
@@ -579,10 +585,10 @@ export const VCombobox = genericComponent<new <
                     'onUpdate:modelValue': undefined,
                   }
 
-                  const hasSlot = hasChips ? !!slots.chip : !!slots.selection
+                  const hasSlot = hasChips.value ? !!slots.chip : !!slots.selection
                   const slotContent = hasSlot
                     ? ensureValidVNode(
-                      hasChips
+                      hasChips.value
                         ? slots.chip!({ item, index, props: slotProps })
                         : slots.selection!({ item, index })
                     )
@@ -602,7 +608,7 @@ export const VCombobox = genericComponent<new <
                       ]}
                       style={ index === selectionIndex.value ? textColorStyles.value : {} }
                     >
-                      { hasChips ? (
+                      { hasChips.value ? (
                         !slots.chip ? (
                           <VChip
                             key="chip"
