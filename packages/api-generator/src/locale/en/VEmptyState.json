@@ -1,0 +1,18 @@
+{
+  "props": {
+    "actionText": "The text used for the action button.",
+    "headline": "A large headline often used for 404 pages.",
+    "href": "The URL the action button links to.",
+    "justify": "Control the justification of the text.",
+    "textWidth": "Sets the width of the text container.",
+    "to": "The URL the action button links to."
+  },
+  "events": {
+    "click:action": "Event emitted when the action button is clicked."
+  },
+  "slots": {
+    "actions": "Slot for the action button.",
+    "headline": "Slot for the component's headline.",
+    "media": "Slot for the component's media."
+  }
+}

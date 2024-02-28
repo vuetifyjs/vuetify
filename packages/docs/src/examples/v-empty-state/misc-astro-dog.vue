@@ -31,7 +31,7 @@
             <v-img class="mb-8"></v-img>
           </template>
 
-          <template v-slot:subtitle>
+          <template v-slot:title>
             <div class="text-h6 text-high-emphasis">Empty in drafts</div>
           </template>
 

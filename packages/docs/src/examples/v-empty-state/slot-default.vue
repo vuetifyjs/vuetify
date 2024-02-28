@@ -1,7 +1,7 @@
 <template>
   <v-empty-state
-    title="Welcome,"
-    subtitle="What would you like to do today?"
+    headline="Welcome,"
+    title="What would you like to do today?"
     icon="$vuetify"
   >
     <v-container>

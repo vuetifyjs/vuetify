@@ -224,11 +224,11 @@
         "subfolder": "components"
       },
       {
-        "title": "sparklines",
+        "title": "empty-states",
         "subfolder": "components"
       },
       {
-        "title": "empty-states",
+        "title": "sparklines",
         "subfolder": "components"
       }
     ]

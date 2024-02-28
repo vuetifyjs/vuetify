@@ -4,13 +4,13 @@
       <v-icon color="surface-variant"></v-icon>
     </template>
 
-    <template v-slot:title>
+    <template v-slot:headline>
       <div class="text-h4">
         All Done For Now!
       </div>
     </template>
 
-    <template v-slot:subtitle>
+    <template v-slot:title>
       <div class="text-h6">
         You're all caught up.
       </div>
@@ -23,7 +23,3 @@
     </template>
   </v-empty-state>
 </template>
-
-<script setup>
-  import { ref } from 'vue'
-</script>

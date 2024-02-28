@@ -44,7 +44,7 @@
                     </v-sheet>
                   </template>
 
-                  <template v-slot:subtitle>
+                  <template v-slot:title>
                     <div class="text-h6 text-high-emphasis">Get Started</div>
                   </template>
 
@@ -78,7 +78,7 @@
                     </v-sheet>
                   </template>
 
-                  <template v-slot:subtitle>
+                  <template v-slot:title>
                     <div class="text-h6 text-high-emphasis">Get Started</div>
                   </template>
 
