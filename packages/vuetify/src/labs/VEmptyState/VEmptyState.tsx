@@ -25,8 +25,16 @@ import type { PropType } from 'vue'
 // Types
 
 export type VEmptyStateSlots = {
-  default: void
-  media: void
+  actions: {
+    props: {
+      onClick: (e: Event) => void
+    }
+  }
+  default: never
+  headline: never
+  title: never
+  media: never
+  text: never
 }
 
 export const makeVEmptyStateProps = propsFactory({
@@ -39,8 +47,8 @@ export const makeVEmptyStateProps = propsFactory({
     type: String as PropType<'start' | 'center' | 'end'>,
     default: 'center',
   },
+  headline: String,
   title: String,
-  subtitle: String,
   text: String,
   textWidth: {
     type: [Number, String],
@@ -75,8 +83,8 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
 
     useRender(() => {
       const hasActions = !!(slots.actions || props.actionText)
+      const hasHeadline = !!(slots.headline || props.headline)
       const hasTitle = !!(slots.title || props.title)
-      const hasSubtitle = !!(slots.subtitle || props.subtitle)
       const hasText = !!(slots.text || props.text)
       const hasMedia = !!(slots.media || props.image || props.icon)
       const size = props.size || (props.image ? 200 : 96)
@@ -136,15 +144,15 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
             </div>
           )}
 
-          { hasTitle && (
-            <div key="title" class="v-empty-state__title">
-              { slots.title?.() ?? props.title }
+          { hasHeadline && (
+            <div key="headline" class="v-empty-state__headline">
+              { slots.headline?.() ?? props.headline }
             </div>
           )}
 
-          { hasSubtitle && (
-            <div key="subtitle" class="v-empty-state__subtitle">
-              { slots.subtitle?.() ?? props.subtitle }
+          { hasTitle && (
+            <div key="title" class="v-empty-state__title">
+              { slots.title?.() ?? props.title }
             </div>
           )}
 
