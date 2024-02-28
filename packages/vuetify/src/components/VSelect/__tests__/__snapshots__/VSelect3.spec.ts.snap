@@ -17,6 +17,7 @@ exports[`VSelect.ts should add color to selected index 1`] = `
           <input id="input-50"
                  readonly="readonly"
                  type="text"
+                 role="combobox"
                  aria-readonly="false"
                  autocomplete="off"
           >

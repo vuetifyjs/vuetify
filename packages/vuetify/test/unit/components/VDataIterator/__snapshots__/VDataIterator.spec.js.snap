@@ -25,6 +25,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                   <input aria-label="Items per page:"
                          readonly="readonly"
                          type="text"
+                         role="combobox"
                          autocomplete="on"
                          aria-readonly="false"
                   >
@@ -166,6 +167,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                   <input aria-label="Items per page:"
                          readonly="readonly"
                          type="text"
+                         role="combobox"
                          autocomplete="on"
                          aria-readonly="false"
                   >
@@ -298,6 +300,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                   <input aria-label="Items per page:"
                          readonly="readonly"
                          type="text"
+                         role="combobox"
                          autocomplete="on"
                          aria-readonly="false"
                   >
@@ -434,6 +437,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                   <input aria-label="Items per page:"
                          readonly="readonly"
                          type="text"
+                         role="combobox"
                          autocomplete="on"
                          aria-readonly="false"
                   >
@@ -594,6 +598,7 @@ exports[`VDataIterator.js should reset to page 1 when data is smaller than curre
                   <input aria-label="Items per page:"
                          readonly="readonly"
                          type="text"
+                         role="combobox"
                          autocomplete="on"
                          aria-readonly="false"
                   >
@@ -719,6 +724,7 @@ exports[`VDataIterator.js should reset to page 1 when data is smaller than curre
                   <input aria-label="Items per page:"
                          readonly="readonly"
                          type="text"
+                         role="combobox"
                          autocomplete="on"
                          aria-readonly="false"
                   >
