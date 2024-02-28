@@ -73,6 +73,7 @@
   "components/defaults-providers": ["VDefaultsProvider"],
   "components/dialogs": ["VDialog", "VOverlay"],
   "components/dividers": ["VDivider"],
+  "components/empty-states": ["VEmptyState"],
   "components/expansion-panels": [
     "VExpansionPanel",
     "VExpansionPanels",
