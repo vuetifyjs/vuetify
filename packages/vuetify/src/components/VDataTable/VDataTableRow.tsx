@@ -29,6 +29,7 @@ export const makeVDataTableRowProps = propsFactory({
   onClick: EventProp<[MouseEvent]>(),
   onContextmenu: EventProp<[MouseEvent]>(),
   onDblclick: EventProp<[MouseEvent]>(),
+  navigable: Boolean,
 }, 'VDataTableRow')
 
 export const VDataTableRow = genericComponent<new <T>(
@@ -58,6 +59,7 @@ export const VDataTableRow = genericComponent<new <T>(
         onClick={ props.onClick as any }
         onContextmenu={ props.onContextmenu as any }
         onDblclick={ props.onDblclick as any }
+        tabindex={props.navigable ? 0 : -1}
       >
         { props.item && columns.value.map((column, i) => {
           const item = props.item!
