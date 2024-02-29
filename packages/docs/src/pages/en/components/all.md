@@ -114,6 +114,12 @@ Navigation components are used to navigate between different views or pages.
 
 </ComponentsListItem>
 
+<ComponentsListItem name="FABs" src="fabs" labs>
+
+  The floating action button is used for a promoted actions within an application
+
+</ComponentsListItem>
+
 <ComponentsListItem name="Navigation drawers"  src="navigation-drawers">
 
   Navigation drawers contain primary application navigation links

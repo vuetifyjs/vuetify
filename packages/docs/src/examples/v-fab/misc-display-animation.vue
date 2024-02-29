@@ -9,13 +9,13 @@
 
         <template v-slot:extension>
           <v-fab
-            :model-value="!hidden"
-            absolute
+            :active="!hidden"
             class="ms-4"
             icon="mdi-plus"
-            offset
-            size="small"
             location="bottom start"
+            size="small"
+            absolute
+            offset
           ></v-fab>
         </template>
       </v-app-bar>
@@ -23,26 +23,22 @@
       <v-main>
         <v-sheet class="pa-4 text-center" color="surface-light" height="300">
           <v-btn
+            :text="hidden ? 'Show' : 'Hide'"
             color="surface-variant"
             width="80"
             @click="hidden = !hidden"
           >
-            <v-scroll-y-transition mode="out-in">
-              <div :key="hidden">
-                {{ hidden ? 'Show' : 'Hide' }}
-              </div>
-            </v-scroll-y-transition>
           </v-btn>
         </v-sheet>
 
         <v-sheet height="125">
           <v-fab
-            :model-value="!hidden"
-            absolute
+            :active="!hidden"
             class="me-4"
-            offset
             icon="mdi-plus"
             location="top end"
+            absolute
+            offset
           ></v-fab>
         </v-sheet>
       </v-main>

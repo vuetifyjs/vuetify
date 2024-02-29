@@ -11,6 +11,7 @@ related:
   - /styles/transitions/
 features:
   report: true
+  spec: https://m2.material.io/components/buttons-floating-action-button
 ---
 
 # Floating Action Buttons
@@ -18,6 +19,12 @@ features:
 The `v-fab` component can be used as a floating action button. This provides an application with a main point of action.
 
 <PageFeatures />
+
+::: warning
+
+This feature requires [v3.5.7](/getting-started/release-notes/?version=v3.5.7)
+
+:::
 
 ## Installation
 
@@ -37,7 +44,7 @@ export default createVuetify({
 
 Floating action buttons can be attached to material to signify a promoted action in your application. The default size will be used in most cases, whereas the `small` variant can be used to maintain continuity with similar sized elements.
 
-<!-- <ExamplesUsage name="v-btn-fab" alt="v-btn" /> -->
+<ExamplesUsage name="v-fab" />
 
 <PromotedEntry />
 
@@ -49,13 +56,13 @@ Floating action buttons can be attached to material to signify a promoted action
 
 <ApiInline hide-links />
 
-## Guide
+<!-- ## Guide
 
 The `v-fab` component is used to indicate a promoted action in your application. It can be used in a variety of contexts, such as a page with no content, a list of items, or a search results page.
 
 ### Props
 
-The `v-fab` component has a multitude of props that allow you to customize its appearance and behavior.
+The `v-fab` component has a multitude of props that allow you to customize its appearance and behavior. -->
 
 ## Examples
 
@@ -69,7 +76,7 @@ When displaying for the first time, a floating action button should animate onto
 
 ### Lateral screens
 
-When changing the default action of your button, it is recommended that you display a transition to signify a change. We do this by binding the `key` prop to a piece of data that can properly signal a change in action to the Vue transition system. While you can use a custom transition for this, ensure that you set the `mode` prop to **out-in**.
+When changing the default action of your button, it is recommended that you display a transition to signify a change. We do this by binding the `key` prop to a piece of data that can properly signal a change in action to the Vue transition system.
 
 <ExamplesExample file="v-fab/misc-lateral-screens" />
 

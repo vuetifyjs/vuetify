@@ -1,29 +1,29 @@
 <template>
-  <v-card max-width="365" class="mx-auto">
+  <v-card class="mx-auto" max-width="365">
     <v-toolbar
       color="light-blue"
-      light
       extended
+      light
     >
-      <v-app-bar-nav-icon color="surface-variant"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon color="grey-darken-4"></v-app-bar-nav-icon>
 
       <v-toolbar-title>My files</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn color="surface-variant" icon="mdi-magnify"></v-btn>
+      <v-btn color="grey-darken-4" icon="mdi-magnify"></v-btn>
 
-      <v-btn color="surface-variant" icon="mdi-view-module"></v-btn>
+      <v-btn color="grey-darken-4" icon="mdi-view-module"></v-btn>
 
       <template v-slot:extension>
         <v-fab
-          absolute
           class="ms-4"
           color="cyan-accent-2"
           icon="mdi-plus"
-          offset
-          size="40"
           location="bottom left"
+          size="40"
+          absolute
+          offset
           @click="dialog = !dialog"
         ></v-fab>
       </template>
@@ -50,7 +50,7 @@
 
         <template v-slot:append>
           <v-list-item-action>
-            <v-btn icon="mdi-information" color="grey-lighten-1" variant="text"></v-btn>
+            <v-btn color="grey-lighten-1" icon="mdi-information" variant="text"></v-btn>
           </v-list-item-action>
         </template>
       </v-list-item>
@@ -74,7 +74,7 @@
 
         <template v-slot:append>
           <v-list-item-action>
-            <v-btn icon="mdi-information" color="grey-lighten-1" variant="text"></v-btn>
+            <v-btn color="grey-lighten-1" icon="mdi-information" variant="text"></v-btn>
           </v-list-item-action>
         </template>
       </v-list-item>
@@ -95,8 +95,8 @@
           <v-spacer></v-spacer>
 
           <v-btn
-            variant="text"
             color="primary"
+            variant="text"
             @click="dialog = false"
           >
             Submit

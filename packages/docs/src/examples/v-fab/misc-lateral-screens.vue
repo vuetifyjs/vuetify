@@ -2,9 +2,9 @@
   <v-card>
     <v-layout>
       <v-app-bar
+        color="indigo"
         absolute
         flat
-        color="indigo"
       >
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
@@ -38,18 +38,17 @@
         <v-sheet height="150"></v-sheet>
       </v-main>
 
-      <v-fade-transition>
-        <v-fab
-          :key="activeFab.icon"
-          app
-          absolute
-          class="ms-4 mb-4"
-          :color="activeFab.color"
-          :icon="activeFab.icon"
-          size="64"
-          location="bottom left"
-        ></v-fab>
-      </v-fade-transition>
+      <v-fab
+        :key="activeFab.icon"
+        :color="activeFab.color"
+        :icon="activeFab.icon"
+        class="ms-4 mb-4"
+        location="bottom start"
+        size="64"
+        absolute
+        app
+        appear
+      ></v-fab>
     </v-layout>
   </v-card>
 </template>

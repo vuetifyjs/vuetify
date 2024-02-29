@@ -81,6 +81,7 @@
     "VExpansionPanelTitle"
   ],
   "components/file-inputs": ["VFileInput"],
+  "components/floating-action-buttons": ["VFab"],
   "components/footers": ["VFooter"],
   "components/forms": ["VForm"],
   "components/grids": ["VCol", "VContainer", "VRow", "VSpacer"],
