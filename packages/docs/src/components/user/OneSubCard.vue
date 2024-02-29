@@ -2,9 +2,9 @@
   <v-card
     v-if="one.isSubscriber"
     class="pa-4 text-white font-weight-bold d-flex align-start flex-column mt-2"
-    flat
     image="https://cdn.vuetifyjs.com/docs/images/one/banners/one-sub-banner.png"
     width="250"
+    flat
   >
     <div>
       Vuetify One

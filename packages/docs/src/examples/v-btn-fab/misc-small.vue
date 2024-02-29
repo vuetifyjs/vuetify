@@ -2,14 +2,14 @@
   <v-row>
     <v-col
       cols="12"
-      sm="6"
       offset-sm="3"
+      sm="6"
     >
       <v-card>
         <v-toolbar
           color="light-blue"
-          light
           extended
+          light
         >
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
           <v-toolbar-title class="text-white">
@@ -24,10 +24,10 @@
           </v-btn>
           <template v-slot:extension>
             <v-btn
-              fab
               color="cyan-accent-2"
               location="bottom left"
               absolute
+              fab
               @click="dialog = !dialog"
             >
               <v-icon>mdi-plus</v-icon>
@@ -119,8 +119,8 @@
               <v-spacer></v-spacer>
 
               <v-btn
-                variant="text"
                 color="primary"
+                variant="text"
                 @click="dialog = false"
               >
                 Submit

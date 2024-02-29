@@ -1,16 +1,16 @@
 <template>
   <v-card
-    flat
     title="Nutrition"
+    flat
   >
     <template v-slot:text>
       <v-text-field
         v-model="search"
         label="Search"
         prepend-inner-icon="mdi-magnify"
-        single-line
         variant="outlined"
         hide-details
+        single-line
       ></v-text-field>
     </template>
 

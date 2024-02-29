@@ -2,8 +2,8 @@
   <v-select
     v-model="value"
     :items="items"
-    chips
     label="Chips"
+    chips
     multiple
   ></v-select>
 </template>

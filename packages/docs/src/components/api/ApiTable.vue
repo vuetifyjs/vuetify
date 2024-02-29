@@ -29,7 +29,7 @@
           />
 
           <tr v-if="item.description || (user.dev && item.source)">
-            <td colspan="3" class="text-mono pt-4">
+            <td class="text-mono pt-4" colspan="3">
               <template v-if="item.description">
                 <AppMarkdown
                   v-if="localeStore.locale !== 'eo-UY'"
@@ -51,7 +51,7 @@
         </template>
 
         <tr v-if="!filtered.length">
-          <td colspan="4" class="text-center text-disabled text-body-2">
+          <td class="text-center text-disabled text-body-2" colspan="4">
             {{ t('search.no-results') }}
           </td>
         </tr>

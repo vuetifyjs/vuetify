@@ -14,16 +14,16 @@
         <v-card-text>
           <v-treeview
             v-model="tree"
-            :load-children="load"
             :items="items"
+            :load-children="load"
+            expand-icon="mdi-chevron-down"
+            indeterminate-icon="mdi-bookmark-minus"
+            off-icon="mdi-bookmark-outline"
+            on-icon="mdi-bookmark"
             selected-color="indigo"
             open-on-click
-            selectable
             return-object
-            expand-icon="mdi-chevron-down"
-            on-icon="mdi-bookmark"
-            off-icon="mdi-bookmark-outline"
-            indeterminate-icon="mdi-bookmark-minus"
+            selectable
           >
           </v-treeview>
         </v-card-text>
@@ -51,14 +51,14 @@
             <v-chip
               v-for="(selection, i) in tree"
               :key="i"
+              class="ma-1"
               color="grey"
               dark
               small
-              class="ma-1"
             >
               <v-icon
-                start
                 size="small"
+                start
               >
                 mdi-beer
               </v-icon>

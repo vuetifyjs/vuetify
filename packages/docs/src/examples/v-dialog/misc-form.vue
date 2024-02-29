@@ -22,8 +22,8 @@
           <v-row dense>
             <v-col
               cols="12"
-              sm="6"
               md="4"
+              sm="6"
             >
               <v-text-field
                 label="First name*"
@@ -33,23 +33,23 @@
 
             <v-col
               cols="12"
-              sm="6"
               md="4"
+              sm="6"
             >
               <v-text-field
-                label="Middle name"
                 hint="example of helper text only on focus"
+                label="Middle name"
               ></v-text-field>
             </v-col>
 
             <v-col
               cols="12"
-              sm="6"
               md="4"
+              sm="6"
             >
               <v-text-field
-                label="Last name*"
                 hint="example of persistent helper text"
+                label="Last name*"
                 persistent-hint
                 required
               ></v-text-field>
@@ -57,8 +57,8 @@
 
             <v-col
               cols="12"
-              sm="6"
               md="4"
+              sm="6"
             >
               <v-text-field
                 label="Email*"
@@ -68,8 +68,8 @@
 
             <v-col
               cols="12"
-              sm="6"
               md="4"
+              sm="6"
             >
               <v-text-field
                 label="Password*"
@@ -80,8 +80,8 @@
 
             <v-col
               cols="12"
-              sm="6"
               md="4"
+              sm="6"
             >
               <v-text-field
                 label="Confirm Password*"
@@ -107,8 +107,8 @@
             >
               <v-autocomplete
                 :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                auto-select-first
                 label="Interests"
+                auto-select-first
                 multiple
               ></v-autocomplete>
             </v-col>

@@ -25,11 +25,11 @@
   <div class="d-flex justify-center align-center ga-2 mt-2">
     <v-label style="width: 100px">comfortable</v-label>
 
-    <v-chip size="x-small" density="comfortable">
+    <v-chip density="comfortable" size="x-small">
       x-small
     </v-chip>
 
-    <v-chip size="small" density="comfortable">
+    <v-chip density="comfortable" size="small">
       small
     </v-chip>
 
@@ -37,22 +37,22 @@
       default
     </v-chip>
 
-    <v-chip size="large" density="comfortable">
+    <v-chip density="comfortable" size="large">
       large
     </v-chip>
 
-    <v-chip size="x-large" density="comfortable">
+    <v-chip density="comfortable" size="x-large">
       x-large
     </v-chip>
   </div>
   <div class="d-flex justify-center align-center ga-2 mt-2">
     <v-label style="width: 100px">compact</v-label>
 
-    <v-chip size="x-small" density="compact">
+    <v-chip density="compact" size="x-small">
       x-small
     </v-chip>
 
-    <v-chip size="small" density="compact">
+    <v-chip density="compact" size="small">
       small
     </v-chip>
 
@@ -60,11 +60,11 @@
       default
     </v-chip>
 
-    <v-chip size="large" density="compact">
+    <v-chip density="compact" size="large">
       large
     </v-chip>
 
-    <v-chip size="x-large" density="compact">
+    <v-chip density="compact" size="x-large">
       x-large
     </v-chip>
   </div>

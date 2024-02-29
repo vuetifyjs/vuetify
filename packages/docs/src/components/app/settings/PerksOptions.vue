@@ -9,8 +9,8 @@
   </alert>
 
   <AppSettingsSettingsHeader
-    title="dashboard.perks.experience"
     text="dashboard.perks.experience-message"
+    title="dashboard.perks.experience"
   />
 
   <AppSettingsOptionsAdOption />
@@ -20,8 +20,8 @@
   <v-divider class="mt-4 mb-3" />
 
   <AppSettingsSettingsHeader
-    title="dashboard.perks.avatar"
     text="dashboard.perks.avatar-message"
+    title="dashboard.perks.avatar"
   />
 
   <AppSettingsOptionsAvatarOption />
@@ -29,8 +29,8 @@
   <v-divider class="mt-4 mb-3" />
 
   <AppSettingsSettingsHeader
-    title="dashboard.perks.layout"
     text="dashboard.perks.layout-message"
+    title="dashboard.perks.layout"
   />
 
   <AppSettingsOptionsQuickbarOption />

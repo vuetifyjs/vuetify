@@ -10,9 +10,9 @@
         <v-main id="scroll-behavior-layout" class="pt-0" scrollable>
           <v-app-bar
             v-bind="props"
-            style="position: sticky"
-            scroll-target="#scroll-behavior-layout > .v-main__scroller"
             color="secondary"
+            scroll-target="#scroll-behavior-layout > .v-main__scroller"
+            style="position: sticky"
           >
             <template v-slot:prepend>
               <v-app-bar-nav-icon></v-app-bar-nav-icon>
@@ -34,10 +34,10 @@
       </v-layout>
 
       <template v-slot:configuration>
-        <v-checkbox v-for="option in behaviors" :key="option.value" v-model="selectedBehaviors" :value="option.value" :label="option.title"></v-checkbox>
+        <v-checkbox v-for="option in behaviors" :key="option.value" v-model="selectedBehaviors" :label="option.title" :value="option.value"></v-checkbox>
         <v-divider></v-divider>
-        <v-checkbox v-model="selectedBehaviors" value="inverted" label="Inverted"></v-checkbox>
-        <v-slider v-model="scrollThreshold" label="Threshold" step="1" min="0" max="1000"></v-slider>
+        <v-checkbox v-model="selectedBehaviors" label="Inverted" value="inverted"></v-checkbox>
+        <v-slider v-model="scrollThreshold" label="Threshold" max="1000" min="0" step="1"></v-slider>
       </template>
     </ExamplesUsageExample>
   </AppSheet>

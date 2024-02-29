@@ -1,8 +1,8 @@
 <template>
   <v-infinite-scroll
     color="secondary"
-    mode="manual"
     height="400"
+    mode="manual"
     @load="load"
   >
     <template v-for="(item, index) in items" :key="item">

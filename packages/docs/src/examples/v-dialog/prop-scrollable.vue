@@ -1,8 +1,8 @@
 <template>
   <div class="pa-4 text-center">
     <v-dialog
-      scrollable
       width="auto"
+      scrollable
     >
       <template v-slot:activator="{ props: activatorProps }">
         <v-btn
@@ -24,8 +24,8 @@
           <v-card-text class="px-4" style="height: 300px;">
             <v-radio-group
               v-model="dialog"
-              column
               messages="Select a Country from the radio group"
+              column
             >
               <v-radio
                 label="Bahamas, The"

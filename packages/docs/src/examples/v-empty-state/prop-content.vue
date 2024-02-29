@@ -1,8 +1,8 @@
 <template>
   <v-empty-state
     headline="No Messages Yet"
-    title="Check back later."
     text="You haven't received any messages yet. When you do, they'll appear here."
+    title="Check back later."
     @click:action="onClickAction"
   ></v-empty-state>
 </template>

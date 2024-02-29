@@ -1,5 +1,5 @@
 <template>
-  <v-card theme="dark" class="pa-8 d-flex justify-center flex-wrap">
+  <v-card class="pa-8 d-flex justify-center flex-wrap" theme="dark">
     <v-responsive max-width="550">
       <v-img
         class="mx-auto mt-12 mb-16"
@@ -11,16 +11,16 @@
       <v-autocomplete
         :items="items"
         append-inner-icon="mdi-microphone"
-        auto-select-first
         class="flex-full-width"
         density="comfortable"
-        item-props
         menu-icon=""
         placeholder="Search Google or type a URL"
         prepend-inner-icon="mdi-magnify"
-        rounded
         theme="light"
         variant="solo"
+        auto-select-first
+        item-props
+        rounded
       ></v-autocomplete>
 
       <v-container class="text-center">
@@ -33,12 +33,12 @@
             <v-card
               :href="shortcut.href"
               class="pa-4"
-              flat
               rel="noopener noreferer"
               target="_blank"
               width="112"
+              flat
             >
-              <v-avatar :icon="shortcut.icon" color="white" variant="tonal" class="mb-2"></v-avatar>
+              <v-avatar :icon="shortcut.icon" class="mb-2" color="white" variant="tonal"></v-avatar>
 
               <div class="text-caption text-truncate" v-text="shortcut.title"></div>
             </v-card>
@@ -47,15 +47,15 @@
           <v-col cols="auto">
             <v-dialog v-model="dialog" max-width="500">
               <template v-slot:activator="{ props }">
-                <v-card flat width="112" v-bind="props" class="pa-4">
+                <v-card v-bind="props" class="pa-4" width="112" flat>
 
-                  <v-avatar icon="mdi-plus" color="white" variant="tonal" class="mb-2"></v-avatar>
+                  <v-avatar class="mb-2" color="white" icon="mdi-plus" variant="tonal"></v-avatar>
 
                   <div class="text-caption text-truncate">Add shortcut</div>
                 </v-card>
               </template>
 
-              <v-card title="Add shortcut" rounded="lg">
+              <v-card rounded="lg" title="Add shortcut">
                 <template v-slot:text>
                   <v-label class="text-caption">Name</v-label>
 
@@ -68,11 +68,11 @@
 
                 <div class="py-4 px-5 text-end">
                   <v-btn
-                    border
                     class="text-none me-2"
                     color="blue"
                     text="Cancel"
                     variant="text"
+                    border
                     @click="dialog = false"
                   ></v-btn>
 

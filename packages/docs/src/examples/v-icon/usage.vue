@@ -2,19 +2,19 @@
   <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div class="text-center">
       <v-icon v-bind="props"></v-icon>
     </div>
 
     <template v-slot:configuration>
-      <v-select v-model="size" label="Size" :items="sizes"></v-select>
+      <v-select v-model="size" :items="sizes" label="Size"></v-select>
 
-      <v-select v-model="color" label="Color" :items="colors"></v-select>
+      <v-select v-model="color" :items="colors" label="Color"></v-select>
 
-      <v-select v-model="icon" label="Icon" :items="icons" clearable></v-select>
+      <v-select v-model="icon" :items="icons" label="Icon" clearable></v-select>
     </template>
   </ExamplesUsageExample>
 </template>

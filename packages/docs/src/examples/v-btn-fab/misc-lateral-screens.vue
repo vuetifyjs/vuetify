@@ -1,10 +1,10 @@
 <template>
   <v-card id="lateral">
     <v-toolbar
-      dark
-      tabs
-      flat
       color="indigo"
+      dark
+      flat
+      tabs
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title>Page title</v-toolbar-title>
@@ -52,10 +52,10 @@
       <v-btn
         :key="activeFab.icon"
         :color="activeFab.color"
-        fab
-        size="large"
-        location="bottom left"
         class="v-btn--example"
+        location="bottom left"
+        size="large"
+        fab
       >
         <v-icon>{{ activeFab.icon }}</v-icon>
       </v-btn>

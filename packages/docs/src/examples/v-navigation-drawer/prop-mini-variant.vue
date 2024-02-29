@@ -14,8 +14,8 @@
         >
           <template v-slot:append>
             <v-btn
-              variant="text"
               icon="mdi-chevron-left"
+              variant="text"
               @click.stop="rail = !rail"
             ></v-btn>
           </template>

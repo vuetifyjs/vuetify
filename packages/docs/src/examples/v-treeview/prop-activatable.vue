@@ -1,7 +1,7 @@
 <template>
   <v-treeview
-    activatable
     :items="items"
+    activatable
   ></v-treeview>
 </template>
 

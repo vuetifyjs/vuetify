@@ -4,8 +4,8 @@
     :subtitle="subtitle"
     :title="item.meta.nav ?? item.meta.title"
     :to="item.path"
-    border
     lines="two"
+    border
     rounded
   >
     <template #prepend>

@@ -1,9 +1,9 @@
 <template>
   <v-data-table
     :headers="headers"
+    :item-value="item => `${item.name}-${item.version}`"
     :items="desserts"
     items-per-page="5"
-    :item-value="item => `${item.name}-${item.version}`"
     show-select
   ></v-data-table>
 </template>

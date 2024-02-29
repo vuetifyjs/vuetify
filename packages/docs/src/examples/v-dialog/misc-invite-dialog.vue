@@ -2,9 +2,9 @@
   <div class="pa-4 text-center">
     <v-btn-group
       color="#b2d7ef"
+      density="comfortable"
       rounded="pill"
       divided
-      density="comfortable"
     >
       <v-btn
         class="pe-2"
@@ -42,9 +42,9 @@
                 <v-textarea
                   :counter="300"
                   class="mb-2"
-                  persistent-counter
                   rows="2"
                   variant="outlined"
+                  persistent-counter
                 ></v-textarea>
 
                 <div class="text-overline mb-2">💎 PREMIUM</div>
@@ -54,8 +54,8 @@
                 </div>
 
                 <v-btn
-                  color="primary"
                   class="text-none font-weight-bold ms-n4"
+                  color="primary"
                   text="Retry Premium Free"
                   variant="text"
                 ></v-btn>
@@ -66,8 +66,8 @@
               <v-card-actions class="my-2 d-flex justify-end">
                 <v-btn
                   class="text-none"
-                  text="Cancel"
                   rounded="xl"
+                  text="Cancel"
                   @click="isActive.value = false"
                 ></v-btn>
 
@@ -86,8 +86,8 @@
       </v-btn>
 
       <v-btn
-        icon
         size="small"
+        icon
       >
         <v-icon icon="mdi-menu-down"></v-icon>
 
@@ -98,13 +98,13 @@
         >
           <v-list
             density="compact"
-            slim
-            rounded="lg"
             min-width="250"
+            rounded="lg"
+            slim
           >
             <v-list-item
-              title="Copy link"
               prepend-icon="mdi-link"
+              title="Copy link"
               link
             ></v-list-item>
 

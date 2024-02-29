@@ -2,7 +2,7 @@
   <ApiApiTable :headers="headers">
     <template #row="{ props, item }">
       <tr v-bind="props">
-        <ApiNameCell section="props" :name="kebabCase(item.name)" :new-in="item.newIn" />
+        <ApiNameCell :name="kebabCase(item.name)" :new-in="item.newIn" section="props" />
 
         <td>
           <ApiPrismCell :code="item.formatted" />

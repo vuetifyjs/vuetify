@@ -2,9 +2,9 @@
   <v-snackbar
     v-if="isVisible && current"
     v-model="isActive"
+    :color="current.color"
     :timeout="current.timeout"
     timer
-    :color="current.color"
     @after-leave="onAfterLeave"
   >
     {{ current.message }}

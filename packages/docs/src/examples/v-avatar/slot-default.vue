@@ -6,8 +6,8 @@
 
     <v-avatar>
       <v-img
-        src="https://cdn.vuetifyjs.com/images/john.jpg"
         alt="John"
+        src="https://cdn.vuetifyjs.com/images/john.jpg"
       ></v-img>
     </v-avatar>
 

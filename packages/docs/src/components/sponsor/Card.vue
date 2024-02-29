@@ -6,17 +6,17 @@
     class="d-inline-flex align-center pa-2"
     color="transparent"
     rel="noopener"
-    rounded
     target="_blank"
     variant="flat"
+    rounded
     @click="onClick"
   >
     <v-img
       :alt="sponsor?.metadata.name"
       :src="src"
       :width="imgWidth"
-      contain
       max-height="64"
+      contain
     />
   </v-card>
 </template>

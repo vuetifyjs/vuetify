@@ -4,9 +4,9 @@
       :fill="fill"
       :gradient="selectedGradient"
       :line-width="width"
+      :model-value="value"
       :padding="padding"
       :smooth="radius || false"
-      :model-value="value"
       auto-draw
     ></v-sparkline>
 
@@ -18,8 +18,8 @@
         md="6"
       >
         <v-row
-          class="fill-height"
           align="center"
+          class="fill-height"
         >
           <v-item-group
             v-model="selectedGradient"
@@ -40,9 +40,9 @@
                     border: '2px solid',
                     borderColor: active ? '#222' : 'white'
                   }"
-                  width="30"
-                  height="30"
                   class="me-2"
+                  height="30"
+                  width="30"
                   @click="toggle"
                 ></v-card>
               </v-item>
@@ -58,8 +58,8 @@
         <v-slider
           v-model="width"
           label="Width"
-          min="0.1"
           max="10"
+          min="0.1"
           step="0.1"
           thumb-label
         ></v-slider>
@@ -67,8 +67,8 @@
 
       <v-col cols="6">
         <v-row
-          class="fill-height"
           align="center"
+          class="fill-height"
         >
           <v-switch
             v-model="fill"
@@ -84,8 +84,8 @@
         <v-slider
           v-model="radius"
           label="Radius"
-          min="0"
           max="25"
+          min="0"
           thumb-label
         ></v-slider>
       </v-col>
@@ -98,8 +98,8 @@
         <v-slider
           v-model="padding"
           label="Padding"
-          min="0"
           max="25"
+          min="0"
           thumb-label
         ></v-slider>
       </v-col>

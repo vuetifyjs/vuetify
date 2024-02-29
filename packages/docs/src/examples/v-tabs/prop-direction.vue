@@ -8,8 +8,8 @@
     <div class="d-flex flex-row">
       <v-tabs
         v-model="tab"
-        direction="vertical"
         color="primary"
+        direction="vertical"
       >
         <v-tab value="option-1">
           <v-icon start>

@@ -12,8 +12,8 @@
             <v-card
               :color="isSelected ? 'primary' : ''"
               class="d-flex align-center"
-              dark
               height="200"
+              dark
               @click="toggle"
             >
               <v-scroll-y-transition>

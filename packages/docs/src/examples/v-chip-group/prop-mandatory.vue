@@ -2,12 +2,12 @@
   <v-row justify="space-around">
     <v-col cols="auto">
       <v-sheet
-        elevation="10"
         class="py-4 px-1"
+        elevation="10"
       >
         <v-chip-group
-          mandatory
           selected-class="text-primary"
+          mandatory
         >
           <v-chip
             v-for="tag in tags"

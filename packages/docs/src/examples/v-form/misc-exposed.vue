@@ -1,5 +1,5 @@
 <template>
-  <v-sheet width="300" class="mx-auto">
+  <v-sheet class="mx-auto" width="300">
 
     <v-form ref="form">
       <v-text-field
@@ -27,8 +27,8 @@
 
       <div class="d-flex flex-column">
         <v-btn
-          color="success"
           class="mt-4"
+          color="success"
           block
           @click="validate"
         >
@@ -36,8 +36,8 @@
         </v-btn>
 
         <v-btn
-          color="error"
           class="mt-4"
+          color="error"
           block
           @click="reset"
         >
@@ -45,8 +45,8 @@
         </v-btn>
 
         <v-btn
-          color="warning"
           class="mt-4"
+          color="warning"
           block
           @click="resetValidation"
         >

@@ -2,10 +2,10 @@
   <v-navigation-drawer
     id="app-drawer"
     v-model="app.drawer"
-    :rail="railEnabled"
     :expand-on-hover="railEnabled"
     :image="image"
     :order="mobile ? -1 : undefined"
+    :rail="railEnabled"
     width="300"
     @update:rail="onUpdateRail"
   >

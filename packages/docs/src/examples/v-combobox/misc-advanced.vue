@@ -6,11 +6,11 @@
       :custom-filter="filter"
       :hide-no-data="!search"
       :items="items"
-      hide-selected
       label="Search for an option"
+      variant="solo"
+      hide-selected
       multiple
       small-chips
-      variant="solo"
     >
       <template v-slot:no-data>
         <v-list-item>
@@ -48,11 +48,11 @@
         <v-text-field
           v-if="editing === item"
           v-model="editing.text"
+          bg-color="transparent"
+          variant="solo"
           autofocus
           flat
-          bg-color="transparent"
           hide-details
-          variant="solo"
           @keyup.enter="edit(index, item)"
         ></v-text-field>
         <v-chip

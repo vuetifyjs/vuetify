@@ -14,9 +14,9 @@
     </template>
 
     <v-img
-      cover
       height="250"
       src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+      cover
     ></v-img>
 
     <v-card-item>
@@ -42,9 +42,9 @@
           :model-value="4.5"
           color="amber"
           density="compact"
+          size="small"
           half-increments
           readonly
-          size="small"
         ></v-rating>
 
         <div class="text-grey ms-4">

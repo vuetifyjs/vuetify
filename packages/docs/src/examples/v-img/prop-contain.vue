@@ -9,22 +9,22 @@
           Matching
         </div>
         <v-img
-          src="https://picsum.photos/510/300?random"
           aspect-ratio="1.7"
+          src="https://picsum.photos/510/300?random"
         ></v-img>
         <div class="subheading pt-4">
           Too high
         </div>
         <v-img
-          src="https://picsum.photos/510/300?random"
           aspect-ratio="2"
+          src="https://picsum.photos/510/300?random"
         ></v-img>
         <div class="subheading pt-4">
           Too low
         </div>
         <v-img
-          src="https://picsum.photos/510/300?random"
           aspect-ratio="1.4"
+          src="https://picsum.photos/510/300?random"
         ></v-img>
       </v-col>
 
@@ -36,24 +36,24 @@
           Matching
         </div>
         <v-img
-          src="https://picsum.photos/510/300?random"
           aspect-ratio="1.7"
+          src="https://picsum.photos/510/300?random"
           contain
         ></v-img>
         <div class="subheading pt-4">
           Too high
         </div>
         <v-img
-          src="https://picsum.photos/510/300?random"
           aspect-ratio="2"
+          src="https://picsum.photos/510/300?random"
           contain
         ></v-img>
         <div class="subheading pt-4">
           Too low
         </div>
         <v-img
-          src="https://picsum.photos/510/300?random"
           aspect-ratio="1.4"
+          src="https://picsum.photos/510/300?random"
           contain
         ></v-img>
       </v-col>

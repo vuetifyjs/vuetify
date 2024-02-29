@@ -4,9 +4,9 @@
     max-width="400"
   >
     <v-toolbar
-      flat
       color="deep-purple-accent-4"
       dark
+      flat
     >
       <v-btn icon>
         <v-icon>mdi-close</v-icon>
@@ -25,38 +25,38 @@
         multiple
       >
         <v-chip
-          filter
           variant="outlined"
+          filter
         >
           Elevator
         </v-chip>
         <v-chip
-          filter
           variant="outlined"
+          filter
         >
           Washer / Dryer
         </v-chip>
         <v-chip
-          filter
           variant="outlined"
+          filter
         >
           Fireplace
         </v-chip>
         <v-chip
-          filter
           variant="outlined"
+          filter
         >
           Wheelchair access
         </v-chip>
         <v-chip
-          filter
           variant="outlined"
+          filter
         >
           Dogs ok
         </v-chip>
         <v-chip
-          filter
           variant="outlined"
+          filter
         >
           Cats ok
         </v-chip>
@@ -74,38 +74,38 @@
         multiple
       >
         <v-chip
-          filter
           variant="outlined"
+          filter
         >
           Snowy Rock Place
         </v-chip>
         <v-chip
-          filter
           variant="outlined"
+          filter
         >
           Honeylane Circle
         </v-chip>
         <v-chip
-          filter
           variant="outlined"
+          filter
         >
           Donna Drive
         </v-chip>
         <v-chip
-          filter
           variant="outlined"
+          filter
         >
           Elaine Street
         </v-chip>
         <v-chip
-          filter
           variant="outlined"
+          filter
         >
           Court Street
         </v-chip>
         <v-chip
-          filter
           variant="outlined"
+          filter
         >
           Kennedy Park
         </v-chip>

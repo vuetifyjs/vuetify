@@ -14,9 +14,9 @@
         :href="vendor.moreUrl"
         append-icon="mdi-open-in-new"
         color="primary"
+        rel="noopener noreferrer"
         size="large"
         target="_blank"
-        rel="noopener noreferrer"
         variant="outlined"
       >
         {{ t('see-more-themes-from', { vendor: vendor.name }) }}
