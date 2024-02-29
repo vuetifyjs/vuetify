@@ -304,7 +304,7 @@ export const VCombobox = genericComponent<new <
 
       if (e.key === 'Enter' && search.value) {
         select(transformItem(props, search.value))
-        search.value = ''
+        if (hasSelectionSlot.value) search.value = ''
       }
 
       if (!props.multiple) return
