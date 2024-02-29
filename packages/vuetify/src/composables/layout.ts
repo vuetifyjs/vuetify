@@ -19,7 +19,7 @@ import { convertToUnit, eagerComputed, findChildrenWithProvide, getCurrentInstan
 // Types
 import type { ComponentInternalInstance, CSSProperties, InjectionKey, Prop, Ref } from 'vue'
 
-type Position = 'top' | 'left' | 'right' | 'bottom'
+export type Position = 'top' | 'left' | 'right' | 'bottom'
 
 interface Layer {
   top: number
