@@ -21,7 +21,7 @@ The `v-empty-state` component is used to indicate that a list is empty or that n
 
 ::: warning
 
-This feature requires [v3.5.6](/getting-started/release-notes/?version=v3.5.6)
+This feature requires [v3.5.7](/getting-started/release-notes/?version=v3.5.7)
 
 :::
 
