@@ -2,7 +2,6 @@
 import './VFab.sass'
 
 // Components
-import { VFabTransition } from '@/components/transitions'
 import { makeVBtnProps, VBtn } from '@/components/VBtn/VBtn'
 
 // Composables
@@ -10,6 +9,7 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useResizeObserver } from '@/composables/resizeObserver'
 import { useToggleScope } from '@/composables/toggleScope'
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, ref, shallowRef, toRef, watchEffect } from 'vue'
@@ -23,6 +23,7 @@ const locations = ['start', 'end', 'left', 'right', 'top', 'bottom'] as const
 
 export const makeVFabProps = propsFactory({
   app: Boolean,
+  appear: Boolean,
   extended: Boolean,
   location: {
     type: String as PropType<typeof locations[number]>,
@@ -34,8 +35,9 @@ export const makeVFabProps = propsFactory({
     default: true,
   },
 
-  ...omit(makeVBtnProps({ size: 56 }), ['location']),
+  ...omit(makeVBtnProps({ active: true }), ['location']),
   ...makeLayoutItemProps(),
+  ...makeTransitionProps({ transition: 'fab-transition' }),
 }, 'VFab')
 
 export const VFab = genericComponent()({
@@ -48,7 +50,7 @@ export const VFab = genericComponent()({
   },
 
   setup (props, { slots }) {
-    const isActive = useProxiedModel(props, 'modelValue')
+    const model = useProxiedModel(props, 'modelValue')
     const height = shallowRef(56)
     const layoutItemStyles = ref()
 
@@ -77,8 +79,8 @@ export const VFab = genericComponent()({
         order: computed(() => parseInt(props.order, 10)),
         position,
         layoutSize: height,
-        elementSize: computed(() => height.value + 8),
-        active: computed(() => props.app && isActive.value),
+        elementSize: computed(() => height.value + 32),
+        active: computed(() => props.app && model.value),
         absolute: toRef(props, 'absolute'),
       })
 
@@ -118,15 +120,19 @@ export const VFab = genericComponent()({
           ]}
         >
           <div class="v-fab__container">
-            <VFabTransition disabled={ props.app }>
+            <MaybeTransition
+              appear={ props.appear }
+              transition={ props.transition }
+            >
               <VBtn
-                v-show={ props.app ? true : isActive.value }
+                v-show={ props.active }
                 ref={ resizeRef }
                 { ...btnProps }
+                active={ undefined }
                 location={ undefined }
                 v-slots={ slots }
               />
-            </VFabTransition>
+            </MaybeTransition>
           </div>
         </div>
       )

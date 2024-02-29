@@ -6,19 +6,23 @@
 @use './mixins' as *
 
 .v-fab
-  display: flex
+  align-items: center
+  display: inline-flex
   flex: 1 1 auto
   pointer-events: none
   position: relative
   transition-duration: $fab-transition-duration
   transition-timing-function: $fab-transition-timing-function
+  vertical-align: middle
 
   .v-btn
     pointer-events: auto
 
-    @include tools.elevation(3)
+    &--variant-elevated
+      @include tools.elevation(3)
 
-  &--app
+  &--app,
+  &--absolute
     display: flex
 
   &--start,
@@ -48,6 +52,7 @@
 .v-fab__container
   align-self: center
   display: inline-flex
+  vertical-align: middle
 
   .v-fab--app &
     margin: 4px
