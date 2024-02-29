@@ -2,11 +2,11 @@
   <v-list-item
     :disabled="!auth.user"
     :subtitle="one.isSubscriber ? 'Active' : 'Inactive'"
-    border
     lines="two"
     prepend-icon="$vuetify"
-    rounded
     title="Subscription Status"
+    border
+    rounded
   >
     <template #prepend>
       <div class="pe-2">

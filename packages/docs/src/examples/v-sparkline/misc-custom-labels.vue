@@ -2,8 +2,8 @@
   <v-card
     class="mx-auto text-center"
     color="green"
-    dark
     max-width="600"
+    dark
   >
     <v-card-text>
       <v-sheet color="rgba(0, 0, 0, .12)">
@@ -32,8 +32,8 @@
 
     <v-card-actions class="justify-center">
       <v-btn
-        block
         variant="text"
+        block
       >
         Go to Report
       </v-btn>

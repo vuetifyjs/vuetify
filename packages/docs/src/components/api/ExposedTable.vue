@@ -2,7 +2,7 @@
   <ApiApiTable>
     <template #row="{ props, item }">
       <tr v-bind="props">
-        <ApiNameCell section="exposed" :name="item.name" :new-in="item.newIn" />
+        <ApiNameCell :name="item.name" :new-in="item.newIn" section="exposed" />
       </tr>
 
       <tr>

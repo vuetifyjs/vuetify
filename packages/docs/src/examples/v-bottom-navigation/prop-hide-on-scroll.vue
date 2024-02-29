@@ -5,10 +5,10 @@
     max-width="500"
   >
     <v-bottom-navigation
+      scroll-target="#hide-on-scroll-example"
       absolute
       hide-on-scroll
       horizontal
-      scroll-target="#hide-on-scroll-example"
     >
       <v-btn
         color="deep-purple-accent-4"

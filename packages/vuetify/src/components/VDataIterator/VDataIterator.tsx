@@ -26,8 +26,9 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 import type { DataIteratorItem } from './composables/items'
 import type { Group } from '@/components/VDataTable/composables/group'
 import type { SortItem } from '@/components/VDataTable/composables/sort'
+import type { GenericProps } from '@/util'
 
-type VDataIteratorSlotProps = {
+type VDataIteratorSlotProps<T> = {
   page: number
   itemsPerPage: number
   sortBy: readonly SortItem[]
@@ -45,14 +46,14 @@ type VDataIteratorSlotProps = {
   toggleExpand: ReturnType<typeof provideExpanded>['toggleExpand']
   isGroupOpen: ReturnType<typeof provideGroupBy>['isGroupOpen']
   toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
-  items: readonly DataIteratorItem[]
-  groupedItems: readonly (DataIteratorItem | Group<DataIteratorItem>)[]
+  items: readonly DataIteratorItem<T>[]
+  groupedItems: readonly (DataIteratorItem<T> | Group<DataIteratorItem<T>>)[]
 }
 
-export type VDataIteratorSlots = {
-  default: VDataIteratorSlotProps
-  header: VDataIteratorSlotProps
-  footer: VDataIteratorSlotProps
+export type VDataIteratorSlots<T> = {
+  default: VDataIteratorSlotProps<T>
+  header: VDataIteratorSlotProps<T>
+  footer: VDataIteratorSlotProps<T>
   'no-data': never
 }
 
@@ -71,7 +72,12 @@ export const makeVDataIteratorProps = propsFactory({
   ...makeTagProps(),
 }, 'VDataIterator')
 
-export const VDataIterator = genericComponent<VDataIteratorSlots>()({
+export const VDataIterator = genericComponent<new <T> (
+  props: {
+    items?: readonly T[]
+  },
+  slots: VDataIteratorSlots<T>,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VDataIterator',
 
   props: makeVDataIteratorProps(),

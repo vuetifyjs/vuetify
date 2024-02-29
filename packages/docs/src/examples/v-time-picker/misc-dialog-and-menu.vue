@@ -10,10 +10,10 @@
         v-model:return-value="time"
         :close-on-content-click="false"
         :nudge-right="40"
-        transition="scale-transition"
-        offset-y
         max-width="290px"
         min-width="290px"
+        transition="scale-transition"
+        offset-y
       >
         <template v-slot:activator="{ on, attrs }">
           <v-text-field
@@ -42,8 +42,8 @@
         ref="dialog"
         v-model="modal2"
         v-model:return-value="time"
-        persistent
         width="290px"
+        persistent
       >
         <template v-slot:activator="{ on, attrs }">
           <v-text-field
@@ -62,15 +62,15 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            variant="text"
             color="primary"
+            variant="text"
             @click="modal2 = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            variant="text"
             color="primary"
+            variant="text"
             @click="dialog.save(time)"
           >
             OK

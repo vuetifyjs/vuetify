@@ -22,17 +22,17 @@
 
     <v-select
       v-model="select.value.value"
-      :items="items"
       :error-messages="select.errorMessage.value"
+      :items="items"
       label="Select"
     ></v-select>
 
     <v-checkbox
       v-model="checkbox.value.value"
       :error-messages="checkbox.errorMessage.value"
-      value="1"
       label="Option"
       type="checkbox"
+      value="1"
     ></v-checkbox>
 
     <v-btn

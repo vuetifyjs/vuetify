@@ -7,9 +7,9 @@
         cols="auto"
       >
         <v-card
+          :variant="variant"
           class="mx-auto"
           max-width="344"
-          :variant="variant"
         >
           <v-card-item>
             <div>

@@ -1,10 +1,10 @@
 <template>
   <v-list-item
     :title="t(auth.user ? 'login.connect-discord' : 'login.with-discord')"
-    nav
     base-color="#5865F2"
     prepend-icon="mdi-discord"
     variant="flat"
+    nav
     @click="auth.login('discord')"
   >
     <template #prepend>

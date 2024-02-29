@@ -17,22 +17,22 @@
       <v-select
         v-model="type"
         :items="types"
-        clearable
         label="Type"
+        clearable
       ></v-select>
 
       <v-select
         v-model="color"
         :items="colors"
-        clearable
         label="Color"
+        clearable
       ></v-select>
 
       <v-slider
         v-model="elevation"
         label="Elevation"
-        min="0"
         max="24"
+        min="0"
       ></v-slider>
     </template>
   </ExamplesUsageExample>

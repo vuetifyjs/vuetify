@@ -9,16 +9,16 @@
           v-for="item in items"
           :key="item.raw.name"
           cols="12"
-          sm="12"
           md="6"
+          sm="12"
         >
           <v-card>
             <v-card-title class="d-flex align-center">
               <v-icon
                 :color="item.raw.color"
                 :icon="item.raw.icon"
-                start
                 size="18"
+                start
               ></v-icon>
 
               <h4>{{ item.raw.name }}</h4>
@@ -30,8 +30,8 @@
 
             <div class="px-4">
               <v-switch
-                :model-value="isExpanded(item)"
                 :label="`${isExpanded(item) ? 'Hide' : 'Show'} details`"
+                :model-value="isExpanded(item)"
                 density="compact"
                 inset
                 @click="() => toggleExpand(item)"
@@ -42,7 +42,7 @@
 
             <v-expand-transition>
               <div v-if="isExpanded(item)">
-                <v-list density="compact" :lines="false">
+                <v-list :lines="false" density="compact">
                   <v-list-item :title="`🔥 Calories: ${item.raw.calories}`" active></v-list-item>
                   <v-list-item :title="`🍔 Fat: ${item.raw.fat}`"></v-list-item>
                   <v-list-item :title="`🍞 Carbs: ${item.raw.carbs}`"></v-list-item>

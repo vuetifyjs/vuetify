@@ -14,7 +14,7 @@
           <v-checkbox-btn
             :color="likesSomeFruit ? 'indigo-darken-4' : undefined"
             :indeterminate="likesSomeFruit && !likesAllFruit"
-            :model-value="likesSomeFruit"
+            :model-value="likesAllFruit"
           ></v-checkbox-btn>
         </template>
       </v-list-item>
@@ -31,7 +31,7 @@
         disabled
       >
         <template v-slot:prepend>
-          <v-avatar icon="mdi-food-apple" color="primary"></v-avatar>
+          <v-avatar color="primary" icon="mdi-food-apple"></v-avatar>
         </template>
       </v-list-item>
     </template>

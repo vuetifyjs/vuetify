@@ -9,8 +9,8 @@
         :class="[
           isDark ? 'theme--dark' : 'theme--light',
         ]"
-        border
         max-width="360"
+        border
       >
         <PromotedScript
           v-if="!error1"

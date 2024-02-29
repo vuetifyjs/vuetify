@@ -1,15 +1,15 @@
 <template>
   <PromotedBase
     v-if="promotion"
-    border
     class="v-promotion-card"
     max-width="360"
+    border
   >
     <a
       :href="promotion.metadata.url"
       class="d-inline-block text-medium-emphasis"
-      target="_blank"
       rel="noopener"
+      target="_blank"
     >
       <v-container class="pa-2">
         <v-row dense>

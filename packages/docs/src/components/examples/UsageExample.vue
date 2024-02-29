@@ -3,8 +3,8 @@
     <v-toolbar
       border="b"
       class="ps-1"
-      flat
       height="44"
+      flat
     >
       <v-slide-group
         v-model="model"
@@ -48,9 +48,9 @@
       <v-tooltip location="bottom">
         <template #activator="{ props: activatorProps }">
           <v-btn
+            :href="playgroundLink"
             class="me-1 text-medium-emphasis"
             density="comfortable"
-            :href="playgroundLink"
             icon="$vuetify-play"
             target="_blank"
             v-bind="activatorProps"
@@ -63,9 +63,9 @@
       <v-tooltip location="bottom">
         <template #activator="{ props: activatorProps }">
           <v-btn
+            :icon="!show ? 'mdi-code-tags' : 'mdi-chevron-up'"
             class="me-1 text-medium-emphasis"
             density="comfortable"
-            :icon="!show ? 'mdi-code-tags' : 'mdi-chevron-up'"
             v-bind="activatorProps"
             @click="show = !show"
           />
@@ -93,9 +93,9 @@
         v-model="tune"
         location="right"
         name="tune"
+        width="250"
         permanent
         touchless
-        width="250"
       >
         <v-list>
           <div class="px-4 usage-example pt-2">

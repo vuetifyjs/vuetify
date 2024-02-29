@@ -7,10 +7,10 @@
       <template v-slot:item.name="props">
         <v-edit-dialog
           v-model:return-value="props.item.name"
-          @save="save"
           @cancel="cancel"
-          @open="open"
           @close="close"
+          @open="open"
+          @save="save"
         >
           {{ props.item.name }}
           <template v-slot:input>
@@ -18,8 +18,8 @@
               v-model="props.item.name"
               :rules="[max25chars]"
               label="Edit"
-              single-line
               counter
+              single-line
             ></v-text-field>
           </template>
         </v-edit-dialog>
@@ -29,10 +29,10 @@
           v-model:return-value="props.item.iron"
           large
           persistent
-          @save="save"
           @cancel="cancel"
-          @open="open"
           @close="close"
+          @open="open"
+          @save="save"
         >
           <div>{{ props.item.iron }}</div>
           <template v-slot:input>
@@ -43,9 +43,9 @@
               v-model="props.item.iron"
               :rules="[max25chars]"
               label="Edit"
-              single-line
-              counter
               autofocus
+              counter
+              single-line
             ></v-text-field>
           </template>
         </v-edit-dialog>
@@ -54,8 +54,8 @@
 
     <v-snackbar
       v-model="snack"
-      :timeout="3000"
       :color="snackColor"
+      :timeout="3000"
     >
       {{ snackText }}
 

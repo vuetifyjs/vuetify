@@ -2,9 +2,9 @@
   <v-btn
     :icon="icon"
     height="28"
-    rounded
     size="small"
     variant="text"
+    rounded
     @click="onClick"
   />
 </template>

@@ -3,8 +3,8 @@
     v-model="user.theme"
     class="mb-2"
     color="primary"
-    hide-details
     true-icon="mdi-check-circle-outline"
+    hide-details
   >
     <v-radio
       v-for="(item, i) in items"

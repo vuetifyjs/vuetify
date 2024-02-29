@@ -2,11 +2,11 @@
   <ApiApiTable>
     <template #row="{ props, item }">
       <tr v-bind="props">
-        <ApiNameCell section="slots" :name="item.name" :new-in="item.newIn" />
+        <ApiNameCell :name="item.name" :new-in="item.newIn" section="slots" />
       </tr>
 
       <tr v-if="item.formatted !== 'never' && item.text !== 'undefined'">
-        <AppMarkup :code="item.formatted" language="ts" :rounded="false" />
+        <AppMarkup :code="item.formatted" :rounded="false" language="ts" />
       </tr>
     </template>
   </ApiApiTable>

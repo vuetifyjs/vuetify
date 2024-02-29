@@ -1,8 +1,8 @@
 <template>
   <AppListLinkListItem
-    :to="rpath(`/getting-started/release-notes/?version=v${version}`)"
-    :title="`v${version}`"
     :label="t('latest-release')"
+    :title="`v${version}`"
+    :to="rpath(`/getting-started/release-notes/?version=v${version}`)"
     append-icon="mdi-page-next"
     prepend-icon="mdi-tag-outline"
     @click="onClick"

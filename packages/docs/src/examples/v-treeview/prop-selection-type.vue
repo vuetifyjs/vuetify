@@ -11,9 +11,9 @@
           v-model="selection"
           :items="items"
           :selection-type="selectionType"
-          selectable
-          return-object
           open-all
+          return-object
+          selectable
         ></v-treeview>
       </v-col>
       <v-divider vertical></v-divider>

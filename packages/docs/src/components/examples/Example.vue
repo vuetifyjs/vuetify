@@ -14,8 +14,8 @@
         <v-toolbar
           border="b"
           class="px-1"
-          flat
           height="44"
+          flat
         >
           <v-fade-transition hide-on-leave>
             <div v-if="showCode">
@@ -24,8 +24,8 @@
                 :key="section.name"
                 :active="template === i"
                 class="ma-1 text-none"
-                variant="text"
                 size="small"
+                variant="text"
                 @click="template = i"
               >
                 <span :class="template === i ? 'text-high-emphasis' : 'text-medium-emphasis'">

@@ -21,9 +21,9 @@
         >
           <template v-slot:activator="{ props }">
             <v-btn
+              class="mb-2"
               color="primary"
               dark
-              class="mb-2"
               v-bind="props"
             >
               New Item
@@ -39,8 +39,8 @@
                 <v-row>
                   <v-col
                     cols="12"
-                    sm="6"
                     md="4"
+                    sm="6"
                   >
                     <v-text-field
                       v-model="editedItem.name"
@@ -49,8 +49,8 @@
                   </v-col>
                   <v-col
                     cols="12"
-                    sm="6"
                     md="4"
+                    sm="6"
                   >
                     <v-text-field
                       v-model="editedItem.calories"
@@ -59,8 +59,8 @@
                   </v-col>
                   <v-col
                     cols="12"
-                    sm="6"
                     md="4"
+                    sm="6"
                   >
                     <v-text-field
                       v-model="editedItem.fat"
@@ -69,8 +69,8 @@
                   </v-col>
                   <v-col
                     cols="12"
-                    sm="6"
                     md="4"
+                    sm="6"
                   >
                     <v-text-field
                       v-model="editedItem.carbs"
@@ -79,8 +79,8 @@
                   </v-col>
                   <v-col
                     cols="12"
-                    sm="6"
                     md="4"
+                    sm="6"
                   >
                     <v-text-field
                       v-model="editedItem.protein"
@@ -125,8 +125,8 @@
     </template>
     <template v-slot:item.actions="{ item }">
       <v-icon
-        size="small"
         class="me-2"
+        size="small"
         @click="editItem(item)"
       >
         mdi-pencil

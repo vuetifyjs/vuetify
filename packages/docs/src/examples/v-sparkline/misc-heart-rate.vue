@@ -8,8 +8,8 @@
       <v-icon
         :color="checking ? 'red lighten-2' : 'indigo'"
         class="me-8"
-        size="64"
         icon="mdi-heart-pulse"
+        size="64"
         @click="takePulse"
       ></v-icon>
     </template>
@@ -28,8 +28,8 @@
 
     <template v-slot:append>
       <v-btn
-        icon="mdi-arrow-right-thick"
         class="align-self-start"
+        icon="mdi-arrow-right-thick"
         size="34"
         variant="text"
       ></v-btn>
@@ -38,12 +38,12 @@
     <v-sheet color="transparent">
       <v-sparkline
         :key="String(avg)"
-        :smooth="16"
         :gradient="['#f72047', '#ffd200', '#1feaea']"
         :line-width="3"
         :model-value="heartbeats"
-        auto-draw
+        :smooth="16"
         stroke-linecap="round"
+        auto-draw
       ></v-sparkline>
     </v-sheet>
   </v-card>

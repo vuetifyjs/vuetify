@@ -7,13 +7,13 @@
       :items="releases"
       :menu-props="menuProps"
       :placeholder="tag"
-      hide-details
-      hide-no-data
       density="comfortable"
       item-title="name"
       label="Select Release Version"
-      persistent-placeholder
       prepend-inner-icon="mdi-text-box-search-outline"
+      hide-details
+      hide-no-data
+      persistent-placeholder
       return-object
     >
       <template #selection>
@@ -68,8 +68,8 @@
     </v-autocomplete>
 
     <v-card
-      variant="flat"
       rounded="t-0 b"
+      variant="flat"
     >
       <div
         v-if="model?.author"
@@ -91,10 +91,10 @@
           <AppTooltipBtn
             v-for="(tooltip, i) in tooltips"
             :key="i"
+            :color="tooltip.color ?? 'text-high-emphasis'"
             :href="tooltip.href"
             :icon="tooltip.icon"
             :path="tooltip.path"
-            :color="tooltip.color ?? 'text-high-emphasis'"
             :target="tooltip.href ? '_blank' : undefined"
             class="text-white ms-2"
             density="comfortable"
@@ -124,24 +124,24 @@
             <AppSheet>
               <v-list-item
                 :href="model.zipball_url"
-                target="_blank"
-                prepend-icon="mdi-folder-zip-outline"
-                title="Source code (zip)"
-                slim
-                nav
                 append-icon="mdi-download-box-outline"
+                prepend-icon="mdi-folder-zip-outline"
+                target="_blank"
+                title="Source code (zip)"
+                nav
+                slim
               />
 
               <v-divider />
 
               <v-list-item
                 :href="model.tarball_url"
-                target="_blank"
-                prepend-icon="mdi-folder-zip-outline"
-                title="Source code (tar.gz)"
-                slim
-                nav
                 append-icon="mdi-download-box-outline"
+                prepend-icon="mdi-folder-zip-outline"
+                target="_blank"
+                title="Source code (tar.gz)"
+                nav
+                slim
               />
             </AppSheet>
           </div>
@@ -150,8 +150,8 @@
 
       <v-skeleton-loader
         v-if="!model && store.isLoading"
-        type="heading, article, heading, subtitle, text, sentences"
         class="pa-4"
+        type="heading, article, heading, subtitle, text, sentences"
       />
     </v-card>
   </div>

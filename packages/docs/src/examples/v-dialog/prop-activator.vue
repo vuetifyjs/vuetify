@@ -15,9 +15,9 @@
 
           <template v-slot:default="{ isActive }">
             <v-card
-              title="Slot Activator"
-              text="When using the activator slot, you must bind the slot props to the activator element."
               prepend-icon="mdi-package"
+              text="When using the activator slot, you must bind the slot props to the activator element."
+              title="Slot Activator"
             >
               <template v-slot:actions>
                 <v-btn
@@ -41,9 +41,9 @@
           <v-dialog activator="parent" max-width="340">
             <template v-slot:default="{ isActive }">
               <v-card
-                title="Parent Activator"
-                text="When using the parent as the activator, the dialog will bind its listeners to the parent element."
                 prepend-icon="mdi-picture-in-picture-bottom-right"
+                text="When using the parent as the activator, the dialog will bind its listeners to the parent element."
+                title="Parent Activator"
               >
                 <template v-slot:actions>
                   <v-btn
@@ -70,9 +70,9 @@
         <v-dialog :activator="btn" max-width="340">
           <template v-slot:default="{ isActive }">
             <v-card
-              title="Ref Activator"
-              text="When using a ref, the dialog will bind its listeners to the ref element. This works for any element and custom components."
               prepend-icon="mdi-variable"
+              text="When using a ref, the dialog will bind its listeners to the ref element. This works for any element and custom components."
+              title="Ref Activator"
             >
               <template v-slot:actions>
                 <v-btn
@@ -98,9 +98,9 @@
         <v-dialog activator="#activator-target" max-width="340">
           <template v-slot:default="{ isActive }">
             <v-card
-              title="Target Activator"
-              text="Pass any valid querySelector to the activator prop to bind the dialog to the target element."
               prepend-icon="mdi-bullseye-arrow"
+              text="Pass any valid querySelector to the activator prop to bind the dialog to the target element."
+              title="Target Activator"
             >
               <template v-slot:actions>
                 <v-btn

@@ -16,6 +16,12 @@ The sparkline component can be used to create simple graphs, like GitHub's contr
 
 <PromotedEntry />
 
+::: warning
+
+This feature requires [v3.5.5](/getting-started/release-notes/?version=v3.5.5)
+
+:::
+
 ## Installation
 
 Labs components require a manual import and installation of the component.

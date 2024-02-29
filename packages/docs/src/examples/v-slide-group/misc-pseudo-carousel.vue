@@ -16,8 +16,8 @@
         v-slot="{ isSelected, toggle, selectedClass }"
       >
         <v-card
-          color="grey-lighten-1"
           :class="['ma-4', selectedClass]"
+          color="grey-lighten-1"
           height="200"
           width="100"
           @click="toggle"
@@ -27,8 +27,8 @@
               <v-icon
                 v-if="isSelected"
                 color="white"
-                size="48"
                 icon="mdi-close-circle-outline"
+                size="48"
               ></v-icon>
             </v-scale-transition>
           </div>

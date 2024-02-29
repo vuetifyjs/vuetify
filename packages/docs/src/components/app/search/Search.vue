@@ -5,8 +5,8 @@
     v-model="model"
     content-class="overflow-visible align-self-start mt-16"
     max-height="900"
-    scrollable
     width="600"
+    scrollable
     @after-leave="searchString = ''"
   >
     <template #activator="{ props: activatorProps }">
@@ -39,12 +39,12 @@
       <AppTextField
         v-model="searchString"
         :placeholder="`${t('search.looking') }...`"
-        autofocus
         class="flex-grow-0 mb-4"
         variant="filled"
+        autofocus
       >
         <template #append-inner>
-          <AppBtn border size="small">
+          <AppBtn size="small" border>
             <span class="text-caption text-disabled">{{ t('esc') }}</span>
           </AppBtn>
         </template>
@@ -76,8 +76,8 @@
 
         <ais-instant-search
           v-else
-          class="flex-grow-1"
           :search-client="searchClient"
+          class="flex-grow-1"
           index-name="vuetifyjs-v3"
           @state-change="searchFunction"
         >

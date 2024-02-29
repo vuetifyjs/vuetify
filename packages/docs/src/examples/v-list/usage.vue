@@ -1,8 +1,8 @@
 <template>
   <ExamplesUsageExample
     v-model="model"
-    :name="name"
     :code="code"
+    :name="name"
     :options="options"
   >
     <div>
@@ -10,9 +10,9 @@
         <v-list-item
           v-for="n in 3"
           :key="n"
+          :prepend-avatar="avatar ? 'https://randomuser.me/api/portraits/women/8.jpg' : undefined"
           :title="'Item ' + n"
           subtitle="Lorem ipsum dolor sit amet consectetur adipisicing elit"
-          :prepend-avatar="avatar ? 'https://randomuser.me/api/portraits/women/8.jpg' : undefined"
         ></v-list-item>
       </v-list>
     </div>

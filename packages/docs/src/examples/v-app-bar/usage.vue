@@ -28,7 +28,7 @@
     <template v-slot:configuration>
       <v-checkbox v-model="actions" label="Actions"></v-checkbox>
 
-      <v-slider v-model="elevation" label="Elevation" step="1" min="0" max="24"></v-slider>
+      <v-slider v-model="elevation" label="Elevation" max="24" min="0" step="1"></v-slider>
     </template>
   </ExamplesUsageExample>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="360">
     <v-layout>
-      <v-system-bar color="#4c00d5" class="ga-1">
+      <v-system-bar class="ga-1" color="#4c00d5">
         <v-icon icon="mdi-square" size="x-small"></v-icon>
 
         <v-icon icon="mdi-circle" size="x-small"></v-icon>
@@ -9,7 +9,7 @@
         <v-icon icon="mdi-triangle" size="x-small"></v-icon>
       </v-system-bar>
 
-      <v-app-bar title="Drafts" color="#6200ee">
+      <v-app-bar color="#6200ee" title="Drafts">
         <template v-slot:prepend>
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
         </template>
@@ -43,9 +43,9 @@
 
       <v-layout-item
         class="text-end"
-        model-value
         position="bottom"
         size="80"
+        model-value
       >
         <v-btn
           class="ma-4"

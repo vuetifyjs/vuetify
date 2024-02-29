@@ -1,7 +1,7 @@
 <template>
   <v-treeview
-    dense
     :items="items"
+    dense
   ></v-treeview>
 </template>
 

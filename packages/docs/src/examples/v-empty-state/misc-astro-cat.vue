@@ -1,12 +1,12 @@
 <template>
   <v-card
-    border
     class="mx-auto"
     max-width="360"
     variant="flat"
+    border
   >
     <v-layout>
-      <v-system-bar color="surface-light" class="ga-1">
+      <v-system-bar class="ga-1" color="surface-light">
         <v-icon icon="mdi-square" size="x-small"></v-icon>
 
         <v-icon icon="mdi-circle" size="x-small"></v-icon>
@@ -31,7 +31,7 @@
       <v-main>
         <div class="pt-4 pb-16">
           <v-window v-model="tabs">
-            <v-window-item value="0" class="pa-2">
+            <v-window-item class="pa-2" value="0">
               <v-card>
                 <v-empty-state
                   class="pa-0"
@@ -57,7 +57,7 @@
                   <template v-slot:actions>
                     <v-spacer></v-spacer>
 
-                    <v-btn text="Shop Movies" color="#4c00d5"></v-btn>
+                    <v-btn color="#4c00d5" text="Shop Movies"></v-btn>
 
                     <v-spacer></v-spacer>
                   </template>
@@ -65,7 +65,7 @@
               </v-card>
             </v-window-item>
 
-            <v-window-item value="0" class="pa-2">
+            <v-window-item class="pa-2" value="0">
               <v-card>
                 <v-empty-state
                   class="pa-0"
@@ -91,7 +91,7 @@
                   <template v-slot:actions>
                     <v-spacer></v-spacer>
 
-                    <v-btn text="Shop TV Shows" color="#4c00d5"></v-btn>
+                    <v-btn color="#4c00d5" text="Shop TV Shows"></v-btn>
 
                     <v-spacer></v-spacer>
                   </template>

@@ -2,9 +2,9 @@
   <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :script="script"
     :name="name"
     :options="options"
+    :script="script"
   >
     <div>
       <v-data-iterator

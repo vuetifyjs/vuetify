@@ -26,10 +26,10 @@
                 v-if="framework.src"
                 :src="framework.src"
                 class="me-2"
-                contain
                 height="24"
                 max-width="24"
                 width="24"
+                contain
               />
 
               <div v-text="framework.name" />

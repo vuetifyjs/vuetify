@@ -2,13 +2,13 @@
   <v-row justify="space-around">
     <v-date-picker
       v-model="picker"
-      type="month"
       locale="th"
+      type="month"
     ></v-date-picker>
     <v-date-picker
       v-model="picker"
-      type="month"
       locale="sv-se"
+      type="month"
     ></v-date-picker>
   </v-row>
 </template>

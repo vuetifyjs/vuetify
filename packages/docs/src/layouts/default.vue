@@ -19,8 +19,8 @@
         <v-container
           :style="style"
           class="pa-4 pa-sm-6 pa-md-8"
-          fluid
           tag="section"
+          fluid
         >
           <router-view v-slot="{ Component }">
             <v-fade-transition hide-on-leave>

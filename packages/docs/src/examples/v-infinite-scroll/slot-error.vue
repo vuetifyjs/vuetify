@@ -14,8 +14,8 @@
           Something went wrong...
           <v-btn
             color="white"
-            variant="outlined"
             size="small"
+            variant="outlined"
             v-bind="props"
           >
             Retry
