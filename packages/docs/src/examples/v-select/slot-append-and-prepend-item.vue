@@ -14,7 +14,7 @@
           <v-checkbox-btn
             :color="likesSomeFruit ? 'indigo-darken-4' : undefined"
             :indeterminate="likesSomeFruit && !likesAllFruit"
-            :model-value="likesSomeFruit"
+            :model-value="likesAllFruit"
           ></v-checkbox-btn>
         </template>
       </v-list-item>
