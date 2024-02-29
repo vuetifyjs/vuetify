@@ -2,8 +2,8 @@
   <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div class="text-center">
       <v-badge v-bind="props">
@@ -20,8 +20,8 @@
       <v-slider
         v-model="content"
         label="Value"
-        min="0"
         max="100"
+        min="0"
         step="1"
       ></v-slider>
     </template>

@@ -8,7 +8,7 @@
         <HomeLogo size="300" />
       </v-col>
 
-      <v-col cols="auto" class="text-center text-lg-start">
+      <v-col class="text-center text-lg-start" cols="auto">
         <h1 class="text-h2 font-weight-medium mb-3 ms-n1">
           Vue Component Framework
         </h1>
@@ -24,11 +24,11 @@
         <v-hover>
           <template #default="{ isHovering, props }">
             <v-sheet
-              border
               class="px-2 py-2 d-inline-flex align-center text-mono text-body-2 text-no-wrap"
               color="surface"
-              rounded
               width="215"
+              border
+              rounded
               v-bind="props"
             >
               <v-icon

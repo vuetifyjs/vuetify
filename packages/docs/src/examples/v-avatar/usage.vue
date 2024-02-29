@@ -19,10 +19,10 @@
 
       <v-slider
         v-model="size"
-        min="40"
-        max="80"
-        step="1"
         label="Size"
+        max="80"
+        min="40"
+        step="1"
       ></v-slider>
     </template>
   </ExamplesUsageExample>

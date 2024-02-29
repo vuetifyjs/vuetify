@@ -3,9 +3,9 @@
     <v-row>
       <v-col
         cols="12"
-        sm="12"
         md="6"
         offset-md="3"
+        sm="12"
       >
         <v-card>
           <v-toolbar extended>
@@ -15,10 +15,10 @@
                 <v-btn
                   v-show="!hidden"
                   color="pink"
-                  fab
+                  location="bottom left"
                   size="small"
                   absolute
-                  location="bottom left"
+                  fab
                 >
                   <v-icon>mdi-plus</v-icon>
                 </v-btn>
@@ -26,8 +26,8 @@
             </template>
           </v-toolbar>
           <v-card-text
-            style="height: 300px;"
             class="bg-grey-lighten-5 text-center"
+            style="height: 300px;"
           >
             <v-btn
               color="primary"
@@ -41,8 +41,8 @@
               <v-btn
                 v-show="!hidden"
                 color="pink"
-                absolute
                 location="top right"
+                absolute
                 fab
               >
                 <v-icon>mdi-plus</v-icon>

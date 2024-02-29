@@ -2,17 +2,17 @@
   <v-row>
     <v-col
       cols="12"
-      sm="6"
       md="4"
+      sm="6"
     >
       <v-menu
         ref="menu"
         v-model="menuActive"
         v-model:return-value="date"
         :close-on-content-click="false"
+        min-width="auto"
         transition="scale-transition"
         offset-y
-        min-width="auto"
       >
         <template v-slot:activator="{ on, attrs }">
           <v-text-field
@@ -31,15 +31,15 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            variant="text"
             color="primary"
+            variant="text"
             @click="menu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            variant="text"
             color="primary"
+            variant="text"
             @click="menu.save(date)"
           >
             OK
@@ -50,15 +50,15 @@
     <v-spacer></v-spacer>
     <v-col
       cols="12"
-      sm="6"
       md="4"
+      sm="6"
     >
       <v-dialog
         ref="dialog"
         v-model="modal"
         v-model:return-value="date"
-        persistent
         width="290px"
+        persistent
       >
         <template v-slot:activator="{ on, attrs }">
           <v-text-field
@@ -76,15 +76,15 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            variant="text"
             color="primary"
+            variant="text"
             @click="modal = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            variant="text"
             color="primary"
+            variant="text"
             @click="dialog.save(date)"
           >
             OK
@@ -94,16 +94,16 @@
     </v-col>
     <v-col
       cols="12"
-      sm="6"
       md="4"
+      sm="6"
     >
       <v-menu
         v-model="menu2"
         :close-on-content-click="false"
         :nudge-right="40"
+        min-width="auto"
         transition="scale-transition"
         offset-y
-        min-width="auto"
       >
         <template v-slot:activator="{ on, attrs }">
           <v-text-field

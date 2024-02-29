@@ -6,27 +6,27 @@
     <v-sheet class="pa-4 bg-primary-lighten-2">
       <v-text-field
         v-model="search"
+        clear-icon="mdi-close-circle-outline"
         label="Search Company Directory"
+        clearable
         dark
         flat
-        solo-inverted
         hide-details
-        clearable
-        clear-icon="mdi-close-circle-outline"
+        solo-inverted
       ></v-text-field>
       <v-checkbox
         v-model="caseSensitive"
+        label="Case sensitive search"
         dark
         hide-details
-        label="Case sensitive search"
       ></v-checkbox>
     </v-sheet>
     <v-card-text>
       <v-treeview
         v-model:open="open"
+        :filter="filter"
         :items="items"
         :search="search"
-        :filter="filter"
       >
         <template v-slot:prepend="{ item }">
           <v-icon

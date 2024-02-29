@@ -7,9 +7,9 @@
       :key="logo"
       :alt="`Vuetify ${t('logo')}`"
       :src="`https://cdn.vuetifyjs.com/docs/images/logos/${logo}`"
+      :transition="false"
       :width="lgAndUp ? 148 : 34"
       class="shrink"
-      :transition="false"
     />
   </router-link>
 </template>

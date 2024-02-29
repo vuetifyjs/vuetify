@@ -16,9 +16,9 @@
 
       <br>
 
-      <v-slider v-model="options.length" :min="1" :max="8" label="Length"></v-slider>
-      <v-slider v-model="options.size" :min="16" :max="128" label="Size"></v-slider>
-      <v-slider v-model="options['model-value']" :min="0" :max="options.length" :step="options['half-increments'] ? 0.5 : 1" label="Value"></v-slider>
+      <v-slider v-model="options.length" :max="8" :min="1" label="Length"></v-slider>
+      <v-slider v-model="options.size" :max="128" :min="16" label="Size"></v-slider>
+      <v-slider v-model="options['model-value']" :max="options.length" :min="0" :step="options['half-increments'] ? 0.5 : 1" label="Value"></v-slider>
 
       <br>
 

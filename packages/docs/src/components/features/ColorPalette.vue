@@ -13,8 +13,8 @@
           v-for="(color, key) in computedColors"
           :key="key"
           cols="12"
-          md="6"
           lg="4"
+          md="6"
         >
           <v-card
             :color="key"
@@ -39,15 +39,15 @@
             <v-card-text>
               <v-row>
                 <v-col
-                  cols="7"
                   class="text-caption"
+                  cols="7"
                 >
                   {{ convertToClass(key, key2) }}
                 </v-col>
 
                 <v-col
-                  cols="5"
                   class="text-right"
+                  cols="5"
                 >
                   <span
                     v-if="subColor !== 'transparent'"

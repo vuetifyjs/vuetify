@@ -7,7 +7,7 @@
     >
       <template #item.provider="item">
         <div class="d-flex align-center">
-          <v-icon :icon="`mdi-${item.value}`" color="medium-emphasis" class="me-1" />
+          <v-icon :icon="`mdi-${item.value}`" class="me-1" color="medium-emphasis" />
 
           <span class="text-capitalize">
             {{ item.value }}

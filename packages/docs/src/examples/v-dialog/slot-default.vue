@@ -9,10 +9,10 @@
       width="auto"
     >
       <v-card
-        prepend-icon="mdi-update"
         max-width="400"
-        title="Update in progress"
+        prepend-icon="mdi-update"
         text="Your application will relaunch automatically after the update is complete."
+        title="Update in progress"
       >
         <template v-slot:actions>
           <v-btn

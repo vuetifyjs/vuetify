@@ -14,17 +14,17 @@
     <v-col
       v-for="job in items"
       :key="job.id"
-      cols="12"
       :md="view ? 6 : undefined"
+      cols="12"
     >
       <v-card
         :href="job.url"
-        border
         class="transition-swing"
         max-height="225"
         rel="sponsored"
         target="_blank"
         variant="flat"
+        border
         @click="onClick(job)"
       >
         <v-list-item
@@ -33,8 +33,8 @@
         >
           <template #prepend>
             <v-avatar
-              :color="!job.avatar ? 'primary' : undefined"
               :class="!job.avatar && 'pt-1'"
+              :color="!job.avatar ? 'primary' : undefined"
               :image="job.avatar"
               icon="$vuetify"
             />
@@ -54,8 +54,8 @@
 
           <template #append>
             <v-btn
-              color="success"
               class="ms-6"
+              color="success"
               size="small"
               style="pointer-events: none;"
               variant="flat"
@@ -64,8 +64,8 @@
 
               <v-icon
                 icon="mdi-open-in-new"
-                end
                 size="small"
+                end
               />
             </v-btn>
           </template>

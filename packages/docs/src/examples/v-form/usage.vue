@@ -8,11 +8,11 @@
         >
           <v-text-field
             v-model="firstname"
-            :rules="nameRules"
             :counter="10"
+            :rules="nameRules"
             label="First name"
-            required
             hide-details
+            required
           ></v-text-field>
         </v-col>
 
@@ -22,8 +22,8 @@
         >
           <v-text-field
             v-model="lastname"
-            :rules="nameRules"
             :counter="10"
+            :rules="nameRules"
             label="Last name"
             hide-details
             required

@@ -14,7 +14,7 @@
       <v-checkbox v-model="focus" label="Focus all"></v-checkbox>
       <v-checkbox v-model="disabled" label="Disabled"></v-checkbox>
       <v-checkbox v-model="loading" label="Loading"></v-checkbox>
-      <v-slider v-model="length" min="4" max="8" step="1" label="Length"></v-slider>
+      <v-slider v-model="length" label="Length" max="8" min="4" step="1"></v-slider>
     </template>
   </ExamplesUsageExample>
 </template>

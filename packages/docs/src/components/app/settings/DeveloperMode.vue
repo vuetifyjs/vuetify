@@ -12,9 +12,9 @@
       class="ps-1"
       color="error"
       density="comfortable"
-      inset
-      true-icon="mdi-check"
       false-icon="$close"
+      true-icon="mdi-check"
+      inset
     >
       <template #label>
         <div v-text="t('developer-mode')" />

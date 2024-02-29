@@ -1,8 +1,8 @@
 <template>
   <v-tooltip
     v-if="one.isSubscriber"
-    text="Vuetify One Subscriber"
     location="bottom"
+    text="Vuetify One Subscriber"
   >
     <template #activator="{ props: activatorProps }">
       <v-icon

@@ -12,8 +12,8 @@
           <v-badge
             :model-value="unread.length > 0"
             color="#ED561B"
-            dot
             location="top end"
+            dot
           >
             <v-icon
               :icon="icon"
@@ -53,7 +53,7 @@
       >
         <p>{{ t('done') }}</p>
 
-        <v-icon icon="$vuetify" size="96" color="#D7D7D7" />
+        <v-icon color="#D7D7D7" icon="$vuetify" size="96" />
       </div>
 
       <template v-else>

@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-toolbar
+      image="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
       dark
       prominent
-      image="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 

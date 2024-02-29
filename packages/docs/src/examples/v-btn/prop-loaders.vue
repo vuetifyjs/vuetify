@@ -2,8 +2,8 @@
   <v-card
     class="mx-auto"
     max-width="450"
-    title="Strengthen your passwords"
     text="Update your weak or re-used passwords with Password Checkup. It's free and only takes a few minutes. Click the Take Checkup button to get started."
+    title="Strengthen your passwords"
   >
 
     <template v-slot:actions>

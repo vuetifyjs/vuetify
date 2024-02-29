@@ -16,8 +16,8 @@
     </v-card-text>
     <v-card-actions>
       <v-btn
-        variant="text"
         color="deep-purple-accent-4"
+        variant="text"
       >
         Learn More
       </v-btn>

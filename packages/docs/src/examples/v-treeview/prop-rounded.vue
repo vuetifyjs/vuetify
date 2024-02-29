@@ -1,9 +1,9 @@
 <template>
   <v-treeview
-    rounded
-    hoverable
-    activatable
     :items="items"
+    activatable
+    hoverable
+    rounded
   ></v-treeview>
 </template>
 

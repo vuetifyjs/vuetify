@@ -9,15 +9,15 @@
   >
     <v-card
       id="request-service"
-      border
       class="pa-2"
       title="Request Support"
       variant="flat"
+      border
     >
       <template #append>
         <v-img
-          width="96"
           :src="logo"
+          width="96"
         />
       </template>
 
@@ -33,9 +33,9 @@
             <v-col cols="12" md="6">
               <AppTextField
                 v-model="name"
+                :placeholder="t('name')"
                 :rules="[rules.required]"
                 name="name"
-                :placeholder="t('name')"
                 prepend-inner-icon="mdi-account-circle-outline"
               />
             </v-col>
@@ -90,12 +90,12 @@
 
           <v-switch
             v-model="sponsor"
-            density="compact"
             color="primary"
-            inset
-            hide-details
+            density="compact"
             label="Yes"
             name="sponsor"
+            hide-details
+            inset
           />
 
           <small class="text-medium-emphasis">
@@ -111,10 +111,10 @@
             :color="success ? 'success' : valid ? 'primary' : undefined"
             :disabled="loading || !valid"
             :loading="loading"
-            block
             size="large"
             type="submit"
             variant="flat"
+            block
           >
             <span v-if="!success && !loading">Submit</span>
 
@@ -126,8 +126,8 @@
           <small>
             Issues with this form?
             <a
-              href="mailto:support@vuetifyjs.com?subject=Enterprise Support"
               class="text-primary"
+              href="mailto:support@vuetifyjs.com?subject=Enterprise Support"
               target="_blank"
             >
               Contact Us

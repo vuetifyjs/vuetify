@@ -12,8 +12,8 @@
 
     <v-main>
       <v-container
-        fluid
         tag="section"
+        fluid
       >
         <v-row justify="center" justify-md="start">
           <v-col cols="auto">
@@ -23,8 +23,8 @@
           <v-col
             class="me-auto"
             cols="12"
-            sm="10"
             md="7"
+            sm="10"
           >
             <UserUserTabs />
 

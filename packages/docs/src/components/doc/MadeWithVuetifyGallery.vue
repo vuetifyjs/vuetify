@@ -20,8 +20,8 @@
     <v-data-iterator
       v-else
       :items="items"
-      :page="page"
       :items-per-page="itemsPerPage"
+      :page="page"
     >
       <template #default="{ items: _items }">
         <v-row style="min-height: 750px;">
@@ -33,19 +33,19 @@
           >
             <a
               :href="project.raw.url"
-              target="_blank"
-              rel="noopener noreferrer"
               class="d-block text-decoration-none"
+              rel="noopener noreferrer"
               style="min-height: 205px;"
+              target="_blank"
             >
               <AppFigure
-                class="border"
                 :name="project.raw.title"
                 :src="project.raw.image"
                 :title="project.raw.title"
-                eager
+                class="border"
                 height="180"
                 min-height="180"
+                eager
               />
             </a>
           </v-col>

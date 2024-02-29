@@ -9,7 +9,7 @@
       />
     </div> -->
     <AppHeadline v-if="showHeadline" :path="`api-headers.${section}`" />
-    <TableComponent :name="name" :items="items" />
+    <TableComponent :items="items" :name="name" />
   </div>
 </template>
 

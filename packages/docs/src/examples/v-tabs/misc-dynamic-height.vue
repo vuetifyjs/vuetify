@@ -9,10 +9,10 @@
       <v-text-field
         append-icon="mdi-microphone"
         class="mx-4"
-        flat
-        hide-details
         label="Search"
         prepend-inner-icon="mdi-magnify"
+        flat
+        hide-details
         solo-inverted
       ></v-text-field>
 

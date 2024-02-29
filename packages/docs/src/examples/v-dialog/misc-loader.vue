@@ -10,8 +10,8 @@
 
     <v-dialog
       v-model="dialog"
-      persistent
       max-width="320"
+      persistent
     >
       <v-list
         class="py-2"

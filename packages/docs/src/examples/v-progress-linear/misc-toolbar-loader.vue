@@ -13,9 +13,9 @@
       <v-progress-linear
         :active="loading"
         :indeterminate="loading"
+        color="deep-purple-accent-4"
         absolute
         bottom
-        color="deep-purple-accent-4"
       ></v-progress-linear>
 
       <v-spacer></v-spacer>
@@ -31,8 +31,8 @@
 
     <v-container style="height: 282px;">
       <v-row
-        class="fill-height"
         align="center"
+        class="fill-height"
         justify="center"
       >
         <v-scale-transition>

@@ -4,7 +4,7 @@
     <v-radio-group v-model="radios">
       <v-radio label="Option One" value="one"></v-radio>
       <v-radio label="Option 2 (string)" value="2"></v-radio>
-      <v-radio label="Option 3 (integer)" :value="3"></v-radio>
+      <v-radio :value="3" label="Option 3 (integer)"></v-radio>
     </v-radio-group>
   </v-container>
 </template>

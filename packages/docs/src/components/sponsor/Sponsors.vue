@@ -21,12 +21,12 @@
 
   <div v-else class="mb-4">
     <AppBtn
-      text="become-a-sponsor"
-      href="https://github.com/sponsors/johnleider"
-      border
-      target="_blank"
-      rel="noopener"
       append-icon="mdi-open-in-new"
+      href="https://github.com/sponsors/johnleider"
+      rel="noopener"
+      target="_blank"
+      text="become-a-sponsor"
+      border
     />
   </div>
 </template>

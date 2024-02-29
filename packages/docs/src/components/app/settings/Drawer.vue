@@ -3,10 +3,10 @@
     id="settings-drawer"
     v-model="app.settings"
     :location="isRtl ? 'left' : 'right'"
+    width="350"
     disable-route-watcher
     temporary
     touchless
-    width="350"
   >
     <v-toolbar :title="t('settings')" flat>
       <template #append>

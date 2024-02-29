@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-progress-circular :rotate="360" :size="100" :width="15" :model-value="value" color="teal">
+    <v-progress-circular :model-value="value" :rotate="360" :size="100" :width="15" color="teal">
       <template v-slot:default> {{ value }} % </template>
     </v-progress-circular>
   </div>

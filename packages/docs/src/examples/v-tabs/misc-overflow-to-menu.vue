@@ -35,10 +35,10 @@
           >
             <template v-slot:activator="{ props }">
               <v-btn
-                variant="plain"
-                rounded="0"
                 class="align-self-center me-4"
                 height="100%"
+                rounded="0"
+                variant="plain"
                 v-bind="props"
               >
                 more
