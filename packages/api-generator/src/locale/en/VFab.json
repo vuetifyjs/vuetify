@@ -1,0 +1,9 @@
+{
+  "props": {
+    "app": "If true, attaches to the closest layout and positions according to the value of **location**.",
+    "appear": "Used to control the animation of the FAB.",
+    "extended": "An alternate style for the FAB that expects text.",
+    "location": "The location of the fab relative to the layout. Only works when using **app**.",
+    "offset": "Translates the Fab up or down, depending on if location is set to **top** or **bottom**."
+  }
+}
