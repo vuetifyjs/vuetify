@@ -19,6 +19,16 @@ The `v-empty-state` component is used to indicate that a list is empty or that n
 
 <PageFeatures />
 
+::: warning
+
+This feature requires [v3.5.6](/getting-started/release-notes/?version=v3.5.6)
+
+:::
+
+## Installation
+
+Labs components require a manual import and installation of the component.
+
 ```js { resource="src/plugins/vuetify.js" }
 import { VEmptyState } from 'vuetify/labs/VEmptyState'
 
