@@ -27,7 +27,11 @@
             width="80"
             @click="hidden = !hidden"
           >
-            {{ hidden ? 'Show' : 'Hide' }}
+            <v-scroll-y-transition mode="out-in">
+              <div :key="hidden">
+                {{ hidden ? 'Show' : 'Hide' }}
+              </div>
+            </v-scroll-y-transition>
           </v-btn>
         </v-sheet>
 
