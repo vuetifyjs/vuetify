@@ -6,7 +6,7 @@
       }
     }"
   >
-    <settings-switch
+    <SettingsSwitch
       v-model="user.disableAds"
       :disabled="!auth.isSubscriber"
       :label="t('dashboard.perks.disable-ads')"

@@ -71,8 +71,9 @@
   "components/date-pickers-month": ["VDatePicker"],
   "components/date-pickers": ["VDatePicker"],
   "components/defaults-providers": ["VDefaultsProvider"],
-  "components/dialogs": ["VDialog"],
+  "components/dialogs": ["VDialog", "VOverlay"],
   "components/dividers": ["VDivider"],
+  "components/empty-states": ["VEmptyState"],
   "components/expansion-panels": [
     "VExpansionPanel",
     "VExpansionPanels",

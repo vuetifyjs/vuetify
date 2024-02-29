@@ -27,7 +27,7 @@
       }
     }"
   >
-    <settings-switch
+    <SettingsSwitch
       v-model="user.mixedTheme"
       :label="t('dark-code')"
       :messages="t('dark-code-message')"

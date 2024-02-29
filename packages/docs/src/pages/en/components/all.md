@@ -392,6 +392,12 @@ These components are used to provide feedback to the user within content, over c
 
 </ComponentsListItem>
 
+<ComponentsListItem name="Empty state component" src="empty-states" labs>
+
+  The empty state component is used to indicate that a page or area on a page has no content.
+
+</ComponentsListItem>
+
 <ComponentsListItem name="Skeleton loader component" src="skeleton-loaders">
 
   Displays a content, enhancing perceived performance during data-fetching & rendering

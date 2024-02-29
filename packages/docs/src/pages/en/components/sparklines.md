@@ -16,6 +16,20 @@ The sparkline component can be used to create simple graphs, like GitHub's contr
 
 <PromotedEntry />
 
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VSparkline } from 'vuetify/labs/VSparkline'
+
+export default createVuetify({
+  components: {
+    VSparkline,
+  },
+})
+```
+
 ## Usage
 
 A sparkline is a tiny chart that provides a visual representation of data. The sparkline component comes in 2 variations, **trend** (default) and **bar**. Each supports a multitude of options for customizing the look and feel of the sparkline.

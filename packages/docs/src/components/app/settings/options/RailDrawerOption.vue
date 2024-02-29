@@ -6,7 +6,7 @@
       }
     }"
   >
-    <settings-switch
+    <SettingsSwitch
       v-model="user.railDrawer"
       :disabled="!auth.isSubscriber"
       :label="t('dashboard.perks.rail-drawer')"

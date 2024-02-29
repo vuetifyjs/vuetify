@@ -24,7 +24,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, mergeProps, ref, shallowRef, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
   ensureValidVNode,
   genericComponent,
@@ -252,21 +252,29 @@ export const VSelect = genericComponent<new <
         model.value = [item]
       }
     }
-    function select (item: ListItem) {
-      const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
-      const add = index === -1
+
+    /** @param set - null means toggle */
+    function select (item: ListItem, set: boolean | null = true) {
+      if (item.props.disabled) return
 
       if (props.multiple) {
-        if (add) {
-          model.value = [...model.value, item]
-        } else {
-          const value = [...model.value]
+        const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
+        const add = set == null ? !~index : set
+
+        if (~index) {
+          const value = add ? [...model.value, item] : [...model.value]
           value.splice(index, 1)
           model.value = value
+        } else if (add) {
+          model.value = [...model.value, item]
         }
       } else {
+        const add = set !== false
         model.value = add ? [item] : []
-        menu.value = false
+
+        nextTick(() => {
+          menu.value = false
+        })
       }
     }
     function onBlur (e: FocusEvent) {
@@ -305,16 +313,10 @@ export const VSelect = genericComponent<new <
       }
     })
 
-    watch(displayItems, (val, oldVal) => {
-      if (!isFocused.value) return
+    watch(() => props.items, val => {
+      if (!isFocused.value || !val.length || menu.value) return
 
-      if (!val.length && props.hideNoData) {
-        menu.value = false
-      }
-
-      if (!oldVal.length && val.length) {
-        menu.value = true
-      }
+      menu.value = true
     })
 
     useRender(() => {
@@ -408,7 +410,7 @@ export const VSelect = genericComponent<new <
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: index,
-                            onClick: () => select(item),
+                            onClick: () => select(item, null),
                           })
 
                           return slots.item?.({
@@ -454,7 +456,7 @@ export const VSelect = genericComponent<new <
                     e.stopPropagation()
                     e.preventDefault()
 
-                    select(item)
+                    select(item, false)
                   }
 
                   const slotProps = {

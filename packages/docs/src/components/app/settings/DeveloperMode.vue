@@ -13,7 +13,6 @@
       color="error"
       density="comfortable"
       inset
-
       true-icon="mdi-check"
       false-icon="$close"
     >
