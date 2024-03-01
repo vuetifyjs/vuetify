@@ -551,35 +551,31 @@ describe('VAutocomplete', () => {
     const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
     const selectedItem = ref('Item 1')
 
-    cy.mount(() => (
-      <VAutocomplete
-        items={ items }
-        chips
-        v-model={ selectedItem.value }
-      />
-    ))
-
-    cy.get('.v-autocomplete').click()
-    cy.get('.v-autocomplete input').should('have.value', '')
-
-    // Blur input with a custom search input value
-    cy.get('.v-autocomplete').click()
-    cy.get('.v-autocomplete input')
+    cy
+      .mount(() => (
+        <VAutocomplete
+          items={ items }
+          chips
+          v-model={ selectedItem.value }
+        />
+      ))
+      .get('.v-autocomplete').click()
+      .get('.v-autocomplete input').should('have.value', '')
+      // Blur input with a custom search input value
       .type('test')
       .blur()
       .should('have.value', '')
-    cy.should(() => {
-      expect(selectedItem.value).to.equal('Item 1')
-    })
-
-    // Search existing item and click to select
-    cy.get('.v-autocomplete').click()
-    cy.get('.v-autocomplete input').type('Item 1')
-    cy.get('.v-list-item').eq(0).click({ waitForAnimations: false })
-    cy.get('.v-autocomplete input').should('have.value', '')
-    cy.should(() => {
-      expect(selectedItem.value).to.equal('Item 1')
-    })
+      .should(() => {
+        expect(selectedItem.value).to.equal('Item 1')
+      })
+      // Search existing item and click to select
+      .get('.v-autocomplete').click()
+      .get('.v-autocomplete input').should('have.value', '')
+      .type('Item 1')
+      .get('.v-list-item').eq(0).click({ waitForAnimations: false })
+      .should(() => {
+        expect(selectedItem.value).to.equal('Item 1')
+      })
   })
 
   describe('Showcase', () => {

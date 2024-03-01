@@ -671,45 +671,40 @@ describe('VCombobox', () => {
     const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
     const selectedItem = ref('Item 1')
 
-    cy.mount(() => (
-      <VCombobox
-        items={ items }
-        chips
-        v-model={ selectedItem.value }
-      />
-    ))
-
-    cy.get('.v-combobox').click()
-    cy.get('.v-combobox input').should('have.value', '')
-
-    // Blur input with a custom search input value
-    cy.get('.v-combobox').click()
-    cy.get('.v-combobox input')
+    cy
+      .mount(() => (
+        <VCombobox
+          items={ items }
+          chips
+          v-model={ selectedItem.value }
+        />
+      ))
+      .get('.v-combobox').click()
+      .get('.v-combobox input').should('have.value', '')
+      // Blur input with a custom search input value
       .type('test')
       .blur()
       .should('have.value', '')
-    cy.should(() => {
-      expect(selectedItem.value).to.equal('test')
-    })
-
-    // Press enter key with a custom search input value
-    cy.get('.v-combobox').click()
-    cy.get('.v-combobox input')
+      .should(() => {
+        expect(selectedItem.value).to.equal('test')
+      })
+      // Press enter key with a custom search input value
+      .get('.v-combobox').click()
+      .get('.v-combobox input').should('have.value', '')
       .type('test 2')
       .trigger('keydown', { key: keyValues.enter, waitForAnimations: false })
       .should('have.value', '')
-    cy.should(() => {
-      expect(selectedItem.value).to.equal('test 2')
-    })
-
-    // Search existing item and click to select
-    cy.get('.v-combobox').click()
-    cy.get('.v-combobox input').type('Item 1')
-    cy.get('.v-list-item').eq(0).click({ waitForAnimations: false })
-    cy.get('.v-combobox input').should('have.value', '')
-    cy.should(() => {
-      expect(selectedItem.value).to.equal('Item 1')
-    })
+      .should(() => {
+        expect(selectedItem.value).to.equal('test 2')
+      })
+      // Search existing item and click to select
+      .get('.v-combobox').click()
+      .get('.v-combobox input').type('Item 1')
+      .get('.v-list-item').eq(0).click({ waitForAnimations: false })
+      .get('.v-combobox input').should('have.value', '')
+      .should(() => {
+        expect(selectedItem.value).to.equal('Item 1')
+      })
   })
 
   describe('Showcase', () => {
