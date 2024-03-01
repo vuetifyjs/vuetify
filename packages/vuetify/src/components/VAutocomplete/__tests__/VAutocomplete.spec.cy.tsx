@@ -546,81 +546,39 @@ describe('VAutocomplete', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/17573
-  describe.only('search (input value)', () => {
-    describe('single', () => {
-      describe('selection slot or chips', () => {
-        // Empty input next to selection slot/chip when focused
-        it('should be empty string when focused', () => {
-          const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
-          const selectedItems = 'Item 1'
+  // Input displayed next to chip/selection slot must be empty
+  it('should always have empty input value when it is unfocused and when using selection slot or chips', () => {
+    const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
+    const selectedItem = ref('Item 1')
 
-          cy.mount(() => (
-            <VAutocomplete
-              items={ items }
-              chips
-              modelValue={ selectedItems }
-            />
-          ))
+    cy.mount(() => (
+      <VAutocomplete
+        items={ items }
+        chips
+        v-model={ selectedItem.value }
+      />
+    ))
 
-          cy.get('.v-autocomplete').click()
-          cy.get('.v-autocomplete input').should('have.value', '')
-        })
-      })
+    cy.get('.v-autocomplete').click()
+    cy.get('.v-autocomplete input').should('have.value', '')
 
-      describe('neither selection slot nor chips', () => {
-        it('should be selected item when focused', () => {
-          const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
-          const selectedItems = 'Item 1'
-
-          cy.mount(() => (
-            <VAutocomplete
-              items={ items }
-              modelValue={ selectedItems }
-            />
-          ))
-
-          cy.get('.v-autocomplete').click()
-          cy.get('.v-autocomplete input').should('have.value', 'Item 1')
-        })
-      })
+    // Blur input with a custom search input value
+    cy.get('.v-autocomplete').click()
+    cy.get('.v-autocomplete input')
+      .type('test')
+      .blur()
+      .should('have.value', '')
+    cy.should(() => {
+      expect(selectedItem.value).to.equal('Item 1')
     })
-    describe('multiple', () => {
-      describe('selection slot or chips', () => {
-        it('should be empty string when focused', () => {
-          const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
-          const selectedItems = ['Item 1', 'Item 2']
 
-          cy.mount(() => (
-            <VAutocomplete
-              items={ items }
-              chips
-              modelValue={ selectedItems }
-              multiple
-            />
-          ))
-
-          cy.get('.v-autocomplete').click()
-          cy.get('.v-autocomplete input').should('have.value', '')
-        })
-      })
-
-      describe('neither selection slot nor chips', () => {
-        it('should be empty string when focused', () => {
-          const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
-          const selectedItems = ['Item 1', 'Item 2']
-
-          cy.mount(() => (
-            <VAutocomplete
-              items={ items }
-              modelValue={ selectedItems }
-              multiple
-            />
-          ))
-
-          cy.get('.v-autocomplete').click()
-          cy.get('.v-autocomplete input').should('have.value', '')
-        })
-      })
+    // Search existing item and click to select
+    cy.get('.v-autocomplete').click()
+    cy.get('.v-autocomplete input').type('Item 1')
+    cy.get('.v-list-item').eq(0).click({ waitForAnimations: false })
+    cy.get('.v-autocomplete input').should('have.value', '')
+    cy.should(() => {
+      expect(selectedItem.value).to.equal('Item 1')
     })
   })
 
