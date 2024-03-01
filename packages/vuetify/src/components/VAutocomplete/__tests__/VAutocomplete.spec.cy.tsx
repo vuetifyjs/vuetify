@@ -546,7 +546,7 @@ describe('VAutocomplete', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/17573
-  // Input displayed next to chip/selection slot must be empty
+  // When using selection slot or chips, input displayed next to chip/selection slot should be always empty
   it('should always have empty input value when it is unfocused and when using selection slot or chips', () => {
     const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
     const selectedItem = ref('Item 1')
