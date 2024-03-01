@@ -167,7 +167,6 @@ export const VCombobox = genericComponent<new <
     const form = useForm()
 
     const hasChips = computed(() => !!(props.chips || slots.chip))
-
     const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
 
     const _search = shallowRef(!props.multiple && !hasSelectionSlot.value ? model.value[0]?.title ?? '' : '')
