@@ -44,6 +44,8 @@ export const makeLineProps = propsFactory({
     type: Array as PropType<SparklineItem[]>,
     default: () => ([]),
   },
+  min: [String, Number],
+  max: [String, Number],
   padding: {
     type: [String, Number],
     default: 8,

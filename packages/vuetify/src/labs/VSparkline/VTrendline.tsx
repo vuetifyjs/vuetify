@@ -55,8 +55,8 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     ): Point[] {
       const { minX, maxX, minY, maxY } = boundary
       const totalValues = values.length
-      const maxValue = Math.max(...values)
-      const minValue = Math.min(...values)
+      const maxValue = props.max != null ? Number(props.max) : Math.max(...values)
+      const minValue = props.min != null ? Number(props.min) : Math.min(...values)
 
       const gridX = (maxX - minX) / (totalValues - 1)
       const gridY = (maxY - minY) / ((maxValue - minValue) || 1)
