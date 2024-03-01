@@ -545,6 +545,39 @@ describe('VAutocomplete', () => {
       .should('exist')
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/17573
+  // When using selection slot or chips, input displayed next to chip/selection slot should be always empty
+  it('should always have empty input value when it is unfocused and when using selection slot or chips', () => {
+    const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
+    const selectedItem = ref('Item 1')
+
+    cy
+      .mount(() => (
+        <VAutocomplete
+          items={ items }
+          chips
+          v-model={ selectedItem.value }
+        />
+      ))
+      .get('.v-autocomplete').click()
+      .get('.v-autocomplete input').should('have.value', '')
+      // Blur input with a custom search input value
+      .type('test')
+      .blur()
+      .should('have.value', '')
+      .should(() => {
+        expect(selectedItem.value).to.equal('Item 1')
+      })
+      // Search existing item and click to select
+      .get('.v-autocomplete').click()
+      .get('.v-autocomplete input').should('have.value', '')
+      .type('Item 1')
+      .get('.v-list-item').eq(0).click({ waitForAnimations: false })
+      .should(() => {
+        expect(selectedItem.value).to.equal('Item 1')
+      })
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })
