@@ -212,6 +212,22 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
             fill={ props.fill ? `url(#${id.value})` : 'none' }
             stroke={ props.fill ? 'none' : `url(#${id.value})` }
           />
+
+          { props.fill && (
+            <path
+              d={ genPath(
+                genPoints(
+                  props.modelValue.map(item => (typeof item === 'number' ? item : item.value)),
+                  boundary.value
+                ),
+                props.smooth ? 8 : Number(props.smooth),
+                false,
+                parseInt(props.height, 10)
+              )}
+              fill="none"
+              stroke={ props.color ?? props.gradient?.[0] }
+            />
+          )}
         </svg>
       )
     })
