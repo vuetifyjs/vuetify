@@ -24,8 +24,8 @@
 
     <v-btn-toggle
       v-model="toggleMultiple"
-      variant="plain"
       color="primary"
+      variant="plain"
       multiple
     >
       <v-btn
@@ -53,8 +53,8 @@
 
     <v-btn-toggle
       v-model="toggleExclusive"
-      variant="plain"
       color="primary"
+      variant="plain"
       dense
       group
     >

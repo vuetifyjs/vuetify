@@ -1,10 +1,10 @@
 <template>
   <v-list-item
     :title="t(auth.user ? 'login.connect-github' : 'login.with-github')"
-    nav
     base-color="#2a2a2a"
     prepend-icon="mdi-github"
     variant="flat"
+    nav
     @click="auth.login('github')"
   >
     <template #prepend>

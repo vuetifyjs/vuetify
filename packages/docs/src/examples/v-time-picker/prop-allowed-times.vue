@@ -6,9 +6,9 @@
       :allowed-minutes="allowedMinutes"
       class="mt-4"
       format="24hr"
-      scrollable
-      min="9:30"
       max="22:15"
+      min="9:30"
+      scrollable
     ></v-time-picker>
     <v-time-picker
       v-model="timeStep"

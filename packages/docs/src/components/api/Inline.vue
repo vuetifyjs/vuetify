@@ -17,11 +17,11 @@
           :readonly="components.length === 1"
           class="mb-2"
           color="primary"
-          hide-details
           label="Component API"
           prepend-inner-icon="mdi-view-dashboard"
           style="max-width: 250px;"
           variant="outlined"
+          hide-details
         />
       </div>
 

@@ -1,7 +1,7 @@
 <template>
   <v-row
-    justify="space-around"
     align="center"
+    justify="space-around"
   >
     <v-time-picker
       v-model="picker"

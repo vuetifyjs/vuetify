@@ -5,14 +5,14 @@
         <v-col cols="auto">
           <v-img
             height="200"
-            width="200"
             src="https://cdn.vuetifyjs.com/images/cards/store.jpg"
+            width="200"
           ></v-img>
         </v-col>
 
         <v-col
-          cols="auto"
           class="text-center ps-0"
+          cols="auto"
         >
           <v-row
             class="flex-column ma-0 fill-height"

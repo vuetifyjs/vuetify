@@ -44,8 +44,8 @@
       <v-slider
         v-model="elevation"
         label="Elevation"
-        min="0"
         max="24"
+        min="0"
       ></v-slider>
     </template>
   </ExamplesUsageExample>

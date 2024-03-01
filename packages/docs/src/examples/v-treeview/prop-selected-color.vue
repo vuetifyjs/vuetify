@@ -1,8 +1,8 @@
 <template>
   <v-treeview
-    selectable
-    selected-color="red"
     :items="items"
+    selected-color="red"
+    selectable
   ></v-treeview>
 </template>
 

@@ -5,8 +5,8 @@
     :color="banner.metadata.color"
     :height="height"
     :image="banner.metadata.images.bg?.url"
-    :theme="banner.metadata.theme.key"
     :model-value="hasPromotion"
+    :theme="banner.metadata.theme.key"
     flat
   >
     <a
@@ -42,8 +42,8 @@
         <template #default="{ isHovering, props }">
           <v-btn
             :color="banner.metadata.link_color"
-            :href="banner.metadata.link"
             :elevation="isHovering ? 8 : 0"
+            :href="banner.metadata.link"
             v-bind="{ ...props, ...banner.metadata.attributes }"
             append-icon="mdi-open-in-new"
             class="text-none me-2"
@@ -62,8 +62,8 @@
         v-if="banner.metadata.closable"
         class="ms-6 me-2"
         density="comfortable"
-        size="small"
         icon="$clear"
+        size="small"
         variant="plain"
         @click="onClose"
       />

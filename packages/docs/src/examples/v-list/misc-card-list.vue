@@ -1,29 +1,29 @@
 <template>
   <v-card
-    max-width="375"
     class="mx-auto"
+    max-width="375"
   >
     <v-img
-      src="https://cdn.vuetifyjs.com/images/lists/ali.png"
       height="300px"
+      src="https://cdn.vuetifyjs.com/images/lists/ali.png"
       theme="dark"
       cover
     >
       <v-row class="fill-height">
         <v-card-title>
-          <v-btn variant="text" icon="mdi-chevron-left"></v-btn>
+          <v-btn icon="mdi-chevron-left" variant="text"></v-btn>
 
           <v-spacer></v-spacer>
 
           <v-btn
-            variant="text"
             class="me-4"
             icon="mdi-pencil"
+            variant="text"
           ></v-btn>
 
           <v-btn
-            variant="text"
             icon="mdi-dots-vertical"
+            variant="text"
           ></v-btn>
         </v-card-title>
 

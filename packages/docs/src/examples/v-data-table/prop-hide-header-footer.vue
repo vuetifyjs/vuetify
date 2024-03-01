@@ -2,8 +2,8 @@
   <v-data-table
     :headers="headers"
     :items="desserts"
-    hide-default-header
     hide-default-footer
+    hide-default-header
   ></v-data-table>
 </template>
 

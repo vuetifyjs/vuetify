@@ -5,9 +5,9 @@
       v-model:search="search"
       :hide-no-data="false"
       :items="items"
-      hide-selected
       hint="Maximum of 5 tags"
       label="Add some tags"
+      hide-selected
       multiple
       persistent-hint
       small-chips

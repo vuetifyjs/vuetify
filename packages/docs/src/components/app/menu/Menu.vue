@@ -12,7 +12,7 @@
     <AppSheet>
       <slot v-if="$slots.default" />
 
-      <AppListList v-else nav :items="items" />
+      <AppListList v-else :items="items" nav />
     </AppSheet>
   </v-menu>
 </template>

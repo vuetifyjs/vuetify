@@ -1,14 +1,14 @@
 <template>
   <PromotedBase
     v-if="ad"
-    border
     class="v-vuetify"
     density="comfortable"
+    border
   >
     <v-list-item
+      :append-icon="smAndUp ? 'mdi-open-in-new' : undefined"
       :prepend-avatar="src"
       :title="ad.title"
-      :append-icon="smAndUp ? 'mdi-open-in-new' : undefined"
       style="min-height: inherit; width: 100%"
       v-bind="attrs"
     >

@@ -1,8 +1,8 @@
 <template>
   <AppMenuMenu
     key="language-menu"
-    :open-on-hover="false"
     :items="items"
+    :open-on-hover="false"
   >
     <template #activator="{ props }">
       <AppBtn

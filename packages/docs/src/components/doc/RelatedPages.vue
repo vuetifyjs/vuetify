@@ -7,8 +7,8 @@
       v-for="(to, i) in related"
       :key="i"
       cols="12"
-      xs="6"
       sm="4"
+      xs="6"
     >
       <DocRelatedPage :to="to" />
     </v-col>

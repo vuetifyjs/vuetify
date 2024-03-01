@@ -2,8 +2,8 @@
   <div class="text-center pa-4">
     <v-dialog
       v-model="dialog"
-      persistent
       max-width="400"
+      persistent
     >
       <template v-slot:activator="{ props: activatorProps }">
         <v-btn v-bind="activatorProps">
@@ -13,8 +13,8 @@
 
       <v-card
         prepend-icon="mdi-map-marker"
-        title="Use Google's location service?"
         text="Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running."
+        title="Use Google's location service?"
       >
         <template v-slot:actions>
           <v-spacer></v-spacer>

@@ -4,10 +4,10 @@
     id="app-toc"
     v-model="tocDrawer"
     color="background"
-    floating
     location="right"
-    sticky
     width="256"
+    floating
+    sticky
   >
     <template
       v-if="routeToc?.length"
@@ -22,8 +22,8 @@
     <ul class="ms-5">
       <router-link
         v-for="{ to, level, text } in routeToc"
-        v-slot="{ href }"
         :key="text"
+        v-slot="{ href }"
         :to="to"
         custom
       >
@@ -77,20 +77,18 @@
               <v-btn
                 :to="rpath('/introduction/sponsors-and-backers/')"
                 append-icon="$vuetify"
-                block
                 class="text-none"
                 color="primary"
                 size="large"
-                variant="tonal"
                 text="Support"
+                variant="tonal"
+                block
               />
             </v-col>
           </template>
 
           <v-col v-else cols="12">
             <v-btn
-              block
-              border
               class="text-none border-opacity-50 border-primary"
               color="primary"
               href="https://github.com/sponsors/johnleider"
@@ -100,6 +98,8 @@
               target="_blank"
               text="Your Logo Here"
               variant="tonal"
+              block
+              border
             />
           </v-col>
 
@@ -109,8 +109,8 @@
           >
             <a
               :href="spot.spot.href"
-              target="_blank"
               rel="noopener noreferrer sponsored"
+              target="_blank"
               @click="gtagClick('toc', 'promotion', spot.spot.sponsor)"
             >
               <v-img :src="spot.spot.image.url" />

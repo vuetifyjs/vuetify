@@ -1,7 +1,7 @@
 <template>
   <AppBtn
-    color="medium-emphasis"
     class="ms-1"
+    color="medium-emphasis"
   >
     {{ title }}
 

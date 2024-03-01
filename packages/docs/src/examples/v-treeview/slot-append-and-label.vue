@@ -1,10 +1,10 @@
 <template>
   <v-treeview
     v-model="tree"
-    :open="initiallyOpen"
     :items="items"
-    activatable
+    :open="initiallyOpen"
     item-key="name"
+    activatable
     open-on-click
   >
     <template v-slot:prepend="{ item, open }">

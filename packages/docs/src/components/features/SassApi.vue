@@ -1,26 +1,26 @@
 <template>
   <v-autocomplete
     v-model="model"
-    :items="variables"
     :custom-filter="customFilter"
-    item-props
-    auto-select-first
+    :items="variables"
     base-color="disabled"
-    chips
-    clearable
-    multiple
-    persistent-clear
     placeholder="Search SASS API"
     prepend-inner-icon="mdi-database-search-outline"
     variant="outlined"
+    auto-select-first
+    chips
+    clearable
+    item-props
+    multiple
+    persistent-clear
     return-object
   >
     <template #chip="{ props }">
       <v-chip
         v-bind="props"
         color="primary"
-        label
         variant="flat"
+        label
       />
     </template>
   </v-autocomplete>

@@ -1,0 +1,22 @@
+@use '../../styles/settings';
+@use "../../styles/tools/functions";
+
+$empty-state-actions-btn-background-color: rgb(var(--v-theme-surface-variant)) !default;
+$empty-state-actions-btn-color: rgb(var(--v-theme-on-surface-variant)) !default;
+$empty-state-actions-gap: 8px !default;
+$empty-state-actions-padding: 16px !default;
+$empty-state-content-padding: 24px 0 !default;
+$empty-state-headline-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+$empty-state-headline-font-size: functions.map-deep-get(settings.$typography, 'h2', 'size') !default;
+$empty-state-headline-line-height: functions.map-deep-get(settings.$typography, 'h2', 'line-height') !default;
+$empty-state-headline-font-weight: functions.map-deep-get(settings.$typography, 'h2', 'weight') !default;
+$empty-state-image-padding: 16px !default;
+$empty-state-min-height: 100% !default;
+$empty-state-padding: 16px !default;
+$empty-state-text-font-size: functions.map-deep-get(settings.$typography, 'body-1', 'size') !default;
+$empty-state-text-font-weight: functions.map-deep-get(settings.$typography, 'body-1', 'weight') !default;
+$empty-state-text-line-height: functions.map-deep-get(settings.$typography, 'body-1', 'line-height') !default;
+$empty-state-text-padding: 0 16px !default;
+$empty-state-title-font-size: functions.map-deep-get(settings.$typography, 'h6', 'size') !default;
+$empty-state-title-line-height: functions.map-deep-get(settings.$typography, 'h6', 'line-height') !default;
+$empty-state-title-font-weight: functions.map-deep-get(settings.$typography, 'h6', 'weight') !default;

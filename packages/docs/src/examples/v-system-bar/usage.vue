@@ -1,9 +1,9 @@
 <template>
   <ExamplesUsageExample
     v-model="model"
+    :code="code"
     :name="name"
     :options="options"
-    :code="code"
   >
     <v-layout
       class="elevation-2 rounded mx-auto bg-white"
@@ -11,8 +11,8 @@
     >
       <v-system-bar v-bind="props">
         <v-icon icon="mdi-wifi-strength-4"></v-icon>
-        <v-icon icon="mdi-signal" class="ms-2"></v-icon>
-        <v-icon icon="mdi-battery" class="ms-2"></v-icon>
+        <v-icon class="ms-2" icon="mdi-signal"></v-icon>
+        <v-icon class="ms-2" icon="mdi-battery"></v-icon>
 
         <span class="ms-2">3:13PM</span>
       </v-system-bar>

@@ -9,17 +9,17 @@
     </v-chip>
 
     <v-chip
+      append-icon="mdi-star"
       class="ma-2"
       color="orange"
-      append-icon="mdi-star"
     >
       Premium
     </v-chip>
 
     <v-chip
+      append-icon="mdi-cake-variant"
       class="ma-2"
       color="primary"
-      append-icon="mdi-cake-variant"
     >
       1 Year
     </v-chip>
@@ -39,22 +39,22 @@
     </v-chip>
 
     <v-chip
+      :model-value="true"
       class="ma-2"
-      closable
       color="teal"
       prepend-icon="mdi-checkbox-marked-circle"
-      :model-value="true"
+      closable
     >
       Confirmed
     </v-chip>
 
     <v-chip
-      class="ma-2"
-      closable
-      color="teal"
-      close-icon="mdi-delete"
-      prepend-icon="mdi-checkbox-marked-circle"
       :model-value="true"
+      class="ma-2"
+      close-icon="mdi-delete"
+      color="teal"
+      prepend-icon="mdi-checkbox-marked-circle"
+      closable
     >
       Confirmed
     </v-chip>

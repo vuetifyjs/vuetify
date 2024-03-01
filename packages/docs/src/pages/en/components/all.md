@@ -114,6 +114,12 @@ Navigation components are used to navigate between different views or pages.
 
 </ComponentsListItem>
 
+<ComponentsListItem name="FABs" src="fabs" labs>
+
+  The floating action button is used for a promoted actions within an application
+
+</ComponentsListItem>
+
 <ComponentsListItem name="Navigation drawers"  src="navigation-drawers">
 
   Navigation drawers contain primary application navigation links
@@ -389,6 +395,12 @@ These components are used to provide feedback to the user within content, over c
 <ComponentsListItem name="Banner component" src="banners">
 
   Banners are used to communicate important information to the user
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Empty state component" src="empty-states" labs>
+
+  The empty state component is used to indicate that a page or area on a page has no content.
 
 </ComponentsListItem>
 

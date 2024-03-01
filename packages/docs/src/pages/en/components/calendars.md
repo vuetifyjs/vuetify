@@ -25,14 +25,6 @@ The `v-calendar` component is used to display information in a daily, weekly, mo
 This feature requires [v3.4.9](/getting-started/release-notes/?version=v3.4.9)
 :::
 
-## Usage
-
-A calendar has a type and a value which determines what type of calendar is shown over what span of time. This shows the bare minimum configuration, an array of events with **title**, **start** and **end** properties. **end** is optional, it defaults to the **start**. If the **start** has a time it's considered a timed event and will be shown accordingly in the day views. An event can span multiple days and will be rendered accordingly.
-
-<ExamplesExample file="v-calendar/usage" />
-
-<PromotedEntry />
-
 ## Installation
 
 Labs components require a manual import and installation of the component.
@@ -46,6 +38,14 @@ export default createVuetify({
   },
 })
 ```
+
+## Usage
+
+A calendar has a type and a value which determines what type of calendar is shown over what span of time. This shows the bare minimum configuration, an array of events with **title**, **start** and **end** properties. **end** is optional, it defaults to the **start**. If the **start** has a time it's considered a timed event and will be shown accordingly in the day views. An event can span multiple days and will be rendered accordingly.
+
+<ExamplesExample file="v-calendar/usage" />
+
+<PromotedEntry />
 
 ## API
 

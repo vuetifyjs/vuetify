@@ -2,8 +2,8 @@
   <div class="mb-3">
     <AppHeading
       :content="t('ready')"
-      level="2"
       class="mb-2"
+      level="2"
     />
 
     <!-- https://vue-i18n.intlify.dev/guide/advanced/component.html#scope-resolving -->

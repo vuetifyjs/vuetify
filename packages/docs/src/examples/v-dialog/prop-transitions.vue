@@ -9,8 +9,8 @@
           <template v-slot:activator="{ props: activatorProps }">
             <v-btn
               v-bind="activatorProps"
-              block
               text="Transition from Bottom"
+              block
             ></v-btn>
           </template>
 
@@ -41,8 +41,8 @@
           <template v-slot:activator="{ props: activatorProps }">
             <v-btn
               v-bind="activatorProps"
-              block
               text="Transition from Top"
+              block
             ></v-btn>
           </template>
           <template v-slot:default="{ isActive }">

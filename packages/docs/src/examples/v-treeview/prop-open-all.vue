@@ -1,7 +1,7 @@
 <template>
   <v-treeview
-    open-all
     :items="items"
+    open-all
   ></v-treeview>
 </template>
 

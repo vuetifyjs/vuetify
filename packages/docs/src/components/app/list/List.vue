@@ -1,9 +1,9 @@
 <template>
   <v-list
     v-model:opened="opened"
-    :nav="nav"
     :items="computedItems"
     :lines="false"
+    :nav="nav"
     color="primary"
     density="compact"
     item-props

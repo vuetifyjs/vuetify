@@ -13,17 +13,17 @@
             :rel="feature.href && 'noopener noreferrer'"
             :target="feature.href && '_blank'"
             :to="feature.to"
-            border
             class="text-xs-center mx-auto"
-            flat
             max-width="350"
+            border
+            flat
           >
             <v-img
               :alt="feature.title"
               :aspect-ratio="2.6"
               :src="feature.src"
-              cover
               width="100%"
+              cover
             />
             <v-card-text>
               <h3

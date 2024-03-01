@@ -7,8 +7,8 @@
       class="v-sheet--offset mx-auto"
       color="cyan"
       elevation="12"
-      rounded="lg"
       max-width="calc(100% - 32px)"
+      rounded="lg"
     >
       <v-sparkline
         :labels="labels"
