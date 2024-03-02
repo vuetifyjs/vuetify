@@ -1,7 +1,7 @@
 // Utilities
 import { computed } from 'vue'
 import { makeLineProps } from './util/line'
-import { genericComponent, getUid, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, getUid, propsFactory, useRender } from '@/util'
 
 // Types
 export type VBarlineSlots = {
@@ -66,6 +66,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
         maxY: parseInt(props.height, 10),
       }
     })
+    const items = computed(() => props.modelValue.map(item => getPropertyFromItem(item, props.itemValue, item)))
 
     function genBars (
       values: number[],
@@ -98,10 +99,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
 
     const parsedLabels = computed(() => {
       const labels = []
-      const points = genBars(
-        props.modelValue.map(item => (typeof item === 'number' ? item : item.value)),
-        boundary.value
-      )
+      const points = genBars(items.value, boundary.value)
       const len = points.length
 
       for (let i = 0; labels.length < len; i++) {
@@ -123,7 +121,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
       return labels
     })
 
-    const bars = computed(() => genBars(props.modelValue.map(item => (typeof item === 'number' ? item : item.value)), boundary.value))
+    const bars = computed(() => genBars(items.value, boundary.value))
     const offsetX = computed(() => (Math.abs(bars.value[0].x - bars.value[1].x) - lineWidth.value) / 2)
 
     useRender(() => {
