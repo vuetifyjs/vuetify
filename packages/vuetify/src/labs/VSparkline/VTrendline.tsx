@@ -1,8 +1,8 @@
 // Utilities
 import { computed, nextTick, ref, watch } from 'vue'
 import { makeLineProps } from './util/line'
-import { genPath } from './util/path'
-import { genericComponent, getUid, propsFactory, useRender } from '@/util'
+import { genPath as _genPath } from './util/path'
+import { genericComponent, getPropertyFromItem, getUid, propsFactory, useRender } from '@/util'
 
 // Types
 export type VTrendlineSlots = {
@@ -91,12 +91,10 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
         maxY: parseInt(props.height, 10) - padding,
       }
     })
+    const items = computed(() => props.modelValue.map(item => getPropertyFromItem(item, props.itemValue, item)))
     const parsedLabels = computed(() => {
       const labels = []
-      const points = genPoints(
-        props.modelValue.map(item => (typeof item === 'number' ? item : item.value)),
-        boundary.value
-      )
+      const points = genPoints(items.value, boundary.value)
       const len = points.length
 
       for (let i = 0; labels.length < len; i++) {
@@ -150,6 +148,15 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
       lastLength.value = length
     }, { immediate: true })
 
+    function genPath (fill: boolean) {
+      return _genPath(
+        genPoints(items.value, boundary.value),
+        props.smooth ? 8 : Number(props.smooth),
+        fill,
+        parseInt(props.height, 10)
+      )
+    }
+
     useRender(() => {
       const gradientData = !props.gradient.slice().length ? [''] : props.gradient.slice().reverse()
 
@@ -200,30 +207,14 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
 
           <path
             ref={ path }
-            d={ genPath(
-              genPoints(
-                props.modelValue.map(item => (typeof item === 'number' ? item : item.value)),
-                boundary.value
-              ),
-              props.smooth ? 8 : Number(props.smooth),
-              props.fill,
-              parseInt(props.height, 10)
-            )}
+            d={ genPath(props.fill) }
             fill={ props.fill ? `url(#${id.value})` : 'none' }
             stroke={ props.fill ? 'none' : `url(#${id.value})` }
           />
 
           { props.fill && (
             <path
-              d={ genPath(
-                genPoints(
-                  props.modelValue.map(item => (typeof item === 'number' ? item : item.value)),
-                  boundary.value
-                ),
-                props.smooth ? 8 : Number(props.smooth),
-                false,
-                parseInt(props.height, 10)
-              )}
+              d={ genPath(false) }
               fill="none"
               stroke={ props.color ?? props.gradient?.[0] }
             />
