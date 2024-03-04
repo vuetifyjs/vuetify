@@ -415,7 +415,7 @@ export const VCombobox = genericComponent<new <
         !model.value.some(({ value }) => value === displayItems.value[0].value)
       ) {
         select(displayItems.value[0])
-      } else if (search.value && !model.value.some(({ title }) => title === search.value)) {
+      } else if (search.value && (!model.value.some(({ title }) => title === search.value) || props.multiple)) {
         select(transformItem(props, search.value))
       }
     })
