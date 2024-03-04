@@ -303,7 +303,7 @@ export const VCombobox = genericComponent<new <
 
       if (e.key === 'Enter' && search.value) {
         select(transformItem(props, search.value))
-        if (hasSelectionSlot.value) search.value = ''
+        if (hasSelectionSlot.value) _search.value = ''
       }
 
       if (!props.multiple) return
@@ -415,8 +415,22 @@ export const VCombobox = genericComponent<new <
         !model.value.some(({ value }) => value === displayItems.value[0].value)
       ) {
         select(displayItems.value[0])
-      } else if (search.value && (!model.value.some(({ title }) => title === search.value) || props.multiple)) {
-        select(transformItem(props, search.value))
+        return
+      }
+
+      if (search.value) {
+        if (props.multiple) {
+          select(transformItem(props, search.value))
+          return
+        }
+
+        if (!hasSelectionSlot.value) return
+
+        if (model.value.some(({ title }) => title === search.value)) {
+          _search.value = ''
+        } else {
+          select(transformItem(props, search.value))
+        }
       }
     })
 
