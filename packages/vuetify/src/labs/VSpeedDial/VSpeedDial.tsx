@@ -1,3 +1,6 @@
+// Styles
+import './VSpeedDial.sass'
+
 // Components
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { makeVMenuProps, VMenu } from '@/components/VMenu/VMenu'
@@ -11,7 +14,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVSpeedDialProps = propsFactory({
   ...makeComponentProps(),
-  ...makeVMenuProps(),
+  ...makeVMenuProps({ offset: 8, minWidth: 0, location: 'bottom center' as const }),
   ...makeTransitionProps({ transition: 'fade-transition' }),
 }, 'VSpeedDial')
 
@@ -29,6 +32,7 @@ export const VSpeedDial = genericComponent()({
           { ...menuProps }
           class={ props.class }
           style={ props.style }
+          contentClass="v-speed-dial__content"
         >
           <VDefaultsProvider
             defaults={{
