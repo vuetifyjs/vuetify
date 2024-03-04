@@ -11,8 +11,8 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVSpeedDialProps = propsFactory({
   ...makeComponentProps(),
-  ...makeTransitionProps({ transition: 'fade-transition' }),
   ...makeVMenuProps(),
+  ...makeTransitionProps({ transition: 'fade-transition' }),
 }, 'VSpeedDial')
 
 export const VSpeedDial = genericComponent()({
@@ -40,7 +40,6 @@ export const VSpeedDial = genericComponent()({
             <MaybeTransition
               appear
               group
-              tag="div"
               transition={ props.transition }
             >
               { slots.default?.() }
