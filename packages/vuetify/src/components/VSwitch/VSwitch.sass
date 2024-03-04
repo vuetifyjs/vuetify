@@ -7,10 +7,6 @@
   .v-label
     padding-inline-start: $switch-label-margin-inline-start
 
-  .v-switch__thumb
-    background-color: $switch-thumb-background
-    color: $switch-thumb-color
-
 .v-switch__loader
   display: flex
 
@@ -58,6 +54,8 @@
 
 .v-switch__thumb
   align-items: center
+  background-color: $switch-thumb-background
+  color: $switch-thumb-color
   border-radius: $switch-thumb-radius
   display: flex
   font-size: .75rem
@@ -71,12 +69,16 @@
 
   @include tools.elevation($switch-thumb-elevation)
 
+  .v-switch.v-switch--flat:not(.v-switch--inset) &
+    background: $switch-thumb-flat-background
+    color: $switch-thumb-flat-color
+
+    @include tools.elevation(0)
+
   .v-switch--inset &
     height: $switch-inset-thumb-height
     width: $switch-inset-thumb-width
     transform: scale(calc($switch-inset-thumb-off-height / $switch-inset-thumb-height))
-
-    @include tools.elevation(0)
 
     &--filled
       transform: none
