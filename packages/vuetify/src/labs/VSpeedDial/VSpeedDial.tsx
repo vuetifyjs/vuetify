@@ -14,7 +14,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVSpeedDialProps = propsFactory({
   ...makeComponentProps(),
-  ...makeVMenuProps({ offset: 8, minWidth: 0, location: 'bottom center' as const }),
+  ...makeVMenuProps({ offset: 8, minWidth: 0, location: 'top center' as const }),
   ...makeTransitionProps({ transition: 'fade-transition' }),
 }, 'VSpeedDial')
 
@@ -37,7 +37,7 @@ export const VSpeedDial = genericComponent()({
           <VDefaultsProvider
             defaults={{
               VBtn: {
-                size: 'x-small',
+                size: 'small',
               },
             }}
           >
