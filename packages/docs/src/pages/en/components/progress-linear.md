@@ -50,7 +50,7 @@ The primary value is controlled by **v-model**, whereas the buffer is controlled
 
 #### Colors
 
-You can set the colors of the progress bar using the props **color** and **background-color**.
+You can set the colors of the progress bar using the props **color** and **bg-color**.
 
 <ExamplesExample file="v-progress-linear/prop-colors" />
 
