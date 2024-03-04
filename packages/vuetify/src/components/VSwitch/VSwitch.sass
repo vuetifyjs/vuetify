@@ -69,15 +69,13 @@
   position: relative
   overflow: hidden
 
-  &:not(.v-switch__thumb--flat)
+  .v-switch:not(.v-switch--flat):not(.v-switch--inset) &
     @include tools.elevation($switch-thumb-elevation)
 
   .v-switch--inset &
     height: $switch-inset-thumb-height
     width: $switch-inset-thumb-width
     transform: scale(calc($switch-inset-thumb-off-height / $switch-inset-thumb-height))
-
-    @include tools.elevation(0)
 
     &--filled
       transform: none

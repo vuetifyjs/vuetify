@@ -109,6 +109,7 @@ export const VSwitch = genericComponent<new <T>(
         <VInput
           class={[
             'v-switch',
+            { 'v-switch--flat': props.flat },
             { 'v-switch--inset': props.inset },
             { 'v-switch--indeterminate': indeterminate.value },
             loaderClasses.value,
@@ -182,7 +183,6 @@ export const VSwitch = genericComponent<new <T>(
                           class={[
                             'v-switch__thumb',
                             { 'v-switch__thumb--filled': icon || props.loading },
-                            { 'v-switch__thumb--flat': props.flat },
                             props.inset ? undefined : backgroundColorClasses.value,
                           ]}
                           style={ props.inset ? undefined : backgroundColorStyles.value }
