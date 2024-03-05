@@ -67,7 +67,8 @@
   position: relative
   overflow: hidden
 
-  @include tools.elevation($switch-thumb-elevation)
+  .v-switch:not(.v-switch--inset) &
+    @include tools.elevation($switch-thumb-elevation)
 
   .v-switch.v-switch--flat:not(.v-switch--inset) &
     background: $switch-thumb-flat-background
