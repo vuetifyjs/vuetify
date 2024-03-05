@@ -707,6 +707,35 @@ describe('VCombobox', () => {
       })
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/19319
+  it('should respect return-object when blurring', () => {
+    const items = [
+      { title: 'Item 1', value: 'item1' },
+      { title: 'Item 2', value: 'item2' },
+      { title: 'Item 3', value: 'item3' },
+      { title: 'Item 4', value: 'item4' },
+    ]
+    const model = ref()
+    const search = ref()
+
+    cy.mount(() => (
+      <VCombobox
+        search={ search.value }
+        v-model={ model.value }
+        items={ items }
+      />
+    ))
+      .get('.v-combobox').click()
+      .get('.v-list-item').eq(0).click({ waitForAnimations: false })
+      .should(() => {
+        expect(model.value).to.deep.equal({ title: 'Item 1', value: 'item1' })
+      })
+      .get('.v-combobox input').blur()
+      .should(() => {
+        expect(model.value).to.deep.equal({ title: 'Item 1', value: 'item1' })
+      })
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })
