@@ -78,6 +78,7 @@ The following is a list of available and up-and-coming components for use with L
 | - | - | - |
 | [v-calendar](/components/calendars/) | A calendar component | [v3.4.9](/getting-started/release-notes/?version=v3.4.9) |
 | [v-empty-state](/components/empty-states/) | A component for displaying empty states | [v3.5.7](/getting-started/release-notes/?version=v3.5.7) |
+| [v-speed-dial](/components/speed-dials/) | A component for display actions | [v3.5.8](/getting-started/release-notes/?version=v3.5.8) |
 | [v-sparkline](/components/sparklines/) | A basic data display component | [v3.5.5](/getting-started/release-notes/?version=v3.5.5) |
 
 ::: warning
