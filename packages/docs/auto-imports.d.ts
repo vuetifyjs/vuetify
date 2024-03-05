@@ -81,6 +81,7 @@ declare global {
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useRtl: typeof import('vuetify')['useRtl']
+  const useSettingsStore: typeof import('@vuetify/one')['useSettingsStore']
   const useShopifyStore: typeof import('./src/stores/shopify')['useShopifyStore']
   const useSponsorsStore: typeof import('./src/stores/sponsors')['useSponsorsStore']
   const useSpotStore: typeof import('./src/stores/spot')['useSpotStore']
@@ -170,6 +171,7 @@ declare module 'vue' {
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
     readonly useRtl: UnwrapRef<typeof import('vuetify')['useRtl']>
+    readonly useSettingsStore: UnwrapRef<typeof import('@vuetify/one')['useSettingsStore']>
     readonly useShopifyStore: UnwrapRef<typeof import('./src/stores/shopify')['useShopifyStore']>
     readonly useSponsorsStore: UnwrapRef<typeof import('./src/stores/sponsors')['useSponsorsStore']>
     readonly useSpotStore: UnwrapRef<typeof import('./src/stores/spot')['useSpotStore']>
@@ -258,6 +260,7 @@ declare module '@vue/runtime-core' {
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
     readonly useRtl: UnwrapRef<typeof import('vuetify')['useRtl']>
+    readonly useSettingsStore: UnwrapRef<typeof import('@vuetify/one')['useSettingsStore']>
     readonly useShopifyStore: UnwrapRef<typeof import('./src/stores/shopify')['useShopifyStore']>
     readonly useSponsorsStore: UnwrapRef<typeof import('./src/stores/sponsors')['useSponsorsStore']>
     readonly useSpotStore: UnwrapRef<typeof import('./src/stores/spot')['useSpotStore']>

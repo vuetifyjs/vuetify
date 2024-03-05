@@ -79,7 +79,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         ],
         imports: [
           {
-            '@vuetify/one': ['createOne', 'useAuthStore', 'useHttpStore', 'useOneStore', 'useUserStore'],
+            '@vuetify/one': ['createOne', 'useAuthStore', 'useHttpStore', 'useOneStore', 'useUserStore', 'useSettingsStore'],
             'lodash-es': ['camelCase', 'kebabCase', 'upperFirst'],
             pinia: ['defineStore', 'storeToRefs'],
             vue: [
