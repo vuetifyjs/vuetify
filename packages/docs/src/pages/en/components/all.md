@@ -150,6 +150,12 @@ Navigation components are used to navigate between different views or pages.
 
 </ComponentsListItem>
 
+<ComponentsListItem name="Speed dials" src="speed-dials" labs>
+
+  The speed dial component is a floating action button that can reveal additional actions when clicked
+
+</ComponentsListItem>
+
 <ComponentsListItem name="System bar"  src="system-bars">
 
   The system bar component shows application information with iconography, time, and more

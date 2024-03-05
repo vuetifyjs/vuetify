@@ -234,6 +234,10 @@
       {
         "title": "sparklines",
         "subfolder": "components"
+      },
+      {
+        "title": "speed-dials",
+        "subfolder": "components"
       }
     ]
   },
