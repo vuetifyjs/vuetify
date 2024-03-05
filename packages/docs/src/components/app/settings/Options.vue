@@ -19,7 +19,5 @@
     <AppSettingsOptionsApiOption />
 
     <AppSettingsOptionsSlashSearchOption />
-
-    <AppSettingsOptionsSyncOption />
   </div>
 </template>

@@ -11,35 +11,13 @@
     <AppSnackbarQueue />
 
     <v-main>
-      <v-container
-        tag="section"
-        fluid
-      >
-        <v-row justify="center" justify-md="start">
-          <v-col cols="auto">
-            <UserUserProfile />
-          </v-col>
-
-          <v-col
-            class="me-auto"
-            cols="12"
-            md="7"
-            sm="10"
-          >
-            <UserUserTabs />
-
-            <br>
-
-            <router-view v-slot="{ Component }">
-              <v-fade-transition hide-on-leave>
-                <div :key="route.name">
-                  <component :is="Component" />
-                </div>
-              </v-fade-transition>
-            </router-view>
-          </v-col>
-        </v-row>
-      </v-container>
+      <router-view v-slot="{ Component }">
+        <v-fade-transition hide-on-leave>
+          <div :key="route.name">
+            <component :is="Component" />
+          </div>
+        </v-fade-transition>
+      </router-view>
     </v-main>
   </v-app>
 </template>
