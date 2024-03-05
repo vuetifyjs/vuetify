@@ -3,10 +3,10 @@
     <v-sparkline
       :fill="fill"
       :gradient="selectedGradient"
-      :line-width="width"
+      :line-width="lineWidth"
       :model-value="value"
       :padding="padding"
-      :smooth="radius || false"
+      :smooth="smooth"
       auto-draw
     ></v-sparkline>
 
@@ -25,7 +25,9 @@
             v-model="selectedGradient"
             mandatory
           >
-            <v-row>
+            <v-row
+              class="pt-6 pl-6"
+            >
               <v-item
                 v-for="(gradient, i) in gradients"
                 :key="i"
@@ -50,54 +52,67 @@
           </v-item-group>
         </v-row>
       </v-col>
+    </v-row>
 
+    <v-row
+      class="mt-5"
+    >
       <v-col
-        cols="12"
-        md="6"
+        cols="2"
+      >
+        Filled
+      </v-col>
+      <v-col
+        cols="3"
+      >
+        <v-switch
+          v-model="fill"
+          class="switch"
+        ></v-switch>
+      </v-col>
+      <v-col
+        cols="3"
+      >
+        Line width
+      </v-col>
+      <v-col
+        cols="3"
       >
         <v-slider
-          v-model="width"
-          label="Width"
+          v-model="lineWidth"
           max="10"
           min="0.1"
           step="0.1"
           thumb-label
         ></v-slider>
       </v-col>
+    </v-row>
 
-      <v-col cols="6">
-        <v-row
-          align="center"
-          class="fill-height"
-        >
-          <v-switch
-            v-model="fill"
-            label="Filled"
-          ></v-switch>
-        </v-row>
-      </v-col>
-
+    <v-row>
       <v-col
-        cols="12"
-        md="6"
+        cols="2"
       >
-        <v-slider
-          v-model="radius"
-          label="Radius"
-          max="25"
-          min="0"
-          thumb-label
-        ></v-slider>
+        Smooth
       </v-col>
-
       <v-col
-        cols="12"
-        md="6"
-        offset-md="6"
+        cols="3"
+      >
+        <v-switch
+          v-model="smooth"
+          class="switch"
+        ></v-switch>
+      </v-col>
+      <v-col
+        cols="3"
+      >
+        Padding
+      </v-col>
+      <v-col
+        cols="3"
       >
         <v-slider
           v-model="padding"
-          label="Padding"
+          cols="3"
           max="25"
           min="0"
           thumb-label
@@ -121,9 +136,9 @@
   const fill = ref(true)
   const selectedGradient = ref(gradients[4])
   const padding = ref(8)
-  const radius = ref(10)
+  const smooth = ref(true)
   const value = ref([0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0])
-  const width = ref(2)
+  const lineWidth = ref(2)
 </script>
 
 <script>
@@ -142,9 +157,16 @@
       selectedGradient: gradients[4],
       gradients,
       padding: 8,
-      radius: 10,
+      smooth: true,
       value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
-      width: 2,
+      lineWidth: 2,
     }),
   }
 </script>
+
+<style scoped>
+.switch {
+  position: relative;
+  top: -12px;
+}
+</style>

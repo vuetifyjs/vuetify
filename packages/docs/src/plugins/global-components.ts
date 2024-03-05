@@ -43,7 +43,6 @@ import PromotedRandom from '@/components/promoted/Random.vue'
 import ResourcesColorPalette from '@/components/resources/ColorPalette.vue'
 import ResourcesLogos from '@/components/resources/Logos.vue'
 import SponserSponsors from '@/components/sponsor/Sponsors.vue'
-import UserAccountOneSubscription from '@/components/user/account/OneSubscription.vue'
 
 // Types
 import type { App } from 'vue'
@@ -95,6 +94,5 @@ export function installGlobalComponents (app: App) {
     .component('ResourcesColorPalette', ResourcesColorPalette)
     .component('ResourcesLogos', ResourcesLogos)
     .component('SponserSponsors', SponserSponsors)
-    .component('UserAccountOneSubscription', UserAccountOneSubscription)
     .component('UnwrapMarkdown', (props, { slots }) => slots.default?.()?.[0].children)
 }
