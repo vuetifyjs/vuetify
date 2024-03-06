@@ -384,6 +384,10 @@ function getNextMonth (date: Date) {
   return new Date(date.getFullYear(), date.getMonth() + 1, 1)
 }
 
+function getPreviousMonth (date: Date) {
+  return new Date(date.getFullYear(), date.getMonth() - 1, 1)
+}
+
 function getHours (date: Date) {
   return date.getHours()
 }
@@ -413,6 +417,10 @@ function isAfter (date: Date, comparing: Date) {
   return date.getTime() > comparing.getTime()
 }
 
+function isAfterDay (date: Date, comparing: Date): boolean {
+  return isAfter(startOfDay(date), startOfDay(comparing))
+}
+
 function isBefore (date: Date, comparing: Date) {
   return date.getTime() < comparing.getTime()
 }
@@ -430,6 +438,10 @@ function isSameDay (date: Date, comparing: Date) {
 function isSameMonth (date: Date, comparing: Date) {
   return date.getMonth() === comparing.getMonth() &&
     date.getFullYear() === comparing.getFullYear()
+}
+
+function isSameYear (date: Date, comparing: Date) {
+  return date.getFullYear() === comparing.getFullYear()
 }
 
 function getDiff (date: Date, comparing: Date | string, unit?: string) {
@@ -582,6 +594,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return isAfter(date, comparing)
   }
 
+  isAfterDay (date: Date, comparing: Date) {
+    return isAfterDay(date, comparing)
+  }
+
   isBefore (date: Date, comparing: Date) {
     return !isAfter(date, comparing) && !isEqual(date, comparing)
   }
@@ -592,6 +608,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   isSameMonth (date: Date, comparing: Date) {
     return isSameMonth(date, comparing)
+  }
+
+  isSameYear (date: Date, comparing: Date) {
+    return isSameYear(date, comparing)
   }
 
   setMinutes (date: Date, count: number) {
@@ -636,6 +656,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   getNextMonth (date: Date) {
     return getNextMonth(date)
+  }
+
+  getPreviousMonth (date: Date) {
+    return getPreviousMonth(date)
   }
 
   getHours (date: Date) {
