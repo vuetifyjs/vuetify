@@ -9,65 +9,60 @@
     :theme="banner.metadata.theme.key"
     flat
   >
-    <a
-      :href="banner.metadata.link"
-      class="d-flex align-center flex-grow-1 text-decoration-none"
-      rel="noopener"
-      target="_blank"
-      v-bind="banner.metadata.attributes"
+    <v-list-item
+      v-bind="link"
+      :active="false"
+      class="flex-grow-1"
+      lines="two"
       @click="onClick"
     >
-      <v-list-item lines="two">
-        <template v-if="banner.metadata.images.logo" #prepend>
-          <v-avatar :image="banner.metadata.images.logo.url" size="x-large" />
-        </template>
+      <template v-if="banner.metadata.images.logo" #prepend>
+        <v-avatar :image="banner.metadata.images.logo.url" size="x-large" />
+      </template>
 
-        <v-list-item-title
-          v-if="banner.metadata.text"
-          class="text-subtitle-2 text-md-subtitle-1 font-weight-medium"
-        >
-          <AppMarkdown :content="banner.metadata.text" />
-        </v-list-item-title>
+      <v-list-item-title
+        v-if="banner.metadata.text"
+        class="text-subtitle-2 text-md-subtitle-1 font-weight-medium"
+      >
+        <AppMarkdown :content="banner.metadata.text" />
+      </v-list-item-title>
 
-        <v-list-item-subtitle v-if="banner.metadata.subtext">
-          {{ banner.metadata.subtext }}
-        </v-list-item-subtitle>
-      </v-list-item>
+      <v-list-item-subtitle v-if="banner.metadata.subtext">
+        {{ banner.metadata.subtext }}
+      </v-list-item-subtitle>
 
-      <v-spacer />
-    </a>
+      <template #append>
+        <v-hover v-if="mdAndUp && banner.metadata.link && banner.metadata.link_text">
+          <template #default="{ isHovering, props: activatorProps }">
+            <v-btn
+              v-bind="{
+                ...activatorProps,
+                ...link
+              }"
+              :color="banner.metadata.link_color"
+              :elevation="isHovering ? 8 : 0"
+              append-icon="mdi-open-in-new"
+              class="text-none me-2"
+              variant="elevated"
+              @click="onClick"
+            >
+              {{ banner.metadata.link_text }}
+            </v-btn>
 
-    <template #append>
-      <v-hover v-if="mdAndUp && banner.metadata.link && banner.metadata.link_text">
-        <template #default="{ isHovering, props }">
-          <v-btn
-            :color="banner.metadata.link_color"
-            :elevation="isHovering ? 8 : 0"
-            :href="banner.metadata.link"
-            v-bind="{ ...props, ...banner.metadata.attributes }"
-            append-icon="mdi-open-in-new"
-            class="text-none me-2"
-            rel="noopener"
-            target="_blank"
-            variant="elevated"
-            @click="onClick"
-          >
-            {{ banner.metadata.link_text }}
-          </v-btn>
+          </template>
+        </v-hover>
 
-        </template>
-      </v-hover>
-
-      <v-btn
-        v-if="banner.metadata.closable"
-        class="ms-6 me-2"
-        density="comfortable"
-        icon="$clear"
-        size="small"
-        variant="plain"
-        @click="onClose"
-      />
-    </template>
+        <v-btn
+          v-if="banner.metadata.closable"
+          class="ms-6 me-2"
+          density="comfortable"
+          icon="$clear"
+          size="small"
+          variant="plain"
+          @click="onClose"
+        />
+      </template>
+    </v-list-item>
   </v-app-bar>
 </template>
 
@@ -92,6 +87,8 @@
       event_label: banner.value.slug,
       value: name?.toString().toLowerCase(),
     })
+
+    onClose()
   }
 
   function onClose () {
@@ -101,6 +98,17 @@
   }
 
   onBeforeMount(banners.fetch)
+
+  const link = computed(() => {
+    const metadata = banner.value?.metadata ?? { link: '' }
+
+    return {
+      href: metadata.link.startsWith('http') ? metadata.link : undefined,
+      target: metadata.link.startsWith('http') ? '_blank' : undefined,
+      to: !metadata.link.startsWith('http') ? metadata.link : undefined,
+      ...banner.value?.metadata.attributes,
+    }
+  })
 </script>
 
 <style lang="sass">
