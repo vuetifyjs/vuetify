@@ -858,7 +858,7 @@ export default baseMixins.extend<options>().extend({
         if (this.hideSelected) {
           this.setMenuIndex(-1)
         } else {
-          const index = this.allItems.indexOf(item)
+          const index = this.computedItems.indexOf(item)
           if (~index) {
             this.$nextTick(() => this.$refs.menu.getTiles())
             setTimeout(() => this.setMenuIndex(index))

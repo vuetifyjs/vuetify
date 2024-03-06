@@ -4,6 +4,7 @@ import VListGroup from './VListGroup'
 
 // Components
 import VSheet from '../VSheet/VSheet'
+import { getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -94,8 +95,9 @@ export default VSheet.extend<options>().extend({
         role: this.isInNav || this.isInMenu ? undefined : 'list',
         ...this.attrs$,
       },
+      on: this.listeners$,
     }
 
-    return h(this.tag, this.setBackgroundColor(this.color, data), [this.$slots.default])
+    return h(this.tag, this.setBackgroundColor(this.color, data), getSlot(this))
   },
 })

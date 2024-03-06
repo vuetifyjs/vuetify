@@ -15,7 +15,7 @@ import Themeable from '../../mixins/themeable'
 import Resize from '../../directives/resize'
 
 // Utilities
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlot } from '../../util/helpers'
 import { ExtractVue } from './../../util/mixins'
 import mixins from '../../util/mixins'
 
@@ -268,7 +268,7 @@ export default baseMixins.extend<options>().extend({
       let slider = null
       const item = []
       const tab = []
-      const slot = this.$slots.default || []
+      const slot = getSlot(this) || []
       const length = slot.length
 
       for (let i = 0; i < length; i++) {

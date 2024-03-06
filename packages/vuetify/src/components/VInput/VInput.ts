@@ -165,7 +165,7 @@ export default baseMixins.extend<options>().extend({
     genDefaultSlot () {
       return [
         this.genLabel(),
-        this.$slots.default,
+        getSlot(this),
       ]
     },
     genIcon (
@@ -251,7 +251,7 @@ export default baseMixins.extend<options>().extend({
           for: this.computedId,
           light: this.light,
         },
-      }, this.$slots.label || this.label)
+      }, getSlot(this, 'label') || this.label)
     },
     genMessages () {
       if (!this.showDetails) return null

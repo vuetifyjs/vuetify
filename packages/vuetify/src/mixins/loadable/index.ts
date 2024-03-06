@@ -1,5 +1,6 @@
 import Vue, { VNode } from 'vue'
 import VProgressLinear from '../../components/VProgressLinear'
+import { getSlot } from '../../util/helpers'
 
 interface colorable extends Vue {
   color?: string
@@ -33,7 +34,7 @@ export default Vue.extend<colorable>().extend({
     genProgress (): VNode | VNode[] | null {
       if (this.loading === false) return null
 
-      return this.$slots.progress || this.$createElement(VProgressLinear, {
+      return getSlot(this, 'progress') || this.$createElement(VProgressLinear, {
         props: {
           absolute: true,
           color: (this.loading === true || this.loading === '')

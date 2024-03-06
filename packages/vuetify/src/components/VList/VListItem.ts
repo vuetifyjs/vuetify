@@ -12,7 +12,7 @@ import { factory as ToggleableFactory } from '../../mixins/toggleable'
 import Ripple from '../../directives/ripple'
 
 // Utilities
-import { keyCodes } from './../../util/helpers'
+import { getSlot, keyCodes } from './../../util/helpers'
 import { ExtractVue } from './../../util/mixins'
 import { removed } from '../../util/console'
 
@@ -183,12 +183,10 @@ export default baseMixins.extend<options>().extend({
       delete data.nativeOn
     }
 
-    const children = this.$scopedSlots.default
-      ? this.$scopedSlots.default({
-        active: this.isActive,
-        toggle: this.toggle,
-      })
-      : this.$slots.default
+    const children = getSlot(this, 'default', {
+      active: this.isActive,
+      toggle: this.toggle,
+    })
 
     return h(tag, this.isActive ? this.setTextColor(this.color, data) : data, children)
   },

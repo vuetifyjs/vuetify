@@ -10,7 +10,7 @@ import SSRBootable from '../../mixins/ssr-bootable'
 
 // Utilities
 import mixins from '../../util/mixins'
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue/types/vnode'
@@ -110,6 +110,6 @@ export default mixins(
       style: this.styles,
     })
 
-    return h(this.tag, data, this.$slots.default)
+    return h(this.tag, data, getSlot(this))
   },
 })

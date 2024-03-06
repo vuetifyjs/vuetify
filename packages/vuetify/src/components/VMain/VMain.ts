@@ -3,6 +3,7 @@ import './VMain.sass'
 
 // Mixins
 import SSRBootable from '../../mixins/ssr-bootable'
+import { getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -44,7 +45,7 @@ export default SSRBootable.extend({
       h(
         'div',
         { staticClass: 'v-main__wrap' },
-        this.$slots.default
+        getSlot(this),
       ),
     ])
   },

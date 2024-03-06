@@ -10,7 +10,7 @@ import ripple from '../../directives/ripple'
 
 // Utilities
 import mixins from '../../util/mixins'
-import { keyCodes } from '../../util/helpers'
+import { getSlot, keyCodes } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -106,7 +106,7 @@ export default baseMixins.extend<options>().extend({
     genLabel () {
       return this.$createElement('div', {
         staticClass: 'v-stepper__label',
-      }, this.$slots.default)
+      }, getSlot(this))
     },
     genStep () {
       const color = (!this.hasError && (this.complete || this.isActive)) ? this.color : false

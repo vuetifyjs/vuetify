@@ -13,6 +13,7 @@ import ClickOutside from '../../directives/click-outside'
 import mixins from '../../util/mixins'
 import { VNode, VNodeData } from 'vue'
 import { Prop } from 'vue/types/options'
+import { getSlot } from '../../util/helpers'
 
 /* @vue/component */
 export default mixins(Positionable, Toggleable, Transitionable).extend({
@@ -71,7 +72,7 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
 
     if (this.isActive) {
       let btnCount = 0
-      children = (this.$slots.default || []).map((b, i) => {
+      children = (getSlot(this) || []).map((b, i) => {
         if (b.tag && typeof b.componentOptions !== 'undefined' && (b.componentOptions.Ctor.options.name === 'v-btn' || b.componentOptions.Ctor.options.name === 'v-tooltip')) {
           btnCount++
           return h('div', {
@@ -97,6 +98,6 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
       },
     }, children)
 
-    return h('div', data, [this.$slots.activator, list])
+    return h('div', data, [getSlot(this, 'activator'), list])
   },
 })
