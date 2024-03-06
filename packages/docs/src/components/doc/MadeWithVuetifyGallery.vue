@@ -66,10 +66,10 @@
   </v-sheet>
 </template>
 
-<script setup>
-  defineProps({
+<script setup lang="ts">
+  const props = defineProps({
     itemsPerPage: {
-      type: [Number, String],
+      type: [Number],
       default: 9,
     },
     pagination: Boolean,
@@ -79,10 +79,13 @@
   const store = useMadeWithVuetifyStore()
 
   const items = computed(() => {
+    if (props.pagination) {
+      return store.items.slice((page.value - 1) * props.itemsPerPage, page.value * props.itemsPerPage)
+    }
     return shuffle(store.items)
   })
 
-  function shuffle (array) {
+  function shuffle (array: any[]) {
     let currentIndex = array.length
     let temporaryValue
     let randomIndex
