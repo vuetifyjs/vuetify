@@ -178,13 +178,14 @@
     if (!val || internalScrolling) return
 
     scrolling.value = true
+    const query = route.query
 
     if (val === routeToc.value?.[0]?.to.slice(1) && route.hash) {
-      router.replace({ path: route.path })
+      router.replace({ path: route.path, query })
     } else {
       const toc = routeToc.value?.find(v => v.to.slice(1) === val)
       if (toc) {
-        await router.replace({ path: route.path, hash: toc.to })
+        await router.replace({ path: route.path, hash: toc.to, query })
       }
     }
     clearTimeout(timeout)
