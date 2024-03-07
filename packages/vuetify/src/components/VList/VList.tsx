@@ -141,8 +141,10 @@ export const VList = genericComponent<new <
 
   emits: {
     'update:selected': (value: unknown[]) => true,
+    'update:activated': (value: unknown[]) => true,
     'update:opened': (value: unknown[]) => true,
     'click:open': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
+    'click:activate': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },
 
