@@ -138,6 +138,7 @@ export const VTreeview = genericComponent<new <T>(
         >
           <VTreeviewChildren
             items={ items.value }
+            selectable={ props.selectable }
             v-slots={ slots }
           ></VTreeviewChildren>
         </VList>

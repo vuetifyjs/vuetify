@@ -72,6 +72,7 @@ export const makeNestedProps = propsFactory({
   openStrategy: [String, Object] as PropType<OpenStrategyProp>,
   opened: Array as PropType<readonly unknown[]>,
   selected: Array as PropType<readonly unknown[]>,
+  selectable: Boolean,
   mandatory: Boolean,
 }, 'nested')
 

@@ -1,6 +1,7 @@
 // Components
 import { VTreeviewGroup } from './VTreeviewGroup'
 import { VTreeviewItem } from './VTreeviewItem'
+import { VCheckboxBtn } from '@/components/VCheckbox'
 
 // Utilities
 import { genericComponent, propsFactory } from '@/util'
@@ -20,6 +21,7 @@ export type VTreeviewChildrenSlots<T> = {
 
 export const makeVTreeviewChildrenProps = propsFactory({
   items: Array as PropType<readonly InternalListItem[]>,
+  selectable: Boolean,
 }, 'VTreeviewChildren')
 
 export const VTreeviewChildren = genericComponent<new <T extends InternalListItem>(
@@ -35,10 +37,20 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
   setup (props, { slots }) {
     return () => slots.default?.() ?? props.items?.map(({ children, props: itemProps, raw: item }) => {
       const slotsWithItem = {
-        prepend: slots.prepend ? (slotProps: any) => slots.prepend?.({ ...slotProps, item }) : undefined,
-        append: slots.append ? (slotProps: any) => slots.append?.({ ...slotProps, item }) : undefined,
-        title: slots.title ? (slotProps: any) => slots.title?.({ ...slotProps, item }) : undefined,
-      }
+        prepend: slots.prepend
+          ? slotProps => slots.prepend?.({ ...slotProps, item })
+          : props.selectable
+            ? ({ isSelected }) => (
+              <VCheckboxBtn
+                key={ item.value }
+                tabindex="-1"
+                modelValue={ isSelected }
+              />
+            )
+            : undefined,
+        append: slots.append ? slotProps => slots.append?.({ ...slotProps, item }) : undefined,
+        title: slots.title ? slotProps => slots.title?.({ ...slotProps, item }) : undefined,
+      } satisfies VTreeviewItem['$props']['$children']
 
       const treeviewGroupProps = VTreeviewGroup.filterProps(itemProps)
       const treeviewChildrenProps = VTreeviewChildren.filterProps(props)
