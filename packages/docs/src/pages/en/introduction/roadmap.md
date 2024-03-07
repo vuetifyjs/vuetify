@@ -31,7 +31,7 @@ The following is a list of all planned components for the year 2024.
 | v-speed-dial | February 2024 | April 2024 |
 | v-confirm-edit | *️⃣ | April 2024 |
 | [v3.7 (Odyssey)](https://github.com/vuetifyjs/vuetify/milestone/73) | | { .bg-surface-light } |
-| v-treeview | February 2024 | July 2024 |
+| v-treeview | March 2024 | July 2024 |
 | v-number-input | March 2024 | July 2024 |
 | v-stepper-vertical | March 2024 | July 2024 |
 | v-time-picker | March 2024 | July 2024 |
