@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Steppers
   title: Stepper component

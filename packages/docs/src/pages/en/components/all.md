@@ -96,12 +96,6 @@ Containment components wrap other components and provide additional functionalit
 
 </components-list-item>
 
-<components-list-item name="Bottom Sheet component" src="bottom-sheets">
-
-  The bottom sheet component is a modified dialog that slides from the bottom of the screen
-
-</components-list-item>
-
 <components-list-item name="Sheet component" src="sheets">
 
   The sheet component is a simple piece of paper that can be used to style and customize a block of content

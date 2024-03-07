@@ -21,10 +21,13 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
 
+// Types
+import type { Ref } from 'vue'
+
 type VSnackbarSlots = {
   activator: { isActive: boolean, props: Record<string, any> }
   default: never
-  actions: never
+  actions: { isActive: Ref<boolean> }
   text: never
 }
 
@@ -192,11 +195,10 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
         >
           { genOverlays(false, 'v-snackbar') }
 
-          { props.timer && (
+          { props.timer && !isHovering.value && (
             <div key="timer" class="v-snackbar__timer">
               <VProgressLinear
                 ref={ timerRef }
-                active={ !isHovering.value }
                 color={ typeof props.timer === 'string' ? props.timer : 'info' }
                 max={ props.timeout }
                 model-value={ countdown.time.value }
@@ -228,7 +230,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
               }}
             >
               <div class="v-snackbar__actions">
-                { slots.actions() }
+                { slots.actions({ isActive }) }
               </div>
             </VDefaultsProvider>
           )}

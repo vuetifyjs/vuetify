@@ -42,6 +42,7 @@
       "global-configuration",
       "icon-fonts",
       "internationalization",
+      "scrolling",
       "sass-variables",
       "theme",
       "treeshaking"
@@ -61,11 +62,13 @@
       },
       "border-radius",
       "content",
+      "cursor",
       "display",
       "elevation",
       "flex",
       "float",
       "overflow",
+      "position",
       "sizing",
       "spacing",
       "text-and-typography"
@@ -130,7 +133,6 @@
       {
         "title": "data-tables",
         "subfolder": "components",
-        "emphasized": true,
         "activeIcon": "",
         "inactiveIcon": "",
         "items": [
