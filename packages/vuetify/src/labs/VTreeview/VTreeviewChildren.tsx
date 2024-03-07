@@ -4,7 +4,8 @@ import { VTreeviewItem } from './VTreeviewItem'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 
 // Utilities
-import { genericComponent, propsFactory } from '@/util'
+import { shallowRef } from 'vue'
+import { genericComponent, getObjectValueByPath, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -20,6 +21,7 @@ export type VTreeviewChildrenSlots<T> = {
 }
 
 export const makeVTreeviewChildrenProps = propsFactory({
+  loadChildren: Function as PropType<(item: unknown) => Promise<void>>,
   items: Array as PropType<readonly InternalListItem[]>,
   selectable: Boolean,
 }, 'VTreeviewChildren')
@@ -34,7 +36,22 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
 
   props: makeVTreeviewChildrenProps(),
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
+    const isLoading = shallowRef(false)
+    const hasLoaded = shallowRef(false)
+
+    function checkChildren (item: unknown) {
+      return new Promise<void>(resolve => {
+        if (!props.items?.length || !props.loadChildren || hasLoaded.value) return resolve()
+
+        isLoading.value = true
+        props.loadChildren(item).then(resolve)
+      }).then(() => {
+        isLoading.value = false
+        hasLoaded.value = true
+      })
+    }
+
     return () => slots.default?.() ?? props.items?.map(({ children, props: itemProps, raw: item }) => {
       const slotsWithItem = {
         prepend: slots.prepend
@@ -45,6 +62,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 key={ item.value }
                 tabindex="-1"
                 modelValue={ isSelected }
+                onClick={ () => checkChildren(item) }
               />
             )
             : undefined,
@@ -66,6 +84,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 { ...itemProps }
                 { ...activatorProps }
                 v-slots={ slotsWithItem }
+                onClick={ () => checkChildren(item) }
               />
             ),
             default: () => (

@@ -1,5 +1,5 @@
 // Components
-import { VTreeviewChildren } from './VTreeviewChildren'
+import { makeVTreeviewChildrenProps, VTreeviewChildren } from './VTreeviewChildren'
 import { makeVListProps, useListItems, VList } from '@/components/VList/VList'
 
 // Composables
@@ -29,6 +29,7 @@ export const makeVTreeviewProps = propsFactory({
   search: String,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
+  ...makeVTreeviewChildrenProps(),
   ...omit(makeVListProps({
     collapseIcon: '$treeviewCollapse',
     expandIcon: '$treeviewExpand',
@@ -123,6 +124,7 @@ export const VTreeview = genericComponent<new <T>(
 
     useRender(() => {
       const listProps = VList.filterProps(props)
+      const treeviewChildrenProps = VTreeviewChildren.filterProps(props)
 
       return (
         <VList
@@ -137,8 +139,8 @@ export const VTreeview = genericComponent<new <T>(
           v-model:selected={ selected.value }
         >
           <VTreeviewChildren
+            { ...treeviewChildrenProps }
             items={ items.value }
-            selectable={ props.selectable }
             v-slots={ slots }
           ></VTreeviewChildren>
         </VList>
