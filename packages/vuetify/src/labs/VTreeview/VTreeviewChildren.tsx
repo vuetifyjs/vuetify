@@ -57,11 +57,12 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         prepend: slots.prepend
           ? slotProps => slots.prepend?.({ ...slotProps, item })
           : props.selectable
-            ? ({ isSelected }) => (
+            ? ({ isSelected, isIndeterminate }) => (
               <VCheckboxBtn
                 key={ item.value }
                 tabindex="-1"
                 modelValue={ isSelected }
+                indeterminate={ isIndeterminate }
                 onClick={ () => checkChildren(item) }
               />
             )
