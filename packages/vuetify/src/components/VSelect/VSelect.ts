@@ -361,6 +361,9 @@ export default baseMixins.extend<options>().extend({
     getContent () {
       return this.$refs.menu && this.$refs.menu.$refs.content
     },
+    getIsInteractive () {
+      return this.isInteractive && !this.isDisabled && !this.$parent?.$props?.disabled
+    },
     genChipSelection (item: object, index: number) {
       const isDisabled = (
         this.isDisabled ||
@@ -465,6 +468,7 @@ export default baseMixins.extend<options>().extend({
       input.data = mergeData(input.data!, {
         domProps: { value: null },
         attrs: {
+          disabled: this.$parent?.$props?.disabled,
           readonly: true,
           type: 'text',
           'aria-readonly': String(this.isReadonly),
@@ -620,7 +624,7 @@ export default baseMixins.extend<options>().extend({
       this.selectedIndex = -1
     },
     onClick (e: MouseEvent) {
-      if (!this.isInteractive) return
+      if (!this.getIsInteractive()) return
 
       if (!this.isAppendInner(e.target)) {
         this.isMenuActive = true
