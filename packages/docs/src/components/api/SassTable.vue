@@ -2,7 +2,7 @@
   <ApiApiTable :headers="headers">
     <template #row="{ props, item }">
       <tr v-bind="props">
-        <ApiNameCell section="sass" :name="item.name" :new-in="item.newIn" />
+        <ApiNameCell :name="item.name" :new-in="item.newIn" section="sass" />
 
         <td>
           <ApiPrismCell :code="item.default" />

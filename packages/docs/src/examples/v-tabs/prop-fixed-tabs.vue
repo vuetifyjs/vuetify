@@ -1,7 +1,7 @@
 <template>
   <v-tabs
-    fixed-tabs
     bg-color="indigo-darken-2"
+    fixed-tabs
   >
     <v-tab>
       Option

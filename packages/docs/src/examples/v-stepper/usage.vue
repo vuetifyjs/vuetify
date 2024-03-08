@@ -9,7 +9,7 @@
       <template v-slot:item.1>
         <v-card title="Step One" flat>
           <template v-slot:text>
-            <div @dblclick="onDblClick" @blur="onBlur">
+            <div @blur="onBlur" @dblclick="onDblClick">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
             </div>
           </template>
@@ -19,7 +19,7 @@
       <template v-slot:item.2>
         <v-card title="Step Two" flat>
           <template v-slot:text>
-            <div @dblclick="onDblClick" @blur="onBlur">
+            <div @blur="onBlur" @dblclick="onDblClick">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus!
             </div>
           </template>
@@ -29,7 +29,7 @@
       <template v-slot:item.3>
         <v-card title="Step Three" flat>
           <template v-slot:text>
-            <div @dblclick="onDblClick" @blur="onBlur">
+            <div @blur="onBlur" @dblclick="onDblClick">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
 
               Lorem ipsum dolor sit amet consectetur adipisicing elit.

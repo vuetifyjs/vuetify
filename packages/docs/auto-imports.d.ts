@@ -61,7 +61,6 @@ declare global {
   const useAppStore: typeof import('./src/stores/app')['useAppStore']
   const useAttrs: typeof import('vue')['useAttrs']
   const useAuthStore: typeof import('@vuetify/one')['useAuthStore']
-  const useBannersStore: typeof import('./src/stores/banners')['useBannersStore']
   const useCommitsStore: typeof import('./src/stores/commits')['useCommitsStore']
   const useCosmic: typeof import('./src/composables/cosmic')['useCosmic']
   const useDate: typeof import('vuetify')['useDate']
@@ -81,6 +80,7 @@ declare global {
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useRtl: typeof import('vuetify')['useRtl']
+  const useSettingsStore: typeof import('@vuetify/one')['useSettingsStore']
   const useShopifyStore: typeof import('./src/stores/shopify')['useShopifyStore']
   const useSponsorsStore: typeof import('./src/stores/sponsors')['useSponsorsStore']
   const useSpotStore: typeof import('./src/stores/spot')['useSpotStore']
@@ -150,7 +150,6 @@ declare module 'vue' {
     readonly useAppStore: UnwrapRef<typeof import('./src/stores/app')['useAppStore']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useAuthStore: UnwrapRef<typeof import('@vuetify/one')['useAuthStore']>
-    readonly useBannersStore: UnwrapRef<typeof import('./src/stores/banners')['useBannersStore']>
     readonly useCommitsStore: UnwrapRef<typeof import('./src/stores/commits')['useCommitsStore']>
     readonly useCosmic: UnwrapRef<typeof import('./src/composables/cosmic')['useCosmic']>
     readonly useDate: UnwrapRef<typeof import('vuetify')['useDate']>
@@ -170,6 +169,7 @@ declare module 'vue' {
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
     readonly useRtl: UnwrapRef<typeof import('vuetify')['useRtl']>
+    readonly useSettingsStore: UnwrapRef<typeof import('@vuetify/one')['useSettingsStore']>
     readonly useShopifyStore: UnwrapRef<typeof import('./src/stores/shopify')['useShopifyStore']>
     readonly useSponsorsStore: UnwrapRef<typeof import('./src/stores/sponsors')['useSponsorsStore']>
     readonly useSpotStore: UnwrapRef<typeof import('./src/stores/spot')['useSpotStore']>
@@ -238,7 +238,6 @@ declare module '@vue/runtime-core' {
     readonly useAppStore: UnwrapRef<typeof import('./src/stores/app')['useAppStore']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useAuthStore: UnwrapRef<typeof import('@vuetify/one')['useAuthStore']>
-    readonly useBannersStore: UnwrapRef<typeof import('./src/stores/banners')['useBannersStore']>
     readonly useCommitsStore: UnwrapRef<typeof import('./src/stores/commits')['useCommitsStore']>
     readonly useCosmic: UnwrapRef<typeof import('./src/composables/cosmic')['useCosmic']>
     readonly useDate: UnwrapRef<typeof import('vuetify')['useDate']>
@@ -258,6 +257,7 @@ declare module '@vue/runtime-core' {
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
     readonly useRtl: UnwrapRef<typeof import('vuetify')['useRtl']>
+    readonly useSettingsStore: UnwrapRef<typeof import('@vuetify/one')['useSettingsStore']>
     readonly useShopifyStore: UnwrapRef<typeof import('./src/stores/shopify')['useShopifyStore']>
     readonly useSponsorsStore: UnwrapRef<typeof import('./src/stores/sponsors')['useSponsorsStore']>
     readonly useSpotStore: UnwrapRef<typeof import('./src/stores/spot')['useSpotStore']>

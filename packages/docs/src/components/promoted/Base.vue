@@ -6,10 +6,10 @@
     <v-sheet
       v-bind="$attrs"
       :min-height="minHeight"
-      color="surface-bright"
       class="v-app-ad d-inline-flex flex-child-1 grow-shrink-0"
-      rounded
+      color="surface-bright"
       width="100%"
+      rounded
     >
       <slot />
     </v-sheet>

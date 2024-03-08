@@ -1,9 +1,9 @@
 <template>
   <v-row>
     <v-col
+      class="my-2 px-1"
       cols="12"
       sm="6"
-      class="my-2 px-1"
     >
       <v-date-picker
         ref="picker"
@@ -13,9 +13,9 @@
       ></v-date-picker>
     </v-col>
     <v-col
+      class="my-2 px-1"
       cols="12"
       sm="6"
-      class="my-2 px-1"
     >
       <div class="text-h6">
         Month news ({{ pickerDate || 'change month...' }})

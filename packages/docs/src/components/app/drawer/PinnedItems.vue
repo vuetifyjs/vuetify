@@ -19,9 +19,9 @@
             <template #append>
               <v-icon
                 v-if="isHovering"
+                class="me-1"
                 icon="mdi-pin-off"
                 size="16"
-                class="me-1"
                 @click.prevent.stop="onClickPinRemove(itemProps)"
               />
             </template>

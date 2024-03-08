@@ -94,7 +94,6 @@ export const makeNestedProps = propsFactory({
   opened: Array as PropType<readonly unknown[]>,
   activated: Array as PropType<readonly unknown[]>,
   selected: Array as PropType<readonly unknown[]>,
-  selectable: Boolean,
   mandatory: Boolean,
 }, 'nested')
 

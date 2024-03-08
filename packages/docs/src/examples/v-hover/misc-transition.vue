@@ -9,8 +9,8 @@
       >
         <v-img
           :aspect-ratio="16/9"
-          cover
           src="https://cdn.vuetifyjs.com/images/cards/kitchen.png"
+          cover
         >
           <v-expand-transition>
             <div

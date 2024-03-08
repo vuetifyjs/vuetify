@@ -42,8 +42,8 @@
                   @click.prevent="copyTextToClipboard(link.copyText)"
                 >
                   <v-icon
-                    :icon="link.icon"
                     :color="link.color"
+                    :icon="link.icon"
                     size="small"
                   />
                 </div>
@@ -111,8 +111,8 @@
             class="text-subtitle d-flex align-center my-2"
           >
             <v-icon
-              start
               :icon="icons[field]"
+              start
             />
 
             <template v-if="Array.isArray(member[field])">

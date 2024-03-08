@@ -32,32 +32,32 @@
       <v-col cols="12">
         <v-select
           v-model="selectedColor"
-          :items="selectedColors"
           :disabled="!selectable"
+          :items="selectedColors"
           label="Selected checkbox color"
         ></v-select>
       </v-col>
       <v-col cols="12">
         <v-select
           v-model="color"
-          :items="selectedColors"
           :disabled="!activatable"
+          :items="selectedColors"
           label="Active node color"
         ></v-select>
       </v-col>
     </v-row>
 
     <v-treeview
-      :items="items"
-      :dense="dense"
-      :selectable="selectable"
       :activatable="activatable"
-      :hoverable="hoverable"
-      :open-on-click="openOnClick"
-      :selected-color="selectedColor"
       :color="color"
-      :shaped="shaped"
+      :dense="dense"
+      :hoverable="hoverable"
+      :items="items"
+      :open-on-click="openOnClick"
       :rounded="rounded"
+      :selectable="selectable"
+      :selected-color="selectedColor"
+      :shaped="shaped"
     ></v-treeview>
   </div>
 </template>

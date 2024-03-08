@@ -7,9 +7,9 @@
     }"
   >
     <settings-switch
-      :model-value="true"
       :label="t('enable-banners')"
       :messages="t('enable-banners-message')"
+      :model-value="true"
       color="disabled"
       readonly
     >
@@ -18,8 +18,8 @@
           :color="isDisabled ? undefined : 'primary'"
           :disabled="isDisabled"
           :text="t('reset')"
-          variant="outlined"
           size="small"
+          variant="outlined"
           @click="onResetNotifications"
         />
       </template>

@@ -6,18 +6,18 @@
           flat
         >
           <v-btn
-            variant="outlined"
             class="me-4"
             color="grey-darken-2"
+            variant="outlined"
             @click="setToday"
           >
             Today
           </v-btn>
           <v-btn
-            fab
-            variant="text"
-            size="small"
             color="grey-darken-2"
+            size="small"
+            variant="text"
+            fab
             @click="prev"
           >
             <v-icon size="small">
@@ -25,10 +25,10 @@
             </v-icon>
           </v-btn>
           <v-btn
-            fab
-            variant="text"
-            size="small"
             color="grey-darken-2"
+            size="small"
+            variant="text"
+            fab
             @click="next"
           >
             <v-icon size="small">
@@ -42,8 +42,8 @@
           <v-menu location="bottom end">
             <template v-slot:activator="{ on, attrs }">
               <v-btn
-                variant="outlined"
                 color="grey-darken-2"
+                variant="outlined"
                 v-bind="attrs"
                 v-on="on"
               >
@@ -74,19 +74,19 @@
         <v-calendar
           ref="calendar"
           v-model="focus"
-          color="primary"
-          :events="events"
           :event-color="getEventColor"
+          :events="events"
           :type="type"
+          color="primary"
+          @change="updateRange"
+          @click:date="viewDay"
           @click:event="showEvent"
           @click:more="viewDay"
-          @click:date="viewDay"
-          @change="updateRange"
         ></v-calendar>
         <v-menu
           v-model="selectedOpen"
-          :close-on-content-click="false"
           :activator="selectedElement"
+          :close-on-content-click="false"
           offset-x
         >
           <v-card
@@ -115,8 +115,8 @@
             </v-card-text>
             <v-card-actions>
               <v-btn
-                variant="text"
                 color="secondary"
+                variant="text"
                 @click="selectedOpen = false"
               >
                 Cancel

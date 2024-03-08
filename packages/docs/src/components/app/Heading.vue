@@ -6,9 +6,9 @@
     <router-link
       v-if="href"
       :to="href"
+      aria-hidden="true"
       class="text-decoration-none text-end text-md-start d-none d-sm-inline-block"
       style="user-select: none"
-      aria-hidden="true"
     >
       <span class="text-primary">#</span>
     </router-link>

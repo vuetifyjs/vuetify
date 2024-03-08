@@ -4,8 +4,8 @@
       <v-row class="child-flex">
         <v-col
           cols="12"
-          sm="6"
           md="4"
+          sm="6"
         >
           <div class="text-subheader-2 pa-2">Options</div>
           <v-checkbox
@@ -16,8 +16,8 @@
         </v-col>
         <v-col
           cols="12"
-          sm="6"
           md="4"
+          sm="6"
         >
           <div class="text-subheader-2 pa-2">FAB location</div>
           <v-checkbox
@@ -43,8 +43,8 @@
         </v-col>
         <v-col
           cols="12"
-          sm="6"
           md="4"
+          sm="6"
         >
           <div class="text-subheader-2 pa-2">Speed dial direction</div>
           <v-radio-group
@@ -52,27 +52,27 @@
             hide-details
           >
             <v-radio
-              value="top"
               label="Top"
+              value="top"
             ></v-radio>
             <v-radio
-              value="right"
               label="Right"
+              value="right"
             ></v-radio>
             <v-radio
-              value="bottom"
               label="Bottom"
+              value="bottom"
             ></v-radio>
             <v-radio
-              value="left"
               label="Left"
+              value="left"
             ></v-radio>
           </v-radio-group>
         </v-col>
         <v-col
           cols="12"
-          sm="6"
           md="4"
+          sm="6"
         >
           <div class="text-subheader-2 pa-2">Transition</div>
           <v-radio-group
@@ -80,24 +80,24 @@
             hide-details
           >
             <v-radio
-              value="slide-y-transition"
               label="Slide y"
+              value="slide-y-transition"
             ></v-radio>
             <v-radio
-              value="slide-y-reverse-transition"
               label="Slide y reverse"
+              value="slide-y-reverse-transition"
             ></v-radio>
             <v-radio
-              value="slide-x-transition"
               label="Slide x"
+              value="slide-x-transition"
             ></v-radio>
             <v-radio
-              value="slide-x-reverse-transition"
               label="Slide x reverse"
+              value="slide-x-reverse-transition"
             ></v-radio>
             <v-radio
-              value="scale-transition"
               label="Scale"
+              value="scale-transition"
             ></v-radio>
           </v-radio-group>
         </v-col>
@@ -105,12 +105,12 @@
     </v-container>
     <v-speed-dial
       v-model="fab"
-      :top="top"
       :bottom="bottom"
-      :right="right"
-      :left="left"
       :direction="direction"
+      :left="left"
       :open-on-hover="hover"
+      :right="right"
+      :top="top"
       :transition="transition"
     >
       <template v-slot:activator>
@@ -129,26 +129,26 @@
         </v-btn>
       </template>
       <v-btn
-        fab
-        dark
-        size="small"
         color="green"
+        size="small"
+        dark
+        fab
       >
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
       <v-btn
-        fab
-        dark
-        size="small"
         color="indigo"
+        size="small"
+        dark
+        fab
       >
         <v-icon>mdi-plus</v-icon>
       </v-btn>
       <v-btn
-        fab
-        dark
-        size="small"
         color="red"
+        size="small"
+        dark
+        fab
       >
         <v-icon>mdi-delete</v-icon>
       </v-btn>

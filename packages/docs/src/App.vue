@@ -50,7 +50,8 @@
     // set current route lang if root
     const currentRoute = router.currentRoute.value
     if (currentRoute.path === '/') {
-      router.replace(`/${locale.value}`)
+      const query = currentRoute.query
+      router.replace({ path: `/${locale.value}`, query })
     }
   })
 

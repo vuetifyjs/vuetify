@@ -51,8 +51,8 @@
     <v-app-bar
       class="px-3"
       color="grey-lighten-4"
-      flat
       height="72"
+      flat
     >
       <v-spacer></v-spacer>
 
@@ -60,10 +60,10 @@
         <v-text-field
           bg-color="grey-lighten-1"
           density="compact"
-          flat
-          hide-details
           rounded="pill"
           variant="solo-filled"
+          flat
+          hide-details
         ></v-text-field>
       </v-responsive>
     </v-app-bar>
@@ -82,17 +82,17 @@
     </v-navigation-drawer>
 
     <v-footer
-      app
       height="72"
+      app
     >
       <v-text-field
         bg-color="grey-lighten-1"
         class="overflow-hidden"
         density="compact"
-        flat
-        hide-details
         rounded="pill"
         variant="solo-filled"
+        flat
+        hide-details
       ></v-text-field>
     </v-footer>
   </v-app>

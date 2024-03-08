@@ -2,13 +2,13 @@
   <v-badge
     :model-value="newJobs.length > 0"
     color="#ED561B"
-    dot
     location="top end"
+    dot
   >
     <AppBtn
+      :icon="icon"
       :to="rpath('/resources/jobs-for-vue/')"
       class="jobs-link"
-      :icon="icon"
       @click="onClick"
     />
   </v-badge>

@@ -6,7 +6,7 @@
       }
     }"
   >
-    <settings-switch
+    <SettingsSwitch
       v-model="user.notifications.show"
       :label="t('enable-notifications')"
       :messages="t('enable-notifications-message')"
@@ -21,7 +21,7 @@
           @click="onResetNotifications"
         />
       </template>
-    </settings-switch>
+    </SettingsSwitch>
   </v-defaults-provider>
 </template>
 

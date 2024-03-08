@@ -1,6 +1,6 @@
 <template>
   <v-file-input
-    label="File input"
     density="compact"
+    label="File input"
   ></v-file-input>
 </template>

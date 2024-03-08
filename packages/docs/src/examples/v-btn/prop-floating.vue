@@ -2,10 +2,10 @@
   <div class="text-center">
     <v-btn
       class="mx-2"
-      fab
-      dark
-      size="small"
       color="primary"
+      size="small"
+      dark
+      fab
     >
       <v-icon dark>
         mdi-minus
@@ -14,10 +14,10 @@
 
     <v-btn
       class="mx-2"
-      fab
-      dark
-      size="small"
       color="pink"
+      size="small"
+      dark
+      fab
     >
       <v-icon dark>
         mdi-heart
@@ -26,9 +26,9 @@
 
     <v-btn
       class="mx-2"
-      fab
-      dark
       color="indigo"
+      dark
+      fab
     >
       <v-icon dark>
         mdi-plus
@@ -37,9 +37,9 @@
 
     <v-btn
       class="mx-2"
-      fab
-      dark
       color="teal"
+      dark
+      fab
     >
       <v-icon dark>
         mdi-format-list-bulleted-square
@@ -48,10 +48,10 @@
 
     <v-btn
       class="mx-2"
-      fab
-      dark
-      size="large"
       color="cyan"
+      size="large"
+      dark
+      fab
     >
       <v-icon dark>
         mdi-pencil
@@ -60,10 +60,10 @@
 
     <v-btn
       class="mx-2"
-      fab
-      dark
-      size="large"
       color="purple"
+      size="large"
+      dark
+      fab
     >
       <v-icon dark>
         mdi-android

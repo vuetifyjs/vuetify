@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <v-container class="d-flex" :style="{ minHeight: '100%' }">
+    <v-container :style="{ minHeight: '100%' }" class="d-flex">
       <v-row align="center" justify="center">
         <v-col cols="auto">
           <h1 class="text-h3 text-primary">

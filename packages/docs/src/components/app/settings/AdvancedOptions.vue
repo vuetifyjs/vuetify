@@ -1,12 +1,12 @@
 <template>
-  <settings-header
-    title="communication"
+  <AppSettingsSettingsHeader
     text="communication-message"
+    title="communication"
   />
 
-  <AppSettingsBannerOption />
+  <AppSettingsOptionsBannerOption />
 
-  <AppSettingsNotificationsOption />
+  <AppSettingsOptionsNotificationsOption />
 
   <br>
 
@@ -24,8 +24,8 @@
   <v-divider class="my-3" />
 
   <AppSettingsSettingsHeader
-    title="dashboard.advanced-options.danger-zone"
     text="dashboard.advanced-options.danger-zone-message"
+    title="dashboard.advanced-options.danger-zone"
   />
 
   <AppSettingsDeveloperMode />

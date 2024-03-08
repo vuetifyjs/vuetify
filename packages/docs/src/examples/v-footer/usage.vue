@@ -2,8 +2,8 @@
   <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div>
       <v-footer v-bind="props">

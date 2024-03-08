@@ -2,8 +2,8 @@
   <v-select
     v-model="model"
     :items="items"
-    readonly
     label="Read-only"
+    readonly
   ></v-select>
 </template>
 

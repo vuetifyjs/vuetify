@@ -35,8 +35,8 @@
 
     <v-card-actions>
       <v-btn
-        block
         color="deep-purple-accent-4"
+        block
       >
         Add to Cart
       </v-btn>

@@ -4,8 +4,8 @@
       v-for="([name, wireframe], i) in wireframes"
       :key="i"
       cols="12"
-      md="6"
       lg="4"
+      md="6"
     >
       <router-link
         :to="rpath(`/wireframes/${wireframe}/`)"
@@ -16,8 +16,8 @@
         <AppFigure
           :alt="`${name} layout`"
           :aspect-ratio="16/9"
-          :title="name"
           :src="`https://cdn.vuetifyjs.com/docs/images/wireframes/${wireframe}.svg`"
+          :title="name"
           class="border"
         />
       </router-link>

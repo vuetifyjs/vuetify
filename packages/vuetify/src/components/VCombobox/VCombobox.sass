@@ -75,8 +75,8 @@
     .v-field__input > input
       caret-color: transparent
 
-  &--single
-    &.v-text-field .v-field--focused input
+  &--single:not(.v-combobox--selection-slot)
+    &.v-text-field input
       flex: 1 1
       position: absolute
       left: 0

@@ -8,14 +8,14 @@
     ></v-select>
     <v-data-table
       :headers="headerArray"
-      :items="itemsArray"
-      :search="search"
       :hide-default-header="hideHeaders"
-      :show-select="showSelect"
+      :items="itemsArray"
       :loading="isLoading"
-      hide-default-footer
-      item-key="name"
+      :search="search"
+      :show-select="showSelect"
       class="elevation-1"
+      item-key="name"
+      hide-default-footer
     >
       <template
         v-if="isEnabled('top')"
@@ -53,8 +53,8 @@
         v-slot:progress
       >
         <v-progress-linear
-          color="purple"
           :height="10"
+          color="purple"
           indeterminate
         ></v-progress-linear>
       </template>
@@ -64,8 +64,8 @@
         v-slot:item.data-table-select="{ isSelected, select }"
       >
         <v-checkbox-btn
-          color="green"
           :value="isSelected"
+          color="green"
           @input="select($event)"
         ></v-checkbox-btn>
       </template>

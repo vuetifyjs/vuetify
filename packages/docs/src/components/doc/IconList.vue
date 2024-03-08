@@ -2,13 +2,13 @@
   <v-autocomplete
     v-model="selection"
     v-model:search="search"
-    :items="filteredIcons"
     :item-props="itemProps"
+    :items="filteredIcons"
     :placeholder="t('search.icons')"
     item-title="name"
     item-value="name"
-    no-filter
     variant="outlined"
+    no-filter
   >
     <template #prepend-inner>
       <v-expand-x-transition>

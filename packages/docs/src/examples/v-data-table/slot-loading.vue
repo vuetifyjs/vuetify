@@ -9,7 +9,7 @@
     ></v-btn>
   </div>
 
-  <v-data-table :loading="loading" :items="items">
+  <v-data-table :items="items" :loading="loading">
     <template v-slot:loading>
       <v-skeleton-loader type="table-row@10"></v-skeleton-loader>
     </template>

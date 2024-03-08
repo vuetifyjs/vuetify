@@ -2,8 +2,8 @@
   <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div>
       <v-radio-group v-bind="props" hide-details>

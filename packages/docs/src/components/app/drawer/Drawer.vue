@@ -2,10 +2,10 @@
   <v-navigation-drawer
     id="app-drawer"
     v-model="app.drawer"
-    :rail="railEnabled"
     :expand-on-hover="railEnabled"
-    :image="image"
+    :image="settings.suit['drawer']"
     :order="mobile ? -1 : undefined"
+    :rail="railEnabled"
     width="300"
     @update:rail="onUpdateRail"
   >
@@ -33,10 +33,10 @@
 
   const app = useAppStore()
   const pins = usePinsStore()
+  const settings = useSettingsStore()
   const user = useUserStore()
 
   const { mobile } = useDisplay()
-  const theme = useTheme()
 
   const rail = ref(user.railDrawer)
   const _opened = ref([])
@@ -61,12 +61,6 @@
         container: scrollingElement,
       })
     }
-  })
-
-  const image = computed(() => {
-    if (['dark', 'light'].includes(theme.name.value)) return undefined
-
-    return `https://cdn.vuetifyjs.com/docs/images/themes/${theme.name.value}-app-drawer.png`
   })
 
   watch(railEnabled, val => {

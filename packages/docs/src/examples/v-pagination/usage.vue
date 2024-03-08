@@ -12,7 +12,7 @@
     </div>
 
     <template v-slot:configuration>
-      <v-slider v-model="length" label="Length" min="1" max="20"></v-slider>
+      <v-slider v-model="length" label="Length" max="20" min="1"></v-slider>
     </template>
   </ExamplesUsageExample>
 </template>

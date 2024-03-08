@@ -2,8 +2,8 @@
   <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div class="d-flex justify-center">
       <v-color-picker v-bind="props"></v-color-picker>

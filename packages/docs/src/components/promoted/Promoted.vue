@@ -25,9 +25,9 @@
               :alt="`Link to ${ad.title}`"
               :src="logo"
               class="mx-1 mx-md-2"
-              contain
               height="56"
               max-width="56"
+              contain
             />
 
             <AppMarkdown

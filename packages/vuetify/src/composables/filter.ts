@@ -83,7 +83,7 @@ export function filterItems (
         const filterKeys = keys || Object.keys(transformed)
 
         for (const key of filterKeys) {
-          const value = getPropertyFromItem(transformed, key, transformed)
+          const value = getPropertyFromItem(transformed, key)
           const keyFilter = options?.customKeyFilter?.[key]
 
           match = keyFilter
