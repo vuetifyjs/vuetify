@@ -1,3 +1,9 @@
-.v-application
-  ul, ol
+// Imports
+@import '../styles.sass'
+
+ul, ol
+  +ltr()
     padding-left: $spacer * 6
+
+  +rtl()
+    padding-right: $spacer * 6
