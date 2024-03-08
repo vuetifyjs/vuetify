@@ -20,6 +20,8 @@ type VirtualProps = {
   height?: number | string
 }
 
+type ScrollToPosition = 'start'|'center'|'end'
+
 export const makeVirtualProps = propsFactory({
   itemHeight: {
     type: [Number, String],
@@ -73,6 +75,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   let offsets = Array.from<number>({ length: items.value.length })
   const updateTime = shallowRef(0)
   let targetScrollIndex = -1
+  let targetScrollPosition: ScrollToPosition = 'start'
 
   function getSize (index: number) {
     return sizes[index] || itemHeight.value
@@ -102,8 +105,9 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
 
     nextTick(() => {
       IN_BROWSER && window.requestAnimationFrame(() => {
-        scrollToIndex(targetScrollIndex)
+        scrollToIndex(targetScrollIndex, targetScrollPosition)
         targetScrollIndex = -1
+        targetScrollPosition = 'start'
       })
     })
   })
@@ -220,12 +224,19 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     paddingBottom.value = calculateOffset(items.value.length) - calculateOffset(last.value)
   }
 
-  function scrollToIndex (index: number) {
+  function scrollToIndex (index: number, position: ScrollToPosition = 'start') {
     const offset = calculateOffset(index)
     if (!containerRef.value || (index && !offset)) {
       targetScrollIndex = index
+      targetScrollPosition = position
     } else {
-      containerRef.value.scrollTop = offset
+      if (position === 'start') {
+        containerRef.value.scrollTop = offset
+      } else if (position === 'center') {
+        containerRef.value.scrollTop = offset - (viewportHeight.value / 2) + (getSize(index) / 2)
+      } else if (position === 'end') {
+        containerRef.value.scrollTop = offset - viewportHeight.value + getSize(index)
+      }
     }
   }
 
