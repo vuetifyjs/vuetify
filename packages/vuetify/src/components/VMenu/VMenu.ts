@@ -213,15 +213,26 @@ export default baseMixins.extend({
   methods: {
     activate () {
       // Update coordinates and dimensions of menu
-      // and its activator
-      this.updateDimensions()
+      // and its activator on the first activation to prevent
+      // menu from "jumping" around
+      if (this.$refs.content === undefined) {
+        this.updateDimensions()
+      }
       // Start the transition
       requestAnimationFrame(() => {
-        // Once transitioning, calculate scroll and top position
+        const transitionEndPromise = new Promise(resolve => {
+          this.$refs.content.ontransitionend = () => {
+            resolve()
+          }
+        })
         this.startTransition().then(() => {
           if (this.$refs.content) {
-            this.calculatedTopAuto = this.calcTopAuto()
-            this.auto && (this.$refs.content.scrollTop = this.calcScrollPosition())
+            transitionEndPromise.then(() => {
+              // Once transitioning, calculate scroll and top position
+              this.calculatedTopAuto = this.calcTopAuto()
+              this.auto && (this.$refs.content.scrollTop = this.calcScrollPosition())
+              this.updateDimensions()
+            })
           }
         })
       })
