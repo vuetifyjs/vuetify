@@ -45,16 +45,16 @@
   const items = ref([
     {
       id: 1,
-      name: 'Root',
+      title: 'Root',
       children: [
-        { id: 2, name: 'Child #1' },
-        { id: 3, name: 'Child #2' },
+        { id: 2, title: 'Child #1' },
+        { id: 3, title: 'Child #2' },
         {
           id: 4,
-          name: 'Child #3',
+          title: 'Child #3',
           children: [
-            { id: 5, name: 'Grandchild #1' },
-            { id: 6, name: 'Grandchild #2' },
+            { id: 5, title: 'Grandchild #1' },
+            { id: 6, title: 'Grandchild #2' },
           ],
         },
       ],
@@ -70,16 +70,16 @@
       items: [
         {
           id: 1,
-          name: 'Root',
+          title: 'Root',
           children: [
-            { id: 2, name: 'Child #1' },
-            { id: 3, name: 'Child #2' },
+            { id: 2, title: 'Child #1' },
+            { id: 3, title: 'Child #2' },
             {
               id: 4,
-              name: 'Child #3',
+              title: 'Child #3',
               children: [
-                { id: 5, name: 'Grandchild #1' },
-                { id: 6, name: 'Grandchild #2' },
+                { id: 5, title: 'Grandchild #1' },
+                { id: 6, title: 'Grandchild #2' },
               ],
             },
           ],

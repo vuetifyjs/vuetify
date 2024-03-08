@@ -2,11 +2,13 @@
   <v-card>
     <v-toolbar
       color="primary"
-      dark
       flat
     >
-      <v-icon>mdi-silverware</v-icon>
-      <v-toolbar-title>Local hotspots</v-toolbar-title>
+      <template v-slot:prepend>
+        <v-icon start>mdi-silverware</v-icon>
+
+        <v-toolbar-title>Local hotspots</v-toolbar-title>
+      </template>
     </v-toolbar>
 
     <v-row>
@@ -18,6 +20,7 @@
             :load-children="load"
             expand-icon="mdi-chevron-down"
             indeterminate-icon="mdi-bookmark-minus"
+            item-title="name"
             off-icon="mdi-bookmark-outline"
             on-icon="mdi-bookmark"
             selected-color="indigo"

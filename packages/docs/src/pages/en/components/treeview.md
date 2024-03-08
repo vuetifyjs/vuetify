@@ -1,33 +1,38 @@
 ---
-disabled: true
+emphasized: true
 meta:
+  nav: Treeview
   title: Treeview component
   description: The treeview component is a user interface that is used to represent hierarchical data in a tree structure.
   keywords: treeview, vuetify treeview component, vue treeview component
 related:
   - /components/lists/
   - /components/timelines/
-
+features:
+  label: 'C: VTreeview'
+  report: true
 ---
 
 # Treeview
 
 The `v-treeview` component is useful for displaying large amounts of nested data.
 
-<PromotedEntry />
+<PageFeatures />
 
 ## Usage
 
 A basic example
 
-<ExamplesExample file="v-treeview/usage" />
+<!-- <ExamplesExample file="v-treeview/usage" /> -->
+
+<PromotedEntry />
 
 ## API
 
 | Component | Description |
 | - | - |
 | [v-treeview](/api/v-treeview/) | Primary Component |
-| [v-treeview-node](/api/v-treeview-node/) | Sub-component used to display a single treeview node |
+| [v-treeview-item](/api/v-treeview-item/) | Sub-component used to display a single treeview node |
 
 <ApiInline hide-links />
 
@@ -53,11 +58,11 @@ Dense mode provides more compact layout with decreased heights of the items.
 
 <ExamplesExample file="v-treeview/prop-dense" />
 
-#### Hoverable
+<!-- #### Hoverable
 
 Treeview nodes can have a hover effect.
 
-<ExamplesExample file="v-treeview/prop-hoverable" />
+<ExamplesExample file="v-treeview/prop-hoverable" /> -->
 
 #### Item disabled
 
