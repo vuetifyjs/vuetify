@@ -237,6 +237,10 @@ export default VSelect.extend({
           this.setMenuIndex(0)
           this.$emit('update:list-index', this.$refs.menu.listIndex)
         }
+
+        if (!val.length) {
+          this.setMenuIndex(-1)
+        }
       })
     },
     onInternalSearchChanged () {
