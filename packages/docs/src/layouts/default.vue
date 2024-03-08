@@ -1,8 +1,10 @@
 <template>
   <v-app>
-    <AppSettingsDrawer />
+    <VoNotificationsBanner />
 
-    <AppBanner />
+    <VoAuthDialog />
+
+    <AppSettingsDrawer />
 
     <AppBarBar />
 
