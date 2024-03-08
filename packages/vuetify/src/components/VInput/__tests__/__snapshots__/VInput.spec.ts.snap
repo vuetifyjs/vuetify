@@ -20,7 +20,9 @@ exports[`VInput.ts should apply theme to label, counter, messages and icons 1`] 
         foo
       </label>
     </div>
-    <div class="v-messages theme--light">
+    <div class="v-messages theme--light"
+         id="input-68-messages"
+    >
       <span name="message-transition"
             tag="div"
             class="v-messages__wrapper"
@@ -66,6 +68,7 @@ exports[`VInput.ts should be in an error state 2`] = `
     </div>
     <div class="v-messages theme--light error--text"
          role="alert"
+         id="input-47-messages"
     >
       <span name="message-transition"
             tag="div"

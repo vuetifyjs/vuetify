@@ -265,6 +265,7 @@ export default baseMixins.extend<options>().extend({
         },
         attrs: {
           role: this.hasMessages ? 'alert' : null,
+          id: this.hasDetails ? this.computedId + '-messages' : null,
         },
         scopedSlots: {
           default: props => getSlot(this, 'message', props),
