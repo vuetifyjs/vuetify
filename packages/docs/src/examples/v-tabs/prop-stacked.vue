@@ -2,8 +2,8 @@
   <v-card>
     <v-tabs
       v-model="tab"
+      align-tabs="center"
       bg-color="deep-purple-accent-4"
-      centered
       stacked
     >
       <v-tab value="tab-1">

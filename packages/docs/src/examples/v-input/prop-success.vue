@@ -1,8 +1,8 @@
 <template>
   <v-input
     :success-messages="['Success']"
-    success
     disabled
+    success
   >
     Input
   </v-input>

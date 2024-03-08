@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :name="name"
@@ -47,17 +47,10 @@
       </v-lazy>
       <br>
     </v-responsive>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Composables
-  import { useGoTo } from 'vuetify'
-
-  // Utilities
-  import { computed, ref, shallowRef } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const goTo = useGoTo()
 
   const name = 'v-lazy'

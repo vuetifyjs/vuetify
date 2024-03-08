@@ -20,15 +20,15 @@ features:
 
 The `v-autocomplete` component offers simple and flexible type-ahead functionality. This is useful when searching large sets of data or even dynamically requesting information from an API.
 
-<page-features />
+<PageFeatures />
 
 ## Usage
 
 The autocomplete component extends `v-select` and adds the ability to filter items.
 
-<usage name="v-autocomplete" />
+<ExamplesUsage name="v-autocomplete" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -38,7 +38,7 @@ The autocomplete component extends `v-select` and adds the ability to filter ite
 | [v-combobox](/api/v-combobox/) | A select component that allows for filtering and custom values |
 | [v-select](/api/v-select/) | A replacement for the HTML <select></select> |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Caveats
 
@@ -58,13 +58,13 @@ Below is a collection of simple to complex examples.
 
 You can use `density` prop to adjust vertical spacing within the component.
 
-<example file="v-autocomplete/prop-density" />
+<ExamplesExample file="v-autocomplete/prop-density" />
 
 #### Filter
 
 The `custom-filter` prop can be used to filter each individual item with custom logic. In this example we filter items by name.
 
-<example file="v-autocomplete/prop-filter" />
+<ExamplesExample file="v-autocomplete/prop-filter" />
 
 ::: tip
 
@@ -80,7 +80,7 @@ Unlike **v-combobox**, it doesn't keep unlisted values. To prevent unnecessary A
 
 With the power of slots, you can customize the visual output of the select. In this example we add a profile picture for both the chips and list items.
 
-<example file="v-autocomplete/slot-item-and-selection" />
+<ExamplesExample file="v-autocomplete/slot-item-and-selection" />
 
 ### Misc
 
@@ -89,14 +89,14 @@ With the power of slots, you can customize the visual output of the select. In t
 
 Sometimes you need to load data externally based upon a search query. Use the `search-input` prop with the **.sync** modifier when using the `autocomplete` prop. We also make use of the new `cache-items` prop. This will keep a unique list of all items that have been passed to the `items` prop and is **REQUIRED** when using asynchronous items and the **multiple** prop.
 
-<example file="v-autocomplete/misc-asynchronous-items" />
+<ExamplesExample file="v-autocomplete/misc-asynchronous-items" />
 -->
 
 #### State selector
 
 Using a combination of `v-autocomplete` slots and transitions, you can create a stylish toggleable autocomplete field such as this state selector.
 
-<example file="v-autocomplete/misc-state-selector" />
+<ExamplesExample file="v-autocomplete/misc-state-selector" />
 
 #### New tab
 
@@ -106,4 +106,4 @@ This feature was introduced in [v3.3.0 (Icarus)](/getting-started/release-notes/
 
 The **auto-select-first** property highlights the first result when searching, allowing you to press <v-kbd>tab</v-kbd> or <v-kbd>enter</v-kbd> to quickly select it.
 
-<example file="v-autocomplete/misc-new-tab" />
+<ExamplesExample file="v-autocomplete/misc-new-tab" />

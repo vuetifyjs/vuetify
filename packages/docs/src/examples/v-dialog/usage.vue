@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :name="name"
@@ -34,14 +34,10 @@
         </template>
       </v-dialog>
     </div>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-dialog'
   const model = ref('default')
   const dialog = ref(false)
@@ -49,14 +45,19 @@
 
   const props = computed(() => {
     return {
-      width: '500',
+      'max-width': '500',
     }
   })
 
   const slots = computed(() => {
     return `
-  <template v-slot:activator="{ props }">
-    <v-btn v-bind="props" text="Open Dialog"> </v-btn>
+  <template v-slot:activator="{ props: activatorProps }">
+    <v-btn
+      v-bind="activatorProps"
+      color="surface-variant"
+      text="Open Dialog"
+      variant="flat"
+    ></v-btn>
   </template>
 
   <template v-slot:default="{ isActive }">

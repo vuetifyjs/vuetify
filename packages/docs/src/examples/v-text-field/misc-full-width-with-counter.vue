@@ -3,11 +3,11 @@
     <v-autocomplete
       v-model="selected"
       :items="items"
+      label="To"
       chips
       hide-details
       hide-no-data
       hide-selected
-      label="To"
       multiple
       single-line
     ></v-autocomplete>
@@ -16,8 +16,8 @@
 
     <v-text-field
       v-model="subject"
-      hide-details
       label="Subject"
+      hide-details
       single-line
     ></v-text-field>
 
@@ -25,9 +25,9 @@
 
     <v-textarea
       v-model="title"
-      counter
       label="Message"
       maxlength="120"
+      counter
       single-line
     ></v-textarea>
   </v-form>

@@ -17,8 +17,8 @@ import { installGlobalComponents } from '@/plugins/global-components'
 import { installGtag } from '@/plugins/gtag'
 import { installOne } from '@/plugins/one'
 import { installI18n } from '@/plugins/i18n'
-import { useAppStore } from '@/store/app'
-import { useLocaleStore } from '@/store/locale'
+import { useAppStore } from '@/stores/app'
+import { useLocaleStore } from '@/stores/locale'
 import { installPwa } from '@/plugins/pwa'
 import { useUserStore } from '@vuetify/one'
 import { installVuetify } from '@/plugins/vuetify'
@@ -31,11 +31,11 @@ import {
   redirectRoutes,
   rpath,
   trailingSlash,
-} from '@/util/routes'
-import { wrapInArray } from '@/util/helpers'
+} from '@/utils/routes'
+import { wrapInArray } from '@/utils/helpers'
 
 // Globals
-import { IN_BROWSER } from '@/util/globals'
+import { IN_BROWSER } from '@/utils/globals'
 
 const routes = setupLayouts(generatedRoutes)
 

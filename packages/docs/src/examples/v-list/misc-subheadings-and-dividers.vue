@@ -1,7 +1,7 @@
 <template>
   <v-card
-    max-width="475"
     class="mx-auto"
+    max-width="475"
   >
     <v-toolbar
       color="teal"
@@ -32,9 +32,9 @@
     <v-divider></v-divider>
 
     <v-list
-      subheader
       lines="two"
       flat
+      subheader
     >
       <v-list-subheader>Hangout notifications</v-list-subheader>
 

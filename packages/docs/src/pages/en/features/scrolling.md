@@ -18,9 +18,9 @@ features:
 
 Handle scrolling within your application by using the **goTo** function.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ::: success
 
@@ -32,7 +32,7 @@ This feature was introduced in [v3.5.0 (Polaris)](/getting-started/release-notes
 
 The **goTo** method takes two parameters **target** and **options**. **target** can be either a pixel offset from the top of the page, a valid css selector, or an element reference. **options** is an object that includes **duration**, **easing**, **container**, and **offset**.
 
-<example file="scroll/usage" />
+<ExamplesExample file="scroll/usage" />
 
 ## API
 
@@ -40,7 +40,7 @@ The **goTo** method takes two parameters **target** and **options**. **target** 
 | - | - |
 | [useGoTo](/api/use-go-to/) | The useGoTo composable |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 <!--## Use with router
 
@@ -66,4 +66,5 @@ export default new Router({
     //
   ],
 })
-``` -->
+```
+-->

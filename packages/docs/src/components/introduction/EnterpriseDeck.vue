@@ -15,7 +15,7 @@
       <v-row>
         <template v-for="(item, i) in items" :key="i">
           <v-col cols="12" md="4">
-            <v-responsive class="mb-4" :min-height="mdAndUp ? 96 : undefined">
+            <v-responsive :min-height="mdAndUp ? 96 : undefined" class="mb-4">
               <h3 class="text-h5 font-weight-medium">
                 {{ item.name }}
               </h3>
@@ -32,14 +32,14 @@
 
             <v-btn
               :href="item.href"
-              target="_blank"
-              rel="noopener"
+              :variant="i === 0 ? 'flat' : 'outlined'"
               class="mb-6 text-none"
               color="primary"
-              block
-              text="Book Now"
+              rel="noopener"
               size="x-large"
-              :variant="i === 0 ? 'flat' : 'outlined'"
+              target="_blank"
+              text="Book Now"
+              block
             />
 
             <ul class="text-caption ps-1" style="list-style-type: none;">
@@ -63,9 +63,6 @@
 </template>
 
 <script setup>
-  // eslint-disable
-  import { useDisplay } from 'vuetify'
-
   const { mdAndUp } = useDisplay()
 
   const items = [

@@ -17,9 +17,9 @@ features:
 
 Easily hook up date libraries that are used for components such as Date Picker and Calendar that require date functionality.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ::: success
 This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
@@ -95,7 +95,7 @@ The following example shows how to use the date composable to format a date stri
 | - | - |
 | [useDate](/api/use-date/) | The date composable is used by components that require date functionality |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ### Adapter
 

@@ -79,7 +79,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
           rangeStop.value = _value
         }
 
-        const diff = adapter.getDiff(rangeStop.value, rangeStart.value)
+        const diff = adapter.getDiff(rangeStop.value, rangeStart.value, 'days')
         const datesInRange = [rangeStart.value]
 
         for (let i = 1; i < diff; i++) {
@@ -182,6 +182,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                   <VDefaultsProvider
                     defaults={{
                       VBtn: {
+                        class: 'v-date-picker-month__day-btn',
                         color: (item.isSelected || item.isToday) && !item.isDisabled
                           ? props.color
                           : undefined,
@@ -190,7 +191,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                         ripple: false,
                         text: item.localized,
                         variant: item.isDisabled
-                          ? 'text'
+                          ? item.isToday ? 'outlined' : 'text'
                           : item.isToday && !item.isSelected ? 'outlined' : 'flat',
                         onClick: () => onClick(item.date),
                       },

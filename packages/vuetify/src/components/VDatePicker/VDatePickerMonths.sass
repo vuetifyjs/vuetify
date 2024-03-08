@@ -1,6 +1,7 @@
+@use './variables' as *
+
 .v-date-picker-months
-  height: 320px
-  overflow-y: scroll
+  height: $date-picker-months-height
 
 .v-date-picker-months__content
   align-items: center
@@ -9,7 +10,7 @@
   height: inherit
   justify-content: space-around
   grid-template-columns: repeat(2, 1fr)
-  grid-gap: 4px 24px
+  grid-gap: $date-picker-months-grid-gap
   padding-inline-start: 36px
   padding-inline-end: 36px
 

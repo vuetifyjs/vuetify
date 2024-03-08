@@ -100,7 +100,8 @@ $list-item-subtitle-letter-spacing: tools.map-deep-get(settings.$typography, 'bo
 $list-item-subtitle-line-height: 1rem !default;
 $list-item-subtitle-padding: 0 !default;
 $list-item-subtitle-text-transform: none !default;
-$list-item-subtitle-word-break: break-all !default;
+$list-item-subtitle-overflow-wrap: break-word !default;
+$list-item-subtitle-word-break: initial !default;
 
 $list-item-title-font-size: tools.map-deep-get(settings.$typography, 'body-1', 'size') !default;
 $list-item-title-font-weight: tools.map-deep-get(settings.$typography, 'body-1', 'weight') !default;

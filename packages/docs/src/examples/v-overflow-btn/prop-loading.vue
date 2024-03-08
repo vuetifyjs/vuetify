@@ -1,11 +1,11 @@
 <template>
   <v-container id="dropdown-example-1">
     <v-overflow-btn
-      class="my-2"
       :items="dropdownFont"
+      class="my-2"
       label="Overflow Btn w/ loading"
-      loading
       target="#dropdown-example-1"
+      loading
     ></v-overflow-btn>
   </v-container>
 </template>

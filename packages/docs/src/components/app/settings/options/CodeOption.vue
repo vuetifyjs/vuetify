@@ -6,7 +6,7 @@
       }
     }"
   >
-    <settings-switch
+    <SettingsSwitch
       v-model="user.composition"
       :label="t('enable-composition')"
       :messages="t('enable-composition-message')"
@@ -17,12 +17,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Composables
-  import { useUserStore } from '@vuetify/one'
-
   const { t } = useI18n()
   const user = useUserStore()
 </script>

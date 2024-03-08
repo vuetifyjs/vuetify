@@ -2,8 +2,8 @@
   <v-card>
     <v-tabs
       v-model="tab"
-      color="deep-purple-accent-4"
       align-tabs="center"
+      color="deep-purple-accent-4"
     >
       <v-tab :value="1">Landscape</v-tab>
       <v-tab :value="2">City</v-tab>
@@ -24,8 +24,8 @@
               md="4"
             >
               <v-img
-                :src="`https://picsum.photos/500/300?image=${i * n * 5 + 10}`"
                 :lazy-src="`https://picsum.photos/10/6?image=${i * n * 5 + 10}`"
+                :src="`https://picsum.photos/500/300?image=${i * n * 5 + 10}`"
                 aspect-ratio="1"
               ></v-img>
             </v-col>

@@ -1,8 +1,8 @@
 <template>
   <v-treeview
-    selectable
-    item-disabled="locked"
     :items="items"
+    item-disabled="locked"
+    selectable
   ></v-treeview>
 </template>
 

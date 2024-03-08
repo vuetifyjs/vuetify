@@ -13,25 +13,25 @@
       <br>
       <br>
 
-      Please read our <a href="#" class="text-red-accent-2">Privacy Policy</a> to learn about our privacy practices or click "Your Preferences" to exercise control over your data.
+      Please read our <a class="text-red-accent-2" href="#">Privacy Policy</a> to learn about our privacy practices or click "Your Preferences" to exercise control over your data.
     </p>
 
     <v-btn
-      block
       class="text-none text-black mb-4"
       color="red-accent-2"
       size="x-large"
       variant="flat"
+      block
     >
       Accept
     </v-btn>
 
     <v-btn
-      block
       class="text-none text-black"
       color="red-accent-2"
       size="x-large"
       variant="outlined"
+      block
     >
       Your Preferences
     </v-btn>

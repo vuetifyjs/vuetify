@@ -133,7 +133,7 @@ export function useGroupItem (
 
   watch(isSelected, value => {
     vm.emit('group:selected', { value })
-  })
+  }, { flush: 'sync' })
 
   return {
     id,

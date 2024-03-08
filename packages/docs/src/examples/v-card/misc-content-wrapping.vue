@@ -3,10 +3,10 @@
     <v-row justify="space-around">
       <v-card width="400">
         <v-img
+          class="text-white"
           height="200"
           src="https://cdn.vuetifyjs.com/docs/images/cards/purple-flowers.jpg"
           cover
-          class="text-white"
         >
           <v-toolbar
             color="rgba(0, 0, 0, 0)"
@@ -31,7 +31,7 @@
             Today
           </div>
 
-          <v-timeline density="compact" align="start">
+          <v-timeline align="start" density="compact">
             <v-timeline-item
               v-for="message in messages"
               :key="message.time"

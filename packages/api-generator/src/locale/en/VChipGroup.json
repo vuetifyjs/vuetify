@@ -3,7 +3,6 @@
     "centerActive": "Forces the selected chip to be centered.",
     "column": "Remove horizontal pagination and wrap items as needed.",
     "filter": "Applies an checkmark icon in front of every chip for using it like a filter.",
-    "mobileBreakpoint": "Sets the designated mobile breakpoint for the component.",
     "nextIcon": "Specify the icon to use for the next icon.",
     "prependIcon": "This icon used in the prepend slot (if shown).",
     "prevIcon": "Specify the icon to use for the prev icon.",

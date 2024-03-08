@@ -1,13 +1,13 @@
 <template>
   <div class="text-center">
     <v-menu
-      transition="scale-transition"
       origin="center center"
+      transition="scale-transition"
     >
       <template v-slot:activator="{ props }">
         <v-btn
-          dark
           color="primary"
+          dark
           v-bind="props"
         >
           Scale Transition

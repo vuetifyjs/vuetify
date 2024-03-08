@@ -18,15 +18,15 @@ features:
 
 The `v-img` component is packed with features to support rich media. Combined with the [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader), you can add dynamic progressive images to provide a better user experience.
 
-<page-features />
+<PageFeatures />
 
 ## Usage
 
 `v-img` component is used to display a responsive image with lazy-load and placeholder.
 
-<usage name="v-img" />
+<ExamplesUsage name="v-img" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -34,7 +34,7 @@ The `v-img` component is packed with features to support rich media. Combined wi
 | - | - |
 | [v-img](/api/v-img/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Caveats
 
@@ -51,13 +51,13 @@ The `v-img` component is packed with features to support rich media. Combined wi
 
 If the provided aspect ratio doesn't match that of the actual image, the default behavior is to fill as much space as possible without cropping. To fill the entire available space use the `cover` prop.
 
-<example file="v-img/prop-cover" />
+<ExamplesExample file="v-img/prop-cover" />
 
 #### Height
 
 `v-img` will automatically grow to the size of its `src`, preserving the correct aspect ratio. You can limit this with the `height` and `max-height` props.
 
-<example file="v-img/prop-max-height" />
+<ExamplesExample file="v-img/prop-max-height" />
 
 ### Slots
 
@@ -65,13 +65,13 @@ If the provided aspect ratio doesn't match that of the actual image, the default
 
 `v-img` has a special `placeholder` slot for placeholder to display while image's loading. Note: the example below has bad src which won't load for you to see placeholder.
 
-<example file="v-img/slot-placeholder" />
+<ExamplesExample file="v-img/slot-placeholder" />
 
 #### Error
 
 `v-img` has an `error` slot that can be used to display alternative content if an error occurs while loading your source image. A common use for this slot is to load a fallback image if your original image is not available.
 
-<example file="v-img/slot-error" />
+<ExamplesExample file="v-img/slot-error" />
 
 ### Misc
 
@@ -102,10 +102,10 @@ This will behave similarly to:
 
 You can use `v-img` to make, for example, a picture gallery.
 
-<example file="v-img/misc-grid" />
+<ExamplesExample file="v-img/misc-grid" />
 
 #### Complex Grid Layout
 
 Build a more complex picture gallery layout using `flex-box` classes.
 
-<example file="v-img/complex-grid" />
+<ExamplesExample file="v-img/complex-grid" />

@@ -1,0 +1,6 @@
+{
+  "props": {
+    "cancelText": "Text for the cancel button",
+    "okText": "Text for the ok button"
+  }
+}

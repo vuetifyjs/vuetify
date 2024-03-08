@@ -2,20 +2,14 @@
   <v-btn
     :icon="icon"
     height="28"
-    rounded
     size="small"
     variant="text"
+    rounded
     @click="onClick"
   />
 </template>
 
 <script setup>
-  // Stores
-  import { useUserStore } from '@vuetify/one'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const user = useUserStore()
 
   const icon = computed(() => {

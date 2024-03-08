@@ -10,15 +10,15 @@
           <v-img
             :src="`https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-${theme.name.value}-slim.svg`"
             class="mx-auto"
-            contain
             height="64"
             width="64"
+            contain
           />
         </v-col>
 
         <v-col
-          cols="12"
           class="pb-0"
+          cols="12"
         >
           <a
             v-for="(social, i) in socials"
@@ -83,10 +83,6 @@
 </template>
 
 <script setup>
-// Composables
-  import { useI18n } from 'vue-i18n'
-  import { useTheme } from 'vuetify'
-
   const { t } = useI18n()
   const theme = useTheme()
   const links = [

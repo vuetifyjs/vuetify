@@ -5,8 +5,8 @@
   >
     <div class="position-absolute d-flex align-center justify-center w-100 h-100">
       <v-btn
-        size="x-large"
         color="deep-purple-darken-2"
+        size="x-large"
         @click="dialog = !dialog"
       >
         Open Dialog
@@ -46,8 +46,8 @@
             class="text-none"
             color="medium-emphasis"
             min-width="92"
-            rounded
             variant="outlined"
+            rounded
             @click="dialog = false"
           >
             Close

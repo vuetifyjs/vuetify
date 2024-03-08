@@ -21,7 +21,7 @@ The bottom sheet is a modified `v-dialog` that slides from the bottom of the scr
 
 ![Bottom Sheet Entry](https://cdn.vuetifyjs.com/docs/images/components/v-bottom-sheet/v-bottom-sheet-entry.png)
 
-<page-features />
+<PageFeatures />
 
 ::: success
 This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
@@ -31,9 +31,9 @@ This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-no
 
 Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet is meant to contain anything.
 
-<usage name="v-bottom-sheet" />
+<ExamplesUsage name="v-bottom-sheet" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -41,7 +41,7 @@ Whereas a bottom navigation component is for buttons and specific application le
 |--------------------------------------------------|-------------------|
 | [v-bottom-sheet](/api/v-bottom-sheet/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Anatomy
 
@@ -80,7 +80,7 @@ The `v-bottom-sheet` component has access to all of the props available in [v-di
 
 The **v-model** (or **model-value**) controls the visibility of the bottom sheet:
 
-<example file="v-bottom-sheet/prop-model" />
+<ExamplesExample file="v-bottom-sheet/prop-model" />
 
 This also works in tandem with the [activator](/api/v-bottom-sheet/#slots-activator) slot.
 
@@ -88,7 +88,7 @@ This also works in tandem with the [activator](/api/v-bottom-sheet/#slots-activa
 
 With the **inset** prop, reduce the maximum width of the content area on desktop to 70%. This can be further reduced manually using the **width** prop.
 
-<example file="v-bottom-sheet/prop-inset" />
+<ExamplesExample file="v-bottom-sheet/prop-inset" />
 
 ### Slots
 
@@ -113,10 +113,10 @@ The following are a collection of examples that demonstrate more advanced and re
 
 Using a inset bottom sheet, you can make practical components such as this simple music player.
 
-<example file="v-bottom-sheet/misc-player" />
+<ExamplesExample file="v-bottom-sheet/misc-player" />
 
 #### Open In List
 
 By combining a functional list into a bottom sheet, you can create a simple 'open in' component.
 
-<example file="v-bottom-sheet/misc-open-in-list" />
+<ExamplesExample file="v-bottom-sheet/misc-open-in-list" />

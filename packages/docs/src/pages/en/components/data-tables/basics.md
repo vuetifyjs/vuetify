@@ -19,15 +19,15 @@ features:
 
 The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, grouping, and row selection.
 
-<page-features />
+<PageFeatures />
 
 ## Usage
 
 The standard data table presumes that the entire data set is available locally. Sorting, pagination, and filtering is supported and done internally by the component itself.
 
-<usage name="v-data-table" />
+<ExamplesUsage name="v-data-table" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -37,7 +37,7 @@ The standard data table presumes that the entire data set is available locally. 
 | [v-data-table-footer](/api/v-data-table-footer/) | Functional Component used to display Data-table headers |
 | [v-checkbox-btn](/api/v-checkbox-btn/) | Reusable lightweight [v-checkbox](/components/checkboxes) |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ### Server side tables
 
@@ -45,7 +45,7 @@ This variant of the data table is meant to be used for very large datasets, wher
 
 Find more information and examples on the [Server side tables](/components/data-tables/server-side-tables) page.
 
-<example file="v-data-table/server" />
+<ExamplesExample file="v-data-table/server" />
 
 ### Virtual tables
 
@@ -53,7 +53,7 @@ The virtual variant of the data table relies, like the standard variant, on all 
 
 Find more information and examples on the [Virtual tables](/components/data-tables/virtual-tables) page.
 
-<example file="v-data-table/virtual" />
+<ExamplesExample file="v-data-table/virtual" />
 
 ## Guide
 
@@ -85,7 +85,7 @@ Leaf nodes (objects without **children**) will be used as columns for each item.
 <br>
 Branch nodes (objects with **children**) support all the same sorting and filtering options as leaf nodes, but cannot be used as columns.
 
-<example file="v-data-table/headers-multiple" />
+<ExamplesExample file="v-data-table/headers-multiple" />
 
 #### Keys and values
 
@@ -132,33 +132,33 @@ There are no shortable of properties available for customizing various aspects o
 
 Using the **density** prop you are able to give your data tables an alternate style.
 
-<example file="v-data-table/prop-dense" />
+<ExamplesExample file="v-data-table/prop-dense" />
 
 <!-- #### Footer props
 
 The `v-data-table` renders a default footer using the `v-data-footer` component. You can pass props to this component using **footer-props**.
 
-<example file="v-data-table/prop-footer-props" /> -->
+<ExamplesExample file="v-data-table/prop-footer-props" /> -->
 
 <!-- #### Hide default header and footer
 
 You can apply the **hide-default-header** and **hide-default-footer** props to remove the default header and footer respectively.
 
-<example file="v-data-table/prop-hide-header-footer" /> -->
+<ExamplesExample file="v-data-table/prop-hide-header-footer" /> -->
 
 #### Selection
 
 The **show-select** prop will render a checkbox in the default header to toggle all rows, and a checkbox for each row.
 
-For more information and examples, see the [selection](/components/data-tables/selection) page.
+For more information and examples, see the [selection examples](/components/data-tables/data-and-display/#selection-examples) page.
 
-<example file="v-data-table/prop-row-selection" />
+<ExamplesExample file="v-data-table/prop-row-selection" />
 
 #### Simple checkbox
 
 When wanting to use a checkbox component inside of a slot template in your data tables, use the `v-checkbox-btn` component rather than the `v-checkbox` component. The `v-checkbox-btn` component is used internally and will respect header alignment.
 
-<example file="v-data-table/slot-simple-checkbox" />
+<ExamplesExample file="v-data-table/slot-simple-checkbox" />
 
 ### Slots
 
@@ -170,37 +170,37 @@ You can use the dynamic slots `header.<key>` to customize only certain columns. 
 There are two built-in slots for customizing both the select (`header.data-table-select`) and expand (`header.data-table-expand`) columns when using **show-select** and **show-expand** props respectively.
 :::
 
-<example file="v-data-table/slot-header" />
+<ExamplesExample file="v-data-table/slot-header" />
 
 #### Headers slot
 
 You can also override all the internal headers by using the `headers` slot. Remember that you will have to re-implement any internal functionality like sorting.
 
-<example file="v-data-table/slot-headers" />
+<ExamplesExample file="v-data-table/slot-headers" />
 
 #### Item slot
 
 Normally you would use the `item.<key>` slots to render custom markup in specific columns. If you instead need more control over the entire row, you can use the `item` slot.
 
-<example file="v-data-table/slot-item" />
+<ExamplesExample file="v-data-table/slot-item" />
 
 #### Item key slot
 
 You can use the dynamic slots `item.<key>` to customize only certain columns. `<key>` is the name of the **key** property in header items sent to **headers**. So to customize the calories column we're using the `item.calories` slot.
 
-<example file="v-data-table/slot-item-key" />
+<ExamplesExample file="v-data-table/slot-item-key" />
 
 #### Group header slot
 
 When using the **group-by** prop, you can customize the group header with the `group-header` slot.
 
-<example file="v-data-table/slot-group-header" />
+<ExamplesExample file="v-data-table/slot-group-header" />
 
 #### Loading slot
 
 The `loading` slot allows you to customize your table's display state when fetching data. In this example we utilize the [v-skeleton-loader](/components/skeleton-loaders) component to display a loading animation.
 
-<example file="v-data-table/slot-loading" />
+<ExamplesExample file="v-data-table/slot-loading" />
 
 ## Examples
 
@@ -210,7 +210,7 @@ The following are a collection of examples that demonstrate more advanced and re
 
 `v-data-table` with CRUD actions using a `v-dialog` component for editing each row
 
-<example file="v-data-table/misc-crud" />
+<ExamplesExample file="v-data-table/misc-crud" />
 
 ### Expandable rows
 
@@ -218,4 +218,4 @@ The **show-expand** prop will render an expand icon on each row. You can customi
 
 Just like selection, row items require a unique property on each item for expansion to work. The default is `id`, but you can use the **item-value** prop to specify a different item property.
 
-<example file="v-data-table/misc-expand" />
+<ExamplesExample file="v-data-table/misc-expand" />

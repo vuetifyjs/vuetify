@@ -2,12 +2,12 @@
   <form>
     <v-text-field
       v-model="state.name"
-      :error-messages="v$.name.$errors.map(e => e.$message)"
       :counter="10"
+      :error-messages="v$.name.$errors.map(e => e.$message)"
       label="Name"
       required
-      @input="v$.name.$touch"
       @blur="v$.name.$touch"
+      @input="v$.name.$touch"
     ></v-text-field>
 
     <v-text-field
@@ -15,18 +15,18 @@
       :error-messages="v$.email.$errors.map(e => e.$message)"
       label="E-mail"
       required
-      @input="v$.email.$touch"
       @blur="v$.email.$touch"
+      @input="v$.email.$touch"
     ></v-text-field>
 
     <v-select
       v-model="state.select"
-      :items="items"
       :error-messages="v$.select.$errors.map(e => e.$message)"
+      :items="items"
       label="Item"
       required
-      @change="v$.select.$touch"
       @blur="v$.select.$touch"
+      @change="v$.select.$touch"
     ></v-select>
 
     <v-checkbox
@@ -34,8 +34,8 @@
       :error-messages="v$.checkbox.$errors.map(e => e.$message)"
       label="Do you agree?"
       required
-      @change="v$.checkbox.$touch"
       @blur="v$.checkbox.$touch"
+      @change="v$.checkbox.$touch"
     ></v-checkbox>
 
     <v-btn

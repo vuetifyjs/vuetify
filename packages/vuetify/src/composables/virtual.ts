@@ -107,9 +107,6 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
       })
     })
   })
-  watch(viewportHeight, (val, oldVal) => {
-    oldVal && calculateVisibleItems()
-  })
 
   onScopeDispose(() => {
     updateOffsets.clear()
@@ -139,6 +136,19 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   let lastScrollTop = 0
   let scrollVelocity = 0
   let lastScrollTime = 0
+
+  watch(viewportHeight, (val, oldVal) => {
+    if (oldVal) {
+      calculateVisibleItems()
+      if (val < oldVal) {
+        requestAnimationFrame(() => {
+          scrollVelocity = 0
+          calculateVisibleItems()
+        })
+      }
+    }
+  })
+
   function handleScroll () {
     if (!containerRef.value || !markerRef.value) return
 

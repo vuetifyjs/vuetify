@@ -7,22 +7,14 @@
       :key="logo"
       :alt="`Vuetify ${t('logo')}`"
       :src="`https://cdn.vuetifyjs.com/docs/images/logos/${logo}`"
+      :transition="false"
       :width="lgAndUp ? 148 : 34"
       class="shrink"
-      :transition="false"
     />
   </router-link>
 </template>
 
 <script setup>
-  // Composables
-  import { useDisplay, useTheme } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   defineProps({
     alt: Boolean,
   })

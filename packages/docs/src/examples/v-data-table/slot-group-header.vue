@@ -1,17 +1,17 @@
 <template>
   <v-data-table
+    :group-by="groupBy"
     :headers="headers"
     :items="desserts"
-    :group-by="groupBy"
     item-value="name"
   >
     <template v-slot:group-header="{ item, columns, toggleGroup, isGroupOpen }">
       <tr>
         <td :colspan="columns.length">
           <VBtn
+            :icon="isGroupOpen(item) ? '$expand' : '$next'"
             size="small"
             variant="text"
-            :icon="isGroupOpen(item) ? '$expand' : '$next'"
             @click="toggleGroup(item)"
           ></VBtn>
           {{ item.value ? 'Contains gluten' : 'Gluten free' }}

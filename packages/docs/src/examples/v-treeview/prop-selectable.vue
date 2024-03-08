@@ -1,7 +1,7 @@
 <template>
   <v-treeview
-    selectable
     :items="items"
+    selectable
   ></v-treeview>
 </template>
 

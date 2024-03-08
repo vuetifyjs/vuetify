@@ -1,5 +1,5 @@
 <template>
-  <app-markdown
+  <AppMarkdown
     v-if="ad"
     :content="description"
     class="v-markdown--inline d-inline"
@@ -8,9 +8,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { createAdProps, useAd } from '@/composables/ad'
-
   const props = defineProps(createAdProps())
 
   const { ad, description } = useAd(props)
