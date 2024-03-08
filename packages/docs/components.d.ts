@@ -23,7 +23,6 @@ declare module 'vue' {
     ApiSection: typeof import('./src/components/api/Section.vue')['default']
     ApiSlotsTable: typeof import('./src/components/api/SlotsTable.vue')['default']
     AppBackToTop: typeof import('./src/components/app/BackToTop.vue')['default']
-    AppBanner: typeof import('./src/components/app/Banner.vue')['default']
     AppBarBar: typeof import('./src/components/app/bar/Bar.vue')['default']
     AppBarEcosystemMenu: typeof import('./src/components/app/bar/EcosystemMenu.vue')['default']
     AppBarEnterpriseLink: typeof import('./src/components/app/bar/EnterpriseLink.vue')['default']

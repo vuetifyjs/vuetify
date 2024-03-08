@@ -2,8 +2,6 @@
   <v-app>
     <AppSettingsDrawer />
 
-    <AppBanner />
-
     <AppBarBar />
 
     <AppDrawerDrawer />
