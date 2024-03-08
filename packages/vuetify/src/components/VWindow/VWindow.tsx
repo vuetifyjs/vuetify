@@ -238,7 +238,12 @@ export const VWindow = genericComponent<new <T>(
         v-touch={ touchOptions.value }
       >
         <div
-          class="v-window__container"
+          class={[
+            'v-window__container',
+            {
+              'v-window__container--is-active': transitionCount.value > 0,
+            },
+          ]}
           style={{
             height: transitionHeight.value,
           }}
