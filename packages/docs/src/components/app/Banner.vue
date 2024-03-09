@@ -5,83 +5,68 @@
     :color="banner.metadata.color"
     :height="height"
     :image="banner.metadata.images.bg?.url"
-    :theme="banner.metadata.theme.key"
     :model-value="hasPromotion"
+    :theme="banner.metadata.theme.key"
     flat
   >
-    <a
-      :href="banner.metadata.link"
-      class="d-flex align-center flex-grow-1 text-decoration-none"
-      rel="noopener"
-      target="_blank"
-      v-bind="banner.metadata.attributes"
+    <v-list-item
+      v-bind="link"
+      :active="false"
+      class="flex-grow-1"
+      lines="two"
       @click="onClick"
     >
-      <v-list-item lines="two">
-        <template v-if="banner.metadata.images.logo" #prepend>
-          <v-avatar :image="banner.metadata.images.logo.url" size="x-large" />
-        </template>
+      <template v-if="banner.metadata.images.logo" #prepend>
+        <v-avatar :image="banner.metadata.images.logo.url" size="x-large" />
+      </template>
 
-        <v-list-item-title
-          v-if="banner.metadata.text"
-          class="text-subtitle-2 text-md-subtitle-1 font-weight-medium"
-        >
-          <app-markdown :content="banner.metadata.text" />
-        </v-list-item-title>
+      <v-list-item-title
+        v-if="banner.metadata.text"
+        class="text-subtitle-2 text-md-subtitle-1 font-weight-medium"
+      >
+        <AppMarkdown :content="banner.metadata.text" />
+      </v-list-item-title>
 
-        <v-list-item-subtitle v-if="banner.metadata.subtext">
-          {{ banner.metadata.subtext }}
-        </v-list-item-subtitle>
-      </v-list-item>
+      <v-list-item-subtitle v-if="banner.metadata.subtext">
+        {{ banner.metadata.subtext }}
+      </v-list-item-subtitle>
 
-      <v-spacer />
-    </a>
+      <template #append>
+        <v-hover v-if="mdAndUp && banner.metadata.link && banner.metadata.link_text">
+          <template #default="{ isHovering, props: activatorProps }">
+            <v-btn
+              v-bind="{
+                ...activatorProps,
+                ...link
+              }"
+              :color="banner.metadata.link_color"
+              :elevation="isHovering ? 8 : 0"
+              append-icon="mdi-open-in-new"
+              class="text-none me-2"
+              variant="elevated"
+              @click="onClick"
+            >
+              {{ banner.metadata.link_text }}
+            </v-btn>
 
-    <template #append>
-      <v-hover v-if="mdAndUp && banner.metadata.link">
-        <template #default="{ isHovering, props }">
-          <v-btn
-            :color="banner.metadata.link_color"
-            :href="banner.metadata.link"
-            :elevation="isHovering ? 8 : 0"
-            v-bind="{ ...props, ...banner.metadata.attributes }"
-            append-icon="mdi-open-in-new"
-            class="text-none me-2"
-            rel="noopener"
-            target="_blank"
-            variant="elevated"
-            @click="onClick"
-          >
-            {{ banner.metadata.link_text }}
-          </v-btn>
+          </template>
+        </v-hover>
 
-        </template>
-      </v-hover>
-
-      <v-btn
-        v-if="banner.metadata.closable"
-        class="ms-6 me-2"
-        density="comfortable"
-        size="small"
-        icon="$clear"
-        variant="plain"
-        @click="onClose"
-      />
-    </template>
+        <v-btn
+          v-if="banner.metadata.closable"
+          class="ms-6 me-2"
+          density="comfortable"
+          icon="$clear"
+          size="small"
+          variant="plain"
+          @click="onClose"
+        />
+      </template>
+    </v-list-item>
   </v-app-bar>
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useBannersStore } from '@/store/banners'
-  import { useDisplay } from 'vuetify'
-  import { useGtag } from 'vue-gtag-next'
-  import { useRoute } from 'vue-router'
-  import { useUserStore } from '@/store/user'
-
-  // Utilities
-  import { computed, onBeforeMount } from 'vue'
-
   const { event } = useGtag()
   const { mdAndUp } = useDisplay()
   const { name } = useRoute()
@@ -89,7 +74,7 @@
   const banners = useBannersStore()
 
   const banner = computed(() => banners.banner)
-  const height = computed(() => banner.value?.metadata.subtext ? 88 : 48)
+  const height = computed(() => banner.value?.metadata.height || (banner.value?.metadata.subtext ? 88 : 48))
   const hasPromotion = computed(() => {
     return !banner.value || !user.notifications.last.banner.includes(banner.value.slug)
   })
@@ -102,6 +87,8 @@
       event_label: banner.value.slug,
       value: name?.toString().toLowerCase(),
     })
+
+    onClose()
   }
 
   function onClose () {
@@ -111,6 +98,17 @@
   }
 
   onBeforeMount(banners.fetch)
+
+  const link = computed(() => {
+    const metadata = banner.value?.metadata ?? { link: '' }
+
+    return {
+      href: metadata.link.startsWith('http') ? metadata.link : undefined,
+      target: metadata.link.startsWith('http') ? '_blank' : undefined,
+      to: !metadata.link.startsWith('http') ? metadata.link : undefined,
+      ...banner.value?.metadata.attributes,
+    }
+  })
 </script>
 
 <style lang="sass">

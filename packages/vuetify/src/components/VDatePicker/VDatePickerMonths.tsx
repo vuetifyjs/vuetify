@@ -41,7 +41,7 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
     'update:modelValue': (date: any) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const adapter = useDate()
     const model = useProxiedModel(props, 'modelValue')
 
@@ -82,6 +82,10 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
             } as const
 
             function onClick (i: number) {
+              if (model.value === i) {
+                emit('update:modelValue', model.value)
+                return
+              }
               model.value = i
             }
 
@@ -93,7 +97,6 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
               <VBtn
                 key="month"
                 { ...btnProps }
-                onClick={ () => onClick(i) }
               />
             )
           })}

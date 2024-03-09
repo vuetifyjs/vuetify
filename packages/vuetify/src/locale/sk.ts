@@ -1,10 +1,10 @@
 export default {
   badge: 'Odznak',
-  open: 'Open',
+  open: 'Otvoriť',
   close: 'Zavrieť',
   confirmEdit: {
     ok: 'OK',
-    cancel: 'Cancel',
+    cancel: 'Zrušiť',
   },
   dataIterator: {
     noResultsText: 'Neboli nájdené žiadne záznamy',
@@ -16,7 +16,7 @@ export default {
       sortDescending: 'Zoradené zostupne.',
       sortAscending: 'Zoradené vzostupne.',
       sortNone: 'Nezoradené.',
-      activateNone: 'Aktivujte na zrušenie triedenia.',
+      activateNone: 'Aktivujte na zrušenie zoradenia.',
       activateDescending: 'Aktivujte na zoradenie zostupne.',
       activateAscending: 'Aktivujte na zoradenie vzostupne.',
     },
@@ -32,18 +32,18 @@ export default {
     pageText: '{0}–{1} z {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'až',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} vybraných',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Vyberte rozsah dátumov',
+      header: 'Zadajte rozsah dátumov',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Vyberte dátum',
+    header: 'Zadajte dátum',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Zadajte dátum',
     },
   },
   noDataText: 'Nie sú dostupné žiadne dáta',
@@ -56,12 +56,13 @@ export default {
   },
   calendar: {
     moreEvents: '{0} ďalších',
+    today: 'Dnes',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Vymazať {0}',
+    prependAction: 'Akcia pred {0}',
+    appendAction: 'Akcia za {0}',
+    otp: 'Prosím zadajte OTP znak {0}',
   },
   fileInput: {
     counter: '{0} súborov',
@@ -78,22 +79,22 @@ export default {
       previous: 'Predchádzajúca stránka',
       page: 'Ísť na stránku {0}',
       currentPage: 'Aktuálna stránka, stránka {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Prvá stránka',
+      last: 'Posledná stránka',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Ďalší',
+    prev: 'Predchádzajúci',
   },
   rating: {
     ariaLabel: {
       item: 'Hodnotenie {0} z {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Načítavam...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Načítať viac',
+    empty: 'Žiadne ďalšie',
   },
 }

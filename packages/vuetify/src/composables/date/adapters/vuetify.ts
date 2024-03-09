@@ -200,6 +200,22 @@ function getWeekArray (date: Date, locale: string) {
   return weeks
 }
 
+function startOfWeek (date: Date) {
+  const d = new Date(date)
+  while (d.getDay() !== 0) {
+    d.setDate(d.getDate() - 1)
+  }
+  return d
+}
+
+function endOfWeek (date: Date) {
+  const d = new Date(date)
+  while (d.getDay() !== 6) {
+    d.setDate(d.getDate() + 1)
+  }
+  return d
+}
+
 function startOfMonth (date: Date) {
   return new Date(date.getFullYear(), date.getMonth(), 1)
 }
@@ -267,6 +283,9 @@ function format (
     case 'fullDateWithWeekday':
       options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }
       break
+    case 'hours12h':
+      options = { hour: 'numeric', hour12: true }
+      break
     case 'normalDateWithWeekday':
       options = { weekday: 'short', day: 'numeric', month: 'short' }
       break
@@ -286,10 +305,12 @@ function format (
       options = { month: 'short' }
       break
     case 'dayOfMonth':
-      options = { day: 'numeric' }
-      break
+      return new Intl.NumberFormat(locale).format(newDate.getDate())
     case 'shortDate':
       options = { year: '2-digit', month: 'numeric', day: 'numeric' }
+      break
+    case 'weekdayShort':
+      options = { weekday: 'short' }
       break
     case 'year':
       options = { year: 'numeric' }
@@ -316,9 +337,27 @@ function parseISO (value: string) {
   return new Date(year, month - 1, day)
 }
 
+function addMinutes (date: Date, amount: number) {
+  const d = new Date(date)
+  d.setMinutes(d.getMinutes() + amount)
+  return d
+}
+
+function addHours (date: Date, amount: number) {
+  const d = new Date(date)
+  d.setHours(d.getHours() + amount)
+  return d
+}
+
 function addDays (date: Date, amount: number) {
   const d = new Date(date)
   d.setDate(d.getDate() + amount)
+  return d
+}
+
+function addWeeks (date: Date, amount: number) {
+  const d = new Date(date)
+  d.setDate(d.getDate() + (amount * 7))
   return d
 }
 
@@ -338,6 +377,14 @@ function getMonth (date: Date) {
 
 function getNextMonth (date: Date) {
   return new Date(date.getFullYear(), date.getMonth() + 1, 1)
+}
+
+function getHours (date: Date) {
+  return date.getHours()
+}
+
+function getMinutes (date: Date) {
+  return date.getMinutes()
 }
 
 function startOfYear (date: Date) {
@@ -384,11 +431,39 @@ function getDiff (date: Date, comparing: Date | string, unit?: string) {
   const d = new Date(date)
   const c = new Date(comparing)
 
-  if (unit === 'month') {
-    return d.getMonth() - c.getMonth() + (d.getFullYear() - c.getFullYear()) * 12
+  switch (unit) {
+    case 'years':
+      return d.getFullYear() - c.getFullYear()
+    case 'quarters':
+      return Math.floor((d.getMonth() - c.getMonth() + (d.getFullYear() - c.getFullYear()) * 12) / 4)
+    case 'months':
+      return d.getMonth() - c.getMonth() + (d.getFullYear() - c.getFullYear()) * 12
+    case 'weeks':
+      return Math.floor((d.getTime() - c.getTime()) / (1000 * 60 * 60 * 24 * 7))
+    case 'days':
+      return Math.floor((d.getTime() - c.getTime()) / (1000 * 60 * 60 * 24))
+    case 'hours':
+      return Math.floor((d.getTime() - c.getTime()) / (1000 * 60 * 60))
+    case 'minutes':
+      return Math.floor((d.getTime() - c.getTime()) / (1000 * 60))
+    case 'seconds':
+      return Math.floor((d.getTime() - c.getTime()) / 1000)
+    default: {
+      return d.getTime() - c.getTime()
+    }
   }
+}
 
-  return Math.floor((d.getTime() - c.getTime()) / (1000 * 60 * 60 * 24))
+function setHours (date: Date, count: number) {
+  const d = new Date(date)
+  d.setHours(count)
+  return d
+}
+
+function setMinutes (date: Date, count: number) {
+  const d = new Date(date)
+  d.setMinutes(count)
+  return d
 }
 
 function setMonth (date: Date, count: number) {
@@ -436,8 +511,20 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return parseISO(date)
   }
 
+  addMinutes (date: Date, amount: number) {
+    return addMinutes(date, amount)
+  }
+
+  addHours (date: Date, amount: number) {
+    return addHours(date, amount)
+  }
+
   addDays (date: Date, amount: number) {
     return addDays(date, amount)
+  }
+
+  addWeeks (date: Date, amount: number) {
+    return addWeeks(date, amount)
   }
 
   addMonths (date: Date, amount: number) {
@@ -446,6 +533,14 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   getWeekArray (date: Date) {
     return getWeekArray(date, this.locale)
+  }
+
+  startOfWeek (date: Date): Date {
+    return startOfWeek(date)
+  }
+
+  endOfWeek (date: Date): Date {
+    return endOfWeek(date)
   }
 
   startOfMonth (date: Date) {
@@ -488,6 +583,14 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return isSameMonth(date, comparing)
   }
 
+  setMinutes (date: Date, count: number) {
+    return setMinutes(date, count)
+  }
+
+  setHours (date: Date, count: number) {
+    return setHours(date, count)
+  }
+
   setMonth (date: Date, count: number) {
     return setMonth(date, count)
   }
@@ -514,6 +617,14 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   getNextMonth (date: Date) {
     return getNextMonth(date)
+  }
+
+  getHours (date: Date) {
+    return getHours(date)
+  }
+
+  getMinutes (date: Date) {
+    return getMinutes(date)
   }
 
   startOfDay (date: Date) {

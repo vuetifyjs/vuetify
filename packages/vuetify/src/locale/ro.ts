@@ -56,6 +56,7 @@ export default {
   },
   calendar: {
     moreEvents: 'încă {0}',
+    today: 'Today',
   },
   input: {
     clear: 'Șterge {0}',

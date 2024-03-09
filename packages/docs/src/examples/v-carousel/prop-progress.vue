@@ -1,8 +1,8 @@
 <template>
   <v-carousel
     height="400"
-    hide-delimiters
     progress="primary"
+    hide-delimiters
   >
     <v-carousel-item
       v-for="(slide, i) in slides"

@@ -4,48 +4,46 @@
     color="grey-lighten-4"
     max-width="600"
   >
-    <v-card-title>
+    <template v-slot:prepend>
       <v-icon
         :color="checking ? 'red lighten-2' : 'indigo'"
-        class="me-12"
+        class="me-8"
+        icon="mdi-heart-pulse"
         size="64"
         @click="takePulse"
-      >
-        mdi-heart-pulse
-      </v-icon>
-      <v-row align="start">
-        <div class="text-caption text-grey text-uppercase">
-          Heart rate
-        </div>
-        <div>
-          <span
-            class="text-h3 font-weight-black"
-            v-text="avg || '—'"
-          ></span>
-          <strong v-if="avg">BPM</strong>
-        </div>
-      </v-row>
+      ></v-icon>
+    </template>
 
-      <v-spacer></v-spacer>
+    <template v-slot:title>
+      <div class="text-caption text-grey text-uppercase">
+        Heart rate
+      </div>
 
+      <span
+        class="text-h3 font-weight-black"
+        v-text="avg || '—'"
+      ></span>
+      <strong v-if="avg">BPM</strong>
+    </template>
+
+    <template v-slot:append>
       <v-btn
-        icon
         class="align-self-start"
-        size="28"
-      >
-        <v-icon>mdi-arrow-right-thick</v-icon>
-      </v-btn>
-    </v-card-title>
+        icon="mdi-arrow-right-thick"
+        size="34"
+        variant="text"
+      ></v-btn>
+    </template>
 
     <v-sheet color="transparent">
       <v-sparkline
         :key="String(avg)"
-        :smooth="16"
         :gradient="['#f72047', '#ffd200', '#1feaea']"
         :line-width="3"
-        :value="heartbeats"
-        auto-draw
+        :model-value="heartbeats"
+        :smooth="16"
         stroke-linecap="round"
+        auto-draw
       ></v-sparkline>
     </v-sheet>
   </v-card>

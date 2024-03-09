@@ -8,10 +8,10 @@
       <v-btn
         v-for="icon in icons"
         :key="icon"
-        class="mx-4"
         :icon="icon"
-        variant="plain"
+        class="mx-4"
         size="small"
+        variant="plain"
       ></v-btn>
     </div>
 

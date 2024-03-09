@@ -1,8 +1,8 @@
 <template>
   <v-card
     class="mx-auto"
-    width="400"
     prepend-icon="mdi-home"
+    width="400"
   >
     <template v-slot:title>
       This is a title

@@ -138,7 +138,7 @@ export function createForm (props: FormProps) {
       invalid > 0 ? false
       : valid === items.value.length ? true
       : null
-  }, { deep: true })
+  }, { deep: true, flush: 'post' })
 
   provide(FormKey, {
     register: ({ id, validate, reset, resetValidation }) => {

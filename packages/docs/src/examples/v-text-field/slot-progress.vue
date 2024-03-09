@@ -8,14 +8,14 @@
     <v-text-field
       v-model="value"
       label="Type characters to change the loader color"
-      loading
       placeholder="Start typing..."
+      loading
     >
       <template v-slot:loader>
         <v-progress-linear
           :active="custom"
-          :model-value="progress"
           :color="color"
+          :model-value="progress"
           height="7"
           indeterminate
         ></v-progress-linear>

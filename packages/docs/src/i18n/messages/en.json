@@ -5,6 +5,7 @@
   },
   "about": "About",
   "accessibility": "Accessibility (a11y)",
+  "ads": "Ads",
   "ads-via-vuetify": "ads via Vuetify",
   "all-components": "All Components",
   "alpha": "Alpha",
@@ -104,7 +105,9 @@
       "rail-drawer": "Rail drawer",
       "rail-drawer-message": "Show the navigation drawer as a rail that expands on hover",
       "disable-quickbar": "Disable Quickbar",
-      "disable-quickbar-message": "Hide the Quickbar actions located on the top right of the documentation"
+      "disable-quickbar-message": "Hide the Quickbar actions located on the top right of the documentation",
+      "enable-pins": "Enable pins",
+      "enable-pins-message": "Bookmark and access vital documentation pages for a more efficient workflow."
     }
   },
   "data-tables": "Data tables",
@@ -278,7 +281,8 @@
     "key-hint-mac": "Cmd+K",
     "key-hint-slash": "Press /",
     "results": "Your search results will appear here",
-    "no-results": "No results found"
+    "no-results": "No results found",
+    "recent": "Recent"
   },
   "search-api": "Search API",
   "search-jobs": "Search Jobs",

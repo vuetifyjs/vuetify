@@ -1,8 +1,8 @@
 <template>
   <v-layout style="overflow: hidden">
     <v-app-bar
-      absolute
       color="deep-purple"
+      absolute
     >
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
@@ -14,8 +14,8 @@
       temporary
     >
       <v-list
-        nav
         dense
+        nav
       >
         <v-list-item-group
           v-model="group"

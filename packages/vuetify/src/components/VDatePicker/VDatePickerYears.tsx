@@ -51,7 +51,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
     'update:modelValue': (year: number) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const adapter = useDate()
     const model = useProxiedModel(props, 'modelValue')
     const years = computed(() => {
@@ -109,7 +109,13 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
               rounded: true,
               text: year.text,
               variant: model.value === year.value ? 'flat' : 'text',
-              onClick: () => model.value = year.value,
+              onClick: () => {
+                if (model.value === year.value) {
+                  emit('update:modelValue', model.value)
+                  return
+                }
+                model.value = year.value
+              },
             } as const
 
             return slots.year?.({

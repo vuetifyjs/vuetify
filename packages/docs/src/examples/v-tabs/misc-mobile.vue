@@ -1,6 +1,6 @@
 <template>
-  <v-card width="350px" class="mx-auto">
-    <v-toolbar color="transparent" class="px-0">
+  <v-card class="mx-auto" width="350px">
+    <v-toolbar class="px-0" color="transparent">
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Contacts</v-toolbar-title>

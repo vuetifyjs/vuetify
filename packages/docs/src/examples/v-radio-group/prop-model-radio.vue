@@ -9,15 +9,15 @@
       v-model="radio"
       false-value="Option 2"
       label="Option 1"
-      readonly
       true-value="Option 1"
+      readonly
     ></v-radio>
     <v-radio
       v-model="radio"
       false-value="Option 1"
       label="Option 2"
-      readonly
       true-value="Option 2"
+      readonly
     ></v-radio>
   </v-container>
 </template>

@@ -9,7 +9,6 @@
   flex-direction: column
   justify-content: space-between
   max-width: 100%
-  overflow: hidden
   position: relative
   transition: $toolbar-transition
   transition-property: height, width, transform, max-width, left, right, top, bottom, box-shadow
@@ -50,6 +49,8 @@
   width: 100%
 
 .v-toolbar__content
+  overflow: hidden
+
   > .v-btn:first-child
     margin-inline-start: $toolbar-prepend-btn-margin-start
 

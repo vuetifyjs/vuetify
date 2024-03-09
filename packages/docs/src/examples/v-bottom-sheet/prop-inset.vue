@@ -1,8 +1,8 @@
 <template>
   <div class="text-center">
     <v-btn
-      text="Click Me"
       size="x-large"
+      text="Click Me"
       @click="sheet = !sheet"
     ></v-btn>
 

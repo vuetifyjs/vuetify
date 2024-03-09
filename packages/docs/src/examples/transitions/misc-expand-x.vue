@@ -16,9 +16,9 @@
       <v-expand-transition>
         <v-card
           v-show="expand"
+          class="mx-auto bg-secondary"
           height="100"
           width="100"
-          class="mx-auto bg-secondary"
         ></v-card>
       </v-expand-transition>
     </v-col>
@@ -37,9 +37,9 @@
       <v-expand-x-transition>
         <v-card
           v-show="expand2"
+          class="mx-auto bg-secondary"
           height="100"
           width="100"
-          class="mx-auto bg-secondary"
         ></v-card>
       </v-expand-x-transition>
     </v-col>

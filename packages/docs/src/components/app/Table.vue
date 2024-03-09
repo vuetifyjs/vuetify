@@ -1,12 +1,12 @@
 <template>
-  <app-sheet class="mb-4 app-table">
+  <AppSheet class="mb-4 app-table">
     <v-table
       density="comfortable"
       v-bind="$attrs"
     >
       <slot />
     </v-table>
-  </app-sheet>
+  </AppSheet>
 </template>
 
 <script>

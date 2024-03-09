@@ -1,12 +1,8 @@
 <template>
-  <div :id="id" ref="rootEl" />
+  <div ref="rootEl" :id="id" />
 </template>
 
 <script setup lang="ts">
-  // Utilities
-  import { IN_BROWSER } from '@/util/globals'
-  import { onBeforeMount, onBeforeUnmount, onMounted, ref } from 'vue'
-
   const props = defineProps({
     id: {
       type: String,

@@ -24,8 +24,14 @@ self.addEventListener('install', event => {
   console.log('[SW] Installed')
   event.waitUntil((async () => {
     if (self.registration.active) {
-      previousManifest = await messageSW(self.registration.active, { type: 'GET_MANIFEST' })
-      console.log('[SW] Recieved manifest')
+      await Promise.race([
+        new Promise(resolve => setTimeout(resolve, 500)),
+        messageSW(self.registration.active, { type: 'GET_MANIFEST' })
+          .then(manifest => {
+            previousManifest = manifest
+            console.log('[SW] Recieved manifest')
+          }),
+      ])
     }
     self.skipWaiting()
   })())

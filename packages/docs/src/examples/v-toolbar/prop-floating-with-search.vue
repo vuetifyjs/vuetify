@@ -1,17 +1,17 @@
 <template>
   <v-card
     class="pa-4"
-    flat
     height="300px"
     img="https://cdn.vuetifyjs.com/images/toolbar/map.jpg"
+    flat
   >
     <v-toolbar
       dense
       floating
     >
       <v-text-field
-        hide-details
         prepend-icon="mdi-magnify"
+        hide-details
         single-line
       ></v-text-field>
 

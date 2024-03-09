@@ -56,6 +56,7 @@ export default {
   },
   calendar: {
     moreEvents: '還有其他 {0} 項',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',

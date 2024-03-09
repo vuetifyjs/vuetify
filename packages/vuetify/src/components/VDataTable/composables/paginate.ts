@@ -2,8 +2,8 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide, watchEffect } from 'vue'
-import { clamp, propsFactory } from '@/util'
+import { computed, inject, provide, watch, watchEffect } from 'vue'
+import { clamp, getCurrentInstance, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
@@ -117,11 +117,17 @@ export function usePaginatedItems <T> (options: {
   stopIndex: Ref<number>
   itemsPerPage: Ref<number>
 }) {
+  const vm = getCurrentInstance('usePaginatedItems')
+
   const { items, startIndex, stopIndex, itemsPerPage } = options
   const paginatedItems = computed(() => {
     if (itemsPerPage.value <= 0) return items.value
 
     return items.value.slice(startIndex.value, stopIndex.value)
+  })
+
+  watch(paginatedItems, val => {
+    vm.emit('update:currentItems', val)
   })
 
   return { paginatedItems }

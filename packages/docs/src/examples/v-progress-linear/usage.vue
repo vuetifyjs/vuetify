@@ -1,9 +1,9 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div>
       <v-progress-linear v-bind="props"></v-progress-linear>
@@ -20,21 +20,17 @@
       <v-slider
         v-model="height"
         label="Height"
-        step="1"
-        min="4"
         max="12"
+        min="4"
+        step="1"
       ></v-slider>
 
       <v-checkbox v-model="indeterminate" label="Indeterminate"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-progress-linear'
   const model = ref('default')
   const color = ref()

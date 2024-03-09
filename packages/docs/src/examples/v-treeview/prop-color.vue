@@ -1,8 +1,8 @@
 <template>
   <v-treeview
-    activatable
-    color="warning"
     :items="items"
+    color="warning"
+    activatable
   ></v-treeview>
 </template>
 

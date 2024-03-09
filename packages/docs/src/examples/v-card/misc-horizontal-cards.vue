@@ -1,7 +1,7 @@
 <template>
   <v-card
-    max-width="400"
     class="mx-auto"
+    max-width="400"
   >
     <!-- <v-system-bar
       color="pink darken-2"
@@ -68,8 +68,8 @@
                 <v-card-actions>
                   <v-btn
                     class="ms-2"
-                    variant="outlined"
                     size="small"
+                    variant="outlined"
                   >
                     START RADIO
                   </v-btn>
@@ -78,8 +78,8 @@
 
               <v-avatar
                 class="ma-3"
-                size="125"
                 rounded="0"
+                size="125"
               >
                 <v-img src="https://cdn.vuetifyjs.com/images/cards/foster.jpg"></v-img>
               </v-avatar>
@@ -111,8 +111,8 @@
 
               <v-avatar
                 class="ma-3"
-                size="125"
                 rounded="0"
+                size="125"
               >
                 <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
               </v-avatar>

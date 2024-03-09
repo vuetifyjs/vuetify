@@ -39,9 +39,11 @@
   ],
   "components/calendars": [
     "VCalendar",
-    "VCalendarDaily",
-    "VCalendarMonthly",
-    "VCalendarWeekly"
+    "VCalendarDay",
+    "VCalendarHeader",
+    "VCalendarInterval",
+    "VCalendarIntervalEvent",
+    "VCalendarMonthDay"
   ],
   "components/cards": [
     "VCard",
@@ -69,8 +71,9 @@
   "components/date-pickers-month": ["VDatePicker"],
   "components/date-pickers": ["VDatePicker"],
   "components/defaults-providers": ["VDefaultsProvider"],
-  "components/dialogs": ["VDialog"],
+  "components/dialogs": ["VDialog", "VOverlay"],
   "components/dividers": ["VDivider"],
+  "components/empty-states": ["VEmptyState"],
   "components/expansion-panels": [
     "VExpansionPanel",
     "VExpansionPanels",
@@ -78,6 +81,7 @@
     "VExpansionPanelTitle"
   ],
   "components/file-inputs": ["VFileInput"],
+  "components/floating-action-buttons": ["VFab"],
   "components/footers": ["VFooter"],
   "components/forms": ["VForm"],
   "components/grids": ["VCol", "VContainer", "VRow", "VSpacer"],
@@ -151,9 +155,9 @@
   "directives/touch": ["v-touch"],
   "features/dates": ["useDate"],
   "features/display-and-platform": ["useDisplay"],
+  "features/scrolling": ["useGoTo"],
   "features/global-configuration": ["VDefaultsProvider"],
   "features/internationalization": ["useLocale", "VLocaleProvider"],
-  "features/scrolling": ["$vuetify"],
   "features/theme": ["VThemeProvider"],
   "styles/transitions": [
     "VDialogBottomTransition",

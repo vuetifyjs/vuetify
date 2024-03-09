@@ -8,15 +8,14 @@ related:
   - /styles/display/
   - /styles/text-and-typography/
 ---
-<script setup>
-  import BreakpointsTable from '@/components/features/BreakpointsTable.vue'
-</script>
 
 # Display & Platform
 
 The display composable provides a multitude of information about the current device
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ## Usage
 
@@ -51,7 +50,7 @@ If you are still using the Options API, you can access the display information o
 </script>
 ```
 
-<breakpoints-table />
+<FeaturesBreakpointsTable />
 
 ## API
 

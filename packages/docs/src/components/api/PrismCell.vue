@@ -9,9 +9,8 @@
   import 'prismjs/components/prism-scss.js'
   import 'prismjs/components/prism-typescript.js'
 
-  // Utilities
-  import { insertLinks, stripLinks } from './utils'
-  import { PropType, ref, watchEffect } from 'vue'
+  // Types
+  import type { PropType } from 'vue'
 
   const props = defineProps({
     code: null,

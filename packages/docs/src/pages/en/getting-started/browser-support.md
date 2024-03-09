@@ -13,7 +13,9 @@ related:
 
 Vuetify 3 is a next generation framework that takes advantage of the latest web technology features and requires an evergreen browser to function.
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ## Browsers
 

@@ -13,7 +13,9 @@ related:
 
 Vuetify allows you to set default prop values globally or per component when setting up your application. Using this functionality you can for example disable **ripple** on all components, or set the default **elevation** for all sheets or buttons.
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ## Setup
 

@@ -245,6 +245,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                 >
                   {{
                     ...slots,
+                    loader: undefined,
                     default: () => {
                       return (
                         <input

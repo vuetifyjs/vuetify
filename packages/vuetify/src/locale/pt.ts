@@ -1,6 +1,6 @@
 export default {
   badge: 'Distintivo',
-  open: 'Open',
+  open: 'Abrir',
   close: 'Fechar',
   confirmEdit: {
     ok: 'OK',
@@ -35,15 +35,15 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} selecionados',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Selecione as datas',
+      header: 'Digite as datas',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Selecione a data',
+    header: 'Digite a data',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Insira a data',
     },
   },
   noDataText: 'Não há dados disponíveis',
@@ -56,12 +56,13 @@ export default {
   },
   calendar: {
     moreEvents: 'Mais {0}',
+    today: 'Today',
   },
   input: {
-    clear: 'Clear {0}',
+    clear: 'Limpar {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    otp: 'Por favor insira o caracter OTP {0}',
   },
   fileInput: {
     counter: '{0} arquivo(s)',
@@ -78,22 +79,22 @@ export default {
       previous: 'Página anterior',
       page: 'Ir à página {0}',
       currentPage: 'Página atual, página {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Primeira página',
+      last: 'Última página',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Próximo',
+    prev: 'Anterior',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Avaliação {0} de {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Carregando...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Carregar mais',
+    empty: 'Não há mais dados',
   },
 }

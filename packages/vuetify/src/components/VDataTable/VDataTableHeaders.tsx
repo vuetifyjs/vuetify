@@ -12,11 +12,11 @@ import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, mergeProps } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { CSSProperties, UnwrapRef } from 'vue'
+import type { CSSProperties, PropType, UnwrapRef } from 'vue'
 import type { provideSelection } from './composables/select'
 import type { provideSort } from './composables/sort'
 import type { InternalDataTableHeader } from './types'
@@ -63,6 +63,9 @@ export const makeVDataTableHeadersProps = propsFactory({
   sortDescIcon: {
     type: IconValue,
     default: '$sortDesc',
+  },
+  headerProps: {
+    type: Object as PropType<Record<string, any>>,
   },
 
   ...makeLoaderProps(),
@@ -113,6 +116,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
 
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
       const noPadding = column.key === 'data-table-select' || column.key === 'data-table-expand'
+      const headerProps = mergeProps(props.headerProps ?? {}, column.headerProps ?? {})
 
       return (
         <VDataTableColumn
@@ -124,6 +128,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               'v-data-table__th--sortable': column.sortable,
               'v-data-table__th--sorted': isSorted(column),
               'v-data-table__th--fixed': column.fixed,
+              'v-data-table__th--sticky': props.sticky,
             },
             loaderClasses.value,
           ]}
@@ -138,7 +143,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           fixed={ column.fixed }
           lastFixed={ column.lastFixed }
           noPadding={ noPadding }
-          { ...column.headerProps }
+          { ...headerProps }
         >
           {{
             default: () => {
@@ -228,3 +233,5 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     })
   },
 })
+
+export type VDataTableHeaders = InstanceType<typeof VDataTableHeaders>

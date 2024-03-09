@@ -7,12 +7,12 @@
     <v-card-text>
       <v-text-field
         :loading="loading"
-        density="compact"
-        variant="solo"
-        label="Search templates"
         append-inner-icon="mdi-magnify"
-        single-line
+        density="compact"
+        label="Search templates"
+        variant="solo"
         hide-details
+        single-line
         @click:append-inner="onClick"
       ></v-text-field>
     </v-card-text>

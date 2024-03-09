@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Unit testing
   description: Learn how to create unit tests with vue-test-utils and Vuetify components in your Vue application.
@@ -14,7 +13,9 @@ related:
 
 Add regression protection by adding unit tests to your Vuetify application
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ## Usage
 

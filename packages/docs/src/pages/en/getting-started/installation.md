@@ -18,7 +18,9 @@ related:
 
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast applications.
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ## Installation
 
@@ -89,7 +91,7 @@ Start off creating a nuxt app by executing the following commands:
 ::: tabs
 
 ```bash [yarn]
-yarn create nuxt-app <project-name>
+npx nuxi@latest init <project-name>
 cd <project-name>
 yarn
 ```
@@ -174,7 +176,9 @@ Nuxt allows you to change its Vite config by using its built-in hook `vite:exten
 In the next step, initialize Vuetify and add it to the main Vue app instance. This can be done in the `plugins` folder as any plugin that is placed in this folder will be automatically loaded by Nuxt at startup.
 
 ```ts { data-resource="~/plugins/vuetify.ts" }
+// import this after install `@mdi/font` package
 import '@mdi/font/css/materialdesignicons.css'
+
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 
@@ -372,4 +376,4 @@ The three development branches (`master`, `dev`, and `next`) are automatically p
 
 Have a question that belongs here? Tell us in our [Discord Community](https://community.vuetifyjs.com/) or create a request on our [Issue Generator](https://issues.vuetifyjs.com/).
 
-<promoted slug="vuetify-discord" />
+<PromotedPromoted slug="vuetify-discord" />

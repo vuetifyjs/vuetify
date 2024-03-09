@@ -1,39 +1,52 @@
 <template>
-  <div class="text-center">
+  <div class="pa-4 text-center">
     <v-btn
       :disabled="dialog"
-      :loading="dialog"
-      color="purple-darken-2"
+      color="primary"
+      icon="mdi-refresh"
+      text="Start loading"
       @click="dialog = true"
-    >
-      Start loading
-    </v-btn>
+    ></v-btn>
+
     <v-dialog
       v-model="dialog"
-      :scrim="false"
+      max-width="320"
       persistent
-      width="auto"
     >
-      <v-card
+      <v-list
+        class="py-2"
         color="primary"
+        elevation="12"
+        rounded="lg"
       >
-        <v-card-text>
-          Please stand by
-          <v-progress-linear
-            indeterminate
-            color="white"
-            class="mb-0"
-          ></v-progress-linear>
-        </v-card-text>
-      </v-card>
+        <v-list-item
+          prepend-icon="$vuetify-outline"
+          title="Refreshing Application..."
+        >
+          <template v-slot:prepend>
+            <div class="pe-4">
+              <v-icon color="primary" size="x-large"></v-icon>
+            </div>
+          </template>
+
+          <template v-slot:append>
+            <v-progress-circular
+              color="primary"
+              indeterminate="disable-shrink"
+              size="16"
+              width="2"
+            ></v-progress-circular>
+          </template>
+        </v-list-item>
+      </v-list>
     </v-dialog>
   </div>
 </template>
 
 <script setup>
-  import { ref, watch } from 'vue'
+  import { shallowRef, watch } from 'vue'
 
-  const dialog = ref(false)
+  const dialog = shallowRef(false)
   watch(dialog, val => {
     if (!val) return
     setTimeout(() => (dialog.value = false), 4000)

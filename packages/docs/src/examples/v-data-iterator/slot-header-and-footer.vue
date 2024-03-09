@@ -21,10 +21,10 @@
           <div class="d-inline-flex">
             <v-btn
               :disabled="page === 1"
+              class="me-2"
               icon="mdi-arrow-left"
               size="small"
               variant="tonal"
-              class="me-2"
               @click="prevPage"
             ></v-btn>
 
@@ -53,14 +53,14 @@
             <v-img
               :gradient="`to top right, rgba(255, 255, 255, .1), rgba(${item.raw.color}, .15)`"
               :src="item.raw.src"
-              cover
               height="150"
+              cover
             ></v-img>
 
             <v-list-item
               :title="item.raw.name"
-              lines="two"
               density="comfortable"
+              lines="two"
               subtitle="Lorem ipsum dil orei namdie dkaf"
             >
               <template v-slot:title>
@@ -70,7 +70,7 @@
               </template>
             </v-list-item>
 
-            <v-table density="compact" class="text-caption">
+            <v-table class="text-caption" density="compact">
               <tbody>
                 <tr align="right">
                   <th>DPI:</th>
@@ -110,8 +110,8 @@
 
     <template v-slot:footer="{ page, pageCount }">
       <v-footer
-        color="surface-variant"
         class="justify-space-between text-body-2 mt-4"
+        color="surface-variant"
       >
         Total mice: {{ mice.length }}
 

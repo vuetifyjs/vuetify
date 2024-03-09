@@ -27,6 +27,7 @@ import { ClickOutside } from '@/directives/click-outside'
 import {
   computed,
   mergeProps,
+  onBeforeUnmount,
   ref,
   Teleport,
   toRef,
@@ -87,6 +88,7 @@ export const makeVOverlayProps = propsFactory({
   contentClass: null,
   contentProps: null,
   disabled: Boolean,
+  opacity: [Number, String],
   noClickAnimation: Boolean,
   modelValue: Boolean,
   persistent: Boolean,
@@ -139,7 +141,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     const { teleportTarget } = useTeleport(computed(() => props.attach || props.contained))
     const { themeClasses } = provideTheme(props)
     const { rtlClasses, isRtl } = useRtl()
-    const { hasContent, onAfterLeave } = useLazy(props, isActive)
+    const { hasContent, onAfterLeave: _onAfterLeave } = useLazy(props, isActive)
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
@@ -194,6 +196,12 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       }
     }, { immediate: true })
 
+    onBeforeUnmount(() => {
+      if (!IN_BROWSER) return
+
+      window.removeEventListener('keydown', onKeydown)
+    })
+
     function onKeydown (e: KeyboardEvent) {
       if (e.key === 'Escape' && globalTop.value) {
         if (!props.persistent) {
@@ -242,6 +250,11 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       })
     }
 
+    function onAfterLeave () {
+      _onAfterLeave()
+      emit('afterLeave')
+    }
+
     useRender(() => (
       <>
         { slots.activator?.({
@@ -271,7 +284,10 @@ export const VOverlay = genericComponent<OverlaySlots>()({
               ]}
               style={[
                 stackStyles.value,
-                { top: convertToUnit(top.value) },
+                {
+                  '--v-overlay-opacity': props.opacity,
+                  top: convertToUnit(top.value),
+                },
                 props.style,
               ]}
               ref={ root }
@@ -288,7 +304,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 persisted
                 transition={ props.transition }
                 target={ target.value }
-                onAfterLeave={ () => { onAfterLeave(); emit('afterLeave') } }
+                onAfterLeave={ onAfterLeave }
               >
                 <div
                   ref={ contentEl }

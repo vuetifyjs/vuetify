@@ -13,8 +13,8 @@
           v-model:open="open"
           :items="items"
           :load-children="fetchUsers"
-          activatable
           color="warning"
+          activatable
           open-on-click
           transition
         >
@@ -43,8 +43,8 @@
             v-else
             :key="selected.id"
             class="pt-6 mx-auto"
-            flat
             max-width="400"
+            flat
           >
             <v-card-text>
               <v-avatar
@@ -73,16 +73,16 @@
             >
               <v-col
                 class="text-right me-4 mb-2"
-                tag="strong"
                 cols="5"
+                tag="strong"
               >
                 Company:
               </v-col>
               <v-col>{{ selected.company.name }}</v-col>
               <v-col
                 class="text-right me-4 mb-2"
-                tag="strong"
                 cols="5"
+                tag="strong"
               >
                 Website:
               </v-col>
@@ -94,8 +94,8 @@
               </v-col>
               <v-col
                 class="text-right me-4 mb-2"
-                tag="strong"
                 cols="5"
+                tag="strong"
               >
                 Phone:
               </v-col>

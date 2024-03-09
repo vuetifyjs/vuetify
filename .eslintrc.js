@@ -6,7 +6,7 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.eslint.json',
     tsconfigRootDir: __dirname,
-    extraFileExtensions: ['.vue'],
+    extraFileExtensions: ['.vue', '.json'],
     suppressDeprecatedPropertyWarnings: true,
   },
   extends: [
@@ -94,6 +94,14 @@ module.exports = {
     'vue/require-prop-types': 'off',
     'vue/one-component-per-file': 'off',
     'vue/custom-event-name-casing': ['error', { ignores: ['/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'] }],
+
+    'vue/attributes-order': ['error', {
+      order: [
+        'DEFINITION', 'LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'UNIQUE', 'GLOBAL', 'SLOT',
+        'TWO_WAY_BINDING', 'ATTR_DYNAMIC', 'ATTR_STATIC', 'ATTR_SHORTHAND_BOOL', 'OTHER_DIRECTIVES', 'EVENTS', 'CONTENT',
+      ],
+      alphabetical: true,
+    }],
   },
   overrides: [
     {
@@ -237,6 +245,17 @@ module.exports = {
       files: '**/*.d.ts',
       rules: {
         'import/no-duplicates': 'off',
+      },
+    },
+    {
+      files: '**/*.json',
+      rules: {
+        quotes: ['error', 'double'],
+        'comma-dangle': ['error', 'never'],
+        'quote-props': ['error', 'always'],
+        'max-len': 'off',
+        'no-unused-expressions': 'off',
+        'no-template-curly-in-string': 'off',
       },
     },
   ],

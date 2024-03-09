@@ -86,6 +86,8 @@ export const makeVListProps = propsFactory({
   activeClass: String,
   bgColor: String,
   disabled: Boolean,
+  expandIcon: String,
+  collapseIcon: String,
   lines: {
     type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
     default: 'one',
@@ -166,6 +168,8 @@ export const VList = genericComponent<new <
         activeColor,
         baseColor,
         color,
+        expandIcon: toRef(props, 'expandIcon'),
+        collapseIcon: toRef(props, 'collapseIcon'),
       },
       VListItem: {
         activeClass: toRef(props, 'activeClass'),
@@ -216,6 +220,10 @@ export const VList = genericComponent<new <
       e.preventDefault()
     }
 
+    function onMousedown (e: MouseEvent) {
+      isFocused.value = true
+    }
+
     function focus (location?: 'next' | 'prev' | 'first' | 'last') {
       if (contentRef.value) {
         return focusChild(contentRef.value, location)
@@ -231,6 +239,7 @@ export const VList = genericComponent<new <
             {
               'v-list--disabled': props.disabled,
               'v-list--nav': props.nav,
+              'v-list--slim': props.slim,
             },
             themeClasses.value,
             backgroundColorClasses.value,
@@ -253,6 +262,7 @@ export const VList = genericComponent<new <
           onFocusout={ onFocusout }
           onFocus={ onFocus }
           onKeydown={ onKeydown }
+          onMousedown={ onMousedown }
         >
           <VListChildren
             items={ items.value }

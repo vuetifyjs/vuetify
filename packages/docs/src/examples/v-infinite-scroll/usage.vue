@@ -1,10 +1,10 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :script="script"
     :name="name"
     :options="options"
+    :script="script"
   >
     <div>
       <v-infinite-scroll
@@ -19,14 +19,10 @@
         </template>
       </v-infinite-scroll>
     </div>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-infinite-scroll'
   const model = ref('default')
   const options = []

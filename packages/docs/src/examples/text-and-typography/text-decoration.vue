@@ -1,9 +1,11 @@
 <template>
   <div class="d-flex justify-space-between flex-row">
     <a
-      href="#"
       class="text-decoration-none"
-    >Non-underlined link</a>
+      href="#"
+    >
+      Non-underlined link
+    </a>
 
     <div class="text-decoration-line-through">
       Line-through text

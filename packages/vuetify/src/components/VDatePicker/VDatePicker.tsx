@@ -68,10 +68,16 @@ export const makeVDatePickerProps = propsFactory({
   modelValue: null,
 }, 'VDatePicker')
 
-export const VDatePicker = genericComponent<new <T, Multiple extends boolean = false> (
+export const VDatePicker = genericComponent<new <
+  T,
+  Multiple extends boolean | 'range' | number | (string & {}) = false,
+  TModel = Multiple extends true | number | string
+    ? T[]
+    : T,
+> (
   props: {
-    modelValue?: Multiple extends true ? T[] : T
-    'onUpdate:modelValue'?: (value: Multiple extends true ? T[] : T) => void
+    modelValue?: TModel
+    'onUpdate:modelValue'?: (value: TModel) => void
     multiple?: Multiple
   },
   slots: VDatePickerSlots
@@ -121,7 +127,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
     })
     const text = computed(() => {
       return adapter.format(
-        adapter.setYear(adapter.setMonth(adapter.date(), month.value), year.value),
+        adapter.date(new Date(year.value, month.value, 1)),
         'monthAndYear',
       )
     })
@@ -176,7 +182,9 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       } else {
         year.value++
         month.value = 0
+        onUpdateYear(year.value)
       }
+      onUpdateMonth(month.value)
     }
 
     function onClickPrev () {
@@ -185,7 +193,9 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       } else {
         year.value--
         month.value = 11
+        onUpdateYear(year.value)
       }
+      onUpdateMonth(month.value)
     }
 
     function onClickDate () {
@@ -200,17 +210,17 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
       viewMode.value = viewMode.value === 'year' ? 'month' : 'year'
     }
 
-    watch(month, () => {
+    function onUpdateMonth (value: number) {
       if (viewMode.value === 'months') onClickMonth()
 
-      emit('update:month', month.value)
-    })
+      emit('update:month', value)
+    }
 
-    watch(year, () => {
+    function onUpdateYear (value: number) {
       if (viewMode.value === 'year') onClickYear()
 
-      emit('update:year', year.value)
-    })
+      emit('update:year', value)
+    }
 
     watch(model, (val, oldVal) => {
       const before = adapter.date(wrapInArray(val)[0])
@@ -264,7 +274,10 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                 { ...datePickerHeaderProps }
                 { ...headerProps }
                 onClick={ viewMode.value !== 'month' ? onClickDate : undefined }
-                v-slots={ slots }
+                v-slots={{
+                  ...slots,
+                  default: undefined,
+                }}
               />
             ),
             default: () => (
@@ -285,6 +298,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                       key="date-picker-months"
                       { ...datePickerMonthsProps }
                       v-model={ month.value }
+                      onUpdate:modelValue={ onUpdateMonth }
                       min={ minDate.value }
                       max={ maxDate.value }
                     />
@@ -293,6 +307,7 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                       key="date-picker-years"
                       { ...datePickerYearsProps }
                       v-model={ year.value }
+                      onUpdate:modelValue={ onUpdateYear }
                       min={ minDate.value }
                       max={ maxDate.value }
                     />
@@ -303,6 +318,8 @@ export const VDatePicker = genericComponent<new <T, Multiple extends boolean = f
                       v-model={ model.value }
                       v-model:month={ month.value }
                       v-model:year={ year.value }
+                      onUpdate:month={ onUpdateMonth }
+                      onUpdate:year={ onUpdateYear }
                       min={ minDate.value }
                       max={ maxDate.value }
                     />
