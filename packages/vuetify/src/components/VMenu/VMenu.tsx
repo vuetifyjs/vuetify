@@ -135,6 +135,9 @@ export const VMenu = genericComponent<OverlaySlots>()({
           isActive.value = false
           overlay.value?.activatorEl?.focus()
         }
+      }else if(e.key === 'Enter' && props.closeOnContentClick){
+        isActive.value = false;
+        parent?.closeParents();
       }
     }
 
