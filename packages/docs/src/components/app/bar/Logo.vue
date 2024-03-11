@@ -24,7 +24,7 @@
   const theme = useTheme()
 
   const logo = computed(() => {
-    const file = `${theme.name.value}.svg`
+    const file = `${theme.current.value.dark ? 'dark' : 'light'}.svg`
     const logo = 'vuetify-logo-v3-slim'
 
     return `${logo}-${lgAndUp.value ? 'text-' : ''}${file}`
