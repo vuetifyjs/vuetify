@@ -22,6 +22,10 @@ export type VTreeviewChildrenSlots<T> = {
 
 export const makeVTreeviewChildrenProps = propsFactory({
   loadChildren: Function as PropType<(item: unknown) => Promise<void>>,
+  loadingIcon: {
+    type: String,
+    default: '$loading',
+  },
   items: Array as PropType<readonly InternalListItem[]>,
   selectable: Boolean,
 }, 'VTreeviewChildren')
@@ -68,6 +72,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 key={ item.value }
                 tabindex="-1"
                 modelValue={ isSelected }
+                loading={ isLoading.value }
                 indeterminate={ isIndeterminate }
                 onClick={ (e: MouseEvent) => onClick(e, item) }
               />
@@ -90,6 +95,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               <VTreeviewItem
                 { ...itemProps }
                 { ...activatorProps }
+                loading={ isLoading.value }
                 v-slots={ slotsWithItem }
                 onClick={ (e: MouseEvent | KeyboardEvent) => onClick(e, item) }
               />

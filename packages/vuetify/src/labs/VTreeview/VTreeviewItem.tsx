@@ -16,9 +16,11 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
+import { VProgressCircular } from '../allComponents'
 import type { VListItemSlots } from '@/components/VList/VListItem'
 
 export const makeVTreeviewItemProps = propsFactory({
+  loading: Boolean,
   toggleIcon: IconValue,
 
   ...makeVListItemProps({ slim: true }),
@@ -28,10 +30,6 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
   name: 'VTreeviewItem',
 
   props: makeVTreeviewItemProps(),
-
-  emits: {
-    click: (e: MouseEvent | KeyboardEvent) => true,
-  },
 
   setup (props, { attrs, slots, emit }) {
     const link = useLink(props, attrs)
@@ -45,11 +43,8 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
     )
 
     function onClick (e: MouseEvent | KeyboardEvent) {
-      if (e instanceof MouseEvent) {
-        emit('click', e)
-        if (!vListItemRef.value?.isGroupActivator || !isClickable.value) return
-        props.value != null && vListItemRef.value?.select(!vListItemRef.value?.isSelected, e)
-      }
+      if (!vListItemRef.value?.isGroupActivator || !isClickable.value) return
+      props.value != null && vListItemRef.value?.select(!vListItemRef.value?.isSelected, e)
     }
 
     function onKeyDown (e: KeyboardEvent) {
@@ -89,8 +84,21 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
                       <VBtn
                         density="compact"
                         icon={ props.toggleIcon }
+                        loading={ props.loading }
                         variant="text"
-                      />
+                      >
+                        {{
+                          loader () {
+                            return (
+                              <VProgressCircular
+                                indeterminate="disable-shrink"
+                                size="20"
+                                width="2"
+                              />
+                            )
+                          },
+                        }}
+                      </VBtn>
                     </VListItemAction>
                   )}
 
