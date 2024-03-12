@@ -86,7 +86,7 @@ export const makeSelectProps = propsFactory({
   },
   openOnClear: Boolean,
   itemColor: String,
-
+  keyboardLookup: Boolean,
   ...makeItemsProps({ itemChildren: false }),
 }, 'Select')
 
@@ -115,6 +115,7 @@ export const VSelect = genericComponent<new <
     itemProps?: SelectItemKey<ItemType<T>>
     returnObject?: ReturnObject
     multiple?: Multiple
+    keyboardLookup?: boolean
     modelValue?: V | null
     'onUpdate:modelValue'?: (value: V) => void
   },
@@ -129,7 +130,9 @@ export const VSelect = genericComponent<new <
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelect',
 
-  props: makeVSelectProps(),
+  props: makeVSelectProps({
+    keyboardLookup: true,
+  }),
 
   emits: {
     'update:focused': (focused: boolean) => true,
@@ -238,7 +241,7 @@ export const VSelect = genericComponent<new <
         return isPrintableChar && noModifier
       }
 
-      if (props.multiple || !checkPrintable(e)) return
+      if (!props.keyboardLookup || props.multiple || !checkPrintable(e)) return
 
       const now = performance.now()
       if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
