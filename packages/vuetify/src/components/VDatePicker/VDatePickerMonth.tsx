@@ -79,15 +79,11 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
           rangeStop.value = _value
         }
 
-        const diff = adapter.getDiff(rangeStop.value, rangeStart.value, 'days')
-        const datesInRange = [rangeStart.value]
+        const datesInRange = []
 
-        for (let i = 1; i < diff; i++) {
-          const nextDate = adapter.addDays(rangeStart.value, i)
-          datesInRange.push(nextDate)
+        for (let d = rangeStart.value; d <= rangeStop.value; d = adapter.addDays(d, 1)) {
+          datesInRange.push(d)
         }
-
-        datesInRange.push(rangeStop.value)
 
         model.value = datesInRange
       } else {
