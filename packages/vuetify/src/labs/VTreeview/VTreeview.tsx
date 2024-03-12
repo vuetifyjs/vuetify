@@ -50,8 +50,9 @@ export const VTreeview = genericComponent<new <T>(
   props: makeVTreeviewProps(),
 
   emits: {
-    'update:selected': (val: unknown[]) => true,
     'update:opened': (val: unknown[]) => true,
+    'update:activated': (val: unknown[]) => true,
+    'update:selected': (val: unknown[]) => true,
     'click:open': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },
@@ -62,6 +63,7 @@ export const VTreeview = genericComponent<new <T>(
     const baseColor = toRef(props, 'baseColor')
     const color = toRef(props, 'color')
     const opened = useProxiedModel(props, 'opened')
+    const activated = useProxiedModel(props, 'activated')
     const selected = useProxiedModel(props, 'selected')
 
     const vListRef = ref<VList>()
@@ -136,6 +138,7 @@ export const VTreeview = genericComponent<new <T>(
           ]}
           style={ props.style }
           v-model:opened={ opened.value }
+          v-model:activated={ activated.value }
           v-model:selected={ selected.value }
         >
           <VTreeviewChildren

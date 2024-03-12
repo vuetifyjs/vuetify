@@ -17,6 +17,7 @@
           color="warning"
           density="compact"
           item-title="name"
+          item-value="id"
           activatable
           open-on-click
           transition
