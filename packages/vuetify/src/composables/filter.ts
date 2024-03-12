@@ -3,7 +3,7 @@
 
 // Utilities
 import { computed, ref, unref, watchEffect } from 'vue'
-import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
+import { getCurrentInstance, getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -139,6 +139,7 @@ export function useFilter <T extends InternalItem> (
     customKeyFilter?: MaybeRef<FilterKeyFunctions | undefined>
   }
 ) {
+  const vm = getCurrentInstance('useFilter');
   const filteredItems: Ref<T[]> = ref([])
   const filteredMatches: Ref<Map<unknown, Record<string, FilterMatch>>> = ref(new Map())
   const transformedItems = computed(() => (
@@ -180,6 +181,8 @@ export function useFilter <T extends InternalItem> (
     })
     filteredItems.value = _filteredItems
     filteredMatches.value = _filteredMatches
+
+    vm.emit("update:filteredItems", filteredItems.value)
   })
 
   function getMatches (item: T) {

@@ -3,8 +3,8 @@ import { useLocale } from '@/composables'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide, toRef } from 'vue'
-import { isEmpty, propsFactory } from '@/util'
+import { computed, inject, provide, toRef, watch } from 'vue'
+import { getCurrentInstance, getObjectValueByPath, isEmpty, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -105,6 +105,7 @@ export function useSortedItems <T extends InternalItem> (
     sortRawFunctions?: Ref<Record<string, DataTableCompareFunction> | undefined>
   },
 ) {
+  const vm = getCurrentInstance('userSortedItems')
   const locale = useLocale()
   const sortedItems = computed(() => {
     if (!sortBy.value.length) return items.value
@@ -117,6 +118,10 @@ export function useSortedItems <T extends InternalItem> (
       },
       sortRawFunctions: options?.sortRawFunctions?.value,
     })
+  })
+
+  watch(sortedItems, val => {
+    vm.emit('update:sortedItems', val)
   })
 
   return { sortedItems }
