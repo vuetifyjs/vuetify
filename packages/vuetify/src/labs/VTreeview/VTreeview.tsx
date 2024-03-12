@@ -8,8 +8,8 @@ import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, provide, ref, toRef } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { computed, provide, ref, toRef, watch } from 'vue'
+import { genericComponent, getPropertyFromItem, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
@@ -26,6 +26,7 @@ function flatten (items: ListItem[], flat: ListItem[] = []) {
 }
 
 export const makeVTreeviewProps = propsFactory({
+  openAll: Boolean,
   search: String,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
@@ -100,6 +101,26 @@ export const VTreeview = genericComponent<new <T>(
         queue.push(...((vListRef.value?.children.get(child) ?? []).slice()))
       }
       return arr
+    }
+
+    watch(() => props.openAll, val => {
+      opened.value = val ? openAll(items.value) : []
+    }, { immediate: true })
+
+    function openAll (item: any) {
+      let ids: number[] = []
+
+      for (const i of item) {
+        if (!i.children) continue
+
+        ids.push(i.value)
+
+        if (i.children) {
+          ids = ids.concat(openAll(i.children))
+        }
+      }
+
+      return ids
     }
 
     provide(VTreeviewSymbol, { visibleIds })

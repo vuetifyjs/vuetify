@@ -1,6 +1,7 @@
 <template>
   <v-treeview
     :items="items"
+    item-value="id"
     open-all
   ></v-treeview>
 </template>

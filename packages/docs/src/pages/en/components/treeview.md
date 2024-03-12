@@ -19,11 +19,31 @@ The `v-treeview` component is useful for displaying large amounts of nested data
 
 <PageFeatures />
 
+::: warning
+
+This feature requires [v3.5.9](/getting-started/release-notes/?version=v3.5.9)
+
+:::
+
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VTreeview } from 'vuetify/labs/VTreeview'
+
+export default createVuetify({
+  components: {
+    VTreeview,
+  },
+})
+```
+
 ## Usage
 
-A basic example
+A basic example of the treeview component.
 
-<!-- <ExamplesExample file="v-treeview/usage" /> -->
+<ExamplesExample file="v-treeview/usage" />
 
 <PromotedEntry />
 
@@ -82,17 +102,17 @@ Treeview nodes can be pre-opened on page load.
 
 <ExamplesExample file="v-treeview/prop-open-all" />
 
-#### Rounded
+<!-- #### Rounded
 
 You can make treeview nodes rounded.
 
-<ExamplesExample file="v-treeview/prop-rounded" />
+<ExamplesExample file="v-treeview/prop-rounded" /> -->
 
-#### Selectable
+<!-- #### Selectable
 
 You can easily select treeview nodes and children.
 
-<ExamplesExample file="v-treeview/prop-selectable" />
+<ExamplesExample file="v-treeview/prop-selectable" /> -->
 
 #### Selected color
 
@@ -106,11 +126,11 @@ Treeview now supports two different selection types. The default type is **'leaf
 
 <ExamplesExample file="v-treeview/prop-selection-type" />
 
-#### Shaped
+<!-- #### Shaped
 
 Shaped treeview's have rounded borders on one side of the nodes.
 
-<ExamplesExample file="v-treeview/prop-shaped" />
+<ExamplesExample file="v-treeview/prop-shaped" /> -->
 
 ### Slots
 
