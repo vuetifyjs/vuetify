@@ -143,7 +143,12 @@
   "components/timelines": ["VTimeline", "VTimelineItem"],
   "components/toolbars": ["VToolbar", "VToolbarItems", "VToolbarTitle"],
   "components/tooltips": ["VTooltip"],
-  "components/treeview": ["VTreeview"],
+  "components/treeview": [
+    "VTreeview",
+    "VTreeviewItem",
+    "VTreeviewChildren",
+    "VTreeviewGroup"
+  ],
   "components/virtual-scroller": ["VVirtualScroll"],
   "components/windows": ["VWindow", "VWindowItem"],
   "directives/click-outside": ["v-click-outside"],

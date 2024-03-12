@@ -1,33 +1,60 @@
 ---
-disabled: true
+emphasized: true
 meta:
+  nav: Treeview
   title: Treeview component
   description: The treeview component is a user interface that is used to represent hierarchical data in a tree structure.
   keywords: treeview, vuetify treeview component, vue treeview component
 related:
   - /components/lists/
   - /components/timelines/
-
+features:
+  label: 'C: VTreeview'
+  report: true
 ---
 
 # Treeview
 
 The `v-treeview` component is useful for displaying large amounts of nested data.
 
-<PromotedEntry />
+<PageFeatures />
+
+::: warning
+
+This feature requires [v3.5.9](/getting-started/release-notes/?version=v3.5.9)
+
+:::
+
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VTreeview } from 'vuetify/labs/VTreeview'
+
+export default createVuetify({
+  components: {
+    VTreeview,
+  },
+})
+```
 
 ## Usage
 
-A basic example
+A basic example of the treeview component.
 
 <ExamplesExample file="v-treeview/usage" />
+
+<PromotedEntry />
 
 ## API
 
 | Component | Description |
 | - | - |
 | [v-treeview](/api/v-treeview/) | Primary Component |
-| [v-treeview-node](/api/v-treeview-node/) | Sub-component used to display a single treeview node |
+| [v-treeview-item](/api/v-treeview-item/) | Sub-component used to display a single treeview node |
+| [v-treeview-children](/api/v-treeview-children/) | Sub-component used to display a single treeview node's children |
+| [v-treeview-group](/api/v-treeview-group/) | Sub-component used to display a single treeview node's children |
 
 <ApiInline hide-links />
 
@@ -53,11 +80,11 @@ Dense mode provides more compact layout with decreased heights of the items.
 
 <ExamplesExample file="v-treeview/prop-dense" />
 
-#### Hoverable
+<!-- #### Hoverable
 
 Treeview nodes can have a hover effect.
 
-<ExamplesExample file="v-treeview/prop-hoverable" />
+<ExamplesExample file="v-treeview/prop-hoverable" /> -->
 
 #### Item disabled
 
@@ -77,17 +104,17 @@ Treeview nodes can be pre-opened on page load.
 
 <ExamplesExample file="v-treeview/prop-open-all" />
 
-#### Rounded
+<!-- #### Rounded
 
 You can make treeview nodes rounded.
 
-<ExamplesExample file="v-treeview/prop-rounded" />
+<ExamplesExample file="v-treeview/prop-rounded" /> -->
 
-#### Selectable
+<!-- #### Selectable
 
 You can easily select treeview nodes and children.
 
-<ExamplesExample file="v-treeview/prop-selectable" />
+<ExamplesExample file="v-treeview/prop-selectable" /> -->
 
 #### Selected color
 
@@ -101,11 +128,11 @@ Treeview now supports two different selection types. The default type is **'leaf
 
 <ExamplesExample file="v-treeview/prop-selection-type" />
 
-#### Shaped
+<!-- #### Shaped
 
 Shaped treeview's have rounded borders on one side of the nodes.
 
-<ExamplesExample file="v-treeview/prop-shaped" />
+<ExamplesExample file="v-treeview/prop-shaped" /> -->
 
 ### Slots
 

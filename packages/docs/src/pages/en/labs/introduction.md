@@ -81,6 +81,7 @@ The following is a list of available and up-and-coming components for use with L
 | [v-fab](/components/floating-action-buttons/) | A layout aware [v-btn](/components/buttons/) | [v3.5.7](/getting-started/release-notes/?version=v3.5.7) |
 | [v-speed-dial](/components/speed-dials/) | A component for display actions | [v3.5.8](/getting-started/release-notes/?version=v3.5.8) |
 | [v-sparkline](/components/sparklines/) | A basic data display component | [v3.5.5](/getting-started/release-notes/?version=v3.5.5) |
+| [v-treeview](/components/treeview/) | A treeview component | [v3.5.9](/getting-started/release-notes/?version=v3.5.9) |
 
 ::: warning
 Lab component APIs are **NOT** finalized and can and will change. You should **EXPECT** for things to break during the course of development.

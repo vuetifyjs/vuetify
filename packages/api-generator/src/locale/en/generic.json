@@ -6,6 +6,7 @@
     "appendAvatar": "Appends a [v-avatar](/components/avatars/) component after default content in the **append** slot.",
     "appendIcon": "Creates a [v-icon](/api/v-icon/) component after default content in the **append** slot.",
     "auto": "Centers list on selected element.",
+    "baseColor": "Sets the color of component when not focused.",
     "bgColor": "Applies specified color to the control's background. Used on components that also support the **color** prop. - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
     "clearable": "Allows for the component to be cleared.",
     "color": "Applies specified color to the control - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",

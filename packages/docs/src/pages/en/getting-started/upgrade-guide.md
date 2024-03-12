@@ -34,9 +34,7 @@ Before upgrading, make sure to consult the Official [Vue 3 Migration Guide](http
 
 - [calendar](https://github.com/vuetifyjs/vuetify/issues/13469)
 - [overflow-btn](https://github.com/vuetifyjs/vuetify/issues/13493)
-- [speed-dial](https://github.com/vuetifyjs/vuetify/issues/13508)
 - [time-picker](https://github.com/vuetifyjs/vuetify/issues/13516)
-- [treeview](https://github.com/vuetifyjs/vuetify/issues/13518)
 :::
 
 ## Setup
