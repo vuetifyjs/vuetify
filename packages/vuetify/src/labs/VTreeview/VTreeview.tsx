@@ -9,7 +9,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, provide, ref, toRef, watch } from 'vue'
-import { genericComponent, getPropertyFromItem, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'

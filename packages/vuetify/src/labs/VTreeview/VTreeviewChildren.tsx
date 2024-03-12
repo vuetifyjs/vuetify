@@ -5,7 +5,7 @@ import { VCheckboxBtn } from '@/components/VCheckbox'
 
 // Utilities
 import { shallowRef } from 'vue'
-import { genericComponent, getObjectValueByPath, propsFactory } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
