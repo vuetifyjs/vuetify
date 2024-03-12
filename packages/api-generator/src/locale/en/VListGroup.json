@@ -1,10 +1,15 @@
 {
   "props": {
     "disabled": "Puts all children inputs into a disabled state.",
+    "collapseIcon": "Icon to display when the list item is expanded.",
+    "expandIcon": "Icon to display when the list item is collapsed.",
     "group": "Assign a route namespace. Accepts a string or regexp for determining active state.",
     "noAction": "Removes left padding assigned for action icons from group items.",
     "prependIcon": "Prepends an icon to the component, uses the same syntax as `v-icon`.",
-    "subGroup": "Designate the component as nested list group.",
+    "subgroup": "Designate the component as nested list group.",
     "value": "Expands / Collapse the list-group."
+  },
+  "exposed": {
+    "isOpen": "Returns the current state of the list-group."
   }
 }

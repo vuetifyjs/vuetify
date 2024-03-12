@@ -53,6 +53,8 @@ A basic example of the treeview component.
 | - | - |
 | [v-treeview](/api/v-treeview/) | Primary Component |
 | [v-treeview-item](/api/v-treeview-item/) | Sub-component used to display a single treeview node |
+| [v-treeview-children](/api/v-treeview-children/) | Sub-component used to display a single treeview node's children |
+| [v-treeview-group](/api/v-treeview-group/) | Sub-component used to display a single treeview node's children |
 
 <ApiInline hide-links />
 
