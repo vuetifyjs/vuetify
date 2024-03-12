@@ -55,6 +55,13 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     const rangeStart = shallowRef()
     const rangeStop = shallowRef()
 
+    if (props.multiple === 'range' && model.value.length > 0) {
+      rangeStart.value = model.value[0]
+      if (model.value.length > 1) {
+        rangeStop.value = model.value[model.value.length - 1]
+      }
+    }
+
     const atMax = computed(() => {
       const max = ['number', 'string'].includes(typeof props.multiple) ? Number(props.multiple) : Infinity
 
