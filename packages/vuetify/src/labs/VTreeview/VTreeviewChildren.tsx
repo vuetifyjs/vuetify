@@ -52,6 +52,12 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       })
     }
 
+    function onClick (e: MouseEvent | KeyboardEvent, item: any) {
+      e.stopPropagation()
+
+      checkChildren(item)
+    }
+
     return () => slots.default?.() ?? props.items?.map(({ children, props: itemProps, raw: item }) => {
       const slotsWithItem = {
         prepend: slots.prepend
@@ -63,7 +69,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 tabindex="-1"
                 modelValue={ isSelected }
                 indeterminate={ isIndeterminate }
-                onClick={ () => checkChildren(item) }
+                onClick={ (e: MouseEvent) => onClick(e, item) }
               />
             )
             : undefined,
@@ -85,7 +91,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 { ...itemProps }
                 { ...activatorProps }
                 v-slots={ slotsWithItem }
-                onClick={ () => checkChildren(item) }
+                onClick={ (e: MouseEvent | KeyboardEvent) => onClick(e, item) }
               />
             ),
             default: () => (
