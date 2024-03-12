@@ -399,10 +399,12 @@ export const VAutocomplete = genericComponent<new <
       }
     })
 
-    watch(() => props.items, val => {
-      if (!isFocused.value || !val.length || menu.value) return
+    watch(() => props.items, (newVal, oldVal) => {
+      if (menu.value) return
 
-      menu.value = true
+      if (isFocused.value && !oldVal.length && newVal.length) {
+        menu.value = true
+      }
     })
 
     useRender(() => {
