@@ -51,8 +51,9 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         isLoading.value = true
         props.loadChildren(item).then(resolve)
       }).then(() => {
-        isLoading.value = false
         hasLoaded.value = true
+      }).finally(() => {
+        isLoading.value = false
       })
     }
 
