@@ -61,7 +61,6 @@ declare global {
   const useAppStore: typeof import('./src/stores/app')['useAppStore']
   const useAttrs: typeof import('vue')['useAttrs']
   const useAuthStore: typeof import('@vuetify/one')['useAuthStore']
-  const useBannersStore: typeof import('./src/stores/banners')['useBannersStore']
   const useCommitsStore: typeof import('./src/stores/commits')['useCommitsStore']
   const useCosmic: typeof import('./src/composables/cosmic')['useCosmic']
   const useDate: typeof import('vuetify')['useDate']
@@ -151,7 +150,6 @@ declare module 'vue' {
     readonly useAppStore: UnwrapRef<typeof import('./src/stores/app')['useAppStore']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useAuthStore: UnwrapRef<typeof import('@vuetify/one')['useAuthStore']>
-    readonly useBannersStore: UnwrapRef<typeof import('./src/stores/banners')['useBannersStore']>
     readonly useCommitsStore: UnwrapRef<typeof import('./src/stores/commits')['useCommitsStore']>
     readonly useCosmic: UnwrapRef<typeof import('./src/composables/cosmic')['useCosmic']>
     readonly useDate: UnwrapRef<typeof import('vuetify')['useDate']>
@@ -240,7 +238,6 @@ declare module '@vue/runtime-core' {
     readonly useAppStore: UnwrapRef<typeof import('./src/stores/app')['useAppStore']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useAuthStore: UnwrapRef<typeof import('@vuetify/one')['useAuthStore']>
-    readonly useBannersStore: UnwrapRef<typeof import('./src/stores/banners')['useBannersStore']>
     readonly useCommitsStore: UnwrapRef<typeof import('./src/stores/commits')['useCommitsStore']>
     readonly useCosmic: UnwrapRef<typeof import('./src/composables/cosmic')['useCosmic']>
     readonly useDate: UnwrapRef<typeof import('vuetify')['useDate']>

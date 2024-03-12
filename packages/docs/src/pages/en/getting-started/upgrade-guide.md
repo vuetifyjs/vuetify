@@ -243,6 +243,8 @@ app.use(vuetify)
   - `data-table-select` and `data-table-expand` must be defined as `key` instead of `value`.
   - `class` has been replaced with `headerProps`.
   - `cellClass` has been replaced with `cellProps` and now accepts either a function or an object.
+  - `filter` function requires `search` to be used in order for it to be triggered.
+- Tables requires `search` prop to trigger filtering. `items` array can be pre-filter with a computed.
 - Server side tables using `server-items-length` must be replaced with `<v-data-table-server items-length />`.
 - Argument order for `@click:*` events is now consistently `(event, data)`.
   - `onRowClick (item, data, event)` should be changed to `onRowClick (event, { item })`.

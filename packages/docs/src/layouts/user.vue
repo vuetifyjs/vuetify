@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <AppSettingsDrawer />
+    <VoNotificationsBanner order="-1" />
 
-    <AppBanner />
+    <AppSettingsDrawer />
 
     <AppBarBar />
 
