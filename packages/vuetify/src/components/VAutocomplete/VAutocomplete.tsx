@@ -247,13 +247,12 @@ export const VAutocomplete = genericComponent<new <
       }
 
       if (['Backspace', 'Delete'].includes(e.key)) {
-        function deSelectItem (item: ListItem) {
-          if (item && !item.props.disabled) select(item, false)
-        }
-        if (!props.multiple) {
-          if (hasSelectionSlot.value) deSelectItem(model.value[0])
-          return
-        }
+        if (
+          !props.multiple &&
+          hasSelectionSlot.value &&
+          model.value.length > 0
+        ) return select(model.value[0], false)
+
         if (selectionIndex.value < 0) {
           if (e.key === 'Backspace' && !search.value) {
             selectionIndex.value = length - 1
@@ -263,7 +262,7 @@ export const VAutocomplete = genericComponent<new <
         }
 
         const originalSelectionIndex = selectionIndex.value
-        deSelectItem(model.value[selectionIndex.value])
+        select(model.value[selectionIndex.value], false)
 
         selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
       }
@@ -331,8 +330,8 @@ export const VAutocomplete = genericComponent<new <
     const isSelecting = shallowRef(false)
 
     /** @param set - null means toggle */
-    function select (item: ListItem, set: boolean | null = true) {
-      if (item.props.disabled) return
+    function select (item: ListItem | undefined, set: boolean | null = true) {
+      if (!item || item.props.disabled) return
 
       if (props.multiple) {
         const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
