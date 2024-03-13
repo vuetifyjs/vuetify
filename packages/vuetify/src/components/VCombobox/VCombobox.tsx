@@ -306,23 +306,28 @@ export const VCombobox = genericComponent<new <
         if (hasSelectionSlot.value) _search.value = ''
       }
 
-      if (!props.multiple) return
-
       if (['Backspace', 'Delete'].includes(e.key)) {
+        function deSelectItem (item: ListItem) {
+          if (item && !item.props.disabled) select(item, false)
+        }
+        if (!props.multiple) {
+          deSelectItem(model.value[0])
+          return
+        }
         if (selectionIndex.value < 0) {
           if (e.key === 'Backspace' && !search.value) {
             selectionIndex.value = length - 1
           }
-
           return
         }
 
         const originalSelectionIndex = selectionIndex.value
-        const selectedItem = model.value[selectionIndex.value]
-        if (selectedItem && !selectedItem.props.disabled) select(selectedItem, false)
+        deSelectItem(model.value[selectionIndex.value])
 
         selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
       }
+
+      if (!props.multiple) return
 
       if (e.key === 'ArrowLeft') {
         if (selectionIndex.value < 0 && selectionStart > 0) return
