@@ -2,17 +2,18 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, inject, markRaw, provide, ref, shallowRef, toRef, watch } from 'vue'
 import { consoleWarn, propsFactory } from '@/util'
 
 // Types
-import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
+import type { ComponentInternalInstance, ComputedRef, InjectionKey, PropType, Raw, Ref } from 'vue'
 import type { ValidationProps } from './validation'
 import type { EventProp } from '@/util'
 
 export interface FormProvide {
   register: (item: {
     id: number | string
+    vm: ComponentInternalInstance
     validate: () => Promise<string[]>
     reset: () => void
     resetValidation: () => void
@@ -32,6 +33,7 @@ export interface FormField {
   validate: () => Promise<string[]>
   reset: () => void
   resetValidation: () => void
+  vm: Raw<ComponentInternalInstance>
   isValid: boolean | null
   errorMessages: string[]
 }
@@ -141,7 +143,7 @@ export function createForm (props: FormProps) {
   }, { deep: true, flush: 'post' })
 
   provide(FormKey, {
-    register: ({ id, validate, reset, resetValidation }) => {
+    register: ({ id, vm, validate, reset, resetValidation }) => {
       if (items.value.some(item => item.id === id)) {
         consoleWarn(`Duplicate input name "${id}"`)
       }
@@ -151,6 +153,7 @@ export function createForm (props: FormProps) {
         validate,
         reset,
         resetValidation,
+        vm: markRaw(vm),
         isValid: null,
         errorMessages: [],
       })
