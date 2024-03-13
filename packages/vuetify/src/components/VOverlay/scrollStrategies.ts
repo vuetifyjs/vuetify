@@ -49,7 +49,7 @@ export function useScrollStrategies (
     if (!(data.isActive.value && props.scrollStrategy)) return
 
     scope = effectScope()
-    await nextTick()
+    await new Promise(resolve => setTimeout(resolve))
     scope.active && scope.run(() => {
       if (typeof props.scrollStrategy === 'function') {
         props.scrollStrategy(data, props, scope!)
