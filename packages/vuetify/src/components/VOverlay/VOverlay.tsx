@@ -162,6 +162,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     })
 
     const root = ref<HTMLElement>()
+    const scrimEl = ref<HTMLElement>()
     const contentEl = ref<HTMLElement>()
     const { contentStyles, updateLocation } = useLocationStrategies(props, {
       isRtl,
@@ -184,8 +185,11 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       else animateClick()
     }
 
-    function closeConditional () {
-      return isActive.value && globalTop.value
+    function closeConditional (e: Event) {
+      return isActive.value && globalTop.value && (
+        // If using scrim, only close if clicking on it rather than anything opened on top
+        !props.scrim || e.target === scrimEl.value
+      )
     }
 
     IN_BROWSER && watch(isActive, val => {
@@ -297,6 +301,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
               <Scrim
                 color={ scrimColor }
                 modelValue={ isActive.value && !!props.scrim }
+                ref={ scrimEl }
                 { ...scrimEvents.value }
               />
               <MaybeTransition
