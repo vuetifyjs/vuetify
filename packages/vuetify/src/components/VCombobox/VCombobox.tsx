@@ -311,7 +311,7 @@ export const VCombobox = genericComponent<new <
           if (item && !item.props.disabled) select(item, false)
         }
         if (!props.multiple) {
-          deSelectItem(model.value[0])
+          if (hasSelectionSlot.value) deSelectItem(model.value[0])
           return
         }
         if (selectionIndex.value < 0) {
