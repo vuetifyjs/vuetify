@@ -721,6 +721,7 @@ export function eagerComputed<T> (fn: () => T, options?: WatchOptions): Readonly
   })
 
   return readonly(result)
+}
 export function isClickInsideElement (event: MouseEvent, targetDiv: HTMLElement) {
   const mouseX = event.clientX
   const mouseY = event.clientY
