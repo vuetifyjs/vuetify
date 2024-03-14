@@ -196,8 +196,10 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
     useRender(() => {
       const Tag = isLink.value ? 'a' : props.tag
-      const hasTitle = (slots.title || props.title != null)
-      const hasSubtitle = (slots.subtitle || props.subtitle != null)
+      const hasTitle = (!slots.default?.(slotProps.value).find(x => x.type?.name === 'VListItemTitle') &&
+      (slots.title || props.title != null))
+      const hasSubtitle = (!slots.default?.(slotProps.value).find(x => x.type?.name === 'VListItemSubtitle') &&
+      (slots.subtitle || props.subtitle != null))
       const hasAppendMedia = !!(props.appendAvatar || props.appendIcon)
       const hasAppend = !!(hasAppendMedia || slots.append)
       const hasPrependMedia = !!(props.prependAvatar || props.prependIcon)
