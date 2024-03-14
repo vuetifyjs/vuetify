@@ -1,5 +1,5 @@
 // Utilities
-import { effectScope, nextTick, onScopeDispose, watchEffect } from 'vue'
+import { effectScope, onScopeDispose, watchEffect } from 'vue'
 import { requestNewFrame } from './requestNewFrame'
 import { convertToUnit, getScrollParents, hasScrollbar, IN_BROWSER, propsFactory } from '@/util'
 
