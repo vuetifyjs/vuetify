@@ -19,7 +19,7 @@
               <div class="text-h6 mb-1">
                 Headline
               </div>
-              <div class="text-caption">Greyhound divisely hello coldly fonwderfully</div>
+              <div class="text-caption">Greyhound divisively hello coldly wonderfully</div>
             </div>
           </v-card-item>
 
@@ -35,5 +35,5 @@
 </template>
 
 <script setup>
-  const variants = ['elevated', 'flat', 'tonal', 'outlined']
+  const variants = ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain']
 </script>
