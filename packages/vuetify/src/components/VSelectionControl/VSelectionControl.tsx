@@ -231,6 +231,7 @@ export const VSelectionControl = genericComponent<new <T>(
           onFocus={ onFocus }
           onInput={ onInput }
           aria-disabled={ !!props.disabled }
+          aria-label={ label || '' }
           type={ props.type }
           value={ trueValue.value }
           name={ props.name }
