@@ -56,7 +56,7 @@ If you are still using the Options API, you can access the display information o
 | - | - |
 | [useDisplay](/api/use-display/) | Composable |
 
-# Breakpoints and Thresholds
+## Breakpoints and Thresholds
 
 Threshold values generate the ranges used for various breakpoints seen throughout vuetify and the `useDisplay` composable. The system uses an "and up" mentality starting from `xs` at 0px. The default threshold values are displayed below.
 
