@@ -220,6 +220,12 @@
   .v-field--error:not(.v-field--disabled) &
     > .v-icon
       color: rgb(var(--v-theme-error))
+  &:focus
+    opacity: 1
+    outline: none
+
+    .v-icon
+      opacity: 1
 
 .v-field__clearable
   cursor: pointer
