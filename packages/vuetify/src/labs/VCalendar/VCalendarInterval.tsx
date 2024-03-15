@@ -107,13 +107,22 @@ export const VCalendarInterval = genericComponent()({
             >
               <slot name="intervalBody" interval={ interval.value }>
                   { interval.value.events?.map(event => (
-                    <VCalendarIntervalEvent
+                    <slot
+                      name="event"
                       event={ event }
                       interval={ interval.value }
                       intervalDivisions={ props.intervalDivisions }
                       intervalDuration={ props.intervalDuration }
                       intervalHeight={ props.intervalHeight }
-                    />
+                    >
+                      <VCalendarIntervalEvent
+                        event={ event }
+                        interval={ interval.value }
+                        intervalDivisions={ props.intervalDivisions }
+                        intervalDuration={ props.intervalDuration }
+                        intervalHeight={ props.intervalHeight }
+                      />
+                    </slot>
                   ))}
               </slot>
             </div>
@@ -126,13 +135,22 @@ export const VCalendarInterval = genericComponent()({
             >
               <slot name="intervalBody" interval={ interval.value }>
                   { interval.value.events?.filter(event => !event.allDay).map(event => (
-                    <VCalendarIntervalEvent
+                    <slot
+                      name="event"
                       event={ event }
                       interval={ interval.value }
                       intervalDivisions={ props.intervalDivisions }
                       intervalDuration={ props.intervalDuration }
                       intervalHeight={ props.intervalHeight }
-                    />
+                    >
+                      <VCalendarIntervalEvent
+                        event={ event }
+                        interval={ interval.value }
+                        intervalDivisions={ props.intervalDivisions }
+                        intervalDuration={ props.intervalDuration }
+                        intervalHeight={ props.intervalHeight }
+                      />
+                    </slot>
                   ))}
               </slot>
             </div>

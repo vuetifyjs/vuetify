@@ -8,7 +8,7 @@ import { VSheet } from '@/components/VSheet'
 import { useDate } from '@/composables/date'
 
 // Utilities
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
 
 export const makeVCalendarIntervalEventProps = propsFactory({
   allDay: Boolean,
@@ -33,7 +33,7 @@ export const VCalendarIntervalEvent = genericComponent()({
 
   props: makeVCalendarIntervalEventProps(),
 
-  setup (props) {
+  setup (props, { attrs }) {
     const adapter = useDate()
     const calcHeight = () => {
       if ((!props.event?.first && !props.event?.last) || adapter.isEqual(props.event?.start, props.interval?.start)) {
@@ -68,6 +68,7 @@ export const VCalendarIntervalEvent = genericComponent()({
               : props.event?.last
                 ? 'b'
                 : false }
+          { ...getPrefixedEventHandlers(attrs, ':intervalEvent', () => props) }
         >
           { props.event?.first ? props.event?.title : '' }
         </VSheet>

@@ -29,6 +29,25 @@ export interface CalendarProps {
   'onUpdate:year': ((value: number) => void) | undefined
 }
 
+export type CalendarDay = {
+  date: Date
+  formatted: string
+  isAdjacent: boolean
+  isDisabled: boolean
+  isEnd: boolean
+  isHidden: boolean
+  isSame: boolean
+  isSelected: boolean
+  isStart: boolean
+  isToday: boolean
+  isWeekEnd: boolean
+  isWeekStart: boolean
+  isoDate: string
+  localized: string
+  month: number
+  year: number
+}
+
 // Composables
 export const makeCalendarProps = propsFactory({
   allowedDates: [Array, Function] as PropType<unknown[] | ((date: unknown) => boolean)>,
@@ -124,7 +143,7 @@ export function useCalendar (props: CalendarProps) {
     return weeks
   })
 
-  function genDays (days: unknown[], today: unknown) {
+  function genDays (days: Date[], today: Date): CalendarDay[] {
     return days.filter(date => {
       return weekDays.value.includes(adapter.toJsDate(date).getDay())
     }).map((date, index) => {
@@ -136,21 +155,21 @@ export function useCalendar (props: CalendarProps) {
 
       return {
         date,
-        isoDate,
         formatted: adapter.format(date, 'keyboardDate'),
-        year: adapter.getYear(date),
-        month: adapter.getMonth(date),
-        isDisabled: isDisabled(date),
-        isWeekStart: index % 7 === 0,
-        isWeekEnd: index % 7 === 6,
-        isToday: adapter.isSameDay(date, today),
         isAdjacent,
-        isHidden: isAdjacent && !props.showAdjacentMonths,
-        isStart,
-        isSelected: model.value.some(value => adapter.isSameDay(date, value)),
+        isDisabled: isDisabled(date),
         isEnd,
+        isHidden: isAdjacent && !props.showAdjacentMonths,
         isSame,
+        isSelected: model.value.some(value => adapter.isSameDay(date, value)),
+        isStart,
+        isToday: adapter.isSameDay(date, today),
+        isWeekEnd: index % 7 === 6,
+        isWeekStart: index % 7 === 0,
+        isoDate,
         localized: adapter.format(date, 'dayOfMonth'),
+        month: adapter.getMonth(date),
+        year: adapter.getYear(date),
       }
     })
   }

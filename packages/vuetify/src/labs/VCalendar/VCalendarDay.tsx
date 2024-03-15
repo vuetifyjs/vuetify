@@ -10,7 +10,7 @@ import { useDate } from '@/composables/date'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
 
 export const makeVCalendarDayProps = propsFactory({
   hideDayHeader: Boolean,
@@ -27,7 +27,7 @@ export const VCalendarDay = genericComponent()({
 
   props: makeVCalendarDayProps(),
 
-  setup (props) {
+  setup (props, { attrs }) {
     const adapter = useDate()
     const intervals = computed(() => [
       ...Array.from({ length: props.intervals }, (v, i) => i)
@@ -57,10 +57,16 @@ export const VCalendarDay = genericComponent()({
           )}
 
           { intervals.value.map((_, index) => (
-            <VCalendarInterval
-              index={ index }
+            <slot
+              name="interval"
               { ...calendarIntervalProps }
-            ></VCalendarInterval>
+            >
+              <VCalendarInterval
+                index={ index }
+                { ...calendarIntervalProps }
+                { ...getPrefixedEventHandlers(attrs, ':interval', () => calendarIntervalProps) }
+              ></VCalendarInterval>
+            </slot>
           ))
           }
         </div>
