@@ -11,16 +11,16 @@ import { setupLayouts } from 'virtual:generated-layouts'
 // Plugins
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import { createHead } from '@vueuse/head'
+import { createHead } from '@unhead/vue'
 import { installPinia, pinia } from '@/plugins/pinia'
 import { installGlobalComponents } from '@/plugins/global-components'
-import { installAuth0 } from '@/plugins/auth'
 import { installGtag } from '@/plugins/gtag'
+import { installOne } from '@/plugins/one'
 import { installI18n } from '@/plugins/i18n'
-import { useAppStore } from '@/store/app'
-import { useLocaleStore } from '@/store/locale'
+import { useAppStore } from '@/stores/app'
+import { useLocaleStore } from '@/stores/locale'
 import { installPwa } from '@/plugins/pwa'
-import { useUserStore } from '@/store/user'
+import { useUserStore } from '@vuetify/one'
 import { installVuetify } from '@/plugins/vuetify'
 
 // Utilities
@@ -31,11 +31,11 @@ import {
   redirectRoutes,
   rpath,
   trailingSlash,
-} from '@/util/routes'
-import { wrapInArray } from '@/util/helpers'
+} from '@/utils/routes'
+import { wrapInArray } from '@/utils/helpers'
 
 // Globals
-import { IN_BROWSER } from '@/util/globals'
+import { IN_BROWSER } from '@/utils/globals'
 
 const routes = setupLayouts(generatedRoutes)
 
@@ -146,12 +146,12 @@ router.onError((err, to) => {
 })
 
 installGlobalComponents(app)
-installAuth0(app)
 installGtag(app, router)
 installI18n(app)
 installPwa(router)
 installPinia(app, router)
 installVuetify(app)
+installOne(app)
 
 router.isReady().then(() => {
   localStorage.removeItem('vuetify:dynamic-reload')

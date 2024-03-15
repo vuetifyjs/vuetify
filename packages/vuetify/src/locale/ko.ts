@@ -2,6 +2,10 @@ export default {
   badge: '배지',
   open: 'Open',
   close: '닫기',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: '일치하는 항목이 없습니다.',
     loadingText: '불러오는 중...',
@@ -31,8 +35,7 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Select dates',
       header: 'Enter dates',
@@ -53,6 +56,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} 더보기',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',

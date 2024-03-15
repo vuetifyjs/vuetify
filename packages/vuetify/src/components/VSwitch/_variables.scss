@@ -1,6 +1,7 @@
 @use '../../styles/settings';
 
 // VSwitch
+$switch-flex: 0 1 auto !default;
 $switch-control-input-transition: .2s transform settings.$standard-easing !default;
 $switch-error-background-color: rgb(var(--v-theme-error)) !default;
 $switch-error-color: rgb(var(--v-theme-on-error)) !default;
@@ -18,6 +19,8 @@ $switch-loader-color: rgb(var(--v-theme-surface)) !default;
 
 $switch-thumb-background: rgb(var(--v-theme-surface-bright)) !default;
 $switch-thumb-color: rgb(var(--v-theme-on-surface-bright)) !default;
+$switch-thumb-flat-background: rgb(var(--v-theme-surface-variant)) !default;
+$switch-thumb-flat-color: rgb(var(--v-theme-on-surface-variant)) !default;
 $switch-thumb-elevation: 4 !default;
 $switch-thumb-height: 20px !default;
 $switch-thumb-width: 20px !default;

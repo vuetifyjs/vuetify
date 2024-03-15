@@ -8,6 +8,7 @@ import { consoleWarn, propsFactory } from '@/util'
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
 import type { ValidationProps } from './validation'
+import type { EventProp } from '@/util'
 
 export interface FormProvide {
   register: (item: {
@@ -54,7 +55,7 @@ export interface FormProps {
   fastFail: boolean
   readonly: boolean
   modelValue: boolean | null
-  'onUpdate:modelValue': ((val: boolean | null) => void) | undefined
+  'onUpdate:modelValue': EventProp<[boolean | null]> | undefined
   validateOn: ValidationProps['validateOn']
 }
 
@@ -137,7 +138,7 @@ export function createForm (props: FormProps) {
       invalid > 0 ? false
       : valid === items.value.length ? true
       : null
-  }, { deep: true })
+  }, { deep: true, flush: 'post' })
 
   provide(FormKey, {
     register: ({ id, validate, reset, resetValidation }) => {

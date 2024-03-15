@@ -8,14 +8,14 @@
 
     <v-slider
       v-model="slider2"
-      track-color="green"
       label="track-color"
+      track-color="green"
     ></v-slider>
 
     <v-slider
       v-model="slider3"
-      thumb-color="purple"
       label="thumb-color"
+      thumb-color="purple"
     ></v-slider>
   </div>
 </template>

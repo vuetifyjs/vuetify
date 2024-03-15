@@ -12,7 +12,9 @@ related:
 
 Add Vuetify as a browser search engine for quick access to the documentation.
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ## Setup
 

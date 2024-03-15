@@ -1,0 +1,38 @@
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+// Transition
+.bottom-sheet-transition
+  &-enter-from
+    transform: translateY(100%)
+
+  &-leave-to
+    transform: translateY(100%)
+
+// Block
+.v-bottom-sheet
+  > .v-bottom-sheet__content.v-overlay__content
+    align-self: flex-end
+    border-radius: 0
+    flex: 0 1 auto
+    left: 0
+    right: 0
+    margin-inline: 0
+    margin-bottom: 0
+    transition-duration: $bottom-sheet-transition-duration
+    width: 100%
+    max-width: 100%
+    overflow: visible
+
+    @include tools.elevation($bottom-sheet-elevation)
+
+    > .v-card,
+    > .v-sheet
+      border-radius: $bottom-sheet-border-radius
+
+  &.v-bottom-sheet--inset
+    max-width: none
+
+    @media #{map-get(settings.$display-breakpoints, 'sm-and-up')}
+      max-width: $bottom-sheet-inset-width

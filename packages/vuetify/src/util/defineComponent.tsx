@@ -108,9 +108,9 @@ export function defineComponent (options: ComponentOptions) {
 
   if (options._setup) {
     options.props = propsFactory(options.props ?? {}, options.name)()
-    const propKeys = Object.keys(options.props)
+    const propKeys = Object.keys(options.props).filter(key => key !== 'class' && key !== 'style')
     options.filterProps = function filterProps (props: Record<string, any>) {
-      return pick(props, propKeys, ['class', 'style'])
+      return pick(props, propKeys)
     }
 
     options.props._as = String
@@ -185,6 +185,11 @@ type DefineComponentWithGenericProps<T extends (new (props: Record<string, any>,
   P = III extends Record<'$props', any>
     ? Omit<PropsOptions, keyof III['$props']>
     : PropsOptions,
+  EEE extends EmitsOptions = E extends any[]
+    ? E
+    : III extends Record<'$props', any>
+      ? Omit<E, ToListeners<keyof III['$props']>>
+      : E,
   Base = DefineComponent<
     P,
     RawBindings,
@@ -193,10 +198,10 @@ type DefineComponentWithGenericProps<T extends (new (props: Record<string, any>,
     M,
     Mixin,
     Extends,
-    E extends any[] ? E : III extends Record<'$props', any> ? Omit<E, ToListeners<keyof III['$props']>> : E,
+    EEE,
     EE,
     PublicProps,
-    ExtractPropTypes<P> & ({} extends E ? {} : EmitsToProps<E>),
+    ExtractPropTypes<P> & ({} extends E ? {} : EmitsToProps<EEE>),
     ExtractDefaultPropTypes<P>,
     S
   >
@@ -292,5 +297,5 @@ export interface FilterPropsOptions<PropsOptions extends Readonly<ComponentProps
   filterProps<
     T extends Partial<Props>,
     U extends Exclude<keyof Props, Exclude<keyof Props, keyof T>>
-  > (props: T): [yes: Partial<Pick<T, U>>, no: Omit<T, U>]
+  > (props: T): Partial<Pick<T, U>>
 }

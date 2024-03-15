@@ -10,14 +10,14 @@
       </p>
       <p>adjective</p>
       <div class="text--primary">
-        relating to or dependent on charity; charitable.<br>
+        relating to or dependent on charity; charitable; charitable donations. Pertaining to alms.<br>
         "an eleemosynary educational institution."
       </div>
     </v-card-text>
     <v-card-actions>
       <v-btn
-        variant="text"
         color="teal-accent-4"
+        variant="text"
         @click="reveal = true"
       >
         Learn More
@@ -38,8 +38,8 @@
         </v-card-text>
         <v-card-actions class="pt-0">
           <v-btn
-            variant="text"
             color="teal-accent-4"
+            variant="text"
             @click="reveal = false"
           >
             Close

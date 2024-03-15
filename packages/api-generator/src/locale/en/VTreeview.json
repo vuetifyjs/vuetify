@@ -1,7 +1,6 @@
 {
   "props": {
     "activatable": "Allows user to mark a node as active by clicking on it.",
-    "active": "Syncable prop that allows one to control which nodes are active. The array consists of the `item-key` of each active item.",
     "color": "Applies specified color to the active node - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
     "dense": "Decreases the height of the items.",
     "disabled": "Disables selection for all nodes.",
@@ -35,14 +34,19 @@
   },
   "slots": {
     "append": "Appends content after label.",
-    "prepend": "Prepends content before label."
+    "prepend": "Prepends content before label.",
+    "header": "Slot for custom header.",
+    "subheader": "Slot for custom subheader.",
+    "divider": "Slot for custom divider."
   },
   "events": {
-    "input": "Emits the array of selected items when this value changes.",
-    "update:active": "Emits the array of active items when this value changes.",
-    "update:open": "Emits the array of open items when this value changes."
+    "click:open": "Emits the item when it is clicked to open.",
+    "click:select": "Emits the item when it is clicked to select.",
+    "update:activated": "Emits the array of active items when this value changes.",
+    "update:opened": "Emits the array of open items when this value changes.",
+    "update:selected": "Emits the array of selected items when this value changes."
   },
-  "functions": {
-    "updateAll": "Opens or closes all nodes."
+  "exposed": {
+    "open": "Open a node by id"
   }
 }

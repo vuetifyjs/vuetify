@@ -276,7 +276,7 @@ export const VChip = genericComponent<VChipSlots>()({
             </div>
           )}
 
-          <div class="v-chip__content">
+          <div class="v-chip__content" data-no-activator="">
             { slots.default?.({
               isSelected: group?.isSelected.value,
               selectedClass: group?.selectedClass.value,
@@ -328,9 +328,10 @@ export const VChip = genericComponent<VChipSlots>()({
           )}
 
           { hasClose && (
-            <div
+            <button
               key="close"
               class="v-chip__close"
+              type="button"
               { ...closeProps.value }
             >
               { !slots.close ? (
@@ -351,7 +352,7 @@ export const VChip = genericComponent<VChipSlots>()({
                   v-slots:default={ slots.close }
                 />
               )}
-            </div>
+            </button>
           )}
         </Tag>
       )

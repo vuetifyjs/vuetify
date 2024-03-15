@@ -1,0 +1,11 @@
+@use '../../styles/settings';
+@use '../../styles/tools';
+
+$data-table-footer-info-min-width: 116px !default;
+$data-table-footer-info-padding: 0 16px !default;
+$data-table-footer-padding: 4px !default;
+$data-table-footer-pagination-margin-inline-start: 16px !default;
+$data-table-footer-select-width: 90px !default;
+$data-table-footer-items-per-page-padding: 8px !default;
+$data-table-header-sort-badge-size: 20px !default;
+$data-table-header-sort-badge-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;

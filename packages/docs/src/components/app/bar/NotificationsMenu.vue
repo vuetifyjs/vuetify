@@ -1,5 +1,5 @@
 <template>
-  <app-menu
+  <AppMenuMenu
     v-if="user.notifications.show"
     v-model="menu"
     :close-on-content-click="false"
@@ -7,13 +7,13 @@
     :width="width"
   >
     <template #activator="{ props }">
-      <app-tooltip-btn v-bind="props">
+      <AppTooltipBtn v-bind="props">
         <template #icon>
           <v-badge
             :model-value="unread.length > 0"
             color="#ED561B"
-            dot
             location="top end"
+            dot
           >
             <v-icon
               :icon="icon"
@@ -22,7 +22,7 @@
             />
           </v-badge>
         </template>
-      </app-tooltip-btn>
+      </AppTooltipBtn>
     </template>
 
     <v-toolbar
@@ -53,7 +53,7 @@
       >
         <p>{{ t('done') }}</p>
 
-        <v-icon icon="$vuetify" size="96" color="#D7D7D7" />
+        <v-icon color="#D7D7D7" icon="$vuetify" size="96" />
       </div>
 
       <template v-else>
@@ -82,15 +82,14 @@
               <div class="text-caption mb-1 font-weight-bold text-medium-emphasis">{{ format(notification.created_at) }}</div>
 
               <div class="text-medium-emphasis text-caption">
-                <app-markdown :content="notification.metadata.text" class="mb-n3" />
+                <AppMarkdown :content="notification.metadata.text" class="mb-n3" />
 
-                <app-link
+                <border-chip
                   :href="notification.metadata.action"
-                  class="border px-2 py-1 rounded"
+                  :text="notification.metadata.action_text"
+                  append-icon="mdi-open-in-new"
                   @click="onClick(notification)"
-                >
-                  {{ notification.metadata.action_text }}
-                </app-link>
+                />
               </div>
 
               <template v-if="!showArchived" #append>
@@ -107,26 +106,10 @@
         </v-list>
       </template>
     </v-responsive>
-  </app-menu>
+  </AppMenuMenu>
 </template>
 
 <script setup lang="ts">
-  // Components
-  import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
-
-  // Composables
-  import { useCosmic } from '@/composables/cosmic'
-  import { useDate } from 'vuetify/labs/date'
-  import { useDisplay } from 'vuetify'
-  import { useGtag } from 'vue-gtag-next'
-  import { useI18n } from 'vue-i18n'
-
-  // Stores
-  import { useUserStore } from '@/store/user'
-
-  // Utilities
-  import { computed, onMounted, ref } from 'vue'
-
   // Types
   interface Notification {
     metadata: {
@@ -186,7 +169,7 @@
   }
   function toggle ({ slug }: Notification) {
     user.notifications.read = user.notifications.read.includes(slug)
-      ? user.notifications.read.filter(n => n !== slug)
+      ? user.notifications.read.filter((n: any) => n !== slug)
       : [...user.notifications.read, slug]
   }
 

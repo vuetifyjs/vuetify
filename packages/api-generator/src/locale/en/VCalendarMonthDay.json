@@ -1,0 +1,9 @@
+{
+  "props": {
+    "day": "Represents the specific day in the month view of the calendar.",
+    "events": "Array of events associated with this specific day."
+  },
+  "slots": {
+    "content": "Slot for custom content related to the day in the month view."
+  }
+}

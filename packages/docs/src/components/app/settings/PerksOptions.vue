@@ -1,42 +1,44 @@
 <template>
-  <promoted
-    permanent
-    slug="vuetify-github-sponsors"
-  />
+  <Alert
+    v-if="!auth.isSubscriber"
+    type="success"
+  >
+    {{ t('dashboard.perks.alert') }}
 
-  <settings-header
-    title="dashboard.perks.experience"
+    <AppLink :href="rpath('/user/subscriptions/')">$2.99 per month</AppLink>
+  </alert>
+
+  <AppSettingsSettingsHeader
     text="dashboard.perks.experience-message"
+    title="dashboard.perks.experience"
   />
 
-  <ad-option />
+  <AppSettingsOptionsAdOption />
+
+  <AppSettingsOptionsPinOption />
 
   <v-divider class="mt-4 mb-3" />
 
-  <settings-header
-    title="dashboard.perks.avatar"
+  <AppSettingsSettingsHeader
     text="dashboard.perks.avatar-message"
+    title="dashboard.perks.avatar"
   />
 
-  <avatar-option />
+  <AppSettingsOptionsAvatarOption />
 
   <v-divider class="mt-4 mb-3" />
 
-  <settings-header
-    title="dashboard.perks.layout"
+  <AppSettingsSettingsHeader
     text="dashboard.perks.layout-message"
+    title="dashboard.perks.layout"
   />
 
-  <quickbar-option />
+  <AppSettingsOptionsQuickbarOption />
 
-  <rail-drawer-option />
+  <AppSettingsOptionsRailDrawerOption />
 </template>
 
-<script setup>
-  // Components
-  import AdOption from '@/components/app/settings/options/AdOption.vue'
-  import AvatarOption from '@/components/app/settings/options/AvatarOption.vue'
-  import QuickbarOption from '@/components/app/settings/options/QuickbarOption.vue'
-  import RailDrawerOption from '@/components/app/settings/options/RailDrawerOption.vue'
-  import SettingsHeader from '@/components/app/settings/SettingsHeader.vue'
+<script setup lang="ts">
+  const auth = useAuthStore()
+  const { t } = useI18n()
 </script>

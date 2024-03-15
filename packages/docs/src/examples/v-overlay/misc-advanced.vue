@@ -18,20 +18,20 @@
         <v-card-title>
           <v-rating
             :model-value="4"
-            dense
-            color="orange"
             background-color="orange"
-            hover
             class="me-2"
+            color="orange"
+            dense
+            hover
           ></v-rating>
           <span class="text-primary text-subtitle-2">64 Reviews</span>
         </v-card-title>
 
         <v-overlay
           :model-value="isHovering"
-          contained
-          scrim="#036358"
           class="align-center justify-center"
+          scrim="#036358"
+          contained
         >
           <v-btn variant="flat">See more info</v-btn>
         </v-overlay>

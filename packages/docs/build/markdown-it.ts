@@ -3,8 +3,8 @@ import path from 'path'
 import Ajv from 'ajv'
 import fm from 'front-matter'
 import MarkdownIt from 'markdown-it'
-import { configureMarkdown } from '../src/util/markdown-it'
-export { configureMarkdown } from '../src/util/markdown-it'
+import { configureMarkdown } from '../src/utils/markdown-it'
+export { configureMarkdown } from '../src/utils/markdown-it'
 
 export const md = configureMarkdown(new MarkdownIt())
 

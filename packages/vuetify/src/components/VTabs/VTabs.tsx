@@ -85,7 +85,7 @@ export const VTabs = genericComponent()({
     })
 
     useRender(() => {
-      const [slideGroupProps] = VSlideGroup.filterProps(props)
+      const slideGroupProps = VSlideGroup.filterProps(props)
 
       return (
         <VSlideGroup

@@ -1,19 +1,15 @@
 <template>
-  <div>
-    <v-list-item
-      :prepend-icon="icon"
-      @click="onClick"
-    />
-  </div>
+  <v-btn
+    :icon="icon"
+    height="28"
+    size="small"
+    variant="text"
+    rounded
+    @click="onClick"
+  />
 </template>
 
 <script setup>
-  // Stores
-  import { useUserStore } from '@/store/user'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const user = useUserStore()
 
   const icon = computed(() => {

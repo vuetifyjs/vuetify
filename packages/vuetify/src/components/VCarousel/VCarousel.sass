@@ -1,3 +1,4 @@
+@use '../../styles/tools'
 @use './variables' as *
 
 .v-carousel
@@ -7,7 +8,6 @@
 
   &__controls
     align-items: center
-    background: $carousel-controls-bg
     bottom: 0
     display: flex
     height: $carousel-controls-size
@@ -16,6 +16,8 @@
     position: absolute
     width: 100%
     z-index: 1
+
+    @include tools.theme($carousel-controls-theme...)
 
     > .v-item-group
       flex: 0 1 auto

@@ -1,3 +1,4 @@
+@use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -21,14 +22,12 @@
 
 .v-picker__actions
   grid-area: actions
-  padding: 0 12px 12px 12px
+  padding: $picker-actions-padding
   display: flex
   align-items: center
   justify-content: flex-end
 
   .v-btn
-    padding-inline-start: 8px
-    padding-inline-end: 8px
     min-width: 48px
 
     &:not(:last-child)
@@ -44,9 +43,8 @@
   text-transform: uppercase
   font-size: .75rem
   grid-area: title
-  padding-inline-start: 24px
-  padding-inline-end: 12px
+  padding-inline: 24px 12px
   padding-top: 16px
   padding-bottom: 16px
-  font-weight: 600
+  font-weight: $picker-title-font-weight
   letter-spacing: .1666666667em

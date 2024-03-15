@@ -1,0 +1,1 @@
+export { VSpeedDial } from './VSpeedDial'

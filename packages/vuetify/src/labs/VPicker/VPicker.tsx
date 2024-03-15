@@ -3,6 +3,7 @@ import './VPicker.sass'
 
 // Components
 import { VPickerTitle } from './VPickerTitle'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
 import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 
 // Composables
@@ -24,6 +25,7 @@ export const makeVPickerProps = propsFactory({
   bgColor: String,
   landscape: Boolean,
   title: String,
+  hideHeader: Boolean,
 
   ...makeVSheetProps(),
 }, 'VPicker')
@@ -36,7 +38,7 @@ export const VPicker = genericComponent<VPickerSlots>()({
   setup (props, { slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     useRender(() => {
-      const [sheetProps] = VSheet.filterProps(props)
+      const sheetProps = VSheet.filterProps(props)
       const hasTitle = !!(props.title || slots.title)
 
       return (
@@ -53,35 +55,47 @@ export const VPicker = genericComponent<VPickerSlots>()({
           ]}
           style={ props.style }
         >
-          <div
-            class={[
-              backgroundColorClasses.value,
-            ]}
-            style={[
-              backgroundColorStyles.value,
-            ]}
-          >
-            { hasTitle && (
-              <VPickerTitle key="picker-title">
-                { slots.title?.() ?? props.title }
-              </VPickerTitle>
-            )}
+          { !props.hideHeader && (
+            <div
+              key="header"
+              class={[
+                backgroundColorClasses.value,
+              ]}
+              style={[
+                backgroundColorStyles.value,
+              ]}
+            >
+              { hasTitle && (
+                <VPickerTitle key="picker-title">
+                  { slots.title?.() ?? props.title }
+                </VPickerTitle>
+              )}
 
-            { slots.header && (
-              <div class="v-picker__header">
-                { slots.header() }
-              </div>
-            )}
-          </div>
+              { slots.header && (
+                <div class="v-picker__header">
+                  { slots.header() }
+                </div>
+              )}
+            </div>
+          )}
 
           <div class="v-picker__body">
             { slots.default?.() }
           </div>
 
           { slots.actions && (
-            <div class="v-picker__actions">
-              { slots.actions() }
-            </div>
+            <VDefaultsProvider
+              defaults={{
+                VBtn: {
+                  slim: true,
+                  variant: 'text',
+                },
+              }}
+            >
+              <div class="v-picker__actions">
+                { slots.actions() }
+              </div>
+            </VDefaultsProvider>
           )}
         </VSheet>
       )

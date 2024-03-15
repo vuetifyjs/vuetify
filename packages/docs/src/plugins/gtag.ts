@@ -1,6 +1,5 @@
 // Imports
 import VueGtag, { trackRouter } from 'vue-gtag-next'
-import { IN_BROWSER } from '@/util/globals'
 
 // Types
 import type { App } from 'vue'

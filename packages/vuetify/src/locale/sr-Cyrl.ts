@@ -2,6 +2,10 @@ export default {
   badge: 'Значка',
   open: 'Open',
   close: 'Затвори',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Ни један запис није пронађен',
     loadingText: 'Учитавање ставке...',
@@ -31,8 +35,7 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Select dates',
       header: 'Enter dates',
@@ -53,6 +56,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} више',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',

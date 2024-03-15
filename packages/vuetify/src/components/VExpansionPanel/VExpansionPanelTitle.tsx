@@ -42,6 +42,8 @@ export const makeVExpansionPanelTitleProps = propsFactory({
     default: '$collapse',
   },
   hideActions: Boolean,
+  focusable: Boolean,
+  static: Boolean,
   ripple: {
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: false,
@@ -79,6 +81,8 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
           'v-expansion-panel-title',
           {
             'v-expansion-panel-title--active': expansionPanel.isSelected.value,
+            'v-expansion-panel-title--focusable': props.focusable,
+            'v-expansion-panel-title--static': props.static,
           },
           backgroundColorClasses.value,
           props.class,

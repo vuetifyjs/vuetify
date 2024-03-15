@@ -2,6 +2,10 @@ export default {
   badge: 'Bedž',
   open: 'Open',
   close: 'Zatvori',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Nisu pronađene odgovarajuće stavke',
     loadingText: 'Učitavanje...',
@@ -31,8 +35,7 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Select dates',
       header: 'Enter dates',
@@ -53,6 +56,7 @@ export default {
   },
   calendar: {
     moreEvents: 'Još {0}',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',

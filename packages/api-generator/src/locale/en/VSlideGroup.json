@@ -1,6 +1,7 @@
 {
   "props": {
     "centerActive": "Forces the selected component to be centered.",
+    "direction": "Switch between horizontal and vertical modes.",
     "mobileBreakpoint": "Sets the designated mobile breakpoint for the component.",
     "nextIcon": "The appended slot when arrows are shown.",
     "prevIcon": "The prepended slot when arrows are shown.",

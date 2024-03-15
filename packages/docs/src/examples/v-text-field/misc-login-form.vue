@@ -54,11 +54,11 @@
       </v-card>
 
       <v-btn
-        block
         class="mb-8"
         color="blue"
         size="large"
         variant="tonal"
+        block
       >
         Log In
       </v-btn>

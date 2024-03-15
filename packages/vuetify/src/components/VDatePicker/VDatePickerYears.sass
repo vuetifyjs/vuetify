@@ -1,0 +1,16 @@
+@use './variables' as *
+
+.v-date-picker-years
+  height: $date-picker-years-height
+  overflow-y: scroll
+
+.v-date-picker-years__content
+  display: grid
+  flex: 1 1
+  justify-content: space-around
+  grid-template-columns: repeat(3, 1fr)
+  gap: 8px 24px
+  padding-inline: $date-picker-years-padding-inline
+
+  .v-btn
+    padding-inline: 8px

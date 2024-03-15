@@ -8,6 +8,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
   CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 jobs:
   pre_job:
@@ -16,7 +17,7 @@ jobs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
       - id: skip_check
-        if: ${{ !startswith(github.ref, 'refs/tags/v') }}
+        if: ${{ !startswith(github.ref, 'refs/tags/v') && github.ref != 'refs/heads/master' }}
         uses: fkirc/skip-duplicate-actions@master
         with:
           skip_after_successful_duplicate: 'true'
@@ -29,7 +30,7 @@ jobs:
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/yarn-install
       - run: yarn build vuetify
       - uses: ./.github/actions/upload-artifact
@@ -49,7 +50,7 @@ jobs:
       matrix:
         scopes: ['--scope vuetify --scope @vuetify/api-generator', '--scope vuetifyjs.com']
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/download-artifact
         with:
           name: vuetify-dist
@@ -64,11 +65,11 @@ jobs:
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/yarn-install
       - run: yarn run test:coverage -i
         working-directory: ./packages/vuetify
-      - uses: codecov/codecov-action@v1
+      - uses: codecov/codecov-action@v4
 
   test-cypress:
     name: Test (Cypress)
@@ -76,7 +77,7 @@ jobs:
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/yarn-install
       - run: yarn cy:run --record --parallel --ci-build-id $GITHUB_RUN_ID
         if: ${{ !startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs' }}
@@ -86,7 +87,7 @@ jobs:
       - run: yarn cy:run
         if: ${{ !startswith(github.ref, 'refs/tags/v') && github.repository_owner != 'vuetifyjs' }}
         working-directory: ./packages/vuetify
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: cypress-screenshots
@@ -98,7 +99,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: ./.github/actions/download-artifact
@@ -124,7 +125,7 @@ jobs:
     if: needs.pre_job.outputs.should_skip != 'true' && github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/download-artifact
         with:
           name: vuetify-dist
@@ -143,8 +144,6 @@ jobs:
           VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
           VITE_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
-          VITE_AUTH0_DOMAIN: ${{ secrets.AUTH0_DOMAIN }}
-          VITE_AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
           VITE_API_SERVER_URL: ${{ secrets.API_SERVER_URL }}
           VITE_GITHUB_SHA: ${{ github.sha }}
       - uses: ./.github/actions/upload-artifact
@@ -157,7 +156,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/download-artifact
         with:
           name: docs-dist

@@ -6,14 +6,16 @@ import { makeVBtnProps, VBtn } from '@/components/VBtn/VBtn'
 
 // Composables
 import { useTextColor } from '@/composables/color'
+import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
-import { computed, ref, shallowRef } from 'vue'
+import { computed, ref } from 'vue'
 import { VTabsSymbol } from './shared'
 import { animate, genericComponent, omit, propsFactory, standardEasing, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VBtnSlots } from '@/components/VBtn/VBtn'
 
 export const makeVTabProps = propsFactory({
   fixed: Boolean,
@@ -39,22 +41,21 @@ export const makeVTabProps = propsFactory({
   ]),
 }, 'VTab')
 
-export const VTab = genericComponent()({
+export const VTab = genericComponent<VBtnSlots>()({
   name: 'VTab',
 
   props: makeVTabProps(),
 
   setup (props, { slots, attrs }) {
     const { textColorClasses: sliderColorClasses, textColorStyles: sliderColorStyles } = useTextColor(props, 'sliderColor')
-    const isHorizontal = computed(() => props.direction === 'horizontal')
-    const isSelected = shallowRef(false)
 
     const rootEl = ref<VBtn>()
     const sliderEl = ref<HTMLElement>()
 
-    function updateSlider ({ value }: { value: boolean }) {
-      isSelected.value = value
+    const isHorizontal = computed(() => props.direction === 'horizontal')
+    const isSelected = computed(() => rootEl.value?.group?.isSelected.value ?? false)
 
+    function updateSlider ({ value }: { value: boolean }) {
       if (value) {
         const prevEl: HTMLElement | undefined = rootEl.value?.$el.parentElement?.querySelector('.v-tab--selected .v-tab__slider')
         const nextEl = sliderEl.value
@@ -101,7 +102,7 @@ export const VTab = genericComponent()({
     }
 
     useRender(() => {
-      const [btnProps] = VBtn.filterProps(props)
+      const btnProps = VBtn.filterProps(props)
 
       return (
         <VBtn
@@ -122,23 +123,30 @@ export const VTab = genericComponent()({
           maxWidth={ props.fixed ? 300 : undefined }
           onGroup:selected={ updateSlider }
         >
-          { slots.default?.() ?? props.text }
+          {{
+            ...slots,
+            default: () => (
+              <>
+                { slots.default?.() ?? props.text }
 
-          { !props.hideSlider && (
-            <div
-              ref={ sliderEl }
-              class={[
-                'v-tab__slider',
-                sliderColorClasses.value,
-              ]}
-              style={ sliderColorStyles.value }
-            />
-          )}
+                { !props.hideSlider && (
+                  <div
+                    ref={ sliderEl }
+                    class={[
+                      'v-tab__slider',
+                      sliderColorClasses.value,
+                    ]}
+                    style={ sliderColorStyles.value }
+                  />
+                )}
+              </>
+            ),
+          }}
         </VBtn>
       )
     })
 
-    return {}
+    return forwardRefs({}, rootEl)
   },
 })
 

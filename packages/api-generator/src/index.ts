@@ -4,13 +4,14 @@ import { components } from 'vuetify/dist/vuetify-labs.js'
 import importMap from 'vuetify/dist/json/importMap.json' assert { type: 'json' }
 import importMapLabs from 'vuetify/dist/json/importMap-labs.json' assert { type: 'json' }
 import { kebabCase } from './helpers/text'
+import type { BaseData, ComponentData, DirectiveData } from './types'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
 import Piscina from 'piscina'
 import { addDescriptions, addDirectiveDescriptions, addPropData, stringifyProps } from './utils'
 import * as os from 'os'
-import mkdirp from 'mkdirp'
+import { mkdirp } from 'mkdirp'
 import { createVeturApi } from './vetur'
-import rimraf from 'rimraf'
+import { rimraf } from 'rimraf'
 import { createWebTypesApi } from './web-types'
 import inspector from 'inspector'
 import yargs from 'yargs'
@@ -31,10 +32,13 @@ const reset = '\x1b[0m'
 const red = '\x1b[31m'
 const blue = '\x1b[34m'
 
-const componentsInfo = {
+const componentsInfo: Record<string, { from: string }> = {
   ...importMap.components,
   ...importMapLabs.components,
 }
+
+type Truthy<T> = Exclude<T, null | undefined | 0 | '' | false>;
+const BooleanFilter = <T>(x: T): x is Truthy<T> => Boolean(x)
 
 const run = async () => {
   const argv = await yar.argv
@@ -43,14 +47,14 @@ const run = async () => {
 
   // Components
   const pool = new Piscina({
-    filename: './lib/worker.mjs',
+    filename: path.resolve('./src/worker.ts'),
     niceIncrement: 10,
     maxThreads: inspector.url() ? 1 : Math.max(1, Math.floor(Math.min(os.cpus().length / 2, os.freemem() / (1.1 * 1024 ** 3)))),
   })
 
   const template = await fs.readFile('./templates/component.d.ts', 'utf-8')
 
-  rimraf.sync(path.resolve('./dist'))
+  await rimraf(path.resolve('./dist'))
   await fs.mkdir(path.resolve('./dist'))
   await mkdirp('./templates/tmp')
   for (const component in components) {
@@ -64,7 +68,7 @@ const run = async () => {
   const outPath = path.resolve('./dist/api')
   await mkdirp(outPath)
 
-  const componentData = await Promise.all(
+  const componentData = (await Promise.all(
     Object.entries(components).map(async ([componentName, componentInstance]) => {
       if (argv.components && !argv.components.includes(componentName)) return null
 
@@ -74,40 +78,50 @@ const run = async () => {
       await addDescriptions(componentName, data, locales, sources)
       const sass = parseSassVariables(componentName)
 
-      const component = { displayName: componentName, fileName: kebabCase(componentName), ...data, sass }
-      await fs.writeFile(path.resolve(outPath, `${componentName}.json`), JSON.stringify(component, null, 2))
+      const component = {
+        displayName: componentName,
+        fileName: componentName,
+        pathName: kebabCase(componentName),
+        ...data,
+        sass,
+      } satisfies ComponentData
+      await fs.writeFile(path.resolve(outPath, `${component.fileName}.json`), JSON.stringify(component, null, 2))
 
       return component
-    }).filter(Boolean)
-  )
+    })
+  )).filter(BooleanFilter)
 
   // Composables
   if (!argv.skipComposables) {
-    const composables = await Promise.all(generateComposableDataFromTypes().map(async composable => {
-      console.log(blue, composable.name, reset)
-      const kebabName = kebabCase(composable.name)
-      await addDescriptions(composable.name, composable.data, locales)
-      return { fileName: kebabName, displayName: composable.name, ...composable }
+    const composables = await Promise.all((await generateComposableDataFromTypes()).map(async composable => {
+      console.log(blue, composable.displayName, reset)
+      await addDescriptions(composable.fileName, composable, locales)
+      return composable
     }))
 
-    for (const { displayName, fileName, data } of composables) {
-      await fs.writeFile(path.resolve(outPath, `${displayName}.json`), JSON.stringify({ displayName, fileName, ...data }, null, 2))
+    for (const composable of composables) {
+      await fs.writeFile(
+        path.resolve(outPath, `${composable.fileName}.json`),
+        JSON.stringify(composable, null, 2)
+      )
     }
   }
 
   // Directives
-  let directives: any[] = []
+  let directives: DirectiveData[] = []
   if (!argv.skipDirectives) {
-    directives = await Promise.all(generateDirectiveDataFromTypes().map(async directive => {
-      const name = `v-${kebabCase(directive.name)}`
-      console.log(blue, name, reset)
-      await addDirectiveDescriptions(name, directive, locales)
+    directives = await Promise.all((await generateDirectiveDataFromTypes()).map(async data => {
+      console.log(blue, data.fileName, reset)
+      await addDirectiveDescriptions(data.fileName, data, locales)
 
-      return { fileName: name, displayName: name, ...directive }
+      return data
     }))
 
-    for (const { displayName, fileName, ...directive } of directives) {
-      await fs.writeFile(path.resolve(outPath, `${fileName}.json`), JSON.stringify({ displayName, fileName, ...directive }, null, 2))
+    for (const directive of directives) {
+      await fs.writeFile(
+        path.resolve(outPath, `${directive.fileName}.json`),
+        JSON.stringify(directive, null, 2)
+      )
     }
   }
 

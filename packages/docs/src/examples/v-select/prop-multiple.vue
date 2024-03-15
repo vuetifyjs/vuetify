@@ -2,9 +2,9 @@
   <v-select
     v-model="favorites"
     :items="states"
+    hint="Pick your favorite states"
     label="Select"
     multiple
-    hint="Pick your favorite states"
     persistent-hint
   ></v-select>
 </template>

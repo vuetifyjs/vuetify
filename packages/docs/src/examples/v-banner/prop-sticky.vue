@@ -12,9 +12,9 @@
       <template v-slot:append>
         <v-switch
           v-model="sticky"
+          color="secondary"
           label="Sticky Banner"
           hide-details
-          color="secondary"
         ></v-switch>
       </template>
     </v-toolbar>

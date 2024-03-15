@@ -1,26 +1,14 @@
 <template>
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <v-fade-transition appear>
+      <component :is="Component" />
+    </v-fade-transition>
+  </router-view>
 </template>
 
 <script setup lang="ts">
   // Composables
-  import { useHead } from '@vueuse/head'
-  import { useI18n } from 'vue-i18n'
-  import { useRoute, useRouter } from 'vue-router'
-  import { useTheme } from 'vuetify'
-  import { useAuth0 } from '@/plugins/auth'
-
-  // Stores
-  import { useAuthStore } from '@/store/auth'
-  import { useUserStore } from '@/store/user'
-
-  // Utilities
-  import { computed, nextTick, onBeforeMount, ref, watch, watchEffect } from 'vue'
-  import { genAppMetaInfo } from '@/util/metadata'
-  import { getMatchMedia } from '@/util/helpers'
-
-  // Globals
-  import { IN_BROWSER } from '@/util/globals'
+  import { useHead } from '@unhead/vue'
 
   const user = useUserStore()
   const router = useRouter()
@@ -28,7 +16,6 @@
   const theme = useTheme()
   const { locale } = useI18n()
   const auth = useAuthStore()
-  const auth0 = useAuth0()
 
   const path = computed(() => route.path.replace(`/${locale.value}/`, ''))
 
@@ -63,7 +50,8 @@
     // set current route lang if root
     const currentRoute = router.currentRoute.value
     if (currentRoute.path === '/') {
-      router.replace(`/${locale.value}`)
+      const query = currentRoute.query
+      router.replace({ path: `/${locale.value}`, query })
     }
   })
 
@@ -71,12 +59,7 @@
   if (IN_BROWSER) {
     let media: MediaQueryList
 
-    watch(auth0!.user, async val => {
-      if (!val?.sub) return
-
-      await auth.getUser()
-      auth.verifyUserSponsorship()
-    }, { immediate: true })
+    auth.verify()
 
     watch(() => user.theme, val => {
       if (val === 'system') {

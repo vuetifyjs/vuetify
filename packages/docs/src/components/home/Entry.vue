@@ -5,10 +5,10 @@
       justify="center"
     >
       <v-col cols="auto">
-        <home-logo size="300" />
+        <HomeLogo size="300" />
       </v-col>
 
-      <v-col cols="auto" class="text-center text-lg-start">
+      <v-col class="text-center text-lg-start" cols="auto">
         <h1 class="text-h2 font-weight-medium mb-3 ms-n1">
           Vue Component Framework
         </h1>
@@ -17,18 +17,18 @@
           Vuetify is a no design skills required Open Source UI Library with beautifully handcrafted Vue Components.
         </p>
 
-        <home-action-btns />
+        <HomeActionBtns />
 
         <br>
 
         <v-hover>
           <template #default="{ isHovering, props }">
             <v-sheet
-              border
               class="px-2 py-2 d-inline-flex align-center text-mono text-body-2 text-no-wrap"
               color="surface"
-              rounded
               width="215"
+              border
+              rounded
               v-bind="props"
             >
               <v-icon
@@ -63,13 +63,6 @@
 </template>
 
 <script setup>
-  // Components
-  import HomeLogo from '@/components/home/Logo.vue'
-  import HomeActionBtns from '@/components/home/ActionBtns.vue'
-
-  // Utilities
-  import { shallowRef } from 'vue'
-
   const isCopying = shallowRef(false)
 
   function copy () {

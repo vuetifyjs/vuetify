@@ -4,18 +4,18 @@
     width="256"
   >
     <v-layout>
-      <v-navigation-drawer permanent absolute>
+      <v-navigation-drawer absolute permanent>
         <v-list>
           <v-list-item
             prepend-avatar="https://cdn.vuetifyjs.com/images/john.png"
-            title="John Leider"
             subtitle="john@google.com"
+            title="John Leider"
           >
             <template v-slot:append>
               <v-btn
+                icon="mdi-menu-down"
                 size="small"
                 variant="text"
-                icon="mdi-menu-down"
               ></v-btn>
             </template>
           </v-list-item>
