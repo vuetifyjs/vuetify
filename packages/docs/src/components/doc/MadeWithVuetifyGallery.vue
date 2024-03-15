@@ -79,7 +79,7 @@
   const store = useMadeWithVuetifyStore()
 
   const items = computed(() => {
-    return shuffle(store.items)
+    return shuffle(store.items.slice())
   })
 
   function shuffle (array) {
