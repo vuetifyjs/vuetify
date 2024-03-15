@@ -236,26 +236,28 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
             default: () => slots.default ? slots.default(slotProps.value) : (
               <>
                 { slots.colgroup?.(slotProps.value) }
-                <thead>
-                  <VDataTableHeaders
-                    { ...dataTableHeadersProps }
-                    v-slots={ slots }
-                  />
-                </thead>
-                { slots.thead?.(slotProps.value) }
-                <tbody>
-                  { slots['body.prepend']?.(slotProps.value) }
-                  { slots.body ? slots.body(slotProps.value) : (
-                    <VDataTableRows
-                      { ...attrs }
-                      { ...dataTableRowsProps }
-                      items={ paginatedItems.value }
+                { slots.thead ? slots.thead(slotProps.value) : (
+                  <thead>
+                    <VDataTableHeaders
+                      { ...dataTableHeadersProps }
                       v-slots={ slots }
                     />
-                  )}
-                  { slots['body.append']?.(slotProps.value) }
-                </tbody>
-                { slots.tbody?.(slotProps.value) }
+                  </thead>
+                )}
+                { slots.tbody ? slots.tbody(slotProps.value) : (
+                  <tbody>
+                    { slots['body.prepend']?.(slotProps.value) }
+                    { slots.body ? slots.body(slotProps.value) : (
+                      <VDataTableRows
+                        { ...attrs }
+                        { ...dataTableRowsProps }
+                        items={ paginatedItems.value }
+                        v-slots={ slots }
+                      />
+                    )}
+                    { slots['body.append']?.(slotProps.value) }
+                  </tbody>
+                )}
                 { slots.tfoot?.(slotProps.value) }
               </>
             ),
