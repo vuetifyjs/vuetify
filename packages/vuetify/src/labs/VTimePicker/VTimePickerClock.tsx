@@ -1,4 +1,5 @@
 // StylesthisValue
+// Styles
 import './VTimePickerClock.sass'
 
 // Utilities
@@ -160,7 +161,7 @@ export const VTimePickerClock = genericComponent()({
       e.preventDefault()
       if ((!isDragging.value && e.type !== 'click') || !clockRef.value) return
       const { width, top, left } = clockRef.value?.getBoundingClientRect()
-      const { width: innerWidth }: DOMRect = innerClockRef.value?.getBoundingClientRect()
+      const { width: innerWidth }: DOMRect = innerClockRef.value?.getBoundingClientRect() ?? { width: 0 } as DOMRect
       const { clientX, clientY } = 'touches' in e ? e.touches[0] : e
       const center = { x: width / 2, y: -width / 2 }
       const coords = { x: clientX - left, y: top - clientY }

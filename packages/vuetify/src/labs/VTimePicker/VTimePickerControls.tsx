@@ -3,6 +3,7 @@ import './VTimePickerControls.sass'
 
 // Components
 import { VBtn } from '@/components/VBtn'
+import { pad } from '@/components/VDatePicker/util'
 
 // Composables
 import { useLocale } from '@/composables/locale'
@@ -12,7 +13,6 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import { SelectingTimes } from './SelectingTimes'
-import { pad } from '../VDatePicker/util'
 type Period = 'am' | 'pm'
 
 export const makeVTimePickerControlsProps = propsFactory({
@@ -64,7 +64,7 @@ export const VTimePickerControls = genericComponent()({
             >
               { props.hour == null ? '--' : pad(`${hour}`) }
             </VBtn>
-            <span class="v-time-picker-title__time__btn">:</span>
+            <span class="v-time-picker-title__time__separator">:</span>
             <v-btn
               variant="tonal"
               onClick={ () => emit('update:selecting', SelectingTimes.Minute) }
@@ -108,6 +108,7 @@ export const VTimePickerControls = genericComponent()({
                     variant="tonal"
                     onClick={ () => emit('update:period', 'am') }
                     class={{
+                      'v-time-picker-title__ampm__am': true,
                       'v-time-picker-title__ampm__btn': true,
                       'v-time-picker-title__ampm__btn__active': props.period === 'am',
                     }}
@@ -118,6 +119,7 @@ export const VTimePickerControls = genericComponent()({
                     variant="tonal"
                     onClick={ () => emit('update:period', 'pm') }
                     class={{
+                      'v-time-picker-title__ampm__pm': true,
                       'v-time-picker-title__ampm__btn': true,
                       'v-time-picker-title__ampm__btn__active': props.period === 'pm',
                     }}

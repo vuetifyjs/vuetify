@@ -1,7 +1,10 @@
+// Styles
+import './VTimePicker.sass'
+
 // Components
 import { VTimePickerClock } from './VTimePickerClock'
 import { VTimePickerControls } from './VTimePickerControls'
-import { VBtn } from '@/components/VBtn'
+import { pad } from '@/components/VDatePicker/util'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
@@ -14,7 +17,6 @@ import { createRange, genericComponent, omit, propsFactory, useRender } from '@/
 
 // Types
 import type { PropType } from 'vue'
-import { pad } from '../VDatePicker/util'
 import type { VPickerSlots } from '@/labs/VPicker/VPicker'
 type Period = 'am' | 'pm'
 type AllowFunction = (val: number) => boolean
@@ -89,14 +91,6 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     const period = ref('am' as Period)
     const selecting = ref(SelectingTimes.Hour)
 
-    // Computeds
-    // const model = useProxiedModel(
-    //   props,
-    //   'modelValue',
-    //   undefined,
-    //   v => v
-    // )
-
     const genValue = () => {
       if (inputHour.value != null && inputMinute.value != null && (!props.useSeconds || inputSecond.value != null)) {
         return `${pad(inputHour.value)}:${pad(inputMinute.value)}` + (props.useSeconds ? `:${pad(inputSecond.value!)}` : '')
@@ -108,15 +102,6 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     const emitValue = () => {
       const value = genValue()
       if (value !== null) emit('update:modelValue', value)
-    }
-
-    function onClickCancel () {
-      emit('click:cancel')
-    }
-
-    function onClickSave () {
-      emitValue()
-      emit('click:save')
     }
 
     const isAllowedHourCb = computed((): AllowFunction => {
@@ -283,7 +268,19 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     }
 
     const onChange = (value: number) => {
-      emit(`click:${selectingNames[selecting.value] as 'hour' | 'minute' | 'second'}`, value)
+      switch (selectingNames[selecting.value]) {
+        case 'hour':
+          emit('click:hour', value)
+          break
+        case 'minutes':
+          emit('click:minute', value)
+          break
+        case 'seconds':
+          emit('click:second', value)
+          break
+        default:
+          break
+      }
 
       const emitChange = selecting.value === (props.useSeconds ? SelectingTimes.Second : SelectingTimes.Minute)
 
@@ -309,9 +306,9 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     }
 
     useRender(() => {
-      const [pickerProps] = VPicker.filterProps(props)
-      const [timePickerControlsProps] = VTimePickerControls.filterProps(props)
-      const [timePickerClockProps] = VTimePickerClock.filterProps(omit(props, ['format', 'modelValue', 'min', 'max']))
+      const pickerProps = VPicker.filterProps(props)
+      const timePickerControlsProps = VTimePickerControls.filterProps(props)
+      const timePickerClockProps = VTimePickerClock.filterProps(omit(props, ['format', 'modelValue', 'min', 'max']))
 
       return (
         <VPicker
@@ -321,7 +318,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
             props.class,
           ]}
           style={ props.style }
-          width={ 360 }
+          width={ 328 }
           v-slots={{
             title: () => slots.title?.() ?? (
               <div class="v-time-picker__title">
@@ -376,27 +373,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
                 />
               </>
             ),
-            actions: () => !props.hideActions ? (
-              slots.actions?.() ?? (
-                <div>
-                  <VBtn
-                    // disabled={ isPristine.value }
-                    variant="text"
-                    color={ props.color }
-                    onClick={ onClickCancel }
-                    text={ t(props.cancelText) }
-                  />
-
-                  <VBtn
-                    // disabled={ isPristine.value }
-                    variant="text"
-                    color={ props.color }
-                    onClick={ onClickSave }
-                    text={ t(props.okText) }
-                  />
-                </div>
-              )
-            ) : undefined,
+            actions: slots.actions,
           }}
         />
       )
