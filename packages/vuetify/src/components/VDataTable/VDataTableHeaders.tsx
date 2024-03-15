@@ -67,6 +67,7 @@ export const makeVDataTableHeadersProps = propsFactory({
   headerProps: {
     type: Object as PropType<Record<string, any>>,
   },
+  mobileView: [Boolean],
 
   ...makeLoaderProps(),
 }, 'VDataTableHeaders')
@@ -114,6 +115,15 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       getSortIcon,
     } satisfies HeadersSlotProps))
 
+    const headerCellClasses = computed(() => [
+      'v-data-table__th',
+      {
+        'v-data-table__th--sticky': props.sticky,
+        'v-data-table__th--mobile': props.mobileView,
+      },
+      loaderClasses.value,
+    ])
+
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
       const noPadding = column.key === 'data-table-select' || column.key === 'data-table-expand'
       const headerProps = mergeProps(props.headerProps ?? {}, column.headerProps ?? {})
@@ -123,12 +133,11 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           tag="th"
           align={ column.align }
           class={[
-            'v-data-table__th',
+            ...headerCellClasses.value,
             {
               'v-data-table__th--sortable': column.sortable,
               'v-data-table__th--sorted': isSorted(column),
               'v-data-table__th--fixed': column.fixed,
-              'v-data-table__th--sticky': props.sticky,
             },
             loaderClasses.value,
           ]}
@@ -201,18 +210,60 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       )
     }
 
+    const VDataTableMobileHeaderCell = ({ y }:
+    { y: number }) => {
+      const headerProps = mergeProps(props.headerProps ?? {} ?? {})
+
+      return (
+        <VDataTableColumn
+          tag="th"
+          class={[
+            ...headerCellClasses.value,
+            loaderClasses.value,
+          ]}
+          colspan={ headers.value.length + 1 }
+          { ...headerProps }
+        >
+          {{
+            default: () => {
+              const columnSlotProps: VDataTableHeaderCellColumnSlotProps = {
+                isSorted,
+                toggleSort,
+                sortBy: sortBy.value,
+                getSortIcon,
+              }
+
+              return (
+                <div class="v-data-table-header__content">
+                  VSelect SortBy
+                </div>
+              )
+            },
+          }}
+        </VDataTableColumn>
+      )
+    }
+
     useRender(() => {
       return (
         <>
-          { slots.headers
-            ? slots.headers(slotProps.value)
-            : headers.value.map((row, y) => (
+          { props.mobileView
+            ? (
+              headers.value.map((row, y) => (
+                <tr>
+                  <VDataTableMobileHeaderCell y={ y } />
+                </tr>
+              ))
+            )
+            : slots.headers
+              ? slots.headers(slotProps.value)
+              : headers.value.map((row, y) => (
               <tr>
                 { row.map((column, x) => (
                   <VDataTableHeaderCell column={ column } x={ x } y={ y } />
                 ))}
               </tr>
-            ))}
+              ))}
 
           { props.loading && (
             <tr class="v-data-table-progress">

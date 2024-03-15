@@ -30,6 +30,7 @@ import type { Group } from './composables/group'
 import type { CellProps, DataTableHeader, DataTableItem, InternalDataTableHeader, RowProps } from './types'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
+import type { DisplayInstance } from '@/composables/display'
 import type { GenericProps, SelectItemKey } from '@/util'
 
 export type VDataTableSlotProps<T> = {
@@ -75,6 +76,7 @@ export const makeDataTableProps = propsFactory({
 
   width: [String, Number],
   search: String,
+  mobileView: [Boolean],
 
   ...makeDataTableExpandProps(),
   ...makeDataTableGroupProps(),
@@ -103,6 +105,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     cellProps?: CellProps<ItemType<T>>
     itemSelectable?: SelectItemKey<ItemType<T>>
     headers?: DeepReadonly<DataTableHeader<ItemType<T>>[]>
+    mobileView?: keyof DisplayInstance
     modelValue?: V
     'onUpdate:modelValue'?: (value: V) => void
   },
@@ -160,6 +163,8 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
     const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 
+    const mobileView = computed(() => props.mobileView || 'mobile')
+
     const {
       isSelected,
       select,
@@ -205,6 +210,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       toggleExpand,
       isGroupOpen,
       toggleGroup,
+      mobileView: mobileView.value,
       items: paginatedItemsWithoutGroups.value.map(item => item.raw),
       internalItems: paginatedItemsWithoutGroups.value,
       groupedItems: paginatedItems.value,
@@ -225,6 +231,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
             {
               'v-data-table--show-select': props.showSelect,
               'v-data-table--loading': props.loading,
+              'v-data-table--mobile': props.mobileView,
             },
             props.class,
           ]}
@@ -236,12 +243,12 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
             default: () => slots.default ? slots.default(slotProps.value) : (
               <>
                 { slots.colgroup?.(slotProps.value) }
-                <thead>
-                  <VDataTableHeaders
-                    { ...dataTableHeadersProps }
-                    v-slots={ slots }
-                  />
-                </thead>
+                  <thead>
+                    <VDataTableHeaders
+                      { ...dataTableHeadersProps }
+                      v-slots={ slots }
+                    />
+                  </thead>
                 { slots.thead?.(slotProps.value) }
                 <tbody>
                   { slots['body.prepend']?.(slotProps.value) }
