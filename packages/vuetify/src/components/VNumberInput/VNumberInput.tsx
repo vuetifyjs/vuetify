@@ -34,6 +34,7 @@ const makeVNumberInputProps = propsFactory({
   min: Number,
   max: Number,
   step: Number,
+
   ...only(makeVInputProps(), [
     'density',
     'disabled',
@@ -70,8 +71,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
   props: {
     ...makeVNumberInputProps(),
+
     modelValue: {
-      type: Number,
+      type: [Number, String],
       default: 0,
     },
   },
@@ -90,8 +92,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     const controlVariant = computed(() => {
-      if (props.hideInput) return 'stacked'
-      return props.controlVariant
+      return props.hideInput ? 'stacked' : props.controlVariant
     })
 
     function toggleUpDown (increment = true) {
@@ -104,9 +105,21 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (inputRef.value) model.value = parseInt(inputRef.value.value, 10)
     }
 
+    function onClickUp () {
+      toggleUpDown()
+    }
+
+    function onClickDown () {
+      toggleUpDown(false)
+    }
+
     useRender(() => {
+      const fieldProps = filterFieldProps(props)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const controlNode = () => (
+      const { modelValue: _, ...inputProps } = VInput.filterProps(props)
+
+      function controlNode () {
+        return (
           <div class="v-number-input__control">
             <VBtn
               flat
@@ -114,103 +127,109 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
               icon="mdi-chevron-down"
               rounded="0"
               size="small"
-              onClick={ () => toggleUpDown(false) }
+              onClick={ onClickDown }
             />
+
             <VDivider
               vertical={ controlVariant.value !== 'stacked' }
             />
+
             <VBtn
               flat
               height={ controlVariant.value === 'stacked' ? 'auto' : '100%' }
               icon="mdi-chevron-up"
-              onClick={ () => toggleUpDown() }
+              onClick={ onClickUp }
               rounded="0"
               size="small"
             />
           </div>
-      )
+        )
+      }
 
-      const dividerNode = () => !props.hideInput && !props.inset ? <VDivider vertical /> : undefined
-
-      const fieldProps = filterFieldProps(props)
-      const { modelValue: _, ...inputProps } = VInput.filterProps(props)
+      function dividerNode () {
+        return !props.hideInput && !props.inset ? <VDivider vertical /> : undefined
+      }
 
       return (
-          <VInput
-            class={[
-              'v-number-input',
-              {
-                'v-number-input--default': controlVariant.value === 'default',
-                'v-number-input--hide-input': props.hideInput,
-                'v-number-input--inset': props.inset,
-                'v-number-input--reverse': props.reverse,
-                'v-number-input--split': controlVariant.value === 'split',
-                'v-number-input--stacked': controlVariant.value === 'stacked',
-              },
-            ]}
-            { ...rootAttrs }
-            { ...inputProps }
-            focused={ isFocused.value }
-          >
-            {{
-              ...slots,
-              default: () => (
-                <VField
-                  { ...fieldProps }
-                  active
-                  focused={ isFocused.value }
-                >
-                  {{
-                    ...slots,
-                    default: ({
-                      props: { class: fieldClass, ...slotProps },
-                    }) => (
-                      <input
-                        ref={ inputRef }
-                        type="number"
-                        value={ model.value }
-                        class={ fieldClass }
-                        max={ props.max }
-                        min={ props.min }
-                        step={ props.step }
-                        onFocus={ onFocus }
-                        onBlur={ blur }
-                        { ...inputAttrs }
+        <VInput
+          class={[
+            'v-number-input',
+            {
+              'v-number-input--default': controlVariant.value === 'default',
+              'v-number-input--hide-input': props.hideInput,
+              'v-number-input--inset': props.inset,
+              'v-number-input--reverse': props.reverse,
+              'v-number-input--split': controlVariant.value === 'split',
+              'v-number-input--stacked': controlVariant.value === 'stacked',
+            },
+            props.class,
+          ]}
+          { ...rootAttrs }
+          { ...inputProps }
+          focused={ isFocused.value }
+          style={ props.style }
+        >
+          {{
+            ...slots,
+            default: () => (
+              <VField
+                { ...fieldProps }
+                active
+                focused={ isFocused.value }
+              >
+                {{
+                  ...slots,
+                  default: ({
+                    props: { class: fieldClass, ...slotProps },
+                  }) => (
+                    <input
+                      ref={ inputRef }
+                      type="number"
+                      value={ model.value }
+                      class={ fieldClass }
+                      max={ props.max }
+                      min={ props.min }
+                      step={ props.step }
+                      onFocus={ onFocus }
+                      onBlur={ blur }
+                      { ...inputAttrs }
+                    />
+                  ),
+                  'append-inner': controlVariant.value === 'split' ? () => (
+                    <div class="v-number-input__control">
+                      <VDivider vertical />
+
+                      <VBtn
+                        flat
+                        height="100%"
+                        icon="mdi-plus"
+                        tile
+                        onClick={ onClickUp }
                       />
-                    ),
-                    'append-inner': controlVariant.value === 'split' ? () => (
-                      <div class="v-number-input__control">
-                        <VDivider vertical />
-                        <VBtn
-                          flat
-                          height="100%"
-                          icon="mdi-plus"
-                          rounded="0"
-                          onClick={ () => toggleUpDown() }
-                        />
-                      </div>
-                    ) : (!props.reverse
-                      ? () => <>{ dividerNode() }{ controlNode() }</>
-                      : undefined),
-                    'prepend-inner': controlVariant.value === 'split' ? () => (
-                      <div class="v-number-input__control">
-                        <VBtn
-                          flat
-                          height="100%"
-                          icon="mdi-minus"
-                          rounded="0"
-                          onClick={ () => toggleUpDown(false) }
-                        />
-                        <VDivider vertical />
-                      </div>
-                    ) : (props.reverse
-                      ? () => <>{ controlNode() }{ dividerNode() }</>
-                      : undefined),
-                  }}
-                </VField>
-              ),
-            }}
-          </VInput>
+                    </div>
+                  ) : (!props.reverse
+                    ? () => <>{ dividerNode() }{ controlNode() }</>
+                    : undefined),
+                  'prepend-inner': controlVariant.value === 'split' ? () => (
+                    <div class="v-number-input__control">
+                      <VBtn
+                        flat
+                        height="100%"
+                        icon="mdi-minus"
+                        tile
+                        onClick={ onClickDown }
+                      />
+
+                      <VDivider vertical />
+                    </div>
+                  ) : (props.reverse
+                    ? () => <>{ controlNode() }{ dividerNode() }</>
+                    : undefined),
+                }}
+              </VField>
+            ),
+          }}
+        </VInput>
       )
     })
   },
