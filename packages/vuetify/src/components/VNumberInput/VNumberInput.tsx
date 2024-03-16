@@ -4,7 +4,7 @@ import './VNumberInput.sass'
 // Components
 import { VBtn } from '../VBtn'
 import { VDivider } from '../VDivider'
-import { allowedVariants, filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
+import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
@@ -61,11 +61,6 @@ const makeVNumberInputProps = propsFactory({
     'variant',
   ]),
   ...makeFocusProps(),
-  variant: {
-    type: String as PropType<Variant>,
-    default: 'filled',
-    validator: (v: any) => allowedVariants.includes(v),
-  },
 }, 'VNumberInput')
 
 export const VNumberInput = genericComponent<VNumberInputSlots>()({
