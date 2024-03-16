@@ -135,7 +135,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
           </div>
       )
 
-      const dividerNode = () => !props.hideInput && !props.inset ? <VDivider v-if={ !props.hideInput } vertical /> : undefined
+      const dividerNode = () => !props.hideInput && !props.inset ? <VDivider vertical /> : undefined
 
       const fieldProps = filterFieldProps(props)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)

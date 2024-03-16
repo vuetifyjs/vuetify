@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :name="name"
@@ -12,22 +12,18 @@
     <template v-slot:configuration>
       <v-select
         v-model="controlVariant"
-        label="Control Variant"
         :items="controlVariantOptions"
+        label="Control Variant"
       ></v-select>
       <v-checkbox v-model="reverse" label="Reverse"></v-checkbox>
       <v-checkbox v-model="inset" label="Inset"></v-checkbox>
       <v-checkbox v-model="hideInput" label="HideInput"></v-checkbox>
       <v-text-field v-model="label" label="Label" clearable></v-text-field>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = ref('v-number-input')
   const model = ref('outlined')
   const options = ['outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled']

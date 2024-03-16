@@ -4,9 +4,9 @@
       <v-col>
         <h5>min:10/max:20</h5>
         <v-number-input
-          model-value="15"
-          min="10"
-          max="20"
+          :max="20"
+          :min="10"
+          :model-value="15"
         ></v-number-input>
       </v-col>
     </v-row>

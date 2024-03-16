@@ -18,21 +18,20 @@ features:
 
 The VNumberInput extends the standard HTML number-type input, ensuring style consistency across browsers as a replacement for `<input type="number">`
 
-![Otp input Entry](https://cdn.vuetifyjs.com/docs/images/components/v-otp-input/v-otp-input-entry.png)
 
 <page-features />
 
 ::: warning
-This feature requires [v3.5.0](/introduction/roadmap/#v3-5)
+This feature requires [v3.7.0](/introduction/roadmap)
 :::
 
 ## Usage
 
 Here we display a list of settings that could be applied within an application.
 
-<usage name="v-number-input" />
+<ExamplesUsage name="v-number-input" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -54,32 +53,32 @@ The `v-number-input` component has support for most of `v-field`'s props and is 
 
 The `control-variant` prop offers an easy way to customize steppers button layout. The following values are valid options: **default**, **stacked** and **split**.
 
-<example file="v-number-input/prop-control-variant" />
+<ExamplesExample file="v-number-input/prop-control-variant" />
 
 #### Reverse
 
 The `reverse` prop automatically changes the stepper buttons' position to the opposite side for both the default and stacked control variants.
 
-<example file="v-number-input/prop-reverse" />
+<ExamplesExample file="v-number-input/prop-reverse" />
 
 #### Hide-input
 
 The `hide-input` prop hides the input field, allowing only the stepper buttons to be visible. These stepper buttons follow a stacked control-variant layout.
 
-<example file="v-number-input/prop-hide-input" />
+<ExamplesExample file="v-number-input/prop-hide-input" />
 
 #### Inset
 
 The `inset` prop adjusts the style of the stepper buttons by reducing the size of the button dividers.
 
-<example file="v-number-input/prop-inset" />
+<ExamplesExample file="v-number-input/prop-inset" />
 
 #### Min/Max
 The `min` and `max` props specify the minimum and maximum values accepted by v-number-input, behaving identically to the native min and max attributes for `<input type="number">`.
 
-<example file="v-number-input/prop-min-max" />
+<ExamplesExample file="v-number-input/prop-min-max" />
 
 #### Step
 The `step` prop behaves the same as the `step` attribute in the `<input type="number">`, it defines the incremental steps for adjusting the numeric value.
 
-<example file="v-number-input/prop-step" />
+<ExamplesExample file="v-number-input/prop-step" />
