@@ -117,3 +117,33 @@
 .v-data-table-rows-loading,
 .v-data-table-rows-no-data
   text-align: center
+
+.v-data-table
+  &__tr-mobile
+    > td
+      border-bottom: thin solid rgba(var(--v-border-color), var(--v-border-opacity)) !important
+
+  &__td-mobile
+    align-items: center
+    border-bottom: 0 !important
+    display: grid !important
+    grid-template-columns: repeat(2, 1fr)
+
+    &:last-child:not(.is-expanded)
+      border-bottom: thin solid rgba(var(--v-border-color), var(--v-border-opacity)) !important
+
+    &-key
+      font-weight: bold
+
+    &-value
+      text-align: right
+      text-overflow: unset !important
+      white-space: unset !important
+
+    &-expanded-row
+      display: flex !important
+      justify-content: center
+      text-align: center !important
+
+      &-expanded
+        border-bottom: 0 !important

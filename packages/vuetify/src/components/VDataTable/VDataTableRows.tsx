@@ -40,12 +40,14 @@ export const makeVDataTableRowsProps = propsFactory({
     type: Array as PropType<readonly (DataTableItem | Group)[]>,
     default: () => ([]),
   },
+  mobileView: Boolean,
   noDataText: {
     type: String,
     default: '$vuetify.noDataText',
   },
   rowProps: [Object, Function] as PropType<RowProps<any>>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
+  headersProps: [Object, Function] as PropType<Record<string, any>>,
 }, 'VDataTableRows')
 
 export const VDataTableRows = genericComponent<new <T>(
@@ -142,6 +144,8 @@ export const VDataTableRows = genericComponent<new <T>(
                   index,
                   item,
                   cellProps: props.cellProps,
+                  headerProps: props.headerProps,
+                  mobileView: props.mobileView,
                 },
                 getPrefixedEventHandlers(attrs, ':row', () => slotProps),
                 typeof props.rowProps === 'function'

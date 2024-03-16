@@ -76,7 +76,7 @@ export const makeDataTableProps = propsFactory({
 
   width: [String, Number],
   search: String,
-  mobileView: [Boolean],
+  mobileView: Boolean,
 
   ...makeDataTableExpandProps(),
   ...makeDataTableGroupProps(),
@@ -256,6 +256,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
                     <VDataTableRows
                       { ...attrs }
                       { ...dataTableRowsProps }
+                      { ...dataTableHeadersProps }
                       items={ paginatedItems.value }
                       v-slots={ slots }
                     />

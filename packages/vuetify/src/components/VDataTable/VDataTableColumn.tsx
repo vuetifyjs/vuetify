@@ -16,8 +16,33 @@ export const VDataTableColumn = defineFunctionalComponent({
   noPadding: Boolean,
   tag: String,
   width: [Number, String],
+  mobileView: Boolean,
 }, (props, { slots }) => {
   const Tag = props.tag ?? 'td'
+
+  if (props.mobileView) {
+    return (
+      <Tag
+        class={[
+          'v-data-table__td',
+          {
+            'v-data-table-column--fixed': props.fixed,
+            'v-data-table-column--last-fixed': props.lastFixed,
+            'v-data-table-column--no-padding': props.noPadding,
+          },
+          `v-data-table-column--align-${props.align}`,
+        ]}
+        style={{
+          height: convertToUnit(props.height),
+          width: convertToUnit(props.width),
+          left: convertToUnit(props.fixedOffset || null),
+        }}
+      >
+        { slots.default?.() }
+      </Tag>
+    )
+  }
+
   return (
     <Tag
       class={[
