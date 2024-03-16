@@ -17,7 +17,7 @@ import { filterInputAttrs, genericComponent, only, propsFactory, useRender } fro
 
 // Types
 import type { PropType } from 'vue'
-import type { Variant, VFieldSlots } from '@/components/VField/VField'
+import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
 type VNumberInputSlots = Omit<VInputSlots & VFieldSlots, 'default'>
