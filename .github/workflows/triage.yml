@@ -7,7 +7,7 @@ jobs:
   triage:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: vuetifyjs/triage-action@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

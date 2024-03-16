@@ -239,6 +239,10 @@
       {
         "title": "speed-dials",
         "subfolder": "components"
+      },
+      {
+        "title": "treeview",
+        "subfolder": "components"
       }
     ]
   },

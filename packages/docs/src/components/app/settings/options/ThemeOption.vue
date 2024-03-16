@@ -52,14 +52,24 @@
       value: 'dark',
     },
     {
+      text: 'Blackguard',
+      icon: 'mdi-space-invaders',
+      value: 'blackguard',
+    },
+    {
+      text: 'Polaris',
+      icon: 'mdi-image-filter-hdr',
+      value: 'polaris',
+    },
+    {
+      text: 'Nebula',
+      icon: 'mdi-rocket-launch-outline',
+      value: 'nebula',
+    },
+    {
       text: t('system'),
       icon: 'mdi-desktop-tower-monitor',
       value: 'system',
-    },
-    {
-      text: t('blackguard'),
-      icon: 'mdi-space-invaders',
-      value: 'blackguard',
     },
   ]
 </script>

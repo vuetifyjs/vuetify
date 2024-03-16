@@ -1,6 +1,6 @@
 export default {
   badge: 'Skilt',
-  open: 'Open',
+  open: 'Åpne',
   close: 'Lukk',
   confirmEdit: {
     ok: 'OK',

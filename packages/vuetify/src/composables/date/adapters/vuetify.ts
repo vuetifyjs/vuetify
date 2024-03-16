@@ -491,7 +491,7 @@ function setYear (date: Date, year: number) {
 }
 
 function startOfDay (date: Date) {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate())
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0)
 }
 
 function endOfDay (date: Date) {

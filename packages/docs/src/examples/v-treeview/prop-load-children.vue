@@ -3,17 +3,21 @@
     <v-card-title class="bg-indigo text-white text-h5">
       User Directory
     </v-card-title>
+
     <v-row
       class="pa-4"
       justify="space-between"
     >
       <v-col cols="5">
         <v-treeview
-          v-model:active="active"
-          v-model:open="open"
+          v-model:activated="active"
+          v-model:opened="open"
           :items="items"
           :load-children="fetchUsers"
           color="warning"
+          density="compact"
+          item-title="name"
+          item-value="id"
           activatable
           open-on-click
           transition
@@ -134,6 +138,7 @@
     ]
   })
   const selected = computed(() => {
+    console.log(active.value)
     if (!active.value.length) return undefined
     const id = active.value[0]
     return users.value.find(user => user.id === id)

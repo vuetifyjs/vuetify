@@ -367,7 +367,7 @@ The following properties are modified when used within the **actions** slot of t
 | **ripple** | `false` |
 | **variant** | `text` |
 
-### Toolbars
+### Toolbars and AppBars
 
 The `v-toolbar` component applies the **text** variant to all `v-btn` components. In addition, the [v-toolbar-items](/api/v-toolbar-items/) component is used to create a grouping of buttons that fill the height of the toolbar.
 
@@ -376,6 +376,22 @@ The `v-toolbar` component applies the **text** variant to all `v-btn` components
 | [Toolbars](/components/toolbars/) | [v-toolbar](/api/v-toolbar/)  |
 
 <ExamplesExample file="v-btn/defaults-toolbar" />
+
+::: info
+
+The [v-app-bar](/components/app-bars/) component uses [v-toolbar](/components/toolbars/) internally. When applying global defaults, you must target the `v-toolbar` component.
+
+:::
+
+```js { resource="src/plugins/vuetify.js" }
+export default createVuetify({
+  defaults: {
+    VToolbar: {
+      VBtn: { variant: 'flat' },
+    },
+  },
+})
+```
 
 The following properties are modified when used within a `v-toolbar` or `v-toolbar-items` component:
 

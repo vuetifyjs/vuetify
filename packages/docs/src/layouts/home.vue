@@ -1,8 +1,6 @@
 <template>
   <v-app>
-    <VoNotificationsBanner />
-
-    <VoAuthDialog />
+    <VoNotificationsBanner order="-1" />
 
     <AppSettingsDrawer />
 

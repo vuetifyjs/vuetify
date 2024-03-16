@@ -1,0 +1,19 @@
+@use './variables' as *
+
+.v-treeview-item--filtered
+    display: none
+
+.v-treeview
+  --indent-padding: 0px
+
+.v-treeview-group.v-list-group
+  --list-indent-size: #{$treeview-group-list-indent-size}
+
+  .v-list--slim &
+    --prepend-width: #{$treeview-group-list-prepend-width}
+
+  .v-list-group__items .v-list-item
+    padding-inline-start: calc(#{$treeview-item-padding-inline-start} + var(--indent-padding)) !important
+
+  .v-list-group__items .v-list-item--prepend
+    // padding-inline-start: calc(#{$treeview-item-prepend-padding-inline-start} + var(--indent-padding)) !important
