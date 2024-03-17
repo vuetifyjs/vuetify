@@ -104,7 +104,6 @@ export const VDataTableRow = genericComponent<new <T>(
                     'v-data-table__mobile-td': props.mobileView,
                     'v-data-table__mobile-td-select-row': props.mobileView && columnKey === 'data-table-select',
                     'v-data-table__mobile-td-expanded-row': props.mobileView && columnKey === 'data-table-expand',
-                    'is-expanded': isExpanded(item) && props.mobileView && columnKey === 'data-table-expand',
                   }}
                 fixed={ column.fixed }
                 fixedOffset={ column.fixedOffset }

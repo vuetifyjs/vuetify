@@ -128,7 +128,7 @@
         display: grid
         grid-template-columns: repeat(2, 1fr)
 
-        &:last-child:not(.is-expanded)
+        &:last-child
           border-bottom: thin solid rgba(var(--v-border-color), var(--v-border-opacity)) !important
 
     &-td
@@ -143,8 +143,4 @@
       &-expanded-row
         display: flex !important
         justify-content: center
-        text-align: center !important
         width: 100% !important
-
-        &-expanded
-          border-bottom: 0 !important
