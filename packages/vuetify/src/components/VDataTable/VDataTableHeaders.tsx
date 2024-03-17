@@ -216,36 +216,38 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
 
     const VDataTableMobileHeaderCell = ({ y }:
     { y: number }) => {
-      const headerProps = mergeProps(props.headerProps ?? {} ?? {})
+      // const headerProps = mergeProps(props.headerProps ?? {} ?? {})
 
-      return (
-        <VDataTableColumn
-          tag="th"
-          class={[
-            ...headerCellClasses.value,
-            loaderClasses.value,
-          ]}
-          colspan={ headers.value.length + 1 }
-          { ...headerProps }
-        >
-          {{
-            default: () => {
-              // const columnSlotProps: VDataTableHeaderCellColumnSlotProps = {
-              //   isSorted,
-              //   toggleSort,
-              //   sortBy: sortBy.value,
-              //   getSortIcon,
-              // }
+      // return (
+      //   <VDataTableColumn
+      //     tag="th"
+      //     class={[
+      //       ...headerCellClasses.value,
+      //       loaderClasses.value,
+      //     ]}
+      //     colspan={ headers.value.length + 1 }
+      //     { ...headerProps }
+      //   >
+      //     {{
+      //       default: () => {
+      //         const columnSlotProps: VDataTableHeaderCellColumnSlotProps = {
+      //           isSorted,
+      //           toggleSort,
+      //           sortBy: sortBy.value,
+      //           getSortIcon,
+      //         }
 
-              return (
-                <div class="v-data-table-header__content">
-                  VSelect SortBy
-                </div>
-              )
-            },
-          }}
-        </VDataTableColumn>
-      )
+      //         return (
+      //           <div class="v-data-table-header__content">
+      //             VSelect SortBy
+      //           </div>
+      //         )
+      //       },
+      //     }}
+      //   </VDataTableColumn>
+      // )
+
+      return <></>
     }
 
     useRender(() => {
