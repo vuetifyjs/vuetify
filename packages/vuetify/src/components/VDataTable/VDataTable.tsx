@@ -76,7 +76,6 @@ export const makeDataTableProps = propsFactory({
 
   width: [String, Number],
   search: String,
-  mobileView: Boolean,
 
   ...makeDataTableExpandProps(),
   ...makeDataTableGroupProps(),
@@ -231,7 +230,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
             {
               'v-data-table--show-select': props.showSelect,
               'v-data-table--loading': props.loading,
-              'v-data-table--mobile': props.mobileView,
+              'v-data-table__mobile': props.mobileView,
             },
             props.class,
           ]}
