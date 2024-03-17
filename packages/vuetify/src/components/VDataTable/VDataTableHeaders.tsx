@@ -119,7 +119,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       'v-data-table__th',
       {
         'v-data-table__th--sticky': props.sticky,
-        'v-data-table__th--mobile': props.mobileView,
+        'v-data-table__mobile-th': props.mobileView,
       },
       loaderClasses.value,
     ])
@@ -226,12 +226,12 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         >
           {{
             default: () => {
-              const columnSlotProps: VDataTableHeaderCellColumnSlotProps = {
-                isSorted,
-                toggleSort,
-                sortBy: sortBy.value,
-                getSortIcon,
-              }
+              // const columnSlotProps: VDataTableHeaderCellColumnSlotProps = {
+              //   isSorted,
+              //   toggleSort,
+              //   sortBy: sortBy.value,
+              //   getSortIcon,
+              // }
 
               return (
                 <div class="v-data-table-header__content">
