@@ -3,6 +3,7 @@ import './VNumberInput.sass'
 
 // Components
 import { VBtn } from '../VBtn'
+import { VDefaultsProvider } from '../VDefaultsProvider'
 import { VDivider } from '../VDivider'
 import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
@@ -20,7 +21,14 @@ import type { PropType } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
-type VNumberInputSlots = Omit<VInputSlots & VFieldSlots, 'default'>
+type ControlSlot = {
+  click: () => void
+}
+
+type VNumberInputSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
+  increment: ControlSlot
+  decrement: ControlSlot
+}
 
 type ControlVariant = 'default' | 'stacked' | 'split'
 
@@ -113,35 +121,80 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       toggleUpDown(false)
     }
 
+    const incrementSlotProps = computed(() => ({ click: onClickUp }))
+
+    const decrementSlotProps = computed(() => ({ click: onClickDown }))
+
     useRender(() => {
       const fieldProps = filterFieldProps(props)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
 
       function controlNode () {
+        const defaultHeight = controlVariant.value === 'stacked' ? 'auto' : '100%'
         return (
           <div class="v-number-input__control">
-            <VBtn
-              flat
-              height={ controlVariant.value === 'stacked' ? 'auto' : '100%' }
-              icon="mdi-chevron-down"
-              rounded="0"
-              size="small"
-              onClick={ onClickDown }
-            />
+            {
+              !slots.decrement ? (
+                <VBtn
+                  flat
+                  key="decrement-btn"
+                  height={ defaultHeight }
+                  icon="mdi-chevron-down"
+                  rounded="0"
+                  size="small"
+                  onClick={ onClickDown }
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="decrement-defaults"
+                  defaults={{
+                    VBtn: {
+                      flat: true,
+                      rounded: '0',
+                      height: defaultHeight,
+                      size: 'small',
+                      icon: 'mdi-chevron-down',
+                    },
+                  }}
+                >
+                  { slots.decrement(decrementSlotProps.value) }
+                </VDefaultsProvider>
+              )
+            }
 
             <VDivider
               vertical={ controlVariant.value !== 'stacked' }
             />
 
-            <VBtn
-              flat
-              height={ controlVariant.value === 'stacked' ? 'auto' : '100%' }
-              icon="mdi-chevron-up"
-              onClick={ onClickUp }
-              rounded="0"
-              size="small"
-            />
+            {
+              !slots.increment ? (
+                <VBtn
+                  flat
+                  key="increment-btn"
+                  height={ defaultHeight }
+                  icon="mdi-chevron-up"
+                  onClick={ onClickUp }
+                  rounded="0"
+                  size="small"
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="increment-defaults"
+                  defaults={{
+                    VBtn: {
+                      flat: true,
+                      height: defaultHeight,
+                      rounded: '0',
+                      size: 'small',
+                      icon: 'mdi-chevron-up',
+                    },
+                  }}
+                >
+                  { slots.increment(incrementSlotProps.value) }
+                </VDefaultsProvider>
+              )
+            }
           </div>
         )
       }
