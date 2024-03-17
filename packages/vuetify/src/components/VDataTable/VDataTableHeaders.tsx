@@ -8,6 +8,7 @@ import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 import { useBackgroundColor } from '@/composables/color'
+import { useDisplay } from '@/composables/display'
 import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 
@@ -67,7 +68,7 @@ export const makeVDataTableHeadersProps = propsFactory({
   headerProps: {
     type: Object as PropType<Record<string, any>>,
   },
-  mobileView: [Boolean],
+  mobileView: Boolean,
 
   ...makeLoaderProps(),
 }, 'VDataTableHeaders')
@@ -82,6 +83,9 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const { someSelected, allSelected, selectAll, showSelectAll } = useSelection()
     const { columns, headers } = useHeaders()
     const { loaderClasses } = useLoader(props)
+
+    const { mobile } = useDisplay()
+    const mobileView = computed(() => props?.mobileView ? props.mobileView : mobile.value)
 
     function getFixedStyles (column: InternalDataTableHeader, y: number): CSSProperties | undefined {
       if (!props.sticky && !column.fixed) return undefined
@@ -119,7 +123,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       'v-data-table__th',
       {
         'v-data-table__th--sticky': props.sticky,
-        'v-data-table__mobile-th': props.mobileView,
+        'v-data-table__mobile-th': mobileView.value,
       },
       loaderClasses.value,
     ])
@@ -247,7 +251,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     useRender(() => {
       return (
         <>
-          { props.mobileView
+          { mobileView.value
             ? (
               headers.value.map((row, y) => (
                 <tr>

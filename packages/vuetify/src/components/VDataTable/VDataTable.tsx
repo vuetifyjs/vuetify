@@ -18,6 +18,7 @@ import { createPagination, makeDataTablePaginateProps, providePagination, usePag
 import { makeDataTableSelectProps, provideSelection } from './composables/select'
 import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from './composables/sort'
 import { provideDefaults } from '@/composables/defaults'
+import { useDisplay } from '@/composables/display'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Utilities
@@ -30,7 +31,6 @@ import type { Group } from './composables/group'
 import type { CellProps, DataTableHeader, DataTableItem, InternalDataTableHeader, RowProps } from './types'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
-import type { DisplayInstance } from '@/composables/display'
 import type { GenericProps, SelectItemKey } from '@/util'
 
 export type VDataTableSlotProps<T> = {
@@ -55,6 +55,7 @@ export type VDataTableSlotProps<T> = {
   groupedItems: readonly (DataTableItem<T> | Group<DataTableItem<T>>)[]
   columns: InternalDataTableHeader[]
   headers: InternalDataTableHeader[][]
+  mobileView: boolean
 }
 
 export type VDataTableSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
@@ -104,7 +105,6 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     cellProps?: CellProps<ItemType<T>>
     itemSelectable?: SelectItemKey<ItemType<T>>
     headers?: DeepReadonly<DataTableHeader<ItemType<T>>[]>
-    mobileView?: keyof DisplayInstance
     modelValue?: V
     'onUpdate:modelValue'?: (value: V) => void
   },
@@ -162,7 +162,8 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
     const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 
-    const mobileView = computed(() => props.mobileView || 'mobile')
+    const { mobile } = useDisplay()
+    const mobileView = computed(() => props?.mobileView ? props.mobileView : mobile.value)
 
     const {
       isSelected,
@@ -230,7 +231,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
             {
               'v-data-table--show-select': props.showSelect,
               'v-data-table--loading': props.loading,
-              'v-data-table__mobile': props.mobileView,
+              'v-data-table__mobile': mobileView.value,
             },
             props.class,
           ]}

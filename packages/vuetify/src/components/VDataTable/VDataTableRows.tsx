@@ -7,10 +7,11 @@ import { useExpanded } from './composables/expand'
 import { useGroupBy } from './composables/group'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
+import { useDisplay } from '@/composables/display'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { Fragment, mergeProps } from 'vue'
+import { computed, Fragment, mergeProps } from 'vue'
 import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
 
 // Types
@@ -68,6 +69,9 @@ export const VDataTableRows = genericComponent<new <T>(
     const { isSelected, toggleSelect } = useSelection()
     const { toggleGroup, isGroupOpen } = useGroupBy()
     const { t } = useLocale()
+
+    const { mobile } = useDisplay()
+    const mobileView = computed(() => props?.mobileView ? props.mobileView : mobile.value)
 
     useRender(() => {
       if (props.loading && (!props.items.length || slots.loading)) {
@@ -144,8 +148,8 @@ export const VDataTableRows = genericComponent<new <T>(
                   index,
                   item,
                   cellProps: props.cellProps,
-                  headerProps: props.headerProps,
-                  mobileView: props.mobileView,
+                  // headerProps: props.headerProps,
+                  mobileView: mobileView.value,
                 },
                 getPrefixedEventHandlers(attrs, ':row', () => slotProps),
                 typeof props.rowProps === 'function'
