@@ -8,9 +8,10 @@ import { useGroupBy } from './composables/group'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
 import { useLocale } from '@/composables/locale'
+import { usePagination } from './composables/paginate'
 
 // Utilities
-import { Fragment, mergeProps } from 'vue'
+import { Fragment, mergeProps, ref } from 'vue'
 import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
 
 // Types
@@ -46,6 +47,7 @@ export const makeVDataTableRowsProps = propsFactory({
   },
   rowProps: [Object, Function] as PropType<RowProps<any>>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
+  navigable: Boolean,
 }, 'VDataTableRows')
 
 export const VDataTableRows = genericComponent<new <T>(
@@ -66,8 +68,12 @@ export const VDataTableRows = genericComponent<new <T>(
     const { isSelected, toggleSelect } = useSelection()
     const { toggleGroup, isGroupOpen } = useGroupBy()
     const { t } = useLocale()
+    const { page, pageCount } = usePagination()
+    const focusTask = ref(-1)
 
     useRender(() => {
+      const refRows = ref<any[]>([])
+
       if (props.loading && (!props.items.length || slots.loading)) {
         return (
           <tr
@@ -142,6 +148,7 @@ export const VDataTableRows = genericComponent<new <T>(
                   index,
                   item,
                   cellProps: props.cellProps,
+                  navigable: props.navigable,
                 },
                 getPrefixedEventHandlers(attrs, ':row', () => slotProps),
                 typeof props.rowProps === 'function'
@@ -155,11 +162,55 @@ export const VDataTableRows = genericComponent<new <T>(
             }
 
             return (
-              <Fragment key={ itemSlotProps.props.key as string }>
+              <Fragment key={ itemSlotProps.props.key as string } ref={props.navigable ? (el) => {refRows.value[index] = el} : undefined}>
                 { slots.item ? slots.item(itemSlotProps) : (
                   <VDataTableRow
                     { ...itemSlotProps.props }
                     v-slots={ slots }
+                    onClick={() => {
+                      if (props.navigable) refRows.value[index].nextElementSibling.focus()
+                    }
+                  }
+                  onKeyup={(key: KeyboardEvent ) => {
+                    if (props.navigable) {
+                    switch (key.code) {
+
+                      case 'ArrowDown':
+                        refRows.value[refRows.value.length  - 1 == index ? 0 : index + 1].nextElementSibling.focus()
+                        focusTask.value = -1
+                        break;
+
+                      case 'ArrowUp':
+                        refRows.value[index == 0 ? refRows.value.length  - 1 : index - 1].nextElementSibling.focus()
+                        focusTask.value = -1
+                        break;
+
+                      case 'ArrowLeft':
+                            if (page.value > 1) {
+                              focusTask.value = 0
+                              page.value -= 1
+                            }
+                            break;
+
+                      case 'ArrowRight':
+                              if (page.value < pageCount.value){
+                                focusTask.value = 0
+                                page.value += 1
+                              }
+                              break;
+
+                      case 'Escape':
+                            refRows.value[index].nextElementSibling.blur()
+                            break;
+                    }
+                  }
+                  }}
+                  onVnodeMounted={(el: any)=>{
+                    if (focusTask.value == index) {
+                      el.el?.focus()
+                      focusTask.value = -1
+                    }
+                  }}
                   />
                 )}
 
