@@ -1,76 +1,76 @@
 // Styles
-import './VDataTable.sass'
+import './VDataTable.sass';
 
 // Components
-import { makeVDataTableFooterProps, VDataTableFooter } from './VDataTableFooter'
-import { makeVDataTableHeadersProps, VDataTableHeaders } from './VDataTableHeaders'
-import { makeVDataTableRowsProps, VDataTableRows } from './VDataTableRows'
-import { VDivider } from '@/components/VDivider'
-import { makeVTableProps, VTable } from '@/components/VTable/VTable'
+import { makeDataTableExpandProps, provideExpanded } from './composables/expand';
+import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems } from './composables/group';
+import { createHeaders, makeDataTableHeaderProps } from './composables/headers';
+import { makeDataTableItemsProps, useDataTableItems } from './composables/items';
+import { useOptions } from './composables/options';
+import { createPagination, makeDataTablePaginateProps, providePagination, usePaginatedItems } from './composables/paginate';
+import { makeDataTableSelectProps, provideSelection } from './composables/select';
+import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from './composables/sort';
+import { makeVDataTableFooterProps, VDataTableFooter } from './VDataTableFooter';
+import { makeVDataTableHeadersProps, VDataTableHeaders } from './VDataTableHeaders';
+import { makeVDataTableRowsProps, VDataTableRows } from './VDataTableRows';
+import { VDivider } from '@/components/VDivider';
+import { makeVTableProps, VTable } from '@/components/VTable/VTable';
 
 // Composables
-import { makeDataTableExpandProps, provideExpanded } from './composables/expand'
-import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems } from './composables/group'
-import { createHeaders, makeDataTableHeaderProps } from './composables/headers'
-import { makeDataTableItemsProps, useDataTableItems } from './composables/items'
-import { useOptions } from './composables/options'
-import { createPagination, makeDataTablePaginateProps, providePagination, usePaginatedItems } from './composables/paginate'
-import { makeDataTableSelectProps, provideSelection } from './composables/select'
-import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from './composables/sort'
-import { provideDefaults } from '@/composables/defaults'
-import { useDisplay } from '@/composables/display'
-import { makeFilterProps, useFilter } from '@/composables/filter'
+import { provideDefaults } from '@/composables/defaults';
+import { useDisplay } from '@/composables/display';
+import { makeFilterProps, useFilter } from '@/composables/filter';
 
 // Utilities
-import { computed, toRef } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { computed, toRef } from 'vue';
+import { genericComponent, propsFactory, useRender } from '@/util';
 
 // Types
-import type { DeepReadonly, UnwrapRef } from 'vue'
-import type { Group } from './composables/group'
-import type { CellProps, DataTableHeader, DataTableItem, InternalDataTableHeader, RowProps } from './types'
-import type { VDataTableHeadersSlots } from './VDataTableHeaders'
-import type { VDataTableRowsSlots } from './VDataTableRows'
-import type { GenericProps, SelectItemKey } from '@/util'
+import type { DeepReadonly, UnwrapRef } from 'vue';
+import type { Group } from './composables/group';
+import type { CellProps, DataTableHeader, DataTableItem, InternalDataTableHeader, RowProps } from './types';
+import type { VDataTableHeadersSlots } from './VDataTableHeaders';
+import type { VDataTableRowsSlots } from './VDataTableRows';
+import type { GenericProps, SelectItemKey } from '@/util';
 
 export type VDataTableSlotProps<T> = {
-  page: number
-  itemsPerPage: number
-  sortBy: UnwrapRef<ReturnType<typeof provideSort>['sortBy']>
-  pageCount: number
-  toggleSort: ReturnType<typeof provideSort>['toggleSort']
-  setItemsPerPage: ReturnType<typeof providePagination>['setItemsPerPage']
-  someSelected: boolean
-  allSelected: boolean
-  isSelected: ReturnType<typeof provideSelection>['isSelected']
-  select: ReturnType<typeof provideSelection>['select']
-  selectAll: ReturnType<typeof provideSelection>['selectAll']
-  toggleSelect: ReturnType<typeof provideSelection>['toggleSelect']
-  isExpanded: ReturnType<typeof provideExpanded>['isExpanded']
-  toggleExpand: ReturnType<typeof provideExpanded>['toggleExpand']
-  isGroupOpen: ReturnType<typeof provideGroupBy>['isGroupOpen']
-  toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
-  items: readonly T[]
-  internalItems: readonly DataTableItem[]
-  groupedItems: readonly (DataTableItem<T> | Group<DataTableItem<T>>)[]
-  columns: InternalDataTableHeader[]
-  headers: InternalDataTableHeader[][]
-  mobileView: boolean
-}
+  page: number;
+  itemsPerPage: number;
+  sortBy: UnwrapRef<ReturnType<typeof provideSort>['sortBy']>;
+  pageCount: number;
+  toggleSort: ReturnType<typeof provideSort>['toggleSort'];
+  setItemsPerPage: ReturnType<typeof providePagination>['setItemsPerPage'];
+  someSelected: boolean;
+  allSelected: boolean;
+  isSelected: ReturnType<typeof provideSelection>['isSelected'];
+  select: ReturnType<typeof provideSelection>['select'];
+  selectAll: ReturnType<typeof provideSelection>['selectAll'];
+  toggleSelect: ReturnType<typeof provideSelection>['toggleSelect'];
+  isExpanded: ReturnType<typeof provideExpanded>['isExpanded'];
+  toggleExpand: ReturnType<typeof provideExpanded>['toggleExpand'];
+  isGroupOpen: ReturnType<typeof provideGroupBy>['isGroupOpen'];
+  toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup'];
+  items: readonly T[];
+  internalItems: readonly DataTableItem[];
+  groupedItems: readonly (DataTableItem<T> | Group<DataTableItem<T>>)[];
+  columns: InternalDataTableHeader[];
+  headers: InternalDataTableHeader[][];
+  mobileView: boolean;
+};
 
 export type VDataTableSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
-  default: VDataTableSlotProps<T>
-  colgroup: VDataTableSlotProps<T>
-  top: VDataTableSlotProps<T>
-  body: VDataTableSlotProps<T>
-  tbody: VDataTableSlotProps<T>
-  thead: VDataTableSlotProps<T>
-  tfoot: VDataTableSlotProps<T>
-  bottom: VDataTableSlotProps<T>
-  'body.prepend': VDataTableSlotProps<T>
-  'body.append': VDataTableSlotProps<T>
-  'footer.prepend': never
-}
+  default: VDataTableSlotProps<T>;
+  colgroup: VDataTableSlotProps<T>;
+  top: VDataTableSlotProps<T>;
+  body: VDataTableSlotProps<T>;
+  tbody: VDataTableSlotProps<T>;
+  thead: VDataTableSlotProps<T>;
+  tfoot: VDataTableSlotProps<T>;
+  bottom: VDataTableSlotProps<T>;
+  'body.prepend': VDataTableSlotProps<T>;
+  'body.append': VDataTableSlotProps<T>;
+  'footer.prepend': never;
+};
 
 export const makeDataTableProps = propsFactory({
   ...makeVDataTableRowsProps(),
@@ -86,27 +86,27 @@ export const makeDataTableProps = propsFactory({
   ...makeDataTableSortProps(),
   ...makeVDataTableHeadersProps(),
   ...makeVTableProps(),
-}, 'DataTable')
+}, 'DataTable');
 
 export const makeVDataTableProps = propsFactory({
   ...makeDataTablePaginateProps(),
   ...makeDataTableProps(),
   ...makeFilterProps(),
   ...makeVDataTableFooterProps(),
-}, 'VDataTable')
+}, 'VDataTable');
 
-type ItemType<T> = T extends readonly (infer U)[] ? U : never
+type ItemType<T> = T extends readonly (infer U)[] ? U : never;
 
 export const VDataTable = genericComponent<new <T extends readonly any[], V>(
   props: {
-    items?: T
-    itemValue?: SelectItemKey<ItemType<T>>
-    rowProps?: RowProps<ItemType<T>>
-    cellProps?: CellProps<ItemType<T>>
-    itemSelectable?: SelectItemKey<ItemType<T>>
-    headers?: DeepReadonly<DataTableHeader<ItemType<T>>[]>
-    modelValue?: V
-    'onUpdate:modelValue'?: (value: V) => void
+    items?: T;
+    itemValue?: SelectItemKey<ItemType<T>>;
+    rowProps?: RowProps<ItemType<T>>;
+    cellProps?: CellProps<ItemType<T>>;
+    itemSelectable?: SelectItemKey<ItemType<T>>;
+    headers?: DeepReadonly<DataTableHeader<ItemType<T>>[]>;
+    modelValue?: V;
+    'onUpdate:modelValue'?: (value: V) => void;
   },
   slots: VDataTableSlots<ItemType<T>>,
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -125,10 +125,10 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     'update:currentItems': (value: any) => true,
   },
 
-  setup (props, { attrs, slots }) {
-    const { groupBy } = createGroupBy(props)
-    const { sortBy, multiSort, mustSort } = createSort(props)
-    const { page, itemsPerPage } = createPagination(props)
+  setup(props, { attrs, slots }) {
+    const { groupBy } = createGroupBy(props);
+    const { sortBy, multiSort, mustSort } = createSort(props);
+    const { page, itemsPerPage } = createPagination(props);
 
     const {
       columns,
@@ -140,30 +140,30 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       groupBy,
       showSelect: toRef(props, 'showSelect'),
       showExpand: toRef(props, 'showExpand'),
-    })
+    });
 
-    const { items } = useDataTableItems(props, columns)
+    const { items } = useDataTableItems(props, columns);
 
-    const search = toRef(props, 'search')
+    const search = toRef(props, 'search');
     const { filteredItems } = useFilter(props, items, search, {
       transform: item => item.columns,
       customKeyFilter: filterFunctions,
-    })
+    });
 
-    const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
-    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
+    const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page });
+    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy });
 
-    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, sortFunctions, sortRawFunctions)
-    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
-    const itemsLength = computed(() => flatItems.value.length)
+    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, sortFunctions, sortRawFunctions);
+    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened);
+    const itemsLength = computed(() => flatItems.value.length);
 
-    const { startIndex, stopIndex, pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })
-    const { paginatedItems } = usePaginatedItems({ items: flatItems, startIndex, stopIndex, itemsPerPage })
+    const { startIndex, stopIndex, pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength });
+    const { paginatedItems } = usePaginatedItems({ items: flatItems, startIndex, stopIndex, itemsPerPage });
 
-    const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
+    const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value));
 
-    const { mobile } = useDisplay()
-    const mobileView = computed(() => props?.mobileView ? props.mobileView : mobile.value)
+    const { mobile } = useDisplay();
+    const mobileView = computed(() => props?.mobileView ? props.mobileView : mobile.value);
 
     const {
       isSelected,
@@ -172,9 +172,9 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       toggleSelect,
       someSelected,
       allSelected,
-    } = provideSelection(props, { allItems: items, currentPage: paginatedItemsWithoutGroups })
+    } = provideSelection(props, { allItems: items, currentPage: paginatedItemsWithoutGroups });
 
-    const { isExpanded, toggleExpand } = provideExpanded(props)
+    const { isExpanded, toggleExpand } = provideExpanded(props);
 
     useOptions({
       page,
@@ -182,7 +182,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       sortBy,
       groupBy,
       search,
-    })
+    });
 
     provideDefaults({
       VDataTableRows: {
@@ -191,7 +191,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
         loading: toRef(props, 'loading'),
         loadingText: toRef(props, 'loadingText'),
       },
-    })
+    });
 
     const slotProps = computed<VDataTableSlotProps<any>>(() => ({
       page: page.value,
@@ -216,13 +216,13 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       groupedItems: paginatedItems.value,
       columns: columns.value,
       headers: headers.value,
-    }))
+    }));
 
     useRender(() => {
-      const dataTableFooterProps = VDataTableFooter.filterProps(props)
-      const dataTableHeadersProps = VDataTableHeaders.filterProps(props)
-      const dataTableRowsProps = VDataTableRows.filterProps(props)
-      const tableProps = VTable.filterProps(props)
+      const dataTableFooterProps = VDataTableFooter.filterProps(props);
+      const dataTableHeadersProps = VDataTableHeaders.filterProps(props);
+      const dataTableRowsProps = VDataTableRows.filterProps(props);
+      const tableProps = VTable.filterProps(props);
 
       return (
         <VTable
@@ -235,36 +235,36 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
             },
             props.class,
           ]}
-          style={ props.style }
-          { ...tableProps }
+          style={props.style}
+          {...tableProps}
         >
           {{
             top: () => slots.top?.(slotProps.value),
             default: () => slots.default ? slots.default(slotProps.value) : (
               <>
-                { slots.colgroup?.(slotProps.value) }
-                  <thead>
-                    <VDataTableHeaders
-                      { ...dataTableHeadersProps }
-                      v-slots={ slots }
-                    />
-                  </thead>
-                { slots.thead?.(slotProps.value) }
+                {slots.colgroup?.(slotProps.value)}
+                <thead>
+                  <VDataTableHeaders
+                    {...dataTableHeadersProps}
+                    v-slots={slots}
+                  />
+                </thead>
+                {slots.thead?.(slotProps.value)}
                 <tbody>
-                  { slots['body.prepend']?.(slotProps.value) }
-                  { slots.body ? slots.body(slotProps.value) : (
+                  {slots['body.prepend']?.(slotProps.value)}
+                  {slots.body ? slots.body(slotProps.value) : (
                     <VDataTableRows
-                      { ...attrs }
-                      { ...dataTableRowsProps }
-                      { ...dataTableHeadersProps }
-                      items={ paginatedItems.value }
-                      v-slots={ slots }
+                      {...attrs}
+                      {...dataTableRowsProps}
+                      {...dataTableHeadersProps}
+                      items={paginatedItems.value}
+                      v-slots={slots}
                     />
                   )}
-                  { slots['body.append']?.(slotProps.value) }
+                  {slots['body.append']?.(slotProps.value)}
                 </tbody>
-                { slots.tbody?.(slotProps.value) }
-                { slots.tfoot?.(slotProps.value) }
+                {slots.tbody?.(slotProps.value)}
+                {slots.tfoot?.(slotProps.value)}
               </>
             ),
             bottom: () => slots.bottom ? slots.bottom(slotProps.value) : (
@@ -272,7 +272,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
                 <VDivider />
 
                 <VDataTableFooter
-                  { ...dataTableFooterProps }
+                  {...dataTableFooterProps}
                   v-slots={{
                     prepend: slots['footer.prepend'],
                   }}
@@ -281,11 +281,11 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
             ),
           }}
         </VTable>
-      )
-    })
+      );
+    });
 
-    return {}
+    return {};
   },
-})
+});
 
-export type VDataTable = InstanceType<typeof VDataTable>
+export type VDataTable = InstanceType<typeof VDataTable>;
