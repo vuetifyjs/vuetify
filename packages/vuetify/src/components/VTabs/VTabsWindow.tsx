@@ -6,8 +6,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { VTabsSymbol } from './shared'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
+
+// Types
+import { VTabsSymbol } from './shared'
 
 export const makeVTabsWindowProps = propsFactory({
   ...omit(makeVWindowProps(), ['continuous', 'nextIcon', 'prevIcon', 'showArrows', 'touch', 'mandatory']),

@@ -11,6 +11,7 @@ import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSli
 import { useBackgroundColor } from '@/composables/color'
 import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { makeGroupProps, useGroup } from '@/composables/group'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTagProps } from '@/composables/tag'
 
@@ -26,9 +27,12 @@ export type TabItem = string | number | Record<string, any>
 
 export type VTabsSlots = {
   default: never
+  header: never
+  'header-item': never
   item: TabItem
   window: never
 } & {
+  [key: `header-item.${string}`]: never
   [key: `item.${string}`]: TabItem
 }
 
@@ -65,6 +69,10 @@ export const makeVTabsProps = propsFactory({
 
   ...makeVSlideGroupProps({ mandatory: 'force' as const }),
   ...makeDensityProps(),
+  ...makeGroupProps({
+    mandatory: 'force' as const,
+    selectedClass: 'v-tab-item--selected',
+  }),
   ...makeTagProps(),
 }, 'VTabs')
 
@@ -79,7 +87,8 @@ export const VTabs = genericComponent<VTabsSlots>()({
 
   setup (props, { slots }) {
     const model = useProxiedModel(props, 'modelValue')
-    const parsedItems = computed(() => parseItems(props.items))
+    const { items: _items } = useGroup(props, VTabsSymbol)
+    const items = computed(() => parseItems(props.items))
     const { densityClasses } = useDensity(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
 
@@ -122,19 +131,27 @@ export const VTabs = genericComponent<VTabsSlots>()({
               props.style,
             ]}
             role="tablist"
-            symbol={ VTabsSymbol }
           >
-            { slots.default?.() ?? parsedItems.value.map(item => (
-              <VTab { ...item } key={ item.text } />
-            ))}
+            { slots.header?.() ?? slots.default?.() ?? items.value.map(item => (
+              slots[`header-item.${item.value}`]?.() ?? slots['header-item']?.() ?? (
+                  <VTab
+                    { ...item }
+                    key={ item.text }
+                    value={ item.value }
+                  />
+              )
+            ))
+            }
           </VSlideGroup>
+
+          { !hasWindow && slots.default?.() }
 
           { hasWindow && (
             <VTabsWindow
+              v-model={ model.value }
               key="tabs-window"
-              model-value={ model.value }
             >
-              { parsedItems.value.map(item => (
+              { items.value.map(item => (
                 <VTabsWindowItem
                   value={ item.value }
                   v-slots={{
