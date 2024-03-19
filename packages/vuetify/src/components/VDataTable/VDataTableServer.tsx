@@ -97,7 +97,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
     const itemsWithoutGroups = computed(() => extractRows(items.value))
 
     const { mobile } = useDisplay()
-    const mobileView = computed(() => props?.mobile ? props.mobile : mobile.value)
+    const mobileView = computed(() => typeof props.mobile !== 'undefined' ? props.mobile : mobile.value)
 
     useOptions({
       page,

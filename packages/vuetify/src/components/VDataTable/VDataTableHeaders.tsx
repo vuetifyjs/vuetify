@@ -71,7 +71,10 @@ export const makeVDataTableHeadersProps = propsFactory({
   headerProps: {
     type: Object as PropType<Record<string, any>>,
   },
-  mobile: Boolean,
+  mobile: {
+    type: Boolean,
+    default: undefined,
+  },
 
   ...makeLoaderProps(),
 }, 'VDataTableHeaders')
@@ -86,9 +89,6 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const { someSelected, allSelected, selectAll, showSelectAll } = useSelection()
     const { columns, headers } = useHeaders()
     const { loaderClasses } = useLoader(props)
-
-    const { mobile } = useDisplay()
-    const mobileView = computed(() => props?.mobile ? props.mobile : mobile.value)
 
     function getFixedStyles (column: InternalDataTableHeader, y: number): CSSProperties | undefined {
       if (!props.sticky && !column.fixed) return undefined
@@ -109,6 +109,9 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     }
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
+
+    const { mobile } = useDisplay()
+    const mobileView = computed(() => typeof props.mobile !== 'undefined' ? props.mobile : mobile.value)
 
     const slotProps = computed(() => ({
       headers: headers.value,

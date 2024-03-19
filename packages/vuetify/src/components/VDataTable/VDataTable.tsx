@@ -55,7 +55,7 @@ export type VDataTableSlotProps<T> = {
   groupedItems: readonly (DataTableItem<T> | Group<DataTableItem<T>>)[]
   columns: InternalDataTableHeader[]
   headers: InternalDataTableHeader[][]
-  mobile: boolean
+  mobile: boolean | undefined
 };
 
 export type VDataTableSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
@@ -163,7 +163,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 
     const { mobile } = useDisplay()
-    const mobileView = computed(() => props?.mobile ? props.mobile : mobile.value)
+    const mobileView = computed(() => typeof props.mobile !== 'undefined' ? props.mobile : mobile.value)
 
     const {
       isSelected,
