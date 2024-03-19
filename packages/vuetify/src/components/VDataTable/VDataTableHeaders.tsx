@@ -1,8 +1,9 @@
 // Components
 import { VDataTableColumn } from './VDataTableColumn'
 import { VCheckboxBtn } from '@/components/VCheckbox'
+import { VChip } from '@/components/VChip'
 import { VIcon } from '@/components/VIcon'
-// import { VSelect } from '@/components/VSelect'
+import { VSelect } from '@/components/VSelect'
 
 // Composables
 import { useHeaders } from './composables/headers'
@@ -22,7 +23,7 @@ import type { CSSProperties, PropType, UnwrapRef } from 'vue'
 import type { provideSelection } from './composables/select'
 import type { provideSort } from './composables/sort'
 import type { InternalDataTableHeader } from './types'
-// import type { ItemProps } from '@/composables/list-items'
+import type { ItemProps } from '@/composables/list-items'
 import type { LoaderSlotProps } from '@/composables/loader'
 
 export type HeadersSlotProps = {
@@ -217,50 +218,66 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     }
 
     const VDataTableMobileHeaderCell = () => {
-      // const headerProps = mergeProps(props.headerProps ?? {} ?? {})
+      const headerProps = mergeProps(props.headerProps ?? {} ?? {})
 
-      // const displayItems = computed<ItemProps['items']>(() => {
-      //   let items: ItemProps['items'] = columns.value.filter(column => column.sortable)
+      const displayItems = computed<ItemProps['items']>(() => {
+        return columns.value.filter(column => column?.sortable)
+      })
 
-      //   items = items.map(item => {
-      //     return {
-      //       title: item.title,
-      //       value: item.key,
-      //     }
-      //   })
-
-      //   return items
-      // })
-
-      // return (
-      //   <VDataTableColumn
-      //     tag="th"
-      //     class={[
-      //       ...headerCellClasses.value,
-      //       loaderClasses.value,
-      //     ]}
-      //     colspan={ headers.value.length + 1 }
-      //     { ...headerProps }
-      //   >
-      //     <div class="v-data-table-header__content">
-      //       <VSelect
-      //       label="Sort By"
-      //       clearable
-      //       multiSort={ props.multiSort }
-      //       placeholder="Sort By"
-      //       hide-details
-      //       items={ displayItems.value }
-      //       density="comfortable"
-      //       >
-      //         {
-      //           // TODO: Add Chip Slot
-      //         }
-      //       </VSelect>
-      //     </div>
-      //   </VDataTableColumn>
-      // )
-
-      return <></>
+      return (
+        <VDataTableColumn
+          tag="th"
+          class={[
+            ...headerCellClasses.value,
+            loaderClasses.value,
+          ]}
+          colspan={ headers.value.length + 1 }
+          { ...headerProps }
+        >
+          <div class="v-data-table-header__content">
+            <VSelect
+            chips
+            class={[
+              'my-2',
+              'v-data-table__mobile-sort-select',
+            ]}
+            clearable
+            color="primary"
+            density="default"
+            hide-details
+            items={ displayItems.value }
+            label="Sort By"
+            multiple={ props.multiSort }
+            variant="underlined"
+            onClick:clear={ () => sortBy.value = [] }
+            >
+              {{
+                ...slots,
+                chip: props => (
+                  <VChip
+                    onClick={ props.item.raw?.sortable ? () => toggleSort(props.item.raw) : undefined }
+                    onMousedown={ (e: MouseEvent) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                    }}
+                  >
+                    { props.item.title }
+                    <VIcon
+                      class={[
+                        'ms-1',
+                        'v-data-table__mobile-sort-icon',
+                      ]}
+                      color={ isSorted(props.item.raw) ? 'on-surface' : 'grey' }
+                      icon={ getSortIcon(props.item.raw) }
+                      size="small"
+                    />
+                  </VChip>
+                ),
+              }}
+            </VSelect>
+          </div>
+        </VDataTableColumn>
+      )
     }
 
     useRender(() => {
