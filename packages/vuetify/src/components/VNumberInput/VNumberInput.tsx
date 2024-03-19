@@ -53,9 +53,7 @@ const makeVNumberInputProps = propsFactory({
     'persistentHint',
     'readonly',
   ]),
-  ...only(makeVFieldProps({
-    variant: 'outlined' as const,
-  }), [
+  ...only(makeVFieldProps(), [
     'baseColor',
     'bgColor',
     'class',
