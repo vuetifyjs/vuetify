@@ -119,7 +119,6 @@
       "forms",
       "inputs",
       "otp-input",
-      "number-input",
       "radio-buttons",
       "range-sliders",
       "selects",
@@ -230,6 +229,10 @@
       },
       {
         "title": "floating-action-buttons",
+        "subfolder": "components"
+      },
+      {
+        "title": "number-inputs",
         "subfolder": "components"
       },
       {

@@ -1,7 +1,7 @@
 ---
 emphasized: true
 meta:
-  title: Number Input
+  title: Number inputs
   description: The Number input component is used for ...
   keywords: Number, vuetify number input component, vue number component
 related:
@@ -14,15 +14,31 @@ features:
   report: true
 ---
 
-# Number Input
+# Number inputs
 
 The VNumberInput extends the standard HTML number-type input, ensuring style consistency across browsers as a replacement for `<input type="number">`
 
 <page-features />
 
 ::: warning
-This feature requires [v3.7.0](/introduction/roadmap)
+
+This feature requires [v3.5.10](/getting-started/release-notes/?version=v3.5.10)
+
 :::
+
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VNumberInput } from 'vuetify/labs/VNumberInput'
+
+export default createVuetify({
+  components: {
+    VNumberInput,
+  },
+})
+```
 
 ## Usage
 
@@ -38,7 +54,7 @@ Here we display a list of settings that could be applied within an application.
 | - | - |
 | [v-number-input](/api/v-number-input/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Guide
 
