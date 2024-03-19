@@ -2,9 +2,9 @@
 import './VNumberInput.sass'
 
 // Components
-import { VBtn } from '../VBtn'
-import { VDefaultsProvider } from '../VDefaultsProvider'
-import { VDivider } from '../VDivider'
+import { VBtn } from '../../components/VBtn'
+import { VDefaultsProvider } from '../../components/VDefaultsProvider'
+import { VDivider } from '../../components/VDivider'
 import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
