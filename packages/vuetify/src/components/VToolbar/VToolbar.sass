@@ -30,6 +30,13 @@
     .v-toolbar-title
       display: none
 
+    &-left
+      border-bottom-right-radius: $toolbar-collapsed-border-radius
+
+    &-right
+      float: right
+      border-bottom-left-radius: $toolbar-collapsed-border-radius
+
   &--flat
     @include tools.elevation($toolbar-flat-elevation)
 
