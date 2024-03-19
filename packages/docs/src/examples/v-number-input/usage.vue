@@ -25,7 +25,7 @@
 
 <script setup>
   const name = ref('v-number-input')
-  const model = ref('outlined')
+  const model = ref('default')
   const options = ['outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled']
   const controlVariantOptions = ['default', 'stacked', 'split']
   const reverse = ref(false)
