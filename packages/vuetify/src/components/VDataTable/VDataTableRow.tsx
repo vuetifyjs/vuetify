@@ -20,7 +20,16 @@ import type { GenericProps } from '@/util'
 export type VDataTableRowSlots<T> = {
   'item.data-table-select': Omit<ItemKeySlot<T>, 'value'>
   'item.data-table-expand': Omit<ItemKeySlot<T>, 'value'>
-} & { [key: `item.${string}`]: ItemKeySlot<T> }
+
+  // TODO: I think this is incorrect and needs to be fixed? VDataTableHeaderCellColumnSlotProps?
+  'header.data-table-select': Omit<ItemKeySlot<T>, 'value'>
+  'header.data-table-expand': Omit<ItemKeySlot<T>, 'value'>
+} & {
+  [key: `item.${string}`]: ItemKeySlot<T>
+
+  // TODO: I think this is incorrect and needs to be fixed? VDataTableHeaderCellColumnSlotProps?
+  [key: `header.${string}`]: ItemKeySlot<T>
+}
 
 export const makeVDataTableRowProps = propsFactory({
   index: Number,
@@ -65,6 +74,7 @@ export const VDataTableRow = genericComponent<new <T>(
           props.item && columns.value.map((column, i) => {
             const item = props.item!
             const slotName = `item.${column.key}` as const
+            const headerSlotName = `header.${column.key}` as const
             const columnKey = column.key
             const slotProps = {
               index: props.index!,
@@ -115,7 +125,7 @@ export const VDataTableRow = genericComponent<new <T>(
               >
                 {{
                   default: () => {
-                    if (slots[slotName]) return slots[slotName]!(slotProps)
+                    if (slots[slotName] && !props.mobileView) return slots[slotName]!(slotProps)
 
                     if (columnKey === 'data-table-select') {
                       return slots['item.data-table-select']?.(slotProps) ?? (
@@ -143,8 +153,19 @@ export const VDataTableRow = genericComponent<new <T>(
                     if (props.mobileView) {
                       return (
                         <>
-                          <div class="v-data-table__mobile-td-title">{ column.title }</div>
-                          <div class="v-data-table__mobile-td-value">{ displayValue }</div>
+                          <div class="v-data-table__mobile-td-title">
+                            {
+                            slots[headerSlotName]
+                              ? slots[headerSlotName]!(slotProps)
+                              : column.title
+                            }
+                            </div>
+                          <div class="v-data-table__mobile-td-value">
+                            {
+                            slots[slotName]
+                              ? slots[slotName]!(slotProps)
+                              : displayValue }
+                            </div>
                         </>
                       )
                     }
