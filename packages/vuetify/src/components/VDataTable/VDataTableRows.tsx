@@ -41,7 +41,7 @@ export const makeVDataTableRowsProps = propsFactory({
     type: Array as PropType<readonly (DataTableItem | Group)[]>,
     default: () => ([]),
   },
-  mobileView: Boolean,
+  mobile: Boolean,
   noDataText: {
     type: String,
     default: '$vuetify.noDataText',
@@ -71,7 +71,7 @@ export const VDataTableRows = genericComponent<new <T>(
     const { t } = useLocale()
 
     const { mobile } = useDisplay()
-    const mobileView = computed(() => props?.mobileView ? props.mobileView : mobile.value)
+    const mobileView = computed(() => props?.mobile ? props.mobile : mobile.value)
 
     useRender(() => {
       if (props.loading && (!props.items.length || slots.loading)) {
@@ -148,8 +148,7 @@ export const VDataTableRows = genericComponent<new <T>(
                   index,
                   item,
                   cellProps: props.cellProps,
-                  // headerProps: props.headerProps,
-                  mobileView: mobileView.value,
+                  mobile: mobileView.value,
                 },
                 getPrefixedEventHandlers(attrs, ':row', () => slotProps),
                 typeof props.rowProps === 'function'

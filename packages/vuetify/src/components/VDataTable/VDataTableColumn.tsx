@@ -16,11 +16,11 @@ export const VDataTableColumn = defineFunctionalComponent({
   noPadding: Boolean,
   tag: String,
   width: [Number, String],
-  mobileView: Boolean,
+  mobile: Boolean,
 }, (props, { slots }) => {
   const Tag = props.tag ?? 'td'
 
-  if (props.mobileView) {
+  if (props.mobile) {
     return (
       <Tag
         class={[

@@ -38,7 +38,7 @@ export type HeadersSlotProps = {
   isSorted: ReturnType<typeof provideSort>['isSorted']
 }
 
-type VDataTableHeaderCellColumnSlotProps = {
+export type VDataTableHeaderCellColumnSlotProps = {
   column: InternalDataTableHeader
   selectAll: ReturnType<typeof provideSelection>['selectAll']
   isSorted: ReturnType<typeof provideSort>['isSorted']
@@ -71,7 +71,7 @@ export const makeVDataTableHeadersProps = propsFactory({
   headerProps: {
     type: Object as PropType<Record<string, any>>,
   },
-  mobileView: Boolean,
+  mobile: Boolean,
 
   ...makeLoaderProps(),
 }, 'VDataTableHeaders')
@@ -88,7 +88,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const { loaderClasses } = useLoader(props)
 
     const { mobile } = useDisplay()
-    const mobileView = computed(() => props?.mobileView ? props.mobileView : mobile.value)
+    const mobileView = computed(() => props?.mobile ? props.mobile : mobile.value)
 
     function getFixedStyles (column: InternalDataTableHeader, y: number): CSSProperties | undefined {
       if (!props.sticky && !column.fixed) return undefined

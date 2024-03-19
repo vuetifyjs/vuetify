@@ -122,7 +122,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     const { isExpanded, toggleExpand } = provideExpanded(props)
 
     const { mobile } = useDisplay()
-    const mobileView = computed(() => props?.mobileView ? props.mobileView : mobile.value)
+    const mobileView = computed(() => props?.mobile ? props.mobile : mobile.value)
 
     const {
       containerRef,
@@ -166,7 +166,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       toggleExpand,
       isGroupOpen,
       toggleGroup,
-      mobileView: mobileView.value,
+      mobile: mobileView.value,
       items: allItems.value.map(item => item.raw),
       internalItems: allItems.value,
       groupedItems: flatItems.value,

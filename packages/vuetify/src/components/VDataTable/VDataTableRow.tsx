@@ -6,6 +6,7 @@ import { VCheckboxBtn } from '@/components/VCheckbox'
 import { useExpanded } from './composables/expand'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
+import { useSort } from './composables/sort'
 import { VDataTableColumn } from './VDataTableColumn'
 
 // Utilities
@@ -15,20 +16,21 @@ import { EventProp, genericComponent, getObjectValueByPath, propsFactory, useRen
 // Types
 import type { PropType } from 'vue'
 import type { CellProps, DataTableItem, ItemKeySlot } from './types'
+import type { VDataTableHeaderCellColumnSlotProps } from './VDataTableHeaders'
 import type { GenericProps } from '@/util'
 
 export type VDataTableRowSlots<T> = {
   'item.data-table-select': Omit<ItemKeySlot<T>, 'value'>
   'item.data-table-expand': Omit<ItemKeySlot<T>, 'value'>
 
-  // TODO: I think this is incorrect and needs to be fixed? VDataTableHeaderCellColumnSlotProps?
-  'header.data-table-select': Omit<ItemKeySlot<T>, 'value'>
-  'header.data-table-expand': Omit<ItemKeySlot<T>, 'value'>
+  // TODO: Check if this is correct
+  'header.data-table-select': VDataTableHeaderCellColumnSlotProps
+  'header.data-table-expand': VDataTableHeaderCellColumnSlotProps
 } & {
   [key: `item.${string}`]: ItemKeySlot<T>
 
-  // TODO: I think this is incorrect and needs to be fixed? VDataTableHeaderCellColumnSlotProps?
-  [key: `header.${string}`]: ItemKeySlot<T>
+  // TODO: Check if this is correct
+  [key: `header.${string}`]: VDataTableHeaderCellColumnSlotProps
 }
 
 export const makeVDataTableRowProps = propsFactory({
@@ -38,7 +40,7 @@ export const makeVDataTableRowProps = propsFactory({
   onClick: EventProp<[MouseEvent]>(),
   onContextmenu: EventProp<[MouseEvent]>(),
   onDblclick: EventProp<[MouseEvent]>(),
-  mobileView: Boolean,
+  mobile: Boolean,
 }, 'VDataTableRow')
 
 export const VDataTableRow = genericComponent<new <T>(
@@ -53,8 +55,9 @@ export const VDataTableRow = genericComponent<new <T>(
   props: makeVDataTableRowProps(),
 
   setup (props, { slots }) {
-    const { isSelected, toggleSelect } = useSelection()
+    const { isSelected, toggleSelect, someSelected, allSelected, selectAll } = useSelection()
     const { isExpanded, toggleExpand } = useExpanded()
+    const { toggleSort, sortBy, isSorted } = useSort()
     const { columns } = useHeaders()
 
     useRender(() => (
@@ -63,7 +66,7 @@ export const VDataTableRow = genericComponent<new <T>(
           'v-data-table__tr',
           {
             'v-data-table__tr--clickable': !!(props.onClick || props.onContextmenu || props.onDblclick),
-            'v-data-table__mobile-tr': props.mobileView,
+            'v-data-table__mobile-tr': props.mobile,
           },
         ]}
         onClick={ props.onClick as any }
@@ -88,6 +91,18 @@ export const VDataTableRow = genericComponent<new <T>(
               toggleExpand,
             } satisfies ItemKeySlot<any>
 
+            // TODO: Check if this is correct
+            const columnSlotProps: VDataTableHeaderCellColumnSlotProps = {
+              column,
+              selectAll,
+              isSorted,
+              toggleSort,
+              sortBy: sortBy.value,
+              someSelected: someSelected.value,
+              allSelected: allSelected.value,
+              getSortIcon: () => '',
+            }
+
             const cellProps = typeof props.cellProps === 'function'
               ? props.cellProps({
                 index: slotProps.index,
@@ -111,9 +126,9 @@ export const VDataTableRow = genericComponent<new <T>(
                 align={ column.align }
                 class={
                   {
-                    'v-data-table__mobile-td': props.mobileView,
-                    'v-data-table__mobile-td-select-row': props.mobileView && columnKey === 'data-table-select',
-                    'v-data-table__mobile-td-expanded-row': props.mobileView && columnKey === 'data-table-expand',
+                    'v-data-table__mobile-td': props.mobile,
+                    'v-data-table__mobile-td-select-row': props.mobile && columnKey === 'data-table-select',
+                    'v-data-table__mobile-td-expanded-row': props.mobile && columnKey === 'data-table-expand',
                   }}
                 fixed={ column.fixed }
                 fixedOffset={ column.fixedOffset }
@@ -125,7 +140,7 @@ export const VDataTableRow = genericComponent<new <T>(
               >
                 {{
                   default: () => {
-                    if (slots[slotName] && !props.mobileView) return slots[slotName]!(slotProps)
+                    if (slots[slotName] && !props.mobile) return slots[slotName]!(slotProps)
 
                     if (columnKey === 'data-table-select') {
                       return slots['item.data-table-select']?.(slotProps) ?? (
@@ -150,13 +165,13 @@ export const VDataTableRow = genericComponent<new <T>(
 
                     const displayValue = toDisplayString(slotProps.value)
 
-                    if (props.mobileView) {
+                    if (props.mobile) {
                       return (
                         <>
                           <div class="v-data-table__mobile-td-title">
                             {
                             slots[headerSlotName]
-                              ? slots[headerSlotName]!(slotProps)
+                              ? slots[headerSlotName]!(columnSlotProps)
                               : column.title
                             }
                             </div>
