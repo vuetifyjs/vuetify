@@ -18,6 +18,7 @@ export const VDataTableColumn = defineFunctionalComponent({
   width: [Number, String],
 }, (props, { slots }) => {
   const Tag = props.tag ?? 'td'
+
   return (
     <Tag
       class={[

@@ -99,10 +99,8 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
         : undefined
     ))
     const height = computed(() => {
-      if (scrollBehavior.value.hide && scrollBehavior.value.inverted) return 0
-
-      const height = vToolbarRef.value?.contentHeight ?? 0
-      const extensionHeight = vToolbarRef.value?.extensionHeight ?? 0
+      const height = Number(vToolbarRef.value?.contentHeight ?? props.height)
+      const extensionHeight = Number(vToolbarRef.value?.extensionHeight ?? 0)
 
       return (height + extensionHeight)
     })
@@ -122,7 +120,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
     })
 
     const { ssrBootStyles } = useSsrBoot()
-    const { layoutItemStyles } = useLayoutItem({
+    const { layoutItemStyles, layoutIsReady } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
       position: toRef(props, 'location'),
@@ -162,7 +160,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       )
     })
 
-    return {}
+    return layoutIsReady
   },
 })
 

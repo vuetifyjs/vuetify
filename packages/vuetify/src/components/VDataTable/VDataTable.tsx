@@ -2,13 +2,6 @@
 import './VDataTable.sass'
 
 // Components
-import { makeVDataTableFooterProps, VDataTableFooter } from './VDataTableFooter'
-import { makeVDataTableHeadersProps, VDataTableHeaders } from './VDataTableHeaders'
-import { makeVDataTableRowsProps, VDataTableRows } from './VDataTableRows'
-import { VDivider } from '@/components/VDivider'
-import { makeVTableProps, VTable } from '@/components/VTable/VTable'
-
-// Composables
 import { makeDataTableExpandProps, provideExpanded } from './composables/expand'
 import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems } from './composables/group'
 import { createHeaders, makeDataTableHeaderProps } from './composables/headers'
@@ -17,7 +10,15 @@ import { useOptions } from './composables/options'
 import { createPagination, makeDataTablePaginateProps, providePagination, usePaginatedItems } from './composables/paginate'
 import { makeDataTableSelectProps, provideSelection } from './composables/select'
 import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from './composables/sort'
+import { makeVDataTableFooterProps, VDataTableFooter } from './VDataTableFooter'
+import { makeVDataTableHeadersProps, VDataTableHeaders } from './VDataTableHeaders'
+import { makeVDataTableRowsProps, VDataTableRows } from './VDataTableRows'
+import { VDivider } from '@/components/VDivider'
+import { makeVTableProps, VTable } from '@/components/VTable/VTable'
+
+// Composables
 import { provideDefaults } from '@/composables/defaults'
+import { useDisplay } from '@/composables/display'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Utilities
@@ -54,7 +55,8 @@ export type VDataTableSlotProps<T> = {
   groupedItems: readonly (DataTableItem<T> | Group<DataTableItem<T>>)[]
   columns: InternalDataTableHeader[]
   headers: InternalDataTableHeader[][]
-}
+  mobile: boolean | undefined
+};
 
 export type VDataTableSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
   default: VDataTableSlotProps<T>
@@ -68,7 +70,7 @@ export type VDataTableSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots
   'body.prepend': VDataTableSlotProps<T>
   'body.append': VDataTableSlotProps<T>
   'footer.prepend': never
-}
+};
 
 export const makeDataTableProps = propsFactory({
   ...makeVDataTableRowsProps(),
@@ -93,7 +95,7 @@ export const makeVDataTableProps = propsFactory({
   ...makeVDataTableFooterProps(),
 }, 'VDataTable')
 
-type ItemType<T> = T extends readonly (infer U)[] ? U : never
+type ItemType<T> = T extends readonly (infer U)[] ? U : never;
 
 export const VDataTable = genericComponent<new <T extends readonly any[], V>(
   props: {
@@ -160,6 +162,9 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
     const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 
+    const { mobile } = useDisplay()
+    const mobileView = computed(() => typeof props.mobile !== 'undefined' ? props.mobile : mobile.value)
+
     const {
       isSelected,
       select,
@@ -205,6 +210,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       toggleExpand,
       isGroupOpen,
       toggleGroup,
+      mobile: mobileView.value,
       items: paginatedItemsWithoutGroups.value.map(item => item.raw),
       internalItems: paginatedItemsWithoutGroups.value,
       groupedItems: paginatedItems.value,
@@ -225,6 +231,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
             {
               'v-data-table--show-select': props.showSelect,
               'v-data-table--loading': props.loading,
+              'v-data-table__mobile': mobileView.value,
             },
             props.class,
           ]}
@@ -249,6 +256,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
                     <VDataTableRows
                       { ...attrs }
                       { ...dataTableRowsProps }
+                      { ...dataTableHeadersProps }
                       items={ paginatedItems.value }
                       v-slots={ slots }
                     />
@@ -280,4 +288,4 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
   },
 })
 
-export type VDataTable = InstanceType<typeof VDataTable>
+export type VDataTable = InstanceType<typeof VDataTable>;

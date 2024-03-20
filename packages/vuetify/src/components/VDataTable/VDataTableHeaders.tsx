@@ -1,13 +1,16 @@
 // Components
 import { VDataTableColumn } from './VDataTableColumn'
 import { VCheckboxBtn } from '@/components/VCheckbox'
+import { VChip } from '@/components/VChip'
 import { VIcon } from '@/components/VIcon'
+import { VSelect } from '@/components/VSelect'
 
 // Composables
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 import { useBackgroundColor } from '@/composables/color'
+import { useDisplay } from '@/composables/display'
 import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 
@@ -20,6 +23,7 @@ import type { CSSProperties, PropType, UnwrapRef } from 'vue'
 import type { provideSelection } from './composables/select'
 import type { provideSort } from './composables/sort'
 import type { InternalDataTableHeader } from './types'
+import type { ItemProps } from '@/composables/list-items'
 import type { LoaderSlotProps } from '@/composables/loader'
 
 export type HeadersSlotProps = {
@@ -34,7 +38,7 @@ export type HeadersSlotProps = {
   isSorted: ReturnType<typeof provideSort>['isSorted']
 }
 
-type VDataTableHeaderCellColumnSlotProps = {
+export type VDataTableHeaderCellColumnSlotProps = {
   column: InternalDataTableHeader
   selectAll: ReturnType<typeof provideSelection>['selectAll']
   isSorted: ReturnType<typeof provideSort>['isSorted']
@@ -66,6 +70,10 @@ export const makeVDataTableHeadersProps = propsFactory({
   },
   headerProps: {
     type: Object as PropType<Record<string, any>>,
+  },
+  mobile: {
+    type: Boolean,
+    default: undefined,
   },
 
   ...makeLoaderProps(),
@@ -102,6 +110,9 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
+    const { mobile } = useDisplay()
+    const mobileView = computed(() => typeof props.mobile !== 'undefined' ? props.mobile : mobile.value)
+
     const slotProps = computed(() => ({
       headers: headers.value,
       columns: columns.value,
@@ -114,6 +125,15 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       getSortIcon,
     } satisfies HeadersSlotProps))
 
+    const headerCellClasses = computed(() => [
+      'v-data-table__th',
+      {
+        'v-data-table__th--sticky': props.sticky,
+        'v-data-table__mobile-th': mobileView.value,
+      },
+      loaderClasses.value,
+    ])
+
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
       const noPadding = column.key === 'data-table-select' || column.key === 'data-table-expand'
       const headerProps = mergeProps(props.headerProps ?? {}, column.headerProps ?? {})
@@ -123,12 +143,11 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           tag="th"
           align={ column.align }
           class={[
-            'v-data-table__th',
+            ...headerCellClasses.value,
             {
               'v-data-table__th--sortable': column.sortable,
               'v-data-table__th--sorted': isSorted(column),
               'v-data-table__th--fixed': column.fixed,
-              'v-data-table__th--sticky': props.sticky,
             },
             loaderClasses.value,
           ]}
@@ -201,7 +220,78 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       )
     }
 
+    const VDataTableMobileHeaderCell = () => {
+      const headerProps = mergeProps(props.headerProps ?? {} ?? {})
+
+      const displayItems = computed<ItemProps['items']>(() => {
+        return columns.value.filter(column => column?.sortable)
+      })
+
+      return (
+        <VDataTableColumn
+          tag="th"
+          class={[
+            ...headerCellClasses.value,
+            loaderClasses.value,
+          ]}
+          colspan={ headers.value.length + 1 }
+          { ...headerProps }
+        >
+          <div class="v-data-table-header__content">
+            <VSelect
+            chips
+            class={[
+              'my-2',
+              'v-data-table__mobile-sort-select',
+            ]}
+            clearable
+            color="primary"
+            density="default"
+            hide-details
+            items={ displayItems.value }
+            label="Sort By"
+            multiple={ props.multiSort }
+            variant="underlined"
+            onClick:clear={ () => sortBy.value = [] }
+            >
+              {{
+                ...slots,
+                chip: props => (
+                  <VChip
+                    onClick={ props.item.raw?.sortable ? () => toggleSort(props.item.raw) : undefined }
+                    onMousedown={ (e: MouseEvent) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                    }}
+                  >
+                    { props.item.title }
+                    <VIcon
+                      class={[
+                        'ms-1',
+                        'v-data-table__mobile-sort-icon',
+                      ]}
+                      color={ isSorted(props.item.raw) ? 'on-surface' : 'grey' }
+                      icon={ getSortIcon(props.item.raw) }
+                      size="small"
+                    />
+                  </VChip>
+                ),
+              }}
+            </VSelect>
+          </div>
+        </VDataTableColumn>
+      )
+    }
+
     useRender(() => {
+      if (mobileView.value) {
+        return (
+          <tr>
+            <VDataTableMobileHeaderCell />
+          </tr>
+        )
+      }
+
       return (
         <>
           { slots.headers
