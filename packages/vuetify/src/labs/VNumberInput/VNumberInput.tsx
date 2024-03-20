@@ -138,7 +138,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                   flat
                   key="decrement-btn"
                   height={ defaultHeight }
-                  icon="mdi-chevron-down"
+                  icon="$expand"
                   rounded="0"
                   size="small"
                   onClick={ onClickDown }
@@ -152,7 +152,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                       rounded: '0',
                       height: defaultHeight,
                       size: 'small',
-                      icon: 'mdi-chevron-down',
+                      icon: '$expand',
                     },
                   }}
                 >
@@ -171,7 +171,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                   flat
                   key="increment-btn"
                   height={ defaultHeight }
-                  icon="mdi-chevron-up"
+                  icon="$collapse"
                   onClick={ onClickUp }
                   rounded="0"
                   size="small"
@@ -185,7 +185,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                       height: defaultHeight,
                       rounded: '0',
                       size: 'small',
-                      icon: 'mdi-chevron-up',
+                      icon: '$collapse',
                     },
                   }}
                 >
@@ -253,7 +253,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                       <VBtn
                         flat
                         height="100%"
-                        icon="mdi-plus"
+                        icon="$plus"
                         tile
                         onClick={ onClickUp }
                       />
@@ -266,7 +266,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                       <VBtn
                         flat
                         height="100%"
-                        icon="mdi-minus"
+                        icon="$minus"
                         tile
                         onClick={ onClickDown }
                       />
