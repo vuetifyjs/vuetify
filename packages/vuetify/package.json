@@ -173,7 +173,7 @@
   },
   "peerDependencies": {
     "typescript": ">=4.7",
-    "vite-plugin-vuetify": ">=1.0.0-alpha.12",
+    "vite-plugin-vuetify": ">=2.0.3",
     "vue": "^3.3.0",
     "vue-i18n": "^9.0.0",
     "webpack-plugin-vuetify": ">=2.0.0-alpha.11"
