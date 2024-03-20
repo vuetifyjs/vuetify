@@ -6,9 +6,9 @@ import { VDataTableRow } from './VDataTableRow'
 import { useExpanded } from './composables/expand'
 import { useGroupBy } from './composables/group'
 import { useHeaders } from './composables/headers'
+import { usePagination } from './composables/paginate'
 import { useSelection } from './composables/select'
 import { useLocale } from '@/composables/locale'
-import { usePagination } from './composables/paginate'
 
 // Utilities
 import { Fragment, mergeProps, ref } from 'vue'
@@ -162,51 +162,50 @@ export const VDataTableRows = genericComponent<new <T>(
             }
 
             return (
-              <Fragment key={ itemSlotProps.props.key as string } ref={props.navigable ? (el) => {refRows.value[index] = el} : undefined}>
+              <Fragment key={ itemSlotProps.props.key as string } ref={ props.navigable ? el => { refRows.value[index] = el } : undefined }>
                 { slots.item ? slots.item(itemSlotProps) : (
                   <VDataTableRow
                     { ...itemSlotProps.props }
                     v-slots={ slots }
-                    onClick={() => {
+                    onClick={ () => {
                       if (props.navigable) refRows.value[index].nextElementSibling.focus()
                     }
                   }
-                  onKeyup={(key: KeyboardEvent ) => {
+                  onKeyup={ (key: KeyboardEvent) => {
                     if (props.navigable) {
-                    switch (key.code) {
+                      switch (key.code) {
+                        case 'ArrowDown':
+                          refRows.value[refRows.value.length - 1 === index ? 0 : index + 1].nextElementSibling.focus()
+                          focusTask.value = -1
+                          break
 
-                      case 'ArrowDown':
-                        refRows.value[refRows.value.length  - 1 == index ? 0 : index + 1].nextElementSibling.focus()
-                        focusTask.value = -1
-                        break;
+                        case 'ArrowUp':
+                          refRows.value[index === 0 ? refRows.value.length - 1 : index - 1].nextElementSibling.focus()
+                          focusTask.value = -1
+                          break
 
-                      case 'ArrowUp':
-                        refRows.value[index == 0 ? refRows.value.length  - 1 : index - 1].nextElementSibling.focus()
-                        focusTask.value = -1
-                        break;
+                        case 'ArrowLeft':
+                          if (page.value > 1) {
+                            focusTask.value = 0
+                            page.value -= 1
+                          }
+                          break
 
-                      case 'ArrowLeft':
-                            if (page.value > 1) {
-                              focusTask.value = 0
-                              page.value -= 1
-                            }
-                            break;
+                        case 'ArrowRight':
+                          if (page.value < pageCount.value) {
+                            focusTask.value = 0
+                            page.value += 1
+                          }
+                          break
 
-                      case 'ArrowRight':
-                              if (page.value < pageCount.value){
-                                focusTask.value = 0
-                                page.value += 1
-                              }
-                              break;
-
-                      case 'Escape':
-                            refRows.value[index].nextElementSibling.blur()
-                            break;
+                        case 'Escape':
+                          refRows.value[index].nextElementSibling.blur()
+                          break
+                      }
                     }
-                  }
                   }}
-                  onVnodeMounted={(el: any)=>{
-                    if (focusTask.value == index) {
+                  onVnodeMounted={ (el: any) => {
+                    if (focusTask.value === index) {
                       el.el?.focus()
                       focusTask.value = -1
                     }
