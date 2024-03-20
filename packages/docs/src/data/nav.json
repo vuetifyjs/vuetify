@@ -232,6 +232,10 @@
         "subfolder": "components"
       },
       {
+        "title": "number-inputs",
+        "subfolder": "components"
+      },
+      {
         "title": "sparklines",
         "subfolder": "components"
       },

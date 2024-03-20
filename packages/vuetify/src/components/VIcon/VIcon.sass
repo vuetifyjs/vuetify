@@ -22,6 +22,10 @@
   &--clickable
     cursor: pointer
 
+  &--disabled
+    pointer-events: none
+    opacity: $icon-disabled-opacity
+
   @each $name in settings.$sizes
     &--size-#{$name}
       font-size: calc(var(--v-icon-size-multiplier) * #{map.get($icon-sizes, $name)})
