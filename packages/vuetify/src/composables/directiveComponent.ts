@@ -11,11 +11,22 @@ import type {
   ObjectDirective,
   VNode,
 } from 'vue'
+import type { ComponentInstance } from '@/util'
 
-export const useDirectiveComponent = (
-  component: string | Component,
-  props?: any
-): ObjectDirective => {
+type ExcludeProps =
+  | 'v-slots'
+  | `v-slot:${string}`
+  | `on${Uppercase<string>}${string}`
+  | 'key'
+  | 'ref'
+  | 'ref_for'
+  | 'ref_key'
+  | '$children'
+
+export const useDirectiveComponent = <
+  C extends Component,
+  Props = Omit<ComponentInstance<C>['$props'], ExcludeProps>
+>(component: string | C, props?: any): ObjectDirective<any, Props> => {
   const concreteComponent = (typeof component === 'string'
     ? resolveComponent(component)
     : component) as ConcreteComponent
