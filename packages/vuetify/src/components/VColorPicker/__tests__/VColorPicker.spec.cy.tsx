@@ -35,6 +35,14 @@ describe('VColorPicker', () => {
     cy.get('.v-color-picker-swatches').should('exist')
   })
 
+  it('should hide eyedropper', () => {
+    cy.mount(() => (
+      <Application>
+        <VColorPicker hideEyeDropper />
+      </Application>
+    ))
+  })
+
   it('should hide inputs', () => {
     cy.mount(() => (
       <Application>
