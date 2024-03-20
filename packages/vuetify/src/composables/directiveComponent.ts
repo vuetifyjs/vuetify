@@ -61,16 +61,16 @@ function findComponentParent (vnode: VNode, root: ComponentInternalInstance): Co
       }
 
       stack.add(child)
-      if (Array.isArray(child.children)) {
-        const result = walk(child.children as VNode[])
-        if (result) {
-          return result
-        }
+      let result
+      if (child.suspense) {
+        result = walk([child.ssContent!])
+      } else if (Array.isArray(child.children)) {
+        result = walk(child.children as VNode[])
       } else if (child.component?.vnode) {
-        const result = walk([child.component?.subTree])
-        if (result) {
-          return result
-        }
+        result = walk([child.component?.subTree])
+      }
+      if (result) {
+        return result
       }
       stack.delete(child)
     }
