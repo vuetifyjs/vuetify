@@ -532,6 +532,26 @@ $utilities: () !default;
         class: position,
         values: static relative fixed absolute sticky
       ),
+      "top": (
+        property: top,
+        class: top,
+        values: 0
+      ),
+      "right": (
+        property: right,
+        class: right,
+        values: 0
+      ),
+      "bottom": (
+        property: bottom,
+        class: bottom,
+        values: 0
+      ),
+      "left": (
+        property: left,
+        class: left,
+        values: 0
+      ),
       // Cursor
       "cursor": (
         property: cursor,

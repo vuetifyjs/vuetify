@@ -96,11 +96,14 @@ export function createJavascriptTransition (
         default: mode,
       },
       disabled: Boolean,
+      group: Boolean,
     },
 
     setup (props, { slots }) {
+      const tag = props.group ? TransitionGroup : Transition
+
       return () => {
-        return h(Transition, {
+        return h(tag as FunctionalComponent, {
           name: props.disabled ? '' : name,
           css: !props.disabled,
           // mode: props.mode, // TODO: vuejs/vue-next#3104

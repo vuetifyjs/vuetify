@@ -1,5 +1,5 @@
 // Utilities
-import { capitalize, Comment, computed, Fragment, isVNode, reactive, toRefs, unref, watchEffect } from 'vue'
+import { capitalize, Comment, computed, Fragment, isVNode, reactive, readonly, shallowRef, toRefs, unref, watchEffect } from 'vue'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -14,6 +14,7 @@ import type {
   VNode,
   VNodeArrayChildren,
   VNodeChild,
+  WatchOptions,
 } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
@@ -720,4 +721,17 @@ export function isClickInsideElement (event: MouseEvent, targetDiv: HTMLElement)
   const divBottom = divRect.bottom
 
   return mouseX >= divLeft && mouseX <= divRight && mouseY >= divTop && mouseY <= divBottom
+}
+
+export function eagerComputed<T> (fn: () => T, options?: WatchOptions): Readonly<Ref<T>> {
+  const result = shallowRef()
+
+  watchEffect(() => {
+    result.value = fn()
+  }, {
+    flush: 'sync',
+    ...options,
+  })
+
+  return readonly(result)
 }
