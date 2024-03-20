@@ -15,7 +15,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { computed, shallowRef, watch } from 'vue'
+import { computed, shallowRef, Suspense, watch } from 'vue'
 import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
 import { clamp, focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
@@ -398,7 +398,11 @@ export const VSlideGroup = genericComponent<new <T>(
             onFocusout={ onFocusout }
             onKeydown={ onKeydown }
           >
-            { slots.default?.(slotProps.value) }
+            <Suspense onResolve={ group.ready }>
+              <>
+                { slots.default?.(slotProps.value) }
+              </>
+            </Suspense>
           </div>
         </div>
 

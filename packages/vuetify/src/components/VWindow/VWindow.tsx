@@ -15,7 +15,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { Touch } from '@/directives/touch'
 
 // Utilities
-import { computed, provide, ref, shallowRef, watch } from 'vue'
+import { computed, provide, ref, shallowRef, Suspense, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -243,7 +243,11 @@ export const VWindow = genericComponent<new <T>(
             height: transitionHeight.value,
           }}
         >
-          { slots.default?.({ group }) }
+          <Suspense onResolve={ group.ready }>
+            <>
+              { slots.default?.({ group }) }
+            </>
+          </Suspense>
 
           { props.showArrows !== false && (
             <div class="v-window__controls">

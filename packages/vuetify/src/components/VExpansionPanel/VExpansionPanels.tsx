@@ -10,7 +10,7 @@ import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed, Suspense, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -47,7 +47,7 @@ export const VExpansionPanels = genericComponent()({
   },
 
   setup (props, { slots }) {
-    useGroup(props, VExpansionPanelSymbol)
+    const group = useGroup(props, VExpansionPanelSymbol)
 
     const { themeClasses } = provideTheme(props)
 
@@ -83,8 +83,13 @@ export const VExpansionPanels = genericComponent()({
           props.class,
         ]}
         style={ props.style }
-        v-slots={ slots }
-      />
+      >
+        <Suspense onResolve={ group.ready }>
+          <>
+            { slots.default?.() }
+          </>
+        </Suspense>
+      </props.tag>
     ))
 
     return {}

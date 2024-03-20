@@ -8,6 +8,7 @@ import { makeVBtnGroupProps, VBtnGroup } from '@/components/VBtnGroup/VBtnGroup'
 import { makeGroupProps, useGroup } from '@/composables/group'
 
 // Utilities
+import { Suspense } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -45,7 +46,7 @@ export const VBtnToggle = genericComponent<new <T>(
   },
 
   setup (props, { slots }) {
-    const { isSelected, next, prev, select, selected } = useGroup(props, VBtnToggleSymbol)
+    const { isSelected, next, prev, select, selected, ready } = useGroup(props, VBtnToggleSymbol)
 
     useRender(() => {
       const btnGroupProps = VBtnGroup.filterProps(props)
@@ -59,13 +60,17 @@ export const VBtnToggle = genericComponent<new <T>(
           { ...btnGroupProps }
           style={ props.style }
         >
-          { slots.default?.({
-            isSelected,
-            next,
-            prev,
-            select,
-            selected,
-          })}
+          <Suspense onResolve={ ready }>
+            <>
+              { slots.default?.({
+                isSelected,
+                next,
+                prev,
+                select,
+                selected,
+              })}
+            </>
+          </Suspense>
         </VBtnGroup>
       )
     })

@@ -129,8 +129,9 @@ export const VWindowItem = genericComponent()({
 
     const { hasContent } = useLazy(props, groupItem.isSelected)
 
-    useRender(() => (
-      <MaybeTransition transition={ transition.value } disabled={ !isBooted.value }>
+    useRender(() => {
+      return (
+        <MaybeTransition transition={ transition.value } disabled={ !isBooted.value }>
         <div
           class={[
             'v-window-item',
@@ -143,9 +144,10 @@ export const VWindowItem = genericComponent()({
           { hasContent.value && slots.default?.() }
         </div>
       </MaybeTransition>
-    ))
+      )
+    })
 
-    return { groupItem }
+    return groupItem.isReady.then(() => ({ groupItem }))
   },
 })
 
