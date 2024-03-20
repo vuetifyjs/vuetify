@@ -132,8 +132,9 @@
           border-bottom: thin solid rgba(var(--v-border-color), var(--v-border-opacity)) !important
 
     &-td
-      min-height: var(--v-table-row-height)
+      column-gap: 4px
       height: auto !important
+      min-height: var(--v-table-row-height)
 
       &-title
         font-weight: bold
@@ -144,10 +145,13 @@
         text-overflow: unset !important
         white-space: unset !important
 
-      &-expanded-row
+      &-expanded-row,
+      &-select-row
         display: flex !important
-        justify-content: center
         width: 100% !important
+
+      &-expanded-row
+        justify-content: center
 
     .v-data-table-footer
       justify-content: center
