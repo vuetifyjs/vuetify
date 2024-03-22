@@ -53,6 +53,8 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url, location.href)
 
+  if (!['http:', 'https:'].includes(url.protocol)) return
+
   if (event.request.method !== 'GET') return
 
   if (
