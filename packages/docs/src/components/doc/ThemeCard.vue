@@ -14,7 +14,7 @@
       min-height="230"
       cover
     >
-      <figcaption class="d-flex text-subtitle-2 align-center text-capitalize mt-3">
+      <figcaption class="d-flex text-subtitle-2 align-center justify-center text-capitalize mt-3">
         <span v-text="product.title" />
 
         <v-chip
@@ -27,7 +27,7 @@
         />
 
         <span
-          v-else
+          v-else-if="product.price"
           class="ms-auto text-subtitle-1 font-weight-bold"
           v-text="`$${product.price}`"
         />

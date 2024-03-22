@@ -30,7 +30,7 @@
     <br>
     <br>
 
-    <SponsorLink size="large" />
+    <SponsorLink append-icon="mdi-page-next" size="large" />
   </v-sheet>
 </template>
 

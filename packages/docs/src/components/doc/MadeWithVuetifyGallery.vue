@@ -42,9 +42,10 @@
                 :name="project.raw.title"
                 :src="project.raw.image"
                 :title="project.raw.title"
-                class="border"
-                height="180"
-                min-height="180"
+                height="230"
+                max-height="230"
+                min-height="230"
+                cover
                 eager
               />
             </a>
