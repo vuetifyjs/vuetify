@@ -3949,10 +3949,10 @@
     find-cache-dir "^3.3.2"
     upath "^2.0.1"
 
-"@vuetify/one@^1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@vuetify/one/-/one-1.4.1.tgz#b485374bb0bf7b143be887871ba7e671ee7f60ff"
-  integrity sha512-ligOaFIhDkzvMoA2SWyHAgKNwawy0U9KPGKoTyiTgbIs2AFTK+MqLFGoy1qfFVQR8X31OXXpbJ0iAXUT3WEnuQ==
+"@vuetify/one@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@vuetify/one/-/one-1.4.2.tgz#13a1907cd393cc5185cd60ce2bf90aade10e09b2"
+  integrity sha512-L9n0rzILC6RgrTPZWI49xzQhv4hemSs35A4fdJesT4UDlXYqYiPUg72ohgxtvuuW1POFqENaV2xcF5HeiBs+NQ==
 
 "@vueuse/head@^1.3.1":
   version "1.3.1"
