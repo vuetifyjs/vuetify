@@ -83,6 +83,7 @@
   const items = shallowRef([])
 
   onMounted(async () => {
+    console.log('mounted')
     await products.index()
 
     items.value = products.randomize(products.themes)
