@@ -4,6 +4,7 @@
     :code="code"
     :name="name"
     :options="options"
+    :script="script"
   >
     <div>
       <v-data-table
@@ -104,6 +105,6 @@
   })
 
   const code = computed(() => {
-    return `<template>\n  <v-data-table${propsToString(props.value, 2)}></v-data-table>\n</template>\n\n${script.value}`
+    return `<v-data-table${propsToString(props.value, 2)}></v-data-table>`
   })
 </script>
