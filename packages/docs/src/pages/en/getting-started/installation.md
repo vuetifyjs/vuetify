@@ -20,7 +20,7 @@ Get started with Vuetify, the world’s most popular Vue.js framework for buildi
 
 <PageFeatures />
 
-<VoPromotionsCardHighlight slug="vuemastery-getting-started" class="mb-4" />
+<VoPromotionsCardHighlight slug="vuemastery-getting-started" />
 
 ## Installation
 

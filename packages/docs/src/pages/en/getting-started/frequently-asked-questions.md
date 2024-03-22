@@ -15,7 +15,7 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 
 <PageFeatures />
 
-<PromotedPromoted slug="discord-subscriber-help" />
+<VoPromotionsCardHighlight slug="vuetify-discord-subscriber-help" />
 
 ## Questions
 
