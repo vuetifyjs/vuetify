@@ -236,7 +236,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                     <input
                       ref={ inputRef }
                       type="number"
-                      value={ model.value }
+                      v-model={ model.value }
                       class={ fieldClass }
                       max={ props.max }
                       min={ props.min }
