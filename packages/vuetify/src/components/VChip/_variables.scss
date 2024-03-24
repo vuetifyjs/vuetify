@@ -12,7 +12,7 @@ $chip-border-thin-width: thin !default;
 $chip-border-width: 0 !default;
 $chip-close-size: 18px !default;
 $chip-color: rgb(var(--v-theme-on-surface-variant)) !default;
-$chip-density: ("default": 0, "comfortable": -2, "compact": -3) !default;
+$chip-density: ("default": 0, "comfortable": -1, "compact": -2) !default;
 $chip-disabled-opacity: 0.3 !default;
 $chip-elevation: 1 !default;
 $chip-font-size: tools.map-deep-get(settings.$typography, "button", "size") !default;
