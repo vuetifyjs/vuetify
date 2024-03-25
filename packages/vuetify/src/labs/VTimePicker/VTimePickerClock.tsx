@@ -74,18 +74,30 @@ export const VTimePickerClock = genericComponent()({
     const displayedValue = computed(() => props.modelValue == null ? props.min : props.modelValue)
     const innerRadiusScale = computed(() => 0.62)
 
-    const update = (value: number) => {
+    const genChildren = computed(() => {
+      const children = []
+      for (let value = props.min; value <= props.max; value = value + props.step) {
+        children.push(value)
+      }
+      return children
+    })
+
+    watch(() => props.modelValue, val => {
+      inputValue.value = val
+    })
+
+    function update (value: number) {
       if (inputValue.value !== value) {
         inputValue.value = value
         emit('input', value)
       }
     }
 
-    const isAllowed = (value: number) => {
+    function isAllowed (value: number) {
       return !props.allowedValues || props.allowedValues(value)
     }
 
-    const wheel = (e: WheelEvent) => {
+    function wheel (e: WheelEvent) {
       e.preventDefault()
 
       const delta = Math.sign(-e.deltaY || 1)
@@ -100,15 +112,15 @@ export const VTimePickerClock = genericComponent()({
       }
     }
 
-    const isInner = (value: number) => {
+    function isInner (value: number) {
       return props.double && (value - props.min >= roundCount.value)
     }
 
-    const handScale = (value: number) => {
+    function handScale (value: number) {
       return isInner(value) ? innerRadiusScale.value : 1
     }
 
-    const getPosition = (value: number) => {
+    function getPosition (value: number) {
       const rotateRadians = props.rotate * Math.PI / 180
       return {
         x: Math.sin((value - props.min) * degrees.value + rotateRadians) * handScale(value),
@@ -116,7 +128,7 @@ export const VTimePickerClock = genericComponent()({
       }
     }
 
-    const angleToValue = (angle: number, insideClick: boolean): number => {
+    function angleToValue (angle: number, insideClick: boolean): number {
       const value = (
         Math.round(angle / degreesPerUnit.value) +
         (insideClick ? roundCount.value : 0)
@@ -128,7 +140,7 @@ export const VTimePickerClock = genericComponent()({
       return insideClick ? props.max - roundCount.value + 1 : props.min
     }
 
-    const getTransform = (i: number) => {
+    function getTransform (i: number) {
       const { x, y } = getPosition(i)
       return {
         left: `${50 + x * 50}%`,
@@ -136,19 +148,19 @@ export const VTimePickerClock = genericComponent()({
       }
     }
 
-    const euclidean = (p0: Point, p1: Point) => {
+    function euclidean (p0: Point, p1: Point) {
       const dx = p1.x - p0.x
       const dy = p1.y - p0.y
 
       return Math.sqrt(dx * dx + dy * dy)
     }
 
-    const angle = (center: Point, p1: Point) => {
+    function angle (center: Point, p1: Point) {
       const value = 2 * Math.atan2(p1.y - center.y - euclidean(center, p1), p1.x - center.x)
       return Math.abs(value * 180 / Math.PI)
     }
 
-    const setMouseDownValue = (value: number) => {
+    function setMouseDownValue (value: number) {
       if (valueOnMouseDown.value === null) {
         valueOnMouseDown.value = value
       }
@@ -157,7 +169,7 @@ export const VTimePickerClock = genericComponent()({
       update(value)
     }
 
-    const onDragMove = (e: MouseEvent | TouchEvent) => {
+    function onDragMove (e: MouseEvent | TouchEvent) {
       e.preventDefault()
       if ((!isDragging.value && e.type !== 'click') || !clockRef.value) return
       const { width, top, left } = clockRef.value?.getBoundingClientRect()
@@ -179,7 +191,7 @@ export const VTimePickerClock = genericComponent()({
       }
     }
 
-    const onMouseDown = (e: MouseEvent | TouchEvent) => {
+    function onMouseDown (e: MouseEvent | TouchEvent) {
       e.preventDefault()
 
       valueOnMouseDown.value = null
@@ -188,7 +200,7 @@ export const VTimePickerClock = genericComponent()({
       onDragMove(e)
     }
 
-    const onMouseUp = (e: MouseEvent | TouchEvent) => {
+    function onMouseUp (e: MouseEvent | TouchEvent) {
       e.stopPropagation()
 
       isDragging.value = false
@@ -197,18 +209,6 @@ export const VTimePickerClock = genericComponent()({
       }
     }
 
-    const genChildren = computed(() => {
-      const children = []
-      for (let value = props.min; value <= props.max; value = value + props.step) {
-        children.push(value)
-      }
-      return children
-    })
-
-    watch(() => props.modelValue, val => {
-      inputValue.value = val
-    })
-
     useRender(() => {
       return (
         <div
@@ -216,13 +216,13 @@ export const VTimePickerClock = genericComponent()({
             'v-time-picker-clock': true,
             'v-time-picker-clock--indeterminate': props.modelValue == null,
           }}
-          onMousedown={ (e: MouseEvent) => onMouseDown(e) }
-          onMouseup={ (e: MouseEvent) => onMouseUp(e) }
+          onMousedown={ onMouseDown }
+          onMouseup={ onMouseUp }
           onMouseleave={ (e: MouseEvent) => (isDragging.value && onMouseUp(e)) }
-          onTouchstart={ (e: TouchEvent) => onMouseDown(e) }
-          onTouchend={ (e: TouchEvent) => onMouseUp(e) }
-          onMousemove={ (e: MouseEvent) => onDragMove(e) }
-          onTouchmove={ (e: TouchEvent) => onDragMove(e) }
+          onTouchstart={ onMouseDown }
+          onTouchend={ onMouseUp }
+          onMousemove={ onDragMove }
+          onTouchmove={ onDragMove }
           onWheel={ (e: WheelEvent) => (props.scrollable && wheel(e)) }
           ref={ clockRef }
         >

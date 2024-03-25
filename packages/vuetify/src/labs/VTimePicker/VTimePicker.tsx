@@ -90,19 +90,8 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     const lazyInputSecond = ref(null as number | null)
     const period = ref('am' as Period)
     const selecting = ref(SelectingTimes.Hour)
-
-    const genValue = () => {
-      if (inputHour.value != null && inputMinute.value != null && (!props.useSeconds || inputSecond.value != null)) {
-        return `${pad(inputHour.value)}:${pad(inputMinute.value)}` + (props.useSeconds ? `:${pad(inputSecond.value!)}` : '')
-      }
-
-      return null
-    }
-
-    const emitValue = () => {
-      const value = genValue()
-      if (value !== null) emit('update:modelValue', value)
-    }
+    const controlsRef = ref<VTimePickerControls | null>(null)
+    const clockRef = ref<VTimePickerClock | null>(null)
 
     const isAllowedHourCb = computed((): AllowFunction => {
       let cb: AllowFunction
@@ -187,19 +176,38 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       }
     })
 
-    const convert24to12 = (hour: number) => {
-      return hour ? ((hour - 1) % 12 + 1) : 12
-    }
-
-    const convert12to24 = (hour: number, period: Period) => {
-      return hour % 12 + (period === 'pm' ? 12 : 0)
-    }
-
     const isAmPm = computed((): boolean => {
       return props.format === 'ampm'
     })
 
-    const setInputData = (value: string | null | Date) => {
+    watch(() => props.modelValue, val => setInputData(val))
+
+    onMounted(() => {
+      setInputData(props.modelValue)
+    })
+
+    function genValue () {
+      if (inputHour.value != null && inputMinute.value != null && (!props.useSeconds || inputSecond.value != null)) {
+        return `${pad(inputHour.value)}:${pad(inputMinute.value)}` + (props.useSeconds ? `:${pad(inputSecond.value!)}` : '')
+      }
+
+      return null
+    }
+
+    function emitValue () {
+      const value = genValue()
+      if (value !== null) emit('update:modelValue', value)
+    }
+
+    function convert24to12 (hour: number) {
+      return hour ? ((hour - 1) % 12 + 1) : 12
+    }
+
+    function convert12to24 (hour: number, period: Period) {
+      return hour % 12 + (period === 'pm' ? 12 : 0)
+    }
+
+    function setInputData (value: string | null | Date) {
       if (value == null || value === '') {
         inputHour.value = null
         inputMinute.value = null
@@ -219,16 +227,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       period.value = (inputHour.value == null || inputHour.value < 12) ? 'am' : 'pm'
     }
 
-    const controlsRef = ref<VTimePickerControls | null>(null)
-    const clockRef = ref<VTimePickerClock | null>(null)
-
-    watch(() => props.modelValue, val => setInputData(val))
-
-    onMounted(() => {
-      setInputData(props.modelValue)
-    })
-
-    const firstAllowed = (type: 'hour' | 'minute' | 'second', value: number) => {
+    function firstAllowed (type: 'hour' | 'minute' | 'second', value: number) {
       const allowedFn = type === 'hour' ? isAllowedHourCb.value : (type === 'minute' ? isAllowedMinuteCb.value : isAllowedSecondCb.value)
       if (!allowedFn) return value
 
@@ -246,7 +245,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       return ((first || 0) + value) % range.length + range[0]
     }
 
-    const setPeriod = (val: Period) => {
+    function setPeriod (val: Period) {
       period.value = val
       if (inputHour.value != null) {
         const newHour = inputHour.value! + (period.value === 'am' ? -12 : 12)
@@ -256,7 +255,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       return true
     }
 
-    const onInput = (value: number) => {
+    function onInput (value: number) {
       if (selecting.value === SelectingTimes.Hour) {
         inputHour.value = isAmPm.value ? convert12to24(value, period.value) : value
       } else if (selecting.value === SelectingTimes.Minute) {
@@ -267,7 +266,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       if (props.hideActions) emitValue()
     }
 
-    const onChange = (value: number) => {
+    function onChange (value: number) {
       switch (selectingNames[selecting.value]) {
         case 'hour':
           emit('click:hour', value)
