@@ -12,6 +12,7 @@ import { propsFactory } from '@/util/propsFactory'
 // Types
 import type {
   AllowedComponentProps,
+  Component,
   ComponentCustomProps,
   ComponentInjectOptions,
   ComponentObjectPropsOptions,
@@ -20,6 +21,7 @@ import type {
   ComponentOptionsWithObjectProps,
   ComponentOptionsWithoutProps,
   ComponentPropsOptions,
+  ComponentPublicInstance,
   ComputedOptions,
   DefineComponent,
   EmitsOptions,
@@ -299,3 +301,29 @@ export interface FilterPropsOptions<PropsOptions extends Readonly<ComponentProps
     U extends Exclude<keyof Props, Exclude<keyof Props, keyof T>>
   > (props: T): Partial<Pick<T, U>>
 }
+
+// https://github.com/vuejs/core/pull/10557
+export type ComponentInstance<T> = T extends { new (): ComponentPublicInstance<any, any, any> }
+  ? InstanceType<T>
+  : T extends FunctionalComponent<infer Props, infer Emits>
+    ? ComponentPublicInstance<Props, {}, {}, {}, {}, ShortEmitsToObject<Emits>>
+    : T extends Component<
+          infer Props,
+          infer RawBindings,
+          infer D,
+          infer C,
+          infer M
+        >
+      ? // NOTE we override Props/RawBindings/D to make sure is not `unknown`
+      ComponentPublicInstance<
+          unknown extends Props ? {} : Props,
+          unknown extends RawBindings ? {} : RawBindings,
+          unknown extends D ? {} : D,
+          C,
+          M
+        >
+      : never // not a vue Component
+
+type ShortEmitsToObject<E> = E extends Record<string, any[]> ? {
+  [K in keyof E]: (...args: E[K]) => any;
+} : E;

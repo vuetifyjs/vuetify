@@ -1,4 +1,4 @@
-import type { DirectiveBinding } from 'vue'
+import type { DirectiveBinding, ObjectDirective } from 'vue'
 import type * as directives from '../../vuetify/lib/directives/index.d.mts'
 
 type ExtractDirectiveBindings<T> = T extends object
@@ -11,7 +11,11 @@ type ExtractDirectiveBindings<T> = T extends object
           }
           : never
         : never
-      : {}
+      : T[K] extends ObjectDirective<any, infer B>
+        ? B extends object
+          ? { value: B, modifiers: {} }
+          : never
+        : never
   }
   : never
 

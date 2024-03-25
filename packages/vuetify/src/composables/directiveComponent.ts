@@ -11,21 +11,33 @@ import type {
   ObjectDirective,
   VNode,
 } from 'vue'
+import type { ComponentInstance } from '@/util'
 
-export const useDirectiveComponent = (
-  component: string | Component,
-  props?: any
-): ObjectDirective => {
+type ExcludeProps =
+  | 'v-slots'
+  | `v-slot:${string}`
+  | `on${Uppercase<string>}${string}`
+  | 'key'
+  | 'ref'
+  | 'ref_for'
+  | 'ref_key'
+  | '$children'
+
+export const useDirectiveComponent = <
+  C extends Component,
+  Props = Omit<ComponentInstance<C>['$props'], ExcludeProps>
+>(component: string | C, props?: any): ObjectDirective<any, Props> => {
   const concreteComponent = (typeof component === 'string'
     ? resolveComponent(component)
     : component) as ConcreteComponent
 
   return {
     mounted (el: HTMLElement, binding: DirectiveBinding, vnode: VNode) {
-      const { value } = binding
+      const text = binding.value?.text ?? binding.value
+      const value = Object(binding.value) === binding.value ? binding.value : undefined
 
       // Get the children from the props or directive value, or the element's children
-      const children = props.text || value.text || el.innerHTML
+      const children = () => text || el.innerHTML
 
       // If vnode.ctx is the same as the instance, then we're bound to a plain element
       // and need to find the nearest parent component instance to inherit provides from
@@ -60,16 +72,16 @@ function findComponentParent (vnode: VNode, root: ComponentInternalInstance): Co
       }
 
       stack.add(child)
-      if (Array.isArray(child.children)) {
-        const result = walk(child.children as VNode[])
-        if (result) {
-          return result
-        }
+      let result
+      if (child.suspense) {
+        result = walk([child.ssContent!])
+      } else if (Array.isArray(child.children)) {
+        result = walk(child.children as VNode[])
       } else if (child.component?.vnode) {
-        const result = walk([child.component?.subTree])
-        if (result) {
-          return result
-        }
+        result = walk([child.component?.subTree])
+      }
+      if (result) {
+        return result
       }
       stack.delete(child)
     }
