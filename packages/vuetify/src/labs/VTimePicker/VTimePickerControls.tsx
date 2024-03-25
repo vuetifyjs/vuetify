@@ -65,7 +65,7 @@ export const VTimePickerControls = genericComponent()({
               { props.hour == null ? '--' : pad(`${hour}`) }
             </VBtn>
             <span class="v-time-picker-title__time__separator">:</span>
-            <v-btn
+            <VBtn
               variant="tonal"
               onClick={ () => emit('update:selecting', SelectingTimes.Minute) }
               class={{
@@ -75,7 +75,7 @@ export const VTimePickerControls = genericComponent()({
               }}
             >
               { props.minute == null ? '--' : pad(props.minute) }
-            </v-btn>
+            </VBtn>
             {
               props.useSeconds && (
                 <span class="v-time-picker-title__time__btn" key="secondsDivider">:</span>
@@ -104,7 +104,7 @@ export const VTimePickerControls = genericComponent()({
                     'v-time-picker-title__ampm--readonly': props.ampmReadonly,
                   }]}
                 >
-                  <v-btn
+                  <VBtn
                     variant="tonal"
                     onClick={ () => emit('update:period', 'am') }
                     class={{
@@ -114,8 +114,8 @@ export const VTimePickerControls = genericComponent()({
                     }}
                   >
                     { t('$vuetify.timePicker.am') }
-                  </v-btn>
-                  <v-btn
+                  </VBtn>
+                  <VBtn
                     variant="tonal"
                     onClick={ () => emit('update:period', 'pm') }
                     class={{
@@ -125,7 +125,7 @@ export const VTimePickerControls = genericComponent()({
                     }}
                   >
                     { t('$vuetify.timePicker.pm') }
-                  </v-btn>
+                  </VBtn>
                 </div>
               )
             }
