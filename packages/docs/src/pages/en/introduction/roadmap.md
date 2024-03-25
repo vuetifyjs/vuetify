@@ -16,7 +16,7 @@ Vuetify is always under development. We are constantly working towards improving
 
 <PageFeatures />
 
-<PromotedEntry />
+<VoPromotionsCardVuetify />
 
 ## 2024 Component Roadmap
 
