@@ -1,5 +1,3 @@
-import { VTimePicker } from './VTimePicker'
-import { VTimePickerClock } from './VTimePickerClock'
-import { VTimePickerControls } from './VTimePickerControls'
-
-export { VTimePicker, VTimePickerClock, VTimePickerControls }
+export { VTimePicker } from './VTimePicker'
+export { VTimePickerClock } from './VTimePickerClock'
+export { VTimePickerControls } from './VTimePickerControls'
