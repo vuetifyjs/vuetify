@@ -15,8 +15,8 @@ import { deepEqual, genericComponent, getUid, propsFactory, useRender } from '@/
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
-import type { GenericProps } from '@/util'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
+import type { GenericProps } from '@/util'
 
 export interface VSelectionGroupContext {
   modelValue: Ref<any>
