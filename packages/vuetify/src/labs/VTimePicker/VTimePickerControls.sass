@@ -10,25 +10,31 @@
     display: flex
     white-space: nowrap
     direction: ltr
+    justify-content: center
 
-    &__btn
+    &__btn.v-btn--density-default.v-btn
       width: $time-picker-title-btn-width
       height: $time-picker-title-btn-height
       font-size: $time-picker-title-btn-font
-      &.v-btn--density-default
-        height: $time-picker-title-btn-height
 
       &__active
         background: rgb(var(--v-theme-primary))
-    &--with-seconds__btn
-      // overridden
-      height: $time-picker-title-seconds-btn-height
-      font-size: $time-picker-title-seconds-btn-height
+      &.v-time-picker-title__time--with-ampm__btn
+        width: $time-picker-title-ampm-btn-width
+        height: $time-picker-title-ampm-btn-height
+      &.v-time-picker-title__time--with-seconds__btn
+        // overridden
+        width: $time-picker-title-seconds-btn-width
+        height: $time-picker-title-seconds-btn-height
+        font-size: $time-picker-title-seconds-btn-font
     &__separator
       font-size: $time-picker-title-btn-font
       height: $time-picker-title-btn-height
       width: $time-picker-title-separator-width
       text-align: center
+    &__separator.v-time-picker-title--with-seconds__time__separator
+      height: $time-picker-title-seconds-btn-height
+      font-size: $time-picker-title-btn-font
 
 .v-time-picker-title__ampm
   margin-left: 12px
@@ -42,7 +48,7 @@
     .v-picker__title__btn.v-picker__title__btn--active
       opacity: $picker-inactive-btn-opacity
 
-  &__btn.v-btn--density-default
+  &__btn.v-btn.v-btn--density-default
     font-size: $time-picker-ampm-title-font-size
     padding: 0 8px
     min-width: 52px
