@@ -379,3 +379,5 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     })
   },
 })
+
+export type VTimePicker = InstanceType<typeof VTimePicker>
