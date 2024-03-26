@@ -15,13 +15,35 @@ related:
 
 The `v-time-picker` is stand-alone component that can be utilized in many existing Vuetify components. It offers the user a visual representation for selecting the time.
 
-<PromotedEntry />
+<PageFeatures />
+
+::: warning
+
+This feature requires [v3.5.12](/getting-started/release-notes/?version=v3.5.12)
+
+:::
+
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VEmptyState } from 'vuetify/labs/VEmptyState'
+
+export default createVuetify({
+  components: {
+    VEmptyState,
+  },
+})
+```
 
 ## Usage
 
 Time pickers have the light theme enabled by default.
 
 <ExamplesUsage name="v-time-picker" />
+
+<PromotedEntry />
 
 ## API
 

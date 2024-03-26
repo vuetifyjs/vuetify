@@ -218,10 +218,13 @@ export const VTimePickerClock = genericComponent()({
     useRender(() => {
       return (
         <div
-          class={{
-            'v-time-picker-clock': true,
-            'v-time-picker-clock--indeterminate': props.modelValue == null,
-          }}
+          class={[
+            {
+              'v-time-picker-clock': true,
+              'v-time-picker-clock--indeterminate': props.modelValue == null,
+              'v-time-picker-clock--readonly': props.readonly,
+            },
+          ]}
           onMousedown={ onMouseDown }
           onMouseup={ onMouseUp }
           onMouseleave={ (e: MouseEvent) => (isDragging.value && onMouseUp(e)) }

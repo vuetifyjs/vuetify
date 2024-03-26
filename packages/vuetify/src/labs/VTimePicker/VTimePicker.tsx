@@ -49,7 +49,6 @@ export const makeVTimePickerProps = propsFactory({
     type: String,
     default: '$vuetify.timePicker.select',
   },
-  hideActions: Boolean,
   max: String,
   min: String,
   modelValue: null as any as PropType<any>,
