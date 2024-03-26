@@ -283,7 +283,6 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                   'v-overlay--contained': props.contained,
                 },
                 themeClasses.value,
-                rtlClasses.value,
                 props.class,
               ]}
               style={[
@@ -294,6 +293,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 },
                 props.style,
               ]}
+              dir={isRtl ? 'rtl' : 'ltr' }
               ref={ root }
               { ...scopeId }
               { ...attrs }
