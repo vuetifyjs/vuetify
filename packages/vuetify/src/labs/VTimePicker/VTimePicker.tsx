@@ -213,7 +213,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
         inputMinute.value = value.getMinutes()
         inputSecond.value = value.getSeconds()
       } else {
-        const [hour, minute, , second, period] = value.trim().toLowerCase().match(/^(\d+):(\d+)(:(\d+))?([ap]m)?$/) || new Array(6)
+        const [hour, , minute, , second, period] = value.trim().toLowerCase().match(/^(\d+):(\d+)(:(\d+))?([ap]m)?$/) || new Array(6)
 
         inputHour.value = period ? convert12to24(parseInt(hour, 10), period as Period) : parseInt(hour, 10)
         inputMinute.value = parseInt(minute, 10)
