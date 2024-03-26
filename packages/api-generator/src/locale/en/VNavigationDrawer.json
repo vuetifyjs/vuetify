@@ -19,6 +19,7 @@
     "temporary": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background.",
     "touchless": "Disable mobile touch functionality.",
     "value": "Controls whether the component is visible or hidden."
+    "location": "You can use the Location prop to tailor the placement of your navigation drawer according to your application's layout and design preferences, ensuring a seamless and user-friendly experience."
   },
   "slots": {
     "append": "A slot at the bottom of the drawer.",
