@@ -36,30 +36,18 @@ export const makeVTimePickerProps = propsFactory({
   allowedMinutes: [Function, Array] as PropType<AllowFunction | number[]>,
   allowedSeconds: [Function, Array] as PropType<AllowFunction | number[]>,
   ampmInTitle: Boolean,
-  cancelText: {
-    type: String,
-    default: '$vuetify.datePicker.cancel',
-  },
   disabled: Boolean,
   format: {
     type: String as PropType<'ampm' | '24hr'>,
     default: 'ampm',
-  },
-  header: {
-    type: String,
-    default: '$vuetify.timePicker.select',
   },
   max: String,
   min: String,
   modelValue: null as any as PropType<any>,
   readonly: Boolean,
   scrollable: Boolean,
-  okText: {
-    type: String,
-    default: '$vuetify.datePicker.ok',
-  },
   useSeconds: Boolean,
-  ...makeVPickerProps({ title: '$vuetify.timePicker.title' }),
+  ...omit(makeVPickerProps({ title: '$vuetify.timePicker.title' }), ['landscape']),
 }, 'VTimePicker')
 
 export const VTimePicker = genericComponent<VTimePickerSlots>()({
