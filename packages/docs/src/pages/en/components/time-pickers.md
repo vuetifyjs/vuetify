@@ -1,6 +1,7 @@
 ---
-disabled: true
+emphasized: true
 meta:
+  nav: Time pickers
   title: Time picker component
   description: The time picker component is a stand-alone interface that allows the selection of hours and minutes in AM/PM and 24hr formats.
   keywords: time pickers, vuetify time picker component, vue time picker component
