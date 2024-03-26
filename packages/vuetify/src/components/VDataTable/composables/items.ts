@@ -1,5 +1,5 @@
 // Utilities
-import { computed } from 'vue'
+import { computed, isReadonly, toRaw } from 'vue'
 import { getPropertyFromItem, propsFactory } from '@/util'
 
 // Types
@@ -62,6 +62,11 @@ export function transformItems (
   items: DataTableItemProps['items'],
   columns: InternalDataTableHeader[]
 ): DataTableItem[] {
+  if (isReadonly(items)) {
+    items = items.map(item => toRaw(item))
+    columns = columns.map(column => toRaw(column))
+    props = toRaw(props)
+  }
   return items.map((item, index) => transformItem(props, item, index, columns))
 }
 
