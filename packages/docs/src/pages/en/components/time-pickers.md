@@ -37,12 +37,6 @@ You can specify allowed times using arrays, objects, and functions. You can also
 
 <ExamplesExample file="v-time-picker/prop-allowed-times" />
 
-#### AMPM in title
-
-You can move AM/PM switch to picker's title.
-
-<ExamplesExample file="v-time-picker/prop-ampm-in-title" />
-
 #### Colors
 
 Time picker colors can be set using the `color` and `header-color` props. If `header-color` prop is not provided  header will use the `color` prop value."
@@ -67,11 +61,11 @@ A time picker can be switched to 24hr format. Note that the `format` prop define
 
 <ExamplesExample file="v-time-picker/prop-format" />
 
-#### No title
+#### No header
 
-You can remove picker's title.
+You can remove picker's header.
 
-<ExamplesExample file="v-time-picker/prop-no-title" />
+<ExamplesExample file="v-time-picker/prop-hide-header" />
 
 #### Range
 
