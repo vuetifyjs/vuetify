@@ -326,51 +326,48 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
             ),
             header: () => (
               <VTimePickerControls
-                  { ...timePickerControlsProps }
-                  ampm={ isAmPm.value || props.ampmInTitle }
-                  ampmReadonly={ isAmPm.value && !props.ampmInTitle }
-                  hour={ inputHour.value as number }
-                  minute={ inputMinute.value as number }
-                  period={ period.value }
-                  second={ inputSecond.value as number }
-                  selecting={ selecting.value }
-                  onUpdate:period={ (val: Period) => setPeriod(val) && emit('update:period', val) }
-                  onUpdate:selecting={ (value: 1 | 2 | 3) => (selecting.value = value) }
-                  ref={ controlsRef }
+                { ...timePickerControlsProps }
+                ampm={ isAmPm.value || props.ampmInTitle }
+                ampmReadonly={ isAmPm.value && !props.ampmInTitle }
+                hour={ inputHour.value as number }
+                minute={ inputMinute.value as number }
+                period={ period.value }
+                second={ inputSecond.value as number }
+                selecting={ selecting.value }
+                onUpdate:period={ (val: Period) => setPeriod(val) && emit('update:period', val) }
+                onUpdate:selecting={ (value: 1 | 2 | 3) => (selecting.value = value) }
+                ref={ controlsRef }
               />
             ),
             default: () => (
-              <>
-
-                <VTimePickerClock
-                  { ...timePickerClockProps }
-                  allowedValues={
-                    selecting.value === SelectingTimes.Hour
-                      ? isAllowedHourCb.value
-                      : (selecting.value === SelectingTimes.Minute
-                        ? isAllowedMinuteCb.value
-                        : isAllowedSecondCb.value)
-                      }
-                  double={ selecting.value === SelectingTimes.Hour && !isAmPm.value }
-                  format={ selecting.value === SelectingTimes.Hour
-                    ? (isAmPm.value ? convert24to12 : (val: number) => val)
-                    : (val: number) => pad(val, 2)
-                  }
-                  max={ selecting.value === SelectingTimes.Hour ? (isAmPm.value && period.value === 'am' ? 11 : 23) : 59 }
-                  min={ selecting.value === SelectingTimes.Hour && isAmPm.value && period.value === 'pm' ? 12 : 0 }
-                  size={ 20 }
-                  step={ selecting.value === SelectingTimes.Hour ? 1 : 5 }
-                  modelValue={ selecting.value === SelectingTimes.Hour
-                    ? inputHour.value as number
+              <VTimePickerClock
+                { ...timePickerClockProps }
+                allowedValues={
+                  selecting.value === SelectingTimes.Hour
+                    ? isAllowedHourCb.value
                     : (selecting.value === SelectingTimes.Minute
-                      ? inputMinute.value as number
-                      : inputSecond.value as number)
-                  }
-                  onChange={ onChange }
-                  onInput={ onInput }
-                  ref={ clockRef }
-                />
-              </>
+                      ? isAllowedMinuteCb.value
+                      : isAllowedSecondCb.value)
+                    }
+                double={ selecting.value === SelectingTimes.Hour && !isAmPm.value }
+                format={ selecting.value === SelectingTimes.Hour
+                  ? (isAmPm.value ? convert24to12 : (val: number) => val)
+                  : (val: number) => pad(val, 2)
+                }
+                max={ selecting.value === SelectingTimes.Hour ? (isAmPm.value && period.value === 'am' ? 11 : 23) : 59 }
+                min={ selecting.value === SelectingTimes.Hour && isAmPm.value && period.value === 'pm' ? 12 : 0 }
+                size={ 20 }
+                step={ selecting.value === SelectingTimes.Hour ? 1 : 5 }
+                modelValue={ selecting.value === SelectingTimes.Hour
+                  ? inputHour.value as number
+                  : (selecting.value === SelectingTimes.Minute
+                    ? inputMinute.value as number
+                    : inputSecond.value as number)
+                }
+                onChange={ onChange }
+                onInput={ onInput }
+                ref={ clockRef }
+              />
             ),
             actions: slots.actions,
           }}
