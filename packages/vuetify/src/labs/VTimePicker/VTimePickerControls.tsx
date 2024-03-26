@@ -135,7 +135,7 @@ export const VTimePickerControls = genericComponent()({
                     }}
                     text={ t('$vuetify.timePicker.am') }
                     variant="tonal"
-                    onClick={ () => emit('update:period', 'am') }
+                    onClick={ () => props.period !== 'am' ? emit('update:period', 'am') : null }
                   />
 
                   <VBtn
@@ -148,7 +148,7 @@ export const VTimePickerControls = genericComponent()({
                     }}
                     text={ t('$vuetify.timePicker.pm') }
                     variant="tonal"
-                    onClick={ () => emit('update:period', 'pm') }
+                    onClick={ () => props.period !== 'pm' ? emit('update:period', 'pm') : null }
                   />
                 </div>
               )

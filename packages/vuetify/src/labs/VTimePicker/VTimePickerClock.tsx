@@ -95,8 +95,8 @@ export const VTimePickerClock = genericComponent()({
     function update (value: number) {
       if (inputValue.value !== value) {
         inputValue.value = value
-        emit('input', value)
       }
+      emit('input', value)
     }
 
     function isAllowed (value: number) {

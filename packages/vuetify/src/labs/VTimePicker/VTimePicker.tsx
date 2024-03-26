@@ -69,14 +69,10 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
   props: makeVTimePickerProps(),
 
   emits: {
-    change: (val: string) => val,
-    'click:cancel': () => true,
-    'click:hour': (val: number) => val,
-    'click:minute': (val: number) => val,
+    'update:hour': (val: number) => val,
+    'update:minute': (val: number) => val,
     'update:period': (val: Period) => val,
-    'click:save': () => true,
-    'click:second': (val: number) => val,
-    input: (val: string) => val,
+    'update:second': (val: number) => val,
     'update:modelValue': (val: string) => val,
   },
 
@@ -250,8 +246,9 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       if (inputHour.value != null) {
         const newHour = inputHour.value! + (period.value === 'am' ? -12 : 12)
         inputHour.value = firstAllowed('hour', newHour)
-        if (props.hideActions) emitValue()
       }
+      emit('update:period', val)
+      emitValue()
       return true
     }
 
@@ -263,19 +260,18 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       } else {
         inputSecond.value = value
       }
-      if (props.hideActions) emitValue()
     }
 
     function onChange (value: number) {
       switch (selectingNames[selecting.value]) {
         case 'hour':
-          emit('click:hour', value)
+          emit('update:hour', value)
           break
         case 'minutes':
-          emit('click:minute', value)
+          emit('update:minute', value)
           break
         case 'seconds':
-          emit('click:second', value)
+          emit('update:second', value)
           break
         default:
           break
@@ -301,7 +297,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       lazyInputMinute.value = inputMinute.value
       props.useSeconds && (lazyInputSecond.value = inputSecond.value)
 
-      emitChange && emit('change', time)
+      emitChange && emitValue()
     }
 
     useRender(() => {
@@ -334,7 +330,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
                 period={ period.value }
                 second={ inputSecond.value as number }
                 selecting={ selecting.value }
-                onUpdate:period={ (val: Period) => setPeriod(val) && emit('update:period', val) }
+                onUpdate:period={ (val: Period) => setPeriod(val) }
                 onUpdate:selecting={ (value: 1 | 2 | 3) => (selecting.value = value) }
                 ref={ controlsRef }
               />
