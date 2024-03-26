@@ -1,12 +1,20 @@
 // Utilities
 import { shallowRef, watch } from 'vue'
+import { IN_BROWSER } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
 import type { VList } from '@/components/VList'
 import type { VTextField } from '@/components/VTextField'
+import type { VVirtualScroll } from '@/components/VVirtualScroll/VVirtualScroll'
+import type { ListItem } from '@/composables/list-items'
 
-export function useScrolling (listRef: Ref<VList | undefined>, textFieldRef: Ref<VTextField | undefined>) {
+export function useScrolling (
+  listRef: Ref<VList | undefined>,
+  textFieldRef: Ref<VTextField | undefined>,
+  virtualScrollRef: Ref<VVirtualScroll | undefined>,
+  displayItems: Ref<ListItem[]>
+) {
   const isScrolling = shallowRef(false)
   let scrollTimeout: number
   function onListScroll (e: Event) {
@@ -32,6 +40,22 @@ export function useScrolling (listRef: Ref<VList | undefined>, textFieldRef: Ref
     })
   }
   async function onListKeydown (e: KeyboardEvent) {
+    if (e.key === 'ArrowUp' && listRef.value?.focusedIndex === 0) {
+      IN_BROWSER && requestAnimationFrame(() => {
+        virtualScrollRef.value?.scrollToIndex(displayItems.value.length - 1)?.then(() => {
+          listRef.value?.focus('last')
+        })
+      })
+    }
+
+    if (e.key === 'ArrowDown' && listRef.value?.focusedIndex === 'last') {
+      IN_BROWSER && requestAnimationFrame(() => {
+        virtualScrollRef.value?.scrollToIndex(0)?.then(() => {
+          listRef.value?.focus('first')
+        })
+      })
+    }
+
     if (e.key === 'Tab') {
       textFieldRef.value?.focus()
     }
