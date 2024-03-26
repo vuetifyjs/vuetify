@@ -306,6 +306,7 @@ export {
   mdiPost,
   mdiPound,
   mdiPower,
+  mdiPuzzle,
   mdiPuzzleOutline,
   mdiRadioboxBlank,
   mdiRadioboxMarked,
