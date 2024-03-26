@@ -5,39 +5,36 @@ import { makeVWindowProps, VWindow } from '@/components/VWindow/VWindow'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, watch } from 'vue'
+import { computed, inject } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { InjectionKey } from 'vue'
-import type { GroupProvide } from '@/composables/group'
+import { VTabsSymbol } from './shared'
 
-export const VStepperSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-stepper')
-
-export const makeVStepperWindowProps = propsFactory({
+export const makeVTabsWindowProps = propsFactory({
   ...omit(makeVWindowProps(), ['continuous', 'nextIcon', 'prevIcon', 'showArrows', 'touch', 'mandatory']),
-}, 'VStepperWindow')
+}, 'VTabsWindow')
 
-export const VStepperWindow = genericComponent()({
-  name: 'VStepperWindow',
+export const VTabsWindow = genericComponent()({
+  name: 'VTabsWindow',
 
-  props: makeVStepperWindowProps(),
+  props: makeVTabsWindowProps(),
 
   emits: {
     'update:modelValue': (v: unknown) => true,
   },
 
   setup (props, { slots }) {
-    const group = inject(VStepperSymbol, null)
+    const group = inject(VTabsSymbol, null)
     const _model = useProxiedModel(props, 'modelValue')
 
     const model = computed({
       get () {
         // Always return modelValue if defined
-        // or if not within a VStepper group
+        // or if not within a VTabs group
         if (_model.value != null || !group) return _model.value
 
-        // If inside of a VStepper, find the currently selected
+        // If inside of a VTabs, find the currently selected
         // item by id. Item value may be assigned by its index
         return group.items.value.find(item => group.selected.value.includes(item.id))?.value
       },
@@ -51,10 +48,10 @@ export const VStepperWindow = genericComponent()({
 
       return (
         <VWindow
-          _as="VStepperWindow"
+          _as="VTabsWindow"
           { ...windowProps }
           v-model={ model.value }
-          class="v-stepper-window"
+          class="v-tabs-window"
           mandatory={ false }
           touch={ false }
           v-slots={ slots }
@@ -66,4 +63,4 @@ export const VStepperWindow = genericComponent()({
   },
 })
 
-export type VStepperWindow = InstanceType<typeof VStepperWindow>
+export type VTabsWindow = InstanceType<typeof VTabsWindow>
