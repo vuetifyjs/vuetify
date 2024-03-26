@@ -87,7 +87,6 @@ export const makeVOverlayProps = propsFactory({
   contained: Boolean,
   contentClass: null,
   contentProps: null,
-  disabled: Boolean,
   opacity: [Number, String],
   noClickAnimation: Boolean,
   modelValue: Boolean,
