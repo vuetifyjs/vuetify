@@ -4,6 +4,7 @@ import './VNavigationDrawer.sass'
 // Components
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VImg } from '@/components/VImg'
+import { VOverlay } from '@/components/VOverlay'
 
 // Composables
 import { useSticky } from './sticky'
@@ -26,7 +27,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, nextTick, onBeforeMount, ref, shallowRef, toRef, Transition, watch } from 'vue'
+import { computed, nextTick, onBeforeMount, ref, shallowRef, toRef, watch } from 'vue'
 import { genericComponent, propsFactory, toPhysical, useRender } from '@/util'
 
 // Types
@@ -187,14 +188,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
 
     const { isStuck, stickyStyles } = useSticky({ rootEl, isSticky, layoutItemStyles })
 
-    const scrimColor = useBackgroundColor(computed(() => {
-      return typeof props.scrim === 'string' ? props.scrim : null
-    }))
     const scrimStyles = computed(() => ({
-      ...isDragging.value ? {
-        opacity: dragProgress.value * 0.2,
-        transition: 'none',
-      } : undefined,
       ...layoutItemScrimStyles.value,
     }))
 
@@ -213,7 +207,6 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
 
     useRender(() => {
       const hasImage = (slots.image || props.image)
-
       return (
         <>
           <props.tag
@@ -294,18 +287,20 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
                 { slots.append?.() }
               </div>
             )}
+
           </props.tag>
 
-          <Transition name="fade-transition">
-            { isTemporary.value && (isDragging.value || isActive.value) && !!props.scrim && (
-              <div
-                class={['v-navigation-drawer__scrim', scrimColor.backgroundColorClasses.value]}
-                style={[scrimStyles.value, scrimColor.backgroundColorStyles.value]}
-                onClick={ () => isActive.value = false }
-                { ...scopeId }
-              />
-            )}
-          </Transition>
+          { !!isTemporary.value && !!props.scrim && (
+            <VOverlay
+              v-model={ isActive.value }
+              origin="center center"
+              scrollStrategy="block"
+              locationStrategy="connected"
+              scrim={ props.scrim }
+              style={[scrimStyles.value]}
+              { ...scopeId }
+            />
+          )}
         </>
       )
     })
