@@ -2,7 +2,7 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide } from 'vue'
+import { computed, inject, provide, toRaw, toRef } from 'vue'
 import { deepEqual, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -45,7 +45,7 @@ const singleSelectStrategy: DataTableSelectStrategy = {
   showSelectAll: false,
   allSelected: () => [],
   select: ({ items, value }) => {
-    return new Set(value ? [items[0]?.value] : [])
+    return new Set(value ? [toRaw(items[0]?.value)] : [])
   },
   selectAll: ({ selected }) => selected,
 }
@@ -55,8 +55,8 @@ const pageSelectStrategy: DataTableSelectStrategy = {
   allSelected: ({ currentPage }) => currentPage,
   select: ({ items, value, selected }) => {
     for (const item of items) {
-      if (value) selected.add(item.value)
-      else selected.delete(item.value)
+      if (value) selected.add(toRaw(item.value))
+      else selected.delete(toRaw(item.value))
     }
 
     return selected
@@ -69,8 +69,8 @@ const allSelectStrategy: DataTableSelectStrategy = {
   allSelected: ({ allItems }) => allItems,
   select: ({ items, value, selected }) => {
     for (const item of items) {
-      if (value) selected.add(item.value)
-      else selected.delete(item.value)
+      if (value) selected.add(toRaw(item.value))
+      else selected.delete(toRaw(item.value))
     }
 
     return selected
@@ -123,11 +123,11 @@ export function provideSelection (
   })
 
   function isSelected (items: SelectableItem | SelectableItem[]) {
-    return wrapInArray(items).every(item => selected.value.has(item.value))
+    return wrapInArray(items).every(item => selected.value.has(toRaw(item.value)))
   }
 
   function isSomeSelected (items: SelectableItem | SelectableItem[]) {
-    return wrapInArray(items).some(item => selected.value.has(item.value))
+    return wrapInArray(items).some(item => selected.value.has(toRaw(item.value)))
   }
 
   function select (items: SelectableItem[], value: boolean) {
@@ -141,7 +141,8 @@ export function provideSelection (
   }
 
   function toggleSelect (item: SelectableItem) {
-    select([item], !isSelected([item]))
+    const newItem = toRef(item)
+    select([newItem.value], !isSelected([newItem.value]))
   }
 
   function selectAll (value: boolean) {
