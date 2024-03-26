@@ -312,24 +312,21 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       return (
         <VPicker
           { ...pickerProps }
+          color={ undefined }
           class={[
             'v-time-picker',
             props.class,
           ]}
           style={ props.style }
-          width={ 328 }
           v-slots={{
             title: () => slots.title?.() ?? (
               <div class="v-time-picker__title">
                 { t(props.title) }
               </div>
             ),
-            default: () => (
-              <>
-                <VTimePickerControls
-                  {
-                    ...timePickerControlsProps
-                  }
+            header: () => (
+              <VTimePickerControls
+                  { ...timePickerControlsProps }
                   ampm={ isAmPm.value || props.ampmInTitle }
                   ampmReadonly={ isAmPm.value && !props.ampmInTitle }
                   hour={ inputHour.value as number }
@@ -340,7 +337,10 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
                   onUpdate:period={ (val: Period) => setPeriod(val) && emit('update:period', val) }
                   onUpdate:selecting={ (value: 1 | 2 | 3) => (selecting.value = value) }
                   ref={ controlsRef }
-                />
+              />
+            ),
+            default: () => (
+              <>
 
                 <VTimePickerClock
                   { ...timePickerClockProps }

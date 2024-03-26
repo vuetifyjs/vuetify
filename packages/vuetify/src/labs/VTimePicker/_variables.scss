@@ -1,20 +1,19 @@
 // @import '../../styles/styles.sass';
 
 $time-picker-padding: 24px !default;
-$time-picker-title-color: white;
-$time-picker-title-btn-font: 56px !default;
-$time-picker-title-btn-height: 80px !default;
-$time-picker-title-btn-width: 114px !default;
-$time-picker-title-seconds-btn-width: 64px !default;
-$time-picker-title-seconds-btn-height: 80px !default;
-$time-picker-title-seconds-btn-font: 40px !default;
-$time-picker-title-separator-width: 24px !default;
+$time-picker-contols-btn-font: 56px !default;
+$time-picker-contols-btn-height: 80px !default;
+$time-picker-contols-btn-width: 96px !default;
+$time-picker-contols-seconds-btn-width: 64px !default;
+$time-picker-contols-seconds-btn-height: 80px !default;
+$time-picker-contols-seconds-btn-font: 40px !default;
+$time-picker-contols-separator-width: 24px !default;
 $time-picker-landscape-title-btn-height: 55px !default;
-$time-picker-title-ampm-btn-width: 96px !default;
-$time-picker-title-ampm-btn-height: 80px !default;
-$time-picker-title-ampm-height: 40px !default;
-$time-picker-title-ampm-am-border-radius: 4px 4px 0 0 !default;
-$time-picker-title-ampm-pm-border-radius: 0 0 4px 4px !default;
+$time-picker-contols-ampm-btn-width: 96px !default;
+$time-picker-contols-ampm-btn-height: 80px !default;
+$time-picker-contols-ampm-height: 40px !default;
+$time-picker-contols-ampm-am-border-radius: 4px 4px 0 0 !default;
+$time-picker-contols-ampm-pm-border-radius: 0 0 4px 4px !default;
 $time-picker-ampm-title-margin-start: 8px !default;
 $time-picker-ampm-title-margin-bottom: 6px !default;
 $time-picker-ampm-title-margin: 0 0 $time-picker-ampm-title-margin-bottom $time-picker-ampm-title-margin-start !default;  // TODO: remove in 3.0
@@ -37,4 +36,4 @@ $time-picker-clock-inner-offset: 27px !default;
 $time-picker-ampm-padding: 10px !default;
 $time-picker-clock-end-border-width: 2px !default;
 $time-picker-clock-end-border-style: solid !default;
-$time-picker-clock-end-border-color: inherit !default;
+$time-picker-clock-end-border-color: currentColor !default;

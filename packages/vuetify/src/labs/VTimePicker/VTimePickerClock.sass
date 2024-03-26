@@ -5,11 +5,6 @@
   background: rgb(var(--v-theme-background))
   color: rgb(var(--v-theme-on-background))
 
-  .v-time-picker-clock__item--disabled
-    opacity: var(--v-disabled-opacity)
-
-  .v-time-picker-clock__hand
-    background-color: rgb(var(--v-theme-surface-variant))
 
   &:after
     color: rgb(var(--v-theme-primary))
@@ -19,14 +14,14 @@
     color: rgb(var(--v-theme-on-surface-variant))
 
 .v-time-picker-clock
+  margin: 0 auto
   background: rgb(var(--v-theme-surface-light))
   border-radius: 50%
   position: relative
   transition: none
   user-select: none
-  width: 90%
-  padding-top: 90%
-  margin-left: 5%
+  height: 256px
+  width: 256px
   flex: 1 0 auto
 
   &__container
@@ -37,6 +32,7 @@
     padding: $time-picker-clock-padding
 
   &__hand
+    background-color: currentColor
     height: $time-picker-clock-hand-height
     width: $time-picker-clock-hand-width
     bottom: 50%
@@ -68,13 +64,14 @@
       top: 100%
       left: 50%
       border-radius: 100%
-      border-style: solid
-      border-color: inherit
-      background-color: inherit
+      background-color: currentColor
       transform: translate(-50%, -50%)
 
     &--inner:after
       height: $time-picker-clock-inner-hand-height
+
+  .v-time-picker-clock__item--disabled
+    opacity: var(--v-disabled-opacity)
 
 .v-picker--full-width
   .v-time-picker-clock__container

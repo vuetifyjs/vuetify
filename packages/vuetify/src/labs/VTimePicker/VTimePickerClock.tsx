@@ -2,8 +2,11 @@
 // Styles
 import './VTimePickerClock.sass'
 
+// Composables
+import { useBackgroundColor, useTextColor } from '@/composables/color'
+
 // Utilities
-import { computed, ref, watch } from 'vue'
+import { computed, ref, toRef, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -66,6 +69,9 @@ export const VTimePickerClock = genericComponent()({
     const isDragging = ref(false)
     const valueOnMouseDown = ref(null as number | null)
     const valueOnMouseUp = ref(null as number | null)
+
+    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
 
     const count = computed(() => props.max - props.min + 1)
     const roundCount = computed(() => props.double ? (count.value / 2) : count.value)
@@ -228,30 +234,44 @@ export const VTimePickerClock = genericComponent()({
         >
           <div class="v-time-picker-clock__inner" ref={ innerClockRef }>
             <div
-              class={{ 'v-time-picker-clock__hand': true, 'v-time-picker-clock__hand--inner': isInner(props.modelValue as number) }}
-              style={{
-                background: props.modelValue != null ? props.color ? props.color : 'accent' : '',
-                transform: `rotate(${props.rotate + degreesPerUnit.value * (displayedValue.value - props.min)}deg) scaleY(${handScale(displayedValue.value)})`,
-              }}
-            ></div>
+              class={[
+                {
+                  'v-time-picker-clock__hand': true,
+                  'v-time-picker-clock__hand--inner': isInner(props.modelValue as number),
+                },
+                textColorClasses.value,
+              ]}
+              style={[
+                {
+                  transform: `rotate(${props.rotate + degreesPerUnit.value * (displayedValue.value - props.min)}deg) scaleY(${handScale(displayedValue.value)})`,
+                },
+                textColorStyles.value,
+              ]}
+            />
+
             {
-              genChildren.value.map(value => (
-                <div
-                  class={{
-                    'v-time-picker-clock__item': true,
-                    'v-time-picker-clock__item--active': value === displayedValue.value,
-                    'v-time-picker-clock__item--disabled': props.disabled || !isAllowed(value),
-                  }}
-                  style={{
-                    ...getTransform(value),
-                    color: value === props.modelValue
-                      ? props.color
-                        ? props.color
-                        : 'accent'
-                      : undefined,
-                  }}
-                ><span>{ props.format(value) }</span></div>
-              ))
+              genChildren.value.map(value => {
+                const isActive = value === displayedValue.value
+
+                return (
+                  <div
+                    class={[
+                      {
+                        'v-time-picker-clock__item': true,
+                        'v-time-picker-clock__item--active': isActive,
+                        'v-time-picker-clock__item--disabled': props.disabled || !isAllowed(value),
+                      },
+                      isActive && backgroundColorClasses.value,
+                    ]}
+                    style={[
+                      getTransform(value),
+                      isActive && backgroundColorStyles.value,
+                    ]}
+                  >
+                    <span>{ props.format(value) }</span>
+                  </div>
+                )
+              })
             }
           </div>
         </div>
