@@ -71,6 +71,7 @@ export default {
   timePicker: {
     am: 'صباحاً',
     pm: 'مساءً',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
