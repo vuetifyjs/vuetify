@@ -3,25 +3,23 @@
 // Theme
 .v-time-picker-clock
   background: rgb(var(--v-theme-background))
+  color: rgb(var(--v-theme-on-background))
 
   .v-time-picker-clock__item--disabled
-    color: rgb(var(--v-theme-primary))
+    opacity: var(--v-disabled-opacity)
 
-    &.v-time-picker-clock__item--active
-      color: rgb(var(--v-theme-primary))
-
-  
   .v-time-picker-clock__hand
-    background-color: rgb(var(--v-theme-primary))
+    background-color: rgb(var(--v-theme-surface-variant))
 
   &:after
     color: rgb(var(--v-theme-primary))
 
   .v-time-picker-clock__item--active
-    background-color: rgb(var(--v-theme-primary))
+    background-color: rgb(var(--v-theme-surface-variant))
+    color: rgb(var(--v-theme-on-surface-variant))
 
 .v-time-picker-clock
-  background: rgb(var(--v-theme-on-surface-variant))
+  background: rgb(var(--v-theme-surface-light))
   border-radius: 50%
   position: relative
   transition: none
@@ -121,7 +119,6 @@
     width: $time-picker-indicator-size
 
   &--active
-    color: 'white'
     cursor: default
     z-index: 2
 
