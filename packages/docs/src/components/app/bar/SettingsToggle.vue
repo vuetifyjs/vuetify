@@ -2,6 +2,7 @@
   <AppBtn
     id="settings-toggle"
     :icon="app.settings ? 'mdi-cog' : 'mdi-cog-outline'"
+    class="me-n2"
     color="medium-emphasis"
     @click="onClick"
   />

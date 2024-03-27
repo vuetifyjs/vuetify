@@ -24,7 +24,7 @@
     "@vercel/analytics": "^1.2.2",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
-    "@vuetify/one": "^1.5.1",
+    "@vuetify/one": "^1.5.2",
     "algoliasearch": "^4.20.0",
     "fflate": "^0.8.1",
     "isomorphic-fetch": "^3.0.0",
