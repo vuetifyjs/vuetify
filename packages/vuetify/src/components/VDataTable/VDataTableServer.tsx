@@ -4,6 +4,7 @@ import { makeVDataTableFooterProps, VDataTableFooter } from './VDataTableFooter'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableRows } from './VDataTableRows'
 import { VTable } from '@/components/VTable'
+import { VDivider } from '@/components/VDivider'
 
 // Composables
 import { provideExpanded } from './composables/expand'
@@ -189,12 +190,16 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
               </>
             ),
             bottom: () => slots.bottom ? slots.bottom(slotProps.value) : (
-              <VDataTableFooter
-                { ...dataTableFooterProps }
-                v-slots={{
-                  prepend: slots['footer.prepend'],
-                }}
-              />
+              <>
+                <VDivider />
+
+                <VDataTableFooter
+                  { ...dataTableFooterProps }
+                  v-slots={{
+                    prepend: slots['footer.prepend'],
+                  }}
+                />
+              </>
             ),
           }}
         </VTable>
