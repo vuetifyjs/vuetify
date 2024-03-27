@@ -39,7 +39,7 @@
     </v-expansion-panel>
 
     <v-expansion-panel>
-      <v-expansion-panel-title v-slot="{ open }">
+      <v-expansion-panel-title v-slot="{ expanded }">
         <v-row no-gutters>
           <v-col class="d-flex justify-start" cols="4">
             Location
@@ -50,7 +50,7 @@
           >
             <v-fade-transition leave-absolute>
               <span
-                v-if="open"
+                v-if="expanded"
                 key="0"
               >
                 Select trip destination
@@ -109,7 +109,7 @@
     </v-expansion-panel>
 
     <v-expansion-panel>
-      <v-expansion-panel-title v-slot="{ open }">
+      <v-expansion-panel-title v-slot="{ expanded }">
         <v-row no-gutters>
           <v-col class="d-flex justify-start" cols="4">
             Start and end dates
@@ -119,7 +119,7 @@
             cols="8"
           >
             <v-fade-transition leave-absolute>
-              <span v-if="open">When do you want to travel?</span>
+              <span v-if="expanded">When do you want to travel?</span>
               <v-row
                 v-else
                 style="width: 100%"
