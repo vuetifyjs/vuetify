@@ -9,6 +9,7 @@ import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 // Composables
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
+import { makeMaskProps, useMask } from '@/composables/mask'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
@@ -44,6 +45,7 @@ export const makeVTextFieldProps = propsFactory({
 
   ...makeVInputProps(),
   ...makeVFieldProps(),
+  ...makeMaskProps(),
 }, 'VTextField')
 
 export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
@@ -68,13 +70,8 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
   },
 
   setup (props, { attrs, emit, slots }) {
-    const model = useProxiedModel(props, 'modelValue')
+    const lazyValue = ref('')
     const { isFocused, focus, blur } = useFocus(props)
-    const counterValue = computed(() => {
-      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
-        : typeof props.counterValue === 'number' ? props.counterValue
-        : (model.value ?? '').toString().length
-    })
     const max = computed(() => {
       if (attrs.maxlength) return attrs.maxlength as unknown as undefined
 
@@ -101,6 +98,49 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VField>()
     const inputRef = ref<HTMLInputElement>()
+
+    const { maskText, updateRange, unmaskText } = useMask(props, inputRef)
+
+    const model = useProxiedModel(
+      props,
+      'modelValue',
+      '',
+      val => {
+        if (props.mask && val !== lazyValue.value) {
+          lazyValue.value = val
+          return maskText(val)
+        }
+        return val
+      },
+      val => {
+        if (props.mask && val !== lazyValue.value) {
+          // In case of token is #-# and the input value is '2-23'
+          // Create a variable that holds the enforced token format; in this case, '2-2'
+          const enforcedMaskedValue = maskText(unmaskText(val))
+          // Extract the lazy value from the previously enforced formatted masked value; in this case, '22'
+          const newLazyValue = unmaskText(enforcedMaskedValue)
+
+          if (newLazyValue === lazyValue.value) {
+            // When the newLazyValue is equal to the previous lazy value
+            // the v-model remains unchanged, as a result, the render function doesn't trigger,
+            // the input tag value must be reinforced with the enforced masked value.
+            // In this case, '2-23' is enforced to '2-2'
+            inputRef.value!.value = enforcedMaskedValue
+            return lazyValue.value
+          }
+          lazyValue.value = newLazyValue
+          updateRange()
+        } else {
+          lazyValue.value = val
+        }
+        return lazyValue.value
+      },
+    )
+    const counterValue = computed(() => {
+      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
+        : typeof props.counterValue === 'number' ? props.counterValue
+        : (model.value ?? '').toString().length
+    })
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
       props.persistentPlaceholder ||
