@@ -33,7 +33,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
 
   const itemHeight = shallowRef(0)
   watchEffect(() => {
-    itemHeight.value = parseFloat(props.itemHeight || 0)
+    itemHeight.value = parseFloat(props.itemHeight || 16)
   })
 
   const first = shallowRef(0)
