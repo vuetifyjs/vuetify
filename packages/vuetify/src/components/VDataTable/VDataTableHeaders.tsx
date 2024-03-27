@@ -135,12 +135,14 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           style={{
             width: convertToUnit(column.width),
             minWidth: convertToUnit(column.minWidth),
+            maxWidth: convertToUnit(column.maxWidth),
             ...getFixedStyles(column, y),
           }}
           colspan={ column.colspan }
           rowspan={ column.rowspan }
           onClick={ column.sortable ? () => toggleSort(column) : undefined }
           fixed={ column.fixed }
+          nowrap={ column.nowrap }
           lastFixed={ column.lastFixed }
           noPadding={ noPadding }
           { ...headerProps }

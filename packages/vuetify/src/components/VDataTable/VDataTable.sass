@@ -42,6 +42,14 @@
             &.v-data-table-column--no-padding
               padding: 0 8px
 
+            &.v-data-table-column--nowrap
+              text-overflow: ellipsis
+              text-wrap: nowrap
+              overflow: hidden
+
+              & .v-data-table-header__content
+                display: contents
+
           > th
             align-items: center
 
