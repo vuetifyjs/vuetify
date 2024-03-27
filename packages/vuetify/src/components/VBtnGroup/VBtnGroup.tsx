@@ -17,6 +17,7 @@ import { toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVBtnGroupProps = propsFactory({
+  baseColor: String,
   divided: Boolean,
 
   ...makeBorderProps(),
@@ -44,6 +45,7 @@ export const VBtnGroup = genericComponent()({
     provideDefaults({
       VBtn: {
         height: 'auto',
+        baseColor: toRef(props, 'baseColor'),
         color: toRef(props, 'color'),
         density: toRef(props, 'density'),
         flat: true,
