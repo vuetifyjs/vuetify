@@ -20,6 +20,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { computed, ref, toRef, watch } from 'vue'
 import {
   animate,
+  callEvent,
   convertToUnit,
   EventProp,
   genericComponent,
@@ -313,10 +314,18 @@ export const VField = genericComponent<new <T>(
             <VExpandXTransition key="clear">
               <div
                 class="v-field__clearable"
+                tabindex="0"
                 v-show={ props.dirty }
                 onMousedown={ (e: MouseEvent) => {
                   e.preventDefault()
                   e.stopPropagation()
+                }}
+                onKeydown={ (e: KeyboardEvent) => {
+                  if (e.key !== 'Enter') return
+
+                  e.preventDefault()
+                  e.stopPropagation()
+                  callEvent(props['onClick:clear'], new MouseEvent('click'))
                 }}
               >
                 { slots.clear
