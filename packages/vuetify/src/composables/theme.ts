@@ -169,7 +169,7 @@ function genDefaults () {
         },
         variables: {
           anchor: '#BB86FC',
-          'anchor-hover': '#3700B3',
+          'anchor-hover': '#D8C1F5',
           'border-color': '#FFFFFF',
           'border-opacity': 0.12,
           'high-emphasis-opacity': 1,
