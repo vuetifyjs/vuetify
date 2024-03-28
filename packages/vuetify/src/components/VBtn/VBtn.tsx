@@ -198,9 +198,10 @@ export const VBtn = genericComponent<VBtnSlots>()({
             sizeStyles.value,
             props.style,
           ]}
+          aria-busy={ props.loading ? true : undefined }
           disabled={ isDisabled.value || undefined }
-          tabindex={ props.loading ? '-1' : undefined }
           href={ link.href.value }
+          tabindex={ props.loading ? -1 : undefined }
           v-ripple={[
             !isDisabled.value && props.ripple,
             null,
