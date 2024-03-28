@@ -26,7 +26,7 @@ import type { VueHeadClient } from '@unhead/vue'
 import type { HeadClient } from '@vueuse/head'
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 
-type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T;
+type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
 export type ThemeOptions = false | {
   cspNonce?: string
@@ -169,7 +169,7 @@ function genDefaults () {
         },
         variables: {
           anchor: '#BB86FC',
-          'anchor-hover': '#D8C1F5',
+          'anchor-hover': '#651FFF',
           'border-color': '#FFFFFF',
           'border-opacity': 0.12,
           'high-emphasis-opacity': 1,
