@@ -9,7 +9,10 @@
     density="compact"
     nav
   >
-    <template v-for="(group, i) in props.groups">
+    <template
+      v-for="(group, i) in props.groups"
+      :key="`group-${group.name}-${i}`"
+    >
       <AppSheet :class="['pa-3', i !== 0 && 'mt-4']" border>
         <div class="text-high-emphasis font-weight-bold d-flex align-center text-h6 mb-2">
           <v-icon
@@ -22,7 +25,10 @@
           {{ group.name }}
         </div>
 
-        <template v-for="(child, ci) in group.items">
+        <template
+          v-for="(child, ci) in group.items"
+          :key="`group-item-${child.name}-${i}`"
+        >
           <v-list-item
             :to="getPathname(child)"
             append-icon="mdi-chevron-right"
