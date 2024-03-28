@@ -117,7 +117,7 @@ jobs:
         id: create_release
         run: yarn conventional-github-releaser -p vuetify
         env:
-          DEBUG: *
+          DEBUG: '*'
           CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-docs:
