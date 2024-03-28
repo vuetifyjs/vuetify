@@ -1,7 +1,7 @@
 {
   "props": {
     "ariaLabel": "Label for the root element.",
-    "color": "Applies specified color to the selected page button - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
+    "color": "Applies specified color to the selected page button - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
     "currentPageAriaLabel": "Label for the currently selected page.",
     "ellipsis": "Text to show between page buttons when truncating the list.",
     "firstAriaLabel": "Label for the go to first button.",
