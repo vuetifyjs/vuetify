@@ -210,15 +210,6 @@ export const VField = genericComponent<new <T>(
       }
     }
 
-    function onKeydownClear (e: KeyboardEvent) {
-      if (e.key !== 'Enter' && e.key !== ' ') return
-
-      e.preventDefault()
-      e.stopPropagation()
-
-      props['onClick:clear']?.(new MouseEvent('click'))
-    }
-
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
       const hasPrepend = !!(slots['prepend-inner'] || props.prependInnerIcon)
@@ -330,7 +321,7 @@ export const VField = genericComponent<new <T>(
               >
                 { slots.clear
                   ? slots.clear()
-                  : <InputIcon name="clear" onKeydown={ onKeydownClear } />
+                  : <InputIcon name="clear" />
                 }
               </div>
             </VExpandXTransition>
