@@ -46,10 +46,10 @@
       > .v-badge .v-icon,
       > .v-icon
         opacity: #{$list-item-icon-active-opacity}
-    &:not(&--hover)
+
+    &:not(.v-list-item--link)
       .v-list-item__overlay
-        // specificity has to be higher to override theme !important
-        opacity: calc(#{map.get(settings.$states, 'activated')} * var(--v-theme-overlay-multiplier)) !important
+        opacity: calc(#{map.get(settings.$states, 'activated')} * var(--v-theme-overlay-multiplier))
 
   &--rounded
     @include tools.rounded($list-item-rounded-border-radius)

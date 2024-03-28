@@ -215,7 +215,6 @@ export const VListItem = genericComponent<VListItemSlots>()({
             'v-list-item',
             {
               'v-list-item--active': isActive.value,
-              'v-list-item--active--hover': isClickable.value,
               'v-list-item--disabled': props.disabled,
               'v-list-item--link': isClickable.value,
               'v-list-item--nav': props.nav,
