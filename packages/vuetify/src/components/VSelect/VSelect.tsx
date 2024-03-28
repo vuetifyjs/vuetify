@@ -97,11 +97,6 @@ export const makeVSelectProps = propsFactory({
     role: 'combobox',
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
   ...makeTransitionProps({ transition: { component: VDialogTransition as Component } }),
-  direction: {
-    type: String as PropType<'horizontal' | 'vertical'>,
-    default: 'horizontal',
-    validator: (v: any) => ['vertical', 'horizontal'].includes(v),
-  },
 }, 'VSelect')
 
 type ItemType<T> = T extends readonly (infer U)[] ? U : never
@@ -361,7 +356,7 @@ export const VSelect = genericComponent<new <
               [`v-select--${props.multiple ? 'multiple' : 'single'}`]: true,
               'v-select--selected': model.value.length,
               'v-select--selection-slot': !!slots.selection,
-              [`v-input--${props.direction.valueOf}`]: true,
+              [`v-input--${props.direction}`]: true,
             },
             props.class,
           ]}
