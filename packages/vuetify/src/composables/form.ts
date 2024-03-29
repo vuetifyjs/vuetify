@@ -14,8 +14,8 @@ export interface FormProvide {
   register: (item: {
     id: number | string
     validate: () => Promise<string[]>
-    reset: () => void
-    resetValidation: () => void
+    reset: () => Promise<void>
+    resetValidation: () => Promise<void>
   }) => void
   unregister: (id: number | string) => void
   update: (id: number | string, isValid: boolean | null, errorMessages: string[]) => void
@@ -30,8 +30,8 @@ export interface FormProvide {
 export interface FormField {
   id: number | string
   validate: () => Promise<string[]>
-  reset: () => void
-  resetValidation: () => void
+  reset: () => Promise<void>
+  resetValidation: () => Promise<void>
   isValid: boolean | null
   errorMessages: string[]
 }

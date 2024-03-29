@@ -35,7 +35,7 @@ export const MaybeTransition: FunctionalComponent<MaybeTransitionProps> = (props
         : customProps as any,
       typeof transition === 'string'
         ? {}
-        : { disabled, group },
+        : Object.fromEntries(Object.entries({ disabled, group }).filter(([_, v]) => v !== undefined)),
       rest as any,
     ),
     slots

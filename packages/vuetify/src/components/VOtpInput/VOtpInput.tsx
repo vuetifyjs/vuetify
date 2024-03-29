@@ -100,10 +100,11 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     function onInput () {
       // The maxlength attribute doesn't work for the number type input, so the text type is used.
       // The following logic simulates the behavior of a number input.
-      if (props.type === 'number' && /[^0-9]/g.test(current.value.value)) {
+      if (isValidNumber(current.value.value)) {
         current.value.value = ''
         return
       }
+
       const array = model.value.slice()
       const value = current.value.value
 
@@ -165,7 +166,11 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       e.preventDefault()
       e.stopPropagation()
 
-      model.value = (e?.clipboardData?.getData('Text') ?? '').split('')
+      const clipboardText = e?.clipboardData?.getData('Text') ?? ''
+
+      if (isValidNumber(clipboardText)) return
+
+      model.value = clipboardText.split('')
 
       inputRef.value?.[index].blur()
     }
@@ -184,6 +189,10 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       blur()
 
       focusIndex.value = -1
+    }
+
+    function isValidNumber (value: string) {
+      return props.type === 'number' && /[^0-9]/g.test(value)
     }
 
     provideDefaults({

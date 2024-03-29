@@ -57,29 +57,34 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     return isLink?.value || hasEvent(attrs, 'click') || hasEvent(props, 'click')
   })
 
-  if (typeof RouterLink === 'string') {
+  if (typeof RouterLink === 'string' || !('useLink' in RouterLink)) {
     return {
       isLink,
       isClickable,
       href: toRef(props, 'href'),
     }
   }
+  // vue-router useLink `to` prop needs to be reactive and useLink will crash if undefined
+  const linkProps = computed(() => ({ ...props, to: props.to ? props.to : {} }))
 
-  const link = props.to ? RouterLink.useLink(props as UseLinkOptions) : undefined
+  const routerLink = RouterLink.useLink(linkProps.value as UseLinkOptions)
+  // Actual link needs to be undefined when to prop is not used
+  const link = computed(() => props.to ? routerLink : undefined)
   const route = useRoute()
 
   return {
     isLink,
     isClickable,
-    route: link?.route,
-    navigate: link?.navigate,
-    isActive: link && computed(() => {
-      if (!props.exact) return link.isActive?.value
-      if (!route.value) return link.isExactActive?.value
+    route: link.value?.route,
+    navigate: link.value?.navigate,
+    isActive: computed(() => {
+      if (!link.value) return false
+      if (!props.exact) return link.value.isActive?.value ?? false
+      if (!route.value) return link.value.isExactActive?.value ?? false
 
-      return link.isExactActive?.value && deepEqual(link.route.value.query, route.value.query)
+      return link.value.isExactActive?.value && deepEqual(link.value.route.value.query, route.value.query)
     }),
-    href: computed(() => props.to ? link?.route.value.href : props.href),
+    href: computed(() => props.to ? link.value?.route.value.href : props.href),
   }
 }
 

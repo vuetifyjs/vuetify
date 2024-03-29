@@ -71,6 +71,7 @@ export default {
   timePicker: {
     am: 'пр. обяд',
     pm: 'сл. обяд',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

@@ -11,8 +11,6 @@
 
     <DocUpNext />
 
-    <PromotedPromoted />
-
     <DocContribute />
   </section>
 </template>

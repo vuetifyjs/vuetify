@@ -11,6 +11,8 @@
       item-title="name"
       label="Select Release Version"
       prepend-inner-icon="mdi-text-box-search-outline"
+      rounded="b-0"
+      variant="solo-filled"
       hide-details
       hide-no-data
       persistent-placeholder
@@ -73,7 +75,7 @@
     >
       <div
         v-if="model?.author"
-        class="d-flex align-center justify-space-between pa-4 bg-grey-lighten-5"
+        class="d-flex align-center justify-space-between pa-4 bg-surface-light border-y"
       >
         <div class="d-flex align-center text-caption">
           <i18n-t v-if="publishedOn" keypath="published" scope="global">

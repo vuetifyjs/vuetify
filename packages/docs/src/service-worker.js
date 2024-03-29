@@ -53,6 +53,8 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url, location.href)
 
+  if (!['http:', 'https:'].includes(url.protocol)) return
+
   if (event.request.method !== 'GET') return
 
   if (
@@ -102,24 +104,31 @@ function getCacheKeyForUrl (url) {
 
 async function networkFirst (request) {
   const cache = await openCache('runtime')
+  const fromNetwork = fetch(request).then(response => ensureCacheableResponse(response)).catch(() => null)
+  const race = Promise.race([
+    fromNetwork,
+    new Promise(resolve => setTimeout(() => resolve('timeout'), 3000)),
+  ])
 
-  let response
   try {
-    response = ensureCacheableResponse(await fetch(request))
+    const response = await race
+    if (response === 'timeout' || !response) {
+      const cached = await caches.match(request)
+      if (cached) return cached
+      throw new Error('Network timeout and no cache available')
+    }
+    const is400 = response?.status >= 400 && response?.status < 500
+    if (response?.status === 200) {
+      cache.put(request, response.clone())
+    } else if (!is400) {
+      await cache.delete(request)
+    }
+    return response
   } catch (e) {
     console.warn('[SW] Failed to fetch', e)
-  }
-  const is400 = response?.status >= 400 && response?.status < 500
-  if (response?.status === 200) {
-    cache.put(request, response.clone())
-  } else if (!is400) {
     const cached = await caches.match(request)
-    if (cached) return cached
-  } else {
-    await cache.delete(request)
+    return cached || Response.error()
   }
-
-  return response
 }
 
 async function getFallbackDocument () {
@@ -199,7 +208,7 @@ function createCacheKey (entry) {
 
   return {
     cacheKey: cacheKeyUrl.href,
-    url: new URL(url, location.href).href,
+    url: cacheKeyUrl.href,
   }
 }
 
