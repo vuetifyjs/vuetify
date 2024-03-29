@@ -356,7 +356,6 @@ export const VSelect = genericComponent<new <
               [`v-select--${props.multiple ? 'multiple' : 'single'}`]: true,
               'v-select--selected': model.value.length,
               'v-select--selection-slot': !!slots.selection,
-              [`v-input--${props.direction}`]: true,
             },
             props.class,
           ]}
