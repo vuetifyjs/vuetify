@@ -122,12 +122,20 @@ export const VDatePicker = genericComponent<new <
       return props.multiple && model.value.length > 1
         ? t('$vuetify.datePicker.itemsSelected', model.value.length)
         : model.value[0] && adapter.isValid(model.value[0])
-          ? adapter.format(model.value[0], 'normalDateWithWeekday')
+          ? adapter.format(
+            adapter.date(model.value[0]),
+            'normalDateWithWeekday')
           : t(props.header)
     })
     const text = computed(() => {
+      let _date = adapter.date()
+
+      _date = adapter.setYear(_date, year.value)
+      _date = adapter.setMonth(_date, month.value)
+      _date = adapter.setDate(_date, 1)
+
       return adapter.format(
-        adapter.date(new Date(year.value, month.value, 1)),
+        _date,
         'monthAndYear',
       )
     })
