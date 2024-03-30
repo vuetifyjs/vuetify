@@ -38,7 +38,7 @@ export type VStepperItemSlots = {
 
 export type ValidationRule = () => string | boolean
 
-export const makeVStepperItemProps = propsFactory({
+export const makeStepperItemProps = propsFactory({
   color: String,
   title: String,
   subtitle: String,
@@ -66,7 +66,10 @@ export const makeVStepperItemProps = propsFactory({
     type: Array as PropType<readonly ValidationRule[]>,
     default: () => ([]),
   },
+}, 'StepperItem')
 
+export const makeVStepperItemProps = propsFactory({
+  ...makeStepperItemProps(),
   ...makeGroupItemProps(),
 }, 'VStepperItem')
 

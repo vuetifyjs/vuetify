@@ -1,0 +1,1 @@
+export { VStepperVertical } from './VStepperVertical'

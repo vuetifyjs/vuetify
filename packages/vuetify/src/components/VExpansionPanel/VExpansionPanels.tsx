@@ -51,7 +51,7 @@ export const VExpansionPanels = genericComponent()({
   },
 
   setup (props, { slots }) {
-    useGroup(props, VExpansionPanelSymbol)
+    const { next, prev } = useGroup(props, VExpansionPanelSymbol)
 
     const { themeClasses } = provideTheme(props)
 
@@ -81,11 +81,15 @@ export const VExpansionPanels = genericComponent()({
           props.class,
         ]}
         style={ props.style }
-        v-slots={ slots }
-      />
+      >
+        { slots.default?.({ prev, next }) }
+      </props.tag>
     ))
 
-    return {}
+    return {
+      next,
+      prev,
+    }
   },
 })
 

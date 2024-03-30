@@ -48,7 +48,7 @@ export type VStepperSlots = {
   [key: `item.${string}`]: StepperItem
 }
 
-export const makeVStepperProps = propsFactory({
+export const makeStepperProps = propsFactory({
   altLabels: Boolean,
   bgColor: String,
   editable: Boolean,
@@ -68,7 +68,10 @@ export const makeVStepperProps = propsFactory({
   mobile: Boolean,
   nonLinear: Boolean,
   flat: Boolean,
+}, 'Stepper')
 
+export const makeVStepperProps = propsFactory({
+  ...makeStepperProps(),
   ...makeGroupProps({
     mandatory: 'force' as const,
     selectedClass: 'v-stepper-item--selected',
