@@ -32,7 +32,7 @@ export default [
     input: 'src/entry-bundler.ts',
     output: [
       {
-        file: 'dist/vuetify.esm.js',
+        file: 'dist/vuetify.mjs',
         format: 'es',
         sourcemap: true,
         banner,
@@ -189,7 +189,7 @@ export default [
         banner,
       },
       {
-        file: 'dist/vuetify-labs.esm.js',
+        file: 'dist/vuetify-labs.mjs',
         format: 'es',
         sourcemap: true,
         banner,

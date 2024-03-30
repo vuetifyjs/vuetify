@@ -62,7 +62,10 @@
       "default": "./lib/styles/main.css"
     },
     "./styles/*": "./lib/styles/*",
-    "./framework": "./lib/framework.mjs",
+    "./framework": {
+      "types": "./lib/index.d.mts",
+      "default": "./lib/framework.mjs"
+    },
     "./blueprints": "./lib/blueprints/index.mjs",
     "./blueprints/*": "./lib/blueprints/*.mjs",
     "./components": "./lib/components/index.mjs",
