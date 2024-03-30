@@ -57,7 +57,7 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     return isLink?.value || hasEvent(attrs, 'click') || hasEvent(props, 'click')
   })
 
-  if (typeof RouterLink === 'string') {
+  if (typeof RouterLink === 'string' || !('useLink' in RouterLink)) {
     return {
       isLink,
       isClickable,

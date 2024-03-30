@@ -28,11 +28,11 @@ This feature requires [v3.5.12](/getting-started/release-notes/?version=v3.5.12)
 Labs components require a manual import and installation of the component.
 
 ```js { resource="src/plugins/vuetify.js" }
-import { VEmptyState } from 'vuetify/labs/VEmptyState'
+import { VTimePicker } from 'vuetify/labs/VTimePicker'
 
 export default createVuetify({
   components: {
-    VEmptyState,
+    VTimePicker,
   },
 })
 ```

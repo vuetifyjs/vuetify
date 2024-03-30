@@ -256,6 +256,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                         icon="$plus"
                         tile
                         onClick={ onClickUp }
+                        rounded="0"
                       />
                     </div>
                   ) : (!props.reverse
@@ -269,6 +270,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                         icon="$minus"
                         tile
                         onClick={ onClickDown }
+                        rounded="0"
                       />
 
                       <VDivider vertical />

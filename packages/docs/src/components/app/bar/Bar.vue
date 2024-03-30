@@ -1,13 +1,11 @@
 <template>
-  <v-app-bar
+  <VoAppBar
     id="app-bar"
-    :image="settings.suit['app-bar']"
     border="b"
+    logo="vuetify"
     flat
   >
     <template #prepend>
-      <app-bar-logo />
-
       <AppBtn
         v-if="route.meta.layout !== 'home' && mdAndDown"
         icon="mdi-menu"
@@ -41,17 +39,12 @@
       <app-bar-language-menu v-if="smAndUp" />
 
       <app-bar-settings-toggle />
-
-      <app-vertical-divider v-if="lgAndUp" class="ms-2 me-3" />
-
-      <VoAuthBtn />
     </template>
-  </v-app-bar>
+  </VoAppBar>
 </template>
 
 <script setup>
   const app = useAppStore()
   const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
   const route = useRoute()
-  const settings = useSettingsStore()
 </script>
