@@ -139,7 +139,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                   key="decrement-btn"
                   height={ defaultHeight }
                   icon="$expand"
-                  rounded="0"
                   size="small"
                   onClick={ onClickDown }
                 />
@@ -149,7 +148,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                   defaults={{
                     VBtn: {
                       flat: true,
-                      rounded: '0',
                       height: defaultHeight,
                       size: 'small',
                       icon: '$expand',
@@ -173,7 +171,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                   height={ defaultHeight }
                   icon="$collapse"
                   onClick={ onClickUp }
-                  rounded="0"
                   size="small"
                 />
               ) : (
@@ -183,7 +180,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                     VBtn: {
                       flat: true,
                       height: defaultHeight,
-                      rounded: '0',
                       size: 'small',
                       icon: '$collapse',
                     },
@@ -256,7 +252,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                         icon="$plus"
                         tile
                         onClick={ onClickUp }
-                        rounded="0"
                       />
                     </div>
                   ) : (!props.reverse
@@ -270,7 +265,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                         icon="$minus"
                         tile
                         onClick={ onClickDown }
-                        rounded="0"
                       />
 
                       <VDivider vertical />
