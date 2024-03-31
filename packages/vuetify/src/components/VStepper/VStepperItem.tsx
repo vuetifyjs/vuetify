@@ -20,6 +20,8 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 import type { PropType } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
+export type StepperItem = string | Record<string, any>
+
 export type StepperItemSlot = {
   canEdit: boolean
   hasError: boolean

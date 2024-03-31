@@ -22,6 +22,15 @@ const allowedVariants = ['default', 'accordion', 'inset', 'popout'] as const
 
 type Variant = typeof allowedVariants[number]
 
+export type VExpansionPanelSlot = {
+  prev: () => void
+  next: () => void
+}
+
+export type VExpansionPanelSlots = {
+  default: VExpansionPanelSlot
+}
+
 export const makeVExpansionPanelsProps = propsFactory({
   color: String,
   flat: Boolean,
@@ -41,7 +50,7 @@ export const makeVExpansionPanelsProps = propsFactory({
   ...makeThemeProps(),
 }, 'VExpansionPanels')
 
-export const VExpansionPanels = genericComponent()({
+export const VExpansionPanels = genericComponent<VExpansionPanelSlots>()({
   name: 'VExpansionPanels',
 
   props: makeVExpansionPanelsProps(),

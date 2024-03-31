@@ -1,25 +1,56 @@
 // Components
+import { VStepperVerticalItem } from './VStepperVerticalItem'
 import { makeVExpansionPanelsProps, VExpansionPanels } from '@/components/VExpansionPanel/VExpansionPanels'
 import { makeStepperProps } from '@/components/VStepper/VStepper'
 
 // Utilities
-import { ref } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { computed, ref } from 'vue'
+import { genericComponent, getPropertyFromItem, propsFactory, useRender } from '@/util'
 
 // Types
+import type { VStepperSlot } from '@/components/VStepper/VStepper'
+import type { StepperItem, StepperItemSlot } from '@/components/VStepper/VStepperItem'
+
+export type VStepperVerticalSlots = {
+  actions: VStepperSlot
+  default: VStepperSlot
+  icon: StepperItemSlot
+  title: StepperItemSlot
+  subtitle: StepperItemSlot
+  item: StepperItem
+  prev: never
+  next: never
+} & {
+  [key: `header-item.${string}`]: StepperItemSlot
+  [key: `item.${string}`]: StepperItem
+}
 
 export const makeVStepperVerticalProps = propsFactory({
   ...makeStepperProps(),
-  ...makeVExpansionPanelsProps(),
+  ...makeVExpansionPanelsProps({
+    static: true,
+    variant: 'accordion' as const,
+  }),
 }, 'VStepperVertical')
 
-export const VStepperVertical = genericComponent()({
+export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
   name: 'VStepperVertical',
 
   props: makeVStepperVerticalProps(),
 
   setup (props, { slots }) {
     const vExpansionPanelsRef = ref<typeof VExpansionPanels>()
+
+    const items = computed(() => props.items.map((item, index) => {
+      const title = getPropertyFromItem(item, props.itemTitle, item)
+      const value = getPropertyFromItem(item, props.itemValue, index + 1)
+
+      return {
+        title,
+        value,
+        raw: item,
+      }
+    }))
 
     useRender(() => {
       return (
@@ -39,8 +70,27 @@ export const VStepperVertical = genericComponent()({
           style={ props.style }
         >
           {{
-            default: ({ prev, next }) => {
-              return slots.default?.({ prev, next })
+            ...slots,
+            default: ({
+              prev,
+              next,
+            }) => {
+              return (
+                <>
+                  { items.value.map(item => (
+                    <VStepperVerticalItem { ...item }>
+                      {{
+                        default: slots[`item.${item.value}`],
+                        icon: slots.icon,
+                        title: slots.title,
+                        subtitle: slots.subtitle,
+                      }}
+                    </VStepperVerticalItem>
+                  ))}
+
+                  { slots.default?.({ prev, next }) }
+                </>
+              )
             },
           }}
         </VExpansionPanels>

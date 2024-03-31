@@ -20,12 +20,10 @@ import { genericComponent, getPropertyFromItem, only, propsFactory, useRender } 
 
 // Types
 import type { InjectionKey, PropType } from 'vue'
-import type { StepperItemSlot } from './VStepperItem'
+import type { StepperItem, StepperItemSlot } from './VStepperItem'
 import type { GroupItemProvide } from '@/composables/group'
 
 export const VStepperSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-stepper')
-
-export type StepperItem = string | Record<string, any>
 
 export type VStepperSlot = {
   prev: () => void
