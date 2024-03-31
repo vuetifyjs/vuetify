@@ -3956,10 +3956,10 @@
     find-cache-dir "^3.3.2"
     upath "^2.0.1"
 
-"@vuetify/one@^1.5.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@vuetify/one/-/one-1.5.2.tgz#316cc0e4f7f4f8b306a1e1ffc3df08b642897a7c"
-  integrity sha512-H41h7IqRAO8e8/l5GiTGMsz5XJOJ4Skbni9uc3nQAQDVZNvKjtRsQNyXVHOpJz75V1MbMggwhYbsUSQJqIae5w==
+"@vuetify/one@^1.5.4":
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/@vuetify/one/-/one-1.5.4.tgz#c312eb99256c50d60c7099c2d445d949e2141887"
+  integrity sha512-gfgRqa2957pKAxqNH5oN1LgKxPh7NTNo+ZWZkjqNnpy/p19b8YVS9ox/GxvkEIT/LvMWJtQDdvy92+vmRCzpng==
 
 "@vueuse/head@^1.3.1":
   version "1.3.1"
