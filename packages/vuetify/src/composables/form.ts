@@ -15,8 +15,8 @@ export interface FormProvide {
     id: number | string
     vm: ComponentInternalInstance
     validate: () => Promise<string[]>
-    reset: () => void
-    resetValidation: () => void
+    reset: () => Promise<void>
+    resetValidation: () => Promise<void>
   }) => void
   unregister: (id: number | string) => void
   update: (id: number | string, isValid: boolean | null, errorMessages: string[]) => void
@@ -34,6 +34,7 @@ export interface FormField {
   reset: () => void
   resetValidation: () => void
   vm: Raw<ComponentInternalInstance>
+
   isValid: boolean | null
   errorMessages: string[]
 }

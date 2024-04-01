@@ -85,7 +85,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       props,
       'modelValue',
       '',
-      val => String(val).split(''),
+      val => val == null ? [] : String(val).split(''),
       val => val.join('')
     )
     const { t } = useLocale()
@@ -168,7 +168,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
       const clipboardText = e?.clipboardData?.getData('Text') ?? ''
 
-      if (!isValidNumber(clipboardText)) return
+      if (isValidNumber(clipboardText)) return
 
       model.value = clipboardText.split('')
 
@@ -192,7 +192,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     }
 
     function isValidNumber (value: string) {
-      return props.type === 'number' && !isNaN(Number(value))
+      return props.type === 'number' && /[^0-9]/g.test(value)
     }
 
     provideDefaults({

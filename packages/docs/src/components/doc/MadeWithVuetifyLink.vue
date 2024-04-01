@@ -3,6 +3,7 @@
     :aria-label="t('see-more-projects')"
     :size="size"
     :to="rpath('/resources/made-with-vuetify/')"
+    append-icon="mdi-page-next"
     color="primary"
     variant="outlined"
     @click="onClick"

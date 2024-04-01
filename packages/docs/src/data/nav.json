@@ -245,6 +245,10 @@
         "subfolder": "components"
       },
       {
+        "title": "time-pickers",
+        "subfolder": "components"
+      },
+      {
         "title": "treeview",
         "subfolder": "components"
       }

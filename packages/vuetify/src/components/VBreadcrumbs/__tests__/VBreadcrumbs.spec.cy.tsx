@@ -109,6 +109,11 @@ describe('VBreadcrumbs', () => {
     cy.then(() => {
       expect(router.currentRoute.value.path).to.equal('/about')
     })
+
+    // Return back to root to not break succeeding tests that don't have /about path.
+    cy.get('.v-breadcrumbs').then(() => {
+      router.push('/')
+    })
   })
 
   it('should apply active color', () => {

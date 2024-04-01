@@ -11,6 +11,7 @@ import { VImg } from '@/components/VImg'
 import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { useDisplay } from '@/composables/display'
 import { IconValue } from '@/composables/icons'
 import { makeSizeProps } from '@/composables/size'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -76,6 +77,7 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { dimensionStyles } = useDimension(props)
+    const { displayClasses } = useDisplay()
 
     function onClickAction (e: Event) {
       emit('click:action', e)
@@ -98,6 +100,7 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
             },
             themeClasses.value,
             backgroundColorClasses.value,
+            displayClasses.value,
             props.class,
           ]}
           style={[
@@ -119,6 +122,7 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
                   ) : props.icon ? (
                     <VIcon
                       key="icon"
+                      color={ props.color }
                       size={ size }
                       icon={ props.icon }
                     />

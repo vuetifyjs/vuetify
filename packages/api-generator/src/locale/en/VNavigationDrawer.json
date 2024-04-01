@@ -18,7 +18,8 @@
     "scrim": "Determines whether an overlay is used when a **temporary** drawer is open. Accepts true/false to enable background, and string to define color.",
     "temporary": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background.",
     "touchless": "Disable mobile touch functionality.",
-    "value": "Controls whether the component is visible or hidden."
+    "value": "Controls whether the component is visible or hidden.",
+    "location": "Controls the edge of the screen the drawer is attached to."
   },
   "slots": {
     "append": "A slot at the bottom of the drawer.",

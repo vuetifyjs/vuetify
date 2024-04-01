@@ -82,6 +82,7 @@ The following is a list of available and up-and-coming components for use with L
 | [v-number-input](/components/number-input/) | A component for numerical data | [v3.5.10](/getting-started/release-notes/?version=v3.5.10) |
 | [v-speed-dial](/components/speed-dials/) | A component for display actions | [v3.5.8](/getting-started/release-notes/?version=v3.5.8) |
 | [v-sparkline](/components/sparklines/) | A basic data display component | [v3.5.5](/getting-started/release-notes/?version=v3.5.5) |
+| [v-time-picker](/components/time-pickers/) | A time-picker component | [v3.5.12](/getting-started/release-notes/?version=v3.5.12) |
 | [v-treeview](/components/treeview/) | A treeview component | [v3.5.9](/getting-started/release-notes/?version=v3.5.9) |
 
 ::: warning
