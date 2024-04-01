@@ -119,6 +119,7 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
                   ) : props.icon ? (
                     <VIcon
                       key="icon"
+                      color={ props.color }
                       size={ size }
                       icon={ props.icon }
                     />
