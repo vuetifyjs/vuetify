@@ -5,7 +5,7 @@ import { makeVWindowProps, VWindow } from '@/components/VWindow/VWindow'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, watch } from 'vue'
+import { computed, inject } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
