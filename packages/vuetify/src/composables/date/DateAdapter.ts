@@ -35,6 +35,8 @@ export interface DateAdapter<T = unknown> {
   getWeekdays (): string[]
   getMonth (date: T): number
   setMonth (date: T, month: number): T
+  getDate (date: T): number
+  setDate (date: T, day: number): T
   getNextMonth (date: T): T
   getHours (date: T): number
   setHours (date: T, hours: number): T
