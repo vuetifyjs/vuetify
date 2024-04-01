@@ -132,19 +132,16 @@ export const VTabs = genericComponent<VTabsSlots>()({
             ]}
             role="tablist"
           >
-            { slots.header?.() ?? slots.default?.() ?? items.value.map(item => (
+            { slots.default?.() ?? items.value.map(item => (
               slots[`header-item.${item.value}`]?.() ?? slots['header-item']?.() ?? (
-                  <VTab
-                    { ...item }
-                    key={ item.text }
-                    value={ item.value }
-                  />
+                <VTab
+                  { ...item }
+                  key={ item.text }
+                  value={ item.value }
+                />
               )
-            ))
-            }
+            ))}
           </VSlideGroup>
-
-          { !hasWindow && slots.default?.() }
 
           { hasWindow && (
             <VTabsWindow
