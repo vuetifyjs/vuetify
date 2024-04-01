@@ -1,8 +1,12 @@
+// Styles
+import './VStepperVerticalItem.sass'
+
 // Components
 import { VAvatar } from '@/components/VAvatar/VAvatar'
 import { VExpansionPanel } from '@/components/VExpansionPanel'
 import { makeVExpansionPanelProps } from '@/components/VExpansionPanel/VExpansionPanel'
 import { VIcon } from '@/components/VIcon/VIcon'
+import { VStepperActions } from '@/components/VStepper/VStepperActions'
 import { makeStepperItemProps } from '@/components/VStepper/VStepperItem'
 
 // Utilities
@@ -40,6 +44,7 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
     const canEdit = computed(() => !props.disabled && props.editable)
     const hasError = computed(() => props.error || !isValid.value)
     const hasCompleted = computed(() => props.complete || (props.rules.length > 0 && isValid.value))
+    const groupItem = computed(() => vExpansionPanelRef.value?.groupItem)
     const icon = computed(() => {
       if (hasError.value) return props.errorIcon
       if (hasCompleted.value) return props.completeIcon
@@ -57,6 +62,15 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
       step: step.value,
       value: props.value,
     }))
+
+    function onClickNext () {
+      groupItem.value.group.next()
+    }
+
+    function onClickPrev () {
+      groupItem.value.group.prev()
+    }
+
     useRender(() => {
       const hasColor = (
         hasCompleted.value ||
@@ -73,14 +87,15 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
           ref={ vExpansionPanelRef }
           { ...expansionPanelProps }
           class={[
-            'v-stepper',
+            'v-stepper-vertical-item',
             {
-              'v-stepper-item--complete': hasCompleted.value,
-              'v-stepper-item--disabled': props.disabled,
-              'v-stepper-item--error': hasError.value,
+              'v-stepper-vertical-item--complete': hasCompleted.value,
+              'v-stepper-vertical-item--disabled': props.disabled,
+              'v-stepper-vertical-item--error': hasError.value,
             },
             props.class,
           ]}
+          disabled={ !props.editable }
           style={ props.style }
         >
           {{
@@ -89,7 +104,7 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
                 <VAvatar
                   key="stepper-avatar"
                   class="v-stepper-vertical-item__avatar"
-                  color={ hasColor ? props.color : 'surface-variant' }
+                  color={ hasColor ? props.color : undefined }
                   size={ 24 }
                   start
                 >
@@ -100,10 +115,28 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
                   )}
                 </VAvatar>
 
-                { slots.title?.(slotProps.value) ?? props.title }
+                <div>
+                  <div class="v-stepper-vertical-item__title">
+                    { slots.title?.(slotProps.value) ?? props.title }
+                  </div>
+
+                  <div class="v-stepper-vertical-item__subtitle">
+                    { slots.subtitle?.(slotProps.value) ?? props.subtitle }
+                  </div>
+                </div>
               </>
             ),
-            text: () => slots.default?.(slotProps.value) ?? props.text,
+            text: () => (
+              <>
+                { slots.default?.(slotProps.value) ?? props.text }
+
+                <VStepperActions
+                  class="v-stepper-vertical-actions"
+                  onClick:next={ onClickNext }
+                  onClick:prev={ onClickPrev }
+                />
+              </>
+            ),
           }}
         </VExpansionPanel>
       )

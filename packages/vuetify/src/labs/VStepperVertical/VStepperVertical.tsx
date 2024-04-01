@@ -3,8 +3,11 @@ import { VStepperVerticalItem } from './VStepperVerticalItem'
 import { makeVExpansionPanelsProps, VExpansionPanels } from '@/components/VExpansionPanel/VExpansionPanels'
 import { makeStepperProps } from '@/components/VStepper/VStepper'
 
+// Composables
+import { provideDefaults } from '@/composables/defaults'
+
 // Utilities
-import { computed, ref } from 'vue'
+import { computed, ref, toRefs } from 'vue'
 import { genericComponent, getPropertyFromItem, propsFactory, useRender } from '@/util'
 
 // Types
@@ -26,8 +29,18 @@ export type VStepperVerticalSlots = {
 }
 
 export const makeVStepperVerticalProps = propsFactory({
+  prevText: {
+    type: String,
+    default: '$vuetify.stepper.prev',
+  },
+  nextText: {
+    type: String,
+    default: '$vuetify.stepper.next',
+  },
+
   ...makeStepperProps(),
   ...makeVExpansionPanelsProps({
+    mandatory: 'force' as const,
     static: true,
     variant: 'accordion' as const,
   }),
@@ -40,6 +53,7 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
 
   setup (props, { slots }) {
     const vExpansionPanelsRef = ref<typeof VExpansionPanels>()
+    const { color, editable, prevText, nextText } = toRefs(props)
 
     const items = computed(() => props.items.map((item, index) => {
       const title = getPropertyFromItem(item, props.itemTitle, item)
@@ -51,6 +65,15 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
         raw: item,
       }
     }))
+
+    provideDefaults({
+      VStepperVerticalItem: {
+        color,
+        editable,
+        prevText,
+        nextText,
+      },
+    })
 
     useRender(() => {
       return (
