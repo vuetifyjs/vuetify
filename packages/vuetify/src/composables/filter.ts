@@ -139,7 +139,7 @@ export function useFilter <T extends InternalItem> (
     customKeyFilter?: MaybeRef<FilterKeyFunctions | undefined>
   }
 ) {
-  const vm = getCurrentInstance('useFilter');
+  const vm = getCurrentInstance('useFilter')
   const filteredItems: Ref<T[]> = ref([])
   const filteredMatches: Ref<Map<unknown, Record<string, FilterMatch>>> = ref(new Map())
   const transformedItems = computed(() => (
@@ -182,7 +182,7 @@ export function useFilter <T extends InternalItem> (
     filteredItems.value = _filteredItems
     filteredMatches.value = _filteredMatches
 
-    vm.emit("update:filteredItems", filteredItems.value)
+    vm.emit('update:filteredItems', filteredItems.value)
   })
 
   function getMatches (item: T) {
