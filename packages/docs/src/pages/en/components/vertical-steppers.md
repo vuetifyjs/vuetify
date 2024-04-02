@@ -1,7 +1,7 @@
 ---
 emphasized: true
 meta:
-  nav: Vertical Steppers
+  nav: Steppers Vertical
   title: Vertical Stepper component
   description: The vertical stepper component is a navigation element that guides users through a sequence of steps.
   keywords: vertical stepper, vuetify vertical stepper component, vue vertical stepper component

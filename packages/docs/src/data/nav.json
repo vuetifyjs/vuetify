@@ -244,15 +244,15 @@
         "subfolder": "components"
       },
       {
+        "title": "vertical-steppers",
+        "subfolder": "components"
+      },
+      {
         "title": "time-pickers",
         "subfolder": "components"
       },
       {
         "title": "treeview",
-        "subfolder": "components"
-      },
-      {
-        "title": "vertical-steppers",
         "subfolder": "components"
       }
     ]
