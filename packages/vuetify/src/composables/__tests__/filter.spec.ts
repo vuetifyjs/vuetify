@@ -4,8 +4,12 @@ import { transformItem, transformItems } from '../list-items'
 
 // Utilities
 import { describe, expect, it } from '@jest/globals'
-import { nextTick, ref } from 'vue'
+import { createApp, nextTick, ref } from 'vue'
+import { withSetup } from '../../util/withSetup'
 import { deepEqual } from '@/util'
+
+// Types
+import type { App } from 'vue'
 
 const itemProps = {
   itemTitle: 'title',
@@ -132,9 +136,8 @@ describe('filter', () => {
       ['14', 1],
       ['foo', 0],
     ])('should return an array of filtered items from value %s', (text: any, expected: number) => {
-      const { filteredItems } = useFilter({}, ref(transformItems(itemProps, items)), ref(text))
-
-      expect(filteredItems.value).toHaveLength(expected)
+      const [result] = withSetup(() => useFilter({}, ref(transformItems(itemProps, items)), ref(text)))
+      expect((result as any)?.filteredItems?.value).toHaveLength(expected)
     })
 
     it('should accept a custom filter function', async () => {
@@ -150,7 +153,10 @@ describe('filter', () => {
         { title: 'fizz' },
         { title: 'buzz' },
       ]))
-      const { filteredItems } = useFilter(props, items, query)
+
+      const [result] = withSetup(() => useFilter(props, items, query))
+
+      const filteredItems = (result as any)?.filteredItems
 
       expect(filteredItems.value.map(item => item.raw.title)).toEqual(['fizz', 'buzz'])
 
