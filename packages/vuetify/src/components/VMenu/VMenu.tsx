@@ -140,7 +140,16 @@ export const VMenu = genericComponent<OverlaySlots>()({
         parent?.closeParents()
       } else if (e.key === 'Enter' && !props.closeOnContentClick) {
         e.preventDefault()
-        overlay.value?.activatorEl?.focus()
+        const nextElement = getNextElement(
+          focusableChildren(overlay.value?.contentEl as Element, false),
+          e.shiftKey ? 'prev' : 'next',
+          (el: HTMLElement) => el.tabIndex >= 0
+        )
+
+        if (!nextElement) {
+          isActive.value = false
+          overlay.value?.activatorEl?.focus()
+        }
       }
     }
 
