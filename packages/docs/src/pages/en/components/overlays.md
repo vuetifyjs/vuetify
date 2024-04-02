@@ -139,7 +139,6 @@ A **contained** overlay is positioned absolutely and contained inside its parent
   Note: The parent element must have position: relative.
 :::
 
-
 <ExamplesExample file="v-overlay/prop-contained" />
 
 ### Misc
