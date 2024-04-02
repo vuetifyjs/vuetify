@@ -11,10 +11,11 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, only, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Prop } from 'vue'
+import { makeVTimelineItemProps } from './VTimelineItem'
 
 export type TimelineDirection = 'vertical' | 'horizontal'
 export type TimelineSide = 'start' | 'end' | undefined
@@ -41,10 +42,6 @@ export const makeVTimelineProps = propsFactory({
     type: String,
     validator: (v: any) => v == null || ['start', 'end'].includes(v),
   } as Prop<TimelineSide>,
-  lineInset: {
-    type: [String, Number],
-    default: 0,
-  },
   lineThickness: {
     type: [String, Number],
     default: 2,
@@ -55,6 +52,9 @@ export const makeVTimelineProps = propsFactory({
     validator: (v: any) => ['start', 'end', 'both'].includes(v),
   } as Prop<TimelineTruncateLine>,
 
+  ...only(makeVTimelineItemProps({
+    lineInset: 0,
+  }), ['dotColor', 'fillDot', 'hideOpposite', 'iconColor', 'lineInset', 'size']),
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeTagProps(),
@@ -77,7 +77,13 @@ export const VTimeline = genericComponent()({
       },
       VTimelineItem: {
         density: toRef(props, 'density'),
+        dotColor: toRef(props, 'lineColor'),
+        fillDot: toRef(props, 'fillDot'),
+        hideOpposite: toRef(props, 'hideOpposite'),
+        iconColor: toRef(props, 'iconColor'),
+        lineColor: toRef(props, 'lineColor'),
         lineInset: toRef(props, 'lineInset'),
+        size: toRef(props, 'size'),
       },
     })
 

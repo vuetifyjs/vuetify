@@ -95,11 +95,11 @@
   @include transition-default();
 
   &-enter-from {
-    transform: translate(0, 100%);
+    transform: translate(100%, 0);
   }
 
   &-leave-to {
-    transform: translate(0, -100%);
+    transform: translate(-100%, 0);
   }
 }
 
@@ -107,11 +107,11 @@
   @include transition-default();
 
   &-enter-from {
-    transform: translate(0, -100%);
+    transform: translate(-100%, 0);
   }
 
   &-leave-to {
-    transform: translate(0, 100%);
+    transform: translate(100%, 0);
   }
 }
 
