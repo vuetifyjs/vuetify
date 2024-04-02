@@ -4,12 +4,9 @@ import { transformItem, transformItems } from '../list-items'
 
 // Utilities
 import { describe, expect, it } from '@jest/globals'
-import { createApp, nextTick, ref } from 'vue'
+import { nextTick, ref } from 'vue'
 import { withSetup } from '../../util/withSetup'
 import { deepEqual } from '@/util'
-
-// Types
-import type { App } from 'vue'
 
 const itemProps = {
   itemTitle: 'title',
@@ -158,17 +155,17 @@ describe('filter', () => {
 
       const filteredItems = (result as any)?.filteredItems
 
-      expect(filteredItems.value.map(item => item.raw.title)).toEqual(['fizz', 'buzz'])
+      expect(filteredItems.value.map((item: any) => item.raw.title)).toEqual(['fizz', 'buzz'])
 
       query.value = 'foo'
       await nextTick()
 
-      expect(filteredItems.value.map(item => item.raw.title)).toEqual(['foo'])
+      expect(filteredItems.value.map((item: any) => item.raw.title)).toEqual(['foo'])
 
       items.value.push(transformItem(itemProps, { title: 'foobar' }))
       await nextTick()
 
-      expect(filteredItems.value.map(item => item.raw.title)).toEqual(['foo', 'foobar'])
+      expect(filteredItems.value.map((item: any) => item.raw.title)).toEqual(['foo', 'foobar'])
     })
   })
 })
