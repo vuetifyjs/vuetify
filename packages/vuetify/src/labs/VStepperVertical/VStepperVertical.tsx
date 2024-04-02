@@ -5,24 +5,25 @@ import { makeStepperProps } from '@/components/VStepper/VStepper'
 
 // Composables
 import { provideDefaults } from '@/composables/defaults'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, toRefs } from 'vue'
-import { genericComponent, getPropertyFromItem, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { VStepperSlot } from '@/components/VStepper/VStepper'
 import type { StepperItem, StepperItemSlot } from '@/components/VStepper/VStepperItem'
 
 export type VStepperVerticalSlots = {
-  actions: VStepperSlot
+  actions: StepperItemSlot
   default: VStepperSlot
   icon: StepperItemSlot
   title: StepperItemSlot
   subtitle: StepperItemSlot
   item: StepperItem
-  prev: never
-  next: never
+  prev: StepperItemSlot
+  next: StepperItemSlot
 } & {
   [key: `header-item.${string}`]: StepperItemSlot
   [key: `item.${string}`]: StepperItem
@@ -51,10 +52,15 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
 
   props: makeVStepperVerticalProps(),
 
+  emits: {
+    'update:modelValue': (val: any) => true,
+  },
+
   setup (props, { slots }) {
     const vExpansionPanelsRef = ref<typeof VExpansionPanels>()
     const { color, editable, prevText, nextText } = toRefs(props)
 
+    const model = useProxiedModel(props, 'modelValue')
     const items = computed(() => props.items.map((item, index) => {
       const title = getPropertyFromItem(item, props.itemTitle, item)
       const value = getPropertyFromItem(item, props.itemValue, index + 1)
@@ -81,6 +87,7 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
     useRender(() => {
       return (
         <VExpansionPanels
+          v-model={ model.value }
           ref={ vExpansionPanelsRef }
           { ...props }
           class={[
@@ -110,6 +117,9 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
                         icon: slots.icon,
                         title: slots.title,
                         subtitle: slots.subtitle,
+                        actions: slots.actions,
+                        prev: slots.prev,
+                        next: slots.next,
                       }}
                     </VStepperVerticalItem>
                   ))}

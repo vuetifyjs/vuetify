@@ -22,6 +22,9 @@ export type VStepperVerticalItemSlots = {
   subtitle: StepperItemSlot
   title: StepperItemSlot
   text: StepperItemSlot
+  prev: StepperItemSlot
+  next: StepperItemSlot
+  actions: StepperItemSlot
 }
 
 export const makeVStepperVerticalItemProps = propsFactory({
@@ -46,7 +49,7 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
     const hasCompleted = computed(() => props.complete || (props.rules.length > 0 && isValid.value))
     const groupItem = computed(() => vExpansionPanelRef.value?.groupItem)
     const selected = computed(() => groupItem.value?.group.selected.value)
-    const _items = computed(() => groupItem.value?.group.items.value)
+    const _items = computed(() => groupItem.value?.group.items.value ?? [])
     const activeIndex = computed(() => {
       return _items.value.findIndex((item: any) => selected.value.includes(item.id))
     })
@@ -61,7 +64,7 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
     const icon = computed(() => {
       if (hasError.value) return props.errorIcon
       if (hasCompleted.value) return props.completeIcon
-      if (props.editable) return props.editIcon
+      if (props.editable && !props.icon) return props.editIcon
 
       return props.icon
     })
@@ -87,7 +90,6 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
     useRender(() => {
       const hasColor = (
         hasCompleted.value ||
-        canEdit.value ||
         groupItem.value?.isSelected.value
       ) && (
         !hasError.value &&
@@ -151,6 +153,11 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
                   disabled={ disabled.value }
                   onClick:next={ onClickNext }
                   onClick:prev={ onClickPrev }
+                  v-slots={{
+                    prev: slots.prev,
+                    next: slots.next,
+                    default: slots.actions,
+                  }}
                 />
               </>
             ),
