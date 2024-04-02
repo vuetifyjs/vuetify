@@ -45,6 +45,19 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
     const hasError = computed(() => props.error || !isValid.value)
     const hasCompleted = computed(() => props.complete || (props.rules.length > 0 && isValid.value))
     const groupItem = computed(() => vExpansionPanelRef.value?.groupItem)
+    const selected = computed(() => groupItem.value?.group.selected.value)
+    const _items = computed(() => groupItem.value?.group.items.value)
+    const activeIndex = computed(() => {
+      return _items.value.findIndex((item: any) => selected.value.includes(item.id))
+    })
+
+    const disabled = computed(() => {
+      if (props.disabled) return props.disabled
+      if (activeIndex.value === 0) return 'prev'
+      if (activeIndex.value === _items.value.length - 1) return 'next'
+
+      return false
+    })
     const icon = computed(() => {
       if (hasError.value) return props.errorIcon
       if (hasCompleted.value) return props.completeIcon
@@ -74,7 +87,8 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
     useRender(() => {
       const hasColor = (
         hasCompleted.value ||
-        canEdit.value
+        canEdit.value ||
+        groupItem.value?.isSelected.value
       ) && (
         !hasError.value &&
         !props.disabled
@@ -84,6 +98,7 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
 
       return (
         <VExpansionPanel
+          _as="VStepperVerticalItem"
           ref={ vExpansionPanelRef }
           { ...expansionPanelProps }
           class={[
@@ -95,8 +110,9 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
             },
             props.class,
           ]}
-          disabled={ !props.editable }
+          readonly={ !props.editable }
           style={ props.style }
+          color=""
         >
           {{
             title: () => (
@@ -132,6 +148,7 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
 
                 <VStepperActions
                   class="v-stepper-vertical-actions"
+                  disabled={ disabled.value }
                   onClick:next={ onClickNext }
                   onClick:prev={ onClickPrev }
                 />

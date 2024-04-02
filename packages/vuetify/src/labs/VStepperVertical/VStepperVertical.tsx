@@ -73,6 +73,9 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
         prevText,
         nextText,
       },
+      VStepperActions: {
+        color,
+      },
     })
 
     useRender(() => {
