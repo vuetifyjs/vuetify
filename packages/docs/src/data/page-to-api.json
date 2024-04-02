@@ -132,7 +132,7 @@
     "VStepperWindow",
     "VStepperWindowItem"
   ],
-  "components/switches": ["VSwitch"],
+  "components/switches": ["VSwitch, VSwitchBtn"],
   "components/system-bars": ["VSystemBar"],
   "components/tables": ["VTable"],
   "components/tabs": ["VTabs", "VTab"],

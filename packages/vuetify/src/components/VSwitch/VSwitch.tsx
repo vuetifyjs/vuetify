@@ -25,6 +25,7 @@ import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSel
 import type { IconValue } from '@/composables/icons'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
+import { VSwitchBtn } from './VSwitchBtn'
 
 export type VSwitchSlot = {
   model: Ref<boolean>
@@ -89,30 +90,15 @@ export const VSwitch = genericComponent<new <T>(
     const uid = getUid()
     const id = computed(() => props.id || `switch-${uid}`)
 
-    function onChange () {
-      if (indeterminate.value) {
-        indeterminate.value = false
-      }
-    }
-    function onTrackClick (e: Event) {
-      e.stopPropagation()
-      e.preventDefault()
-      control.value?.input?.click()
-    }
-
     useRender(() => {
       const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
       const inputProps = VInput.filterProps(props)
-      const controlProps = VSelectionControl.filterProps(props)
+      const switchProps = VSwitchBtn.filterProps(props)
 
       return (
         <VInput
           class={[
             'v-switch',
-            { 'v-switch--flat': props.flat },
-            { 'v-switch--inset': props.inset },
-            { 'v-switch--indeterminate': indeterminate.value },
-            loaderClasses.value,
             props.class,
           ]}
           { ...rootAttrs }
@@ -131,110 +117,20 @@ export const VSwitch = genericComponent<new <T>(
               isReadonly,
               isValid,
             }) => {
-              const slotProps = {
-                model,
-                isValid,
-              }
-
               return (
-                <VSelectionControl
-                  ref={ control }
-                  { ...controlProps }
-                  v-model={ model.value }
-                  id={ id.value }
-                  aria-describedby={ messagesId.value }
-                  type="checkbox"
-                  onUpdate:modelValue={ onChange }
-                  aria-checked={ indeterminate.value ? 'mixed' : undefined }
-                  disabled={ isDisabled.value }
-                  readonly={ isReadonly.value }
-                  onFocus={ focus }
-                  onBlur={ blur }
-                  { ...controlAttrs }
-                >
-                  {{
-                    ...slots,
-                    default: ({ backgroundColorClasses, backgroundColorStyles }) => (
-                      <div
-                        class={[
-                          'v-switch__track',
-                          ...backgroundColorClasses.value,
-                        ]}
-                        style={ backgroundColorStyles.value }
-                        onClick={ onTrackClick }
-                      >
-                        { slots['track-true'] && (
-                          <div key="prepend" class="v-switch__track-true">
-                            { slots['track-true'](slotProps) }
-                          </div>
-                        )}
-
-                        { slots['track-false'] && (
-                          <div key="append" class="v-switch__track-false">
-                            { slots['track-false'](slotProps) }
-                          </div>
-                        )}
-                      </div>
-                    ),
-                    input: ({ inputNode, icon, backgroundColorClasses, backgroundColorStyles }) => (
-                      <>
-                        { inputNode }
-                        <div
-                          class={[
-                            'v-switch__thumb',
-                            { 'v-switch__thumb--filled': icon || props.loading },
-                            props.inset ? undefined : backgroundColorClasses.value,
-                          ]}
-                          style={ props.inset ? undefined : backgroundColorStyles.value }
-                        >
-                          { slots.thumb ? (
-                            <VDefaultsProvider
-                              defaults={{
-                                VIcon: {
-                                  icon,
-                                  size: 'x-small',
-                                },
-                              }}
-                            >
-                              { slots.thumb({ ...slotProps, icon }) }
-                            </VDefaultsProvider>
-                          ) : (
-                            <VScaleTransition>
-                              { !props.loading ? (
-                                (icon && (
-                                  <VIcon
-                                    key={ String(icon) }
-                                    icon={ icon }
-                                    size="x-small"
-                                  />
-                                ))) : (
-                                <LoaderSlot
-                                  name="v-switch"
-                                  active
-                                  color={ isValid.value === false ? undefined : loaderColor.value }
-                                >
-                                  { slotProps => (
-                                    slots.loader
-                                      ? slots.loader(slotProps)
-                                      : (
-                                        <VProgressCircular
-                                          active={ slotProps.isActive }
-                                          color={ slotProps.color }
-                                          indeterminate
-                                          size="16"
-                                          width="2"
-                                        />
-                                      )
-                                  )}
-                                </LoaderSlot>
-                              )}
-                            </VScaleTransition>
-                          )}
-                        </div>
-                      </>
-                    ),
-                  }}
-                </VSelectionControl>
+                <VSwitchBtn
+                { ...switchProps }
+                id={ id.value }
+                aria-describedby={ messagesId.value }
+                disabled={ isDisabled.value }
+                readonly={ isReadonly.value }
+                { ...controlAttrs }
+                error={ isValid.value === false }
+                v-model={ model.value }
+                onFocus={ focus }
+                onBlur={ blur }
+                v-slots={ slots }
+                />
               )
             },
           }}
