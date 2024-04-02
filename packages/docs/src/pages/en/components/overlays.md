@@ -133,7 +133,7 @@ No scroll strategy is used.
 
 #### Contained
 
-A **contained** overlay is positioned absolutely and contained inside its parent element.
+A **contained** overlay is positioned absolutely and contained inside its parent element. (Note: The parent element must have position: relative.)",
 
 <ExamplesExample file="v-overlay/prop-contained" />
 
