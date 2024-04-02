@@ -250,6 +250,10 @@
       {
         "title": "treeview",
         "subfolder": "components"
+      },
+      {
+        "title": "vertical-steppers",
+        "subfolder": "components"
       }
     ]
   },
