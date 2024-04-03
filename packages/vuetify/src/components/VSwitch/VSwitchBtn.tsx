@@ -2,16 +2,16 @@
 import './VSwitch.sass'
 
 // Components
+import { VSwitchTrack } from './VSwitchTrack'
 import { VScaleTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
-import { makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { makeVInputProps } from '@/components/VInput/VInput'
 import { VProgressCircular } from '@/components/VProgressCircular'
 import {
   makeVSelectionControlProps,
   VSelectionControl,
 } from '@/components/VSelectionControl/VSelectionControl'
-import { makeVSwitchTrackProps, VSwitchTrack } from './VSwitchTrack'
 
 // Composables
 import { useFocus } from '@/composables/focus'
@@ -24,8 +24,8 @@ import {
   filterInputAttrs,
   genericComponent,
   getUid,
-  propsFactory,
   omit,
+  propsFactory,
   useRender,
 } from '@/util'
 
@@ -43,12 +43,12 @@ export type VSwitchSlot = {
 }
 
 export type VSwitchSlots = VInputSlots &
-  VSelectionControlSlots & {
-    loader: LoaderSlotProps
-    thumb: { icon: IconValue | undefined } & VSwitchSlot
-    'track-false': VSwitchSlot
-    'track-true': VSwitchSlot
-  }
+VSelectionControlSlots & {
+  loader: LoaderSlotProps
+  thumb: { icon: IconValue | undefined } & VSwitchSlot
+  'track-false': VSwitchSlot
+  'track-true': VSwitchSlot
+}
 
 export const makeVSwitchBtnProps = propsFactory(
   {
@@ -119,8 +119,6 @@ export const VSwitchBtn = genericComponent<
       if (indeterminate.value) {
         indeterminate.value = false
       }
-
-      console.log(model.value)
     }
 
     useRender(() => {

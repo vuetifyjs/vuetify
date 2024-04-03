@@ -5,11 +5,10 @@ import './VSwitch.sass'
 import { makeVSelectionControlProps } from '@/components/VSelectionControl/VSelectionControl'
 
 // Composables
-import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types

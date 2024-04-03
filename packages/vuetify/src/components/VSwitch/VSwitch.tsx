@@ -2,16 +2,12 @@
 import './VSwitch.sass'
 
 // Components
-import { VScaleTransition } from '@/components/transitions'
-import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
-import { VIcon } from '@/components/VIcon'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { VProgressCircular } from '@/components/VProgressCircular'
-import { makeVSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
+import { makeVSelectionControlProps } from '@/components/VSelectionControl/VSelectionControl'
 
 // Composables
 import { useFocus } from '@/composables/focus'
-import { LoaderSlot, useLoader } from '@/composables/loader'
+import { useLoader } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -20,12 +16,12 @@ import { filterInputAttrs, genericComponent, getUid, propsFactory, useRender } f
 
 // Types
 import type { ComputedRef, Ref } from 'vue'
+import { VSwitchBtn } from './VSwitchBtn'
 import type { VInputSlots } from '@/components/VInput/VInput'
-import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
+import type { VSelectionControl, VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
 import type { IconValue } from '@/composables/icons'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
-import { VSwitchBtn } from './VSwitchBtn'
 
 export type VSwitchSlot = {
   model: Ref<boolean>
@@ -75,17 +71,8 @@ export const VSwitch = genericComponent<new <T>(
   },
 
   setup (props, { attrs, slots }) {
-    const indeterminate = useProxiedModel(props, 'indeterminate')
     const model = useProxiedModel(props, 'modelValue')
-    const { loaderClasses } = useLoader(props)
     const { isFocused, focus, blur } = useFocus(props)
-    const control = ref<VSelectionControl>()
-
-    const loaderColor = computed(() => {
-      return typeof props.loading === 'string' && props.loading !== ''
-        ? props.loading
-        : props.color
-    })
 
     const uid = getUid()
     const id = computed(() => props.id || `switch-${uid}`)
