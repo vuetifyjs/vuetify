@@ -73,7 +73,16 @@ export const VSwitchTrack = genericComponent<
     function onTrackClick (e: Event) {
       e.stopPropagation()
       e.preventDefault()
-      model.value = !model.value
+
+      let target
+
+      if (slots['track-true'] && slots['track-false']) {
+        target = (e as any).target.parentElement.parentElement
+      } else {
+        target = (e as any).target.parentElement
+      }
+
+      (target.querySelector('input') as HTMLInputElement).click()
     }
 
     useRender(() => {
