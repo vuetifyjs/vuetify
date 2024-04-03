@@ -3,10 +3,6 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-.v-switch-btn
-  .v-label
-    padding-inline-start: $switch-label-margin-inline-start
-
 .v-switch__loader
   display: flex
 
@@ -46,7 +42,7 @@
   cursor: pointer
   transition: $switch-track-transition
 
-  .v-switch--inset &
+  .v-switch-btn--inset &
     border-radius: $switch-inset-track-border-radius
     font-size: .75rem
     height: $switch-inset-track-height
@@ -67,10 +63,10 @@
   position: relative
   overflow: hidden
 
-  .v-switch-btn:not(.v-switch--inset) &
+  .v-switch-btn:not(.v-switch-btn--inset) &
     @include tools.elevation($switch-thumb-elevation)
 
-  .v-switch-btn.v-switch-btn--flat:not(.v-switch--inset) &
+  .v-switch-btn.v-switch-btn--flat:not(.v-switch-btn--inset) &
     background: $switch-thumb-flat-background
     color: $switch-thumb-flat-color
 
@@ -84,12 +80,11 @@
     &--filled
       transform: none
 
-  .v-switch-btn--inset .v-selection-control--dirty &
-    transform: none
-    transition: .15s .05s transform settings.$decelerated-easing
-
 .v-switch-btn
   $switch-thumb-transform: $switch-track-width * .5 - $switch-thumb-width * .5 + $switch-thumb-offset
+
+  .v-label
+    padding-inline-start: $switch-label-margin-inline-start
 
   &.v-input
     flex: $switch-flex
@@ -110,6 +105,11 @@
     .v-selection-control__input
       transform: translateX($switch-thumb-transform)
 
+    &.v-switch-btn--inset
+      .v-switch__thumb
+        transform: none
+        transition: .15s .05s transform settings.$decelerated-easing
+
   &.v-switch--indeterminate
     .v-selection-control__input
       transform: scale(.8)
@@ -117,9 +117,10 @@
       transform: scale(.75)
       box-shadow: none
 
-  &.v-switch--inset
+  &.v-switch-btn--inset
     .v-selection-control__wrapper
       width: auto
+
 
   @at-root
     @include tools.density('v-input', $switch-control-density) using ($modifier)
