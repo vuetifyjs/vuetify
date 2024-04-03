@@ -7,18 +7,17 @@ import { makeVSelectionControlProps } from '@/components/VSelectionControl/VSele
 
 // Composables
 import { useFocus } from '@/composables/focus'
-import { useLoader } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { filterInputAttrs, genericComponent, getUid, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, Ref } from 'vue'
 import { VSwitchBtn } from './VSwitchBtn'
 import type { VInputSlots } from '@/components/VInput/VInput'
-import type { VSelectionControl, VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
+import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
 import type { IconValue } from '@/composables/icons'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
