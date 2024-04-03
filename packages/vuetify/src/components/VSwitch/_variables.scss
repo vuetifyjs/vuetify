@@ -27,6 +27,7 @@ $switch-thumb-width: 20px !default;
 $switch-thumb-offset: 2px !default;
 $switch-thumb-radius: 50% !default;
 $switch-thumb-transition: .15s .05s transform settings.$decelerated-easing, .2s color settings.$standard-easing, .2s background-color settings.$standard-easing !default;
+$switch-thumb-vertical-transform: rotate(-90deg) !default;
 
 $switch-track-background: rgb(var(--v-theme-surface-variant)) !default;
 $switch-track-radius: 9999px !default;

@@ -33,11 +33,11 @@ The following is a list of all planned components for the year 2024.
 | [v3.7 (Odyssey)](https://github.com/vuetifyjs/vuetify/milestone/73) | | { .bg-surface-light } |
 | [v-treeview](/components/treeview/) | *️⃣ | July 2024 |
 | [v-number-input](/components/number-inputs/) | *️⃣  | July 2024 |
-| v-stepper-vertical | March 2024 | July 2024 |
-| v-time-picker | March 2024 | July 2024 |
+| v-time-picker | *️⃣ | July 2024 |
 | v-date-input | April 2024 | July 2024 |
 | v-file-upload | April 2024 | July 2024 |
 | v-time-input | April 2024 | July 2024 |
+| v-stepper-vertical | ~~March~~ May 2024 | July 2024 |
 | [v3.8 (Andromeda)](https://github.com/vuetifyjs/vuetify/milestone/74) | | { .bg-surface-light } |
 | v-calendar | *️⃣ | Q4 |
 | v-date-time-picker | May 2024 | Q4 |
