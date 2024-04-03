@@ -232,6 +232,12 @@ Form components are used to collect user input in a variety of ways.
 
 </ComponentsListItem>
 
+<ComponentsListItem name="Number input component" src="number-inputs" labs>
+
+  The number input component is used for collecting numerical data from the user
+
+</ComponentsListItem>
+
 <ComponentsListItem name="OTP Input component" src="otp-input" >
 
   The OTP input component is used for MFA authentication via input field

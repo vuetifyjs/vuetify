@@ -60,6 +60,7 @@
       {
         "subheader": "utility-classes"
       },
+      "borders",
       "border-radius",
       "content",
       "cursor",
@@ -233,11 +234,19 @@
         "subfolder": "components"
       },
       {
+        "title": "number-inputs",
+        "subfolder": "components"
+      },
+      {
         "title": "sparklines",
         "subfolder": "components"
       },
       {
         "title": "speed-dials",
+        "subfolder": "components"
+      },
+      {
+        "title": "time-pickers",
         "subfolder": "components"
       },
       {

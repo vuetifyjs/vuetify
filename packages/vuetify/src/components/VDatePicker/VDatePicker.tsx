@@ -119,17 +119,22 @@ export const VDatePicker = genericComponent<new <
 
     const isReversing = shallowRef(false)
     const header = computed(() => {
-      return props.multiple && model.value.length > 1
-        ? t('$vuetify.datePicker.itemsSelected', model.value.length)
-        : model.value[0] && adapter.isValid(model.value[0])
-          ? adapter.format(model.value[0], 'normalDateWithWeekday')
-          : t(props.header)
+      if (props.multiple && model.value.length > 1) {
+        return t('$vuetify.datePicker.itemsSelected', model.value.length)
+      }
+
+      return (model.value[0] && adapter.isValid(model.value[0]))
+        ? adapter.format(adapter.date(model.value[0]), 'normalDateWithWeekday')
+        : t(props.header)
     })
     const text = computed(() => {
-      return adapter.format(
-        adapter.date(new Date(year.value, month.value, 1)),
-        'monthAndYear',
-      )
+      let date = adapter.date()
+
+      date = adapter.setYear(date, year.value)
+      date = adapter.setMonth(date, month.value)
+      date = adapter.setDate(date, 1)
+
+      return adapter.format(date, 'monthAndYear')
     })
     // const headerIcon = computed(() => props.inputMode === 'calendar' ? props.keyboardIcon : props.calendarIcon)
     const headerTransition = computed(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)

@@ -2,16 +2,15 @@
   <v-footer
     id="footer"
     class="d-block py-6"
-    color="surface-bright"
+    color="surface-light"
   >
     <v-container class="text-center">
       <v-row>
         <v-col cols="12">
           <v-img
-            :src="`https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-${theme.name.value}-slim.svg`"
+            :src="`https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-${theme.current.value.dark ? 'dark' : 'light'}-slim.svg`"
             class="mx-auto"
             height="64"
-            width="64"
             contain
           />
         </v-col>

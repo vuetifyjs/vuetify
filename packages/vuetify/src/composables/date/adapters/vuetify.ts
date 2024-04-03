@@ -375,6 +375,10 @@ function getMonth (date: Date) {
   return date.getMonth()
 }
 
+function getDate (date: Date) {
+  return date.getDate()
+}
+
 function getNextMonth (date: Date) {
   return new Date(date.getFullYear(), date.getMonth() + 1, 1)
 }
@@ -481,6 +485,12 @@ function setMinutes (date: Date, count: number) {
 function setMonth (date: Date, count: number) {
   const d = new Date(date)
   d.setMonth(count)
+  return d
+}
+
+function setDate (date: Date, day: number) {
+  const d = new Date(date)
+  d.setDate(day)
   return d
 }
 
@@ -615,6 +625,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return setMonth(date, count)
   }
 
+  setDate (date: Date, day: number): Date {
+    return setDate(date, day)
+  }
+
   setYear (date: Date, year: number) {
     return setYear(date, year)
   }
@@ -633,6 +647,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   getMonth (date: Date) {
     return getMonth(date)
+  }
+
+  getDate (date: Date) {
+    return getDate(date)
   }
 
   getNextMonth (date: Date) {

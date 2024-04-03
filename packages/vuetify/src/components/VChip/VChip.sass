@@ -14,6 +14,9 @@
   white-space: $chip-white-space
   vertical-align: middle
 
+  .v-icon
+    --v-icon-size-multiplier: #{$chip-icon-size-multiplier}
+
   @at-root
     @include chip-sizes()
     @include chip-density('height', $chip-density)
