@@ -284,7 +284,6 @@ export const VBtn = genericComponent<VBtnSlots>()({
                 <VProgressCircular
                   color={ typeof props.loading === 'boolean' ? undefined : props.loading }
                   indeterminate
-                  size="23"
                   width="2"
                 />
               )}
