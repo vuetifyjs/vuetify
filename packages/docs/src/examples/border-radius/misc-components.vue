@@ -2,7 +2,7 @@
   <v-container class="text-center">
     <v-btn
       color="primary"
-      rounded="0"
+      rounded="pill"
       text="Update Account"
       flat
     ></v-btn>

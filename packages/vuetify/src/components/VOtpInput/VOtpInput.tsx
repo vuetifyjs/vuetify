@@ -85,7 +85,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       props,
       'modelValue',
       '',
-      val => String(val).split(''),
+      val => val == null ? [] : String(val).split(''),
       val => val.join('')
     )
     const { t } = useLocale()
