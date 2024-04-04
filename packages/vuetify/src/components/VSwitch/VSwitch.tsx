@@ -2,8 +2,8 @@
 import './VSwitch.sass'
 
 // Components
+import { makeVSwitchBtnProps, VSwitchBtn } from './VSwitchBtn'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { makeVSelectionControlProps } from '@/components/VSelectionControl/VSelectionControl'
 
 // Composables
 import { useFocus } from '@/composables/focus'
@@ -15,7 +15,6 @@ import { filterInputAttrs, genericComponent, getUid, propsFactory, useRender } f
 
 // Types
 import type { ComputedRef, Ref } from 'vue'
-import { VSwitchBtn } from './VSwitchBtn'
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
 import type { IconValue } from '@/composables/icons'
@@ -38,16 +37,8 @@ export type VSwitchSlots =
   }
 
 export const makeVSwitchProps = propsFactory({
-  indeterminate: Boolean,
-  inset: Boolean,
-  flat: Boolean,
-  loading: {
-    type: [Boolean, String],
-    default: false,
-  },
-
   ...makeVInputProps(),
-  ...makeVSelectionControlProps(),
+  ...makeVSwitchBtnProps(),
 }, 'VSwitch')
 
 export const VSwitch = genericComponent<new <T>(
@@ -102,9 +93,8 @@ export const VSwitch = genericComponent<new <T>(
               isDisabled,
               isReadonly,
               isValid,
-            }) => {
-              return (
-                <VSwitchBtn
+            }) => (
+              <VSwitchBtn
                 { ...switchProps }
                 id={ id.value }
                 aria-describedby={ messagesId.value }
@@ -116,9 +106,8 @@ export const VSwitch = genericComponent<new <T>(
                 onFocus={ focus }
                 onBlur={ blur }
                 v-slots={ slots }
-                />
-              )
-            },
+              />
+            ),
           }}
         </VInput>
       )

@@ -14,7 +14,7 @@ import {
 } from '@/components/VSelectionControl/VSelectionControl'
 
 // Composables
-import { useFocus } from '@/composables/focus'
+import { makeFocusProps, useFocus } from '@/composables/focus'
 import { LoaderSlot, useLoader } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -64,7 +64,7 @@ export const makeVSwitchBtnProps = propsFactory(
       default: false,
     },
 
-    ...makeVInputProps(),
+    ...makeFocusProps(),
     ...makeVSelectionControlProps(),
   },
   'VSwitchBtn'
@@ -80,8 +80,6 @@ export const VSwitchBtn = genericComponent<
   ) => GenericProps<typeof props, typeof slots>
 >()({
   name: 'VSwitchBtn',
-
-  inheritAttrs: false,
 
   props: makeVSwitchBtnProps(),
 
