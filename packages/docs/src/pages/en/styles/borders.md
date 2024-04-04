@@ -123,7 +123,7 @@ Setting the **border** property to true applies a component specific border clas
 
 <ExamplesExample file="border/card" />
 
-### SASS variables
+## SASS variables
 
 You can also use the following SASS variables to customize the border color and width:
 
