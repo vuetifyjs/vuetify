@@ -131,6 +131,7 @@ export const VTabs = genericComponent<VTabsSlots>()({
               props.style,
             ]}
             role="tablist"
+            symbol={ VTabsSymbol }
           >
             { slots.default?.() ?? items.value.map(item => (
               slots[`header-item.${item.value}`]?.() ?? slots['header-item']?.() ?? (
