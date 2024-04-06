@@ -158,6 +158,7 @@
   "directives/ripple": ["v-ripple"],
   "directives/scroll": ["v-scroll"],
   "directives/touch": ["v-touch"],
+  "directives/tooltip": ["v-tooltip"],
   "features/dates": ["useDate"],
   "features/display-and-platform": ["useDisplay"],
   "features/scrolling": ["useGoTo"],
