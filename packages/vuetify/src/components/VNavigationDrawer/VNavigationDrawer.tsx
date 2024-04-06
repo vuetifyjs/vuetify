@@ -56,7 +56,6 @@ export const makeVNavigationDrawerProps = propsFactory({
     default: null,
   },
   permanent: Boolean,
-  persistent: Boolean,
   rail: {
     type: Boolean as PropType<boolean | null>,
     default: null,
@@ -71,6 +70,7 @@ export const makeVNavigationDrawerProps = propsFactory({
   },
   image: String,
   temporary: Boolean,
+  persistent: Boolean,
   touchless: Boolean,
   width: {
     type: [Number, String],
@@ -231,6 +231,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
                 'v-navigation-drawer--is-hovering': isHovering.value,
                 'v-navigation-drawer--rail': props.rail,
                 'v-navigation-drawer--temporary': isTemporary.value,
+                'v-navigation-drawer--persistent': isPersistent.value,
                 'v-navigation-drawer--active': isActive.value,
                 'v-navigation-drawer--sticky': isSticky.value,
               },
@@ -303,7 +304,10 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               <div
                 class={['v-navigation-drawer__scrim', scrimColor.backgroundColorClasses.value]}
                 style={[scrimStyles.value, scrimColor.backgroundColorStyles.value]}
-                onClick={ () => isActive.value = isPersistent.value }
+                onClick={ () => {
+                  if (isPersistent.value) return
+                  isActive.value = false
+                }}
                 { ...scopeId }
               />
             )}
