@@ -33,6 +33,7 @@ export const useDirectiveComponent = <
 
   return {
     mounted (el: HTMLElement, binding: DirectiveBinding, vnode: VNode) {
+      const _props = typeof props === 'function' ? props(binding.arg, binding.modifiers) : props
       const text = binding.value?.text ?? binding.value
       const value = Object(binding.value) === binding.value ? binding.value : undefined
 
@@ -45,7 +46,7 @@ export const useDirectiveComponent = <
         ? findComponentParent(vnode, binding.instance!.$)?.provides
         : vnode.ctx?.provides) ?? binding.instance!.$.provides
 
-      const node = h(concreteComponent, mergeProps(props, value), children)
+      const node = h(concreteComponent, mergeProps(_props, value), children)
       node.appContext = Object.assign(
         Object.create(null),
         (binding.instance as ComponentPublicInstance).$.appContext,
