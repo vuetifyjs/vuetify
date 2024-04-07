@@ -17,28 +17,28 @@
 
     <template #append>
       <template v-if="mdAndUp">
-        <app-bar-learn-menu />
+        <AppBarLearnMenu />
 
-        <app-bar-support-menu />
+        <AppBarSupportMenu />
 
-        <app-bar-ecosystem-menu />
+        <AppBarEcosystemMenu />
 
-        <app-bar-team-link v-if="lgAndUp" />
+        <AppBarTeamLink v-if="lgAndUp" />
 
-        <app-bar-playground-link v-if="lgAndUp" />
+        <AppBarPlaygroundLink v-if="lgAndUp" />
 
-        <app-bar-enterprise-link />
+        <AppBarEnterpriseLink />
       </template>
 
-      <app-vertical-divider v-if="smAndUp" class="ms-3 me-2" />
+      <AppVerticalDivider v-if="smAndUp" class="ms-3 me-2" />
 
-      <app-bar-store-link v-if="smAndUp" />
+      <AppBarStoreLink v-if="smAndUp" />
 
-      <app-bar-jobs-link v-if="smAndUp" />
+      <AppBarJobsLink v-if="smAndUp" />
 
-      <app-bar-language-menu v-if="smAndUp" />
+      <AppBarLanguageMenu v-if="smAndUp" />
 
-      <app-bar-settings-toggle />
+      <AppBarSettingsToggle />
     </template>
   </VoAppBar>
 </template>
