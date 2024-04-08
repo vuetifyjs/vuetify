@@ -6,7 +6,7 @@
       }
     }"
   >
-    <settings-switch
+    <SettingsSwitch
       v-model="user.slashSearch"
       :label="t('slash-search')"
       :messages="t('slash-search-message')"
@@ -15,12 +15,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Stores
-  import { useUserStore } from '@vuetify/one'
-
   const { t } = useI18n()
   const user = useUserStore()
 </script>

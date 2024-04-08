@@ -66,7 +66,7 @@ export const makeVFileInputProps = propsFactory({
   ...makeVInputProps({ prependIcon: '$file' }),
 
   modelValue: {
-    type: Array as PropType<File[]>,
+    type: [Array, Object] as PropType<File[] | File>,
     default: () => ([]),
     validator: (val: any) => {
       return wrapInArray(val).every(v => v != null && typeof v === 'object')
@@ -92,7 +92,13 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
   setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
-    const model = useProxiedModel(props, 'modelValue')
+    const model = useProxiedModel(
+      props,
+      'modelValue',
+      props.modelValue,
+      val => wrapInArray(val),
+      val => (props.multiple || Array.isArray(props.modelValue)) ? val : val[0],
+    )
     const { isFocused, focus, blur } = useFocus(props)
     const base = computed(() => typeof props.showSize !== 'boolean' ? props.showSize : undefined)
     const totalBytes = computed(() => (model.value ?? []).reduce((bytes, { size = 0 }) => bytes + size, 0))
@@ -127,7 +133,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       if (!isFocused.value) focus()
     }
     function onClickPrepend (e: MouseEvent) {
-      onControlClick(e)
+      inputRef.value?.click()
     }
     function onControlMousedown (e: MouseEvent) {
       emit('mousedown:control', e)

@@ -71,6 +71,7 @@ export default {
   timePicker: {
     am: 'ព្រឹក',
     pm: 'ល្ងាច',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

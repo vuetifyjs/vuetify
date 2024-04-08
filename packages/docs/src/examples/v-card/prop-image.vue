@@ -1,10 +1,10 @@
 <template>
   <v-card
     class="mx-auto"
-    max-width="200"
     height="200"
     image="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-    title="Card title"
+    max-width="200"
     theme="dark"
+    title="Card title"
   ></v-card>
 </template>

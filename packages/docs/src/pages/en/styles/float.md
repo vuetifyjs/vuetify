@@ -13,27 +13,27 @@ related:
 
 Applies a custom float across any breakpoint with responsive float utilities.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Overview
 
 Float utility classes apply floating based upon the current viewport size using the [CSS float property](https://developer.mozilla.org/en-US/docs/Web/CSS/float).
 
-<breakpoints-table />
+<FeaturesBreakpointsTable />
 
 ## Classes
 
 Easily toggle a float with a class:
 
-<example file="float/classes" />
+<ExamplesExample file="float/classes" />
 
 ## Responsive
 
 Floats can also be applied on a per breakpoint (viewport) basis.
 
-<example file="float/responsive" />
+<ExamplesExample file="float/responsive" />
 
 Here is a list of all the available support classes:
 

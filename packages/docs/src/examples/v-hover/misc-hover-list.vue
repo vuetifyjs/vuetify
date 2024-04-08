@@ -1,8 +1,8 @@
 <template>
   <v-container class="pa-4 text-center">
     <v-row
-      class="fill-height"
       align="center"
+      class="fill-height"
       justify="center"
     >
       <template v-for="(item, i) in items" :key="i">
@@ -12,8 +12,8 @@
         >
           <v-hover v-slot="{ isHovering, props }">
             <v-card
-              :elevation="isHovering ? 12 : 2"
               :class="{ 'on-hover': isHovering }"
+              :elevation="isHovering ? 12 : 2"
               v-bind="props"
             >
               <v-img
@@ -39,10 +39,10 @@
                   <v-btn
                     v-for="(icon, index) in icons"
                     :key="index"
-                    variant="text"
                     :class="{ 'show-btns': isHovering }"
                     :color="transparent"
                     :icon="icon"
+                    variant="text"
                   ></v-btn>
                 </div>
               </v-img>

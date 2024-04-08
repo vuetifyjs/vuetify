@@ -1,10 +1,10 @@
 <template>
   <v-layout-item
-    v-scroll="onScroll"
     class="text-end pointer-events-none"
-    model-value
     position="bottom"
     size="88"
+    model-value
+    v-scroll="onScroll"
   >
     <div class="ma-4">
       <v-fab-transition>
@@ -15,7 +15,7 @@
           elevation="8"
           icon="mdi-chevron-up"
           size="large"
-          @click="onClick"
+          @click="goTo(0)"
         />
       </v-fab-transition>
     </div>
@@ -23,19 +23,12 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  const goTo = useGoTo({ layout: true })
 
-  const model = ref(false)
+  const model = shallowRef(false)
 
   function onScroll () {
     model.value = window.scrollY > 200
-  }
-
-  function onClick () {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
   }
 </script>
 

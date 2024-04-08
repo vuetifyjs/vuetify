@@ -22,15 +22,15 @@ The `v-btn` component replaces the standard html button with a material design t
 
 ![Button Entry](https://cdn.vuetifyjs.com/docs/images/components/v-btn/v-btn-entry.png)
 
-<page-features />
+<PageFeatures />
 
 ## Usage
 
 Buttons in their simplest form contain uppercase text, a slight elevation, hover effect, and a ripple effect on click.
 
-<usage name="v-btn" />
+<ExamplesUsage name="v-btn" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -38,7 +38,7 @@ Buttons in their simplest form contain uppercase text, a slight elevation, hover
 | - | - |
 | [v-btn](/api/v-btn/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Anatomy
 
@@ -73,19 +73,19 @@ A wide array of props can be employed to modify the `v-btn` component's look and
 
 The **density** prop is used to control the vertical space that the button takes up.
 
-<example file="v-btn/prop-density" />
+<ExamplesExample file="v-btn/prop-density" />
 
 #### Size
 
 The **size** property is used to control the size of the button and scales with density. The default size is **undefined** which essentially translates to **medium**.
 
-<example file="v-btn/prop-size" />
+<ExamplesExample file="v-btn/prop-size" />
 
 #### Block
 
 Block buttons extend the full available width of their container. This is useful for creating buttons that span the full width of a card or dialog.
 
-<example file="v-btn/prop-block" />
+<ExamplesExample file="v-btn/prop-block" />
 
 ::: info
 Block applies **width: 100%** which can cause overflow issues inside a flex container.
@@ -95,19 +95,19 @@ Block applies **width: 100%** which can cause overflow issues inside a flex cont
 
 Use the **rounded** prop to control the border radius of a button.
 
-<example file="v-btn/prop-rounded" />
+<ExamplesExample file="v-btn/prop-rounded" />
 
 #### Elevation
 
 The **elevation** property provides up to 24 levels of shadow depth. By default, buttons rest at 2dp.
 
-<example file="v-btn/prop-elevation" />
+<ExamplesExample file="v-btn/prop-elevation" />
 
 #### Ripple
 
 The **ripple** property determines whether the [v-ripple](/directives/ripple/) directive is used.
 
-<example file="v-btn/prop-ripple" />
+<ExamplesExample file="v-btn/prop-ripple" />
 
 #### Variants
 
@@ -126,21 +126,21 @@ The **variant** prop gives you easy access to several different button styles. A
 
 Icons can be used for the primary content of a button. They are commonly used in the [v-toolbar](/components/toolbars/) and [v-app-bar](/components/app-bars/) components.
 
-<example file="v-btn/prop-icon" />
+<ExamplesExample file="v-btn/prop-icon" />
 
-<random />
+<PromotedRandom />
 
 #### Loaders
 
 Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use a `v-progress-circular` component but this can be customized with the **loader** slot.
 
-<example file="v-btn/prop-loaders" />
+<ExamplesExample file="v-btn/prop-loaders" />
 
 #### Inside of bars
 
 A common use-case is to use the `v-btn` with the **icon** property within a [v-toolbar](/components/toolbars/) or [v-app-bar](/components/app-bars/) component.
 
-<example file="v-btn/misc-toolbar" />
+<ExamplesExample file="v-btn/misc-toolbar" />
 
 ### Slots
 
@@ -161,13 +161,13 @@ Slots give you greater control to customize the content of the `v-btn` component
 
 When you use the **prepend-icon** and **append-icon** props in conjunction with the corresponding slot, **prepend** or **append**, you are able to place a [v-icon](/components/icons/) that automatically injects the designated icon.
 
-<example file="v-btn/slot-prepend-append" />
+<ExamplesExample file="v-btn/slot-prepend-append" />
 
 #### Custom loader
 
 The **loader** slot allows you to customize the loading indicator. In this example we use a [v-progress-linear](/components/progress-linear/) component to create a loading bar that spans the full width of the button.
 
-<example file="v-btn/slot-loader" />
+<ExamplesExample file="v-btn/slot-loader" />
 
 ## Examples
 
@@ -177,33 +177,33 @@ The following are a collection of examples that demonstrate more advanced and re
 
 In this example we utilize multiple different button variants and styles to create a copy of the Discord event card.
 
-<example file="v-btn/misc-discord-event" hide-invert />
+<ExamplesExample file="v-btn/misc-discord-event" hide-invert />
 
 ### Survey group
 
 In addition to [Button groups](/components/button-groups/), the `v-btn` component cant hook into a [v-item-group](/components/item-groups/) using a special symbol. In the next example we create a group of buttons that are used to select a survey answer and add custom **active** state styling.
 
-<example file="v-btn/misc-group-survey" hide-invert />
+<ExamplesExample file="v-btn/misc-group-survey" hide-invert />
 
 ### Tax form confirmation
 
 This example utilizes the [v-text-field](/components/text-fields/) component to collect data from the user and the **loading** prop of `v-btn` when submitting the form.
 
-<example file="v-btn/misc-tax-form" />
+<ExamplesExample file="v-btn/misc-tax-form" />
 
-<random />
+<PromotedRandom />
 
 ### Dialog action
 
 Buttons are often used to trigger actions within a [v-dialog](/components/dialogs/). In this example we use the **outlined** variant and the **color** prop to create a button that is visually distinct from the other buttons.
 
-<example file="v-btn/misc-dialog-action" />
+<ExamplesExample file="v-btn/misc-dialog-action" />
 
 ### Cookie settings
 
 In this example we use a [v-banner](/components/banners/) component to display a custom cookie consent banner. Clicking the "Manage Cookies" button will prompt a [v-dialog](/components/dialogs/) component.
 
-<example file="v-btn/misc-cookie-settings" />
+<ExamplesExample file="v-btn/misc-cookie-settings" />
 
 ## Global Configuration
 
@@ -282,7 +282,7 @@ The `v-banner-actions` component applies the **text** variant and **slim** prop,
 | - | - |
 | [Banners](/components/banners/) | [v-banner-actions](/api/v-banner-actions/) |  |
 
-<example file="v-btn/defaults-banner-actions" />
+<ExamplesExample file="v-btn/defaults-banner-actions" />
 
 The following properties are modified when used within a `v-banner-actions` component:
 
@@ -301,7 +301,7 @@ The `v-bottom-navigation` component **scopes** out all previously provided defau
 | - | - |
 | [Bottom navigation](/components/bottom-navigation/) | [v-bottom-navigation](/api/v-bottom-navigation/) |  |
 
-<example file="v-btn/defaults-bottom-navigation" />
+<ExamplesExample file="v-btn/defaults-bottom-navigation" />
 
 The following properties are modified when used within a `v-bottom-navigation` component:
 
@@ -320,7 +320,7 @@ The `v-btn-group` component makes multiple changes to the `v-btn` component.
 | - | - |
 | [Button groups](/components/button-groups/) | [v-btn-group](/api/v-btn-group/) |  |
 
-<example file="v-btn/defaults-btn-group" />
+<ExamplesExample file="v-btn/defaults-btn-group" />
 
 The following properties are modified when used within a `v-btn-group` component:
 
@@ -340,7 +340,7 @@ The `v-card-actions` component applies the **text** variant and **slim** prop, r
 | - | - |
 | [Cards](/components/cards/) | [v-card-actions](/api/v-card-actions/) |  |
 
-<example file="v-btn/defaults-card-actions" />
+<ExamplesExample file="v-btn/defaults-card-actions" />
 
 The following properties are modified when used within a `v-card-actions` component:
 
@@ -357,7 +357,7 @@ The `v-snackbar` component applies the **text** variant, **slim** prop, and remo
 | - | - |
 | [Snackbars](/components/snackbars/) | [v-snackbar](/api/v-snackbar/) |  |
 
-<example file="v-btn/defaults-snackbar" />
+<ExamplesExample file="v-btn/defaults-snackbar" />
 
 The following properties are modified when used within the **actions** slot of the `v-snackbar` component:
 
@@ -367,7 +367,7 @@ The following properties are modified when used within the **actions** slot of t
 | **ripple** | `false` |
 | **variant** | `text` |
 
-### Toolbars
+### Toolbars and AppBars
 
 The `v-toolbar` component applies the **text** variant to all `v-btn` components. In addition, the [v-toolbar-items](/api/v-toolbar-items/) component is used to create a grouping of buttons that fill the height of the toolbar.
 
@@ -375,7 +375,23 @@ The `v-toolbar` component applies the **text** variant to all `v-btn` components
 | - | - |
 | [Toolbars](/components/toolbars/) | [v-toolbar](/api/v-toolbar/)  |
 
-<example file="v-btn/defaults-toolbar" />
+<ExamplesExample file="v-btn/defaults-toolbar" />
+
+::: info
+
+The [v-app-bar](/components/app-bars/) component uses [v-toolbar](/components/toolbars/) internally. When applying global defaults, you must target the `v-toolbar` component.
+
+:::
+
+```js { resource="src/plugins/vuetify.js" }
+export default createVuetify({
+  defaults: {
+    VToolbar: {
+      VBtn: { variant: 'flat' },
+    },
+  },
+})
+```
 
 The following properties are modified when used within a `v-toolbar` or `v-toolbar-items` component:
 

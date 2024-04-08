@@ -62,7 +62,7 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
     <tr>
       <td>
         <a href="https://www.teamwork.com/" target="_blank">
-          <img height="35px" src="https://cdn.cosmicjs.com/4fbb7ab0-612e-11ed-af1a-0faa4245afee-teamwork.png">
+          <img height="35px" src="https://cdn.cosmicjs.com/ca146a20-bc5d-11ee-9be1-85f53db06a1d-teamwork-logo-2023.svg">
         </a>
       </td>
     </tr>
@@ -131,6 +131,17 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
           <img height="30px" src="https://cdn.cosmicjs.com/8d038320-6382-11ee-b975-cb0cfadd93ad-jap.png">
         </a>
       </td>
+    </tr>
+    <tr></tr>
+    <tr>
+      <td>
+        <a href="https://stormlikes.net/">
+          <img height="40px" src="https://cdn.cosmicjs.com/64e6f630-a980-11ee-b417-db331415685f-stormlikes.png">
+        </a>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
   </tbody>
 </table>

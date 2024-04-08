@@ -88,6 +88,7 @@ export const makeVOverlayProps = propsFactory({
   contentClass: null,
   contentProps: null,
   disabled: Boolean,
+  opacity: [Number, String],
   noClickAnimation: Boolean,
   modelValue: Boolean,
   persistent: Boolean,
@@ -161,6 +162,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     })
 
     const root = ref<HTMLElement>()
+    const scrimEl = ref<HTMLElement>()
     const contentEl = ref<HTMLElement>()
     const { contentStyles, updateLocation } = useLocationStrategies(props, {
       isRtl,
@@ -183,8 +185,11 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       else animateClick()
     }
 
-    function closeConditional () {
-      return isActive.value && globalTop.value
+    function closeConditional (e: Event) {
+      return isActive.value && globalTop.value && (
+        // If using scrim, only close if clicking on it rather than anything opened on top
+        !props.scrim || e.target === scrimEl.value
+      )
     }
 
     IN_BROWSER && watch(isActive, val => {
@@ -264,7 +269,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
           }, activatorEvents.value, props.activatorProps),
         })}
 
-        { !props.disabled && isMounted.value && hasContent.value && (
+        { isMounted.value && hasContent.value && (
           <Teleport
             disabled={ !teleportTarget.value }
             to={ teleportTarget.value }
@@ -283,7 +288,10 @@ export const VOverlay = genericComponent<OverlaySlots>()({
               ]}
               style={[
                 stackStyles.value,
-                { top: convertToUnit(top.value) },
+                {
+                  '--v-overlay-opacity': props.opacity,
+                  top: convertToUnit(top.value),
+                },
                 props.style,
               ]}
               ref={ root }
@@ -292,7 +300,8 @@ export const VOverlay = genericComponent<OverlaySlots>()({
             >
               <Scrim
                 color={ scrimColor }
-                modelValue={ !!props.scrim && isActive.value }
+                modelValue={ isActive.value && !!props.scrim }
+                ref={ scrimEl }
                 { ...scrimEvents.value }
               />
               <MaybeTransition
@@ -328,6 +337,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     return {
       activatorEl,
+      scrimEl,
       target,
       animateClick,
       contentEl,

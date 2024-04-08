@@ -199,6 +199,10 @@ export const VSelectionControl = genericComponent<new <T>(
       isFocusVisible.value = false
     }
 
+    function onClickLabel (e: Event) {
+      e.stopPropagation()
+    }
+
     function onInput (e: Event) {
       if (!isInteractive.value) return
 
@@ -227,6 +231,7 @@ export const VSelectionControl = genericComponent<new <T>(
           onFocus={ onFocus }
           onInput={ onInput }
           aria-disabled={ !!props.disabled }
+          aria-label={ props.label }
           type={ props.type }
           value={ trueValue.value }
           name={ props.name }
@@ -299,7 +304,7 @@ export const VSelectionControl = genericComponent<new <T>(
           </div>
 
           { label && (
-            <VLabel for={ id.value } clickable onClick={ (e: Event) => e.stopPropagation() }>
+            <VLabel for={ id.value } onClick={ onClickLabel }>
               { label }
             </VLabel>
           )}

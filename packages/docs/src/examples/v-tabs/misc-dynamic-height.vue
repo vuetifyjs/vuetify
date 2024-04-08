@@ -9,17 +9,17 @@
       <v-text-field
         append-icon="mdi-microphone"
         class="mx-4"
-        flat
-        hide-details
         label="Search"
         prepend-inner-icon="mdi-magnify"
+        flat
+        hide-details
         solo-inverted
       ></v-text-field>
 
       <template v-slot:extension>
         <v-tabs
           v-model="tabs"
-          centered
+          align-tabs="center"
         >
           <v-tab
             v-for="n in 3"

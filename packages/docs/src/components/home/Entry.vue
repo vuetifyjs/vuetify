@@ -5,10 +5,10 @@
       justify="center"
     >
       <v-col cols="auto">
-        <home-logo size="300" />
+        <HomeLogo size="300" />
       </v-col>
 
-      <v-col cols="auto" class="text-center text-lg-start">
+      <v-col class="text-center text-lg-start" cols="auto">
         <h1 class="text-h2 font-weight-medium mb-3 ms-n1">
           Vue Component Framework
         </h1>
@@ -17,60 +17,89 @@
           Vuetify is a no design skills required Open Source UI Library with beautifully handcrafted Vue Components.
         </p>
 
-        <home-action-btns />
+        <HomeActionBtns />
 
         <br>
 
-        <v-hover>
-          <template #default="{ isHovering, props }">
+        <v-row :justify="mdAndDown ? 'center' : undefined">
+          <v-col cols="auto">
+            <v-hover>
+              <template #default="{ isHovering, props }">
+                <v-sheet
+                  class="px-2 py-2 d-inline-flex align-center text-mono text-body-2 text-no-wrap"
+                  color="surface"
+                  width="215"
+                  border
+                  rounded
+                  v-bind="props"
+                >
+                  <v-icon
+                    class="me-1"
+                    color="medium-emphasis"
+                    icon="mdi-chevron-right"
+                    size="16"
+                  />
+
+                  {{ randomPackage }} create
+
+                  <span class="text-primary font-weight-medium ms-2">
+                    vuetify
+                  </span>
+
+                  <v-icon
+                    :icon="isCopying ? 'mdi-check' : 'mdi-clipboard-text-outline'"
+                    :style="{
+                      opacity: isHovering || isCopying ? 1 : 0,
+                    }"
+                    class="ms-auto"
+                    color="medium-emphasis"
+                    size="17"
+                    @click="copy"
+                  />
+                </v-sheet>
+              </template>
+            </v-hover>
+          </v-col>
+
+          <v-col cols="auto">
             <v-sheet
-              border
-              class="px-2 py-2 d-inline-flex align-center text-mono text-body-2 text-no-wrap"
+              class="pa-1 ps-3 d-inline-flex align-center justify-space-between text-caption"
               color="surface"
-              rounded
               width="215"
-              v-bind="props"
+              border
+              rounded
             >
-              <v-icon
-                class="me-1"
-                color="medium-emphasis"
-                icon="mdi-chevron-right"
-                size="16"
-              />
+              <span class="me-2">Latest Commit:</span>
 
-              yarn create
-
-              <span class="text-primary font-weight-medium ms-2">
-                vuetify
-              </span>
-
-              <v-icon
-                :icon="isCopying ? 'mdi-check' : 'mdi-clipboard-text-outline'"
-                :style="{
-                  opacity: isHovering || isCopying ? 1 : 0,
-                }"
-                class="ms-auto"
-                color="medium-emphasis"
-                size="17"
-                @click="copy"
-              />
+              <AppCommitBtn />
             </v-sheet>
-          </template>
-        </v-hover>
+          </v-col>
+
+          <v-col cols="auto">
+            <v-sheet
+              class="pa-1 ps-3 d-inline-flex align-center justify-space-between text-caption"
+              color="surface"
+              width="215"
+              border
+              rounded
+            >
+              <span class="me-2">Latest Release:</span>
+
+              <AppVersionBtn />
+            </v-sheet>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script setup>
-  // Components
-  import HomeLogo from '@/components/home/Logo.vue'
-  import HomeActionBtns from '@/components/home/ActionBtns.vue'
-
-  // Utilities
-  import { shallowRef } from 'vue'
-
   const isCopying = shallowRef(false)
+
+  const { mdAndDown } = useDisplay()
+  const packages = ['npm', 'yarn', 'pnpm', 'bun']
+  const randomPackage = packages[Math.floor(Math.random() * packages.length)]
 
   function copy () {
     isCopying.value = true

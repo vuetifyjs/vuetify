@@ -4,10 +4,10 @@
       <v-btn
         v-for="link in links"
         :key="link"
-        color="white"
-        variant="text"
         class="mx-2"
+        color="white"
         rounded="xl"
+        variant="text"
       >
         {{ link }}
       </v-btn>

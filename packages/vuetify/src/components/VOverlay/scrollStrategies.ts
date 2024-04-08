@@ -1,5 +1,5 @@
 // Utilities
-import { effectScope, nextTick, onScopeDispose, watchEffect } from 'vue'
+import { effectScope, onScopeDispose, watchEffect } from 'vue'
 import { requestNewFrame } from './requestNewFrame'
 import { convertToUnit, getScrollParents, hasScrollbar, IN_BROWSER, propsFactory } from '@/util'
 
@@ -49,7 +49,7 @@ export function useScrollStrategies (
     if (!(data.isActive.value && props.scrollStrategy)) return
 
     scope = effectScope()
-    await nextTick()
+    await new Promise(resolve => setTimeout(resolve))
     scope.active && scope.run(() => {
       if (typeof props.scrollStrategy === 'function') {
         props.scrollStrategy(data, props, scope!)
@@ -101,6 +101,9 @@ function blockScrollStrategy (data: ScrollStrategyData, props: StrategyProps) {
       const x = parseFloat(el.style.getPropertyValue('--v-body-scroll-x'))
       const y = parseFloat(el.style.getPropertyValue('--v-body-scroll-y'))
 
+      const scrollBehavior = el.style.scrollBehavior
+
+      el.style.scrollBehavior = 'auto'
       el.style.removeProperty('--v-body-scroll-x')
       el.style.removeProperty('--v-body-scroll-y')
       el.style.removeProperty('--v-scrollbar-offset')
@@ -108,6 +111,8 @@ function blockScrollStrategy (data: ScrollStrategyData, props: StrategyProps) {
 
       el.scrollLeft = -x
       el.scrollTop = -y
+
+      el.style.scrollBehavior = scrollBehavior
     })
     if (scrollableParent) {
       data.root.value!.classList.remove('v-overlay--scroll-blocked')

@@ -122,7 +122,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
               >
                 { !props.hideWeekNumber ? <div key="weekNumber0" class="v-calendar-weekly__head-weeknumber"></div> : '' }
                 {
-                  props.weekdays.sort((a, b) => a - b).map(weekday => (
+                  props.weekdays.map(weekday => (
                     <div class={ `v-calendar-weekly__head-weekday${!props.hideWeekNumber ? '-with-weeknumber' : ''}` }>
                       { dayNames[weekday] }
                     </div>

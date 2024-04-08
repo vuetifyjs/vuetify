@@ -15,7 +15,17 @@ import { useScopeId } from '@/composables/scopeId'
 // Utilities
 import { computed, inject, mergeProps, nextTick, provide, ref, shallowRef, watch } from 'vue'
 import { VMenuSymbol } from './shared'
-import { focusableChildren, focusChild, genericComponent, getNextElement, getUid, omit, propsFactory, useRender } from '@/util'
+import {
+  focusableChildren,
+  focusChild,
+  genericComponent,
+  getNextElement,
+  getUid,
+  isClickInsideElement,
+  omit,
+  propsFactory,
+  useRender,
+} from '@/util'
 
 // Types
 import type { Component } from 'vue'
@@ -64,9 +74,11 @@ export const VMenu = genericComponent<OverlaySlots>()({
       unregister () {
         --openChildren.value
       },
-      closeParents () {
+      closeParents (e) {
         setTimeout(() => {
-          if (!openChildren.value) {
+          if (!openChildren.value &&
+            (e == null || (e && !isClickInsideElement(e, overlay.value!.contentEl!)))
+          ) {
             isActive.value = false
             parent?.closeParents()
           }
@@ -106,8 +118,8 @@ export const VMenu = genericComponent<OverlaySlots>()({
       }
     })
 
-    function onClickOutside () {
-      parent?.closeParents()
+    function onClickOutside (e: MouseEvent) {
+      parent?.closeParents(e)
     }
 
     function onKeydown (e: KeyboardEvent) {
@@ -123,6 +135,9 @@ export const VMenu = genericComponent<OverlaySlots>()({
           isActive.value = false
           overlay.value?.activatorEl?.focus()
         }
+      } else if (['Enter', ' '].includes(e.key) && props.closeOnContentClick) {
+        isActive.value = false
+        parent?.closeParents()
       }
     }
 
@@ -160,6 +175,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
       return (
         <VOverlay
           ref={ overlay }
+          id={ id.value }
           class={[
             'v-menu',
             props.class,

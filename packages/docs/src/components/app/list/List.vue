@@ -1,9 +1,9 @@
 <template>
   <v-list
     v-model:opened="opened"
-    :nav="nav"
     :items="computedItems"
     :lines="false"
+    :nav="nav"
     color="primary"
     density="compact"
     item-props
@@ -57,15 +57,8 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utiltities
-  import { computed, ref } from 'vue'
-  import { generatedRoutes as routes } from '@/util/routes'
-  import { RouteLocationRaw, RouteRecordRaw } from 'vue-router'
-
   // Types
+  import type { RouteLocationRaw, RouteRecordRaw } from 'vue-router'
   import type { Prop } from 'vue'
 
   export type Item = {
@@ -88,7 +81,7 @@
   }
 
   function generateApiItems (locale: string) {
-    return (routes as RouteRecordRaw[])
+    return (generatedRoutes as RouteRecordRaw[])
       .filter(route => route.path.includes(`${locale}/api/`))
       .map(route => {
         return {
@@ -111,8 +104,8 @@
       if (litem.subfolder) path = litem.subfolder
 
       const route = litem.routeMatch
-        ? routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.routeMatch}/`))
-        : routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.title}/`))
+        ? generatedRoutes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.routeMatch}/`))
+        : generatedRoutes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.title}/`))
 
       const to = litem.routePath
         ? `/${locale}/${path}/${litem.routePath}/`

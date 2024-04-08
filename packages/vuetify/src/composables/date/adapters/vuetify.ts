@@ -255,15 +255,13 @@ function date (value?: any): Date | null {
 
 const sundayJanuarySecond2000 = new Date(2000, 0, 2)
 
-// The number of letters returned by getWeekday() varies by date library
-// So we've opted for 3-letter abbreviations for all locales
 function getWeekdays (locale: string) {
   const daysFromSunday = firstDay[locale.slice(-2).toUpperCase()]
 
   return createRange(7).map(i => {
     const weekday = new Date(sundayJanuarySecond2000)
     weekday.setDate(sundayJanuarySecond2000.getDate() + daysFromSunday + i)
-    return new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(weekday)
+    return new Intl.DateTimeFormat(locale, { weekday: 'narrow' }).format(weekday)
   })
 }
 
@@ -307,8 +305,7 @@ function format (
       options = { month: 'short' }
       break
     case 'dayOfMonth':
-      options = { day: 'numeric' }
-      break
+      return new Intl.NumberFormat(locale).format(newDate.getDate())
     case 'shortDate':
       options = { year: '2-digit', month: 'numeric', day: 'numeric' }
       break
@@ -378,8 +375,16 @@ function getMonth (date: Date) {
   return date.getMonth()
 }
 
+function getDate (date: Date) {
+  return date.getDate()
+}
+
 function getNextMonth (date: Date) {
   return new Date(date.getFullYear(), date.getMonth() + 1, 1)
+}
+
+function getPreviousMonth (date: Date) {
+  return new Date(date.getFullYear(), date.getMonth() - 1, 1)
 }
 
 function getHours (date: Date) {
@@ -411,6 +416,10 @@ function isAfter (date: Date, comparing: Date) {
   return date.getTime() > comparing.getTime()
 }
 
+function isAfterDay (date: Date, comparing: Date): boolean {
+  return isAfter(startOfDay(date), startOfDay(comparing))
+}
+
 function isBefore (date: Date, comparing: Date) {
   return date.getTime() < comparing.getTime()
 }
@@ -430,15 +439,35 @@ function isSameMonth (date: Date, comparing: Date) {
     date.getFullYear() === comparing.getFullYear()
 }
 
+function isSameYear (date: Date, comparing: Date) {
+  return date.getFullYear() === comparing.getFullYear()
+}
+
 function getDiff (date: Date, comparing: Date | string, unit?: string) {
   const d = new Date(date)
   const c = new Date(comparing)
 
-  if (unit === 'month') {
-    return d.getMonth() - c.getMonth() + (d.getFullYear() - c.getFullYear()) * 12
+  switch (unit) {
+    case 'years':
+      return d.getFullYear() - c.getFullYear()
+    case 'quarters':
+      return Math.floor((d.getMonth() - c.getMonth() + (d.getFullYear() - c.getFullYear()) * 12) / 4)
+    case 'months':
+      return d.getMonth() - c.getMonth() + (d.getFullYear() - c.getFullYear()) * 12
+    case 'weeks':
+      return Math.floor((d.getTime() - c.getTime()) / (1000 * 60 * 60 * 24 * 7))
+    case 'days':
+      return Math.floor((d.getTime() - c.getTime()) / (1000 * 60 * 60 * 24))
+    case 'hours':
+      return Math.floor((d.getTime() - c.getTime()) / (1000 * 60 * 60))
+    case 'minutes':
+      return Math.floor((d.getTime() - c.getTime()) / (1000 * 60))
+    case 'seconds':
+      return Math.floor((d.getTime() - c.getTime()) / 1000)
+    default: {
+      return d.getTime() - c.getTime()
+    }
   }
-
-  return Math.floor((d.getTime() - c.getTime()) / (1000 * 60 * 60 * 24))
 }
 
 function setHours (date: Date, count: number) {
@@ -459,6 +488,12 @@ function setMonth (date: Date, count: number) {
   return d
 }
 
+function setDate (date: Date, day: number) {
+  const d = new Date(date)
+  d.setDate(day)
+  return d
+}
+
 function setYear (date: Date, year: number) {
   const d = new Date(date)
   d.setFullYear(year)
@@ -466,7 +501,7 @@ function setYear (date: Date, year: number) {
 }
 
 function startOfDay (date: Date) {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate())
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0)
 }
 
 function endOfDay (date: Date) {
@@ -558,6 +593,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return isAfter(date, comparing)
   }
 
+  isAfterDay (date: Date, comparing: Date) {
+    return isAfterDay(date, comparing)
+  }
+
   isBefore (date: Date, comparing: Date) {
     return !isAfter(date, comparing) && !isEqual(date, comparing)
   }
@@ -570,6 +609,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return isSameMonth(date, comparing)
   }
 
+  isSameYear (date: Date, comparing: Date) {
+    return isSameYear(date, comparing)
+  }
+
   setMinutes (date: Date, count: number) {
     return setMinutes(date, count)
   }
@@ -580,6 +623,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   setMonth (date: Date, count: number) {
     return setMonth(date, count)
+  }
+
+  setDate (date: Date, day: number): Date {
+    return setDate(date, day)
   }
 
   setYear (date: Date, year: number) {
@@ -602,8 +649,16 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return getMonth(date)
   }
 
+  getDate (date: Date) {
+    return getDate(date)
+  }
+
   getNextMonth (date: Date) {
     return getNextMonth(date)
+  }
+
+  getPreviousMonth (date: Date) {
+    return getPreviousMonth(date)
   }
 
   getHours (date: Date) {

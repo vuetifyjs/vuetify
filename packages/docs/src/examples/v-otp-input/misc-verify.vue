@@ -13,19 +13,19 @@
     <v-otp-input
       v-model="otp"
       :disabled="validating"
-      variant="plain"
       color="primary"
+      variant="plain"
     ></v-otp-input>
 
     <v-btn
       :loading="validating"
-      border
       class="mt-6 text-none bg-surface-variant"
-      rounded
-      variant="plain"
-      text="Validate"
       height="40"
+      text="Validate"
+      variant="plain"
       width="135"
+      border
+      rounded
       @click="onClick"
     ></v-btn>
   </v-card>

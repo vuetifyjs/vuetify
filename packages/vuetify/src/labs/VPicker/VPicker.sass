@@ -16,13 +16,15 @@
 
 .v-picker__body
   grid-area: body
+  overflow: hidden
+  position: relative
 
 .v-picker__header
   grid-area: header
 
 .v-picker__actions
   grid-area: actions
-  padding: 0 12px 12px 12px
+  padding: $picker-actions-padding
   display: flex
   align-items: center
   justify-content: flex-end
@@ -46,5 +48,5 @@
   padding-inline: 24px 12px
   padding-top: 16px
   padding-bottom: 16px
-  font-weight: 600
+  font-weight: $picker-title-font-weight
   letter-spacing: .1666666667em

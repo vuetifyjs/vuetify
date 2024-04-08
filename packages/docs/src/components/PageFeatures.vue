@@ -14,10 +14,10 @@
     <page-feature-chip
       v-if="route.meta?.features?.figma"
       :text="t('figma-design')"
-      prepend-icon="mdi-image"
       href="https://figma.vuetifyjs.com/"
-      target="_blank"
+      prepend-icon="mdi-image"
       rel="noopener noreferrer"
+      target="_blank"
     >
       <template #prepend>
         <v-icon color="purple" />
@@ -27,10 +27,10 @@
     <page-feature-chip
       v-if="route.meta?.features?.report"
       :text="t('report-a-bug')"
-      prepend-icon="mdi-bug-outline"
-      target="_blank"
-      rel="noopener noreferrer"
       href="https://issues.vuetifyjs.com/"
+      prepend-icon="mdi-bug-outline"
+      rel="noopener noreferrer"
+      target="_blank"
     >
       <template #prepend>
         <v-icon color="red" />
@@ -42,8 +42,8 @@
       :href="label"
       :text="t('open-issues')"
       prepend-icon="mdi-alert-circle-outline"
-      target="_blank"
       rel="noopener noreferrer"
+      target="_blank"
     >
       <template #prepend>
         <v-icon color="warning" />
@@ -52,11 +52,11 @@
 
     <page-feature-chip
       v-if="route.meta?.features?.github"
+      :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetify/src${route.meta.features.github}`"
       :text="t('view-in-github')"
       prepend-icon="mdi-github"
-      :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetify/src${route.meta.features.github}`"
-      target="_blank"
       rel="noopener noreferrer"
+      target="_blank"
     >
       <template #prepend>
         <v-icon color="black" />
@@ -65,11 +65,11 @@
 
     <page-feature-chip
       v-if="route.meta?.features?.spec"
+      :href="route.meta.features.spec"
       :text="t('design-spec')"
       prepend-icon="mdi-material-design"
-      :href="route.meta.features.spec"
-      target="_blank"
       rel="noopener noreferrer"
+      target="_blank"
     >
       <template #prepend>
         <v-icon color="surface-variant" />
@@ -79,18 +79,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-  import { useRoute } from 'vue-router'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { getBranch } from '@/util/helpers'
-
-  // Stores
-  import { useOneStore } from '@vuetify/one'
-  import { usePinsStore } from '@/store/pins'
-
   const one = useOneStore()
   const pins = usePinsStore()
   const route = useRoute()

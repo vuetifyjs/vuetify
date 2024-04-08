@@ -1,61 +1,44 @@
 <template>
-  <alert
+  <Alert
     v-if="!auth.isSubscriber"
     type="success"
   >
     {{ t('dashboard.perks.alert') }}
 
-    <app-link :href="rpath('/user/subscriptions/')">$1 per month</app-link>
+    <AppLink :href="rpath('/user/subscriptions/')">$2.99 per month</AppLink>
   </alert>
 
-  <settings-header
-    title="dashboard.perks.experience"
+  <AppSettingsSettingsHeader
     text="dashboard.perks.experience-message"
+    title="dashboard.perks.experience"
   />
 
-  <ad-option />
+  <AppSettingsOptionsAdOption />
 
-  <pin-option />
+  <AppSettingsOptionsPinOption />
 
   <v-divider class="mt-4 mb-3" />
 
-  <settings-header
-    title="dashboard.perks.avatar"
+  <AppSettingsSettingsHeader
     text="dashboard.perks.avatar-message"
+    title="dashboard.perks.avatar"
   />
 
-  <avatar-option />
+  <AppSettingsOptionsAvatarOption />
 
   <v-divider class="mt-4 mb-3" />
 
-  <settings-header
-    title="dashboard.perks.layout"
+  <AppSettingsSettingsHeader
     text="dashboard.perks.layout-message"
+    title="dashboard.perks.layout"
   />
 
-  <quickbar-option />
+  <AppSettingsOptionsQuickbarOption />
 
-  <rail-drawer-option />
+  <AppSettingsOptionsRailDrawerOption />
 </template>
 
 <script setup lang="ts">
-  // Components
-  import AdOption from '@/components/app/settings/options/AdOption.vue'
-  import AvatarOption from '@/components/app/settings/options/AvatarOption.vue'
-  import PinOption from '@/components/app/settings/options/PinOption.vue'
-  import QuickbarOption from '@/components/app/settings/options/QuickbarOption.vue'
-  import RailDrawerOption from '@/components/app/settings/options/RailDrawerOption.vue'
-  import SettingsHeader from '@/components/app/settings/SettingsHeader.vue'
-
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { rpath } from '@/util/routes'
-
-  // Stores
-  import { useAuthStore } from '@vuetify/one'
-
   const auth = useAuthStore()
   const { t } = useI18n()
 </script>

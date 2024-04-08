@@ -4,16 +4,16 @@
     id="app-toc"
     v-model="tocDrawer"
     color="background"
-    floating
     location="right"
-    sticky
     width="256"
+    floating
+    sticky
   >
     <template
-      v-if="toc?.length"
+      v-if="routeToc?.length"
       #prepend
     >
-      <app-headline
+      <AppHeadline
         class="mt-4 mb-2 ms-4"
         path="contents"
       />
@@ -21,9 +21,9 @@
 
     <ul class="ms-5">
       <router-link
-        v-for="{ to, level, text } in toc"
-        v-slot="{ href }"
+        v-for="{ to, level, text } in routeToc"
         :key="text"
+        v-slot="{ href }"
         :to="to"
         custom
       >
@@ -50,7 +50,7 @@
 
     <template #append>
       <v-container>
-        <app-headline
+        <AppHeadline
           v-if="sponsors.length"
           :to="rpath('/introduction/sponsors-and-backers/')"
           class="mb-1 mt-n1 text-high-emphasis text-decoration-none"
@@ -77,20 +77,18 @@
               <v-btn
                 :to="rpath('/introduction/sponsors-and-backers/')"
                 append-icon="$vuetify"
-                block
                 class="text-none"
                 color="primary"
                 size="large"
-                variant="tonal"
                 text="Support"
+                variant="tonal"
+                block
               />
             </v-col>
           </template>
 
           <v-col v-else cols="12">
             <v-btn
-              block
-              border
               class="text-none border-opacity-50 border-primary"
               color="primary"
               href="https://github.com/sponsors/johnleider"
@@ -100,6 +98,8 @@
               target="_blank"
               text="Your Logo Here"
               variant="tonal"
+              block
+              border
             />
           </v-col>
 
@@ -109,8 +109,8 @@
           >
             <a
               :href="spot.spot.href"
-              target="_blank"
               rel="noopener noreferrer sponsored"
+              target="_blank"
               @click="gtagClick('toc', 'promotion', spot.spot.sponsor)"
             >
               <v-img :src="spot.spot.image.url" />
@@ -123,25 +123,6 @@
 </template>
 
 <script setup lang="ts">
-  // Components
-  import SponsorCard from '@/components/sponsor/Card.vue'
-
-  // Composables
-  import { useRoute, useRouter } from 'vue-router'
-  import { useTheme } from 'vuetify'
-
-  // Stores
-  import { useAppStore } from '@/store/app'
-  import { useUserStore } from '@vuetify/one'
-  import { useSponsorsStore } from '@/store/sponsors'
-  import { useSpotStore } from '@/store/spot'
-
-  // Utilities
-  import { computed, nextTick, onMounted, onScopeDispose, ref, watch } from 'vue'
-  import { gtagClick } from '@/util/analytics'
-  import { rpath } from '@/util/routes'
-  import { storeToRefs } from 'pinia'
-
   type TocItem = {
     to: string;
     text: string;
@@ -197,13 +178,14 @@
     if (!val || internalScrolling) return
 
     scrolling.value = true
+    const query = route.query
 
     if (val === routeToc.value?.[0]?.to.slice(1) && route.hash) {
-      router.replace({ path: route.path })
+      router.replace({ path: route.path, query })
     } else {
       const toc = routeToc.value?.find(v => v.to.slice(1) === val)
       if (toc) {
-        await router.replace({ path: route.path, hash: toc.to })
+        await router.replace({ path: route.path, hash: toc.to, query })
       }
     }
     clearTimeout(timeout)
@@ -224,7 +206,7 @@
 
   const sponsorStore = useSponsorsStore()
 
-  const toc = computed(() => route.meta.toc as TocItem[])
+  // const toc = computed(() => route.meta.toc as TocItem[])
 
   const sponsors = computed(() => (
     sponsorStore.sponsors

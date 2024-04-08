@@ -6,10 +6,10 @@
     <v-card-item title="Florida">
       <template v-slot:subtitle>
         <v-icon
+          class="me-1 pb-1"
+          color="error"
           icon="mdi-alert"
           size="18"
-          color="error"
-          class="me-1 pb-1"
         ></v-icon>
 
         Extreme Weather Alert
@@ -25,7 +25,7 @@
           64&deg;F
         </v-col>
 
-        <v-col cols="6" class="text-right">
+        <v-col class="text-right" cols="6">
           <v-icon
             color="error"
             icon="mdi-weather-hurricane"
@@ -62,9 +62,9 @@
             class="mx-4"
             color="primary"
             density="compact"
-            hide-details
             show-ticks="always"
             thumb-size="10"
+            hide-details
           ></v-slider>
         </div>
 
@@ -72,9 +72,9 @@
           <v-list-item
             v-for="item in forecast"
             :key="item.day"
-            :title="item.day"
             :append-icon="item.icon"
             :subtitle="item.temp"
+            :title="item.day"
           >
           </v-list-item>
         </v-list>

@@ -42,6 +42,7 @@
       "global-configuration",
       "icon-fonts",
       "internationalization",
+      "scrolling",
       "sass-variables",
       "theme",
       "treeshaking"
@@ -59,6 +60,7 @@
       {
         "subheader": "utility-classes"
       },
+      "borders",
       "border-radius",
       "content",
       "cursor",
@@ -66,7 +68,9 @@
       "elevation",
       "flex",
       "float",
+      "opacity",
       "overflow",
+      "position",
       "sizing",
       "spacing",
       "text-and-typography"
@@ -131,7 +135,6 @@
       {
         "title": "data-tables",
         "subfolder": "components",
-        "emphasized": true,
         "activeIcon": "",
         "inactiveIcon": "",
         "items": [
@@ -221,6 +224,34 @@
       "introduction",
       {
         "title": "calendars",
+        "subfolder": "components"
+      },
+      {
+        "title": "empty-states",
+        "subfolder": "components"
+      },
+      {
+        "title": "floating-action-buttons",
+        "subfolder": "components"
+      },
+      {
+        "title": "number-inputs",
+        "subfolder": "components"
+      },
+      {
+        "title": "sparklines",
+        "subfolder": "components"
+      },
+      {
+        "title": "speed-dials",
+        "subfolder": "components"
+      },
+      {
+        "title": "time-pickers",
+        "subfolder": "components"
+      },
+      {
+        "title": "treeview",
         "subfolder": "components"
       }
     ]

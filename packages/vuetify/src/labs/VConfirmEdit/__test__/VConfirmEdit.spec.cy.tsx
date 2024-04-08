@@ -24,7 +24,8 @@ describe('VConfirmEdit', () => {
       .get('p')
       .should('have.text', 'bar')
   })
-  it.only(`doesn't mutate the original value`, () => {
+
+  it(`doesn't mutate the original value`, () => {
     const externalModel = ref(['foo'])
 
     cy.mount(
@@ -51,6 +52,7 @@ describe('VConfirmEdit', () => {
         expect(externalModel.value).to.deep.equal(['foo', 'bar'])
       })
   })
+
   it('hides actions if used from the slot', () => {
     cy.mount(
       <VConfirmEdit></VConfirmEdit>

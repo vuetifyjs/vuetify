@@ -1,6 +1,7 @@
 <template>
-  <app-list
+  <AppListList
     v-if="auth.isSubscriber && user.pins"
+    v-model:opened="opened"
     :items="pinned"
     class="pb-0 mb-n2"
     nav
@@ -18,9 +19,9 @@
             <template #append>
               <v-icon
                 v-if="isHovering"
+                class="me-1"
                 icon="mdi-pin-off"
                 size="16"
-                class="me-1"
                 @click.prevent.stop="onClickPinRemove(itemProps)"
               />
             </template>
@@ -28,25 +29,16 @@
         </template>
       </v-hover>
     </template>
-  </app-list>
+  </AppListList>
 </template>
 
 <script setup>
-  // Composables
-  import { useRouter } from 'vue-router'
-
-  // Utilities
-  import { computed, onBeforeMount } from 'vue'
-
-  // Stores
-  import { useAuthStore, useUserStore } from '@vuetify/one'
-  import { usePinsStore } from '@/store/pins'
-
   const auth = useAuthStore()
   const pins = usePinsStore()
   const user = useUserStore()
   const router = useRouter()
 
+  const opened = ref([])
   const pinned = computed(() => ([{
     activeIcon: 'mdi-pin',
     inactiveIcon: 'mdi-pin-outline',
@@ -68,5 +60,11 @@
 
   onBeforeMount(() => {
     pins.load()
+  })
+
+  watch(() => pins.pins, (val, oldVal) => {
+    if (val.length < oldVal.length) return
+
+    opened.value = ['Pinned']
   })
 </script>

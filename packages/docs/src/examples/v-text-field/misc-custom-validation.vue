@@ -2,17 +2,17 @@
   <v-row justify="center">
     <v-col
       cols="12"
-      sm="10"
-      md="8"
       lg="6"
+      md="8"
+      sm="10"
     >
       <v-card ref="form">
         <v-card-text>
           <v-text-field
             ref="name"
             v-model="name"
-            :rules="[() => !!name || 'This field is required']"
             :error-messages="errorMessages"
+            :rules="[() => !!name || 'This field is required']"
             label="Full Name"
             placeholder="John Doe"
             required
@@ -25,9 +25,9 @@
               () => !!address && address.length <= 25 || 'Address must be less than 25 characters',
               addressCheck
             ]"
+            counter="25"
             label="Address Line"
             placeholder="Snowy Rock Pl"
-            counter="25"
             required
           ></v-text-field>
           <v-text-field
@@ -43,22 +43,22 @@
             v-model="state"
             :rules="[() => !!state || 'This field is required']"
             label="State/Province/Region"
-            required
             placeholder="TX"
+            required
           ></v-text-field>
           <v-text-field
             ref="zip"
             v-model="zip"
             :rules="[() => !!zip || 'This field is required']"
             label="ZIP / Postal Code"
-            required
             placeholder="79938"
+            required
           ></v-text-field>
           <v-autocomplete
             ref="country"
             v-model="country"
-            :rules="[() => !!country || 'This field is required']"
             :items="countries"
+            :rules="[() => !!country || 'This field is required']"
             label="Country"
             placeholder="Select..."
             required
@@ -77,11 +77,11 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
-                  icon
                   class="my-0"
+                  icon
                   v-bind="attrs"
-                  @click="resetForm"
                   v-on="on"
+                  @click="resetForm"
                 >
                   <v-icon>mdi-refresh</v-icon>
                 </v-btn>

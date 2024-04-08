@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.4.11",
+  "version": "3.5.14",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -173,10 +173,10 @@
   },
   "peerDependencies": {
     "typescript": ">=4.7",
-    "vite-plugin-vuetify": ">=1.0.0-alpha.12",
+    "vite-plugin-vuetify": ">=1.0.0",
     "vue": "^3.3.0",
     "vue-i18n": "^9.0.0",
-    "webpack-plugin-vuetify": ">=2.0.0-alpha.11"
+    "webpack-plugin-vuetify": ">=2.0.0"
   },
   "peerDependenciesMeta": {
     "typescript": {

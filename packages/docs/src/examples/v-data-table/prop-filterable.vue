@@ -8,13 +8,13 @@
 
       <v-text-field
         v-model="search"
-        prepend-inner-icon="mdi-magnify"
         density="compact"
         label="Search"
-        single-line
+        prepend-inner-icon="mdi-magnify"
+        variant="solo-filled"
         flat
         hide-details
-        variant="solo-filled"
+        single-line
       ></v-text-field>
     </v-card-title>
 
@@ -50,8 +50,8 @@
             :color="item.stock ? 'green' : 'red'"
             :text="item.stock ? 'In stock' : 'Out of stock'"
             class="text-uppercase"
-            label
             size="small"
+            label
           ></v-chip>
         </div>
       </template>

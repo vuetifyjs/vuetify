@@ -1,22 +1,23 @@
 <template>
-  <v-row justify="space-around">
-    <v-time-picker
-      v-model="time"
-      :allowed-hours="allowedHours"
-      :allowed-minutes="allowedMinutes"
-      class="mt-4"
-      format="24hr"
-      scrollable
-      min="9:30"
-      max="22:15"
-    ></v-time-picker>
-    <v-time-picker
-      v-model="timeStep"
-      :allowed-minutes="allowedStep"
-      class="mt-4"
-      format="24hr"
-    ></v-time-picker>
-  </v-row>
+  <v-container>
+    <v-row justify="space-around">
+      <v-time-picker
+        v-model="time"
+        :allowed-hours="allowedHours"
+        :allowed-minutes="allowedMinutes"
+        format="24hr"
+        max="22:15"
+        min="9:30"
+        scrollable
+      ></v-time-picker>
+
+      <v-time-picker
+        v-model="timeStep"
+        :allowed-minutes="allowedStep"
+        format="24hr"
+      ></v-time-picker>
+    </v-row>
+  </v-container>
 </template>
 
 <script setup>

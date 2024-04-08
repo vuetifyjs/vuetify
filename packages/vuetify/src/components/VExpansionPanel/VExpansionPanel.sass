@@ -50,11 +50,11 @@
       border-top-right-radius: 0 !important
 
   &--variant-accordion
-    > :first-child
+    > :first-child:not(:last-child)
       border-bottom-left-radius: 0 !important
       border-bottom-right-radius: 0 !important
 
-    > :last-child
+    > :last-child:not(:first-child)
       border-top-left-radius: 0 !important
       border-top-right-radius: 0 !important
 
@@ -126,10 +126,11 @@
   transition: .3s min-height settings.$standard-easing
   width: 100%
   justify-content: space-between
-  @include tools.states('.v-expansion-panel-title__overlay', true)
 
-  &--active::before
-    opacity: 0.12
+  @include tools.states('.v-expansion-panel-title__overlay', false)
+
+  &--focusable.v-expansion-panel-title--active
+    @include tools.active-states('.v-expansion-panel-title__overlay')
 
 .v-expansion-panel-title__overlay
   @include tools.absolute()
@@ -173,3 +174,17 @@
 
     &--active
       max-width: $expansion-panel-inset-active-max-width
+
+.v-expansion-panels--flat
+  > .v-expansion-panel
+    &::after
+      border-top: none
+
+    .v-expansion-panel__shadow
+      display: none
+
+.v-expansion-panels--tile
+  border-radius: 0
+
+  > .v-expansion-panel
+    border-radius: 0

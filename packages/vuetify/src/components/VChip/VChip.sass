@@ -4,7 +4,6 @@
 
 .v-chip
   align-items: center
-  cursor: default
   display: inline-flex
   font-weight: $chip-font-weight
   max-width: $chip-max-width
@@ -14,6 +13,9 @@
   text-decoration: none
   white-space: $chip-white-space
   vertical-align: middle
+
+  .v-icon
+    --v-icon-size-multiplier: #{$chip-icon-size-multiplier}
 
   @at-root
     @include chip-sizes()

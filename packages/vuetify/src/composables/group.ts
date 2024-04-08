@@ -2,7 +2,7 @@
 import { useProxiedModel } from './proxiedModel'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef, unref, watch } from 'vue'
 import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -133,7 +133,7 @@ export function useGroupItem (
 
   watch(isSelected, value => {
     vm.emit('group:selected', { value })
-  })
+  }, { flush: 'sync' })
 
   return {
     id,
@@ -178,6 +178,10 @@ export function useGroup (
     const key = Symbol.for(`${injectKey.description}:id`)
     const children = findChildrenWithProvide(key, groupVm?.vnode)
     const index = children.indexOf(vm)
+
+    if (unref(unwrapped.value) == null) {
+      unwrapped.value = index
+    }
 
     if (index > -1) {
       items.splice(index, 0, unwrapped)

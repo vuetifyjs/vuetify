@@ -18,9 +18,9 @@ related:
 
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast applications.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<VoPromotionsCardHighlight slug="vuemastery-getting-started" />
 
 ## Installation
 
@@ -376,4 +376,4 @@ The three development branches (`master`, `dev`, and `next`) are automatically p
 
 Have a question that belongs here? Tell us in our [Discord Community](https://community.vuetifyjs.com/) or create a request on our [Issue Generator](https://issues.vuetifyjs.com/).
 
-<promoted slug="vuetify-discord" />
+<PromotedPromoted slug="vuetify-discord" />

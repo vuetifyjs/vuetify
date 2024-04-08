@@ -9,23 +9,23 @@
           inline
         >
           <v-radio
-            label="indigo"
             color="indigo"
+            label="indigo"
             value="indigo"
           ></v-radio>
           <v-radio
-            label="indigo-darken-3"
             color="indigo-darken-3"
+            label="indigo-darken-3"
             value="indigo-darken-3"
           ></v-radio>
           <v-radio
-            label="primary"
             color="primary"
+            label="primary"
             value="primary"
           ></v-radio>
           <v-radio
-            label="secondary"
             color="secondary"
+            label="secondary"
             value="secondary"
           ></v-radio>
         </v-radio-group>
@@ -38,10 +38,10 @@
         cols="auto"
       >
         <v-card
-          class="mx-auto"
-          max-width="344"
           :color="color"
           :variant="variant"
+          class="mx-auto"
+          max-width="344"
         >
           <v-card-item>
             <div>

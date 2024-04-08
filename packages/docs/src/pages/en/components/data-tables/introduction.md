@@ -14,7 +14,7 @@ related:
 
 The data table component is used for displaying tabular data in a way that is easy for users to scan. It includes sorting, searching, pagination and selection.
 
-<entry />
+<PromotedEntry />
 
 ::: success
 This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
@@ -37,10 +37,10 @@ Before diving into the guides and examples, let's take a moment to understand th
 | [v-data-table](/api/v-data-table/)                 | Primary Component                                           |
 | [v-data-table-server](/api/v-data-table-server/)   | Specialized Data-table for displaying results from a server |
 | [v-data-table-virtual](/api/v-data-table-virtual/) | Data-table with built in row virtualization                 |
-| [v-data-table-footer](/api/v-data-table-footer/)   | Functional Component used to display Data-table headers     |
+| [v-data-table-footer](/api/v-data-table-footer/)   | Functional Component used to display Data-table footer     |
 | [v-checkbox-btn](/api/v-checkbox-btn/)             | Reusable lightweight [v-checkbox](/components/checkboxes)   |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Guides
 

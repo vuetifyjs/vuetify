@@ -9,16 +9,13 @@ related:
   - /getting-started/contributing/
   - /introduction/roadmap/
 ---
-<script setup>
-  import Releases from '@/components/doc/Releases.vue'
-</script>
 
 # Release notes
 
 The Vuetify team performs releases on a weekly basis.
 
-<page-features />
+<PageFeatures />
 
-<releases />
+<VoPromotionsCardVuetify />
 
-<entry />
+<DocReleases />

@@ -2,17 +2,17 @@
 
 @mixin transition-default() {
   &-enter-active {
-    transition-duration: 0.3s !important;
+    transition-duration: settings.$transition-duration-root !important;
     transition-timing-function: settings.$standard-easing !important;
   }
 
   &-leave-active {
-    transition-duration: 0.3s !important;
+    transition-duration: settings.$transition-duration-root !important;
     transition-timing-function: settings.$standard-easing !important;
   }
 
   &-move {
-    transition-duration: 0.5s !important;
+    transition-duration: settings.$transition-move-duration-root !important;
     transition-property: transform !important;
     transition-timing-function: settings.$standard-easing !important;
   }
@@ -95,11 +95,11 @@
   @include transition-default();
 
   &-enter-from {
-    transform: translate(0, 100%);
+    transform: translate(100%, 0);
   }
 
   &-leave-to {
-    transform: translate(0, -100%);
+    transform: translate(-100%, 0);
   }
 }
 
@@ -107,11 +107,11 @@
   @include transition-default();
 
   &-enter-from {
-    transform: translate(0, -100%);
+    transform: translate(-100%, 0);
   }
 
   &-leave-to {
-    transform: translate(0, 100%);
+    transform: translate(100%, 0);
   }
 }
 

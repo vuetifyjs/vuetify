@@ -387,6 +387,14 @@
         #{selector.append('[class^="rounded-"]', &)},
         #{selector.append('[class*=" rounded-"]', &)}
           flex-basis: calc(var(--v-input-control-height) / 2 + 2px)
+      
+      @at-root #{selector.append('.v-field--reverse', &)}
+        border-start-start-radius: 0
+        border-start-end-radius: inherit
+        border-end-end-radius: inherit 
+        border-end-start-radius: 0
+        border-inline-end-width: var(--v-field-border-width)
+        border-inline-start-width: 0
 
     &__notch
       flex: none
@@ -421,6 +429,14 @@
       border-end-end-radius: inherit
       border-end-start-radius: 0
 
+      @at-root #{selector.append('.v-field--reverse', &)}
+        border-start-start-radius: inherit
+        border-start-end-radius: 0
+        border-end-end-radius: 0
+        border-end-start-radius: inherit 
+        border-inline-end-width: 0
+        border-inline-start-width: var(--v-field-border-width)
+
 /* endregion */
 /* region LOADER */
 .v-field__loader
@@ -437,6 +453,8 @@
 
   .v-field--variant-outlined &
     top: calc(100% - 3px)
+    width: calc(100% - #{$field-border-width} * 2)
+    left: $field-border-width
 
 /* endregion */
 /* region OVERLAY */
@@ -493,7 +511,9 @@
 /* endregion */
 /* region MODIFIERS */
 .v-field--reverse
-  .v-field__field, .v-field__input
+  .v-field__field,
+  .v-field__input,
+  .v-field__outline
     flex-direction: row-reverse
 
   .v-field__input, input
