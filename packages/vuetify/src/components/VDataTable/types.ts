@@ -18,6 +18,7 @@ export type DataTableHeader<T = Record<string, any>> = {
   width?: number | string
   minWidth?: string
   maxWidth?: string
+  nowrap?: boolean
 
   headerProps?: Record<string, any>
   cellProps?: HeaderCellProps

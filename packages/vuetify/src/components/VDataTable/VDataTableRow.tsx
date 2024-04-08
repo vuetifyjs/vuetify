@@ -100,6 +100,8 @@ export const VDataTableRow = genericComponent<new <T>(
               lastFixed={ column.lastFixed }
               noPadding={ column.key === 'data-table-select' || column.key === 'data-table-expand' }
               width={ column.width }
+              maxWidth={ column.maxWidth }
+              nowrap={ column.nowrap }
               { ...cellProps }
               { ...columnCellProps }
             >
