@@ -120,7 +120,7 @@ headers = [
 
 See [Data and display](/components/data-tables/data-and-display).
 
-#### Customisation
+#### Customization
 
 Other options are available for setting **width**, **align**, **fixed**, or pass custom props to the header element with **headerProps** and row cells with **cellProps**.
 
