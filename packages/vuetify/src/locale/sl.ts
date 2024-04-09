@@ -1,14 +1,14 @@
 export default {
   badge: 'Značka',
-  open: 'Open',
+  open: 'Odpri',
   close: 'Zapri',
   confirmEdit: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    ok: 'V redu',
+    cancel: 'Prekliči',
   },
   dataIterator: {
     noResultsText: 'Ni iskanega zapisa',
-    loadingText: 'Nalaganje...',
+    loadingText: 'Nalaganje ...',
   },
   dataTable: {
     itemsPerPageText: 'Vrstic na stran:',
@@ -23,8 +23,8 @@ export default {
     sortBy: 'Razvrsti po',
   },
   dataFooter: {
-    itemsPerPageText: 'Predmetov na stran:',
-    itemsPerPageAll: 'Vse',
+    itemsPerPageText: 'Elementov na stran:',
+    itemsPerPageAll: 'Vsi',
     nextPage: 'Naslednja stran',
     prevPage: 'Prejšnja stran',
     firstPage: 'Prva stran',
@@ -32,18 +32,18 @@ export default {
     pageText: '{0}-{1} od {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'do',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} izbranih',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Izberite datume',
+      header: 'Vnesite datume',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Izberite datum',
+    header: 'Vnesite datum',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Vnesite datum',
     },
   },
   noDataText: 'Ni podatkov',
@@ -51,51 +51,51 @@ export default {
     prev: 'Prejšnji prikaz',
     next: 'Naslednji prikaz',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Prikaz {0} od {1}',
     },
   },
   calendar: {
     moreEvents: 'Še {0}',
-    today: 'Today',
+    today: 'Danes',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Počisti {0}',
+    prependAction: 'Dejanje pred {0}',
+    appendAction: 'Dejanje po {0}',
+    otp: 'Vnesite {0}. OTP znak',
   },
   fileInput: {
     counter: '{0} datotek',
-    counterSize: '{0} datotek ({1} skupno)',
+    counterSize: '{0} datotek (skupno {1})',
   },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Izberite čas',
   },
   pagination: {
     ariaLabel: {
-      root: 'Navigacija po strani po strani',
+      root: 'Navigacija po straneh',
       next: 'Naslednja stran',
       previous: 'Prejšnja stran',
       page: 'Pojdi na stran {0}',
       currentPage: 'Trenutna stran, stran {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Prva stran',
+      last: 'Zadnja stran',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Naprej',
+    prev: 'Nazaj',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Ocena {0} od {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Nalaganje ...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Naloži več',
+    empty: 'Konec',
   },
 }
