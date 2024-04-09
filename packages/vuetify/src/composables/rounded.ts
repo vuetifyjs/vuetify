@@ -43,7 +43,7 @@ export function useRounded (
       for (const value of String(rounded).split(' ')) {
         classes.push(`rounded-${value}`)
       }
-    } else if (tile) {
+    } else if (tile || rounded === false) {
       classes.push('rounded-0')
     }
 
