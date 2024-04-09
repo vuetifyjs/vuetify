@@ -8,9 +8,12 @@ import { VBtn } from '@/components/VBtn'
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
 
+// Types
+import type { CalendarDay } from '@/composables/calendar'
+
 export type VCalendarMonthDaySlots = {
   default: never
-  content: never
+  content: { day?: CalendarDay, events?: Array<any> }
   title: { title?: number | string }
   event: { day?: Object, allDay: boolean, event: Record<string, unknown> }
 }
@@ -41,7 +44,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
         >
           { !props.day?.isHidden && hasTitle && (
             <div key="title" class="v-calendar-weekly__day-label">
-              { slots.title?.({ title: props.title }) ?? (
+              <slot name="title" title={ props.title }>
                 <VBtn
                   class={ props.day?.isToday ? 'v-calendar-weekly__day-label__today' : undefined }
                   color={ props.color }
@@ -52,7 +55,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
                 >
                   { props.title }
                 </VBtn>
-              )}
+              </slot>
             </div>
           )}
 
