@@ -108,10 +108,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       props.active
     ))
     function onFocus () {
-      if (inputRef.value !== document.activeElement) {
-        inputRef.value?.focus()
-      }
-
       if (!isFocused.value) focus()
     }
     function onControlMousedown (e: MouseEvent) {
