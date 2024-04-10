@@ -81,7 +81,8 @@ export async function generateDirectiveDataFromTypes (): Promise<DirectiveData[]
         fileName: `v-${kebabName}`,
         displayName: `v-${kebabName}`,
         pathName: `v-${kebabName}-directive`,
-        argument: { value: await prettifyType(name, (data as ObjectDefinition).properties.value) },
+        value: await prettifyType(name, (data as ObjectDefinition).properties.value),
+        argument: (data as ObjectDefinition).properties.arg,
         modifiers: ((data as ObjectDefinition).properties.modifiers as ObjectDefinition).properties,
       }
     })
@@ -217,6 +218,7 @@ export type ComponentData = BaseData & {
   slots: Record<string, Definition>
   events: Record<string, Definition>
   exposed: Record<string, Definition>
+  value?: never
   argument?: never
   modifiers?: never
 }
@@ -226,7 +228,8 @@ export type DirectiveData = BaseData & {
   slots?: never
   events?: never
   exposed?: never
-  argument: { value: Definition }
+  value: Definition
+  argument: Definition
   modifiers: Record<string, Definition>
 }
 export type ComposableData = BaseData & {
@@ -235,6 +238,7 @@ export type ComposableData = BaseData & {
   slots?: never
   events?: never
   exposed: Record<string, Definition>
+  value?: never
   argument?: never
   modifiers?: never
 }
