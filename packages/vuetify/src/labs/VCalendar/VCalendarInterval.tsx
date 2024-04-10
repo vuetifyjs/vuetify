@@ -11,6 +11,13 @@ import { useDate } from '@/composables/date'
 import { computed } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
+export type VCalendarIntervalSlots = {
+  default: never
+  event: any
+  intervalBody: any
+  intervalFormat: { interval: any }
+}
+
 export const makeVCalendarIntervalProps = propsFactory({
   day: {
     type: Object,
@@ -40,7 +47,7 @@ export const makeVCalendarIntervalProps = propsFactory({
   },
 }, 'VCalendarInterval')
 
-export const VCalendarInterval = genericComponent()({
+export const VCalendarInterval = genericComponent< VCalendarIntervalSlots >()({
   name: 'VCalendarInterval',
 
   props: {
@@ -88,33 +95,33 @@ export const VCalendarInterval = genericComponent()({
       return (
         props.dayIndex === 0 ? (
           <div class="v-calendar-day__row-with-label" style={ `height: ${convertToUnit(props.intervalHeight)}` }>
-            <div class="v-calendar-day__row-label">
-              <slot name="intervalFormat" interval={ interval.value }>
-                { props.index
+            <div class="v-calendar-day__row-label">{
+              slots.intervalFormat?.({ interval: interval.value }) ?? (
+                props.index
                   ? props.intervalFormat
                     ? typeof props.intervalFormat === 'string'
                       ? adapter.format(interval.value.start, 'hours12h')
                       : props.intervalFormat(interval.value)
                     : interval.value.label
                   : ''
-                }
-              </slot>
+              )
+            }
             </div>
             <div class="v-calendar-day__row-hairline"></div>
             <div class={['v-calendar-day__row-content', interval.value.events.some(e => !e.last)
               ? 'v-calendar-day__row-content-through'
               : '']}
             >
-              <slot name="intervalBody" interval={ interval.value }>
-                  { interval.value.events?.map(event => (
-                    <slot
-                      name="event"
-                      event={ event }
-                      interval={ interval.value }
-                      intervalDivisions={ props.intervalDivisions }
-                      intervalDuration={ props.intervalDuration }
-                      intervalHeight={ props.intervalHeight }
-                    >
+              {
+                slots.intervalBody?.({ interval: interval.value }) ?? (
+                  interval.value.events?.map(event =>
+                    slots.event?.({
+                      event,
+                      interval: interval.value,
+                      intervalDivisions: props.intervalDivisions,
+                      intervalDuration: props.intervalDuration,
+                      intervalHeight: props.intervalHeight,
+                    }) ?? (
                       <VCalendarIntervalEvent
                         event={ event }
                         interval={ interval.value }
@@ -122,8 +129,9 @@ export const VCalendarInterval = genericComponent()({
                         intervalDuration={ props.intervalDuration }
                         intervalHeight={ props.intervalHeight }
                       />
-                    </slot>
+                    )
                   ))}
+              <slot name="intervalBody" interval={ interval.value }>
               </slot>
             </div>
           </div>
