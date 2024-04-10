@@ -11,7 +11,6 @@ import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSli
 import { useBackgroundColor } from '@/composables/color'
 import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeGroupProps, useGroup } from '@/composables/group'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTagProps } from '@/composables/tag'
 
@@ -70,12 +69,11 @@ export const makeVTabsProps = propsFactory({
   hideSlider: Boolean,
   sliderColor: String,
 
-  ...makeVSlideGroupProps({ mandatory: 'force' as const }),
-  ...makeDensityProps(),
-  ...makeGroupProps({
+  ...makeVSlideGroupProps({
     mandatory: 'force' as const,
     selectedClass: 'v-tab-item--selected',
   }),
+  ...makeDensityProps(),
   ...makeTagProps(),
 }, 'VTabs')
 
@@ -136,11 +134,14 @@ export const VTabs = genericComponent<VTabsSlots>()({
             symbol={ VTabsSymbol }
           >
             { slots.default?.() ?? items.value.map(item => (
-              slots[`tab.${item.value}`]?.({ item }) ?? slots.tab?.({ item }) ?? (
+              slots.tab?.({ item }) ?? (
                 <VTab
                   { ...item }
                   key={ item.text }
                   value={ item.value }
+                  v-slots={{
+                    default: () => slots[`tab.${item.value}`]?.({ item }),
+                  }}
                 />
               )
             ))}
@@ -151,11 +152,11 @@ export const VTabs = genericComponent<VTabsSlots>()({
               v-model={ model.value }
               key="tabs-window"
             >
-              { items.value.map(item => (
+              { items.value.map(item => slots.item?.({ item }) ?? (
                 <VTabsWindowItem
                   value={ item.value }
                   v-slots={{
-                    default: () => slots[`item.${item.value}`]?.({ item }) ?? slots.item?.({ item }),
+                    default: () => slots[`item.${item.value}`]?.({ item }),
                   }}
                 />
               ))}

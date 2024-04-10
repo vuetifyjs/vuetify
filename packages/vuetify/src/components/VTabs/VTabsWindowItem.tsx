@@ -21,7 +21,11 @@ export const VTabsWindowItem = genericComponent()({
         <VWindowItem
           _as="VTabsWindowItem"
           { ...windowItemProps }
-          class="v-tabs-window-item"
+          class={[
+            'v-tabs-window-item',
+            props.class,
+          ]}
+          style={ props.style }
           v-slots={ slots }
         />
       )
