@@ -52,4 +52,44 @@ describe('vuetify date adapter', () => {
 
     timezoneMock.unregister()
   })
+
+  it('returns correct start of week', () => {
+    let instance = new VuetifyDateAdapter({ locale: 'en-US' })
+
+    let date = instance.startOfWeek(new Date(2024, 3, 10, 12, 0, 0))
+
+    expect(date?.getFullYear()).toBe(2024)
+    expect(date?.getMonth()).toBe(3)
+    expect(date?.getDate()).toBe(7)
+    expect(date?.getDay()).toBe(0)
+
+    instance = new VuetifyDateAdapter({ locale: 'sv-SE' })
+
+    date = instance.startOfWeek(new Date(2024, 3, 10, 12, 0, 0))
+
+    expect(date?.getFullYear()).toBe(2024)
+    expect(date?.getMonth()).toBe(3)
+    expect(date?.getDate()).toBe(8)
+    expect(date?.getDay()).toBe(1)
+  })
+
+  it('returns correct end of week', () => {
+    let instance = new VuetifyDateAdapter({ locale: 'en-US' })
+
+    let date = instance.endOfWeek(new Date(2024, 3, 10, 12, 0, 0))
+
+    expect(date?.getFullYear()).toBe(2024)
+    expect(date?.getMonth()).toBe(3)
+    expect(date?.getDate()).toBe(13)
+    expect(date?.getDay()).toBe(6)
+
+    instance = new VuetifyDateAdapter({ locale: 'sv-SE' })
+
+    date = instance.endOfWeek(new Date(2024, 3, 10, 12, 0, 0))
+
+    expect(date?.getFullYear()).toBe(2024)
+    expect(date?.getMonth()).toBe(3)
+    expect(date?.getDate()).toBe(14)
+    expect(date?.getDay()).toBe(0)
+  })
 })
