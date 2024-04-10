@@ -1,5 +1,6 @@
 // Utilities
 import { h, mergeProps, render, resolveComponent } from 'vue'
+import { isObject } from '@/util'
 
 // Types
 import type {
@@ -23,41 +24,68 @@ type ExcludeProps =
   | 'ref_key'
   | '$children'
 
-export const useDirectiveComponent = <
+declare const CustomDirectiveSymbol: unique symbol
+type DirectiveHook<B extends DirectiveBinding> = (el: any, binding: B, vnode: VNode<any, any>, prevVNode: VNode<any, any>) => void
+export interface CustomDirective<B extends DirectiveBinding = DirectiveBinding> {
+  created?: DirectiveHook<B>
+  beforeMount?: DirectiveHook<B>
+  mounted?: DirectiveHook<B>
+  beforeUpdate?: DirectiveHook<B>
+  updated?: DirectiveHook<B>
+  beforeUnmount?: DirectiveHook<B>
+  unmounted?: DirectiveHook<B>
+  [CustomDirectiveSymbol]: true
+}
+
+export function useDirectiveComponent <
+  Binding extends DirectiveBinding,
+> (component: string | Component, props?: (binding: Binding) => Record<string, any>): CustomDirective<Binding>
+export function useDirectiveComponent <
   C extends Component,
   Props = Omit<ComponentInstance<C>['$props'], ExcludeProps>
->(component: string | C, props?: any): ObjectDirective<any, Props> => {
+> (component: string | C, props?: Record<string, any>): ObjectDirective<any, Props>
+export function useDirectiveComponent (
+  component: string | Component,
+  props?: Record<string, any> | ((binding: DirectiveBinding) => Record<string, any>)
+): ObjectDirective | CustomDirective {
   const concreteComponent = (typeof component === 'string'
     ? resolveComponent(component)
     : component) as ConcreteComponent
 
+  const hook = mountComponent(concreteComponent, props)
+
   return {
-    mounted (el: HTMLElement, binding: DirectiveBinding, vnode: VNode) {
-      const _props = typeof props === 'function' ? props(binding.arg, binding.modifiers) : props
-      const text = binding.value?.text ?? binding.value
-      const value = Object(binding.value) === binding.value ? binding.value : undefined
-
-      // Get the children from the props or directive value, or the element's children
-      const children = () => text || el.innerHTML
-
-      // If vnode.ctx is the same as the instance, then we're bound to a plain element
-      // and need to find the nearest parent component instance to inherit provides from
-      const provides = (vnode.ctx === binding.instance!.$
-        ? findComponentParent(vnode, binding.instance!.$)?.provides
-        : vnode.ctx?.provides) ?? binding.instance!.$.provides
-
-      const node = h(concreteComponent, mergeProps(_props, value), children)
-      node.appContext = Object.assign(
-        Object.create(null),
-        (binding.instance as ComponentPublicInstance).$.appContext,
-        { provides }
-      )
-
-      render(node, el)
-    },
+    mounted: hook,
+    updated: hook,
     unmounted (el: HTMLElement) {
       render(null, el)
     },
+  }
+}
+
+function mountComponent (component: ConcreteComponent, props?: Record<string, any> | ((binding: DirectiveBinding) => Record<string, any>)) {
+  return function (el: HTMLElement, binding: DirectiveBinding, vnode: VNode) {
+    const _props = typeof props === 'function' ? props(binding) : props
+    const text = binding.value?.text ?? binding.value
+    const value = isObject(binding.value) ? binding.value : {}
+
+    // Get the children from the props or directive value, or the element's children
+    const children = () => text ?? el.innerHTML
+
+    // If vnode.ctx is the same as the instance, then we're bound to a plain element
+    // and need to find the nearest parent component instance to inherit provides from
+    const provides = (vnode.ctx === binding.instance!.$
+      ? findComponentParent(vnode, binding.instance!.$)?.provides
+      : vnode.ctx?.provides) ?? binding.instance!.$.provides
+
+    const node = h(component, mergeProps(_props, value), children)
+    node.appContext = Object.assign(
+      Object.create(null),
+      (binding.instance as ComponentPublicInstance).$.appContext,
+      { provides }
+    )
+
+    render(node, el)
   }
 }
 

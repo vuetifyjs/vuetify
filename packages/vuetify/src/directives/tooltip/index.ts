@@ -6,15 +6,18 @@ import { useDirectiveComponent } from '@/composables/directiveComponent'
 
 // Types
 import type { DirectiveBinding } from 'vue'
+import type { Anchor } from '@/util'
 
-export const Tooltip = useDirectiveComponent(VTooltip, (
-  arg: DirectiveBinding['arg'],
-  modifiers: DirectiveBinding['modifiers'],
-) => {
+export interface TooltipDirectiveBinding extends Omit<DirectiveBinding<string>, 'arg' | 'value'> {
+  arg?: { [T in Anchor]: T extends `${infer A} ${infer B}` ? `${A}-${B}` : T }[Anchor]
+  value: boolean | string | Record<string, any>
+}
+
+export const Tooltip = useDirectiveComponent<TooltipDirectiveBinding>(VTooltip, binding => {
   return {
     activator: 'parent',
-    location: arg ?? 'top',
-    ...modifiers,
+    location: binding.arg?.replace('-', ' '),
+    text: typeof binding.value === 'boolean' ? undefined : binding.value,
   }
 })
 
