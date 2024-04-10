@@ -25,15 +25,18 @@ import { VTabsSymbol } from './shared'
 
 export type TabItem = string | number | Record<string, any>
 
+export type VTabsSlot = {
+  item: TabItem
+}
+
 export type VTabsSlots = {
   default: never
-  header: never
-  'header-item': never
-  item: TabItem
+  tab: VTabsSlot
+  item: VTabsSlot
   window: never
 } & {
-  [key: `header-item.${string}`]: never
-  [key: `item.${string}`]: TabItem
+  [key: `tab.${string}`]: VTabsSlot
+  [key: `item.${string}`]: VTabsSlot
 }
 
 function parseItems (items: readonly TabItem[] | undefined) {
@@ -87,7 +90,6 @@ export const VTabs = genericComponent<VTabsSlots>()({
 
   setup (props, { slots }) {
     const model = useProxiedModel(props, 'modelValue')
-    const { items: _items } = useGroup(props, VTabsSymbol)
     const items = computed(() => parseItems(props.items))
     const { densityClasses } = useDensity(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
@@ -134,7 +136,7 @@ export const VTabs = genericComponent<VTabsSlots>()({
             symbol={ VTabsSymbol }
           >
             { slots.default?.() ?? items.value.map(item => (
-              slots[`header-item.${item.value}`]?.() ?? slots['header-item']?.() ?? (
+              slots[`tab.${item.value}`]?.({ item }) ?? slots.tab?.({ item }) ?? (
                 <VTab
                   { ...item }
                   key={ item.text }
@@ -153,7 +155,7 @@ export const VTabs = genericComponent<VTabsSlots>()({
                 <VTabsWindowItem
                   value={ item.value }
                   v-slots={{
-                    default: () => slots[`item.${item.value}`]?.(item) ?? slots.item?.(item),
+                    default: () => slots[`item.${item.value}`]?.({ item }) ?? slots.item?.({ item }),
                   }}
                 />
               ))}
