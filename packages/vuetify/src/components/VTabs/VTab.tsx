@@ -108,16 +108,15 @@ export const VTab = genericComponent<VBtnSlots>()({
 
         const color = getComputedStyle(prevEl).color
 
-        let options: ((nextEl: HTMLElement, prevEl: HTMLElement) => Record<string, any>)
-        switch (props.sliderTransition) {
-          case 'fade': options = fade; break
-          case 'grow': options = grow; break
-          default: options = shift
-        }
+        const keyframes = {
+          fade,
+          grow,
+          shift,
+        }[props.sliderTransition ?? 'shift'] ?? shift
 
         animate(nextEl, {
           backgroundColor: [color, 'currentcolor'],
-          ...options(nextEl, prevEl),
+          ...keyframes(nextEl, prevEl),
         }, {
           duration: 225,
           easing: standardEasing,
