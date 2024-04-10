@@ -45,7 +45,7 @@ export const makeLineProps = propsFactory({
     default: 'value',
   },
   modelValue: {
-    type: Array as PropType<SparklineItem[]>,
+    type: Array as PropType<SparklineItem[] | Array<SparklineItem[]>>,
     default: () => ([]),
   },
   min: [String, Number],

@@ -47,7 +47,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     const autoDrawDuration = computed(() => Number(props.autoDrawDuration) || (props.fill ? 500 : 2000))
 
     const lastLength = ref(0)
-    const path = ref<SVGPathElement | null>(null)
+    const paths = ref<SVGPathElement[] | []>([])
 
     function genPoints (
       values: number[],
@@ -91,14 +91,18 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
         maxY: parseInt(props.height, 10) - padding,
       }
     })
-    const items = computed(() => props.modelValue.map(item => getPropertyFromItem(item, props.itemValue, item)))
+    const items = computed(() =>
+      !Array.isArray(props.modelValue?.[0])
+        ? [props.modelValue.map(item => getPropertyFromItem(item, props.itemValue, item))]
+        : props.modelValue.map(item => (item as SparklineItem[]).map(nested => getPropertyFromItem(nested, props.itemValue, nested)))
+    )
     const parsedLabels = computed(() => {
       const labels = []
-      const points = genPoints(items.value, boundary.value)
+      const points = items.value.map(item => genPoints(item, boundary.value))
       const len = points.length
 
       for (let i = 0; labels.length < len; i++) {
-        const item = points[i]
+        const item = points[0][i]
         let value = props.labels[i]
 
         if (!value) {
@@ -119,38 +123,40 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     watch(() => props.modelValue, async () => {
       await nextTick()
 
-      if (!props.autoDraw || !path.value) return
+      if (!props.autoDraw || !paths.value || !paths.value.length) return
+      console.log(paths.value)
+      for (const path of paths.value) {
+        const pathRef = path
+        const length = pathRef.getTotalLength()
 
-      const pathRef = path.value
-      const length = pathRef.getTotalLength()
+        if (!props.fill) {
+          // Initial setup to "hide" the line by using the stroke dash array
+          pathRef.style.strokeDasharray = `${length}`
+          pathRef.style.strokeDashoffset = `${length}`
 
-      if (!props.fill) {
-        // Initial setup to "hide" the line by using the stroke dash array
-        pathRef.style.strokeDasharray = `${length}`
-        pathRef.style.strokeDashoffset = `${length}`
+          // Force reflow to ensure the transition starts from this state
+          pathRef.getBoundingClientRect()
 
-        // Force reflow to ensure the transition starts from this state
-        pathRef.getBoundingClientRect()
-
-        // Animate the stroke dash offset to "draw" the line
-        pathRef.style.transition = `stroke-dashoffset ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
-        pathRef.style.strokeDashoffset = '0'
-      } else {
-        // Your existing logic for filled paths remains the same
-        pathRef.style.transformOrigin = 'bottom center'
-        pathRef.style.transition = 'none'
-        pathRef.style.transform = `scaleY(0)`
-        pathRef.getBoundingClientRect()
-        pathRef.style.transition = `transform ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
-        pathRef.style.transform = `scaleY(1)`
+          // Animate the stroke dash offset to "draw" the line
+          pathRef.style.transition = `stroke-dashoffset ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
+          pathRef.style.strokeDashoffset = '0'
+        } else {
+          // Your existing logic for filled paths remains the same
+          pathRef.style.transformOrigin = 'bottom center'
+          pathRef.style.transition = 'none'
+          pathRef.style.transform = `scaleY(0)`
+          pathRef.getBoundingClientRect()
+          pathRef.style.transition = `transform ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
+          pathRef.style.transform = `scaleY(1)`
+        }
       }
 
       lastLength.value = length
     }, { immediate: true })
 
-    function genPath (fill: boolean) {
+    function genPath (index: number, fill: boolean) {
       return _genPath(
-        genPoints(items.value, boundary.value),
+        genPoints(items.value[index], boundary.value),
         props.smooth ? 8 : Number(props.smooth),
         fill,
         parseInt(props.height, 10)
@@ -204,17 +210,20 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
               }
             </g>
           )}
-
-          <path
-            ref={ path }
-            d={ genPath(props.fill) }
-            fill={ props.fill ? `url(#${id.value})` : 'none' }
-            stroke={ props.fill ? 'none' : `url(#${id.value})` }
-          />
+          {
+            items.value.map((item, i) => (
+              <path
+                ref={ paths }
+                d={ genPath(i, props.fill) }
+                fill={ props.fill ? `url(#${id.value})` : 'none' }
+                stroke={ props.fill ? 'none' : `url(#${id.value})` }
+              />
+            ))
+          }
 
           { props.fill && (
             <path
-              d={ genPath(false) }
+              d={ genPath(0, false) }
               fill="none"
               stroke={ props.color ?? props.gradient?.[0] }
             />
