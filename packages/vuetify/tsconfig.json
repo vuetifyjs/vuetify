@@ -18,6 +18,7 @@
         "vue-router"
       ]
     },
-    "stripInternal": true
+    "stripInternal": true,
+    "skipLibCheck": true,
   }
 }
