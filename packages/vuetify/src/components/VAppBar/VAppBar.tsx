@@ -94,6 +94,9 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       (scrollBehavior.value.inverted ? scrollRatio.value > 0 : scrollRatio.value === 0)
     ))
     const isFlat = computed(() => props.flat || (
+      scrollBehavior.value.fullyHide &&
+      !isActive.value
+    ) || (
       scrollBehavior.value.elevate &&
       (scrollBehavior.value.inverted ? currentScroll.value > 0 : currentScroll.value === 0)
     ))
