@@ -64,16 +64,35 @@ For a list of all supported date adapters, visit the [date-io](https://github.co
 
 The date composable supports the following date formatting options:
 
-* fullDateWithWeekday
-* normalDateWithWeekday
-* keyboardDate
-* monthAndDate
-* monthAndYear
-* month
-* monthShort
-* dayOfMonth
-* shortDate
-* year
+| Format Name | Format Output |
+| - | - |
+| fullDate | "Jan 1, 2024" |
+| fullDateWithWeekday | "Tuesday, January 1, 2024" |
+| normalDate | "1 January" |
+| normalDateWithWeekday | "Wed, Jan 1" |
+| shortDate | "Jan 1" |
+| year | "2024" |
+| month | "January" |
+| monthShort | "Jan" |
+| monthAndYear | "January 2024" |
+| monthAndDate | "January 1" |
+| weekday | "Wednesday" |
+| weekdayShort | "Wed" |
+| dayOfMonth | "1" |
+| hours12h | "11" |
+| hours24h | "23" |
+| minutes | "44" |
+| seconds | "00" |
+| fullTime | "11:44 PM" for US, "23:44" for Europe |
+| fullTime12h | "11:44 PM" |
+| fullTime24h | "23:44" |
+| fullDateTime | "Jan 1, 2024 11:44 PM" |
+| fullDateTime12h | "Jan 1, 2024 11:44 PM" |
+| fullDateTime24h | "Jan 1, 2024 23:44" |
+| keyboardDate | "02/13/2024" |
+| keyboardDateTime | "02/13/2024 23:44" |
+| keyboardDateTime12h | "02/13/2024 11:44 PM" |
+| keyboardDateTime24h | "02/13/2024 23:44" |
 
 The following example shows how to use the date composable to format a date string:
 

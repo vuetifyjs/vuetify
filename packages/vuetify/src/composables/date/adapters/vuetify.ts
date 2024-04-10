@@ -280,23 +280,24 @@ function format (
 
   let options: Intl.DateTimeFormatOptions = {}
   switch (formatString) {
+    case 'fullDate':
+      options = { year: 'numeric', month: 'long', day: 'numeric' }
+      break
     case 'fullDateWithWeekday':
-      options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }
+      options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
       break
-    case 'hours12h':
-      options = { hour: 'numeric', hour12: true }
-      break
+    case 'normalDate':
+      const day = newDate.getDate()
+      const month = new Intl.DateTimeFormat(locale, { month: 'long' }).format(newDate)
+      return `${day} ${month}`
     case 'normalDateWithWeekday':
       options = { weekday: 'short', day: 'numeric', month: 'short' }
       break
-    case 'keyboardDate':
-      options = { day: '2-digit', month: '2-digit', year: 'numeric' }
+    case 'shortDate':
+      options = { month: 'short', day: 'numeric' }
       break
-    case 'monthAndDate':
-      options = { month: 'long', day: 'numeric' }
-      break
-    case 'monthAndYear':
-      options = { month: 'long', year: 'numeric' }
+    case 'year':
+      options = { year: 'numeric' }
       break
     case 'month':
       options = { month: 'long' }
@@ -304,16 +305,61 @@ function format (
     case 'monthShort':
       options = { month: 'short' }
       break
-    case 'dayOfMonth':
-      return new Intl.NumberFormat(locale).format(newDate.getDate())
-    case 'shortDate':
-      options = { year: '2-digit', month: 'numeric', day: 'numeric' }
+    case 'monthAndYear':
+      options = { month: 'long', year: 'numeric' }
+      break
+    case 'monthAndDate':
+      options = { month: 'long', day: 'numeric' }
+      break
+    case 'weekday':
+      options = { weekday: 'long' }
       break
     case 'weekdayShort':
       options = { weekday: 'short' }
       break
-    case 'year':
-      options = { year: 'numeric' }
+    case 'dayOfMonth':
+      return new Intl.NumberFormat(locale).format(newDate.getDate())
+    case 'hours12h':
+      options = { hour: 'numeric', hour12: true }
+      break
+    case 'hours24h':
+      options = { hour: 'numeric', hour12: false }
+      break
+    case 'minutes':
+      options = { minute: 'numeric' }
+      break
+    case 'seconds':
+      options = { second: 'numeric' }
+      break
+    case 'fullTime':
+      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      break
+    case 'fullTime12h':
+      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      break
+    case 'fullTime24h':
+      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+      break
+    case 'fullDateTime':
+      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      break
+    case 'fullDateTime12h':
+      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      break
+    case 'fullDateTime24h':
+      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+      break
+    case 'keyboardDate':
+      options = { year: 'numeric', month: '2-digit', day: '2-digit' }
+      break
+    case 'keyboardDateTime':
+      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+      break
+    case 'keyboardDateTime12h':
+      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      break
+    case 'keyboardDateTime24h':
+      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
       break
     default:
       options = customFormat ?? { timeZone: 'UTC', timeZoneName: 'short' }
