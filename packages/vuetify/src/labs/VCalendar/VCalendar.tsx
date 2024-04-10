@@ -15,6 +15,7 @@ import { computed } from 'vue'
 import { chunkArray, genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVCalendarProps = propsFactory({
+  fullHeight: Boolean,
   hideHeader: Boolean,
   hideWeekNumber: Boolean,
 
@@ -88,6 +89,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
             'v-calendar-monthly': props.viewMode === 'month',
             'v-calendar-weekly': props.viewMode === 'week',
             'v-calendar-day': props.viewMode === 'day',
+            'v-calendar--full-height': props.fullHeight,
           },
         ]}
         >

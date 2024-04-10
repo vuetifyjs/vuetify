@@ -1,5 +1,15 @@
 @import './_variables.scss'
 
+.v-calendar
+  display: flex
+  flex-direction: column
+
+  &--full-height
+    flex-grow: 1
+
+    .v-calendar__container
+      flex-grow: 1
+
 .v-calendar-weekly
   width: 100%
   height: 100%
@@ -11,6 +21,8 @@
   background-color: #fff
 
 .v-calendar__container
+  display: flex
+  flex-direction: column
   border-top: $calendar-line-width solid $calendar-line-color
   border-left: $calendar-line-width solid $calendar-line-color
   border-right: $calendar-line-width solid $calendar-line-color
