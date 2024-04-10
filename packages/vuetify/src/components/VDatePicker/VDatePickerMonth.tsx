@@ -167,7 +167,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
         <MaybeTransition name={ transition.value }>
           <div
             ref={ daysRef }
-            key={ daysInMonth.value[0].date.toString() }
+            key={ daysInMonth.value[0].date?.toString() }
             class="v-date-picker-month__days"
           >
             { !props.hideWeekdays && adapter.getWeekdays().map(weekDay => (
