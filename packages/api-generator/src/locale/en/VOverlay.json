@@ -11,6 +11,7 @@
     "zIndex": "The z-index used for the component."
   },
   "events": {
-    "click:outside": "Event that fires when clicking outside an active overlay."
+    "click:outside": "Event that fires when clicking outside an active overlay.",
+    "afterLeave": "Event that fires after the overlay has finished transitioning out."
   }
 }
