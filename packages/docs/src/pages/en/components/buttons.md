@@ -280,7 +280,7 @@ The `v-banner-actions` component applies the **text** variant and **slim** prop,
 
 | Documentation | API |
 | - | - |
-| [Banners](/components/banners/) | [v-banner-actions](/api/v-banner-actions/) |  |
+| [Banners](/components/banners/) | [v-banner-actions](/api/v-banner-actions/) |
 
 <ExamplesExample file="v-btn/defaults-banner-actions" />
 
@@ -299,7 +299,7 @@ The `v-bottom-navigation` component **scopes** out all previously provided defau
 
 | Documentation | API |
 | - | - |
-| [Bottom navigation](/components/bottom-navigation/) | [v-bottom-navigation](/api/v-bottom-navigation/) |  |
+| [Bottom navigation](/components/bottom-navigation/) | [v-bottom-navigation](/api/v-bottom-navigation/) |
 
 <ExamplesExample file="v-btn/defaults-bottom-navigation" />
 
@@ -318,7 +318,7 @@ The `v-btn-group` component makes multiple changes to the `v-btn` component.
 
 | Documentation | API |
 | - | - |
-| [Button groups](/components/button-groups/) | [v-btn-group](/api/v-btn-group/) |  |
+| [Button groups](/components/button-groups/) | [v-btn-group](/api/v-btn-group/) |
 
 <ExamplesExample file="v-btn/defaults-btn-group" />
 
@@ -338,7 +338,7 @@ The `v-card-actions` component applies the **text** variant and **slim** prop, r
 
 | Documentation | API |
 | - | - |
-| [Cards](/components/cards/) | [v-card-actions](/api/v-card-actions/) |  |
+| [Cards](/components/cards/) | [v-card-actions](/api/v-card-actions/) |
 
 <ExamplesExample file="v-btn/defaults-card-actions" />
 
@@ -355,7 +355,7 @@ The `v-snackbar` component applies the **text** variant, **slim** prop, and remo
 
 | Documentation | API |
 | - | - |
-| [Snackbars](/components/snackbars/) | [v-snackbar](/api/v-snackbar/) |  |
+| [Snackbars](/components/snackbars/) | [v-snackbar](/api/v-snackbar/) |
 
 <ExamplesExample file="v-btn/defaults-snackbar" />
 

@@ -80,7 +80,7 @@ If you are still using the Options API, you can access the locale settings on `t
 
 | Feature | Description |
 | - | - |
-| [useLocale](/api/use-locale/) | The locale composable is used
+| [useLocale](/api/use-locale/) | The locale composable is used |
 | [v-locale-provider](/api/v-locale-provider/) | The locale provider component is used to scope a portion of your application to a different locale than the default one |
 
 <ApiInline hide-links />

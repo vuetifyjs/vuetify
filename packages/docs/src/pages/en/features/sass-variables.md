@@ -244,7 +244,7 @@ Only put variables, mixins, and functions in the settings file, styles should be
 
 ### Build performance
 
-Vuetify loads precompiled CSS by default, enabling variable customisation will switch to the base SASS files instead which must be recompiled with your project.
+Vuetify loads precompiled CSS by default, enabling variable customization will switch to the base SASS files instead which must be recompiled with your project.
 This can be a performance hit if you're using more than a few vuetify components, and also forces you to use the same SASS compiler version as us.
 
 ### Symlinks
