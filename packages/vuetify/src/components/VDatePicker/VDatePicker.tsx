@@ -60,7 +60,9 @@ export const makeVDatePickerProps = propsFactory({
   },
 
   ...makeVDatePickerControlsProps(),
-  ...makeVDatePickerMonthProps(),
+  ...makeVDatePickerMonthProps({
+    weeksInMonth: 'static' as const,
+  }),
   ...omit(makeVDatePickerMonthsProps(), ['modelValue']),
   ...omit(makeVDatePickerYearsProps(), ['modelValue']),
   ...makeVPickerProps({ title: '$vuetify.datePicker.title' }),
