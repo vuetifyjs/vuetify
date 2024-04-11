@@ -2,7 +2,7 @@
 import './VDataIterator.sass'
 
 // Components
-import { VSlideYTransition } from '@/components/transitions'
+import { VFadeTransition } from '@/components/transitions'
 import { makeDataTableExpandProps, provideExpanded } from '@/components/VDataTable/composables/expand'
 import { makeDataTableGroupProps, provideGroupBy, useGroupedItems } from '@/components/VDataTable/composables/group'
 import { useOptions } from '@/components/VDataTable/composables/options'
@@ -14,7 +14,6 @@ import {
 } from '@/components/VDataTable/composables/paginate'
 import { makeDataTableSelectProps, provideSelection } from '@/components/VDataTable/composables/select'
 import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from '@/components/VDataTable/composables/sort'
-import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
 import { makeDataIteratorItemsProps, useDataIteratorItems } from './composables/items'
@@ -82,7 +81,7 @@ export const makeVDataIteratorProps = propsFactory({
   ...makeTagProps(),
   ...makeTransitionProps({
     transition: {
-      component: VSlideYTransition as Component,
+      component: VFadeTransition as Component,
       hideOnLeave: true,
     },
   }),
@@ -193,22 +192,11 @@ export const VDataIterator = genericComponent<new <T> (
 
         <MaybeTransition transition={ props.transition }>
           { props.loading ? (
-            <LoaderSlot name="v-data-iterator" active>
-              { slotProps => (
-                slots.loader
-                  ? slots.loader?.(slotProps)
-                  : (
-                    <VProgressCircular
-                      color={ typeof props.loading === 'boolean' ? undefined : props.loading }
-                      indeterminate
-                      size="36"
-                      width="2"
-                    />
-                  )
-              )}
+            <LoaderSlot key="loader" name="v-data-iterator" active>
+              { slotProps => slots.loader?.(slotProps) }
             </LoaderSlot>
           ) : (
-            <div>
+            <div key="items">
               { !paginatedItems.value.length
                 ? slots['no-data']?.()
                 : slots.default?.(slotProps.value)
