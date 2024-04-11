@@ -23,6 +23,26 @@ The `v-confirm-edit` component is used to allow the user to verify their changes
 
 <PageFeatures />
 
+::: warning
+
+This feature requires [v3.4.0](/getting-started/release-notes/?version=v3.4.0)
+
+:::
+
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VConfirmEdit } from 'vuetify/labs/VConfirmEdit'
+
+export default createVuetify({
+  components: {
+    VConfirmEdit,
+  },
+})
+```
+
 ## Usage
 
 <ExamplesUsage name="v-confirm-edit" />
