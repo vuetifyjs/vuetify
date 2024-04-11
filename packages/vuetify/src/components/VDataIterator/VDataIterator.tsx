@@ -1,6 +1,3 @@
-// Styles
-import './VDataIterator.sass'
-
 // Components
 import { VFadeTransition } from '@/components/transitions'
 import { makeDataTableExpandProps, provideExpanded } from '@/components/VDataTable/composables/expand'
