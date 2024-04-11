@@ -125,7 +125,9 @@ export const VMenu = genericComponent<OverlaySlots>()({
     function onKeydown (e: KeyboardEvent) {
       if (props.disabled) return
 
-      if (e.key === 'Tab') {
+      if (e.key === 'Tab' || (e.key === 'Enter' && !props.closeOnContentClick)) {
+        if (e.key === 'Enter') e.preventDefault()
+
         const nextElement = getNextElement(
           focusableChildren(overlay.value?.contentEl as Element, false),
           e.shiftKey ? 'prev' : 'next',

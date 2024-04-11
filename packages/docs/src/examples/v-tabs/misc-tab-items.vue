@@ -7,9 +7,8 @@
       <v-tab
         v-for="item in items"
         :key="item.tab"
-      >
-        {{ item.tab }}
-      </v-tab>
+        :title="item.tab"
+      ></v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
