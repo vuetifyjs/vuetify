@@ -25,6 +25,7 @@ export const makeVCalendarProps = propsFactory({
 
 export type VCalendarSlots = {
   header: { title: string }
+  event: { day?: Object, allDay: boolean, event: Record<string, unknown> }
 }
 
 export const VCalendar = genericComponent<VCalendarSlots>()({
@@ -152,6 +153,9 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                           day={ day }
                           title={ day ? adapter.format(day.date, 'dayOfMonth') : 'NaN' }
                           events={ props.events?.filter(e => adapter.isSameDay(day.date, e.start) || adapter.isSameDay(day.date, e.end)) }
+                          v-slots={{
+                            event: slots.event,
+                          }}
                         ></VCalendarMonthDay>
                       )),
                     ]
