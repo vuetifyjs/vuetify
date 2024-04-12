@@ -92,10 +92,17 @@ export async function generateDirectiveDataFromTypes (): Promise<DirectiveData[]
 export async function generateComponentDataFromTypes (component: string): Promise<ComponentData> {
   const sourceFile = project.addSourceFileAtPath(`./templates/tmp/${component}.d.ts`)
 
-  const props = await inspect(project, sourceFile.getTypeAlias('ComponentProps'))
-  const events = await inspect(project, sourceFile.getTypeAlias('ComponentEvents'))
-  const slots = await inspect(project, sourceFile.getTypeAlias('ComponentSlots'))
-  const exposed = await inspect(project, sourceFile.getTypeAlias('ComponentExposed'))
+  const [
+    props,
+    events,
+    slots,
+    exposed,
+  ] = await Promise.all([
+    inspect(project, sourceFile.getTypeAlias('ComponentProps')),
+    inspect(project, sourceFile.getTypeAlias('ComponentEvents')),
+    inspect(project, sourceFile.getTypeAlias('ComponentSlots')),
+    inspect(project, sourceFile.getTypeAlias('ComponentExposed')),
+  ])
 
   const sections = [props, events, slots, exposed]
 
