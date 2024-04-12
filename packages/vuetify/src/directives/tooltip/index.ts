@@ -16,7 +16,7 @@ export interface TooltipDirectiveBinding extends Omit<DirectiveBinding<string>, 
 export const Tooltip = useDirectiveComponent<TooltipDirectiveBinding>(VTooltip, binding => {
   return {
     activator: 'parent',
-    location: binding.arg?.replace('-', ' '),
+    location: binding.arg?.replace('-', ' ') ?? 'top',
     text: typeof binding.value === 'boolean' ? undefined : binding.value,
   }
 })
