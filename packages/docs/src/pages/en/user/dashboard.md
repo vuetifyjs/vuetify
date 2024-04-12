@@ -6,5 +6,8 @@ meta:
   description: User Dashboard
   keywords: user dashboard
 ---
+<script setup>
+  import { DashboardDashboardEmptyState } from '@/components/dashboard/DashboardEmptyState'
+</script>
 
 <DashboardDashboardEmptyState />
