@@ -22,7 +22,11 @@
                 class="me-1"
                 icon="mdi-pin-off"
                 size="16"
-                @click.prevent.stop="onClickPinRemove(itemProps)"
+                @click.prevent.stop="onClickPinRemove({
+                  title: itemProps.title,
+                  to: itemProps.to,
+                  category: '',
+                })"
               />
             </template>
           </v-list-item>
@@ -32,13 +36,21 @@
   </AppListList>
 </template>
 
-<script setup>
+<script lang="ts" setup>
+  import { Pin } from '@/stores/pins'
+
+  const props = defineProps<{ rail: boolean }>()
+
   const auth = useAuthStore()
   const pins = usePinsStore()
   const user = useUserStore()
   const router = useRouter()
 
-  const opened = ref([])
+  const _opened = ref<string[]>([])
+  const opened = computed({
+    get: () => props.rail ? [] : _opened.value,
+    set: val => _opened.value = val,
+  })
   const pinned = computed(() => ([{
     activeIcon: 'mdi-pin',
     inactiveIcon: 'mdi-pin-outline',
@@ -46,7 +58,7 @@
     title: 'Pinned',
   }]))
 
-  async function onClickPin (to) {
+  async function onClickPin (to: string) {
     pins.isPinning = true
 
     await router.replace(to)
@@ -54,7 +66,7 @@
     pins.isPinning = false
   }
 
-  function onClickPinRemove (pin) {
+  function onClickPinRemove (pin: Pin) {
     pins.toggle(false, pin)
   }
 
