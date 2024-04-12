@@ -97,7 +97,6 @@ declare global {
 // for vue template auto import
 import { UnwrapRef } from 'vue'
 declare module 'vue' {
-  interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly IN_BROWSER: UnwrapRef<typeof import('./src/utils/globals')['IN_BROWSER']>
     readonly IS_DEBUG: UnwrapRef<typeof import('./src/utils/globals')['IS_DEBUG']>
@@ -187,7 +186,6 @@ declare module 'vue' {
   }
 }
 declare module '@vue/runtime-core' {
-  interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly IN_BROWSER: UnwrapRef<typeof import('./src/utils/globals')['IN_BROWSER']>
     readonly IS_DEBUG: UnwrapRef<typeof import('./src/utils/globals')['IS_DEBUG']>

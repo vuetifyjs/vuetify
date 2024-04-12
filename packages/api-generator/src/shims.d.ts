@@ -20,5 +20,3 @@ declare module 'ts-morph' {
 }
 
 export {}
-
-export {}
