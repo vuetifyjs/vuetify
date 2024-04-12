@@ -1,8 +1,8 @@
 <template>
   <v-data-iterator
     :items="mice"
-    :loading="true"
     :items-per-page="itemsPerPage"
+    :loading="true"
   >
     <template v-slot:default="{ items }">
       <v-row>
@@ -17,14 +17,14 @@
             <v-img
               :gradient="`to top right, rgba(255, 255, 255, .1), rgba(${item.raw.color}, .15)`"
               :src="item.raw.src"
-              cover
               height="150"
+              cover
             ></v-img>
 
             <v-list-item
               :title="item.raw.name"
-              lines="two"
               density="comfortable"
+              lines="two"
               subtitle="Lorem ipsum dil orei namdie dkaf"
             >
               <template v-slot:title>
@@ -34,7 +34,7 @@
               </template>
             </v-list-item>
 
-            <v-table density="compact" class="text-caption">
+            <v-table class="text-caption" density="compact">
               <tbody>
                 <tr align="right">
                   <th>DPI:</th>
@@ -438,6 +438,6 @@
           },
         ],
       }
-    }
+    },
   }
 </script>
