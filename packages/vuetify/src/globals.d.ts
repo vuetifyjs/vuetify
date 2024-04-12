@@ -132,6 +132,7 @@ declare module '@vue/runtime-core' {
 
   export interface VNode {
     ctx: ComponentInternalInstance | null
+    ssContent: VNode | null
   }
 }
 

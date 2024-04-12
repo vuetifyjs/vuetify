@@ -130,7 +130,7 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
   }
 }
 
-export function isObject (obj: any): obj is object {
+export function isObject (obj: any): obj is Record<string, any> {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
 }
 
