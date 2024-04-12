@@ -18,3 +18,5 @@ declare module 'ts-morph' {
     }
   }
 }
+
+export {}

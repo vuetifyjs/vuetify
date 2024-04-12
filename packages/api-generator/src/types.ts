@@ -115,6 +115,10 @@ export async function generateComponentDataFromTypes (component: string): Promis
     events: events.properties,
     slots: slots.properties,
     exposed: exposed.properties,
+    displayName: component,
+    fileName: component,
+    pathName: kebabCase(component),
+    sass: {},
   }
 }
 
@@ -272,21 +276,21 @@ function getSource (declaration?: Node<ts.Node>) {
   return filePath && startLine ? `${filePath}#L${startLine}-L${endLine}` : undefined
 }
 
-function listFlags (flags: object, value?: number) {
-  if (!value) return []
+// function listFlags (flags: object, value?: number) {
+//   if (!value) return []
 
-  const entries = Object.entries(flags).filter(([_, flag]) => typeof flag === 'number')
+//   const entries = Object.entries(flags).filter(([_, flag]) => typeof flag === 'number')
 
-  return entries.reduce<string[]>((arr, [name, flag]) => {
-    if (value & flag) {
-      arr.push(name)
-    }
-    return arr
-  }, [])
-}
+//   return entries.reduce<string[]>((arr, [name, flag]) => {
+//     if (value & flag) {
+//       arr.push(name)
+//     }
+//     return arr
+//   }, [])
+// }
 
 function getCleanText (text: string) {
-  return text.replaceAll(/import\(.*?\)\./g, '')
+  return text.replace(/import\(.*?\)\./g, '')
 }
 
 function count (arr: string[], needle: string) {
@@ -611,7 +615,7 @@ function getRecursiveTypes (recursiveTypes: string[], type: Type<ts.Type>) {
 function findPotentialRecursiveTypes (type?: Type<ts.Type>): string[] {
   if (type == null) return []
 
-  const recursiveTypes = []
+  const recursiveTypes: string[] = []
 
   if (type.isUnion()) {
     recursiveTypes.push(...getUnionTypes(type).map(t => t.getText()))
