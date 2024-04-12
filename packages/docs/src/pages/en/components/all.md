@@ -114,7 +114,7 @@ Navigation components are used to navigate between different views or pages.
 
 </ComponentsListItem>
 
-<ComponentsListItem name="FABs" src="fabs" labs>
+<ComponentsListItem name="FABs" src="floating-action-buttons" labs>
 
   The floating action button is used for a promoted actions within an application
 
