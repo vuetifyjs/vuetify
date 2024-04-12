@@ -7,7 +7,7 @@ meta:
   keywords: user dashboard
 ---
 <script setup>
-  import { DashboardDashboardEmptyState } from '@/components/dashboard/DashboardEmptyState'
+  import DashboardDashboardEmptyState from '@/components/dashboard/DashboardEmptyState.vue'
 </script>
 
 <DashboardDashboardEmptyState />
