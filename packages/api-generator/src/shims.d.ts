@@ -1,4 +1,4 @@
-import { ts } from '@ts-morph/common'
+import '@ts-morph/common'
 
 declare module 'ts-morph' {
   export interface Type {
@@ -18,5 +18,7 @@ declare module 'ts-morph' {
     }
   }
 }
+
+export {}
 
 export {}
