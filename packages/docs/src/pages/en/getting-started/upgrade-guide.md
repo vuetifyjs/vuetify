@@ -21,8 +21,6 @@ This page contains a detailed list of breaking changes and the steps required to
   <span class="text-h6">Many of the changes on this page can be applied automatically using [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)</span>
 :::
 
-<PromotedEntry />
-
 ::: info
 
 Before upgrading, make sure to consult the Official [Vue 3 Migration Guide](https://v3-migration.vuejs.org/)
@@ -34,9 +32,7 @@ Before upgrading, make sure to consult the Official [Vue 3 Migration Guide](http
 
 - [calendar](https://github.com/vuetifyjs/vuetify/issues/13469)
 - [overflow-btn](https://github.com/vuetifyjs/vuetify/issues/13493)
-- [speed-dial](https://github.com/vuetifyjs/vuetify/issues/13508)
 - [time-picker](https://github.com/vuetifyjs/vuetify/issues/13516)
-- [treeview](https://github.com/vuetifyjs/vuetify/issues/13518)
 :::
 
 ## Setup
@@ -243,6 +239,8 @@ app.use(vuetify)
   - `data-table-select` and `data-table-expand` must be defined as `key` instead of `value`.
   - `class` has been replaced with `headerProps`.
   - `cellClass` has been replaced with `cellProps` and now accepts either a function or an object.
+  - `filter` function requires `search` to be used in order for it to be triggered.
+- Tables requires `search` prop to trigger filtering. `items` array can be pre-filter with a computed.
 - Server side tables using `server-items-length` must be replaced with `<v-data-table-server items-length />`.
 - Argument order for `@click:*` events is now consistently `(event, data)`.
   - `onRowClick (item, data, event)` should be changed to `onRowClick (event, { item })`.

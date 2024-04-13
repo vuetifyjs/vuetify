@@ -10,7 +10,11 @@ import { makeComponentProps } from '@/composables/component'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
+import { ref } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
+
+// Types
+import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVSpeedDialProps = propsFactory({
   ...makeComponentProps(),
@@ -18,12 +22,14 @@ export const makeVSpeedDialProps = propsFactory({
   ...makeTransitionProps({ transition: 'fade-transition' }),
 }, 'VSpeedDial')
 
-export const VSpeedDial = genericComponent()({
+export const VSpeedDial = genericComponent<OverlaySlots>()({
   name: 'VSpeedDial',
 
   props: makeVSpeedDialProps(),
 
   setup (props, { slots }) {
+    const menuRef = ref<VMenu>()
+
     useRender(() => {
       const menuProps = VMenu.filterProps(props)
 
@@ -33,22 +39,28 @@ export const VSpeedDial = genericComponent()({
           class={ props.class }
           style={ props.style }
           contentClass="v-speed-dial__content"
+          ref={ menuRef }
         >
-          <VDefaultsProvider
-            defaults={{
-              VBtn: {
-                size: 'small',
-              },
-            }}
-          >
-            <MaybeTransition
-              appear
-              group
-              transition={ props.transition }
-            >
-              { slots.default?.() }
-            </MaybeTransition>
-          </VDefaultsProvider>
+          {{
+            ...slots,
+            default: slotProps => (
+              <VDefaultsProvider
+                defaults={{
+                  VBtn: {
+                    size: 'small',
+                  },
+                }}
+              >
+                <MaybeTransition
+                  appear
+                  group
+                  transition={ props.transition }
+                >
+                  { slots.default?.(slotProps) }
+                </MaybeTransition>
+              </VDefaultsProvider>
+            ),
+          }}
         </VMenu>
       )
     })

@@ -25,7 +25,7 @@ jobs:
           - branch: 'v2-dev'
             tag: 'v2-dev'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           ref: ${{ matrix.branch }}
           fetch-depth: 0
@@ -45,14 +45,14 @@ jobs:
           release-id: ${{ matrix.branch }}.${{ env.RELEASE_ID }}
           npm-tag: ${{ matrix.tag }}
           npm-token: ${{ secrets.NPM_TOKEN }}
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
   percy:
     name: Visual regression tests
     runs-on: ubuntu-latest
     if: ${{ github.repository_owner == 'vuetifyjs' }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           ref: master
           fetch-depth: 0
@@ -73,7 +73,7 @@ jobs:
           PERCY_BRANCH: master
           PERCY_TARGET_BRANCH: master
           PERCY_COMMIT: ${{ env.COMMIT }}
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: cypress-screenshots

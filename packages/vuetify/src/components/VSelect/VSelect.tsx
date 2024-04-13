@@ -302,7 +302,7 @@ export const VSelect = genericComponent<new <
       }
     }
 
-    watch(menu, () => {
+    watch([menu, model], () => {
       if (!props.hideSelected && menu.value && model.value.length) {
         const index = displayItems.value.findIndex(
           item => model.value.some(s => props.valueComparator(s.value, item.value))
@@ -313,10 +313,12 @@ export const VSelect = genericComponent<new <
       }
     })
 
-    watch(() => props.items, val => {
-      if (!isFocused.value || !val.length || menu.value) return
+    watch(() => props.items, (newVal, oldVal) => {
+      if (menu.value) return
 
-      menu.value = true
+      if (isFocused.value && !oldVal.length && newVal.length) {
+        menu.value = true
+      }
     })
 
     useRender(() => {
@@ -461,6 +463,14 @@ export const VSelect = genericComponent<new <
 
                   const slotProps = {
                     'onClick:close': onChipClose,
+                    onKeydown (e: KeyboardEvent) {
+                      if (e.key !== 'Enter' && e.key !== ' ') return
+
+                      e.preventDefault()
+                      e.stopPropagation()
+
+                      onChipClose(e)
+                    },
                     onMousedown (e: MouseEvent) {
                       e.preventDefault()
                       e.stopPropagation()

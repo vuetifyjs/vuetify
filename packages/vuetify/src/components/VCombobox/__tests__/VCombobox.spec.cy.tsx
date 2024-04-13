@@ -665,6 +665,21 @@ describe('VCombobox', () => {
       .should('exist')
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/19346
+  it('should not show menu when focused and existing non-empty items are changed', () => {
+    cy
+      .mount((props: any) => (<VCombobox items={ props.items } />))
+      .setProps({ items: ['Foo', 'Bar'] })
+      .get('.v-combobox')
+      .click()
+      .get('.v-overlay')
+      .should('exist')
+      .get('.v-list-item').eq(0).click({ waitForAnimations: false })
+      .setProps({ items: ['Foo', 'Bar', 'test'] })
+      .get('.v-overlay')
+      .should('not.exist')
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/17573
   // When using selection slot or chips, input displayed next to chip/selection slot should be always empty
   it('should always have empty input value when it is unfocused and when using selection slot or chips', () => {

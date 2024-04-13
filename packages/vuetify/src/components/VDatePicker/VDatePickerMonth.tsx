@@ -55,6 +55,13 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     const rangeStart = shallowRef()
     const rangeStop = shallowRef()
 
+    if (props.multiple === 'range' && model.value.length > 0) {
+      rangeStart.value = model.value[0]
+      if (model.value.length > 1) {
+        rangeStop.value = model.value[model.value.length - 1]
+      }
+    }
+
     const atMax = computed(() => {
       const max = ['number', 'string'].includes(typeof props.multiple) ? Number(props.multiple) : Infinity
 
@@ -68,15 +75,15 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
         rangeStart.value = _value
         model.value = [rangeStart.value]
       } else if (!rangeStop.value) {
-        if (adapter.isSameDay(value, rangeStart.value)) {
+        if (adapter.isSameDay(_value, rangeStart.value)) {
           rangeStart.value = undefined
           model.value = []
           return
-        } else if (adapter.isBefore(value, rangeStart.value)) {
-          rangeStop.value = rangeStart.value
+        } else if (adapter.isBefore(_value, rangeStart.value)) {
+          rangeStop.value = adapter.endOfDay(rangeStart.value)
           rangeStart.value = _value
         } else {
-          rangeStop.value = _value
+          rangeStop.value = adapter.endOfDay(_value)
         }
 
         const diff = adapter.getDiff(rangeStop.value, rangeStart.value, 'days')

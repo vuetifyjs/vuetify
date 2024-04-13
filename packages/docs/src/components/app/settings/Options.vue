@@ -13,6 +13,7 @@
       text="general-message"
       title="general"
     />
+    <AppSettingsOptionsPinOption />
 
     <AppSettingsOptionsCodeOption />
 

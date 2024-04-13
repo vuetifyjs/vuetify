@@ -200,17 +200,18 @@ function getWeekArray (date: Date, locale: string) {
   return weeks
 }
 
-function startOfWeek (date: Date) {
+function startOfWeek (date: Date, locale: string) {
   const d = new Date(date)
-  while (d.getDay() !== 0) {
+  while (d.getDay() !== (firstDay[locale.slice(-2).toUpperCase()] ?? 0)) {
     d.setDate(d.getDate() - 1)
   }
   return d
 }
 
-function endOfWeek (date: Date) {
+function endOfWeek (date: Date, locale: string) {
   const d = new Date(date)
-  while (d.getDay() !== 6) {
+  const lastDay = ((firstDay[locale.slice(-2).toUpperCase()] ?? 0) + 6) % 7
+  while (d.getDay() !== lastDay) {
     d.setDate(d.getDate() + 1)
   }
   return d
@@ -375,6 +376,10 @@ function getMonth (date: Date) {
   return date.getMonth()
 }
 
+function getDate (date: Date) {
+  return date.getDate()
+}
+
 function getNextMonth (date: Date) {
   return new Date(date.getFullYear(), date.getMonth() + 1, 1)
 }
@@ -472,6 +477,12 @@ function setMonth (date: Date, count: number) {
   return d
 }
 
+function setDate (date: Date, day: number) {
+  const d = new Date(date)
+  d.setDate(day)
+  return d
+}
+
 function setYear (date: Date, year: number) {
   const d = new Date(date)
   d.setFullYear(year)
@@ -479,7 +490,7 @@ function setYear (date: Date, year: number) {
 }
 
 function startOfDay (date: Date) {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate())
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0)
 }
 
 function endOfDay (date: Date) {
@@ -536,11 +547,11 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
   }
 
   startOfWeek (date: Date): Date {
-    return startOfWeek(date)
+    return startOfWeek(date, this.locale)
   }
 
   endOfWeek (date: Date): Date {
-    return endOfWeek(date)
+    return endOfWeek(date, this.locale)
   }
 
   startOfMonth (date: Date) {
@@ -595,6 +606,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return setMonth(date, count)
   }
 
+  setDate (date: Date, day: number): Date {
+    return setDate(date, day)
+  }
+
   setYear (date: Date, year: number) {
     return setYear(date, year)
   }
@@ -613,6 +628,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   getMonth (date: Date) {
     return getMonth(date)
+  }
+
+  getDate (date: Date) {
+    return getDate(date)
   }
 
   getNextMonth (date: Date) {

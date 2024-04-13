@@ -209,6 +209,7 @@ export {
   mdiImage,
   mdiImageEdit,
   mdiImageEditOutline,
+  mdiImageFilterHdr,
   mdiImageOutline,
   mdiInboxArrowDown,
   mdiInformation,
@@ -314,6 +315,7 @@ export {
   mdiRefresh,
   mdiReply,
   mdiRewind,
+  mdiRocketLaunchOutline,
   mdiSass,
   mdiSchool,
   mdiScriptText,
@@ -369,7 +371,6 @@ export {
   mdiVideoVintage,
   mdiViewDashboard,
   mdiViewDashboardOutline,
-  mdiWindowRestore,
   mdiViewGridOutline,
   mdiViewListOutline,
   mdiViewModule,
@@ -390,6 +391,7 @@ export {
   mdiWifiStrengthAlertOutline,
   mdiWindowMaximize,
   mdiWindowMinimize,
+  mdiWindowRestore,
   mdiWrench,
 } from '@mdi/js'
 

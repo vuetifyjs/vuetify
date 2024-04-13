@@ -1,6 +1,10 @@
 // Styles
 import './VNavigationDrawer.sass'
 
+// Components
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VImg } from '@/components/VImg'
+
 // Composables
 import { useSticky } from './sticky'
 import { useTouch } from './touch'
@@ -249,10 +253,29 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
           >
             { hasImage && (
               <div key="image" class="v-navigation-drawer__img">
-                { slots.image
-                  ? slots.image?.({ image: props.image })
-                  : (<img src={ props.image } alt="" />)
-                }
+                { !slots.image ? (
+                  <VImg
+                    key="image-img"
+                    alt=""
+                    cover
+                    height="inherit"
+                    src={ props.image }
+                  />
+                ) : (
+                  <VDefaultsProvider
+                    key="image-defaults"
+                    disabled={ !props.image }
+                    defaults={{
+                      VImg: {
+                        alt: '',
+                        cover: true,
+                        height: 'inherit',
+                        src: props.image,
+                      },
+                    }}
+                    v-slots:default={ slots.image }
+                  />
+                )}
               </div>
             )}
 

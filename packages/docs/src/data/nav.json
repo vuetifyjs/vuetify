@@ -60,6 +60,7 @@
       {
         "subheader": "utility-classes"
       },
+      "borders",
       "border-radius",
       "content",
       "cursor",
@@ -236,6 +237,10 @@
         "subfolder": "components"
       },
       {
+        "title": "confirm-edit",
+        "subfolder": "components"
+      },
+      {
         "title": "empty-states",
         "subfolder": "components"
       },
@@ -244,11 +249,23 @@
         "subfolder": "components"
       },
       {
+        "title": "number-inputs",
+        "subfolder": "components"
+      },
+      {
         "title": "sparklines",
         "subfolder": "components"
       },
       {
         "title": "speed-dials",
+        "subfolder": "components"
+      },
+      {
+        "title": "time-pickers",
+        "subfolder": "components"
+      },
+      {
+        "title": "treeview",
         "subfolder": "components"
       }
     ]
