@@ -10,6 +10,7 @@ import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Directives
 import Intersect from '@/directives/intersect'
@@ -42,6 +43,7 @@ export const makeVTextFieldProps = propsFactory({
   },
   modelModifiers: Object as PropType<Record<string, boolean>>,
 
+  ...makeThemeProps(),
   ...makeVInputProps(),
   ...makeVFieldProps(),
 }, 'VTextField')
@@ -69,6 +71,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
 
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
+    const { themeClasses } = provideTheme(props)
     const { isFocused, focus, blur } = useFocus(props)
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function' ? props.counterValue(model.value)
@@ -172,6 +175,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
               'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
             props.class,
+            themeClasses.value,
           ]}
           style={ props.style }
           { ...rootAttrs }
