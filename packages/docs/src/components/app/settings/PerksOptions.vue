@@ -1,6 +1,6 @@
 <template>
   <Alert
-    v-if="!auth.isSubscriber"
+    v-if="!one.isSubscriber"
     type="success"
   >
     {{ t('dashboard.perks.alert') }}
@@ -39,6 +39,6 @@
 </template>
 
 <script setup lang="ts">
-  const auth = useAuthStore()
+  const one = useOneStore()
   const { t } = useI18n()
 </script>

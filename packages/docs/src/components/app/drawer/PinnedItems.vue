@@ -1,6 +1,6 @@
 <template>
   <AppListList
-    v-if="auth.isSubscriber && user.pins"
+    v-if="one.isSubscriber && user.pins"
     v-model:opened="opened"
     :items="pinned"
     class="pb-0 mb-n2"
@@ -41,7 +41,7 @@
 
   const props = defineProps<{ rail: boolean }>()
 
-  const auth = useAuthStore()
+  const one = useOneStore()
   const pins = usePinsStore()
   const user = useUserStore()
   const router = useRouter()
