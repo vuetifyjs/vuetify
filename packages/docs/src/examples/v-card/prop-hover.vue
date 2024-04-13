@@ -8,6 +8,7 @@
       <v-card-title>
         Card title
       </v-card-title>
+
       <v-card-subtitle>
         Card subtitle secondary text
       </v-card-subtitle>
