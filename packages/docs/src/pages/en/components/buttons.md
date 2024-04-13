@@ -24,13 +24,13 @@ The `v-btn` component replaces the standard html button with a material design t
 
 <PageFeatures />
 
+<VoPromotionsCardVuetify />
+
 ## Usage
 
 Buttons in their simplest form contain uppercase text, a slight elevation, hover effect, and a ripple effect on click.
 
 <ExamplesUsage name="v-btn" />
-
-<PromotedEntry />
 
 ## API
 
@@ -128,8 +128,6 @@ Icons can be used for the primary content of a button. They are commonly used in
 
 <ExamplesExample file="v-btn/prop-icon" />
 
-<PromotedRandom />
-
 #### Loaders
 
 Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use a `v-progress-circular` component but this can be customized with the **loader** slot.
@@ -169,6 +167,8 @@ The **loader** slot allows you to customize the loading indicator. In this examp
 
 <ExamplesExample file="v-btn/slot-loader" />
 
+<VoPromotionsCardVuetify />
+
 ## Examples
 
 The following are a collection of examples that demonstrate more advanced and real world use of the `v-btn` component.
@@ -190,8 +190,6 @@ In addition to [Button groups](/components/button-groups/), the `v-btn` componen
 This example utilizes the [v-text-field](/components/text-fields/) component to collect data from the user and the **loading** prop of `v-btn` when submitting the form.
 
 <ExamplesExample file="v-btn/misc-tax-form" />
-
-<PromotedRandom />
 
 ### Dialog action
 
@@ -399,6 +397,8 @@ The following properties are modified when used within a `v-toolbar` or `v-toolb
 | - | - |
 | **height** | provided by `v-toolbar-items` |
 | **variant** | `text` |
+
+<VoPromotionsCardVuetify />
 
 ## Accessibility
 
