@@ -180,6 +180,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
             'v-file-input',
             {
               'v-file-input--chips': !!props.chips,
+              'v-file-input--hide': props.hideInput,
               'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
             props.class,
@@ -215,7 +216,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
                 error={ isValid.value === false }
-                style={ !hasInput ? { display: 'none' } : props.style }
               >
                 {{
                   ...slots,
