@@ -1,6 +1,11 @@
 export default {
   badge: 'Märk',
+  open: 'Open',
   close: 'Sulge',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Vastavaid kirjeid ei leitud',
     loadingText: 'Andmeid laaditakse...',
@@ -26,12 +31,20 @@ export default {
     lastPage: 'Viimane lehekülg',
     pageText: '{0}-{1} {2}st',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} valitud',
-    nextMonthAriaLabel: 'Järgmine kuu',
-    nextYearAriaLabel: 'Järgmine aasta',
-    prevMonthAriaLabel: 'Eelmine kuu',
-    prevYearAriaLabel: 'Eelmine aasta',
+    itemsSelected: '{0} selected',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Andmed puuduvad',
   carousel: {
@@ -43,11 +56,13 @@ export default {
   },
   calendar: {
     moreEvents: '{0} veel',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} faili',
@@ -56,6 +71,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
@@ -67,6 +83,10 @@ export default {
       first: 'First page',
       last: 'Last page',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

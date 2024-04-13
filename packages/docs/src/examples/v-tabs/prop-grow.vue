@@ -15,14 +15,13 @@
       <v-tab
         v-for="item in items"
         :key="item"
+        :text="item"
         :value="item"
-      >
-        {{ item }}
-      </v-tab>
+      ></v-tab>
     </v-tabs>
 
-    <v-window v-model="tab">
-      <v-window-item
+    <v-tabs-window v-model="tab">
+      <v-tabs-window-item
         v-for="item in items"
         :key="item"
         :value="item"
@@ -33,10 +32,24 @@
         >
           <v-card-text>{{ text }}</v-card-text>
         </v-card>
-      </v-window-item>
-    </v-window>
+      </v-tabs-window-item>
+    </v-tabs-window>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const tab = ref('Appetizers')
+
+  const items = [
+    'Appetizers',
+    'Entrees',
+    'Deserts',
+    'Cocktails',
+  ]
+  const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+</script>
 
 <script>
   export default {

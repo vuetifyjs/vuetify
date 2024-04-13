@@ -2,12 +2,12 @@
 import './VSelectionControlGroup.sass'
 
 // Composables
-import { IconValue } from '@/composables/icons'
 import { makeComponentProps } from '@/composables/component'
-import { makeDensityProps } from '@/composables/density'
-import { makeThemeProps } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
+import { makeDensityProps } from '@/composables/density'
+import { IconValue } from '@/composables/icons'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeThemeProps } from '@/composables/theme'
 
 // Utilities
 import { computed, onScopeDispose, provide, toRef } from 'vue'
@@ -15,6 +15,8 @@ import { deepEqual, genericComponent, getUid, propsFactory, useRender } from '@/
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
+import type { GenericProps } from '@/util'
 
 export interface VSelectionGroupContext {
   modelValue: Ref<any>
@@ -26,14 +28,18 @@ export const VSelectionControlGroupSymbol: InjectionKey<VSelectionGroupContext> 
 
 export const makeSelectionControlGroupProps = propsFactory({
   color: String,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
+  defaultsTarget: String,
   error: Boolean,
   id: String,
   inline: Boolean,
   falseIcon: IconValue,
   trueIcon: IconValue,
   ripple: {
-    type: Boolean,
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
   multiple: {
@@ -41,7 +47,10 @@ export const makeSelectionControlGroupProps = propsFactory({
     default: null,
   },
   name: String,
-  readonly: Boolean,
+  readonly: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
   modelValue: null,
   type: String,
   valueComparator: {
@@ -49,25 +58,30 @@ export const makeSelectionControlGroupProps = propsFactory({
     default: deepEqual,
   },
 
-  ...makeThemeProps(),
+  ...makeComponentProps(),
   ...makeDensityProps(),
-}, 'v-selection-control-group')
+  ...makeThemeProps(),
+}, 'SelectionControlGroup')
 
-export const VSelectionControlGroup = genericComponent()({
+export const makeVSelectionControlGroupProps = propsFactory({
+  ...makeSelectionControlGroupProps({
+    defaultsTarget: 'VSelectionControl',
+  }),
+}, 'VSelectionControlGroup')
+
+export const VSelectionControlGroup = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: { default: never },
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelectionControlGroup',
 
-  props: {
-    defaultsTarget: {
-      type: String,
-      default: 'VSelectionControl',
-    },
-
-    ...makeComponentProps(),
-    ...makeSelectionControlGroupProps(),
-  },
+  props: makeVSelectionControlGroupProps(),
 
   emits: {
-    'update:modelValue': (val: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { slots }) {

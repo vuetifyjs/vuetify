@@ -6,42 +6,45 @@ import { makeVToolbarProps, VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
-import { makeScrollProps, useScroll } from '@/composables/scroll'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeScrollProps, useScroll } from '@/composables/scroll'
 import { useSsrBoot } from '@/composables/ssrBoot'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, ref, toRef, watch } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { computed, ref, shallowRef, toRef, watchEffect } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { VToolbarSlots } from '@/components/VToolbar/VToolbar'
 
+export const makeVAppBarProps = propsFactory({
+  scrollBehavior: String as PropType<'hide' | 'inverted' | 'collapse' | 'elevate' | 'fade-image' | (string & {})>,
+  modelValue: {
+    type: Boolean,
+    default: true,
+  },
+  location: {
+    type: String as PropType<'top' | 'bottom'>,
+    default: 'top',
+    validator: (value: any) => ['top', 'bottom'].includes(value),
+  },
+
+  ...makeVToolbarProps(),
+  ...makeLayoutItemProps(),
+  ...makeScrollProps(),
+
+  height: {
+    type: [Number, String],
+    default: 64,
+  },
+}, 'VAppBar')
+
 export const VAppBar = genericComponent<VToolbarSlots>()({
   name: 'VAppBar',
 
-  props: {
-    scrollBehavior: String,
-    modelValue: {
-      type: Boolean,
-      default: true,
-    },
-    location: {
-      type: String as PropType<'top' | 'bottom'>,
-      default: 'top',
-      validator: (value: any) => ['top', 'bottom'].includes(value),
-    },
-
-    ...makeVToolbarProps(),
-    ...makeLayoutItemProps(),
-    ...makeScrollProps(),
-
-    height: {
-      type: [Number, String],
-      default: 64,
-    },
-  },
+  props: makeVAppBarProps(),
 
   emits: {
     'update:modelValue': (value: boolean) => true,
@@ -54,7 +57,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       const behavior = new Set(props.scrollBehavior?.split(' ') ?? [])
       return {
         hide: behavior.has('hide'),
-        // fullyHide: behavior.has('fully-hide'),
+        fullyHide: behavior.has('fully-hide'),
         inverted: behavior.has('inverted'),
         collapse: behavior.has('collapse'),
         elevate: behavior.has('elevate'),
@@ -66,7 +69,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       const behavior = scrollBehavior.value
       return (
         behavior.hide ||
-        // behavior.fullyHide ||
+        behavior.fullyHide ||
         behavior.inverted ||
         behavior.collapse ||
         behavior.elevate ||
@@ -82,11 +85,18 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       scrollRatio,
     } = useScroll(props, { canScroll })
 
+    const canHide = computed(() => (
+      scrollBehavior.value.hide ||
+      scrollBehavior.value.fullyHide
+    ))
     const isCollapsed = computed(() => props.collapse || (
       scrollBehavior.value.collapse &&
       (scrollBehavior.value.inverted ? scrollRatio.value > 0 : scrollRatio.value === 0)
     ))
     const isFlat = computed(() => props.flat || (
+      scrollBehavior.value.fullyHide &&
+      !isActive.value
+    ) || (
       scrollBehavior.value.elevate &&
       (scrollBehavior.value.inverted ? currentScroll.value > 0 : currentScroll.value === 0)
     ))
@@ -96,41 +106,43 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
         : undefined
     ))
     const height = computed(() => {
-      if (scrollBehavior.value.hide && scrollBehavior.value.inverted) return 0
+      const height = Number(vToolbarRef.value?.contentHeight ?? props.height)
+      const extensionHeight = Number(vToolbarRef.value?.extensionHeight ?? 0)
 
-      const height = vToolbarRef.value?.contentHeight ?? 0
-      const extensionHeight = vToolbarRef.value?.extensionHeight ?? 0
+      if (!canHide.value) return (height + extensionHeight)
 
-      return (height + extensionHeight)
+      return currentScroll.value < scrollThreshold.value || scrollBehavior.value.fullyHide
+        ? (height + extensionHeight)
+        : height
     })
-    function setActive () {
-      if (scrollBehavior.value.hide) {
-        if (scrollBehavior.value.inverted) {
-          isActive.value = currentScroll.value > scrollThreshold.value
-        } else {
-          isActive.value = isScrollingUp.value || (currentScroll.value < scrollThreshold.value)
-        }
-      } else {
-        isActive.value = true
-      }
-    }
 
-    watch(currentScroll, setActive, { immediate: true })
-    watch(scrollBehavior, setActive)
+    useToggleScope(computed(() => !!props.scrollBehavior), () => {
+      watchEffect(() => {
+        if (canHide.value) {
+          if (scrollBehavior.value.inverted) {
+            isActive.value = currentScroll.value > scrollThreshold.value
+          } else {
+            isActive.value = isScrollingUp.value || (currentScroll.value < scrollThreshold.value)
+          }
+        } else {
+          isActive.value = true
+        }
+      })
+    })
 
     const { ssrBootStyles } = useSsrBoot()
-    const { layoutItemStyles } = useLayoutItem({
+    const { layoutItemStyles, layoutIsReady } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
       position: toRef(props, 'location'),
       layoutSize: height,
-      elementSize: ref(undefined),
+      elementSize: shallowRef(undefined),
       active: isActive,
       absolute: toRef(props, 'absolute'),
     })
 
     useRender(() => {
-      const [toolbarProps] = VToolbar.filterProps(props)
+      const toolbarProps = VToolbar.filterProps(props)
 
       return (
         <VToolbar
@@ -159,7 +171,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       )
     })
 
-    return {}
+    return layoutIsReady
   },
 })
 

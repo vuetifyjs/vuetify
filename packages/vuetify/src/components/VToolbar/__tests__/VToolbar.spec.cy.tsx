@@ -1,8 +1,8 @@
 /// <reference types="../../../../types/cypress" />
 
-// Component
-import { VBtn } from '@/components/VBtn'
+// Components
 import { VToolbar } from '..'
+import { VBtn } from '@/components/VBtn'
 
 // Utilities
 const colors = ['success', 'info', 'warning', 'error', 'invalid']

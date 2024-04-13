@@ -1,4 +1,1 @@
-import VBottomSheet from './VBottomSheet'
-
-export { VBottomSheet }
-export default VBottomSheet
+export { VBottomSheet } from './VBottomSheet'

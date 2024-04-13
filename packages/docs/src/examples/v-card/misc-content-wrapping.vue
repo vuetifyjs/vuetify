@@ -3,10 +3,10 @@
     <v-row justify="space-around">
       <v-card width="400">
         <v-img
-          height="200"
-          src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg"
-          cover
           class="text-white"
+          height="200"
+          src="https://cdn.vuetifyjs.com/docs/images/cards/purple-flowers.jpg"
+          cover
         >
           <v-toolbar
             color="rgba(0, 0, 0, 0)"
@@ -31,7 +31,7 @@
             Today
           </div>
 
-          <v-timeline density="compact" align="start">
+          <v-timeline align="start" density="compact">
             <v-timeline-item
               v-for="message in messages"
               :key="message.time"
@@ -51,6 +51,29 @@
     </v-row>
   </v-container>
 </template>
+
+<script setup>
+  const messages = [
+    {
+      from: 'You',
+      message: `Sure, I'll see you later.`,
+      time: '10:42am',
+      color: 'deep-purple-lighten-1',
+    },
+    {
+      from: 'John Doe',
+      message: 'Yeah, sure. Does 1:00pm work?',
+      time: '10:37am',
+      color: 'green',
+    },
+    {
+      from: 'You',
+      message: 'Did you still want to grab lunch today?',
+      time: '9:47am',
+      color: 'deep-purple-lighten-1',
+    },
+  ]
+</script>
 
 <script>
   export default {

@@ -1,31 +1,26 @@
 <template>
-  <v-progress-linear v-if="pwa.loading" indeterminate color="primary" height="3" class="pwa-loader" />
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <v-fade-transition appear>
+      <component :is="Component" />
+    </v-fade-transition>
+  </router-view>
 </template>
 
 <script setup lang="ts">
   // Composables
-  import { useHead } from '@vueuse/head'
-  import { useI18n } from 'vue-i18n'
-  import { useRoute, useRouter } from 'vue-router'
-  import { useTheme } from 'vuetify'
-  import { useUserStore } from '@/store/user'
-  import { usePwaStore } from '@/store/pwa'
+  import { useHead } from '@unhead/vue'
 
   // Utilities
-  import { computed, nextTick, onBeforeMount, ref, watch, watchEffect } from 'vue'
-  import { genAppMetaInfo } from '@/util/metadata'
-  import { getMatchMedia } from '@/util/helpers'
+  import { inject } from '@vercel/analytics'
 
-  // Globals
-  import { IN_BROWSER } from '@/util/globals'
+  inject()
 
   const user = useUserStore()
-  const pwa = usePwaStore()
   const router = useRouter()
   const route = useRoute()
   const theme = useTheme()
   const { locale } = useI18n()
+  const auth = useAuthStore()
 
   const path = computed(() => route.path.replace(`/${locale.value}/`, ''))
 
@@ -42,19 +37,35 @@
     title: computed(() => meta.value.title),
     meta: computed(() => meta.value.meta),
     link: computed(() => meta.value.link),
+    script: computed(() => {
+      return route.meta.locale === 'eo-UY' ? [
+        {
+          type: 'text/javascript',
+          innerHTML: `let _jipt = [['project', 'vuetify']];`,
+        },
+        {
+          type: 'text/javascript',
+          src: '//cdn.crowdin.com/jipt/jipt.js',
+        },
+      ] : []
+    }),
   })
 
   onBeforeMount(() => {
     // set current route lang if root
     const currentRoute = router.currentRoute.value
     if (currentRoute.path === '/') {
-      router.replace(`/${locale.value}`)
+      const query = currentRoute.query
+      router.replace({ path: `/${locale.value}`, query })
     }
   })
 
   const systemTheme = ref('light')
   if (IN_BROWSER) {
     let media: MediaQueryList
+
+    auth.verify()
+
     watch(() => user.theme, val => {
       if (val === 'system') {
         media = getMatchMedia()!
@@ -151,6 +162,7 @@
 
   p
     margin-bottom: 1rem
+    line-height: 1.8
 
     a, a:visited
       color: rgb(var(--v-theme-primary))

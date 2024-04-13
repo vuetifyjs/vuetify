@@ -1,15 +1,13 @@
 name: Issue triage
 on:
   issues:
-    types: [opened, labeled]
-  pull_request:
-    types: [opened, labeled]
+    types: [opened, labeled, unlabeled]
 
 jobs:
   triage:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: vuetifyjs/triage-action@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

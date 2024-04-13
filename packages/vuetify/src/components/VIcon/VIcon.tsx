@@ -2,19 +2,20 @@
 import './VIcon.sass'
 
 // Composables
-import { IconValue, useIcon } from '@/composables/icons'
+import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { IconValue, useIcon } from '@/composables/icons'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, Text, toRef } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, flattenFragments, genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVIconProps = propsFactory({
   color: String,
+  disabled: Boolean,
   start: Boolean,
   end: Boolean,
   icon: IconValue,
@@ -23,7 +24,7 @@ export const makeVIconProps = propsFactory({
   ...makeSizeProps(),
   ...makeTagProps({ tag: 'i' }),
   ...makeThemeProps(),
-}, 'v-icon')
+}, 'VIcon')
 
 export const VIcon = genericComponent()({
   name: 'VIcon',
@@ -41,10 +42,11 @@ export const VIcon = genericComponent()({
     useRender(() => {
       const slotValue = slots.default?.()
       if (slotValue) {
-        slotIcon.value = slotValue.filter(node =>
+        slotIcon.value = flattenFragments(slotValue).filter(node =>
           node.type === Text && node.children && typeof node.children === 'string'
         )[0]?.children as string
       }
+      const hasClick = !!(attrs.onClick || attrs.onClickOnce)
 
       return (
         <iconData.value.component
@@ -57,7 +59,8 @@ export const VIcon = genericComponent()({
             sizeClasses.value,
             textColorClasses.value,
             {
-              'v-icon--clickable': !!attrs.onClick,
+              'v-icon--clickable': hasClick,
+              'v-icon--disabled': props.disabled,
               'v-icon--start': props.start,
               'v-icon--end': props.end,
             },
@@ -72,8 +75,9 @@ export const VIcon = genericComponent()({
             textColorStyles.value,
             props.style,
           ]}
-          role={ attrs.onClick ? 'button' : undefined }
-          aria-hidden={ !attrs.onClick }
+          role={ hasClick ? 'button' : undefined }
+          aria-hidden={ !hasClick }
+          tabindex={ hasClick ? props.disabled ? -1 : 0 : undefined }
         >
           { slotValue }
         </iconData.value.component>

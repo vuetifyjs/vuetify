@@ -1,6 +1,11 @@
 export default {
   badge: 'Emblem',
+  open: 'Open',
   close: 'Luk',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Ingen matchende data fundet',
     loadingText: 'Indhenter data...',
@@ -26,12 +31,20 @@ export default {
     lastPage: 'Sidste side',
     pageText: '{0}-{1} af {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} valgt',
-    nextMonthAriaLabel: 'Næste måned',
-    nextYearAriaLabel: 'Næste år',
-    prevMonthAriaLabel: 'Forrige måned',
-    prevYearAriaLabel: 'Forrige år',
+    itemsSelected: '{0} selected',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Ingen data tilgængelig',
   carousel: {
@@ -43,11 +56,13 @@ export default {
   },
   calendar: {
     moreEvents: '{0} mere',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} filer',
@@ -56,6 +71,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
@@ -67,6 +83,10 @@ export default {
       first: 'First page',
       last: 'Last page',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

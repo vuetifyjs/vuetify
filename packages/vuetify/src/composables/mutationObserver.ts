@@ -1,6 +1,6 @@
 // Utilities
-import { isComponentInstance } from '@/util'
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { refElement } from '@/util'
 
 // Types
 import type { ComponentPublicInstance } from 'vue'
@@ -44,7 +44,7 @@ export function useMutationObserver (
   watch(mutationRef, (newValue, oldValue) => {
     if (oldValue) observer.disconnect()
 
-    const el = isComponentInstance(newValue) ? newValue.$el : newValue
+    const el = refElement(newValue)
 
     if (!el) return
 

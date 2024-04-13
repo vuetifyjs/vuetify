@@ -1,6 +1,6 @@
 ---
-nav: Chip groups
 meta:
+  nav: Chip groups
   title: Chip group component
   description: The chip group component combines numerous selectable chips into single or multiple lines.
   keywords: chip groups, vuetify chip group component, vue chip group component
@@ -8,6 +8,11 @@ related:
   - /components/chips/
   - /components/slide-groups/
   - /components/item-groups/
+features:
+  github: /components/VChipGroup/
+  label: 'C: VChipGroup'
+  report: true
+  spec: https://m2.material.io/components/chips#choice-chips
 ---
 
 # Chip groups
@@ -16,15 +21,15 @@ The `v-chip-group` supercharges the `v-chip` component by providing groupable fu
 
 <!-- ![chip-groups Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-chip-groups/v-chip-groups-entry.png) -->
 
----
+<PageFeatures />
 
 ## Usage
 
 Chip groups make it easy for users to select filtering options for more complex implementations. By default `v-chip-group` will overflow to the right but can be changed to a **column** only mode.
 
-<usage name="v-chip-group" />
+<ExamplesUsage name="v-chip-group" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -32,7 +37,7 @@ Chip groups make it easy for users to select filtering options for more complex 
 | - | - |
 | [v-chip-group](/api/v-chip-group/) | Primary component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Examples
 
@@ -42,25 +47,25 @@ Chip groups make it easy for users to select filtering options for more complex 
 
 Chip groups with **column** prop can wrap their chips.
 
-<example file="v-chip-group/prop-column" />
+<ExamplesExample file="v-chip-group/prop-column" />
 
 #### Filter results
 
 Easily create chip groups that provide additional feedback with the **filter** prop. This creates an alternative visual style that communicates to the user that the chip is selected.
 
-<example file="v-chip-group/prop-filter" />
+<ExamplesExample file="v-chip-group/prop-filter" />
 
 #### Mandatory
 
 Chip groups with **mandatory** prop must always have a value selected.
 
-<example file="v-chip-group/prop-mandatory" />
+<ExamplesExample file="v-chip-group/prop-mandatory" />
 
 #### Multiple
 
 Chip groups with **multiple** prop can have many values selected.
 
-<example file="v-chip-group/prop-multiple" />
+<ExamplesExample file="v-chip-group/prop-multiple" />
 
 ### Misc
 
@@ -68,10 +73,10 @@ Chip groups with **multiple** prop can have many values selected.
 
 The `v-chip` component can have an explicit value used for its model. This gets passed to the `v-chip-group` component and is useful for when you don't want to use the chips index as their values.
 
-<example file="v-chip-group/misc-product-card" />
+<ExamplesExample file="v-chip-group/misc-product-card" />
 
 #### Toothbrush card
 
 Chip groups allow the creation of custom interfaces that perform the same actions as an item group or radio controls, but are stylistically different.
 
-<example file="v-chip-group/misc-toothbrush-card" />
+<ExamplesExample file="v-chip-group/misc-toothbrush-card" />

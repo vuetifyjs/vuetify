@@ -1,9 +1,9 @@
 {
   "props": {
-    "filterMode": "Apply a specific filter when matching items. **some** is the default, which will return true if any key matches the search term. **every** will return true only if every key matches the search term. The **union** mode will return true if every key matches the search term. The **intersection** mode will return true if any key matches the search term.",
-    "noFilter": "Disables all item filtering.",
-    "customFilter": "Function used to filter items.",
-    "customKeyFilter": "Function used on specific keys within the item object.",
-    "filterKeys": "Array of specific keys to filter on the item."
+    "customFilter": "Function used to filter items, called for each filterable key on each item in the list. The first argument is the filterable value from the item, the second is the search term, and the third is the internal item object. The function should return true if the item should be included in the filtered list, or the index of the match in the value if it should be included with the result highlighted.",
+    "customKeyFilter": "Function used on specific keys within the item object. `customFilter` is skipped for columns with `customKeyFilter` specified.",
+    "filterKeys": "Array of specific keys to filter on the item.",
+    "filterMode": "Controls how the results of `customFilter` and `customKeyFilter` are combined. All modes only apply `customFilter` to columns not specified in `customKeyFilter`.\n\n- **some**: There is at least one match from either the custom filter or the custom key filter.\n- **every**: All columns match either the custom filter or the custom key filter.\n- **union**: There is at least one match from the custom filter, or all columns match the custom key filters.\n- **intersection**: There is at least one match from the custom filter, and all columns match the custom key filters.",
+    "noFilter": "Disables all item filtering."
   }
 }

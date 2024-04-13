@@ -12,32 +12,36 @@
     width: calc(100% - #{$dialog-margin * 2})
     max-width: calc(100% - #{$dialog-margin * 2})
     margin: $dialog-margin
-    display: flex
-    flex-direction: column
 
-    > .v-card,
-    > .v-sheet
-      --v-scrollbar-offset: 0px
-      border-radius: $dialog-border-radius
-      overflow-y: auto
-
-      @include tools.elevation($dialog-elevation)
-
-    > .v-card
+    &,
+    > form
       display: flex
       flex-direction: column
+      min-height: 0
 
-      > .v-card-item
-        padding: $dialog-card-header-padding
+      > .v-card,
+      > .v-sheet
+        --v-scrollbar-offset: 0px
+        border-radius: $dialog-border-radius
+        overflow-y: auto
 
-        + .v-card-text
-          padding-top: $dialog-card-header-text-padding-top
+        @include tools.elevation($dialog-elevation)
 
-      > .v-card-text
-        font-size: inherit
-        letter-spacing: $dialog-card-text-letter-spacing
-        line-height: inherit
-        padding: $dialog-card-text-padding
+      > .v-card
+        display: flex
+        flex-direction: column
+
+        > .v-card-item
+          padding: $dialog-card-header-padding
+
+          + .v-card-text
+            padding-top: $dialog-card-header-text-padding-top
+
+        > .v-card-text
+          font-size: inherit
+          letter-spacing: $dialog-card-text-letter-spacing
+          line-height: inherit
+          padding: $dialog-card-text-padding
 
 .v-dialog--fullscreen
   --v-scrollbar-offset: 0px
@@ -54,23 +58,26 @@
     top: 0
     left: 0
 
-    > .v-card,
-    > .v-sheet
-      min-height: 100%
-      min-width: 100%
-      border-radius: 0
+    &,
+    > form
+      > .v-card,
+      > .v-sheet
+        min-height: 100%
+        min-width: 100%
+        border-radius: 0
 
-.v-dialog--scrollable > .v-overlay__content,
-.v-dialog--scrollable > .v-overlay__content > form
-  display: flex
-
-  > .v-card
+.v-dialog--scrollable > .v-overlay__content
+  &,
+  > form
     display: flex
-    flex: 1 1 100%
-    flex-direction: column
-    max-height: 100%
-    max-width: 100%
 
-    > .v-card-text
-      backface-visibility: hidden
-      overflow-y: auto
+    > .v-card
+      display: flex
+      flex: 1 1 100%
+      flex-direction: column
+      max-height: 100%
+      max-width: 100%
+
+      > .v-card-text
+        backface-visibility: hidden
+        overflow-y: auto

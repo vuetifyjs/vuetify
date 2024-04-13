@@ -2,26 +2,29 @@
 import './VApp.sass'
 
 // Composables
-import { createLayout, makeLayoutProps } from '@/composables/layout'
 import { makeComponentProps } from '@/composables/component'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { createLayout, makeLayoutProps } from '@/composables/layout'
 import { useRtl } from '@/composables/locale'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { Suspense } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVAppProps = propsFactory({
+  ...makeComponentProps(),
+  ...makeLayoutProps({ fullHeight: true }),
+  ...makeThemeProps(),
+}, 'VApp')
 
 export const VApp = genericComponent()({
   name: 'VApp',
 
-  props: {
-    ...makeComponentProps(),
-    ...makeLayoutProps({ fullHeight: true }),
-    ...makeThemeProps(),
-  },
+  props: makeVAppProps(),
 
   setup (props, { slots }) {
     const theme = provideTheme(props)
-    const { layoutClasses, layoutStyles, getLayoutItem, items, layoutRef } = createLayout(props)
+    const { layoutClasses, getLayoutItem, items, layoutRef } = createLayout(props)
     const { rtlClasses } = useRtl()
 
     useRender(() => (
@@ -35,12 +38,15 @@ export const VApp = genericComponent()({
           props.class,
         ]}
         style={[
-          layoutStyles.value,
           props.style,
         ]}
       >
         <div class="v-application__wrap">
-          { slots.default?.() }
+          <Suspense>
+            <>
+              { slots.default?.() }
+            </>
+          </Suspense>
         </div>
       </div>
     ))

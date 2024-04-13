@@ -19,6 +19,7 @@ export { default as he } from './he'
 export { default as id } from './id'
 export { default as it } from './it'
 export { default as ja } from './ja'
+export { default as km } from './km'
 export { default as ko } from './ko'
 export { default as lv } from './lv'
 export { default as lt } from './lt'
@@ -40,47 +41,3 @@ export { default as uk } from './uk'
 export { default as vi } from './vi'
 export { default as zhHans } from './zh-Hans'
 export { default as zhHant } from './zh-Hant'
-
-export const defaultRtl = {
-  af: false,
-  ar: true,
-  bg: false,
-  ca: false,
-  ckb: false,
-  cs: false,
-  de: false,
-  el: false,
-  en: false,
-  es: false,
-  et: false,
-  fa: true,
-  fi: false,
-  fr: false,
-  hr: false,
-  hu: false,
-  he: true,
-  id: false,
-  it: false,
-  ja: false,
-  ko: false,
-  lv: false,
-  lt: false,
-  nl: false,
-  no: false,
-  pl: false,
-  pt: false,
-  ro: false,
-  ru: false,
-  sk: false,
-  sl: false,
-  srCyrl: false,
-  srLatn: false,
-  sv: false,
-  th: false,
-  tr: false,
-  az: false,
-  uk: false,
-  vi: false,
-  zhHans: false,
-  zhHant: false,
-}

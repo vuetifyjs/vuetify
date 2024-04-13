@@ -1,9 +1,13 @@
-import type { ComponentPublicInstance, FunctionalComponent, UnwrapNestedRefs, VNodeChild } from 'vue'
+/* eslint-disable local-rules/sort-imports */
+
+import 'vue/jsx'
+import type { FunctionalComponent, UnwrapNestedRefs, VNodeChild } from 'vue'
 
 // @skip-build
-import type { DefaultsInstance, DisplayInstance, IconOptions, LocaleInstance, RtlInstance, ThemeInstance } from './framework'
+import type { ComponentPublicInstance } from 'vue'
+
 // @skip-build
-import type { DateOptions } from './labs'
+import type { DateInstance, DefaultsInstance, DisplayInstance, IconOptions, LocaleInstance, RtlInstance, ThemeInstance } from './framework'
 
 declare global {
   namespace JSX {
@@ -33,7 +37,7 @@ declare module '@vue/runtime-core' {
     theme: UnwrapNestedRefs<ThemeInstance>
     icons: IconOptions
     locale: UnwrapNestedRefs<LocaleInstance & RtlInstance>
-    date: DateOptions
+    date: DateInstance
   }
 
   export interface ComponentCustomProperties {

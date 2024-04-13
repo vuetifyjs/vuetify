@@ -1,18 +1,19 @@
 <template>
-  <app-menu
+  <AppMenuMenu
+    v-if="user.notifications.show"
     v-model="menu"
     :close-on-content-click="false"
     :open-on-hover="false"
     :width="width"
   >
     <template #activator="{ props }">
-      <app-tooltip-btn v-bind="props">
+      <AppTooltipBtn v-bind="props">
         <template #icon>
           <v-badge
             :model-value="unread.length > 0"
             color="#ED561B"
-            dot
             location="top end"
+            dot
           >
             <v-icon
               :icon="icon"
@@ -21,7 +22,7 @@
             />
           </v-badge>
         </template>
-      </app-tooltip-btn>
+      </AppTooltipBtn>
     </template>
 
     <v-toolbar
@@ -30,7 +31,6 @@
       density="compact"
     >
       <v-btn
-        :disabled="showArchived ? unread.length < 1 : read.length < 1"
         class="px-2 ms-n1 text-none font-weight-regular"
         size="small"
         variant="text"
@@ -38,15 +38,6 @@
       >
         {{ showArchived ? t('unread', { number: unread.length }) : t('read', { number: read.length }) }}
       </v-btn>
-
-      <template #append>
-        <v-icon
-          v-if="showArchived ? read.length > 0 : unread.length > 0"
-          :icon="showArchived ? 'mdi-email' : 'mdi-email-open'"
-          color="medium-emphasis"
-          @click.stop.prevent="toggleAll"
-        />
-      </template>
     </v-toolbar>
 
     <v-divider />
@@ -62,7 +53,7 @@
       >
         <p>{{ t('done') }}</p>
 
-        <v-icon icon="$vuetify" size="96" color="#D7D7D7" />
+        <v-icon color="#D7D7D7" icon="$vuetify" size="96" />
       </div>
 
       <template v-else>
@@ -81,29 +72,31 @@
               class="py-2"
             >
               <template #prepend>
-                <div class="pe-4 mt-n2">{{ notification.metadata.emoji }}</div>
+                <div class="pe-4 align-self-start">{{ notification.metadata.emoji }}</div>
               </template>
 
-              <v-list-item-title class="text-wrap text-h6 mb-1">
-                <div> {{ notification.title }}</div>
+              <v-list-item-title class="text-wrap text-h6">
+                <div class=" text-truncate">{{ notification.title }}</div>
               </v-list-item-title>
 
-              <div class="text-medium-emphasis text-caption">
-                {{ notification.metadata.text }}
+              <div class="text-caption mb-1 font-weight-bold text-medium-emphasis">{{ format(notification.created_at) }}</div>
 
-                <app-link
+              <div class="text-medium-emphasis text-caption">
+                <AppMarkdown :content="notification.metadata.text" class="mb-n3" />
+
+                <border-chip
                   :href="notification.metadata.action"
+                  :text="notification.metadata.action_text"
+                  append-icon="mdi-open-in-new"
                   @click="onClick(notification)"
-                >
-                  {{ notification.metadata.action_text }}
-                </app-link>
+                />
               </div>
 
-              <template #append>
-                <div class="ps-4 mt-n2">
+              <template v-if="!showArchived" #append>
+                <div class="ps-4">
                   <v-icon
-                    :icon="showArchived ? 'mdi-email-outline' : 'mdi-email-open-outline'"
                     color="medium-emphasis"
+                    icon="mdi-check"
                     @click.stop.prevent="toggle(notification)"
                   />
                 </div>
@@ -113,22 +106,10 @@
         </v-list>
       </template>
     </v-responsive>
-  </app-menu>
+  </AppMenuMenu>
 </template>
 
 <script setup lang="ts">
-  // Components
-  import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
-
-  // Composables
-  import { useCosmic } from '@/composables/cosmic'
-  import { useDisplay } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
-  import { useUserStore } from '@/store/user'
-
-  // Utilities
-  import { computed, onMounted, ref } from 'vue'
-
   // Types
   interface Notification {
     metadata: {
@@ -144,9 +125,12 @@
   }
 
   const { t } = useI18n()
-  const { bucket } = useCosmic<Notification>()
+  const { event } = useGtag()
+  const { bucket } = useCosmic()
   const { mobile } = useDisplay()
+  const date = useDate()
   const user = useUserStore()
+
   const menu = ref(false)
   const all = ref<Notification[]>([])
   const showArchived = ref(false)
@@ -171,29 +155,34 @@
 
   const width = computed(() => mobile.value ? 420 : 520)
 
+  function format (str: string) {
+    return date.format(new Date(str), 'fullDateWithWeekday')
+  }
   function onClick (notification: Notification) {
     toggle(notification)
     menu.value = false
+    event('click', {
+      event_category: 'vuetify-notification',
+      event_label: notification.slug,
+      value: notification.metadata.action,
+    })
   }
   function toggle ({ slug }: Notification) {
     user.notifications.read = user.notifications.read.includes(slug)
-      ? user.notifications.read.filter(n => n !== slug)
+      ? user.notifications.read.filter((n: any) => n !== slug)
       : [...user.notifications.read, slug]
-  }
-  function toggleAll () {
-    user.notifications.read = showArchived.value ? [] : all.value.map(({ slug }) => slug)
   }
 
   onMounted(async () => {
     if (all.value.length) return
 
-    const { objects = [] } = (
+    const { objects = [] }: { objects: Notification[] } = (
       await bucket?.objects
         .find({ type: 'notifications' })
-        .props('created_at,metadata,slug,title')
+        .props('metadata,created_at,slug,title')
         .status('published')
         .sort('-created_at')
-        .limit(5)
+        .limit(10)
     ) || {}
 
     all.value = objects

@@ -1,8 +1,8 @@
 // Composables
-import { describe, expect, it } from '@jest/globals'
 import { createDisplay } from '../display'
 
 // Utilities
+import { describe, expect, it } from '@jest/globals'
 import { resizeWindow } from '@/../test/index'
 
 const breakpoints = [

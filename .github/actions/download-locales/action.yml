@@ -1,0 +1,32 @@
+name: Download translations
+description: Download translations from Crowdin
+
+inputs:
+  crowdin-branch:
+    description: 'Crowdin branch name'
+    required: false
+    default: 'v3'
+
+runs:
+  using: composite
+  steps:
+    - name: Download eo-UY
+      uses: crowdin/github-action@v1.19.0
+      with:
+        download_language: eo
+        config: crowdin.yml
+        upload_sources: false
+        download_translations: true
+        push_translations: false
+        export_only_approved: false
+        crowdin_branch_name: ${{ inputs.crowdin-branch }}
+    - name: Download zh-CN
+      uses: crowdin/github-action@v1.19.0
+      with:
+        download_language: zh-CN
+        config: crowdin.yml
+        upload_sources: false
+        download_translations: true
+        push_translations: false
+        export_only_approved: false
+        crowdin_branch_name: ${{ inputs.crowdin-branch }}

@@ -6,14 +6,28 @@ import { startCase } from 'lodash-es'
 import locales from '../src/i18n/locales.json'
 import pageToApi from '../src/data/page-to-api.json'
 import type { Plugin } from 'vite'
+import { rimraf } from 'rimraf'
+import { mkdirp } from 'mkdirp'
+
+const API_ROOT = resolve('../api-generator/dist/api')
+const API_PAGES_ROOT = resolve('./node_modules/.cache/api-pages')
 
 const require = createRequire(import.meta.url)
+
+const sections = ['props', 'events', 'slots', 'exposed', 'sass', 'argument', 'modifiers', 'value'] as const
+// This can't be imported from the api-generator because it mixes the type definitions up
+type Data = {
+  displayName: string // user visible name used in page titles
+  fileName: string // file name for translation strings and generated types
+  pathName: string // kebab-case name for use in urls
+} & Record<typeof sections[number], Record<string, any>>
 
 const localeList = locales
   .filter(item => item.enabled)
   .map(item => item.alternate || item.locale)
 
 function genApiLinks (componentName: string, header: string) {
+  const section = ['<promoted-entry />', '<api-search />']
   const links = (Object.keys(pageToApi) as (keyof typeof pageToApi)[])
     .filter(page => pageToApi[page].includes(componentName))
     .reduce<string[]>((acc, href) => {
@@ -22,13 +36,9 @@ function genApiLinks (componentName: string, header: string) {
       return acc
     }, [])
 
-  if (!links.length || !header) return ''
-
-  const section = [
-    `## ${header} {#links}`,
-    links.join('\n'),
-    '<entry />',
-  ]
+  if (links.length && header) {
+    section.unshift(...[links.join('\n'), `## ${header} {#links}`])
+  }
 
   return `${section.join('\n\n')}\n\n`
 }
@@ -47,6 +57,7 @@ function genHeader (componentName: string) {
   const header = [
     genFrontMatter(componentName),
     `# ${componentName} API`,
+    '<page-features />',
   ]
 
   return `${header.join('\n\n')}\n\n`
@@ -70,14 +81,14 @@ async function loadMessages (locale: string) {
   }
 }
 
-async function createMdFile (component: Record<string, any>, locale: string) {
+async function createMdFile (component: Data, locale: string) {
   const messages = await loadMessages(locale)
   let str = ''
 
   str += genHeader(component.displayName)
-  str += genApiLinks(component.fileName, messages.links)
+  str += genApiLinks(component.displayName, messages.links)
 
-  for (const section of ['props', 'events', 'slots', 'exposed', 'sass', 'options', 'argument', 'modifiers']) {
+  for (const section of sections) {
     if (Object.keys(component[section] ?? {}).length) {
       str += `## ${messages[section]} {#${section}}\n\n`
       str += `<api-section name="${component.fileName}" section="${section}" />\n\n`
@@ -87,31 +98,26 @@ async function createMdFile (component: Record<string, any>, locale: string) {
   return str
 }
 
-async function writeFile (componentApi: Record<string, any>, locale: string) {
+async function writeFile (componentApi: Data, locale: string) {
   if (!componentApi?.fileName) return
 
-  const folder = `src/api/${locale}`
+  const folder = resolve(API_PAGES_ROOT, locale, 'api')
 
-  if (!fs.existsSync(resolve(folder))) {
-    fs.mkdirSync(resolve(folder), { recursive: true })
+  if (!fs.existsSync(folder)) {
+    fs.mkdirSync(folder, { recursive: true })
   }
 
-  fs.writeFileSync(resolve(`${folder}/${sanitize(componentApi.fileName)}.md`), await createMdFile(componentApi, locale))
+  fs.writeFileSync(resolve(folder, `${sanitize(componentApi.pathName)}.md`), await createMdFile(componentApi, locale))
 }
 
 function getApiData () {
-  const files = fs.readdirSync(resolve('src/api/data'))
-  const data: Record<string, any>[] = []
+  const files = fs.readdirSync(API_ROOT)
+  const data: Data[] = []
 
   for (const file of files) {
-    const name = path.basename(file.slice(file.lastIndexOf('/') + 1), '.json')
-    const obj = JSON.parse(fs.readFileSync(resolve('src/api/data', file), 'utf-8'))
+    const obj = JSON.parse(fs.readFileSync(resolve(API_ROOT, file), 'utf-8'))
 
-    data.push({
-      name,
-      displayName: name,
-      ...obj,
-    })
+    data.push(obj)
   }
 
   return data
@@ -130,15 +136,15 @@ async function generateFiles () {
       // pages[`/${locale}/api/${sanitize(kebabCase(item.name))}/`] = item.name
     }
 
-    // fs.writeFileSync(resolve(`src/api/${locale}/pages.json`), JSON.stringify(pages, null, 2))
-    fs.writeFileSync(resolve(`src/api/${locale}.js`), `export default require.context('./${locale}', true, /\\.md$/)`)
+    // fs.writeFileSync(resolve(API_PAGES_ROOT, `${locale}/pages.json`), JSON.stringify(pages, null, 2))
+    fs.writeFileSync(resolve(API_PAGES_ROOT, `${locale}.js`), `export default require.context('./${locale}/api', true, /\\.md$/)`)
   }
 
   // for (const item of api) {
   //   writeData(item.name, item)
   // }
 
-  // fs.writeFileSync(resolve(`src/api/sass.json`), JSON.stringify([
+  // fs.writeFileSync(resolve(API_PAGES_ROOT, 'sass.json'), JSON.stringify([
   //   ...api.filter(item => item && item.sass && item.sass.length > 0).map(item => item.name),
   // ]))
 }
@@ -146,8 +152,10 @@ async function generateFiles () {
 export default function Api (): Plugin {
   return {
     name: 'vuetify:api',
-    async configResolved () {
-      // rimraf.sync(resolve('src/api'))
+    enforce: 'pre',
+    async config () {
+      await rimraf(API_PAGES_ROOT)
+      await mkdirp(API_PAGES_ROOT)
 
       await generateFiles()
     },

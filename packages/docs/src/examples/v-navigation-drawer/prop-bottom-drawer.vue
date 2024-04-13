@@ -13,11 +13,11 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn variant="text" icon="mdi-magnify"></v-btn>
+        <v-btn icon="mdi-magnify" variant="text"></v-btn>
 
-        <v-btn variant="text" icon="mdi-filter"></v-btn>
+        <v-btn icon="mdi-filter" variant="text"></v-btn>
 
-        <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
+        <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>
       </v-app-bar>
 
       <v-navigation-drawer
@@ -38,6 +38,36 @@
     </v-layout>
   </v-card>
 </template>
+
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const items = [
+    {
+      title: 'Foo',
+      value: 'foo',
+    },
+    {
+      title: 'Bar',
+      value: 'bar',
+    },
+    {
+      title: 'Fizz',
+      value: 'fizz',
+    },
+    {
+      title: 'Buzz',
+      value: 'buzz',
+    },
+  ]
+
+  const drawer = ref(false)
+  const group = ref(null)
+
+  watch(group, () => {
+    drawer.value = false
+  })
+</script>
 
 <script>
   export default {

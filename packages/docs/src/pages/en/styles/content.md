@@ -13,7 +13,9 @@ related:
 
 Vuetify has custom styling for multiple standard elements.
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ## Block quote
 

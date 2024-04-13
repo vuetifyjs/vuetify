@@ -2,7 +2,7 @@
 
 $shadow-key-umbra-opacity: var(--v-shadow-key-umbra-opacity, rgba(0, 0, 0, 0.2)) !default;
 $shadow-key-penumbra-opacity: var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.14)) !default;
-$shadow-key-ambient-opacity: var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.12)) !default;
+$shadow-key-ambient-opacity: var(--v-shadow-key-ambient-opacity, rgba(0, 0, 0, 0.12)) !default;
 
 $shadow-key-umbra: () !default;
 $shadow-key-umbra: map-deep-merge(

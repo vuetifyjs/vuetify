@@ -9,9 +9,8 @@
       <v-tab
         v-for="i in 30"
         :key="i"
-      >
-        Item {{ i }}
-      </v-tab>
+        :text="`Item ${i}`"
+      ></v-tab>
     </v-tabs>
   </v-sheet>
 </template>

@@ -7,27 +7,27 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 import { VProgressCircular } from '@/components/VProgressCircular'
 
-// Directives
-import { Ripple } from '@/directives/ripple'
-
 // Composables
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
-import { IconValue } from '@/composables/icons'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
+import { IconValue } from '@/composables/icons'
 import { makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
+import { useSelectLink } from '@/composables/selectLink'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useSelectLink } from '@/composables/selectLink'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+
+// Directives
+import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed } from 'vue'
@@ -35,12 +35,13 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 export type VBtnSlots = {
-  default: []
-  prepend: []
-  append: []
-  loader: []
+  default: never
+  prepend: never
+  append: never
+  loader: never
 }
 
 export const makeVBtnProps = propsFactory({
@@ -48,6 +49,7 @@ export const makeVBtnProps = propsFactory({
     type: Boolean,
     default: undefined,
   },
+  baseColor: String,
   symbol: {
     type: null,
     default: VBtnToggleSymbol,
@@ -58,10 +60,11 @@ export const makeVBtnProps = propsFactory({
   appendIcon: IconValue,
 
   block: Boolean,
+  slim: Boolean,
   stacked: Boolean,
 
   ripple: {
-    type: Boolean,
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
 
@@ -82,7 +85,7 @@ export const makeVBtnProps = propsFactory({
   ...makeTagProps({ tag: 'button' }),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'elevated' } as const),
-}, 'v-btn')
+}, 'VBtn')
 
 export const VBtn = genericComponent<VBtnSlots>()({
   name: 'VBtn',
@@ -98,7 +101,6 @@ export const VBtn = genericComponent<VBtnSlots>()({
   setup (props, { attrs, slots }) {
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
-    const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
@@ -121,19 +123,42 @@ export const VBtn = genericComponent<VBtnSlots>()({
 
       return group?.isSelected.value
     })
+
+    const variantProps = computed(() => {
+      const showColor = (
+        (group?.isSelected.value && (!link.isLink.value || link.isActive?.value)) ||
+        (!group || link.isActive?.value)
+      )
+      return ({
+        color: showColor ? props.color ?? props.baseColor : props.baseColor,
+        variant: props.variant,
+      })
+    })
+    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
+
     const isDisabled = computed(() => group?.disabled.value || props.disabled)
     const isElevated = computed(() => {
       return props.variant === 'elevated' && !(props.disabled || props.flat || props.border)
     })
     const valueAttr = computed(() => {
-      if (props.value === undefined) return undefined
+      if (props.value === undefined || typeof props.value === 'symbol') return undefined
 
       return Object(props.value) === props.value
-        ? JSON.stringify(props.value, null, 0) : props.value
+        ? JSON.stringify(props.value, null, 0)
+        : props.value
     })
 
     function onClick (e: MouseEvent) {
-      if (isDisabled.value) return
+      if (
+        isDisabled.value ||
+        (link.isLink.value && (
+          e.metaKey ||
+          e.ctrlKey ||
+          e.shiftKey ||
+          (e.button !== 0) ||
+          attrs.target === '_blank'
+        ))
+      ) return
 
       link.navigate?.(e)
       group?.toggle()
@@ -146,10 +171,6 @@ export const VBtn = genericComponent<VBtnSlots>()({
       const hasPrepend = !!(props.prependIcon || slots.prepend)
       const hasAppend = !!(props.appendIcon || slots.append)
       const hasIcon = !!(props.icon && props.icon !== true)
-      const hasColor = (
-        (group?.isSelected.value && (!link.isLink.value || link.isActive?.value)) ||
-        (!group || link.isActive?.value)
-      )
 
       return (
         <Tag
@@ -165,11 +186,12 @@ export const VBtn = genericComponent<VBtnSlots>()({
               'v-btn--flat': props.flat,
               'v-btn--icon': !!props.icon,
               'v-btn--loading': props.loading,
+              'v-btn--slim': props.slim,
               'v-btn--stacked': props.stacked,
             },
             themeClasses.value,
             borderClasses.value,
-            hasColor ? colorClasses.value : undefined,
+            colorClasses.value,
             densityClasses.value,
             elevationClasses.value,
             loaderClasses.value,
@@ -180,14 +202,16 @@ export const VBtn = genericComponent<VBtnSlots>()({
             props.class,
           ]}
           style={[
-            hasColor ? colorStyles.value : undefined,
+            colorStyles.value,
             dimensionStyles.value,
             locationStyles.value,
             sizeStyles.value,
             props.style,
           ]}
+          aria-busy={ props.loading ? true : undefined }
           disabled={ isDisabled.value || undefined }
           href={ link.href.value }
+          tabindex={ props.loading ? -1 : undefined }
           v-ripple={[
             !isDisabled.value && props.ripple,
             null,
@@ -269,7 +293,6 @@ export const VBtn = genericComponent<VBtnSlots>()({
                 <VProgressCircular
                   color={ typeof props.loading === 'boolean' ? undefined : props.loading }
                   indeterminate
-                  size="23"
                   width="2"
                 />
               )}
@@ -279,7 +302,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
       )
     })
 
-    return {}
+    return { group }
   },
 })
 

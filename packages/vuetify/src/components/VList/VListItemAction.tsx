@@ -3,18 +3,20 @@ import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVListItemActionProps = propsFactory({
+  start: Boolean,
+  end: Boolean,
+
+  ...makeComponentProps(),
+  ...makeTagProps(),
+}, 'VListItemAction')
 
 export const VListItemAction = genericComponent()({
   name: 'VListItemAction',
 
-  props: {
-    start: Boolean,
-    end: Boolean,
-
-    ...makeComponentProps(),
-    ...makeTagProps(),
-  },
+  props: makeVListItemActionProps(),
 
   setup (props, { slots }) {
     useRender(() => (

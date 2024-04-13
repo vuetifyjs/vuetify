@@ -45,9 +45,9 @@
         <div class="pa-4 text-center">
           <v-img
             class="mb-4"
-            contain
             height="128"
             src="https://cdn.vuetifyjs.com/images/logos/v.svg"
+            contain
           ></v-img>
           <h3 class="text-h6 font-weight-light mb-2">
             Welcome to Vuetify
@@ -79,6 +79,20 @@
     </v-card-actions>
   </v-card>
 </template>
+
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const step = ref(1)
+
+  const currentTitle = computed(() => {
+    switch (step.value) {
+      case 1: return 'Sign-up'
+      case 2: return 'Create a password'
+      default: return 'Account created'
+    }
+  })
+</script>
 
 <script>
   export default {

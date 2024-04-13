@@ -4,15 +4,18 @@
 
 .v-chip
   align-items: center
-  cursor: default
   display: inline-flex
   font-weight: $chip-font-weight
   max-width: $chip-max-width
+  min-width: 0
   overflow: hidden
   position: relative
   text-decoration: none
   white-space: $chip-white-space
   vertical-align: middle
+
+  .v-icon
+    --v-icon-size-multiplier: #{$chip-icon-size-multiplier}
 
   @at-root
     @include chip-sizes()
@@ -36,6 +39,15 @@
     @include tools.rounded($chip-label-border-radius)
 
 // Elements
+.v-chip__content
+  align-items: center
+  display: inline-flex
+
+  .v-autocomplete__selection &,
+  .v-combobox__selection &,
+  .v-select__selection &
+    overflow: hidden
+
 .v-chip__filter,
 .v-chip__prepend,
 .v-chip__append,

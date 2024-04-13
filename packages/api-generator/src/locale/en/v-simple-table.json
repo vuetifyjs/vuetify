@@ -1,6 +1,0 @@
-{
-  "props": {
-    "dense": "Decreases paddings to render a dense table",
-    "fixedHeader": "Sets table header to fixed mode"
-  }
-}

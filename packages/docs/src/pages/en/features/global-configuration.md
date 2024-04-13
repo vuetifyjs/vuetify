@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Global configuration
   description: Vuetify.config is an object containing global configuration options that modify the bootstrapping of your project.
@@ -14,7 +13,9 @@ related:
 
 Vuetify allows you to set default prop values globally or per component when setting up your application. Using this functionality you can for example disable **ripple** on all components, or set the default **elevation** for all sheets or buttons.
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ## Setup
 
@@ -45,7 +46,7 @@ createVuetify({
   defaults: {
     VCard: {
       VBtn: { variant: 'outlined' },
-    }
+    },
   },
 })
 ```
@@ -60,11 +61,9 @@ This is used internally by some components already:
 
 ## Global class and styles
 
-<alert type="success">
-
-This feature was introduced in [v3.2.0 (Orion)](https://github.com/vuetifyjs/vuetify/releases/tag/v3.2.0)
-
-</alert>
+::: success
+This feature was introduced in [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
+:::
 
 Define global classes and styles for all [built-in](/components/all/) components; including [virtual](/features/aliasing/#virtual-component-defaults) ones. This provides an immense amount of utility when building your application's design system and it reduces the amount of duplicated code in your templates.
 
@@ -114,6 +113,10 @@ export default createVuetify({
   },
 })
 ```
+
+::: warning
+  `class` and `style` cannot be used in the `global` object, only in specific components.
+:::
 
 ## Using with virtual components
 
@@ -204,19 +207,15 @@ export default createVuetify({
 
 When `<v-chip-primary>` is used in a template, it will **not** have the `v-chip--custom` class.
 
-<alert type="warning">
-
+::: warning
 There are some cases where a default class or style could be unintentionally passed down to an inner component. This mostly concerns [form inputs and controls](/components/all/#form-inputs-and-controls).
-
-</alert>
+:::
 
 ## Using in custom components
 
-<alert type="success">
-
-This feature was introduced in [v3.2.0 (Orion)](https://github.com/vuetifyjs/vuetify/releases/tag/v3.2.0)
-
-</alert>
+::: success
+This feature was introduced in [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
+:::
 
 Hook into the Vuetify defaults engine and configure your custom components the same way that we do. This feature makes it super easy to homogenize functionality across your application and reduce the amount of duplicated code.
 
@@ -266,18 +265,16 @@ In your template, assign the return value of `defineProps` to a variable and pas
 </script>
 ```
 
-Notice that we have to explicltly use the `props` object in the template. This is because Vue automatically unwraps the values in `defineProps`.
+Notice that we have to explicitly use the `props` object in the template. This is because Vue automatically unwraps the values in `defineProps`.
 
 ```diff
 -<div>I am {{ foo }}</div>
 +<div>I am {{ props.foo }}</div>
 ```
 
-<alert type="info">
-
+::: info
 The **name** argument is optional and is inferred from the component's name if not provided.
-
-</alert>
+:::
 
 When `<MyComponent1>` is used in a template, it uses the default value assigned in the Vuetify config:
 

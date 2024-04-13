@@ -26,6 +26,21 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const media = ref(0)
+  const alarm = ref(0)
+  const zoom = ref(0)
+
+  function zoomOut () {
+    zoom.value = (zoom.value - 10) || 0
+  }
+  function zoomIn () {
+    zoom.value = (zoom.value + 10) || 100
+  }
+</script>
+
 <script>
   export default {
     data () {

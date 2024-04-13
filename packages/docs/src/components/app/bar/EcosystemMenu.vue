@@ -1,31 +1,26 @@
 <template>
-  <app-btn>
+  <AppBtn>
     Ecosystem
 
-    <chevron-down />
+    <IconsChevronDown />
 
-    <app-menu
+    <AppMenuMenu
       :items="items"
       activator="parent"
       width="200"
     />
-  </app-btn>
+  </AppBtn>
 </template>
 
 <script setup>
-  // Components
-  import ChevronDown from '@/components/icons/ChevronDown.vue'
-
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const { t } = useI18n()
   const items = computed(() => ([
     { subheader: t('social') },
+    {
+      title: 'X',
+      href: 'https://x.com/vuetifyjs',
+      appendIcon: '$x',
+    },
     {
       title: 'Discord',
       href: 'https://community.vuetifyjs.com/',
@@ -37,17 +32,32 @@
       appendIcon: 'mdi-github',
     },
     {
-      title: 'twitter',
-      href: 'https://twitter.com/vuetifyjs',
-      appendIcon: 'mdi-twitter',
-    },
-    {
       title: 'reddit',
       href: 'https://reddit.com/r/vuetifyjs',
       appendIcon: 'mdi-reddit',
     },
     { divider: true },
     { subheader: t('tools') },
+    {
+      title: 'awesome',
+      href: 'https://github.com/vuetifyjs/awesome-vuetify',
+      appendIcon: 'mdi-creation-outline',
+    },
+    {
+      title: 'brand-kit',
+      to: rpath('/resources/brand-kit/'),
+      appendIcon: '$vuetify-outline',
+    },
+    {
+      title: 'create',
+      href: 'https://tryvuetify.com/',
+      appendIcon: 'mdi-widgets-outline',
+    },
+    {
+      title: 'pastebin',
+      href: 'https://bin.vuetifyjs.com/',
+      appendIcon: 'mdi-delete-outline',
+    },
     {
       title: 'playground',
       href: 'https://play.vuetifyjs.com/',
@@ -67,23 +77,6 @@
       title: 'ui-kits',
       to: rpath('/resources/ui-kits/'),
       appendIcon: 'mdi-vector-difference-ab',
-    },
-    { divider: true },
-    { subheader: t('documentation') },
-    {
-      title: '3.x (latest)',
-      href: 'https://vuetifyjs.com/',
-      appendIcon: 'mdi-numeric-3-box',
-    },
-    {
-      title: '2.6.x (v2-stable)',
-      href: 'https://v2.vuetifyjs.com/',
-      appendIcon: 'mdi-numeric-2-box',
-    },
-    {
-      title: '1.5.x (v1-stable)',
-      href: 'https://v15.vuetifyjs.com/',
-      appendIcon: 'mdi-numeric-1-box',
     },
   ]))
 </script>

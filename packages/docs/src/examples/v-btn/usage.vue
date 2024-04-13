@@ -1,9 +1,9 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div class="text-center">
       <v-btn v-bind="props">
@@ -17,14 +17,10 @@
       <v-checkbox v-model="append" label="Append icon"></v-checkbox>
       <v-checkbox v-model="stacked" label="Stacked"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref, watch } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const variants = ['outlined', 'tonal', 'text', 'plain']
   const name = 'v-btn'
   const model = ref('default')
@@ -37,9 +33,9 @@
   const props = computed(() => {
     return {
       block: block.value || undefined,
-      'prepend-icon': prepend.value ? 'mdi-vuetify' : undefined,
-      'append-icon': append.value ? 'mdi-vuetify' : undefined,
-      icon: icon.value ? 'mdi-vuetify' : undefined,
+      'prepend-icon': prepend.value ? '$vuetify' : undefined,
+      'append-icon': append.value ? '$vuetify' : undefined,
+      icon: icon.value ? '$vuetify' : undefined,
       stacked: stacked.value || undefined,
       variant: variants.includes(model.value) ? model.value : undefined,
     }

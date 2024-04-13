@@ -12,7 +12,6 @@
   transition-duration: $navigation-drawer-transition-duration
   transition-property: $navigation-drawer-transition-property
   transition-timing-function: $navigation-drawer-transition-timing-function
-  will-change: $navigation-drawer-will-change
   position: absolute
 
   @include tools.border($navigation-drawer-border...)
@@ -46,7 +45,7 @@
   &--floating
     border: none
 
-  &--temporary
+  &--temporary.v-navigation-drawer--active
     @include tools.elevation($navigation-drawer-temporary-elevation)
 
   &--sticky
@@ -71,16 +70,24 @@
   width: 100%
   z-index: -1
 
-  img
+  // TODO: remove in v4
+  img:not(.v-img__img)
     height: $navigation-drawer-img-height
     object-fit: $navigation-drawer-img-object-fit
     width: $navigation-drawer-img-width
 
 .v-navigation-drawer__scrim
   position: absolute
+  top: 0
+  left: 0
   width: 100%
   height: 100%
   background: black
   opacity: $navigation-drawer-scrim-opacity
   transition: opacity $navigation-drawer-transition-duration $navigation-drawer-transition-timing-function
   z-index: 1
+
+.v-navigation-drawer__prepend,
+.v-navigation-drawer__append
+  flex: none
+  overflow: hidden

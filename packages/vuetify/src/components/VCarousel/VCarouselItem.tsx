@@ -1,40 +1,43 @@
 // Components
-import { VImg } from '@/components/VImg'
-import { VWindowItem } from '@/components/VWindow'
-
-// Composables
-import { makeComponentProps } from '@/composables/component'
+import { makeVImgProps, VImg } from '@/components/VImg/VImg'
+import { makeVWindowItemProps, VWindowItem } from '@/components/VWindow/VWindowItem'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VImgSlots } from '@/components/VImg/VImg'
+
+export const makeVCarouselItemProps = propsFactory({
+  ...makeVImgProps(),
+  ...makeVWindowItemProps(),
+}, 'VCarouselItem')
 
 export const VCarouselItem = genericComponent<VImgSlots>()({
   name: 'VCarouselItem',
 
   inheritAttrs: false,
 
-  props: {
-    value: null,
-
-    ...makeComponentProps(),
-  },
+  props: makeVCarouselItemProps(),
 
   setup (props, { slots, attrs }) {
-    useRender(() => (
-      <VWindowItem
-        class={[
-          'v-carousel-item',
-          props.class,
-        ]}
-        style={ props.style }
-        value={ props.value }
-      >
-        <VImg { ...attrs } v-slots={ slots } />
-      </VWindowItem>
-    ))
+    useRender(() => {
+      const imgProps = VImg.filterProps(props)
+      const windowItemProps = VWindowItem.filterProps(props)
+
+      return (
+        <VWindowItem
+          class="v-carousel-item"
+          { ...windowItemProps }
+        >
+          <VImg
+            { ...attrs }
+            { ...imgProps }
+            v-slots={ slots }
+          />
+        </VWindowItem>
+      )
+    })
   },
 })
 

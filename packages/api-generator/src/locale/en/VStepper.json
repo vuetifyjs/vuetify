@@ -1,0 +1,29 @@
+{
+  "props": {
+    "altLabels": "Places the labels beneath the step.",
+    "editable": "Marks step as editable.",
+    "flat": "Removes the stepper's elevation.",
+    "hideActions": "Hide actions bar (prev and next buttons).",
+    "itemTitle": "Property on supplied `items` that contains its title.",
+    "itemValue": "Property on supplied `items` that contains its value.",
+    "mobile": "Forces the stepper into a mobile state, removing labels from stepper items.",
+    "nextText": "The text used for the Next button.",
+    "prevText": "The text used for the Prev button.",
+    "nonLinear": "Allow user to jump to any step.",
+    "vertical": "Display steps vertically."
+  },
+  "slots": {
+    "[`header-item.${string}`]": "Slot for customizing header items when using the [items](/api/v-stepper/#props-items) prop.",
+    "[`item.${string}`]": "Slot for customizing the content for each step.",
+    "actions": "Slot for customizing [v-stepper-actions](/api/v-stepper-actions/).",
+    "header": "Slot for customizing the header.",
+    "header-item": "Slot for customizing all header items.",
+    "icon": "Slot for customizing all stepper item icons.",
+    "next": "Slot for customizing the next step functionailty",
+    "prev": "Slot for customizing the prev step functionality"
+  },
+  "exposed": {
+    "next": "Move to the next step.",
+    "prev": "Move to the prev step."
+  }
+}

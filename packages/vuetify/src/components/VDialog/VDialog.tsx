@@ -5,41 +5,46 @@ import './VDialog.sass'
 import { VDialogTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
+import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Composables
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
-import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
-import { focusableChildren, genericComponent, IN_BROWSER, useRender } from '@/util'
-import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
+import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
+import type { Component } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
+
+export const makeVDialogProps = propsFactory({
+  fullscreen: Boolean,
+  retainFocus: {
+    type: Boolean,
+    default: true,
+  },
+  scrollable: Boolean,
+
+  ...makeVOverlayProps({
+    origin: 'center center' as const,
+    scrollStrategy: 'block' as const,
+    transition: { component: VDialogTransition as Component },
+    zIndex: 2400,
+  }),
+}, 'VDialog')
 
 export const VDialog = genericComponent<OverlaySlots>()({
   name: 'VDialog',
 
-  props: {
-    fullscreen: Boolean,
-    retainFocus: {
-      type: Boolean,
-      default: true,
-    },
-    scrollable: Boolean,
-
-    ...makeVOverlayProps({
-      origin: 'center center' as const,
-      scrollStrategy: 'block' as const,
-      transition: { component: VDialogTransition },
-      zIndex: 2400,
-    }),
-  },
+  props: makeVDialogProps(),
 
   emits: {
+    'click:outside': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
+    afterLeave: () => true,
   },
 
   setup (props, { slots }) {
@@ -101,7 +106,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
     )
 
     useRender(() => {
-      const [overlayProps] = VOverlay.filterProps(props)
+      const overlayProps = VOverlay.filterProps(props)
 
       return (
         <VOverlay
@@ -125,7 +130,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
           {{
             activator: slots.activator,
             default: (...args) => (
-              <VDefaultsProvider root>
+              <VDefaultsProvider root="VDialog">
                 { slots.default?.(...args) }
               </VDefaultsProvider>
             ),

@@ -1,46 +1,59 @@
-@import './_variables.scss'
-
-+theme(v-date-picker-header) using ($material)
-  .v-date-picker-header__value:not(.v-date-picker-header__value--disabled)
-    button:not(:hover):not(:focus)
-      color: map-deep-get($material, 'text', 'primary')
-
-  .v-date-picker-header__value--disabled
-    button
-      color: map-deep-get($material, 'text', 'disabled')
+@use '../../styles/settings'
+@use './variables' as *
 
 .v-date-picker-header
-  padding: $date-picker-header-padding
-
-  align-items: center
-  display: flex
-  justify-content: space-between
-  position: relative
-
-  .v-btn
-    margin: 0
-    z-index: auto
-
-  .v-icon
-    cursor: pointer
-    user-select: none
-
-.v-date-picker-header__value
-  flex: 1
-  text-align: center
-  position: relative
+  align-items: flex-end
+  height: $date-picker-header-height
+  display: grid
+  grid-template-areas: "prepend content append"
+  grid-template-columns: min-content minmax(0, 1fr) min-content
   overflow: hidden
+  padding-inline: 24px 12px
+  padding-bottom: 12px
 
-  div
-    transition: $date-picker-header-value-transition
-    width: 100%
+.v-date-picker-header__append
+  grid-area: append
 
-  button
+.v-date-picker-header__prepend
+  grid-area: prepend
+  padding-inline-start: 8px
+
+.v-date-picker-header__content
+  align-items: center
+  display: inline-flex
+  font-size: 32px
+  line-height: 40px
+  grid-area: content
+  justify-content: space-between
+
+  .v-date-picker-header--clickable &
     cursor: pointer
-    font-weight: $date-picker-header-button-font-weight
-    outline: none
-    padding: $date-picker-header-button-padding
-    transition: $date-picker-header-button-transition
 
-.v-date-picker-header--disabled
-  pointer-events: none
+    &:not(:hover)
+      opacity: .7
+
+.date-picker-header-transition,
+.date-picker-header-reverse-transition
+  &-enter-active
+    transition-duration: 0.3s
+    transition-timing-function: settings.$standard-easing
+
+  &-leave-active
+    transition-duration: 0.3s
+    transition-timing-function: settings.$standard-easing
+
+.date-picker-header-transition
+  &-enter-from
+    transform: translate(0, 100%)
+
+  &-leave-to
+    opacity: 0
+    transform: translate(0, -100%)
+
+.date-picker-header-reverse-transition
+  &-enter-from
+    transform: translate(0, -100%)
+
+  &-leave-to
+    opacity: 0
+    transform: translate(0, 100%)

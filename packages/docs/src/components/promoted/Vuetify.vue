@@ -1,35 +1,29 @@
 <template>
-  <promoted-base
-    border
-    class="v-vuetify mb-4"
+  <PromotedBase
+    v-if="ad"
+    class="v-vuetify"
     density="comfortable"
+    border
   >
     <v-list-item
-      v-if="ad"
+      :append-icon="smAndUp ? 'mdi-open-in-new' : undefined"
       :prepend-avatar="src"
       :title="ad.title"
-      append-icon="mdi-open-in-new"
       style="min-height: inherit; width: 100%"
       v-bind="attrs"
     >
       <template #subtitle>
-        <app-markdown
+        <AppMarkdown
           v-if="description"
           :content="description"
           class="text-caption"
         />
       </template>
     </v-list-item>
-  </promoted-base>
+  </PromotedBase>
 </template>
 
 <script setup>
-  // Components
-  import PromotedBase from './Base.vue'
-
-  // Composables
-  import { createAdProps, useAd } from '@/composables/ad'
-
   const props = defineProps({
     color: String,
 
@@ -37,6 +31,7 @@
   })
 
   const { ad, attrs, src, description } = useAd(props)
+  const { smAndUp } = useDisplay()
 </script>
 
 <style lang="sass">

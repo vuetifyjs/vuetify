@@ -1,7 +1,7 @@
 @use '../../styles/settings';
 
 // VTooltip
-$tooltip-background-color: rgba(var(--v-theme-surface-variant), .7) !default;
+$tooltip-background-color: rgb(var(--v-theme-surface-variant)) !default;
 $tooltip-text-color: rgb(var(--v-theme-on-surface-variant)) !default;
 $tooltip-border-radius: settings.$border-radius-root !default;
 $tooltip-font-size: .875rem !default;
@@ -9,3 +9,4 @@ $tooltip-line-height: 1.6 !default;
 $tooltip-transition-enter-duration: 150ms !default;
 $tooltip-transition-leave-duration: 75ms !default;
 $tooltip-padding: 5px 16px !default;
+$tooltip-overflow-wrap: break-word !default;

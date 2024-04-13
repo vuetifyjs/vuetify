@@ -17,12 +17,13 @@
 </template>
 
 <script setup>
-  import { computed } from 'vue'
-
   const props = defineProps({ type: String })
 
+  const type = computed(() => {
+    return props.type === 'tip' ? 'success' : props.type
+  })
   const icon = computed(() => {
-    switch (props.type) {
+    switch (type.value) {
       case 'error': return 'mdi-close-circle-outline'
       case 'info': return 'mdi-information-outline'
       case 'success': return 'mdi-check-circle-outline'

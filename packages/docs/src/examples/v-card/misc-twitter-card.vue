@@ -2,9 +2,9 @@
   <v-card
     class="mx-auto"
     color="#26c6da"
-    theme="dark"
     max-width="400"
     prepend-icon="mdi-twitter"
+    theme="dark"
     title="Twitter"
   >
     <template v-slot:prepend>
@@ -41,11 +41,3 @@
     </v-card-actions>
   </v-card>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-      //
-    }),
-  }
-</script>

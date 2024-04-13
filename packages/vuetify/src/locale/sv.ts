@@ -1,6 +1,11 @@
 export default {
   badge: 'Bricka',
+  open: 'Open',
   close: 'Stäng',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Avbryt',
+  },
   dataIterator: {
     noResultsText: 'Hittade inga poster',
     loadingText: 'Laddar data...',
@@ -26,12 +31,20 @@ export default {
     lastPage: 'Sista sidan',
     pageText: '{0}-{1} av {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} markerade',
-    nextMonthAriaLabel: 'Nästa månad',
-    nextYearAriaLabel: 'Nästa år',
-    prevMonthAriaLabel: 'Förra månaden',
-    prevYearAriaLabel: 'Förra året',
+    itemsSelected: '{0} selected',
+    range: {
+      title: 'Välj datum',
+      header: 'Välj datum',
+    },
+    title: 'Välj datum',
+    header: 'Välj datum',
+    input: {
+      placeholder: 'Välj datum',
+    },
   },
   noDataText: 'Ingen data tillgänglig',
   carousel: {
@@ -43,11 +56,13 @@ export default {
   },
   calendar: {
     moreEvents: '{0} fler',
+    today: 'Today',
   },
   input: {
     clear: 'Rensa {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} filer',
@@ -56,6 +71,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
@@ -67,6 +83,10 @@ export default {
       first: 'Första sidan',
       last: 'Sista sidan',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

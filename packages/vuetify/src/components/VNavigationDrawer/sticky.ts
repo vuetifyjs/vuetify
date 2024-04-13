@@ -1,6 +1,9 @@
-import type { CSSProperties, Ref } from 'vue'
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+// Utilities
+import { computed, onBeforeUnmount, onMounted, shallowRef, watch } from 'vue'
 import { convertToUnit } from '@/util'
+
+// Types
+import type { CSSProperties, Ref } from 'vue'
 
 interface StickyProps {
   rootEl: Ref<HTMLElement | undefined>
@@ -9,8 +12,8 @@ interface StickyProps {
 }
 
 export function useSticky ({ rootEl, isSticky, layoutItemStyles }: StickyProps) {
-  const isStuck = ref<boolean | 'top' | 'bottom'>(false)
-  const stuckPosition = ref(0)
+  const isStuck = shallowRef<boolean | 'top' | 'bottom'>(false)
+  const stuckPosition = shallowRef(0)
 
   const stickyStyles = computed(() => {
     const side = typeof isStuck.value === 'boolean' ? 'top' : isStuck.value
@@ -33,7 +36,7 @@ export function useSticky ({ rootEl, isSticky, layoutItemStyles }: StickyProps) 
   })
 
   onBeforeUnmount(() => {
-    document.removeEventListener('scroll', onScroll)
+    window.removeEventListener('scroll', onScroll)
   })
 
   let lastScrollTop = 0

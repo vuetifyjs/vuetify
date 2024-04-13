@@ -26,8 +26,8 @@
           <v-list-item
             v-for="([title, icon], i) in admins"
             :key="i"
-            :title="title"
             :prepend-icon="icon"
+            :title="title"
             :value="title"
           ></v-list-item>
         </v-list-group>
@@ -43,15 +43,32 @@
           <v-list-item
             v-for="([title, icon], i) in cruds"
             :key="i"
-            :value="title"
-            :title="title"
             :prepend-icon="icon"
+            :title="title"
+            :value="title"
           ></v-list-item>
         </v-list-group>
       </v-list-group>
     </v-list>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const open = ref(['Users'])
+
+  const admins = [
+    ['Management', 'mdi-account-multiple-outline'],
+    ['Settings', 'mdi-cog-outline'],
+  ]
+  const cruds = [
+    ['Create', 'mdi-plus-outline'],
+    ['Read', 'mdi-file-outline'],
+    ['Update', 'mdi-update'],
+    ['Delete', 'mdi-delete'],
+  ]
+</script>
 
 <script>
   export default {

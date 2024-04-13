@@ -5,19 +5,19 @@
       side="end"
     >
       <v-timeline-item
-        fill-dot
         class="mb-12"
         dot-color="orange"
         size="large"
+        fill-dot
       >
         <template v-slot:icon>
           <span>JL</span>
         </template>
         <v-text-field
           v-model="input"
-          hide-details
-          label="Leave a comment..."
           density="compact"
+          label="Leave a comment..."
+          hide-details
           @keydown.enter="comment"
         >
           <template v-slot:append>
@@ -79,8 +79,8 @@
             <v-chip
               class="ms-0"
               color="purple"
-              label
               size="small"
+              label
             >
               APP
             </v-chip>
@@ -149,6 +149,30 @@
     </v-timeline>
   </v-container>
 </template>
+
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const events = ref([])
+  const input = ref(null)
+  const nonce = ref(0)
+
+  const timeline = computed(() => {
+    return events.value.slice().reverse()
+  })
+
+  function comment () {
+    const time = (new Date()).toTimeString()
+    events.value.push({
+      id: nonce.value++,
+      text: input.value,
+      time: time.replace(/:\d{2}\sGMT-\d{4}\s\((.*)\)/, (match, contents, offset) => {
+        return ` ${contents.split(' ').map(v => v.charAt(0)).join('')}`
+      }),
+    })
+    input.value = null
+  }
+</script>
 
 <script>
   export default {

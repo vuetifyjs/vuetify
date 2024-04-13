@@ -1,9 +1,50 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VForm } from '@/components/VForm'
-import { ref } from 'vue'
+// Components
 import { VAutocomplete } from '../VAutocomplete'
+import { VForm } from '@/components/VForm'
+
+// Utilities
+import { cloneVNode, ref } from 'vue'
+import { generate } from '../../../../cypress/templates'
 import { keyValues } from '@/util'
+
+const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
+const densities = ['default', 'comfortable', 'compact'] as const
+const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'] as const
+
+const stories = Object.fromEntries(Object.entries({
+  'Default input': <VAutocomplete />,
+  Disabled: <VAutocomplete items={ items } disabled />,
+  Affixes: <VAutocomplete items={ items } prefix="prefix" suffix="suffix" />,
+  'Prepend/append': <VAutocomplete items={ items } prependIcon="$vuetify" appendIcon="$vuetify" />,
+  'Prepend/append inner': <VAutocomplete items={ items } prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
+  Placeholder: <VAutocomplete items={ items } placeholder="placeholder" persistentPlaceholder />,
+}).map(([k, v]) => [k, (
+  <div class="d-flex flex-column flex-grow-1">
+    { variants.map(variant => (
+      densities.map(density => (
+        <div class="d-flex align-start" style="gap: 0.4rem; height: 100px;">
+          { cloneVNode(v, { variant, density, label: `${variant} ${density}` }) }
+          { cloneVNode(v, { variant, density, label: `with value`, modelValue: ['California'] }) }
+          { cloneVNode(v, { variant, density, label: `chips`, chips: true, modelValue: ['California'] }) }
+          <VAutocomplete
+            variant={ variant }
+            density={ density }
+            modelValue={['California']}
+            label="selection slot"
+            { ...v.props }
+          >{{
+            selection: ({ item }) => {
+              return item.title
+            },
+          }}
+          </VAutocomplete>
+        </div>
+      ))
+    )).flat()}
+  </div>
+)]))
 
 describe('VAutocomplete', () => {
   it('should close only first chip', () => {
@@ -41,7 +82,7 @@ describe('VAutocomplete', () => {
       />
     ))
 
-    cy.get('.mdi-menu-down').click()
+    cy.get('.v-autocomplete__menu-icon').click()
 
     cy.get('.v-list-item--active').should('have.length', 2)
     cy.get('.v-list-item--active input').eq(0).click()
@@ -86,7 +127,7 @@ describe('VAutocomplete', () => {
       />
     ))
 
-    cy.get('.mdi-menu-down').click()
+    cy.get('.v-autocomplete__menu-icon').click()
 
     cy.get('.v-list-item--active').should('have.length', 1)
     cy.get('.v-list-item--active input').click()
@@ -94,6 +135,60 @@ describe('VAutocomplete', () => {
       expect(selectedItems.value).to.be.empty
     })
     cy.get('.v-list-item--active').should('have.length', 0)
+  })
+
+  it('should work with objects when using multiple and item-value', () => {
+    const items = ref([
+      {
+        text: 'Item 1',
+        id: 'item1',
+      },
+      {
+        text: 'Item 2',
+        id: 'item2',
+      },
+      {
+        text: 'Item 3',
+        id: 'item3',
+      },
+    ])
+
+    const selectedItems = ref([
+      {
+        text: 'Item 1',
+        id: 'item1',
+      },
+      {
+        text: 'Item 2',
+        id: 'item2',
+      },
+    ])
+
+    cy.mount(() => (
+      <VAutocomplete
+        v-model={ selectedItems.value }
+        items={ items.value }
+        multiple
+        returnObject
+        item-title="text"
+        item-value="id"
+      />
+    ))
+
+    cy.get('.v-autocomplete').click()
+
+    cy.get('.v-list-item--active').should('have.length', 2)
+    cy.get('.v-field__input').should('include.text', 'Item 1')
+    cy.get('.v-field__input').should('include.text', 'Item 2')
+
+    cy.get('.v-list-item--active input')
+      .eq(0)
+      .click()
+      .get('.v-field__input')
+      .should(() => expect(selectedItems.value).to.deep.equal([{
+        text: 'Item 2',
+        id: 'item2',
+      }]))
   })
 
   it('should not be clickable when in readonly', () => {
@@ -207,6 +302,48 @@ describe('VAutocomplete', () => {
     cy.get('.v-autocomplete__selection-text').should('have.text', `Item: {"id":1,"name":"a"}`)
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/16442
+  describe('null value', () => {
+    it('should allow null as legit itemValue', () => {
+      const items = [
+        { name: 'Default Language', code: null },
+        { code: 'en-US', name: 'English' },
+        { code: 'de-DE', name: 'German' },
+      ]
+
+      const selectedItems = null
+
+      cy.mount(() => (
+        <VAutocomplete
+          items={ items }
+          modelValue={ selectedItems }
+          itemTitle="name"
+          itemValue="code"
+        />
+      ))
+
+      cy.get('.v-autocomplete__selection').eq(0).invoke('text').should('equal', 'Default Language')
+    })
+    it('should mark input as "not dirty" when the v-model is null, but null is not present in the items', () => {
+      const items = [
+        { code: 'en-US', name: 'English' },
+        { code: 'de-DE', name: 'German' },
+      ]
+
+      cy.mount(() => (
+        <VAutocomplete
+          label="Language"
+          items={ items }
+          modelValue={ null }
+          itemTitle="name"
+          itemValue="code"
+        />
+      ))
+
+      cy.get('.v-field').should('not.have.class', 'v-field--dirty')
+    })
+  })
+
   describe('hide-selected', () => {
     it('should hide selected item(s)', () => {
       const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
@@ -222,7 +359,7 @@ describe('VAutocomplete', () => {
         />
       ))
 
-      cy.get('.mdi-menu-down').click()
+      cy.get('.v-autocomplete__menu-icon').click()
 
       cy.get('.v-overlay__content .v-list-item').should('have.length', 2)
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 3')
@@ -325,5 +462,138 @@ describe('VAutocomplete', () => {
       .should('have.class', 'v-autocomplete--active-menu')
       .trigger('keydown', { key: keyValues.esc })
       .should('not.have.class', 'v-autocomplete--active-menu')
+  })
+
+  it('should auto-select-first item when pressing enter', () => {
+    const selectedItems = ref(undefined)
+
+    cy
+      .mount(() => (
+        <VAutocomplete
+          v-model={ selectedItems.value }
+          items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+          multiple
+          autoSelectFirst
+        />
+      ))
+      .get('.v-autocomplete')
+      .click()
+      .get('.v-list-item')
+      .should('have.length', 6)
+      .get('.v-autocomplete input')
+      .type('Cal')
+      .get('.v-list-item').eq(0)
+      .should('have.class', 'v-list-item--active')
+      .get('.v-autocomplete input')
+      .trigger('keydown', { key: keyValues.enter, waitForAnimations: false })
+      .get('.v-list-item')
+      .should('have.length', 1)
+      .then(_ => {
+        expect(selectedItems.value).to.deep.equal(['California'])
+      })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/18796
+  // https://github.com/vuetifyjs/vuetify/issues/19235
+  it('should allow deleting selection via closable-chips', () => {
+    const selectedItem = ref('California')
+
+    cy.mount(() => (
+      <VAutocomplete
+        chips
+        v-model={ selectedItem.value }
+        closable-chips
+        items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+      />
+    ))
+      .get('.v-chip__close')
+      .click()
+      .then(_ => {
+        expect(selectedItem.value).to.equal(null)
+      })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/19261
+  it('should not toggle v-model to null when clicking already selected item in single selection mode', () => {
+    const selectedItem = ref('abc')
+
+    cy.mount(() => (
+      <VAutocomplete
+        v-model={ selectedItem.value }
+        items={['abc', 'def']}
+      />
+    ))
+
+    cy.get('.v-autocomplete').click()
+
+    cy.get('.v-list-item').should('have.length', 2)
+    cy.get('.v-list-item').eq(0).click({ waitForAnimations: false }).should(() => {
+      expect(selectedItem.value).equal('abc')
+    })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/18556
+  it('should show menu if focused and items are added', () => {
+    cy
+      .mount(props => (<VAutocomplete { ...props } />))
+      .get('.v-autocomplete input')
+      .focus()
+      .get('.v-overlay')
+      .should('not.exist')
+      .setProps({ items: ['Foo', 'Bar'] })
+      .get('.v-overlay')
+      .should('exist')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/19346
+  it('should not show menu when focused and existing non-empty items are changed', () => {
+    cy
+      .mount((props: any) => (<VAutocomplete items={ props.items } />))
+      .setProps({ items: ['Foo', 'Bar'] })
+      .get('.v-autocomplete')
+      .click()
+      .get('.v-overlay')
+      .should('exist')
+      .get('.v-list-item').eq(1).click({ waitForAnimations: false })
+      .setProps({ items: ['Foo', 'Bar', 'test', 'test 2'] })
+      .get('.v-overlay')
+      .should('not.exist')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/17573
+  // When using selection slot or chips, input displayed next to chip/selection slot should be always empty
+  it('should always have empty input value when it is unfocused and when using selection slot or chips', () => {
+    const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
+    const selectedItem = ref('Item 1')
+
+    cy
+      .mount(() => (
+        <VAutocomplete
+          items={ items }
+          chips
+          v-model={ selectedItem.value }
+        />
+      ))
+      .get('.v-autocomplete').click()
+      .get('.v-autocomplete input').should('have.value', '')
+      // Blur input with a custom search input value
+      .type('test')
+      .blur()
+      .should('have.value', '')
+      .should(() => {
+        expect(selectedItem.value).to.equal('Item 1')
+      })
+      // Search existing item and click to select
+      .get('.v-autocomplete').click()
+      .get('.v-autocomplete input').should('have.value', '')
+      .type('Item 1')
+      .get('.v-list-item').eq(0).click({ waitForAnimations: false })
+      .should(() => {
+        expect(selectedItem.value).to.equal('Item 1')
+      })
+  })
+
+  describe('Showcase', () => {
+    generate({ stories })
   })
 })

@@ -2,13 +2,12 @@
 /* eslint-disable no-labels */
 
 // Utilities
-import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
 import { computed, ref, unref, watchEffect } from 'vue'
+import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
 import type { MaybeRef } from '@/util'
-import type { InternalItem } from './items'
 
 /**
  * - match without highlight
@@ -17,7 +16,7 @@ import type { InternalItem } from './items'
  * - multiple matches (start, end), probably shouldn't overlap
  */
 export type FilterMatch = boolean | number | [number, number] | [number, number][]
-export type FilterFunction = (value: string, query: string, item?: any) => FilterMatch
+export type FilterFunction = (value: string, query: string, item?: InternalItem) => FilterMatch
 export type FilterKeyFunctions = Record<string, FilterFunction>
 export type FilterKeys = string | string[]
 export type FilterMode = 'some' | 'every' | 'union' | 'intersection'
@@ -28,6 +27,11 @@ export interface FilterProps {
   filterKeys?: FilterKeys
   filterMode?: FilterMode
   noFilter?: boolean
+}
+
+export interface InternalItem<T = any> {
+  value: any
+  raw: T
 }
 
 // Composables
@@ -49,7 +53,7 @@ export const makeFilterProps = propsFactory({
 }, 'filter')
 
 export function filterItems (
-  items: InternalItem[],
+  items: readonly (readonly [item: InternalItem, transformed: {}])[] | readonly InternalItem[],
   query: string,
   options?: {
     customKeyFilter?: FilterKeyFunctions
@@ -69,17 +73,17 @@ export function filterItems (
 
   loop:
   for (let i = 0; i < items.length; i++) {
-    const item = items[i]
+    const [item, transformed = item] = wrapInArray(items[i]) as readonly [InternalItem, {}]
     const customMatches: Record<string, FilterMatch> = {}
     const defaultMatches: Record<string, FilterMatch> = {}
     let match: FilterMatch = -1
 
     if (query && !options?.noFilter) {
       if (typeof item === 'object') {
-        const filterKeys = keys || Object.keys(item)
+        const filterKeys = keys || Object.keys(transformed)
 
         for (const key of filterKeys) {
-          const value = getPropertyFromItem(item as any, key, item)
+          const value = getPropertyFromItem(transformed, key)
           const keyFilter = options?.customKeyFilter?.[key]
 
           match = keyFilter
@@ -129,41 +133,53 @@ export function filterItems (
 export function useFilter <T extends InternalItem> (
   props: FilterProps,
   items: MaybeRef<T[]>,
-  query: Ref<string | undefined>,
+  query: Ref<string | undefined> | (() => string | undefined),
   options?: {
-    filterKeys?: MaybeRef<FilterKeys>
+    transform?: (item: T) => {}
+    customKeyFilter?: MaybeRef<FilterKeyFunctions | undefined>
   }
 ) {
-  const strQuery = computed(() => (
-    typeof query?.value !== 'string' &&
-    typeof query?.value !== 'number'
-  ) ? '' : String(query.value))
-
   const filteredItems: Ref<T[]> = ref([])
   const filteredMatches: Ref<Map<unknown, Record<string, FilterMatch>>> = ref(new Map())
+  const transformedItems = computed(() => (
+    options?.transform
+      ? unref(items).map(item => ([item, options.transform!(item)] as const))
+      : unref(items)
+  ))
 
   watchEffect(() => {
-    filteredItems.value = []
-    filteredMatches.value = new Map()
+    const _query = typeof query === 'function' ? query() : unref(query)
+    const strQuery = (
+      typeof _query !== 'string' &&
+      typeof _query !== 'number'
+    ) ? '' : String(_query)
 
-    const transformedItems = unref(items)
     const results = filterItems(
-      transformedItems,
-      strQuery.value,
+      transformedItems.value,
+      strQuery,
       {
-        customKeyFilter: props.customKeyFilter,
+        customKeyFilter: {
+          ...props.customKeyFilter,
+          ...unref(options?.customKeyFilter),
+        },
         default: props.customFilter,
-        filterKeys: unref(options?.filterKeys) ?? props.filterKeys,
+        filterKeys: props.filterKeys,
         filterMode: props.filterMode,
         noFilter: props.noFilter,
       },
     )
 
+    const originalItems = unref(items)
+
+    const _filteredItems: typeof filteredItems['value'] = []
+    const _filteredMatches: typeof filteredMatches['value'] = new Map()
     results.forEach(({ index, matches }) => {
-      const item = transformedItems[index]
-      filteredItems.value.push(item)
-      filteredMatches.value.set(item.value, matches)
+      const item = originalItems[index]
+      _filteredItems.push(item)
+      _filteredMatches.set(item.value, matches)
     })
+    filteredItems.value = _filteredItems
+    filteredMatches.value = _filteredMatches
   })
 
   function getMatches (item: T) {

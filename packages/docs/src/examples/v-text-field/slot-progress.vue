@@ -8,15 +8,14 @@
     <v-text-field
       v-model="value"
       label="Type characters to change the loader color"
-      loading
       placeholder="Start typing..."
+      loading
     >
       <template v-slot:loader>
         <v-progress-linear
           :active="custom"
-          :model-value="progress"
           :color="color"
-          absolute
+          :model-value="progress"
           height="7"
           indeterminate
         ></v-progress-linear>
@@ -24,6 +23,19 @@
     </v-text-field>
   </v-container>
 </template>
+
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const value = ref('')
+  const custom = ref(false)
+  const progress = computed(() => {
+    return Math.min(100, value.value.length * 10)
+  })
+  const color = computed(() => {
+    return ['error', 'warning', 'success'][Math.floor(progress.value / 40)]
+  })
+</script>
 
 <script>
   export default {

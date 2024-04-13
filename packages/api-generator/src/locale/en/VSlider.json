@@ -1,0 +1,15 @@
+{
+  "props": {
+    "alwaysDirty": "When used with the **thumb-label** prop will always show the thumb label.",
+    "inverseLabel": "Reverse the label position. Works with **rtl**.",
+    "vertical": "Changes slider direction to vertical."
+  },
+  "slots": {
+    "thumb-label": "Slot for the thumb label.",
+    "tick-label": "Slot for the tick label."
+  },
+  "events": {
+    "end": "Slider value emitted at the end of slider movement.",
+    "start": "Slider value emitted at start of slider movement."
+  }
+}

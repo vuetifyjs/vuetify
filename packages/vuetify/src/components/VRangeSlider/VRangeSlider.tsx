@@ -3,37 +3,40 @@ import '../VSlider/VSlider.sass'
 
 // Components
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { getOffset, makeSliderProps, useSlider, useSteps } from '@/components/VSlider/slider'
 import { VLabel } from '@/components/VLabel'
+import { getOffset, makeSliderProps, useSlider, useSteps } from '@/components/VSlider/slider'
 import { VSliderThumb } from '@/components/VSlider/VSliderThumb'
 import { VSliderTrack } from '@/components/VSlider/VSliderTrack'
 
 // Composables
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, WritableComputedRef } from 'vue'
 import type { VSliderSlots } from '../VSlider/VSlider'
 
+export const makeVRangeSliderProps = propsFactory({
+  ...makeFocusProps(),
+  ...makeVInputProps(),
+  ...makeSliderProps(),
+
+  strict: Boolean,
+  modelValue: {
+    type: Array as PropType<readonly (string | number)[]>,
+    default: () => ([0, 0]),
+  },
+}, 'VRangeSlider')
+
 export const VRangeSlider = genericComponent<VSliderSlots>()({
   name: 'VRangeSlider',
 
-  props: {
-    ...makeFocusProps(),
-    ...makeVInputProps(),
-    ...makeSliderProps(),
-
-    strict: Boolean,
-    modelValue: {
-      type: Array as PropType<number[]>,
-      default: () => ([0, 0]),
-    },
-  },
+  props: makeVRangeSliderProps(),
 
   emits: {
     'update:focused': (value: boolean) => true,
@@ -46,6 +49,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
     const startThumbRef = ref<VSliderThumb>()
     const stopThumbRef = ref<VSliderThumb>()
     const inputRef = ref<VInput>()
+    const { rtlClasses } = useRtl()
 
     function getActiveThumb (e: MouseEvent | TouchEvent) {
       if (!startThumbRef.value || !stopThumbRef.value) return
@@ -82,6 +86,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       onSliderTouchstart,
       position,
       trackContainerRef,
+      readonly,
     } = useSlider({
       props,
       steps,
@@ -93,8 +98,11 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
           ? [value, model.value[1]]
           : [model.value[0], value]
 
-        model.value = newValue
-        emit('end', newValue)
+        if (!props.strict && newValue[0] < newValue[1]) {
+          model.value = newValue
+        }
+
+        emit('end', model.value)
       },
       onSliderMove: ({ value }) => {
         const [start, stop] = model.value
@@ -118,7 +126,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
     const trackStop = computed(() => position(model.value[1]))
 
     useRender(() => {
-      const [inputProps, _] = VInput.filterProps(props)
+      const inputProps = VInput.filterProps(props)
       const hasPrepend = !!(props.label || slots.label || slots.prepend)
 
       return (
@@ -132,6 +140,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
               'v-slider--pressed': mousePressed.value,
               'v-slider--disabled': props.disabled,
             },
+            rtlClasses.value,
             props.class,
           ]}
           style={ props.style }
@@ -143,14 +152,15 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
             ...slots,
             prepend: hasPrepend ? slotProps => (
               <>
-                { slots.label?.(slotProps) ?? props.label
-                  ? (
-                    <VLabel
-                      class="v-slider__label"
-                      text={ props.label }
-                    />
-                  ) : undefined
-                }
+                { slots.label?.(slotProps) ?? (
+                  props.label
+                    ? (
+                      <VLabel
+                        class="v-slider__label"
+                        text={ props.label }
+                      />
+                    ) : undefined
+                )}
 
                 { slots.prepend?.(slotProps) }
               </>
@@ -158,14 +168,14 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
             default: ({ id, messagesId }) => (
               <div
                 class="v-slider__container"
-                onMousedown={ onSliderMousedown }
-                onTouchstartPassive={ onSliderTouchstart }
+                onMousedown={ !readonly.value ? onSliderMousedown : undefined }
+                onTouchstartPassive={ !readonly.value ? onSliderTouchstart : undefined }
               >
                 <input
                   id={ `${id.value}_start` }
                   name={ props.name || id.value }
-                  disabled={ props.disabled }
-                  readonly={ props.readonly }
+                  disabled={ !!props.disabled }
+                  readonly={ !!props.readonly }
                   tabindex="-1"
                   value={ model.value[0] }
                 />
@@ -173,8 +183,8 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                 <input
                   id={ `${id.value}_stop` }
                   name={ props.name || id.value }
-                  disabled={ props.disabled }
-                  readonly={ props.readonly }
+                  disabled={ !!props.disabled }
+                  readonly={ !!props.readonly }
                   tabindex="-1"
                   value={ model.value[1] }
                 />
@@ -217,6 +227,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                   min={ min.value }
                   max={ model.value[1] }
                   position={ trackStart.value }
+                  ripple={ props.ripple }
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>
@@ -251,6 +262,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                   min={ model.value[0] }
                   max={ max.value }
                   position={ trackStop.value }
+                  ripple={ props.ripple }
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>

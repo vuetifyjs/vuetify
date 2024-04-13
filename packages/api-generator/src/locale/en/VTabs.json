@@ -1,0 +1,31 @@
+{
+  "props": {
+    "alignTabs": "Aligns the tabs to the `start`, `center`, or `end` of container. Also accepts `title` to align with the `v-toolbar-title` component.",
+    "alignWithTitle": "Make `v-tabs` lined up with the toolbar title.",
+    "color": "Applies specified color to the selected tab - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
+    "centered": "Centers the tabs.",
+    "centerActive": "Forces the selected tab to be centered.",
+    "cycle": "Will reset to first or last tab when swiping left or right if at the end of indexes.",
+    "dark": "Applies the dark theme variant to the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
+    "direction": "Changes the direction of the tabs. Can be either `horizontal` or `vertical`.",
+    "fixedTabs": "`v-tabs-item` min-width 160px, max-width 360px.",
+    "grow": "Force `v-tab`'s to take up all available space.",
+    "height": "Sets the height of the tabs bar.",
+    "hideSlider": "Hide's the generated `v-tabs-slider`.",
+    "iconsAndText": "Will stack icon and text vertically.",
+    "items": "The items to display in the component. This can be an array of strings or objects with a property `title`.",
+    "light": "Applies the light theme variant to the component.",
+    "mobileBreakpoint": "Sets the designated mobile breakpoint for the component.",
+    "optional": "Does not require an active item. Useful when using `v-tab` as a `router-link`.",
+    "prevIcon": "Left pagination icon.",
+    "nextIcon": "Right pagination icon.",
+    "reverseTransition": "The transition used when the component is reversing items. Can be one of the [built in transitions](/styles/transitions) or one your own.",
+    "right": "Aligns tabs to the right.",
+    "showArrows": "Show pagination arrows if the tab items overflow their container. For mobile devices, arrows will only display when using this prop.",
+    "sliderColor": "Changes the background color of an auto-generated `v-tabs-slider`.",
+    "sliderSize": "Changes the size of the slider, **height** for horizontal, **width** for vertical.",
+    "stacked": "Apply the stacked prop to all children v-tab components.",
+    "touchless": "Disable mobile touch functionality.",
+    "vertical": "Stacks tabs on top of each other vertically."
+  }
+}

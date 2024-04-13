@@ -4,8 +4,8 @@
     max-width="344"
   >
     <v-img
-      src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
       height="200px"
+      src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
       cover
     ></v-img>
 
@@ -44,6 +44,12 @@
     </v-expand-transition>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const show = ref(false)
+</script>
 
 <script>
   export default {

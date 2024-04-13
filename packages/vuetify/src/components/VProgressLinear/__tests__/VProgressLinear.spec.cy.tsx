@@ -1,9 +1,12 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
+import { VProgressLinear } from '../VProgressLinear'
 import { CenteredGrid } from '@/../cypress/templates'
 import { VLocaleProvider } from '@/components/VLocaleProvider'
+
+// Utilities
 import { defineComponent, ref } from 'vue'
-import { VProgressLinear } from '../VProgressLinear'
 
 describe('VProgressLinear', () => {
   it('supports modelValue prop', () => {

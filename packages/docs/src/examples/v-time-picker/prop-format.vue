@@ -1,20 +1,7 @@
 <template>
-  <v-row justify="center">
-    <v-col>
-      <v-time-picker
-        v-model="e7"
-        format="24hr"
-      ></v-time-picker>
-    </v-col>
-  </v-row>
+  <v-container>
+    <v-row justify="center">
+      <v-time-picker format="24hr"></v-time-picker>
+    </v-row>
+  </v-container>
 </template>
-
-<script>
-  export default {
-    data () {
-      return {
-        e7: null,
-      }
-    },
-  }
-</script>

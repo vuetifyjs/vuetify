@@ -5,11 +5,17 @@
   >
     <v-text-field
       :rules="[rules.required]"
-      clearable
       label="Last name"
+      clearable
     ></v-text-field>
   </v-responsive>
 </template>
+
+<script setup>
+  const rules = {
+    required: value => !!value || 'Field is required',
+  }
+</script>
 
 <script>
   export default {

@@ -3,69 +3,73 @@ import './VTimeline.sass'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { useRtl } from '@/composables/locale'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, only, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Prop } from 'vue'
+import { makeVTimelineItemProps } from './VTimelineItem'
 
 export type TimelineDirection = 'vertical' | 'horizontal'
 export type TimelineSide = 'start' | 'end' | undefined
 export type TimelineAlign = 'center' | 'start'
 export type TimelineTruncateLine = 'start' | 'end' | 'both' | undefined
 
+export const makeVTimelineProps = propsFactory({
+  align: {
+    type: String,
+    default: 'center',
+    validator: (v: any) => ['center', 'start'].includes(v),
+  } as Prop<TimelineAlign>,
+  direction: {
+    type: String,
+    default: 'vertical',
+    validator: (v: any) => ['vertical', 'horizontal'].includes(v),
+  } as Prop<TimelineDirection>,
+  justify: {
+    type: String,
+    default: 'auto',
+    validator: (v: any) => ['auto', 'center'].includes(v),
+  },
+  side: {
+    type: String,
+    validator: (v: any) => v == null || ['start', 'end'].includes(v),
+  } as Prop<TimelineSide>,
+  lineThickness: {
+    type: [String, Number],
+    default: 2,
+  },
+  lineColor: String,
+  truncateLine: {
+    type: String,
+    validator: (v: any) => ['start', 'end', 'both'].includes(v),
+  } as Prop<TimelineTruncateLine>,
+
+  ...only(makeVTimelineItemProps({
+    lineInset: 0,
+  }), ['dotColor', 'fillDot', 'hideOpposite', 'iconColor', 'lineInset', 'size']),
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'VTimeline')
+
 export const VTimeline = genericComponent()({
   name: 'VTimeline',
 
-  props: {
-    align: {
-      type: String,
-      default: 'center',
-      validator: (v: any) => ['center', 'start'].includes(v),
-    } as Prop<TimelineAlign>,
-    direction: {
-      type: String,
-      default: 'vertical',
-      validator: (v: any) => ['vertical', 'horizontal'].includes(v),
-    } as Prop<TimelineDirection>,
-    justify: {
-      type: String,
-      default: 'auto',
-      validator: (v: any) => ['auto', 'center'].includes(v),
-    },
-    side: {
-      type: String,
-      validator: (v: any) => v == null || ['start', 'end'].includes(v),
-    } as Prop<TimelineSide>,
-    lineInset: {
-      type: [String, Number],
-      default: 0,
-    },
-    lineThickness: {
-      type: [String, Number],
-      default: 2,
-    },
-    lineColor: String,
-    truncateLine: {
-      type: String,
-      validator: (v: any) => ['start', 'end', 'both'].includes(v),
-    } as Prop<TimelineTruncateLine>,
-
-    ...makeComponentProps(),
-    ...makeDensityProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVTimelineProps(),
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
+    const { rtlClasses } = useRtl()
 
     provideDefaults({
       VTimelineDivider: {
@@ -73,7 +77,13 @@ export const VTimeline = genericComponent()({
       },
       VTimelineItem: {
         density: toRef(props, 'density'),
+        dotColor: toRef(props, 'dotColor'),
+        fillDot: toRef(props, 'fillDot'),
+        hideOpposite: toRef(props, 'hideOpposite'),
+        iconColor: toRef(props, 'iconColor'),
+        lineColor: toRef(props, 'lineColor'),
         lineInset: toRef(props, 'lineInset'),
+        size: toRef(props, 'size'),
       },
     })
 
@@ -111,6 +121,7 @@ export const VTimeline = genericComponent()({
           themeClasses.value,
           densityClasses.value,
           sideClasses.value,
+          rtlClasses.value,
           props.class,
         ]}
         style={[

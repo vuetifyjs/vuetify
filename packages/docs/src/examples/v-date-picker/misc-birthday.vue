@@ -3,11 +3,11 @@
     <div class="mb-6">Active picker: <code>{{ activePicker || 'null' }}</code></div>
     <v-menu
       ref="menu"
-      v-model="menu"
+      v-model="menuActive"
       :close-on-content-click="false"
+      min-width="auto"
       transition="scale-transition"
       offset-y
-      min-width="auto"
     >
       <template v-slot:activator="{ on, attrs }">
         <v-text-field
@@ -30,15 +30,33 @@
   </div>
 </template>
 
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const menu = ref()
+
+  const activePicker = ref(null)
+  const date = ref(null)
+  const menuActive = ref(false)
+
+  watch(menuActive, val => {
+    val && setTimeout(() => (activePicker.value = 'YEAR'))
+  })
+
+  function save (date) {
+    menu.value.save(date)
+  }
+</script>
+
 <script>
   export default {
     data: () => ({
       activePicker: null,
       date: null,
-      menu: false,
+      menuActive: false,
     }),
     watch: {
-      menu (val) {
+      menuActive (val) {
         val && setTimeout(() => (this.activePicker = 'YEAR'))
       },
     },

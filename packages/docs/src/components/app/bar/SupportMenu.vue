@@ -1,31 +1,21 @@
 <template>
-  <app-btn
-    color="medium-emphasis"
+  <AppBtn
     class="ms-1"
+    color="medium-emphasis"
   >
     {{ title }}
 
-    <chevron-down />
+    <IconsChevronDown />
 
-    <app-menu
+    <AppMenuMenu
       :items="items"
       activator="parent"
       width="220"
     />
-  </app-btn>
+  </AppBtn>
 </template>
 
 <script setup>
-  // Components
-  import ChevronDown from '@/components/icons/ChevronDown.vue'
-
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const { t } = useI18n()
   const title = t('support')
   const items = computed(() => ([
@@ -55,6 +45,11 @@
       href: 'https://github.com/vuetifyjs/vuetify/discussions',
       appendIcon: 'mdi-message-text-outline',
     },
+    {
+      title: 'stack-overflow',
+      href: 'https://stackoverflow.com/search?q=vuetify',
+      appendIcon: 'mdi-layers-outline',
+    },
     { divider: true },
     { subheader: t('resources') },
     {
@@ -66,11 +61,6 @@
       title: 'documentation-status',
       href: 'https://status.vuetifyjs.com/',
       appendIcon: 'mdi-cloud-outline',
-    },
-    {
-      title: 'stack-overflow',
-      href: 'https://stackoverflow.com/search?q=vuetify',
-      appendIcon: 'mdi-layers-outline',
     },
     {
       title: 'latest-releases',

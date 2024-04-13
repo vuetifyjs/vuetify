@@ -1,6 +1,11 @@
 export default {
   badge: 'Odznak',
+  open: 'Otevřiť',
   close: 'Zavřít',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Zrušit',
+  },
   dataIterator: {
     noResultsText: 'Nenalezeny žádné záznamy',
     loadingText: 'Načítám položky...',
@@ -26,28 +31,38 @@ export default {
     lastPage: 'Poslední strana',
     pageText: '{0}-{1} z {2}',
   },
+  dateRangeInput: {
+    divider: 'do',
+  },
   datePicker: {
-    itemsSelected: '{0} vybráno',
-    nextMonthAriaLabel: 'Příští měsíc',
-    nextYearAriaLabel: 'Příští rok',
-    prevMonthAriaLabel: 'Předchozí měsíc',
-    prevYearAriaLabel: 'Předchozí rok',
+    itemsSelected: '{0} vybrán',
+    range: {
+      title: 'Vyberte datumy',
+      header: 'Zadejte datumy',
+    },
+    title: 'Vyberte datum',
+    header: 'Zadejte datum',
+    input: {
+      placeholder: 'Zadejte datum',
+    },
   },
   noDataText: 'Nejsou dostupná žádná data',
   carousel: {
     prev: 'Předchozí obrázek',
     next: 'Další obrázek',
     ariaLabel: {
-      delimiter: 'Slide {0} z {1}',
+      delimiter: 'Obrázek {0} z {1}',
     },
   },
   calendar: {
     moreEvents: '{0} dalších',
+    today: 'Today',
   },
   input: {
-    clear: 'Clear {0}',
+    clear: 'Vymazat {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Vložte výhradně OTP znaky {0}',
   },
   fileInput: {
     counter: '{0} souborů',
@@ -56,6 +71,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
@@ -64,18 +80,22 @@ export default {
       previous: 'Předchozí strana',
       page: 'Přejít na stránku {0}',
       currentPage: 'Aktuální stránka, stránka {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'První stránka',
+      last: 'Poslední stránka',
     },
+  },
+  stepper: {
+    next: 'Další',
+    prev: 'Předchozí',
   },
   rating: {
     ariaLabel: {
       item: 'Hodnocení {0} z {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Načítám...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Načíst více',
+    empty: 'Žádné další',
   },
 }

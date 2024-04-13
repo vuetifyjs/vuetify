@@ -37,14 +37,29 @@
 
     <v-card-actions>
       <v-btn
-        block
         color="deep-purple-accent-4"
+        block
       >
         Add to Cart
       </v-btn>
     </v-card-actions>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const sizes = [
+    '04',
+    '06',
+    '08',
+    '10',
+    '12',
+    '14',
+  ]
+
+  const selection = ref('08')
+</script>
 
 <script>
   export default {

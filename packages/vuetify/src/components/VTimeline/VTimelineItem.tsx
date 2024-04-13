@@ -2,56 +2,58 @@
 import { VTimelineDivider } from './VTimelineDivider'
 
 // Composables
-import { IconValue } from '@/composables/icons'
 import { makeComponentProps } from '@/composables/component'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps } from '@/composables/elevation'
+import { IconValue } from '@/composables/icons'
 import { makeRoundedProps } from '@/composables/rounded'
 import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { convertToUnit, genericComponent, useRender } from '@/util'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import { ref, watch } from 'vue'
+import { ref, shallowRef, watch } from 'vue'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
 // Types
 export type VTimelineItemSlots = {
-  default: []
-  icon: []
-  opposite: []
+  default: never
+  icon: never
+  opposite: never
 }
+
+export const makeVTimelineItemProps = propsFactory({
+  density: String as PropType<'default' | 'compact'>,
+  dotColor: String,
+  fillDot: Boolean,
+  hideDot: Boolean,
+  hideOpposite: {
+    type: Boolean,
+    default: undefined,
+  },
+  icon: IconValue,
+  iconColor: String,
+  lineInset: [Number, String],
+
+  ...makeComponentProps(),
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeRoundedProps(),
+  ...makeSizeProps(),
+  ...makeTagProps(),
+}, 'VTimelineItem')
 
 export const VTimelineItem = genericComponent<VTimelineItemSlots>()({
   name: 'VTimelineItem',
 
-  props: {
-    density: String as PropType<'default' | 'compact'>,
-    dotColor: String,
-    fillDot: Boolean,
-    hideDot: Boolean,
-    hideOpposite: {
-      type: Boolean,
-      default: undefined,
-    },
-    icon: IconValue,
-    iconColor: String,
-    lineInset: [Number, String],
-
-    ...makeComponentProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeRoundedProps(),
-    ...makeSizeProps(),
-    ...makeTagProps(),
-  },
+  props: makeVTimelineItemProps(),
 
   setup (props, { slots }) {
     const { dimensionStyles } = useDimension(props)
 
-    const dotSize = ref(0)
+    const dotSize = shallowRef(0)
     const dotRef = ref<VTimelineDivider>()
     watch(dotRef, newValue => {
       if (!newValue) return

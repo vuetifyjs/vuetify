@@ -13,12 +13,18 @@
   line-height: $icon-line-height
   position: relative
   text-indent: $icon-text-indent
+  text-align: center
   user-select: none
   vertical-align: $icon-vertical-align
   width: $icon-size
+  min-width: $icon-size
 
   &--clickable
     cursor: pointer
+
+  &--disabled
+    pointer-events: none
+    opacity: $icon-disabled-opacity
 
   @each $name in settings.$sizes
     &--size-#{$name}

@@ -1,13 +1,14 @@
 import path from 'upath'
-import fs from 'fs'
+import fs from 'fs/promises'
 import { fileURLToPath } from 'url'
 
 import { defineConfig, loadEnv } from 'vite'
-import Vue from '@vitejs/plugin-vue'
+import AutoImport from 'unplugin-auto-import/vite'
+import Vue, { parseVueRequest } from '@vitejs/plugin-vue'
 import ViteFonts from 'unplugin-fonts/vite'
 import Pages from 'vite-plugin-pages'
 import Layouts from 'vite-plugin-vue-layouts'
-// import Components from 'unplugin-vue-components/vite'
+import Components from 'unplugin-vue-components/vite'
 import Markdown from 'vite-plugin-md'
 import { VitePWA } from 'vite-plugin-pwa'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
@@ -18,6 +19,7 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 import { configureMarkdown, parseMeta } from './build/markdown-it'
 import Api from './build/api-plugin'
 import { Examples } from './build/examples-plugin'
+import { genAppMetaInfo } from './src/utils/metadata'
 
 const resolve = (file: string) => fileURLToPath(new URL(file, import.meta.url))
 
@@ -30,6 +32,8 @@ const ssrTransformCustomDirective = () => {
 
 export default defineConfig(({ command, mode, ssrBuild }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
+
+  let allRoutes: any[]
 
   return {
     logLevel: 'info',
@@ -49,6 +53,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       sourcemap: mode === 'development',
       modulePreload: false,
       cssCodeSplit: false,
+      minify: false,
       rollupOptions: {
         output: ssrBuild ? { inlineDynamicImports: true } : {
           // TODO: these options currently cause a request cascade
@@ -65,6 +70,40 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       },
     },
     plugins: [
+      // https://github.com/unplugin/unplugin-auto-import
+      AutoImport({
+        dirs: [
+          './src/composables/**',
+          './src/stores/**',
+          './src/utils/**',
+        ],
+        imports: [
+          {
+            '@vuetify/one': [
+              'createOne',
+              'useAuthStore',
+              'useHttpStore',
+              'useOneStore',
+              'useUserStore',
+              'useSettingsStore',
+              'useProductsStore',
+            ],
+            'lodash-es': ['camelCase', 'kebabCase', 'upperFirst'],
+            pinia: ['defineStore', 'storeToRefs'],
+            vue: [
+              'camelize', 'computed', 'h', 'mergeProps', 'nextTick',
+              'onBeforeMount', 'onBeforeUnmount', 'onMounted', 'onScopeDispose', 'onServerPrefetch',
+              'ref', 'shallowRef', 'useAttrs', 'watch', 'watchEffect'
+            ],
+            vuetify: ['useDate', 'useDisplay', 'useGoTo', 'useRtl', 'useTheme'],
+            'vue-gtag-next': ['useGtag'],
+            'vue-i18n': ['useI18n'],
+            'vue-router': ['onBeforeRouteLeave', 'onBeforeRouteUpdate', 'useRoute', 'useRouter'],
+          }
+        ],
+        vueTemplate: true,
+      }),
+
       // https://github.com/stafyniaksacha/vite-plugin-fonts
       ViteFonts({
         google: {
@@ -78,15 +117,10 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       Api(),
 
       // https://github.com/antfu/unplugin-vue-components
-      // Components({
-      //   deep: true,
-      //   dirs: ['src/components-v3'],
-      //   directoryAsNamespace: true,
-      //   globalNamespaces: ['icons'],
-      //   dts: true,
-      //   extensions: ['vue', 'md'],
-      //   include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-      // }),
+      Components({
+        directoryAsNamespace: true,
+        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+      }),
 
       // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
       Layouts({
@@ -108,26 +142,18 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       Pages({
         extensions: ['vue', 'md'],
         dirs: [
-          { dir: 'src/pages', baseRoute: 'pages' },
-          { dir: 'src/api', baseRoute: 'api' },
+          { dir: 'src/pages', baseRoute: '' },
+          { dir: 'node_modules/.cache/api-pages', baseRoute: '' },
         ],
         extendRoute (route) {
-          const [base, locale, ...folders] = route.component.split('/').slice(2)
-          const paths = [locale]
+          let [locale, category, ...rest] = route.path.split('/').slice(1)
 
-          if (base !== 'pages') paths.push(base)
+          const idx = route.component.toLowerCase().indexOf(locale)
+          locale = ~idx ? route.component.slice(idx, idx + locale.length) : locale
 
-          for (const folder of folders) {
-            if (folder.match('index')) continue
-
-            // remove file extensions if present
-            paths.push(folder.replace(/\.[a-z]*/, ''))
-          }
-
-          const [category, ...rest] = paths.slice(1)
           const meta = {
             layout: 'default',
-            ...parseMeta(route.component),
+            ...parseMeta(route.component, locale),
           }
 
           if (meta.disabled) {
@@ -136,18 +162,19 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 
           return {
             ...route,
-            path: `/${paths.join('/')}/`,
-            name: `${category ?? meta.layout}${rest.length ? '-' + rest.join('-') : ''}`,
+            path: '/' + [locale, category, ...rest].filter(Boolean).join('/') + '/',
+            // name: [`${category ?? meta.layout}`, ...rest].join('-'),
             meta: {
               ...meta,
               category,
-              page: rest?.join('-'),
+              page: rest.join('-'),
               locale,
             },
           }
         },
         onRoutesGenerated (routes) {
-          return routes.filter(route => !route.disabled)
+          allRoutes = routes.filter(route => !route.disabled)
+          return allRoutes
         },
         importMode (filepath) {
           return [
@@ -166,7 +193,6 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         injectManifest: {
           globIgnores: ['**/*.html'],
           additionalManifestEntries: [
-            { url: '/_crowdin.html', revision: Date.now().toString(16) },
             { url: '/_fallback.html', revision: Date.now().toString(16) },
           ],
           dontCacheBustURLsMatching: /assets\/.+[A-Za-z0-9]{8}\.(js|css)$/,
@@ -191,6 +217,23 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
           ],
         },
       }),
+
+      {
+        // Remove options block from examples
+        name: 'vuetify:example-setup',
+        transform (code, id) {
+          const { filename, query } = parseVueRequest(id)
+          if (query.raw || query.url) return
+          if (filename.includes('packages/docs/src/examples')) {
+            const composition = /(<script setup>[\w\W]*?<\/script>)/g.exec(code)
+            const options = /(<script>[\w\W]*?<\/script>)/g.exec(code)
+
+            if (composition && options) {
+              return code.slice(0, options.index) + code.slice(options.index + options[0].length + 1)
+            }
+          }
+        }
+      },
 
       Vue({
         include: [/\.vue$/, /\.md$/],
@@ -218,10 +261,10 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       Examples(),
 
       {
-        name: 'vuetify:codepen-blocks',
+        name: 'vuetify:example-blocks',
         transform (code, id) {
-          const type = id.includes('vue&type=codepen-additional') ? 'codepenAdditional'
-            : id.includes('vue&type=codepen-resources') ? 'codepenResources'
+          const type = id.includes('vue&type=playground-resources') ? 'playgroundResources'
+            : id.includes('vue&type=playground-setup') ? 'playgroundSetup'
             : null
           if (!type) return
 
@@ -233,15 +276,49 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       },
 
       {
-        name: 'vuetify:fallback',
+        // lightweight head-only ssg
+        name: 'vuetify:ssg',
         enforce: 'post',
-        transformIndexHtml (html) {
-          fs.mkdirSync('dist', { recursive: true })
-          fs.writeFileSync(path.join('dist/_fallback.html'), html)
-          fs.writeFileSync(path.join('dist/_crowdin.html').replace(/<\/head>/, `
-<script type="text/javascript">let _jipt = [['project', 'vuetify']];</script>
-<script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
-$&`), html)
+        async transformIndexHtml (html) {
+          if (mode !== 'production') return html
+
+          await fs.mkdir('dist', { recursive: true })
+          await fs.writeFile(path.join('dist/_fallback.html'), html)
+
+          const routes = allRoutes.filter(({ path: route }) => {
+            return route !== '/' &&
+              !['/eo-UY/', '/api/', '/user/', ':', '*'].some(v => route.includes(v))
+          }).map(route => {
+            const meta = genAppMetaInfo({
+              title: `${route.meta.title}${route.path === '/en/' ? '' : ' — Vuetify'}`,
+              description: route.meta.description,
+              keywords: route.meta.keywords,
+            })
+            const metaContent = [
+              `<title>${meta.title}</title>`,
+              ...meta.meta.map((v: any) => {
+                const attrs = Object.keys(v).filter(k => k !== 'key').map(k => `${k}="${v[k]}"`).join(' ')
+                return `<meta ${attrs}>`
+              }),
+              ...meta.link.map((v: any) => {
+                const attrs = Object.keys(v).map(k => `${k}="${v[k]}"`).join(' ')
+                return `<link ${attrs}>`
+              }),
+            ].join('\n    ')
+            const content = html.replace('<!-- @inject-meta -->', metaContent)
+            return {
+              path: route.path,
+              content
+            }
+          })
+
+          for (const route of routes) {
+            const filename = path.join('dist', route.path, 'index.html')
+            await fs.mkdir(path.dirname(filename), { recursive: true })
+            await fs.writeFile(filename, route.content)
+          }
+
+          return routes.find(r => r.path === '/en/')?.content
         },
       },
 
@@ -249,13 +326,6 @@ $&`), html)
 
       process.env.HTTPS === 'true' ? basicSsl() : undefined,
     ],
-
-    // https://github.com/antfu/vite-ssg
-    ssgOptions: {
-      script: 'sync',
-      formatting: 'minify',
-      crittersOptions: false,
-    },
 
     optimizeDeps: {
       include: [
@@ -268,11 +338,11 @@ $&`), html)
     },
 
     ssr: {
-      noExternal: ['vue-i18n', '@vuelidate/core', 'pinia', '@auth0/auth0-vue'],
+      noExternal: ['vue-i18n', '@vuelidate/core', 'pinia'],
     },
 
     server: {
-      port: +(process.env.PORT ?? 8080),
+      port: +(process.env.PORT ?? 8095),
     },
 
     preview: {

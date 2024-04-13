@@ -1,6 +1,11 @@
 export default {
   badge: 'nişan',
+  open: 'Open',
   close: 'Bağla',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Uyğun məlumat tapılmadı',
     loadingText: 'Yüklənir... Zəhmət olmasa, gözləyin.',
@@ -26,12 +31,20 @@ export default {
     lastPage: 'Son səhifə',
     pageText: '{0} - {1} arası, Cəmi: {2} qeydiyyat',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} element seçildi',
-    nextMonthAriaLabel: 'Növbəti ay',
-    nextYearAriaLabel: 'Növbəti yıl',
-    prevMonthAriaLabel: 'Keçən ay',
-    prevYearAriaLabel: 'Keçən yıl',
+    itemsSelected: '{0} selected',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Bu görüntüdə məlumat yoxdur.',
   carousel: {
@@ -43,11 +56,13 @@ export default {
   },
   calendar: {
     moreEvents: '{0} ədad daha',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} fayl',
@@ -56,6 +71,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
@@ -67,6 +83,10 @@ export default {
       first: 'First page',
       last: 'Last page',
     },
+  },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
   },
   rating: {
     ariaLabel: {

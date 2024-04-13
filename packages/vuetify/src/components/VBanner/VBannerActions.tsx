@@ -2,24 +2,27 @@
 import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
 
-// Utility
-import { genericComponent, useRender } from '@/util'
+// Utilities
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVBannerActionsProps = propsFactory({
+  color: String,
+  density: String,
+
+  ...makeComponentProps(),
+}, 'VBannerActions')
 
 export const VBannerActions = genericComponent()({
   name: 'VBannerActions',
 
-  props: {
-    color: String,
-    density: String,
-
-    ...makeComponentProps(),
-  },
+  props: makeVBannerActionsProps(),
 
   setup (props, { slots }) {
     provideDefaults({
       VBtn: {
         color: props.color,
         density: props.density,
+        slim: true,
         variant: 'text',
       },
     })

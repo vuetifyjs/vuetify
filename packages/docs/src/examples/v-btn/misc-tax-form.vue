@@ -15,35 +15,46 @@
 
       <v-text-field
         label="Enter value here"
-        single-line
         variant="outlined"
+        single-line
       ></v-text-field>
 
       <v-btn
         :disabled="loading"
         :loading="loading"
-        block
         class="text-none mb-4"
         color="indigo-darken-3"
         size="x-large"
         variant="flat"
+        block
         @click="loading = !loading"
       >
         Verify and continue
       </v-btn>
 
       <v-btn
-        block
         class="text-none"
         color="grey-lighten-3"
         size="x-large"
         variant="flat"
+        block
       >
         Cancel
       </v-btn>
     </v-card-text>
   </v-card>
 </template>
+
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const loading = ref(false)
+
+  watch(loading, val => {
+    if (!val) return
+    setTimeout(() => (loading.value = false), 2000)
+  })
+</script>
 
 <script>
   export default {

@@ -8,17 +8,25 @@
 
     <v-slider
       v-model="slider2"
-      track-color="green"
       label="track-color"
+      track-color="green"
     ></v-slider>
 
     <v-slider
       v-model="slider3"
-      thumb-color="purple"
       label="thumb-color"
+      thumb-color="purple"
     ></v-slider>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const slider1 = ref(0)
+  const slider2 = ref(50)
+  const slider3 = ref(100)
+</script>
 
 <script>
   export default {

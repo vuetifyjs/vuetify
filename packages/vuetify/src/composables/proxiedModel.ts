@@ -1,16 +1,19 @@
+// Composables
+import { useToggleScope } from '@/composables/toggleScope'
+
 // Utilities
 import { computed, ref, toRaw, watch } from 'vue'
 import { getCurrentInstance, toKebabCase } from '@/util'
-import { useToggleScope } from '@/composables/toggleScope'
 
 // Types
 import type { Ref } from 'vue'
+import type { EventProp } from '@/util'
 
 type InnerVal<T> = T extends any[] ? Readonly<T> : T
 
 // Composables
 export function useProxiedModel<
-  Props extends object & { [key in Prop as `onUpdate:${Prop}`]: ((val: any) => void) | undefined },
+  Props extends object & { [key in Prop as `onUpdate:${Prop}`]: EventProp | undefined },
   Prop extends Extract<keyof Props, string>,
   Inner = Props[Prop],
 > (

@@ -1,5 +1,4 @@
 ---
-emphasized: false
 meta:
   title: Dates
   description: Vuetify has first party date support that can easily be swapped for another date library
@@ -8,13 +7,23 @@ related:
 - /features/blueprints/
 - /features/global-configuration/
 - /features/treeshaking/
+features:
+  github: /composables/date/
+  label: 'E: date'
+  report: true
 ---
 
 # Dates
 
-Easily hook up date libraries that are used for components that require date functionality.
+Easily hook up date libraries that are used for components such as Date Picker and Calendar that require date functionality.
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
+
+::: success
+This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
+:::
 
 ## Usage
 
@@ -24,7 +33,7 @@ The following example demonstrates explicitly importing the Vuetify date adapter
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
-import { VuetifyDateAdapter } from 'vuetify/labs/date/adapters/vuetify'
+import { VuetifyDateAdapter } from 'vuetify/date/adapters/vuetify'
 
 export default createVuetify({
   date: {
@@ -36,50 +45,66 @@ export default createVuetify({
 Within your application, import the **useDate** function and use it to access the date composable.
 
 ```html { resource="src/views/Date.vue" }
-<script>
-  import { useDate } from 'vuetify/labs'
+<script setup>
+  import { useDate } from 'vuetify'
 
-  export default {
-    setup () {
-      const date = useDate()
+  const date = useDate()
 
-      console.log(date.getMonth(new Date('March 1, 2021'))) // 3
-    },
-  }
+  console.log(date.getMonth(new Date('March 1, 2021'))) // 3
 </script>
 ```
 
-<alert type="info">
+::: info
 
 For a list of all supported date adapters, visit the [date-io](https://github.com/dmtrKovalenko/date-io#projects) project repository.
 
-</alert>
+:::
 
 ### Format options
 
 The date composable supports the following date formatting options:
 
-* fullDateWithWeekday
-* normalDateWithWeekday
-* keyboardDate
-* monthAndDate
-* monthAndYear
+| Format Name | Format Output |
+| - | - |
+| fullDate | "Jan 1, 2024" |
+| fullDateWithWeekday | "Tuesday, January 1, 2024" |
+| normalDate | "1 January" |
+| normalDateWithWeekday | "Wed, Jan 1" |
+| shortDate | "Jan 1" |
+| year | "2024" |
+| month | "January" |
+| monthShort | "Jan" |
+| monthAndYear | "January 2024" |
+| monthAndDate | "January 1" |
+| weekday | "Wednesday" |
+| weekdayShort | "Wed" |
+| dayOfMonth | "1" |
+| hours12h | "11" |
+| hours24h | "23" |
+| minutes | "44" |
+| seconds | "00" |
+| fullTime | "11:44 PM" for US, "23:44" for Europe |
+| fullTime12h | "11:44 PM" |
+| fullTime24h | "23:44" |
+| fullDateTime | "Jan 1, 2024 11:44 PM" |
+| fullDateTime12h | "Jan 1, 2024 11:44 PM" |
+| fullDateTime24h | "Jan 1, 2024 23:44" |
+| keyboardDate | "02/13/2024" |
+| keyboardDateTime | "02/13/2024 23:44" |
+| keyboardDateTime12h | "02/13/2024 11:44 PM" |
+| keyboardDateTime24h | "02/13/2024 23:44" |
 
 The following example shows how to use the date composable to format a date string:
 
 ```html { resource="src/views/Date.vue" }
-<script>
-  import { useDate } from 'vuetify/labs'
+<script setup>
+  import { useDate } from 'vuetify'
 
-  export default {
-    setup () {
-      const date = useDate()
+  const date = useDate()
 
-      const formatted = date.format('2010-04-13 00:00:00', 'fullDateWithWeekday')
+  const formatted = date.format('2010-04-13', 'fullDateWithWeekday')
 
-      console.log(formatted) // Tuesday, April 13, 2010
-    },
-  }
+  console.log(formatted) // Tuesday, April 13, 2010
 </script>
 ```
 
@@ -89,14 +114,14 @@ The following example shows how to use the date composable to format a date stri
 | - | - |
 | [useDate](/api/use-date/) | The date composable is used by components that require date functionality |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ### Adapter
 
 The built-in date adapter implements a subset of functionality from the [DateIOFormats](https://github.com/dmtrKovalenko/date-io/blob/master/packages/core/IUtils.d.ts) interface. Because of this, it's easy to swap in any date library supported by [date-io](https://github.com/dmtrKovalenko/date-io).
 
 ```js { resource="src/plugins/vuetify.js" }
-import { createVuetify } from 'vuetify/labs'
+import { createVuetify } from 'vuetify'
 import LuxonAdapter from "@date-io/luxon"
 
 const luxon = new LuxonAdapter({ locale: "sv" });
@@ -115,31 +140,38 @@ To create your own date adapter, implement the **DateAdapter** interface:
 ```ts
 import type { DateAdapter } from 'vuetify/labs'
 
-export interface DateAdapter<Date> {
-  date (value?: any): Date | null
-  format (date: Date, formatString: string): string
+export interface DateAdapter<TDate> {
+  date (value?: any): TDate | null
+  format (date: TDate, formatString: string): string
+  toJsTDate (value: TDate): TDate
+  parseISO (date: string): TDate
+  toISO (date: TDate): string
 
-  startOfMonth (date: Date): Date
-  endOfMonth (date: Date): Date
-  startOfYear (date: Date): Date
-  endOfYear (date: Date): Date
+  startOfDay (date: TDate): TDate
+  endOfDay (date: TDate): TDate
+  startOfMonth (date: TDate): TDate
+  endOfMonth (date: TDate): TDate
+  startOfYear (date: TDate): TDate
+  endOfYear (date: TDate): TDate
 
-  isAfter (date: Date, comparing: Date): boolean
-  isEqual (date: Date, comparing: Date): boolean
-  isSameDay (date: Date, comparing: Date): boolean
-  isSameMonth (date: Date, comparing: Date): boolean
+  isBefore (date: TDate, comparing: TDate): boolean
+  isAfter (date: TDate, comparing: TDate): boolean
+  isEqual (date: TDate, comparing: TDate): boolean
+  isSameDay (date: TDate, comparing: TDate): boolean
+  isSameMonth (date: TDate, comparing: TDate): boolean
   isValid (date: any): boolean
-  isWithinRange (date: Date, range: [Date, Date]): boolean
+  isWithinRange (date: TDate, range: [TDate, TDate]): boolean
 
-  addDays (date: Date, amount: number): Date
-  addMonths (date: Date, amount: number): Date
+  addDays (date: TDate, amount: number): TDate
+  addMonths (date: TDate, amount: number): TDate
 
-  getYear (date: Date): number
-  setYear (date: Date, year: number): Date
-  getDiff (date: Date, comparing: Date | string, unit?: string): number
-  getWeek (date: Date): number
-  getWeekArray (date: Date): (Date | null)[][]
+  getYear (date: TDate): number
+  setYear (date: TDate, year: number): TDate
+  getDiff (date: TDate, comparing: TDate | string, unit?: string): number
+  getWeekArray (date: TDate): TDate[][]
   getWeekdays (): string[]
-  getMonth (date: Date): number
+  getMonth (date: TDate): number
+  setMonth (date: TDate, month: number): TDate
+  getNextMonth (date: TDate): TDate
 }
 ```

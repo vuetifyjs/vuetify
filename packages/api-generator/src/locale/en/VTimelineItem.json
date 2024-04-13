@@ -1,0 +1,20 @@
+{
+  "props": {
+    "alignDot": "Align the dot to the **start** or **end** of the item.",
+    "color": "Applies specified color to the item dot - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
+    "dotColor": "Color of the item dot.",
+    "fillDot": "Remove outer border of item dot, making the color fill the entire dot.",
+    "hideDot": "Hide the timeline item dot.",
+    "hideOpposite": "Hide opposite content if it exists.",
+    "icon": "Apply a specific icon to the inside dot using the [v-icon](/components/icons/) component.",
+    "iconColor": "Color of the icon.",
+    "index": "Used to allow dynamically shown items to be re-inserted in the correct position.",
+    "lineInset": "Specifies the distance between the line and the dot of the item.",
+    "side": "Show the item either **before** or **after** the timeline. This will override the implicit ordering of items, but will in turn be overriden by the `v-timeline` **single-side** prop.",
+    "size": "Size of the item dot"
+  },
+  "slots": {
+    "icon": "Used to customize the icon inside the item dot.",
+    "opposite": "Used to customize the opposite side of timeline items."
+  }
+}

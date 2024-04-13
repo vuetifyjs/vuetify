@@ -1,14 +1,14 @@
 <template>
   <v-card
-    max-width="600"
     class="mx-auto"
+    max-width="600"
   >
     <div class="d-flex justify-space-between pa-4 pb-0">
       <v-btn-toggle
         v-model="formatting"
-        multiple
         variant="outlined"
         divided
+        multiple
       >
         <v-btn>
           <v-icon icon="mdi-format-italic"></v-icon>
@@ -27,10 +27,10 @@
             <v-icon icon="mdi-format-color-text"></v-icon>
 
             <v-sheet
-              tile
+              color="purple"
               height="4"
               width="26"
-              color="purple"
+              tile
             ></v-sheet>
           </div>
         </v-btn>
@@ -58,24 +58,30 @@
     <v-sheet class="pa-4 text-center">
       <v-textarea
         v-model="value"
+        rows="2"
         variant="outlined"
         auto-grow
         full-width
-        rows="2"
         hide-details
       ></v-textarea>
     </v-sheet>
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const alignment = ref(1)
+  const formatting = ref([])
+  const value = ref('Toggle button requirements.\n\nHave at least three toggle buttons in a group\nLabel buttons with text, an icon, or')
+</script>
+
 <script>
   export default {
     data: () => ({
       alignment: 1,
       formatting: [],
-      numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
-      letters: 'qwertyuiop'.split(''),
-      value: 'Toggle button requirements.\r\rHave at least three toggle buttons in a group\rLabel buttons with text, an icon, or',
+      value: 'Toggle button requirements.\n\nHave at least three toggle buttons in a group\nLabel buttons with text, an icon, or',
     }),
   }
 </script>

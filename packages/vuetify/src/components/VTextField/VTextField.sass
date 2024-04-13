@@ -30,8 +30,9 @@
       --v-field-padding-end: #{$text-field-input-padding-end}
 
   .v-input__details
-    padding-inline-start: $text-field-details-padding-inline
-    padding-inline-end: $text-field-details-padding-inline
+    padding-inline: $text-field-details-padding-inline
+    @at-root #{selector.append('.v-input--plain-underlined', &)}
+      padding-inline: 0
 
   .v-field--no-label,
   .v-field--active
@@ -54,6 +55,7 @@
     opacity: 0
     transition: inherit
     white-space: nowrap
+    min-height: $field-input-min-height
     padding-top: calc(var(--v-field-padding-top, 4px) + var(--v-input-padding-top, 0))
     padding-bottom: var(--v-field-padding-bottom, 6px)
 
@@ -69,10 +71,4 @@
   &__suffix
     padding-inline-end: var(--v-field-padding-end)
 
-/* endregion */
-/* region MODIFIERS */
-.v-text-field
-  &--flush-details
-    .v-input__details
-      padding: 0
 /* endregion */

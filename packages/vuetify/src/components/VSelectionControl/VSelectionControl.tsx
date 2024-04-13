@@ -4,37 +4,42 @@ import './VSelectionControl.sass'
 // Components
 import { VIcon } from '@/components/VIcon'
 import { VLabel } from '@/components/VLabel'
-import { makeComponentProps } from '@/composables/component'
 import { makeSelectionControlGroupProps, VSelectionControlGroupSymbol } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
+
+// Composables
+import { useBackgroundColor, useTextColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { useDensity } from '@/composables/density'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
 
-// Composables
-import { useDensity } from '@/composables/density'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTextColor } from '@/composables/color'
-
 // Utilities
-import { computed, inject, nextTick, ref } from 'vue'
+import { computed, inject, nextTick, ref, shallowRef } from 'vue'
 import {
   filterInputAttrs,
   genericComponent,
   getUid,
+  matchesSelector,
   propsFactory,
-  SUPPORTS_FOCUS_VISIBLE,
   useRender,
   wrapInArray,
 } from '@/util'
 
 // Types
-import type { CSSProperties, ExtractPropTypes, Ref, WritableComputedRef } from 'vue'
-import type { GenericProps } from '@/util'
+import type { CSSProperties, ExtractPropTypes, Ref, VNode, WritableComputedRef } from 'vue'
+import type { IconValue } from '@/composables/icons'
+import type { EventProp, GenericProps } from '@/util'
 
 export type SelectionControlSlot = {
-  model: WritableComputedRef<any>
+  model: WritableComputedRef<boolean>
   textColorClasses: Ref<string[]>
   textColorStyles: Ref<CSSProperties>
+  backgroundColorClasses: Ref<string[]>
+  backgroundColorStyles: Ref<CSSProperties>
+  inputNode: VNode
+  icon: IconValue | undefined
   props: {
     onBlur: (e: Event) => void
     onFocus: (e: FocusEvent) => void
@@ -43,24 +48,28 @@ export type SelectionControlSlot = {
 }
 
 export type VSelectionControlSlots = {
-  default: []
-  label: [{ label: string | undefined, props: Record<string, unknown> }]
-  input: [SelectionControlSlot]
+  default: {
+    backgroundColorClasses: Ref<string[]>
+    backgroundColorStyles: Ref<CSSProperties>
+  }
+  label: { label: string | undefined, props: Record<string, unknown> }
+  input: SelectionControlSlot
 }
 
-export const makeSelectionControlProps = propsFactory({
+export const makeVSelectionControlProps = propsFactory({
   label: String,
+  baseColor: String,
   trueValue: null,
   falseValue: null,
   value: null,
 
   ...makeComponentProps(),
   ...makeSelectionControlGroupProps(),
-}, 'v-selection-control')
+}, 'VSelectionControl')
 
 export function useSelectionControl (
-  props: ExtractPropTypes<ReturnType<typeof makeSelectionControlProps>> & {
-    'onUpdate:modelValue': ((val: any) => void) | undefined
+  props: ExtractPropTypes<ReturnType<typeof makeVSelectionControlProps>> & {
+    'onUpdate:modelValue': EventProp | undefined
   }
 ) {
   const group = inject(VSelectionControlGroupSymbol, undefined)
@@ -81,7 +90,7 @@ export function useSelectionControl (
       const val = group ? group.modelValue.value : modelValue.value
 
       return isMultiple.value
-        ? val.some((v: any) => props.valueComparator(v, trueValue.value))
+        ? wrapInArray(val).some((v: any) => props.valueComparator(v, trueValue.value))
         : props.valueComparator(val, trueValue.value)
     },
     set (val: boolean) {
@@ -105,11 +114,16 @@ export function useSelectionControl (
     },
   })
   const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
+    if (props.error || props.disabled) return undefined
+
+    return model.value ? props.color : props.baseColor
+  }))
+  const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => {
     return (
       model.value &&
       !props.error &&
       !props.disabled
-    ) ? props.color : undefined
+    ) ? props.color : props.baseColor
   }))
   const icon = computed(() => model.value ? props.trueIcon : props.falseIcon)
 
@@ -121,24 +135,29 @@ export function useSelectionControl (
     model,
     textColorClasses,
     textColorStyles,
+    backgroundColorClasses,
+    backgroundColorStyles,
     icon,
   }
 }
 
-export const VSelectionControl = genericComponent<new <T>(props: {
-  modelValue?: T
-  'onUpdate:modelValue'?: (val: T) => any
-}) => GenericProps<typeof props, VSelectionControlSlots>>()({
+export const VSelectionControl = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: VSelectionControlSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelectionControl',
 
   directives: { Ripple },
 
   inheritAttrs: false,
 
-  props: makeSelectionControlProps(),
+  props: makeVSelectionControlProps(),
 
   emits: {
-    'update:modelValue': (val: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { attrs, slots }) {
@@ -149,13 +168,16 @@ export const VSelectionControl = genericComponent<new <T>(props: {
       model,
       textColorClasses,
       textColorStyles,
+      backgroundColorClasses,
+      backgroundColorStyles,
       trueValue,
     } = useSelectionControl(props)
     const uid = getUid()
-    const id = computed(() => props.id || `input-${uid}`)
-    const isFocused = ref(false)
-    const isFocusVisible = ref(false)
+    const isFocused = shallowRef(false)
+    const isFocusVisible = shallowRef(false)
     const input = ref<HTMLInputElement>()
+    const id = computed(() => props.id || `input-${uid}`)
+    const isInteractive = computed(() => !props.disabled && !props.readonly)
 
     group?.onForceUpdate(() => {
       if (input.value) {
@@ -164,11 +186,10 @@ export const VSelectionControl = genericComponent<new <T>(props: {
     })
 
     function onFocus (e: FocusEvent) {
+      if (!isInteractive.value) return
+
       isFocused.value = true
-      if (
-        !SUPPORTS_FOCUS_VISIBLE ||
-        (SUPPORTS_FOCUS_VISIBLE && (e.target as HTMLElement).matches(':focus-visible'))
-      ) {
+      if (matchesSelector(e.target as HTMLElement, ':focus-visible') !== false) {
         isFocusVisible.value = true
       }
     }
@@ -178,7 +199,13 @@ export const VSelectionControl = genericComponent<new <T>(props: {
       isFocusVisible.value = false
     }
 
+    function onClickLabel (e: Event) {
+      e.stopPropagation()
+    }
+
     function onInput (e: Event) {
+      if (!isInteractive.value) return
+
       if (props.readonly && group) {
         nextTick(() => group.forceUpdate())
       }
@@ -193,6 +220,25 @@ export const VSelectionControl = genericComponent<new <T>(props: {
         })
         : props.label
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
+
+      const inputNode = (
+        <input
+          ref={ input }
+          checked={ model.value }
+          disabled={ !!props.disabled }
+          id={ id.value }
+          onBlur={ onBlur }
+          onFocus={ onFocus }
+          onInput={ onInput }
+          aria-disabled={ !!props.disabled }
+          aria-label={ props.label }
+          type={ props.type }
+          value={ trueValue.value }
+          name={ props.name }
+          aria-checked={ props.type === 'checkbox' ? model.value : undefined }
+          { ...inputAttrs }
+        />
+      )
 
       return (
         <div
@@ -219,7 +265,10 @@ export const VSelectionControl = genericComponent<new <T>(props: {
             ]}
             style={ textColorStyles.value }
           >
-            { slots.default?.() }
+            { slots.default?.({
+              backgroundColorClasses,
+              backgroundColorStyles,
+            })}
 
             <div
               class={[
@@ -231,39 +280,31 @@ export const VSelectionControl = genericComponent<new <T>(props: {
                 ['center', 'circle'],
               ]}
             >
-              { icon.value && <VIcon key="icon" icon={ icon.value } /> }
-
-              <input
-                ref={ input }
-                checked={ model.value }
-                disabled={ props.disabled }
-                id={ id.value }
-                onBlur={ onBlur }
-                onFocus={ onFocus }
-                onInput={ onInput }
-                aria-disabled={ props.readonly }
-                type={ props.type }
-                value={ trueValue.value }
-                name={ props.name }
-                aria-checked={ props.type === 'checkbox' ? model.value : undefined }
-                { ...inputAttrs }
-              />
-
               { slots.input?.({
                 model,
                 textColorClasses,
                 textColorStyles,
+                backgroundColorClasses,
+                backgroundColorStyles,
+                inputNode,
+                icon: icon.value,
                 props: {
                   onFocus,
                   onBlur,
                   id: id.value,
                 },
-              } as SelectionControlSlot)}
+              } satisfies SelectionControlSlot) ?? (
+                <>
+                  { icon.value && <VIcon key="icon" icon={ icon.value } /> }
+
+                  { inputNode }
+                </>
+              )}
             </div>
           </div>
 
           { label && (
-            <VLabel for={ id.value } clickable>
+            <VLabel for={ id.value } onClick={ onClickLabel }>
               { label }
             </VLabel>
           )}

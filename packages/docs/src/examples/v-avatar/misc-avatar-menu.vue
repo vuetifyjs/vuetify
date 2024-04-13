@@ -1,7 +1,7 @@
 <template>
   <v-container
-    fluid
     style="height: 300px"
+    fluid
   >
     <v-row justify="center">
       <v-menu
@@ -35,15 +35,15 @@
               </p>
               <v-divider class="my-3"></v-divider>
               <v-btn
-                rounded
                 variant="text"
+                rounded
               >
                 Edit Account
               </v-btn>
               <v-divider class="my-3"></v-divider>
               <v-btn
-                rounded
                 variant="text"
+                rounded
               >
                 Disconnect
               </v-btn>
@@ -54,6 +54,14 @@
     </v-row>
   </v-container>
 </template>
+
+<script setup>
+  const user = {
+    initials: 'JD',
+    fullName: 'John Doe',
+    email: 'john.doe@doe.com',
+  }
+</script>
 
 <script>
   export default {

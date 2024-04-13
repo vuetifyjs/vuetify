@@ -7,8 +7,8 @@
       <template v-slot:activator="{ props }">
         <v-card
           class="portrait"
-          image="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
           height="300"
+          image="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
           width="600"
           v-bind="props"
         ></v-card>
@@ -25,6 +25,19 @@
     </v-menu>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const showMenu = ref(false)
+
+  const items = [
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me 2' },
+  ]
+</script>
 
 <script>
   export default {

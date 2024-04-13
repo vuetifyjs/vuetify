@@ -1,13 +1,18 @@
 <template>
   <v-list
     v-model:opened="opened"
-    :nav="nav"
     :items="computedItems"
     :lines="false"
+    :nav="nav"
     color="primary"
     density="compact"
     item-props
+    slim
   >
+    <template v-if="$slots.item" #item="itemProps">
+      <slot name="item" v-bind="itemProps" />
+    </template>
+
     <template #divider>
       <slot name="divider" />
 
@@ -29,6 +34,12 @@
       />
     </template>
 
+    <template #subtitle="{ item }">
+      <span v-if="item.subtitle" class="text-high-emphasis">
+        {{ item.subtitle }}
+      </span>
+    </template>
+
     <template #subheader="{ props: subheaderProps }">
       <slot
         name="subheader"
@@ -46,19 +57,13 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utiltities
-  import { computed, ref } from 'vue'
-  import { generatedRoutes as routes } from '@/util/routes'
-  import { RouteLocationRaw, RouteRecordRaw } from 'vue-router'
-
   // Types
+  import type { RouteLocationRaw, RouteRecordRaw } from 'vue-router'
   import type { Prop } from 'vue'
 
   export type Item = {
     title?: string
+    subtitle?: string
     appendIcon?: string
     activeIcon?: string
     inactiveIcon?: string
@@ -69,18 +74,22 @@
     href?: string
     subfolder?: string
     disabled?: boolean
+    routeMatch?: string
+    routePath?: string
+    emphasized?: boolean
+    onClick?: () => void
   }
 
   function generateApiItems (locale: string) {
-    return (routes as RouteRecordRaw[])
+    return (generatedRoutes as RouteRecordRaw[])
       .filter(route => route.path.includes(`${locale}/api/`))
-      .sort((a, b) => a.path.localeCompare(b.path))
       .map(route => {
         return {
           title: (route.meta!.title as string).slice(0, -4),
           to: route.path,
         }
       })
+      .sort((a, b) => a.title.localeCompare(b.title))
   }
 
   function generateListItem (item: string | Item, path = '', locale = 'en', t = (key: string) => key): any {
@@ -94,12 +103,19 @@
 
       if (litem.subfolder) path = litem.subfolder
 
-      const route = routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.title}/`))
+      const route = litem.routeMatch
+        ? generatedRoutes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.routeMatch}/`))
+        : generatedRoutes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.title}/`))
+
+      const to = litem.routePath
+        ? `/${locale}/${path}/${litem.routePath}/`
+        : route?.path
 
       return {
         title: route?.meta?.nav ?? route?.meta?.title ?? litem.title,
+        subtitle: litem.subtitle && te(litem.subtitle) ? t(litem.subtitle) : litem.subtitle,
         emphasized: route?.meta?.emphasized ?? false,
-        to: route?.path,
+        to,
         disabled: !route,
       }
     } else if (item.divider) {
@@ -115,6 +131,7 @@
       const p = item.subfolder ? `${item.subfolder}/${item.title}` : path
       return {
         title: t(item.title!),
+        emphasized: item.emphasized,
         children: item.items.map(item => generateListItem(item, p, locale, t)),
       }
     }
@@ -150,6 +167,7 @@
         to: item?.to,
         href: item?.href,
       }),
+      onClick: item?.onClick,
       rel: item.href ? 'noopener noreferrer' : undefined,
       target: item.href ? '_blank' : undefined,
       children: item.title === 'api' ? generateApiItems(locale.value) : generateListItems(item, item.title!, locale.value, t),

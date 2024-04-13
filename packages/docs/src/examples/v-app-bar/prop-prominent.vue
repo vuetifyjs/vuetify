@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="448" class="mx-auto">
+  <v-card class="mx-auto" max-width="448">
     <v-layout>
       <v-app-bar
         color="info"
@@ -21,15 +21,15 @@
       <v-main>
         <v-container fluid>
           <v-card
-            border
             class="mb-2"
             density="compact"
             prepend-avatar="https://randomuser.me/api/portraits/women/10.jpg"
             subtitle="Salsa, merengue, y cumbia"
             title="Cuba"
             variant="text"
+            border
           >
-            <v-img src="https://picsum.photos/512/128?image=660" height="128" cover></v-img>
+            <v-img height="128" src="https://picsum.photos/512/128?image=660" cover></v-img>
 
             <v-card-text>
               During my last trip to South America, I spent 2 weeks traveling through Patagonia in Chile.
@@ -43,14 +43,14 @@
           </v-card>
 
           <v-card
-            border
             density="comfortable"
             prepend-avatar="https://randomuser.me/api/portraits/women/17.jpg"
             subtitle="Salsa, merengue, y cumbia"
             title="Florida"
             variant="text"
+            border
           >
-            <v-img src="https://picsum.photos/512/128?random" height="128" cover></v-img>
+            <v-img height="128" src="https://picsum.photos/512/128?random" cover></v-img>
 
             <v-card-text>
               During my last trip to Florida, I spent 2 weeks traveling through the Everglades.

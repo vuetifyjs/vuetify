@@ -1,4 +1,5 @@
 /* eslint-disable sonarjs/no-identical-functions */
+// Utilities
 import { toRaw } from 'vue'
 
 export type SelectStrategyFn = (data: {
@@ -11,7 +12,7 @@ export type SelectStrategyFn = (data: {
 }) => Map<unknown, 'on' | 'off' | 'indeterminate'>
 
 export type SelectStrategyTransformInFn = (
-  v: unknown[] | undefined,
+  v: readonly unknown[] | undefined,
   children: Map<unknown, unknown[]>,
   parents: Map<unknown, unknown>,
 ) => Map<unknown, 'on' | 'off' | 'indeterminate'>
@@ -36,7 +37,11 @@ export const independentSelectStrategy = (mandatory?: boolean): SelectStrategy =
       // When mandatory and we're trying to deselect when id
       // is the only currently selected item then do nothing
       if (mandatory && !value) {
-        const on = Array.from(selected.entries()).reduce((arr, [key, value]) => value === 'on' ? [...arr, key] : arr, [] as unknown[])
+        const on = Array.from(selected.entries())
+          .reduce((arr, [key, value]) => {
+            if (value === 'on') arr.push(key)
+            return arr
+          }, [] as unknown[])
         if (on.length === 1 && on[0] === id) return selected
       }
 
@@ -166,7 +171,11 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
       // If mandatory and planned deselect results in no selected
       // items then we can't do it, so return original state
       if (mandatory && !value) {
-        const on = Array.from(selected.entries()).reduce((arr, [key, value]) => value === 'on' ? [...arr, key] : arr, [] as unknown[])
+        const on = Array.from(selected.entries())
+          .reduce((arr, [key, value]) => {
+            if (value === 'on') arr.push(key)
+            return arr
+          }, [] as unknown[])
         if (on.length === 0) return original
       }
 

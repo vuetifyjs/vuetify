@@ -8,9 +8,10 @@
         >
           <v-text-field
             v-model="firstname"
-            :rules="nameRules"
             :counter="10"
+            :rules="nameRules"
             label="First name"
+            hide-details
             required
           ></v-text-field>
         </v-col>
@@ -21,9 +22,10 @@
         >
           <v-text-field
             v-model="lastname"
-            :rules="nameRules"
             :counter="10"
+            :rules="nameRules"
             label="Last name"
+            hide-details
             required
           ></v-text-field>
         </v-col>
@@ -36,6 +38,7 @@
             v-model="email"
             :rules="emailRules"
             label="E-mail"
+            hide-details
             required
           ></v-text-field>
         </v-col>
@@ -54,7 +57,7 @@
         value => {
           if (value) return true
 
-          return 'Name is requred.'
+          return 'Name is required.'
         },
         value => {
           if (value?.length <= 10) return true

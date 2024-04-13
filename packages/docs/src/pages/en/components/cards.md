@@ -1,6 +1,6 @@
 ---
-nav: Cards
 meta:
+  nav: Cards
   title: Card component
   description: The v-card component is a versatile and enhanced sheet of paper that provides a simple interface for headings, text, images, and actions.
   keywords: cards, vuetify card component, vue card component, v-card
@@ -8,23 +8,29 @@ related:
   - /components/buttons
   - /components/images
   - /styles/text-and-typography
+features:
+  figma: true
+  label: 'C: VCard'
+  github: /components/VCard/
+  report: true
+  spec: https://m2.material.io/components/cards
 ---
 
 # Cards
 
- The `v-card` component is a versatile and enhanced version of [v-sheet](/components/sheets/) that provides a simple interface for headings, text, images, icons, and more <inline slug="scrimba-cards" />
+ The `v-card` component is a versatile and enhanced version of [v-sheet](/components/sheets/) that provides a simple interface for headings, text, images, icons, and more.
 
 ![Card Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-card/v-card-entry.png)
 
----
+<PageFeatures />
 
 ## Usage
 
 The `v-card` component is a stylish way to wrap different types of content; such as tables, images, or user actions.
 
-<usage name="v-card" />
+<ExamplesUsage name="v-card" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -55,13 +61,13 @@ The recommended placement of elements inside of `v-card` is:
 | 4. Text (optional) | A content area with a lower emphasis text color |
 | 5. Actions (optional) | A content area that typically contains one or more [v-btn](/components/buttons) components |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Basics
 
 There are three ways you can populate a `v-card` with content. The first one is by using props, the second one is by slots, and the third one is by manually using the `v-card-*` components.
 
-<example file="v-card/basics-content" />
+<ExamplesExample file="v-card/basics-content" />
 
 Props give you an easy interface to display text-only content. They can also be used to easily render images and icons.
 
@@ -69,23 +75,88 @@ Use slots if you need to render more complex content. If you need full control o
 
 In some cases it is possible to combine the different options, like the example below where props, slots and markup have all been used.
 
-<alert type="info">
-
+::: info
   In general slots take precedence over props. So if you provide both **text** prop and use **text** slot, then only the slot content will be rendered.
+:::
 
-</alert>
+<ExamplesExample file="v-card/basics-combine" />
 
-<example file="v-card/basics-combine" />
+### Content overflow
+
+`v-card` does not allow its content to overflow outside the card by default. It also establishes a z-index stacking context, which prevents its content from displaying on top of elements outside the `v-card`, even when it sets a higher z-index value. To override this default behavior, apply the following usage: `<v-card style="overflow: initial; z-index: initial">`.
 
 ## Examples
 
 ### Props
 
-#### Outlined
+#### Variants
 
-A card with the **variant** prop set to `outlined` has zero elevation.
+The **variant** prop gives you easy access to several different card styles. Available variants are: **elevated**(default), **flat**, **tonal**, **outlined**, **text**, and **plain**.
 
-<example file="v-card/prop-outlined" />
+| Value        | Description                                                 |
+|--------------|-------------------------------------------------------------|
+| **elevated** | Elevates the card with a shadow                             |
+| **flat**     | Removes card shadow and border                              |
+| **tonal**    | Background color is a lowered opacity of the color          |
+| **outlined** | Applies a thin border and card has zero elevation           |
+| **text**     | Removes the background and removes shadow                   |
+| **plain**    | Removes the background and lowers the opacity until hovered |
+
+<ExamplesExample file="v-card/prop-variant" />
+
+#### Color
+
+Cards can be colored by using any of the builtin colors and contextual names using the **color** prop.
+
+<ExamplesExample file="v-card/prop-color" />
+
+#### Elevation
+
+The **elevation** property provides up to 24 levels of shadow depth. By default, cards rest at 2dp.
+
+<ExamplesExample file="v-card/prop-elevation" />
+
+#### Hover
+
+When using the **hover** prop, the cards will increase its elevation when the mouse is hovered over them.
+
+<ExamplesExample file="v-card/prop-hover" />
+
+#### Href
+
+The card becomes an anchor with the **href** prop.
+
+<ExamplesExample file="v-card/prop-href" />
+
+#### Link
+
+Add the **link** prop for the same style without adding an anchor.
+
+<ExamplesExample file="v-card/prop-link" />
+
+#### Disabled
+
+The **disabled** prop can be added in order to prevent a user from interacting with the card.
+
+<ExamplesExample file="v-card/prop-disabled" />
+
+#### Image
+
+Apply a specific background image to the Card.
+
+<ExamplesExample file="v-card/prop-image" />
+
+### Slots
+
+The `v-card` component provides slots that enable you to customize content created by its props or to add additional content.
+
+Slots give you greater control to customize the content of the `v-card` component while still taking advantage of the easy-to-use props.
+
+#### Avatar and icon
+
+You can use the **prepend-avatar**, **append-avatar**, **prepend-icon** and **append-icon** props or the **prepend** and **append** slots to place a [v-icon](/components/icons/) that automatically injects the designated icon.
+
+<ExamplesExample file="v-card/slot-prepend-append" />
 
 ### Misc
 
@@ -93,58 +164,58 @@ A card with the **variant** prop set to `outlined` has zero elevation.
 
 Using [v-expand-transition](/api/v-expand-transition/) and a `@click` event you can have a card that reveals more information once the button is clicked, activating the hidden card to be revealed.
 
-<example file="v-card/misc-card-reveal" />
+<ExamplesExample file="v-card/misc-card-reveal" />
 
 #### Content wrapping
 
 The `v-card` component is useful for wrapping content.
 
-<example file="v-card/misc-content-wrapping" />
+<ExamplesExample file="v-card/misc-content-wrapping" />
 
 #### Custom actions
 
 With a simple conditional, you can easily add supplementary text that is hidden until opened.
 
-<example file="v-card/misc-custom-actions" />
+<ExamplesExample file="v-card/misc-custom-actions" />
 
 #### Grids
 
-Using grids, you can create beautiful layouts.
+Using [grids](/components/grids/), you can create beautiful layouts.
 
-<example file="v-card/misc-grids" />
+<ExamplesExample file="v-card/misc-grids" />
 
 #### Horizontal cards
 
-TODO: better description
+You can also play with the card layout using [layout flex](/styles/flex/).
 
-<example file="v-card/misc-horizontal-cards" />
+<ExamplesExample file="v-card/misc-horizontal-cards" />
 
 #### Information card
 
 Cards are entry points to more detailed information. To keep things concise, ensure to limit the number of actions the user can take.
 
-<example file="v-card/misc-information-card" />
+<ExamplesExample file="v-card/misc-information-card" />
 
 #### Media with text
 
 Using the layout system, we can add custom text anywhere within the background.
 
-<example file="v-card/misc-media-with-text" />
+<ExamplesExample file="v-card/misc-media-with-text" />
 
 #### Twitter card
 
 The `v-card` component has multiple children components that help you build complex examples without having to worry about spacing. This example is comprised of the `v-card-title`, `v-card-text` and `v-card-actions` components.
 
-<example file="v-card/misc-twitter-card" />
+<ExamplesExample file="v-card/misc-twitter-card" />
 
 #### Weather card
 
 Using [v-list-items](/components/lists) and a [v-slider](/components/sliders), we are able to create a unique weather card. The list components ensure that we have consistent spacing and functionality while the slider component allows us to provide a useful interface of selection to the user.
 
-<example file="v-card/misc-weather-card" />
+<ExamplesExample file="v-card/misc-weather-card" />
 
 #### Loading
 
 Use an indeterminate [v-progress-linear](/components/progress-linear) to indicate a loading state.
 
-<example file="v-card/prop-loading" />
+<ExamplesExample file="v-card/prop-loading" />

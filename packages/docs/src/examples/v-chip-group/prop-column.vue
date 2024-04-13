@@ -2,9 +2,9 @@
   <v-row justify="center">
     <v-col
       cols="12"
-      sm="7"
-      md="6"
       lg="5"
+      md="6"
+      sm="7"
     >
       <v-sheet
         elevation="10"
@@ -43,6 +43,20 @@
     </v-col>
   </v-row>
 </template>
+
+<script setup>
+  const tags = [
+    'Work',
+    'Home Improvement',
+    'Vacation',
+    'Food',
+    'Drawers',
+    'Shopping',
+    'Art',
+    'Tech',
+    'Creative Writing',
+  ]
+</script>
 
 <script>
   export default {

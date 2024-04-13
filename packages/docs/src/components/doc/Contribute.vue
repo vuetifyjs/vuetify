@@ -3,21 +3,13 @@
     <span class="font-weight-bold me-1 text-medium-emphasis">
       {{ t('edit-this-page') }}
     </span>
-    <app-link :href="href">
+    <AppLink :href="href">
       {{ t('github') }}
-    </app-link>
+    </AppLink>
   </div>
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-  import { useRoute } from 'vue-router'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { getBranch } from '@/util/helpers'
-
   const { t } = useI18n()
   const route = useRoute()
 

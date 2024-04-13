@@ -1,8 +1,8 @@
 <template>
   <v-card
-    v-scroll.self="onScroll"
     class="overflow-y-auto"
     max-height="400"
+    v-scroll.self="onScroll"
   >
     <v-banner
       class="justify-center text-h5 font-weight-light"
@@ -29,6 +29,15 @@
     </v-card-text>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const scrollInvoked = ref(0)
+  function onScroll () {
+    scrollInvoked.value++
+  }
+</script>
 
 <script>
   export default {

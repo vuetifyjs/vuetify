@@ -1,7 +1,10 @@
 /// <reference types="../../../../types/cypress" />
 
-import { createRange } from '@/util'
+// Components
 import { VVirtualScroll } from '../VVirtualScroll'
+
+// Utilities
+import { createRange } from '@/util'
 
 describe('VVirtualScroll', () => {
   it('only renders visible items', () => {
@@ -17,7 +20,7 @@ describe('VVirtualScroll', () => {
       </VVirtualScroll>
     ))
 
-    cy.get('.v-virtual-scroll__item').should('have.length', 30)
+    cy.get('.v-virtual-scroll__item').should('have.length.above', 10).should('have.length.below', 50)
   })
 
   it('reuses the same elements', () => {

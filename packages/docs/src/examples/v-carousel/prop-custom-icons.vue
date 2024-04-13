@@ -1,15 +1,15 @@
 <template>
   <v-card
+    class="mx-auto"
     elevation="24"
     max-width="444"
-    class="mx-auto"
   >
     <v-carousel
       :continuous="false"
       :show-arrows="false"
-      hide-delimiter-background
       delimiter-icon="mdi-square"
       height="300"
+      hide-delimiter-background
     >
       <v-carousel-item
         v-for="(slide, i) in slides"
@@ -30,6 +30,23 @@
     </v-carousel>
   </v-card>
 </template>
+
+<script setup>
+  const colors = [
+    'green',
+    'secondary',
+    'yellow darken-4',
+    'red lighten-2',
+    'orange darken-1',
+  ]
+  const slides = [
+    'First',
+    'Second',
+    'Third',
+    'Fourth',
+    'Fifth',
+  ]
+</script>
 
 <script>
   export default {

@@ -36,11 +36,12 @@ export function useLoader (
 
 export function LoaderSlot (
   props: {
+    absolute?: boolean
     active: boolean
     name: string
     color?: string
   } & ExtractPropTypes<SlotsToProps<{
-    default: [LoaderSlotProps]
+    default: LoaderSlotProps
   }>>,
   { slots }: SetupContext,
 ) {
@@ -51,6 +52,7 @@ export function LoaderSlot (
         isActive: props.active,
       } as LoaderSlotProps) || (
         <VProgressLinear
+          absolute={ props.absolute }
           active={ props.active }
           color={ props.color }
           height="2"

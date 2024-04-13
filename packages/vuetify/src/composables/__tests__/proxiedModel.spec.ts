@@ -1,10 +1,10 @@
-// Utilities
-import { mount } from '@vue/test-utils'
-import { describe, expect, it } from '@jest/globals'
-import { defineComponent, h } from 'vue'
-
 // Composables
 import { useProxiedModel } from '../proxiedModel'
+
+// Utilities
+import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
+import { defineComponent, h } from 'vue'
 
 const TestComponent = defineComponent({
   props: {

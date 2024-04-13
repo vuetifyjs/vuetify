@@ -1,9 +1,9 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div>
       <v-file-input v-bind="props"></v-file-input>
@@ -14,14 +14,10 @@
 
       <v-checkbox v-model="disabled" label="Disabled"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-file-input'
   const model = ref('default')
   const options = ['outlined', 'underlined', 'solo', 'solo-filled', 'solo-inverted']

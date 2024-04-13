@@ -3,9 +3,9 @@
     <v-row>
       <v-col cols="12">
         <v-slider
-          inverse-label
           label="Inverse label"
           model-value="30"
+          inverse-label
         ></v-slider>
       </v-col>
     </v-row>

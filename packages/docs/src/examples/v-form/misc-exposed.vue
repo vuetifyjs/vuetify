@@ -1,5 +1,5 @@
 <template>
-  <v-sheet width="300" class="mx-auto">
+  <v-sheet class="mx-auto" width="300">
 
     <v-form ref="form">
       <v-text-field
@@ -27,8 +27,8 @@
 
       <div class="d-flex flex-column">
         <v-btn
-          color="success"
           class="mt-4"
+          color="success"
           block
           @click="validate"
         >
@@ -36,8 +36,8 @@
         </v-btn>
 
         <v-btn
-          color="error"
           class="mt-4"
+          color="error"
           block
           @click="reset"
         >
@@ -45,8 +45,8 @@
         </v-btn>
 
         <v-btn
-          color="warning"
           class="mt-4"
+          color="warning"
           block
           @click="resetValidation"
         >
@@ -57,10 +57,42 @@
   </v-sheet>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const form = ref()
+
+  const items = [
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+  ]
+
+  const name = ref('')
+  const nameRules = ref([
+    v => !!v || 'Name is required',
+    v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+  ])
+  const select = ref(null)
+  const checkbox = ref(false)
+
+  async function validate () {
+    const { valid } = await form.value.validate()
+
+    if (valid) alert('Form is valid')
+  }
+  function reset () {
+    form.value.reset()
+  }
+  function resetValidation () {
+    form.value.resetValidation()
+  }
+</script>
+
 <script>
   export default {
     data: () => ({
-      valid: true,
       name: '',
       nameRules: [
         v => !!v || 'Name is required',

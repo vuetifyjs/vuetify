@@ -95,6 +95,20 @@
   </v-container>
 </template>
 
+<script setup>
+  import { h } from 'vue'
+
+  const SheetFooter = {
+    setup (_, { slots }) {
+      return () => h('v-sheet', {
+        class: 'ma-auto px-4',
+        color: 'rgba(0, 0, 0, .36)',
+        height: 50,
+      }, slots.default())
+    },
+  }
+</script>
+
 <script>
   import { h } from 'vue'
 

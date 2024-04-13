@@ -3,20 +3,20 @@ import { VItem } from '../VItem'
 import { VItemGroup } from '../VItemGroup'
 
 // Utilities
-import { h } from 'vue'
-import { mount, type VueWrapper } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { createVuetify } from '@/framework'
 
 describe('VItemGroup', () => {
   const vuetify = createVuetify()
   const mountFunction = (options = {}) => {
-    return mount<any>(VItemGroup, {
+    return mount(VItemGroup, {
       ...options,
       global: {
         plugins: [vuetify],
       },
-    }) as VueWrapper<VItemGroup>
+    })
   }
 
   const defaultSlot = () => [
