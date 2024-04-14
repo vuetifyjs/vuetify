@@ -13,8 +13,8 @@ import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref } from 'vue'
-import { filterInputAttrs, genericComponent, only, propsFactory, useRender } from '@/util'
+import { computed, ref, watchEffect } from 'vue'
+import { clamp, filterInputAttrs, genericComponent, getDecimals, only, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -39,9 +39,18 @@ const makeVNumberInputProps = propsFactory({
   },
   inset: Boolean,
   hideInput: Boolean,
-  min: Number,
-  max: Number,
-  step: Number,
+  min: {
+    type: Number,
+    default: -Infinity,
+  },
+  max: {
+    type: Number,
+    default: Infinity,
+  },
+  step: {
+    type: Number,
+    default: 1,
+  },
 
   ...only(makeVInputProps(), [
     'density',
@@ -79,8 +88,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     ...makeVNumberInputProps(),
 
     modelValue: {
-      type: [Number, String],
-      default: 0,
+      type: Number,
+      default: undefined,
     },
   },
 
@@ -93,6 +102,24 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const { isFocused, focus, blur } = useFocus(props)
     const inputRef = ref<HTMLInputElement>()
 
+    const stepDecimals = computed(() => getDecimals(props.step))
+    const modelDecimals = computed(() => model.value != null ? getDecimals(model.value) : 0)
+
+    const canIncrease = computed(() => {
+      if (model.value == null) return true
+      return model.value + props.step <= props.max
+    })
+    const canDecrease = computed(() => {
+      if (model.value == null) return true
+      return model.value - props.step >= props.min
+    })
+
+    watchEffect(() => {
+      if (model.value != null && (model.value < props.min || model.value > props.max)) {
+        model.value = clamp(model.value, props.min, props.max)
+      }
+    })
+
     function onFocus () {
       if (!isFocused.value) focus()
     }
@@ -101,14 +128,22 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       return props.hideInput ? 'stacked' : props.controlVariant
     })
 
+    const incrementSlotProps = computed(() => ({ click: onClickUp }))
+
+    const decrementSlotProps = computed(() => ({ click: onClickDown }))
+
     function toggleUpDown (increment = true) {
-      if (increment) {
-        inputRef.value?.stepUp()
-      } else {
-        inputRef.value?.stepDown()
+      if (model.value == null) {
+        model.value = 0
+        return
       }
 
-      if (inputRef.value) model.value = parseInt(inputRef.value.value, 10)
+      const decimals = Math.max(modelDecimals.value, stepDecimals.value)
+      if (increment) {
+        if (canIncrease.value) model.value = +(((model.value + props.step).toFixed(decimals)))
+      } else {
+        if (canDecrease.value) model.value = +(((model.value - props.step).toFixed(decimals)))
+      }
     }
 
     function onClickUp () {
@@ -119,9 +154,35 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       toggleUpDown(false)
     }
 
-    const incrementSlotProps = computed(() => ({ click: onClickUp }))
+    function onKeydown (e: KeyboardEvent) {
+      if ([
+        'Enter',
+        'ArrowLeft',
+        'ArrowRight',
+        'Backspace',
+      ].includes(e.key)) return
 
-    const decrementSlotProps = computed(() => ({ click: onClickDown }))
+      if (['ArrowDown'].includes(e.key)) {
+        e.preventDefault()
+        toggleUpDown(false)
+        return
+      }
+      if (['ArrowUp'].includes(e.key)) {
+        e.preventDefault()
+        toggleUpDown()
+        return
+      }
+
+      // Only numbers, +, - & . are allowed
+      if (!/^[0-9\-+.]+$/.test(e.key)) {
+        e.preventDefault()
+      }
+    }
+
+    function onInput (e: Event) {
+      const el = e.target as HTMLInputElement
+      model.value = el.value ? +(el.value) : undefined
+    }
 
     useRender(() => {
       const fieldProps = filterFieldProps(props)
@@ -135,9 +196,11 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             {
               !slots.decrement ? (
                 <VBtn
+                  disabled={ !canDecrease.value }
                   flat
                   key="decrement-btn"
                   height={ defaultHeight }
+                  name="decrement-btn"
                   icon="$expand"
                   size="small"
                   onClick={ onClickDown }
@@ -166,9 +229,11 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             {
               !slots.increment ? (
                 <VBtn
+                  disabled={ !canIncrease.value }
                   flat
                   key="increment-btn"
                   height={ defaultHeight }
+                  name="increment-btn"
                   icon="$collapse"
                   onClick={ onClickUp }
                   size="small"
@@ -231,12 +296,11 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                   }) => (
                     <input
                       ref={ inputRef }
-                      type="number"
-                      v-model={ model.value }
+                      type="text"
+                      value={ model.value }
+                      onInput={ onInput }
+                      onKeydown={ onKeydown }
                       class={ fieldClass }
-                      max={ props.max }
-                      min={ props.min }
-                      step={ props.step }
                       onFocus={ onFocus }
                       onBlur={ blur }
                       { ...inputAttrs }
