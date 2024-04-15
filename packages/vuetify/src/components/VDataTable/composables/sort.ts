@@ -143,7 +143,7 @@ export function sortItems<T extends Record<string, any>> (
       if (customRawSorters?.[sortKey]) {
         const customResult = customRawSorters[sortKey](sortARaw, sortBRaw)
 
-        if (!customResult) continue
+        if (customResult == null) continue
 
         return customResult
       }
@@ -151,7 +151,7 @@ export function sortItems<T extends Record<string, any>> (
       if (customSorters?.[sortKey]) {
         const customResult = customSorters[sortKey](sortA, sortB)
 
-        if (!customResult) continue
+        if (customResult == null) continue
 
         return customResult
       }
