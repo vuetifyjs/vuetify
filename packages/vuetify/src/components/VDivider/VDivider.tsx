@@ -17,6 +17,7 @@ export const makeVDividerProps = propsFactory({
   color: String,
   inset: Boolean,
   length: [Number, String],
+  opacity: [Number, String],
   thickness: [Number, String],
   vertical: Boolean,
 
@@ -62,6 +63,7 @@ export const VDivider = genericComponent()({
           style={[
             dividerStyles.value,
             textColorStyles.value,
+            { '--v-border-opacity': props.opacity },
             props.style,
           ]}
           aria-orientation={
