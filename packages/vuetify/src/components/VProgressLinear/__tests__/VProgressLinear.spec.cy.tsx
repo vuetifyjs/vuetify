@@ -85,7 +85,7 @@ describe('VProgressLinear', () => {
         <VProgressLinear modelValue={ 25 } stream bufferValue={ 50 } />
       </CenteredGrid>
     ))
-      .get('.v-progress-linear__background')
+      .get('.v-progress-linear__buffer')
       .should('have.css', 'width', '50px')
   })
 
