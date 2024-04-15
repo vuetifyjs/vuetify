@@ -1,7 +1,10 @@
+@use '../../styles/tools'
 @use '../../styles/settings'
 @use './variables' as *
 
 .v-tooltip
+  @include tools.variant($tooltip-variants...)
+
   > .v-overlay__content
     background: $tooltip-background-color
     color: $tooltip-text-color

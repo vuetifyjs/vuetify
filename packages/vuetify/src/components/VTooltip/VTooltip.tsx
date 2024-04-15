@@ -9,6 +9,7 @@ import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
+import { makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
 import { computed, mergeProps, ref } from 'vue'
@@ -39,6 +40,8 @@ export const makeVTooltipProps = propsFactory({
     'absolute',
     'persistent',
   ]),
+
+  ...makeVariantProps({ variant: 'flat' } as const),
 }, 'VTooltip')
 
 export const VTooltip = genericComponent<OverlaySlots>()({
@@ -53,6 +56,7 @@ export const VTooltip = genericComponent<OverlaySlots>()({
   setup (props, { slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
+    const { colorClasses, colorStyles, variantClasses } = useVariant(props)
 
     const uid = getUid()
     const id = computed(() => props.id || `v-tooltip-${uid}`)
@@ -96,9 +100,20 @@ export const VTooltip = genericComponent<OverlaySlots>()({
             'v-tooltip',
             props.class,
           ]}
-          style={ props.style }
+          style={[
+            props.style,
+          ]}
           id={ id.value }
           { ...overlayProps }
+          contentClass={[
+            variantClasses.value,
+            colorClasses.value,
+          ]}
+          contentProps={{
+            style: [
+              colorStyles.value,
+            ],
+          }}
           v-model={ isActive.value }
           transition={ transition.value }
           absolute
