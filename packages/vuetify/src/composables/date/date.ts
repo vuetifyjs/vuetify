@@ -21,7 +21,7 @@ export interface DateInstance extends DateModule.InternalAdapter {
 export namespace DateModule {
   interface Adapter {}
 
-  export type InternalAdapter = {} extends Adapter ? DateAdapter<Date> : Adapter
+  export type InternalAdapter = {} extends Adapter ? DateAdapter : Adapter
 }
 
 export type InternalDateOptions = {
