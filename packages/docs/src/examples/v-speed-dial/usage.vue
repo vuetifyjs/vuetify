@@ -10,6 +10,7 @@
         <v-icon></v-icon>
 
         <v-speed-dial
+          activator="parent"
           v-bind="props"
         >
           <v-btn key="1" icon="$success"></v-btn>
@@ -41,7 +42,6 @@
   const transitions = ['scale-transition', 'slide-x-transition', 'slide-y-transition', 'slide-x-reverse-transition', 'slide-y-reverse-transition']
   const props = computed(() => {
     return {
-      activator: 'parent',
       location: location.value,
       transition: transition.value,
     }
