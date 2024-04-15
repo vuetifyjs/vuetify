@@ -215,5 +215,19 @@
     "name": "Yoones Khoshghadam",
     "team": "legends",
     "joined": "January 2023"
+  },
+  "kieuminhcanh": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/kieuminhcanh.png",
+    "discord": "kieuminhcanh",
+    "languages": [
+      "English",
+      "Vietnamese"
+    ],
+    "twitter": "kieuminhcanh",
+    "linkedin": "kieuminhcanh",
+    "location": "California",
+    "name": "Ken Kieu",
+    "team": "legends",
+    "joined": "April 2024"
   }
 }
