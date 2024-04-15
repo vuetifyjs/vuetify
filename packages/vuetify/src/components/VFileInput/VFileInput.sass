@@ -7,8 +7,14 @@
 .v-file-input
 
   &--hide.v-input
-    .v-field
+    .v-field,
+    .v-input__control,
+    .v-input__details
       display: none
+
+    .v-input__prepend
+      grid-area: control
+      margin: 0 auto
 
   &--chips.v-input--density-compact
     .v-field--variant-solo,
