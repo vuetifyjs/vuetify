@@ -64,15 +64,10 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
       href: toRef(props, 'href'),
     }
   }
-  // vue-router useLink `to` prop needs to be reactive and useLink will crash if undefined
-  const linkProps = computed(() => ({
-    ...props,
-    to: toRef(() => props.to || {}),
-  }))
 
-  const routerLink = RouterLink.useLink(linkProps.value as UseLinkOptions)
-  // Actual link needs to be undefined when to prop is not used
-  const link = computed(() => props.to ? routerLink : undefined)
+  // vue-router useLink `to` prop needs to be reactive and useLink will crash if undefined
+  const link = computed(() => props.to ? RouterLink.useLink(props as UseLinkOptions) : undefined)
+
   const route = useRoute()
 
   return {
