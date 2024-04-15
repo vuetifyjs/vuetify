@@ -125,6 +125,7 @@ export function sortItems<T extends Record<string, any>> (
 
   return [...items].sort((a, b) => {
     for (let i = 0; i < sortByItems.length; i++) {
+      let hasCustomResult = false
       const sortKey = sortByItems[i].key
       const sortOrder = sortByItems[i].order ?? 'asc'
 
@@ -144,17 +145,19 @@ export function sortItems<T extends Record<string, any>> (
         const customResult = customRawSorters[sortKey](sortARaw, sortBRaw)
 
         if (customResult == null) continue
-
-        return customResult
+        hasCustomResult = true
+        if (customResult) return customResult
       }
 
       if (customSorters?.[sortKey]) {
         const customResult = customSorters[sortKey](sortA, sortB)
 
         if (customResult == null) continue
-
-        return customResult
+        hasCustomResult = true
+        if (customResult) return customResult
       }
+
+      if (hasCustomResult) continue
 
       // Dates should be compared numerically
       if (sortA instanceof Date && sortB instanceof Date) {
