@@ -10,3 +10,13 @@ $tooltip-transition-enter-duration: 150ms !default;
 $tooltip-transition-leave-duration: 75ms !default;
 $tooltip-padding: 5px 16px !default;
 $tooltip-overflow-wrap: break-word !default;
+$tooltip-plain-opacity: 1;
+$tooltip-elevation: 1 !default;
+
+$tooltip-variants: (
+  $tooltip-background-color,
+  $tooltip-text-color,
+  $tooltip-elevation,
+  $tooltip-plain-opacity,
+  'v-chip'
+) !default;
