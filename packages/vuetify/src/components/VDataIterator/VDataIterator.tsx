@@ -118,7 +118,7 @@ export const VDataIterator = genericComponent<new <T> (
     const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
 
-    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups)
+    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, { transform: item => item.raw })
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
 
     const itemsLength = computed(() => flatItems.value.length)
