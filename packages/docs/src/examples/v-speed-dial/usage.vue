@@ -13,10 +13,10 @@
           activator="parent"
           v-bind="props"
         >
-          <v-btn key="1" icon="$success"></v-btn>
-          <v-btn key="2" icon="$info"></v-btn>
-          <v-btn key="3" icon="$warning"></v-btn>
-          <v-btn key="4" icon="$error"></v-btn>
+          <v-btn key="1" color="surface-variant" icon="$success"></v-btn>
+          <v-btn key="2" color="surface-variant" icon="$info"></v-btn>
+          <v-btn key="3" color="surface-variant" icon="$warning"></v-btn>
+          <v-btn key="4" color="surface-variant" icon="$error"></v-btn>
         </v-speed-dial>
       </v-fab>
     </v-sheet>
