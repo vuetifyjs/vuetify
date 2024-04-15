@@ -51,6 +51,7 @@ export const makeVFileInputProps = propsFactory({
     type: String,
     default: '$vuetify.fileInput.counter',
   },
+  hideInput: Boolean,
   multiple: Boolean,
   showSize: {
     type: [Boolean, Number, String] as PropType<boolean | 1000 | 1024>,
@@ -178,6 +179,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
             'v-file-input',
             {
               'v-file-input--chips': !!props.chips,
+              'v-file-input--hide': props.hideInput,
               'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
             props.class,
@@ -247,7 +249,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                       />
 
                       <div class={ fieldClass }>
-                        { !!model.value?.length && (
+                        { !!model.value?.length && !props.hideInput && (
                           slots.selection ? slots.selection({
                             fileNames: fileNames.value,
                             totalBytes: totalBytes.value,
