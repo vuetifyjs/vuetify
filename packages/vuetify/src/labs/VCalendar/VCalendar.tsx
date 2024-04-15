@@ -29,11 +29,11 @@ export const makeVCalendarProps = propsFactory({
 export type VCalendarSlots = {
   allDayContent: { day?: CalendarDay, events?: Array<any> }
   allDayEvent: { day?: CalendarDay, event?: Record<string, unknown> }
-  content: { day?: CalendarDay, events?: Array<any> }
+  dayBody: { day?: CalendarDay, events?: Array<any> }
   day: { day?: CalendarDay, events?: Array<any> }
-  event: { day?: CalendarDay, event?: Record<string, unknown> }
+  event: { day?: CalendarDay, allDay: Boolean, event?: Record<string, unknown> }
   header: { title: string }
-  event: { day?: Object, allDay: boolean, event: Record<string, unknown> }
+  intervalDay: { day?: CalendarDay, dayIndex: Number, events?: Array<any> }
 }
 
 export const VCalendar = genericComponent<VCalendarSlots>()({
@@ -154,28 +154,33 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                     [
                       !props.hideWeekNumber ? <div class="v-calendar-month__weeknumber">{ weekNumbers.value[wi] }</div> : '',
                       week.map(day => (
-                        <slot
-                          name="day"
-                          day={ day }
-                          events={ props.events?.filter(e => adapter.isSameDay(day.date, e.start) || adapter.isSameDay(day.date, e.end)) }
-                          v-slots={{
-                            event: slots.event,
-                          }}
-                        ></VCalendarMonthDay>
-                      )),
+                        slots.day ? slots.day({
+                          day,
+                          events: props.events?.filter(e => adapter.isSameDay(day.date, e.start) || adapter.isSameDay(day.date, e.end)),
+                        })
+                        : (
+                          <VCalendarMonthDay
+                            key={ day.date.getTime() }
+                            { ...calendarDayProps }
+                            { ...getPrefixedEventHandlers(attrs, ':day', () => ({ day })) }
+                            day={ day }
+                            events={ props.events?.filter(e => adapter.isSameDay(day.date, e.start) || adapter.isSameDay(day.date, e.end)) }
+                          />
+                        ))),
                     ]
-                  ))}
+                  ))
+                }
               </div>
             )}
 
             { props.viewMode === 'week' && (
               daysInWeek.value.map((day, i) =>
-                slots.intervalDay?.({
+                slots.intervalDay ? slots.intervalDay?.({
                   ...calendarDayProps,
                   day,
                   dayIndex: i,
                   events: props.events?.filter(e => adapter.isSameDay(e.start, day.date) || adapter.isSameDay(e.end, day.date)),
-                }) ?? (
+                }) : (
                   <VCalendarDay
                     { ...calendarDayProps }
                     day={ day }
@@ -187,18 +192,14 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
             }
 
             { props.viewMode === 'day' && (
-              <slot
-                name="intervalDay"
-                { ...calendarDayProps }
-                day={ genDays([displayValue.value as Date], adapter.date() as Date)[0] }
-                dayIndex={ 0 }
-                events={
-                  props.events?.filter(e =>
-                    adapter.isSameDay(e.start, genDays([displayValue.value as Date], adapter.date() as Date)[0].date) ||
-                    adapter.isSameDay(e.end, genDays([displayValue.value as Date], adapter.date() as Date)[0].date)
-                  )
-                }
-              >
+              slots.intervalDay ? slots.intervalDay({
+                day: genDays([displayValue.value as Date], adapter.date() as Date)[0],
+                dayIndex: 0,
+                events: props.events?.filter(e =>
+                  adapter.isSameDay(e.start, genDays([displayValue.value as Date], adapter.date() as Date)[0].date) ||
+                  adapter.isSameDay(e.end, genDays([displayValue.value as Date], adapter.date() as Date)[0].date)
+                ),
+              }) : (
                 <VCalendarDay
                   { ...calendarDayProps }
                   day={ genDays([model.value[0] as Date], adapter.date() as Date)[0] }

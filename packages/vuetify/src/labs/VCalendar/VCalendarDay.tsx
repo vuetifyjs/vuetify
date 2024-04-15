@@ -14,7 +14,7 @@ import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } f
 
 export type VCalendarDaySlots = {
   default: never
-  interval: any
+  interval: { }
 }
 
 export const makeVCalendarDayProps = propsFactory({
@@ -27,7 +27,7 @@ export const makeVCalendarDayProps = propsFactory({
   ...makeVCalendarIntervalProps(),
 }, 'VCalendarDay')
 
-export const VCalendarDay = genericComponent< VCalendarDaySlots >()({
+export const VCalendarDay = genericComponent<VCalendarDaySlots>()({
   name: 'VCalendarDay',
 
   props: makeVCalendarDayProps(),
