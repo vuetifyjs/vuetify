@@ -58,6 +58,7 @@
   "components/chip-groups": ["VChip", "VChipGroup"],
   "components/chips": ["VChip", "VChipGroup"],
   "components/color-pickers": ["VColorPicker"],
+  "components/confirm-edit": ["VConfirmEdit"],
   "components/combobox": ["VCombobox"],
   "components/data-iterators": ["VDataIterator"],
   "components/data-tables": [

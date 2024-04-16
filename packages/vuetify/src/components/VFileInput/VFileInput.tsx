@@ -259,8 +259,8 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                             <VChip
                               key={ text }
                               size="small"
-                              color={ props.color }
-                            >{ text }</VChip>
+                              text={ text }
+                            />
                           ))
                           : fileNames.value.join(', ')
                         )}

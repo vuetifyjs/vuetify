@@ -13,7 +13,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { computed, mergeProps, nextTick, ref, watch } from 'vue'
+import { mergeProps, nextTick, ref, watch } from 'vue'
 import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
@@ -89,24 +89,28 @@ export const VDialog = genericComponent<OverlaySlots>()({
       }, { immediate: true })
     }
 
+    function onAfterEnter () {
+      if (overlay.value?.contentEl && !overlay.value.contentEl.contains(document.activeElement)) {
+        overlay.value.contentEl.focus({ preventScroll: true })
+      }
+    }
+
     watch(isActive, async val => {
-      await nextTick()
-      if (val) {
-        overlay.value!.contentEl?.focus({ preventScroll: true })
-      } else {
+      if (!val) {
+        await nextTick()
         overlay.value!.activatorEl?.focus({ preventScroll: true })
       }
     })
 
-    const activatorProps = computed(() =>
-      mergeProps({
+    useRender(() => {
+      const overlayProps = VOverlay.filterProps(props)
+      const activatorProps = mergeProps({
         'aria-haspopup': 'dialog',
         'aria-expanded': String(isActive.value),
       }, props.activatorProps)
-    )
-
-    useRender(() => {
-      const overlayProps = VOverlay.filterProps(props)
+      const contentProps = mergeProps({
+        tabindex: -1,
+      }, props.contentProps)
 
       return (
         <VOverlay
@@ -123,8 +127,10 @@ export const VDialog = genericComponent<OverlaySlots>()({
           { ...overlayProps }
           v-model={ isActive.value }
           aria-modal="true"
-          activatorProps={ activatorProps.value }
+          activatorProps={ activatorProps }
+          contentProps={ contentProps }
           role="dialog"
+          onAfterEnter={ onAfterEnter }
           { ...scopeId }
         >
           {{

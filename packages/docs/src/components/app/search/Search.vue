@@ -42,6 +42,7 @@
         class="flex-grow-0 mb-4"
         variant="filled"
         autofocus
+        @focus="$event.target.select()"
       >
         <template #append-inner>
           <AppBtn size="small" border>

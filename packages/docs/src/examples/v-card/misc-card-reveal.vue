@@ -5,45 +5,48 @@
   >
     <v-card-text>
       <div>Word of the Day</div>
-      <p class="text-h4 text--primary">
-        el·ee·mos·y·nar·y
-      </p>
+
+      <p class="text-h4 font-weight-black">el·ee·mos·y·nar·y</p>
+
       <p>adjective</p>
-      <div class="text--primary">
+
+      <div class="text-medium-emphasis">
         relating to or dependent on charity; charitable; charitable donations. Pertaining to alms.<br>
         "an eleemosynary educational institution."
       </div>
     </v-card-text>
+
     <v-card-actions>
       <v-btn
         color="teal-accent-4"
+        text="Learn More"
         variant="text"
         @click="reveal = true"
-      >
-        Learn More
-      </v-btn>
+      ></v-btn>
     </v-card-actions>
 
     <v-expand-transition>
       <v-card
         v-if="reveal"
-        class="v-card--reveal"
-        style="height: 100%;"
+        class="position-absolute w-100"
+        height="100%"
+        style="bottom: 0;"
       >
         <v-card-text class="pb-0">
-          <p class="text-h4 text--primary">
-            Origin
+          <p class="text-h4">Origin</p>
+
+          <p class="text-medium-emphasis">
+            late 16th century (as a noun denoting a place where alms were distributed): from medieval Latin eleemosynarius, from late Latin eleemosyna ‘alms’, from Greek eleēmosunē ‘compassion’
           </p>
-          <p>late 16th century (as a noun denoting a place where alms were distributed): from medieval Latin eleemosynarius, from late Latin eleemosyna ‘alms’, from Greek eleēmosunē ‘compassion’ </p>
         </v-card-text>
+
         <v-card-actions class="pt-0">
           <v-btn
             color="teal-accent-4"
+            text="Close"
             variant="text"
             @click="reveal = false"
-          >
-            Close
-          </v-btn>
+          ></v-btn>
         </v-card-actions>
       </v-card>
     </v-expand-transition>
@@ -63,12 +66,3 @@
     }),
   }
 </script>
-
-<style>
-.v-card--reveal {
-  bottom: 0;
-  opacity: 1 !important;
-  position: absolute;
-  width: 100%;
-}
-</style>

@@ -6,6 +6,8 @@
     flat
   >
     <template #prepend>
+      <div class="px-1" />
+
       <AppBtn
         v-if="route.meta.layout !== 'home' && mdAndDown"
         icon="mdi-menu"
