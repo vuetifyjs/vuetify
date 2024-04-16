@@ -67,7 +67,7 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
   // vue-router useLink `to` prop needs to be reactive and useLink will crash if undefined
   const linkProps = computed(() => ({
     ...props,
-    to: toRef(() => props.to || {}),
+    to: toRef(() => props.to || ''),
   }))
 
   const routerLink = RouterLink.useLink(linkProps.value as UseLinkOptions)
