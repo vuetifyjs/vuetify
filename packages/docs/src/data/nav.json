@@ -68,7 +68,9 @@
       "elevation",
       "flex",
       "float",
+      "opacity",
       "overflow",
+      "position",
       "sizing",
       "spacing",
       "text-and-typography"
