@@ -97,7 +97,7 @@ export function useTouch ({
       offset.value = getOffset(isHorizontal.value ? touchX : touchY, isActive.value)
       dragProgress.value = getProgress(isHorizontal.value ? touchX : touchY)
 
-      maybeDragging = offset.value > -100 && offset.value < 100
+      maybeDragging = offset.value > -20 && offset.value < 80
       endTouch(e)
       addMovement(e)
     }
