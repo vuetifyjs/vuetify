@@ -83,12 +83,12 @@ export function useTouch ({ isActive, isTemporary, width, touchless, position }:
       inElement ||
       (isActive.value && isTemporary.value)
     ) {
-      maybeDragging = true
       start = [touchX, touchY]
 
       offset.value = getOffset(isHorizontal.value ? touchX : touchY, isActive.value)
       dragProgress.value = getProgress(isHorizontal.value ? touchX : touchY)
 
+      maybeDragging = offset.value > -30 && offset.value < 30
       endTouch(e)
       addMovement(e)
     }
