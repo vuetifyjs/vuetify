@@ -228,6 +228,10 @@
         "subfolder": "components"
       },
       {
+        "title": "confirm-edit",
+        "subfolder": "components"
+      },
+      {
         "title": "empty-states",
         "subfolder": "components"
       },

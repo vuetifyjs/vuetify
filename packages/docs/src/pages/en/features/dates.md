@@ -29,19 +29,6 @@ This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-no
 
 The date composable provides a shared architecture that is used by components such as date picker and calendar. The default implementation is built using the native Date object, but can be swapped out for another date library. If no other date adapter is given, the default Vuetify one is used.
 
-The following example demonstrates explicitly importing the Vuetify date adapter and passing it to the date options.
-
-```js { resource="src/plugins/vuetify.js" }
-import { createVuetify } from 'vuetify'
-import { VuetifyDateAdapter } from 'vuetify/date/adapters/vuetify'
-
-export default createVuetify({
-  date: {
-    adapter: VuetifyDateAdapter,
-  },
-})
-```
-
 Within your application, import the **useDate** function and use it to access the date composable.
 
 ```html { resource="src/views/Date.vue" }
@@ -124,11 +111,40 @@ The built-in date adapter implements a subset of functionality from the [DateIOF
 import { createVuetify } from 'vuetify'
 import LuxonAdapter from "@date-io/luxon"
 
-const luxon = new LuxonAdapter({ locale: "sv" });
-
 export default createVuetify({
   date: {
-    adapter: luxon,
+    adapter: LuxonAdapter,
+  },
+})
+```
+
+For TypeScript users, an interface is also exposed for [module augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation):
+
+```ts { resource="src/plugins/vuetify.js" }
+export default createVuetify({
+  ...
+})
+
+declare module 'vuetify' {
+  namespace DateModule {
+    interface Adapter extends LuxonAdapter {}
+  }
+}
+```
+
+### Localization
+
+The date composable will use the current vuetify [locale](/features/internationalization/) for formatting and getting the first day of the week. These do not always line up perfectly, so a list of aliases can be provided to map language codes to locales. The following configuration will look up `en` keys for translations, but use `en-GB` for date formatting:
+
+```js { resource="src/plugins/vuetify.js" }
+export default createVuetify({
+  locale: {
+    locale: 'en',
+  },
+  date: {
+    locale: {
+      en: 'en-GB',
+    },
   },
 })
 ```

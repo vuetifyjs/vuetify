@@ -130,6 +130,42 @@
     "team": "core",
     "joined": "Mar 2023"
   },
+  "userquin": {
+    "discord": "userquin",
+    "focus": [
+      "[vuetifyjs/create](https://github.com/vuetifyjs/create)",
+      "[Nuxt](https://github.com/userquin/vuetify-nuxt-module)"
+    ],
+    "languages": [
+      "Spanish",
+      "English"
+    ],
+    "location": "Madrid, Spain",
+    "name": "Joaquín Sánchez",
+    "twitter": "userquin",
+    "team": "core",
+    "joined": "Mar 2024"
+  },
+  "kieuminhcanh": {
+    "discord": "kieuminhcanh",
+    "focus": [
+      "[vuetifyjs/studio](https://github.com/vuetifyjs/studio)"
+    ],
+    "funding": [
+      "[GitHub Sponsors](https://github.com/sponsors/kieuminhcanh)",
+      "[Patreon](https://patreon.com/kieuminhcanh)",
+      "[Open Collective](https://opencollective.com/vuetify)"
+    ],
+    "languages": [
+      "English",
+      "Vietnamese"
+    ],
+    "location": "California, US",
+    "name": "Ken Kieu",
+    "team": "core",
+    "twitter": "kieuminhcanh",
+    "joined": "April 2024"
+  },
   "jacekkarczmarczyk": {
     "discord": "jacek#3542",
     "languages": [

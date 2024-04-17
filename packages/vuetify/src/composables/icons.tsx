@@ -3,7 +3,7 @@ import { aliases, mdi } from '@/iconsets/mdi'
 
 // Utilities
 import { computed, inject, unref } from 'vue'
-import { defineComponent, genericComponent, mergeDeep, propsFactory } from '@/util'
+import { consoleWarn, defineComponent, genericComponent, mergeDeep, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, JSXComponent, PropType, Ref } from 'vue'
@@ -227,7 +227,7 @@ export const useIcon = (props: Ref<IconValue | undefined>) => {
       }
     }
 
-    if (!icon) throw new Error(`Could not find aliased icon "${iconAlias}"`)
+    if (!icon) consoleWarn(`Could not find aliased icon "${iconAlias}"`)
 
     if (Array.isArray(icon)) {
       return {

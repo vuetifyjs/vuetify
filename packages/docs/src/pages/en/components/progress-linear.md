@@ -115,3 +115,15 @@ The `v-progress-linear` component is good for communicating to the user that the
 Using the **absolute** prop we are able to position the `v-progress-linear` component at the bottom of the `v-toolbar`. We also use the **active** prop which allows us to control the visibility of the progress.
 
 <ExamplesExample file="v-progress-linear/misc-toolbar-loader" />
+
+#### Buffer color and opacity
+
+::: success
+
+This feature was introduced in [v3.6.0 (Nebula)](/getting-started/release-notes/?version=v3.6.0)
+
+:::
+
+The buffer color and opacity can be controlled using the **buffer-color** and **buffer-opacity** props. This enables you to make multi colored progress bars.
+
+<ExamplesExample file="v-progress-linear/misc-buffer-color" />

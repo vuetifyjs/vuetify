@@ -302,7 +302,7 @@ export const VSelect = genericComponent<new <
       }
     }
 
-    watch(menu, () => {
+    watch([menu, model], () => {
       if (!props.hideSelected && menu.value && model.value.length) {
         const index = displayItems.value.findIndex(
           item => model.value.some(s => props.valueComparator(s.value, item.value))

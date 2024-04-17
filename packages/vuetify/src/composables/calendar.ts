@@ -148,7 +148,7 @@ export function useCalendar (props: CalendarProps) {
   }
 
   const daysInWeek = computed(() => {
-    const lastDay = adapter.startOfWeek(model.value)
+    const lastDay = adapter.startOfWeek(displayValue.value)
     const week = []
     for (let day = 0; day <= 6; day++) {
       week.push(adapter.addDays(lastDay, day))

@@ -13,13 +13,15 @@
     @include tools.rounded($progress-linear-border-radius)
 
 // Elements
-.v-progress-linear__background
+.v-progress-linear__background,
+.v-progress-linear__buffer
   background: $progress-linear-background
   bottom: 0
   left: 0
   opacity: $progress-linear-background-opacity
   position: absolute
   top: 0
+  width: 100%
   transition-property: width, left, right
   transition: inherit
 

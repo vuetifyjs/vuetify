@@ -30,7 +30,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, withDirectives } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -89,8 +89,6 @@ export const makeVBtnProps = propsFactory({
 
 export const VBtn = genericComponent<VBtnSlots>()({
   name: 'VBtn',
-
-  directives: { Ripple },
 
   props: makeVBtnProps(),
 
@@ -172,7 +170,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
       const hasAppend = !!(props.appendIcon || slots.append)
       const hasIcon = !!(props.icon && props.icon !== true)
 
-      return (
+      return withDirectives(
         <Tag
           type={ Tag === 'a' ? undefined : 'button' }
           class={[
@@ -212,11 +210,6 @@ export const VBtn = genericComponent<VBtnSlots>()({
           disabled={ isDisabled.value || undefined }
           href={ link.href.value }
           tabindex={ props.loading ? -1 : undefined }
-          v-ripple={[
-            !isDisabled.value && props.ripple,
-            null,
-            props.icon ? ['center'] : null,
-          ]}
           onClick={ onClick }
           value={ valueAttr.value }
         >
@@ -298,7 +291,13 @@ export const VBtn = genericComponent<VBtnSlots>()({
               )}
             </span>
           )}
-        </Tag>
+        </Tag>,
+        [[
+          Ripple,
+          !isDisabled.value && !!props.ripple,
+          '',
+          { center: !!props.icon },
+        ]]
       )
     })
 

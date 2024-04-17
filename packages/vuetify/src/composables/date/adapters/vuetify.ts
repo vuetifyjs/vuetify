@@ -200,17 +200,18 @@ function getWeekArray (date: Date, locale: string) {
   return weeks
 }
 
-function startOfWeek (date: Date) {
+function startOfWeek (date: Date, locale: string) {
   const d = new Date(date)
-  while (d.getDay() !== 0) {
+  while (d.getDay() !== (firstDay[locale.slice(-2).toUpperCase()] ?? 0)) {
     d.setDate(d.getDate() - 1)
   }
   return d
 }
 
-function endOfWeek (date: Date) {
+function endOfWeek (date: Date, locale: string) {
   const d = new Date(date)
-  while (d.getDay() !== 6) {
+  const lastDay = ((firstDay[locale.slice(-2).toUpperCase()] ?? 0) + 6) % 7
+  while (d.getDay() !== lastDay) {
     d.setDate(d.getDate() + 1)
   }
   return d
@@ -604,11 +605,11 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
   }
 
   startOfWeek (date: Date): Date {
-    return startOfWeek(date)
+    return startOfWeek(date, this.locale)
   }
 
   endOfWeek (date: Date): Date {
-    return endOfWeek(date)
+    return endOfWeek(date, this.locale)
   }
 
   startOfMonth (date: Date) {
