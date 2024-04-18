@@ -1,73 +1,74 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-.v-badge
-  display: inline-block
-  line-height: $badge-line-height
+@include tools.layer('components')
+  .v-badge
+    display: inline-block
+    line-height: $badge-line-height
 
-.v-badge__badge
-  align-items: center
-  display: inline-flex
-  border-radius: $badge-border-radius
-  font-size: $badge-font-size
-  font-weight: $badge-font-weight
-  height: $badge-height
-  justify-content: center
-  min-width: $badge-min-width
-  padding: $badge-padding
-  pointer-events: auto
-  position: absolute
-  text-align: center
-  text-indent: 0
-  transition: $badge-transition
-  white-space: nowrap
-
-  @include tools.theme($badge-theme...)
-
-  .v-badge--bordered &
-    &::after
-      border-radius: inherit
-      border-style: $badge-border-style
-      border-width: $badge-border-width
-      bottom: 0
-      color: $badge-border-color
-      content: ''
-      left: 0
-      position: absolute
-      right: 0
-      top: 0
-      transform: $badge-border-transform
-
-  .v-badge--dot &
-    border-radius: $badge-dot-border-radius
-    height: $badge-dot-height
-    min-width: 0
-    padding: 0
-    width: $badge-dot-width
-
-    &::after
-      border-width: $badge-dot-border-width
-
-  .v-badge--inline &
-    position: relative
-    vertical-align: $badge-inline-vertical-align
-
-  .v-icon
-    color: inherit
-    font-size: $badge-font-size
-    margin: $badge-icon-margin
-
-  img,
-  .v-img
-    height: 100%
-    width: 100%
-
-.v-badge__wrapper
-  display: flex
-  position: relative
-
-  .v-badge--inline &
+  .v-badge__badge
     align-items: center
     display: inline-flex
+    border-radius: $badge-border-radius
+    font-size: $badge-font-size
+    font-weight: $badge-font-weight
+    height: $badge-height
     justify-content: center
-    margin: $badge-wrapper-margin
+    min-width: $badge-min-width
+    padding: $badge-padding
+    pointer-events: auto
+    position: absolute
+    text-align: center
+    text-indent: 0
+    transition: $badge-transition
+    white-space: nowrap
+
+    @include tools.theme($badge-theme...)
+
+    .v-badge--bordered &
+      &::after
+        border-radius: inherit
+        border-style: $badge-border-style
+        border-width: $badge-border-width
+        bottom: 0
+        color: $badge-border-color
+        content: ''
+        left: 0
+        position: absolute
+        right: 0
+        top: 0
+        transform: $badge-border-transform
+
+    .v-badge--dot &
+      border-radius: $badge-dot-border-radius
+      height: $badge-dot-height
+      min-width: 0
+      padding: 0
+      width: $badge-dot-width
+
+      &::after
+        border-width: $badge-dot-border-width
+
+    .v-badge--inline &
+      position: relative
+      vertical-align: $badge-inline-vertical-align
+
+    .v-icon
+      color: inherit
+      font-size: $badge-font-size
+      margin: $badge-icon-margin
+
+    img,
+    .v-img
+      height: 100%
+      width: 100%
+
+  .v-badge__wrapper
+    display: flex
+    position: relative
+
+    .v-badge--inline &
+      align-items: center
+      display: inline-flex
+      justify-content: center
+      margin: $badge-wrapper-margin

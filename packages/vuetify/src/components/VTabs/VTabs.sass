@@ -4,51 +4,52 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-.v-tabs
-  display: flex
-  height: var(--v-tabs-height)
+@include tools.layer('components')
+  .v-tabs
+    display: flex
+    height: var(--v-tabs-height)
 
-  @at-root
-    @include tools.density('v-tabs', $tabs-density) using ($modifier)
-      --v-tabs-height: #{$tabs-height + $modifier}
+    @at-root
+      @include tools.density('v-tabs', $tabs-density) using ($modifier)
+        --v-tabs-height: #{$tabs-height + $modifier}
 
-      &.v-tabs--stacked
-        --v-tabs-height: #{$tabs-stacked-height + $modifier}
+        &.v-tabs--stacked
+          --v-tabs-height: #{$tabs-stacked-height + $modifier}
 
-  &.v-slide-group--vertical
-    height: auto
-    flex: none
-    --v-tabs-height: #{$tabs-height}
+    &.v-slide-group--vertical
+      height: auto
+      flex: none
+      --v-tabs-height: #{$tabs-height}
 
-.v-tabs--align-tabs-title:not(.v-slide-group--has-affixes)
-  .v-tab:first-child
-    margin-inline-start: $tab-align-tabs-title-margin
-
-.v-tabs--fixed-tabs,
-.v-tabs--align-tabs-center
-  .v-slide-group__content > *:last-child
-    margin-inline-end: auto
-
-  .v-slide-group__content > *:first-child
-    margin-inline-start: auto
-
-.v-tabs--grow
-  flex-grow: 1
-
-  .v-tab
-    flex: 1 0 auto
-    max-width: none
-
-.v-tabs--align-tabs-end
-  .v-tab:first-child
-    margin-inline-start: auto
-
-  .v-tab:last-child
-    margin-inline-end: 0
-
-@media #{map-get(settings.$display-breakpoints, 'md-and-down')}
-  .v-tabs.v-slide-group--is-overflowing.v-slide-group--horizontal:not(.v-slide-group--has-affixes)
+  .v-tabs--align-tabs-title:not(.v-slide-group--has-affixes)
     .v-tab:first-child
-      margin-inline-start: 52px
+      margin-inline-start: $tab-align-tabs-title-margin
+
+  .v-tabs--fixed-tabs,
+  .v-tabs--align-tabs-center
+    .v-slide-group__content > *:last-child
+      margin-inline-end: auto
+
+    .v-slide-group__content > *:first-child
+      margin-inline-start: auto
+
+  .v-tabs--grow
+    flex-grow: 1
+
+    .v-tab
+      flex: 1 0 auto
+      max-width: none
+
+  .v-tabs--align-tabs-end
+    .v-tab:first-child
+      margin-inline-start: auto
+
     .v-tab:last-child
-      margin-inline-end: 52px
+      margin-inline-end: 0
+
+  @media #{map-get(settings.$display-breakpoints, 'md-and-down')}
+    .v-tabs.v-slide-group--is-overflowing.v-slide-group--horizontal:not(.v-slide-group--has-affixes)
+      .v-tab:first-child
+        margin-inline-start: 52px
+      .v-tab:last-child
+        margin-inline-end: 52px
