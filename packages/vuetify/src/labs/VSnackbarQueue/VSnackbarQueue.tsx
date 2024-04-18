@@ -1,10 +1,11 @@
 // Components
+import { VBtn } from '@/components/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { makeVSnackbarProps, VSnackbar } from '@/components/VSnackbar/VSnackbar'
 
 // Utilities
 import { nextTick, shallowRef, watch } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -30,6 +31,18 @@ export type SnackbarMessage = Omit<
   | 'openOnHover'
 >
 
+export const makeVSnackbarQueueProps = propsFactory({
+  // TODO: Port this to Snackbar on dev
+  closable: Boolean,
+
+  ...makeVSnackbarProps(),
+
+  modelValue: {
+    type: Array as PropType<readonly (string | SnackbarMessage)[]>,
+    default: () => [],
+  },
+}, 'VSnackbarQueue')
+
 export const VSnackbarQueue = genericComponent<new <T extends readonly (string | SnackbarMessage)[]> (
   props: {
     modelValue?: T
@@ -39,14 +52,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly (string |
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSnackbarQueue',
 
-  props: {
-    ...makeVSnackbarProps(),
-
-    modelValue: {
-      type: Array as PropType<readonly (string | SnackbarMessage)[]>,
-      default: () => [],
-    },
-  },
+  props: makeVSnackbarQueueProps(),
 
   emits: {
     'update:modelValue': (val: (string | SnackbarMessage)[]) => true,
@@ -82,30 +88,47 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly (string |
         isActive.value = true
       })
     }
+    function onClickDismiss () {
+      isActive.value = false
+    }
 
-    useRender(() => (
-      <>
-        { isVisible.value && !!current.value && (
-          slots.default
-            ? (
-              <VDefaultsProvider defaults={{ VSnackbar: current.value }}>
-                { slots.default({ item: current.value }) }
-              </VDefaultsProvider>
-            ) : (
-              <VSnackbar
-                { ...current.value }
-                v-model={ isActive.value }
-                onAfterLeave={ onAfterLeave }
-              >
-                {{
-                  text: slots.text ? () => slots.text?.({ item: current.value! }) : undefined,
-                  actions: slots.actions ? () => slots.actions?.({ item: current.value! }) : undefined,
-                }}
-              </VSnackbar>
-            )
-        )}
-      </>
-    ))
+    useRender(() => {
+      const hasActions = !!(props.closable || slots.actions)
+
+      return (
+        <>
+          { isVisible.value && !!current.value && (
+            slots.default
+              ? (
+                <VDefaultsProvider defaults={{ VSnackbar: current.value }}>
+                  { slots.default({ item: current.value }) }
+                </VDefaultsProvider>
+              ) : (
+                <VSnackbar
+                  { ...current.value }
+                  v-model={ isActive.value }
+                  onAfterLeave={ onAfterLeave }
+                >
+                  {{
+                    text: slots.text ? () => slots.text?.({ item: current.value! }) : undefined,
+                    actions: hasActions ? () => (
+                      <>
+                        { !slots.actions ? (
+                          <VBtn text="Dismiss" onClick={ onClickDismiss }></VBtn>
+                        ) : (
+                          <VDefaultsProvider defaults={{ VBtn: { text: 'Dismiss' } }}>
+                            { slots.actions({ item: current.value!, props: { onClick: onClickDismiss } }) }
+                          </VDefaultsProvider>
+                        )}
+                      </>
+                    ) : undefined,
+                  }}
+                </VSnackbar>
+              )
+          )}
+        </>
+      )
+    })
   },
 })
 
