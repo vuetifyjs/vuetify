@@ -304,7 +304,7 @@ export const VSelect = genericComponent<new <
 
     watch([menu, model], () => {
       if (!props.hideSelected && menu.value && model.value.length) {
-        const index = displayItems.value.findIndex(
+        const index = displayItems.value.findLastIndex(
           item => model.value.some(s => props.valueComparator(s.value, item.value))
         )
         IN_BROWSER && window.requestAnimationFrame(() => {
