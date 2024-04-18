@@ -21,9 +21,7 @@ export const makeVTimePickerClockProps = propsFactory({
   ampm: Boolean,
   color: String,
   disabled: Boolean,
-  displayedValue: {
-    default: null,
-  },
+  displayedValue: null,
   double: Boolean,
   format: {
     type: Function,
