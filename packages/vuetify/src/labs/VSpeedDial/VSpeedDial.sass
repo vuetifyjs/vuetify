@@ -1,24 +1,27 @@
-.v-speed-dial__content
-  gap: 8px
+@use '../../styles/tools'
 
-  &.v-overlay__content
-    &.v-speed-dial__content--end,
-    &.v-speed-dial__content--end-center,
-    &.v-speed-dial__content--right,
-    &.v-speed-dial__content--right-center
-      flex-direction: row
+@include tools.layer('components')
+  .v-speed-dial__content
+    gap: 8px
 
-    &.v-speed-dial__content--left,
-    &.v-speed-dial__content--left-center,
-    &.v-speed-dial__content--start,
-    &.v-speed-dial__content--start-center
-      flex-direction: row-reverse
+    &.v-overlay__content
+      &.v-speed-dial__content--end,
+      &.v-speed-dial__content--end-center,
+      &.v-speed-dial__content--right,
+      &.v-speed-dial__content--right-center
+        flex-direction: row
 
-    &.v-speed-dial__content--top,
-    &.v-speed-dial__content--top-center
-      flex-direction: column-reverse
+      &.v-speed-dial__content--left,
+      &.v-speed-dial__content--left-center,
+      &.v-speed-dial__content--start,
+      &.v-speed-dial__content--start-center
+        flex-direction: row-reverse
 
-  > *
-    @for $i from 1 through 10
-      &:nth-child(#{$i})
-        transition-delay: 0.05s * ($i - 1)
+      &.v-speed-dial__content--top,
+      &.v-speed-dial__content--top-center
+        flex-direction: column-reverse
+
+    > *
+      @for $i from 1 through 10
+        &:nth-child(#{$i})
+          transition-delay: 0.05s * ($i - 1)
