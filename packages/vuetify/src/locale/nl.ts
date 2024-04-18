@@ -2,6 +2,7 @@ export default {
   badge: 'Insigne',
   open: 'Openen',
   close: 'Sluiten',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Annuleren',

@@ -2,6 +2,7 @@ export default {
   badge: 'Insignă',
   open: 'Open',
   close: 'Închideți',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Anulează',

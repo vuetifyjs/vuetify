@@ -2,6 +2,7 @@ export default {
   badge: 'rozet',
   open: 'Open',
   close: 'Kapat',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',

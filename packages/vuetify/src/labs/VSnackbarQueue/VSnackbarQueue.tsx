@@ -3,8 +3,11 @@ import { VBtn } from '@/components/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { makeVSnackbarProps, VSnackbar } from '@/components/VSnackbar/VSnackbar'
 
+// Composables
+import { useLocale } from '@/composables/locale'
+
 // Utilities
-import { nextTick, shallowRef, watch } from 'vue'
+import { computed, nextTick, shallowRef, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -14,7 +17,12 @@ import type { GenericProps } from '@/util'
 export type VSnackbarQueueSlots<T extends string | SnackbarMessage> = {
   default: { item: T }
   text: { item: T }
-  actions: { item: T }
+  actions: {
+    item: T
+    props: {
+      onClick: () => void
+    }
+  }
 }
 
 export type SnackbarMessage = Omit<
@@ -33,7 +41,11 @@ export type SnackbarMessage = Omit<
 
 export const makeVSnackbarQueueProps = propsFactory({
   // TODO: Port this to Snackbar on dev
-  closable: Boolean,
+  closable: [Boolean, String],
+  closeText: {
+    type: String,
+    default: '$vuetify.dismiss',
+  },
 
   ...makeVSnackbarProps(),
 
@@ -59,6 +71,8 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly (string |
   },
 
   setup (props, { emit, slots }) {
+    const { t } = useLocale()
+
     const isActive = shallowRef(false)
     const isVisible = shallowRef(false)
     const current = shallowRef<SnackbarMessage>()
@@ -88,9 +102,14 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly (string |
         isActive.value = true
       })
     }
-    function onClickDismiss () {
+    function onClickClose () {
       isActive.value = false
     }
+
+    const btnProps = computed(() => ({
+      color: typeof props.closable === 'string' ? props.closable : undefined,
+      text: t(props.closeText),
+    }))
 
     useRender(() => {
       const hasActions = !!(props.closable || slots.actions)
@@ -114,10 +133,20 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly (string |
                     actions: hasActions ? () => (
                       <>
                         { !slots.actions ? (
-                          <VBtn text="Dismiss" onClick={ onClickDismiss }></VBtn>
+                          <VBtn
+                            { ...btnProps.value }
+                            onClick={ onClickClose }
+                          />
                         ) : (
-                          <VDefaultsProvider defaults={{ VBtn: { text: 'Dismiss' } }}>
-                            { slots.actions({ item: current.value!, props: { onClick: onClickDismiss } }) }
+                          <VDefaultsProvider
+                            defaults={{
+                              VBtn: btnProps.value,
+                            }}
+                          >
+                            { slots.actions({
+                              item: current.value!,
+                              props: { onClick: onClickClose },
+                            })}
                           </VDefaultsProvider>
                         )}
                       </>

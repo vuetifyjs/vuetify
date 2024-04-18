@@ -2,6 +2,7 @@ export default {
   badge: 'תג',
   open: 'Open',
   close: 'סגור',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',

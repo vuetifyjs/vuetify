@@ -2,6 +2,7 @@ export default {
   badge: 'Infopiste',
   open: 'Open',
   close: 'Sulje',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
