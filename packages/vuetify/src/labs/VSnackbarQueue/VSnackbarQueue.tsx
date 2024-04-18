@@ -98,8 +98,8 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly (string |
                 onAfterLeave={ onAfterLeave }
               >
                 {{
-                  text: () => slots.text?.({ item: current.value! }),
-                  actions: () => slots.actions?.({ item: current.value! }),
+                  text: slots.text ? () => slots.text?.({ item: current.value! }) : undefined,
+                  actions: slots.actions ? () => slots.actions?.({ item: current.value! }) : undefined,
                 }}
               </VSnackbar>
             )
