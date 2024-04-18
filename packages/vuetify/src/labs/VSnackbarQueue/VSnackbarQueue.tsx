@@ -8,7 +8,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, nextTick, shallowRef, watch } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -46,13 +46,12 @@ export const makeVSnackbarQueueProps = propsFactory({
     type: String,
     default: '$vuetify.dismiss',
   },
-
-  ...makeVSnackbarProps(),
-
   modelValue: {
     type: Array as PropType<readonly (string | SnackbarMessage)[]>,
     default: () => [],
   },
+
+  ...omit(makeVSnackbarProps(), ['modelValue']),
 }, 'VSnackbarQueue')
 
 export const VSnackbarQueue = genericComponent<new <T extends readonly (string | SnackbarMessage)[]> (
@@ -113,6 +112,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly (string |
 
     useRender(() => {
       const hasActions = !!(props.closable || slots.actions)
+      const { modelValue: _, ...snackbarProps } = VSnackbar.filterProps(props as any)
 
       return (
         <>
@@ -124,6 +124,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly (string |
                 </VDefaultsProvider>
               ) : (
                 <VSnackbar
+                  { ...snackbarProps }
                   { ...current.value }
                   v-model={ isActive.value }
                   onAfterLeave={ onAfterLeave }
