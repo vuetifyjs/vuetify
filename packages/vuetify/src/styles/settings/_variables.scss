@@ -289,7 +289,14 @@ $flat-typography: () !default;
 @each $type, $values in $typography {
   $flat-typography: map-deep-merge(
     $flat-typography,
-    (#{$type}: map.values($values))
+    (#{$type}: (
+      map.get($values, 'size'),
+      map.get($values, 'weight'),
+      map.get($values, 'line-height'),
+      map.get($values, 'letter-spacing'),
+      map.get($values, 'font-family'),
+      map.get($values, 'text-transform'),
+    ))
   );
 }
 
