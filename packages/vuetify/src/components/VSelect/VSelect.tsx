@@ -250,6 +250,10 @@ export const VSelect = genericComponent<new <
       const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
       if (item !== undefined) {
         model.value = [item]
+        const index = displayItems.value.indexOf(item)
+        IN_BROWSER && window.requestAnimationFrame(() => {
+          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
+        })
       }
     }
 
@@ -302,9 +306,9 @@ export const VSelect = genericComponent<new <
       }
     }
 
-    watch([menu, model], () => {
+    watch(menu, () => {
       if (!props.hideSelected && menu.value && model.value.length) {
-        const index = displayItems.value.findLastIndex(
+        const index = displayItems.value.findIndex(
           item => model.value.some(s => props.valueComparator(s.value, item.value))
         )
         IN_BROWSER && window.requestAnimationFrame(() => {
