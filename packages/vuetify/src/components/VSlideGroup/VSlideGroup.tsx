@@ -224,6 +224,7 @@ export const VSlideGroup = genericComponent<new <T>(
         for (const item of contentRef.value.children) {
           if (item === el) {
             scrollToChildren(item as HTMLElement)
+            return
           }
         }
       }
