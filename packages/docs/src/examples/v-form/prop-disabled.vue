@@ -1,5 +1,5 @@
 <template>
-  <v-sheet width="300" class="mx-auto">
+  <v-sheet class="mx-auto" width="300">
     <v-form disabled>
       <v-text-field
         v-model="firstName"

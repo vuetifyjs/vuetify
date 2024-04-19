@@ -3,20 +3,20 @@
     <div class="ma-4">
       <div class="text-subtitle-2">Default</div>
       <v-img
-        class="bg-white"
-        width="300"
         :aspect-ratio="1"
+        class="bg-white"
         src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+        width="300"
       ></v-img>
     </div>
 
     <div class="ma-4">
       <div class="text-subtitle-2">Cover</div>
       <v-img
-        class="bg-white"
-        width="300"
         :aspect-ratio="1"
+        class="bg-white"
         src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+        width="300"
         cover
       ></v-img>
     </div>

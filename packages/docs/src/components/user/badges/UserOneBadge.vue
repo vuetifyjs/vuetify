@@ -1,8 +1,8 @@
 <template>
   <v-tooltip
     v-if="one.isSubscriber"
-    text="Vuetify One Subscriber"
     location="bottom"
+    text="Vuetify One Subscriber"
   >
     <template #activator="{ props: activatorProps }">
       <v-icon
@@ -15,8 +15,5 @@
 </template>
 
 <script setup>
-  // Stores
-  import { useOneStore } from '@vuetify/one'
-
   const one = useOneStore()
 </script>

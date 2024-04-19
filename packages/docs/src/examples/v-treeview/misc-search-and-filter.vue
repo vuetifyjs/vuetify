@@ -6,32 +6,32 @@
     <v-sheet class="pa-4 bg-primary-lighten-2">
       <v-text-field
         v-model="search"
+        clear-icon="mdi-close-circle-outline"
         label="Search Company Directory"
+        clearable
         dark
         flat
-        solo-inverted
         hide-details
-        clearable
-        clear-icon="mdi-close-circle-outline"
+        solo-inverted
       ></v-text-field>
       <v-checkbox
         v-model="caseSensitive"
+        label="Case sensitive search"
         dark
         hide-details
-        label="Case sensitive search"
       ></v-checkbox>
     </v-sheet>
     <v-card-text>
       <v-treeview
         v-model:open="open"
+        :filter="filter"
         :items="items"
         :search="search"
-        :filter="filter"
       >
         <template v-slot:prepend="{ item }">
           <v-icon
             v-if="item.children"
-            v-text="`mdi-${item.id === 1 ? 'home-variant' : 'folder-network'}`"
+            :icon="`mdi-${item.id === 1 ? 'home-variant' : 'folder-network'}`"
           ></v-icon>
         </template>
       </v-treeview>
@@ -45,63 +45,63 @@
   const items = ref([
     {
       id: 1,
-      name: 'Vuetify Human Resources',
+      title: 'Vuetify Human Resources',
       children: [
         {
           id: 2,
-          name: 'Core team',
+          title: 'Core team',
           children: [
             {
               id: 201,
-              name: 'John',
+              title: 'John',
             },
             {
               id: 202,
-              name: 'Kael',
+              title: 'Kael',
             },
             {
               id: 203,
-              name: 'Nekosaur',
+              title: 'Nekosaur',
             },
             {
               id: 204,
-              name: 'Jacek',
+              title: 'Jacek',
             },
             {
               id: 205,
-              name: 'Andrew',
+              title: 'Andrew',
             },
           ],
         },
         {
           id: 3,
-          name: 'Administrators',
+          title: 'Administrators',
           children: [
             {
               id: 301,
-              name: 'Mike',
+              title: 'Mike',
             },
             {
               id: 302,
-              name: 'Hunt',
+              title: 'Hunt',
             },
           ],
         },
         {
           id: 4,
-          name: 'Contributors',
+          title: 'Contributors',
           children: [
             {
               id: 401,
-              name: 'Phlow',
+              title: 'Phlow',
             },
             {
               id: 402,
-              name: 'Brandon',
+              title: 'Brandon',
             },
             {
               id: 403,
-              name: 'Sean',
+              title: 'Sean',
             },
           ],
         },
@@ -122,63 +122,63 @@
       items: [
         {
           id: 1,
-          name: 'Vuetify Human Resources',
+          title: 'Vuetify Human Resources',
           children: [
             {
               id: 2,
-              name: 'Core team',
+              title: 'Core team',
               children: [
                 {
                   id: 201,
-                  name: 'John',
+                  title: 'John',
                 },
                 {
                   id: 202,
-                  name: 'Kael',
+                  title: 'Kael',
                 },
                 {
                   id: 203,
-                  name: 'Nekosaur',
+                  title: 'Nekosaur',
                 },
                 {
                   id: 204,
-                  name: 'Jacek',
+                  title: 'Jacek',
                 },
                 {
                   id: 205,
-                  name: 'Andrew',
+                  title: 'Andrew',
                 },
               ],
             },
             {
               id: 3,
-              name: 'Administrators',
+              title: 'Administrators',
               children: [
                 {
                   id: 301,
-                  name: 'Mike',
+                  title: 'Mike',
                 },
                 {
                   id: 302,
-                  name: 'Hunt',
+                  title: 'Hunt',
                 },
               ],
             },
             {
               id: 4,
-              name: 'Contributors',
+              title: 'Contributors',
               children: [
                 {
                   id: 401,
-                  name: 'Phlow',
+                  title: 'Phlow',
                 },
                 {
                   id: 402,
-                  name: 'Brandon',
+                  title: 'Brandon',
                 },
                 {
                   id: 403,
-                  name: 'Sean',
+                  title: 'Sean',
                 },
               ],
             },

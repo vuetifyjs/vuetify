@@ -3,8 +3,8 @@
     <v-row justify="space-between">
       <v-col v-for="cursor in cursors" :key="cursor" cols="3">
         <v-btn
-          :text="cursor"
           :class="`cursor-${cursor}`"
+          :text="cursor"
           block
         ></v-btn>
       </v-col>

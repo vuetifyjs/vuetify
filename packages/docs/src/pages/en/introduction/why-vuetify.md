@@ -1,7 +1,7 @@
 ---
 meta:
   nav: Why Vuetify?
-  title: Why you should be using Vuetify
+  title: Why Vuetify?
   description: Vuetify has an extremely active community, provides easy to use Material Design components and is consistently updated.
   keywords: why vuetify, best vue framework, best ui framework, best component framework, best ui library, best component library
 related:
@@ -14,9 +14,9 @@ related:
 
 Learn more about what Vuetify is, how to create an application from scratch, browse API references, sample code, tutorials, and more.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<VoPromotionsCardVuetify />
 
 ## What is Vuetify?
 
@@ -26,6 +26,8 @@ Since its initial release in 2014, [Vue.js](https://vuejs.org/) has grown to be 
 * [Features at a glance](#feature-guides)
 
 ## Getting started
+
+<VoPromotionsCardHighlight slug="vuemastery-getting-started" class="mb-4" />
 
 The fastest way to try Vuetify is in the browser at [Vuetify Play](https://play.vuetifyjs.com/). For a complete list of installation options please navigate to the [Installation page](/getting-started/installation/).
 
@@ -55,7 +57,7 @@ Vuetify has a large ecosystem of supporting tools that enrich the development ex
 
 When you develop with Vuetify, you are never alone. Stuck on a problem? Take advantage of our massive [Discord community](https://community.vuetifyjs.com/) and collaborate with other Vuetify developers in one of our public help channels. Need a more personalized support solution? Vuetify offers [Enterprise support](/introduction/enterprise-support/) with options tailored to individuals and businesses. Check out some other ways to [Sponsor Vuetify development](/introduction/sponsors-and-backers/).
 
-<promoted slug="vuetify-discord" />
+<PromotedPromoted slug="vuetify-discord" />
 
 ### Professional and Enterprise support
 

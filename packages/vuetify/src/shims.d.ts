@@ -1,6 +1,10 @@
 /* eslint-disable local-rules/sort-imports */
 
-import type { ComponentPublicInstance, FunctionalComponent, UnwrapNestedRefs, VNodeChild } from 'vue'
+import 'vue/jsx'
+import type { FunctionalComponent, UnwrapNestedRefs, VNodeChild } from 'vue'
+
+// @skip-build
+import type { ComponentPublicInstance } from 'vue'
 
 // @skip-build
 import type { DateInstance, DefaultsInstance, DisplayInstance, IconOptions, LocaleInstance, RtlInstance, ThemeInstance } from './framework'

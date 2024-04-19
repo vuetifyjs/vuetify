@@ -13,9 +13,9 @@ related:
 
 Web accessibility **(a11y for short)**, is the inclusive practice of ensuring there are no barriers that prevent the interaction with, or access to, websites on the World Wide Web by people with disabilities. Vuetify components are built to provide keyboard interactions for all mouse-based actions and utilize HTML5 semantic elements where applicable.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Activator slots
 
@@ -73,7 +73,7 @@ Beyond attributes, components such as `v-menu` also support interaction by press
 
 When inside of a `v-menu`, `v-list-item` will be automatically configured to have a role of **menuitem**. Navigate to the [Menu](/components/menus) for more information on the components features.
 
-<example file="accessibility/menu" inline />
+<ExamplesExample file="accessibility/menu" inline />
 
 ## Additional Resources
 

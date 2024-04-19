@@ -71,6 +71,7 @@ export default {
   timePicker: {
     am: '오전',
     pm: '오후',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

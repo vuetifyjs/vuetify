@@ -5,82 +5,82 @@
         <v-row>
           <v-col
             cols="12"
-            sm="6"
             md="6"
+            sm="6"
           >
             <v-radio-group
               v-model="ex7"
               column
             >
               <v-radio
-                label="red"
                 color="red"
+                label="red"
                 value="red"
               ></v-radio>
               <v-radio
-                label="red-darken-3"
                 color="red-darken-3"
+                label="red-darken-3"
                 value="red-darken-3"
               ></v-radio>
               <v-radio
-                label="indigo"
                 color="indigo"
+                label="indigo"
                 value="indigo"
               ></v-radio>
               <v-radio
-                label="indigo-darken-3"
                 color="indigo-darken-3"
+                label="indigo-darken-3"
                 value="indigo-darken-3"
               ></v-radio>
               <v-radio
-                label="orange"
                 color="orange"
+                label="orange"
                 value="orange"
               ></v-radio>
               <v-radio
-                label="orange-darken-3"
                 color="orange-darken-3"
+                label="orange-darken-3"
                 value="orange-darken-3"
               ></v-radio>
             </v-radio-group>
           </v-col>
           <v-col
             cols="12"
-            sm="6"
             md="6"
+            sm="6"
           >
             <v-radio-group
               v-model="ex8"
               column
             >
               <v-radio
-                label="primary"
                 color="primary"
+                label="primary"
                 value="primary"
               ></v-radio>
               <v-radio
-                label="secondary"
                 color="secondary"
+                label="secondary"
                 value="secondary"
               ></v-radio>
               <v-radio
-                label="success"
                 color="success"
+                label="success"
                 value="success"
               ></v-radio>
               <v-radio
-                label="info"
                 color="info"
+                label="info"
                 value="info"
               ></v-radio>
               <v-radio
-                label="warning"
                 color="warning"
+                label="warning"
                 value="warning"
               ></v-radio>
               <v-radio
-                label="error"
                 color="error"
+                label="error"
                 value="error"
               ></v-radio>
             </v-radio-group>

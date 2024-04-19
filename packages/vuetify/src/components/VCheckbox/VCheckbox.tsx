@@ -75,6 +75,7 @@ export const VCheckbox = genericComponent<new <T>(
               messagesId,
               isDisabled,
               isReadonly,
+              isValid,
             }) => (
               <VCheckboxBtn
                 { ...checkboxProps }
@@ -83,6 +84,7 @@ export const VCheckbox = genericComponent<new <T>(
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 { ...controlAttrs }
+                error={ isValid.value === false }
                 v-model={ model.value }
                 onFocus={ focus }
                 onBlur={ blur }

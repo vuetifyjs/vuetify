@@ -71,6 +71,7 @@ export default {
   timePicker: {
     am: 'پێش نیوەڕۆژ',
     pm: 'دوای نیوەڕۆژ',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

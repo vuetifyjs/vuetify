@@ -9,8 +9,8 @@
     <template v-slot:top>
       <v-text-field
         v-model="search"
-        label="Search (UPPER CASE ONLY)"
         class="pa-2"
+        label="Search (UPPER CASE ONLY)"
       ></v-text-field>
     </template>
   </v-data-table>

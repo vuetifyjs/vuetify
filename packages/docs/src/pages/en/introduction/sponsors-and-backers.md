@@ -14,9 +14,9 @@ related:
 
 Vuetify is an [MIT licensed](https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md) open-source project that's completely free to use.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<VoPromotionsCardVuetify />
 
 ## Preamble
 
@@ -41,7 +41,7 @@ We thank all of our project sponsors for their continued support of Vuetify. If 
 
 Thank you to our special sponsor. Your support is greatly appreciated.
 
-<sponsors tier="-2" width="240" />
+<SponserSponsors tier="-2" width="240" />
 
 <br>
 
@@ -49,7 +49,7 @@ Thank you to our special sponsor. Your support is greatly appreciated.
 
 These sponsors have pledged $1,500 per month.
 
-<sponsors tier="1" />
+<SponserSponsors tier="1" />
 
 <br>
 
@@ -57,7 +57,7 @@ These sponsors have pledged $1,500 per month.
 
 These sponsors have pledged $500 per month.
 
-<sponsors tier="2" />
+<SponserSponsors tier="2" />
 
 <br>
 
@@ -65,7 +65,7 @@ These sponsors have pledged $500 per month.
 
 These sponsors have pledged $250 per month.
 
-<sponsors tier="3" />
+<SponserSponsors tier="3" />
 
 <br>
 
@@ -73,7 +73,7 @@ These sponsors have pledged $250 per month.
 
 These sponsors help keep the lights on by providing free services to the Vuetify project.
 
-<sponsors tier="6" />
+<SponserSponsors tier="6" />
 
 <br>
 
@@ -81,7 +81,7 @@ These sponsors help keep the lights on by providing free services to the Vuetify
 
 We work with these companies to provide you with the best possible experience.
 
-<sponsors tier="5" />
+<SponserSponsors tier="5" />
 
 <br>
 

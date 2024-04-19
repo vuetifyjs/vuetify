@@ -5,21 +5,21 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 import {
   computed,
   inject,
+  nextTick,
   onActivated,
   onBeforeUnmount,
   onDeactivated,
-  onMounted,
   provide,
   reactive,
   ref,
   shallowRef,
 } from 'vue'
-import { convertToUnit, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory } from '@/util'
+import { convertToUnit, eagerComputed, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory } from '@/util'
 
 // Types
 import type { ComponentInternalInstance, CSSProperties, InjectionKey, Prop, Ref } from 'vue'
 
-type Position = 'top' | 'left' | 'right' | 'bottom'
+export type Position = 'top' | 'left' | 'right' | 'bottom'
 
 interface Layer {
   top: number
@@ -59,6 +59,7 @@ interface LayoutProvide {
   items: Ref<LayoutItem[]>
   layoutRect: Ref<DOMRectReadOnly | undefined>
   rootZIndex: Ref<number>
+  layoutIsReady: Promise<void>
 }
 
 export const VuetifyLayoutKey: InjectionKey<LayoutProvide> = Symbol.for('vuetify:layout')
@@ -91,7 +92,10 @@ export function useLayout () {
 
   if (!layout) throw new Error('[Vuetify] Could not find injected layout')
 
+  const layoutIsReady = nextTick()
+
   return {
+    layoutIsReady,
     getLayoutItem: layout.getLayoutItem,
     mainRect: layout.mainRect,
     mainStyles: layout.mainStyles,
@@ -122,6 +126,8 @@ export function useLayoutItem (options: {
   onDeactivated(() => isKeptAlive.value = true)
   onActivated(() => isKeptAlive.value = false)
 
+  const layoutIsReady = nextTick()
+
   const {
     layoutItemStyles,
     layoutItemScrimStyles,
@@ -133,7 +139,7 @@ export function useLayoutItem (options: {
 
   onBeforeUnmount(() => layout.unregister(id))
 
-  return { layoutItemStyles, layoutRect: layout.layoutRect, layoutItemScrimStyles }
+  return { layoutItemStyles, layoutRect: layout.layoutRect, layoutItemScrimStyles, layoutIsReady }
 }
 
 const generateLayers = (
@@ -177,28 +183,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
   const disabledTransitions = reactive(new Map<string, Ref<boolean>>())
   const { resizeRef, contentRect: layoutRect } = useResizeObserver()
 
-  const computedOverlaps = computed(() => {
-    const map = new Map<string, { position: Position, amount: number }>()
-    const overlaps = props.overlaps ?? []
-    for (const overlap of overlaps.filter(item => item.includes(':'))) {
-      const [top, bottom] = overlap.split(':')
-      if (!registered.value.includes(top) || !registered.value.includes(bottom)) continue
-
-      const topPosition = positions.get(top)
-      const bottomPosition = positions.get(bottom)
-      const topAmount = layoutSizes.get(top)
-      const bottomAmount = layoutSizes.get(bottom)
-
-      if (!topPosition || !bottomPosition || !topAmount || !bottomAmount) continue
-
-      map.set(bottom, { position: topPosition.value, amount: parseInt(topAmount.value, 10) })
-      map.set(top, { position: bottomPosition.value, amount: -parseInt(bottomAmount.value, 10) })
-    }
-
-    return map
-  })
-
-  const layers = computed(() => {
+  const layers = eagerComputed(() => {
     const uniquePriorities = [...new Set([...priorities.values()].map(p => p.value))].sort((a, b) => a - b)
     const layout = []
     for (const p of uniquePriorities) {
@@ -226,7 +211,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     }
   })
 
-  const items = computed(() => {
+  const items = eagerComputed(() => {
     return layers.value.slice(1).map(({ id }, index) => {
       const { layer } = layers.value[index]
       const size = layoutSizes.get(id)
@@ -247,10 +232,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
   const rootVm = getCurrentInstance('createLayout')
 
-  const isMounted = shallowRef(false)
-  onMounted(() => {
-    isMounted.value = true
-  })
+  const layoutIsReady = nextTick()
 
   provide(VuetifyLayoutKey, {
     register: (
@@ -289,21 +271,16 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
         const styles = {
           [position.value]: 0,
           zIndex: zIndex.value,
-          transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -110) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}%)`,
+          transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -(elementSize.value ?? layoutSize.value)) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}px)`,
           position: absolute.value || rootZIndex.value !== ROOT_ZINDEX ? 'absolute' : 'fixed',
           ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
         } as const
 
-        if (!isMounted.value) return styles
+        if (index.value < 0) throw new Error(`Layout item "${id}" is missing`)
 
         const item = items.value[index.value]
 
         if (!item) throw new Error(`[Vuetify] Could not find layout item "${id}"`)
-
-        const overlap = computedOverlaps.value.get(id)
-        if (overlap) {
-          item[overlap.position] += overlap.amount
-        }
 
         return {
           ...styles,
@@ -342,6 +319,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     items,
     layoutRect,
     rootZIndex,
+    layoutIsReady,
   })
 
   const layoutClasses = computed(() => [
@@ -361,6 +339,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     getLayoutItem,
     items,
     layoutRect,
+    layoutIsReady,
     layoutRef: resizeRef,
   }
 }

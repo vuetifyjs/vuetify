@@ -1,42 +1,47 @@
 <template>
-  <div class="d-flex align-center flex-column">
-    <div class="text-subtitle-2">With props</div>
+  <v-row>
+    <v-col cols="12" md="4">
+      <v-card
+        subtitle="This is a card subtitle"
+        text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus!"
+        title="This is a title"
+      ></v-card>
 
-    <v-card
-      width="400"
-      title="This is a title"
-      subtitle="This is a subtitle"
-      text="This is content"
-    ></v-card>
+      <div class="text-center text-caption">Using Props Only</div>
+    </v-col>
 
-    <div class="mt-4 text-subtitle-2">With slots</div>
+    <v-col cols="12" md="4">
+      <v-card>
+        <template v-slot:title>
+          This is a title
+        </template>
 
-    <v-card width="400">
-      <template v-slot:title>
-        This is a title
-      </template>
+        <template v-slot:subtitle>
+          This is a card subtitle
+        </template>
 
-      <template v-slot:subtitle>
-        This is a subtitle
-      </template>
+        <template v-slot:text>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus!
+        </template>
+      </v-card>
 
-      <template v-slot:text>
-        This is content
-      </template>
-    </v-card>
+      <div class="text-center text-caption">Using Slots Only</div>
+    </v-col>
 
-    <div class="mt-4 text-subtitle-2">With markup</div>
+    <v-col cols="12" md="4">
+      <v-card>
+        <v-card-item>
+          <v-card-title>This is a title</v-card-title>
 
-    <v-card width="400">
-      <v-card-item>
-        <v-card-title>This is a title</v-card-title>
+          <v-card-subtitle>This is a card subtitle</v-card-subtitle>
+        </v-card-item>
 
-        <v-card-subtitle>This is a subtitle</v-card-subtitle>
-      </v-card-item>
+        <v-card-text>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus!
+        </v-card-text>
+      </v-card>
 
-      <v-card-text>
-        This is content
-      </v-card-text>
-    </v-card>
-  </div>
+      <div class="text-center text-caption">Using Markup Only</div>
+    </v-col>
+  </v-row>
 </template>

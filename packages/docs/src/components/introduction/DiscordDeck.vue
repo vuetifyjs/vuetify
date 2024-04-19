@@ -15,7 +15,7 @@
       <v-row justify="space-around" dense>
         <template v-for="(tier, i) in tiers" :key="i">
           <v-col cols="12" md="4">
-            <v-responsive class="mb-4" :min-height="mdAndUp ? 96 : undefined">
+            <v-responsive :min-height="mdAndUp ? 96 : undefined" class="mb-4">
               <h3 class="d-flex align-center text-h6 font-weight-medium mb-4">
                 <v-avatar :image="tier.src" class="me-3" />
 
@@ -32,11 +32,11 @@
                 :href="tier.href"
                 :text="tierText(tier)"
                 :variant="i === 1 ? 'flat' : 'outlined'"
-                block
                 class="mb-6 text-none"
                 color="primary"
                 rel="noopener"
                 target="_blank"
+                block
               />
 
               <div class="text-caption">{{ tier.text }}</div>
@@ -63,18 +63,16 @@
     </v-container>
 
     <div class="px-4 pb-3 text-medium-emphasis text-caption">
-      *View more detailed information on our <app-link
+      *View more detailed information on our <AppLink
         href="https://discord.com/servers/vuetify-340160225338195969"
       >
         Discord Welcome Page
-      </app-link>
+      </AppLink>
     </div>
   </v-sheet>
 </template>
 
 <script setup>
-  import { useDisplay } from 'vuetify'
-
   const { mdAndUp } = useDisplay()
 
   const tiers = [

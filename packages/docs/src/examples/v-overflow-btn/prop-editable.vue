@@ -1,11 +1,11 @@
 <template>
   <v-container id="dropdown-example-3">
     <v-overflow-btn
-      class="my-2"
       :items="dropdownEdit"
+      class="my-2"
+      item-value="text"
       label="Overflow Btn w/ editable"
       editable
-      item-value="text"
     ></v-overflow-btn>
   </v-container>
 </template>

@@ -2,13 +2,13 @@
   <v-autocomplete
     v-model="selection"
     v-model:search="search"
-    :items="filteredIcons"
     :item-props="itemProps"
+    :items="filteredIcons"
     :placeholder="t('search.icons')"
     item-title="name"
     item-value="name"
-    no-filter
     variant="outlined"
+    no-filter
   >
     <template #prepend-inner>
       <v-expand-x-transition>
@@ -44,13 +44,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { camelize, computed, shallowRef, watch } from 'vue'
-  import { distance } from '@/util/helpers'
-
   // Data
   import icons from '@mdi/svg/meta.json'
   import * as paths from '@mdi/js'

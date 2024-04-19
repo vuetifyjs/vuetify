@@ -19,7 +19,8 @@
     "props": "Props",
     "sass": "SASS Variables",
     "slots": "Slots",
-    "exposed": "Exposed"
+    "exposed": "Exposed",
+    "value": "Value"
   },
   "api-explorer": "API Explorer",
   "application": "Application",
@@ -291,7 +292,7 @@
   "see-more-themes-from": "See More Themes From {vendor}",
   "selection": "Selection",
   "services": "Services",
-  "settings": "Settings",
+  "settings": "Documentation settings",
   "slash-search": "Use / for Search hotkey",
   "slash-search-message": "This option sets the bound search key to '/' from Cmd/Ctrl+K.",
   "small": "Small",

@@ -1,6 +1,7 @@
 import type { Node, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
 import { prettifyType } from './utils'
+import { kebabCase } from './helpers/text'
 
 const project = new Project({
   tsConfigFilePath: './tsconfig.json',
@@ -29,15 +30,15 @@ async function inspect (project: Project, node?: Node<ts.Node>) {
   throw new Error(`Unsupported node kind: ${kind}`)
 }
 
-export async function generateComposableDataFromTypes () {
+export async function generateComposableDataFromTypes (): Promise<ComposableData[]> {
   const sourceFile = project.addSourceFileAtPath('./templates/composables.d.ts')
 
   const composables = await inspect(project, sourceFile.getTypeAlias('Composables'))
 
-  return await Promise.all(
+  return Promise.all(
     Object.entries(composables.properties).map(async ([name, data]) => {
       const returnType = (data as FunctionDefinition).returnType
-      let exposed: Record<string, Definition> | undefined
+      let exposed: Record<string, Definition> = {}
       if (returnType.type === 'allOf') {
         exposed = returnType.items.reduce((acc, item) => {
           const props = (item as ObjectDefinition).properties
@@ -56,39 +57,52 @@ export async function generateComposableDataFromTypes () {
         )
       }
 
+      const kebabName = kebabCase(name)
+
       return {
-        name,
-        data: {
-          exposed,
-        },
+        fileName: name,
+        displayName: name,
+        pathName: kebabName,
+        exposed,
       }
     })
-  ) as { name: string, data: { exposed: Record<string, Definition> } }[]
+  )
 }
 
-export async function generateDirectiveDataFromTypes () {
+export async function generateDirectiveDataFromTypes (): Promise<DirectiveData[]> {
   const sourceFile = project.addSourceFileAtPath('./templates/directives.d.ts')
 
   const directives = await inspect(project, sourceFile.getTypeAlias('Directives'))
 
-  return await Promise.all(
+  return Promise.all(
     Object.entries(directives.properties).map(async ([name, data]) => {
+      const kebabName = kebabCase(name)
       return {
-        name,
-        argument: { value: await prettifyType(name, (data as ObjectDefinition).properties.value) },
+        fileName: `v-${kebabName}`,
+        displayName: `v-${kebabName}`,
+        pathName: `v-${kebabName}-directive`,
+        value: await prettifyType(name, (data as ObjectDefinition).properties.value),
+        argument: (data as ObjectDefinition).properties.arg,
         modifiers: ((data as ObjectDefinition).properties.modifiers as ObjectDefinition).properties,
       }
     })
-  ) as { name: string, argument: { value: Definition }, modifiers: Record<string, Definition> }[]
+  )
 }
 
-export async function generateComponentDataFromTypes (component: string) {
+export async function generateComponentDataFromTypes (component: string): Promise<ComponentData> {
   const sourceFile = project.addSourceFileAtPath(`./templates/tmp/${component}.d.ts`)
 
-  const props = await inspect(project, sourceFile.getTypeAlias('ComponentProps'))
-  const events = await inspect(project, sourceFile.getTypeAlias('ComponentEvents'))
-  const slots = await inspect(project, sourceFile.getTypeAlias('ComponentSlots'))
-  const exposed = await inspect(project, sourceFile.getTypeAlias('ComponentExposed'))
+  const [
+    props,
+    events,
+    slots,
+    exposed,
+  ] = await Promise.all([
+    inspect(project, sourceFile.getTypeAlias('ComponentProps')),
+    inspect(project, sourceFile.getTypeAlias('ComponentEvents')),
+    inspect(project, sourceFile.getTypeAlias('ComponentSlots')),
+    inspect(project, sourceFile.getTypeAlias('ComponentExposed')),
+  ])
 
   const sections = [props, events, slots, exposed]
 
@@ -108,6 +122,10 @@ export async function generateComponentDataFromTypes (component: string) {
     events: events.properties,
     slots: slots.properties,
     exposed: exposed.properties,
+    displayName: component,
+    fileName: component,
+    pathName: kebabCase(component),
+    sass: {},
   }
 }
 
@@ -200,6 +218,43 @@ export type Definition =
   | RecordDefinition
   | InterfaceDefinition
 
+export type BaseData = {
+  displayName: string // user visible name used in page titles
+  fileName: string // file name for translation strings and generated types
+  pathName: string // kebab-case name for use in urls
+}
+export type ComponentData = BaseData & {
+  sass: Record<string, { default: string }>
+  props: Record<string, Definition>
+  slots: Record<string, Definition>
+  events: Record<string, Definition>
+  exposed: Record<string, Definition>
+  value?: never
+  argument?: never
+  modifiers?: never
+}
+export type DirectiveData = BaseData & {
+  sass?: never
+  props?: never
+  slots?: never
+  events?: never
+  exposed?: never
+  value: Definition
+  argument: Definition
+  modifiers: Record<string, Definition>
+}
+export type ComposableData = BaseData & {
+  sass?: never
+  props?: never
+  slots?: never
+  events?: never
+  exposed: Record<string, Definition>
+  value?: never
+  argument?: never
+  modifiers?: never
+}
+export type PartData = ComponentData | DirectiveData | ComposableData
+
 function isExternalDeclaration (declaration?: Node<ts.Node>, definitionText?: string) {
   const filePath = declaration?.getSourceFile().getFilePath()
 
@@ -228,21 +283,21 @@ function getSource (declaration?: Node<ts.Node>) {
   return filePath && startLine ? `${filePath}#L${startLine}-L${endLine}` : undefined
 }
 
-function listFlags (flags: object, value?: number) {
-  if (!value) return []
+// function listFlags (flags: object, value?: number) {
+//   if (!value) return []
 
-  const entries = Object.entries(flags).filter(([_, flag]) => typeof flag === 'number')
+//   const entries = Object.entries(flags).filter(([_, flag]) => typeof flag === 'number')
 
-  return entries.reduce<string[]>((arr, [name, flag]) => {
-    if (value & flag) {
-      arr.push(name)
-    }
-    return arr
-  }, [])
-}
+//   return entries.reduce<string[]>((arr, [name, flag]) => {
+//     if (value & flag) {
+//       arr.push(name)
+//     }
+//     return arr
+//   }, [])
+// }
 
 function getCleanText (text: string) {
-  return text.replaceAll(/import\(.*?\)\./g, '')
+  return text.replace(/import\(.*?\)\./g, '')
 }
 
 function count (arr: string[], needle: string) {
@@ -567,7 +622,7 @@ function getRecursiveTypes (recursiveTypes: string[], type: Type<ts.Type>) {
 function findPotentialRecursiveTypes (type?: Type<ts.Type>): string[] {
   if (type == null) return []
 
-  const recursiveTypes = []
+  const recursiveTypes: string[] = []
 
   if (type.isUnion()) {
     recursiveTypes.push(...getUnionTypes(type).map(t => t.getText()))

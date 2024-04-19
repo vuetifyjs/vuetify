@@ -204,20 +204,21 @@ describe('VSlideGroup', () => {
     cy.get('.v-card').eq(7).should('exist').should('be.visible').should('have.class', 'bg-primary')
   })
 
-  it('should support native scroll', () => {
-    cy.mount(() => (
-      <Application>
-        <CenteredGrid width="400px">
-          <VSlideGroup selectedClass="bg-primary">
-            { createRange(8).map(i => (
-              <VSlideGroupItem key={ i } value={ i }>
-                { props => <VCard color="grey" width="50" height="100" class={['ma-4', props.selectedClass, `item-${i}`]}>{ i }</VCard> }
-              </VSlideGroupItem>
-            ))}
-          </VSlideGroup>
-        </CenteredGrid>
-      </Application>
-    ))
+  it('supports native scroll', () => {
+    cy.viewport(1280, 768)
+      .mount(() => (
+        <Application>
+          <CenteredGrid width="400px">
+            <VSlideGroup selectedClass="bg-primary">
+              { createRange(8).map(i => (
+                <VSlideGroupItem key={ i } value={ i }>
+                  { props => <VCard color="grey" width="50" height="100" class={['ma-4', props.selectedClass, `item-${i}`]}>{ i }</VCard> }
+                </VSlideGroupItem>
+              ))}
+            </VSlideGroup>
+          </CenteredGrid>
+        </Application>
+      ))
 
     cy.get('.v-slide-group__container').should('exist').scrollTo(450, 0, { ensureScrollable: true })
 

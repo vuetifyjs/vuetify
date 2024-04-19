@@ -77,7 +77,7 @@ export const VColorPickerEdit = defineComponent({
 
             if (!target) return
 
-            emit('update:color', mode.from(getColor(color ?? nullColor, target.value)))
+            emit('update:color', mode.from(getColor(color ?? mode.to(nullColor), target.value)))
           },
         }
       })

@@ -1,12 +1,12 @@
 <template>
-  <settings-header
-    title="communication"
+  <AppSettingsSettingsHeader
     text="communication-message"
+    title="communication"
   />
 
-  <banner-option />
+  <AppSettingsOptionsBannerOption />
 
-  <notifications-option />
+  <AppSettingsOptionsNotificationsOption />
 
   <br>
 
@@ -23,12 +23,12 @@
 
   <v-divider class="my-3" />
 
-  <settings-header
-    title="dashboard.advanced-options.danger-zone"
+  <AppSettingsSettingsHeader
     text="dashboard.advanced-options.danger-zone-message"
+    title="dashboard.advanced-options.danger-zone"
   />
 
-  <developer-mode />
+  <AppSettingsDeveloperMode />
 
   <br>
 
@@ -45,21 +45,6 @@
 </template>
 
 <script setup>
-  // Components
-  import BannerOption from './options/BannerOption.vue'
-  import DeveloperMode from './DeveloperMode.vue'
-  import NotificationsOption from './options/NotificationsOption.vue'
-  import SettingsHeader from '@/components/app/settings/SettingsHeader.vue'
-
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Stores
-  import { useUserStore } from '@vuetify/one'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const { t } = useI18n()
   const user = useUserStore()
 

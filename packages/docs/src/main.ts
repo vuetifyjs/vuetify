@@ -1,27 +1,27 @@
 // Styles
 import 'prism-theme-vars/base.css'
 
+// Plugins
+import { createApp } from 'vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import { createHead } from '@unhead/vue'
+import { installVuetify } from '@/plugins/vuetify'
+import { installPinia, pinia } from '@/plugins/pinia'
+import { installGlobalComponents } from '@/plugins/global-components'
+import { installGtag } from '@/plugins/gtag'
+import { installOne } from '@/plugins/one'
+import { installI18n } from '@/plugins/i18n'
+import { useAppStore } from '@/stores/app'
+import { useLocaleStore } from '@/stores/locale'
+import { installPwa } from '@/plugins/pwa'
+import { useUserStore } from '@vuetify/one'
+
 // App
 import App from './App.vue'
 
 // Virtual
 // import 'virtual:api'
 import { setupLayouts } from 'virtual:generated-layouts'
-
-// Plugins
-import { createApp } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
-import { createHead } from '@unhead/vue'
-import { installPinia, pinia } from '@/plugins/pinia'
-import { installGlobalComponents } from '@/plugins/global-components'
-import { installGtag } from '@/plugins/gtag'
-import { installOne } from '@/plugins/one'
-import { installI18n } from '@/plugins/i18n'
-import { useAppStore } from '@/store/app'
-import { useLocaleStore } from '@/store/locale'
-import { installPwa } from '@/plugins/pwa'
-import { useUserStore } from '@vuetify/one'
-import { installVuetify } from '@/plugins/vuetify'
 
 // Utilities
 import {
@@ -31,11 +31,11 @@ import {
   redirectRoutes,
   rpath,
   trailingSlash,
-} from '@/util/routes'
-import { wrapInArray } from '@/util/helpers'
+} from '@/utils/routes'
+import { wrapInArray } from '@/utils/helpers'
 
 // Globals
-import { IN_BROWSER } from '@/util/globals'
+import { IN_BROWSER } from '@/utils/globals'
 
 const routes = setupLayouts(generatedRoutes)
 

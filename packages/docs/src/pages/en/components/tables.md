@@ -25,13 +25,13 @@ More advanced tables such as [v-data-table](/components/data-tables/basics/) are
 
 <!-- ![Table Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-table/v-table-entry.png) -->
 
-<page-features />
+<PageFeatures />
 
 ## Usage
 
-<example file="v-table/usage" />
+<ExamplesExample file="v-table/usage" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -39,7 +39,7 @@ More advanced tables such as [v-data-table](/components/data-tables/basics/) are
 | - | - |
 | [v-table](/api/v-table/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Examples
 
@@ -49,22 +49,22 @@ More advanced tables such as [v-data-table](/components/data-tables/basics/) are
 
 Use **theme** prop to switch table to another theme.
 
-<example file="v-table/prop-dark" />
+<ExamplesExample file="v-table/prop-dark" />
 
 #### Density
 
 You can show a dense version of the table by using the **density** prop.
 
-<example file="v-table/prop-dense" />
+<ExamplesExample file="v-table/prop-dense" />
 
 #### Height
 
 Use the **height** prop to set the height of the table.
 
-<example file="v-table/prop-height" />
+<ExamplesExample file="v-table/prop-height" />
 
 #### Fixed header
 
 Use the **fixed-header** prop together with the **height** prop to fix the header to the top of the table.
 
-<example file="v-table/prop-fixed-header" />
+<ExamplesExample file="v-table/prop-fixed-header" />

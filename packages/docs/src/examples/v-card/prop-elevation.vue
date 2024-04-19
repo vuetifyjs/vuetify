@@ -1,13 +1,14 @@
 <template>
   <v-card
     class="mx-auto my-8"
-    max-width="344"
     elevation="16"
+    max-width="344"
   >
     <v-card-item>
       <v-card-title>
         Card title
       </v-card-title>
+
       <v-card-subtitle>
         Card subtitle secondary text
       </v-card-subtitle>

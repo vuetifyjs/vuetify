@@ -10,7 +10,7 @@
       :key="sponsor.slug"
       cols="auto"
     >
-      <sponsor-card
+      <SponsorCard
         :comfortable="Number(tier) === 2"
         :compact="Number(tier) > 2"
         :sponsor="sponsor"
@@ -20,27 +20,18 @@
   </v-row>
 
   <div v-else class="mb-4">
-    <app-btn
-      text="become-a-sponsor"
-      href="https://github.com/sponsors/johnleider"
-      border
-      target="_blank"
-      rel="noopener"
+    <AppBtn
       append-icon="mdi-open-in-new"
+      href="https://github.com/sponsors/johnleider"
+      rel="noopener"
+      target="_blank"
+      text="become-a-sponsor"
+      border
     />
   </div>
 </template>
 
 <script setup lang="ts">
-  // Components
-  import SponsorCard from '@/components/sponsor/Card.vue'
-
-  // Composables
-  import { useSponsorsStore } from '@/store/sponsors'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const props = defineProps({
     tier: {
       type: [Number, String],

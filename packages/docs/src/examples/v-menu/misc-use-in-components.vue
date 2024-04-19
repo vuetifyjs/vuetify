@@ -2,8 +2,8 @@
   <v-row>
     <v-col
       cols="12"
-      sm="6"
       offset-sm="3"
+      sm="6"
     >
       <v-card height="200px">
         <v-card-title class="bg-blue">

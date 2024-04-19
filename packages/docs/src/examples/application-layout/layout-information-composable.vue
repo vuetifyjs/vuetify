@@ -8,8 +8,8 @@
 
     <v-navigation-drawer
       color="grey-darken-2"
-      permanent
       name="drawer"
+      permanent
     >
       <div class="d-flex justify-center align-center h-100">
         <child v-slot="{ print }">
@@ -23,8 +23,8 @@
     </v-main>
 
     <v-footer
-      app
       name="footer"
+      app
     >
       <v-btn
         class="mx-auto"

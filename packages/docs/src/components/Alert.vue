@@ -17,8 +17,6 @@
 </template>
 
 <script setup>
-  import { computed } from 'vue'
-
   const props = defineProps({ type: String })
 
   const type = computed(() => {

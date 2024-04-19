@@ -141,6 +141,7 @@ export const VChip = genericComponent<VChipSlots>()({
     const closeProps = computed(() => ({
       'aria-label': t(props.closeLabel),
       onClick (e: MouseEvent) {
+        e.preventDefault()
         e.stopPropagation()
 
         isActive.value = false
@@ -276,7 +277,7 @@ export const VChip = genericComponent<VChipSlots>()({
             </div>
           )}
 
-          <div class="v-chip__content">
+          <div class="v-chip__content" data-no-activator="">
             { slots.default?.({
               isSelected: group?.isSelected.value,
               selectedClass: group?.selectedClass.value,
