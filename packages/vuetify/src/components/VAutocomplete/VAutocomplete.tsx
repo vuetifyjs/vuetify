@@ -195,7 +195,7 @@ export const VAutocomplete = genericComponent<new <
     ))
 
     const listRef = ref<VList>()
-    const { onListScroll, onListKeydown } = useScrolling(listRef, vTextFieldRef)
+    const { onListScroll, onListKeydown } = useScrolling(listRef, vTextFieldRef, vVirtualScrollRef, displayItems)
     function onClear (e: MouseEvent) {
       if (props.openOnClear) {
         menu.value = true
@@ -230,8 +230,25 @@ export const VAutocomplete = genericComponent<new <
         e.preventDefault()
       }
 
-      if (['Enter', 'ArrowDown'].includes(e.key)) {
-        menu.value = true
+      if (['Enter', ' '].includes(e.key)) {
+        // menu is opened in VMenu
+        autoFocusModelValue()
+      }
+
+      if (['ArrowUp'].includes(e.key)) {
+        IN_BROWSER && window.requestAnimationFrame(() => {
+          vVirtualScrollRef.value?.scrollToIndex(displayItems.value.length - 1)?.then(() => {
+            listRef.value?.focus('last')
+          })
+        })
+      }
+
+      if (['ArrowDown'].includes(e.key)) {
+        IN_BROWSER && window.requestAnimationFrame(() => {
+          vVirtualScrollRef.value?.scrollToIndex(0)?.then(() => {
+            listRef.value?.focus('first')
+          })
+        })
       }
 
       if (['Escape'].includes(e.key)) {
@@ -357,6 +374,22 @@ export const VAutocomplete = genericComponent<new <
         })
       }
     }
+    function autoFocusModelValue () {
+      if (props.hideSelected || !menu.value || !model.value.length) return
+
+      const index = displayItems.value.findIndex(
+        item => model.value.some(s => props.valueComparator(s.value, item.value))
+      )
+
+      IN_BROWSER && window.requestAnimationFrame(() => {
+        index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)?.then(() => {
+          const computedIndex = vVirtualScrollRef.value?.computedItems.findIndex(
+            item => model.value.some(s => props.valueComparator(s.value, item.raw.value))
+          )
+          listRef.value?.focus(computedIndex)
+        })
+      })
+    }
 
     watch(isFocused, (val, oldVal) => {
       if (val === oldVal) return
@@ -469,6 +502,7 @@ export const VAutocomplete = genericComponent<new <
                   { hasList && (
                     <VList
                       ref={ listRef }
+                      virtualItems
                       selected={ selectedValues.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
