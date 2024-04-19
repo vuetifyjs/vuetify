@@ -202,7 +202,5 @@ function clampTarget (
     max = scrollHeight + -containerHeight
   }
 
-  console.log({ min, max, value })
-
   return Math.max(Math.min(value, max), min)
 }
