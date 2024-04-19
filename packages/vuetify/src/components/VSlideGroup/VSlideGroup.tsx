@@ -17,7 +17,14 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, shallowRef, watch } from 'vue'
-import { calculateCenteredTarget, calculateUpdatedTarget, getClientSize, getOffsetSize, getScrollPosition, getScrollSize } from './helpers'
+import {
+  calculateCenteredTarget,
+  calculateUpdatedTarget,
+  getClientSize,
+  getOffsetSize,
+  getScrollPosition,
+  getScrollSize,
+} from './helpers'
 import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
@@ -105,8 +112,6 @@ export const VSlideGroup = genericComponent<new <T>(
 
     const { resizeRef: containerRef, contentRect: containerRect } = useResizeObserver()
     const { resizeRef: contentRef, contentRect } = useResizeObserver()
-
-    let ignoreFocusEvent = false
 
     const goTo = useGoTo()
     const goToOptions = computed<Partial<GoToOptions>>(() => {
@@ -228,6 +233,8 @@ export const VSlideGroup = genericComponent<new <T>(
       isFocused.value = false
     }
 
+    // Affix clicks produce onFocus that we have to ignore to avoid extra scrollToChildren
+    let ignoreFocusEvent = false
     function onFocus (e: FocusEvent) {
       if (
         !ignoreFocusEvent &&
@@ -238,9 +245,6 @@ export const VSlideGroup = genericComponent<new <T>(
       ignoreFocusEvent = false
     }
 
-    /**
-     * Affixes clicks produce onFocus that we have to ignore to avoid extra scrollToChildren
-     */
     function onFocusAffixes () {
       ignoreFocusEvent = true
     }

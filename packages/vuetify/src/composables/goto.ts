@@ -1,10 +1,10 @@
 // Utilities
 import { computed, inject } from 'vue'
+import { useRtl } from './locale'
 import { clamp, consoleWarn, mergeDeep, refElement } from '@/util'
 
 // Types
 import type { ComponentPublicInstance, InjectionKey, Ref } from 'vue'
-import { useRtl } from './locale'
 import type { LocaleInstance, RtlInstance } from './locale'
 
 export interface GoToInstance {
@@ -186,8 +186,8 @@ function clampTarget (
     scrollHeight,
   } = container
 
-  let min = -Infinity
-  let max = Infinity
+  let min: number
+  let max: number
 
   if (horizontal) {
     if (rtl) {
