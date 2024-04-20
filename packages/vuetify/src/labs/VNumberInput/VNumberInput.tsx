@@ -108,7 +108,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         inputRef.value?.stepDown()
       }
 
-      if (inputRef.value) model.value = parseInt(inputRef.value.value, 10)
+      if (inputRef.value) model.value = parseFloat(inputRef.value.value)
     }
 
     function onClickUp () {
