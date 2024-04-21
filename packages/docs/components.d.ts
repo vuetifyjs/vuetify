@@ -80,7 +80,6 @@ declare module 'vue' {
     AppSettingsPerksOptions: typeof import('./src/components/app/settings/PerksOptions.vue')['default']
     AppSettingsSettingsHeader: typeof import('./src/components/app/settings/SettingsHeader.vue')['default']
     AppSheet: typeof import('./src/components/app/Sheet.vue')['default']
-    AppSnackbarQueue: typeof import('./src/components/app/SnackbarQueue.vue')['default']
     AppTable: typeof import('./src/components/app/Table.vue')['default']
     AppTextField: typeof import('./src/components/app/TextField.vue')['default']
     AppTitle: typeof import('./src/components/app/Title.vue')['default']

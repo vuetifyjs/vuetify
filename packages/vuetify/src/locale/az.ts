@@ -2,6 +2,7 @@ export default {
   badge: 'nişan',
   open: 'Open',
   close: 'Bağla',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
