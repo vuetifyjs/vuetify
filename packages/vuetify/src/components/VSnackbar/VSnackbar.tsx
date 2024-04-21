@@ -107,6 +107,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     const overlay = ref<VOverlay>()
     const timerRef = ref<VProgressLinear>()
     const isHovering = shallowRef(false)
+    const startY = shallowRef(0)
 
     watch(isActive, startTimeout)
     watch(() => props.timeout, startTimeout)
@@ -145,6 +146,16 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     function onPointerleave () {
       isHovering.value = false
       startTimeout()
+    }
+
+    function onTouchstart (event: TouchEvent) {
+      startY.value = event.touches[0].clientY
+    }
+
+    function onTouchend (event: TouchEvent) {
+      if (Math.abs(startY.value - event.changedTouches[0].clientY) > 50) {
+        isActive.value = false
+      }
     }
 
     const locationClasses = computed(() => {
@@ -199,6 +210,8 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           scrim={ false }
           scrollStrategy="none"
           _disableGlobalStack
+          onTouchstart={ onTouchstart }
+          onTouchend={ onTouchend }
           { ...scopeId }
           v-slots={{ activator: slots.activator }}
         >
