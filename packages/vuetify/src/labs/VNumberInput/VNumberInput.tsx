@@ -208,6 +208,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                   key="decrement-defaults"
                   defaults={{
                     VBtn: {
+                      disabled: !canDecrease.value,
                       flat: true,
                       height: defaultHeight,
                       size: 'small',
@@ -241,6 +242,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                   key="increment-defaults"
                   defaults={{
                     VBtn: {
+                      disabled: !canIncrease.value,
                       flat: true,
                       height: defaultHeight,
                       size: 'small',
