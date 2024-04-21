@@ -155,12 +155,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     function onKeydown (e: KeyboardEvent) {
-      if ([
-        'Enter',
-        'ArrowLeft',
-        'ArrowRight',
-        'Backspace',
-      ].includes(e.key)) return
+      if (
+        ['Enter', 'ArrowLeft', 'ArrowRight', 'Backspace'].includes(e.key) ||
+        e.ctrlKey
+      ) return
 
       if (['ArrowDown'].includes(e.key)) {
         e.preventDefault()
