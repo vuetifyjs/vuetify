@@ -8,6 +8,7 @@ import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VProgressLinear } from '@/components/VProgressLinear'
 
 // Composables
+import { useLayout } from '@/composables'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { makeLocationProps } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
@@ -95,6 +96,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
   setup (props, { slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
+    const { mainStyles } = useLayout()
     const { positionClasses } = usePosition(props)
     const { scopeId } = useScopeId()
     const { themeClasses } = provideTheme(props)
@@ -172,7 +174,10 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             positionClasses.value,
             props.class,
           ]}
-          style={ props.style }
+          style={[
+            mainStyles.value,
+            props.style,
+          ]}
           { ...overlayProps }
           v-model={ isActive.value }
           contentProps={ mergeProps({
