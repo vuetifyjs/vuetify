@@ -25,6 +25,7 @@ export const makeVFabProps = propsFactory({
   app: Boolean,
   appear: Boolean,
   extended: Boolean,
+  layout: Boolean,
   location: {
     type: String as PropType<typeof locations[number]>,
     default: 'bottom end',
@@ -78,8 +79,8 @@ export const VFab = genericComponent()({
         id: props.name,
         order: computed(() => parseInt(props.order, 10)),
         position,
-        layoutSize: height,
-        elementSize: computed(() => height.value + 32),
+        layoutSize: computed(() => props.layout ? height.value + 24 : 0),
+        elementSize: computed(() => height.value),
         active: computed(() => props.app && model.value),
         absolute: toRef(props, 'absolute'),
       })
