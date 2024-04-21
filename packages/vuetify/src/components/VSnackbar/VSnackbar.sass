@@ -8,9 +8,6 @@
   margin: $snackbar-wrapper-margin
   margin-inline-end: calc(#{$snackbar-wrapper-margin} + var(--v-scrollbar-offset))
 
-  &:not(.v-snackbar--centered):not(.v-snackbar--top)
-    align-items: flex-end
-
   &__wrapper
     align-items: center
     display: flex
@@ -66,6 +63,24 @@
     .v-snackbar__actions
       align-self: flex-end
       margin-bottom: $snackbar-vertical-action-margin-bottom
+
+  &--center
+    align-items: center
+    justify-content: center
+
+  &--top
+    align-items: flex-start
+
+  &--bottom
+    align-items: flex-end
+
+  &--left,
+  &--start
+    justify-content: flex-start
+
+  &--right,
+  &--end
+    justify-content: flex-end
 
 .v-snackbar-transition
   &-enter-active,
