@@ -80,7 +80,7 @@ export const VFab = genericComponent()({
         order: computed(() => parseInt(props.order, 10)),
         position,
         layoutSize: computed(() => props.layout ? height.value + 24 : 0),
-        elementSize: computed(() => height.value),
+        elementSize: computed(() => height.value + 24),
         active: computed(() => props.app && model.value),
         absolute: toRef(props, 'absolute'),
       })
