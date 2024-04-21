@@ -22,6 +22,26 @@ The `v-snackbar-queue` component is used to queue up multiple snackbar messages 
 
 <PageFeatures />
 
+::: warning
+
+This feature requires [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
+
+:::
+
+## Installation
+
+Labs components require a manual import and installation of the component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VSnackbarQueue } from 'vuetify/labs/VSnackbarQueue'
+
+export default createVuetify({
+  components: {
+    VSnackbarQueue,
+  },
+})
+```
+
 ## Usage
 
 <ExamplesUsage name="v-snackbar-queue" />

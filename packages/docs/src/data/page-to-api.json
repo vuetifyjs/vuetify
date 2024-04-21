@@ -125,6 +125,7 @@
   "components/slide-groups": ["VSlideGroup", "VSlideGroupItem"],
   "components/sliders": ["VRangeSlider", "VSlider"],
   "components/snackbars": ["VSnackbar"],
+  "components/snackbar-queue": ["VSnackbarQueue", "VSnackbar"],
   "components/sparklines": ["VSparkline"],
   "components/steppers": [
     "VStepper",
