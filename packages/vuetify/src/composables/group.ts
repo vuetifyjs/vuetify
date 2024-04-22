@@ -13,6 +13,7 @@ export interface GroupItem {
   id: number
   value: Ref<unknown>
   disabled: Ref<boolean | undefined>
+  useIndexAsValue?: boolean
 }
 
 export interface GroupProps {
@@ -181,6 +182,7 @@ export function useGroup (
 
     if (unref(unwrapped.value) == null) {
       unwrapped.value = index
+      unwrapped.useIndexAsValue = true
     }
 
     if (index > -1) {
@@ -201,6 +203,13 @@ export function useGroup (
 
     const index = items.findIndex(item => item.id === id)
     items.splice(index, 1)
+
+    // #19655 update the items that use the index as the value.
+    for (let i = index; i < items.length; i++) {
+      if (items[i].useIndexAsValue) {
+        items[i].value = i
+      }
+    }
   }
 
   // If mandatory and nothing is selected, then select first non-disabled item

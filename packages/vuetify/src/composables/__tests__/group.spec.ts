@@ -3,7 +3,7 @@ import { makeGroupProps, useGroup, useGroupItem } from '../group'
 // Utilities
 import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
-import { defineComponent, h, nextTick, reactive } from 'vue'
+import { defineComponent, h, nextTick, reactive, useSlots } from 'vue'
 
 describe('group', () => {
   describe('with complex values', () => {
@@ -270,7 +270,8 @@ describe('group', () => {
       setup (props) {
         // @ts-expect-error missing emit
         useGroup(props, Symbol.for('test'))
-        return () => h('div', [
+        const slot = useSlots()
+        return () => h('div', slot.default?.() ?? [
           h(GroupItemComponent, { disabled: !!props.disabledItems?.[0] }),
           h(GroupItemComponent, { disabled: !!props.disabledItems?.[1] }),
         ])
@@ -369,6 +370,30 @@ describe('group', () => {
       await items[1].trigger('click')
 
       expect(wrapper.emitted('update:modelValue')).toStrictEqual([[[0]]])
+    })
+
+    it('should update the items that use index as the value when delete', async () => {
+      const values = reactive(['one', 'two', 'three'])
+      const wrapper = mount(GroupComponent, {
+        props: {
+          multiple: false,
+          mandatory: false,
+        },
+        slots: {
+          default () {
+            return values.map(value => h(GroupItemComponent, { key: value }))
+          },
+        },
+      })
+      values.splice(1, 1)
+      values.push('four')
+      await nextTick()
+      const items = wrapper.findAllComponents(GroupItemComponent)
+
+      await items[1].trigger('click')
+      await items[2].trigger('click')
+
+      expect(wrapper.emitted()['update:modelValue']).toEqual([[1], [2]])
     })
   })
 })
