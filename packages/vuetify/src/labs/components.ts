@@ -1,5 +1,6 @@
 export * from './VCalendar'
 export * from './VDateInput'
+export * from './VFileUpload'
 export * from './VNumberInput'
 export * from './VPicker'
 export * from './VStepperVertical'
