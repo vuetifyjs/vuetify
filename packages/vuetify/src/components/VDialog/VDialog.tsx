@@ -42,7 +42,6 @@ export const VDialog = genericComponent<OverlaySlots>()({
   props: makeVDialogProps(),
 
   emits: {
-    'click:outside': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
     afterLeave: () => true,
   },
