@@ -10,11 +10,6 @@
   // Composables
   import { useHead } from '@unhead/vue'
 
-  // Utilities
-  import { inject } from '@vercel/analytics'
-
-  inject()
-
   const user = useUserStore()
   const router = useRouter()
   const route = useRoute()

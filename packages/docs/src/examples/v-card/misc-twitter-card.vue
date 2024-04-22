@@ -1,10 +1,9 @@
 <template>
   <v-card
-    class="mx-auto"
+    class="mx-auto text-white"
     color="#26c6da"
     max-width="400"
     prepend-icon="mdi-twitter"
-    theme="dark"
     title="Twitter"
   >
     <template v-slot:prepend>

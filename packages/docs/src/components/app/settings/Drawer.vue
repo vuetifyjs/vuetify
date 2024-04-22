@@ -23,7 +23,7 @@
     <v-container class="px-3 py-3">
       <AppSettingsOptions />
 
-      <AppSettingsOptionsAdOption v-if="auth.isSubscriber" />
+      <AppSettingsOptionsAdOption v-if="one.isSubscriber" />
 
       <AppSettingsDeveloperMode />
     </v-container>
@@ -36,7 +36,7 @@
 
 <script setup>
   const app = useAppStore()
-  const auth = useAuthStore()
+  const one = useOneStore()
 
   const { t } = useI18n()
   const { isRtl } = useRtl()

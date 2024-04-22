@@ -30,7 +30,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, withDirectives } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -60,6 +60,7 @@ export const makeVBtnProps = propsFactory({
   appendIcon: IconValue,
 
   block: Boolean,
+  readonly: Boolean,
   slim: Boolean,
   stacked: Boolean,
 
@@ -89,8 +90,6 @@ export const makeVBtnProps = propsFactory({
 
 export const VBtn = genericComponent<VBtnSlots>()({
   name: 'VBtn',
-
-  directives: { Ripple },
 
   props: makeVBtnProps(),
 
@@ -172,7 +171,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
       const hasAppend = !!(props.appendIcon || slots.append)
       const hasIcon = !!(props.icon && props.icon !== true)
 
-      return (
+      return withDirectives(
         <Tag
           type={ Tag === 'a' ? undefined : 'button' }
           class={[
@@ -186,6 +185,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
               'v-btn--flat': props.flat,
               'v-btn--icon': !!props.icon,
               'v-btn--loading': props.loading,
+              'v-btn--readonly': props.readonly,
               'v-btn--slim': props.slim,
               'v-btn--stacked': props.stacked,
             },
@@ -211,12 +211,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
           aria-busy={ props.loading ? true : undefined }
           disabled={ isDisabled.value || undefined }
           href={ link.href.value }
-          tabindex={ props.loading ? -1 : undefined }
-          v-ripple={[
-            !isDisabled.value && props.ripple,
-            null,
-            props.icon ? ['center'] : null,
-          ]}
+          tabindex={ props.loading || props.readonly ? -1 : undefined }
           onClick={ onClick }
           value={ valueAttr.value }
         >
@@ -298,7 +293,13 @@ export const VBtn = genericComponent<VBtnSlots>()({
               )}
             </span>
           )}
-        </Tag>
+        </Tag>,
+        [[
+          Ripple,
+          !isDisabled.value && !!props.ripple,
+          '',
+          { center: !!props.icon },
+        ]]
       )
     })
 

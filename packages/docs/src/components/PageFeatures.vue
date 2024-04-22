@@ -1,7 +1,7 @@
 <template>
   <div class="mb-4">
     <page-feature-chip
-      v-if="one.isSubscriber"
+      v-if="one.isSubscriber && user.pins"
       :prepend-icon="`mdi-pin${!pinned ? '-outline' : ''}`"
       text="Pin"
       @click="onClickPin"
@@ -82,6 +82,7 @@
   const one = useOneStore()
   const pins = usePinsStore()
   const route = useRoute()
+  const user = useUserStore()
   const { t } = useI18n()
 
   const branch = getBranch()

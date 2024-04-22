@@ -213,6 +213,7 @@
       "resize",
       "ripple",
       "scroll",
+      "tooltip",
       "touch"
     ]
   },
@@ -224,6 +225,10 @@
       "introduction",
       {
         "title": "calendars",
+        "subfolder": "components"
+      },
+      {
+        "title": "confirm-edit",
         "subfolder": "components"
       },
       {

@@ -77,7 +77,7 @@ export const VTimeline = genericComponent()({
       },
       VTimelineItem: {
         density: toRef(props, 'density'),
-        dotColor: toRef(props, 'lineColor'),
+        dotColor: toRef(props, 'dotColor'),
         fillDot: toRef(props, 'fillDot'),
         hideOpposite: toRef(props, 'hideOpposite'),
         iconColor: toRef(props, 'iconColor'),

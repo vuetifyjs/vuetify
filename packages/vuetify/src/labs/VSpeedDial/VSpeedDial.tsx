@@ -7,19 +7,28 @@ import { makeVMenuProps, VMenu } from '@/components/VMenu/VMenu'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
-import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { ComputedRef } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
+import type { Anchor } from '@/util'
 
 export const makeVSpeedDialProps = propsFactory({
   ...makeComponentProps(),
-  ...makeVMenuProps({ offset: 8, minWidth: 0, location: 'top center' as const }),
-  ...makeTransitionProps({ transition: 'fade-transition' }),
+  ...makeVMenuProps({
+    offset: 8,
+    minWidth: 0,
+    openDelay: 0,
+    closeDelay: 100,
+    location: 'top center' as const,
+    transition: 'scale-transition',
+  }),
 }, 'VSpeedDial')
 
 export const VSpeedDial = genericComponent<OverlaySlots>()({
@@ -27,8 +36,24 @@ export const VSpeedDial = genericComponent<OverlaySlots>()({
 
   props: makeVSpeedDialProps(),
 
+  emits: {
+    'update:modelValue': (value: boolean) => true,
+  },
+
   setup (props, { slots }) {
+    const model = useProxiedModel(props, 'modelValue')
+
     const menuRef = ref<VMenu>()
+
+    const location = computed(() => {
+      const [y, x = 'center'] = props.location.split(' ')
+
+      return `${y} ${x}`
+    }) as ComputedRef<Anchor>
+
+    const locationClasses = computed(() => ({
+      [`v-speed-dial__content--${location.value.replace(' ', '-')}`]: true,
+    }))
 
     useRender(() => {
       const menuProps = VMenu.filterProps(props)
@@ -36,10 +61,16 @@ export const VSpeedDial = genericComponent<OverlaySlots>()({
       return (
         <VMenu
           { ...menuProps }
+          v-model={ model.value }
           class={ props.class }
           style={ props.style }
-          contentClass="v-speed-dial__content"
+          contentClass={[
+            'v-speed-dial__content',
+            locationClasses.value,
+          ]}
+          location={ location.value }
           ref={ menuRef }
+          transition="fade-transition"
         >
           {{
             ...slots,
@@ -55,6 +86,7 @@ export const VSpeedDial = genericComponent<OverlaySlots>()({
                   appear
                   group
                   transition={ props.transition }
+                  mode="out-in"
                 >
                   { slots.default?.(slotProps) }
                 </MaybeTransition>

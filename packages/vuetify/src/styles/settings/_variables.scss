@@ -5,6 +5,7 @@
 
 $color-pack: true !default;
 $reset: true !default;
+$layers: false !default;
 
 $body-font-family: 'Roboto', sans-serif !default;
 $font-size-root: 1rem !default;
@@ -12,6 +13,7 @@ $line-height-root: 1.5 !default;
 $border-color-root: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $border-radius-root: 4px !default;
 $border-style-root: solid !default;
+$border-width-root: thin !default;
 $transition-duration-root: 0.3s !default;
 $transition-move-duration-root: 0.5s !default;
 
@@ -19,8 +21,8 @@ $borders: () !default;
 $borders: map-deep-merge(
   (
     0: 0,
-    null: thin,
-    thin: thin,
+    null: $border-width-root,
+    thin: $border-width-root,
     sm: 1px,
     md: 2px,
     lg: 4px,

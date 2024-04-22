@@ -29,10 +29,10 @@ describe('VBottomNavigation', () => {
       .get('.v-bottom-navigation').should('have.css', 'height', '40px')
   })
 
-  it('should not be visible if modelValue is false', () => {
+  it('should not be visible if active is false', () => {
     cy.mount(() => (
       <VLayout>
-        <VBottomNavigation modelValue={ false }></VBottomNavigation>
+        <VBottomNavigation active={ false }></VBottomNavigation>
       </VLayout>
     ))
 
