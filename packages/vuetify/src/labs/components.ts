@@ -1,6 +1,7 @@
 export * from './VCalendar'
 export * from './VConfirmEdit'
 export * from './VEmptyState'
+export * from './VFileUpload'
 export * from './VFab'
 export * from './VNumberInput'
 export * from './VPicker'
