@@ -388,12 +388,22 @@ describe('group', () => {
       values.splice(1, 1)
       values.push('four')
       await nextTick()
-      const items = wrapper.findAllComponents(GroupItemComponent)
+      let items = wrapper.findAllComponents(GroupItemComponent)
 
       await items[1].trigger('click')
       await items[2].trigger('click')
 
       expect(wrapper.emitted()['update:modelValue']).toEqual([[1], [2]])
+
+      values.splice(1, 0, 'eight')
+      values.push('nine')
+      await nextTick()
+      items = wrapper.findAllComponents(GroupItemComponent)
+
+      await items[3].trigger('click')
+      await items[4].trigger('click')
+
+      expect(wrapper.emitted()['update:modelValue']).toEqual([[1], [2], [3], [4]])
     })
   })
 })

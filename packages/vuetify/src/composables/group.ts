@@ -2,7 +2,7 @@
 import { useProxiedModel } from './proxiedModel'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef, unref, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, onUpdated, provide, reactive, toRef, unref, watch } from 'vue'
 import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -203,13 +203,6 @@ export function useGroup (
 
     const index = items.findIndex(item => item.id === id)
     items.splice(index, 1)
-
-    // #19655 update the items that use the index as the value.
-    for (let i = index; i < items.length; i++) {
-      if (items[i].useIndexAsValue) {
-        items[i].value = i
-      }
-    }
   }
 
   // If mandatory and nothing is selected, then select first non-disabled item
@@ -226,6 +219,15 @@ export function useGroup (
 
   onBeforeUnmount(() => {
     isUnmounted = true
+  })
+
+  onUpdated(() => {
+    // #19655 update the items that use the index as the value.
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].useIndexAsValue) {
+        items[i].value = i
+      }
+    }
   })
 
   function select (id: number, value?: boolean) {
