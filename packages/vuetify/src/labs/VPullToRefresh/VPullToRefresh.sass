@@ -1,0 +1,18 @@
+.v-pull-to-refresh
+  overflow: hidden
+  &__pull-down
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: flex-end
+    height: 64px 
+    transition: top .3s ease-out
+    &--touching
+      transition: none
+
+
+  &__scroll-container
+    position: relative
+    transition: top .3s ease-out
+    &--touching
+      transition: none
