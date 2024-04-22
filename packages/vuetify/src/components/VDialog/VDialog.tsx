@@ -47,7 +47,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
     afterLeave: () => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
 
@@ -95,6 +95,10 @@ export const VDialog = genericComponent<OverlaySlots>()({
       }
     }
 
+    function onAfterLeave () {
+      emit('afterLeave')
+    }
+
     watch(isActive, async val => {
       if (!val) {
         await nextTick()
@@ -131,6 +135,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
           contentProps={ contentProps }
           role="dialog"
           onAfterEnter={ onAfterEnter }
+          onAfterLeave={ onAfterLeave }
           { ...scopeId }
         >
           {{
