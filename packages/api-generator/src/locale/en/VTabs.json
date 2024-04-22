@@ -2,7 +2,7 @@
   "props": {
     "alignTabs": "Aligns the tabs to the `start`, `center`, or `end` of container. Also accepts `title` to align with the `v-toolbar-title` component.",
     "alignWithTitle": "Make `v-tabs` lined up with the toolbar title.",
-    "color": "Applies specified color to the selected tab - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
+    "color": "Applies specified color to the selected tab - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
     "centered": "Centers the tabs.",
     "centerActive": "Forces the selected tab to be centered.",
     "cycle": "Will reset to first or last tab when swiping left or right if at the end of indexes.",

@@ -24,17 +24,21 @@ The continued development and maintenance of Vuetify is made possible by these g
 
 <HomeSponsors />
 
-<br>
+<v-divider style="max-width: 500px;" class="mx-auto my-16" />
 
-<v-divider style="max-width: 500px;" class="mx-auto" />
+## Templates Built With Vuetify
 
-<br>
+Check out these premium templates built using Vuetify.{style="max-width: 568px" .mx-auto .px-4}
+
+<DocPremiumThemesGallery />
+
+<v-divider style="max-width: 500px;" class="mx-auto my-16" />
 
 ## Made With Vuetify
 
 Check out these beautiful apps, plugins, and themes built using Vuetify.{style="max-width: 568px" .mx-auto .px-4}
 
-<DocMadeWithVuetifyGallery class="pa-3" />
+<DocMadeWithVuetifyGallery class="pa-3 mb-4" />
 
 <DocMadeWithVuetifyLink />
 

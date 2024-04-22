@@ -20,7 +20,7 @@ Get started with Vuetify, the world’s most popular Vue.js framework for buildi
 
 <PageFeatures />
 
-<PromotedEntry />
+<VoPromotionsCardHighlight slug="vuemastery-getting-started" />
 
 ## Installation
 
@@ -44,7 +44,7 @@ yarn create vuetify
 ```
 
 ```bash [npm]
-npm create vuetify
+npm create vuetify@latest
 ```
 
 ```bash [pnpm]

@@ -37,9 +37,11 @@ describe('VPagination', () => {
   })
 
   it('should react to keyboard navigation', () => {
-    cy.mount(defineComponent(() => {
-      const model = ref(2)
-      return () => <VPagination v-model={ model.value } length={ 3 } />
+    cy.mount(defineComponent({
+      setup () {
+        const model = ref(2)
+        return () => <VPagination v-model={ model.value } length={ 3 } />
+      },
     }))
 
     cy.get('.v-pagination__item').first().find('.v-btn').focus()

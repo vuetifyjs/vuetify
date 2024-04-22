@@ -84,9 +84,10 @@
     <v-divider></v-divider>
 
     <v-card-actions>
-      <v-btn @click="expand = !expand">
-        {{ !expand ? 'Full Report' : 'Hide Report' }}
-      </v-btn>
+      <v-btn
+        :text="!expand ? 'Full Report' : 'Hide Report'"
+        @click="expand = !expand"
+      ></v-btn>
     </v-card-actions>
   </v-card>
 </template>

@@ -1,12 +1,12 @@
 <template>
   <v-card
     class="mx-auto"
-    color="grey-lighten-4"
+    color="surface-light"
     max-width="600"
   >
     <template v-slot:prepend>
       <v-icon
-        :color="checking ? 'red lighten-2' : 'indigo'"
+        :color="checking ? 'red lighten-2' : 'indigo-lighten-2'"
         class="me-8"
         icon="mdi-heart-pulse"
         size="64"

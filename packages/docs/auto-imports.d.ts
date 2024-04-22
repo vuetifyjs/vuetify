@@ -75,6 +75,7 @@ declare global {
   const useOneStore: typeof import('@vuetify/one')['useOneStore']
   const usePinsStore: typeof import('./src/stores/pins')['usePinsStore']
   const usePlayground: typeof import('./src/composables/playground')['usePlayground']
+  const useProductsStore: typeof import('@vuetify/one')['useProductsStore']
   const usePromotionsStore: typeof import('./src/stores/promotions')['usePromotionsStore']
   const useReleasesStore: typeof import('./src/stores/releases')['useReleasesStore']
   const useRoute: typeof import('vue-router')['useRoute']
@@ -96,6 +97,7 @@ declare global {
 // for vue template auto import
 import { UnwrapRef } from 'vue'
 declare module 'vue' {
+  interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly IN_BROWSER: UnwrapRef<typeof import('./src/utils/globals')['IN_BROWSER']>
     readonly IS_DEBUG: UnwrapRef<typeof import('./src/utils/globals')['IS_DEBUG']>
@@ -164,6 +166,7 @@ declare module 'vue' {
     readonly useOneStore: UnwrapRef<typeof import('@vuetify/one')['useOneStore']>
     readonly usePinsStore: UnwrapRef<typeof import('./src/stores/pins')['usePinsStore']>
     readonly usePlayground: UnwrapRef<typeof import('./src/composables/playground')['usePlayground']>
+    readonly useProductsStore: UnwrapRef<typeof import('@vuetify/one')['useProductsStore']>
     readonly usePromotionsStore: UnwrapRef<typeof import('./src/stores/promotions')['usePromotionsStore']>
     readonly useReleasesStore: UnwrapRef<typeof import('./src/stores/releases')['useReleasesStore']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
@@ -184,6 +187,7 @@ declare module 'vue' {
   }
 }
 declare module '@vue/runtime-core' {
+  interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly IN_BROWSER: UnwrapRef<typeof import('./src/utils/globals')['IN_BROWSER']>
     readonly IS_DEBUG: UnwrapRef<typeof import('./src/utils/globals')['IS_DEBUG']>
@@ -252,6 +256,7 @@ declare module '@vue/runtime-core' {
     readonly useOneStore: UnwrapRef<typeof import('@vuetify/one')['useOneStore']>
     readonly usePinsStore: UnwrapRef<typeof import('./src/stores/pins')['usePinsStore']>
     readonly usePlayground: UnwrapRef<typeof import('./src/composables/playground')['usePlayground']>
+    readonly useProductsStore: UnwrapRef<typeof import('@vuetify/one')['useProductsStore']>
     readonly usePromotionsStore: UnwrapRef<typeof import('./src/stores/promotions')['usePromotionsStore']>
     readonly useReleasesStore: UnwrapRef<typeof import('./src/stores/releases')['useReleasesStore']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>

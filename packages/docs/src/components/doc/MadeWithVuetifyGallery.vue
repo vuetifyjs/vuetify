@@ -11,9 +11,9 @@
         cols="12"
         md="4"
       >
-        <v-skeleton-loader height="180" />
+        <v-skeleton-loader class="rounded-b-0" height="180" />
 
-        <v-skeleton-loader type="text" />
+        <v-skeleton-loader class="rounded-t-0" type="text" />
       </v-col>
     </v-row>
 
@@ -42,9 +42,10 @@
                 :name="project.raw.title"
                 :src="project.raw.image"
                 :title="project.raw.title"
-                class="border"
-                height="180"
-                min-height="180"
+                height="230"
+                max-height="230"
+                min-height="230"
+                cover
                 eager
               />
             </a>
@@ -79,7 +80,7 @@
   const store = useMadeWithVuetifyStore()
 
   const items = computed(() => {
-    return shuffle(store.items)
+    return shuffle(store.items.slice())
   })
 
   function shuffle (array) {

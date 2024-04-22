@@ -79,3 +79,9 @@ The `v-sparkline` component pairs nicely with `v-card` and `v-sheet` to create c
 For concise information, a complete chart might be overkill. Using a trend line with gradient provides enough detail for the user without showing too much information.
 
 <ExamplesExample file="v-sparkline/misc-heart-rate" />
+
+#### Dashboard cards
+
+The `v-sparkline` component can be used to create a variety of different cards for a dashboard. Here we show a few examples of how it can be used to display different types of data.
+
+<ExamplesExample file="v-sparkline/misc-dashboard-cards" />
