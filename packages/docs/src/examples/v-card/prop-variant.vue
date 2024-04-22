@@ -10,6 +10,7 @@
         :variant="variant"
         class="mx-auto"
         color="surface-variant"
+        max-width="344"
         subtitle="Greyhound divisely hello coldly fonwderfully"
         title="Headline"
       >
