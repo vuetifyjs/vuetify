@@ -43,6 +43,9 @@
             line-height: inherit
             padding: $dialog-card-text-padding
 
+          > .v-card-actions
+            justify-content: flex-end
+
   .v-dialog--fullscreen
     --v-scrollbar-offset: 0px
 
@@ -81,3 +84,6 @@
         > .v-card-text
           backface-visibility: hidden
           overflow-y: auto
+
+  .v-dialog__close
+    margin: $dialog-close-margin

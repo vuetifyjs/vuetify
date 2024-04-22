@@ -3,6 +3,8 @@ import './VDialog.sass'
 
 // Components
 import { VDialogTransition } from '@/components/transitions'
+import { VBtn } from '@/components/VBtn'
+import { makeVCardProps, VCard } from '@/components/VCard/VCard'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
@@ -17,10 +19,25 @@ import { mergeProps, nextTick, ref, watch } from 'vue'
 import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
-import type { Component } from 'vue'
+import type { Component, Ref } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
+export type DialogSlots = OverlaySlots & {
+  item: { isActive: Ref<boolean> }
+  prepend: { isActive: Ref<boolean> }
+  title: { isActive: Ref<boolean> }
+  subtitle: { isActive: Ref<boolean> }
+  append: { isActive: Ref<boolean> }
+  actions: { isActive: Ref<boolean> }
+  close: { isActive: Ref<boolean>, props: Record<string, any> }
+}
+
 export const makeVDialogProps = propsFactory({
+  closable: Boolean,
+  closeIcon: {
+    type: String,
+    default: '$close',
+  },
   fullscreen: Boolean,
   retainFocus: {
     type: Boolean,
@@ -28,6 +45,7 @@ export const makeVDialogProps = propsFactory({
   },
   scrollable: Boolean,
 
+  ...makeVCardProps(),
   ...makeVOverlayProps({
     origin: 'center center' as const,
     scrollStrategy: 'block' as const,
@@ -36,7 +54,7 @@ export const makeVDialogProps = propsFactory({
   }),
 }, 'VDialog')
 
-export const VDialog = genericComponent<OverlaySlots>()({
+export const VDialog = genericComponent<DialogSlots>()({
   name: 'VDialog',
 
   props: makeVDialogProps(),
@@ -111,6 +129,18 @@ export const VDialog = genericComponent<OverlaySlots>()({
       const contentProps = mergeProps({
         tabindex: -1,
       }, props.contentProps)
+      const cardProps = VCard.filterProps(props)
+
+      const hasTitle = !!(slots.title || props.title != null)
+      const hasSubtitle = !!(slots.subtitle || props.subtitle != null)
+      const hasHeader = hasTitle || hasSubtitle
+      const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon || props.closable)
+      const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
+      const hasCardItem = hasHeader || hasPrepend || hasAppend
+
+      function onClickClose () {
+        isActive.value = false
+      }
 
       return (
         <VOverlay
@@ -137,6 +167,67 @@ export const VDialog = genericComponent<OverlaySlots>()({
             activator: slots.activator,
             default: (...args) => (
               <VDefaultsProvider root="VDialog">
+                { hasCardItem && (
+                  <VCard
+                    { ...cardProps }
+                    color={ undefined }
+                    key="item"
+                  >
+                    {{
+                      default: slots.item ? () => slots.item?.(...args) : undefined,
+                      prepend: slots.prepend ? () => slots.prepend?.(...args) : undefined,
+                      title: slots.title ? () => slots.title?.(...args) : undefined,
+                      subtitle: slots.subtitle ? () => slots.subtitle?.(...args) : undefined,
+                      append: hasAppend ? () => (
+                        <>
+                          { slots.append?.(...args) }
+
+                          <div class="v-dialog__close">
+                            { !slots.close ? (
+                              <VBtn
+                                icon={ props.closeIcon }
+                                onClick={ onClickClose }
+                                variant="text"
+                                density="comfortable"
+                                size="small"
+                              ></VBtn>
+                            ) : (
+                              <VDefaultsProvider
+                                defaults={{
+                                  VBtn: {
+                                    icon: props.closeIcon,
+                                    variant: 'text',
+                                    density: 'comfortable',
+                                    size: 'small',
+                                  },
+                                }}
+                              >
+                                {{
+                                  default: () => slots.close?.({
+                                    ...args[0],
+                                    props: { onClick: onClickClose },
+                                  }),
+                                }}
+                              </VDefaultsProvider>
+                            )}
+                          </div>
+                        </>
+                      ) : undefined,
+                      actions: slots.actions ? () => (
+                        <VDefaultsProvider
+                          defaults={{
+                            VBtn: {
+                              color: props.color,
+                            },
+                          }}
+                        >
+                          { slots.actions?.(...args) }
+                        </VDefaultsProvider>
+                      ) : undefined,
+                    }}
+                  </VCard>
+                )}
+
                 { slots.default?.(...args) }
               </VDefaultsProvider>
             ),
