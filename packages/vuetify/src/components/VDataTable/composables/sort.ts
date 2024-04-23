@@ -3,7 +3,7 @@ import { useLocale } from '@/composables'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide, toRef } from 'vue'
+import { computed, inject, provide, toRaw, toRef } from 'vue'
 import { getObjectValueByPath, isEmpty, propsFactory } from '@/util'
 
 // Types
@@ -105,10 +105,16 @@ export function useSortedItems <T extends Record<string, any>> (
   const sortedItems = computed(() => {
     if (!sortBy.value.length) return items.value
 
-    return sortItems(items.value, sortBy.value, locale.current.value, {
-      ...props.customKeySort,
-      ...sortFunctions?.value,
-    }, sortRawFunctions?.value)
+    return sortItems(
+      [...toRaw(items.value)],
+      sortBy.value.map(item => toRaw(item)),
+      locale.current.value,
+      {
+        ...props.customKeySort,
+        ...sortFunctions?.value,
+      },
+      sortRawFunctions?.value
+    )
   })
 
   return { sortedItems }
@@ -123,7 +129,7 @@ export function sortItems<T extends Record<string, any>> (
 ): T[] {
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
 
-  return [...items].sort((a, b) => {
+  return items.sort((a, b) => {
     for (let i = 0; i < sortByItems.length; i++) {
       let hasCustomResult = false
       const sortKey = sortByItems[i].key
@@ -131,22 +137,26 @@ export function sortItems<T extends Record<string, any>> (
 
       if (sortOrder === false) continue
 
-      let sortA = getObjectValueByPath(a.raw, sortKey)
-      let sortB = getObjectValueByPath(b.raw, sortKey)
-      let sortARaw = a.raw
-      let sortBRaw = b.raw
-
-      if (sortOrder === 'desc') {
-        [sortA, sortB] = [sortB, sortA]
-        ;[sortARaw, sortBRaw] = [sortBRaw, sortARaw]
-      }
-
       if (customRawSorters?.[sortKey]) {
+        let sortARaw = a.raw
+        let sortBRaw = b.raw
+
+        if (sortOrder === 'desc') {
+          [sortARaw, sortBRaw] = [sortBRaw, sortARaw]
+        }
+
         const customResult = customRawSorters[sortKey](sortARaw, sortBRaw)
 
         if (customResult == null) continue
         hasCustomResult = true
         if (customResult) return customResult
+      }
+
+      let sortA = getObjectValueByPath(a.raw, sortKey)
+      let sortB = getObjectValueByPath(b.raw, sortKey)
+
+      if (sortOrder === 'desc') {
+        [sortA, sortB] = [sortB, sortA]
       }
 
       if (customSorters?.[sortKey]) {
