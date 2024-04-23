@@ -124,7 +124,7 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
       )
     })
 
-    return {}
+    return groupItem.isReady
   },
 })
 

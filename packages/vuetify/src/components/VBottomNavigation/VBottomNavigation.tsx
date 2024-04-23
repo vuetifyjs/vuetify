@@ -20,7 +20,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed, Suspense, toRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -95,7 +95,7 @@ export const VBottomNavigation = genericComponent<new <T>(
       absolute: toRef(props, 'absolute'),
     })
 
-    useGroup(props, VBtnToggleSymbol)
+    const group = useGroup(props, VBtnToggleSymbol)
 
     provideDefaults({
       VBtn: {
@@ -135,11 +135,13 @@ export const VBottomNavigation = genericComponent<new <T>(
             props.style,
           ]}
         >
-          { slots.default && (
-            <div class="v-bottom-navigation__content">
-              { slots.default() }
-            </div>
-          )}
+          <div class="v-bottom-navigation__content">
+            <Suspense onResolve={ group.ready }>
+              <>
+                { slots.default?.() }
+              </>
+            </Suspense>
+          </div>
         </props.tag>
       )
     })

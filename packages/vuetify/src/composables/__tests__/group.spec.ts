@@ -3,7 +3,8 @@ import { makeGroupProps, useGroup, useGroupItem } from '../group'
 // Utilities
 import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
-import { defineComponent, h, nextTick, reactive } from 'vue'
+import { defineComponent, Fragment, h, nextTick, reactive, Suspense } from 'vue'
+import { useRender } from '@/util'
 
 describe('group', () => {
   describe('with complex values', () => {
@@ -14,12 +15,17 @@ describe('group', () => {
       setup (props) {
         // @ts-expect-error missing emit
         const item = useGroupItem(props, Symbol.for('test'))
-        return () => h('div', {
+        return item.isReady.then(() => ({
+          item,
+        }))
+      },
+      render (ctx: any) {
+        return h('div', {
           class: {
-            selected: item.isSelected.value,
+            selected: ctx.item.isSelected.value,
           },
-          onClick: item.toggle,
-        }, [JSON.stringify(props.value)])
+          onClick: ctx.item.toggle,
+        }, [JSON.stringify(ctx.value)])
       },
     })
 
@@ -29,11 +35,11 @@ describe('group', () => {
       },
       setup (props) {
         // @ts-expect-error missing emit
-        useGroup(props, Symbol.for('test'))
-        return () => h('div', [
+        const group = useGroup(props, Symbol.for('test'))
+        return () => h(Suspense, { onResolve: group.ready }, [h(Fragment, [
           h(GroupItemComponent, { value: { foo: 1 } }),
           h(GroupItemComponent, { value: { bar: 2 } }),
-        ])
+        ])])
       },
     })
 
@@ -54,7 +60,7 @@ describe('group', () => {
 
       await item[1].trigger('click')
 
-      expect(wrapper.emitted('update:modelValue')).toEqual([
+      expect(wrapper.emitted('update:modelValue')).toStrictEqual([
         [{ bar: 2 }],
       ])
 
@@ -71,12 +77,17 @@ describe('group', () => {
       setup (props) {
         // @ts-expect-error missing emit
         const item = useGroupItem(props, Symbol.for('test'))
-        return () => h('div', {
-          class: {
-            selected: item.isSelected.value,
-          },
-          onClick: item.toggle,
-        }, [props.value])
+
+        useRender(() => {
+          return h('div', {
+            class: {
+              selected: item.isSelected.value,
+            },
+            onClick: item.toggle,
+          }, [props.value])
+        })
+
+        return item.isReady
       },
     })
 
@@ -85,26 +96,26 @@ describe('group', () => {
         ...makeGroupProps(),
         disabledItems: Array,
       },
-      setup (props) {
+      setup (props, { slots }) {
         // @ts-expect-error missing emit
-        return useGroup(props, Symbol.for('test'))
-      },
-      render () {
-        return h('div', this.$slots.default?.() ?? [
-          h(GroupItemComponent, { value: 'one', disabled: !!this.disabledItems?.[0] }),
-          h(GroupItemComponent, { value: 'two', disabled: !!this.disabledItems?.[1] }),
-        ])
+        const group = useGroup(props, Symbol.for('test'))
+        return h(Suspense, { onResolve: group.ready }, slots.default?.() ?? [h(Fragment, [
+          h(GroupItemComponent, { value: 'one', disabled: !!props.disabledItems?.[0] }),
+          h(GroupItemComponent, { value: 'two', disabled: !!props.disabledItems?.[1] }),
+        ])])
       },
     })
 
     it('should emit new selection', async () => {
       const wrapper = mount(GroupComponent)
 
+      await nextTick()
+
       const item = wrapper.findComponent(GroupItemComponent)
 
       await item.trigger('click')
 
-      expect(wrapper.emitted('update:modelValue')).toEqual([
+      expect(wrapper.emitted('update:modelValue')).toStrictEqual([
         ['one'],
       ])
 
@@ -160,7 +171,7 @@ describe('group', () => {
       await items[1].trigger('click')
       await items[0].trigger('click')
 
-      expect(wrapper.emitted()['update:modelValue']).toEqual([
+      expect(wrapper.emitted('update:modelValue')).toStrictEqual([
         [['two']],
         [['two', 'one']],
       ])
@@ -175,7 +186,10 @@ describe('group', () => {
         },
       })
 
-      expect(wrapper.emitted()['update:modelValue']).toEqual([
+      await nextTick()
+      await nextTick()
+
+      expect(wrapper.emitted('update:modelValue')).toStrictEqual([
         ['two'],
       ])
     })
@@ -195,7 +209,7 @@ describe('group', () => {
 
       await items[0].trigger('click')
 
-      expect(wrapper.emitted()).not.toHaveProperty('update:modelValue')
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined()
     })
 
     it('should not allow selection bigger than max', async () => {
@@ -214,7 +228,7 @@ describe('group', () => {
       await items[0].trigger('click')
       await items[1].trigger('click')
 
-      expect(wrapper.emitted()['update:modelValue']).toEqual([
+      expect(wrapper.emitted('update:modelValue')).toStrictEqual([
         [['one']],
       ])
     })
@@ -239,7 +253,7 @@ describe('group', () => {
       wrapper.vm.next()
       await nextTick()
 
-      expect(wrapper.emitted()['update:modelValue']).toEqual([
+      expect(wrapper.emitted('update:modelValue')).toStrictEqual([
         ['three'],
       ])
     })
@@ -327,12 +341,11 @@ describe('group', () => {
         },
       })
 
-      // selection happens in mounted so we need to await
-      // to be able to match snapshot
-      await wrapper.vm.$nextTick()
+      await nextTick()
 
-      expect(wrapper.emitted()['update:modelValue']).toHaveLength(1)
-      expect(wrapper.html()).toMatchSnapshot()
+      expect(wrapper.emitted('update:modelValue')).toStrictEqual([
+        ['two'],
+      ])
     })
 
     it('should not allow empty value when mandatory', async () => {

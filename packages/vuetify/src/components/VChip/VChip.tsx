@@ -30,7 +30,7 @@ import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed } from 'vue'
-import { EventProp, genericComponent, propsFactory } from '@/util'
+import { EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -166,7 +166,7 @@ export const VChip = genericComponent<VChipSlots>()({
       }
     }
 
-    return () => {
+    useRender(() => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasAppendMedia = !!(props.appendIcon || props.appendAvatar)
       const hasAppend = !!(hasAppendMedia || slots.append)
@@ -357,7 +357,9 @@ export const VChip = genericComponent<VChipSlots>()({
           )}
         </Tag>
       )
-    }
+    })
+
+    return group ? group.isReady : undefined
   },
 })
 

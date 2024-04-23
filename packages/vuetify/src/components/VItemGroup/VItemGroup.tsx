@@ -8,6 +8,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
+import { Suspense } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -51,7 +52,7 @@ export const VItemGroup = genericComponent<new <T>(
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
-    const { isSelected, select, next, prev, selected } = useGroup(props, VItemGroupSymbol)
+    const { isSelected, select, next, prev, selected, ready } = useGroup(props, VItemGroupSymbol)
 
     return () => (
       <props.tag
@@ -62,13 +63,17 @@ export const VItemGroup = genericComponent<new <T>(
         ]}
         style={ props.style }
       >
-        { slots.default?.({
-          isSelected,
-          select,
-          next,
-          prev,
-          selected: selected.value,
-        })}
+        <Suspense onResolve={ ready }>
+          <>
+            { slots.default?.({
+              isSelected,
+              select,
+              next,
+              prev,
+              selected: selected.value,
+            })}
+          </>
+        </Suspense>
       </props.tag>
     )
   },

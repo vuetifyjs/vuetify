@@ -13,7 +13,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { toRef } from 'vue'
+import { Suspense, toRef } from 'vue'
 import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -65,7 +65,7 @@ export const VChipGroup = genericComponent<new <T>(
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
-    const { isSelected, select, next, prev, selected } = useGroup(props, VChipGroupSymbol)
+    const { isSelected, select, next, prev, selected, ready } = useGroup(props, VChipGroupSymbol)
 
     provideDefaults({
       VChip: {
@@ -92,13 +92,17 @@ export const VChipGroup = genericComponent<new <T>(
           ]}
           style={ props.style }
         >
-          { slots.default?.({
-            isSelected,
-            select,
-            next,
-            prev,
-            selected: selected.value,
-          })}
+          <Suspense onResolve={ ready }>
+            <>
+              { slots.default?.({
+                isSelected,
+                select,
+                next,
+                prev,
+                selected: selected.value,
+              })}
+            </>
+          </Suspense>
         </VSlideGroup>
       )
     })

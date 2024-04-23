@@ -303,7 +303,9 @@ export const VBtn = genericComponent<VBtnSlots>()({
       )
     })
 
-    return { group }
+    const expose = { group }
+
+    return group ? group.isReady.then(() => expose) : expose
   },
 })
 
