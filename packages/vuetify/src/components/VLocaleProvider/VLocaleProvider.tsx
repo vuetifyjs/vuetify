@@ -26,7 +26,7 @@ export const VLocaleProvider = genericComponent()({
   props: makeVLocaleProviderProps(),
 
   setup (props, { slots }) {
-    const { rtlClasses } = provideLocale(props)
+    const { rtlClasses, isRtl } = provideLocale(props)
 
     useRender(() => (
       <div
@@ -35,6 +35,7 @@ export const VLocaleProvider = genericComponent()({
           rtlClasses.value,
           props.class,
         ]}
+        dir={isRtl ? 'rtl' : 'ltr' }
         style={ props.style }
       >
         { slots.default?.() }
