@@ -3,7 +3,7 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john@vuetifyjs.com>",
-  "version": "3.6.0-alpha.2",
+  "version": "3.6.0-beta.0.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuetifyjs/vuetify.git",
@@ -38,7 +38,7 @@
     "vue-i18n": "^9.11.0",
     "vue-instantsearch": "^4.15.0",
     "vue-prism-component": "^2.0.0",
-    "vuetify": "^3.6.0-alpha.2"
+    "vuetify": "^3.6.0-beta.0.0"
   },
   "devDependencies": {
     "@emailjs/browser": "^4.3.3",
@@ -50,7 +50,7 @@
     "@vitejs/plugin-basic-ssl": "^1.1.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/compiler-sfc": "^3.4.21",
-    "@vuetify/api-generator": "^3.6.0-alpha.2",
+    "@vuetify/api-generator": "^3.6.0-beta.0.0",
     "ajv": "^8.12.0",
     "async-es": "^3.2.5",
     "date-fns": "^3.6.0",
