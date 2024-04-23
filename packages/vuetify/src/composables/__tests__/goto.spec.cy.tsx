@@ -50,7 +50,7 @@ const ComponentB = defineComponent({
 })
 
 describe('goto', () => {
-  it('should scroll vertical', () => {
+  it('scrolls vertically', () => {
     cy
       .mount(() => (
         <div>
@@ -71,8 +71,7 @@ describe('goto', () => {
       })
   })
 
-  // TODO: find a better way to test this and fix in CI
-  it.skip('should scroll horizontal', () => {
+  it('scrolls horizontally', () => {
     cy
       .mount(() => (
         <div id="container" style="overflow-x: auto;">

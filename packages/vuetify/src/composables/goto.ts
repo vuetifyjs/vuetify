@@ -179,12 +179,10 @@ function clampTarget (
   rtl: boolean,
   horizontal: boolean,
 ) {
-  const {
-    offsetWidth: containerWidth,
-    offsetHeight: containerHeight,
-    scrollWidth,
-    scrollHeight,
-  } = container
+  const { scrollWidth, scrollHeight } = container
+  const [containerWidth, containerHeight] = container === document.scrollingElement
+    ? [window.innerWidth, window.innerHeight]
+    : [container.offsetWidth, container.offsetHeight]
 
   let min: number
   let max: number
