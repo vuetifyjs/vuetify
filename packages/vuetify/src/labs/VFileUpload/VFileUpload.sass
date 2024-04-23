@@ -1,0 +1,33 @@
+@use '../../styles/tools'
+@use '../../styles/settings'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-file-upload
+    padding: 64px 0
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+    &.v-sheet
+      display: flex
+      border-radius: 4px
+      border-style: dashed
+      border-width: 2px
+
+    &.v-file-upload--density-compact
+      padding: 32px 0
+      flex-direction: row
+      gap: 1rem
+
+  .v-file-upload-title
+    font-size: $file-upload-title-font-size
+    font-weight: 600
+
+  .v-file-upload-icon
+    font-size: 3rem
+    margin-bottom: 1rem
+
+  .v-file-upload-divider
+    margin: 32px 0
+    width: 100%

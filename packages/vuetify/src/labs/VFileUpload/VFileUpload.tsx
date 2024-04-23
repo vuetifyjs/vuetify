@@ -1,12 +1,46 @@
+// Styles
+import './VFileUpload.sass'
+
 // Components
-import { VCard } from '@/components/VCard'
-import { makeVCardProps } from '@/components/VCard/VCard'
+import { VBtn } from '@/components/VBtn/VBtn'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
+import { makeVDividerProps, VDivider } from '@/components/VDivider/VDivider'
+import { VIcon } from '@/components/VIcon/VIcon'
+import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
+
+// Composables
+import { makeDensityProps, useDensity } from '@/composables/density'
+import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { computed } from 'vue'
+import { genericComponent, only, propsFactory, useRender } from '@/util'
 
 export const makeVFileUploadProps = propsFactory({
-  ...makeVCardProps(),
+  browseText: {
+    type: String,
+    default: '$vuetify.fileUpload.browse',
+  },
+  dividerText: {
+    type: String,
+    default: '$vuetify.fileUpload.divider',
+  },
+  title: {
+    type: String,
+    default: '$vuetify.fileUpload.title',
+  },
+  subtitle: String,
+  icon: {
+    type: IconValue,
+    default: '$upload',
+  },
+
+  ...makeDensityProps(),
+  ...only(makeVDividerProps({
+    length: 150,
+  }), ['length', 'thickness', 'opacity']),
+  ...makeVSheetProps(),
 }, 'VFileUpload')
 
 export const VFileUpload = genericComponent()({
@@ -14,16 +48,81 @@ export const VFileUpload = genericComponent()({
 
   props: makeVFileUploadProps(),
 
-  setup (props) {
+  setup (props, { slots }) {
+    const { t } = useLocale()
+    const { densityClasses } = useDensity(props)
+
+    const title = computed(() => {
+      return props.title.startsWith('$vuetify')
+        ? t(props.title)
+        : props.title
+    })
     useRender(() => {
-      const cardProps = VCard.filterProps(props)
+      const hasTitle = !!(slots.title || title.value)
+      const hasIcon = !!(slots.icon || props.icon)
+      const cardProps = VSheet.filterProps(props)
+      const dividerProps = VDivider.filterProps(props)
 
       return (
-        <VCard
+        <VSheet
           { ...cardProps }
+          class={[
+            'v-file-upload',
+            densityClasses.value,
+          ]}
         >
+          { hasIcon && (
+            <div key="icon" class="v-file-upload-icon">
+              { !slots.icon ? (
+                <VIcon
+                  key="icon-icon"
+                  icon={ props.icon }
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="icon-defaults"
+                  defaults={{
+                    VIcon: {
+                      icon: props.icon,
+                    },
+                  }}
+                >
+                  { slots.icon() }
+                </VDefaultsProvider>
+              )}
+            </div>
+          )}
 
-        </VCard>
+          { hasTitle && (
+            <div key="title" class="v-file-upload-title">
+              { slots.title?.() ?? title.value }
+            </div>
+          )}
+
+          { props.density === 'default' && (
+            <>
+              <div key="upload-divider" class="v-file-upload-divider">
+                { slots.divider?.() ?? (
+                  <VDivider { ...dividerProps }>
+                    { t(props.dividerText) }
+                  </VDivider>
+                )}
+              </div>
+
+              <VBtn
+                text={ t(props.browseText) }
+                variant="tonal"
+                size="large"
+              />
+
+              { props.subtitle && (
+                <div class="v-file-upload-subtitle">
+                  { props.subtitle }
+                </div>
+              )}
+            </>
+          )}
+        </VSheet>
       )
     })
   },
