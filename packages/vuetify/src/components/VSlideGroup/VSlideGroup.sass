@@ -38,11 +38,24 @@
     contain: content
     display: flex
     flex: 1 1 auto
-    overflow: hidden
+    overflow-x: auto
+    overflow-y: hidden
+
+    scrollbar-width: none
+    scrollbar-color: rgba(0, 0, 0, 0)
+
+    &::-webkit-scrollbar
+      display: none
 
   // Modifiers
   .v-slide-group--vertical
+    max-height: inherit
+
     &,
     .v-slide-group__container,
     .v-slide-group__content
       flex-direction: column
+
+    .v-slide-group__container
+      overflow-x: hidden
+      overflow-y: auto
