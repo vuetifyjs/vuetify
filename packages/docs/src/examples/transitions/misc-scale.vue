@@ -3,8 +3,8 @@
     <v-menu transition="scale-transition">
       <template v-slot:activator="{ props }">
         <v-btn
-          dark
           color="primary"
+          dark
           v-bind="props"
         >
           Scale Transition

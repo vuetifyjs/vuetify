@@ -13,9 +13,9 @@ related:
 
 Sizing utility classes are used to modify the dimensions of an element.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Height
 
@@ -31,7 +31,7 @@ Specify the `height` property of **block level elements** with a utility class. 
 | **h-75**     | `height: 75%`    |
 | **h-100**    | `height: 100%`   |
 
-<example file="sizing/height" />
+<ExamplesExample file="sizing/height" />
 
 ## Width
 
@@ -46,4 +46,4 @@ Specify the `width` property of **block level elements** with a utility class. T
 | **w-75**     | `width: 75%`   |
 | **w-100**    | `width: 100%`  |
 
-<example file="sizing/width" />
+<ExamplesExample file="sizing/width" />

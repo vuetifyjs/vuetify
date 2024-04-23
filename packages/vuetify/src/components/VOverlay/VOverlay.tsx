@@ -127,6 +127,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
   emits: {
     'click:outside': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
+    afterEnter: () => true,
     afterLeave: () => true,
   },
 
@@ -162,6 +163,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     })
 
     const root = ref<HTMLElement>()
+    const scrimEl = ref<HTMLElement>()
     const contentEl = ref<HTMLElement>()
     const { contentStyles, updateLocation } = useLocationStrategies(props, {
       isRtl,
@@ -184,8 +186,11 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       else animateClick()
     }
 
-    function closeConditional () {
-      return isActive.value && globalTop.value
+    function closeConditional (e: Event) {
+      return isActive.value && globalTop.value && (
+        // If using scrim, only close if clicking on it rather than anything opened on top
+        !props.scrim || e.target === scrimEl.value
+      )
     }
 
     IN_BROWSER && watch(isActive, val => {
@@ -250,6 +255,10 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       })
     }
 
+    function onAfterEnter () {
+      emit('afterEnter')
+    }
+
     function onAfterLeave () {
       _onAfterLeave()
       emit('afterLeave')
@@ -297,6 +306,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
               <Scrim
                 color={ scrimColor }
                 modelValue={ isActive.value && !!props.scrim }
+                ref={ scrimEl }
                 { ...scrimEvents.value }
               />
               <MaybeTransition
@@ -304,6 +314,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 persisted
                 transition={ props.transition }
                 target={ target.value }
+                onAfterEnter={ onAfterEnter }
                 onAfterLeave={ onAfterLeave }
               >
                 <div
@@ -332,6 +343,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     return {
       activatorEl,
+      scrimEl,
       target,
       animateClick,
       contentEl,

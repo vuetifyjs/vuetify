@@ -13,9 +13,9 @@ related:
 
 Vuetify blueprints are a new way to pre-configure your entire application with a completely unique design system.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Usage
 
@@ -52,7 +52,7 @@ import { md1 } from 'vuetify/blueprints'
 
 **Preview:**
 
-<example preview file="blueprints/md1" />
+<ExamplesExample preview file="blueprints/md1" />
 
 ### Material Design 2
 
@@ -64,7 +64,7 @@ import { md2 } from 'vuetify/blueprints'
 
 **Preview:**
 
-<example preview file="blueprints/md2" />
+<ExamplesExample preview file="blueprints/md2" />
 
 ### Material Design 3
 
@@ -76,4 +76,4 @@ import { md3 } from 'vuetify/blueprints'
 
 **Preview:**
 
-<example preview file="blueprints/md3" />
+<ExamplesExample preview file="blueprints/md3" />

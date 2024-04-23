@@ -13,17 +13,17 @@ related:
 
 Control the layout of flex containers with alignment, justification and more with responsive flexbox utilities.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Enabling flexbox
 
 Using `display` utilities you can turn any element into a flexbox container transforming **direct children elements** into flex items. Using additional flex property utilities, you can customize their interaction even further.
 
-<example file="flex/flexbox" />
+<ExamplesExample file="flex/flexbox" />
 
-<example file="flex/flexbox-inline" />
+<ExamplesExample file="flex/flexbox-inline" />
 
 You can also customize flex utilities to apply based upon various breakpoints.
 
@@ -48,7 +48,7 @@ It is important to note that using any of the display classes above will result 
 
 The flex utility classes can be used to modify the **flex** css property. This makes it easy to position flex items within a flex container.
 
-<example file="flex/flex-flex" />
+<ExamplesExample file="flex/flex-flex" />
 
 There are also responsive variations for `flex`:
 
@@ -102,11 +102,11 @@ There are also responsive variations for `flex`:
 
 By default, `d-flex` applies `flex-direction: row` and can generally be omitted. However, there may be situations where you need to explicitly define it.
 
-<example file="flex/flex-direction" />
+<ExamplesExample file="flex/flex-direction" />
 
 The `flex-column` and `flex-column-reverse` utility classes can be used to change the orientation of the flexbox container.
 
-<example file="flex/flex-column" />
+<ExamplesExample file="flex/flex-column" />
 
 There are also responsive variations for `flex-direction`.
 
@@ -135,7 +135,7 @@ There are also responsive variations for `flex-direction`.
 
 The `justify-content` flex setting can be changed using the flex justify classes. This by default will modify the flexbox items on the **x-axis** but is reversed when using `flex-direction: column`, modifying the **y-axis**. Choose from `start` (browser default), `end`, `center`, `space-between`, `space-around`, or `space-evenly`.
 
-<example file="flex/flex-justify" />
+<ExamplesExample file="flex/flex-justify" />
 
 There are also responsive variations for `justify-content`.
 
@@ -174,7 +174,7 @@ There are also responsive variations for `justify-content`.
 
 The `align-items` flex setting can be changed using the flex align classes. This by default will modify the flexbox items on the **y-axis** but is reversed when using `flex-direction: column`, modifying the **x-axis**. Choose from `start`, `end`, `center`, `baseline`, or `stretch` (browser default).
 
-<example file="flex/flex-align" />
+<ExamplesExample file="flex/flex-align" />
 
 There are also responsive variations for `align-items`.
 
@@ -208,7 +208,7 @@ There are also responsive variations for `align-items`.
 
 The `align-self` flex setting can be changed using the flex align-self classes. This by default will modify individual flexbox items across the **y-axis** but is reversed when using `flex-direction: column`, modifying the **x-axis**. Choose from `start`, `end`, `center`, `baseline`, `stretch`, or `auto` (browser default, applies align-items property from flex container).
 
-<example file="flex/flex-align-self" />
+<ExamplesExample file="flex/flex-align-self" />
 
 There are also responsive variations for `align-self-items`.
 
@@ -247,13 +247,13 @@ There are also responsive variations for `align-self-items`.
 
 Using the margin helper classes in a flexbox container, you can control the positioning of flex items on the **x-axis** or **y-axis** when using `flex-row` or `flex-column` respectively.
 
-<example file="flex/margins" />
+<ExamplesExample file="flex/margins" />
 
 ### Using align-items
 
 Mixing `flex-direction: column` and `align-items`, you can utilize `.mt-auto` and `.mb-auto` helper classes to adjust flex item positioning.
 
-<example file="flex/margins-align-items" />
+<ExamplesExample file="flex/margins-align-items" />
 
 ## Flex wrap
 
@@ -263,11 +263,11 @@ By default `.d-flex` does not provide any wrapping (behaves similarly to `flex-w
 - **.flex-wrap**
 - **.flex-wrap-reverse**
 
-<example file="flex/flex-nowrap" />
+<ExamplesExample file="flex/flex-nowrap" />
 
-<example file="flex/flex-wrap" />
+<ExamplesExample file="flex/flex-wrap" />
 
-<example file="flex/flex-wrap-reverse" />
+<ExamplesExample file="flex/flex-wrap-reverse" />
 
 These helper classes can also be applied in the format `flex-{breakpoint}-{condition}` to create more responsive variations based on breakpoints. The following combinations are available:
 
@@ -288,7 +288,7 @@ These helper classes can also be applied in the format `flex-{breakpoint}-{condi
 
 You can change the visual order of flex items with the `order` utilities.
 
-<example file="flex/flex-order" />
+<ExamplesExample file="flex/flex-order" />
 
 There are also responsive variations for `order`.
 
@@ -372,15 +372,15 @@ There are also responsive variations for `order`.
 
 The `align-content` flex setting can be changed using the flex align-content classes. This by default will modify the wrapped flexbox content across the **y-axis** but is reversed when using `flex-direction: column`, modifying the **x-axis**. Choose from `start`, `end`, `center`, `space-between`, `space-around`, `space-evenly` or `stretch` (browser default).
 
-<example file="flex/flex-align-content-start" />
+<ExamplesExample file="flex/flex-align-content-start" />
 
-<example file="flex/flex-align-content-end" />
+<ExamplesExample file="flex/flex-align-content-end" />
 
-<example file="flex/flex-align-content-center" />
+<ExamplesExample file="flex/flex-align-content-center" />
 
-<example file="flex/flex-align-content-between" />
+<ExamplesExample file="flex/flex-align-content-between" />
 
-<example file="flex/flex-align-content-around" />
+<ExamplesExample file="flex/flex-align-content-around" />
 
 There are also responsive variations for `align-content`.
 
@@ -429,7 +429,7 @@ Vuetify has helper classes for applying grow and shrink manually. These can be a
 - **flex-shrink-0**
 - **flex-shrink-1**
 
-<example file="flex/grow-shrink" />
+<ExamplesExample file="flex/grow-shrink" />
 
 These helper classes can also be applied in the format `flex-{breakpoint}-{condition}-{state}` to create more responsive variations based on breakpoints. The following combinations are available:
 

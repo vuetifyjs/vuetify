@@ -60,7 +60,9 @@ export const makeVDatePickerProps = propsFactory({
   },
 
   ...makeVDatePickerControlsProps(),
-  ...makeVDatePickerMonthProps(),
+  ...makeVDatePickerMonthProps({
+    weeksInMonth: 'static' as const,
+  }),
   ...omit(makeVDatePickerMonthsProps(), ['modelValue']),
   ...omit(makeVDatePickerYearsProps(), ['modelValue']),
   ...makeVPickerProps({ title: '$vuetify.datePicker.title' }),
@@ -119,17 +121,22 @@ export const VDatePicker = genericComponent<new <
 
     const isReversing = shallowRef(false)
     const header = computed(() => {
-      return props.multiple && model.value.length > 1
-        ? t('$vuetify.datePicker.itemsSelected', model.value.length)
-        : model.value[0] && adapter.isValid(model.value[0])
-          ? adapter.format(model.value[0], 'normalDateWithWeekday')
-          : t(props.header)
+      if (props.multiple && model.value.length > 1) {
+        return t('$vuetify.datePicker.itemsSelected', model.value.length)
+      }
+
+      return (model.value[0] && adapter.isValid(model.value[0]))
+        ? adapter.format(adapter.date(model.value[0]), 'normalDateWithWeekday')
+        : t(props.header)
     })
     const text = computed(() => {
-      return adapter.format(
-        adapter.parseISO(`${year.value}-${month.value + 1}-01`),
-        'monthAndYear',
-      )
+      let date = adapter.date()
+
+      date = adapter.setYear(date, year.value)
+      date = adapter.setMonth(date, month.value)
+      date = adapter.setDate(date, 1)
+
+      return adapter.format(date, 'monthAndYear')
     })
     // const headerIcon = computed(() => props.inputMode === 'calendar' ? props.keyboardIcon : props.calendarIcon)
     const headerTransition = computed(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
@@ -182,7 +189,9 @@ export const VDatePicker = genericComponent<new <
       } else {
         year.value++
         month.value = 0
+        onUpdateYear(year.value)
       }
+      onUpdateMonth(month.value)
     }
 
     function onClickPrev () {
@@ -191,7 +200,9 @@ export const VDatePicker = genericComponent<new <
       } else {
         year.value--
         month.value = 11
+        onUpdateYear(year.value)
       }
+      onUpdateMonth(month.value)
     }
 
     function onClickDate () {
@@ -206,17 +217,17 @@ export const VDatePicker = genericComponent<new <
       viewMode.value = viewMode.value === 'year' ? 'month' : 'year'
     }
 
-    watch(month, () => {
+    function onUpdateMonth (value: number) {
       if (viewMode.value === 'months') onClickMonth()
 
-      emit('update:month', month.value)
-    })
+      emit('update:month', value)
+    }
 
-    watch(year, () => {
+    function onUpdateYear (value: number) {
       if (viewMode.value === 'year') onClickYear()
 
-      emit('update:year', year.value)
-    })
+      emit('update:year', value)
+    }
 
     watch(model, (val, oldVal) => {
       const before = adapter.date(wrapInArray(val)[0])
@@ -294,6 +305,7 @@ export const VDatePicker = genericComponent<new <
                       key="date-picker-months"
                       { ...datePickerMonthsProps }
                       v-model={ month.value }
+                      onUpdate:modelValue={ onUpdateMonth }
                       min={ minDate.value }
                       max={ maxDate.value }
                     />
@@ -302,6 +314,7 @@ export const VDatePicker = genericComponent<new <
                       key="date-picker-years"
                       { ...datePickerYearsProps }
                       v-model={ year.value }
+                      onUpdate:modelValue={ onUpdateYear }
                       min={ minDate.value }
                       max={ maxDate.value }
                     />
@@ -312,6 +325,8 @@ export const VDatePicker = genericComponent<new <
                       v-model={ model.value }
                       v-model:month={ month.value }
                       v-model:year={ year.value }
+                      onUpdate:month={ onUpdateMonth }
+                      onUpdate:year={ onUpdateYear }
                       min={ minDate.value }
                       max={ maxDate.value }
                     />

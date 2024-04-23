@@ -71,6 +71,7 @@ export default {
   timePicker: {
     am: 'ap.',
     pm: 'ip.',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

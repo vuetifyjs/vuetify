@@ -1,34 +1,30 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div>
       <v-navigation-drawer
         permanent
         v-bind="props"
       >
-        <v-list-item title="My Application" subtitle="Vuetify"></v-list-item>
+        <v-list-item subtitle="Vuetify" title="My Application"></v-list-item>
         <v-divider></v-divider>
-        <v-list-item link title="List Item 1"></v-list-item>
-        <v-list-item link title="List Item 2"></v-list-item>
-        <v-list-item link title="List Item 3"></v-list-item>
+        <v-list-item title="List Item 1" link></v-list-item>
+        <v-list-item title="List Item 2" link></v-list-item>
+        <v-list-item title="List Item 3" link></v-list-item>
       </v-navigation-drawer>
     </div>
 
     <template v-slot:configuration>
-      <v-slider v-model="width" label="Width" min="100" max="400" step="1"></v-slider>
+      <v-slider v-model="width" label="Width" max="400" min="100" step="1"></v-slider>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref, shallowRef } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-navigation-drawer'
   const model = ref('default')
   const width = shallowRef(256)

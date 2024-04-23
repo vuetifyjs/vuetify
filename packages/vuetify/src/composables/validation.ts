@@ -6,7 +6,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref, shallowRef, unref, watch } from 'vue'
-import { getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/util'
+import { getCurrentInstance, getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -120,11 +120,13 @@ export function useValidation (
     }
   })
 
+  const vm = getCurrentInstance('validation')
   const uid = computed(() => props.name ?? unref(id))
 
   onBeforeMount(() => {
     form?.register({
       id: uid.value,
+      vm,
       validate,
       reset,
       resetValidation,
@@ -166,15 +168,16 @@ export function useValidation (
     form?.update(uid.value, isValid.value, errorMessages.value)
   })
 
-  function reset () {
+  async function reset () {
     model.value = null
-    nextTick(resetValidation)
+    await nextTick()
+    await resetValidation()
   }
 
-  function resetValidation () {
+  async function resetValidation () {
     isPristine.value = true
     if (!validateOn.value.lazy) {
-      validate(true)
+      await validate(true)
     } else {
       internalErrorMessages.value = []
     }

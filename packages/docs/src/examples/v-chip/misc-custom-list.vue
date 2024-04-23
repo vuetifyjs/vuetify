@@ -28,8 +28,8 @@
         <v-col
           v-for="(selection, i) in selections"
           :key="selection.text"
-          cols="auto"
           class="py-1 pe-0"
+          cols="auto"
         >
           <v-chip
             :disabled="loading"
@@ -52,8 +52,8 @@
           <v-text-field
             ref="searchField"
             v-model="search"
-            hide-details
             label="Search"
+            hide-details
             single-line
           ></v-text-field>
         </v-col>

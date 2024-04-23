@@ -4,6 +4,7 @@ import './VField.sass'
 // Components
 import { VFieldLabel } from './VFieldLabel'
 import { VExpandXTransition } from '@/components/transitions'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { useInputIcon } from '@/components/VInput/InputIcon'
 
 // Composables
@@ -96,7 +97,7 @@ export const makeVFieldProps = propsFactory({
 }, 'VField')
 
 export type VFieldSlots = {
-  clear: never
+  clear: DefaultInputSlot & { props: Record<string, any> }
   'prepend-inner': DefaultInputSlot
   'append-inner': DefaultInputSlot
   label: DefaultInputSlot & { label: string | undefined, props: Record<string, any> }
@@ -210,9 +211,18 @@ export const VField = genericComponent<new <T>(
       }
     }
 
+    function onKeydownClear (e: KeyboardEvent) {
+      if (e.key !== 'Enter' && e.key !== ' ') return
+
+      e.preventDefault()
+      e.stopPropagation()
+
+      props['onClick:clear']?.(new MouseEvent('click'))
+    }
+
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
-      const hasPrepend = (slots['prepend-inner'] || props.prependInnerIcon)
+      const hasPrepend = !!(slots['prepend-inner'] || props.prependInnerIcon)
       const hasClear = !!(props.clearable || slots.clear)
       const hasAppend = !!(slots['append-inner'] || props.appendInnerIcon || hasClear)
       const label = () => (
@@ -319,10 +329,32 @@ export const VField = genericComponent<new <T>(
                   e.stopPropagation()
                 }}
               >
+              <VDefaultsProvider
+                defaults={{
+                  VIcon: {
+                    icon: props.clearIcon,
+                  },
+                }}
+              >
                 { slots.clear
-                  ? slots.clear()
-                  : <InputIcon name="clear" />
-                }
+                  ? slots.clear({
+                    ...slotProps.value,
+                    props: {
+                      onKeydown: onKeydownClear,
+                      onFocus: focus,
+                      onBlur: blur,
+                      onClick: props['onClick:clear'],
+                    },
+                  })
+                  : (
+                    <InputIcon
+                      name="clear"
+                      onKeydown={ onKeydownClear }
+                      onFocus={ focus }
+                      onBlur={ blur }
+                    />
+                  )}
+                </VDefaultsProvider>
               </div>
             </VExpandXTransition>
           )}

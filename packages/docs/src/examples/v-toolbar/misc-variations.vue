@@ -3,15 +3,15 @@
     <v-col
       v-for="(bar, i) in bars"
       :key="i"
-      cols="12"
-      sm="12"
-      md="6"
       class="my-4"
+      cols="12"
+      md="6"
+      sm="12"
     >
       <v-card
         color="grey-lighten-4"
-        flat
         height="200px"
+        flat
       >
         <v-toolbar
           :color="bar.class"

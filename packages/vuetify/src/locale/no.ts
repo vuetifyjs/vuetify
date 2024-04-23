@@ -1,6 +1,6 @@
 export default {
   badge: 'Skilt',
-  open: 'Open',
+  open: 'Åpne',
   close: 'Lukk',
   confirmEdit: {
     ok: 'OK',
@@ -71,6 +71,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

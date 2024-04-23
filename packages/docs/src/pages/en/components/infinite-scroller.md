@@ -20,7 +20,7 @@ The `v-infinite-scroll` component displays a potentially infinite list, by loadi
 
 ![Infinite scroll Entry](https://cdn.vuetifyjs.com/docs/images/components/v-infinite-scroll/v-infinite-scroll-entry.png)
 
-<page-features />
+<PageFeatures />
 
 ::: success
 This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
@@ -30,7 +30,7 @@ This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-no
 
 When scrolling towards the bottom, new items will be rendered either automatically, or manually with the click of a button.
 
-<usage name="v-infinite-scroll" />
+<ExamplesUsage name="v-infinite-scroll" />
 
 A **load** event will be emitted when the component needs to load more content. The argument passed is an object with two properties.
 
@@ -44,7 +44,7 @@ A **load** event will be emitted when the component needs to load more content. 
 |`'empty'`|There is no more content to fetch. This will display the `empty` slot|
 |`'loading'`|Content is currently loading. This will display a message that content is loading. This status is only set internally by the component and should not be used with the **done** function|
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -52,7 +52,7 @@ A **load** event will be emitted when the component needs to load more content. 
 | - | - |
 | [v-infinite-scroll](/api/v-infinite-scroll/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Anatomy
 
@@ -77,13 +77,13 @@ The `v-infinite-scroll` component has a number of props that can be used to cust
 
 The default behaviour of the component is to try to load more content automatically when the scrollbar gets close to the end. However a manual mode is also supported, where the user needs to do some interaction to load the content. By default this a button, but it can be customized with a [slot](#load-more)
 
-<example file="v-infinite-scroll/prop-mode" />
+<ExamplesExample file="v-infinite-scroll/prop-mode" />
 
 #### Direction
 
 The `v-infinite-scroll` component can be used with either vertical and horizontal scrolling.
 
-<example file="v-infinite-scroll/prop-direction" />
+<ExamplesExample file="v-infinite-scroll/prop-direction" />
 
 #### Side
 
@@ -91,17 +91,17 @@ By default the `v-infinite-scroll` component assumes that new content will be ap
 
 When using the **start** side for content, the scrolllbar will start at the bottom of the content.
 
-<example file="v-infinite-scroll/prop-side-start" />
+<ExamplesExample file="v-infinite-scroll/prop-side-start" />
 
 When using **both** sides for content, the scrollbar will start in the middle of the content.
 
-<example file="v-infinite-scroll/prop-side-both" />
+<ExamplesExample file="v-infinite-scroll/prop-side-both" />
 
 #### Color
 
 The default load more button and loading spinner can be colored with the **color** prop.
 
-<example file="v-infinite-scroll/prop-color" />
+<ExamplesExample file="v-infinite-scroll/prop-color" />
 
 ### Slots
 
@@ -121,25 +121,25 @@ The `v-infinite-scroll` component exposes a number of slots that allow you to fu
 
 You can customize the loading message with the **loading** slot.
 
-<example file="v-infinite-scroll/slot-loading" />
+<ExamplesExample file="v-infinite-scroll/slot-loading" />
 
 #### Load more
 
 When using **manual** mode you can customize the action required to load more content with the **load-more** slot.
 
-<example file="v-infinite-scroll/slot-load-more" />
+<ExamplesExample file="v-infinite-scroll/slot-load-more" />
 
 #### Empty
 
 You can customize the empty message with the **empty** slot.
 
-<example file="v-infinite-scroll/slot-empty" />
+<ExamplesExample file="v-infinite-scroll/slot-empty" />
 
 #### Error
 
 The **error** slot is shown if the status `'error'` is returned from the `done` callback.
 
-<example file="v-infinite-scroll/slot-error" />
+<ExamplesExample file="v-infinite-scroll/slot-error" />
 
 ### Examples
 
@@ -149,4 +149,4 @@ The following are a collection of examples that demonstrate more advanced and re
 
 If the items in your infinite list are of a uniform size, you can quite easily virtualize the list to only render a small amount of items regardless of how far you scroll in either direction.
 
-<example file="v-infinite-scroll/misc-virtual" />
+<ExamplesExample file="v-infinite-scroll/misc-virtual" />

@@ -60,6 +60,7 @@
       {
         "subheader": "utility-classes"
       },
+      "borders",
       "border-radius",
       "content",
       "cursor",
@@ -67,6 +68,7 @@
       "elevation",
       "flex",
       "float",
+      "opacity",
       "overflow",
       "position",
       "sizing",
@@ -211,6 +213,7 @@
       "resize",
       "ripple",
       "scroll",
+      "tooltip",
       "touch"
     ]
   },
@@ -222,6 +225,38 @@
       "introduction",
       {
         "title": "calendars",
+        "subfolder": "components"
+      },
+      {
+        "title": "confirm-edit",
+        "subfolder": "components"
+      },
+      {
+        "title": "empty-states",
+        "subfolder": "components"
+      },
+      {
+        "title": "floating-action-buttons",
+        "subfolder": "components"
+      },
+      {
+        "title": "number-inputs",
+        "subfolder": "components"
+      },
+      {
+        "title": "sparklines",
+        "subfolder": "components"
+      },
+      {
+        "title": "speed-dials",
+        "subfolder": "components"
+      },
+      {
+        "title": "time-pickers",
+        "subfolder": "components"
+      },
+      {
+        "title": "treeview",
         "subfolder": "components"
       }
     ]

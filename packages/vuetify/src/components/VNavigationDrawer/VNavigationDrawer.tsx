@@ -1,6 +1,10 @@
 // Styles
 import './VNavigationDrawer.sass'
 
+// Components
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VImg } from '@/components/VImg'
+
 // Composables
 import { useSticky } from './sticky'
 import { useTouch } from './touch'
@@ -9,6 +13,7 @@ import { makeBorderProps, useBorder } from '@/composables/border'
 import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
+import { makeDelayProps, useDelay } from '@/composables/delay'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
@@ -80,6 +85,7 @@ export const makeVNavigationDrawerProps = propsFactory({
 
   ...makeBorderProps(),
   ...makeComponentProps(),
+  ...makeDelayProps(),
   ...makeDisplayProps(),
   ...makeElevationProps(),
   ...makeLayoutItemProps(),
@@ -113,6 +119,10 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
 
     const rootEl = ref<HTMLElement>()
     const isHovering = shallowRef(false)
+
+    const { runOpenDelay, runCloseDelay } = useDelay(props, value => {
+      isHovering.value = value
+    })
 
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)
@@ -197,13 +207,6 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       },
     })
 
-    function onMouseenter () {
-      isHovering.value = true
-    }
-    function onMouseleave () {
-      isHovering.value = false
-    }
-
     useRender(() => {
       const hasImage = (slots.image || props.image)
 
@@ -211,8 +214,8 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
         <>
           <props.tag
             ref={ rootEl }
-            onMouseenter={ onMouseenter }
-            onMouseleave={ onMouseleave }
+            onMouseenter={ runOpenDelay }
+            onMouseleave={ runCloseDelay }
             class={[
               'v-navigation-drawer',
               `v-navigation-drawer--${location.value}`,
@@ -246,10 +249,29 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
           >
             { hasImage && (
               <div key="image" class="v-navigation-drawer__img">
-                { slots.image
-                  ? slots.image?.({ image: props.image })
-                  : (<img src={ props.image } alt="" />)
-                }
+                { !slots.image ? (
+                  <VImg
+                    key="image-img"
+                    alt=""
+                    cover
+                    height="inherit"
+                    src={ props.image }
+                  />
+                ) : (
+                  <VDefaultsProvider
+                    key="image-defaults"
+                    disabled={ !props.image }
+                    defaults={{
+                      VImg: {
+                        alt: '',
+                        cover: true,
+                        height: 'inherit',
+                        src: props.image,
+                      },
+                    }}
+                    v-slots:default={ slots.image }
+                  />
+                )}
               </div>
             )}
 

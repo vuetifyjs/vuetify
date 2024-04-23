@@ -1,15 +1,6 @@
 import fs from 'fs'
 import { kebabCase } from './helpers/text'
-import type { Definition } from './types'
-
-type ComponentData = {
-  props: Record<string, Definition>
-  slots: Record<string, Definition>
-  events: Record<string, Definition>
-  exposed: Record<string, Definition>
-  displayName: string
-  fileName: string
-}
+import type { ComponentData } from './types'
 
 export function createVeturApi (componentData: ComponentData[]) {
   const tags = componentData.reduce((obj, component) => {

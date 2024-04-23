@@ -131,7 +131,7 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
   }
 }
 
-export function isObject (obj: any): obj is object {
+export function isObject (obj: any): obj is Record<string, any> {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
 }
 
@@ -723,4 +723,17 @@ export function eagerComputed<T> (fn: () => T, options?: WatchOptions): Readonly
   })
 
   return readonly(result)
+}
+
+export function isClickInsideElement (event: MouseEvent, targetDiv: HTMLElement) {
+  const mouseX = event.clientX
+  const mouseY = event.clientY
+
+  const divRect = targetDiv.getBoundingClientRect()
+  const divLeft = divRect.left
+  const divTop = divRect.top
+  const divRight = divRect.right
+  const divBottom = divRect.bottom
+
+  return mouseX >= divLeft && mouseX <= divRight && mouseY >= divTop && mouseY <= divBottom
 }

@@ -6,10 +6,10 @@
           <v-select
             v-model="target"
             :items="targets"
-            hide-details
             label="Target"
             prepend-inner-icon="mdi-bullseye"
             variant="outlined"
+            hide-details
           ></v-select>
         </v-col>
 
@@ -17,7 +17,6 @@
           <v-text-field
             v-if="target === 'By Number'"
             v-model.number="number"
-            hide-details
             label="Number"
             max="2000"
             min="0"
@@ -25,6 +24,7 @@
             step="1"
             type="number"
             variant="outlined"
+            hide-details
             @keydown.enter="onClick"
           ></v-text-field>
 
@@ -32,20 +32,20 @@
             v-else-if="target === 'By Query Selector'"
             v-model="query"
             :items="queries"
-            hide-details
             label="Query Selector"
             prepend-inner-icon="mdi-format-header-1"
             variant="outlined"
+            hide-details
           ></v-select>
 
           <v-select
             v-else
             v-model="component"
             :items="components"
-            hide-details
             label="Component / Element"
             prepend-inner-icon="mdi-card-bulleted"
             variant="outlined"
+            hide-details
           ></v-select>
         </v-col>
 
@@ -53,17 +53,16 @@
           <v-select
             v-model="easing"
             :items="easings"
-            hide-details
             label="Easing"
             prepend-inner-icon="mdi-sine-wave"
             variant="outlined"
+            hide-details
           ></v-select>
         </v-col>
 
         <v-col cols="12" md="6">
           <v-text-field
             v-model.number="duration"
-            hide-details
             label="Duration"
             max="2000"
             min="50"
@@ -71,6 +70,7 @@
             step="1"
             type="number"
             variant="outlined"
+            hide-details
           ></v-text-field>
         </v-col>
 
@@ -78,33 +78,33 @@
           <v-slider
             v-model="offset"
             append-icon="mdi-axis-arrow"
-            hide-details
             label="Offset"
             max="100"
             min="-100"
             step="1"
+            hide-details
             thumb-label
           ></v-slider>
         </v-col>
 
         <v-divider class="my-3 mx-n1"></v-divider>
 
-        <v-col cols="10" class="mt-n2">
+        <v-col class="mt-n2" cols="10">
           <v-btn
-            block
             color="surface-variant"
-            variant="flat"
             text="Go To"
+            variant="flat"
+            block
             @click="onClick"
           ></v-btn>
         </v-col>
 
-        <v-col cols="2" class="mt-n2">
+        <v-col class="mt-n2" cols="2">
           <v-btn
-            block
+            color="error"
             text="Reset"
             variant="outlined"
-            color="error"
+            block
             @click="onClickReset"
           ></v-btn>
         </v-col>
@@ -130,9 +130,9 @@
 
         <v-card
           :ref="instance => cards.card1 = instance"
-          flat
-          title="Card 1"
           text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!"
+          title="Card 1"
+          flat
         ></v-card>
 
         <div style="height: 420px;"></div>
@@ -145,9 +145,9 @@
 
         <v-card
           :ref="instance => cards.card2 = instance"
-          flat
-          title="Card 2"
           text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!"
+          title="Card 2"
+          flat
         ></v-card>
 
         <div style="height: 420px;"></div>
@@ -160,9 +160,9 @@
 
         <v-card
           :ref="instance => cards.card3 = instance"
-          flat
-          title="Card 3"
           text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!"
+          title="Card 3"
+          flat
         ></v-card>
 
         <div style="height: 420px;"></div>
@@ -175,9 +175,9 @@
 
         <v-card
           :ref="instance => cards.card4 = instance"
-          flat
-          title="Card 4"
           text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!"
+          title="Card 4"
+          flat
         ></v-card>
 
         <div style="height: 180px;"></div>
@@ -279,6 +279,10 @@
   import { useGoTo } from 'vuetify'
 
   export default {
+    setup () {
+      const goTo = useGoTo()
+      return { goTo }
+    },
     data () {
       return {
         duration: 300,
@@ -340,13 +344,12 @@
     },
     methods: {
       onClick () {
-        const goTo = useGoTo()
         if (this.target === 'By Number') {
-          goTo(this.number, this.options)
+          this.goTo(this.number, this.options)
         } else if (this.target === 'By Query Selector') {
-          goTo(this.query, this.options)
+          this.goTo(this.query, this.options)
         } else if (this.target === 'By Component / Element') {
-          goTo(this.cards[this.component].$el, this.options)
+          this.goTo(this.cards[this.component].$el, this.options)
         }
       },
       onClickReset () {
@@ -358,8 +361,7 @@
         this.query = '#heading-3'
         this.target = 'By Number'
 
-        const goTo = useGoTo()
-        goTo(0, { container: '#goto-container-example' })
+        this.goTo(0, { container: '#goto-container-example' })
       },
     },
   }

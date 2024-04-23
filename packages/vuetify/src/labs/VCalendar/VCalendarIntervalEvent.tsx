@@ -1,3 +1,6 @@
+// Styles
+import './VCalendarIntervalEvent.sass'
+
 // Components
 import { VSheet } from '@/components/VSheet'
 
@@ -55,8 +58,8 @@ export const VCalendarIntervalEvent = genericComponent()({
         <VSheet
           height={ calcHeight().height }
           density="comfortable"
-          style={ `width: 100%; margin-top: ${calcHeight().margin}` }
-          class="align-center pa-1"
+          style={ `margin-top: ${calcHeight().margin}` }
+          class="v-calendar-internal-event"
           color={ props.event?.color ?? undefined }
           rounded={ props.event?.first && props.event?.last
             ? true

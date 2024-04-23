@@ -1,7 +1,7 @@
 <template>
   <v-card
-    max-width="500"
     class="mx-auto"
+    max-width="500"
   >
     <v-toolbar
       :color="selection.length ? 'grey darken-4' : 'deep-purple accent-4'"
@@ -50,8 +50,8 @@
       <v-select
         v-model="selection"
         :items="items"
-        multiple
         label="Select an option"
+        multiple
       ></v-select>
     </v-card-text>
   </v-card>

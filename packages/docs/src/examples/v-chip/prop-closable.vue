@@ -11,8 +11,8 @@
 
     <v-btn
       v-if="!chip"
-      close
       color="primary"
+      close
       dark
       @click="chip = true"
     >

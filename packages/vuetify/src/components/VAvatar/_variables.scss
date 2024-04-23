@@ -14,6 +14,8 @@ $avatar-plain-opacity: .62 !default;
 $avatar-rounded-border-radius: variables.$border-radius-root !default;
 $avatar-vertical-align: middle !default;
 $avatar-width: 40px !default;
+$avatar-margin-end: map.get(variables.$grid-gutters, 'md') !default;
+$avatar-margin-start: map.get(variables.$grid-gutters, 'md') !default;
 
 $avatar-sizes: () !default;
 $avatar-sizes: functions.map-deep-merge(

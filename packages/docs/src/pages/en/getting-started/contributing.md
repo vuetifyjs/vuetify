@@ -13,13 +13,13 @@ related:
 
 Vuetify is made possible by an amazing community that submits issues, creates pull requests, and provides invaluable feedback.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<VoPromotionsCardVuetify />
 
 It is our job to enable you to create amazing applications. A lot of the time, you come across something that can be made better. Maybe you find a bug, or you have an idea for additional functionality. That's great! It's as easy as cloning the Vuetify repository to get started working in a development environment.
 
-<promoted slug="vuetify-discord" />
+<PromotedPromoted slug="vuetify-discord" />
 
 ## Reporting Issues
 
@@ -201,7 +201,7 @@ Some of the more notable links within these services include:
 
 The following sections are designed to familiarize you with our standard operating procedures for Vuetify development.
 
-<promoted slug="vue-jobs" />
+<PromotedPromoted slug="vue-jobs" />
 
 ### Issue triage
 
@@ -274,7 +274,7 @@ The following is a list of **commit types** used in the _angular_ preset:
 - **chore:** Other commits that don't modify src or test files.
 - **revert:** Commits that revert previous commits.
 
-<promoted slug="vuetify-reddit" />
+<PromotedPromoted slug="vuetify-reddit" />
 
 [community]: https://community.vuetifyjs.com/
 [core team]: /about/meet-the-team/

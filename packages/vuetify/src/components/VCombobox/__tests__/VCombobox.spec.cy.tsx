@@ -652,6 +652,105 @@ describe('VCombobox', () => {
       })
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/18556
+  it('should show menu if focused and items are added', () => {
+    cy
+      .mount(props => (<VCombobox { ...props } />))
+      .get('.v-combobox input')
+      .focus()
+      .get('.v-overlay')
+      .should('not.exist')
+      .setProps({ items: ['Foo', 'Bar'] })
+      .get('.v-overlay')
+      .should('exist')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/19346
+  it('should not show menu when focused and existing non-empty items are changed', () => {
+    cy
+      .mount((props: any) => (<VCombobox items={ props.items } />))
+      .setProps({ items: ['Foo', 'Bar'] })
+      .get('.v-combobox')
+      .click()
+      .get('.v-overlay')
+      .should('exist')
+      .get('.v-list-item').eq(0).click({ waitForAnimations: false })
+      .setProps({ items: ['Foo', 'Bar', 'test'] })
+      .get('.v-overlay')
+      .should('not.exist')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/17573
+  // When using selection slot or chips, input displayed next to chip/selection slot should be always empty
+  it('should always have empty input value when it is unfocused and when using selection slot or chips', () => {
+    const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
+    const selectedItem = ref('Item 1')
+
+    cy
+      .mount(() => (
+        <VCombobox
+          items={ items }
+          chips
+          v-model={ selectedItem.value }
+        />
+      ))
+      .get('.v-combobox').click()
+      .get('.v-combobox input').should('have.value', '')
+      // Blur input with a custom search input value
+      .type('test')
+      .blur()
+      .should('have.value', '')
+      .should(() => {
+        expect(selectedItem.value).to.equal('test')
+      })
+      // Press enter key with a custom search input value
+      .get('.v-combobox').click()
+      .get('.v-combobox input').should('have.value', '')
+      .type('test 2')
+      .trigger('keydown', { key: keyValues.enter, waitForAnimations: false })
+      .should('have.value', '')
+      .should(() => {
+        expect(selectedItem.value).to.equal('test 2')
+      })
+      // Search existing item and click to select
+      .get('.v-combobox').click()
+      .get('.v-combobox input').type('Item 1')
+      .get('.v-list-item').eq(0).click({ waitForAnimations: false })
+      .get('.v-combobox input').should('have.value', '')
+      .should(() => {
+        expect(selectedItem.value).to.equal('Item 1')
+      })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/19319
+  it('should respect return-object when blurring', () => {
+    const items = [
+      { title: 'Item 1', value: 'item1' },
+      { title: 'Item 2', value: 'item2' },
+      { title: 'Item 3', value: 'item3' },
+      { title: 'Item 4', value: 'item4' },
+    ]
+    const model = ref()
+    const search = ref()
+
+    cy.mount(() => (
+      <VCombobox
+        search={ search.value }
+        v-model={ model.value }
+        items={ items }
+      />
+    ))
+      .get('.v-combobox').click()
+      .get('.v-list-item').eq(0).click({ waitForAnimations: false })
+      .should(() => {
+        expect(model.value).to.deep.equal({ title: 'Item 1', value: 'item1' })
+      })
+      .get('.v-combobox input').blur()
+      .should(() => {
+        expect(model.value).to.deep.equal({ title: 'Item 1', value: 'item1' })
+      })
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })

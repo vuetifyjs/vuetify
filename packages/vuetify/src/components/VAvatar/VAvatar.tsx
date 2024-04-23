@@ -79,7 +79,7 @@ export const VAvatar = genericComponent()({
           <VDefaultsProvider
             key="content-defaults"
             defaults={{
-              VAvatar: {
+              VImg: {
                 cover: true,
                 image: props.image,
               },
@@ -88,7 +88,7 @@ export const VAvatar = genericComponent()({
               },
             }}
           >
-            { slots.default?.() }
+            { slots.default() }
           </VDefaultsProvider>
         )}
 

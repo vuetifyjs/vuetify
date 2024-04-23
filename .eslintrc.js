@@ -94,6 +94,14 @@ module.exports = {
     'vue/require-prop-types': 'off',
     'vue/one-component-per-file': 'off',
     'vue/custom-event-name-casing': ['error', { ignores: ['/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'] }],
+
+    'vue/attributes-order': ['error', {
+      order: [
+        'DEFINITION', 'LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'UNIQUE', 'GLOBAL', 'SLOT',
+        'TWO_WAY_BINDING', 'ATTR_DYNAMIC', 'ATTR_STATIC', 'ATTR_SHORTHAND_BOOL', 'OTHER_DIRECTIVES', 'EVENTS', 'CONTENT',
+      ],
+      alphabetical: true,
+    }],
   },
   overrides: [
     {

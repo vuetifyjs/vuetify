@@ -1,5 +1,5 @@
 <template>
-  <v-select label="User" :items="items" item-title="name">
+  <v-select :items="items" item-title="name" label="User">
     <template v-slot:item="{ props, item }">
       <v-list-item v-bind="props" :subtitle="item.raw.department"></v-list-item>
     </template>

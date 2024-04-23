@@ -494,6 +494,7 @@ describe('VAutocomplete', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/18796
+  // https://github.com/vuetifyjs/vuetify/issues/19235
   it('should allow deleting selection via closable-chips', () => {
     const selectedItem = ref('California')
 
@@ -509,6 +510,86 @@ describe('VAutocomplete', () => {
       .click()
       .then(_ => {
         expect(selectedItem.value).to.equal(null)
+      })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/19261
+  it('should not toggle v-model to null when clicking already selected item in single selection mode', () => {
+    const selectedItem = ref('abc')
+
+    cy.mount(() => (
+      <VAutocomplete
+        v-model={ selectedItem.value }
+        items={['abc', 'def']}
+      />
+    ))
+
+    cy.get('.v-autocomplete').click()
+
+    cy.get('.v-list-item').should('have.length', 2)
+    cy.get('.v-list-item').eq(0).click({ waitForAnimations: false }).should(() => {
+      expect(selectedItem.value).equal('abc')
+    })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/18556
+  it('should show menu if focused and items are added', () => {
+    cy
+      .mount(props => (<VAutocomplete { ...props } />))
+      .get('.v-autocomplete input')
+      .focus()
+      .get('.v-overlay')
+      .should('not.exist')
+      .setProps({ items: ['Foo', 'Bar'] })
+      .get('.v-overlay')
+      .should('exist')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/19346
+  it('should not show menu when focused and existing non-empty items are changed', () => {
+    cy
+      .mount((props: any) => (<VAutocomplete items={ props.items } />))
+      .setProps({ items: ['Foo', 'Bar'] })
+      .get('.v-autocomplete')
+      .click()
+      .get('.v-overlay')
+      .should('exist')
+      .get('.v-list-item').eq(1).click({ waitForAnimations: false })
+      .setProps({ items: ['Foo', 'Bar', 'test', 'test 2'] })
+      .get('.v-overlay')
+      .should('not.exist')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/17573
+  // When using selection slot or chips, input displayed next to chip/selection slot should be always empty
+  it('should always have empty input value when it is unfocused and when using selection slot or chips', () => {
+    const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
+    const selectedItem = ref('Item 1')
+
+    cy
+      .mount(() => (
+        <VAutocomplete
+          items={ items }
+          chips
+          v-model={ selectedItem.value }
+        />
+      ))
+      .get('.v-autocomplete').click()
+      .get('.v-autocomplete input').should('have.value', '')
+      // Blur input with a custom search input value
+      .type('test')
+      .blur()
+      .should('have.value', '')
+      .should(() => {
+        expect(selectedItem.value).to.equal('Item 1')
+      })
+      // Search existing item and click to select
+      .get('.v-autocomplete').click()
+      .get('.v-autocomplete input').should('have.value', '')
+      .type('Item 1')
+      .get('.v-list-item').eq(0).click({ waitForAnimations: false })
+      .should(() => {
+        expect(selectedItem.value).to.equal('Item 1')
       })
   })
 

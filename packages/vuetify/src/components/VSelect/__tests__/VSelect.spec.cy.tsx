@@ -532,6 +532,73 @@ describe('VSelect', () => {
       .should('not.have.class', 'v-select--active-menu')
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/19235
+  it('should update v-model when click closable chip', () => {
+    const selectedItem = ref('abc')
+
+    cy.mount(() => (
+      <VSelect
+        v-model={ selectedItem.value }
+        chips
+        closable-chips
+        items={['abc', 'def']}
+      />
+    ))
+
+    cy.get('.v-chip__close')
+      .click()
+      .then(_ => {
+        expect(selectedItem.value).equal(null)
+      })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/19261
+  it('should not toggle v-model to null when clicking already selected item in single selection mode', () => {
+    const selectedItem = ref('abc')
+
+    cy.mount(() => (
+      <VSelect
+        v-model={ selectedItem.value }
+        items={['abc', 'def']}
+      />
+    ))
+
+    cy.get('.v-select').click()
+
+    cy.get('.v-list-item').should('have.length', 2)
+    cy.get('.v-list-item').eq(0).click({ waitForAnimations: false }).should(() => {
+      expect(selectedItem.value).equal('abc')
+    })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/18556
+  it('should show menu if focused and items are added', () => {
+    cy
+      .mount(props => (<VSelect { ...props } />))
+      .get('.v-select input')
+      .focus()
+      .get('.v-overlay')
+      .should('not.exist')
+      .setProps({ items: ['Foo', 'Bar'] })
+      .get('.v-overlay')
+      .should('exist')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/19346
+  it('should not show menu when focused and existing non-empty items are changed', () => {
+    cy
+      .mount((props: any) => (<VSelect items={ props.items } />))
+      .setProps({ items: ['Foo', 'Bar'] })
+      .get('.v-select')
+      .click()
+      .get('.v-overlay')
+      .should('exist')
+      .get('.v-list-item').eq(1).click({ waitForAnimations: false })
+      .setProps({ items: ['Foo', 'Bar', 'test', 'test 2'] })
+      .get('.v-overlay')
+      .should('not.exist')
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })

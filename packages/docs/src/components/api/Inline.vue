@@ -7,7 +7,7 @@
   />
 
   <div v-if="components" :class="showInline && 'mt-4'">
-    <api-links v-if="!showInline && !hideLinks" :components="components" />
+    <ApiLinks v-if="!showInline && !hideLinks" :components="components" />
 
     <div v-if="showInline">
       <div class="d-flex justify-space-between align-center">
@@ -17,16 +17,16 @@
           :readonly="components.length === 1"
           class="mb-2"
           color="primary"
-          hide-details
           label="Component API"
           prepend-inner-icon="mdi-view-dashboard"
           style="max-width: 250px;"
           variant="outlined"
+          hide-details
         />
       </div>
 
       <template v-for="section of sections" :key="section">
-        <api-section
+        <ApiSection
           :name="name"
           :section="section"
           show-headline
@@ -37,14 +37,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-  import { useRoute } from 'vue-router'
-  import { useUserStore } from '@vuetify/one'
-
-  // Utilities
-  import { computed, onBeforeMount, ref } from 'vue'
-
   // Data
   import pageToApi from '@/data/page-to-api.json'
 

@@ -12,10 +12,9 @@
       class="ps-1"
       color="error"
       density="comfortable"
-      inset
-
-      true-icon="mdi-check"
       false-icon="$close"
+      true-icon="mdi-check"
+      inset
     >
       <template #label>
         <div v-text="t('developer-mode')" />
@@ -25,12 +24,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Stores
-  import { useUserStore } from '@vuetify/one'
-
   const { t } = useI18n()
   const user = useUserStore()
 </script>

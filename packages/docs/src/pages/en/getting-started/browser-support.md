@@ -13,9 +13,9 @@ related:
 
 Vuetify 3 is a next generation framework that takes advantage of the latest web technology features and requires an evergreen browser to function.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<VoPromotionsCardVuetify />
 
 ## Browsers
 
@@ -35,4 +35,4 @@ This is not an exhaustive list of compatible browsers, but the main targeted one
 This table is updated with minor releases of Vuetify. Chrome, Firefox, and Safari will be supported at least two years back from the Vuetify x.x.0 release date.
 Current start date is May 2021.
 
-Support for older browsers may be possible with additional [polyfills](https://polyfill.io/v3/) and [PostCSS plugins](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-logical), but has not been tested and is not guaranteed. If you need to support older browsers we recommend using Vuetify 2.
+Support for older browsers may be possible with additional [polyfills](https://cdnjs.cloudflare.com/polyfill/) and [PostCSS plugins](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-logical), but has not been tested and is not guaranteed. If you need to support older browsers we recommend using Vuetify 2.

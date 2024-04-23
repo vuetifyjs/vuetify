@@ -1,45 +1,55 @@
-.v-date-picker-month
-  display: flex
-  justify-content: center
-  min-width: 328px
+@use '../../styles/tools'
+@use './variables' as *
 
-  --v-date-picker-month-day-diff: 4px
+@include tools.layer('components')
+  .v-date-picker-month
+    display: flex
+    justify-content: center
+    padding: $date-picker-month-padding
 
-.v-date-picker-month__weeks
-  display: grid
-  grid-template-rows: min-content min-content min-content min-content min-content min-content min-content
-  row-gap: 4px
-  font-size: .875rem
+    --v-date-picker-month-day-diff: 4px
 
-  + .v-date-picker-month__days
-    grid-row-gap: 0
+  .v-date-picker-month__weeks
+    display: grid
+    grid-template-rows: min-content min-content min-content min-content min-content min-content min-content
+    column-gap: $date-picker-month-column-gap
+    font-size: $date-picker-month-font-size
 
-.v-date-picker-month__weekday
-  font-size: .875rem
+    + .v-date-picker-month__days
+      grid-row-gap: 0
 
-.v-date-picker-month__days
-  display: grid
-  grid-template-columns: min-content min-content min-content min-content min-content min-content min-content
-  row-gap: 4px
-  flex: 1 1
-  justify-content: space-around
+  .v-date-picker-month__weekday
+    font-size: $date-picker-month-font-size
 
-.v-date-picker-month__day
-  align-items: center
-  display: flex
-  justify-content: center
-  position: relative
+  .v-date-picker-month__days
+    display: grid
+    grid-template-columns: min-content min-content min-content min-content min-content min-content min-content
+    column-gap: $date-picker-month-column-gap
+    flex: 1 1
+    justify-content: space-around
 
-  &--selected
-    .v-btn
-      background-color: rgb(var(--v-theme-surface-variant))
-      color: rgb(var(--v-theme-on-surface-variant))
+  .v-date-picker-month__day
+    align-items: center
+    display: flex
+    justify-content: center
+    position: relative
+    height: $date-picker-month-day-size
+    width: $date-picker-month-day-size
 
-  &--week
-    font-size: var(--v-btn-size)
+    &--selected
+      .v-btn
+        background-color: rgb(var(--v-theme-surface-variant))
+        color: rgb(var(--v-theme-on-surface-variant))
 
-.v-date-picker-month__day--adjacent
-  opacity: 0.5
+    .v-btn.v-date-picker-month__day-btn
+      --v-btn-height: #{$date-picker-month-btn-height}
+      --v-btn-size: #{$date-picker-month-btn-size}
 
-.v-date-picker-month__day--hide-adjacent
-  opacity: 0
+    &--week
+      font-size: var(--v-btn-size)
+
+  .v-date-picker-month__day--adjacent
+    opacity: 0.5
+
+  .v-date-picker-month__day--hide-adjacent
+    opacity: 0

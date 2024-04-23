@@ -3,8 +3,8 @@
     v-model="user.theme"
     class="mb-2"
     color="primary"
-    hide-details
     true-icon="mdi-check-circle-outline"
+    hide-details
   >
     <v-radio
       v-for="(item, i) in items"
@@ -27,7 +27,7 @@
       }
     }"
   >
-    <settings-switch
+    <SettingsSwitch
       v-model="user.mixedTheme"
       :label="t('dark-code')"
       :messages="t('dark-code-message')"
@@ -36,11 +36,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useUserStore } from '@vuetify/one'
-  import { useI18n } from 'vue-i18n'
-  import { useTheme } from 'vuetify'
-
   const { t } = useI18n()
   const theme = useTheme()
   const user = useUserStore()
@@ -57,14 +52,24 @@
       value: 'dark',
     },
     {
+      text: 'Blackguard',
+      icon: 'mdi-space-invaders',
+      value: 'blackguard',
+    },
+    {
+      text: 'Polaris',
+      icon: 'mdi-image-filter-hdr',
+      value: 'polaris',
+    },
+    {
+      text: 'Nebula',
+      icon: 'mdi-rocket-launch-outline',
+      value: 'nebula',
+    },
+    {
       text: t('system'),
       icon: 'mdi-desktop-tower-monitor',
       value: 'system',
-    },
-    {
-      text: t('blackguard'),
-      icon: 'mdi-space-invaders',
-      value: 'blackguard',
     },
   ]
 </script>

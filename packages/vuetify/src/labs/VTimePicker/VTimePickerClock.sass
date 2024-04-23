@@ -1,0 +1,132 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  // Theme
+  .v-time-picker-clock
+    background: rgb(var(--v-theme-background))
+    color: rgb(var(--v-theme-on-background))
+
+    &:after
+      color: rgb(var(--v-theme-primary))
+
+    .v-time-picker-clock__item--active
+      background-color: rgb(var(--v-theme-surface-variant))
+      color: rgb(var(--v-theme-on-surface-variant))
+
+  .v-time-picker-clock
+    margin: 0 auto
+    background: rgb(var(--v-theme-surface-light))
+    border-radius: 50%
+    position: relative
+    transition: none
+    user-select: none
+    height: 256px
+    width: 256px
+    flex: 1 0 auto
+
+    &__container
+      display: flex
+      flex-direction: column
+      flex-basis: 290px
+      justify-content: center
+      padding: $time-picker-clock-padding
+
+    &__hand
+      background-color: currentColor
+      height: $time-picker-clock-hand-height
+      width: $time-picker-clock-hand-width
+      bottom: 50%
+      left: $time-picker-clock-hand-left
+      transform-origin: center bottom
+      position: absolute
+      will-change: transform
+      z-index: 1
+
+      &:before
+        background: transparent
+        border-width: $time-picker-clock-end-border-width
+        border-style: $time-picker-clock-end-border-style
+        border-color: $time-picker-clock-end-border-color
+        border-radius: 100%
+        width: $time-picker-clock-end-size
+        height: $time-picker-clock-end-size
+        content: ''
+        position: absolute
+        top: $time-picker-clock-end-top
+        left: 50%
+        transform: translate(-50%, -50%)
+
+      &:after
+        content: ''
+        position: absolute
+        height: $time-picker-clock-center-size
+        width: $time-picker-clock-center-size
+        top: 100%
+        left: 50%
+        border-radius: 100%
+        background-color: currentColor
+        transform: translate(-50%, -50%)
+
+      &--inner:after
+        height: $time-picker-clock-inner-hand-height
+
+    &--readonly
+      pointer-events: none
+
+    .v-time-picker-clock__item--disabled
+      opacity: var(--v-disabled-opacity)
+
+  .v-picker--full-width
+    .v-time-picker-clock__container
+      max-width: $time-picker-clock-max-width
+
+  .v-time-picker-clock__inner
+    position: absolute
+    bottom: $time-picker-clock-inner-offset
+    left: $time-picker-clock-inner-offset
+    right: $time-picker-clock-inner-offset
+    top: $time-picker-clock-inner-offset
+
+  .v-time-picker-clock__item
+    align-items: center
+    border-radius: 100%
+    cursor: default
+    display: flex
+    font-size: $time-picker-number-font-size
+    justify-content: center
+    height: $time-picker-indicator-size
+    position: absolute
+    text-align: center
+    width: $time-picker-indicator-size
+    user-select: none
+    transform: translate(-50%, -50%)
+
+    > span
+      z-index: 1
+
+    &:before, &:after
+      content: ''
+      border-radius: 100%
+      position: absolute
+      top: 50%
+      left: 50%
+      height: 14px
+      width: 14px
+      transform: translate(-50%, -50%)
+
+    &:after, &:before
+      height: $time-picker-indicator-size
+      width: $time-picker-indicator-size
+
+    &--active
+      cursor: default
+      z-index: 2
+
+    &--disabled
+      pointer-events: none
+
+  .v-picker--landscape
+    .v-time-picker-clock
+      &__container
+        flex-direction: row

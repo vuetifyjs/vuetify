@@ -13,11 +13,11 @@ related:
 
 The display helpers allow you to control the display of content. This includes being conditionally visible based upon the current viewport, or the actual element display type.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
-<breakpoints-table />
+<FeaturesBreakpointsTable />
 
 ## Display
 
@@ -40,9 +40,9 @@ The _value_ property is one of:
 
 When setting a specific breakpoint for a display helper class, it will apply to all screen widths from the designation and up. For example, `d-lg-flex` will apply to `lg`, `xl` and `xxl` size screens.
 
-<example file="display/display-inline" />
+<ExamplesExample file="display/display-inline" />
 
-<example file="display/display-block" />
+<ExamplesExample file="display/display-block" />
 
 ## Visibility
 
@@ -65,7 +65,7 @@ Conditionally display an element based upon the current **viewport**. Breakpoint
 | Visible only on xl  | `.d-none .d-xl-flex .d-xxl-none` |
 | Visible only on xxl | `.d-none .d-xxl-flex`            |
 
-<example file="display/visibility" />
+<ExamplesExample file="display/visibility" />
 
 Alternatively you can hide an element based upon the current **viewport** using lateral display helper classes. These classes can be applied using the following format `hidden-{breakpoint}-{condition?}`
 
@@ -101,7 +101,7 @@ You can also change the display property when printing.
 
 Print utility classes can also be combined with none print display utilities.
 
-<example file="display/print" />
+<ExamplesExample file="display/print" />
 
 ## Accessibility
 

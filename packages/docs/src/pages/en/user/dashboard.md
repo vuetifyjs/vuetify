@@ -6,11 +6,8 @@ meta:
   description: User Dashboard
   keywords: user dashboard
 ---
-
 <script setup>
-  import PerksOptions from '@/components/app/settings/PerksOptions.vue'
+  import DashboardDashboardEmptyState from '@/components/dashboard/DashboardEmptyState.vue'
 </script>
 
-### Perks
-
-<PerksOptions />
+<DashboardDashboardEmptyState />

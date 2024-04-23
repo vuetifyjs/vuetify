@@ -1,11 +1,12 @@
 // Styles
 import './VExpansionPanel.sass'
 
+// Components
+import { makeVExpansionPanelProps } from './VExpansionPanel'
+
 // Composables
-import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
 import { makeGroupProps, useGroup } from '@/composables/group'
-import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
@@ -23,19 +24,17 @@ const allowedVariants = ['default', 'accordion', 'inset', 'popout'] as const
 type Variant = typeof allowedVariants[number]
 
 export const makeVExpansionPanelsProps = propsFactory({
-  color: String,
-  static: Boolean,
+  flat: Boolean,
+
+  ...makeGroupProps(),
+  ...makeVExpansionPanelProps(),
+  ...makeThemeProps(),
+
   variant: {
     type: String as PropType<Variant>,
     default: 'default',
     validator: (v: any) => allowedVariants.includes(v),
   },
-  readonly: Boolean,
-
-  ...makeComponentProps(),
-  ...makeGroupProps(),
-  ...makeTagProps(),
-  ...makeThemeProps(),
 }, 'VExpansionPanels')
 
 export const VExpansionPanels = genericComponent()({
@@ -56,8 +55,17 @@ export const VExpansionPanels = genericComponent()({
 
     provideDefaults({
       VExpansionPanel: {
+        bgColor: toRef(props, 'bgColor'),
+        collapseIcon: toRef(props, 'collapseIcon'),
         color: toRef(props, 'color'),
+        eager: toRef(props, 'eager'),
+        elevation: toRef(props, 'elevation'),
+        expandIcon: toRef(props, 'expandIcon'),
+        focusable: toRef(props, 'focusable'),
+        hideActions: toRef(props, 'hideActions'),
         readonly: toRef(props, 'readonly'),
+        ripple: toRef(props, 'ripple'),
+        rounded: toRef(props, 'rounded'),
         static: toRef(props, 'static'),
       },
     })
@@ -66,6 +74,10 @@ export const VExpansionPanels = genericComponent()({
       <props.tag
         class={[
           'v-expansion-panels',
+          {
+            'v-expansion-panels--flat': props.flat,
+            'v-expansion-panels--tile': props.tile,
+          },
           themeClasses.value,
           variantClass.value,
           props.class,
