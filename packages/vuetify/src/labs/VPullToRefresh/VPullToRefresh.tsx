@@ -10,7 +10,7 @@ import { LoaderSlot } from '@/composables/loader'
 
 // Utilities
 import { computed, onMounted, ref, shallowRef } from 'vue'
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, getScrollParents, useRender } from '@/util'
 
 const PULL_DOWN_HEIGHT_PX = 64
 
@@ -28,15 +28,15 @@ export const VPullToRefresh = genericComponent()({
 
   setup (props, { slots, emit }) {
     let touchstartY = 0
+    let lastTouchY = 0
 
     const touchDiff = shallowRef(0)
     const scrollContainerRef = ref<HTMLElement>()
 
-    const height = shallowRef(0)
-
     const canRefresh = computed(() => touchDiff.value > PULL_DOWN_HEIGHT_PX * 2 / 3)
     const refreshing = shallowRef(false)
     const touching = shallowRef(false)
+    let immediateScrollParent: HTMLElement | undefined
 
     function onTouchstart (e: TouchEvent) {
       if (refreshing.value) {
@@ -44,7 +44,7 @@ export const VPullToRefresh = genericComponent()({
         return
       }
       touching.value = true
-      touchstartY = e.touches[0].clientY
+      lastTouchY = touchstartY = e.touches[0].clientY + immediateScrollParent!.scrollTop
     }
 
     function onTouchmove (e: TouchEvent) {
@@ -53,9 +53,14 @@ export const VPullToRefresh = genericComponent()({
         return
       }
       const touchY = e.touches[0].clientY
-      if (touchDiff.value < PULL_DOWN_HEIGHT_PX && window.scrollY === 0) {
+      if (
+        touchY > lastTouchY &&
+        touchDiff.value < PULL_DOWN_HEIGHT_PX &&
+        !immediateScrollParent!.scrollTop
+      ) {
         touchDiff.value = touchY - touchstartY
       }
+      lastTouchY = touchY
     }
 
     function onTouchend (e: TouchEvent) {
@@ -77,7 +82,7 @@ export const VPullToRefresh = genericComponent()({
     }
 
     onMounted(() => {
-      height.value = scrollContainerRef.value!.offsetHeight
+      immediateScrollParent = getScrollParents(scrollContainerRef.value)[0]
     })
 
     useRender(() => {
@@ -89,9 +94,6 @@ export const VPullToRefresh = genericComponent()({
           onTouchstart={ onTouchstart }
           onTouchmove={ onTouchmove }
           onTouchend={ onTouchend }
-          style={{
-            height: convertToUnit(height.value),
-          }}
         >
           <div
             class={[
@@ -102,6 +104,7 @@ export const VPullToRefresh = genericComponent()({
             ]}
             style={{
               top: convertToUnit(-1 * PULL_DOWN_HEIGHT_PX + touchDiff.value),
+              height: convertToUnit(PULL_DOWN_HEIGHT_PX),
             }}
           >
             {
@@ -130,7 +133,7 @@ export const VPullToRefresh = genericComponent()({
               },
             ]}
             ref={ scrollContainerRef }
-            style={{ top: convertToUnit(-1 * PULL_DOWN_HEIGHT_PX + touchDiff.value) }}
+            style={{ top: convertToUnit(touchDiff.value) }}
           >
             { slots.default?.() }
           </div>

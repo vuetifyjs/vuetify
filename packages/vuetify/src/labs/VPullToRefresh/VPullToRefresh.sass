@@ -1,11 +1,12 @@
 .v-pull-to-refresh
   overflow: hidden
+  position: relative
   &__pull-down
-    position: relative
+    position: absolute
+    width: 100%
     display: flex
     justify-content: center
     align-items: flex-end
-    height: 64px 
     transition: top .3s ease-out
     &--touching
       transition: none
