@@ -2,6 +2,7 @@ export default {
   badge: 'Jelvény',
   open: 'Open',
   close: 'Bezárás',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',

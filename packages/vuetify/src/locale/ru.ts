@@ -2,6 +2,7 @@ export default {
   badge: 'Знак',
   open: 'Открыть',
   close: 'Закрыть',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'ОК',
     cancel: 'Отмена',

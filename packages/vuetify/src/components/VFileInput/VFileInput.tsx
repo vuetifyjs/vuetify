@@ -68,7 +68,7 @@ export const makeVFileInputProps = propsFactory({
 
   modelValue: {
     type: [Array, Object] as PropType<File[] | File>,
-    default: () => ([]),
+    default: (props: any) => props.multiple ? [] : null,
     validator: (val: any) => {
       return wrapInArray(val).every(v => v != null && typeof v === 'object')
     },
