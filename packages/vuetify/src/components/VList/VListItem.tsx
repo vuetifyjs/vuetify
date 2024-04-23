@@ -69,7 +69,7 @@ export const makeVListItemProps = propsFactory({
   appendIcon: IconValue,
   baseColor: String,
   disabled: Boolean,
-  lines: String as PropType<'one' | 'two' | 'three'>,
+  lines: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
   link: {
     type: Boolean,
     default: undefined,
