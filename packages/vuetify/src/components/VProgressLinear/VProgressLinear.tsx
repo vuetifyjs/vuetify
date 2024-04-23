@@ -6,6 +6,7 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useRtl } from '@/composables/locale'
+import { makeLocationProps, useLocation } from '@/composables/location'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
@@ -52,6 +53,7 @@ export const makeVProgressLinearProps = propsFactory({
   roundedBar: Boolean,
 
   ...makeComponentProps(),
+  ...makeLocationProps({ location: 'top' } as const),
   ...makeRoundedProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
@@ -70,6 +72,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     const progress = useProxiedModel(props, 'modelValue')
     const { isRtl, rtlClasses } = useRtl()
     const { themeClasses } = provideTheme(props)
+    const { locationStyles } = useLocation(props)
     const { textColorClasses, textColorStyles } = useTextColor(props, 'color')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => props.bgColor || props.color))
     const { backgroundColorClasses: barColorClasses, backgroundColorStyles: barColorStyles } = useBackgroundColor(props, 'color')
@@ -117,8 +120,11 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
         ]}
         style={[
           {
+            bottom: props.location === 'bottom' ? 0 : undefined,
+            top: props.location === 'top' ? 0 : undefined,
             height: props.active ? convertToUnit(height.value) : 0,
             '--v-progress-linear-height': convertToUnit(height.value),
+            ...locationStyles.value,
           },
           props.style,
         ]}
