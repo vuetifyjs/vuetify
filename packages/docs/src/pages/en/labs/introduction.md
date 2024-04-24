@@ -78,6 +78,7 @@ The following is a list of available and up-and-coming components for use with L
 | - | - | - |
 | [v-calendar](/components/calendars/) | A calendar component | [v3.4.9](/getting-started/release-notes/?version=v3.4.9) |
 | [v-confirm-edit](/components/confirm-edit/) | A component for confirming model changes | [v3.4.0](/getting-started/release-notes/?version=v3.4.0) |
+| [v-date-input](/components/date-inputs/) | A date input component | [v3.6.0](/getting-started/release-notes/?version=v3.6.0) |
 | [v-empty-state](/components/empty-states/) | A component for displaying empty states | [v3.5.7](/getting-started/release-notes/?version=v3.5.7) |
 | [v-fab](/components/floating-action-buttons/) | A layout aware [v-btn](/components/buttons/) | [v3.5.7](/getting-started/release-notes/?version=v3.5.7) |
 | [v-number-input](/components/number-input/) | A component for numerical data | [v3.5.10](/getting-started/release-notes/?version=v3.5.10) |
