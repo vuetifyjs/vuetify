@@ -6,13 +6,13 @@ import { VOverlay } from '@/components/VOverlay'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Composables
+import { useColor } from '@/composables/color'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
-import { makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { computed, mergeProps, ref } from 'vue'
+import { computed, mergeProps, ref, unref } from 'vue'
 import { genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -22,6 +22,7 @@ import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 export const makeVTooltipProps = propsFactory({
   id: String,
   text: String,
+  color: String,
 
   ...omit(makeVOverlayProps({
     closeOnBack: false,
@@ -40,8 +41,6 @@ export const makeVTooltipProps = propsFactory({
     'absolute',
     'persistent',
   ]),
-
-  ...makeVariantProps({ variant: 'flat' } as const),
 }, 'VTooltip')
 
 export const VTooltip = genericComponent<OverlaySlots>()({
@@ -56,7 +55,13 @@ export const VTooltip = genericComponent<OverlaySlots>()({
   setup (props, { slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
-    const { colorClasses, colorStyles, variantClasses } = useVariant(props)
+
+    const { colorClasses, colorStyles } = useColor(computed(() => {
+      const { color } = unref(props)
+      return {
+        background: color,
+      }
+    }))
 
     const uid = getUid()
     const id = computed(() => props.id || `v-tooltip-${uid}`)
@@ -106,7 +111,6 @@ export const VTooltip = genericComponent<OverlaySlots>()({
           id={ id.value }
           { ...overlayProps }
           contentClass={[
-            variantClasses.value,
             colorClasses.value,
           ]}
           contentProps={{
