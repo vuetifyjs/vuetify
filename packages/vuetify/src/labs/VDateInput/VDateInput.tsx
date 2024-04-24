@@ -26,7 +26,7 @@ export const makeVDateInputProps = propsFactory({
     prependIcon: 'mdi-calendar',
   }),
   ...omit(makeVDatePickerProps({
-    weeksInMonth: 'dynamic',
+    weeksInMonth: 'dynamic' as const,
     hideHeader: true,
   }), ['active']),
 }, 'VDateInput')
@@ -37,7 +37,7 @@ export const VDateInput = genericComponent()({
   props: makeVDateInputProps(),
 
   emits: {
-    'update:modelValue': (val: string | null) => val != null && typeof val === 'string',
+    'update:modelValue': (val: string) => true,
   },
 
   setup (props, { slots }) {
@@ -121,6 +121,8 @@ export const VDateInput = genericComponent()({
               }}
             </VConfirmEdit>
           </VMenu>
+
+          { slots.default?.() }
         </VTextField>
       )
     })
