@@ -2,6 +2,7 @@ export default {
   badge: 'Infopiste',
   open: 'Open',
   close: 'Sulje',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
@@ -71,6 +72,7 @@ export default {
   timePicker: {
     am: 'ap.',
     pm: 'ip.',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

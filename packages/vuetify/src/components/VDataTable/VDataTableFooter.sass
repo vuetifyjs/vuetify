@@ -2,12 +2,13 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-.v-data-table-footer
-  align-items: center
-  display: flex
-  flex-wrap: wrap
-  justify-content: flex-end
-  padding: $data-table-footer-padding
+@include tools.layer('components')
+  .v-data-table-footer
+    align-items: center
+    display: flex
+    flex-wrap: wrap
+    justify-content: flex-end
+    padding: $data-table-footer-padding
 
   &__items-per-page
     align-items: center

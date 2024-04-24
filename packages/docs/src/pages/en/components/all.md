@@ -114,7 +114,7 @@ Navigation components are used to navigate between different views or pages.
 
 </ComponentsListItem>
 
-<ComponentsListItem name="FABs" src="fabs" labs>
+<ComponentsListItem name="FABs" src="floating-action-buttons" labs>
 
   The floating action button is used for a promoted actions within an application
 
@@ -229,6 +229,12 @@ Form components are used to collect user input in a variety of ways.
 <ComponentsListItem name="Inputs component" src="inputs">
 
   Create custom inputs that can be used with the v-model directive
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Number input component" src="number-inputs" labs>
+
+  The number input component is used for collecting numerical data from the user
 
 </ComponentsListItem>
 

@@ -1,10 +1,9 @@
 <template>
-  <v-row align="center" justify="center">
-    <v-col cols="auto">
+  <v-row align="center" justify="center" dense>
+    <v-col cols="12" md="6">
       <v-card
         append-icon="mdi-check"
         class="mx-auto"
-        max-width="344"
         prepend-icon="mdi-account"
         subtitle="prepend-icon and append-icon"
         title="Icons"
@@ -13,10 +12,9 @@
       </v-card>
     </v-col>
 
-    <v-col cols="auto">
+    <v-col cols="12" md="6">
       <v-card
         class="mx-auto"
-        max-width="344"
         subtitle="prepend and append"
         title="Icons"
       >
@@ -30,11 +28,10 @@
       </v-card>
     </v-col>
 
-    <v-col cols="auto">
+    <v-col cols="12" md="6">
       <v-card
         append-avatar="https://cdn.vuetifyjs.com/images/john.jpg"
         class="mx-auto"
-        max-width="344"
         prepend-avatar="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
         subtitle="prepend-avatar and append-avatar"
         title="Avatars"
@@ -43,10 +40,9 @@
       </v-card>
     </v-col>
 
-    <v-col cols="auto">
+    <v-col cols="12" md="6">
       <v-card
         class="mx-auto"
-        max-width="344"
         subtitle="prepend and append"
         title="Avatars"
       >

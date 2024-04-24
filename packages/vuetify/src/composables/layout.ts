@@ -271,7 +271,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
         const styles = {
           [position.value]: 0,
           zIndex: zIndex.value,
-          transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -110) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}%)`,
+          transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -(elementSize.value ?? layoutSize.value)) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}px)`,
           position: absolute.value || rootZIndex.value !== ROOT_ZINDEX ? 'absolute' : 'fixed',
           ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
         } as const

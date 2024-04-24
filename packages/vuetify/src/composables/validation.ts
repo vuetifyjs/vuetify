@@ -168,15 +168,16 @@ export function useValidation (
     form?.update(uid.value, isValid.value, errorMessages.value)
   })
 
-  function reset () {
+  async function reset () {
     model.value = null
-    nextTick(resetValidation)
+    await nextTick()
+    await resetValidation()
   }
 
-  function resetValidation () {
+  async function resetValidation () {
     isPristine.value = true
     if (!validateOn.value.lazy) {
-      validate(true)
+      await validate(true)
     } else {
       internalErrorMessages.value = []
     }

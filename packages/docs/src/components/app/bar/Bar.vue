@@ -1,12 +1,12 @@
 <template>
-  <v-app-bar
+  <VoAppBar
     id="app-bar"
-    :image="settings.suit['app-bar']"
     border="b"
+    logo="vuetify"
     flat
   >
     <template #prepend>
-      <app-bar-logo />
+      <div class="px-1" />
 
       <AppBtn
         v-if="route.meta.layout !== 'home' && mdAndDown"
@@ -19,39 +19,34 @@
 
     <template #append>
       <template v-if="mdAndUp">
-        <app-bar-learn-menu />
+        <AppBarLearnMenu />
 
-        <app-bar-support-menu />
+        <AppBarSupportMenu />
 
-        <app-bar-ecosystem-menu />
+        <AppBarEcosystemMenu />
 
-        <app-bar-team-link v-if="lgAndUp" />
+        <AppBarTeamLink v-if="lgAndUp" />
 
-        <app-bar-playground-link v-if="lgAndUp" />
+        <AppBarPlaygroundLink v-if="lgAndUp" />
 
-        <app-bar-enterprise-link />
+        <AppBarEnterpriseLink />
       </template>
 
-      <app-vertical-divider v-if="smAndUp" class="ms-3 me-2" />
+      <AppVerticalDivider v-if="smAndUp" class="ms-3 me-2" />
 
-      <app-bar-store-link v-if="smAndUp" />
+      <AppBarStoreLink v-if="smAndUp" />
 
-      <app-bar-jobs-link v-if="smAndUp" />
+      <AppBarJobsLink v-if="smAndUp" />
 
-      <app-bar-language-menu v-if="smAndUp" />
+      <AppBarLanguageMenu v-if="smAndUp" />
 
-      <app-bar-settings-toggle />
-
-      <app-vertical-divider v-if="lgAndUp" class="ms-2 me-3" />
-
-      <VoAuthBtn />
+      <AppBarSettingsToggle />
     </template>
-  </v-app-bar>
+  </VoAppBar>
 </template>
 
 <script setup>
   const app = useAppStore()
   const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
   const route = useRoute()
-  const settings = useSettingsStore()
 </script>

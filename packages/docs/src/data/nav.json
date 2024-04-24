@@ -60,6 +60,7 @@
       {
         "subheader": "utility-classes"
       },
+      "borders",
       "border-radius",
       "content",
       "cursor",
@@ -67,6 +68,7 @@
       "elevation",
       "flex",
       "float",
+      "opacity",
       "overflow",
       "position",
       "sizing",
@@ -211,6 +213,7 @@
       "resize",
       "ripple",
       "scroll",
+      "tooltip",
       "touch"
     ]
   },
@@ -225,6 +228,10 @@
         "subfolder": "components"
       },
       {
+        "title": "confirm-edit",
+        "subfolder": "components"
+      },
+      {
         "title": "empty-states",
         "subfolder": "components"
       },
@@ -233,11 +240,23 @@
         "subfolder": "components"
       },
       {
+        "title": "number-inputs",
+        "subfolder": "components"
+      },
+      {
+        "title": "snackbar-queue",
+        "subfolder": "components"
+      },
+      {
         "title": "sparklines",
         "subfolder": "components"
       },
       {
         "title": "speed-dials",
+        "subfolder": "components"
+      },
+      {
+        "title": "time-pickers",
         "subfolder": "components"
       },
       {

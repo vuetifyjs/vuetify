@@ -19,7 +19,8 @@
     "props": "Props",
     "sass": "SASS Variables",
     "slots": "Slots",
-    "exposed": "Exposed"
+    "exposed": "Exposed",
+    "value": "Value"
   },
   "api-explorer": "API Explorer",
   "application": "Application",

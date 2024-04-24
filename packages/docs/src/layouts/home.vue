@@ -6,8 +6,6 @@
 
     <AppBarBar />
 
-    <AppSnackbarQueue />
-
     <v-main class="text-center font-weight-light">
       <router-view />
     </v-main>

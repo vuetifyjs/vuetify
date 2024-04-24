@@ -1,18 +1,19 @@
 @use '../settings';
+@use '../tools';
 
 @mixin transition-default() {
   &-enter-active {
-    transition-duration: 0.3s !important;
+    transition-duration: settings.$transition-duration-root !important;
     transition-timing-function: settings.$standard-easing !important;
   }
 
   &-leave-active {
-    transition-duration: 0.3s !important;
+    transition-duration: settings.$transition-duration-root !important;
     transition-timing-function: settings.$standard-easing !important;
   }
 
   &-move {
-    transition-duration: 0.5s !important;
+    transition-duration: settings.$transition-move-duration-root !important;
     transition-property: transform !important;
     transition-timing-function: settings.$standard-easing !important;
   }
@@ -26,339 +27,341 @@
   }
 }
 
-// Component specific transitions
-.dialog-transition,
-.dialog-bottom-transition,
-.dialog-top-transition {
-  &-enter-active {
-    transition-duration: 225ms !important;
-    transition-timing-function: settings.$decelerated-easing !important;
+@include tools.layer('transitions') {
+  // Component specific transitions
+  .dialog-transition,
+  .dialog-bottom-transition,
+  .dialog-top-transition {
+    &-enter-active {
+      transition-duration: 225ms !important;
+      transition-timing-function: settings.$decelerated-easing !important;
+    }
+
+    &-leave-active {
+      transition-duration: 125ms !important;
+      transition-timing-function: settings.$accelerated-easing !important;
+    }
+
+    &-enter-active,
+    &-leave-active {
+      transition-property: transform, opacity !important;
+      pointer-events: none;
+    }
   }
 
-  &-leave-active {
-    transition-duration: 125ms !important;
-    transition-timing-function: settings.$accelerated-easing !important;
+  .dialog-transition {
+    &-enter-from, &-leave-to {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+
+    &-enter-to, &-leave-from {
+      opacity: 1;
+    }
   }
 
-  &-enter-active,
-  &-leave-active {
-    transition-property: transform, opacity !important;
-    pointer-events: none;
-  }
-}
-
-.dialog-transition {
-  &-enter-from, &-leave-to {
-    transform: scale(0.9);
-    opacity: 0;
+  .dialog-bottom-transition {
+    &-enter-from, &-leave-to {
+      transform: translateY(calc(50vh + 50%));
+    }
   }
 
-  &-enter-to, &-leave-from {
-    opacity: 1;
-  }
-}
-
-.dialog-bottom-transition {
-  &-enter-from, &-leave-to {
-    transform: translateY(calc(50vh + 50%));
-  }
-}
-
-.dialog-top-transition {
-  &-enter-from, &-leave-to {
-    transform: translateY(calc(-50vh - 50%));
-  }
-}
-
-.picker-transition,
-.picker-reverse-transition {
-  @include transition-default();
-
-  &-enter-from,
-  &-leave-to {
-    opacity: 0;
+  .dialog-top-transition {
+    &-enter-from, &-leave-to {
+      transform: translateY(calc(-50vh - 50%));
+    }
   }
 
-  &-leave-from,
-  &-leave-active,
-  &-leave-to {
-    position: absolute !important;
+  .picker-transition,
+  .picker-reverse-transition {
+    @include transition-default();
+
+    &-enter-from,
+    &-leave-to {
+      opacity: 0;
+    }
+
+    &-leave-from,
+    &-leave-active,
+    &-leave-to {
+      position: absolute !important;
+    }
+
+    &-enter-active,
+    &-leave-active {
+      transition-property: transform, opacity !important;
+    }
   }
 
-  &-enter-active,
-  &-leave-active {
-    transition-property: transform, opacity !important;
-  }
-}
+  .picker-transition {
+    @include transition-default();
 
-.picker-transition {
-  @include transition-default();
+    &-enter-from {
+      transform: translate(100%, 0);
+    }
 
-  &-enter-from {
-    transform: translate(0, 100%);
-  }
-
-  &-leave-to {
-    transform: translate(0, -100%);
-  }
-}
-
-.picker-reverse-transition {
-  @include transition-default();
-
-  &-enter-from {
-    transform: translate(0, -100%);
+    &-leave-to {
+      transform: translate(-100%, 0);
+    }
   }
 
-  &-leave-to {
-    transform: translate(0, 100%);
-  }
-}
+  .picker-reverse-transition {
+    @include transition-default();
 
-// Generic transitions
-.expand-transition {
-  @include transition-default();
+    &-enter-from {
+      transform: translate(-100%, 0);
+    }
 
-  &-enter-active,
-  &-leave-active {
-    transition-property: height !important;
-  }
-}
-
-.expand-x-transition {
-  @include transition-default();
-
-  &-enter-active,
-  &-leave-active {
-    transition-property: width !important;
-  }
-}
-
-.scale-transition {
-  @include transition-default();
-  @include fade-out();
-
-  &-enter-from {
-    opacity: 0;
-    transform: scale(0);
+    &-leave-to {
+      transform: translate(100%, 0);
+    }
   }
 
-  &-enter-active,
-  &-leave-active {
-    transition-property: transform, opacity !important;
-  }
-}
+  // Generic transitions
+  .expand-transition {
+    @include transition-default();
 
-.scale-rotate-transition {
-  @include transition-default();
-  @include fade-out();
-
-  &-enter-from {
-    opacity: 0;
-    transform: scale(0) rotate(-45deg);
+    &-enter-active,
+    &-leave-active {
+      transition-property: height !important;
+    }
   }
 
-  &-enter-active,
-  &-leave-active {
-    transition-property: transform, opacity !important;
-  }
-}
+  .expand-x-transition {
+    @include transition-default();
 
-.scale-rotate-reverse-transition {
-  @include transition-default();
-  @include fade-out();
-
-  &-enter-from {
-    opacity: 0;
-    transform: scale(0) rotate(45deg);
+    &-enter-active,
+    &-leave-active {
+      transition-property: width !important;
+    }
   }
 
-  &-enter-active,
-  &-leave-active {
-    transition-property: transform, opacity !important;
-  }
-}
+  .scale-transition {
+    @include transition-default();
+    @include fade-out();
 
-.message-transition {
-  @include transition-default();
+    &-enter-from {
+      opacity: 0;
+      transform: scale(0);
+    }
 
-  &-enter-from, &-leave-to {
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-
-  &-leave-from, &-leave-active {
-    position: absolute;
+    &-enter-active,
+    &-leave-active {
+      transition-property: transform, opacity !important;
+    }
   }
 
-  &-enter-active,
-  &-leave-active {
-    transition-property: transform, opacity !important;
-  }
-}
+  .scale-rotate-transition {
+    @include transition-default();
+    @include fade-out();
 
-.slide-y-transition {
-  @include transition-default();
+    &-enter-from {
+      opacity: 0;
+      transform: scale(0) rotate(-45deg);
+    }
 
-  &-enter-from, &-leave-to {
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-
-  &-enter-active,
-  &-leave-active {
-    transition-property: transform, opacity !important;
-  }
-}
-
-.slide-y-reverse-transition {
-  @include transition-default();
-
-  &-enter-from, &-leave-to {
-    opacity: 0;
-    transform: translateY(15px);
+    &-enter-active,
+    &-leave-active {
+      transition-property: transform, opacity !important;
+    }
   }
 
-  &-enter-active,
-  &-leave-active {
-    transition-property: transform, opacity !important;
-  }
-}
+  .scale-rotate-reverse-transition {
+    @include transition-default();
+    @include fade-out();
 
-.scroll-y-transition {
-  @include transition-default();
+    &-enter-from {
+      opacity: 0;
+      transform: scale(0) rotate(45deg);
+    }
 
-  &-enter-from, &-leave-to {
-    opacity: 0;
-  }
-
-  &-enter-from {
-    transform: translateY(-15px);
+    &-enter-active,
+    &-leave-active {
+      transition-property: transform, opacity !important;
+    }
   }
 
-  &-leave-to {
-    transform: translateY(15px);
+  .message-transition {
+    @include transition-default();
+
+    &-enter-from, &-leave-to {
+      opacity: 0;
+      transform: translateY(-15px);
+    }
+
+    &-leave-from, &-leave-active {
+      position: absolute;
+    }
+
+    &-enter-active,
+    &-leave-active {
+      transition-property: transform, opacity !important;
+    }
   }
 
-  &-enter-active,
-  &-leave-active {
-    transition-property: transform, opacity !important;
-  }
-}
+  .slide-y-transition {
+    @include transition-default();
 
-.scroll-y-reverse-transition {
-  @include transition-default();
+    &-enter-from, &-leave-to {
+      opacity: 0;
+      transform: translateY(-15px);
+    }
 
-  &-enter-from, &-leave-to {
-    opacity: 0;
-  }
-
-  &-enter-from {
-    transform: translateY(15px);
+    &-enter-active,
+    &-leave-active {
+      transition-property: transform, opacity !important;
+    }
   }
 
-  &-leave-to {
-    transform: translateY(-15px);
+  .slide-y-reverse-transition {
+    @include transition-default();
+
+    &-enter-from, &-leave-to {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    &-enter-active,
+    &-leave-active {
+      transition-property: transform, opacity !important;
+    }
   }
 
-  &-enter-active,
-  &-leave-active {
-    transition-property: transform, opacity !important;
-  }
-}
+  .scroll-y-transition {
+    @include transition-default();
 
-.scroll-x-transition {
-  @include transition-default();
+    &-enter-from, &-leave-to {
+      opacity: 0;
+    }
 
-  &-enter-from, &-leave-to {
-    opacity: 0;
-  }
+    &-enter-from {
+      transform: translateY(-15px);
+    }
 
-  &-enter-from {
-    transform: translateX(-15px);
-  }
+    &-leave-to {
+      transform: translateY(15px);
+    }
 
-  &-leave-to {
-    transform: translateX(15px);
-  }
-
-  &-enter-active,
-  &-leave-active {
-    transition-property: transform, opacity !important;
-  }
-}
-
-.scroll-x-reverse-transition {
-  @include transition-default();
-
-  &-enter-from, &-leave-to {
-    opacity: 0;
+    &-enter-active,
+    &-leave-active {
+      transition-property: transform, opacity !important;
+    }
   }
 
-  &-enter-from {
-    transform: translateX(15px);
+  .scroll-y-reverse-transition {
+    @include transition-default();
+
+    &-enter-from, &-leave-to {
+      opacity: 0;
+    }
+
+    &-enter-from {
+      transform: translateY(15px);
+    }
+
+    &-leave-to {
+      transform: translateY(-15px);
+    }
+
+    &-enter-active,
+    &-leave-active {
+      transition-property: transform, opacity !important;
+    }
   }
 
-  &-leave-to {
-    transform: translateX(-15px);
+  .scroll-x-transition {
+    @include transition-default();
+
+    &-enter-from, &-leave-to {
+      opacity: 0;
+    }
+
+    &-enter-from {
+      transform: translateX(-15px);
+    }
+
+    &-leave-to {
+      transform: translateX(15px);
+    }
+
+    &-enter-active,
+    &-leave-active {
+      transition-property: transform, opacity !important;
+    }
   }
 
-  &-enter-active,
-  &-leave-active {
-    transition-property: transform, opacity !important;
-  }
-}
+  .scroll-x-reverse-transition {
+    @include transition-default();
 
-.slide-x-transition {
-  @include transition-default();
+    &-enter-from, &-leave-to {
+      opacity: 0;
+    }
 
-  &-enter-from, &-leave-to {
-    opacity: 0;
-    transform: translateX(-15px);
-  }
+    &-enter-from {
+      transform: translateX(15px);
+    }
 
-  &-enter-active,
-  &-leave-active {
-    transition-property: transform, opacity !important;
-  }
-}
+    &-leave-to {
+      transform: translateX(-15px);
+    }
 
-.slide-x-reverse-transition {
-  @include transition-default();
-
-  &-enter-from, &-leave-to {
-    opacity: 0;
-    transform: translateX(15px);
+    &-enter-active,
+    &-leave-active {
+      transition-property: transform, opacity !important;
+    }
   }
 
-  &-enter-active,
-  &-leave-active {
-    transition-property: transform, opacity !important;
-  }
-}
+  .slide-x-transition {
+    @include transition-default();
 
-.fade-transition {
-  @include transition-default();
+    &-enter-from, &-leave-to {
+      opacity: 0;
+      transform: translateX(-15px);
+    }
 
-  &-enter-from, &-leave-to {
-    opacity: 0 !important;
-  }
-
-  &-enter-active,
-  &-leave-active {
-    transition-property: opacity !important;
-  }
-}
-
-.fab-transition {
-  @include transition-default();
-
-  &-enter-from, &-leave-to {
-    transform: scale(0) rotate(-45deg);
+    &-enter-active,
+    &-leave-active {
+      transition-property: transform, opacity !important;
+    }
   }
 
-  &-enter-active,
-  &-leave-active {
-    transition-property: transform !important;
+  .slide-x-reverse-transition {
+    @include transition-default();
+
+    &-enter-from, &-leave-to {
+      opacity: 0;
+      transform: translateX(15px);
+    }
+
+    &-enter-active,
+    &-leave-active {
+      transition-property: transform, opacity !important;
+    }
+  }
+
+  .fade-transition {
+    @include transition-default();
+
+    &-enter-from, &-leave-to {
+      opacity: 0 !important;
+    }
+
+    &-enter-active,
+    &-leave-active {
+      transition-property: opacity !important;
+    }
+  }
+
+  .fab-transition {
+    @include transition-default();
+
+    &-enter-from, &-leave-to {
+      transform: scale(0) rotate(-45deg);
+    }
+
+    &-enter-active,
+    &-leave-active {
+      transition-property: transform !important;
+    }
   }
 }

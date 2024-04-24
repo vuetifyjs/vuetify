@@ -91,7 +91,6 @@ export const VDataTableRow = genericComponent<new <T>(
               toggleExpand,
             } satisfies ItemKeySlot<any>
 
-            // TODO: Check if this is correct
             const columnSlotProps: VDataTableHeaderCellColumnSlotProps = {
               column,
               selectAll,
@@ -133,7 +132,9 @@ export const VDataTableRow = genericComponent<new <T>(
                 fixed={ column.fixed }
                 fixedOffset={ column.fixedOffset }
                 lastFixed={ column.lastFixed }
+                maxWidth={ column.maxWidth }
                 noPadding={ columnKey === 'data-table-select' || columnKey === 'data-table-expand' }
+                nowrap={ column.nowrap }
                 width={ column.width }
                 { ...cellProps }
                 { ...columnCellProps }

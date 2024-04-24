@@ -2,6 +2,7 @@ export default {
   badge: '배지',
   open: 'Open',
   close: '닫기',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
@@ -71,6 +72,7 @@ export default {
   timePicker: {
     am: '오전',
     pm: '오후',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

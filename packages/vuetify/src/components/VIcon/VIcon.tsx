@@ -15,6 +15,7 @@ import { convertToUnit, flattenFragments, genericComponent, propsFactory, useRen
 
 export const makeVIconProps = propsFactory({
   color: String,
+  disabled: Boolean,
   start: Boolean,
   end: Boolean,
   icon: IconValue,
@@ -45,6 +46,7 @@ export const VIcon = genericComponent()({
           node.type === Text && node.children && typeof node.children === 'string'
         )[0]?.children as string
       }
+      const hasClick = !!(attrs.onClick || attrs.onClickOnce)
 
       return (
         <iconData.value.component
@@ -57,7 +59,8 @@ export const VIcon = genericComponent()({
             sizeClasses.value,
             textColorClasses.value,
             {
-              'v-icon--clickable': !!attrs.onClick,
+              'v-icon--clickable': hasClick,
+              'v-icon--disabled': props.disabled,
               'v-icon--start': props.start,
               'v-icon--end': props.end,
             },
@@ -72,8 +75,9 @@ export const VIcon = genericComponent()({
             textColorStyles.value,
             props.style,
           ]}
-          role={ attrs.onClick ? 'button' : undefined }
-          aria-hidden={ !attrs.onClick }
+          role={ hasClick ? 'button' : undefined }
+          aria-hidden={ !hasClick }
+          tabindex={ hasClick ? props.disabled ? -1 : 0 : undefined }
         >
           { slotValue }
         </iconData.value.component>

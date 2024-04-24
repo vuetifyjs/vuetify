@@ -30,7 +30,7 @@ const ssrTransformCustomDirective = () => {
   }
 }
 
-export default defineConfig(({ command, mode, ssrBuild }) => {
+export default defineConfig(({ command, mode, isSsrBuild }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
 
   let allRoutes: any[]
@@ -41,12 +41,12 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       alias: [
         { find: '@', replacement: `${resolve('src')}/` },
         { find: 'node-fetch', replacement: 'isomorphic-fetch' },
-        { find: /^vue$/, replacement: ssrBuild ? 'vue' : 'vue/dist/vue.esm-bundler.js' },
+        { find: /^vue$/, replacement: isSsrBuild ? 'vue' : 'vue/dist/vue.esm-bundler.js' },
         { find: /^pinia$/, replacement: 'pinia/dist/pinia.mjs' },
       ],
     },
     define: {
-      'process.env.NODE_ENV': mode === 'production' || ssrBuild ? '"production"' : '"development"',
+      'process.env.NODE_ENV': mode === 'production' || isSsrBuild ? '"production"' : '"development"',
       __INTLIFY_PROD_DEVTOOLS__: 'false',
     },
     build: {
@@ -55,7 +55,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       cssCodeSplit: false,
       minify: false,
       rollupOptions: {
-        output: ssrBuild ? { inlineDynamicImports: true } : {
+        output: isSsrBuild ? { inlineDynamicImports: true } : {
           // TODO: these options currently cause a request cascade
           // experimentalMinChunkSize: 20 * 1024,
           // manualChunks (id) {
@@ -79,7 +79,15 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         ],
         imports: [
           {
-            '@vuetify/one': ['createOne', 'useAuthStore', 'useHttpStore', 'useOneStore', 'useUserStore', 'useSettingsStore'],
+            '@vuetify/one': [
+              'createOne',
+              'useAuthStore',
+              'useHttpStore',
+              'useOneStore',
+              'useUserStore',
+              'useSettingsStore',
+              'useProductsStore',
+            ],
             'lodash-es': ['camelCase', 'kebabCase', 'upperFirst'],
             pinia: ['defineStore', 'storeToRefs'],
             vue: [
@@ -335,10 +343,6 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 
     server: {
       port: +(process.env.PORT ?? 8095),
-    },
-
-    preview: {
-      https: process.env.HTTPS === 'true',
     },
   }
 })

@@ -6,7 +6,7 @@
   >
     <v-container>
       <v-row>
-        <v-col cols="6">
+        <v-col cols="12" md="6">
           <v-card
             href="https://vuetifyjs.com/introduction/why-vuetify/#feature-guides"
             prepend-icon="$vuetify"
@@ -16,7 +16,7 @@
           ></v-card>
         </v-col>
 
-        <v-col cols="6">
+        <v-col cols="12" md="6">
           <v-card
             href="https://play.vuetifyjs.com"
             prepend-icon="$vuetify-play"
@@ -26,7 +26,7 @@
           ></v-card>
         </v-col>
 
-        <v-col cols="6">
+        <v-col cols="12" md="6">
           <v-card
             href="https://bin.vuetifyjs.com"
             prepend-icon="mdi-delete"
@@ -36,7 +36,7 @@
           ></v-card>
         </v-col>
 
-        <v-col cols="6">
+        <v-col cols="12" md="6">
           <v-card
             href="https://issues.vuetifyjs.com"
             prepend-icon="$warning"

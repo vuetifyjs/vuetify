@@ -13,6 +13,7 @@ import { makeBorderProps, useBorder } from '@/composables/border'
 import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
+import { makeDelayProps, useDelay } from '@/composables/delay'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
@@ -70,6 +71,7 @@ export const makeVNavigationDrawerProps = propsFactory({
   },
   image: String,
   temporary: Boolean,
+  persistent: Boolean,
   touchless: Boolean,
   width: {
     type: [Number, String],
@@ -84,6 +86,7 @@ export const makeVNavigationDrawerProps = propsFactory({
 
   ...makeBorderProps(),
   ...makeComponentProps(),
+  ...makeDelayProps(),
   ...makeDisplayProps(),
   ...makeElevationProps(),
   ...makeLayoutItemProps(),
@@ -118,6 +121,10 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const rootEl = ref<HTMLElement>()
     const isHovering = shallowRef(false)
 
+    const { runOpenDelay, runCloseDelay } = useDelay(props, value => {
+      isHovering.value = value
+    })
+
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)
         ? Number(props.width)
@@ -126,6 +133,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const location = computed(() => {
       return toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'bottom'
     })
+    const isPersistent = computed(() => props.persistent)
     const isTemporary = computed(() => !props.permanent && (mobile.value || props.temporary))
     const isSticky = computed(() =>
       props.sticky &&
@@ -153,7 +161,8 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       isActive.value = props.permanent || !mobile.value
     }
 
-    const { isDragging, dragProgress, dragStyles } = useTouch({
+    const { isDragging, dragProgress } = useTouch({
+      el: rootEl,
       isActive,
       isTemporary,
       width,
@@ -201,13 +210,6 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       },
     })
 
-    function onMouseenter () {
-      isHovering.value = true
-    }
-    function onMouseleave () {
-      isHovering.value = false
-    }
-
     useRender(() => {
       const hasImage = (slots.image || props.image)
 
@@ -215,8 +217,8 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
         <>
           <props.tag
             ref={ rootEl }
-            onMouseenter={ onMouseenter }
-            onMouseleave={ onMouseleave }
+            onMouseenter={ runOpenDelay }
+            onMouseleave={ runCloseDelay }
             class={[
               'v-navigation-drawer',
               `v-navigation-drawer--${location.value}`,
@@ -226,6 +228,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
                 'v-navigation-drawer--is-hovering': isHovering.value,
                 'v-navigation-drawer--rail': props.rail,
                 'v-navigation-drawer--temporary': isTemporary.value,
+                'v-navigation-drawer--persistent': isPersistent.value,
                 'v-navigation-drawer--active': isActive.value,
                 'v-navigation-drawer--sticky': isSticky.value,
               },
@@ -240,7 +243,6 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
             style={[
               backgroundColorStyles.value,
               layoutItemStyles.value,
-              dragStyles.value,
               ssrBootStyles.value,
               stickyStyles.value,
               props.style,
@@ -298,7 +300,10 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               <div
                 class={['v-navigation-drawer__scrim', scrimColor.backgroundColorClasses.value]}
                 style={[scrimStyles.value, scrimColor.backgroundColorStyles.value]}
-                onClick={ () => isActive.value = false }
+                onClick={ () => {
+                  if (isPersistent.value) return
+                  isActive.value = false
+                }}
                 { ...scopeId }
               />
             )}
