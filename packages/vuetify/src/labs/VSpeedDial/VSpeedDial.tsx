@@ -7,6 +7,7 @@ import { makeVMenuProps, VMenu } from '@/components/VMenu/VMenu'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
@@ -35,7 +36,13 @@ export const VSpeedDial = genericComponent<OverlaySlots>()({
 
   props: makeVSpeedDialProps(),
 
+  emits: {
+    'update:modelValue': (value: boolean) => true,
+  },
+
   setup (props, { slots }) {
+    const model = useProxiedModel(props, 'modelValue')
+
     const menuRef = ref<VMenu>()
 
     const location = computed(() => {
@@ -54,6 +61,7 @@ export const VSpeedDial = genericComponent<OverlaySlots>()({
       return (
         <VMenu
           { ...menuProps }
+          v-model={ model.value }
           class={ props.class }
           style={ props.style }
           contentClass={[

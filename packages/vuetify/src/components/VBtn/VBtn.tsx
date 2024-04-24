@@ -60,6 +60,7 @@ export const makeVBtnProps = propsFactory({
   appendIcon: IconValue,
 
   block: Boolean,
+  readonly: Boolean,
   slim: Boolean,
   stacked: Boolean,
 
@@ -184,6 +185,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
               'v-btn--flat': props.flat,
               'v-btn--icon': !!props.icon,
               'v-btn--loading': props.loading,
+              'v-btn--readonly': props.readonly,
               'v-btn--slim': props.slim,
               'v-btn--stacked': props.stacked,
             },
@@ -209,7 +211,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
           aria-busy={ props.loading ? true : undefined }
           disabled={ isDisabled.value || undefined }
           href={ link.href.value }
-          tabindex={ props.loading ? -1 : undefined }
+          tabindex={ props.loading || props.readonly ? -1 : undefined }
           onClick={ onClick }
           value={ valueAttr.value }
         >

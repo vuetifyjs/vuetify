@@ -242,6 +242,7 @@ export {
   mdiMapMarkerOff,
   mdiMapMarkerOutline,
   mdiMaterialDesign,
+  mdiMedal,
   mdiMenu,
   mdiMenuDown,
   mdiMenuLeft,
