@@ -174,7 +174,7 @@ export const VChip = genericComponent<VChipSlots>()({
       const hasFilter = !!(slots.filter || props.filter) && group
       const hasPrependMedia = !!(props.prependIcon || props.prependAvatar)
       const hasPrepend = !!(hasPrependMedia || slots.prepend)
-      const hasColor = !group || group.isSelected.value
+      const hasColor = !group || !group.isSelected.value
 
       return isActive.value && (
         <Tag
