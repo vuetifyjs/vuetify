@@ -8,14 +8,14 @@ import { VMessages } from '@/components/VMessages/VMessages'
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { IconValue } from '@/composables/icons'
 import { useRtl } from '@/composables/locale'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
 import { computed } from 'vue'
-import { EventProp, genericComponent, getUid, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, getUid, only, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
@@ -63,7 +63,11 @@ export const makeVInputProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeDensityProps(),
-  ...makeThemeProps(),
+  ...only(makeDimensionProps(), [
+    'maxWidth',
+    'minWidth',
+    'width',
+  ]),
   ...makeValidationProps(),
 }, 'VInput')
 
@@ -94,7 +98,7 @@ export const VInput = genericComponent<new <T>(
 
   setup (props, { attrs, slots, emit }) {
     const { densityClasses } = useDensity(props)
-    const { themeClasses } = provideTheme(props)
+    const { dimensionStyles } = useDimension(props)
     const { rtlClasses } = useRtl()
     const { InputIcon } = useInputIcon(props)
 
@@ -159,12 +163,14 @@ export const VInput = genericComponent<new <T>(
               'v-input--hide-spin-buttons': props.hideSpinButtons,
             },
             densityClasses.value,
-            themeClasses.value,
             rtlClasses.value,
             validationClasses.value,
             props.class,
           ]}
-          style={ props.style }
+          style={[
+            dimensionStyles.value,
+            props.style,
+          ]}
         >
           { hasPrepend && (
             <div key="prepend" class="v-input__prepend">
