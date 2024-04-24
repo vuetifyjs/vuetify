@@ -11,7 +11,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, shallowRef } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 export interface VDateInputSlots {
@@ -25,10 +25,10 @@ export const makeVDateInputProps = propsFactory({
     label: 'mm/dd/yyyy',
     prependIcon: 'mdi-calendar',
   }),
-  ...makeVDatePickerProps({
+  ...omit(makeVDatePickerProps({
     weeksInMonth: 'dynamic',
     hideHeader: true,
-  }),
+  }), ['active']),
 }, 'VDateInput')
 
 export const VDateInput = genericComponent()({
@@ -77,7 +77,7 @@ export const VDateInput = genericComponent()({
 
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
-      const datePickerProps = VDatePicker.filterProps(props)
+      const datePickerProps = VDatePicker.filterProps(omit(props, ['active']))
       const textFieldProps = VTextField.filterProps(props)
 
       return (
