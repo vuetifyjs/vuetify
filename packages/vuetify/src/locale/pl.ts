@@ -2,6 +2,7 @@ export default {
   badge: 'Odznaka',
   open: 'Otwórz',
   close: 'Zamknij',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Anuluj',

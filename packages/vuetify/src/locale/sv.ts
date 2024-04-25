@@ -2,6 +2,7 @@ export default {
   badge: 'Bricka',
   open: 'Open',
   close: 'Stäng',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Avbryt',

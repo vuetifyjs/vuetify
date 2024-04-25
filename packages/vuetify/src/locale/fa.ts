@@ -2,6 +2,7 @@ export default {
   badge: 'نشان',
   open: 'Open',
   close: 'بستن',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'لغو',

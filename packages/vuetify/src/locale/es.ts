@@ -2,6 +2,7 @@ export default {
   badge: 'Placa',
   open: 'Open',
   close: 'Cerrar',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',

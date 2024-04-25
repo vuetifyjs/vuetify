@@ -2,6 +2,7 @@ export default {
   badge: 'شارة',
   open: 'Open',
   close: 'إغلاق',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',

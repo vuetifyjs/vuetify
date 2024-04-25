@@ -2,6 +2,7 @@ export default {
   badge: 'Ženklelis',
   open: 'Atidaryti',
   close: 'Uždaryti',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Atšaukti',

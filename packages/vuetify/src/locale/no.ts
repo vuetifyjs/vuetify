@@ -2,6 +2,7 @@ export default {
   badge: 'Skilt',
   open: 'Åpne',
   close: 'Lukk',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Avbryt',
