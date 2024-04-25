@@ -72,6 +72,7 @@ describe('goto', () => {
   })
 
   it('scrolls horizontally', () => {
+    cy.viewport(1075, 825)
     cy
       .mount(() => (
         <div id="container" style="overflow-x: auto;">
