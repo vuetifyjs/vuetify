@@ -166,8 +166,8 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
     const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 
-    const { mobile } = useDisplay()
-    const mobileView = computed(() => typeof props.mobile !== 'undefined' ? props.mobile : mobile.value)
+    const { smAndDown } = useDisplay()
+    const mobileView = computed(() => typeof props.mobile !== 'undefined' ? props.mobile : smAndDown.value)
 
     const {
       isSelected,
