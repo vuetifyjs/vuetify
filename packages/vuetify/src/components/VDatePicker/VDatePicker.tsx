@@ -228,10 +228,10 @@ export const VDatePicker = genericComponent<new <
     }
 
     watch(model, (val, oldVal) => {
-      const before = adapter.date(wrapInArray(val)[0])
-      const after = adapter.date(wrapInArray(oldVal)[0])
-      const newMonth = adapter.getMonth(before)
-      const newYear = adapter.getYear(before)
+      const before = adapter.date(wrapInArray(oldVal)[oldVal.length - 1])
+      const after = adapter.date(wrapInArray(val)[val.length - 1])
+      const newMonth = adapter.getMonth(after)
+      const newYear = adapter.getYear(after)
 
       if (newMonth !== month.value) {
         month.value = newMonth
