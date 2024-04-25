@@ -7,11 +7,12 @@ import { makeVConfirmEditProps, VConfirmEdit } from '@/labs/VConfirmEdit/VConfir
 // Composables
 import { useDate } from '@/composables/date'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, shallowRef } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 export interface VDateInputSlots {
@@ -22,8 +23,8 @@ export const makeVDateInputProps = propsFactory({
   ...makeFocusProps(),
   ...makeVConfirmEditProps(),
   ...makeVTextFieldProps({
-    label: 'mm/dd/yyyy',
-    prependIcon: 'mdi-calendar',
+    placeholder: 'mm/dd/yyyy',
+    prependIcon: '$calendar',
   }),
   ...omit(makeVDatePickerProps({
     weeksInMonth: 'dynamic' as const,
@@ -41,12 +42,30 @@ export const VDateInput = genericComponent()({
   },
 
   setup (props, { slots }) {
+    const { t } = useLocale()
     const adapter = useDate()
     const { isFocused, focus, blur } = useFocus(props)
-    const model = useProxiedModel(props, 'modelValue')
+    const model = useProxiedModel(props, 'modelValue', props.multiple ? [] : null)
     const menu = shallowRef(false)
 
     const display = computed(() => {
+      const value = wrapInArray(model.value)
+
+      if (!value.length) return null
+
+      if (props.multiple === true) {
+        return t('$vuetify.datePicker.itemsSelected', value.length)
+      }
+
+      if (props.multiple === 'range') {
+        const start = value[0]
+        const end = value[value.length - 1]
+
+        return adapter.isValid(start) && adapter.isValid(end)
+          ? `${adapter.format(start, 'keyboardDate')} - ${adapter.format(end, 'keyboardDate')}`
+          : ''
+      }
+
       return adapter.isValid(model.value) ? adapter.format(model.value, 'keyboardDate') : ''
     })
 
@@ -85,7 +104,6 @@ export const VDateInput = genericComponent()({
           { ...textFieldProps }
           modelValue={ display.value }
           onKeydown={ onKeydown }
-          dirty={ menu.value }
           focused={ menu.value || isFocused.value }
           onFocus={ focus }
           onBlur={ blur }
