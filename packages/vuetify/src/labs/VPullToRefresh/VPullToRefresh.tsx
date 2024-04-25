@@ -9,7 +9,7 @@ import { VProgressCircular } from '@/components/VProgressCircular'
 import { LoaderSlot } from '@/composables/loader'
 
 // Utilities
-import { computed, onMounted, ref, shallowRef } from 'vue'
+import { computed, onMounted, ref, shallowRef, watchEffect } from 'vue'
 import { clamp, convertToUnit, genericComponent, getScrollParents, useRender } from '@/util'
 
 const PULL_DOWN_HEIGHT_PX = 64
@@ -28,9 +28,7 @@ export const VPullToRefresh = genericComponent()({
 
   setup (props, { slots, emit }) {
     let touchstartY = 0
-    let lastTouchY = 0
     let immediateScrollParent: HTMLElement | undefined
-    let touchStartTopOffset = 0
 
     const touchDiff = shallowRef(0)
     const scrollContainerRef = ref<HTMLElement>()
@@ -39,31 +37,27 @@ export const VPullToRefresh = genericComponent()({
     const touching = shallowRef(false)
     const canRefresh = shallowRef(false)
 
-    const topOffset = computed(() => clamp(touchStartTopOffset + touchDiff.value, 0, PULL_DOWN_HEIGHT_PX))
+    const topOffset = computed(() => clamp(touchDiff.value, 0, PULL_DOWN_HEIGHT_PX))
 
     function onTouchstart (e: TouchEvent) {
+      if (refreshing.value) return
       touching.value = true
-      lastTouchY = touchstartY = e.touches[0].clientY + immediateScrollParent!.scrollTop
-      touchStartTopOffset = topOffset.value
+      touchstartY = e.touches[0].clientY + immediateScrollParent!.scrollTop
     }
 
     function onTouchmove (e: TouchEvent) {
-      if (canRefresh.value) return
+      if (canRefresh.value || refreshing.value) return
 
       const touchY = e.touches[0].clientY
-      // Moving up to cancel existing loading
-      if (touchY < lastTouchY && touchstartY - touchY > PULL_DOWN_HEIGHT_PX / 3) {
-        refreshing.value = false
-      }
 
       if (!immediateScrollParent!.scrollTop) {
         touchDiff.value = touchY - touchstartY
         canRefresh.value = touchDiff.value >= PULL_DOWN_HEIGHT_PX
       }
-      lastTouchY = touchY
     }
 
     function onTouchend (e: TouchEvent) {
+      if (refreshing.value) return
       touching.value = false
       if (canRefresh.value) {
         function done (status: PullToRefreshStatus) {
@@ -81,6 +75,12 @@ export const VPullToRefresh = genericComponent()({
 
     onMounted(() => {
       immediateScrollParent = getScrollParents(scrollContainerRef.value)[0]
+    })
+
+    watchEffect(() => {
+      if (immediateScrollParent) {
+        immediateScrollParent.style.overflow = topOffset.value && !refreshing.value ? 'hidden' : 'auto'
+      }
     })
 
     useRender(() => {
