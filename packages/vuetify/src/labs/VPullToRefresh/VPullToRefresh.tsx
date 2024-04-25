@@ -10,7 +10,7 @@ import { LoaderSlot } from '@/composables/loader'
 
 // Utilities
 import { computed, onMounted, ref, shallowRef } from 'vue'
-import { convertToUnit, genericComponent, getScrollParents, useRender } from '@/util'
+import { clamp, convertToUnit, genericComponent, getScrollParents, useRender } from '@/util'
 
 const PULL_DOWN_HEIGHT_PX = 64
 
@@ -29,48 +29,45 @@ export const VPullToRefresh = genericComponent()({
   setup (props, { slots, emit }) {
     let touchstartY = 0
     let lastTouchY = 0
+    let immediateScrollParent: HTMLElement | undefined
+    let touchStartTopOffset = 0
 
     const touchDiff = shallowRef(0)
     const scrollContainerRef = ref<HTMLElement>()
 
-    const canRefresh = computed(() => touchDiff.value > PULL_DOWN_HEIGHT_PX * 2 / 3)
     const refreshing = shallowRef(false)
     const touching = shallowRef(false)
-    let immediateScrollParent: HTMLElement | undefined
+    const canRefresh = shallowRef(false)
+
+    const topOffset = computed(() => clamp(touchStartTopOffset + touchDiff.value, 0, PULL_DOWN_HEIGHT_PX))
 
     function onTouchstart (e: TouchEvent) {
-      if (refreshing.value) {
-        e.preventDefault()
-        return
-      }
       touching.value = true
       lastTouchY = touchstartY = e.touches[0].clientY + immediateScrollParent!.scrollTop
+      touchStartTopOffset = topOffset.value
     }
 
     function onTouchmove (e: TouchEvent) {
-      if (refreshing.value) {
-        e.preventDefault()
-        return
-      }
+      if (canRefresh.value) return
+
       const touchY = e.touches[0].clientY
-      if (
-        touchY > lastTouchY &&
-        touchDiff.value < PULL_DOWN_HEIGHT_PX &&
-        !immediateScrollParent!.scrollTop
-      ) {
+      // Moving up to cancel existing loading
+      if (touchY < lastTouchY && touchstartY - touchY > PULL_DOWN_HEIGHT_PX / 3) {
+        refreshing.value = false
+      }
+
+      if (!immediateScrollParent!.scrollTop) {
         touchDiff.value = touchY - touchstartY
+        canRefresh.value = touchDiff.value >= PULL_DOWN_HEIGHT_PX
       }
       lastTouchY = touchY
     }
 
     function onTouchend (e: TouchEvent) {
-      if (refreshing.value) {
-        e.preventDefault()
-        return
-      }
       touching.value = false
       if (canRefresh.value) {
         function done (status: PullToRefreshStatus) {
+          if (!refreshing.value) return
           if (status === 'ok') {
             touchDiff.value = 0
             refreshing.value = false
@@ -78,6 +75,7 @@ export const VPullToRefresh = genericComponent()({
         }
         emit('load', { done })
         refreshing.value = true
+        canRefresh.value = false
       }
     }
 
@@ -103,12 +101,12 @@ export const VPullToRefresh = genericComponent()({
               },
             ]}
             style={{
-              top: convertToUnit(-1 * PULL_DOWN_HEIGHT_PX + touchDiff.value),
+              top: convertToUnit(-1 * PULL_DOWN_HEIGHT_PX + topOffset.value),
               height: convertToUnit(PULL_DOWN_HEIGHT_PX),
             }}
           >
             {
-              canRefresh.value || refreshing.value ? (
+              refreshing.value ? (
                 <LoaderSlot
                   name="v-pull-to-refresh"
                   active={ false }
@@ -133,7 +131,7 @@ export const VPullToRefresh = genericComponent()({
               },
             ]}
             ref={ scrollContainerRef }
-            style={{ top: convertToUnit(touchDiff.value) }}
+            style={{ top: convertToUnit(topOffset.value) }}
           >
             { slots.default?.() }
           </div>
