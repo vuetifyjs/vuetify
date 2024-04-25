@@ -22,14 +22,10 @@ import type { GenericProps } from '@/util'
 export type VDataTableRowSlots<T> = {
   'item.data-table-select': Omit<ItemKeySlot<T>, 'value'>
   'item.data-table-expand': Omit<ItemKeySlot<T>, 'value'>
-
-  // TODO: Check if this is correct
   'header.data-table-select': VDataTableHeaderCellColumnSlotProps
   'header.data-table-expand': VDataTableHeaderCellColumnSlotProps
 } & {
   [key: `item.${string}`]: ItemKeySlot<T>
-
-  // TODO: Check if this is correct
   [key: `header.${string}`]: VDataTableHeaderCellColumnSlotProps
 }
 
