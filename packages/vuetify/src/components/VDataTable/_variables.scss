@@ -15,3 +15,6 @@ $data-table-footer-items-per-page-padding: 8px !default;
 
 $data-table-footer-mobile-info-padding: 0 0 0 16px !default;
 $data-table-footer-mobile-info-justify: flex-start !default;
+
+$data-table-header-mobile-chip-icon-color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity)) !default;
+$data-table-header-mobile-chip-icon-color-active: rgba(var(--v-theme-on-surface)) !default;

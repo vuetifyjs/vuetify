@@ -270,8 +270,8 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                     <VIcon
                       class={[
                         'v-data-table__mobile-sort-icon',
+                        isSorted(props.item.raw) && 'v-data-table__mobile-sort-icon-active',
                       ]}
-                      color={ isSorted(props.item.raw) ? 'on-surface' : 'grey' }
                       icon={ getSortIcon(props.item.raw) }
                       size="small"
                     />
