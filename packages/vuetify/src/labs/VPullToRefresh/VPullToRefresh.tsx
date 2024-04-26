@@ -26,10 +26,6 @@ export const VPullToRefresh = genericComponent<VPullToRefreshSlots>()({
       type: Number,
       default: 64,
     },
-    enablePullOnScrollTop: {
-      type: Number,
-      default: 0,
-    },
   },
 
   emits: {
@@ -61,7 +57,7 @@ export const VPullToRefresh = genericComponent<VPullToRefreshSlots>()({
 
       const touchY = 'clientY' in e ? e.clientY : e.touches[0].clientY
 
-      if (immediateScrollParent!.scrollTop >= props.enablePullOnScrollTop) {
+      if (!immediateScrollParent!.scrollTop) {
         touchDiff.value = touchY - touchstartY
       }
     }
