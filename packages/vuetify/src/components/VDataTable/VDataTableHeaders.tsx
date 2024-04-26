@@ -13,6 +13,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { useDisplay } from '@/composables/display'
 import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, mergeProps } from 'vue'
@@ -85,6 +86,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
   props: makeVDataTableHeadersProps(),
 
   setup (props, { slots }) {
+    const { t } = useLocale()
     const { toggleSort, sortBy, isSorted } = useSort()
     const { someSelected, allSelected, selectAll, showSelectAll } = useSelection()
     const { columns, headers } = useHeaders()
@@ -250,7 +252,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
             density="default"
             hide-details
             items={ displayItems.value }
-            label="Sort By"
+            label={ t('$vuetify.dataTable.sortBy') }
             multiple={ props.multiSort }
             variant="underlined"
             onClick:clear={ () => sortBy.value = [] }
