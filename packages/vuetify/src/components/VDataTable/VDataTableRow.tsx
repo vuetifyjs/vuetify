@@ -164,27 +164,17 @@ export const VDataTableRow = genericComponent<new <T>(
 
                   const displayValue = toDisplayString(slotProps.value)
 
-                  if (mobile.value) {
-                    return (
-                      <>
-                        <div class="v-data-table__mobile-td-title">
-                          {
-                          slots[headerSlotName]
-                            ? slots[headerSlotName]!(columnSlotProps)
-                            : column.title
-                          }
-                          </div>
-                        <div class="v-data-table__mobile-td-value">
-                          {
-                          slots[slotName]
-                            ? slots[slotName]!(slotProps)
-                            : displayValue }
-                          </div>
-                      </>
-                    )
-                  }
+                  return !mobile.value ? displayValue : (
+                    <>
+                      <div class="v-data-table__mobile-td-title">
+                        { slots[headerSlotName]?.(columnSlotProps) ?? column.title }
+                      </div>
 
-                  return displayValue
+                      <div class="v-data-table__mobile-td-value">
+                        { slots[slotName]?.(slotProps) ?? displayValue }
+                      </div>
+                    </>
+                  )
                 },
               }}
             </VDataTableColumn>
