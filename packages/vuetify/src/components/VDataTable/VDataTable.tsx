@@ -292,4 +292,4 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
   },
 })
 
-export type VDataTable = InstanceType<typeof VDataTable>;
+export type VDataTable = InstanceType<typeof VDataTable>
