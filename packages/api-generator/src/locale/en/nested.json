@@ -1,5 +1,7 @@
 {
   "props": {
+    "activated": "Array of ids of activated nodes.",
+    "activeStrategy": "Affects how items with children behave when activated.\n- **leaf:** Only leaf nodes (items without children) can be activated.\n- **independent:** All nodes can be activated whether they have children or not.\n- **classic:** Activating a parent node will cause all children to be activated.",
     "opened": "An array containing the values of currently opened groups. Can be two-way bound with `v-model:opened`.",
     "openStrategy": "Affects how items with children behave when expanded.\n- **multiple:** Any number of groups can be open at once.\n- **single:** Only one group at each level can be open, opening a group will cause others to close.\n- **list:** Multiple, but all other groups will close when an item is selected.",
     "selected": "An array containing the values of currently selected items. Can be two-way bound with `v-model:selected`.",

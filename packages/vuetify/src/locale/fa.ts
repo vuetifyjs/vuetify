@@ -2,6 +2,7 @@ export default {
   badge: 'نشان',
   open: 'Open',
   close: 'بستن',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'لغو',
@@ -71,6 +72,7 @@ export default {
   timePicker: {
     am: 'قبل از ظهر',
     pm: 'بعد از ظهر',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

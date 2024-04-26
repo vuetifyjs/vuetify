@@ -16,7 +16,7 @@ Vuetify is always under development. We are constantly working towards improving
 
 <PageFeatures />
 
-<PromotedEntry />
+<VoPromotionsCardVuetify />
 
 ## 2024 Component Roadmap
 
@@ -25,19 +25,19 @@ The following is a list of all planned components for the year 2024.
 | Component | Entering Labs | Production Release |
 | - | - | - |
 | [v3.6 (Nebula)](https://github.com/vuetifyjs/vuetify/milestone/72) | | { .bg-surface-light } |
-| v-fab | February 2024 | April 2024 |
-| v-empty-state | February 2024 | April 2024 |
-| v-sparkline | February 2024 | April 2024 |
-| v-speed-dial | February 2024 | April 2024 |
-| v-confirm-edit | *️⃣ | April 2024 |
+| [v-fab](/components/floating-action-buttons/) | *️⃣ | April 2024 |
+| [v-empty-state](/components/empty-states/) | *️⃣ | April 2024 |
+| [v-sparkline](/components/sparklines/) | *️⃣ | April 2024 |
+| [v-speed-dial](/components/speed-dials/) | *️⃣ | April 2024 |
+| [v-confirm-edit](/components/confirm-edit/) | *️⃣ | April 2024 |
 | [v3.7 (Odyssey)](https://github.com/vuetifyjs/vuetify/milestone/73) | | { .bg-surface-light } |
-| v-treeview | February 2024 | July 2024 |
-| v-number-input | March 2024 | July 2024 |
-| v-stepper-vertical | March 2024 | July 2024 |
-| v-time-picker | March 2024 | July 2024 |
+| [v-treeview](/components/treeview/) | *️⃣ | July 2024 |
+| [v-number-input](/components/number-inputs/) | *️⃣  | July 2024 |
+| [v-time-picker](/components/time-pickers/) | *️⃣ | July 2024 |
 | v-date-input | April 2024 | July 2024 |
 | v-file-upload | April 2024 | July 2024 |
 | v-time-input | April 2024 | July 2024 |
+| v-stepper-vertical | ~~March~~ May 2024 | July 2024 |
 | [v3.8 (Andromeda)](https://github.com/vuetifyjs/vuetify/milestone/74) | | { .bg-surface-light } |
 | v-calendar | *️⃣ | Q4 |
 | v-date-time-picker | May 2024 | Q4 |

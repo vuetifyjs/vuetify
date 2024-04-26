@@ -1,0 +1,48 @@
+@use 'sass:selector'
+@use './variables' as *
+
+.v-number-input
+  $root: &
+  $control-root: #{selector.append($root, '__control')}
+
+  input[type="number"]
+    -moz-appearance: textfield
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button
+      -webkit-appearance: none
+
+  .v-field
+    padding-inline-end: 0
+    padding-inline-start: 0
+
+  &--inset
+    .v-divider
+      height: $number-input-inset-divider-size
+      width: $number-input-inset-divider-size
+      align-self: center
+
+  &--split
+    .v-field__input
+      text-align: center
+
+  &--stacked 
+    #{$control-root}
+      flex-direction: column-reverse
+      .v-btn
+        flex: 1
+
+  &--hide-input
+    .v-field
+      flex: none
+      &__input
+        width: 0
+        padding-inline: 0
+
+  &__control
+    display: flex
+    height: 100%
+
+    .v-btn
+      background-color: transparent
+      border-radius: 0

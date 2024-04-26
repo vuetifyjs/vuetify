@@ -100,7 +100,10 @@
   .v-selection-control__input
     border-radius: 50%
     transition: $switch-control-input-transition
-    transform: translateX(-$switch-thumb-transform)
+    +tools.ltr()
+      transform: translateX(-$switch-thumb-transform)
+    +tools.rtl()
+      transform: translateX($switch-thumb-transform)
     position: absolute
 
     .v-icon
@@ -108,7 +111,10 @@
 
   .v-selection-control--dirty
     .v-selection-control__input
-      transform: translateX($switch-thumb-transform)
+      +tools.ltr()
+        transform: translateX($switch-thumb-transform)
+      +tools.rtl()
+        transform: translateX(-$switch-thumb-transform)
 
   &.v-switch--indeterminate
     .v-selection-control__input
@@ -120,3 +126,10 @@
   &.v-switch--inset
     .v-selection-control__wrapper
       width: auto
+
+  &.v-input--vertical
+    .v-label
+      min-width: max-content
+
+    .v-selection-control__wrapper
+      transform: $switch-thumb-vertical-transform

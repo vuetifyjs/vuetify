@@ -2,30 +2,33 @@
   <v-card>
     <v-toolbar
       color="primary"
-      dark
       flat
     >
-      <v-icon>mdi-silverware</v-icon>
-      <v-toolbar-title>Local hotspots</v-toolbar-title>
+      <template v-slot:prepend>
+        <v-icon start>mdi-silverware</v-icon>
+
+        <v-toolbar-title>Local hotspots</v-toolbar-title>
+      </template>
     </v-toolbar>
 
     <v-row>
       <v-col>
         <v-card-text>
           <v-treeview
-            v-model="tree"
+            v-model:selected="tree"
             :items="items"
             :load-children="load"
             expand-icon="mdi-chevron-down"
             indeterminate-icon="mdi-bookmark-minus"
+            item-title="name"
+            item-value="name"
             off-icon="mdi-bookmark-outline"
             on-icon="mdi-bookmark"
             selected-color="indigo"
             open-on-click
             return-object
             selectable
-          >
-          </v-treeview>
+          ></v-treeview>
         </v-card-text>
       </v-col>
 
@@ -51,19 +54,12 @@
             <v-chip
               v-for="(selection, i) in tree"
               :key="i"
+              :text="selection"
               class="ma-1"
               color="grey"
-              dark
-              small
-            >
-              <v-icon
-                size="small"
-                start
-              >
-                mdi-beer
-              </v-icon>
-              {{ selection.name }}
-            </v-chip>
+              prepend-icon="mdi-beer"
+              size="small"
+            ></v-chip>
           </v-scroll-x-transition>
         </v-card-text>
       </v-col>
@@ -73,23 +69,19 @@
 
     <v-card-actions>
       <v-btn
+        text="Reset"
         variant="text"
         @click="tree = []"
-      >
-        Reset
-      </v-btn>
+      ></v-btn>
 
       <v-spacer></v-spacer>
 
       <v-btn
+        append-icon="mdi-content-save"
         color="green-darken-1"
+        text="Save"
         variant="flat"
-      >
-        Save
-        <v-icon end>
-          mdi-content-save
-        </v-icon>
-      </v-btn>
+      ></v-btn>
     </v-card-actions>
   </v-card>
 </template>

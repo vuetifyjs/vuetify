@@ -7,6 +7,7 @@
     "combobox": "The single select variant of **tags**.",
     "hideSelected": "Do not display in the select menu items that are already selected.",
     "itemColor": "Sets color of selected items.",
+    "itemChildren": "This property currently has **no effect**.",
     "itemDisabled": "Set property of **items**'s disabled value.",
     "items": "Can be an array of objects or strings. By default objects should have **title** and **value** properties, and can optionally have a **props** property containing any [VListItem props](/api/v-list-item/#props). Keys to use for these can be changed with the **item-title**, **item-value**, and **item-props** props.",
     "itemText": "Set property of **items**'s title value.",

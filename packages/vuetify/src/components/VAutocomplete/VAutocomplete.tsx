@@ -246,23 +246,25 @@ export const VAutocomplete = genericComponent<new <
         listRef.value?.focus('next')
       }
 
-      if (!props.multiple) return
-
       if (['Backspace', 'Delete'].includes(e.key)) {
-        if (selectionIndex.value < 0) {
-          if (e.key === 'Backspace' && !search.value) {
-            selectionIndex.value = length - 1
-          }
+        if (
+          !props.multiple &&
+          hasSelectionSlot.value &&
+          model.value.length > 0 &&
+          !search.value
+        ) return select(model.value[0], false)
 
-          return
+        if (~selectionIndex.value) {
+          const originalSelectionIndex = selectionIndex.value
+          select(model.value[selectionIndex.value], false)
+
+          selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
+        } else if (e.key === 'Backspace' && !search.value) {
+          selectionIndex.value = length - 1
         }
-
-        const originalSelectionIndex = selectionIndex.value
-        const selectedItem = model.value[selectionIndex.value]
-        if (selectedItem && !selectedItem.props.disabled) select(selectedItem, false)
-
-        selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
       }
+
+      if (!props.multiple) return
 
       if (e.key === 'ArrowLeft') {
         if (selectionIndex.value < 0 && selectionStart > 0) return
@@ -319,14 +321,14 @@ export const VAutocomplete = genericComponent<new <
       listHasFocus.value = false
     }
     function onUpdateModelValue (v: any) {
-      if (v == null || (v === '' && !props.multiple)) model.value = []
+      if (v == null || (v === '' && !props.multiple && !hasSelectionSlot.value)) model.value = []
     }
 
     const isSelecting = shallowRef(false)
 
     /** @param set - null means toggle */
-    function select (item: ListItem, set: boolean | null = true) {
-      if (item.props.disabled) return
+    function select (item: ListItem | undefined, set: boolean | null = true) {
+      if (!item || item.props.disabled) return
 
       if (props.multiple) {
         const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
@@ -399,10 +401,12 @@ export const VAutocomplete = genericComponent<new <
       }
     })
 
-    watch(() => props.items, val => {
-      if (!isFocused.value || !val.length || menu.value) return
+    watch(() => props.items, (newVal, oldVal) => {
+      if (menu.value) return
 
-      menu.value = true
+      if (isFocused.value && !oldVal.length && newVal.length) {
+        menu.value = true
+      }
     })
 
     useRender(() => {
@@ -545,6 +549,14 @@ export const VAutocomplete = genericComponent<new <
 
                   const slotProps = {
                     'onClick:close': onChipClose,
+                    onKeydown (e: KeyboardEvent) {
+                      if (e.key !== 'Enter' && e.key !== ' ') return
+
+                      e.preventDefault()
+                      e.stopPropagation()
+
+                      onChipClose(e)
+                    },
                     onMousedown (e: MouseEvent) {
                       e.preventDefault()
                       e.stopPropagation()

@@ -92,6 +92,7 @@ export const VDatePickerControls = genericComponent()({
     }
 
     useRender(() => {
+      // TODO: add slot support and scope defaults
       return (
         <div
           class={[

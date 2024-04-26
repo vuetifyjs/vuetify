@@ -10,10 +10,10 @@ related:
   - /components/selects
 features:
   figma: true
-  github: /components/VBtn/
+  github: /components/VChip/
   label: 'C: VChip'
   report: true
-  spec: https://m2.material.io/components/buttons
+  spec: https://m2.material.io/components/chips
 ---
 
 # Chips

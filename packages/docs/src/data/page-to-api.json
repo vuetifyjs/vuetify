@@ -58,6 +58,7 @@
   "components/chip-groups": ["VChip", "VChipGroup"],
   "components/chips": ["VChip", "VChipGroup"],
   "components/color-pickers": ["VColorPicker"],
+  "components/confirm-edit": ["VConfirmEdit"],
   "components/combobox": ["VCombobox"],
   "components/data-iterators": ["VDataIterator"],
   "components/data-tables": [
@@ -124,6 +125,7 @@
   "components/slide-groups": ["VSlideGroup", "VSlideGroupItem"],
   "components/sliders": ["VRangeSlider", "VSlider"],
   "components/snackbars": ["VSnackbar"],
+  "components/snackbar-queue": ["VSnackbarQueue", "VSnackbar"],
   "components/sparklines": ["VSparkline"],
   "components/steppers": [
     "VStepper",
@@ -143,7 +145,12 @@
   "components/timelines": ["VTimeline", "VTimelineItem"],
   "components/toolbars": ["VToolbar", "VToolbarItems", "VToolbarTitle"],
   "components/tooltips": ["VTooltip"],
-  "components/treeview": ["VTreeview"],
+  "components/treeview": [
+    "VTreeview",
+    "VTreeviewItem",
+    "VTreeviewChildren",
+    "VTreeviewGroup"
+  ],
   "components/virtual-scroller": ["VVirtualScroll"],
   "components/windows": ["VWindow", "VWindowItem"],
   "directives/click-outside": ["v-click-outside"],

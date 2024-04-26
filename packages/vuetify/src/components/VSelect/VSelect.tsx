@@ -250,6 +250,10 @@ export const VSelect = genericComponent<new <
       const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
       if (item !== undefined) {
         model.value = [item]
+        const index = displayItems.value.indexOf(item)
+        IN_BROWSER && window.requestAnimationFrame(() => {
+          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
+        })
       }
     }
 
@@ -313,10 +317,12 @@ export const VSelect = genericComponent<new <
       }
     })
 
-    watch(() => props.items, val => {
-      if (!isFocused.value || !val.length || menu.value) return
+    watch(() => props.items, (newVal, oldVal) => {
+      if (menu.value) return
 
-      menu.value = true
+      if (isFocused.value && !oldVal.length && newVal.length) {
+        menu.value = true
+      }
     })
 
     useRender(() => {
@@ -461,6 +467,14 @@ export const VSelect = genericComponent<new <
 
                   const slotProps = {
                     'onClick:close': onChipClose,
+                    onKeydown (e: KeyboardEvent) {
+                      if (e.key !== 'Enter' && e.key !== ' ') return
+
+                      e.preventDefault()
+                      e.stopPropagation()
+
+                      onChipClose(e)
+                    },
                     onMousedown (e: MouseEvent) {
                       e.preventDefault()
                       e.stopPropagation()

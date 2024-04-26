@@ -8,8 +8,9 @@ import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VProgressLinear } from '@/components/VProgressLinear'
 
 // Composables
+import { useLayout } from '@/composables'
 import { forwardRefs } from '@/composables/forwardRefs'
-import { makeLocationProps, useLocation } from '@/composables/location'
+import { makeLocationProps } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -18,7 +19,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch } from 'vue'
+import { computed, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
 
 type VSnackbarSlots = {
@@ -95,7 +96,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
   setup (props, { slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
-    const { locationStyles } = useLocation(props)
+    const { mainStyles } = useLayout()
     const { positionClasses } = usePosition(props)
     const { scopeId } = useScopeId()
     const { themeClasses } = provideTheme(props)
@@ -106,6 +107,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     const overlay = ref<VOverlay>()
     const timerRef = ref<VProgressLinear>()
     const isHovering = shallowRef(false)
+    const startY = shallowRef(0)
 
     watch(isActive, startTimeout)
     watch(() => props.timeout, startTimeout)
@@ -146,6 +148,24 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
       startTimeout()
     }
 
+    function onTouchstart (event: TouchEvent) {
+      startY.value = event.touches[0].clientY
+    }
+
+    function onTouchend (event: TouchEvent) {
+      if (Math.abs(startY.value - event.changedTouches[0].clientY) > 50) {
+        isActive.value = false
+      }
+    }
+
+    const locationClasses = computed(() => {
+      return props.location.split(' ').reduce((acc, loc) => {
+        acc[`v-snackbar--${loc}`] = true
+
+        return acc
+      }, {} as Record<string, any>)
+    })
+
     useRender(() => {
       const overlayProps = VOverlay.filterProps(props)
       const hasContent = !!(slots.default || slots.text || props.text)
@@ -161,10 +181,14 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
               'v-snackbar--timer': !!props.timer,
               'v-snackbar--vertical': props.vertical,
             },
+            locationClasses.value,
             positionClasses.value,
             props.class,
           ]}
-          style={ props.style }
+          style={[
+            mainStyles.value,
+            props.style,
+          ]}
           { ...overlayProps }
           v-model={ isActive.value }
           contentProps={ mergeProps({
@@ -176,7 +200,6 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
               variantClasses.value,
             ],
             style: [
-              locationStyles.value,
               colorStyles.value,
             ],
             onPointerenter,
@@ -187,6 +210,8 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           scrim={ false }
           scrollStrategy="none"
           _disableGlobalStack
+          onTouchstart={ onTouchstart }
+          onTouchend={ onTouchend }
           { ...scopeId }
           v-slots={{ activator: slots.activator }}
         >

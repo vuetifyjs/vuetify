@@ -20,10 +20,8 @@
     <v-card-actions>
       <v-btn
         color="orange-lighten-2"
-        variant="text"
-      >
-        Explore
-      </v-btn>
+        text="Explore"
+      ></v-btn>
 
       <v-spacer></v-spacer>
 

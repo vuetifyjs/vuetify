@@ -10,6 +10,7 @@ import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
 import { useRtl } from '@/composables/locale'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
@@ -62,6 +63,7 @@ export const makeVInputProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeDensityProps(),
+  ...makeThemeProps(),
   ...makeValidationProps(),
 }, 'VInput')
 
@@ -92,6 +94,7 @@ export const VInput = genericComponent<new <T>(
 
   setup (props, { attrs, slots, emit }) {
     const { densityClasses } = useDensity(props)
+    const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
     const { InputIcon } = useInputIcon(props)
 
@@ -156,6 +159,7 @@ export const VInput = genericComponent<new <T>(
               'v-input--hide-spin-buttons': props.hideSpinButtons,
             },
             densityClasses.value,
+            themeClasses.value,
             rtlClasses.value,
             validationClasses.value,
             props.class,

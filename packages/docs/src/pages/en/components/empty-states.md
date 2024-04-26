@@ -11,6 +11,8 @@ related:
 features:
   report: true
   spec: https://m2.material.io/design/communication/empty-states.html
+  label: 'C: VEmptyState'
+  github: '/labs/VEmptyState/'
 ---
 
 # Empty states

@@ -22,6 +22,7 @@ import DocVueJobs from '@/components/doc/VueJobs.vue'
 import DocMadeWithVueAttribution from '@/components/doc/MadeWithVueAttribution.vue'
 import DocMadeWithVuetifyGallery from '@/components/doc/MadeWithVuetifyGallery.vue'
 import DocMadeWithVuetifyLink from '@/components/doc/MadeWithVuetifyLink.vue'
+import DocPremiumThemesGallery from '@/components/doc/PremiumThemesGallery.vue'
 import DocReleases from '@/components/doc/Releases.vue'
 import DocThemeVendor from '@/components/doc/ThemeVendor.vue'
 import ExamplesExample from '@/components/examples/Example.vue'
@@ -73,6 +74,7 @@ export function installGlobalComponents (app: App) {
     .component('DocMadeWithVueAttribution', DocMadeWithVueAttribution)
     .component('DocMadeWithVuetifyGallery', DocMadeWithVuetifyGallery)
     .component('DocMadeWithVuetifyLink', DocMadeWithVuetifyLink)
+    .component('DocPremiumThemesGallery', DocPremiumThemesGallery)
     .component('DocReleases', DocReleases)
     .component('DocThemeVendor', DocThemeVendor)
     .component('ExamplesExample', ExamplesExample)

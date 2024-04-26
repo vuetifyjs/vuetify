@@ -2,6 +2,7 @@ export default {
   badge: 'Jelvény',
   open: 'Open',
   close: 'Bezárás',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
@@ -71,6 +72,7 @@ export default {
   timePicker: {
     am: 'de',
     pm: 'du',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
