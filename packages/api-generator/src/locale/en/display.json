@@ -1,6 +1,6 @@
 {
   "props": {
-    "mobile": "If `true` mobile friendly view is enabled.",
+    "mobile": "Explicitly designate as a mobile display configuration.",
     "mobileBreakpoint": "Overrides the display configuration default."
   }
 }
