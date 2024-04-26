@@ -17,6 +17,7 @@ export type DisplayThresholds = {
 }
 
 export interface DisplayProps {
+  mobile?: boolean | undefined
   mobileBreakpoint?: number | DisplayBreakpoint
 }
 

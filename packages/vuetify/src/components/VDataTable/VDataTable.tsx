@@ -18,7 +18,7 @@ import { makeVTableProps, VTable } from '@/components/VTable/VTable'
 
 // Composables
 import { provideDefaults } from '@/composables/defaults'
-import { makeDisplayProps, useDisplay } from '@/composables/display'
+import { makeDisplayProps } from '@/composables/display'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Utilities
@@ -31,7 +31,6 @@ import type { Group } from './composables/group'
 import type { CellProps, DataTableHeader, DataTableItem, InternalDataTableHeader, RowProps } from './types'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
-import type { DisplayBreakpoint } from '@/composables/display'
 import type { GenericProps, SelectItemKey } from '@/util'
 
 export type VDataTableSlotProps<T> = {
@@ -56,7 +55,6 @@ export type VDataTableSlotProps<T> = {
   groupedItems: readonly (DataTableItem<T> | Group<DataTableItem<T>>)[]
   columns: InternalDataTableHeader[]
   headers: InternalDataTableHeader[][]
-  mobileBreakpoint: number | DisplayBreakpoint
 }
 
 export type VDataTableSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
@@ -79,7 +77,6 @@ export const makeDataTableProps = propsFactory({
   width: [String, Number],
   search: String,
 
-  ...makeDisplayProps(),
   ...makeDataTableExpandProps(),
   ...makeDataTableGroupProps(),
   ...makeDataTableHeaderProps(),
@@ -168,8 +165,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
     const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 
-    const { mobile } = useDisplay()
-    const mobileView = computed(() => typeof props.mobileBreakpoint !== 'undefined' ? props.mobileBreakpoint : mobile.value)
+    const mobileView = computed(() => typeof props.mobile !== 'undefined' ? props.mobile : props.mobileBreakpoint)
 
     const {
       isSelected,
@@ -216,7 +212,8 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       toggleExpand,
       isGroupOpen,
       toggleGroup,
-      mobileBreakpoint: mobileView.value,
+      mobile: mobileView.value,
+      mobileBreakpoint: props.mobileBreakpoint,
       items: paginatedItemsWithoutGroups.value.map(item => item.raw),
       internalItems: paginatedItemsWithoutGroups.value,
       groupedItems: paginatedItems.value,
@@ -229,6 +226,9 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       const dataTableHeadersProps = VDataTableHeaders.filterProps(props)
       const dataTableRowsProps = VDataTableRows.filterProps(props)
       const tableProps = VTable.filterProps(props)
+
+      console.log('props', props)
+      console.log('dataTableHeadersProps', dataTableHeadersProps)
 
       return (
         <VTable
