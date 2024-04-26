@@ -155,7 +155,8 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       isActive.value = props.permanent || !mobile.value
     })
 
-    const { isDragging, dragProgress, dragStyles } = useTouch({
+    const { isDragging, dragProgress } = useTouch({
+      el: rootEl,
       isActive,
       isTemporary,
       width,
@@ -243,7 +244,6 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
             style={[
               backgroundColorStyles.value,
               layoutItemStyles.value,
-              dragStyles.value,
               ssrBootStyles.value,
               stickyStyles.value,
               props.style,

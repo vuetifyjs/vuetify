@@ -124,7 +124,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             top: props.location === 'top' ? 0 : undefined,
             height: props.active ? convertToUnit(height.value) : 0,
             '--v-progress-linear-height': convertToUnit(height.value),
-            ...locationStyles.value,
+            ...(props.absolute ? locationStyles.value : {}),
           },
           props.style,
         ]}

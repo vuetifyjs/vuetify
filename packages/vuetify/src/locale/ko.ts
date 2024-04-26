@@ -2,6 +2,7 @@ export default {
   badge: '배지',
   open: 'Open',
   close: '닫기',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',

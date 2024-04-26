@@ -205,7 +205,9 @@ export const VList = genericComponent<new <
     }
 
     function onKeydown (e: KeyboardEvent) {
-      if (!contentRef.value) return
+      const target = e.target as HTMLElement
+
+      if (!contentRef.value || ['INPUT', 'TEXTAREA'].includes(target.tagName)) return
 
       if (e.key === 'ArrowDown') {
         focus('next')

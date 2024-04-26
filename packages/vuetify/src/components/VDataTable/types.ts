@@ -5,7 +5,7 @@ import type { provideSelection, SelectableItem } from './composables/select'
 import type { FilterFunction, InternalItem } from '@/composables/filter'
 import type { SelectItemKey } from '@/util'
 
-export type DataTableCompareFunction<T = any> = (a: T, b: T) => number
+export type DataTableCompareFunction<T = any> = (a: T, b: T) => number | null
 
 export type DataTableHeader<T = Record<string, any>> = {
   key?: 'data-table-group' | 'data-table-select' | 'data-table-expand' | (string & {})

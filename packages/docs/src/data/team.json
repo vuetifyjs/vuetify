@@ -35,6 +35,22 @@
     "work": "COO @ Vuetify",
     "joined": "Nov 2019"
   },
+  "alexandriajackson": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/alexandria.jpg",
+    "discord": "alexandriajackson_",
+    "focus": [
+      "vuetifyjs/*"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "Dallas, TX, USA",
+    "name": "Alexandria Jackson",
+    "team": "company",
+    "twitter": "AlexxJackson96",
+    "work": "Marketing Coordinator @ Vuetify",
+    "joined": "Sept 2023"
+  },
   "KaelWD": {
     "discord": "kaelwd",
     "focus": [
@@ -145,6 +161,26 @@
     "twitter": "userquin",
     "team": "core",
     "joined": "Mar 2024"
+  },
+  "kieuminhcanh": {
+    "discord": "kieuminhcanh",
+    "focus": [
+      "[vuetifyjs/studio](https://github.com/vuetifyjs/studio)"
+    ],
+    "funding": [
+      "[GitHub Sponsors](https://github.com/sponsors/kieuminhcanh)",
+      "[Patreon](https://patreon.com/kieuminhcanh)",
+      "[Open Collective](https://opencollective.com/vuetify)"
+    ],
+    "languages": [
+      "English",
+      "Vietnamese"
+    ],
+    "location": "California, US",
+    "name": "Ken Kieu",
+    "team": "core",
+    "twitter": "kieuminhcanh",
+    "joined": "April 2024"
   },
   "jacekkarczmarczyk": {
     "discord": "jacek#3542",

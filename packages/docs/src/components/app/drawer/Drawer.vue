@@ -9,7 +9,7 @@
     width="300"
     @update:rail="onUpdateRail"
   >
-    <AppDrawerPinnedItems />
+    <AppDrawerPinnedItems :rail="rail" />
 
     <AppListList
       v-model:opened="opened"

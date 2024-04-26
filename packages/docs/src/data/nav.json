@@ -241,6 +241,10 @@
         "subfolder": "components"
       },
       {
+        "title": "snackbar-queue",
+        "subfolder": "components"
+      },
+      {
         "title": "sparklines",
         "subfolder": "components"
       },

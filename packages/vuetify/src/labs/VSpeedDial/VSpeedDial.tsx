@@ -7,19 +7,27 @@ import { makeVMenuProps, VMenu } from '@/components/VMenu/VMenu'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
-import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
+import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { ComputedRef } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
+import type { Anchor } from '@/util'
 
 export const makeVSpeedDialProps = propsFactory({
   ...makeComponentProps(),
-  ...makeVMenuProps({ offset: 8, minWidth: 0, location: 'top center' as const }),
-  ...makeTransitionProps({ transition: 'fade-transition' }),
+  ...makeVMenuProps({
+    offset: 8,
+    minWidth: 0,
+    openDelay: 0,
+    closeDelay: 100,
+    location: 'top center' as const,
+    transition: 'scale-transition',
+  }),
 }, 'VSpeedDial')
 
 export const VSpeedDial = genericComponent<OverlaySlots>()({
@@ -30,6 +38,16 @@ export const VSpeedDial = genericComponent<OverlaySlots>()({
   setup (props, { slots }) {
     const menuRef = ref<VMenu>()
 
+    const location = computed(() => {
+      const [y, x = 'center'] = props.location.split(' ')
+
+      return `${y} ${x}`
+    }) as ComputedRef<Anchor>
+
+    const locationClasses = computed(() => ({
+      [`v-speed-dial__content--${location.value.replace(' ', '-')}`]: true,
+    }))
+
     useRender(() => {
       const menuProps = VMenu.filterProps(props)
 
@@ -38,8 +56,13 @@ export const VSpeedDial = genericComponent<OverlaySlots>()({
           { ...menuProps }
           class={ props.class }
           style={ props.style }
-          contentClass="v-speed-dial__content"
+          contentClass={[
+            'v-speed-dial__content',
+            locationClasses.value,
+          ]}
+          location={ location.value }
           ref={ menuRef }
+          transition="fade-transition"
         >
           {{
             ...slots,

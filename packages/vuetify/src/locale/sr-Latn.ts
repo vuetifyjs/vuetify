@@ -2,6 +2,7 @@ export default {
   badge: 'Značka',
   open: 'Open',
   close: 'Zatvori',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
