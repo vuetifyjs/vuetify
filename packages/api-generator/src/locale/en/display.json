@@ -1,5 +1,6 @@
 {
   "props": {
-    "mobileBreakpoint": "Sets the designated mobile breakpoint for the component."
+    "mobile": "If `true` mobile friendly view is enabled.",
+    "mobileBreakpoint": "Overrides the display configuration default."
   }
 }
