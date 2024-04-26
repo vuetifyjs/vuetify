@@ -238,19 +238,15 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         >
           <div class="v-data-table-header__content">
             <VSelect
-            chips
-            class={[
-              'my-2',
-              'v-data-table__mobile-sort-select',
-            ]}
-            clearable
-            density="default"
-            hide-details
-            items={ displayItems.value }
-            label={ t('$vuetify.dataTable.sortBy') }
-            multiple={ props.multiSort }
-            variant="underlined"
-            onClick:clear={ () => sortBy.value = [] }
+              chips
+              class="v-data-table__mobile-sort-select"
+              clearable
+              density="default"
+              items={ displayItems.value }
+              label={ t('$vuetify.dataTable.sortBy') }
+              multiple={ props.multiSort }
+              variant="underlined"
+              onClick:clear={ () => sortBy.value = [] }
             >
               {{
                 ...slots,
