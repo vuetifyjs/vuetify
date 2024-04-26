@@ -20,7 +20,6 @@ export const VDataTableColumn = defineFunctionalComponent({
   nowrap: Boolean,
 }, (props, { slots }) => {
   const Tag = props.tag ?? 'td'
-
   return (
     <Tag
       class={[
