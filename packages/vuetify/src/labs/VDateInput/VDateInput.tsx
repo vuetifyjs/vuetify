@@ -20,6 +20,8 @@ export interface VDateInputSlots {
 }
 
 export const makeVDateInputProps = propsFactory({
+  hideActions: Boolean,
+
   ...makeFocusProps(),
   ...makeVConfirmEditProps(),
   ...makeVTextFieldProps({
@@ -127,11 +129,20 @@ export const VDateInput = genericComponent()({
                   return (
                     <VDatePicker
                       { ...datePickerProps }
-                      v-model={ proxyModel.value }
+                      modelValue={ props.hideActions ? model.value : proxyModel.value }
+                      onUpdate:modelValue={ val => {
+                        if (!props.hideActions) {
+                          proxyModel.value = val
+                        } else {
+                          model.value = val
+                        }
+
+                        if (!props.multiple) menu.value = false
+                      }}
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                     >
                       {{
-                        actions: () => actions,
+                        actions: !props.hideActions ? () => actions : undefined,
                       }}
                     </VDatePicker>
                   )
