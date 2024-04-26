@@ -135,9 +135,9 @@ export const VDateInput = genericComponent()({
                           proxyModel.value = val
                         } else {
                           model.value = val
-                        }
 
-                        if (!props.multiple) menu.value = false
+                          if (!props.multiple) menu.value = false
+                        }
                       }}
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                     >
