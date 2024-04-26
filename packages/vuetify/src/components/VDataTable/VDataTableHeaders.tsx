@@ -10,7 +10,7 @@ import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 import { useBackgroundColor } from '@/composables/color'
-import { useDisplay } from '@/composables/display'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { useLocale } from '@/composables/locale'
@@ -72,11 +72,8 @@ export const makeVDataTableHeadersProps = propsFactory({
   headerProps: {
     type: Object as PropType<Record<string, any>>,
   },
-  mobile: {
-    type: Boolean,
-    default: undefined,
-  },
 
+  ...makeDisplayProps(),
   ...makeLoaderProps(),
 }, 'VDataTableHeaders')
 
@@ -112,8 +109,8 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
-    const { mobile } = useDisplay()
-    const mobileView = computed(() => typeof props.mobile !== 'undefined' ? props.mobile : mobile.value)
+    const { smAndDown } = useDisplay()
+    const mobileView = computed(() => typeof props.mobileBreakpoint !== 'undefined' ? props.mobileBreakpoint : smAndDown.value)
 
     const slotProps = computed(() => ({
       headers: headers.value,

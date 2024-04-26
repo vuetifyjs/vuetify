@@ -18,7 +18,7 @@ import { makeVTableProps, VTable } from '@/components/VTable/VTable'
 
 // Composables
 import { provideDefaults } from '@/composables/defaults'
-import { useDisplay } from '@/composables/display'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Utilities
@@ -78,6 +78,7 @@ export const makeDataTableProps = propsFactory({
   width: [String, Number],
   search: String,
 
+  ...makeDisplayProps(),
   ...makeDataTableExpandProps(),
   ...makeDataTableGroupProps(),
   ...makeDataTableHeaderProps(),
@@ -167,7 +168,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 
     const { smAndDown } = useDisplay()
-    const mobileView = computed(() => typeof props.mobile !== 'undefined' ? props.mobile : smAndDown.value)
+    const mobileView = computed(() => typeof props.mobileBreakpoint !== 'undefined' ? props.mobileBreakpoint : smAndDown.value)
 
     const {
       isSelected,
