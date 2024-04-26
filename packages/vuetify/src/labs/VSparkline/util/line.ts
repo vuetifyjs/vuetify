@@ -13,7 +13,7 @@ export const makeLineProps = propsFactory({
     type: String,
     default: 'ease',
   },
-  color: String,
+  color: [Array<String>, String],
   gradient: {
     type: Array as PropType<string[]>,
     default: () => ([]),

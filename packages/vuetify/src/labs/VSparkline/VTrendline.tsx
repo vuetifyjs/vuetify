@@ -60,7 +60,9 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
 
       const gridX = (maxX - minX) / (totalValues - 1)
       const gridY = (maxY - minY) / ((maxValue - minValue) || 1)
-
+      if (values.length === 1) {
+        values.push(values[0])
+      }
       return values.map((value, index) => {
         return {
           x: minX + index * gridX,
@@ -124,7 +126,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
       await nextTick()
 
       if (!props.autoDraw || !paths.value || !paths.value.length) return
-      console.log(paths.value)
+      let pathIndex = 0
       for (const path of paths.value) {
         const pathRef = path
         const length = pathRef.getTotalLength()
@@ -141,6 +143,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
           pathRef.style.transition = `stroke-dashoffset ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
           pathRef.style.strokeDashoffset = '0'
         } else {
+          pathRef.style.fill = 'black'
           // Your existing logic for filled paths remains the same
           pathRef.style.transformOrigin = 'bottom center'
           pathRef.style.transition = 'none'
@@ -149,6 +152,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
           pathRef.style.transition = `transform ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
           pathRef.style.transform = `scaleY(1)`
         }
+        pathIndex++
       }
 
       lastLength.value = length
@@ -216,7 +220,9 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
                 ref={ paths }
                 d={ genPath(i, props.fill) }
                 fill={ props.fill ? `url(#${id.value})` : 'none' }
-                stroke={ props.fill ? 'none' : `url(#${id.value})` }
+                stroke={ props.fill ? 'none' : Array.isArray(props.color)
+                  ? props.color[i] ? props.color[i] : props.color.at(-1)
+                  : props.color }
               />
             ))
           }
@@ -225,7 +231,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
             <path
               d={ genPath(0, false) }
               fill="none"
-              stroke={ props.color ?? props.gradient?.[0] }
+              stroke={ (Array.isArray(props.color) ? props.color[0] : props.color) ?? props.gradient?.[0] }
             />
           )}
         </svg>
