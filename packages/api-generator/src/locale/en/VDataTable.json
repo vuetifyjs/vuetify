@@ -23,7 +23,6 @@
     "itemClass": "Property on supplied `items` that contains item's row class or function that takes an item as an argument and returns the class of corresponding row.",
     "itemsPerPage": "Changes how many items per page should be visible. Can be used with `.sync` modifier. Setting this prop to `-1` will display all items on the page.",
     "locale": "Sets the locale used for sorting. This is passed into [`Intl.Collator()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator) in the default `customSort` function.",
-    "mobile": "If `true` mobile friendly view is enabled.",
     "mobileBreakpoint": "Used to set when to toggle between regular table and mobile view.",
     "multiSort": "If `true` then one can sort on multiple properties.",
     "mustSort": "If `true` then one can not disable sorting, it will always switch between ascending and descending.",
