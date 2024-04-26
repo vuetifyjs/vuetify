@@ -129,7 +129,6 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         'v-data-table__th--sticky': props.sticky,
       },
       displayClasses.value,
-      loaderClasses.value,
     ]))
 
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {

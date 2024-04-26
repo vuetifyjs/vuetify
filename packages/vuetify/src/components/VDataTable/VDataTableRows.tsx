@@ -7,7 +7,7 @@ import { useExpanded } from './composables/expand'
 import { useGroupBy } from './composables/group'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
-import { useDisplay } from '@/composables/display'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
@@ -41,10 +41,6 @@ export const makeVDataTableRowsProps = propsFactory({
     type: Array as PropType<readonly (DataTableItem | Group)[]>,
     default: () => ([]),
   },
-  mobile: {
-    type: Boolean,
-    default: undefined,
-  },
   noDataText: {
     type: String,
     default: '$vuetify.noDataText',
@@ -52,6 +48,8 @@ export const makeVDataTableRowsProps = propsFactory({
   rowProps: [Object, Function] as PropType<RowProps<any>>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
   headersProps: [Object, Function] as PropType<Record<string, any>>,
+
+  ...makeDisplayProps(),
 }, 'VDataTableRows')
 
 export const VDataTableRows = genericComponent<new <T>(
@@ -72,9 +70,7 @@ export const VDataTableRows = genericComponent<new <T>(
     const { isSelected, toggleSelect } = useSelection()
     const { toggleGroup, isGroupOpen } = useGroupBy()
     const { t } = useLocale()
-
-    const { mobile } = useDisplay()
-    const mobileView = computed(() => typeof props.mobile !== 'undefined' ? props.mobile : mobile.value)
+    const { mobile } = useDisplay(props)
 
     useRender(() => {
       if (props.loading && (!props.items.length || slots.loading)) {
@@ -151,7 +147,7 @@ export const VDataTableRows = genericComponent<new <T>(
                   index,
                   item,
                   cellProps: props.cellProps,
-                  mobile: mobileView.value,
+                  mobile: mobile.value,
                 },
                 getPrefixedEventHandlers(attrs, ':row', () => slotProps),
                 typeof props.rowProps === 'function'
