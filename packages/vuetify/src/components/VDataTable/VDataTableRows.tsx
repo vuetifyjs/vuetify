@@ -47,7 +47,6 @@ export const makeVDataTableRowsProps = propsFactory({
   },
   rowProps: [Object, Function] as PropType<RowProps<any>>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
-  headersProps: [Object, Function] as PropType<Record<string, any>>,
 
   ...makeDisplayProps(),
 }, 'VDataTableRows')
