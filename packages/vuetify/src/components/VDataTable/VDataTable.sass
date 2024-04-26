@@ -7,17 +7,17 @@
   .v-data-table
     width: 100%
 
-    &__table
-      border-collapse: separate
-      border-spacing: 0
-      width: 100%
+  .v-data-table__table
+    width: 100%
+    border-collapse: separate
+    border-spacing: 0
 
-    &__tr
-      &--focus
-        border: 1px dotted black
+  .v-data-table__tr
+    &--focus
+      border: 1px dotted black
 
-      &--clickable
-        cursor: pointer
+    &--clickable
+      cursor: pointer
 
   .v-data-table
     .v-table__wrapper
@@ -90,30 +90,29 @@
       > span
         padding-left: 5px
 
-    &__column
-      padding-left: calc(var(--v-data-table-group-header-row-depth) * 16px) !important
-
   .v-data-table--loading
     .v-data-table__td
       opacity: $data-table-loading-opacity
 
-.v-data-table-header
-  &__content
-    align-items: center
-    display: flex
+  .v-data-table-group-header-row__column
+    padding-left: calc(var(--v-data-table-group-header-row-depth) * 16px) !important
 
-  &__sort-badge
+  .v-data-table-header__content
+    display: flex
     align-items: center
-    background: $data-table-header-sort-badge-color
-    border-radius: 50%
+
+  .v-data-table-header__sort-badge
     display: inline-flex
-    font-size: 0.875rem
-    height: $data-table-header-sort-badge-size
     justify-content: center
-    min-height: $data-table-header-sort-badge-size
-    min-width: $data-table-header-sort-badge-size
+    align-items: center
+    font-size: 0.875rem
     padding: 4px
+    border-radius: 50%
+    background: $data-table-header-sort-badge-color
+    min-width: $data-table-header-sort-badge-size
+    min-height: $data-table-header-sort-badge-size
     width: $data-table-header-sort-badge-size
+    height: $data-table-header-sort-badge-size
 
   .v-data-table-progress
     > th
@@ -121,12 +120,12 @@
       height: auto !important
       padding: 0 !important
 
-    &__loader
-      position: relative
+  .v-data-table-progress__loader
+    position: relative
 
-.v-data-table-rows-loading,
-.v-data-table-rows-no-data
-  text-align: center
+  .v-data-table-rows-loading,
+  .v-data-table-rows-no-data
+    text-align: center
 
 .v-data-table
   &__mobile
