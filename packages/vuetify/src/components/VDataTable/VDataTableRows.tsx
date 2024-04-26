@@ -11,7 +11,7 @@ import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { computed, Fragment, mergeProps } from 'vue'
+import { Fragment, mergeProps } from 'vue'
 import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
 
 // Types
