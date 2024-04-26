@@ -247,7 +247,6 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               'v-data-table__mobile-sort-select',
             ]}
             clearable
-            color="primary"
             density="default"
             hide-details
             items={ displayItems.value }
