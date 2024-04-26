@@ -1,4 +1,5 @@
 // Components
+import { VDataTableColumn } from './VDataTableColumn'
 import { VBtn } from '@/components/VBtn'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 
@@ -7,7 +8,6 @@ import { useExpanded } from './composables/expand'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
-import { VDataTableColumn } from './VDataTableColumn'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 
 // Utilities
