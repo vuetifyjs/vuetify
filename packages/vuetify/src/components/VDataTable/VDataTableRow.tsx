@@ -8,6 +8,7 @@ import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 import { VDataTableColumn } from './VDataTableColumn'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 
 // Utilities
 import { toDisplayString, withModifiers } from 'vue'
@@ -36,7 +37,8 @@ export const makeVDataTableRowProps = propsFactory({
   onClick: EventProp<[MouseEvent]>(),
   onContextmenu: EventProp<[MouseEvent]>(),
   onDblclick: EventProp<[MouseEvent]>(),
-  mobile: Boolean,
+
+  ...makeDisplayProps(),
 }, 'VDataTableRow')
 
 export const VDataTableRow = genericComponent<new <T>(
@@ -51,6 +53,7 @@ export const VDataTableRow = genericComponent<new <T>(
   props: makeVDataTableRowProps(),
 
   setup (props, { slots }) {
+    const { mobile } = useDisplay(props)
     const { isSelected, toggleSelect, someSelected, allSelected, selectAll } = useSelection()
     const { isExpanded, toggleExpand } = useExpanded()
     const { toggleSort, sortBy, isSorted } = useSort()
@@ -62,7 +65,7 @@ export const VDataTableRow = genericComponent<new <T>(
           'v-data-table__tr',
           {
             'v-data-table__tr--clickable': !!(props.onClick || props.onContextmenu || props.onDblclick),
-            'v-data-table__mobile-tr': props.mobile,
+            'v-data-table__mobile-tr': mobile.value,
           },
         ]}
         onClick={ props.onClick as any }
@@ -121,9 +124,9 @@ export const VDataTableRow = genericComponent<new <T>(
                 align={ column.align }
                 class={
                   {
-                    'v-data-table__mobile-td': props.mobile,
-                    'v-data-table__mobile-td-select-row': props.mobile && columnKey === 'data-table-select',
-                    'v-data-table__mobile-td-expanded-row': props.mobile && columnKey === 'data-table-expand',
+                    'v-data-table__mobile-td': mobile.value,
+                    'v-data-table__mobile-td-select-row': mobile.value && columnKey === 'data-table-select',
+                    'v-data-table__mobile-td-expanded-row': mobile.value && columnKey === 'data-table-expand',
                   }}
                 fixed={ column.fixed }
                 fixedOffset={ column.fixedOffset }

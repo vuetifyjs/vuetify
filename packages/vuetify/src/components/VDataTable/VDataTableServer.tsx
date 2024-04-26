@@ -97,8 +97,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     const itemsWithoutGroups = computed(() => extractRows(items.value))
 
-    const { mobile } = useDisplay()
-    const mobileView = computed(() => typeof props.mobile !== 'undefined' ? props.mobile : mobile.value)
+    const { displayClasses, mobile } = useDisplay(props)
 
     useOptions({
       page,
@@ -139,7 +138,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
       toggleExpand,
       isGroupOpen,
       toggleGroup,
-      mobile: mobileView.value,
+      mobile: mobile.value,
       items: itemsWithoutGroups.value.map(item => item.raw),
       internalItems: itemsWithoutGroups.value,
       groupedItems: flatItems.value,
@@ -159,8 +158,8 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
             'v-data-table',
             {
               'v-data-table--loading': props.loading,
-              'v-data-table__mobile': mobileView.value,
             },
+            displayClasses.value,
             props.class,
           ]}
           style={ props.style }

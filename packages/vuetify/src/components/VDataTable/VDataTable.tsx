@@ -18,6 +18,7 @@ import { createPagination, makeDataTablePaginateProps, providePagination, usePag
 import { makeDataTableSelectProps, provideSelection } from './composables/select'
 import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from './composables/sort'
 import { provideDefaults } from '@/composables/defaults'
+import { useDisplay } from '@/composables/display'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Utilities
@@ -93,7 +94,7 @@ export const makeVDataTableProps = propsFactory({
   ...makeVDataTableFooterProps(),
 }, 'VDataTable')
 
-type ItemType<T> = T extends readonly (infer U)[] ? U : never;
+type ItemType<T> = T extends readonly (infer U)[] ? U : never
 
 export const VDataTable = genericComponent<new <T extends readonly any[], V>(
   props: {
@@ -164,7 +165,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
     const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 
-    const mobileView = computed(() => typeof props.mobile !== 'undefined' ? props.mobile : props.mobileBreakpoint)
+    const { displayClasses, mobile } = useDisplay(props)
 
     const {
       isSelected,
@@ -211,8 +212,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       toggleExpand,
       isGroupOpen,
       toggleGroup,
-      mobile: mobileView.value,
-      mobileBreakpoint: props.mobileBreakpoint,
+      mobile: mobile.value,
       items: paginatedItemsWithoutGroups.value.map(item => item.raw),
       internalItems: paginatedItemsWithoutGroups.value,
       groupedItems: paginatedItems.value,
@@ -233,8 +233,8 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
             {
               'v-data-table--show-select': props.showSelect,
               'v-data-table--loading': props.loading,
-              'v-data-table__mobile': mobileView.value,
             },
+            displayClasses.value,
             props.class,
           ]}
           style={ props.style }
@@ -258,7 +258,6 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
                     <VDataTableRows
                       { ...attrs }
                       { ...dataTableRowsProps }
-                      { ...dataTableHeadersProps }
                       items={ paginatedItems.value }
                       v-slots={ slots }
                     />
