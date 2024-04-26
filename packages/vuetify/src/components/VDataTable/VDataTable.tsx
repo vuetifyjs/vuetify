@@ -227,9 +227,6 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       const dataTableRowsProps = VDataTableRows.filterProps(props)
       const tableProps = VTable.filterProps(props)
 
-      console.log('props', props)
-      console.log('dataTableHeadersProps', dataTableHeadersProps)
-
       return (
         <VTable
           class={[
