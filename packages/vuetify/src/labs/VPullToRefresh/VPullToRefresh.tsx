@@ -12,12 +12,14 @@ import { LoaderSlot } from '@/composables/loader'
 import { computed, onMounted, ref, shallowRef, watch } from 'vue'
 import { clamp, convertToUnit, genericComponent, getScrollParents, useRender } from '@/util'
 
-const PULL_DOWN_HEIGHT_PX = 64
-
 export const VPullToRefresh = genericComponent()({
   name: 'VPullToRefresh',
 
   props: {
+    loadThreshold: {
+      type: Number,
+      default: 64,
+    },
   },
 
   emits: {
@@ -34,28 +36,29 @@ export const VPullToRefresh = genericComponent()({
     const refreshing = shallowRef(false)
     const touching = shallowRef(false)
 
-    const topOffset = computed(() => clamp(touchDiff.value, 0, PULL_DOWN_HEIGHT_PX))
+    const canRefresh = computed(() => touchDiff.value >= props.loadThreshold)
+    const topOffset = computed(() => clamp(touchDiff.value, 0, props.loadThreshold))
 
-    function onTouchstart (e: TouchEvent) {
+    function onTouchstart (e: TouchEvent | MouseEvent) {
       if (refreshing.value) return
       touching.value = true
-      touchstartY = e.touches[0].clientY + immediateScrollParent!.scrollTop
+      touchstartY = ('clientY' in e ? e.clientY : e.touches[0].clientY) + immediateScrollParent!.scrollTop
     }
 
-    function onTouchmove (e: TouchEvent) {
-      if (refreshing.value) return
+    function onTouchmove (e: TouchEvent | MouseEvent) {
+      if (refreshing.value || !touching.value) return
 
-      const touchY = e.touches[0].clientY
+      const touchY = 'clientY' in e ? e.clientY : e.touches[0].clientY
 
-      if (!immediateScrollParent!.scrollTop) {
+      if (!immediateScrollParent!.scrollTop || e instanceof MouseEvent) {
         touchDiff.value = touchY - touchstartY
       }
     }
 
-    function onTouchend (e: TouchEvent) {
+    function onTouchend (e: TouchEvent | MouseEvent) {
       if (refreshing.value) return
       touching.value = false
-      if (touchDiff.value >= PULL_DOWN_HEIGHT_PX) {
+      if (canRefresh.value) {
         function done () {
           if (!refreshing.value) return
           touchDiff.value = 0
@@ -87,6 +90,10 @@ export const VPullToRefresh = genericComponent()({
           onTouchstart={ onTouchstart }
           onTouchmove={ onTouchmove }
           onTouchend={ onTouchend }
+          onMousedown={ onTouchstart }
+          onMouseup={ onTouchend }
+          onMouseleave={ onTouchend }
+          onMousemove={ onTouchmove }
           ref={ containerRef }
         >
           <div
@@ -97,8 +104,8 @@ export const VPullToRefresh = genericComponent()({
               },
             ]}
             style={{
-              top: convertToUnit(-1 * PULL_DOWN_HEIGHT_PX + topOffset.value),
-              height: convertToUnit(PULL_DOWN_HEIGHT_PX),
+              top: convertToUnit(-1 * props.loadThreshold + topOffset.value),
+              height: convertToUnit(props.loadThreshold),
             }}
           >
             {
@@ -114,7 +121,7 @@ export const VPullToRefresh = genericComponent()({
                 </LoaderSlot>
               ) : (
                 <VIcon
-                  icon="$sortDesc"
+                  icon={ canRefresh.value ? '$sortAsc' : '$sortDesc' }
                 />
               )
             }
