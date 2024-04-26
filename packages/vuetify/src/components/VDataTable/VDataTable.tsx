@@ -258,7 +258,6 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
                     <VDataTableRows
                       { ...attrs }
                       { ...dataTableRowsProps }
-                      { ...dataTableHeadersProps }
                       items={ paginatedItems.value }
                       v-slots={ slots }
                     />
