@@ -125,14 +125,14 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       getSortIcon,
     } satisfies HeadersSlotProps))
 
-    const headerCellClasses = computed(() => [
+    const headerCellClasses = computed(() => ([
       'v-data-table__th',
       {
         'v-data-table__th--sticky': props.sticky,
         'v-data-table__mobile-th': mobileView.value,
       },
       loaderClasses.value,
-    ])
+    ]))
 
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
       const noPadding = column.key === 'data-table-select' || column.key === 'data-table-expand'
