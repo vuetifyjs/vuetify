@@ -213,7 +213,6 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       isGroupOpen,
       toggleGroup,
       mobile: mobile.value,
-      mobileBreakpoint: props.mobileBreakpoint,
       items: paginatedItemsWithoutGroups.value.map(item => item.raw),
       internalItems: paginatedItemsWithoutGroups.value,
       groupedItems: paginatedItems.value,
