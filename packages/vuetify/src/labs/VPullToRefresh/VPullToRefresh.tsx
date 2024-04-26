@@ -16,9 +16,13 @@ export const VPullToRefresh = genericComponent()({
   name: 'VPullToRefresh',
 
   props: {
-    loadThreshold: {
+    pullDownThreshold: {
       type: Number,
       default: 64,
+    },
+    enablePullOnScrollTop: {
+      type: Number,
+      default: 0,
     },
   },
 
@@ -34,15 +38,16 @@ export const VPullToRefresh = genericComponent()({
     const containerRef = ref<HTMLElement>()
 
     const refreshing = shallowRef(false)
+    const goingUp = shallowRef(false)
     const touching = shallowRef(false)
 
-    const canRefresh = computed(() => touchDiff.value >= props.loadThreshold)
-    const topOffset = computed(() => clamp(touchDiff.value, 0, props.loadThreshold))
+    const canRefresh = computed(() => touchDiff.value >= props.pullDownThreshold)
+    const topOffset = computed(() => clamp(touchDiff.value, 0, props.pullDownThreshold))
 
     function onTouchstart (e: TouchEvent | MouseEvent) {
       if (refreshing.value) return
       touching.value = true
-      touchstartY = ('clientY' in e ? e.clientY : e.touches[0].clientY) + immediateScrollParent!.scrollTop
+      touchstartY = 'clientY' in e ? e.clientY : e.touches[0].clientY
     }
 
     function onTouchmove (e: TouchEvent | MouseEvent) {
@@ -50,7 +55,7 @@ export const VPullToRefresh = genericComponent()({
 
       const touchY = 'clientY' in e ? e.clientY : e.touches[0].clientY
 
-      if (!immediateScrollParent!.scrollTop || e instanceof MouseEvent) {
+      if (immediateScrollParent!.scrollTop >= props.enablePullOnScrollTop) {
         touchDiff.value = touchY - touchstartY
       }
     }
@@ -81,6 +86,10 @@ export const VPullToRefresh = genericComponent()({
       }
     })
 
+    watch(topOffset, (newVal, oldVal) => {
+      goingUp.value = newVal < oldVal
+    })
+
     useRender(() => {
       return (
         <div
@@ -104,8 +113,8 @@ export const VPullToRefresh = genericComponent()({
               },
             ]}
             style={{
-              top: convertToUnit(-1 * props.loadThreshold + topOffset.value),
-              height: convertToUnit(props.loadThreshold),
+              top: convertToUnit(-1 * props.pullDownThreshold + topOffset.value),
+              height: convertToUnit(props.pullDownThreshold),
             }}
           >
             {
@@ -121,7 +130,7 @@ export const VPullToRefresh = genericComponent()({
                 </LoaderSlot>
               ) : (
                 <VIcon
-                  icon={ canRefresh.value ? '$sortAsc' : '$sortDesc' }
+                  icon={ canRefresh.value || goingUp.value ? '$sortAsc' : '$sortDesc' }
                 />
               )
             }
