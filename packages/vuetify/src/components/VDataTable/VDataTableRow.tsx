@@ -125,8 +125,8 @@ export const VDataTableRow = genericComponent<new <T>(
                 class={
                   {
                     'v-data-table__mobile-td': mobile.value,
-                    'v-data-table__mobile-td-select-row': mobile && columnKey === 'data-table-select',
-                    'v-data-table__mobile-td-expanded-row': mobile && columnKey === 'data-table-expand',
+                    'v-data-table__mobile-td-select-row': mobile.value && columnKey === 'data-table-select',
+                    'v-data-table__mobile-td-expanded-row': mobile.value && columnKey === 'data-table-expand',
                   }}
                 fixed={ column.fixed }
                 fixedOffset={ column.fixedOffset }
