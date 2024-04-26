@@ -1,5 +1,6 @@
 export * from './VCalendar'
 export * from './VConfirmEdit'
+export * from './VDateInput'
 export * from './VEmptyState'
 export * from './VFab'
 export * from './VNumberInput'
