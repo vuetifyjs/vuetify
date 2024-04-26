@@ -84,8 +84,7 @@ By default days from previous and next months are not visible. They can be displ
 
 #### Colors
 
-Date picker colors can be set using the **color** props.
-
+Date picker colors can be set using the **color** and ***header-color*** props. If ***header-color*** prop is not provided header will use the **color** prop value.
 <ExamplesExample file="v-date-picker/prop-colors" />
 
 #### Allowed dates

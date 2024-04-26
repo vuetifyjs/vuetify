@@ -11,6 +11,7 @@
     "flat": "Removes  elevation.",
     "format": "Takes a date object and returns it in a specified format.",
     "header": "Text shown when no **display-date** is set.",
+    "headerColor": "Defines the header color. If not specified it will use the color defined by color prop or the default picker color.",
     "headerDateFormat": "Allows you to customize the format of the month string that appears in the header of the calendar. Called with date (ISO 8601 **date** string) arguments.",
     "inputMode": "Toggles between showing dates or inputs.",
     "locale": "Sets the locale. Accepts a string with a BCP 47 language tag.",
