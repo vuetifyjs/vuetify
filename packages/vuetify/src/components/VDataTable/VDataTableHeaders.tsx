@@ -109,8 +109,8 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
-    const { smAndDown } = useDisplay()
-    const mobileView = computed(() => typeof props.mobileBreakpoint !== 'undefined' ? props.mobileBreakpoint : smAndDown.value)
+    const { mobile } = useDisplay()
+    const mobileView = computed(() => typeof props.mobileBreakpoint !== 'undefined' ? props.mobileBreakpoint : mobile.value)
 
     const slotProps = computed(() => ({
       headers: headers.value,
