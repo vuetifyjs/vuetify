@@ -232,6 +232,10 @@
         "subfolder": "components"
       },
       {
+        "title": "date-inputs",
+        "subfolder": "components"
+      },
+      {
         "title": "empty-states",
         "subfolder": "components"
       },

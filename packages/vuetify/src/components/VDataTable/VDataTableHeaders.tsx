@@ -224,9 +224,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                   name="v-data-table-progress"
                   absolute
                   active
-                  color={ typeof props.loading === 'boolean' || props.loading === 'true'
-                    ? props.color
-                    : props.loading }
+                  color={ typeof props.loading === 'boolean' ? props.color : props.loading }
                   indeterminate
                   v-slots={{ default: slots.loader }}
                 />
