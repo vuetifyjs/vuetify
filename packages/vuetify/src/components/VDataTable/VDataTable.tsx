@@ -70,7 +70,7 @@ export type VDataTableSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots
   'body.prepend': VDataTableSlotProps<T>
   'body.append': VDataTableSlotProps<T>
   'footer.prepend': never
-};
+}
 
 export const makeDataTableProps = propsFactory({
   ...makeVDataTableRowsProps(),
