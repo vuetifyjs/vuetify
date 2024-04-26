@@ -56,7 +56,7 @@ export type VDataTableSlotProps<T> = {
   columns: InternalDataTableHeader[]
   headers: InternalDataTableHeader[][]
   mobile: boolean | undefined
-};
+}
 
 export type VDataTableSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
   default: VDataTableSlotProps<T>
