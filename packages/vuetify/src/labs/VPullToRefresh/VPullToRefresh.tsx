@@ -5,14 +5,20 @@ import './VPullToRefresh.sass'
 import { VIcon } from '@/components/VIcon'
 import { VProgressCircular } from '@/components/VProgressCircular'
 
-// Composables
-import { LoaderSlot } from '@/composables/loader'
-
 // Utilities
 import { computed, onMounted, ref, shallowRef, watch } from 'vue'
 import { clamp, convertToUnit, genericComponent, getScrollParents, useRender } from '@/util'
 
-export const VPullToRefresh = genericComponent()({
+export type VPullToRefreshSlots = {
+  default: never
+  pullDownPanel: {
+    canRefresh: boolean
+    goingUp: boolean
+    refreshing: boolean
+  }
+}
+
+export const VPullToRefresh = genericComponent<VPullToRefreshSlots>()({
   name: 'VPullToRefresh',
 
   props: {
@@ -41,7 +47,7 @@ export const VPullToRefresh = genericComponent()({
     const goingUp = shallowRef(false)
     const touching = shallowRef(false)
 
-    const canRefresh = computed(() => touchDiff.value >= props.pullDownThreshold)
+    const canRefresh = computed(() => touchDiff.value >= props.pullDownThreshold && !refreshing.value)
     const topOffset = computed(() => clamp(touchDiff.value, 0, props.pullDownThreshold))
 
     function onTouchstart (e: TouchEvent | MouseEvent) {
@@ -117,22 +123,21 @@ export const VPullToRefresh = genericComponent()({
               height: convertToUnit(props.pullDownThreshold),
             }}
           >
-            {
-              refreshing.value ? (
-                <LoaderSlot
-                  name="v-pull-to-refresh"
+            { slots.pullDownPanel
+              ? slots.pullDownPanel({
+                canRefresh: canRefresh.value,
+                goingUp: goingUp.value,
+                refreshing: refreshing.value,
+              }) : (refreshing.value ? (
+                <VProgressCircular
+                  indeterminate
                   active={ false }
-                >
-                  <VProgressCircular
-                    indeterminate
-                    active={ false }
-                  />
-                </LoaderSlot>
+                />
               ) : (
                 <VIcon
                   icon={ canRefresh.value || goingUp.value ? '$sortAsc' : '$sortDesc' }
                 />
-              )
+              ))
             }
           </div>
           <div
