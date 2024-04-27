@@ -24,6 +24,13 @@ import { genericComponent, humanReadableFileSize, only, propsFactory, useRender,
 // Types
 import type { PropType } from 'vue'
 
+export type VFileUploadSlots = {
+  default: never
+  icon: never
+  title: never
+  divider: never
+}
+
 export const makeVFileUploadProps = propsFactory({
   browseText: {
     type: String,
@@ -60,7 +67,7 @@ export const makeVFileUploadProps = propsFactory({
   ...makeVSheetProps(),
 }, 'VFileUpload')
 
-export const VFileUpload = genericComponent()({
+export const VFileUpload = genericComponent<VFileUploadSlots>()({
   name: 'VFileUpload',
 
   props: makeVFileUploadProps(),
@@ -123,7 +130,10 @@ export const VFileUpload = genericComponent()({
 
       for (const file of files) {
         if (!model.value.some(f => f.name === file.name)) {
-          model.value.push(file)
+          model.value = [
+            ...model.value,
+            file,
+          ]
         }
       }
     }
