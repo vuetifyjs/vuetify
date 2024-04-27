@@ -34,7 +34,7 @@ export const VPullToRefresh = genericComponent<VPullToRefreshSlots>()({
 
   setup (props, { slots, emit }) {
     let touchstartY = 0
-    let immediateScrollParents: HTMLElement[] = []
+    let scrollParents: HTMLElement[] = []
 
     const touchDiff = shallowRef(0)
     const containerRef = ref<HTMLElement>()
@@ -57,7 +57,7 @@ export const VPullToRefresh = genericComponent<VPullToRefreshSlots>()({
 
       const touchY = 'clientY' in e ? e.clientY : e.touches[0].clientY
 
-      if (immediateScrollParents.length && !immediateScrollParents[0].scrollTop) {
+      if (scrollParents.length && !scrollParents[0].scrollTop) {
         touchDiff.value = touchY - touchstartY
       }
     }
@@ -79,13 +79,13 @@ export const VPullToRefresh = genericComponent<VPullToRefreshSlots>()({
     }
 
     onMounted(() => {
-      immediateScrollParents = getScrollParents(containerRef.value)
+      scrollParents = getScrollParents(containerRef.value)
     })
 
     watch([topOffset, refreshing], () => {
-      if (immediateScrollParents.length) {
+      if (scrollParents.length) {
         const stopScrolling = topOffset.value && !refreshing.value
-        immediateScrollParents.forEach(p => p.style.overflow = stopScrolling ? 'hidden' : 'auto')
+        scrollParents.forEach(p => p.style.overflow = stopScrolling ? 'hidden' : 'auto')
       }
     })
 
