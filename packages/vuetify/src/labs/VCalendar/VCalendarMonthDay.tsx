@@ -6,19 +6,25 @@ import { VCalendarEvent } from './VCalendarEvent'
 import { VBtn } from '@/components/VBtn'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
+import type { CalendarDay } from '@/composables/calendar'
 
 export type VCalendarMonthDaySlots = {
   default: never
-  content: never
+  dayBody: { day?: CalendarDay, events?: Array<any> }
   title: { title?: number | string }
-  event: { day?: Object, allDay: boolean, event: Record<string, unknown> }
+  event: { day?: CalendarDay, allDay: boolean, event: Record<string, unknown> }
 }
 
 export const makeVCalendarMonthDayProps = propsFactory({
   active: Boolean,
   color: String,
-  day: Object,
+  day: {
+    type: Object as PropType<CalendarDay>,
+  },
   disabled: Boolean,
   events: Array<any>,
   title: [Number, String],
@@ -29,7 +35,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
 
   props: makeVCalendarMonthDayProps(),
 
-  setup (props, { emit, slots }) {
+  setup (props, { emit, attrs, slots }) {
     useRender(() => {
       const hasTitle = !!(props.title || slots.title?.({ title: props.title }))
 
@@ -41,8 +47,9 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
         >
           { !props.day?.isHidden && hasTitle && (
             <div key="title" class="v-calendar-weekly__day-label">
-              { slots.title?.({ title: props.title }) ?? (
+              { slots.title ? slots.title?.({ title: props.title }) : (
                 <VBtn
+                { ...getPrefixedEventHandlers(attrs, ':date', () => props) }
                   class={ props.day?.isToday ? 'v-calendar-weekly__day-label__today' : undefined }
                   color={ props.color }
                   disabled={ props.disabled }
@@ -52,14 +59,21 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
                 >
                   { props.title }
                 </VBtn>
-              )}
+
+              )
+            }
             </div>
           )}
 
           { !props.day?.isHidden && (
             <div key="content" class="v-calendar-weekly__day-content">
-              { slots.content?.() ?? (
-                <div>
+              { slots.dayBody ? slots.dayBody?.({ day: props.day, events: props.events }) : (
+                <div
+                  { ...getPrefixedEventHandlers(attrs, ':day', () => ({
+                    day: props.day,
+                    events: props.events,
+                  }))}
+                >
                   <div class="v-calendar-weekly__day-alldayevents-container">
                     { props.events?.filter(event => event.allDay).map(event => slots.event
                       ? slots.event({ day: props.day, allDay: true, event })
