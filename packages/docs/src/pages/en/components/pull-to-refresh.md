@@ -40,7 +40,6 @@ export default createVuetify({
 
 Drag the list downward to activate the pull-to-refresh feature.
 
-
 <ExamplesExample file="v-pull-to-refresh/usage" />
 
 <PromotedEntry />
