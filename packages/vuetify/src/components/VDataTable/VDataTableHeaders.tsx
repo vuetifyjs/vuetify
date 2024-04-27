@@ -129,6 +129,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         'v-data-table__th--sticky': props.sticky,
       },
       displayClasses.value,
+      loaderClasses.value,
     ]))
 
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
@@ -140,13 +141,12 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           tag="th"
           align={ column.align }
           class={[
-            ...headerCellClasses.value,
             {
               'v-data-table__th--sortable': column.sortable,
               'v-data-table__th--sorted': isSorted(column),
               'v-data-table__th--fixed': column.fixed,
             },
-            loaderClasses.value,
+            ...headerCellClasses.value,
           ]}
           style={{
             width: convertToUnit(column.width),
@@ -231,7 +231,6 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           tag="th"
           class={[
             ...headerCellClasses.value,
-            loaderClasses.value,
           ]}
           colspan={ headers.value.length + 1 }
           { ...headerProps }
@@ -277,15 +276,11 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     }
 
     useRender(() => {
-      if (mobile.value) {
-        return (
-          <tr>
-            <VDataTableMobileHeaderCell />
-          </tr>
-        )
-      }
-
-      return (
+      return mobile.value ? (
+        <tr>
+          <VDataTableMobileHeaderCell />
+        </tr>
+      ) : (
         <>
           { slots.headers
             ? slots.headers(slotProps.value)
