@@ -1,8 +1,11 @@
+// Composables
+import { makeThemeProps, provideTheme } from '@/composables/theme'
+
 // Utilities
 import { computed, nextTick, ref, watch } from 'vue'
 import { makeLineProps } from './util/line'
 import { genPath as _genPath } from './util/path'
-import { genericComponent, getPropertyFromItem, getUid, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, getUid, isCssColor, propsFactory, useRender } from '@/util'
 
 // Types
 export type VTrendlineSlots = {
@@ -32,8 +35,8 @@ export interface Point {
 
 export const makeVTrendlineProps = propsFactory({
   fill: Boolean,
-
   ...makeLineProps(),
+  ...makeThemeProps(),
 }, 'VTrendline')
 
 export const VTrendline = genericComponent<VTrendlineSlots>()({
@@ -42,6 +45,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
   props: makeVTrendlineProps(),
 
   setup (props, { slots }) {
+    const theme = provideTheme(props)
     const uid = getUid()
     const id = computed(() => props.id || `trendline-${uid}`)
     const autoDrawDuration = computed(() => Number(props.autoDrawDuration) || (props.fill ? 500 : 2000))
@@ -221,8 +225,14 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
                 d={ genPath(i, props.fill) }
                 fill={ props.fill ? `url(#${id.value})` : 'none' }
                 stroke={ props.fill ? 'none' : Array.isArray(props.color)
-                  ? props.color[i] ? props.color[i] : props.color.at(-1)
-                  : props.color }
+                  ? props.color[i]
+                    ? isCssColor(props.color[i])
+                      ? props.color[i]
+                      : theme.current.value.colors[props.color[i]]
+                    : isCssColor(props.color.at(-1))
+                      ? props.color.at(-1)
+                      : theme.current.value.colors[props.color.at(-1)]
+                  : isCssColor(props.color) ? props.color : theme.current.value.colors[props.color] }
               />
             ))
           }
