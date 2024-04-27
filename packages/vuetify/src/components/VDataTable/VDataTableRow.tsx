@@ -76,7 +76,6 @@ export const VDataTableRow = genericComponent<new <T>(
           const item = props.item!
           const slotName = `item.${column.key}` as const
           const headerSlotName = `header.${column.key}` as const
-          const columnKey = column.key
           const slotProps = {
             index: props.index!,
             item: item.raw,
@@ -124,14 +123,14 @@ export const VDataTableRow = genericComponent<new <T>(
               class={
                 {
                   'v-data-table__mobile-td': mobile.value,
-                  'v-data-table__mobile-td-select-row': mobile.value && columnKey === 'data-table-select',
-                  'v-data-table__mobile-td-expanded-row': mobile.value && columnKey === 'data-table-expand',
+                  'v-data-table__mobile-td-select-row': mobile.value && column.key === 'data-table-select',
+                  'v-data-table__mobile-td-expanded-row': mobile.value && column.key === 'data-table-expand',
                 }}
               fixed={ column.fixed }
               fixedOffset={ column.fixedOffset }
               lastFixed={ column.lastFixed }
               maxWidth={ column.maxWidth }
-              noPadding={ columnKey === 'data-table-select' || columnKey === 'data-table-expand' }
+              noPadding={ column.key === 'data-table-select' || column.key === 'data-table-expand' }
               nowrap={ column.nowrap }
               width={ column.width }
               { ...cellProps }
@@ -139,9 +138,9 @@ export const VDataTableRow = genericComponent<new <T>(
             >
               {{
                 default: () => {
-                  if (slots[slotName] && !mobile.value) return slots[slotName]!(slotProps)
+                  if (slots[slotName] && !mobile.value) return slots[slotName](slotProps)
 
-                  if (columnKey === 'data-table-select') {
+                  if (column.key === 'data-table-select') {
                     return slots['item.data-table-select']?.(slotProps) ?? (
                       <VCheckboxBtn
                         disabled={ !item.selectable }
@@ -151,7 +150,7 @@ export const VDataTableRow = genericComponent<new <T>(
                     )
                   }
 
-                  if (columnKey === 'data-table-expand') {
+                  if (column.key === 'data-table-expand') {
                     return slots['item.data-table-expand']?.(slotProps) ?? (
                       <VBtn
                         icon={ isExpanded(item) ? '$collapse' : '$expand' }
