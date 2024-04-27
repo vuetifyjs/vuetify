@@ -7,12 +7,11 @@ import { makeVTimePickerProps, VTimePicker } from '@/labs/VTimePicker/VTimePicke
 // Composables
 import { useDate } from '@/composables/date'
 import { makeFocusProps, useFocus } from '@/composables/focus'
-import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, shallowRef } from 'vue'
-import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 export interface VTimeInputSlots {
@@ -29,7 +28,6 @@ export const makeVTimeInputProps = propsFactory({
     prependIcon: '$clock',
   }),
   ...omit(makeVTimePickerProps({
-    weeksInMonth: 'dynamic' as const,
     hideHeader: true,
   }), ['active']),
 }, 'VTimeInput')
@@ -44,19 +42,14 @@ export const VTimeInput = genericComponent()({
   },
 
   setup (props, { slots }) {
-    const { t } = useLocale()
     const adapter = useDate()
     const { isFocused, focus, blur } = useFocus(props)
-    const model = useProxiedModel(props, 'modelValue', props.multiple ? [] : null)
+    const model = useProxiedModel(props, 'modelValue', null)
     const menu = shallowRef(false)
 
-    const display = computed(() => {
-      const value = wrapInArray(model.value)
-
-      if (!value.length) return null
-
-      return adapter.isValid(model.value) ? adapter.format(model.value, 'keyboardDate') : ''
-    })
+    const display = computed(() => adapter.isValid(model.value)
+      ? adapter.format(model.value, props.format === '24hr' ? 'fullTime24h' : 'fullTime12h')
+      : '')
 
     function onKeydown (e: KeyboardEvent) {
       if (e.key !== 'Enter') return
