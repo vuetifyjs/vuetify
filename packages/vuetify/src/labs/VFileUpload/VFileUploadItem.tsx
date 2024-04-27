@@ -10,7 +10,6 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 import type { VListItemSlots } from '@/components/VList/VListItem'
 
 export const makeVFileUploadItemProps = propsFactory({
-
   ...makeVListItemProps({
     border: true,
     rounded: true,
@@ -26,6 +25,7 @@ export const VFileUploadItem = genericComponent<VListItemSlots>()({
 
   emits: {
     'click:remove': () => true,
+    click: (e: MouseEvent | KeyboardEvent) => true,
   },
 
   setup (props, { emit, slots }) {
