@@ -84,11 +84,6 @@ export const VFileUpload = genericComponent()({
     const vSheetRef = ref<InstanceType<typeof VSheet> | null>(null)
 
     const base = computed(() => typeof props.showSize !== 'boolean' ? props.showSize : undefined)
-    const title = computed(() => {
-      return props.title.startsWith('$vuetify')
-        ? t(props.title)
-        : props.title
-    })
 
     onMounted(() => {
       vSheetRef.value?.$el.addEventListener('dragover', onDragOver)
@@ -138,7 +133,7 @@ export const VFileUpload = genericComponent()({
     }
 
     useRender(() => {
-      const hasTitle = !!(slots.title || title.value)
+      const hasTitle = !!(slots.title || props.title)
       const hasIcon = !!(slots.icon || props.icon)
       const cardProps = VSheet.filterProps(props)
       const dividerProps = VDivider.filterProps(props)
@@ -183,7 +178,7 @@ export const VFileUpload = genericComponent()({
 
             { hasTitle && (
               <div key="title" class="v-file-upload-title">
-                { slots.title?.() ?? title.value }
+                { slots.title?.() ?? t(props.title) }
               </div>
             )}
 
