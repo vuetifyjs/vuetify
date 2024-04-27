@@ -125,16 +125,26 @@ export const VPullToRefresh = genericComponent<VPullToRefreshSlots>()({
                 canRefresh: canRefresh.value,
                 goingUp: goingUp.value,
                 refreshing: refreshing.value,
-              }) : (refreshing.value ? (
-                <VProgressCircular
-                  indeterminate
-                  active={ false }
-                />
-              ) : (
-                <VIcon
-                  icon={ canRefresh.value || goingUp.value ? '$sortAsc' : '$sortDesc' }
-                />
-              ))
+              }) : (
+                <div
+                  class={[
+                    'v-pull-to-refresh__pull-down-default',
+                  ]}
+                >
+                  {
+                    refreshing.value ? (
+                      <VProgressCircular
+                        indeterminate
+                        active={ false }
+                      />
+                    ) : (
+                      <VIcon
+                        icon={ canRefresh.value || goingUp.value ? '$sortAsc' : '$sortDesc' }
+                      />
+                    )
+                  }
+                </div>
+              )
             }
           </div>
           <div

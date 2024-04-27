@@ -4,13 +4,17 @@
   &__pull-down
     position: absolute
     width: 100%
-    display: flex
-    justify-content: center
-    align-items: flex-end
     transition: top .3s ease-out
     &--touching
       transition: none
 
+  &__pull-down-default
+    display: flex
+    width: 100%
+    height: 100%
+    justify-content: center
+    align-items: flex-end
+    padding-bottom: 10px
 
   &__scroll-container
     position: relative
