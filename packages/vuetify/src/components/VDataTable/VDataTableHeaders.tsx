@@ -239,7 +239,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           <div class="v-data-table-header__content">
             <VSelect
               chips
-              class="v-data-table__mobile-sort-select"
+              class="v-data-table__td-sort-select"
               clearable
               density="default"
               items={ displayItems.value }
@@ -261,8 +261,8 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                     { props.item.title }
                     <VIcon
                       class={[
-                        'v-data-table__mobile-sort-icon',
-                        isSorted(props.item.raw) && 'v-data-table__mobile-sort-icon-active',
+                        'v-data-table__td-sort-icon',
+                        isSorted(props.item.raw) && 'v-data-table__td-sort-icon-active',
                       ]}
                       icon={ getSortIcon(props.item.raw) }
                       size="small"

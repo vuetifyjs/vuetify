@@ -53,7 +53,7 @@ export const VDataTableRow = genericComponent<new <T>(
   props: makeVDataTableRowProps(),
 
   setup (props, { slots }) {
-    const { mobile } = useDisplay(props)
+    const { displayClasses, mobile } = useDisplay(props, 'v-data-table__tr')
     const { isSelected, toggleSelect, someSelected, allSelected, selectAll } = useSelection()
     const { isExpanded, toggleExpand } = useExpanded()
     const { toggleSort, sortBy, isSorted } = useSort()
@@ -65,8 +65,8 @@ export const VDataTableRow = genericComponent<new <T>(
           'v-data-table__tr',
           {
             'v-data-table__tr--clickable': !!(props.onClick || props.onContextmenu || props.onDblclick),
-            'v-data-table__mobile-tr': mobile.value,
           },
+          displayClasses.value,
         ]}
         onClick={ props.onClick as any }
         onContextmenu={ props.onContextmenu as any }
@@ -120,19 +120,17 @@ export const VDataTableRow = genericComponent<new <T>(
           return (
             <VDataTableColumn
               align={ column.align }
-              class={
-                {
-                  'v-data-table__mobile-td': mobile.value,
-                  'v-data-table__mobile-td-select-row': mobile.value && column.key === 'data-table-select',
-                  'v-data-table__mobile-td-expanded-row': mobile.value && column.key === 'data-table-expand',
-                }}
+              class={{
+                'v-data-table__td--expanded-row': column.key === 'data-table-expand',
+                'v-data-table__td--select-row': column.key === 'data-table-select',
+              }}
               fixed={ column.fixed }
               fixedOffset={ column.fixedOffset }
               lastFixed={ column.lastFixed }
-              maxWidth={ column.maxWidth }
+              maxWidth={ !mobile.value ? column.maxWidth : undefined }
               noPadding={ column.key === 'data-table-select' || column.key === 'data-table-expand' }
               nowrap={ column.nowrap }
-              width={ column.width }
+              width={ !mobile.value ? column.width : undefined }
               { ...cellProps }
               { ...columnCellProps }
             >
@@ -165,11 +163,11 @@ export const VDataTableRow = genericComponent<new <T>(
 
                   return !mobile.value ? displayValue : (
                     <>
-                      <div class="v-data-table__mobile-td-title">
+                      <div class="v-data-table__td-title">
                         { slots[headerSlotName]?.(columnSlotProps) ?? column.title }
                       </div>
 
-                      <div class="v-data-table__mobile-td-value">
+                      <div class="v-data-table__td-value">
                         { slots[slotName]?.(slotProps) ?? displayValue }
                       </div>
                     </>

@@ -127,50 +127,33 @@
   .v-data-table-rows-no-data
     text-align: center
 
-  .v-data-table__mobile
-    &-tr
-      > td
-        align-items: center
-        border-bottom: 0 !important
-        display: grid
-        grid-template-columns: repeat(2, 1fr)
+  .v-data-table__tr--mobile
+    > .v-data-table__td--expanded-row
+      grid-template-columns: 0
+      justify-content: center
 
-        &:last-child
-          border-bottom: thin solid rgba(var(--v-border-color), var(--v-border-opacity)) !important
+    > .v-data-table__td--select-row
+      grid-template-columns: 0
+      justify-content: start
 
-    &-td
+    > td
+      align-items: center
       column-gap: 4px
-      height: auto !important
+      display: grid
+      grid-template-columns: repeat(2, 1fr)
       min-height: var(--v-table-row-height)
 
-      &-title
-        font-weight: bold
-        text-align: left
+      &:not(:last-child)
+        border-bottom: 0 !important
 
-      &-value
-        text-align: right
-        text-overflow: unset !important
-        white-space: unset !important
+  .v-data-table__td-title
+    font-weight: bold
+    text-align: left
 
-      &-expanded-row,
-      &-select-row
-        display: flex !important
-        width: 100% !important
+  .v-data-table__td-value
+    text-align: right
 
-      &-expanded-row
-        justify-content: center
-
-    .v-data-table-footer
-      justify-content: center
-      row-gap: 8px
-
-      &__pagination
-        margin-inline-start: 0
-
-      &__info
-        justify-content: $data-table-footer-mobile-info-justify
-        padding: $data-table-footer-mobile-info-padding
-
+  .v-data-table__td
     &-sort-icon
       color: $data-table-header-mobile-chip-icon-color
 
