@@ -69,8 +69,9 @@
     "VDataTableServer",
     "VDataTableVirtual"
   ],
+  "components/date-inputs": ["VDateInput", "VDatePicker"],
   "components/date-pickers-month": ["VDatePicker"],
-  "components/date-pickers": ["VDatePicker"],
+  "components/date-pickers": ["VDatePicker", "VDateInput"],
   "components/defaults-providers": ["VDefaultsProvider"],
   "components/dialogs": ["VDialog", "VOverlay"],
   "components/dividers": ["VDivider"],
