@@ -23,6 +23,7 @@ const aliases: IconAliases = {
   checkboxOn: 'mdi-checkbox-marked',
   checkboxOff: 'mdi-checkbox-blank-outline',
   checkboxIndeterminate: 'mdi-minus-box',
+  clock: 'mdi-clock',
   delimiter: 'mdi-circle', // for carousel
   sortAsc: 'mdi-arrow-up',
   sortDesc: 'mdi-arrow-down',
