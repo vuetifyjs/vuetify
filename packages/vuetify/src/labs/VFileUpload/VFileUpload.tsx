@@ -6,15 +6,17 @@ import { VBtn } from '@/components/VBtn/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
 import { makeVDividerProps, VDivider } from '@/components/VDivider/VDivider'
 import { VIcon } from '@/components/VIcon/VIcon'
+import { VOverlay } from '@/components/VOverlay/VOverlay'
 import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 
 // Composables
+import { makeDelayProps } from '@/composables/delay'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, onMounted, onUnmounted, ref, shallowRef } from 'vue'
 import { genericComponent, only, propsFactory, useRender } from '@/util'
 
 export const makeVFileUploadProps = propsFactory({
@@ -35,7 +37,9 @@ export const makeVFileUploadProps = propsFactory({
     type: IconValue,
     default: '$upload',
   },
+  multiple: Boolean,
 
+  ...makeDelayProps(),
   ...makeDensityProps(),
   ...only(makeVDividerProps({
     length: 150,
@@ -52,11 +56,40 @@ export const VFileUpload = genericComponent()({
     const { t } = useLocale()
     const { densityClasses } = useDensity(props)
 
+    const dragOver = shallowRef(false)
+    const vSheetRef = ref<InstanceType<typeof VSheet> | null>(null)
+
     const title = computed(() => {
       return props.title.startsWith('$vuetify')
         ? t(props.title)
         : props.title
     })
+
+    onMounted(() => {
+      vSheetRef.value?.$el.addEventListener('dragover', onDragOver)
+      vSheetRef.value?.$el.addEventListener('drop', onDrop)
+    })
+
+    onUnmounted(() => {
+      vSheetRef.value?.$el.removeEventListener('dragover', onDragOver)
+      vSheetRef.value?.$el.removeEventListener('drop', onDrop)
+    })
+
+    function onDragOver (e: DragEvent) {
+      e.preventDefault()
+      dragOver.value = true
+    }
+
+    function onDragLeave (e: DragEvent) {
+      e.preventDefault()
+      dragOver.value = false
+    }
+
+    function onDrop (e: DragEvent) {
+      e.preventDefault()
+      dragOver.value = false
+    }
+
     useRender(() => {
       const hasTitle = !!(slots.title || title.value)
       const hasIcon = !!(slots.icon || props.icon)
@@ -65,11 +98,18 @@ export const VFileUpload = genericComponent()({
 
       return (
         <VSheet
+          ref={ vSheetRef }
           { ...cardProps }
           class={[
             'v-file-upload',
+            {
+              'v-file-upload--dragging': dragOver.value,
+            },
             densityClasses.value,
           ]}
+          onDragleave={ onDragLeave }
+          onDragover={ onDragOver }
+          onDrop={ onDrop }
         >
           { hasIcon && (
             <div key="icon" class="v-file-upload-icon">
@@ -122,6 +162,11 @@ export const VFileUpload = genericComponent()({
               )}
             </>
           )}
+
+          <VOverlay
+            model-value={ dragOver.value }
+            contained
+          />
         </VSheet>
       )
     })

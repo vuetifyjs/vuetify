@@ -8,6 +8,7 @@
     flex-direction: column
     justify-content: center
     align-items: center
+    position: relative
 
     &.v-sheet
       display: flex
@@ -19,6 +20,13 @@
       padding: 32px 0
       flex-direction: row
       gap: 1rem
+
+    .v-overlay__scrim
+      pointer-events: none
+
+    &--dragging
+      > *
+        pointer-events: none
 
   .v-file-upload-title
     font-size: $file-upload-title-font-size
