@@ -136,7 +136,7 @@ export const VDataTableRow = genericComponent<new <T>(
             >
               {{
                 default: () => {
-                  if (slots[slotName] && !mobile.value) return slots[slotName](slotProps)
+                  if (slots[slotName] && !mobile.value) return slots[slotName]?.(slotProps)
 
                   if (column.key === 'data-table-select') {
                     return slots['item.data-table-select']?.(slotProps) ?? (
