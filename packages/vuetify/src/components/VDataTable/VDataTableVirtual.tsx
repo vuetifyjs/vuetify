@@ -15,7 +15,6 @@ import { useOptions } from './composables/options'
 import { provideSelection } from './composables/select'
 import { createSort, provideSort, useSortedItems } from './composables/sort'
 import { provideDefaults } from '@/composables/defaults'
-import { useDisplay } from '@/composables/display'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 
@@ -125,8 +124,6 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     })
     const { isExpanded, toggleExpand } = provideExpanded(props)
 
-    const { displayClasses, mobile } = useDisplay(props)
-
     const {
       containerRef,
       markerRef,
@@ -169,7 +166,6 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       toggleExpand,
       isGroupOpen,
       toggleGroup,
-      mobile: mobile.value,
       items: allItems.value.map(item => item.raw),
       internalItems: allItems.value,
       groupedItems: flatItems.value,
@@ -189,7 +185,6 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
             {
               'v-data-table--loading': props.loading,
             },
-            displayClasses.value,
             props.class,
           ]}
           style={ props.style }

@@ -16,7 +16,6 @@ import { createPagination, makeDataTablePaginateProps, providePagination } from 
 import { provideSelection } from './composables/select'
 import { createSort, provideSort } from './composables/sort'
 import { provideDefaults } from '@/composables/defaults'
-import { useDisplay } from '@/composables/display'
 
 // Utilities
 import { computed, provide, toRef } from 'vue'
@@ -97,8 +96,6 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     const itemsWithoutGroups = computed(() => extractRows(items.value))
 
-    const { displayClasses, mobile } = useDisplay(props)
-
     useOptions({
       page,
       itemsPerPage,
@@ -138,7 +135,6 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
       toggleExpand,
       isGroupOpen,
       toggleGroup,
-      mobile: mobile.value,
       items: itemsWithoutGroups.value.map(item => item.raw),
       internalItems: itemsWithoutGroups.value,
       groupedItems: flatItems.value,
@@ -159,7 +155,6 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
             {
               'v-data-table--loading': props.loading,
             },
-            displayClasses.value,
             props.class,
           ]}
           style={ props.style }

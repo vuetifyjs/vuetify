@@ -18,7 +18,6 @@ import { createPagination, makeDataTablePaginateProps, providePagination, usePag
 import { makeDataTableSelectProps, provideSelection } from './composables/select'
 import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from './composables/sort'
 import { provideDefaults } from '@/composables/defaults'
-import { useDisplay } from '@/composables/display'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Utilities
@@ -165,8 +164,6 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
     const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 
-    const { displayClasses, mobile } = useDisplay(props)
-
     const {
       isSelected,
       select,
@@ -212,7 +209,6 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       toggleExpand,
       isGroupOpen,
       toggleGroup,
-      mobile: mobile.value,
       items: paginatedItemsWithoutGroups.value.map(item => item.raw),
       internalItems: paginatedItemsWithoutGroups.value,
       groupedItems: paginatedItems.value,
@@ -234,7 +230,6 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
               'v-data-table--show-select': props.showSelect,
               'v-data-table--loading': props.loading,
             },
-            displayClasses.value,
             props.class,
           ]}
           style={ props.style }
