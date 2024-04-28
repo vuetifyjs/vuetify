@@ -105,6 +105,12 @@ With the new `v-slot` syntax, nested activators such as those seen with a `v-men
 
 ### Misc
 
+#### Cascading menus
+
+Using `v-menu` inside a `v-menu` you can create a cascading menu that allows for more complex menu structures.
+
+<ExamplesExample file="v-menu/misc-cascading" />
+
 #### Transitions
 
 Vuetify comes with [several standard transitions](/styles/transitions#api) that you can use. You can also create your own and pass it as the transition argument. For an example of how the stock transitions are constructed, visit [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts).
@@ -117,8 +123,33 @@ A menu can be configured to be static when opened, allowing it to function as a 
 
 <ExamplesExample file="v-menu/misc-popover" />
 
-#### Use In components
-
+### Use in components
 Menus can be placed within almost any component.
 
-<ExamplesExample file="v-menu/misc-use-in-components" />
+#### In app bar
+Menus can be placed within `v-app-bar`
+
+<ExamplesExample file="v-menu/misc-use-in-app-bar" />
+
+#### In button toggles
+Menus can be used with `v-btn-toggle`
+
+<ExamplesExample file="v-menu/misc-use-in-btn-toggle" />
+
+#### In Cards
+Menus can be used within `v-card`
+
+<ExamplesExample file="v-menu/misc-use-in-card" />
+
+#### In text fields
+Menus can be placed within `v-text-field`
+
+<ExamplesExample file="v-menu/misc-use-in-text-field" />
+
+### Examples
+The following are a collection of examples that demonstrate more advanced and real world use of the `v-menu` component.
+
+#### File context menu
+Here is a clone losely based on the windows 11 context menu.
+
+<ExamplesExample file="v-menu/misc-file-context" />
