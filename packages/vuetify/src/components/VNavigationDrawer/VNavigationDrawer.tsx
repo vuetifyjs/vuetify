@@ -177,12 +177,13 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
 
       return isDragging.value ? size * dragProgress.value : size
     })
+    const elementSize = computed(() => ['top', 'bottom'].includes(props.location) ? 0 : width.value)
     const { layoutItemStyles, layoutItemScrimStyles, layoutIsReady } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
       position: location,
       layoutSize,
-      elementSize: width,
+      elementSize,
       active: computed(() => isActive.value || isDragging.value),
       disableTransitions: computed(() => isDragging.value),
       absolute: computed(() =>
@@ -246,6 +247,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               ssrBootStyles.value,
               stickyStyles.value,
               props.style,
+              ['top', 'bottom'].includes(location.value) ? { height: 'auto' } : {},
             ]}
             { ...scopeId }
             { ...attrs }
