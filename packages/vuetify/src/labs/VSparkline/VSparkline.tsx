@@ -1,5 +1,6 @@
 // Components
 import { makeVBarlineProps, VBarline } from './VBarline'
+import { makeVMultiTrendProps, VMultiTrend } from './VMultiTrend'
 import { makeVTrendlineProps, VTrendline } from './VTrendline'
 
 // Composables
@@ -16,11 +17,12 @@ import type { PropType } from 'vue'
 
 export const makeVSparklineProps = propsFactory({
   type: {
-    type: String as PropType<'trend' | 'bar'>,
+    type: String as PropType<'trend' | 'bar' | 'multi'>,
     default: 'trend',
   },
 
   ...makeVBarlineProps(),
+  ...makeVMultiTrendProps(),
   ...makeVTrendlineProps(),
 }, 'VSparkline')
 
@@ -35,7 +37,11 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
   props: makeVSparklineProps(),
 
   setup (props, { slots }) {
-    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
+    const { textColorClasses, textColorStyles } = useTextColor(
+      Array.isArray(props.color)
+        ? toRef(props, 'color[0]')
+        : toRef(props, 'color')
+    )
     const hasLabels = computed(() => {
       return Boolean(
         props.showLabels ||
@@ -52,8 +58,12 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
     })
 
     useRender(() => {
-      const Tag = props.type === 'trend' ? VTrendline : VBarline
-      const lineProps = props.type === 'trend' ? VTrendline.filterProps(props) : VBarline.filterProps(props)
+      const Tag = props.type === 'trend' ? VTrendline : props.type === 'bar' ? VBarline : VMultiTrend
+      const lineProps = props.type === 'trend'
+        ? VTrendline.filterProps(props)
+        : props.type === 'bar'
+          ? VBarline.filterProps(props)
+          : VMultiTrend.filterProps(props)
 
       return (
         <Tag
