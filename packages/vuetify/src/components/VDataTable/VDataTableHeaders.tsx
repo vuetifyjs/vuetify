@@ -226,6 +226,10 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         return columns.value.filter(column => column?.sortable)
       })
 
+      const appendIcon = computed(() => {
+        return allSelected.value ? '$checkboxOn' : someSelected.value ? '$checkboxIndeterminate' : '$checkboxOff'
+      })
+
       return (
         <VDataTableColumn
           tag="th"
@@ -246,6 +250,8 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               multiple={ props.multiSort }
               variant="underlined"
               onClick:clear={ () => sortBy.value = [] }
+              appendIcon={ appendIcon.value }
+              onClick:append={ () => selectAll(!allSelected.value) }
             >
               {{
                 ...slots,
