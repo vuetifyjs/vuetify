@@ -35,7 +35,7 @@
                                         </div>
 
                                         <v-row dense>
-                                            <v-col v-for="n in 3" cols="4">
+                                            <v-col v-for="n in 3" cols="4" :key="`gifs-${n}`">
                                                 <v-sheet color="surface-variant-alt" height="96" rounded></v-sheet>
                                             </v-col>
                                         </v-row>
@@ -44,7 +44,7 @@
                                             <v-btn variant="text" size="x-small">See all ></v-btn>
                                         </div>
                                         <v-row dense>
-                                            <v-col v-for="n in 3" cols="4">
+                                            <v-col v-for="n in 3" cols="4" :key="`stickers-${n}`">
                                                 <v-sheet color="surface-variant-alt" height="96" rounded></v-sheet>
                                             </v-col>
                                         </v-row>
