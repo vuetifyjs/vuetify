@@ -33,6 +33,10 @@ export type VFileUploadSlots = {
   input: {
     inputNode: VNode
   }
+  item: {
+    file: File
+    props: { 'onClick:remove': () => void }
+  }
   title: never
   divider: never
 }
@@ -283,14 +287,34 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
           { model.value.length > 0 && (
             <div class="v-file-upload-items">
-              { model.value.map((file, i) => (
-                <VFileUploadItem
-                  key={ i }
-                  file={ file }
-                  showSize={ props.showSize }
-                  onClick:remove={ () => onClickRemove(i) }
-                />
-              ))}
+              { model.value.map((file, i) => {
+                const slotProps = {
+                  file,
+                  props: {
+                    'onClick:remove': () => onClickRemove(i),
+                  },
+                }
+
+                return (
+                  <VDefaultsProvider
+                    key={ i }
+                    defaults={{
+                      VFileUploadItem: {
+                        file,
+                        showSize: props.showSize,
+                      },
+                    }}
+                  >
+                    { slots.item?.(slotProps) ?? (
+                      <VFileUploadItem
+                        key={ i }
+                        onClick:remove={ () => onClickRemove(i) }
+                        v-slots={ slots }
+                      />
+                    )}
+                  </VDefaultsProvider>
+                )
+              })}
             </div>
           )}
         </>

@@ -1,6 +1,7 @@
 // Components
 import { VAvatar } from '@/components/VAvatar/VAvatar'
 import { VBtn } from '@/components/VBtn/VBtn'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
 import { makeVListItemProps, VListItem } from '@/components/VList/VListItem'
 
 // Utilities
@@ -10,6 +11,12 @@ import { genericComponent, humanReadableFileSize, propsFactory, useRender } from
 // Types
 import type { PropType } from 'vue'
 import type { VListItemSlots } from '@/components/VList/VListItem'
+
+export type VFileUploadItemSlots = {
+  clear: {
+    props: { onClick: () => void }
+  }
+} & VListItemSlots
 
 export const makeVFileUploadItemProps = propsFactory({
   file: {
@@ -30,7 +37,7 @@ export const makeVFileUploadItemProps = propsFactory({
   }),
 }, 'VFileUploadItem')
 
-export const VFileUploadItem = genericComponent<VListItemSlots>()({
+export const VFileUploadItem = genericComponent<VFileUploadItemSlots>()({
   name: 'VFileUploadItem',
 
   props: makeVFileUploadItemProps(),
@@ -61,20 +68,62 @@ export const VFileUploadItem = genericComponent<VListItemSlots>()({
           title={ props.title ?? props.file?.name }
           subtitle={ props.showSize ? humanReadableFileSize(props.file?.size, base.value) : props.file?.type }
           class="v-file-upload-item"
-          prependAvatar={ preview.value }
         >
           {{
             ...slots,
-            prepend: slotProps => slots.prepend?.(slotProps) ?? (
-              <VAvatar rounded icon={ !preview.value ? props.fileIcon : undefined } />
+            prepend: slotProps => (
+              <>
+                { !slots.prepend ? (
+                  <VAvatar
+                    icon={ props.fileIcon }
+                    image={ preview.value }
+                    rounded
+                  />
+                ) : (
+                  <VDefaultsProvider
+                    defaults={{
+                      VAvatar: {
+                        image: preview.value,
+                        icon: !preview.value ? props.fileIcon : undefined,
+                        rounded: true,
+                      },
+                    }}
+                  >
+                    { slots.prepend?.(slotProps) ?? (
+                      <VAvatar />
+                    )}
+                  </VDefaultsProvider>
+                )}
+              </>
             ),
-            append: slotProps => slots.append?.(slotProps) ?? (
-              <VBtn
-                icon="$clear"
-                density="comfortable"
-                variant="text"
-                onClick={ onClickRemove }
-              />
+            append: slotProps => (
+              <>
+                { !slots.clear ? (
+                  <VBtn
+                    icon="$clear"
+                    density="comfortable"
+                    variant="text"
+                    onClick={ onClickRemove }
+                  />
+                ) : (
+                  <VDefaultsProvider
+                    defaults={{
+                      VBtn: {
+                        icon: '$clear',
+                        density: 'comfortable',
+                        variant: 'text',
+                      },
+                    }}
+                  >
+                    { slots.clear?.({
+                      ...slotProps,
+                      props: { onClick: onClickRemove },
+                    }) ?? (<VBtn />)}
+                  </VDefaultsProvider>
+                )}
+
+                { slots.append?.(slotProps) }
+              </>
             ),
           }}
         </VListItem>
