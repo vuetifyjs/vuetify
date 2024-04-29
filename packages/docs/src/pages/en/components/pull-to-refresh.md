@@ -12,9 +12,9 @@ features:
 
 # Pull To Refresh
 
-The PullToRefresh allows users to update content with a simple downward swipe on their screen. Works for Mobile and Desktop. **It allows pulling down as soon as its immediate scrollable parent has scrolled to the top**.
+The PullToRefresh allows users to update content with a simple downward swipe on their screen. Works for Mobile and Desktop.
 
-<page-features />
+<PageFeatures />
 
 ::: warning
 
@@ -41,6 +41,12 @@ export default createVuetify({
 Drag the list downward to activate the pull-to-refresh feature.
 
 <ExamplesExample file="v-pull-to-refresh/usage" />
+
+::: tip
+
+Pull down functionality is available as soon as its immediate scrollable parent has scrolled to the top.
+
+:::
 
 <PromotedEntry />
 
