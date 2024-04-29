@@ -248,6 +248,10 @@
         "subfolder": "components"
       },
       {
+        "title": "pull-to-refresh",
+        "subfolder": "components"
+      },
+      {
         "title": "snackbar-queue",
         "subfolder": "components"
       },
