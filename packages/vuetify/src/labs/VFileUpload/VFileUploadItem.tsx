@@ -1,20 +1,32 @@
 // Components
+import { VAvatar } from '@/components/VAvatar/VAvatar'
 import { VBtn } from '@/components/VBtn/VBtn'
-import { VIcon } from '@/components/VIcon/VIcon'
 import { makeVListItemProps, VListItem } from '@/components/VList/VListItem'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { computed, ref, watchEffect } from 'vue'
+import { genericComponent, humanReadableFileSize, propsFactory, useRender } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import type { VListItemSlots } from '@/components/VList/VListItem'
 
 export const makeVFileUploadItemProps = propsFactory({
+  file: {
+    type: Object as PropType<File>,
+    default: null,
+  },
+  fileIcon: {
+    type: String,
+    // TODO: setup up a proper aliased icon
+    default: 'mdi-file-document',
+  },
+  showSize: Boolean,
+
   ...makeVListItemProps({
     border: true,
     rounded: true,
     lines: 'two' as const,
-    slim: true,
   }),
 }, 'VFileUploadItem')
 
@@ -29,9 +41,16 @@ export const VFileUploadItem = genericComponent<VListItemSlots>()({
   },
 
   setup (props, { emit, slots }) {
+    const preview = ref()
+    const base = computed(() => typeof props.showSize !== 'boolean' ? props.showSize : undefined)
+
     function onClickRemove () {
       emit('click:remove')
     }
+
+    watchEffect(() => {
+      preview.value = props.file?.type.startsWith('image') ? URL.createObjectURL(props.file) : undefined
+    })
 
     useRender(() => {
       const listItemProps = VListItem.filterProps(props)
@@ -39,12 +58,15 @@ export const VFileUploadItem = genericComponent<VListItemSlots>()({
       return (
         <VListItem
           { ...listItemProps }
+          title={ props.title ?? props.file?.name }
+          subtitle={ props.showSize ? humanReadableFileSize(props.file?.size, base.value) : props.file?.type }
           class="v-file-upload-item"
+          prependAvatar={ preview.value }
         >
           {{
             ...slots,
             prepend: slotProps => slots.prepend?.(slotProps) ?? (
-              <VIcon size="32">mdi-file-document</VIcon>
+              <VAvatar rounded icon={ !preview.value ? props.fileIcon : undefined } />
             ),
             append: slotProps => slots.append?.(slotProps) ?? (
               <VBtn

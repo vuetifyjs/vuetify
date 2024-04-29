@@ -18,15 +18,21 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onMounted, onUnmounted, ref, shallowRef } from 'vue'
-import { genericComponent, humanReadableFileSize, only, propsFactory, useRender, wrapInArray } from '@/util'
+import { onMounted, onUnmounted, ref, shallowRef } from 'vue'
+import { filterInputAttrs, genericComponent, only, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, VNode } from 'vue'
 
 export type VFileUploadSlots = {
+  browse: {
+    props: { onClick: (e: MouseEvent) => void }
+  }
   default: never
   icon: never
+  input: {
+    inputNode: VNode
+  }
   title: never
   divider: never
 }
@@ -56,8 +62,11 @@ export const makeVFileUploadProps = propsFactory({
       return wrapInArray(val).every(v => v != null && typeof v === 'object')
     },
   },
+  disabled: Boolean,
+  hideBrowse: Boolean,
   multiple: Boolean,
   showSize: Boolean,
+  name: String,
 
   ...makeDelayProps(),
   ...makeDensityProps(),
@@ -70,13 +79,15 @@ export const makeVFileUploadProps = propsFactory({
 export const VFileUpload = genericComponent<VFileUploadSlots>()({
   name: 'VFileUpload',
 
+  inheritAttrs: false,
+
   props: makeVFileUploadProps(),
 
   emits: {
     'update:modelValue': (files: File[]) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const { t } = useLocale()
     const { densityClasses } = useDensity(props)
     const model = useProxiedModel(
@@ -89,8 +100,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
     const dragOver = shallowRef(false)
     const vSheetRef = ref<InstanceType<typeof VSheet> | null>(null)
-
-    const base = computed(() => typeof props.showSize !== 'boolean' ? props.showSize : undefined)
+    const inputRef = ref<HTMLInputElement | null>(null)
 
     onMounted(() => {
       vSheetRef.value?.$el.addEventListener('dragover', onDragOver)
@@ -128,14 +138,19 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
         return
       }
 
+      const array = model.value.slice()
+
       for (const file of files) {
-        if (!model.value.some(f => f.name === file.name)) {
-          model.value = [
-            ...model.value,
-            file,
-          ]
+        if (!array.some(f => f.name === file.name)) {
+          array.push(file)
         }
       }
+
+      model.value = array
+    }
+
+    function onClick () {
+      inputRef.value?.click()
     }
 
     function onClickRemove (index: number) {
@@ -145,8 +160,27 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
     useRender(() => {
       const hasTitle = !!(slots.title || props.title)
       const hasIcon = !!(slots.icon || props.icon)
+      const hasBrowse = !!(!props.hideBrowse && (slots.browse || props.density === 'default'))
       const cardProps = VSheet.filterProps(props)
       const dividerProps = VDivider.filterProps(props)
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
+
+      const inputNode = (
+        <input
+          ref={ inputRef }
+          type="file"
+          disabled={ props.disabled }
+          multiple={ props.multiple }
+          name={ props.name }
+          onChange={ e => {
+            if (!e.target) return
+
+            const target = e.target as HTMLInputElement
+            model.value = [...target.files ?? []]
+          }}
+          { ...inputAttrs }
+        />
+      )
 
       return (
         <>
@@ -156,6 +190,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
             class={[
               'v-file-upload',
               {
+                'v-file-upload--clickable': !hasBrowse,
                 'v-file-upload--dragging': dragOver.value,
               },
               densityClasses.value,
@@ -163,6 +198,8 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
             onDragleave={ onDragLeave }
             onDragover={ onDragOver }
             onDrop={ onDrop }
+            onClick={ !hasBrowse ? onClick : undefined }
+            { ...rootAttrs }
           >
             { hasIcon && (
               <div key="icon" class="v-file-upload-icon">
@@ -202,11 +239,32 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                   )}
                 </div>
 
-                <VBtn
-                  text={ t(props.browseText) }
-                  variant="tonal"
-                  size="large"
-                />
+                { hasBrowse && (
+                  <>
+                    { !slots.browse ? (
+                      <VBtn
+                        text={ t(props.browseText) }
+                        variant="tonal"
+                        size="large"
+                        onClick={ onClick }
+                      />
+                    ) : (
+                      <VDefaultsProvider
+                        defaults={{
+                          VBtn: {
+                            text: t(props.browseText),
+                            variant: 'tonal',
+                            size: 'large',
+                          },
+                        }}
+                      >
+                        { slots.browse({ props: { onClick } }) }
+                      </VDefaultsProvider>
+                    )}
+                  </>
+                )}
+
+                { slots.input?.({ inputNode }) ?? inputNode }
 
                 { props.subtitle && (
                   <div class="v-file-upload-subtitle">
@@ -220,6 +278,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
               model-value={ dragOver.value }
               contained
             />
+
           </VSheet>
 
           { model.value.length > 0 && (
@@ -227,8 +286,8 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
               { model.value.map((file, i) => (
                 <VFileUploadItem
                   key={ i }
-                  title={ file.name }
-                  subtitle={ props.showSize ? humanReadableFileSize(file.size, base.value) : undefined }
+                  file={ file }
+                  showSize={ props.showSize }
                   onClick:remove={ () => onClickRemove(i) }
                 />
               ))}
