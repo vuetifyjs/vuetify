@@ -28,6 +28,17 @@
       > *
         pointer-events: none
 
+    &--clickable
+      cursor: pointer
+
+    input[type="file"]
+      left: 0
+      opacity: 0
+      position: absolute
+      cursor: pointer
+      top: 0
+      z-index: -1
+
   .v-file-upload-title
     font-size: $file-upload-title-font-size
     font-weight: 600
