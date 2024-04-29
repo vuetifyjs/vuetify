@@ -55,7 +55,7 @@
               align-items: center
 
             > th.v-data-table__th--fixed
-                position: sticky
+              position: sticky
 
             > th.v-data-table__th--sortable:hover
                 cursor: pointer
@@ -126,3 +126,36 @@
   .v-data-table-rows-loading,
   .v-data-table-rows-no-data
     text-align: center
+
+  .v-data-table__tr--mobile
+    > .v-data-table__td--expanded-row
+      grid-template-columns: 0
+      justify-content: center
+
+    > .v-data-table__td--select-row
+      grid-template-columns: 0
+      justify-content: end
+
+    > td
+      align-items: center
+      column-gap: 4px
+      display: grid
+      grid-template-columns: repeat(2, 1fr)
+      min-height: var(--v-table-row-height)
+
+      &:not(:last-child)
+        border-bottom: 0 !important
+
+  .v-data-table__td-title
+    font-weight: bold
+    text-align: left
+
+  .v-data-table__td-value
+    text-align: right
+
+  .v-data-table__td
+    &-sort-icon
+      color: $data-table-header-mobile-chip-icon-color
+
+      &-active
+        color: $data-table-header-mobile-chip-icon-color-active

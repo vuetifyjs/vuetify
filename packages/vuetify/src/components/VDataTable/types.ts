@@ -28,6 +28,8 @@ export type DataTableHeader<T = Record<string, any>> = {
   sortRaw?: DataTableCompareFunction
   filter?: FilterFunction
 
+  mobile?: boolean
+
   children?: DataTableHeader<T>[]
 }
 
@@ -37,6 +39,7 @@ export type InternalDataTableHeader = Omit<DataTableHeader, 'key' | 'value' | 'c
   sortable: boolean
   fixedOffset?: number
   lastFixed?: boolean
+  nowrap?: boolean
   colspan?: number
   rowspan?: number
   children?: InternalDataTableHeader[]

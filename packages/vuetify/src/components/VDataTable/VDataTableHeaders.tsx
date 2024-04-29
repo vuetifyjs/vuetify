@@ -1,15 +1,19 @@
 // Components
 import { VDataTableColumn } from './VDataTableColumn'
 import { VCheckboxBtn } from '@/components/VCheckbox'
+import { VChip } from '@/components/VChip'
 import { VIcon } from '@/components/VIcon'
+import { VSelect } from '@/components/VSelect'
 
 // Composables
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 import { useBackgroundColor } from '@/composables/color'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, mergeProps } from 'vue'
@@ -20,6 +24,7 @@ import type { CSSProperties, PropType, UnwrapRef } from 'vue'
 import type { provideSelection } from './composables/select'
 import type { provideSort } from './composables/sort'
 import type { InternalDataTableHeader } from './types'
+import type { ItemProps } from '@/composables/list-items'
 import type { LoaderSlotProps } from '@/composables/loader'
 
 export type HeadersSlotProps = {
@@ -34,7 +39,7 @@ export type HeadersSlotProps = {
   isSorted: ReturnType<typeof provideSort>['isSorted']
 }
 
-type VDataTableHeaderCellColumnSlotProps = {
+export type VDataTableHeaderCellColumnSlotProps = {
   column: InternalDataTableHeader
   selectAll: ReturnType<typeof provideSelection>['selectAll']
   isSorted: ReturnType<typeof provideSort>['isSorted']
@@ -68,6 +73,7 @@ export const makeVDataTableHeadersProps = propsFactory({
     type: Object as PropType<Record<string, any>>,
   },
 
+  ...makeDisplayProps(),
   ...makeLoaderProps(),
 }, 'VDataTableHeaders')
 
@@ -77,6 +83,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
   props: makeVDataTableHeadersProps(),
 
   setup (props, { slots }) {
+    const { t } = useLocale()
     const { toggleSort, sortBy, isSorted } = useSort()
     const { someSelected, allSelected, selectAll, showSelectAll } = useSelection()
     const { columns, headers } = useHeaders()
@@ -102,6 +109,8 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
+    const { displayClasses, mobile } = useDisplay(props)
+
     const slotProps = computed(() => ({
       headers: headers.value,
       columns: columns.value,
@@ -114,6 +123,15 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       getSortIcon,
     } satisfies HeadersSlotProps))
 
+    const headerCellClasses = computed(() => ([
+      'v-data-table__th',
+      {
+        'v-data-table__th--sticky': props.sticky,
+      },
+      displayClasses.value,
+      loaderClasses.value,
+    ]))
+
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
       const noPadding = column.key === 'data-table-select' || column.key === 'data-table-expand'
       const headerProps = mergeProps(props.headerProps ?? {}, column.headerProps ?? {})
@@ -123,14 +141,12 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           tag="th"
           align={ column.align }
           class={[
-            'v-data-table__th',
             {
               'v-data-table__th--sortable': column.sortable,
               'v-data-table__th--sorted': isSorted(column),
               'v-data-table__th--fixed': column.fixed,
-              'v-data-table__th--sticky': props.sticky,
             },
-            loaderClasses.value,
+            ...headerCellClasses.value,
           ]}
           style={{
             width: convertToUnit(column.width),
@@ -203,8 +219,74 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       )
     }
 
-    useRender(() => {
+    const VDataTableMobileHeaderCell = () => {
+      const headerProps = mergeProps(props.headerProps ?? {} ?? {})
+
+      const displayItems = computed<ItemProps['items']>(() => {
+        return columns.value.filter(column => column?.sortable)
+      })
+
+      const appendIcon = computed(() => {
+        return allSelected.value ? '$checkboxOn' : someSelected.value ? '$checkboxIndeterminate' : '$checkboxOff'
+      })
+
       return (
+        <VDataTableColumn
+          tag="th"
+          class={[
+            ...headerCellClasses.value,
+          ]}
+          colspan={ headers.value.length + 1 }
+          { ...headerProps }
+        >
+          <div class="v-data-table-header__content">
+            <VSelect
+              chips
+              class="v-data-table__td-sort-select"
+              clearable
+              density="default"
+              items={ displayItems.value }
+              label={ t('$vuetify.dataTable.sortBy') }
+              multiple={ props.multiSort }
+              variant="underlined"
+              onClick:clear={ () => sortBy.value = [] }
+              appendIcon={ appendIcon.value }
+              onClick:append={ () => selectAll(!allSelected.value) }
+            >
+              {{
+                ...slots,
+                chip: props => (
+                  <VChip
+                    onClick={ props.item.raw?.sortable ? () => toggleSort(props.item.raw) : undefined }
+                    onMousedown={ (e: MouseEvent) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                    }}
+                  >
+                    { props.item.title }
+                    <VIcon
+                      class={[
+                        'v-data-table__td-sort-icon',
+                        isSorted(props.item.raw) && 'v-data-table__td-sort-icon-active',
+                      ]}
+                      icon={ getSortIcon(props.item.raw) }
+                      size="small"
+                    />
+                  </VChip>
+                ),
+              }}
+            </VSelect>
+          </div>
+        </VDataTableColumn>
+      )
+    }
+
+    useRender(() => {
+      return mobile.value ? (
+        <tr>
+          <VDataTableMobileHeaderCell />
+        </tr>
+      ) : (
         <>
           { slots.headers
             ? slots.headers(slotProps.value)
