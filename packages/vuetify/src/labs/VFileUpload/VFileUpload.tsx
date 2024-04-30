@@ -69,6 +69,10 @@ export const makeVFileUploadProps = propsFactory({
   disabled: Boolean,
   hideBrowse: Boolean,
   multiple: Boolean,
+  scrim: {
+    type: [Boolean, String],
+    default: true,
+  },
   showSize: Boolean,
   name: String,
 
@@ -283,6 +287,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
             <VOverlay
               model-value={ dragOver.value }
               contained
+              scrim={ props.scrim }
             />
 
             { slots.input?.({ inputNode }) ?? inputNode }
