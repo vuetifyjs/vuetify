@@ -10,16 +10,18 @@ import { VProgressLinear } from '@/components/VProgressLinear'
 // Composables
 import { useLayout } from '@/composables'
 import { forwardRefs } from '@/composables/forwardRefs'
+import { VuetifyLayoutKey } from '@/composables/layout'
 import { makeLocationProps } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { useScopeId } from '@/composables/scopeId'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useToggleScope } from '@/composables/toggleScope'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { computed, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch } from 'vue'
+import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
 import { genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
 
 type VSnackbarSlots = {
@@ -96,7 +98,6 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
   setup (props, { slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
-    const { mainStyles } = useLayout()
     const { positionClasses } = usePosition(props)
     const { scopeId } = useScopeId()
     const { themeClasses } = provideTheme(props)
@@ -108,6 +109,16 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     const timerRef = ref<VProgressLinear>()
     const isHovering = shallowRef(false)
     const startY = shallowRef(0)
+    const mainStyles = ref()
+    const hasLayout = inject(VuetifyLayoutKey, undefined)
+
+    useToggleScope(() => !!hasLayout, () => {
+      const layout = useLayout()
+
+      watchEffect(() => {
+        mainStyles.value = layout.mainStyles.value
+      })
+    })
 
     watch(isActive, startTimeout)
     watch(() => props.timeout, startTimeout)
