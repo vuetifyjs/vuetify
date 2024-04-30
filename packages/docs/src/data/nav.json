@@ -236,6 +236,10 @@
         "subfolder": "components"
       },
       {
+        "title": "file-upload",
+        "subfolder": "components"
+      },
+      {
         "title": "floating-action-buttons",
         "subfolder": "components"
       },
