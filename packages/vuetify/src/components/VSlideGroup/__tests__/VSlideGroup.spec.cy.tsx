@@ -52,12 +52,9 @@ describe('VSlideGroup', () => {
         </CenteredGrid>
       </Application>
     ))
-
-    cy.get('.v-slide-group__prev').should('exist').should('have.css', 'pointer-events', 'none')
-
-    cy.get('.v-slide-group__next').should('exist').click().wait(500).should('have.css', 'pointer-events', 'none')
-
-    cy.get('.v-slide-group__prev').should('exist').should('not.have.css', 'pointer-events', 'none').click()
+      .get('.v-slide-group__prev').should('exist').should('have.css', 'pointer-events', 'none')
+      .get('.v-slide-group__next').should('exist').click().wait(500).should('have.css', 'pointer-events', 'none')
+      .get('.v-slide-group__prev').should('exist').should('not.have.css', 'pointer-events', 'none').click()
   })
 
   it('should accept scoped prev/next slots', () => {

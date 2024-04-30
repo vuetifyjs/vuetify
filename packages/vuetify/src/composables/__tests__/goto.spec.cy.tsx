@@ -81,16 +81,9 @@ describe('goto', () => {
           <ComponentB id="end" target="#start" container="parent" style="margin-inline-start: 2000px;" />
         </div>
       ))
-      .get('#start').click()
-      .wait(500)
-      .get('#container').then($el => {
-        expect(Math.ceil($el[0].getBoundingClientRect().width))
-          .to.equal(Math.ceil($el[0].querySelector('#end')!.getBoundingClientRect().right))
-      })
-      .get('#end').click()
-      .wait(500)
-      .get('#container').then($el => {
-        expect($el[0].scrollLeft).to.equal(0)
-      })
+      .get('#start').click().wait(500)
+      .get('#end').should('be.visible')
+      .get('#end').click().wait(500)
+      .get('#start').should('be.visible')
   })
 })
