@@ -78,7 +78,7 @@ function mountComponent (component: ConcreteComponent, props?: Record<string, an
       ? findComponentParent(vnode, binding.instance!.$)?.provides
       : vnode.ctx?.provides) ?? binding.instance!.$.provides
 
-    const node = h(component, mergeProps(_props, value), { default: () => children })
+    const node = h(component, mergeProps(_props, value), children)
     node.appContext = Object.assign(
       Object.create(null),
       (binding.instance as ComponentPublicInstance).$.appContext,
