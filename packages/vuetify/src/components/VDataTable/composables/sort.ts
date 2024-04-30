@@ -124,13 +124,6 @@ export function useSortedItems <T extends InternalItem> (
     vm.emit('update:sortedItems', val)
   })
 
-  watch(sortedItems, val => {
-    vm.emit('update:sortedItems', val)
-  })
-
-  watch(sortedItems, val => {
-    vm.emit('update:sortedItems', val)
-  })
 
   return { sortedItems }
 }
