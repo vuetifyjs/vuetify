@@ -24,6 +24,10 @@
     .v-overlay__scrim
       pointer-events: none
 
+    &--disabled
+      pointer-events: none
+      opacity: var(--v-disabled-opacity)
+
     &--dragging
       > *
         pointer-events: none

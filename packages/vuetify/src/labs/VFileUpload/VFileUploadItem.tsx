@@ -19,6 +19,7 @@ export type VFileUploadItemSlots = {
 } & VListItemSlots
 
 export const makeVFileUploadItemProps = propsFactory({
+  clearable: Boolean,
   file: {
     type: Object as PropType<File>,
     default: null,
@@ -98,28 +99,32 @@ export const VFileUploadItem = genericComponent<VFileUploadItemSlots>()({
             ),
             append: slotProps => (
               <>
-                { !slots.clear ? (
-                  <VBtn
-                    icon="$clear"
-                    density="comfortable"
-                    variant="text"
-                    onClick={ onClickRemove }
-                  />
-                ) : (
-                  <VDefaultsProvider
-                    defaults={{
-                      VBtn: {
-                        icon: '$clear',
-                        density: 'comfortable',
-                        variant: 'text',
-                      },
-                    }}
-                  >
-                    { slots.clear?.({
-                      ...slotProps,
-                      props: { onClick: onClickRemove },
-                    }) ?? (<VBtn />)}
-                  </VDefaultsProvider>
+                { props.clearable && (
+                  <>
+                    { !slots.clear ? (
+                      <VBtn
+                        icon="$clear"
+                        density="comfortable"
+                        variant="text"
+                        onClick={ onClickRemove }
+                      />
+                    ) : (
+                      <VDefaultsProvider
+                        defaults={{
+                          VBtn: {
+                            icon: '$clear',
+                            density: 'comfortable',
+                            variant: 'text',
+                          },
+                        }}
+                      >
+                        { slots.clear?.({
+                          ...slotProps,
+                          props: { onClick: onClickRemove },
+                        }) ?? (<VBtn />)}
+                      </VDefaultsProvider>
+                    )}
+                  </>
                 )}
 
                 { slots.append?.(slotProps) }

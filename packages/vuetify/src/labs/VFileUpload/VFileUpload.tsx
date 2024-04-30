@@ -66,6 +66,7 @@ export const makeVFileUploadProps = propsFactory({
       return wrapInArray(val).every(v => v != null && typeof v === 'object')
     },
   },
+  clearable: Boolean,
   disabled: Boolean,
   hideBrowse: Boolean,
   multiple: Boolean,
@@ -203,6 +204,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
               'v-file-upload',
               {
                 'v-file-upload--clickable': !hasBrowse,
+                'v-file-upload--disabled': props.disabled,
                 'v-file-upload--dragging': dragOver.value,
               },
               densityClasses.value,
@@ -255,18 +257,20 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                   <>
                     { !slots.browse ? (
                       <VBtn
+                        readonly={ props.disabled }
+                        size="large"
                         text={ t(props.browseText) }
                         variant="tonal"
-                        size="large"
                         onClick={ onClick }
                       />
                     ) : (
                       <VDefaultsProvider
                         defaults={{
                           VBtn: {
+                            readonly: props.disabled,
+                            size: 'large',
                             text: t(props.browseText),
                             variant: 'tonal',
-                            size: 'large',
                           },
                         }}
                       >
@@ -309,6 +313,8 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                     defaults={{
                       VFileUploadItem: {
                         file,
+                        clearable: props.clearable,
+                        disabled: props.disabled,
                         showSize: props.showSize,
                       },
                     }}
