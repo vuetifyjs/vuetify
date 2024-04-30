@@ -4,7 +4,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject, provide, toRef, watch } from 'vue'
-import { getCurrentInstance, getObjectValueByPath, isEmpty, propsFactory } from '@/util'
+import { getCurrentInstance, isEmpty, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
