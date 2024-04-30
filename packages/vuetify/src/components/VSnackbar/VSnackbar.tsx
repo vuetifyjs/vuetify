@@ -221,7 +221,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           scrim={ false }
           scrollStrategy="none"
           _disableGlobalStack
-          onTouchstart={ onTouchstart }
+          onTouchstartPassive={ onTouchstart }
           onTouchend={ onTouchend }
           { ...scopeId }
           v-slots={{ activator: slots.activator }}
