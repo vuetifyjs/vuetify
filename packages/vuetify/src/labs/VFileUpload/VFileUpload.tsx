@@ -268,8 +268,6 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                   </>
                 )}
 
-                { slots.input?.({ inputNode }) ?? inputNode }
-
                 { props.subtitle && (
                   <div class="v-file-upload-subtitle">
                     { props.subtitle }
@@ -283,6 +281,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
               contained
             />
 
+            { slots.input?.({ inputNode }) ?? inputNode }
           </VSheet>
 
           { model.value.length > 0 && (
