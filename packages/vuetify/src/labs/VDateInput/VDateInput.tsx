@@ -1,8 +1,8 @@
 // Components
+import { makeVConfirmEditProps, VConfirmEdit } from '@/components/VConfirmEdit/VConfirmEdit'
 import { makeVDatePickerProps, VDatePicker } from '@/components/VDatePicker/VDatePicker'
 import { VMenu } from '@/components/VMenu/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
-import { makeVConfirmEditProps, VConfirmEdit } from '@/labs/VConfirmEdit/VConfirmEdit'
 
 // Composables
 import { useDate } from '@/composables/date'

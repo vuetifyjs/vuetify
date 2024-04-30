@@ -108,9 +108,11 @@
       "app-bars",
       "bottom-navigation",
       "breadcrumbs",
+      "floating-action-buttons",
       "footers",
       "navigation-drawers",
       "paginations",
+      "speed-dials",
       "system-bars",
       "tabs",
       { "divider": true },
@@ -131,6 +133,7 @@
       "textareas",
       { "divider": true },
       { "subheader": "data-and-display" },
+      "confirm-edit",
       "data-iterators",
       {
         "title": "data-tables",
@@ -147,6 +150,7 @@
           "virtual-tables"
         ]
       },
+      "sparklines",
       "infinite-scroller",
       "tables",
       "virtual-scroller",
@@ -167,6 +171,7 @@
       "alerts",
       "badges",
       "banners",
+      "empty-states",
       "hover",
       "progress-circular",
       "progress-linear",
@@ -228,19 +233,7 @@
         "subfolder": "components"
       },
       {
-        "title": "confirm-edit",
-        "subfolder": "components"
-      },
-      {
         "title": "date-inputs",
-        "subfolder": "components"
-      },
-      {
-        "title": "empty-states",
-        "subfolder": "components"
-      },
-      {
-        "title": "floating-action-buttons",
         "subfolder": "components"
       },
       {
@@ -253,14 +246,6 @@
       },
       {
         "title": "snackbar-queue",
-        "subfolder": "components"
-      },
-      {
-        "title": "sparklines",
-        "subfolder": "components"
-      },
-      {
-        "title": "speed-dials",
         "subfolder": "components"
       },
       {
