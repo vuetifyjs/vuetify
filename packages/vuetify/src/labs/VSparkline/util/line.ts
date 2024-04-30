@@ -13,7 +13,7 @@ export const makeLineProps = propsFactory({
     type: String,
     default: 'ease',
   },
-  color: String,
+  color: [Array<String>, String],
   gradient: {
     type: Array as PropType<string[]>,
     default: () => ([]),
@@ -45,7 +45,7 @@ export const makeLineProps = propsFactory({
     default: 'value',
   },
   modelValue: {
-    type: Array as PropType<SparklineItem[]>,
+    type: Array as PropType<SparklineItem[] | Array<SparklineItem[]>>,
     default: () => ([]),
   },
   min: [String, Number],
