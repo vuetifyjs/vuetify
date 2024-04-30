@@ -89,6 +89,8 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const { columns, headers } = useHeaders()
     const { loaderClasses } = useLoader(props)
 
+    console.log('showSelectAll', showSelectAll)
+
     function getFixedStyles (column: InternalDataTableHeader, y: number): CSSProperties | undefined {
       if (!props.sticky && !column.fixed) return undefined
 
@@ -227,6 +229,12 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       })
 
       const appendIcon = computed(() => {
+        const showSelectColumn = columns.value.find(column => column.key === 'data-table-select')
+
+        if (typeof showSelectColumn === 'undefined') {
+          return
+        }
+
         return allSelected.value ? '$checkboxOn' : someSelected.value ? '$checkboxIndeterminate' : '$checkboxOff'
       })
 
