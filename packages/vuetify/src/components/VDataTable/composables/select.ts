@@ -7,39 +7,9 @@ import { deepEqual, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
-import type { DataTableItemProps } from './items'
-import type { EventProp } from '@/util'
+import type { DataTableSelectStrategy, SelectableItem, SelectionProps } from '../types'
 
-export interface SelectableItem {
-  value: any
-  selectable: boolean
-}
-
-export interface DataTableSelectStrategy {
-  showSelectAll: boolean
-  allSelected: (data: {
-    allItems: SelectableItem[]
-    currentPage: SelectableItem[]
-  }) => SelectableItem[]
-  select: (data: {
-    items: SelectableItem[]
-    value: boolean
-    selected: Set<unknown>
-  }) => Set<unknown>
-  selectAll: (data: {
-    value: boolean
-    allItems: SelectableItem[]
-    currentPage: SelectableItem[]
-    selected: Set<unknown>
-  }) => Set<unknown>
-}
-
-type SelectionProps = Pick<DataTableItemProps, 'itemValue'> & {
-  modelValue: readonly any[]
-  selectStrategy: 'single' | 'page' | 'all'
-  valueComparator: typeof deepEqual
-  'onUpdate:modelValue': EventProp<[any[]]> | undefined
-}
+export type { SelectableItem }
 
 const singleSelectStrategy: DataTableSelectStrategy = {
   showSelectAll: false,

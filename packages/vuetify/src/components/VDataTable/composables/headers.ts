@@ -4,8 +4,7 @@ import { consoleError, propsFactory } from '@/util'
 
 // Types
 import type { DeepReadonly, InjectionKey, PropType, Ref } from 'vue'
-import type { SortItem } from './sort'
-import type { DataTableCompareFunction, DataTableHeader, InternalDataTableHeader } from '../types'
+import type { DataTableCompareFunction, DataTableHeader, InternalDataTableHeader, SortItem } from '../types'
 import type { FilterKeyFunctions } from '@/composables/filter'
 
 export const makeDataTableHeaderProps = propsFactory({

@@ -1,9 +1,9 @@
 // Types
 import type { provideExpanded } from './composables/expand'
-import type { Group, GroupableItem, provideGroupBy } from './composables/group'
-import type { provideSelection, SelectableItem } from './composables/select'
+import type { provideGroupBy } from './composables/group'
+import type { provideSelection } from './composables/select'
 import type { FilterFunction, InternalItem } from '@/composables/filter'
-import type { SelectItemKey } from '@/util'
+import type { deepEqual, EventProp, SelectItemKey } from '@/util'
 
 export type DataTableCompareFunction<T = any> = (a: T, b: T) => number | null
 
@@ -95,3 +95,72 @@ export type CellProps<T> =
 export type HeaderCellProps =
   | Record<string, any>
   | ((data: Pick<ItemKeySlot<any>, 'index' | 'item' | 'internalItem' | 'value'>) => Record<string, any>)
+
+export interface GroupableItem<T = any> {
+  type: 'item'
+  raw: T
+}
+
+export interface Group<T = any> {
+  type: 'group'
+  depth: number
+  id: string
+  key: string
+  value: any
+  items: readonly (T | Group<T>)[]
+}
+
+export interface DataTableItemProps {
+  items: any[]
+  itemValue: SelectItemKey
+  itemSelectable: SelectItemKey
+  returnObject: boolean
+}
+
+export type SortItem = { key: string, order?: boolean | 'asc' | 'desc' }
+
+export type SortProps = {
+  sortBy: readonly SortItem[]
+  'onUpdate:sortBy': ((value: any) => void) | undefined
+  mustSort: boolean
+  multiSort: boolean
+}
+
+export type PaginationProps = {
+  page: number | string
+  'onUpdate:page': EventProp | undefined
+  itemsPerPage: number | string
+  'onUpdate:itemsPerPage': EventProp | undefined
+  itemsLength?: number | string
+}
+
+export interface SelectableItem {
+  value: any
+  selectable: boolean
+}
+
+export interface DataTableSelectStrategy {
+  showSelectAll: boolean
+  allSelected: (data: {
+    allItems: SelectableItem[]
+    currentPage: SelectableItem[]
+  }) => SelectableItem[]
+  select: (data: {
+    items: SelectableItem[]
+    value: boolean
+    selected: Set<unknown>
+  }) => Set<unknown>
+  selectAll: (data: {
+    value: boolean
+    allItems: SelectableItem[]
+    currentPage: SelectableItem[]
+    selected: Set<unknown>
+  }) => Set<unknown>
+}
+
+export type SelectionProps = Pick<DataTableItemProps, 'itemValue'> & {
+  modelValue: readonly any[]
+  selectStrategy: 'single' | 'page' | 'all'
+  valueComparator: typeof deepEqual
+  'onUpdate:modelValue': EventProp<[any[]]> | undefined
+}
