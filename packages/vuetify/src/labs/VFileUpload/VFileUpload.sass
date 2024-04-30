@@ -4,7 +4,7 @@
 
 @include tools.layer('components')
   .v-file-upload
-    padding: 64px 0
+    padding: $file-upload-padding
     flex-direction: column
     justify-content: center
     align-items: center
@@ -44,15 +44,24 @@
     font-weight: 600
 
   .v-file-upload-icon
-    font-size: 3rem
-    margin-bottom: 1rem
+    opacity: var(--v-medium-emphasis-opacity)
+    font-size: $file-upload-icon-font-size
+    margin-bottom: $file-upload-icon-margin-bottom
+
+    .v-file-upload--density-comfortable &
+      font-size: $file-upload-icon-font-size - .5rem
+      margin-bottom: $file-upload-icon-margin-bottom - .5rem
+
+    .v-file-upload--density-compact &
+      font-size: $file-upload-icon-font-size - 1rem
+      margin-bottom: $file-upload-icon-margin-bottom - 1rem
 
   .v-file-upload-divider
-    margin: 32px 0
+    margin: $file-upload-divider-margin
     width: 100%
 
   .v-file-upload-items
-    margin: 16px 0
+    margin: $file-upload-items-margin
 
   .v-file-upload-item
     &:not(:first-child)
