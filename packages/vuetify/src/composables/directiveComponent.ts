@@ -66,7 +66,7 @@ export function useDirectiveComponent (
 function mountComponent (component: ConcreteComponent, props?: Record<string, any> | ((binding: DirectiveBinding) => Record<string, any>)) {
   return function (el: HTMLElement, binding: DirectiveBinding, vnode: VNode) {
     const _props = typeof props === 'function' ? props(binding) : props
-    const text = binding.value?.text ?? binding.value
+    const text = binding.value?.text ?? binding.value ?? _props?.text
     const value = isObject(binding.value) ? binding.value : {}
 
     // Get the children from the props or directive value, or the element's children
@@ -78,7 +78,7 @@ function mountComponent (component: ConcreteComponent, props?: Record<string, an
       ? findComponentParent(vnode, binding.instance!.$)?.provides
       : vnode.ctx?.provides) ?? binding.instance!.$.provides
 
-    const node = h(component, mergeProps(_props, value), children)
+    const node = h(component, mergeProps(_props, value), { default: () => children })
     node.appContext = Object.assign(
       Object.create(null),
       (binding.instance as ComponentPublicInstance).$.appContext,

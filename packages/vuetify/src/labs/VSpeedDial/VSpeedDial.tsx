@@ -86,7 +86,6 @@ export const VSpeedDial = genericComponent<OverlaySlots>()({
                   appear
                   group
                   transition={ props.transition }
-                  mode="out-in"
                 >
                   { slots.default?.(slotProps) }
                 </MaybeTransition>
