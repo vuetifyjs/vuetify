@@ -85,6 +85,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
               'useHttpStore',
               'useOneStore',
               'useUserStore',
+              'useQueueStore',
               'useSettingsStore',
               'useProductsStore',
             ],
