@@ -25,7 +25,7 @@ export const useDirectiveComponent = (
       const { value } = binding
 
       // Get the children from the props or directive value, or the element's children
-      const children = props.text || value.text || el.innerHTML
+      const children = props?.text || value?.text || el.innerHTML
 
       // If vnode.ctx is the same as the instance, then we're bound to a plain element
       // and need to find the nearest parent component instance to inherit provides from
@@ -33,7 +33,7 @@ export const useDirectiveComponent = (
         ? findComponentParent(vnode, binding.instance!.$)?.provides
         : vnode.ctx?.provides) ?? binding.instance!.$.provides
 
-      const node = h(concreteComponent, mergeProps(props, value), children)
+      const node = h(concreteComponent, mergeProps(props, value), { default: () => children })
       node.appContext = Object.assign(
         Object.create(null),
         (binding.instance as ComponentPublicInstance).$.appContext,
