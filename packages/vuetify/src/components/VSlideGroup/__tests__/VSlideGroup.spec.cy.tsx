@@ -38,8 +38,7 @@ describe('VSlideGroup', () => {
     cy.get('.v-card').eq(3).click().should('have.class', 'bg-primary')
   })
 
-  // TODO: fails in headloss mode
-  it.skip('should disable affixes when appropriate', () => {
+  it('should disable affixes when appropriate', () => {
     cy.mount(() => (
       <Application>
         <CenteredGrid width="400px">
@@ -56,7 +55,7 @@ describe('VSlideGroup', () => {
 
     cy.get('.v-slide-group__prev').should('exist').should('have.css', 'pointer-events', 'none')
 
-    cy.get('.v-slide-group__next').should('exist').click().should('have.css', 'pointer-events', 'none')
+    cy.get('.v-slide-group__next').should('exist').click().wait(500).should('have.css', 'pointer-events', 'none')
 
     cy.get('.v-slide-group__prev').should('exist').should('not.have.css', 'pointer-events', 'none').click()
   })

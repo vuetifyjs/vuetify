@@ -63,7 +63,7 @@ describe('goto', () => {
       ))
       .get('#top').click()
       .window().should(win => {
-        expect(win.scrollY).to.equal(1223)
+        expect(Math.ceil(win.scrollY)).to.equal(1223)
       })
       .get('#bottom').click()
       .window().should(win => {
@@ -84,7 +84,8 @@ describe('goto', () => {
       .get('#start').click()
       .wait(500)
       .get('#container').then($el => {
-        expect($el[0].scrollLeft).to.equal(975)
+        expect(Math.ceil($el[0].getBoundingClientRect().width))
+          .to.equal(Math.ceil($el[0].querySelector('#end')!.getBoundingClientRect().right))
       })
       .get('#end').click()
       .wait(500)
