@@ -227,6 +227,10 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       })
 
       const appendIcon = computed(() => {
+        const showSelectColumn = columns.value.find(column => column.key === 'data-table-select')
+
+        if (showSelectColumn == null) return
+
         return allSelected.value ? '$checkboxOn' : someSelected.value ? '$checkboxIndeterminate' : '$checkboxOff'
       })
 
