@@ -7,7 +7,7 @@ import { genericComponent, propsFactory } from '@/util'
 
 type VHoverSlots = {
   default: {
-    isHovering: boolean
+    isHovering: boolean | null
     props: Record<string, unknown>
   }
 }
