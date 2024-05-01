@@ -89,8 +89,6 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const { columns, headers } = useHeaders()
     const { loaderClasses } = useLoader(props)
 
-    console.log('showSelectAll', showSelectAll)
-
     function getFixedStyles (column: InternalDataTableHeader, y: number): CSSProperties | undefined {
       if (!props.sticky && !column.fixed) return undefined
 
