@@ -30,6 +30,10 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
   props: makeVCalendarMonthDayProps(),
 
   setup (props, { emit, slots }) {
+    function onDayClick () {
+      emit('monthDayClick', props.day?.date)
+    }
+
     useRender(() => {
       const hasTitle = !!(props.title || slots.title?.({ title: props.title }))
 
@@ -49,6 +53,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
                   icon
                   size="x-small"
                   variant={ props.day?.isToday ? undefined : 'flat' }
+                  onClick={ onDayClick }
                 >
                   { props.title }
                 </VBtn>

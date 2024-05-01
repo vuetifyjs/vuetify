@@ -27,12 +27,20 @@ export const VCalendarDay = genericComponent()({
 
   props: makeVCalendarDayProps(),
 
-  setup (props) {
+  emits: {
+    dayClick: (value: Date) => true,
+  },
+
+  setup (props, { emit }) {
     const adapter = useDate()
     const intervals = computed(() => [
       ...Array.from({ length: props.intervals }, (v, i) => i)
         .filter((int, index) => (props.intervalDuration * (index + props.intervalStart)) < 1440),
     ])
+
+    function onDayClick () {
+      emit('dayClick', props.day?.date)
+    }
 
     useRender(() => {
       const calendarIntervalProps = VCalendarInterval.filterProps(props)
@@ -51,6 +59,7 @@ export const VCalendarDay = genericComponent()({
                   icon
                   text={ adapter.format(props.day.date, 'dayOfMonth') }
                   variant="text"
+                  onClick={ onDayClick }
                 />
               </div>
             </div>

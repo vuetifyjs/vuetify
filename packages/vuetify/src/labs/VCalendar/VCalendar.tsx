@@ -36,6 +36,9 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
   emits: {
     next: null,
     prev: null,
+    'click:monthDay': (value: Date) => true,
+    'click:weekDay': (value: Date) => true,
+    'click:day': (value: Date) => true,
     'update:modelValue': null,
   },
 
@@ -72,6 +75,18 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
 
     function onClickToday () {
       model.value = [new Date()]
+    }
+
+    function onMonthDayClick (date: Date) {
+      emit('click:monthDay', date)
+    }
+
+    function onWeekDayClick (date: Date) {
+      emit('click:weekDay', date)
+    }
+
+    function onDayClick (date: Date) {
+      emit('click:day', date)
     }
 
     const title = computed(() => {
@@ -156,6 +171,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                           v-slots={{
                             event: slots.event,
                           }}
+                          onMonthDayClick={ onMonthDayClick }
                         ></VCalendarMonthDay>
                       )),
                     ]
@@ -170,6 +186,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                   day={ day }
                   dayIndex={ i }
                   events={ props.events?.filter(e => adapter.isSameDay(e.start, day.date) || adapter.isSameDay(e.end, day.date)) }
+                  onDayClick={ onWeekDayClick }
                 ></VCalendarDay>
               ))
             )}
@@ -185,6 +202,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                     adapter.isSameDay(e.end, genDays([displayValue.value as Date], adapter.date() as Date)[0].date)
                   )
                 }
+                onDayClick={ onDayClick }
               ></VCalendarDay>
             )}
           </div>
