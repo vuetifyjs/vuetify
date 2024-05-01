@@ -45,7 +45,7 @@ export const VVirtualScrollItem = genericComponent<new <Renderless extends boole
 
     useRender(() => props.renderless ? (
       <>
-        { slots.default?.({ itemRef: resizeRef }) }
+        { slots.default?.({ itemRef: el => resizeRef.value = el }) }
       </>
     ) : (
       <div
