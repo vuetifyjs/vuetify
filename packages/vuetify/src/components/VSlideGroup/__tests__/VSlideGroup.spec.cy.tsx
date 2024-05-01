@@ -43,7 +43,7 @@ describe('VSlideGroup', () => {
     cy.mount(() => (
       <Application>
         <CenteredGrid width="400px">
-          <VSlideGroup showArrows="always" className="test">
+          <VSlideGroup showArrows="always">
             { createRange(6).map(i => (
               <VSlideGroupItem key={ i }>
                 <VCard class="ma-4" color="grey" width="50" height="100">{ i }</VCard>
