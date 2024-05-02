@@ -7,7 +7,7 @@ import { watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
 import type { GenericProps } from '@/util'
 
 export const makeVVirtualScrollItemProps = propsFactory({
@@ -22,7 +22,7 @@ export const VVirtualScrollItem = genericComponent<new <Renderless extends boole
   },
   slots: {
     default: Renderless extends true ? {
-      itemRef: Ref<HTMLElement | undefined>
+      itemRef: (ref: Element | ComponentPublicInstance | null) => void
     } : never
   }
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -45,7 +45,7 @@ export const VVirtualScrollItem = genericComponent<new <Renderless extends boole
 
     useRender(() => props.renderless ? (
       <>
-        { slots.default?.({ itemRef: el => resizeRef.value = el }) }
+        { slots.default?.({ itemRef: el => resizeRef.value = el as HTMLElement }) }
       </>
     ) : (
       <div

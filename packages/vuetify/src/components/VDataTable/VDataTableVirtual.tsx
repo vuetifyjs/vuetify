@@ -23,7 +23,7 @@ import { computed, shallowRef, toRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
 import type { VDataTableSlotProps } from './VDataTable'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
@@ -46,7 +46,7 @@ export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeade
   'body.prepend': VDataTableVirtualSlotProps<T>
   'body.append': VDataTableVirtualSlotProps<T>
   item: {
-    itemRef: Ref<HTMLElement | undefined>
+    itemRef: (ref: Element | ComponentPublicInstance | null) => void
   }
 }
 
