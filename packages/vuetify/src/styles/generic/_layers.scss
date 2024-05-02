@@ -1,0 +1,7 @@
+@use '../settings';
+
+@if (settings.$layers) {
+  @layer vuetify {
+    @layer reset, transitions, base, components, overrides, colors, theme, utilities;
+  }
+}

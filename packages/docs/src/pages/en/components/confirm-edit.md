@@ -10,7 +10,7 @@ related:
   - /components/icons/
   - /components/toolbars/
 features:
-  github: /labs/VConfirmEdit/
+  github: /components/VConfirmEdit/
   label: 'C: VConfirmEdit'
   report: true
 ---
@@ -19,29 +19,13 @@ features:
 
 The `v-confirm-edit` component is used to allow the user to verify their changes before they are committed.
 
-![Badge Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-badge/v-badge-entry.png)
-
 <PageFeatures />
 
-::: warning
+::: success
 
-This feature requires [v3.4.0](/getting-started/release-notes/?version=v3.4.0)
+This feature was introduced in [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
 
 :::
-
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VConfirmEdit } from 'vuetify/labs/VConfirmEdit'
-
-export default createVuetify({
-  components: {
-    VConfirmEdit,
-  },
-})
-```
 
 ## Usage
 

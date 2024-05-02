@@ -69,8 +69,9 @@
     "VDataTableServer",
     "VDataTableVirtual"
   ],
+  "components/date-inputs": ["VDateInput", "VDatePicker"],
   "components/date-pickers-month": ["VDatePicker"],
-  "components/date-pickers": ["VDatePicker"],
+  "components/date-pickers": ["VDatePicker", "VDateInput"],
   "components/defaults-providers": ["VDefaultsProvider"],
   "components/dialogs": ["VDialog", "VOverlay"],
   "components/dividers": ["VDivider"],
@@ -160,6 +161,7 @@
   "directives/ripple": ["v-ripple"],
   "directives/scroll": ["v-scroll"],
   "directives/touch": ["v-touch"],
+  "directives/tooltip": ["v-tooltip"],
   "features/dates": ["useDate"],
   "features/display-and-platform": ["useDisplay"],
   "features/scrolling": ["useGoTo"],

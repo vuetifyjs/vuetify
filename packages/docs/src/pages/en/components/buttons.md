@@ -203,6 +203,12 @@ In this example we use a [v-banner](/components/banners/) component to display a
 
 <ExamplesExample file="v-btn/misc-cookie-settings" />
 
+### Readonly buttons
+
+In this example, we change the properties of the `v-btn` based upon a "subscription" state. When the user is subscribed, we want to disable interaction with the button, but not change its appearance; which is what occurs when using the **disabled** property.
+
+<ExamplesExample file="v-btn/misc-readonly" />
+
 ## Global Configuration
 
 Modify the default values and set a default style for all `v-btn` components using the [Global configuration](/features/global-configuration/). This helps keep your application consistent and allows you to change it in the future with minimal effort.
