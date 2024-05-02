@@ -327,3 +327,5 @@ export type ComponentInstance<T> = T extends { new (): ComponentPublicInstance<a
 type ShortEmitsToObject<E> = E extends Record<string, any[]> ? {
   [K in keyof E]: (...args: E[K]) => any;
 } : E;
+
+export type FunctionVNodeRef = (ref: Element | ComponentPublicInstance | null, refs: Record<string, any>) => void
