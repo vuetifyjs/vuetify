@@ -87,7 +87,7 @@ export const makeVNavigationDrawerProps = propsFactory({
   ...makeBorderProps(),
   ...makeComponentProps(),
   ...makeDelayProps(),
-  ...makeDisplayProps(),
+  ...makeDisplayProps({ mobile: null }),
   ...makeElevationProps(),
   ...makeLayoutItemProps(),
   ...makeRoundedProps(),
