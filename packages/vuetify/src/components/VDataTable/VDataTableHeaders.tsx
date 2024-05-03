@@ -245,15 +245,17 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         return allSelected.value ? '$checkboxOn' : someSelected.value ? '$checkboxIndeterminate' : '$checkboxOff'
       })
 
-      // const columnSlotProps: Partial<VDataTableHeaderCellColumnSlotProps> = {
-      //   selectAll,
-      //   isSorted,
-      //   toggleSort,
-      //   sortBy: sortBy.value,
-      //   someSelected: someSelected.value,
-      //   allSelected: allSelected.value,
-      //   getSortIcon,
-      // }
+      const selectColumn = columns.value.find(column => column.key === 'data-table-select') as InternalDataTableHeader
+      const selectColumnSlotProps: VDataTableHeaderCellColumnSlotProps = {
+        column: selectColumn,
+        selectAll,
+        isSorted,
+        toggleSort,
+        sortBy: sortBy.value,
+        someSelected: someSelected.value,
+        allSelected: allSelected.value,
+        getSortIcon,
+      }
 
       return (
         <VDataTableColumn
@@ -267,8 +269,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           {{
             default: () => {
               if (isSelectAll && !hasItems.value) {
-                // TODO: Not sure how to deal with these slot props yet //
-                return slots['header.data-table-select']?.(slotProps.value) ?? (showSelectAll && (
+                return slots['header.data-table-select']?.(selectColumnSlotProps) ?? (showSelectAll && (
                   <VCheckboxBtn
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
@@ -330,46 +331,48 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
 
     useRender(() => {
       return (
-        <thead>
-        {
-          showMobileHeader.value
-            ? slots['mobile.header'] ? slots['mobile.header']!(slotProps.value)
-            : (
-              <tr>
-                <VDataTableMobileHeaderCell />
-              </tr>
-            )
-            : !mobile.value && (
-              <>
-                { slots.headers
-                  ? slots.headers(slotProps.value)
-                  : headers.value.map((row, y) => (
-                  <tr>
-                    { row.map((column, x) => (
-                      <VDataTableHeaderCell column={ column } x={ x } y={ y } />
+        <>
+          <thead>
+          {
+            showMobileHeader.value
+              ? slots['mobile.header'] ? slots['mobile.header']!(slotProps.value)
+              : (
+                <tr>
+                  <VDataTableMobileHeaderCell />
+                </tr>
+              )
+              : !mobile.value && (
+                <>
+                  { slots.headers
+                    ? slots.headers(slotProps.value)
+                    : headers.value.map((row, y) => (
+                    <tr>
+                      { row.map((column, x) => (
+                        <VDataTableHeaderCell column={ column } x={ x } y={ y } />
+                      ))}
+                    </tr>
                     ))}
-                  </tr>
-                  ))}
 
-                { props.loading && (
-                  <tr class="v-data-table-progress">
-                    <th colspan={ columns.value.length }>
-                      <LoaderSlot
-                        name="v-data-table-progress"
-                        absolute
-                        active
-                        color={ typeof props.loading === 'boolean' ? undefined : props.loading }
-                        indeterminate
-                        v-slots={{ default: slots.loader }}
-                      />
-                    </th>
-                  </tr>
-                )}
-              </>
-            )
-          }
-          { slots.thead?.(slotProps.value) }
-        </thead>
+                  { props.loading && (
+                    <tr class="v-data-table-progress">
+                      <th colspan={ columns.value.length }>
+                        <LoaderSlot
+                          name="v-data-table-progress"
+                          absolute
+                          active
+                          color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+                          indeterminate
+                          v-slots={{ default: slots.loader }}
+                        />
+                      </th>
+                    </tr>
+                  )}
+                </>
+              )
+            }
+          </thead>
+
+        </>
       )
     })
   },
