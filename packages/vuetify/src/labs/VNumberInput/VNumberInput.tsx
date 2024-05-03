@@ -160,6 +160,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                   name="decrement-btn"
                   icon="$expand"
                   size="small"
+                  tabindex="-1"
                   onClick={ onClickDown }
                 />
               ) : (
@@ -195,6 +196,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                   icon="$collapse"
                   onClick={ onClickUp }
                   size="small"
+                  tabindex="-1"
                 />
               ) : (
                 <VDefaultsProvider
@@ -232,6 +234,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                 height="100%"
                 icon="$plus"
                 tile
+                tabindex="-1"
                 onClick={ onClickUp }
               />
             </div>
@@ -250,6 +253,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                 height="100%"
                 icon="$minus"
                 tile
+                tabindex="-1"
                 onClick={ onClickDown }
               />
 
@@ -291,8 +295,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             ) : undefined,
             'prepend-inner': hasPrependInner ? (...args) => (
               <>
-                { slots['prepend-inner']?.(...args) }
                 { prependInnerControl }
+                { slots['prepend-inner']?.(...args) }
               </>
             ) : undefined,
           }}
