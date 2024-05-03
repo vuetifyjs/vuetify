@@ -55,6 +55,7 @@ export type VDataTableHeadersSlots = {
   loader: LoaderSlotProps
   'header.data-table-select': VDataTableHeaderCellColumnSlotProps
   'header.data-table-expand': VDataTableHeaderCellColumnSlotProps
+  'mobile.header': HeadersSlotProps
 } & { [key: `header.${string}`]: VDataTableHeaderCellColumnSlotProps }
 
 export const makeVDataTableHeadersProps = propsFactory({
@@ -88,6 +89,8 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const { someSelected, allSelected, selectAll, showSelectAll } = useSelection()
     const { columns, headers } = useHeaders()
     const { loaderClasses } = useLoader(props)
+
+    // console.log('slots', slots)
 
     function getFixedStyles (column: InternalDataTableHeader, y: number): CSSProperties | undefined {
       if (!props.sticky && !column.fixed) return undefined
@@ -131,6 +134,16 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       displayClasses.value,
       loaderClasses.value,
     ]))
+
+    const displayItems = computed<ItemProps['items']>(() => {
+      return columns.value.filter(column => column?.sortable)
+    })
+
+    const showMobileHeader = computed(() => {
+      const isSelectAll = columns.value.find(column => column.key === 'data-table-select')
+
+      return mobile.value && (displayItems.value.length > 0 || isSelectAll)
+    })
 
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
       const noPadding = column.key === 'data-table-select' || column.key === 'data-table-expand'
@@ -222,10 +235,6 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const VDataTableMobileHeaderCell = () => {
       const headerProps = mergeProps(props.headerProps ?? {} ?? {})
 
-      const displayItems = computed<ItemProps['items']>(() => {
-        return columns.value.filter(column => column?.sortable)
-      })
-
       const appendIcon = computed(() => {
         const showSelectColumn = columns.value.find(column => column.key === 'data-table-select')
 
@@ -244,6 +253,9 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           { ...headerProps }
         >
           <div class="v-data-table-header__content">
+          { slots['mobile.header']
+            ? slots['mobile.header']({ ...slotProps.value, selectAll })
+            : displayItems.value.length > 0 && (
             <VSelect
               chips
               class="v-data-table__td-sort-select"
@@ -280,17 +292,19 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                 ),
               }}
             </VSelect>
+            )
+            }
           </div>
         </VDataTableColumn>
       )
     }
 
     useRender(() => {
-      return mobile.value ? (
+      return showMobileHeader.value ? (
         <tr>
           <VDataTableMobileHeaderCell />
         </tr>
-      ) : (
+      ) : mobile.value ? <></> : (
         <>
           { slots.headers
             ? slots.headers(slotProps.value)
