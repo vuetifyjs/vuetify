@@ -276,7 +276,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
           isActive: isActive.value,
           targetRef,
           props: mergeProps({
-            ref: activatorRef,
+            ref: el => activatorRef.value = el as HTMLElement,
           }, activatorEvents.value, props.activatorProps),
         })}
 
