@@ -13,7 +13,8 @@ import { computed, nextTick, onMounted, ref, watchEffect } from 'vue'
 import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { ComponentPublicInstance, PropType } from 'vue'
+import type { FunctionVNodeRef } from '@/util'
 
 // Types
 export type VDatePickerYearsSlots = {
@@ -87,7 +88,10 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
       model.value = model.value ?? adapter.getYear(adapter.date())
     })
 
-    const yearRef = ref<VBtn>()
+    const yearRef = ref<ComponentPublicInstance>()
+
+    const yearRefFunction: FunctionVNodeRef = el => yearRef.value = el as ComponentPublicInstance
+
     onMounted(async () => {
       await nextTick()
       yearRef.value?.$el.scrollIntoView({ block: 'center' })
@@ -103,7 +107,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
         <div class="v-date-picker-years__content">
           { years.value.map((year, i) => {
             const btnProps = {
-              ref: model.value === year.value ? yearRef : undefined,
+              ref: model.value === year.value ? yearRefFunction : undefined,
               active: model.value === year.value,
               color: model.value === year.value ? props.color : undefined,
               rounded: true,
