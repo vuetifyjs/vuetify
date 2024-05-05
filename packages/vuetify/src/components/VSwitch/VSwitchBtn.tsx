@@ -6,7 +6,6 @@ import { VSwitchTrack } from './VSwitchTrack'
 import { VScaleTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
-import { makeVInputProps } from '@/components/VInput/VInput'
 import { VProgressCircular } from '@/components/VProgressCircular'
 import {
   makeVSelectionControlProps,
@@ -46,8 +45,8 @@ export type VSwitchSlots = VInputSlots &
 VSelectionControlSlots & {
   loader: LoaderSlotProps
   thumb: { icon: IconValue | undefined } & VSwitchSlot
-  'track-false': VSwitchSlot
-  'track-true': VSwitchSlot
+  'track-false': never
+  'track-true': never
 }
 
 export const makeVSwitchBtnProps = propsFactory(
@@ -104,6 +103,7 @@ export const VSwitchBtn = genericComponent<
       model,
       isValid: computed(() => props.isValid || null),
     }
+
     const loaderColor = computed(() => {
       return typeof props.loading === 'string' && props.loading !== ''
         ? props.loading
@@ -140,6 +140,12 @@ export const VSwitchBtn = genericComponent<
           ref={ control }
           id={ id.value }
           { ...controlAttrs }
+          name={ props.name }
+          label={ props.label }
+          disabled={ !!props.disabled }
+          readonly={ !!props.readonly }
+          onFocus={ focus }
+          onBlur={ blur }
         >
           {{
             ...slots,
@@ -149,7 +155,6 @@ export const VSwitchBtn = genericComponent<
                 { ...controlProps }
                 id={ id.value }
                 { ...controlAttrs }
-                v-model={ model.value }
                 onFocus={ focus }
                 onBlur={ blur }
                 v-slots={ slots }

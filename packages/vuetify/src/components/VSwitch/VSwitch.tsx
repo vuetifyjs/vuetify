@@ -4,6 +4,7 @@ import './VSwitch.sass'
 // Components
 import { makeVSwitchBtnProps, VSwitchBtn } from './VSwitchBtn'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { makeVSelectionControlProps } from '@/components/VSelectionControl/VSelectionControl'
 
 // Composables
 import { useFocus } from '@/composables/focus'
@@ -32,12 +33,13 @@ export type VSwitchSlots =
   & {
     loader: LoaderSlotProps
     thumb: { icon: IconValue | undefined } & VSwitchSlot
-    'track-false': VSwitchSlot
-    'track-true': VSwitchSlot
+    'track-false': never
+    'track-true': never
   }
 
 export const makeVSwitchProps = propsFactory({
   ...makeVInputProps(),
+  ...makeVSelectionControlProps(),
   ...makeVSwitchBtnProps(),
 }, 'VSwitch')
 
@@ -106,6 +108,7 @@ export const VSwitch = genericComponent<new <T>(
                 onFocus={ focus }
                 onBlur={ blur }
                 v-slots={ slots }
+                label={ props.label }
               />
             ),
           }}
