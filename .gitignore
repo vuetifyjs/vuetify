@@ -23,6 +23,3 @@ cypress/videos
 
 .vercel
 .now
-
-# ignore yarn build files
-**.css
