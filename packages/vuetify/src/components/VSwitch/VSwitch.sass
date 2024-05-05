@@ -50,29 +50,41 @@
   cursor: pointer
   transition: $switch-track-transition
 
-  .v-switch-btn--inset &
-    border-radius: $switch-inset-track-border-radius
+  .v-switch__track
+    display: inline-flex
+    align-items: center
+    font-size: .5rem
+    padding: 0 5px
+    background-color: $switch-track-background
+    border-radius: $switch-track-radius
+    height: $switch-track-height
+    opacity: $switch-track-opacity
+    min-width: $switch-track-width
+    cursor: pointer
+    transition: $switch-track-transition
+
+    .v-switch-btn--inset &
+      border-radius: $switch-inset-track-border-radius
+      font-size: .75rem
+      height: $switch-inset-track-height
+      min-width: $switch-inset-track-width
+
+  .v-switch__thumb
+    align-items: center
+    background-color: $switch-thumb-background
+    color: $switch-thumb-color
+    border-radius: $switch-thumb-radius
+    display: flex
     font-size: .75rem
     height: $switch-inset-track-height
     min-width: $switch-inset-track-width
 
-.v-switch__thumb
-  align-items: center
-  background-color: $switch-thumb-background
-  color: $switch-thumb-color
-  border-radius: $switch-thumb-radius
-  display: flex
-  font-size: .75rem
-  height: $switch-thumb-height
-  justify-content: center
-  width: $switch-thumb-width
-  pointer-events: none
-  transition: $switch-thumb-transition
-  position: relative
-  overflow: hidden
+    .v-switch:not(.v-switch-btn--inset) &
+      @include tools.elevation($switch-thumb-elevation)
 
-  .v-switch-btn:not(.v-switch-btn--inset) &
-    @include tools.elevation($switch-thumb-elevation)
+    .v-switch-btn.v-switch-btn--flat:not(.v-switch-btn--inset) &
+      background: $switch-thumb-flat-background
+      color: $switch-thumb-flat-color
 
   .v-switch-btn.v-switch-btn--flat:not(.v-switch-btn--inset) &
     background: $switch-thumb-flat-background
@@ -88,7 +100,7 @@
     width: $switch-inset-thumb-width
     transform: scale(calc($switch-inset-thumb-off-height / $switch-inset-thumb-height))
 
-    &--filled
+    .v-switch-btn--inset .v-selection-control--dirty &
       transform: none
 
   .v-switch-btn
@@ -128,14 +140,14 @@
         +tools.rtl()
           transform: translateX(-$switch-thumb-transform)
 
-    &.v-switch--indeterminate
+    &.v-switch-btn--indeterminate
       .v-selection-control__input
         transform: scale(.8)
       .v-switch__thumb
         transform: none
         transition: .15s .05s transform settings.$decelerated-easing
 
-    &.v-switch--inset
+    &.v-switch-btn--inset
       .v-selection-control__wrapper
         width: auto
       .v-switch__thumb
