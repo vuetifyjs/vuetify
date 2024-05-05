@@ -83,13 +83,13 @@ export const VSwitchTrack = genericComponent<
         >
           { slots['track-true'] && (
             <div key="prepend" class="v-switch__track-true">
-              { slots['track-true'](true) }
+              { slots['track-true']() }
             </div>
           )}
 
           { slots['track-false'] && (
             <div key="append" class="v-switch__track-false">
-              { slots['track-false'](false) }
+              { slots['track-false']() }
             </div>
           )}
         </div>
