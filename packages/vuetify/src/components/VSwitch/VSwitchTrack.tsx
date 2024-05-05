@@ -4,28 +4,19 @@ import './VSwitch.sass'
 // Components
 import { makeVSelectionControlProps } from '@/components/VSelectionControl/VSelectionControl'
 
-// Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
-
 // Utilities
-import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, PropType, Ref } from 'vue'
+import type { PropType } from 'vue'
 import { makeVInputProps } from '../VInput/VInput'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
 
-export type VSwitchTrackSlot = {
-  model: Ref<boolean>
-  isValid: ComputedRef<boolean | null>
-}
-
 export type VSwitchTrackSlots = {
   loader: LoaderSlotProps
-  'track-false': VSwitchTrackSlot
-  'track-true': VSwitchTrackSlot
+  'track-false': never
+  'track-true': never
 }
 
 export const makeVSwitchTrackProps = propsFactory(
@@ -68,8 +59,6 @@ export const VSwitchTrack = genericComponent<
   },
 
   setup (props, { slots }) {
-    const model = useProxiedModel(props, 'modelValue')
-
     function onTrackClick (e: Event) {
       e.stopPropagation()
       e.preventDefault()
@@ -86,11 +75,6 @@ export const VSwitchTrack = genericComponent<
     }
 
     useRender(() => {
-      const slotProps = {
-        model,
-        isValid: computed(() => props.isValid || null),
-      }
-
       return (
         <div
           class={['v-switch__track', ...props.bgColor]}
@@ -99,13 +83,13 @@ export const VSwitchTrack = genericComponent<
         >
           { slots['track-true'] && (
             <div key="prepend" class="v-switch__track-true">
-              { slots['track-true'](slotProps) }
+              { slots['track-true'](true) }
             </div>
           )}
 
           { slots['track-false'] && (
             <div key="append" class="v-switch__track-false">
-              { slots['track-false'](slotProps) }
+              { slots['track-false'](false) }
             </div>
           )}
         </div>
