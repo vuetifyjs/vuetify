@@ -377,7 +377,7 @@ export const VAutocomplete = genericComponent<new <
           select(displayItems.value[0])
         }
         menu.value = false
-        props.multiple && (search.value = '')
+        if (props.multiple || hasSelectionSlot.value) search.value = ''
         selectionIndex.value = -1
       }
     })
