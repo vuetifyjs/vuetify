@@ -143,20 +143,20 @@ In the following example, we use a switch statement and the current breakpoint n
 ```ts
 {
   // Breakpoints
-  xs: boolean // 0 - 595
-  sm: boolean // 600 - 959
-  md: boolean // 960 - 1279
-  lg: boolean // 1280 - 1919
-  xl: boolean // > 1920
-  xxl: boolean
-  smAndDown: boolean // < 960
-  smAndUp: boolean // > 600
-  mdAndDown: boolean // < 1280
-  mdAndUp: boolean // > 960
-  lgAndDown: boolean // < 1919
-  lgAndUp: boolean // > 1280
-  xlAndDown: boolean
-  xlAndUp: boolean // < 1920
+  xs: boolean // 0 - 599
+  sm: boolean // 600 - 839
+  md: boolean // 840 - 1144
+  lg: boolean // 1145 - 1544
+  xl: boolean // 1545 - 2137
+  xxl: boolean // >= 2138
+  smAndDown: boolean // < 840
+  smAndUp: boolean // > 599
+  mdAndDown: boolean // < 1145
+  mdAndUp: boolean // > 839
+  lgAndDown: boolean // < 1545
+  lgAndUp: boolean // > 1144
+  xlAndDown: boolean // < 2138
+  xlAndUp: boolean // > 1544
 
   // true if screen width < mobileBreakpoint
   mobile: boolean
