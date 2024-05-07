@@ -28,4 +28,14 @@ describe('VBottomNavigation', () => {
       .setProps({ density: 'compact' })
       .get('.v-bottom-navigation').should('have.css', 'height', '40px')
   })
+
+  it('should not be visible if active is false', () => {
+    cy.mount(() => (
+      <VLayout>
+        <VBottomNavigation active={ false }></VBottomNavigation>
+      </VLayout>
+    ))
+
+    cy.get('.v-bottom-navigation').should('not.be.visible')
+  })
 })

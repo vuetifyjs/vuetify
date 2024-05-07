@@ -48,6 +48,7 @@ import {
 // Types
 import type { PropType, Ref } from 'vue'
 import type { BackgroundColorData } from '@/composables/color'
+import type { TemplateRef } from '@/util'
 
 interface ScrimProps {
   [key: string]: unknown
@@ -74,7 +75,7 @@ function Scrim (props: ScrimProps) {
 
 export type OverlaySlots = {
   default: { isActive: Ref<boolean> }
-  activator: { isActive: boolean, props: Record<string, any> }
+  activator: { isActive: boolean, props: Record<string, any>, targetRef: TemplateRef }
 }
 
 export const makeVOverlayProps = propsFactory({
@@ -268,9 +269,9 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       <>
         { slots.activator?.({
           isActive: isActive.value,
+          targetRef,
           props: mergeProps({
             ref: activatorRef,
-            targetRef,
           }, activatorEvents.value, props.activatorProps),
         })}
 

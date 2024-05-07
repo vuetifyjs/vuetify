@@ -1,18 +1,19 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-.v-menu
-  > .v-overlay__content
-    display: flex
-    flex-direction: column
-    @include tools.rounded($menu-content-border-radius)
+@include tools.layer('components')
+  .v-menu
+    > .v-overlay__content
+      display: flex
+      flex-direction: column
+      @include tools.rounded($menu-content-border-radius)
 
-    > .v-card,
-    > .v-sheet,
-    > .v-list
-      background: rgb(var(--v-theme-surface))
-      border-radius: inherit
-      overflow: auto
-      height: 100%
+      > .v-card,
+      > .v-sheet,
+      > .v-list
+        background: rgb(var(--v-theme-surface))
+        border-radius: inherit
+        overflow: auto
+        height: 100%
 
-      @include tools.elevation($menu-elevation)
+        @include tools.elevation($menu-elevation)

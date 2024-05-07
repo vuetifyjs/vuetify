@@ -213,6 +213,20 @@ describe('VDataTable', () => {
       .should('deep.equal', [[2], [1]])
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/19069
+  it('should update the select all checkbox when changing the select-strategy', () => {
+    const strategy = ref('single')
+    cy.mount(() => (
+      <Application>
+        <VDataTable select-strategy={ strategy.value } items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS } showSelect />
+      </Application>
+    )).get('thead .v-selection-control').should('not.exist')
+      .then(() => strategy.value = 'all')
+      .get('thead .v-selection-control').should('exist')
+      .then(() => strategy.value = 'page')
+      .get('thead .v-selection-control').should('exist')
+  })
+
   describe('slots', () => {
     it('should have top slot', () => {
       cy.mount(() => (

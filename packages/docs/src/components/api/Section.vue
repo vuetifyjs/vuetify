@@ -15,6 +15,7 @@
 
 <script setup lang="ts">
   // Components
+  import DirectiveTable from '@/components/api/DirectiveTable.vue'
   import EventsTable from '@/components/api/EventsTable.vue'
   import ExposedTable from '@/components/api/ExposedTable.vue'
   import PropsTable from '@/components/api/PropsTable.vue'
@@ -22,12 +23,16 @@
   import SlotsTable from '@/components/api/SlotsTable.vue'
 
   // Types
-  import type { Item } from './utils'
+  import type { PartData } from '@vuetify/api-generator/src/types'
+  import type { PropType } from 'vue'
 
   // Data
   import newIn from '@/data/new-in.json'
 
-  const getApi = (name: string) => {
+  type PartKey = Exclude<keyof PartData, 'displayName' | 'fileName' | 'pathName'>
+  type NewIn = Record<string, Record<PartKey, Record<string, string>>>
+
+  const getApi = (name: string): Promise<{ default: PartData }> => {
     return import(`../../../../api-generator/dist/api/${name}.json`)
   }
 
@@ -37,7 +42,7 @@
       required: true,
     },
     section: {
-      type: String,
+      type: String as PropType<PartKey>,
       required: true,
     },
     showHeadline: Boolean,
@@ -47,40 +52,48 @@
   const items = ref()
 
   const TableComponent = computed(() => {
-    if (['props', 'argument', 'modifiers'].includes(props.section)) {
-      return PropsTable
-    } else if (props.section === 'events') {
-      return EventsTable
-    } else if (props.section === 'slots') {
-      return SlotsTable
-    } else if (props.section === 'exposed') {
-      return ExposedTable
-    } else if (props.section === 'sass') {
-      return SassTable
-    }
-
-    return PropsTable
+    return {
+      props: PropsTable,
+      events: EventsTable,
+      slots: SlotsTable,
+      exposed: ExposedTable,
+      modifiers: ExposedTable,
+      sass: SassTable,
+      argument: DirectiveTable,
+      value: DirectiveTable,
+    }[props.section] || PropsTable
   })
 
   async function fetchApiData () {
     try {
       const api = (await getApi(props.name)).default
-      if (!api[props.section]) {
+      const sectionName = props.section
+      const section = api[sectionName]
+      if (!section) {
         throw new Error(`API section "${props.section}" for "${props.name}" does not exist`)
       }
-      const section = (api[props.section] ?? {}) as Record<string, Item>
-      const _newIn = newIn as Record<string, Record<string, Record<string, string>>>
 
-      items.value = Object.entries(section).reduce<any>((arr, [name, prop]) => {
-        arr.push({
-          ...prop,
-          name,
-          newIn: _newIn?.[props.name]?.[props.section]?.[name],
-          description: prop.description?.[store.locale],
-          descriptionSource: prop.descriptionSource?.[store.locale],
-        })
-        return arr
-      }, []).sort((a: any, b: any) => a.name.localeCompare(b.name))
+      if (sectionName === 'argument' || sectionName === 'value') {
+        const section = api[sectionName]!
+        items.value = [{
+          ...section,
+          name: sectionName,
+          description: section.description?.[store.locale],
+          descriptionSource: section.descriptionSource?.[store.locale],
+        }]
+      } else {
+        const _newIn = newIn as any as NewIn
+        items.value = Object.entries(section).reduce<any>((arr, [name, prop]) => {
+          arr.push({
+            ...prop,
+            name,
+            newIn: _newIn?.[props.name]?.[props.section]?.[name],
+            description: prop.description?.[store.locale],
+            descriptionSource: prop.descriptionSource?.[store.locale],
+          })
+          return arr
+        }, []).sort((a: any, b: any) => a.name.localeCompare(b.name))
+      }
     } catch (err) {}
   }
 
