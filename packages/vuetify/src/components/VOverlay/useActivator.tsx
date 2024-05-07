@@ -22,7 +22,7 @@ import {
   IN_BROWSER,
   matchesSelector,
   propsFactory,
-  refElement,
+  templateRef,
   unbindProps,
 } from '@/util'
 
@@ -228,19 +228,19 @@ export function useActivator (
     }
   }, { flush: 'post' })
 
-  const activatorRef = ref<HTMLElement>()
+  const activatorRef = templateRef()
   watchEffect(() => {
     if (!activatorRef.value) return
 
     nextTick(() => {
-      activatorEl.value = refElement(activatorRef.value)
+      activatorEl.value = activatorRef.el
     })
   })
 
-  const targetRef = ref<ComponentPublicInstance<any> | HTMLElement>()
+  const targetRef = templateRef()
   const target = computed(() => {
     if (props.target === 'cursor' && cursorTarget.value) return cursorTarget.value
-    if (targetRef.value) return refElement(targetRef.value)
+    if (targetRef.value) return targetRef.el
     return getTarget(props.target, vm) || activatorEl.value
   })
   const targetEl = computed(() => {

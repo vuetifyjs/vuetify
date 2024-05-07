@@ -328,6 +328,7 @@ const allowedRefs = [
   'SelectStrategyFn',
   'SortItem',
   'SubmitEventPromise',
+  'TemplateRef',
   'TouchHandlers',
   'ValidationRule',
 ]
