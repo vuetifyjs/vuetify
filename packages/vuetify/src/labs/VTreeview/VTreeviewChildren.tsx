@@ -41,20 +41,29 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
   props: makeVTreeviewChildrenProps(),
 
   setup (props, { emit, slots }) {
-    const isLoading = shallowRef(false)
-    const hasLoaded = shallowRef(false)
+    const isLoading = shallowRef(null)
 
     function checkChildren (item: unknown) {
-      return new Promise<void>(resolve => {
-        if (!props.items?.length || !props.loadChildren || hasLoaded.value) return resolve()
 
-        isLoading.value = true
-        props.loadChildren(item).then(resolve)
-      }).then(() => {
-        hasLoaded.value = true
+      return new Promise<void>((resolve) => {
+
+        if (!props.items?.length || !props.loadChildren) return resolve()
+
+        if (item?.children?.length === 0) {
+
+          isLoading.value = item.value
+          props.loadChildren(item).then(resolve)
+
+          return
+
+        }
+
+        resolve()
+
       }).finally(() => {
-        isLoading.value = false
+        isLoading.value = null
       })
+
     }
 
     function onClick (e: MouseEvent | KeyboardEvent, item: any) {
@@ -64,6 +73,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
     }
 
     return () => slots.default?.() ?? props.items?.map(({ children, props: itemProps, raw: item }) => {
+      const loading = isLoading.value === item.value
       const slotsWithItem = {
         prepend: slots.prepend
           ? slotProps => slots.prepend?.({ ...slotProps, item })
@@ -73,7 +83,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 key={ item.value }
                 tabindex="-1"
                 modelValue={ isSelected }
-                loading={ isLoading.value }
+                loading={ loading }
                 indeterminate={ isIndeterminate }
                 onClick={ (e: MouseEvent) => onClick(e, item) }
               />
@@ -96,7 +106,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               <VTreeviewItem
                 { ...itemProps }
                 { ...activatorProps }
-                loading={ isLoading.value }
+                loading={ loading }
                 v-slots={ slotsWithItem }
                 onClick={ (e: MouseEvent | KeyboardEvent) => onClick(e, item) }
               />
