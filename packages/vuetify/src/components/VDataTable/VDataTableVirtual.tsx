@@ -27,7 +27,7 @@ import type { VDataTableSlotProps } from './VDataTable'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
 import type { CellProps, RowProps } from '@/components/VDataTable/types'
-import type { FunctionVNodeRef, GenericProps, SelectItemKey } from '@/util'
+import type { GenericProps, SelectItemKey, TemplateRef } from '@/util'
 
 type VDataTableVirtualSlotProps<T> = Omit<
   VDataTableSlotProps<T>,
@@ -45,7 +45,7 @@ export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeade
   'body.prepend': VDataTableVirtualSlotProps<T>
   'body.append': VDataTableVirtualSlotProps<T>
   item: {
-    itemRef: FunctionVNodeRef
+    itemRef: TemplateRef
   }
 }
 

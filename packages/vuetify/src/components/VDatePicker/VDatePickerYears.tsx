@@ -9,12 +9,11 @@ import { useDate } from '@/composables/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onMounted, ref, watchEffect } from 'vue'
-import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
+import { computed, nextTick, onMounted, watchEffect } from 'vue'
+import { convertToUnit, createRange, genericComponent, propsFactory, templateRef, useRender } from '@/util'
 
 // Types
-import type { ComponentPublicInstance, PropType } from 'vue'
-import type { FunctionVNodeRef } from '@/util'
+import type { PropType } from 'vue'
 
 // Types
 export type VDatePickerYearsSlots = {
@@ -88,13 +87,11 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
       model.value = model.value ?? adapter.getYear(adapter.date())
     })
 
-    const yearRef = ref<ComponentPublicInstance>()
-
-    const yearRefFunction: FunctionVNodeRef = el => yearRef.value = el as ComponentPublicInstance
+    const yearRef = templateRef()
 
     onMounted(async () => {
       await nextTick()
-      yearRef.value?.$el.scrollIntoView({ block: 'center' })
+      yearRef.el?.scrollIntoView({ block: 'center' })
     })
 
     useRender(() => (
@@ -107,7 +104,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
         <div class="v-date-picker-years__content">
           { years.value.map((year, i) => {
             const btnProps = {
-              ref: model.value === year.value ? yearRefFunction : undefined,
+              ref: model.value === year.value ? yearRef : undefined,
               active: model.value === year.value,
               color: model.value === year.value ? props.color : undefined,
               rounded: true,

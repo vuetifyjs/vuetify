@@ -735,3 +735,26 @@ export function isClickInsideElement (event: MouseEvent, targetDiv: HTMLElement)
 
   return mouseX >= divLeft && mouseX <= divRight && mouseY >= divTop && mouseY <= divBottom
 }
+
+export type TemplateRef = {
+  (target: Element | ComponentPublicInstance | null): void
+  value: HTMLElement | ComponentPublicInstance | null | undefined
+  readonly el: HTMLElement | undefined
+}
+export function templateRef () {
+  const el = shallowRef<HTMLElement | ComponentPublicInstance | null>()
+  const fn = (target: HTMLElement | ComponentPublicInstance | null) => {
+    el.value = target
+  }
+  Object.defineProperty(fn, 'value', {
+    enumerable: true,
+    get: () => el.value,
+    set: val => el.value = val,
+  })
+  Object.defineProperty(fn, 'el', {
+    enumerable: true,
+    get: () => refElement(el.value),
+  })
+
+  return el as any as TemplateRef
+}
