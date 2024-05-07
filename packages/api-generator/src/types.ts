@@ -309,6 +309,7 @@ function count (arr: string[], needle: string) {
 // Types that are displayed as links
 const allowedRefs = [
   'Anchor',
+  'ActiveStrategy',
   'DataIteratorItem',
   'DataTableHeader',
   'DataTableItem',
@@ -319,9 +320,11 @@ const allowedRefs = [
   'ListItem',
   'LocationStrategyFn',
   'OpenSelectStrategyFn',
+  'OpenStrategy',
   'OpenStrategyFn',
   'ScrollStrategyFn',
   'SelectItemKey',
+  'SelectStrategy',
   'SelectStrategyFn',
   'SortItem',
   'SubmitEventPromise',
