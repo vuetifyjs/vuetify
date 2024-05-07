@@ -756,5 +756,5 @@ export function templateRef () {
     get: () => refElement(el.value),
   })
 
-  return el as any as TemplateRef
+  return fn as TemplateRef
 }
