@@ -172,19 +172,12 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
         intersecting(side)
       }
     }
-    function shouldEmit (rootEl: any, status: string): boolean {
-      const isRootElUndefined = !rootEl.value
-      const isLoading = status === 'loading'
-      const isEmpty = status === 'empty'
-
-      return isRootElUndefined || isLoading || isEmpty
-    }
 
     function intersecting (side: InfiniteScrollSide) {
       if (props.mode !== 'manual' && !isIntersecting.value) return
 
       const status = getStatus(side)
-      if (shouldEmit(rootEl, status)) return
+      if (!rootEl.value || ['empty', 'loading'].includes(status)) return
 
       previousScrollSize = getScrollSize()
       setStatus(side, 'loading')
