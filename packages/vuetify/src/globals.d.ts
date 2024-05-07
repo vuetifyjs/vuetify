@@ -58,16 +58,6 @@ declare global {
     path?: EventTarget[]
   }
 
-  interface UIEvent {
-    initUIEvent (
-      typeArg: string,
-      canBubbleArg: boolean,
-      cancelableArg: boolean,
-      viewArg: Window,
-      detailArg: number,
-    ): void
-  }
-
   interface MouseEvent {
     sourceCapabilities?: { firesTouchEvents: boolean }
   }

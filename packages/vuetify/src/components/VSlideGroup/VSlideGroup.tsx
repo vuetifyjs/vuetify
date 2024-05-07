@@ -207,7 +207,7 @@ export const VSlideGroup = genericComponent<new <T>(
       }
     }
 
-    function onScroll (e: UIEvent) {
+    function onScroll (e: Event) {
       const { scrollTop, scrollLeft } = e.target as HTMLElement
 
       scrollOffset.value = isHorizontal.value ? scrollLeft : scrollTop
