@@ -67,7 +67,7 @@ export const makeVFileInputProps = propsFactory({
   ...makeVInputProps({ prependIcon: '$file' }),
 
   modelValue: {
-    type: [Array, Object] as PropType<File[] | File>,
+    type: [Array, Object] as PropType<File[] | File | null>,
     default: (props: any) => props.multiple ? [] : null,
     validator: (val: any) => {
       return wrapInArray(val).every(v => v != null && typeof v === 'object')
@@ -98,7 +98,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       'modelValue',
       props.modelValue,
       val => wrapInArray(val),
-      val => (props.multiple || Array.isArray(props.modelValue)) ? val : val[0],
+      val => (props.multiple || Array.isArray(props.modelValue)) ? val : (val[0] ?? null),
     )
     const { isFocused, focus, blur } = useFocus(props)
     const base = computed(() => typeof props.showSize !== 'boolean' ? props.showSize : undefined)

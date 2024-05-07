@@ -3,7 +3,7 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john@vuetifyjs.com>",
-  "version": "3.6.2",
+  "version": "3.6.3",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuetifyjs/vuetify.git",
@@ -33,12 +33,12 @@
     "prismjs": "^1.29.0",
     "roboto-fontface": "^0.10.0",
     "vee-validate": "^4.12.6",
-    "vue": "^3.4.21",
+    "vue": "^3.4.27",
     "vue-gtag-next": "^1.14.0",
     "vue-i18n": "^9.11.0",
     "vue-instantsearch": "^4.15.0",
     "vue-prism-component": "^2.0.0",
-    "vuetify": "^3.6.2"
+    "vuetify": "^3.6.3"
   },
   "devDependencies": {
     "@emailjs/browser": "^4.3.3",
@@ -49,8 +49,8 @@
     "@types/prismjs": "^1.26.3",
     "@vitejs/plugin-basic-ssl": "^1.1.0",
     "@vitejs/plugin-vue": "^5.0.4",
-    "@vue/compiler-sfc": "^3.4.21",
-    "@vuetify/api-generator": "^3.6.2",
+    "@vue/compiler-sfc": "^3.4.27",
+    "@vuetify/api-generator": "^3.6.3",
     "ajv": "^8.12.0",
     "async-es": "^3.2.5",
     "date-fns": "^3.6.0",

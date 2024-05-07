@@ -12,6 +12,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useScopeId } from '@/composables/scopeId'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
@@ -86,11 +87,12 @@ export const VTabs = genericComponent<VTabsSlots>()({
     'update:modelValue': (v: unknown) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const items = computed(() => parseItems(props.items))
     const { densityClasses } = useDensity(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { scopeId } = useScopeId()
 
     provideDefaults({
       VTab: {
@@ -132,6 +134,8 @@ export const VTabs = genericComponent<VTabsSlots>()({
             ]}
             role="tablist"
             symbol={ VTabsSymbol }
+            { ...scopeId }
+            { ...attrs }
           >
             { slots.default?.() ?? items.value.map(item => (
               slots.tab?.({ item }) ?? (
@@ -151,6 +155,7 @@ export const VTabs = genericComponent<VTabsSlots>()({
             <VTabsWindow
               v-model={ model.value }
               key="tabs-window"
+              { ...scopeId }
             >
               { items.value.map(item => slots.item?.({ item }) ?? (
                 <VTabsWindowItem
