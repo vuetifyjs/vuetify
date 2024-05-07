@@ -39,7 +39,7 @@
     "avatar": "https://cdn.vuetifyjs.com/docs/images/team/alexandria.jpg",
     "discord": "alexandriajackson_",
     "focus": [
-      "vuetifyjs/*"
+      "[vuetifyjs/*](https://github.com/vuetifyjs)"
     ],
     "languages": [
       "English"
