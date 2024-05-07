@@ -254,10 +254,10 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
         case 'hour':
           emit('update:hour', value)
           break
-        case 'minutes':
+        case 'minute':
           emit('update:minute', value)
           break
-        case 'seconds':
+        case 'second':
           emit('update:second', value)
           break
         default:

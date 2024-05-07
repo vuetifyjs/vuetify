@@ -123,7 +123,7 @@ export function useSelectionControl (
       model.value &&
       !props.error &&
       !props.disabled
-    ) ? props.color : undefined
+    ) ? props.color : props.baseColor
   }))
   const icon = computed(() => model.value ? props.trueIcon : props.falseIcon)
 

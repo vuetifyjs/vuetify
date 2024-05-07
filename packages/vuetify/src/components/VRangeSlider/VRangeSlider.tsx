@@ -86,6 +86,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       onSliderTouchstart,
       position,
       trackContainerRef,
+      readonly,
     } = useSlider({
       props,
       steps,
@@ -167,8 +168,8 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
             default: ({ id, messagesId }) => (
               <div
                 class="v-slider__container"
-                onMousedown={ onSliderMousedown }
-                onTouchstartPassive={ onSliderTouchstart }
+                onMousedown={ !readonly.value ? onSliderMousedown : undefined }
+                onTouchstartPassive={ !readonly.value ? onSliderTouchstart : undefined }
               >
                 <input
                   id={ `${id.value}_start` }

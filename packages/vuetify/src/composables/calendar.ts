@@ -21,6 +21,7 @@ export interface CalendarProps {
   month: number | string | undefined
   weekdays: number[]
   year: number | string | undefined
+  weeksInMonth: 'dynamic' | 'static'
 
   'onUpdate:modelValue': ((value: unknown[]) => void) | undefined
   'onUpdate:month': ((value: number) => void) | undefined
@@ -41,6 +42,10 @@ export const makeCalendarProps = propsFactory({
   weekdays: {
     type: Array<number>,
     default: () => [0, 1, 2, 3, 4, 5, 6],
+  },
+  weeksInMonth: {
+    type: String as PropType<'dynamic' | 'static'>,
+    default: 'dynamic',
   },
 }, 'calendar')
 
@@ -86,15 +91,15 @@ export function useCalendar (props: CalendarProps) {
     v => adapter.getMonth(v)
   )
 
-  const weeksInMonth = computed<Date[][]>((): Date[][] => {
+  const weeksInMonth = computed(() => {
     const weeks = adapter.getWeekArray(month.value)
 
     const days = weeks.flat()
 
     // Make sure there's always 6 weeks in month (6 * 7 days)
-    // But only do it if we're not hiding adjacent months?
+    // if weeksInMonth is 'static'
     const daysInMonth = 6 * 7
-    if (days.length < daysInMonth) {
+    if (props.weeksInMonth === 'static' && days.length < daysInMonth) {
       const lastDay = days[days.length - 1]
 
       let week = []
@@ -108,10 +113,10 @@ export function useCalendar (props: CalendarProps) {
       }
     }
 
-    return weeks as Date[][]
+    return weeks
   })
 
-  function genDays (days: Date[], today: Date) {
+  function genDays (days: unknown[], today: unknown) {
     return days.filter(date => {
       return props.weekdays.includes(adapter.toJsDate(date).getDay())
     }).map((date, index) => {
@@ -143,17 +148,15 @@ export function useCalendar (props: CalendarProps) {
   }
 
   const daysInWeek = computed(() => {
-    const lastDay = adapter.startOfWeek(model.value)
+    const lastDay = adapter.startOfWeek(displayValue.value)
     const week = []
     for (let day = 0; day <= 6; day++) {
       week.push(adapter.addDays(lastDay, day))
     }
 
-    const days = week as Date[]
+    const today = adapter.date()
 
-    const today = adapter.date() as Date
-
-    return genDays(days, today)
+    return genDays(week, today)
   })
 
   const daysInMonth = computed(() => {

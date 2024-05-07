@@ -80,3 +80,9 @@ The `v-chip` component can have an explicit value used for its model. This gets 
 Chip groups allow the creation of custom interfaces that perform the same actions as an item group or radio controls, but are stylistically different.
 
 <ExamplesExample file="v-chip-group/misc-toothbrush-card" />
+
+#### Reddit style categories
+
+Use a combination of utility classes and emojis to create a Reddit-style category selection.
+
+<ExamplesExample file="v-chip-group/misc-reddit-categories" />
