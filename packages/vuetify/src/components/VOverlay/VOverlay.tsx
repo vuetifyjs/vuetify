@@ -320,8 +320,8 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                     props.contentClass,
                   ]}
                   style={[
-                    dimensionStyles.value,
                     contentStyles.value,
+                    dimensionStyles.value,
                   ]}
                   { ...contentEvents.value }
                   { ...props.contentProps }
