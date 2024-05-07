@@ -2,6 +2,7 @@
 @use '../../styles/tools'
 @use '../../components/VTable/variables' as *
 @use './variables' as *
+@use '../VTable/variables' as VTable
 
 @include tools.layer('components')
   .v-data-table
@@ -147,7 +148,7 @@
         border-bottom: 0 !important
 
   .v-data-table__td-title
-    font-weight: bold
+    font-weight: VTable.$table-header-font-weight
     text-align: left
 
   .v-data-table__td-value

@@ -5,7 +5,8 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { computed, inject, onBeforeUnmount, provide, ref, shallowRef, toRaw, toRef } from 'vue'
 import {
   independentActiveStrategy,
-  independentSingleActiveStrategy, leafActiveStrategy,
+  independentSingleActiveStrategy,
+  leafActiveStrategy,
   leafSingleActiveStrategy,
 } from './activeStrategies'
 import { listOpenStrategy, multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
@@ -20,26 +21,41 @@ import { getCurrentInstance, getUid, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
+import type { ActiveStrategy } from './activeStrategies'
 import type { OpenStrategy } from './openStrategies'
-import type { SelectStrategyFn } from './selectStrategies'
+import type { SelectStrategy } from './selectStrategies'
 import type { EventProp } from '@/util'
 
-export type SelectStrategy = 'single-leaf' | 'leaf' | 'independent' | 'single-independent' | 'classic' | SelectStrategyFn
+export type ActiveStrategyProp =
+  | 'single-leaf'
+  | 'leaf'
+  | 'independent'
+  | 'single-independent'
+  | ActiveStrategy
+  | ((mandatory: boolean) => ActiveStrategy)
+export type SelectStrategyProp =
+  | 'single-leaf'
+  | 'leaf'
+  | 'independent'
+  | 'single-independent'
+  | 'classic'
+  | SelectStrategy
+  | ((mandatory: boolean) => SelectStrategy)
 export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
 
 export interface NestedProps {
   activatable: boolean
   selectable: boolean
-  activeStrategy: SelectStrategy | undefined
-  selectStrategy: SelectStrategy | undefined
+  activeStrategy: ActiveStrategyProp | undefined
+  selectStrategy: SelectStrategyProp | undefined
   openStrategy: OpenStrategyProp | undefined
-  activated: readonly unknown[] | undefined
-  selected: readonly unknown[] | undefined
-  opened: readonly unknown[] | undefined
+  activated: any
+  selected: any
+  opened: any
   mandatory: boolean
-  'onUpdate:activated': EventProp<[unknown[]]> | undefined
-  'onUpdate:selected': EventProp<[unknown[]]> | undefined
-  'onUpdate:opened': EventProp<[unknown[]]> | undefined
+  'onUpdate:activated': EventProp<[any]> | undefined
+  'onUpdate:selected': EventProp<[any]> | undefined
+  'onUpdate:opened': EventProp<[any]> | undefined
 }
 
 type NestedProvide = {
@@ -88,12 +104,12 @@ export const emptyNested: NestedProvide = {
 export const makeNestedProps = propsFactory({
   activatable: Boolean,
   selectable: Boolean,
-  activeStrategy: [String, Function] as PropType<SelectStrategy>,
-  selectStrategy: [String, Function] as PropType<SelectStrategy>,
+  activeStrategy: [String, Function, Object] as PropType<ActiveStrategyProp>,
+  selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
   openStrategy: [String, Object] as PropType<OpenStrategyProp>,
-  opened: Array as PropType<readonly unknown[]>,
-  activated: Array as PropType<readonly unknown[]>,
-  selected: Array as PropType<readonly unknown[]>,
+  opened: null,
+  activated: null,
+  selected: null,
   mandatory: Boolean,
 }, 'nested')
 
@@ -106,6 +122,7 @@ export const useNested = (props: NestedProps) => {
 
   const activeStrategy = computed(() => {
     if (typeof props.activeStrategy === 'object') return props.activeStrategy
+    if (typeof props.activeStrategy === 'function') return props.activeStrategy(props.mandatory)
 
     switch (props.activeStrategy) {
       case 'leaf': return leafActiveStrategy(props.mandatory)
@@ -118,6 +135,7 @@ export const useNested = (props: NestedProps) => {
 
   const selectStrategy = computed(() => {
     if (typeof props.selectStrategy === 'object') return props.selectStrategy
+    if (typeof props.selectStrategy === 'function') return props.selectStrategy(props.mandatory)
 
     switch (props.selectStrategy) {
       case 'single-leaf': return leafSingleSelectStrategy(props.mandatory)

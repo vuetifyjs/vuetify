@@ -23,12 +23,11 @@ import { computed, shallowRef, toRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
 import type { VDataTableSlotProps } from './VDataTable'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
 import type { CellProps, RowProps } from '@/components/VDataTable/types'
-import type { GenericProps, SelectItemKey } from '@/util'
+import type { GenericProps, SelectItemKey, TemplateRef } from '@/util'
 
 type VDataTableVirtualSlotProps<T> = Omit<
   VDataTableSlotProps<T>,
@@ -46,7 +45,7 @@ export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeade
   'body.prepend': VDataTableVirtualSlotProps<T>
   'body.append': VDataTableVirtualSlotProps<T>
   item: {
-    itemRef: Ref<HTMLElement | undefined>
+    itemRef: TemplateRef
   }
 }
 

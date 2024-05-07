@@ -128,10 +128,10 @@ export const VList = genericComponent<new <
     itemValue?: SelectItemKey<ItemType<T>>
     itemChildren?: SelectItemKey<ItemType<T>>
     itemProps?: SelectItemKey<ItemType<T>>
-    selected?: readonly S[]
-    'onUpdate:selected'?: (value: S[]) => void
-    opened?: readonly O[]
-    'onUpdate:opened'?: (value: O[]) => void
+    selected?: S
+    'onUpdate:selected'?: (value: S) => void
+    opened?: O
+    'onUpdate:opened'?: (value: O) => void
   },
   slots: VListChildrenSlots<ItemType<T>>
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -140,9 +140,9 @@ export const VList = genericComponent<new <
   props: makeVListProps(),
 
   emits: {
-    'update:selected': (value: unknown[]) => true,
-    'update:activated': (value: unknown[]) => true,
-    'update:opened': (value: unknown[]) => true,
+    'update:selected': (value: unknown) => true,
+    'update:activated': (value: unknown) => true,
+    'update:opened': (value: unknown) => true,
     'click:open': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:activate': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,

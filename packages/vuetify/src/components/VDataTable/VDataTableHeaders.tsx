@@ -180,7 +180,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               if (slots[columnSlotName]) return slots[columnSlotName]!(columnSlotProps)
 
               if (column.key === 'data-table-select') {
-                return slots['header.data-table-select']?.(columnSlotProps) ?? (showSelectAll && (
+                return slots['header.data-table-select']?.(columnSlotProps) ?? (showSelectAll.value && (
                   <VCheckboxBtn
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
