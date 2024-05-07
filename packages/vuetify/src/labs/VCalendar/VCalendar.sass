@@ -2,6 +2,9 @@
 @use './variables' as *
 
 @include tools.layer('components')
+  .v-calendar
+    @include tools.theme($calendar-theme...)
+
   .v-calendar-weekly
     width: 100%
     height: 100%
@@ -9,8 +12,6 @@
     flex-direction: column
     // https://github.com/vuetifyjs/vuetify/issues/8319
     min-height: 0
-    // Themed
-    background-color: #fff
 
   .v-calendar__container
     border-top: $calendar-line-width solid $calendar-line-color
