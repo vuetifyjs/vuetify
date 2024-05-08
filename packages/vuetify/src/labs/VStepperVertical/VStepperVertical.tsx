@@ -9,7 +9,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, toRefs } from 'vue'
-import { genericComponent, getPropertyFromItem, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, getPropertyFromItem, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { VStepperSlot } from '@/components/VStepper/VStepper'
@@ -40,11 +40,10 @@ export const makeVStepperVerticalProps = propsFactory({
   },
 
   ...makeStepperProps(),
-  ...makeVExpansionPanelsProps({
+  ...omit(makeVExpansionPanelsProps({
     mandatory: 'force' as const,
-    static: true,
     variant: 'accordion' as const,
-  }),
+  }), ['static']),
 }, 'VStepperVertical')
 
 export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
@@ -78,6 +77,7 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
         editable,
         prevText,
         nextText,
+        static: true,
       },
       VStepperActions: {
         color,
@@ -85,11 +85,13 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
     })
 
     useRender(() => {
+      const expansionPanelProps = VExpansionPanels.filterProps(props)
+
       return (
         <VExpansionPanels
+          { ...expansionPanelProps }
           v-model={ model.value }
           ref={ vExpansionPanelsRef }
-          { ...props }
           class={[
             'v-stepper',
             {
@@ -113,13 +115,8 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
                   { items.value.map(item => (
                     <VStepperVerticalItem { ...item }>
                       {{
+                        ...slots,
                         default: slots[`item.${item.value}`],
-                        icon: slots.icon,
-                        title: slots.title,
-                        subtitle: slots.subtitle,
-                        actions: slots.actions,
-                        prev: slots.prev,
-                        next: slots.next,
                       }}
                     </VStepperVerticalItem>
                   ))}
