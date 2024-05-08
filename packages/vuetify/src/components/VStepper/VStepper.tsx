@@ -22,6 +22,7 @@ import { genericComponent, getPropertyFromItem, isObject, only, pick, propsFacto
 import type { InjectionKey, PropType } from 'vue'
 import type { StepperItemSlot } from './VStepperItem'
 import type { GroupItemProvide } from '@/composables/group'
+import type { SelectItemKey } from '@/util'
 
 export const VStepperSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-stepper')
 
@@ -58,12 +59,16 @@ export const makeVStepperProps = propsFactory({
     default: () => ([]),
   },
   itemTitle: {
-    type: String,
+    type: [String, Array, Function] as PropType<SelectItemKey>,
     default: 'title',
   },
   itemValue: {
-    type: String,
+    type: [String, Array, Function] as PropType<SelectItemKey>,
     default: 'value',
+  },
+  itemProps: {
+    type: [Boolean, String, Array, Function] as PropType<SelectItemKey>,
+    default: 'props',
   },
   mobile: Boolean,
   nonLinear: Boolean,
@@ -91,15 +96,24 @@ export const VStepper = genericComponent<VStepperSlots>()({
     const { color, editable, prevText, nextText } = toRefs(props)
 
     const itemComponentPropNames = Object.keys(VStepperItem.props)
+    const resolveItemProps = (item: StepperItem, itemProps: SelectItemKey) => {
+      if (!isObject(item)) {
+        return undefined
+      }
+      const props = getPropertyFromItem(item, itemProps)
+
+      return isObject(props) ? pick(props, itemComponentPropNames) : props
+    }
+
     const items = computed(() => props.items.map((item, index) => {
       const title = getPropertyFromItem(item, props.itemTitle, item)
       const value = getPropertyFromItem(item, props.itemValue, index + 1)
-      const inheritedProps = isObject(item) ? pick(item, itemComponentPropNames) : null
+      const resolvedItemProps = resolveItemProps(item, props.itemProps)
 
       return {
-        ...inheritedProps,
         title,
         value,
+        ...resolvedItemProps,
         raw: item,
       }
     }))
