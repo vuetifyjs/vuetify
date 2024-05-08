@@ -2,6 +2,7 @@ export default {
   badge: 'ផ្លាក',
   open: 'បើក',
   close: 'បិទ',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'យល់ព្រម',
     cancel: 'បោះបង់',
@@ -71,6 +72,7 @@ export default {
   timePicker: {
     am: 'ព្រឹក',
     pm: 'ល្ងាច',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

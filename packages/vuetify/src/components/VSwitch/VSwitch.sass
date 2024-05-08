@@ -8,8 +8,8 @@
     .v-label
       padding-inline-start: $switch-label-margin-inline-start
 
-  .v-progress-circular
-    color: $switch-loader-color
+    .v-progress-circular
+      color: $switch-loader-color
 
     .v-switch-btn--inset &
       border-radius: $switch-inset-track-border-radius
@@ -21,34 +21,34 @@
     .v-progress-circular
       color: $switch-loader-color
 
-  .v-selection-control--error:not(.v-selection-control--disabled) &
-    background-color: $switch-error-background-color
-    color: $switch-error-color
+    .v-selection-control--error:not(.v-selection-control--disabled) &
+      background-color: $switch-error-background-color
+      color: $switch-error-color
 
-.v-switch__track-true
-  margin-inline-end: auto
+  .v-switch__track-true
+    margin-inline-end: auto
 
-  .v-selection-control:not(.v-selection-control--dirty) &
-    opacity: 0
+    .v-selection-control:not(.v-selection-control--dirty) &
+      opacity: 0
 
-.v-switch__track-false
-  margin-inline-start: auto
+  .v-switch__track-false
+    margin-inline-start: auto
 
-  .v-selection-control--dirty &
-    opacity: 0
+    .v-selection-control--dirty &
+      opacity: 0
 
-.v-switch__track
-  display: inline-flex
-  align-items: center
-  font-size: .5rem
-  padding: 0 5px
-  background-color: $switch-track-background
-  border-radius: $switch-track-radius
-  height: $switch-track-height
-  opacity: $switch-track-opacity
-  min-width: $switch-track-width
-  cursor: pointer
-  transition: $switch-track-transition
+  .v-switch__track
+    display: inline-flex
+    align-items: center
+    font-size: .5rem
+    padding: 0 5px
+    background-color: $switch-track-background
+    border-radius: $switch-track-radius
+    height: $switch-track-height
+    opacity: $switch-track-opacity
+    min-width: $switch-track-width
+    cursor: pointer
+    transition: $switch-track-transition
 
   .v-switch__track
     display: inline-flex
@@ -76,8 +76,13 @@
     border-radius: $switch-thumb-radius
     display: flex
     font-size: .75rem
-    height: $switch-inset-track-height
-    min-width: $switch-inset-track-width
+    height: $switch-thumb-height
+    justify-content: center
+    width: $switch-thumb-width
+    pointer-events: none
+    transition: $switch-thumb-transition
+    position: relative
+    overflow: hidden
 
     .v-switch:not(.v-switch-btn--inset) &
       @include tools.elevation($switch-thumb-elevation)
@@ -102,6 +107,7 @@
 
     .v-switch-btn--inset .v-selection-control--dirty &
       transform: none
+      transition: .15s .05s transform settings.$decelerated-easing
 
   .v-switch-btn
     $switch-thumb-transform: $switch-track-width * .5 - $switch-thumb-width * .5 + $switch-thumb-offset
@@ -114,19 +120,16 @@
       .v-icon
         position: absolute
 
-  &.v-input
-    flex: $switch-flex
+    .v-selection-control
+      min-height: var(--v-input-control-height)
 
-  .v-selection-control
-    min-height: var(--v-input-control-height)
-
-  .v-selection-control__input
-    border-radius: 50%
-    transition: $switch-control-input-transition
-    transform: translateX(-$switch-thumb-transform)
-    position: absolute
-
-    .v-icon
+    .v-selection-control__input
+      border-radius: 50%
+      transition: $switch-control-input-transition
+      +tools.ltr()
+        transform: translateX(-$switch-thumb-transform)
+      +tools.rtl()
+        transform: translateX($switch-thumb-transform)
       position: absolute
 
   &.v-selection-control--dirty

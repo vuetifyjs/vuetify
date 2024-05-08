@@ -1,8 +1,7 @@
 import container from 'markdown-it-container'
-import Token from 'markdown-it/lib/token'
+import Token from 'markdown-it/lib/token.mjs'
 import type MarkdownIt from 'markdown-it'
-import type Renderer from 'markdown-it/lib/renderer'
-import type { RenderRule } from 'markdown-it/lib/renderer'
+import type { RenderRule } from 'markdown-it/lib/renderer.mjs'
 
 function addCodeRules (md: MarkdownIt) {
   const fence = md.renderer.rules.fence
@@ -64,7 +63,7 @@ function addHrRules (md: MarkdownIt) {
 }
 
 function addUnderlineRules (md: MarkdownIt) {
-  const renderEm: Renderer.RenderRule = (tokens, idx, opts, env, self) => {
+  const renderEm: RenderRule = (tokens, idx, opts, env, self) => {
     const token = tokens[idx]
     if (token.markup === '_') {
       token.tag = 'span'

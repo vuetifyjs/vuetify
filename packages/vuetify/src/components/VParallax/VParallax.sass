@@ -1,6 +1,9 @@
-.v-parallax
-  position: relative
-  overflow: hidden
+@use '../../styles/tools'
 
-  &--active > .v-img__img
-    will-change: transform
+@include tools.layer('components')
+  .v-parallax
+    position: relative
+    overflow: hidden
+
+    &--active > .v-img__img
+      will-change: transform

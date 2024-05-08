@@ -24,13 +24,13 @@ The `v-btn` component replaces the standard html button with a material design t
 
 <PageFeatures />
 
+<VoPromotionsCardVuetify />
+
 ## Usage
 
 Buttons in their simplest form contain uppercase text, a slight elevation, hover effect, and a ripple effect on click.
 
 <ExamplesUsage name="v-btn" />
-
-<PromotedEntry />
 
 ## API
 
@@ -128,8 +128,6 @@ Icons can be used for the primary content of a button. They are commonly used in
 
 <ExamplesExample file="v-btn/prop-icon" />
 
-<PromotedRandom />
-
 #### Loaders
 
 Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use a `v-progress-circular` component but this can be customized with the **loader** slot.
@@ -169,6 +167,8 @@ The **loader** slot allows you to customize the loading indicator. In this examp
 
 <ExamplesExample file="v-btn/slot-loader" />
 
+<VoPromotionsCardVuetify />
+
 ## Examples
 
 The following are a collection of examples that demonstrate more advanced and real world use of the `v-btn` component.
@@ -191,8 +191,6 @@ This example utilizes the [v-text-field](/components/text-fields/) component to 
 
 <ExamplesExample file="v-btn/misc-tax-form" />
 
-<PromotedRandom />
-
 ### Dialog action
 
 Buttons are often used to trigger actions within a [v-dialog](/components/dialogs/). In this example we use the **outlined** variant and the **color** prop to create a button that is visually distinct from the other buttons.
@@ -204,6 +202,12 @@ Buttons are often used to trigger actions within a [v-dialog](/components/dialog
 In this example we use a [v-banner](/components/banners/) component to display a custom cookie consent banner. Clicking the "Manage Cookies" button will prompt a [v-dialog](/components/dialogs/) component.
 
 <ExamplesExample file="v-btn/misc-cookie-settings" />
+
+### Readonly buttons
+
+In this example, we change the properties of the `v-btn` based upon a "subscription" state. When the user is subscribed, we want to disable interaction with the button, but not change its appearance; which is what occurs when using the **disabled** property.
+
+<ExamplesExample file="v-btn/misc-readonly" />
 
 ## Global Configuration
 
@@ -280,7 +284,7 @@ The `v-banner-actions` component applies the **text** variant and **slim** prop,
 
 | Documentation | API |
 | - | - |
-| [Banners](/components/banners/) | [v-banner-actions](/api/v-banner-actions/) |  |
+| [Banners](/components/banners/) | [v-banner-actions](/api/v-banner-actions/) |
 
 <ExamplesExample file="v-btn/defaults-banner-actions" />
 
@@ -299,7 +303,7 @@ The `v-bottom-navigation` component **scopes** out all previously provided defau
 
 | Documentation | API |
 | - | - |
-| [Bottom navigation](/components/bottom-navigation/) | [v-bottom-navigation](/api/v-bottom-navigation/) |  |
+| [Bottom navigation](/components/bottom-navigation/) | [v-bottom-navigation](/api/v-bottom-navigation/) |
 
 <ExamplesExample file="v-btn/defaults-bottom-navigation" />
 
@@ -318,7 +322,7 @@ The `v-btn-group` component makes multiple changes to the `v-btn` component.
 
 | Documentation | API |
 | - | - |
-| [Button groups](/components/button-groups/) | [v-btn-group](/api/v-btn-group/) |  |
+| [Button groups](/components/button-groups/) | [v-btn-group](/api/v-btn-group/) |
 
 <ExamplesExample file="v-btn/defaults-btn-group" />
 
@@ -338,7 +342,7 @@ The `v-card-actions` component applies the **text** variant and **slim** prop, r
 
 | Documentation | API |
 | - | - |
-| [Cards](/components/cards/) | [v-card-actions](/api/v-card-actions/) |  |
+| [Cards](/components/cards/) | [v-card-actions](/api/v-card-actions/) |
 
 <ExamplesExample file="v-btn/defaults-card-actions" />
 
@@ -355,7 +359,7 @@ The `v-snackbar` component applies the **text** variant, **slim** prop, and remo
 
 | Documentation | API |
 | - | - |
-| [Snackbars](/components/snackbars/) | [v-snackbar](/api/v-snackbar/) |  |
+| [Snackbars](/components/snackbars/) | [v-snackbar](/api/v-snackbar/) |
 
 <ExamplesExample file="v-btn/defaults-snackbar" />
 
@@ -399,6 +403,8 @@ The following properties are modified when used within a `v-toolbar` or `v-toolb
 | - | - |
 | **height** | provided by `v-toolbar-items` |
 | **variant** | `text` |
+
+<VoPromotionsCardVuetify />
 
 ## Accessibility
 

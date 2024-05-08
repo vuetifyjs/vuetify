@@ -2,6 +2,7 @@ export default {
   badge: 'Odznaka',
   open: 'Otwórz',
   close: 'Zamknij',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Anuluj',
@@ -71,6 +72,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

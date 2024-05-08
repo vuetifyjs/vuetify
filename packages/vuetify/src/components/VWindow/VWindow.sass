@@ -1,82 +1,86 @@
+@use '../../styles/tools'
 @use './variables' as *
 
-.v-window
-  overflow: hidden
-
-  &__container
-    display: flex
-    flex-direction: column
-    height: inherit
-    position: relative
-    transition: $window-transition
-
-  &__controls
-    position: absolute
-    left: 0
-    top: 0
-    width: 100%
-    height: 100%
-    display: flex
-    align-items: center
-    justify-content: space-between
-    padding: $window-controls-padding
-    pointer-events: none
-
-    > *
-      pointer-events: auto
-
-  &--show-arrows-on-hover
+@include tools.layer('components')
+  .v-window
     overflow: hidden
 
-    .v-window__left
-      transform: translateX(-200%)
-
-    .v-window__right
-      transform: translateX(200%)
-
-    &:hover
-      .v-window__left,
-      .v-window__right
-        transform: translateX(0)
-
-  &-x-transition,
-  &-x-reverse-transition,
-  &-y-transition,
-  &-y-reverse-transition
-    &-enter-active,
-    &-leave-active
+    &__container
+      display: flex
+      flex-direction: column
+      height: inherit
+      position: relative
       transition: $window-transition
 
-    &-leave-from,
-    &-leave-to
-      position: absolute !important
+    &__controls
+      position: absolute
+      left: 0
       top: 0
       width: 100%
+      height: 100%
+      display: flex
+      align-items: center
+      justify-content: space-between
+      padding: $window-controls-padding
+      pointer-events: none
 
-  &-x-transition
-    &-enter-from
-      transform: translateX(100%)
+      > *
+        pointer-events: auto
 
-    &-leave-to
-      transform: translateX(-100%)
+    &--show-arrows-on-hover
+      overflow: hidden
 
-  &-x-reverse-transition
-    &-enter-from
-      transform: translateX(-100%)
+      .v-window__left
+        transform: translateX(-200%)
 
-    &-leave-to
-      transform: translateX(100%)
+      .v-window__right
+        transform: translateX(200%)
 
-  &-y-transition
-    &-enter-from
-      transform: translateY(100%)
+      &:hover
+        .v-window__left,
+        .v-window__right
+          transform: translateX(0)
 
-    &-leave-to
-      transform: translateY(-100%)
+@include tools.layer('transitions')
+  .v-window
+    &-x-transition,
+    &-x-reverse-transition,
+    &-y-transition,
+    &-y-reverse-transition
+      &-enter-active,
+      &-leave-active
+        transition: $window-transition
 
-  &-y-reverse-transition
-    &-enter-from
-      transform: translateY(-100%)
+      &-leave-from,
+      &-leave-to
+        position: absolute !important
+        top: 0
+        width: 100%
 
-    &-leave-to
-      transform: translateY(100%)
+    &-x-transition
+      &-enter-from
+        transform: translateX(100%)
+
+      &-leave-to
+        transform: translateX(-100%)
+
+    &-x-reverse-transition
+      &-enter-from
+        transform: translateX(-100%)
+
+      &-leave-to
+        transform: translateX(100%)
+
+    &-y-transition
+      &-enter-from
+        transform: translateY(100%)
+
+      &-leave-to
+        transform: translateY(-100%)
+
+    &-y-reverse-transition
+      &-enter-from
+        transform: translateY(-100%)
+
+      &-leave-to
+        transform: translateY(100%)

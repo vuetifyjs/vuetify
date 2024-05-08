@@ -2,6 +2,7 @@ export default {
   badge: 'rozet',
   open: 'Open',
   close: 'Kapat',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
@@ -71,6 +72,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

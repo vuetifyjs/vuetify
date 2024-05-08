@@ -1,17 +1,11 @@
 // Styles
 import 'prism-theme-vars/base.css'
 
-// App
-import App from './App.vue'
-
-// Virtual
-// import 'virtual:api'
-import { setupLayouts } from 'virtual:generated-layouts'
-
 // Plugins
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { createHead } from '@unhead/vue'
+import { installVuetify } from '@/plugins/vuetify'
 import { installPinia, pinia } from '@/plugins/pinia'
 import { installGlobalComponents } from '@/plugins/global-components'
 import { installGtag } from '@/plugins/gtag'
@@ -21,7 +15,13 @@ import { useAppStore } from '@/stores/app'
 import { useLocaleStore } from '@/stores/locale'
 import { installPwa } from '@/plugins/pwa'
 import { useUserStore } from '@vuetify/one'
-import { installVuetify } from '@/plugins/vuetify'
+
+// App
+import App from './App.vue'
+
+// Virtual
+// import 'virtual:api'
+import { setupLayouts } from 'virtual:generated-layouts'
 
 // Utilities
 import {

@@ -114,7 +114,7 @@ Navigation components are used to navigate between different views or pages.
 
 </ComponentsListItem>
 
-<ComponentsListItem name="FABs" src="fabs" labs>
+<ComponentsListItem name="FABs" src="floating-action-buttons">
 
   The floating action button is used for a promoted actions within an application
 
@@ -150,7 +150,7 @@ Navigation components are used to navigate between different views or pages.
 
 </ComponentsListItem>
 
-<ComponentsListItem name="Speed dials" src="speed-dials" labs>
+<ComponentsListItem name="Speed dials" src="speed-dials">
 
   The speed dial component is a floating action button that can reveal additional actions when clicked
 
@@ -229,6 +229,12 @@ Form components are used to collect user input in a variety of ways.
 <ComponentsListItem name="Inputs component" src="inputs">
 
   Create custom inputs that can be used with the v-model directive
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Number input component" src="number-inputs" labs>
+
+  The number input component is used for collecting numerical data from the user
 
 </ComponentsListItem>
 
@@ -328,6 +334,12 @@ These components are used to display data and information in a variety of ways.
 
 <v-row>
 
+<ComponentsListItem name="Confirm edit component" src="confirm-edit">
+
+  The confirm edit component is used to confirm changes to data
+
+</ComponentsListItem>
+
 <ComponentsListItem name="Data iterator component" src="data-iterators">
 
   The data iterator component provides an easy interface for paginating and sorting data
@@ -352,7 +364,7 @@ These components are used to display data and information in a variety of ways.
 
 </ComponentsListItem>
 
-<ComponentsListItem name="Sparkline component" src="sparkline" labs>
+<ComponentsListItem name="Sparkline component" src="sparkline">
 
   The sparkline component creates beautiful and expressive simple graphs for displaying numerical data
 
@@ -404,7 +416,7 @@ These components are used to provide feedback to the user within content, over c
 
 </ComponentsListItem>
 
-<ComponentsListItem name="Empty state component" src="empty-states" labs>
+<ComponentsListItem name="Empty state component" src="empty-states">
 
   The empty state component is used to indicate that a page or area on a page has no content.
 

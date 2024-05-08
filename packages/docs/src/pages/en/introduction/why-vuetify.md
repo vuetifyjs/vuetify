@@ -16,7 +16,7 @@ Learn more about what Vuetify is, how to create an application from scratch, bro
 
 <PageFeatures />
 
-<PromotedEntry />
+<VoPromotionsCardVuetify />
 
 ## What is Vuetify?
 
@@ -26,6 +26,8 @@ Since its initial release in 2014, [Vue.js](https://vuejs.org/) has grown to be 
 * [Features at a glance](#feature-guides)
 
 ## Getting started
+
+<VoPromotionsCardHighlight slug="vuemastery-getting-started" class="mb-4" />
 
 The fastest way to try Vuetify is in the browser at [Vuetify Play](https://play.vuetifyjs.com/). For a complete list of installation options please navigate to the [Installation page](/getting-started/installation/).
 

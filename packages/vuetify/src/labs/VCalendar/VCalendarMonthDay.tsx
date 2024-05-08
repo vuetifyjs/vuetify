@@ -12,6 +12,7 @@ export type VCalendarMonthDaySlots = {
   default: never
   content: never
   title: { title?: number | string }
+  event: { day?: Object, allDay: boolean, event: Record<string, unknown> }
 }
 
 export const makeVCalendarMonthDayProps = propsFactory({
@@ -23,7 +24,7 @@ export const makeVCalendarMonthDayProps = propsFactory({
   title: [Number, String],
 }, 'VCalendarMonthDay')
 
-export const VCalendarMonthDay = genericComponent< VCalendarMonthDaySlots >()({
+export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
   name: 'VCalendarMonthDay',
 
   props: makeVCalendarMonthDayProps(),
@@ -54,24 +55,32 @@ export const VCalendarMonthDay = genericComponent< VCalendarMonthDaySlots >()({
               )}
             </div>
           )}
-          <div key="content" class="v-calendar-weekly__day-content">
-            { slots.content?.() ?? (
-              <div>
-                <div class="v-calendar-weekly__day-alldayevents-container">
-                  { props.events?.filter(event => event.allDay).map(event => (
-                    <VCalendarEvent day={ props.day } event={ event } allDay />
-                  ))}
-                </div>
-                <div class="v-calendar-weekly__day-events-container">
-                  { props.events?.filter(event => !event.allDay).map(event => (
-                    <VCalendarEvent day={ props.day } event={ event } />
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
 
-          { slots.default?.() }
+          { !props.day?.isHidden && (
+            <div key="content" class="v-calendar-weekly__day-content">
+              { slots.content?.() ?? (
+                <div>
+                  <div class="v-calendar-weekly__day-alldayevents-container">
+                    { props.events?.filter(event => event.allDay).map(event => slots.event
+                      ? slots.event({ day: props.day, allDay: true, event })
+                      : (
+                        <VCalendarEvent day={ props.day } event={ event } allDay />
+                      ))}
+                  </div>
+
+                  <div class="v-calendar-weekly__day-events-container">
+                    { props.events?.filter(event => !event.allDay).map(event => slots.event
+                      ? slots.event({ day: props.day, event, allDay: false })
+                      : (
+                        <VCalendarEvent day={ props.day } event={ event } />
+                      ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          { !props.day?.isHidden && slots.default?.() }
         </div>
       )
     })

@@ -14,7 +14,7 @@ const API_PAGES_ROOT = resolve('./node_modules/.cache/api-pages')
 
 const require = createRequire(import.meta.url)
 
-const sections = ['props', 'events', 'slots', 'exposed', 'sass', 'argument', 'modifiers'] as const
+const sections = ['props', 'events', 'slots', 'exposed', 'sass', 'argument', 'modifiers', 'value'] as const
 // This can't be imported from the api-generator because it mixes the type definitions up
 type Data = {
   displayName: string // user visible name used in page titles

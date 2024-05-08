@@ -1,15 +1,17 @@
+@use '../../styles/tools'
 @use './variables' as *
 
-.v-pagination
-  &__list
-    display: inline-flex
-    list-style-type: none
-    justify-content: center
-    width: 100%
+@include tools.layer('components')
+  .v-pagination
+    &__list
+      display: inline-flex
+      list-style-type: none
+      justify-content: center
+      width: 100%
 
-  &__item,
-  &__first,
-  &__prev,
-  &__next,
-  &__last
-    margin: $pagination-item-margin
+    &__item,
+    &__first,
+    &__prev,
+    &__next,
+    &__last
+      margin: $pagination-item-margin

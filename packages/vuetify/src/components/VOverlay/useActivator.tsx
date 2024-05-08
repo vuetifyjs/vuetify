@@ -237,7 +237,7 @@ export function useActivator (
     })
   })
 
-  const targetRef = ref<HTMLElement>()
+  const targetRef = ref<ComponentPublicInstance<any> | HTMLElement>()
   const target = computed(() => {
     if (props.target === 'cursor' && cursorTarget.value) return cursorTarget.value
     if (targetRef.value) return refElement(targetRef.value)

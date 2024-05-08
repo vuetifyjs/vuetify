@@ -32,8 +32,8 @@
               <v-badge :model-value="user.avatar === avatar">
                 <v-avatar
                   v-bind="hoverProps"
-                  :class="{ 'cursor-pointer': auth.isSubscriber }"
-                  :style="auth.isSubscriber ? {} : {
+                  :class="{ 'cursor-pointer': one.isSubscriber }"
+                  :style="one.isSubscriber ? {} : {
                     filter: isHovering ? 'grayscale(0%)' : 'grayscale(100%)',
                     opacity: isHovering ? '1' : '.12',
                   }"
@@ -43,7 +43,7 @@
                   <v-img :src="avatar">
 
                     <div
-                      v-if="isHovering && !auth.isSubscriber"
+                      v-if="isHovering && !one.isSubscriber"
                       class="d-flex align-center justify-center h-100"
                       @click.stop.prevent
                     >
@@ -66,6 +66,7 @@
 
 <script setup>
   const auth = useAuthStore()
+  const one = useOneStore()
   const user = useUserStore()
 
   const avatars = [
