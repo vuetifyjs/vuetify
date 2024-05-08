@@ -12,8 +12,6 @@
 
     <AppBackToTop />
 
-    <AppSnackbarQueue />
-
     <v-main>
       <slot>
         <v-container

@@ -51,9 +51,9 @@ export const VTreeview = genericComponent<new <T>(
   props: makeVTreeviewProps(),
 
   emits: {
-    'update:opened': (val: unknown[]) => true,
-    'update:activated': (val: unknown[]) => true,
-    'update:selected': (val: unknown[]) => true,
+    'update:opened': (val: unknown) => true,
+    'update:activated': (val: unknown) => true,
+    'update:selected': (val: unknown) => true,
     'click:open': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },

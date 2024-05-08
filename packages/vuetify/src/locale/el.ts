@@ -2,6 +2,7 @@ export default {
   badge: 'Σήμα',
   open: 'Open',
   close: 'Close',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',

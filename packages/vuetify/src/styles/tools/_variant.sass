@@ -1,5 +1,6 @@
 @use "./absolute" as *
 @use "./elevation" as *
+@use "../settings/variables" as *
 
 @mixin variant($contained-background, $contained-color, $contained-elevation, $plain-opacity, $name)
   &--variant-plain,
@@ -33,7 +34,7 @@
     @include elevation(0)
 
   &--variant-outlined
-    border: thin solid currentColor
+    border: $border-width-root solid currentColor
 
   &--variant-text
     .#{$name}__overlay
@@ -44,9 +45,11 @@
       background: currentColor
       opacity: var(--v-activated-opacity)
       border-radius: inherit
-      position: absolute
       top: 0
       right: 0
       bottom: 0
       left: 0
       pointer-events: none
+
+  .#{$name}__underlay
+    position: absolute

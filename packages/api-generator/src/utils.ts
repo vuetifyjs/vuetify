@@ -2,7 +2,7 @@ import { execSync } from 'child_process'
 import stringifyObject from 'stringify-object'
 import prettier from 'prettier'
 import * as typescriptParser from 'prettier/plugins/typescript'
-import type { Definition } from './types'
+import type { Definition, DirectiveData } from './types'
 
 function parseFunctionParams (func: string) {
   const [, regular] = /function\s\((.*)\)\s\{.*/i.exec(func) || []
@@ -134,10 +134,12 @@ async function getSources (name: string, locale: string, sources: string[]) {
   const sourcesMap = [name, ...sources, 'generic']
 
   return {
-    find: (section: string, key: string, ogSource = name) => {
+    find (section: string, key?: string, ogSource = name) {
       for (let i = 0; i < arr.length; i++) {
         const source = arr[i] as any
-        const found: string | undefined = source?.[section]?.[key]
+        const found: string | undefined = ['argument', 'value'].includes(section)
+          ? source?.[section]
+          : source?.[section]?.[key!]
         if (found) {
           return { text: found, source: sourcesMap[i] }
         }
@@ -167,25 +169,26 @@ export async function addDescriptions (name: string, componentData: ComponentDat
 
 export async function addDirectiveDescriptions (
   name: string,
-  componentData: { argument: { value: Definition }, modifiers: Record<string, Definition> },
+  componentData: DirectiveData,
   locales: string[],
   sources: string[] = [],
 ) {
   for (const locale of locales) {
     const descriptions = await getSources(name, locale, sources)
 
-    if (componentData.argument) {
-      for (const [name, arg] of Object.entries(componentData.argument)) {
-        arg.description = arg.description ?? {}
+    if (componentData.value) {
+      componentData.value.description = componentData.value.description ?? {}
+      componentData.value.description[locale] = descriptions.find('value')?.text
+    }
 
-        arg.description[locale] = descriptions.find('argument', name)?.text
-      }
+    if (componentData.argument) {
+      componentData.argument.description = componentData.argument.description ?? {}
+      componentData.argument.description[locale] = descriptions.find('argument')?.text
     }
 
     if (componentData.modifiers) {
       for (const [name, modifier] of Object.entries(componentData.modifiers)) {
         modifier.description = modifier.description ?? {}
-
         modifier.description[locale] = descriptions.find('modifiers', name)?.text
       }
     }

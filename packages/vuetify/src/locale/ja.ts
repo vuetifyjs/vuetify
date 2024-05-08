@@ -2,6 +2,7 @@ export default {
   badge: 'バッジ',
   open: 'Open',
   close: '閉じる',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',

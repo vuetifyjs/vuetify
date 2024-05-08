@@ -2,7 +2,7 @@
 import { useProxiedModel } from './proxiedModel'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef, unref, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, onUpdated, provide, reactive, toRef, unref, watch } from 'vue'
 import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -13,6 +13,7 @@ export interface GroupItem {
   id: number
   value: Ref<unknown>
   disabled: Ref<boolean | undefined>
+  useIndexAsValue?: boolean
 }
 
 export interface GroupProps {
@@ -181,6 +182,7 @@ export function useGroup (
 
     if (unref(unwrapped.value) == null) {
       unwrapped.value = index
+      unwrapped.useIndexAsValue = true
     }
 
     if (index > -1) {
@@ -217,6 +219,15 @@ export function useGroup (
 
   onBeforeUnmount(() => {
     isUnmounted = true
+  })
+
+  onUpdated(() => {
+    // #19655 update the items that use the index as the value.
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].useIndexAsValue) {
+        items[i].value = i
+      }
+    }
   })
 
   function select (id: number, value?: boolean) {

@@ -2,6 +2,7 @@ export default {
   badge: '徽章',
   open: 'Open',
   close: '關閉',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',

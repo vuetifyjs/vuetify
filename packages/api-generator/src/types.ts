@@ -81,7 +81,8 @@ export async function generateDirectiveDataFromTypes (): Promise<DirectiveData[]
         fileName: `v-${kebabName}`,
         displayName: `v-${kebabName}`,
         pathName: `v-${kebabName}-directive`,
-        argument: { value: await prettifyType(name, (data as ObjectDefinition).properties.value) },
+        value: await prettifyType(name, (data as ObjectDefinition).properties.value),
+        argument: (data as ObjectDefinition).properties.arg,
         modifiers: ((data as ObjectDefinition).properties.modifiers as ObjectDefinition).properties,
       }
     })
@@ -91,10 +92,17 @@ export async function generateDirectiveDataFromTypes (): Promise<DirectiveData[]
 export async function generateComponentDataFromTypes (component: string): Promise<ComponentData> {
   const sourceFile = project.addSourceFileAtPath(`./templates/tmp/${component}.d.ts`)
 
-  const props = await inspect(project, sourceFile.getTypeAlias('ComponentProps'))
-  const events = await inspect(project, sourceFile.getTypeAlias('ComponentEvents'))
-  const slots = await inspect(project, sourceFile.getTypeAlias('ComponentSlots'))
-  const exposed = await inspect(project, sourceFile.getTypeAlias('ComponentExposed'))
+  const [
+    props,
+    events,
+    slots,
+    exposed,
+  ] = await Promise.all([
+    inspect(project, sourceFile.getTypeAlias('ComponentProps')),
+    inspect(project, sourceFile.getTypeAlias('ComponentEvents')),
+    inspect(project, sourceFile.getTypeAlias('ComponentSlots')),
+    inspect(project, sourceFile.getTypeAlias('ComponentExposed')),
+  ])
 
   const sections = [props, events, slots, exposed]
 
@@ -114,6 +122,10 @@ export async function generateComponentDataFromTypes (component: string): Promis
     events: events.properties,
     slots: slots.properties,
     exposed: exposed.properties,
+    displayName: component,
+    fileName: component,
+    pathName: kebabCase(component),
+    sass: {},
   }
 }
 
@@ -217,6 +229,7 @@ export type ComponentData = BaseData & {
   slots: Record<string, Definition>
   events: Record<string, Definition>
   exposed: Record<string, Definition>
+  value?: never
   argument?: never
   modifiers?: never
 }
@@ -226,7 +239,8 @@ export type DirectiveData = BaseData & {
   slots?: never
   events?: never
   exposed?: never
-  argument: { value: Definition }
+  value: Definition
+  argument: Definition
   modifiers: Record<string, Definition>
 }
 export type ComposableData = BaseData & {
@@ -235,6 +249,7 @@ export type ComposableData = BaseData & {
   slots?: never
   events?: never
   exposed: Record<string, Definition>
+  value?: never
   argument?: never
   modifiers?: never
 }
@@ -268,21 +283,21 @@ function getSource (declaration?: Node<ts.Node>) {
   return filePath && startLine ? `${filePath}#L${startLine}-L${endLine}` : undefined
 }
 
-function listFlags (flags: object, value?: number) {
-  if (!value) return []
+// function listFlags (flags: object, value?: number) {
+//   if (!value) return []
 
-  const entries = Object.entries(flags).filter(([_, flag]) => typeof flag === 'number')
+//   const entries = Object.entries(flags).filter(([_, flag]) => typeof flag === 'number')
 
-  return entries.reduce<string[]>((arr, [name, flag]) => {
-    if (value & flag) {
-      arr.push(name)
-    }
-    return arr
-  }, [])
-}
+//   return entries.reduce<string[]>((arr, [name, flag]) => {
+//     if (value & flag) {
+//       arr.push(name)
+//     }
+//     return arr
+//   }, [])
+// }
 
 function getCleanText (text: string) {
-  return text.replaceAll(/import\(.*?\)\./g, '')
+  return text.replace(/import\(.*?\)\./g, '')
 }
 
 function count (arr: string[], needle: string) {
@@ -294,6 +309,7 @@ function count (arr: string[], needle: string) {
 // Types that are displayed as links
 const allowedRefs = [
   'Anchor',
+  'ActiveStrategy',
   'DataIteratorItem',
   'DataTableHeader',
   'DataTableItem',
@@ -304,12 +320,15 @@ const allowedRefs = [
   'ListItem',
   'LocationStrategyFn',
   'OpenSelectStrategyFn',
+  'OpenStrategy',
   'OpenStrategyFn',
   'ScrollStrategyFn',
   'SelectItemKey',
+  'SelectStrategy',
   'SelectStrategyFn',
   'SortItem',
   'SubmitEventPromise',
+  'TemplateRef',
   'TouchHandlers',
   'ValidationRule',
 ]
@@ -607,7 +626,7 @@ function getRecursiveTypes (recursiveTypes: string[], type: Type<ts.Type>) {
 function findPotentialRecursiveTypes (type?: Type<ts.Type>): string[] {
   if (type == null) return []
 
-  const recursiveTypes = []
+  const recursiveTypes: string[] = []
 
   if (type.isUnion()) {
     recursiveTypes.push(...getUnionTypes(type).map(t => t.getText()))

@@ -2,6 +2,7 @@ export default {
   badge: 'Lencana',
   open: 'Open',
   close: 'Tutup',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',

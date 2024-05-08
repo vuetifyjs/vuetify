@@ -8,39 +8,31 @@ related:
   - /components/cards/
   - /components/sheets/
   - /components/expansion-panels/
+features:
+  github: /components/VSparkline/
+  label: 'C: VSparkline'
+  report: true
 ---
 
 # Sparklines
 
 The sparkline component can be used to create simple graphs, like GitHub's contribution chart.
 
-<PromotedEntry />
+<PageFeatures />
 
-::: warning
+::: success
 
-This feature requires [v3.5.5](/getting-started/release-notes/?version=v3.5.5)
+This feature was introduced in [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
 
 :::
-
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VSparkline } from 'vuetify/labs/VSparkline'
-
-export default createVuetify({
-  components: {
-    VSparkline,
-  },
-})
-```
 
 ## Usage
 
 A sparkline is a tiny chart that provides a visual representation of data. The sparkline component comes in 2 variations, **trend** (default) and **bar**. Each supports a multitude of options for customizing the look and feel of the sparkline.
 
 <ExamplesExample file="v-sparkline/usage" />
+
+<PromotedEntry />
 
 ## API
 
@@ -79,3 +71,9 @@ The `v-sparkline` component pairs nicely with `v-card` and `v-sheet` to create c
 For concise information, a complete chart might be overkill. Using a trend line with gradient provides enough detail for the user without showing too much information.
 
 <ExamplesExample file="v-sparkline/misc-heart-rate" />
+
+#### Dashboard cards
+
+The `v-sparkline` component can be used to create a variety of different cards for a dashboard. Here we show a few examples of how it can be used to display different types of data.
+
+<ExamplesExample file="v-sparkline/misc-dashboard-cards" />

@@ -2,22 +2,22 @@
   <v-defaults-provider
     :defaults="{
       VIcon: {
-        color: user.railDrawer && auth.isSubscriber ? 'primary' : 'disabled'
+        color: user.railDrawer && one.isSubscriber ? 'primary' : 'disabled'
       }
     }"
   >
     <SettingsSwitch
       v-model="user.railDrawer"
-      :disabled="!auth.isSubscriber"
+      :disabled="!one.isSubscriber"
       :label="t('dashboard.perks.rail-drawer')"
       :messages="t('dashboard.perks.rail-drawer-message')"
-      :readonly="!auth.isSubscriber"
+      :readonly="!one.isSubscriber"
     />
   </v-defaults-provider>
 </template>
 
 <script setup>
   const { t } = useI18n()
-  const auth = useAuthStore()
+  const one = useOneStore()
   const user = useUserStore()
 </script>

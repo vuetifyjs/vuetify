@@ -2,6 +2,7 @@ export default {
   badge: 'Emblem',
   open: 'Open',
   close: 'Luk',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',

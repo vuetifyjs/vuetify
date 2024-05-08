@@ -60,7 +60,9 @@ export const makeVDatePickerProps = propsFactory({
   },
 
   ...makeVDatePickerControlsProps(),
-  ...makeVDatePickerMonthProps(),
+  ...makeVDatePickerMonthProps({
+    weeksInMonth: 'static' as const,
+  }),
   ...omit(makeVDatePickerMonthsProps(), ['modelValue']),
   ...omit(makeVDatePickerYearsProps(), ['modelValue']),
   ...makeVPickerProps({ title: '$vuetify.datePicker.title' }),
@@ -119,17 +121,22 @@ export const VDatePicker = genericComponent<new <
 
     const isReversing = shallowRef(false)
     const header = computed(() => {
-      return props.multiple && model.value.length > 1
-        ? t('$vuetify.datePicker.itemsSelected', model.value.length)
-        : model.value[0] && adapter.isValid(model.value[0])
-          ? adapter.format(model.value[0], 'normalDateWithWeekday')
-          : t(props.header)
+      if (props.multiple && model.value.length > 1) {
+        return t('$vuetify.datePicker.itemsSelected', model.value.length)
+      }
+
+      return (model.value[0] && adapter.isValid(model.value[0]))
+        ? adapter.format(adapter.date(model.value[0]), 'normalDateWithWeekday')
+        : t(props.header)
     })
     const text = computed(() => {
-      return adapter.format(
-        adapter.date(new Date(year.value, month.value, 1)),
-        'monthAndYear',
-      )
+      let date = adapter.date()
+
+      date = adapter.setDate(date, 1)
+      date = adapter.setMonth(date, month.value)
+      date = adapter.setYear(date, year.value)
+
+      return adapter.format(date, 'monthAndYear')
     })
     // const headerIcon = computed(() => props.inputMode === 'calendar' ? props.keyboardIcon : props.calendarIcon)
     const headerTransition = computed(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
@@ -223,8 +230,20 @@ export const VDatePicker = genericComponent<new <
     }
 
     watch(model, (val, oldVal) => {
-      const before = adapter.date(wrapInArray(val)[0])
-      const after = adapter.date(wrapInArray(oldVal)[0])
+      const before = adapter.date(wrapInArray(oldVal)[oldVal.length - 1])
+      const after = adapter.date(wrapInArray(val)[val.length - 1])
+      const newMonth = adapter.getMonth(after)
+      const newYear = adapter.getYear(after)
+
+      if (newMonth !== month.value) {
+        month.value = newMonth
+        onUpdateMonth(month.value)
+      }
+
+      if (newYear !== year.value) {
+        year.value = newYear
+        onUpdateYear(year.value)
+      }
 
       isReversing.value = adapter.isBefore(before, after)
     })

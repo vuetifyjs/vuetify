@@ -161,7 +161,7 @@ yarn create vuetify
 Using [npm](https://npmjs.com/)
 
 ```bash
-npm create vuetify
+npm create vuetify@latest
 ```
 
 Using [pnpm](https://pnpm.io/)

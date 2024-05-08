@@ -2,6 +2,7 @@ export default {
   badge: 'Distintivo',
   open: 'Apri',
   close: 'Chiudi',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Annulla',
