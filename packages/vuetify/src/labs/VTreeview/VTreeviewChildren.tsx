@@ -43,27 +43,21 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
   setup (props, { emit, slots }) {
     const isLoading = shallowRef(null)
 
-    function checkChildren (item: unknown) {
-
-      return new Promise<void>((resolve) => {
-
+    function checkChildren (item: any) {
+      return new Promise<void>(resolve => {
         if (!props.items?.length || !props.loadChildren) return resolve()
 
         if (item?.children?.length === 0) {
-
           isLoading.value = item.value
           props.loadChildren(item).then(resolve)
 
           return
-
         }
 
         resolve()
-
       }).finally(() => {
         isLoading.value = null
       })
-
     }
 
     function onClick (e: MouseEvent | KeyboardEvent, item: any) {
