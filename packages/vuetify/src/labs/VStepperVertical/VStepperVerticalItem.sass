@@ -32,9 +32,13 @@
   &:after
     display: none
 
-  &.v-expansion-panel--disabled
-    .v-expansion-panel-title .v-expansion-panel-title__overlay
-      opacity: 0
+  &.v-expansion-panel--disabled,
+  &:not(.v-stepper-vertical-item--editable)
+    .v-expansion-panel-title
+      pointer-events: none
+
+      .v-expansion-panel-title__overlay
+        opacity: 0
 
 .v-stepper-vertical-item__avatar.v-avatar
   background: rgba(var(--v-theme-surface-variant), var(--v-medium-emphasis-opacity))

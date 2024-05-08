@@ -108,6 +108,7 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
             {
               'v-stepper-vertical-item--complete': hasCompleted.value,
               'v-stepper-vertical-item--disabled': props.disabled,
+              'v-stepper-vertical-item--editable': canEdit.value,
               'v-stepper-vertical-item--error': hasError.value,
             },
             props.class,
@@ -154,9 +155,8 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
                   onClick:next={ onClickNext }
                   onClick:prev={ onClickPrev }
                   v-slots={{
-                    prev: slots.prev,
-                    next: slots.next,
-                    default: slots.actions,
+                    prev: slots.prev ? (slotProps: any) => slots.prev?.(slotProps) : undefined,
+                    next: slots.next ? (slotProps: any) => slots.next?.(slotProps) : undefined,
                   }}
                 />
               </>
