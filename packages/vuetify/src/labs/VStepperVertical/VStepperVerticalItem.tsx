@@ -2,11 +2,11 @@
 import './VStepperVerticalItem.sass'
 
 // Components
+import { VStepperVerticalActions } from './VStepperVerticalActions'
 import { VAvatar } from '@/components/VAvatar/VAvatar'
 import { VExpansionPanel } from '@/components/VExpansionPanel'
 import { makeVExpansionPanelProps } from '@/components/VExpansionPanel/VExpansionPanel'
 import { VIcon } from '@/components/VIcon/VIcon'
-import { VStepperActions } from '@/components/VStepper/VStepperActions'
 import { makeStepperItemProps } from '@/components/VStepper/VStepperItem'
 
 // Utilities
@@ -40,24 +40,25 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
 
   props: makeVStepperVerticalItemProps(),
 
-  setup (props, { slots }) {
+  emits: {
+    'click:next': () => true,
+    'click:prev': () => true,
+    'click:finish': () => true,
+  },
+
+  setup (props, { emit, slots }) {
     const vExpansionPanelRef = ref<typeof VExpansionPanel>()
     const step = computed(() => props.value)
-    const isValid = computed(() => props.rules.every(handler => handler() === true))
-    const canEdit = computed(() => !props.disabled && props.editable)
-    const hasError = computed(() => props.error || !isValid.value)
-    const hasCompleted = computed(() => props.complete || (props.rules.length > 0 && isValid.value))
     const groupItem = computed(() => vExpansionPanelRef.value?.groupItem)
-    const selected = computed(() => groupItem.value?.group.selected.value)
-    const _items = computed(() => groupItem.value?.group.items.value ?? [])
-    const activeIndex = computed(() => {
-      return _items.value.findIndex((item: any) => selected.value.includes(item.id))
-    })
+    const isSelected = computed(() => groupItem.value?.isSelected.value ?? false)
+    const isValid = computed(() => isSelected.value ? props.rules.every(handler => handler() === true) : null)
+    const canEdit = computed(() => !props.disabled && props.editable)
+    const hasError = computed(() => props.error || (isSelected.value && !isValid.value))
+    const hasCompleted = computed(() => props.complete || (props.rules.length > 0 && isValid.value === true))
 
     const disabled = computed(() => {
       if (props.disabled) return props.disabled
-      if (activeIndex.value === 0) return 'prev'
-      if (activeIndex.value === _items.value.length - 1) return 'next'
+      if (groupItem.value?.isFirst.value) return 'prev'
 
       return false
     })
@@ -79,11 +80,19 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
       value: props.value,
     }))
 
+    function onClickFinish () {
+      emit('click:finish')
+    }
+
     function onClickNext () {
+      emit('click:next')
+
       groupItem.value.group.next()
     }
 
     function onClickPrev () {
+      emit('click:prev')
+
       groupItem.value.group.prev()
     }
 
@@ -149,11 +158,13 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
               <>
                 { slots.default?.(slotProps.value) ?? props.text }
 
-                <VStepperActions
+                <VStepperVerticalActions
                   class="v-stepper-vertical-actions"
                   disabled={ disabled.value }
                   onClick:next={ onClickNext }
                   onClick:prev={ onClickPrev }
+                  onClick:finish={ onClickFinish }
+                  finish={ groupItem.value?.isLast.value }
                   v-slots={{
                     prev: slots.prev ? (slotProps: any) => slots.prev?.(slotProps) : undefined,
                     next: slots.next ? (slotProps: any) => slots.next?.(slotProps) : undefined,
