@@ -8,8 +8,8 @@
     .v-label
       padding-inline-start: $switch-label-margin-inline-start
 
-    .v-progress-circular
-      color: $switch-loader-color
+  .v-switch__loader
+    display: flex
 
     .v-switch-btn--inset &
       border-radius: $switch-inset-track-border-radius
@@ -20,6 +20,10 @@
 
     .v-progress-circular
       color: $switch-loader-color
+
+  .v-switch__track,
+  .v-switch__thumb
+    transition: none
 
     .v-selection-control--error:not(.v-selection-control--disabled) &
       background-color: $switch-error-background-color
@@ -36,19 +40,6 @@
 
     .v-selection-control--dirty &
       opacity: 0
-
-  .v-switch__track
-    display: inline-flex
-    align-items: center
-    font-size: .5rem
-    padding: 0 5px
-    background-color: $switch-track-background
-    border-radius: $switch-track-radius
-    height: $switch-track-height
-    opacity: $switch-track-opacity
-    min-width: $switch-track-width
-    cursor: pointer
-    transition: $switch-track-transition
 
   .v-switch__track
     display: inline-flex
@@ -91,19 +82,15 @@
       background: $switch-thumb-flat-background
       color: $switch-thumb-flat-color
 
-  .v-switch-btn.v-switch-btn--flat:not(.v-switch-btn--inset) &
-    background: $switch-thumb-flat-background
-    color: $switch-thumb-flat-color
+      @include tools.elevation(0)
 
     .v-switch-btn--inset &
       height: $switch-inset-thumb-height
       width: $switch-inset-thumb-width
       transform: scale(calc($switch-inset-thumb-off-height / $switch-inset-thumb-height))
 
-  .v-switch-btn--inset &
-    height: $switch-inset-thumb-height
-    width: $switch-inset-thumb-width
-    transform: scale(calc($switch-inset-thumb-off-height / $switch-inset-thumb-height))
+      &--filled
+        transform: none
 
     .v-switch-btn--inset .v-selection-control--dirty &
       transform: none
@@ -132,9 +119,8 @@
         transform: translateX($switch-thumb-transform)
       position: absolute
 
-  &.v-selection-control--dirty
-    .v-selection-control__input
-      transform: translateX($switch-thumb-transform)
+      .v-icon
+        position: absolute
 
     &.v-selection-control--dirty
       .v-selection-control__input
@@ -147,8 +133,8 @@
       .v-selection-control__input
         transform: scale(.8)
       .v-switch__thumb
-        transform: none
-        transition: .15s .05s transform settings.$decelerated-easing
+        transform: scale(.75)
+        box-shadow: none
 
     &.v-switch-btn--inset
       .v-selection-control__wrapper
@@ -157,9 +143,9 @@
         transform: none
         transition: .15s .05s transform settings.$decelerated-easing
 
-  &.v-switch-btn--inset
-    .v-selection-control__wrapper
-      width: auto
+    &.v-input--vertical
+      .v-label
+        min-width: max-content
 
       .v-selection-control__wrapper
         transform: $switch-thumb-vertical-transform
