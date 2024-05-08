@@ -79,6 +79,7 @@ export const VSwitch = genericComponent<new <T>(
     const { loaderClasses } = useLoader(props)
     const { isFocused, focus, blur } = useFocus(props)
     const control = ref<VSelectionControl>()
+    const isForcedColorsModeActive = matchMedia('(forced-colors: active)').matches
 
     const loaderColor = computed(() => {
       return typeof props.loading === 'string' && props.loading !== ''
@@ -158,7 +159,7 @@ export const VSwitch = genericComponent<new <T>(
                       <div
                         class={[
                           'v-switch__track',
-                          ...backgroundColorClasses.value,
+                          ...(!isForcedColorsModeActive ? backgroundColorClasses.value : ''),
                         ]}
                         style={ backgroundColorStyles.value }
                         onClick={ onTrackClick }
@@ -183,7 +184,7 @@ export const VSwitch = genericComponent<new <T>(
                           class={[
                             'v-switch__thumb',
                             { 'v-switch__thumb--filled': icon || props.loading },
-                            props.inset ? undefined : backgroundColorClasses.value,
+                            props.inset || isForcedColorsModeActive ? undefined : backgroundColorClasses.value,
                           ]}
                           style={ props.inset ? undefined : backgroundColorStyles.value }
                         >
