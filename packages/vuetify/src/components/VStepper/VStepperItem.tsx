@@ -91,7 +91,7 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
     const icon = computed(() => {
       if (hasError.value) return props.errorIcon
       if (hasCompleted.value) return props.completeIcon
-      if (props.editable) return props.editIcon
+      if (group.isSelected.value && props.editable) return props.editIcon
 
       return props.icon
     })
