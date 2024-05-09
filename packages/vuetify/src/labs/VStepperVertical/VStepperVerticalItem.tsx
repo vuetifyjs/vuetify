@@ -65,7 +65,7 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
     const icon = computed(() => {
       if (hasError.value) return props.errorIcon
       if (hasCompleted.value) return props.completeIcon
-      if (props.editable && !props.icon) return props.editIcon
+      if (groupItem.value?.isSelected.value && props.editable) return props.editIcon
 
       return props.icon
     })

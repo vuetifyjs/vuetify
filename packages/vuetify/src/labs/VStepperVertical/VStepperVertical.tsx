@@ -112,7 +112,7 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
             }) => {
               return (
                 <>
-                  { items.value.map(item => (
+                  { items.value.map(({ raw, ...item }) => (
                     <VStepperVerticalItem { ...item }>
                       {{
                         ...slots,
