@@ -29,15 +29,14 @@ The `v-confirm` directive makes it easy to add a confirm to any element in your 
 
 ## API
 
-| Props                                  | Type                         |
-|--------------------------------------------|-------------------------------------|
-| title                                       | String |
-| text                                       | String |
-| input                                       | String, Boolean |
-| inputProps                                       | [v-text-field](/api/v-text-field/) |
-| onSubmit                                       | ((value: any) => void) |
-| onCancel                                       | (() => number) |
-
+| Props                                  | Type                                |
+|----------------------------------------|-------------------------------------|
+| title                                  | String                              |
+| text                                   | String                              |
+| input                                  | String, Boolean                     |
+| inputProps                             | [v-text-field](/api/v-text-field/)  |
+| onSubmit                               | ((value: any) => void)              |
+| onCancel                               | (() => number)                      |
 
 ## Guide
 
