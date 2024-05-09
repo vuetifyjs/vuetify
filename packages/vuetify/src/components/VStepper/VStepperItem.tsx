@@ -7,6 +7,7 @@ import { VIcon } from '@/components/VIcon/VIcon'
 
 // Composables
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
+import { genOverlays } from '@/composables/variant'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -85,13 +86,14 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
     const group = useGroupItem(props, VStepperSymbol, true)
     const step = computed(() => group?.value.value ?? props.value)
     const isValid = computed(() => props.rules.every(handler => handler() === true))
+    const isClickable = computed(() => !props.disabled && props.editable)
     const canEdit = computed(() => !props.disabled && props.editable)
     const hasError = computed(() => props.error || !isValid.value)
     const hasCompleted = computed(() => props.complete || (props.rules.length > 0 && isValid.value))
     const icon = computed(() => {
       if (hasError.value) return props.errorIcon
       if (hasCompleted.value) return props.completeIcon
-      if (props.editable) return props.editIcon
+      if (group.isSelected.value && props.editable) return props.editIcon
 
       return props.icon
     })
@@ -141,6 +143,8 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
           ]}
           onClick={ onClick }
         >
+          { isClickable.value && genOverlays(true, 'v-stepper-item') }
+
           <VAvatar
             key="stepper-avatar"
             class="v-stepper-item__avatar"
