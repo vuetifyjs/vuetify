@@ -213,6 +213,7 @@
     "activeIcon": "mdi-function",
     "items": [
       "click-outside",
+      "confirm",
       "intersect",
       "mutate",
       "resize",

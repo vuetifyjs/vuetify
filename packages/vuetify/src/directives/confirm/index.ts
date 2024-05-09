@@ -9,11 +9,16 @@ import type { DirectiveBinding } from 'vue'
 import type { Anchor } from '@/util'
 
 export interface ConfirmDirectiveBinding
-  extends Omit<DirectiveBinding<string>, 'arg' | 'value'> {
-  arg?: {
-    [T in Anchor]: T extends `${infer A} ${infer B}` ? `${A}-${B}` : T;
-  }[Anchor]
-  value: boolean | string | Record<string, any>
+  extends Omit<DirectiveBinding<string>, 'value'> {
+  value: {
+    title: string
+    text: string
+    onSubmit: (value?: string) => void
+    onCancel?: () => void
+    input?: boolean
+    inputProps?: Record<string, unknown>
+    anchor?: Anchor
+  }
 }
 
 export const Confirm = useDirectiveComponent<ConfirmDirectiveBinding>(
