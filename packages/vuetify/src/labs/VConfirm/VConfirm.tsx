@@ -76,6 +76,7 @@ export const VConfirm = genericComponent()({
                       variant="solo-filled"
                       clearable
                       hide-details
+                      focused
                       minWidth="200"
                       label={ props.text }
                       { ...props.inputProps }
