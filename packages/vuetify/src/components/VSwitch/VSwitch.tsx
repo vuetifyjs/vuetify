@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { filterInputAttrs, genericComponent, getUid, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, getUid, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, Ref } from 'vue'
@@ -79,7 +79,7 @@ export const VSwitch = genericComponent<new <T>(
     const { loaderClasses } = useLoader(props)
     const { isFocused, focus, blur } = useFocus(props)
     const control = ref<VSelectionControl>()
-    const isForcedColorsModeActive = matchMedia('(forced-colors: active)').matches
+    const isForcedColorsModeActive = IN_BROWSER && window.matchMedia('(forced-colors: active)').matches
 
     const loaderColor = computed(() => {
       return typeof props.loading === 'string' && props.loading !== ''
