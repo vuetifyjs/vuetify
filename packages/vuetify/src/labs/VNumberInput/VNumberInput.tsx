@@ -19,7 +19,7 @@ import type { PropType } from 'vue'
 import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
 
 type ControlSlot = {
-  click: () => void
+  click: (e: MouseEvent) => void
 }
 
 type VNumberInputSlots = Omit<VTextFieldSlots, 'default'> & {
@@ -108,11 +108,13 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       }
     }
 
-    function onClickUp () {
+    function onClickUp (e: MouseEvent) {
+      e.stopPropagation()
       toggleUpDown()
     }
 
-    function onClickDown () {
+    function onClickDown (e: MouseEvent) {
+      e.stopPropagation()
       toggleUpDown(false)
     }
 
@@ -143,6 +145,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       model.value = v ? +(v) : undefined
     }
 
+    function onControlMousedown (e: MouseEvent) {
+      e.stopPropagation()
+    }
+
     useRender(() => {
       const { modelValue: _, ...textFieldProps } = VTextField.filterProps(props)
 
@@ -162,6 +168,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                   size="small"
                   tabindex="-1"
                   onClick={ onClickDown }
+                  onMousedown={ onControlMousedown }
                 />
               ) : (
                 <VDefaultsProvider
@@ -195,6 +202,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                   name="increment-btn"
                   icon="$collapse"
                   onClick={ onClickUp }
+                  onMousedown={ onControlMousedown }
                   size="small"
                   tabindex="-1"
                 />
@@ -236,6 +244,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                 tile
                 tabindex="-1"
                 onClick={ onClickUp }
+                onMousedown={ onControlMousedown }
               />
             </div>
           ) : (!props.reverse
@@ -255,6 +264,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                 tile
                 tabindex="-1"
                 onClick={ onClickDown }
+                onMousedown={ onControlMousedown }
               />
 
               <VDivider vertical />
