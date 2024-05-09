@@ -73,6 +73,8 @@ export type VDataTableSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots
 export const makeDataTableProps = propsFactory({
   ...makeVDataTableRowsProps(),
 
+  hideDefaultFooter: Boolean,
+  hideDefaultHeader: Boolean,
   width: [String, Number],
   search: String,
 
@@ -151,7 +153,11 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
 
-    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, sortFunctions, sortRawFunctions)
+    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
+      transform: item => item.columns,
+      sortFunctions,
+      sortRawFunctions,
+    })
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
     const itemsLength = computed(() => flatItems.value.length)
 
@@ -236,12 +242,14 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
             default: () => slots.default ? slots.default(slotProps.value) : (
               <>
                 { slots.colgroup?.(slotProps.value) }
-                <thead>
-                  <VDataTableHeaders
-                    { ...dataTableHeadersProps }
-                    v-slots={ slots }
-                  />
-                </thead>
+                { !props.hideDefaultHeader && (
+                  <thead key="thead">
+                    <VDataTableHeaders
+                      { ...dataTableHeadersProps }
+                      v-slots={ slots }
+                    />
+                  </thead>
+                )}
                 { slots.thead?.(slotProps.value) }
                 <tbody>
                   { slots['body.prepend']?.(slotProps.value) }
@@ -259,7 +267,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
                 { slots.tfoot?.(slotProps.value) }
               </>
             ),
-            bottom: () => slots.bottom ? slots.bottom(slotProps.value) : (
+            bottom: () => slots.bottom ? slots.bottom(slotProps.value) : !props.hideDefaultFooter && (
               <>
                 <VDivider />
 

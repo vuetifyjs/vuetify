@@ -9,13 +9,9 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
+      <v-btn icon="mdi-magnify"></v-btn>
 
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      <v-btn icon="mdi-dots-vertical"></v-btn>
 
       <template v-slot:extension>
         <v-tabs
@@ -25,14 +21,11 @@
           <v-tab
             v-for="item in items"
             :key="item"
+            :text="item"
             :value="'tab-' + item"
-          >
-            {{ item }}
-          </v-tab>
+          ></v-tab>
 
-          <v-menu
-            v-if="more.length"
-          >
+          <v-menu v-if="more.length">
             <template v-slot:activator="{ props }">
               <v-btn
                 class="align-self-center me-4"
@@ -42,9 +35,8 @@
                 v-bind="props"
               >
                 more
-                <v-icon end>
-                  mdi-menu-down
-                </v-icon>
+
+                <v-icon icon="mdi-menu-down" end></v-icon>
               </v-btn>
             </template>
 
@@ -52,18 +44,17 @@
               <v-list-item
                 v-for="item in more"
                 :key="item"
+                :title="item"
                 @click="addItem(item)"
-              >
-                {{ item }}
-              </v-list-item>
+              ></v-list-item>
             </v-list>
           </v-menu>
         </v-tabs>
       </template>
     </v-toolbar>
 
-    <v-window v-model="currentItem">
-      <v-window-item
+    <v-tabs-window v-model="currentItem">
+      <v-tabs-window-item
         v-for="item in items.concat(more)"
         :key="item"
         :value="'tab-' + item"
@@ -74,8 +65,8 @@
             {{ text }}
           </v-card-text>
         </v-card>
-      </v-window-item>
-    </v-window>
+      </v-tabs-window-item>
+    </v-tabs-window>
   </v-card>
 </template>
 

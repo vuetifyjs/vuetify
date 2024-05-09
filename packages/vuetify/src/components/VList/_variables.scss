@@ -93,7 +93,7 @@ $list-item-nav-subtitle-font-weight: tools.map-deep-get(settings.$typography, 'b
 $list-item-nav-subtitle-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
 $list-item-nav-subtitle-line-height: 1rem !default;
 
-$list-item-subtitle-opacity: var(--v-medium-emphasis-opacity) !default;
+$list-item-subtitle-opacity: var(--v-list-item-subtitle-opacity, var(--v-medium-emphasis-opacity)) !default;
 $list-item-subtitle-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size') !default;
 $list-item-subtitle-font-weight: tools.map-deep-get(settings.$typography, 'body-2', 'weight') !default;
 $list-item-subtitle-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;

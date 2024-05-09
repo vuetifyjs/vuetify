@@ -1,23 +1,25 @@
+@use '../../styles/tools'
 @use './variables' as *
 
-// Block
-.v-chip-group
-  display: flex
-  max-width: 100%
-  min-width: 0
-  overflow-x: auto
-  padding: $chip-group-padding
-
-  .v-chip
-    margin: $chip-group-margin
-
-    &.v-chip--selected:not(.v-chip--disabled)
-      .v-chip__overlay
-        opacity: $chip-group-selected-opacity
-
-// Modifiers
-.v-chip-group--column
-  .v-slide-group__content
-    white-space: normal
-    flex-wrap: wrap
+@include tools.layer('components')
+  // Block
+  .v-chip-group
+    display: flex
     max-width: 100%
+    min-width: 0
+    overflow-x: auto
+    padding: $chip-group-padding
+
+    .v-chip
+      margin: $chip-group-margin
+
+      &.v-chip--selected:not(.v-chip--disabled)
+        .v-chip__overlay
+          opacity: $chip-group-selected-opacity
+
+  // Modifiers
+  .v-chip-group--column
+    .v-slide-group__content
+      white-space: normal
+      flex-wrap: wrap
+      max-width: 100%

@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.5.17",
+  "version": "3.6.4",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -138,7 +138,7 @@
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
     "@vue/babel-plugin-jsx": "^1.2.2",
-    "@vue/test-utils": "2.4.5",
+    "@vue/test-utils": "2.4.6",
     "acorn-walk": "^8.3.2",
     "autoprefixer": "^10.4.19",
     "babel-plugin-add-import-extension": "1.5.1",

@@ -7,6 +7,7 @@ import { useExpanded } from './composables/expand'
 import { useGroupBy } from './composables/group'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
@@ -46,6 +47,8 @@ export const makeVDataTableRowsProps = propsFactory({
   },
   rowProps: [Object, Function] as PropType<RowProps<any>>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
+
+  ...makeDisplayProps(),
 }, 'VDataTableRows')
 
 export const VDataTableRows = genericComponent<new <T>(
@@ -66,6 +69,7 @@ export const VDataTableRows = genericComponent<new <T>(
     const { isSelected, toggleSelect } = useSelection()
     const { toggleGroup, isGroupOpen } = useGroupBy()
     const { t } = useLocale()
+    const { mobile } = useDisplay(props)
 
     useRender(() => {
       if (props.loading && (!props.items.length || slots.loading)) {
@@ -142,6 +146,7 @@ export const VDataTableRows = genericComponent<new <T>(
                   index,
                   item,
                   cellProps: props.cellProps,
+                  mobile: mobile.value,
                 },
                 getPrefixedEventHandlers(attrs, ':row', () => slotProps),
                 typeof props.rowProps === 'function'

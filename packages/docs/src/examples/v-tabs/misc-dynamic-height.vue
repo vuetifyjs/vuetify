@@ -2,7 +2,6 @@
   <v-card>
     <v-toolbar
       color="purple"
-      dark
       flat
       prominent
     >
@@ -24,9 +23,8 @@
           <v-tab
             v-for="n in 3"
             :key="n"
-          >
-            Item {{ n }}
-          </v-tab>
+            :text="`Item ${n}`"
+          ></v-tab>
         </v-tabs>
       </template>
     </v-toolbar>

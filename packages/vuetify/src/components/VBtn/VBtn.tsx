@@ -49,6 +49,7 @@ export const makeVBtnProps = propsFactory({
     type: Boolean,
     default: undefined,
   },
+  baseColor: String,
   symbol: {
     type: null,
     default: VBtnToggleSymbol,
@@ -59,6 +60,7 @@ export const makeVBtnProps = propsFactory({
   appendIcon: IconValue,
 
   block: Boolean,
+  readonly: Boolean,
   slim: Boolean,
   stacked: Boolean,
 
@@ -98,7 +100,6 @@ export const VBtn = genericComponent<VBtnSlots>()({
   setup (props, { attrs, slots }) {
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
-    const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
@@ -121,6 +122,19 @@ export const VBtn = genericComponent<VBtnSlots>()({
 
       return group?.isSelected.value
     })
+
+    const variantProps = computed(() => {
+      const showColor = (
+        (group?.isSelected.value && (!link.isLink.value || link.isActive?.value)) ||
+        (!group || link.isActive?.value)
+      )
+      return ({
+        color: showColor ? props.color ?? props.baseColor : props.baseColor,
+        variant: props.variant,
+      })
+    })
+    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
+
     const isDisabled = computed(() => group?.disabled.value || props.disabled)
     const isElevated = computed(() => {
       return props.variant === 'elevated' && !(props.disabled || props.flat || props.border)
@@ -156,10 +170,6 @@ export const VBtn = genericComponent<VBtnSlots>()({
       const hasPrepend = !!(props.prependIcon || slots.prepend)
       const hasAppend = !!(props.appendIcon || slots.append)
       const hasIcon = !!(props.icon && props.icon !== true)
-      const hasColor = (
-        (group?.isSelected.value && (!link.isLink.value || link.isActive?.value)) ||
-        (!group || link.isActive?.value)
-      )
 
       return withDirectives(
         <Tag
@@ -175,12 +185,13 @@ export const VBtn = genericComponent<VBtnSlots>()({
               'v-btn--flat': props.flat,
               'v-btn--icon': !!props.icon,
               'v-btn--loading': props.loading,
+              'v-btn--readonly': props.readonly,
               'v-btn--slim': props.slim,
               'v-btn--stacked': props.stacked,
             },
             themeClasses.value,
             borderClasses.value,
-            hasColor ? colorClasses.value : undefined,
+            colorClasses.value,
             densityClasses.value,
             elevationClasses.value,
             loaderClasses.value,
@@ -191,7 +202,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
             props.class,
           ]}
           style={[
-            hasColor ? colorStyles.value : undefined,
+            colorStyles.value,
             dimensionStyles.value,
             locationStyles.value,
             sizeStyles.value,
@@ -200,7 +211,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
           aria-busy={ props.loading ? true : undefined }
           disabled={ isDisabled.value || undefined }
           href={ link.href.value }
-          tabindex={ props.loading ? -1 : undefined }
+          tabindex={ props.loading || props.readonly ? -1 : undefined }
           onClick={ onClick }
           value={ valueAttr.value }
         >

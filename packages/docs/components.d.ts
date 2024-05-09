@@ -11,6 +11,7 @@ declare module 'vue' {
     AboutTeamMembers: typeof import('./src/components/about/TeamMembers.vue')['default']
     Alert: typeof import('./src/components/Alert.vue')['default']
     ApiApiTable: typeof import('./src/components/api/ApiTable.vue')['default']
+    ApiDirectiveTable: typeof import('./src/components/api/DirectiveTable.vue')['default']
     ApiEventsTable: typeof import('./src/components/api/EventsTable.vue')['default']
     ApiExposedTable: typeof import('./src/components/api/ExposedTable.vue')['default']
     ApiInline: typeof import('./src/components/api/Inline.vue')['default']

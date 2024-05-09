@@ -1,13 +1,38 @@
 // Composables
-import { sortItems } from '../composables/sort'
-import { transformItems } from '@/composables/list-items'
+import { createHeaders } from '../composables/headers'
+import { transformItems as _transformItems } from '../composables/items'
+import { sortItems as _sortItems } from '../composables/sort'
 
 // Utilities
 import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
+
+// Types
+import type { SortItem } from '../composables/sort'
+import type { DataTableCompareFunction, DataTableHeader, DataTableItem } from '@/components/VDataTable/types'
+
+function transformItems (items: any[], headers?: DataTableHeader[]) {
+  let _items: DataTableItem[]
+  mount({
+    setup () {
+      const { columns } = createHeaders({ items, headers })
+      _items = _transformItems({} as any, items, columns.value)
+      return () => {}
+    },
+  })
+  return _items!
+}
+
+function sortItems (items: any[], sortBy: SortItem[], sortFunctions?: Record<string, DataTableCompareFunction>) {
+  return _sortItems(items, sortBy, 'en', {
+    sortFunctions,
+    transform: item => item.columns,
+  })
+}
 
 describe('VDataTable - sorting', () => {
   it('should sort items by single column', () => {
-    const items = transformItems({} as any, [
+    const items = transformItems([
       { string: 'foo', number: 1 },
       { string: 'bar', number: 2 },
       { string: 'baz', number: 4 },
@@ -15,7 +40,7 @@ describe('VDataTable - sorting', () => {
     ])
 
     expect(
-      sortItems(items, [{ key: 'string', order: 'asc' }], 'en')
+      sortItems(items, [{ key: 'string', order: 'asc' }])
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'bar', number: 2 },
@@ -25,7 +50,7 @@ describe('VDataTable - sorting', () => {
     ])
 
     expect(
-      sortItems(items, [{ key: 'string', order: 'desc' }], 'en')
+      sortItems(items, [{ key: 'string', order: 'desc' }])
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'foo', number: 1 },
@@ -35,7 +60,7 @@ describe('VDataTable - sorting', () => {
     ])
 
     expect(
-      sortItems(items, [{ key: 'number', order: 'asc' }], 'en')
+      sortItems(items, [{ key: 'number', order: 'asc' }])
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'foo', number: 1 },
@@ -45,7 +70,7 @@ describe('VDataTable - sorting', () => {
     ])
 
     expect(
-      sortItems(items, [{ key: 'number', order: 'desc' }], 'en')
+      sortItems(items, [{ key: 'number', order: 'desc' }])
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'baz', number: 4 },
@@ -55,7 +80,7 @@ describe('VDataTable - sorting', () => {
     ])
 
     expect(
-      sortItems(items, [{ key: 'number', order: 'asc' }], 'en', { number: (a, b) => b - a })
+      sortItems(items, [{ key: 'number', order: 'asc' }], { number: (a, b) => b - a })
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'baz', number: 4 },
@@ -65,7 +90,7 @@ describe('VDataTable - sorting', () => {
     ])
 
     expect(
-      sortItems(items, [{ key: 'number', order: 'desc' }], 'en', { number: (a, b) => b - a })
+      sortItems(items, [{ key: 'number', order: 'desc' }], { number: (a, b) => b - a })
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'foo', number: 1 },
@@ -76,16 +101,24 @@ describe('VDataTable - sorting', () => {
   })
 
   it('should sort items with deep structure', () => {
-    const items = transformItems({} as any, [{ foo: { bar: { baz: 3 } } }, { foo: { bar: { baz: 1 } } }, { foo: { bar: { baz: 2 } } }])
+    const items = transformItems([
+      { foo: { bar: { baz: 3 } } },
+      { foo: { bar: { baz: 1 } } },
+      { foo: { bar: { baz: 2 } } },
+    ], [{ key: 'foo.bar.baz' }])
 
     expect(
-      sortItems(items, [{ key: 'foo.bar.baz', order: 'asc' }], 'en')
+      sortItems(items, [{ key: 'foo.bar.baz', order: 'asc' }])
         .map(i => i.raw)
-    ).toStrictEqual([{ foo: { bar: { baz: 1 } } }, { foo: { bar: { baz: 2 } } }, { foo: { bar: { baz: 3 } } }])
+    ).toStrictEqual([
+      { foo: { bar: { baz: 1 } } },
+      { foo: { bar: { baz: 2 } } },
+      { foo: { bar: { baz: 3 } } },
+    ])
   })
 
   it('should sort items by multiple columns', () => {
-    const items = transformItems({} as any, [
+    const items = transformItems([
       { string: 'foo', number: 1 },
       { string: 'bar', number: 3 },
       { string: 'baz', number: 2 },
@@ -93,7 +126,7 @@ describe('VDataTable - sorting', () => {
     ])
 
     expect(
-      sortItems(items, [{ key: 'string', order: 'asc' }, { key: 'number', order: 'asc' }], 'en')
+      sortItems(items, [{ key: 'string', order: 'asc' }, { key: 'number', order: 'asc' }])
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'bar', number: 3 },
@@ -113,7 +146,7 @@ describe('VDataTable - sorting', () => {
     // { string: 'foo', number: 1 },
 
     expect(
-      sortItems(items, [{ key: 'string', order: 'desc' }, { key: 'number', order: 'asc' }], 'en')
+      sortItems(items, [{ key: 'string', order: 'desc' }, { key: 'number', order: 'asc' }])
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'foo', number: 1 },
@@ -123,7 +156,7 @@ describe('VDataTable - sorting', () => {
     ])
 
     expect(
-      sortItems(items, [{ key: 'string', order: 'asc' }, { key: 'number', order: 'desc' }], 'en')
+      sortItems(items, [{ key: 'string', order: 'asc' }, { key: 'number', order: 'desc' }])
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'bar', number: 3 },
@@ -133,7 +166,7 @@ describe('VDataTable - sorting', () => {
     ])
 
     expect(
-      sortItems(items, [{ key: 'string', order: 'desc' }, { key: 'number', order: 'desc' }], 'en')
+      sortItems(items, [{ key: 'string', order: 'desc' }, { key: 'number', order: 'desc' }])
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'foo', number: 1 },
@@ -143,7 +176,7 @@ describe('VDataTable - sorting', () => {
     ])
 
     expect(
-      sortItems(items, [{ key: 'number', order: 'asc' }, { key: 'string', order: 'asc' }], 'en')
+      sortItems(items, [{ key: 'number', order: 'asc' }, { key: 'string', order: 'asc' }])
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'baz', number: 1 },
@@ -153,7 +186,7 @@ describe('VDataTable - sorting', () => {
     ])
 
     expect(
-      sortItems(items, [{ key: 'number', order: 'desc' }, { key: 'string', order: 'asc' }], 'en')
+      sortItems(items, [{ key: 'number', order: 'desc' }, { key: 'string', order: 'asc' }])
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'bar', number: 3 },
@@ -163,7 +196,7 @@ describe('VDataTable - sorting', () => {
     ])
 
     expect(
-      sortItems(items, [{ key: 'number', order: 'asc' }, { key: 'string', order: 'desc' }], 'en')
+      sortItems(items, [{ key: 'number', order: 'asc' }, { key: 'string', order: 'desc' }])
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'foo', number: 1 },
@@ -173,7 +206,7 @@ describe('VDataTable - sorting', () => {
     ])
 
     expect(
-      sortItems(items, [{ key: 'number', order: 'desc' }, { key: 'string', order: 'desc' }], 'en')
+      sortItems(items, [{ key: 'number', order: 'desc' }, { key: 'string', order: 'desc' }])
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'bar', number: 3 },
@@ -183,7 +216,7 @@ describe('VDataTable - sorting', () => {
     ])
 
     expect(
-      sortItems(items, [{ key: 'string', order: 'asc' }, { key: 'number', order: 'asc' }], 'en', { number: (a, b) => b - a })
+      sortItems(items, [{ key: 'string', order: 'asc' }, { key: 'number', order: 'asc' }], { number: (a, b) => b - a })
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'bar', number: 3 },
@@ -193,7 +226,7 @@ describe('VDataTable - sorting', () => {
     ])
 
     expect(
-      sortItems(items, [{ key: 'number', order: 'asc' }, { key: 'string', order: 'asc' }], 'en', { number: (a, b) => b - a })
+      sortItems(items, [{ key: 'number', order: 'asc' }, { key: 'string', order: 'asc' }], { number: (a, b) => b - a })
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'bar', number: 3 },
@@ -204,7 +237,7 @@ describe('VDataTable - sorting', () => {
   })
 
   it('should sort items with nullable column', () => {
-    const items = transformItems({} as any, [
+    const items = transformItems([
       { string: 'foo', number: 1 },
       { string: 'bar', number: null },
       { string: 'baz', number: 4 },
@@ -215,7 +248,7 @@ describe('VDataTable - sorting', () => {
     ])
 
     expect(
-      sortItems(items, [{ key: 'number', order: 'asc' }], 'en')
+      sortItems(items, [{ key: 'number', order: 'asc' }])
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'bar', number: null },
@@ -228,7 +261,7 @@ describe('VDataTable - sorting', () => {
     ])
 
     expect(
-      sortItems(items, [{ key: 'number', order: 'desc' }], 'en')
+      sortItems(items, [{ key: 'number', order: 'desc' }])
         .map(i => i.raw)
     ).toStrictEqual([
       { string: 'foobar', number: 5 },

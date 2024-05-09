@@ -4,50 +4,51 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-.v-textarea
-  .v-field
-    --v-textarea-control-height: var(--v-input-control-height)
+@include tools.layer('components')
+  .v-textarea
+    .v-field
+      --v-textarea-control-height: var(--v-input-control-height)
 
-  .v-field__field
-    --v-input-control-height: var(--v-textarea-control-height)
+    .v-field__field
+      --v-input-control-height: var(--v-textarea-control-height)
 
-  .v-field__input
-    $a: calc((var(--v-field-padding-top, 0) + var(--v-input-padding-top, 0)) - 6px)
-    $b: calc(var(--v-field-padding-top, 0) + var(--v-input-padding-top, 0) + 4px)
-
-    flex: 1 1 auto
-    outline: none
-    -webkit-mask-image: linear-gradient(to bottom, transparent, transparent $a, black $b)
-    mask-image: linear-gradient(to bottom, transparent, transparent $a, black $b)
-
-    &.v-textarea__sizer
-      visibility: hidden
-      position: absolute
-      top: 0
-      left: 0
-      height: 0 !important
-      min-height: 0 !important
-      pointer-events: none
-
-  &--no-resize
     .v-field__input
-      resize: none
+      $a: calc((var(--v-field-padding-top, 0) + var(--v-input-padding-top, 0)) - 6px)
+      $b: calc(var(--v-field-padding-top, 0) + var(--v-input-padding-top, 0) + 4px)
 
-  .v-field--no-label,
-  .v-field--active
-    textarea
-      opacity: 1
-
-  textarea
-    opacity: 0
-    flex: 1
-    min-width: 0
-    transition: .15s opacity settings.$standard-easing
-
-    &:focus,
-    &:active
+      flex: 1 1 auto
       outline: none
+      -webkit-mask-image: linear-gradient(to bottom, transparent, transparent $a, black $b)
+      mask-image: linear-gradient(to bottom, transparent, transparent $a, black $b)
 
-    // Remove Firefox red outline
-    &:invalid
-      box-shadow: none
+      &.v-textarea__sizer
+        visibility: hidden
+        position: absolute
+        top: 0
+        left: 0
+        height: 0 !important
+        min-height: 0 !important
+        pointer-events: none
+
+    &--no-resize
+      .v-field__input
+        resize: none
+
+    .v-field--no-label,
+    .v-field--active
+      textarea
+        opacity: 1
+
+    textarea
+      opacity: 0
+      flex: 1
+      min-width: 0
+      transition: .15s opacity settings.$standard-easing
+
+      &:focus,
+      &:active
+        outline: none
+
+      // Remove Firefox red outline
+      &:invalid
+        box-shadow: none

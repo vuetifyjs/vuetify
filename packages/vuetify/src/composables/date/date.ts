@@ -13,22 +13,24 @@ import type { LocaleInstance } from '@/composables/locale'
 // Adapters
 import { VuetifyDateAdapter } from './adapters/vuetify'
 
-export interface DateInstance<T = DateInstanceType['instanceType']> extends DateAdapter<T> {
+export interface DateInstance extends DateModule.InternalAdapter {
   locale?: any
 }
 
-/** Supports module augmentation to specify date object types */
-export interface DateInstanceType {
-  instanceType: unknown
+/** Supports module augmentation to specify date adapter types */
+export namespace DateModule {
+  interface Adapter {}
+
+  export type InternalAdapter = {} extends Adapter ? DateAdapter : Adapter
 }
 
-export type InternalDateOptions<T = unknown> = {
-  adapter: (new (options: { locale: any, formats?: any }) => DateInstance<T>) | DateInstance<T>
+export type InternalDateOptions = {
+  adapter: (new (options: { locale: any, formats?: any }) => DateInstance) | DateInstance
   formats?: Record<string, any>
   locale: Record<string, any>
 }
 
-export type DateOptions<T = any> = Partial<InternalDateOptions<T>>
+export type DateOptions = Partial<InternalDateOptions>
 
 export const DateOptionsSymbol: InjectionKey<InternalDateOptions> = Symbol.for('vuetify:date-options')
 export const DateAdapterSymbol: InjectionKey<DateInstance> = Symbol.for('vuetify:date-adapter')
@@ -105,7 +107,7 @@ function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
   return instance
 }
 
-export function useDate () {
+export function useDate (): DateInstance {
   const options = inject(DateOptionsSymbol)
 
   if (!options) throw new Error('[Vuetify] Could not find injected date options')

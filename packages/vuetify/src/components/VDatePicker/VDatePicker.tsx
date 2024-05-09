@@ -60,7 +60,9 @@ export const makeVDatePickerProps = propsFactory({
   },
 
   ...makeVDatePickerControlsProps(),
-  ...makeVDatePickerMonthProps(),
+  ...makeVDatePickerMonthProps({
+    weeksInMonth: 'static' as const,
+  }),
   ...omit(makeVDatePickerMonthsProps(), ['modelValue']),
   ...omit(makeVDatePickerYearsProps(), ['modelValue']),
   ...makeVPickerProps({ title: '$vuetify.datePicker.title' }),
@@ -130,9 +132,9 @@ export const VDatePicker = genericComponent<new <
     const text = computed(() => {
       let date = adapter.date()
 
-      date = adapter.setYear(date, year.value)
-      date = adapter.setMonth(date, month.value)
       date = adapter.setDate(date, 1)
+      date = adapter.setMonth(date, month.value)
+      date = adapter.setYear(date, year.value)
 
       return adapter.format(date, 'monthAndYear')
     })
