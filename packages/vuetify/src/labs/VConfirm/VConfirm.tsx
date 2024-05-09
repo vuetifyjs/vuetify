@@ -6,15 +6,7 @@ import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
-import {
-  VBtn,
-  VList,
-  VListItem,
-  VListItemAction,
-  VListItemTitle,
-  VMenu,
-  VTextField,
-} from '../allComponents'
+import { VBtn, VList, VListItem, VListItemAction, VListItemTitle, VMenu, VTextField } from '../allComponents'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVConfirmProps = propsFactory(
@@ -29,7 +21,7 @@ export const makeVConfirmProps = propsFactory(
     ...makeVariantProps(),
     ...makeThemeProps(),
   },
-  'VConfirm',
+  'VConfirm'
 )
 
 export const VConfirm = genericComponent()({
@@ -42,21 +34,16 @@ export const VConfirm = genericComponent()({
     const isActive = ref(false)
 
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } =
-      useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { locationStyles } = useLocation(props)
-    watch(isActive, value =>
-      value
-        ? (input.value = typeof props.input === 'string' ? props.input : '')
-        : '',
-    )
+    watch(isActive, value => (value ? (input.value = typeof props.input === 'string' ? props.input : '') : ''))
 
     const showInput = computed(() => props.input || props.input !== false)
 
     function onSubmit () {
       isActive.value = false
       if (props.onSubmit) {
-        props.onSubmit(props.input ? input.value : undefined)
+        props.onSubmit(input.value)
       }
     }
     function onCancel () {
@@ -92,9 +79,7 @@ export const VConfirm = genericComponent()({
                       minWidth="200"
                       label={ props.text }
                       { ...props.inputProps }
-                      onKeydown={ (e: KeyboardEvent) =>
-                        e.key === 'Enter' && onSubmit()
-                      }
+                      onKeydown={ (e: KeyboardEvent) => e.key === 'Enter' && onSubmit() }
                     />
                   )}
                 </VListItemTitle>
@@ -131,4 +116,4 @@ export const VConfirm = genericComponent()({
   },
 })
 
-export type VConfirm = InstanceType<typeof VConfirm>;
+export type VConfirm = InstanceType<typeof VConfirm>
