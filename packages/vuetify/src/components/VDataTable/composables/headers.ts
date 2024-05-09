@@ -246,7 +246,7 @@ export function createHeaders (
     }
 
     if (options?.showExpand?.value && !keys.has('data-table-expand')) {
-      items.push({ key: 'data-table-expand' })
+      items.push({ key: 'data-table-expand', title: 'Actions' })
     }
 
     const internalHeaders = convertToInternalHeaders(items)

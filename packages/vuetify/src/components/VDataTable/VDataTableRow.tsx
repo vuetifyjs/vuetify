@@ -123,6 +123,7 @@ export const VDataTableRow = genericComponent<new <T>(
                         icon={ isExpanded(item) ? '$collapse' : '$expand' }
                         size="small"
                         variant="text"
+                        aria-label={ isExpanded(item) ? 'Collapse item' : 'Expand item' }
                         onClick={ withModifiers(() => toggleExpand(item), ['stop']) }
                       />
                     )
