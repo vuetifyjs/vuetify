@@ -151,7 +151,7 @@ export const VStepper = genericComponent<VStepperSlots>()({
         >
           { hasHeader && (
             <VStepperHeader key="stepper-header">
-              { items.value.map((item, index) => (
+              { items.value.map(({ raw, ...item }, index) => (
                 <>
                   { !!index && (<VDivider />) }
 
