@@ -4,6 +4,7 @@ import './VStepperVerticalItem.sass'
 // Components
 import { VStepperVerticalActions } from './VStepperVerticalActions'
 import { VAvatar } from '@/components/VAvatar/VAvatar'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
 import { VExpansionPanel } from '@/components/VExpansionPanel'
 import { makeVExpansionPanelProps } from '@/components/VExpansionPanel/VExpansionPanel'
 import { VIcon } from '@/components/VIcon/VIcon'
@@ -24,7 +25,13 @@ export type VStepperVerticalItemSlots = {
   text: StepperItemSlot
   prev: StepperItemSlot
   next: StepperItemSlot
-  actions: StepperItemSlot
+  actions: StepperItemSlot & {
+    props: {
+      'onClick:finish': () => void
+      'onClick:next': () => void
+      'onClick:prev': () => void
+    }
+  }
 }
 
 export const makeVStepperVerticalItemProps = propsFactory({
@@ -164,19 +171,33 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
                 { slots.default?.(slotProps.value) ?? props.text }
 
                 { hasActions && (
-                  slots.actions?.(slotProps.value) ?? (
-                    <VStepperVerticalActions
-                      disabled={ disabled.value }
-                      onClick:next={ onClickNext }
-                      onClick:prev={ onClickPrev }
-                      onClick:finish={ onClickFinish }
-                      finish={ groupItem.value?.isLast.value }
-                      v-slots={{
-                        prev: slots.prev ? (slotProps: any) => slots.prev?.(slotProps) : undefined,
-                        next: slots.next ? (slotProps: any) => slots.next?.(slotProps) : undefined,
-                      }}
-                    />
-                  )
+                  <VDefaultsProvider
+                    defaults={{
+                      VStepperVerticalActions: {
+                        disabled: disabled.value,
+                        finish: groupItem.value?.isLast.value,
+                      },
+                    }}
+                  >
+                    { slots.actions?.({
+                      ...slotProps.value,
+                      props: {
+                        'onClick:finish': onClickFinish,
+                        'onClick:next': onClickNext,
+                        'onClick:prev': onClickPrev,
+                      },
+                    }) ?? (
+                      <VStepperVerticalActions
+                        onClick:next={ onClickNext }
+                        onClick:prev={ onClickPrev }
+                        onClick:finish={ onClickFinish }
+                        v-slots={{
+                          prev: slots.prev ? (slotProps: any) => slots.prev?.(slotProps) : undefined,
+                          next: slots.next ? (slotProps: any) => slots.next?.(slotProps) : undefined,
+                        }}
+                      />
+                    )}
+                  </VDefaultsProvider>
                 )}
               </>
             ),
