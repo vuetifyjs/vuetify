@@ -17,7 +17,7 @@ import type { StepperItem, StepperItemSlot } from '@/components/VStepper/VSteppe
 
 export type VStepperVerticalSlots = {
   actions: StepperItemSlot
-  default: VStepperSlot
+  default: VStepperSlot & { step: unknown }
   icon: StepperItemSlot
   title: StepperItemSlot
   subtitle: StepperItemSlot
@@ -122,7 +122,7 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
                     </VStepperVerticalItem>
                   ))}
 
-                  { slots.default?.({ prev, next }) }
+                  { slots.default?.({ prev, next, step: model.value }) }
                 </>
               )
             },

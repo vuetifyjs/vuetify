@@ -26,11 +26,8 @@ export type VStepperVerticalItemSlots = {
   prev: StepperItemSlot
   next: StepperItemSlot
   actions: StepperItemSlot & {
-    props: {
-      'onClick:finish': () => void
-      'onClick:next': () => void
-      'onClick:prev': () => void
-    }
+    next: () => void
+    prev: () => void
   }
 }
 
@@ -89,12 +86,16 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
       value: props.value,
     }))
 
-    function onClickFinish () {
-      emit('click:finish')
-    }
+    const actionProps = computed(() => ({
+      ...slotProps.value,
+      prev: onClickPrev,
+      next: onClickNext,
+    }))
 
     function onClickNext () {
       emit('click:next')
+
+      if (groupItem.value?.isLast.value) return
 
       groupItem.value.group.next()
     }
@@ -179,21 +180,13 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
                       },
                     }}
                   >
-                    { slots.actions?.({
-                      ...slotProps.value,
-                      props: {
-                        'onClick:finish': onClickFinish,
-                        'onClick:next': onClickNext,
-                        'onClick:prev': onClickPrev,
-                      },
-                    }) ?? (
+                    { slots.actions?.(actionProps.value) ?? (
                       <VStepperVerticalActions
                         onClick:next={ onClickNext }
                         onClick:prev={ onClickPrev }
-                        onClick:finish={ onClickFinish }
                         v-slots={{
-                          prev: slots.prev ? (slotProps: any) => slots.prev?.(slotProps) : undefined,
-                          next: slots.next ? (slotProps: any) => slots.next?.(slotProps) : undefined,
+                          prev: slots.prev ? () => slots.prev?.(actionProps.value) : undefined,
+                          next: slots.next ? () => slots.next?.(actionProps.value) : undefined,
                         }}
                       />
                     )}
