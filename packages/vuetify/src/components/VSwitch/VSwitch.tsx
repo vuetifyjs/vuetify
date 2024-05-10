@@ -159,7 +159,7 @@ export const VSwitch = genericComponent<new <T>(
                       <div
                         class={[
                           'v-switch__track',
-                          ...(!isForcedColorsModeActive ? backgroundColorClasses.value : ''),
+                          !isForcedColorsModeActive ? backgroundColorClasses.value : undefined,
                         ]}
                         style={ backgroundColorStyles.value }
                         onClick={ onTrackClick }
