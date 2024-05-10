@@ -93,7 +93,10 @@ export const makeVOverlayProps = propsFactory({
   disabled: Boolean,
   opacity: [Number, String],
   noClickAnimation: Boolean,
-  modelValue: Boolean,
+  modelValue: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
   persistent: Boolean,
   scrim: {
     type: [Boolean, String],
@@ -137,7 +140,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
   setup (props, { slots, attrs, emit }) {
     const model = useProxiedModel(props, 'modelValue')
     const isActive = computed({
-      get: () => model.value,
+      get: () => Boolean(model.value),
       set: v => {
         if (!(v && props.disabled)) model.value = v
       },

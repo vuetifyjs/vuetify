@@ -410,6 +410,7 @@ function addWeeks (date: Date, amount: number) {
 
 function addMonths (date: Date, amount: number) {
   const d = new Date(date)
+  d.setDate(1)
   d.setMonth(d.getMonth() + amount)
   return d
 }

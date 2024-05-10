@@ -30,7 +30,7 @@ import type { Ref } from 'vue'
 type VSnackbarSlots = {
   activator: { isActive: boolean, props: Record<string, any> }
   default: never
-  actions: { isActive: Ref<boolean> }
+  actions: { isActive: Ref<boolean | null> }
   text: never
 }
 
