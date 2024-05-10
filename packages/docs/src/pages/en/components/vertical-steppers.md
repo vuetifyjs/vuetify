@@ -57,4 +57,14 @@ Vertical steppers allow users to complete a series of actions in step order.
 
 ### Guide
 
-Coming soon.
+The `v-stepper-vertical` is the vertical variant of the [v-stepper](/components/steppers/) component. It also extends functionality of [v-expansion-panels](/components/expansion-panels/).
+
+#### Slots
+
+The `v-stepper-vertical` component has several slots for customization.
+
+##### Actions
+
+Customize the flow of your stepper by hooking into the available **prev** and **next** slots.
+
+<ExamplesExample file="v-stepper-vertical/slot-actions" />
