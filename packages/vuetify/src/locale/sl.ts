@@ -88,6 +88,7 @@ export default {
   stepper: {
     next: 'Naprej',
     prev: 'Nazaj',
+    finish: 'Finish',
   },
   rating: {
     ariaLabel: {

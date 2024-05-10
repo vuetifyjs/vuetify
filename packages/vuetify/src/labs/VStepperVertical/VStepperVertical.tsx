@@ -8,8 +8,8 @@ import { provideDefaults } from '@/composables/defaults'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, toRef, toRefs } from 'vue'
-import { genericComponent, getPropertyFromItem, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { computed, ref, toRefs } from 'vue'
+import { genericComponent, getPropertyFromItem, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VStepperSlot } from '@/components/VStepper/VStepper'

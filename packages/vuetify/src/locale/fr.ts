@@ -88,6 +88,7 @@ export default {
   stepper: {
     next: 'Suivant',
     prev: 'Précédent',
+    finish: 'Finish',
   },
   rating: {
     ariaLabel: {

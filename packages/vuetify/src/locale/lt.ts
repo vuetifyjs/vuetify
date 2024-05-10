@@ -88,6 +88,7 @@ export default {
   stepper: {
     next: 'Kitas',
     prev: 'Ankstesnis',
+    finish: 'Finish',
   },
   rating: {
     ariaLabel: {

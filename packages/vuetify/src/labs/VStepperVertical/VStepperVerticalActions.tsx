@@ -1,17 +1,9 @@
 // Components
 import { VBtn } from '@/components/VBtn/VBtn'
-import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
 import { makeVStepperActionsProps, VStepperActions } from '@/components/VStepper/VStepperActions'
 
-// Composables
-import { useLocale } from '@/composables/locale'
-
 // Utilities
-import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
-
-// Types
-import type { PropType } from 'vue'
 
 export type VStepperActionsSlots = {
   prev: {
