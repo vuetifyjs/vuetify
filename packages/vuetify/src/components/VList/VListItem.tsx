@@ -28,7 +28,7 @@ import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed, watch } from 'vue'
-import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
+import { deprecate, EventProp, genericComponent, noop, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -173,12 +173,13 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
     function onClick (e: MouseEvent) {
       emit('click', e)
-
+    }
+    function onSelect (e: MouseEvent) {
       if (!isClickable.value) return
 
       link.navigate?.(e)
 
-      if (isGroupActivator) return
+      if (!root.groupActivatorActivatable && isGroupActivator) return
 
       if (root.activatable.value) {
         activate(!isActivated.value, e)
@@ -241,7 +242,10 @@ export const VListItem = genericComponent<VListItemSlots>()({
           ]}
           href={ link.href.value }
           tabindex={ isClickable.value ? (list ? -2 : 0) : undefined }
-          onClick={ onClick }
+          onClick={[
+            onSelect,
+            root.groupActivatorActivatable ? () => noop : onClick,
+          ]}
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && props.ripple }
         >
@@ -264,6 +268,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
                       key="prepend-icon"
                       density={ props.density }
                       icon={ props.prependIcon }
+                      onClick={ root.groupActivatorActivatable ? onClick : () => noop }
                     />
                   )}
                 </>
@@ -318,6 +323,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
                       key="append-icon"
                       density={ props.density }
                       icon={ props.appendIcon }
+                      onClick={ root.groupActivatorActivatable ? onClick : () => noop }
                     />
                   )}
 

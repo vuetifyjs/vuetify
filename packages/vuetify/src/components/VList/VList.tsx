@@ -88,6 +88,10 @@ export const makeVListProps = propsFactory({
   disabled: Boolean,
   expandIcon: String,
   collapseIcon: String,
+  groupActivatorActivatable: {
+    type: Boolean,
+    default: false,
+  },
   lines: {
     type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
     default: 'one',

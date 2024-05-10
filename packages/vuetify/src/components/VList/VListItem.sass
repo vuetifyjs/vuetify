@@ -318,12 +318,3 @@
 
   .v-list-group__items .v-list-item
     padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
-
-  .v-list-group__header.v-list-item--active
-    &:not(:focus-visible)
-      .v-list-item__overlay
-        opacity: 0
-
-    &:hover
-      .v-list-item__overlay
-        opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))

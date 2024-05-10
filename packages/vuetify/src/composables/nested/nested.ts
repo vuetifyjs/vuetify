@@ -45,6 +45,7 @@ export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
 
 export interface NestedProps {
   activatable: boolean
+  groupActivatorActivatable: boolean
   selectable: boolean
   activeStrategy: ActiveStrategyProp | undefined
   selectStrategy: SelectStrategyProp | undefined
@@ -66,6 +67,7 @@ type NestedProvide = {
     parents: Ref<Map<unknown, unknown>>
     activatable: Ref<boolean>
     selectable: Ref<boolean>
+    groupActivatorActivatable: Ref<boolean>
     opened: Ref<Set<unknown>>
     activated: Ref<Set<unknown>>
     selected: Ref<Map<unknown, 'on' | 'off' | 'indeterminate'>>
@@ -93,6 +95,7 @@ export const emptyNested: NestedProvide = {
     activate: () => null,
     select: () => null,
     activatable: ref(false),
+    groupActivatorActivatable: ref(false),
     selectable: ref(false),
     opened: ref(new Set()),
     activated: ref(new Set()),
@@ -196,6 +199,7 @@ export const useNested = (props: NestedProps) => {
     root: {
       opened,
       activatable: toRef(props, 'activatable'),
+      groupActivatorActivatable: toRef(props, 'groupActivatorActivatable'),
       selectable: toRef(props, 'selectable'),
       activated,
       selected,
