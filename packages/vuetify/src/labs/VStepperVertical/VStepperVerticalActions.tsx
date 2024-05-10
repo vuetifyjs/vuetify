@@ -56,12 +56,12 @@ export const VStepperVerticalActions = genericComponent<VStepperActionsSlots>()(
         >
           {{
             prev: (slotProps: any) => {
-              return (
+              return slots.prev?.(slotProps) ?? (
                 <VBtn { ...slotProps.props } onClick={ onClickPrev } />
               )
             },
             next: (slotProps: any) => {
-              return (
+              return slots.next?.(slotProps) ?? (
                 <VBtn { ...slotProps.props } onClick={ onClickNext } />
               )
             },
