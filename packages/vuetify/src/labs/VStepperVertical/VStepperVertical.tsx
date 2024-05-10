@@ -8,7 +8,7 @@ import { provideDefaults } from '@/composables/defaults'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, toRefs } from 'vue'
+import { computed, ref, toRef, toRefs } from 'vue'
 import { genericComponent, getPropertyFromItem, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -57,7 +57,7 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
 
   setup (props, { slots }) {
     const vExpansionPanelsRef = ref<typeof VExpansionPanels>()
-    const { color, editable, prevText, nextText } = toRefs(props)
+    const { color, editable, prevText, nextText, hideActions } = toRefs(props)
 
     const model = useProxiedModel(props, 'modelValue')
     const items = computed(() => props.items.map((item, index) => {
@@ -77,6 +77,7 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
         editable,
         prevText,
         nextText,
+        hideActions,
         static: true,
       },
       VStepperActions: {

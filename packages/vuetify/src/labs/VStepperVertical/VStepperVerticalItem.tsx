@@ -105,6 +105,7 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
         !props.disabled
       )
 
+      const hasActions = !props.hideActions || !!slots.actions
       const expansionPanelProps = VExpansionPanel.filterProps(props)
 
       return (
@@ -125,6 +126,7 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
           readonly={ !props.editable }
           style={ props.style }
           color=""
+          hide-actions={ false }
         >
           {{
             title: () => (
@@ -158,18 +160,22 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
               <>
                 { slots.default?.(slotProps.value) ?? props.text }
 
-                <VStepperVerticalActions
-                  class="v-stepper-vertical-actions"
-                  disabled={ disabled.value }
-                  onClick:next={ onClickNext }
-                  onClick:prev={ onClickPrev }
-                  onClick:finish={ onClickFinish }
-                  finish={ groupItem.value?.isLast.value }
-                  v-slots={{
-                    prev: slots.prev ? (slotProps: any) => slots.prev?.(slotProps) : undefined,
-                    next: slots.next ? (slotProps: any) => slots.next?.(slotProps) : undefined,
-                  }}
-                />
+                { hasActions && (
+                  slots.actions?.(slotProps.value) ?? (
+                    <VStepperVerticalActions
+                      class="v-stepper-vertical-actions"
+                      disabled={ disabled.value }
+                      onClick:next={ onClickNext }
+                      onClick:prev={ onClickPrev }
+                      onClick:finish={ onClickFinish }
+                      finish={ groupItem.value?.isLast.value }
+                      v-slots={{
+                        prev: slots.prev ? (slotProps: any) => slots.prev?.(slotProps) : undefined,
+                        next: slots.next ? (slotProps: any) => slots.next?.(slotProps) : undefined,
+                      }}
+                    />
+                  )
+                )}
               </>
             ),
           }}
