@@ -2,6 +2,7 @@ export default {
   badge: 'Žetons',
   open: 'Open',
   close: 'Aizvērt',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',

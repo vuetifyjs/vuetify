@@ -163,6 +163,7 @@ export function provideSelection (
     })
     return !!items.length && isSelected(items)
   })
+  const showSelectAll = computed(() => selectStrategy.value.showSelectAll)
 
   const data = {
     toggleSelect,
@@ -172,7 +173,7 @@ export function provideSelection (
     isSomeSelected,
     someSelected,
     allSelected,
-    showSelectAll: selectStrategy.value.showSelectAll,
+    showSelectAll,
   }
 
   provide(VDataTableSelectionSymbol, data)

@@ -104,7 +104,7 @@ The following components are compatible with the [Application layout](/features/
 
 | Component | Default location | Default orientation | Description |
 | - | :-: | :-: | - |
-| [v-system-bar](/api/v-system-bar/) | top | horizontal | Used to simulate the system bar on phones and desktop applications |{data-toggle=modal}
+| [v-system-bar](/api/v-system-bar/) | top | horizontal | Used to simulate the system bar on phones and desktop applications |
 | [v-app-bar](/api/v-app-bar/) | top | horizontal | Top level application actions and navigation links |
 | [v-navigation-drawer](/api/v-navigation-drawer/) | start | vertical | The primary component used for application navigation |
 | [v-footer](/api/v-footer/) | bottom | horizontal | The only application component that is not bound to the current layout by default. Must explicitly specify the **app** prop |

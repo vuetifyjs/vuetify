@@ -165,13 +165,15 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
             default: () => slots.default ? slots.default(slotProps.value) : (
               <>
                 { slots.colgroup?.(slotProps.value) }
-                <thead class="v-data-table__thead" role="rowgroup">
-                  <VDataTableHeaders
-                    { ...dataTableHeadersProps }
-                    sticky={ props.fixedHeader }
-                    v-slots={ slots }
-                  />
-                </thead>
+                { !props.hideDefaultHeader && (
+                  <thead key="thead" class="v-data-table__thead" role="rowgroup">
+                    <VDataTableHeaders
+                      { ...dataTableHeadersProps }
+                      sticky={ props.fixedHeader }
+                      v-slots={ slots }
+                    />
+                  </thead>
+                )}
                 { slots.thead?.(slotProps.value) }
                 <tbody class="v-data-table__tbody" role="rowgroup">
                   { slots['body.prepend']?.(slotProps.value) }
@@ -189,7 +191,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
                 { slots.tfoot?.(slotProps.value) }
               </>
             ),
-            bottom: () => slots.bottom ? slots.bottom(slotProps.value) : (
+            bottom: () => slots.bottom ? slots.bottom(slotProps.value) : !props.hideDefaultFooter && (
               <>
                 <VDivider />
 

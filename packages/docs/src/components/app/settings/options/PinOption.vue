@@ -2,13 +2,13 @@
   <v-defaults-provider
     :defaults="{
       VIcon: {
-        color: auth.isSubscriber && user.pins ? 'primary' : 'disabled'
+        color: one.isSubscriber && user.pins ? 'primary' : 'disabled'
       }
     }"
   >
     <SettingsSwitch
       v-model="user.pins"
-      :disabled="!auth.isSubscriber"
+      :disabled="!one.isSubscriber"
       :messages="t('dashboard.perks.enable-pins-message')"
     >
       <template #label>
@@ -28,6 +28,6 @@
 
 <script setup>
   const { t } = useI18n()
-  const auth = useAuthStore()
+  const one = useOneStore()
   const user = useUserStore()
 </script>

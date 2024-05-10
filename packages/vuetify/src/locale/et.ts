@@ -2,6 +2,7 @@ export default {
   badge: 'Märk',
   open: 'Open',
   close: 'Sulge',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',

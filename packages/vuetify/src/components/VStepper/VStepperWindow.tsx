@@ -54,7 +54,11 @@ export const VStepperWindow = genericComponent()({
           _as="VStepperWindow"
           { ...windowProps }
           v-model={ model.value }
-          class="v-stepper-window"
+          class={[
+            'v-stepper-window',
+            props.class,
+          ]}
+          style={ props.style }
           mandatory={ false }
           touch={ false }
           v-slots={ slots }

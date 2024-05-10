@@ -120,7 +120,7 @@ headers = [
 
 See [Data and display](/components/data-tables/data-and-display).
 
-#### Customisation
+#### Customization
 
 Other options are available for setting **width**, **align**, **fixed**, or pass custom props to the header element with **headerProps** and row cells with **cellProps**.
 
@@ -140,11 +140,11 @@ The `v-data-table` renders a default footer using the `v-data-footer` component.
 
 <ExamplesExample file="v-data-table/prop-footer-props" /> -->
 
-<!-- #### Hide default header and footer
+#### Hide default header and footer
 
 You can apply the **hide-default-header** and **hide-default-footer** props to remove the default header and footer respectively.
 
-<ExamplesExample file="v-data-table/prop-hide-header-footer" /> -->
+<ExamplesExample file="v-data-table/prop-hide-header-footer" />
 
 #### Selection
 

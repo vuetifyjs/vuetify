@@ -1,0 +1,6 @@
+{
+  "props": {
+    "landscape": "Puts the picker into landscape mode.",
+    "hideHeader": "Hide the picker header."
+  }
+}

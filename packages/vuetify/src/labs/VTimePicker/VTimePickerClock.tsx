@@ -21,9 +21,7 @@ export const makeVTimePickerClockProps = propsFactory({
   ampm: Boolean,
   color: String,
   disabled: Boolean,
-  displayedValue: {
-    default: null,
-  },
+  displayedValue: null,
   double: Boolean,
   format: {
     type: Function,
@@ -200,6 +198,10 @@ export const VTimePickerClock = genericComponent()({
     function onMouseDown (e: MouseEvent | TouchEvent) {
       e.preventDefault()
 
+      window.addEventListener('mousemove', onDragMove)
+      window.addEventListener('touchmove', onDragMove)
+      window.addEventListener('mouseup', onMouseUp)
+      window.addEventListener('touchend', onMouseUp)
       valueOnMouseDown.value = null
       valueOnMouseUp.value = null
       isDragging.value = true
@@ -208,6 +210,10 @@ export const VTimePickerClock = genericComponent()({
 
     function onMouseUp (e: MouseEvent | TouchEvent) {
       e.stopPropagation()
+      window.removeEventListener('mousemove', onDragMove)
+      window.removeEventListener('touchmove', onDragMove)
+      window.removeEventListener('mouseup', onMouseUp)
+      window.removeEventListener('touchend', onMouseUp)
 
       isDragging.value = false
       if (valueOnMouseUp.value !== null && isAllowed(valueOnMouseUp.value)) {
@@ -226,12 +232,7 @@ export const VTimePickerClock = genericComponent()({
             },
           ]}
           onMousedown={ onMouseDown }
-          onMouseup={ onMouseUp }
-          onMouseleave={ (e: MouseEvent) => (isDragging.value && onMouseUp(e)) }
           onTouchstart={ onMouseDown }
-          onTouchend={ onMouseUp }
-          onMousemove={ onDragMove }
-          onTouchmove={ onDragMove }
           onWheel={ (e: WheelEvent) => (props.scrollable && wheel(e)) }
           ref={ clockRef }
         >
