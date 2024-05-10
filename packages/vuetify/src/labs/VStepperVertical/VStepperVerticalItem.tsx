@@ -11,7 +11,7 @@ import { makeStepperItemProps } from '@/components/VStepper/VStepperItem'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { StepperItemSlot } from '@/components/VStepper/VStepperItem'
@@ -28,11 +28,13 @@ export type VStepperVerticalItemSlots = {
 }
 
 export const makeVStepperVerticalItemProps = propsFactory({
+  hideActions: Boolean,
+
   ...makeStepperItemProps(),
-  ...makeVExpansionPanelProps({
+  ...omit(makeVExpansionPanelProps({
     expandIcon: '',
     collapseIcon: '',
-  }),
+  }), ['hideActions']),
 }, 'VStepperVerticalItem')
 
 export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>()({
@@ -164,7 +166,6 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
                 { hasActions && (
                   slots.actions?.(slotProps.value) ?? (
                     <VStepperVerticalActions
-                      class="v-stepper-vertical-actions"
                       disabled={ disabled.value }
                       onClick:next={ onClickNext }
                       onClick:prev={ onClickPrev }

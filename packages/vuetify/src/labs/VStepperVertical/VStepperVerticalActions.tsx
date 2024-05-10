@@ -50,6 +50,7 @@ export const VStepperVerticalActions = genericComponent<VStepperActionsSlots>()(
 
       return (
         <VStepperActions
+          class="v-stepper-vertical-actions"
           { ...stepperActionsProps }
           nextText={ props.finish ? props.finishText : undefined }
         >
