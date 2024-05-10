@@ -48,7 +48,7 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
 
   setup (props, { emit, slots }) {
     const vExpansionPanelRef = ref<typeof VExpansionPanel>()
-    const step = computed(() => props.value)
+    const step = computed(() => !isNaN(parseInt(props.value)) ? Number(props.value) : props.value)
     const groupItem = computed(() => vExpansionPanelRef.value?.groupItem)
     const isSelected = computed(() => groupItem.value?.isSelected.value ?? false)
     const isValid = computed(() => isSelected.value ? props.rules.every(handler => handler() === true) : null)
@@ -127,6 +127,7 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
           style={ props.style }
           color=""
           hide-actions={ false }
+          value={ step.value }
         >
           {{
             title: () => (
