@@ -91,8 +91,6 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const { columns, headers } = useHeaders()
     const { loaderClasses } = useLoader(props)
 
-    // console.log('slots', slots)
-
     function getFixedStyles (column: InternalDataTableHeader, y: number): CSSProperties | undefined {
       if (!props.sticky && !column.fixed) return undefined
 
@@ -141,10 +139,11 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     })
 
     const isSelectAll = columns.value.find(column => column.key === 'data-table-select')
+    const hasSelectAll = !!isSelectAll
     const hasItems = computed(() => displayItems.value.length > 0)
 
     const showMobileHeader = computed(() => {
-      return mobile.value && (hasItems.value || isSelectAll)
+      return mobile.value && (hasItems.value || hasSelectAll)
     })
 
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
@@ -236,16 +235,14 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
 
     const VDataTableMobileHeaderCell = () => {
       const headerProps = mergeProps(props.headerProps ?? {} ?? {})
+      const selectColumn = columns.value.find(column => column.key === 'data-table-select') as InternalDataTableHeader
 
       const appendIcon = computed(() => {
-        const showSelectColumn = columns.value.find(column => column.key === 'data-table-select')
-
-        if (showSelectColumn == null) return
+        if (!hasSelectAll) return
 
         return allSelected.value ? '$checkboxOn' : someSelected.value ? '$checkboxIndeterminate' : '$checkboxOff'
       })
 
-      const selectColumn = columns.value.find(column => column.key === 'data-table-select') as InternalDataTableHeader
       const selectColumnSlotProps: VDataTableHeaderCellColumnSlotProps = {
         column: selectColumn,
         selectAll,
@@ -264,6 +261,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
             ...headerCellClasses.value,
           ]}
           colspan={ headers.value.length + 1 }
+          noPadding={ hasSelectAll && !hasItems.value }
           { ...headerProps }
         >
           {{
@@ -271,6 +269,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               if (isSelectAll && !hasItems.value) {
                 return slots['header.data-table-select']?.(selectColumnSlotProps) ?? (showSelectAll && (
                   <VCheckboxBtn
+                    class="justify-end"
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
                     onUpdate:modelValue={ selectAll }
