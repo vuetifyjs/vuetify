@@ -1,4 +1,6 @@
+@use 'sass:map'
 @use '../../styles/tools'
+@use '../../styles/settings'
 @use './variables' as *
 
 @include tools.layer('components')
@@ -19,3 +21,15 @@
 
     .v-list-group__items .v-list-item--prepend
       // padding-inline-start: calc(#{$treeview-item-prepend-padding-inline-start} + var(--indent-padding)) !important
+
+  .v-list-item
+    &--active
+      .v-list-item__prepend,
+      .v-list-item__append
+        > .v-badge .v-icon,
+        > .v-icon
+          opacity: #{$list-item-icon-active-opacity}
+
+      &:not(.v-list-item--link)
+        .v-list-item__overlay
+          opacity: calc(#{map.get(settings.$states, 'activated')} * var(--v-theme-overlay-multiplier))
