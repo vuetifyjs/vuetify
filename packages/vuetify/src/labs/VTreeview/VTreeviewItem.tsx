@@ -14,7 +14,7 @@ import { genOverlays } from '@/composables/variant'
 
 // Utilities
 import { computed, inject, ref } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, noop, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
@@ -24,6 +24,7 @@ import type { VListItemSlots } from '@/components/VList/VListItem'
 export const makeVTreeviewItemProps = propsFactory({
   loading: Boolean,
   toggleIcon: IconValue,
+  openOnClick: Boolean,
 
   ...makeVListItemProps({ slim: true }),
 }, 'VTreeviewItem')
@@ -48,6 +49,8 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       root,
     } = useNestedItem(id, false)
 
+    const isActivetableGroupActivator = computed(() => isGroupActivator && !props.openOnClick)
+
     const slotProps = computed(() => ({
       isActive: isActivated.value,
       select,
@@ -62,6 +65,8 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
     )
 
     function onClick (e: MouseEvent | KeyboardEvent) {
+      if (!isActivetableGroupActivator.value) return
+
       if (root.activatable.value) {
         activate(!isActivated.value, e)
       } else if (root.selectable.value) {
@@ -86,7 +91,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       const listItemProps = VListItem.filterProps(props)
       const hasPrepend = slots.prepend || props.toggleIcon
 
-      return isGroupActivator
+      return isActivetableGroupActivator.value
         ? (
           <div
             class={[
@@ -98,6 +103,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
               props.class,
             ]}
             onClick={ onClick }
+            v-ripple={ isClickable.value && props.ripple }
           >
             <>
               { genOverlays(isActivated.value, 'v-list-item') }
@@ -154,7 +160,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             },
             props.class,
           ]}
-          onClick={ onClick }
+          onClick={ () => noop }
           onKeydown={ isClickable.value && onKeyDown }
         >
           {{
