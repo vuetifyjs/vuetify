@@ -370,7 +370,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               )
             }
           </thead>
-
+          { slots.thead?.(slotProps.value) }
         </>
       )
     })

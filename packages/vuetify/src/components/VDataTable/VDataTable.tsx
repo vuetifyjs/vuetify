@@ -239,10 +239,10 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
             default: () => slots.default ? slots.default(slotProps.value) : (
               <>
                 { slots.colgroup?.(slotProps.value) }
-                  <VDataTableHeaders
-                    { ...dataTableHeadersProps }
-                    v-slots={ slots }
-                  />
+                <VDataTableHeaders
+                  { ...dataTableHeadersProps }
+                  v-slots={ slots }
+                />
                 <tbody>
                   { slots['body.prepend']?.(slotProps.value) }
                   { slots.body ? slots.body(slotProps.value) : (
