@@ -99,6 +99,6 @@ The following responses are a collection of common questions asked by the Vuetif
 
 * **Is Vuetify 3 compatible with `@vue/compat`?**
 
-  No. If this changes in the future, we will update this FAQ and make a public notification.
+  Not directly, you have to set `configureCompat({ MODE: 3 })` globally and `MODE: 2` in each of your components that you want to run in compatibility mode. There will still be some incorrect warnings that can be ignored with the `-ATTR_FALSE_VALUE` filter in devtools.
 
 <PromotedPromoted type="theme" />
