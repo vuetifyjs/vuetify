@@ -336,4 +336,3 @@ export const useNestedGroupActivator = () => {
 
   provide(VNestedSymbol, { ...parent, isGroupActivator: true })
 }
-
