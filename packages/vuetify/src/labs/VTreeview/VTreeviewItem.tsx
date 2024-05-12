@@ -20,7 +20,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import { VTreeviewSymbol } from './shared'
 import { VProgressCircular } from '../allComponents'
-import type { VListItemSlots } from '@/components/VList/VListItem'
+import type { ListItemSlot, VListItemSlots } from '@/components/VList/VListItem'
 
 export const makeVTreeviewItemProps = propsFactory({
   loading: Boolean,
@@ -51,7 +51,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
     } = useNestedItem(id, false)
 
     const isActivetableGroupActivator = computed(() =>
-      (root.activatable.value || root.selectable.value) &&
+      (root.activatable.value) &&
       isGroupActivator &&
       !props.openOnClick
     )
@@ -63,7 +63,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       select,
       isSelected: isSelected.value,
       isIndeterminate: isIndeterminate.value,
-    } satisfies any))
+    } satisfies ListItemSlot))
 
     const isClickable = computed(() =>
       !props.disabled &&
@@ -83,12 +83,8 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
         } else {
           vListItemRef.value?.activate(!vListItemRef.value?.isActivated, e)
         }
-      } else if (root.selectable.value) {
-        if (isActivetableGroupActivator.value) {
-          select(!isSelected.value, e)
-        } else {
-          vListItemRef.value?.select(!vListItemRef.value?.isSelected, e)
-        }
+      } else if (props.value != null) {
+        vListItemRef.value?.select(!vListItemRef.value?.isSelected, e)
       }
     }
 

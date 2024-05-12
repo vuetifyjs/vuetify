@@ -34,7 +34,7 @@ import { deprecate, EventProp, genericComponent, propsFactory, useRender } from 
 import type { PropType } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
-type ListItemSlot = {
+export type ListItemSlot = {
   isActive: boolean
   isSelected: boolean
   isIndeterminate: boolean
