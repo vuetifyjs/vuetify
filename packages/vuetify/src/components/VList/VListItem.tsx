@@ -359,6 +359,8 @@ export const VListItem = genericComponent<VListItemSlots>()({
     })
 
     return {
+      activate,
+      isActivated,
       isGroupActivator,
       isSelected,
       list,

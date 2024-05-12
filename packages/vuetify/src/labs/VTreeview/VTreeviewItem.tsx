@@ -7,6 +7,7 @@ import { VListItemAction, VListItemSubtitle, VListItemTitle } from '@/components
 import { makeVListItemProps, VListItem } from '@/components/VList/VListItem'
 
 // Composables
+import { useDensity } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
 import { useNestedItem } from '@/composables/nested/nested'
 import { useLink } from '@/composables/router'
@@ -14,7 +15,7 @@ import { genOverlays } from '@/composables/variant'
 
 // Utilities
 import { computed, inject, ref } from 'vue'
-import { genericComponent, noop, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
@@ -49,7 +50,9 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       root,
     } = useNestedItem(id, false)
 
-    const isActivetableGroupActivator = computed(() => isGroupActivator && !props.openOnClick)
+    const isActivetableGroupActivator = computed(() => (root.activatable || root.selectable) && isGroupActivator && !props.openOnClick)
+
+    const { densityClasses } = useDensity(props, 'v-list-item')
 
     const slotProps = computed(() => ({
       isActive: isActivated.value,
@@ -65,14 +68,20 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
     )
 
     function onClick (e: MouseEvent | KeyboardEvent) {
-      if (!isActivetableGroupActivator.value) return
+      if (!isActivetableGroupActivator.value && isGroupActivator) return
 
       if (root.activatable.value) {
-        activate(!isActivated.value, e)
+        if (isActivetableGroupActivator.value) {
+          activate(!isActivated.value, e)
+        } else {
+          vListItemRef.value?.activate(!vListItemRef.value?.isActivated, e)
+        }
       } else if (root.selectable.value) {
-        select(!isSelected.value, e)
-      } else if (props.value != null) {
-        select(!isSelected.value, e)
+        if (isActivetableGroupActivator.value) {
+          select(!isSelected.value, e)
+        } else {
+          vListItemRef.value?.select(!vListItemRef.value?.isSelected, e)
+        }
       }
     }
 
@@ -96,17 +105,21 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
           <div
             class={[
               'v-list-item',
+              'v-list-item--one-line',
               'v-treeview-item',
+              'v-treeview-item--activetable-group-activator',
               {
-                'v-list-item--active': isActivated.value,
+                'v-list-item--active': isActivated.value || isSelected.value,
+                'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(id.value),
               },
+              densityClasses.value,
               props.class,
             ]}
             onClick={ onClick }
             v-ripple={ isClickable.value && props.ripple }
           >
             <>
-              { genOverlays(isActivated.value, 'v-list-item') }
+              { genOverlays(isActivated.value || isSelected.value, 'v-list-item') }
               { props.toggleIcon && (
                 <VListItemAction start={ false }>
                   <VBtn
@@ -160,7 +173,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             },
             props.class,
           ]}
-          onClick={ () => noop }
+          onClick={ onClick }
           onKeydown={ isClickable.value && onKeyDown }
         >
           {{
