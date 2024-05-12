@@ -50,7 +50,11 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       root,
     } = useNestedItem(id, false)
 
-    const isActivetableGroupActivator = computed(() => (root.activatable || root.selectable) && isGroupActivator && !props.openOnClick)
+    const isActivetableGroupActivator = computed(() =>
+      (root.activatable.value || root.selectable.value) &&
+      isGroupActivator &&
+      !props.openOnClick
+    )
 
     const { densityClasses } = useDensity(props, 'v-list-item')
 
@@ -67,8 +71,11 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       (props.link || link.isClickable.value || (props.value != null && !!vListItemRef.value?.list))
     )
 
-    function onClick (e: MouseEvent | KeyboardEvent) {
-      if (!isActivetableGroupActivator.value && isGroupActivator) return
+    function selectItem (e: MouseEvent | KeyboardEvent) {
+      if (
+        !isClickable.value ||
+        (!isActivetableGroupActivator.value && isGroupActivator)
+      ) return
 
       if (root.activatable.value) {
         if (isActivetableGroupActivator.value) {
@@ -88,7 +95,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
     function onKeyDown (e: KeyboardEvent) {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault()
-        onClick(e as any as MouseEvent)
+        selectItem(e)
       }
     }
 
@@ -115,7 +122,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
               densityClasses.value,
               props.class,
             ]}
-            onClick={ onClick }
+            onClick={ selectItem }
             v-ripple={ isClickable.value && props.ripple }
           >
             <>
@@ -173,7 +180,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             },
             props.class,
           ]}
-          onClick={ onClick }
+          onClick={ selectItem }
           onKeydown={ isClickable.value && onKeyDown }
         >
           {{
