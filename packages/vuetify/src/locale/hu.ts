@@ -1,11 +1,11 @@
 export default {
   badge: 'Jelvény',
-  open: 'Open',
+  open: 'Megnyit',
   close: 'Bezárás',
-  dismiss: 'Dismiss',
+  dismiss: 'Elutasít',
   confirmEdit: {
     ok: 'OK',
-    cancel: 'Cancel',
+    cancel: 'Mégsem',
   },
   dataIterator: {
     noResultsText: 'Nincs egyező találat',
@@ -36,15 +36,15 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} kiválasztva',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Válassza ki a dátumokat',
+      header: 'Adja meg a dátumokat',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Válassza ki a dátumot',
+    header: 'Adja meg a dátumot',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Adja meg a dátumot',
     },
   },
   noDataText: 'Nincs elérhető adat',
@@ -57,7 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} további',
-    today: 'Today',
+    today: 'Ma',
   },
   input: {
     clear: 'Clear {0}',
@@ -72,7 +72,7 @@ export default {
   timePicker: {
     am: 'de',
     pm: 'du',
-    title: 'Select Time',
+    title: 'Válassza ki az időpontot',
   },
   pagination: {
     ariaLabel: {
@@ -81,22 +81,22 @@ export default {
       previous: 'Előző oldal',
       page: 'Menj a(z) {0}. oldalra',
       currentPage: 'Aktuális oldal: {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Első oldal',
+      last: 'Utolsó oldal',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Következő',
+    prev: 'Előző',
   },
   rating: {
     ariaLabel: {
       item: 'Rating {0} of {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Betöltés...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Továbbiak',
+    empty: 'Nincsen több',
   },
 }
