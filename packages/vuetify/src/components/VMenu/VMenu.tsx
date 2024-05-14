@@ -77,6 +77,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
       closeParents (e) {
         setTimeout(() => {
           if (!openChildren.value &&
+            !props.persistent &&
             (e == null || (e && !isClickInsideElement(e, overlay.value!.contentEl!)))
           ) {
             isActive.value = false
