@@ -77,6 +77,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
       closeParents (e) {
         setTimeout(() => {
           if (!openChildren.value &&
+            !props.persistent &&
             (e == null || (e && !isClickInsideElement(e, overlay.value!.contentEl!)))
           ) {
             isActive.value = false
@@ -126,6 +127,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
       if (props.disabled) return
 
       if (e.key === 'Tab' || (e.key === 'Enter' && !props.closeOnContentClick)) {
+        if (e.key === 'Enter' && e.target instanceof HTMLTextAreaElement) return
         if (e.key === 'Enter') e.preventDefault()
 
         const nextElement = getNextElement(

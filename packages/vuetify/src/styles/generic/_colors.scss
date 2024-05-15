@@ -13,7 +13,6 @@
 @mixin background-text-color($color_name, $color_type) {
   $map_value: map-deep-get(colors.$text-on-colors, $color_name, $color_type);
 
-  --v-theme-on-surface: #{$map_value} !important;
   color: $map_value !important;
 }
 

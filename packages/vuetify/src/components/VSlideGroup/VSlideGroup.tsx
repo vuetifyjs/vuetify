@@ -78,7 +78,7 @@ export const makeVSlideGroupProps = propsFactory({
   },
 
   ...makeComponentProps(),
-  ...makeDisplayProps(),
+  ...makeDisplayProps({ mobile: null }),
   ...makeTagProps(),
   ...makeGroupProps({
     selectedClass: 'v-slide-group-item--active',
