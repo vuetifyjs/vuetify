@@ -8,6 +8,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { useInputIcon } from '@/components/VInput/InputIcon'
 
 // Composables
+import { makeBorderProps, useBorder } from '@/composables/border'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeFocusProps, useFocus } from '@/composables/focus'
@@ -38,7 +39,7 @@ import type { PropType, Ref } from 'vue'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
 
-const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled', 'plain'] as const
+const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled', 'plain', 'border'] as const
 type Variant = typeof allowedVariants[number]
 
 export interface DefaultInputSlot {
@@ -90,6 +91,7 @@ export const makeVFieldProps = propsFactory({
   'onClick:appendInner': EventProp<[MouseEvent]>(),
   'onClick:prependInner': EventProp<[MouseEvent]>(),
 
+  ...makeBorderProps(),
   ...makeComponentProps(),
   ...makeLoaderProps(),
   ...makeRoundedProps(),
@@ -119,6 +121,7 @@ export const VField = genericComponent<new <T>(
   props: {
     id: String,
 
+    ...makeBorderProps(),
     ...makeFocusProps(),
     ...makeVFieldProps(),
   },
@@ -130,12 +133,14 @@ export const VField = genericComponent<new <T>(
 
   setup (props, { attrs, emit, slots }) {
     const { themeClasses } = provideTheme(props)
+    const { borderClasses } = useBorder(props, 'v-field__outline')
     const { loaderClasses } = useLoader(props)
     const { focusClasses, isFocused, focus, blur } = useFocus(props)
     const { InputIcon } = useInputIcon(props)
     const { roundedClasses } = useRounded(props)
     const { rtlClasses } = useRtl()
 
+    const variant = computed(() => props.border ? 'outlined' : props.variant)
     const isActive = computed(() => props.dirty || props.active)
     const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
 
@@ -146,7 +151,7 @@ export const VField = genericComponent<new <T>(
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()
     const controlRef = ref<HTMLElement>()
-    const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
+    const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(variant.value))
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
@@ -221,7 +226,7 @@ export const VField = genericComponent<new <T>(
     }
 
     useRender(() => {
-      const isOutlined = props.variant === 'outlined'
+      const isOutlined = variant.value === 'outlined' || props.border
       const hasPrepend = !!(slots['prepend-inner'] || props.prependInnerIcon)
       const hasClear = !!(props.clearable || slots.clear)
       const hasAppend = !!(slots['append-inner'] || props.appendInnerIcon || hasClear)
@@ -253,7 +258,7 @@ export const VField = genericComponent<new <T>(
               'v-field--reverse': props.reverse,
               'v-field--single-line': props.singleLine,
               'v-field--no-label': !label(),
-              [`v-field--variant-${props.variant}`]: true,
+              [`v-field--variant-${variant.value}`]: true,
             },
             themeClasses.value,
             backgroundColorClasses.value,
@@ -290,7 +295,7 @@ export const VField = genericComponent<new <T>(
           )}
 
           <div class="v-field__field" data-no-activator="">
-            {['filled', 'solo', 'solo-inverted', 'solo-filled'].includes(props.variant) && hasLabel.value && (
+            {['filled', 'solo', 'solo-inverted', 'solo-filled'].includes(variant.value) && hasLabel.value && (
               <VFieldLabel
                 key="floating-label"
                 ref={ floatingLabelRef }
@@ -372,6 +377,7 @@ export const VField = genericComponent<new <T>(
           <div
             class={[
               'v-field__outline',
+              borderClasses.value,
               textColorClasses.value,
             ]}
             style={ textColorStyles.value }

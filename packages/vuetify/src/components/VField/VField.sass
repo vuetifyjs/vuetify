@@ -324,6 +324,13 @@
     position: absolute
     right: 0
     width: 100%
+    
+    @include tools.border($field-border-prop...)
+
+    &.v-field__outline--border
+      --v-field-border-width: 0
+      --v-field-border-opacity: 0
+
 
     @media (hover: hover)
       .v-field:hover &
@@ -336,7 +343,7 @@
     .v-input.v-input--error &
       --v-field-border-opacity: 1
 
-    .v-field--variant-outlined.v-field--focused &
+    .v-field--variant-outlined.v-field--focused &:not(.v-field__outline--border)
       --v-field-border-width: #{$field-focused-border-width}
 
     .v-field--variant-filled &,
