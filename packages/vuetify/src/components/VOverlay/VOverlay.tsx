@@ -326,10 +326,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                     'v-overlay__content',
                     props.contentClass,
                   ]}
-                  style={[
-                    contentStyles.value,
-                    dimensionStyles.value,
-                  ]}
+                  style={ Object.assign({}, contentStyles.value, JSON.parse(JSON.stringify(dimensionStyles.value))) }
                   { ...contentEvents.value }
                   { ...props.contentProps }
                 >
