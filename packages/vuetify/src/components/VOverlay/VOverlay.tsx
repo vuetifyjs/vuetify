@@ -156,6 +156,9 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       scrimEvents,
     } = useActivator(props, { isActive, isTop: localTop })
     const { dimensionStyles } = useDimension(props)
+    const definedDimensionStyles = computed(() => {
+      return Object.fromEntries(Object.entries(dimensionStyles.value).filter(([_, v]) => v != null))
+    })
     const isMounted = useHydration()
     const { scopeId } = useScopeId()
 
@@ -326,7 +329,10 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                     'v-overlay__content',
                     props.contentClass,
                   ]}
-                  style={ Object.assign({}, contentStyles.value, JSON.parse(JSON.stringify(dimensionStyles.value))) }
+                  style={[
+                    contentStyles.value,
+                    definedDimensionStyles.value,
+                  ]}
                   { ...contentEvents.value }
                   { ...props.contentProps }
                 >
