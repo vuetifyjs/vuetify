@@ -9,6 +9,7 @@
     "column.data-table-select": "Slot to replace the default `v-simple-checkbox` used when selecting rows.",
     "data-table-group": "Slot for custom rendering of a group.",
     "data-table-select": "Slot for custom rendering of a header cell with the select checkbox.",
+    "disableSort": "Disables sorting completely.",
     "expanded-row": "Slot for custom rendering of an expanded row.",
     "group-header": "Slot for custom rendering of a group header.",
     "headers": "Slot to replace the default rendering of the `<thead>` element.",
