@@ -39,7 +39,7 @@ import type { PropType, Ref } from 'vue'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
 
-const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled', 'plain', 'border'] as const
+const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled', 'plain'] as const
 type Variant = typeof allowedVariants[number]
 
 export interface DefaultInputSlot {
@@ -133,7 +133,9 @@ export const VField = genericComponent<new <T>(
 
   setup (props, { attrs, emit, slots }) {
     const { themeClasses } = provideTheme(props)
-    const { borderClasses } = useBorder(props, 'v-field__outline')
+    const { borderClasses: outlineStartBorderClasses } = useBorder(props, 'v-field__outline__start')
+    const { borderClasses: outlineNotchBorderClasses } = useBorder(props, 'v-field__outline__notch')
+    const { borderClasses: outlineEndBorderClasses } = useBorder(props, 'v-field__outline__end')
     const { loaderClasses } = useLoader(props)
     const { focusClasses, isFocused, focus, blur } = useFocus(props)
     const { InputIcon } = useInputIcon(props)
@@ -377,24 +379,42 @@ export const VField = genericComponent<new <T>(
           <div
             class={[
               'v-field__outline',
-              borderClasses.value,
               textColorClasses.value,
             ]}
             style={ textColorStyles.value }
           >
             { isOutlined && (
               <>
-                <div class="v-field__outline__start" />
+                <div
+                  class={[
+                    'v-field__outline__start',
+                    {
+                      'v-field__outline__start--border': props.border,
+                    },
+                    outlineStartBorderClasses.value,
+                  ]}
+                />
 
                 { hasLabel.value && (
-                  <div class="v-field__outline__notch">
+                  <div class={[
+                    'v-field__outline__notch',
+                    {
+                      'v-field__outline__notch--border': props.border,
+                    },
+                    outlineNotchBorderClasses.value,
+                  ]}
+                  >
                     <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
                       { label() }
                     </VFieldLabel>
                   </div>
                 )}
 
-                <div class="v-field__outline__end" />
+                <div class={[
+                  'v-field__outline__end',
+                  outlineEndBorderClasses.value,
+                ]}
+                />
               </>
             )}
 

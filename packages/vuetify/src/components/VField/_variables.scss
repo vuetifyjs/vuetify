@@ -54,7 +54,7 @@ $field-border-prop-color: settings.$border-color-root !default;
 $field-border-prop-radius: settings.$border-radius-root !default;
 $field-border-prop-style: settings.$border-style-root !default;
 $field-border-prop-thin-width: thin !default;
-$field-border-prop-width: 0 !default;
+$field-border-prop-width: thin !default;
 
 $field-border-prop: (
   $field-border-prop-color,
