@@ -231,14 +231,15 @@ export function useDisplay (
   if (!display) throw new Error('Could not find Vuetify display injection')
 
   const mobile = computed(() => {
-    if (props.mobile != null) return props.mobile
+    if (typeof props.mobile === 'boolean' && !props.mobileBreakpoint) return props.mobile
+
     if (!props.mobileBreakpoint) return display.mobile.value
 
     const breakpointValue = typeof props.mobileBreakpoint === 'number'
       ? props.mobileBreakpoint
       : display.thresholds.value[props.mobileBreakpoint]
 
-    return display.width.value < breakpointValue
+    return props.mobile && display.width.value < breakpointValue
   })
 
   const displayClasses = computed(() => {

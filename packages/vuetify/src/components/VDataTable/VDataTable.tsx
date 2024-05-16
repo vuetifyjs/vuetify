@@ -191,6 +191,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
         noDataText: toRef(props, 'noDataText'),
         loading: toRef(props, 'loading'),
         loadingText: toRef(props, 'loadingText'),
+        mobile: toRef(props, 'mobile'),
       },
     })
 
@@ -258,6 +259,8 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
                       { ...attrs }
                       { ...dataTableRowsProps }
                       items={ paginatedItems.value }
+                      mobile={ props.mobile }
+                      mobileBreakpoint={ props.mobileBreakpoint }
                       v-slots={ slots }
                     />
                   )}

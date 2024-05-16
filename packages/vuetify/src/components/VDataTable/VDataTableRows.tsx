@@ -64,6 +64,7 @@ export const VDataTableRows = genericComponent<new <T>(
   props: makeVDataTableRowsProps(),
 
   setup (props, { attrs, slots }) {
+    console.log('VDataTableROWSSSSSSSSSS', props)
     const { columns } = useHeaders()
     const { expandOnClick, toggleExpand, isExpanded } = useExpanded()
     const { isSelected, toggleSelect } = useSelection()
@@ -164,6 +165,8 @@ export const VDataTableRows = genericComponent<new <T>(
                 { slots.item ? slots.item(itemSlotProps) : (
                   <VDataTableRow
                     { ...itemSlotProps.props }
+                    mobile={ props.mobile }
+                    mobileBreakpoint={ props.mobileBreakpoint }
                     v-slots={ slots }
                   />
                 )}
