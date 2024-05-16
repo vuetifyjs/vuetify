@@ -324,10 +324,12 @@
     position: absolute
     right: 0
     width: 100%
-    
 
+    &--border
+      --v-field-border-opacity: none
+    
     @media (hover: hover)
-      .v-field:hover &
+      .v-field:hover &:not(.v-field__outline--border)
         --v-field-border-opacity: var(--v-high-emphasis-opacity)
 
     .v-field--error:not(.v-field--disabled) &
@@ -407,13 +409,11 @@
         max-width: calc(100% - $field-control-affixed-padding)
         border-inline-end-width: 0 !important
         border-inline-start-width: 0 !important
-        &--border
-          @include tools.border($field-border-prop...)
-
         &--border 
+          @include tools.border($field-border-prop...)
           opacity: var(--v-field-border-opacity)
           transition: opacity $field-subtle-transition-timing
-
+        
         &::before,
         &::after
           opacity: var(--v-field-border-opacity)

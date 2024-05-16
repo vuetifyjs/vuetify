@@ -379,6 +379,9 @@ export const VField = genericComponent<new <T>(
           <div
             class={[
               'v-field__outline',
+              {
+                'v-field__outline--border': props.border,
+              },
               textColorClasses.value,
             ]}
             style={ textColorStyles.value }
@@ -387,11 +390,8 @@ export const VField = genericComponent<new <T>(
               <>
                 <div
                   class={[
-                    'v-field__outline__start',
-                    {
-                      'v-field__outline__start--border': props.border,
-                    },
                     outlineStartBorderClasses.value,
+                    'v-field__outline__start',
                   ]}
                 />
 
