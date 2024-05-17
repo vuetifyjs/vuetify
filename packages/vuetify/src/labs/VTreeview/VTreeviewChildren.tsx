@@ -105,13 +105,13 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
           { ...treeviewGroupProps }
         >
           {{
-            activator: ({ props: activatorProps, id }) => (
+            activator: ({ props: activatorProps, nestedId }) => (
               <VTreeviewItem
                 { ...itemProps }
                 { ...activatorProps }
                 loading={ loading }
                 v-slots={ slotsWithItem }
-                value={ id }
+                value={ nestedId }
                 onClick={ () => checkChildren(item) }
               />
             ),
