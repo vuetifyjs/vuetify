@@ -17,7 +17,7 @@ describe('VListGroup', () => {
 
         <VList>
           <VListGroup>
-            {{ activator: props => <VListItem { ...props } title="Group" /> }}
+            {{ activator: props => <VListItem isOpen={ props.isOpen } value={ props.nestedId } title="Group" /> }}
           </VListGroup>
         </VList>
       </CenteredGrid>
