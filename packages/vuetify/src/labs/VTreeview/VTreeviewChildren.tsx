@@ -71,22 +71,27 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
     return () => slots.default?.() ?? props.items?.map(({ children, props: itemProps, raw: item }) => {
       const loading = isLoading.value === item.value
       const slotsWithItem = {
-        prepend: slots.prepend
-          ? slotProps => slots.prepend?.({ ...slotProps, item })
-          : props.selectable && (!children || (children && props.selectStrategy !== 'single-leaf' && props.selectStrategy !== 'leaf'))
-            ? ({ isSelected, isIndeterminate, select }) => (
-              <div>
-                <VCheckboxBtn
-                  key={ item.value }
-                  tabindex="-1"
-                  modelValue={ isSelected }
-                  loading={ loading }
-                  indeterminate={ isIndeterminate }
-                  onClick={ withModifiers(() => selectItem(select, isSelected), ['stop']) }
-                />
-              </div>
-            )
-            : undefined,
+        prepend: slotProps => (
+          <>
+            { slots.prepend?.({ ...slotProps, item }) }
+            {
+              props.selectable && (!children || (children && props.selectStrategy !== 'single-leaf' && props.selectStrategy !== 'leaf'))
+                ? (
+                <div>
+                  <VCheckboxBtn
+                    key={ item.value }
+                    tabindex="-1"
+                    modelValue={ slotProps.isSelected }
+                    loading={ loading }
+                    indeterminate={ slotProps.isIndeterminate }
+                    onClick={ withModifiers(() => selectItem(slotProps.select, slotProps.isSelected), ['stop']) }
+                  />
+                </div>
+                )
+                : undefined
+            }
+          </>
+        ),
         append: slots.append ? slotProps => slots.append?.({ ...slotProps, item }) : undefined,
         title: slots.title ? slotProps => slots.title?.({ ...slotProps, item }) : undefined,
       } satisfies VTreeviewItem['$props']['$children']
@@ -107,7 +112,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 loading={ loading }
                 v-slots={ slotsWithItem }
                 value={ id }
-                onClick={ withModifiers(() => () => checkChildren(item), ['stop']) }
+                onClick={ () => checkChildren(item) }
               />
             ),
             default: () => (
