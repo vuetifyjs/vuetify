@@ -58,8 +58,12 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       })
     }
 
-    function onClick (e: MouseEvent | KeyboardEvent, item: any) {
+    function selectItem (e: MouseEvent | KeyboardEvent, item: any, select: (value: boolean) => void, isSelected: boolean) {
       e.stopPropagation()
+
+      if (props.selectable) {
+        select(!isSelected)
+      }
 
       checkChildren(item)
     }
@@ -69,15 +73,17 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         prepend: slots.prepend
           ? slotProps => slots.prepend?.({ ...slotProps, item })
           : props.selectable
-            ? ({ isSelected, isIndeterminate }) => (
-              <VCheckboxBtn
-                key={ item.value }
-                tabindex="-1"
-                modelValue={ isSelected }
-                loading={ isLoading.value }
-                indeterminate={ isIndeterminate }
-                onClick={ (e: MouseEvent) => onClick(e, item) }
-              />
+            ? ({ isSelected, isIndeterminate, select }) => (
+              <div>
+                <VCheckboxBtn
+                  key={ item.value }
+                  tabindex="-1"
+                  modelValue={ isSelected }
+                  loading={ isLoading.value }
+                  indeterminate={ isIndeterminate }
+                  onClick={ (e: MouseEvent) => selectItem(e, item, select, isSelected) }
+                />
+              </div>
             )
             : undefined,
         append: slots.append ? slotProps => slots.append?.({ ...slotProps, item }) : undefined,
@@ -93,14 +99,14 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
           { ...treeviewGroupProps }
         >
           {{
-            activator: ({ props: activatorProps }) => (
+            activator: ({ props: activatorProps, id }) => (
               <VTreeviewItem
                 { ...itemProps }
                 { ...activatorProps }
                 loading={ isLoading.value }
                 openOnClick={ props.openOnClick }
                 v-slots={ slotsWithItem }
-                onClick={ (e: MouseEvent | KeyboardEvent) => onClick(e, item) }
+                value={ id }
               />
             ),
             default: () => (

@@ -17,7 +17,7 @@ import { defineComponent, genericComponent, propsFactory, useRender } from '@/ut
 
 export type VListGroupSlots = {
   default: never
-  activator: { isOpen: boolean, props: Record<string, unknown> }
+  activator: { id: any, isOpen: boolean, props: Record<string, unknown> }
 }
 
 const VListGroupActivator = defineComponent({
@@ -106,7 +106,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
         { slots.activator && (
           <VDefaultsProvider defaults={ activatorDefaults.value }>
             <VListGroupActivator>
-              { slots.activator({ props: activatorProps.value, isOpen: isOpen.value }) }
+              { slots.activator({ id: _id, props: activatorProps.value, isOpen: isOpen.value }) }
             </VListGroupActivator>
           </VDefaultsProvider>
         )}

@@ -37,7 +37,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
 
   setup (props, { attrs, slots, emit }) {
     const link = useLink(props, attrs)
-    const id = computed(() => props.value === undefined ? link.href.value : props.value)
+    const rawId = computed(() => props.value === undefined ? link.href.value : props.value)
     const vListItemRef = ref<VListItem>()
 
     const {
@@ -48,7 +48,8 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       isIndeterminate,
       isGroupActivator,
       root,
-    } = useNestedItem(id, false)
+      id,
+    } = useNestedItem(rawId, false)
 
     const isActivetableGroupActivator = computed(() =>
       (root.activatable.value) &&
@@ -71,7 +72,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       (props.link || link.isClickable.value || (props.value != null && !!vListItemRef.value?.list))
     )
 
-    function selectItem (e: MouseEvent | KeyboardEvent) {
+    function activateItem (e: MouseEvent | KeyboardEvent) {
       if (
         !isClickable.value ||
         (!isActivetableGroupActivator.value && isGroupActivator)
@@ -91,7 +92,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
     function onKeyDown (e: KeyboardEvent) {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault()
-        selectItem(e)
+        activateItem(e)
       }
     }
 
@@ -118,7 +119,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
               densityClasses.value,
               props.class,
             ]}
-            onClick={ selectItem }
+            onClick={ activateItem }
             v-ripple={ isClickable.value && props.ripple }
           >
             <>
@@ -176,7 +177,8 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             },
             props.class,
           ]}
-          onClick={ selectItem }
+          value={ id.value.value }
+          onClick={ activateItem }
           onKeydown={ isClickable.value && onKeyDown }
         >
           {{
