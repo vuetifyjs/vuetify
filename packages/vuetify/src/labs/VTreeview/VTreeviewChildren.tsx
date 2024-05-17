@@ -4,7 +4,7 @@ import { VTreeviewItem } from './VTreeviewItem'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 
 // Utilities
-import { shallowRef } from 'vue'
+import { shallowRef, withModifiers } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -62,14 +62,10 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       })
     }
 
-    function selectItem (e: MouseEvent | KeyboardEvent, item: any, select: (value: boolean) => void, isSelected: boolean) {
-      e.stopPropagation()
-
+    function selectItem (select: (value: boolean) => void, isSelected: boolean) {
       if (props.selectable) {
         select(!isSelected)
       }
-
-      checkChildren(item)
     }
 
     return () => slots.default?.() ?? props.items?.map(({ children, props: itemProps, raw: item }) => {
@@ -86,7 +82,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                   modelValue={ isSelected }
                   loading={ loading }
                   indeterminate={ isIndeterminate }
-                  onClick={ (e: MouseEvent) => selectItem(e, item, select, isSelected) }
+                  onClick={ withModifiers(() => selectItem(select, isSelected), ['stop']) }
                 />
               </div>
             )
@@ -111,6 +107,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 loading={ loading }
                 v-slots={ slotsWithItem }
                 value={ id }
+                onClick={ withModifiers(() => () => checkChildren(item), ['stop']) }
               />
             ),
             default: () => (
