@@ -11,6 +11,7 @@ import { genericComponent, propsFactory } from '@/util'
 import type { PropType } from 'vue'
 import type { InternalListItem } from '@/components/VList/VList'
 import type { VListItemSlots } from '@/components/VList/VListItem'
+import type { SelectStrategyProp } from '@/composables/nested/nested'
 import type { GenericProps } from '@/util'
 
 export type VTreeviewChildrenSlots<T> = {
@@ -29,6 +30,7 @@ export const makeVTreeviewChildrenProps = propsFactory({
   },
   items: Array as PropType<readonly InternalListItem[]>,
   selectable: Boolean,
+  selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
 }, 'VTreeviewChildren')
 
 export const VTreeviewChildren = genericComponent<new <T extends InternalListItem>(
@@ -72,7 +74,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       const slotsWithItem = {
         prepend: slots.prepend
           ? slotProps => slots.prepend?.({ ...slotProps, item })
-          : props.selectable
+          : props.selectable && (!children || (children && props.selectStrategy !== 'single-leaf' && props.selectStrategy !== 'leaf'))
             ? ({ isSelected, isIndeterminate, select }) => (
               <div>
                 <VCheckboxBtn
