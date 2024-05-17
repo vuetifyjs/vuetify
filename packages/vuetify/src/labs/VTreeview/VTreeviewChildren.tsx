@@ -73,7 +73,6 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       const slotsWithItem = {
         prepend: slotProps => (
           <>
-            { slots.prepend?.({ ...slotProps, item }) }
             {
               props.selectable && (!children || (children && props.selectStrategy !== 'single-leaf' && props.selectStrategy !== 'leaf'))
                 ? (
@@ -90,6 +89,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 )
                 : undefined
             }
+            { slots.prepend?.({ ...slotProps, item }) }
           </>
         ),
         append: slots.append ? slotProps => slots.append?.({ ...slotProps, item }) : undefined,
