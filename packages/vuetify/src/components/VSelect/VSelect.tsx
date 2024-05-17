@@ -176,7 +176,7 @@ export const VSelect = genericComponent<new <
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
-        return items.value.filter(item => !model.value.some(s => s === item))
+        return items.value.filter(item => !model.value.some(s => props.valueComparator(s, item)))
       }
       return items.value
     })

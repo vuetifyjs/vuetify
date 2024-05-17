@@ -1,0 +1,9 @@
+{
+  "props": {
+    "finish": "Changes the Next button to use the finish text.",
+    "finishText": "The text used for the finish button. Shown when using the **finish** prop."
+  },
+  "events": {
+    "click:finish": "Emitted when the clicking the finish button."
+  }
+}
