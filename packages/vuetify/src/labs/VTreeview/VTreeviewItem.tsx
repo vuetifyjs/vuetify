@@ -177,7 +177,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             },
             props.class,
           ]}
-          value={ id.value.value }
+          value={ id.value }
           onClick={ activateItem }
           onKeydown={ isClickable.value && onKeyDown }
         >

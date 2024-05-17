@@ -106,7 +106,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
         { slots.activator && (
           <VDefaultsProvider defaults={ activatorDefaults.value }>
             <VListGroupActivator>
-              { slots.activator({ id: _id, props: activatorProps.value, isOpen: isOpen.value }) }
+              { slots.activator({ id: _id.value, props: activatorProps.value, isOpen: isOpen.value }) }
             </VListGroupActivator>
           </VDefaultsProvider>
         )}
