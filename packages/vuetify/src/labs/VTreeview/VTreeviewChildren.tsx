@@ -22,7 +22,6 @@ export type VTreeviewChildrenSlots<T> = {
 }
 
 export const makeVTreeviewChildrenProps = propsFactory({
-  openOnClick: Boolean,
   loadChildren: Function as PropType<(item: unknown) => Promise<void>>,
   loadingIcon: {
     type: String,
@@ -106,7 +105,6 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 { ...itemProps }
                 { ...activatorProps }
                 loading={ isLoading.value }
-                openOnClick={ props.openOnClick }
                 v-slots={ slotsWithItem }
                 value={ id }
               />

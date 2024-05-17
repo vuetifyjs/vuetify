@@ -25,7 +25,6 @@ import type { ListItemSlot, VListItemSlots } from '@/components/VList/VListItem'
 export const makeVTreeviewItemProps = propsFactory({
   loading: Boolean,
   toggleIcon: IconValue,
-  openOnClick: Boolean,
 
   ...makeVListItemProps({ slim: true }),
 }, 'VTreeviewItem')
@@ -53,8 +52,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
 
     const isActivetableGroupActivator = computed(() =>
       (root.activatable.value) &&
-      isGroupActivator &&
-      !props.openOnClick
+      isGroupActivator
     )
 
     const { densityClasses } = useDensity(props, 'v-list-item')
@@ -84,8 +82,6 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
         } else {
           vListItemRef.value?.activate(!vListItemRef.value?.isActivated, e)
         }
-      } else if (props.value != null) {
-        vListItemRef.value?.select(!vListItemRef.value?.isSelected, e)
       }
     }
 
