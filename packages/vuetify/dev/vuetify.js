@@ -5,16 +5,9 @@ import { createVuetify } from 'vuetify/src/framework'
 import * as directives from 'vuetify/src/directives'
 
 import date from './vuetify/date'
-// import defaults from './vuetify/defaults'
+import defaults from './vuetify/defaults'
 import icons from './vuetify/icons'
 import locale from './vuetify/locale'
-
-const defaults = {
-  VDataTable: {
-    mobile: null,
-    mobileBreakpoint: 'xl',
-  },
-}
 
 export default createVuetify({
   directives,
