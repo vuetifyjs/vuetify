@@ -18,6 +18,7 @@
     "headers": "An array of objects that each describe a header column. See the example below for a definition of all properties.",
     "headersLength": "Can be used in combination with `hide-default-header` to specify the number of columns in the table to allow expansion rows and loading bar to function properly.",
     "height": "Set an explicit height of table.",
+    "hideDefaultBody": "Hides the default body.",
     "hideDefaultHeader": "Hides the default header.",
     "hideDefaultFooter": "Hides the default footer. This has no effect on `v-data-table-virtual`.",
     "hover": "Adds a hover effects to a table rows.",

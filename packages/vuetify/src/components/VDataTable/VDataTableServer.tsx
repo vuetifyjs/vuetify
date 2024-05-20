@@ -175,18 +175,20 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
                   </thead>
                 )}
                 { slots.thead?.(slotProps.value) }
-                <tbody class="v-data-table__tbody" role="rowgroup">
-                  { slots['body.prepend']?.(slotProps.value) }
-                  { slots.body ? slots.body(slotProps.value) : (
-                    <VDataTableRows
-                      { ...attrs }
-                      { ...dataTableRowsProps }
-                      items={ flatItems.value }
-                      v-slots={ slots }
-                    />
-                  )}
-                  { slots['body.append']?.(slotProps.value) }
-                </tbody>
+                { !props.hideDefaultBody && (
+                  <tbody class="v-data-table__tbody" role="rowgroup">
+                    { slots['body.prepend']?.(slotProps.value) }
+                    { slots.body ? slots.body(slotProps.value) : (
+                      <VDataTableRows
+                        { ...attrs }
+                        { ...dataTableRowsProps }
+                        items={ flatItems.value }
+                        v-slots={ slots }
+                      />
+                    )}
+                    { slots['body.append']?.(slotProps.value) }
+                  </tbody>
+                )}
                 { slots.tbody?.(slotProps.value) }
                 { slots.tfoot?.(slotProps.value) }
               </>
