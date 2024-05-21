@@ -238,7 +238,7 @@ export const VAutocomplete = genericComponent<new <
         menu.value = false
       }
 
-      if (highlightFirst.value && ['Enter', 'Tab'].includes(e.key)) {
+      if (highlightFirst.value && e.key === 'Enter') {
         select(displayItems.value[0])
       }
 
