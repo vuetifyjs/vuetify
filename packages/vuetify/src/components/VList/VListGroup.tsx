@@ -17,7 +17,7 @@ import { defineComponent, genericComponent, propsFactory, useRender } from '@/ut
 
 export type VListGroupSlots = {
   default: never
-  activator: { nestedId: unknown, isOpen: boolean, props: Record<string, unknown> }
+  activator: { isOpen: boolean, props: Record<string, unknown> }
 }
 
 const VListGroupActivator = defineComponent({
@@ -60,8 +60,8 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
   props: makeVListGroupProps(),
 
   setup (props, { slots }) {
-    const { isOpen, open, id: nestedId } = useNestedItem(toRef(props, 'value'), true)
-    const id = computed(() => `v-list-group--id-${String(nestedId.value)}`)
+    const { isOpen, open, id: _id } = useNestedItem(toRef(props, 'value'), true)
+    const id = computed(() => `v-list-group--id-${String(_id.value)}`)
     const list = useList()
     const { isBooted } = useSsrBoot()
 
@@ -106,7 +106,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
         { slots.activator && (
           <VDefaultsProvider defaults={ activatorDefaults.value }>
             <VListGroupActivator>
-              { slots.activator({ nestedId: nestedId.value, props: activatorProps.value, isOpen: isOpen.value }) }
+              { slots.activator({ props: activatorProps.value, isOpen: isOpen.value }) }
             </VListGroupActivator>
           </VDefaultsProvider>
         )}
