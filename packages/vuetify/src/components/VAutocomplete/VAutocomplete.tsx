@@ -238,7 +238,7 @@ export const VAutocomplete = genericComponent<new <
         menu.value = false
       }
 
-      if (highlightFirst.value && ['Enter', 'Tab'].includes(e.key)) {
+      if (highlightFirst.value && e.key === 'Enter') {
         select(displayItems.value[0])
       }
 
@@ -638,6 +638,7 @@ export const VAutocomplete = genericComponent<new <
                     onClick={ noop }
                     aria-label={ t(label.value) }
                     title={ t(label.value) }
+                    tabindex="-1"
                   />
                 ) : undefined }
               </>

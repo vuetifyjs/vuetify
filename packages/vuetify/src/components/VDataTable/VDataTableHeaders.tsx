@@ -60,6 +60,7 @@ export type VDataTableHeadersSlots = {
 export const makeVDataTableHeadersProps = propsFactory({
   color: String,
   sticky: Boolean,
+  disableSort: Boolean,
   multiSort: Boolean,
   sortAscIcon: {
     type: IconValue,
@@ -142,7 +143,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           align={ column.align }
           class={[
             {
-              'v-data-table__th--sortable': column.sortable,
+              'v-data-table__th--sortable': column.sortable && !props.disableSort,
               'v-data-table__th--sorted': isSorted(column),
               'v-data-table__th--fixed': column.fixed,
             },
@@ -192,7 +193,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               return (
                 <div class="v-data-table-header__content">
                   <span>{ column.title }</span>
-                  { column.sortable && (
+                  { column.sortable && !props.disableSort && (
                     <VIcon
                       key="icon"
                       class="v-data-table-header__sort-icon"
@@ -223,7 +224,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       const headerProps = mergeProps(props.headerProps ?? {} ?? {})
 
       const displayItems = computed<ItemProps['items']>(() => {
-        return columns.value.filter(column => column?.sortable)
+        return columns.value.filter(column => column?.sortable && !props.disableSort)
       })
 
       const appendIcon = computed(() => {
