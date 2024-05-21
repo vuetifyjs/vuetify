@@ -320,6 +320,7 @@ export const VDatePicker = genericComponent<new <
                       onUpdate:modelValue={ onUpdateMonth }
                       min={ minDate.value }
                       max={ maxDate.value }
+                      year={ year.value }
                     />
                   ) : viewMode.value === 'year' ? (
                     <VDatePickerYears
