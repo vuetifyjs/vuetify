@@ -684,6 +684,7 @@ export const VCombobox = genericComponent<new <
                     onClick={ noop }
                     aria-label={ t(label.value) }
                     title={ t(label.value) }
+                    tabindex="-1"
                   />
                 ) : undefined }
               </>
