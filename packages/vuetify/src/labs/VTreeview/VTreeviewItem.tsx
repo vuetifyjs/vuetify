@@ -50,7 +50,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       id,
     } = useNestedItem(rawId, false)
 
-    const isActivetableGroupActivator = computed(() =>
+    const isActivatableGroupActivator = computed(() =>
       (root.activatable.value) &&
       isGroupActivator
     )
@@ -73,11 +73,11 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
     function activateItem (e: MouseEvent | KeyboardEvent) {
       if (
         !isClickable.value ||
-        (!isActivetableGroupActivator.value && isGroupActivator)
+        (!isActivatableGroupActivator.value && isGroupActivator)
       ) return
 
       if (root.activatable.value) {
-        if (isActivetableGroupActivator.value) {
+        if (isActivatableGroupActivator.value) {
           activate(!isActivated.value, e)
         } else {
           vListItemRef.value?.activate(!vListItemRef.value?.isActivated, e)
@@ -100,7 +100,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       const listItemProps = VListItem.filterProps(props)
       const hasPrepend = slots.prepend || props.toggleIcon
 
-      return isActivetableGroupActivator.value
+      return isActivatableGroupActivator.value
         ? (
           <div
             class={[
