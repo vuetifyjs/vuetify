@@ -77,11 +77,15 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               <div>
                 <VCheckboxBtn
                   key={ item.value }
-                  tabindex="-1"
                   modelValue={ slotProps.isSelected }
                   loading={ loading }
                   indeterminate={ slotProps.isIndeterminate }
                   onClick={ withModifiers(() => selectItem(slotProps.select, slotProps.isSelected), ['stop']) }
+                  onKeydown={ (e: KeyboardEvent) => {
+                    if (!['Enter', 'Space'].includes(e.key)) return
+                    e.stopPropagation()
+                    selectItem(slotProps.select, slotProps.isSelected)
+                  }}
                 />
               </div>
             )}
