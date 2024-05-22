@@ -51,7 +51,7 @@ describe('VCheckboxBtn', () => {
   it('should not update input checked state when it is readonly', () => {
     const model = ref(false)
     cy.mount(() => (
-      <VCheckboxBtn v-model={ model.value } readonly={ true } />
+      <VCheckboxBtn v-model={ model.value } readonly />
     ))
 
     cy.get('.v-checkbox-btn').click(20, 20)

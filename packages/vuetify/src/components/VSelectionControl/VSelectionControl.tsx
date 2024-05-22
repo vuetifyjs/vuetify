@@ -209,10 +209,10 @@ export const VSelectionControl = genericComponent<new <T>(
           // model value is not updated when input is not interactive
           // but the internal checked state of the input is still updated,
           // so here it's value is restored
-          input.value.checked = model.value;
+          input.value.checked = model.value
         }
 
-        return;
+        return
       }
 
       if (props.readonly && group) {
