@@ -47,4 +47,17 @@ describe('VCheckboxBtn', () => {
 
     cy.get('input').should('have.attr', 'aria-checked', 'mixed')
   })
+
+  it('should not update input checked state when it is readonly', () => {
+    const model = ref(false)
+    cy.mount(() => (
+      <VCheckboxBtn v-model={ model.value } readonly={ true } />
+    ))
+
+    cy.get('.v-checkbox-btn').click(20, 20)
+
+    cy.get('input').should('not.be.checked').then(() => {
+      expect(model.value).to.be.false
+    })
+  })
 })
