@@ -1,6 +1,8 @@
 // Utilities
 import { computed, inject, provide, ref, shallowRef, unref, watchEffect } from 'vue'
-import { getCurrentInstance, injectSelf, mergeDeep, toKebabCase } from '@/util'
+import { getCurrentInstance } from '@/util/getCurrentInstance'
+import { mergeDeep, toKebabCase } from '@/util/helpers'
+import { injectSelf } from '@/util/injectSelf'
 
 // Types
 import type { ComputedRef, InjectionKey, Ref, VNode } from 'vue'

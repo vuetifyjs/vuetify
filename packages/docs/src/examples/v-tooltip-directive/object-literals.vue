@@ -14,8 +14,10 @@
 <script>
   export default {
     data: () => ({
-      text: 'Tooltip',
-      scrollStrategy: 'block',
+      tooltip: {
+        text: 'Tooltip',
+        scrollStrategy: 'block',
+      },
     }),
   }
 </script>
