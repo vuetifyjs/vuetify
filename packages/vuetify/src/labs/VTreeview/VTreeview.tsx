@@ -5,6 +5,7 @@ import { makeVListProps, useListItems, VList } from '@/components/VList/VList'
 // Composables
 import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
+import { useItems } from '@/composables/list-items'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -59,17 +60,21 @@ export const VTreeview = genericComponent<new <T>(
   },
 
   setup (props, { slots }) {
-    const { items } = useListItems(props)
+    // const { items } = useListItems(props)
+    const { items, transformIn, transformOut } = useItems(props)
     const activeColor = toRef(props, 'activeColor')
     const baseColor = toRef(props, 'baseColor')
     const color = toRef(props, 'color')
     const opened = useProxiedModel(props, 'opened')
     const activated = useProxiedModel(props, 'activated')
-    const selected = useProxiedModel(props, 'selected')
-
     const vListRef = ref<VList>()
 
     const flatItems = computed(() => flatten(items.value))
+
+    const selected = useProxiedModel(
+      props,
+      'selected',
+    )
     const search = toRef(props, 'search')
     const { filteredItems } = useFilter(props, flatItems, search)
     const visibleIds = computed(() => {
