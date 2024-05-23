@@ -90,7 +90,9 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
 
     function onRangeClick (value: unknown) {
       const _value = adapter.startOfDay(value)
-
+      if (model.value.length === 0) {
+        rangeStart.value = undefined
+      }
       if (!rangeStart.value) {
         rangeStart.value = _value
         model.value = [rangeStart.value]
