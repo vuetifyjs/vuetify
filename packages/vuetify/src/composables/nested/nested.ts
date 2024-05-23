@@ -314,7 +314,7 @@ export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
     activate: (activated: boolean, e?: Event) => parent.root.activate(computedId.value, activated, e),
     isActivated: computed(() => parent.root.activated.value.has(toRaw(computedId.value))),
     select: (selected: boolean, e?: Event) => parent.root.select(computedId.value, selected, e),
-    isSelected: computed(() => parent.root.selected.value.get(toRaw(computedId.value)) === 'on'),
+    isSelected: computed(() => parent.root.selected.value.get(computedId.value) === 'on'),
     isIndeterminate: computed(() => parent.root.selected.value.get(computedId.value) === 'indeterminate'),
     isLeaf: computed(() => !parent.root.children.value.get(computedId.value)),
     isGroupActivator: parent.isGroupActivator,
