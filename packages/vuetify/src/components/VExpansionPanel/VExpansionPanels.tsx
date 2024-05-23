@@ -2,6 +2,7 @@
 import './VExpansionPanel.sass'
 
 // Components
+import { VExpansionPanelSymbol } from './shared'
 import { makeVExpansionPanelProps } from './VExpansionPanel'
 
 // Composables
@@ -14,10 +15,7 @@ import { computed, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { InjectionKey, PropType } from 'vue'
-import type { GroupItemProvide } from '@/composables/group'
-
-export const VExpansionPanelSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-expansion-panel')
+import type { PropType } from 'vue'
 
 const allowedVariants = ['default', 'accordion', 'inset', 'popout'] as const
 
