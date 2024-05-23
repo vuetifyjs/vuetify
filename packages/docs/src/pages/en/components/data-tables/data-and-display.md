@@ -80,6 +80,12 @@ Use the **item-selectable** prop to designate a property on your items that cont
 
 <ExamplesExample file="v-data-table/prop-item-selectable" />
 
+### Custom select column
+
+Use the **item.data-table-select** slot alongside `v-checkbox-btn` to customize the checkbox used for row selection. You can also use the **header.data-table-select** slot to customize the select-all checkbox in the header of the column.
+
+<ExamplesExample file="v-data-table/slot-item-data-table-select" />
+
 ### Select strategies
 
 Data-tables support three different select strategies.
