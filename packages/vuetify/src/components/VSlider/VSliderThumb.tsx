@@ -48,10 +48,7 @@ export const makeVSliderThumbProps = propsFactory({
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
-  name:{
-    type: String,
-    default: 'Slider'
-  },
+  name: String,
 
   ...makeComponentProps(),
 }, 'VSliderThumb')
