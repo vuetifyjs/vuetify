@@ -18,6 +18,8 @@ import { clamp, genericComponent, getDecimals, omit, propsFactory, useRender } f
 import type { PropType } from 'vue'
 import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
 
+const CALCULATION_DECIMAL_PRECISION = 10
+
 type ControlSlot = {
   click: (e: MouseEvent) => void
 }
@@ -69,15 +71,14 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const model = useProxiedModel(props, 'modelValue')
 
     const stepDecimals = computed(() => getDecimals(props.step))
-    const modelDecimals = computed(() => model.value != null ? getDecimals(model.value) : 0)
 
     const canIncrease = computed(() => {
       if (model.value == null) return true
-      return model.value + props.step <= props.max
+      return model.value < props.max
     })
     const canDecrease = computed(() => {
       if (model.value == null) return true
-      return model.value - props.step >= props.min
+      return model.value > props.min
     })
 
     watchEffect(() => {
@@ -94,17 +95,31 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const decrementSlotProps = computed(() => ({ click: onClickDown }))
 
+    function roundToZero (v: number) {
+      const actualValue = +v.toFixed(CALCULATION_DECIMAL_PRECISION)
+      return v < 0 ? -Math.floor(-actualValue) : Math.floor(actualValue)
+    }
+    function roundToStep (v: number) {
+      return +(v.toFixed(stepDecimals.value))
+    }
+
     function toggleUpDown (increment = true) {
       if (model.value == null) {
         model.value = 0
         return
       }
 
-      const decimals = Math.max(modelDecimals.value, stepDecimals.value)
+      const truncated = roundToStep(roundToZero(model.value / props.step) * props.step)
       if (increment) {
-        if (canIncrease.value) model.value = +(((model.value + props.step).toFixed(decimals)))
+        const newValue = truncated > model.value
+          ? truncated
+          : roundToStep(truncated + props.step)
+        model.value = Math.min(newValue, props.max)
       } else {
-        if (canDecrease.value) model.value = +(((model.value - props.step).toFixed(decimals)))
+        const newValue = truncated < model.value
+          ? truncated
+          : roundToStep(truncated - props.step)
+        model.value = Math.max(newValue, props.min)
       }
     }
 
