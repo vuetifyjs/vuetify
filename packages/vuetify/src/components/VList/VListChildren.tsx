@@ -48,10 +48,6 @@ export const VListChildren = genericComponent<new <T extends ListItem>(
     return () => {
       if (slots.default) return slots.default()
 
-      // if (!props.items?.length && props.noDataText) {
-      //   return slots['no-data']?.({ noDataText: props.noDataText }) ?? <VListItem title={ t(props.noDataText) } />
-      // }
-
       return props.items?.map((internalItem, index) => {
         const { children, props: itemProps, raw: item } = internalItem
 

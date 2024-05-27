@@ -218,7 +218,6 @@ export const VList = genericComponent<new <
             items={ items.value }
             returnObject={ props.returnObject }
             v-slots={ slots }
-            // noDataText={ !props.hideNoData ? props.noDataText : undefined }
           />
         </props.tag>
       )
