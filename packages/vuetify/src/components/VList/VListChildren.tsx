@@ -72,9 +72,19 @@ export const VListChildren = genericComponent<new <T extends ListItem>(
             { ...listGroupProps }
           >
             {{
-              activator: ({ props: activatorProps }) => slots.header
-                ? slots.header({ item: internalItem, props: { ...itemProps, ...activatorProps }, index })
-                : <VListItem { ...itemProps } { ...activatorProps } v-slots={ slotsWithItem } />,
+              activator: ({ props: activatorProps }) => {
+                const listItemProps = {
+                  ...itemProps,
+                  ...activatorProps,
+                  value: props.returnObject ? item : itemProps.value,
+                }
+
+                return slots.header
+                  ? slots.header({ item: internalItem, props: listItemProps, index })
+                  : (
+                    <VListItem { ...listItemProps } v-slots={ slotsWithItem } />
+                  )
+              },
               default: () => (
                 <VListChildren
                   items={ children }
@@ -87,6 +97,7 @@ export const VListChildren = genericComponent<new <T extends ListItem>(
           slots.item ? slots.item({ item: internalItem, props: itemProps, index }) : (
             <VListItem
               { ...itemProps }
+              value={ props.returnObject ? item : itemProps.value }
               v-slots={ slotsWithItem }
             />
           )
