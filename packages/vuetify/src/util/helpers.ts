@@ -760,3 +760,19 @@ export function templateRef () {
 
   return fn as TemplateRef
 }
+
+export function extractNumber (text: string): number | null {
+  let cleanText = text.split('')
+    .filter(x => /[\d\-+.]/.test(x))
+    .filter((x, i, all) => (i === 0 && /[-+]/.test(x)) || // sign allowed at the start
+        (x === '.' && i === all.indexOf('.')) || // decimal separator allowed only once
+        /\d/.test(x))
+    .join('')
+
+  if (!/\d\./.test(cleanText) && cleanText.includes('.')) {
+    cleanText = cleanText.replace('.', '0.') // inject missing zero before separator
+  }
+
+  const hasAnyDigit = /\d/.test(cleanText)
+  return hasAnyDigit ? Number(cleanText) : null
+}

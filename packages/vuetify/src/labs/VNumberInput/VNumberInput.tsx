@@ -11,8 +11,8 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, watchEffect } from 'vue'
-import { clamp, genericComponent, getDecimals, omit, propsFactory, useRender } from '@/util'
+import { computed, nextTick, ref, watch, watchEffect } from 'vue'
+import { clamp, extractNumber, genericComponent, getDecimals, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -67,6 +67,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
+    const textModel = ref<string | null>(null)
 
     const stepDecimals = computed(() => getDecimals(props.step))
     const modelDecimals = computed(() => model.value != null ? getDecimals(model.value) : 0)
@@ -106,6 +107,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       } else {
         if (canDecrease.value) model.value = +(((model.value - props.step).toFixed(decimals)))
       }
+
+      nextTick().then(() => syncTextModel())
     }
 
     function onClickUp (e: MouseEvent) {
@@ -141,8 +144,21 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       }
     }
 
+    function syncTextModel () {
+      textModel.value = typeof model.value === 'number' && !isNaN(model.value)
+        ? String(model.value)
+        : null
+    }
+
+    watch(model, () => syncTextModel(), { immediate: true })
+
     function onModelUpdate (v: string) {
-      model.value = v ? +(v) : undefined
+      textModel.value = v
+      model.value = v ? extractNumber(v) : undefined
+    }
+
+    async function onBlur (e: FocusEvent) {
+      syncTextModel()
     }
 
     function onControlMousedown (e: MouseEvent) {
@@ -277,9 +293,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
       return (
         <VTextField
-          modelValue={ model.value }
+          modelValue={ textModel.value }
           onUpdate:modelValue={ onModelUpdate }
           onKeydown={ onKeydown }
+          onBlur={ onBlur }
           class={[
             'v-number-input',
             {
