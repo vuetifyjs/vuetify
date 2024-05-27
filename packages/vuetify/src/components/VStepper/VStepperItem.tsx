@@ -14,7 +14,7 @@ import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed } from 'vue'
-import { VStepperSymbol } from './VStepper'
+import { VStepperSymbol } from './shared'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types

@@ -2,6 +2,7 @@
 import './VStepper.sass'
 
 // Components
+import { VStepperSymbol } from './shared'
 import { makeVStepperActionsProps, VStepperActions } from './VStepperActions'
 import { VStepperHeader } from './VStepperHeader'
 import { VStepperItem } from './VStepperItem'
@@ -19,11 +20,8 @@ import { computed, toRefs } from 'vue'
 import { genericComponent, getPropertyFromItem, only, propsFactory, useRender } from '@/util'
 
 // Types
-import type { InjectionKey, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { StepperItem, StepperItemSlot } from './VStepperItem'
-import type { GroupItemProvide } from '@/composables/group'
-
-export const VStepperSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-stepper')
 
 export type VStepperSlot = {
   prev: () => void

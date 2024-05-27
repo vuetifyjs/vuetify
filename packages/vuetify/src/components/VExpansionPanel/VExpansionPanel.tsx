@@ -1,5 +1,5 @@
 // Components
-import { VExpansionPanelSymbol } from './VExpansionPanels'
+import { VExpansionPanelSymbol } from './shared'
 import { makeVExpansionPanelTextProps, VExpansionPanelText } from './VExpansionPanelText'
 import { makeVExpansionPanelTitleProps, VExpansionPanelTitle } from './VExpansionPanelTitle'
 
