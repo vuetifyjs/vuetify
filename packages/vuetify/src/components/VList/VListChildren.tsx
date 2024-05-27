@@ -55,7 +55,6 @@ export const VListChildren = genericComponent<new <T extends ListItem>(
           subtitle: slots.subtitle ? (slotProps: any) => slots.subtitle?.({ ...slotProps, item }) : undefined,
           prepend: slots.prepend ? (slotProps: any) => slots.prepend?.({ ...slotProps, item }) : undefined,
           append: slots.append ? (slotProps: any) => slots.append?.({ ...slotProps, item }) : undefined,
-          // default: slots.default ? (slotProps: any) => slots.default?.({ ...slotProps, item }) : undefined,
           title: slots.title ? (slotProps: any) => slots.title?.({ ...slotProps, item }) : undefined,
         }
 
