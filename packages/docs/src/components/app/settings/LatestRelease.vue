@@ -1,23 +1,20 @@
 <template>
-  <app-link-list-item
-    :to="rpath(`/getting-started/release-notes/?version=v${version}`)"
+  <AppListLinkListItem
+    :label="t('latest-release')"
     :title="`v${version}`"
+    :to="rpath(`/getting-started/release-notes/?version=v${version}`)"
     append-icon="mdi-page-next"
-    label="Latest release"
-    prepend-icon="mdi-label"
+    prepend-icon="mdi-tag-outline"
     @click="onClick"
   />
 </template>
 
 <script setup>
   // Utilities
-  import { rpath } from '@/util/routes'
   import { version } from 'vuetify'
 
-  // Stores
-  import { useAppStore } from '@/store/app'
-
   const app = useAppStore()
+  const { t } = useI18n()
 
   function onClick () {
     app.settings = false

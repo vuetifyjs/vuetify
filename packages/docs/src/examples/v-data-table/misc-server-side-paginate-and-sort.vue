@@ -2,11 +2,10 @@
   <v-data-table-server
     v-model:items-per-page="itemsPerPage"
     :headers="headers"
-    :items-length="totalItems"
     :items="serverItems"
+    :items-length="totalItems"
     :loading="loading"
     :search="search"
-    class="elevation-1"
     item-value="name"
     @update:options="loadItems"
   ></v-data-table-server>

@@ -42,9 +42,9 @@
         </v-stepper-window>
 
         <v-stepper-actions
-          :disable="disable"
-          @click:prev="prev"
+          :disabled="disabled"
           @click:next="next"
+          @click:prev="prev"
         ></v-stepper-actions>
       </template>
     </v-stepper>
@@ -57,7 +57,7 @@
   const e1 = ref(1)
   const steps = ref(2)
 
-  const disable = computed(() => {
+  const disabled = computed(() => {
     return e1.value === 1 ? 'prev' : e1.value === steps.value ? 'next' : undefined
   })
 </script>
@@ -72,7 +72,7 @@
     },
 
     computed: {
-      disable () {
+      disabled () {
         return this.e1 === 1 ? 'prev' : this.e1 === this.steps ? 'next' : undefined
       },
     },

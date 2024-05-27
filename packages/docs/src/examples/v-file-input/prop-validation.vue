@@ -2,9 +2,9 @@
   <v-file-input
     :rules="rules"
     accept="image/png, image/jpeg, image/bmp"
+    label="Avatar"
     placeholder="Pick an avatar"
     prepend-icon="mdi-camera"
-    label="Avatar"
   ></v-file-input>
 </template>
 

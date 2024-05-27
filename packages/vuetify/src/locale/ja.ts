@@ -2,6 +2,11 @@ export default {
   badge: 'バッジ',
   open: 'Open',
   close: '閉じる',
+  dismiss: 'Dismiss',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: '検索結果が見つかりません。',
     loadingText: '項目をロード中です...',
@@ -31,8 +36,7 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Select dates',
       header: 'Enter dates',
@@ -53,6 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: 'さらに{0}',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',
@@ -67,6 +72,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

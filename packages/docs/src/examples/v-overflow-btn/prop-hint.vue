@@ -1,11 +1,11 @@
 <template>
   <v-container id="dropdown-example-1">
     <v-overflow-btn
-      class="my-2"
       :items="dropdownFont"
-      menu-props="top"
-      label="Overflow Btn w/ hint"
+      class="my-2"
       hint="Select font"
+      label="Overflow Btn w/ hint"
+      menu-props="top"
       target="#dropdown-example-1"
     ></v-overflow-btn>
   </v-container>

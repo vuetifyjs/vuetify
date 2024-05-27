@@ -9,15 +9,13 @@ related:
   - /features/treeshaking/
 ---
 
-<script setup>
-  import SassApi from '@/components/features/SassApi.vue'
-</script>
-
 # SASS variables
 
 Vuetify uses **SASS/SCSS** to craft the style and appearance of all aspects of the framework.
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ::: info
 
@@ -34,7 +32,7 @@ To begin modifying Vuetify's internal variables, install the [sass](https://sass
 ::: tabs
 
 ```bash [yarn]
-  yarn install -D sass
+  yarn add -D sass
 ```
 
 ```bash [npm]
@@ -43,6 +41,10 @@ To begin modifying Vuetify's internal variables, install the [sass](https://sass
 
 ```bash [pnpm]
   pnpm install -D sass-loader sass
+```
+
+```bash [bun]
+  bun add -D sass-loader sass
 ```
 
 :::
@@ -55,7 +57,7 @@ Create a **main.scss** file in your **src/styles** directory and update the styl
 
 ```scss { resource="src/styles/main.scss" }
 @use 'vuetify' with (
-  $variable: false,
+  // variables go here
 );
 ```
 
@@ -74,9 +76,17 @@ Within your style file, import the Vuetify styles and specify the variables you 
 
 ## Component specific variables
 
-Customising variables used in components is a bit more complex and requires the use of a special build plugin.
+Customizing variables used in components is a bit more complex and requires the use of a special build plugin.
 
 Follow the plugin setup guide from [treeshaking](/features/treeshaking/) then add `styles.configFile` to the plugin options:
+
+```js { resource="vite.config.js" }
+vuetify({
+  styles: {
+    configFile: 'src/styles/settings.scss',
+  },
+})
+```
 
 ```scss { resource="src/styles/settings.scss" }
 @use 'vuetify/settings' with (
@@ -85,18 +95,22 @@ Follow the plugin setup guide from [treeshaking](/features/treeshaking/) then ad
 ```
 
 `configFile` will be resolved relative to the project root, and loaded before each of vuetify's stylesheets.
-If you were using the basic technique from above, make sure to remove it and switch back to `import 'vuetify/styles'`.
-You can keep `main.scss` for other style overrides but don't do both or you'll end up with duplicated styles.
+If you were using the basic technique from above, make sure to either:
 
-Available SASS variables are located on each component's API page.
+- Remove it and switch back to `import 'vuetify/styles'`, or
+- Add `@use './settings'` before `@use 'vuetify'` in `main.scss` and remove the `with` block from `@use 'vuetify'`.
 
-![image](https://github.com/vuetifyjs/vuetify/assets/9064066/967da002-5a9e-4bce-8285-1fa9b849e36d "VBtn SASS Variables")
+You can keep `main.scss` for other style overrides but don't do both `@use 'vuetify'` and `import 'vuetify/styles'` or you'll end up with duplicated styles.
 
 ## Variable API
 
 There are many SASS/SCSS variables that can be customized across the entire Vuetify framework. You can browse all the variables using the tool below:
 
- <sass-api />
+<FeaturesSassApi />
+
+Available SASS variables are located on each component's API page.
+
+![image](https://github.com/vuetifyjs/vuetify/assets/9064066/967da002-5a9e-4bce-8285-1fa9b849e36d "VBtn SASS Variables")
 
 ## Usage in templates
 
@@ -219,6 +233,30 @@ Color packs are handy for quickly applying a color to a component but mostly unu
 );
 ```
 
+## Enabling CSS cascade layers
+
+::: success
+This feature was introduced in [v3.6.0 (Nebula)](/getting-started/release-notes/?version=v3.6.0)
+:::
+
+[Cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) are a modern CSS feature that makes it easier to write custom styles without having to deal with specificity issues and `!important`. This will be included by default in Vuetify 4 but can optionally be used now:
+
+```scss { resource="src/styles/settings.scss" }
+@forward 'vuetify/settings' with (
+  $layers: true,
+);
+```
+
+Import order of stylesheets becomes much more important with layers enabled, `import 'vuetify/styles'` or a file containing `@use 'vuetify'` **must** be loaded *before* any components or the CSS reset will take precedence over component styles and break everything. If you have separate plugin files make sure to import vuetify's before `App.vue`.
+
+Your own styles will always<sup>*</sup> override vuetify's if you don't use `@layer` yourself, or you can specify an order for custom layers in a stylesheet loaded before vuetify.
+
+```css { resource="src/styles/layers.css" }
+@layer base, vuetify, overrides;
+```
+
+\* Layers invert `!important`, so anything trying to override an important vuetify style must also be in a layer. { class="text-caption" }
+
 ## Caveats
 
 When using sass variables, there are a few considerations to be aware of.
@@ -230,7 +268,7 @@ Only put variables, mixins, and functions in the settings file, styles should be
 
 ### Build performance
 
-Vuetify loads precompiled CSS by default, enabling variable customisation will switch to the base SASS files instead which must be recompiled with your project.
+Vuetify loads precompiled CSS by default, enabling variable customization will switch to the base SASS files instead which must be recompiled with your project.
 This can be a performance hit if you're using more than a few vuetify components, and also forces you to use the same SASS compiler version as us.
 
 ### Symlinks

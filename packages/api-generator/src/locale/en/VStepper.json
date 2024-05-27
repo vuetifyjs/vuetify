@@ -1,11 +1,9 @@
 {
   "props": {
-    "altLabels": "Places the labels beneath the step",
-    "flat": "Removes the stepper's elevation.",
-    "nonLinear": "Allow user to jump to any step",
-    "vertical": "Display steps vertically"
+    "flat": "Removes the stepper's elevation."
   },
-  "events": {
-    "change": "Emitted when step is changed by user interaction"
+  "exposed": {
+    "next": "Move to the next step.",
+    "prev": "Move to the prev step."
   }
 }

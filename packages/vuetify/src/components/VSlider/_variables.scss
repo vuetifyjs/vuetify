@@ -21,6 +21,7 @@ $slider-thumb-label-offset: calc(var(--v-slider-thumb-size) / 2) !default;
 $slider-thumb-label-transition: .2s settings.$accelerated-easing !default;
 $slider-thumb-label-padding: 6px !default;
 $slider-thumb-touch-size: 42px !default;
+$slider-tick-background: rgb(var(--v-theme-surface-light)) !default;
 $slider-tick-border-radius: 2px !default;
 $slider-tick-label-margin-top: 8px !default;
 $slider-tick-label-margin-start: 12px !default;

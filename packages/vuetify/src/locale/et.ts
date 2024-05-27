@@ -2,6 +2,11 @@ export default {
   badge: 'Märk',
   open: 'Open',
   close: 'Sulge',
+  dismiss: 'Dismiss',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Vastavaid kirjeid ei leitud',
     loadingText: 'Andmeid laaditakse...',
@@ -31,8 +36,7 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Select dates',
       header: 'Enter dates',
@@ -53,6 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} veel',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',
@@ -67,6 +72,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

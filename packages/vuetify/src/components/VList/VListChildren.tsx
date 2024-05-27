@@ -3,7 +3,6 @@ import { VListGroup } from './VListGroup'
 import { VListItem } from './VListItem'
 
 // Composables
-import { useLocale } from '@/composables'
 import { VListSubheader } from './VListSubheader'
 import { VDivider } from '../VDivider'
 
@@ -14,8 +13,8 @@ import { genericComponent, propsFactory } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { VListItemSlots } from './VListItem'
+import type { ListItem } from '@/composables/list-items'
 import type { GenericProps } from '@/util'
-import { ListItem } from '@/composables/list-items'
 
 export type VListChildrenSlots<T> = {
   [K in keyof Omit<VListItemSlots, 'default'>]: VListItemSlots[K] & { item: T }
@@ -29,11 +28,13 @@ export type VListChildrenSlots<T> = {
 
 export const makeVListChildrenProps = propsFactory({
   items: Array as PropType<readonly ListItem[]>,
+  returnObject: Boolean,
 }, 'VListChildren')
 
 export const VListChildren = genericComponent<new <T extends ListItem>(
   props: {
     items?: readonly T[]
+    returnObject?: boolean
   },
   slots: VListChildrenSlots<T>
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -42,7 +43,6 @@ export const VListChildren = genericComponent<new <T extends ListItem>(
   props: makeVListChildrenProps(),
 
   setup (props, { slots }) {
-    const { t } = useLocale()
     createList()
 
     return () => {
@@ -63,7 +63,7 @@ export const VListChildren = genericComponent<new <T extends ListItem>(
           title: slots.title ? (slotProps: any) => slots.title?.({ ...slotProps, item }) : undefined,
         }
 
-        const [listGroupProps, _1] = VListGroup.filterProps(itemProps)
+        const listGroupProps = VListGroup.filterProps(itemProps)
 
         return children && itemProps.subheader ? (
           <div>

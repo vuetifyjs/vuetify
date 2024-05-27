@@ -1,9 +1,9 @@
 <template>
   <v-treeview
-    shaped
-    hoverable
-    activatable
     :items="items"
+    activatable
+    hoverable
+    shaped
   ></v-treeview>
 </template>
 
@@ -13,42 +13,42 @@
   const items = ref([
     {
       id: 1,
-      name: 'Applications :',
+      title: 'Applications :',
       children: [
-        { id: 2, name: 'Calendar : app' },
-        { id: 3, name: 'Chrome : app' },
-        { id: 4, name: 'Webstorm : app' },
+        { id: 2, title: 'Calendar : app' },
+        { id: 3, title: 'Chrome : app' },
+        { id: 4, title: 'Webstorm : app' },
       ],
     },
     {
       id: 5,
-      name: 'Documents :',
+      title: 'Documents :',
       children: [
         {
           id: 6,
-          name: 'vuetify :',
+          title: 'vuetify :',
           children: [
             {
               id: 7,
-              name: 'src :',
+              title: 'src :',
               children: [
-                { id: 8, name: 'index : ts' },
-                { id: 9, name: 'bootstrap : ts' },
+                { id: 8, title: 'index : ts' },
+                { id: 9, title: 'bootstrap : ts' },
               ],
             },
           ],
         },
         {
           id: 10,
-          name: 'material2 :',
+          title: 'material2 :',
           children: [
             {
               id: 11,
-              name: 'src :',
+              title: 'src :',
               children: [
-                { id: 12, name: 'v-btn : ts' },
-                { id: 13, name: 'v-card : ts' },
-                { id: 14, name: 'v-window : ts' },
+                { id: 12, title: 'v-btn : ts' },
+                { id: 13, title: 'v-card : ts' },
+                { id: 14, title: 'v-window : ts' },
               ],
             },
           ],
@@ -57,28 +57,28 @@
     },
     {
       id: 15,
-      name: 'Downloads :',
+      title: 'Downloads :',
       children: [
-        { id: 16, name: 'October : pdf' },
-        { id: 17, name: 'November : pdf' },
-        { id: 18, name: 'Tutorial : html' },
+        { id: 16, title: 'October : pdf' },
+        { id: 17, title: 'November : pdf' },
+        { id: 18, title: 'Tutorial : html' },
       ],
     },
     {
       id: 19,
-      name: 'Videos :',
+      title: 'Videos :',
       children: [
         {
           id: 20,
-          name: 'Tutorials :',
+          title: 'Tutorials :',
           children: [
-            { id: 21, name: 'Basic layouts : mp4' },
-            { id: 22, name: 'Advanced techniques : mp4' },
-            { id: 23, name: 'All about app : dir' },
+            { id: 21, title: 'Basic layouts : mp4' },
+            { id: 22, title: 'Advanced techniques : mp4' },
+            { id: 23, title: 'All about app : dir' },
           ],
         },
-        { id: 24, name: 'Intro : mov' },
-        { id: 25, name: 'Conference introduction : avi' },
+        { id: 24, title: 'Intro : mov' },
+        { id: 25, title: 'Conference introduction : avi' },
       ],
     },
   ])
@@ -90,42 +90,42 @@
       items: [
         {
           id: 1,
-          name: 'Applications :',
+          title: 'Applications :',
           children: [
-            { id: 2, name: 'Calendar : app' },
-            { id: 3, name: 'Chrome : app' },
-            { id: 4, name: 'Webstorm : app' },
+            { id: 2, title: 'Calendar : app' },
+            { id: 3, title: 'Chrome : app' },
+            { id: 4, title: 'Webstorm : app' },
           ],
         },
         {
           id: 5,
-          name: 'Documents :',
+          title: 'Documents :',
           children: [
             {
               id: 6,
-              name: 'vuetify :',
+              title: 'vuetify :',
               children: [
                 {
                   id: 7,
-                  name: 'src :',
+                  title: 'src :',
                   children: [
-                    { id: 8, name: 'index : ts' },
-                    { id: 9, name: 'bootstrap : ts' },
+                    { id: 8, title: 'index : ts' },
+                    { id: 9, title: 'bootstrap : ts' },
                   ],
                 },
               ],
             },
             {
               id: 10,
-              name: 'material2 :',
+              title: 'material2 :',
               children: [
                 {
                   id: 11,
-                  name: 'src :',
+                  title: 'src :',
                   children: [
-                    { id: 12, name: 'v-btn : ts' },
-                    { id: 13, name: 'v-card : ts' },
-                    { id: 14, name: 'v-window : ts' },
+                    { id: 12, title: 'v-btn : ts' },
+                    { id: 13, title: 'v-card : ts' },
+                    { id: 14, title: 'v-window : ts' },
                   ],
                 },
               ],
@@ -134,28 +134,28 @@
         },
         {
           id: 15,
-          name: 'Downloads :',
+          title: 'Downloads :',
           children: [
-            { id: 16, name: 'October : pdf' },
-            { id: 17, name: 'November : pdf' },
-            { id: 18, name: 'Tutorial : html' },
+            { id: 16, title: 'October : pdf' },
+            { id: 17, title: 'November : pdf' },
+            { id: 18, title: 'Tutorial : html' },
           ],
         },
         {
           id: 19,
-          name: 'Videos :',
+          title: 'Videos :',
           children: [
             {
               id: 20,
-              name: 'Tutorials :',
+              title: 'Tutorials :',
               children: [
-                { id: 21, name: 'Basic layouts : mp4' },
-                { id: 22, name: 'Advanced techniques : mp4' },
-                { id: 23, name: 'All about app : dir' },
+                { id: 21, title: 'Basic layouts : mp4' },
+                { id: 22, title: 'Advanced techniques : mp4' },
+                { id: 23, title: 'All about app : dir' },
               ],
             },
-            { id: 24, name: 'Intro : mov' },
-            { id: 25, name: 'Conference introduction : avi' },
+            { id: 24, title: 'Intro : mov' },
+            { id: 25, title: 'Conference introduction : avi' },
           ],
         },
       ],

@@ -120,7 +120,9 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
       </props.tag>
     ))
 
-    return {}
+    return {
+      isOpen,
+    }
   },
 })
 

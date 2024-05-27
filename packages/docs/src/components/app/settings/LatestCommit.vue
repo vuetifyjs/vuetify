@@ -1,25 +1,20 @@
 <template>
-  <app-link-list-item
+  <AppListLinkListItem
     v-if="commits.latest"
     :href="`https://github.com/vuetifyjs/vuetify/commit/${commits.latest?.sha}`"
+    :label="t('latest-commit')"
     :title="commits.latest?.sha.slice(0, 7)"
     append-icon="mdi-open-in-new"
-    label="Latest commit"
+    min-width="90"
     prepend-icon="mdi-source-commit"
     rel="noopener noreferrer"
     target="_blank"
-    min-width="90"
   />
 </template>
 
 <script setup>
-  // Utilities
-  import { onBeforeMount } from 'vue'
-
-  // Stores
-  import { useCommitsStore } from '@/store/commits'
-
   const commits = useCommitsStore()
+  const { t } = useI18n()
 
   onBeforeMount(() => {
     if (!commits.latest) commits.fetch()

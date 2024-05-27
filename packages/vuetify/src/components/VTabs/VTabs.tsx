@@ -3,6 +3,8 @@ import './VTabs.sass'
 
 // Components
 import { VTab } from './VTab'
+import { VTabsWindow } from './VTabsWindow'
+import { VTabsWindowItem } from './VTabsWindowItem'
 import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'
 
 // Composables
@@ -10,23 +12,38 @@ import { useBackgroundColor } from '@/composables/color'
 import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useScopeId } from '@/composables/scopeId'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, isObject, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import { VTabsSymbol } from './shared'
 
-export type TabItem = string | Record<string, any>
+export type TabItem = string | number | Record<string, any>
+
+export type VTabsSlot = {
+  item: TabItem
+}
+
+export type VTabsSlots = {
+  default: never
+  tab: VTabsSlot
+  item: VTabsSlot
+  window: never
+} & {
+  [key: `tab.${string}`]: VTabsSlot
+  [key: `item.${string}`]: VTabsSlot
+}
 
 function parseItems (items: readonly TabItem[] | undefined) {
   if (!items) return []
 
   return items.map(item => {
-    if (typeof item === 'string') return { title: item, value: item }
+    if (!isObject(item)) return { text: item, value: item }
 
     return item
   })
@@ -53,12 +70,15 @@ export const makeVTabsProps = propsFactory({
   hideSlider: Boolean,
   sliderColor: String,
 
-  ...makeVSlideGroupProps({ mandatory: 'force' as const }),
+  ...makeVSlideGroupProps({
+    mandatory: 'force' as const,
+    selectedClass: 'v-tab-item--selected',
+  }),
   ...makeDensityProps(),
   ...makeTagProps(),
 }, 'VTabs')
 
-export const VTabs = genericComponent()({
+export const VTabs = genericComponent<VTabsSlots>()({
   name: 'VTabs',
 
   props: makeVTabsProps(),
@@ -67,11 +87,12 @@ export const VTabs = genericComponent()({
     'update:modelValue': (v: unknown) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const model = useProxiedModel(props, 'modelValue')
-    const parsedItems = computed(() => parseItems(props.items))
+    const items = computed(() => parseItems(props.items))
     const { densityClasses } = useDensity(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { scopeId } = useScopeId()
 
     provideDefaults({
       VTab: {
@@ -85,37 +106,70 @@ export const VTabs = genericComponent()({
     })
 
     useRender(() => {
-      const [slideGroupProps] = VSlideGroup.filterProps(props)
+      const slideGroupProps = VSlideGroup.filterProps(props)
+      const hasWindow = !!(slots.window || props.items.length > 0)
 
       return (
-        <VSlideGroup
-          { ...slideGroupProps }
-          v-model={ model.value }
-          class={[
-            'v-tabs',
-            `v-tabs--${props.direction}`,
-            `v-tabs--align-tabs-${props.alignTabs}`,
-            {
-              'v-tabs--fixed-tabs': props.fixedTabs,
-              'v-tabs--grow': props.grow,
-              'v-tabs--stacked': props.stacked,
-            },
-            densityClasses.value,
-            backgroundColorClasses.value,
-            props.class,
-          ]}
-          style={[
-            { '--v-tabs-height': convertToUnit(props.height) },
-            backgroundColorStyles.value,
-            props.style,
-          ]}
-          role="tablist"
-          symbol={ VTabsSymbol }
-        >
-          { slots.default ? slots.default() : parsedItems.value.map(item => (
-            <VTab { ...item } key={ item.title } />
-          ))}
-        </VSlideGroup>
+        <>
+          <VSlideGroup
+            { ...slideGroupProps }
+            v-model={ model.value }
+            class={[
+              'v-tabs',
+              `v-tabs--${props.direction}`,
+              `v-tabs--align-tabs-${props.alignTabs}`,
+              {
+                'v-tabs--fixed-tabs': props.fixedTabs,
+                'v-tabs--grow': props.grow,
+                'v-tabs--stacked': props.stacked,
+              },
+              densityClasses.value,
+              backgroundColorClasses.value,
+              props.class,
+            ]}
+            style={[
+              { '--v-tabs-height': convertToUnit(props.height) },
+              backgroundColorStyles.value,
+              props.style,
+            ]}
+            role="tablist"
+            symbol={ VTabsSymbol }
+            { ...scopeId }
+            { ...attrs }
+          >
+            { slots.default?.() ?? items.value.map(item => (
+              slots.tab?.({ item }) ?? (
+                <VTab
+                  { ...item }
+                  key={ item.text }
+                  value={ item.value }
+                  v-slots={{
+                    default: () => slots[`tab.${item.value}`]?.({ item }),
+                  }}
+                />
+              )
+            ))}
+          </VSlideGroup>
+
+          { hasWindow && (
+            <VTabsWindow
+              v-model={ model.value }
+              key="tabs-window"
+              { ...scopeId }
+            >
+              { items.value.map(item => slots.item?.({ item }) ?? (
+                <VTabsWindowItem
+                  value={ item.value }
+                  v-slots={{
+                    default: () => slots[`item.${item.value}`]?.({ item }),
+                  }}
+                />
+              ))}
+
+              { slots.window?.() }
+            </VTabsWindow>
+          )}
+        </>
       )
     })
 

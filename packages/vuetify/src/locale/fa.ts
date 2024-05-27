@@ -1,7 +1,12 @@
 export default {
   badge: 'نشان',
-  open: 'Open',
+  open: 'باز کردن',
   close: 'بستن',
+  dismiss: 'رد کردن',
+  confirmEdit: {
+    ok: 'تایید',
+    cancel: 'لغو',
+  },
   dataIterator: {
     noResultsText: 'نتیجه‌ای یافت نشد',
     loadingText: 'در حال بارگذاری...',
@@ -28,19 +33,18 @@ export default {
     pageText: '{0} تا {1} از {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'تا',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} انتخاب‌شده',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'انتخاب تاریخ‌ها',
+      header: 'تاریخ‌ها را وارد کنید',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'انتخاب تاریخ',
+    header: 'تاریخ را وارد کنید',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'تاریخ را وارد کنید',
     },
   },
   noDataText: 'داده‌ای موجود نیست',
@@ -53,12 +57,13 @@ export default {
   },
   calendar: {
     moreEvents: '{بیشتر {0',
+    today: 'امروز',
   },
   input: {
-    clear: 'Clear {0}',
+    clear: 'پاکسازی {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    otp: 'لطفا کد را وارد کنید {0}',
   },
   fileInput: {
     counter: '{0} پرونده',
@@ -67,30 +72,31 @@ export default {
   timePicker: {
     am: 'قبل از ظهر',
     pm: 'بعد از ظهر',
+    title: 'انتخاب زمان',
   },
   pagination: {
     ariaLabel: {
       root: 'جهت یابی صفحه',
-      next: 'صفحه بعد',
-      previous: 'صفحه قبلی',
+      next: 'صفحه‌ی بعد',
+      previous: 'صفحه‌ی قبلی',
       page: 'برو صفحه {0}',
-      currentPage: '{0} صفحه فعلی ، صفحه',
-      first: 'First page',
-      last: 'Last page',
+      currentPage: '{0} صفحه‌ی فعلی ، صفحه‌ی',
+      first: 'صفحه‌ی اول',
+      last: 'صفحه‌ی آخر',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'بعدی',
+    prev: 'قبلی',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'امتیاز {0} از {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'در حال بارگذاری...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'بارگذاری بیشتر',
+    empty: 'پایان',
   },
 }

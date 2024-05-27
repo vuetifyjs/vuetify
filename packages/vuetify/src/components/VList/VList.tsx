@@ -25,9 +25,9 @@ import { computed, ref, shallowRef, toRef } from 'vue'
 import { focusChild, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { GenericProps } from '@/util'
 import type { PropType } from 'vue'
 import type { VListChildrenSlots } from './VListChildren'
+import type { GenericProps, SelectItemKey } from '@/util'
 
 export const makeVListProps = propsFactory({
   baseColor: String,
@@ -36,10 +36,13 @@ export const makeVListProps = propsFactory({
   activeClass: String,
   bgColor: String,
   disabled: Boolean,
+  expandIcon: String,
+  collapseIcon: String,
   lines: {
     type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
     default: 'one',
   },
+  slim: Boolean,
   nav: Boolean,
 
   ...makeNestedProps({
@@ -58,20 +61,36 @@ export const makeVListProps = propsFactory({
   ...makeVariantProps({ variant: 'text' } as const),
 }, 'VList')
 
-export const VList = genericComponent<new <T>(
+type ItemType<T> = T extends readonly (infer U)[] ? U : never
+
+export const VList = genericComponent<new <
+  T extends readonly any[],
+  S = unknown,
+  O = unknown
+>(
   props: {
-    items?: T[]
+    items?: T
+    itemTitle?: SelectItemKey<ItemType<T>>
+    itemValue?: SelectItemKey<ItemType<T>>
+    itemChildren?: SelectItemKey<ItemType<T>>
+    itemProps?: SelectItemKey<ItemType<T>>
+    selected?: S
+    'onUpdate:selected'?: (value: S) => void
+    opened?: O
+    'onUpdate:opened'?: (value: O) => void
   },
-  slots: VListChildrenSlots<T>
+  slots: VListChildrenSlots<ItemType<T>>
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VList',
 
   props: makeVListProps(),
 
   emits: {
-    'update:selected': (val: unknown[]) => true,
-    'update:opened': (val: unknown[]) => true,
+    'update:selected': (value: unknown) => true,
+    'update:activated': (value: unknown) => true,
+    'update:opened': (value: unknown) => true,
     'click:open': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
+    'click:activate': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },
 
@@ -84,7 +103,7 @@ export const VList = genericComponent<new <T>(
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const { open, select } = useNested(props)
+    const { children, open, parents, select } = useNested(props)
     const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
     const activeColor = toRef(props, 'activeColor')
     const baseColor = toRef(props, 'baseColor')
@@ -97,6 +116,8 @@ export const VList = genericComponent<new <T>(
         activeColor,
         baseColor,
         color,
+        expandIcon: toRef(props, 'expandIcon'),
+        collapseIcon: toRef(props, 'collapseIcon'),
       },
       VListItem: {
         activeClass: toRef(props, 'activeClass'),
@@ -107,6 +128,7 @@ export const VList = genericComponent<new <T>(
         disabled: toRef(props, 'disabled'),
         lines: toRef(props, 'lines'),
         nav: toRef(props, 'nav'),
+        slim: toRef(props, 'slim'),
         variant: toRef(props, 'variant'),
       },
     })
@@ -129,7 +151,9 @@ export const VList = genericComponent<new <T>(
     }
 
     function onKeydown (e: KeyboardEvent) {
-      if (!contentRef.value) return
+      const target = e.target as HTMLElement
+
+      if (!contentRef.value || ['INPUT', 'TEXTAREA'].includes(target.tagName)) return
 
       if (e.key === 'ArrowDown') {
         focus('next')
@@ -144,6 +168,10 @@ export const VList = genericComponent<new <T>(
       }
 
       e.preventDefault()
+    }
+
+    function onMousedown (e: MouseEvent) {
+      isFocused.value = true
     }
 
     function focus (location?: 'next' | 'prev' | 'first' | 'last') {
@@ -161,6 +189,7 @@ export const VList = genericComponent<new <T>(
             {
               'v-list--disabled': props.disabled,
               'v-list--nav': props.nav,
+              'v-list--slim': props.slim,
             },
             themeClasses.value,
             backgroundColorClasses.value,
@@ -183,12 +212,14 @@ export const VList = genericComponent<new <T>(
           onFocusout={ onFocusout }
           onFocus={ onFocus }
           onKeydown={ onKeydown }
+          onMousedown={ onMousedown }
         >
           <VListChildren
             items={ items.value }
-            // noDataText={ !props.hideNoData ? props.noDataText : undefined }
+            returnObject={ props.returnObject }
             v-slots={ slots }
-          ></VListChildren>
+            // noDataText={ !props.hideNoData ? props.noDataText : undefined }
+          />
         </props.tag>
       )
     })
@@ -197,6 +228,8 @@ export const VList = genericComponent<new <T>(
       open,
       select,
       focus,
+      children,
+      parents,
     }
   },
 })

@@ -1,10 +1,14 @@
 {
   "props": {
-    "strict": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-range-slider.json))"
+    "strict": "Disallows dragging the ending thumb past the starting thumb and vice versa."
+
+  },
+  "slots": {
+    "thumb-label": "Slot for the thumb label.",
+    "tick-label": "Slot for the tick label."
   },
   "events": {
-    "click:prepend": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-range-slider.json))",
-    "click:append": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-range-slider.json))",
-    "update:focused": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-range-slider.json))"
+    "end": "Slider value emitted at the end of slider movement.",
+    "start": "Slider value emitted at start of slider movement."
   }
 }

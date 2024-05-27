@@ -12,6 +12,7 @@ import { propsFactory } from '@/util/propsFactory'
 // Types
 import type {
   AllowedComponentProps,
+  Component,
   ComponentCustomProps,
   ComponentInjectOptions,
   ComponentObjectPropsOptions,
@@ -20,6 +21,7 @@ import type {
   ComponentOptionsWithObjectProps,
   ComponentOptionsWithoutProps,
   ComponentPropsOptions,
+  ComponentPublicInstance,
   ComputedOptions,
   DefineComponent,
   EmitsOptions,
@@ -108,9 +110,9 @@ export function defineComponent (options: ComponentOptions) {
 
   if (options._setup) {
     options.props = propsFactory(options.props ?? {}, options.name)()
-    const propKeys = Object.keys(options.props)
+    const propKeys = Object.keys(options.props).filter(key => key !== 'class' && key !== 'style')
     options.filterProps = function filterProps (props: Record<string, any>) {
-      return pick(props, propKeys, ['class', 'style'])
+      return pick(props, propKeys)
     }
 
     options.props._as = String
@@ -185,6 +187,11 @@ type DefineComponentWithGenericProps<T extends (new (props: Record<string, any>,
   P = III extends Record<'$props', any>
     ? Omit<PropsOptions, keyof III['$props']>
     : PropsOptions,
+  EEE extends EmitsOptions = E extends any[]
+    ? E
+    : III extends Record<'$props', any>
+      ? Omit<E, ToListeners<keyof III['$props']>>
+      : E,
   Base = DefineComponent<
     P,
     RawBindings,
@@ -193,10 +200,10 @@ type DefineComponentWithGenericProps<T extends (new (props: Record<string, any>,
     M,
     Mixin,
     Extends,
-    E extends any[] ? E : III extends Record<'$props', any> ? Omit<E, ToListeners<keyof III['$props']>> : E,
+    EEE,
     EE,
     PublicProps,
-    ExtractPropTypes<P> & ({} extends E ? {} : EmitsToProps<E>),
+    ExtractPropTypes<P> & ({} extends E ? {} : EmitsToProps<EEE>),
     ExtractDefaultPropTypes<P>,
     S
   >
@@ -292,5 +299,31 @@ export interface FilterPropsOptions<PropsOptions extends Readonly<ComponentProps
   filterProps<
     T extends Partial<Props>,
     U extends Exclude<keyof Props, Exclude<keyof Props, keyof T>>
-  > (props: T): [yes: Partial<Pick<T, U>>, no: Omit<T, U>]
+  > (props: T): Partial<Pick<T, U>>
 }
+
+// https://github.com/vuejs/core/pull/10557
+export type ComponentInstance<T> = T extends { new (): ComponentPublicInstance<any, any, any> }
+  ? InstanceType<T>
+  : T extends FunctionalComponent<infer Props, infer Emits>
+    ? ComponentPublicInstance<Props, {}, {}, {}, {}, ShortEmitsToObject<Emits>>
+    : T extends Component<
+          infer Props,
+          infer RawBindings,
+          infer D,
+          infer C,
+          infer M
+        >
+      ? // NOTE we override Props/RawBindings/D to make sure is not `unknown`
+      ComponentPublicInstance<
+          unknown extends Props ? {} : Props,
+          unknown extends RawBindings ? {} : RawBindings,
+          unknown extends D ? {} : D,
+          C,
+          M
+        >
+      : never // not a vue Component
+
+type ShortEmitsToObject<E> = E extends Record<string, any[]> ? {
+  [K in keyof E]: (...args: E[K]) => any;
+} : E;

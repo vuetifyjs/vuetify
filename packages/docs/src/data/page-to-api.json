@@ -39,9 +39,11 @@
   ],
   "components/calendars": [
     "VCalendar",
-    "VCalendarDaily",
-    "VCalendarMonthly",
-    "VCalendarWeekly"
+    "VCalendarDay",
+    "VCalendarHeader",
+    "VCalendarInterval",
+    "VCalendarIntervalEvent",
+    "VCalendarMonthDay"
   ],
   "components/cards": [
     "VCard",
@@ -56,8 +58,9 @@
   "components/chip-groups": ["VChip", "VChipGroup"],
   "components/chips": ["VChip", "VChipGroup"],
   "components/color-pickers": ["VColorPicker"],
+  "components/confirm-edit": ["VConfirmEdit"],
   "components/combobox": ["VCombobox"],
-  "components/data-iterators": ["VDataIterator", "VDataFooter"],
+  "components/data-iterators": ["VDataIterator"],
   "components/data-tables": [
     "VDataTable",
     "VDataTableFooter",
@@ -66,11 +69,13 @@
     "VDataTableServer",
     "VDataTableVirtual"
   ],
+  "components/date-inputs": ["VDateInput", "VDatePicker"],
   "components/date-pickers-month": ["VDatePicker"],
-  "components/date-pickers": ["VDatePicker"],
+  "components/date-pickers": ["VDatePicker", "VDateInput"],
   "components/defaults-providers": ["VDefaultsProvider"],
-  "components/dialogs": ["VDialog"],
+  "components/dialogs": ["VDialog", "VOverlay"],
   "components/dividers": ["VDivider"],
+  "components/empty-states": ["VEmptyState"],
   "components/expansion-panels": [
     "VExpansionPanel",
     "VExpansionPanels",
@@ -78,6 +83,7 @@
     "VExpansionPanelTitle"
   ],
   "components/file-inputs": ["VFileInput"],
+  "components/floating-action-buttons": ["VFab"],
   "components/footers": ["VFooter"],
   "components/forms": ["VForm"],
   "components/grids": ["VCol", "VContainer", "VRow", "VSpacer"],
@@ -120,6 +126,7 @@
   "components/slide-groups": ["VSlideGroup", "VSlideGroupItem"],
   "components/sliders": ["VRangeSlider", "VSlider"],
   "components/snackbars": ["VSnackbar"],
+  "components/snackbar-queue": ["VSnackbarQueue", "VSnackbar"],
   "components/sparklines": ["VSparkline"],
   "components/steppers": [
     "VStepper",
@@ -139,7 +146,12 @@
   "components/timelines": ["VTimeline", "VTimelineItem"],
   "components/toolbars": ["VToolbar", "VToolbarItems", "VToolbarTitle"],
   "components/tooltips": ["VTooltip"],
-  "components/treeview": ["VTreeview"],
+  "components/treeview": [
+    "VTreeview",
+    "VTreeviewItem",
+    "VTreeviewChildren",
+    "VTreeviewGroup"
+  ],
   "components/virtual-scroller": ["VVirtualScroll"],
   "components/windows": ["VWindow", "VWindowItem"],
   "directives/click-outside": ["v-click-outside"],
@@ -149,11 +161,12 @@
   "directives/ripple": ["v-ripple"],
   "directives/scroll": ["v-scroll"],
   "directives/touch": ["v-touch"],
+  "directives/tooltip": ["v-tooltip"],
   "features/dates": ["useDate"],
   "features/display-and-platform": ["useDisplay"],
+  "features/scrolling": ["useGoTo"],
   "features/global-configuration": ["VDefaultsProvider"],
   "features/internationalization": ["useLocale", "VLocaleProvider"],
-  "features/scrolling": ["$vuetify"],
   "features/theme": ["VThemeProvider"],
   "styles/transitions": [
     "VDialogBottomTransition",

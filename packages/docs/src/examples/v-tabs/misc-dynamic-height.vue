@@ -2,31 +2,29 @@
   <v-card>
     <v-toolbar
       color="purple"
-      dark
       flat
       prominent
     >
       <v-text-field
         append-icon="mdi-microphone"
         class="mx-4"
-        flat
-        hide-details
         label="Search"
         prepend-inner-icon="mdi-magnify"
+        flat
+        hide-details
         solo-inverted
       ></v-text-field>
 
       <template v-slot:extension>
         <v-tabs
           v-model="tabs"
-          centered
+          align-tabs="center"
         >
           <v-tab
             v-for="n in 3"
             :key="n"
-          >
-            Item {{ n }}
-          </v-tab>
+            :text="`Item ${n}`"
+          ></v-tab>
         </v-tabs>
       </template>
     </v-toolbar>

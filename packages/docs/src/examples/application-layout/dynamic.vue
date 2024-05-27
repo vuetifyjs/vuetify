@@ -5,17 +5,17 @@
     <v-app-bar
       :order="order"
       color="grey-lighten-2"
-      flat
       title="Application bar"
+      flat
     >
       <template v-slot:append>
         <v-switch
           v-model="order"
-          hide-details
-          inset
+          false-value="0"
           label="Toggle order"
           true-value="-1"
-          false-value="0"
+          hide-details
+          inset
         ></v-switch>
       </template>
     </v-app-bar>

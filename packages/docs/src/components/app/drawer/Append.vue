@@ -1,17 +1,17 @@
 <template>
-  <div v-if="user.quickbar">
-    <v-divider />
+  <v-divider />
 
-    <latest-release />
+  <div class="d-flex align-center text-caption text-medium-emphasis pa-2">
+    <AppDrawerDrawerToggleRail v-if="one.isSubscriber" class="me-2" />
+
+    <div class="d-flex ms-auto overflow-hidden">
+      <AppCommitBtn class="me-2" />
+
+      <AppVersionBtn />
+    </div>
   </div>
 </template>
 
-<script setup>
-  // Components
-  import LatestRelease from '@/components/app/settings/LatestRelease.vue'
-
-  // Stores
-  import { useUserStore } from '@/store/user'
-
-  const user = useUserStore()
+<script setup lang="ts">
+  const one = useOneStore()
 </script>

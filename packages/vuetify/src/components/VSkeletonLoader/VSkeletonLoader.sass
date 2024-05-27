@@ -1,0 +1,229 @@
+// Imports
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-skeleton-loader
+    align-items: center
+    background: $skeleton-loader-background
+    border-radius: $skeleton-loader-border-radius
+    display: flex
+    flex-wrap: wrap
+    position: relative
+    vertical-align: top
+
+    &__actions
+      justify-content: end
+
+    .v-skeleton-loader__ossein
+      height: 100%
+
+    .v-skeleton-loader__avatar,
+    .v-skeleton-loader__button,
+    .v-skeleton-loader__chip,
+    .v-skeleton-loader__divider,
+    .v-skeleton-loader__heading,
+    .v-skeleton-loader__image,
+    .v-skeleton-loader__ossein,
+    .v-skeleton-loader__text
+      background: $skeleton-loader-text-background
+
+    .v-skeleton-loader__list-item,
+    .v-skeleton-loader__list-item-avatar,
+    .v-skeleton-loader__list-item-text,
+    .v-skeleton-loader__list-item-two-line,
+    .v-skeleton-loader__list-item-avatar-two-line,
+    .v-skeleton-loader__list-item-three-line,
+    .v-skeleton-loader__list-item-avatar-three-line
+      border-radius: $skeleton-loader-border-radius
+
+    &__bone
+      align-items: center
+      border-radius: inherit
+      display: flex
+      flex: 1 1 100%
+      flex-wrap: wrap
+      overflow: hidden
+      position: relative
+
+      &::after
+        @include tools.absolute(true)
+
+        animation: $skeleton-loader-loading-animation
+        background: $skeleton-loader-bone-background
+        transform: $skeleton-loader-loading-transform
+        z-index: 1
+
+    &__avatar
+      border-radius: 50%
+      flex: 0 1 auto
+      margin: $skeleton-loader-avatar-margin
+      max-height: $skeleton-loader-avatar-height
+      min-height: $skeleton-loader-avatar-height
+      height: $skeleton-loader-avatar-height
+      max-width: $skeleton-loader-avatar-width
+      min-width: $skeleton-loader-avatar-width
+      width: $skeleton-loader-avatar-width
+
+      + .v-skeleton-loader__bone
+        flex: 1 1 auto
+        margin-inline-start: 0
+
+      + .v-skeleton-loader__sentences,
+      + .v-skeleton-loader__paragraph
+        > .v-skeleton-loader__text
+          margin-inline-start: 0
+
+    &__button
+      border-radius: $skeleton-loader-button-border-radius
+      height: $skeleton-loader-button-height
+      margin: $skeleton-loader-gutter
+      max-width: $skeleton-loader-button-width
+
+      + .v-skeleton-loader__bone
+        flex: 1 1 auto
+        margin-inline-start: 0
+
+      + .v-skeleton-loader__sentences,
+      + .v-skeleton-loader__paragraph
+        > .v-skeleton-loader__text
+          margin-inline-start: 0
+
+    &__chip
+      border-radius: $skeleton-loader-chip-border-radius
+      margin: $skeleton-loader-gutter
+      height: $skeleton-loader-chip-height
+      max-width: $skeleton-loader-chip-width
+
+      + .v-skeleton-loader__bone
+        flex: 1 1 auto
+        margin-inline-start: 0
+
+      + .v-skeleton-loader__sentences,
+      + .v-skeleton-loader__paragraph
+        > .v-skeleton-loader__text
+          margin-inline-start: 0
+
+    &__date-picker
+      border-radius: $skeleton-loader-date-picker-border-radius
+
+      .v-skeleton-loader__list-item:first-child
+        .v-skeleton-loader__text
+          max-width: $skeleton-loader-date-picker-text-max-width
+          width: $skeleton-loader-date-picker-text-width
+
+      .v-skeleton-loader__heading
+        max-width: $skeleton-loader-date-picker-heading-max-width
+        width: $skeleton-loader-date-picker-heading-width
+
+    &__date-picker-days
+      flex-wrap: wrap
+      margin: $skeleton-loader-gutter
+
+      .v-skeleton-loader__avatar
+        border-radius: $skeleton-loader-border-radius
+        margin: $skeleton-loader-date-picker-days-margin
+        max-width: 100%
+
+    &__date-picker-options
+      flex-wrap: nowrap
+
+      .v-skeleton-loader__text
+        flex: 1 1 auto
+
+    &__divider
+      border-radius: $skeleton-loader-divider-border-radius
+      height: $skeleton-loader-divider-height
+
+    &__heading
+      border-radius: $skeleton-loader-heading-border-radius
+      margin: $skeleton-loader-gutter
+      height: $skeleton-loader-heading-height
+
+      + .v-skeleton-loader__subtitle
+        margin-top: -$skeleton-loader-gutter
+
+    &__image
+      height: $skeleton-loader-image-height
+      border-radius: 0
+
+    &__card
+      .v-skeleton-loader__image
+        border-radius: 0
+
+    &__list-item
+      margin: $skeleton-loader-gutter
+
+      .v-skeleton-loader__text
+        margin: 0
+
+    &__table-thead
+      justify-content: space-between
+
+      .v-skeleton-loader__heading
+        margin-top: $skeleton-loader-gutter
+        max-width: $skeleton-loader-gutter
+
+    &__table-tfoot
+      flex-wrap: nowrap
+
+      > .v-skeleton-loader__text.v-skeleton-loader__bone
+        margin-top: $skeleton-loader-gutter
+
+    &__table-row
+      align-items: baseline
+      margin: $skeleton-loader-table-row-margin
+      justify-content: space-evenly
+      flex-wrap: nowrap
+
+      > .v-skeleton-loader__text.v-skeleton-loader__bone
+        margin-inline: $skeleton-loader-table-row-text-margin
+
+      + .v-skeleton-loader__divider
+        margin: 0 $skeleton-loader-gutter
+
+    &__table-cell
+      align-items: center
+      display: flex
+      height: $skeleton-loader-table-cell-height
+      width: $skeleton-loader-table-cell-width
+
+      .v-skeleton-loader__text
+        margin-bottom: 0
+
+    &__subtitle
+      max-width: $skeleton-loader-subtitle-max-width
+
+      > .v-skeleton-loader__text
+        height: $skeleton-loader-subtitle-text-height
+        border-radius: $skeleton-loader-subtitle-text-border-radius
+
+    &__text
+      border-radius: $skeleton-loader-text-border-radius
+      margin: $skeleton-loader-gutter
+      height: $skeleton-loader-text-height
+
+      + .v-skeleton-loader__text
+        margin-top: $skeleton-loader-text-two-text-margin-top
+        max-width: $skeleton-loader-text-two-text-max-width
+
+        + .v-skeleton-loader__text
+          max-width: $skeleton-loader-text-three-text-max-width
+
+    &--boilerplate
+      .v-skeleton-loader__bone:after
+        display: none
+
+    &--is-loading
+      overflow: hidden
+
+    &--tile
+      border-radius: 0
+
+      .v-skeleton-loader__bone
+        border-radius: 0
+
+  @keyframes loading
+    100%
+      transform: translateX(100%)

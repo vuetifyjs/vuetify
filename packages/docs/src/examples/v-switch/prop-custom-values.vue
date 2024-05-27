@@ -1,10 +1,10 @@
 <template>
   <v-switch
     v-model="model"
-    hide-details
-    true-value="yes"
-    false-value="no"
     :label="`Switch: ${model}`"
+    false-value="no"
+    true-value="yes"
+    hide-details
   ></v-switch>
 </template>
 

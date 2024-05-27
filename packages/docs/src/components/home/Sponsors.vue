@@ -1,17 +1,14 @@
 <template>
   <v-sheet
     id="home-sponsors"
-    class="mx-auto pa-3 pb-12"
+    class="mx-auto pa-3"
     color="transparent"
     max-width="700"
   >
-    <v-responsive
-      class="mb-12"
-      min-height="500"
-    >
+    <v-responsive min-height="500">
       <v-row
-        dense
         justify="center"
+        dense
       >
         <v-col
           v-for="sponsor in sponsors"
@@ -19,7 +16,7 @@
           class="d-flex align-center justify-center"
           cols="auto"
         >
-          <sponsor-card
+          <SponsorCard
             :comfortable="Number(sponsor.metadata.tier) === 2"
             :compact="Number(sponsor.metadata.tier) > 2"
             :sponsor="sponsor"
@@ -30,22 +27,14 @@
       </v-row>
     </v-responsive>
 
-    <sponsor-link size="large" />
+    <br>
+    <br>
+
+    <SponsorLink append-icon="mdi-page-next" size="large" />
   </v-sheet>
 </template>
 
 <script setup>
-  // Components
-  import SponsorCard from '@/components/sponsor/Card.vue'
-  import SponsorLink from '@/components/sponsor/Link.vue'
-
-  // Composables
-  import { useDisplay } from 'vuetify'
-  import { useSponsorsStore } from '@/store/sponsors'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const { smAndDown } = useDisplay()
   const sponsorStore = useSponsorsStore()
 

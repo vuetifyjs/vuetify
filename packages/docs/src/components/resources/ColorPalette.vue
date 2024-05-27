@@ -1,14 +1,14 @@
 <template>
   <v-container class="px-0">
     <v-row>
-      <v-col cols="12" class="pb-0 font-weight-bold">{{ t('colors') }}</v-col>
+      <v-col class="pb-0 font-weight-bold" cols="12">{{ t('colors') }}</v-col>
 
       <v-col v-for="(color, i) in colors" :key="i" cols="3">
         <v-sheet
           :color="color"
-          border
           class="d-flex align-center justify-center text-mono"
           height="150"
+          border
           rounded
         >
           {{ color }}
@@ -19,9 +19,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
   const { t } = useI18n()
 
   const colors = [

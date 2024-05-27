@@ -2,12 +2,12 @@
   <v-combobox
     v-model="chips"
     :items="items"
-    chips
-    clearable
     label="Your favorite hobbies"
-    multiple
     prepend-icon="mdi-filter-variant"
     variant="solo"
+    chips
+    clearable
+    multiple
   >
     <template v-slot:selection="{ attrs, item, select, selected }">
       <v-chip

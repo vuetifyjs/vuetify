@@ -1,7 +1,12 @@
 export default {
   badge: 'Skilt',
-  open: 'Open',
+  open: 'Åpne',
   close: 'Lukk',
+  dismiss: 'Dismiss',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Avbryt',
+  },
   dataIterator: {
     noResultsText: 'Fant ingen matchende elementer.',
     loadingText: 'Laster elementer...',
@@ -28,11 +33,10 @@ export default {
     pageText: '{0}-{1} av {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'til',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Avbryt',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Velg datoer',
       header: 'Velg datoer',
@@ -53,6 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} flere',
+    today: 'Today',
   },
   input: {
     clear: 'Fjern {0}',
@@ -67,6 +72,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

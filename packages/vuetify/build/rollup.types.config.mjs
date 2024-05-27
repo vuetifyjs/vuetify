@@ -49,7 +49,12 @@ function createTypesConfig (input, output, renderChunk, filter) {
             code = new MagicString(code)
 
             if (renderChunk) await renderChunk(code)
+
+            // vue-router is optional but we need to include some of its types
             code.replaceAll(/import([^;])*?from 'vue-router'/gm, '// @ts-ignore\n$&')
+
+            // tsc adds extra export statements to namespaces
+            code.replaceAll(/^\s*export \{\s*\};?$/gm, '')
 
             const map = code.generateMap({
               // source: 'source.js',
@@ -104,9 +109,9 @@ export default [
   }),
   createTypesConfig('labs/components.d.ts', 'lib/labs/components.d.mts'),
   createTypesConfig('labs/*/index.d.ts', 'lib/labs/*/index.d.mts'),
-  createTypesConfig('labs/date/adapters/*.d.ts', 'lib/labs/date/adapters/*.d.mts'),
   createTypesConfig('directives/index.d.ts', 'lib/directives/index.d.mts'),
   createTypesConfig('locale/index.d.ts', 'lib/locale/index.d.mts'),
   createTypesConfig('locale/adapters/*.d.ts', 'lib/locale/adapters/*.d.mts'),
   createTypesConfig('iconsets/*.d.ts', 'lib/iconsets/*.d.mts'),
+  createTypesConfig('util/colors.d.ts', 'lib/util/colors.d.mts'),
 ].flat()

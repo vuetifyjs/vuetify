@@ -2,33 +2,36 @@
   <div class="border rounded my-6">
     <v-autocomplete
       ref="autocomplete"
-      v-model="search"
+      v-model="model"
+      v-model:search="search"
       :items="releases"
-      :loading="store.isLoading"
       :menu-props="menuProps"
       :placeholder="tag"
-      hide-details
       density="comfortable"
       item-title="name"
       label="Select Release Version"
-      persistent-placeholder
       prepend-inner-icon="mdi-text-box-search-outline"
+      rounded="b-0"
+      variant="solo-filled"
+      hide-details
+      hide-no-data
+      persistent-placeholder
       return-object
     >
       <template #selection>
         <div class="d-flex align-center">
-          <div class="me-1">{{ search?.tag_name }}</div>
+          <div class="me-1">{{ model?.tag_name }}</div>
 
-          <template v-if="search?.reactions?.total_count">
+          <template v-if="model?.reactions?.total_count">
             &mdash;
           </template>
 
           <template v-for="(value, key) in reactions" :key="key">
-            <template v-if="search?.reactions?.[key]">
+            <template v-if="model?.reactions?.[key]">
               <span class="d-inline-flex align-center text-body-2 me-2">
                 {{ value }}
 
-                <span class="text-caption">{{ search.reactions[key] }}</span>
+                <span class="text-caption">{{ model.reactions[key] }}</span>
               </span>
             </template>
           </template>
@@ -55,40 +58,45 @@
           />
         </template>
       </template>
+
+      <template #append-inner>
+        <v-progress-circular
+          v-if="store.isLoading"
+          indeterminate="disable-shrink"
+          size="18"
+          width="2"
+        />
+      </template>
     </v-autocomplete>
 
     <v-card
-      variant="flat"
       rounded="t-0 b"
+      variant="flat"
     >
       <div
-        v-if="search?.author"
-        class="d-flex justify-space-between"
+        v-if="model?.author"
+        class="d-flex align-center justify-space-between pa-4 bg-surface-light border-y"
       >
-        <v-list-item v-if="publishedOn" lines="two">
-          <v-list-item-title class="d-flex align-center">
-            <i18n-t keypath="published">
-              <template #date>
-                <v-chip
-                  :text="publishedOn"
-                  class="ms-2 text-caption"
-                  density="comfortable"
-                  label
-                  variant="flat"
-                />
-              </template>
-            </i18n-t>
-          </v-list-item-title>
-        </v-list-item>
+        <div class="d-flex align-center text-caption">
+          <i18n-t v-if="publishedOn" keypath="published" scope="global">
+            <template #date>
+              <border-chip
+                :text="publishedOn"
+                class="ms-1"
+                prepend-icon="mdi-calendar"
+              />
+            </template>
+          </i18n-t>
+        </div>
 
-        <div class="pe-3 d-flex align-center flex-1-0-auto">
-          <app-tooltip-btn
+        <div class="d-flex align-center">
+          <AppTooltipBtn
             v-for="(tooltip, i) in tooltips"
             :key="i"
+            :color="tooltip.color ?? 'text-high-emphasis'"
             :href="tooltip.href"
             :icon="tooltip.icon"
             :path="tooltip.path"
-            :color="tooltip.color ?? 'text-high-emphasis'"
             :target="tooltip.href ? '_blank' : undefined"
             class="text-white ms-2"
             density="comfortable"
@@ -99,34 +107,64 @@
         </div>
       </div>
 
-      <template v-if="search?.body && !store.isLoading">
+      <template v-if="model?.body">
         <v-divider />
 
         <div class="px-4 pt-4">
-          <app-markdown
-            v-if="search?.body"
-            :content="search.body"
+          <AppMarkdown
+            :content="model.body"
             class="releases"
           />
         </div>
+
+        <template v-if="model.zipball_url && model.tarball_url">
+          <v-divider class="my-2" />
+
+          <div class="px-4 pb-4">
+            <h2 class="text-h6 font-weight-bold">Assets</h2>
+
+            <AppSheet>
+              <v-list-item
+                :href="model.zipball_url"
+                append-icon="mdi-download-box-outline"
+                prepend-icon="mdi-folder-zip-outline"
+                target="_blank"
+                title="Source code (zip)"
+                nav
+                slim
+              />
+
+              <v-divider />
+
+              <v-list-item
+                :href="model.tarball_url"
+                append-icon="mdi-download-box-outline"
+                prepend-icon="mdi-folder-zip-outline"
+                target="_blank"
+                title="Source code (tar.gz)"
+                nav
+                slim
+              />
+            </AppSheet>
+          </div>
+        </template>
       </template>
+
+      <v-skeleton-loader
+        v-if="!model && store.isLoading"
+        class="pa-4"
+        type="heading, article, heading, subtitle, text, sentences"
+      />
     </v-card>
   </div>
 </template>
 
 <script setup lang="ts">
   // Composables
-  import { useDate } from 'vuetify/labs/date'
-  import { useI18n } from 'vue-i18n'
-  import { useDisplay, version } from 'vuetify'
-  import { useRoute, useRouter } from 'vue-router'
+  import { version } from 'vuetify'
 
-  // Stores
-  import { Release, useReleasesStore } from '@/store/releases'
-
-  // Utilities
-  import { computed, onBeforeMount, ref, watch } from 'vue'
-  import { wait } from '@/util/helpers'
+  // Types
+  import type { Release } from '@/stores/releases'
 
   const reactions = {
     '+1': '👍',
@@ -139,14 +177,16 @@
 
   const { smAndUp } = useDisplay()
   const { t } = useI18n()
-  const date = useDate()
+  const adapter = useDate()
   const route = useRoute()
   const router = useRouter()
   const store = useReleasesStore()
 
   const autocomplete = ref()
   const clicked = ref('copy-link')
-  const search = ref<Release>()
+  const model = ref<Release>()
+  const search = shallowRef('')
+  let timeout = -1 as any
 
   const menuProps = computed(() => {
     return {
@@ -161,7 +201,7 @@
         color: '#3b5998',
         icon: clicked.value === 'copied' ? 'mdi-check' : 'mdi-share-variant-outline',
         async onClick () {
-          navigator.clipboard.writeText(`${window.location.origin}/getting-started/release-notes/?version=${search.value!.tag_name}`)
+          navigator.clipboard.writeText(`${window.location.origin}/getting-started/release-notes/?version=${model.value!.tag_name}`)
 
           clicked.value = 'copied'
 
@@ -179,7 +219,7 @@
       },
       {
         color: '#212121',
-        href: search.value!.html_url,
+        href: model.value!.html_url,
         icon: 'mdi-github',
         path: 'open-github-release',
       },
@@ -197,18 +237,18 @@
   const tag = computed(() => (route.query.version ?? `v${version}`) as string)
 
   const publishedOn = computed(() => {
-    if (!search.value?.published_at) return undefined
+    if (!model.value?.published_at) return undefined
 
-    return date.format(new Date(search.value.published_at), smAndUp.value ? 'fullDateWithWeekday' : 'normalDateWithWeekday')
+    return adapter.format(new Date(model.value.published_at), smAndUp.value ? 'fullDateWithWeekday' : 'normalDateWithWeekday')
   })
 
   onBeforeMount(async () => {
     await store.fetch()
 
-    search.value = await store.find(tag.value)
+    model.value = await store.find(tag.value)
   })
 
-  watch(search, val => {
+  watch(model, val => {
     const version = val?.tag_name ?? tag.value
 
     if (!version) return
@@ -218,6 +258,8 @@
     autocomplete.value?.blur()
   })
 
+  watch(search, onSearch)
+
   function genEmoji (count: number) {
     switch (true) {
       case (count >= 100): return '💫'
@@ -226,6 +268,35 @@
       default: return undefined
     }
   }
+
+  async function onSearch (val: string) {
+    clearTimeout(timeout)
+
+    timeout = setTimeout(() => store.find(val), 500)
+  }
+
+  // function timeAgo (string: string): string {
+  //   const date = adapter.toJsDate(adapter.date(string))
+  //   const now = new Date()
+  //   const seconds = Math.floor((now.getTime() - date.getTime()) / 1000)
+
+  //   let interval = seconds / 31536000
+  //   if (interval > 1) return `${Math.floor(interval)} years ago`
+
+  //   interval = seconds / 2592000
+  //   if (interval > 1) return `${Math.floor(interval)} months ago`
+
+  //   interval = seconds / 86400
+  //   if (interval > 1) return `${Math.floor(interval)} days ago`
+
+  //   interval = seconds / 3600
+  //   if (interval > 1) return `${Math.floor(interval)} hours ago`
+
+  //   interval = seconds / 60
+  //   if (interval > 1) return `${Math.floor(interval)} minutes ago`
+
+  //   return `${Math.floor(seconds)} seconds ago`
+  // }
 </script>
 
 <style lang="sass">

@@ -46,8 +46,27 @@ export const VColorPickerCanvas = defineComponent({
 
   setup (props, { emit }) {
     const isInteracting = shallowRef(false)
-    const isOutsideUpdate = shallowRef(false)
-    const dotPosition = ref({ x: 0, y: 0 })
+    const canvasRef = ref<HTMLCanvasElement | null>()
+    const canvasWidth = shallowRef(parseFloat(props.width))
+    const canvasHeight = shallowRef(parseFloat(props.height))
+
+    const _dotPosition = ref({ x: 0, y: 0 })
+    const dotPosition = computed({
+      get: () => _dotPosition.value,
+      set (val) {
+        if (!canvasRef.value) return
+
+        const { x, y } = val
+        _dotPosition.value = val
+
+        emit('update:color', {
+          h: props.color?.h ?? 0,
+          s: clamp(x, 0, canvasWidth.value) / canvasWidth.value,
+          v: 1 - clamp(y, 0, canvasHeight.value) / canvasHeight.value,
+          a: props.color?.a ?? 1,
+        })
+      },
+    })
 
     const dotStyles = computed(() => {
       const { x, y } = dotPosition.value
@@ -60,11 +79,8 @@ export const VColorPickerCanvas = defineComponent({
       }
     })
 
-    const canvasRef = ref<HTMLCanvasElement | null>()
-    const canvasWidth = shallowRef(parseFloat(props.width))
-    const canvasHeight = shallowRef(parseFloat(props.height))
     const { resizeRef } = useResizeObserver(entries => {
-      if (!resizeRef.value?.offsetParent) return
+      if (!resizeRef.el?.offsetParent) return
 
       const { width, height } = entries[0].contentRect
 
@@ -80,19 +96,15 @@ export const VColorPickerCanvas = defineComponent({
       }
     }
 
-    function handleClick (e: MouseEvent) {
-      if (props.disabled || !canvasRef.value) return
-
-      updateDotPosition(e.clientX, e.clientY, canvasRef.value.getBoundingClientRect())
-    }
-
     function handleMouseDown (e: MouseEvent | TouchEvent) {
-      // To prevent selection while moving cursor
-      e.preventDefault()
+      if (e.type === 'mousedown') {
+        // Prevent text selection while dragging
+        e.preventDefault()
+      }
 
       if (props.disabled) return
 
-      isInteracting.value = true
+      handleMouseMove(e)
 
       window.addEventListener('mousemove', handleMouseMove)
       window.addEventListener('mouseup', handleMouseUp)
@@ -117,24 +129,6 @@ export const VColorPickerCanvas = defineComponent({
       window.removeEventListener('touchend', handleMouseUp)
     }
 
-    watch(dotPosition, () => {
-      if (isOutsideUpdate.value) {
-        isOutsideUpdate.value = false
-        return
-      }
-
-      if (!canvasRef.value) return
-
-      const { x, y } = dotPosition.value
-
-      emit('update:color', {
-        h: props.color?.h ?? 0,
-        s: clamp(x, 0, canvasWidth.value) / canvasWidth.value,
-        v: 1 - clamp(y, 0, canvasHeight.value) / canvasHeight.value,
-        a: props.color?.a ?? 1,
-      })
-    })
-
     function updateCanvas () {
       if (!canvasRef.value) return
 
@@ -150,7 +144,7 @@ export const VColorPickerCanvas = defineComponent({
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       const valueGradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
-      valueGradient.addColorStop(0, 'hsla(0, 0%, 100%, 0)') // transparent
+      valueGradient.addColorStop(0, 'hsla(0, 0%, 0%, 0)') // transparent
       valueGradient.addColorStop(1, 'hsla(0, 0%, 0%, 1)') // black
       ctx.fillStyle = valueGradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -159,7 +153,7 @@ export const VColorPickerCanvas = defineComponent({
     watch(() => props.color?.h, updateCanvas, { immediate: true })
     watch(() => [canvasWidth.value, canvasHeight.value], (newVal, oldVal) => {
       updateCanvas()
-      dotPosition.value = {
+      _dotPosition.value = {
         x: dotPosition.value.x * newVal[0] / oldVal[0],
         y: dotPosition.value.y * newVal[1] / oldVal[1],
       }
@@ -171,9 +165,7 @@ export const VColorPickerCanvas = defineComponent({
         return
       }
 
-      isOutsideUpdate.value = true
-
-      dotPosition.value = props.color ? {
+      _dotPosition.value = props.color ? {
         x: props.color.s * canvasWidth.value,
         y: (1 - props.color.v) * canvasHeight.value,
       } : { x: 0, y: 0 }
@@ -189,9 +181,8 @@ export const VColorPickerCanvas = defineComponent({
           props.class,
         ]}
         style={ props.style }
-        onClick={ handleClick }
         onMousedown={ handleMouseDown }
-        onTouchstart={ handleMouseDown }
+        onTouchstartPassive={ handleMouseDown }
       >
         <canvas
           ref={ canvasRef }

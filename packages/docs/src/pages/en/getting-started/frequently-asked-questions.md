@@ -13,11 +13,13 @@ related:
 
 Stuck on a particular problem? Check some of these common gotchas before creating a ticket. If you still cannot find what you are looking for, you can submit an [issue](https://issues.vuetifyjs.com/) on GitHub or ask in our [community](https://community.vuetifyjs.com/).
 
-<entry />
+<PageFeatures />
+
+<VoPromotionsCardHighlight slug="vuetify-discord-subscriber-help" />
 
 ## Questions
 
-<promoted slug="vuetify-discord" />
+The following responses are a collection of common questions asked by the Vuetify community.
 
 * **What is Vuetify?** { #what-is-vuetify }
 
@@ -91,4 +93,16 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 
   Please create a new [issue](https://issues.vuetifyjs.com/) with our Issue Generator. Please make sure to check for existing issues before creating a new one.
 
-<promoted type="theme" />
+* **Why did Vuetify 3 change `value` to `model-value`?**
+
+  The `value` prop was changed in Vue 3 to support a new `v-model` syntax. See the official Vue docs for more information on [Component v-model](https://vuejs.org/guide/components/v-model.html).
+
+* **Is Vuetify 3 compatible with `@vue/compat`?**
+
+  Not directly, you have to set `configureCompat({ MODE: 3 })` globally and `MODE: 2` in each of your components that you want to run in compatibility mode. There will still be some incorrect warnings that can be ignored with the `-ATTR_FALSE_VALUE` filter in devtools.
+
+* **Why don't elements exist in the DOM yet in `onMounted()`?** ([#19736](https://github.com/vuetifyjs/vuetify/issues/19736))
+
+  Some vuetify components are asynchronous, so there is no guarantee that their children will be mounted immediately. Either wait for the target element itself to be mounted with `v-on:vue:mounted` or use `onMounted` in a separate component that only has plain elements between the `<template>` and your target element.
+
+<PromotedPromoted type="theme" />

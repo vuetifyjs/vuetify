@@ -3,8 +3,8 @@ import path from 'path'
 import Ajv from 'ajv'
 import fm from 'front-matter'
 import MarkdownIt from 'markdown-it'
-import { configureMarkdown } from '../src/util/markdown-it'
-export { configureMarkdown } from '../src/util/markdown-it'
+import { configureMarkdown } from '../src/utils/markdown-it'
+export { configureMarkdown } from '../src/utils/markdown-it'
 
 export const md = configureMarkdown(new MarkdownIt())
 
@@ -75,7 +75,19 @@ const validate = ajv.compile({
     },
     disabled: { type: 'boolean' }, // The page is not published
     emphasized: { type: 'boolean' }, // The page is emphasized in the navigation
-    fluid: { type: 'boolean' }, // The page is emphasized in the navigation
+    fluid: { type: 'boolean' }, // Hide the Toc
+    backmatter: { type: 'boolean' }, // Hide the backmatter
+    features: {
+      type: 'object',
+      additionalProperties: false,
+      properties: {
+        figma: { type: 'boolean' },
+        label: { type: 'string' },
+        report: { type: 'boolean' },
+        github: { type: 'string' },
+        spec: { type: 'string' },
+      },
+    },
   },
 })
 

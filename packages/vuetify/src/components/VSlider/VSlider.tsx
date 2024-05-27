@@ -94,7 +94,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
     const trackStop = computed(() => position(model.value))
 
     useRender(() => {
-      const [inputProps, _] = VInput.filterProps(props)
+      const inputProps = VInput.filterProps(props)
       const hasPrepend = !!(props.label || slots.label || slots.prepend)
 
       return (
@@ -118,15 +118,16 @@ export const VSlider = genericComponent<VSliderSlots>()({
             ...slots,
             prepend: hasPrepend ? slotProps => (
               <>
-                { slots.label?.(slotProps) ?? props.label
-                  ? (
-                    <VLabel
-                      id={ slotProps.id.value }
-                      class="v-slider__label"
-                      text={ props.label }
-                    />
-                  ) : undefined
-                }
+                { slots.label?.(slotProps) ?? (
+                  props.label
+                    ? (
+                      <VLabel
+                        id={ slotProps.id.value }
+                        class="v-slider__label"
+                        text={ props.label }
+                      />
+                    ) : undefined
+                )}
 
                 { slots.prepend?.(slotProps) }
               </>
@@ -166,6 +167,8 @@ export const VSlider = genericComponent<VSliderSlots>()({
                   elevation={ props.elevation }
                   onFocus={ focus }
                   onBlur={ blur }
+                  ripple={ props.ripple }
+                  name={ props.name }
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>

@@ -2,6 +2,11 @@ export default {
   badge: 'สัญลักษณ์',
   open: 'Open',
   close: 'ปิด',
+  dismiss: 'Dismiss',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'ไม่พบข้อมูลที่ค้นหา',
     loadingText: 'กำลังโหลดข้อมูล...',
@@ -31,8 +36,7 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Select dates',
       header: 'Enter dates',
@@ -53,6 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: 'มีอีก {0}',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',
@@ -67,6 +72,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

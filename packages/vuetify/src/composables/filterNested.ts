@@ -6,10 +6,10 @@ import { computed } from 'vue'
 
 // Types
 import type { Ref } from 'vue'
-import type { InternalItem } from './items'
 import type { FilterProps } from './filter'
+import type { ListItem } from './list-items'
 
-function flatten <T> (items: InternalItem<T>[], flat: InternalItem<T>[] = []) {
+function flatten <T> (items: ListItem<T>[], flat: ListItem<T>[] = []) {
   for (const item of items) {
     flat.push(item)
 
@@ -19,7 +19,7 @@ function flatten <T> (items: InternalItem<T>[], flat: InternalItem<T>[] = []) {
   return flat
 }
 
-function filter <T> (items: InternalItem<T>[], include: Set<any>, out: InternalItem<T>[] = []): InternalItem<T>[] {
+function filter <T> (items: ListItem<T>[], include: Set<any>, out: ListItem<T>[] = []): ListItem<T>[] {
   const children = []
   for (const item of items) {
     if (item.children) {
@@ -38,7 +38,7 @@ function filter <T> (items: InternalItem<T>[], include: Set<any>, out: InternalI
   return children
 }
 
-export function useFilterNested <T> (props: FilterProps, items: Ref<InternalItem<T>[]>, search: Ref<string | undefined>) {
+export function useFilterNested <T> (props: FilterProps, items: Ref<ListItem<T>[]>, search: Ref<string | undefined>) {
   const flatItems = computed(() => flatten(items.value))
 
   const { filteredItems: flatFilteredItems, filteredMatches, getMatches } = useFilter(props, flatItems, search)

@@ -1,7 +1,12 @@
 export default {
-  badge: 'знак',
-  open: 'Open',
+  badge: 'Знак',
+  open: 'Открыть',
   close: 'Закрыть',
+  dismiss: 'Dismiss',
+  confirmEdit: {
+    ok: 'ОК',
+    cancel: 'Отмена',
+  },
   dataIterator: {
     noResultsText: 'Не найдено подходящих записей',
     loadingText: 'Запись загружается...',
@@ -28,19 +33,18 @@ export default {
     pageText: '{0}-{1} из {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'до',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} выбрано',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Выбранные даты',
+      header: 'Ввод дат',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Выбор даты',
+    header: 'Ввод даты',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Введите дату',
     },
   },
   noDataText: 'Отсутствуют данные',
@@ -53,12 +57,13 @@ export default {
   },
   calendar: {
     moreEvents: 'Еще {0}',
+    today: 'Today',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Очистить {0}',
+    prependAction: '{0} предварительных действий',
+    appendAction: '{0} добавочных действий',
+    otp: 'Пожалуйста введите символы OTP {0}',
   },
   fileInput: {
     counter: 'Файлов: {0}',
@@ -67,6 +72,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
@@ -75,22 +81,22 @@ export default {
       previous: 'Предыдущая страница',
       page: 'Перейти на страницу {0}',
       currentPage: 'Текущая страница, Страница {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Первая страница',
+      last: 'Последняя страница',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Следующий',
+    prev: 'Предыдущий',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Рейтинг {0} из {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Загрузка...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Загрузить ещё',
+    empty: 'Больше нечего загружать',
   },
 }

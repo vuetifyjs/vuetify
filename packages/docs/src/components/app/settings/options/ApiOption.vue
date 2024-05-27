@@ -6,25 +6,17 @@
       }
     }"
   >
-    <v-switch
+    <SettingsSwitch
       v-model="user.api"
-      class="ps-3 flex-0-0"
-      color="primary"
-      density="compact"
+      :label="t('enable-inline-api')"
+      :messages="t('enable-inline-api-message')"
       false-value="link-only"
-      inset
-      label="Enable Inline API"
-      messages="Display API tables inline on documentation pages."
       true-value="inline"
-      true-icon="mdi-check"
-      false-icon="$close"
     />
   </v-defaults-provider>
 </template>
 
 <script setup>
-  // Composables
-  import { useUserStore } from '@/store/user'
-
+  const { t } = useI18n()
   const user = useUserStore()
 </script>

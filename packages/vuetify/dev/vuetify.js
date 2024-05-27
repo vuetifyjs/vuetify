@@ -16,4 +16,5 @@ export default createVuetify({
   defaults,
   icons,
   locale,
+  theme: { defaultTheme: 'light' },
 })

@@ -2,8 +2,8 @@
   <div class="text-center">
     <v-rating
       v-model="rating"
-      bg-color="orange-lighten-1"
-      color="blue"
+      active-color="blue"
+      color="orange-lighten-1"
     ></v-rating>
   </div>
 </template>

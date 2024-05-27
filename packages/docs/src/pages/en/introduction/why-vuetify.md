@@ -1,7 +1,7 @@
 ---
 meta:
   nav: Why Vuetify?
-  title: Why you should be using Vuetify
+  title: Why Vuetify?
   description: Vuetify has an extremely active community, provides easy to use Material Design components and is consistently updated.
   keywords: why vuetify, best vue framework, best ui framework, best component framework, best ui library, best component library
 related:
@@ -14,7 +14,9 @@ related:
 
 Learn more about what Vuetify is, how to create an application from scratch, browse API references, sample code, tutorials, and more.
 
-<entry />
+<PageFeatures />
+
+<VoPromotionsCardVuetify />
 
 ## What is Vuetify?
 
@@ -25,7 +27,9 @@ Since its initial release in 2014, [Vue.js](https://vuejs.org/) has grown to be 
 
 ## Getting started
 
-The fastest way to try Vuetify is in the browser at 🎮[play.vuetifyjs.com](https://play.vuetifyjs.com/). For a complete list of installation options please navigate to the [Installation page](/getting-started/installation/).
+<VoPromotionsCardHighlight slug="vuemastery-getting-started" class="mb-4" />
+
+The fastest way to try Vuetify is in the browser at [Vuetify Play](https://play.vuetifyjs.com/). For a complete list of installation options please navigate to the [Installation page](/getting-started/installation/).
 
 ## Why Vuetify? { id="why-vuetify" }
 
@@ -53,7 +57,7 @@ Vuetify has a large ecosystem of supporting tools that enrich the development ex
 
 When you develop with Vuetify, you are never alone. Stuck on a problem? Take advantage of our massive [Discord community](https://community.vuetifyjs.com/) and collaborate with other Vuetify developers in one of our public help channels. Need a more personalized support solution? Vuetify offers [Enterprise support](/introduction/enterprise-support/) with options tailored to individuals and businesses. Check out some other ways to [Sponsor Vuetify development](/introduction/sponsors-and-backers/).
 
-<promoted slug="vuetify-discord" />
+<PromotedPromoted slug="vuetify-discord" />
 
 ### Professional and Enterprise support
 
@@ -91,6 +95,7 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 | [Accessibility (a11y)](/features/accessibility) | Intermediate | 10 min |
 | [Aliasing](/features/aliasing/) | Intermediate | 5 min |
 | [Application layout](/features/application-layout/) | Intermediate | 15 min |
+| [Dates](/features/dates/) | Intermediate | 10 min |
 | [Display & Platform](/features/display-and-platform/) | Intermediate | 15 min |
 | [Internationalization (i18n)](/features/internationalization/) | Intermediate | 5 min |
 | [SASS variables](/features/sass-variables/) | Intermediate | 10 min |

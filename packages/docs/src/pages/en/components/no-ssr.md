@@ -3,6 +3,10 @@ meta:
   title: No SSR
   description: The No SSR component is a simple component that doesn't get rendered on the server, but only on the client.
   keywords: nossr, vuetify no ssr component, vue no ssr component
+features:
+  github: /components/VNoSsr/
+  label: 'C: VNoSsr'
+  report: true
 ---
 
 # No SSR
@@ -11,7 +15,7 @@ The `v-no-ssr` component is a simple wrapper that allows a developer to designat
 
 <!-- ![No-Ssr Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-No-Ssr/v-No-Ssr-entry.png) -->
 
----
+<PageFeatures />
 
 ## Usage
 
@@ -34,6 +38,6 @@ The `v-no-ssr` component prevents its content from rendering on the server side.
 | - | - |
 | [v-no-ssr](/api/v-no-ssr/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
-<entry />
+<PromotedEntry />

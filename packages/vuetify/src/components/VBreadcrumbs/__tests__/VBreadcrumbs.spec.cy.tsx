@@ -15,7 +15,7 @@ describe('VBreadcrumbs', () => {
       <Application>
         <VBreadcrumbs items={['hello', 'world']}>
           {{
-            title: ({ item }: any) => `${item}!`,
+            title: ({ item }: any) => `${item.title}!`,
           }}
         </VBreadcrumbs>
       </Application>
@@ -108,6 +108,11 @@ describe('VBreadcrumbs', () => {
     cy.get('.v-breadcrumbs-item').should('exist').eq(0).click()
     cy.then(() => {
       expect(router.currentRoute.value.path).to.equal('/about')
+    })
+
+    // Return back to root to not break succeeding tests that don't have /about path.
+    cy.get('.v-breadcrumbs').then(() => {
+      router.push('/')
     })
   })
 

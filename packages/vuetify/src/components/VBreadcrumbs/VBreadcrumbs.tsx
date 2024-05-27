@@ -25,10 +25,12 @@ import type { PropType } from 'vue'
 import type { LinkProps } from '@/composables/router'
 import type { GenericProps } from '@/util'
 
-export type BreadcrumbItem = string | (Partial<LinkProps> & {
+export type InternalBreadcrumbItem = Partial<LinkProps> & {
   title: string
   disabled?: boolean
-})
+}
+
+export type BreadcrumbItem = string | InternalBreadcrumbItem
 
 export const makeVBreadcrumbsProps = propsFactory({
   activeClass: String,
@@ -58,8 +60,9 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
   },
   slots: {
     prepend: never
-    title: { item: T, index: number }
+    title: { item: InternalBreadcrumbItem, index: number }
     divider: { item: T, index: number }
+    item: { item: InternalBreadcrumbItem, index: number }
     default: never
   }
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -131,14 +134,16 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
 
           { items.value.map(({ item, raw }, index, array) => (
             <>
-              <VBreadcrumbsItem
-                key={ item.title }
-                disabled={ index >= array.length - 1 }
-                { ...item }
-                v-slots={{
-                  default: slots.title ? () => slots.title?.({ item: raw, index }) : undefined,
-                }}
-              />
+              { slots.item?.({ item, index }) ?? (
+                <VBreadcrumbsItem
+                  key={ index }
+                  disabled={ index >= array.length - 1 }
+                  { ...(typeof item === 'string' ? { title: item } : item) }
+                  v-slots={{
+                    default: slots.title ? () => slots.title?.({ item, index }) : undefined,
+                  }}
+                />
+              )}
 
               { index < array.length - 1 && (
                 <VBreadcrumbsDivider

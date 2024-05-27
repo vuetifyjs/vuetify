@@ -1,6 +1,9 @@
 // Styles
 import './VChipGroup.sass'
 
+// Components
+import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'
+
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
@@ -15,6 +18,7 @@ import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { GenericProps } from '@/util'
 
 export const VChipGroupSymbol = Symbol.for('vuetify:v-chip-group')
 
@@ -26,6 +30,7 @@ export const makeVChipGroupProps = propsFactory({
     default: deepEqual,
   },
 
+  ...makeVSlideGroupProps(),
   ...makeComponentProps(),
   ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
   ...makeTagProps(),
@@ -43,7 +48,13 @@ type VChipGroupSlots = {
   }
 }
 
-export const VChipGroup = genericComponent<VChipGroupSlots>()({
+export const VChipGroup = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: VChipGroupSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VChipGroup',
 
   props: makeVChipGroupProps(),
@@ -65,27 +76,32 @@ export const VChipGroup = genericComponent<VChipGroupSlots>()({
       },
     })
 
-    useRender(() => (
-      <props.tag
-        class={[
-          'v-chip-group',
-          {
-            'v-chip-group--column': props.column,
-          },
-          themeClasses.value,
-          props.class,
-        ]}
-        style={ props.style }
-      >
-        { slots.default?.({
-          isSelected,
-          select,
-          next,
-          prev,
-          selected: selected.value,
-        })}
-      </props.tag>
-    ))
+    useRender(() => {
+      const slideGroupProps = VSlideGroup.filterProps(props)
+
+      return (
+        <VSlideGroup
+          { ...slideGroupProps }
+          class={[
+            'v-chip-group',
+            {
+              'v-chip-group--column': props.column,
+            },
+            themeClasses.value,
+            props.class,
+          ]}
+          style={ props.style }
+        >
+          { slots.default?.({
+            isSelected,
+            select,
+            next,
+            prev,
+            selected: selected.value,
+          })}
+        </VSlideGroup>
+      )
+    })
 
     return {}
   },

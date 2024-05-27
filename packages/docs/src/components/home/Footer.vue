@@ -2,23 +2,22 @@
   <v-footer
     id="footer"
     class="d-block py-6"
-    theme="dark"
+    color="surface-light"
   >
     <v-container class="text-center">
       <v-row>
         <v-col cols="12">
           <v-img
+            :src="`https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-${theme.current.value.dark ? 'dark' : 'light'}-slim.svg`"
             class="mx-auto"
-            contain
             height="64"
-            src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-v3-slim-light.svg"
-            width="64"
+            contain
           />
         </v-col>
 
         <v-col
-          cols="12"
           class="pb-0"
+          cols="12"
         >
           <a
             v-for="(social, i) in socials"
@@ -32,7 +31,7 @@
           >
             <v-icon
               :icon="social.icon"
-              color="white"
+              color="medium-emphasis"
             />
           </a>
         </v-col>
@@ -47,12 +46,12 @@
           </v-responsive>
         </v-col>
 
-        <v-col cols="12">
+        <v-col class="text-medium-emphasis" cols="12">
           <div>
             {{ t('released-under-the') }}
             <a
               class="text-medium-emphasis text-decoration-underline"
-              href="https://opensource.org/licenses/MIT"
+              href="https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md"
               path="mit-license"
               rel="noopener"
               target="_blank"
@@ -83,10 +82,8 @@
 </template>
 
 <script setup>
-// Composables
-  import { useI18n } from 'vue-i18n'
-
   const { t } = useI18n()
+  const theme = useTheme()
   const links = [
     {
       href: 'https://www.iubenda.com/privacy-policy/76325752',

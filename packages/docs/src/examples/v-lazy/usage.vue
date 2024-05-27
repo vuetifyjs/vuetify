@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :name="name"
@@ -47,29 +47,22 @@
       </v-lazy>
       <br>
     </v-responsive>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
+  const goTo = useGoTo()
 
   const name = 'v-lazy'
-  const model = ref('default')
-  const isActive = ref(false)
+  const model = shallowRef('default')
+  const isActive = shallowRef(false)
   const responsive = ref()
   const options = []
 
-  function reset () {
-    responsive.value.$el.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
+  async function reset () {
+    await goTo(0, { container: responsive.value.$el })
 
-    setTimeout(() => {
-      isActive.value = false
-    }, 300)
+    isActive.value = false
   }
 
   const props = computed(() => {

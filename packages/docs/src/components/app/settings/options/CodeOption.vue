@@ -6,25 +6,17 @@
       }
     }"
   >
-    <v-switch
+    <SettingsSwitch
       v-model="user.composition"
-      class="ps-3 flex-0-0"
-      color="primary"
-      density="compact"
+      :label="t('enable-composition')"
+      :messages="t('enable-composition-message')"
       false-value="options"
-      inset
-      label="Enable Composition API"
-      messages="Determines the script shown in code examples for components."
       true-value="composition"
-      true-icon="mdi-check"
-      false-icon="$close"
     />
   </v-defaults-provider>
 </template>
 
 <script setup>
-  // Composables
-  import { useUserStore } from '@/store/user'
-
+  const { t } = useI18n()
   const user = useUserStore()
 </script>

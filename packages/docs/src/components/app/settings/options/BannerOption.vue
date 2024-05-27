@@ -6,40 +6,29 @@
       }
     }"
   >
-    <v-switch
+    <settings-switch
+      :label="t('enable-banners')"
+      :messages="t('enable-banners-message')"
       :model-value="true"
-      class="ps-3 flex-0-0"
-      label="Enable Banners"
-      messages="Banners are located at the top of the screen and usually provide general information about Vuetify."
-      density="compact"
       color="disabled"
-      true-icon="mdi-check"
-      false-icon="$close"
       readonly
-      inset
     >
       <template #append>
         <v-btn
-          :color="isDisabled ? undefined : 'error'"
+          :color="isDisabled ? undefined : 'primary'"
           :disabled="isDisabled"
-          variant="outlined"
+          :text="t('reset')"
           size="small"
+          variant="outlined"
           @click="onResetNotifications"
-        >
-          Reset
-        </v-btn>
+        />
       </template>
-    </v-switch>
+    </settings-switch>
   </v-defaults-provider>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed } from 'vue'
-
-  // Stores
-  import { useUserStore } from '@/store/user'
-
+  const { t } = useI18n()
   const user = useUserStore()
 
   const isDisabled = computed(() => user.notifications.last.banner.length === 0)

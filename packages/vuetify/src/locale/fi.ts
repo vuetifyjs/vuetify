@@ -2,6 +2,11 @@ export default {
   badge: 'Infopiste',
   open: 'Open',
   close: 'Sulje',
+  dismiss: 'Dismiss',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Ei osumia',
     loadingText: 'Ladataan kohteita...',
@@ -31,8 +36,7 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Select dates',
       header: 'Enter dates',
@@ -53,6 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} lisää',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',
@@ -67,6 +72,7 @@ export default {
   timePicker: {
     am: 'ap.',
     pm: 'ip.',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

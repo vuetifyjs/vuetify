@@ -10,14 +10,13 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed } from 'vue'
-
   defineProps({
     size: String,
   })
 
+  const theme = useTheme()
+
   const logo = computed(() => {
-    return `vuetify-logo-light-atom.svg`
+    return `vuetify-logo-${theme.current.value.dark ? 'dark' : 'light'}-atom.svg`
   })
 </script>

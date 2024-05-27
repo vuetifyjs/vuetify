@@ -1,7 +1,12 @@
 export default {
   badge: 'Odznaka',
-  open: 'Open',
+  open: 'Otwórz',
   close: 'Zamknij',
+  dismiss: 'Dismiss',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Anuluj',
+  },
   dataIterator: {
     noResultsText: 'Nie znaleziono danych odpowiadających wyszukiwaniu',
     loadingText: 'Wczytywanie danych...',
@@ -28,19 +33,18 @@ export default {
     pageText: '{0}-{1} z {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'do',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} selected',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Wybór zakresu dat',
+      header: 'Wprowadź zakres dat',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Wybór daty',
+    header: 'Wprowadź datę',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Wprowadź datę',
     },
   },
   noDataText: 'Brak danych',
@@ -53,12 +57,13 @@ export default {
   },
   calendar: {
     moreEvents: '{0} więcej',
+    today: 'Today',
   },
   input: {
     clear: 'Wyczyść {0}',
     prependAction: '{0} dodatkowa akcja',
     appendAction: '{0} dodatkowa akcja',
-    otp: 'Please enter OTP character {0}',
+    otp: 'Proszę wprowadzić znak nr {0}',
   },
   fileInput: {
     counter: 'Liczba plików: {0}',
@@ -67,6 +72,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
@@ -80,17 +86,17 @@ export default {
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Następny',
+    prev: 'Poprzedni',
   },
   rating: {
     ariaLabel: {
       item: 'Ocena {0} na {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Wczytywanie danych...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Wczytaj więcej',
+    empty: 'Brak kolejnych danych',
   },
 }

@@ -1,130 +1,157 @@
-// Styles
-import './VDateInput.sass'
-
 // Components
-import { VDialog } from '@/components/VDialog'
-import { VMenu } from '@/components/VMenu'
+import { makeVConfirmEditProps, VConfirmEdit } from '@/components/VConfirmEdit/VConfirmEdit'
+import { makeVDatePickerProps, VDatePicker } from '@/components/VDatePicker/VDatePicker'
+import { VMenu } from '@/components/VMenu/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
-import { VDateCard, VDatePicker } from '@/labs/VDatePicker'
 
 // Composables
-import { createDateInput, dateEmits, makeDateProps } from './composables'
-import { useDisplay } from '@/composables'
+import { useDate } from '@/composables/date'
+import { makeFocusProps, useFocus } from '@/composables/focus'
+import { useLocale } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { ref, watch } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { computed, shallowRef } from 'vue'
+import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
-
-export type VDateInputSlots = VTextFieldSlots
+export interface VDateInputSlots {
+  default: never
+}
 
 export const makeVDateInputProps = propsFactory({
-  mobile: Boolean,
+  hideActions: Boolean,
 
-  ...makeDateProps(),
+  ...makeFocusProps(),
+  ...makeVConfirmEditProps(),
   ...makeVTextFieldProps({
-    appendInnerIcon: '$calendar',
-    dirty: true,
     placeholder: 'mm/dd/yyyy',
+    prependIcon: '$calendar',
   }),
+  ...omit(makeVDatePickerProps({
+    weeksInMonth: 'dynamic' as const,
+    hideHeader: true,
+  }), ['active']),
 }, 'VDateInput')
 
-export const VDateInput = genericComponent<VDateInputSlots>()({
+export const VDateInput = genericComponent()({
   name: 'VDateInput',
 
   props: makeVDateInputProps(),
 
   emits: {
-    ...dateEmits,
+    'update:modelValue': (val: string) => true,
   },
 
   setup (props, { slots }) {
-    const { mobile } = useDisplay()
-    const { adapter, model, inputMode, viewMode, displayDate, parseKeyboardDate } = createDateInput(props, false)
+    const { t } = useLocale()
+    const adapter = useDate()
+    const { isFocused, focus, blur } = useFocus(props)
+    const model = useProxiedModel(props, 'modelValue', props.multiple ? [] : null)
+    const menu = shallowRef(false)
 
-    const dialog = ref(false)
-    const menu = ref(false)
-    const inputModel = ref(model.value.length ? adapter.format(model.value[0], 'keyboardDate') : '')
+    const display = computed(() => {
+      const value = wrapInArray(model.value)
 
-    function onBlur () {
-      const { isEqual } = adapter
-      const date = parseKeyboardDate(inputModel.value)
+      if (!value.length) return null
 
-      if (date && (!model.value[0] || !isEqual(date, model.value[0]))) {
-        model.value = date
-        displayDate.value = date
+      if (props.multiple === true) {
+        return t('$vuetify.datePicker.itemsSelected', value.length)
       }
-    }
 
-    watch(model, val => {
-      if (!val.length) return
+      if (props.multiple === 'range') {
+        const start = value[0]
+        const end = value[value.length - 1]
 
-      inputModel.value = adapter.format(val[0], 'keyboardDate')
+        return adapter.isValid(start) && adapter.isValid(end)
+          ? `${adapter.format(start, 'keyboardDate')} - ${adapter.format(end, 'keyboardDate')}`
+          : ''
+      }
+
+      return adapter.isValid(model.value) ? adapter.format(model.value, 'keyboardDate') : ''
     })
 
-    function onSave () {
-      dialog.value = false
-      menu.value = false
+    function onKeydown (e: KeyboardEvent) {
+      if (e.key !== 'Enter') return
+
+      if (!menu.value || !isFocused.value) {
+        menu.value = true
+
+        return
+      }
+
+      const target = e.target as HTMLInputElement
+
+      model.value = adapter.date(target.value)
     }
 
-    function onCancel () {
-      dialog.value = false
+    function onClick (e: MouseEvent) {
+      e.preventDefault()
+      e.stopPropagation()
+
+      menu.value = true
+    }
+
+    function onSave () {
       menu.value = false
     }
 
     useRender(() => {
-      const [textFieldProps] = VTextField.filterProps(props)
+      const confirmEditProps = VConfirmEdit.filterProps(props)
+      const datePickerProps = VDatePicker.filterProps(omit(props, ['active']))
+      const textFieldProps = VTextField.filterProps(props)
 
       return (
         <VTextField
           { ...textFieldProps }
-          class="v-date-input"
-          v-model={ inputModel.value }
-          onBlur={ onBlur }
+          modelValue={ display.value }
+          onKeydown={ onKeydown }
+          focused={ menu.value || isFocused.value }
+          onFocus={ focus }
+          onBlur={ blur }
+          onClick:control={ onClick }
+          onClick:prepend={ onClick }
         >
-          {{
-            ...slots,
-            default: () => !mobile.value ? (
-              <VMenu
-                v-model={ menu.value }
-                activator="parent"
-                closeOnContentClick={ false }
-                location="end bottom"
-                origin="top right"
-              >
-                <VDateCard
-                  v-model={ model.value }
-                  v-model:displayDate={ displayDate.value }
-                  v-model:inputMode={ inputMode.value }
-                  v-model:viewMode={ viewMode.value }
-                  onSave={ onSave }
-                  onCancel={ onCancel }
-                />
-              </VMenu>
-            ) : (
-              <VDialog
-                v-model={ dialog.value }
-                activator="parent"
-                contentClass="v-date-input__dialog-content"
-              >
-                {{
-                  default: ({ isActive }) => (
+          <VMenu
+            v-model={ menu.value }
+            activator="parent"
+            min-width="0"
+            closeOnContentClick={ false }
+            openOnClick={ false }
+          >
+            <VConfirmEdit
+              { ...confirmEditProps }
+              v-model={ model.value }
+              onSave={ onSave }
+            >
+              {{
+                default: ({ actions, model: proxyModel }) => {
+                  return (
                     <VDatePicker
-                      key="date-picker"
-                      v-model={ model.value }
-                      v-model:displayDate={ displayDate.value }
-                      v-model:inputMode={ inputMode.value }
-                      v-model:viewMode={ viewMode.value }
-                      onSave={ onSave }
-                      onCancel={ onCancel }
-                    />
-                  ),
-                }}
-              </VDialog>
-            ),
-          }}
+                      { ...datePickerProps }
+                      modelValue={ props.hideActions ? model.value : proxyModel.value }
+                      onUpdate:modelValue={ val => {
+                        if (!props.hideActions) {
+                          proxyModel.value = val
+                        } else {
+                          model.value = val
+
+                          if (!props.multiple) menu.value = false
+                        }
+                      }}
+                      onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                    >
+                      {{
+                        actions: !props.hideActions ? () => actions : undefined,
+                      }}
+                    </VDatePicker>
+                  )
+                },
+              }}
+            </VConfirmEdit>
+          </VMenu>
+
+          { slots.default?.() }
         </VTextField>
       )
     })

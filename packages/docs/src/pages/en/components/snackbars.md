@@ -8,19 +8,26 @@ related:
   - /components/buttons/
   - /styles/colors/
   - /components/forms/
+features:
+  github: /components/VSnackbar/
+  label: 'C: VSnackbar'
+  report: true
+  spec: https://m2.material.io/components/snackbars
 ---
 
 # Snackbars
 
 The `v-snackbar` component is used to display a quick message to a user. Snackbars support positioning, removal delay, and callbacks.
 
+<PageFeatures />
+
 ## Usage
 
 a `v-snackbar` in its simplest form displays a temporary and closable notification to the user.
 
-<example file="v-snackbar/usage" />
+<ExamplesExample file="v-snackbar/usage" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -29,7 +36,7 @@ a `v-snackbar` in its simplest form displays a temporary and closable notificati
 | [v-snackbar](/api/v-snackbar/) | Primary Component |
 | [v-btn](/api/v-btn/) | Sub-component typically used for actions |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Examples
 
@@ -39,22 +46,22 @@ a `v-snackbar` in its simplest form displays a temporary and closable notificati
 
 The **multi-line** property extends the height of the `v-snackbar` to give you a little more room for content.
 
-<example file="v-snackbar/prop-multi-line" />
+<ExamplesExample file="v-snackbar/prop-multi-line" />
 
 #### Timeout
 
 The **timeout** property lets you customize the delay before the `v-snackbar` is hidden.
 
-<example file="v-snackbar/prop-timeout" />
+<ExamplesExample file="v-snackbar/prop-timeout" />
 
 #### Variants
 
 Apply different styles to the snackbar using props such as **text**, **shaped**, **outlined**, and more.
 
-<example file="v-snackbar/prop-variants" />
+<ExamplesExample file="v-snackbar/prop-variants" />
 
 #### Vertical
 
 The **vertical** property allows you to stack the content of your `v-snackbar`.
 
-<example file="v-snackbar/prop-vertical" />
+<ExamplesExample file="v-snackbar/prop-vertical" />

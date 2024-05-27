@@ -1,9 +1,9 @@
 <template>
   <v-sheet
     ref="root"
-    :theme="isDark ? 'dark' : 'light'"
-    :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
+    :color="theme.name.value === 'light' && !user.mixedTheme ? 'surface-bright' : undefined"
     :rounded="rounded"
+    :theme="theme.name.value === 'light' && user.mixedTheme ? 'dark' : theme.name.value"
     class="app-markup overflow-hidden"
     dir="ltr"
   >
@@ -68,15 +68,8 @@
   import 'prismjs/components/prism-scss.js'
   import 'prismjs/components/prism-typescript.js'
 
-  // Composables
-  import { useI18n } from 'vue-i18n'
-  import { useTheme } from 'vuetify'
-  import { useUserStore } from '@/store/user'
-
-  // Utilities
-  import { ComponentPublicInstance, computed, ref, watchEffect } from 'vue'
-  import { wait } from '@/util/helpers'
-  import { stripLinks } from '@/components/api/utils'
+  // Types
+  import type { ComponentPublicInstance } from 'vue'
 
   const props = defineProps({
     resource: String,
@@ -131,11 +124,6 @@
 
     clicked.value = false
   }
-
-  const isDark = computed(() => {
-    return user.mixedTheme || theme.current.value.dark
-  })
-
 </script>
 
 <style lang="sass">
@@ -205,7 +193,11 @@
     pre.language-vue::after
       content: 'vue'
 
+    // TODO: handle this differently
+    &.v-theme--blackguard,
     &.v-theme--dark
+      --prism-interpolation: var(--prism-operator)
+
       code,
       pre
         color: #ccc !important

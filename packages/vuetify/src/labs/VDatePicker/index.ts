@@ -1,6 +1,0 @@
-export { VDateCard } from './VDateCard'
-export { VDatePicker } from './VDatePicker'
-export { VDatePickerControls } from './VDatePickerControls'
-export { VDatePickerHeader } from './VDatePickerHeader'
-export { VDatePickerMonth } from './VDatePickerMonth'
-export { VDatePickerYears } from './VDatePickerYears'

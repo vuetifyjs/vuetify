@@ -1,7 +1,12 @@
 export default {
   badge: 'Distintivo',
-  open: 'Open',
+  open: 'Apri',
   close: 'Chiudi',
+  dismiss: 'Dismiss',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Annulla',
+  },
   dataIterator: {
     noResultsText: 'Nessun risultato trovato',
     loadingText: 'Caricamento in corso...',
@@ -28,19 +33,18 @@ export default {
     pageText: '{0}-{1} di {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'a',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} selected',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Seleziona date',
+      header: 'Inserisci date',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Seleziona data',
+    header: 'Inserisci data',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Inserisci data',
     },
   },
   noDataText: 'Nessun elemento disponibile',
@@ -48,17 +52,18 @@ export default {
     prev: 'Vista precedente',
     next: 'Prossima vista',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} di {1}',
+      delimiter: 'Slide carosello {0} di {1}',
     },
   },
   calendar: {
     moreEvents: '{0} di più',
+    today: 'Today',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Cancella {0}',
+    prependAction: 'Azione precedente {0}',
+    appendAction: 'Azione successiva {0}',
+    otp: 'Inserisci il codice OTP {0}',
   },
   fileInput: {
     counter: '{0} file',
@@ -67,6 +72,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
@@ -75,22 +81,22 @@ export default {
       previous: 'Pagina precedente',
       page: 'Vai alla pagina {0}',
       currentPage: 'Pagina corrente, pagina {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Prima pagina',
+      last: 'Ultima pagina',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Successivo',
+    prev: 'Precedente',
   },
   rating: {
     ariaLabel: {
       item: 'Valutazione {0} di {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Caricamento...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Carica altro',
+    empty: 'Nessun elemento',
   },
 }

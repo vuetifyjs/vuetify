@@ -8,17 +8,20 @@ import { VMessages } from '@/components/VMessages/VMessages'
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { IconValue } from '@/composables/icons'
 import { useRtl } from '@/composables/locale'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
 import { computed } from 'vue'
-import { EventProp, genericComponent, getUid, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, getUid, only, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
 import type { VMessageSlot } from '@/components/VMessages/VMessages'
+import type { GenericProps } from '@/util'
 
 export interface VInputSlot {
   id: ComputedRef<string>
@@ -43,6 +46,7 @@ export const makeVInputProps = propsFactory({
   },
   prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
+  hideSpinButtons: Boolean,
   hint: String,
   persistentHint: Boolean,
   messages: {
@@ -60,6 +64,12 @@ export const makeVInputProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeDensityProps(),
+  ...only(makeDimensionProps(), [
+    'maxWidth',
+    'minWidth',
+    'width',
+  ]),
+  ...makeThemeProps(),
   ...makeValidationProps(),
 }, 'VInput')
 
@@ -71,7 +81,13 @@ export type VInputSlots = {
   message: VMessageSlot
 }
 
-export const VInput = genericComponent<VInputSlots>()({
+export const VInput = genericComponent<new <T>(
+  props: {
+    modelValue?: T | null
+    'onUpdate:modelValue'?: (value: T | null) => void
+  },
+  slots: VInputSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VInput',
 
   props: {
@@ -79,11 +95,13 @@ export const VInput = genericComponent<VInputSlots>()({
   },
 
   emits: {
-    'update:modelValue': (val: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { attrs, slots, emit }) {
     const { densityClasses } = useDensity(props)
+    const { dimensionStyles } = useDimension(props)
+    const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
     const { InputIcon } = useInputIcon(props)
 
@@ -145,13 +163,18 @@ export const VInput = genericComponent<VInputSlots>()({
             `v-input--${props.direction}`,
             {
               'v-input--center-affix': props.centerAffix,
+              'v-input--hide-spin-buttons': props.hideSpinButtons,
             },
             densityClasses.value,
+            themeClasses.value,
             rtlClasses.value,
             validationClasses.value,
             props.class,
           ]}
-          style={ props.style }
+          style={[
+            dimensionStyles.value,
+            props.style,
+          ]}
         >
           { hasPrepend && (
             <div key="prepend" class="v-input__prepend">
@@ -205,6 +228,8 @@ export const VInput = genericComponent<VInputSlots>()({
       reset,
       resetValidation,
       validate,
+      isValid,
+      errorMessages,
     }
   },
 })

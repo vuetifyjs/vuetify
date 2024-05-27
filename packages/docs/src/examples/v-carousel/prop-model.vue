@@ -2,14 +2,14 @@
   <div>
     <div class="d-flex justify-space-around align-center py-4">
       <v-btn
-        variant="text"
         icon="mdi-minus"
+        variant="text"
         @click="model = Math.max(model - 1, 0)"
       ></v-btn>
       {{ model }}
       <v-btn
-        variant="text"
         icon="mdi-plus"
+        variant="text"
         @click="model = Math.min(model + 1, 4)"
       ></v-btn>
     </div>

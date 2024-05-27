@@ -1,8 +1,10 @@
 {
   "props": {
-    "selectStrategy": "Affects how items with children behave when selected.\n- **leaf:** Only leaf nodes (items without children) can be selected.\n- **independent:** All nodes can be selected whether they have children or not.\n- **classic:** Selecting a parent node will cause all children to be selected, parent nodes will be displayed as selected if all their descendants are selected. Only leaf nodes will be added to the model.",
-    "openStrategy": "Affects how items with children behave when expanded.\n- **multiple:** Any number of groups can be open at once.\n- **single:** Only one group at each level can be open, opening a group will cause others to close.\n- **list:** Multiple, but all other groups will close when an item is selected.",
+    "activated": "Array of ids of activated nodes.",
+    "activeStrategy": "Affects how items with children behave when activated.\n- **leaf:** Only leaf nodes (items without children) can be activated.\n- **independent:** All nodes can be activated whether they have children or not.\n- **classic:** Activating a parent node will cause all children to be activated.",
     "opened": "An array containing the values of currently opened groups. Can be two-way bound with `v-model:opened`.",
-    "selected": "An array containing the values of currently selected items. Can be two-way bound with `v-model:selected`."
+    "openStrategy": "Affects how items with children behave when expanded.\n- **multiple:** Any number of groups can be open at once.\n- **single:** Only one group at each level can be open, opening a group will cause others to close.\n- **list:** Multiple, but all other groups will close when an item is selected.",
+    "selected": "An array containing the values of currently selected items. Can be two-way bound with `v-model:selected`.",
+    "selectStrategy": "Affects how items with children behave when selected.\n- **leaf:** Only leaf nodes (items without children) can be selected.\n- **independent:** All nodes can be selected whether they have children or not.\n- **classic:** Selecting a parent node will cause all children to be selected, parent nodes will be displayed as selected if all their descendants are selected. Only leaf nodes will be added to the model."
   }
 }

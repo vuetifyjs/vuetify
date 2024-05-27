@@ -1,37 +1,21 @@
 <template>
   <v-card>
-    <v-toolbar
-      color="primary"
-    >
-      <v-toolbar-title>User Profile</v-toolbar-title>
+    <v-toolbar color="primary" title="User Profile">
     </v-toolbar>
+
     <div class="d-flex flex-row">
       <v-tabs
         v-model="tab"
-        direction="vertical"
         color="primary"
+        direction="vertical"
       >
-        <v-tab value="option-1">
-          <v-icon start>
-            mdi-account
-          </v-icon>
-          Option 1
-        </v-tab>
-        <v-tab value="option-2">
-          <v-icon start>
-            mdi-lock
-          </v-icon>
-          Option 2
-        </v-tab>
-        <v-tab value="option-3">
-          <v-icon start>
-            mdi-access-point
-          </v-icon>
-          Option 3
-        </v-tab>
+        <v-tab prepend-icon="mdi-account" text="Option 1" value="option-1"></v-tab>
+        <v-tab prepend-icon="mdi-lock" text="Option 2" value="option-2"></v-tab>
+        <v-tab prepend-icon="mdi-access-point" text="Option 3" value="option-3"></v-tab>
       </v-tabs>
-      <v-window v-model="tab">
-        <v-window-item value="option-1">
+
+      <v-tabs-window v-model="tab">
+        <v-tabs-window-item value="option-1">
           <v-card flat>
             <v-card-text>
               <p>
@@ -47,8 +31,9 @@
               </p>
             </v-card-text>
           </v-card>
-        </v-window-item>
-        <v-window-item value="option-2">
+        </v-tabs-window-item>
+
+        <v-tabs-window-item value="option-2">
           <v-card flat>
             <v-card-text>
               <p>
@@ -72,8 +57,9 @@
               </p>
             </v-card-text>
           </v-card>
-        </v-window-item>
-        <v-window-item value="option-3">
+        </v-tabs-window-item>
+
+        <v-tabs-window-item value="option-3">
           <v-card flat>
             <v-card-text>
               <p>
@@ -85,8 +71,8 @@
               </p>
             </v-card-text>
           </v-card>
-        </v-window-item>
-      </v-window>
+        </v-tabs-window-item>
+      </v-tabs-window>
     </div>
   </v-card>
 </template>

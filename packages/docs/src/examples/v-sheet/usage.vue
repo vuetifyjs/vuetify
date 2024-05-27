@@ -1,16 +1,11 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :name="name"
     :options="options"
   >
-    <div
-      class="py-8"
-      :class="[
-        !border && (isDark ? 'bg-grey-darken-3' : 'bg-grey-lighten-3')
-      ]"
-    >
+    <div class="py-8 bg-surface-bright">
       <v-sheet
         v-if="sheet"
         v-model="sheet"
@@ -49,19 +44,14 @@
       <v-slider
         v-model="elevation"
         label="Elevation"
-        min="0"
         max="24"
+        min="0"
       ></v-slider>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-  import { useUserStore } from '../../store/user'
-
   const name = 'v-sheet'
   const model = ref('default')
   const sheet = ref(true)
@@ -69,7 +59,6 @@
   const elevation = ref(0)
   const rounded = ref(false)
   const color = ref()
-  const user = useUserStore()
   const options = []
   const props = computed(() => {
     return {
@@ -80,10 +69,6 @@
       color: color.value || undefined,
       rounded: rounded.value || undefined,
     }
-  })
-
-  const isDark = computed(() => {
-    return user.theme === 'dark'
   })
 
   const slots = computed(() => {

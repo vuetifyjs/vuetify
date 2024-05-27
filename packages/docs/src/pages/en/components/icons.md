@@ -11,21 +11,27 @@ related:
 assets:
   - https://use.fontawesome.com/releases/v5.0.13/css/all.css
   - https://fonts.googleapis.com/icon?family=Material+Icons
+features:
+  figma: true
+  github: /components/VIcon/
+  label: 'C: VIcon'
+  report: true
+  spec: https://m2.material.io/design/iconography/system-icons.html
 ---
 
 # Icons
 
 The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. For a list of all available icons, visit the official [Material Design Icons](https://materialdesignicons.com/) page. To use any of these icons simply use the `mdi-` prefix followed by the icon name.
 
-----
+<PageFeatures />
 
 ## Usage
 
 Icons come in two themes (light and dark), and five different sizes (x-small, small, medium (default), large, and x-large).
 
-<usage name="v-icon" />
+<ExamplesUsage name="v-icon" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -33,7 +39,7 @@ Icons come in two themes (light and dark), and five different sizes (x-small, sm
 | - | - |
 | [v-icon](/api/v-icon/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Examples
 
@@ -43,7 +49,7 @@ Icons come in two themes (light and dark), and five different sizes (x-small, sm
 
 Using color helpers you can change the color of an icon from the standard dark and light themes.
 
-<example file="v-icon/prop-color" />
+<ExamplesExample file="v-icon/prop-color" />
 
 <!-- ### Events
 
@@ -51,7 +57,7 @@ Using color helpers you can change the color of an icon from the standard dark a
 
 Binding any click event to `v-icon` will automatically change the cursor to a pointer.
 
-<example file="v-icon/event-click" /> -->
+<ExamplesExample file="v-icon/event-click" /> -->
 
 ### Misc
 
@@ -59,7 +65,7 @@ Binding any click event to `v-icon` will automatically change the cursor to a po
 
 Icons can be used inside of buttons to add emphasis to the action.
 
-<example file="v-icon/misc-buttons" />
+<ExamplesExample file="v-icon/misc-buttons" />
 
 #### Font Awesome
 
@@ -69,7 +75,7 @@ Icons can be used inside of buttons to add emphasis to the action.
   Note that this example is using an icon set prefix, because the default icon set in the documentation is `mdi`. You can read more about using multiple icon sets [here](/features/icon-fonts/#multiple-icon-sets)
 :::
 
-<example file="v-icon/misc-font-awesome" />
+<ExamplesExample file="v-icon/misc-font-awesome" />
 
 #### Material Design
 
@@ -79,7 +85,7 @@ Icons can be used inside of buttons to add emphasis to the action.
   Note that this example is using an icon set prefix, because the default icon set in the documentation is `mdi`. You can read more about using multiple icon sets [here](/features/icon-fonts/#multiple-icon-sets)
 :::
 
-<example file="v-icon/misc-md" />
+<ExamplesExample file="v-icon/misc-md" />
 
 #### MDI SVG
 
@@ -89,7 +95,7 @@ You can manually import only the icons you use when using the [@mdi/js](https://
   Note that this example is using an icon set prefix, because the default icon set in the documentation is `mdi`. You can read more about using multiple icon sets [here](/features/icon-fonts/#multiple-icon-sets)
 :::
 
-<example file="v-icon/misc-mdi-svg" />
+<ExamplesExample file="v-icon/misc-mdi-svg" />
 
 ## Accessibility
 

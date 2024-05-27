@@ -2,6 +2,11 @@ export default {
   badge: 'Bricka',
   open: 'Open',
   close: 'Stäng',
+  dismiss: 'Dismiss',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Avbryt',
+  },
   dataIterator: {
     noResultsText: 'Hittade inga poster',
     loadingText: 'Laddar data...',
@@ -31,8 +36,7 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Avbryt',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Välj datum',
       header: 'Välj datum',
@@ -53,6 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} fler',
+    today: 'Today',
   },
   input: {
     clear: 'Rensa {0}',
@@ -67,6 +72,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
