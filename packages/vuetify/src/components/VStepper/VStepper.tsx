@@ -13,6 +13,7 @@ import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 
 // Composables
 import { provideDefaults } from '@/composables/defaults'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeGroupProps, useGroup } from '@/composables/group'
 
 // Utilities
@@ -61,9 +62,10 @@ export const makeStepperProps = propsFactory({
     type: String,
     default: 'value',
   },
-  mobile: Boolean,
   nonLinear: Boolean,
   flat: Boolean,
+
+  ...makeDisplayProps(),
 }, 'Stepper')
 
 export const makeVStepperProps = propsFactory({
@@ -87,6 +89,7 @@ export const VStepper = genericComponent<VStepperSlots>()({
 
   setup (props, { slots }) {
     const { items: _items, next, prev, selected } = useGroup(props, VStepperSymbol)
+    const { displayClasses, mobile } = useDisplay(props)
     const { color, editable, prevText, nextText } = toRefs(props)
 
     const items = computed(() => props.items.map((item, index) => {
@@ -141,8 +144,9 @@ export const VStepper = genericComponent<VStepperSlots>()({
               'v-stepper--alt-labels': props.altLabels,
               'v-stepper--flat': props.flat,
               'v-stepper--non-linear': props.nonLinear,
-              'v-stepper--mobile': props.mobile,
+              'v-stepper--mobile': mobile.value,
             },
+            displayClasses.value,
             props.class,
           ]}
           style={ props.style }
