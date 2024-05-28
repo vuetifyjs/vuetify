@@ -38,7 +38,10 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
   return mergeDeep({
     aliases: {
       required: (err?: string) => {
-        return (v: any) => !!v || t(err || '$vuetify.rules.required')
+        (v: any) => {
+          // If the modifier .number is used, the 0 will be a number and it's a falsy value so we need to check for it
+          return v === 0 || !!v || t(err || '$vuetify.rules.required')
+        }
       },
       email: (err?: string) => {
         return (v: any) => (!v || (typeof v === 'string' && /^.+@\S+\.\S+$/.test(v))) || t(err || '$vuetify.rules.email')
