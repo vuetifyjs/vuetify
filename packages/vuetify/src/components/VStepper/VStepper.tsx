@@ -48,7 +48,10 @@ export type VStepperSlots = {
 export const makeStepperProps = propsFactory({
   altLabels: Boolean,
   bgColor: String,
+  completeIcon: String,
+  editIcon: String,
   editable: Boolean,
+  errorIcon: String,
   hideActions: Boolean,
   items: {
     type: Array as PropType<readonly StepperItem[]>,
@@ -90,7 +93,7 @@ export const VStepper = genericComponent<VStepperSlots>()({
   setup (props, { slots }) {
     const { items: _items, next, prev, selected } = useGroup(props, VStepperSymbol)
     const { displayClasses, mobile } = useDisplay(props)
-    const { color, editable, prevText, nextText } = toRefs(props)
+    const { completeIcon, editIcon, errorIcon, color, editable, prevText, nextText } = toRefs(props)
 
     const items = computed(() => props.items.map((item, index) => {
       const title = getPropertyFromItem(item, props.itemTitle, item)
@@ -116,6 +119,9 @@ export const VStepper = genericComponent<VStepperSlots>()({
     provideDefaults({
       VStepperItem: {
         editable,
+        errorIcon,
+        completeIcon,
+        editIcon,
         prevText,
         nextText,
       },
