@@ -38,7 +38,12 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
   return mergeDeep({
     aliases: {
       required: (err?: string) => {
-        return (v: any) => !!v || t(err || '$vuetify.rules.required')
+        (v: any) => {
+          if (typeof v === 'number') {
+            return !!v.toString() || t(err || '$vuetify.rules.required')
+          }
+          return !!v || t(err || '$vuetify.rules.required')
+        }
       },
       email: (err?: string) => {
         return (v: any) => (!v || (typeof v === 'string' && /^.+@\S+\.\S+$/.test(v))) || t(err || '$vuetify.rules.email')
