@@ -39,10 +39,8 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
     aliases: {
       required: (err?: string) => {
         (v: any) => {
-          if (typeof v === 'number') {
-            return !!v.toString() || t(err || '$vuetify.rules.required')
-          }
-          return !!v || t(err || '$vuetify.rules.required')
+          // If the modifier .number is used, the 0 will be a number and it's a falsy value so we need to check for it
+          return v === 0 || !!v || t(err || '$vuetify.rules.required')
         }
       },
       email: (err?: string) => {
