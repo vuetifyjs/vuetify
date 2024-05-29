@@ -34,7 +34,7 @@ export const makeVTreeviewProps = propsFactory({
   ...omit(makeVListProps({
     collapseIcon: '$treeviewCollapse',
     expandIcon: '$treeviewExpand',
-    selectStrategy: 'independent' as const,
+    selectStrategy: 'classic' as const,
     openStrategy: 'multiple' as const,
     slim: true,
   }), ['nav']),

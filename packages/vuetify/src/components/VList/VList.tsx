@@ -22,7 +22,7 @@ import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
 import { computed, ref, shallowRef, toRef } from 'vue'
-import { focusChild, genericComponent, getPropertyFromItem, omit, propsFactory, useRender } from '@/util'
+import { EventProp, focusChild, genericComponent, getPropertyFromItem, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -95,6 +95,8 @@ export const makeVListProps = propsFactory({
   slim: Boolean,
   nav: Boolean,
 
+  'onClick:open': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
+  'onClick:select': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
   ...makeNestedProps({
     selectStrategy: 'single-leaf' as const,
     openStrategy: 'list' as const,
@@ -130,6 +132,8 @@ export const VList = genericComponent<new <
     itemProps?: SelectItemKey<ItemType<T>>
     selected?: S
     'onUpdate:selected'?: (value: S) => void
+    'onClick:open'?: (value: { id: unknown, value: boolean, path: unknown[] }) => void
+    'onClick:select'?: (value: { id: unknown, value: boolean, path: unknown[] }) => void
     opened?: O
     'onUpdate:opened'?: (value: O) => void
   },
