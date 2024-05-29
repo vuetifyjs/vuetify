@@ -7,6 +7,8 @@ related:
   - /styles/content/
   - /styles/flex/
   - /styles/text-and-typography/
+features:
+  report: true
 ---
 
 # Sizing
