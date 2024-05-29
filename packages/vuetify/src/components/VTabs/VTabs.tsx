@@ -144,7 +144,7 @@ export const VTabs = genericComponent<VTabsSlots>()({
                   key={ item.text }
                   value={ item.value }
                   v-slots={{
-                    default: () => slots[`tab.${item.value}`]?.({ item }),
+                    default: slots[`tab.${item.value}`] ? () => slots[`tab.${item.value}`]?.({ item }) : undefined,
                   }}
                 />
               )
