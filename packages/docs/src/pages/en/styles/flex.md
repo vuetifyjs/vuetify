@@ -7,6 +7,8 @@ related:
   - /styles/display/
   - /components/grids/
   - /styles/css-reset/
+features:
+  report: true
 ---
 
 # Flex

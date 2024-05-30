@@ -8,6 +8,7 @@ import { VDivider } from '../../components/VDivider'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
+import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -71,16 +72,24 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const stepDecimals = computed(() => getDecimals(props.step))
     const modelDecimals = computed(() => model.value != null ? getDecimals(model.value) : 0)
 
+    const form = useForm()
+    const controlsDisabled = computed(() => (
+      props.disabled || props.readonly || form?.isReadonly.value
+    ))
+
     const canIncrease = computed(() => {
+      if (controlsDisabled.value) return false
       if (model.value == null) return true
       return model.value + props.step <= props.max
     })
     const canDecrease = computed(() => {
+      if (controlsDisabled.value) return false
       if (model.value == null) return true
       return model.value - props.step >= props.min
     })
 
     watchEffect(() => {
+      if (controlsDisabled.value) return
       if (model.value != null && (model.value < props.min || model.value > props.max)) {
         model.value = clamp(model.value, props.min, props.max)
       }
@@ -95,6 +104,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const decrementSlotProps = computed(() => ({ click: onClickDown }))
 
     function toggleUpDown (increment = true) {
+      if (controlsDisabled.value) return
       if (model.value == null) {
         model.value = 0
         return
