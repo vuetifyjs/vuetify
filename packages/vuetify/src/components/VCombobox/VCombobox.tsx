@@ -290,8 +290,8 @@ export const VCombobox = genericComponent<new <
         menu.value = false
       }
 
-      if (['Enter', 'Escape', 'Tab'].includes(e.key)) {
-        if (highlightFirst.value && ['Enter', 'Tab'].includes(e.key)) {
+      if (['Enter', 'Escape'].includes(e.key)) {
+        if (highlightFirst.value && e.key === 'Enter') {
           select(filteredItems.value[0])
         }
 
@@ -684,6 +684,7 @@ export const VCombobox = genericComponent<new <
                     onClick={ noop }
                     aria-label={ t(label.value) }
                     title={ t(label.value) }
+                    tabindex="-1"
                   />
                 ) : undefined }
               </>

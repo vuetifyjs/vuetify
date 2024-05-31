@@ -7,6 +7,8 @@ related:
   - /features/accessibility/
   - /features/treeshaking/
   - /features/blueprints/
+features:
+  report: true
 ---
 
 # Global configuration

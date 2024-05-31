@@ -41,7 +41,7 @@ Avatars in their simplest form display content within a circular container.
 
 The recommended placement of elements inside of `v-avatar` is:
 
-* Place a [v-img](/components/images/) or [v-icon](/components/images/) component within the default *slot*
+* Place a [v-img](/components/images/) or [v-icon](/components/icons/) component within the default *slot*
 * Place textual content within the default *slot*
 
 ![Avatar Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-avatar/v-avatar-anatomy.png)

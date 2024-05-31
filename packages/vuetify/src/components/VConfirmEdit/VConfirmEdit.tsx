@@ -16,6 +16,9 @@ import type { GenericProps } from '@/util'
 export type VConfirmEditSlots<T> = {
   default: {
     model: Ref<T>
+    save: () => void
+    cancel: () => void
+    isPristine: boolean
     get actions (): VNode
   }
 }
@@ -100,6 +103,9 @@ export const VConfirmEdit = genericComponent<new <T> (
           {
             slots.default?.({
               model: internalModel,
+              save,
+              cancel,
+              isPristine: isPristine.value,
               get actions () {
                 actionsUsed = true
                 return actions
@@ -111,6 +117,12 @@ export const VConfirmEdit = genericComponent<new <T> (
         </>
       )
     })
+
+    return {
+      save,
+      cancel,
+      isPristine,
+    }
   },
 })
 

@@ -7,6 +7,8 @@ related:
   - /styles/text-and-typography/
   - /styles/display/
   - /styles/spacing/
+features:
+  report: true
 ---
 
 # Content

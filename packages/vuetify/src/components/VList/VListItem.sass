@@ -319,7 +319,7 @@
   .v-list-group__items .v-list-item
     padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
 
-  .v-list-group__header.v-list-item--active
+  .v-list-group__header:not(.v-treeview-item--activetable-group-activator).v-list-item--active
     &:not(:focus-visible)
       .v-list-item__overlay
         opacity: 0

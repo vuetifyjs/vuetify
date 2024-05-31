@@ -8,6 +8,8 @@ related:
   - /styles/display/
   - /styles/spacing/
   - /styles/flex/
+features:
+  report: true
 ---
 
 # Position

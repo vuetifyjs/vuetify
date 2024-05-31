@@ -79,6 +79,7 @@ export const makeVAutocompleteProps = propsFactory({
   },
   clearOnSelect: Boolean,
   search: String,
+  disableSelectOnBackspace: Boolean,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...makeSelectProps(),
@@ -238,7 +239,7 @@ export const VAutocomplete = genericComponent<new <
         menu.value = false
       }
 
-      if (highlightFirst.value && ['Enter', 'Tab'].includes(e.key)) {
+      if (highlightFirst.value && e.key === 'Enter') {
         select(displayItems.value[0])
       }
 
@@ -259,7 +260,7 @@ export const VAutocomplete = genericComponent<new <
           select(model.value[selectionIndex.value], false)
 
           selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
-        } else if (e.key === 'Backspace' && !search.value) {
+        } else if (e.key === 'Backspace' && !search.value && !props.disableSelectOnBackspace) {
           selectionIndex.value = length - 1
         }
       }
@@ -377,7 +378,7 @@ export const VAutocomplete = genericComponent<new <
           select(displayItems.value[0])
         }
         menu.value = false
-        search.value = ''
+        if (props.multiple || hasSelectionSlot.value) search.value = ''
         selectionIndex.value = -1
       }
     })
@@ -638,6 +639,7 @@ export const VAutocomplete = genericComponent<new <
                     onClick={ noop }
                     aria-label={ t(label.value) }
                     title={ t(label.value) }
+                    tabindex="-1"
                   />
                 ) : undefined }
               </>
