@@ -5,7 +5,8 @@
     "itemChildren": "This property currently has **no effect**.",
     "filter": "The filtering algorithm used when searching. [example](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L40).",
     "items": "Can be an array of objects or strings. By default objects should have **title** and **value** properties, and can optionally have a **props** property containing any [VListItem props](/api/v-list-item/#props). Keys to use for these can be changed with the **item-title**, **item-value**, and **item-props** props.",
-    "noFilter": "Do not apply filtering when searching. Useful when data is being filtered server side."
+    "noFilter": "Do not apply filtering when searching. Useful when data is being filtered server side.",
+    "disableSelectOnBackspace": "Do not select last item when backspace key is pressed and search is empty."
   },
   "slots": {
     "item": "Define a custom item appearance. The root element of this slot must be a **v-list-item** with `v-bind=\"props\"` applied. `props` includes everything required for the default select list behaviour - including title, value, click handlers, virtual scrolling, and anything else that has been added with `item-props`."
