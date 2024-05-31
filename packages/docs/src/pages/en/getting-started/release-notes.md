@@ -16,6 +16,6 @@ The Vuetify team performs releases on a weekly basis.
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify />
+<VoPromotionsCardVuetify slug="vuetify-one" />
 
 <DocReleases />
