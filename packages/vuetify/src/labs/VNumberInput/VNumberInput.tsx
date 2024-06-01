@@ -68,6 +68,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const textModel = ref<string | null>(null)
+    const isTyping = ref(false)
 
     const stepDecimals = computed(() => getDecimals(props.step))
     const modelDecimals = computed(() => model.value != null ? getDecimals(model.value) : 0)
@@ -129,11 +130,13 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
       if (['ArrowDown'].includes(e.key)) {
         e.preventDefault()
+        isTyping.value = false
         toggleUpDown(false)
         return
       }
       if (['ArrowUp'].includes(e.key)) {
         e.preventDefault()
+        isTyping.value = false
         toggleUpDown()
         return
       }
@@ -142,11 +145,13 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (!/^[0-9\-+.]+$/.test(e.key)) {
         e.preventDefault()
       }
+      isTyping.value = true
     }
 
     function syncTextModel () {
+      if (isTyping.value) return
       textModel.value = typeof model.value === 'number' && !isNaN(model.value)
-        ? String(model.value)
+        ? model.value.toFixed(getDecimals(model.value))
         : null
     }
 
@@ -158,6 +163,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     async function onBlur (e: FocusEvent) {
+      isTyping.value = false
       syncTextModel()
     }
 
