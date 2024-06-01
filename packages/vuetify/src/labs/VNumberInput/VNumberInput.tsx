@@ -123,6 +123,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     function onKeydown (e: KeyboardEvent) {
+      isTyping.value = true
+
       if (
         ['Enter', 'ArrowLeft', 'ArrowRight', 'Backspace', 'Tab'].includes(e.key) ||
         e.ctrlKey
@@ -145,7 +147,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (!/^[0-9\-+.]+$/.test(e.key)) {
         e.preventDefault()
       }
-      isTyping.value = true
     }
 
     function syncTextModel () {

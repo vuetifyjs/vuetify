@@ -149,5 +149,17 @@ describe('VNumberInput', () => {
         cy.get('.v-number-input input').blur().should('have.value', expected)
       })
     })
+
+    it('should not interrupt typing float numbers', () => {
+      const scenarios = [
+        { text: '0.12{backspace}{backspace}89', expected: '0.89' },
+        { text: '-.{backspace}25.{backspace}0.50{backspace}{backspace}99', expected: '-250.99' },
+      ]
+      scenarios.forEach(({ text, expected }) => {
+        cy.mount(() => <VNumberInput />)
+        cy.get('.v-number-input input').focus().realType(text)
+        cy.get('.v-number-input input').blur().should('have.value', expected)
+      })
+    })
   })
 })
