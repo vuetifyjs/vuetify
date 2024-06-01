@@ -7,14 +7,19 @@
   >
     <v-divider
       class="border-opacity-100"
-      color="#6458f2"
+      color="primary"
       thickness="4"
     />
 
-    <v-container class="pt-9 px-5" fluid>
+    <v-container class="py-9 px-5" fluid>
       <v-row justify="space-around" dense>
         <template v-for="(tier, i) in tiers" :key="i">
-          <v-col cols="12" md="4">
+          <v-col
+            :class="i === 1 && 'bg-primary'"
+            class="position-relative pa-4 rounded-lg"
+            cols="12"
+            md="4"
+          >
             <v-responsive :min-height="mdAndUp ? 96 : undefined" class="mb-4">
               <h3 class="d-flex align-center text-h6 font-weight-medium mb-4">
                 <v-avatar :image="tier.src" class="me-3" />
@@ -23,17 +28,17 @@
                   {{ tier.name }}
 
                   <div class="text-h5 font-weight-bold">
-                    {{ tier.price }}<span v-if="tier.suffix" class="font-weight-medium text-medium-emphasis text-body-2">{{ tier.suffix }}</span>
+                    {{ tier.price }}<span v-if="tier.suffix" class="font-weight-medium opacity-60 text-body-2">{{ tier.suffix }}</span>
                   </div>
                 </div>
               </h3>
 
               <v-btn
+                :color="i === 1 ? 'surface' : 'primary'"
                 :href="tier.href"
                 :text="tierText(tier)"
                 :variant="i === 1 ? 'flat' : 'outlined'"
                 class="mb-6 text-none"
-                color="#6458f2"
                 rel="noopener"
                 target="_blank"
                 block
@@ -51,7 +56,7 @@
                 <div>
                   <strong>{{ benefit.name }}</strong>
 
-                  <div>
+                  <div class="opacity-60">
                     {{ benefit.text }}
                   </div>
                 </div>
@@ -61,14 +66,6 @@
         </template>
       </v-row>
     </v-container>
-
-    <div class="px-4 pb-3 text-medium-emphasis text-caption">
-      *View more detailed information on our <AppLink
-        href="https://discord.com/servers/vuetify-340160225338195969"
-      >
-        Discord Welcome Page
-      </AppLink>
-    </div>
   </v-sheet>
 </template>
 
@@ -77,61 +74,60 @@
 
   const tiers = [
     {
-      name: 'Wood Tier',
-      price: '$2.99',
+      name: 'Galaxy Tier',
+      price: '$250',
       suffix: '/mo',
-      trial: true,
-      href: 'https://discord.com/invite/jZq4rzazEr',
-      src: 'https://cdn.vuetifyjs.com/docs/images/discord/tiers/wood.png',
-      text: 'Get access to sponsor only chat and help channels.',
+      href: 'https://buy.stripe.com/cN2fZOfIE7xc4iA288',
+      src: 'https://cdn.vuetifyjs.com/docs/images/avatars/galaxy.png',
+      text: '🥉 For 2 developers',
       benefits: [
         {
-          name: '#subscribers',
-          text: 'Say hello and talk to other developers in this private subscriber only channel.',
-          emoji: '💪',
+          name: 'Chat support',
+          text: 'Get a private Discord channel where your developers can ask questions directly to the Core Team.',
+          emoji: '💬',
         },
         {
-          name: '#subscriber-help',
-          text: 'Get priority help in our Subscriber only help channel.',
-          emoji: '🚑',
+          name: 'Same day response',
+          text: 'Questions are answered within 24 hours, Monday through Friday.',
+          emoji: '🕒',
         },
       ],
     },
     {
-      name: 'Gold Tier',
-      price: '$19.99',
+      name: 'Cosmic Tier',
+      price: '$500',
       suffix: '/mo',
-      href: 'https://discord.com/invite/jZq4rzazEr',
-      src: 'https://cdn.vuetifyjs.com/docs/images/discord/tiers/gold.png',
-      text: 'Get access to our daily Vuetify development updates.',
+      href: 'https://buy.stripe.com/7sIfZO0NK3gW3ewfYZ',
+      src: 'https://cdn.vuetifyjs.com/docs/images/avatars/cosmic.png',
+      text: '🥈 For up to 5 developers',
       benefits: [
         {
-          text: 'Every channel in Wood Tier plus:',
-          emoji: '🪵',
+          name: 'Everything in Galaxy Tier, plus:',
+          emoji: '💫',
         },
         {
-          name: '🔥dev-stream',
-          text: 'Inside peek of current Vuetify development.',
-          emoji: '🎉',
+          name: 'Priority bug fixes',
+          text: 'Get priority on reported or identified Vuetify GitHub issues.',
+          emoji: '🎯',
         },
       ],
     },
     {
-      name: 'Planetary Tier',
-      price: '$99.99',
+      name: 'Multiverse Tier',
+      price: '$1,000',
       suffix: '/mo',
-      href: 'https://discord.com/invite/jZq4rzazEr',
-      src: 'https://cdn.vuetifyjs.com/docs/images/discord/tiers/planetary.png',
-      text: 'Get help directly from the Core team with a private help channel.',
+      href: 'https://buy.stripe.com/8wMeVKeEA04K8yQeUW',
+      src: 'https://cdn.vuetifyjs.com/docs/images/avatars/multiverse.png',
+      text: '🥇 For up to 15 developers',
       benefits: [
         {
-          text: 'Every channel in Gold Tier plus:',
-          emoji: '🥇',
+          name: 'Everything in Cosmic Tier, plus:',
+          emoji: '💫',
         },
         {
-          name: 'Private Help Channel',
-          text: 'Get a private help channel where you can ask questions to the Core Team.',
-          emoji: '🔨',
+          name: 'Monthly strategy session',
+          text: 'A monthly strategy session to discuss your project and how to best utilize Vuetify.',
+          emoji: '📅',
         },
       ],
     },
