@@ -8,7 +8,7 @@ $table-background: rgb(var(--v-theme-surface)) !default;
 $table-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $table-density: ('default': 0, 'comfortable': -2, 'compact': -4) !default;
 $table-header-height: 56px !default;
-$table-header-font-weight: 500 !default;
+$table-header-font-weight: 700 !default;
 $table-header-font-size: tools.map-deep-get(settings.$typography, 'caption', 'size') !default;
 $table-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size') !default;
 $table-row-height: 52px !default;
