@@ -204,13 +204,11 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
               >
                 <table>
                   { slots.colgroup?.(slotProps.value) }
-                  <thead>
-                    <VDataTableHeaders
-                      { ...dataTableHeadersProps }
-                      sticky={ props.fixedHeader }
-                      v-slots={ slots }
-                    />
-                  </thead>
+                  <VDataTableHeaders
+                    { ...dataTableHeadersProps }
+                    sticky={ props.fixedHeader }
+                    v-slots={ slots }
+                  />
                   <tbody>
                     <tr ref={ markerRef } style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
                       <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>

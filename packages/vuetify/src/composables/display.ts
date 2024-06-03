@@ -217,7 +217,7 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
 export const makeDisplayProps = propsFactory({
   mobile: {
     type: Boolean,
-    default: null,
+    default: false,
   },
   mobileBreakpoint: [Number, String] as PropType<number | DisplayBreakpoint>,
 }, 'display')
