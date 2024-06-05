@@ -25,19 +25,19 @@
       Default flat
     </v-chip>
 
-    <v-chip variant="flat" color="primary">
+    <v-chip color="primary" variant="flat">
       Primary flat
     </v-chip>
 
-    <v-chip variant="flat" color="secondary">
+    <v-chip color="secondary" variant="flat">
       Secondary flat
     </v-chip>
 
-    <v-chip variant="flat" color="red">
+    <v-chip color="red" variant="flat">
       Red flat
     </v-chip>
 
-    <v-chip variant="flat" color="green">
+    <v-chip color="green" variant="flat">
       Green flat
     </v-chip>
   </div>

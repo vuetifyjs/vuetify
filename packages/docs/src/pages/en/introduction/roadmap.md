@@ -14,9 +14,9 @@ related:
 
 Vuetify is always under development. We are constantly working towards improving the existing codebase, adding new features, and expanding the ecosystem with developer tooling that makes building applications even easier.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<VoPromotionsCardVuetify />
 
 ## 2024 Component Roadmap
 
@@ -24,22 +24,16 @@ The following is a list of all planned components for the year 2024.
 
 | Component | Entering Labs | Production Release |
 | - | - | - |
-| [v3.6 (Nebula)](https://github.com/vuetifyjs/vuetify/milestone/72) | | { .bg-surface-light } |
-| v-fab | February 2024 | April 2024 |
-| v-empty-state | February 2024 | April 2024 |
-| v-sparkline | February 2024 | April 2024 |
-| v-speed-dial | February 2024 | April 2024 |
-| v-confirm-edit | *️⃣ | April 2024 |
-| [v3.7 (Odyssey)](https://github.com/vuetifyjs/vuetify/milestone/73) | | { .bg-surface-light } |
-| v-treeview | February 2024 | July 2024 |
-| v-number-input | March 2024 | July 2024 |
-| v-stepper-vertical | March 2024 | July 2024 |
-| v-time-picker | March 2024 | July 2024 |
-| v-date-input | April 2024 | July 2024 |
-| v-file-upload | April 2024 | July 2024 |
-| v-time-input | April 2024 | July 2024 |
-| [v3.8 (Andromeda)](https://github.com/vuetifyjs/vuetify/milestone/74) | | { .bg-surface-light } |
-| v-calendar | *️⃣ | Q4 |
+| [v3.7 (Odyssey)](https://github.com/vuetifyjs/vuetify/milestone/73) | | July 2024 { .bg-surface-light } |
+| [v-treeview](/components/treeview/) | *️⃣ | July 2024 |
+| [v-number-input](/components/number-inputs/) | *️⃣  | July 2024 |
+| [v-time-picker](/components/time-pickers/) | *️⃣ | July 2024 |
+| [v-date-input](/components/date-inputs/) | *️⃣ | July 2024 |
+| [v-file-upload](https://github.com/vuetifyjs/vuetify/pull/19667) | ~~April~~ May 2024 | July 2024 |
+| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709) | ~~April~~ May 2024 | July 2024 |
+| [v-stepper-vertical](https://github.com/vuetifyjs/vuetify/pull/19524) | ~~March~~ May 2024 | July 2024 |
+| [v3.8 (Andromeda)](https://github.com/vuetifyjs/vuetify/milestone/74) | | Q4 { .bg-surface-light } |
+| [v-calendar](/components/calendars/) | *️⃣ | Q4 |
 | v-date-time-picker | May 2024 | Q4 |
 | v-date-range-picker | June 2024 | Q4 |
 | v-video | July 2024 | Q4 |
@@ -50,6 +44,21 @@ The following is a list of all planned components for the year 2024.
 ## Released
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
+
+### v3.6 (Nebula)
+
+- **Released:** April 2024
+- **Hero:** [Banner](https://cdn.vuetifyjs.com/docs/images/release-banners/nebula-36.png)
+- **Target Release:** Q2 2024
+- **Notes:** [v3.6 Release](/getting-started/release-notes/?version=v3.6.0)
+- **Overview:** Introduced 5 new components to the main framework from Labs:
+  - [v-fab](/components/floating-action-buttons/)
+  - [v-empty-state](/components/empty-states/)
+  - [v-sparkline](/components/sparklines/)
+  - [v-speed-dial](/components/speed-dials/)
+  - [v-confirm-edit](/components/confirm-edit/)
+  - Multiple bug fixes and improvements.
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/72)
 
 ### v3.5 (Polaris)
 

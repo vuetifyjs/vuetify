@@ -9,24 +9,30 @@
     density="compact"
     nav
   >
-    <template v-for="(group, i) in props.groups">
-      <app-sheet border :class="['pa-3', i !== 0 && 'mt-4']">
+    <template
+      v-for="(group, i) in props.groups"
+      :key="`group-${group.name}-${i}`"
+    >
+      <AppSheet :class="['pa-3', i !== 0 && 'mt-4']" border>
         <div class="text-high-emphasis font-weight-bold d-flex align-center text-h6 mb-2">
           <v-icon
             :icon="getIcon(group)"
-            color="medium-emphasis"
             class="me-2"
+            color="medium-emphasis"
             size="22"
           />
 
           {{ group.name }}
         </div>
 
-        <template v-for="(child, ci) in group.items">
+        <template
+          v-for="(child, ci) in group.items"
+          :key="`group-item-${child.name}-${i}`"
+        >
           <v-list-item
             :to="getPathname(child)"
-            class="mb-0"
             append-icon="mdi-chevron-right"
+            class="mb-0"
             prepend-icon="mdi-home-outline"
             slim
             @click="onSearchClick(child.name, getPathname(child))"
@@ -48,9 +54,9 @@
             <v-list-item
               v-for="(item, it) in child.items"
               :key="`search-${i}-${ci}-${it}-children`"
-              :to="item.url"
-              :prepend-icon="item.url.indexOf('#') > -1 ? 'mdi-pound' : undefined"
               :append-icon="item.url.indexOf('#') > -1 ? 'mdi-chevron-right' : undefined"
+              :prepend-icon="item.url.indexOf('#') > -1 ? 'mdi-pound' : undefined"
+              :to="item.url"
               class="ps-6 mb-0"
               slim
               @click="onSearchClick(child.name, item.url)"
@@ -76,17 +82,14 @@
             </v-list-item>
           </template>
         </template>
-      </app-sheet>
+      </AppSheet>
     </template>
   </v-list>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  // Types
   import type { VList } from 'vuetify/components'
-
-  // Stores
-  import { useAppStore } from '@/store/app'
 
   const props = defineProps<{ groups: any[] }>()
   const emit = defineEmits(['click:result'])

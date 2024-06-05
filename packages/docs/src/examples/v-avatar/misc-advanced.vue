@@ -1,5 +1,5 @@
 <template>
-  <v-expansion-panels variant="popout" class="pa-4">
+  <v-expansion-panels class="pa-4" variant="popout">
     <v-expansion-panel
       v-for="(message, i) in messages"
       :key="i"
@@ -13,8 +13,8 @@
         >
           <v-col
             cols="4"
-            sm="2"
             md="1"
+            sm="2"
           >
             <v-avatar
               size="36px"
@@ -34,8 +34,8 @@
 
           <v-col
             class="hidden-xs-only text-left ms-2"
-            sm="5"
             md="3"
+            sm="5"
           >
             <strong v-html="message.name"></strong>
             <span

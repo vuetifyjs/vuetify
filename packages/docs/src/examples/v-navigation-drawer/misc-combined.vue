@@ -3,12 +3,12 @@
     <v-layout>
       <v-navigation-drawer
         theme="dark"
-        rail
         permanent
+        rail
       >
         <v-list-item
-          nav
           prepend-avatar="https://randomuser.me/api/portraits/women/75.jpg"
+          nav
         ></v-list-item>
 
         <v-divider></v-divider>

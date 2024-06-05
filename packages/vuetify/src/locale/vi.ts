@@ -2,6 +2,7 @@ export default {
   badge: 'Huy hiệu',
   open: 'Open',
   close: 'Đóng',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
@@ -71,6 +72,7 @@ export default {
   timePicker: {
     am: 'SA',
     pm: 'CH',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

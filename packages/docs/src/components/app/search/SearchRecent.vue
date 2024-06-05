@@ -1,5 +1,5 @@
 <template>
-  <app-sheet v-if="searches.length" border class="pa-3 flex-1-1-100">
+  <AppSheet v-if="searches.length" class="pa-3 flex-1-1-100" border>
     <div class="text-high-emphasis font-weight-bold d-flex align-center text-h6 mb-2">
       <v-icon
         class="me-2"
@@ -18,8 +18,8 @@
         append-icon="mdi-delete-outline"
         density="comfortable"
         lines="one"
-        nav
         prepend-icon="mdi-file-document-outline"
+        nav
         slim
       >
         <template v-if="search.hash" #subtitle>
@@ -38,13 +38,10 @@
         </template>
       </v-list-item>
     </template>
-  </app-sheet>
+  </AppSheet>
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
   defineProps({
     searches: {
       type: Array,

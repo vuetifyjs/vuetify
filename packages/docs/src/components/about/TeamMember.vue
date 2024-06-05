@@ -42,8 +42,8 @@
                   @click.prevent="copyTextToClipboard(link.copyText)"
                 >
                   <v-icon
-                    :icon="link.icon"
                     :color="link.color"
+                    :icon="link.icon"
                     size="small"
                   />
                 </div>
@@ -67,7 +67,7 @@
           </div>
 
           <template v-for="(focus, k) in member.focus" :key="k">
-            <app-markdown :content="focus" />
+            <AppMarkdown :content="focus" />
 
             <span
               v-if="k < member.focus.length - 1"
@@ -92,7 +92,7 @@
           </div>
 
           <template v-for="(funding, k) in member.funding" :key="k">
-            <app-markdown :content="funding" />
+            <AppMarkdown :content="funding" />
 
             <span
               v-if="k < member.funding.length - 1"
@@ -111,13 +111,13 @@
             class="text-subtitle d-flex align-center my-2"
           >
             <v-icon
-              start
               :icon="icons[field]"
+              start
             />
 
             <template v-if="Array.isArray(member[field])">
               <template v-for="(focus, j) in member[field]" :key="j">
-                <app-markdown :content="focus" />
+                <AppMarkdown :content="focus" />
 
                 <span
                   v-if="j < member[field]!.length - 1"
@@ -146,14 +146,8 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-
   // Types
-  import type { Member } from '@/store/team'
+  import type { Member } from '@/stores/team'
   import type { PropType } from 'vue'
 
   const props = defineProps({

@@ -32,18 +32,18 @@
               <v-badge :model-value="user.avatar === avatar">
                 <v-avatar
                   v-bind="hoverProps"
-                  :style="auth.isSubscriber ? {} : {
+                  :class="{ 'cursor-pointer': one.isSubscriber }"
+                  :style="one.isSubscriber ? {} : {
                     filter: isHovering ? 'grayscale(0%)' : 'grayscale(100%)',
                     opacity: isHovering ? '1' : '.12',
                   }"
                   size="56"
-                  :class="{ 'cursor-pointer': auth.isSubscriber }"
                   @click="onClick(avatar)"
                 >
                   <v-img :src="avatar">
 
                     <div
-                      v-if="isHovering && !auth.isSubscriber"
+                      v-if="isHovering && !one.isSubscriber"
                       class="d-flex align-center justify-center h-100"
                       @click.stop.prevent
                     >
@@ -65,10 +65,8 @@
 </template>
 
 <script setup>
-  // Stores
-  import { useAuthStore, useUserStore } from '@vuetify/one'
-
   const auth = useAuthStore()
+  const one = useOneStore()
   const user = useUserStore()
 
   const avatars = [

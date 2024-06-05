@@ -1,6 +1,6 @@
 <template>
   <v-tooltip
-    v-if="auth.isSubscriber"
+    v-if="one.isSubscriber"
     location="bottom"
     text="Sponsor"
   >
@@ -15,8 +15,5 @@
 </template>
 
 <script setup>
-  // Stores
-  import { useAuthStore } from '@vuetify/one'
-
-  const auth = useAuthStore()
+  const one = useOneStore()
 </script>

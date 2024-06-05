@@ -20,7 +20,7 @@
           </v-card-title>
         </template>
 
-        <v-divider vertical class="mx-2"></v-divider>
+        <v-divider class="mx-2" vertical></v-divider>
 
         <v-btn
           class="text-none text-subtitle-1"
@@ -119,10 +119,10 @@
         </v-btn>
 
         <v-btn
-          border
           class="text-none"
           prepend-icon="mdi-check"
           variant="text"
+          border
         >
           Interested
         </v-btn>

@@ -2,6 +2,7 @@ export default {
   badge: '배지',
   open: 'Open',
   close: '닫기',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
@@ -56,7 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} 더보기',
-    today: 'Today',
+    today: '오늘',
   },
   input: {
     clear: 'Clear {0}',
@@ -71,28 +72,29 @@ export default {
   timePicker: {
     am: '오전',
     pm: '오후',
+    title: '시간을 선택하세요.',
   },
   pagination: {
     ariaLabel: {
       root: 'Pagination Navigation',
       next: '다음 페이지',
       previous: '이전 페이지',
-      page: '고토 페이지 {0}',
+      page: '{0} 페이지로 이동',
       currentPage: '현재 페이지, 페이지 {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: '첫 페이지',
+      last: '마지막 페이지',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: '다음',
+    prev: '이전',
   },
   rating: {
     ariaLabel: {
       item: 'Rating {0} of {1}',
     },
   },
-  loading: 'Loading...',
+  loading: '불러오는 중...',
   infiniteScroll: {
     loadMore: 'Load more',
     empty: 'No more',

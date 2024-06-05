@@ -1,9 +1,9 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div>
       <v-switch v-bind="props"></v-switch>
@@ -12,14 +12,10 @@
     <template v-slot:configuration>
       <v-checkbox v-model="indeterminate" label="Indeterminate"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref, watch } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-switch'
   const model = ref('default')
   const indeterminate = ref(false)

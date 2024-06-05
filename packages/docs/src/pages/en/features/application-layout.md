@@ -13,9 +13,9 @@ related:
 
 Vuetify features an application layout system that allows you to easily create complex website designs.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 The system is built around an outside-in principle, where each application layout component reserves space for itself in one of four directions (left, right, up, down), leaving the available free space for any subsequent layout component(s) to occupy.
 
@@ -39,21 +39,21 @@ The final part of the layout system is the **v-main** component. Inside this is 
 
 By default, the order in which layout components will attempt to reserve space is simply the order that they appear in your markup. To illustrate this concept, see the following two examples where a single **v-app-bar** and **v-navigation-drawer** have changed places in the markup.
 
-<example file="application-layout/app-bar-first" />
+<ExamplesExample file="application-layout/app-bar-first" />
 
-<example file="application-layout/nav-drawer-first" />
+<ExamplesExample file="application-layout/nav-drawer-first" />
 
 As you can see, placing the **v-app-bar** before the **v-navigation-drawer** means that it will use the full width of the screen. When it it placed after the **v-navigation-drawer**, it will only use the free space left over.
 
 Some layout components accept a **location** prop with which you can place the component in the layout. In the example below, we use two **v-navigation-drawer** components, one on each side of the application.
 
-<example file="application-layout/location" />
+<ExamplesExample file="application-layout/location" />
 
 ## Complex layouts
 
 Let's create a more complex layout to show the flexibility of the system. In the following example we have re-created the general layout of the Discord application. This example also demonstrates that layout components accept either a **width** or **height** prop, and that multiple components of the same type can be stacked in the same position.
 
-<example file="application-layout/discord" />
+<ExamplesExample file="application-layout/discord" />
 
 ## Dynamic layouts and order
 
@@ -63,18 +63,18 @@ To solve this you can explicitly set the layout order by using the **order** pro
 
 All layout components have a default order of `0`. Layout components with the same order will be ordered as they appear in the markup.
 
-<example file="application-layout/dynamic" />
+<ExamplesExample file="application-layout/dynamic" />
 
 ## Accessing layout information
 
 The layout system exposes a function `getLayoutItem` that allows you to get size and position information about a specific layout component in your markup. To use it, you will need to add a **name** prop to the layout component, and give it a unique value. You can either access the method by using a ref on **v-app**, or by using the **useLayout** composable.
 
-<example file="application-layout/layout-information-ref" />
+<ExamplesExample file="application-layout/layout-information-ref" />
 
 ::: warning
   You will not be able to directly use the composable in the same component where you are rendering the **v-app** component. The call to **useLayout** must happen in a child component, so that the layout can be properly injected.
 :::
 
-<example file="application-layout/layout-information-composable" />
+<ExamplesExample file="application-layout/layout-information-composable" />
 
 The combined size of all layout components is also available under `layout.mainRect`. This is used internally by the **v-main** component to determine the size of the main content area.

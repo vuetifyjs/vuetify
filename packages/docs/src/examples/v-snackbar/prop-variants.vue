@@ -18,7 +18,7 @@
       rounded="pill"
     >
       <template v-slot:activator="{ props }">
-        <v-btn rounded="pill" color="blue-grey" class="ma-2" v-bind="props">open</v-btn>
+        <v-btn class="ma-2" color="blue-grey" rounded="pill" v-bind="props">open</v-btn>
       </template>
 
       Snackbar with <strong>rounded="pill"</strong>.
@@ -30,7 +30,7 @@
       elevation="24"
     >
       <template v-slot:activator="{ props }">
-        <v-btn color="deep-purple-accent-4" class="ma-2" v-bind="props">open</v-btn>
+        <v-btn class="ma-2" color="deep-purple-accent-4" v-bind="props">open</v-btn>
       </template>
 
       Snackbar with <strong>elevation="24"</strong>.
@@ -42,7 +42,7 @@
       variant="tonal"
     >
       <template v-slot:activator="{ props }">
-        <v-btn color="primary" variant="tonal" class="ma-2" v-bind="props">open</v-btn>
+        <v-btn class="ma-2" color="primary" variant="tonal" v-bind="props">open</v-btn>
       </template>
 
       Snackbar with <strong>tonal</strong> variant.
@@ -54,7 +54,7 @@
       variant="outlined"
     >
       <template v-slot:activator="{ props }">
-        <v-btn color="success" variant="outlined" class="ma-2" v-bind="props">open</v-btn>
+        <v-btn class="ma-2" color="success" variant="outlined" v-bind="props">open</v-btn>
       </template>
 
       Snackbar with <strong>outlined</strong> variant.

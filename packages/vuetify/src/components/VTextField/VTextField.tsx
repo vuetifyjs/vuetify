@@ -316,6 +316,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                       active={ props.persistentCounter || isFocused.value }
                       value={ counterValue.value }
                       max={ max.value }
+                      disabled={ props.disabled }
                       v-slots:default={ slots.counter }
                     />
                   </>

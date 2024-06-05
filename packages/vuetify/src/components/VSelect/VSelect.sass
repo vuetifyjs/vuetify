@@ -4,62 +4,63 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-.v-select
-  .v-field
-    .v-text-field__prefix,
-    .v-text-field__suffix,
-    .v-field__input,
-    &.v-field
-      cursor: pointer
+@include tools.layer('components')
+  .v-select
+    .v-field
+      .v-text-field__prefix,
+      .v-text-field__suffix,
+      .v-field__input,
+      &.v-field
+        cursor: pointer
 
-  .v-field
-    .v-field__input
-      > input
-        align-self: flex-start
-        opacity: 1
-        flex: 0 0
-        position: absolute
-        width: 100%
-        transition: none
-        pointer-events: none
-        caret-color: transparent
-
-  .v-field--dirty
-    .v-select__selection
-      margin-inline-end: 2px
-
-  .v-select__selection-text
-    overflow: hidden
-    text-overflow: ellipsis
-    white-space: nowrap
-
-  &__content
-    overflow: hidden
-
-    @include tools.elevation($select-content-elevation)
-    @include tools.rounded($select-content-border-radius)
-
-  &__selection
-    display: inline-flex
-    align-items: center
-    letter-spacing: inherit
-    line-height: inherit
-    max-width: 100%
-
-  .v-select__selection
-    &:first-child
-      margin-inline-start: 0
-
-  &--selected
     .v-field
       .v-field__input
         > input
-          opacity: 0
+          align-self: flex-start
+          opacity: 1
+          flex: 0 0
+          position: absolute
+          width: 100%
+          transition: none
+          pointer-events: none
+          caret-color: transparent
 
-  &__menu-icon
-    margin-inline-start: 4px
-    transition: $select-transition
+    .v-field--dirty
+      .v-select__selection
+        margin-inline-end: 2px
 
-    .v-select--active-menu &
-      opacity: var(--v-high-emphasis-opacity)
-      transform: rotate(180deg)
+    .v-select__selection-text
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+
+    &__content
+      overflow: hidden
+
+      @include tools.elevation($select-content-elevation)
+      @include tools.rounded($select-content-border-radius)
+
+    &__selection
+      display: inline-flex
+      align-items: center
+      letter-spacing: inherit
+      line-height: inherit
+      max-width: 100%
+
+    .v-select__selection
+      &:first-child
+        margin-inline-start: 0
+
+    &--selected
+      .v-field
+        .v-field__input
+          > input
+            opacity: 0
+
+    &__menu-icon
+      margin-inline-start: 4px
+      transition: $select-transition
+
+      .v-select--active-menu &
+        opacity: var(--v-high-emphasis-opacity)
+        transform: rotate(180deg)

@@ -4,7 +4,7 @@
       <v-btn icon="mdi-arrow-left"></v-btn>
     </template>
 
-    <v-btn icon="mdi-archive-plus-outline" class="ms-5"></v-btn>
+    <v-btn class="ms-5" icon="mdi-archive-plus-outline"></v-btn>
 
     <v-btn icon="mdi-alert-circle-outline"></v-btn>
 

@@ -1,95 +1,52 @@
 <template>
-  <v-app-bar
+  <VoAppBar
     id="app-bar"
-    :image="image"
     border="b"
+    logo="vuetify"
     flat
   >
     <template #prepend>
-      <app-bar-logo />
+      <div class="px-1" />
 
-      <app-btn
+      <AppBtn
         v-if="route.meta.layout !== 'home' && mdAndDown"
         icon="mdi-menu"
         @click="app.drawer = !app.drawer"
       />
 
-      <app-search />
+      <AppSearchSearch />
     </template>
 
     <template #append>
       <template v-if="mdAndUp">
-        <app-bar-learn-menu />
+        <AppBarLearnMenu />
 
-        <app-bar-support-menu />
+        <AppBarSupportMenu />
 
-        <app-bar-ecosystem-menu />
+        <AppBarEcosystemMenu />
 
-        <app-bar-team-link v-if="lgAndUp" />
+        <AppBarTeamLink v-if="lgAndUp" />
 
-        <app-bar-playground-link v-if="lgAndUp" />
+        <AppBarPlaygroundLink v-if="lgAndUp" />
 
-        <app-bar-enterprise-link />
+        <AppBarEnterpriseLink />
       </template>
 
-      <template v-if="!user.quickbar">
-        <app-vertical-divider v-if="smAndUp" class="ms-3 me-2" />
+      <AppVerticalDivider v-if="smAndUp" class="ms-3 me-2" />
 
-        <app-bar-store-link v-if="smAndUp" />
+      <AppBarStoreLink v-if="smAndUp" />
 
-        <app-bar-jobs-link v-if="smAndUp" />
+      <AppBarJobsLink v-if="smAndUp" />
 
-        <app-bar-notifications-menu />
+      <AppBarLanguageMenu v-if="smAndUp" />
 
-        <app-bar-language-menu v-if="smAndUp" />
-
-        <app-bar-settings-toggle />
-      </template>
-
-      <app-vertical-divider v-if="lgAndUp" class="ms-2 me-3" />
-
-      <vo-auth-dialog />
+      <AppBarSettingsToggle />
     </template>
-  </v-app-bar>
+  </VoAppBar>
 </template>
 
 <script setup>
-  // Components
-  import AppBarEcosystemMenu from './EcosystemMenu.vue'
-  import AppBarEnterpriseLink from './EnterpriseLink.vue'
-  import AppBarJobsLink from './JobsLink.vue'
-  import AppBarLanguageMenu from './LanguageMenu.vue'
-  import AppBarLearnMenu from './LearnMenu.vue'
-  import AppBarLogo from './Logo.vue'
-  import AppBarNotificationsMenu from './NotificationsMenu.vue'
-  import AppBarPlaygroundLink from './PlaygroundLink.vue'
-  import AppBarSettingsToggle from './SettingsToggle.vue'
-  import AppBarStoreLink from './StoreLink.vue'
-  import AppBarSupportMenu from './SupportMenu.vue'
-  import AppBarTeamLink from './TeamLink.vue'
-  import AppSearch from '@/components/app/search/Search.vue'
-  import AppVerticalDivider from '@/components/app/VerticalDivider.vue'
-
-  // Composables
-  import { useAppStore } from '@/store/app'
-  import { useDisplay, useTheme } from 'vuetify'
-  import { useRoute } from 'vue-router'
-
-  // Stores
-  import { useUserStore } from '@vuetify/one'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const app = useAppStore()
-  const user = useUserStore()
   const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
   const route = useRoute()
-  const theme = useTheme()
-
-  const image = computed(() => {
-    if (['dark', 'light'].includes(theme.name.value)) return undefined
-
-    return `https://cdn.vuetifyjs.com/docs/images/themes/${theme.name.value}-app-bar.png`
-  })
 </script>

@@ -46,7 +46,10 @@ import {
 } from '@/util'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type {
+  ComponentPublicInstance, PropType,
+  Ref,
+} from 'vue'
 import type { BackgroundColorData } from '@/composables/color'
 
 interface ScrimProps {
@@ -74,7 +77,7 @@ function Scrim (props: ScrimProps) {
 
 export type OverlaySlots = {
   default: { isActive: Ref<boolean> }
-  activator: { isActive: boolean, props: Record<string, any> }
+  activator: { isActive: boolean, props: Record<string, any>, targetRef: Ref<ComponentPublicInstance<any> | HTMLElement> }
 }
 
 export const makeVOverlayProps = propsFactory({
@@ -90,7 +93,10 @@ export const makeVOverlayProps = propsFactory({
   disabled: Boolean,
   opacity: [Number, String],
   noClickAnimation: Boolean,
-  modelValue: Boolean,
+  modelValue: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
   persistent: Boolean,
   scrim: {
     type: [Boolean, String],
@@ -127,13 +133,14 @@ export const VOverlay = genericComponent<OverlaySlots>()({
   emits: {
     'click:outside': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
+    afterEnter: () => true,
     afterLeave: () => true,
   },
 
   setup (props, { slots, attrs, emit }) {
     const model = useProxiedModel(props, 'modelValue')
     const isActive = computed({
-      get: () => model.value,
+      get: () => Boolean(model.value),
       set: v => {
         if (!(v && props.disabled)) model.value = v
       },
@@ -162,6 +169,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     })
 
     const root = ref<HTMLElement>()
+    const scrimEl = ref<HTMLElement>()
     const contentEl = ref<HTMLElement>()
     const { contentStyles, updateLocation } = useLocationStrategies(props, {
       isRtl,
@@ -184,8 +192,11 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       else animateClick()
     }
 
-    function closeConditional () {
-      return isActive.value && globalTop.value
+    function closeConditional (e: Event) {
+      return isActive.value && globalTop.value && (
+        // If using scrim, only close if clicking on it rather than anything opened on top
+        !props.scrim || e.target === scrimEl.value
+      )
     }
 
     IN_BROWSER && watch(isActive, val => {
@@ -250,6 +261,10 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       })
     }
 
+    function onAfterEnter () {
+      emit('afterEnter')
+    }
+
     function onAfterLeave () {
       _onAfterLeave()
       emit('afterLeave')
@@ -259,9 +274,9 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       <>
         { slots.activator?.({
           isActive: isActive.value,
+          targetRef,
           props: mergeProps({
             ref: activatorRef,
-            targetRef,
           }, activatorEvents.value, props.activatorProps),
         })}
 
@@ -297,6 +312,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
               <Scrim
                 color={ scrimColor }
                 modelValue={ isActive.value && !!props.scrim }
+                ref={ scrimEl }
                 { ...scrimEvents.value }
               />
               <MaybeTransition
@@ -304,6 +320,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 persisted
                 transition={ props.transition }
                 target={ target.value }
+                onAfterEnter={ onAfterEnter }
                 onAfterLeave={ onAfterLeave }
               >
                 <div
@@ -332,6 +349,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     return {
       activatorEl,
+      scrimEl,
       target,
       animateClick,
       contentEl,

@@ -1,0 +1,6 @@
+{
+  "props": {
+    "mobile": "Explicitly designate as a mobile display configuration.",
+    "mobileBreakpoint": "Overrides the display configuration default."
+  }
+}

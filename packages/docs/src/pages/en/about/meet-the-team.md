@@ -13,28 +13,28 @@ related:
 
 Vuetify is _not_ a one person show. We have a very active and engaged team that is **constantly striving** to bring developers a better experience. Keep in mind the below is not an exhaustive list of all the individuals that help make Vuetify great.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Company
 
 While Vuetify (the framework) is [MIT Licensed](https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md) and [Open Source](https://opensource.com/resources/what-open-source), Vuetify (the company) is owned and operated by John and Heather Leider as a full-time Open Source business. You can support them by sponsoring Vuetify on **GitHub**.
 
-<promoted slug="enterprise-support" />
+<PromotedPromoted slug="enterprise-support" />
 
-<team-members team="company" />
+<AboutTeamMembers team="company" />
 
 ## Core Team
 
 The core development team are Open Source developers that help guide the direction of Vuetify and its ecosystem.
 
-<promoted slug="vuetify-open-collective" />
+<PromotedPromoted slug="vuetify-open-collective" />
 
-<team-members team="core" />
+<AboutTeamMembers team="core" />
 
 ## Legends
 
 Legends are inactive members of the core team. They have contributed a significant amount of time and effort to the project and are recognized for their contributions.
 
-<team-members team="legends" />
+<AboutTeamMembers team="legends" />

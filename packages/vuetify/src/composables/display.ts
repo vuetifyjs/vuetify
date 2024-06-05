@@ -17,6 +17,7 @@ export type DisplayThresholds = {
 }
 
 export interface DisplayProps {
+  mobile?: boolean | null
   mobileBreakpoint?: number | DisplayBreakpoint
 }
 
@@ -214,6 +215,10 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
 }
 
 export const makeDisplayProps = propsFactory({
+  mobile: {
+    type: Boolean,
+    default: null,
+  },
   mobileBreakpoint: [Number, String] as PropType<number | DisplayBreakpoint>,
 }, 'display')
 
@@ -226,6 +231,7 @@ export function useDisplay (
   if (!display) throw new Error('Could not find Vuetify display injection')
 
   const mobile = computed(() => {
+    if (props.mobile != null) return props.mobile
     if (!props.mobileBreakpoint) return display.mobile.value
 
     const breakpointValue = typeof props.mobileBreakpoint === 'number'

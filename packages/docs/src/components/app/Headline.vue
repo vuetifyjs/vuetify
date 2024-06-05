@@ -8,9 +8,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
   defineProps({
     color: String,
     size: {
@@ -27,7 +24,7 @@
     },
     path: {
       type: String,
-      required: true,
+      default: '',
     },
   })
 

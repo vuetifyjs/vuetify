@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="448" class="mx-auto" color="grey-lighten-3">
+  <v-card class="mx-auto" color="grey-lighten-3" max-width="448">
     <v-layout>
       <v-app-bar
         color="teal-darken-4"
@@ -41,8 +41,8 @@
               cols="12"
             >
               <v-card
-                :title="`Content ${n}`"
                 :subtitle="`Subtitle for Content ${n}`"
+                :title="`Content ${n}`"
                 text="Lorem ipsum dolor sit amet consectetur, adipisicing elit.?"
               ></v-card>
             </v-col>

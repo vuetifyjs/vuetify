@@ -1,6 +1,7 @@
 // Utilities
-import { inject } from 'vue'
-import { mergeDeep, refElement } from '@/util'
+import { computed, inject } from 'vue'
+import { useRtl } from './locale'
+import { clamp, consoleWarn, mergeDeep, refElement } from '@/util'
 
 // Types
 import type { ComponentPublicInstance, InjectionKey, Ref } from 'vue'
@@ -75,13 +76,14 @@ export function createGoTo (options: Partial<GoToOptions> | undefined, locale: L
   }
 }
 
-async function scrollTo (
+export async function scrollTo (
   _target: ComponentPublicInstance | HTMLElement | number | string,
   _options: Partial<GoToOptions>,
   horizontal?: boolean,
   goTo?: GoToInstance,
 ) {
-  const options = mergeDeep(goTo?.options, _options)
+  const property = horizontal ? 'scrollLeft' : 'scrollTop'
+  const options = mergeDeep(goTo?.options ?? genDefaults(), _options)
   const rtl = goTo?.rtl.value
   const target = (typeof _target === 'number' ? _target : getTarget(_target)) ?? 0
   const container = options.container === 'parent' && target instanceof HTMLElement
@@ -106,8 +108,9 @@ async function scrollTo (
   }
 
   targetLocation += options.offset
+  targetLocation = clampTarget(container, targetLocation, !!rtl, !!horizontal)
 
-  const startLocation = (horizontal ? container.scrollLeft : container.scrollTop) ?? 0
+  const startLocation = container[property] ?? 0
 
   if (targetLocation === startLocation) return Promise.resolve(targetLocation)
 
@@ -115,26 +118,22 @@ async function scrollTo (
 
   return new Promise(resolve => requestAnimationFrame(function step (currentTime: number) {
     const timeElapsed = currentTime - startTime
-    const progress = Math.abs(options.duration ? Math.min(timeElapsed / options.duration, 1) : 1)
-    const location = Math.floor(startLocation + (targetLocation - startLocation) * ease(progress))
+    const progress = timeElapsed / options.duration
+    const location = Math.floor(
+      startLocation +
+      (targetLocation - startLocation) *
+      ease(clamp(progress, 0, 1))
+    )
 
-    container[horizontal ? 'scrollLeft' : 'scrollTop'] = location
+    container[property] = location
 
-    if (progress === 1) return resolve(targetLocation)
-
-    let clientSize
-    let reachEnd
-
-    if (!horizontal) {
-      clientSize = container === document.body ? document.documentElement.clientHeight : container.clientHeight
-      reachEnd = clientSize + container.scrollTop >= container.scrollHeight
-
-      if (targetLocation > container.scrollTop && reachEnd) return resolve(targetLocation)
-    } else {
-      clientSize = container === document.body ? document.documentElement.clientWidth : container.clientWidth
-      reachEnd = clientSize + container.scrollLeft >= container.scrollWidth
-
-      if (targetLocation > container.scrollLeft && reachEnd) return resolve(targetLocation)
+    // Allow for some jitter if target time has elapsed
+    if (progress >= 1 && Math.abs(location - container[property]) < 10) {
+      return resolve(targetLocation)
+    } else if (progress > 2) {
+      // The target might not be reachable
+      consoleWarn('Scroll target is not reachable')
+      return resolve(container[property])
     }
 
     requestAnimationFrame(step)
@@ -142,9 +141,16 @@ async function scrollTo (
 }
 
 export function useGoTo (_options: Partial<GoToOptions> = {}) {
-  const goTo = inject(GoToSymbol)
+  const goToInstance = inject(GoToSymbol)
+  const { isRtl } = useRtl()
 
-  if (!goTo) throw new Error('[Vuetify] Could not find injected goto instance')
+  if (!goToInstance) throw new Error('[Vuetify] Could not find injected goto instance')
+
+  const goTo = {
+    ...goToInstance,
+    // can be set via VLocaleProvider
+    rtl: computed(() => goToInstance.rtl.value || isRtl.value),
+  }
 
   async function go (
     target: ComponentPublicInstance | HTMLElement | string | number,
@@ -161,4 +167,38 @@ export function useGoTo (_options: Partial<GoToOptions> = {}) {
   }
 
   return go
+}
+
+/**
+ * Clamp target value to achieve a smooth scroll animation
+ * when the value goes outside the scroll container size
+ */
+function clampTarget (
+  container: HTMLElement,
+  value: number,
+  rtl: boolean,
+  horizontal: boolean,
+) {
+  const { scrollWidth, scrollHeight } = container
+  const [containerWidth, containerHeight] = container === document.scrollingElement
+    ? [window.innerWidth, window.innerHeight]
+    : [container.offsetWidth, container.offsetHeight]
+
+  let min: number
+  let max: number
+
+  if (horizontal) {
+    if (rtl) {
+      min = -(scrollWidth - containerWidth)
+      max = 0
+    } else {
+      min = 0
+      max = scrollWidth - containerWidth
+    }
+  } else {
+    min = 0
+    max = scrollHeight + -containerHeight
+  }
+
+  return Math.max(Math.min(value, max), min)
 }

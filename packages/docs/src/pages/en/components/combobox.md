@@ -20,15 +20,15 @@ features:
 
 The `v-combobox` component is a [v-text-field](/components/text-fields) that allows the user to select values from a provided **items** array, or to enter their own value. Created items will be returned as strings.
 
-<page-features />
+<PageFeatures />
 
 ## Usage
 
 With Combobox, you can allow a user to create new values that may not be present in a provided items list.
 
-<usage name="v-combobox" />
+<ExamplesUsage name="v-combobox" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -38,7 +38,7 @@ With Combobox, you can allow a user to create new values that may not be present
 | [v-autocomplete](/api/v-autocomplete/) | A select component that allows for advanced filtering |
 | [v-select](/api/v-select/) | A replacement for the HTML <select></select> |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Caveats
 
@@ -56,13 +56,13 @@ With Combobox, you can allow a user to create new values that may not be present
 
 You can use `density` prop to adjust vertical spacing within the component.
 
-<example file="v-combobox/prop-density" />
+<ExamplesExample file="v-combobox/prop-density" />
 
 #### Multiple combobox
 
 Previously known as **tags** - user is allowed to enter more than one value.
 
-<example file="v-combobox/prop-multiple" />
+<ExamplesExample file="v-combobox/prop-multiple" />
 
 ### Slots
 
@@ -70,4 +70,4 @@ Previously known as **tags** - user is allowed to enter more than one value.
 
 In this example we utilize a custom **no-data** slot to provide context to the user when searching / creating items.
 
-<example file="v-combobox/slot-no-data" />
+<ExamplesExample file="v-combobox/slot-no-data" />

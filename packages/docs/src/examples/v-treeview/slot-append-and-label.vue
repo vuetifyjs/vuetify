@@ -1,10 +1,10 @@
 <template>
   <v-treeview
     v-model="tree"
-    :open="initiallyOpen"
     :items="items"
-    activatable
+    :opened="initiallyOpen"
     item-key="name"
+    activatable
     open-on-click
   >
     <template v-slot:prepend="{ item, open }">
@@ -35,53 +35,53 @@
   const tree = ref([])
   const items = ref([
     {
-      name: '.git',
+      title: '.git',
     },
     {
-      name: 'node_modules',
+      title: 'node_modules',
     },
     {
-      name: 'public',
+      title: 'public',
       children: [
         {
-          name: 'static',
+          title: 'static',
           children: [{
-            name: 'logo.png',
+            title: 'logo.png',
             file: 'png',
           }],
         },
         {
-          name: 'favicon.ico',
+          title: 'favicon.ico',
           file: 'png',
         },
         {
-          name: 'index.html',
+          title: 'index.html',
           file: 'html',
         },
       ],
     },
     {
-      name: '.gitignore',
+      title: '.gitignore',
       file: 'txt',
     },
     {
-      name: 'babel.config.js',
+      title: 'babel.config.js',
       file: 'js',
     },
     {
-      name: 'package.json',
+      title: 'package.json',
       file: 'json',
     },
     {
-      name: 'README.md',
+      title: 'README.md',
       file: 'md',
     },
     {
-      name: 'vue.config.js',
+      title: 'vue.config.js',
       file: 'js',
     },
     {
-      name: 'yarn.lock',
+      title: 'yarn.lock',
       file: 'txt',
     },
   ])
@@ -104,53 +104,53 @@
       tree: [],
       items: [
         {
-          name: '.git',
+          title: '.git',
         },
         {
-          name: 'node_modules',
+          title: 'node_modules',
         },
         {
-          name: 'public',
+          title: 'public',
           children: [
             {
-              name: 'static',
+              title: 'static',
               children: [{
-                name: 'logo.png',
+                title: 'logo.png',
                 file: 'png',
               }],
             },
             {
-              name: 'favicon.ico',
+              title: 'favicon.ico',
               file: 'png',
             },
             {
-              name: 'index.html',
+              title: 'index.html',
               file: 'html',
             },
           ],
         },
         {
-          name: '.gitignore',
+          title: '.gitignore',
           file: 'txt',
         },
         {
-          name: 'babel.config.js',
+          title: 'babel.config.js',
           file: 'js',
         },
         {
-          name: 'package.json',
+          title: 'package.json',
           file: 'json',
         },
         {
-          name: 'README.md',
+          title: 'README.md',
           file: 'md',
         },
         {
-          name: 'vue.config.js',
+          title: 'vue.config.js',
           file: 'js',
         },
         {
-          name: 'yarn.lock',
+          title: 'yarn.lock',
           file: 'txt',
         },
       ],

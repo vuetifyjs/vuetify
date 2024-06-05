@@ -7,10 +7,10 @@
       >
         <v-textarea
           label="One row"
-          auto-grow
-          variant="outlined"
-          rows="1"
           row-height="15"
+          rows="1"
+          variant="outlined"
+          auto-grow
         ></v-textarea>
       </v-col>
       <v-col
@@ -18,11 +18,11 @@
         sm="6"
       >
         <v-textarea
+          label="Two rows"
+          row-height="20"
+          rows="2"
           variant="filled"
           auto-grow
-          label="Two rows"
-          rows="2"
-          row-height="20"
         ></v-textarea>
       </v-col>
       <v-col
@@ -31,10 +31,10 @@
       >
         <v-textarea
           label="Three rows"
-          auto-grow
-          variant="outlined"
-          rows="3"
           row-height="25"
+          rows="3"
+          variant="outlined"
+          auto-grow
           shaped
         ></v-textarea>
       </v-col>
@@ -43,11 +43,11 @@
         sm="6"
       >
         <v-textarea
+          label="Four rows"
+          row-height="30"
+          rows="4"
           variant="filled"
           auto-grow
-          label="Four rows"
-          rows="4"
-          row-height="30"
           shaped
         ></v-textarea>
       </v-col>

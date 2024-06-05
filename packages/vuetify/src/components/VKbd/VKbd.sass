@@ -1,13 +1,14 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-.v-kbd
-  background: rgb(var(--v-theme-kbd))
-  color: rgb(var(--v-theme-on-kbd))
-  border-radius: $kbd-border-radius
-  display: $kbd-display
-  font-size: $kbd-font-size
-  font-weight: $kbd-font-weight
-  padding: $kbd-padding
+@include tools.layer('components')
+  .v-kbd
+    background: rgb(var(--v-theme-kbd))
+    color: rgb(var(--v-theme-on-kbd))
+    border-radius: $kbd-border-radius
+    display: $kbd-display
+    font-size: $kbd-font-size
+    font-weight: $kbd-font-weight
+    padding: $kbd-padding
 
-  @include tools.elevation($kbd-elevation)
+    @include tools.elevation($kbd-elevation)

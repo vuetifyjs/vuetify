@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <v-container class="d-flex" :style="{ minHeight: '100%' }">
+    <v-container :style="{ minHeight: '100%' }" class="d-flex">
       <v-row align="center" justify="center">
         <v-col cols="auto">
           <h1 class="text-h3 text-primary">
@@ -20,7 +20,7 @@
           </p>
 
           <p>
-            <app-link :href="'https://v2.vuetifyjs.com' + route.fullPath">Looking for Vuetify 2?</app-link>
+            <AppLink :href="'https://v2.vuetifyjs.com' + route.fullPath">Looking for Vuetify 2?</AppLink>
           </p>
         </v-col>
       </v-row>
@@ -29,10 +29,11 @@
 </template>
 
 <script setup lang="ts">
-  import { useRoute } from 'vue-router'
-  import { rpath } from '@/util/routes'
-  import { useHead } from '@unhead/vue'
+  // Components
   import DefaultLayout from '@/layouts/default.vue'
+
+  // Utilities
+  import { useHead } from '@unhead/vue'
 
   const route = useRoute()
   useHead({

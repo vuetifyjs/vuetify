@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :name="name"
@@ -28,16 +28,12 @@
     </v-layout>
 
     <template v-slot:configuration>
-      <v-slider v-model="elevation" label="Elevation" step="1" min="0" max="24"></v-slider>
+      <v-slider v-model="elevation" label="Elevation" max="24" min="0" step="1"></v-slider>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-bottom-navigation'
   const model = ref('default')
   const options = ['grow', 'shift']

@@ -9,15 +9,15 @@ $utilities: () !default;
       // Display utilities
       "overflow": (
         property: overflow,
-        values: auto hidden visible,
+        values: auto hidden visible scroll,
       ),
       "overflow-x": (
         property: overflow-x,
-        values: auto hidden
+        values: auto hidden scroll
       ),
       "overflow-y": (
         property: overflow-y,
-        values: auto hidden
+        values: auto hidden scroll
       ),
       "display": (
         responsive: true,
@@ -472,6 +472,11 @@ $utilities: () !default;
         class: text,
         values: (break: break-word)
       ),
+      "opacity": (
+        property: opacity,
+        class: opacity,
+        values: variables.$opacities
+      ),
       "text-opacity": (
         property: color,
         class: text,
@@ -568,6 +573,7 @@ $utilities: () !default;
       ),
       "height": (
         property: height,
+        responsive: true,
         class: h,
         values: (
           auto: auto,
@@ -588,6 +594,7 @@ $utilities: () !default;
       ),
       "width": (
         property: width,
+        responsive: true,
         class: w,
         values: (
           auto: auto,

@@ -18,9 +18,9 @@ related:
 
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast applications.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<VoPromotionsCardHighlight slug="vuemastery-getting-started" />
 
 ## Installation
 
@@ -44,7 +44,7 @@ yarn create vuetify
 ```
 
 ```bash [npm]
-npm create vuetify
+npm create vuetify@latest
 ```
 
 ```bash [pnpm]
@@ -218,7 +218,6 @@ You should now have access to all Vuetify components and tools in Nuxt app.
 
 ```js
 import { createApp } from 'vue'
-import App from './App.vue'
 
 // Vuetify
 import '@mdi/font/css/materialdesignicons.css'
@@ -226,6 +225,9 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+
+// Components
+import App from './App.vue'
 
 const vuetify = createVuetify({
   components,
@@ -293,13 +295,15 @@ In the file where you create the Vue application, add the following code
 
 ```js
 import { createApp } from 'vue'
-import App from './App.vue'
 
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+
+// Components
+import App from './App.vue'
 
 const vuetify = createVuetify({
   components,
@@ -376,4 +380,4 @@ The three development branches (`master`, `dev`, and `next`) are automatically p
 
 Have a question that belongs here? Tell us in our [Discord Community](https://community.vuetifyjs.com/) or create a request on our [Issue Generator](https://issues.vuetifyjs.com/).
 
-<promoted slug="vuetify-discord" />
+<PromotedPromoted slug="vuetify-discord" />

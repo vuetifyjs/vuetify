@@ -5,11 +5,11 @@
         <v-select
           v-model="weekday"
           :items="weekdays"
-          dense
-          variant="outlined"
-          hide-details
-          label="weekdays"
           class="ma-2"
+          label="weekdays"
+          variant="outlined"
+          dense
+          hide-details
         ></v-select>
       </v-sheet>
     </v-col>

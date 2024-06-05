@@ -1,47 +1,36 @@
 <template>
-  <v-row justify="center">
-    <v-col
-      cols="12"
-      sm="7"
-      md="6"
-      lg="5"
+  <v-sheet
+    class="mx-auto"
+    elevation="10"
+    max-width="300"
+    rounded="xl"
+  >
+    <v-sheet
+      class="pa-3 bg-primary text-right"
+      rounded="t-xl"
     >
-      <v-sheet
-        elevation="10"
-        rounded="xl"
+      <v-btn icon="mdi-content-save-cog-outline"></v-btn>
+
+      <v-btn
+        class="ms-2"
+        icon="mdi-check-bold"
+      ></v-btn>
+    </v-sheet>
+
+    <div class="pa-4">
+      <v-chip-group
+        selected-class="text-primary"
+        column
       >
-        <v-sheet
-          class="pa-3 bg-primary text-right"
-          rounded="t-xl"
+        <v-chip
+          v-for="tag in tags"
+          :key="tag"
         >
-          <v-btn icon>
-            <v-icon>mdi-content-save-cog-outline</v-icon>
-          </v-btn>
-
-          <v-btn
-            class="ms-2"
-            icon
-          >
-            <v-icon>mdi-check-bold</v-icon>
-          </v-btn>
-        </v-sheet>
-
-        <div class="pa-4">
-          <v-chip-group
-            selected-class="text-primary"
-            column
-          >
-            <v-chip
-              v-for="tag in tags"
-              :key="tag"
-            >
-              {{ tag }}
-            </v-chip>
-          </v-chip-group>
-        </div>
-      </v-sheet>
-    </v-col>
-  </v-row>
+          {{ tag }}
+        </v-chip>
+      </v-chip-group>
+    </div>
+  </v-sheet>
 </template>
 
 <script setup>

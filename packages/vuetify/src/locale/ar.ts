@@ -2,6 +2,7 @@ export default {
   badge: 'شارة',
   open: 'Open',
   close: 'إغلاق',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
@@ -71,6 +72,7 @@ export default {
   timePicker: {
     am: 'صباحاً',
     pm: 'مساءً',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

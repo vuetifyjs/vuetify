@@ -11,30 +11,25 @@ related:
   - /about/meet-the-team/
 ---
 
-<script setup>
-  import ColorPalette from '@/components/resources/ColorPalette.vue'
-  import Logos from '@/components/resources/Logos.vue'
-</script>
-
 # Brand Kit
 
 Explore the Vuetify Brand Kit, your source for official logos and branding assets.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Vuetify Logo
 
 The Vuetify logo encapsulates the essence of modern web development, combining sleek design with Vue.js principles. Its symmetrical lines and bold color palette reflect the framework's commitment to efficiency, flexibility, and elegance, resonating with developers and designers alike.
 
-<logos />
+<ResourcesLogos />
 
 ## Color Palette
 
 The Vuetify logo color palette is comprised of 4 colors, each used for a different shape. The colors are designed to work together harmoniously, creating a unified and balanced look.
 
-<color-palette />
+<ResourcesColorPalette />
 
 <br>
 

@@ -1,7 +1,8 @@
 export default {
-  badge: 'insigne',
+  badge: 'Insigne',
   open: 'Openen',
   close: 'Sluiten',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Annuleren',
@@ -71,6 +72,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

@@ -9,11 +9,11 @@
       <v-text-field
         :model-value="itemsPerPage"
         class="pa-2"
-        hide-details
         label="Items per page"
-        min="-1"
         max="15"
+        min="-1"
         type="number"
+        hide-details
         @update:model-value="itemsPerPage = parseInt($event, 10)"
       ></v-text-field>
     </template>

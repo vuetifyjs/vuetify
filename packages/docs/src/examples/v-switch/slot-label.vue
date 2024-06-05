@@ -4,8 +4,8 @@
       Turn on the progress:
       <v-progress-circular
         :indeterminate="switchMe"
-        size="24"
         class="ms-2"
+        size="24"
       ></v-progress-circular>
     </template>
   </v-switch>

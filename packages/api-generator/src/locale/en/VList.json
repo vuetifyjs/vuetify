@@ -1,5 +1,6 @@
 {
   "props": {
+    "itemType": "Designates the key on the supplied items that is used for determining the nodes type.",
     "disabled": "Puts all children inputs into a disabled state.",
     "inactive": "If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler.",
     "lines": "Designates a **minimum-height** for all children `v-list-item` components. This prop uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers.",

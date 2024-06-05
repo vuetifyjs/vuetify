@@ -25,9 +25,9 @@ import { computed, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { UnwrapRef } from 'vue'
+import type { DeepReadonly, UnwrapRef } from 'vue'
 import type { Group } from './composables/group'
-import type { CellProps, DataTableItem, InternalDataTableHeader, RowProps } from './types'
+import type { CellProps, DataTableHeader, DataTableItem, InternalDataTableHeader, RowProps } from './types'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
 import type { GenericProps, SelectItemKey } from '@/util'
@@ -102,6 +102,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     rowProps?: RowProps<ItemType<T>>
     cellProps?: CellProps<ItemType<T>>
     itemSelectable?: SelectItemKey<ItemType<T>>
+    headers?: DeepReadonly<DataTableHeader<ItemType<T>>[]>
     modelValue?: V
     'onUpdate:modelValue'?: (value: V) => void
   },
@@ -150,7 +151,11 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
 
-    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, sortFunctions, sortRawFunctions)
+    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
+      transform: item => item.columns,
+      sortFunctions,
+      sortRawFunctions,
+    })
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
     const itemsLength = computed(() => flatItems.value.length)
 

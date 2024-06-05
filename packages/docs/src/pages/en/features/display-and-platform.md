@@ -8,17 +8,14 @@ related:
   - /styles/display/
   - /styles/text-and-typography/
 ---
-<script setup>
-  import BreakpointsTable from '@/components/features/BreakpointsTable.vue'
-</script>
 
 # Display & Platform
 
 The display composable provides a multitude of information about the current device
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Usage
 
@@ -53,13 +50,32 @@ If you are still using the Options API, you can access the display information o
 </script>
 ```
 
-<breakpoints-table />
-
 ## API
 
 | Component | Description |
 | - | - |
 | [useDisplay](/api/use-display/) | Composable |
+
+## Breakpoints and Thresholds
+
+Threshold values generate the ranges used for various breakpoints seen throughout vuetify and the `useDisplay` composable. The system uses an "and up" mentality starting from `xs` at 0px. The default threshold values are displayed below.
+
+<FeaturesBreakpointsTable />
+
+These ranges power the various additional `AndUp` / `AndDown` properties accessible in `useDisplay`
+
+```ts
+{
+  smAndDown: boolean // < 960px
+  smAndUp: boolean // > 600px
+  mdAndDown: boolean // < 1280px
+  mdAndUp: boolean // > 960px
+  lgAndDown: boolean // < 1919px
+  lgAndUp: boolean // > 1280px
+  xlAndDown: boolean // < 2559px
+  xlAndUp: boolean // > 1920px
+}
+```
 
 ## Options
 
@@ -127,20 +143,20 @@ In the following example, we use a switch statement and the current breakpoint n
 ```ts
 {
   // Breakpoints
-  xs: boolean
-  sm: boolean
-  md: boolean
-  lg: boolean
-  xl: boolean
+  xs: boolean // 0 - 595
+  sm: boolean // 600 - 959
+  md: boolean // 960 - 1279
+  lg: boolean // 1280 - 1919
+  xl: boolean // > 1920
   xxl: boolean
-  smAndDown: boolean
-  smAndUp: boolean
-  mdAndDown: boolean
-  mdAndUp: boolean
-  lgAndDown: boolean
-  lgAndUp: boolean
+  smAndDown: boolean // < 960
+  smAndUp: boolean // > 600
+  mdAndDown: boolean // < 1280
+  mdAndUp: boolean // > 960
+  lgAndDown: boolean // < 1919
+  lgAndUp: boolean // > 1280
   xlAndDown: boolean
-  xlAndUp: boolean
+  xlAndUp: boolean // < 1920
 
   // true if screen width < mobileBreakpoint
   mobile: boolean
