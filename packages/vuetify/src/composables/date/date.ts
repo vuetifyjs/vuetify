@@ -189,7 +189,10 @@ export function dateFromLocalizedValue (adapter: DateInstance, value: any, forma
       }
 
       if (part.type === 'year') {
-        if (options.year !== '2-digit' && options.year !== 'numeric') return
+        if (options.year !== '2-digit' && options.year !== 'numeric') {
+          anyNotSupportedPart = true
+          return
+        }
 
         // make a group that catches any number of length 1 to max length of the year part
         regexString += `(\\d{1,${part.value.length}})`
@@ -199,7 +202,10 @@ export function dateFromLocalizedValue (adapter: DateInstance, value: any, forma
       }
 
       if (part.type === 'month') {
-        if (options.month !== '2-digit' && options.month !== 'numeric') return
+        if (options.month !== '2-digit' && options.month !== 'numeric') {
+          anyNotSupportedPart = true
+          return
+        }
 
         // make a group that catches any number of length 1 to max length of the month part
         regexString += `(\\d{1,${part.value.length}})`
@@ -210,7 +216,10 @@ export function dateFromLocalizedValue (adapter: DateInstance, value: any, forma
       }
 
       if (part.type === 'day') {
-        if (options.day !== '2-digit' && options.day !== 'numeric') return
+        if (options.day !== '2-digit' && options.day !== 'numeric') {
+          anyNotSupportedPart = true
+          return
+        }
 
         // make a group that catches any number of length 1 to max length of the day part
         regexString += `(\\d{1,${part.value.length}})`
