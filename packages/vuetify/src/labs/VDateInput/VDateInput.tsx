@@ -6,12 +6,13 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { useDate } from '@/composables/date'
+import { dateFromLocalizedValue } from '@/composables/date/date'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, shallowRef } from 'vue'
+import { ref, shallowRef, watch, watchEffect } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -50,25 +51,39 @@ export const VDateInput = genericComponent()({
     const model = useProxiedModel(props, 'modelValue', props.multiple ? [] : null)
     const menu = shallowRef(false)
 
-    const display = computed(() => {
+    const display = ref<string | null>(null)
+
+    watch(isFocused, isFocusedValue => {
+      if (isFocusedValue) return
+
+      setModelValueFromDisplayValue()
+    })
+
+    watchEffect(() => {
       const value = wrapInArray(model.value)
 
-      if (!value.length) return null
+      if (!value.length) {
+        display.value = null
+        return
+      }
 
       if (props.multiple === true) {
-        return t('$vuetify.datePicker.itemsSelected', value.length)
+        display.value = t('$vuetify.datePicker.itemsSelected', value.length)
+        return
       }
 
       if (props.multiple === 'range') {
         const start = value[0]
         const end = value[value.length - 1]
 
-        return adapter.isValid(start) && adapter.isValid(end)
-          ? `${adapter.format(start, 'keyboardDate')} - ${adapter.format(end, 'keyboardDate')}`
+        display.value = adapter.isValid(start) && adapter.isValid(end)
+          ? `${formatValueForTextField(start)} - ${formatValueForTextField(end)}`
           : ''
+
+        return
       }
 
-      return adapter.isValid(model.value) ? adapter.format(model.value, 'keyboardDate') : ''
+      display.value = formatValueForTextField(model.value)
     })
 
     function onKeydown (e: KeyboardEvent) {
@@ -76,13 +91,55 @@ export const VDateInput = genericComponent()({
 
       if (!menu.value || !isFocused.value) {
         menu.value = true
-
         return
       }
 
-      const target = e.target as HTMLInputElement
+      setModelValueFromDisplayValue()
+    }
 
-      model.value = adapter.date(target.value)
+    function setModelValueFromDisplayValue () {
+      if (props.multiple === true) {
+        // here the e.target will be in format "1 selected", so that cannot be parsed back to date
+        return
+      }
+
+      if (props.multiple === 'range') {
+        if (display.value == null || display.value === '') {
+          model.value = []
+          return
+        }
+
+        // NOTE: split by ' - ', so value "2024-06-04 - 2024-06-05" will be split into array of ["2024-06-04", "2024-06-05"]
+        const [fromValue, toValue] = display.value.split(' - ').map(i => i?.trim())
+        if (fromValue == null || fromValue.length === 0 || toValue == null || toValue.length === 0) {
+          model.value = []
+          return
+        }
+
+        const fromParsed = parseValueFromTextField(fromValue)
+        const toParsed = parseValueFromTextField(toValue)
+
+        if (adapter.isValid(fromParsed) && adapter.isValid(toParsed)) {
+          model.value = [fromParsed, toParsed]
+          return
+        }
+
+        model.value = []
+        return
+      }
+
+      model.value = parseValueFromTextField(display.value)
+    }
+
+    function parseValueFromTextField (value: string | null) {
+      const parsedValue = dateFromLocalizedValue(adapter, value, 'keyboardDate')
+      if (parsedValue) return parsedValue
+
+      return adapter.date(value)
+    }
+
+    function formatValueForTextField (value: any) {
+      return adapter.isValid(value) ? adapter.format(value, 'keyboardDate') : ''
     }
 
     function onClick (e: MouseEvent) {
@@ -99,14 +156,15 @@ export const VDateInput = genericComponent()({
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const datePickerProps = VDatePicker.filterProps(omit(props, ['active']))
-      const textFieldProps = VTextField.filterProps(props)
+      const textFieldProps = VTextField.filterProps(omit(props, ['readonly']))
 
       return (
         <VTextField
           { ...textFieldProps }
-          modelValue={ display.value }
+          v-model={ display.value }
           onKeydown={ onKeydown }
           focused={ menu.value || isFocused.value }
+          readonly={ props.readonly || props.multiple === true }
           onFocus={ focus }
           onBlur={ blur }
           onClick:control={ onClick }

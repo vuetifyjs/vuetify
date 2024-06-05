@@ -11,7 +11,7 @@ import type { DateAdapter } from './DateAdapter'
 import type { LocaleInstance } from '@/composables/locale'
 
 // Adapters
-import { VuetifyDateAdapter } from './adapters/vuetify'
+import { getDateTimeFormatOptions, VuetifyDateAdapter } from './adapters/vuetify'
 
 export interface DateInstance extends DateModule.InternalAdapter {
   locale?: any
@@ -138,4 +138,112 @@ export function getWeek (adapter: DateAdapter<any>, value: any) {
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
 
   return Math.floor(diffDays / 7) + 1
+}
+
+/**
+ * This is an arbitrary date used parse a formatted date needed for parsing an user provided date into Date objects.
+ * Each date part (year, month and day) should be of max length for each part. For example, max value for month
+ * is a two digit number, so the arbitrary date must have two digit number for month. Similarly for other parts.
+ */
+const arbitraryDate = new Date(2000, 10, 10)
+
+/**
+ * Try to parse the provided value into a Date object in a locale aware way.
+ * @param adapter date instance adapter value
+ * @param value value that should be parsed into a Date object
+ * @param formatString string format in which the value should be given (currently only `keyboardDate` is supported)
+ * @returns null if parsing is not possible for current locale and provided formatString, otherwise the parsed Date
+*/
+export function dateFromLocalizedValue (adapter: DateInstance, value: any, formatString: string): Date | null {
+  if (value == null) return null
+  if (value instanceof Date) return value
+
+  if (typeof value !== 'string') return null
+
+  value = value.trim()
+  if (value === '') return null
+
+  const options = getDateTimeFormatOptions(formatString)
+  if (options == null) return null
+
+  // NOTE: currently only simple date parsing is supported
+  // Implement other formats when required
+  if (formatString !== 'keyboardDate') return null
+
+  let regexString = ''
+  let nextGroupIndex = 0
+  let yearGroupIndex = -1
+  let monthGroupIndex = -1
+  let dayGroupIndex = -1
+  let anyNotSupportedPart = false
+
+  new Intl.DateTimeFormat(adapter.locale, options)
+    .formatToParts(arbitraryDate)
+    .forEach(part => {
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#date-time_component_options
+      // Currently only "literal | year | month | day" types are parsed, as they are required for keyboardDate formatString
+      // Extend this if other formats are required
+      if (part.type === 'literal') {
+        regexString += part.value
+        return
+      }
+
+      if (part.type === 'year') {
+        if (options.year !== '2-digit' && options.year !== 'numeric') return
+
+        // make a group that catches any number of length 1 to max length of the year part
+        regexString += `(\\d{1,${part.value.length}})`
+        yearGroupIndex = nextGroupIndex
+        nextGroupIndex++
+        return
+      }
+
+      if (part.type === 'month') {
+        if (options.month !== '2-digit' && options.month !== 'numeric') return
+
+        // make a group that catches any number of length 1 to max length of the month part
+        regexString += `(\\d{1,${part.value.length}})`
+
+        monthGroupIndex = nextGroupIndex
+        nextGroupIndex++
+        return
+      }
+
+      if (part.type === 'day') {
+        if (options.day !== '2-digit' && options.day !== 'numeric') return
+
+        // make a group that catches any number of length 1 to max length of the day part
+        regexString += `(\\d{1,${part.value.length}})`
+
+        dayGroupIndex = nextGroupIndex
+        nextGroupIndex++
+        return
+      }
+
+      anyNotSupportedPart = true
+    })
+
+  if (anyNotSupportedPart) return null
+  if (yearGroupIndex === -1 || monthGroupIndex === -1 || dayGroupIndex === -1) return null
+
+  // Try to match the provided value into the generated regex string
+  const matchResult = value.match(new RegExp(regexString))
+
+  // If at least one group not matched, then matchResult will be null
+  if (matchResult == null) return null
+
+  // '+ 1', because first element in matchResult is the matched text, and later are the groups
+  const parsedYear = Number(matchResult[yearGroupIndex + 1])
+  const parsedMonth = Number(matchResult[monthGroupIndex + 1])
+  const parsedDay = Number(matchResult[dayGroupIndex + 1])
+
+  let finalDate = adapter.date() as Date
+  finalDate = adapter.setYear(finalDate, parsedYear) as Date
+
+  // month are indexed from 0 so '- 1` is required
+  finalDate = adapter.setMonth(finalDate, parsedMonth - 1) as Date
+
+  finalDate = adapter.setDate(finalDate, parsedDay) as Date
+
+  return adapter.isValid(finalDate) ? finalDate : null
 }

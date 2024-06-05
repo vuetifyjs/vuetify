@@ -266,6 +266,65 @@ function getWeekdays (locale: string) {
   })
 }
 
+export function getDateTimeFormatOptions (
+  formatString: string,
+): Intl.DateTimeFormatOptions | null {
+  switch (formatString) {
+    case 'fullDate':
+      return { year: 'numeric', month: 'long', day: 'numeric' }
+    case 'fullDateWithWeekday':
+      return { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+    case 'normalDateWithWeekday':
+      return { weekday: 'short', day: 'numeric', month: 'short' }
+    case 'shortDate':
+      return { month: 'short', day: 'numeric' }
+    case 'year':
+      return { year: 'numeric' }
+    case 'month':
+      return { month: 'long' }
+    case 'monthShort':
+      return { month: 'short' }
+    case 'monthAndYear':
+      return { month: 'long', year: 'numeric' }
+    case 'monthAndDate':
+      return { month: 'long', day: 'numeric' }
+    case 'weekday':
+      return { weekday: 'long' }
+    case 'weekdayShort':
+      return { weekday: 'short' }
+    case 'hours12h':
+      return { hour: 'numeric', hour12: true }
+    case 'hours24h':
+      return { hour: 'numeric', hour12: false }
+    case 'minutes':
+      return { minute: 'numeric' }
+    case 'seconds':
+      return { second: 'numeric' }
+    case 'fullTime':
+      return { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+    case 'fullTime12h':
+      return { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+    case 'fullTime24h':
+      return { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+    case 'fullDateTime':
+      return { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+    case 'fullDateTime12h':
+      return { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+    case 'fullDateTime24h':
+      return { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+    case 'keyboardDate':
+      return { year: 'numeric', month: '2-digit', day: '2-digit' }
+    case 'keyboardDateTime':
+      return { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+    case 'keyboardDateTime12h':
+      return { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+    case 'keyboardDateTime24h':
+      return { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+  }
+
+  return null
+}
+
 function format (
   value: Date,
   formatString: string,
@@ -279,93 +338,17 @@ function format (
     return customFormat(newDate, formatString, locale)
   }
 
-  let options: Intl.DateTimeFormatOptions = {}
-  switch (formatString) {
-    case 'fullDate':
-      options = { year: 'numeric', month: 'long', day: 'numeric' }
-      break
-    case 'fullDateWithWeekday':
-      options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
-      break
-    case 'normalDate':
-      const day = newDate.getDate()
-      const month = new Intl.DateTimeFormat(locale, { month: 'long' }).format(newDate)
-      return `${day} ${month}`
-    case 'normalDateWithWeekday':
-      options = { weekday: 'short', day: 'numeric', month: 'short' }
-      break
-    case 'shortDate':
-      options = { month: 'short', day: 'numeric' }
-      break
-    case 'year':
-      options = { year: 'numeric' }
-      break
-    case 'month':
-      options = { month: 'long' }
-      break
-    case 'monthShort':
-      options = { month: 'short' }
-      break
-    case 'monthAndYear':
-      options = { month: 'long', year: 'numeric' }
-      break
-    case 'monthAndDate':
-      options = { month: 'long', day: 'numeric' }
-      break
-    case 'weekday':
-      options = { weekday: 'long' }
-      break
-    case 'weekdayShort':
-      options = { weekday: 'short' }
-      break
-    case 'dayOfMonth':
-      return new Intl.NumberFormat(locale).format(newDate.getDate())
-    case 'hours12h':
-      options = { hour: 'numeric', hour12: true }
-      break
-    case 'hours24h':
-      options = { hour: 'numeric', hour12: false }
-      break
-    case 'minutes':
-      options = { minute: 'numeric' }
-      break
-    case 'seconds':
-      options = { second: 'numeric' }
-      break
-    case 'fullTime':
-      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
-      break
-    case 'fullTime12h':
-      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
-      break
-    case 'fullTime24h':
-      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
-      break
-    case 'fullDateTime':
-      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
-      break
-    case 'fullDateTime12h':
-      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
-      break
-    case 'fullDateTime24h':
-      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
-      break
-    case 'keyboardDate':
-      options = { year: 'numeric', month: '2-digit', day: '2-digit' }
-      break
-    case 'keyboardDateTime':
-      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
-      break
-    case 'keyboardDateTime12h':
-      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
-      break
-    case 'keyboardDateTime24h':
-      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
-      break
-    default:
-      options = customFormat ?? { timeZone: 'UTC', timeZoneName: 'short' }
+  if (formatString === 'normalDate') {
+    const day = newDate.getDate()
+    const month = new Intl.DateTimeFormat(locale, { month: 'long' }).format(newDate)
+    return `${day} ${month}`
   }
 
+  if (formatString === 'dayOfMonth') {
+    return new Intl.NumberFormat(locale).format(newDate.getDate())
+  }
+
+  const options: Intl.DateTimeFormatOptions = getDateTimeFormatOptions(formatString) ?? { timeZone: 'UTC', timeZoneName: 'short' }
   return new Intl.DateTimeFormat(locale, options).format(newDate)
 }
 
