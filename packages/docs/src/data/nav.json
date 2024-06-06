@@ -88,6 +88,7 @@
         "routePath": "explorer",
         "subtitle": "browse-components"
       },
+      "application",
       { "divider": true },
       { "subheader": "containment" },
       "bottom-sheets",
