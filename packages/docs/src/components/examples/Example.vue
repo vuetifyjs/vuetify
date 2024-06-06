@@ -70,7 +70,7 @@
       </v-lazy>
 
       <div class="d-flex flex-column">
-        <v-expand-transition v-if="hasRendered">
+        <v-expand-transition v-if="hasRendered || preview">
           <v-window v-show="showCode" v-model="template">
             <v-window-item
               v-for="(section, i) of sections"
@@ -88,7 +88,7 @@
         </v-expand-transition>
 
         <v-theme-provider
-          :class="showCode && 'border-t'"
+          :class="showCode && !preview && 'border-t'"
           :theme="theme"
           class="pa-2 rounded-b"
           with-background
