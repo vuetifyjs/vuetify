@@ -177,13 +177,13 @@ Text fields can validate against character masks. Using either a pre-made or cus
 | a | Any small letter |
 | N | Any capital alphanumeric character |
 | n | Any small alphanumeric character |
-| X | Any special symbol (-!$%^&*()_+|~=`{}[]:";'<>?,./\) or space |
+| X | Any special symbol (-!$%^&*()_+ &#124;~=`{}[]:";'<>?,./\) or space |
 
 | Pre-made | |
 | - | - |
-| credit-card	| #### - #### - #### - #### |
+| credit-card | #### - #### - #### - #### |
 | date-with-time | ##/##/#### ##:## |
-| phone	| (###) ### - #### |
+| phone | (###) ### - #### |
 | social | ###-##-#### |
 | time | ##:## |
 | time-with-seconds | ##:##:## |
