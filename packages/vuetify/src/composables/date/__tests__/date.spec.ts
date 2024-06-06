@@ -49,7 +49,7 @@ describe('date.ts', () => {
     ])('parse value "%s" into Date when providing valid keyboardDate formatted date string in "en-US" format', (value, expected) => {
       const adapter = new VuetifyDateAdapter({ locale: 'en-US' })
 
-      const result = dateFromLocalizedValue(adapter, value, 'keyboardDate')
+      const result: any = dateFromLocalizedValue(adapter, value, 'keyboardDate')
       expect(result).not.toBeNull()
       expect(result!.getDate()).toBe(expected.getDate())
       expect(result!.getMonth()).toBe(expected.getMonth())
@@ -86,7 +86,7 @@ describe('date.ts', () => {
     ])('parse value "%s" into Date when providing valid keyboardDate formatted date string in "pl" format', (value, expected) => {
       const adapter = new VuetifyDateAdapter({ locale: 'pl' })
 
-      const result = dateFromLocalizedValue(adapter, value, 'keyboardDate')
+      const result: any = dateFromLocalizedValue(adapter, value, 'keyboardDate')
       expect(result).not.toBeNull()
       expect(result!.getDate()).toBe(expected.getDate())
       expect(result!.getMonth()).toBe(expected.getMonth())
@@ -123,7 +123,7 @@ describe('date.ts', () => {
     ])('parse value "%s" into Date when providing valid keyboardDate formatted date string in "sv" format', (value, expected) => {
       const adapter = new VuetifyDateAdapter({ locale: 'sv' })
 
-      const result = dateFromLocalizedValue(adapter, value, 'keyboardDate')
+      const result: any = dateFromLocalizedValue(adapter, value, 'keyboardDate')
       expect(result).not.toBeNull()
       expect(result!.getDate()).toBe(expected.getDate())
       expect(result!.getMonth()).toBe(expected.getMonth())
