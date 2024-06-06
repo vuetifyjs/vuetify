@@ -8,8 +8,6 @@ import { VLocaleProvider } from '../../../components/VLocaleProvider'
 import { ref } from 'vue'
 
 describe('VDateInput', () => {
-  // DEFAULT LOCALE
-
   function expectDate (value: Date | null, expectedYear: number, expectedMonth: number, expectedDate: number) {
     expect(value?.getFullYear()).to.be.equal(expectedYear)
     expect(value?.getMonth()).to.be.equal(expectedMonth)

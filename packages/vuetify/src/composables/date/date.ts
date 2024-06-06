@@ -154,7 +154,7 @@ const arbitraryDate = new Date(2000, 10, 10)
  * @param formatString string format in which the value should be given (currently only `keyboardDate` is supported)
  * @returns null if parsing is not possible for current locale and provided formatString, otherwise the parsed Date
 */
-export function dateFromLocalizedValue (adapter: DateInstance, value: any, formatString: string): Date | null {
+export function dateFromLocalizedValue (adapter: DateInstance, value: any, formatString: string): unknown | null {
   if (value == null) return null
   if (value instanceof Date) return value
 
@@ -247,13 +247,13 @@ export function dateFromLocalizedValue (adapter: DateInstance, value: any, forma
   const parsedMonth = Number(matchResult[monthGroupIndex + 1])
   const parsedDay = Number(matchResult[dayGroupIndex + 1])
 
-  let finalDate = adapter.date() as Date
-  finalDate = adapter.setYear(finalDate, parsedYear) as Date
+  let finalDate = adapter.date()
+  finalDate = adapter.setYear(finalDate, parsedYear)
 
   // month are indexed from 0 so '- 1` is required
-  finalDate = adapter.setMonth(finalDate, parsedMonth - 1) as Date
+  finalDate = adapter.setMonth(finalDate, parsedMonth - 1)
 
-  finalDate = adapter.setDate(finalDate, parsedDay) as Date
+  finalDate = adapter.setDate(finalDate, parsedDay)
 
   return adapter.isValid(finalDate) ? finalDate : null
 }
