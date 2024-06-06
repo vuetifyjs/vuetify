@@ -105,35 +105,24 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       props,
       'modelValue',
       '',
+      val => props.mask ? maskText(unmaskText(val)) : val,
       val => {
-        if (props.mask && val !== lazyValue.value) {
-          lazyValue.value = val
-          return maskText(val)
-        }
-        return val
-      },
-      val => {
-        if (props.mask && val !== lazyValue.value) {
+        if (props.mask) {
           // In case of token is #-# and the input value is '2-23'
-          // Create a variable that holds the enforced token format; in this case, '2-2'
+          // Create a variable that holds the enforced token format; in this case, '2-23' is enforced to '2-2'
           const enforcedMaskedValue = maskText(unmaskText(val))
-          // Extract the lazy value from the previously enforced formatted masked value; in this case, '22'
           const newLazyValue = unmaskText(enforcedMaskedValue)
 
           if (newLazyValue === lazyValue.value) {
-            // When the newLazyValue is equal to the previous lazy value
-            // the v-model remains unchanged, as a result, the render function doesn't trigger,
-            // the input tag value must be reinforced with the enforced masked value.
-            // In this case, '2-23' is enforced to '2-2'
             inputRef.value!.value = enforcedMaskedValue
-            return lazyValue.value
+            return props.returnMaskedValue ? maskText(lazyValue.value) : lazyValue.value
           }
           lazyValue.value = newLazyValue
           updateRange()
         } else {
           lazyValue.value = val
         }
-        return lazyValue.value
+        return props.returnMaskedValue ? maskText(lazyValue.value) : lazyValue.value
       },
     )
     const counterValue = computed(() => {

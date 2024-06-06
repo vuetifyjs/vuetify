@@ -7,10 +7,12 @@ import type { Ref } from 'vue'
 
 export interface MaskProps {
   mask: string | undefined
+  returnMaskedValue: Boolean
 }
 
 export const makeMaskProps = propsFactory({
   mask: String,
+  returnMaskedValue: Boolean,
 }, 'mask')
 
 export interface MaskItem {
