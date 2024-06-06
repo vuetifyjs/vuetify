@@ -7,6 +7,8 @@ related:
   - /styles/text-and-typography/
   - /directives/resize/
   - /features/display-and-platform/
+features:
+  report: true
 ---
 
 # Display helpers

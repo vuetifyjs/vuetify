@@ -7,6 +7,8 @@ related:
   - /styles/display/
   - /components/grids/
   - /styles/css-reset/
+features:
+  report: true
 ---
 
 # Flex
@@ -52,21 +54,41 @@ Control the layout of flex containers with alignment, justification and more wit
 | **flex-md-0-0** | flex: 0 0 auto; |
 | **flex-lg-0-0** | flex: 0 0 auto; |
 | **flex-xl-0-0** | flex: 0 0 auto; |
+| **flex-1-1-0** | flex: 1 1 0%; |
+| **flex-sm-1-1-0** | flex: 1 1 0%; |
+| **flex-md-1-1-0** | flex: 1 1 0%; |
+| **flex-lg-1-1-0** | flex: 1 1 0%; |
+| **flex-xl-1-1-0** | flex: 1 1 0%; |
 | **flex-1-1-100** | flex: 1 1 100%; |
 | **flex-sm-1-1-100** | flex: 1 1 100%; |
 | **flex-md-1-1-100** | flex: 1 1 100%; |
 | **flex-lg-1-1-100** | flex: 1 1 100%; |
 | **flex-xl-1-1-100** | flex: 1 1 100%; |
+| **flex-1-0-0** | flex: 1 0 0%; |
+| **flex-sm-1-0-0** | flex: 1 0 0%; |
+| **flex-md-1-0-0** | flex: 1 0 0%; |
+| **flex-lg-1-0-0** | flex: 1 0 0%; |
+| **flex-xl-1-0-0** | flex: 1 0 0%; |
 | **flex-1-0-100** | flex: 1 0 100%; |
 | **flex-sm-1-0-100** | flex: 1 0 100%; |
 | **flex-md-1-0-100** | flex: 1 0 100%; |
 | **flex-lg-1-0-100** | flex: 1 0 100%; |
 | **flex-xl-1-0-100** | flex: 1 0 100%; |
+| **flex-0-1-0** | flex: 0 1 0%; |
+| **flex-sm-0-1-0** | flex: 0 1 0%; |
+| **flex-md-0-1-0** | flex: 0 1 0%; |
+| **flex-lg-0-1-0** | flex: 0 1 0%; |
+| **flex-xl-0-1-0** | flex: 0 1 0%; |
 | **flex-0-1-100** | flex: 0 1 100%; |
 | **flex-sm-0-1-100** | flex: 0 1 100%; |
 | **flex-md-0-1-100** | flex: 0 1 100%; |
 | **flex-lg-0-1-100** | flex: 0 1 100%; |
 | **flex-xl-0-1-100** | flex: 0 1 100%; |
+| **flex-0-0-0** | flex: 0 0 0% |
+| **flex-sm-0-0-0** | flex: 0 0 0% |
+| **flex-md-0-0-0** | flex: 0 0 0% |
+| **flex-lg-0-0-0** | flex: 0 0 0% |
+| **flex-xl-0-0-0** | flex: 0 0 0% |
 | **flex-0-0-100** | flex: 0 0 100%; |
 | **flex-sm-0-0-100** | flex: 0 0 100%; |
 | **flex-md-0-0-100** | flex: 0 0 100%; |
