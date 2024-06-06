@@ -70,7 +70,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
   },
 
   setup (props, { attrs, emit, slots }) {
-    const lazyValue = ref('')
     const { isFocused, focus, blur } = useFocus(props)
     const max = computed(() => {
       if (attrs.maxlength) return attrs.maxlength as unknown as undefined
@@ -100,6 +99,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     const inputRef = ref<HTMLInputElement>()
 
     const { maskText, updateRange, unmaskText } = useMask(props, inputRef)
+    const returnMaskedValue = computed(() => props.mask && props.returnMaskedValue)
 
     const model = useProxiedModel(
       props,
@@ -108,21 +108,20 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       val => props.mask ? maskText(unmaskText(val)) : val,
       val => {
         if (props.mask) {
+          const valueBeforeChange = unmaskText(model.value)
           // In case of token is #-# and the input value is '2-23'
           // Create a variable that holds the enforced token format; in this case, '2-23' is enforced to '2-2'
           const enforcedMaskedValue = maskText(unmaskText(val))
-          const newLazyValue = unmaskText(enforcedMaskedValue)
+          const newUnmaskedValue = unmaskText(enforcedMaskedValue)
 
-          if (newLazyValue === lazyValue.value) {
+          if (newUnmaskedValue === valueBeforeChange) {
             inputRef.value!.value = enforcedMaskedValue
-            return props.returnMaskedValue ? maskText(lazyValue.value) : lazyValue.value
+            return returnMaskedValue.value ? maskText(val) : val
           }
-          lazyValue.value = newLazyValue
+          val = newUnmaskedValue
           updateRange()
-        } else {
-          lazyValue.value = val
         }
-        return props.returnMaskedValue ? maskText(lazyValue.value) : lazyValue.value
+        return returnMaskedValue.value ? maskText(val) : val
       },
     )
     const counterValue = computed(() => {
