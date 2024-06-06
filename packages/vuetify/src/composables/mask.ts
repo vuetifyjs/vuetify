@@ -24,6 +24,16 @@ export const defaultDelimiters = /[-!$%^&*()_+|~=`{}[\]:";'<>?,./\\ ]/
 
 export type MaskType = '#' | 'A' | 'a' | 'N' | 'n' | 'X'
 
+const preDefinedMap: Record<string, string> = {
+  'credit-card': '#### - #### - #### - ####',
+  date: '##/##/####',
+  'date-with-time': '##/##/#### ##:##',
+  phone: '(###) ### - ####',
+  social: '###-##-####',
+  time: '##:##',
+  'time-with-seconds': '##:##:##',
+}
+
 export const isMaskDelimiter = (char: string): boolean => char ? defaultDelimiters.test(char) : false
 
 const allowedMasks: Record<MaskType, MaskItem> = {
@@ -63,10 +73,13 @@ const convert = (mask: MaskType, char: string): string => {
 }
 
 export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | undefined>) {
-  const masks = computed(() => props.mask ? props.mask.split('') : [])
+  const rawMask = computed(() => {
+    const preDefined = props.mask ? preDefinedMap[props.mask] : undefined
+    return preDefined ?? (props.mask ?? props.mask)
+  })
+  const masks = computed(() => rawMask.value ? rawMask.value.split('') : [])
   const selection = ref(0)
   const lazySelection = ref(0)
-  // const maskedValue = computed(() => maskText(lazyValue.value, masks.value))
 
   const maskText = (text: string | null | undefined): string => {
     if (text == null) return ''

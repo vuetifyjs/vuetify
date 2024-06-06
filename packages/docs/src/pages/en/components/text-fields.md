@@ -166,6 +166,30 @@ Group multiple `v-text-field` components and other functionality within a `v-for
 
 <ExamplesExample file="v-text-field/misc-guide" />
 
+#### Masks
+
+Text fields can validate against character masks. Using either a pre-made or custom rules, you can optionally format and validate specific character sets. Note that **masks work only with text fields**, using them with date/number/file etc inputs may end up in unexpected behaviour or exception.
+
+| Mask | Description |
+| - | - |
+| # | Any digit |
+| A | Any capital letter |
+| a | Any small letter |
+| N | Any capital alphanumeric character |
+| n | Any small alphanumeric character |
+| X | Any special symbol (-!$%^&*()_+|~=`{}[]:";'<>?,./\) or space |
+
+| Pre-made | |
+| - | - |
+| credit-card	| #### - #### - #### - #### |
+| date-with-time | ##/##/#### ##:## |
+| phone	| (###) ### - #### |
+| social | ###-##-#### |
+| time | ##:## |
+| time-with-seconds | ##:##:## |
+
+<ExamplesExample file="v-text-field/prop-mask" />
+
 ### Examples
 
 The following is a collection of `v-text-field` examples that demonstrate how different the properties work in an application.
