@@ -104,7 +104,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     const model = useProxiedModel(
       props,
       'modelValue',
-      '',
+      undefined,
       val => props.mask ? maskText(unmaskText(val)) : val,
       val => {
         if (props.mask) {
