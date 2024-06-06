@@ -141,7 +141,7 @@ export function getWeek (adapter: DateAdapter<any>, value: any) {
 }
 
 /**
- * This is an arbitrary date used parse a formatted date needed for parsing an user provided date into Date objects.
+ * This is an arbitrary date used to parse a formatted date needed for parsing an user provided date into Date objects.
  * Each date part (year, month and day) should be of max length for each part. For example, max value for month
  * is a two digit number, so the arbitrary date must have two digit number for month. Similarly for other parts.
  */
@@ -184,7 +184,8 @@ export function dateFromLocalizedValue (adapter: DateInstance, value: any, forma
       // Currently only "literal | year | month | day" types are parsed, as they are required for keyboardDate formatString
       // Extend this if other formats are required
       if (part.type === 'literal') {
-        regexString += part.value
+        // dot (.) must be escaped in the regex string
+        regexString += part.value.replaceAll('.', '\\.')
         return
       }
 
