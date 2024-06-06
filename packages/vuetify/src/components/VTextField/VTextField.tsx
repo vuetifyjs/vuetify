@@ -116,7 +116,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
 
           if (newUnmaskedValue === valueBeforeChange) {
             inputRef.value!.value = enforcedMaskedValue
-            return returnMaskedValue.value ? maskText(val) : val
+            return returnMaskedValue.value ? maskText(newUnmaskedValue) : newUnmaskedValue
           }
           val = newUnmaskedValue
           updateRange()
