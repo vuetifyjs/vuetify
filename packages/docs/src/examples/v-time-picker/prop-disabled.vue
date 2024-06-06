@@ -9,7 +9,7 @@
     ></v-time-picker>
     <v-time-picker
       v-model="picker"
-      :landscape="$vuetify.breakpoint.smAndUp"
+      :landscape="$vuetify.display.smAndUp"
       disabled
     ></v-time-picker>
   </v-row>
