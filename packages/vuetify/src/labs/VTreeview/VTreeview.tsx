@@ -146,7 +146,14 @@ export const VTreeview = genericComponent<new <T>(
     })
 
     useRender(() => {
-      const listProps = VList.filterProps(props)
+      const { opened: _, ...listPropsRaw } = VList.filterProps(props)
+      const listProps = props.opened == null
+        ? listPropsRaw
+        : {
+          ...listPropsRaw,
+          opened: props.opened,
+        }
+
       const treeviewChildrenProps = VTreeviewChildren.filterProps(props)
 
       return (
@@ -158,7 +165,6 @@ export const VTreeview = genericComponent<new <T>(
             props.class,
           ]}
           style={ props.style }
-          v-model:opened={ opened.value }
           v-model:activated={ activated.value }
           v-model:selected={ selected.value }
         >
