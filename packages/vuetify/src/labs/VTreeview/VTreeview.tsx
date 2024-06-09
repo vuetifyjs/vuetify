@@ -9,7 +9,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, provide, ref, toRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, getCurrentInstance, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
@@ -59,6 +59,7 @@ export const VTreeview = genericComponent<new <T>(
   },
 
   setup (props, { slots }) {
+    const vm = getCurrentInstance('VTreeview')
     const { items } = useListItems(props)
     const activeColor = toRef(props, 'activeColor')
     const baseColor = toRef(props, 'baseColor')
@@ -146,13 +147,7 @@ export const VTreeview = genericComponent<new <T>(
     })
 
     useRender(() => {
-      const { opened: _, ...listPropsRaw } = VList.filterProps(props)
-      const listProps = props.opened == null
-        ? listPropsRaw
-        : {
-          ...listPropsRaw,
-          opened: props.opened,
-        }
+      const listProps = VList.filterProps(vm.vnode.props!)
 
       const treeviewChildrenProps = VTreeviewChildren.filterProps(props)
 
