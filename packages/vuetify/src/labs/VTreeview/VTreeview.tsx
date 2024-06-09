@@ -12,6 +12,7 @@ import { computed, provide, ref, toRef, watch } from 'vue'
 import { genericComponent, getCurrentInstance, omit, propsFactory, useRender } from '@/util'
 
 // Types
+import type { ExtractPublicPropTypes } from 'vue'
 import { VTreeviewSymbol } from './shared'
 import type { VListChildrenSlots } from '@/components/VList/VListChildren'
 import type { ListItem } from '@/composables/list-items'
@@ -147,7 +148,7 @@ export const VTreeview = genericComponent<new <T>(
     })
 
     useRender(() => {
-      const listProps = VList.filterProps(vm.vnode.props!)
+      const listProps = VList.filterProps(vm.vnode.props! as ExtractPublicPropTypes<typeof makeVTreeviewProps>)
 
       const treeviewChildrenProps = VTreeviewChildren.filterProps(props)
 
