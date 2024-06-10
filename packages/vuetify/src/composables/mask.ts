@@ -1,5 +1,5 @@
 // Utilities
-import { computed, ref } from 'vue'
+import { computed, shallowRef } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
@@ -34,7 +34,9 @@ const preDefinedMap: Record<string, string> = {
   'time-with-seconds': '##:##:##',
 }
 
-export const isMaskDelimiter = (char: string): boolean => char ? defaultDelimiters.test(char) : false
+export function isMaskDelimiter (char: string): boolean {
+  return char ? defaultDelimiters.test(char) : false
+}
 
 const allowedMasks: Record<MaskType, MaskItem> = {
   '#': {
@@ -61,14 +63,16 @@ const allowedMasks: Record<MaskType, MaskItem> = {
   },
 }
 
-const isMask = (char: string): boolean => allowedMasks.hasOwnProperty(char)
+function isMask (char: string): boolean {
+  return allowedMasks.hasOwnProperty(char)
+}
 
-const maskValidates = (mask: MaskType, char: string): boolean => {
+function maskValidates (mask: MaskType, char: string): boolean {
   if (char == null || !isMask(mask)) return false
   return allowedMasks[mask].test(char)
 }
 
-const convert = (mask: MaskType, char: string): string => {
+function convert (mask: MaskType, char: string): string {
   return allowedMasks[mask].convert ? allowedMasks[mask].convert!(char) : char
 }
 
@@ -78,10 +82,10 @@ export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | unde
     return preDefined ?? (props.mask ?? props.mask)
   })
   const masks = computed(() => rawMask.value ? rawMask.value.split('') : [])
-  const selection = ref(0)
-  const lazySelection = ref(0)
+  const selection = shallowRef(0)
+  const lazySelection = shallowRef(0)
 
-  const maskText = (text: string | null | undefined): string => {
+  function maskText (text: string | null | undefined): string {
     if (text == null) return ''
 
     if (!masks.value.length || !text.length) return text
@@ -115,7 +119,7 @@ export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | unde
     }
     return newText
   }
-  const unmaskText = (text: string): string => {
+  function unmaskText (text: string): string {
     return text ? String(text).replace(new RegExp(defaultDelimiters.source, 'g'), '') : text
   }
   function setCaretPosition (newSelection: number) {
