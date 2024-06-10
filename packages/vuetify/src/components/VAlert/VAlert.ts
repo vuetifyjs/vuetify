@@ -16,6 +16,7 @@ import Transitionable from '../../mixins/transitionable'
 // Utilities
 import mixins from '../../util/mixins'
 import { breaking } from '../../util/console'
+import { getSlot } from '../../util/helpers'
 
 // Types
 import { VNodeData } from 'vue'
@@ -188,10 +189,10 @@ export default mixins(
   methods: {
     genWrapper (): VNode {
       const children = [
-        this.$slots.prepend || this.__cachedIcon,
+        getSlot(this, 'prepend') || this.__cachedIcon,
         this.genContent(),
         this.__cachedBorder,
-        this.$slots.append,
+        getSlot(this, 'append'),
         this.$scopedSlots.close
           ? this.$scopedSlots.close({ toggle: this.toggle })
           : this.__cachedDismissible,
@@ -206,7 +207,7 @@ export default mixins(
     genContent (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-alert__content',
-      }, this.$slots.default)
+      }, getSlot(this))
     },
     genAlert (): VNode {
       let data: VNodeData = {

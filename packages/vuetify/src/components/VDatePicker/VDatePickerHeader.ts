@@ -12,6 +12,7 @@ import Themeable from '../../mixins/themeable'
 // Utils
 import { createNativeLocaleFormatter, monthChange } from './util'
 import mixins from '../../util/mixins'
+import { getSlot } from '../../util/helpers'
 
 // Types
 import { VNode, PropType } from 'vue'
@@ -117,7 +118,7 @@ export default mixins(
         on: {
           click: () => this.$emit('toggle'),
         },
-      }, [this.$slots.default || this.formatter(String(this.value))])])
+      }, getSlot(this) || [this.formatter(String(this.value))])])
 
       const transition = this.$createElement('transition', {
         props: {

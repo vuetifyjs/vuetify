@@ -10,6 +10,7 @@ import Themeable from '../../mixins/themeable'
 // Utilities
 import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
+import { getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue/types'
@@ -254,7 +255,7 @@ export const BaseItemGroup = mixins(
   },
 
   render (h): VNode {
-    return h(this.tag, this.genData(), this.$slots.default)
+    return h(this.tag, this.genData(), getSlot(this))
   },
 })
 

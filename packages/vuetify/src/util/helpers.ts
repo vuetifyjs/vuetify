@@ -409,10 +409,15 @@ export function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
 }
 
 export function getSlot (vm: Vue, name = 'default', data?: object | (() => object), optional = false) {
+  const kebabName = kebabCase(name)
   if (vm.$scopedSlots.hasOwnProperty(name)) {
     return vm.$scopedSlots[name]!(data instanceof Function ? data() : data)
+  } else if (vm.$scopedSlots.hasOwnProperty(kebabName)) {
+    return vm.$scopedSlots[kebabName]!(data instanceof Function ? data() : data)
   } else if (vm.$slots.hasOwnProperty(name) && (!data || optional)) {
     return vm.$slots[name]
+  } else if (vm.$slots.hasOwnProperty(kebabName) && (!data || optional)) {
+    return vm.$slots[kebabName]
   }
   return undefined
 }

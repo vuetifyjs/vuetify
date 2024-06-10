@@ -7,7 +7,7 @@ import { ExtractVue } from '../../util/mixins'
 import VAppBar from './VAppBar'
 
 // Utilities
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlot } from '../../util/helpers'
 import { easeInOutCubic } from '../../services/goto/easing-patterns'
 
 const base = inject<'VAppBar', typeof VAppBar>('VAppBar', 'v-app-bar-title', 'v-app-bar')
@@ -67,14 +67,14 @@ export default base.extend<options>().extend({
         class: 'v-app-bar-title__content',
         style: this.styles,
         ref: 'content',
-      }, [this.$slots.default]),
+      }, getSlot(this)),
       h('div', {
         class: 'v-app-bar-title__placeholder',
         style: {
           visibility: this.VAppBar.scrollRatio ? 'hidden' : 'visible',
         },
         ref: 'placeholder',
-      }, [this.$slots.default]),
+      }, getSlot(this)),
     ])
   },
 })

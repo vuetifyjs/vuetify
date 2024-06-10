@@ -10,6 +10,7 @@ import Routable from '../../mixins/routable'
 
 // Helpers
 import mixins from '../../util/mixins'
+import { getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -86,7 +87,7 @@ export default mixins(
 
     return h(tag, this.setBackgroundColor(this.color, data), [
       this.genProgress(),
-      this.$slots.default,
+      getSlot(this),
     ])
   },
 })

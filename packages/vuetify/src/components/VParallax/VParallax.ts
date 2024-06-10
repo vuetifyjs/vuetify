@@ -3,10 +3,11 @@ import './VParallax.sass'
 
 // Mixins
 import Translatable from '../../mixins/translatable'
+import mixins from '../../util/mixins'
+import { getSlot } from '../../util/helpers'
 
 // Types
 import { VNode, VNodeData } from 'vue/types/vnode'
-import mixins from '../../util/mixins'
 
 const baseMixins = mixins(
   Translatable
@@ -95,7 +96,7 @@ export default baseMixins.extend<options>().extend({
 
     const content = h('div', {
       staticClass: 'v-parallax__content',
-    }, this.$slots.default)
+    }, getSlot(this))
 
     return h('div', {
       staticClass: 'v-parallax',

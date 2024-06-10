@@ -19,7 +19,7 @@ import ripple from '../../directives/ripple'
 
 // Utilities
 import { attachedRoot } from '../../util/dom'
-import { convertToUnit, keyCodes } from '../../util/helpers'
+import { convertToUnit, getSlot, keyCodes } from '../../util/helpers'
 import { breaking, consoleWarn } from '../../util/console'
 
 // Types
@@ -372,7 +372,7 @@ export default baseMixins.extend<options>().extend({
         },
       }
 
-      return this.$createElement(VLabel, data, this.$slots.label || this.label)
+      return this.$createElement(VLabel, data, getSlot(this, 'label') || this.label)
     },
     genLegend () {
       const width = !this.singleLine && (this.labelValue || this.isDirty) ? this.labelWidth : 0

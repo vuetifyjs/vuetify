@@ -1,6 +1,7 @@
 import Routable from '../../mixins/routable'
 
 import mixins from '../../util/mixins'
+import { getSlot } from '../../util/helpers'
 import { VNode } from 'vue'
 
 /* @vue/component */
@@ -39,7 +40,7 @@ export default mixins(Routable).extend({
           ...data.attrs,
           'aria-current': this.isActive && this.isLink ? 'page' : undefined,
         },
-      }, this.$slots.default),
+      }, getSlot(this)),
     ])
   },
 })

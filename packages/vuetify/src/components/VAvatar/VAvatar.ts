@@ -6,7 +6,7 @@ import Measurable from '../../mixins/measurable'
 import Roundable from '../../mixins/roundable'
 
 // Utilities
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -55,6 +55,6 @@ export default mixins(
       on: this.$listeners,
     }
 
-    return h('div', this.setBackgroundColor(this.color, data), this.$slots.default)
+    return h('div', this.setBackgroundColor(this.color, data), getSlot(this))
   },
 })

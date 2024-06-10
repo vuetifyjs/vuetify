@@ -8,6 +8,7 @@ import Themeable from '../themeable'
 
 // Utils
 import mixins from '../../util/mixins'
+import { getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -43,7 +44,7 @@ export default mixins(
       return this.$scopedSlots.default ? this.$scopedSlots.default({
         save: (this as any).save,
         cancel: (this as any).cancel,
-      }) : this.$slots.default
+      }) : getSlot(this)
     },
     genPicker (staticClass: string) {
       const children: VNode[] = []

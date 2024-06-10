@@ -14,6 +14,7 @@ import { factory as ToggleableFactory } from '../../mixins/toggleable'
 // Utilities
 import mixins from '../../util/mixins'
 import { breaking } from '../../util/console'
+import { getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -152,6 +153,6 @@ export default mixins(
       })
     }
 
-    return h(ButtonGroup, this.setTextColor(this.color, data), this.$slots.default)
+    return h(ButtonGroup, this.setTextColor(this.color, data), getSlot(this))
   },
 })

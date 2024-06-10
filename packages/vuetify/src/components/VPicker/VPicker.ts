@@ -7,7 +7,7 @@ import Elevatable from '../../mixins/elevatable'
 import Themeable from '../../mixins/themeable'
 
 // Helpers
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue/types'
@@ -50,14 +50,14 @@ export default mixins(
         class: {
           'v-picker__title--landscape': this.landscape,
         },
-      }), this.$slots.title)
+      }), getSlot(this, 'title'))
     },
     genBodyTransition () {
       return this.$createElement('transition', {
         props: {
           name: this.transition,
         },
-      }, this.$slots.default)
+      }, getSlot(this))
     },
     genBody () {
       return this.$createElement('div', {
@@ -79,7 +79,7 @@ export default mixins(
         class: {
           'v-picker__actions--no-title': this.noTitle,
         },
-      }, this.$slots.actions)
+      }, getSlot(this, 'actions'))
     },
   },
 

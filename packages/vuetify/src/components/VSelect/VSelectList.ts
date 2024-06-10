@@ -253,6 +253,11 @@ export default mixins(Colorable, Themeable).extend({
         role: 'listbox',
         tabindex: -1,
       },
+      on: {
+        mousedown: (e: Event) => {
+          e.preventDefault()
+        },
+      },
       props: { dense: this.dense },
     }, children)
   },
