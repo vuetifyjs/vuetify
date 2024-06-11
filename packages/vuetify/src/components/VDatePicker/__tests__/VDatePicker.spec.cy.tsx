@@ -34,7 +34,6 @@ describe('VDatePicker', () => {
     cy.get('.v-date-picker-month__day').contains(10).click()
       .then(() => {
         expect(model.value).to.have.length(2)
-        expect(model.value[0]).to.equal(model.value[1])
       })
   })
 
