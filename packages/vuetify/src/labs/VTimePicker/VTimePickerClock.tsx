@@ -102,9 +102,7 @@ export const VTimePickerClock = genericComponent()({
     }
 
     function wheel (e: WheelEvent) {
-      if (!props.scrollable || props.disabled) {
-        return
-      }
+      if (!props.scrollable || props.disabled) return
 
       e.preventDefault()
 
@@ -200,9 +198,7 @@ export const VTimePickerClock = genericComponent()({
     }
 
     function onMouseDown (e: MouseEvent | TouchEvent) {
-      if (props.disabled) {
-        return
-      }
+      if (props.disabled) return
 
       e.preventDefault()
 
