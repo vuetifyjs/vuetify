@@ -10,7 +10,7 @@
     ></v-time-picker>
     <v-time-picker
       v-model="picker"
-      :landscape="$vuetify.breakpoint.smAndUp"
+      :landscape="$vuetify.display.smAndUp"
       ampm-in-title
     ></v-time-picker>
   </v-row>
