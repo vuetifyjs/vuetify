@@ -130,7 +130,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
         if (
           e.key === 'Enter' &&
           ((e.target instanceof HTMLTextAreaElement) ||
-          (e.target instanceof HTMLInputElement && e.target.closest('form')))
+          (e.target instanceof HTMLInputElement && !!e.target.closest('form')))
         ) return
         if (e.key === 'Enter') e.preventDefault()
 
