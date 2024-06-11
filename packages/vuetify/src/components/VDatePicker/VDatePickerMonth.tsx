@@ -98,11 +98,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
         rangeStart.value = _value
         model.value = [rangeStart.value]
       } else if (!rangeStop.value) {
-        if (adapter.isSameDay(_value, rangeStart.value)) {
-          rangeStart.value = undefined
-          model.value = []
-          return
-        } else if (adapter.isBefore(_value, rangeStart.value)) {
+        if (adapter.isBefore(_value, rangeStart.value)) {
           rangeStop.value = adapter.endOfDay(rangeStart.value)
           rangeStart.value = _value
         } else {

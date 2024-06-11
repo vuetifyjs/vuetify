@@ -22,6 +22,22 @@ describe('VDatePicker', () => {
       })
   })
 
+  it('selects the same day as a range', () => {
+    const model = ref<unknown[]>([])
+    cy.mount(() => (
+      <Application>
+        <VDatePicker v-model={ model.value } multiple="range" />
+      </Application>
+    ))
+
+    cy.get('.v-date-picker-month__day').contains(10).click()
+    cy.get('.v-date-picker-month__day').contains(10).click()
+      .then(() => {
+        expect(model.value).to.have.length(2)
+        expect(model.value[0]).to.equal(model.value[1])
+      })
+  })
+
   it('selects a range of dates across month boundary', () => {
     const model = ref<unknown[]>([])
     cy.mount(() => (
