@@ -66,7 +66,7 @@ export const VTimePickerControls = genericComponent()({
                 'v-time-picker-controls__time--with-seconds__btn': props.useSeconds,
               }}
               text={ props.hour == null ? '--' : pad(`${hour}`) }
-              onClick={ () => emit('update:selecting', SelectingTimes.Hour) }
+              onClick={ (e: Event) => { emit('update:selecting', SelectingTimes.Hour); e.stopPropagation() } }
             />
 
             <span
@@ -87,7 +87,7 @@ export const VTimePickerControls = genericComponent()({
               }}
               variant="tonal"
               text={ props.minute == null ? '--' : pad(props.minute) }
-              onClick={ () => emit('update:selecting', SelectingTimes.Minute) }
+              onClick={ (e: Event) => { emit('update:selecting', SelectingTimes.Minute); e.stopPropagation() } }
             />
 
             {
@@ -107,7 +107,7 @@ export const VTimePickerControls = genericComponent()({
                 <VBtn
                   key="secondsVal"
                   variant="tonal"
-                  onClick={ () => emit('update:selecting', SelectingTimes.Second) }
+                  onClick={ (e: Event) => { emit('update:selecting', SelectingTimes.Second); e.stopPropagation() } }
                   class={{
                     'v-time-picker-controls__time__btn': true,
                     'v-time-picker-controls__time__btn__active': props.selecting === 3,
@@ -135,7 +135,7 @@ export const VTimePickerControls = genericComponent()({
                     }}
                     text={ t('$vuetify.timePicker.am') }
                     variant="tonal"
-                    onClick={ () => props.period !== 'am' ? emit('update:period', 'am') : null }
+                    onClick={ (e: Event) => { if (props.period !== 'am') { emit('update:period', 'am') } e.stopPropagation() } }
                   />
 
                   <VBtn
@@ -148,7 +148,7 @@ export const VTimePickerControls = genericComponent()({
                     }}
                     text={ t('$vuetify.timePicker.pm') }
                     variant="tonal"
-                    onClick={ () => props.period !== 'pm' ? emit('update:period', 'pm') : null }
+                    onClick={ (e: Event) => { if (props.period !== 'pm') { emit('update:period', 'pm') } e.stopPropagation() } }
                   />
                 </div>
               )
