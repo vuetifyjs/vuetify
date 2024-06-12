@@ -7,6 +7,8 @@ related:
   - /styles/colors/
   - /features/theme/
   - /features/treeshaking/
+features:
+  report: true
 ---
 
 # SASS variables

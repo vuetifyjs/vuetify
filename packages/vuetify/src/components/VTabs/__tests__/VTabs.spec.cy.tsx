@@ -145,4 +145,17 @@ describe('VTabs', () => {
         expect(model.value).to.equal('B')
       })
   })
+
+  it('should render tabs using items', () => {
+    const items = [
+      { text: 'A', value: 1 },
+      { text: 'B', value: 2 },
+      { text: 'C', value: 3 },
+    ]
+    cy.mount(() => (
+      <VTabs items={ items } />
+    )).get('.v-tab').eq(0).should('have.text', 'A')
+      .get('.v-tab').eq(1).should('have.text', 'B')
+      .get('.v-tab').eq(2).should('have.text', 'C')
+  })
 })

@@ -7,7 +7,6 @@
   >
     <AppSheet class="mb-9">
       <v-lazy
-        v-if="!preview"
         v-model="hasRendered"
         min-height="44"
       >
@@ -46,31 +45,33 @@
 
           <v-spacer />
 
-          <v-tooltip
-            v-for="({ path, ...action }, i) of actions"
-            :key="i"
-            location="top"
-          >
-            <template #activator="{ props: tooltip }">
-              <v-fade-transition hide-on-leave>
-                <v-btn
-                  v-show="!action.hide"
-                  :key="action.icon"
-                  class="me-2 text-medium-emphasis"
-                  density="comfortable"
-                  variant="text"
-                  v-bind="mergeProps(action as any, tooltip)"
-                />
-              </v-fade-transition>
-            </template>
+          <template v-if="!preview">
+            <v-tooltip
+              v-for="({ path, ...action }, i) of actions"
+              :key="i"
+              location="top"
+            >
+              <template #activator="{ props: tooltip }">
+                <v-fade-transition hide-on-leave>
+                  <v-btn
+                    v-show="!action.hide"
+                    :key="action.icon"
+                    class="me-2 text-medium-emphasis"
+                    density="comfortable"
+                    variant="text"
+                    v-bind="mergeProps(action as any, tooltip)"
+                  />
+                </v-fade-transition>
+              </template>
 
-            <span>{{ t(path) }}</span>
-          </v-tooltip>
+              <span>{{ t(path) }}</span>
+            </v-tooltip>
+          </template>
         </v-toolbar>
       </v-lazy>
 
       <div class="d-flex flex-column">
-        <v-expand-transition v-if="hasRendered">
+        <v-expand-transition v-if="hasRendered || preview">
           <v-window v-show="showCode" v-model="template">
             <v-window-item
               v-for="(section, i) of sections"
@@ -88,7 +89,7 @@
         </v-expand-transition>
 
         <v-theme-provider
-          :class="showCode && 'border-t'"
+          :class="showCode && !preview && 'border-t'"
           :theme="theme"
           class="pa-2 rounded-b"
           with-background

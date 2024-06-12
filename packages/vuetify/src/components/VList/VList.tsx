@@ -22,7 +22,7 @@ import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
 import { computed, ref, shallowRef, toRef } from 'vue'
-import { focusChild, genericComponent, getPropertyFromItem, omit, propsFactory, useRender } from '@/util'
+import { EventProp, focusChild, genericComponent, getPropertyFromItem, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -95,6 +95,9 @@ export const makeVListProps = propsFactory({
   slim: Boolean,
   nav: Boolean,
 
+  'onClick:open': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
+  'onClick:select': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
+  'onUpdate:opened': EventProp<[]>(),
   ...makeNestedProps({
     selectStrategy: 'single-leaf' as const,
     openStrategy: 'list' as const,
@@ -128,10 +131,12 @@ export const VList = genericComponent<new <
     itemValue?: SelectItemKey<ItemType<T>>
     itemChildren?: SelectItemKey<ItemType<T>>
     itemProps?: SelectItemKey<ItemType<T>>
-    selected?: readonly S[]
-    'onUpdate:selected'?: (value: S[]) => void
-    opened?: readonly O[]
-    'onUpdate:opened'?: (value: O[]) => void
+    selected?: S
+    'onUpdate:selected'?: (value: S) => void
+    'onClick:open'?: (value: { id: unknown, value: boolean, path: unknown[] }) => void
+    'onClick:select'?: (value: { id: unknown, value: boolean, path: unknown[] }) => void
+    opened?: O
+    'onUpdate:opened'?: (value: O) => void
   },
   slots: VListChildrenSlots<ItemType<T>>
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -140,9 +145,9 @@ export const VList = genericComponent<new <
   props: makeVListProps(),
 
   emits: {
-    'update:selected': (value: unknown[]) => true,
-    'update:activated': (value: unknown[]) => true,
-    'update:opened': (value: unknown[]) => true,
+    'update:selected': (value: unknown) => true,
+    'update:activated': (value: unknown) => true,
+    'update:opened': (value: unknown) => true,
     'click:open': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:activate': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,

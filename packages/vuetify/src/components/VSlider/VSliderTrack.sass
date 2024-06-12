@@ -9,8 +9,14 @@
   .v-slider-track__background
     background-color: rgb(var(--v-theme-surface-variant))
 
+    @media (forced-colors: active)
+      background-color: highlight
+
   .v-slider-track__fill
     background-color: rgb(var(--v-theme-surface-variant))
+
+    @media (forced-colors: active)
+      background-color: highlight
 
   .v-slider-track__tick
     background-color: rgb(var(--v-theme-surface-variant))
@@ -21,6 +27,9 @@
   // Elements
   .v-slider-track
     border-radius: $slider-track-border-radius
+
+    @media (forced-colors: active)
+      border: thin solid buttontext
 
   .v-slider-track
     &__background, &__fill

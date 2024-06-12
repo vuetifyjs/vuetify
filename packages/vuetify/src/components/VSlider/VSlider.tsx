@@ -168,6 +168,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
                   onFocus={ focus }
                   onBlur={ blur }
                   ripple={ props.ripple }
+                  name={ props.name }
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>

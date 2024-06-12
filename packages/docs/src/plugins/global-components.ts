@@ -35,6 +35,7 @@ import HomeEntry from '@/components/home/Entry.vue'
 import HomeFeatures from '@/components/home/Features.vue'
 import HomeSpecialSponsor from '@/components/home/SpecialSponsor.vue'
 import HomeSponsors from '@/components/home/Sponsors.vue'
+import IntroductionSlaDeck from '@/components/introduction/SlaDeck.vue'
 import IntroductionDiscordDeck from '@/components/introduction/DiscordDeck.vue'
 import IntroductionEnterpriseDeck from '@/components/introduction/EnterpriseDeck.vue'
 import PageFeatures from '@/components/PageFeatures.vue'
@@ -87,6 +88,7 @@ export function installGlobalComponents (app: App) {
     .component('HomeFeatures', HomeFeatures)
     .component('HomeSpecialSponsor', HomeSpecialSponsor)
     .component('HomeSponsors', HomeSponsors)
+    .component('IntroductionSlaDeck', IntroductionSlaDeck)
     .component('IntroductionDiscordDeck', IntroductionDiscordDeck)
     .component('IntroductionEnterpriseDeck', IntroductionEnterpriseDeck)
     .component('PageFeatures', PageFeatures)

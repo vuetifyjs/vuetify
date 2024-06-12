@@ -10,7 +10,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { computed, toRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
-type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'maxHeight' | 'maxWidth'
+type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'height' | 'width'
 type DividerStyles = Partial<Record<DividerKey, string>>
 
 export const makeVDividerProps = propsFactory({
@@ -37,7 +37,7 @@ export const VDivider = genericComponent()({
       const styles: DividerStyles = {}
 
       if (props.length) {
-        styles[props.vertical ? 'maxHeight' : 'maxWidth'] = convertToUnit(props.length)
+        styles[props.vertical ? 'height' : 'width'] = convertToUnit(props.length)
       }
 
       if (props.thickness) {

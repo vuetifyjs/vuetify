@@ -51,7 +51,7 @@ export const makeVBannerProps = propsFactory({
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeDimensionProps(),
-  ...makeDisplayProps(),
+  ...makeDisplayProps({ mobile: null }),
   ...makeElevationProps(),
   ...makeLocationProps(),
   ...makePositionProps(),

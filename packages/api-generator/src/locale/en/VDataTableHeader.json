@@ -1,6 +1,5 @@
 {
   "props": {
-    "disableSort": "Toggles rendering of sort button.",
     "everyItem": "Indicates if all items in table are selected.",
     "headers": "Array of header items to display.",
     "mobile": "Renders mobile view of headers.",

@@ -1,7 +1,8 @@
 // Components
-import { VExpansionPanelSymbol } from './VExpansionPanels'
+import { VExpansionPanelSymbol } from './shared'
 import { makeVExpansionPanelTextProps, VExpansionPanelText } from './VExpansionPanelText'
 import { makeVExpansionPanelTitleProps, VExpansionPanelTitle } from './VExpansionPanelTitle'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
@@ -11,7 +12,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { computed, provide } from 'vue'
+import { computed, provide, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVExpansionPanelProps = propsFactory({
@@ -101,30 +102,37 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
             ]}
           />
 
-          { hasTitle && (
-            <VExpansionPanelTitle
-              key="title"
-              { ...expansionPanelTitleProps }
-            >
-              { slots.title ? slots.title() : props.title }
-            </VExpansionPanelTitle>
-          )}
+          <VDefaultsProvider
+            defaults={{
+              VExpansionPanelTitle: {
+                ...expansionPanelTitleProps,
+              },
+              VExpansionPanelText: {
+                ...expansionPanelTextProps,
+              },
+            }}
+          >
+            { hasTitle && (
+              <VExpansionPanelTitle key="title">
+                { slots.title ? slots.title() : props.title }
+              </VExpansionPanelTitle>
+            )}
 
-          { hasText && (
-            <VExpansionPanelText
-              key="text"
-              { ...expansionPanelTextProps }
-            >
-              { slots.text ? slots.text() : props.text }
-            </VExpansionPanelText>
-          )}
+            { hasText && (
+              <VExpansionPanelText key="text">
+                { slots.text ? slots.text() : props.text }
+              </VExpansionPanelText>
+            )}
 
-          { slots.default?.() }
+            { slots.default?.() }
+          </VDefaultsProvider>
         </props.tag>
       )
     })
 
-    return {}
+    return {
+      groupItem,
+    }
   },
 })
 
