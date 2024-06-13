@@ -281,7 +281,6 @@ export const VSelect = genericComponent<new <
         })
       }
     }
-
     function onAfterLeave () {
       if (isFocused.value) {
         vTextFieldRef.value?.focus()
