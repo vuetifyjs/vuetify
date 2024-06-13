@@ -286,7 +286,7 @@ export const VCombobox = genericComponent<new <
         menu.value = true
       }
 
-      if (['Escape'].includes(e.key)) {
+      if (['Escape', 'Tab'].includes(e.key)) {
         menu.value = false
       }
 
@@ -414,7 +414,6 @@ export const VCombobox = genericComponent<new <
       if (val || val === oldVal) return
 
       selectionIndex.value = -1
-      menu.value = false
 
       if (search.value) {
         if (props.multiple) {

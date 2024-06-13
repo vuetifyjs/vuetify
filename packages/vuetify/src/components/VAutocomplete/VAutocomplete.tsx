@@ -234,7 +234,7 @@ export const VAutocomplete = genericComponent<new <
         menu.value = true
       }
 
-      if (['Escape'].includes(e.key)) {
+      if (['Escape', 'Tab'].includes(e.key)) {
         menu.value = false
       }
 
@@ -309,10 +309,10 @@ export const VAutocomplete = genericComponent<new <
     }
 
     function onAfterLeave () {
-      if (isFocused.value) {
-        isPristine.value = true
-        vTextFieldRef.value?.focus()
-      }
+      // if (isFocused.value) {
+      //   isPristine.value = true
+      //   vTextFieldRef.value?.focus()
+      // }
     }
 
     function onFocusin (e: FocusEvent) {
@@ -373,7 +373,7 @@ export const VAutocomplete = genericComponent<new <
         nextTick(() => isSelecting.value = false)
       } else {
         if (!props.multiple && search.value == null) model.value = []
-        menu.value = false
+        // menu.value = false
         if (!model.value.some(({ title }) => title === search.value)) search.value = ''
         selectionIndex.value = -1
       }
@@ -419,7 +419,6 @@ export const VAutocomplete = genericComponent<new <
       return (
         <VTextField
           ref={ vTextFieldRef }
-          { ...textFieldProps }
           v-model={ search.value }
           onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
@@ -460,8 +459,6 @@ export const VAutocomplete = genericComponent<new <
                   openOnClick={ false }
                   closeOnContentClick={ false }
                   transition={ props.transition }
-                  onAfterLeave={ onAfterLeave }
-                  { ...props.menuProps }
                 >
                   { hasList && (
                     <VList
