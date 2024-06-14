@@ -464,33 +464,92 @@ describe('VAutocomplete', () => {
       .should('not.have.class', 'v-autocomplete--active-menu')
   })
 
-  it('should auto-select-first item when pressing enter', () => {
-    const selectedItems = ref(undefined)
+  describe('auto-select-first', () => {
+    it('should auto-select-first item when pressing enter', () => {
+      const selectedItems = ref(undefined)
 
-    cy
-      .mount(() => (
-        <VAutocomplete
-          v-model={ selectedItems.value }
-          items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
-          multiple
-          autoSelectFirst
-        />
-      ))
-      .get('.v-autocomplete')
-      .click()
-      .get('.v-list-item')
-      .should('have.length', 6)
-      .get('.v-autocomplete input')
-      .type('Cal')
-      .get('.v-list-item').eq(0)
-      .should('have.class', 'v-list-item--active')
-      .get('.v-autocomplete input')
-      .trigger('keydown', { key: keyValues.enter, waitForAnimations: false })
-      .get('.v-list-item')
-      .should('have.length', 1)
-      .then(_ => {
-        expect(selectedItems.value).to.deep.equal(['California'])
-      })
+      cy
+        .mount(() => (
+          <VAutocomplete
+            v-model={ selectedItems.value }
+            items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+            multiple
+            autoSelectFirst
+          />
+        ))
+        .get('.v-autocomplete')
+        .click()
+        .get('.v-list-item')
+        .should('have.length', 6)
+        .get('.v-autocomplete input')
+        .type('Cal')
+        .get('.v-list-item').eq(0)
+        .should('have.class', 'v-list-item--active')
+        .get('.v-autocomplete input')
+        .trigger('keydown', { key: keyValues.enter, waitForAnimations: false })
+        .get('.v-list-item')
+        .should('have.length', 1)
+        .then(_ => {
+          expect(selectedItems.value).to.deep.equal(['California'])
+        })
+    })
+
+    it('should auto-select-first item when pressing tab', () => {
+      const selectedItems = ref([])
+
+      cy
+        .mount(() => (
+          <VAutocomplete
+            v-model={ selectedItems.value }
+            items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+            multiple
+            autoSelectFirst
+          />
+        ))
+        .get('.v-autocomplete')
+        .click()
+        .get('.v-list-item')
+        .should('have.length', 6)
+        .get('.v-autocomplete input')
+        .type('Cal')
+        .get('.v-list-item').eq(0)
+        .should('have.class', 'v-list-item--active')
+        .realPress('Tab')
+        .get('.v-list-item')
+        .should('have.length', 0)
+        .then(_ => {
+          expect(selectedItems.value).to.deep.equal(['California'])
+        })
+    })
+
+    it('should not auto-select-first item when blur', () => {
+      const selectedItems = ref(undefined)
+
+      cy
+        .mount(() => (
+          <VAutocomplete
+            v-model={ selectedItems.value }
+            items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+            multiple
+            autoSelectFirst
+          />
+        ))
+        .get('.v-autocomplete')
+        .click()
+        .get('.v-list-item')
+        .should('have.length', 6)
+        .get('.v-autocomplete input')
+        .type('Cal')
+        .get('.v-list-item').eq(0)
+        .should('have.class', 'v-list-item--active')
+        .get('.v-autocomplete input')
+        .blur()
+        .get('.v-list-item')
+        .should('have.length', 0)
+        .should(_ => {
+          expect(selectedItems.value).to.deep.equal(undefined)
+        })
+    })
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/18796

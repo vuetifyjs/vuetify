@@ -134,3 +134,58 @@
 
       .v-selection-control__wrapper
         transform: $switch-thumb-vertical-transform
+        
+@media (forced-colors: active)
+  .v-switch
+    .v-switch__loader
+      .v-progress-circular 
+        color: currentColor
+
+    .v-switch__thumb
+      background-color: buttontext
+
+    .v-switch__track,
+    .v-switch__thumb
+      border: 1px solid 
+      color: buttontext
+
+    &:not(.v-switch--loading):not(.v-input--disabled)
+      .v-selection-control--dirty
+        .v-switch__thumb
+          background-color: highlight 
+
+    &:not(.v-input--disabled)
+      .v-selection-control--dirty
+        .v-switch__track
+          background-color: highlight
+
+        .v-switch__track,
+        .v-switch__thumb
+          color: highlight
+
+    &.v-switch--inset
+      .v-switch__track
+        border-width: 2px
+
+      &:not(.v-switch--loading):not(.v-input--disabled)
+        .v-selection-control--dirty
+          .v-switch__thumb
+            background-color: highlighttext
+            color: highlighttext
+
+    &.v-input--disabled
+      .v-switch__thumb
+        background-color: graytext
+
+      .v-switch__track,
+      .v-switch__thumb
+        color: graytext
+
+    &.v-switch--loading
+      .v-switch__thumb
+        background-color: canvas
+
+      &.v-switch--inset,
+      &.v-switch--indeterminate
+        .v-switch__thumb
+          border-width: 0 

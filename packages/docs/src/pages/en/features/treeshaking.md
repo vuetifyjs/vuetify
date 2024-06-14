@@ -7,6 +7,8 @@ related:
   - /features/sass-variables/
   - /features/blueprints/
   - /introduction/why-vuetify/
+features:
+  report: true
 ---
 
 # Treeshaking

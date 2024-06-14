@@ -22,7 +22,7 @@
             name="row"
             v-bind="{
               props: {
-                class: 'bg-surface-bright'
+                style: 'background: rgba(0,0,0,.1)'
               },
               item,
             }"

@@ -7,6 +7,8 @@ related:
   - /features/accessibility/
   - /components/locale-providers/
   - /getting-started/browser-support/
+features:
+  report: true
 ---
 
 # Internationalization (i18n)

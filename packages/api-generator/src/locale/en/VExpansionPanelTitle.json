@@ -2,6 +2,7 @@
   "props": {
     "collapseIcon": "Icon used when the expansion panel is in a collapsable state.",
     "expandIcon": "Icon used when the expansion panel is in a expandable state.",
-    "hideActions": "Hide the expand icon in the content title."
+    "hideActions": "Hide the expand icon in the content title.",
+    "static": "Remove title size expansion when selected."
   }
 }

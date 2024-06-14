@@ -7,6 +7,8 @@ related:
   - /components/icons
   - /components/buttons
   - /components/avatars
+features:
+  report: true
 ---
 
 # Icon Fonts

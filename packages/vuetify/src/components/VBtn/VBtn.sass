@@ -193,9 +193,15 @@
     grid-area: prepend
     margin-inline: $button-margin-start $button-margin-end
 
+    .v-btn--slim &
+      margin-inline-start: 0
+
   .v-btn__append
     grid-area: append
     margin-inline: $button-margin-end $button-margin-start
+
+    .v-btn--slim &
+      margin-inline-end: 0
 
   .v-btn__content
     grid-area: content
