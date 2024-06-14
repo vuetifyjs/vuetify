@@ -3,7 +3,7 @@
 import { VTextField } from '../VTextField'
 
 // Utilities
-import { cloneVNode } from 'vue'
+import { cloneVNode, shallowRef } from 'vue'
 import { generate } from '../../../../cypress/templates'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
@@ -89,6 +89,36 @@ describe('VTextField', () => {
       .get('.v-input__details').should('be.visible')
   })
 
+  describe('Mask', () => {
+    it('should mask model-value but keep v-model intact', () => {
+      const inputValue = shallowRef('4567')
+      cy.mount(() => (
+        <VTextField
+          v-model={ inputValue.value }
+          mask="(###) #"
+        ></VTextField>
+      ))
+        .get('.v-text-field input').should('have.value', '(456) 7')
+        .then(_ => {
+          expect(inputValue.value).to.equal('4567')
+        })
+    })
+
+    it('should mask model-value and also return v-model to be masked value', () => {
+      const inputValue = shallowRef('4567')
+      cy.mount(() => (
+        <VTextField
+          v-model={ inputValue.value }
+          mask="(###) #"
+          returnMaskedValue
+        ></VTextField>
+      ))
+        .get('.v-text-field input').should('have.value', '(456) 7')
+        .then(_ => {
+          expect(inputValue.value).to.equal('(456) 7')
+        })
+    })
+  })
   describe('Showcase', () => {
     generate({ stories })
   })
