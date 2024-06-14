@@ -7,7 +7,7 @@ import type { Ref } from 'vue'
 
 export interface MaskProps {
   mask: string | undefined
-  returnMaskedValue: Boolean
+  returnMaskedValue?: Boolean
 }
 
 export const makeMaskProps = propsFactory({
@@ -79,7 +79,7 @@ function convert (mask: MaskType, char: string): string {
 export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | undefined>) {
   const rawMask = computed(() => {
     const preDefined = props.mask ? preDefinedMap[props.mask] : undefined
-    return preDefined ?? (props.mask ?? props.mask)
+    return preDefined ?? props.mask
   })
   const masks = computed(() => rawMask.value ? rawMask.value.split('') : [])
   const selection = shallowRef(0)
@@ -119,8 +119,8 @@ export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | unde
     }
     return newText
   }
-  function unmaskText (text: string): string {
-    return text ? String(text).replace(new RegExp(defaultDelimiters.source, 'g'), '') : text
+  function unmaskText (text: string | null): string {
+    return text ? String(text).replace(new RegExp(defaultDelimiters.source, 'g'), '') : text!
   }
   function setCaretPosition (newSelection: number) {
     selection.value = newSelection
