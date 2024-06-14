@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import Intersect from '@/directives/intersect'
 
 // Utilities
-import { cloneVNode, computed, nextTick, ref } from 'vue'
+import { cloneVNode, computed, nextTick, onMounted, ref } from 'vue'
 import { callEvent, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -105,23 +105,24 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       props,
       'modelValue',
       undefined,
+      // Always display masked value in input when mask is applied
       val => props.mask ? maskText(unmaskText(val)) : val,
       val => {
         if (props.mask) {
           const valueBeforeChange = unmaskText(model.value)
-          // In case of token is #-# and the input value is '2-23'
-          // Create a variable that holds the enforced token format; in this case, '2-23' is enforced to '2-2'
+          // E.g. mask is #-# and the input value is '2-23'
+          // model-value should be enforced to '2-2'
           const enforcedMaskedValue = maskText(unmaskText(val))
           const newUnmaskedValue = unmaskText(enforcedMaskedValue)
 
           if (newUnmaskedValue === valueBeforeChange) {
             inputRef.value!.value = enforcedMaskedValue
-            return returnMaskedValue.value ? maskText(newUnmaskedValue) : newUnmaskedValue
           }
           val = newUnmaskedValue
           updateRange()
+          return returnMaskedValue.value ? maskText(val) : val
         }
-        return returnMaskedValue.value ? maskText(val) : val
+        return val
       },
     )
     const counterValue = computed(() => {
@@ -180,6 +181,12 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
         })
       }
     }
+
+    onMounted(() => {
+      if (props.returnMaskedValue) {
+        emit('update:modelValue', model.value)
+      }
+    })
 
     useRender(() => {
       const hasCounter = !!(slots.counter || (props.counter !== false && props.counter != null))
