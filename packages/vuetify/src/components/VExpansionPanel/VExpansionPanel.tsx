@@ -12,7 +12,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { computed, provide, toRef } from 'vue'
+import { computed, provide } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVExpansionPanelProps = propsFactory({
