@@ -56,8 +56,6 @@ const makeVNumberInputProps = propsFactory({
 export const VNumberInput = genericComponent<VNumberInputSlots>()({
   name: 'VNumberInput',
 
-  inheritAttrs: false,
-
   props: {
     ...makeVNumberInputProps(),
   },
