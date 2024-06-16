@@ -18,6 +18,7 @@ import { useScrolling } from './useScrolling'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
+import { useIsMousedown } from '@/composables/isMousedown'
 import { makeItemsProps, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -167,6 +168,7 @@ export const VSelect = genericComponent<new <
         : model.value.length
     })
     const form = useForm()
+    const { isMousedown } = useIsMousedown()
     const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
     const label = computed(() => menu.value ? props.closeText : props.openText)
@@ -281,6 +283,11 @@ export const VSelect = genericComponent<new <
         })
       }
     }
+    function onBlur (e: FocusEvent) {
+      if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement) && !isMousedown.value) {
+        menu.value = false
+      }
+    }
     function onAfterLeave () {
       if (isFocused.value) {
         vTextFieldRef.value?.focus()
@@ -363,6 +370,7 @@ export const VSelect = genericComponent<new <
           placeholder={ placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
+          onBlur={ onBlur }
           onKeydown={ onKeydown }
           aria-label={ t(label.value) }
           title={ t(label.value) }

@@ -20,6 +20,7 @@ import { useTextColor } from '@/composables/color'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
+import { useIsMousedown } from '@/composables/isMousedown'
 import { transformItem, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -165,6 +166,7 @@ export const VCombobox = genericComponent<new <
       }
     )
     const form = useForm()
+    const { isMousedown } = useIsMousedown()
 
     const hasChips = computed(() => !!(props.chips || slots.chip))
     const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
@@ -286,7 +288,7 @@ export const VCombobox = genericComponent<new <
         menu.value = true
       }
 
-      if (['Escape', 'Tab'].includes(e.key)) {
+      if (['Escape'].includes(e.key)) {
         menu.value = false
       }
 
@@ -365,6 +367,13 @@ export const VCombobox = genericComponent<new <
         vTextFieldRef.value?.focus()
       }
     }
+
+    function onBlur (e: FocusEvent) {
+      if (!isMousedown.value) {
+        menu.value = false
+      }
+    }
+
     /** @param set - null means toggle */
     function select (item: ListItem | undefined, set: boolean | null = true) {
       if (!item || item.props.disabled) return
@@ -485,6 +494,7 @@ export const VCombobox = genericComponent<new <
           readonly={ props.readonly }
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
+          onBlur={ onBlur }
           onMousedown:control={ onMousedownControl }
           onKeydown={ onKeydown }
         >
