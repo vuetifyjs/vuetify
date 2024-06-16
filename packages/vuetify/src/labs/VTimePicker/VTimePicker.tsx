@@ -264,7 +264,6 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
           break
       }
 
-      const emitChange = selecting.value === (props.useSeconds ? SelectingTimes.Second : SelectingTimes.Minute)
 
       if (selecting.value === SelectingTimes.Hour) {
         selecting.value = SelectingTimes.Minute
@@ -284,7 +283,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       lazyInputMinute.value = inputMinute.value
       props.useSeconds && (lazyInputSecond.value = inputSecond.value)
 
-      emitChange && emitValue()
+      emitValue()
     }
 
     useRender(() => {
