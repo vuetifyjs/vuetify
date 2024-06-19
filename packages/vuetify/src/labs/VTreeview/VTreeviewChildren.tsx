@@ -28,6 +28,7 @@ export const makeVTreeviewChildrenProps = propsFactory({
     default: '$loading',
   },
   items: Array as PropType<readonly InternalListItem[]>,
+  returnObject: Boolean,
   selectable: Boolean,
   selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
 }, 'VTreeviewChildren')
@@ -35,6 +36,7 @@ export const makeVTreeviewChildrenProps = propsFactory({
 export const VTreeviewChildren = genericComponent<new <T extends InternalListItem>(
   props: {
     items?: readonly T[]
+    returnObject?: boolean
   },
   slots: VTreeviewChildrenSlots<T>
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -102,15 +104,15 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
 
       return children ? (
         <VTreeviewGroup
-          value={ itemProps?.value }
           { ...treeviewGroupProps }
+          value={ props.returnObject ? item : itemProps?.value }
         >
           {{
             activator: ({ props: activatorProps }) => {
               const listItemProps = {
                 ...itemProps,
                 ...activatorProps,
-                value: itemProps?.value,
+                value: props.returnObject ? item : itemProps.value,
               }
 
               return (
@@ -126,6 +128,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               <VTreeviewChildren
                 { ...treeviewChildrenProps }
                 items={ children }
+                returnObject={ props.returnObject }
                 v-slots={ slots }
               />
             ),
@@ -135,6 +138,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         slots.item?.({ props: itemProps }) ?? (
           <VTreeviewItem
             { ...itemProps }
+            value={ props.returnObject ? item : itemProps.value }
             v-slots={ slotsWithItem }
           />
         ))

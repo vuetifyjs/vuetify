@@ -141,7 +141,7 @@ export const leafSingleSelectStrategy = (mandatory?: boolean): SelectStrategy =>
 export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
   const strategy: SelectStrategy = {
     select: ({ id, value, selected, children, parents }) => {
-      id = toRaw(id)
+      const rawId = toRaw(id)
       const original = new Map(selected)
 
       const items = [id]
@@ -156,7 +156,7 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
         }
       }
 
-      let parent = parents.get(id)
+      let parent = parents.get(rawId)
 
       while (parent) {
         const childrenIds = children.get(parent)!
