@@ -238,7 +238,11 @@ export const VAutocomplete = genericComponent<new <
         menu.value = false
       }
 
-      if (highlightFirst.value && e.key === 'Enter') {
+      if (
+        highlightFirst.value &&
+        ['Enter', 'Tab'].includes(e.key) &&
+        !model.value.some(({ value }) => value === displayItems.value[0].value)
+      ) {
         select(displayItems.value[0])
       }
 
@@ -369,15 +373,8 @@ export const VAutocomplete = genericComponent<new <
         nextTick(() => isSelecting.value = false)
       } else {
         if (!props.multiple && search.value == null) model.value = []
-        else if (
-          highlightFirst.value &&
-          !listHasFocus.value &&
-          !model.value.some(({ value }) => value === displayItems.value[0].value)
-        ) {
-          select(displayItems.value[0])
-        }
         menu.value = false
-        if (props.multiple || hasSelectionSlot.value) search.value = ''
+        if (!model.value.some(({ title }) => title === search.value)) search.value = ''
         selectionIndex.value = -1
       }
     })

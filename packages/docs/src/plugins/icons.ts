@@ -150,6 +150,7 @@ export {
   mdiExport,
   mdiExportVariant,
   mdiEye,
+  mdiEyedropper,
   mdiEyeOff,
   mdiFacebook,
   mdiFastForward,

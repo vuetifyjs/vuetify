@@ -34,7 +34,8 @@ The standard data table presumes that the entire data set is available locally. 
 | Component | Description |
 | - | - |
 | [v-data-table](/api/v-data-table/) | Primary Component |
-| [v-data-table-footer](/api/v-data-table-footer/) | Functional Component used to display Data-table headers |
+| [v-data-table-headers](/api/v-data-table-headers/) | Functional Component used to display Data-table headers |
+| [v-data-table-footer](/api/v-data-table-footer/) | Functional Component used to display Data-table footers |
 | [v-checkbox-btn](/api/v-checkbox-btn/) | Reusable lightweight [v-checkbox](/components/checkboxes) |
 
 <ApiInline hide-links />

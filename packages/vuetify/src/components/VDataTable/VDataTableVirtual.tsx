@@ -212,48 +212,50 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                       />
                     </thead>
                   )}
-                  <tbody>
-                    <tr ref={ markerRef } style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
-                      <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
-                    </tr>
+                  { !props.hideDefaultBody && (
+                    <tbody>
+                      <tr ref={ markerRef } style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
+                        <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
+                      </tr>
 
-                    { slots['body.prepend']?.(slotProps.value) }
+                      { slots['body.prepend']?.(slotProps.value) }
 
-                    <VDataTableRows
-                      { ...attrs }
-                      { ...dataTableRowsProps }
-                      items={ displayItems.value }
-                    >
-                      {{
-                        ...slots,
-                        item: itemSlotProps => (
-                          <VVirtualScrollItem
-                            key={ itemSlotProps.internalItem.index }
-                            renderless
-                            onUpdate:height={ height => handleItemResize(itemSlotProps.internalItem.index, height) }
-                          >
-                            { ({ itemRef }) => (
-                              slots.item?.({ ...itemSlotProps, itemRef }) ?? (
-                                <VDataTableRow
-                                  { ...itemSlotProps.props }
-                                  ref={ itemRef }
-                                  key={ itemSlotProps.internalItem.index }
-                                  index={ itemSlotProps.internalItem.index }
-                                  v-slots={ slots }
-                                />
-                              )
-                            )}
-                          </VVirtualScrollItem>
-                        ),
-                      }}
-                    </VDataTableRows>
+                      <VDataTableRows
+                        { ...attrs }
+                        { ...dataTableRowsProps }
+                        items={ displayItems.value }
+                      >
+                        {{
+                          ...slots,
+                          item: itemSlotProps => (
+                            <VVirtualScrollItem
+                              key={ itemSlotProps.internalItem.index }
+                              renderless
+                              onUpdate:height={ height => handleItemResize(itemSlotProps.internalItem.index, height) }
+                            >
+                              { ({ itemRef }) => (
+                                slots.item?.({ ...itemSlotProps, itemRef }) ?? (
+                                  <VDataTableRow
+                                    { ...itemSlotProps.props }
+                                    ref={ itemRef }
+                                    key={ itemSlotProps.internalItem.index }
+                                    index={ itemSlotProps.internalItem.index }
+                                    v-slots={ slots }
+                                  />
+                                )
+                              )}
+                            </VVirtualScrollItem>
+                          ),
+                        }}
+                      </VDataTableRows>
 
-                    { slots['body.append']?.(slotProps.value) }
+                      { slots['body.append']?.(slotProps.value) }
 
-                    <tr style={{ height: convertToUnit(paddingBottom.value), border: 0 }}>
-                      <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
-                    </tr>
-                  </tbody>
+                      <tr style={{ height: convertToUnit(paddingBottom.value), border: 0 }}>
+                        <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
+                      </tr>
+                    </tbody>
+                  )}
                 </table>
               </div>
             ),

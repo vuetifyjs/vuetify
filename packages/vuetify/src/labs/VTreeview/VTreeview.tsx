@@ -10,9 +10,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, provide, ref, toRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, getCurrentInstance, omit, propsFactory, useRender } from '@/util'
 
 // Types
+import type { ExtractPublicPropTypes } from 'vue'
 import { VTreeviewSymbol } from './shared'
 import type { VListChildrenSlots } from '@/components/VList/VListChildren'
 import type { ListItem } from '@/composables/list-items'
@@ -62,6 +63,7 @@ export const VTreeview = genericComponent<new <T>(
   setup (props, { slots }) {
     // const { items } = useListItems(props)
     const { items, transformIn, transformOut } = useItems(props)
+    const vm = getCurrentInstance('VTreeview')
     const activeColor = toRef(props, 'activeColor')
     const baseColor = toRef(props, 'baseColor')
     const color = toRef(props, 'color')
@@ -151,7 +153,8 @@ export const VTreeview = genericComponent<new <T>(
     })
 
     useRender(() => {
-      const listProps = VList.filterProps(props)
+      const listProps = VList.filterProps(vm.vnode.props! as ExtractPublicPropTypes<typeof makeVTreeviewProps>)
+
       const treeviewChildrenProps = VTreeviewChildren.filterProps(props)
 
       return (
@@ -163,7 +166,6 @@ export const VTreeview = genericComponent<new <T>(
             props.class,
           ]}
           style={ props.style }
-          v-model:opened={ opened.value }
           v-model:activated={ activated.value }
           v-model:selected={ selected.value }
         >

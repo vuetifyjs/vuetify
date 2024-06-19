@@ -5,6 +5,7 @@ import './VTreeviewItem.sass'
 import { VBtn } from '@/components/VBtn'
 import { VListItemAction, VListItemSubtitle, VListItemTitle } from '@/components/VList'
 import { makeVListItemProps, VListItem } from '@/components/VList/VListItem'
+import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
 import { useDensity } from '@/composables/density'
@@ -19,7 +20,6 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
-import { VProgressCircular } from '../allComponents'
 import type { ListItemSlot, VListItemSlots } from '@/components/VList/VListItem'
 
 export const makeVTreeviewItemProps = propsFactory({

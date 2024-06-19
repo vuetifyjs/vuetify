@@ -7,6 +7,8 @@ related:
   - /styles/text-and-typography/
   - /styles/transitions/
   - /styles/content/
+features:
+  report: true
 ---
 
 # Float

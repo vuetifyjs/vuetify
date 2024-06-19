@@ -7,6 +7,8 @@ related:
   - /features/global-configuration/
   - /features/theme/
   - /features/display-and-platform/
+features:
+  report: true
 ---
 
 # Blueprints

@@ -593,27 +593,86 @@ describe('VCombobox', () => {
       .should('not.have.class', 'v-combobox--active-menu')
   })
 
-  it('should auto-select-first item when pressing enter', () => {
-    cy
-      .mount(() => (
-        <VCombobox
-          items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
-          multiple
-          autoSelectFirst
-        />
-      ))
-      .get('.v-combobox')
-      .click()
-      .get('.v-list-item')
-      .should('have.length', 6)
-      .get('.v-combobox input')
-      .type('Cal')
-      .get('.v-list-item').eq(0)
-      .should('have.class', 'v-list-item--active')
-      .get('.v-combobox input')
-      .trigger('keydown', { key: keyValues.enter, waitForAnimations: false })
-      .get('.v-list-item')
-      .should('have.length', 6)
+  describe('auto-select-first', () => {
+    it('should auto-select-first item when pressing enter', () => {
+      cy
+        .mount(() => (
+          <VCombobox
+            items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+            multiple
+            autoSelectFirst
+          />
+        ))
+        .get('.v-combobox')
+        .click()
+        .get('.v-list-item')
+        .should('have.length', 6)
+        .get('.v-combobox input')
+        .type('Cal')
+        .get('.v-list-item').eq(0)
+        .should('have.class', 'v-list-item--active')
+        .get('.v-combobox input')
+        .trigger('keydown', { key: keyValues.enter, waitForAnimations: false })
+        .get('.v-list-item')
+        .should('have.length', 6)
+    })
+
+    it('should auto-select-first item when pressing tab', () => {
+      const selectedItems = ref([])
+
+      cy
+        .mount(() => (
+          <VCombobox
+            v-model={ selectedItems.value }
+            items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+            multiple
+            autoSelectFirst
+          />
+        ))
+        .get('.v-combobox')
+        .click()
+        .get('.v-list-item')
+        .should('have.length', 6)
+        .get('.v-combobox input')
+        .type('Cal')
+        .get('.v-list-item').eq(0)
+        .should('have.class', 'v-list-item--active')
+        .realPress('Tab')
+        .get('.v-list-item')
+        .should('have.length', 0)
+        .then(_ => {
+          expect(selectedItems.value).to.deep.equal(['California'])
+        })
+    })
+
+    it('should not auto-select-first item when blur', () => {
+      const selectedItems = ref(undefined)
+
+      cy
+        .mount(() => (
+          <VCombobox
+            v-model={ selectedItems.value }
+            items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+            multiple
+            autoSelectFirst
+          />
+        ))
+        .get('.v-combobox')
+        .click()
+        .get('.v-list-item')
+        .should('have.length', 6)
+        .get('.v-combobox input')
+        .type('Cal')
+        .get('.v-list-item').eq(0)
+        .should('have.class', 'v-list-item--active')
+        .get('.v-combobox input')
+        .blur()
+        .get('.v-list-item')
+        .should('have.length', 0)
+        .should(_ => {
+          expect(selectedItems.value).to.deep.equal(['Cal'])
+        })
+    })
   })
 
   it(`doesn't add duplicate values`, () => {

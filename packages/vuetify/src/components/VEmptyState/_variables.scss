@@ -1,8 +1,8 @@
 @use '../../styles/settings';
 @use "../../styles/tools/functions";
 
-$empty-state-actions-btn-background-color: rgb(var(--v-theme-surface-variant)) !default;
-$empty-state-actions-btn-color: rgb(var(--v-theme-on-surface-variant)) !default;
+$empty-state-actions-btn-background-color: initial !default;
+$empty-state-actions-btn-color: initial !default;
 $empty-state-actions-gap: 8px !default;
 $empty-state-actions-padding: 16px !default;
 $empty-state-content-padding: 24px 0 !default;
