@@ -291,4 +291,19 @@ describe('VTreeview', () => {
         })
     })
   })
+  it('should have all items visible when open-all is applied', () => {
+    cy.mount(() => (
+      <>
+        <VTreeview
+          open-all
+          items={ items.value }
+          item-title="title"
+          item-value="id"
+        />
+      </>
+    ))
+      .get('.v-treeview-item')
+      .filter(':visible')
+      .should('have.length', 7)
+  })
 })
