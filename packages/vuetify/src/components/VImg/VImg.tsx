@@ -81,6 +81,7 @@ export const makeVImgProps = propsFactory({
     default: '',
   },
   crossorigin: String as PropType<'' | 'anonymous' | 'use-credentials'>,
+  fetchpriority: String as PropType<'' | 'high' | 'low'>,
   referrerpolicy: String as PropType<
     | 'no-referrer'
     | 'no-referrer-when-downgrade'
@@ -260,6 +261,7 @@ export const VImg = genericComponent<VImgSlots>()({
           srcset={ normalisedSrc.value.srcset }
           alt={ props.alt }
           crossorigin={ props.crossorigin }
+          fetchpriority={ props.fetchpriority }
           referrerpolicy={ props.referrerpolicy }
           draggable={ props.draggable }
           sizes={ props.sizes }
