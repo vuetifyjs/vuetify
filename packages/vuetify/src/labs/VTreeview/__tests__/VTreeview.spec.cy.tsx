@@ -203,7 +203,7 @@ describe('VTreeview', () => {
           expect(selected.value.sort()).to.deep.equal([3, 4, 6].sort())
         })
     })
-    it.only('independent strategy', () => {
+    it('independent strategy', () => {
       const selected = ref([])
       cy.mount(() => (
         <>
