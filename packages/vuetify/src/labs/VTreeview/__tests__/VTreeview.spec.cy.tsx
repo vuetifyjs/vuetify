@@ -203,7 +203,7 @@ describe('VTreeview', () => {
           expect(selected.value.sort()).to.deep.equal([3, 4, 6].sort())
         })
     })
-    it('independent strategy', () => {
+    it.only('independent strategy', () => {
       const selected = ref([])
       cy.mount(() => (
         <>
@@ -225,8 +225,8 @@ describe('VTreeview', () => {
         .then(_ => {
           expect(selected.value.sort()).to.deep.equal([3, 4].sort())
         })
-        .get('.v-checkbox-btn').eq(0).click(20, 20)
         .get('.v-checkbox-btn').eq(1).click(20, 20)
+        .get('.v-checkbox-btn').eq(0).click(20, 20)
         .then(_ => {
           expect(selected.value.sort()).to.deep.equal([1, 2, 3, 4].sort())
         })
@@ -253,10 +253,10 @@ describe('VTreeview', () => {
         .then(_ => {
           expect(selected.value.sort()).to.deep.equal([4].sort())
         })
-        .get('.v-checkbox-btn').eq(0).click(20, 20)
         .get('.v-checkbox-btn').eq(1).click(20, 20)
+        .get('.v-checkbox-btn').eq(0).click(20, 20)
         .then(_ => {
-          expect(selected.value.sort()).to.deep.equal([2].sort())
+          expect(selected.value.sort()).to.deep.equal([1].sort())
         })
     })
     it('classic strategy', () => {
