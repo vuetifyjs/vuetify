@@ -26,6 +26,128 @@ describe('VTreeview', () => {
       ],
     },
   ])
+  describe('activate', () => {
+    it('single-leaf strategy', () => {
+      const activated = ref([])
+      cy.mount(() => (
+        <>
+          <VTreeview
+            v-model:activated={ activated.value }
+            open-all
+            items={ items.value }
+            item-title="title"
+            item-value="id"
+            activatable
+            active-strategy="single-leaf"
+          />
+        </>
+      ))
+
+      cy.get('.v-treeview-item').should('have.length', 7)
+        .get('.v-treeview-item').eq(0).click()
+        .then(_ => {
+          expect(activated.value).to.deep.equal([])
+        })
+        .get('.v-treeview-item').eq(2).click()
+        .get('.v-treeview-item').eq(3).click()
+        .get('.v-treeview-item').eq(4).click()
+        .then(_ => {
+          expect(activated.value).to.deep.equal([5])
+        })
+    })
+    it('leaf strategy', () => {
+      const activated = ref([])
+      cy.mount(() => (
+        <>
+          <VTreeview
+            v-model:activated={ activated.value }
+            open-all
+            items={ items.value }
+            item-title="title"
+            item-value="id"
+            activatable
+            active-strategy="leaf"
+          />
+        </>
+      ))
+
+      cy.get('.v-treeview-item').should('have.length', 7)
+        .get('.v-treeview-item').eq(0).click()
+        .then(_ => {
+          expect(activated.value).to.deep.equal([])
+        })
+        .get('.v-treeview-item').eq(2).click()
+        .get('.v-treeview-item').eq(3).click()
+        .get('.v-treeview-item').eq(4).click()
+        .then(_ => {
+          expect(activated.value.sort()).to.deep.equal([3, 4, 5].sort())
+        })
+    })
+    it('independent strategy', () => {
+      const activated = ref([])
+      cy.mount(() => (
+        <>
+          <VTreeview
+            v-model:activated={ activated.value }
+            open-all
+            items={ items.value }
+            item-title="title"
+            item-value="id"
+            activatable
+            active-strategy="independent"
+          />
+        </>
+      ))
+
+      cy.get('.v-treeview-item').should('have.length', 7)
+        .get('.v-treeview-item').eq(0).click()
+        .then(_ => {
+          expect(activated.value).to.deep.equal([1])
+        })
+        .get('.v-treeview-item').eq(1).click()
+        .then(_ => {
+          expect(activated.value).to.deep.equal([1, 2])
+        })
+        .get('.v-treeview-item').eq(2).click()
+        .get('.v-treeview-item').eq(3).click()
+        .get('.v-treeview-item').eq(4).click()
+        .then(_ => {
+          expect(activated.value.sort()).to.deep.equal([1, 2, 3, 4, 5].sort())
+        })
+    })
+    it('single-independent strategy', () => {
+      const activated = ref([])
+      cy.mount(() => (
+        <>
+          <VTreeview
+            v-model:activated={ activated.value }
+            open-all
+            items={ items.value }
+            item-title="title"
+            item-value="id"
+            activatable
+            active-strategy="single-independent"
+          />
+        </>
+      ))
+
+      cy.get('.v-treeview-item').should('have.length', 7)
+        .get('.v-treeview-item').eq(0).click()
+        .then(_ => {
+          expect(activated.value).to.deep.equal([1])
+        })
+        .get('.v-treeview-item').eq(1).click()
+        .then(_ => {
+          expect(activated.value).to.deep.equal([2])
+        })
+        .get('.v-treeview-item').eq(2).click()
+        .get('.v-treeview-item').eq(3).click()
+        .get('.v-treeview-item').eq(4).click()
+        .then(_ => {
+          expect(activated.value).to.deep.equal([5])
+        })
+    })
+  })
   describe('select', () => {
     it('single-leaf strategy', () => {
       const selected = ref([])
