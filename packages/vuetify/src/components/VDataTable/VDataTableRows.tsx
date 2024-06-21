@@ -31,6 +31,7 @@ export type VDataTableRowsSlots<T> = VDataTableGroupHeaderRowSlots & VDataTableR
 }
 
 export const makeVDataTableRowsProps = propsFactory({
+  color: String,
   loading: [Boolean, String],
   loadingText: {
     type: String,
@@ -163,6 +164,7 @@ export const VDataTableRows = genericComponent<new <T>(
               <Fragment key={ itemSlotProps.props.key as string }>
                 { slots.item ? slots.item(itemSlotProps) : (
                   <VDataTableRow
+                    color={ props.color }
                     { ...itemSlotProps.props }
                     v-slots={ slots }
                   />
