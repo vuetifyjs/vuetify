@@ -25,9 +25,7 @@ export const VRadio = genericComponent<VSelectionControlSlots>()({
         { ...props }
         class={[
           'v-radio',
-          props.class,
         ]}
-        style={ props.style }
         type="radio"
         v-slots={ slots }
       />
