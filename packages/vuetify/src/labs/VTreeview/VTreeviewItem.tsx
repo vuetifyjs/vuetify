@@ -16,7 +16,7 @@ import { genOverlays } from '@/composables/variant'
 
 // Utilities
 import { computed, inject, ref } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
@@ -85,19 +85,12 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       }
     }
 
-    function onKeyDown (e: KeyboardEvent) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault()
-        activateItem(e)
-      }
-    }
-
     const visibleIds = inject(VTreeviewSymbol, { visibleIds: ref() }).visibleIds
 
     useRender(() => {
       const hasTitle = (slots.title || props.title != null)
       const hasSubtitle = (slots.subtitle || props.subtitle != null)
-      const listItemProps = VListItem.filterProps(props)
+      const listItemProps = omit(VListItem.filterProps(props), ['onClick'])
       const hasPrepend = slots.prepend || props.toggleIcon
 
       return isActivatableGroupActivator.value
@@ -116,7 +109,6 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
               props.class,
             ]}
             onClick={ activateItem }
-            v-ripple={ isClickable.value && props.ripple }
           >
             <>
               { genOverlays(isActivated.value || isSelected.value, 'v-list-item') }
@@ -173,9 +165,8 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             },
             props.class,
           ]}
+          ripple={ false }
           value={ id.value }
-          onClick={ activateItem }
-          onKeydown={ isClickable.value && onKeyDown }
         >
           {{
             ...slots,
@@ -189,6 +180,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
                         icon={ props.toggleIcon }
                         loading={ props.loading }
                         variant="text"
+                        onClick={ props.onClick }
                       >
                         {{
                           loader () {
