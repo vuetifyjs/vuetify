@@ -299,7 +299,7 @@ Specify a custom **mobileBreakpoint** value directly to the [useDisplay](/api/us
   import { onMounted } from 'vue'
   import { useDisplay } from 'vuetify'
 
-  const { mobile } = useDisplay({ mobileBreakpoint })
+  const { mobile } = useDisplay({ mobileBreakpoint: 580 })
 
   // Given a viewport width of 960px
   onMounted(() => {
