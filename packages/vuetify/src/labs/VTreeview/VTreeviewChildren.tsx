@@ -28,6 +28,10 @@ export const makeVTreeviewChildrenProps = propsFactory({
     default: '$loading',
   },
   items: Array as PropType<readonly InternalListItem[]>,
+  openOnClick: {
+    type: Boolean,
+    default: false,
+  },
   selectable: Boolean,
   selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
 }, 'VTreeviewChildren')
@@ -111,6 +115,8 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 ...itemProps,
                 ...activatorProps,
                 value: itemProps?.value,
+                onToggleExpand: activatorProps.onClick as any,
+                onClick: props.openOnClick ? [() => checkChildren(item), activatorProps.onClick] as any : undefined,
               }
 
               return (
@@ -118,7 +124,6 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                   { ...listItemProps }
                   loading={ loading }
                   v-slots={ slotsWithItem }
-                  onClick={ () => checkChildren(item) }
                 />
               )
             },

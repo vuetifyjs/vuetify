@@ -16,7 +16,7 @@ import { genOverlays } from '@/composables/variant'
 
 // Utilities
 import { computed, inject, ref } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
@@ -24,6 +24,7 @@ import type { ListItemSlot, VListItemSlots } from '@/components/VList/VListItem'
 
 export const makeVTreeviewItemProps = propsFactory({
   loading: Boolean,
+  onToggleExpand: EventProp<[MouseEvent]>(),
   toggleIcon: IconValue,
 
   ...makeVListItemProps({ slim: true }),
@@ -67,7 +68,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
     const isClickable = computed(() =>
       !props.disabled &&
       props.link !== false &&
-      (props.link || link.isClickable.value || (props.value != null && !!vListItemRef.value?.list))
+      (props.link || link.isClickable.value || (props.value != null && !!vListItemRef.value?.list) || isActivatableGroupActivator.value)
     )
 
     function activateItem (e: MouseEvent | KeyboardEvent) {
@@ -93,6 +94,10 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       const listItemProps = omit(VListItem.filterProps(props), ['onClick'])
       const hasPrepend = slots.prepend || props.toggleIcon
 
+      // A dedicated ActivatableGroupActivator was created because VList does not currently allow VListGroup to be activatable.
+      // Making VListGroup activatable would be a new feature in VList.
+      // However, this functionality is available in VTreeview.
+      // The ActivatableGroupActivator can be removed once VList supports activatable VListGroups.
       return isActivatableGroupActivator.value
         ? (
           <div
@@ -108,7 +113,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
               densityClasses.value,
               props.class,
             ]}
-            onClick={ activateItem }
+            onClick={ props.onClick ?? activateItem }
           >
             <>
               { genOverlays(isActivated.value || isSelected.value, 'v-list-item') }
@@ -119,7 +124,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
                     icon={ props.toggleIcon }
                     loading={ props.loading }
                     variant="text"
-                    onClick={ props.onClick }
+                    onClick={ props.onToggleExpand }
                   >
                     {{
                       loader () {
