@@ -110,7 +110,7 @@ export function useSortedItems<T extends InternalItem> (
 ) {
   const locale = useLocale()
   const sortedItems = computed(() => {
-    if (!sortBy.value.length || props.disableSort) return items.value
+    if (!sortBy.value.length && props.disableSort) return items.value
 
     return sortItems(items.value, sortBy.value, locale.current.value, {
       transform: options?.transform,
