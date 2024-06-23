@@ -130,6 +130,7 @@ export const VDataTableRow = genericComponent<new <T>(
               maxWidth={ !mobile.value ? column.maxWidth : undefined }
               noPadding={ column.key === 'data-table-select' || column.key === 'data-table-expand' }
               nowrap={ column.nowrap }
+              hidden={ column.hidden }
               width={ !mobile.value ? column.width : undefined }
               { ...cellProps }
               { ...columnCellProps }
