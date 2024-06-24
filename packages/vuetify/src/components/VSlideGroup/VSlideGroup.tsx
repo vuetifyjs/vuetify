@@ -451,6 +451,8 @@ export const VSlideGroup = genericComponent<new <T>(
       scrollTo,
       scrollOffset,
       focus,
+      hasPrev,
+      hasNext,
     }
   },
 })
