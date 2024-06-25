@@ -33,8 +33,8 @@ export type ThemeOptions = false | {
   defaultTheme?: string
   variations?: false | VariationsOptions
   themes?: Record<string, ThemeDefinition>
-}
-export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
+};
+export type ThemeDefinition = DeepPartial<InternalThemeDefinition>;
 
 interface InternalThemeOptions {
   cspNonce?: string
@@ -129,6 +129,8 @@ function genDefaults () {
           warning: '#FB8C00',
         },
         variables: {
+          anchor: '#6200EE',
+          'anchor-hover': '#3700B3',
           'border-color': '#000000',
           'border-opacity': 0.12,
           'high-emphasis-opacity': 0.87,
@@ -166,6 +168,8 @@ function genDefaults () {
           warning: '#FB8C00',
         },
         variables: {
+          anchor: '#BB86FC',
+          'anchor-hover': '#B39DDB',
           'border-color': '#FFFFFF',
           'border-opacity': 0.12,
           'high-emphasis-opacity': 1,
