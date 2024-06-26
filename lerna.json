@@ -2,9 +2,8 @@
   "command": {
     "publish": {
       "allowBranch": [
-        "master",
-        "dev",
-        "next"
+        "v2-stable",
+        "v2-dev"
       ],
       "message": "chore(release): publish %s"
     },
@@ -13,6 +12,6 @@
     }
   },
   "npmClient": "yarn",
-  "version": "2.6.14",
+  "version": "2.7.2",
   "useWorkspaces": true
 }

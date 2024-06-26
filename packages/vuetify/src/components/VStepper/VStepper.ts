@@ -15,6 +15,7 @@ import Proxyable from '../../mixins/proxyable'
 // Utilities
 import mixins from '../../util/mixins'
 import { breaking } from '../../util/console'
+import { getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -135,6 +136,6 @@ export default baseMixins.extend({
       staticClass: 'v-stepper',
       class: this.classes,
       style: this.styles,
-    }, this.$slots.default)
+    }, getSlot(this))
   },
 })

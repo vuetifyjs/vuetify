@@ -5,13 +5,9 @@
     :color="dark ? '#272727' : undefined"
     :right="rtl"
     app
-    floating
+    clipped
     width="300"
   >
-    <template #prepend>
-      <default-drawer-prepend />
-    </template>
-
     <keep-alive>
       <default-list
         :key="key"
@@ -21,12 +17,39 @@
     </keep-alive>
 
     <div class="pt-12" />
+
+    <template #append>
+      <v-divider />
+
+      <v-toolbar height="40" flat>
+        <div class="text--secondary text-caption py-2 mx-n1 d-flex align-center flex-grow-1 justify-space-between">
+          <div class="d-inline-flex align-center">
+            <v-icon left size="18">mdi-label</v-icon>
+            Latest release
+          </div>
+
+          <v-btn
+            :href="`https://vuetifyjs.com/getting-started/release-notes/?version=v${version}`"
+            class="text-button px-2 ms-auto text--secondary"
+            rel="noopener noreferrer"
+            small
+            target="_blank"
+            text
+          >
+            <span class="text-none">
+              v{{ version }}
+            </span>
+
+            <v-icon small right>mdi-open-in-new</v-icon>
+          </v-btn>
+        </div>
+      </v-toolbar>
+    </template>
   </v-navigation-drawer>
 </template>
 
 <script>
   // Components
-  import DefaultDrawerPrepend from './DrawerPrepend'
   import DefaultList from './List'
 
   // Utilities
@@ -39,7 +62,6 @@
     name: 'DefaultDrawer',
 
     components: {
-      DefaultDrawerPrepend,
       DefaultList,
     },
 
@@ -54,6 +76,7 @@
       ]),
       drawer: sync('app/drawer'),
       ualphabetical: get('user/drawer@alphabetical'),
+      version: get('app/version'),
       key () {
         return !this.ualphabetical ? 'simple' : 'alphabetical'
       },

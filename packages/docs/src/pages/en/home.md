@@ -10,22 +10,3 @@ Vuetify is a no design skills required UI Framework with beautifully handcrafted
 <br>
 
 <home-action-btns />
-
-<br>
-<br>
-
-## Special Sponsor
-
-Thank you to our special sponsor:
-
-<sponsor height="70" slug="teamwork" />
-
-<br>
-
-## Project Sponsors
-
-The continued development and maintenance of Vuetify is made possible by these generous sponsors:
-
-<br>
-
-<home-sponsors />

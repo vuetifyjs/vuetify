@@ -161,12 +161,12 @@ export default mixins(
 
   methods: {
     onKeyDown (e: KeyboardEvent): void {
-      if (e.keyCode !== keyCodes.shift) return
-      this.shiftKeyDown = true
+      this.shiftKeyDown = e.keyCode === keyCodes.shift || e.shiftKey
     },
     onKeyUp (e: KeyboardEvent): void {
-      if (e.keyCode !== keyCodes.shift) return
-      this.shiftKeyDown = false
+      if (e.keyCode === keyCodes.shift || !e.shiftKey) {
+        this.shiftKeyDown = false
+      }
     },
     toggleSelectAll (value: boolean): void {
       const selection = Object.assign({}, this.selection)
@@ -256,13 +256,13 @@ export default mixins(
     },
     genEmpty (originalItemsLength: number, filteredItemsLength: number) {
       if (originalItemsLength === 0 && this.loading) {
-        const loading = this.$slots.loading || this.$vuetify.lang.t(this.loadingText)
+        const loading = getSlot(this, 'loading') || this.$vuetify.lang.t(this.loadingText)
         return this.genEmptyWrapper(loading)
       } else if (originalItemsLength === 0) {
-        const noData = this.$slots['no-data'] || this.$vuetify.lang.t(this.noDataText)
+        const noData = getSlot(this, 'noData') || this.$vuetify.lang.t(this.noDataText)
         return this.genEmptyWrapper(noData)
       } else if (filteredItemsLength === 0) {
-        const noResults = this.$slots['no-results'] || this.$vuetify.lang.t(this.noResultsText)
+        const noResults = getSlot(this, 'noResults') || this.$vuetify.lang.t(this.noResultsText)
         return this.genEmptyWrapper(noResults)
       }
 

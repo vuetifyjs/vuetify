@@ -2,17 +2,12 @@
   <app-btn
     href="https://vuetifyjs.com/en/introduction/enterprise-support/"
     path="enterprise"
+    active
+    color="primary"
+    class="ml-2"
     @click="onClick"
   >
-    <v-badge inline color="success">
-      <template #badge>
-        <small>NEW</small>
-      </template>
-
-      <span class="me-1">
-        <i18n path="enterprise" />
-      </span>
-    </v-badge>
+    <i18n path="get-help" />
   </app-btn>
 </template>
 

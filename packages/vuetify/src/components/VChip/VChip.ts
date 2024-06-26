@@ -19,6 +19,7 @@ import Sizeable from '../../mixins/sizeable'
 
 // Utilities
 import { breaking } from '../../util/console'
+import { getSlot } from '../../util/helpers'
 
 // Types
 import { PropValidator, PropType } from 'vue/types/options'
@@ -169,7 +170,7 @@ export default mixins(
         staticClass: 'v-chip__content',
       }, [
         this.filter && this.genFilter(),
-        this.$slots.default,
+        getSlot(this),
         this.hasClose && this.genClose(),
       ])
     },

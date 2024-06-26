@@ -15,10 +15,7 @@ import Toggleable from '../../mixins/toggleable'
 
 // Utilities
 import mixins from '../../util/mixins'
-import {
-  convertToUnit,
-  getSlot,
-} from '../../util/helpers'
+import { convertToUnit, getSlot } from '../../util/helpers'
 
 // Typeslint
 import { VNode } from 'vue'
@@ -56,7 +53,7 @@ export default mixins(
       }
     },
     hasIcon (): boolean {
-      return Boolean(this.icon || this.$slots.icon)
+      return Boolean(this.icon || this.$slots.icon || this.$scopedSlots.icon)
     },
     isSticky (): boolean {
       return this.sticky || this.app
@@ -99,7 +96,7 @@ export default mixins(
           },
         }, [this.icon])
       } else {
-        content = this.$slots.icon
+        content = getSlot(this, 'icon')
       }
 
       return this.$createElement(VAvatar, {
@@ -116,7 +113,7 @@ export default mixins(
     genText () {
       return this.$createElement('div', {
         staticClass: 'v-banner__text',
-      }, this.$slots.default)
+      }, getSlot(this))
     },
     genActions () {
       const children = getSlot(this, 'actions', {

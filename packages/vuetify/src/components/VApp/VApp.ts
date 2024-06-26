@@ -6,6 +6,7 @@ import Themeable from '../../mixins/themeable'
 
 // Utilities
 import mixins from '../../util/mixins'
+import { getSlot } from '../../util/helpers'
 
 /* @vue/component */
 export default mixins(
@@ -41,7 +42,7 @@ export default mixins(
   },
 
   render (h) {
-    const wrapper = h('div', { staticClass: 'v-application--wrap' }, this.$slots.default)
+    const wrapper = h('div', { staticClass: 'v-application--wrap' }, getSlot(this))
 
     return h('div', {
       staticClass: 'v-application',

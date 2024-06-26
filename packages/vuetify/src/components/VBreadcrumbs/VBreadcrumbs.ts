@@ -14,6 +14,7 @@ import Themeable from '../../mixins/themeable'
 
 // Utils
 import mixins from '../../util/mixins'
+import { getSlot } from '../../util/helpers'
 
 export default mixins(
   Themeable
@@ -67,7 +68,7 @@ export default mixins(
   },
 
   render (h): VNode {
-    const children = this.$slots.default || this.genItems()
+    const children = getSlot(this) || this.genItems()
 
     return h('ul', {
       staticClass: 'v-breadcrumbs',

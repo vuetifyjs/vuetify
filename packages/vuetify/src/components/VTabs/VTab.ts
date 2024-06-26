@@ -4,7 +4,7 @@ import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
 
 // Utilities
-import { keyCodes } from './../../util/helpers'
+import { getSlot, keyCodes } from './../../util/helpers'
 import mixins from '../../util/mixins'
 import { ExtractVue } from './../../util/mixins'
 
@@ -39,6 +39,9 @@ export default baseMixins.extend<options>().extend(
       type: [Boolean, Object],
       default: true,
     },
+    tabValue: {
+      required: false,
+    },
   },
 
   data: () => ({
@@ -55,6 +58,8 @@ export default baseMixins.extend<options>().extend(
       }
     },
     value (): any {
+      if (this.tabValue != null) return this.tabValue
+
       let to = this.to || this.href
 
       if (to == null) return to
@@ -124,6 +129,6 @@ export default baseMixins.extend<options>().extend(
       },
     }
 
-    return h(tag, data, this.$slots.default)
+    return h(tag, data, getSlot(this))
   },
 })

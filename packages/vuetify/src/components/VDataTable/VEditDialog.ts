@@ -6,7 +6,7 @@ import Returnable from '../../mixins/returnable'
 import Themeable from '../../mixins/themeable'
 
 // Utils
-import { keyCodes } from '../../util/helpers'
+import { getSlot, keyCodes } from '../../util/helpers'
 
 // Component
 import VBtn from '../VBtn'
@@ -96,7 +96,7 @@ export default mixins(Returnable, Themeable).extend({
           },
         },
         ref: 'content',
-      }, [this.$slots.input])
+      }, getSlot(this, 'input'))
     },
   },
 
@@ -127,7 +127,7 @@ export default mixins(Returnable, Themeable).extend({
           }, [
             h('span', {
               staticClass: 'v-small-dialog__activator__content',
-            }, this.$slots.default),
+            }, getSlot(this)),
           ])
         },
       },

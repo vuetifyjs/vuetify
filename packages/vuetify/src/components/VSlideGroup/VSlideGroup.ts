@@ -20,7 +20,7 @@ import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
 import Vue, { VNode } from 'vue'
-import { composedPath } from '../../util/helpers'
+import { composedPath, getSlot } from '../../util/helpers'
 
 interface TouchEvent {
   touchstartX: number
@@ -130,6 +130,7 @@ export const BaseSlideGroup = mixins<options &
       validator: (v: any) => (
         typeof v === 'boolean' || [
           'always',
+          'never',
           'desktop',
           'mobile',
         ].includes(v)
@@ -185,6 +186,9 @@ export const BaseSlideGroup = mixins<options &
           this.isMobile ||
           (this.isOverflowing || Math.abs(this.scrollOffset) > 0)
         )
+
+        // Always hide arrows
+        case 'never': return false
 
         // https://material.io/components/tabs#scrollable-tabs
         // Always show arrows when
@@ -279,7 +283,7 @@ export const BaseSlideGroup = mixins<options &
     genNext (): VNode | null {
       const slot = this.$scopedSlots.next
         ? this.$scopedSlots.next({})
-        : this.$slots.next || this.__cachedNext
+        : getSlot(this, 'next') || this.__cachedNext
 
       return this.$createElement('div', {
         staticClass: 'v-slide-group__next',
@@ -299,7 +303,7 @@ export const BaseSlideGroup = mixins<options &
         on: {
           focusin: this.onFocusin,
         },
-      }, this.$slots.default)
+      }, getSlot(this))
     },
     genData (): object {
       return {
@@ -337,7 +341,7 @@ export const BaseSlideGroup = mixins<options &
     genPrev (): VNode | null {
       const slot = this.$scopedSlots.prev
         ? this.$scopedSlots.prev({})
-        : this.$slots.prev || this.__cachedPrev
+        : getSlot(this, 'prev') || this.__cachedPrev
 
       return this.$createElement('div', {
         staticClass: 'v-slide-group__prev',

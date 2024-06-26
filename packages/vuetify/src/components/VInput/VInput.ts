@@ -165,7 +165,7 @@ export default baseMixins.extend<options>().extend({
     genDefaultSlot () {
       return [
         this.genLabel(),
-        this.$slots.default,
+        getSlot(this),
       ]
     },
     genIcon (
@@ -177,9 +177,20 @@ export default baseMixins.extend<options>().extend({
       const eventName = `click:${kebabCase(type)}`
       const hasListener = !!(this.listeners$[eventName] || cb)
 
+      const localeKey = {
+        prepend: 'prependAction',
+        prependInner: 'prependAction',
+        append: 'appendAction',
+        appendOuter: 'appendAction',
+        clear: 'clear',
+      }[type]
+      const label = hasListener && localeKey
+        ? this.$vuetify.lang.t(`$vuetify.input.${localeKey}`, this.label ?? '')
+        : undefined
+
       const data = mergeData({
         attrs: {
-          'aria-label': hasListener ? kebabCase(type).split('-')[0] + ' icon' : undefined,
+          'aria-label': label,
           color: this.validationState,
           dark: this.dark,
           disabled: this.isDisabled,
@@ -240,7 +251,7 @@ export default baseMixins.extend<options>().extend({
           for: this.computedId,
           light: this.light,
         },
-      }, this.$slots.label || this.label)
+      }, getSlot(this, 'label') || this.label)
     },
     genMessages () {
       if (!this.showDetails) return null

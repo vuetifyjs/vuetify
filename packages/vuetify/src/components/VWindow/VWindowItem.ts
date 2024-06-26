@@ -9,7 +9,7 @@ import { factory as GroupableFactory } from '../../mixins/groupable'
 import Touch from '../../directives/touch'
 
 // Utilities
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlot } from '../../util/helpers'
 import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
@@ -75,7 +75,7 @@ export default baseMixins.extend<options>().extend(
 
   methods: {
     genDefaultSlot () {
-      return this.$slots.default
+      return getSlot(this)
     },
     genWindowItem () {
       return this.$createElement('div', {

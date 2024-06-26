@@ -8,6 +8,7 @@ import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Helpers
 import { VNode } from 'vue'
+import { getSlot } from '../../util/helpers'
 
 type ErrorBag = Record<number, boolean>
 type VInputInstance = InstanceType<typeof VInput>
@@ -139,6 +140,6 @@ export default mixins(
       on: {
         submit: (e: Event) => this.$emit('submit', e),
       },
-    }, this.$slots.default)
+    }, getSlot(this))
   },
 })

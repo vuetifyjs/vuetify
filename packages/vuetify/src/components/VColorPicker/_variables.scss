@@ -7,7 +7,8 @@ $color-picker-swatch-color-height: 18px !default;
 $color-picker-swatch-color-margin: 2px 4px !default;
 $color-picker-swatch-color-border-radius: 2px !default;
 $color-picker-swatch-margin-bottom: 10px !default;
-$color-picker-swatches-border-radius: 8px !default;
+$color-picker-swatches-border-radius: 8px !default; // typo
+$color-picker-swatches-padding: $color-picker-swatches-border-radius !default;
 $color-picker-canvas-dot-size: 15px !default;
 $color-picker-canvas-dot-box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 1), inset 0px 0px 1px 1.5px rgba(0, 0, 0, 0.3) !default;
 $color-picker-canvas-dot-disabled-box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.7), inset 0px 0px 1px 1.5px rgba(0, 0, 0, 0.3) !default;

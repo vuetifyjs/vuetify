@@ -7,6 +7,7 @@ import mixins from '../../util/mixins'
 
 // Mixins
 import Themeable from '../../mixins/themeable'
+import { getSlot } from '../../util/helpers'
 
 export default mixins(
   Themeable
@@ -39,6 +40,6 @@ export default mixins(
     return h('div', {
       staticClass: 'v-timeline',
       class: this.classes,
-    }, this.$slots.default)
+    }, getSlot(this))
   },
 })

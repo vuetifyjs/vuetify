@@ -8,7 +8,7 @@ import {
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
 // Helpers
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlot } from '../../util/helpers'
 
 // Utilities
 import mixins from '../../util/mixins'
@@ -155,7 +155,7 @@ export default baseMixins.extend<options>().extend({
       }]
     }
 
-    const wrapper = h('div', wrapperData, [this.$slots.default])
+    const wrapper = h('div', wrapperData, getSlot(this))
     const content = h('div', contentData, [wrapper])
 
     return h(this.computedTransition, {

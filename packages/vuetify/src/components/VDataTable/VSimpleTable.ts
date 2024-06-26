@@ -1,6 +1,6 @@
 import './VSimpleTable.sass'
 
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlot } from '../../util/helpers'
 import Themeable from '../../mixins/themeable'
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
@@ -35,7 +35,7 @@ export default mixins(Themeable).extend({
           height: convertToUnit(this.height),
         },
       }, [
-        this.$createElement('table', this.$slots.default),
+        this.$createElement('table', getSlot(this)),
       ])
     },
   },
@@ -45,9 +45,9 @@ export default mixins(Themeable).extend({
       staticClass: 'v-data-table',
       class: this.classes,
     }, [
-      this.$slots.top,
+      getSlot(this, 'top'),
       this.genWrapper(),
-      this.$slots.bottom,
+      getSlot(this, 'bottom'),
     ])
   },
 })
