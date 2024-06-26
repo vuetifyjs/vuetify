@@ -427,10 +427,9 @@ export function clamp (value: number, min = 0, max = 1) {
 }
 
 export function getDecimals (value: number) {
-  const trimmedStr = value.toString().trim()
-  return trimmedStr.includes('.')
-    ? (trimmedStr.length - trimmedStr.indexOf('.') - 1)
-    : 0
+  const fractionDigits = (value.toString().trim().match(/\.\d+/g)?.at(0) ?? '.').length - 1
+  const correction = Number(value.toString().split('e')[1] ?? '0')
+  return Math.max(0, fractionDigits - correction)
 }
 
 export function padEnd (str: string, length: number, char = '0') {
@@ -759,4 +758,38 @@ export function templateRef () {
   })
 
   return fn as TemplateRef
+}
+
+export function extractNumber (text: string): number | null {
+  let cleanText = text.split('')
+    .filter(x => /[\d\-.]/.test(x))
+    .filter((x, i, all) => (i === 0 && /[-]/.test(x)) || // sign allowed at the start
+        (x === '.' && i === all.indexOf('.')) || // decimal separator allowed only once
+        /\d/.test(x))
+    .join('')
+
+  const hasAnyDigit = /\d/.test(cleanText)
+  if (!hasAnyDigit) return null
+
+  if (!/\d\./.test(cleanText) && cleanText.includes('.')) {
+    cleanText = cleanText.replace('.', '0.') // inject missing zero before separator
+  }
+
+  cleanText = cleanText.replace(/^(-)?0*(\d)/, '$1$2') // remove leading zeros except one
+  cleanText = cleanText.replace(/\.(\d*[1-9])?0+$/, '.$1') // remove trailing zeros
+  cleanText = cleanText.replace(/\.$/, '') // remove trailing dot
+
+  if (cleanText.length > 17) {
+    cleanText = cleanText.substring(0, 17)
+  }
+
+  let decimalDigits = (cleanText.split('.')[1] ?? '').length
+  while (cleanText.length > 1 && cleanText !== Number(cleanText).toFixed(decimalDigits)) {
+    cleanText = cleanText.substring(0, cleanText.length - 2)
+    if (decimalDigits > 0) decimalDigits--
+  }
+
+  if (cleanText === '-0') return 0
+
+  return Number(cleanText)
 }
