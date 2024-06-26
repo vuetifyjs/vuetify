@@ -228,7 +228,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
-          centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
+          centerAffix={ props.centerAffix ?? (rows.value === 1 && !isPlainOrUnderlined.value) }
           focused={ isFocused.value }
         >
           {{
@@ -253,7 +253,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                 { ...fieldProps }
                 id={ id.value }
                 active={ isActive.value || isDirty.value }
-                centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
+                centerAffix={ props.centerAffix ?? (rows.value === 1 && !isPlainOrUnderlined.value) }
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }

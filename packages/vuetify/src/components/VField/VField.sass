@@ -197,12 +197,13 @@
 
   .v-field.v-field--variant-underlined,
   .v-field.v-field--variant-plain
-    .v-field__append-inner,
-    .v-field__clearable,
-    .v-field__prepend-inner
-      align-items: flex-start
-      padding-top: $field-input-padding-top
-      padding-bottom: $field-input-padding-bottom
+    &:not(.v-field--center-affix)
+      .v-field__append-inner,
+      .v-field__clearable,
+      .v-field__prepend-inner
+        align-items: flex-start
+        padding-top: $field-input-padding-top
+        padding-bottom: $field-input-padding-bottom
 
   .v-field__prepend-inner,
   .v-field__append-inner

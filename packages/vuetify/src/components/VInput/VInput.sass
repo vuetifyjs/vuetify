@@ -104,13 +104,13 @@
         -moz-appearance: textfield
 
     &--plain-underlined
+      &:not(.v-input--center-affix)
+        .v-input__prepend,
+        .v-input__append
+          $this: &
+          align-items: flex-start
 
-      .v-input__prepend,
-      .v-input__append
-        $this: &
-        align-items: flex-start
-
-        @at-root
-          @include tools.density('v-input', $input-density) using ($modifier)
-            @at-root #{selector.append(&, $this)}
-              padding-top: calc(var(--v-input-padding-top) + #{math.max(0px, 4px + $modifier * .25)})
+          @at-root
+            @include tools.density('v-input', $input-density) using ($modifier)
+              @at-root #{selector.append(&, $this)}
+                padding-top: calc(var(--v-input-padding-top) + #{math.max(0px, 4px + $modifier * .25)})

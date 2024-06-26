@@ -64,7 +64,7 @@ export const makeVFieldProps = propsFactory({
   active: Boolean,
   centerAffix: {
     type: Boolean,
-    default: undefined,
+    default: false,
   },
   color: String,
   baseColor: String,
