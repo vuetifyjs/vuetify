@@ -191,7 +191,7 @@ app.use(vuetify)
 ### v-list
 
 - `two-line` and `three-line` props have been combined into a single `lines` prop with allowed values `'two'` or `'three'`.
-- `v-list-item-group` has been removed, just add `value` to list items to make them selectable and bind `v-model:selected` on v-list to get the selected value.
+- `v-list-item-group` has been removed, assign the item's key to the `value` prop of each `v-list-item` and bind `v-model:selected` on the `v-list` to get the selected value.
 - `v-list-item-icon` and `v-list-item-avatar` have been removed, use `v-list-item` with `icon` or `avatar` props, or put an icon or avatar in the append or prepend slot.
 - `v-list-item-content` has been removed, lists use CSS grid for layout now instead.
 - `v-list-group` can now be nested arbitrarily deep, `sub-group` prop should be removed.
