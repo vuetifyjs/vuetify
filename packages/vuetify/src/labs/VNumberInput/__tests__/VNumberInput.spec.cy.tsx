@@ -158,4 +158,16 @@ describe('VNumberInput', () => {
         .then(() => expect(numberInputValue.value).to.equal(0))
     })
   })
+
+  describe('hiding controls', () => {
+    it('should support hiding controls', () => {
+      cy.mount(() => <VNumberInput modelValue={ 512 } hide-controls />)
+        .get('.v-number-input__control').should('have.length', 0)
+    })
+
+    it('should support showing icon instead of controls', () => {
+      cy.mount(() => <VNumberInput modelValue={ 1024 } readonly hide-controls append-inner-icon="mdi-lock" />)
+        .get('.v-icon').should('have.length', 1)
+    })
+  })
 })

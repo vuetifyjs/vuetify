@@ -13,7 +13,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, watchEffect } from 'vue'
-import { clamp, genericComponent, getDecimals, omit, propsFactory, useRender } from '@/util'
+import { clamp, genericComponent, getDecimals, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -37,6 +37,7 @@ const makeVNumberInputProps = propsFactory({
   },
   inset: Boolean,
   hideInput: Boolean,
+  hideControls: Boolean,
   min: {
     type: Number,
     default: -Infinity,
@@ -49,8 +50,7 @@ const makeVNumberInputProps = propsFactory({
     type: Number,
     default: 1,
   },
-
-  ...omit(makeVTextFieldProps(), ['appendInnerIcon', 'prependInnerIcon']),
+  ...makeVTextFieldProps(),
 }, 'VNumberInput')
 
 export const VNumberInput = genericComponent<VNumberInputSlots>()({
@@ -293,6 +293,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             {
               'v-number-input--default': controlVariant.value === 'default',
               'v-number-input--hide-input': props.hideInput,
+              'v-number-input--hide-controls': props.hideControls,
               'v-number-input--inset': props.inset,
               'v-number-input--reverse': props.reverse,
               'v-number-input--split': controlVariant.value === 'split',
@@ -306,13 +307,13 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         >
           {{
             ...slots,
-            'append-inner': hasAppendInner ? (...args) => (
+            'append-inner': hasAppendInner && !props.hideControls ? (...args) => (
               <>
                 { slots['append-inner']?.(...args) }
                 { appendInnerControl }
               </>
             ) : undefined,
-            'prepend-inner': hasPrependInner ? (...args) => (
+            'prepend-inner': hasPrependInner && !props.hideControls ? (...args) => (
               <>
                 { prependInnerControl }
                 { slots['prepend-inner']?.(...args) }
