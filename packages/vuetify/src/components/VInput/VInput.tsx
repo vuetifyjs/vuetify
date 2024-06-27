@@ -42,7 +42,7 @@ export const makeVInputProps = propsFactory({
   appendIcon: IconValue,
   centerAffix: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,

@@ -152,6 +152,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     const sizerRef = ref<HTMLTextAreaElement>()
     const rows = ref(+props.rows)
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
+    const isCenterAffix = computed(() => props.centerAffix ?? (rows.value === 1 && !isPlainOrUnderlined.value))
     watchEffect(() => {
       if (!props.autoGrow) rows.value = +props.rows
     })
@@ -228,7 +229,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
-          centerAffix={ props.centerAffix ?? (rows.value === 1 && !isPlainOrUnderlined.value) }
+          centerAffix={ isCenterAffix.value }
           focused={ isFocused.value }
         >
           {{
@@ -253,7 +254,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                 { ...fieldProps }
                 id={ id.value }
                 active={ isActive.value || isDirty.value }
-                centerAffix={ props.centerAffix ?? (rows.value === 1 && !isPlainOrUnderlined.value) }
+                centerAffix={ isCenterAffix.value }
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
