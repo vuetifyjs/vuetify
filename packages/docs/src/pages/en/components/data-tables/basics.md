@@ -34,7 +34,8 @@ The standard data table presumes that the entire data set is available locally. 
 | Component | Description |
 | - | - |
 | [v-data-table](/api/v-data-table/) | Primary Component |
-| [v-data-table-footer](/api/v-data-table-footer/) | Functional Component used to display Data-table headers |
+| [v-data-table-headers](/api/v-data-table-headers/) | Functional Component used to display Data-table headers |
+| [v-data-table-footer](/api/v-data-table-footer/) | Functional Component used to display Data-table footers |
 | [v-checkbox-btn](/api/v-checkbox-btn/) | Reusable lightweight [v-checkbox](/components/checkboxes) |
 
 <ApiInline hide-links />
@@ -140,11 +141,11 @@ The `v-data-table` renders a default footer using the `v-data-footer` component.
 
 <ExamplesExample file="v-data-table/prop-footer-props" /> -->
 
-<!-- #### Hide default header and footer
+#### Hide default header and footer
 
 You can apply the **hide-default-header** and **hide-default-footer** props to remove the default header and footer respectively.
 
-<ExamplesExample file="v-data-table/prop-hide-header-footer" /> -->
+<ExamplesExample file="v-data-table/prop-hide-header-footer" />
 
 #### Selection
 

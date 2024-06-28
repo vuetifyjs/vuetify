@@ -3,13 +3,16 @@ import './VLayout.sass'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { createLayout, makeLayoutProps } from '@/composables/layout'
 
 // Utilities
+import { Suspense } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVLayoutProps = propsFactory({
   ...makeComponentProps(),
+  ...makeDimensionProps(),
   ...makeLayoutProps(),
 }, 'VLayout')
 
@@ -20,6 +23,7 @@ export const VLayout = genericComponent()({
 
   setup (props, { slots }) {
     const { layoutClasses, layoutStyles, getLayoutItem, items, layoutRef } = createLayout(props)
+    const { dimensionStyles } = useDimension(props)
 
     useRender(() => (
       <div
@@ -29,11 +33,16 @@ export const VLayout = genericComponent()({
           props.class,
         ]}
         style={[
+          dimensionStyles.value,
           layoutStyles.value,
           props.style,
         ]}
       >
-        { slots.default?.() }
+        <Suspense>
+          <>
+            { slots.default?.() }
+          </>
+        </Suspense>
       </div>
     ))
 

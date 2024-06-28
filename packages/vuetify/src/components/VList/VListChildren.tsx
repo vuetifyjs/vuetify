@@ -85,7 +85,11 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(
                 )
             },
             default: () => (
-              <VListChildren items={ children } v-slots={ slots } />
+              <VListChildren
+                items={ children }
+                returnObject={ props.returnObject }
+                v-slots={ slots }
+              />
             ),
           }}
         </VListGroup>

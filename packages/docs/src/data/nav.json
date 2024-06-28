@@ -68,7 +68,9 @@
       "elevation",
       "flex",
       "float",
+      "opacity",
       "overflow",
+      "position",
       "sizing",
       "spacing",
       "text-and-typography"
@@ -86,6 +88,7 @@
         "routePath": "explorer",
         "subtitle": "browse-components"
       },
+      "application",
       { "divider": true },
       { "subheader": "containment" },
       "bottom-sheets",
@@ -106,9 +109,11 @@
       "app-bars",
       "bottom-navigation",
       "breadcrumbs",
+      "floating-action-buttons",
       "footers",
       "navigation-drawers",
       "paginations",
+      "speed-dials",
       "system-bars",
       "tabs",
       { "divider": true },
@@ -129,6 +134,7 @@
       "textareas",
       { "divider": true },
       { "subheader": "data-and-display" },
+      "confirm-edit",
       "data-iterators",
       {
         "title": "data-tables",
@@ -145,6 +151,7 @@
           "virtual-tables"
         ]
       },
+      "sparklines",
       "infinite-scroller",
       "tables",
       "virtual-scroller",
@@ -165,6 +172,7 @@
       "alerts",
       "badges",
       "banners",
+      "empty-states",
       "hover",
       "progress-circular",
       "progress-linear",
@@ -211,6 +219,7 @@
       "resize",
       "ripple",
       "scroll",
+      "tooltip",
       "touch"
     ]
   },
@@ -225,15 +234,7 @@
         "subfolder": "components"
       },
       {
-        "title": "confirm-edit",
-        "subfolder": "components"
-      },
-      {
-        "title": "empty-states",
-        "subfolder": "components"
-      },
-      {
-        "title": "floating-action-buttons",
+        "title": "date-inputs",
         "subfolder": "components"
       },
       {
@@ -241,15 +242,15 @@
         "subfolder": "components"
       },
       {
+        "title": "pull-to-refresh",
+        "subfolder": "components"
+      },
+      {
         "title": "snackbar-queue",
         "subfolder": "components"
       },
       {
-        "title": "sparklines",
-        "subfolder": "components"
-      },
-      {
-        "title": "speed-dials",
+        "title": "vertical-steppers",
         "subfolder": "components"
       },
       {

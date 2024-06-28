@@ -7,6 +7,8 @@ related:
   - /components/app-bars/
   - /components/navigation-drawers/
   - /components/footers/
+features:
+  report: true
 ---
 
 # Application layout

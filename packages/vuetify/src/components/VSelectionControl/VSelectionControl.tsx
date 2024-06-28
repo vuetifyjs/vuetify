@@ -204,7 +204,16 @@ export const VSelectionControl = genericComponent<new <T>(
     }
 
     function onInput (e: Event) {
-      if (!isInteractive.value) return
+      if (!isInteractive.value) {
+        if (input.value) {
+          // model value is not updated when input is not interactive
+          // but the internal checked state of the input is still updated,
+          // so here it's value is restored
+          input.value.checked = model.value
+        }
+
+        return
+      }
 
       if (props.readonly && group) {
         nextTick(() => group.forceUpdate())

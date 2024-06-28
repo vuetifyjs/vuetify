@@ -281,23 +281,24 @@ function format (
 
   let options: Intl.DateTimeFormatOptions = {}
   switch (formatString) {
+    case 'fullDate':
+      options = { year: 'numeric', month: 'long', day: 'numeric' }
+      break
     case 'fullDateWithWeekday':
-      options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }
+      options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
       break
-    case 'hours12h':
-      options = { hour: 'numeric', hour12: true }
-      break
+    case 'normalDate':
+      const day = newDate.getDate()
+      const month = new Intl.DateTimeFormat(locale, { month: 'long' }).format(newDate)
+      return `${day} ${month}`
     case 'normalDateWithWeekday':
       options = { weekday: 'short', day: 'numeric', month: 'short' }
       break
-    case 'keyboardDate':
-      options = { day: '2-digit', month: '2-digit', year: 'numeric' }
+    case 'shortDate':
+      options = { month: 'short', day: 'numeric' }
       break
-    case 'monthAndDate':
-      options = { month: 'long', day: 'numeric' }
-      break
-    case 'monthAndYear':
-      options = { month: 'long', year: 'numeric' }
+    case 'year':
+      options = { year: 'numeric' }
       break
     case 'month':
       options = { month: 'long' }
@@ -305,16 +306,61 @@ function format (
     case 'monthShort':
       options = { month: 'short' }
       break
-    case 'dayOfMonth':
-      return new Intl.NumberFormat(locale).format(newDate.getDate())
-    case 'shortDate':
-      options = { year: '2-digit', month: 'numeric', day: 'numeric' }
+    case 'monthAndYear':
+      options = { month: 'long', year: 'numeric' }
+      break
+    case 'monthAndDate':
+      options = { month: 'long', day: 'numeric' }
+      break
+    case 'weekday':
+      options = { weekday: 'long' }
       break
     case 'weekdayShort':
       options = { weekday: 'short' }
       break
-    case 'year':
-      options = { year: 'numeric' }
+    case 'dayOfMonth':
+      return new Intl.NumberFormat(locale).format(newDate.getDate())
+    case 'hours12h':
+      options = { hour: 'numeric', hour12: true }
+      break
+    case 'hours24h':
+      options = { hour: 'numeric', hour12: false }
+      break
+    case 'minutes':
+      options = { minute: 'numeric' }
+      break
+    case 'seconds':
+      options = { second: 'numeric' }
+      break
+    case 'fullTime':
+      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      break
+    case 'fullTime12h':
+      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      break
+    case 'fullTime24h':
+      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+      break
+    case 'fullDateTime':
+      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      break
+    case 'fullDateTime12h':
+      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      break
+    case 'fullDateTime24h':
+      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+      break
+    case 'keyboardDate':
+      options = { year: 'numeric', month: '2-digit', day: '2-digit' }
+      break
+    case 'keyboardDateTime':
+      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+      break
+    case 'keyboardDateTime12h':
+      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      break
+    case 'keyboardDateTime24h':
+      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
       break
     default:
       options = customFormat ?? { timeZone: 'UTC', timeZoneName: 'short' }
@@ -364,6 +410,7 @@ function addWeeks (date: Date, amount: number) {
 
 function addMonths (date: Date, amount: number) {
   const d = new Date(date)
+  d.setDate(1)
   d.setMonth(d.getMonth() + amount)
   return d
 }
@@ -382,6 +429,10 @@ function getDate (date: Date) {
 
 function getNextMonth (date: Date) {
   return new Date(date.getFullYear(), date.getMonth() + 1, 1)
+}
+
+function getPreviousMonth (date: Date) {
+  return new Date(date.getFullYear(), date.getMonth() - 1, 1)
 }
 
 function getHours (date: Date) {
@@ -413,6 +464,10 @@ function isAfter (date: Date, comparing: Date) {
   return date.getTime() > comparing.getTime()
 }
 
+function isAfterDay (date: Date, comparing: Date): boolean {
+  return isAfter(startOfDay(date), startOfDay(comparing))
+}
+
 function isBefore (date: Date, comparing: Date) {
   return date.getTime() < comparing.getTime()
 }
@@ -430,6 +485,10 @@ function isSameDay (date: Date, comparing: Date) {
 function isSameMonth (date: Date, comparing: Date) {
   return date.getMonth() === comparing.getMonth() &&
     date.getFullYear() === comparing.getFullYear()
+}
+
+function isSameYear (date: Date, comparing: Date) {
+  return date.getFullYear() === comparing.getFullYear()
 }
 
 function getDiff (date: Date, comparing: Date | string, unit?: string) {
@@ -582,6 +641,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return isAfter(date, comparing)
   }
 
+  isAfterDay (date: Date, comparing: Date) {
+    return isAfterDay(date, comparing)
+  }
+
   isBefore (date: Date, comparing: Date) {
     return !isAfter(date, comparing) && !isEqual(date, comparing)
   }
@@ -592,6 +655,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   isSameMonth (date: Date, comparing: Date) {
     return isSameMonth(date, comparing)
+  }
+
+  isSameYear (date: Date, comparing: Date) {
+    return isSameYear(date, comparing)
   }
 
   setMinutes (date: Date, count: number) {
@@ -636,6 +703,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   getNextMonth (date: Date) {
     return getNextMonth(date)
+  }
+
+  getPreviousMonth (date: Date) {
+    return getPreviousMonth(date)
   }
 
   getHours (date: Date) {

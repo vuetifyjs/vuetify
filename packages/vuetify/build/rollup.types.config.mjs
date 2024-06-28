@@ -49,7 +49,12 @@ function createTypesConfig (input, output, renderChunk, filter) {
             code = new MagicString(code)
 
             if (renderChunk) await renderChunk(code)
+
+            // vue-router is optional but we need to include some of its types
             code.replaceAll(/import([^;])*?from 'vue-router'/gm, '// @ts-ignore\n$&')
+
+            // tsc adds extra export statements to namespaces
+            code.replaceAll(/^\s*export \{\s*\};?$/gm, '')
 
             const map = code.generateMap({
               // source: 'source.js',

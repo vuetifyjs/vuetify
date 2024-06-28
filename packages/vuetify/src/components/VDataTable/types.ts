@@ -18,6 +18,7 @@ export type DataTableHeader<T = Record<string, any>> = {
   width?: number | string
   minWidth?: string
   maxWidth?: string
+  nowrap?: boolean
 
   headerProps?: Record<string, any>
   cellProps?: HeaderCellProps
@@ -26,6 +27,8 @@ export type DataTableHeader<T = Record<string, any>> = {
   sort?: DataTableCompareFunction
   sortRaw?: DataTableCompareFunction
   filter?: FilterFunction
+
+  mobile?: boolean
 
   children?: DataTableHeader<T>[]
 }
@@ -36,6 +39,7 @@ export type InternalDataTableHeader = Omit<DataTableHeader, 'key' | 'value' | 'c
   sortable: boolean
   fixedOffset?: number
   lastFixed?: boolean
+  nowrap?: boolean
   colspan?: number
   rowspan?: number
   children?: InternalDataTableHeader[]

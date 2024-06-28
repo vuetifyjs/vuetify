@@ -5,6 +5,7 @@
 
 $color-pack: true !default;
 $reset: true !default;
+$layers: false !default;
 
 $body-font-family: 'Roboto', sans-serif !default;
 $font-size-root: 1rem !default;
@@ -12,13 +13,16 @@ $line-height-root: 1.5 !default;
 $border-color-root: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $border-radius-root: 4px !default;
 $border-style-root: solid !default;
+$border-width-root: thin !default;
+$transition-duration-root: 0.3s !default;
+$transition-move-duration-root: 0.5s !default;
 
 $borders: () !default;
 $borders: map-deep-merge(
   (
     0: 0,
-    null: thin,
-    thin: thin,
+    null: $border-width-root,
+    thin: $border-width-root,
     sm: 1px,
     md: 2px,
     lg: 4px,
@@ -45,6 +49,30 @@ $border-opacities: map-deep-merge(
     100: 1
   ),
   $border-opacities
+);
+
+$opacities: () !default;
+$opacities: map-deep-merge(
+  (
+    hover: var(--v-hover-opacity),
+    focus: var(--v-focus-opacity),
+    selected: var(--v-selected-opacity),
+    activated: var(--v-activated-opacity),
+    pressed: var(--v-pressed-opacity),
+    dragged: var(--v-dragged-opacity),
+    0: 0,
+    10: .1,
+    20: .2,
+    30: .3,
+    40: .4,
+    50: .5,
+    60: .6,
+    70: .7,
+    80: .8,
+    90: .9,
+    100: 1
+  ),
+  $opacities
 );
 
 $states: () !default;

@@ -82,6 +82,8 @@ cd vuetify-project
 yarn dev
 ```
 
+<VoPromotionsCardVuetify slug="vuetify-one" />
+
 ## Using Nuxt 3
 
 [Nuxt](https://nuxt.com/) is an open-source framework that has helpful features to quickly get you started with developing a full-stack Vue app, such as file-based routing, SSR and component auto-imports. Nuxt is powered by Vite, so the steps to get Vuetify working in Nuxt 3 are quite similar to the manual steps described above.
@@ -218,7 +220,6 @@ You should now have access to all Vuetify components and tools in Nuxt app.
 
 ```js
 import { createApp } from 'vue'
-import App from './App.vue'
 
 // Vuetify
 import '@mdi/font/css/materialdesignicons.css'
@@ -226,6 +227,9 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+
+// Components
+import App from './App.vue'
 
 const vuetify = createVuetify({
   components,
@@ -293,13 +297,15 @@ In the file where you create the Vue application, add the following code
 
 ```js
 import { createApp } from 'vue'
-import App from './App.vue'
 
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+
+// Components
+import App from './App.vue'
 
 const vuetify = createVuetify({
   components,

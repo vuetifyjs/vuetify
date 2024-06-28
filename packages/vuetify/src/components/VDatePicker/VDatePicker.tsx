@@ -60,7 +60,9 @@ export const makeVDatePickerProps = propsFactory({
   },
 
   ...makeVDatePickerControlsProps(),
-  ...makeVDatePickerMonthProps(),
+  ...makeVDatePickerMonthProps({
+    weeksInMonth: 'static' as const,
+  }),
   ...omit(makeVDatePickerMonthsProps(), ['modelValue']),
   ...omit(makeVDatePickerYearsProps(), ['modelValue']),
   ...makeVPickerProps({ title: '$vuetify.datePicker.title' }),
@@ -130,9 +132,9 @@ export const VDatePicker = genericComponent<new <
     const text = computed(() => {
       let date = adapter.date()
 
-      date = adapter.setYear(date, year.value)
-      date = adapter.setMonth(date, month.value)
       date = adapter.setDate(date, 1)
+      date = adapter.setMonth(date, month.value)
+      date = adapter.setYear(date, year.value)
 
       return adapter.format(date, 'monthAndYear')
     })
@@ -228,8 +230,13 @@ export const VDatePicker = genericComponent<new <
     }
 
     watch(model, (val, oldVal) => {
-      const before = adapter.date(wrapInArray(oldVal)[oldVal.length - 1])
-      const after = adapter.date(wrapInArray(val)[val.length - 1])
+      const arrBefore = wrapInArray(oldVal)
+      const arrAfter = wrapInArray(val)
+
+      if (!arrAfter.length) return
+
+      const before = adapter.date(arrBefore[arrBefore.length - 1])
+      const after = adapter.date(arrAfter[arrAfter.length - 1])
       const newMonth = adapter.getMonth(after)
       const newYear = adapter.getYear(after)
 
@@ -318,6 +325,7 @@ export const VDatePicker = genericComponent<new <
                       onUpdate:modelValue={ onUpdateMonth }
                       min={ minDate.value }
                       max={ maxDate.value }
+                      year={ year.value }
                     />
                   ) : viewMode.value === 'year' ? (
                     <VDatePickerYears

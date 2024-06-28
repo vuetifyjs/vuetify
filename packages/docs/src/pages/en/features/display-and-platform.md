@@ -7,6 +7,8 @@ related:
   - /directives/resize/
   - /styles/display/
   - /styles/text-and-typography/
+features:
+  report: true
 ---
 
 # Display & Platform

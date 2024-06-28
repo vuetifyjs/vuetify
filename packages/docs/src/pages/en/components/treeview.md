@@ -86,11 +86,11 @@ Treeview nodes can have a hover effect.
 
 <ExamplesExample file="v-treeview/prop-hoverable" /> -->
 
-#### Item disabled
+#### Item props
 
-Setting **item-disabled** prop allows to control which node's property disables the node when set to `true`.
+If **item-props** is set to `true` then the whole item will be spread. In the following example, the disabled prop defined in each item will disable the item accordingly.
 
-<ExamplesExample file="v-treeview/prop-item-disabled" />
+<ExamplesExample file="v-treeview/prop-item-props" />
 
 #### Load children
 

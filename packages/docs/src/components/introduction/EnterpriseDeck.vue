@@ -69,7 +69,7 @@
     {
       name: 'Direct Support',
       text: 'Get direct help from the author of Vuetify in a live conference call',
-      price: '180',
+      price: '120',
       suffix: '/60m',
       benefits: [
         {

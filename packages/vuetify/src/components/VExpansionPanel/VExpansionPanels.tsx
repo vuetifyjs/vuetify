@@ -1,11 +1,13 @@
 // Styles
 import './VExpansionPanel.sass'
 
+// Components
+import { VExpansionPanelSymbol } from './shared'
+import { makeVExpansionPanelProps } from './VExpansionPanel'
+
 // Composables
-import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
 import { makeGroupProps, useGroup } from '@/composables/group'
-import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
@@ -13,35 +15,36 @@ import { computed, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { InjectionKey, PropType } from 'vue'
-import type { GroupItemProvide } from '@/composables/group'
-
-export const VExpansionPanelSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-expansion-panel')
+import type { PropType } from 'vue'
 
 const allowedVariants = ['default', 'accordion', 'inset', 'popout'] as const
 
 type Variant = typeof allowedVariants[number]
 
+export type VExpansionPanelSlot = {
+  prev: () => void
+  next: () => void
+}
+
+export type VExpansionPanelSlots = {
+  default: VExpansionPanelSlot
+}
+
 export const makeVExpansionPanelsProps = propsFactory({
-  color: String,
   flat: Boolean,
-  focusable: Boolean,
-  static: Boolean,
-  tile: Boolean,
+
+  ...makeGroupProps(),
+  ...makeVExpansionPanelProps(),
+  ...makeThemeProps(),
+
   variant: {
     type: String as PropType<Variant>,
     default: 'default',
     validator: (v: any) => allowedVariants.includes(v),
   },
-  readonly: Boolean,
-
-  ...makeComponentProps(),
-  ...makeGroupProps(),
-  ...makeTagProps(),
-  ...makeThemeProps(),
 }, 'VExpansionPanels')
 
-export const VExpansionPanels = genericComponent()({
+export const VExpansionPanels = genericComponent<VExpansionPanelSlots>()({
   name: 'VExpansionPanels',
 
   props: makeVExpansionPanelsProps(),
@@ -51,7 +54,7 @@ export const VExpansionPanels = genericComponent()({
   },
 
   setup (props, { slots }) {
-    useGroup(props, VExpansionPanelSymbol)
+    const { next, prev } = useGroup(props, VExpansionPanelSymbol)
 
     const { themeClasses } = provideTheme(props)
 
@@ -59,11 +62,17 @@ export const VExpansionPanels = genericComponent()({
 
     provideDefaults({
       VExpansionPanel: {
+        bgColor: toRef(props, 'bgColor'),
+        collapseIcon: toRef(props, 'collapseIcon'),
         color: toRef(props, 'color'),
-        readonly: toRef(props, 'readonly'),
-      },
-      VExpansionPanelTitle: {
+        eager: toRef(props, 'eager'),
+        elevation: toRef(props, 'elevation'),
+        expandIcon: toRef(props, 'expandIcon'),
         focusable: toRef(props, 'focusable'),
+        hideActions: toRef(props, 'hideActions'),
+        readonly: toRef(props, 'readonly'),
+        ripple: toRef(props, 'ripple'),
+        rounded: toRef(props, 'rounded'),
         static: toRef(props, 'static'),
       },
     })
@@ -81,11 +90,15 @@ export const VExpansionPanels = genericComponent()({
           props.class,
         ]}
         style={ props.style }
-        v-slots={ slots }
-      />
+      >
+        { slots.default?.({ prev, next }) }
+      </props.tag>
     ))
 
-    return {}
+    return {
+      next,
+      prev,
+    }
   },
 })
 
