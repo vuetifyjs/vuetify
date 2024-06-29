@@ -147,7 +147,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
     const search = toRef(props, 'search')
     const { filteredItems } = useFilter(props, items, search, {
-      transform: item => item.columns,
+      transform: item => item.raw,
       customKeyFilter: filterFunctions,
     })
 
@@ -155,7 +155,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
-      transform: item => item.columns,
+      transform: item => item.raw,
       sortFunctions,
       sortRawFunctions,
     })
