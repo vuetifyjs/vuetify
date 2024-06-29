@@ -147,7 +147,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
     const search = toRef(props, 'search')
     const { filteredItems } = useFilter(props, items, search, {
-      transform: item => item.raw,
+      transform: item => item.columns,
       customKeyFilter: filterFunctions,
     })
 
