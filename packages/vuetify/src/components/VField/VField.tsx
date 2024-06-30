@@ -136,8 +136,9 @@ export const VField = genericComponent<new <T>(
     const { roundedClasses } = useRounded(props)
     const { rtlClasses } = useRtl()
 
+    const isSingleLine = computed(() => props.singleLine || props.centerAffix)
     const isActive = computed(() => props.dirty || props.active)
-    const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
+    const hasLabel = computed(() => !isSingleLine.value && !!(props.label || slots.label))
 
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
@@ -242,7 +243,7 @@ export const VField = genericComponent<new <T>(
             {
               'v-field--active': isActive.value,
               'v-field--appended': hasAppend,
-              'v-field--center-affix': props.centerAffix ?? !isPlainOrUnderlined.value,
+              'v-field--center-affix': props.centerAffix,
               'v-field--disabled': props.disabled,
               'v-field--dirty': props.dirty,
               'v-field--error': props.error,
@@ -251,7 +252,7 @@ export const VField = genericComponent<new <T>(
               'v-field--persistent-clear': props.persistentClear,
               'v-field--prepended': hasPrepend,
               'v-field--reverse': props.reverse,
-              'v-field--single-line': props.singleLine,
+              'v-field--single-line': isSingleLine.value,
               'v-field--no-label': !label(),
               [`v-field--variant-${props.variant}`]: true,
             },

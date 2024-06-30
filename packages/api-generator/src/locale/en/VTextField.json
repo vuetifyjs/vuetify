@@ -1,7 +1,6 @@
 {
   "props": {
     "autofocus": "Enables autofocus.",
-    "centerAffix": "Vertically align **append**, **appendInner**, **prepend**, **prependInner**, **clearIcon** and **label** in the center.",
     "clearIcon": "Applied when using **clearable** and the input is dirty.",
     "counterValue": "Function returns the counter display text.",
     "flat": "Removes elevation (shadow) added to element when using the **solo** or **solo-inverted** props.",

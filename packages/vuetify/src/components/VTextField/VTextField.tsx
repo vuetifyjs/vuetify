@@ -176,7 +176,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
           style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
-          centerAffix={ props.centerAffix }
           focused={ isFocused.value }
         >
           {{
