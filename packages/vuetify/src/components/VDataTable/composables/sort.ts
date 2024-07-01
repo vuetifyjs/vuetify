@@ -8,8 +8,10 @@ import { isEmpty, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
-import type { DataTableCompareFunction, InternalDataTableHeader } from '../types'
+import type { DataTableCompareFunction, InternalDataTableHeader, SortItem, SortProps } from '../types'
 import type { InternalItem } from '@/composables/filter'
+
+export type { SortItem }
 
 export const makeDataTableSortProps = propsFactory({
   sortBy: {
@@ -26,15 +28,6 @@ const VDataTableSortSymbol: InjectionKey<{
   toggleSort: (column: InternalDataTableHeader) => void
   isSorted: (column: InternalDataTableHeader) => boolean
 }> = Symbol.for('vuetify:data-table-sort')
-
-export type SortItem = { key: string, order?: boolean | 'asc' | 'desc' }
-
-type SortProps = {
-  sortBy: readonly SortItem[]
-  'onUpdate:sortBy': ((value: any) => void) | undefined
-  mustSort: boolean
-  multiSort: boolean
-}
 
 export function createSort (props: SortProps) {
   const sortBy = useProxiedModel(props, 'sortBy')
