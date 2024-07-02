@@ -88,9 +88,7 @@ export const makeSelectProps = propsFactory({
   openOnClear: Boolean,
   itemColor: String,
 
-  ...makeItemsProps({
-    itemProps: () => (item: any) => ({ subheader: item.subheader, divider: item.divider }),
-  }),
+  ...makeItemsProps(),
 }, 'Select')
 
 export const makeVSelectProps = propsFactory({
