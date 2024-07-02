@@ -63,7 +63,7 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any): List
   const itemProps = props.itemProps === true
     ? typeof item === 'object' && item != null && !Array.isArray(item)
       ? 'children' in item
-        ? omit(item as any, ['children'])
+        ? omit(item, ['children'])
         : item
       : undefined
     : getPropertyFromItem(item, props.itemProps)
