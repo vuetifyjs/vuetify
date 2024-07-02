@@ -57,7 +57,7 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
 
   setup (props, { slots }) {
     const vExpansionPanelsRef = ref<typeof VExpansionPanels>()
-    const { color, editable, prevText, nextText, hideActions } = toRefs(props)
+    const { color, eager, editable, prevText, nextText, hideActions } = toRefs(props)
 
     const model = useProxiedModel(props, 'modelValue')
     const items = computed(() => props.items.map((item, index) => {
@@ -74,6 +74,7 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
     provideDefaults({
       VStepperVerticalItem: {
         color,
+        eager,
         editable,
         prevText,
         nextText,
