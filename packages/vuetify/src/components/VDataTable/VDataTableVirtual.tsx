@@ -109,7 +109,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
-      transform: item => item.raw,
+      transform: item => ({ ...item.raw, ...item.columns }),
       sortFunctions,
       sortRawFunctions,
     })
