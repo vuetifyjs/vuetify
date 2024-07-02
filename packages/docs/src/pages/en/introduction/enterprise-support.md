@@ -21,11 +21,11 @@ Let the experts at Vuetify help you get the most out of your application with a 
 
 Vuetify offers a variety of support options to meet any need.
 
-<IntroductionEnterpriseDeck />
+<IntroductionSlaDeck />
 
 <br>
 
-## Chat support
+## Single developer support
 
 Get direct access to the Vuetify team through our private [Discord server](https://community.vuetifyjs.com/). Ask questions, get help, and chat with the team.
 

@@ -59,6 +59,7 @@ export const VTimePickerControls = genericComponent()({
             <VBtn
               active={ props.selecting === 1 }
               color={ props.selecting === 1 ? props.color : undefined }
+              disabled={ props.disabled }
               variant="tonal"
               class={{
                 'v-time-picker-controls__time__btn': true,
@@ -85,6 +86,7 @@ export const VTimePickerControls = genericComponent()({
                 'v-time-picker-controls__time--with-ampm__btn': props.ampm,
                 'v-time-picker-controls__time--with-seconds__btn': props.useSeconds,
               }}
+              disabled={ props.disabled }
               variant="tonal"
               text={ props.minute == null ? '--' : pad(props.minute) }
               onClick={ () => emit('update:selecting', SelectingTimes.Minute) }
@@ -113,6 +115,7 @@ export const VTimePickerControls = genericComponent()({
                     'v-time-picker-controls__time__btn__active': props.selecting === 3,
                     'v-time-picker-controls__time--with-seconds__btn': props.useSeconds,
                   }}
+                  disabled={ props.disabled }
                   text={ props.second == null ? '--' : pad(props.second) }
                 />
               )
@@ -133,8 +136,9 @@ export const VTimePickerControls = genericComponent()({
                       'v-time-picker-controls__ampm__btn': true,
                       'v-time-picker-controls__ampm__btn__active': props.period === 'am',
                     }}
+                    disabled={ props.disabled }
                     text={ t('$vuetify.timePicker.am') }
-                    variant="tonal"
+                    variant={ props.disabled && props.period === 'am' ? 'elevated' : 'tonal' }
                     onClick={ () => props.period !== 'am' ? emit('update:period', 'am') : null }
                   />
 
@@ -146,8 +150,9 @@ export const VTimePickerControls = genericComponent()({
                       'v-time-picker-controls__ampm__btn': true,
                       'v-time-picker-controls__ampm__btn__active': props.period === 'pm',
                     }}
+                    disabled={ props.disabled }
                     text={ t('$vuetify.timePicker.pm') }
-                    variant="tonal"
+                    variant={ props.disabled && props.period === 'pm' ? 'elevated' : 'tonal' }
                     onClick={ () => props.period !== 'pm' ? emit('update:period', 'pm') : null }
                   />
                 </div>

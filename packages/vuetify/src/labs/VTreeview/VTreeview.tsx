@@ -9,7 +9,7 @@ import { useItems } from '@/composables/list-items'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, provide, ref, toRef, watch } from 'vue'
+import { computed, provide, ref, toRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -35,8 +35,6 @@ export const makeVTreeviewProps = propsFactory({
   ...omit(makeVListProps({
     collapseIcon: '$treeviewCollapse',
     expandIcon: '$treeviewExpand',
-    selectStrategy: 'classic' as const,
-    openStrategy: 'multiple' as const,
     slim: true,
   }), ['nav']),
 }, 'VTreeview')
@@ -64,12 +62,12 @@ export const VTreeview = genericComponent<new <T>(
     const activeColor = toRef(props, 'activeColor')
     const baseColor = toRef(props, 'baseColor')
     const color = toRef(props, 'color')
-    const opened = useProxiedModel(props, 'opened')
     const activated = useProxiedModel(props, 'activated')
     const selected = useProxiedModel(props, 'selected')
 
     const vListRef = ref<VList>()
 
+    const opened = computed(() => props.openAll ? openAll(items.value) : props.opened)
     const flatItems = computed(() => flatten(items.value))
     const search = toRef(props, 'search')
     const { filteredItems } = useFilter(props, flatItems, search)
@@ -103,10 +101,6 @@ export const VTreeview = genericComponent<new <T>(
       }
       return arr
     }
-
-    watch(() => props.openAll, val => {
-      opened.value = val ? openAll(items.value) : []
-    }, { immediate: true })
 
     function openAll (item: any) {
       let ids: number[] = []
@@ -148,6 +142,7 @@ export const VTreeview = genericComponent<new <T>(
 
     useRender(() => {
       const listProps = VList.filterProps(props)
+
       const treeviewChildrenProps = VTreeviewChildren.filterProps(props)
 
       return (
@@ -159,7 +154,7 @@ export const VTreeview = genericComponent<new <T>(
             props.class,
           ]}
           style={ props.style }
-          v-model:opened={ opened.value }
+          opened={ opened.value }
           v-model:activated={ activated.value }
           v-model:selected={ selected.value }
         >

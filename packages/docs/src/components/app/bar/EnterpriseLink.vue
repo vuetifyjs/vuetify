@@ -3,7 +3,7 @@
     :to="rpath('/introduction/enterprise-support/')"
     class="ms-1"
     color="primary"
-    text="enterprise"
+    text="support"
     variant="outlined"
     @click="gtagClick('app-bar', 'enterprise', name)"
   />

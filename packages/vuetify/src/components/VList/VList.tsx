@@ -47,6 +47,7 @@ export const makeVListProps = propsFactory({
 
   'onClick:open': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
   'onClick:select': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
+  'onUpdate:opened': EventProp<[]>(),
   ...makeNestedProps({
     selectStrategy: 'single-leaf' as const,
     openStrategy: 'list' as const,
