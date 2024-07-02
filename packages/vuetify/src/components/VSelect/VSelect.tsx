@@ -86,7 +86,6 @@ export const makeSelectProps = propsFactory({
     default: '$vuetify.noDataText',
   },
   openOnClear: Boolean,
-  readonly: Boolean,
   itemColor: String,
 
   ...makeItemsProps({
