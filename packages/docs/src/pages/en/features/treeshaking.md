@@ -179,7 +179,7 @@ Dynamic components using `<component>` can be registered locally:
   import { VChip } from 'vuetify/components/VChip'
   import { shallowRef } from 'vue'
 
-  const btn = shallowRef(false)
+  const button = shallowRef(false)
 </script>
 ```
 
