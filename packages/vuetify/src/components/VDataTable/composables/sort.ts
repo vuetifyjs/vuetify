@@ -151,7 +151,6 @@ export function sortItems<T extends InternalItem> (
 
       let sortA = getObjectValueByPath(a[1], sortKey)
       let sortB = getObjectValueByPath(b[1], sortKey)
-
       let sortARaw = a[0].raw
       let sortBRaw = b[0].raw
 

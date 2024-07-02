@@ -130,7 +130,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     const { groupBy } = createGroupBy(props)
     const { sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
-    
+
     const {
       columns,
       headers,
