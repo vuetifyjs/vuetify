@@ -105,6 +105,7 @@ export const VDateInput = genericComponent()({
         <VTextField
           { ...textFieldProps }
           class={ props.class }
+          style={ props.style }
           modelValue={ display.value }
           onKeydown={ onKeydown }
           focused={ menu.value || isFocused.value }
