@@ -109,7 +109,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
   props: makeVListItemProps(),
 
   emits: {
-    click: (e: MouseEvent | KeyboardEvent) => true,
+    click: (e: MouseEvent) => true,
   },
 
   setup (props, { attrs, slots, emit }) {
