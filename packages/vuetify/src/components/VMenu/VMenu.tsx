@@ -35,6 +35,7 @@ export const makeVMenuProps = propsFactory({
   // TODO
   // disableKeys: Boolean,
   id: String,
+  disableArrowKeysActivation: Boolean,
 
   ...omit(makeVOverlayProps({
     closeDelay: 250,
@@ -44,6 +45,7 @@ export const makeVMenuProps = propsFactory({
     scrim: false,
     scrollStrategy: 'reposition' as const,
     transition: { component: VDialogTransition as Component },
+    disableArrowKeysActivation: false
   }), ['absolute']),
 }, 'VMenu')
 
@@ -161,7 +163,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
           e.preventDefault()
           focusChild(el, 'prev')
         }
-      } else if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
+      } else if (['ArrowDown', 'ArrowUp'].includes(e.key) && !props.disableArrowKeysActivation) {
         isActive.value = true
         e.preventDefault()
         setTimeout(() => setTimeout(() => onActivatorKeydown(e)))
