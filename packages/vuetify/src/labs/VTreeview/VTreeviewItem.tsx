@@ -78,70 +78,20 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       const listItemProps = omit(VListItem.filterProps(props), ['onClick'])
       const hasPrepend = slots.prepend || props.toggleIcon
 
-      // A dedicated ActivatableGroupActivator was created because VList does not currently allow VListGroup to be activatable.
-      // Making VListGroup activatable would be a new feature in VList.
-      // However, this functionality is available in VTreeview.
-      // The ActivatableGroupActivator can be removed once VList supports activatable VListGroups.
-      return isActivatableGroupActivator.value
-        ? (
-          <VListItem
-            { ...listItemProps }
-            active={ isActivated.value }
-            class={[
-              'v-treeview-item',
-              'v-treeview-item--activetable-group-activator',
-              props.class,
-            ]}
-            ripple={ false }
-            onClick={ props.onClick ?? activateItem }
-          >
-            {{
-              ...slots,
-              prepend: hasPrepend ? slotProps => {
-                return (
-                  <>
-                    { props.toggleIcon && (
-                      <VListItemAction start={ false }>
-                        <VBtn
-                          density="compact"
-                          icon={ props.toggleIcon }
-                          loading={ props.loading }
-                          variant="text"
-                          onClick={ props.onToggleExpand }
-                        >
-                          {{
-                            loader () {
-                              return (
-                                <VProgressCircular
-                                  indeterminate="disable-shrink"
-                                  size="20"
-                                  width="2"
-                                />
-                              )
-                            },
-                          }}
-                        </VBtn>
-                      </VListItemAction>
-                    )}
-
-                    { slots.prepend?.(slotProps) }
-                  </>
-                )
-              } : undefined,
-            }}
-          </VListItem>
-        ) : (
+      return (
         <VListItem
-          ref={ vListItemRef }
           { ...listItemProps }
+          active={ isActivated.value }
           class={[
             'v-treeview-item',
             {
+              'v-treeview-item--activetable-group-activator': isActivatableGroupActivator.value,
               'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(id.value),
             },
             props.class,
           ]}
           ripple={ false }
+          onClick={ props.onClick ?? activateItem }
           value={ id.value }
         >
           {{
@@ -179,7 +129,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             } : undefined,
           }}
         </VListItem>
-        )
+      )
     })
 
     return {}
