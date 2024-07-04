@@ -51,7 +51,11 @@ export const VTabsWindow = genericComponent()({
           _as="VTabsWindow"
           { ...windowProps }
           v-model={ model.value }
-          class="v-tabs-window"
+          class={[
+            'v-tabs-window',
+            props.class,
+          ]}
+          style={ props.style }
           mandatory={ false }
           touch={ false }
           v-slots={ slots }

@@ -232,6 +232,11 @@ app.use(vuetify)
 
 - `v-simple-table` has been renamed to `v-table`
 
+### v-stepper (vertical)
+
+- `v-stepper-step` has been renamed to `v-stepper-vertical-item`. Move content into the **title** slot.
+- `v-stepper-content` has been removed. Move content to the default slot of `v-stepper-vertical-item`.
+
 ### v-data-table
 
 - Headers objects:

@@ -82,6 +82,8 @@ cd vuetify-project
 yarn dev
 ```
 
+<VoPromotionsCardVuetify slug="vuetify-one" />
+
 ## Using Nuxt 3
 
 [Nuxt](https://nuxt.com/) is an open-source framework that has helpful features to quickly get you started with developing a full-stack Vue app, such as file-based routing, SSR and component auto-imports. Nuxt is powered by Vite, so the steps to get Vuetify working in Nuxt 3 are quite similar to the manual steps described above.

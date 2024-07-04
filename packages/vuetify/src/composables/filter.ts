@@ -78,7 +78,7 @@ export function filterItems (
     const defaultMatches: Record<string, FilterMatch> = {}
     let match: FilterMatch = -1
 
-    if (query && !options?.noFilter) {
+    if ((query || customFiltersLength > 0) && !options?.noFilter) {
       if (typeof item === 'object') {
         const filterKeys = keys || Object.keys(transformed)
 

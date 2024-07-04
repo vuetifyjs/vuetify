@@ -35,6 +35,9 @@
     user-select: none
     background-color: currentColor
 
+    @media (forced-colors: active)
+      background-color: highlight
+
     &::before
       transition: 0.3s settings.$standard-easing
       content: ''

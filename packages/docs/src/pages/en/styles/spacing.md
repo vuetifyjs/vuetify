@@ -7,6 +7,8 @@ related:
   - /styles/elevation/
   - /styles/content/
   - /components/grids/
+features:
+  report: true
 ---
 
 # Spacing

@@ -177,7 +177,7 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
       if (props.mode !== 'manual' && !isIntersecting.value) return
 
       const status = getStatus(side)
-      if (!rootEl.value || status === 'loading') return
+      if (!rootEl.value || ['empty', 'loading'].includes(status)) return
 
       previousScrollSize = getScrollSize()
       setStatus(side, 'loading')

@@ -34,7 +34,7 @@ import { deprecate, EventProp, genericComponent, propsFactory, useRender } from 
 import type { PropType } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
-type ListItemSlot = {
+export type ListItemSlot = {
   isActive: boolean
   isSelected: boolean
   isIndeterminate: boolean
@@ -69,7 +69,7 @@ export const makeVListItemProps = propsFactory({
   appendIcon: IconValue,
   baseColor: String,
   disabled: Boolean,
-  lines: String as PropType<'one' | 'two' | 'three'>,
+  lines: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
   link: {
     type: Boolean,
     default: undefined,
@@ -174,9 +174,11 @@ export const VListItem = genericComponent<VListItemSlots>()({
     function onClick (e: MouseEvent) {
       emit('click', e)
 
-      if (isGroupActivator || !isClickable.value) return
+      if (!isClickable.value) return
 
       link.navigate?.(e)
+
+      if (isGroupActivator) return
 
       if (root.activatable.value) {
         activate(!isActivated.value, e)
@@ -357,6 +359,8 @@ export const VListItem = genericComponent<VListItemSlots>()({
     })
 
     return {
+      activate,
+      isActivated,
       isGroupActivator,
       isSelected,
       list,
