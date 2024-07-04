@@ -6,26 +6,31 @@ import { VTreeview } from '../VTreeview'
 // Utilities
 import { ref } from 'vue'
 
+function compareItemObject (a: any, b: any) {
+  return a.id - b.id
+}
+
+const items = ref([
+  {
+    id: 1,
+    title: 'Videos :',
+    children: [
+      {
+        id: 2,
+        title: 'Tutorials :',
+        children: [
+          { id: 3, title: 'Basic layouts : mp4' },
+          { id: 4, title: 'Advanced techniques : mp4' },
+          { id: 5, title: 'All about app : dir' },
+        ],
+      },
+      { id: 6, title: 'Intro : mov' },
+      { id: 7, title: 'Conference introduction : avi' },
+    ],
+  },
+])
+
 describe('VTreeview', () => {
-  const items = ref([
-    {
-      id: 1,
-      title: 'Videos :',
-      children: [
-        {
-          id: 2,
-          title: 'Tutorials :',
-          children: [
-            { id: 3, title: 'Basic layouts : mp4' },
-            { id: 4, title: 'Advanced techniques : mp4' },
-            { id: 5, title: 'All about app : dir' },
-          ],
-        },
-        { id: 6, title: 'Intro : mov' },
-        { id: 7, title: 'Conference introduction : avi' },
-      ],
-    },
-  ])
   describe('activate', () => {
     it('single-leaf strategy', () => {
       const activated = ref([])
@@ -259,38 +264,75 @@ describe('VTreeview', () => {
           expect(selected.value.sort()).to.deep.equal([1].sort())
         })
     })
-    it('classic strategy', () => {
-      const selected = ref([])
-      cy.mount(() => (
-        <>
-          <VTreeview
-            v-model:selected={ selected.value }
-            open-all
-            items={ items.value }
-            item-title="title"
-            item-value="id"
-            selectable
-            select-strategy="classic"
-          />
-        </>
-      ))
 
-      cy.get('.v-checkbox-btn').eq(2).click(20, 20)
-        .get('.v-checkbox-btn').eq(3).click(20, 20)
-        .get('.v-checkbox-btn').eq(4).click(20, 20)
-        .then(_ => {
-          expect(selected.value).to.deep.equal([3, 4, 5])
-        })
-        .get('.v-checkbox-btn').eq(1).click(20, 20)
-        .then(_ => {
-          expect(selected.value).to.deep.equal([])
-        })
-        .get('.v-checkbox-btn').eq(0).click(20, 20)
-        .then(_ => {
-          expect(selected.value.sort()).to.deep.equal([3, 4, 5, 6, 7].sort())
-        })
+    describe('classic strategy', () => {
+      it('should correctly update v-model:selected', () => {
+        const selected = ref([])
+        cy.mount(() => (
+          <>
+            <VTreeview
+              v-model:selected={ selected.value }
+              open-all
+              items={ items.value }
+              item-title="title"
+              item-value="id"
+              selectable
+              select-strategy="classic"
+            />
+          </>
+        ))
+
+        cy.get('.v-checkbox-btn').eq(2).click(20, 20)
+          .get('.v-checkbox-btn').eq(3).click(20, 20)
+          .get('.v-checkbox-btn').eq(4).click(20, 20)
+          .then(_ => {
+            expect(selected.value).to.deep.equal([3, 4, 5])
+          })
+          .get('.v-checkbox-btn').eq(1).click(20, 20)
+          .then(_ => {
+            expect(selected.value).to.deep.equal([])
+          })
+          .get('.v-checkbox-btn').eq(0).click(20, 20)
+          .then(_ => {
+            expect(selected.value.sort()).to.deep.equal([3, 4, 5, 6, 7].sort())
+          })
+      })
+
+      it('should correctly update v-model:selected when return-object is applied', () => {
+        const selected = ref([])
+        cy.mount(() => (
+          <>
+            <VTreeview
+              v-model:selected={ selected.value }
+              open-all
+              items={ items.value }
+              item-title="title"
+              item-value="id"
+              selectable
+              return-object
+              select-strategy="classic"
+            />
+          </>
+        ))
+
+        cy.get('.v-checkbox-btn').eq(0).click(20, 20)
+          .then(_ => {
+            expect(selected.value.sort(compareItemObject)).to.deep.equal([
+              { id: 3, title: 'Basic layouts : mp4' },
+              { id: 4, title: 'Advanced techniques : mp4' },
+              { id: 5, title: 'All about app : dir' },
+              { id: 6, title: 'Intro : mov' },
+              { id: 7, title: 'Conference introduction : avi' },
+            ].sort(compareItemObject))
+          })
+          .get('.v-checkbox-btn').eq(0).click(20, 20)
+          .then(_ => {
+            expect(selected.value).to.deep.equal([])
+          })
+      })
     })
   })
+
   it('should have all items visible when open-all is applied', () => {
     cy.mount(() => (
       <>

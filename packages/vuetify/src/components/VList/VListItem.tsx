@@ -114,10 +114,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
   setup (props, { attrs, slots, emit }) {
     const link = useLink(props, attrs)
-    const id = computed(() => {
-      console.log('id 1a', props.value === undefined ? link.href.value : props.value)
-      return props.value === undefined ? link.href.value : props.value
-    })
+    const id = computed(() => props.value === undefined ? link.href.value : props.value)
     const {
       activate,
       isActivated,

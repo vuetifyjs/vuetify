@@ -165,7 +165,7 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
 
         selected.set(parent, everySelected ? 'on' : noneSelected ? 'off' : 'indeterminate')
 
-        parent = parents.get(parent)
+        parent = toRaw(parents.get(parent))
       }
 
       // If mandatory and planned deselect results in no selected
