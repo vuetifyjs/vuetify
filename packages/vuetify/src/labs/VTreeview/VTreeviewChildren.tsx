@@ -4,7 +4,7 @@ import { VTreeviewItem } from './VTreeviewItem'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 
 // Utilities
-import { shallowRef, withModifiers } from 'vue'
+import { computed, shallowRef, withModifiers } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -30,7 +30,7 @@ export const makeVTreeviewChildrenProps = propsFactory({
   items: Array as PropType<readonly InternalListItem[]>,
   openOnClick: {
     type: Boolean,
-    default: false,
+    default: undefined,
   },
   selectable: Boolean,
   selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
@@ -48,6 +48,8 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
 
   setup (props, { emit, slots }) {
     const isLoading = shallowRef(null)
+
+    const isClickOnOpen = computed(() => props.openOnClick != null ? props.openOnClick : props.selectable)
 
     function checkChildren (item: any) {
       return new Promise<void>(resolve => {
@@ -116,7 +118,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 ...activatorProps,
                 value: itemProps?.value,
                 onToggleExpand: activatorProps.onClick as any,
-                onClick: props.openOnClick ? [() => checkChildren(item), activatorProps.onClick] as any : undefined,
+                onClick: isClickOnOpen.value ? [() => checkChildren(item), activatorProps.onClick] as any : undefined,
               }
 
               return (
