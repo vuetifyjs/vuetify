@@ -86,7 +86,7 @@ export const makeVListItemProps = propsFactory({
   title: [String, Number],
   value: null,
 
-  onClick: EventProp<[MouseEvent]>(),
+  onClick: EventProp<[MouseEvent | KeyboardEvent]>(),
   onClickOnce: EventProp<[MouseEvent]>(),
 
   ...makeBorderProps(),
@@ -109,12 +109,15 @@ export const VListItem = genericComponent<VListItemSlots>()({
   props: makeVListItemProps(),
 
   emits: {
-    click: (e: MouseEvent) => true,
+    click: (e: MouseEvent | KeyboardEvent) => true,
   },
 
   setup (props, { attrs, slots, emit }) {
     const link = useLink(props, attrs)
-    const id = computed(() => props.value === undefined ? link.href.value : props.value)
+    const id = computed(() => {
+      console.log('id 1a', props.value === undefined ? link.href.value : props.value)
+      return props.value === undefined ? link.href.value : props.value
+    })
     const {
       activate,
       isActivated,

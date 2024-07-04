@@ -4,7 +4,7 @@ import { VTreeviewItem } from './VTreeviewItem'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 
 // Utilities
-import { computed, shallowRef, withModifiers } from 'vue'
+import { computed, shallowRef, toRaw, withModifiers } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -32,6 +32,7 @@ export const makeVTreeviewChildrenProps = propsFactory({
     type: Boolean,
     default: undefined,
   },
+  returnObject: Boolean,
   selectable: Boolean,
   selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
 }, 'VTreeviewChildren')
@@ -108,8 +109,8 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
 
       return children ? (
         <VTreeviewGroup
-          value={ itemProps?.value }
           { ...treeviewGroupProps }
+          value={ props.returnObject ? item : treeviewGroupProps?.value }
         >
           {{
             activator: ({ props: activatorProps }) => {
@@ -124,6 +125,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               return (
                 <VTreeviewItem
                   { ...listItemProps }
+                  value={ props.returnObject ? toRaw(item) : itemProps.value }
                   loading={ loading }
                   v-slots={ slotsWithItem }
                 />
@@ -133,6 +135,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               <VTreeviewChildren
                 { ...treeviewChildrenProps }
                 items={ children }
+                returnObject={ props.returnObject }
                 v-slots={ slots }
               />
             ),
@@ -142,6 +145,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         slots.item?.({ props: itemProps }) ?? (
           <VTreeviewItem
             { ...itemProps }
+            value={ props.returnObject ? toRaw(item) : itemProps.value }
             v-slots={ slotsWithItem }
           />
         ))

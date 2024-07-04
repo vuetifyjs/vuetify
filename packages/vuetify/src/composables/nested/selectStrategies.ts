@@ -149,19 +149,19 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
       while (items.length) {
         const item = items.shift()!
 
-        selected.set(item, value ? 'on' : 'off')
+        selected.set(toRaw(item), value ? 'on' : 'off')
 
         if (children.has(item)) {
           items.push(...children.get(item)!)
         }
       }
 
-      let parent = parents.get(id)
+      let parent = toRaw(parents.get(id))
 
       while (parent) {
         const childrenIds = children.get(parent)!
-        const everySelected = childrenIds.every(cid => selected.get(cid) === 'on')
-        const noneSelected = childrenIds.every(cid => !selected.has(cid) || selected.get(cid) === 'off')
+        const everySelected = childrenIds.every(cid => selected.get(toRaw(cid)) === 'on')
+        const noneSelected = childrenIds.every(cid => !selected.has(toRaw(cid)) || selected.get(toRaw(cid)) === 'off')
 
         selected.set(parent, everySelected ? 'on' : noneSelected ? 'off' : 'indeterminate')
 
