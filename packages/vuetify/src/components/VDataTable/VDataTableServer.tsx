@@ -81,7 +81,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
 
-    const { opened, isGroupOpen, toggleGroup, extractRows } = provideGroupBy({ groupBy, sortBy })
+    const { opened, isGroupOpen, toggleGroup, extractRows } = provideGroupBy({ groupBy, sortBy, disableSort: toRef(props, 'disableSort') })
 
     const { pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })
 

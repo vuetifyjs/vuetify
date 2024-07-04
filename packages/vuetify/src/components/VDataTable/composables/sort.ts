@@ -98,7 +98,6 @@ export function useSort () {
 export function useSortedItems<T extends InternalItem> (
   props: {
     customKeySort: Record<string, DataTableCompareFunction> | undefined
-    disableSort?: Boolean
   },
   items: Ref<T[]>,
   sortBy: Ref<readonly SortItem[]>,
@@ -110,7 +109,7 @@ export function useSortedItems<T extends InternalItem> (
 ) {
   const locale = useLocale()
   const sortedItems = computed(() => {
-    if (!sortBy.value.length || props.disableSort) return items.value
+    if (!sortBy.value.length) return items.value
 
     return sortItems(items.value, sortBy.value, locale.current.value, {
       transform: options?.transform,

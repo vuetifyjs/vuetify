@@ -152,7 +152,13 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     })
 
     const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
-    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
+    const {
+      sortByWithGroups,
+      opened,
+      extractRows,
+      isGroupOpen,
+      toggleGroup,
+    } = provideGroupBy({ groupBy, sortBy, disableSort: toRef(props, 'disableSort') })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
       transform: item => item.columns,
