@@ -52,9 +52,9 @@ export function createGroupBy (props: GroupProps) {
 }
 
 export function provideGroupBy (options: {
-  disableSort: Ref<boolean>
   groupBy: Ref<readonly SortItem[]>
   sortBy: Ref<readonly SortItem[]>
+  disableSort?: Ref<boolean>
 }) {
   const { disableSort, groupBy, sortBy } = options
   const opened = ref(new Set<string>())
@@ -63,7 +63,7 @@ export function provideGroupBy (options: {
     return groupBy.value.map<SortItem>(val => ({
       ...val,
       order: val.order ?? false,
-    })).concat(disableSort.value ? [] : sortBy.value)
+    })).concat(disableSort?.value ? [] : sortBy.value)
   })
 
   function isGroupOpen (group: Group) {

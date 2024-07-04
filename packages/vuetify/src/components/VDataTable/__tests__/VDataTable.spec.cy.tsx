@@ -7,9 +7,6 @@ import { Application } from '../../../../cypress/templates'
 // Utilities
 import { ref } from 'vue'
 
-// Types
-import type { SortItem } from '../composables/sort'
-
 const DESSERT_HEADERS = [
   { title: 'Dessert (100g serving)', key: 'name' },
   { title: 'Calories', key: 'calories' },
@@ -373,28 +370,17 @@ describe('VDataTable', () => {
 
   describe('sort', () => {
     it('should sort by sortBy', () => {
-      const sortBy = ref<SortItem[]>([])
       cy.mount(() => (
         <Application>
           <VDataTable
           items={ DESSERT_ITEMS }
           headers={ DESSERT_HEADERS }
           itemsPerPage={ 10 }
-          sortBy={ sortBy.value }
+          sortBy={[{ key: 'fat', order: 'asc' }]}
           />
         </Application>
-      )).get('thead .v-data-table__td').eq(2).should('not.have.class', 'v-data-table__th--sorted')
-        .get('tbody td:nth-child(3)').then(rows => {
-          const actualFat = Array.from(rows).map(row => {
-            return Number(row.textContent)
-          })
-          const expectedFat = DESSERT_ITEMS.map(d => d.fat)
-          expect(actualFat).to.deep.equal(expectedFat)
-        })
-        .then(() => {
-          sortBy.value = [{ key: 'fat', order: 'asc' }]
-        })
-        .get('thead .v-data-table__td').eq(2).should('have.class', 'v-data-table__th--sorted')
+      ))
+      cy.get('thead .v-data-table__td').eq(2).should('have.class', 'v-data-table__th--sorted')
         .get('tbody td:nth-child(3)').then(rows => {
           const actualFat = Array.from(rows).map(row => {
             return Number(row.textContent)
@@ -402,9 +388,7 @@ describe('VDataTable', () => {
           const expectedFat = DESSERT_ITEMS.map(d => d.fat).sort((a, b) => a - b)
           expect(actualFat).to.deep.equal(expectedFat)
         })
-        .then(() => {
-          sortBy.value = [{ key: 'fat', order: 'desc' }]
-        })
+      cy.get('thead .v-data-table__td').eq(2).click()
         .get('thead .v-data-table__td').eq(2).should('have.class', 'v-data-table__th--sorted')
         .get('tbody td:nth-child(3)').then(rows => {
           const actualFat = Array.from(rows).map(row => {
