@@ -26,7 +26,7 @@
             true-icon="mdi-bookmark"
             return-object
             selectable
-          />
+          ></v-treeview>
         </v-card-text>
       </v-col>
 
@@ -85,24 +85,16 @@
 </template>
 
 <script setup>
-  import { computed, ref, watch } from 'vue'
+  import { ref, watch } from 'vue'
 
-  const rootObj = {
-    id: 1,
-    name: 'All Breweries',
-  }
   const breweries = ref([])
   const tree = ref([])
   const types = ref([])
-  const items = computed(() => {
-    const children = types.value.map(type => ({
-      id: type,
-      name: getName(type),
-      children: getChildren(type),
-    }))
-    rootObj.children = children
-    return [rootObj]
-  })
+  const items = ref([{
+    id: 1,
+    name: 'All Breweries',
+    children: [],
+  }])
   function load () {
     if (breweries.value.length) return
 
@@ -130,6 +122,14 @@
       if (!acc.includes(type)) acc.push(type)
       return acc
     }, []).sort()
+
+    const children = types.value.map(type => ({
+      id: type,
+      name: getName(type),
+      children: getChildren(type),
+    }))
+    const rootObj = items.value[0]
+    rootObj.children = children
+    items.value = [rootObj]
   })
 </script>
-
