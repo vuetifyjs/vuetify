@@ -8,11 +8,12 @@ import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, provide, ref, toRef } from 'vue'
+import { computed, provide, ref, toRaw, toRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
+import type { InternalListItem } from '@/components/VList/VList'
 import type { VListChildrenSlots } from '@/components/VList/VListChildren'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps } from '@/util'
@@ -101,13 +102,13 @@ export const VTreeview = genericComponent<new <T>(
       return arr
     }
 
-    function openAll (item: any) {
-      let ids: number[] = []
+    function openAll (items: InternalListItem<any>[]) {
+      let ids: any[] = []
 
-      for (const i of item) {
+      for (const i of items) {
         if (!i.children) continue
 
-        ids.push(i.value)
+        ids.push(props.returnObject ? toRaw(i.raw) : i.value)
 
         if (i.children) {
           ids = ids.concat(openAll(i.children))

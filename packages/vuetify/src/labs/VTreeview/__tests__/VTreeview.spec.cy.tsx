@@ -329,6 +329,14 @@ describe('VTreeview', () => {
           .then(_ => {
             expect(selected.value).to.deep.equal([])
           })
+          .get('.v-checkbox-btn').eq(1).click(20, 20)
+          .then(_ => {
+            expect(selected.value.sort(compareItemObject)).to.deep.equal([
+              { id: 3, title: 'Basic layouts : mp4' },
+              { id: 4, title: 'Advanced techniques : mp4' },
+              { id: 5, title: 'All about app : dir' },
+            ].sort(compareItemObject))
+          })
       })
     })
   })
