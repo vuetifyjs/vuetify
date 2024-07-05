@@ -3,6 +3,9 @@ import { VTreeviewGroup } from './VTreeviewGroup'
 import { VTreeviewItem } from './VTreeviewItem'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 
+// Composables
+import { IconValue } from '@/composables/icons'
+
 // Utilities
 import { computed, shallowRef, toRaw, withModifiers } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
@@ -32,8 +35,18 @@ export const makeVTreeviewChildrenProps = propsFactory({
     type: Boolean,
     default: undefined,
   },
+  indeterminateIcon: {
+    type: IconValue,
+    default: '$checkboxIndeterminate',
+  },
+  falseIcon: IconValue,
+  trueIcon: IconValue,
   returnObject: Boolean,
   selectable: Boolean,
+  selectedColor: {
+    type: String,
+    default: 'accent',
+  },
   selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
 }, 'VTreeviewChildren')
 
@@ -86,7 +99,11 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                   key={ item.value }
                   modelValue={ slotProps.isSelected }
                   loading={ loading }
+                  color={ props.selectedColor }
                   indeterminate={ slotProps.isIndeterminate }
+                  indeterminateIcon={ props.indeterminateIcon }
+                  falseIcon={ props.falseIcon }
+                  trueIcon={ props.trueIcon }
                   onClick={ withModifiers(() => selectItem(slotProps.select, slotProps.isSelected), ['stop']) }
                   onKeydown={ (e: KeyboardEvent) => {
                     if (!['Enter', 'Space'].includes(e.key)) return

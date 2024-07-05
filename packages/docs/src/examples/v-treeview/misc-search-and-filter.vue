@@ -23,10 +23,12 @@
     </v-sheet>
     <v-card-text>
       <v-treeview
-        v-model:open="open"
+        v-model:opened="open"
         :filter="filter"
         :items="items"
         :search="search"
+        item-value="id"
+        open-all
       >
         <template v-slot:prepend="{ item }">
           <v-icon

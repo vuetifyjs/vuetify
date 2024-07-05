@@ -18,17 +18,15 @@
             v-model:selected="tree"
             :items="items"
             :load-children="load"
-            expand-icon="mdi-chevron-down"
+            false-icon="mdi-bookmark-outline"
             indeterminate-icon="mdi-bookmark-minus"
             item-title="name"
-            item-value="name"
-            off-icon="mdi-bookmark-outline"
-            on-icon="mdi-bookmark"
-            selected-color="indigo"
-            open-on-click
+            item-value="id"
+            select-strategy="classic"
+            true-icon="mdi-bookmark"
             return-object
             selectable
-          ></v-treeview>
+          />
         </v-card-text>
       </v-col>
 
@@ -54,7 +52,7 @@
             <v-chip
               v-for="(selection, i) in tree"
               :key="i"
-              :text="selection"
+              :text="selection.name"
               class="ma-1"
               color="grey"
               prepend-icon="mdi-beer"
@@ -89,6 +87,10 @@
 <script setup>
   import { computed, ref, watch } from 'vue'
 
+  const rootObj = {
+    id: 1,
+    name: 'All Breweries',
+  }
   const breweries = ref([])
   const tree = ref([])
   const types = ref([])
@@ -98,11 +100,8 @@
       name: getName(type),
       children: getChildren(type),
     }))
-    return [{
-      id: 1,
-      name: 'All Breweries',
-      children,
-    }]
+    rootObj.children = children
+    return [rootObj]
   })
   function load () {
     if (breweries.value.length) return
@@ -134,70 +133,3 @@
   })
 </script>
 
-<script>
-  export default {
-    data: () => ({
-      breweries: [],
-      tree: [],
-      types: [],
-    }),
-
-    computed: {
-      items () {
-        const children = this.types.map(type => ({
-          id: type,
-          name: this.getName(type),
-          children: this.getChildren(type),
-        }))
-
-        return [{
-          id: 1,
-          name: 'All Breweries',
-          children,
-        }]
-      },
-    },
-
-    watch: {
-      breweries (val) {
-        this.types = val.reduce((acc, cur) => {
-          const type = cur.brewery_type
-
-          if (!acc.includes(type)) acc.push(type)
-
-          return acc
-        }, []).sort()
-      },
-    },
-
-    methods: {
-      load () {
-        if (this.breweries.length) return
-
-        return fetch('https://api.openbrewerydb.org/breweries')
-          .then(res => res.json())
-          .then(data => (this.breweries = data))
-          .catch(err => console.log(err))
-      },
-      getChildren (type) {
-        const breweries = []
-
-        for (const brewery of this.breweries) {
-          if (brewery.brewery_type !== type) continue
-
-          breweries.push({
-            ...brewery,
-            name: this.getName(brewery.name),
-          })
-        }
-
-        return breweries.sort((a, b) => {
-          return a.name > b.name ? 1 : -1
-        })
-      },
-      getName (name) {
-        return `${name.charAt(0).toUpperCase()}${name.slice(1)}`
-      },
-    },
-  }
-</script>

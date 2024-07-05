@@ -29,7 +29,7 @@
             v-for="node in selection"
             :key="node.id"
           >
-            {{ node.name }}
+            {{ node.title }}
           </div>
         </template>
       </v-col>

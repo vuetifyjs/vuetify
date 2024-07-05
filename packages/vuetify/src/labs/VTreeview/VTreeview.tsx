@@ -36,6 +36,7 @@ export const makeVTreeviewProps = propsFactory({
     collapseIcon: '$treeviewCollapse',
     expandIcon: '$treeviewExpand',
     slim: true,
+    color: 'primary',
   }), ['nav', 'openStrategy']),
 }, 'VTreeview')
 
