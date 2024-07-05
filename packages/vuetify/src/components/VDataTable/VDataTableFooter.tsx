@@ -7,8 +7,8 @@ import { VSelect } from '@/components/VSelect'
 
 // Composables
 import { usePagination } from './composables/paginate'
-import { useLocale } from '@/composables/locale'
 import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
