@@ -2,7 +2,7 @@
   <v-btn
     v-if="commits.latest"
     :href="`https://github.com/vuetifyjs/vuetify/commit/${commits.latest?.sha}`"
-    :text="commits.latest?.sha.slice(0, 7)"
+    :text="commits.latest?.sha?.slice(0, 7)"
     class="text-caption"
     prepend-icon="mdi-source-commit"
     rel="noopener noreferrer"

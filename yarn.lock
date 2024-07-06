@@ -4108,10 +4108,10 @@
   dependencies:
     upath "^2.0.1"
 
-"@vuetify/one@^1.8.1":
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/@vuetify/one/-/one-1.8.1.tgz#f89aa5bd06624db9e366e45643cc641b9bf311e7"
-  integrity sha512-PnlMvLqm3hT2zHFrNAr6DTVLjpM5q9iEG1t/ECNm0fjnT0QfZBTmnAHALcTwjXhLYv9VnD6a7f6KnPlQD4eSZQ==
+"@vuetify/one@^1.9.1":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@vuetify/one/-/one-1.9.1.tgz#408d5d0bd6ce9a3ccd7cdba679ba411d7c6e446b"
+  integrity sha512-vp1+9n4Ehs6XP/DuuUwCpUiOKDTwAdJmYc6eqt/HRw+u7s/0W8SGvrKOhzQeXLeGrfzwpIed6iB78NyfZzM66Q==
 
 "@vueuse/head@^1.3.1":
   version "1.3.1"
