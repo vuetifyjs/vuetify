@@ -25,7 +25,7 @@
     "returnObject": "When `true` will make `v-model`, `active.sync` and `open.sync` return the complete object instead of just the key.",
     "rounded": "Provides an alternative active style for `v-treeview` node. Only visible when `activatable` is `true` and should not be used in conjunction with the `shaped` prop.",
     "search": "The search model for filtering results.",
-    "selectable": "Will render a checkbox next to each node allowing them to be selected.",
+    "selectable": "Will render a checkbox next to each node allowing them to be selected. Additionally, the **[openOnClick](/api/v-treeview/#props-open-on-click)** property will be applied internally.",
     "selectedColor": "The color of the selection checkbox.",
     "selectionType": "Controls how the treeview selects nodes. There are two modes available: 'leaf' and 'independent'.",
     "shaped": "Provides an alternative active style for `v-treeview` node. Only visible when `activatable` is `true` and should not be used in conjunction with the `rounded` prop.",

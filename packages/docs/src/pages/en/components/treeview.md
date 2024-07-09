@@ -136,9 +136,9 @@ Shaped treeview's have rounded borders on one side of the nodes.
 
 ### Slots
 
-#### Append and label
+#### Prepend
 
-Using the the **label**, and an **append** slots we are able to create an intuitive file explorer.
+Using the the **prepend** slot we are able to create an intuitive file explorer.
 
 <ExamplesExample file="v-treeview/slot-append-and-label" />
 
