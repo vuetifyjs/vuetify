@@ -36,8 +36,8 @@ export const VTimePickerControls = genericComponent()({
   props: makeVTimePickerControlsProps(),
 
   emits: {
-    'update:period': (data: Period) => data,
-    'update:selecting': (data: 1 | 2 | 3) => data,
+    'update:period': (data: Period) => true,
+    'update:selecting': (data: 1 | 2 | 3) => true,
   },
 
   setup (props, { emit, slots }) {
