@@ -263,6 +263,51 @@ const app = createApp()
 app.use(vuetify).mount('#app')
 ```
 
+## Using Vitepress
+
+You can use Vuetify's components in your Vitepress static site.
+
+First, add vuetify to your dependencies
+
+::: tabs
+
+```bash [yarn]
+yarn create vuetify
+```
+
+```bash [npm]
+npm create vuetify@latest
+```
+
+```bash [pnpm]
+pnpm create vuetify
+```
+
+```bash [bun]
+bun create vuetify
+```
+
+:::
+
+Then, in your `.vitepress/theme/index.ts`
+
+```ts
+import DefaultTheme from 'vitepress/theme'
+import 'vuetify/styles'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+import { createVuetify } from 'vuetify'
+
+const vuetify = createVuetify({ components, directives })
+
+export default {
+  ...DefaultTheme,
+  enhanceApp({ app }) {
+    app.use(vuetify)
+  },
+}
+```
+
 ## Existing projects
 
 Follow these steps if for example you are adding Vuetify to an existing project, or simply do not want to use a scaffolding tool.
