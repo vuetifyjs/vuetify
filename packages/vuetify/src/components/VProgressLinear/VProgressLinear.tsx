@@ -14,7 +14,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, Transition } from 'vue'
-import { clamp, convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { clamp, convertToUnit, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 type VProgressLinearSlots = {
   default: { value: number, buffer: number }
@@ -98,6 +98,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     const normalizedValue = computed(() => clamp(parseFloat(progress.value) / max.value * 100, 0, 100))
     const isReversed = computed(() => isRtl.value !== props.reverse)
     const transition = computed(() => props.indeterminate ? 'fade-transition' : 'slide-x-transition')
+    const isForcedColorsModeActive = IN_BROWSER && window.matchMedia('(forced-colors: active)').matches
 
     function handleClick (e: MouseEvent) {
       if (!intersectionRef.value) return
@@ -165,7 +166,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
         <div
           class={[
             'v-progress-linear__background',
-            backgroundColorClasses.value,
+            !isForcedColorsModeActive ? backgroundColorClasses.value : undefined,
           ]}
           style={[
             backgroundColorStyles.value,
@@ -179,7 +180,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
         <div
           class={[
             'v-progress-linear__buffer',
-            bufferColorClasses.value,
+            !isForcedColorsModeActive ? bufferColorClasses.value : undefined,
           ]}
           style={[
             bufferColorStyles.value,
@@ -195,7 +196,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             <div
               class={[
                 'v-progress-linear__determinate',
-                barColorClasses.value,
+                !isForcedColorsModeActive ? barColorClasses.value : undefined,
               ]}
               style={[
                 barColorStyles.value,
@@ -210,7 +211,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
                   class={[
                     'v-progress-linear__indeterminate',
                     bar,
-                    barColorClasses.value,
+                    !isForcedColorsModeActive ? barColorClasses.value : undefined,
                   ]}
                   style={ barColorStyles.value }
                 />
