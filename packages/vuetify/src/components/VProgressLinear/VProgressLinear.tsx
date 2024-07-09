@@ -98,7 +98,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     const normalizedValue = computed(() => clamp(parseFloat(progress.value) / max.value * 100, 0, 100))
     const isReversed = computed(() => isRtl.value !== props.reverse)
     const transition = computed(() => props.indeterminate ? 'fade-transition' : 'slide-x-transition')
-    const isForcedColorsModeActive = IN_BROWSER && window.matchMedia('(forced-colors: active)').matches
+    const isForcedColorsModeActive = IN_BROWSER && window.matchMedia?.('(forced-colors: active)').matches
 
     function handleClick (e: MouseEvent) {
       if (!intersectionRef.value) return
