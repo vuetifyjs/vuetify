@@ -36,7 +36,3 @@ Example of an inline `<code>` element.
 ## Variables
 
 <var>v</var> = <var>u</var> * <var>e</var>
-
-## User input
-
-To install Vuetify, type <kbd>npm install vuetify</kbd> into your console. Once complete, type <kbd>cd `<project name>`</kbd> and run <kbd>npm install</kbd>

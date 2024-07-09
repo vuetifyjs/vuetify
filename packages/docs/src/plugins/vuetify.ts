@@ -12,6 +12,7 @@ import { fa } from 'vuetify/iconsets/fa'
 import { md } from 'vuetify/iconsets/md'
 import { mdi } from 'vuetify/iconsets/mdi-svg'
 import * as mdiSvg from './icons'
+import { aliases } from '@vuetify/one'
 
 // Locales
 import { en, sv } from 'vuetify/locale'
@@ -112,11 +113,7 @@ export function installVuetify (app: App) {
           },
         },
       },
-      aliases: {
-        /* eslint-disable max-len */
-        x: ['M2.04875 3.00002L9.77052 13.3248L1.99998 21.7192H3.74882L10.5519 14.3697L16.0486 21.7192H22L13.8437 10.8137L21.0765 3.00002H19.3277L13.0624 9.76874L8.0001 3.00002H2.04875ZM4.62054 4.28821H7.35461L19.4278 20.4308H16.6937L4.62054 4.28821Z'],
-        /* eslint-enable max-len */
-      },
+      aliases,
     },
     theme: {
       themes: {
