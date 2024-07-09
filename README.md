@@ -207,6 +207,14 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
   <tbody>
     <tr>
       <td>
+        <a href="https://snips.vuetifyjs.com">
+          ✂️&nbsp;Vuetify&nbsp;Snips
+        </a>
+      </td>
+      <td>Pre-built code snippets for Vuetify components that you can use in your projects</td>
+    </tr>
+    <tr>
+      <td>
         <a href="https://support.vuetifyjs.com/?ref=github">
           💫&nbsp;Enterprise&nbsp;Support
         </a>

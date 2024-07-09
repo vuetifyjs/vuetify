@@ -6,13 +6,15 @@ import { VExpansionPanelSymbol } from './shared'
 import { makeVExpansionPanelProps } from './VExpansionPanel'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
 import { makeGroupProps, useGroup } from '@/composables/group'
+import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -34,8 +36,24 @@ export const makeVExpansionPanelsProps = propsFactory({
   flat: Boolean,
 
   ...makeGroupProps(),
-  ...makeVExpansionPanelProps(),
+  ...pick(makeVExpansionPanelProps(), [
+    'bgColor',
+    'collapseIcon',
+    'color',
+    'eager',
+    'elevation',
+    'expandIcon',
+    'focusable',
+    'hideActions',
+    'readonly',
+    'ripple',
+    'rounded',
+    'tile',
+    'static',
+  ]),
   ...makeThemeProps(),
+  ...makeComponentProps(),
+  ...makeTagProps(),
 
   variant: {
     type: String as PropType<Variant>,

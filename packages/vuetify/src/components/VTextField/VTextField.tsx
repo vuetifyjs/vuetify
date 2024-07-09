@@ -176,7 +176,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
           style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
-          centerAffix={ !isPlainOrUnderlined.value }
           focused={ isFocused.value }
         >
           {{
@@ -202,6 +201,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
+                centerAffix={ props.centerAffix }
                 error={ isValid.value === false }
               >
                 {{
