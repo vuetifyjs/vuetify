@@ -43,10 +43,7 @@ export const makeVTreeviewChildrenProps = propsFactory({
   trueIcon: IconValue,
   returnObject: Boolean,
   selectable: Boolean,
-  selectedColor: {
-    type: String,
-    default: 'accent',
-  },
+  selectedColor: String,
   selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
 }, 'VTreeviewChildren')
 

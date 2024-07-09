@@ -85,7 +85,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
           class={[
             'v-treeview-item',
             {
-              'v-treeview-item--activetable-group-activator': isActivatableGroupActivator.value,
+              'v-treeview-item--activatable-group-activator': isActivatableGroupActivator.value,
               'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(id.value),
             },
             props.class,
