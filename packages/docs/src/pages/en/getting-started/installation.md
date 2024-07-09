@@ -119,7 +119,7 @@ bun install
 
 :::
 
-and then install the required Vuefity modules as dependencies:
+and then install the required Vuetify modules as dependencies:
 
 ::: tabs
 
