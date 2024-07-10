@@ -22,6 +22,7 @@ export interface CalendarProps {
   weekdays: number[]
   year: number | string | undefined
   weeksInMonth: 'dynamic' | 'static'
+  firstDayOfWeek: number | string | undefined
 
   'onUpdate:modelValue': ((value: unknown[]) => void) | undefined
   'onUpdate:month': ((value: number) => void) | undefined
@@ -47,6 +48,7 @@ export const makeCalendarProps = propsFactory({
     type: String as PropType<'dynamic' | 'static'>,
     default: 'dynamic',
   },
+  firstDayOfWeek: [Number, String],
 }, 'calendar')
 
 export function useCalendar (props: CalendarProps) {
@@ -91,8 +93,14 @@ export function useCalendar (props: CalendarProps) {
     v => adapter.getMonth(v)
   )
 
+  const weekDays = computed(() => {
+    const firstDayOfWeek = Number(props.firstDayOfWeek ?? 0)
+
+    return props.weekdays.map(day => (day + firstDayOfWeek) % 7)
+  })
+
   const weeksInMonth = computed(() => {
-    const weeks = adapter.getWeekArray(month.value)
+    const weeks = adapter.getWeekArray(month.value, props.firstDayOfWeek)
 
     const days = weeks.flat()
 
@@ -118,7 +126,7 @@ export function useCalendar (props: CalendarProps) {
 
   function genDays (days: unknown[], today: unknown) {
     return days.filter(date => {
-      return props.weekdays.includes(adapter.toJsDate(date).getDay())
+      return weekDays.value.includes(adapter.toJsDate(date).getDay())
     }).map((date, index) => {
       const isoDate = adapter.toISO(date)
       const isAdjacent = !adapter.isSameMonth(date, month.value)
@@ -148,7 +156,7 @@ export function useCalendar (props: CalendarProps) {
   }
 
   const daysInWeek = computed(() => {
-    const lastDay = adapter.startOfWeek(displayValue.value)
+    const lastDay = adapter.startOfWeek(displayValue.value, props.firstDayOfWeek)
     const week = []
     for (let day = 0; day <= 6; day++) {
       week.push(adapter.addDays(lastDay, day))
@@ -198,6 +206,7 @@ export function useCalendar (props: CalendarProps) {
     genDays,
     model,
     weeksInMonth,
+    weekDays,
     weekNumbers,
   }
 }
