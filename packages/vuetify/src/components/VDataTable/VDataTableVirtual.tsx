@@ -19,7 +19,7 @@ import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 
 // Utilities
-import { computed, shallowRef, toRef } from 'vue'
+import { computed, shallowRef, toRef, toRefs } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -85,6 +85,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
   setup (props, { attrs, slots }) {
     const { groupBy } = createGroupBy(props)
     const { sortBy, multiSort, mustSort } = createSort(props)
+    const { disableSort } = toRefs(props)
 
     const {
       columns,
@@ -106,7 +107,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     })
 
     const { toggleSort } = provideSort({ sortBy, multiSort, mustSort })
-    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
+    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy, disableSort })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
       transform: item => item.columns,
