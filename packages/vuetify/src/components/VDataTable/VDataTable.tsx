@@ -21,7 +21,7 @@ import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed, toRef, toRefs } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -130,6 +130,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     const { groupBy } = createGroupBy(props)
     const { sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
+    const { disableSort } = toRefs(props)
 
     const {
       columns,
@@ -152,13 +153,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     })
 
     const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
-    const {
-      sortByWithGroups,
-      opened,
-      extractRows,
-      isGroupOpen,
-      toggleGroup,
-    } = provideGroupBy({ groupBy, sortBy, disableSort: toRef(props, 'disableSort') })
+    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy, disableSort })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
       transform: item => item.columns,
