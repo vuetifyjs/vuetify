@@ -328,34 +328,32 @@ export const VField = genericComponent<new <T>(
                 e.stopPropagation()
               }}
             >
-              { hasClear && (
-                  <VDefaultsProvider
-                    defaults={{
-                      VIcon: {
-                        icon: props.clearIcon,
-                      },
-                    }}
-                  >
-                    { slots.clear
-                      ? slots.clear({
-                        ...slotProps.value,
-                        props: {
-                          onKeydown: onKeydownClear,
-                          onFocus: focus,
-                          onBlur: blur,
-                          onClick: props['onClick:clear'],
-                        },
-                      })
-                      : (
-                        <InputIcon
-                          name="clear"
-                          onKeydown={ onKeydownClear }
-                          onFocus={ focus }
-                          onBlur={ blur }
-                        />
-                      )}
-                  </VDefaultsProvider>
-              )}
+              <VDefaultsProvider
+                defaults={{
+                  VIcon: {
+                    icon: props.clearIcon,
+                  },
+                }}
+              >
+                { slots.clear
+                  ? slots.clear({
+                    ...slotProps.value,
+                    props: {
+                      onKeydown: onKeydownClear,
+                      onFocus: focus,
+                      onBlur: blur,
+                      onClick: props['onClick:clear'],
+                    },
+                  })
+                  : (
+                    <InputIcon
+                      name="clear"
+                      onKeydown={ onKeydownClear }
+                      onFocus={ focus }
+                      onBlur={ blur }
+                    />
+                  )}
+              </VDefaultsProvider>
             </div>
           </VExpandXTransition>
 
