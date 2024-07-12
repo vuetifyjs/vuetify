@@ -74,6 +74,7 @@
     "pagination": "Emits when something changed to the `pagination` which can be provided via the `pagination` prop.",
     "toggleSelectAll": "Emits when the `select-all` checkbox in table header is clicked. This checkbox is enabled by the **show-select** prop.",
     "update:expanded": "Emits when the **expanded** property of the **options** prop is updated.",
+    "update:filteredItems": "Emits i.e. when **searching** and return the filtered items.",
     "update:groupBy": "Emits when the **group-by** property of the **options** property is updated.",
     "update:groupDesc": "Emits when the **group-desc** property of the **options** prop is updated.",
     "update:itemsPerPage": "Emits when the **items-per-page** property of the **options** prop is updated.",
@@ -83,6 +84,7 @@
     "update:options": "Emits when one of the **options** properties is updated.",
     "update:page": "Emits when the **page** property of the **options** prop is updated.",
     "update:sortBy": "Emits when the **sortBy** property of the **options** prop is updated.",
-    "update:sortDesc": "Emits when the **sort-desc** property of the **options** prop is updated."
+    "update:sortDesc": "Emits when the **sort-desc** property of the **options** prop is updated.",
+    "update:sortedItems": "Emits when **sorting** and return items according to its current sorting."
   }
 }
