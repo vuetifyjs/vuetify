@@ -8,5 +8,7 @@
     "nav": "An alternative styling that reduces `v-list-item` width and rounds the corners. Typically used with **[v-navigation-drawer](/components/navigation-drawers)**.",
     "subheader": "Removes the top padding from `v-list-subheader` components. When used as a **String**, renders a subheader for you.",
     "slim": "Reduces horizontal spacing for badges, icons, tooltips, and avatars within slim list items to create a more compact visual representation."
+    "collapseIcon": "Defines the icon that represents the inactive state of the component.",
+    "expandIcon": "Defines the icon that represents the active state of the component.",
   }
 }
