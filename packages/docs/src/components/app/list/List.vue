@@ -57,6 +57,8 @@
 </template>
 
 <script setup lang="ts">
+  import { useRoute } from 'vue-router'
+
   // Types
   import type { RouteLocationRaw, RouteRecordRaw } from 'vue-router'
   import type { Prop } from 'vue'
@@ -79,6 +81,8 @@
     emphasized?: boolean
     onClick?: () => void
   }
+
+  const { path: currentRoutePath } = useRoute()
 
   function generateApiItems (locale: string) {
     return (generatedRoutes as RouteRecordRaw[])
@@ -117,6 +121,7 @@
         emphasized: route?.meta?.emphasized ?? false,
         to,
         disabled: !route,
+        active: currentRoutePath === route?.path,
       }
     } else if (item.divider) {
       return {
