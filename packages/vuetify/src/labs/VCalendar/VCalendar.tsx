@@ -30,10 +30,15 @@ export type VCalendarSlots = {
   allDayContent: { day?: CalendarDay, events?: Array<any> }
   allDayEvent: { day?: CalendarDay, event?: Record<string, unknown> }
   dayBody: { day?: CalendarDay, events?: Array<any> }
-  day: { day?: CalendarDay, events?: Array<any> }
-  event: { day?: CalendarDay, allDay: Boolean, event?: Record<string, unknown> }
-  header: { title: string }
+  dayTitle: { title?: number | string }
+  dayEvent: { day?: CalendarDay, allDay: Boolean, event?: Record<string, unknown> }
+  header: { title: string, clickNext: Function, clickPrev: Function, clickToday: Function }
+  interval: {}
+  intervalBody: {}
   intervalDay: { day?: CalendarDay, dayIndex: Number, events?: Array<any> }
+  intervalEvent: {}
+  intervalTitle: {}
+  title: { title?: string }
 }
 
 export const VCalendar = genericComponent<VCalendarSlots>()({
@@ -42,8 +47,10 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
   props: makeVCalendarProps(),
 
   emits: {
+    'click:intervalDate': null,
     next: null,
     prev: null,
+    today: null,
     'update:modelValue': null,
   },
 
@@ -64,6 +71,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
       if (props.viewMode === 'day') {
         model.value = [adapter.addDays(displayValue.value, 1)]
       }
+      emit('next', model.value[0])
     }
 
     function onClickPrev () {
@@ -76,10 +84,12 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
       if (props.viewMode === 'day') {
         model.value = [adapter.addDays(displayValue.value, -1)]
       }
+      emit('prev', model.value[0])
     }
 
     function onClickToday () {
       model.value = [adapter.date()]
+      emit('today', model.value[0])
     }
 
     const title = computed(() => {
@@ -102,7 +112,12 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
         >
           <div>
             { !props.hideHeader && (
-              slots.header?.({ title: title.value }) ?? (
+              slots.header?.({
+                title: title.value,
+                clickNext: onClickNext,
+                clickPrev: onClickPrev,
+                clickToday: onClickToday,
+              }) ?? (
                 <VCalendarHeader
                   key="calendar-header"
                   { ...calendarHeaderProps }
@@ -110,7 +125,15 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                   onClick:next={ onClickNext }
                   onClick:prev={ onClickPrev }
                   onClick:toToday={ onClickToday }
-                />
+                >
+                  {{
+                    ...(slots.title ? {
+                      title: ({ title }) => (
+                        slots.title?.({ title })
+                      ),
+                    } : {}),
+                  }}
+                </VCalendarHeader>
               )
             )}
           </div>
@@ -154,19 +177,33 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                     [
                       !props.hideWeekNumber ? <div class="v-calendar-month__weeknumber">{ weekNumbers.value[wi] }</div> : '',
                       week.map(day => (
-                        slots.day ? slots.day({
-                          day,
-                          events: props.events?.filter(e => adapter.isSameDay(day.date, e.start) || adapter.isSameDay(day.date, e.end)),
-                        })
-                        : (
                           <VCalendarMonthDay
                             key={ day.date.getTime() }
                             { ...calendarDayProps }
                             { ...getPrefixedEventHandlers(attrs, ':day', () => ({ day })) }
                             day={ day }
+                            title={ adapter.format(day.date, 'dayOfMonth') }
                             events={ props.events?.filter(e => adapter.isSameDay(day.date, e.start) || adapter.isSameDay(day.date, e.end)) }
-                          />
-                        ))),
+                          >
+                            {{
+                              ...(slots.dayBody ? {
+                                dayBody: props => (
+                                  slots.dayBody?.(props)
+                                ),
+                              } : {}),
+                              ...(slots.dayEvent ? {
+                                dayEvent: props => (
+                                  slots.dayEvent?.(props)
+                                ),
+                              } : {}),
+                              ...(slots.dayTitle ? {
+                                dayTitle: props => (
+                                  slots.dayTitle?.(props)
+                                ),
+                              } : {}),
+                            }}
+                          </VCalendarMonthDay>
+                      )),
                     ]
                   ))
                 }
@@ -186,7 +223,30 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                     day={ day }
                     dayIndex={ i }
                     events={ props.events?.filter(e => adapter.isSameDay(e.start, day.date) || adapter.isSameDay(e.end, day.date)) }
-                  ></VCalendarDay>
+                  >
+                    {{
+                      ...(slots.interval ? {
+                        interval: () => (
+                          slots.interval?.({})
+                        ),
+                      } : {}),
+                      ...(slots.intervalBody ? {
+                        intervalBody: props => (
+                          slots.intervalBody?.(props)
+                        ),
+                      } : {}),
+                      ...(slots.intervalEvent ? {
+                        intervalEvent: props => (
+                          slots.intervalEvent?.(props)
+                        ),
+                      } : {}),
+                      ...(slots.intervalTitle ? {
+                        intervalTitle: props => (
+                          slots.intervalTitle?.(props)
+                        ),
+                      } : {}),
+                    }}
+                  </VCalendarDay>
                 )
               ))
             }

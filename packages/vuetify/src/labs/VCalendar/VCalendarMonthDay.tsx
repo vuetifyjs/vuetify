@@ -13,11 +13,9 @@ import type { PropType } from 'vue'
 import type { CalendarDay } from '@/composables/calendar'
 
 export type VCalendarMonthDaySlots = {
-  default: never
-  day: { day?: CalendarDay, events: Array<any> }
   dayBody: { day?: CalendarDay, events?: Array<any> }
-  title: { title?: number | string }
-  event: { day?: CalendarDay, allDay: boolean, event: Record<string, unknown> }
+  dayEvent: { day?: CalendarDay, allDay: boolean, event: Record<string, unknown> }
+  dayTitle: { title?: number | string }
 }
 
 export const makeVCalendarMonthDayProps = propsFactory({
@@ -38,17 +36,15 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
 
   setup (props, { emit, attrs, slots }) {
     useRender(() => {
-      const hasTitle = !!(props.title || slots.title?.({ title: props.title }))
-
       return (
         <div
           class={[
             'v-calendar-month__day',
           ]}
         >
-          { !props.day?.isHidden && hasTitle && (
+          { !props.day?.isHidden ? (
             <div key="title" class="v-calendar-weekly__day-label">
-              { slots.title ? slots.title?.({ title: props.title }) : (
+              { slots.dayTitle?.({ title: props.title }) ?? (
                 <VBtn
                 { ...getPrefixedEventHandlers(attrs, ':date', () => props) }
                   class={ props.day?.isToday ? 'v-calendar-weekly__day-label__today' : undefined }
@@ -57,18 +53,17 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
                   icon
                   size="x-small"
                   variant={ props.day?.isToday ? undefined : 'flat' }
-                >
-                  { props.title }
-                </VBtn>
+                  text={ `${props.title}` }
+                />
 
               )
             }
             </div>
-          )}
+          ) : '' }
 
-          { !props.day?.isHidden && (
+          { !props.day?.isHidden ? (
             <div key="content" class="v-calendar-weekly__day-content">
-              { slots.dayBody ? slots.dayBody?.({ day: props.day, events: props.events }) : (
+              { slots.dayBody?.({ day: props.day, events: props.events }) ?? (
                 <div
                   { ...getPrefixedEventHandlers(attrs, ':day', () => ({
                     day: props.day,
@@ -76,16 +71,16 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
                   }))}
                 >
                   <div class="v-calendar-weekly__day-alldayevents-container">
-                    { props.events?.filter(event => event.allDay).map(event => slots.event
-                      ? slots.event({ day: props.day, allDay: true, event })
+                    { props.events?.filter(event => event.allDay).map(event => slots.dayEvent
+                      ? slots.dayEvent({ day: props.day, allDay: true, event })
                       : (
                         <VCalendarEvent day={ props.day } event={ event } allDay />
                       ))}
                   </div>
 
                   <div class="v-calendar-weekly__day-events-container">
-                    { props.events?.filter(event => !event.allDay).map(event => slots.event
-                      ? slots.event({ day: props.day, event, allDay: false })
+                    { props.events?.filter(event => !event.allDay).map(event => slots.dayEvent
+                      ? slots.dayEvent({ day: props.day, event, allDay: false })
                       : (
                         <VCalendarEvent day={ props.day } event={ event } />
                       ))}
@@ -93,9 +88,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
                 </div>
               )}
             </div>
-          )}
-
-          { !props.day?.isHidden && slots.default?.() }
+          ) : '' }
         </div>
       )
     })
