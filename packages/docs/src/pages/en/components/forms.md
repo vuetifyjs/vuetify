@@ -62,21 +62,29 @@ This also demonstrates the **validate-on** prop, which tells the `v-form` compon
 
 ## Validation state
 
-By default, all inputs run their validation rules when mounted but do not display errors to the user.
+When rules run is controlled with the **validate-on** prop which accepts a string containing `input`, `blur`, `submit`, `invalid-input`, `eager`, or `lazy`.
 <br>
-When rules run is controlled with the **validate-on** prop which accepts a string containing `input`, `blur`, `submit`, or `lazy`.
+`input`, `blur`, `submit`, and `eager` set when a validation error can first be displayed to the user, while `lazy` disables validation on mount (useful for async rules).
 <br>
-`input`, `blur`, and `submit` set when a validation error can first be displayed to the user, while `lazy` disables validation on mount (useful for async rules).
+By default, all inputs run their validation rules when mounted but do not display errors to the user. Adding `eager` will display errors immediately, or `lazy` to disable this.
 <br>
-`lazy` can be combined with other options, and implies `input` on its own.
+`eager` and `lazy` can be combined with other options but not each other, and both imply `input` on their own.
+<br>
+`invalid-input` behaves the same as `blur` unless the field is invalid, then it will run on input instead until validation passes again.
 
-| `validate-on=` | `"input"` | `"blur"` | `"submit"` | `"lazy"` |
-|----------------|:---------:|:--------:|:----------:|:--------:|
-| On mount       |     ✅     |    ✅     |     ✅      |    ❌     |
-| On input       |     ✅     |    ❌     |     ❌      |    *     |
-| On blur        |     ✅     |    ✅     |     ❌      |    *     |
-| On submit      |     ✅     |    ✅     |     ✅      |    *     |
-<p class="text-caption">* Uses the behavior of whatever it's combined with.</p>
+| `validate-on=` | `"input"` | `"blur"` | `"submit"` | `"invalid-input"` |   `"eager"`   | `"lazy"` |
+|----------------|:---------:|:--------:|:----------:|:-----------------:|:-------------:|:--------:|
+| On mount       |     ✅     |    ✅     |     ✅      |         ✅         | ✅<sup>†</sup> |    ❌     |
+| On input       |     ✅     |    ❌     |     ❌      |         ‡         |       *       |    *     |
+| On blur        |     ✅     |    ✅     |     ❌      |         ✅         |       *       |    *     |
+| On submit      |     ✅     |    ✅     |     ✅      |         ✅         |       ✅       |    ✅     |
+<p class="text-caption">
+* Uses the behavior of whatever it's combined with, the same as on="input" by default.
+<br>
+† Displays errors immediately on mount or reset.
+<br>
+‡ Only if the validation failed previously.
+</p>
 
 The form's current validation status is accessed using `v-model` or the submit event. It can be in one of three states:
 

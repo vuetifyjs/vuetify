@@ -3,6 +3,7 @@ import './VGrid.sass'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { useRtl } from '@/composables/locale'
 import { makeTagProps } from '@/composables/tag'
 
@@ -16,6 +17,7 @@ export const makeVContainerProps = propsFactory({
   },
 
   ...makeComponentProps(),
+  ...makeDimensionProps(),
   ...makeTagProps(),
 }, 'VContainer')
 
@@ -26,6 +28,7 @@ export const VContainer = genericComponent()({
 
   setup (props, { slots }) {
     const { rtlClasses } = useRtl()
+    const { dimensionStyles } = useDimension(props)
 
     useRender(() => (
       <props.tag
@@ -35,7 +38,10 @@ export const VContainer = genericComponent()({
           rtlClasses.value,
           props.class,
         ]}
-        style={ props.style }
+        style={[
+          dimensionStyles.value,
+          props.style,
+        ]}
         v-slots={ slots }
       />
     ))

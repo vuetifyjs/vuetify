@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.6.12",
+  "version": "3.6.13-3.7.0-beta.0.0",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
