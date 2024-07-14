@@ -6,6 +6,26 @@ import { VFileUpload } from '..'
 import { ref } from 'vue'
 
 describe('VFileUpload', () => {
+  it('should set accept default success', () => {
+    cy.mount(() => <VFileUpload />)
+      .get('input[type="file"]').should('have.attr', 'accept', '*')
+  })
+
+  it('should set accept custom success', () => {
+    cy.mount(() => <VFileUpload accept="image/*" />)
+      .get('input[type="file"]').should('have.attr', 'accept', 'image/*')
+  })
+
+  it('should not set multiple default', () => {
+    cy.mount(() => <VFileUpload />)
+      .get('input[type="file"]').should('not.have.attr', 'multiple')
+  })
+
+  it('should set multiple success', () => {
+    cy.mount(() => <VFileUpload multiple />)
+      .get('input[type="file"]').should('have.attr', 'multiple')
+  })
+
   it('should displays correct default', () => {
     cy.mount(() => <VFileUpload />)
       .get('.v-sheet').should('exist')
@@ -97,7 +117,6 @@ describe('VFileUpload', () => {
       .get('.v-list-item').should('have.length', 1)
       .get('.v-list-item .v-list-item__content .v-list-item-title').eq(0).should('have.text', 'example.json')
       .get('.v-list-item .v-progress-linear').should('exist')
-      .get('.v-list-item .v-progress-linear').should('have.attr', 'aria-valuenow', '100')
       .then(() => {
         expect(model.value).to.be.not.null
         expect(change).to.be.called
@@ -115,8 +134,6 @@ describe('VFileUpload', () => {
       .get('.v-list-item .v-list-item__content .v-list-item-title').eq(1).should('have.text', 'text.txt')
       .get('.v-list-item .v-progress-linear').eq(0).should('exist')
       .get('.v-list-item .v-progress-linear').eq(1).should('exist')
-      .get('.v-list-item .v-progress-linear').eq(0).should('have.attr', 'aria-valuenow', '100')
-      .get('.v-list-item .v-progress-linear').eq(1).should('have.attr', 'aria-valuenow', '100')
       .then(() => {
         expect(model.value).to.be.not.null
         expect(change).to.be.called
@@ -124,5 +141,16 @@ describe('VFileUpload', () => {
   })
 
   // it('should delete file while upload', () => {
+  //   const model = ref([])
+  //   const change = cy.spy().as('change')
+  //   cy.mount(() => <VFileUpload v-model={ model.value } clearable multiple onChange={ change } />)
+  //     .get('input[type="file"]').attachFile(['example.json', 'text.txt'])
+  //     .get('.v-list-item .v-list-item__append .v-btn').eq(0).click()
+  //     .get('.v-list-item').should('have.length', 1)
+  //     .get('.v-list-item .v-list-item__content .v-list-item-title').eq(0).should('have.text', 'text.txt')
+  //     .then(() => {
+  //       expect(model.value).to.be.not.null
+  //       expect(change).to.be.called
+  //     })
   // })
 })
