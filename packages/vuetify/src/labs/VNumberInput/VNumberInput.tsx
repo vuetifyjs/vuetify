@@ -293,6 +293,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             props.class,
           ]}
           { ...textFieldProps }
+          centerAffix={ true }
+          singleLine={ false } 
           style={ props.style }
           inputmode="decimal"
         >

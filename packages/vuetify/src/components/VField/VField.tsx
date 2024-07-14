@@ -76,7 +76,10 @@ export const makeVFieldProps = propsFactory({
   persistentClear: Boolean,
   prependInnerIcon: IconValue,
   reverse: Boolean,
-  singleLine: Boolean,
+  singleLine: {
+    type: Boolean,
+    default: null,
+  },
   variant: {
     type: String as PropType<Variant>,
     default: 'filled',
@@ -133,7 +136,7 @@ export const VField = genericComponent<new <T>(
     const { roundedClasses } = useRounded(props)
     const { rtlClasses } = useRtl()
 
-    const isSingleLine = computed(() => props.singleLine || props.centerAffix)
+    const isSingleLine = computed(() => props.singleLine != null ? props.singleLine : props.centerAffix)
     const isActive = computed(() => props.dirty || props.active)
     const hasLabel = computed(() => !isSingleLine.value && !!(props.label || slots.label))
 
