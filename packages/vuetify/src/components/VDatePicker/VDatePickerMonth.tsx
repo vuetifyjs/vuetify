@@ -93,6 +93,9 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
 
       if (model.value.length === 0) {
         rangeStart.value = undefined
+      } else if (model.value.length === 1) {
+        rangeStart.value = model.value[0]
+        rangeStop.value = undefined
       }
       if (!rangeStart.value) {
         rangeStart.value = _value
