@@ -94,6 +94,12 @@ describe('VFileUpload', () => {
       .get('.v-list-item .v-list-item__content .v-list-item-title').eq(1).should('have.text', 'text.txt')
   })
 
+  it('should update correct modelValue with multiple and limit', () => {
+    cy.mount(() => <VFileUpload autoUpload={ false } multiple limit={ 1 } />)
+      .get('input[type="file"]').attachFile(['example.json', 'text.txt'])
+      .get('.v-list-item').should('have.length', 1)
+  })
+
   it('should update correct modelValue with multiple and drop', () => {
     const model = ref([])
     const change = cy.spy().as('change')
@@ -106,6 +112,15 @@ describe('VFileUpload', () => {
       .get('.v-list-item').should('have.length', 2)
       .get('.v-list-item .v-list-item__content .v-list-item-title').eq(0).should('have.text', 'example.json')
       .get('.v-list-item .v-list-item__content .v-list-item-title').eq(1).should('have.text', 'text.txt')
+  })
+
+  it('should upload file with params', () => {
+    cy.intercept('POST', '/users').as('upload')
+    cy.mount(() => <VFileUpload />)
+      .get('input[type="file"]').attachFile(['example.json'])
+      .wait('@upload').then(interception => {
+        expect(interception.request.method).to.eq('POST')
+      })
   })
 
   it('should upload single file', () => {
@@ -140,17 +155,17 @@ describe('VFileUpload', () => {
       })
   })
 
-  // it('should delete file while upload', () => {
-  //   const model = ref([])
-  //   const change = cy.spy().as('change')
-  //   cy.mount(() => <VFileUpload v-model={ model.value } clearable multiple onChange={ change } />)
-  //     .get('input[type="file"]').attachFile(['example.json', 'text.txt'])
-  //     .get('.v-list-item .v-list-item__append .v-btn').eq(0).click()
-  //     .get('.v-list-item').should('have.length', 1)
-  //     .get('.v-list-item .v-list-item__content .v-list-item-title').eq(0).should('have.text', 'text.txt')
-  //     .then(() => {
-  //       expect(model.value).to.be.not.null
-  //       expect(change).to.be.called
-  //     })
-  // })
+  it('should delete file while upload', () => {
+    const model = ref([])
+    const change = cy.spy().as('change')
+    cy.mount(() => <VFileUpload v-model={ model.value } clearable multiple onChange={ change } />)
+      .get('input[type="file"]').attachFile(['example.json', 'text.txt'])
+      .get('.v-list-item .v-list-item__append .v-btn').eq(0).click()
+      .get('.v-list-item').should('have.length', 1)
+      .get('.v-list-item .v-list-item__content .v-list-item-title').eq(0).should('have.text', 'text.txt')
+      .then(() => {
+        expect(model.value).to.be.not.null
+        expect(change).to.be.called
+      })
+  })
 })

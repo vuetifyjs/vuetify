@@ -117,6 +117,7 @@ export const makeVFileUploadProps = propsFactory({
     type: Object as PropType<Record<string, string>>,
     default: () => ({ }),
   },
+  onError: Function as PropType<(err: Error) => void>,
   onProcess: Function as PropType<(file: File, e: ProgressEvent) => void>,
 
   ...makeDelayProps(),
@@ -165,10 +166,11 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
     const fileList = computed(() => {
       return wrapInArray(model.value).map(f => {
-        const progress = uploadMap.value.get(f)?.progress ?? 0
+        const { progress, state } = uploadMap.value.get(f) ?? {}
         return {
           file: f,
-          progress,
+          progress: progress ?? 0,
+          state,
         }
       })
     })
@@ -208,6 +210,9 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       } else {
         const array = model.value.slice()
         for (const file of files) {
+          if (props.multiple && props.limit > 0 && array.length >= props.limit) {
+            break
+          }
           if (!array.some(f => f.name === file.name)) {
             array.push(file)
           }
@@ -219,7 +224,9 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       emit('change', model.value)
 
       if (props.autoUpload) {
-        upload(files)
+        upload(files).catch((e: Error) => {
+          props.onError?.(e)
+        })
       }
     }
 
@@ -230,17 +237,22 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       if (!e.target) return
 
       const target = e.target as HTMLInputElement
-      const files = [...target.files ?? []]
-      // TODO add error handling
-      if (props.multiple && props.limit > 0 && files.length > props.limit) {
-        return
+      let files = [...target.files ?? []]
+
+      if (props.multiple && props.limit > 0) {
+        if (model.value.length >= props.limit) return
+        if (model.value.length + files.length > props.limit) {
+          files = files.slice(0, props.limit - model.value.length)
+        }
       }
       model.value = props.multiple ? [...model.value, ...files] : files
 
       emit('change', model.value)
 
       if (props.autoUpload) {
-        upload(files)
+        upload(files).catch((e: Error) => {
+          props.onError?.(e)
+        })
       }
     }
 
@@ -420,7 +432,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                         v-slots={ slots }
                       >
                         {
-                          props.autoUpload ? (<VProgressLinear modelValue={ item.progress } />) : null
+                          props.autoUpload && item.state !== 'complete' ? (<VProgressLinear modelValue={ item.progress } />) : null
                         }
                       </VFileUploadItem>
                     )}
