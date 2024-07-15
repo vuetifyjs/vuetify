@@ -42,9 +42,6 @@
     &--prepended
       padding-inline-start: $field-control-affixed-padding
 
-    &--appended
-      padding-inline-end: $field-control-affixed-padding
-
     &--variant-solo,
     &--variant-solo-filled
       background: $field-control-solo-background
@@ -187,6 +184,9 @@
   .v-field__append-inner
     grid-area: append-inner
     padding-inline-start: var(--v-field-padding-after)
+    
+  .v-field__last-inner-suffix
+    padding-inline-end: $field-control-affixed-padding
 
   .v-field__append-inner,
   .v-field__clearable,

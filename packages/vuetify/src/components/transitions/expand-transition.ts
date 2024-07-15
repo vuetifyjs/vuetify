@@ -22,7 +22,9 @@ export default function (expandedParentClass = '', x = false) {
         transition: el.style.transition,
         overflow: el.style.overflow,
         [sizeProperty]: el.style[sizeProperty],
+        paddingInline: el.style.paddingInline,
       }
+      el._computedPadding = getComputedStyle(el).paddingInline
     },
 
     onEnter (el: HTMLExpandElement) {
@@ -34,6 +36,7 @@ export default function (expandedParentClass = '', x = false) {
       const offset = `${el[offsetProperty]}px`
 
       el.style[sizeProperty] = '0'
+      el.style.paddingInline = '0'
 
       void el.offsetHeight // force reflow
 
@@ -45,6 +48,7 @@ export default function (expandedParentClass = '', x = false) {
 
       requestAnimationFrame(() => {
         el.style[sizeProperty] = offset
+        el.style.paddingInline = el._computedPadding
       })
     },
 
