@@ -109,8 +109,8 @@ export const VDateInput = genericComponent()({
           focused={ menu.value || isFocused.value }
           onFocus={ focus }
           onBlur={ blur }
-          onClick:control={ onClick }
-          onClick:prepend={ onClick }
+          onClick:control={ !props.readonly ? onClick : undefined }
+          onClick:prepend={ !props.readonly ? onClick : undefined }
         >
           <VMenu
             v-model={ menu.value }
