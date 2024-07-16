@@ -17,6 +17,7 @@ type Period = 'am' | 'pm'
 
 export const makeVTimePickerControlsProps = propsFactory({
   ampm: Boolean,
+  ampmInTitle: Boolean,
   ampmReadonly: Boolean,
   color: String,
   disabled: Boolean,
@@ -122,7 +123,7 @@ export const VTimePickerControls = genericComponent()({
             }
 
             {
-              props.ampm && (
+              props.ampm && props.ampmInTitle && (
                 <div
                   class={['v-time-picker-controls__ampm', {
                     'v-time-picker-controls__ampm--readonly': props.ampmReadonly,
