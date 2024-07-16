@@ -20,7 +20,7 @@ import type { PropType } from 'vue'
 import type { VToolbarSlots } from '@/components/VToolbar/VToolbar'
 
 export const makeVAppBarProps = propsFactory({
-  scrollBehavior: String as PropType<'hide' | 'inverted' | 'collapse' | 'elevate' | 'fade-image' | (string & {})>,
+  scrollBehavior: String as PropType<'hide' | 'fully-hide' | 'inverted' | 'collapse' | 'elevate' | 'fade-image' | (string & {})>,
   modelValue: {
     type: Boolean,
     default: true,

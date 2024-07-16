@@ -1,4 +1,5 @@
 {
+  "name": "@vuetify/vuetify-root",
   "private": true,
   "workspaces": [
     "packages/*"

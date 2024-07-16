@@ -141,10 +141,6 @@
 
     $root: &
 
-    @at-root #{selector.nest('.v-field.v-field--center-affix.v-field--variant-underlined, .v-field.v-field--center-affix.v-field--variant-plain', &)}
-      padding-top: unset
-      padding-bottom: unset
-    
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
@@ -199,8 +195,8 @@
       align-items: center
       padding-top: 0
 
-  .v-field:not(.v-field--center-affix).v-field--variant-underlined,
-  .v-field:not(.v-field--center-affix).v-field--variant-plain
+  .v-field.v-field--variant-underlined,
+  .v-field.v-field--variant-plain
     .v-field__append-inner,
     .v-field__clearable,
     .v-field__prepend-inner

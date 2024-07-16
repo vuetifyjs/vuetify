@@ -18,7 +18,7 @@ import Intersect from '@/directives/intersect'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
-import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -48,8 +48,8 @@ export const makeVTextareaProps = propsFactory({
   suffix: String,
   modelModifiers: Object as PropType<Record<string, boolean>>,
 
-  ...omit(makeVInputProps(), ['centerAffix']),
-  ...omit(makeVFieldProps(), ['centerAffix']),
+  ...makeVInputProps(),
+  ...makeVFieldProps(),
 }, 'VTextarea')
 
 type VTextareaSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
@@ -228,7 +228,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
-          centerAffix={ false }
+          centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
           focused={ isFocused.value }
         >
           {{
@@ -253,7 +253,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                 { ...fieldProps }
                 id={ id.value }
                 active={ isActive.value || isDirty.value }
-                centerAffix={ false }
+                centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }

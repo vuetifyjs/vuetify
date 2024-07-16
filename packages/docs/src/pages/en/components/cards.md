@@ -24,7 +24,7 @@ features:
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify />
+<VoPromotionsCardVuetify slug="vuetify-snips" />
 
 ## Usage
 
