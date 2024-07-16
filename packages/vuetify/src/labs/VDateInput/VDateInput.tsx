@@ -71,6 +71,8 @@ export const VDateInput = genericComponent()({
       return adapter.isValid(model.value) ? adapter.format(model.value, 'keyboardDate') : ''
     })
 
+    const isInteractive = computed(() => !props.disabled && !props.readonly)
+
     function onKeydown (e: KeyboardEvent) {
       if (e.key !== 'Enter') return
 
@@ -105,12 +107,12 @@ export const VDateInput = genericComponent()({
         <VTextField
           { ...textFieldProps }
           modelValue={ display.value }
-          onKeydown={ onKeydown }
+          onKeydown={ isInteractive.value ? onKeydown : undefined }
           focused={ menu.value || isFocused.value }
           onFocus={ focus }
           onBlur={ blur }
-          onClick:control={ !props.readonly ? onClick : undefined }
-          onClick:prepend={ !props.readonly ? onClick : undefined }
+          onClick:control={ isInteractive.value ? onClick : undefined }
+          onClick:prepend={ isInteractive.value ? onClick : undefined }
         >
           <VMenu
             v-model={ menu.value }
