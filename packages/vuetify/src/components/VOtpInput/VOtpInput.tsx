@@ -166,7 +166,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       e.preventDefault()
       e.stopPropagation()
 
-      const clipboardText = e?.clipboardData?.getData('Text') ?? ''
+      const clipboardText = e?.clipboardData?.getData('Text').slice(0, length.value) ?? ''
 
       if (isValidNumber(clipboardText)) return
 
