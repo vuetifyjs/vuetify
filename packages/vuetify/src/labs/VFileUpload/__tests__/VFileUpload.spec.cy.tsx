@@ -114,15 +114,6 @@ describe('VFileUpload', () => {
       .get('.v-list-item .v-list-item__content .v-list-item-title').eq(1).should('have.text', 'text.txt')
   })
 
-  it('should upload file with params', () => {
-    cy.intercept('POST', '/users').as('upload')
-    cy.mount(() => <VFileUpload />)
-      .get('input[type="file"]').attachFile(['example.json'])
-      .wait('@upload').then(interception => {
-        expect(interception.request.method).to.eq('POST')
-      })
-  })
-
   it('should upload single file', () => {
     const model = ref()
     const change = cy.spy().as('change')

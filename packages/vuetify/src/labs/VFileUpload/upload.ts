@@ -28,6 +28,7 @@ const useUpload = (options: Options) => {
       const { name, url, method, headers } = options
       const xhr = new XMLHttpRequest()
 
+      xhr.open(method, url, true)
       if (headers) {
         Object.keys(headers).forEach(key => {
           if (headers[key] !== null) {
@@ -79,7 +80,6 @@ const useUpload = (options: Options) => {
       if (options.withCredentials && 'withCredentials' in xhr) {
         xhr.withCredentials = true
       }
-      xhr.open(method, url, true)
       xhr.send(formData)
 
       uploadMap.value.set(file, {

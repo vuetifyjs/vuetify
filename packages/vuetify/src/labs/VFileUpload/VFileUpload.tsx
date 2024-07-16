@@ -221,7 +221,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
         model.value = array
       }
 
-      emit('change', model.value)
+      emit('change', files)
 
       if (props.autoUpload) {
         upload(files).catch((e: Error) => {
@@ -247,7 +247,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       }
       model.value = props.multiple ? [...model.value, ...files] : files
 
-      emit('change', model.value)
+      emit('change', files)
 
       if (props.autoUpload) {
         upload(files).catch((e: Error) => {
