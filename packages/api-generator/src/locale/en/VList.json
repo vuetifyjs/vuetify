@@ -7,6 +7,8 @@
     "link": "Applies `v-list-item` hover styles. Useful when using the item is an _activator_.",
     "nav": "An alternative styling that reduces `v-list-item` width and rounds the corners. Typically used with **[v-navigation-drawer](/components/navigation-drawers)**.",
     "subheader": "Removes the top padding from `v-list-subheader` components. When used as a **String**, renders a subheader for you.",
-    "slim": "Reduces horizontal spacing for badges, icons, tooltips, and avatars within slim list items to create a more compact visual representation."
+    "slim": "Reduces horizontal spacing for badges, icons, tooltips, and avatars within slim list items to create a more compact visual representation.",
+    "collapseIcon": "Icon to display when the list item is expanded.",
+    "expandIcon": "Icon to display when the list item is collapsed."
   }
 }
