@@ -34,7 +34,7 @@ export function useOptions ({
     if (deepEqual(oldOptions, options.value)) return
 
     // Reset page when searching
-    if (oldOptions && oldOptions.search !== options.value.search) {
+    if (oldOptions?.search != null && oldOptions.search !== options.value.search) {
       page.value = 1
     }
 
