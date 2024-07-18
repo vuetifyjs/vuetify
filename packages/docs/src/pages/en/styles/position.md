@@ -16,7 +16,7 @@ features:
 
 Utilities for controlling the positioning of elements in your application.
 
-<page-features />
+<PageFeatures />
 
 | Class | Properties |
 | - | - |
@@ -30,7 +30,7 @@ Utilities for controlling the positioning of elements in your application.
 | **bottom-0** | bottom: 0; |
 | **left-0** | left: 0; |
 
-<entry />
+<PromotedEntry />
 
 ## Usage
 
