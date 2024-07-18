@@ -12,8 +12,8 @@ import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, watchEffect } from 'vue'
-import { clamp, genericComponent, getDecimals, omit, propsFactory, useRender } from '@/util'
+import { computed, ref, watchEffect } from 'vue'
+import { clamp, extractNumber, genericComponent, getDecimals, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -67,6 +67,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
 
+    const textModel = ref<string | null>(null)
+    const hasSign = computed(() => /^(\+|-)/.test(textModel.value ?? String(model.value)))
+    const hasDecimalSeparator = computed(() => (textModel.value ?? String(model.value)).includes('.'))
+
     const stepDecimals = computed(() => getDecimals(props.step))
     const modelDecimals = computed(() => model.value != null ? getDecimals(model.value) : 0)
 
@@ -108,6 +112,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     function toggleUpDown (increment = true) {
       if (controlsDisabled.value) return
+
       if (model.value == null) {
         model.value = 0
         return
@@ -149,13 +154,25 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       }
 
       // Only numbers, +, - & . are allowed
-      if (!/^[0-9\-+.]+$/.test(e.key)) {
+      if ((hasSign.value && ['+', '-'].includes(e.key)) ||
+        (hasDecimalSeparator.value && e.key === '.') ||
+        !/^[0-9\-+.]+$/.test(e.key)) {
         e.preventDefault()
       }
     }
 
     function onModelUpdate (v: string) {
-      model.value = v ? +(v) : undefined
+      if (/\.(\d*0+)?$/.test(v) || ['+', '-'].includes(v)) {
+        textModel.value = v
+      } else {
+        textModel.value = null
+      }
+
+      model.value = v ? extractNumber(v) : undefined
+    }
+
+    function onBlur (_: FocusEvent) {
+      textModel.value = null
     }
 
     function onControlMousedown (e: MouseEvent) {
@@ -277,9 +294,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
       return (
         <VTextField
-          modelValue={ model.value }
+          modelValue={ textModel.value ?? model.value }
           onUpdate:modelValue={ onModelUpdate }
           onKeydown={ onKeydown }
+          onBlur={ onBlur }
           class={[
             'v-number-input',
             {
