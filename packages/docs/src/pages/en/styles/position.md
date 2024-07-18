@@ -40,28 +40,43 @@ The `position` utilities allow you to quickly style the positioning of any eleme
 
 The default position value for all elements is `static`. This means that the element is positioned according to the normal flow of the document. The `top`, `right`, `bottom`, `left` properties have no effect on a statically positioned element.
 
-<example file="position/static" />
+<ExamplesExample file="position/static" />
 
 ### Relative
 
 The `position-relative` class allows you to position an element relative to its normal position in the document. This means that the `top`, `right`, `bottom`, and `left` properties can be used to move the element from its normal position.
 
-<example file="position/relative" />
+<ExamplesExample file="position/relative" />
 
 ### Absolute
 
 The `position-absolute` class allows you to position an element relative to its closest positioned ancestor. If no positioned ancestor is found, the element is positioned relative to the document body.
 
-<example file="position/absolute" />
+<ExamplesExample file="position/absolute" />
 
 ### Fixed
 
 The `position-fixed` class allows you to position an element relative to the viewport. This means that the element will stay in the same position even when the page is scrolled.
 
-<example file="position/fixed" />
+<ExamplesExample file="position/fixed" />
 
 ### Sticky
 
 The `position-sticky` class allows you to position an element based on the user's scroll position. The element is treated as `relative` until it crosses a specified threshold, at which point it is treated as `fixed`.
 
-<example file="position/sticky" />
+<ExamplesExample file="position/sticky" />
+
+## SASS Variables
+
+Disable position class generation by setting $position, $top, $right, $bottom, and $left to **false**.
+
+```scss { resource="src/styles/settings.scss" }
+@use 'vuetify/settings' with (
+  $utilities: (
+    position: false,
+    top: false,
+    right: false,
+    bottom: false,
+    left: false
+  )
+);
