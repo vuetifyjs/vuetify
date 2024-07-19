@@ -1,5 +1,5 @@
 // Composables
-import { createDisplay as _createDisplay } from '../display'
+import { createDisplay } from '../display'
 import { createClientFeatures } from '@/composables/clientFeatures'
 import { createSSRHandler } from '@/composables/ssr'
 
@@ -26,12 +26,6 @@ const breakpoints = [
   'xlAndDown',
   'xlAndUp',
 ] as const
-
-function createDisplay (options?: DisplayOptions, ssr?: SSROptions) {
-  const ssrHandler = createSSRHandler()
-  const clientFeatures = createClientFeatures(ssrHandler)
-  return _createDisplay(ssrHandler, clientFeatures, options, ssr)
-}
 
 describe('display', () => {
   it.each([

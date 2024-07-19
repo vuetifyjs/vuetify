@@ -1,3 +1,7 @@
+// Composables
+import { createClientFeatures } from '@/composables/clientFeatures'
+import { createSSRHandler } from '@/composables/ssr'
+
 // Utilities
 import { computed, inject, reactive, shallowRef, toRefs, watchEffect } from 'vue'
 import { getCurrentInstanceName, mergeDeep, propsFactory } from '@/util'
@@ -151,10 +155,10 @@ function getPlatform (ssrHandler: SSRHandler, clientFeatures: ClientFeatures, ss
 }
 
 export function createDisplay (
-  ssrHandler: SSRHandler,
-  clientFeatures: ClientFeatures,
   options?: DisplayOptions,
-  ssr?: SSROptions
+  ssr?: SSROptions,
+  ssrHandler: SSRHandler = createSSRHandler(),
+  clientFeatures: ClientFeatures = createClientFeatures(),
 ): DisplayInstance {
   const { thresholds, mobileBreakpoint } = parseDisplayOptions(options)
 

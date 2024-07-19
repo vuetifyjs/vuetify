@@ -22,9 +22,5 @@ export function createSSRHandler (ssrHandler?: SSRHandler): SSRHandler {
 }
 
 export function useSSRHandler () {
-  const ssrHandler = inject(SSRSymbol)
-
-  if (!ssrHandler) throw new Error('Could not find Vuetify SSR handler injection')
-
-  return ssrHandler
+  return inject(SSRSymbol) ?? createSSRHandler()
 }

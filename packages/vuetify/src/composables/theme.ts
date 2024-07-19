@@ -1,3 +1,6 @@
+// Composables
+import { createSSRHandler } from '@/composables/ssr'
+
 // Utilities
 import {
   computed,
@@ -208,7 +211,10 @@ function parseThemeOptions (options: ThemeOptions = genDefaults()): InternalThem
 }
 
 // Composables
-export function createTheme ({ isClient }: SSRHandler, options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
+export function createTheme (
+  options?: ThemeOptions,
+  { isClient }: SSRHandler = createSSRHandler(),
+): ThemeInstance & { install: (app: App) => void } {
   const parsedOptions = parseThemeOptions(options)
   const name = ref(parsedOptions.defaultTheme)
   const themes = ref(parsedOptions.themes)

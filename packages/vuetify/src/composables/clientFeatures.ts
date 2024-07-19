@@ -1,3 +1,6 @@
+// Composables
+import { createSSRHandler } from '@/composables/ssr'
+
 // Utilities
 import { inject } from 'vue'
 
@@ -14,7 +17,7 @@ export interface ClientFeatures {
 
 export const ClientFeaturesSymbol: InjectionKey<ClientFeatures> = Symbol.for('vuetify:clientFeatures')
 
-export function createClientFeatures (ssrHandler: SSRHandler) {
+export function createClientFeatures (ssrHandler: SSRHandler = createSSRHandler()) {
   return {
     supportsSelector: selector => {
       if (ssrHandler.isServer) return false
@@ -30,9 +33,5 @@ export function createClientFeatures (ssrHandler: SSRHandler) {
 }
 
 export function useClientFeatures () {
-  const clientFeatures = inject(ClientFeaturesSymbol)
-
-  if (!clientFeatures) throw new Error('Could not find Vuetify client features injection')
-
-  return clientFeatures
+  return inject(ClientFeaturesSymbol) ?? createClientFeatures()
 }
