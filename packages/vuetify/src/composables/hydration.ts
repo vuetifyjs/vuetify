@@ -3,10 +3,10 @@ import { useDisplay } from '@/composables/display'
 import { useSSRHandler } from '@/composables/ssr'
 
 // Utilities
-import { onMounted, shallowRef } from 'vue'
+import { onMounted, ref, shallowRef, watch } from 'vue'
 
 export function useHydration () {
-  const { isServer } = useSSRHandler()
+  const { isServer, isHydrated } = useSSRHandler()
 
   if (isServer) return shallowRef(false)
 
@@ -14,8 +14,14 @@ export function useHydration () {
 
   if (ssr) {
     const isMounted = shallowRef(false)
+    const mounted = ref(false)
     onMounted(() => {
-      isMounted.value = true
+      mounted.value = true
+    })
+    watch([mounted, isHydrated], ([h, m]) => {
+      if (h && m) {
+        isMounted.value = true
+      }
     })
     return isMounted
   } else {

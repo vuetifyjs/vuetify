@@ -1,19 +1,21 @@
 // Utilities
-import { inject } from 'vue'
+import { inject, ref } from 'vue'
 
 // Types
-import type { InjectionKey } from 'vue'
+import type { InjectionKey, Ref } from 'vue'
 
 export interface SSRHandler {
+  isHydrated: Ref<boolean>
   isClient: boolean
   isServer: boolean
-  registerSuspenseResolve?: (callback: () => void) => void
+  registerHydratedCallback?: (callback: () => void) => void
 }
 
 export const SSRSymbol: InjectionKey<SSRHandler> = Symbol.for('vuetify:ssr')
 
 export function createSSRHandler (ssrHandler?: SSRHandler): SSRHandler {
   return ssrHandler ?? {
+    isHydrated: ref(false),
     isClient: typeof window !== 'undefined',
     isServer: typeof window === 'undefined',
   }

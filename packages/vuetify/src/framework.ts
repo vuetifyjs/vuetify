@@ -94,15 +94,23 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     app.provide(GoToSymbol, goTo)
 
     if (ssr.isClient && options.ssr) {
-      if (typeof ssr.registerSuspenseResolve === 'function') {
-        ssr.registerSuspenseResolve(() => {
+      if (typeof ssr.registerHydratedCallback === 'function') {
+        ssr.registerHydratedCallback(() => {
+          display.update()
+        })
+      } else if (app.$nuxt) {
+        app.$nuxt.hook('app:suspense:resolve', () => {
+          ssr.isHydrated.value = true
           display.update()
         })
       } else {
         const { mount } = app
         app.mount = (...args) => {
           const vm = mount(...args)
-          nextTick(() => display.update())
+          nextTick(() => {
+            ssr.isHydrated.value = true
+            display.update()
+          })
           app.mount = mount
           return vm
         }
