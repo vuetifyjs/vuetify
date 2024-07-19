@@ -1,7 +1,8 @@
 /* eslint-disable jest/no-commented-out-tests */
 
 // Composables
-import { createTheme } from '../theme'
+import { createTheme as _createTheme } from '../theme'
+import { createSSRHandler } from '@/composables/ssr'
 
 // Utilities
 import { describe, expect, it } from '@jest/globals'
@@ -9,6 +10,12 @@ import { createApp } from 'vue'
 
 // Types
 import type { App } from 'vue'
+import type { ThemeOptions } from '../theme'
+
+function createTheme (options?: ThemeOptions) {
+  const ssrHandler = createSSRHandler()
+  return _createTheme(ssrHandler, options)
+}
 
 describe('createTheme', () => {
   let app: App

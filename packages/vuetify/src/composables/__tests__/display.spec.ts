@@ -1,9 +1,14 @@
 // Composables
-import { createDisplay } from '../display'
+import { createDisplay as _createDisplay } from '../display'
+import { createClientFeatures } from '@/composables/clientFeatures'
+import { createSSRHandler } from '@/composables/ssr'
 
 // Utilities
 import { describe, expect, it } from '@jest/globals'
 import { resizeWindow } from '@/../test/index'
+
+// Types
+import type { DisplayOptions, SSROptions } from '../display'
 
 const breakpoints = [
   'xs',
@@ -21,6 +26,12 @@ const breakpoints = [
   'xlAndDown',
   'xlAndUp',
 ] as const
+
+function createDisplay (options?: DisplayOptions, ssr?: SSROptions) {
+  const ssrHandler = createSSRHandler()
+  const clientFeatures = createClientFeatures(ssrHandler)
+  return _createDisplay(ssrHandler, clientFeatures, options, ssr)
+}
 
 describe('display', () => {
   it.each([
