@@ -1,12 +1,15 @@
+// Composables
+import { useSSRHandler } from '@/composables/ssr'
+
 // Utilities
 import { computed, warn } from 'vue'
-import { IN_BROWSER } from '@/util'
 
 export function useTeleport (target: () => (boolean | string | ParentNode)) {
+  const { isServer } = useSSRHandler()
   const teleportTarget = computed(() => {
     const _target = target()
 
-    if (_target === true || !IN_BROWSER) return undefined
+    if (_target === true || isServer) return undefined
 
     const targetElement =
       _target === false ? document.body

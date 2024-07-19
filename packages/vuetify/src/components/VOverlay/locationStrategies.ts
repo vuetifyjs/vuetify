@@ -1,4 +1,5 @@
 // Composables
+import { useSSRHandler } from '@/composables/ssr'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
@@ -14,7 +15,6 @@ import {
   flipSide,
   getAxis,
   getScrollParents,
-  IN_BROWSER,
   isFixedPosition,
   nullifyTransforms,
   parseAnchor,
@@ -76,10 +76,11 @@ export function useLocationStrategies (
   props: StrategyProps,
   data: LocationStrategyData
 ) {
+  const { isClient } = useSSRHandler()
   const contentStyles = ref({})
   const updateLocation = ref<(e: Event) => void>()
 
-  if (IN_BROWSER) {
+  if (isClient) {
     useToggleScope(() => !!(data.isActive.value && props.locationStrategy), reset => {
       watch(() => props.locationStrategy, reset)
       onScopeDispose(() => {

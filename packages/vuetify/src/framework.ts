@@ -1,15 +1,17 @@
 // Composables
+import { ClientFeaturesSymbol, createClientFeatures } from '@/composables/clientFeatures'
 import { createDate, DateAdapterSymbol, DateOptionsSymbol } from '@/composables/date/date'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createGoTo, GoToSymbol } from '@/composables/goto'
 import { createIcons, IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
+import { createSSRHandler, SSRSymbol } from '@/composables/ssr'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
 
 // Utilities
 import { nextTick, reactive } from 'vue'
-import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
+import { defineComponent, getUid, mergeDeep } from '@/util'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
@@ -19,6 +21,7 @@ import type { DisplayOptions, SSROptions } from '@/composables/display'
 import type { GoToOptions } from '@/composables/goto'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
+import type { SSRHandler } from '@/composables/ssr'
 import type { ThemeOptions } from '@/composables/theme'
 export * from './composables'
 export type { DateOptions, DateInstance, DateModule } from '@/composables/date'
@@ -36,12 +39,13 @@ export interface VuetifyOptions {
   icons?: IconOptions
   locale?: LocaleOptions & RtlOptions
   ssr?: SSROptions
+  ssrHandler?: SSRHandler
 }
 
 export interface Blueprint extends Omit<VuetifyOptions, 'blueprint'> {}
 
 export function createVuetify (vuetify: VuetifyOptions = {}) {
-  const { blueprint, ...rest } = vuetify
+  const { blueprint, ssrHandler, ...rest } = vuetify
   const options: VuetifyOptions = mergeDeep(blueprint, rest)
   const {
     aliases = {},
@@ -49,9 +53,11 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     directives = {},
   } = options
 
+  const ssr = createSSRHandler(ssrHandler)
+  const clientFeatures = createClientFeatures(ssr)
   const defaults = createDefaults(options.defaults)
-  const display = createDisplay(options.display, options.ssr)
-  const theme = createTheme(options.theme)
+  const display = createDisplay(ssr, clientFeatures, options.display, options.ssr)
+  const theme = createTheme(ssr, options.theme)
   const icons = createIcons(options.icons)
   const locale = createLocale(options.locale)
   const date = createDate(options.date, locale)
@@ -76,6 +82,8 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
 
     theme.install(app)
 
+    app.provide(SSRSymbol, ssr)
+    app.provide(ClientFeaturesSymbol, clientFeatures)
     app.provide(DefaultsSymbol, defaults)
     app.provide(DisplaySymbol, display)
     app.provide(ThemeSymbol, theme)
@@ -85,9 +93,9 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     app.provide(DateAdapterSymbol, date.instance)
     app.provide(GoToSymbol, goTo)
 
-    if (IN_BROWSER && options.ssr) {
-      if (app.$nuxt) {
-        app.$nuxt.hook('app:suspense:resolve', () => {
+    if (ssr.isClient && options.ssr) {
+      if (typeof ssr.registerSuspenseResolve === 'function') {
+        ssr.registerSuspenseResolve(() => {
           display.update()
         })
       } else {
@@ -108,6 +116,8 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
         computed: {
           $vuetify () {
             return reactive({
+              ssr: inject.call(this, SSRSymbol),
+              clientFeatures: inject.call(this, ClientFeaturesSymbol),
               defaults: inject.call(this, DefaultsSymbol),
               display: inject.call(this, DisplaySymbol),
               theme: inject.call(this, ThemeSymbol),
@@ -123,6 +133,8 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
 
   return {
     install,
+    ssr,
+    clientFeatures,
     defaults,
     display,
     theme,

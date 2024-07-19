@@ -3,6 +3,7 @@ import { VMenuSymbol } from '@/components/VMenu/shared'
 
 // Composables
 import { makeDelayProps, useDelay } from '@/composables/delay'
+import { useSSRHandler } from '@/composables/ssr'
 
 // Utilities
 import {
@@ -19,7 +20,6 @@ import {
 import {
   bindProps,
   getCurrentInstance,
-  IN_BROWSER,
   matchesSelector,
   propsFactory,
   templateRef,
@@ -76,6 +76,7 @@ export function useActivator (
   { isActive, isTop }: { isActive: Ref<boolean>, isTop: Ref<boolean> }
 ) {
   const vm = getCurrentInstance('useActivator')
+  const { isClient } = useSSRHandler()
   const activatorEl = ref<HTMLElement>()
 
   let isHovered = false
@@ -251,7 +252,7 @@ export function useActivator (
 
   let scope: EffectScope
   watch(() => !!props.activator, val => {
-    if (val && IN_BROWSER) {
+    if (val && isClient) {
       scope = effectScope()
       scope.run(() => {
         _useActivator(props, vm, { activatorEl, activatorEvents })

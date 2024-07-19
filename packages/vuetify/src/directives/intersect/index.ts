@@ -1,5 +1,5 @@
-// Utilities
-import { SUPPORTS_INTERSECTION } from '@/util'
+// Composables
+import { useClientFeatures } from '@/composables/clientFeatures'
 
 // Types
 import type {
@@ -21,7 +21,9 @@ export interface ObserveDirectiveBinding extends Omit<DirectiveBinding, 'modifie
 }
 
 function mounted (el: HTMLElement, binding: ObserveDirectiveBinding) {
-  if (!SUPPORTS_INTERSECTION) return
+  const clientFeatures = useClientFeatures()
+
+  if (!clientFeatures.supportsIntersection) return
 
   const modifiers = binding.modifiers || {}
   const value = binding.value

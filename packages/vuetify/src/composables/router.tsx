@@ -1,3 +1,6 @@
+// Composables
+import { useSSRHandler } from '@/composables/ssr'
+
 // Utilities
 import {
   computed,
@@ -6,7 +9,7 @@ import {
   resolveDynamicComponent,
   toRef,
 } from 'vue'
-import { deepEqual, getCurrentInstance, hasEvent, IN_BROWSER, propsFactory } from '@/util'
+import { deepEqual, getCurrentInstance, hasEvent, propsFactory } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref, SetupContext } from 'vue'
@@ -103,8 +106,9 @@ export function useBackButton (router: Router | undefined, cb: (next: Navigation
   let popped = false
   let removeBefore: (() => void) | undefined
   let removeAfter: (() => void) | undefined
+  const { isClient } = useSSRHandler()
 
-  if (IN_BROWSER) {
+  if (isClient) {
     nextTick(() => {
       window.addEventListener('popstate', onPopstate)
       removeBefore = router?.beforeEach((to, from, next) => {

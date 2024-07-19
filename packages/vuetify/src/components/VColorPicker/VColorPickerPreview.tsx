@@ -6,6 +6,7 @@ import { VBtn } from '@/components/VBtn'
 import { VSlider } from '@/components/VSlider'
 
 // Composables
+import { useClientFeatures } from '@/composables/clientFeatures'
 import { makeComponentProps } from '@/composables/component'
 
 // Utilities
@@ -16,7 +17,6 @@ import {
   HexToHSV,
   HSVtoCSS,
   propsFactory,
-  SUPPORTS_EYE_DROPPER,
   useRender,
 } from '@/util'
 
@@ -45,11 +45,12 @@ export const VColorPickerPreview = defineComponent({
 
   setup (props, { emit }) {
     const abortController = new AbortController()
+    const clientFeatures = useClientFeatures()
 
     onUnmounted(() => abortController.abort())
 
     async function openEyeDropper () {
-      if (!SUPPORTS_EYE_DROPPER) return
+      if (!clientFeatures.supportsEyeDropper) return
 
       const eyeDropper = new window.EyeDropper()
       try {
@@ -70,7 +71,7 @@ export const VColorPickerPreview = defineComponent({
         ]}
         style={ props.style }
       >
-        { SUPPORTS_EYE_DROPPER && (
+        { clientFeatures.supportsEyeDropper && (
           <div class="v-color-picker-preview__eye-dropper" key="eyeDropper">
             <VBtn onClick={ openEyeDropper } icon="$eyeDropper" variant="plain" density="comfortable" />
           </div>

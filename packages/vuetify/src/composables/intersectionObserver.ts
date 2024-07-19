@@ -1,12 +1,15 @@
+// Composables
+import { useClientFeatures } from '@/composables/clientFeatures'
+
 // Utilities
 import { onBeforeUnmount, ref, shallowRef, watch } from 'vue'
-import { SUPPORTS_INTERSECTION } from '@/util'
 
 export function useIntersectionObserver (callback?: IntersectionObserverCallback, options?: IntersectionObserverInit) {
   const intersectionRef = ref<HTMLElement>()
   const isIntersecting = shallowRef(false)
+  const clientFeatures = useClientFeatures()
 
-  if (SUPPORTS_INTERSECTION) {
+  if (clientFeatures.supportsIntersection) {
     const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
       callback?.(entries, observer)
 

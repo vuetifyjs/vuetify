@@ -1,6 +1,9 @@
+// Composables
+import { useClientFeatures } from '@/composables/clientFeatures'
+import { useSSRHandler } from '@/composables/ssr'
+
 // Utilities
 import { capitalize, Comment, computed, Fragment, isVNode, reactive, readonly, shallowRef, toRefs, unref, watchEffect } from 'vue'
-import { IN_BROWSER } from '@/util/globals'
 
 // Types
 import type {
@@ -675,12 +678,7 @@ export function noop () {}
 
 /** Returns null if the selector is not supported or we can't check */
 export function matchesSelector (el: Element | undefined, selector: string): boolean | null {
-  const supportsSelector = IN_BROWSER &&
-    typeof CSS !== 'undefined' &&
-    typeof CSS.supports !== 'undefined' &&
-    CSS.supports(`selector(${selector})`)
-
-  if (!supportsSelector) return null
+  if (!useClientFeatures().supportsSelector(selector)) return null
 
   try {
     return !!el && el.matches(selector)
@@ -701,7 +699,7 @@ export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildre
 }
 
 export function defer (timeout: number, cb: () => void) {
-  if (!IN_BROWSER || timeout === 0) {
+  if (useSSRHandler().isServer || timeout === 0) {
     cb()
 
     return () => {}

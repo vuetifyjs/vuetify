@@ -1,7 +1,10 @@
+// Composables
+import { useSSRHandler } from '@/composables/ssr'
+
 // Utilities
 import { effectScope, onScopeDispose, watchEffect } from 'vue'
 import { requestNewFrame } from './requestNewFrame'
-import { convertToUnit, getScrollParents, hasScrollbar, IN_BROWSER, propsFactory } from '@/util'
+import { convertToUnit, getScrollParents, hasScrollbar, propsFactory } from '@/util'
 
 // Types
 import type { EffectScope, PropType, Ref } from 'vue'
@@ -40,7 +43,8 @@ export function useScrollStrategies (
   props: StrategyProps,
   data: ScrollStrategyData
 ) {
-  if (!IN_BROWSER) return
+  const { isServer } = useSSRHandler()
+  if (isServer) return
 
   let scope: EffectScope | undefined
   watchEffect(async () => {

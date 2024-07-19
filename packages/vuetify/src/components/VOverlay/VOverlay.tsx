@@ -14,6 +14,7 @@ import { useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useBackButton, useRouter } from '@/composables/router'
 import { useScopeId } from '@/composables/scopeId'
+import { useSSRHandler } from '@/composables/ssr'
 import { useStack } from '@/composables/stack'
 import { useTeleport } from '@/composables/teleport'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -39,7 +40,6 @@ import {
   convertToUnit,
   genericComponent,
   getScrollParent,
-  IN_BROWSER,
   propsFactory,
   standardEasing,
   useRender,
@@ -134,6 +134,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
   setup (props, { slots, attrs, emit }) {
     const model = useProxiedModel(props, 'modelValue')
+    const { isClient } = useSSRHandler()
     const isActive = computed({
       get: () => model.value,
       set: v => {
@@ -200,28 +201,27 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       )
     }
 
-    IN_BROWSER && watch(isActive, val => {
-      if (val) {
-        window.addEventListener('keydown', onKeydown)
-      } else {
+    if (isClient) {
+      watch(isActive, val => {
+        if (val) {
+          window.addEventListener('keydown', onKeydown)
+        } else {
+          window.removeEventListener('keydown', onKeydown)
+        }
+      }, { immediate: true })
+
+      onBeforeUnmount(() => {
         window.removeEventListener('keydown', onKeydown)
-      }
-    }, { immediate: true })
-
-    onBeforeUnmount(() => {
-      if (!IN_BROWSER) return
-
-      window.removeEventListener('keydown', onKeydown)
-    })
-
-    function onKeydown (e: KeyboardEvent) {
-      if (e.key === 'Escape' && globalTop.value) {
-        if (!props.persistent) {
-          isActive.value = false
-          if (contentEl.value?.contains(document.activeElement)) {
-            activatorEl.value?.focus()
-          }
-        } else animateClick()
+      })
+      function onKeydown (e: KeyboardEvent) {
+        if (e.key === 'Escape' && globalTop.value) {
+          if (!props.persistent) {
+            isActive.value = false
+            if (contentEl.value?.contains(document.activeElement)) {
+              activatorEl.value?.focus()
+            }
+          } else animateClick()
+        }
       }
     }
 

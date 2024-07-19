@@ -1,10 +1,11 @@
 // Composables
 import { useDisplay } from '@/composables/display'
 import { useResizeObserver } from '@/composables/resizeObserver'
+import { useSSRHandler } from '@/composables/ssr'
 
 // Utilities
 import { computed, nextTick, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
-import { clamp, debounce, IN_BROWSER, propsFactory } from '@/util'
+import { clamp, debounce, propsFactory } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -30,6 +31,7 @@ export const makeVirtualProps = propsFactory({
 
 export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   const display = useDisplay()
+  const { isClient } = useSSRHandler()
 
   const itemHeight = shallowRef(0)
   watchEffect(() => {
@@ -101,7 +103,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     if (!~targetScrollIndex) return
 
     nextTick(() => {
-      IN_BROWSER && window.requestAnimationFrame(() => {
+      isClient && window.requestAnimationFrame(() => {
         scrollToIndex(targetScrollIndex)
         targetScrollIndex = -1
       })

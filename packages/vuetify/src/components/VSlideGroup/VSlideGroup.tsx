@@ -13,6 +13,7 @@ import { makeGroupProps, useGroup } from '@/composables/group'
 import { IconValue } from '@/composables/icons'
 import { useRtl } from '@/composables/locale'
 import { useResizeObserver } from '@/composables/resizeObserver'
+import { useSSRHandler } from '@/composables/ssr'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
@@ -25,7 +26,7 @@ import {
   getScrollPosition,
   getScrollSize,
 } from './helpers'
-import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
+import { focusableChildren, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType } from 'vue'
@@ -104,6 +105,7 @@ export const VSlideGroup = genericComponent<new <T>(
     const { isRtl } = useRtl()
     const { displayClasses, mobile } = useDisplay(props)
     const group = useGroup(props, props.symbol)
+    const { isClient, isServer } = useSSRHandler()
     const isOverflowing = shallowRef(false)
     const scrollOffset = shallowRef(0)
     const containerSize = shallowRef(0)
@@ -134,7 +136,7 @@ export const VSlideGroup = genericComponent<new <T>(
       return group.items.value.findIndex(item => item.id === group.selected.value[group.selected.value.length - 1])
     })
 
-    if (IN_BROWSER) {
+    if (isClient) {
       let frame = -1
       watch(() => [group.selected.value, containerRect.value, contentRect.value, isHorizontal.value], () => {
         cancelAnimationFrame(frame)
@@ -182,7 +184,7 @@ export const VSlideGroup = genericComponent<new <T>(
     }
 
     function scrollToPosition (newPosition: number) {
-      if (!IN_BROWSER || !containerRef.el) return
+      if (isServer || !containerRef.el) return
 
       const offsetSize = getOffsetSize(isHorizontal.value, containerRef.el)
       const scrollPosition = getScrollPosition(isHorizontal.value, isRtl.value, containerRef.el)

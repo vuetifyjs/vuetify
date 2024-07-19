@@ -1,10 +1,11 @@
 // Utilities
 import { computed, inject, reactive, shallowRef, toRefs, watchEffect } from 'vue'
 import { getCurrentInstanceName, mergeDeep, propsFactory } from '@/util'
-import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
+import type { ClientFeatures } from '@/composables/clientFeatures'
+import type { SSRHandler } from '@/composables/ssr'
 
 export const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
 
@@ -99,20 +100,20 @@ const parseDisplayOptions = (options: DisplayOptions = defaultDisplayOptions) =>
   return mergeDeep(defaultDisplayOptions, options) as InternalDisplayOptions
 }
 
-function getClientWidth (ssr?: SSROptions) {
-  return IN_BROWSER && !ssr
+function getClientWidth (ssrHandler: SSRHandler, ssr?: SSROptions) {
+  return ssrHandler.isClient && !ssr
     ? window.innerWidth
     : (typeof ssr === 'object' && ssr.clientWidth) || 0
 }
 
-function getClientHeight (ssr?: SSROptions) {
-  return IN_BROWSER && !ssr
+function getClientHeight (ssrHandler: SSRHandler, ssr?: SSROptions) {
+  return ssrHandler.isClient && !ssr
     ? window.innerHeight
     : (typeof ssr === 'object' && ssr.clientHeight) || 0
 }
 
-function getPlatform (ssr?: SSROptions): DisplayPlatform {
-  const userAgent = IN_BROWSER && !ssr
+function getPlatform (ssrHandler: SSRHandler, clientFeatures: ClientFeatures, ssr?: SSROptions): DisplayPlatform {
+  const userAgent = ssrHandler.isClient && !ssr
     ? window.navigator.userAgent
     : 'ssr'
 
@@ -144,26 +145,31 @@ function getPlatform (ssr?: SSROptions): DisplayPlatform {
     win,
     mac,
     linux,
-    touch: SUPPORTS_TOUCH,
+    touch: clientFeatures.supportsTouch,
     ssr: userAgent === 'ssr',
   }
 }
 
-export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): DisplayInstance {
+export function createDisplay (
+  ssrHandler: SSRHandler,
+  clientFeatures: ClientFeatures,
+  options?: DisplayOptions,
+  ssr?: SSROptions
+): DisplayInstance {
   const { thresholds, mobileBreakpoint } = parseDisplayOptions(options)
 
-  const height = shallowRef(getClientHeight(ssr))
-  const platform = shallowRef(getPlatform(ssr))
+  const height = shallowRef(getClientHeight(ssrHandler, ssr))
+  const platform = shallowRef(getPlatform(ssrHandler, clientFeatures, ssr))
   const state = reactive({} as DisplayInstance)
-  const width = shallowRef(getClientWidth(ssr))
+  const width = shallowRef(getClientWidth(ssrHandler, ssr))
 
   function updateSize () {
-    height.value = getClientHeight()
-    width.value = getClientWidth()
+    height.value = getClientHeight(ssrHandler)
+    width.value = getClientWidth(ssrHandler)
   }
   function update () {
     updateSize()
-    platform.value = getPlatform()
+    platform.value = getPlatform(ssrHandler, clientFeatures)
   }
 
   // eslint-disable-next-line max-statements
@@ -207,7 +213,7 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
     state.thresholds = thresholds
   })
 
-  if (IN_BROWSER) {
+  if (ssrHandler.isClient) {
     window.addEventListener('resize', updateSize, { passive: true })
   }
 

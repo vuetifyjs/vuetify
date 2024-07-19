@@ -5,6 +5,7 @@ import './VImg.sass'
 import { makeVResponsiveProps, VResponsive } from '@/components/VResponsive/VResponsive'
 
 // Composables
+import { useClientFeatures } from '@/composables/clientFeatures'
 import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -31,7 +32,6 @@ import {
   genericComponent,
   getCurrentInstance,
   propsFactory,
-  SUPPORTS_INTERSECTION,
   useRender,
 } from '@/util'
 
@@ -116,6 +116,7 @@ export const VImg = genericComponent<VImgSlots>()({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { roundedClasses } = useRounded(props)
     const vm = getCurrentInstance('VImg')
+    const clientFeatures = useClientFeatures()
 
     const currentSrc = shallowRef('') // Set from srcset
     const image = ref<HTMLImageElement>()
@@ -157,7 +158,7 @@ export const VImg = genericComponent<VImgSlots>()({
     function init (isIntersecting?: boolean) {
       if (props.eager && isIntersecting) return
       if (
-        SUPPORTS_INTERSECTION &&
+        clientFeatures.supportsIntersection &&
         !isIntersecting &&
         !props.eager
       ) return

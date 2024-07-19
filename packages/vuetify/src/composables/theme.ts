@@ -13,7 +13,6 @@ import {
   getCurrentInstance,
   getForeground,
   getLuma,
-  IN_BROWSER,
   lighten,
   mergeDeep,
   parseColor,
@@ -25,6 +24,7 @@ import {
 import type { VueHeadClient } from '@unhead/vue'
 import type { HeadClient } from '@vueuse/head'
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
+import type { SSRHandler } from '@/composables/ssr'
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
@@ -208,7 +208,7 @@ function parseThemeOptions (options: ThemeOptions = genDefaults()): InternalThem
 }
 
 // Composables
-export function createTheme (options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
+export function createTheme ({ isClient }: SSRHandler, options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
   const parsedOptions = parseThemeOptions(options)
   const name = ref(parsedOptions.defaultTheme)
   const themes = ref(parsedOptions.themes)
@@ -308,11 +308,11 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     if (head) {
       if (head.push) {
         const entry = head.push(getHead)
-        if (IN_BROWSER) {
+        if (isClient) {
           watch(styles, () => { entry.patch(getHead) })
         }
       } else {
-        if (IN_BROWSER) {
+        if (isClient) {
           head.addHeadObjs(computed(getHead))
           watchEffect(() => head.updateDOM())
         } else {
@@ -320,11 +320,11 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         }
       }
     } else {
-      let styleEl = IN_BROWSER
+      let styleEl = isClient
         ? document.getElementById('vuetify-theme-stylesheet')
         : null
 
-      if (IN_BROWSER) {
+      if (isClient) {
         watch(styles, updateStyles, { immediate: true })
       } else {
         updateStyles()

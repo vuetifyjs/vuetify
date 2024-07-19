@@ -9,12 +9,13 @@ import { useRtl } from '@/composables/locale'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { useSSRHandler } from '@/composables/ssr'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, Transition } from 'vue'
-import { clamp, convertToUnit, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
+import { clamp, convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 type VProgressLinearSlots = {
   default: { value: number, buffer: number }
@@ -91,6 +92,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     } = useBackgroundColor(props, 'color')
     const { roundedClasses } = useRounded(props)
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
+    const { isClient } = useSSRHandler()
 
     const max = computed(() => parseFloat(props.max))
     const height = computed(() => parseFloat(props.height))
@@ -98,7 +100,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     const normalizedValue = computed(() => clamp(parseFloat(progress.value) / max.value * 100, 0, 100))
     const isReversed = computed(() => isRtl.value !== props.reverse)
     const transition = computed(() => props.indeterminate ? 'fade-transition' : 'slide-x-transition')
-    const isForcedColorsModeActive = IN_BROWSER && window.matchMedia?.('(forced-colors: active)').matches
+    const isForcedColorsModeActive = isClient && window.matchMedia?.('(forced-colors: active)').matches
 
     function handleClick (e: MouseEvent) {
       if (!intersectionRef.value) return

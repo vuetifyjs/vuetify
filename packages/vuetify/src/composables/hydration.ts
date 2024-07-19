@@ -1,12 +1,14 @@
 // Composables
 import { useDisplay } from '@/composables/display'
+import { useSSRHandler } from '@/composables/ssr'
 
 // Utilities
 import { onMounted, shallowRef } from 'vue'
-import { IN_BROWSER } from '@/util'
 
 export function useHydration () {
-  if (!IN_BROWSER) return shallowRef(false)
+  const { isServer } = useSSRHandler()
+
+  if (isServer) return shallowRef(false)
 
   const { ssr } = useDisplay()
 

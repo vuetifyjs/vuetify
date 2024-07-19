@@ -21,6 +21,7 @@ import { IconValue } from '@/composables/icons'
 import { makeItemsProps, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useSSRHandler } from '@/composables/ssr'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
@@ -28,7 +29,6 @@ import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
   ensureValidVNode,
   genericComponent,
-  IN_BROWSER,
   matchesSelector,
   omit,
   propsFactory,
@@ -139,6 +139,7 @@ export const VSelect = genericComponent<new <
 
   setup (props, { slots }) {
     const { t } = useLocale()
+    const { isClient } = useSSRHandler()
     const vTextFieldRef = ref()
     const vMenuRef = ref<VMenu>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
@@ -251,7 +252,7 @@ export const VSelect = genericComponent<new <
       if (item !== undefined) {
         model.value = [item]
         const index = displayItems.value.indexOf(item)
-        IN_BROWSER && window.requestAnimationFrame(() => {
+        isClient && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
       }
@@ -311,7 +312,7 @@ export const VSelect = genericComponent<new <
         const index = displayItems.value.findIndex(
           item => model.value.some(s => props.valueComparator(s.value, item.value))
         )
-        IN_BROWSER && window.requestAnimationFrame(() => {
+        isClient && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
       }

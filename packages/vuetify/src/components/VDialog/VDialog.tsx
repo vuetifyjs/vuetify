@@ -11,10 +11,11 @@ import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
+import { useSSRHandler } from '@/composables/ssr'
 
 // Utilities
 import { mergeProps, nextTick, ref, watch } from 'vue'
-import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
+import { focusableChildren, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Component } from 'vue'
@@ -49,6 +50,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
   setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
+    const { isClient } = useSSRHandler()
 
     const overlay = ref<VOverlay>()
     function onFocusin (e: FocusEvent) {
@@ -80,7 +82,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
       }
     }
 
-    if (IN_BROWSER) {
+    if (isClient) {
       watch(() => isActive.value && props.retainFocus, val => {
         val
           ? document.addEventListener('focusin', onFocusin)

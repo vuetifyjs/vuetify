@@ -1,7 +1,9 @@
+// Composables
+import { useSSRHandler } from '@/composables/ssr'
+
 // Utilities
 import { onBeforeUnmount, readonly, ref, watch } from 'vue'
 import { templateRef } from '@/util'
-import { IN_BROWSER } from '@/util/globals'
 
 // Types
 import type { DeepReadonly, Ref } from 'vue'
@@ -15,8 +17,9 @@ interface ResizeState {
 export function useResizeObserver (callback?: ResizeObserverCallback, box: 'content' | 'border' = 'content'): ResizeState {
   const resizeRef = templateRef()
   const contentRect = ref<DOMRectReadOnly>()
+  const { isClient } = useSSRHandler()
 
-  if (IN_BROWSER) {
+  if (isClient) {
     const observer = new ResizeObserver((entries: ResizeObserverEntry[]) => {
       callback?.(entries, observer)
 

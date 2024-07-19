@@ -22,6 +22,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useSSRHandler } from '@/composables/ssr'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
@@ -29,7 +30,6 @@ import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
   ensureValidVNode,
   genericComponent,
-  IN_BROWSER,
   matchesSelector,
   noop,
   omit,
@@ -130,6 +130,7 @@ export const VAutocomplete = genericComponent<new <
 
   setup (props, { slots }) {
     const { t } = useLocale()
+    const { isClient } = useSSRHandler()
     const vTextFieldRef = ref()
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
@@ -392,7 +393,7 @@ export const VAutocomplete = genericComponent<new <
         const index = displayItems.value.findIndex(
           item => model.value.some(s => item.value === s.value)
         )
-        IN_BROWSER && window.requestAnimationFrame(() => {
+        isClient && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
       }
