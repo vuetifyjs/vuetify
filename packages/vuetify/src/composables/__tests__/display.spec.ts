@@ -1,14 +1,9 @@
 // Composables
 import { createDisplay } from '../display'
-import { createClientFeatures } from '@/composables/clientFeatures'
-import { createSSRHandler } from '@/composables/ssr'
 
 // Utilities
 import { describe, expect, it } from '@jest/globals'
 import { resizeWindow } from '@/../test/index'
-
-// Types
-import type { DisplayOptions, SSROptions } from '../display'
 
 const breakpoints = [
   'xs',
