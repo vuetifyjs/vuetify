@@ -154,9 +154,13 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       contentEvents,
       scrimEvents,
     } = useActivator(props, { isActive, isTop: localTop })
-    const potentialShadowDomRoot = computed(() => (activatorEl?.value as Element)?.getRootNode() as Element)
-    const { teleportTarget } = useTeleport(computed(() => props.attach || props.contained ||
-      potentialShadowDomRoot.value instanceof ShadowRoot ? potentialShadowDomRoot.value : false))
+    const { teleportTarget } = useTeleport(() => {
+      const target = props.attach || props.contained
+      if (target) return target
+      const rootNode = activatorEl?.value?.getRootNode()
+      if (rootNode instanceof ShadowRoot) return rootNode
+      return false
+    })
     const { dimensionStyles } = useDimension(props)
     const isMounted = useHydration()
     const { scopeId } = useScopeId()

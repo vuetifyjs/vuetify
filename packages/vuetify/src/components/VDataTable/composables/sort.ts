@@ -4,7 +4,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject, provide, toRef } from 'vue'
-import { isEmpty, propsFactory } from '@/util'
+import { getObjectValueByPath, isEmpty, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -98,7 +98,6 @@ export function useSort () {
 export function useSortedItems<T extends InternalItem> (
   props: {
     customKeySort: Record<string, DataTableCompareFunction> | undefined
-    disableSort?: Boolean
   },
   items: Ref<T[]>,
   sortBy: Ref<readonly SortItem[]>,
@@ -110,7 +109,7 @@ export function useSortedItems<T extends InternalItem> (
 ) {
   const locale = useLocale()
   const sortedItems = computed(() => {
-    if (!sortBy.value.length || props.disableSort) return items.value
+    if (!sortBy.value.length) return items.value
 
     return sortItems(items.value, sortBy.value, locale.current.value, {
       transform: options?.transform,
@@ -149,8 +148,8 @@ export function sortItems<T extends InternalItem> (
 
       if (sortOrder === false) continue
 
-      let sortA = a[1][sortKey]
-      let sortB = b[1][sortKey]
+      let sortA = getObjectValueByPath(a[1], sortKey)
+      let sortB = getObjectValueByPath(b[1], sortKey)
       let sortARaw = a[0].raw
       let sortBRaw = b[0].raw
 

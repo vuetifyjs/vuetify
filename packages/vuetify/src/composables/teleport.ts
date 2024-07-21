@@ -2,12 +2,9 @@
 import { computed, warn } from 'vue'
 import { IN_BROWSER } from '@/util'
 
-// Types
-import type { Ref } from 'vue'
-
-export function useTeleport (target: Ref<boolean | string | Element>) {
+export function useTeleport (target: () => (boolean | string | ParentNode)) {
   const teleportTarget = computed(() => {
-    const _target = target.value
+    const _target = target()
 
     if (_target === true || !IN_BROWSER) return undefined
 
