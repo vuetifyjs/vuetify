@@ -1,0 +1,16 @@
+@use "../../styles/settings";
+@use "../../styles/settings/variables";
+
+// VFeatureDiscovery
+$feature-discovery-background-color: rgb(var(--v-theme-surface-variant)) !default;
+$feature-discovery-text-color: rgb(var(--v-theme-on-surface-variant)) !default;
+$feature-discovery-border-radius: settings.$border-radius-root !default;
+$feature-discovery-font-size: .875rem !default;
+$feature-discovery-line-height: 1.6 !default;
+$feature-discovery-transition-enter-duration: 150ms !default;
+$feature-discovery-transition-leave-duration: 75ms !default;
+$feature-discovery-padding: 5px 16px !default;
+$feature-discovery-overflow-wrap: break-word !default;
+
+$feature-discovery-transition: opacity variables.$standard-easing, top 1ms, left 1ms, transform variables.$standard-easing, top 1ms, left 1ms;
+$feature-discovery-wrap-transition: .2s opacity slow-in-fast-out;

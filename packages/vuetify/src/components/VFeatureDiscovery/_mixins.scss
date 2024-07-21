@@ -1,0 +1,7 @@
+@use '../../styles/settings';
+@use './variables' as *;
+
+@mixin feature-discovery-theme($material) {
+  color: map-deep-get($material, 'text', 'primary');
+  background-color: map-get($material, 'app-bar');
+}

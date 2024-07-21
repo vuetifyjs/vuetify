@@ -1,0 +1,30 @@
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './mixins' as *
+@use './variables' as *
+
+@include tools.layer('components')
+  // Element
+  .v-feature-discovery
+    > .v-overlay__content
+      background: $feature-discovery-background-color
+      color: $feature-discovery-text-color
+      border-radius: $feature-discovery-border-radius
+      font-size: $feature-discovery-font-size
+      line-height: $feature-discovery-line-height
+      display: inline-block
+      padding: $feature-discovery-padding
+      text-transform: initial
+      width: auto
+      opacity: 1
+      pointer-events: none
+      transition-property: opacity, transform
+      overflow-wrap: $feature-discovery-overflow-wrap
+
+      &[class*="enter-active"]
+        transition-timing-function: settings.$decelerated-easing
+        transition-duration: $feature-discovery-transition-enter-duration
+
+      &[class*="leave-active"]
+        transition-timing-function: settings.$accelerated-easing
+        transition-duration: $feature-discovery-transition-leave-duration

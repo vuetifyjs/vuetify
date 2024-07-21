@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VFeatureDiscovery.ts should work 1`] = `
+<div class="v-feature-discovery">
+  <button>
+  </button>
+  <div role="feature-discovery"
+       class="v-feature-discovery__content theme--light feature-discoverable__content__active "
+       style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 8; display: none; z-index: 8;"
+  >
+    <div class="v-card v-sheet theme--light">
+    </div>
+  </div>
+</div>
+`;
