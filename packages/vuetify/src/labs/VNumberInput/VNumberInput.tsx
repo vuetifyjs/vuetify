@@ -12,7 +12,7 @@ import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, watchEffect } from 'vue'
+import { computed, ref } from 'vue'
 import { clamp, genericComponent, getDecimals, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -39,11 +39,11 @@ const makeVNumberInputProps = propsFactory({
   hideInput: Boolean,
   min: {
     type: Number,
-    default: -Infinity,
+    default: Number.MIN_SAFE_INTEGER,
   },
   max: {
     type: Number,
-    default: Infinity,
+    default: Number.MAX_SAFE_INTEGER,
   },
   step: {
     type: Number,
@@ -67,6 +67,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
 
+    const vTextFieldRef = ref()
+
     const stepDecimals = computed(() => getDecimals(props.step))
     const modelDecimals = computed(() => model.value != null ? getDecimals(model.value) : 0)
 
@@ -84,13 +86,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (controlsDisabled.value) return false
       if (model.value == null) return true
       return model.value - props.step >= props.min
-    })
-
-    watchEffect(() => {
-      if (controlsDisabled.value) return
-      if (model.value != null && (model.value < props.min || model.value > props.max)) {
-        model.value = clamp(model.value, props.min, props.max)
-      }
     })
 
     const controlVariant = computed(() => {
@@ -131,6 +126,20 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       toggleUpDown(false)
     }
 
+    function onBeforeinput (e: InputEvent) {
+      if (!e.data) return
+      const existingTxt = (e.target as HTMLInputElement)?.value
+      const selectionStart = vTextFieldRef.value.selectionStart
+      const selectionEnd = vTextFieldRef.value.selectionEnd
+      const potentialNewInputVal = existingTxt ? existingTxt.slice(0, selectionStart) + e.data + existingTxt.slice(selectionEnd) : e.data
+      // Only numbers, "-", "." are allowed
+      // AND "-", "." are allowed only once
+      // AND "-" is only allowed at the start
+      if (!/^-?\d+(\.\d*)?$|^-$/.test(potentialNewInputVal)) {
+        e.preventDefault()
+      }
+    }
+
     function onKeydown (e: KeyboardEvent) {
       if (
         ['Enter', 'ArrowLeft', 'ArrowRight', 'Backspace', 'Delete', 'Tab'].includes(e.key) ||
@@ -140,26 +149,33 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (['ArrowDown'].includes(e.key)) {
         e.preventDefault()
         toggleUpDown(false)
-        return
       }
       if (['ArrowUp'].includes(e.key)) {
         e.preventDefault()
         toggleUpDown()
-        return
       }
-
-      // Only numbers, +, - & . are allowed
-      if (!/^[0-9\-+.]+$/.test(e.key)) {
-        e.preventDefault()
-      }
-    }
-
-    function onModelUpdate (v: string) {
-      model.value = v ? +(v) : undefined
     }
 
     function onControlMousedown (e: MouseEvent) {
       e.stopPropagation()
+    }
+
+    function onChange () {
+      convertToNum()
+    }
+
+    function convertToNum () {
+      const inputVal = vTextFieldRef.value.value
+      if (isNaN(+(inputVal))) {
+        model.value = inputVal
+      } else {
+        if (controlsDisabled.value) return
+        const numVal = +(inputVal)
+        if (numVal != null && (numVal < props.min || numVal > props.max)) {
+          model.value = clamp(numVal, props.min, props.max)
+          vTextFieldRef.value.value = model.value
+        }
+      }
     }
 
     useRender(() => {
@@ -277,8 +293,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
       return (
         <VTextField
-          modelValue={ model.value }
-          onUpdate:modelValue={ onModelUpdate }
+          ref={ vTextFieldRef }
+          v-model={ model.value }
+          onBeforeinput={ onBeforeinput }
+          onChange={ onChange }
           onKeydown={ onKeydown }
           class={[
             'v-number-input',
