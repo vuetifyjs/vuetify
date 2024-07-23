@@ -2,8 +2,9 @@
 @use '../settings'
 
 @mixin radius($r, $important: false)
-  // Key exists within the $rounded variable
-  @if (map.has-key(settings.$rounded, $r))
-    border-radius: map.get(settings.$rounded, $r) if($important, !important, null)
-  @else
-    border-radius: $r if($important, !important, null)
+  &
+    // Key exists within the $rounded variable
+    @if (map.has-key(settings.$rounded, $r))
+      border-radius: map.get(settings.$rounded, $r) if($important, !important, null)
+    @else
+      border-radius: $r if($important, !important, null)
