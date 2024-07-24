@@ -69,7 +69,6 @@ jobs:
       - uses: ./.github/actions/pnpm-install
       - run: pnpm run test:coverage -i
         working-directory: ./packages/vuetify
-      - uses: codecov/codecov-action@v4
 
   test-cypress:
     name: Test (Cypress)
@@ -162,7 +161,7 @@ jobs:
         with:
           name: docs-dist
       - uses: ./.github/actions/pnpm-install
-      - run: pnpm global add vercel
+      - run: pnpm add vercel --global
       - run: node scripts/deploy-and-alias.js ${{ github.ref }}
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}

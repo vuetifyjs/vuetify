@@ -11,7 +11,8 @@ runs:
           **/node_modules
           /home/runner/.cache/pnpm
           /home/runner/.cache/Cypress
-        key: pnpm-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yml') }}
+          /home/runner/.pnpm-store
+        key: pnpm-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
     - uses: pnpm/action-setup@v4
     - run: pnpm i --frozen-lockfile
       shell: bash
