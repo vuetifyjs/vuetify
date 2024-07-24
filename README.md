@@ -152,6 +152,12 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
 
 Getting started with Vuetify is easy. To create a new project, choose your package manager and run one of the following commands:
 
+Using [pnpm](https://pnpm.io/)
+
+```bash
+pnpm create vuetify
+```
+
 Using [yarn](https://yarnpkg.com/)
 
 ```bash
@@ -162,12 +168,6 @@ Using [npm](https://npmjs.com/)
 
 ```bash
 npm create vuetify@latest
-```
-
-Using [pnpm](https://pnpm.io/)
-
-```bash
-pnpm create vuetify
 ```
 
 Using [bun](https://bun.sh/)

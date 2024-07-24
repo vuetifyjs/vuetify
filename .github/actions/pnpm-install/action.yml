@@ -1,0 +1,17 @@
+name: pnpm install
+description: Restore node_modules and cache, then run pnpm install
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/cache@v4
+      with:
+        path: |
+          node_modules
+          **/node_modules
+          /home/runner/.cache/pnpm
+          /home/runner/.cache/Cypress
+        key: pnpm-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yml') }}
+    - uses: pnpm/action-setup@v4
+    - run: pnpm i --frozen-lockfile
+      shell: bash
