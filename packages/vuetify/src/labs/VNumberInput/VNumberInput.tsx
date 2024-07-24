@@ -12,7 +12,7 @@ import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { clamp, genericComponent, getDecimals, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -65,8 +65,16 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   },
 
   setup (props, { attrs, emit, slots }) {
-    const model = useProxiedModel(props, 'modelValue')
+    const _model = useProxiedModel(props, 'modelValue')
 
+    const model = computed({
+      get () {
+        return _model.value
+      },
+      set (val) {
+        _model.value = clamp(val, props.min, props.max)
+      },
+    })
     const vTextFieldRef = ref()
 
     const stepDecimals = computed(() => getDecimals(props.step))
@@ -100,6 +108,12 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const incrementSlotProps = computed(() => ({ click: onClickUp }))
 
     const decrementSlotProps = computed(() => ({ click: onClickDown }))
+
+    onMounted(() => {
+      if (!props.readonly && !props.disabled) {
+        model.value = clamp(model.value, props.min, props.max)
+      }
+    })
 
     function toggleUpDown (increment = true) {
       if (controlsDisabled.value) return
@@ -170,11 +184,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         model.value = inputVal
       } else {
         if (controlsDisabled.value) return
-        const numVal = +(inputVal)
-        if (numVal != null && (numVal < props.min || numVal > props.max)) {
-          model.value = clamp(numVal, props.min, props.max)
-          vTextFieldRef.value.value = model.value
-        }
+        model.value = +(inputVal)
       }
     }
 
