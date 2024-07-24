@@ -69,7 +69,6 @@ jobs:
       - uses: ./.github/actions/pnpm-install
       - run: pnpm run test:coverage -i
         working-directory: ./packages/vuetify
-      - uses: codecov/codecov-action@v4
 
   test-cypress:
     name: Test (Cypress)
