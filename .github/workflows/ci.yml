@@ -31,8 +31,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/yarn-install
-      - run: yarn build vuetify
+      - uses: ./.github/actions/pnpm-install
+      - run: pnpm build vuetify
       - uses: ./.github/actions/upload-artifact
         with:
           name: vuetify-dist
@@ -54,8 +54,8 @@ jobs:
       - uses: ./.github/actions/download-artifact
         with:
           name: vuetify-dist
-      - uses: ./.github/actions/yarn-install
-      - run: yarn lerna run lint $SCOPES
+      - uses: ./.github/actions/pnpm-install
+      - run: pnpm lerna run lint $SCOPES
         env:
           SCOPES: ${{ matrix.scopes }}
 
@@ -66,10 +66,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/yarn-install
-      - run: yarn run test:coverage -i
+      - uses: ./.github/actions/pnpm-install
+      - run: pnpm run test:coverage -i
         working-directory: ./packages/vuetify
-      - uses: codecov/codecov-action@v4
 
   test-cypress:
     name: Test (Cypress)
@@ -78,13 +77,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/yarn-install
-      - run: yarn cy:run --record --parallel --ci-build-id $GITHUB_RUN_ID
+      - uses: ./.github/actions/pnpm-install
+      - run: pnpm cy:run --record --parallel --ci-build-id $GITHUB_RUN_ID
         if: ${{ !startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs' }}
         working-directory: ./packages/vuetify
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-      - run: yarn cy:run
+      - run: pnpm cy:run
         if: ${{ !startswith(github.ref, 'refs/tags/v') && github.repository_owner != 'vuetifyjs' }}
         working-directory: ./packages/vuetify
       - uses: actions/upload-artifact@v3
@@ -105,8 +104,8 @@ jobs:
       - uses: ./.github/actions/download-artifact
         with:
           name: vuetify-dist
-      - uses: ./.github/actions/yarn-install
-      - run: yarn build api
+      - uses: ./.github/actions/pnpm-install
+      - run: pnpm build api
       - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
       - name: NPM Release
         run: bash scripts/deploy.sh
@@ -115,7 +114,7 @@ jobs:
           RELEASE_TAG: ${{ env.RELEASE_TAG }}
       - name: GitHub release
         id: create_release
-        run: yarn conventional-github-releaser -p vuetify
+        run: pnpm conventional-github-releaser -p vuetify
         env:
           DEBUG: '*'
           CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -130,10 +129,10 @@ jobs:
       - uses: ./.github/actions/download-artifact
         with:
           name: vuetify-dist
-      - uses: ./.github/actions/yarn-install
+      - uses: ./.github/actions/pnpm-install
       - uses: ./.github/actions/download-locales
-      - run: yarn build api
-      - run: yarn build docs
+      - run: pnpm build api
+      - run: pnpm build docs
         env:
           NODE_OPTIONS: --max-old-space-size=4096
           VITE_COSMIC_2_BUCKET_SLUG: ${{ secrets.COSMIC_2_BUCKET_SLUG }}
@@ -161,8 +160,8 @@ jobs:
       - uses: ./.github/actions/download-artifact
         with:
           name: docs-dist
-      - uses: ./.github/actions/yarn-install
-      - run: yarn global add vercel
+      - uses: ./.github/actions/pnpm-install
+      - run: pnpm add vercel --global
       - run: node scripts/deploy-and-alias.js ${{ github.ref }}
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
