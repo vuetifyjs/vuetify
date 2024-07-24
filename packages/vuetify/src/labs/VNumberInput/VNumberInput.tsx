@@ -64,17 +64,16 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     'update:modelValue': (val: number) => true,
   },
 
-  setup (props, { attrs, emit, slots }) {
+  setup (props, { slots }) {
     const _model = useProxiedModel(props, 'modelValue')
 
     const model = computed({
       get () {
         return _model.value
       },
-      set (val) {
-        _model.value = clamp(val, props.min, props.max)
-      },
+      set (val) {},
     })
+
     const vTextFieldRef = ref()
 
     const stepDecimals = computed(() => getDecimals(props.step))
@@ -111,7 +110,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     onMounted(() => {
       if (!props.readonly && !props.disabled) {
-        model.value = clamp(model.value, props.min, props.max)
+        convertInputStrToNum()
       }
     })
 
@@ -124,9 +123,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
       const decimals = Math.max(modelDecimals.value, stepDecimals.value)
       if (increment) {
-        if (canIncrease.value) model.value = +(((model.value + props.step).toFixed(decimals)))
+        if (canIncrease.value) _model.value = +(((_model.value + props.step).toFixed(decimals)))
       } else {
-        if (canDecrease.value) model.value = +(((model.value - props.step).toFixed(decimals)))
+        if (canDecrease.value) _model.value = +(((_model.value - props.step).toFixed(decimals)))
       }
     }
 
@@ -175,16 +174,13 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     function onChange () {
-      convertToNum()
+      convertInputStrToNum()
     }
 
-    function convertToNum () {
+    function convertInputStrToNum () {
       const inputVal = vTextFieldRef.value.value
-      if (isNaN(+(inputVal))) {
-        model.value = inputVal
-      } else {
-        if (controlsDisabled.value) return
-        model.value = +(inputVal)
+      if (!isNaN(+(inputVal))) {
+        _model.value = clamp(+(inputVal), props.min, props.max)
       }
     }
 
