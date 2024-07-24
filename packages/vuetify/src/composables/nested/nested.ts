@@ -227,7 +227,6 @@ export const useNested = (props: NestedProps) => {
           children.value.set(parent, list.filter(child => child !== id))
         }
         parents.value.delete(id)
-        opened.value.delete(id)
       },
       open: (id, value, event) => {
         vm.emit('click:open', { id, value, path: getPath(id), event })
