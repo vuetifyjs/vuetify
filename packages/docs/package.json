@@ -38,7 +38,7 @@
     "vue-i18n": "^9.11.0",
     "vue-instantsearch": "^4.16.1",
     "vue-prism-component": "^2.0.0",
-    "vuetify": "^3.6.13"
+    "vuetify": "workspace:*"
   },
   "devDependencies": {
     "@emailjs/browser": "^4.3.3",
