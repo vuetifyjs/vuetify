@@ -333,9 +333,6 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         'vue',
         'vue-router',
       ],
-      exclude: [
-        'vue-demi',
-      ],
     },
 
     ssr: {
