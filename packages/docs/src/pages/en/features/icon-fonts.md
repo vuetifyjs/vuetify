@@ -76,16 +76,16 @@ Or as a local dependency:
 
 ::: tabs
 
+```bash [pnpm]
+pnpm add @mdi/font -D
+```
+
 ```bash [yarn]
 yarn add @mdi/font -D
 ```
 
 ``` bash [npm]
 npm install @mdi/font -D
-```
-
-```bash [pnpm]
-pnpm add @mdi/font -D
 ```
 
 ```bash [bun]
@@ -139,16 +139,16 @@ The following example shows how to use an imported icon within a `.vue` SFC temp
 
 ::: tabs
 
+```bash [pnpm]
+pnpm add @mdi/js -D
+```
+
 ```bash [yarn]
 yarn add @mdi/js -D
 ```
 
 ```bash [npm]
 npm install @mdi/js -D
-```
-
-```bash [pnpm]
-pnpm add @mdi/js -D
 ```
 
 ```bash [bun]
@@ -223,16 +223,16 @@ Alternatively, it is possible to install locally using yarn or npm. Keep in mind
 
 ::: tabs
 
+```bash [pnpm]
+pnpm add material-design-icons-iconfont -D
+```
+
 ```bash [yarn]
 yarn add material-design-icons-iconfont -D
 ```
 
 ```bash [npm]
 npm install material-design-icons-iconfont -D
-```
-
-```bash [pnpm]
-pnpm add material-design-icons-iconfont -D
 ```
 
 ```bash [bun]
@@ -277,16 +277,16 @@ To install locally you can pull in the [free](https://fontawesome.com/) version 
 
 ::: tabs
 
+```bash [pnpm]
+pnpm add @fortawesome/fontawesome-free -D
+```
+
 ```bash [yarn]
 yarn add @fortawesome/fontawesome-free -D
 ```
 
 ```bash [npm]
 npm install @fortawesome/fontawesome-free -D
-```
-
-```bash [pnpm]
-pnpm add @fortawesome/fontawesome-free -D
 ```
 
 ```bash [bun]
@@ -335,16 +335,16 @@ To install FontAwesome **4** locally is the same as its newer version, just from
 
 ::: tabs
 
+```bash [pnpm]
+pnpm add font-awesome@4.7.0 -D
+```
+
 ```bash [yarn]
 yarn add font-awesome@4.7.0 -D
 ```
 
 ```bash [npm]
 npm install font-awesome@4.7.0 -D
-```
-
-```bash [pnpm]
-pnpm add font-awesome@4.7.0 -D
 ```
 
 ```bash [bun]
@@ -381,16 +381,16 @@ Install the following packages.
 
 ::: tabs
 
+```bash [pnpm]
+pnpm add @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons -D
+```
+
 ```bash [yarn]
 yarn add @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons -D
 ```
 
 ```bash [npm]
 npm install @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons -D
-```
-
-```bash [pnpm]
-pnpm add @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons -D
 ```
 
 ```bash [bun]
