@@ -136,9 +136,9 @@ Shaped treeview's have rounded borders on one side of the nodes.
 
 ### Slots
 
-#### Append and label
+#### Prepend
 
-Using the the **label**, and an **append** slots we are able to create an intuitive file explorer.
+Using the the **prepend** slot we are able to create an intuitive file explorer.
 
 <ExamplesExample file="v-treeview/slot-append-and-label" />
 
@@ -146,7 +146,7 @@ Using the the **label**, and an **append** slots we are able to create an intuit
 
 #### Search and filter
 
-Easily filter your treeview by using the **search** prop. You can easily apply your custom filtering function if you need case-sensitive or fuzzy filtering by setting the **filter** prop. This works similar to the [v-autocomplete](/components/autocompletes) component.
+Easily filter your treeview by using the **search** prop. You can easily apply your custom filtering function if you need case-sensitive or fuzzy filtering by setting the **custom-filter** prop. This works similar to the [v-autocomplete](/components/autocompletes) component.
 
 <ExamplesExample file="v-treeview/misc-search-and-filter" />
 

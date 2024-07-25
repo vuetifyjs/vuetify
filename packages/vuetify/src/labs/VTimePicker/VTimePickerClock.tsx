@@ -1,4 +1,3 @@
-// StylesthisValue
 // Styles
 import './VTimePickerClock.sass'
 
@@ -56,8 +55,8 @@ export const VTimePickerClock = genericComponent()({
   props: makeVTimePickerClockProps(),
 
   emits: {
-    change: (val: number) => val,
-    input: (val: number) => val,
+    change: (val: number) => true,
+    input: (val: number) => true,
   },
 
   setup (props, { emit }) {

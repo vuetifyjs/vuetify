@@ -3,7 +3,7 @@
     class="mx-auto"
     max-width="500"
   >
-    <v-sheet class="pa-4 bg-primary-lighten-2">
+    <v-sheet class="pa-4 bg-primary">
       <v-text-field
         v-model="search"
         clear-icon="mdi-close-circle-outline"
@@ -23,10 +23,11 @@
     </v-sheet>
     <v-card-text>
       <v-treeview
-        v-model:open="open"
-        :filter="filter"
+        v-model:opened="open"
+        :custom-filter="filterFn"
         :items="items"
         :search="search"
+        item-value="id"
       >
         <template v-slot:prepend="{ item }">
           <v-icon
@@ -40,7 +41,7 @@
 </template>
 
 <script setup>
-  import { computed, ref } from 'vue'
+  import { ref } from 'vue'
 
   const items = ref([
     {
@@ -111,90 +112,7 @@
   const open = ref([1, 2])
   const search = ref(null)
   const caseSensitive = ref(false)
-  const filter = computed(() => {
-    return caseSensitive.value ? (item, search, textKey) => item[textKey].indexOf(search) > -1 : undefined
-  })
-</script>
-
-<script>
-  export default {
-    data: () => ({
-      items: [
-        {
-          id: 1,
-          title: 'Vuetify Human Resources',
-          children: [
-            {
-              id: 2,
-              title: 'Core team',
-              children: [
-                {
-                  id: 201,
-                  title: 'John',
-                },
-                {
-                  id: 202,
-                  title: 'Kael',
-                },
-                {
-                  id: 203,
-                  title: 'Nekosaur',
-                },
-                {
-                  id: 204,
-                  title: 'Jacek',
-                },
-                {
-                  id: 205,
-                  title: 'Andrew',
-                },
-              ],
-            },
-            {
-              id: 3,
-              title: 'Administrators',
-              children: [
-                {
-                  id: 301,
-                  title: 'Mike',
-                },
-                {
-                  id: 302,
-                  title: 'Hunt',
-                },
-              ],
-            },
-            {
-              id: 4,
-              title: 'Contributors',
-              children: [
-                {
-                  id: 401,
-                  title: 'Phlow',
-                },
-                {
-                  id: 402,
-                  title: 'Brandon',
-                },
-                {
-                  id: 403,
-                  title: 'Sean',
-                },
-              ],
-            },
-          ],
-        },
-      ],
-      open: [1, 2],
-      search: null,
-      caseSensitive: false,
-    }),
-    computed: {
-      filter () {
-        return this.caseSensitive
-          ? (item, search, textKey) => item[textKey].indexOf(search) > -1
-          : undefined
-      },
-    },
+  const filterFn = function (value, search, item) {
+    return caseSensitive.value ? value.indexOf(search) > -1 : value.toLowerCase().indexOf(search.toLowerCase()) > -1
   }
 </script>

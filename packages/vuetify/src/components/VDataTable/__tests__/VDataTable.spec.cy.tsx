@@ -14,6 +14,7 @@ const DESSERT_HEADERS = [
   { title: 'Carbs (g)', key: 'carbs' },
   { title: 'Protein (g)', key: 'protein' },
   { title: 'Iron (%)', key: 'iron' },
+  { title: 'Group', key: 'group' },
 ]
 
 const DESSERT_ITEMS = [
@@ -24,6 +25,7 @@ const DESSERT_ITEMS = [
     carbs: 24,
     protein: 4.0,
     iron: '1%',
+    group: 1,
   },
   {
     name: 'Ice cream sandwich',
@@ -32,6 +34,7 @@ const DESSERT_ITEMS = [
     carbs: 37,
     protein: 4.3,
     iron: '1%',
+    group: 3,
   },
   {
     name: 'Eclair',
@@ -40,6 +43,7 @@ const DESSERT_ITEMS = [
     carbs: 23,
     protein: 6.0,
     iron: '7%',
+    group: 2,
   },
   {
     name: 'Cupcake',
@@ -48,6 +52,7 @@ const DESSERT_ITEMS = [
     carbs: 67,
     protein: 4.3,
     iron: '8%',
+    group: 2,
   },
   {
     name: 'Gingerbread',
@@ -56,6 +61,7 @@ const DESSERT_ITEMS = [
     carbs: 49,
     protein: 3.9,
     iron: '16%',
+    group: 3,
   },
   {
     name: 'Jelly bean',
@@ -64,6 +70,7 @@ const DESSERT_ITEMS = [
     carbs: 94,
     protein: 0.0,
     iron: '0%',
+    group: 1,
   },
   {
     name: 'Lollipop',
@@ -72,6 +79,7 @@ const DESSERT_ITEMS = [
     carbs: 98,
     protein: 0,
     iron: '2%',
+    group: 2,
   },
   {
     name: 'Honeycomb',
@@ -80,6 +88,7 @@ const DESSERT_ITEMS = [
     carbs: 87,
     protein: 6.5,
     iron: '45%',
+    group: 3,
   },
   {
     name: 'Donut',
@@ -88,6 +97,7 @@ const DESSERT_ITEMS = [
     carbs: 51,
     protein: 4.9,
     iron: '22%',
+    group: 3,
   },
   {
     name: 'KitKat',
@@ -96,6 +106,7 @@ const DESSERT_ITEMS = [
     carbs: 65,
     protein: 7,
     iron: '6%',
+    group: 1,
   },
 ]
 
@@ -354,6 +365,94 @@ describe('VDataTable', () => {
       cy.get('.v-data-table').find('h1').should('exist')
       cy.get('.v-data-table').find('h2').should('exist')
       cy.get('.v-data-table').find('h3').should('exist')
+    })
+  })
+
+  describe('sort', () => {
+    it('should sort by sortBy', () => {
+      cy.mount(() => (
+        <Application>
+          <VDataTable
+          items={ DESSERT_ITEMS }
+          headers={ DESSERT_HEADERS }
+          itemsPerPage={ 10 }
+          sortBy={[{ key: 'fat', order: 'asc' }]}
+          />
+        </Application>
+      ))
+      cy.get('thead .v-data-table__td').eq(2).should('have.class', 'v-data-table__th--sorted')
+        .get('tbody td:nth-child(3)').then(rows => {
+          const actualFat = Array.from(rows).map(row => {
+            return Number(row.textContent)
+          })
+          const expectedFat = DESSERT_ITEMS.map(d => d.fat).sort((a, b) => a - b)
+          expect(actualFat).to.deep.equal(expectedFat)
+        })
+      cy.get('thead .v-data-table__td').eq(2).click()
+        .get('thead .v-data-table__td').eq(2).should('have.class', 'v-data-table__th--sorted')
+        .get('tbody td:nth-child(3)').then(rows => {
+          const actualFat = Array.from(rows).map(row => {
+            return Number(row.textContent)
+          })
+          const expectedFat = DESSERT_ITEMS.map(d => d.fat).sort((a, b) => b - a)
+          expect(actualFat).to.deep.equal(expectedFat)
+        })
+    })
+
+    it('should sort by groupBy and sortBy', () => {
+      cy.mount(() => (
+        <Application>
+          <VDataTable
+          items={ DESSERT_ITEMS }
+          headers={ DESSERT_HEADERS }
+          itemsPerPage={ 10 }
+          groupBy={[{ key: 'group', order: 'desc' }]}
+          sortBy={[{ key: 'calories', order: 'desc' }]}
+          />
+        </Application>
+      )).get('tr.v-data-table-group-header-row .v-data-table__td button + span').then(rows => {
+        const actualGroup = Array.from(rows).map(row => {
+          return Number(row.textContent)
+        })
+        const expectedGroup = [...new Set(DESSERT_ITEMS.map(d => d.group))].sort((a, b) => b - a)
+        expect(actualGroup).to.deep.equal(expectedGroup)
+      }).get('.v-data-table-group-header-row button').eq(0).click()
+        .get('.v-data-table__tr td:nth-child(3)').then(rows => {
+          const actualCalories = Array.from(rows).map(row => {
+            return Number(row.textContent)
+          })
+          const expectedCalories = DESSERT_ITEMS.filter(d => d.group === 3).map(d => d.calories).sort((a, b) => b - a)
+          expect(actualCalories).to.deep.equal(expectedCalories)
+        })
+    })
+
+    // https://github.com/vuetifyjs/vuetify/issues/20046
+    it('should sort by groupBy while sort is disabled', () => {
+      cy.mount(() => (
+        <Application>
+          <VDataTable
+          items={ DESSERT_ITEMS }
+          headers={ DESSERT_HEADERS }
+          itemsPerPage={ 10 }
+          groupBy={[{ key: 'group', order: 'desc' }]}
+          sortBy={[{ key: 'calories', order: 'desc' }]}
+          disableSort
+          />
+        </Application>
+      )).get('tr.v-data-table-group-header-row .v-data-table__td button + span').then(rows => {
+        const actualGroup = Array.from(rows).map(row => {
+          return Number(row.textContent)
+        })
+        const expectedGroup = [...new Set(DESSERT_ITEMS.map(d => d.group))].sort((a, b) => b - a)
+        expect(actualGroup).to.deep.equal(expectedGroup)
+      }).get('.v-data-table-group-header-row button').eq(0).click()
+        .get('.v-data-table__tr td:nth-child(3)').then(rows => {
+          const actualCalories = Array.from(rows).map(row => {
+            return Number(row.textContent)
+          })
+          const expectedCalories = DESSERT_ITEMS.filter(d => d.group === 3).map(d => d.calories)
+          expect(actualCalories).to.deep.equal(expectedCalories)
+        })
     })
   })
 })

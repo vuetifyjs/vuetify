@@ -133,7 +133,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     function onKeydown (e: KeyboardEvent) {
       if (
-        ['Enter', 'ArrowLeft', 'ArrowRight', 'Backspace', 'Tab'].includes(e.key) ||
+        ['Enter', 'ArrowLeft', 'ArrowRight', 'Backspace', 'Delete', 'Tab'].includes(e.key) ||
         e.ctrlKey
       ) return
 

@@ -98,13 +98,13 @@
   const isCopying = shallowRef(false)
 
   const { mdAndDown } = useDisplay()
-  const packages = ['npm', 'yarn', 'pnpm', 'bun']
+  const packages = ['pnpm', 'yarn', 'npm', 'bun']
   const randomPackage = packages[Math.floor(Math.random() * packages.length)]
 
   function copy () {
     isCopying.value = true
 
-    navigator.clipboard.writeText('yarn create vuetify')
+    navigator.clipboard.writeText('pnpm create vuetify')
 
     setTimeout(() => {
       isCopying.value = false
