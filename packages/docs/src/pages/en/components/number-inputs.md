@@ -59,7 +59,7 @@ Here we display a list of settings that could be applied within an application.
 ## Caveats
 
 ::: warning
-**v-number-input** is designed for simple numeric input usage. It has limitations with very long integers and decimal arithmetic due to JavaScript number precision issues:
+**v-number-input** is designed for simple numeric input usage. It has limitations with very long integers and highly precise decimal arithmetic due to JavaScript number precision issues:
 
 - For integers, **v-model** is restricted within [Number.MIN_SAFE_INTEGER](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER) and [Number.MAX_SAFE_INTEGER](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER) to ensure precision is not lost.
 
