@@ -13,6 +13,8 @@
     "openDelay": "Milliseconds to wait before opening component. Only works with the **open-on-hover** prop.",
     "openOnClick": "Designates whether menu should open on activator click.",
     "openOnHover": "Designates whether menu should open on activator hover.",
-    "returnValue": "The value that is updated when the menu is closed - must be primitive. Dot notation is supported."
+    "returnValue": "The value that is updated when the menu is closed - must be primitive. Dot notation is supported.",
+    "submenu": "Opens with right arrow and closes on left instead of up/down. Implies `location=\"end\"`. Directions are reversed for RTL."
   }
 }
+r

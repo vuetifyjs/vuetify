@@ -53,6 +53,7 @@ export const makeVMenuProps = propsFactory({
     closeDelay: 250,
     closeOnContentClick: true,
     locationStrategy: 'connected' as const,
+    location: null,
     openDelay: 300,
     scrim: false,
     scrollStrategy: 'reposition' as const,
@@ -226,7 +227,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
           v-model={ isActive.value }
           absolute
           activatorProps={ activatorProps.value }
-          location={ props.location ?? (props.submenu ? 'end' : undefined) }
+          location={ props.location ?? (props.submenu ? 'end' : 'bottom') }
           onClick:outside={ onClickOutside }
           onKeydown={ onKeydown }
           { ...scopeId }
