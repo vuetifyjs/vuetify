@@ -144,7 +144,7 @@ export const VCombobox = genericComponent<new <
     const menu = computed({
       get: () => _menu.value,
       set: v => {
-        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren) return
+        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren.size) return
         _menu.value = v
       },
     })

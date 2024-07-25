@@ -13,7 +13,18 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { computed, inject, mergeProps, nextTick, provide, ref, shallowRef, watch } from 'vue'
+import {
+  computed,
+  inject,
+  mergeProps,
+  nextTick,
+  onBeforeUnmount,
+  onDeactivated,
+  provide,
+  ref,
+  shallowRef,
+  watch,
+} from 'vue'
 import { VMenuSymbol } from './shared'
 import {
   focusableChildren,
@@ -66,17 +77,17 @@ export const VMenu = genericComponent<OverlaySlots>()({
     const overlay = ref<VOverlay>()
 
     const parent = inject(VMenuSymbol, null)
-    const openChildren = shallowRef(0)
+    const openChildren = shallowRef(new Set<number>())
     provide(VMenuSymbol, {
       register () {
-        ++openChildren.value
+        openChildren.value.add(uid)
       },
       unregister () {
-        --openChildren.value
+        openChildren.value.delete(uid)
       },
       closeParents (e) {
         setTimeout(() => {
-          if (!openChildren.value &&
+          if (!openChildren.value.size &&
             !props.persistent &&
             (e == null || (e && !isClickInsideElement(e, overlay.value!.contentEl!)))
           ) {
@@ -86,6 +97,9 @@ export const VMenu = genericComponent<OverlaySlots>()({
         }, 40)
       },
     })
+
+    onBeforeUnmount(() => parent?.unregister())
+    onDeactivated(() => isActive.value = false)
 
     async function onFocusIn (e: FocusEvent) {
       const before = e.relatedTarget as HTMLElement | null
