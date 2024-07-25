@@ -28,6 +28,7 @@ import { makeTransitionProps } from '@/composables/transition'
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
+  checkPrintable,
   ensureValidVNode,
   genericComponent,
   IN_BROWSER,
@@ -246,7 +247,7 @@ export const VCombobox = genericComponent<new <
     ))
 
     const listRef = ref<VList>()
-    const { onListScroll, onListKeydown } = useScrolling(listRef, vTextFieldRef)
+    const listEvents = useScrolling(listRef, vTextFieldRef)
     function onClear (e: MouseEvent) {
       cleared = true
 
@@ -267,6 +268,11 @@ export const VCombobox = genericComponent<new <
         e.stopPropagation()
       }
       menu.value = !menu.value
+    }
+    function onListKeydown (e: KeyboardEvent) {
+      if (checkPrintable(e)) {
+        vTextFieldRef.value?.focus()
+      }
     }
     // eslint-disable-next-line complexity
     function onKeydown (e: KeyboardEvent) {
@@ -516,10 +522,10 @@ export const VCombobox = genericComponent<new <
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
-                      onScrollPassive={ onListScroll }
                       tabindex="-1"
                       aria-live="polite"
                       color={ props.itemColor ?? props.color }
+                      { ...listEvents }
                       { ...props.listProps }
                     >
                       { slots['prepend-item']?.() }

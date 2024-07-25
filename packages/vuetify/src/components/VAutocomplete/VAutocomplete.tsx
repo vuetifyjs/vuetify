@@ -27,6 +27,7 @@ import { makeTransitionProps } from '@/composables/transition'
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
+  checkPrintable,
   ensureValidVNode,
   genericComponent,
   IN_BROWSER,
@@ -195,7 +196,7 @@ export const VAutocomplete = genericComponent<new <
     ))
 
     const listRef = ref<VList>()
-    const { onListScroll, onListKeydown } = useScrolling(listRef, vTextFieldRef)
+    const listEvents = useScrolling(listRef, vTextFieldRef)
     function onClear (e: MouseEvent) {
       if (props.openOnClear) {
         menu.value = true
@@ -216,6 +217,11 @@ export const VAutocomplete = genericComponent<new <
         e.stopPropagation()
       }
       menu.value = !menu.value
+    }
+    function onListKeydown (e: KeyboardEvent) {
+      if (checkPrintable(e)) {
+        vTextFieldRef.value?.focus()
+      }
     }
     function onKeydown (e: KeyboardEvent) {
       if (props.readonly || form?.isReadonly.value) return
@@ -472,10 +478,10 @@ export const VAutocomplete = genericComponent<new <
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
-                      onScrollPassive={ onListScroll }
                       tabindex="-1"
                       aria-live="polite"
                       color={ props.itemColor ?? props.color }
+                      { ...listEvents }
                       { ...props.listProps }
                     >
                       { slots['prepend-item']?.() }
