@@ -286,6 +286,11 @@ export const VSelect = genericComponent<new <
         menu.value = false
       }
     }
+    function onAfterEnter () {
+      if (props.eager) {
+        vVirtualScrollRef.value?.calculateVisibleItems()
+      }
+    }
     function onAfterLeave () {
       if (isFocused.value) {
         vTextFieldRef.value?.focus()
@@ -388,6 +393,7 @@ export const VSelect = genericComponent<new <
                   openOnClick={ false }
                   closeOnContentClick={ false }
                   transition={ props.transition }
+                  onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...computedMenuProps.value }
                 >

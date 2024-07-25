@@ -365,6 +365,11 @@ export const VCombobox = genericComponent<new <
         }
       }
     }
+    function onAfterEnter () {
+      if (props.eager) {
+        vVirtualScrollRef.value?.calculateVisibleItems()
+      }
+    }
     function onAfterLeave () {
       if (isFocused.value) {
         isPristine.value = true
@@ -510,6 +515,7 @@ export const VCombobox = genericComponent<new <
                   openOnClick={ false }
                   closeOnContentClick={ false }
                   transition={ props.transition }
+                  onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
                 >
