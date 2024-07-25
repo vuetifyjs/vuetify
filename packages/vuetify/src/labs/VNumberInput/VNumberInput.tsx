@@ -50,7 +50,12 @@ const makeVNumberInputProps = propsFactory({
     default: 1,
   },
 
-  ...omit(makeVTextFieldProps(), ['appendInnerIcon', 'prependInnerIcon']),
+  ...omit(makeVTextFieldProps({
+    modelValue: {
+      type: [Number, null],
+      default: null
+    },
+  }), ['appendInnerIcon', 'prependInnerIcon']),
 }, 'VNumberInput')
 
 export const VNumberInput = genericComponent<VNumberInputSlots>()({
@@ -65,14 +70,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   },
 
   setup (props, { slots }) {
-    const _model = useProxiedModel(props, 'modelValue')
-
-    const model = computed({
-      get () {
-        return _model.value
-      },
-      set (val) {},
-    })
+    const model = useProxiedModel(props, 'modelValue')
 
     const vTextFieldRef = ref()
 
@@ -86,13 +84,11 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const canIncrease = computed(() => {
       if (controlsDisabled.value) return false
-      if (model.value == null) return true
-      return model.value + props.step <= props.max
+      return (model.value ?? 0) + props.step <= props.max
     })
     const canDecrease = computed(() => {
       if (controlsDisabled.value) return false
-      if (model.value == null) return true
-      return model.value - props.step >= props.min
+      return (model.value ?? 0) - props.step >= props.min
     })
 
     const controlVariant = computed(() => {
@@ -110,22 +106,22 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     onMounted(() => {
       if (!props.readonly && !props.disabled) {
-        convertInputStrToNum()
+        clampModel()
       }
     })
 
     function toggleUpDown (increment = true) {
       if (controlsDisabled.value) return
       if (model.value == null) {
-        model.value = 0
+        model.value = clamp(0, props.min, props.max)
         return
       }
 
       const decimals = Math.max(modelDecimals.value, stepDecimals.value)
       if (increment) {
-        if (canIncrease.value) _model.value = +(((_model.value + props.step).toFixed(decimals)))
+        if (canIncrease.value) model.value = +(((model.value + props.step).toFixed(decimals)))
       } else {
-        if (canDecrease.value) _model.value = +(((_model.value - props.step).toFixed(decimals)))
+        if (canDecrease.value) model.value = +(((model.value - props.step).toFixed(decimals)))
       }
     }
 
@@ -173,14 +169,11 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       e.stopPropagation()
     }
 
-    function onChange () {
-      convertInputStrToNum()
-    }
-
-    function convertInputStrToNum () {
-      const inputVal = vTextFieldRef.value.value
-      if (!isNaN(+(inputVal))) {
-        _model.value = clamp(+(inputVal), props.min, props.max)
+    function clampModel () {
+      if (!isNaN(+model.value)) {
+        model.value = clamp(+(model.value), props.min, props.max)
+      } else {
+        model.value = null
       }
     }
 
@@ -302,7 +295,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
           ref={ vTextFieldRef }
           v-model={ model.value }
           onBeforeinput={ onBeforeinput }
-          onChange={ onChange }
+          onChange={ clampModel }
           onKeydown={ onKeydown }
           class={[
             'v-number-input',
