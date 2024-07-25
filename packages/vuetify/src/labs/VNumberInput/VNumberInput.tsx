@@ -53,7 +53,7 @@ const makeVNumberInputProps = propsFactory({
   ...omit(makeVTextFieldProps({
     modelValue: {
       type: [Number, null],
-      default: null
+      default: null,
     },
   }), ['appendInnerIcon', 'prependInnerIcon']),
 }, 'VNumberInput')

@@ -26,15 +26,15 @@ describe('VNumberInput', () => {
   it('should reset v-model to null when click:clear is triggered', () => {
     const model = ref(5)
 
-      cy.mount(() => (
+    cy.mount(() => (
         <>
           <VNumberInput
-            clearable 
+            clearable
             v-model={ model.value }
             readonly
           />
         </>
-      ))
+    ))
       .get('.v-field__clearable .v-icon--clickable').click()
       .then(() => {
         expect(model.value).equal(null)
