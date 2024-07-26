@@ -12,7 +12,7 @@ import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onMounted, ref, shallowRef, watch } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { clamp, genericComponent, getDecimals, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -72,13 +72,14 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   setup (props, { slots }) {
     const _model = useProxiedModel(props, 'modelValue')
 
-    const model = shallowRef<number | string | null>(_model.value)
-
-    watch(model, val => {
-      if (typeof val !== 'string') _model.value = val
+    const model = computed({
+      get: () => _model.value,
+      set (val) {
+        if (typeof val !== 'string') _model.value = val
+      },
     })
 
-    const vTextFieldRef = ref()
+    const vTextFieldRef = ref<VTextField | undefined>()
 
     const stepDecimals = computed(() => getDecimals(props.step))
     const modelDecimals = computed(() => typeof model.value === 'number' ? getDecimals(model.value) : 0)
@@ -89,11 +90,11 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     ))
 
     const canIncrease = computed(() => {
-      if (controlsDisabled.value || typeof model.value === 'string') return false
+      if (controlsDisabled.value) return false
       return (model.value ?? 0) + props.step <= props.max
     })
     const canDecrease = computed(() => {
-      if (controlsDisabled.value || typeof model.value === 'string') return false
+      if (controlsDisabled.value) return false
       return (model.value ?? 0) - props.step >= props.min
     })
 
@@ -144,9 +145,12 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     function onBeforeinput (e: InputEvent) {
       if (!e.data) return
       const existingTxt = (e.target as HTMLInputElement)?.value
-      const selectionStart = vTextFieldRef.value.selectionStart
-      const selectionEnd = vTextFieldRef.value.selectionEnd
-      const potentialNewInputVal = existingTxt ? existingTxt.slice(0, selectionStart) + e.data + existingTxt.slice(selectionEnd) : e.data
+      const selectionStart = vTextFieldRef.value!.selectionStart
+      const selectionEnd = vTextFieldRef.value!.selectionEnd
+      const potentialNewInputVal =
+        existingTxt
+          ? existingTxt.slice(0, selectionStart as number | undefined) + e.data + existingTxt.slice(selectionEnd as number | undefined)
+          : e.data
       // Only numbers, "-", "." are allowed
       // AND "-", "." are allowed only once
       // AND "-" is only allowed at the start
@@ -176,8 +180,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     function clampModel () {
-      if (model.value != null && !isNaN(+model.value)) {
-        model.value = clamp(+(model.value), props.min, props.max)
+      if (!vTextFieldRef.value) return
+      const inputText = vTextFieldRef.value.value
+      if (!isNaN(+inputText)) {
+        model.value = clamp(+(inputText), props.min, props.max)
       } else {
         model.value = null
       }
