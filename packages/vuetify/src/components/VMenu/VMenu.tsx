@@ -53,7 +53,7 @@ export const makeVMenuProps = propsFactory({
     closeDelay: 250,
     closeOnContentClick: true,
     locationStrategy: 'connected' as const,
-    location: null,
+    location: undefined,
     openDelay: 300,
     scrim: false,
     scrollStrategy: 'reposition' as const,

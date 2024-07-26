@@ -133,6 +133,9 @@ export const VOverlay = genericComponent<OverlaySlots>()({
   },
 
   setup (props, { slots, attrs, emit }) {
+    const root = ref<HTMLElement>()
+    const scrimEl = ref<HTMLElement>()
+    const contentEl = ref<HTMLElement>()
     const model = useProxiedModel(props, 'modelValue')
     const isActive = computed({
       get: () => model.value,
@@ -153,7 +156,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       activatorEvents,
       contentEvents,
       scrimEvents,
-    } = useActivator(props, { isActive, isTop: localTop })
+    } = useActivator(props, { isActive, isTop: localTop, contentEl })
     const { teleportTarget } = useTeleport(() => {
       const target = props.attach || props.contained
       if (target) return target
@@ -169,9 +172,6 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       if (v) isActive.value = false
     })
 
-    const root = ref<HTMLElement>()
-    const scrimEl = ref<HTMLElement>()
-    const contentEl = ref<HTMLElement>()
     const { contentStyles, updateLocation } = useLocationStrategies(props, {
       isRtl,
       contentEl,
