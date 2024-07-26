@@ -31,10 +31,10 @@ describe('vuetify date adapter', () => {
     expect(instance.format(new Date(2000, 0, 1, 13), 'fullDateTime12h')).toBe('Jan 1, 2000, 1:00 PM')
     expect(instance.format(new Date(2000, 0, 1, 13), 'fullDateTime24h')).toBe('Jan 1, 2000, 13:00')
 
-    const keyboardDateTime24hFormat = '01/01/2000 13:00'
-    expect(instance.format(new Date(2000, 0, 1, 13), 'keyboardDateTime')).toBe(keyboardDateTime24hFormat)
-    expect(instance.format(new Date(2000, 0, 1, 13), 'keyboardDateTime12h')).toBe('01/01/2000 1:00 PM')
-    expect(instance.format(new Date(2000, 0, 1, 13), 'keyboardDateTime24h')).toBe(keyboardDateTime24hFormat)
+    const keyboardDateTime12hFormat = '01/01/2000 1:00 PM'
+    expect(instance.format(new Date(2000, 0, 1, 13), 'keyboardDateTime')).toBe(keyboardDateTime12hFormat)
+    expect(instance.format(new Date(2000, 0, 1, 13), 'keyboardDateTime12h')).toBe(keyboardDateTime12hFormat)
+    expect(instance.format(new Date(2000, 0, 1, 13), 'keyboardDateTime24h')).toBe('01/01/2000 13:00')
 
     expect(instance.format(new Date(2000, 0, 1), 'fullDateWithWeekday')).toBe('Saturday, January 1, 2000')
 
