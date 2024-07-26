@@ -12,7 +12,7 @@ import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, shallowRef, watch } from 'vue'
 import { clamp, genericComponent, getDecimals, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -70,12 +70,18 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   },
 
   setup (props, { slots }) {
-    const model = useProxiedModel(props, 'modelValue')
+    const _model = useProxiedModel(props, 'modelValue')
+
+    const model = shallowRef<number | string | null>(_model.value)
+
+    watch(model, val => {
+      if (typeof val !== 'string') _model.value = val
+    })
 
     const vTextFieldRef = ref()
 
     const stepDecimals = computed(() => getDecimals(props.step))
-    const modelDecimals = computed(() => model.value != null ? getDecimals(model.value) : 0)
+    const modelDecimals = computed(() => typeof model.value === 'number' ? getDecimals(model.value) : 0)
 
     const form = useForm()
     const controlsDisabled = computed(() => (
@@ -83,11 +89,11 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     ))
 
     const canIncrease = computed(() => {
-      if (controlsDisabled.value) return false
+      if (controlsDisabled.value || typeof model.value === 'string') return false
       return (model.value ?? 0) + props.step <= props.max
     })
     const canDecrease = computed(() => {
-      if (controlsDisabled.value) return false
+      if (controlsDisabled.value || typeof model.value === 'string') return false
       return (model.value ?? 0) - props.step >= props.min
     })
 
@@ -119,9 +125,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
       const decimals = Math.max(modelDecimals.value, stepDecimals.value)
       if (increment) {
-        if (canIncrease.value) model.value = +(((model.value + props.step).toFixed(decimals)))
+        if (canIncrease.value) model.value = +((((model.value as number) + props.step).toFixed(decimals)))
       } else {
-        if (canDecrease.value) model.value = +(((model.value - props.step).toFixed(decimals)))
+        if (canDecrease.value) model.value = +((((model.value as number) - props.step).toFixed(decimals)))
       }
     }
 
@@ -170,7 +176,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     function clampModel () {
-      if (!isNaN(+model.value)) {
+      if (model.value != null && !isNaN(+model.value)) {
         model.value = clamp(+(model.value), props.min, props.max)
       } else {
         model.value = null
