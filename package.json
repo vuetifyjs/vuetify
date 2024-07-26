@@ -22,7 +22,9 @@
     "postversion": "node scripts/post-release-merge.js",
     "clean": "lerna clean",
     "changelog": "conventional-changelog -u -p vuetify",
-    "all-checks": "pnpm run lint && lerna run test && lerna run cy:run && pnpm run build"
+    "all-checks": "pnpm run lint && lerna run test && lerna run cy:run && pnpm run build",
+    "vue-ecosystem-ci:build": "pnpm --filter vuetify run build",
+    "vue-ecosystem-ci:test": "pnpm --filter vuetify run lint && pnpm --filter vuetify run test"
   },
   "engines": {
     "node": ">=18.19.0 || >=20.6.0"
