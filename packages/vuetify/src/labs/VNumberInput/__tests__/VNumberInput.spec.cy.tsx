@@ -10,19 +10,21 @@ import { ref } from 'vue'
 describe('VNumberInput', () => {
   it('should prevent NaN from arbitrary input', () => {
     const scenarios = [
-      { text: '---', expected: '-' }, // "-" is only allowed once
-      { text: '1-', expected: '1' }, // "-" is only at the start
-      { text: '.', expected: '' }, // "." isn't allowed at the start
-      { text: '1...0', expected: '1.0' }, // "." is only allowed once
-      { text: '123.45.67', expected: '123.4567' }, // "." is only allowed once
-      { text: 'ab-c8+.iop9', expected: '-8.9' }, // Only numbers, "-", "." are allowed to type in
+      { typing: '---', expected: '-' }, // "-" is only allowed once
+      { typing: '1-', expected: '1' }, // "-" is only at the start
+      { typing: '.', expected: '.' }, // "." is allowed at the start
+      { typing: '..', expected: '.' }, // "." is only allowed once
+      { typing: '1...0', expected: '1.0' }, // "." is only allowed once
+      { typing: '123.45.67', expected: '123.4567' }, // "." is only allowed once
+      { typing: 'ab-c8+.iop9', expected: '-8.9' }, // Only numbers, "-", "." are allowed to type in
     ]
-    scenarios.forEach(({ text, expected }) => {
+    scenarios.forEach(({ typing, expected }) => {
       cy.mount(() => <VNumberInput />)
-        .get('.v-number-input input').focus().realType(text)
+        .get('.v-number-input input').focus().realType(typing)
         .get('.v-number-input input').should('have.value', expected)
     })
   })
+
   it('should reset v-model to null when click:clear is triggered', () => {
     const model = ref(5)
 

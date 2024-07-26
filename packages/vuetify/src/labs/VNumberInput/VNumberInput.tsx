@@ -37,6 +37,10 @@ const makeVNumberInputProps = propsFactory({
   },
   inset: Boolean,
   hideInput: Boolean,
+  modelValue: {
+    type: Number as PropType<Number | null>,
+    default: null,
+  },
   min: {
     type: Number,
     default: Number.MIN_SAFE_INTEGER,
@@ -50,12 +54,7 @@ const makeVNumberInputProps = propsFactory({
     default: 1,
   },
 
-  ...omit(makeVTextFieldProps({
-    modelValue: {
-      type: [Number, null],
-      default: null,
-    },
-  }), ['appendInnerIcon', 'prependInnerIcon']),
+  ...omit(makeVTextFieldProps({}), ['appendInnerIcon', 'modelValue', 'prependInnerIcon']),
 }, 'VNumberInput')
 
 export const VNumberInput = genericComponent<VNumberInputSlots>()({
@@ -91,11 +90,11 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const canIncrease = computed(() => {
       if (controlsDisabled.value) return false
-      return (model.value ?? 0) + props.step <= props.max
+      return (model.value ?? 0) as number + props.step <= props.max
     })
     const canDecrease = computed(() => {
       if (controlsDisabled.value) return false
-      return (model.value ?? 0) - props.step >= props.min
+      return (model.value ?? 0) as number - props.step >= props.min
     })
 
     const controlVariant = computed(() => {
@@ -145,8 +144,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     function onBeforeinput (e: InputEvent) {
       if (!e.data) return
       const existingTxt = (e.target as HTMLInputElement)?.value
-      const selectionStart = vTextFieldRef.value!.selectionStart
-      const selectionEnd = vTextFieldRef.value!.selectionEnd
+      const selectionStart = (e.target as HTMLInputElement)?.selectionStart
+      const selectionEnd = (e.target as HTMLInputElement)?.selectionEnd
       const potentialNewInputVal =
         existingTxt
           ? existingTxt.slice(0, selectionStart as number | undefined) + e.data + existingTxt.slice(selectionEnd as number | undefined)
@@ -154,7 +153,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       // Only numbers, "-", "." are allowed
       // AND "-", "." are allowed only once
       // AND "-" is only allowed at the start
-      if (!/^-?\d+(\.\d*)?$|^-$/.test(potentialNewInputVal)) {
+      if (!/^-?(\d+(\.\d*)?|(\.\d+)|\d*|\.)$/.test(potentialNewInputVal)) {
         e.preventDefault()
       }
     }
@@ -182,7 +181,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     function clampModel () {
       if (!vTextFieldRef.value) return
       const inputText = vTextFieldRef.value.value
-      if (!isNaN(+inputText)) {
+      if (inputText && !isNaN(+inputText)) {
         model.value = clamp(+(inputText), props.min, props.max)
       } else {
         model.value = null
