@@ -17,4 +17,3 @@
     "submenu": "Opens with right arrow and closes on left instead of up/down. Implies `location=\"end\"`. Directions are reversed for RTL."
   }
 }
-
