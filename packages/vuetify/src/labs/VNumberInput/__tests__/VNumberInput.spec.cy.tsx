@@ -25,6 +25,41 @@ describe('VNumberInput', () => {
     })
   })
 
+  it.only('should resolve to numeric value after blur', () => {
+    const scenarios = [
+      { typing: '-', expected: '' },
+      { typing: '.', expected: '' },
+      { typing: '-.', expected: '' },
+      { typing: '-.50', expected: '-0.5' },
+      { typing: '5.{leftarrow}{backspace}', expected: '' },
+    ]
+    scenarios.forEach(({ typing, expected }) => {
+      cy.mount(() => <VNumberInput />)
+        .get('.v-number-input input').focus().realType(typing)
+        .get('.v-number-input input').blur().should('have.value', expected)
+    })
+  })
+
+  it('should resolve to numeric value after blur (advanced)', () => {
+    cy.mount(() => <VNumberInput />)
+      .get('.v-number-input input').focus().realType('-0.21')
+      .get('.v-number-input input').blur().focus().realType('{home}{rightarrow}{del}') // removes "0", leaving "-.21"
+      .get('.v-number-input input').blur().should('have.value', '-0.21')
+  })
+
+  it('should accept up/down actions after typing a value', () => {
+    const scenarios = [
+      { typing: '500{uparrow}', expected: '501' },
+      { typing: '11{downarrow}', expected: '10' },
+      { typing: '7{uparrow}{uparrow}', expected: '9' },
+    ]
+    scenarios.forEach(({ typing, expected }) => {
+      cy.mount(() => <VNumberInput />)
+        .get('.v-number-input input').focus().realType(typing)
+        .get('.v-number-input input').should('have.value', expected)
+    })
+  })
+
   it('should reset v-model to null when click:clear is triggered', () => {
     const model = ref(5)
 
