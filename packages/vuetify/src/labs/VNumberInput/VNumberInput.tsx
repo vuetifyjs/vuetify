@@ -69,14 +69,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   },
 
   setup (props, { slots }) {
-    const _model = useProxiedModel(props, 'modelValue')
-
-    const model = computed({
-      get: () => _model.value,
-      set (val) {
-        if (typeof val !== 'string') _model.value = val
-      },
-    })
+    const model = useProxiedModel(props, 'modelValue')
 
     const vTextFieldRef = ref<VTextField | undefined>()
 
@@ -304,7 +297,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       return (
         <VTextField
           ref={ vTextFieldRef }
-          v-model={ model.value }
+          modelValue={ model.value }
           onBeforeinput={ onBeforeinput }
           onChange={ clampModel }
           onKeydown={ onKeydown }
