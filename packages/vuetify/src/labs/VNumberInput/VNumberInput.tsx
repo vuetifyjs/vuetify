@@ -12,7 +12,7 @@ import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onMounted, ref } from 'vue'
+import { computed, nextTick, onMounted, ref } from 'vue'
 import { clamp, genericComponent, getDecimals, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -158,19 +158,22 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       }
     }
 
-    function onKeydown (e: KeyboardEvent) {
+    async function onKeydown (e: KeyboardEvent) {
       if (
         ['Enter', 'ArrowLeft', 'ArrowRight', 'Backspace', 'Delete', 'Tab'].includes(e.key) ||
         e.ctrlKey
       ) return
 
-      if (['ArrowDown'].includes(e.key)) {
+      if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
         e.preventDefault()
-        toggleUpDown(false)
-      }
-      if (['ArrowUp'].includes(e.key)) {
-        e.preventDefault()
-        toggleUpDown()
+        clampModel()
+        // _model is controlled, so need to wait until props['modelValue'] is updated
+        await nextTick()
+        if (e.key === 'ArrowDown') {
+          toggleUpDown(false)
+        } else {
+          toggleUpDown()
+        }
       }
     }
 
