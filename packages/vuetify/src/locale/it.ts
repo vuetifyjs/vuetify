@@ -68,6 +68,11 @@ export default {
     counter: '{0} file',
     counterSize: '{0} file ({1} in totale)',
   },
+  fileUpload: {
+    title: 'Trascina e rilascia i file qui',
+    divider: 'oppure',
+    browse: 'Sfoglia i file',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

@@ -68,6 +68,11 @@ export default {
     counter: '{0} קבצים',
     counterSize: '{0} קבצים ({1} בסך הכל)',
   },
+  fileUpload: {
+    title: 'גרור והנח קבצים כאן',
+    divider: 'או',
+    browse: 'עיין בקבצים',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

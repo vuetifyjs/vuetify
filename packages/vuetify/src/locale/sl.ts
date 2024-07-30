@@ -68,6 +68,11 @@ export default {
     counter: '{0} datotek',
     counterSize: '{0} datotek (skupno {1})',
   },
+  fileUpload: {
+    title: 'Povlecite in spustite datoteke tukaj',
+    divider: 'ali',
+    browse: 'Brskajte po datotekah',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

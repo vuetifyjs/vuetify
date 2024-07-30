@@ -8,6 +8,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvi
 import { makeVDividerProps, VDivider } from '@/components/VDivider/VDivider'
 import { VIcon } from '@/components/VIcon/VIcon'
 import { VOverlay } from '@/components/VOverlay/VOverlay'
+import { VProgressLinear } from '@/components/VProgressLinear/VProgressLinear'
 import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 
 // Composables
@@ -18,7 +19,8 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { onMounted, onUnmounted, ref, shallowRef } from 'vue'
+import { computed, onMounted, onUnmounted, ref, shallowRef } from 'vue'
+import useUpload from './upload'
 import { filterInputAttrs, genericComponent, only, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -42,14 +44,41 @@ export type VFileUploadSlots = {
 }
 
 export const makeVFileUploadProps = propsFactory({
+  accept: {
+    type: String,
+    default: '*',
+  },
+  autoUpload: {
+    type: Boolean,
+    default: true,
+  },
   browseText: {
     type: String,
     default: '$vuetify.fileUpload.browse',
   },
+  capture: {
+    type: [Boolean, String] as PropType<boolean | 'user' | 'environment'>,
+    default: undefined,
+    validator: (val: any) => {
+      return typeof val === 'boolean' || ['user', 'environment'].includes(val)
+    },
+  },
+  // Non-standard attributes
+  directory: Boolean,
   dividerText: {
     type: String,
     default: '$vuetify.fileUpload.divider',
   },
+  limit: {
+    type: Number,
+    default: 0,
+  },
+  // TODO
+  maxFileSize: {
+    type: Number,
+    default: Infinity,
+  },
+  preview: Boolean,
   title: {
     type: String,
     default: '$vuetify.fileUpload.title',
@@ -76,6 +105,20 @@ export const makeVFileUploadProps = propsFactory({
   },
   showSize: Boolean,
   name: String,
+  url: {
+    type: String,
+    default: '',
+  },
+  method: {
+    type: String as PropType<'POST' | 'PUT' | 'PATCH'>,
+    default: 'POST',
+  },
+  headers: {
+    type: Object as PropType<Record<string, string>>,
+    default: () => ({ }),
+  },
+  onError: Function as PropType<(err: Error) => void>,
+  onProcess: Function as PropType<(file: File, e: ProgressEvent) => void>,
 
   ...makeDelayProps(),
   ...makeDensityProps(),
@@ -93,10 +136,12 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
   props: makeVFileUploadProps(),
 
   emits: {
+    change: (files: readonly File[]) => true,
+    'click:remove': () => true,
     'update:modelValue': (files: File[]) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
     const { densityClasses } = useDensity(props)
     const model = useProxiedModel(
@@ -110,6 +155,25 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
     const dragOver = shallowRef(false)
     const vSheetRef = ref<InstanceType<typeof VSheet> | null>(null)
     const inputRef = ref<HTMLInputElement | null>(null)
+
+    const { remove, upload, uploadMap } = useUpload({
+      name: props.name ?? 'file',
+      url: props.url,
+      method: props.method,
+      headers: props.headers,
+      onProcess,
+    })
+
+    const fileList = computed(() => {
+      return wrapInArray(model.value).map(f => {
+        const { progress, state } = uploadMap.value.get(f) ?? {}
+        return {
+          file: f,
+          progress: progress ?? 0,
+          state,
+        }
+      })
+    })
 
     onMounted(() => {
       vSheetRef.value?.$el.addEventListener('dragover', onDragOver)
@@ -143,19 +207,53 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
       if (!props.multiple) {
         model.value = [files[0]]
+      } else {
+        const array = model.value.slice()
+        for (const file of files) {
+          if (props.multiple && props.limit > 0 && array.length >= props.limit) {
+            break
+          }
+          if (!array.some(f => f.name === file.name)) {
+            array.push(file)
+          }
+        }
 
-        return
+        model.value = array
       }
 
-      const array = model.value.slice()
+      emit('change', files)
 
-      for (const file of files) {
-        if (!array.some(f => f.name === file.name)) {
-          array.push(file)
+      if (props.autoUpload) {
+        upload(files).catch((e: Error) => {
+          props.onError?.(e)
+        })
+      }
+    }
+
+    function onChange (e: Event) {
+      e.preventDefault()
+      e.stopPropagation()
+
+      if (!e.target) return
+
+      const target = e.target as HTMLInputElement
+      let files = [...target.files ?? []]
+
+      if (props.multiple && props.limit > 0) {
+        if (model.value.length >= props.limit) return
+        if (model.value.length + files.length > props.limit) {
+          files = files.slice(0, props.limit - model.value.length)
         }
       }
+      model.value = props.multiple ? [...model.value, ...files] : files
 
-      model.value = array
+      emit('change', files)
+
+      if (props.autoUpload) {
+        upload(files).catch((e: Error) => {
+          props.onError?.(e)
+        })
+      }
     }
 
     function onClick () {
@@ -163,11 +261,19 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
     }
 
     function onClickRemove (index: number) {
+      remove(model.value[index])
       model.value = model.value.filter((_, i) => i !== index)
+      emit('change', model.value)
 
       if (model.value.length > 0 || !inputRef.value) return
 
       inputRef.value.value = ''
+    }
+
+    function onProcess (file: File, e: ProgressEvent) {
+      if (props.onProcess) {
+        props.onProcess(file, e)
+      }
     }
 
     useRender(() => {
@@ -177,20 +283,19 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       const cardProps = VSheet.filterProps(props)
       const dividerProps = VDivider.filterProps(props)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
+      const directoryProps = props.directory ? { webkitdirectory: true, directory: true } : {}
 
       const inputNode = (
         <input
+          accept={ props.accept }
+          capture={ props.capture }
           ref={ inputRef }
           type="file"
           disabled={ props.disabled }
           multiple={ props.multiple }
           name={ props.name }
-          onChange={ e => {
-            if (!e.target) return
-
-            const target = e.target as HTMLInputElement
-            model.value = [...target.files ?? []]
-          }}
+          onChange={ onChange }
+          { ...directoryProps }
           { ...inputAttrs }
         />
       )
@@ -297,11 +402,11 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
             { slots.input?.({ inputNode }) ?? inputNode }
           </VSheet>
 
-          { model.value.length > 0 && (
+          { fileList.value.length > 0 && (
             <div class="v-file-upload-items">
-              { model.value.map((file, i) => {
+              { fileList.value.map((item, i) => {
                 const slotProps = {
-                  file,
+                  file: item.file,
                   props: {
                     'onClick:remove': () => onClickRemove(i),
                   },
@@ -312,9 +417,11 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                     key={ i }
                     defaults={{
                       VFileUploadItem: {
-                        file,
+                        file: item.file,
+                        baseColor: item.state === 'error' ? 'error' : '',
                         clearable: props.clearable,
                         disabled: props.disabled,
+                        progress: item.progress,
                         showSize: props.showSize,
                       },
                     }}
@@ -324,7 +431,11 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                         key={ i }
                         onClick:remove={ () => onClickRemove(i) }
                         v-slots={ slots }
-                      />
+                      >
+                        {
+                          props.autoUpload && item.state === 'uploading' ? (<VProgressLinear modelValue={ item.progress } />) : null
+                        }
+                      </VFileUploadItem>
                     )}
                   </VDefaultsProvider>
                 )

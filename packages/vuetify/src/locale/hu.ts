@@ -68,6 +68,11 @@ export default {
     counter: '{0} fájl',
     counterSize: '{0} fájl ({1} összesen)',
   },
+  fileUpload: {
+    title: 'Húzza és ejtse le a fájlokat ide',
+    divider: 'vagy',
+    browse: 'Fájlok tallózása',
+  },
   timePicker: {
     am: 'de',
     pm: 'du',

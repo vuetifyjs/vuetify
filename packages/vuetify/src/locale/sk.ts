@@ -68,6 +68,11 @@ export default {
     counter: '{0} súborov',
     counterSize: '{0} súborov ({1} celkom)',
   },
+  fileUpload: {
+    title: 'Перетащите и отпустите файлы здесь',
+    divider: 'или',
+    browse: 'Просмотр файлов',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

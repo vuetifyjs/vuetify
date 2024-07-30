@@ -68,6 +68,11 @@ export default {
     counter: 'Odabranih datoteka: {0}',
     counterSize: 'Odabranih datoteka: {0} ({1} ukupno)',
   },
+  fileUpload: {
+    title: 'Povucite i ispustite datoteke ovdje',
+    divider: 'ili',
+    browse: 'Pregledaj datoteke',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

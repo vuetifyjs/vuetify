@@ -68,6 +68,11 @@ export default {
     counter: '{0} 个文件',
     counterSize: '{0} 个文件（共 {1}）',
   },
+  fileUpload: {
+    title: '将文件拖放到此处',
+    divider: '或',
+    browse: '浏览文件',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

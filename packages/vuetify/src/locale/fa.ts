@@ -68,6 +68,11 @@ export default {
     counter: '{0} پرونده',
     counterSize: '{0} پرونده ({1} در کل)',
   },
+  fileUpload: {
+    title: 'فایل ها را اینجا بکشید و رها کنید',
+    divider: 'یا',
+    browse: 'مرور فایل ها',
+  },
   timePicker: {
     am: 'قبل از ظهر',
     pm: 'بعد از ظهر',

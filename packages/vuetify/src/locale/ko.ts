@@ -68,6 +68,11 @@ export default {
     counter: '{0} files',
     counterSize: '{0} files ({1} in total)',
   },
+  fileUpload: {
+    title: '파일을 여기로 끌어다 놓기',
+    divider: '또는',
+    browse: '파일 찾아보기',
+  },
   timePicker: {
     am: '오전',
     pm: '오후',

@@ -68,6 +68,11 @@ export default {
     counter: '{0} фајлова',
     counterSize: '{0} фајлова ({1} укупно)',
   },
+  fileUpload: {
+    title: 'Превуците и отпустите датотеке овде',
+    divider: 'или',
+    browse: 'Претражите датотеке',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

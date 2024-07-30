@@ -68,6 +68,11 @@ export default {
     counter: '{0} files',
     counterSize: '{0} files ({1} in total)',
   },
+  fileUpload: {
+    title: 'Velciet un nometiet failus šeit',
+    divider: 'vai',
+    browse: 'Pārlūkot failus',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

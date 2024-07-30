@@ -68,6 +68,11 @@ export default {
     counter: '{0} fitxers',
     counterSize: '{0} fitxers ({1} en total)',
   },
+  fileUpload: {
+    title: 'Arrossegueu i deixeu anar els fitxers aquí',
+    divider: 'o',
+    browse: 'Navegueu pels fitxers',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

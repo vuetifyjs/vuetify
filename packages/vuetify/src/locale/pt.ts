@@ -68,6 +68,11 @@ export default {
     counter: '{0} arquivo(s)',
     counterSize: '{0} arquivo(s) ({1} no total)',
   },
+  fileUpload: {
+    title: 'Arraste e solte os arquivos aqui',
+    divider: 'ou',
+    browse: 'Navegar pelos arquivos',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

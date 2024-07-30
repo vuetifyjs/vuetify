@@ -68,6 +68,11 @@ export default {
     counter: '{0} filer',
     counterSize: '{0} filer ({1})',
   },
+  fileUpload: {
+    title: 'Dra och släpp filer här',
+    divider: 'eller',
+    browse: 'Bläddra i filer',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

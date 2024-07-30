@@ -68,6 +68,11 @@ export default {
     counter: '{0} fayl',
     counterSize: '{0} fayl (cəmi {1})',
   },
+  fileUpload: {
+    title: 'Faylları buraya sürüşdürün və buraxın',
+    divider: 'və ya',
+    browse: 'Faylları gözdən keçirin',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

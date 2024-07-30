@@ -68,6 +68,11 @@ export default {
     counter: '{0} فایل',
     counterSize: '{0} فایل ({1} لە کۆی گشتی)',
   },
+  fileUpload: {
+    title: 'لێرە پەڕگەکان بکێشە و جێبهێڵە',
+    divider: 'یان',
+    browse: 'بەرواری پەڕگەکان',
+  },
   timePicker: {
     am: 'پێش نیوەڕۆژ',
     pm: 'دوای نیوەڕۆژ',
