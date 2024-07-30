@@ -9,6 +9,7 @@ import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
+import { useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
@@ -46,11 +47,13 @@ export const makeVMenuProps = propsFactory({
   // TODO
   // disableKeys: Boolean,
   id: String,
+  submenu: Boolean,
 
   ...omit(makeVOverlayProps({
     closeDelay: 250,
     closeOnContentClick: true,
     locationStrategy: 'connected' as const,
+    location: undefined,
     openDelay: 300,
     scrim: false,
     scrollStrategy: 'reposition' as const,
@@ -70,6 +73,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
   setup (props, { slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
+    const { isRtl } = useRtl()
 
     const uid = getUid()
     const id = computed(() => props.id || `v-menu-${uid}`)
@@ -157,9 +161,9 @@ export const VMenu = genericComponent<OverlaySlots>()({
           isActive.value = false
           overlay.value?.activatorEl?.focus()
         }
-      } else if (['Enter', ' '].includes(e.key) && props.closeOnContentClick) {
+      } else if (props.submenu && e.key === (isRtl.value ? 'ArrowRight' : 'ArrowLeft')) {
         isActive.value = false
-        parent?.closeParents()
+        overlay.value?.activatorEl?.focus()
       }
     }
 
@@ -170,12 +174,25 @@ export const VMenu = genericComponent<OverlaySlots>()({
       if (el && isActive.value) {
         if (e.key === 'ArrowDown') {
           e.preventDefault()
+          e.stopImmediatePropagation()
           focusChild(el, 'next')
         } else if (e.key === 'ArrowUp') {
           e.preventDefault()
+          e.stopImmediatePropagation()
           focusChild(el, 'prev')
+        } else if (props.submenu) {
+          if (e.key === (isRtl.value ? 'ArrowRight' : 'ArrowLeft')) {
+            isActive.value = false
+          } else if (e.key === (isRtl.value ? 'ArrowLeft' : 'ArrowRight')) {
+            e.preventDefault()
+            focusChild(el, 'first')
+          }
         }
-      } else if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
+      } else if (
+        props.submenu
+          ? e.key === (isRtl.value ? 'ArrowLeft' : 'ArrowRight')
+          : ['ArrowDown', 'ArrowUp'].includes(e.key)
+      ) {
         isActive.value = true
         e.preventDefault()
         setTimeout(() => setTimeout(() => onActivatorKeydown(e)))
@@ -207,6 +224,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
           v-model={ isActive.value }
           absolute
           activatorProps={ activatorProps.value }
+          location={ props.location ?? (props.submenu ? 'end' : 'bottom') }
           onClick:outside={ onClickOutside }
           onKeydown={ onKeydown }
           { ...scopeId }

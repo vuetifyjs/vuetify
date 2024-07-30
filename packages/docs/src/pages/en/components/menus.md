@@ -91,6 +91,12 @@ Menus can be accessed using hover instead of clicking with the **open-on-hover**
 
 <ExamplesExample file="v-menu/prop-open-on-hover" />
 
+#### Nested menus
+
+Menus with other menus inside them will not close until their children are closed. The **submenu** prop changes keyboard behaviour to open and close with left/right arrow keys instead of up/down.
+
+<ExamplesExample file="v-menu/prop-submenu" />
+
 ### Slots
 
 #### Activator and tooltip

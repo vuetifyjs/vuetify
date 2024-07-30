@@ -195,7 +195,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     function onKeyDown (e: KeyboardEvent) {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault()
-        onClick(e as any as MouseEvent)
+        e.target!.dispatchEvent(new MouseEvent('click', e))
       }
     }
 
