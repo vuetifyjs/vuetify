@@ -215,6 +215,14 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
                 error={ isValid.value === false }
+                onDragover={ (e: MouseEvent) => { e.preventDefault() } }
+                onDrop={ (e: DragEvent) => {
+                  e.preventDefault()
+
+                  if (!e.dataTransfer) return
+
+                  model.value = [...e.dataTransfer.files ?? []]
+                }}
               >
                 {{
                   ...slots,
