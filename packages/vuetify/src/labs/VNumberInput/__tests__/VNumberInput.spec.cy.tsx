@@ -33,11 +33,11 @@ describe('VNumberInput', () => {
           <VNumberInput
             clearable
             v-model={ model.value }
-            readonly
           />
         </>
     ))
       .get('.v-field__clearable .v-icon--clickable').click()
+      .get('.v-field input').blur()
       .then(() => {
         expect(model.value).equal(null)
       })
@@ -170,6 +170,7 @@ describe('VNumberInput', () => {
         (
         <VNumberInput
           step={ 0.03 }
+          precision={ 2 }
           v-model={ numberInputValue.value }
         ></VNumberInput>
         )
@@ -188,7 +189,7 @@ describe('VNumberInput', () => {
         .then(() => expect(numberInputValue.value).to.equal(0.03))
         .get('button[name="decrement-btn"]')
         .click()
-        .get('.v-number-input input').should('have.value', '0')
+        .get('.v-number-input input').should('have.value', '0.00')
         .then(() => expect(numberInputValue.value).to.equal(0))
     })
   })
