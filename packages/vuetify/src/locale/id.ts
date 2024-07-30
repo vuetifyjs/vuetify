@@ -68,6 +68,11 @@ export default {
     counter: '{0} berkas',
     counterSize: '{0} berkas (dari total {1})',
   },
+  fileUpload: {
+    title: 'Seret dan lepaskan file di sini',
+    divider: 'atau',
+    browse: 'Telusuri file',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

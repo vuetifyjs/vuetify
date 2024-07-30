@@ -68,6 +68,11 @@ export default {
     counter: '{0} ไฟล์',
     counterSize: '{0} ไฟล์ (รวม {1})',
   },
+  fileUpload: {
+    title: 'ลากและวางไฟล์ที่นี่',
+    divider: 'หรือ',
+    browse: 'เรียกดูไฟล์',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

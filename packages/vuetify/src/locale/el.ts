@@ -68,6 +68,11 @@ export default {
     counter: '{0} files',
     counterSize: '{0} files ({1} in total)',
   },
+  fileUpload: {
+    title: 'Σύρετε και αφήστε αρχεία εδώ',
+    divider: 'ή',
+    browse: 'Περιηγηθείτε σε αρχεία',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

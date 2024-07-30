@@ -15,7 +15,7 @@ interface Options {
 export interface FileItem {
   file: File
   progress: number
-  state?: 'aborted' | 'complete' | 'uploading'
+  state?: 'aborted' | 'complete' | 'error' | 'uploading'
   xhr?: XMLHttpRequest
 }
 
@@ -73,6 +73,12 @@ const useUpload = (options: Options) => {
             }
             resolve(this.responseText || this.response)
           } else {
+            if (uploadMap.value.has(file)) {
+              const item = uploadMap.value.get(file)
+              if (item?.state === 'uploading') {
+                item.state = 'error'
+              }
+            }
             reject(new Error(this.statusText))
           }
         }

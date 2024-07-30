@@ -68,6 +68,11 @@ export default {
     counter: '{0} tệp',
     counterSize: '{0} tệp (tổng cộng {1})',
   },
+  fileUpload: {
+    title: 'Kéo và thả tệp tin ở đây',
+    divider: 'hoặc',
+    browse: 'Duyệt tệp tin',
+  },
   timePicker: {
     am: 'SA',
     pm: 'CH',

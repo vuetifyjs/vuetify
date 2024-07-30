@@ -68,6 +68,11 @@ export default {
     counter: '{0} файлів',
     counterSize: '{0} файлів ({1} загалом)',
   },
+  fileUpload: {
+    title: 'Перетягніть і відпустіть файли тут',
+    divider: 'або',
+    browse: 'Переглянути файли',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

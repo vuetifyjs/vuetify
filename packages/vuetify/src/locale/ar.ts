@@ -68,6 +68,11 @@ export default {
     counter: '{0} ملفات',
     counterSize: '{0} ملفات ({1} في المجموع)',
   },
+  fileUpload: {
+    title: 'هنا اسحب وأفلت الملفات',
+    divider: 'أو',
+    browse: 'تصفح الملفات',
+  },
   timePicker: {
     am: 'صباحاً',
     pm: 'مساءً',

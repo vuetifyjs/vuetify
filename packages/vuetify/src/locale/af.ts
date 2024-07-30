@@ -68,6 +68,11 @@ export default {
     counter: '{0} files',
     counterSize: '{0} files ({1} in total)',
   },
+  fileUpload: {
+    title: 'Hier bestande sleep en laat val',
+    divider: 'of',
+    browse: 'Blaai deur lêers',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

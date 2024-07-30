@@ -68,6 +68,11 @@ export default {
     counter: '{0} ឯកសារ',
     counterSize: '{0} ឯកសារ ({1} សរុប)',
   },
+  fileUpload: {
+    title: 'ទាញហើយទុកឯកសារនៅទីនេះ',
+    divider: 'ឬ',
+    browse: 'រុករកឯកសារ',
+  },
   timePicker: {
     am: 'ព្រឹក',
     pm: 'ល្ងាច',

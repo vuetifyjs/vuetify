@@ -68,6 +68,11 @@ export default {
     counter: '{0} filer',
     counterSize: '{0} filer ({1} total)',
   },
+  fileUpload: {
+    title: 'Træk og slip filer her',
+    divider: 'eller',
+    browse: 'Gennemse filer',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

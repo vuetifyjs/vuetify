@@ -418,6 +418,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                     defaults={{
                       VFileUploadItem: {
                         file: item.file,
+                        baseColor: item.state === 'error' ? 'error' : '',
                         clearable: props.clearable,
                         disabled: props.disabled,
                         progress: item.progress,
@@ -432,7 +433,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                         v-slots={ slots }
                       >
                         {
-                          props.autoUpload && item.state !== 'complete' ? (<VProgressLinear modelValue={ item.progress } />) : null
+                          props.autoUpload && item.state === 'uploading' ? (<VProgressLinear modelValue={ item.progress } />) : null
                         }
                       </VFileUploadItem>
                     )}

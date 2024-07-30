@@ -68,6 +68,11 @@ export default {
     counter: '{0} tiedostoa',
     counterSize: '{0} tiedostoa ({1} yhteensä)',
   },
+  fileUpload: {
+    title: 'Vedä ja pudota tiedostot tähän',
+    divider: 'tai',
+    browse: 'Selaa tiedostoja',
+  },
   timePicker: {
     am: 'ap.',
     pm: 'ip.',

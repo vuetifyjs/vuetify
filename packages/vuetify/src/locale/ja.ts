@@ -68,6 +68,11 @@ export default {
     counter: '{0} ファイル',
     counterSize: '{0} ファイル (合計 {1})',
   },
+  fileUpload: {
+    title: 'ファイルをここにドラッグ&ドロップ',
+    divider: 'または',
+    browse: 'ファイルを参照',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

@@ -68,6 +68,11 @@ export default {
     counter: '{0} fișiere',
     counterSize: '{0} fișiere ({1} în total)',
   },
+  fileUpload: {
+    title: 'Trage și plasează fișierele aici',
+    divider: 'sau',
+    browse: 'Răsfoiește fișierele',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

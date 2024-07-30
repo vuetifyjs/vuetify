@@ -68,6 +68,11 @@ export default {
     counter: '{0} fajlova',
     counterSize: '{0} fajlova ({1} ukupno)',
   },
+  fileUpload: {
+    title: 'Prevucite i otpustite datoteke ovde',
+    divider: 'ili',
+    browse: 'Pretražite datoteke',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

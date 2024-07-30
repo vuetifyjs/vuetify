@@ -68,6 +68,11 @@ export default {
     counter: '{0} souborů',
     counterSize: '{0} souborů ({1} celkem)',
   },
+  fileUpload: {
+    title: 'Přetáhněte a pusťte soubory zde',
+    divider: 'nebo',
+    browse: 'Procházet soubory',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

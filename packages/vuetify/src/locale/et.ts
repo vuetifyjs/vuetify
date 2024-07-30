@@ -68,6 +68,11 @@ export default {
     counter: '{0} faili',
     counterSize: '{0} faili (kokku {1})',
   },
+  fileUpload: {
+    title: 'Lohista ja viska failid siia',
+    divider: 'või',
+    browse: 'Sirvi faile',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

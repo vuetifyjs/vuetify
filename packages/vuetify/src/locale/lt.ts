@@ -68,6 +68,11 @@ export default {
     counter: '{0} failų',
     counterSize: '{0} failų ({1} iš viso)',
   },
+  fileUpload: {
+    title: 'Perkelkite ir paleiskite failus čia',
+    divider: 'arba',
+    browse: 'Naršyti failus',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
