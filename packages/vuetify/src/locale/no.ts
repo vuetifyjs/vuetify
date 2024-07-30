@@ -99,4 +99,7 @@ export default {
     loadMore: 'Last flere',
     empty: 'Det var alt',
   },
+  numberInput: {
+    precisionExceeded: 'Expected up to {0} decimal places',
+  },
 }

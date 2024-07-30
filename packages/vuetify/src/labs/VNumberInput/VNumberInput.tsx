@@ -8,6 +8,7 @@ import { VDivider } from '../../components/VDivider'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
+import { useLocale } from '@/composables'
 import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -73,6 +74,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   },
 
   setup (props, { slots }) {
+    const { t } = useLocale()
+
     const model = useProxiedModel(props, 'modelValue')
     const inputText = ref<string | null>(null)
 
@@ -117,7 +120,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }, { immediate: true })
 
     const precisionRules = computed(() => [
-      (v: string | null) => isNaN(Number(v)) || getDecimals(Number(v)) <= props.precision! || `Expected up to ${props.precision} decimal places`,
+      (v: string | null) => isNaN(Number(v)) ||
+        getDecimals(Number(v)) <= props.precision! ||
+        t('$vuetify.numberInput.precisionExceeded', props.precision),
     ])
 
     function formatInputValue () {
