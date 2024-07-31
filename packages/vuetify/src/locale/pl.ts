@@ -100,6 +100,6 @@ export default {
     empty: 'Brak kolejnych danych',
   },
   numberInput: {
-    precisionExceeded: 'Expected up to {0} decimal places',
+    precisionExceeded: 'Użyj maksymalnie {0} miejsc dziesiętnych',
   },
 }
