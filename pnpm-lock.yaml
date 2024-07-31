@@ -289,7 +289,7 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0(rollup@4.14.1)(vue-i18n@9.11.1(vue@3.4.27(typescript@5.3.3)))
       '@mdi/js':
-        specifier: ^7.4.47
+        specifier: 7.4.47
         version: 7.4.47
       '@mdi/svg':
         specifier: 7.4.47

@@ -43,7 +43,7 @@
   "devDependencies": {
     "@emailjs/browser": "^4.3.3",
     "@intlify/unplugin-vue-i18n": "^4.0.0",
-    "@mdi/js": "^7.4.47",
+    "@mdi/js": "7.4.47",
     "@mdi/svg": "7.4.47",
     "@types/lodash-es": "^4.17.12",
     "@types/markdown-it": "^14.0.0",
