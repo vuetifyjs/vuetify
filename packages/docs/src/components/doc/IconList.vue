@@ -57,8 +57,8 @@
   const selection = shallowRef()
   const search = shallowRef('')
 
-  import('@mdi/svg/meta.json')
-    .then(i => icons.value = i.default)
+  import('virtual:mdi-js-icons')
+    .then(i => icons.value = i.icons)
     .catch(console.error)
     .finally(() => loading.value = false)
 

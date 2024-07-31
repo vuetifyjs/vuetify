@@ -10,6 +10,14 @@ declare module '*.vue' {
   export default component
 }
 
+declare module 'virtual:mdi-js-icons' {
+  export interface IconEntry {
+    name: string
+    aliases: string[]
+  }
+  export const icons: IconEntry[]
+}
+
 declare module 'markdown-it-header-sections' {
   import type MarkdownIt from 'markdown-it'
 

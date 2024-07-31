@@ -236,6 +236,27 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         }
       },
 
+      {
+        name: 'vuetify:mdi-js-icons',
+        enforce: 'pre',
+        resolveId(id) {
+          if (id === 'virtual:mdi-js-icons') {
+            return `\0virtual:mdi-js-icons`
+          }
+        },
+        async load (id) {
+          if (id === `\0virtual:mdi-js-icons`) {
+            const icons: { name: string, aliases: string[] }[] = await import('@mdi/svg/meta.json', {
+              assert: { type: 'json' }
+            }).then(i => i.default)
+            return `export const icons = ${JSON.stringify(icons.map(i => ({
+              name: i.name,
+              aliases: i.aliases,
+            })))}`
+          }
+        }
+      },
+
       Vue({
         include: [/\.vue$/, /\.md$/],
         // https://github.com/vuejs/vue-next/issues/3298
