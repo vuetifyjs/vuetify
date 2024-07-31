@@ -2,15 +2,15 @@
 @import './_mixins.sass'
 
 // Theme
-+theme(v-treeview) using ($material)
+@include theme(v-treeview) using ($material)
   color: map-deep-get($material, 'text', 'primary')
 
   &--hoverable .v-treeview-node__root,
   .v-treeview-node--click > .v-treeview-node__root
-    +states($material)
+    @include states($material)
 
   .v-treeview-node__root.v-treeview-node--active
-    +active-states($material)
+    @include active-states($material)
 
   .v-treeview-node--disabled
     > .v-treeview-node__root > .v-treeview-node__content
@@ -18,10 +18,10 @@
 
 .v-treeview-node
   &.v-treeview-node--shaped
-    +treeview-shaped($treeview-node-height, $treeview-node-shaped-margin)
+    @include treeview-shaped($treeview-node-height, $treeview-node-shaped-margin)
 
   &.v-treeview-node--rounded
-    +treeview-rounded($treeview-node-height, $treeview-node-shaped-margin)
+    @include treeview-rounded($treeview-node-height, $treeview-node-shaped-margin)
 
   &--click
     > .v-treeview-node__root,
@@ -68,10 +68,10 @@
     min-height: $treeview-node-height-dense
 
   &.v-treeview-node--shaped
-    +treeview-shaped($treeview-node-height-dense, $treeview-node-shaped-margin)
+    @include treeview-shaped($treeview-node-height-dense, $treeview-node-shaped-margin)
 
   &.v-treeview-node--rounded
-    +treeview-rounded($treeview-node-height-dense, $treeview-node-shaped-margin)
+    @include treeview-rounded($treeview-node-height-dense, $treeview-node-shaped-margin)
 
 .v-treeview-node__checkbox
   width: $treeview-node-level-width
@@ -85,12 +85,12 @@
   &--loading
     animation: progress-circular-rotate 1s linear infinite
 
-  +ltr()
+  @include ltr()
     transform: rotate(-90deg)
     &--open
       transform: none
 
-  +rtl()
+  @include rtl()
     transform: rotate(90deg)
     &--open
       transform: none

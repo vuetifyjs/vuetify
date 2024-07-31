@@ -10,7 +10,7 @@
 @include tools.layer('utilities')
   @each $breakpoint in map.keys(settings.$grid-breakpoints)
     // Generate media query if needed
-    +tools.media-breakpoint-up($breakpoint)
+    @include tools.media-breakpoint-up($breakpoint)
       $infix: tools.breakpoint-infix($breakpoint, settings.$grid-breakpoints)
 
       // Loop over each utility property
@@ -19,13 +19,13 @@
         // Only proceed if responsive media queries are enabled or if it's the base media query
         @if string.slice($key, -4) == ':ltr'
           @if meta.type-of($utility) == "map" and (map.get($utility, responsive) or $infix == "")
-            +tools.generate-utility($utility, $infix, 'ltr')
+            @include tools.generate-utility($utility, $infix, 'ltr')
         @else if string.slice($key, -4) == ':rtl'
           @if meta.type-of($utility) == "map" and (map.get($utility, responsive) or $infix == "")
-            +tools.generate-utility($utility, $infix, 'rtl')
+            @include tools.generate-utility($utility, $infix, 'rtl')
         @else
           @if meta.type-of($utility) == "map" and (map.get($utility, responsive) or $infix == "")
-            +tools.generate-utility($utility, $infix, 'bidi')
+            @include tools.generate-utility($utility, $infix, 'bidi')
 
   // Print utilities
   @media print
@@ -34,10 +34,10 @@
       // Then check if the utility needs print styles
       @if string.slice($key, -4) == ':ltr'
         @if meta.type-of($utility) == "map" and map.get($utility, print) == true
-          +tools.generate-utility($utility, "-print", 'ltr')
+          @include tools.generate-utility($utility, "-print", 'ltr')
       @else if string.slice($key, -4) == ':rtl'
         @if meta.type-of($utility) == "map" and map.get($utility, print) == true
-          +tools.generate-utility($utility, "-print", 'rtl')
+          @include tools.generate-utility($utility, "-print", 'rtl')
       @else
         @if meta.type-of($utility) == "map" and map.get($utility, print) == true
-          +tools.generate-utility($utility, "-print", 'bidi')
+          @include tools.generate-utility($utility, "-print", 'bidi')
