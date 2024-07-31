@@ -2,7 +2,6 @@
   "name": "vuetifyjs.com",
   "description": "A Vue.js project",
   "private": true,
-  "type": "module",
   "author": "John Leider <john@vuetifyjs.com>",
   "version": "3.6.14",
   "repository": {
