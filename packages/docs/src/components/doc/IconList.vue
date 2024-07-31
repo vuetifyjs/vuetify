@@ -4,7 +4,7 @@
     v-model:search="search"
     :item-props="itemProps"
     :items="filteredIcons"
-    :loading="loading"
+    :loading="loading ? 'primary' : false"
     :placeholder="t('search.icons')"
     item-title="name"
     item-value="name"
