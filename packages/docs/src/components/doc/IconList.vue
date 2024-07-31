@@ -4,10 +4,12 @@
     v-model:search="search"
     :item-props="itemProps"
     :items="filteredIcons"
+    :loading="loading ? 'primary' : false"
     :placeholder="t('search.icons')"
     item-title="name"
     item-value="name"
     variant="outlined"
+    clearable
     no-filter
   >
     <template #prepend-inner>
@@ -45,29 +47,49 @@
 
 <script setup>
   // Data
-  import icons from '@mdi/svg/meta.json'
+  // import icons from '@mdi/svg/meta.json'
   import * as paths from '@mdi/js'
 
   const { t } = useI18n()
 
   const copied = shallowRef(false)
+  const loading = shallowRef(true)
+  const icons = shallowRef([])
   const selection = shallowRef()
   const search = shallowRef('')
-  const filteredIcons = computed(() => {
-    if (!search.value) return icons
 
-    return icons
-      .map(icon => ({
+  import('@mdi/svg/meta.json')
+    .then(i => icons.value = i.default)
+    .catch(console.error)
+    .finally(() => loading.value = false)
+
+  /** @param s {string} */
+  function * mapIcons (s) {
+    for (const icon of icons.value) {
+      yield {
         name: icon.name,
         distance: Math.max(
-          distance(search.value, icon.name),
+          distance(s, icon.name),
           ...icon.aliases.map(v => distance(search.value, v))
         ),
-      }))
-      .filter(v => v.distance > 0.7)
-      .sort((a, b) => {
-        return b.distance - a.distance
-      })
+      }
+    }
+  }
+
+  /** @param s {string} */
+  function * filterIcons (s) {
+    for (const icon of mapIcons(s)) {
+      if (icon.distance > 0.7) {
+        yield icon
+      }
+    }
+  }
+
+  const filteredIcons = computed(() => {
+    const s = search.value.trim()
+    if (!s.length) return icons.value
+
+    return [...filterIcons(s)].sort((a, b) => b.distance - a.distance)
   })
 
   watch(selection, value => {
