@@ -4,7 +4,7 @@
     v-model:search="search"
     :item-props="itemProps"
     :items="filteredIcons"
-    :loading="loading ? 'primary' : false"
+    :loading="loading"
     :placeholder="t('search.icons')"
     item-title="name"
     item-value="name"
@@ -47,7 +47,6 @@
 
 <script setup>
   // Data
-  // import icons from '@mdi/svg/meta.json'
   import * as paths from '@mdi/js'
 
   const { t } = useI18n()
