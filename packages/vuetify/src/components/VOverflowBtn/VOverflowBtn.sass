@@ -1,7 +1,7 @@
 @import './_variables.scss'
 
 // Theme
-+theme(v-overflow-btn) using ($material)
+@include theme(v-overflow-btn) using ($material)
   &#{&} > .v-input__control > .v-input__slot
     border-color: map-get($material, 'dividers')
 
