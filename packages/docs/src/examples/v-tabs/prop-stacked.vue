@@ -7,19 +7,19 @@
       stacked
     >
       <v-tab value="tab-1">
-        <v-icon icon="mdi-phone"></v-icon>
+        <v-icon icon="i-mdi:phone"></v-icon>
 
         Recents
       </v-tab>
 
       <v-tab value="tab-2">
-        <v-icon icon="mdi-heart"></v-icon>
+        <v-icon icon="i-mdi:heart"></v-icon>
 
         Favorites
       </v-tab>
 
       <v-tab value="tab-3">
-        <v-icon icon="mdi-account-box"></v-icon>
+        <v-icon icon="i-mdi:account-box"></v-icon>
 
         Nearby
       </v-tab>

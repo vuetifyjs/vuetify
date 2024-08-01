@@ -19,7 +19,7 @@
           key="subscribed"
           class="text-success text-caption"
         >
-          <v-icon icon="mdi-medal" size="1em"></v-icon>
+          <v-icon icon="i-mdi:medal" size="1em"></v-icon>
           $2.99 /month
         </div>
 
@@ -39,7 +39,7 @@
           :key="`subscribe-${isSubscriber}`"
           :border="`thin ${isSubscriber ? 'error' : 'success'}`"
           :color="isSubscriber ? 'error' : 'success'"
-          :prepend-icon="isSubscriber ? 'mdi-close' : 'mdi-email'"
+          :prepend-icon="isSubscriber ? 'i-mdi:lose' : 'i-mdi:email'"
           :slim="isSubscriber"
           :text="isSubscriber ? 'Cancel' : 'Subscribe'"
           :variant="isSubscriber ? 'plain' : 'tonal'"
@@ -54,7 +54,7 @@
         <v-btn
           :key="`info-${isSubscriber}`"
           :color="isSubscriber ? 'success' : 'primary'"
-          :prepend-icon="isSubscriber ? 'mdi-check' : 'mdi-open-in-new'"
+          :prepend-icon="isSubscriber ? 'i-mdi:check' : 'i-mdi:open-in-new'"
           :readonly="isSubscriber"
           :text="isSubscriber ? 'Subscribed' : 'More Info'"
           class="text-none"

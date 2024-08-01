@@ -9,7 +9,7 @@
   >
     <template v-slot:prepend="{ item, open }">
       <v-icon v-if="!item.file">
-        {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
+        {{ open ? 'i-mdi:folder-open' : 'i-mdi:folder' }}
       </v-icon>
       <v-icon v-else>
         {{ files[item.file] }}
@@ -23,14 +23,14 @@
 
   const initiallyOpen = ref(['public'])
   const files = ref({
-    html: 'mdi-language-html5',
-    js: 'mdi-nodejs',
-    json: 'mdi-code-json',
-    md: 'mdi-language-markdown',
-    pdf: 'mdi-file-pdf-box',
-    png: 'mdi-file-image',
-    txt: 'mdi-file-document-outline',
-    xls: 'mdi-file-excel',
+    html: 'i-mdi:language-html5',
+    js: 'i-mdi:nodejs',
+    json: 'i-mdi:code-json',
+    md: 'i-mdi:language-markdown',
+    pdf: 'i-mdi:file-pdf-box',
+    png: 'i-mdi:file-image',
+    txt: 'i-mdi:file-document-outline',
+    xls: 'i-mdi:file-excel',
   })
   const tree = ref([])
   const items = ref([
@@ -92,14 +92,14 @@
     data: () => ({
       initiallyOpen: ['public'],
       files: {
-        html: 'mdi-language-html5',
-        js: 'mdi-nodejs',
-        json: 'mdi-code-json',
-        md: 'mdi-language-markdown',
-        pdf: 'mdi-file-pdf-box',
-        png: 'mdi-file-image',
-        txt: 'mdi-file-document-outline',
-        xls: 'mdi-file-excel',
+        html: 'i-mdi:language-html5',
+        js: 'i-mdi:nodejs',
+        json: 'i-mdi:code-json',
+        md: 'i-mdi:language-markdown',
+        pdf: 'i-mdi:file-pdf-box',
+        png: 'i-mdi:file-image',
+        txt: 'i-mdi:file-document-outline',
+        xls: 'i-mdi:file-excel',
       },
       tree: [],
       items: [

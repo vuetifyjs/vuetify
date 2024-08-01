@@ -6,7 +6,7 @@
     <v-sheet class="pa-4 bg-primary-lighten-2">
       <v-text-field
         v-model="search"
-        clear-icon="mdi-close-circle-outline"
+        clear-icon="i-mdi:close-circle-outline"
         label="Search Company Directory"
         clearable
         dark
@@ -31,7 +31,7 @@
         <template v-slot:prepend="{ item }">
           <v-icon
             v-if="item.children"
-            :icon="`mdi-${item.id === 1 ? 'home-variant' : 'folder-network'}`"
+            :icon="`${item.id === 1 ? 'i-mdi:home-variant' : 'i-mdi:folder-network'}`"
           ></v-icon>
         </template>
       </v-treeview>

@@ -8,7 +8,7 @@
         >
           <v-text-field
             v-model="password"
-            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            :append-icon="show1 ? 'i-mdi:eye' : 'i-mdi:eye-off'"
             :rules="[rules.required, rules.min]"
             :type="show1 ? 'text' : 'password'"
             hint="At least 8 characters"
@@ -24,7 +24,7 @@
           sm="6"
         >
           <v-text-field
-            :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+            :append-icon="show2 ? 'i-mdi:eye' : 'i-mdi:eye-off'"
             :rules="[rules.required, rules.min]"
             :type="show2 ? 'text' : 'password'"
             class="input-group--focused"

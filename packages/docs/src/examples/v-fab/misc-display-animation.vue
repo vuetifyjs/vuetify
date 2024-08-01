@@ -11,7 +11,7 @@
           <v-fab
             :active="!hidden"
             class="ms-4"
-            icon="mdi-plus"
+            icon="i-mdi:plus"
             location="bottom start"
             size="small"
             absolute
@@ -35,7 +35,7 @@
           <v-fab
             :active="!hidden"
             class="me-4"
-            icon="mdi-plus"
+            icon="i-mdi:plus"
             location="top end"
             absolute
             offset

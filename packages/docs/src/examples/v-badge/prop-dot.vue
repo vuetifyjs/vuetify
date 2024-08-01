@@ -5,7 +5,7 @@
         color="error"
         dot
       >
-        <v-icon icon="mdi-newspaper-variant-outline"></v-icon>
+        <v-icon icon="i-mdi:newspaper-variant-outline"></v-icon>
       </v-badge>
 
       News
@@ -16,7 +16,7 @@
         color="error"
         dot
       >
-        <v-icon icon="mdi-post"></v-icon>
+        <v-icon icon="i-mdi:post"></v-icon>
       </v-badge>
 
       Blog
@@ -26,7 +26,7 @@
       variant="tonal"
       stacked
     >
-      <v-icon icon="mdi-login"></v-icon>
+      <v-icon icon="i-mdi:login"></v-icon>
 
       Login
     </v-btn>

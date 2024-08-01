@@ -50,9 +50,9 @@
       Object.entries({
         ...options,
         ...(selectedOption.value === 'Hearts' ? {
-          'empty-icon': 'mdi-heart-outline',
-          'half-icon': 'mdi-heart-half-full',
-          'full-icon': 'mdi-heart',
+          'empty-icon': 'i-mdi:heart-outline',
+          'half-icon': 'i-mdi:heart-half-full',
+          'full-icon': 'i-mdi:heart',
         } : undefined),
       }).filter(([key, value]) => value)
     )

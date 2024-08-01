@@ -29,19 +29,19 @@
   const items = [
     {
       color: 'red-lighten-2',
-      icon: 'mdi-star',
+      icon: 'i-mdi:star',
     },
     {
       color: 'purple-lighten-2',
-      icon: 'mdi-book-variant',
+      icon: 'i-mdi:book-variant',
     },
     {
       color: 'green-lighten-1',
-      icon: 'mdi-airballoon',
+      icon: 'i-mdi:airballoon',
     },
     {
       color: 'indigo-lighten-2',
-      icon: 'mdi-layers-triple',
+      icon: 'i-mdi:layers-triple',
     },
   ]
 </script>
@@ -52,19 +52,19 @@
       items: [
         {
           color: 'red-lighten-2',
-          icon: 'mdi-star',
+          icon: 'i-mdi:star',
         },
         {
           color: 'purple-lighten-2',
-          icon: 'mdi-book-variant',
+          icon: 'i-mdi:book-variant',
         },
         {
           color: 'green-lighten-1',
-          icon: 'mdi-airballoon',
+          icon: 'i-mdi:airballoon',
         },
         {
           color: 'indigo-lighten-2',
-          icon: 'mdi-layers-triple',
+          icon: 'i-mdi:layers-triple',
         },
       ],
     }),

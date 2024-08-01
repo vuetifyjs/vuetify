@@ -2,11 +2,11 @@
   <v-card class="mx-auto" max-width="360">
     <v-layout>
       <v-system-bar class="ga-1" color="#4c00d5">
-        <v-icon icon="mdi-square" size="x-small"></v-icon>
+        <v-icon icon="i-mdi:square" size="x-small"></v-icon>
 
-        <v-icon icon="mdi-circle" size="x-small"></v-icon>
+        <v-icon icon="i-mdi:circle" size="x-small"></v-icon>
 
-        <v-icon icon="mdi-triangle" size="x-small"></v-icon>
+        <v-icon icon="i-mdi:triangle" size="x-small"></v-icon>
       </v-system-bar>
 
       <v-app-bar color="#6200ee" title="Drafts">
@@ -15,9 +15,9 @@
         </template>
 
         <template v-slot:append>
-          <v-btn icon="mdi-magnify"></v-btn>
+          <v-btn icon="i-mdi:magnify"></v-btn>
 
-          <v-btn icon="mdi-dots-vertical"></v-btn>
+          <v-btn icon="i-mdi:dots-vertical"></v-btn>
         </template>
       </v-app-bar>
 
@@ -51,7 +51,7 @@
           class="ma-4"
           color="#4c00d5"
           elevation="8"
-          icon="mdi-plus"
+          icon="i-mdi:plus"
         ></v-btn>
       </v-layout-item>
     </v-layout>

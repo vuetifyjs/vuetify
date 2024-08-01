@@ -6,7 +6,7 @@
       base-color="disabled"
       class="mb-2"
       placeholder="Search Vuetify API"
-      prepend-inner-icon="mdi-database-search-outline"
+      prepend-inner-icon="i-mdi:database-search-outline"
       variant="outlined"
       auto-select-first
       autofocus
@@ -42,7 +42,7 @@
     <div v-else class="text-center d-flex flex-column justify-center align-center my-10">
       <v-icon
         color="disabled"
-        icon="mdi-text-box-search-outline"
+        icon="i-mdi:text-box-search-outline"
         size="150"
       />
 
@@ -69,10 +69,10 @@
     let subtitle
 
     if (name.startsWith('V')) {
-      prependIcon = 'mdi-view-dashboard'
+      prependIcon = 'i-mdi:view-dashboard'
       subtitle = 'Component'
     } else if (name.startsWith('v-')) {
-      prependIcon = 'mdi-function'
+      prependIcon = 'i-mdi:function'
       subtitle = 'Directive'
     } else if (name.startsWith('use')) {
       prependIcon = '$vuetify'

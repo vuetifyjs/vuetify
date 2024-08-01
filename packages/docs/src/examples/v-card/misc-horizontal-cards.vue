@@ -7,11 +7,11 @@
       <v-system-bar color="pink-darken-2">
         <v-spacer></v-spacer>
 
-        <v-icon>mdi-window-minimize</v-icon>
+        <v-icon icon="i-mdi:window-minimize"></v-icon>
 
-        <v-icon>mdi-window-maximize</v-icon>
+        <v-icon icon="i-mdi:window-maximize"></v-icon>
 
-        <v-icon>mdi-close</v-icon>
+        <v-icon icon="i-mdi:close"></v-icon>
       </v-system-bar>
 
       <v-app-bar color="pink">
@@ -21,7 +21,7 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn icon="mdi-magnify"></v-btn>
+        <v-btn icon="i-mdi:magnify"></v-btn>
       </v-app-bar>
 
       <v-main>
@@ -87,7 +87,7 @@
                     <v-card-actions>
                       <v-btn
                         class="ms-2"
-                        icon="mdi-play"
+                        icon="i-mdi:play"
                         variant="text"
                       ></v-btn>
                     </v-card-actions>

@@ -5,7 +5,7 @@
       color="success"
       variant="outlined"
     >
-      <v-icon icon="mdi-server-plus" start></v-icon>
+      <v-icon icon="i-mdi:server-plus" start></v-icon>
       Server Status
     </v-chip>
 
@@ -15,7 +15,7 @@
       variant="outlined"
     >
       User Account
-      <v-icon icon="mdi-account-outline" end></v-icon>
+      <v-icon icon="i-mdi:account-outline" end></v-icon>
     </v-chip>
   </div>
 </template>

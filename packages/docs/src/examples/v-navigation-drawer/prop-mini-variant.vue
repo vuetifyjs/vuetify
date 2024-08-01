@@ -14,7 +14,7 @@
         >
           <template v-slot:append>
             <v-btn
-              icon="mdi-chevron-left"
+              icon="i-mdi:chevron-left"
               variant="text"
               @click.stop="rail = !rail"
             ></v-btn>
@@ -24,9 +24,9 @@
         <v-divider></v-divider>
 
         <v-list density="compact" nav>
-          <v-list-item prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
-          <v-list-item prepend-icon="mdi-account" title="My Account" value="account"></v-list-item>
-          <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
+          <v-list-item prepend-icon="i-mdi:home-city" title="Home" value="home"></v-list-item>
+          <v-list-item prepend-icon="i-mdi:account" title="My Account" value="account"></v-list-item>
+          <v-list-item prepend-icon="i-mdi:account-group-outline" title="Users" value="users"></v-list-item>
         </v-list>
       </v-navigation-drawer>
       <v-main style="height: 250px"></v-main>

@@ -12,7 +12,7 @@
       <v-toolbar-title>Message Board</v-toolbar-title>
 
       <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
+        <v-icon icon="i-mdi:magnify"></v-icon>
       </v-btn>
     </v-toolbar>
 

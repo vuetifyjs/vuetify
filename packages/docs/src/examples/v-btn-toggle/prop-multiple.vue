@@ -4,10 +4,10 @@
       v-model="toggle"
       multiple
     >
-      <v-btn icon="mdi-format-align-left" value="left"></v-btn>
-      <v-btn icon="mdi-format-align-center" value="center"></v-btn>
-      <v-btn icon="mdi-format-align-right" value="right"></v-btn>
-      <v-btn icon="mdi-format-align-justify" value="justify"></v-btn>
+      <v-btn icon="i-mdi:format-align-left" value="left"></v-btn>
+      <v-btn icon="i-mdi:format-align-center" value="center"></v-btn>
+      <v-btn icon="i-mdi:format-align-right" value="right"></v-btn>
+      <v-btn icon="i-mdi:format-align-justify" value="justify"></v-btn>
     </v-btn-toggle>
 
     <pre class="pt-2">{{ toggle }}</pre>

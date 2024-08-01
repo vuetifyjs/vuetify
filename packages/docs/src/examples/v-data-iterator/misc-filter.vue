@@ -11,7 +11,7 @@
             v-model="search"
             density="comfortable"
             placeholder="Search"
-            prepend-inner-icon="mdi-magnify"
+            prepend-inner-icon="i-mdi:magnify"
             style="max-width: 300px;"
             variant="solo"
             clearable
@@ -40,7 +40,7 @@
 
                 <div class="d-flex justify-space-between px-4">
                   <div class="d-flex align-center text-caption text-medium-emphasis me-1">
-                    <v-icon icon="mdi-clock" start></v-icon>
+                    <v-icon icon="i-mdi:clock" start></v-icon>
 
                     <div class="text-truncate">{{ item.raw.duration }}</div>
                   </div>
@@ -65,7 +65,7 @@
           <v-btn
             :disabled="page === 1"
             density="comfortable"
-            icon="mdi-arrow-left"
+            icon="i-mdi:arrow-left"
             variant="tonal"
             rounded
             @click="prevPage"
@@ -78,7 +78,7 @@
           <v-btn
             :disabled="page >= pageCount"
             density="comfortable"
-            icon="mdi-arrow-right"
+            icon="i-mdi:arrow-right"
             variant="tonal"
             rounded
             @click="nextPage"

@@ -11,18 +11,18 @@
     >
       <v-row class="fill-height">
         <v-card-title>
-          <v-btn icon="mdi-chevron-left" variant="text"></v-btn>
+          <v-btn icon="i-mdi:chevron-left" variant="text"></v-btn>
 
           <v-spacer></v-spacer>
 
           <v-btn
             class="me-4"
-            icon="mdi-pencil"
+            icon="i-mdi:pencil"
             variant="text"
           ></v-btn>
 
           <v-btn
-            icon="mdi-dots-vertical"
+            icon="i-mdi:dots-vertical"
             variant="text"
           ></v-btn>
         </v-card-title>
@@ -40,7 +40,7 @@
     <v-list lines="two">
       <v-list-item>
         <v-list-item-avatar start>
-          <v-icon color="indigo" icon="mdi-phone"></v-icon>
+          <v-icon color="indigo" icon="i-mdi:phone"></v-icon>
         </v-list-item-avatar>
 
         <v-list-item-header>
@@ -49,7 +49,7 @@
         </v-list-item-header>
 
         <v-list-item-avatar end>
-          <v-icon icon="mdi-message-text"></v-icon>
+          <v-icon icon="i-mdi:message-text"></v-icon>
         </v-list-item-avatar>
       </v-list-item>
 
@@ -62,7 +62,7 @@
         </v-list-item-header>
 
         <v-list-item-avatar end>
-          <v-icon icon="mdi-message-text"></v-icon>
+          <v-icon icon="i-mdi:message-text"></v-icon>
         </v-list-item-avatar>
       </v-list-item>
 
@@ -70,7 +70,7 @@
 
       <v-list-item>
         <v-list-item-avatar start>
-          <v-icon color="indigo" icon="mdi-email"></v-icon>
+          <v-icon color="indigo" icon="i-mdi:email"></v-icon>
         </v-list-item-avatar>
 
         <v-list-item-header>
@@ -92,7 +92,7 @@
 
       <v-list-item>
         <v-list-item-avatar start>
-          <v-icon color="indigo" icon="mdi-map-marker"></v-icon>
+          <v-icon color="indigo" icon="i-mdi:map-marker"></v-icon>
         </v-list-item-avatar>
 
         <v-list-item-header>

@@ -11,7 +11,7 @@
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
+        <v-icon icon="i-mdi:magnify"></v-icon>
       </v-btn>
     </v-toolbar>
 
@@ -34,8 +34,7 @@
         </v-list-item-header>
 
         <v-list-item-avatar>
-          <v-icon :color="chat.active ? 'deep-purple accent-4' : 'grey'">
-            mdi-message-outline
+          <v-icon :color="chat.active ? 'deep-purple accent-4' : 'grey'" icon="i-mdi:message-outline">
           </v-icon>
         </v-list-item-avatar>
       </v-list-item>

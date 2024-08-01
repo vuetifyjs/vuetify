@@ -2,9 +2,9 @@
   <v-row align="center" justify="center" dense>
     <v-col cols="12" md="6">
       <v-card
-        append-icon="mdi-check"
+        append-icon="i-mdi:check"
         class="mx-auto"
-        prepend-icon="mdi-account"
+        prepend-icon="i-mdi:account"
         subtitle="prepend-icon and append-icon"
         title="Icons"
       >
@@ -19,10 +19,10 @@
         title="Icons"
       >
         <template v-slot:prepend>
-          <v-icon color="primary" icon="mdi-account"></v-icon>
+          <v-icon color="primary" icon="i-mdi:account"></v-icon>
         </template>
         <template v-slot:append>
-          <v-icon color="success" icon="mdi-check"></v-icon>
+          <v-icon color="success" icon="i-mdi:check"></v-icon>
         </template>
         <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</v-card-text>
       </v-card>
@@ -48,7 +48,7 @@
       >
         <template v-slot:prepend>
           <v-avatar color="blue-darken-2">
-            <v-icon icon="mdi-alarm"></v-icon>
+            <v-icon icon="i-mdi:alarm"></v-icon>
           </v-avatar>
         </template>
         <template v-slot:append>

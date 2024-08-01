@@ -100,12 +100,12 @@
   ]
   const socials = [
     {
-      icon: 'mdi-reddit',
+      icon: 'i-mdi:reddit',
       href: 'https://www.reddit.com/r/vuetifyjs',
       title: 'reddit',
     },
     {
-      icon: 'mdi-github',
+      icon: 'i-mdi:github',
       href: 'https://github.com/vuetifyjs/vuetify',
       title: 'github',
     },
@@ -115,7 +115,7 @@
       title: 'x',
     },
     {
-      icon: 'mdi-discord',
+      icon: 'i-mdi:discord',
       href: 'https://community.vuetifyjs.com',
       title: 'discord',
     },

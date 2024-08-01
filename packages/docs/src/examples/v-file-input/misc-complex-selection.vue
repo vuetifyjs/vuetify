@@ -5,7 +5,7 @@
     color="deep-purple-accent-4"
     label="File input"
     placeholder="Select your files"
-    prepend-icon="mdi-paperclip"
+    prepend-icon="i-mdi:paperclip"
     variant="outlined"
     counter
     multiple

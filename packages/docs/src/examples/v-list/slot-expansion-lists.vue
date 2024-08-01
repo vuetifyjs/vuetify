@@ -14,7 +14,7 @@
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
+        <v-icon icon="i-mdi:dots-vertical"></v-icon>
       </v-btn>
     </v-toolbar>
 
@@ -48,12 +48,12 @@
 <script setup>
   const items = [
     {
-      action: 'mdi-ticket',
+      action: 'i-mdi:ticket',
       items: [{ title: 'List Item' }],
       title: 'Attractions',
     },
     {
-      action: 'mdi-silverware-fork-knife',
+      action: 'i-mdi:silverware-fork-knife',
       active: true,
       items: [
         { title: 'Breakfast & brunch' },
@@ -63,27 +63,27 @@
       title: 'Dining',
     },
     {
-      action: 'mdi-school',
+      action: 'i-mdi:school',
       items: [{ title: 'List Item' }],
       title: 'Education',
     },
     {
-      action: 'mdi-human-male-female-child',
+      action: 'i-mdi:human-male-female-child',
       items: [{ title: 'List Item' }],
       title: 'Family',
     },
     {
-      action: 'mdi-bottle-tonic-plus',
+      action: 'i-mdi:bottle-tonic-plus',
       items: [{ title: 'List Item' }],
       title: 'Health',
     },
     {
-      action: 'mdi-briefcase',
+      action: 'i-mdi:briefcase',
       items: [{ title: 'List Item' }],
       title: 'Office',
     },
     {
-      action: 'mdi-tag',
+      action: 'i-mdi:tag',
       items: [{ title: 'List Item' }],
       title: 'Promotions',
     },
@@ -95,12 +95,12 @@
     data: () => ({
       items: [
         {
-          action: 'mdi-ticket',
+          action: 'i-mdi:ticket',
           items: [{ title: 'List Item' }],
           title: 'Attractions',
         },
         {
-          action: 'mdi-silverware-fork-knife',
+          action: 'i-mdi:silverware-fork-knife',
           active: true,
           items: [
             { title: 'Breakfast & brunch' },
@@ -110,27 +110,27 @@
           title: 'Dining',
         },
         {
-          action: 'mdi-school',
+          action: 'i-mdi:school',
           items: [{ title: 'List Item' }],
           title: 'Education',
         },
         {
-          action: 'mdi-human-male-female-child',
+          action: 'i-mdi:human-male-female-child',
           items: [{ title: 'List Item' }],
           title: 'Family',
         },
         {
-          action: 'mdi-bottle-tonic-plus',
+          action: 'i-mdi:bottle-tonic-plus',
           items: [{ title: 'List Item' }],
           title: 'Health',
         },
         {
-          action: 'mdi-briefcase',
+          action: 'i-mdi:briefcase',
           items: [{ title: 'List Item' }],
           title: 'Office',
         },
         {
-          action: 'mdi-tag',
+          action: 'i-mdi:tag',
           items: [{ title: 'List Item' }],
           title: 'Promotions',
         },

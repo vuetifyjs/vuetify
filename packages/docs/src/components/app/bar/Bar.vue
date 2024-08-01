@@ -11,7 +11,7 @@
 
       <AppBtn
         v-if="route.meta.layout !== 'home' && mdAndDown"
-        icon="mdi-menu"
+        icon="i-mdi:menu"
         @click="app.drawer = !app.drawer"
       />
 

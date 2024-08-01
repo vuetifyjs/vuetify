@@ -6,7 +6,7 @@
     border
   >
     <v-list-item
-      :append-icon="smAndUp ? 'mdi-open-in-new' : undefined"
+      :append-icon="smAndUp ? 'i-mdi:open-in-new' : undefined"
       :prepend-avatar="src"
       :title="ad.title"
       style="min-height: inherit; width: 100%"

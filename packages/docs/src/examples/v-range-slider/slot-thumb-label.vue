@@ -29,10 +29,10 @@
     3: 'Fall',
   })
   const icons = ref([
-    'mdi-snowflake',
-    'mdi-leaf',
-    'mdi-fire',
-    'mdi-water',
+    'i-mdi:snowflake',
+    'i-mdi:leaf',
+    'i-mdi:fire',
+    'i-mdi:water',
   ])
   function season (val) {
     return icons.value[val]
@@ -49,10 +49,10 @@
         3: 'Fall',
       },
       icons: [
-        'mdi-snowflake',
-        'mdi-leaf',
-        'mdi-fire',
-        'mdi-water',
+        'i-mdi:snowflake',
+        'i-mdi:leaf',
+        'i-mdi:fire',
+        'i-mdi:water',
       ],
     }),
 

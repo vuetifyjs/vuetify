@@ -14,8 +14,8 @@
   const { name } = useRoute()
 
   const icon = computed(() => theme.global.name.value === 'dark'
-    ? 'mdi-weather-night'
-    : 'mdi-weather-sunny'
+    ? 'i-mdi:weather-night'
+    : 'i-mdi:weather-sunny'
   )
   const hasToggle = computed(() => !['dark', 'light'].includes(theme.name.value))
 

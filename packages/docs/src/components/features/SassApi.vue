@@ -5,7 +5,7 @@
     :items="variables"
     base-color="disabled"
     placeholder="Search SASS API"
-    prepend-inner-icon="mdi-database-search-outline"
+    prepend-inner-icon="i-mdi:database-search-outline"
     variant="outlined"
     auto-select-first
     chips

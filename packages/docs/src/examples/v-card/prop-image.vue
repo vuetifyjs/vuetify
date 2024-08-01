@@ -9,7 +9,7 @@
   >
     <template v-slot:actions>
       <v-btn
-        append-icon="mdi-chevron-right"
+        append-icon="i-mdi:chevron-right"
         color="red-lighten-2"
         text="Book Activity"
         variant="outlined"

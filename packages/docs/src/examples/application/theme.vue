@@ -5,7 +5,7 @@
         <v-spacer></v-spacer>
 
         <v-btn
-          :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
+          :prepend-icon="theme === 'light' ? 'i-mdi:weather-sunny' : 'i-mdi:weather-night'"
           text="Toggle Theme"
           slim
           @click="onClick"

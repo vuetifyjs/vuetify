@@ -7,9 +7,9 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon="mdi-magnify"></v-btn>
+      <v-btn icon="i-mdi:magnify"></v-btn>
 
-      <v-btn icon="mdi-dots-vertical"></v-btn>
+      <v-btn icon="i-mdi:dots-vertical"></v-btn>
 
       <template v-slot:extension>
         <v-tabs

@@ -14,12 +14,12 @@
         <v-col cols="12">
           <v-autocomplete
             :items="items"
-            append-inner-icon="mdi-microphone"
+            append-inner-icon="i-mdi:microphone"
             class="mx-auto"
             density="comfortable"
             menu-icon=""
             placeholder="Search Google or type a URL"
-            prepend-inner-icon="mdi-magnify"
+            prepend-inner-icon="i-mdi:magnify"
             style="max-width: 350px;"
             theme="light"
             variant="solo"
@@ -53,7 +53,7 @@
             <template v-slot:activator="{ props }">
               <v-card v-bind="props" class="pa-4" width="112" flat>
 
-                <v-avatar class="mb-2" color="white" icon="mdi-plus" variant="tonal"></v-avatar>
+                <v-avatar class="mb-2" color="white" icon="i-mdi:plus" variant="tonal"></v-avatar>
 
                 <div class="text-caption text-truncate">Add shortcut</div>
               </v-card>
@@ -101,44 +101,44 @@
 
   const items = [
     {
-      prependIcon: 'mdi-clock-outline',
+      prependIcon: 'i-mdi:clock-outline',
       title: 'recipe with chicken',
     },
     {
-      prependIcon: 'mdi-clock-outline',
+      prependIcon: 'i-mdi:clock-outline',
       title: 'best hiking trails near me',
     },
     {
-      prependIcon: 'mdi-clock-outline',
+      prependIcon: 'i-mdi:clock-outline',
       title: 'how to learn a new language',
     },
     {
-      prependIcon: 'mdi-clock-outline',
+      prependIcon: 'i-mdi:clock-outline',
       title: 'DIY home organization ideas',
     },
     {
-      prependIcon: 'mdi-clock-outline',
+      prependIcon: 'i-mdi:clock-outline',
       title: 'latest fashion trends',
     },
   ]
   const shortcuts = [
     {
-      icon: 'mdi-github',
+      icon: 'i-mdi:github',
       title: 'Master ',
       href: 'https://github.com/vuetifyjs/vuetify',
     },
     {
-      icon: 'mdi-github',
+      icon: 'i-mdi:github',
       title: 'Dev',
       href: 'https://github.com/vuetifyjs/vuetify/tree/dev',
     },
     {
-      icon: 'mdi-github',
+      icon: 'i-mdi:github',
       title: 'Stable',
       href: 'https://github.com/vuetifyjs/vuetify/tree/v2-stable',
     },
     {
-      icon: 'mdi-github',
+      icon: 'i-mdi:github',
       title: 'My Pull Requests',
       href: 'https://github.com/vuetifyjs/vuetify/pulls/johnleider',
     },
@@ -153,44 +153,44 @@
       dialog: false,
       items: [
         {
-          prependIcon: 'mdi-clock-outline',
+          prependIcon: 'i-mdi:clock-outline',
           title: 'recipe with chicken',
         },
         {
-          prependIcon: 'mdi-clock-outline',
+          prependIcon: 'i-mdi:clock-outline',
           title: 'best hiking trails near me',
         },
         {
-          prependIcon: 'mdi-clock-outline',
+          prependIcon: 'i-mdi:clock-outline',
           title: 'how to learn a new language',
         },
         {
-          prependIcon: 'mdi-clock-outline',
+          prependIcon: 'i-mdi:clock-outline',
           title: 'DIY home organization ideas',
         },
         {
-          prependIcon: 'mdi-clock-outline',
+          prependIcon: 'i-mdi:clock-outline',
           title: 'latest fashion trends',
         },
       ],
       shortcuts: [
         {
-          icon: 'mdi-github',
+          icon: 'i-mdi:github',
           title: 'Master ',
           href: 'https://github.com/vuetifyjs/vuetify',
         },
         {
-          icon: 'mdi-github',
+          icon: 'i-mdi:github',
           title: 'Dev',
           href: 'https://github.com/vuetifyjs/vuetify/tree/dev',
         },
         {
-          icon: 'mdi-github',
+          icon: 'i-mdi:github',
           title: 'Stable',
           href: 'https://github.com/vuetifyjs/vuetify/tree/v2-stable',
         },
         {
-          icon: 'mdi-github',
+          icon: 'i-mdi:github',
           title: 'My Pull Requests',
           href: 'https://github.com/vuetifyjs/vuetify/pulls/johnleider',
         },

@@ -26,10 +26,10 @@
 
 <script setup>
   const icons = [
-    'mdi-facebook',
-    'mdi-twitter',
-    'mdi-linkedin',
-    'mdi-instagram',
+    'i-mdi:facebook',
+    'i-mdi:twitter',
+    'i-mdi:linkedin',
+    'i-mdi:instagram',
   ]
 </script>
 
@@ -37,10 +37,10 @@
   export default {
     data: () => ({
       icons: [
-        'mdi-facebook',
-        'mdi-twitter',
-        'mdi-linkedin',
-        'mdi-instagram',
+        'i-mdi:facebook',
+        'i-mdi:twitter',
+        'i-mdi:linkedin',
+        'i-mdi:instagram',
       ],
     }),
   }

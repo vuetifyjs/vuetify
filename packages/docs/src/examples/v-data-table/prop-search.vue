@@ -7,7 +7,7 @@
       <v-text-field
         v-model="search"
         label="Search"
-        prepend-inner-icon="mdi-magnify"
+        prepend-inner-icon="i-mdi:magnify"
         variant="outlined"
         hide-details
         single-line

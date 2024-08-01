@@ -11,7 +11,7 @@
       <template v-slot:append>
         <v-btn
           color="white"
-          icon="mdi-plus"
+          icon="i-mdi:plus"
           size="small"
         ></v-btn>
       </template>
@@ -51,10 +51,9 @@
 
               <v-icon
                 color="orange-darken-4"
+                icon="i-mdi:open-in-new"
                 end
-              >
-                mdi-open-in-new
-              </v-icon>
+              ></v-icon>
             </v-btn>
           </template>
         </v-list-item>

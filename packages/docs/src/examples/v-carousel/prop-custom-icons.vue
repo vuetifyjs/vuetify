@@ -7,7 +7,7 @@
     <v-carousel
       :continuous="false"
       :show-arrows="false"
-      delimiter-icon="mdi-square"
+      delimiter-icon="i-mdi:square"
       height="300"
       hide-delimiter-background
     >

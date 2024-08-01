@@ -35,19 +35,19 @@
 
     <v-card-text class="d-flex justify-space-between">
       <v-chip
-        prepend-icon="mdi-brightness-5"
+        prepend-icon="i-mdi:brightness-5"
         @click="lights"
       >
         Turn on lights
       </v-chip>
       <v-chip
-        prepend-icon="mdi-alarm-check"
+        prepend-icon="i-mdi:alarm-check"
         @click="alarm"
       >
         Set alarm
       </v-chip>
       <v-chip
-        icon="mdi-blinds"
+        icon="i-mdi:blinds"
         @click="blinds"
       >
         Close blinds

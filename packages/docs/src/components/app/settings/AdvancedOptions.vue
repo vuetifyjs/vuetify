@@ -36,7 +36,7 @@
     <v-btn
       :text="t('reset-all-settings')"
       color="error"
-      prepend-icon="mdi-alert-circle-outline"
+      prepend-icon="i-mdi:alert-circle-outline"
       size="small"
       variant="flat"
       @click="onResetAllSettings"

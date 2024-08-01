@@ -20,19 +20,19 @@
           >
             <v-col class="px-0">
               <v-btn icon>
-                <v-icon>mdi-heart</v-icon>
+                <v-icon icon="i-mdi:heart"></v-icon>
               </v-btn>
             </v-col>
 
             <v-col class="px-0">
               <v-btn icon>
-                <v-icon>mdi-bookmark</v-icon>
+                <v-icon icon="i-mdi:bookmark"></v-icon>
               </v-btn>
             </v-col>
 
             <v-col class="px-0">
               <v-btn icon>
-                <v-icon>mdi-share-variant</v-icon>
+                <v-icon icon="i-mdi:share-variant"></v-icon>
               </v-btn>
             </v-col>
           </v-row>

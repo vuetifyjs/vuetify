@@ -4,13 +4,13 @@
     width="300"
   >
     <v-list v-model:opened="open">
-      <v-list-item prepend-icon="mdi-home" title="Home"></v-list-item>
+      <v-list-item prepend-icon="i-mdi:home" title="Home"></v-list-item>
 
       <v-list-group value="Users">
         <template v-slot:activator="{ props }">
           <v-list-item
             v-bind="props"
-            prepend-icon="mdi-account-circle"
+            prepend-icon="i-mdi:account-circle"
             title="Users"
           ></v-list-item>
         </template>
@@ -59,14 +59,14 @@
   const open = ref(['Users'])
 
   const admins = [
-    ['Management', 'mdi-account-multiple-outline'],
-    ['Settings', 'mdi-cog-outline'],
+    ['Management', 'i-mdi:account-multiple-outline'],
+    ['Settings', 'i-mdi:cog-outline'],
   ]
   const cruds = [
-    ['Create', 'mdi-plus-outline'],
-    ['Read', 'mdi-file-outline'],
-    ['Update', 'mdi-update'],
-    ['Delete', 'mdi-delete'],
+    ['Create', 'i-mdi:plus-outline'],
+    ['Read', 'i-mdi:file-outline'],
+    ['Update', 'i-mdi:update'],
+    ['Delete', 'i-mdi:delete'],
   ]
 </script>
 
@@ -75,14 +75,14 @@
     data: () => ({
       open: ['Users'],
       admins: [
-        ['Management', 'mdi-account-multiple-outline'],
-        ['Settings', 'mdi-cog-outline'],
+        ['Management', 'i-mdi:account-multiple-outline'],
+        ['Settings', 'i-mdi:cog-outline'],
       ],
       cruds: [
-        ['Create', 'mdi-plus-outline'],
-        ['Read', 'mdi-file-outline'],
-        ['Update', 'mdi-update'],
-        ['Delete', 'mdi-delete'],
+        ['Create', 'i-mdi:plus-outline'],
+        ['Read', 'i-mdi:file-outline'],
+        ['Update', 'i-mdi:update'],
+        ['Delete', 'i-mdi:delete'],
       ],
     }),
   }

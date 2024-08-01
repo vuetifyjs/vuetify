@@ -3,13 +3,13 @@
     <v-chip
       class="ma-2"
       color="indigo"
-      prepend-icon="mdi-account-circle"
+      prepend-icon="i-mdi:account-circle"
     >
       Mike
     </v-chip>
 
     <v-chip
-      append-icon="mdi-star"
+      append-icon="i-mdi:star"
       class="ma-2"
       color="orange"
     >
@@ -17,7 +17,7 @@
     </v-chip>
 
     <v-chip
-      append-icon="mdi-cake-variant"
+      append-icon="i-mdi:cake-variant"
       class="ma-2"
       color="primary"
     >
@@ -42,7 +42,7 @@
       :model-value="true"
       class="ma-2"
       color="teal"
-      prepend-icon="mdi-checkbox-marked-circle"
+      prepend-icon="i-mdi:checkbox-marked-circle"
       closable
     >
       Confirmed
@@ -51,9 +51,9 @@
     <v-chip
       :model-value="true"
       class="ma-2"
-      close-icon="mdi-delete"
+      close-icon="i-mdi:delete"
       color="teal"
-      prepend-icon="mdi-checkbox-marked-circle"
+      prepend-icon="i-mdi:checkbox-marked-circle"
       closable
     >
       Confirmed

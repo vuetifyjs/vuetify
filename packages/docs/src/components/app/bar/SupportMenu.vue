@@ -23,49 +23,49 @@
     {
       title: 'for-enterprise',
       to: rpath('/introduction/enterprise-support/'),
-      appendIcon: 'mdi-shield-star-outline',
+      appendIcon: 'i-mdi:shield-star-outline',
     },
     {
       title: 'file-a-bug-report',
       href: 'https://issues.vuetifyjs.com/',
-      appendIcon: 'mdi-bug-outline',
+      appendIcon: 'i-mdi:bug-outline',
     },
     {
       title: 'faq',
       to: rpath('/getting-started/frequently-asked-questions/'),
-      appendIcon: 'mdi-head-question-outline',
+      appendIcon: 'i-mdi:head-question-outline',
     },
     {
       title: 'upgrade-guide',
       to: rpath('/getting-started/upgrade-guide/'),
-      appendIcon: 'mdi-update',
+      appendIcon: 'i-mdi:update',
     },
     {
       title: 'github-discussions',
       href: 'https://github.com/vuetifyjs/vuetify/discussions',
-      appendIcon: 'mdi-message-text-outline',
+      appendIcon: 'i-mdi:message-text-outline',
     },
     {
       title: 'stack-overflow',
       href: 'https://stackoverflow.com/search?q=vuetify',
-      appendIcon: 'mdi-layers-outline',
+      appendIcon: 'i-mdi:layers-outline',
     },
     { divider: true },
     { subheader: t('resources') },
     {
       title: 'github-issues',
       href: 'https://github.com/vuetifyjs/vuetify/issues/',
-      appendIcon: 'mdi-alert-circle-outline',
+      appendIcon: 'i-mdi:alert-circle-outline',
     },
     {
       title: 'documentation-status',
       href: 'https://status.vuetifyjs.com/',
-      appendIcon: 'mdi-cloud-outline',
+      appendIcon: 'i-mdi:cloud-outline',
     },
     {
       title: 'latest-releases',
       href: 'https://github.com/vuetifyjs/vuetify/releases',
-      appendIcon: 'mdi-package-variant',
+      appendIcon: 'i-mdi:package-variant',
     },
   ]))
 </script>

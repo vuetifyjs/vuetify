@@ -24,7 +24,7 @@
             <template v-slot:append>
               <v-btn
                 :class="fav ? 'text-red' : ''"
-                icon="mdi-heart"
+                icon="i-mdi:heart"
                 variant="text"
                 @click="fav = !fav"
               ></v-btn>

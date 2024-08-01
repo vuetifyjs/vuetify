@@ -126,17 +126,16 @@
     <template v-slot:item.actions="{ item }">
       <v-icon
         class="me-2"
+        icon="i-mdi:pencil"
         size="small"
         @click="editItem(item)"
       >
-        mdi-pencil
       </v-icon>
       <v-icon
+        icon="i-mdi:delete"
         size="small"
         @click="deleteItem(item)"
-      >
-        mdi-delete
-      </v-icon>
+      ></v-icon>
     </template>
     <template v-slot:no-data>
       <v-btn

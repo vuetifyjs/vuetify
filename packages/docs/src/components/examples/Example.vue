@@ -37,7 +37,7 @@
               v-else-if="user.dev && file"
               class="text-body-2 ma-1 text-medium-emphasis"
             >
-              <v-icon icon="mdi-file-tree" />
+              <v-icon icon="i-mdi:file-tree" />
 
               {{ file }}.vue
             </div>
@@ -211,7 +211,7 @@
 
   const actions = computed(() => [
     {
-      icon: 'mdi-theme-light-dark',
+      icon: 'i-mdi:theme-light-dark',
       path: 'invert-example-colors',
       onClick: toggleTheme,
     },
@@ -223,14 +223,14 @@
       hide: xs.value,
     },
     {
-      icon: 'mdi-github',
+      icon: 'i-mdi:github',
       path: 'view-in-github',
       href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
       target: '_blank',
       hide: xs.value,
     },
     {
-      icon: copied.value ? 'mdi-check' : 'mdi-clipboard-multiple-outline',
+      icon: copied.value ? 'i-mdi:check' : 'i-mdi:clipboard-multiple-outline',
       path: 'copy-example-source',
       onClick: async () => {
         navigator.clipboard.writeText(
@@ -246,7 +246,7 @@
       hide: xs.value,
     },
     {
-      icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',
+      icon: !showCode.value ? 'i-mdi:code-tags' : 'i-mdi:chevron-up',
       path: !showCode.value ? 'view-source' : 'hide-source',
       onClick: () => {
         showCode.value = !showCode.value

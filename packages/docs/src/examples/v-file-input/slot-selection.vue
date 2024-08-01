@@ -3,7 +3,7 @@
     v-model="files"
     label="File input"
     placeholder="Upload your documents"
-    prepend-icon="mdi-paperclip"
+    prepend-icon="i-mdi:paperclip"
     multiple
   >
     <template v-slot:selection="{ fileNames }">

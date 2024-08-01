@@ -7,8 +7,7 @@
       dark
       fab
     >
-      <v-icon dark>
-        mdi-minus
+      <v-icon icon="i-mdi:minus" dark>
       </v-icon>
     </v-btn>
 
@@ -19,8 +18,7 @@
       dark
       fab
     >
-      <v-icon dark>
-        mdi-heart
+      <v-icon icon="i-mdi:heart" dark>
       </v-icon>
     </v-btn>
 
@@ -30,8 +28,7 @@
       dark
       fab
     >
-      <v-icon dark>
-        mdi-plus
+      <v-icon icon="i-mdi:plus" dark>
       </v-icon>
     </v-btn>
 
@@ -41,8 +38,7 @@
       dark
       fab
     >
-      <v-icon dark>
-        mdi-format-list-bulleted-square
+      <v-icon icon="i-mdi:format-list-bulleted-square" dark>
       </v-icon>
     </v-btn>
 
@@ -53,8 +49,7 @@
       dark
       fab
     >
-      <v-icon dark>
-        mdi-pencil
+      <v-icon icon="i-mdi:pencil" dark>
       </v-icon>
     </v-btn>
 
@@ -65,8 +60,7 @@
       dark
       fab
     >
-      <v-icon dark>
-        mdi-android
+      <v-icon icon="i-mdi:android" dark>
       </v-icon>
     </v-btn>
   </div>

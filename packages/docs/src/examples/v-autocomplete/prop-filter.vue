@@ -5,7 +5,7 @@
     max-width="500"
   >
     <v-toolbar color="purple" flat>
-      <v-btn icon="mdi-account"></v-btn>
+      <v-btn icon="i-mdi:account"></v-btn>
 
       <v-toolbar-title class="font-weight-light">
         User Profile
@@ -18,9 +18,9 @@
         @click="isEditing = !isEditing"
       >
         <v-fade-transition leave-absolute>
-          <v-icon v-if="isEditing">mdi-close</v-icon>
+          <v-icon v-if="isEditing" icon="i-mdi:close"></v-icon>
 
-          <v-icon v-else>mdi-pencil</v-icon>
+          <v-icon v-else icon="i-mdi:pencil"></v-icon>
         </v-fade-transition>
       </v-btn>
     </v-toolbar>

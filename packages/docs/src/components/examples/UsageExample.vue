@@ -63,7 +63,7 @@
       <v-tooltip location="bottom">
         <template #activator="{ props: activatorProps }">
           <v-btn
-            :icon="!show ? 'mdi-code-tags' : 'mdi-chevron-up'"
+            :icon="!show ? 'i-mdi:code-tags' : 'i-mdi:chevron-up'"
             class="me-1 text-medium-emphasis"
             density="comfortable"
             v-bind="activatorProps"

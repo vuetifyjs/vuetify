@@ -7,9 +7,9 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon="mdi-magnify"></v-btn>
+      <v-btn icon="i-mdi:magnify"></v-btn>
 
-      <v-btn icon="mdi-dots-vertical"></v-btn>
+      <v-btn icon="i-mdi:dots-vertical"></v-btn>
 
       <template v-slot:extension>
         <v-tabs
@@ -20,19 +20,19 @@
           <v-tab
             :value="1"
           >
-            <v-icon icon="mdi-phone"></v-icon>
+            <v-icon icon="i-mdi:phone"></v-icon>
           </v-tab>
 
           <v-tab
             :value="2"
           >
-            <v-icon icon="mdi-heart"></v-icon>
+            <v-icon icon="i-mdi:heart"></v-icon>
           </v-tab>
 
           <v-tab
             :value="3"
           >
-            <v-icon icon="mdi-account-box"></v-icon>
+            <v-icon icon="i-mdi:account-box"></v-icon>
           </v-tab>
         </v-tabs>
       </template>

@@ -13,14 +13,14 @@
       title: 'Item #1',
       value: 1,
       props: {
-        prependIcon: 'mdi-home',
+        prependIcon: 'i-mdi:home',
       },
     },
     {
       title: 'Item #2',
       value: 2,
       props: {
-        appendIcon: 'mdi-close',
+        appendIcon: 'i-mdi:close',
       },
     },
     {
@@ -41,14 +41,14 @@
           title: 'Item #1',
           value: 1,
           props: {
-            prependIcon: 'mdi-home',
+            prependIcon: 'i-mdi:home',
           },
         },
         {
           title: 'Item #2',
           value: 2,
           props: {
-            appendIcon: 'mdi-close',
+            appendIcon: 'i-mdi:close',
           },
         },
         {

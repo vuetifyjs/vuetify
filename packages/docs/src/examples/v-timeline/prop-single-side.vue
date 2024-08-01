@@ -22,12 +22,12 @@
     {
       id: 1,
       color: 'info',
-      icon: 'mdi-information',
+      icon: 'i-mdi:information',
     },
     {
       id: 2,
       color: 'error',
-      icon: 'mdi-alert-circle',
+      icon: 'i-mdi:alert-circle',
     },
   ]
 </script>
@@ -39,12 +39,12 @@
         {
           id: 1,
           color: 'info',
-          icon: 'mdi-information',
+          icon: 'i-mdi:information',
         },
         {
           id: 2,
           color: 'error',
-          icon: 'mdi-alert-circle',
+          icon: 'i-mdi:alert-circle',
         },
       ],
     }),

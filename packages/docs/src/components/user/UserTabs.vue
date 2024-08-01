@@ -13,7 +13,7 @@
   const tabs = computed(() => {
     return [
       {
-        prependIcon: 'mdi-view-dashboard-outline',
+        prependIcon: 'i-mdi:-view-dashboard-outline',
         text: 'My Dashboard',
         to: rpath('/user/dashboard/'),
       },

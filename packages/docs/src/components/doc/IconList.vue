@@ -24,7 +24,7 @@
       <v-list-item v-bind="props">
         <template #append>
           <v-btn
-            icon="mdi-content-copy"
+            icon="i-mdi:content-copy"
             size="small"
             variant="plain"
             @click.stop="copy(item.raw.name)"

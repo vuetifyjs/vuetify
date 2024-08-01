@@ -3,7 +3,7 @@
     <v-btn
       :disabled="dialog"
       color="primary"
-      icon="mdi-refresh"
+      icon="i-mdi:refresh"
       text="Start loading"
       @click="dialog = true"
     ></v-btn>

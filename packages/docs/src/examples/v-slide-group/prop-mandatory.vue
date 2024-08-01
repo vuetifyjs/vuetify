@@ -28,7 +28,7 @@
               <v-icon
                 v-if="isSelected"
                 color="white"
-                icon="mdi-close-circle-outline"
+                icon="i-mdi:close-circle-outline"
                 size="48"
               ></v-icon>
             </v-scale-transition>

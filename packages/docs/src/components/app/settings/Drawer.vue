@@ -11,7 +11,7 @@
     <v-toolbar :title="t('settings')" flat>
       <template #append>
         <v-btn
-          icon="mdi-close"
+          icon="i-mdi:close"
           variant="flat"
           @click="app.settings = false"
         />

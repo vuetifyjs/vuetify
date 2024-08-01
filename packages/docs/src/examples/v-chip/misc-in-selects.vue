@@ -3,7 +3,7 @@
     v-model="chips"
     :items="items"
     label="Your favorite hobbies"
-    prepend-icon="mdi-filter-variant"
+    prepend-icon="i-mdi:filter-variant"
     variant="solo"
     chips
     clearable

@@ -61,7 +61,7 @@
         width="400"
       >
         <template v-slot:activator="{ props }">
-          <v-icon v-bind="props" icon="mdi-share-variant"></v-icon>
+          <v-icon v-bind="props" icon="i-mdi:share-variant"></v-icon>
         </template>
 
         <v-card>
@@ -74,26 +74,26 @@
               icon
               @click="dialog = false"
             >
-              <v-icon>mdi-close-circle-outline</v-icon>
+              <v-icon icon="i-mdi:close-circle-outline"></v-icon>
             </v-btn>
           </v-card-title>
 
           <v-list>
             <v-list-item title="Facebook">
               <template v-slot:prepend>
-                <v-icon color="indigo" icon="mdi-facebook"></v-icon>
+                <v-icon color="indigo" icon="i-mdi:facebook"></v-icon>
               </template>
             </v-list-item>
 
             <v-list-item title="Twitter">
               <template v-slot:prepend>
-                <v-icon color="cyan" icon="mdi-twitter"></v-icon>
+                <v-icon color="cyan" icon="i-mdi:twitter"></v-icon>
               </template>
             </v-list-item>
 
             <v-list-item title="Email">
               <template v-slot:prepend>
-                <v-icon icon="mdi-email"></v-icon>
+                <v-icon icon="i-mdi:email"></v-icon>
               </template>
             </v-list-item>
           </v-list>
@@ -125,7 +125,7 @@
         <template v-slot:item="props">
           <v-icon
             :color="props.isFilled ? 'purple-darken-4' : ''"
-            :icon="`mdi-numeric-${props.index}-box`"
+            :icon="icons[props.index]"
             size="large"
           ></v-icon>
         </template>
@@ -145,6 +145,20 @@
   const copied = ref(false)
   const dialog = ref(false)
   const rating = ref(10)
+
+  const icons = [
+    'i-mdi:numeric-0-box',
+    'i-mdi:numeric-1-box',
+    'i-mdi:numeric-2-box',
+    'i-mdi:numeric-3-box',
+    'i-mdi:numeric-4-box',
+    'i-mdi:numeric-5-box',
+    'i-mdi:numeric-6-box',
+    'i-mdi:numeric-7-box',
+    'i-mdi:numeric-8-box',
+    'i-mdi:numeric-9-box',
+    'i-mdi:numeric-10-box',
+  ]
 
   function copy () {
     link.value.focus()

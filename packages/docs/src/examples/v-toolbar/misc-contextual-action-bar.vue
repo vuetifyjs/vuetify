@@ -13,7 +13,7 @@
         icon
         @click="selection = []"
       >
-        <v-icon>mdi-close</v-icon>
+        <v-icon icon="i-mdi:close"></v-icon>
       </v-btn>
 
       <v-toolbar-title>
@@ -28,7 +28,7 @@
           key="export"
           icon
         >
-          <v-icon>mdi-export-variant</v-icon>
+          <v-icon icon="i-mdi:export-variant"></v-icon>
         </v-btn>
       </v-scale-transition>
       <v-scale-transition>
@@ -37,12 +37,12 @@
           key="delete"
           icon
         >
-          <v-icon>mdi-delete</v-icon>
+          <v-icon icon="i-mdi:delete"></v-icon>
         </v-btn>
       </v-scale-transition>
 
       <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
+        <v-icon icon="i-mdi:dots-vertical"></v-icon>
       </v-btn>
     </v-toolbar>
 

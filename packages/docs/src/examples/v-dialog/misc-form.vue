@@ -7,7 +7,7 @@
       <template v-slot:activator="{ props: activatorProps }">
         <v-btn
           class="text-none font-weight-regular"
-          prepend-icon="mdi-account"
+          prepend-icon="i-mdi:account"
           text="Edit Profile"
           variant="tonal"
           v-bind="activatorProps"
@@ -15,7 +15,7 @@
       </template>
 
       <v-card
-        prepend-icon="mdi-account"
+        prepend-icon="i-mdi:account"
         title="User Profile"
       >
         <v-card-text>

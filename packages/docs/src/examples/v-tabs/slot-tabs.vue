@@ -32,22 +32,22 @@
   const tab = shallowRef('tab-1')
   const tabs = [
     {
-      icon: 'mdi-book-open-page-variant',
+      icon: 'i-mdi:book-open-page-variant',
       text: 'Readme',
       value: 'tab-1',
     },
     {
-      icon: 'mdi-handshake-outline',
+      icon: 'i-mdi:handshake-outline',
       text: 'Code of Conduct',
       value: 'tab-2',
     },
     {
-      icon: 'mdi-license',
+      icon: 'i-mdi:license',
       text: 'MIT License',
       value: 'tab-3',
     },
     {
-      icon: 'mdi-shield-lock-outline',
+      icon: 'i-mdi:shield-lock-outline',
       text: 'Security',
       value: 'tab-4',
     },
@@ -60,22 +60,22 @@
       tab: 'tab-1',
       tabs: [
         {
-          icon: 'mdi-book-open-page-variant',
+          icon: 'i-mdi:book-open-page-variant',
           text: 'Readme',
           value: 'tab-1',
         },
         {
-          icon: 'mdi-handshake-outline',
+          icon: 'i-mdi:handshake-outline',
           text: 'Code of Conduct',
           value: 'tab-2',
         },
         {
-          icon: 'mdi-license',
+          icon: 'i-mdi:license',
           text: 'MIT License',
           value: 'tab-3',
         },
         {
-          icon: 'mdi-shield-lock-outline',
+          icon: 'i-mdi:shield-lock-outline',
           text: 'Security',
           value: 'tab-4',
         },

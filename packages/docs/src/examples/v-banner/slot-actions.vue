@@ -1,7 +1,7 @@
 <template>
   <v-banner
     color="warning"
-    icon="mdi-wifi-strength-alert-outline"
+    icon="i-mdi:wifi-strength-alert-outline"
     lines="one"
   >
     <template v-slot:text>

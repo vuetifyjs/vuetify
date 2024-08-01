@@ -1,5 +1,6 @@
 // Styles
 import 'prism-theme-vars/base.css'
+import 'uno.css'
 
 // Plugins
 import { createApp } from 'vue'

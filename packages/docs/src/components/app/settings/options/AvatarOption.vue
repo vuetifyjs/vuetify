@@ -3,7 +3,7 @@
     :defaults="{
       VBadge: {
         color: 'primary',
-        icon: 'mdi-check',
+        icon: 'i-mdi:check',
         offsetX: 6,
         offsetY: 6,
       }
@@ -49,7 +49,7 @@
                     >
                       <v-icon
                         color="white"
-                        icon="mdi-lock"
+                        icon="i-mdi:lock"
                         size="small"
                       />
                     </div>

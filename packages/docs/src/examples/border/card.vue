@@ -18,7 +18,7 @@
           size="small"
           variant="text"
         >
-          <v-icon icon="mdi-arrow-up" start></v-icon> 13%
+          <v-icon icon="i-mdi:arrow-up" start></v-icon> 13%
         </v-chip>
       </template>
 
@@ -28,7 +28,7 @@
         <small class="text-caption text-medium-emphasis d-flex justify-space-between align-center">
           <div>
             <span class="text-green">
-              <v-avatar icon="mdi-arrow-up" size="small" variant="tonal"></v-avatar>
+              <v-avatar icon="i-mdi:arrow-up" size="small" variant="tonal"></v-avatar>
               + $ 3,295
             </span>
 
@@ -36,7 +36,7 @@
           </div>
 
           <v-btn
-            icon="mdi-arrow-right"
+            icon="i-mdi:arrow-right"
             size="x-small"
             variant="text"
             border

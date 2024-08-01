@@ -4,7 +4,7 @@
   <v-btn
     :href="href"
     color="primary"
-    icon="mdi-github"
+    icon="i-mdi:github"
     rel="noopener"
     style="position: fixed; bottom: 12px; right: 12px; z-index: 2000;"
     target="_blank"

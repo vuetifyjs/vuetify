@@ -17,41 +17,41 @@
             }
           }"
         >
-          <v-btn icon="mdi-chevron-left"></v-btn>
+          <v-btn icon="i-mdi:chevron-left"></v-btn>
 
-          <v-btn icon="mdi-pencil"></v-btn>
+          <v-btn icon="i-mdi:pencil"></v-btn>
 
-          <v-btn icon="mdi-dots-vertical"></v-btn>
+          <v-btn icon="i-mdi:dots-vertical"></v-btn>
         </v-defaults-provider>
       </template>
     </v-card-item>
 
     <v-list>
       <v-list-item
-        append-icon="mdi-message-text"
-        prepend-icon="mdi-phone"
+        append-icon="i-mdi:message-text"
+        prepend-icon="i-mdi:phone"
         title="(650) 555-1234"
       ></v-list-item>
 
       <v-divider inset></v-divider>
 
       <v-list-item
-        append-icon="mdi-message-text"
-        prepend-icon="mdi-phone"
+        append-icon="i-mdi:message-text"
+        prepend-icon="i-mdi:phone"
         title="(323) 555-6789"
       ></v-list-item>
 
       <v-divider inset></v-divider>
 
       <v-list-item
-        prepend-icon="mdi-email"
+        prepend-icon="i-mdi:email"
         title="mcbeal@example.com"
       ></v-list-item>
 
       <v-divider inset></v-divider>
 
       <v-list-item
-        prepend-icon="mdi-map-marker"
+        prepend-icon="i-mdi:map-marker"
         title="Orlando, FL 79938"
       ></v-list-item>
     </v-list>

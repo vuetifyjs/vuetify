@@ -7,7 +7,7 @@
     >
       <template v-slot:activator="{ props: activatorProps }">
         <v-btn
-          prepend-icon="mdi-cog"
+          prepend-icon="i-mdi:cog"
           size="small"
           text="Settings"
           v-bind="activatorProps"
@@ -17,7 +17,7 @@
       <v-card>
         <v-toolbar>
           <v-btn
-            icon="mdi-close"
+            icon="i-mdi:-close"
             @click="dialog = false"
           ></v-btn>
 

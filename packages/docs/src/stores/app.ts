@@ -1,3 +1,5 @@
+// @unocss-include DON'T REMOVE THIS LINE
+
 // Data
 import data from '@/data/nav.json'
 
@@ -39,27 +41,27 @@ export const useAppStore = defineStore({
     settings: false,
     categories: {
       api: {
-        icon: 'mdi-flask-outline',
+        icon: 'i-mdi:flask-outline',
         color: 'orange',
       },
       components: {
-        icon: 'mdi-view-dashboard-outline',
+        icon: 'i-mdi:view-dashboard-outline',
         color: 'indigo-darken-1',
       },
       features: {
-        icon: 'mdi-image-edit-outline',
+        icon: 'i-mdi:image-edit-outline',
         color: 'red',
       },
       directives: {
-        icon: 'mdi-function',
+        icon: 'i-mdi:function',
         color: 'blue-grey',
       },
       'getting-started': {
-        icon: 'mdi-speedometer',
+        icon: 'i-mdi:speedometer',
         color: 'teal',
       },
       introduction: {
-        icon: 'mdi-script-text-outline',
+        icon: 'i-mdi:script-text-outline',
         color: 'green',
       },
       about: {
@@ -67,19 +69,19 @@ export const useAppStore = defineStore({
         color: 'primary',
       },
       resources: {
-        icon: 'mdi-human-male-board',
+        icon: 'i-mdi:human-male-board',
         color: 'pink',
       },
       styles: {
-        icon: 'mdi-palette-outline',
+        icon: 'i-mdi:palette-outline',
         color: 'deep-purple-accent-4',
       },
       themes: {
-        icon: 'mdi-script-text-outline',
+        icon: 'i-mdi:script-text-outline',
         color: 'pink',
       },
       labs: {
-        icon: 'mdi-beaker-outline',
+        icon: 'i-mdi:beaker-outline',
         color: 'purple',
       },
     },

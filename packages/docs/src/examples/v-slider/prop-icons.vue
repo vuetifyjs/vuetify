@@ -4,22 +4,22 @@
 
     <v-slider
       v-model="media"
-      prepend-icon="mdi-volume-high"
+      prepend-icon="i-mdi:volume-high"
     ></v-slider>
 
     <div class="text-caption">Alarm volume</div>
 
     <v-slider
       v-model="alarm"
-      append-icon="mdi-alarm"
+      append-icon="i-mdi:alarm"
     ></v-slider>
 
     <div class="text-caption">Icon click callback</div>
 
     <v-slider
       v-model="zoom"
-      append-icon="mdi-magnify-plus-outline"
-      prepend-icon="mdi-magnify-minus-outline"
+      append-icon="i-mdi:magnify-plus-outline"
+      prepend-icon="i-mdi:magnify-minus-outline"
       @click:append="zoomIn"
       @click:prepend="zoomOut"
     ></v-slider>

@@ -10,9 +10,10 @@ import * as labs from 'vuetify/labs/components'
 // Icons
 import { fa } from 'vuetify/iconsets/fa'
 import { md } from 'vuetify/iconsets/md'
-import { mdi } from 'vuetify/iconsets/mdi-svg'
-import * as mdiSvg from './icons'
-import { aliases } from '@vuetify/one'
+import { mdi } from 'vuetify/iconsets/mdi'
+// import * as mdiSvg from './icons'
+import { aliases } from './unocss-mdi'
+// import { aliases } from '@vuetify/one'
 
 // Locales
 import { en, sv } from 'vuetify/locale'
@@ -40,7 +41,7 @@ export function installVuetify (app: App) {
         eager: false,
       },
       NewInChip: {
-        appendIcon: 'mdi-page-next',
+        appendIcon: 'i-mdi:page-next',
         class: 'ms-2 text-mono',
         color: 'success',
         label: true,
@@ -78,7 +79,7 @@ export function installVuetify (app: App) {
         color: 'primary',
         density: 'compact',
         inset: true,
-        trueIcon: 'mdi-check',
+        trueIcon: 'i-mdi:check',
         falseIcon: '$close',
       },
       BorderChip: {
@@ -105,13 +106,14 @@ export function installVuetify (app: App) {
       sets: {
         fa,
         md,
-        mdiSvg: mdi,
+        mdi,
+        /* mdiSvg: mdi,
         mdi: {
           component: (props: IconProps) => {
             const icon = mdiSvg[camelize(props.icon as string) as keyof typeof mdiSvg]
             return h(components.VSvgIcon, { ...props, icon })
           },
-        },
+        }, */
       },
       aliases,
     },

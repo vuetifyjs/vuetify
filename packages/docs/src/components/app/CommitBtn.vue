@@ -1,7 +1,7 @@
 <template>
   <v-btn
     :href="`https://github.com/vuetifyjs/vuetify/commit/${commits.latest?.sha}`"
-    :prepend-icon="commits.latest ? 'mdi-source-commit' : undefined"
+    :prepend-icon="commits.latest ? 'i-mdi:source-commit' : undefined"
     :readonly="!commits.latest"
     :text="commits.latest?.sha.slice(0, 7)"
     class="text-caption"

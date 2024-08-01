@@ -10,19 +10,19 @@
 
         <v-btn-toggle v-model="toggle_exclusive">
           <v-btn>
-            <v-icon>mdi-format-align-left</v-icon>
+            <v-icon icon="i-mdi:format-align-left"></v-icon>
           </v-btn>
 
           <v-btn>
-            <v-icon>mdi-format-align-center</v-icon>
+            <v-icon icon="i-mdi:format-align-center"></v-icon>
           </v-btn>
 
           <v-btn>
-            <v-icon>mdi-format-align-right</v-icon>
+            <v-icon icon="i-mdi:format-align-right"></v-icon>
           </v-btn>
 
           <v-btn>
-            <v-icon>mdi-format-align-justify</v-icon>
+            <v-icon icon="i-mdi:format-align-justify"></v-icon>
           </v-btn>
         </v-btn-toggle>
       </v-col>
@@ -41,19 +41,19 @@
           multiple
         >
           <v-btn>
-            <v-icon>mdi-format-bold</v-icon>
+            <v-icon icon="i-mdi:format-bold"></v-icon>
           </v-btn>
 
           <v-btn>
-            <v-icon>mdi-format-italic</v-icon>
+            <v-icon icon="i-mdi:format-italic"></v-icon>
           </v-btn>
 
           <v-btn>
-            <v-icon>mdi-format-underline</v-icon>
-          </v-btn>
+            <v-icon icon="i-mdi:format-underline"</v-icon>
+            </v-icon></v-btn>
 
           <v-btn>
-            <v-icon>mdi-format-color-fill</v-icon>
+            <v-icon icon="i-mdi:format-color-fill"></v-icon>
           </v-btn>
         </v-btn-toggle>
       </v-col>
@@ -67,18 +67,18 @@
 
         <v-btn-toggle v-model="toggle_none">
           <v-btn>
-            <v-icon>mdi-format-align-left</v-icon>
+            <v-icon icon="i-mdi:format-align-left"></v-icon>
           </v-btn>
 
           <v-btn>
-            <v-icon>mdi-format-align-center</v-icon>
+            <v-icon icon="i-mdi:format-align-center"></v-icon>
           </v-btn>
           <v-btn>
-            <v-icon>mdi-format-align-right</v-icon>
+            <v-icon icon="i-mdi:format-align-right"></v-icon>
           </v-btn>
 
           <v-btn>
-            <v-icon>mdi-format-align-justify</v-icon>
+            <v-icon icon="i-mdi:format-align-justify"></v-icon>
           </v-btn>
         </v-btn-toggle>
       </v-col>
@@ -96,19 +96,19 @@
           shaped
         >
           <v-btn>
-            <v-icon>mdi-format-align-left</v-icon>
+            <v-icon icon="i-mdi:format-align-left"></v-icon>
           </v-btn>
 
           <v-btn>
-            <v-icon>mdi-format-align-center</v-icon>
+            <v-icon icon="i-mdi:format-align-center"></v-icon>
           </v-btn>
 
           <v-btn>
-            <v-icon>mdi-format-align-right</v-icon>
+            <v-icon icon="i-mdi:format-align-right"></v-icon>
           </v-btn>
 
           <v-btn>
-            <v-icon>mdi-format-align-justify</v-icon>
+            <v-icon icon="i-mdi:format-align-justify"></v-icon>
           </v-btn>
         </v-btn-toggle>
       </v-col>
@@ -156,32 +156,28 @@
           <v-btn value="left">
             <span class="hidden-sm-and-down">Left</span>
 
-            <v-icon end>
-              mdi-format-align-left
+            <v-icon icon="i-mdi:format-align-left" end>
             </v-icon>
           </v-btn>
 
           <v-btn value="center">
             <span class="hidden-sm-and-down">Center</span>
 
-            <v-icon end>
-              mdi-format-align-center
+            <v-icon icon="i-mdi:format-align-center" end>
             </v-icon>
           </v-btn>
 
           <v-btn value="right">
             <span class="hidden-sm-and-down">Right</span>
 
-            <v-icon end>
-              mdi-format-align-right
+            <v-icon icon="i-mdi:format-align-right" end>
             </v-icon>
           </v-btn>
 
           <v-btn value="justify">
             <span class="hidden-sm-and-down">Justify</span>
 
-            <v-icon end>
-              mdi-format-align-justify
+            <v-icon icon="i-mdi:format-align-justify" end>
             </v-icon>
           </v-btn>
         </v-btn-toggle>

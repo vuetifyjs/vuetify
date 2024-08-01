@@ -13,7 +13,7 @@
           >
             <template v-slot:append>
               <v-btn
-                icon="mdi-menu-down"
+                icon="i-mdi:menu-down"
                 size="small"
                 variant="text"
               ></v-btn>
@@ -50,13 +50,13 @@
 
 <script setup>
   const items = [
-    { text: 'My Files', icon: 'mdi-folder' },
-    { text: 'Shared with me', icon: 'mdi-account-multiple' },
-    { text: 'Starred', icon: 'mdi-star' },
-    { text: 'Recent', icon: 'mdi-history' },
-    { text: 'Offline', icon: 'mdi-check-circle' },
-    { text: 'Uploads', icon: 'mdi-upload' },
-    { text: 'Backups', icon: 'mdi-cloud-upload' },
+    { text: 'My Files', icon: 'i-mdi:folder' },
+    { text: 'Shared with me', icon: 'i-mdi:account-multiple' },
+    { text: 'Starred', icon: 'i-mdi:star' },
+    { text: 'Recent', icon: 'i-mdi:history' },
+    { text: 'Offline', icon: 'i-mdi:check-circle' },
+    { text: 'Uploads', icon: 'i-mdi:upload' },
+    { text: 'Backups', icon: 'i-mdi:cloud-upload' },
   ]
 </script>
 
@@ -64,13 +64,13 @@
   export default {
     data: () => ({
       items: [
-        { text: 'My Files', icon: 'mdi-folder' },
-        { text: 'Shared with me', icon: 'mdi-account-multiple' },
-        { text: 'Starred', icon: 'mdi-star' },
-        { text: 'Recent', icon: 'mdi-history' },
-        { text: 'Offline', icon: 'mdi-check-circle' },
-        { text: 'Uploads', icon: 'mdi-upload' },
-        { text: 'Backups', icon: 'mdi-cloud-upload' },
+        { text: 'My Files', icon: 'i-mdi:folder' },
+        { text: 'Shared with me', icon: 'i-mdi:account-multiple' },
+        { text: 'Starred', icon: 'i-mdi:star' },
+        { text: 'Recent', icon: 'i-mdi:history' },
+        { text: 'Offline', icon: 'i-mdi:check-circle' },
+        { text: 'Uploads', icon: 'i-mdi:upload' },
+        { text: 'Backups', icon: 'i-mdi:cloud-upload' },
       ],
     }),
   }

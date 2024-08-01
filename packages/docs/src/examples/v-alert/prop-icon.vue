@@ -3,7 +3,7 @@
     <v-alert
       color="#2A3B4D"
       density="compact"
-      icon="mdi-firework"
+      icon="i-mdi:firework"
       theme="dark"
     >
       Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. Vivamus quis mi. Quisque ut nisi. Maecenas malesuada.
@@ -13,7 +13,7 @@
 
     <v-alert
       color="#C51162"
-      icon="mdi-material-design"
+      icon="i-mdi:material-design"
       theme="dark"
       border
     >

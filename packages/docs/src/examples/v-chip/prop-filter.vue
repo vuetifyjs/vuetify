@@ -14,7 +14,7 @@
     <v-chip
       :model-value="active"
       class="ma-2"
-      filter-icon="mdi-plus"
+      filter-icon="i-mdi:plus"
       filter
     >
       I'm v-chip
@@ -23,7 +23,7 @@
     <v-chip
       :model-value="active"
       class="ma-2"
-      filter-icon="mdi-minus"
+      filter-icon="i-mdi:minus"
       filter
     >
       I'm v-chip

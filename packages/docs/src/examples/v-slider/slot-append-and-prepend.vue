@@ -11,7 +11,7 @@
         <span class="text-subheading">METRONOME</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon="mdi-share-variant" variant="text"></v-btn>
+      <v-btn icon="i-mdi:share-variant" variant="text"></v-btn>
     </v-toolbar>
 
     <v-card-text>
@@ -45,7 +45,7 @@
             icon
             @click="toggle"
           >
-            <v-icon :icon="isPlaying ? 'mdi-pause' : 'mdi-play'" size="large"></v-icon>
+            <v-icon :icon="isPlaying ? 'i-mdi:pause' : 'i-mdi:play'" size="large"></v-icon>
           </v-btn>
         </v-col>
       </v-row>
@@ -61,7 +61,7 @@
         <template v-slot:prepend>
           <v-btn
             :color="color"
-            icon="mdi-minus"
+            icon="i-mdi:minus"
             size="small"
             variant="text"
             @click="decrement"
@@ -71,7 +71,7 @@
         <template v-slot:append>
           <v-btn
             :color="color"
-            icon="mdi-plus"
+            icon="i-mdi:plus"
             size="small"
             variant="text"
             @click="increment"

@@ -6,7 +6,7 @@
     <template v-slot:prepend>
       <v-avatar
         color="deep-purple-accent-4"
-        icon="mdi-account-filter"
+        icon="i-mdi:account-filter"
       ></v-avatar>
     </template>
 

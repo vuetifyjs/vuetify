@@ -30,7 +30,7 @@
 
         <v-btn
           :href="person.link"
-          append-icon="mdi-open-in-new"
+          append-icon="i-mdi:open-in-new"
           color="primary"
           target="_blank"
           variant="flat"

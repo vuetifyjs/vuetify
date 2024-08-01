@@ -13,7 +13,7 @@
 
         <template v-slot:append>
           <v-btn icon>
-            <v-icon>mdi-dots-vertical</v-icon>
+            <v-icon icon="i-mdi:dots-vertical"></v-icon>
           </v-btn>
         </template>
       </v-app-bar>

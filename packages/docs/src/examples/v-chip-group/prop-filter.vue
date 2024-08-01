@@ -4,7 +4,7 @@
     max-width="400"
   >
     <v-toolbar color="deep-purple-accent-4">
-      <v-btn icon="mdi-close"></v-btn>
+      <v-btn icon="i-mdi:close"></v-btn>
 
       <v-toolbar-title>Filter results</v-toolbar-title>
     </v-toolbar>

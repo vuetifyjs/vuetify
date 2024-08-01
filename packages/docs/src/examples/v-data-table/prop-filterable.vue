@@ -1,7 +1,7 @@
 <template>
   <v-card flat>
     <v-card-title class="d-flex align-center pe-2">
-      <v-icon icon="mdi-video-input-component"></v-icon> &nbsp;
+      <v-icon icon="i-mdi:video-input-component"></v-icon> &nbsp;
       Find a Graphics Card
 
       <v-spacer></v-spacer>
@@ -10,7 +10,7 @@
         v-model="search"
         density="compact"
         label="Search"
-        prepend-inner-icon="mdi-magnify"
+        prepend-inner-icon="i-mdi:magnify"
         variant="solo-filled"
         flat
         hide-details

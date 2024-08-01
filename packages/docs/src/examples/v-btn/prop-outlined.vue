@@ -11,7 +11,7 @@
       variant="outlined"
       icon
     >
-      <v-icon>mdi-format-list-bulleted-square</v-icon>
+      <v-icon icon="i-mdi:format-list-bulleted-square"></v-icon>
     </v-btn>
     <v-btn
       color="info"
@@ -19,7 +19,7 @@
       variant="outlined"
       icon
     >
-      <v-icon>mdi-pencil</v-icon>
+      <v-icon icon="i-mdi:pencil"></v-icon>
     </v-btn>
   </div>
 </template>

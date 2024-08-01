@@ -3,11 +3,11 @@
     <v-system-bar>
       <v-spacer></v-spacer>
 
-      <v-icon>mdi-square</v-icon>
+      <v-icon icon="i-mdi:square"></v-icon>
 
-      <v-icon>mdi-circle</v-icon>
+      <v-icon icon="i-mdi:circle"></v-icon>
 
-      <v-icon>mdi-triangle</v-icon>
+      <v-icon icon="i-mdi:triangle"></v-icon>
     </v-system-bar>
 
     <v-navigation-drawer v-model="drawer">
@@ -83,10 +83,10 @@
 
   const cards = ['Today', 'Yesterday']
   const links = [
-    ['mdi-inbox-arrow-down', 'Inbox'],
-    ['mdi-send', 'Send'],
-    ['mdi-delete', 'Trash'],
-    ['mdi-alert-octagon', 'Spam'],
+    ['i-mdi:inbox-arrow-down', 'Inbox'],
+    ['i-mdi:send', 'Send'],
+    ['i-mdi:delete', 'Trash'],
+    ['i-mdi:alert-octagon', 'Spam'],
   ]
 
   const drawer = ref(null)
@@ -98,10 +98,10 @@
       cards: ['Today', 'Yesterday'],
       drawer: null,
       links: [
-        ['mdi-inbox-arrow-down', 'Inbox'],
-        ['mdi-send', 'Send'],
-        ['mdi-delete', 'Trash'],
-        ['mdi-alert-octagon', 'Spam'],
+        ['i-mdi:inbox-arrow-down', 'Inbox'],
+        ['i-mdi:send', 'Send'],
+        ['i-mdi:delete', 'Trash'],
+        ['i-mdi:alert-octagon', 'Spam'],
       ],
     }),
   }

@@ -14,11 +14,11 @@
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
+        <v-icon icon="i-mdi:magnify"></v-icon>
       </v-btn>
 
       <v-btn icon>
-        <v-icon>mdi-checkbox-marked-circle</v-icon>
+        <v-icon icon="i-mdi:checkbox-marked-circle"></v-icon>
       </v-btn>
     </v-toolbar>
 
@@ -48,15 +48,15 @@
                 <v-icon
                   v-if="!active"
                   color="grey-lighten-1"
+                  icon="i-mdi:star-outline"
                 >
-                  mdi-star-outline
                 </v-icon>
 
                 <v-icon
                   v-else
                   color="yellow-darken-3"
+                  icon="i-mdi:star"
                 >
-                  mdi-star
                 </v-icon>
               </v-list-item-action>
             </template>

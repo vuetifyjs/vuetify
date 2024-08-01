@@ -26,7 +26,7 @@
           <v-combobox
             v-model="dates"
             label="Multiple picker in menu"
-            prepend-icon="mdi-calendar"
+            prepend-icon="i-mdi:calendar"
             chips
             multiple
             readonly

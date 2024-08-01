@@ -25,9 +25,9 @@
 
 <script setup>
   const items = [
-    { text: 'Real-Time', icon: 'mdi-clock' },
-    { text: 'Audience', icon: 'mdi-account' },
-    { text: 'Conversions', icon: 'mdi-flag' },
+    { text: 'Real-Time', icon: 'i-mdi:clock' },
+    { text: 'Audience', icon: 'i-mdi:account' },
+    { text: 'Conversions', icon: 'i-mdi:flag' },
   ]
 </script>
 
@@ -35,9 +35,9 @@
   export default {
     data: () => ({
       items: [
-        { text: 'Real-Time', icon: 'mdi-clock' },
-        { text: 'Audience', icon: 'mdi-account' },
-        { text: 'Conversions', icon: 'mdi-flag' },
+        { text: 'Real-Time', icon: 'i-mdi:clock' },
+        { text: 'Audience', icon: 'i-mdi:account' },
+        { text: 'Conversions', icon: 'i-mdi:flag' },
       ],
     }),
   }

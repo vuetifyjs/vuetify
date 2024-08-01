@@ -7,7 +7,7 @@
       <template v-slot:activator="{ props: activatorProps }">
         <v-btn
           color="brown"
-          prepend-icon="mdi-earth"
+          prepend-icon="i-mdi:earth"
           text="Select Country"
           variant="outlined"
           v-bind="activatorProps"
@@ -16,7 +16,7 @@
 
       <template v-slot:default="{ isActive }">
         <v-card
-          prepend-icon="mdi-earth"
+          prepend-icon="i-mdi:earth"
           title="Select Country"
         >
           <v-divider class="mt-3"></v-divider>

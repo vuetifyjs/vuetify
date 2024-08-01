@@ -92,7 +92,7 @@
               class="text-none border-opacity-50 border-primary"
               color="primary"
               href="https://github.com/sponsors/johnleider"
-              prepend-icon="mdi-github"
+              prepend-icon="i-mdi:github"
               rel="noopener noreferrer"
               size="large"
               target="_blank"

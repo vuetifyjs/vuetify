@@ -9,7 +9,7 @@
     <v-icon
       class="mb-5"
       color="success"
-      icon="mdi-check-circle"
+      icon="i-mdi:check-circle"
       size="112"
     ></v-icon>
 

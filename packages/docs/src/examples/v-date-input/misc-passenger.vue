@@ -2,16 +2,16 @@
   <v-card class="mx-auto" max-width="420">
     <v-layout>
       <v-system-bar color="#4603c0">
-        <v-icon icon="mdi-square"></v-icon>
+        <v-icon icon="i-mdi:square"></v-icon>
 
-        <v-icon icon="mdi-circle"></v-icon>
+        <v-icon icon="i-mdi:circle"></v-icon>
 
-        <v-icon icon="mdi-triangle"></v-icon>
+        <v-icon icon="i-mdi:triangle"></v-icon>
       </v-system-bar>
 
       <v-app-bar color="#6200ee" title="Passenger information" flat>
         <template v-slot:prepend>
-          <v-btn icon="mdi-arrow-left"></v-btn>
+          <v-btn icon="i-mdi:arrow-left"></v-btn>
         </template>
       </v-app-bar>
 

@@ -1,7 +1,7 @@
 <template>
   <v-banner
     color="pink-darken-1"
-    icon="mdi-account-box"
+    icon="i-mdi:account-box"
     lines="two"
   >
     <template v-slot:prepend>

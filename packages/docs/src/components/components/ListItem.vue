@@ -17,7 +17,7 @@
             v-if="labs"
             :to="rpath('/labs/introduction/')"
             color="success"
-            prepend-icon="mdi-beaker-outline"
+            prepend-icon="i-mdi:beaker-outline"
             rounded="bs-0 te-0"
             size="small"
             text="Labs Component"

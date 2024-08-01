@@ -12,7 +12,7 @@
       color="pink"
       label
     >
-      <v-icon icon="mdi-label" start></v-icon>
+      <v-icon icon="i-mdi:label" start></v-icon>
       Tags
     </v-chip>
 
@@ -21,7 +21,7 @@
       color="primary"
       label
     >
-      <v-icon icon="mdi-account-circle-outline" start></v-icon>
+      <v-icon icon="i-mdi:account-circle-outline" start></v-icon>
       John Leider
     </v-chip>
 
@@ -31,7 +31,7 @@
       closable
       label
     >
-      <v-icon icon="mdi-twitter" start></v-icon>
+      <v-icon icon="i-mdi:twitter" start></v-icon>
       New Tweets
     </v-chip>
   </div>

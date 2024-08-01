@@ -7,25 +7,25 @@
       mode="shift"
     >
       <v-btn>
-        <v-icon>mdi-television-play</v-icon>
+        <v-icon icon="i-mdi:television-play"></v-icon>
 
         <span>Video</span>
       </v-btn>
 
       <v-btn>
-        <v-icon>mdi-music-note</v-icon>
+        <v-icon icon="i-mdi:music-note"></v-icon>
 
         <span>Music</span>
       </v-btn>
 
       <v-btn>
-        <v-icon>mdi-book</v-icon>
+        <v-icon icon="i-mdi:book"></v-icon>
 
         <span>Book</span>
       </v-btn>
 
       <v-btn>
-        <v-icon>mdi-image</v-icon>
+        <v-icon icon="i-mdi:image"></v-icon>
 
         <span>Image</span>
       </v-btn>

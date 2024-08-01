@@ -7,7 +7,7 @@
     <v-card-text>
       <v-text-field
         :loading="loading"
-        append-inner-icon="mdi-magnify"
+        append-inner-icon="i-mdi:magnify"
         density="compact"
         label="Search templates"
         variant="solo"

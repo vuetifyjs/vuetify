@@ -9,21 +9,21 @@
       flat
     >
       <template v-slot:prepend>
-        <v-btn icon="mdi-arrow-left">
+        <v-btn icon="i-mdi:arrow-left">
         </v-btn>
       </template>
 
       <v-text-field
         v-model="search"
         label="Search News"
-        prepend-inner-icon="mdi-magnify"
+        prepend-inner-icon="i-mdi:magnify"
         clearable
         hide-details
         single-line
       ></v-text-field>
 
       <template v-slot:append>
-        <v-btn icon="mdi-dots-vertical"></v-btn>
+        <v-btn icon="i-mdi:dots-vertical"></v-btn>
       </template>
     </v-toolbar>
 

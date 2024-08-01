@@ -31,9 +31,9 @@
         >
           <v-list-item
             :to="getPathname(child)"
-            append-icon="mdi-chevron-right"
+            append-icon="i-mdi:chevron-right"
             class="mb-0"
-            prepend-icon="mdi-home-outline"
+            prepend-icon="i-mdi:home-outline"
             slim
             @click="onSearchClick(child.name, getPathname(child))"
           >
@@ -54,8 +54,8 @@
             <v-list-item
               v-for="(item, it) in child.items"
               :key="`search-${i}-${ci}-${it}-children`"
-              :append-icon="item.url.indexOf('#') > -1 ? 'mdi-chevron-right' : undefined"
-              :prepend-icon="item.url.indexOf('#') > -1 ? 'mdi-pound' : undefined"
+              :append-icon="item.url.indexOf('#') > -1 ? 'i-mdi:chevron-right' : undefined"
+              :prepend-icon="item.url.indexOf('#') > -1 ? 'i-mdi:pound' : undefined"
               :to="item.url"
               class="ps-6 mb-0"
               slim

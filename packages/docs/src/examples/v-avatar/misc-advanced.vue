@@ -90,7 +90,7 @@
     },
     {
       color: 'red',
-      icon: 'mdi-account-multiple',
+      icon: 'i-mdi:account-multiple',
       name: 'Social',
       new: 1,
       total: 3,
@@ -98,7 +98,7 @@
     },
     {
       color: 'teal',
-      icon: 'mdi-tag',
+      icon: 'i-mdi:tag',
       name: 'Promos',
       new: 2,
       total: 4,
@@ -121,7 +121,7 @@
         },
         {
           color: 'red',
-          icon: 'mdi-account-multiple',
+          icon: 'i-mdi:account-multiple',
           name: 'Social',
           new: 1,
           total: 3,
@@ -129,7 +129,7 @@
         },
         {
           color: 'teal',
-          icon: 'mdi-tag',
+          icon: 'i-mdi:tag',
           name: 'Promos',
           new: 2,
           total: 4,

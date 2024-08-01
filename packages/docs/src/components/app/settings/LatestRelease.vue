@@ -3,8 +3,8 @@
     :label="t('latest-release')"
     :title="`v${version}`"
     :to="rpath(`/getting-started/release-notes/?version=v${version}`)"
-    append-icon="mdi-page-next"
-    prepend-icon="mdi-tag-outline"
+    append-icon="i-mdi:page-next"
+    prepend-icon="i-mdi:tag-outline"
     @click="onClick"
   />
 </template>

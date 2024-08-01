@@ -6,19 +6,19 @@
       active
     >
       <v-btn>
-        <v-icon>mdi-history</v-icon>
+        <v-icon icon="i-mdi:history"></v-icon>
 
         Recents
       </v-btn>
 
       <v-btn>
-        <v-icon>mdi-heart</v-icon>
+        <v-icon icon="i-mdi:heart"></v-icon>
 
         Favorites
       </v-btn>
 
       <v-btn>
-        <v-icon>mdi-map-marker</v-icon>
+        <v-icon icon="i-mdi:map-marker"></v-icon>
 
         <span>Nearby</span>
       </v-btn>

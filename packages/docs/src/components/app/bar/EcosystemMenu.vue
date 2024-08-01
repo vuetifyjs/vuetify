@@ -29,19 +29,19 @@
     {
       title: 'github',
       href: 'https://github.com/vuetifyjs/vuetify',
-      appendIcon: 'mdi-github',
+      appendIcon: 'i-mdi:github',
     },
     {
       title: 'reddit',
       href: 'https://reddit.com/r/vuetifyjs',
-      appendIcon: 'mdi-reddit',
+      appendIcon: 'i-mdi:reddit',
     },
     { divider: true },
     { subheader: t('tools') },
     {
       title: 'awesome',
       href: 'https://github.com/vuetifyjs/awesome-vuetify',
-      appendIcon: 'mdi-creation-outline',
+      appendIcon: 'i-mdi:creation-outline',
     },
     {
       title: 'brand-kit',
@@ -51,22 +51,22 @@
     {
       title: 'create',
       href: 'https://tryvuetify.com/',
-      appendIcon: 'mdi-widgets-outline',
+      appendIcon: 'i-mdi:widgets-outline',
     },
     {
       title: 'pastebin',
       href: 'https://bin.vuetifyjs.com/',
-      appendIcon: 'mdi-delete-outline',
+      appendIcon: 'i-mdi:delete-outline',
     },
     {
       title: 'playground',
       href: 'https://play.vuetifyjs.com/',
-      appendIcon: 'mdi-play-circle-outline',
+      appendIcon: 'i-mdi:play-circle-outline',
     },
     {
       title: 'jobs',
       to: rpath('/resources/jobs-for-vue/'),
-      appendIcon: 'mdi-briefcase-variant-outline',
+      appendIcon: 'i-mdi:briefcase-variant-outline',
     },
     {
       title: 'snips',
@@ -81,12 +81,12 @@
     {
       title: 'themes',
       to: rpath('/resources/themes/'),
-      appendIcon: 'mdi-shape-outline',
+      appendIcon: 'i-mdi:shape-outline',
     },
     {
       title: 'ui-kits',
       to: rpath('/resources/ui-kits/'),
-      appendIcon: 'mdi-vector-difference-ab',
+      appendIcon: 'i-mdi:vector-difference-ab',
     },
   ]))
 </script>

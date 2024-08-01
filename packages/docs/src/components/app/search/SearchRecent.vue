@@ -4,7 +4,7 @@
       <v-icon
         class="me-2"
         color="medium-emphasis"
-        icon="mdi-history"
+        icon="i-mdi:history"
         size="22"
       />
 
@@ -15,10 +15,10 @@
       <v-list-item
         :title="search.name"
         :to="search.url"
-        append-icon="mdi-delete-outline"
+        append-icon="i-mdi:delete-outline"
         density="comfortable"
         lines="one"
-        prepend-icon="mdi-file-document-outline"
+        prepend-icon="i-mdi:file-document-outline"
         nav
         slim
       >
@@ -26,7 +26,7 @@
           <div class="d-flex align-center">
             <v-icon
               class="me-1"
-              icon="mdi-pound"
+              icon="i-mdi:pound"
               size="x-small"
             />
             <span class="text-capitalize">{{ search.hash }}</span>

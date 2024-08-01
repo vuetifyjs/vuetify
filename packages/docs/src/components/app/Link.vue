@@ -32,9 +32,9 @@
   )
 
   const icon = computed(() => {
-    if (isSamePage.value) return 'mdi-pound'
-    if (isExternal.value) return 'mdi-open-in-new'
-    if (props.href) return 'mdi-page-next'
+    if (isSamePage.value) return 'i-mdi:pound'
+    if (isExternal.value) return 'i-mdi:open-in-new'
+    if (props.href) return 'i-mdi:page-next'
 
     return null
   })

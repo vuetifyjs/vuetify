@@ -10,7 +10,7 @@
           :active="menu2"
           :focus="menu2"
           label="Picker in menu"
-          prepend-icon="mdi-clock-time-four-outline"
+          prepend-icon="i-mdi:clock-time-four-outline"
           readonly
         >
           <v-menu
@@ -37,7 +37,7 @@
           :active="modal2"
           :focused="modal2"
           label="Picker in dialog"
-          prepend-icon="mdi-clock-time-four-outline"
+          prepend-icon="i-mdi:clock-time-four-outline"
           readonly
         >
           <v-dialog

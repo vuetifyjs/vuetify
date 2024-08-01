@@ -65,7 +65,7 @@
     {
       name: 'Frozen Yogurt',
       description: 'A tangy and creamy dessert made from yogurt and sometimes fruit, Frozen Yogurt is a lighter alternative to ice cream. Perfect for those who crave a sweet treat but want to keep it on the healthier side.',
-      icon: 'mdi-ice-cream',
+      icon: 'i-mdi:ice-cream',
       color: '#6EC1E4',
       calories: 159,
       fat: 6,
@@ -78,7 +78,7 @@
     {
       name: 'Ice cream sandwich',
       description: 'A classic treat featuring a layer of creamy ice cream sandwiched between two cookies or cake layers. Ideal for those hot summer days when you can\'t decide between a cookie and ice cream.',
-      icon: 'mdi-cookie',
+      icon: 'i-mdi:cookie',
       color: '#F4A261',
       calories: 237,
       fat: 9,
@@ -91,7 +91,7 @@
     {
       name: 'Eclair',
       description: 'A small, individual cake topped with frosting and often adorned with sprinkles or other decorations. Great for parties or as a quick indulgence when you need a sugar fix.',
-      icon: 'mdi-cake-variant',
+      icon: 'i-mdi:cake-variant',
       color: '#6D4C41',
       calories: 262,
       fat: 16,
@@ -105,7 +105,7 @@
       name: 'Cupcake',
       description: 'A small, individual cake topped with frosting and often adorned with sprinkles or other decorations. Great for parties or as a quick indulgence when you need a sugar fix.',
       color: '#FFADAD',
-      icon: 'mdi-cupcake',
+      icon: 'i-mdi:cupcake',
       calories: 305,
       fat: 3.7,
       carbs: 67,
@@ -124,7 +124,7 @@
         {
           name: 'Frozen Yogurt',
           description: 'A tangy and creamy dessert made from yogurt and sometimes fruit, Frozen Yogurt is a lighter alternative to ice cream. Perfect for those who crave a sweet treat but want to keep it on the healthier side.',
-          icon: 'mdi-ice-cream',
+          icon: 'i-mdi:ice-cream',
           color: '#6EC1E4',
           calories: 159,
           fat: 6,
@@ -137,7 +137,7 @@
         {
           name: 'Ice cream sandwich',
           description: 'A classic treat featuring a layer of creamy ice cream sandwiched between two cookies or cake layers. Ideal for those hot summer days when you can\'t decide between a cookie and ice cream.',
-          icon: 'mdi-cookie',
+          icon: 'i-mdi:cookie',
           color: '#F4A261',
           calories: 237,
           fat: 9,
@@ -150,7 +150,7 @@
         {
           name: 'Eclair',
           description: 'A small, individual cake topped with frosting and often adorned with sprinkles or other decorations. Great for parties or as a quick indulgence when you need a sugar fix.',
-          icon: 'mdi-cake-variant',
+          icon: 'i-mdi:cake-variant',
           color: '#6D4C41',
           calories: 262,
           fat: 16,
@@ -164,7 +164,7 @@
           name: 'Cupcake',
           description: 'A small, individual cake topped with frosting and often adorned with sprinkles or other decorations. Great for parties or as a quick indulgence when you need a sugar fix.',
           color: '#FFADAD',
-          icon: 'mdi-cupcake',
+          icon: 'i-mdi:cupcake',
           calories: 305,
           fat: 3.7,
           carbs: 67,

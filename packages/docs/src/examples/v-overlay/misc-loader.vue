@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <v-btn
-      append-icon="mdi-open-in-new"
+      append-icon="i-mdi:open-in-new"
       color="deep-purple-accent-4"
       @click="overlay = !overlay"
     >

@@ -24,10 +24,10 @@
   })
   const icon = computed(() => {
     switch (type.value) {
-      case 'error': return 'mdi-close-circle-outline'
-      case 'info': return 'mdi-information-outline'
-      case 'success': return 'mdi-check-circle-outline'
-      case 'warning': return 'mdi-alert-circle-outline'
+      case 'error': return 'i-mdi:close-circle-outline'
+      case 'info': return 'i-mdi:information-outline'
+      case 'success': return 'i-mdi:check-circle-outline'
+      case 'warning': return 'i-mdi:alert-circle-outline'
       default: return '$vuetify'
     }
   })

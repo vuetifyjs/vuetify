@@ -48,7 +48,7 @@
             >
               <v-icon
                 class="me-1"
-                icon="mdi-material-design"
+                icon="i-mdi:material-design"
                 size="small"
                 style="color: inherit;"
               />
@@ -65,42 +65,42 @@
 <script setup>
   const breakpoints = [
     {
-      icon: 'mdi-cellphone',
+      icon: 'i-mdi:cellphone',
       device: 'extra-small',
       code: 'xs',
       type: 'breakpoints-table.small-to-large-handset',
       range: '< 600px',
     },
     {
-      icon: 'mdi-tablet',
+      icon: 'i-mdi:-tablet',
       device: 'small',
       code: 'sm',
       type: 'breakpoints-table.small-to-medium-tablet',
       range: '600px > < 960px',
     },
     {
-      icon: 'mdi-laptop',
+      icon: 'i-mdi:laptop',
       device: 'medium',
       code: 'md',
       type: 'breakpoints-table.large-tablet-to-laptop',
       range: '960px > < 1280px',
     },
     {
-      icon: 'mdi-monitor-small',
+      icon: 'i-mdi:monitor-small',
       device: 'large',
       code: 'lg',
       type: 'breakpoints-table.desktop',
       range: '1280px > < 1920px',
     },
     {
-      icon: 'mdi-monitor',
+      icon: 'i-mdi:monitor',
       device: 'extra-large',
       code: 'xl',
       type: 'breakpoints-table.large-to-extra-large',
       range: '1920px > < 2560px',
     },
     {
-      icon: 'mdi-monitor-screenshot',
+      icon: 'i-mdi:monitor-screenshot',
       device: 'extra-extra-large',
       code: 'xxl',
       type: 'breakpoints-table.extra-large-to-extra-extra-large',

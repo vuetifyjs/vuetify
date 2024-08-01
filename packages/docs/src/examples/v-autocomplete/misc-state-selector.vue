@@ -13,7 +13,7 @@
         :items="states"
         :label="`State — ${isEditing ? 'Editable' : 'Readonly'}`"
         :readonly="!isEditing"
-        prepend-icon="mdi-city"
+        prepend-icon="i-mdi:city"
         persistent-hint
       >
         <template v-slot:append>
@@ -21,7 +21,7 @@
             <v-icon
               :key="`icon-${isEditing}`"
               :color="isEditing ? 'success' : 'info'"
-              :icon="isEditing ? 'mdi-check-outline' : 'mdi-circle-edit-outline'"
+              :icon="isEditing ? 'i-mdi:check-outline' : 'i-mdi:circle-edit-outline'"
               @click="isEditing = !isEditing"
             ></v-icon>
           </v-slide-x-reverse-transition>

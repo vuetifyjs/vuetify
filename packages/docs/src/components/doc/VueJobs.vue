@@ -4,7 +4,7 @@
       <div class="d-flex">
         <AppTextField
           v-model="search"
-          :append-inner-icon="view ? 'mdi-view-grid-outline' : 'mdi-view-list-outline'"
+          :append-inner-icon="view ? 'i-mdi:view-grid-outline' : 'i-mdi:view-list-outline'"
           :placeholder="placeholder"
           @click:append-inner.stop.prevent="view = !view"
         />
@@ -43,7 +43,7 @@
 
           <template v-if="job.locations.length > 0" #subtitle>
             <v-icon
-              icon="mdi-map-marker-outline"
+              icon="i-mdi:map-marker-outline"
               size="14"
             />
 
@@ -61,7 +61,7 @@
               {{ t('apply') }}
 
               <v-icon
-                icon="mdi-open-in-new"
+                icon="i-mdi:open-in-new"
                 size="small"
                 end
               />

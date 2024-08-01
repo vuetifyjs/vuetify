@@ -20,12 +20,12 @@
           :title="`Employee Name`"
         >
           <template v-slot:prepend>
-            <v-icon class="bg-primary">mdi-account</v-icon>
+            <v-icon class="bg-primary" icon="i-mdi:account"></v-icon>
           </template>
 
           <template v-slot:append>
             <v-btn
-              icon="mdi-pencil"
+              icon="i-mdi:pencil"
               size="x-small"
               variant="tonal"
             ></v-btn>

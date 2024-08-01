@@ -4,15 +4,15 @@
     max-width="600"
   >
     <v-toolbar color="secondary">
-      <v-btn icon="mdi-menu" variant="text"></v-btn>
+      <v-btn icon="i-mdi:menu" variant="text"></v-btn>
 
       <v-toolbar-title>My files</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn icon="mdi-magnify" variant="text"></v-btn>
+      <v-btn icon="i-mdi:magnify" variant="text"></v-btn>
 
-      <v-btn icon="mdi-view-module" variant="text"></v-btn>
+      <v-btn icon="i-mdi:view-module" variant="text"></v-btn>
     </v-toolbar>
 
     <v-list lines="two">
@@ -26,14 +26,14 @@
       >
         <template v-slot:prepend>
           <v-avatar color="grey-lighten-1">
-            <v-icon color="white">mdi-folder</v-icon>
+            <v-icon color="white" icon="i-mdi:folder"></v-icon>
           </v-avatar>
         </template>
 
         <template v-slot:append>
           <v-btn
             color="grey-lighten-1"
-            icon="mdi-information"
+            icon="i-mdi:information"
             variant="text"
           ></v-btn>
         </template>
@@ -58,7 +58,7 @@
         <template v-slot:append>
           <v-btn
             color="grey-lighten-1"
-            icon="mdi-information"
+            icon="i-mdi:information"
             variant="text"
           ></v-btn>
         </template>
@@ -71,13 +71,13 @@
   const files = [
     {
       color: 'blue',
-      icon: 'mdi-clipboard-text',
+      icon: 'i-mdi:clipboard-text',
       subtitle: 'Jan 20, 2014',
       title: 'Vacation itinerary',
     },
     {
       color: 'amber',
-      icon: 'mdi-gesture-tap-button',
+      icon: 'i-mdi:gesture-tap-button',
       subtitle: 'Jan 10, 2014',
       title: 'Kitchen remodel',
     },
@@ -104,13 +104,13 @@
       files: [
         {
           color: 'blue',
-          icon: 'mdi-clipboard-text',
+          icon: 'i-mdi:clipboard-text',
           subtitle: 'Jan 20, 2014',
           title: 'Vacation itinerary',
         },
         {
           color: 'amber',
-          icon: 'mdi-gesture-tap-button',
+          icon: 'i-mdi:gesture-tap-button',
           subtitle: 'Jan 10, 2014',
           title: 'Kitchen remodel',
         },

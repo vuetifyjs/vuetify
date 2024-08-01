@@ -7,8 +7,7 @@
       color="success"
       tile
     >
-      <v-icon start>
-        mdi-pencil
+      <v-icon icon="i-mdi:pencil" start>
       </v-icon>
       Edit
     </v-btn>
