@@ -46,21 +46,32 @@
 </template>
 
 <script setup>
-  // Data
-  import * as paths from '@mdi/js'
-
   const { t } = useI18n()
 
   const copied = shallowRef(false)
   const loading = shallowRef(true)
   const icons = shallowRef([])
+  const paths = shallowRef({})
   const selection = shallowRef()
   const search = shallowRef('')
 
-  import('virtual:mdi-js-icons')
-    .then(i => icons.value = i.icons)
-    .catch(console.error)
-    .finally(() => loading.value = false)
+  const data = Promise.all([
+    import('virtual:mdi-js-icons'),
+    import('@mdi/js'),
+  ])
+
+  function load () {
+    nextTick(() => {
+      data.then(([i, p]) => {
+        paths.value = p
+        icons.value = i.icons
+      })
+        .catch(console.error)
+        .finally(() => loading.value = false)
+    })
+  }
+
+  onMounted(load)
 
   /** @param s {string} */
   function * mapIcons (s) {
@@ -96,7 +107,7 @@
   })
 
   function getIcon (name) {
-    return 'svg:' + paths[camelize('mdi-' + name)]
+    return 'svg:' + paths.value[camelize('mdi-' + name)]
   }
   function itemProps (item) {
     return {

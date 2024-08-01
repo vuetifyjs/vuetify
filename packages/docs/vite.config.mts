@@ -50,6 +50,14 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
       'process.env.NODE_ENV': mode === 'production' || isSsrBuild ? '"production"' : '"development"',
       __INTLIFY_PROD_DEVTOOLS__: 'false',
     },
+    css: {
+      preprocessorOptions: {
+        sass: {
+          api: 'modern'
+        }
+      },
+      preprocessorMaxWorkers: true,
+    },
     build: {
       sourcemap: mode === 'development',
       modulePreload: false,
