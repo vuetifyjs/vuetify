@@ -6,12 +6,11 @@
 @include tools.layer('components')
   // Theme
   .v-table
-    @include tools.theme($table-theme...)
-
     font-size: $table-font-size
     transition-duration: $table-transition-duration
     transition-property: $table-transition-property
     transition-timing-function: $table-transition-timing-function
+    @include tools.theme($table-theme...)
 
     .v-table-divider
       border-right: $table-border
@@ -46,9 +45,9 @@
                 position: relative
 
               &:hover > td::after
-                @include tools.absolute(true)
                 background: $table-hover-color
                 pointer-events: none
+                @include tools.absolute(true)
 
     &.v-table--fixed-header
       > .v-table__wrapper

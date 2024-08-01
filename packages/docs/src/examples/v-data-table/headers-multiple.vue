@@ -84,7 +84,7 @@
           ],
         },
       ],
-      desserts: [
+      items: [
         {
           name: 'Great Pyramid of Giza',
           location: 'Egypt',

@@ -90,6 +90,7 @@ The `v-app-bar` component has a variety of props that allow you to customize its
 Available values:
 
 - **hide**: The default slot area will shift up and hide as the user scrolls down. The extension slot remains visible.
+- **fully-hide**: The entire app bar will hide as the user scrolls down.
 - **collapse**: Shrink horizontally to a small bar in one corner.
 - **elevate**: Add a drop shadow to the app bar when scrolling. Ignores `scroll-threshold`, will always be applied with any amount of scrolling.
 - **fade-image**: Fade out the image as the user scrolls down.

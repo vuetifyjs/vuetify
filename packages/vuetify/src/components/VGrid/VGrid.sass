@@ -19,7 +19,7 @@
   //
   // Rows contain and clear the floats of your columns.
   .v-row
-    +make-row
+    @include make-row
 
     & + .v-row
       margin-top: settings.$grid-gutter * .5

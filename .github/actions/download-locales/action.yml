@@ -20,6 +20,16 @@ runs:
         push_translations: false
         export_only_approved: false
         crowdin_branch_name: ${{ inputs.crowdin-branch }}
+    - name: Download ja-JP
+      uses: crowdin/github-action@v1.19.0
+      with:
+        download_language: ja
+        config: crowdin.yml
+        upload_sources: false
+        download_translations: true
+        push_translations: false
+        export_only_approved: false
+        crowdin_branch_name: ${{ inputs.crowdin-branch }}
     - name: Download zh-CN
       uses: crowdin/github-action@v1.19.0
       with:

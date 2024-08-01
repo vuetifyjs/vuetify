@@ -33,16 +33,16 @@ To begin modifying Vuetify's internal variables, install the [sass](https://sass
 
 ::: tabs
 
+```bash [pnpm]
+  pnpm install -D sass-loader sass
+```
+
 ```bash [yarn]
   yarn add -D sass
 ```
 
 ```bash [npm]
   npm install -D sass-loader sass
-```
-
-```bash [pnpm]
-  pnpm install -D sass-loader sass
 ```
 
 ```bash [bun]

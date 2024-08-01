@@ -296,7 +296,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
         </Tag>,
         [[
           Ripple,
-          !isDisabled.value && !!props.ripple,
+          !isDisabled.value && props.ripple,
           '',
           { center: !!props.icon },
         ]]

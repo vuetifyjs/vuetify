@@ -1,10 +1,10 @@
 <template>
   <v-data-table :items="consoles">
     <template v-slot:item.exclusive="{ item }">
-      <v-checkbox
+      <v-checkbox-btn
         v-model="item.exclusive"
         readonly
-      ></v-checkbox>
+      ></v-checkbox-btn>
     </template>
   </v-data-table>
 </template>
