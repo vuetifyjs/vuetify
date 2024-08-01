@@ -2,26 +2,48 @@
 import './VFeatureDiscovery.sass'
 
 // Components
-import { VOverlay } from '@/components/VOverlay'
-import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
+// TODO: create it inside VFeatureDiscovery
+import { makeLocationStrategyProps, useLocationStrategies } from '@/components/VOverlay/locationStrategies'
+import { makeScrollStrategyProps, useScrollStrategies } from '@/components/VOverlay/scrollStrategies'
+import { makeActivatorProps, useActivator } from '@/components/VOverlay/useActivator'
 
 // Composables
-import { forwardRefs } from '@/composables/forwardRefs'
+import { useRtl } from '@/composables'
+import { makeComponentProps } from '@/composables/component'
+import { useHydration } from '@/composables/hydration'
+import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useBackButton, useRouter } from '@/composables/router'
 import { useScopeId } from '@/composables/scopeId'
+import { useStack } from '@/composables/stack'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useToggleScope } from '@/composables/toggleScope'
+
+// Directives
+import { ClickOutside } from '@/directives'
 
 // Utilities
-import { computed, mergeProps, ref } from 'vue'
-import { genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
+import { computed, mergeProps, onBeforeUnmount, ref, toRef, watch } from 'vue'
+import { genericComponent, getUid, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
-import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
+// TODO: create it inside VFeatureDiscovery
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVFeatureDiscoveryProps = propsFactory({
   id: String,
   text: String,
-
+  closeOnBack: {
+    type: Boolean,
+    default: true,
+  },
+  flat: Boolean,
+  contained: Boolean,
+  contentClass: null,
+  contentProps: null,
+  disabled: Boolean,
+  noClickAnimation: Boolean,
+  modelValue: Boolean,
   edgeX: {
     type: [Number, String],
     default: 200,
@@ -38,115 +60,202 @@ export const makeVFeatureDiscoveryProps = propsFactory({
       return !isNaN(value) && value >= 0
     },
   },
+  zIndex: {
+    type: [Number, String],
+    default: 2000,
+  },
 
-  ...omit(makeVOverlayProps({
-    closeOnBack: false,
-    location: 'center' as const,
-    locationStrategy: 'featureDiscovery' as const,
-    eager: true,
-    minWidth: 0,
-    offset: 0,
-    openOnClick: false,
-    openOnHover: false,
-    origin: 'center' as const,
-    scrim: false,
-    scrollStrategy: 'block' as const,
-    transition: false,
-  }), [
-    'absolute',
-    'persistent',
-  ]),
+  ...makeActivatorProps(),
+  ...makeComponentProps(),
+  ...makeLazyProps(),
+  ...makeLocationStrategyProps(),
+  ...makeScrollStrategyProps(),
+  ...makeThemeProps(),
 }, 'VFeatureDiscovery')
 
 export const VFeatureDiscovery = genericComponent<OverlaySlots>()({
   name: 'VFeatureDiscovery',
 
-  props: makeVFeatureDiscoveryProps(),
+  directives: { ClickOutside },
+
+  props: {
+    _disableGlobalStack: Boolean,
+
+    ...makeVFeatureDiscoveryProps(),
+  },
 
   emits: {
+    'click:outside': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
   },
 
-  setup (props, { slots }) {
-    const isActive = useProxiedModel(props, 'modelValue')
+  setup (props, { slots, attrs, emit }) {
+    const model = useProxiedModel(props, 'modelValue')
+    const isActive = computed({
+      get: () => model.value,
+      set: v => {
+        if (!(v && props.disabled)) model.value = v
+      },
+    })
+    const isFlat = computed(() => props.flat)
+    const { themeClasses } = provideTheme(props)
+    const { rtlClasses, isRtl } = useRtl()
+    const { hasContent, onAfterLeave: _onAfterLeave } = useLazy(props, isActive)
+    const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'), props._disableGlobalStack)
+    const {
+      activatorEl, activatorRef,
+      target, targetEl, targetRef,
+      activatorEvents,
+      contentEvents,
+      scrimEvents,
+    } = useActivator(props, { isActive, isTop: localTop })
+    const isMounted = useHydration()
     const { scopeId } = useScopeId()
+
+    const root = ref<HTMLElement>()
+    const scrimEl = ref<HTMLElement>()
+    const contentEl = ref<HTMLElement>()
+    const { contentStyles, updateLocation } = useLocationStrategies(props, {
+      isRtl,
+      contentEl,
+      target,
+      isActive,
+    })
+    useScrollStrategies(props, {
+      root,
+      contentEl,
+      targetEl,
+      isActive,
+      updateLocation,
+    })
+
+    function onClickOutside (e: MouseEvent) {
+      emit('click:outside', e)
+
+      isActive.value = false
+    }
+
+    function closeConditional (e: Event) {
+      return isActive.value && globalTop.value
+      /*
+        && (
+        // If using scrim, only close if clicking on it rather than anything opened on top
+        !props.scrim || e.target === scrimEl.value
+      )
+      */
+    }
+
+    IN_BROWSER && watch(isActive, val => {
+      if (val) {
+        window.addEventListener('keydown', onKeydown)
+      } else {
+        window.removeEventListener('keydown', onKeydown)
+      }
+    }, { immediate: true })
+
+    onBeforeUnmount(() => {
+      if (!IN_BROWSER) return
+
+      window.removeEventListener('keydown', onKeydown)
+    })
+
+    function onKeydown (e: KeyboardEvent) {
+      if (e.key === 'Escape' && globalTop.value) {
+        isActive.value = false
+        if (contentEl.value?.contains(document.activeElement)) {
+          activatorEl.value?.focus()
+        }
+      }
+    }
+
+    const router = useRouter()
+    useToggleScope(() => props.closeOnBack, () => {
+      useBackButton(router, next => {
+        if (globalTop.value && isActive.value) {
+          next(false)
+          isActive.value = false
+        } else {
+          next()
+        }
+      })
+    })
 
     const uid = getUid()
     const id = computed(() => props.id || `v-feature-discovery-${uid}`)
 
-    const overlay = ref<VOverlay>()
-
-    const location = computed(() => {
-      return props.location.split(' ').length > 1
-        ? props.location
-        : props.location + ' center' as StrategyProps['location']
-    })
-
-    const origin = computed(() => {
-      return (
-        props.origin === 'auto' ||
-        props.origin === 'overlap' ||
-        props.origin.split(' ').length > 1 ||
-        props.location.split(' ').length > 1
-      ) ? props.origin
-        : props.origin + ' center' as StrategyProps['origin']
-    })
-
-    const transition = computed(() => {
-      if (props.transition) return props.transition
-      return isActive.value ? 'scale-transition' : 'fade-transition'
-    })
-
-    const activatorProps = computed(() =>
-      mergeProps({
-        'aria-haspopup': 'dialog',
-        'aria-expanded': String(isActive.value),
-        'aria-owns': id.value,
-      }, props.activatorProps)
-    )
-
     useRender(() => {
-      const overlayProps = VOverlay.filterProps(props)
-
       return (
-        <VOverlay
-          ref={ overlay }
+        <div
           class={[
             'v-feature-discovery',
+            {
+              'v-feature-discovery--inline': !!slots.activator,
+            },
+            themeClasses.value,
+            rtlClasses.value,
             props.class,
           ]}
-          style={ props.style }
-          id={ id.value }
-          { ...overlayProps }
-          v-model={ isActive.value }
-          transition={ transition.value }
-          absolute
-          location={ location.value }
-          origin={ origin.value }
-          persistent
-          scrim="transparent"
-          role="dialog"
-          activatorProps={ activatorProps.value }
-          _disableGlobalStack
+          style={[
+            stackStyles.value,
+            {},
+            props.style,
+          ]}
+          ref={ root }
           { ...scopeId }
+          { ...attrs }
         >
-          {{
-            activator: slots.activator,
-            default: (...args) =>
-              (
-                <>
-                  <div class="v-feature-discovery__highlight"></div>
-                  <div class="v-feature-discovery__content">
-                    { slots.default?.(...args) ?? props.text }
-                  </div>
-                </>
-              ),
-          }}
-        </VOverlay>
+          { slots.activator?.({
+            isActive: isActive.value,
+            targetRef,
+            props: mergeProps({
+              ref: activatorRef,
+            }, activatorEvents.value, {
+              'aria-haspopup': 'dialog',
+              'aria-expanded': String(isActive.value),
+              'aria-owns': id.value,
+            }, props.activatorProps),
+          })}
+
+          { isMounted.value && hasContent.value && (
+            <div
+              ref={ contentEl }
+              v-show={ isActive.value }
+              v-click-outside={{
+                handler: onClickOutside,
+                closeConditional,
+                include: () => [activatorEl.value],
+              }}
+              class={[
+                'v-feature-discovery__content',
+                {
+                  // 'v-feature-discovery__content--fixed': this.activatorFixed,
+                  'v-feature-discovery__content--flat': isFlat.value,
+                  'v-feature-discovery__content--active': isActive.value,
+                },
+                props.contentClass,
+              ]}
+              style={[
+                // dimensionStyles.value,
+                contentStyles.value,
+              ]}
+              { ...contentEvents.value }
+              { ...props.contentProps }
+            >
+              { slots.default?.({ isActive }) ?? props.text }
+            </div>
+          )}
+        </div>
       )
     })
 
-    return forwardRefs({}, overlay)
+    return {
+      activatorEl,
+      target,
+      contentEl,
+      globalTop,
+      localTop,
+      updateLocation,
+    }
   },
 })
 

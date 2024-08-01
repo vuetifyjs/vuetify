@@ -459,13 +459,12 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
   return { updateLocation }
 }
 
+// TODO: move it to "VFeatureDiscovery/locationStrategies.ts" or similar
 function featureDiscoveryLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
   const activatorFixed = Array.isArray(data.target.value) || isFixedPosition(data.target.value)
   if (activatorFixed) {
     Object.assign(contentStyles.value, {
       position: 'fixed',
-      top: 0,
-      [data.isRtl.value ? 'right' : 'left']: 0,
     })
   }
 
@@ -691,8 +690,8 @@ function featureDiscoveryLocationStrategy (data: LocationStrategyData, props: St
 
     const backdropStyle = (() => {
       const size = backdropSize
-      const top = -backdropSize / 2 + computedBackdropOffsetTop
-      const left = -backdropSize / 2 + computedBackdropOffsetLeft
+      const top = (-1 * backdropSize) / 2 + computedBackdropOffsetTop
+      const left = (-1 * backdropSize) / 2 + computedBackdropOffsetLeft
       const originLeft = computedBackdropOffsetLeft < 0
         ? `calc(50% + ${convertToUnit(-1 * computedBackdropOffsetLeft)})`
         : `calc(50% - ${convertToUnit(computedBackdropOffsetLeft)})`
@@ -872,6 +871,23 @@ function featureDiscoveryLocationStrategy (data: LocationStrategyData, props: St
       minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth.value, targetBox.width) : minWidth.value),
       maxWidth: convertToUnit(pixelCeil(clamp(available.x, minWidth.value === Infinity ? 0 : minWidth.value, maxWidth.value))),
       maxHeight: convertToUnit(pixelCeil(clamp(available.y, minHeight.value === Infinity ? 0 : minHeight.value, maxHeight.value))),
+
+      '--v-feature-discovery-backdrop-top': backdropStyle.top,
+      '--v-feature-discovery-backdrop-left': backdropStyle.left,
+      '--v-feature-discovery-backdrop-height': backdropStyle.height,
+      '--v-feature-discovery-backdrop-width': backdropStyle.width,
+      '--v-feature-discovery-backdrop-transform-origin': backdropStyle.transformOrigin,
+
+      '--v-feature-discovery-highlight-top': highlightStyle.top,
+      '--v-feature-discovery-highlight-left': highlightStyle.left,
+      '--v-feature-discovery-highlight-height': highlightStyle.height,
+      '--v-feature-discovery-highlight-width': highlightStyle.width,
+
+      '--v-feature-discovery-wrap-top': wrapStyle.top,
+      '--v-feature-discovery-wrap-left': wrapStyle.left,
+      '--v-feature-discovery-wrap-height': wrapStyle.height,
+      '--v-feature-discovery-wrap-width': wrapStyle.width,
+      '--v-feature-discovery-wrap-padding': wrapStyle.padding,
     })
 
     return {
