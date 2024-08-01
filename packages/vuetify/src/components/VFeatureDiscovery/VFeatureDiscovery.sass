@@ -7,9 +7,8 @@
   // Element
   .v-feature-discovery
     > .v-overlay__content
-      background: $feature-discovery-background-color
       color: $feature-discovery-text-color
-      border-radius: $feature-discovery-border-radius
+      border-radius: 50%
       font-size: $feature-discovery-font-size
       line-height: $feature-discovery-line-height
       display: inline-block
@@ -28,3 +27,18 @@
       &[class*="leave-active"]
         transition-timing-function: settings.$accelerated-easing
         transition-duration: $feature-discovery-transition-leave-duration
+
+      overflow: hidden
+
+      > .v-feature-discovery__highlight
+        box-shadow: 0 0 0 9999px $feature-discovery-background-color
+        position: absolute
+        top: calc(50% - 44px)
+        left: calc(50% - 44px)
+        width: 88px
+        height: 88px
+        border-radius: 50%
+
+      > .v-feature-discovery__content
+        width: 250px
+        height: 250px

@@ -22,10 +22,27 @@ export const makeVFeatureDiscoveryProps = propsFactory({
   id: String,
   text: String,
 
+  edgeX: {
+    type: [Number, String],
+    default: 200,
+    validator: (v: string | number) => {
+      const value = parseInt(v, 10)
+      return !isNaN(value) && value >= 0
+    },
+  },
+  edgeY: {
+    type: [Number, String],
+    default: 144,
+    validator: (v: string | number) => {
+      const value = parseInt(v, 10)
+      return !isNaN(value) && value >= 0
+    },
+  },
+
   ...omit(makeVOverlayProps({
     closeOnBack: false,
     location: 'center' as const,
-    locationStrategy: 'connected' as const,
+    locationStrategy: 'featureDiscovery' as const,
     eager: true,
     minWidth: 0,
     offset: 0,
@@ -107,6 +124,7 @@ export const VFeatureDiscovery = genericComponent<OverlaySlots>()({
           location={ location.value }
           origin={ origin.value }
           persistent
+          scrim="transparent"
           role="dialog"
           activatorProps={ activatorProps.value }
           _disableGlobalStack
@@ -116,9 +134,12 @@ export const VFeatureDiscovery = genericComponent<OverlaySlots>()({
             activator: slots.activator,
             default: (...args) =>
               (
-                <div>
-                  { slots.default?.(...args) ?? props.text }
-                </div>
+                <>
+                  <div class="v-feature-discovery__highlight"></div>
+                  <div class="v-feature-discovery__content">
+                    { slots.default?.(...args) ?? props.text }
+                  </div>
+                </>
               ),
           }}
         </VOverlay>
