@@ -20,6 +20,7 @@ import { configureMarkdown, parseMeta } from './build/markdown-it'
 import Api from './build/api-plugin'
 import { Examples } from './build/examples-plugin'
 import { genAppMetaInfo } from './src/utils/metadata'
+import { MdiJs } from './build/mdi-js'
 
 const resolve = (file: string) => fileURLToPath(new URL(file, import.meta.url))
 
@@ -236,26 +237,8 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         }
       },
 
-      {
-        name: 'vuetify:mdi-js-icons',
-        enforce: 'pre',
-        resolveId(id) {
-          if (id === 'virtual:mdi-js-icons') {
-            return `\0virtual:mdi-js-icons`
-          }
-        },
-        async load (id) {
-          if (id === `\0virtual:mdi-js-icons`) {
-            const icons: { name: string, aliases: string[] }[] = await import('@mdi/svg/meta.json', {
-              assert: { type: 'json' }
-            }).then(i => i.default)
-            return `export const icons = ${JSON.stringify(icons.map(i => ({
-              name: i.name,
-              aliases: i.aliases,
-            })))}`
-          }
-        }
-      },
+      // mdi js names and aliases from `@mdi/svg`
+      MdiJs(),
 
       Vue({
         include: [/\.vue$/, /\.md$/],

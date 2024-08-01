@@ -12,7 +12,7 @@
     "moduleResolution": "Bundler",
     "noUnusedLocals": true,
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": ["src/*"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
