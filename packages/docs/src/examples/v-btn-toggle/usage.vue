@@ -49,8 +49,8 @@
           </v-btn>
 
           <v-btn>
-            <v-icon icon="i-mdi:format-underline"</v-icon>
-            </v-icon></v-btn>
+            <v-icon icon="i-mdi:format-underline"></v-icon>
+          </v-btn>
 
           <v-btn>
             <v-icon icon="i-mdi:format-color-fill"></v-icon>
