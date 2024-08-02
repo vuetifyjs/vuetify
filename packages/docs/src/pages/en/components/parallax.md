@@ -10,7 +10,7 @@ related:
   - /components/images/
 features:
   github: /components/VParallax/
-  label: 'C: VParallax'
+  label: "C: VParallax"
   report: true
 ---
 
@@ -30,8 +30,8 @@ A parallax causes a shift in a background image when the user scrolls the page.
 
 ## API
 
-| Component | Description |
-| - | - |
+| Component                      | Description       |
+| ------------------------------ | ----------------- |
 | [v-parallax](/api/v-parallax/) | Primary Component |
 
 <ApiInline hide-links />
@@ -45,6 +45,12 @@ A parallax causes a shift in a background image when the user scrolls the page.
 You can also place any content inside of the parallax. This allows you to use the parallax as a hero image.
 
 <ExamplesExample file="v-parallax/misc-content" />
+
+#### Welcome
+
+You can use it as a welcome section or as a portfolio hero section.
+
+<ExamplesExample file="v-parallax/misc-welcome" />
 
 #### Custom height
 
