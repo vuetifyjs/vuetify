@@ -20,7 +20,7 @@ export function usePlayground (
   const files: Record<string, string> = {
     'App.vue': sections
       .filter(section => ['script', 'template', 'style'].includes(section.name))
-      .map(section => section.content)
+      .map(section => section.content.replace(/i-mdi:/g, 'mdi-'))
       .join('\n\n'),
     'links.json': JSON.stringify({ css }),
     'import-map.json': JSON.stringify({ imports }),
