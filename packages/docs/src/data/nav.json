@@ -1,8 +1,8 @@
 [
   {
     "title": "introduction",
-    "inactiveIcon": "mdi-script-text-outline",
-    "activeIcon": "mdi-script-text",
+    "inactiveIcon": "i-mdi:script-text-outline",
+    "activeIcon": "i-mdi:script-text",
     "items": [
       "why-vuetify",
       "long-term-support",
@@ -15,8 +15,8 @@
   },
   {
     "title": "getting-started",
-    "inactiveIcon": "mdi-speedometer-medium",
-    "activeIcon": "mdi-speedometer",
+    "inactiveIcon": "i-mdi:speedometer-medium",
+    "activeIcon": "i-mdi:speedometer",
     "items": [
       "installation",
       "frequently-asked-questions",
@@ -30,8 +30,8 @@
   },
   {
     "title": "features",
-    "inactiveIcon": "mdi-image-edit-outline",
-    "activeIcon": "mdi-image-edit",
+    "inactiveIcon": "i-mdi:image-edit-outline",
+    "activeIcon": "i-mdi:image-edit",
     "items": [
       "accessibility",
       "aliasing",
@@ -50,8 +50,8 @@
   },
   {
     "title": "styles",
-    "inactiveIcon": "mdi-palette-outline",
-    "activeIcon": "mdi-palette",
+    "inactiveIcon": "i-mdi:palette-outline",
+    "activeIcon": "i-mdi:palette",
     "items": [
       "css-reset",
       "transitions",
@@ -78,8 +78,8 @@
   },
   {
     "title": "components",
-    "inactiveIcon": "mdi-view-dashboard-outline",
-    "activeIcon": "mdi-view-dashboard",
+    "inactiveIcon": "i-mdi:view-dashboard-outline",
+    "activeIcon": "i-mdi:view-dashboard",
     "items": [
       "all",
       {
@@ -204,14 +204,14 @@
   },
   {
     "title": "api",
-    "inactiveIcon": "mdi-flask-empty-outline",
-    "activeIcon": "mdi-flask-outline",
+    "inactiveIcon": "i-mdi:flask-empty-outline",
+    "activeIcon": "i-mdi:flask-outline",
     "items": []
   },
   {
     "title": "directives",
-    "inactiveIcon": "mdi-function",
-    "activeIcon": "mdi-function",
+    "inactiveIcon": "i-mdi:function",
+    "activeIcon": "i-mdi:function",
     "items": [
       "click-outside",
       "intersect",
@@ -225,8 +225,8 @@
   },
   {
     "title": "labs",
-    "inactiveIcon": "mdi-beaker-outline",
-    "activeIcon": "mdi-beaker",
+    "inactiveIcon": "i-mdi:beaker-outline",
+    "activeIcon": "i-mdi:beaker",
     "items": [
       "introduction",
       {
@@ -265,8 +265,8 @@
   },
   {
     "title": "resources",
-    "inactiveIcon": "mdi-human-male-board",
-    "activeIcon": "mdi-human-male-board",
+    "inactiveIcon": "i-mdi:human-male-board",
+    "activeIcon": "i-mdi:human-male-board",
     "items": [
       "brand-kit",
       "jobs-for-vue",
