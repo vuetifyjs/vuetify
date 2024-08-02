@@ -3,7 +3,7 @@ import { mkdirp } from 'mkdirp'
 import { writeFile } from 'fs/promises'
 import { fileURLToPath } from 'url'
 
-import packageJson from '../package.json' assert { type: 'json' }
+import packageJson from '../package.json' with { type: 'json' }
 
 import alias from '@rollup/plugin-alias'
 import sass from 'rollup-plugin-sass'

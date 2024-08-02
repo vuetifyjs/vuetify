@@ -27,13 +27,13 @@
     "vue-ecosystem-ci:test": "pnpm --filter vuetify run lint && pnpm --filter vuetify run test"
   },
   "engines": {
-    "node": ">=18.19.0 || >=20.6.0"
+    "node": ">=18.20.0 || >=20.10.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.24.1",
-    "@babel/core": "^7.24.4",
-    "@babel/preset-env": "^7.24.4",
-    "@babel/preset-typescript": "^7.24.1",
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-typescript": "^7.24.7",
     "@mdi/font": "6.2.95",
     "@mdi/js": "6.2.95",
     "@mdi/svg": "6.2.95",
@@ -89,5 +89,5 @@
     "vue-tsc": "^1.8.27",
     "yargs": "^17.7.2"
   },
-  "packageManager": "pnpm@9.5.0"
+  "packageManager": "pnpm@9.6.0"
 }
