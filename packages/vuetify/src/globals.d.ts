@@ -3,6 +3,7 @@ import 'vue/jsx'
 // Types
 import type { Events, VNode } from 'vue'
 import type { TouchStoredHandlers } from './directives/touch'
+import type { TouchHoldStoredHandlers } from './directives/touch-hold'
 
 declare global {
   interface HTMLCollection {
@@ -41,7 +42,7 @@ declare global {
       target?: EventTarget
     } | undefined>
     _touchHandlers?: {
-      [_uid: number]: TouchStoredHandlers
+      [_uid: number]: TouchStoredHandlers | TouchHoldStoredHandlers
     }
     _transitionInitialStyles?: {
       position: string
