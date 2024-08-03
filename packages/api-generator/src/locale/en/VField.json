@@ -2,7 +2,7 @@
   "props": {
     "appendInnerIcon": "Creates a [v-icon](/api/v-icon/) component in the **append-inner** slot.",
     "baseColor": "Sets the color of the input when it is not focused.",
-    "centerAffix": "Vertically align **appendInner**, **prependInner**, **clearIcon** and **label** in the center.",
+    "centerAffix": "Automatically apply **[singleLine](/api/v-field/#props-single-line)** under the hood, and vertically align **appendInner**, **prependInner**, **clearIcon**, **label** and **input field** in the center.",
     "clearIcon": "The icon used when the **clearable** prop is set to true.",
     "dirty": "Manually apply the dirty state styling.",
     "disabled": "Removes the ability to click or target the input.",
