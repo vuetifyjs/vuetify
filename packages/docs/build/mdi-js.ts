@@ -3,7 +3,7 @@ import type { Plugin } from 'vite'
 export function MdiJs () {
   const virtual = 'virtual:mdi-js-icons'
   const resolvedVirtual = `\0${virtual}`
-  const icons = import('@mdi/svg/meta.json', {
+  const iconsPromise = import('@mdi/svg/meta.json', {
     assert: { type: 'json' },
   })
 
@@ -15,12 +15,11 @@ export function MdiJs () {
     },
     async load (id) {
       if (id === resolvedVirtual) {
-        return `export const icons = ${JSON.stringify(await icons
-          .then(i => i.default)
-          .then(i => i.map(i => ({
-            name: i.name,
-            aliases: i.aliases,
-          }))))}`
+        const icons = await iconsPromise.then(i => i.default.map(i => ({
+          name: i.name,
+          aliases: i.aliases,
+        })))
+        return `export const icons = ${JSON.stringify(icons)}`
       }
 
       return undefined
