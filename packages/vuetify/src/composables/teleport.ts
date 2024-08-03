@@ -18,7 +18,8 @@ export function useTeleport (target: () => (boolean | string | ParentNode)) {
       return undefined
     }
 
-    let container = targetElement.querySelector(':scope > .v-overlay-container')
+    const rootSelector = targetElement instanceof ShadowRoot ? ':host' : ':scope'
+    let container = targetElement.querySelector(`${rootSelector} > .v-overlay-container`)
 
     if (!container) {
       container = document.createElement('div')
