@@ -15,6 +15,7 @@ import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 import Inspect from 'vite-plugin-inspect'
 import Vuetify from 'vite-plugin-vuetify'
 import basicSsl from '@vitejs/plugin-basic-ssl'
+import MagicString from 'magic-string'
 
 import { configureMarkdown, parseMeta } from './build/markdown-it'
 import Api from './build/api-plugin'
@@ -59,10 +60,10 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
       preprocessorMaxWorkers: true,
     },
     build: {
-      sourcemap: mode === 'development',
+      sourcemap: true,
       modulePreload: false,
       cssCodeSplit: false,
-      minify: false,
+      minify: true,
       rollupOptions: {
         output: isSsrBuild ? { inlineDynamicImports: true } : {
           // TODO: these options currently cause a request cascade
@@ -77,6 +78,9 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
           // }
         },
       },
+    },
+    esbuild: {
+      lineLimit: 1000,
     },
     plugins: [
       // https://github.com/unplugin/unplugin-auto-import
@@ -241,7 +245,12 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
             const options = /(<script>[\w\W]*?<\/script>)/g.exec(code)
 
             if (composition && options) {
-              return code.slice(0, options.index) + code.slice(options.index + options[0].length + 1)
+              const s = new MagicString(code)
+              s.remove(options.index, options.index + options[0].length + 1)
+              return {
+                code: s.toString(),
+                map: s.generateMap({ hires: true }),
+              }
             }
           }
         }
