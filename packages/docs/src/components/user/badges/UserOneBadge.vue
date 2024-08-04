@@ -8,7 +8,7 @@
       <v-icon
         v-bind="activatorProps"
         color="primary"
-        icon="mdi-numeric-1-box"
+        icon="i-mdi:numeric-1-box"
       />
     </template>
   </v-tooltip>

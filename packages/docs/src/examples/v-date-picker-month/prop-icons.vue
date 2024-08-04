@@ -2,10 +2,10 @@
   <v-row justify="center">
     <v-date-picker
       v-model="picker"
-      next-icon="mdi-skip-next"
-      prev-icon="mdi-skip-previous"
+      next-icon="i-mdi:skip-next"
+      prev-icon="i-mdi:skip-previous"
       type="month"
-      year-icon="mdi-calendar-blank"
+      year-icon="i-mdi:calendar-blank"
     ></v-date-picker>
   </v-row>
 </template>

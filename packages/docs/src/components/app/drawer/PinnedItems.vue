@@ -20,7 +20,7 @@
               <v-icon
                 v-if="isHovering"
                 class="me-1"
-                icon="mdi-pin-off"
+                icon="i-mdi:pin-off"
                 size="16"
                 @click.prevent.stop="onClickPinRemove({
                   title: itemProps.title,
@@ -52,8 +52,8 @@
     set: val => _opened.value = val,
   })
   const pinned = computed(() => ([{
-    activeIcon: 'mdi-pin',
-    inactiveIcon: 'mdi-pin-outline',
+    activeIcon: 'i-mdi:pin',
+    inactiveIcon: 'i-mdi:pin-outline',
     items: [...pins.pins],
     title: 'Pinned',
   }]))

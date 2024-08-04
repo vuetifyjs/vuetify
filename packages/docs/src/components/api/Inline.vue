@@ -1,6 +1,6 @@
 <template>
   <border-chip
-    :prepend-icon="user.api === 'inline' ? 'mdi-flask-outline' : 'mdi-flask-empty-outline'"
+    :prepend-icon="user.api === 'inline' ? 'i-mdi:flask-outline' : 'i-mdi:flask-empty-outline'"
     :text="t('toggle', [`${t('inline')} ${t('api')}`])"
     class="mb-2"
     @click="onClick"
@@ -18,7 +18,7 @@
           class="mb-2"
           color="primary"
           label="Component API"
-          prepend-inner-icon="mdi-view-dashboard"
+          prepend-inner-icon="i-mdi:view-dashboard"
           style="max-width: 250px;"
           variant="outlined"
           hide-details

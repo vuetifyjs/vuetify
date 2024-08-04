@@ -2,7 +2,7 @@
   <div class="text-center">
     <v-btn
       :disabled="loading"
-      append-icon="mdi-refresh"
+      append-icon="i-mdi:refresh"
       text="Refresh"
       variant="outlined"
       @click="onClick"

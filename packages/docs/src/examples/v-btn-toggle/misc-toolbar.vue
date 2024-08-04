@@ -30,22 +30,22 @@
     >
       <v-btn
         :value="1"
-        icon="mdi-format-bold"
+        icon="i-mdi:format-bold"
       ></v-btn>
 
       <v-btn
         :value="2"
-        icon="mdi-format-italic"
+        icon="i-mdi:format-italic"
       ></v-btn>
 
       <v-btn
         :value="3"
-        icon="mdi-format-underline"
+        icon="i-mdi:format-underline"
       ></v-btn>
 
       <v-btn
         :value="4"
-        icon="mdi-format-color-fill"
+        icon="i-mdi:format-color-fill"
       ></v-btn>
     </v-btn-toggle>
 
@@ -60,22 +60,22 @@
     >
       <v-btn
         :value="1"
-        icon="mdi-format-align-left"
+        icon="i-mdi:format-align-left"
       ></v-btn>
 
       <v-btn
         :value="2"
-        icon="mdi-format-align-center"
+        icon="i-mdi:format-align-center"
       ></v-btn>
 
       <v-btn
         :value="3"
-        icon="mdi-format-align-right"
+        icon="i-mdi:format-align-right"
       ></v-btn>
 
       <v-btn
         :value="4"
-        icon="mdi-format-align-justify"
+        icon="i-mdi:format-align-justify"
       ></v-btn>
     </v-btn-toggle>
   </v-toolbar>

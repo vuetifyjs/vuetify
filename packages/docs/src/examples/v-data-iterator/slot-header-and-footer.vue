@@ -22,7 +22,7 @@
             <v-btn
               :disabled="page === 1"
               class="me-2"
-              icon="mdi-arrow-left"
+              icon="i-mdi:arrow-left"
               size="small"
               variant="tonal"
               @click="prevPage"
@@ -30,7 +30,7 @@
 
             <v-btn
               :disabled="page === pageCount"
-              icon="mdi-arrow-right"
+              icon="i-mdi:arrow-right"
               size="small"
               variant="tonal"
               @click="nextPage"

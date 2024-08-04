@@ -5,7 +5,7 @@
     border
   >
     <v-list-item
-      prepend-icon="mdi-inbox-arrow-down"
+      prepend-icon="i-mdi:-inbox-arrow-down"
       title="Inbox"
       link
     >
@@ -19,13 +19,13 @@
     </v-list-item>
 
     <v-list-item
-      prepend-icon="mdi-send"
+      prepend-icon="i-mdi:send"
       title="Sent Mail"
       link
     ></v-list-item>
 
     <v-list-item
-      prepend-icon="mdi-delete"
+      prepend-icon="i-mdi:delete"
       title="Trash"
       link
     >
@@ -39,7 +39,7 @@
     </v-list-item>
 
     <v-list-item
-      prepend-icon="mdi-alert-circle"
+      prepend-icon="i-mdi:alert-circle"
       title="Spam"
       link
     ></v-list-item>

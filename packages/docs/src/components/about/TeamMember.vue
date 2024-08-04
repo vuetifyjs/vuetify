@@ -3,7 +3,7 @@
     <div class="d-flex">
       <v-avatar color="grey-lighten-2" size="72">
         <v-img v-if="member.avatar" :src="member.avatar" />
-        <v-icon v-else color="grey" size="35"> mdi-image</v-icon>
+        <v-icon v-else class="i-mdi:image" color="grey" size="35" />
       </v-avatar>
 
       <div class="ps-6 font-weight-medium">
@@ -138,7 +138,7 @@
         <border-chip
           v-if="member.joined"
           :text="t('joined', { date: member.joined })"
-          prepend-icon="mdi-calendar"
+          prepend-icon="i-mdi:calendar"
         />
       </div>
     </div>
@@ -160,9 +160,9 @@
   const { t } = useI18n()
 
   const icons = {
-    languages: 'mdi-translate',
-    location: 'mdi-map-marker-outline',
-    work: 'mdi-briefcase-variant-outline',
+    languages: 'i-mdi:translate',
+    location: 'i-mdi:map-marker-outline',
+    work: 'i-mdi:briefcase-variant-outline',
   }
   const fields = ['work', 'location', 'languages'] as const
 
@@ -182,7 +182,7 @@
       links.push({
         color: '#24292E',
         href: `https://github.com/${props.member.github}`,
-        icon: 'mdi-github',
+        icon: 'i-mdi:github',
         tooltip: 'GitHub',
       })
     }
@@ -191,7 +191,7 @@
       links.push({
         color: '#0077B5',
         href: `https://linkedin.com/in/${props.member.linkedin}`,
-        icon: 'mdi-linkedin',
+        icon: 'i-mdi:linkedin',
         tooltip: 'LinkedIn',
       })
     }
@@ -200,7 +200,7 @@
       links.push({
         color: '#738ADB',
         copyText: props.member.discord,
-        icon: 'mdi-discord',
+        icon: 'i-mdi:discord',
         tooltip: `Discord: ${props.member.discord} (click to copy)`,
       })
     }

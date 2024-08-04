@@ -15,7 +15,7 @@
       hide-no-data
     ></v-autocomplete>
 
-    <v-btn icon="mdi-dots-vertical"></v-btn>
+    <v-btn icon="i-mdi:dots-vertical"></v-btn>
   </v-toolbar>
 </template>
 

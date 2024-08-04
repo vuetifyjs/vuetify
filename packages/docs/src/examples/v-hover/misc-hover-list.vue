@@ -55,7 +55,7 @@
 </template>
 
 <script setup>
-  const icons = ['mdi-rewind', 'mdi-play', 'mdi-fast-forward']
+  const icons = ['i-mdi:rewind', 'i-mdi:play', 'i-mdi:fast-forward']
   const items = [
     {
       title: 'New Releases',
@@ -82,7 +82,7 @@
 <script>
   export default {
     data: () => ({
-      icons: ['mdi-rewind', 'mdi-play', 'mdi-fast-forward'],
+      icons: ['i-mdi:rewind', 'i-mdi:play', 'i-mdi:fast-forward'],
       items: [
         {
           title: 'New Releases',

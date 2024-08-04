@@ -19,11 +19,11 @@
   defineProps({
     prependIcon: {
       type: String,
-      default: 'mdi-package',
+      default: 'i-mdi:package',
     },
     appendIcon: {
       type: String,
-      default: 'mdi-open-in-new',
+      default: 'i-mdi:open-in-new',
     },
   })
 </script>

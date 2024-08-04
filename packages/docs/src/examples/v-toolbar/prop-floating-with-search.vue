@@ -10,17 +10,17 @@
       floating
     >
       <v-text-field
-        prepend-icon="mdi-magnify"
+        prepend-icon="i-mdi:magnify"
         hide-details
         single-line
       ></v-text-field>
 
       <v-btn icon>
-        <v-icon>mdi-crosshairs-gps</v-icon>
+        <v-icon icon="i-mdi:crosshairs-gps"></v-icon>
       </v-btn>
 
       <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
+        <v-icon icon="i-mdi:dots-vertical"></v-icon>
       </v-btn>
     </v-toolbar>
   </v-card>

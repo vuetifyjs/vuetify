@@ -23,7 +23,7 @@
 
     <v-card-actions class="justify-space-between">
       <v-btn
-        icon="mdi-chevron-left"
+        icon="i-mdi:chevron-left"
         variant="plain"
         @click="prev"
       ></v-btn>
@@ -40,13 +40,13 @@
         >
           <v-btn
             :variant="isSelected ? 'outlined' : 'text'"
-            icon="mdi-record"
+            icon="i-mdi:record"
             @click="toggle"
           ></v-btn>
         </v-item>
       </v-item-group>
       <v-btn
-        icon="mdi-chevron-right"
+        icon="i-mdi:chevron-right"
         variant="plain"
         @click="next"
       ></v-btn>

@@ -45,7 +45,7 @@
       <v-divider></v-divider>
 
       <v-list-item
-        append-icon="mdi-chevron-right"
+        append-icon="i-mdi:chevron-right"
         lines="two"
         subtitle="Details and agreement"
         link

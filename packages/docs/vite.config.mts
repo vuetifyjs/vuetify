@@ -15,6 +15,7 @@ import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 import Inspect from 'vite-plugin-inspect'
 import Vuetify from 'vite-plugin-vuetify'
 import basicSsl from '@vitejs/plugin-basic-ssl'
+import UnoCSS from 'unocss/vite'
 
 import { configureMarkdown, parseMeta } from './build/markdown-it'
 import Api from './build/api-plugin'
@@ -260,6 +261,8 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
       }),
 
       Examples(),
+
+      UnoCSS(),
 
       {
         name: 'vuetify:example-blocks',

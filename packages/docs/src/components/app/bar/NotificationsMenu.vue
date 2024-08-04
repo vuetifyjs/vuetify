@@ -87,7 +87,7 @@
                 <border-chip
                   :href="notification.metadata.action"
                   :text="notification.metadata.action_text"
-                  append-icon="mdi-open-in-new"
+                  append-icon="i-mdi:open-in-new"
                   @click="onClick(notification)"
                 />
               </div>
@@ -96,7 +96,7 @@
                 <div class="ps-4">
                   <v-icon
                     color="medium-emphasis"
-                    icon="mdi-check"
+                    icon="i-mdi:check"
                     @click.stop.prevent="toggle(notification)"
                   />
                 </div>
@@ -147,10 +147,10 @@
   })
 
   const icon = computed(() => {
-    if (menu.value && unread.value.length > 0) return 'mdi-bell-ring'
-    else if (menu.value) return 'mdi-bell'
-    else if (unread.value.length > 0) return 'mdi-bell-ring-outline'
-    else return 'mdi-bell-outline'
+    if (menu.value && unread.value.length > 0) return 'i-mdi:bell-ring'
+    else if (menu.value) return 'i-mdi:bell'
+    else if (unread.value.length > 0) return 'i-mdi:bell-ring-outline'
+    else return 'i-mdi:bell-outline'
   })
 
   const width = computed(() => mobile.value ? 420 : 520)

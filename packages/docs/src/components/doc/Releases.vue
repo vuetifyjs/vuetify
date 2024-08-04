@@ -10,7 +10,7 @@
       density="comfortable"
       item-title="name"
       label="Select Release Version"
-      prepend-inner-icon="mdi-text-box-search-outline"
+      prepend-inner-icon="i-mdi:text-box-search-outline"
       rounded="b-0"
       variant="solo-filled"
       hide-details
@@ -83,7 +83,7 @@
               <border-chip
                 :text="publishedOn"
                 class="ms-1"
-                prepend-icon="mdi-calendar"
+                prepend-icon="i-mdi:calendar"
               />
             </template>
           </i18n-t>
@@ -126,8 +126,8 @@
             <AppSheet>
               <v-list-item
                 :href="model.zipball_url"
-                append-icon="mdi-download-box-outline"
-                prepend-icon="mdi-folder-zip-outline"
+                append-icon="i-mdi:download-box-outline"
+                prepend-icon="i-mdi:folder-zip-outline"
                 target="_blank"
                 title="Source code (zip)"
                 nav
@@ -138,8 +138,8 @@
 
               <v-list-item
                 :href="model.tarball_url"
-                append-icon="mdi-download-box-outline"
-                prepend-icon="mdi-folder-zip-outline"
+                append-icon="i-mdi:download-box-outline"
+                prepend-icon="i-mdi:folder-zip-outline"
                 target="_blank"
                 title="Source code (tar.gz)"
                 nav
@@ -199,7 +199,7 @@
     return [
       {
         color: '#3b5998',
-        icon: clicked.value === 'copied' ? 'mdi-check' : 'mdi-share-variant-outline',
+        icon: clicked.value === 'copied' ? 'i-mdi:check' : 'i-mdi:share-variant-outline',
         async onClick () {
           navigator.clipboard.writeText(`${window.location.origin}/getting-started/release-notes/?version=${model.value!.tag_name}`)
 
@@ -213,14 +213,14 @@
       },
       {
         color: '#738ADB',
-        icon: 'mdi-discord',
+        icon: 'i-mdi:discord',
         href: 'https://discord.gg/QHWSAbA',
         path: 'discuss-on-discord',
       },
       {
         color: '#212121',
         href: model.value!.html_url,
-        icon: 'mdi-github',
+        icon: 'i-mdi:github',
         path: 'open-github-release',
       },
     ]

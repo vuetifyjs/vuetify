@@ -7,7 +7,7 @@
             v-model="target"
             :items="targets"
             label="Target"
-            prepend-inner-icon="mdi-bullseye"
+            prepend-inner-icon="i-mdi:bullseye"
             variant="outlined"
             hide-details
           ></v-select>
@@ -20,7 +20,7 @@
             label="Number"
             max="2000"
             min="0"
-            prepend-inner-icon="mdi-numeric"
+            prepend-inner-icon="i-mdi:numeric"
             step="1"
             type="number"
             variant="outlined"
@@ -33,7 +33,7 @@
             v-model="query"
             :items="queries"
             label="Query Selector"
-            prepend-inner-icon="mdi-format-header-1"
+            prepend-inner-icon="i-mdi:format-header-1"
             variant="outlined"
             hide-details
           ></v-select>
@@ -43,7 +43,7 @@
             v-model="component"
             :items="components"
             label="Component / Element"
-            prepend-inner-icon="mdi-card-bulleted"
+            prepend-inner-icon="i-mdi:card-bulleted"
             variant="outlined"
             hide-details
           ></v-select>
@@ -54,7 +54,7 @@
             v-model="easing"
             :items="easings"
             label="Easing"
-            prepend-inner-icon="mdi-sine-wave"
+            prepend-inner-icon="i-mdi:sine-wave"
             variant="outlined"
             hide-details
           ></v-select>
@@ -66,7 +66,7 @@
             label="Duration"
             max="2000"
             min="50"
-            prepend-inner-icon="mdi-timer-sand"
+            prepend-inner-icon="i-mdi:timer-sand"
             step="1"
             type="number"
             variant="outlined"
@@ -77,7 +77,7 @@
         <v-col cols="12">
           <v-slider
             v-model="offset"
-            append-icon="mdi-axis-arrow"
+            append-icon="i-mdi:axis-arrow"
             label="Offset"
             max="100"
             min="-100"
@@ -183,7 +183,7 @@
         <div style="height: 180px;"></div>
 
         <v-btn
-          append-icon="mdi-arrow-up-bold"
+          append-icon="mi-mdi:arrow-up-bold"
           text="Back to Top"
           variant="tonal"
           @click="goTo(0, { container: '#goto-container-example' })"

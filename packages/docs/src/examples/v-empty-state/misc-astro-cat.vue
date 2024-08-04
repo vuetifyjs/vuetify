@@ -7,11 +7,11 @@
   >
     <v-layout>
       <v-system-bar class="ga-1" color="surface-light">
-        <v-icon icon="mdi-square" size="x-small"></v-icon>
+        <v-icon icon="i-mdi:square" size="x-small"></v-icon>
 
-        <v-icon icon="mdi-circle" size="x-small"></v-icon>
+        <v-icon icon="i-mdi:circle" size="x-small"></v-icon>
 
-        <v-icon icon="mdi-triangle" size="x-small"></v-icon>
+        <v-icon icon="i-mdi:triangle" size="x-small"></v-icon>
       </v-system-bar>
 
       <v-app-bar title="My Library">

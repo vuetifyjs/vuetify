@@ -26,8 +26,7 @@
               icon
               v-bind="props"
             >
-              <v-icon color="grey-lighten-1">
-                mdi-cart
+              <v-icon color="grey-lighten-1" icon="i-mdi:cart">
               </v-icon>
             </v-btn>
           </template>

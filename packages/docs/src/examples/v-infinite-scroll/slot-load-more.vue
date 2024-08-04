@@ -11,7 +11,7 @@
     </template>
     <template v-slot:load-more="{ props }">
       <v-btn
-        icon="mdi-refresh"
+        icon="i-mdi:refresh"
         size="small"
         variant="text"
         v-bind="props"

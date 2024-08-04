@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex align-center justify-space-around">
     <v-avatar color="info">
-      <v-icon icon="mdi-account-circle"></v-icon>
+      <v-icon icon="i-mdi:account-circle"></v-icon>
     </v-avatar>
 
     <v-avatar>

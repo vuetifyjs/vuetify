@@ -8,7 +8,7 @@
         <v-card-title class="bg-purple-lighten-2">
           <v-icon
             class="me-4"
-            icon="mdi-magnify"
+            icon="i-mdi:magnify"
             size="large"
           ></v-icon>
           <h2 class="font-weight-light">
@@ -32,7 +32,7 @@
             Title 2
           </h2>
           <v-icon
-            icon="mdi-home-outline"
+            icon="i-mdi:home-outline"
             size="large"
           ></v-icon>
         </v-card-title>
@@ -50,7 +50,7 @@
         <v-card-title class="bg-cyan-lighten-1">
           <v-icon
             class="me-4"
-            icon="mdi-email-outline"
+            icon="i-mdi:email-outline"
             size="large"
           ></v-icon>
           <h2 class="font-weight-light">
@@ -74,7 +74,7 @@
             Title 4
           </h2>
           <v-icon
-            icon="mdi-account-multiple-outline"
+            icon="i-mdi:account-multiple-outline"
             size="large"
           ></v-icon>
         </v-card-title>
@@ -92,7 +92,7 @@
         <v-card-title class="bg-green-lighten-1">
           <v-icon
             class="me-4"
-            icon="mdi-phone-in-talk"
+            icon="i-mdi:phone-in-talk"
             size="large"
           ></v-icon>
           <h2 class="font-weight-light">

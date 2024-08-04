@@ -4,7 +4,7 @@
       color="blue-darken-2"
       rounded="0"
     >
-      <v-icon icon="mdi-alarm"></v-icon>
+      <v-icon icon="i-mdi:alarm"></v-icon>
     </v-avatar>
   </div>
 </template>

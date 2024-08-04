@@ -66,7 +66,7 @@
 
   const { isRtl } = useRtl()
   const arrows = computed(() => ({
-    next: !isRtl ? 'mdi-chevron-left' : 'mdi-chevron-right',
-    prev: !isRtl ? 'mdi-chevron-right' : 'mdi-chevron-left',
+    next: !isRtl ? 'i-mdi:chevron-left' : 'i-mdi:chevron-right',
+    prev: !isRtl ? 'i-mdi:chevron-right' : 'i-mdi:chevron-left',
   }))
 </script>

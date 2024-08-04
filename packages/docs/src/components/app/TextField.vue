@@ -2,7 +2,7 @@
   <v-text-field
     :placeholder="t('search.label')"
     base-color="disabled"
-    prepend-inner-icon="mdi-magnify"
+    prepend-inner-icon="i-mdi:magnify"
     variant="outlined"
     hide-details
     persistent-placeholder

@@ -49,7 +49,7 @@
       <v-btn color="success">
         Complete Registration
 
-        <v-icon icon="mdi-chevron-right" end></v-icon>
+        <v-icon icon="i-mdi:chevron-right" end></v-icon>
       </v-btn>
     </v-card-actions>
   </v-card>

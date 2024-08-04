@@ -120,11 +120,9 @@
           dark
           fab
         >
-          <v-icon v-if="fab">
-            mdi-close
+          <v-icon v-if="fab" icon="i-mdi:close">
           </v-icon>
-          <v-icon v-else>
-            mdi-account-circle
+          <v-icon v-else icon="i-mdi:account-circle">
           </v-icon>
         </v-btn>
       </template>
@@ -134,7 +132,7 @@
         dark
         fab
       >
-        <v-icon>mdi-pencil</v-icon>
+        <v-icon icon="i-mdi:pencil"></v-icon>
       </v-btn>
       <v-btn
         color="indigo"
@@ -142,7 +140,7 @@
         dark
         fab
       >
-        <v-icon>mdi-plus</v-icon>
+        <v-icon icon="i-mdi:plus"></v-icon>
       </v-btn>
       <v-btn
         color="red"
@@ -150,7 +148,7 @@
         dark
         fab
       >
-        <v-icon>mdi-delete</v-icon>
+        <v-icon icon="i-mdi:delete"></v-icon>
       </v-btn>
     </v-speed-dial>
   </v-card>

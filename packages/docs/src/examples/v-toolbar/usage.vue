@@ -8,8 +8,8 @@
     <div>
       <v-toolbar v-bind="props">
         <v-spacer></v-spacer>
-        <v-btn icon="mdi-menu"></v-btn>
-        <v-btn icon="mdi-dots-vertical"></v-btn>
+        <v-btn icon="i-mdi:menu"></v-btn>
+        <v-btn icon="i-mdi:dots-vertical"></v-btn>
       </v-toolbar>
     </div>
 

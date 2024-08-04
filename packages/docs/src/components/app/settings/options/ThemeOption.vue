@@ -3,7 +3,7 @@
     v-model="user.theme"
     class="mb-2"
     color="primary"
-    true-icon="mdi-check-circle-outline"
+    true-icon="i-mdi:check-circle-outline"
     hide-details
   >
     <v-radio
@@ -43,32 +43,32 @@
   const items = [
     {
       text: t('light'),
-      icon: 'mdi-white-balance-sunny',
+      icon: 'i-mdi:white-balance-sunny',
       value: 'light',
     },
     {
       text: t('dark'),
-      icon: 'mdi-weather-night',
+      icon: 'i-mdi:weather-night',
       value: 'dark',
     },
     {
       text: 'Blackguard',
-      icon: 'mdi-space-invaders',
+      icon: 'i-mdi:space-invaders',
       value: 'blackguard',
     },
     {
       text: 'Polaris',
-      icon: 'mdi-image-filter-hdr',
+      icon: 'i-mdi:image-filter-hdr',
       value: 'polaris',
     },
     {
       text: 'Nebula',
-      icon: 'mdi-rocket-launch-outline',
+      icon: 'i-mdi:rocket-launch-outline',
       value: 'nebula',
     },
     {
       text: t('system'),
-      icon: 'mdi-desktop-tower-monitor',
+      icon: 'i-mdi:desktop-tower-monitor',
       value: 'system',
     },
   ]

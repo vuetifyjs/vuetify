@@ -18,7 +18,7 @@
     <v-alert
       color="blue-grey-darken-2"
       density="compact"
-      icon="mdi-school"
+      icon="i-mdi:school"
       prominent
     >
       Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui. Aenean ut eros et nisl sagittis vestibulum. Sed aliquam ultrices mauris. Donec vitae orci sed dolor rutrum auctor.
@@ -27,7 +27,7 @@
     <br>
 
     <v-alert
-      icon="mdi-shield-lock-outline"
+      icon="i-mdi:shield-lock-outline"
       type="info"
       prominent
     >

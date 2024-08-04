@@ -7,8 +7,8 @@
     <v-slide-group
       v-model="model"
       class="pa-4"
-      next-icon="mdi-plus"
-      prev-icon="mdi-minus"
+      next-icon="i-mdi:plus"
+      prev-icon="i-mdi:minus"
       selected-class="bg-primary"
       show-arrows
     >
@@ -29,7 +29,7 @@
               <v-icon
                 v-if="isSelected"
                 color="white"
-                icon="mdi-close-circle-outline"
+                icon="i-mdi:close-circle-outline"
                 size="48"
               ></v-icon>
             </v-scale-transition>

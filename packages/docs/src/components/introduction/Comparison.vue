@@ -53,10 +53,9 @@
             <template v-if="framework[key]">
               <v-icon
                 v-if="typeof framework[key] === 'boolean'"
+                class="i-mdi:record"
                 color="success"
-              >
-                mdi-record
-              </v-icon>
+              />
 
               <span
                 v-else-if="typeof framework[key] === 'string'"

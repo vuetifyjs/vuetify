@@ -10,7 +10,7 @@
         <v-fade-transition>
           <v-btn
             v-show="newTask"
-            icon="mdi-plus-circle"
+            icon="i-mdi:plus-circle"
             variant="text"
             @click="create"
           ></v-btn>
@@ -76,8 +76,7 @@
 
             <template v-slot:append>
               <v-expand-x-transition>
-                <v-icon v-if="task.done" color="success">
-                  mdi-check
+                <v-icon v-if="task.done" color="success" icon="i-mdi:check">
                 </v-icon>
               </v-expand-x-transition>
             </template>

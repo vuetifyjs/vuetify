@@ -53,7 +53,7 @@
   </v-sheet>
 
   <v-btn
-    append-icon="mdi-open-in-new"
+    append-icon="i-mdi:open-in-new"
     aria-label="See More Templates"
     color="primary"
     href="https://store.vuetifyjs.com"

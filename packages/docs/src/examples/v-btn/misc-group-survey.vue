@@ -29,7 +29,7 @@
         <template v-slot:default="{ toggle }">
           <v-btn
             :active="model != null && model + 1 >= n"
-            :icon="`mdi-numeric-${n}`"
+            :icon="icons[n]"
             height="40"
             variant="text"
             width="40"
@@ -46,6 +46,13 @@
   import { ref } from 'vue'
 
   const model = ref(null)
+  const icons = [
+    'i-mdi:numeric-1',
+    'i-mdi:numeric-2',
+    'i-mdi:numeric-3',
+    'i-mdi:numeric-4',
+    'i-mdi:numeric-5',
+  ]
 </script>
 
 <script>

@@ -15,7 +15,7 @@
         <template v-slot:append-inner>
           <v-btn
             :disabled="!text"
-            append-icon="mdi-arrow-right"
+            append-icon="i-mdi:arrow-right"
             text="Queue"
             flat
             slim

@@ -50,7 +50,7 @@
         <br>
 
         <v-chip
-          prepend-icon="mdi-check-circle"
+          prepend-icon="i-mdi:check-circle"
           size="large"
           variant="text"
           border

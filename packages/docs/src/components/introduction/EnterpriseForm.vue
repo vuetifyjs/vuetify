@@ -36,7 +36,7 @@
                 :placeholder="t('name')"
                 :rules="[rules.required]"
                 name="name"
-                prepend-inner-icon="mdi-account-circle-outline"
+                prepend-inner-icon="i-mdi:account-circle-outline"
               />
             </v-col>
 
@@ -46,7 +46,7 @@
                 :placeholder="t('email-address')"
                 :rules="[rules.required, rules.email]"
                 name="email"
-                prepend-inner-icon="mdi-email-outline"
+                prepend-inner-icon="i-mdi:email-outline"
               />
             </v-col>
           </v-row>

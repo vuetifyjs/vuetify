@@ -19,7 +19,7 @@
         height="44"
         rounded="tl"
       >
-        <v-icon icon="mdi-file-tree" />
+        <v-icon icon="i-mdi:file-tree" />
 
         {{ resource }}
       </v-sheet>
@@ -111,7 +111,7 @@
   })
 
   const className = computed(() => `language-${props.language}`)
-  const icon = computed(() => clicked.value ? 'mdi-check' : 'mdi-clipboard-text-outline')
+  const icon = computed(() => clicked.value ? 'i-mdi:check' : 'i-mdi:clipboard-text-outline')
 
   async function copy () {
     const el = root.value?.$el.querySelector('code')

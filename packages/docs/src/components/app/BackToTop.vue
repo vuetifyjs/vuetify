@@ -3,7 +3,7 @@
     v-model="model"
     color="primary"
     elevation="8"
-    icon="mdi-chevron-up"
+    icon="i-mdi:chevron-up"
     size="large"
     app
     v-scroll="onScroll"

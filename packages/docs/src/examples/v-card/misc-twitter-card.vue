@@ -3,7 +3,7 @@
     class="mx-auto text-white"
     color="#26c6da"
     max-width="400"
-    prepend-icon="mdi-twitter"
+    prepend-icon="i-mdi:twitter"
     title="Twitter"
   >
     <template v-slot:prepend>
@@ -29,10 +29,10 @@
 
         <template v-slot:append>
           <div class="justify-self-end">
-            <v-icon class="me-1" icon="mdi-heart"></v-icon>
+            <v-icon class="me-1" icon="i-mdi:heart"></v-icon>
             <span class="subheading me-2">256</span>
             <span class="me-1">·</span>
-            <v-icon class="me-1" icon="mdi-share-variant"></v-icon>
+            <v-icon class="me-1" icon="i-mdi:share-variant"></v-icon>
             <span class="subheading">45</span>
           </div>
         </template>

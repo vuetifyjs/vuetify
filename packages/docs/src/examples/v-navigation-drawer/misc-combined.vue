@@ -17,9 +17,9 @@
           density="compact"
           nav
         >
-          <v-list-item prepend-icon="mdi-view-dashboard" value="dashboard"></v-list-item>
+          <v-list-item prepend-icon="i-mdi:view-dashboard" value="dashboard"></v-list-item>
 
-          <v-list-item prepend-icon="mdi-forum" value="messages"></v-list-item>
+          <v-list-item prepend-icon="i-mdi:forum" value="messages"></v-list-item>
         </v-list>
       </v-navigation-drawer>
 

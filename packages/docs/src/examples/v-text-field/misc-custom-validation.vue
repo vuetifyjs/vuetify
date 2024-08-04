@@ -83,7 +83,7 @@
                   v-on="on"
                   @click="resetForm"
                 >
-                  <v-icon>mdi-refresh</v-icon>
+                  <v-icon icon="i-mdi:refresh"></v-icon>
                 </v-btn>
               </template>
               <span>Refresh form</span>

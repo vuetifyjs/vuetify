@@ -19,7 +19,7 @@
               v-model="dateFormatted"
               hint="MM/DD/YYYY format"
               label="Date"
-              prepend-icon="mdi-calendar"
+              prepend-icon="i-mdi:calendar"
               persistent-hint
               v-bind="attrs"
               v-on="on"
@@ -52,7 +52,7 @@
               v-model="computedDateFormatted"
               hint="MM/DD/YYYY format"
               label="Date (read only text field)"
-              prepend-icon="mdi-calendar"
+              prepend-icon="i-mdi:calendar"
               persistent-hint
               readonly
               v-bind="attrs"

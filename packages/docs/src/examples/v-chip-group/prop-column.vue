@@ -9,11 +9,11 @@
       class="pa-3 bg-primary text-right"
       rounded="t-xl"
     >
-      <v-btn icon="mdi-content-save-cog-outline"></v-btn>
+      <v-btn icon="i-mdi:content-save-cog-outline"></v-btn>
 
       <v-btn
         class="ms-2"
-        icon="mdi-check-bold"
+        icon="i-mdi:check-bold"
       ></v-btn>
     </v-sheet>
 

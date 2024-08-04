@@ -17,7 +17,7 @@
       <v-text-field
         density="compact"
         placeholder="Email address"
-        prepend-inner-icon="mdi-email-outline"
+        prepend-inner-icon="i-mdi:email-outline"
         variant="outlined"
       ></v-text-field>
 
@@ -34,11 +34,11 @@
       </div>
 
       <v-text-field
-        :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+        :append-inner-icon="visible ? 'i-mdi:eye-off' : 'i-mdi:eye'"
         :type="visible ? 'text' : 'password'"
         density="compact"
         placeholder="Enter your password"
-        prepend-inner-icon="mdi-lock-outline"
+        prepend-inner-icon="i-mdi:lock-outline"
         variant="outlined"
         @click:append-inner="visible = !visible"
       ></v-text-field>
@@ -70,7 +70,7 @@
           rel="noopener noreferrer"
           target="_blank"
         >
-          Sign up now <v-icon icon="mdi-chevron-right"></v-icon>
+          Sign up now <v-icon icon="i-mdi:chevron-right"></v-icon>
         </a>
       </v-card-text>
     </v-card>

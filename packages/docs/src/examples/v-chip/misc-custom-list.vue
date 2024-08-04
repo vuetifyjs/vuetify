@@ -14,7 +14,7 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        icon="mdi-magnify"
+        icon="i-mdi:magnify"
         @click="searchField.focus()"
       >
       </v-btn>
@@ -106,23 +106,23 @@
   const items = [
     {
       text: 'Nature',
-      icon: 'mdi-nature',
+      icon: 'i-mdi:nature',
     },
     {
       text: 'Nightlife',
-      icon: 'mdi-glass-wine',
+      icon: 'i-mdi:glass-wine',
     },
     {
       text: 'November',
-      icon: 'mdi-calendar-range',
+      icon: 'i-mdi:calendar-range',
     },
     {
       text: 'Portland',
-      icon: 'mdi-map-marker',
+      icon: 'i-mdi:map-marker',
     },
     {
       text: 'Biking',
-      icon: 'mdi-bike',
+      icon: 'i-mdi:bike',
     },
   ]
   const searchField = ref()
@@ -170,23 +170,23 @@
       items: [
         {
           text: 'Nature',
-          icon: 'mdi-nature',
+          icon: 'i-mdi:nature',
         },
         {
           text: 'Nightlife',
-          icon: 'mdi-glass-wine',
+          icon: 'i-mdi:glass-wine',
         },
         {
           text: 'November',
-          icon: 'mdi-calendar-range',
+          icon: 'i-mdi:calendar-range',
         },
         {
           text: 'Portland',
-          icon: 'mdi-map-marker',
+          icon: 'i-mdi:map-marker',
         },
         {
           text: 'Biking',
-          icon: 'mdi-bike',
+          icon: 'i-mdi:bike',
         },
       ],
       loading: false,

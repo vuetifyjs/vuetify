@@ -8,7 +8,7 @@
         <v-textarea
           class="mx-2"
           label="prepend-icon"
-          prepend-icon="mdi-comment"
+          prepend-icon="i-mdi:comment"
           rows="1"
         ></v-textarea>
       </v-col>
@@ -17,7 +17,7 @@
         sm="6"
       >
         <v-textarea
-          append-icon="mdi-comment"
+          append-icon="i-mdi:comment"
           class="mx-2"
           label="append-icon"
           rows="1"
@@ -30,7 +30,7 @@
         <v-textarea
           class="mx-2"
           label="prepend-inner-icon"
-          prepend-inner-icon="mdi-comment"
+          prepend-inner-icon="i-mdi:comment"
           rows="1"
         ></v-textarea>
       </v-col>
@@ -39,7 +39,7 @@
         sm="6"
       >
         <v-textarea
-          append-inner-icon="mdi-comment"
+          append-inner-icon="i-mdi:comment"
           class="mx-2"
           label="append-inner-icon"
           rows="1"

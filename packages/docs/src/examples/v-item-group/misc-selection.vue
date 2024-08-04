@@ -23,7 +23,7 @@
                 cover
                 @click="toggle"
               >
-                <v-btn :icon="isSelected ? 'mdi-heart' : 'mdi-heart-outline'"></v-btn>
+                <v-btn :icon="isSelected ? 'i-mdi:heart' : 'i-mdi:heart-outline'"></v-btn>
               </v-img>
             </v-item>
           </v-col>

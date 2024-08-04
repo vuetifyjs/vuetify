@@ -1,7 +1,7 @@
 <template>
   <AppBtn
     href="https://cdn.vuetifyjs.com/docs/images/brand-kit/vuetify-brand-kit.zip"
-    prepend-icon="mdi-download-box-outline"
+    prepend-icon="i-mdi:download-box-outline"
     target="_blank"
     text="download-brand-kit"
     border

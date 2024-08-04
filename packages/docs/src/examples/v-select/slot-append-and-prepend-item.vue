@@ -31,7 +31,7 @@
         disabled
       >
         <template v-slot:prepend>
-          <v-avatar color="primary" icon="mdi-food-apple"></v-avatar>
+          <v-avatar color="primary" icon="i-mdi:food-apple"></v-avatar>
         </template>
       </v-list-item>
     </template>

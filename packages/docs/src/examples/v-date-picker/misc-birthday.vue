@@ -13,7 +13,7 @@
         <v-text-field
           v-model="date"
           label="Birthday date"
-          prepend-icon="mdi-calendar"
+          prepend-icon="i-mdi:calendar"
           readonly
           v-bind="attrs"
           v-on="on"

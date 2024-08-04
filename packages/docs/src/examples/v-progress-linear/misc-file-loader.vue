@@ -17,21 +17,21 @@
         absolute
         fab
       >
-        <v-icon>mdi-plus</v-icon>
+        <v-icon icon="i-mdi:plus"></v-icon>
       </v-btn>
 
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon>mdi-share-variant</v-icon>
+        <v-icon icon="i-mdi:share-variant"></v-icon>
       </v-btn>
 
       <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
+        <v-icon icon="i-mdi:magnify"></v-icon>
       </v-btn>
 
       <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
+        <v-icon icon="i-mdi:dots-vertical"></v-icon>
       </v-btn>
     </v-toolbar>
 

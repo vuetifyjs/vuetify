@@ -8,7 +8,7 @@
     >
       <v-btn
         class="pe-2"
-        prepend-icon="mdi-account-multiple-outline"
+        prepend-icon="i-mdi:account-multiple-outline"
         variant="flat"
       >
         <div class="text-none font-weight-regular">
@@ -24,7 +24,7 @@
                 </div>
 
                 <v-btn
-                  icon="mdi-close"
+                  icon="i-mdi:close"
                   variant="text"
                   @click="isActive.value = false"
                 ></v-btn>
@@ -89,7 +89,7 @@
         size="small"
         icon
       >
-        <v-icon icon="mdi-menu-down"></v-icon>
+        <v-icon icon="i-mdi:menu-down"></v-icon>
 
         <v-menu
           activator="parent"
@@ -103,7 +103,7 @@
             slim
           >
             <v-list-item
-              prepend-icon="mdi-link"
+              prepend-icon="i-mdi:link"
               title="Copy link"
               link
             ></v-list-item>

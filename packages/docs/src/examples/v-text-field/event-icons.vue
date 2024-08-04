@@ -5,10 +5,10 @@
         <v-col cols="12">
           <v-text-field
             v-model="message"
-            :append-icon="message ? 'mdi-send' : 'mdi-microphone'"
-            :append-inner-icon="marker ? 'mdi-map-marker' : 'mdi-map-marker-off'"
+            :append-icon="message ? 'i-mdi:send' : 'i-mdi:microphone'"
+            :append-inner-icon="marker ? 'i-mdi:map-marker' : 'i-mdi:map-marker-off'"
             :prepend-icon="icon"
-            clear-icon="mdi-close-circle"
+            clear-icon="i-mdi:close-circle"
             label="Message"
             type="text"
             variant="filled"
@@ -28,14 +28,14 @@
   import { computed, ref } from 'vue'
 
   const icons = [
-    'mdi-emoticon',
-    'mdi-emoticon-cool',
-    'mdi-emoticon-dead',
-    'mdi-emoticon-excited',
-    'mdi-emoticon-happy',
-    'mdi-emoticon-neutral',
-    'mdi-emoticon-sad',
-    'mdi-emoticon-tongue',
+    'i-mdi:emoticon',
+    'i-mdi:emoticon-cool',
+    'i-mdi:emoticon-dead',
+    'i-mdi:emoticon-excited',
+    'i-mdi:emoticon-happy',
+    'i-mdi:emoticon-neutral',
+    'i-mdi:emoticon-sad',
+    'i-mdi:emoticon-tongue',
   ]
 
   const message = ref('Hey!')
@@ -73,14 +73,14 @@
       marker: true,
       iconIndex: 0,
       icons: [
-        'mdi-emoticon',
-        'mdi-emoticon-cool',
-        'mdi-emoticon-dead',
-        'mdi-emoticon-excited',
-        'mdi-emoticon-happy',
-        'mdi-emoticon-neutral',
-        'mdi-emoticon-sad',
-        'mdi-emoticon-tongue',
+        'i-mdi:emoticon',
+        'i-mdi:emoticon-cool',
+        'i-mdi:emoticon-dead',
+        'i-mdi:emoticon-excited',
+        'i-mdi:emoticon-happy',
+        'i-mdi:emoticon-neutral',
+        'i-mdi:emoticon-sad',
+        'i-mdi:emoticon-tongue',
       ],
     }),
 

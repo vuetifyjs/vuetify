@@ -2,8 +2,8 @@
   <v-sheet elevation="6">
     <v-tabs
       bg-color="indigo"
-      next-icon="mdi-arrow-right-bold-box-outline"
-      prev-icon="mdi-arrow-left-bold-box-outline"
+      next-icon="i-mdi:arrow-right-bold-box-outline"
+      prev-icon="i-mdi:arrow-left-bold-box-outline"
       show-arrows
     >
       <v-tab

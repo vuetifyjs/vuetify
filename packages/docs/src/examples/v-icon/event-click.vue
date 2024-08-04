@@ -17,10 +17,10 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-icon
+        icon="i-mdi:chevron-right"
         size="large"
         @click="next"
       >
-        mdi-chevron-right
       </v-icon>
     </v-card-actions>
   </v-card>

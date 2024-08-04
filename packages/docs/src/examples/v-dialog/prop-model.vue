@@ -10,7 +10,7 @@
     >
       <v-card
         max-width="400"
-        prepend-icon="mdi-update"
+        prepend-icon="i-mdi:update"
         text="Your application will relaunch automatically after the update is complete."
         title="Update in progress"
       >

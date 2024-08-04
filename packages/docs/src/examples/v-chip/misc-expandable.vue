@@ -47,7 +47,7 @@
                     icon
                     @click="menu = false"
                   >
-                    <v-icon>mdi-close-circle</v-icon>
+                    <v-icon icon="i-mdi:close-circle"></v-icon>
                   </v-btn>
                 </v-list-item-action>
               </template>
@@ -55,7 +55,7 @@
           </v-list>
 
           <v-list>
-            <v-list-item prepend-icon="mdi-briefcase" link>
+            <v-list-item prepend-icon="i-mdi:briefcase" link>
               <v-list-item-subtitle>john@gmail.com</v-list-item-subtitle>
             </v-list-item>
           </v-list>

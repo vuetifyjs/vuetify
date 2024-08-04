@@ -32,7 +32,7 @@
           <v-icon
             class="mb-6"
             color="success"
-            icon="mdi-check-circle-outline"
+            icon="i-mdi:check-circle-outline"
             size="128"
           ></v-icon>
 

@@ -21,7 +21,7 @@
 
   <div v-else class="mb-4">
     <AppBtn
-      append-icon="mdi-open-in-new"
+      append-icon="i-mdi:open-in-new"
       href="https://github.com/sponsors/johnleider"
       rel="noopener"
       target="_blank"

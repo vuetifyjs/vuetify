@@ -13,7 +13,7 @@
   const user = useUserStore()
 
   const icon = computed(() => {
-    return user.railDrawer ? 'mdi-chevron-double-right' : 'mdi-chevron-double-left'
+    return user.railDrawer ? 'i-mdi:chevron-double-right' : 'i-mdi:chevron-double-left'
   })
 
   function onClick () {

@@ -13,7 +13,7 @@
       color="error"
       density="comfortable"
       false-icon="$close"
-      true-icon="mdi-check"
+      true-icon="i-mdi:check"
       inset
     >
       <template #label>

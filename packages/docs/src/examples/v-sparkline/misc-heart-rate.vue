@@ -8,7 +8,7 @@
       <v-icon
         :color="checking ? 'red lighten-2' : 'indigo-lighten-2'"
         class="me-8"
-        icon="mdi-heart-pulse"
+        icon="i-mdi:heart-pulse"
         size="64"
         @click="takePulse"
       ></v-icon>
@@ -29,7 +29,7 @@
     <template v-slot:append>
       <v-btn
         class="align-self-start"
-        icon="mdi-arrow-right-thick"
+        icon="i-mdi:arrow-right-thick"
         size="34"
         variant="text"
       ></v-btn>

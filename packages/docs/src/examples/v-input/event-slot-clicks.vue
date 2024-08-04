@@ -7,8 +7,8 @@
       <v-col cols="12">
         <v-input
           :messages="['Messages']"
-          append-icon="mdi-close"
-          prepend-icon="mdi-phone"
+          append-icon="i-mdi:close"
+          prepend-icon="i-mdi:phone"
           @click:append="appendIconCallback"
           @click:prepend="prependIconCallback"
         >

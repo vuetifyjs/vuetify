@@ -2,7 +2,7 @@
   <div class="d-flex justify-space-around align-center flex-column flex-md-row fill-height">
     <v-badge
       color="error"
-      icon="mdi-lock"
+      icon="i-mdi:lock"
       bordered
     >
       <v-btn

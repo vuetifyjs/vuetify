@@ -2,9 +2,9 @@
   <div class="text-center">
     <v-rating
       v-model="rating"
-      empty-icon="mdi-circle-outline"
-      full-icon="mdi-circle"
-      half-icon="mdi-circle-half"
+      empty-icon="i-mdi:circle-outline"
+      full-icon="i-mdi:circle"
+      half-icon="i-mdi:circle-half"
       half-increments
       hover
     ></v-rating>

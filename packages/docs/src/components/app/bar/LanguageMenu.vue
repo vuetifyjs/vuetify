@@ -7,7 +7,7 @@
     <template #activator="{ props }">
       <AppBtn
         color="medium-emphasis"
-        icon="mdi-translate"
+        icon="i-mdi:translate"
         v-bind="props"
       />
     </template>

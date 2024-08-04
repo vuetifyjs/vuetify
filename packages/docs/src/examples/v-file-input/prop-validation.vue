@@ -4,7 +4,7 @@
     accept="image/png, image/jpeg, image/bmp"
     label="Avatar"
     placeholder="Pick an avatar"
-    prepend-icon="mdi-camera"
+    prepend-icon="i-mdi:camera"
   ></v-file-input>
 </template>
 

@@ -13,7 +13,7 @@
             <template v-slot:prepend>
               <v-tooltip location="bottom">
                 <template v-slot:activator="{ props }">
-                  <v-icon v-bind="props" icon="mdi-help-circle-outline"></v-icon>
+                  <v-icon v-bind="props" icon="i-mdi:help-circle-outline"></v-icon>
                 </template>
 
                 I'm a tooltip
@@ -43,7 +43,7 @@
               <v-menu>
                 <template v-slot:activator="{ props }">
                   <v-btn v-bind="props" class="mt-n2">
-                    <v-icon icon="mdi-menu" start></v-icon>
+                    <v-icon icon="i-mdi:menu" start></v-icon>
 
                     Menu
                   </v-btn>
@@ -57,7 +57,7 @@
                       variant="text"
                       @click="clickMe"
                     >
-                      <v-icon icon="mdi-target" start></v-icon>
+                      <v-icon icon="i-mdi:target" start></v-icon>
 
                       Click me
                     </v-btn>

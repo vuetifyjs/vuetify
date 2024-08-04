@@ -1,7 +1,7 @@
 <template>
   <v-file-input
     label="File input"
-    prepend-icon="mdi-camera"
+    prepend-icon="i-mdi:camera"
     variant="filled"
   ></v-file-input>
 </template>

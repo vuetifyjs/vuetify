@@ -12,7 +12,7 @@
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon>mdi-export</v-icon>
+        <v-icon icon="i-mdi:export"></v-icon>
       </v-btn>
     </v-toolbar>
   </div>

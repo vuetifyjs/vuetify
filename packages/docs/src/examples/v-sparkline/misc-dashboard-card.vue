@@ -29,10 +29,9 @@
       <v-divider class="my-2"></v-divider>
       <v-icon
         class="me-2"
+        icon="i-mdi:clock"
         size="small"
-      >
-        mdi-clock
-      </v-icon>
+      ></v-icon>
       <span class="text-caption text-grey font-weight-light">last registration 26 minutes ago</span>
     </v-card-text>
   </v-card>

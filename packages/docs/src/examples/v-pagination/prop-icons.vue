@@ -3,8 +3,8 @@
     <v-pagination
       v-model="page"
       :length="4"
-      next-icon="mdi-menu-right"
-      prev-icon="mdi-menu-left"
+      next-icon="i-mdi:menu-right"
+      prev-icon="i-mdi:menu-left"
     ></v-pagination>
   </div>
 </template>

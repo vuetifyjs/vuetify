@@ -12,8 +12,8 @@
     <template #activator="{ props: activatorProps }">
       <AppBtn
         :active="model"
-        :icon="xs ? 'mdi-magnify' : undefined"
-        :prepend-icon="smAndUp ? 'mdi-magnify' : undefined"
+        :icon="xs ? 'i-mdi:magnify' : undefined"
+        :prepend-icon="smAndUp ? 'i-mdi:magnify' : undefined"
         v-bind="activatorProps"
       >
         <span :class="mdAndUp && 'me-n1'">
@@ -63,7 +63,7 @@
           <div class="text-center">
             <v-icon
               class="mb-6 mx-auto text-disabled"
-              icon="mdi-text-box-search-outline"
+              icon="i-mdi:text-box-search-outline"
               size="150"
             />
 

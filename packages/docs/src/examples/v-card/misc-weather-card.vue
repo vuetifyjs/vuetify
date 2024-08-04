@@ -8,7 +8,7 @@
         <v-icon
           class="me-1 pb-1"
           color="error"
-          icon="mdi-alert"
+          icon="i-mdi:alert"
           size="18"
         ></v-icon>
 
@@ -28,7 +28,7 @@
         <v-col class="text-right" cols="6">
           <v-icon
             color="error"
-            icon="mdi-weather-hurricane"
+            icon="i-mdi:weather-hurricane"
             size="88"
           ></v-icon>
         </v-col>
@@ -38,14 +38,14 @@
     <div class="d-flex py-3 justify-space-between">
       <v-list-item
         density="compact"
-        prepend-icon="mdi-weather-windy"
+        prepend-icon="i-mdi:weather-windy"
       >
         <v-list-item-subtitle>123 km/h</v-list-item-subtitle>
       </v-list-item>
 
       <v-list-item
         density="compact"
-        prepend-icon="mdi-weather-pouring"
+        prepend-icon="i-mdi:weather-pouring"
       >
         <v-list-item-subtitle>48%</v-list-item-subtitle>
       </v-list-item>
@@ -97,9 +97,9 @@
 
   const labels = { 0: 'SU', 1: 'MO', 2: 'TU', 3: 'WED', 4: 'TH', 5: 'FR', 6: 'SA' }
   const forecast = [
-    { day: 'Tuesday', icon: 'mdi-white-balance-sunny', temp: '24\u00B0/12\u00B0' },
-    { day: 'Wednesday', icon: 'mdi-white-balance-sunny', temp: '22\u00B0/14\u00B0' },
-    { day: 'Thursday', icon: 'mdi-cloud', temp: '25\u00B0/15\u00B0' },
+    { day: 'Tuesday', icon: 'i-mdi:white-balance-sunny', temp: '24\u00B0/12\u00B0' },
+    { day: 'Wednesday', icon: 'i-mdi:white-balance-sunny', temp: '22\u00B0/14\u00B0' },
+    { day: 'Thursday', icon: 'i-mdi:cloud', temp: '25\u00B0/15\u00B0' },
   ]
 
   const expand = ref(false)
@@ -113,9 +113,9 @@
       expand: false,
       time: 0,
       forecast: [
-        { day: 'Tuesday', icon: 'mdi-white-balance-sunny', temp: '24\xB0/12\xB0' },
-        { day: 'Wednesday', icon: 'mdi-white-balance-sunny', temp: '22\xB0/14\xB0' },
-        { day: 'Thursday', icon: 'mdi-cloud', temp: '25\xB0/15\xB0' },
+        { day: 'Tuesday', icon: 'i-mdi:white-balance-sunny', temp: '24\xB0/12\xB0' },
+        { day: 'Wednesday', icon: 'i-mdi:white-balance-sunny', temp: '22\xB0/14\xB0' },
+        { day: 'Thursday', icon: 'i-mdi:cloud', temp: '25\xB0/15\xB0' },
       ],
     }),
   }

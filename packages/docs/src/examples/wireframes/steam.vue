@@ -3,11 +3,11 @@
     <v-system-bar>
       <v-spacer></v-spacer>
 
-      <v-icon>mdi-square</v-icon>
+      <v-icon icon="i-mdi:square"></v-icon>
 
-      <v-icon>mdi-circle</v-icon>
+      <v-icon icon="i-mdi:circle"></v-icon>
 
-      <v-icon>mdi-triangle</v-icon>
+      <v-icon icon="i-mdi:triangle"></v-icon>
     </v-system-bar>
 
     <v-app-bar
@@ -110,7 +110,7 @@
         <v-text-field
           class="mb-4"
           density="compact"
-          prepend-inner-icon="mdi-magnify"
+          prepend-inner-icon="i-mdi:magnify"
           variant="solo-filled"
           flat
           hide-details

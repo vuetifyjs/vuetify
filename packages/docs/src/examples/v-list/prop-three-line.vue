@@ -4,13 +4,13 @@
     max-width="450"
   >
     <v-toolbar color="cyan-lighten-1">
-      <v-btn icon="mdi-menu" variant="text"></v-btn>
+      <v-btn icon="i-mdi:menu" variant="text"></v-btn>
 
       <v-toolbar-title>Inbox</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn icon="mdi-magnify" variant="text"></v-btn>
+      <v-btn icon="i-mdi:magnify" variant="text"></v-btn>
     </v-toolbar>
 
     <v-list

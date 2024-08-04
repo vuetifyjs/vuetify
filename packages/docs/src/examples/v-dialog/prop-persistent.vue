@@ -12,7 +12,7 @@
       </template>
 
       <v-card
-        prepend-icon="mdi-map-marker"
+        prepend-icon="i-mdi:map-marker"
         text="Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running."
         title="Use Google's location service?"
       >

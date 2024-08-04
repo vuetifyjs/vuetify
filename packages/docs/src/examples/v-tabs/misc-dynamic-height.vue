@@ -6,10 +6,10 @@
       prominent
     >
       <v-text-field
-        append-icon="mdi-microphone"
+        append-icon="i-mdi:microphone"
         class="mx-4"
         label="Search"
-        prepend-inner-icon="mdi-magnify"
+        prepend-inner-icon="i-mdi:magnify"
         flat
         hide-details
         solo-inverted

@@ -11,20 +11,20 @@
         multiple
       >
         <v-btn>
-          <v-icon icon="mdi-format-italic"></v-icon>
+          <v-icon icon="i-mdi:format-italic"></v-icon>
         </v-btn>
 
         <v-btn>
-          <v-icon icon="mdi-format-bold"></v-icon>
+          <v-icon icon="i-mdi:format-bold"></v-icon>
         </v-btn>
 
         <v-btn>
-          <v-icon icon="mdi-format-underline"></v-icon>
+          <v-icon icon="i-mdi:format-underline"></v-icon>
         </v-btn>
 
         <v-btn>
           <div class="d-flex align-center flex-column justify-center">
-            <v-icon icon="mdi-format-color-text"></v-icon>
+            <v-icon icon="i-mdi:format-color-text"></v-icon>
 
             <v-sheet
               color="purple"
@@ -42,15 +42,15 @@
         divided
       >
         <v-btn>
-          <v-icon icon="mdi-format-align-center"></v-icon>
+          <v-icon icon="i-mdi:format-align-center"></v-icon>
         </v-btn>
 
         <v-btn>
-          <v-icon icon="mdi-format-align-left"></v-icon>
+          <v-icon icon="i-mdi:format-align-left"></v-icon>
         </v-btn>
 
         <v-btn>
-          <v-icon icon="mdi-format-align-right"></v-icon>
+          <v-icon icon="i-mdi:format-align-right"></v-icon>
         </v-btn>
       </v-btn-toggle>
     </div>

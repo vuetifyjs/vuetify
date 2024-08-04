@@ -10,10 +10,10 @@
       <v-hover v-slot="{ props }" v-model="hover">
         <v-icon
           color="grey-lighten-1"
+          icon="i-mdi:account"
           size="large"
           v-bind="props"
         >
-          mdi-account
         </v-icon>
       </v-hover>
     </v-badge>

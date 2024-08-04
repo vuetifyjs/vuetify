@@ -36,7 +36,7 @@
                   <v-icon
                     class="me-1"
                     color="medium-emphasis"
-                    icon="mdi-chevron-right"
+                    icon="i-mdi:chevron-right"
                     size="16"
                   />
 
@@ -47,7 +47,7 @@
                   </span>
 
                   <v-icon
-                    :icon="isCopying ? 'mdi-check' : 'mdi-clipboard-text-outline'"
+                    :icon="isCopying ? 'i-mdi:check' : 'i-mdi:clipboard-text-outline'"
                     :style="{
                       opacity: isHovering || isCopying ? 1 : 0,
                     }"

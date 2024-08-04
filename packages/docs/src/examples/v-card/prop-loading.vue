@@ -28,7 +28,7 @@
 
         <v-icon
           color="error"
-          icon="mdi-fire-circle"
+          icon="i-mdi:fire-circle"
           size="small"
         ></v-icon>
       </v-card-subtitle>

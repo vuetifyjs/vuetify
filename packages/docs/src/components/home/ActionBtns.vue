@@ -27,7 +27,7 @@
     {
       color: 'primary',
       flat: true,
-      icon: 'mdi-speedometer',
+      icon: 'i-mdi:speedometer',
       text: 'home.get-started',
       to: rpath('/getting-started/installation/'),
     },
@@ -43,7 +43,7 @@
       theme: 'dark',
       flat: true,
       href: 'https://github.com/vuetifyjs/vuetify',
-      icon: 'mdi-github',
+      icon: 'i-mdi:github',
       rel: 'noopener',
       target: '_blank',
       text: 'github',

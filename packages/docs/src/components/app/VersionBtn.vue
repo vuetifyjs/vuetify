@@ -3,7 +3,7 @@
     :text="version"
     :to="rpath(`/getting-started/release-notes/?version=v${version}`)"
     class="text-caption"
-    prepend-icon="mdi-tag-outline"
+    prepend-icon="i-mdi:tag-outline"
     size="small"
     variant="text"
     slim

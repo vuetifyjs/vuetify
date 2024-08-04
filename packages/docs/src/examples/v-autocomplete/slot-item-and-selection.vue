@@ -30,7 +30,7 @@
               <v-btn
                 v-bind="props"
                 density="comfortable"
-                icon="mdi-dots-vertical"
+                icon="i-mdi:dots-vertical"
                 variant="tonal"
               ></v-btn>
             </template>
@@ -130,7 +130,7 @@
         :loading="isUpdating"
         :variant="isUpdating ? 'tonal' : undefined"
         color="blue-grey-lighten-3"
-        prepend-icon="mdi-update"
+        prepend-icon="i-mdi:update"
         @click="isUpdating = true"
       >
         Update Now

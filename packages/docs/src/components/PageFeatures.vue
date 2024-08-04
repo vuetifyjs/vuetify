@@ -2,7 +2,7 @@
   <div class="mb-4">
     <page-feature-chip
       v-if="one.isSubscriber && user.pins"
-      :prepend-icon="`mdi-pin${!pinned ? '-outline' : ''}`"
+      :prepend-icon="`${pinned ? 'i-mdi:pin' : 'i-mdi:pin-outline'}`"
       text="Pin"
       @click="onClickPin"
     >
@@ -15,7 +15,7 @@
       v-if="route.meta?.features?.figma"
       :text="t('figma-design')"
       href="https://figma.vuetifyjs.com/"
-      prepend-icon="mdi-image"
+      prepend-icon="i-mdi:image"
       rel="noopener noreferrer"
       target="_blank"
     >
@@ -28,7 +28,7 @@
       v-if="route.meta?.features?.report"
       :text="t('report-a-bug')"
       href="https://issues.vuetifyjs.com/"
-      prepend-icon="mdi-bug-outline"
+      prepend-icon="i-mdi:bug-outline"
       rel="noopener noreferrer"
       target="_blank"
     >
@@ -41,7 +41,7 @@
       v-if="label"
       :href="label"
       :text="t('open-issues')"
-      prepend-icon="mdi-alert-circle-outline"
+      prepend-icon="i-mdi:alert-circle-outline"
       rel="noopener noreferrer"
       target="_blank"
     >
@@ -54,7 +54,7 @@
       v-if="route.meta?.features?.github"
       :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetify/src${route.meta.features.github}`"
       :text="t('view-in-github')"
-      prepend-icon="mdi-github"
+      prepend-icon="i-mdi:github"
       rel="noopener noreferrer"
       target="_blank"
     >
@@ -67,7 +67,7 @@
       v-if="route.meta?.features?.spec"
       :href="route.meta.features.spec"
       :text="t('design-spec')"
-      prepend-icon="mdi-material-design"
+      prepend-icon="i-mdi:material-design"
       rel="noopener noreferrer"
       target="_blank"
     >

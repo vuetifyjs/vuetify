@@ -9,9 +9,9 @@
         color="primary"
         direction="vertical"
       >
-        <v-tab prepend-icon="mdi-account" text="Option 1" value="option-1"></v-tab>
-        <v-tab prepend-icon="mdi-lock" text="Option 2" value="option-2"></v-tab>
-        <v-tab prepend-icon="mdi-access-point" text="Option 3" value="option-3"></v-tab>
+        <v-tab prepend-icon="i-mdi:account" text="Option 1" value="option-1"></v-tab>
+        <v-tab prepend-icon="i-mdi:lock" text="Option 2" value="option-2"></v-tab>
+        <v-tab prepend-icon="i-mdi:access-point" text="Option 3" value="option-3"></v-tab>
       </v-tabs>
 
       <v-tabs-window v-model="tab">

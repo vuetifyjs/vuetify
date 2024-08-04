@@ -26,19 +26,19 @@
 
               <v-btn
                 color="medium-emphasis"
-                icon="mdi-heart"
+                icon="i-mdi:heart"
                 size="small"
               ></v-btn>
 
               <v-btn
                 color="medium-emphasis"
-                icon="mdi-bookmark"
+                icon="i-mdi:bookmark"
                 size="small"
               ></v-btn>
 
               <v-btn
                 color="medium-emphasis"
-                icon="mdi-share-variant"
+                icon="i-mdi:share-variant"
                 size="small"
               ></v-btn>
             </v-card-actions>

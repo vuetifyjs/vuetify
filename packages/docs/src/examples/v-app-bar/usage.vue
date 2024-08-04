@@ -14,11 +14,11 @@
         <v-app-bar-title>Application Bar</v-app-bar-title>
 
         <template v-if="actions" v-slot:append>
-          <v-btn icon="mdi-heart"></v-btn>
+          <v-btn icon="i-mdi:heart"></v-btn>
 
-          <v-btn icon="mdi-magnify"></v-btn>
+          <v-btn icon="i-mdi:magnify"></v-btn>
 
-          <v-btn icon="mdi-dots-vertical"></v-btn>
+          <v-btn icon="i-mdi:dots-vertical"></v-btn>
         </template>
       </v-app-bar>
 
@@ -62,11 +62,11 @@
     if (actions.value) {
       str += `
   <template v-slot:append>
-    <v-btn icon="mdi-heart"></v-btn>
+    <v-btn icon="i-mdi:heart"></v-btn>
 
-    <v-btn icon="mdi-magnify"></v-btn>
+    <v-btn icon="i-mdi:magnify"></v-btn>
 
-    <v-btn icon="mdi-dots-vertical"></v-btn>
+    <v-btn icon="i-mdi:dots-vertical"></v-btn>
   </template>
 `
     }

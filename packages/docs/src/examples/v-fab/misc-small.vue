@@ -11,15 +11,15 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn color="grey-darken-4" icon="mdi-magnify"></v-btn>
+      <v-btn color="grey-darken-4" icon="mi-mdi:magnify"></v-btn>
 
-      <v-btn color="grey-darken-4" icon="mdi-view-module"></v-btn>
+      <v-btn color="grey-darken-4" icon="i-mdi:view-module"></v-btn>
 
       <template v-slot:extension>
         <v-fab
           class="ms-4"
           color="cyan-accent-2"
-          icon="mdi-plus"
+          icon="i-mdi:plus"
           location="bottom left"
           size="40"
           absolute
@@ -50,7 +50,7 @@
 
         <template v-slot:append>
           <v-list-item-action>
-            <v-btn color="grey-lighten-1" icon="mdi-information" variant="text"></v-btn>
+            <v-btn color="grey-lighten-1" icon="i-mdi:information" variant="text"></v-btn>
           </v-list-item-action>
         </template>
       </v-list-item>
@@ -74,7 +74,7 @@
 
         <template v-slot:append>
           <v-list-item-action>
-            <v-btn color="grey-lighten-1" icon="mdi-information" variant="text"></v-btn>
+            <v-btn color="grey-lighten-1" icon="i-mdi:information" variant="text"></v-btn>
           </v-list-item-action>
         </template>
       </v-list-item>
@@ -112,12 +112,12 @@
 
   const dialog = ref(false)
   const items = ref([
-    { icon: 'mdi-folder', iconClass: 'bg-grey-lighten-1 text-white', title: 'Photos', subtitle: 'Jan 9, 2014' },
-    { icon: 'mdi-folder', iconClass: 'bg-grey-lighten-1 text-white', title: 'Recipes', subtitle: 'Jan 17, 2014' },
-    { icon: 'mdi-folder', iconClass: 'bg-grey-lighten-1 text-white', title: 'Work', subtitle: 'Jan 28, 2014' },
+    { icon: 'i-mdi:folder', iconClass: 'bg-grey-lighten-1 text-white', title: 'Photos', subtitle: 'Jan 9, 2014' },
+    { icon: 'i-mdi:folder', iconClass: 'bg-grey-lighten-1 text-white', title: 'Recipes', subtitle: 'Jan 17, 2014' },
+    { icon: 'i-mdi:folder', iconClass: 'bg-grey-lighten-1 text-white', title: 'Work', subtitle: 'Jan 28, 2014' },
   ])
   const items2 = ref([
-    { icon: 'mdi-clipboard-text', iconClass: 'bg-blue text-white', title: 'Vacation itinerary', subtitle: 'Jan 20, 2014' },
-    { icon: 'mdi-gesture-tap-button', iconClass: 'bg-amber text-white', title: 'Kitchen remodel', subtitle: 'Jan 10, 2014' },
+    { icon: 'i-mdi:clipboard-text', iconClass: 'bg-blue text-white', title: 'Vacation itinerary', subtitle: 'Jan 20, 2014' },
+    { icon: 'i-mdi:gesture-tap-button', iconClass: 'bg-amber text-white', title: 'Kitchen remodel', subtitle: 'Jan 10, 2014' },
   ])
 </script>

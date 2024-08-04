@@ -9,9 +9,9 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon="mdi-magnify"></v-btn>
+      <v-btn icon="i-mdi:magnify"></v-btn>
 
-      <v-btn icon="mdi-dots-vertical"></v-btn>
+      <v-btn icon="i-mdi:dots-vertical"></v-btn>
 
       <template v-slot:extension>
         <v-tabs
@@ -36,7 +36,7 @@
               >
                 more
 
-                <v-icon icon="mdi-menu-down" end></v-icon>
+                <v-icon icon="i-mdi:menu-down" end></v-icon>
               </v-btn>
             </template>
 

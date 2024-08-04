@@ -3,7 +3,7 @@
     <v-banner
       class="my-4"
       color="deep-purple-accent-4"
-      icon="mdi-lock"
+      icon="i-mdi:lock"
       lines="one"
     >
       <v-banner-text>
@@ -18,7 +18,7 @@
     <v-banner
       class="my-4"
       color="error"
-      icon="mdi-weather-hurricane"
+      icon="i-mdi:weather-hurricane"
       lines="two"
     >
       <v-banner-text>

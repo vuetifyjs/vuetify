@@ -12,9 +12,9 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn icon="mdi-magnify"></v-btn>
+        <v-btn icon="i-mdi:magnify"></v-btn>
 
-        <v-btn icon="mdi-dots-vertical">
+        <v-btn icon="i-mdi:dots-vertical">
           <v-icon></v-icon>
         </v-btn>
 
@@ -59,9 +59,9 @@
   const tabs = ref(null)
   const activeFab = computed(() => {
     switch (tabs.value) {
-      case 'one': return { color: 'success', icon: 'mdi-share-variant' }
-      case 'two': return { color: 'red', icon: 'mdi-pencil' }
-      case 'three': return { color: 'green', icon: 'mdi-chevron-up' }
+      case 'one': return { color: 'success', icon: 'i-mdi:share-variant' }
+      case 'two': return { color: 'red', icon: 'i-mdi:pencil' }
+      case 'three': return { color: 'green', icon: 'i-mdi:chevron-up' }
       default: return {}
     }
   })
@@ -76,9 +76,9 @@
     computed: {
       activeFab () {
         switch (this.tabs) {
-          case 'one': return { color: 'success', icon: 'mdi-share-variant' }
-          case 'two': return { color: 'red', icon: 'mdi-pencil' }
-          case 'three': return { color: 'green', icon: 'mdi-chevron-up' }
+          case 'one': return { color: 'success', icon: 'i-mdi:share-variant' }
+          case 'two': return { color: 'red', icon: 'i-mdi:pencil' }
+          case 'three': return { color: 'green', icon: 'i-mdi:chevron-up' }
           default: return {}
         }
       },

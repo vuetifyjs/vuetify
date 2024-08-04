@@ -22,8 +22,8 @@
 
   const icon = computed(() => {
     return currentRoute.value.path.match('resources/jobs-for-vue')
-      ? 'mdi-briefcase-variant'
-      : 'mdi-briefcase-variant-outline'
+      ? 'i-mdi:briefcase-variant'
+      : 'i-mdi:briefcase-variant-outline'
   })
 
   function onClick () {

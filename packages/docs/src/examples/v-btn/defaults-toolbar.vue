@@ -8,6 +8,6 @@
 
     <v-divider class="mx-2" vertical></v-divider>
 
-    <v-btn icon="mdi-dots-vertical"></v-btn>
+    <v-btn icon="i-mdi:dots-vertical"></v-btn>
   </v-toolbar>
 </template>

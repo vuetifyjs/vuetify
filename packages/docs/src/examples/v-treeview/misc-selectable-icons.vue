@@ -5,7 +5,7 @@
       flat
     >
       <template v-slot:prepend>
-        <v-icon start>mdi-silverware</v-icon>
+        <v-icon icon="i-mdi:silverware" start></v-icon>
 
         <v-toolbar-title>Local hotspots</v-toolbar-title>
       </template>
@@ -18,12 +18,12 @@
             v-model:selected="tree"
             :items="items"
             :load-children="load"
-            expand-icon="mdi-chevron-down"
-            indeterminate-icon="mdi-bookmark-minus"
+            expand-icon="i-mdi:chevron-down"
+            indeterminate-icon="i-mdi:bookmark-minus"
             item-title="name"
             item-value="name"
-            off-icon="mdi-bookmark-outline"
-            on-icon="mdi-bookmark"
+            off-icon="i-mdi:bookmark-outline"
+            on-icon="i-mdi:bookmark"
             selected-color="indigo"
             open-on-click
             return-object
@@ -57,7 +57,7 @@
               :text="selection"
               class="ma-1"
               color="grey"
-              prepend-icon="mdi-beer"
+              prepend-icon="i-mdi:beer"
               size="small"
             ></v-chip>
           </v-scroll-x-transition>
@@ -77,7 +77,7 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        append-icon="mdi-content-save"
+        append-icon="i-mdi:content-save"
         color="green-darken-1"
         text="Save"
         variant="flat"

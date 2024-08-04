@@ -40,14 +40,14 @@
     'error',
   ]
   const icons = [
-    'mdi-plus',
-    'mdi-check-circle',
-    'mdi-information',
-    'mdi-alert',
-    'mdi-alert-circle',
-    'mdi-wifi',
-    'mdi-access-point',
-    'mdi-antenna',
+    'i-mdi:plus',
+    'i-mdi:check-circle',
+    'i-mdi:information',
+    'i-mdi:alert',
+    'i-mdi:alert-circle',
+    'i-mdi:wifi',
+    'i-mdi:access-point',
+    'i-mdi:antenna',
   ]
   const sizes = [
     'x-small',

@@ -10,17 +10,17 @@
       flat
     >
       <v-btn icon>
-        <v-icon>mdi-arrow-left</v-icon>
+        <v-icon icon="i-mdi:arrow-left"></v-icon>
       </v-btn>
       <v-card-title class="text-h6 font-weight-regular">
         Sign up
       </v-card-title>
       <v-spacer></v-spacer>
       <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
+        <v-icon icon="i-mdi:magnify"></v-icon>
       </v-btn>
       <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
+        <v-icon icon="i-mdi:dots-vertical"></v-icon>
       </v-btn>
     </v-toolbar>
     <v-form

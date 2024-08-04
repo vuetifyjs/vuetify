@@ -12,7 +12,7 @@
     <v-col class="text-center mb-8" cols="12">
       <AppBtn
         :href="vendor.moreUrl"
-        append-icon="mdi-open-in-new"
+        append-icon="i-mdi:open-in-new"
         color="primary"
         rel="noopener noreferrer"
         size="large"

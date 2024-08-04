@@ -22,20 +22,20 @@
 
           <template v-slot:append>
             <v-btn
-              icon="mdi-rewind"
+              icon="i-mdi:rewind"
               variant="text"
             ></v-btn>
 
             <v-btn
               :class="{ 'mx-5': display.mdAndUp.value }"
-              icon="mdi-pause"
+              icon="i-mdi:pause"
               variant="text"
             ></v-btn>
 
             <v-btn
               :class="{ 'me-3': display.mdAndUp.value }"
               class="ms-0"
-              icon="mdi-fast-forward"
+              icon="i-mdi:fast-forward"
               variant="text"
             ></v-btn>
           </template>

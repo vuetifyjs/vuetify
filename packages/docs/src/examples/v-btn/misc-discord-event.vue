@@ -12,7 +12,7 @@
         <template v-slot:prepend>
           <v-card-title>
             <v-icon
-              icon="mdi-calendar"
+              icon="i-mdi:calendar"
               start
             ></v-icon>
 
@@ -51,7 +51,7 @@
         <v-card-title class="text-body-2 d-flex align-center">
           <v-icon
             color="#949cf7"
-            icon="mdi-calendar"
+            icon="i-mdi:calendar"
             start
           ></v-icon>
 
@@ -67,7 +67,7 @@
           <v-chip
             class="ms-2 text-medium-emphasis"
             color="grey-darken-4"
-            prepend-icon="mdi-account-multiple"
+            prepend-icon="i-mdi:account-multiple"
             size="small"
             text="81"
             variant="flat"
@@ -88,13 +88,13 @@
       <div class="pa-4 d-flex align-center">
         <v-icon
           color="disabled"
-          icon="mdi-broadcast"
+          icon="i-mdi:broadcast"
           start
         ></v-icon>
 
         <v-icon
           color="#949cf7"
-          icon="mdi-video-vintage"
+          icon="i-mdi:video-vintage"
           size="x-small"
         ></v-icon>
 
@@ -105,14 +105,14 @@
         <v-spacer></v-spacer>
 
         <v-btn
-          icon="mdi-dots-horizontal"
+          icon="i-mdi:dots-horizontal"
           variant="text"
         ></v-btn>
 
         <v-btn
           class="me-2 text-none"
           color="#4f545c"
-          prepend-icon="mdi-export-variant"
+          prepend-icon="i-mdi:export-variant"
           variant="flat"
         >
           Share
@@ -120,7 +120,7 @@
 
         <v-btn
           class="text-none"
-          prepend-icon="mdi-check"
+          prepend-icon="i-mdi:check"
           variant="text"
           border
         >

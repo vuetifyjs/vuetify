@@ -20,8 +20,7 @@
             fab
             @click="prev"
           >
-            <v-icon size="small">
-              mdi-chevron-left
+            <v-icon icon="i-mdi:chevron-left" size="small">
             </v-icon>
           </v-btn>
           <v-btn
@@ -31,8 +30,7 @@
             fab
             @click="next"
           >
-            <v-icon size="small">
-              mdi-chevron-right
+            <v-icon icon="i-mdi:chevron-right" size="small">
             </v-icon>
           </v-btn>
           <v-toolbar-title v-if="calendar">
@@ -48,8 +46,7 @@
                 v-on="on"
               >
                 <span>{{ typeToLabel[type] }}</span>
-                <v-icon end>
-                  mdi-menu-down
+                <v-icon icon="i-mdi:menu-down" end>
                 </v-icon>
               </v-btn>
             </template>
@@ -99,15 +96,15 @@
               dark
             >
               <v-btn icon>
-                <v-icon>mdi-pencil</v-icon>
+                <v-icon icon="i-mdi:pencil"></v-icon>
               </v-btn>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
               <v-btn icon>
-                <v-icon>mdi-heart</v-icon>
+                <v-icon icon="i-mdi:heart"></v-icon>
               </v-btn>
               <v-btn icon>
-                <v-icon>mdi-dots-vertical</v-icon>
+                <v-icon icon="i-mdi:dots-vertical"></v-icon>
               </v-btn>
             </v-toolbar>
             <v-card-text>

@@ -29,7 +29,7 @@
         <v-col cols="12" md="6">
           <v-card
             href="https://bin.vuetifyjs.com"
-            prepend-icon="mdi-delete"
+            prepend-icon="i-mdi:delete"
             target="_blank"
             text="Create a new bin to store your code"
             title="Create a Bin"
