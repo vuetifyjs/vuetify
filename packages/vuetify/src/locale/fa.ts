@@ -99,4 +99,7 @@ export default {
     loadMore: 'بارگذاری بیشتر',
     empty: 'پایان',
   },
+  numberInput: {
+    precisionExceeded: 'Expected up to {0} decimal places',
+  },
 }
