@@ -84,8 +84,12 @@
   .v-data-table-column--last-fixed
     border-right: 1px solid rgba(var(--v-border-color), var(--v-border-opacity))
 
-  .v-data-table.v-table--fixed-header > .v-table__wrapper > table > thead > tr > th.v-data-table-column--fixed
-    z-index: 2
+  .v-data-table.v-table--fixed-header
+    &:not(.v-table--fixed-height) > .v-table__wrapper
+      overflow: visible
+    
+    > .v-table__wrapper > table > thead > tr > th.v-data-table-column--fixed
+      z-index: 2
 
   .v-data-table-group-header-row
     td
