@@ -10,7 +10,15 @@ import { useDate } from '@/composables/date'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
+
+export type VCalendarDaySlots = {
+  default: never
+  interval: {}
+  intervalBody: {}
+  intervalEvent: { height: string, margin: string, eventClass: string, event: any, interval: any }
+  intervalTitle: { interval: any }
+}
 
 export const makeVCalendarDayProps = propsFactory({
   hideDayHeader: Boolean,
@@ -22,16 +30,16 @@ export const makeVCalendarDayProps = propsFactory({
   ...makeVCalendarIntervalProps(),
 }, 'VCalendarDay')
 
-export const VCalendarDay = genericComponent()({
+export const VCalendarDay = genericComponent<VCalendarDaySlots>()({
   name: 'VCalendarDay',
 
   props: makeVCalendarDayProps(),
 
-  setup (props) {
+  setup (props, { attrs, emit, slots }) {
     const adapter = useDate()
     const intervals = computed(() => [
       ...Array.from({ length: props.intervals }, (v, i) => i)
-        .filter((int, index) => (props.intervalDuration * (index + props.intervalStart)) < 1440),
+        .filter((_, index) => (props.intervalDuration * (index + props.intervalStart)) < 1440),
     ])
 
     useRender(() => {
@@ -48,6 +56,7 @@ export const VCalendarDay = genericComponent()({
 
               <div>
                 <VBtn
+                  { ...getPrefixedEventHandlers(attrs, ':intervalDate', () => props.day) }
                   icon
                   text={ adapter.format(props.day.date, 'dayOfMonth') }
                   variant="text"
@@ -56,13 +65,33 @@ export const VCalendarDay = genericComponent()({
             </div>
           )}
 
-          { intervals.value.map((_, index) => (
-            <VCalendarInterval
-              index={ index }
-              { ...calendarIntervalProps }
-            ></VCalendarInterval>
-          ))
-          }
+          { intervals.value.map((_, index) =>
+            slots.interval?.(calendarIntervalProps) ?? (
+              <VCalendarInterval
+                index={ index }
+                { ...calendarIntervalProps }
+                { ...getPrefixedEventHandlers(attrs, ':interval', () => calendarIntervalProps) }
+              >
+                {{
+                  ...(slots.intervalBody ? {
+                    intervalBody: () => (
+                      slots.intervalBody?.({})
+                    ),
+                  } : {}),
+                  ...(slots.intervalEvent ? {
+                    intervalEvent: ({ height, margin, eventClass, event, interval }) => (
+                      slots.intervalEvent?.({ height, margin, eventClass, event, interval })
+                    ),
+                  } : {}),
+                  ...(slots.intervalTitle ? {
+                    intervalTitle: ({ interval }) => (
+                      slots.intervalTitle?.({ interval })
+                    ),
+                  } : {}),
+                }}
+              </VCalendarInterval>
+            )
+          )}
         </div>
       )
     })
