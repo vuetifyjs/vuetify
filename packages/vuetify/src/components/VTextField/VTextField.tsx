@@ -224,7 +224,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                         placeholder={ props.placeholder }
                         size={ 1 }
                         type={ props.type }
-                        onFocus={ onFocus }
+                        onFocus={ focus }
                         onBlur={ blur }
                         { ...slotProps }
                         { ...inputAttrs }
