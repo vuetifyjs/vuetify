@@ -1,7 +1,5 @@
-import type { Plugin } from 'vite'
-import meta from '@mdi/svg/meta.json' with { type: 'json' }
-import * as paths from '@mdi/js'
 import { camelize } from 'vue'
+import type { Plugin } from 'vite'
 
 const virtual = 'virtual:mdi-js-icons'
 const resolvedVirtual = `\0${virtual}`
@@ -15,6 +13,10 @@ export function MdiJs () {
     },
     async load (id) {
       if (id === resolvedVirtual) {
+        const [meta, paths] = await Promise.all([
+          import('@mdi/svg/meta.json', { with: { type: 'json' } }).then(m => m.default),
+          import('@mdi/js'),
+        ])
         const icons = meta.map(icon => ({
           name: icon.name,
           aliases: icon.aliases,
