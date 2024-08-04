@@ -42,7 +42,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
       alias: [
         { find: '@', replacement: `${resolve('src')}/` },
         { find: 'node-fetch', replacement: 'isomorphic-fetch' },
-        { find: /^vue$/, replacement: isSsrBuild ? 'vue' : 'vue/dist/vue.esm-bundler.js' },
+        { find: /^vue$/, replacement: isSsrBuild ? 'vue' : 'vue/dist/vue.runtime.esm-bundler.js' },
         { find: /^pinia$/, replacement: 'pinia/dist/pinia.mjs' },
       ],
     },
