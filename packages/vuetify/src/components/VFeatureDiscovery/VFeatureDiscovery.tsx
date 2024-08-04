@@ -25,7 +25,7 @@ import { ClickOutside } from '@/directives'
 
 // Utilities
 import { computed, mergeProps, onBeforeUnmount, ref, toRef, watch } from 'vue'
-import { genericComponent, getUid, IN_BROWSER, propsFactory, useRender } from '@/util'
+import { genericComponent, getScrollParent, getUid, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
 // TODO: create it inside VFeatureDiscovery
@@ -139,15 +139,16 @@ export const VFeatureDiscovery = genericComponent<OverlaySlots>()({
     const root = ref<HTMLElement>()
     const scrimEl = ref<HTMLElement>()
     const contentEl = ref<HTMLElement>()
+    const wrapEl = ref<HTMLElement>()
     const { contentStyles, updateLocation } = useLocationStrategies(props, {
       isRtl,
-      contentEl,
+      contentEl: wrapEl,
       target,
       isActive,
     })
     useScrollStrategies(props, {
       root,
-      contentEl,
+      contentEl: wrapEl,
       targetEl,
       isActive,
       updateLocation,
@@ -300,6 +301,7 @@ export const VFeatureDiscovery = genericComponent<OverlaySlots>()({
                   }]}
               />
               <div
+                ref={ wrapEl }
                 class={[
                   'v-feature-discovery__wrap',
                   wrapTextColor.textColorClasses.value,
@@ -327,6 +329,7 @@ export const VFeatureDiscovery = genericComponent<OverlaySlots>()({
       activatorEl,
       target,
       contentEl,
+      wrapEl,
       globalTop,
       localTop,
       updateLocation,
