@@ -14,6 +14,7 @@ declare module 'virtual:mdi-js-icons' {
   export interface IconEntry {
     name: string
     aliases: string[]
+    path: string
   }
   export const icons: IconEntry[]
 }

@@ -1,12 +1,12 @@
 import type { Plugin } from 'vite'
+import meta from '@mdi/svg/meta.json' with { type: 'json' }
+import * as paths from '@mdi/js'
+import { camelize } from 'vue'
+
+const virtual = 'virtual:mdi-js-icons'
+const resolvedVirtual = `\0${virtual}`
 
 export function MdiJs () {
-  const virtual = 'virtual:mdi-js-icons'
-  const resolvedVirtual = `\0${virtual}`
-  const iconsPromise = import('@mdi/svg/meta.json', {
-    assert: { type: 'json' },
-  })
-
   return {
     name: 'vuetify:mdi-js-icons',
     enforce: 'pre',
@@ -15,10 +15,11 @@ export function MdiJs () {
     },
     async load (id) {
       if (id === resolvedVirtual) {
-        const icons = await iconsPromise.then(i => i.default.map(i => ({
-          name: i.name,
-          aliases: i.aliases,
-        })))
+        const icons = meta.map(icon => ({
+          name: icon.name,
+          aliases: icon.aliases,
+          path: paths[camelize('mdi-' + icon.name) as keyof typeof paths],
+        }))
         return `export const icons = ${JSON.stringify(icons)}`
       }
 

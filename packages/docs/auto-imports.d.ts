@@ -21,12 +21,12 @@ declare global {
   const createOne: typeof import('@vuetify/one')['createOne']
   const defineStore: typeof import('pinia')['defineStore']
   const disabledLanguagePattern: typeof import('./src/utils/routes')['disabledLanguagePattern']
-  const distance: typeof import('./src/utils/helpers')['distance']
   const eventName: typeof import('./src/utils/helpers')['eventName']
   const genAppMetaInfo: typeof import('./src/utils/metadata')['genAppMetaInfo']
   const genMetaInfo: typeof import('./src/utils/metadata')['genMetaInfo']
   const generatedRoutes: typeof import('./src/utils/routes')['generatedRoutes']
   const getBranch: typeof import('./src/utils/helpers')['getBranch']
+  const getDistance: typeof import('./src/utils/helpers')['getDistance']
   const getMatchMedia: typeof import('./src/utils/helpers')['getMatchMedia']
   const gtagClick: typeof import('./src/utils/analytics')['gtagClick']
   const h: typeof import('vue')['h']
@@ -114,12 +114,12 @@ declare module 'vue' {
     readonly createOne: UnwrapRef<typeof import('@vuetify/one')['createOne']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
     readonly disabledLanguagePattern: UnwrapRef<typeof import('./src/utils/routes')['disabledLanguagePattern']>
-    readonly distance: UnwrapRef<typeof import('./src/utils/helpers')['distance']>
     readonly eventName: UnwrapRef<typeof import('./src/utils/helpers')['eventName']>
     readonly genAppMetaInfo: UnwrapRef<typeof import('./src/utils/metadata')['genAppMetaInfo']>
     readonly genMetaInfo: UnwrapRef<typeof import('./src/utils/metadata')['genMetaInfo']>
     readonly generatedRoutes: UnwrapRef<typeof import('./src/utils/routes')['generatedRoutes']>
     readonly getBranch: UnwrapRef<typeof import('./src/utils/helpers')['getBranch']>
+    readonly getDistance: UnwrapRef<typeof import('./src/utils/helpers')['getDistance']>
     readonly getMatchMedia: UnwrapRef<typeof import('./src/utils/helpers')['getMatchMedia']>
     readonly gtagClick: UnwrapRef<typeof import('./src/utils/analytics')['gtagClick']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
@@ -205,12 +205,12 @@ declare module '@vue/runtime-core' {
     readonly createOne: UnwrapRef<typeof import('@vuetify/one')['createOne']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
     readonly disabledLanguagePattern: UnwrapRef<typeof import('./src/utils/routes')['disabledLanguagePattern']>
-    readonly distance: UnwrapRef<typeof import('./src/utils/helpers')['distance']>
     readonly eventName: UnwrapRef<typeof import('./src/utils/helpers')['eventName']>
     readonly genAppMetaInfo: UnwrapRef<typeof import('./src/utils/metadata')['genAppMetaInfo']>
     readonly genMetaInfo: UnwrapRef<typeof import('./src/utils/metadata')['genMetaInfo']>
     readonly generatedRoutes: UnwrapRef<typeof import('./src/utils/routes')['generatedRoutes']>
     readonly getBranch: UnwrapRef<typeof import('./src/utils/helpers')['getBranch']>
+    readonly getDistance: UnwrapRef<typeof import('./src/utils/helpers')['getDistance']>
     readonly getMatchMedia: UnwrapRef<typeof import('./src/utils/helpers')['getMatchMedia']>
     readonly gtagClick: UnwrapRef<typeof import('./src/utils/analytics')['gtagClick']>
     readonly h: UnwrapRef<typeof import('vue')['h']>

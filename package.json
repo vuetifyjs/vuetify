@@ -34,9 +34,9 @@
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.3",
     "@babel/preset-typescript": "^7.24.7",
-    "@mdi/font": "6.2.95",
-    "@mdi/js": "6.2.95",
-    "@mdi/svg": "6.2.95",
+    "@mdi/font": "7.4.47",
+    "@mdi/js": "7.4.47",
+    "@mdi/svg": "7.4.47",
     "@octokit/core": "^5.2.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
@@ -89,5 +89,10 @@
     "vue-tsc": "^1.8.27",
     "yargs": "^17.7.2"
   },
-  "packageManager": "pnpm@9.6.0"
+  "packageManager": "pnpm@9.6.0",
+  "pnpm": {
+    "patchedDependencies": {
+      "@mdi/js@7.4.47": "patches/@mdi__js@7.4.47.patch"
+    }
+  }
 }
