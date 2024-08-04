@@ -21,9 +21,10 @@
   },
   "dependencies": {
     "@cosmicjs/sdk": "^1.0.11",
+    "@vue/compiler-dom": "^3.4.27",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
-    "@vuetify/one": "^1.9.1",
+    "@vuetify/one": "^1.9.2",
     "algoliasearch": "^4.23.3",
     "fflate": "^0.8.2",
     "isomorphic-fetch": "^3.0.0",
@@ -74,13 +75,13 @@
     "markdownlint-cli": "^0.39.0",
     "unplugin-auto-import": "0.17.5",
     "unplugin-fonts": "1.0.3",
-    "unplugin-vue-components": "^0.26.0",
+    "unplugin-vue-components": "^0.27.3",
     "vite": "5.4.0-beta.1",
     "vite-plugin-md": "^0.21.5",
     "vite-plugin-pages": "^0.32.1",
     "vite-plugin-pwa": "^0.17.4",
     "vite-plugin-vue-layouts": "^0.11.0",
-    "vite-plugin-vuetify": "^2.0.3",
+    "vite-plugin-vuetify": "^2.0.4",
     "vue-tsc": "^1.8.27"
   },
   "publishConfig": {

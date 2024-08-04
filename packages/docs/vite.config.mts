@@ -129,7 +129,9 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
       // https://github.com/antfu/unplugin-vue-components
       Components({
         directoryAsNamespace: true,
-        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+        include: [/\.vue$/, /\.vue\?vue/, /\.md$/, /\.md\?vue/],
+        exclude: [],
+        excludeNames: ['AppMarkdown'],
       }),
 
       // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
@@ -261,7 +263,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
       }),
 
       Vuetify({
-        autoImport: false,
+        autoImport: { labs: true },
         styles: command === 'serve' || mode === 'development' ? 'sass' : true,
       }),
 

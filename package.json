@@ -92,7 +92,8 @@
   "packageManager": "pnpm@9.6.0",
   "pnpm": {
     "patchedDependencies": {
-      "@mdi/js@7.4.47": "patches/@mdi__js@7.4.47.patch"
+      "@mdi/js@7.4.47": "patches/@mdi__js@7.4.47.patch",
+      "unplugin-vue-components@0.27.3": "patches/unplugin-vue-components@0.27.3.patch"
     }
   }
 }
