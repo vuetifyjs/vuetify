@@ -50,7 +50,13 @@ export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'hre
 }
 
 export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['attrs']): UseLink {
-  const RouterLink = resolveDynamicComponent('RouterLink') as typeof _RouterLink | string
+  // NuxtLink component name can be changed in nuxt config file, but we cannot access to that name
+  // NuxtLink is not registered globally, and so we cannot use resolveDynamicComponent, the user
+  // must register it globally (vuetify-nuxt-module will add an option to enable global registration)
+  let RouterLink = resolveDynamicComponent('NuxtLink') as typeof _RouterLink | string
+  if (typeof RouterLink === 'string' || !('useLink' in RouterLink)) {
+    RouterLink = resolveDynamicComponent('RouterLink') as typeof _RouterLink | string
+  }
 
   const isLink = computed(() => !!(props.href || props.to))
   const isClickable = computed(() => {
