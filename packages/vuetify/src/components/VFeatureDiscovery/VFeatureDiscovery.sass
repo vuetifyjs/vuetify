@@ -6,39 +6,86 @@
 @include tools.layer('components')
   // Element
   .v-feature-discovery
-    > .v-overlay__content
-      color: $feature-discovery-text-color
-      border-radius: 50%
-      font-size: $feature-discovery-font-size
-      line-height: $feature-discovery-line-height
+    display: block
+    vertical-align: middle
+    position: relative
+
+    &--inline
       display: inline-block
-      padding: $feature-discovery-padding
-      text-transform: initial
-      width: auto
-      opacity: 1
-      pointer-events: none
-      transition-property: opacity, transform
-      overflow-wrap: $feature-discovery-overflow-wrap
 
-      &[class*="enter-active"]
-        transition-timing-function: settings.$decelerated-easing
-        transition-duration: $feature-discovery-transition-enter-duration
+    &__content
+      position: absolute !important
+      top: 50%
+      left: 50%
+      height: 0
+      width: 0
+      display: inline-block !important
+      border-radius: 100%
 
-      &[class*="leave-active"]
-        transition-timing-function: settings.$accelerated-easing
-        transition-duration: $feature-discovery-transition-leave-duration
+      &--active
+        display: inline-block
 
-      overflow: hidden
-
-      > .v-feature-discovery__highlight
-        box-shadow: 0 0 0 9999px $feature-discovery-background-color
+      &:not(&--no-ripple) .v-feature-discovery__highlight:before
+        content: ''
         position: absolute
-        top: calc(50% - 44px)
-        left: calc(50% - 44px)
-        width: 88px
-        height: 88px
-        border-radius: 50%
+        height: 100%
+        width: 100%
+        background-color: inherit
+        border-radius: inherit
+        transition: $feature-discovery-transition
+        animation: pulse-animation 1.4s cubic-bezier(0.24, 0, 0.38, 1) infinite
+        pointer-events: none
+        z-index: 10
 
-      > .v-feature-discovery__content
-        width: 250px
-        height: 250px
+      &--fixed
+        position: fixed
+
+    &__backdrop, &__highlight
+      position: absolute
+      border-radius: 100%
+      transform: scale(0)
+      transition: $feature-discovery-transition
+
+    &__backdrop
+      opacity: 0
+      +tools.elevation(4)
+
+    &__highlight
+      background: white
+
+    &__wrap
+      position: absolute
+      transition: $feature-discovery-wrap-transition
+      opacity: 0
+
+  // Modifier
+  .v-feature-discovery__content
+    &--active
+      .v-feature-discovery__backdrop
+        opacity: 0.96
+
+      .v-feature-discovery__backdrop, .v-feature-discovery__highlight
+        transform: scale(1)
+
+      .v-feature-discovery__wrap
+        opacity: 1
+
+    &:not(&--active)
+      pointer-events: none
+
+    &--flat
+      .v-feature-discovery__backdrop
+        +tools.elevation(0)
+
+  // Animations
+  @keyframes pulse-animation
+    from
+      opacity: 1
+      transform: scale(1)
+
+    20%
+      opacity: 1
+
+    to
+      opacity: 0
+      transform: scale(1.5)

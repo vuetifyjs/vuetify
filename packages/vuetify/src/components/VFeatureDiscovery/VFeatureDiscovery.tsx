@@ -9,6 +9,7 @@ import { makeActivatorProps, useActivator } from '@/components/VOverlay/useActiv
 
 // Composables
 import { useRtl } from '@/composables'
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { useHydration } from '@/composables/hydration'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
@@ -33,6 +34,19 @@ import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 export const makeVFeatureDiscoveryProps = propsFactory({
   id: String,
   text: String,
+  color: {
+    type: String,
+    default: 'primary',
+  },
+  // TODO: calculate "textColor" based on "color"
+  textColor: {
+    type: String,
+    default: 'white',
+  },
+  highlightColor: {
+    type: String,
+    default: 'white',
+  },
   closeOnBack: {
     type: Boolean,
     default: true,
@@ -68,7 +82,10 @@ export const makeVFeatureDiscoveryProps = propsFactory({
   ...makeActivatorProps(),
   ...makeComponentProps(),
   ...makeLazyProps(),
-  ...makeLocationStrategyProps(),
+  ...makeLocationStrategyProps({
+    location: 'center' as const,
+    locationStrategy: 'featureDiscovery' as const,
+  }),
   ...makeScrollStrategyProps(),
   ...makeThemeProps(),
 }, 'VFeatureDiscovery')
@@ -101,6 +118,13 @@ export const VFeatureDiscovery = genericComponent<OverlaySlots>()({
     const { themeClasses } = provideTheme(props)
     const { rtlClasses, isRtl } = useRtl()
     const { hasContent, onAfterLeave: _onAfterLeave } = useLazy(props, isActive)
+    const backdropColor = useBackgroundColor(computed(() => {
+      return typeof props.color === 'string' ? props.color : null
+    }))
+    const wrapTextColor = useTextColor(toRef(props, 'textColor'))
+    const highlightColor = useBackgroundColor(computed(() => {
+      return typeof props.highlightColor === 'string' ? props.highlightColor : null
+    }))
     const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'), props._disableGlobalStack)
     const {
       activatorEl, activatorRef,
@@ -231,17 +255,68 @@ export const VFeatureDiscovery = genericComponent<OverlaySlots>()({
                   // 'v-feature-discovery__content--fixed': this.activatorFixed,
                   'v-feature-discovery__content--flat': isFlat.value,
                   'v-feature-discovery__content--active': isActive.value,
+                  // 'v-feature-discovery__content--no-ripple': this.noRipple,
                 },
                 props.contentClass,
               ]}
               style={[
                 // dimensionStyles.value,
                 contentStyles.value,
+                {
+                  zIndex: 'var(--v-feature-discovery-content-z-index)',
+                },
               ]}
               { ...contentEvents.value }
               { ...props.contentProps }
             >
-              { slots.default?.({ isActive }) ?? props.text }
+              <div
+                class={[
+                  'v-feature-discovery__backdrop',
+                  backdropColor.backgroundColorClasses.value,
+                ]}
+                style={[
+                  backdropColor.backgroundColorStyles.value,
+                  {
+                    top: 'var(--v-feature-discovery-backdrop-top)',
+                    left: 'var(--v-feature-discovery-backdrop-left)',
+                    height: 'var(--v-feature-discovery-backdrop-height)',
+                    width: 'var(--v-feature-discovery-backdrop-width)',
+                    transformOrigin: 'var(--v-feature-discovery-backdrop-transformOrigin)',
+                  },
+                ]}
+              />
+              <div
+                class={[
+                  'v-feature-discovery__highlight',
+                  highlightColor.backgroundColorClasses.value,
+                ]}
+                style={[
+                  highlightColor.backgroundColorStyles.value,
+                  {
+                    top: 'var(--v-feature-discovery-highlight-top)',
+                    left: 'var(--v-feature-discovery-highlight-left)',
+                    height: 'var(--v-feature-discovery-highlight-height)',
+                    width: 'var(--v-feature-discovery-highlight-width)',
+                  }]}
+              />
+              <div
+                class={[
+                  'v-feature-discovery__wrap',
+                  wrapTextColor.textColorClasses.value,
+                ]}
+                style={[
+                  wrapTextColor.textColorStyles.value,
+                  {
+                    top: 'var(--v-feature-discovery-wrap-top)',
+                    left: 'var(--v-feature-discovery-wrap-left)',
+                    height: 'var(--v-feature-discovery-wrap-height)',
+                    width: 'var(--v-feature-discovery-wrap-width)',
+                    padding: 'var(--v-feature-discovery-wrap-padding)',
+                  },
+                ]}
+              >
+                { slots.default?.({ isActive }) ?? props.text }
+              </div>
             </div>
           )}
         </div>
