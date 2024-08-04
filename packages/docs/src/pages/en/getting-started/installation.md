@@ -267,24 +267,24 @@ app.use(vuetify).mount('#app')
 
 You can use Vuetify's components in your Vitepress static site.
 
-First, add vuetify to your dependencies
+After initializing your Vitepress project, add Vuetify to your dependencies
 
 ::: tabs
 
 ```bash [pnpm]
-pnpm create vuetify
+pnpm i vuetify
 ```
 
 ```bash [yarn]
-yarn create vuetify
+yarn add vuetify
 ```
 
 ```bash [npm]
-npm create vuetify@latest
+npm i vuetify
 ```
 
 ```bash [bun]
-bun create vuetify
+bun add vuetify
 ```
 
 :::
