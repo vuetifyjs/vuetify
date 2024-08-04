@@ -344,6 +344,8 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
       include: [
         'vue',
         'vue-router',
+        'vue-instantsearch/vue3/es/src/instantsearch.js',
+        'algoliasearch',
       ],
     },
 

@@ -326,6 +326,9 @@ importers:
       ajv:
         specifier: ^8.12.0
         version: 8.12.0
+      algoliasearch-helper:
+        specifier: ^3.22.3
+        version: 3.22.3(algoliasearch@4.23.3)
       async-es:
         specifier: ^3.2.5
         version: 3.2.5
@@ -3103,6 +3106,11 @@ packages:
 
   algoliasearch-helper@3.19.0:
     resolution: {integrity: sha512-AaSb5DZDMZmDQyIy6lf4aL0OZGgyIdqvLIIvSuVQOIOqfhrYSY7TvotIFI2x0Q3cP3xUpTd7lI1astUC4aXBJw==}
+    peerDependencies:
+      algoliasearch: '>= 3.1 < 6'
+
+  algoliasearch-helper@3.22.3:
+    resolution: {integrity: sha512-2eoEz8mG4KHE+DzfrBTrCmDPxVXv7aZZWPojAJFtARpxxMO6lkos1dJ+XDCXdPvq7q3tpYWRi6xXmVQikejtpA==}
     peerDependencies:
       algoliasearch: '>= 3.1 < 6'
 
@@ -11812,6 +11820,11 @@ snapshots:
       uri-js: 4.2.2
 
   algoliasearch-helper@3.19.0(algoliasearch@4.23.3):
+    dependencies:
+      '@algolia/events': 4.0.1
+      algoliasearch: 4.23.3
+
+  algoliasearch-helper@3.22.3(algoliasearch@4.23.3):
     dependencies:
       '@algolia/events': 4.0.1
       algoliasearch: 4.23.3

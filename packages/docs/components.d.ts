@@ -57,6 +57,7 @@ declare module 'vue' {
     AppMarkup: typeof import('./src/components/app/Markup.vue')['default']
     AppMenuMenu: typeof import('./src/components/app/menu/Menu.vue')['default']
     AppSearchSearch: typeof import('./src/components/app/search/Search.vue')['default']
+    AppSearchSearchDialog: typeof import('./src/components/app/search/SearchDialog.vue')['default']
     AppSearchSearchRecent: typeof import('./src/components/app/search/SearchRecent.vue')['default']
     AppSearchSearchResults: typeof import('./src/components/app/search/SearchResults.vue')['default']
     AppSettingsAdvancedOptions: typeof import('./src/components/app/settings/AdvancedOptions.vue')['default']
