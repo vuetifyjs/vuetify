@@ -47,7 +47,14 @@ export const VDateInput = genericComponent()({
     const { t } = useLocale()
     const adapter = useDate()
     const { isFocused, focus, blur } = useFocus(props)
-    const model = useProxiedModel(props, 'modelValue', props.multiple ? [] : null)
+    const model = useProxiedModel(
+      props,
+      'modelValue',
+      props.multiple ? [] : null,
+      val => Array.isArray(val) ? val.map(item => adapter.toJsDate(item)) : val ? adapter.toJsDate(val) : null,
+      val => Array.isArray(val) ? val.map(item => adapter.date(item)) : val ? adapter.date(val) : null
+    )
+
     const menu = shallowRef(false)
 
     const display = computed(() => {
@@ -84,7 +91,7 @@ export const VDateInput = genericComponent()({
 
       const target = e.target as HTMLInputElement
 
-      model.value = adapter.date(target.value)
+      model.value = adapter.toJsDate(target.value)
     }
 
     function onClick (e: MouseEvent) {
