@@ -288,6 +288,25 @@ describe('helpers', () => {
     it('should use arrayFn function if provided', () => {
       expect(mergeDeep({ a: ['foo'] }, { a: ['bar'] }, (a, b) => [...a, ...b])).toEqual({ a: ['foo', 'bar'] })
     })
+
+    it('should not recursively merge Nodes', () => {
+      const nodeSource = document.createElement('div')
+      const nodeTarget = document.createElement('span')
+
+      expect(mergeDeep({ a: nodeSource }, { a: nodeTarget }).a).toBe(nodeTarget)
+    })
+
+    it('should recursively merge with circular references', () => {
+      const source = { a: {}, b: {} }
+      source.a = source.b = source
+      const target = { b: {}, c: {} }
+      target.b = target.c = target
+      const result = mergeDeep(source, target)
+
+      expect(result.a).toBe(source)
+      expect(result.b).toBe(result)
+      expect(result.c).toBe(target)
+    })
   })
 
   describe('destructComputed', () => {
