@@ -60,6 +60,7 @@ declare global {
 
   interface MouseEvent {
     sourceCapabilities?: { firesTouchEvents: boolean }
+    shadowTarget?: EventTarget | null
   }
 
   interface ColorSelectionOptions {
