@@ -233,9 +233,8 @@
 
   // VCard
   .v-btn
-    ~ .v-btn:not(.v-btn-toggle .v-btn)
-      .v-card-actions &
-        margin-inline-start: $button-card-actions-margin
+    .v-card-actions > &
+      margin-inline-start: $button-card-actions-margin
 
   // VPagination
   .v-btn
