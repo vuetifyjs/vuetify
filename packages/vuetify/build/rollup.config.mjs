@@ -165,10 +165,10 @@ export default [
           this.emitFile({
             type: 'asset',
             fileName: '_component-variables.sass',
+            // Normalize Windows Paths
             source: variables.map(id => {
               return `@forward '` + path.join(
                 '../lib',
-                // Normalize Windows Paths
                 path.relative(srcDir, id),
                 '../_variables.scss'
               ) + `'`
@@ -285,10 +285,10 @@ export default [
           this.emitFile({
             type: 'asset',
             fileName: '_component-variables-labs.sass',
+            // Normalize Windows Paths
             source: variables.map(id => {
               return `@forward '` + path.join(
                 '../lib',
-                // Normalize Windows Paths
                 path.relative(srcDir, id),
                 '../_variables.scss'
               ) + `'`
