@@ -108,10 +108,10 @@
           min-height: $expansion-panel-active-title-min-height
 
   .v-expansion-panel__shadow
-    @include tools.absolute()
-    @include tools.elevation(2)
     border-radius: inherit
     z-index: -1
+    @include tools.absolute()
+    @include tools.elevation(2)
 
   .v-expansion-panel-title
     align-items: center
@@ -134,10 +134,10 @@
       @include tools.active-states('.v-expansion-panel-title__overlay')
 
   .v-expansion-panel-title__overlay
-    @include tools.absolute()
     background-color: currentColor
     border-radius: inherit
     opacity: 0
+    @include tools.absolute()
 
   .v-expansion-panel-title__icon
     display: inline-flex

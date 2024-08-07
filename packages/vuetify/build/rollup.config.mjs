@@ -3,7 +3,7 @@ import { mkdirp } from 'mkdirp'
 import { writeFile } from 'fs/promises'
 import { fileURLToPath } from 'url'
 
-import packageJson from '../package.json' assert { type: 'json' }
+import packageJson from '../package.json' with { type: 'json' }
 
 import alias from '@rollup/plugin-alias'
 import sass from 'rollup-plugin-sass'
@@ -26,6 +26,10 @@ const banner = `/*!
 function fixWindowsPath(path) {
   return path.replace(/^[^:]+:\\/, '\\').replaceAll('\\', '/')
 }
+
+const srcDir = fixWindowsPath(fileURLToPath(new URL('../src', import.meta.url)));
+const libDir = fixWindowsPath(fileURLToPath(new URL('../lib', import.meta.url)));
+const labsDir = fixWindowsPath(fileURLToPath(new URL('../src/labs', import.meta.url)));
 
 export default [
   {
@@ -85,11 +89,9 @@ export default [
           })
 
           // Individual CSS files
-          for (const { id, content } of styleNodes) {
-            const out = path.parse(fixWindowsPath(id).replace(
-              fileURLToPath(new URL('../src', import.meta.url)),
-              fileURLToPath(new URL('../lib', import.meta.url))
-            ))
+          for (const {id, content} of styleNodes) {
+            const relativePath = path.relative(srcDir, fixWindowsPath(id))
+            const out = path.parse(path.join(libDir, relativePath))
             mkdirp(out.dir).then(() => {
               writeFile(path.join(out.dir, out.name + '.css'), content, 'utf8')
             })
@@ -222,12 +224,13 @@ export default [
           })
 
           // Individual CSS files
-          styleNodes = styleNodes.filter(node => node.id.includes('src/labs'))
+          styleNodes = styleNodes.filter(node => {
+              return fixWindowsPath(node.id).startsWith(labsDir)
+            }
+          );
           for (const { id, content } of styleNodes) {
-            const out = path.parse(fixWindowsPath(id).replace(
-              fileURLToPath(new URL('../src', import.meta.url)),
-              fileURLToPath(new URL('../lib', import.meta.url))
-            ))
+            const relativePath = path.relative(srcDir, fixWindowsPath(id))
+            const out = path.parse(path.join(libDir, relativePath))
             mkdirp(out.dir).then(() => {
               writeFile(path.join(out.dir, out.name + '.css'), content, 'utf8')
             })

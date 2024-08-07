@@ -1,4 +1,3 @@
-// StylesthisValue
 // Styles
 import './VTimePickerClock.sass'
 

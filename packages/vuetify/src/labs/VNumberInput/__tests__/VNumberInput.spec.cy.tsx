@@ -8,6 +8,40 @@ import { VForm } from '@/components/VForm'
 import { ref } from 'vue'
 
 describe('VNumberInput', () => {
+  it('should prevent NaN from arbitrary input', () => {
+    const scenarios = [
+      { typing: '---', expected: '-' }, // "-" is only allowed once
+      { typing: '1-', expected: '1' }, // "-" is only at the start
+      { typing: '.', expected: '.' }, // "." is allowed at the start
+      { typing: '..', expected: '.' }, // "." is only allowed once
+      { typing: '1...0', expected: '1.0' }, // "." is only allowed once
+      { typing: '123.45.67', expected: '123.4567' }, // "." is only allowed once
+      { typing: 'ab-c8+.iop9', expected: '-8.9' }, // Only numbers, "-", "." are allowed to type in
+    ]
+    scenarios.forEach(({ typing, expected }) => {
+      cy.mount(() => <VNumberInput />)
+        .get('.v-number-input input').focus().realType(typing)
+        .get('.v-number-input input').should('have.value', expected)
+    })
+  })
+
+  it('should reset v-model to null when click:clear is triggered', () => {
+    const model = ref(5)
+
+    cy.mount(() => (
+        <>
+          <VNumberInput
+            clearable
+            v-model={ model.value }
+            readonly
+          />
+        </>
+    ))
+      .get('.v-field__clearable .v-icon--clickable').click()
+      .then(() => {
+        expect(model.value).equal(null)
+      })
+  })
   describe('readonly', () => {
     it('should prevent mutation when readonly applied', () => {
       const value = ref(1)
@@ -98,7 +132,7 @@ describe('VNumberInput', () => {
             class="disabled-input-2"
             v-model={ value4.value }
             min={ 0 }
-  max={ 10 }
+            max={ 10 }
             disabled
           />
         </>

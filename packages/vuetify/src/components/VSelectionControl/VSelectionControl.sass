@@ -74,11 +74,11 @@
       opacity: 0
 
     &::before
-      @include tools.absolute(true)
       border-radius: 100%
       background-color: currentColor
       opacity: 0
       pointer-events: none
+      @include tools.absolute(true)
 
     &:hover::before
       opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))

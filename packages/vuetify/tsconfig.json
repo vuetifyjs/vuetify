@@ -19,6 +19,6 @@
       ]
     },
     "stripInternal": true,
-    "skipLibCheck": true,
+    "skipLibCheck": false,
   }
 }
