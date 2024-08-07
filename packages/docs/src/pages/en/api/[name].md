@@ -20,4 +20,3 @@ meta:
 <ApiSearch />
 
 <ApiView @update:name="name = $event" />
-

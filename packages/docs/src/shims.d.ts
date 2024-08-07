@@ -25,16 +25,16 @@ declare module 'virtual:api-list' {
 }
 
 declare module 'markdown-it-header-sections' {
-  import type MarkdownIt from 'markdown-it'
+  import type { PluginSimple } from 'markdown-it'
 
-  const MarkdownItHeaderSections: MarkdownIt.PluginSimple
+  const MarkdownItHeaderSections: PluginSimple
   export default MarkdownItHeaderSections
 }
 
 declare module 'markdown-it-attrs' {
-  import type MarkdownIt from 'markdown-it'
+  import type { PluginWithOptions } from 'markdown-it'
 
-  const MarkdownItAttrs: MarkdownIt.PluginWithOptions<{
+  const MarkdownItAttrs: PluginWithOptions<{
     leftDelimiter?: string
     rightDelimiter?: string
     allowedAttributes?: string[]
@@ -43,14 +43,14 @@ declare module 'markdown-it-attrs' {
 }
 
 declare module 'markdown-it-link-attributes' {
-  import type MarkdownIt from 'markdown-it'
+  import type { PluginWithOptions } from 'markdown-it'
 
   interface Config {
     pattern?: string
     attrs: Record<string, string>
   }
 
-  const MarkdownItLinkAttributes: MarkdownIt.PluginWithOptions<Config | Config[]>
+  const MarkdownItLinkAttributes: PluginWithOptions<Config | Config[]>
   export default MarkdownItLinkAttributes
 }
 
@@ -63,21 +63,6 @@ declare module 'virtual:examples' {
     component: Component
     source: string
   }>
-}
-
-declare module '@emailjs/browser' {
-  interface emailjs {
-    sendForm (
-      service_id: string,
-      template_id: string,
-      el: HTMLFormElement,
-      public_key: string
-    ): Promise<EmailJSResponseStatus>
-  }
-
-  const client: emailjs
-
-  export default client
 }
 
 declare module 'vue-instantsearch/vue3/es/src/instantsearch.js'

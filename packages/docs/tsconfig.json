@@ -29,6 +29,12 @@
     ],
     "outDir": "./dist"
   },
-  "include": ["build", "../api-generator/src/shims.d.ts"],
+  "include": [
+    "build",
+    "src",
+    "./auto-imports.d.ts",
+    "./components.d.ts",
+    "../api-generator/src/shims.d.ts"
+  ],
   "exclude": ["dist", "node_modules"],
 }

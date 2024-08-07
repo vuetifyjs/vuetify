@@ -48,7 +48,7 @@
   const { t, locale } = useI18n()
   const user = useUserStore()
   const name = ref()
-  const sections = ['props', 'slots', 'events', 'functions']
+  const sections = ['props', 'slots', 'events', 'exposed'] as const
 
   const components = computed(() => {
     if (props.components) return props.components.split(/, ?/)

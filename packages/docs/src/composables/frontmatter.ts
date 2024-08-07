@@ -2,6 +2,8 @@ type Frontmatter = {
   meta: {
     nav?: string
     title: string
+    description?: string
+    keywords?: string[]
   }
   assets?: string[]
   backmatter?: boolean

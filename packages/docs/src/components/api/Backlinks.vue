@@ -20,11 +20,11 @@
   const router = useRouter()
 
   const links = computed(() => {
-    return Object.keys(pageToApi)
+    return (Object.keys(pageToApi) as (keyof typeof pageToApi)[])
       .filter(page => pageToApi[page].includes(props.name))
       .map(page => {
         const resolved = router.resolve('/' + route.meta.locale + '/' + page)
-        const name = resolved.meta.nav ?? page.split('/').at(-1)
+        const name = (resolved.meta.nav ?? page.split('/').at(-1)) as string
         return {
           name,
           href: resolved.href,

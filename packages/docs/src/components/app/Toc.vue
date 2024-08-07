@@ -11,7 +11,7 @@
   >
     <template #prepend>
       <AppHeadline
-        v-if="frontmatter?.toc.length"
+        v-if="frontmatter?.toc?.length"
         class="mt-4 mb-2 ms-4"
         path="contents"
       />
