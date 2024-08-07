@@ -81,7 +81,7 @@ export const VAvatar = genericComponent()({
             defaults={{
               VImg: {
                 cover: true,
-                image: props.image,
+                src: props.image,
               },
               VIcon: {
                 icon: props.icon,

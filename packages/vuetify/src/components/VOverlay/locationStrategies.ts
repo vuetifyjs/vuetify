@@ -37,7 +37,7 @@ type LocationStrategyFn = (
   data: LocationStrategyData,
   props: StrategyProps,
   contentStyles: Ref<Record<string, string>>
-) => undefined | { updateLocation: (e: Event) => void }
+) => undefined | { updateLocation: (e?: Event) => void }
 
 const locationStrategies = {
   static: staticLocationStrategy, // specific viewport position, usually centered

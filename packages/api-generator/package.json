@@ -1,12 +1,12 @@
 {
   "name": "@vuetify/api-generator",
-  "version": "3.6.10",
+  "version": "3.6.14",
   "private": true,
   "description": "",
   "scripts": {
     "build": "node --import tsx --no-warnings src/index.ts",
     "lint": "eslint --ext .ts,.json src -f codeframe --max-warnings 0",
-    "lint:fix": "yarn lint --fix"
+    "lint:fix": "pnpm run lint --fix"
   },
   "author": "",
   "license": "ISC",
@@ -17,9 +17,12 @@
     "ts-morph": "^22.0.0",
     "tsx": "^4.7.2",
     "vue": "^3.4.27",
-    "vuetify": "^3.6.10"
+    "vuetify": "workspace:*"
   },
   "devDependencies": {
-    "@types/stringify-object": "^4.0.5"
+    "@types/stringify-object": "^4.0.5",
+    "eslint": "^8.57.0",
+    "lodash-es": "^4.17.21",
+    "stringify-object": "^5.0.0"
   }
 }

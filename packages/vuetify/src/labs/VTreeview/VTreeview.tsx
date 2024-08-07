@@ -167,9 +167,7 @@ export const VTreeview = genericComponent<new <T>(
       )
     })
 
-    return {
-      open,
-    }
+    return { }
   },
 })
 
