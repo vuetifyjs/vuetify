@@ -4,6 +4,7 @@
     "dotSize": "Changes the size of the selection dot on the canvas.",
     "flat": "Removes elevation.",
     "hideCanvas": "Hides canvas.",
+    "hideEyeDropper": "Hides EyeDropper.",
     "hideSliders": "Hides sliders.",
     "hideInputs": "Hides inputs.",
     "hideModeSwitch": "Hides mode switch.",
