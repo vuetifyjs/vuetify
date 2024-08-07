@@ -29,7 +29,6 @@
         <ApiSection
           :name="name"
           :section="section"
-          show-headline
         />
       </template>
     </div>

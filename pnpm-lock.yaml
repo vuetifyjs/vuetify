@@ -293,6 +293,12 @@ importers:
         specifier: workspace:*
         version: link:../vuetify
     devDependencies:
+      '@babel/generator':
+        specifier: ^7.25.0
+        version: 7.25.0
+      '@babel/types':
+        specifier: ^7.25.2
+        version: 7.25.2
       '@emailjs/browser':
         specifier: ^4.3.3
         version: 4.3.3
@@ -305,6 +311,9 @@ importers:
       '@mdi/svg':
         specifier: 7.4.47
         version: 7.4.47
+      '@types/babel__generator':
+        specifier: ^7.6.8
+        version: 7.6.8
       '@types/lodash-es':
         specifier: ^4.17.12
         version: 4.17.12
@@ -2665,6 +2674,9 @@ packages:
 
   '@types/babel__generator@7.6.1':
     resolution: {integrity: sha512-bBKm+2VPJcMRVwNhxKu8W+5/zT7pwNEqeokFOmbvVSqGzFneNxYcEBro9Ac7/N9tlsaPYnZLK8J1LWKkMsLAew==}
+
+  '@types/babel__generator@7.6.8':
+    resolution: {integrity: sha512-ASsj+tpEDsEiFr1arWrlN6V3mdfjRMZt6LtK/Vp/kreFLnr5QH5+DhvD5nINYZXzwJvXeGq+05iUXcAzVrqWtw==}
 
   '@types/babel__template@7.0.2':
     resolution: {integrity: sha512-/K6zCpeW7Imzgab2bLkLEbz0+1JlFSrUMdw7KoIIu+IUdu51GWaBZpd3y1VXGVXzynvGa4DaIaxNZHiON3GXUg==}
@@ -11240,6 +11252,10 @@ snapshots:
       '@types/babel__traverse': 7.0.15
 
   '@types/babel__generator@7.6.1':
+    dependencies:
+      '@babel/types': 7.25.2
+
+  '@types/babel__generator@7.6.8':
     dependencies:
       '@babel/types': 7.25.2
 

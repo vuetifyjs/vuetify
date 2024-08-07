@@ -86,6 +86,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
     plugins: [
       // https://github.com/unplugin/unplugin-auto-import
       AutoImport({
+        include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
         dirs: [
           './src/composables/**',
           './src/stores/**',
@@ -158,7 +159,6 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         extensions: ['vue', 'md'],
         dirs: [
           { dir: 'src/pages', baseRoute: '' },
-          { dir: 'node_modules/.cache/api-pages', baseRoute: '' },
         ],
         extendRoute (route) {
           let [locale, category, ...rest] = route.path.split('/').slice(1)

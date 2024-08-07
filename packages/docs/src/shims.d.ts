@@ -19,6 +19,11 @@ declare module 'virtual:mdi-js-icons' {
   export const icons: IconEntry[]
 }
 
+declare module 'virtual:api-list' {
+  const list: string[]
+  export default list
+}
+
 declare module 'markdown-it-header-sections' {
   import type MarkdownIt from 'markdown-it'
 

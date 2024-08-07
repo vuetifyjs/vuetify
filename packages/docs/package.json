@@ -42,10 +42,13 @@
     "vuetify": "workspace:*"
   },
   "devDependencies": {
+    "@babel/generator": "^7.25.0",
+    "@babel/types": "^7.25.2",
     "@emailjs/browser": "^4.3.3",
     "@intlify/unplugin-vue-i18n": "^4.0.0",
     "@mdi/js": "7.4.47",
     "@mdi/svg": "7.4.47",
+    "@types/babel__generator": "^7.6.8",
     "@types/lodash-es": "^4.17.12",
     "@types/markdown-it": "^14.0.0",
     "@types/markdown-it-container": "^2.0.10",
