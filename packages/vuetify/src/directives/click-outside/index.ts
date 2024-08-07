@@ -8,6 +8,7 @@ interface ClickOutsideBindingArgs {
   handler: (e: MouseEvent) => void
   closeConditional?: (e: Event) => boolean
   include?: () => HTMLElement[]
+  ignore?: (e: MouseEvent) => boolean | string
 }
 
 interface ClickOutsideDirectiveBinding extends DirectiveBinding {
@@ -46,7 +47,22 @@ function checkEvent (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirect
   // Toggleable can return true if it wants to deactivate.
   // Note that, because we're in the capture phase, this callback will occur before
   // the bubbling click event on any outside elements.
-  return !elements.some(el => el?.contains(e.target as Node))
+  const value = !elements.some(el => el?.contains(e.target as Node))
+
+  // Check if the clicked element should be ignored.
+  // Ignore function must return true to ignore the element
+  // Ignore can also be a string selector. If clicked the element or any of its children will be ignored.
+  if (value && (typeof binding.value === 'object' && binding.value.ignore)) {
+    // function
+    if (typeof binding.value.ignore === 'function') {
+      return !(binding.value.ignore as Function)(e)
+    }
+
+    // string selector
+    return (e.target as HTMLElement).closest(binding.value.ignore as string) === null
+  }
+
+  return value
 }
 
 function checkIsActive (e: MouseEvent, binding: ClickOutsideDirectiveBinding): boolean | void {
