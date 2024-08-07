@@ -54,6 +54,7 @@
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/compiler-sfc": "^3.4.27",
     "@vuetify/api-generator": "workspace:*",
+    "@yankeeinlondon/builder-api": "^1.4.1",
     "ajv": "^8.12.0",
     "algoliasearch-helper": "^3.22.3",
     "async-es": "^3.2.5",

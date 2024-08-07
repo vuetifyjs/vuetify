@@ -29,6 +29,6 @@
     ],
     "outDir": "./dist"
   },
-  "include": ["../api-generator/src/shims.d.ts"],
+  "include": ["build", "../api-generator/src/shims.d.ts"],
   "exclude": ["dist", "node_modules"],
 }

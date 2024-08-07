@@ -27,7 +27,7 @@
     "vue-ecosystem-ci:test": "pnpm --filter vuetify run lint && pnpm --filter vuetify run test"
   },
   "engines": {
-    "node": ">=18.20.0 || >=20.10.0"
+    "node": ">=22.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.8",
@@ -79,7 +79,7 @@
     "semver": "^7.6.0",
     "shelljs": "^0.8.5",
     "stringify-object": "^5.0.0",
-    "typescript": "~5.3.3",
+    "typescript": "~5.5.4",
     "upath": "^2.0.1",
     "vite-plugin-inspect": "^0.8.3",
     "vite-plugin-warmup": "^0.1.0",
