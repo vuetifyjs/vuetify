@@ -188,3 +188,19 @@ export function useFilter <T extends InternalItem> (
 
   return { filteredItems, filteredMatches, getMatches }
 }
+
+export function highlightResult (component: string, text: string, matches: FilterMatch | undefined, length: number) {
+  if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
+
+  if (matches == null) return text
+
+  return typeof matches === 'number' && ~matches
+    ? (
+      <>
+        <span class={ `${component}__unmask` }>{ text.substr(0, matches) }</span>
+        <span class={ `${component}__mask` }>{ text.substr(matches, length) }</span>
+        <span class={ `${component}__unmask` }>{ text.substr(matches + length) }</span>
+      </>
+    )
+    : text
+}

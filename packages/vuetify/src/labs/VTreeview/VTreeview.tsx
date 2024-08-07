@@ -1,10 +1,11 @@
 // Components
 import { makeVTreeviewChildrenProps, VTreeviewChildren } from './VTreeviewChildren'
-import { makeVListProps, useListItems, VList } from '@/components/VList/VList'
+import { makeVListProps, VList } from '@/components/VList/VList'
 
 // Composables
 import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
+import { useItems } from '@/composables/list-items'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -42,7 +43,7 @@ export const VTreeview = genericComponent<new <T>(
   props: {
     items?: T[]
   },
-  slots: VListChildrenSlots<T>
+  slots: VListChildrenSlots<ListItem<T>>
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VTreeview',
 
@@ -57,7 +58,7 @@ export const VTreeview = genericComponent<new <T>(
   },
 
   setup (props, { slots }) {
-    const { items } = useListItems(props)
+    const { items } = useItems(props)
     const activeColor = toRef(props, 'activeColor')
     const baseColor = toRef(props, 'baseColor')
     const color = toRef(props, 'color')
