@@ -1,7 +1,7 @@
 {
   "props": {
     "backgroundColor": "Changes the background-color of the input.",
-    "centerAffix": "Vertically align **appendInner**, **prependInner**, **clearIcon** and **label** in the center.",
+    "centerAffix": "Vertically align **append** and **prepend** in the center.",
     "direction": "Changes the direction of the input.",
     "hideDetails": "Hides hint and validation errors. When set to `auto` messages will be rendered only if there's a message (hint, error message, counter value etc) to display.",
     "hideSpinButtons": "Hides spin buttons on the input when type is set to `number`.",
