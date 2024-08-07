@@ -71,7 +71,7 @@ export default [
         },
         output (styles, styleNodes) {
           // Complete CSS bundle
-          mkdirp(fileURLToPath(new URL('../dist', import.meta.url))).then(() => {
+          mkdirp(path.resolve(root, 'dist')).then(() => {
             return Promise.all([
               postcss([autoprefixer]).process(styles, { from: 'src' }),
               postcss([autoprefixer, cssnano({
@@ -169,10 +169,10 @@ export default [
               return `@forward '` + path.join(
                 '../lib',
                 // Normalize Windows Paths
-                path.relative(srcDir, id).replace(/\\/g, '/'),
+                path.relative(srcDir, id),
                 '../_variables.scss'
               ) + `'`
-            }).sort().join('\n'),
+            }).sort().join('\n').replace(/\\/g, '/'),
           })
         },
       },
@@ -289,10 +289,10 @@ export default [
               return `@forward '` + path.join(
                 '../lib',
                 // Normalize Windows Paths
-                path.relative(srcDir, id).replace(/\\/g, '/'),
+                path.relative(srcDir, id),
                 '../_variables.scss'
               ) + `'`
-            }).sort().join('\n'),
+            }).sort().join('\n').replace(/\\/g, '/'),
           })
         }
       }
