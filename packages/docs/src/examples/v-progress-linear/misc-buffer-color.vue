@@ -6,7 +6,7 @@
     rounded="lg"
   >
     <v-progress-linear
-      :location="false"
+      :location="null"
       bg-color="#92aed9"
       buffer-color="#6a3e0b"
       buffer-opacity="1"

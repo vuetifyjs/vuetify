@@ -20,6 +20,7 @@
     "vuetify": "workspace:*"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.12",
     "@types/stringify-object": "^4.0.5",
     "eslint": "^8.57.0",
     "lodash-es": "^4.17.21",
