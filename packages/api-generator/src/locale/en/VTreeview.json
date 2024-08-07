@@ -16,6 +16,7 @@
     "itemText": "Property on supplied `items` that contains its label text.",
     "loadChildren": "A function used when dynamically loading children. If this prop is set, then the supplied function will be run if expanding an item that has a `item-children` property that is an empty array. Supports returning a Promise.",
     "loadingIcon": "Icon used when node is in a loading state.",
+    "modelValue": "Allows one to control which nodes are selected. The array contains the values of currently selected items. It is equivalent to the `v-model:selected`",
     "multipleActive": "When `true`, allows user to have multiple active nodes at the same time.",
     "offIcon": "Icon used when node is not selected. Only visible when `selectable` is `true`.",
     "onIcon": "Icon used when leaf node is selected or when a branch node is fully selected. Only visible when `selectable` is `true`.",

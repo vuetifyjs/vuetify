@@ -37,6 +37,10 @@ export const makeVTreeviewProps = propsFactory({
     expandIcon: '$treeviewExpand',
     slim: true,
   }), ['nav', 'openStrategy']),
+  modelValue: {
+    type: Array,
+    default: () => ([]),
+  },
 }, 'VTreeview')
 
 export const VTreeview = genericComponent<new <T>(
@@ -53,6 +57,7 @@ export const VTreeview = genericComponent<new <T>(
     'update:opened': (val: unknown) => true,
     'update:activated': (val: unknown) => true,
     'update:selected': (val: unknown) => true,
+    'update:modelValue': (val: unknown) => true,
     'click:open': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },
@@ -63,7 +68,16 @@ export const VTreeview = genericComponent<new <T>(
     const baseColor = toRef(props, 'baseColor')
     const color = toRef(props, 'color')
     const activated = useProxiedModel(props, 'activated')
-    const selected = useProxiedModel(props, 'selected')
+    const model = useProxiedModel(props, 'modelValue')
+    const _selected = useProxiedModel(props, 'selected', props.modelValue)
+
+    const selected = computed({
+      get: () => _selected.value,
+      set (val) {
+        _selected.value = val
+        model.value = val
+      },
+    })
 
     const vListRef = ref<VList>()
 
