@@ -9,6 +9,16 @@
 
         <v-toolbar-title>Local hotspots</v-toolbar-title>
       </template>
+
+      <v-spacer />
+
+      <v-select
+        label="Selection Strategy"
+        v-model="selectStrategy"
+        :items="strategies"
+        outlined
+        density="comfortable"
+      ></v-select>
     </v-toolbar>
 
     <v-row>
@@ -18,6 +28,7 @@
             v-model:selected="tree"
             :items="items"
             :load-children="load"
+            :select-strategy="selectStrategy"
             expand-icon="mdi-chevron-down"
             indeterminate-icon="mdi-bookmark-minus"
             item-title="name"
@@ -89,6 +100,21 @@
 <script setup>
   import { computed, ref, watch } from 'vue'
 
+  const toTitleCase = s =>
+    s.replace(/^[_\-]*(.)|[_\-]+(.)/g, (s, c, d) =>
+      c ? c.toUpperCase() : ' ' + d.toUpperCase()
+    )
+
+  const strategies = [
+    'single-leaf',
+    'leaf',
+    'independent',
+    'single-independent',
+    'classic',
+  ].map(strat => ({ title: toTitleCase(strat), value: strat }))
+
+  const selectStrategy = ref(strategies[0].value)
+  
   const breweries = ref([])
   const tree = ref([])
   const types = ref([])
