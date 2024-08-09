@@ -24,7 +24,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, mergeProps, ref, shallowRef, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
   ensureValidVNode,
   genericComponent,
@@ -68,6 +68,9 @@ export const makeSelectProps = propsFactory({
   eager: Boolean,
   hideNoData: Boolean,
   hideSelected: Boolean,
+  listProps: {
+    type: Object as PropType<VList['$props']>,
+  },
   menu: Boolean,
   menuIcon: {
     type: IconValue,
@@ -173,7 +176,7 @@ export const VSelect = genericComponent<new <
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
-        return items.value.filter(item => !model.value.some(s => s === item))
+        return items.value.filter(item => !model.value.some(s => props.valueComparator(s, item)))
       }
       return items.value
     })
@@ -247,22 +250,35 @@ export const VSelect = genericComponent<new <
       const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
       if (item !== undefined) {
         model.value = [item]
+        const index = displayItems.value.indexOf(item)
+        IN_BROWSER && window.requestAnimationFrame(() => {
+          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
+        })
       }
     }
-    function select (item: ListItem) {
+
+    /** @param set - null means toggle */
+    function select (item: ListItem, set: boolean | null = true) {
+      if (item.props.disabled) return
+
       if (props.multiple) {
         const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
+        const add = set == null ? !~index : set
 
-        if (index === -1) {
-          model.value = [...model.value, item]
-        } else {
-          const value = [...model.value]
+        if (~index) {
+          const value = add ? [...model.value, item] : [...model.value]
           value.splice(index, 1)
           model.value = value
+        } else if (add) {
+          model.value = [...model.value, item]
         }
       } else {
-        model.value = [item]
-        menu.value = false
+        const add = set !== false
+        model.value = add ? [item] : []
+
+        nextTick(() => {
+          menu.value = false
+        })
       }
     }
     function onBlur (e: FocusEvent) {
@@ -301,14 +317,10 @@ export const VSelect = genericComponent<new <
       }
     })
 
-    watch(displayItems, (val, oldVal) => {
-      if (!isFocused.value) return
+    watch(() => props.items, (newVal, oldVal) => {
+      if (menu.value) return
 
-      if (!val.length && props.hideNoData) {
-        menu.value = false
-      }
-
-      if (!oldVal.length && val.length) {
+      if (isFocused.value && !oldVal.length && newVal.length) {
         menu.value = true
       }
     })
@@ -391,6 +403,7 @@ export const VSelect = genericComponent<new <
                       tabindex="-1"
                       aria-live="polite"
                       color={ props.itemColor ?? props.color }
+                      { ...props.listProps }
                     >
                       { slots['prepend-item']?.() }
 
@@ -403,7 +416,7 @@ export const VSelect = genericComponent<new <
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: index,
-                            onClick: () => select(item),
+                            onClick: () => select(item, null),
                           })
 
                           return slots.item?.({
@@ -449,11 +462,19 @@ export const VSelect = genericComponent<new <
                     e.stopPropagation()
                     e.preventDefault()
 
-                    select(item)
+                    select(item, false)
                   }
 
                   const slotProps = {
                     'onClick:close': onChipClose,
+                    onKeydown (e: KeyboardEvent) {
+                      if (e.key !== 'Enter' && e.key !== ' ') return
+
+                      e.preventDefault()
+                      e.stopPropagation()
+
+                      onChipClose(e)
+                    },
                     onMousedown (e: MouseEvent) {
                       e.preventDefault()
                       e.stopPropagation()

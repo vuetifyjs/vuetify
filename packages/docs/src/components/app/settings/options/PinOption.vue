@@ -2,13 +2,13 @@
   <v-defaults-provider
     :defaults="{
       VIcon: {
-        color: auth.isSubscriber && user.pins ? 'primary' : 'disabled'
+        color: one.isSubscriber && user.pins ? 'primary' : 'disabled'
       }
     }"
   >
-    <settings-switch
+    <SettingsSwitch
       v-model="user.pins"
-      :disabled="!auth.isSubscriber"
+      :disabled="!one.isSubscriber"
       :messages="t('dashboard.perks.enable-pins-message')"
     >
       <template #label>
@@ -22,18 +22,12 @@
           variant="outlined"
         />
       </template>
-    </settings-switch>
+    </SettingsSwitch>
   </v-defaults-provider>
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Stores
-  import { useAuthStore, useUserStore } from '@vuetify/one'
-
   const { t } = useI18n()
-  const auth = useAuthStore()
+  const one = useOneStore()
   const user = useUserStore()
 </script>

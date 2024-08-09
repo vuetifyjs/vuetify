@@ -123,7 +123,7 @@ export function useSelectionControl (
       model.value &&
       !props.error &&
       !props.disabled
-    ) ? props.color : undefined
+    ) ? props.color : props.baseColor
   }))
   const icon = computed(() => model.value ? props.trueIcon : props.falseIcon)
 
@@ -199,8 +199,21 @@ export const VSelectionControl = genericComponent<new <T>(
       isFocusVisible.value = false
     }
 
+    function onClickLabel (e: Event) {
+      e.stopPropagation()
+    }
+
     function onInput (e: Event) {
-      if (!isInteractive.value) return
+      if (!isInteractive.value) {
+        if (input.value) {
+          // model value is not updated when input is not interactive
+          // but the internal checked state of the input is still updated,
+          // so here it's value is restored
+          input.value.checked = model.value
+        }
+
+        return
+      }
 
       if (props.readonly && group) {
         nextTick(() => group.forceUpdate())
@@ -227,6 +240,7 @@ export const VSelectionControl = genericComponent<new <T>(
           onFocus={ onFocus }
           onInput={ onInput }
           aria-disabled={ !!props.disabled }
+          aria-label={ props.label }
           type={ props.type }
           value={ trueValue.value }
           name={ props.name }
@@ -299,7 +313,7 @@ export const VSelectionControl = genericComponent<new <T>(
           </div>
 
           { label && (
-            <VLabel for={ id.value } clickable onClick={ (e: Event) => e.stopPropagation() }>
+            <VLabel for={ id.value } onClick={ onClickLabel }>
               { label }
             </VLabel>
           )}

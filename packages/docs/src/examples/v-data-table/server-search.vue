@@ -1,27 +1,27 @@
 <template>
   <v-data-table-server
     v-model:items-per-page="itemsPerPage"
-    :search="search"
     :headers="headers"
-    :items-length="totalItems"
     :items="serverItems"
+    :items-length="totalItems"
     :loading="loading"
+    :search="search"
     item-value="name"
     @update:options="loadItems"
   >
     <template v-slot:tfoot>
       <tr>
         <td>
-          <v-text-field v-model="name" hide-details placeholder="Search name..." class="ma-2" density="compact"></v-text-field>
+          <v-text-field v-model="name" class="ma-2" density="compact" placeholder="Search name..." hide-details></v-text-field>
         </td>
         <td>
           <v-text-field
             v-model="calories"
-            hide-details
-            placeholder="Minimum calories"
-            type="number"
             class="ma-2"
             density="compact"
+            placeholder="Minimum calories"
+            type="number"
+            hide-details
           ></v-text-field>
         </td>
       </tr>

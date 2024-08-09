@@ -1,67 +1,68 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-.v-carousel
-  overflow: hidden
-  position: relative
-  width: 100%
-
-  &__controls
-    align-items: center
-    bottom: 0
-    display: flex
-    height: $carousel-controls-size
-    justify-content: center
-    list-style-type: none
-    position: absolute
+@include tools.layer('components')
+  .v-carousel
+    overflow: hidden
+    position: relative
     width: 100%
-    z-index: 1
 
-    @include tools.theme($carousel-controls-theme...)
+    &__controls
+      align-items: center
+      bottom: 0
+      display: flex
+      height: $carousel-controls-size
+      justify-content: center
+      list-style-type: none
+      position: absolute
+      width: 100%
+      z-index: 1
 
-    > .v-item-group
-      flex: 0 1 auto
+      @include tools.theme($carousel-controls-theme...)
 
-    &__item
-      margin: $carousel-dot-margin
+      > .v-item-group
+        flex: 0 1 auto
 
-      .v-icon
-        opacity: $carousel-dot-inactive-opacity
+      &__item
+        margin: $carousel-dot-margin
 
-      &--active
         .v-icon
-          opacity: $carousel-dot-active-opacity
-          vertical-align: middle
+          opacity: $carousel-dot-inactive-opacity
 
-      &:hover
-        background: none
+        &--active
+          .v-icon
+            opacity: $carousel-dot-active-opacity
+            vertical-align: middle
 
-        .v-icon
-          opacity: $carousel-dot-hover-opacity
+        &:hover
+          background: none
 
-// Element
-.v-carousel__progress
-  margin: 0
-  position: absolute
-  bottom: 0
-  left: 0
-  right: 0
+          .v-icon
+            opacity: $carousel-dot-hover-opacity
 
-.v-carousel-item
-  display: block
-  height: inherit
-  text-decoration: none
+  // Element
+  .v-carousel__progress
+    margin: 0
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
 
-  & > .v-img
+  .v-carousel-item
+    display: block
     height: inherit
+    text-decoration: none
 
-// Modifier
-.v-carousel--hide-delimiter-background
-  .v-carousel__controls
-    background: transparent
+    & > .v-img
+      height: inherit
 
-.v-carousel--vertical-delimiters
-  .v-carousel__controls
-    flex-direction: column
-    height: 100% !important
-    width: $carousel-controls-size
+  // Modifier
+  .v-carousel--hide-delimiter-background
+    .v-carousel__controls
+      background: transparent
+
+  .v-carousel--vertical-delimiters
+    .v-carousel__controls
+      flex-direction: column
+      height: 100% !important
+      width: $carousel-controls-size

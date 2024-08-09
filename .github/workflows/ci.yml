@@ -30,9 +30,9 @@ jobs:
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/yarn-install
-      - run: yarn build vuetify
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/pnpm-install
+      - run: pnpm build vuetify
       - uses: ./.github/actions/upload-artifact
         with:
           name: vuetify-dist
@@ -50,12 +50,12 @@ jobs:
       matrix:
         scopes: ['--scope vuetify --scope @vuetify/api-generator', '--scope vuetifyjs.com']
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/download-artifact
         with:
           name: vuetify-dist
-      - uses: ./.github/actions/yarn-install
-      - run: yarn lerna run lint $SCOPES
+      - uses: ./.github/actions/pnpm-install
+      - run: pnpm lerna run lint $SCOPES
         env:
           SCOPES: ${{ matrix.scopes }}
 
@@ -65,11 +65,10 @@ jobs:
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/yarn-install
-      - run: yarn run test:coverage -i
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/pnpm-install
+      - run: pnpm run test:coverage -i
         working-directory: ./packages/vuetify
-      - uses: codecov/codecov-action@v1
 
   test-cypress:
     name: Test (Cypress)
@@ -77,17 +76,17 @@ jobs:
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/yarn-install
-      - run: yarn cy:run --record --parallel --ci-build-id $GITHUB_RUN_ID
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/pnpm-install
+      - run: pnpm cy:run --record --parallel --ci-build-id $GITHUB_RUN_ID
         if: ${{ !startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs' }}
         working-directory: ./packages/vuetify
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-      - run: yarn cy:run
+      - run: pnpm cy:run
         if: ${{ !startswith(github.ref, 'refs/tags/v') && github.repository_owner != 'vuetifyjs' }}
         working-directory: ./packages/vuetify
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: cypress-screenshots
@@ -99,14 +98,14 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: ./.github/actions/download-artifact
         with:
           name: vuetify-dist
-      - uses: ./.github/actions/yarn-install
-      - run: yarn build api
+      - uses: ./.github/actions/pnpm-install
+      - run: pnpm build api
       - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
       - name: NPM Release
         run: bash scripts/deploy.sh
@@ -115,8 +114,9 @@ jobs:
           RELEASE_TAG: ${{ env.RELEASE_TAG }}
       - name: GitHub release
         id: create_release
-        run: yarn conventional-github-releaser -p vuetify
+        run: pnpm conventional-github-releaser -p vuetify
         env:
+          DEBUG: '*'
           CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-docs:
@@ -125,14 +125,14 @@ jobs:
     if: needs.pre_job.outputs.should_skip != 'true' && github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/download-artifact
         with:
           name: vuetify-dist
-      - uses: ./.github/actions/yarn-install
+      - uses: ./.github/actions/pnpm-install
       - uses: ./.github/actions/download-locales
-      - run: yarn build api
-      - run: yarn build docs
+      - run: pnpm build api
+      - run: pnpm build docs
         env:
           NODE_OPTIONS: --max-old-space-size=4096
           VITE_COSMIC_2_BUCKET_SLUG: ${{ secrets.COSMIC_2_BUCKET_SLUG }}
@@ -156,12 +156,12 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/download-artifact
         with:
           name: docs-dist
-      - uses: ./.github/actions/yarn-install
-      - run: yarn global add vercel
+      - uses: ./.github/actions/pnpm-install
+      - run: pnpm add vercel --global
       - run: node scripts/deploy-and-alias.js ${{ github.ref }}
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}

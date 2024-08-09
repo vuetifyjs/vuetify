@@ -1,5 +1,5 @@
 <template>
-  <app-btn
+  <AppBtn
     v-if="!hasToggle"
     :icon="icon"
     color="medium-emphasis"
@@ -9,15 +9,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useRoute } from 'vue-router'
-  import { useTheme } from 'vuetify'
-  import { useUserStore } from '@vuetify/one'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { gtagClick } from '@/util/analytics'
-
   const theme = useTheme()
   const user = useUserStore()
   const { name } = useRoute()

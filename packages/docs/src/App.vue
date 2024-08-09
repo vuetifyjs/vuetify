@@ -1,24 +1,14 @@
 <template>
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <v-fade-transition appear>
+      <component :is="Component" />
+    </v-fade-transition>
+  </router-view>
 </template>
 
 <script setup lang="ts">
   // Composables
   import { useHead } from '@unhead/vue'
-  import { useI18n } from 'vue-i18n'
-  import { useRoute, useRouter } from 'vue-router'
-  import { useTheme } from 'vuetify'
-
-  // Stores
-  import { useAuthStore, useUserStore } from '@vuetify/one'
-
-  // Utilities
-  import { computed, nextTick, onBeforeMount, ref, watch, watchEffect } from 'vue'
-  import { genAppMetaInfo } from '@/util/metadata'
-  import { getMatchMedia } from '@/util/helpers'
-
-  // Globals
-  import { IN_BROWSER } from '@/util/globals'
 
   const user = useUserStore()
   const router = useRouter()
@@ -60,7 +50,8 @@
     // set current route lang if root
     const currentRoute = router.currentRoute.value
     if (currentRoute.path === '/') {
-      router.replace(`/${locale.value}`)
+      const query = currentRoute.query
+      router.replace({ path: `/${locale.value}`, query })
     }
   })
 

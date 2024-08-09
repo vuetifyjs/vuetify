@@ -12,8 +12,8 @@
 
     <v-navigation-drawer v-model="drawer">
       <v-sheet
-        color="grey-lighten-4"
         class="pa-4"
+        color="grey-lighten-4"
       >
         <v-avatar
           class="mb-4"

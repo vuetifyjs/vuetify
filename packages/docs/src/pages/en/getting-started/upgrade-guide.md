@@ -15,13 +15,11 @@ related:
 
 This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
 
-<page-features />
+<PageFeatures />
 
 ::: error
   <span class="text-h6">Many of the changes on this page can be applied automatically using [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)</span>
 :::
-
-<entry />
 
 ::: info
 
@@ -34,10 +32,7 @@ Before upgrading, make sure to consult the Official [Vue 3 Migration Guide](http
 
 - [calendar](https://github.com/vuetifyjs/vuetify/issues/13469)
 - [overflow-btn](https://github.com/vuetifyjs/vuetify/issues/13493)
-- [sparkline](https://github.com/vuetifyjs/vuetify/issues/13507)
-- [speed-dial](https://github.com/vuetifyjs/vuetify/issues/13508)
 - [time-picker](https://github.com/vuetifyjs/vuetify/issues/13516)
-- [treeview](https://github.com/vuetifyjs/vuetify/issues/13518)
 :::
 
 ## Setup
@@ -120,7 +115,7 @@ app.use(vuetify)
 - `value` prop has been replaced by `model-value` on components that support `v-model` usage. (Vue 3 requires this change)
   - Note that this does not apply to `value` used as a *selection value*, for example `v-btn` within `v-btn-toggle`.
 - `@input` event has been replaced by `@update:model-value` on components that support `v-model` usage. (Vue 3 requires this change)
-- `left` and `right` have been replaced by `start` and `end` respectively. This applies to utility classes too, for example `.border-r` is now `.border-e`.
+- `left` and `right` have been replaced by `start` and `end` respectively. This applies to utility classes too, for example `.rounded-r` is now `.rounded-e`.
 - Size props `small` / `medium` / `large` etc. have been combined into a single `size` prop.
 - `absolute` and `fixed` props have been combined into a single `position` prop.
 - `top` / `bottom` / `left` / `right` props have been combined into a single `location` prop.
@@ -196,7 +191,7 @@ app.use(vuetify)
 ### v-list
 
 - `two-line` and `three-line` props have been combined into a single `lines` prop with allowed values `'two'` or `'three'`.
-- `v-list-item-group` has been removed, just add `value` to list items to make them selectable and bind `v-model:selected` on v-list to get the selected value.
+- `v-list-item-group` has been removed, assign the item's key to the `value` prop of each `v-list-item` and bind `v-model:selected` on the `v-list` to get the selected value.
 - `v-list-item-icon` and `v-list-item-avatar` have been removed, use `v-list-item` with `icon` or `avatar` props, or put an icon or avatar in the append or prepend slot.
 - `v-list-item-content` has been removed, lists use CSS grid for layout now instead.
 - `v-list-group` can now be nested arbitrarily deep, `sub-group` prop should be removed.
@@ -204,6 +199,10 @@ app.use(vuetify)
 - `v-list-item` `inactive` prop has been replaced with `:active="false" :link="false"`.
 - `v-subheader`  has been renamed to `v-list-subheader`.
 - `v-list-item`'s `active` scoped slot prop has been renamed to `isActive`
+
+### v-navigation-drawer
+
+- `stateless` prop has been removed, manually control state using `model-value` or `v-model` instead.
 
 ### v-rating
 
@@ -233,6 +232,11 @@ app.use(vuetify)
 
 - `v-simple-table` has been renamed to `v-table`
 
+### v-stepper (vertical)
+
+- `v-stepper-step` has been renamed to `v-stepper-vertical-item`. Move content into the **title** slot.
+- `v-stepper-content` has been removed. Move content to the default slot of `v-stepper-vertical-item`.
+
 ### v-data-table
 
 - Headers objects:
@@ -240,12 +244,15 @@ app.use(vuetify)
   - `data-table-select` and `data-table-expand` must be defined as `key` instead of `value`.
   - `class` has been replaced with `headerProps`.
   - `cellClass` has been replaced with `cellProps` and now accepts either a function or an object.
+  - `filter` function requires `search` to be used in order for it to be triggered.
+- Tables requires `search` prop to trigger filtering. `items` array can be pre-filter with a computed.
 - Server side tables using `server-items-length` must be replaced with `<v-data-table-server items-length />`.
 - Argument order for `@click:*` events is now consistently `(event, data)`.
   - `onRowClick (item, data, event)` should be changed to `onRowClick (event, { item })`.
 - `item-class` and `item-style` have been combined into `row-props`, and `cell-props` has been added.
 - `sort-desc` and `group-desc` have been combined into `sort-by` and `group-by`. These properties now take an array of `{ key: string, order: 'asc' | 'desc' }` objects instead of strings.
 - `current-items` event has been renamed to `update:current-items`.
+- `custom-sort` can now be done using the **sort** key in the headers object or by using the `custom-key-sort` prop.
 
 ### v-slider/v-range-slider
 
@@ -282,6 +289,10 @@ app.use(vuetify)
 ### v-card
 
 - `v-card` does not allow content to overflow or use higher `z-index` values to display on top of elements outside it. To disable this behavior, use `<v-card style="overflow: initial; z-index: initial">` ([#17593](https://github.com/vuetifyjs/vuetify/issues/17593), [#17628](https://github.com/vuetifyjs/vuetify/issues/17628))
+
+### v-sparkline
+
+- `value` is now `model-value`
 
 ## Directives
 

@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Data iterators
   title: Data iterator component
@@ -21,7 +20,7 @@ The `v-data-iterator` component is used for displaying arbitrary data, and share
 
 <!-- ![Data iterator Entry](https://cdn.vuetifyjs.com/docs/images/components/v-data-iterator/v-data-iterator-entry.png){ placeholder=true } -->
 
-<page-features />
+<PageFeatures />
 
 ::: success
 This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
@@ -31,9 +30,9 @@ This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-no
 
 The `v-data-iterator` allows you to customize exactly how to display your data. In this example we are using a grid with cards.
 
-<usage name="v-data-iterator" />
+<ExamplesUsage name="v-data-iterator" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -41,7 +40,7 @@ The `v-data-iterator` allows you to customize exactly how to display your data. 
 |------------------------------------------|-------------------|
 | [v-data-iterator](/api/v-data-iterator/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Anatomy
 
@@ -83,22 +82,28 @@ The following are a collection of examples that demonstrate more advanced and re
 
 ### Slots
 
-The `v-data-iterator` component has 3 main slots
+The `v-data-iterator` component has 4 main slots
 
 #### Default
 
 The `v-data-iterator` has internal state for both selection and expansion, just like `v-data-table`. In this example we use the methods `isExpanded` and `toggleExpand` available on the default slot.
 
-<example file="v-data-iterator/slot-default" />
+<ExamplesExample file="v-data-iterator/slot-default" />
 
 #### Header and footer
 
 The `v-data-iterator` has both a **header** and **footer** slot for adding extra content.
 
-<example file="v-data-iterator/slot-header-and-footer" />
+<ExamplesExample file="v-data-iterator/slot-header-and-footer" />
 
 #### Controllable props
 
 Sorting, filters and pagination can be controlled externally by using the individual props
 
-<example file="v-data-iterator/misc-filter" />
+<ExamplesExample file="v-data-iterator/misc-filter" />
+
+#### Loader props
+
+Loader can be used to change loader on "loading" prop
+
+<ExamplesExample file="v-data-iterator/slot-loader" />

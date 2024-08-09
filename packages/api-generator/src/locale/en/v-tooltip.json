@@ -1,0 +1,4 @@
+{
+  "argument": "Applies the VTooltip location prop.",
+  "value": "**string**: Sets the tooltip content.  \n**boolean**: Controls visibility, tooltip content will be the innerText of the bound element.  \n**object**: Use any [VTooltip props](/api/v-tooltip), content can be set with `text`. Keys are camelCase."
+}

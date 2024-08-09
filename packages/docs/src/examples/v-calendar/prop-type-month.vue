@@ -5,9 +5,9 @@
         <v-calendar
           ref="calendar"
           v-model="today"
+          :events="events"
           color="primary"
           type="month"
-          :events="events"
         ></v-calendar>
       </v-sheet>
     </v-col>

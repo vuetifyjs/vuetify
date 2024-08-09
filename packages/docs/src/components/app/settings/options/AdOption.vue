@@ -2,28 +2,22 @@
   <v-defaults-provider
     :defaults="{
       VIcon: {
-        color: user.disableAds && auth.isSubscriber ? 'primary' : 'disabled'
+        color: user.disableAds && one.isSubscriber ? 'primary' : 'disabled'
       }
     }"
   >
-    <settings-switch
+    <SettingsSwitch
       v-model="user.disableAds"
-      :disabled="!auth.isSubscriber"
+      :disabled="!one.isSubscriber"
       :label="t('dashboard.perks.disable-ads')"
       :messages="t('dashboard.perks.disable-ads-message')"
-      :readonly="!auth.isSubscriber"
+      :readonly="!one.isSubscriber"
     />
   </v-defaults-provider>
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Stores
-  import { useAuthStore, useUserStore } from '@vuetify/one'
-
   const { t } = useI18n()
-  const auth = useAuthStore()
+  const one = useOneStore()
   const user = useUserStore()
 </script>

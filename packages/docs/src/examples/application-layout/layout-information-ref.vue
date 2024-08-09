@@ -6,9 +6,9 @@
 
     <v-navigation-drawer
       color="grey-darken-2"
-      permanent
-      name="drawer"
       location="end"
+      name="drawer"
+      permanent
     >
       <div class="d-flex justify-center align-center h-100">
         <v-btn @click="print('drawer')">Get data</v-btn>
@@ -20,8 +20,8 @@
     </v-main>
 
     <v-footer
-      app
       name="footer"
+      app
     >
       <v-btn
         class="mx-auto"

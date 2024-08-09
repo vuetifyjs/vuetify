@@ -1,36 +1,36 @@
 <template>
   <div>
     <v-sheet
-      tile
-      height="54"
       class="d-flex"
+      height="54"
+      tile
     >
       <v-select
         v-model="type"
         :items="types"
-        dense
-        variant="outlined"
-        hide-details
         class="ma-2"
         label="View Mode"
+        variant="outlined"
+        dense
+        hide-details
       ></v-select>
       <v-select
         v-model="weekday"
         :items="weekdays"
-        dense
-        variant="outlined"
-        hide-details
-        label="weekdays"
         class="ma-2"
+        label="weekdays"
+        variant="outlined"
+        dense
+        hide-details
       ></v-select>
     </v-sheet>
     <v-sheet>
       <v-calendar
         ref="calendar"
         v-model="value"
-        :weekdays="weekday"
-        :view-mode="type"
         :events="events"
+        :view-mode="type"
+        :weekdays="weekday"
       ></v-calendar>
     </v-sheet>
   </div>

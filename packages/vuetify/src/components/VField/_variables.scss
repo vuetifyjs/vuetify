@@ -4,7 +4,7 @@
 
 // INPUT
 $field-border-radius: settings.$border-radius-root !default;
-$field-rounded-border-radius: map-get(settings.$rounded, 'pill') !default;
+$field-rounded-border-radius: map-get(settings.$rounded, 'xl') !default;
 $field-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $field-disabled-color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity)) !default;
 $field-error-color: rgb(var(--v-theme-error)) !default;

@@ -62,7 +62,7 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
     <tr>
       <td>
         <a href="https://www.teamwork.com/" target="_blank">
-          <img height="35px" src="https://cdn.cosmicjs.com/4fbb7ab0-612e-11ed-af1a-0faa4245afee-teamwork.png">
+          <img height="35px" src="https://cdn.cosmicjs.com/ca146a20-bc5d-11ee-9be1-85f53db06a1d-teamwork-logo-2023.svg">
         </a>
       </td>
     </tr>
@@ -132,6 +132,17 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
         </a>
       </td>
     </tr>
+    <tr></tr>
+    <tr>
+      <td>
+        <a href="https://stormlikes.net/">
+          <img height="40px" src="https://cdn.cosmicjs.com/64e6f630-a980-11ee-b417-db331415685f-stormlikes.png">
+        </a>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
   </tbody>
 </table>
 
@@ -140,6 +151,12 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
 ### ⚡ Quick Start
 
 Getting started with Vuetify is easy. To create a new project, choose your package manager and run one of the following commands:
+
+Using [pnpm](https://pnpm.io/)
+
+```bash
+pnpm create vuetify
+```
 
 Using [yarn](https://yarnpkg.com/)
 
@@ -150,13 +167,7 @@ yarn create vuetify
 Using [npm](https://npmjs.com/)
 
 ```bash
-npm create vuetify
-```
-
-Using [pnpm](https://pnpm.io/)
-
-```bash
-pnpm create vuetify
+npm create vuetify@latest
 ```
 
 Using [bun](https://bun.sh/)
@@ -194,6 +205,14 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td>
+        <a href="https://snips.vuetifyjs.com">
+          ✂️&nbsp;Vuetify&nbsp;Snips
+        </a>
+      </td>
+      <td>Pre-built code snippets for Vuetify components that you can use in your projects</td>
+    </tr>
     <tr>
       <td>
         <a href="https://support.vuetifyjs.com/?ref=github">

@@ -11,9 +11,10 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, shallowRef, toRef } from 'vue'
+import { computed, ref, shallowRef, toRef, watchEffect } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVFooterProps = propsFactory({
@@ -39,6 +40,9 @@ export const VFooter = genericComponent()({
   props: makeVFooterProps(),
 
   setup (props, { slots }) {
+    const layoutItemStyles = ref()
+    const layoutIsReady = shallowRef()
+
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { borderClasses } = useBorder(props)
@@ -51,14 +55,22 @@ export const VFooter = genericComponent()({
       autoHeight.value = entries[0].target.clientHeight
     })
     const height = computed(() => props.height === 'auto' ? autoHeight.value : parseInt(props.height, 10))
-    const { layoutItemStyles } = useLayoutItem({
-      id: props.name,
-      order: computed(() => parseInt(props.order, 10)),
-      position: computed(() => 'bottom'),
-      layoutSize: height,
-      elementSize: computed(() => props.height === 'auto' ? undefined : height.value),
-      active: computed(() => props.app),
-      absolute: toRef(props, 'absolute'),
+
+    useToggleScope(() => props.app, () => {
+      const layout = useLayoutItem({
+        id: props.name,
+        order: computed(() => parseInt(props.order, 10)),
+        position: computed(() => 'bottom'),
+        layoutSize: height,
+        elementSize: computed(() => props.height === 'auto' ? undefined : height.value),
+        active: computed(() => props.app),
+        absolute: toRef(props, 'absolute'),
+      })
+
+      watchEffect(() => {
+        layoutItemStyles.value = layout.layoutItemStyles.value
+        layoutIsReady.value = layout.layoutIsReady
+      })
     })
 
     useRender(() => (
@@ -84,7 +96,7 @@ export const VFooter = genericComponent()({
       />
     ))
 
-    return {}
+    return props.app ? layoutIsReady.value : {}
   },
 })
 

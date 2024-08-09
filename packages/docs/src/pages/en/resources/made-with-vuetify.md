@@ -1,6 +1,5 @@
 ---
 backmatter: false
-emphasized: true
 fluid: true
 meta:
   nav: Made with Vuetify
@@ -13,21 +12,16 @@ related:
   - /resources/ui-kits/
 ---
 
-<script setup>
-  import MadeWithVuetify from '@/components/doc/MadeWithVuetify.vue'
-  import MadeWithVueAttribution from '@/components/doc/MadeWithVueAttribution.vue'
-</script>
-
 # Made with Vuetify
 
 Check out these amazing projects built using Vuetify.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
-<made-with-vuetify pagination />
+<DocMadeWithVuetifyGallery pagination />
 
 <br />
 
-<made-with-vue-attribution />
+<DocMadeWithVueAttribution />

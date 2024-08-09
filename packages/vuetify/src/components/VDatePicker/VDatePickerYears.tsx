@@ -9,8 +9,8 @@ import { useDate } from '@/composables/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onMounted, ref, watchEffect } from 'vue'
-import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
+import { computed, nextTick, onMounted, watchEffect } from 'vue'
+import { convertToUnit, createRange, genericComponent, propsFactory, templateRef, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -51,7 +51,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
     'update:modelValue': (year: number) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const adapter = useDate()
     const model = useProxiedModel(props, 'modelValue')
     const years = computed(() => {
@@ -87,10 +87,11 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
       model.value = model.value ?? adapter.getYear(adapter.date())
     })
 
-    const yearRef = ref<VBtn>()
+    const yearRef = templateRef()
+
     onMounted(async () => {
       await nextTick()
-      yearRef.value?.$el.scrollIntoView({ block: 'center' })
+      yearRef.el?.scrollIntoView({ block: 'center' })
     })
 
     useRender(() => (
@@ -109,7 +110,13 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
               rounded: true,
               text: year.text,
               variant: model.value === year.value ? 'flat' : 'text',
-              onClick: () => model.value = year.value,
+              onClick: () => {
+                if (model.value === year.value) {
+                  emit('update:modelValue', model.value)
+                  return
+                }
+                model.value = year.value
+              },
             } as const
 
             return slots.year?.({

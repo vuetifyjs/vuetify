@@ -1,9 +1,9 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div>
       <v-breadcrumbs v-bind="props">
@@ -20,16 +20,12 @@
     </div>
 
     <template v-slot:configuration>
-      <v-select v-model="color" label="Background color" :items="['primary', 'success', 'info']" clearable></v-select>
+      <v-select v-model="color" :items="['primary', 'success', 'info']" label="Background color" clearable></v-select>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-breadcrumbs'
   const model = ref('default')
   const options = []

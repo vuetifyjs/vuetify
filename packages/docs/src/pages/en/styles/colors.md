@@ -13,19 +13,19 @@ related:
 
 Out of the box you get access to all colors in the [Material Design specification](https://material.io/design/color/the-color-system.html) through **sass** and **javascript**. These values can be used within your style sheets, your component files and on actual components via the **color** prop.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Classes
 
 Each color from the specification gets converted to a **background** and **text** variant for styling within your application through a class, e.g. `<div class="bg-red">` or `<span class="text-red">`. These class colors are defined [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_colors.scss).
 
-<example file="color/classes" />
+<ExamplesExample file="color/classes" />
 
 Text colors also support **darken** and **lighten** variants using `text-{color}-{lighten|darken}-{n}`
 
-<example file="color/text-classes" />
+<ExamplesExample file="color/text-classes" />
 
 ## Javascript color pack
 
@@ -66,4 +66,4 @@ While convenient, the color pack increases the CSS export size by ~30kb. Some pr
 
 Below is a list of the Material design color palette grouped by primary color
 
-<color-palette />
+<FeaturesColorPalette />

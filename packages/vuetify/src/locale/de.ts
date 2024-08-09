@@ -2,6 +2,7 @@ export default {
   badge: 'Abzeichen',
   open: 'Öffnen',
   close: 'Schließen',
+  dismiss: 'Verwerfen',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Abbrechen',
@@ -35,7 +36,7 @@ export default {
     divider: 'bis',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} ausgewählt',
     range: {
       title: 'Daten auswählen',
       header: 'Daten eingeben',
@@ -56,7 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} mehr',
-    today: 'Today',
+    today: 'Heute',
   },
   input: {
     clear: '{0} leeren',
@@ -71,6 +72,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Uhrzeit auswählen',
   },
   pagination: {
     ariaLabel: {

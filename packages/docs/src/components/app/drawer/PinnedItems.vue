@@ -1,6 +1,7 @@
 <template>
-  <app-list
-    v-if="auth.isSubscriber && user.pins"
+  <AppListList
+    v-if="one.isSubscriber && user.pins"
+    v-model:opened="opened"
     :items="pinned"
     class="pb-0 mb-n2"
     nav
@@ -18,35 +19,38 @@
             <template #append>
               <v-icon
                 v-if="isHovering"
+                class="me-1"
                 icon="mdi-pin-off"
                 size="16"
-                class="me-1"
-                @click.prevent.stop="onClickPinRemove(itemProps)"
+                @click.prevent.stop="onClickPinRemove({
+                  title: itemProps.title,
+                  to: itemProps.to,
+                  category: '',
+                })"
               />
             </template>
           </v-list-item>
         </template>
       </v-hover>
     </template>
-  </app-list>
+  </AppListList>
 </template>
 
-<script setup>
-  // Composables
-  import { useRouter } from 'vue-router'
+<script lang="ts" setup>
+  import { Pin } from '@/stores/pins'
 
-  // Utilities
-  import { computed, onBeforeMount } from 'vue'
+  const props = defineProps<{ rail: boolean }>()
 
-  // Stores
-  import { useAuthStore, useUserStore } from '@vuetify/one'
-  import { usePinsStore } from '@/store/pins'
-
-  const auth = useAuthStore()
+  const one = useOneStore()
   const pins = usePinsStore()
   const user = useUserStore()
   const router = useRouter()
 
+  const _opened = ref<string[]>([])
+  const opened = computed({
+    get: () => props.rail ? [] : _opened.value,
+    set: val => _opened.value = val,
+  })
   const pinned = computed(() => ([{
     activeIcon: 'mdi-pin',
     inactiveIcon: 'mdi-pin-outline',
@@ -54,7 +58,7 @@
     title: 'Pinned',
   }]))
 
-  async function onClickPin (to) {
+  async function onClickPin (to: string) {
     pins.isPinning = true
 
     await router.replace(to)
@@ -62,11 +66,17 @@
     pins.isPinning = false
   }
 
-  function onClickPinRemove (pin) {
+  function onClickPinRemove (pin: Pin) {
     pins.toggle(false, pin)
   }
 
   onBeforeMount(() => {
     pins.load()
+  })
+
+  watch(() => pins.pins, (val, oldVal) => {
+    if (val.length < oldVal.length) return
+
+    opened.value = ['Pinned']
   })
 </script>

@@ -1,6 +1,9 @@
 // Styles
 import './VChipGroup.sass'
 
+// Components
+import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'
+
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
@@ -27,6 +30,7 @@ export const makeVChipGroupProps = propsFactory({
     default: deepEqual,
   },
 
+  ...makeVSlideGroupProps(),
   ...makeComponentProps(),
   ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
   ...makeTagProps(),
@@ -72,27 +76,32 @@ export const VChipGroup = genericComponent<new <T>(
       },
     })
 
-    useRender(() => (
-      <props.tag
-        class={[
-          'v-chip-group',
-          {
-            'v-chip-group--column': props.column,
-          },
-          themeClasses.value,
-          props.class,
-        ]}
-        style={ props.style }
-      >
-        { slots.default?.({
-          isSelected,
-          select,
-          next,
-          prev,
-          selected: selected.value,
-        })}
-      </props.tag>
-    ))
+    useRender(() => {
+      const slideGroupProps = VSlideGroup.filterProps(props)
+
+      return (
+        <VSlideGroup
+          { ...slideGroupProps }
+          class={[
+            'v-chip-group',
+            {
+              'v-chip-group--column': props.column,
+            },
+            themeClasses.value,
+            props.class,
+          ]}
+          style={ props.style }
+        >
+          { slots.default?.({
+            isSelected,
+            select,
+            next,
+            prev,
+            selected: selected.value,
+          })}
+        </VSlideGroup>
+      )
+    })
 
     return {}
   },

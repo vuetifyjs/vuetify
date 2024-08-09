@@ -1,11 +1,10 @@
 <template>
-  <div class="d-flex justify-space-around">
-    <div class="pa-4 text-center bg-secondary rounded-0">
-      .rounded-0
-    </div>
-
-    <div class="pa-4 text-center bg-secondary rounded-xl rounded-be-0">
-      .rounded-xl .rounded-be-0
-    </div>
-  </div>
+  <v-container class="text-center">
+    <v-btn
+      color="primary"
+      rounded="0"
+      text="Update Account"
+      flat
+    ></v-btn>
+  </v-container>
 </template>

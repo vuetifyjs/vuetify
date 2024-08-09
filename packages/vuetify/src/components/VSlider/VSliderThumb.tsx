@@ -48,6 +48,7 @@ export const makeVSliderThumbProps = propsFactory({
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
+  name: String,
 
   ...makeComponentProps(),
 }, 'VSliderThumb')
@@ -84,6 +85,8 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       indexFromEnd,
     } = slider
 
+    const elevationProps = computed(() => !disabled.value ? elevation.value : undefined)
+    const { elevationClasses } = useElevation(elevationProps)
     const { textColorClasses, textColorStyles } = useTextColor(thumbColor)
 
     const { pageup, pagedown, end, home, left, right, down, up } = keyValues
@@ -129,7 +132,6 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
 
     useRender(() => {
       const positionPercentage = convertToUnit(indexFromEnd.value ? 100 - props.position : props.position, '%')
-      const { elevationClasses } = useElevation(computed(() => !disabled.value ? elevation.value : undefined))
 
       return (
         <div
@@ -151,6 +153,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
           ]}
           role="slider"
           tabindex={ disabled.value ? -1 : 0 }
+          aria-label={ props.name }
           aria-valuemin={ props.min }
           aria-valuemax={ props.max }
           aria-valuenow={ props.modelValue }

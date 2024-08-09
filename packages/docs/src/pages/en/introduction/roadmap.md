@@ -14,43 +14,68 @@ related:
 
 Vuetify is always under development. We are constantly working towards improving the existing codebase, adding new features, and expanding the ecosystem with developer tooling that makes building applications even easier.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<VoPromotionsCardVuetify />
 
-## In Development
+## 2024 Component Roadmap
 
-The following releases are currently under development:
+The following is a list of all planned components for the year 2024.
 
-::: warning
+::: info
 
-This is not an exhaustive list and is subject to change at any time without notice
+**UPDATE: July 18th, 2024**
+
+Multiple components have been delayed until further notice due to reduced funding and team support. We are still working on features and fixes but at a reduced rate. We are actively seeking new funding and will update the roadmap as soon as we have more information. If you're interested in supporting Vuetify development, please consider becoming a [Sponsor](/introduction/sponsors-and-backers/).
 
 :::
 
-<promoted slug="vuetify-github-sponsors" />
+| Component | Entering Labs | Production Release |
+| - | - | - |
+| [v3.7 (Odyssey)](https://github.com/vuetifyjs/vuetify/milestone/73) | | July 2024 { .bg-surface-light } |
+| [v-treeview](/components/treeview/) | *️⃣ | July 2024 |
+| [v-number-input](/components/number-inputs/) | *️⃣  | July 2024 |
+| [v-time-picker](/components/time-pickers/) | *️⃣ | July 2024 |
+| [v-date-input](/components/date-inputs/) | *️⃣ | July 2024 |
+| [v-file-upload](https://github.com/vuetifyjs/vuetify/pull/19667) | ~~April~~ ~~May 2024~~ TBD | ~~July 2024~~ TBD |
+| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709) | ~~April~~ ~~May 2024~~ TBD | ~~July 2024~~ TBD |
+| [v-stepper-vertical](https://github.com/vuetifyjs/vuetify/pull/19524) | *️⃣ | ~~July 2024~~ TBD |
+| [v3.8 (Andromeda)](https://github.com/vuetifyjs/vuetify/milestone/74) | | TBD { .bg-surface-light } |
+| [v-calendar](/components/calendars/) | *️⃣ | Q4 |
+| v-date-time-picker | ~~May 2024~~ TBD | ~~Q4~~ TBD |
+| v-date-range-picker | ~~June 2024~~ TBD | ~~Q4~~ TBD |
+| v-video | ~~July 2024~~ TBD | ~~Q4~~ TBD |
+| v-feature-discovery | ~~August 2024~~ TBD | ~~Q4~~ TBD |
 
-### v3.5
-
-- **Target Release:** Q1 2024
-- **Overview:** A maintenance cycle post v3.4 that will focus on bug fixes and general improvements.
-- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/70)
-
-### Labs release schedule
-
-Information regarding upcoming 🧪 Labs components is located on the [Labs introduction](/labs/introduction/) page.
-
-----
-
-## Long-term support (LTS)
-
-The following versions have continued maintenance for backwards compatible fixes, major bugs, and security vulnerabilities. More information is located on the [Long-term support](/introduction/long-term-support/) page.
-
-<promoted slug="vuetify-open-collective" />
+*️⃣ Already in Labs { .text-caption }
 
 ## Released
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
+
+### v3.6 (Nebula)
+
+- **Released:** April 2024
+- **Hero:** [Banner](https://cdn.vuetifyjs.com/docs/images/release-banners/nebula-36.png)
+- **Target Release:** Q2 2024
+- **Notes:** [v3.6 Release](/getting-started/release-notes/?version=v3.6.0)
+- **Overview:** Introduced 5 new components to the main framework from Labs:
+  - [v-fab](/components/floating-action-buttons/)
+  - [v-empty-state](/components/empty-states/)
+  - [v-sparkline](/components/sparklines/)
+  - [v-speed-dial](/components/speed-dials/)
+  - [v-confirm-edit](/components/confirm-edit/)
+  - Multiple bug fixes and improvements.
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/72)
+
+### v3.5 (Polaris)
+
+- **Released:** January 2024
+- **Hero:** [Banner](https://cdn.vuetifyjs.com/docs/images/release-banners/polaris-35.png)
+- **Target Release:** Q1 2024
+- **Notes:** [v3.5 Release](/getting-started/release-notes/?version=v3.5.0)
+- **Overview:** A maintenance cycle post v3.4 that will focuses on bug fixes and general improvements.
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/70)
 
 ### v3.4 (Blackguard)
 
@@ -58,7 +83,15 @@ The following are the already released **minor** and **major** version updates. 
 - **Hero:** [Banner](https://cdn.vuetifyjs.com/docs/images/release-banners/blackguard-34.png)
 - **Target Release:** Q3 2023
 - **Notes:** [v3.4 Release](/getting-started/release-notes/?version=v3.4.0)
-- **Overview:** Introduced 8 updated components to the main framework from Labs: VBottomSheet, VDataIterator, VDataTable, VDatePicker, VInfiniteScroll, VOtpInput, VSkeletonLoader, and VStepper.
+- **Overview:** Introduced 8 updated components to the main framework from Labs:
+  - [v-bottom-sheet](/components/bottom-sheets/)
+  - [v-data-iterator](/components/data-iterators/)
+  - [v-data-table](/components/data-tables/)
+  - [v-date-picker](/components/date-pickers/)
+  - [v-infinite-scroll](/components/infinite-scroller/)
+  - [v-opt-input](/components/otp-input/)
+  - [v-skeleton-loader](/components/skeleton-loaders/)
+  - [v-stepper](/components/steppers/).
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/61)
 
 ### v2.7 (Nirvana)

@@ -1,6 +1,8 @@
 // Utilities
 import { computed, inject, provide, ref, shallowRef, unref, watchEffect } from 'vue'
-import { getCurrentInstance, injectSelf, mergeDeep, toKebabCase } from '@/util'
+import { getCurrentInstance } from '@/util/getCurrentInstance'
+import { mergeDeep, toKebabCase } from '@/util/helpers'
+import { injectSelf } from '@/util/injectSelf'
 
 // Types
 import type { ComputedRef, InjectionKey, Ref, VNode } from 'vue'
@@ -106,7 +108,9 @@ export function internalUseDefaults (
       if (prop === 'class' || prop === 'style') {
         return [componentDefaults.value?.[prop], propValue].filter(v => v != null)
       } else if (typeof prop === 'string' && !propIsDefined(vm.vnode, prop)) {
-        return componentDefaults.value?.[prop] ?? defaults.value?.global?.[prop] ?? propValue
+        return componentDefaults.value?.[prop] !== undefined ? componentDefaults.value?.[prop]
+          : defaults.value?.global?.[prop] !== undefined ? defaults.value?.global?.[prop]
+          : propValue
       }
       return propValue
     },

@@ -102,8 +102,8 @@
             ref="link"
             :label="copied ? 'Link copied' : 'Click to copy link'"
             class="pa-4"
-            readonly
             model-value="https://g.co/kgs/nkrK43"
+            readonly
             @click="copy"
           ></v-text-field>
         </v-card>
@@ -124,9 +124,9 @@
       >
         <template v-slot:item="props">
           <v-icon
-            size="large"
             :color="props.isFilled ? 'purple-darken-4' : ''"
             :icon="`mdi-numeric-${props.index}-box`"
+            size="large"
           ></v-icon>
         </template>
       </v-rating>

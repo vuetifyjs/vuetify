@@ -116,6 +116,7 @@ function genDefaults () {
           background: '#FFFFFF',
           surface: '#FFFFFF',
           'surface-bright': '#FFFFFF',
+          'surface-light': '#EEEEEE',
           'surface-variant': '#424242',
           'on-surface-variant': '#EEEEEE',
           primary: '#1867C0',
@@ -152,6 +153,7 @@ function genDefaults () {
           background: '#121212',
           surface: '#212121',
           'surface-bright': '#ccbfd6',
+          'surface-light': '#424242',
           'surface-variant': '#a3a3a3',
           'on-surface-variant': '#424242',
           primary: '#2196F3',
@@ -253,7 +255,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   const styles = computed(() => {
     const lines: string[] = []
 
-    if (current.value.dark) {
+    if (current.value?.dark) {
       createCssClass(lines, ':root', ['color-scheme: dark'])
     }
 

@@ -15,7 +15,7 @@
       <v-row justify="space-around" dense>
         <template v-for="(tier, i) in tiers" :key="i">
           <v-col cols="12" md="4">
-            <v-responsive class="mb-4" :min-height="mdAndUp ? 96 : undefined">
+            <v-responsive :min-height="mdAndUp ? 96 : undefined" class="mb-4">
               <h3 class="d-flex align-center text-h6 font-weight-medium mb-4">
                 <v-avatar :image="tier.src" class="me-3" />
 
@@ -32,11 +32,11 @@
                 :href="tier.href"
                 :text="tierText(tier)"
                 :variant="i === 1 ? 'flat' : 'outlined'"
-                block
                 class="mb-6 text-none"
-                color="primary"
+                color="#6458f2"
                 rel="noopener"
                 target="_blank"
+                block
               />
 
               <div class="text-caption">{{ tier.text }}</div>
@@ -63,40 +63,19 @@
     </v-container>
 
     <div class="px-4 pb-3 text-medium-emphasis text-caption">
-      *View more detailed information on our <app-link
+      *View more detailed information on our <AppLink
         href="https://discord.com/servers/vuetify-340160225338195969"
       >
         Discord Welcome Page
-      </app-link>
+      </AppLink>
     </div>
   </v-sheet>
 </template>
 
 <script setup>
-  import { useDisplay } from 'vuetify'
-
   const { mdAndUp } = useDisplay()
 
   const tiers = [
-    {
-      name: 'Grass Tier',
-      price: 'Free',
-      href: 'https://community.vuetifyjs.com/',
-      src: 'https://cdn.vuetifyjs.com/docs/images/discord/tiers/grass.png',
-      text: 'Ask questions in our public Discord help channels.',
-      benefits: [
-        {
-          name: '#vuetify-3-help',
-          text: 'Ask questions and get help for Vuetify 3 from the community in this public channel.',
-          emoji: '3️⃣',
-        },
-        {
-          name: '#vuetify-2-help',
-          text: 'Ask questions and get help for Vuetify 2 from the community in this public channel.',
-          emoji: '2️⃣',
-        },
-      ],
-    },
     {
       name: 'Wood Tier',
       price: '$2.99',
@@ -153,36 +132,6 @@
           name: 'Private Help Channel',
           text: 'Get a private help channel where you can ask questions to the Core Team.',
           emoji: '🔨',
-        },
-        {
-          name: 'Priority GitHub Issues',
-          text: 'Get priority on your GitHub reported issues.',
-          emoji: '🚨',
-        },
-      ],
-    },
-    {
-      name: 'Galaxy Tier',
-      contact: true,
-      price: '$199.99',
-      suffix: '/mo',
-      href: 'mailto:support@vuetifyjs.com?subject=Galaxy%20Tier%20Support%20Request',
-      src: 'https://cdn.vuetifyjs.com/docs/images/discord/tiers/galaxy.png',
-      text: 'Get support for up to 3 developers with a private help channel.',
-      benefits: [
-        {
-          text: 'Every channel in Planetary Tier plus:',
-          emoji: '💫',
-        },
-        {
-          name: 'Extra Developers',
-          text: 'Get a private help channel where up to 3 developers can ask questions directly to the Core Team.',
-          emoji: '🛠️',
-        },
-        {
-          name: 'Direct Support Discounts',
-          text: '50% discount on all Direct Support services.',
-          emoji: '🏷️',
         },
       ],
     },

@@ -8,28 +8,34 @@ import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VProgressLinear } from '@/components/VProgressLinear'
 
 // Composables
+import { useLayout } from '@/composables'
 import { forwardRefs } from '@/composables/forwardRefs'
-import { makeLocationProps, useLocation } from '@/composables/location'
+import { VuetifyLayoutKey } from '@/composables/layout'
+import { makeLocationProps } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { useScopeId } from '@/composables/scopeId'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useToggleScope } from '@/composables/toggleScope'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch } from 'vue'
+import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
 import { genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
+
+// Types
+import type { Ref } from 'vue'
 
 type VSnackbarSlots = {
   activator: { isActive: boolean, props: Record<string, any> }
   default: never
-  actions: never
+  actions: { isActive: Ref<boolean> }
   text: never
 }
 
-function useCountdown (milliseconds: number) {
-  const time = shallowRef(milliseconds)
+function useCountdown (milliseconds: () => number) {
+  const time = shallowRef(milliseconds())
   let timer = -1
 
   function clear () {
@@ -39,7 +45,7 @@ function useCountdown (milliseconds: number) {
   function reset () {
     clear()
 
-    nextTick(() => time.value = milliseconds)
+    nextTick(() => time.value = milliseconds())
   }
 
   function start (el?: HTMLElement) {
@@ -53,7 +59,7 @@ function useCountdown (milliseconds: number) {
     const startTime = performance.now()
     timer = window.setInterval(() => {
       const elapsed = performance.now() - startTime + interval
-      time.value = Math.max(milliseconds - elapsed, 0)
+      time.value = Math.max(milliseconds() - elapsed, 0)
 
       if (time.value <= 0) clear()
     }, interval)
@@ -95,17 +101,27 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
   setup (props, { slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
-    const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
     const { scopeId } = useScopeId()
     const { themeClasses } = provideTheme(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { roundedClasses } = useRounded(props)
-    const countdown = useCountdown(Number(props.timeout))
+    const countdown = useCountdown(() => Number(props.timeout))
 
     const overlay = ref<VOverlay>()
     const timerRef = ref<VProgressLinear>()
     const isHovering = shallowRef(false)
+    const startY = shallowRef(0)
+    const mainStyles = ref()
+    const hasLayout = inject(VuetifyLayoutKey, undefined)
+
+    useToggleScope(() => !!hasLayout, () => {
+      const layout = useLayout()
+
+      watchEffect(() => {
+        mainStyles.value = layout.mainStyles.value
+      })
+    })
 
     watch(isActive, startTimeout)
     watch(() => props.timeout, startTimeout)
@@ -146,6 +162,24 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
       startTimeout()
     }
 
+    function onTouchstart (event: TouchEvent) {
+      startY.value = event.touches[0].clientY
+    }
+
+    function onTouchend (event: TouchEvent) {
+      if (Math.abs(startY.value - event.changedTouches[0].clientY) > 50) {
+        isActive.value = false
+      }
+    }
+
+    const locationClasses = computed(() => {
+      return props.location.split(' ').reduce((acc, loc) => {
+        acc[`v-snackbar--${loc}`] = true
+
+        return acc
+      }, {} as Record<string, any>)
+    })
+
     useRender(() => {
       const overlayProps = VOverlay.filterProps(props)
       const hasContent = !!(slots.default || slots.text || props.text)
@@ -161,10 +195,14 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
               'v-snackbar--timer': !!props.timer,
               'v-snackbar--vertical': props.vertical,
             },
+            locationClasses.value,
             positionClasses.value,
             props.class,
           ]}
-          style={ props.style }
+          style={[
+            mainStyles.value,
+            props.style,
+          ]}
           { ...overlayProps }
           v-model={ isActive.value }
           contentProps={ mergeProps({
@@ -176,7 +214,6 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
               variantClasses.value,
             ],
             style: [
-              locationStyles.value,
               colorStyles.value,
             ],
             onPointerenter,
@@ -187,16 +224,17 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           scrim={ false }
           scrollStrategy="none"
           _disableGlobalStack
+          onTouchstartPassive={ onTouchstart }
+          onTouchend={ onTouchend }
           { ...scopeId }
           v-slots={{ activator: slots.activator }}
         >
           { genOverlays(false, 'v-snackbar') }
 
-          { props.timer && (
+          { props.timer && !isHovering.value && (
             <div key="timer" class="v-snackbar__timer">
               <VProgressLinear
                 ref={ timerRef }
-                active={ !isHovering.value }
                 color={ typeof props.timer === 'string' ? props.timer : 'info' }
                 max={ props.timeout }
                 model-value={ countdown.time.value }
@@ -228,7 +266,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
               }}
             >
               <div class="v-snackbar__actions">
-                { slots.actions() }
+                { slots.actions({ isActive }) }
               </div>
             </VDefaultsProvider>
           )}

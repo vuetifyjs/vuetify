@@ -3,6 +3,7 @@
     :aria-label="t('see-more-projects')"
     :size="size"
     :to="rpath('/resources/made-with-vuetify/')"
+    append-icon="mdi-page-next"
     color="primary"
     variant="outlined"
     @click="onClick"
@@ -15,14 +16,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useGtag } from 'vue-gtag-next'
-  import { useI18n } from 'vue-i18n'
-  import { useRoute } from 'vue-router'
-
-  // Utilities
-  import { rpath } from '@/util/routes'
-
   defineProps({
     size: {
       type: String,

@@ -1,0 +1,10 @@
+{
+  "props": {
+    "cancelText": "Text for the cancel button",
+    "okText": "Text for the ok button"
+  },
+  "events": {
+    "ok": "The event emitted when the user clicks the OK button",
+    "cancel": "The event emitted when the user clicks the Cancel button"
+  }
+}

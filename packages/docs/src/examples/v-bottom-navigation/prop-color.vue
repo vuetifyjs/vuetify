@@ -2,8 +2,8 @@
   <v-layout class="overflow-visible" style="height: 56px;">
     <v-bottom-navigation
       v-model="value"
-      active
       color="primary"
+      active
     >
       <v-btn>
         <v-icon>mdi-history</v-icon>

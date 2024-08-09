@@ -1,8 +1,8 @@
 <template>
   <v-card
     :loading="isUpdating"
-    color="blue-grey-darken-1"
     class="mx-auto"
+    color="blue-grey-darken-1"
     max-width="420"
   >
     <template v-slot:loader="{ isActive }">
@@ -15,9 +15,9 @@
     </template>
 
     <v-img
-      cover
       height="200"
       src="https://cdn.vuetifyjs.com/images/cards/dark-beach.jpg"
+      cover
     >
       <v-row class="pa-3">
         <v-col cols="12">
@@ -29,8 +29,8 @@
             <template v-slot:activator="{ props }">
               <v-btn
                 v-bind="props"
-                icon="mdi-dots-vertical"
                 density="comfortable"
+                icon="mdi-dots-vertical"
                 variant="tonal"
               ></v-btn>
             </template>
@@ -80,12 +80,12 @@
               v-model="friends"
               :disabled="isUpdating"
               :items="people"
-              chips
-              closable-chips
               color="blue-grey-lighten-2"
               item-title="name"
               item-value="name"
               label="Select"
+              chips
+              closable-chips
               multiple
             >
               <template v-slot:chip="{ props, item }">
@@ -100,8 +100,8 @@
                 <v-list-item
                   v-bind="props"
                   :prepend-avatar="item.raw.avatar"
-                  :title="item.raw.name"
                   :subtitle="item.raw.group"
+                  :title="item.raw.name"
                 ></v-list-item>
               </template>
             </v-autocomplete>
@@ -119,8 +119,8 @@
         class="mt-0 ms-2"
         color="green-lighten-2"
         density="compact"
-        hide-details
         label="Auto Update"
+        hide-details
       ></v-switch>
 
       <v-spacer></v-spacer>

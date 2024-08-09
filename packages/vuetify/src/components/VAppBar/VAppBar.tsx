@@ -20,7 +20,7 @@ import type { PropType } from 'vue'
 import type { VToolbarSlots } from '@/components/VToolbar/VToolbar'
 
 export const makeVAppBarProps = propsFactory({
-  scrollBehavior: String as PropType<'hide' | 'inverted' | 'collapse' | 'elevate' | 'fade-image' | (string & {})>,
+  scrollBehavior: String as PropType<'hide' | 'fully-hide' | 'inverted' | 'collapse' | 'elevate' | 'fade-image' | (string & {})>,
   modelValue: {
     type: Boolean,
     default: true,
@@ -57,7 +57,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       const behavior = new Set(props.scrollBehavior?.split(' ') ?? [])
       return {
         hide: behavior.has('hide'),
-        // fullyHide: behavior.has('fully-hide'),
+        fullyHide: behavior.has('fully-hide'),
         inverted: behavior.has('inverted'),
         collapse: behavior.has('collapse'),
         elevate: behavior.has('elevate'),
@@ -69,7 +69,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       const behavior = scrollBehavior.value
       return (
         behavior.hide ||
-        // behavior.fullyHide ||
+        behavior.fullyHide ||
         behavior.inverted ||
         behavior.collapse ||
         behavior.elevate ||
@@ -85,11 +85,18 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       scrollRatio,
     } = useScroll(props, { canScroll })
 
+    const canHide = computed(() => (
+      scrollBehavior.value.hide ||
+      scrollBehavior.value.fullyHide
+    ))
     const isCollapsed = computed(() => props.collapse || (
       scrollBehavior.value.collapse &&
       (scrollBehavior.value.inverted ? scrollRatio.value > 0 : scrollRatio.value === 0)
     ))
     const isFlat = computed(() => props.flat || (
+      scrollBehavior.value.fullyHide &&
+      !isActive.value
+    ) || (
       scrollBehavior.value.elevate &&
       (scrollBehavior.value.inverted ? currentScroll.value > 0 : currentScroll.value === 0)
     ))
@@ -99,17 +106,19 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
         : undefined
     ))
     const height = computed(() => {
-      if (scrollBehavior.value.hide && scrollBehavior.value.inverted) return 0
+      const height = Number(vToolbarRef.value?.contentHeight ?? props.height)
+      const extensionHeight = Number(vToolbarRef.value?.extensionHeight ?? 0)
 
-      const height = vToolbarRef.value?.contentHeight ?? 0
-      const extensionHeight = vToolbarRef.value?.extensionHeight ?? 0
+      if (!canHide.value) return (height + extensionHeight)
 
-      return (height + extensionHeight)
+      return currentScroll.value < scrollThreshold.value || scrollBehavior.value.fullyHide
+        ? (height + extensionHeight)
+        : height
     })
 
     useToggleScope(computed(() => !!props.scrollBehavior), () => {
       watchEffect(() => {
-        if (scrollBehavior.value.hide) {
+        if (canHide.value) {
           if (scrollBehavior.value.inverted) {
             isActive.value = currentScroll.value > scrollThreshold.value
           } else {
@@ -122,7 +131,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
     })
 
     const { ssrBootStyles } = useSsrBoot()
-    const { layoutItemStyles } = useLayoutItem({
+    const { layoutItemStyles, layoutIsReady } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
       position: toRef(props, 'location'),
@@ -162,7 +171,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       )
     })
 
-    return {}
+    return layoutIsReady
   },
 })
 

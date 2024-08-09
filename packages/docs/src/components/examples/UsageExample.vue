@@ -3,8 +3,8 @@
     <v-toolbar
       border="b"
       class="ps-1"
-      flat
       height="44"
+      flat
     >
       <v-slide-group
         v-model="model"
@@ -48,9 +48,9 @@
       <v-tooltip location="bottom">
         <template #activator="{ props: activatorProps }">
           <v-btn
+            :href="playgroundLink"
             class="me-1 text-medium-emphasis"
             density="comfortable"
-            :href="playgroundLink"
             icon="$vuetify-play"
             target="_blank"
             v-bind="activatorProps"
@@ -63,9 +63,9 @@
       <v-tooltip location="bottom">
         <template #activator="{ props: activatorProps }">
           <v-btn
+            :icon="!show ? 'mdi-code-tags' : 'mdi-chevron-up'"
             class="me-1 text-medium-emphasis"
             density="comfortable"
-            :icon="!show ? 'mdi-code-tags' : 'mdi-chevron-up'"
             v-bind="activatorProps"
             @click="show = !show"
           />
@@ -93,9 +93,9 @@
         v-model="tune"
         location="right"
         name="tune"
+        width="250"
         permanent
         touchless
-        width="250"
       >
         <v-list>
           <div class="px-4 usage-example pt-2">
@@ -118,11 +118,11 @@
     <v-expand-transition>
       <div v-if="show">
         <div class="pa-2">
-          <app-markup :code="code" />
+          <AppMarkup :code="code" />
         </div>
 
         <div v-if="script" class="pa-2 pt-0">
-          <app-markup :code="script" language="js" />
+          <AppMarkup :code="script" language="js" />
         </div>
       </div>
     </v-expand-transition>
@@ -130,15 +130,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useDisplay } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
-  import { usePlayground } from '@/composables/playground'
-
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { upperFirst } from 'lodash-es'
-
   const props = defineProps({
     name: String,
     code: String,
@@ -173,7 +164,7 @@
     {
       name: 'template',
       language: 'html',
-      content: `<template>\n  <v-app>\n    <v-container>\n      ${props.code.replaceAll('\n', '\n      ')}\n    </v-container>\n  </v-app>\n</template>`,
+      content: `<template>\n  <v-app>\n    <v-container>\n      ${props.code.replaceAll('\n', '\n      ')}\n    </v-container>\n  </v-app>\n</template>\n${props.script}`,
     },
   ]))
 </script>

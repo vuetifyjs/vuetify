@@ -18,9 +18,9 @@ related:
 
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast applications.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<VoPromotionsCardHighlight slug="vuemastery-getting-started" />
 
 ## Installation
 
@@ -28,9 +28,9 @@ Vuetify has support for multiple different installation paths with the most comm
 
 For more information regarding supported package managers, please visit their official websites:
 
+* [pnpm](https://pnpm.io/)
 * [yarn](https://yarnpkg.com/)
 * [npm](https://npmjs.org/)
-* [pnpm](https://pnpm.io/)
 * [bun](https://bun.sh/package-manager)
 
 ## Using Vite
@@ -39,16 +39,16 @@ To get started with Vuetify 3, simply paste the following code into your termina
 
 ::: tabs
 
+```bash [pnpm]
+pnpm create vuetify
+```
+
 ```bash [yarn]
 yarn create vuetify
 ```
 
 ```bash [npm]
-npm create vuetify
-```
-
-```bash [pnpm]
-pnpm create vuetify
+npm create vuetify@latest
 ```
 
 ```bash [bun]
@@ -79,8 +79,10 @@ Once the scaffold is complete, start the vite development server by running the 
 
 ```bash
 cd vuetify-project
-yarn dev
+pnpm dev
 ```
+
+<VoPromotionsCardVuetify slug="vuetify-one" />
 
 ## Using Nuxt 3
 
@@ -89,6 +91,13 @@ yarn dev
 Start off creating a nuxt app by executing the following commands:
 
 ::: tabs
+
+```bash [pnpm]
+pnpx nuxi@latest init <project-name>
+cd <project-name>
+# Create a .npmrc file with shamefully-hoist=true
+pnpm install
+```
 
 ```bash [yarn]
 npx nuxi@latest init <project-name>
@@ -102,13 +111,6 @@ cd <project-name>
 npm install
 ```
 
-```bash [pnpm]
-pnpm dlx nuxi@latest init <project-name>
-# Make sure you have `shamefully-hoist=true` in `.npmrc` before running pnpm install
-cd <project-name>
-pnpm install
-```
-
 ```bash [bun]
 bunx nuxi@latest init <project-name>
 cd <project-name>
@@ -117,9 +119,14 @@ bun install
 
 :::
 
-and then install the required Vuefity modules as dependencies:
+and then install the required Vuetify modules as dependencies:
 
 ::: tabs
+
+```bash [pnpm]
+pnpm i -D vuetify vite-plugin-vuetify
+pnpm i @mdi/font
+```
 
 ```bash [yarn]
 yarn add -D vuetify vite-plugin-vuetify
@@ -129,11 +136,6 @@ yarn add @mdi/font
 ```bash [npm]
 npm i -D vuetify vite-plugin-vuetify
 npm i @mdi/font
-```
-
-```bash [pnpm]
-pnpm i -D vuetify vite-plugin-vuetify
-pnpm i @mdi/font
 ```
 
 ```bash [bun]
@@ -218,7 +220,6 @@ You should now have access to all Vuetify components and tools in Nuxt app.
 
 ```js
 import { createApp } from 'vue'
-import App from './App.vue'
 
 // Vuetify
 import '@mdi/font/css/materialdesignicons.css'
@@ -226,6 +227,9 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+
+// Components
+import App from './App.vue'
 
 const vuetify = createVuetify({
   components,
@@ -259,11 +263,60 @@ const app = createApp()
 app.use(vuetify).mount('#app')
 ```
 
+## Using Vitepress
+
+You can use Vuetify's components in your Vitepress static site.
+
+First, add vuetify to your dependencies
+
+::: tabs
+
+```bash [pnpm]
+pnpm create vuetify
+```
+
+```bash [yarn]
+yarn create vuetify
+```
+
+```bash [npm]
+npm create vuetify@latest
+```
+
+```bash [bun]
+bun create vuetify
+```
+
+:::
+
+Then, in your `.vitepress/theme/index.ts`
+
+```ts
+import DefaultTheme from 'vitepress/theme'
+import 'vuetify/styles'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+import { createVuetify } from 'vuetify'
+
+const vuetify = createVuetify({ components, directives })
+
+export default {
+  ...DefaultTheme,
+  enhanceApp({ app }) {
+    app.use(vuetify)
+  },
+}
+```
+
 ## Existing projects
 
 Follow these steps if for example you are adding Vuetify to an existing project, or simply do not want to use a scaffolding tool.
 
 ::: tabs
+
+```bash [pnpm]
+pnpm i vuetify
+```
 
 ```bash [yarn]
 yarn add vuetify
@@ -271,10 +324,6 @@ yarn add vuetify
 
 ```bash [npm]
 npm i vuetify
-```
-
-```bash [pnpm]
-pnpm i vuetify
 ```
 
 ```bash [bun]
@@ -293,13 +342,15 @@ In the file where you create the Vue application, add the following code
 
 ```js
 import { createApp } from 'vue'
-import App from './App.vue'
 
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+
+// Components
+import App from './App.vue'
 
 const vuetify = createVuetify({
   components,
@@ -376,4 +427,4 @@ The three development branches (`master`, `dev`, and `next`) are automatically p
 
 Have a question that belongs here? Tell us in our [Discord Community](https://community.vuetifyjs.com/) or create a request on our [Issue Generator](https://issues.vuetifyjs.com/).
 
-<promoted slug="vuetify-discord" />
+<PromotedPromoted slug="vuetify-discord" />

@@ -7,7 +7,8 @@ $dialog-elevation: 24 !default;
 $dialog-border-radius: settings.$border-radius-root !default;
 $dialog-margin: 24px !default;
 
-$dialog-card-header-padding: 14px 24px 0 !default;
-$dialog-card-header-text-padding-top: 10px !default;
-$dialog-card-text-padding: 16px 24px 10px !default;
+$dialog-card-actions-justify: flex-end !default;
+$dialog-card-header-padding: 16px 24px !default;
+$dialog-card-header-text-padding-top: 0 !default;
+$dialog-card-text-padding: 16px 24px 24px !default;
 $dialog-card-text-letter-spacing: tools.map-deep-get(settings.$typography, 'body-1', 'letter-spacing') !default;

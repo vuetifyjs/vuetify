@@ -30,8 +30,8 @@
     <v-divider class="mt-4"></v-divider>
 
     <v-row
-      class="my-1"
       align="center"
+      class="my-1"
     >
       <strong class="mx-4 text-info-darken-2">
         Remaining: {{ remainingTasks }}
@@ -56,8 +56,8 @@
     <v-card v-if="tasks.length > 0">
       <v-slide-y-transition
         class="py-0"
-        group
         tag="v-list"
+        group
       >
         <template v-for="(task, i) in tasks" :key="`${i}-${task.text}`">
           <v-divider

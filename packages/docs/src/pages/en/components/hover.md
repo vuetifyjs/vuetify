@@ -18,15 +18,15 @@ features:
 
 The `v-hover` component provides a simple interface for handling hover states for any component.
 
-<page-features />
+<PageFeatures />
 
 ## Usage
 
  `v-hover` is a renderless component that uses the default slot to provide scoped access to its internal model; as well as mouse event listeners to modify it. To explicitly control the internal state, use the **model-value** property.
 
-<usage name="v-hover" />
+<ExamplesUsage name="v-hover" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -34,7 +34,7 @@ The `v-hover` component provides a simple interface for handling hover states fo
 | - | - |
 | [v-hover](/api/v-hover/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Examples
 
@@ -44,13 +44,13 @@ The `v-hover` component provides a simple interface for handling hover states fo
 
 The **disabled** prop disables the hover functionality.
 
-<example file="v-hover/prop-disabled" />
+<ExamplesExample file="v-hover/prop-disabled" />
 
 #### Open and close delay
 
 Delay `v-hover` events by using **open-delay** and **close-delay** props in combination or separately.
 
-<example file="v-hover/prop-open-and-close-delay" />
+<ExamplesExample file="v-hover/prop-open-and-close-delay" />
 
 ### Misc
 
@@ -58,10 +58,10 @@ Delay `v-hover` events by using **open-delay** and **close-delay** props in comb
 
 `v-hover` can be used in combination with `v-for` to make a single item stand out when the user interacts with the list.
 
-<example file="v-hover/misc-hover-list" />
+<ExamplesExample file="v-hover/misc-hover-list" />
 
 #### Transition
 
 Create highly customized components that respond to user interaction.
 
-<example file="v-hover/misc-transition" />
+<ExamplesExample file="v-hover/misc-transition" />

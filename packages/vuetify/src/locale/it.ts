@@ -2,6 +2,7 @@ export default {
   badge: 'Distintivo',
   open: 'Apri',
   close: 'Chiudi',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Annulla',
@@ -71,6 +72,7 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

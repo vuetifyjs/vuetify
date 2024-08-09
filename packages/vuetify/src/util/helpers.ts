@@ -1,5 +1,5 @@
 // Utilities
-import { camelize, capitalize, Comment, computed, Fragment, isVNode, reactive, toRefs, unref, watchEffect } from 'vue'
+import { capitalize, Comment, computed, Fragment, isVNode, reactive, readonly, shallowRef, toRefs, unref, watchEffect } from 'vue'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -10,11 +10,11 @@ import type {
   InjectionKey,
   PropType,
   Ref,
-  Slots,
   ToRefs,
   VNode,
   VNodeArrayChildren,
   VNodeChild,
+  WatchOptions,
 } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
@@ -131,7 +131,7 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
   }
 }
 
-export function isObject (obj: any): obj is object {
+export function isObject (obj: any): obj is Record<string, any> {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
 }
 
@@ -398,14 +398,6 @@ export function defaultFilter (value: any, search: string | null, item: any) {
     value.toString().toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1
 }
 
-export function searchItems<T extends any = any> (items: T[], search: string): T[] {
-  if (!search) return items
-  search = search.toString().toLowerCase()
-  if (search.trim() === '') return items
-
-  return items.filter((item: any) => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
-}
-
 export function debounce (fn: Function, delay: MaybeRef<number>) {
   let timeoutId = 0 as any
   const wrap = (...args: any[]) => {
@@ -428,22 +420,6 @@ export function throttle<T extends (...args: any[]) => any> (fn: T, limit: numbe
       return fn(...args)
     }
   }
-}
-
-type Writable<T> = {
-  -readonly [P in keyof T]: T[P]
-}
-
-/**
- * Filters slots to only those starting with `prefix`, removing the prefix
- */
-export function getPrefixedSlots (prefix: string, slots: Slots): Slots {
-  return Object.keys(slots)
-    .filter(k => k.startsWith(prefix))
-    .reduce<Writable<Slots>>((obj, k) => {
-      obj[k.replace(prefix, '')] = slots[k]
-      return obj
-    }, {})
 }
 
 export function clamp (value: number, min = 0, max = 1) {
@@ -495,15 +471,6 @@ export function humanReadableFileSize (bytes: number, base: 1000 | 1024 = 1000):
   return `${bytes.toFixed(1)} ${prefix[unit]}B`
 }
 
-export function camelizeObjectKeys (obj: Record<string, any> | null | undefined) {
-  if (!obj) return {}
-
-  return Object.keys(obj).reduce((o: any, key: string) => {
-    o[camelize(key)] = obj[key]
-    return o
-  }, {})
-}
-
 export function mergeDeep (
   source: Record<string, any> = {},
   target: Record<string, any> = {},
@@ -542,10 +509,6 @@ export function mergeDeep (
   return out
 }
 
-export function fillArray<T> (length: number, obj: T) {
-  return Array(length).fill(obj)
-}
-
 export function flattenFragments (nodes: VNode[]): VNode[] {
   return nodes.map(node => {
     if (node.type === Fragment) {
@@ -554,11 +517,6 @@ export function flattenFragments (nodes: VNode[]): VNode[] {
       return node
     }
   }).flat()
-}
-
-export const randomHexColor = () => {
-  const n = (Math.random() * 0xfffff * 1000000).toString(16)
-  return '#' + n.slice(0, 6)
 }
 
 export function toKebabCase (str = '') {
@@ -574,30 +532,6 @@ toKebabCase.cache = new Map<string, string>()
 
 export type MaybeRef<T> = T | Ref<T>
 
-export function findChildren (vnode?: VNodeChild): ComponentInternalInstance[] {
-  if (!vnode || typeof vnode !== 'object') {
-    return []
-  }
-
-  if (Array.isArray(vnode)) {
-    return vnode
-      .map(child => findChildren(child))
-      .filter(v => v)
-      .flat(1)
-  } else if (Array.isArray(vnode.children)) {
-    return vnode.children
-      .map(child => findChildren(child))
-      .filter(v => v)
-      .flat(1)
-  } else if (vnode.component) {
-    return [vnode.component, ...findChildren(vnode.component?.subTree)]
-      .filter(v => v)
-      .flat(1)
-  }
-
-  return []
-}
-
 export function findChildrenWithProvide (
   key: InjectionKey<any> | symbol,
   vnode?: VNodeChild,
@@ -606,6 +540,8 @@ export function findChildrenWithProvide (
 
   if (Array.isArray(vnode)) {
     return vnode.map(child => findChildrenWithProvide(key, child)).flat(1)
+  } else if (vnode.suspense) {
+    return findChildrenWithProvide(key, vnode.ssContent!)
   } else if (Array.isArray(vnode.children)) {
     return vnode.children.map(child => findChildrenWithProvide(key, child)).flat(1)
   } else if (vnode.component) {
@@ -774,4 +710,53 @@ export function defer (timeout: number, cb: () => void) {
   const timeoutId = window.setTimeout(cb, timeout)
 
   return () => window.clearTimeout(timeoutId)
+}
+
+export function eagerComputed<T> (fn: () => T, options?: WatchOptions): Readonly<Ref<T>> {
+  const result = shallowRef()
+
+  watchEffect(() => {
+    result.value = fn()
+  }, {
+    flush: 'sync',
+    ...options,
+  })
+
+  return readonly(result)
+}
+
+export function isClickInsideElement (event: MouseEvent, targetDiv: HTMLElement) {
+  const mouseX = event.clientX
+  const mouseY = event.clientY
+
+  const divRect = targetDiv.getBoundingClientRect()
+  const divLeft = divRect.left
+  const divTop = divRect.top
+  const divRight = divRect.right
+  const divBottom = divRect.bottom
+
+  return mouseX >= divLeft && mouseX <= divRight && mouseY >= divTop && mouseY <= divBottom
+}
+
+export type TemplateRef = {
+  (target: Element | ComponentPublicInstance | null): void
+  value: HTMLElement | ComponentPublicInstance | null | undefined
+  readonly el: HTMLElement | undefined
+}
+export function templateRef () {
+  const el = shallowRef<HTMLElement | ComponentPublicInstance | null>()
+  const fn = (target: HTMLElement | ComponentPublicInstance | null) => {
+    el.value = target
+  }
+  Object.defineProperty(fn, 'value', {
+    enumerable: true,
+    get: () => el.value,
+    set: val => el.value = val,
+  })
+  Object.defineProperty(fn, 'el', {
+    enumerable: true,
+    get: () => refElement(el.value),
+  })
+
+  return fn as TemplateRef
 }

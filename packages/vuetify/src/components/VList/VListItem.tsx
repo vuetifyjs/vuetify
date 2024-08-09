@@ -34,7 +34,7 @@ import { deprecate, EventProp, genericComponent, propsFactory, useRender } from 
 import type { PropType } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
-type ListItemSlot = {
+export type ListItemSlot = {
   isActive: boolean
   isSelected: boolean
   isIndeterminate: boolean
@@ -69,7 +69,7 @@ export const makeVListItemProps = propsFactory({
   appendIcon: IconValue,
   baseColor: String,
   disabled: Boolean,
-  lines: String as PropType<'one' | 'two' | 'three'>,
+  lines: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
   link: {
     type: Boolean,
     default: undefined,
@@ -115,17 +115,27 @@ export const VListItem = genericComponent<VListItemSlots>()({
   setup (props, { attrs, slots, emit }) {
     const link = useLink(props, attrs)
     const id = computed(() => props.value === undefined ? link.href.value : props.value)
-    const { select, isSelected, isIndeterminate, isGroupActivator, root, parent, openOnSelect } = useNestedItem(id, false)
+    const {
+      activate,
+      isActivated,
+      select,
+      isSelected,
+      isIndeterminate,
+      isGroupActivator,
+      root,
+      parent,
+      openOnSelect,
+    } = useNestedItem(id, false)
     const list = useList()
     const isActive = computed(() =>
       props.active !== false &&
-      (props.active || link.isActive?.value || isSelected.value)
+      (props.active || link.isActive?.value || (root.activatable.value ? isActivated.value : isSelected.value))
     )
     const isLink = computed(() => props.link !== false && link.isLink.value)
     const isClickable = computed(() =>
       !props.disabled &&
       props.link !== false &&
-      (props.link || link.isClickable.value || (props.value != null && !!list))
+      (props.link || link.isClickable.value || (!!list && (root.selectable.value || root.activatable.value || props.value != null)))
     )
 
     const roundedProps = computed(() => props.rounded || props.nav)
@@ -164,10 +174,19 @@ export const VListItem = genericComponent<VListItemSlots>()({
     function onClick (e: MouseEvent) {
       emit('click', e)
 
-      if (isGroupActivator || !isClickable.value) return
+      if (!isClickable.value) return
 
       link.navigate?.(e)
-      props.value != null && select(!isSelected.value, e)
+
+      if (isGroupActivator) return
+
+      if (root.activatable.value) {
+        activate(!isActivated.value, e)
+      } else if (root.selectable.value) {
+        select(!isSelected.value, e)
+      } else if (props.value != null) {
+        select(!isSelected.value, e)
+      }
     }
 
     function onKeyDown (e: KeyboardEvent) {
@@ -339,7 +358,14 @@ export const VListItem = genericComponent<VListItemSlots>()({
       )
     })
 
-    return {}
+    return {
+      activate,
+      isActivated,
+      isGroupActivator,
+      isSelected,
+      list,
+      select,
+    }
   },
 })
 

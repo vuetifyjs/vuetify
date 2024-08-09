@@ -22,10 +22,10 @@
           <v-text-field
             v-model="description"
             :rules="rules"
-            counter
-            maxlength="25"
             hint="This field uses maxlength attribute"
             label="Limit exceeded"
+            maxlength="25"
+            counter
           ></v-text-field>
         </v-col>
 
@@ -35,11 +35,11 @@
         >
           <v-text-field
             v-model="title"
+            :counter-value="v => v.trim().split(' ').length"
             :rules="wordsRules"
             counter="5"
             hint="This field counts words instead of characters"
             label="Custom counter from prop"
-            :counter-value="v => v.trim().split(' ').length"
           ></v-text-field>
         </v-col>
 

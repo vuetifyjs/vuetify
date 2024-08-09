@@ -1,17 +1,17 @@
 <template>
   <v-window
     v-model="onboarding"
-    show-arrows
     reverse
+    show-arrows
   >
     <v-window-item
       v-for="n in length"
       :key="`card-${n}`"
     >
       <v-card
+        class="d-flex align-center justify-center ma-2"
         elevation="2"
         height="200"
-        class="d-flex align-center justify-center ma-2"
       >
         <h1
           class="text-h2"

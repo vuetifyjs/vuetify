@@ -1,5 +1,5 @@
 <template>
-  <app-sheet>
+  <AppSheet>
     <v-table class="api-table" density="comfortable">
       <thead>
         <tr>
@@ -22,16 +22,16 @@
             name="row"
             v-bind="{
               props: {
-                class: 'bg-surface-bright'
+                style: 'background: rgba(0,0,0,.1)'
               },
               item,
             }"
           />
 
           <tr v-if="item.description || (user.dev && item.source)">
-            <td colspan="3" class="text-mono pt-4">
+            <td class="text-mono pt-4" colspan="3">
               <template v-if="item.description">
-                <app-markdown
+                <AppMarkdown
                   v-if="localeStore.locale !== 'eo-UY'"
                   :content="item.description"
                   class="mb-0"
@@ -51,27 +51,18 @@
         </template>
 
         <tr v-if="!filtered.length">
-          <td colspan="4" class="text-center text-disabled text-body-2">
+          <td class="text-center text-disabled text-body-2" colspan="4">
             {{ t('search.no-results') }}
           </td>
         </tr>
       </tbody>
     </v-table>
-  </app-sheet>
+  </AppSheet>
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed, PropType } from 'vue'
-  import { camelCase } from 'lodash-es'
-
-  // Stores
-  import { useAppStore } from '@/store/app'
-  import { useLocaleStore } from '@/store/locale'
-  import { useUserStore } from '@vuetify/one'
+  // Types
+  import type { PropType } from 'vue'
 
   const props = defineProps({
     headers: {

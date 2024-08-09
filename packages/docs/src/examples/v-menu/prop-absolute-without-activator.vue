@@ -7,8 +7,8 @@
       <v-card
         :ripple="false"
         class="portrait"
-        img="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
         height="300px"
+        img="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
         @contextmenu="show"
       ></v-card>
     </v-row>

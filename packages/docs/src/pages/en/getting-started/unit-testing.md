@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Unit testing
   description: Learn how to create unit tests with vue-test-utils and Vuetify components in your Vue application.
@@ -14,9 +13,9 @@ related:
 
 Add regression protection by adding unit tests to your Vuetify application
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<VoPromotionsCardVuetify />
 
 ## Usage
 
@@ -52,16 +51,16 @@ export default defineConfig({
 
 ::: tabs
 
+```bash [pnpm]
+pnpm add @vue/test-utils vitest resize-observer-polyfill --save-dev
+```
+
 ```bash [yarn]
 yarn add @vue/test-utils vitest resize-observer-polyfill --dev
 ```
 
 ```bash [npm]
 npm install @vue/test-utils vitest resize-observer-polyfill --save-dev
-```
-
-```bash [pnpm]
-pnpm add @vue/test-utils vitest resize-observer-polyfill --save-dev
 ```
 
 ```bash [bun]

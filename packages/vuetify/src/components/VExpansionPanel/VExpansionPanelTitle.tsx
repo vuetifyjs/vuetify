@@ -1,5 +1,6 @@
 // Components
-import { VExpansionPanelSymbol } from './VExpansionPanels'
+import { VExpansionPanelSymbol } from './shared'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
@@ -42,6 +43,7 @@ export const makeVExpansionPanelTitleProps = propsFactory({
     default: '$collapse',
   },
   hideActions: Boolean,
+  focusable: Boolean,
   static: Boolean,
   ripple: {
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
@@ -74,12 +76,15 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
       readonly: props.readonly,
     }))
 
+    const icon = computed(() => expansionPanel.isSelected.value ? props.collapseIcon : props.expandIcon)
+
     useRender(() => (
       <button
         class={[
           'v-expansion-panel-title',
           {
             'v-expansion-panel-title--active': expansionPanel.isSelected.value,
+            'v-expansion-panel-title--focusable': props.focusable,
             'v-expansion-panel-title--static': props.static,
           },
           backgroundColorClasses.value,
@@ -101,12 +106,17 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
         { slots.default?.(slotProps.value) }
 
         { !props.hideActions && (
-          <span class="v-expansion-panel-title__icon">
-            {
-              slots.actions ? slots.actions(slotProps.value)
-              : <VIcon icon={ expansionPanel.isSelected.value ? props.collapseIcon : props.expandIcon } />
-            }
-          </span>
+          <VDefaultsProvider
+            defaults={{
+              VIcon: {
+                icon: icon.value,
+              },
+            }}
+          >
+            <span class="v-expansion-panel-title__icon">
+              { slots.actions?.(slotProps.value) ?? <VIcon /> }
+            </span>
+          </VDefaultsProvider>
         )}
       </button>
     ))

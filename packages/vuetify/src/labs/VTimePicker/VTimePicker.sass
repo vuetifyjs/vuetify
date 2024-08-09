@@ -1,0 +1,11 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-time-picker.v-picker
+    padding: $time-picker-padding
+    width: $time-picker-width
+
+    .v-picker-title
+      padding: 0
+      margin-bottom: 20px

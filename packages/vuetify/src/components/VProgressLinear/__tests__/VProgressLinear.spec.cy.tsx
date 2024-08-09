@@ -85,7 +85,7 @@ describe('VProgressLinear', () => {
         <VProgressLinear modelValue={ 25 } stream bufferValue={ 50 } />
       </CenteredGrid>
     ))
-      .get('.v-progress-linear__background')
+      .get('.v-progress-linear__buffer')
       .should('have.css', 'width', '50px')
   })
 
@@ -110,13 +110,15 @@ describe('VProgressLinear', () => {
   })
 
   it('supports clickable prop', () => {
-    cy.mount(defineComponent(() => {
-      const model = ref(0)
-      return () => (
-        <CenteredGrid width="100px">
-          <VProgressLinear v-model={ model.value } clickable />
-        </CenteredGrid>
-      )
+    cy.mount(defineComponent({
+      setup () {
+        const model = ref(0)
+        return () => (
+          <CenteredGrid width="100px">
+            <VProgressLinear v-model={ model.value } clickable />
+          </CenteredGrid>
+        )
+      },
     }))
       .get('.v-progress-linear')
       .click('center')

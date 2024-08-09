@@ -77,6 +77,7 @@ export const makeVAutocompleteProps = propsFactory({
   autoSelectFirst: {
     type: [Boolean, String] as PropType<boolean | 'exact'>,
   },
+  clearOnSelect: Boolean,
   search: String,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
@@ -174,6 +175,9 @@ export const VAutocomplete = genericComponent<new <
       return filteredItems.value
     })
 
+    const hasChips = computed(() => !!(props.chips || slots.chip))
+    const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
+
     const selectedValues = computed(() => model.value.map(selection => selection.props.value))
 
     const highlightFirst = computed(() => {
@@ -234,7 +238,11 @@ export const VAutocomplete = genericComponent<new <
         menu.value = false
       }
 
-      if (highlightFirst.value && ['Enter', 'Tab'].includes(e.key)) {
+      if (
+        highlightFirst.value &&
+        ['Enter', 'Tab'].includes(e.key) &&
+        !model.value.some(({ value }) => value === displayItems.value[0].value)
+      ) {
         select(displayItems.value[0])
       }
 
@@ -242,24 +250,25 @@ export const VAutocomplete = genericComponent<new <
         listRef.value?.focus('next')
       }
 
-      if (!props.multiple) return
-
       if (['Backspace', 'Delete'].includes(e.key)) {
-        if (selectionIndex.value < 0) {
-          if (e.key === 'Backspace' && !search.value) {
-            selectionIndex.value = length - 1
-          }
+        if (
+          !props.multiple &&
+          hasSelectionSlot.value &&
+          model.value.length > 0 &&
+          !search.value
+        ) return select(model.value[0], false)
 
-          return
+        if (~selectionIndex.value) {
+          const originalSelectionIndex = selectionIndex.value
+          select(model.value[selectionIndex.value], false)
+
+          selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
+        } else if (e.key === 'Backspace' && !search.value) {
+          selectionIndex.value = length - 1
         }
-
-        const originalSelectionIndex = selectionIndex.value
-
-        const selectedItem = model.value[selectionIndex.value]
-        if (selectedItem && !selectedItem.props.disabled) select(selectedItem)
-
-        selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
       }
+
+      if (!props.multiple) return
 
       if (e.key === 'ArrowLeft') {
         if (selectionIndex.value < 0 && selectionStart > 0) return
@@ -316,35 +325,40 @@ export const VAutocomplete = genericComponent<new <
       listHasFocus.value = false
     }
     function onUpdateModelValue (v: any) {
-      if (v == null || (v === '' && !props.multiple)) model.value = []
+      if (v == null || (v === '' && !props.multiple && !hasSelectionSlot.value)) model.value = []
     }
 
     const isSelecting = shallowRef(false)
 
-    function select (item: ListItem, add = true) {
-      if (item.props.disabled) return
+    /** @param set - null means toggle */
+    function select (item: ListItem | undefined, set: boolean | null = true) {
+      if (!item || item.props.disabled) return
 
       if (props.multiple) {
         const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
+        const add = set == null ? !~index : set
 
-        if (index === -1) {
-          model.value = [...model.value, item]
-        } else {
-          const value = [...model.value]
+        if (~index) {
+          const value = add ? [...model.value, item] : [...model.value]
           value.splice(index, 1)
           model.value = value
+        } else if (add) {
+          model.value = [...model.value, item]
+        }
+
+        if (props.clearOnSelect) {
+          search.value = ''
         }
       } else {
+        const add = set !== false
         model.value = add ? [item] : []
+        search.value = add && !hasSelectionSlot.value ? item.title : ''
 
-        isSelecting.value = true
-
-        search.value = add ? item.title : ''
-
-        menu.value = false
-        isPristine.value = true
-
-        nextTick(() => (isSelecting.value = false))
+        // watch for search watcher to trigger
+        nextTick(() => {
+          menu.value = false
+          isPristine.value = true
+        })
       }
     }
 
@@ -353,21 +367,14 @@ export const VAutocomplete = genericComponent<new <
 
       if (val) {
         isSelecting.value = true
-        search.value = props.multiple ? '' : String(model.value.at(-1)?.props.title ?? '')
+        search.value = (props.multiple || hasSelectionSlot.value) ? '' : String(model.value.at(-1)?.props.title ?? '')
         isPristine.value = true
 
         nextTick(() => isSelecting.value = false)
       } else {
         if (!props.multiple && search.value == null) model.value = []
-        else if (
-          highlightFirst.value &&
-          !listHasFocus.value &&
-          !model.value.some(({ value }) => value === displayItems.value[0].value)
-        ) {
-          select(displayItems.value[0])
-        }
         menu.value = false
-        search.value = ''
+        if (!model.value.some(({ title }) => title === search.value)) search.value = ''
         selectionIndex.value = -1
       }
     })
@@ -391,20 +398,15 @@ export const VAutocomplete = genericComponent<new <
       }
     })
 
-    watch(displayItems, (val, oldVal) => {
-      if (!isFocused.value) return
+    watch(() => props.items, (newVal, oldVal) => {
+      if (menu.value) return
 
-      if (!val.length && props.hideNoData) {
-        menu.value = false
-      }
-
-      if (!oldVal.length && val.length) {
+      if (isFocused.value && !oldVal.length && newVal.length) {
         menu.value = true
       }
     })
 
     useRender(() => {
-      const hasChips = !!(props.chips || slots.chip)
       const hasList = !!(
         (!props.hideNoData || displayItems.value.length) ||
         slots['prepend-item'] ||
@@ -431,7 +433,7 @@ export const VAutocomplete = genericComponent<new <
             {
               'v-autocomplete--active-menu': menu.value,
               'v-autocomplete--chips': !!props.chips,
-              'v-autocomplete--selection-slot': !!slots.selection,
+              'v-autocomplete--selection-slot': !!hasSelectionSlot.value,
               'v-autocomplete--selecting-index': selectionIndex.value > -1,
             },
             props.class,
@@ -474,6 +476,7 @@ export const VAutocomplete = genericComponent<new <
                       tabindex="-1"
                       aria-live="polite"
                       color={ props.itemColor ?? props.color }
+                      { ...props.listProps }
                     >
                       { slots['prepend-item']?.() }
 
@@ -487,7 +490,7 @@ export const VAutocomplete = genericComponent<new <
                             ref: itemRef,
                             key: index,
                             active: (highlightFirst.value && index === 0) ? true : undefined,
-                            onClick: () => select(item),
+                            onClick: () => select(item, null),
                           })
 
                           return slots.item?.({
@@ -495,7 +498,7 @@ export const VAutocomplete = genericComponent<new <
                             index,
                             props: itemProps,
                           }) ?? (
-                            <VListItem { ...itemProps }>
+                            <VListItem { ...itemProps } role="option">
                             {{
                               prepend: ({ isSelected }) => (
                                 <>
@@ -543,6 +546,14 @@ export const VAutocomplete = genericComponent<new <
 
                   const slotProps = {
                     'onClick:close': onChipClose,
+                    onKeydown (e: KeyboardEvent) {
+                      if (e.key !== 'Enter' && e.key !== ' ') return
+
+                      e.preventDefault()
+                      e.stopPropagation()
+
+                      onChipClose(e)
+                    },
                     onMousedown (e: MouseEvent) {
                       e.preventDefault()
                       e.stopPropagation()
@@ -551,10 +562,10 @@ export const VAutocomplete = genericComponent<new <
                     'onUpdate:modelValue': undefined,
                   }
 
-                  const hasSlot = hasChips ? !!slots.chip : !!slots.selection
+                  const hasSlot = hasChips.value ? !!slots.chip : !!slots.selection
                   const slotContent = hasSlot
                     ? ensureValidVNode(
-                      hasChips
+                      hasChips.value
                         ? slots.chip!({ item, index, props: slotProps })
                         : slots.selection!({ item, index })
                     )
@@ -574,7 +585,7 @@ export const VAutocomplete = genericComponent<new <
                       ]}
                       style={ index === selectionIndex.value ? textColorStyles.value : {} }
                     >
-                      { hasChips ? (
+                      { hasChips.value ? (
                         !slots.chip ? (
                           <VChip
                             key="chip"
@@ -624,6 +635,7 @@ export const VAutocomplete = genericComponent<new <
                     onClick={ noop }
                     aria-label={ t(label.value) }
                     title={ t(label.value) }
+                    tabindex="-1"
                   />
                 ) : undefined }
               </>
