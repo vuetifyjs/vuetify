@@ -172,6 +172,10 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
       }
     }
 
+    function onAfterLeave () {
+      if (isHovering.value) onPointerleave();
+    }
+
     const locationClasses = computed(() => {
       return props.location.split(' ').reduce((acc, loc) => {
         acc[`v-snackbar--${loc}`] = true
@@ -226,6 +230,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           _disableGlobalStack
           onTouchstartPassive={ onTouchstart }
           onTouchend={ onTouchend }
+          onAfterLeave={ onAfterLeave }
           { ...scopeId }
           v-slots={{ activator: slots.activator }}
         >
