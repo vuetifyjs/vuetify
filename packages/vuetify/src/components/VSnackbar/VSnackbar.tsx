@@ -173,7 +173,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     }
 
     function onAfterLeave () {
-      if (isHovering.value) onPointerleave();
+      if (isHovering.value) onPointerleave()
     }
 
     const locationClasses = computed(() => {
