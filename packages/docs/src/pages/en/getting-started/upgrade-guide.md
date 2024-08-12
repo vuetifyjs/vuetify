@@ -299,3 +299,7 @@ app.use(vuetify)
 ### v-intersect
 
 - Handler argument order has changed from `entries, observer, isIntersecting` to `isIntersecting, entries, observer`
+
+## Composables
+
+- the `xsOnly`, `smOnly`, `mdOnly`, `lgOnly`, and `xlOnly` properties have been deprecated from the `useDisplay()` composable.
