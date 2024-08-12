@@ -47,7 +47,7 @@ export function LoaderSlot (
 ) {
   return (
     <div class={ `${props.name}__loader` }>
-      { slots.default?.({
+      { slots?.default?.({
         color: props.color,
         isActive: props.active,
       } as LoaderSlotProps) || (
