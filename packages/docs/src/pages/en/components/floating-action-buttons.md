@@ -73,3 +73,9 @@ When changing the default action of your button, it is recommended that you disp
 For better visual appeal, we use a small button to match our list avatars.
 
 <ExamplesExample file="v-fab/misc-small" />
+
+### Speed dial
+
+The speed-dial component has a very robust api for customizing your FAB experience exactly how you want.
+
+<ExamplesExample file="v-fab/misc-speed-dial" />
