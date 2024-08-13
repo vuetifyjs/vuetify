@@ -159,7 +159,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     const { teleportTarget } = useTeleport(() => {
       const target = props.attach || props.contained
       if (target) return target
-      const rootNode = activatorEl?.value?.getRootNode() || vm?.proxy?.$el?.getRootNode()
+      const rootNode = activatorEl?.value?.getRootNode() || vm.proxy?.$el?.getRootNode()
       if (rootNode instanceof ShadowRoot) return rootNode
       return false
     })
