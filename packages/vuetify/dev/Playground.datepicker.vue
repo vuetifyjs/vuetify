@@ -96,13 +96,12 @@
 </template>
 
 <script>
-  import { VDateInput, VDateRangeInput } from '../src/labs/VDateInput'
+  import { VDateInput } from '../src/labs/VDateInput'
   import sv from 'date-fns/locale/sv'
 
   export default {
     components: {
       VDateInput,
-      VDateRangeInput,
     },
     data: () => ({
       date: '2022-01-01',
