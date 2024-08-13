@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'upath'
 import { mkdirp } from 'mkdirp'
 import { writeFile } from 'fs/promises'
 import { fileURLToPath } from 'url'
@@ -112,7 +112,7 @@ export default [
             )
             await Promise.all(importedIds.map(async id => {
               // Normalize Windows Paths
-              const importFrom = path.relative(srcDir, id).replace(/\\/g, '/').replace(/\.ts$/, '.mjs')
+              const importFrom = path.relative(srcDir, id).replace(/\.ts$/, '.mjs')
 
               if (await this.resolve(path.join(id, '../_variables.scss')) != null) {
                 variables.push(id)
@@ -172,7 +172,7 @@ export default [
                 path.relative(srcDir, id),
                 '../_variables.scss'
               ) + `'`
-            }).sort().join('\n').replace(/\\/g, '/'),
+            }).sort().join('\n'),
           })
         },
       },
@@ -251,7 +251,7 @@ export default [
             )
             await Promise.all(importedIds.map(async id => {
               // Normalize Windows Paths
-              const importFrom = path.relative(srcDir, id).replace(/\\/g, '/').replace(/\.ts$/, '.mjs')
+              const importFrom = path.relative(srcDir, id).replace(/\.ts$/, '.mjs')
 
               if (await this.resolve(path.join(id, '../_variables.scss')) != null) {
                 variables.push(id)
@@ -292,7 +292,7 @@ export default [
                 path.relative(srcDir, id),
                 '../_variables.scss'
               ) + `'`
-            }).sort().join('\n').replace(/\\/g, '/'),
+            }).sort().join('\n'),
           })
         }
       }
