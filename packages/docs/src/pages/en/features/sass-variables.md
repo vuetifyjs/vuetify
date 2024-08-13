@@ -284,6 +284,7 @@ You might have to write a custom importer plugin to load the settings file.
 ### sass modern options
 
 If you're using Vite or Nuxt 3 (with Vite), you can enable SASS modern Vite options to improve dev server startup and build performance, you will need to:
+
 - bump Vite to `5.4.0`: `"vite": "^5.4.0"`
 - bump SASS to `1.77.8`: `"sass": "^1.77.8"`
 - configure the new sass modern options
