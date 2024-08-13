@@ -290,6 +290,7 @@ If you're using Vite or Nuxt 3 (with Vite), you can enable SASS modern Vite opti
 - configure the new sass modern options
 
 When using Vite, add the following option to your Vite config file:
+
 ```js { resource="vite.config.ts" }
 css: {
   preprocessorOptions: {
@@ -302,6 +303,7 @@ css: {
 ```
 
 When using Nuxt, add the following option to your Nuxt config file:
+
 ```js { resource="nuxt.config.ts" }
 vite: {
   css: {
