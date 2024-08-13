@@ -70,6 +70,7 @@ app.use(vuetify)
 - Global styles previously included as `.v-application p` or `.v-application ul` are no longer included. If you need margin for `p`, or padding-left for `ul` and `ol`, set it manually in your root component's `<style>` tag
 - `stateless`, `clipped`, `clipped-right` and `app` props have been removed from v-navigation-drawer, v-app-bar and v-system-bar. The position in the markup determines the appearance. Use the `order="number"` prop to influence it manually.
 - `$vuetify.breakpoint` has been renamed to `$vuetify.display` and extended with [new properties](/features/display-and-platform/)
+  - `*Only` properties have been removed, use `xs` instead of `xsOnly` etc.
 
 ### Theme
 
@@ -299,7 +300,3 @@ app.use(vuetify)
 ### v-intersect
 
 - Handler argument order has changed from `entries, observer, isIntersecting` to `isIntersecting, entries, observer`
-
-## Composables
-
-- the `xsOnly`, `smOnly`, `mdOnly`, `lgOnly`, and `xlOnly` properties have been deprecated from the `useDisplay()` composable.
