@@ -9,6 +9,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { useForm } from '@/composables/form'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -345,6 +346,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         </VTextField>
       )
     })
+
+    return forwardRefs({}, vTextFieldRef)
   },
 })
 
