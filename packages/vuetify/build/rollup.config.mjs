@@ -81,8 +81,8 @@ export default [
               })]).process(styles, { from: 'src' }),
             ])
           }).then(result => {
-            writeFile(fileURLToPath(new URL('../dist/vuetify.css', import.meta.url)), banner + result[0].css, 'utf8')
-            writeFile(fileURLToPath(new URL('../dist/vuetify.min.css', import.meta.url)), banner + result[1].css, 'utf8')
+            writeFile(path.resolve(root, 'dist/vuetify.css'), banner + result[0].css, 'utf8')
+            writeFile(path.resolve(root, 'dist/vuetify.min.css'), banner + result[1].css, 'utf8')
           })
 
           // Individual CSS files
