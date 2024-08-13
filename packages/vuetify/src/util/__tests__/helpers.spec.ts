@@ -289,23 +289,14 @@ describe('helpers', () => {
       expect(mergeDeep({ a: ['foo'] }, { a: ['bar'] }, (a, b) => [...a, ...b])).toEqual({ a: ['foo', 'bar'] })
     })
 
-    it('should not recursively merge Nodes', () => {
-      const nodeSource = document.createElement('div')
-      const nodeTarget = document.createElement('span')
+    it('should not recursively merge non-plain objects', () => {
+      const plain = { a: 'foo' }
+      const div = document.createElement('div')
+      const span = document.createElement('span')
 
-      expect(mergeDeep({ a: nodeSource }, { a: nodeTarget }).a).toBe(nodeTarget)
-    })
-
-    it('should recursively merge with circular references', () => {
-      const source = { a: {}, b: {} }
-      source.a = source.b = source
-      const target = { b: {}, c: {} }
-      target.b = target.c = target
-      const result = mergeDeep(source, target)
-
-      expect(result.a).toBe(source)
-      expect(result.b).toBe(result)
-      expect(result.c).toBe(target)
+      expect(mergeDeep({ a: plain }, { a: div }).a).toBe(div)
+      expect(mergeDeep({ a: div }, { a: plain }).a).toBe(plain)
+      expect(mergeDeep({ a: div }, { a: span }).a).toBe(span)
     })
   })
 

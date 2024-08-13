@@ -475,15 +475,8 @@ export function mergeDeep (
   source: Record<string, any> = {},
   target: Record<string, any> = {},
   arrayFn?: (a: unknown[], b: unknown[]) => unknown[],
-  seen: WeakMap<Record<string, any>, Record<string, any>> = new WeakMap(),
 ) {
-  // Do not merge objects that are already seen (circular)
-  if (seen.has(source)) {
-    return seen.get(source) as Record<string, any>
-  }
-
   const out: Record<string, any> = {}
-  seen.set(source, out)
 
   for (const key in source) {
     out[key] = source[key]
@@ -493,20 +486,13 @@ export function mergeDeep (
     const sourceProperty = source[key]
     const targetProperty = target[key]
 
-    // Do not merge nodes
-    if (sourceProperty instanceof Node || targetProperty instanceof Node) {
-      out[key] = targetProperty
-
-      continue
-    }
-
     // Only continue deep merging if
-    // both properties are objects
+    // both properties are plain objects
     if (
-      isObject(sourceProperty) &&
-      isObject(targetProperty)
+      isObject(sourceProperty) && Object.getPrototypeOf(sourceProperty) === Object.prototype &&
+      isObject(targetProperty) && Object.getPrototypeOf(targetProperty) === Object.prototype
     ) {
-      out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn, seen)
+      out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn)
 
       continue
     }
