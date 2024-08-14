@@ -63,7 +63,7 @@ describe('click-outside.js within the Shadow DOM', () => {
     const { outsideClickHandler, shadowEl, binding } = bootstrap()
     expect(window.document.addEventListener).toHaveBeenCalledWith('click', outsideClickHandler, true)
 
-    ClickOutside.unmounted(shadowEl, binding)
+    ClickOutside.beforeUnmount(shadowEl, binding)
     expect(window.document.removeEventListener).toHaveBeenCalledWith('click', outsideClickHandler, true)
   })
 
@@ -71,7 +71,7 @@ describe('click-outside.js within the Shadow DOM', () => {
     const { shadowClickHandler, shadowRoot, shadowEl, binding } = bootstrap()
     expect(shadowRoot.addEventListener).toHaveBeenCalledWith('click', shadowClickHandler, true)
 
-    ClickOutside.unmounted(shadowEl, binding)
+    ClickOutside.beforeUnmount(shadowEl, binding)
     expect(shadowRoot.removeEventListener).toHaveBeenCalledWith('click', shadowClickHandler, true)
   })
 

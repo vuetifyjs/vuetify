@@ -28,9 +28,9 @@ Vuetify has support for multiple different installation paths with the most comm
 
 For more information regarding supported package managers, please visit their official websites:
 
+* [pnpm](https://pnpm.io/)
 * [yarn](https://yarnpkg.com/)
 * [npm](https://npmjs.org/)
-* [pnpm](https://pnpm.io/)
 * [bun](https://bun.sh/package-manager)
 
 ## Using Vite
@@ -39,16 +39,16 @@ To get started with Vuetify 3, simply paste the following code into your termina
 
 ::: tabs
 
+```bash [pnpm]
+pnpm create vuetify
+```
+
 ```bash [yarn]
 yarn create vuetify
 ```
 
 ```bash [npm]
 npm create vuetify@latest
-```
-
-```bash [pnpm]
-pnpm create vuetify
 ```
 
 ```bash [bun]
@@ -79,7 +79,7 @@ Once the scaffold is complete, start the vite development server by running the 
 
 ```bash
 cd vuetify-project
-yarn dev
+pnpm dev
 ```
 
 <VoPromotionsCardVuetify slug="vuetify-one" />
@@ -92,6 +92,13 @@ Start off creating a nuxt app by executing the following commands:
 
 ::: tabs
 
+```bash [pnpm]
+pnpx nuxi@latest init <project-name>
+cd <project-name>
+# Create a .npmrc file with shamefully-hoist=true
+pnpm install
+```
+
 ```bash [yarn]
 npx nuxi@latest init <project-name>
 cd <project-name>
@@ -102,13 +109,6 @@ yarn
 npx nuxi@latest init <project-name>
 cd <project-name>
 npm install
-```
-
-```bash [pnpm]
-pnpm dlx nuxi@latest init <project-name>
-# Make sure you have `shamefully-hoist=true` in `.npmrc` before running pnpm install
-cd <project-name>
-pnpm install
 ```
 
 ```bash [bun]
@@ -123,6 +123,11 @@ and then install the required Vuetify modules as dependencies:
 
 ::: tabs
 
+```bash [pnpm]
+pnpm i -D vuetify vite-plugin-vuetify
+pnpm i @mdi/font
+```
+
 ```bash [yarn]
 yarn add -D vuetify vite-plugin-vuetify
 yarn add @mdi/font
@@ -131,11 +136,6 @@ yarn add @mdi/font
 ```bash [npm]
 npm i -D vuetify vite-plugin-vuetify
 npm i @mdi/font
-```
-
-```bash [pnpm]
-pnpm i -D vuetify vite-plugin-vuetify
-pnpm i @mdi/font
 ```
 
 ```bash [bun]
@@ -267,24 +267,24 @@ app.use(vuetify).mount('#app')
 
 You can use Vuetify's components in your Vitepress static site.
 
-First, add vuetify to your dependencies
+After initializing your Vitepress project, add Vuetify to your dependencies
 
 ::: tabs
 
+```bash [pnpm]
+pnpm i vuetify
+```
+
 ```bash [yarn]
-yarn create vuetify
+yarn add vuetify
 ```
 
 ```bash [npm]
-npm create vuetify@latest
-```
-
-```bash [pnpm]
-pnpm create vuetify
+npm i vuetify
 ```
 
 ```bash [bun]
-bun create vuetify
+bun add vuetify
 ```
 
 :::
@@ -314,16 +314,16 @@ Follow these steps if for example you are adding Vuetify to an existing project,
 
 ::: tabs
 
+```bash [pnpm]
+pnpm i vuetify
+```
+
 ```bash [yarn]
 yarn add vuetify
 ```
 
 ```bash [npm]
 npm i vuetify
-```
-
-```bash [pnpm]
-pnpm i vuetify
 ```
 
 ```bash [bun]

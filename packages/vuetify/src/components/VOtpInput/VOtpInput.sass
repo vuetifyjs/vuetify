@@ -5,13 +5,12 @@
 
 @include tools.layer('components')
   .v-otp-input
-    @include tools.rounded(4px)
-
     align-items: center
     display: flex
     justify-content: center
     padding: $otp-input-padding
     position: relative
+    @include tools.rounded(4px)
 
     .v-field
       height: 100%

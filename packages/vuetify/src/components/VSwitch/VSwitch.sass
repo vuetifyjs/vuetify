@@ -101,20 +101,20 @@
     .v-selection-control__input
       border-radius: 50%
       transition: $switch-control-input-transition
-      +tools.ltr()
-        transform: translateX(-$switch-thumb-transform)
-      +tools.rtl()
-        transform: translateX($switch-thumb-transform)
       position: absolute
+      @include tools.ltr()
+        transform: translateX(-$switch-thumb-transform)
+      @include tools.rtl()
+        transform: translateX($switch-thumb-transform)
 
       .v-icon
         position: absolute
 
     .v-selection-control--dirty
       .v-selection-control__input
-        +tools.ltr()
+        @include tools.ltr()
           transform: translateX($switch-thumb-transform)
-        +tools.rtl()
+        @include tools.rtl()
           transform: translateX(-$switch-thumb-transform)
 
     &.v-switch--indeterminate
@@ -134,11 +134,11 @@
 
       .v-selection-control__wrapper
         transform: $switch-thumb-vertical-transform
-        
+
 @media (forced-colors: active)
   .v-switch
     .v-switch__loader
-      .v-progress-circular 
+      .v-progress-circular
         color: currentColor
 
     .v-switch__thumb
@@ -146,13 +146,13 @@
 
     .v-switch__track,
     .v-switch__thumb
-      border: 1px solid 
+      border: 1px solid
       color: buttontext
 
     &:not(.v-switch--loading):not(.v-input--disabled)
       .v-selection-control--dirty
         .v-switch__thumb
-          background-color: highlight 
+          background-color: highlight
 
     &:not(.v-input--disabled)
       .v-selection-control--dirty
@@ -188,4 +188,4 @@
       &.v-switch--inset,
       &.v-switch--indeterminate
         .v-switch__thumb
-          border-width: 0 
+          border-width: 0

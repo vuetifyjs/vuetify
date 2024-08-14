@@ -35,7 +35,7 @@ export const makeVTreeviewProps = propsFactory({
     collapseIcon: '$treeviewCollapse',
     expandIcon: '$treeviewExpand',
     slim: true,
-  }), ['nav']),
+  }), ['itemType', 'nav']),
 }, 'VTreeview')
 
 export const VTreeview = genericComponent<new <T>(
@@ -166,9 +166,7 @@ export const VTreeview = genericComponent<new <T>(
       )
     })
 
-    return {
-      open,
-    }
+    return { }
   },
 })
 
