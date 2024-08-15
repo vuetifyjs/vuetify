@@ -111,7 +111,6 @@ export default [
               (await this.resolve('src/components/index.ts')).id
             )
             await Promise.all(importedIds.map(async id => {
-              // Normalize Windows Paths
               const importFrom = path.relative(srcDir, id).replace(/\.ts$/, '.mjs')
 
               if (await this.resolve(path.join(id, '../_variables.scss')) != null) {
@@ -165,7 +164,6 @@ export default [
           this.emitFile({
             type: 'asset',
             fileName: '_component-variables.sass',
-            // Normalize Windows Paths
             source: variables.map(id => {
               return `@forward '` + path.join(
                 '../lib',
@@ -250,7 +248,6 @@ export default [
               (await this.resolve('src/labs/components.ts')).id
             )
             await Promise.all(importedIds.map(async id => {
-              // Normalize Windows Paths
               const importFrom = path.relative(srcDir, id).replace(/\.ts$/, '.mjs')
 
               if (await this.resolve(path.join(id, '../_variables.scss')) != null) {
@@ -285,7 +282,6 @@ export default [
           this.emitFile({
             type: 'asset',
             fileName: '_component-variables-labs.sass',
-            // Normalize Windows Paths
             source: variables.map(id => {
               return `@forward '` + path.join(
                 '../lib',
