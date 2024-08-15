@@ -220,10 +220,7 @@ export default [
           })
 
           // Individual CSS files
-          styleNodes = styleNodes.filter(node => {
-              return node.id.startsWith(labsDir)
-            }
-          );
+          styleNodes = styleNodes.filter(node => path.normalize(node.id).startsWith(labsDir));
           for (const { id, content } of styleNodes) {
             const relativePath = path.relative(srcDir, id)
             const out = path.parse(path.join(libDir, relativePath))
