@@ -273,6 +273,8 @@ Only put variables, mixins, and functions in the settings file, styles should be
 Vuetify loads precompiled CSS by default, enabling variable customization will switch to the base SASS files instead which must be recompiled with your project.
 This can be a performance hit if you're using more than a few vuetify components, and also forces you to use the same SASS compiler version as us.
 
+If you're using Vite or Nuxt 3 (with Vite), check [sass modern compiler](#sass-modern-compiler) to improve performance.
+
 ### Symlinks
 
 PNPM and Yarn 2+ create symlinks to library files instead of copying them to node_modules, sass doesn't seem to like this and sometimes doesn't apply the configuration.
@@ -281,13 +283,14 @@ PNPM and Yarn 2+ create symlinks to library files instead of copying them to nod
 
 You might have to write a custom importer plugin to load the settings file.
 
-### sass modern options
+### sass modern compiler
 
 If you're using Vite or Nuxt 3 (with Vite), you can enable SASS modern Vite options to improve dev server startup and build performance, you will need to:
 
 - bump Vite to `5.4.0`: `"vite": "^5.4.0"`
 - bump SASS to `1.77.8`: `"sass": "^1.77.8"`
-- configure the new sass modern options
+- add `sass-embedded` to your dev dependencies: `"sass-embedded": "^1.77.8"`
+- configure the new sass modern compiler
 
 When using Vite, add the following option to your Vite config file:
 
@@ -295,24 +298,22 @@ When using Vite, add the following option to your Vite config file:
 css: {
   preprocessorOptions: {
     sass: {
-      api: 'modern'
+      api: 'modern-compiler'
     }
-  },
-  preprocessorMaxWorkers: true
+  }
 }
 ```
 
-When using Nuxt, add the following option to your Nuxt config file:
+When using Nuxt 3 with Vite, add the following option to your Nuxt config file:
 
 ```js { resource="nuxt.config.ts" }
 vite: {
   css: {
     preprocessorOptions: {
       sass: {
-        api: 'modern'
+        api: 'modern-compiler'
       }
-    },
-    preprocessorMaxWorkers: true
+    }
   }
 }
 ```
