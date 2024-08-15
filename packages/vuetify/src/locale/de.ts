@@ -99,4 +99,7 @@ export default {
     loadMore: 'Mehr laden',
     empty: 'Nichts weiteres',
   },
+  numberInput: {
+    precisionExceeded: 'Expected up to {0} decimal places',
+  },
 }

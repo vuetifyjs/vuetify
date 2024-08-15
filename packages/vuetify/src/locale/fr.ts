@@ -99,4 +99,7 @@ export default {
     loadMore: 'Charger plus',
     empty: 'Aucune donnée supplémentaire',
   },
+  numberInput: {
+    precisionExceeded: 'Expected up to {0} decimal places',
+  },
 }

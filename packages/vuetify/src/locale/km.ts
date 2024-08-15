@@ -99,4 +99,7 @@ export default {
     loadMore: 'ទាញយកបន្ថែម',
     empty: 'គ្មានទំព័រទៀត',
   },
+  numberInput: {
+    precisionExceeded: 'Expected up to {0} decimal places',
+  },
 }

@@ -99,4 +99,7 @@ export default {
     loadMore: 'Wczytaj więcej',
     empty: 'Brak kolejnych danych',
   },
+  numberInput: {
+    precisionExceeded: 'Użyj maksymalnie {0} miejsc dziesiętnych',
+  },
 }
