@@ -55,10 +55,9 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
     css: {
       preprocessorOptions: {
         sass: {
-          api: 'modern'
+          api: 'modern-compiler'
         }
       },
-      preprocessorMaxWorkers: true,
     },
     build: {
       sourcemap: true,
