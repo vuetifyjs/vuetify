@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Forms
   title: Form component

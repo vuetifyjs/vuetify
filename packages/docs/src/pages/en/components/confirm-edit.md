@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Confirm Edit
   title: Confirm Edit
