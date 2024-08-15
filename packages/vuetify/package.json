@@ -101,7 +101,7 @@
     "watch": "pnpm run build:lib --watch",
     "dev": "NODE_ENV=development vite",
     "dev:ssr": "NODE_ENV=development VITE_SSR=true vite-ssr",
-    "dev:prod": "NODE_ENV=production concurrently \"vite build -w\" \"vite preview\"",
+    "dev:prod": "concurrently \"vite build -w\" \"vite preview\"",
     "dev:typecheck": "vue-tsc --noEmit --skipLibCheck --project ./tsconfig.dev.json",
     "build": "rimraf lib dist && concurrently \"pnpm run build:dist\" \"pnpm run build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && pnpm run build:types",
     "build:dist": "rollup --config build/rollup.config.mjs",
