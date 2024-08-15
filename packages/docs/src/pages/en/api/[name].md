@@ -5,7 +5,7 @@ meta:
   keywords: api, vuetify
 ---
 
-<script setup lang="ts">
+<script setup>
   const name = shallowRef('')
 </script>
 
@@ -19,4 +19,4 @@ meta:
 
 <ApiSearch />
 
-<ApiView @update:name="name = $event" />
+<ApiView v-on:update:name="name = $event" />
