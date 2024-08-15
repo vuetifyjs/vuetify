@@ -86,7 +86,11 @@ pnpm dev
 
 ## Using Nuxt 3
 
-[Nuxt](https://nuxt.com/) is an open-source framework that has helpful features to quickly get you started with developing a full-stack Vue app, such as file-based routing, SSR and component auto-imports. Nuxt is powered by Vite, so the steps to get Vuetify working in Nuxt 3 are quite similar to the manual steps described above.
+[Nuxt](https://nuxt.com/) is an open-source framework that has helpful features to quickly get you started with developing a full-stack Vue app, such as file-based routing, SSR and component auto-imports.
+
+### Manual setup
+
+Nuxt is powered by Vite, so the steps to get Vuetify working in Nuxt 3 are quite similar to [the manual steps described below](#existing-projects).
 
 Start off creating a nuxt app by executing the following commands:
 
@@ -214,7 +218,7 @@ or
 </template>
 ```
 
-You should now have access to all Vuetify components and tools in Nuxt app.
+You should now have access to all Vuetify components and tools in the Nuxt app.
 
 ### vuetify-nuxt-module
 
