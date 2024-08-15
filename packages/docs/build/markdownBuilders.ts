@@ -52,52 +52,73 @@ const validate = ajv.compile({
   },
 })
 
-export const frontmatterBuilder = createBuilder('frontmatterBuilder', 'metaExtracted')
-  .options<{
-    files?: Map<string, Pipeline<'metaExtracted'>>
-    awaiting?: Map<string, ((v: Pipeline<'metaExtracted'>) => void)[]>
+async function setupPages<T extends Pipeline<any>> (
+  payload: T,
+  options: {
+    files?: Map<string, T>
+    awaiting?: Map<string, ((v: T) => void)[]>
     pages?: ReadonlyArray<Record<'name' | 'path' | 'component', string>>
-  }>()
+  }
+) {
+  if (!options.pages) {
+    const pagesPlugin = payload.viteConfig.plugins!
+      .find((p: any) => p && 'name' in p && p.name === 'vite-plugin-pages') as Plugin
+    options.pages = await pagesPlugin.api.getResolvedRoutes() as []
+  }
+
+  const page = options.pages.find(p => payload.fileName.endsWith(p.component))
+
+  if (!page) throw new Error('Unable to find page')
+
+  const locale = page.path.split('/').at(1)!
+
+  const html = 'html' in payload && typeof payload.html !== 'string'
+    ? payload.html.cloneNode(true)
+    : undefined
+  options.files ??= new Map()
+  options.files.set(page.path, {
+    ...payload,
+    html,
+  })
+
+  let original: T | undefined
+  if (locale !== 'en') {
+    const originalPath = page.path.replace(`/${locale}/`, '/en/')
+    original = options.files.get(originalPath)
+    if (!original) {
+      options.awaiting ??= new Map()
+      const awaiting = options.awaiting.get(originalPath) ?? []
+      const { promise, resolve } = Promise.withResolvers<T>()
+      awaiting.push(resolve)
+      options.awaiting.set(originalPath, awaiting)
+      original = await promise
+    }
+  } else {
+    original = payload
+    if (options.awaiting?.has(page.path)) {
+      options.awaiting.get(page.path)!.forEach(fn => fn({
+        ...payload,
+        html,
+      }))
+    }
+  }
+
+  return { page, locale, original }
+}
+
+export const frontmatterBuilder = createBuilder('frontmatterBuilder', 'metaExtracted')
+  .options()
   .initializer()
   .handler(async (payload, options) => {
-    const { frontmatter, fileName } = payload
+    const { locale, original } = await setupPages(payload, options)
 
-    if (!options.pages) {
-      const pagesPlugin = payload.viteConfig.plugins!
-        .find(p => p && 'name' in p && p.name === 'vite-plugin-pages') as Plugin
-      options.pages = await pagesPlugin.api.getResolvedRoutes() as []
-    }
-
-    const page = options.pages.find(p => fileName.endsWith(p.component))
-
-    if (!page) throw new Error('Unable to find page')
-
-    const locale = page.path.split('/').at(0)!
-
-    options.files ??= new Map()
-    options.files.set(page.path, payload)
-
-    const { meta, ...rest } = frontmatter
+    const { meta, ...rest } = payload.frontmatter
 
     if (locale !== 'en') {
-      const originalPath = page.path.replace(`/${locale}/`, '/en/')
-      let original = options.files.get(originalPath)
-      if (!original) {
-        options.awaiting ??= new Map()
-        const awaiting = options.awaiting.get(originalPath) ?? []
-        const { promise, resolve } = Promise.withResolvers<Pipeline<'metaExtracted'>>()
-        awaiting.push(resolve)
-        options.awaiting.set(originalPath, awaiting)
-        original = await promise
-      }
       Object.assign(rest, {
         assets: original.frontmatter.assets,
         related: original.frontmatter.related,
       })
-    }
-
-    if (options.awaiting?.has(page.path)) {
-      options.awaiting.get(page.path)!.forEach(fn => fn(payload))
     }
 
     payload.frontmatter = {
@@ -179,3 +200,24 @@ function generateToc (content: string) {
 
   return headings
 }
+
+export const scriptFixer = createBuilder('scriptFixer', 'dom')
+  .options()
+  .initializer()
+  .handler(async (payload, options) => {
+    const { locale, original } = await setupPages(payload, options)
+
+    if (locale !== 'en') {
+      const setup = payload.html.querySelector('script[setup]')
+      const origSetup = original.html.querySelector('script[setup]')
+      if (setup) {
+        if (!origSetup) {
+          throw new Error(`Extra setup in ${payload.fileName}`)
+        }
+        setup.innerHTML = origSetup.innerHTML
+      }
+    }
+
+    return payload
+  })
+  .meta()

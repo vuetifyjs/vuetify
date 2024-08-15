@@ -22,7 +22,7 @@ import Api from './build/api-plugin'
 import { Examples } from './build/examples-plugin'
 import { genAppMetaInfo } from './src/utils/metadata'
 import { MdiJs } from './build/mdi-js'
-import { frontmatterBuilder, getRouteMeta } from './build/frontmatterMeta'
+import { frontmatterBuilder, getRouteMeta, scriptFixer } from './build/markdownBuilders'
 
 const resolve = (file: string) => fileURLToPath(new URL(file, import.meta.url))
 
@@ -151,7 +151,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         exposeFrontmatter: true,
         exposeExcerpt: false,
         markdownItSetup: configureMarkdown,
-        builders: [frontmatterBuilder()]
+        builders: [frontmatterBuilder(), scriptFixer()]
       }),
 
       // https://github.com/hannoeru/vite-plugin-pages
