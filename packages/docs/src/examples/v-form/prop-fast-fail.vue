@@ -24,7 +24,7 @@
   const firstName = ref('')
   const firstNameRules = [
     value => {
-      if (value?.length > 3) return true
+      if (value?.length >= 3) return true
       return 'First name must be at least 3 characters.'
     },
   ]
@@ -44,7 +44,7 @@
       firstName: '',
       firstNameRules: [
         value => {
-          if (value?.length > 3) return true
+          if (value?.length >= 3) return true
 
           return 'First name must be at least 3 characters.'
         },
