@@ -1,6 +1,6 @@
 {
   "name": "@vuetify/api-generator",
-  "version": "3.7.0-beta.1",
+  "version": "3.7.0",
   "private": true,
   "description": "",
   "scripts": {
