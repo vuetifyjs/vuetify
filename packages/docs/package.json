@@ -3,7 +3,7 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john@vuetifyjs.com>",
-  "version": "3.6.14",
+  "version": "3.6.15",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuetifyjs/vuetify.git",
