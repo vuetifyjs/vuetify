@@ -50,7 +50,6 @@
     "conventional-changelog-cli": "^3.0.0",
     "conventional-changelog-vuetify": "^1.2.1",
     "conventional-github-releaser": "^3.1.5",
-    "cross-env": "^7.0.3",
     "cross-spawn": "^7.0.3",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
