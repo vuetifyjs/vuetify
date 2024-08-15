@@ -38,6 +38,7 @@ import {
   animate,
   convertToUnit,
   genericComponent,
+  getCurrentInstance,
   getScrollParent,
   IN_BROWSER,
   propsFactory,
@@ -133,6 +134,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
   },
 
   setup (props, { slots, attrs, emit }) {
+    const vm = getCurrentInstance('VOverlay')
     const root = ref<HTMLElement>()
     const scrimEl = ref<HTMLElement>()
     const contentEl = ref<HTMLElement>()
@@ -160,7 +162,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     const { teleportTarget } = useTeleport(() => {
       const target = props.attach || props.contained
       if (target) return target
-      const rootNode = activatorEl?.value?.getRootNode()
+      const rootNode = activatorEl?.value?.getRootNode() || vm.proxy?.$el?.getRootNode()
       if (rootNode instanceof ShadowRoot) return rootNode
       return false
     })
@@ -196,7 +198,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     function closeConditional (e: Event) {
       return isActive.value && globalTop.value && (
         // If using scrim, only close if clicking on it rather than anything opened on top
-        !props.scrim || e.target === scrimEl.value
+        !props.scrim || e.target === scrimEl.value || (e instanceof MouseEvent && e.shadowTarget === scrimEl.value)
       )
     }
 

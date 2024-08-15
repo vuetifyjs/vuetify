@@ -67,6 +67,7 @@ export const VSpeedDial = genericComponent<OverlaySlots>()({
           contentClass={[
             'v-speed-dial__content',
             locationClasses.value,
+            props.contentClass,
           ]}
           location={ location.value }
           ref={ menuRef }
