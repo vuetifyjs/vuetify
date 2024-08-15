@@ -587,6 +587,9 @@ importers:
       unplugin-vue-components:
         specifier: ^0.27.4
         version: 0.27.4(@babel/parser@7.25.3)(rollup@3.29.4)(vue@3.4.27(typescript@5.5.4))
+      upath:
+        specifier: ^2.0.1
+        version: 2.0.1
       vite:
         specifier: ^5.4.0
         version: 5.4.0(@types/node@20.12.7)(sass@1.77.8)(terser@5.31.3)
