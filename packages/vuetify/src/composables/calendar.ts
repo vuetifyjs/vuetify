@@ -100,7 +100,7 @@ export function useCalendar (props: CalendarProps) {
   })
 
   const weeksInMonth = computed(() => {
-    const weeks = adapter.getWeekArray(month.value, props.firstDayOfWeek)
+    const weeks = adapter.getWeekArray(month.value, props.firstDayOfWeek, weekDays.value)
 
     const days = weeks.flat()
 

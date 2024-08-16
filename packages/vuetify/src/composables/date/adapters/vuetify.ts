@@ -160,14 +160,16 @@ const firstDay: Record<string, number> = {
   ZW: 0,
 }
 
-function getWeekArray (date: Date, locale: string, firstDayOfWeek?: number) {
+function getWeekArray (date: Date, locale: string, firstDayOfWeek?: number, weekDays?: number[]) {
   const weeks = []
   let currentWeek = []
   const firstDayOfMonth = startOfMonth(date)
   const lastDayOfMonth = endOfMonth(date)
   const first = firstDayOfWeek ?? firstDay[locale.slice(-2).toUpperCase()] ?? 0
-  const firstDayWeekIndex = (firstDayOfMonth.getDay() - first + 7) % 7
-  const lastDayWeekIndex = (lastDayOfMonth.getDay() - first + 7) % 7
+
+  const offSetFirstIndex = weekDays ? weekDays[0] : 0
+  const firstDayWeekIndex = (firstDayOfMonth.getDay() - first + 7) % 7 - offSetFirstIndex
+  const lastDayWeekIndex = (lastDayOfMonth.getDay() - first + 7) % 7 - offSetFirstIndex
 
   for (let i = 0; i < firstDayWeekIndex; i++) {
     const adjacentDay = new Date(firstDayOfMonth)
@@ -175,7 +177,9 @@ function getWeekArray (date: Date, locale: string, firstDayOfWeek?: number) {
     currentWeek.push(adjacentDay)
   }
 
-  for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
+  const secondWeekIndex = firstDayWeekIndex < 0 ? Math.abs(firstDayWeekIndex) + 1 : 1
+
+  for (let i = secondWeekIndex; i <= lastDayOfMonth.getDate(); i++) {
     const day = new Date(date.getFullYear(), date.getMonth(), i)
 
     // Add the day to the current week
@@ -188,7 +192,9 @@ function getWeekArray (date: Date, locale: string, firstDayOfWeek?: number) {
     }
   }
 
-  for (let i = 1; i < 7 - lastDayWeekIndex; i++) {
+  const lastWeekIndex = lastDayWeekIndex < 0 ? Math.abs(lastDayWeekIndex) : 7 - lastDayWeekIndex
+
+  for (let i = 1; i < lastWeekIndex; i++) {
     const adjacentDay = new Date(lastDayOfMonth)
     adjacentDay.setDate(adjacentDay.getDate() + i)
     currentWeek.push(adjacentDay)
@@ -604,8 +610,8 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return addMonths(date, amount)
   }
 
-  getWeekArray (date: Date, firstDayOfWeek?: number | string) {
-    return getWeekArray(date, this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : undefined)
+  getWeekArray (date: Date, firstDayOfWeek?: number | string, weekDays?: number[]) {
+    return getWeekArray(date, this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : undefined, weekDays)
   }
 
   startOfWeek (date: Date, firstDayOfWeek?: number | string): Date {
