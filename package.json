@@ -42,6 +42,7 @@
     "@typescript-eslint/parser": "^7.18.0",
     "@unhead/vue": "^1.9.4",
     "@vue/compiler-sfc": "^3.4.27",
+    "@vue/language-server": "^2.0.29",
     "@vue/runtime-core": "^3.4.27",
     "@vue/runtime-dom": "^3.4.27",
     "@vueuse/head": "^1.3.1",
