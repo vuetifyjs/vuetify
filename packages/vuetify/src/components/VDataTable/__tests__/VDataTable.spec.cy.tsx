@@ -377,7 +377,7 @@ describe('VDataTable', () => {
             groupBy={[{ key: 'group', order: 'desc' }]}
           >
             {{
-              'body.append': ({ items }) => <div id='body-append'>{ items.length }</div>,
+              'body.append': ({ items }) => <div id="body-append">{ items.length }</div>,
             }}
           </VDataTable>
         </Application>
