@@ -273,7 +273,7 @@ Only put variables, mixins, and functions in the settings file, styles should be
 Vuetify loads precompiled CSS by default, enabling variable customization will switch to the base SASS files instead which must be recompiled with your project.
 This can be a performance hit if you're using more than a few vuetify components, and also forces you to use the same SASS compiler version as us.
 
-If you're using Vite or Nuxt 3 (with Vite), check [sass modern compiler](#sass-modern-compiler) to improve performance.
+Performance can be improved with Vite by using the modern sass compiler. Replace your `sass` dependency with `sass-embedded`, update vite to 5.4 or later, and set [`css.preprocessorOptions.sass.api`](https://vitejs.dev/config/shared-options#css-preprocessoroptions) to `'modern-compiler'` in the vite config.
 
 ### Symlinks
 
