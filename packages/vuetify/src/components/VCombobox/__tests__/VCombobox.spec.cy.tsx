@@ -528,7 +528,7 @@ describe('VCombobox', () => {
       .should('have.attr', 'placeholder', 'Placeholder')
       .setProps({ label: 'Label' })
       .get('.v-combobox input')
-      .should('not.be.visible')
+      .should('be.visible')
       .get('.v-combobox input')
       .focus()
       .should('have.attr', 'placeholder', 'Placeholder')

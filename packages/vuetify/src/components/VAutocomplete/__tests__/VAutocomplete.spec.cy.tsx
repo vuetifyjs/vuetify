@@ -399,7 +399,7 @@ describe('VAutocomplete', () => {
       .should('have.attr', 'placeholder', 'Placeholder')
       .setProps({ label: 'Label' })
       .get('.v-autocomplete input')
-      .should('not.be.visible')
+      .should('be.visible')
       .get('.v-autocomplete input')
       .focus()
       .should('have.attr', 'placeholder', 'Placeholder')
