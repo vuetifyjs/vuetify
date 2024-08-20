@@ -54,6 +54,7 @@ const makeVNumberInputProps = propsFactory({
     type: Number,
     default: 1,
   },
+  clearZero: Boolean,
 
   ...omit(makeVTextFieldProps({}), ['appendInnerIcon', 'modelValue', 'prependInnerIcon']),
 }, 'VNumberInput')
@@ -163,6 +164,13 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       // AND "-" is only allowed at the start
       if (!/^-?(\d+(\.\d*)?|(\.\d+)|\d*|\.)$/.test(potentialNewInputVal)) {
         e.preventDefault()
+      }
+    }
+
+    function onFocus () {
+      if (controlsDisabled.value) return
+      if (props.clearZero && model.value === 0 && vTextFieldRef.value) {
+        nextTick(() => vTextFieldRef.value!.value = '')
       }
     }
 
@@ -318,6 +326,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
           v-model={ model.value }
           onBeforeinput={ onBeforeinput }
           onChange={ clampModel }
+          onFocus={ onFocus }
           onKeydown={ onKeydown }
           class={[
             'v-number-input',
