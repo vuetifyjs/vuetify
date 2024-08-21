@@ -33,10 +33,10 @@ Multiple components have been delayed until further notice due to reduced fundin
 | Component | Entering Labs | Production Release |
 | - | - | - |
 | [v3.7 (Odyssey)](https://github.com/vuetifyjs/vuetify/milestone/73) | | July 2024 { .bg-surface-light } |
-| [v-treeview](/components/treeview/) | *️⃣ | July 2024 |
-| [v-number-input](/components/number-inputs/) | *️⃣  | July 2024 |
-| [v-time-picker](/components/time-pickers/) | *️⃣ | July 2024 |
-| [v-date-input](/components/date-inputs/) | *️⃣ | July 2024 |
+| [v-treeview](/components/treeview/) | *️⃣ | ~~July 2024~~ TBD |
+| [v-number-input](/components/number-inputs/) | *️⃣  | ~~July 2024~~ TBD |
+| [v-time-picker](/components/time-pickers/) | *️⃣ | ~~July 2024~~ TBD |
+| [v-date-input](/components/date-inputs/) | *️⃣ | ~~July 2024~~ TBD |
 | [v-file-upload](https://github.com/vuetifyjs/vuetify/pull/19667) | ~~April~~ ~~May 2024~~ TBD | ~~July 2024~~ TBD |
 | [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709) | ~~April~~ ~~May 2024~~ TBD | ~~July 2024~~ TBD |
 | [v-stepper-vertical](https://github.com/vuetifyjs/vuetify/pull/19524) | *️⃣ | ~~July 2024~~ TBD |
@@ -216,9 +216,9 @@ The following are the already released **minor** and **major** version updates. 
 - **Released:** January 2020
 - **Notes:** [v2.2 Release](/getting-started/release-notes/?version=v2.2.0)
 - **Overview:**
-  The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be _user customizable_. Will streamline the process for altering the default styles for the framework. Thousands of SASS variables will be added and a lookup tree for finding those variables will put into the documentation. For more information on Google's studies, please [navigate here](https://material.io/design/material-studies/about-our-material-studies.html).
+  The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be *user customizable*. Will streamline the process for altering the default styles for the framework. Thousands of SASS variables will be added and a lookup tree for finding those variables will put into the documentation. For more information on Google's studies, please [navigate here](https://material.io/design/material-studies/about-our-material-studies.html).
 - **Objectives:**
-  - Add _thousands_ of new SASS variables
+  - Add *thousands* of new SASS variables
   - Create a new Vuetify Service for bootstrapping pre-configured framework options; **Preset**
   - Create presets for the official [Material Design Studies](https://material.io/design/material-studies/about-our-material-studies.html)
   - Add new features and improve code styling of `v-badge`
