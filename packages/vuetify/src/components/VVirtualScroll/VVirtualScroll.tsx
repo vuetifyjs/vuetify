@@ -61,6 +61,7 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
     const vm = getCurrentInstance('VVirtualScroll')
     const { dimensionStyles } = useDimension(props)
     const {
+      calculateVisibleItems,
       containerRef,
       markerRef,
       handleScroll,
@@ -138,6 +139,7 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
     })
 
     return {
+      calculateVisibleItems,
       scrollToIndex,
     }
   },

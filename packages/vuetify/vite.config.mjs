@@ -78,6 +78,13 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       minify: false,
-    }
+    },
+    css: {
+      preprocessorOptions: {
+        sass: {
+          api: 'modern-compiler'
+        }
+      },
+    },
   }
 })

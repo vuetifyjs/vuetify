@@ -40,7 +40,10 @@ export interface VInputSlot {
 export const makeVInputProps = propsFactory({
   id: String,
   appendIcon: IconValue,
-  centerAffix: Boolean,
+  centerAffix: {
+    type: Boolean,
+    default: true,
+  },
   prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hideSpinButtons: Boolean,

@@ -12,7 +12,6 @@
       "push": true
     }
   },
-  "npmClient": "yarn",
-  "version": "3.6.12",
-  "useWorkspaces": true
+  "npmClient": "pnpm",
+  "version": "3.7.0"
 }

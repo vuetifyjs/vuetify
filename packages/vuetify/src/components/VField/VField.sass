@@ -8,8 +8,6 @@
 @include tools.layer('components')
   /* region INPUT */
   .v-field
-    --v-theme-overlay-multiplier: 1
-
     display: grid
     grid-template-areas: "prepend-inner field clear append-inner"
     grid-template-columns: min-content minmax(0, 1fr) min-content min-content
@@ -22,16 +20,17 @@
     grid-area: control
     position: relative
 
-    &--disabled
-      opacity: var(--v-disabled-opacity)
-      pointer-events: none
-
+    --v-theme-overlay-multiplier: 1
     --v-field-padding-start: #{$field-control-padding-start}
     --v-field-padding-end: #{$field-control-padding-end}
     --v-field-padding-top: #{$field-control-padding-top}
     --v-field-padding-bottom: #{$field-control-padding-bottom}
     --v-field-input-padding-top: #{$field-input-padding-top}
     --v-field-input-padding-bottom: #{$field-input-padding-bottom}
+
+    &--disabled
+      opacity: var(--v-disabled-opacity)
+      pointer-events: none
 
     .v-chip
       --v-chip-height: #{$field-chip-height}
@@ -50,14 +49,12 @@
       background: $field-control-solo-background
       border-color: transparent
       color: $field-control-solo-color
-
       @include tools.elevation($field-control-solo-elevation)
 
     &--variant-solo-inverted
       background: $field-control-solo-background
       border-color: transparent
       color: $field-control-solo-inverted-color
-
       @include tools.elevation($field-control-solo-elevation)
 
       &.v-field--focused
@@ -141,10 +138,6 @@
 
     $root: &
 
-    @at-root #{selector.nest('.v-field.v-field--center-affix.v-field--variant-underlined, .v-field.v-field--center-affix.v-field--variant-plain', &)}
-      padding-top: unset
-      padding-bottom: unset
-    
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
@@ -199,8 +192,8 @@
       align-items: center
       padding-top: 0
 
-  .v-field:not(.v-field--center-affix).v-field--variant-underlined,
-  .v-field:not(.v-field--center-affix).v-field--variant-plain
+  .v-field.v-field--variant-underlined,
+  .v-field.v-field--variant-plain
     .v-field__append-inner,
     .v-field__clearable,
     .v-field__prepend-inner

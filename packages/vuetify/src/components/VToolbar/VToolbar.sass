@@ -65,11 +65,10 @@
       align-items: flex-start
 
   .v-toolbar__image
-    @include tools.absolute()
-
     display: flex
     opacity: var(--v-toolbar-image-opacity, 1)
     transition-property: opacity
+    @include tools.absolute()
 
   .v-toolbar__prepend,
   .v-toolbar__append

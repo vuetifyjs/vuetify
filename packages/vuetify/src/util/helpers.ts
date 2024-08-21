@@ -760,3 +760,9 @@ export function templateRef () {
 
   return fn as TemplateRef
 }
+
+export function checkPrintable (e: KeyboardEvent) {
+  const isPrintableChar = e.key.length === 1
+  const noModifier = !e.ctrlKey && !e.metaKey && !e.altKey
+  return isPrintableChar && noModifier
+}

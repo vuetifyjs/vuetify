@@ -1,8 +1,8 @@
 import fs from 'fs/promises'
 import path from 'upath'
 import { components } from 'vuetify/dist/vuetify-labs.js'
-import importMap from 'vuetify/dist/json/importMap.json' assert { type: 'json' }
-import importMapLabs from 'vuetify/dist/json/importMap-labs.json' assert { type: 'json' }
+import importMap from 'vuetify/dist/json/importMap.json' with { type: 'json' }
+import importMapLabs from 'vuetify/dist/json/importMap-labs.json' with { type: 'json' }
 import { kebabCase } from './helpers/text'
 import type { BaseData, ComponentData, DirectiveData } from './types'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'

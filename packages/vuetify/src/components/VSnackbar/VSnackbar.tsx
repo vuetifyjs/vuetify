@@ -34,8 +34,8 @@ type VSnackbarSlots = {
   text: never
 }
 
-function useCountdown (milliseconds: number) {
-  const time = shallowRef(milliseconds)
+function useCountdown (milliseconds: () => number) {
+  const time = shallowRef(milliseconds())
   let timer = -1
 
   function clear () {
@@ -45,7 +45,7 @@ function useCountdown (milliseconds: number) {
   function reset () {
     clear()
 
-    nextTick(() => time.value = milliseconds)
+    nextTick(() => time.value = milliseconds())
   }
 
   function start (el?: HTMLElement) {
@@ -59,7 +59,7 @@ function useCountdown (milliseconds: number) {
     const startTime = performance.now()
     timer = window.setInterval(() => {
       const elapsed = performance.now() - startTime + interval
-      time.value = Math.max(milliseconds - elapsed, 0)
+      time.value = Math.max(milliseconds() - elapsed, 0)
 
       if (time.value <= 0) clear()
     }, interval)
@@ -106,7 +106,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     const { themeClasses } = provideTheme(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { roundedClasses } = useRounded(props)
-    const countdown = useCountdown(Number(props.timeout))
+    const countdown = useCountdown(() => Number(props.timeout))
 
     const overlay = ref<VOverlay>()
     const timerRef = ref<VProgressLinear>()
@@ -172,6 +172,10 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
       }
     }
 
+    function onAfterLeave () {
+      if (isHovering.value) onPointerleave()
+    }
+
     const locationClasses = computed(() => {
       return props.location.split(' ').reduce((acc, loc) => {
         acc[`v-snackbar--${loc}`] = true
@@ -226,6 +230,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           _disableGlobalStack
           onTouchstartPassive={ onTouchstart }
           onTouchend={ onTouchend }
+          onAfterLeave={ onAfterLeave }
           { ...scopeId }
           v-slots={{ activator: slots.activator }}
         >

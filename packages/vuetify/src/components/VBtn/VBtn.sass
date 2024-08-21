@@ -40,12 +40,12 @@
 
     @supports selector(:focus-visible)
       &::after
-        @include tools.absolute(true)
         pointer-events: none
         border: 2px solid currentColor
         border-radius: inherit
         opacity: 0
         transition: opacity .2s ease-in-out
+        @include tools.absolute(true)
 
       &:focus-visible::after
         opacity: calc(.25 * var(--v-theme-overlay-multiplier))
@@ -66,10 +66,10 @@
     &--elevated
       &:hover,
       &:focus
-        +tools.elevation(map.get($button-elevation, 'hover'))
+        @include tools.elevation(map.get($button-elevation, 'hover'))
 
       &:active
-        +tools.elevation(map.get($button-elevation, 'active'))
+        @include tools.elevation(map.get($button-elevation, 'active'))
 
     &--flat
       box-shadow: none
@@ -168,6 +168,9 @@
       .v-icon
         --v-icon-size-multiplier: #{calc(24/21)}
 
+      &.v-btn--block
+        min-width: 100%
+
   .v-btn__loader
     align-items: center
     display: flex
@@ -225,14 +228,8 @@
 
   .v-btn__overlay,
   .v-btn__underlay
-    @include tools.absolute()
     pointer-events: none
-
-  // VCard
-  .v-btn
-    ~ .v-btn:not(.v-btn-toggle .v-btn)
-      .v-card-actions &
-        margin-inline-start: $button-card-actions-margin
+    @include tools.absolute()
 
   // VPagination
   .v-btn

@@ -44,7 +44,7 @@ describe('v-click-outside', () => {
     const { clickHandler, el, binding } = bootstrap()
     expect(window.document.addEventListener).toHaveBeenCalledWith('click', clickHandler, true)
 
-    ClickOutside.unmounted(el, binding)
+    ClickOutside.beforeUnmount(el, binding)
     expect(window.document.removeEventListener).toHaveBeenCalledWith('click', clickHandler, true)
   })
 

@@ -3,9 +3,10 @@ import 'vuetify/styles'
 
 // Imports
 import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-import * as labs from 'vuetify/labs/components'
+import { VChip } from 'vuetify/components/VChip'
+import { VBtn } from 'vuetify/components/VBtn'
+import { VSwitch } from 'vuetify/components/VSwitch'
+import { VSvgIcon } from 'vuetify/components/VIcon'
 
 // Icons
 import { fa } from 'vuetify/iconsets/fa'
@@ -24,17 +25,12 @@ import type { IconProps } from 'vuetify'
 export function installVuetify (app: App) {
   const vuetify = createVuetify({
     aliases: {
-      BorderChip: components.VChip,
-      NewInChip: components.VChip,
-      PageFeatureChip: components.VChip,
-      PrimaryBtn: components.VBtn,
-      SettingsSwitch: components.VSwitch,
+      BorderChip: VChip,
+      NewInChip: VChip,
+      PageFeatureChip: VChip,
+      PrimaryBtn: VBtn,
+      SettingsSwitch: VSwitch,
     },
-    components: {
-      ...components,
-      ...labs,
-    },
-    directives,
     defaults: {
       global: {
         eager: false,
@@ -109,7 +105,7 @@ export function installVuetify (app: App) {
         mdi: {
           component: (props: IconProps) => {
             const icon = mdiSvg[camelize(props.icon as string) as keyof typeof mdiSvg]
-            return h(components.VSvgIcon, { ...props, icon })
+            return h(VSvgIcon, { ...props, icon })
           },
         },
       },
