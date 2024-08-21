@@ -119,11 +119,13 @@ const ripples = {
     transform(animation, `translate(${x}, ${y}) scale3d(${scale},${scale},${scale})`)
     animation.dataset.activated = String(performance.now())
 
-    setTimeout(() => {
-      animation.classList.remove('v-ripple__animation--enter')
-      animation.classList.add('v-ripple__animation--in')
-      transform(animation, `translate(${centerX}, ${centerY}) scale3d(1,1,1)`)
-    }, 0)
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        animation.classList.remove('v-ripple__animation--enter')
+        animation.classList.add('v-ripple__animation--in')
+        transform(animation, `translate(${centerX}, ${centerY}) scale3d(1,1,1)`)
+      })
+    })
   },
 
   hide (el: HTMLElement | null) {
