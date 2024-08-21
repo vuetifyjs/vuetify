@@ -10,14 +10,13 @@ import { useDate } from '@/composables/date'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
+import { genericComponent, getPrefixedEventHandlers, pick, propsFactory, useRender } from '@/util'
 
-export type VCalendarDaySlots = {
-  default: never
-  interval: {}
-  intervalBody: {}
-  intervalEvent: { height: string, margin: string, eventClass: string, event: any, interval: any }
-  intervalTitle: { interval: any }
+// Types
+import type { VCalendarIntervalSlots } from './VCalendarInterval'
+
+export type VCalendarDaySlots = VCalendarIntervalSlots & {
+  interval: Record<string, unknown>
 }
 
 export const makeVCalendarDayProps = propsFactory({
@@ -73,21 +72,7 @@ export const VCalendarDay = genericComponent<VCalendarDaySlots>()({
                 { ...getPrefixedEventHandlers(attrs, ':interval', () => calendarIntervalProps) }
               >
                 {{
-                  ...(slots.intervalBody ? {
-                    intervalBody: () => (
-                      slots.intervalBody?.({})
-                    ),
-                  } : {}),
-                  ...(slots.intervalEvent ? {
-                    intervalEvent: ({ height, margin, eventClass, event, interval }) => (
-                      slots.intervalEvent?.({ height, margin, eventClass, event, interval })
-                    ),
-                  } : {}),
-                  ...(slots.intervalTitle ? {
-                    intervalTitle: ({ interval }) => (
-                      slots.intervalTitle?.({ interval })
-                    ),
-                  } : {}),
+                  ...pick(slots, ['intervalBody', 'intervalEvent', 'intervalTitle']),
                 }}
               </VCalendarInterval>
             )

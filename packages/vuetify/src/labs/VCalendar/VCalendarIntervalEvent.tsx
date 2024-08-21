@@ -76,13 +76,12 @@ export const VCalendarIntervalEvent = genericComponent<VCalendarIntervalEventSlo
                 style={ `margin-top: ${calcHeight().margin}` }
                 class="v-calendar-internal-event"
                 color={ props.event?.color ?? undefined }
-                rounded={ props.event?.first && props.event?.last
-                  ? true
-                  : props.event?.first
-                    ? 't'
-                    : props.event?.last
-                      ? 'b'
-                      : false }
+                rounded={
+                  props.event?.first && props.event?.last ? true
+                  : props.event?.first ? 't'
+                  : props.event?.last ? 'b'
+                  : false
+                }
                 { ...getPrefixedEventHandlers(attrs, ':intervalEvent', () => props) }
               >
                 { props.event?.first ? props.event?.title : '' }

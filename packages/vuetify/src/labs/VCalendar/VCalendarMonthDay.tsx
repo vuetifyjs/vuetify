@@ -46,7 +46,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
             <div key="title" class="v-calendar-weekly__day-label">
               { slots.dayTitle?.({ title: props.title }) ?? (
                 <VBtn
-                { ...getPrefixedEventHandlers(attrs, ':date', () => props) }
+                  { ...getPrefixedEventHandlers(attrs, ':date', () => props) }
                   class={ props.day?.isToday ? 'v-calendar-weekly__day-label__today' : undefined }
                   color={ props.color }
                   disabled={ props.disabled }
@@ -55,11 +55,10 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
                   variant={ props.day?.isToday ? undefined : 'flat' }
                   text={ `${props.title}` }
                 />
-
               )
             }
             </div>
-          ) : '' }
+          ) : undefined }
 
           { !props.day?.isHidden ? (
             <div key="content" class="v-calendar-weekly__day-content">
@@ -88,7 +87,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
                 </div>
               )}
             </div>
-          ) : '' }
+          ) : undefined }
         </div>
       )
     })
