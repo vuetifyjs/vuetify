@@ -45,7 +45,7 @@
   const slots = computed(() => {
     return `
   <template v-slot:activator="{ props }">
-    <v-btn v-bind="props">Tooltip</v-btn>
+    <v-btn v-bind="props">HOVER ON ME</v-btn>
   </template>
 `
   })
