@@ -375,7 +375,7 @@ This will include all components and directives regardless of whether or not you
 Lastly, do not forget to install [icons](/features/icon-fonts/). e.g. `@mdi/font` (And add `import '@mdi/font/css/materialdesignicons.css'` to your entrypoint). And the Roboto font with the appropriate weights and styles. You can use [unplugin-fonts](https://www.npmjs.com/package/unplugin-fonts) using any of its supported providers for that, or any other method. For example, using Google fonts:
 
 ```ts
-import ViteFonts from "unplugin-fonts/vite"
+import ViteFonts from 'unplugin-fonts/vite'
 
 export default defineConfig({
   plugins: [
@@ -394,7 +394,7 @@ export default defineConfig({
 Or using fontsource (Install `@fontsource/roboto`, and add `import 'unfonts.css'` to your entrypoint):
 
 ```ts
-import ViteFonts from "unplugin-fonts/vite"
+import ViteFonts from 'unplugin-fonts/vite'
 
 export default defineConfig({
   plugins: [
@@ -402,9 +402,9 @@ export default defineConfig({
       fontsource: {
         families: [
           {
-            name: "Roboto",
+            name: 'Roboto',
             weights: [100, 300, 400, 500, 700, 900],
-            styles: ["normal", "italic"],
+            styles: ['normal', 'italic'],
           },
         ],
       },
