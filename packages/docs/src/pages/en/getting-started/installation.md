@@ -372,7 +372,46 @@ createApp(App).use(vuetify).mount('#app')
 
 This will include all components and directives regardless of whether or not you are using them. If you instead only want to include used components, have a look at the [Vite](https://npmjs.com/package/vite-plugin-vuetify) or [Webpack](https://npmjs.com/package/webpack-plugin-vuetify) plugins, depending on your setup. The plugins also makes it possible to customize SCSS variables.
 
-Lastly, do not forget to install [icons](/features/icon-fonts/).
+Lastly, do not forget to install [icons](/features/icon-fonts/). e.g. `@mdi/font` (And add `import '@mdi/font/css/materialdesignicons.css'` to your entrypoint). And the Roboto font with the appropriate weights and styles. You can use [unplugin-fonts](https://www.npmjs.com/package/unplugin-fonts) using any of its supported providers for that, or any other method. For example, using Google fonts:
+
+```ts
+import ViteFonts from "unplugin-fonts/vite"
+
+export default defineConfig({
+  plugins: [
+    ViteFonts({
+      google: {
+        families: [{
+          name: 'Roboto',
+          styles: 'wght@100;300;400;500;700;900',
+        }],
+      },
+    }),
+  ],
+})
+```
+
+Or using fontsource (Install `@fontsource/roboto`, and add `import 'unfonts.css'` to your entrypoint):
+
+```ts
+import ViteFonts from "unplugin-fonts/vite"
+
+export default defineConfig({
+  plugins: [
+    ViteFonts({
+      fontsource: {
+        families: [
+          {
+            name: "Roboto",
+            weights: [100, 300, 400, 500, 700, 900],
+            styles: ["normal", "italic"],
+          },
+        ],
+      },
+    }),
+  ],
+})
+```
 
 ## SSR caveats
 
