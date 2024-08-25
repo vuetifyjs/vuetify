@@ -10,6 +10,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { computed, provide, ref, toRaw, toRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { preventLoops } from '@/util/nested'
 
 // Types
 import { VTreeviewSymbol } from './shared'
@@ -98,6 +99,7 @@ export const VTreeview = genericComponent<new <T>(
       const path: unknown[] = []
       let parent: unknown = id
       while (parent != null) {
+        preventLoops(path, parent)
         path.unshift(parent)
         parent = vListRef.value?.parents.get(parent)
       }

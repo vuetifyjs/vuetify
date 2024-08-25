@@ -18,6 +18,7 @@ import {
   leafSingleSelectStrategy,
 } from './selectStrategies'
 import { getCurrentInstance, getUid, propsFactory } from '@/util'
+import { preventLoops } from '@/util/nested'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -182,6 +183,7 @@ export const useNested = (props: NestedProps) => {
     let parent: unknown = id
 
     while (parent != null) {
+      preventLoops(path, parent)
       path.unshift(parent)
       parent = parents.value.get(parent)
     }
