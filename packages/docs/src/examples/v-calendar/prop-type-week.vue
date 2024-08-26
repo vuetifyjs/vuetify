@@ -57,7 +57,7 @@
     },
   ]
 
-  const today = ref(new Date('2019-01-08'))
+  const today = ref([new Date('2019-01-08')])
 </script>
 
 <script>

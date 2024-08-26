@@ -36,7 +36,7 @@
 <script>
   export default {
     data: () => ({
-      value: '',
+      value: [''],
       events: [],
       colors: ['#2196F3', '#3F51B5', '#673AB7', '#00BCD4', '#4CAF50', '#FF9800', '#757575'],
       names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],

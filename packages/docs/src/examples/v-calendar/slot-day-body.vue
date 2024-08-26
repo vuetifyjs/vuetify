@@ -25,7 +25,7 @@
 
   const calendar = ref()
 
-  const value = ref('')
+  const value = ref([''])
   const ready = ref(false)
 
   const cal = computed(() => {

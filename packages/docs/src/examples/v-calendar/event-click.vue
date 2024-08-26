@@ -143,7 +143,7 @@
   const colors = ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1']
   const names = ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party']
 
-  const focus = ref('')
+  const focus = ref([''])
   const type = ref('month')
   const selectedEvent = ref({})
   const selectedElement = ref(null)
