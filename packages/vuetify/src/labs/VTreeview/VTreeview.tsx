@@ -10,7 +10,6 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { computed, provide, ref, toRaw, toRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
-import { preventLoops } from '@/util/nested'
 
 // Types
 import { VTreeviewSymbol } from './shared'
@@ -87,24 +86,13 @@ export const VTreeview = genericComponent<new <T>(
     const search = toRef(props, 'search')
     const { filteredItems } = useFilter(props, flatItems, search)
     const visibleIds = computed(() => {
-      if (!search.value) {
-        return null
-      }
+      if (!search.value) return null
+      const getPath = vListRef.value?.getPath
+      if (!getPath) return null
       return new Set(filteredItems.value.flatMap(item => {
         return [...getPath(item.props.value), ...getChildren(item.props.value)]
       }))
     })
-
-    function getPath (id: unknown) {
-      const path: unknown[] = []
-      let parent: unknown = id
-      while (parent != null) {
-        preventLoops(path, parent)
-        path.unshift(parent)
-        parent = vListRef.value?.parents.get(parent)
-      }
-      return path
-    }
 
     function getChildren (id: unknown) {
       const arr: unknown[] = []
