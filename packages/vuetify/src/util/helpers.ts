@@ -135,6 +135,14 @@ export function isObject (obj: any): obj is Record<string, any> {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
 }
 
+export function isPlainObject (obj: any): obj is Record<string, any> {
+  let proto
+  return obj !== null && typeof obj === 'object' && (
+    (proto = Object.getPrototypeOf(obj)) === Object.prototype ||
+    proto === null
+  )
+}
+
 export function refElement (obj?: ComponentPublicInstance<any> | HTMLElement): HTMLElement | undefined {
   if (obj && '$el' in obj) {
     const el = obj.$el as HTMLElement
@@ -488,16 +496,13 @@ export function mergeDeep (
 
     // Only continue deep merging if
     // both properties are plain objects
-    if (
-      isObject(sourceProperty) && Object.getPrototypeOf(sourceProperty) === Object.prototype &&
-      isObject(targetProperty) && Object.getPrototypeOf(targetProperty) === Object.prototype
-    ) {
+    if (isPlainObject(sourceProperty) && isPlainObject(targetProperty)) {
       out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn)
 
       continue
     }
 
-    if (Array.isArray(sourceProperty) && Array.isArray(targetProperty) && arrayFn) {
+    if (arrayFn && Array.isArray(sourceProperty) && Array.isArray(targetProperty)) {
       out[key] = arrayFn(sourceProperty, targetProperty)
 
       continue
