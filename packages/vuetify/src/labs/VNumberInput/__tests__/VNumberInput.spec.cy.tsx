@@ -42,6 +42,46 @@ describe('VNumberInput', () => {
         expect(model.value).equal(null)
       })
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/20337
+  it('should emit model-value when input value is a legit number within range of the max and min', () => {
+    const model = ref(null)
+
+    cy.mount(() => (
+        <>
+          <VNumberInput
+            v-model={ model.value }
+            min={ 5 }
+            max={ 125 }
+          />
+        </>
+    ))
+      .get('.v-number-input input')
+      .focus().realType('1')
+      .then(() => {
+        expect(model.value).equal(null)
+      })
+      .get('.v-number-input input')
+      .realType('0')
+      .then(() => {
+        expect(model.value).equal(10)
+      })
+      .realType('0')
+      .then(() => {
+        expect(model.value).equal(100)
+      })
+      .realType('0')
+      .get('.v-number-input input')
+      .then(() => {
+        expect(model.value).equal(100)
+      })
+      .get('.v-number-input input')
+      .blur()
+      .then(() => {
+        expect(model.value).equal(125)
+      })
+  })
+
   describe('readonly', () => {
     it('should prevent mutation when readonly applied', () => {
       const value = ref(1)

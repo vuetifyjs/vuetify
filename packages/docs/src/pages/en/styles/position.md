@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Position
   description: Use position utilities to quickly style the positioning of any element.
