@@ -222,7 +222,7 @@ You should now have access to all Vuetify components and tools in the Nuxt app.
 
 ### vuetify-nuxt-module
 
-Alternatively, you can use the [vuetify-nuxt-module](https://github.com/userquin/vuetify-nuxt-module) (works only with Vite). The module is strongly opinionated and has a built-in default configuration out of the box. You can use it without any configuration, and it will work for most use cases.
+Alternatively, you can use the [vuetify-nuxt-module](https://github.com/vuetifyjs/nuxt-module) (works only with Vite). The module is strongly opinionated and has a built-in default configuration out of the box. You can use it without any configuration, and it will work for most use cases.
 
 Check the [documentation](https://vuetify-nuxt-module.netlify.app/) for more information on how to use it.
 
