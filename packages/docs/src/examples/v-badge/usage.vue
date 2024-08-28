@@ -24,6 +24,10 @@
         min="0"
         step="1"
       ></v-slider>
+
+      <v-expand-transition>
+        <v-checkbox v-model="left" label="Inline Left"></v-checkbox>
+      </v-expand-transition>
     </template>
   </ExamplesUsageExample>
 </template>
@@ -33,6 +37,7 @@
   const model = ref('default')
   const content = ref(0)
   const dot = ref(false)
+  const left = ref(false)
   const options = ['floating', 'inline']
   const props = computed(() => {
     return {
@@ -40,6 +45,7 @@
       dot: dot.value || undefined,
       floating: model.value === 'floating' || undefined,
       inline: model.value === 'inline' || undefined,
+      left: left.value || undefined,
     }
   })
 

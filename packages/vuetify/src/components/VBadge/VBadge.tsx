@@ -32,6 +32,7 @@ export const makeVBadgeProps = propsFactory({
   floating: Boolean,
   icon: IconValue,
   inline: Boolean,
+  left: Boolean,
   label: {
     type: String,
     default: '$vuetify.badge',
@@ -102,6 +103,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
               'v-badge--dot': props.dot,
               'v-badge--floating': props.floating,
               'v-badge--inline': props.inline,
+              'v-badge--inline-left': props.inline && props.left,
             },
             props.class,
           ]}

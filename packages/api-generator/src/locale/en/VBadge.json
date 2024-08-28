@@ -6,6 +6,7 @@
     "floating": "Elevates the badge above the slotted content.",
     "inline": "Moves the badge to be inline with the wrapping element. Supports the usage of the **left** prop.",
     "label": "The **aria-label** used for the badge.",
+    "left": "Moves badge to the left. Requires **inline** prop. Use **location** to position the badge in any other scenario.",
     "max": "Sets the maximum number allowed when using the **content** prop with a `number` like value. If the content number exceeds the maximum value, a `+` suffix is added.",
     "offsetX": "Offset the badge on the x-axis.",
     "offsetY": "Offset the badge on the y-axis.",
