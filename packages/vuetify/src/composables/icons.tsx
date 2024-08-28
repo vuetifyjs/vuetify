@@ -6,7 +6,11 @@ import { computed, inject, unref } from 'vue'
 import { consoleWarn, defineComponent, genericComponent, mergeDeep, propsFactory } from '@/util'
 
 // Types
-import type { InjectionKey, JSXComponent, PropType, Ref } from 'vue'
+import type { ComponentPublicInstance, FunctionalComponent, InjectionKey, PropType, Ref } from 'vue'
+
+export type JSXComponent<Props = any> =
+  | { new (): ComponentPublicInstance<Props> }
+  | FunctionalComponent<Props>
 
 export type IconValue =
   | string

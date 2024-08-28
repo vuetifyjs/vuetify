@@ -288,6 +288,16 @@ describe('helpers', () => {
     it('should use arrayFn function if provided', () => {
       expect(mergeDeep({ a: ['foo'] }, { a: ['bar'] }, (a, b) => [...a, ...b])).toEqual({ a: ['foo', 'bar'] })
     })
+
+    it('should not recursively merge non-plain objects', () => {
+      const plain = { a: 'foo' }
+      const div = document.createElement('div')
+      const span = document.createElement('span')
+
+      expect(mergeDeep({ a: plain }, { a: div }).a).toBe(div)
+      expect(mergeDeep({ a: div }, { a: plain }).a).toBe(plain)
+      expect(mergeDeep({ a: div }, { a: span }).a).toBe(span)
+    })
   })
 
   describe('destructComputed', () => {
