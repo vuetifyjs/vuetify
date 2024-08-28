@@ -27,6 +27,7 @@ import { makeTransitionProps } from '@/composables/transition'
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
+  checkPrintable,
   ensureValidVNode,
   genericComponent,
   IN_BROWSER,
@@ -148,7 +149,7 @@ export const VSelect = genericComponent<new <
     const menu = computed({
       get: () => _menu.value,
       set: v => {
-        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren) return
+        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren.size) return
         _menu.value = v
       },
     })
@@ -200,7 +201,7 @@ export const VSelect = genericComponent<new <
     })
 
     const listRef = ref<VList>()
-    const { onListScroll, onListKeydown } = useScrolling(listRef, vTextFieldRef)
+    const listEvents = useScrolling(listRef, vTextFieldRef)
     function onClear (e: MouseEvent) {
       if (props.openOnClear) {
         menu.value = true
@@ -210,6 +211,11 @@ export const VSelect = genericComponent<new <
       if (menuDisabled.value) return
 
       menu.value = !menu.value
+    }
+    function onListKeydown (e: KeyboardEvent) {
+      if (checkPrintable(e)) {
+        onKeydown(e)
+      }
     }
     function onKeydown (e: KeyboardEvent) {
       if (!e.key || props.readonly || form?.isReadonly.value) return
@@ -234,12 +240,6 @@ export const VSelect = genericComponent<new <
 
       // html select hotkeys
       const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
-
-      function checkPrintable (e: KeyboardEvent) {
-        const isPrintableChar = e.key.length === 1
-        const noModifier = !e.ctrlKey && !e.metaKey && !e.altKey
-        return isPrintableChar && noModifier
-      }
 
       if (props.multiple || !checkPrintable(e)) return
 
@@ -287,6 +287,11 @@ export const VSelect = genericComponent<new <
     function onBlur (e: FocusEvent) {
       if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement)) {
         menu.value = false
+      }
+    }
+    function onAfterEnter () {
+      if (props.eager) {
+        vVirtualScrollRef.value?.calculateVisibleItems()
       }
     }
     function onAfterLeave () {
@@ -391,6 +396,7 @@ export const VSelect = genericComponent<new <
                   openOnClick={ false }
                   closeOnContentClick={ false }
                   transition={ props.transition }
+                  onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...computedMenuProps.value }
                 >
@@ -402,10 +408,10 @@ export const VSelect = genericComponent<new <
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
-                      onScrollPassive={ onListScroll }
                       tabindex="-1"
                       aria-live="polite"
                       color={ props.itemColor ?? props.color }
+                      { ...listEvents }
                       { ...props.listProps }
                     >
                       { slots['prepend-item']?.() }

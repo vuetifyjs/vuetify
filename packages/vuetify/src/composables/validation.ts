@@ -19,7 +19,15 @@ export type ValidationRule =
   | ((value: any) => ValidationResult)
   | ((value: any) => PromiseLike<ValidationResult>)
 
-type ValidateOnValue = 'blur' | 'input' | 'submit'
+type ValidateOnValue = 'blur' | 'input' | 'submit' | 'invalid-input'
+type ValidateOn =
+  | ValidateOnValue
+  | `${ValidateOnValue} lazy`
+  | `${ValidateOnValue} eager`
+  | `lazy ${ValidateOnValue}`
+  | `eager ${ValidateOnValue}`
+  | 'lazy'
+  | 'eager'
 
 export interface ValidationProps {
   disabled: boolean | null
@@ -33,7 +41,7 @@ export interface ValidationProps {
   rules: readonly ValidationRule[]
   modelValue: any
   'onUpdate:modelValue': EventProp | undefined
-  validateOn?: ValidateOnValue | `${ValidateOnValue} lazy` | `lazy ${ValidateOnValue}` | 'lazy'
+  validateOn?: ValidateOn
   validationValue: any
 }
 
@@ -92,13 +100,15 @@ export function useValidation (
   const validateOn = computed(() => {
     let value = (props.validateOn ?? form?.validateOn.value) || 'input'
     if (value === 'lazy') value = 'input lazy'
+    if (value === 'eager') value = 'input eager'
     const set = new Set(value?.split(' ') ?? [])
 
     return {
-      blur: set.has('blur') || set.has('input'),
       input: set.has('input'),
-      submit: set.has('submit'),
+      blur: set.has('blur') || set.has('input') || set.has('invalid-input'),
+      invalidInput: set.has('invalid-input'),
       lazy: set.has('lazy'),
+      eager: set.has('eager'),
     }
   })
   const isValid = computed(() => {
@@ -139,12 +149,12 @@ export function useValidation (
 
   onMounted(async () => {
     if (!validateOn.value.lazy) {
-      await validate(true)
+      await validate(!validateOn.value.eager)
     }
     form?.update(uid.value, isValid.value, errorMessages.value)
   })
 
-  useToggleScope(() => validateOn.value.input, () => {
+  useToggleScope(() => validateOn.value.input || (validateOn.value.invalidInput && isValid.value === false), () => {
     watch(validationModel, () => {
       if (validationModel.value != null) {
         validate()
@@ -177,7 +187,7 @@ export function useValidation (
   async function resetValidation () {
     isPristine.value = true
     if (!validateOn.value.lazy) {
-      await validate(true)
+      await validate(!validateOn.value.eager)
     } else {
       internalErrorMessages.value = []
     }

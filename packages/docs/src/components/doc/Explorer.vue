@@ -34,7 +34,6 @@
         <ApiSection
           :name="model"
           :section="section"
-          show-headline
         />
       </template>
     </template>
@@ -56,15 +55,14 @@
 </template>
 
 <script setup>
+  import files from 'virtual:api-list'
+
   const route = useRoute()
   const router = useRouter()
 
-  const files = import.meta.glob('../../../../api-generator/dist/api/*.json')
-
   const search = shallowRef()
 
-  const components = Object.keys(files).reduce((acc, cur) => {
-    const name = cur.split('/').pop().split('.')[0]
+  const components = files.reduce((acc, name) => {
     let prependIcon
     let subtitle
 

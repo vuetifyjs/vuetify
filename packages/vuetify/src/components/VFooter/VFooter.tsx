@@ -41,7 +41,6 @@ export const VFooter = genericComponent()({
 
   setup (props, { slots }) {
     const layoutItemStyles = ref()
-    const layoutIsReady = shallowRef()
 
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
@@ -69,7 +68,6 @@ export const VFooter = genericComponent()({
 
       watchEffect(() => {
         layoutItemStyles.value = layout.layoutItemStyles.value
-        layoutIsReady.value = layout.layoutIsReady
       })
     })
 
@@ -96,7 +94,7 @@ export const VFooter = genericComponent()({
       />
     ))
 
-    return props.app ? layoutIsReady.value : {}
+    return {}
   },
 })
 

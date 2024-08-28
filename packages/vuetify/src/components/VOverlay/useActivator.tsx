@@ -73,7 +73,11 @@ export const makeActivatorProps = propsFactory({
 
 export function useActivator (
   props: ActivatorProps,
-  { isActive, isTop }: { isActive: Ref<boolean>, isTop: Ref<boolean> }
+  { isActive, isTop, contentEl }: {
+    isActive: Ref<boolean>
+    isTop: Ref<boolean>
+    contentEl: Ref<HTMLElement | undefined>
+  }
 ) {
   const vm = getCurrentInstance('useActivator')
   const activatorEl = ref<HTMLElement>()
@@ -215,7 +219,7 @@ export function useActivator (
     if (val && (
       (props.openOnHover && !isHovered && (!openOnFocus.value || !isFocused)) ||
       (openOnFocus.value && !isFocused && (!props.openOnHover || !isHovered))
-    )) {
+    ) && !contentEl.value?.contains(document.activeElement)) {
       isActive.value = false
     }
   })

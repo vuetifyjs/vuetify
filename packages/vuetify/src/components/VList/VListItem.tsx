@@ -36,6 +36,7 @@ import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 export type ListItemSlot = {
   isActive: boolean
+  isOpen: boolean
   isSelected: boolean
   isIndeterminate: boolean
   select: (value: boolean) => void
@@ -86,7 +87,7 @@ export const makeVListItemProps = propsFactory({
   title: [String, Number],
   value: null,
 
-  onClick: EventProp<[MouseEvent]>(),
+  onClick: EventProp<[MouseEvent | KeyboardEvent]>(),
   onClickOnce: EventProp<[MouseEvent]>(),
 
   ...makeBorderProps(),
@@ -119,6 +120,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       activate,
       isActivated,
       select,
+      isOpen,
       isSelected,
       isIndeterminate,
       isGroupActivator,
@@ -167,6 +169,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     const slotProps = computed(() => ({
       isActive: isActive.value,
       select,
+      isOpen: isOpen.value,
       isSelected: isSelected.value,
       isIndeterminate: isIndeterminate.value,
     } satisfies ListItemSlot))
@@ -192,7 +195,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     function onKeyDown (e: KeyboardEvent) {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault()
-        onClick(e as any as MouseEvent)
+        e.target!.dispatchEvent(new MouseEvent('click', e))
       }
     }
 

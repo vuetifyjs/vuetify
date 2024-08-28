@@ -2,16 +2,16 @@
   <v-container>
     <v-select
       v-model="selectionType"
-      :items="['leaf', 'independent']"
+      :items="['leaf', 'single-leaf', 'independent', 'single-independent', 'classic']"
       label="Selection type"
     ></v-select>
     <v-row>
       <v-col>
         <v-treeview
-          v-model="selection"
+          v-model:selected="selection"
           :items="items"
-          :selection-type="selectionType"
-          open-all
+          :select-strategy="selectionType"
+          item-value="id"
           return-object
           selectable
         ></v-treeview>
@@ -29,7 +29,7 @@
             v-for="node in selection"
             :key="node.id"
           >
-            {{ node.name }}
+            {{ node.title }}
           </div>
         </template>
       </v-col>

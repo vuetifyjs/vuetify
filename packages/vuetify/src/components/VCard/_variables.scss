@@ -3,9 +3,6 @@
 @use '../../styles/tools';
 
 // VCard
-$card-actions-flex: none !default;
-$card-actions-min-height: 52px !default;
-$card-actions-padding: .5rem !default;
 $card-append-padding-inline-start: .5rem !default;
 $card-background: rgb(var(--v-theme-surface)) !default;
 $card-border-color: settings.$border-color-root !default;
@@ -30,6 +27,13 @@ $card-prepend-padding-inline-end: .5rem !default;
 $card-transition-duration: 0.28s !default;
 $card-transition-property: box-shadow, opacity, background !default;
 $card-transition-timing-function: settings.$standard-easing !default;
+
+// VCardActions
+$card-actions-flex: none !default;
+$card-actions-min-height: 52px !default;
+$card-actions-padding: .5rem !default;
+$button-card-actions-margin: .5rem !default; // deprecated
+$card-actions-gap: $button-card-actions-margin !default;
 
 // VCardHeader
 $card-header-flex: none !default;
