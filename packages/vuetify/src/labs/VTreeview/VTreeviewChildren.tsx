@@ -62,12 +62,12 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
 
     const isClickOnOpen = computed(() => props.openOnClick != null ? props.openOnClick : props.selectable)
 
-    function checkChildren (item: any) {
+    function checkChildren (item: any, itemValue: any) {
       return new Promise<void>(resolve => {
         if (!props.items?.length || !props.loadChildren) return resolve()
 
         if (item?.children?.length === 0) {
-          isLoading.value = item.value
+          isLoading.value = itemValue
           props.loadChildren(item).then(resolve)
 
           return
@@ -86,7 +86,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
     }
 
     return () => slots.default?.() ?? props.items?.map(({ children, props: itemProps, raw: item }) => {
-      const loading = isLoading.value === item.value
+      const loading = isLoading.value === itemProps.value
       const slotsWithItem = {
         prepend: slotProps => (
           <>
@@ -132,8 +132,8 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 ...itemProps,
                 ...activatorProps,
                 value: itemProps?.value,
-                onToggleExpand: [() => checkChildren(item), activatorProps.onClick] as any,
-                onClick: isClickOnOpen.value ? [() => checkChildren(item), activatorProps.onClick] as any : undefined,
+                onToggleExpand: [() => checkChildren(item, itemProps.value), activatorProps.onClick] as any,
+                onClick: isClickOnOpen.value ? [() => checkChildren(item, itemProps.value), activatorProps.onClick] as any : undefined,
               }
 
               return (
