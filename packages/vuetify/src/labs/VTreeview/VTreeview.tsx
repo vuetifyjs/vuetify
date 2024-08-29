@@ -14,7 +14,6 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
-import type { InternalListItem } from '@/components/VList/VList'
 import type { VListChildrenSlots } from '@/components/VList/VListChildren'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps } from '@/util'
@@ -37,7 +36,7 @@ export const makeVTreeviewProps = propsFactory({
     collapseIcon: '$treeviewCollapse',
     expandIcon: '$treeviewExpand',
     slim: true,
-  }), ['itemType', 'nav', 'openStrategy']),
+  }), ['nav', 'openStrategy']),
   modelValue: {
     type: Array,
     default: () => ([]),
@@ -117,7 +116,7 @@ export const VTreeview = genericComponent<new <T>(
       return arr
     }
 
-    function openAll (items: InternalListItem<any>[]) {
+    function openAll (items: ListItem<any>[]) {
       let ids: any[] = []
 
       for (const i of items) {
