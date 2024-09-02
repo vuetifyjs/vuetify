@@ -150,6 +150,7 @@ export const VCard = genericComponent<VCardSlots>()({
             props.style,
           ]}
           href={ link.href.value }
+          aria-current={ link['aria-current']?.value }
           onClick={ isClickable.value && link.navigate }
           v-ripple={ isClickable.value && props.ripple }
           tabindex={ props.disabled ? -1 : undefined }

@@ -205,6 +205,7 @@ export const VChip = genericComponent<VChipSlots>()({
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }
           href={ link.href.value }
+          aria-current={ link['aria-current']?.value }
           tabindex={ isClickable.value ? 0 : undefined }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }

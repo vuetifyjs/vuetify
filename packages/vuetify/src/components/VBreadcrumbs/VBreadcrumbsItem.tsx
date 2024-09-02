@@ -56,7 +56,7 @@ export const VBreadcrumbsItem = genericComponent()({
             <a
               class="v-breadcrumbs-item--link"
               href={ link.href.value }
-              aria-current={ isActive.value ? 'page' : undefined }
+              aria-current={ link['aria-current']?.value }
               onClick={ link.navigate }
             >
               { slots.default?.() ?? props.title }

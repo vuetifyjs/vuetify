@@ -47,6 +47,7 @@ export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'hre
   isLink: ComputedRef<boolean>
   isClickable: ComputedRef<boolean>
   href: Ref<string | undefined>
+  'aria-current'?: ComputedRef<'page' | undefined>
 }
 
 export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['attrs']): UseLink {
@@ -74,20 +75,22 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
   // Actual link needs to be undefined when to prop is not used
   const link = computed(() => props.to ? routerLink : undefined)
   const route = useRoute()
+  const isActive = computed(() => {
+    if (!link.value) return false
+    if (!props.exact) return link.value.isActive?.value ?? false
+    if (!route.value) return link.value.isExactActive?.value ?? false
+
+    return link.value.isExactActive?.value && deepEqual(link.value.route.value.query, route.value.query)
+  })
 
   return {
     isLink,
     isClickable,
+    isActive,
     route: link.value?.route,
     navigate: link.value?.navigate,
-    isActive: computed(() => {
-      if (!link.value) return false
-      if (!props.exact) return link.value.isActive?.value ?? false
-      if (!route.value) return link.value.isExactActive?.value ?? false
-
-      return link.value.isExactActive?.value && deepEqual(link.value.route.value.query, route.value.query)
-    }),
     href: computed(() => props.to ? link.value?.route.value.href : props.href),
+    'aria-current': computed(() => isActive.value ? 'page' : undefined),
   }
 }
 
