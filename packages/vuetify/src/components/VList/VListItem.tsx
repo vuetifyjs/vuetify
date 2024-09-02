@@ -127,6 +127,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       root,
       parent,
       openOnSelect,
+      id: uid,
     } = useNestedItem(id, false)
     const list = useList()
     const isActive = computed(() =>
@@ -368,6 +369,8 @@ export const VListItem = genericComponent<VListItemSlots>()({
       isSelected,
       list,
       select,
+      root,
+      id: uid,
     }
   },
 })
