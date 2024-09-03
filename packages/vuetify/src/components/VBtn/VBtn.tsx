@@ -212,10 +212,10 @@ export const VBtn = genericComponent<VBtnSlots>()({
           ]}
           aria-busy={ props.loading ? true : undefined }
           disabled={ isDisabled.value || undefined }
-          href={ link.href.value }
           tabindex={ props.loading || props.readonly ? -1 : undefined }
           onClick={ onClick }
           value={ valueAttr.value }
+          { ...link.linkProps }
         >
           { genOverlays(true, 'v-btn') }
 
