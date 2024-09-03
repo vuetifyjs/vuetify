@@ -23,7 +23,7 @@
       ]
     },
     {
-      "source": "[a-z0-9]{8}\\.(js|css)(\\.map)?",
+      "source": "-[a-zA-Z0-9_-]{8}\\.(js|css)(\\.map)?",
       "headers" : [
         {
           "key" : "Cache-Control",
