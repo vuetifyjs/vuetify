@@ -95,7 +95,7 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     href,
     linkProps: reactive({
       href,
-      ariaCurrent: computed(() => isActive.value ? 'page' : undefined),
+      'aria-current': computed(() => isActive.value ? 'page' : undefined),
     }),
   }
 }
