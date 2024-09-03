@@ -3,7 +3,7 @@ import fs, { readFileSync } from 'fs'
 import { fileURLToPath } from 'url'
 
 import fg from 'fast-glob'
-import { loadEnv, defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
@@ -12,9 +12,9 @@ import Components from 'unplugin-vue-components/vite'
 import { warmup } from 'vite-plugin-warmup'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const resolve = file => path.resolve(__dirname, file)
+const resolve = (file: string) => path.resolve(__dirname, file)
 
-const vuetifyPackage = fs.readFileSync('./package.json', 'utf-8')
+const vuetifyPackage = JSON.parse(fs.readFileSync('./package.json', 'utf-8'))
 
 const index = readFileSync(resolve('src/components/index.ts'), { encoding: 'utf8' })
 const block = Array.from(index.matchAll(/^\/\/ export \* from '\.\/(.*)'$/gm), m => m[1])
@@ -45,8 +45,8 @@ export default defineConfig(({ mode }) => {
       alias: [
         { find: /^vuetify$/, replacement: resolve('./src/framework.ts') },
         { find: /^vuetify\/(.*)/, replacement: resolve('./$1') },
-        { find: /^@\/(.*)/, replacement: resolve('./src/$1')}
-      ]
+        { find: /^@\/(.*)/, replacement: resolve('./src/$1') },
+      ],
     },
     plugins: [
       vue(),
@@ -57,10 +57,11 @@ export default defineConfig(({ mode }) => {
         resolvers: [
           name => {
             if (map.has(name)) {
-              return { name, from: map.get(name) }
+              return { name, from: map.get(name)! }
             }
-          }
-        ]
+            return undefined
+          },
+        ],
       }),
       warmup({
         clientFiles: process.env.CYPRESS ? [
@@ -69,7 +70,7 @@ export default defineConfig(({ mode }) => {
         ] : [
           './dev/index.html',
         ],
-      })
+      }),
     ],
     define: {
       __VUETIFY_VERSION__: JSON.stringify(vuetifyPackage.version),
@@ -82,8 +83,8 @@ export default defineConfig(({ mode }) => {
     css: {
       preprocessorOptions: {
         sass: {
-          api: 'modern-compiler'
-        }
+          api: 'modern-compiler',
+        },
       },
     },
   }

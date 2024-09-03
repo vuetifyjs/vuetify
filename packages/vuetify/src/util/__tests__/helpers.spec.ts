@@ -1,3 +1,6 @@
+// Utilities
+import { describe, expect, it, vi } from 'vitest'
+import { isProxy, isRef, ref } from 'vue'
 import {
   arrayDiff,
   convertToUnit,
@@ -11,10 +14,6 @@ import {
   isEmpty,
   mergeDeep,
 } from '../helpers'
-
-// Utilities
-import { describe, expect, it } from '@jest/globals'
-import { isProxy, isRef, ref } from 'vue'
 
 describe('helpers', () => {
   it('should return set difference of arrays A and B', () => {
@@ -345,31 +344,31 @@ describe('helpers', () => {
 
   describe('defer', () => {
     beforeAll(() => {
-      jest.useFakeTimers()
+      vi.useFakeTimers()
     })
 
     it('executes callback immediately if timeout is 0', () => {
-      const mockCallback = jest.fn()
+      const mockCallback = vi.fn()
       defer(0, mockCallback)()
 
       expect(mockCallback).toHaveBeenCalled()
     })
 
     it('executes callback after specified timeout', () => {
-      const mockCallback = jest.fn()
+      const mockCallback = vi.fn()
       defer(1000, mockCallback)
 
       expect(mockCallback).not.toHaveBeenCalled()
-      jest.advanceTimersByTime(1000)
+      vi.advanceTimersByTime(1000)
       expect(mockCallback).toHaveBeenCalled()
     })
 
     it('provides a function to clear the timeout', () => {
-      const mockCallback = jest.fn()
+      const mockCallback = vi.fn()
       const clear = defer(1000, mockCallback)
 
       clear()
-      jest.advanceTimersByTime(1000)
+      vi.advanceTimersByTime(1000)
 
       expect(mockCallback).not.toHaveBeenCalled()
     })

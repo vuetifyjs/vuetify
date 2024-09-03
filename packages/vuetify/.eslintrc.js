@@ -51,7 +51,7 @@ module.exports = {
       plugins: ['jest'],
       extends: ['plugin:jest/recommended'],
       rules: {
-        'local-rules/jest-global-imports': 'error',
+        'local-rules/vitest-global-imports': 'error',
 
         'no-restricted-imports': 'off',
 

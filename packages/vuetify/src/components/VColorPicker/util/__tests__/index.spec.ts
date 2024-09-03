@@ -1,5 +1,5 @@
 // Utilities
-import { describe, expect, it } from '@jest/globals'
+import { expect, it } from 'vitest'
 import { extractColor } from '../'
 
 const red = { h: 0, s: 1, v: 1, a: 1 }

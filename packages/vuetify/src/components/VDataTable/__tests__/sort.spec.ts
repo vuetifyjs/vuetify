@@ -4,8 +4,8 @@ import { transformItems as _transformItems } from '../composables/items'
 import { sortItems as _sortItems } from '../composables/sort'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
+import { expect, it } from 'vitest'
 
 // Types
 import type { SortItem } from '../composables/sort'

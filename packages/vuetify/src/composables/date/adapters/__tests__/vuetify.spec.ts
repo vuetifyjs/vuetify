@@ -1,6 +1,6 @@
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import timezoneMock from 'timezone-mock'
+import { expect, it } from 'vitest'
 import { VuetifyDateAdapter } from '../vuetify'
 
 // Types

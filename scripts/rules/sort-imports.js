@@ -17,7 +17,7 @@ const groups = [
   },
   {
     label: 'Utilities',
-    match: /^@\/util|^vue$|^vue-|^@vue\/|^@jest/,
+    match: /^@\/util|^vue$|^vue-|^@vue\/|^@jest|^vitest/,
   },
   {
     label: 'Types',

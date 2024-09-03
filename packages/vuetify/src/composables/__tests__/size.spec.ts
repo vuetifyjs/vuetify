@@ -2,7 +2,9 @@
 import { useSize } from '../size'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
+import { expect, it } from 'vitest'
+
+// Utilities
 
 describe('size', () => {
   it.each([

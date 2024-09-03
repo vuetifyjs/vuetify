@@ -2,8 +2,8 @@
 import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
+import { expect, it } from 'vitest'
 import { defineComponent, ref } from 'vue'
 import { useRender } from '@/util'
 

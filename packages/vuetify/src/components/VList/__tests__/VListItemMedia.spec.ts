@@ -2,8 +2,8 @@
 import { VListItemMedia } from '..'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
+import { expect, it } from 'vitest'
 import { createVuetify } from '@/framework'
 
 describe('VListItemMedia', () => {

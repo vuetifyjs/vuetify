@@ -2,8 +2,8 @@
 import ClickOutside from '../'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
-import { wait } from '../../../../test'
+import { describe, expect, it, vi } from 'vitest'
+import { wait } from '@/../test'
 
 function bootstrap (args?: object) {
   const outsideEl = document.createElement('div')
@@ -13,7 +13,7 @@ function bootstrap (args?: object) {
 
   const binding = {
     value: {
-      handler: jest.fn(),
+      handler: vi.fn(),
       ...args,
     },
     instance: {
@@ -30,18 +30,18 @@ function bootstrap (args?: object) {
   document.body.appendChild(shadowHost)
   shadowRoot.appendChild(shadowEl)
 
-  jest.spyOn(window.document, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
+  vi.spyOn(window.document, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
     if (eventName === 'click') outsideClickHandler = eventHandler
     if (eventName === 'mousedown') outsideMousedownHandler = eventHandler
   })
 
-  jest.spyOn(shadowRoot, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
+  vi.spyOn(shadowRoot, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
     if (eventName === 'click') shadowClickHandler = eventHandler
     if (eventName === 'mousedown') shadowMousedownHandler = eventHandler
   })
 
-  jest.spyOn(window.document, 'removeEventListener')
-  jest.spyOn(shadowRoot, 'removeEventListener')
+  vi.spyOn(window.document, 'removeEventListener')
+  vi.spyOn(shadowRoot, 'removeEventListener')
 
   ClickOutside.mounted(shadowEl as HTMLElement, binding)
 

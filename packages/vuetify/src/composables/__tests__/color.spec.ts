@@ -2,7 +2,7 @@
 import { useBackgroundColor, useColor, useTextColor } from '../color'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
+import { expect, it } from 'vitest'
 import { reactive, toRef } from 'vue'
 
 describe('color.ts', () => {

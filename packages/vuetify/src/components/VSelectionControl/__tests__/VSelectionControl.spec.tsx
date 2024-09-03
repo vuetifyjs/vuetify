@@ -2,8 +2,8 @@
 import { makeVSelectionControlProps, useSelectionControl } from '../VSelectionControl'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
+import { describe, expect, it, vi } from 'vitest'
 import { defineComponent, nextTick } from 'vue'
 import { createVuetify } from '@/framework'
 
@@ -36,7 +36,7 @@ describe('VSelectionControl', () => {
   })
 
   it('should use trueValue', async () => {
-    const update = jest.fn()
+    const update = vi.fn()
     const wrapper = mountFunction({
       props: {
         trueValue: 'on',
@@ -52,7 +52,7 @@ describe('VSelectionControl', () => {
   })
 
   it('should use falseValue', async () => {
-    const update = jest.fn()
+    const update = vi.fn()
     const wrapper = mountFunction({
       props: {
         trueValue: 'on',

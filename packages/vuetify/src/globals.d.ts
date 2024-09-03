@@ -170,12 +170,12 @@ declare module 'vue' {
   export interface CSSProperties extends CustomProperties {}
 }
 
-declare module 'expect' {
-  interface Matchers<R> {
-    /** console.warn */
-    toHaveBeenTipped(): R
+interface CustomMatchers<R = unknown> {
+  toHaveBeenTipped: () => R
+  toHaveBeenWarned: () => R
+}
 
-    /** console.error */
-    toHaveBeenWarned(): R
-  }
+declare module 'vitest' {
+  interface Assertion<T = any> extends CustomMatchers<T> {}
+  interface AsymmetricMatchersContaining extends CustomMatchers {}
 }

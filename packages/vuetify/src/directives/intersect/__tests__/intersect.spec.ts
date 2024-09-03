@@ -2,11 +2,11 @@
 import Intersect from '../'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
+import { expect } from 'vitest'
 
 describe('v-intersect', () => {
   it('should bind event on mounted', () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
     const el = document.createElement('div')
     document.body.appendChild(el)
 
@@ -36,7 +36,7 @@ describe('v-intersect', () => {
     const el = document.createElement('div')
     document.body.appendChild(el)
 
-    const callback = jest.fn()
+    const callback = vi.fn()
 
     Intersect.mounted(el, {
       value: callback,
