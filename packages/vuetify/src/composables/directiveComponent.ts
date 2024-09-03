@@ -70,7 +70,7 @@ function mountComponent (component: ConcreteComponent, props?: Record<string, an
     const value = isObject(binding.value) ? binding.value : {}
 
     // Get the children from the props or directive value, or the element's children
-    const children = () => text ?? el.innerHTML
+    const children = () => text ?? el.textContent
 
     // If vnode.ctx is the same as the instance, then we're bound to a plain element
     // and need to find the nearest parent component instance to inherit provides from
