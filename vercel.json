@@ -32,6 +32,19 @@
       ]
     },
     {
+      "source": "/sw.js",
+      "headers" : [
+        {
+          "key" : "Cache-Control",
+          "value" : "public, max-age=0, s-maxage=10, must-revalidate"
+        },
+        {
+          "key" : "CDN-Cache-Control",
+          "value" : "max-age=10"
+        }
+      ]
+    },
+    {
       "source": "/service-worker.js",
       "headers" : [
         {

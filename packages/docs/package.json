@@ -84,7 +84,7 @@
     "vite": "^5.4.0",
     "vite-plugin-md": "^0.21.5",
     "vite-plugin-pages": "^0.32.1",
-    "vite-plugin-pwa": "^0.17.4",
+    "vite-plugin-pwa": "^0.20.3",
     "vite-plugin-vue-layouts": "^0.11.0",
     "vite-plugin-vuetify": "^2.0.4",
     "vue-tsc": "^2.0.29"
