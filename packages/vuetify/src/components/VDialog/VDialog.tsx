@@ -111,7 +111,6 @@ export const VDialog = genericComponent<OverlaySlots>()({
       const overlayProps = VOverlay.filterProps(props)
       const activatorProps = mergeProps({
         'aria-haspopup': 'dialog',
-        'aria-expanded': String(isActive.value),
       }, props.activatorProps)
       const contentProps = mergeProps({
         tabindex: -1,
