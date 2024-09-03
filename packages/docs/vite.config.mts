@@ -20,7 +20,7 @@ import MagicString from 'magic-string'
 import { configureMarkdown } from './build/markdown-it'
 import Api from './build/api-plugin'
 import { Examples } from './build/examples-plugin'
-import { genAppMetaInfo } from './src/utils/metadata'
+// import { genAppMetaInfo } from './src/utils/metadata'
 import { MdiJs } from './build/mdi-js'
 import { frontmatterBuilder, getRouteMeta, scriptFixer } from './build/markdownBuilders'
 
@@ -206,15 +206,20 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
       // https://github.com/antfu/vite-plugin-pwa
       VitePWA({
         srcDir: 'src',
-        filename: 'service-worker.js',
+        filename: 'sw.js',
         strategies: 'injectManifest',
         includeAssets: ['favicon.ico'],
+        injectRegister: false,
         injectManifest: {
-          globIgnores: ['**/*.html'],
-          additionalManifestEntries: [
-            { url: '/_fallback.html', revision: Date.now().toString(16) },
-          ],
-          dontCacheBustURLsMatching: /assets\/.+[A-Za-z0-9]{8}\.(js|css)$/,
+          minify: false,
+          enableWorkboxModulesLogs: true,
+          // globIgnores: ['**/*.html'],
+          globIgnores: ['assets/*.map', 'service-worker.js'],
+          // globPatterns: ['**/*.{js,css}', 'index.html'],
+          // additionalManifestEntries: [
+          //   { url: '/_fallback.html', revision: Date.now().toString(16) },
+          // ],
+          // dontCacheBustURLsMatching: /assets\/.+[A-Za-z0-9]{8}\.(js|css)$/,
           maximumFileSizeToCacheInBytes: 24 * 1024 ** 2,
         },
         manifest: {
@@ -301,7 +306,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
           }
         },
       },
-
+/*
       {
         // lightweight head-only ssg
         name: 'vuetify:ssg',
@@ -348,7 +353,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
           return routes.find(r => r.path === '/en/')?.content
         },
       },
-
+*/
       Inspect(),
 
       process.env.HTTPS === 'true' ? basicSsl() : undefined,

@@ -133,11 +133,19 @@ async function networkFirst (request) {
   }
 }
 
+function findFallbackEntry () {
+  const { url, revision } = MANIFEST.find(e => e.url === 'index.html')
+  const cacheKeyUrl = new URL(url, location.href)
+  cacheKeyUrl.searchParams.set('__WB_REVISION__', revision)
+  return cacheKeyUrl.href
+}
+
 async function getFallbackDocument () {
   const precache = await openCache('precache')
 
-  const cacheKey = getCacheKeyForUrl('/_fallback.html')
-  const request = fetch('/_fallback.html')
+  const cacheKey = findFallbackEntry()
+  // const cacheKey = getCacheKeyForUrl('index.html')
+  /* const request = fetch('index.html')
   if (cacheKey) {
     request.then(response => {
       response = ensureCacheableResponse(response)
@@ -148,15 +156,22 @@ async function getFallbackDocument () {
   }
   request.catch(() => {
     console.warn('[SW] Failed to fetch fallback document')
-  })
+  }) */
 
   const fallback = await precache.match(cacheKey)
 
-  if (!fallback) {
-    return request.then(ensureCacheableResponse)
+  if (fallback) {
+    return fallback
   }
 
-  return fallback
+  // use stale while revalidate: we're going to claim the clients also here
+  return fetch('index.html').then(response => {
+    response = ensureCacheableResponse(response)
+    if (response.status === 200) {
+      precache.put(cacheKey, response.clone())
+    }
+    return response
+  })
 }
 
 async function cleanCache () {
@@ -280,3 +295,14 @@ function ensureCacheableResponse (response) {
     statusText: cloned.statusText,
   })
 }
+
+// Skip-Waiting Service Worker-based solution
+self.addEventListener('activate', async () => {
+  // after we've taken over, iterate over all the current clients (windows)
+  const clients = await self.clients.matchAll({ type: 'window' })
+  clients.forEach(client => {
+    // ...and refresh each one of them
+    client.navigate(client.url)
+  })
+})
+self.skipWaiting()
