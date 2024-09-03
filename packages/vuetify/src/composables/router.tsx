@@ -2,7 +2,7 @@
 import {
   computed,
   nextTick,
-  onScopeDispose,
+  onScopeDispose, reactive,
   resolveDynamicComponent,
   toRef,
 } from 'vue'
@@ -47,7 +47,7 @@ export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'hre
   isLink: ComputedRef<boolean>
   isClickable: ComputedRef<boolean>
   href: Ref<string | undefined>
-  'aria-current'?: ComputedRef<'page' | undefined>
+  linkProps: Record<string, string | undefined>
 }
 
 export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['attrs']): UseLink {
@@ -59,10 +59,12 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
   })
 
   if (typeof RouterLink === 'string' || !('useLink' in RouterLink)) {
+    const href = toRef(props, 'href')
     return {
       isLink,
       isClickable,
-      href: toRef(props, 'href'),
+      href,
+      linkProps: reactive({ href }),
     }
   }
   // vue-router useLink `to` prop needs to be reactive and useLink will crash if undefined
@@ -82,6 +84,7 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
 
     return link.value.isExactActive?.value && deepEqual(link.value.route.value.query, route.value.query)
   })
+  const href = computed(() => props.to ? link.value?.route.value.href : props.href)
 
   return {
     isLink,
@@ -89,8 +92,11 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     isActive,
     route: link.value?.route,
     navigate: link.value?.navigate,
-    href: computed(() => props.to ? link.value?.route.value.href : props.href),
-    'aria-current': computed(() => isActive.value ? 'page' : undefined),
+    href,
+    linkProps: reactive({
+      href,
+      ariaCurrent: computed(() => isActive.value ? 'page' : undefined),
+    }),
   }
 }
 
