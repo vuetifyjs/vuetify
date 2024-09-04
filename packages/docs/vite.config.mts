@@ -209,12 +209,13 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         filename: 'service-worker.js',
         strategies: 'injectManifest',
         includeAssets: ['favicon.ico'],
+        injectRegister: false,
         injectManifest: {
           globIgnores: ['**/*.html'],
           additionalManifestEntries: [
             { url: '/_fallback.html', revision: Date.now().toString(16) },
           ],
-          dontCacheBustURLsMatching: /assets\/.+[A-Za-z0-9]{8}\.(js|css)$/,
+          dontCacheBustURLsMatching: /assets\/.+-[A-Za-z0-9_-]{8}\.(js|css)$/,
           maximumFileSizeToCacheInBytes: 24 * 1024 ** 2,
         },
         manifest: {
