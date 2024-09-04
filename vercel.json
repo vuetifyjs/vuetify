@@ -27,7 +27,7 @@
       "headers" : [
         {
           "key" : "Cache-Control",
-          "value" : "public, max-age=31536000, immutable"
+          "value" : "public, immutable, max-age=31536000, stale-if-error=604800"
         }
       ]
     },
@@ -36,11 +36,11 @@
       "headers" : [
         {
           "key" : "Cache-Control",
-          "value" : "public, max-age=0, s-maxage=10, must-revalidate"
+          "value" : "public, max-age=0, s-maxage=60, must-revalidate"
         },
         {
           "key" : "CDN-Cache-Control",
-          "value" : "max-age=10"
+          "value" : "max-age=60"
         }
       ]
     }
