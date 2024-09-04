@@ -210,7 +210,7 @@ function createCacheKey (entry) {
 
   return {
     cacheKey: cacheKeyUrl.href,
-    url: cacheKeyUrl.href,
+    url: new URL(url, location.href).href,
   }
 }
 
