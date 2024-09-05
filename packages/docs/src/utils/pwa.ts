@@ -3,7 +3,7 @@ import eachLimit from 'async-es/eachLimit'
 type ManifestEntry = { url: string, revision?: string }
 type Manifest = ManifestEntry[]
 
-const urlsToCacheKeys = new Map()
+const urlsToCacheKeys = new Map<string, string>()
 export function getCacheKeyForUrl (url: string) {
   url = createCacheKey(url).url
 
@@ -26,7 +26,7 @@ export async function cacheManifestEntries (
   const cache = await openCache('precache')
   let count = 0
   const total = urlsToCacheKeys.size
-  await eachLimit(urlsToCacheKeys, 4, async ([url, cacheKey]) => {
+  await eachLimit(urlsToCacheKeys, 4, async ([url, cacheKey]: [string, string]) => {
     const response = ensureCacheableResponse(await fetch(url))
     if (response.status === 200) {
       await cache.put(cacheKey, response)
@@ -61,7 +61,7 @@ async function cleanCache (previousManifest: Manifest) {
 
   // Date of earliest entry in the old manifest
   const date = Array.from(
-    new Set(responses.filter(v => v).map(getDate))
+    new Set(responses.filter(v => !!v).map(getDate))
   ).reduce((acc, val) => Math.min(acc, val), Date.now())
 
   console.log('[SW] Cleaning caches before', new Date(date))
