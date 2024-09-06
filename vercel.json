@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": true,
   "rewrites": [
     {
@@ -9,7 +9,7 @@
     },
     {
       "source": "/((?!assets/).*)",
-      "destination": "/_fallback"
+      "destination": "/_fallback.html"
     }
   ],
   "headers": [
@@ -18,13 +18,13 @@
       "headers" : [
         {
           "key" : "Cache-Control",
-          "value" : "public, max-age=3600, s-maxage=60, must-revalidate"
+          "value" : "public, max-age=3600, s-maxage=60"
         }
       ]
     },
     {
-      "source": "/(.*)-([a-zA-Z0-9_-]{8}).(js|css)(\\.map)?",
-      "headers" : [
+      "source": "/assets/(.*)",
+      "headers": [
         {
           "key" : "Cache-Control",
           "value" : "public, immutable, max-age=31536000, stale-if-error=604800"
