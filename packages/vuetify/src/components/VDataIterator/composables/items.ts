@@ -17,7 +17,6 @@ export interface DataIteratorItemProps {
 }
 
 export interface DataIteratorItem<T = any> extends GroupableItem<T>, SelectableItem {
-  key: any
   value: unknown
 }
 
