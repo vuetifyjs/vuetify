@@ -1,14 +1,15 @@
 // Utilities
 import { computed } from 'vue'
-import { getPropertyFromItem, propsFactory } from '@/util'
+import { getObjectValueByPath, getPropertyFromItem, propsFactory } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
 import type { CellProps, DataTableItem, InternalDataTableHeader, RowProps } from '../types'
-import type { SelectItemKey } from '@/util'
+import type { SelectItemId, SelectItemKey } from '@/util'
 
 export interface DataTableItemProps {
   items: any[]
+  itemId: SelectItemId
   itemValue: SelectItemKey
   itemSelectable: SelectItemKey
   returnObject: boolean
@@ -19,6 +20,10 @@ export const makeDataTableItemsProps = propsFactory({
   items: {
     type: Array as PropType<DataTableItemProps['items']>,
     default: () => ([]),
+  },
+  itemId: {
+    type: [String, Function] as PropType<SelectItemId>,
+    default: 'id',
   },
   itemValue: {
     type: [String, Array, Function] as PropType<SelectItemKey>,
@@ -35,6 +40,7 @@ export const makeDataTableItemsProps = propsFactory({
 
 export function transformItem (
   props: Omit<DataTableItemProps, 'items'>,
+  id: number | string,
   item: any,
   index: number,
   columns: InternalDataTableHeader[]
@@ -48,7 +54,7 @@ export function transformItem (
 
   return {
     type: 'item',
-    key: props.returnObject ? getPropertyFromItem(item, props.itemValue) : value,
+    key: id,
     index,
     value,
     selectable,
@@ -62,7 +68,11 @@ export function transformItems (
   items: DataTableItemProps['items'],
   columns: InternalDataTableHeader[]
 ): DataTableItem[] {
-  return items.map((item, index) => transformItem(props, item, index, columns))
+  const itemId = props.itemId
+  const getId = typeof itemId === 'function'
+    ? (item: any) => itemId(item)
+    : (item: any) => getObjectValueByPath(item, itemId)
+  return items.map((item, index) => transformItem(props, getId(item), item, index, columns))
 }
 
 export function useDataTableItems (props: DataTableItemProps, columns: Ref<InternalDataTableHeader[]>) {

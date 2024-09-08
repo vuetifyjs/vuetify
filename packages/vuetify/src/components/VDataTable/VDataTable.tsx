@@ -30,7 +30,7 @@ import type { Group } from './composables/group'
 import type { CellProps, DataTableHeader, DataTableItem, InternalDataTableHeader, RowProps } from './types'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
-import type { GenericProps, SelectItemKey } from '@/util'
+import type { GenericProps, SelectItemId, SelectItemKey } from '@/util'
 
 export type VDataTableSlotProps<T> = {
   page: number
