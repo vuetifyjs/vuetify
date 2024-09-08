@@ -68,7 +68,7 @@ export function transformItems (
   items: DataTableItemProps['items'],
   columns: InternalDataTableHeader[]
 ): DataTableItem[] {
-  const itemId = props.itemId
+  const itemId = props.itemId || 'id'
   const getId = typeof itemId === 'function'
     ? (item: any) => itemId(item)
     : (item: any) => getObjectValueByPath(item, itemId)

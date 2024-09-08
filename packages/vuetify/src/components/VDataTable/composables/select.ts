@@ -104,7 +104,7 @@ export function provideSelection (
   props: SelectionProps,
   { allItems, currentPage }: { allItems: Ref<SelectableItem[]>, currentPage: Ref<SelectableItem[]> }
 ) {
-  const itemId = props.itemId ?? 'id'
+  const itemId = props.itemId || 'id'
   const extractId = typeof itemId === 'function'
     ? (item: any) => itemId(item)
     : (item: any) => getObjectValueByPath(item, itemId)

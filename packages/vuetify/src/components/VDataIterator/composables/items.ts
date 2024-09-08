@@ -62,7 +62,7 @@ export function transformItems (
   props: Omit<DataIteratorItemProps, 'items'>,
   items: DataIteratorItemProps['items']
 ) {
-  const itemId = props.itemId
+  const itemId = props.itemId || 'id'
   const getId = typeof itemId === 'function'
     ? (item: any) => itemId(item)
     : (item: any) => getObjectValueByPath(item, itemId)
