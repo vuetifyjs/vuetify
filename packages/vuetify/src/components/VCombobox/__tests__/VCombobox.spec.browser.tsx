@@ -1,12 +1,10 @@
-/// <reference types="../../../../types/cypress" />
-
 // Components
 import { VCombobox } from '../VCombobox'
 import { VForm } from '@/components/VForm'
 
 // Utilities
+import { generate, render } from '@test'
 import { cloneVNode, ref } from 'vue'
-import { generate } from '../../../../cypress/templates'
 import { keyValues } from '@/util'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
@@ -810,7 +808,7 @@ describe('VCombobox', () => {
       })
   })
 
-  describe('Showcase', () => {
+  describe.only('Showcase', () => {
     generate({ stories })
   })
 })

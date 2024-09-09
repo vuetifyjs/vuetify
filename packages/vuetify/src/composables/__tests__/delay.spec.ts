@@ -3,7 +3,6 @@ import { makeDelayProps, useDelay } from '../delay'
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { expect, it } from 'vitest'
 import { wait } from '@/../test'
 
 describe('delayProps', () => {

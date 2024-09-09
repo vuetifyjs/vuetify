@@ -3,10 +3,12 @@
   "include": [
     "src",
     "dev",
+    "test",
     "cypress",
     "cypress.config.ts",
     "vite.config.mts",
-    "vitest.config.mts"
+    "vitest.config.mts",
+    "vitest.workspace.mts"
   ],
   "compilerOptions": {
     "allowJs": true

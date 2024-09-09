@@ -1,20 +1,13 @@
-// Setup
-// import type { ComponentOptions } from 'vue'
-
 // Utilities
-import toHaveBeenWarnedInit from './util/to-have-been-warned'
+import { render as _render } from '@testing-library/vue'
+import { createVuetify } from '@/framework.ts'
+import { afterEach } from 'vitest'
+import { mergeDeep } from '@/util'
+import { aliases } from '@/iconsets/mdi-svg'
 
-// export function functionalContext (context: ComponentOptions<Vue> = {}, children = []) {
-//   if (!Array.isArray(children)) children = [children]
-//   return {
-//     context: {
-//       data: {},
-//       props: {},
-//       ...context,
-//     },
-//     children,
-//   }
-// }
+export { userEvent } from '@vitest/browser/context'
+export { screen } from '@testing-library/vue'
+export * from './templates'
 
 export function touch (element: Element) {
   const createTrigger = (eventName: string) => (clientX: number, clientY: number) => {
@@ -39,73 +32,43 @@ export const wait = (timeout?: number) => {
   return new Promise(resolve => setTimeout(resolve, timeout))
 }
 
-export const waitAnimationFrame = (timeout?: number) => {
+export const waitAnimationFrame = () => {
   return new Promise(resolve => requestAnimationFrame(resolve))
 }
 
-export const resizeWindow = (width = window.innerWidth, height = window.innerHeight) => {
-  (window as any).innerWidth = width
-  ;(window as any).innerHeight = height
-  window.dispatchEvent(new Event('resize'))
-
-  return wait(200)
+export const waitIdle = () => {
+  return new Promise(resolve => requestIdleCallback(resolve, { timeout: 500 }))
 }
 
-export const scrollWindow = (y: number) => {
-  (window as any).pageYOffset = y
-  window.dispatchEvent(new Event('scroll'))
-
-  return wait(200)
+export const scroll = (options: ScrollToOptions, el: Element | Window = window) => {
+  return Promise.race([
+    wait(500),
+    new Promise(resolve => {
+      el.addEventListener('scrollend', resolve, { once: true })
+      el.scroll(options)
+    }).then(waitIdle),
+  ])
 }
 
-export const scrollElement = (element: Element, y: number) => {
-  element.scrollTop = y
-  element.dispatchEvent(new Event('scroll'))
+let vuetify: ReturnType<typeof createVuetify> | null
+afterEach(() => {
+  vuetify = null
+})
 
-  return wait(200)
-}
+export const render = (function render (component, options) {
+  vuetify = vuetify ?? (vuetify = createVuetify({ icons: { aliases } }))
 
-// Add a global mockup for IntersectionObserver
-class IntersectionObserver {
-  callback?: (entries: any, observer: any) => {}
-
-  constructor (callback: any) {
-    this.callback = callback
+  const defaultOptions = {
+    global: {
+      stubs: {
+        transition: false,
+        'transition-group': false,
+      },
+      plugins: [vuetify],
+    },
   }
 
-  observe () {
-    this.callback?.([], this)
-    return null
-  }
+  const mountOptions = mergeDeep(defaultOptions, options!, (a, b) => a.concat(b))
 
-  unobserve () {
-    this.callback = undefined
-    return null
-  }
-}
-
-(global as any).IntersectionObserver = IntersectionObserver
-
-class ResizeObserver {
-  callback?: ResizeObserverCallback
-
-  constructor (callback: ResizeObserverCallback) {
-    this.callback = callback
-  }
-
-  observe () {
-    this.callback?.([], this)
-  }
-
-  unobserve () {
-    this.callback = undefined
-  }
-
-  disconnect () {
-    this.callback = undefined
-  }
-}
-
-(global as any).ResizeObserver = ResizeObserver
-
-toHaveBeenWarnedInit()
+  return _render(component, mountOptions)
+}) as typeof _render

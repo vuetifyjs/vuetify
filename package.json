@@ -91,6 +91,7 @@
       "@mdi/js@7.4.47": "patches/@mdi__js@7.4.47.patch"
     },
     "overrides": {
+      "@types/node": "22.5.4",
       "tough-cookie": "5.0.0-rc.4"
     }
   }

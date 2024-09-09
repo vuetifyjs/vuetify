@@ -2,13 +2,14 @@
  * Utilities for generating formatted mount functions
  * Some utility functions for mounting these generated examples inside of tests
  */
-import { FunctionalComponent } from 'vue'
-import { JSXComponent } from '@/composables'
-
-const _ = Cypress._
+import type { FunctionalComponent } from 'vue'
+import type { JSXComponent } from '@/composables'
+import { it } from 'vitest'
+import { commands, page } from '@vitest/browser/context'
+import { render } from '@test'
 
 type Stories = Record<string, JSX.Element>
-type Props = Record<string, Boolean | any[]>
+type Props = Record<string, boolean | any[]>
 type GenerateConfiguration = {
   props: Props
   component: JSXComponent
@@ -20,8 +21,8 @@ type GenerateConfiguration = {
 }
 
 type Example = {
-  name: string,
-  mount: JSX.Element
+  name: string
+  mount: () => JSX.Element
 }
 
 /** Utility components */
@@ -42,16 +43,17 @@ const Wrapper: FunctionalComponent = (_, { slots }) => <div class="ma-4">{ slots
   })
  */
 export const makeExamplesFromStories = (stories: Stories): Example[] => {
-  return Object.entries(stories).reduce((acc: Example[], [key, value]) => {
-    acc.push({
+  return Object.entries(stories).map(([key, value]) => {
+    return {
       name: key,
-      mount: <Wrapper>
-        { title(key) }
-        { grid(value) }
-      </Wrapper>,
-    })
-    return acc
-  }, [])
+      mount: () => (
+        <Wrapper>
+          { title(key) }
+          { grid(value) }
+        </Wrapper>
+      ),
+    }
+  })
 }
 
 /**
@@ -65,30 +67,31 @@ export const makeExamplesFromStories = (stories: Stories): Example[] => {
    }, VBtn)
  */
 export const makeExamplesFromProps = (props: Props, Component: JSXComponent): Example[] => {
-  return Object.entries(props).reduce((acc: Example[], [key, value]) => {
+  return Object.entries(props).map(([key, value]) => {
     // Collect an array of examples by prop.
     const variants: JSX.Element[] = []
 
     // Props with boolean values should be rendered with both their true/false states
-    if (_.isBoolean(value)) {
+    if (typeof value === 'boolean') {
       variants.push(<Component { ...{ [key]: true } }>Is { key }</Component>)
       variants.push(<Component { ...{ [key]: false } }>Is not { key }</Component>)
-    } else if (_.isArray(value)) {
+    } else if (Array.isArray(value)) {
       // Props with array values should be iterated over
-      value.forEach((v) => {
+      value.forEach(v => {
         variants.push(<Component { ... { [key]: v } }>{ v }</Component>)
       })
     }
 
-    acc.push({
+    return {
       name: key,
-      mount: <Wrapper>
-        { title(key) }
-        { grid(variants) }
-      </Wrapper>
-    })
-    return acc
-  }, [])
+      mount: () => (
+        <Wrapper>
+          { title(key) }
+          { grid(variants) }
+        </Wrapper>
+      ),
+    }
+  })
 }
 
 /**
@@ -108,17 +111,35 @@ export const generate = ({ props, stories, component }: GenerateConfiguration) =
     exampleProps = makeExamplesFromProps(props, component)
   }
 
-  return it('renders everything', () => {
-    cy.mount(() => <>
-      { exampleStories && <>
-        <h2 class="mx-4 mt-10 mb-4">Stories</h2>
-        { exampleStories.map(s => s.mount) }
-      </>}
-      { exampleProps && <>
-        <h2 class="mx-4 mt-10 mb-4">Props</h2>
-        { exampleProps.map(s => s.mount) }
-      </>}
-    </>).percySnapshot()
+  return it('renders everything', async () => {
+    await page.viewport(1280, 825)
+
+    render(() => (
+      <>
+        { exampleStories && (
+          <>
+            <h2 class="mx-4 mt-10 mb-4">Stories</h2>
+            { exampleStories.map(s => s.mount()) }
+          </>
+        )}
+        { exampleProps && (
+          <>
+            <h2 class="mx-4 mt-10 mb-4">Props</h2>
+            { exampleProps.map(s => s.mount()) }
+          </>
+        )}
+      </>
+    ))
+
+    let suite = (globalThis as any).__vitest_worker__.current
+    let name = ''
+    while (suite) {
+      name = suite.name + ' ' + name
+      suite = suite.suite
+    }
+
+    await commands.percySnapshot(name.trim())
+    await page.screenshot()
   })
 }
 
@@ -129,7 +150,9 @@ export const generate = ({ props, stories, component }: GenerateConfiguration) =
  */
 export const generateByExample = (stories: Stories) => {
   return makeExamplesFromStories(stories).map(({ name, mount }) => {
-    return it(name, () => { cy.mount(() => <>{ mount }</>) })
+    return it(name, () => {
+      render(mount)
+    })
   })
 }
 
@@ -141,6 +164,8 @@ export const generateByExample = (stories: Stories) => {
  */
 export const generateByProps = (props: Props, component: JSXComponent) => {
   return makeExamplesFromProps(props, component).map(({ mount, name }) => {
-    return it(name, () => { cy.mount(() => <>{ mount }</>) })
+    return it(name, () => {
+      render(mount)
+    })
   })
 }

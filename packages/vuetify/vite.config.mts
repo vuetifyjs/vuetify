@@ -7,7 +7,6 @@ import { defineConfig, loadEnv } from 'vite'
 
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import viteSSR from 'vite-ssr/plugin.js'
 import Components from 'unplugin-vue-components/vite'
 import { warmup } from 'vite-plugin-warmup'
 
@@ -26,6 +25,8 @@ const map = new Map(components.flatMap(file => {
   return Array.from(matches, m => [m[1] || m[2], file.replace('src/', '@/').replace('.ts', '')])
 }))
 
+const viteSSR = process.env.TEST ? () => {} : (await import('vite-ssr/plugin.js').then(m => m.default))
+
 export default defineConfig(({ mode }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
 
@@ -33,8 +34,8 @@ export default defineConfig(({ mode }) => {
     root: resolve('dev'),
     server: {
       host: process.env.HOST,
-      port: process.env.CYPRESS ? undefined : +(process.env.PORT ?? 8090),
-      strictPort: !!process.env.PORT && !process.env.CYPRESS,
+      port: process.env.TEST ? undefined : +(process.env.PORT ?? 8090),
+      strictPort: !!process.env.PORT && !process.env.TEST,
     },
     preview: {
       host: process.env.HOST,
@@ -53,7 +54,7 @@ export default defineConfig(({ mode }) => {
       vueJsx({ optimize: false, enableObjectSlots: false }),
       viteSSR(),
       Components({
-        dts: !process.env.CYPRESS,
+        dts: !process.env.TEST,
         resolvers: [
           name => {
             if (map.has(name)) {
@@ -64,12 +65,7 @@ export default defineConfig(({ mode }) => {
         ],
       }),
       warmup({
-        clientFiles: process.env.CYPRESS ? [
-          './src/**/*.spec.cy.{js,jsx,ts,tsx}',
-          './cypress/support/index.ts',
-        ] : [
-          './dev/index.html',
-        ],
+        clientFiles: process.env.TEST ? [] : ['./dev/index.html'],
       }),
     ],
     define: {

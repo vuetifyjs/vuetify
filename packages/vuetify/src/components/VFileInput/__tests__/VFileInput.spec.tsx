@@ -2,7 +2,6 @@ import { VFileInput } from '../VFileInput'
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { describe, expect, it, vi } from 'vitest'
 import { createVuetify } from '@/framework'
 
 describe('VFileInput', () => {

@@ -1,7 +1,7 @@
-/// <reference types="../../../../types/cypress" />
-
 import { VAlert } from '..'
-import { generate } from '@/../cypress/templates'
+
+// Utilities
+import { generate, render } from '@test'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
 
@@ -19,8 +19,8 @@ const stories = {
 // Tests
 describe('VAlert', () => {
   describe('color', () => {
-    it('supports default color props', () => {
-      cy.mount(() => (
+    it('supports default color props', async () => {
+      const { container } = render(() => (
         <>
           { defaultColors.map((color, idx) => (
             <VAlert color={ color } text={ idx.toString() }>
@@ -29,13 +29,14 @@ describe('VAlert', () => {
           ))}
         </>
       ))
-        .get('.v-alert')
-        .should('have.length', defaultColors.length)
-        .then(subjects => {
-          Array.from(subjects).forEach((subject, idx) => {
-            expect(subject).to.contain(defaultColors[idx])
-          })
-        })
+
+      const alerts = container.querySelectorAll('.v-alert')
+      expect(alerts).toHaveLength(defaultColors.length)
+
+      Array.from(alerts).forEach((alert, idx) => {
+        // TODO: useless assert
+        expect(alert).toHaveTextContent(defaultColors[idx])
+      })
     })
   })
 

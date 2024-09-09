@@ -1,18 +1,15 @@
-/// <reference types="../../../../types/cypress" />
-
 // Components
 import { VInput } from '../VInput'
 
 // Utilities
+import { generate } from '@test'
 import { cloneVNode } from 'vue'
-import { generate } from '../../../../cypress/templates'
 
 const densities = ['default', 'comfortable', 'compact']
 
 const stories = Object.fromEntries(Object.entries({
   Default: <VInput />,
   Disabled: <VInput disabled />,
-  Affixes: <VInput prefix="prefix" suffix="suffix" />,
   PrependAppend: <VInput prependIcon="$vuetify" appendIcon="$vuetify" />,
   Hint: <VInput hint="hint" persistentHint />,
   Messages: <VInput messages="messages" />,

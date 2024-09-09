@@ -2,7 +2,6 @@
 import ClickOutside from '../'
 
 // Utilities
-import { describe, expect, it, vi } from 'vitest'
 import { wait } from '@/../test'
 
 function bootstrap (args?: object) {

@@ -1,7 +1,7 @@
-/// <reference types="../../../../types/cypress" />
-
 import { VSwitch } from '../VSwitch'
-import { generate, gridOn } from '@/../cypress/templates'
+
+// Utilities
+import { generate, gridOn } from '@test'
 
 const contextColor = 'rgb(0, 0, 255)'
 const color = 'rgb(255, 0, 0)'
@@ -20,9 +20,14 @@ const stories = {
     <VSwitch modelValue={ active } />
   )),
 }
+const props = {
+  loading: [true],
+  inset: [true],
+  indeterminate: [true],
+}
 
 describe('VSwitch', () => {
   describe('Showcase', () => {
-    generate({ stories, props: {}, component: VSwitch })
+    generate({ stories, props, component: VSwitch })
   })
 })

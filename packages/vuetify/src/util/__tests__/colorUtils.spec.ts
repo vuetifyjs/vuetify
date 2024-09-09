@@ -1,5 +1,4 @@
 // Utilities
-import { expect, it } from 'vitest'
 import { APCAcontrast } from '../color/APCA'
 import * as transformCIELAB from '../color/transformCIELAB'
 import * as transformSRGB from '../color/transformSRGB'

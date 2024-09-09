@@ -2,8 +2,7 @@
 import { createDisplay } from '../display'
 
 // Utilities
-import { expect, it } from 'vitest'
-import { resizeWindow } from '@/../test'
+import { page } from '@vitest/browser/context'
 
 const breakpoints = [
   'xs',
@@ -261,7 +260,7 @@ describe('display', () => {
       ],
     ],
   ])('should calculate breakpoint for $description', async (options, expected) => {
-    await resizeWindow(options.width, options.height)
+    await page.viewport(options.width, options.height)
 
     const display = createDisplay()
 
@@ -278,20 +277,20 @@ describe('display', () => {
       thresholds: { sm: 400 },
     })
 
-    await resizeWindow(400)
-    expect(name.value).toBe('sm')
+    await page.viewport(400, 900)
+    await expect.poll(() => name.value).toBe('sm')
 
-    await resizeWindow(399)
-    expect(name.value).toBe('xs')
+    await page.viewport(399, 900)
+    await expect.poll(() => name.value).toBe('xs')
   })
 
   it('should allow breakpoint strings for mobileBreakpoint', async () => {
     const { mobile } = createDisplay({ mobileBreakpoint: 'lg' })
 
-    await resizeWindow(1920)
-    expect(mobile.value).toBe(false)
+    await page.viewport(1920, 900)
+    await expect.poll(() => mobile.value).toBe(false)
 
-    await resizeWindow(600)
-    expect(mobile.value).toBe(true)
+    await page.viewport(600, 900)
+    await expect.poll(() => mobile.value).toBe(true)
   })
 })

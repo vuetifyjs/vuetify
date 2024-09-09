@@ -67,7 +67,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/pnpm-install
-      - run: pnpm run test
+      - run: pnpm run test --project unit
         working-directory: ./packages/vuetify
 
   test-e2e:
@@ -78,20 +78,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/pnpm-install
-      - run: pnpm cy:run --record --parallel --ci-build-id $GITHUB_RUN_ID
-        if: ${{ !startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs' }}
+      - run: pnpm run test --project browser
         working-directory: ./packages/vuetify
-        env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-      - run: pnpm cy:run
-        if: ${{ !startswith(github.ref, 'refs/tags/v') && github.repository_owner != 'vuetifyjs' }}
-        working-directory: ./packages/vuetify
-      - uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: ./packages/vuetify/cypress/screenshots/
-          if-no-files-found: ignore
 
   deploy:
     needs: [lint, test-unit, test-e2e, build-vuetify]
