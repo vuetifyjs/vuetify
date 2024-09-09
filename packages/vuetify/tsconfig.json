@@ -10,6 +10,7 @@
     "outDir": "./types-temp",
     "paths": {
       "@/*": ["src/*"],
+      "@test": ["test/index.ts"]
     },
     "types": [
       "node",

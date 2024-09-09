@@ -3,7 +3,7 @@ import { VCombobox } from '../VCombobox'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { generate, render } from '@test'
+import { generate } from '@test'
 import { cloneVNode, ref } from 'vue'
 import { keyValues } from '@/util'
 
@@ -44,7 +44,7 @@ const stories = Object.fromEntries(Object.entries({
   </div>
 )]))
 
-describe('VCombobox', () => {
+describe.skip('VCombobox', () => {
   describe('closableChips', () => {
     it('should close only first chip', () => {
       const items = [
@@ -807,8 +807,11 @@ describe('VCombobox', () => {
         expect(model.value).to.deep.equal({ title: 'Item 1', value: 'item1' })
       })
   })
+})
 
-  describe.only('Showcase', () => {
+// eslint-disable-next-line vitest/no-identical-title
+describe('VCombobox', () => {
+  describe('Showcase', () => {
     generate({ stories })
   })
 })

@@ -12,10 +12,6 @@
   ],
   "compilerOptions": {
     "allowJs": true,
-    "paths": {
-      "@/*": ["src/*"],
-      "@test": ["test/index.ts"]
-    },
     "types": [
       "@vitest/browser/providers/webdriverio"
     ]

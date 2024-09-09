@@ -16,8 +16,7 @@ describe('v-intersect', () => {
       },
     })
 
-    await waitAnimationFrame()
-    await waitAnimationFrame()
+    await waitIdle()
 
     expect(callback).toHaveBeenCalled()
   })
@@ -32,13 +31,12 @@ describe('v-intersect', () => {
       },
     })
 
-    await waitAnimationFrame()
-    await waitAnimationFrame()
+    await waitIdle()
 
     expect(callback).not.toHaveBeenCalled()
   })
 
-  describe.only('once', () => {
+  describe('once', () => {
     async function setup (height: string, quiet: boolean) {
       const callback = vi.fn()
 
