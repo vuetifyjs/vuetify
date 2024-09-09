@@ -13,9 +13,6 @@ export default defineWorkspace([
   },
   {
     extends: './vitest.config.mts',
-    define: {
-      'process.env.TEST_BAIL': String(process.env.TEST_BAIL),
-    },
     test: {
       name: 'browser',
       include: ['**/*.spec.browser.{ts,tsx}'],

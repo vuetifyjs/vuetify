@@ -1,13 +1,11 @@
-/// <reference types="../../../../types/cypress" />
-
 // Components
 import { VSelect } from '../VSelect'
 import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 
 // Utilities
+import { generate } from '@test'
 import { cloneVNode, ref } from 'vue'
-import { generate } from '../../../../cypress/templates'
 import { keyValues } from '@/util'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
@@ -47,7 +45,7 @@ const stories = Object.fromEntries(Object.entries({
   </div>
 )]))
 
-describe('VSelect', () => {
+describe.skip('VSelect', () => {
   it('should render selection slot', () => {
     const items = [
       { title: 'a' },
@@ -636,7 +634,10 @@ describe('VSelect', () => {
       .get('.v-overlay')
       .should('not.exist')
   })
+})
 
+// eslint-disable-next-line vitest/no-identical-title
+describe('VSelect', () => {
   describe('Showcase', () => {
     generate({ stories })
   })

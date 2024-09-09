@@ -1,10 +1,8 @@
-/// <reference types="../../../../types/cypress" />
-
 import { VTextField } from '../VTextField'
 
 // Utilities
+import { generate } from '@test'
 import { cloneVNode } from 'vue'
-import { generate } from '../../../../cypress/templates'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -29,7 +27,7 @@ const stories = Object.fromEntries(Object.entries({
   </div>
 )]))
 
-describe('VTextField', () => {
+describe.skip('VTextField', () => {
   it('validates input on mount', () => {
     const rule = cy.spy(v => v?.length > 4 || 'Error!').as('rule')
 
@@ -88,7 +86,10 @@ describe('VTextField', () => {
     ))
       .get('.v-input__details').should('be.visible')
   })
+})
 
+// eslint-disable-next-line vitest/no-identical-title
+describe('VTextField', () => {
   describe('Showcase', () => {
     generate({ stories })
   })

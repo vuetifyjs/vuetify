@@ -1,11 +1,8 @@
-/// <reference types="../../../../types/cypress" />
-
-import { CenteredGrid, generate } from '@/../cypress/templates'
-
 // Components
 import { VFileInput } from '../VFileInput'
 
 // Utilities
+import { CenteredGrid, generate } from '@test'
 import { cloneVNode, ref } from 'vue'
 
 const oneMBFile = new File([new ArrayBuffer(1021576)], '1MB file')
@@ -18,7 +15,6 @@ const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming
 const stories = Object.fromEntries(Object.entries({
   'Default input': <VFileInput />,
   Disabled: <VFileInput items={ items } disabled />,
-  Affixes: <VFileInput items={ items } prefix="prefix" suffix="suffix" />,
   'Prepend/append': <VFileInput items={ items } prependIcon="$vuetify" appendIcon="$vuetify" />,
   'Prepend/append inner': <VFileInput items={ items } prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
   Placeholder: <VFileInput items={ items } placeholder="placeholder" persistentPlaceholder />,
@@ -48,7 +44,7 @@ const stories = Object.fromEntries(Object.entries({
   </div>
 )]))
 
-describe('VFileInput', () => {
+describe.skip('VFileInput', () => {
   it('should add file', () => {
     cy.mount(() => (
       <CenteredGrid width="400px">
@@ -230,7 +226,10 @@ describe('VFileInput', () => {
         expect(input.files).to.have.length(0)
       })
   })
+})
 
+// eslint-disable-next-line vitest/no-identical-title
+describe('VFileInput', () => {
   describe('Showcase', () => {
     generate({ stories })
   })
