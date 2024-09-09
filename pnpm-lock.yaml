@@ -14,6 +14,9 @@ patchedDependencies:
   '@mdi/js@7.4.47':
     hash: wt4lkgr52gphla2wb445bnli3i
     path: patches/@mdi__js@7.4.47.patch
+  '@testing-library/vue':
+    hash: 3limad3b7od6m3nrz2f3jnaixy
+    path: patches/@testing-library__vue.patch
 
 importers:
 
@@ -470,7 +473,7 @@ importers:
         version: 14.5.2(@testing-library/dom@10.4.0)
       '@testing-library/vue':
         specifier: ^8.1.0
-        version: 8.1.0(@vue/compiler-sfc@3.4.27)(vue@3.4.27(typescript@5.5.4))
+        version: 8.1.0(patch_hash=3limad3b7od6m3nrz2f3jnaixy)(@vue/compiler-sfc@3.4.27)(vue@3.4.27(typescript@5.5.4))
       '@types/node':
         specifier: 22.5.4
         version: 22.5.4
@@ -11476,7 +11479,7 @@ snapshots:
     dependencies:
       '@testing-library/dom': 10.4.0
 
-  '@testing-library/vue@8.1.0(@vue/compiler-sfc@3.4.27)(vue@3.4.27(typescript@5.5.4))':
+  '@testing-library/vue@8.1.0(patch_hash=3limad3b7od6m3nrz2f3jnaixy)(@vue/compiler-sfc@3.4.27)(vue@3.4.27(typescript@5.5.4))':
     dependencies:
       '@babel/runtime': 7.24.4
       '@testing-library/dom': 9.3.4
