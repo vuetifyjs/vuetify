@@ -3,22 +3,17 @@
   "include": [
     "src",
     "dev",
-    "test"
   ],
   "exclude": ["types-temp", "**/*.spec.cy.ts", "**/*.spec.cy.tsx"],
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "./types-temp",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@test": ["test/index.ts"]
+      "@/*": ["src/*"],
     },
     "types": [
       "node",
-      "vue-router",
-      "@vitest/browser/matchers"
+      "vue-router"
     ],
     "stripInternal": true,
     "skipLibCheck": false

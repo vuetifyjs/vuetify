@@ -178,7 +178,7 @@
     "vitest": "^2.0.5",
     "vue-i18n": "^9.7.1",
     "vue-router": "^4.3.0",
-    "webdriverio": "^9.0.9"
+    "webdriverio": "^8.40.5"
   },
   "peerDependencies": {
     "typescript": ">=4.7",

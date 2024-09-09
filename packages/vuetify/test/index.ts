@@ -1,4 +1,5 @@
 // Utilities
+import './globals.d'
 import { render as _render } from '@testing-library/vue'
 import { createVuetify } from '@/framework.ts'
 import { afterEach } from 'vitest'

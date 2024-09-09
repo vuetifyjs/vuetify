@@ -1,4 +1,5 @@
 /// <reference types="@vitest/browser/providers/webdriverio" />
+/// <reference types="./percy.d.ts" />
 
 import type { BrowserCommandContext } from 'vitest/node'
 import percy from '@percy/sdk-utils'
@@ -10,7 +11,7 @@ import path from 'upath'
 const require = createRequire(import.meta.url)
 
 const pkg = JSON.parse(readFileSync('../../package.json', 'utf8'))
-const wdioPkg = JSON.parse(readFileSync(path.resolve(require.resolve('webdriverio'), '../../package.json'), 'utf8'))
+const wdioPkg = JSON.parse(readFileSync(path.resolve(require.resolve('webdriverio'), '../../../package.json'), 'utf8'))
 const CLIENT_INFO = `${pkg.name}/${pkg.version}`
 const ENV_INFO = `${wdioPkg.name}/${wdioPkg.version}`
 
@@ -32,7 +33,7 @@ function scroll (ctx: BrowserCommandContext, x: number, y: number) {
 }
 
 export function isDisplayedInViewport (ctx: BrowserCommandContext, el: any) {
-  return ctx.browser.$(el).isDisplayed({ withinViewport: true })
+  return ctx.browser.$(el).isDisplayedInViewport()
 }
 
 export async function percySnapshot (ctx: BrowserCommandContext, name: string, options?: PercyOptions) {

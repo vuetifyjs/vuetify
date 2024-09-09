@@ -85,7 +85,7 @@
     "vue-tsc": "^2.0.29",
     "yargs": "^17.7.2"
   },
-  "packageManager": "pnpm@9.6.0",
+  "packageManager": "pnpm@9.10.0",
   "pnpm": {
     "patchedDependencies": {
       "@mdi/js@7.4.47": "patches/@mdi__js@7.4.47.patch",

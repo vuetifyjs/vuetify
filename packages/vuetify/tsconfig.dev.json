@@ -11,7 +11,14 @@
     "vitest.workspace.mts"
   ],
   "compilerOptions": {
-    "allowJs": true
+    "allowJs": true,
+    "paths": {
+      "@/*": ["src/*"],
+      "@test": ["test/index.ts"]
+    },
+    "types": [
+      "@vitest/browser/providers/webdriverio"
+    ]
   },
   "vueCompilerOptions": {
     "strictTemplates": true
