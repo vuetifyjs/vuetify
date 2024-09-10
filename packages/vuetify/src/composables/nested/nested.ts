@@ -120,7 +120,7 @@ export const useNested = (props: NestedProps) => {
   const children = ref(new Map<unknown, unknown[]>())
   const parents = ref(new Map<unknown, unknown>())
 
-  const opened = useProxiedModel(props, 'opened', props.opened, v => new Set(toRaw(v)), v => [...v.values()])
+  const opened = useProxiedModel(props, 'opened', props.opened, v => new Set(v), v => [...v.values()])
 
   const activeStrategy = computed(() => {
     if (typeof props.activeStrategy === 'object') return props.activeStrategy
@@ -321,9 +321,9 @@ export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
   const item = {
     ...parent,
     id: computedId,
-    open: (open: boolean, e: Event) => parent.root.open(toRaw(computedId.value), open, e),
+    open: (open: boolean, e: Event) => parent.root.open(computedId.value, open, e),
     openOnSelect: (open: boolean, e?: Event) => parent.root.openOnSelect(computedId.value, open, e),
-    isOpen: computed(() => parent.root.opened.value.has(toRaw(computedId.value))),
+    isOpen: computed(() => parent.root.opened.value.has(computedId.value)),
     parent: computed(() => parent.root.parents.value.get(computedId.value)),
     activate: (activated: boolean, e?: Event) => parent.root.activate(computedId.value, activated, e),
     isActivated: computed(() => parent.root.activated.value.has(toRaw(computedId.value))),
