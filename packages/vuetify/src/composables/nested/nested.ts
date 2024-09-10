@@ -321,7 +321,7 @@ export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
   const item = {
     ...parent,
     id: computedId,
-    open: (open: boolean, e: Event) => parent.root.open(toRaw(computedId.value), open, e),
+    open: (open: boolean, e: Event) => parent.root.open(computedId.value, open, e),
     openOnSelect: (open: boolean, e?: Event) => parent.root.openOnSelect(computedId.value, open, e),
     isOpen: computed(() => parent.root.opened.value.has(computedId.value)),
     parent: computed(() => parent.root.parents.value.get(computedId.value)),
