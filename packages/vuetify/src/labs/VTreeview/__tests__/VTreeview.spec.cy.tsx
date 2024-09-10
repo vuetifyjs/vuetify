@@ -300,6 +300,22 @@ describe('VTreeview', () => {
 
   describe('return-object', () => {
     describe('open', () => {
+      it('open and collapse should both work', () => {
+        cy.mount(() => (
+          <>
+            <VTreeview
+              items={ items.value }
+              item-title="title"
+              item-value="id"
+              return-object
+            />
+          </>
+        ))
+          .get('.v-list-item-action .v-btn').eq(0).click()
+          .get('.v-list-group__items').eq(0).should('be.visible')
+          .get('.v-list-item-action .v-btn').eq(0).click()
+          .get('.v-list-group__items').eq(0).should('not.be.visible')
+      })
       it('opan-all should work', () => {
         cy.mount(() => (
           <>

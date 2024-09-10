@@ -34,7 +34,7 @@ describe('VListGroup', () => {
     wrapper.get('.v-list-item-title').contains('Group')
   })
 
-  it.only('supports children', () => {
+  it('supports children', () => {
     const wrapper = mountFunction((
       <CenteredGrid width="200px">
         <h2 class="mt-8">ListGroup</h2>
@@ -120,7 +120,7 @@ describe('VListGroup', () => {
       </>
     ))
 
-    cy.get('button').click({ waitForAnimations: true })
+    cy.get('button').click()
       .then(_ => {
         expect(opened.value).to.deep.equal(['Users'])
       })
