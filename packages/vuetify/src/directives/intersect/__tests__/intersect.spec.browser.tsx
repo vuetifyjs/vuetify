@@ -2,7 +2,7 @@
 import Intersect from '../'
 
 // Utilities
-import { scroll, waitAnimationFrame, waitIdle } from '@test'
+import { scroll, waitIdle } from '@test'
 import { render, screen } from '@testing-library/vue'
 
 describe('v-intersect', () => {

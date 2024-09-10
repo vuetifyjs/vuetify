@@ -92,6 +92,7 @@
       "@testing-library/vue": "patches/@testing-library__vue.patch"
     },
     "overrides": {
+      "@testing-library/dom": "10.4.0",
       "@types/node": "22.5.4",
       "tough-cookie": "5.0.0-rc.4"
     }
