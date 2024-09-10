@@ -200,12 +200,12 @@ describe('VAutocomplete', () => {
     }])
   })
 
-  it.skip('should not be clickable when in readonly', () => {
+  it('should not be clickable when in readonly', async () => {
     const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
 
     const selectedItems = 'Item 1'
 
-    cy.mount(() => (
+    const { element } = render(() => (
       <VAutocomplete
         items={ items }
         modelValue={ selectedItems }
@@ -213,23 +213,24 @@ describe('VAutocomplete', () => {
       />
     ))
 
-    cy.get('.v-autocomplete').click()
-    cy.get('.v-list-item').should('have.length', 0)
-    cy.get('.v-select--active-menu').should('have.length', 0)
+    await userEvent.click(element)
 
-    cy.get('.v-autocomplete input').as('input')
-      .focus()
-    cy.get('@input').type('{downarrow}', { force: true })
-    cy.get('.v-list-item').should('have.length', 0)
-    cy.get('.v-select--active-menu').should('have.length', 0)
+    expect(screen.queryAllByRole('listbox')).toHaveLength(0)
+    expect(element).not.toHaveClass('v-select--active-menu')
+
+    screen.getByCSS('input').focus()
+    await userEvent.keyboard('{ArrowDown}')
+
+    expect(screen.queryAllByRole('listbox')).toHaveLength(0)
+    expect(element).not.toHaveClass('v-select--active-menu')
   })
 
-  it.skip('should not be clickable when in readonly form', () => {
+  it('should not be clickable when in readonly form', async () => {
     const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
 
     const selectedItems = 'Item 1'
 
-    cy.mount(() => (
+    render(() => (
       <VForm readonly>
         <VAutocomplete
           items={ items }
@@ -239,18 +240,20 @@ describe('VAutocomplete', () => {
       </VForm>
     ))
 
-    cy.get('.v-autocomplete').click()
-    cy.get('.v-list-item').should('have.length', 0)
-    cy.get('.v-select--active-menu').should('have.length', 0)
+    const element = screen.getByCSS('.v-autocomplete')
 
-    cy.get('.v-autocomplete input').as('input')
-      .focus()
-    cy.get('@input').type('{downarrow}', { force: true })
-    cy.get('.v-list-item').should('have.length', 0)
-    cy.get('.v-select--active-menu').should('have.length', 0)
+    await userEvent.click(element)
+    expect(screen.queryAllByRole('listbox')).toHaveLength(0)
+    expect(element).not.toHaveClass('v-select--active-menu')
+
+    screen.getByCSS('input').focus()
+    await userEvent.keyboard('{ArrowDown}')
+
+    expect(screen.queryAllByRole('listbox')).toHaveLength(0)
+    expect(element).not.toHaveClass('v-select--active-menu')
   })
 
-  it.skip('should be empty when delete the selected option', () => {
+  it('should remove selection if search is cleared', async () => {
     const items = ref([
       { title: 'Item 1', value: 'Item 1' },
       { title: 'Item 2', value: 'Item 2' },
@@ -258,7 +261,7 @@ describe('VAutocomplete', () => {
 
     const selectedItems = ref(null)
 
-    cy.mount(() => (
+    const { element } = render(() => (
       <VAutocomplete
         v-model={ selectedItems.value }
         items={ items.value }
@@ -266,13 +269,17 @@ describe('VAutocomplete', () => {
       />
     ))
 
-    cy.get('.v-autocomplete').click()
-    cy.get('.v-list-item').should('have.length', 2)
-    cy.get('.v-list-item').contains('Item 1').click()
+    await userEvent.click(element)
+    const options = await screen.findAllByRole('option')
+    expect(options).toHaveLength(2)
 
-    cy.get('.v-field__input').clear()
-    cy.get('body').click('bottomLeft')
-    cy.get('.v-field__input').should('not.include.text', 'Item 1')
+    await userEvent.click(options[0])
+
+    await userEvent.click(element)
+    await userEvent.keyboard('{Control>}a{/Ctrl}{Backspace}')
+    await userEvent.click(document.body)
+
+    expect(element).not.toHaveTextContent('Item 1')
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/16210
