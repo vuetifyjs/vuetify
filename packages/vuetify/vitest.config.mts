@@ -39,13 +39,14 @@ export default defineConfig(configEnv => {
         }),
       ],
       server: {
-        hmr: { overlay: false },
+        hmr: false,
+        preTransformRequests: false,
       },
       clearScreen: !IS_RUN,
       test: {
         watch: false,
         setupFiles: ['../test/setup/to-have-been-warned.ts'],
-        reporters: process.env.GITHUB_ACTIONS ? ['basic', 'github-actions'] : [IS_RUN ? 'dot' : 'default'],
+        reporters: process.env.GITHUB_ACTIONS ? ['basic', 'github-actions'] : [IS_RUN ? 'dot' : 'basic'],
         coverage: {
           provider: 'v8',
           reporter: ['html'],

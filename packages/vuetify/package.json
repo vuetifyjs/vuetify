@@ -114,6 +114,7 @@
     "test:open": "TEST_BAIL=1 vitest --project browser -w",
     "test:coverage": "pnpm run test --coverage",
     "test:percy": "percy exec -- vitest --project browser",
+    "test:all": "concurrently -gr 'vitest --project unit' 'vitest --project browser --shard=1/5' 'vitest --project browser --shard=2/5' 'vitest --project browser --shard=3/5' 'vitest --project browser --shard=4/5' 'vitest --project browser --shard=5/5'",
     "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\""
   },
@@ -131,7 +132,7 @@
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
-    "@testing-library/dom": "npm:@vuetify/testing-library-dom@1.0.1",
+    "@testing-library/dom": "npm:@vuetify/testing-library-dom@1.0.2",
     "@testing-library/user-event": "^14.5.2",
     "@testing-library/vue": "^8.1.0",
     "@types/node": "^22.5.4",

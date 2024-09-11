@@ -3,10 +3,9 @@ import { VAutocomplete } from '../VAutocomplete'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { generate, render, screen, userEvent } from '@test'
-import { findAllByRole, queryAllByRole } from '@testing-library/vue'
+import { generate, render, screen, userEvent, waitAnimationFrame, waitIdle } from '@test'
+import { findAllByRole, queryAllByRole, within } from '@testing-library/vue'
 import { cloneVNode, ref } from 'vue'
-import { keyValues } from '@/util'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -283,7 +282,7 @@ describe('VAutocomplete', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/16210
-  it.skip('should return item object as the argument of item-title function', () => {
+  it('should return item object as the argument of item-title function', async () => {
     const items = [
       { id: 1, name: 'a' },
       { id: 2, name: 'b' },
@@ -291,36 +290,32 @@ describe('VAutocomplete', () => {
 
     const selectedItems = ref(null)
 
-    function itemTitleFunc (item: any) {
+    const itemTitle = vi.fn((item: any) => {
       return 'Item: ' + JSON.stringify(item)
-    }
+    })
 
-    const itemTitleFuncSpy = cy.spy(itemTitleFunc).as('itemTitleFunc')
-
-    cy.mount(() => (
+    const { element } = render(() => (
       <VAutocomplete
         items={ items }
-        modelValue={ selectedItems }
-        item-title={ itemTitleFuncSpy }
+        v-model={ selectedItems.value }
+        item-title={ itemTitle }
         item-value="id"
       />
     ))
 
-    cy.get('.v-autocomplete').click()
+    await userEvent.click(element)
 
-    cy.get('.v-list-item').eq(0).click({ waitForAnimations: false }).should(() => {
-      expect(selectedItems.value).to.deep.equal(1)
-    })
+    await userEvent.click(screen.getAllByRole('option')[0])
+    expect(selectedItems.value).toBe(1)
 
-    cy.get('@itemTitleFunc')
-      .should('have.been.calledWith', { id: 1, name: 'a' })
+    expect(itemTitle).toHaveBeenCalledWith({ id: 1, name: 'a' }, expect.anything())
 
-    cy.get('.v-autocomplete__selection-text').should('have.text', `Item: {"id":1,"name":"a"}`)
+    expect(element).toHaveTextContent('Item: {"id":1,"name":"a"}')
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/16442
-  describe.skip('null value', () => {
-    it('should allow null as legit itemValue', () => {
+  describe('null value', () => {
+    it('should allow null as legit itemValue', async () => {
       const items = [
         { name: 'Default Language', code: null },
         { code: 'en-US', name: 'English' },
@@ -329,7 +324,7 @@ describe('VAutocomplete', () => {
 
       const selectedItems = null
 
-      cy.mount(() => (
+      const { element } = render(() => (
         <VAutocomplete
           items={ items }
           modelValue={ selectedItems }
@@ -338,15 +333,16 @@ describe('VAutocomplete', () => {
         />
       ))
 
-      cy.get('.v-autocomplete__selection').eq(0).invoke('text').should('equal', 'Default Language')
+      expect(element).toHaveTextContent('Default Language')
     })
-    it('should mark input as "not dirty" when the v-model is null, but null is not present in the items', () => {
+
+    it('should mark input as "not dirty" when the v-model is null, but null is not present in the items', async () => {
       const items = [
         { code: 'en-US', name: 'English' },
         { code: 'de-DE', name: 'German' },
       ]
 
-      cy.mount(() => (
+      const { container } = render(() => (
         <VAutocomplete
           label="Language"
           items={ items }
@@ -356,17 +352,16 @@ describe('VAutocomplete', () => {
         />
       ))
 
-      cy.get('.v-field').should('not.have.class', 'v-field--dirty')
+      expect(container.querySelector('.v-field')).not.toHaveClass('v-field--dirty')
     })
   })
 
-  describe.skip('hide-selected', () => {
-    it('should hide selected item(s)', () => {
+  describe('hide-selected', () => {
+    it('should hide selected item(s)', async () => {
       const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
-
       const selectedItems = ['Item 1', 'Item 2']
 
-      cy.mount(() => (
+      render(() => (
         <VAutocomplete
           items={ items }
           modelValue={ selectedItems }
@@ -375,86 +370,80 @@ describe('VAutocomplete', () => {
         />
       ))
 
-      cy.get('.v-autocomplete__menu-icon').click()
+      const menuIcon = screen.getByRole('button', { name: /open/i })
+      await userEvent.click(menuIcon)
 
-      cy.get('.v-overlay__content .v-list-item').should('have.length', 2)
-      cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 3')
-      cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
+      const listItems = screen.getAllByRole('option')
+      expect(listItems).toHaveLength(2)
+      expect(listItems[0]).toHaveTextContent('Item 3')
+      expect(listItems[1]).toHaveTextContent('Item 4')
     })
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/16055
-  it.skip('should not replicate html select hotkeys in v-autocomplete', () => {
+  it('should not replicate html select hotkeys in v-autocomplete', async () => {
     const items = ref(['aaa', 'foo', 'faa'])
 
     const selectedItems = ref(undefined)
 
-    cy.mount(() => (
+    const { element } = render(() => (
       <VAutocomplete
         v-model={ selectedItems.value }
         items={ items.value }
       />
     ))
 
-    cy.get('.v-autocomplete')
-      .click()
-      .get('.v-autocomplete input')
-      .focus()
-      .type('f', { force: true })
-      .get('.v-list-item').should('have.length', 2)
-      .then(_ => {
-        expect(selectedItems.value).equal(undefined)
-      })
+    await userEvent.type(element, 'f')
+    const listItems = screen.getAllByRole('option')
+    expect(listItems).toHaveLength(2)
+    expect(selectedItems.value).toBeUndefined()
   })
 
-  it.skip('should conditionally show placeholder', () => {
-    cy.mount(props => (
-      <VAutocomplete placeholder="Placeholder" { ...props } />
-    ))
-      .get('.v-autocomplete input')
-      .should('have.attr', 'placeholder', 'Placeholder')
-      .setProps({ label: 'Label' })
-      .get('.v-autocomplete input')
-      .should('not.be.visible')
-      .get('.v-autocomplete input')
-      .focus()
-      .should('have.attr', 'placeholder', 'Placeholder')
-      .should('be.visible')
-      .blur()
-      .setProps({ persistentPlaceholder: true })
-      .get('.v-autocomplete input')
-      .should('have.attr', 'placeholder', 'Placeholder')
-      .should('be.visible')
-      .setProps({ modelValue: 'Foobar' })
-      .get('.v-autocomplete input')
-      .should('not.have.attr', 'placeholder')
-      .setProps({ multiple: true, modelValue: ['Foobar'] })
-      .get('.v-autocomplete input')
-      .should('not.have.attr', 'placeholder')
+  it('should conditionally show placeholder', async () => {
+    const { rerender, getByCSS } = render(VAutocomplete, {
+      props: { placeholder: 'Placeholder' },
+    })
+
+    const input = getByCSS('input')
+    expect(input).toHaveAttribute('placeholder', 'Placeholder')
+
+    await rerender({ label: 'Label' })
+    expect(input).not.toBeVisible()
+
+    input.focus()
+    await waitAnimationFrame()
+    expect(input).toHaveAttribute('placeholder', 'Placeholder')
+    expect(input).toBeVisible()
+
+    input.blur()
+    await rerender({ persistentPlaceholder: true })
+    expect(input).toHaveAttribute('placeholder', 'Placeholder')
+    expect(input).toBeVisible()
+
+    await rerender({ modelValue: 'Foobar' })
+    expect(input).not.toHaveAttribute('placeholder')
+
+    await rerender({ multiple: true, modelValue: ['Foobar'] })
+    expect(input).not.toHaveAttribute('placeholder')
   })
 
-  it.skip('should keep TextField focused while selecting items from open menu', () => {
-    cy.mount(() => (
+  it('should keep TextField focused while selecting items from open menu', async () => {
+    const { element } = render(() => (
       <VAutocomplete
         multiple
         items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
       />
     ))
 
-    cy.get('.v-autocomplete')
-      .click()
+    await userEvent.click(element)
 
-    cy.get('.v-list')
-      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
-      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
-      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+    await userEvent.keyboard('{ArrowDown}{ArrowDown}{ArrowDown}c')
 
-    cy.get('.v-field').should('have.class', 'v-field--focused')
+    expect(document.activeElement).toBe(within(element).getByCSS('input'))
   })
 
-  it.skip('should not open menu when closing a chip', () => {
-    cy
-      .mount(() => (
+  it('should not open menu when closing a chip', async () => {
+    const { element } = render(() => (
         <VAutocomplete
           chips
           closable-chips
@@ -463,209 +452,185 @@ describe('VAutocomplete', () => {
           modelValue={['foo', 'bar']}
           multiple
         />
-      ))
-      .get('.v-autocomplete')
-      .should('not.have.class', 'v-autocomplete--active-menu')
-      .get('.v-chip__close').eq(1)
-      .click()
-      .get('.v-autocomplete')
-      .should('not.have.class', 'v-autocomplete--active-menu')
-      .get('.v-chip__close')
-      .click()
-      .get('.v-autocomplete')
-      .should('not.have.class', 'v-autocomplete--active-menu')
-      .click()
-      .should('have.class', 'v-autocomplete--active-menu')
-      .trigger('keydown', { key: keyValues.esc })
-      .should('not.have.class', 'v-autocomplete--active-menu')
+    ))
+
+    expect(screen.queryByRole('listbox')).toBeNull()
+
+    await userEvent.click(screen.getAllByTestId('close-chip')[0])
+    await waitAnimationFrame()
+    expect(screen.queryByRole('listbox')).toBeNull()
+
+    await userEvent.click(screen.getAllByTestId('close-chip')[0])
+    await waitAnimationFrame()
+    expect(screen.queryByRole('listbox')).toBeNull()
+
+    await userEvent.click(element)
+    await screen.findByRole('listbox')
+
+    await userEvent.keyboard('{Escape}')
+    await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
   })
 
-  describe.skip('auto-select-first', () => {
-    it('should auto-select-first item when pressing enter', () => {
-      const selectedItems = ref(undefined)
+  describe('auto-select-first', () => {
+    async function setup () {
+      const selectedItems = ref()
+      const { element } = render(() => (
+        <VAutocomplete
+          v-model={ selectedItems.value }
+          items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+          multiple
+          autoSelectFirst
+        />
+      ))
+      const getItems = () => screen.queryAllByRole('option')
 
-      cy
-        .mount(() => (
-          <VAutocomplete
-            v-model={ selectedItems.value }
-            items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
-            multiple
-            autoSelectFirst
-          />
-        ))
-        .get('.v-autocomplete')
-        .click()
-        .get('.v-list-item')
-        .should('have.length', 6)
-        .get('.v-autocomplete input')
-        .type('Cal')
-        .get('.v-list-item').eq(0)
-        .should('have.class', 'v-list-item--active')
-        .get('.v-autocomplete input')
-        .trigger('keydown', { key: keyValues.enter, waitForAnimations: false })
-        .get('.v-list-item')
-        .should('have.length', 1)
-        .then(_ => {
-          expect(selectedItems.value).to.deep.equal(['California'])
-        })
+      await userEvent.click(element)
+      await expect.poll(getItems).toHaveLength(6)
+
+      await userEvent.keyboard('Cal')
+      await expect.poll(() => getItems()[0]).toHaveClass('v-list-item--active')
+
+      return { selectedItems, element, getItems }
+    }
+
+    it('should auto-select-first item when pressing enter', async () => {
+      const { selectedItems, getItems } = await setup()
+
+      await userEvent.keyboard('{Enter}')
+      await expect.poll(getItems).toHaveLength(1)
+      expect(selectedItems.value).toStrictEqual(['California'])
     })
 
-    it('should auto-select-first item when pressing tab', () => {
-      const selectedItems = ref([])
+    it('should auto-select-first item when pressing tab', async () => {
+      const { selectedItems, getItems } = await setup()
 
-      cy
-        .mount(() => (
-          <VAutocomplete
-            v-model={ selectedItems.value }
-            items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
-            multiple
-            autoSelectFirst
-          />
-        ))
-        .get('.v-autocomplete')
-        .click()
-        .get('.v-list-item')
-        .should('have.length', 6)
-        .get('.v-autocomplete input')
-        .type('Cal')
-        .get('.v-list-item').eq(0)
-        .should('have.class', 'v-list-item--active')
-        .realPress('Tab')
-        .get('.v-list-item')
-        .should('have.length', 0)
-        .then(_ => {
-          expect(selectedItems.value).to.deep.equal(['California'])
-        })
+      await userEvent.keyboard('{Tab}')
+      await expect.poll(getItems).toHaveLength(0)
+      expect(selectedItems.value).toStrictEqual(['California'])
     })
 
-    it('should not auto-select-first item when blur', () => {
-      const selectedItems = ref(undefined)
+    it('should not auto-select-first item when blur', async () => {
+      const { selectedItems, getItems } = await setup()
 
-      cy
-        .mount(() => (
-          <VAutocomplete
-            v-model={ selectedItems.value }
-            items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
-            multiple
-            autoSelectFirst
-          />
-        ))
-        .get('.v-autocomplete')
-        .click()
-        .get('.v-list-item')
-        .should('have.length', 6)
-        .get('.v-autocomplete input')
-        .type('Cal')
-        .get('.v-list-item').eq(0)
-        .should('have.class', 'v-list-item--active')
-        .get('.v-autocomplete input')
-        .blur()
-        .get('.v-list-item')
-        .should('have.length', 0)
-        .should(_ => {
-          expect(selectedItems.value).to.deep.equal(undefined)
-        })
+      await userEvent.click(document.body)
+      await expect.poll(getItems).toHaveLength(0)
+      expect(selectedItems.value).toBeUndefined()
     })
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/18796
   // https://github.com/vuetifyjs/vuetify/issues/19235
-  it.skip('should allow deleting selection via closable-chips', () => {
+  it('should allow deleting single selection via closable-chips', async () => {
     const selectedItem = ref('California')
 
-    cy.mount(() => (
+    const { getByTestId } = render(() => (
       <VAutocomplete
-        chips
         v-model={ selectedItem.value }
+        chips
         closable-chips
         items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
       />
     ))
-      .get('.v-chip__close')
-      .click()
-      .then(_ => {
-        expect(selectedItem.value).to.equal(null)
-      })
+
+    await userEvent.click(getByTestId('close-chip'))
+    expect(selectedItem.value).toBeNull()
+  })
+
+  it('should allow deleting multiple selection via closable-chips', async () => {
+    const selectedItem = ref(['California'])
+
+    const { getByTestId } = render(() => (
+      <VAutocomplete
+        v-model={ selectedItem.value }
+        chips
+        closable-chips
+        multiple
+        items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+      />
+    ))
+
+    await userEvent.click(getByTestId('close-chip'))
+    expect(selectedItem.value).toHaveLength(0)
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/19261
-  it.skip('should not toggle v-model to null when clicking already selected item in single selection mode', () => {
+  it('should not remove single selection on list item click', async () => {
     const selectedItem = ref('abc')
 
-    cy.mount(() => (
+    const { element } = render(() => (
       <VAutocomplete
         v-model={ selectedItem.value }
         items={['abc', 'def']}
       />
     ))
 
-    cy.get('.v-autocomplete').click()
+    await userEvent.click(element)
 
-    cy.get('.v-list-item').should('have.length', 2)
-    cy.get('.v-list-item').eq(0).click({ waitForAnimations: false }).should(() => {
-      expect(selectedItem.value).equal('abc')
-    })
+    const items = await screen.findAllByRole('option')
+    expect(items).toHaveLength(2)
+
+    await userEvent.click(items[0])
+    await waitAnimationFrame()
+    expect(selectedItem.value).toBe('abc')
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/18556
-  it.skip('should show menu if focused and items are added', () => {
-    cy
-      .mount(props => (<VAutocomplete { ...props } />))
-      .get('.v-autocomplete input')
-      .focus()
-      .get('.v-overlay')
-      .should('not.exist')
-      .setProps({ items: ['Foo', 'Bar'] })
-      .get('.v-overlay')
-      .should('exist')
+  it('should show menu if focused and items are added', async () => {
+    const { rerender } = render(VAutocomplete)
+
+    await userEvent.keyboard('{Tab}')
+    await waitAnimationFrame()
+    expect(screen.queryByRole('listbox')).toBeNull()
+
+    await rerender({ items: ['Foo', 'Bar'] })
+    expect(await screen.findByRole('listbox')).toBeInTheDocument()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/19346
-  it.skip('should not show menu when focused and existing non-empty items are changed', () => {
-    cy
-      .mount((props: any) => (<VAutocomplete items={ props.items } />))
-      .setProps({ items: ['Foo', 'Bar'] })
-      .get('.v-autocomplete')
-      .click()
-      .get('.v-overlay')
-      .should('exist')
-      .get('.v-list-item').eq(1).click({ waitForAnimations: false })
-      .setProps({ items: ['Foo', 'Bar', 'test', 'test 2'] })
-      .get('.v-overlay')
-      .should('not.exist')
+  it('should not show menu when focused and existing non-empty items are changed', async () => {
+    const { element, rerender } = render(VAutocomplete, {
+      props: { items: ['Foo', 'Bar'] },
+    })
+
+    await userEvent.click(element)
+    expect(await screen.findByRole('listbox')).toBeInTheDocument()
+
+    await userEvent.click(screen.getAllByRole('option')[0])
+    await rerender({ items: ['Foo', 'Bar', 'test', 'test 2'] })
+    await waitIdle()
+    expect(screen.queryByRole('listbox')).toBeNull()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/17573
   // When using selection slot or chips, input displayed next to chip/selection slot should be always empty
-  it.skip('should always have empty input value when it is unfocused and when using selection slot or chips', () => {
+  it('should always have empty input value when it is unfocused and when using selection slot or chips', async () => {
     const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
     const selectedItem = ref('Item 1')
 
-    cy
-      .mount(() => (
-        <VAutocomplete
-          items={ items }
-          chips
-          v-model={ selectedItem.value }
-        />
-      ))
-      .get('.v-autocomplete').click()
-      .get('.v-autocomplete input').should('have.value', '')
-      // Blur input with a custom search input value
-      .type('test')
-      .blur()
-      .should('have.value', '')
-      .should(() => {
-        expect(selectedItem.value).to.equal('Item 1')
-      })
-      // Search existing item and click to select
-      .get('.v-autocomplete').click()
-      .get('.v-autocomplete input').should('have.value', '')
-      .type('Item 1')
-      .get('.v-list-item').eq(0).click({ waitForAnimations: false })
-      .should(() => {
-        expect(selectedItem.value).to.equal('Item 1')
-      })
+    const { element, getByCSS } = render(() => (
+      <VAutocomplete
+        items={ items }
+        chips
+        v-model={ selectedItem.value }
+      />
+    ))
+
+    await userEvent.click(element)
+    const input = getByCSS('input')
+    expect(input).toHaveValue('')
+
+    // Blur input with a custom search input value
+    await userEvent.keyboard('test')
+    input.blur()
+    await expect.poll(() => selectedItem.value).toBe('Item 1')
+    expect(input).toHaveValue('')
+
+    // Search existing item and click to select
+    await userEvent.click(element)
+    expect(input).toHaveValue('')
+    await userEvent.keyboard('Item 1')
+    await userEvent.click(await screen.findByRole('option'))
+    await expect.poll(() => selectedItem.value).toBe('Item 1')
   })
 
   describe('Showcase', () => {
