@@ -2,7 +2,6 @@
 import './VFeatureDiscovery.sass'
 
 // Components
-// TODO: create it inside VFeatureDiscovery
 import { makeLocationStrategyProps, useLocationStrategies } from '@/components/VOverlay/locationStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from '@/components/VOverlay/scrollStrategies'
 import { makeActivatorProps, useActivator } from '@/components/VOverlay/useActivator'
@@ -28,7 +27,6 @@ import { computed, mergeProps, onBeforeUnmount, ref, toRef, watch } from 'vue'
 import { genericComponent, getScrollParent, getUid, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
-// TODO: create it inside VFeatureDiscovery
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVFeatureDiscoveryProps = propsFactory({
@@ -221,8 +219,7 @@ export const VFeatureDiscovery = genericComponent<OverlaySlots>()({
             props.class,
           ]}
           style={[
-            stackStyles.value,
-            {},
+            isActive.value ? stackStyles.value : {},
             props.style,
           ]}
           ref={ root }
@@ -238,7 +235,11 @@ export const VFeatureDiscovery = genericComponent<OverlaySlots>()({
               'aria-haspopup': 'dialog',
               'aria-expanded': String(isActive.value),
               'aria-owns': id.value,
-            }, props.activatorProps),
+            }, props.activatorProps, {
+              style: [
+                isActive.value ? stackStyles.value : {},
+              ],
+            }),
           })}
 
           { isMounted.value && hasContent.value && (
