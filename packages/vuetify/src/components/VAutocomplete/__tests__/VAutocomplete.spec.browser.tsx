@@ -598,7 +598,7 @@ describe('VAutocomplete', () => {
     await userEvent.click(screen.getAllByRole('option')[0])
     await rerender({ items: ['Foo', 'Bar', 'test', 'test 2'] })
     await waitIdle()
-    expect(screen.queryByRole('listbox')).toBeNull()
+    await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/17573
