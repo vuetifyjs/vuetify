@@ -73,7 +73,7 @@ Please give a shoutout to our [sponsors and backers](/introduction/sponsors-and-
 
 ## Current State – Where We Are Now
 
-Today, Vuetify is in an exciting place. While we are still recovering from a tough financial **drought**, things are looking up. Thanks to generous contributions from companies like [Abacus](https://www.abacus.ch/) and [Route4Me](https://route4me.com/), development is now back at full speed.
+Today, Vuetify is in an exciting place. While we are still recovering from a tough financial **drought**, things are looking up. Thanks to generous contributions from companies like [Abacus](https://www.abacus.ch/), [Route4Me](https://route4me.com/), and [Teamwork](https://teamwork.com), the framework is now back at full speed.
 
 With that being said, those who followed my post earlier back in [June](https://x.com/zeroskillz/status/1803081840669937724) will know that I've been seeking employment in lieu of the financial situation. During this time, I connected with a company named Optikka. Their entire platform is built on Vue / Vuetify and they were gracious enough to offer me a Senior Developer position. I've been with them for a little over a month now and it's been an amazing experience. I've been able to bring my knowledge of Vuetify to the team and help them build out their platform.
 
