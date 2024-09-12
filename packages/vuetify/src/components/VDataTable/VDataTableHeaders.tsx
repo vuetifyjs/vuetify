@@ -183,6 +183,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               if (column.key === 'data-table-select') {
                 return slots['header.data-table-select']?.(columnSlotProps) ?? (showSelectAll.value && (
                   <VCheckboxBtn
+                    color={ props.color }
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
                     onUpdate:modelValue={ selectAll }
@@ -310,7 +311,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                   name="v-data-table-progress"
                   absolute
                   active
-                  color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+                  color={ typeof props.loading === 'boolean' ? props.color : props.loading }
                   indeterminate
                   v-slots={{ default: slots.loader }}
                 />
