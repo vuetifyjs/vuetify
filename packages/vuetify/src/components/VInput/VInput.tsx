@@ -148,10 +148,8 @@ export const VInput = genericComponent<new <T>(
     })
 
     function prependKeyDown(key: KeyboardEvent) {
-      console.warn('prependKeyDown')
       if (key.key !== 'Enter' && key.key !== ' ') return
 
-      console.warn('prependKeyDown')
       key.preventDefault()
       key.stopPropagation()
 
