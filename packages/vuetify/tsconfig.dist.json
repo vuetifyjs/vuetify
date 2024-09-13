@@ -1,4 +1,11 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["dev", "**/*.spec.*", "cypress"]
+  "exclude": ["dev", "**/*.spec.*", "cypress"],
+  "compilerOptions": {
+    "outDir": "./lib",
+    "plugins": [
+      { "transform": "typescript-transform-paths", "afterDeclarations": true },
+      { "transform":  "./build/remove-dts-styles.ts", "afterDeclarations": true },
+    ],
+  },
 }

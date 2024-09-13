@@ -4,10 +4,8 @@
     "src",
     "dev"
   ],
-  "exclude": ["types-temp"],
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "./types-temp",
     "paths": {
       "@/*": [
         "src/*"
