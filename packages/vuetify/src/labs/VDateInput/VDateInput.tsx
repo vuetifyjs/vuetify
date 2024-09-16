@@ -103,6 +103,10 @@ export const VDateInput = genericComponent()({
       menu.value = false
     }
 
+    function closeMenu() {
+      menu.value = false
+    }
+
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const datePickerProps = VDatePicker.filterProps(omit(props, ['active']))
@@ -133,6 +137,7 @@ export const VDateInput = genericComponent()({
               { ...confirmEditProps }
               v-model={ model.value }
               onSave={ onSave }
+              onCloseMenu={ closeMenu }
               enableActions
             >
               {{

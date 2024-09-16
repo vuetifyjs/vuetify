@@ -56,6 +56,7 @@ export const VConfirmEdit = genericComponent<new <T> (
     cancel: () => true,
     save: (value: any) => true,
     'update:modelValue': (value: any) => true,
+    closeMenu: () => true,
   },
 
   setup (props, { emit, slots }) {
@@ -80,7 +81,7 @@ export const VConfirmEdit = genericComponent<new <T> (
       const checkPristine = structuredClone(toRaw(isPristine.value))
       internalModel.value = structuredClone(toRaw(model.value))
       if (props.enableActions && checkPristine){
-          emit('save',internalModel.value)
+          emit('closeMenu')
           return
       }
       emit('cancel')
