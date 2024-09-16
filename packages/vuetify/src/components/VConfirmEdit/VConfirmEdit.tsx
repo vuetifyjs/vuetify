@@ -80,9 +80,9 @@ export const VConfirmEdit = genericComponent<new <T> (
     function cancel () {
       const checkPristine = structuredClone(toRaw(isPristine.value))
       internalModel.value = structuredClone(toRaw(model.value))
-      if (props.enableActions && checkPristine){
-          emit('closeMenu')
-          return
+      if (props.enableActions && checkPristine) {
+        emit('closeMenu')
+        return
       }
       emit('cancel')
     }
@@ -91,7 +91,7 @@ export const VConfirmEdit = genericComponent<new <T> (
     useRender(() => {
       const actions = (
         <>
-          {/*{!!props.enableActions}*/}
+          { /* {!!props.enableActions} */ }
           <VBtn
             disabled={ props.enableActions ? false : isPristine.value }
             variant="text"

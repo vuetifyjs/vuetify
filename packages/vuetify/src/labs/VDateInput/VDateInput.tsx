@@ -74,7 +74,6 @@ export const VDateInput = genericComponent()({
     const isInteractive = computed(() => !props.disabled && !props.readonly)
 
     function onClear (e: MouseEvent) {
-      // console.warn('onClear', e)
       model.value = props.multiple ? [] : null
     }
 
@@ -103,7 +102,7 @@ export const VDateInput = genericComponent()({
       menu.value = false
     }
 
-    function closeMenu() {
+    function closeMenu () {
       menu.value = false
     }
 
