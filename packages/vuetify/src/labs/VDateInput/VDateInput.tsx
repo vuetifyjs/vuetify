@@ -73,6 +73,11 @@ export const VDateInput = genericComponent()({
 
     const isInteractive = computed(() => !props.disabled && !props.readonly)
 
+    function onClear (e: MouseEvent) {
+      // console.warn('onClear', e)
+      model.value = props.multiple ? [] : null
+    }
+
     function onKeydown (e: KeyboardEvent) {
       if (e.key !== 'Enter') return
 
@@ -115,6 +120,7 @@ export const VDateInput = genericComponent()({
           onBlur={ blur }
           onClick:control={ isInteractive.value ? onClick : undefined }
           onClick:prepend={ isInteractive.value ? onClick : undefined }
+          onClick:clear={ onClear }
         >
           <VMenu
             v-model={ menu.value }
