@@ -101,7 +101,7 @@ export const VConfirmEdit = genericComponent<new <T> (
           />
 
           <VBtn
-            disabled={ isPristine.value }
+            disabled={ props.enableActions ? false : isPristine.value }
             variant="text"
             color={ props.color }
             onClick={ save }
