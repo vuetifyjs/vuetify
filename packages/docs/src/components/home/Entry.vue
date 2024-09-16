@@ -90,6 +90,8 @@
           </v-col>
         </v-row>
       </v-col>
+
+      <VoPromotionsCardHighlight class="mb-n8" max-width="1096" slug="vuetify-snips" />
     </v-row>
   </v-container>
 </template>
@@ -111,3 +113,8 @@
     }, 1000)
   }
 </script>
+
+<style lang="sass" scoped>
+  :deep(.v-card-item)
+    max-width: 100%
+</style>
