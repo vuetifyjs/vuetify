@@ -3,6 +3,8 @@ const shell = require('shelljs')
 const inquirer = require('inquirer')
 const version = require('../lerna.json').version
 
+if (process.env.CI) process.exit(0)
+
 function exec (command) {
   const result = shell.exec(command, { silent: true })
   if (result.code) {

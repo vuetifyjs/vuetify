@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Empty states
   description: The empty state component is used to indicate that a list is empty or that no search results were found.
@@ -11,6 +10,8 @@ related:
 features:
   report: true
   spec: https://m2.material.io/design/communication/empty-states.html
+  label: 'C: VEmptyState'
+  github: '/components/VEmptyState/'
 ---
 
 # Empty states
@@ -19,25 +20,11 @@ The `v-empty-state` component is used to indicate that a list is empty or that n
 
 <PageFeatures />
 
-::: warning
+::: success
 
-This feature requires [v3.5.7](/getting-started/release-notes/?version=v3.5.7)
+This feature was introduced in [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
 
 :::
-
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VEmptyState } from 'vuetify/labs/VEmptyState'
-
-export default createVuetify({
-  components: {
-    VEmptyState,
-  },
-})
-```
 
 ## Usage
 

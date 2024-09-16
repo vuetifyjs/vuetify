@@ -2,6 +2,7 @@
 import './VStepper.sass'
 
 // Components
+import { VStepperSymbol } from './shared'
 import { makeVStepperActionsProps, VStepperActions } from './VStepperActions'
 import { VStepperHeader } from './VStepperHeader'
 import { VStepperItem } from './VStepperItem'
@@ -12,6 +13,7 @@ import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 
 // Composables
 import { provideDefaults } from '@/composables/defaults'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeGroupProps, useGroup } from '@/composables/group'
 
 // Utilities
@@ -19,13 +21,8 @@ import { computed, toRefs } from 'vue'
 import { genericComponent, getPropertyFromItem, only, propsFactory, useRender } from '@/util'
 
 // Types
-import type { InjectionKey, PropType } from 'vue'
-import type { StepperItemSlot } from './VStepperItem'
-import type { GroupItemProvide } from '@/composables/group'
-
-export const VStepperSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-stepper')
-
-export type StepperItem = string | Record<string, any>
+import type { PropType } from 'vue'
+import type { StepperItem, StepperItemSlot } from './VStepperItem'
 
 export type VStepperSlot = {
   prev: () => void
@@ -48,10 +45,13 @@ export type VStepperSlots = {
   [key: `item.${string}`]: StepperItem
 }
 
-export const makeVStepperProps = propsFactory({
+export const makeStepperProps = propsFactory({
   altLabels: Boolean,
   bgColor: String,
+  completeIcon: String,
+  editIcon: String,
   editable: Boolean,
+  errorIcon: String,
   hideActions: Boolean,
   items: {
     type: Array as PropType<readonly StepperItem[]>,
@@ -65,10 +65,14 @@ export const makeVStepperProps = propsFactory({
     type: String,
     default: 'value',
   },
-  mobile: Boolean,
   nonLinear: Boolean,
   flat: Boolean,
 
+  ...makeDisplayProps(),
+}, 'Stepper')
+
+export const makeVStepperProps = propsFactory({
+  ...makeStepperProps(),
   ...makeGroupProps({
     mandatory: 'force' as const,
     selectedClass: 'v-stepper-item--selected',
@@ -88,7 +92,8 @@ export const VStepper = genericComponent<VStepperSlots>()({
 
   setup (props, { slots }) {
     const { items: _items, next, prev, selected } = useGroup(props, VStepperSymbol)
-    const { color, editable, prevText, nextText } = toRefs(props)
+    const { displayClasses, mobile } = useDisplay(props)
+    const { completeIcon, editIcon, errorIcon, color, editable, prevText, nextText } = toRefs(props)
 
     const items = computed(() => props.items.map((item, index) => {
       const title = getPropertyFromItem(item, props.itemTitle, item)
@@ -114,6 +119,9 @@ export const VStepper = genericComponent<VStepperSlots>()({
     provideDefaults({
       VStepperItem: {
         editable,
+        errorIcon,
+        completeIcon,
+        editIcon,
         prevText,
         nextText,
       },
@@ -142,15 +150,16 @@ export const VStepper = genericComponent<VStepperSlots>()({
               'v-stepper--alt-labels': props.altLabels,
               'v-stepper--flat': props.flat,
               'v-stepper--non-linear': props.nonLinear,
-              'v-stepper--mobile': props.mobile,
+              'v-stepper--mobile': mobile.value,
             },
+            displayClasses.value,
             props.class,
           ]}
           style={ props.style }
         >
           { hasHeader && (
             <VStepperHeader key="stepper-header">
-              { items.value.map((item, index) => (
+              { items.value.map(({ raw, ...item }, index) => (
                 <>
                   { !!index && (<VDivider />) }
 

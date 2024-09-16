@@ -5,6 +5,7 @@ import './VTreeviewItem.sass'
 import { VBtn } from '@/components/VBtn'
 import { VListItemAction } from '@/components/VList'
 import { makeVListItemProps, VListItem } from '@/components/VList/VListItem'
+import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
 import { IconValue } from '@/composables/icons'
@@ -12,15 +13,15 @@ import { useLink } from '@/composables/router'
 
 // Utilities
 import { computed, inject, ref } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
-import { VProgressCircular } from '../allComponents'
 import type { VListItemSlots } from '@/components/VList/VListItem'
 
 export const makeVTreeviewItemProps = propsFactory({
   loading: Boolean,
+  onToggleExpand: EventProp<[MouseEvent]>(),
   toggleIcon: IconValue,
 
   ...makeVListItemProps({ slim: true }),
@@ -33,46 +34,51 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
 
   setup (props, { attrs, slots, emit }) {
     const link = useLink(props, attrs)
-    const id = computed(() => props.value === undefined ? link.href.value : props.value)
     const vListItemRef = ref<VListItem>()
+
+    const isActivatableGroupActivator = computed(() =>
+      (vListItemRef.value?.root.activatable.value) &&
+      vListItemRef.value?.isGroupActivator
+    )
 
     const isClickable = computed(() =>
       !props.disabled &&
       props.link !== false &&
-      (props.link || link.isClickable.value || (props.value != null && !!vListItemRef.value?.list))
+      (props.link || link.isClickable.value || (props.value != null && !!vListItemRef.value?.list) || isActivatableGroupActivator.value)
     )
 
-    function onClick (e: MouseEvent | KeyboardEvent) {
-      if (!vListItemRef.value?.isGroupActivator || !isClickable.value) return
-      props.value != null && vListItemRef.value?.select(!vListItemRef.value?.isSelected, e)
-    }
+    function activateItem (e: MouseEvent | KeyboardEvent) {
+      if (
+        !isClickable.value ||
+        (!isActivatableGroupActivator.value && vListItemRef.value?.isGroupActivator)
+      ) return
 
-    function onKeyDown (e: KeyboardEvent) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault()
-        onClick(e as any as MouseEvent)
+      if (vListItemRef.value?.root.activatable.value) {
+        vListItemRef.value?.activate(!vListItemRef.value?.isActivated, e)
       }
     }
 
     const visibleIds = inject(VTreeviewSymbol, { visibleIds: ref() }).visibleIds
 
     useRender(() => {
-      const listItemProps = VListItem.filterProps(props)
+      const listItemProps = omit(VListItem.filterProps(props), ['onClick'])
       const hasPrepend = slots.prepend || props.toggleIcon
 
       return (
         <VListItem
           ref={ vListItemRef }
           { ...listItemProps }
+          active={ vListItemRef.value?.isActivated }
           class={[
             'v-treeview-item',
             {
-              'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(id.value),
+              'v-treeview-item--activatable-group-activator': isActivatableGroupActivator.value,
+              'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(vListItemRef.value?.id),
             },
             props.class,
           ]}
-          onClick={ onClick }
-          onKeydown={ isClickable.value && onKeyDown }
+          ripple={ false }
+          onClick={ props.onClick ?? activateItem }
         >
           {{
             ...slots,
@@ -86,6 +92,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
                         icon={ props.toggleIcon }
                         loading={ props.loading }
                         variant="text"
+                        onClick={ props.onToggleExpand }
                       >
                         {{
                           loader () {

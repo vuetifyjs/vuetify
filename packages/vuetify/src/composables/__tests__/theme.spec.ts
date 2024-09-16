@@ -4,7 +4,7 @@
 import { createTheme } from '../theme'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
+import { expect, it } from 'vitest'
 import { createApp } from 'vue'
 
 // Types

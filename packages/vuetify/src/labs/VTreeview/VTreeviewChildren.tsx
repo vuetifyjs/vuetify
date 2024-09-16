@@ -3,14 +3,18 @@ import { VTreeviewGroup } from './VTreeviewGroup'
 import { VTreeviewItem } from './VTreeviewItem'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 
+// Composables
+import { IconValue } from '@/composables/icons'
+
 // Utilities
-import { shallowRef } from 'vue'
+import { computed, shallowRef, toRaw, withModifiers } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { InternalListItem } from '@/components/VList/VList'
 import type { VListItemSlots } from '@/components/VList/VListItem'
+import type { SelectStrategyProp } from '@/composables/nested/nested'
 import type { GenericProps } from '@/util'
 
 export type VTreeviewChildrenSlots<T> = {
@@ -27,7 +31,20 @@ export const makeVTreeviewChildrenProps = propsFactory({
     default: '$loading',
   },
   items: Array as PropType<readonly InternalListItem[]>,
+  openOnClick: {
+    type: Boolean,
+    default: undefined,
+  },
+  indeterminateIcon: {
+    type: IconValue,
+    default: '$checkboxIndeterminate',
+  },
+  falseIcon: IconValue,
+  trueIcon: IconValue,
+  returnObject: Boolean,
   selectable: Boolean,
+  selectedColor: String,
+  selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
 }, 'VTreeviewChildren')
 
 export const VTreeviewChildren = genericComponent<new <T extends InternalListItem>(
@@ -41,44 +58,62 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
   props: makeVTreeviewChildrenProps(),
 
   setup (props, { emit, slots }) {
-    const isLoading = shallowRef(false)
-    const hasLoaded = shallowRef(false)
+    const isLoading = shallowRef(null)
 
-    function checkChildren (item: unknown) {
+    const isClickOnOpen = computed(() => props.openOnClick != null ? props.openOnClick : props.selectable)
+
+    function checkChildren (item: any) {
       return new Promise<void>(resolve => {
-        if (!props.items?.length || !props.loadChildren || hasLoaded.value) return resolve()
+        if (!props.items?.length || !props.loadChildren) return resolve()
 
-        isLoading.value = true
-        props.loadChildren(item).then(resolve)
-      }).then(() => {
-        hasLoaded.value = true
+        if (item?.children?.length === 0) {
+          isLoading.value = item.value
+          props.loadChildren(item).then(resolve)
+
+          return
+        }
+
+        resolve()
       }).finally(() => {
-        isLoading.value = false
+        isLoading.value = null
       })
     }
 
-    function onClick (e: MouseEvent | KeyboardEvent, item: any) {
-      e.stopPropagation()
-
-      checkChildren(item)
+    function selectItem (select: (value: boolean) => void, isSelected: boolean) {
+      if (props.selectable) {
+        select(!isSelected)
+      }
     }
 
     return () => slots.default?.() ?? props.items?.map(({ children, props: itemProps, raw: item }) => {
+      const loading = isLoading.value === item.value
       const slotsWithItem = {
-        prepend: slots.prepend
-          ? slotProps => slots.prepend?.({ ...slotProps, item })
-          : props.selectable
-            ? ({ isSelected, isIndeterminate }) => (
-              <VCheckboxBtn
-                key={ item.value }
-                tabindex="-1"
-                modelValue={ isSelected }
-                loading={ isLoading.value }
-                indeterminate={ isIndeterminate }
-                onClick={ (e: MouseEvent) => onClick(e, item) }
-              />
-            )
-            : undefined,
+        prepend: slotProps => (
+          <>
+            { props.selectable && (!children || (children && !['leaf', 'single-leaf'].includes(props.selectStrategy as string))) && (
+              <div>
+                <VCheckboxBtn
+                  key={ item.value }
+                  modelValue={ slotProps.isSelected }
+                  loading={ loading }
+                  color={ props.selectedColor }
+                  indeterminate={ slotProps.isIndeterminate }
+                  indeterminateIcon={ props.indeterminateIcon }
+                  falseIcon={ props.falseIcon }
+                  trueIcon={ props.trueIcon }
+                  onClick={ withModifiers(() => selectItem(slotProps.select, slotProps.isSelected), ['stop']) }
+                  onKeydown={ (e: KeyboardEvent) => {
+                    if (!['Enter', 'Space'].includes(e.key)) return
+                    e.stopPropagation()
+                    selectItem(slotProps.select, slotProps.isSelected)
+                  }}
+                />
+              </div>
+            )}
+
+            { slots.prepend?.({ ...slotProps, item }) }
+          </>
+        ),
         append: slots.append ? slotProps => slots.append?.({ ...slotProps, item }) : undefined,
         title: slots.title ? slotProps => slots.title?.({ ...slotProps, item }) : undefined,
       } satisfies VTreeviewItem['$props']['$children']
@@ -88,23 +123,33 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
 
       return children ? (
         <VTreeviewGroup
-          value={ itemProps?.value }
           { ...treeviewGroupProps }
+          value={ props.returnObject ? item : treeviewGroupProps?.value }
         >
           {{
-            activator: ({ props: activatorProps }) => (
-              <VTreeviewItem
-                { ...itemProps }
-                { ...activatorProps }
-                loading={ isLoading.value }
-                v-slots={ slotsWithItem }
-                onClick={ (e: MouseEvent | KeyboardEvent) => onClick(e, item) }
-              />
-            ),
+            activator: ({ props: activatorProps }) => {
+              const listItemProps = {
+                ...itemProps,
+                ...activatorProps,
+                value: itemProps?.value,
+                onToggleExpand: [() => checkChildren(item), activatorProps.onClick] as any,
+                onClick: isClickOnOpen.value ? [() => checkChildren(item), activatorProps.onClick] as any : undefined,
+              }
+
+              return (
+                <VTreeviewItem
+                  { ...listItemProps }
+                  value={ props.returnObject ? toRaw(item) : itemProps.value }
+                  loading={ loading }
+                  v-slots={ slotsWithItem }
+                />
+              )
+            },
             default: () => (
               <VTreeviewChildren
                 { ...treeviewChildrenProps }
                 items={ children }
+                returnObject={ props.returnObject }
                 v-slots={ slots }
               />
             ),
@@ -114,6 +159,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         slots.item?.({ props: itemProps }) ?? (
           <VTreeviewItem
             { ...itemProps }
+            value={ props.returnObject ? toRaw(item) : itemProps.value }
             v-slots={ slotsWithItem }
           />
         ))

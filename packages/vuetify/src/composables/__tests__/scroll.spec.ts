@@ -2,8 +2,8 @@
 import { makeScrollProps, useScroll } from '../scroll'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
+import { expect, it } from 'vitest'
 import { defineComponent, ref } from 'vue'
 
 // Types
@@ -14,7 +14,7 @@ import {
   scrollElement,
   scrollWindow,
   wait,
-} from '../../../test'
+} from '@/../test'
 
 describe('scrollProps', () => {
   it('should allow setting default values', () => {
@@ -60,7 +60,7 @@ describe('useScroll', () => {
   })
 
   it.skip('should use a custom target', async () => {
-    const thresholdMetCallback = jest.fn()
+    const thresholdMetCallback = vi.fn()
     mountFunction({}, {
       props: { scrollTarget: 'body', scrollThreshold: 300 },
     })
@@ -73,7 +73,7 @@ describe('useScroll', () => {
   })
 
   it.skip('should do nothing if !canScroll', async () => {
-    const thresholdMetCallback = jest.fn()
+    const thresholdMetCallback = vi.fn()
     mountFunction({
       canScroll: ref(false),
     }, {
@@ -88,7 +88,7 @@ describe('useScroll', () => {
   })
 
   it.skip('should do something if canScroll', async () => {
-    const thresholdMetCallback = jest.fn()
+    const thresholdMetCallback = vi.fn()
     mountFunction({
       canScroll: ref(true),
     }, {

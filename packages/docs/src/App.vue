@@ -10,26 +10,22 @@
   // Composables
   import { useHead } from '@unhead/vue'
 
-  // Utilities
-  import { inject } from '@vercel/analytics'
-
-  inject()
-
   const user = useUserStore()
   const router = useRouter()
   const route = useRoute()
   const theme = useTheme()
   const { locale } = useI18n()
   const auth = useAuthStore()
+  const frontmatter = useFrontmatter()
 
   const path = computed(() => route.path.replace(`/${locale.value}/`, ''))
 
   const meta = computed(() => {
     return genAppMetaInfo({
       title: `${route.meta.title}${path.value === '' ? '' : ' — Vuetify'}`,
-      description: route.meta.description,
-      keywords: route.meta.keywords,
-      assets: route.meta.assets,
+      description: frontmatter.value?.meta.description,
+      keywords: frontmatter.value?.meta.keywords,
+      assets: frontmatter.value?.assets,
     })
   })
 

@@ -89,6 +89,8 @@ async function matchPrecache (request) {
       response = ensureCacheableResponse(response)
       if (response.status === 200) {
         precache.put(cacheKey, response.clone())
+      } else {
+        console.error(`[SW] Failed to fetch missing precached asset ${request.url}`)
       }
     })
   }
@@ -208,7 +210,7 @@ function createCacheKey (entry) {
 
   return {
     cacheKey: cacheKeyUrl.href,
-    url: cacheKeyUrl.href,
+    url: new URL(url, location.href).href,
   }
 }
 

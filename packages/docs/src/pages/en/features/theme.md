@@ -7,6 +7,8 @@ related:
   - /styles/colors/
   - /styles/transitions/
   - /getting-started/wireframes/
+features:
+  report: true
 ---
 
 # Theme configuration

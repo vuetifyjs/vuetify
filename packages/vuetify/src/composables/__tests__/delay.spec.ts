@@ -2,9 +2,9 @@
 import { makeDelayProps, useDelay } from '../delay'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
-import { wait } from '../../../test'
+import { expect, it } from 'vitest'
+import { wait } from '@/../test'
 
 describe('delayProps', () => {
   it('should allow setting default values', () => {
@@ -25,7 +25,7 @@ describe('delayProps', () => {
 
 describe('useDelay', () => {
   it.each(['runOpenDelay', 'runCloseDelay'] as const)('should call %s - callback', async methodName => {
-    const cb = jest.fn()
+    const cb = vi.fn()
     const runDelay = useDelay({
       openDelay: 50,
       closeDelay: 50,
@@ -41,7 +41,7 @@ describe('useDelay', () => {
   })
 
   it.each(['runOpenDelay', 'runCloseDelay'] as const)('should call %s - promise', async methodName => {
-    const cb = jest.fn(val => val)
+    const cb = vi.fn(val => val)
     const runDelay = useDelay({
       openDelay: 50,
       closeDelay: 50,
@@ -59,7 +59,7 @@ describe('useDelay', () => {
   })
 
   it('should cancel delay when running a new one', async () => {
-    const cb = jest.fn()
+    const cb = vi.fn()
     const { runOpenDelay, runCloseDelay } = useDelay({
       closeDelay: 50,
       openDelay: 50,

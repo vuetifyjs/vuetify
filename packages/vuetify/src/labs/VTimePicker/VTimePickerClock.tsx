@@ -1,4 +1,3 @@
-// StylesthisValue
 // Styles
 import './VTimePickerClock.sass'
 
@@ -21,9 +20,7 @@ export const makeVTimePickerClockProps = propsFactory({
   ampm: Boolean,
   color: String,
   disabled: Boolean,
-  displayedValue: {
-    default: null,
-  },
+  displayedValue: null,
   double: Boolean,
   format: {
     type: Function,
@@ -58,8 +55,8 @@ export const VTimePickerClock = genericComponent()({
   props: makeVTimePickerClockProps(),
 
   emits: {
-    change: (val: number) => val,
-    input: (val: number) => val,
+    change: (val: number) => true,
+    input: (val: number) => true,
   },
 
   setup (props, { emit }) {
@@ -104,6 +101,8 @@ export const VTimePickerClock = genericComponent()({
     }
 
     function wheel (e: WheelEvent) {
+      if (!props.scrollable || props.disabled) return
+
       e.preventDefault()
 
       const delta = Math.sign(-e.deltaY || 1)
@@ -198,7 +197,13 @@ export const VTimePickerClock = genericComponent()({
     }
 
     function onMouseDown (e: MouseEvent | TouchEvent) {
+<<<<<<< fix/v3-time-picker-stop-prop -- Incoming Change
       e.stopPropagation()
+=======
+      if (props.disabled) return
+
+      e.preventDefault()
+>>>>>>> master -- Current Change
 
       window.addEventListener('mousemove', onDragMove)
       window.addEventListener('touchmove', onDragMove)
@@ -236,7 +241,7 @@ export const VTimePickerClock = genericComponent()({
           onClick={ (e: Event) => e.stopPropagation() }
           onMousedown={ onMouseDown }
           onTouchstart={ onMouseDown }
-          onWheel={ (e: WheelEvent) => (props.scrollable && wheel(e)) }
+          onWheel={ wheel }
           ref={ clockRef }
         >
           <div class="v-time-picker-clock__inner" ref={ innerClockRef }>

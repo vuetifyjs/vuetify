@@ -5,27 +5,26 @@ import './VNumberInput.sass'
 import { VBtn } from '../../components/VBtn'
 import { VDefaultsProvider } from '../../components/VDefaultsProvider'
 import { VDivider } from '../../components/VDivider'
-import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
-import { makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
-import { makeFocusProps, useFocus } from '@/composables/focus'
+import { useForm } from '@/composables/form'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref } from 'vue'
-import { filterInputAttrs, genericComponent, only, propsFactory, useRender } from '@/util'
+import { computed, nextTick, onMounted, ref } from 'vue'
+import { clamp, genericComponent, getDecimals, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { VFieldSlots } from '@/components/VField/VField'
-import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
 
 type ControlSlot = {
-  click: () => void
+  click: (e: MouseEvent) => void
 }
 
-type VNumberInputSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
+type VNumberInputSlots = Omit<VTextFieldSlots, 'default'> & {
   increment: ControlSlot
   decrement: ControlSlot
 }
@@ -39,156 +38,244 @@ const makeVNumberInputProps = propsFactory({
   },
   inset: Boolean,
   hideInput: Boolean,
-  min: Number,
-  max: Number,
-  step: Number,
+  modelValue: {
+    type: Number as PropType<Number | null>,
+    default: null,
+  },
+  min: {
+    type: Number,
+    default: Number.MIN_SAFE_INTEGER,
+  },
+  max: {
+    type: Number,
+    default: Number.MAX_SAFE_INTEGER,
+  },
+  step: {
+    type: Number,
+    default: 1,
+  },
 
-  ...only(makeVInputProps(), [
-    'density',
-    'disabled',
-    'focused',
-    'hideDetails',
-    'hint',
-    'label',
-    'persistentHint',
-    'readonly',
-  ]),
-  ...only(makeVFieldProps(), [
-    'baseColor',
-    'bgColor',
-    'class',
-    'color',
-    'disabled',
-    'error',
-    'loading',
-    'reverse',
-    'rounded',
-    'style',
-    'theme',
-    'variant',
-  ]),
-  ...makeFocusProps(),
+  ...omit(makeVTextFieldProps({}), ['appendInnerIcon', 'modelValue', 'prependInnerIcon']),
 }, 'VNumberInput')
 
 export const VNumberInput = genericComponent<VNumberInputSlots>()({
   name: 'VNumberInput',
 
-  inheritAttrs: false,
-
   props: {
     ...makeVNumberInputProps(),
-
-    modelValue: {
-      type: [Number, String],
-      default: 0,
-    },
   },
 
   emits: {
     'update:modelValue': (val: number) => true,
   },
 
-  setup (props, { attrs, emit, slots }) {
-    const model = useProxiedModel(props, 'modelValue')
-    const { isFocused, focus, blur } = useFocus(props)
-    const inputRef = ref<HTMLInputElement>()
+  setup (props, { slots }) {
+    const _model = useProxiedModel(props, 'modelValue')
 
-    function onFocus () {
-      if (!isFocused.value) focus()
-    }
+    const model = computed({
+      get: () => _model.value,
+      set (val) {
+        if (val === null) {
+          _model.value = null
+          return
+        }
+
+        if (!isNaN(+val) && +val <= props.max && +val >= props.min) {
+          _model.value = +val
+        }
+      },
+    })
+
+    const vTextFieldRef = ref<VTextField | undefined>()
+
+    const stepDecimals = computed(() => getDecimals(props.step))
+    const modelDecimals = computed(() => typeof model.value === 'number' ? getDecimals(model.value) : 0)
+
+    const form = useForm()
+    const controlsDisabled = computed(() => (
+      props.disabled || props.readonly || form?.isReadonly.value
+    ))
+
+    const canIncrease = computed(() => {
+      if (controlsDisabled.value) return false
+      return (model.value ?? 0) as number + props.step <= props.max
+    })
+    const canDecrease = computed(() => {
+      if (controlsDisabled.value) return false
+      return (model.value ?? 0) as number - props.step >= props.min
+    })
 
     const controlVariant = computed(() => {
       return props.hideInput ? 'stacked' : props.controlVariant
     })
 
-    function toggleUpDown (increment = true) {
-      if (increment) {
-        inputRef.value?.stepUp()
-      } else {
-        inputRef.value?.stepDown()
-      }
-
-      if (inputRef.value) model.value = parseInt(inputRef.value.value, 10)
-    }
-
-    function onClickUp () {
-      toggleUpDown()
-    }
-
-    function onClickDown () {
-      toggleUpDown(false)
-    }
+    const incrementIcon = computed(() => controlVariant.value === 'split' ? '$plus' : '$collapse')
+    const decrementIcon = computed(() => controlVariant.value === 'split' ? '$minus' : '$expand')
+    const controlNodeSize = computed(() => controlVariant.value === 'split' ? 'default' : 'small')
+    const controlNodeDefaultHeight = computed(() => controlVariant.value === 'stacked' ? 'auto' : '100%')
 
     const incrementSlotProps = computed(() => ({ click: onClickUp }))
 
     const decrementSlotProps = computed(() => ({ click: onClickDown }))
 
+    onMounted(() => {
+      if (!props.readonly && !props.disabled) {
+        clampModel()
+      }
+    })
+
+    function toggleUpDown (increment = true) {
+      if (controlsDisabled.value) return
+      if (model.value == null) {
+        model.value = clamp(0, props.min, props.max)
+        return
+      }
+
+      const decimals = Math.max(modelDecimals.value, stepDecimals.value)
+      if (increment) {
+        if (canIncrease.value) model.value = +((((model.value as number) + props.step).toFixed(decimals)))
+      } else {
+        if (canDecrease.value) model.value = +((((model.value as number) - props.step).toFixed(decimals)))
+      }
+    }
+
+    function onClickUp (e: MouseEvent) {
+      e.stopPropagation()
+      toggleUpDown()
+    }
+
+    function onClickDown (e: MouseEvent) {
+      e.stopPropagation()
+      toggleUpDown(false)
+    }
+
+    function onBeforeinput (e: InputEvent) {
+      if (!e.data) return
+      const existingTxt = (e.target as HTMLInputElement)?.value
+      const selectionStart = (e.target as HTMLInputElement)?.selectionStart
+      const selectionEnd = (e.target as HTMLInputElement)?.selectionEnd
+      const potentialNewInputVal =
+        existingTxt
+          ? existingTxt.slice(0, selectionStart as number | undefined) + e.data + existingTxt.slice(selectionEnd as number | undefined)
+          : e.data
+      // Only numbers, "-", "." are allowed
+      // AND "-", "." are allowed only once
+      // AND "-" is only allowed at the start
+      if (!/^-?(\d+(\.\d*)?|(\.\d+)|\d*|\.)$/.test(potentialNewInputVal)) {
+        e.preventDefault()
+      }
+    }
+
+    async function onKeydown (e: KeyboardEvent) {
+      if (
+        ['Enter', 'ArrowLeft', 'ArrowRight', 'Backspace', 'Delete', 'Tab'].includes(e.key) ||
+        e.ctrlKey
+      ) return
+
+      if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
+        e.preventDefault()
+        clampModel()
+        // _model is controlled, so need to wait until props['modelValue'] is updated
+        await nextTick()
+        if (e.key === 'ArrowDown') {
+          toggleUpDown(false)
+        } else {
+          toggleUpDown()
+        }
+      }
+    }
+
+    function onControlMousedown (e: MouseEvent) {
+      e.stopPropagation()
+    }
+
+    function clampModel () {
+      if (!vTextFieldRef.value) return
+      const inputText = vTextFieldRef.value.value
+      if (inputText && !isNaN(+inputText)) {
+        model.value = clamp(+(inputText), props.min, props.max)
+      } else {
+        model.value = null
+      }
+    }
+
     useRender(() => {
-      const fieldProps = filterFieldProps(props)
-      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const { modelValue: _, ...inputProps } = VInput.filterProps(props)
+      const { modelValue: _, ...textFieldProps } = VTextField.filterProps(props)
+
+      function incrementControlNode () {
+        return !slots.increment ? (
+          <VBtn
+            disabled={ !canIncrease.value }
+            flat
+            key="increment-btn"
+            height={ controlNodeDefaultHeight.value }
+            name="increment-btn"
+            icon={ incrementIcon.value }
+            onClick={ onClickUp }
+            onMousedown={ onControlMousedown }
+            size={ controlNodeSize.value }
+            tabindex="-1"
+          />
+        ) : (
+          <VDefaultsProvider
+            key="increment-defaults"
+            defaults={{
+              VBtn: {
+                disabled: !canIncrease.value,
+                flat: true,
+                height: controlNodeDefaultHeight.value,
+                size: controlNodeSize.value,
+                icon: incrementIcon.value,
+              },
+            }}
+          >
+            { slots.increment(incrementSlotProps.value) }
+          </VDefaultsProvider>
+        )
+      }
+
+      function decrementControlNode () {
+        return !slots.decrement ? (
+          <VBtn
+            disabled={ !canDecrease.value }
+            flat
+            key="decrement-btn"
+            height={ controlNodeDefaultHeight.value }
+            name="decrement-btn"
+            icon={ decrementIcon.value }
+            size={ controlNodeSize.value }
+            tabindex="-1"
+            onClick={ onClickDown }
+            onMousedown={ onControlMousedown }
+          />
+        ) : (
+          <VDefaultsProvider
+            key="decrement-defaults"
+            defaults={{
+              VBtn: {
+                disabled: !canDecrease.value,
+                flat: true,
+                height: controlNodeDefaultHeight.value,
+                size: controlNodeSize.value,
+                icon: decrementIcon.value,
+              },
+            }}
+          >
+            { slots.decrement(decrementSlotProps.value) }
+          </VDefaultsProvider>
+        )
+      }
 
       function controlNode () {
-        const defaultHeight = controlVariant.value === 'stacked' ? 'auto' : '100%'
         return (
           <div class="v-number-input__control">
-            {
-              !slots.decrement ? (
-                <VBtn
-                  flat
-                  key="decrement-btn"
-                  height={ defaultHeight }
-                  icon="$expand"
-                  size="small"
-                  onClick={ onClickDown }
-                />
-              ) : (
-                <VDefaultsProvider
-                  key="decrement-defaults"
-                  defaults={{
-                    VBtn: {
-                      flat: true,
-                      height: defaultHeight,
-                      size: 'small',
-                      icon: '$expand',
-                    },
-                  }}
-                >
-                  { slots.decrement(decrementSlotProps.value) }
-                </VDefaultsProvider>
-              )
-            }
+            { decrementControlNode() }
 
             <VDivider
               vertical={ controlVariant.value !== 'stacked' }
             />
 
-            {
-              !slots.increment ? (
-                <VBtn
-                  flat
-                  key="increment-btn"
-                  height={ defaultHeight }
-                  icon="$collapse"
-                  onClick={ onClickUp }
-                  size="small"
-                />
-              ) : (
-                <VDefaultsProvider
-                  key="increment-defaults"
-                  defaults={{
-                    VBtn: {
-                      flat: true,
-                      height: defaultHeight,
-                      size: 'small',
-                      icon: '$collapse',
-                    },
-                  }}
-                >
-                  { slots.increment(incrementSlotProps.value) }
-                </VDefaultsProvider>
-              )
-            }
+            { incrementControlNode() }
           </div>
         )
       }
@@ -197,8 +284,41 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         return !props.hideInput && !props.inset ? <VDivider vertical /> : undefined
       }
 
+      const appendInnerControl =
+        controlVariant.value === 'split'
+          ? (
+            <div class="v-number-input__control">
+              <VDivider vertical />
+
+              { incrementControlNode() }
+            </div>
+          ) : (!props.reverse
+            ? <>{ dividerNode() }{ controlNode() }</>
+            : undefined)
+
+      const hasAppendInner = slots['append-inner'] || appendInnerControl
+
+      const prependInnerControl =
+        controlVariant.value === 'split'
+          ? (
+            <div class="v-number-input__control">
+              { decrementControlNode() }
+
+              <VDivider vertical />
+            </div>
+          ) : (props.reverse
+            ? <>{ controlNode() }{ dividerNode() }</>
+            : undefined)
+
+      const hasPrependInner = slots['prepend-inner'] || prependInnerControl
+
       return (
-        <VInput
+        <VTextField
+          ref={ vTextFieldRef }
+          v-model={ model.value }
+          onBeforeinput={ onBeforeinput }
+          onChange={ clampModel }
+          onKeydown={ onKeydown }
           class={[
             'v-number-input',
             {
@@ -211,74 +331,30 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             },
             props.class,
           ]}
-          { ...rootAttrs }
-          { ...inputProps }
-          focused={ isFocused.value }
+          { ...textFieldProps }
           style={ props.style }
+          inputmode="decimal"
         >
           {{
             ...slots,
-            default: () => (
-              <VField
-                { ...fieldProps }
-                active
-                focused={ isFocused.value }
-              >
-                {{
-                  ...slots,
-                  default: ({
-                    props: { class: fieldClass, ...slotProps },
-                  }) => (
-                    <input
-                      ref={ inputRef }
-                      type="number"
-                      v-model={ model.value }
-                      class={ fieldClass }
-                      max={ props.max }
-                      min={ props.min }
-                      step={ props.step }
-                      onFocus={ onFocus }
-                      onBlur={ blur }
-                      { ...inputAttrs }
-                    />
-                  ),
-                  'append-inner': controlVariant.value === 'split' ? () => (
-                    <div class="v-number-input__control">
-                      <VDivider vertical />
-
-                      <VBtn
-                        flat
-                        height="100%"
-                        icon="$plus"
-                        tile
-                        onClick={ onClickUp }
-                      />
-                    </div>
-                  ) : (!props.reverse
-                    ? () => <>{ dividerNode() }{ controlNode() }</>
-                    : undefined),
-                  'prepend-inner': controlVariant.value === 'split' ? () => (
-                    <div class="v-number-input__control">
-                      <VBtn
-                        flat
-                        height="100%"
-                        icon="$minus"
-                        tile
-                        onClick={ onClickDown }
-                      />
-
-                      <VDivider vertical />
-                    </div>
-                  ) : (props.reverse
-                    ? () => <>{ controlNode() }{ dividerNode() }</>
-                    : undefined),
-                }}
-              </VField>
-            ),
+            'append-inner': hasAppendInner ? (...args) => (
+              <>
+                { slots['append-inner']?.(...args) }
+                { appendInnerControl }
+              </>
+            ) : undefined,
+            'prepend-inner': hasPrependInner ? (...args) => (
+              <>
+                { prependInnerControl }
+                { slots['prepend-inner']?.(...args) }
+              </>
+            ) : undefined,
           }}
-        </VInput>
+        </VTextField>
       )
     })
+
+    return forwardRefs({}, vTextFieldRef)
   },
 })
 

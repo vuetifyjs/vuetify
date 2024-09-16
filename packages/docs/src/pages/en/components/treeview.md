@@ -86,11 +86,11 @@ Treeview nodes can have a hover effect.
 
 <ExamplesExample file="v-treeview/prop-hoverable" /> -->
 
-#### Item disabled
+#### Item props
 
-Setting **item-disabled** prop allows to control which node's property disables the node when set to `true`.
+If **item-props** is set to `true` then the whole item will be spread. In the following example, the disabled prop defined in each item will disable the item accordingly.
 
-<ExamplesExample file="v-treeview/prop-item-disabled" />
+<ExamplesExample file="v-treeview/prop-item-props" />
 
 #### Load children
 
@@ -136,9 +136,9 @@ Shaped treeview's have rounded borders on one side of the nodes.
 
 ### Slots
 
-#### Append and label
+#### Prepend
 
-Using the the **label**, and an **append** slots we are able to create an intuitive file explorer.
+Using the the **prepend** slot we are able to create an intuitive file explorer.
 
 <ExamplesExample file="v-treeview/slot-append-and-label" />
 
@@ -146,7 +146,7 @@ Using the the **label**, and an **append** slots we are able to create an intuit
 
 #### Search and filter
 
-Easily filter your treeview by using the **search** prop. You can easily apply your custom filtering function if you need case-sensitive or fuzzy filtering by setting the **filter** prop. This works similar to the [v-autocomplete](/components/autocompletes) component.
+Easily filter your treeview by using the **search** prop. You can easily apply your custom filtering function if you need case-sensitive or fuzzy filtering by setting the **custom-filter** prop. This works similar to the [v-autocomplete](/components/autocompletes) component.
 
 <ExamplesExample file="v-treeview/misc-search-and-filter" />
 

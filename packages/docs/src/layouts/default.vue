@@ -8,11 +8,9 @@
 
     <AppDrawerDrawer />
 
-    <AppToc />
+    <AppToc v-if="!route.meta.fluid" />
 
     <AppBackToTop />
-
-    <AppSnackbarQueue />
 
     <v-main>
       <slot>

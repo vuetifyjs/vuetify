@@ -50,7 +50,7 @@ const ComponentB = defineComponent({
 })
 
 describe('goto', () => {
-  it('should scroll vertical', () => {
+  it('scrolls vertically', () => {
     cy
       .mount(() => (
         <div>
@@ -63,7 +63,7 @@ describe('goto', () => {
       ))
       .get('#top').click()
       .window().should(win => {
-        expect(win.scrollY).to.equal(1223)
+        expect(Math.ceil(win.scrollY)).to.equal(1223)
       })
       .get('#bottom').click()
       .window().should(win => {
@@ -71,8 +71,8 @@ describe('goto', () => {
       })
   })
 
-  // TODO: find a better way to test this and fix in CI
-  it.skip('should scroll horizontal', () => {
+  it('scrolls horizontally', () => {
+    cy.viewport(1075, 825)
     cy
       .mount(() => (
         <div id="container" style="overflow-x: auto;">
@@ -81,15 +81,9 @@ describe('goto', () => {
           <ComponentB id="end" target="#start" container="parent" style="margin-inline-start: 2000px;" />
         </div>
       ))
-      .get('#start').click()
-      .wait(500)
-      .get('#container').then($el => {
-        expect($el[0].scrollLeft).to.equal(975)
-      })
-      .get('#end').click()
-      .wait(500)
-      .get('#container').then($el => {
-        expect($el[0].scrollLeft).to.equal(0)
-      })
+      .get('#start').click().wait(500)
+      .get('#end').should('be.visible')
+      .get('#end').click().wait(500)
+      .get('#start').should('be.visible')
   })
 })

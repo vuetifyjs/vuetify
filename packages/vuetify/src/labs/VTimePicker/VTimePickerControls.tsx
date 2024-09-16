@@ -2,8 +2,8 @@
 import './VTimePickerControls.sass'
 
 // Components
+import { pad } from './util'
 import { VBtn } from '@/components/VBtn'
-import { pad } from '@/components/VDatePicker/util'
 
 // Composables
 import { useLocale } from '@/composables/locale'
@@ -17,6 +17,7 @@ type Period = 'am' | 'pm'
 
 export const makeVTimePickerControlsProps = propsFactory({
   ampm: Boolean,
+  ampmInTitle: Boolean,
   ampmReadonly: Boolean,
   color: String,
   disabled: Boolean,
@@ -36,8 +37,8 @@ export const VTimePickerControls = genericComponent()({
   props: makeVTimePickerControlsProps(),
 
   emits: {
-    'update:period': (data: Period) => data,
-    'update:selecting': (data: 1 | 2 | 3) => data,
+    'update:period': (data: Period) => true,
+    'update:selecting': (data: 1 | 2 | 3) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -59,6 +60,7 @@ export const VTimePickerControls = genericComponent()({
             <VBtn
               active={ props.selecting === 1 }
               color={ props.selecting === 1 ? props.color : undefined }
+              disabled={ props.disabled }
               variant="tonal"
               class={{
                 'v-time-picker-controls__time__btn': true,
@@ -85,6 +87,7 @@ export const VTimePickerControls = genericComponent()({
                 'v-time-picker-controls__time--with-ampm__btn': props.ampm,
                 'v-time-picker-controls__time--with-seconds__btn': props.useSeconds,
               }}
+              disabled={ props.disabled }
               variant="tonal"
               text={ props.minute == null ? '--' : pad(props.minute) }
               onClick={ (e: Event) => { emit('update:selecting', SelectingTimes.Minute); e.stopPropagation() } }
@@ -113,13 +116,14 @@ export const VTimePickerControls = genericComponent()({
                     'v-time-picker-controls__time__btn__active': props.selecting === 3,
                     'v-time-picker-controls__time--with-seconds__btn': props.useSeconds,
                   }}
+                  disabled={ props.disabled }
                   text={ props.second == null ? '--' : pad(props.second) }
                 />
               )
             }
 
             {
-              props.ampm && (
+              props.ampm && props.ampmInTitle && (
                 <div
                   class={['v-time-picker-controls__ampm', {
                     'v-time-picker-controls__ampm--readonly': props.ampmReadonly,
@@ -133,9 +137,15 @@ export const VTimePickerControls = genericComponent()({
                       'v-time-picker-controls__ampm__btn': true,
                       'v-time-picker-controls__ampm__btn__active': props.period === 'am',
                     }}
+                    disabled={ props.disabled }
                     text={ t('$vuetify.timePicker.am') }
+<<<<<<< fix/v3-time-picker-stop-prop -- Incoming Change
                     variant="tonal"
                     onClick={ (e: Event) => { if (props.period !== 'am') { emit('update:period', 'am') } e.stopPropagation() } }
+=======
+                    variant={ props.disabled && props.period === 'am' ? 'elevated' : 'tonal' }
+                    onClick={ () => props.period !== 'am' ? emit('update:period', 'am') : null }
+>>>>>>> master -- Current Change
                   />
 
                   <VBtn
@@ -146,9 +156,15 @@ export const VTimePickerControls = genericComponent()({
                       'v-time-picker-controls__ampm__btn': true,
                       'v-time-picker-controls__ampm__btn__active': props.period === 'pm',
                     }}
+                    disabled={ props.disabled }
                     text={ t('$vuetify.timePicker.pm') }
+<<<<<<< fix/v3-time-picker-stop-prop -- Incoming Change
                     variant="tonal"
                     onClick={ (e: Event) => { if (props.period !== 'pm') { emit('update:period', 'pm') } e.stopPropagation() } }
+=======
+                    variant={ props.disabled && props.period === 'pm' ? 'elevated' : 'tonal' }
+                    onClick={ () => props.period !== 'pm' ? emit('update:period', 'pm') : null }
+>>>>>>> master -- Current Change
                   />
                 </div>
               )

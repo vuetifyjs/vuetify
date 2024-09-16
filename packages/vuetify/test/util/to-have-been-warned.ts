@@ -1,4 +1,5 @@
-import { afterEach, beforeAll, beforeEach, expect, jest } from '@jest/globals'
+import type { Mock } from 'vitest'
+import { beforeAll, expect, vi } from 'vitest'
 
 // From Vue, slightly modified
 function noop () { }
@@ -16,7 +17,7 @@ console.info = noop
 
 const asserted: string[] = []
 
-function createCompareFn (spy: jest.Mock) {
+function createCompareFn (spy: Mock) {
   const hasWarned = (msg: string) => {
     for (const args of spy.mock.calls) {
       if (args.some((arg: any) => (
@@ -41,11 +42,11 @@ function createCompareFn (spy: jest.Mock) {
 }
 
 function toHaveBeenWarnedInit () {
-  let warn: jest.Mock
-  let error: jest.Mock
+  let warn: Mock
+  let error: Mock
   beforeAll(() => {
-    warn = jest.spyOn(console, 'warn').mockImplementation(noop) as any
-    error = jest.spyOn(console, 'error').mockImplementation(noop) as any
+    warn = vi.spyOn(console, 'warn').mockImplementation(noop) as any
+    error = vi.spyOn(console, 'error').mockImplementation(noop) as any
     expect.extend({
       toHaveBeenWarned: createCompareFn(error),
       toHaveBeenTipped: createCompareFn(warn),
@@ -58,17 +59,15 @@ function toHaveBeenWarnedInit () {
     error.mockClear()
   })
 
-  afterEach(done => {
+  afterEach(() => {
     for (const type of ['error', 'warn']) {
       const warned = (msg: string) => asserted.some(assertedMsg => msg.toString().includes(assertedMsg))
       for (const args of (console as any)[type].mock.calls) {
         if (!warned(args[0])) {
-          done!(new Error(`Unexpected console.${type} message: ${args[0]}`))
-          return
+          throw new Error(`Unexpected console.${type} message: ${args[0]}`)
         }
       }
     }
-    done!()
   })
 }
 

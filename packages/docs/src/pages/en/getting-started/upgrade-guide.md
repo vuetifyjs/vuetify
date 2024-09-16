@@ -70,6 +70,7 @@ app.use(vuetify)
 - Global styles previously included as `.v-application p` or `.v-application ul` are no longer included. If you need margin for `p`, or padding-left for `ul` and `ol`, set it manually in your root component's `<style>` tag
 - `stateless`, `clipped`, `clipped-right` and `app` props have been removed from v-navigation-drawer, v-app-bar and v-system-bar. The position in the markup determines the appearance. Use the `order="number"` prop to influence it manually.
 - `$vuetify.breakpoint` has been renamed to `$vuetify.display` and extended with [new properties](/features/display-and-platform/)
+  - `*Only` properties have been removed, use `xs` instead of `xsOnly` etc.
 
 ### Theme
 
@@ -115,7 +116,7 @@ app.use(vuetify)
 - `value` prop has been replaced by `model-value` on components that support `v-model` usage. (Vue 3 requires this change)
   - Note that this does not apply to `value` used as a *selection value*, for example `v-btn` within `v-btn-toggle`.
 - `@input` event has been replaced by `@update:model-value` on components that support `v-model` usage. (Vue 3 requires this change)
-- `left` and `right` have been replaced by `start` and `end` respectively. This applies to utility classes too, for example `.border-r` is now `.border-e`.
+- `left` and `right` have been replaced by `start` and `end` respectively. This applies to utility classes too, for example `.rounded-r` is now `.rounded-e`.
 - Size props `small` / `medium` / `large` etc. have been combined into a single `size` prop.
 - `absolute` and `fixed` props have been combined into a single `position` prop.
 - `top` / `bottom` / `left` / `right` props have been combined into a single `location` prop.
@@ -191,7 +192,7 @@ app.use(vuetify)
 ### v-list
 
 - `two-line` and `three-line` props have been combined into a single `lines` prop with allowed values `'two'` or `'three'`.
-- `v-list-item-group` has been removed, just add `value` to list items to make them selectable and bind `v-model:selected` on v-list to get the selected value.
+- `v-list-item-group` has been removed, assign the item's key to the `value` prop of each `v-list-item` and bind `v-model:selected` on the `v-list` to get the selected value.
 - `v-list-item-icon` and `v-list-item-avatar` have been removed, use `v-list-item` with `icon` or `avatar` props, or put an icon or avatar in the append or prepend slot.
 - `v-list-item-content` has been removed, lists use CSS grid for layout now instead.
 - `v-list-group` can now be nested arbitrarily deep, `sub-group` prop should be removed.
@@ -231,6 +232,11 @@ app.use(vuetify)
 ### v-simple-table
 
 - `v-simple-table` has been renamed to `v-table`
+
+### v-stepper (vertical)
+
+- `v-stepper-step` has been renamed to `v-stepper-vertical-item`. Move content into the **title** slot.
+- `v-stepper-content` has been removed. Move content to the default slot of `v-stepper-vertical-item`.
 
 ### v-data-table
 

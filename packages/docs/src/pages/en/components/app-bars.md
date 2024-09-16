@@ -90,6 +90,7 @@ The `v-app-bar` component has a variety of props that allow you to customize its
 Available values:
 
 - **hide**: The default slot area will shift up and hide as the user scrolls down. The extension slot remains visible.
+- **fully-hide**: The entire app bar will hide as the user scrolls down.
 - **collapse**: Shrink horizontally to a small bar in one corner.
 - **elevate**: Add a drop shadow to the app bar when scrolling. Ignores `scroll-threshold`, will always be applied with any amount of scrolling.
 - **fade-image**: Fade out the image as the user scrolls down.
@@ -115,6 +116,6 @@ You can make **app-bar** dense. A dense app bar has lower height than regular on
 
 #### Prominent
 
-An `v-app-bar` with the `density="prominent"` prop can opt to have its height shrunk as the user scrolls down. This provides a smooth transition to taking up less visual space when the user is scrolling through content. Shrink height has 2 possible options, **compact** (48px) and **comfortable** (56px) sizes.
+An `v-app-bar` with the `density="prominent"` prop can be used for longer titles, to house imagery, or to provide a stronger presence to the top app bar.
 
 <ExamplesExample file="v-app-bar/prop-prominent" />

@@ -2,7 +2,9 @@
 import { allowedVariants, makeVariantProps, useVariant } from '../variant'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
+import { expect, it } from 'vitest'
+
+// Utilities
 
 describe('variant', () => {
   it.each([

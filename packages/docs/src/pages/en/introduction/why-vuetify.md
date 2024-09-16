@@ -16,7 +16,7 @@ Learn more about what Vuetify is, how to create an application from scratch, bro
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify />
+<VoPromotionsCardVuetify slug="vuetify-snips" />
 
 ## What is Vuetify?
 

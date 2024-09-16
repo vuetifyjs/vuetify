@@ -2,7 +2,8 @@
  * Utilities for generating formatted mount functions
  * Some utility functions for mounting these generated examples inside of tests
  */
-import { FunctionalComponent, JSXComponent } from 'vue'
+import { FunctionalComponent } from 'vue'
+import { JSXComponent } from '@/composables'
 
 const _ = Cypress._
 

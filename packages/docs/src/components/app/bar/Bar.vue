@@ -2,10 +2,13 @@
   <VoAppBar
     id="app-bar"
     border="b"
+    class="px-md-3"
     logo="vuetify"
     flat
   >
     <template #prepend>
+      <div class="px-1" />
+
       <AppBtn
         v-if="route.meta.layout !== 'home' && mdAndDown"
         icon="mdi-menu"
@@ -17,6 +20,8 @@
 
     <template #append>
       <template v-if="mdAndUp">
+        <AppBarBlogLink />
+
         <AppBarLearnMenu />
 
         <AppBarSupportMenu />

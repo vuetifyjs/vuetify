@@ -2,9 +2,9 @@
 import './VTimePicker.sass'
 
 // Components
+import { pad } from './util'
 import { VTimePickerClock } from './VTimePickerClock'
 import { VTimePickerControls } from './VTimePickerControls'
-import { pad } from '@/components/VDatePicker/util'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
@@ -56,11 +56,11 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
   props: makeVTimePickerProps(),
 
   emits: {
-    'update:hour': (val: number) => val,
-    'update:minute': (val: number) => val,
-    'update:period': (val: Period) => val,
-    'update:second': (val: number) => val,
-    'update:modelValue': (val: string) => val,
+    'update:hour': (val: number) => true,
+    'update:minute': (val: number) => true,
+    'update:period': (val: Period) => true,
+    'update:second': (val: number) => true,
+    'update:modelValue': (val: string) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -254,10 +254,10 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
         case 'hour':
           emit('update:hour', value)
           break
-        case 'minutes':
+        case 'minute':
           emit('update:minute', value)
           break
-        case 'seconds':
+        case 'second':
           emit('update:second', value)
           break
         default:

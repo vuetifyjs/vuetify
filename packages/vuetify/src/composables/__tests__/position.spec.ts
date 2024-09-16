@@ -2,7 +2,7 @@
 import { usePosition } from '../position'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
+import { expect, it } from 'vitest'
 
 // Types
 import type { PositionProps } from '../position'

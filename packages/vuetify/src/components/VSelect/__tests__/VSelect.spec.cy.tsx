@@ -460,6 +460,44 @@ describe('VSelect', () => {
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 3')
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
     })
+
+    // https://github.com/vuetifyjs/vuetify/issues/19806
+    it('should hide selected item(s) with return-object', () => {
+      const selectedItem = ref({ text: 'Item 1', id: 'item1' })
+      const items = ref([
+        {
+          text: 'Item 1',
+          id: 'item1',
+        },
+        {
+          text: 'Item 2',
+          id: 'item2',
+        },
+        {
+          text: 'Item 3',
+          id: 'item3',
+        },
+      ])
+      cy.mount((props: any) => (
+          <VSelect
+            v-model={ selectedItem.value }
+            hideSelected
+            items={ items.value }
+            item-title="text"
+            item-value="id"
+            returnObject
+          />
+      )).get('.v-select').click()
+        .get('.v-list-item--active').should('have.length', 0)
+        .get('.v-overlay__content .v-list-item').should('have.length', 2)
+        .get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 2')
+        .get('.v-overlay__content .v-list-item').eq(0).click({ waitForAnimations: false }).should(() => {
+          expect(selectedItem.value).to.deep.equal({ text: 'Item 2', id: 'item2' })
+        })
+        .get('.v-list-item--active').should('have.length', 0)
+        .get('.v-overlay__content .v-list-item').should('have.length', 2)
+        .get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 1')
+    })
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/16055

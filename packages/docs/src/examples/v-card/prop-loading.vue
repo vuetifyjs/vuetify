@@ -1,5 +1,6 @@
 <template>
   <v-card
+    :disabled="loading"
     :loading="loading"
     class="mx-auto my-12"
     max-width="374"
@@ -63,8 +64,8 @@
 
     <v-card-title>Tonight's availability</v-card-title>
 
-    <div class="px-4">
-      <v-chip-group v-model="selection">
+    <div class="px-4 mb-2">
+      <v-chip-group v-model="selection" selected-class="bg-deep-purple-lighten-2">
         <v-chip>5:30PM</v-chip>
 
         <v-chip>7:30PM</v-chip>
@@ -78,11 +79,11 @@
     <v-card-actions>
       <v-btn
         color="deep-purple-lighten-2"
-        variant="text"
+        text="Reserve"
+        block
+        border
         @click="reserve"
-      >
-        Reserve
-      </v-btn>
+      ></v-btn>
     </v-card-actions>
   </v-card>
 </template>

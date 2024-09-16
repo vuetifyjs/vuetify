@@ -24,13 +24,13 @@ features:
 
 <PageFeatures />
 
+<VoPromotionsCardVuetify slug="vuetify-snips" />
+
 ## Usage
 
 The `v-card` component is a stylish way to wrap different types of content; such as tables, images, or user actions.
 
 <ExamplesUsage name="v-card" />
-
-<PromotedEntry />
 
 ## API
 
@@ -42,6 +42,8 @@ The `v-card` component is a stylish way to wrap different types of content; such
 | [v-card-subtitle](/api/v-card-subtitle/) | Sub-component used to display the Card's subtitle. Wraps the `#subtitle` slot. |
 | [v-card-text](/api/v-card-text/) | Sub-component used to display the Card's text. Wraps the `#text` slot. |
 | [v-card-actions](/api/v-card-actions/) | Sub-component that modifies the default styling of [v-btn](/components/buttons/). Wraps the `#actions` slot |
+
+<ApiInline hide-links />
 
 ## Anatomy
 
@@ -61,33 +63,33 @@ The recommended placement of elements inside of `v-card` is:
 | 4. Text (optional) | A content area with a lower emphasis text color |
 | 5. Actions (optional) | A content area that typically contains one or more [v-btn](/components/buttons) components |
 
-<ApiInline hide-links />
+## Guide
 
-## Basics
+The `v-card` component is a versatile and enhanced sheet of paper that provides a simple interface for headings, text, images, and actions. It is a content container that is the most common way to present information.
+
+### Basics
 
 There are three ways you can populate a `v-card` with content. The first one is by using props, the second one is by slots, and the third one is by manually using the `v-card-*` components.
 
 <ExamplesExample file="v-card/basics-content" />
 
-Props give you an easy interface to display text-only content. They can also be used to easily render images and icons.
+Props give you an easy interface to display text-only content. They can also be used to easily render images and icons. Use slots if you need to render more complex content. If you need full control over the content, use markup.
 
-Use slots if you need to render more complex content. If you need full control over the content, use markup.
+### Combined
 
 In some cases it is possible to combine the different options, like the example below where props, slots and markup have all been used.
 
-::: info
-  In general slots take precedence over props. So if you provide both **text** prop and use **text** slot, then only the slot content will be rendered.
-:::
-
 <ExamplesExample file="v-card/basics-combine" />
 
-### Content overflow
+::: info
 
-`v-card` does not allow its content to overflow outside the card by default. It also establishes a z-index stacking context, which prevents its content from displaying on top of elements outside the `v-card`, even when it sets a higher z-index value. To override this default behavior, apply the following usage: `<v-card style="overflow: initial; z-index: initial">`.
+In general slots take precedence over props. So if you provide both **text** prop and use **text** slot, then only the slot content will be rendered.
 
-## Examples
+:::
 
 ### Props
+
+The `v-card` component has a variety of props that allow you to customize its appearance and behavior.
 
 #### Variants
 
@@ -103,6 +105,8 @@ The **variant** prop gives you easy access to several different card styles. Ava
 | **plain**    | Removes the background and lowers the opacity until hovered |
 
 <ExamplesExample file="v-card/prop-variant" />
+
+<VoPromotionsCardVuetify />
 
 #### Color
 
@@ -146,6 +150,12 @@ Apply a specific background image to the Card.
 
 <ExamplesExample file="v-card/prop-image" />
 
+::: tip
+
+`v-card` does not allow its content to overflow outside the card by default. It also establishes a z-index stacking context, which prevents its content from displaying on top of elements outside the `v-card`, even when it sets a higher z-index value. To override this default behavior, apply the following usage: `<v-card style="overflow: initial; z-index: initial">`.
+
+:::
+
 ### Slots
 
 The `v-card` component provides slots that enable you to customize content created by its props or to add additional content.
@@ -158,64 +168,80 @@ You can use the **prepend-avatar**, **append-avatar**, **prepend-icon** and **ap
 
 <ExamplesExample file="v-card/slot-prepend-append" />
 
-### Misc
+## Examples
 
-#### Card Reveal
+The following are a collection of examples that demonstrate more advanced and real world use of the `v-card` component.
+
+### Card Reveal
 
 Using [v-expand-transition](/api/v-expand-transition/) and a `@click` event you can have a card that reveals more information once the button is clicked, activating the hidden card to be revealed.
 
 <ExamplesExample file="v-card/misc-card-reveal" />
 
-#### Content wrapping
+### Content wrapping
 
 The `v-card` component is useful for wrapping content.
 
 <ExamplesExample file="v-card/misc-content-wrapping" />
 
-#### Custom actions
+### Custom actions
 
 With a simple conditional, you can easily add supplementary text that is hidden until opened.
 
 <ExamplesExample file="v-card/misc-custom-actions" />
 
-#### Grids
+<VoPromotionsCardVuetify />
+
+### Grids
 
 Using [grids](/components/grids/), you can create beautiful layouts.
 
 <ExamplesExample file="v-card/misc-grids" />
 
-#### Horizontal cards
+### Horizontal cards
 
 You can also play with the card layout using [layout flex](/styles/flex/).
 
 <ExamplesExample file="v-card/misc-horizontal-cards" />
 
-#### Information card
+### Information card
 
 Cards are entry points to more detailed information. To keep things concise, ensure to limit the number of actions the user can take.
 
 <ExamplesExample file="v-card/misc-information-card" />
 
-#### Media with text
+### Media with text
 
 Using the layout system, we can add custom text anywhere within the background.
 
 <ExamplesExample file="v-card/misc-media-with-text" />
 
-#### Twitter card
+### Twitter card
 
 The `v-card` component has multiple children components that help you build complex examples without having to worry about spacing. This example is comprised of the `v-card-title`, `v-card-text` and `v-card-actions` components.
 
 <ExamplesExample file="v-card/misc-twitter-card" />
 
-#### Weather card
+### Weather card
 
 Using [v-list-items](/components/lists) and a [v-slider](/components/sliders), we are able to create a unique weather card. The list components ensure that we have consistent spacing and functionality while the slider component allows us to provide a useful interface of selection to the user.
 
 <ExamplesExample file="v-card/misc-weather-card" />
 
-#### Loading
+### Loading
 
 Use an indeterminate [v-progress-linear](/components/progress-linear) to indicate a loading state.
 
 <ExamplesExample file="v-card/prop-loading" />
+
+### Earnings goal
+
+This example utilizes slots to customize the appearance of the different content areas.
+
+<ExamplesExample file="v-card/misc-earnings-goal" />
+
+### Funding card
+
+Utilize a combination of Card properties and utility classes to create a unique funding card.
+
+<ExamplesExample file="v-card/misc-shopify-funding" />

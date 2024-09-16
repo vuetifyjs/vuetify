@@ -3,7 +3,7 @@ import 'cypress-real-events'
 import type { mount as cyMount } from 'cypress/vue'
 import type { SnapshotOptions } from '@percy/core'
 import type { MountingOptions, VueWrapper } from '@vue/test-utils'
-import type { AllowedComponentProps, ComponentPublicInstance, FunctionalComponent, VNodeProps } from 'vue'
+import type { AllowedComponentProps, ComponentPublicInstance, DefineSetupFnComponent, FunctionalComponent, VNodeProps } from 'vue'
 import type { VuetifyOptions } from '@/framework'
 
 type Swipe = number[] | string

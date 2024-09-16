@@ -2,8 +2,8 @@
 import { createDisplay } from '../display'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
-import { resizeWindow } from '@/../test/index'
+import { expect, it } from 'vitest'
+import { resizeWindow } from '@/../test'
 
 const breakpoints = [
   'xs',
@@ -260,7 +260,7 @@ describe('display', () => {
         'xlAndUp',
       ],
     ],
-  ])('should calculate breakpoint for %s', async (options, expected) => {
+  ])('should calculate breakpoint for $description', async (options, expected) => {
     await resizeWindow(options.width, options.height)
 
     const display = createDisplay()

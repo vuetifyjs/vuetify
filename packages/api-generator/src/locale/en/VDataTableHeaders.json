@@ -1,5 +1,6 @@
 {
   "props": {
+    "disableSort": "Toggles rendering of sort button.",
     "sortAscIcon": "Icon used for ascending sort button.",
     "sortDescIcon": "Icon used for descending sort button.",
     "sticky": "Sticks the header to the top of the table."

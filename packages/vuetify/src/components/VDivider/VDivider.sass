@@ -1,33 +1,53 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-.v-divider
-  display: block
-  flex: $divider-flex
-  height: 0px
-  max-height: 0px
-  opacity: $divider-opacity
-  transition: inherit
+@include tools.layer('components')
+  .v-divider
+    display: block
+    flex: $divider-flex
+    height: 0px
+    max-height: 0px
+    opacity: $divider-opacity
+    transition: inherit
 
-  @include tools.border($divider-border...)
+    @include tools.border($divider-border...)
 
-  &--vertical
-    align-self: stretch
-    border-width: $divider-vertical-border-width
-    display: inline-flex
-    height: 100%
-    margin-left: $divider-vertical-margin-left
-    max-height: 100%
-    max-width: 0px
-    vertical-align: text-bottom
-    width: 0px
+    &--vertical
+      align-self: stretch
+      border-width: $divider-vertical-border-width
+      display: inline-flex
+      height: auto
+      margin-left: $divider-vertical-margin-left
+      max-height: 100%
+      max-width: 0px
+      vertical-align: text-bottom
+      width: 0px
 
-  &--inset
-    &:not(.v-divider--vertical)
-      max-width: $divider-inset-max-width
-      margin-inline-start: $divider-inset-margin
+    &--inset
+      &:not(.v-divider--vertical)
+        max-width: $divider-inset-max-width
+        margin-inline-start: $divider-inset-margin
 
-    &.v-divider--vertical
-      margin-bottom: $divider-vertical-inset-margin-bottom
-      margin-top: $divider-vertical-inset-margin-top
-      max-height: $divider-vertical-inset-max-height
+      &.v-divider--vertical
+        margin-bottom: $divider-vertical-inset-margin-bottom
+        margin-top: $divider-vertical-inset-margin-top
+        max-height: $divider-vertical-inset-max-height
+
+  .v-divider__content
+    padding: $divider-content-padding
+    text-wrap: nowrap
+
+    .v-divider__wrapper--vertical &
+      padding: $divider-content-vertical-padding
+
+  .v-divider__wrapper
+    display: flex
+    align-items: center
+    justify-content: center
+
+    &--vertical
+      flex-direction: column
+      height: 100%
+
+      .v-divider
+        margin: 0 auto

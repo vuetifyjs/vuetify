@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Cursor
   description: Assign a custom cursor to any element.
@@ -18,8 +17,8 @@ Utilities for controlling the cursor styling when hovering over elements.
 
 <PageFeatures />
 
-| Class | Properties | |
-| - | - | - |
+| Class | Properties |
+| - | - |
 | **cursor-auto** | cursor: auto; |
 | **cursor-default** | cursor: default; |
 | **cursor-grab** | cursor: grab; |

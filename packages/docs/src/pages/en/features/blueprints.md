@@ -7,6 +7,8 @@ related:
   - /features/global-configuration/
   - /features/theme/
   - /features/display-and-platform/
+features:
+  report: true
 ---
 
 # Blueprints
@@ -41,6 +43,12 @@ While Vuetify is built under the guise of Google's [Material Design](https://mat
 | [Material Design 1](#material-design-1) | 2014 | ✅ Available | [Specification](https://m1.material.io) |
 | [Material Design 2](#material-design-2) | 2017 | ✅ Available | [Specification](https://m2.material.io) |
 | [Material Design 3](#material-design-3) | 2022 | ✅ Available | [Specification](https://m3.material.io) |
+
+::: error
+
+Blueprints require the use of utility classes to properly function.
+
+:::
 
 ### Material Design 1
 

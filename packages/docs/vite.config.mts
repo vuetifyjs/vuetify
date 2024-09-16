@@ -15,11 +15,14 @@ import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 import Inspect from 'vite-plugin-inspect'
 import Vuetify from 'vite-plugin-vuetify'
 import basicSsl from '@vitejs/plugin-basic-ssl'
+import MagicString from 'magic-string'
 
-import { configureMarkdown, parseMeta } from './build/markdown-it'
+import { configureMarkdown } from './build/markdown-it'
 import Api from './build/api-plugin'
 import { Examples } from './build/examples-plugin'
 import { genAppMetaInfo } from './src/utils/metadata'
+import { MdiJs } from './build/mdi-js'
+import { frontmatterBuilder, getRouteMeta, scriptFixer } from './build/markdownBuilders'
 
 const resolve = (file: string) => fileURLToPath(new URL(file, import.meta.url))
 
@@ -30,7 +33,7 @@ const ssrTransformCustomDirective = () => {
   }
 }
 
-export default defineConfig(({ command, mode, ssrBuild }) => {
+export default defineConfig(({ command, mode, isSsrBuild }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
 
   let allRoutes: any[]
@@ -41,21 +44,28 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       alias: [
         { find: '@', replacement: `${resolve('src')}/` },
         { find: 'node-fetch', replacement: 'isomorphic-fetch' },
-        { find: /^vue$/, replacement: ssrBuild ? 'vue' : 'vue/dist/vue.esm-bundler.js' },
+        { find: /^vue$/, replacement: isSsrBuild ? 'vue' : 'vue/dist/vue.runtime.esm-bundler.js' },
         { find: /^pinia$/, replacement: 'pinia/dist/pinia.mjs' },
       ],
     },
     define: {
-      'process.env.NODE_ENV': mode === 'production' || ssrBuild ? '"production"' : '"development"',
+      'process.env.NODE_ENV': mode === 'production' || isSsrBuild ? '"production"' : '"development"',
       __INTLIFY_PROD_DEVTOOLS__: 'false',
     },
+    css: {
+      preprocessorOptions: {
+        sass: {
+          api: 'modern-compiler'
+        }
+      },
+    },
     build: {
-      sourcemap: mode === 'development',
+      sourcemap: true,
       modulePreload: false,
       cssCodeSplit: false,
-      minify: false,
+      minify: true,
       rollupOptions: {
-        output: ssrBuild ? { inlineDynamicImports: true } : {
+        output: isSsrBuild ? { inlineDynamicImports: true } : {
           // TODO: these options currently cause a request cascade
           // experimentalMinChunkSize: 20 * 1024,
           // manualChunks (id) {
@@ -69,15 +79,22 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         },
       },
     },
+    esbuild: {
+      lineLimit: 1000,
+    },
     plugins: [
       // https://github.com/unplugin/unplugin-auto-import
       AutoImport({
+        include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
         dirs: [
           './src/composables/**',
           './src/stores/**',
           './src/utils/**',
         ],
         imports: [
+          'vue',
+          'vue-router',
+          'pinia',
           {
             '@vuetify/one': [
               'createOne',
@@ -85,20 +102,15 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
               'useHttpStore',
               'useOneStore',
               'useUserStore',
+              'useQueueStore',
               'useSettingsStore',
               'useProductsStore',
             ],
             'lodash-es': ['camelCase', 'kebabCase', 'upperFirst'],
-            pinia: ['defineStore', 'storeToRefs'],
-            vue: [
-              'camelize', 'computed', 'h', 'mergeProps', 'nextTick',
-              'onBeforeMount', 'onBeforeUnmount', 'onMounted', 'onScopeDispose', 'onServerPrefetch',
-              'ref', 'shallowRef', 'useAttrs', 'watch', 'watchEffect'
-            ],
+            vue: ['camelize', 'mergeProps'],
             vuetify: ['useDate', 'useDisplay', 'useGoTo', 'useRtl', 'useTheme'],
             'vue-gtag-next': ['useGtag'],
             'vue-i18n': ['useI18n'],
-            'vue-router': ['onBeforeRouteLeave', 'onBeforeRouteUpdate', 'useRoute', 'useRouter'],
           }
         ],
         vueTemplate: true,
@@ -119,7 +131,9 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       // https://github.com/antfu/unplugin-vue-components
       Components({
         directoryAsNamespace: true,
-        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+        include: [/\.vue$/, /\.vue\?vue/, /\.md$/, /\.md\?vue/],
+        exclude: [],
+        excludeNames: ['AppMarkdown'],
       }),
 
       // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
@@ -132,10 +146,11 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 
       // https://github.com/antfu/vite-plugin-md
       Markdown({
-        wrapperComponent: 'unwrap-markdown',
         wrapperClasses: '',
-        headEnabled: true,
+        exposeFrontmatter: true,
+        exposeExcerpt: false,
         markdownItSetup: configureMarkdown,
+        builders: [frontmatterBuilder(), scriptFixer()]
       }),
 
       // https://github.com/hannoeru/vite-plugin-pages
@@ -143,7 +158,6 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         extensions: ['vue', 'md'],
         dirs: [
           { dir: 'src/pages', baseRoute: '' },
-          { dir: 'node_modules/.cache/api-pages', baseRoute: '' },
         ],
         extendRoute (route) {
           let [locale, category, ...rest] = route.path.split('/').slice(1)
@@ -151,10 +165,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
           const idx = route.component.toLowerCase().indexOf(locale)
           locale = ~idx ? route.component.slice(idx, idx + locale.length) : locale
 
-          const meta = {
-            layout: 'default',
-            ...parseMeta(route.component, locale),
-          }
+          const meta = getRouteMeta(route.component, locale)
 
           if (meta.disabled) {
             return { disabled: true }
@@ -163,18 +174,26 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
           return {
             ...route,
             path: '/' + [locale, category, ...rest].filter(Boolean).join('/') + '/',
-            // name: [`${category ?? meta.layout}`, ...rest].join('-'),
             meta: {
               ...meta,
               category,
-              page: rest.join('-'),
               locale,
             },
           }
         },
         onRoutesGenerated (routes) {
           allRoutes = routes.filter(route => !route.disabled)
-          return allRoutes
+          return allRoutes.map(route => ({
+            ...route,
+            meta: JSON.parse(JSON.stringify({ // remove undefined
+              category: route.meta.category,
+              emphasized: route.meta.emphasized,
+              layout: route.meta.layout,
+              locale: route.meta.locale,
+              nav: route.meta.nav,
+              title: route.meta.title,
+            }))
+          }))
         },
         importMode (filepath) {
           return [
@@ -229,11 +248,19 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
             const options = /(<script>[\w\W]*?<\/script>)/g.exec(code)
 
             if (composition && options) {
-              return code.slice(0, options.index) + code.slice(options.index + options[0].length + 1)
+              const s = new MagicString(code)
+              s.remove(options.index, options.index + options[0].length + 1)
+              return {
+                code: s.toString(),
+                map: s.generateMap({ hires: true }),
+              }
             }
           }
         }
       },
+
+      // mdi js names and aliases from `@mdi/svg`
+      MdiJs(),
 
       Vue({
         include: [/\.vue$/, /\.md$/],
@@ -248,7 +275,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       }),
 
       Vuetify({
-        autoImport: false,
+        autoImport: { labs: true },
         styles: command === 'serve' || mode === 'development' ? 'sass' : true,
       }),
 
@@ -331,9 +358,19 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       include: [
         'vue',
         'vue-router',
-      ],
-      exclude: [
-        'vue-demi',
+        'vue-instantsearch/vue3/es/src/instantsearch.js',
+        'algoliasearch',
+        'markdown-it-prism',
+        'markdown-it-link-attributes',
+        'markdown-it-attrs',
+        'markdown-it-anchor',
+        'markdown-it-header-sections',
+        'markdown-it-emoji/bare.js',
+        'markdown-it-container',
+        'markdown-it/lib/token.mjs',
+        'lodash-es',
+        'fflate',
+        '@cosmicjs/sdk',
       ],
     },
 
@@ -343,10 +380,6 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 
     server: {
       port: +(process.env.PORT ?? 8095),
-    },
-
-    preview: {
-      https: process.env.HTTPS === 'true',
     },
   }
 })

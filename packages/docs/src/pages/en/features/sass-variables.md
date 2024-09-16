@@ -7,6 +7,8 @@ related:
   - /styles/colors/
   - /features/theme/
   - /features/treeshaking/
+features:
+  report: true
 ---
 
 # SASS variables
@@ -31,16 +33,16 @@ To begin modifying Vuetify's internal variables, install the [sass](https://sass
 
 ::: tabs
 
+```bash [pnpm]
+  pnpm install -D sass-loader sass
+```
+
 ```bash [yarn]
   yarn add -D sass
 ```
 
 ```bash [npm]
   npm install -D sass-loader sass
-```
-
-```bash [pnpm]
-  pnpm install -D sass-loader sass
 ```
 
 ```bash [bun]
@@ -233,6 +235,30 @@ Color packs are handy for quickly applying a color to a component but mostly unu
 );
 ```
 
+## Enabling CSS cascade layers
+
+::: success
+This feature was introduced in [v3.6.0 (Nebula)](/getting-started/release-notes/?version=v3.6.0)
+:::
+
+[Cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) are a modern CSS feature that makes it easier to write custom styles without having to deal with specificity issues and `!important`. This will be included by default in Vuetify 4 but can optionally be used now:
+
+```scss { resource="src/styles/settings.scss" }
+@forward 'vuetify/settings' with (
+  $layers: true,
+);
+```
+
+Import order of stylesheets becomes much more important with layers enabled, `import 'vuetify/styles'` or a file containing `@use 'vuetify'` **must** be loaded *before* any components or the CSS reset will take precedence over component styles and break everything. If you have separate plugin files make sure to import vuetify's before `App.vue`.
+
+Your own styles will always<sup>*</sup> override vuetify's if you don't use `@layer` yourself, or you can specify an order for custom layers in a stylesheet loaded before vuetify.
+
+```css { resource="src/styles/layers.css" }
+@layer base, vuetify, overrides;
+```
+
+\* Layers invert `!important`, so anything trying to override an important vuetify style must also be in a layer. { class="text-caption" }
+
 ## Caveats
 
 When using sass variables, there are a few considerations to be aware of.
@@ -246,6 +272,8 @@ Only put variables, mixins, and functions in the settings file, styles should be
 
 Vuetify loads precompiled CSS by default, enabling variable customization will switch to the base SASS files instead which must be recompiled with your project.
 This can be a performance hit if you're using more than a few vuetify components, and also forces you to use the same SASS compiler version as us.
+
+Performance can be improved with Vite by using the modern sass compiler. Replace your `sass` dependency with `sass-embedded`, update vite to 5.4 or later, and set [`css.preprocessorOptions.sass.api`](https://vitejs.dev/config/shared-options#css-preprocessoroptions) to `'modern-compiler'` in the vite config.
 
 ### Symlinks
 
