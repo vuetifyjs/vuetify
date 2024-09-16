@@ -133,6 +133,7 @@ export const VDateInput = genericComponent()({
               { ...confirmEditProps }
               v-model={ model.value }
               onSave={ onSave }
+              enableActions
             >
               {{
                 default: ({ actions, model: proxyModel }) => {
