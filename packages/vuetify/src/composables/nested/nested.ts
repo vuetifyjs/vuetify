@@ -214,8 +214,8 @@ export const useNested = (props: NestedProps) => {
       }),
       register: (id, parentId, isGroup) => {
         if (nodeIds.has(id)) {
-          const path = getPath(id).join(' -> ')
-          const newPath = getPath(parentId).concat(id).join(' -> ')
+          const path = getPath(id).map(String).join(' -> ')
+          const newPath = getPath(parentId).concat(id).map(String).join(' -> ')
           consoleError(`Multiple nodes with the same ID\n\t${path}\n\t${newPath}`)
           return
         } else {
