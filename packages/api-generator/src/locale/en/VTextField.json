@@ -2,6 +2,7 @@
   "props": {
     "autofocus": "Enables autofocus.",
     "clearIcon": "Applied when using **clearable** and the input is dirty.",
+    "centerAffix": "Automatically apply **[singleLine](/api/v-field/#props-single-line)** under the hood, and vertically align **appendInner**, **prependInner**, **clearIcon**, **label**, **append**, **prepend** and **input field** in the center.",
     "counterValue": "Function returns the counter display text.",
     "flat": "Removes elevation (shadow) added to element when using the **solo** or **solo-inverted** props.",
     "persistentPlaceholder": "Forces placeholder to always be visible.",
