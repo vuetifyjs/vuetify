@@ -2,8 +2,8 @@
 import { VFileInput } from '../VFileInput'
 
 // Utilities
-import { CenteredGrid, generate } from '@test'
-import { cloneVNode, ref } from 'vue'
+import { CenteredGrid, generate, render, userEvent, screen } from '@test'
+import { cloneVNode, defineComponent, ref } from 'vue'
 
 const oneMBFile = new File([new ArrayBuffer(1021576)], '1MB file')
 const twoMBFile = new File([new ArrayBuffer(2021152)], '2MB file')
@@ -44,192 +44,147 @@ const stories = Object.fromEntries(Object.entries({
   </div>
 )]))
 
-describe.skip('VFileInput', () => {
-  it('should add file', () => {
-    cy.mount(() => (
-      <CenteredGrid width="400px">
-        <VFileInput label="foo" counter />
-      </CenteredGrid>
+describe('VFileInput', () => {
+  it('should add file', async () => {
+    const model = ref()
+    const { element } = render(() => (
+      <VFileInput v-model={ model.value } />
     ))
-      .get('.v-file-input input')
-      .attachFile('text.txt')
-      .get('.v-file-input .v-field__input')
-      .should('have.text', 'text.txt')
+
+    const input = screen.getByCSS('input')
+
+    await userEvent.upload(input, 'text.txt')
+    expect(element).toHaveTextContent('text.txt')
+    expect(model.value).toEqual(expect.objectContaining({ name: 'text.txt' }))
   })
 
-  it('should show number of files', () => {
-    cy.mount(() => (
-      <CenteredGrid width="400px">
-        <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} multiple counter />
-      </CenteredGrid>
+  it('should show number of files', async () => {
+    const { element } = render(() => (
+      <VFileInput modelValue={[oneMBFile, twoMBFile]} multiple counter />
     ))
-      .get('.v-file-input .v-input__details')
-      .should('have.text', '2 files')
+
+    expect(element).toHaveTextContent('2 files')
   })
 
-  it('should show size of files', () => {
-    cy.mount(() => (
-      <CenteredGrid width="400px">
-        <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} multiple show-size />
-      </CenteredGrid>
+  it('should show size of files', async () => {
+    const { element } = render(() => (
+      <VFileInput modelValue={[oneMBFile, twoMBFile]} multiple show-size />
     ))
-      .get('.v-file-input .v-field__input')
-      .should('have.text', '1MB file (1.0 MB), 2MB file (2.0 MB)')
+
+    expect(element).toHaveTextContent('1MB file (1.0 MB), 2MB file (2.0 MB)')
   })
 
-  it('should show total size of files in counter', () => {
-    cy.mount(() => (
-      <CenteredGrid width="400px">
-        <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} multiple counter show-size />
-      </CenteredGrid>
+  it('should show total size of files in counter', async () => {
+    const { element } = render(() => (
+      <VFileInput modelValue={[oneMBFile, twoMBFile]} multiple counter show-size />
     ))
-      .get('.v-file-input .v-input__details')
-      .should('have.text', '2 files (3.0 MB in total)')
+
+    expect(element).toHaveTextContent('2 files (3.0 MB in total)')
   })
 
-  it('should clear input', () => {
+  it('should clear input', async () => {
     const model = ref([oneMBFile, twoMBFile])
-    cy.mount(() => (
-      <CenteredGrid width="400px">
-        <VFileInput label="foo" v-model={ model.value } />
-      </CenteredGrid>
+    const { element } = render(() => (
+      <VFileInput v-model={ model.value } multiple />
     ))
-      .get('.v-field__clearable > .v-icon')
-      .click()
-    cy.get('.v-input input')
-      .should('have.value', '')
+
+    await userEvent.click(screen.getByLabelText(/clear/i))
+
+    expect(element).not.toHaveTextContent('1MB file, 2MB file')
+    expect(model.value).toHaveLength(0)
+    expect(screen.getByCSS('input')).toHaveValue('')
   })
 
-  it('should support removing clearable icon', () => {
-    cy.mount(() => (
-      <CenteredGrid width="400px">
-        <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} clearable={ false } />
-      </CenteredGrid>
+  it('should support removing clearable icon', async () => {
+    render(() => (
+      <VFileInput modelValue={[oneMBFile, twoMBFile]} clearable={ false } />
     ))
-      .get('.v-field__append-inner > .v-btn')
-      .should('not.exist')
+
+    expect(screen.queryAllByLabelText(/clear/i)).toHaveLength(0)
   })
 
-  it('should be disabled', () => {
-    cy.mount(() => (
-      <CenteredGrid width="400px">
-        <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} disabled />
-      </CenteredGrid>
+  it('should be disabled', async () => {
+    render(() => (
+      <VFileInput modelValue={[oneMBFile, twoMBFile]} disabled />
     ))
-      .get('.v-file-input')
-      .should('have.class', 'v-input--disabled')
-      .get('.v-file-input input')
-      .should('have.attr', 'disabled')
+    expect(screen.getByCSS('input')).toBeDisabled()
   })
 
-  it('should support no prepend icon', () => {
-    cy.mount(() => (
-      <CenteredGrid width="400px">
-        <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} prependIcon="" />
-      </CenteredGrid>
+  it('should support no prepend icon', async () => {
+    render(() => (
+      <VFileInput modelValue={[oneMBFile, twoMBFile]} prependIcon="" />
     ))
-      .get('.v-file-input .v-input__prepend')
-      .should('not.exist')
+    expect(screen.queryAllByCSS('.v-file-input .v-input__prepend')).toHaveLength(0)
   })
 
   it('should support chips', () => {
-    cy.mount(() => (
-      <CenteredGrid width="400px">
-        <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} chips />
-      </CenteredGrid>
+    render(() => (
+      <VFileInput modelValue={[oneMBFile, twoMBFile]} chips />
     ))
-      .get('.v-file-input .v-chip')
-      .should('have.length', 2)
+    expect(screen.getAllByCSS('.v-file-input .v-chip')).toHaveLength(2)
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/8167
-  it('should not emit change event when input is blurred', () => {
-    const change = cy.spy().as('change')
-    const update = cy.spy().as('update')
-    cy.mount(() => (
-      <VFileInput label="foo" />
-    ), {
-      props: {
-        onChange: change,
-        'onUpdate:modelValue': update,
-      },
-    })
-      .get('.v-file-input input').as('input')
-      .focus()
-    cy.get('@input').attachFile('text.txt')
-    cy.get('@input').blur()
-    cy.then(() => {
-      expect(change).to.be.calledOnce
-      expect(update).to.be.calledOnce
-    })
+  it('should not emit change event when input is blurred', async () => {
+    const change = vi.fn()
+    const update = vi.fn()
+    render(() => (
+      <VFileInput onChange={ change } onUpdate:modelValue={ update } />
+    ))
+
+    const input = screen.getByCSS('input')
+    input.focus()
+    await userEvent.upload(input, 'text.txt')
+    await userEvent.tab()
+
+    expect(change).toHaveBeenCalledTimes(1)
+    expect(update).toHaveBeenCalledTimes(1)
   })
 
   it('should put extra attributes on input', () => {
-    cy.mount(() => (
-      <CenteredGrid width="400px">
-        <VFileInput label="foo" accept="image/*" />
-      </CenteredGrid>
+    render(() => (
+      <VFileInput label="foo" accept="image/*" />
     ))
-      .get('.v-file-input input')
-      .should('have.attr', 'accept', 'image/*')
+    expect(screen.getByCSS('input')).toHaveAttribute('accept', 'image/*')
   })
 
-  /**
-   * https://github.com/vuetifyjs/vuetify/issues/16486
-   */
-  it('should reset the underlying HTMLInput when model is controlled input', () => {
-    function TestWrapper () {
-      const files = ref<File[]>([])
-      const onReset = () => {
-        files.value = []
+  // https://github.com/vuetifyjs/vuetify/issues/16486
+  it('should reset the underlying HTMLInput when model is controlled input', async () => {
+    render(defineComponent({
+      setup () {
+        const files = ref<File[]>([])
+        const onReset = () => {
+          files.value = []
+        }
+        return () => (
+          <CenteredGrid width="400px">
+            <VFileInput modelValue={ files.value } />
+            <button type="button" onClick={ onReset }>Reset Model Value</button>
+          </CenteredGrid>
+        )
       }
-      return (
-        <CenteredGrid width="400px">
-          <VFileInput modelValue={ files.value } />
-          <button onClick={ onReset }>Reset Model Value</button>
-        </CenteredGrid>
-      )
-    }
+    }))
 
-    cy.mount(() => (
-      <TestWrapper />
-    ))
-      .get('.v-file-input input').as('input')
-      .should($res => {
-        const input = $res[0] as HTMLInputElement
-        expect(input.files).to.have.length(0)
-      })
+    const input = screen.getByCSS('input') as HTMLInputElement
+    expect(input.files).toHaveLength(0)
+
     // add file
-    cy.get('@input').attachFile('text.txt')
-      .should($res => {
-        const input = $res[0] as HTMLInputElement
-        expect(input.files).to.have.length(1)
-      })
-    // reset input from wrapper/parent component
-    cy.get('button').click()
-    cy.get('@input')
-      .should($res => {
-        const input = $res[0] as HTMLInputElement
-        expect(input.files).to.have.length(0)
-      })
-      // add same file again
-      .attachFile('text.txt')
-      .should($res => {
-        const input = $res[0] as HTMLInputElement
-        expect(input.files).to.have.length(1)
-      })
-    // reset input from wrapper/parent component
-    cy.get('button').click()
-    cy.get('@input')
-      .should($res => {
-        const input = $res[0] as HTMLInputElement
-        expect(input.files).to.have.length(0)
-      })
-  })
-})
+    await userEvent.upload(input, 'text.txt')
+    expect(input.files).toHaveLength(1)
 
-// eslint-disable-next-line vitest/no-identical-title
-describe('VFileInput', () => {
+    // reset input from wrapper/parent component
+    await userEvent.click(screen.getByText(/reset/i))
+    expect(input.files).toHaveLength(0)
+
+    // add same file again
+    await userEvent.upload(input, 'text.txt')
+    expect(input.files).toHaveLength(1)
+
+    // reset input from wrapper/parent component
+    await userEvent.click(screen.getByText(/reset/i))
+    expect(input.files).toHaveLength(0)
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })
