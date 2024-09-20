@@ -1,7 +1,7 @@
 import { VTextField } from '../VTextField'
 
 // Utilities
-import { generate } from '@test'
+import { generate, render, userEvent } from '@test'
 import { cloneVNode } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
@@ -27,69 +27,69 @@ const stories = Object.fromEntries(Object.entries({
   </div>
 )]))
 
-describe.skip('VTextField', () => {
-  it('validates input on mount', () => {
-    const rule = cy.spy(v => v?.length > 4 || 'Error!').as('rule')
+describe('VTextField', () => {
+  it('validates input on mount', async () => {
+    const rule = vi.fn(v => v?.length > 4 || 'Error!')
 
-    cy.mount(() => (
-      <VTextField rules={[rule]}></VTextField>
+    const { element } = render(() => (
+      <VTextField rules={[rule]} />
     ))
 
-    cy.get('.v-text-field').should('not.have.class', 'v-input--error')
-    cy.get('@rule').should('have.been.calledOnceWith', undefined)
-    cy.get('.v-text-field input').type('Hello')
-    cy.get('@rule').should('to.be.callCount', 6)
-    cy.get('.v-text-field').should('not.have.class', 'v-input--error')
+    expect(element).not.toHaveClass('v-input--error')
+    expect(rule).toHaveBeenCalledOnce()
+    expect(rule).toHaveBeenCalledWith(undefined)
+    await userEvent.click(element)
+    await userEvent.keyboard('Hello')
+    expect(rule).toHaveBeenCalledTimes(6)
+    expect(element).not.toHaveClass('v-input--error')
   })
 
-  it('does not validate on mount when using validate-on lazy', () => {
-    const rule = cy.spy(v => v?.length > 5 || 'Error!').as('rule')
+  it('does not validate on mount when using validate-on lazy', async () => {
+    const rule = vi.fn(v => v?.length > 5 || 'Error!')
 
-    cy.mount(() => (
-      <VTextField label="Label" validate-on="lazy" rules={[rule]} />
+    const { element } = render(() => (
+      <VTextField rules={[rule]} validate-on="lazy" />
     ))
 
-    cy.get('.v-text-field').should('not.have.class', 'v-input--error')
-    cy.get('@rule').should('not.have.been.called')
-    cy.get('.v-text-field input').type('Hello')
-    cy.get('@rule').should('to.be.callCount', 5)
-    cy.get('.v-text-field').should('have.class', 'v-input--error')
-    cy.get('.v-messages').should('exist').invoke('text').should('equal', 'Error!')
+    expect(element).not.toHaveClass('v-input--error')
+    expect(rule).not.toHaveBeenCalled()
+    await userEvent.click(element)
+    await userEvent.keyboard('Hello')
+    expect(rule).toHaveBeenCalledTimes(5)
+    expect(element).toHaveClass('v-input--error')
+    expect(element).toHaveTextContent('Error!')
   })
 
-  it('handles multiple options in validate-on prop', () => {
-    const rule = cy.spy(v => v?.length > 5 || 'Error!').as('rule')
+  it('handles multiple options in validate-on prop', async () => {
+    const rule = vi.fn(v => v?.length > 5 || 'Error!')
 
-    cy.mount(() => (
-      <VTextField label="Label" validate-on="blur lazy" rules={[rule]} />
+    const { element } = render(() => (
+      <VTextField validate-on="blur lazy" rules={[rule]} />
     ))
 
-    cy.get('.v-text-field').should('not.have.class', 'v-input--error')
-    cy.get('@rule').should('not.have.been.called')
+    expect(element).not.toHaveClass('v-input--error')
+    expect(rule).not.toHaveBeenCalled()
 
-    cy.get('.v-text-field input').type('Hello')
+    await userEvent.click(element)
+    await userEvent.keyboard('Hello')
+    expect(element).not.toHaveClass('v-input--error')
+    expect(rule).not.toHaveBeenCalled()
 
-    cy.get('.v-text-field').should('not.have.class', 'v-input--error')
-    cy.get('@rule').should('not.have.been.called')
-
-    cy.get('.v-text-field input').blur()
-
-    cy.get('@rule').should('have.been.calledOnce')
-    cy.get('.v-text-field').should('have.class', 'v-input--error')
-    cy.get('.v-messages').should('exist').invoke('text').should('equal', 'Error!')
+    await userEvent.click(document.body)
+    expect(rule).toHaveBeenCalledOnce()
+    expect(element).toHaveClass('v-input--error')
+    expect(element).toHaveTextContent('Error!')
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/15231
-  it('renders details if using hide-details="auto" and counter prop', () => {
-    cy.mount(() => (
+  it('renders details if using hide-details="auto" and counter prop', async () => {
+    const { element } = render(() => (
       <VTextField hide-details="auto" counter></VTextField>
     ))
-      .get('.v-input__details').should('be.visible')
+    await userEvent.click(element)
+    expect(element).toHaveTextContent('0')
   })
-})
 
-// eslint-disable-next-line vitest/no-identical-title
-describe('VTextField', () => {
   describe('Showcase', () => {
     generate({ stories })
   })
