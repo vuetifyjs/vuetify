@@ -508,15 +508,15 @@ describe('VSelect', () => {
 
   it('should not open menu when closing a chip', async () => {
     const { element } = render(() => (
-        <VSelect
-          chips
-          closable-chips
-          items={['foo', 'bar']}
-          label="Select"
-          modelValue={['foo', 'bar']}
-          multiple
-        />
-      ))
+      <VSelect
+        chips
+        closable-chips
+        items={['foo', 'bar']}
+        label="Select"
+        modelValue={['foo', 'bar']}
+        multiple
+      />
+    ))
 
     await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
     await userEvent.click(screen.getAllByTestId('close-chip')[1])

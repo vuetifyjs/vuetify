@@ -32,6 +32,7 @@ export default defineWorkspace([
         providerOptions: {
           capabilities: {
             'goog:chromeOptions': {
+              // @ts-ignore
               args: ['--start-maximized', process.env.BAIL && '--auto-open-devtools-for-tabs'].filter(v => !!v),
             },
           },

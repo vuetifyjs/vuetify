@@ -2,7 +2,7 @@
 import { VFileInput } from '../VFileInput'
 
 // Utilities
-import { CenteredGrid, generate, render, userEvent, screen } from '@test'
+import { CenteredGrid, generate, render, screen, userEvent } from '@test'
 import { cloneVNode, defineComponent, ref } from 'vue'
 
 const oneMBFile = new File([new ArrayBuffer(1021576)], '1MB file')
@@ -162,7 +162,7 @@ describe('VFileInput', () => {
             <button type="button" onClick={ onReset }>Reset Model Value</button>
           </CenteredGrid>
         )
-      }
+      },
     }))
 
     const input = screen.getByCSS('input') as HTMLInputElement

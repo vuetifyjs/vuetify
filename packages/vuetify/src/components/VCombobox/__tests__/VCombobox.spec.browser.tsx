@@ -3,7 +3,7 @@ import { VCombobox } from '../VCombobox'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { generate, render, screen, waitAnimationFrame, userEvent, waitIdle } from '@test'
+import { generate, render, screen, userEvent, waitAnimationFrame, waitIdle } from '@test'
 import { cloneVNode, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
@@ -101,16 +101,16 @@ describe('VCombobox', () => {
       await userEvent.click(element)
       await userEvent.keyboard('{Control>}a{/Ctrl}{Backspace}')
       await userEvent.keyboard('Item 2')
-      expect(model.value).toEqual('Item 2')
-      expect(search.value).toEqual('Item 2')
+      expect(model.value).toBe('Item 2')
+      expect(search.value).toBe('Item 2')
       expect(screen.getByRole('textbox')).toHaveValue('Item 2')
       expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent('Item 2')
 
       await userEvent.click(element)
       await userEvent.keyboard('{Control>}a{/Ctrl}{Backspace}')
       await userEvent.keyboard('item3')
-      expect(model.value).toEqual('item3')
-      expect(search.value).toEqual('item3')
+      expect(model.value).toBe('item3')
+      expect(search.value).toBe('item3')
       expect(screen.getByRole('textbox')).toHaveValue('item3')
       expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent('item3')
     })
@@ -238,7 +238,7 @@ describe('VCombobox', () => {
     })
   })
 
-  describe('prefilled data', async () => {
+  describe('prefilled data', () => {
     it('should work with array of strings when using multiple', async () => {
       const items = ref(['California', 'Colorado', 'Florida'])
 
@@ -494,7 +494,7 @@ describe('VCombobox', () => {
     expect(input).toBeVisible()
 
     await rerender({ modelValue: 'Foobar' })
-    await expect.poll(() =>input).not.toHaveAttribute('placeholder')
+    await expect.poll(() => input).not.toHaveAttribute('placeholder')
 
     await rerender({ multiple: true, modelValue: ['Foobar'] })
     await expect.poll(() => input).not.toHaveAttribute('placeholder')
@@ -640,7 +640,7 @@ describe('VCombobox', () => {
     ))
 
     await userEvent.click(screen.getByTestId('close-chip'))
-    expect(selectedItem.value).toBeNull
+    expect(selectedItem.value).toBeNull()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/18556
