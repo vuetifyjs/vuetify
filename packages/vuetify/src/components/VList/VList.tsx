@@ -38,7 +38,7 @@ function isPrimitive (value: unknown): value is string | number | boolean {
   return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean'
 }
 
-function transformItem (props: ItemProps & { itemType: string }, item: any): InternalListItem {
+function transformItem (props: ItemProps & { itemType?: string }, item: any): InternalListItem {
   const type = getPropertyFromItem(item, props.itemType, 'item')
   const title = isPrimitive(item) ? item : getPropertyFromItem(item, props.itemTitle)
   const value = getPropertyFromItem(item, props.itemValue, undefined)
@@ -63,7 +63,7 @@ function transformItem (props: ItemProps & { itemType: string }, item: any): Int
   }
 }
 
-function transformItems (props: ItemProps & { itemType: string }, items: (string | object)[]) {
+function transformItems (props: ItemProps & { itemType?: string }, items: (string | object)[]) {
   const array: InternalListItem[] = []
 
   for (const item of items) {
@@ -73,7 +73,7 @@ function transformItems (props: ItemProps & { itemType: string }, items: (string
   return array
 }
 
-export function useListItems (props: ItemProps & { itemType: string }) {
+export function useListItems (props: ItemProps & { itemType?: string }) {
   const items = computed(() => transformItems(props, props.items))
 
   return { items }
@@ -162,7 +162,7 @@ export const VList = genericComponent<new <
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const { children, open, parents, select } = useNested(props)
+    const { children, open, parents, select, getPath } = useNested(props)
     const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
     const activeColor = toRef(props, 'activeColor')
     const baseColor = toRef(props, 'baseColor')
@@ -288,6 +288,7 @@ export const VList = genericComponent<new <
       focus,
       children,
       parents,
+      getPath,
     }
   },
 })

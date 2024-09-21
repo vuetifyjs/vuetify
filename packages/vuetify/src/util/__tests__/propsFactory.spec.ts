@@ -1,7 +1,6 @@
-import { propsFactory } from '../propsFactory'
-
 // Utilities
-import { describe, expect, it } from '@jest/globals'
+import { expect, it } from 'vitest'
+import { propsFactory } from '../propsFactory'
 
 describe('propsFactory', () => {
   it.each([

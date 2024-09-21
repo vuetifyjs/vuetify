@@ -1,5 +1,5 @@
 // Utilities
-import { describe, expect, it } from '@jest/globals'
+import { expect, it } from 'vitest'
 import { useDimension } from '../dimensions'
 
 // Types

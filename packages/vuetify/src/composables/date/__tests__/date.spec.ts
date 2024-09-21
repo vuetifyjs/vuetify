@@ -2,7 +2,7 @@
 import { getWeek } from '../date'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
+import { expect, it } from 'vitest'
 import { VuetifyDateAdapter } from '../adapters/vuetify'
 
 // Types

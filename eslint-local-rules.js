@@ -5,7 +5,7 @@ module.exports = {
   'no-components-index': require('./scripts/rules/no-components-index'),
   'jsx-condition-key': require('./scripts/rules/jsx-condition-key'),
   'jsx-curly-spacing': require('./scripts/rules/jsx-curly-spacing'),
-  'jest-global-imports': require('./scripts/rules/jest-global-imports'),
+  'vitest-global-imports': require('./scripts/rules/vitest-global-imports'),
   'cypress-types-reference': require('./scripts/rules/cypress-types-reference'),
   'sort-imports': require('./scripts/rules/sort-imports'),
   'no-nullish-coalescing-in-condition': require('./scripts/rules/no-nullish-coalescing-in-condition'),

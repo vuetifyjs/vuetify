@@ -1,8 +1,8 @@
 import { VTextarea } from '../VTextarea'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
+import { describe, expect, it, vi } from 'vitest'
 import { createVuetify } from '@/framework'
 
 describe('VTextarea', () => {
@@ -45,10 +45,10 @@ describe('VTextarea', () => {
   })
 
   it('has affixed icons with actions', () => {
-    const onClickPrepend = jest.fn()
-    const onClickPrependInner = jest.fn()
-    const onClickAppendInner = jest.fn()
-    const onClickAppend = jest.fn()
+    const onClickPrepend = vi.fn()
+    const onClickPrependInner = vi.fn()
+    const onClickAppendInner = vi.fn()
+    const onClickAppend = vi.fn()
 
     const wrapper = mountFunction(
       <VTextarea

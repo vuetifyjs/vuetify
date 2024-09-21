@@ -8,8 +8,6 @@
 @include tools.layer('components')
   /* region INPUT */
   .v-field
-    --v-theme-overlay-multiplier: 1
-
     display: grid
     grid-template-areas: "prepend-inner field clear append-inner"
     grid-template-columns: min-content minmax(0, 1fr) min-content min-content
@@ -22,16 +20,17 @@
     grid-area: control
     position: relative
 
-    &--disabled
-      opacity: var(--v-disabled-opacity)
-      pointer-events: none
-
+    --v-theme-overlay-multiplier: 1
     --v-field-padding-start: #{$field-control-padding-start}
     --v-field-padding-end: #{$field-control-padding-end}
     --v-field-padding-top: #{$field-control-padding-top}
     --v-field-padding-bottom: #{$field-control-padding-bottom}
     --v-field-input-padding-top: #{$field-input-padding-top}
     --v-field-input-padding-bottom: #{$field-input-padding-bottom}
+
+    &--disabled
+      opacity: var(--v-disabled-opacity)
+      pointer-events: none
 
     .v-chip
       --v-chip-height: #{$field-chip-height}
@@ -50,14 +49,12 @@
       background: $field-control-solo-background
       border-color: transparent
       color: $field-control-solo-color
-
       @include tools.elevation($field-control-solo-elevation)
 
     &--variant-solo-inverted
       background: $field-control-solo-background
       border-color: transparent
       color: $field-control-solo-inverted-color
-
       @include tools.elevation($field-control-solo-elevation)
 
       &.v-field--focused

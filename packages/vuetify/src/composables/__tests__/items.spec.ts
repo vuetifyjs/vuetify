@@ -2,7 +2,7 @@
 import { useItems } from '../list-items'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
+import { expect, it } from 'vitest'
 import { deepEqual } from '@/util'
 
 describe('items', () => {

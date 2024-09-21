@@ -59,19 +59,19 @@ jobs:
         env:
           SCOPES: ${{ matrix.scopes }}
 
-  test-jest:
-    name: Test (Jest)
+  test-unit:
+    name: Test (Unit)
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/pnpm-install
-      - run: pnpm run test:coverage -i
+      - run: pnpm run test
         working-directory: ./packages/vuetify
 
-  test-cypress:
-    name: Test (Cypress)
+  test-e2e:
+    name: Test (e2e)
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
@@ -94,7 +94,7 @@ jobs:
           if-no-files-found: ignore
 
   deploy:
-    needs: [lint, test-jest, test-cypress, build-vuetify]
+    needs: [lint, test-unit, test-e2e, build-vuetify]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
     steps:
@@ -152,7 +152,7 @@ jobs:
           path: packages/docs/dist
 
   publish-docs:
-    needs: [lint, test-jest, build-docs]
+    needs: [lint, test-unit, build-docs]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
     steps:

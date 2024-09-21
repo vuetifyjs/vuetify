@@ -43,6 +43,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
 
   emits: {
     'update:modelValue': (value: boolean) => true,
+    afterEnter: () => true,
     afterLeave: () => true,
   },
 
@@ -89,6 +90,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
     }
 
     function onAfterEnter () {
+      emit('afterEnter')
       if (overlay.value?.contentEl && !overlay.value.contentEl.contains(document.activeElement)) {
         overlay.value.contentEl.focus({ preventScroll: true })
       }
@@ -109,7 +111,6 @@ export const VDialog = genericComponent<OverlaySlots>()({
       const overlayProps = VOverlay.filterProps(props)
       const activatorProps = mergeProps({
         'aria-haspopup': 'dialog',
-        'aria-expanded': String(isActive.value),
       }, props.activatorProps)
       const contentProps = mergeProps({
         tabindex: -1,

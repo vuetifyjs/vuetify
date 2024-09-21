@@ -12,7 +12,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 // import { keyCodes } from '../../../util/helpers'
-// import { waitAnimationFrame } from '../../../../test'
+// import { waitAnimationFrame } from '@/../test'
 
 describe.skip('VMenu.ts', () => {
   type Instance = InstanceType<typeof VMenu>

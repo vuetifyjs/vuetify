@@ -1,15 +1,17 @@
+/// <reference types="vitest/jsdom" />
+
 // Directives
 import Scroll from '../'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
+import { expect } from 'vitest'
 import {
   createApp,
   defineComponent,
   h,
   withDirectives,
 } from 'vue'
-import { scrollWindow } from '../../../../test'
+import { scrollWindow } from '@/../test'
 
 describe('v-scroll', () => {
   const instance = {
@@ -25,9 +27,9 @@ describe('v-scroll', () => {
 
   it('shoud bind event on inserted (selector)', () => {
     const value = () => {}
-    const targetElement = { addEventListener: jest.fn(), removeEventListener: jest.fn() } as any as Element
+    const targetElement = { addEventListener: vi.fn(), removeEventListener: vi.fn() } as any as Element
     const el = {} as HTMLElement
-    const querySelector = jest.spyOn(window.document, 'querySelector').mockImplementation(
+    const querySelector = vi.spyOn(window.document, 'querySelector').mockImplementation(
       selector => selector === '.selector' ? targetElement : null
     )
 
@@ -46,8 +48,8 @@ describe('v-scroll', () => {
 
   it('shoud bind event on inserted (window)', () => {
     const value = () => {}
-    const addListener = jest.spyOn(window, 'addEventListener')
-    const removeListener = jest.spyOn(window, 'removeEventListener')
+    const addListener = vi.spyOn(window, 'addEventListener')
+    const removeListener = vi.spyOn(window, 'removeEventListener')
     const el = {}
 
     Scroll.mounted(el as HTMLElement, { value, instance } as any)
@@ -62,8 +64,8 @@ describe('v-scroll', () => {
   it('shoud rebind event on updated', () => {
     const value1 = () => {}
     const value2 = () => {}
-    const addListener = jest.spyOn(window, 'addEventListener')
-    const removeListener = jest.spyOn(window, 'removeEventListener')
+    const addListener = vi.spyOn(window, 'addEventListener')
+    const removeListener = vi.spyOn(window, 'removeEventListener')
     const el = {}
 
     Scroll.mounted(el as HTMLElement, { value: value1, instance } as any)
@@ -87,7 +89,7 @@ describe('v-scroll', () => {
   })
 
   it('should call the callback on scroll', async () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
 
     mountFunction(event => callback(event.target))
 
@@ -95,6 +97,6 @@ describe('v-scroll', () => {
 
     await scrollWindow(400)
 
-    expect(callback).toHaveBeenCalledWith(window)
+    expect(callback).toHaveBeenCalledWith(jsdom.window)
   })
 })

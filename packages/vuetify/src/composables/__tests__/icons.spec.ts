@@ -2,8 +2,8 @@
 import { useIcon } from '../icons'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
+import { expect, it } from 'vitest'
 import { defineComponent, toRef } from 'vue'
 import { createVuetify } from '@/framework'
 
