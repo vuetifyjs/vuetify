@@ -208,7 +208,7 @@ describe('VBtn', () => {
       expect(wrapper.element).toHaveClass('v-btn--disabled')
 
       await wrapper.setProps({ disabled: false })
-      expect.poll(() => wrapper.element).not.toHaveClass('v-btn--disabled')
+      expect.poll(() => wrapper.element as HTMLElement).not.toHaveClass('v-btn--disabled')
     })
 
     it.skip('activeClass', async () => {
@@ -231,7 +231,7 @@ describe('VBtn', () => {
 
       await wrapper.setProps({ variant: 'default' })
 
-      expect.poll(() => wrapper.element).not.toHaveClass('v-btn--variant-plain')
+      expect.poll(() => wrapper.element as HTMLElement).not.toHaveClass('v-btn--variant-plain')
     })
   })
 

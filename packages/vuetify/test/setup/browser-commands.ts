@@ -60,7 +60,11 @@ export async function percySnapshot (ctx: BrowserCommandContext, name: string, o
   }
 }
 
-export const commands = { drag, scroll, isDisplayedInViewport, percySnapshot }
+export async function waitStable (ctx: BrowserCommandContext, el: any) {
+  return ctx.browser.$(el).waitForStable()
+}
+
+export const commands = { drag, scroll, isDisplayedInViewport, percySnapshot, waitStable }
 
 export type CustomCommands = {
   [k in keyof typeof commands]: typeof commands[k] extends (ctx: any, ...args: infer A) => any
