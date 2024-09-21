@@ -1,10 +1,12 @@
 // Utilities
 import './globals.d'
 import { render as _render } from '@testing-library/vue'
-import { createVuetify } from '@/framework.ts'
-import { afterEach } from 'vitest'
-import { mergeDeep } from '@/util'
-import { aliases } from '@/iconsets/mdi-svg'
+import { createVuetify } from '../src/framework'
+import { mergeDeep } from '../src/util'
+import { aliases } from '../src/iconsets/mdi-svg'
+
+import type { RenderOptions, RenderResult } from '@testing-library/vue'
+import type { VuetifyOptions } from '../src/framework'
 
 export { userEvent } from '@vitest/browser/context'
 export { screen } from '@testing-library/vue'
@@ -51,13 +53,12 @@ export const scroll = (options: ScrollToOptions, el: Element | Window = window) 
   ])
 }
 
-let vuetify: ReturnType<typeof createVuetify> | null
-afterEach(() => {
-  vuetify = null
-})
-
-export const render = (function render (component, options) {
-  vuetify = vuetify ?? (vuetify = createVuetify({ icons: { aliases } }))
+export function render<C> (
+  component: C,
+  options?: RenderOptions<C> | null,
+  vuetifyOptions?: VuetifyOptions
+): RenderResult {
+  const vuetify = createVuetify(mergeDeep({ icons: { aliases } }, vuetifyOptions))
 
   const defaultOptions = {
     global: {
@@ -72,4 +73,4 @@ export const render = (function render (component, options) {
   const mountOptions = mergeDeep(defaultOptions, options!, (a, b) => a.concat(b))
 
   return _render(component, mountOptions)
-}) as typeof _render
+}
