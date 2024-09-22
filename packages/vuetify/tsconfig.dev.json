@@ -5,8 +5,8 @@
     "dev",
     "cypress",
     "cypress.config.ts",
-    "vite.config.mts",
-    "vitest.config.mts"
+    "vite.config.ts",
+    "vitest.config.ts"
   ],
   "compilerOptions": {
     "allowJs": true

@@ -5,7 +5,7 @@
     "outDir": "./lib",
     "plugins": [
       { "transform": "typescript-transform-paths", "afterDeclarations": true },
-      { "transform":  "./build/remove-dts-styles.ts", "afterDeclarations": true },
+      { "transform":  "./build/remove-dts-styles.cts", "afterDeclarations": true },
     ],
   },
 }

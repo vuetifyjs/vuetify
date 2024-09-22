@@ -1,7 +1,7 @@
 import type ts from 'typescript'
 import type { TransformerExtras, PluginConfig } from 'ts-patch'
 
-export default function (program: ts.Program, pluginConfig: PluginConfig, { ts: tsc }: TransformerExtras) {
+module.exports = function (program: ts.Program, pluginConfig: PluginConfig, { ts: tsc }: TransformerExtras) {
   return (ctx: ts.TransformationContext) => {
     return (sourceFile: ts.SourceFile) => {
       function visit(node: ts.Node) {
