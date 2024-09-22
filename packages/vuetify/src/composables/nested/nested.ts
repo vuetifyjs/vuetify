@@ -184,7 +184,7 @@ export const useNested = (props: NestedProps) => {
     let parent: unknown = id
 
     while (parent != null) {
-      path.unshift(toRaw(parent))
+      path.unshift(parent)
       parent = parents.value.get(parent)
     }
 

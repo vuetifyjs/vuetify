@@ -94,7 +94,7 @@ export const VTreeview = genericComponent<new <T>(
         return [
           ...getPath(itemVal),
           ...getChildren(itemVal),
-        ]
+        ].map(toRaw)
       }))
     })
 
