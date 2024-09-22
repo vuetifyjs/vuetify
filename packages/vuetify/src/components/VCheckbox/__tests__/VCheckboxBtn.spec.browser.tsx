@@ -42,7 +42,7 @@ describe('VCheckboxBtn', () => {
     ))
 
     const input = screen.getByCSS('input')
-    expect(input).toHaveAttribute('aria-checked', 'mixed')
+    expect(input).toBePartiallyChecked()
   })
 
   it('should not update input checked state when it is readonly', async () => {
