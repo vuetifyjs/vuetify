@@ -2,9 +2,10 @@
 
 // Components
 import { VTreeview } from '../VTreeview'
+import { VTextField } from '@/components/VTextField'
 
 // Utilities
-import { ref } from 'vue'
+import { ref, shallowRef } from 'vue'
 
 function compareItemObject (a: any, b: any) {
   return a.id - b.id
@@ -300,6 +301,22 @@ describe('VTreeview', () => {
 
   describe('return-object', () => {
     describe('open', () => {
+      it('open and collapse should both work', () => {
+        cy.mount(() => (
+          <>
+            <VTreeview
+              items={ items.value }
+              item-title="title"
+              item-value="id"
+              return-object
+            />
+          </>
+        ))
+          .get('.v-list-item-action .v-btn').eq(0).click()
+          .get('.v-list-group__items').eq(0).should('be.visible')
+          .get('.v-list-item-action .v-btn').eq(0).click()
+          .get('.v-list-group__items').eq(0).should('not.be.visible')
+      })
       it('opan-all should work', () => {
         cy.mount(() => (
           <>
@@ -831,6 +848,106 @@ describe('VTreeview', () => {
               { id: 5, title: 'All about app : dir' },
             ].sort(compareItemObject))
           })
+      })
+    })
+    describe('search', () => {
+      // https://github.com/vuetifyjs/vuetify/issues/20488
+      it('should filter items based on the search text and return the correct result', () => {
+        const items = ref([
+          {
+            id: 1,
+            title: 'Vuetify Human Resources',
+            children: [
+              {
+                id: 2,
+                title: 'Core team',
+                children: [
+                  {
+                    id: 201,
+                    title: 'John',
+                  },
+                  {
+                    id: 202,
+                    title: 'Kael',
+                  },
+                  {
+                    id: 203,
+                    title: 'Nekosaur',
+                  },
+                  {
+                    id: 204,
+                    title: 'Jacek',
+                  },
+                  {
+                    id: 205,
+                    title: 'Andrew',
+                  },
+                ],
+              },
+              {
+                id: 3,
+                title: 'Administrators',
+                children: [
+                  {
+                    id: 301,
+                    title: 'Mike',
+                  },
+                  {
+                    id: 302,
+                    title: 'Hunt',
+                  },
+                ],
+              },
+              {
+                id: 4,
+                title: 'Contributors',
+                children: [
+                  {
+                    id: 401,
+                    title: 'Phlow',
+                  },
+                  {
+                    id: 402,
+                    title: 'Brandon',
+                  },
+                  {
+                    id: 403,
+                    title: 'Sean',
+                  },
+                ],
+              },
+            ],
+          },
+        ])
+        const search = shallowRef('')
+
+        function filterFn (value: string, search: string) {
+          return value.toLowerCase().includes(search.toLowerCase())
+        }
+        cy.mount(() => (
+          <>
+            <VTextField v-model={ search.value } />
+            <VTreeview
+              customFilter={ filterFn }
+              search={ search.value }
+              items={ items.value }
+              item-title="title"
+              item-value="id"
+              open-all
+              return-object
+            />
+          </>
+        ))
+          .get('.v-text-field input')
+          .type('j')
+          .get('.v-treeview-item').eq(0).should('be.visible') // { id: 1, title: 'Vuetify Human Resources' }
+          .get('.v-treeview-item').eq(1).should('be.visible') // { id: 2, title: 'Core team' }
+          .get('.v-treeview-item').eq(2).should('be.visible') // { id: 201, title: 'John' }
+          .get('.v-treeview-item').eq(3).should('not.be.visible')
+          .get('.v-treeview-item').eq(4).should('not.be.visible')
+          .get('.v-treeview-item').eq(5).should('be.visible') // { id: 204, title: 'Jacek' }
+          .get('.v-treeview-item').eq(9).should('not.be.visible')
+          .get('.v-treeview-item').eq(13).should('not.be.visible')
       })
     })
   })

@@ -241,8 +241,8 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4(vue@3.4.27(typescript@5.5.4))
       '@vuetify/one':
-        specifier: ^1.9.2
-        version: 1.9.2(@mdi/js@7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i))(lodash-es@4.17.21)(vue@3.4.27(typescript@5.5.4))(vuetify@packages+vuetify)
+        specifier: ^1.9.5
+        version: 1.9.5(@mdi/js@7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i))(lodash-es@4.17.21)(vue@3.4.27(typescript@5.5.4))(vuetify@packages+vuetify)
       algoliasearch:
         specifier: ^4.23.3
         version: 4.23.3
@@ -2965,8 +2965,8 @@ packages:
       vue: ^3.0.0
       vuetify: ^3.0.0
 
-  '@vuetify/one@1.9.2':
-    resolution: {integrity: sha512-bD8b391KpGGaKhxZ/o6F7t2SJGseWw4HC4yQuhAqq0RKrm07Dh44Pl0wPXdUbDDVdvlCA7hVyJt4J+4rOCW24A==}
+  '@vuetify/one@1.9.5':
+    resolution: {integrity: sha512-SnJoqgNPNG0rHx3DRE9iyhaaF1P8CiIIMwTYG2INdet0ysivDNlRR3oqo08Hf7W4Gr0FiSSH9Lp6NnDpPNuSdw==}
     peerDependencies:
       '@mdi/js': 7.4.47
       lodash-es: ^4.17.21
@@ -12246,7 +12246,7 @@ snapshots:
       vue: 3.4.27(typescript@5.5.4)
       vuetify: link:packages/vuetify
 
-  '@vuetify/one@1.9.2(@mdi/js@7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i))(lodash-es@4.17.21)(vue@3.4.27(typescript@5.5.4))(vuetify@packages+vuetify)':
+  '@vuetify/one@1.9.5(@mdi/js@7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i))(lodash-es@4.17.21)(vue@3.4.27(typescript@5.5.4))(vuetify@packages+vuetify)':
     dependencies:
       '@mdi/js': 7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i)
       lodash-es: 4.17.21

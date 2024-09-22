@@ -102,20 +102,6 @@
     "work": "CEO at Foundational Technologies LLC",
     "joined": "Feb 2021"
   },
-  "elvinagarcia": {
-    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/elvinagarcia.png",
-    "discord": "elvinagarcia",
-    "focus": [
-      "Design/Animations"
-    ],
-    "languages": [
-      "English"
-    ],
-    "location": "Virginia, USA",
-    "name": "Elvina Garcia",
-    "team": "core",
-    "joined": "Feb 2023"
-  },
   "yuwu9145": {
     "discord": "yuwu9145",
     "focus": [
@@ -251,5 +237,19 @@
     "name": "Yoones Khoshghadam",
     "team": "legends",
     "joined": "January 2023"
+  },
+  "elvinagarcia": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/elvinagarcia.png",
+    "discord": "elvinagarcia",
+    "focus": [
+      "Design/Animations"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "Virginia, USA",
+    "name": "Elvina Garcia",
+    "team": "legends",
+    "joined": "Feb 2023"
   }
 }

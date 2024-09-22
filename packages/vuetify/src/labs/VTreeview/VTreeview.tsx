@@ -90,7 +90,11 @@ export const VTreeview = genericComponent<new <T>(
       const getPath = vListRef.value?.getPath
       if (!getPath) return null
       return new Set(filteredItems.value.flatMap(item => {
-        return [...getPath(item.props.value), ...getChildren(item.props.value)]
+        const itemVal = props.returnObject ? item.raw : item.props.value
+        return [
+          ...getPath(itemVal),
+          ...getChildren(itemVal),
+        ].map(toRaw)
       }))
     })
 
