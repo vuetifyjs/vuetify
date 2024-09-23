@@ -113,7 +113,7 @@ importers:
         version: 9.24.1(eslint@8.57.0)
       eslint-plugin-vuetify:
         specifier: ^2.3.0
-        version: 2.3.0(eslint@8.57.0)(vuetify@3.7.1(typescript@5.5.4)(vite-plugin-vuetify@2.0.4)(vue@3.4.27(typescript@5.5.4)))
+        version: 2.3.0(eslint@8.57.0)(vuetify@3.7.2(typescript@5.5.4)(vite-plugin-vuetify@2.0.4)(vue@3.4.27(typescript@5.5.4)))
       glob:
         specifier: ^11.0.0
         version: 11.0.0
@@ -355,10 +355,10 @@ importers:
         version: 4.0.2
       jest:
         specifier: ^28.1.3
-        version: 28.1.3(@types/node@20.12.7)
+        version: 28.1.3(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.5.4))
       jest-runner-eslint:
         specifier: ^2.2.0
-        version: 2.2.0(@jest/test-result@28.1.3)(eslint@8.57.0)(jest-runner@28.1.3)(jest@28.1.3(@types/node@20.12.7))
+        version: 2.2.0(@jest/test-result@28.1.3)(eslint@8.57.0)(jest-runner@28.1.3)(jest@28.1.3(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.5.4)))
       jest-silent-reporter:
         specifier: ^0.5.0
         version: 0.5.0
@@ -538,7 +538,7 @@ importers:
         version: 2.15.1(eslint@8.57.0)
       eslint-plugin-jest:
         specifier: ^28.7.0
-        version: 28.7.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(jest@28.1.3(@types/node@20.12.7))(typescript@5.5.4)
+        version: 28.7.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(jest@28.1.3(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.5.4)))(typescript@5.5.4)
       expect:
         specifier: ^28.1.3
         version: 28.1.3
@@ -575,6 +575,15 @@ importers:
       timezone-mock:
         specifier: ^1.3.6
         version: 1.3.6
+      ts-node:
+        specifier: ^10.9.2
+        version: 10.9.2(@types/node@20.12.7)(typescript@5.5.4)
+      ts-patch:
+        specifier: ^3.2.1
+        version: 3.2.1
+      typescript-transform-paths:
+        specifier: ^3.5.1
+        version: 3.5.1(typescript@5.5.4)
       unplugin-auto-import:
         specifier: 0.17.5
         version: 0.17.5(rollup@3.29.4)
@@ -1291,6 +1300,10 @@ packages:
   '@cosmicjs/sdk@1.0.11':
     resolution: {integrity: sha512-Zm53TsyAGg2ytsJaBf06NcFA5FVG+tc39ZAYQgANi3uLkojnZFWGCIkwHVAn7CYVBac8dPF4tt0U6pYWNAA+Pg==}
 
+  '@cspotcode/source-map-support@0.8.1':
+    resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
+    engines: {node: '>=12'}
+
   '@cypress/request@3.0.1':
     resolution: {integrity: sha512-TWivJlJi8ZDx2wGOw1dbLuHJKUYX7bWySw377nlnGOW3hP9/MUKIsEdXT/YngWxVdgNCHRBmFlBipE+5/2ZZlQ==}
     engines: {node: '>= 6'}
@@ -1861,6 +1874,9 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
+  '@jridgewell/trace-mapping@0.3.9':
+    resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
+
   '@lerna/create@8.1.7':
     resolution: {integrity: sha512-ch81CgU5pBNOiUCQx44F/ZtN4DxxJjUQtuytYRBFWJSHAJ+XPJtiC/yQ9zjr1I1yaUlmNYYblkopoOyziOdJ1w==}
     engines: {node: '>=18.0.0'}
@@ -2402,6 +2418,18 @@ packages:
 
   '@ts-morph/common@0.23.0':
     resolution: {integrity: sha512-m7Lllj9n/S6sOkCkRftpM7L24uvmfXQFedlW/4hENcuJH1HHm9u5EgxZb9uVjQSCGrbBWBkOGgcTxNg36r6ywA==}
+
+  '@tsconfig/node10@1.0.11':
+    resolution: {integrity: sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw==}
+
+  '@tsconfig/node12@1.0.11':
+    resolution: {integrity: sha512-cqefuRsh12pWyGsIoBKJA9luFu3mRxCA+ORZvA4ktLSzIuCUtWVxGIuXigEwO5/ywWFMZ2QEGKWvkZG1zDMTag==}
+
+  '@tsconfig/node14@1.0.3':
+    resolution: {integrity: sha512-ysT8mhdixWK6Hw3i1V2AeRqZ5WfXg1G43mqoYlM2nc6388Fq5jcXyr5mRsqViLx/GJYdoL0bfXD8nmF+Zn/Iow==}
+
+  '@tsconfig/node16@1.0.4':
+    resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
 
   '@tufjs/canonical-json@2.0.0':
     resolution: {integrity: sha512-yVtV8zsdo8qFHe+/3kw81dSLyF7D576A5cCFCi4X7B39tWT7SekaEFUnvnWJHz+9qO7qJTah1JbrDjWKqFtdWA==}
@@ -2973,6 +3001,9 @@ packages:
 
   arch@2.2.0:
     resolution: {integrity: sha512-Of/R0wqp83cgHozfIYLbBMnej79U/SVGOOyuB3VVFv1NRM/PSFMK12x9KVtiYzJqmnU5WR2qp0Z5rHb7sWGnFQ==}
+
+  arg@4.1.3:
+    resolution: {integrity: sha512-58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA==}
 
   argparse@1.0.10:
     resolution: {integrity: sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==}
@@ -3728,6 +3759,9 @@ packages:
       jest-runner:
         optional: true
 
+  create-require@1.1.1:
+    resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
+
   cross-spawn@6.0.5:
     resolution: {integrity: sha512-eTVLrBSt7fjbDygz805pMnstIs2VTBNkRm0qxZd+M7A5XDdxVRWO5MxGBXZhjY4cqLYLdtrGqRf8mBPmzwSpWQ==}
     engines: {node: '>=4.8'}
@@ -3988,6 +4022,10 @@ packages:
   diff-sequences@29.6.3:
     resolution: {integrity: sha512-EjePK1srD3P08o2j4f0ExnylqRs5B9tJjcp9t1krH2qRi8CCdsYfwe9JgSLurFBWwq4uOlipzfk5fHNvwFKr8Q==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
+
+  diff@4.0.2:
+    resolution: {integrity: sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==}
+    engines: {node: '>=0.3.1'}
 
   dir-glob@3.0.1:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}
@@ -4757,6 +4795,10 @@ packages:
   global-dirs@3.0.0:
     resolution: {integrity: sha512-v8ho2DS5RiCjftj1nD9NmnfaOzTdud7RRnVd9kFNOjqZbISlx5DQ+OrTkywgd0dIt7oFCvKetZSHoHcP3sDdiA==}
     engines: {node: '>=10'}
+
+  global-prefix@3.0.0:
+    resolution: {integrity: sha512-awConJSVCHVGND6x3tmMaKcQvwXLhjdkmomy2W+Goaui8YPgYgXJZewhg3fWC+DlfqqQuWg8AwqjGTD2nAPVWg==}
+    engines: {node: '>=6'}
 
   globals@11.12.0:
     resolution: {integrity: sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==}
@@ -5819,6 +5861,9 @@ packages:
   make-dir@4.0.0:
     resolution: {integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw==}
     engines: {node: '>=10'}
+
+  make-error@1.3.6:
+    resolution: {integrity: sha512-s8UhlNe7vPKomQhC1qFelMokr/Sc3AgNbso3n74mVPA5LTZwkB9NlXf4XPamLxJE8h0gh73rM94xvwRT2CVInw==}
 
   make-fetch-happen@13.0.1:
     resolution: {integrity: sha512-cKTUFc/rbKUd/9meOvgrpJ2WrNzymt6jfRDdwg5UCnVzv9dTpEj9JS5m3wtziXVCjluIXyL8pcaukYqezIzZQA==}
@@ -7888,6 +7933,24 @@ packages:
   ts-morph@22.0.0:
     resolution: {integrity: sha512-M9MqFGZREyeb5fTl6gNHKZLqBQA0TjA1lea+CR48R8EBTDuWrNqW6ccC5QvjNR4s6wDumD3LTCjOFSp9iwlzaw==}
 
+  ts-node@10.9.2:
+    resolution: {integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': '>=1.2.50'
+      '@swc/wasm': '>=1.2.50'
+      '@types/node': '*'
+      typescript: '>=2.7'
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      '@swc/wasm':
+        optional: true
+
+  ts-patch@3.2.1:
+    resolution: {integrity: sha512-hlR43v+GUIUy8/ZGFP1DquEqPh7PFKQdDMTAmYt671kCCA6AkDQMoeFaFmZ7ObPLYOmpMgyKUqL1C+coFMf30w==}
+    hasBin: true
+
   tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
 
@@ -7981,6 +8044,11 @@ packages:
 
   typescript-auto-import-cache@0.3.3:
     resolution: {integrity: sha512-ojEC7+Ci1ij9eE6hp8Jl9VUNnsEKzztktP5gtYNRMrTmfXVwA1PITYYAkpxCvvupdSYa/Re51B6KMcv1CTZEUA==}
+
+  typescript-transform-paths@3.5.1:
+    resolution: {integrity: sha512-nq+exuF+38rAby9zrP+S6t0HWuwv69jeFu0I5UwjdoCIDPmnKIAr6a7JfYkbft7h5OzYKEDRhT/jLvvtTvWF4Q==}
+    peerDependencies:
+      typescript: '>=3.6.5'
 
   typescript@5.5.4:
     resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
@@ -8142,6 +8210,9 @@ packages:
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
+
+  v8-compile-cache-lib@3.0.1:
+    resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
 
   v8-to-istanbul@9.0.1:
     resolution: {integrity: sha512-74Y4LqY74kLE6IFyIjPtkSTWzUZmj8tdHT9Ii/26dvQ6K9Dl2NbEfj0XgU2sHCtKgt5VupqhlO/5aWuqS+IY1w==}
@@ -8492,8 +8563,8 @@ packages:
       typescript:
         optional: true
 
-  vuetify@3.7.1:
-    resolution: {integrity: sha512-N1XlczbgeGt/O+JUk72QPrqcDaRIXUdptUciJqGyTvZ9cfMoSlEWs6TZO+dOOfXbKvmIMFMycYg4dgSHDpCPhg==}
+  vuetify@3.7.2:
+    resolution: {integrity: sha512-q0WTcRG977+a9Dqhb8TOaPm+Xmvj0oVhnBJhAdHWFSov3HhHTTxlH2nXP/GBTXZuuMHDbBeIWFuUR2/1Fx0PPw==}
     engines: {node: ^12.20 || >=14.13}
     peerDependencies:
       typescript: '>=4.7'
@@ -8762,6 +8833,10 @@ packages:
 
   yauzl@2.10.0:
     resolution: {integrity: sha512-p4a9I6X6nu6IhoGmBqAcbJy1mlC4j27vEPZX9F4L4/vZT3Lyq1VkFHw/V/PUcB9Buo+DG3iHkT0x3Qya58zc3g==}
+
+  yn@3.1.1:
+    resolution: {integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==}
+    engines: {node: '>=6'}
 
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
@@ -9697,6 +9772,10 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
+  '@cspotcode/source-map-support@0.8.1':
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.9
+
   '@cypress/request@3.0.1':
     dependencies:
       aws-sign2: 0.7.0
@@ -10091,7 +10170,7 @@ snapshots:
       jest-util: 28.1.3
       slash: 3.0.0
 
-  '@jest/core@28.1.3':
+  '@jest/core@28.1.3(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.5.4))':
     dependencies:
       '@jest/console': 28.1.3
       '@jest/reporters': 28.1.3
@@ -10105,7 +10184,7 @@ snapshots:
       exit: 0.1.2
       graceful-fs: 4.2.11
       jest-changed-files: 28.1.3
-      jest-config: 28.1.3(@types/node@20.12.7)
+      jest-config: 28.1.3(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.5.4))
       jest-haste-map: 28.1.3
       jest-message-util: 28.1.3
       jest-regex-util: 28.0.2
@@ -10276,6 +10355,11 @@ snapshots:
   '@jridgewell/sourcemap-codec@1.5.0': {}
 
   '@jridgewell/trace-mapping@0.3.25':
+    dependencies:
+      '@jridgewell/resolve-uri': 3.1.2
+      '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@jridgewell/trace-mapping@0.3.9':
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -11063,6 +11147,14 @@ snapshots:
       mkdirp: 3.0.1
       path-browserify: 1.0.1
 
+  '@tsconfig/node10@1.0.11': {}
+
+  '@tsconfig/node12@1.0.11': {}
+
+  '@tsconfig/node14@1.0.3': {}
+
+  '@tsconfig/node16@1.0.4': {}
+
   '@tufjs/canonical-json@2.0.0': {}
 
   '@tufjs/models@2.0.1':
@@ -11648,11 +11740,11 @@ snapshots:
       vue: 3.4.27(typescript@5.5.4)
       vue-demi: 0.13.11(vue@3.4.27(typescript@5.5.4))
 
-  '@vuetify/loader-shared@2.0.3(vue@3.4.27(typescript@5.5.4))(vuetify@3.7.1(typescript@5.5.4)(vite-plugin-vuetify@2.0.4)(vue@3.4.27(typescript@5.5.4)))':
+  '@vuetify/loader-shared@2.0.3(vue@3.4.27(typescript@5.5.4))(vuetify@3.7.2(typescript@5.5.4)(vite-plugin-vuetify@2.0.4)(vue@3.4.27(typescript@5.5.4)))':
     dependencies:
       upath: 2.0.1
       vue: 3.4.27(typescript@5.5.4)
-      vuetify: 3.7.1(typescript@5.5.4)(vite-plugin-vuetify@2.0.4)(vue@3.4.27(typescript@5.5.4))
+      vuetify: 3.7.2(typescript@5.5.4)(vite-plugin-vuetify@2.0.4)(vue@3.4.27(typescript@5.5.4))
     optional: true
 
   '@vuetify/loader-shared@2.0.3(vue@3.4.27(typescript@5.5.4))(vuetify@packages+vuetify)':
@@ -11827,6 +11919,8 @@ snapshots:
   aproba@2.0.0: {}
 
   arch@2.2.0: {}
+
+  arg@4.1.3: {}
 
   argparse@1.0.10:
     dependencies:
@@ -12745,6 +12839,8 @@ snapshots:
       '@jest/test-result': 28.1.3
       jest-runner: 28.1.3
 
+  create-require@1.1.1: {}
+
   cross-spawn@6.0.5:
     dependencies:
       nice-try: 1.0.5
@@ -13049,6 +13145,8 @@ snapshots:
   diff-sequences@28.1.1: {}
 
   diff-sequences@29.6.3: {}
+
+  diff@4.0.2: {}
 
   dir-glob@3.0.1:
     dependencies:
@@ -13417,13 +13515,13 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-jest@28.7.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(jest@28.1.3(@types/node@20.12.7))(typescript@5.5.4):
+  eslint-plugin-jest@28.7.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(jest@28.1.3(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.5.4)))(typescript@5.5.4):
     dependencies:
       '@typescript-eslint/utils': 8.0.1(eslint@8.57.0)(typescript@5.5.4)
       eslint: 8.57.0
     optionalDependencies:
       '@typescript-eslint/eslint-plugin': 7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
-      jest: 28.1.3(@types/node@20.12.7)
+      jest: 28.1.3(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.5.4))
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -13489,12 +13587,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-vuetify@2.3.0(eslint@8.57.0)(vuetify@3.7.1(typescript@5.5.4)(vite-plugin-vuetify@2.0.4)(vue@3.4.27(typescript@5.5.4))):
+  eslint-plugin-vuetify@2.3.0(eslint@8.57.0)(vuetify@3.7.2(typescript@5.5.4)(vite-plugin-vuetify@2.0.4)(vue@3.4.27(typescript@5.5.4))):
     dependencies:
       eslint: 8.57.0
       eslint-plugin-vue: 9.24.1(eslint@8.57.0)
       requireindex: 1.2.0
-      vuetify: 3.7.1(typescript@5.5.4)(vite-plugin-vuetify@2.0.4)(vue@3.4.27(typescript@5.5.4))
+      vuetify: 3.7.2(typescript@5.5.4)(vite-plugin-vuetify@2.0.4)(vue@3.4.27(typescript@5.5.4))
     transitivePeerDependencies:
       - supports-color
 
@@ -14052,6 +14150,12 @@ snapshots:
   global-dirs@3.0.0:
     dependencies:
       ini: 2.0.0
+
+  global-prefix@3.0.0:
+    dependencies:
+      ini: 1.3.8
+      kind-of: 6.0.3
+      which: 1.3.1
 
   globals@11.12.0: {}
 
@@ -14718,16 +14822,16 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jest-cli@28.1.3(@types/node@20.12.7):
+  jest-cli@28.1.3(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.5.4)):
     dependencies:
-      '@jest/core': 28.1.3
+      '@jest/core': 28.1.3(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.5.4))
       '@jest/test-result': 28.1.3
       '@jest/types': 28.1.3
       chalk: 4.1.2
       exit: 0.1.2
       graceful-fs: 4.2.11
       import-local: 3.1.0
-      jest-config: 28.1.3(@types/node@20.12.7)
+      jest-config: 28.1.3(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.5.4))
       jest-util: 28.1.3
       jest-validate: 28.1.3
       prompts: 2.4.2
@@ -14737,7 +14841,7 @@ snapshots:
       - supports-color
       - ts-node
 
-  jest-config@28.1.3(@types/node@20.12.7):
+  jest-config@28.1.3(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.5.4)):
     dependencies:
       '@babel/core': 7.25.2
       '@jest/test-sequencer': 28.1.3
@@ -14763,6 +14867,7 @@ snapshots:
       strip-json-comments: 3.1.1
     optionalDependencies:
       '@types/node': 20.12.7
+      ts-node: 10.9.2(@types/node@20.12.7)(typescript@5.5.4)
     transitivePeerDependencies:
       - supports-color
 
@@ -14875,14 +14980,14 @@ snapshots:
       resolve.exports: 1.1.0
       slash: 3.0.0
 
-  jest-runner-eslint@2.2.0(@jest/test-result@28.1.3)(eslint@8.57.0)(jest-runner@28.1.3)(jest@28.1.3(@types/node@20.12.7)):
+  jest-runner-eslint@2.2.0(@jest/test-result@28.1.3)(eslint@8.57.0)(jest-runner@28.1.3)(jest@28.1.3(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.5.4))):
     dependencies:
       chalk: 4.1.2
       cosmiconfig: 7.1.0
       create-jest-runner: 0.11.2(@jest/test-result@28.1.3)(jest-runner@28.1.3)
       dot-prop: 6.0.1
       eslint: 8.57.0
-      jest: 28.1.3(@types/node@20.12.7)
+      jest: 28.1.3(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.5.4))
     transitivePeerDependencies:
       - '@jest/test-result'
       - jest-runner
@@ -15023,12 +15128,12 @@ snapshots:
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  jest@28.1.3(@types/node@20.12.7):
+  jest@28.1.3(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.5.4)):
     dependencies:
-      '@jest/core': 28.1.3
+      '@jest/core': 28.1.3(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.5.4))
       '@jest/types': 28.1.3
       import-local: 3.1.0
-      jest-cli: 28.1.3(@types/node@20.12.7)
+      jest-cli: 28.1.3(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.5.4))
     transitivePeerDependencies:
       - '@types/node'
       - supports-color
@@ -15446,6 +15551,8 @@ snapshots:
   make-dir@4.0.0:
     dependencies:
       semver: 7.6.3
+
+  make-error@1.3.6: {}
 
   make-fetch-happen@13.0.1:
     dependencies:
@@ -17560,6 +17667,33 @@ snapshots:
       '@ts-morph/common': 0.23.0
       code-block-writer: 13.0.1
 
+  ts-node@10.9.2(@types/node@20.12.7)(typescript@5.5.4):
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.11
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.4
+      '@types/node': 20.12.7
+      acorn: 8.12.1
+      acorn-walk: 8.3.2
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 5.5.4
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+
+  ts-patch@3.2.1:
+    dependencies:
+      chalk: 4.1.2
+      global-prefix: 3.0.0
+      minimist: 1.2.8
+      resolve: 1.22.8
+      semver: 7.6.3
+      strip-ansi: 6.0.1
+
   tsconfig-paths@3.15.0:
     dependencies:
       '@types/json5': 0.0.29
@@ -17659,6 +17793,11 @@ snapshots:
   typescript-auto-import-cache@0.3.3:
     dependencies:
       semver: 7.6.3
+
+  typescript-transform-paths@3.5.1(typescript@5.5.4):
+    dependencies:
+      minimatch: 9.0.5
+      typescript: 5.5.4
 
   typescript@5.5.4: {}
 
@@ -17863,6 +18002,8 @@ snapshots:
 
   uuid@8.3.2: {}
 
+  v8-compile-cache-lib@3.0.1: {}
+
   v8-to-istanbul@9.0.1:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
@@ -17986,14 +18127,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vite-plugin-vuetify@2.0.4(vite@5.4.0(@types/node@20.12.7)(sass-embedded@1.77.8)(sass@1.77.8)(terser@5.31.3))(vue@3.4.27(typescript@5.5.4))(vuetify@3.7.1):
+  vite-plugin-vuetify@2.0.4(vite@5.4.0(@types/node@20.12.7)(sass-embedded@1.77.8)(sass@1.77.8)(terser@5.31.3))(vue@3.4.27(typescript@5.5.4))(vuetify@3.7.2):
     dependencies:
-      '@vuetify/loader-shared': 2.0.3(vue@3.4.27(typescript@5.5.4))(vuetify@3.7.1(typescript@5.5.4)(vite-plugin-vuetify@2.0.4)(vue@3.4.27(typescript@5.5.4)))
+      '@vuetify/loader-shared': 2.0.3(vue@3.4.27(typescript@5.5.4))(vuetify@3.7.2(typescript@5.5.4)(vite-plugin-vuetify@2.0.4)(vue@3.4.27(typescript@5.5.4)))
       debug: 4.3.6(supports-color@8.1.1)
       upath: 2.0.1
       vite: 5.4.0(@types/node@20.12.7)(sass-embedded@1.77.8)(sass@1.77.8)(terser@5.31.3)
       vue: 3.4.27(typescript@5.5.4)
-      vuetify: 3.7.1(typescript@5.5.4)(vite-plugin-vuetify@2.0.4)(vue@3.4.27(typescript@5.5.4))
+      vuetify: 3.7.2(typescript@5.5.4)(vite-plugin-vuetify@2.0.4)(vue@3.4.27(typescript@5.5.4))
     transitivePeerDependencies:
       - supports-color
     optional: true
@@ -18257,12 +18398,12 @@ snapshots:
     optionalDependencies:
       typescript: 5.5.4
 
-  vuetify@3.7.1(typescript@5.5.4)(vite-plugin-vuetify@2.0.4)(vue@3.4.27(typescript@5.5.4)):
+  vuetify@3.7.2(typescript@5.5.4)(vite-plugin-vuetify@2.0.4)(vue@3.4.27(typescript@5.5.4)):
     dependencies:
       vue: 3.4.27(typescript@5.5.4)
     optionalDependencies:
       typescript: 5.5.4
-      vite-plugin-vuetify: 2.0.4(vite@5.4.0(@types/node@20.12.7)(sass-embedded@1.77.8)(sass@1.77.8)(terser@5.31.3))(vue@3.4.27(typescript@5.5.4))(vuetify@3.7.1)
+      vite-plugin-vuetify: 2.0.4(vite@5.4.0(@types/node@20.12.7)(sass-embedded@1.77.8)(sass@1.77.8)(terser@5.31.3))(vue@3.4.27(typescript@5.5.4))(vuetify@3.7.2)
 
   w3c-xmlserializer@5.0.0:
     dependencies:
@@ -18602,6 +18743,8 @@ snapshots:
     dependencies:
       buffer-crc32: 0.2.13
       fd-slicer: 1.1.0
+
+  yn@3.1.1: {}
 
   yocto-queue@0.1.0: {}
 
