@@ -17,14 +17,10 @@ describe('VConfirmEdit', () => {
       </VConfirmEdit>
     ))
 
-    // Verify initial state
     expect(screen.getByText('foo')).toBeInTheDocument()
 
-    // Update external model
     externalModel.value = 'bar'
     await nextTick()
-
-    // Verify updated state
     expect(screen.getByText('bar')).toBeInTheDocument()
   })
 
@@ -36,49 +32,57 @@ describe('VConfirmEdit', () => {
         { ({ model }) => (
           <>
             <p>{ model.value.join(',') }</p>
-            <button data-test="push" onClick={ () => model.value.push('bar') }>Push</button>
+            <button data-testid="push" onClick={ () => model.value.push('bar') }>Push</button>
           </>
         )}
       </VConfirmEdit>
     ))
 
     expect(screen.getByText('foo')).toBeInTheDocument()
-    const element = screen.getByCSS('[data-test="push"]')
 
-    await userEvent.click(element)
-
+    await userEvent.click(screen.getByTestId('push'))
     expect(screen.getByText('foo,bar')).toBeInTheDocument()
     expect(externalModel.value).toEqual(['foo'])
 
     await userEvent.click(screen.getByText('OK'))
-
     expect(externalModel.value).toEqual(['foo', 'bar'])
   })
 
-  it.skip('hides actions if used from the slot', async () => {
-    render(() => <VConfirmEdit />)
-    expect(screen.getAllByCSS('button')).toHaveLength(2)
+  describe('hides actions if used from the slot', () => {
+    it('nothing', () => {
+      render(() => <VConfirmEdit />)
+      expect(screen.getAllByCSS('button')).toHaveLength(2)
+    })
 
-    render(() => (
-      <VConfirmEdit>
-        { ({ model }) => { void model } }
-      </VConfirmEdit>
-    ))
-    expect(screen.getAllByCSS('button')).toHaveLength(2)
+    it('consume model', () => {
+      render(() => (
+        <VConfirmEdit>
+          { ({ model }) => {
+            void model
+          }}
+        </VConfirmEdit>
+      ))
+      expect(screen.getAllByCSS('button')).toHaveLength(2)
+    })
 
-    render(() => (
-      <VConfirmEdit>
-        { ({ actions }) => { void actions } }
-      </VConfirmEdit>
-    ))
-    expect(screen.getAllByCSS('button')).toHaveLength(0)
+    it('consume actions', () => {
+      render(() => (
+        <VConfirmEdit>
+          { ({ actions }) => {
+            void actions
+          }}
+        </VConfirmEdit>
+      ))
+      expect(screen.queryAllByCSS('button')).toHaveLength(0)
+    })
 
-    // // Scenario 4: Render actions from the slot
-    render(() => (
-      <VConfirmEdit>
-        { ({ actions }) => actions }
-      </VConfirmEdit>
-    ))
-    expect(screen.getAllByCSS('button')).toHaveLength(2)
+    it('render actions', () => {
+      render(() => (
+        <VConfirmEdit>
+          { ({ actions }) => actions }
+        </VConfirmEdit>
+      ))
+      expect(screen.getAllByCSS('button')).toHaveLength(2)
+    })
   })
 })
