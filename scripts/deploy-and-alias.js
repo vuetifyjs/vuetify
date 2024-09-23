@@ -25,4 +25,6 @@ if (child.code !== 0) {
 }
 const instanceUrl = child.stdout
 
-shell.exec(`vercel alias set ${instanceUrl} ${alias} --scope=vuetifyjs --token=$NOW_TOKEN`, options)
+setTimeout(() => {
+  shell.exec(`vercel alias set ${instanceUrl} ${alias} --scope=vuetifyjs --token=$NOW_TOKEN`, options)
+}, 15_000)

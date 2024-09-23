@@ -91,7 +91,9 @@
         </v-row>
       </v-col>
 
-      <VoPromotionsCardHighlight class="mb-n8" max-width="1096" slug="vuetify-snips" />
+      <v-col cols="12">
+        <VoPromotionsCardHighlight class="mb-n8" max-width="1096" slug="vuetify-snips" />
+      </v-col>
     </v-row>
   </v-container>
 </template>
