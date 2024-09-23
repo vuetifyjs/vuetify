@@ -18,9 +18,7 @@ describe('VChip', () => {
       />
     ))
 
-    const button = screen.getByCSS('.v-chip__close')
-
-    await userEvent.click(button)
+    await userEvent.click(screen.getByTestId('close-chip'))
     expect(close).toHaveBeenCalled()
     expect(update).toHaveBeenCalled()
   })
@@ -36,20 +34,16 @@ describe('VChip', () => {
       />
     ))
 
-    const button = screen.getByCSS('.v-chip__close')
+    const button = screen.getByTestId('close-chip')
 
     expect(button).toHaveAttribute('aria-label', 'Foo')
 
     closeLabel.value = 'Bar'
-
     await nextTick()
-
     expect(button).toHaveAttribute('aria-label', 'Bar')
 
     closeLabel.value = undefined
-
     await nextTick()
-
     expect(button).toHaveAttribute('aria-label', 'Close')
   })
 })
