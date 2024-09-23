@@ -1,7 +1,7 @@
 import { VCheckboxBtn } from '../'
 
 // Utilities
-import { render, userEvent, screen } from '@test'
+import { render, screen, userEvent } from '@test'
 import { ref } from 'vue'
 
 describe('VCheckboxBtn', () => {
