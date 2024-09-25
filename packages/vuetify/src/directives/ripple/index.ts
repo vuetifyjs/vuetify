@@ -5,9 +5,7 @@ import './VRipple.sass'
 import { isObject, keyCodes } from '@/util'
 
 // Types
-import type {
-  DirectiveBinding,
-} from 'vue'
+import type { DirectiveBinding } from 'vue'
 
 const stopSymbol = Symbol('rippleStop')
 

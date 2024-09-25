@@ -1,6 +1,5 @@
 // Utilities
 import { mount } from '@vue/test-utils'
-import { expect, it } from 'vitest'
 import { defineComponent, h } from 'vue'
 import {
   attachedRoot,

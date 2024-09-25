@@ -1,6 +1,5 @@
 // Utilities
 import { mount } from '@vue/test-utils'
-import { expect, it } from 'vitest'
 import { getCurrentInstance } from '../getCurrentInstance'
 
 describe('getCurrentInstance.ts', () => {

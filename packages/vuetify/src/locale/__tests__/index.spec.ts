@@ -1,7 +1,6 @@
 // Utilities
 import fs from 'fs'
 import path from 'path'
-import { expect, it } from 'vitest'
 import * as locales from '../'
 
 describe('locales', () => {
