@@ -68,7 +68,7 @@ When the **hide-details** prop is set to `auto` messages will be rendered only i
 
 #### Hint
 
-`v-input` can have **hint** which can tell user how to use the input. **persistent-hint** prop makes the hint visible always if no messages are displayed.
+`v-input` can have **hint** which can tell user how to use the input (when focused). **persistent-hint** prop makes the hint visible always if no `error-messages` are displayed.
 
 <ExamplesExample file="v-input/prop-hint" />
 
