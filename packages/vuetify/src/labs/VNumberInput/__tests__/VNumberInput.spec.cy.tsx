@@ -33,7 +33,6 @@ describe('VNumberInput', () => {
           <VNumberInput
             clearable
             v-model={ model.value }
-            readonly
           />
         </>
     ))
