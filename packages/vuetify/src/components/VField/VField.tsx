@@ -219,7 +219,11 @@ export const VField = genericComponent<new <T>(
 
       props['onClick:clear']?.(new MouseEvent('click'))
     }
-
+ 
+    const isHovered = ref(false)
+    function changeHover(value: boolean) {
+      isHovered.value = value
+    }
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
       const hasPrepend = !!(slots['prepend-inner'] || props.prependInnerIcon)
@@ -268,6 +272,8 @@ export const VField = genericComponent<new <T>(
             props.style,
           ]}
           onClick={ onClick }
+          onMouseenter={() => changeHover(true)}
+          onMouseleave={() => changeHover(false)}
           { ...attrs }
         >
           <div class="v-field__overlay" />
@@ -319,7 +325,7 @@ export const VField = genericComponent<new <T>(
             } as VFieldSlot)}
           </div>
 
-          { hasClear && (
+          {(hasClear && (isFocused.value || isHovered.value) ) && (
             <VExpandXTransition key="clear">
               <div
                 class="v-field__clearable"
