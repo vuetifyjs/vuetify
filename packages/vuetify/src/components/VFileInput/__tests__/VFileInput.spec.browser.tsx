@@ -87,12 +87,13 @@ describe('VFileInput', () => {
     const { element } = render(() => (
       <VFileInput v-model={ model.value } multiple />
     ))
-
+    const input = screen.getByCSS('input')
+    input.focus()
     await userEvent.click(screen.getByLabelText(/clear/i))
 
     expect(element).not.toHaveTextContent('1MB file, 2MB file')
     expect(model.value).toHaveLength(0)
-    expect(screen.getByCSS('input')).toHaveValue('')
+    expect(input).toHaveValue('')
   })
 
   it('should support removing clearable icon', async () => {
