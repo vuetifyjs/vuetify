@@ -324,9 +324,9 @@ export const VField = genericComponent<new <T>(
               blur,
             } as VFieldSlot)}
           </div>
-
-          { (hasClear && (props.focused || isHovered.value) ) && (
+          { (hasClear && (isFocused.value || isHovered.value) ) && (
             <VExpandXTransition key="clear">
+
               <div
                 class="v-field__clearable"
                 v-show={ props.dirty }

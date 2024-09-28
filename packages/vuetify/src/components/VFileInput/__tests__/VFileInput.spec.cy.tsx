@@ -97,7 +97,7 @@ describe('VFileInput', () => {
       <CenteredGrid width="400px">
         <VFileInput label="foo" v-model={ model.value } />
       </CenteredGrid>
-    ))
+    )).get('.v-field').click()	
       .get('.v-field__clearable > .v-icon')
       .click()
     cy.get('.v-input input')
