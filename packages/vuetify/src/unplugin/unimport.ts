@@ -30,7 +30,7 @@ export interface VuetifyDirectivesOptions {
 
 export function VuetifyComposables (options: VuetifyComposablesOptions = {}) {
   const { prefix } = options
-  const composableImports: [link: string, name: string][] = [
+  const composableImports: [link: string, name: string, renamed?: string][] = [
     ['use-date', 'useDate'],
     ['use-defaults', 'useDefaults'],
     ['use-display', 'useDisplay'],
@@ -40,15 +40,16 @@ export function VuetifyComposables (options: VuetifyComposablesOptions = {}) {
     ['use-rtl', 'useRtl'],
     ['use-theme', 'useTheme'],
   ]
-  const imports: typeof composableImports = typeof prefix === 'string'
-    ? composableImports.map(([l, n]) => [l, n.replace('use', `use${prefix}`)])
+  const imports = typeof prefix === 'string'
+    ? composableImports.map(([l, n]) => [l, n, n.replace('use', `use${prefix}`)])
     : prefix
-      ? composableImports.map(([l, n]) => [l, n.replace('use', 'useV')])
+      ? composableImports.map(([l, n]) => [l, n, n.replace('use', 'useV')])
       : composableImports
   return {
     from: 'vuetify',
-    imports: imports.map(([link, name]) => ({
+    imports: imports.map(([link, name, renamed]) => ({
       name,
+      as: renamed,
       meta: { docsUrl: `https://vuetifyjs.com/en/api/${link}/` },
     } satisfies PresetImport)),
   } satisfies Preset
@@ -66,21 +67,24 @@ export function VuetifyOneComposables (options: VuetifyOneComposablesOptions = {
     'useSettingsStore',
     'useProductsStore',
   ]
-  const imports: typeof composableImports = typeof prefix === 'string'
+  const imports = typeof prefix === 'string'
     ? composableImports.map(n => n.startsWith('create')
-      ? n.replace('create', `create${prefix}`)
-      : n.replace('use', `use${prefix}`)
+      ? [n, n.replace('create', `create${prefix}`)]
+      : [n, n.replace('use', `use${prefix}`)]
     )
     : prefix
       ? composableImports.map(n => n.startsWith('create')
-        ? n.replace('create', 'createV')
-        : n.replace('use', 'useV')
+        ? [n, n.replace('create', 'createV')]
+        : [n, n.replace('use', 'useV')]
       )
-      : composableImports
+      : composableImports.map(n => [n])
 
   return {
     from: '@vuetify/one',
-    imports,
+    imports: imports.map(([name, renamed]) => ({
+      name,
+      as: renamed,
+    } satisfies PresetImport)),
   } satisfies Preset
 }
 
