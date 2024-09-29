@@ -23,6 +23,7 @@ import { Examples } from './build/examples-plugin'
 import { genAppMetaInfo } from './src/utils/metadata'
 import { MdiJs } from './build/mdi-js'
 import { frontmatterBuilder, getRouteMeta, scriptFixer } from './build/markdownBuilders'
+import { VuetifyComposables, VuetifyDirectives, VuetifyOneComposables } from 'vuetify/unimport'
 
 const resolve = (file: string) => fileURLToPath(new URL(file, import.meta.url))
 
@@ -95,25 +96,22 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
           'vue',
           'vue-router',
           'pinia',
+          VuetifyComposables(),
+          VuetifyDirectives(),
+          VuetifyOneComposables(),
           {
-            '@vuetify/one': [
-              'createOne',
-              'useAuthStore',
-              'useHttpStore',
-              'useOneStore',
-              'useUserStore',
-              'useQueueStore',
-              'useSettingsStore',
-              'useProductsStore',
-            ],
             'lodash-es': ['camelCase', 'kebabCase', 'upperFirst'],
             vue: ['camelize', 'mergeProps'],
-            vuetify: ['useDate', 'useDisplay', 'useGoTo', 'useRtl', 'useTheme'],
             'vue-gtag-next': ['useGtag'],
             'vue-i18n': ['useI18n'],
           }
         ],
         vueTemplate: true,
+        // when this PR https://github.com/unplugin/unplugin-auto-import/pull/534 merged and released
+        // this option will create the `v<Directive>` for Vuetify directives in vue module augmentation
+        // Volar will show Vuetify directives (VSCode only)
+        // check it here: packages/docs/src/examples/v-ripple/misc-custom-color.vue
+        vueDirectives: true,
       }),
 
       // https://github.com/stafyniaksacha/vite-plugin-fonts
