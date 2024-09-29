@@ -397,7 +397,41 @@ export function useTheme () {
 
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
-  return theme
+  function get(name?: string) {
+    return theme?.themes.value[name ?? theme.global.name.value]
+  }
+
+  function update (color: keyof Colors, value: any, name?: string) {
+    const target = get(name)
+
+    if (!target) return
+
+    console.log(target.colors)
+
+    target.colors[color] = value
+  }
+
+  function register (name: string, registering: Partial<ThemeDefinition>) {
+    if (!theme) return
+
+    const defaults = registering.dark ? theme.themes.value.dark : theme.themes.value.light
+
+    theme.themes.value[name] = mergeDeep(defaults, registering) as InternalThemeDefinition
+  }
+
+  function set (name: string) {
+    if (!theme)return
+
+    theme.global.name.value = name
+  }
+
+  return {
+    ...theme,
+    get,
+    register,
+    update,
+    set,
+  }
 }
 
 function createCssClass (lines: string[], selector: string, content: string[]) {
