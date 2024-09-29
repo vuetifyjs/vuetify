@@ -1,6 +1,5 @@
 export interface VuetifyComponent {
   from: string
-  styles?: string[]
 }
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 export type ComponentName = keyof typeof import('vuetify/components')
