@@ -30,7 +30,7 @@ export interface VuetifyDirectivesOptions {
 
 export function VuetifyComposables (options: VuetifyComposablesOptions = {}) {
   const { prefix } = options
-  const composableImports: [link: string, name: string, renamed?: string][] = [
+  const composableImports: [link: string, name: string][] = [
     ['use-date', 'useDate'],
     ['use-defaults', 'useDefaults'],
     ['use-display', 'useDisplay'],
