@@ -16,18 +16,20 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { StepperItemSlot } from '@/components/VStepper/VStepperItem'
 
+export type StepperVerticalItemActionSlot = StepperItemSlot & {
+  next: () => void
+  prev: () => void
+}
+
 export type VStepperVerticalItemSlots = {
   default: StepperItemSlot
   icon: StepperItemSlot
   subtitle: StepperItemSlot
   title: StepperItemSlot
   text: StepperItemSlot
-  prev: StepperItemSlot
-  next: StepperItemSlot
-  actions: StepperItemSlot & {
-    next: () => void
-    prev: () => void
-  }
+  prev: StepperVerticalItemActionSlot
+  next: StepperVerticalItemActionSlot
+  actions: StepperVerticalItemActionSlot
 }
 
 export const makeVStepperVerticalItemProps = propsFactory({

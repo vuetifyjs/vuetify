@@ -14,16 +14,17 @@ import { genericComponent, getPropertyFromItem, omit, propsFactory, useRender } 
 // Types
 import type { VStepperSlot } from '@/components/VStepper/VStepper'
 import type { StepperItem, StepperItemSlot } from '@/components/VStepper/VStepperItem'
+import type { StepperVerticalItemActionSlot } from './VStepperVerticalItem'
 
 export type VStepperVerticalSlots = {
-  actions: StepperItemSlot
+  actions: StepperVerticalItemActionSlot
   default: VStepperSlot & { step: unknown }
   icon: StepperItemSlot
   title: StepperItemSlot
   subtitle: StepperItemSlot
   item: StepperItem
-  prev: StepperItemSlot
-  next: StepperItemSlot
+  prev: StepperVerticalItemActionSlot
+  next: StepperVerticalItemActionSlot
 } & {
   [key: `header-item.${string}`]: StepperItemSlot
   [key: `item.${string}`]: StepperItem
