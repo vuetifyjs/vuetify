@@ -10,12 +10,9 @@ export type DirectiveName = keyof typeof import('vuetify/directives')
 export interface VuetifyComponents {
   [key: string]: VuetifyComponent
 }
-export interface VuetifyDirectives {
-  [key: string]: DirectiveName
-}
 export interface ImportComponents {
   components: VuetifyComponents
-  directives: VuetifyDirectives
+  directives: DirectiveName[]
 }
 export interface ImportLabsComponents {
   [key: string]: VuetifyComponent

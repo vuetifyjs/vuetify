@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises'
 import path from 'upath'
 import { createRequire } from 'node:module'
+import process from 'node:process'
 
 // Types
 import type { ImportComponents, ImportLabsComponents, ImportMaps } from './types'

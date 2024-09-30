@@ -23,7 +23,7 @@ export interface VuetifyComponentResolverOptions {
   /**
    * Paths to locate Vuetify package.
    *
-   * @default [procces.cwd()]
+   * @default [process.cwd()]
    */
   paths?: string[]
 }
@@ -41,7 +41,7 @@ export interface VuetifyDirectivesResolverOptions {
   /**
    * Paths to locate Vuetify package.
    *
-   * @default [procces.cwd()]
+   * @default [process.cwd()]
    */
   paths?: string[]
 }
@@ -121,7 +121,10 @@ function createComponentsResolver (
   } satisfies ComponentResolver
 }
 
-function createDirectivesResolver (promise: Promise<ImportComponents>, options: VuetifyDirectivesResolverOptions) {
+function createDirectivesResolver (
+  promise: Promise<ImportComponents>,
+  options: VuetifyDirectivesResolverOptions
+) {
   const { exclude, prefix } = options
   // Vue will transform v-<directive> to _resolveDirective('<directive>')
   // If prefix enabled, Vue will transform v-vuetify-<directive> to _resolveDirective('vuetify-<directive>')
@@ -139,12 +142,12 @@ function createDirectivesResolver (promise: Promise<ImportComponents>, options: 
       }
       if (exclude?.some(e => e === name)) return undefined
       const { directives } = await promise
-      const directive = name in directives ? directives[name] : undefined
-
+      const directive = directives.includes(name as DirectiveName)
       if (!directive) return undefined
+
       return {
         name,
-        as: prefix ? `Vuetify${name}` : undefined,
+        as: prefix ? resolvedName : undefined,
         from: `vuetify/directives`,
       }
     },
