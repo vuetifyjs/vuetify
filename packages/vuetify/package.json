@@ -77,7 +77,6 @@
     "./labs/components": "./lib/labs/components.mjs",
     "./labs/*": "./lib/labs/*/index.mjs",
     "./util/colors": "./lib/util/colors.mjs",
-    "./*": "./*",
     "./unplugin-vue-components": {
       "import": "./unplugin-vue-components/index.mjs",
       "require": "./unplugin-vue-components/index.cjs"
@@ -85,7 +84,8 @@
     "./unimport": {
       "import": "./unimport/index.mjs",
       "require": "./unimport/index.cjs"
-    }
+    },
+    "./*": "./*"
   },
   "typesVersions": {
     "*": {
