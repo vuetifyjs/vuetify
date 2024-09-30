@@ -406,8 +406,6 @@ export function useTheme () {
 
     if (!target) return
 
-    console.log(target.colors)
-
     target.colors[color] = value
   }
 
