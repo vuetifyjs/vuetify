@@ -23,7 +23,7 @@ import { Examples } from './build/examples-plugin'
 import { genAppMetaInfo } from './src/utils/metadata'
 import { MdiJs } from './build/mdi-js'
 import { frontmatterBuilder, getRouteMeta, scriptFixer } from './build/markdownBuilders'
-import { VuetifyComposables, VuetifyDirectives, VuetifyOneComposables } from 'vuetify/unimport'
+import { VuetifyComposables, VuetifyDirectives } from 'vuetify/unimport'
 
 const resolve = (file: string) => fileURLToPath(new URL(file, import.meta.url))
 
@@ -98,8 +98,17 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
           'pinia',
           VuetifyComposables(),
           VuetifyDirectives(),
-          VuetifyOneComposables(),
           {
+            '@vuetify/one': [
+              'createOne',
+              'useAuthStore',
+              'useHttpStore',
+              'useOneStore',
+              'useUserStore',
+              'useQueueStore',
+              'useSettingsStore',
+              'useProductsStore',
+            ],
             'lodash-es': ['camelCase', 'kebabCase', 'upperFirst'],
             vue: ['camelize', 'mergeProps'],
             'vue-gtag-next': ['useGtag'],
