@@ -11,7 +11,7 @@ import MagicString from 'magic-string'
 
 import importMap from '../dist/json/importMap.json' with { type: 'json' }
 import importMapLabs from '../dist/json/importMap-labs.json' with { type: 'json' }
-import {unpluginTypes} from "./unplugin-config.mjs";
+import { unpluginTypes } from './unplugin-config.mjs'
 
 /** @type {() => import("rollup").Plugin} */
 const externalsPlugin = () => ({
