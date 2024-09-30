@@ -30,11 +30,17 @@ function unpluginModule(name) {
   /** @type {import("rollup").RollupOptions}  */
   const config = {
     input,
-    external: ['vuetify', 'unplugin-vue-components/types', ...externals],
+    external: [
+      'vuetify',
+      'vuetify/directives',
+      'vuetify/components',
+      'vuetify/labs/components',
+      'unplugin-vue-components/types',
+      ...externals,
+    ],
     output: [{
       file: `${file}.mjs`,
       format: 'esm',
-      exports: "named",
       generatedCode: { constBindings: true },
       externalLiveBindings: false,
       freeze: false,
@@ -42,7 +48,6 @@ function unpluginModule(name) {
     }, {
       file: `${file}.cjs`,
       format: 'cjs',
-      exports: "named",
       generatedCode: { constBindings: true },
       externalLiveBindings: false,
       freeze: false,
@@ -54,15 +59,9 @@ function unpluginModule(name) {
       }
     },
     plugins: [
-      nodeResolve({ extensions, browser: false, modulesOnly: true }),
+      nodeResolve({ extensions }),
       babel({
         extensions,
-      }),
-      dts({
-        respectExternal: true,
-        compilerOptions: {
-          rootDir: root,
-        },
       }),
       {
         async buildEnd() {
