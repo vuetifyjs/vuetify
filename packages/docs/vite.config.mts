@@ -120,7 +120,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         // this option will create the `v<Directive>` for Vuetify directives in vue module augmentation
         // Volar will show Vuetify directives (VSCode only)
         // check it here: packages/docs/src/examples/v-ripple/misc-custom-color.vue
-        vueDirectives: true,
+        // vueDirectives: true,
       }),
 
       // https://github.com/stafyniaksacha/vite-plugin-fonts
