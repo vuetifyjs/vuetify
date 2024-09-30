@@ -10,18 +10,55 @@ import type {
 import { resolveVuetifyImportMap, resolveVuetifyImportMaps } from './utils'
 
 export interface VuetifyComponentResolverOptions {
+  /**
+   * Include labs components?.
+   *
+   * @default false
+   */
   labs?: boolean
+  /**
+   * Components to exclude.
+   */
   exclude?: (ComponentName | LabComponentName)[]
+  /**
+   * Paths to locate Vuetify package.
+   *
+   * @default [procces.cwd()]
+   */
   paths?: string[]
 }
 
 export interface VuetifyDirectivesResolverOptions {
+  /**
+   * Prefix Vuetify directives (to allow use other directives with the same name):
+   * - when prefix set to `true` will use `Vuetify` => `v-vuetify-<directive>: `v-vuetify-ripple`.
+   */
+  prefix?: true
+  /**
+   * Directives to exclude.
+   */
   exclude?: DirectiveName[]
+  /**
+   * Paths to locate Vuetify package.
+   *
+   * @default [procces.cwd()]
+   */
   paths?: string[]
 }
 
 export interface VuetifyVueResolverOptions extends Omit<VuetifyComponentResolverOptions, 'exclude'> {
+  /**
+   * Prefix Vuetify directives (to allow use other directives with the same name):
+   * - when prefix set to `true` will use `Vuetify` => `v-vuetify-<directive>: `v-vuetify-ripple`.
+   */
+  prefixDirectives?: true
+  /**
+   * Directives to exclude.
+   */
   excludeDirectives?: DirectiveName[]
+  /**
+   * Components to exclude.
+   */
   excludeComponents?: (ComponentName | LabComponentName)[]
 }
 
@@ -31,13 +68,14 @@ export function VuetifyVueResolver (options: VuetifyVueResolverOptions = {}) {
     excludeDirectives,
     labs,
     excludeComponents,
+    prefixDirectives,
   } = options
 
   const [componentsPromise, directivesPromise] = resolveVuetifyImportMaps(paths)
 
   const directives = createDirectivesResolver(
     componentsPromise,
-    { exclude: excludeDirectives, paths }
+    { exclude: excludeDirectives, paths, prefix: prefixDirectives }
   )
   const components = createComponentsResolver(
     [componentsPromise, directivesPromise],
@@ -84,19 +122,30 @@ function createComponentsResolver (
 }
 
 function createDirectivesResolver (promise: Promise<ImportComponents>, options: VuetifyDirectivesResolverOptions) {
-  const { exclude } = options
+  const { exclude, prefix } = options
+  // Vue will transform v-<directive> to _resolveDirective('<directive>')
+  // If prefix enabled, Vue will transform v-vuetify-<directive> to _resolveDirective('vuetify-<directive>')
+  // unplugin-vue-components will provide the correct import when calling resolve: PascalCase(<directive>)
+  // If prefix enabled, unplugin-vue-components will provide PascalCase(vuetify-<directive>)
   return {
     type: 'directive',
-    resolve: async name => {
+    resolve: async resolvedName => {
+      let name = resolvedName
+      if (prefix) {
+        if (!name.startsWith('Vuetify')) {
+          return undefined
+        }
+        name = name.slice('Vuetify'.length)
+      }
       if (exclude?.some(e => e === name)) return undefined
       const { directives } = await promise
       const directive = name in directives ? directives[name] : undefined
 
       if (!directive) return undefined
       return {
-        name: 'default',
-        as: name,
-        from: `vuetify/directives/${String(directive)}`,
+        name,
+        as: prefix ? `Vuetify${name}` : undefined,
+        from: `vuetify/directives`,
       }
     },
   } satisfies ComponentResolver
