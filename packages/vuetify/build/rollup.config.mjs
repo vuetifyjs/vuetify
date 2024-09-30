@@ -2,32 +2,27 @@ import path from 'upath'
 import { mkdirp } from 'mkdirp'
 import { writeFile } from 'fs/promises'
 import { fileURLToPath } from 'url'
-
-import packageJson from '../package.json' with { type: 'json' }
-
 import alias from '@rollup/plugin-alias'
 import sass from 'rollup-plugin-sass'
 import { babel } from '@rollup/plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
-
 import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
 import postcss from 'postcss'
 import { simple as walk } from 'acorn-walk'
+import {
+  banner,
+  labsDir,
+  libDir,
+  root,
+  srcDir,
+} from './constants.mjs'
+import { unpluginModules } from './unplugin-config.mjs'
 
 const extensions = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs']
-const banner = `/*!
-* Vuetify v${packageJson.version}
-* Forged by John Leider
-* Released under the MIT License.
-*/\n`
 
-const root = path.resolve(fileURLToPath(import.meta.url), '../..')
-const srcDir = path.resolve(root, 'src')
-const libDir = path.resolve(root, 'lib')
-const labsDir = path.resolve(srcDir, 'labs')
-
+/** @type {import("rollup").RollupOptions[]} */
 export default [
   {
     input: 'src/entry-bundler.ts',
@@ -291,4 +286,5 @@ export default [
       }
     ],
   },
+  ...unpluginModules(),
 ]

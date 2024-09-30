@@ -23,6 +23,10 @@ export function resolveVuetifyImportMap (paths = [process.cwd()]) {
   return importMap(resolveVuetifyBase(paths))
 }
 
+export function resolveVuetifyImportMapLabs (paths = [process.cwd()]) {
+  return importMapLabs(resolveVuetifyBase(paths))
+}
+
 async function importMap (vuetifyBase: string): Promise<ImportComponents> {
   return JSON.parse(await readFile(path.resolve(vuetifyBase, 'dist/json/importMap.json'), 'utf-8'))
 }

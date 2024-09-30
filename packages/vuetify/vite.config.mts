@@ -1,8 +1,7 @@
 import path from 'path'
-import fs, { readFileSync } from 'fs'
+import fs from 'fs'
 import { fileURLToPath } from 'url'
 
-import fg from 'fast-glob'
 import { defineConfig, loadEnv } from 'vite'
 
 import vue from '@vitejs/plugin-vue'

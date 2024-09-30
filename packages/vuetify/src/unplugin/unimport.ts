@@ -1,5 +1,5 @@
 // Types
-import type { Preset, PresetImport } from 'unimport'
+import type { InlinePreset, PresetImport } from 'unimport'
 import type { DirectiveName } from './types'
 
 export interface VuetifyComposablesOptions {
@@ -40,14 +40,14 @@ export function VuetifyComposables (options: VuetifyComposablesOptions = {}) {
     : prefix
       ? composableImports.map(([l, n]) => [l, n, n.replace('use', 'useV')])
       : composableImports
-  return {
+  return <InlinePreset>{
     from: 'vuetify',
     imports: imports.map<PresetImport>(([link, name, renamed]) => ({
       name,
       as: renamed,
       meta: { docsUrl: `https://vuetifyjs.com/en/api/${link}/` },
     })),
-  } satisfies Preset
+  }
 }
 
 export function VuetifyDirectives (options: VuetifyDirectivesOptions = {}) {
@@ -65,7 +65,7 @@ export function VuetifyDirectives (options: VuetifyDirectivesOptions = {}) {
 
   const directives = directivesImports.filter(entry => !exclude || !exclude.includes(entry[1]))
 
-  return {
+  return <InlinePreset>{
     from: 'vuetify/directives',
     meta: {
       vueDirective: true,
@@ -75,5 +75,5 @@ export function VuetifyDirectives (options: VuetifyDirectivesOptions = {}) {
       as: prefix ? `Vuetify${name}` : undefined,
       meta: { docsUrl: `https://vuetifyjs.com/en/api/${link}/` },
     })),
-  } satisfies Preset
+  }
 }

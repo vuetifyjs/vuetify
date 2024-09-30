@@ -101,7 +101,7 @@ function createComponentsResolver (
   options: VuetifyComponentResolverOptions
 ) {
   const { exclude, labs } = options
-  return {
+  return <ComponentResolver>{
     type: 'component',
     resolve: async name => {
       if (exclude?.some(e => e === name)) return undefined
@@ -118,7 +118,7 @@ function createComponentsResolver (
         from: `vuetify/lib/${component.from}`,
       }
     },
-  } satisfies ComponentResolver
+  }
 }
 
 function createDirectivesResolver (
@@ -130,7 +130,7 @@ function createDirectivesResolver (
   // If prefix enabled, Vue will transform v-vuetify-<directive> to _resolveDirective('vuetify-<directive>')
   // unplugin-vue-components will provide the correct import when calling resolve: PascalCase(<directive>)
   // If prefix enabled, unplugin-vue-components will provide PascalCase(vuetify-<directive>)
-  return {
+  return <ComponentResolver>{
     type: 'directive',
     resolve: async resolvedName => {
       let name = resolvedName
@@ -151,5 +151,5 @@ function createDirectivesResolver (
         from: `vuetify/directives`,
       }
     },
-  } satisfies ComponentResolver
+  }
 }
