@@ -1,20 +1,29 @@
 import path from 'path'
-import fs from 'fs'
+import fs, { readFileSync } from 'fs'
 import { fileURLToPath } from 'url'
 
+import fg from 'fast-glob'
 import { defineConfig, loadEnv } from 'vite'
 
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import Components from 'unplugin-vue-components/vite'
 import { warmup } from 'vite-plugin-warmup'
-import { VuetifyComponentResolver, VuetifyDirectiveResolver } from './src/unplugin/components'
-import Inspect from 'vite-plugin-inspect'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const resolve = (file: string) => path.resolve(__dirname, file)
 
 const vuetifyPackage = JSON.parse(fs.readFileSync('./package.json', 'utf-8'))
+
+const index = readFileSync(resolve('src/components/index.ts'), { encoding: 'utf8' })
+const block = Array.from(index.matchAll(/^\/\/ export \* from '\.\/(.*)'$/gm), m => m[1])
+const files = fg.sync(['src/components/**/index.ts', 'src/labs/**/index.ts'], { cwd: __dirname })
+const components = files.filter(file => file.startsWith('src/labs') || !block.some(name => file.includes(`/${name}/`)))
+const map = new Map(components.flatMap(file => {
+  const src = readFileSync(file, { encoding: 'utf8' })
+  const matches = src.matchAll(/export const (V\w+)|export { (V\w+) }/gm)
+  return Array.from(matches, m => [m[1] || m[2], file.replace('src/', '@/').replace('.ts', '')])
+}))
 
 const viteSSR = process.env.TEST ? () => null : (await import('vite-ssr/plugin.js').then(m => m.default))
 
@@ -36,7 +45,6 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: [
         { find: /^vuetify$/, replacement: resolve('./src/framework.ts') },
-        { find: /^vuetify\/directives$/, replacement: resolve('./src/directives/index.ts') },
         { find: /^vuetify\/(.*)/, replacement: resolve('./$1') },
         { find: /^@\/(.*)/, replacement: resolve('./src/$1') },
       ],
@@ -47,13 +55,15 @@ export default defineConfig(({ mode }) => {
       viteSSR(),
       Components({
         dts: !process.env.TEST,
-        directives: true,
         resolvers: [
-          VuetifyComponentResolver({ labs: true, paths: [__dirname] }),
-          VuetifyDirectiveResolver({ paths: [__dirname] }),
+          name => {
+            if (map.has(name)) {
+              return { name, from: map.get(name)! }
+            }
+            return undefined
+          },
         ],
       }),
-      Inspect(),
       warmup({
         clientFiles: process.env.TEST ? [] : ['./dev/index.html'],
       }),
