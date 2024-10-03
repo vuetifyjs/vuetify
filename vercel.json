@@ -27,7 +27,7 @@
       "headers": [
         {
           "key" : "Cache-Control",
-          "value" : "public, immutable, max-age=31536000, stale-if-error=604800"
+          "value" : "public, immutable, max-age=31536000, stale-if-error=604800, s-maxage=300"
         }
       ]
     },
