@@ -113,7 +113,7 @@ export function useBackButton (router: Router | undefined, cb: (next: Navigation
   let removeBefore: (() => void) | undefined
   let removeAfter: (() => void) | undefined
 
-  if (IN_BROWSER) {
+  if (IN_BROWSER && router?.beforeEach) {
     nextTick(() => {
       window.addEventListener('popstate', onPopstate)
       removeBefore = router?.beforeEach((to, from, next) => {
