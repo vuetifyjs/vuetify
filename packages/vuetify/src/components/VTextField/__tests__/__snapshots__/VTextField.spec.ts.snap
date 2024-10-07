@@ -30,6 +30,7 @@ exports[`VTextField.ts should apply theme to label, counter, messages and icons 
         </label>
         <input id="input-129"
                type="text"
+               aria-describedby="input-129-messages"
         >
       </div>
       <div class="v-input__append-inner">
@@ -43,7 +44,9 @@ exports[`VTextField.ts should apply theme to label, counter, messages and icons 
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages theme--light">
+      <div class="v-messages theme--light"
+           id="input-129-messages"
+      >
         <span name="message-transition"
               tag="div"
               class="v-messages__wrapper"
@@ -119,11 +122,14 @@ exports[`VTextField.ts should hide messages if no messages and hide-details is a
       <div class="v-text-field__slot">
         <input id="input-141"
                type="text"
+               aria-describedby="input-141-messages"
         >
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages theme--light">
+      <div class="v-messages theme--light"
+           id="input-141-messages"
+      >
         <span name="message-transition"
               tag="div"
               class="v-messages__wrapper"
@@ -145,11 +151,13 @@ exports[`VTextField.ts should hide messages if no messages and hide-details is a
       <div class="v-text-field__slot">
         <input id="input-141"
                type="text"
+               aria-describedby="input-141-messages"
         >
       </div>
     </div>
     <div class="v-text-field__details">
       <div class="v-messages theme--light error--text"
+           id="input-141-messages"
            role="alert"
       >
         <span name="message-transition"

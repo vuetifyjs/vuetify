@@ -149,6 +149,7 @@ exports[`VFileInput.ts should display total size in counter 1`] = `
         </div>
         <input id="input-23"
                type="file"
+               aria-describedby="input-23-messages"
         >
       </div>
       <div class="v-input__append-inner">
@@ -164,7 +165,9 @@ exports[`VFileInput.ts should display total size in counter 1`] = `
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages theme--light">
+      <div class="v-messages theme--light"
+           id="input-23-messages"
+      >
         <span name="message-transition"
               tag="div"
               class="v-messages__wrapper"
@@ -199,6 +202,7 @@ exports[`VFileInput.ts should display total size in counter 2`] = `
         </div>
         <input id="input-23"
                type="file"
+               aria-describedby="input-23-messages"
         >
       </div>
       <div class="v-input__append-inner">
@@ -214,7 +218,9 @@ exports[`VFileInput.ts should display total size in counter 2`] = `
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages theme--light">
+      <div class="v-messages theme--light"
+           id="input-23-messages"
+      >
         <span name="message-transition"
               tag="div"
               class="v-messages__wrapper"
@@ -339,6 +345,7 @@ exports[`VFileInput.ts should render counter 1`] = `
         </div>
         <input id="input-11"
                type="file"
+               aria-describedby="input-11-messages"
         >
       </div>
       <div class="v-input__append-inner">
@@ -354,7 +361,9 @@ exports[`VFileInput.ts should render counter 1`] = `
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages theme--light">
+      <div class="v-messages theme--light"
+           id="input-11-messages"
+      >
         <span name="message-transition"
               tag="div"
               class="v-messages__wrapper"
