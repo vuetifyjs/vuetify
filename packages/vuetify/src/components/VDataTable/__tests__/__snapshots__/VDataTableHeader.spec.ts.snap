@@ -535,6 +535,7 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
                   <input id="input-37"
                          readonly="readonly"
                          type="text"
+                         role="combobox"
                          aria-readonly="false"
                          autocomplete="off"
                   >
@@ -598,6 +599,7 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
                   <input id="input-69"
                          readonly="readonly"
                          type="text"
+                         role="combobox"
                          aria-readonly="false"
                          autocomplete="off"
                   >
@@ -661,6 +663,7 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                   <input id="input-47"
                          readonly="readonly"
                          type="text"
+                         role="combobox"
                          aria-readonly="false"
                          autocomplete="off"
                   >
@@ -713,6 +716,7 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
                   <input id="input-42"
                          readonly="readonly"
                          type="text"
+                         role="combobox"
                          aria-readonly="false"
                          autocomplete="off"
                   >
@@ -776,6 +780,7 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                   <input id="input-54"
                          readonly="readonly"
                          type="text"
+                         role="combobox"
                          aria-readonly="false"
                          autocomplete="off"
                   >
@@ -841,6 +846,7 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                   <input id="input-61"
                          readonly="readonly"
                          type="text"
+                         role="combobox"
                          aria-readonly="false"
                          autocomplete="off"
                   >

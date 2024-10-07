@@ -35,6 +35,7 @@ exports[`VDataTable.ts should apply class from item to rows 1`] = `
                         <input id="input-699"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -333,6 +334,7 @@ exports[`VDataTable.ts should apply class from item to rows 1`] = `
                        id="input-703"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -427,6 +429,7 @@ exports[`VDataTable.ts should apply class function to rows 1`] = `
                         <input id="input-683"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -725,6 +728,7 @@ exports[`VDataTable.ts should apply class function to rows 1`] = `
                        id="input-687"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -819,6 +823,7 @@ exports[`VDataTable.ts should apply class list to rows 1`] = `
                         <input id="input-651"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -1117,6 +1122,7 @@ exports[`VDataTable.ts should apply class list to rows 1`] = `
                        id="input-655"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -1211,6 +1217,7 @@ exports[`VDataTable.ts should apply class unique to rows 1`] = `
                         <input id="input-667"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -1509,6 +1516,7 @@ exports[`VDataTable.ts should apply class unique to rows 1`] = `
                        id="input-671"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -1603,6 +1611,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
                         <input id="input-483"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -1803,6 +1812,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
                         <input id="input-435"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -2151,6 +2161,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
                        id="input-439"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -2245,6 +2256,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
                         <input id="input-451"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -2793,6 +2805,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
                        id="input-455"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -2888,6 +2901,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
                         <input id="input-763"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -3436,6 +3450,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
                        id="input-767"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -3531,6 +3546,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
                         <input id="input-419"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -3829,6 +3845,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
                        id="input-423"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -3923,6 +3940,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                         <input id="input-371"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -3976,6 +3994,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                        id="input-375"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -4070,6 +4089,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                         <input id="input-371"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -4368,6 +4388,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                        id="input-375"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -4461,6 +4482,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
                         <input id="input-387"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -5009,6 +5031,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
                        id="input-391"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -5104,6 +5127,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
                         <input id="input-387"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -5157,6 +5181,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
                        id="input-391"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -5252,6 +5277,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                         <input id="input-403"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -5450,6 +5476,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                        id="input-407"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -5545,6 +5572,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                         <input id="input-403"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -6093,6 +6121,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                        id="input-407"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -6204,6 +6233,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
                         <input id="input-515"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -6384,6 +6414,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
                        id="input-521"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -6483,6 +6514,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
                        id="input-315"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -6582,6 +6614,7 @@ exports[`VDataTable.ts should render 1`] = `
                        id="input-6"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -6678,6 +6711,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
                        id="input-359"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -6779,6 +6813,7 @@ exports[`VDataTable.ts should render footer.prepend slot content 1`] = `
                        id="input-345"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -6873,6 +6908,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
                         <input id="input-577"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -6981,6 +7017,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
                        id="input-589"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -7105,6 +7142,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
                        id="input-238"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -7200,6 +7238,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
                         <input id="input-250"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -7262,6 +7301,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
                        id="input-254"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -7357,6 +7397,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                         <input id="input-35"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -7406,6 +7447,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                        id="input-39"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -7500,6 +7542,7 @@ exports[`VDataTable.ts should render with data 1`] = `
                         <input id="input-18"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -7798,6 +7841,7 @@ exports[`VDataTable.ts should render with data 1`] = `
                        id="input-22"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -7892,6 +7936,7 @@ exports[`VDataTable.ts should render with foot slot 1`] = `
                         <input id="input-52"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -8193,6 +8238,7 @@ exports[`VDataTable.ts should render with foot slot 1`] = `
                        id="input-56"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -8286,6 +8332,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                         <input id="input-219"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -8346,6 +8393,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                        id="input-223"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -8439,6 +8487,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                         <input id="input-131"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -8857,6 +8906,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                        id="input-155"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -8950,6 +9000,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                         <input id="input-185"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -9316,6 +9367,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                        id="input-205"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -9410,6 +9462,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                         <input id="input-169"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -9473,6 +9526,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                        id="input-173"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -9567,6 +9621,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                         <input id="input-113"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -9890,6 +9945,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                        id="input-117"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -9985,6 +10041,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                         <input id="input-68"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -10338,6 +10395,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                        id="input-77"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -10433,6 +10491,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                         <input id="input-68"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -10786,6 +10845,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                        id="input-77"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -10896,6 +10956,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                         <input id="input-90"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -11279,6 +11340,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                        id="input-99"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -11368,6 +11430,7 @@ exports[`VDataTable.ts should respect mustSort property on options 1`] = `
                         <input id="input-747"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -11516,6 +11579,7 @@ exports[`VDataTable.ts should respect mustSort property on options 1`] = `
                        id="input-751"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -11606,6 +11670,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
                         <input id="input-552"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -11728,6 +11793,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
                        id="input-564"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -11818,6 +11884,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
                         <input id="input-552"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -11903,6 +11970,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
                        id="input-564"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -12011,6 +12079,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
                         <input id="input-633"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -12311,6 +12380,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
                        id="input-639"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >
@@ -12419,6 +12489,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
                         <input id="input-633"
                                readonly="readonly"
                                type="text"
+                               role="combobox"
                                aria-readonly="false"
                                autocomplete="off"
                         >
@@ -12719,6 +12790,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
                        id="input-639"
                        readonly="readonly"
                        type="text"
+                       role="combobox"
                        aria-readonly="false"
                        autocomplete="off"
                 >

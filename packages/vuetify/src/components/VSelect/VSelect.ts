@@ -467,6 +467,7 @@ export default baseMixins.extend<options>().extend({
         attrs: {
           readonly: true,
           type: 'text',
+          role: 'combobox',
           'aria-readonly': String(this.isReadonly),
           'aria-activedescendant': getObjectValueByPath(this.$refs.menu, 'activeTile.id'),
           autocomplete: getObjectValueByPath(input.data!, 'attrs.autocomplete', 'off'),
