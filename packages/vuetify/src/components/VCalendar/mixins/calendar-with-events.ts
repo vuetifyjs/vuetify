@@ -423,7 +423,7 @@ export default CalendarBase.extend({
     },
     getEventsForDayAll (day: CalendarDaySlotScope): CalendarEventParsed[] {
       const identifier = getDayIdentifier(day)
-      const firstWeekday = this.eventWeekdays[0]
+      const firstWeekday = this.parsedStart.weekday
 
       return this.parsedEvents.filter(
         event => event.allDay &&
