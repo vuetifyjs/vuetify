@@ -118,6 +118,18 @@ export default CalendarWithEvents.extend({
           component = VCalendarDaily
           start = this.parsedStart || around
           end = this.parsedEnd
+          const defaultWeekDays = [0, 1, 2, 3, 4, 5, 6]
+          const isCustomWeekDays = (this.weekdays.length !== defaultWeekDays.length) || defaultWeekDays.some((element, index) => {
+            return element !== this.weekdays[index]
+          })
+          if (!isCustomWeekDays) {
+            weekdays = []
+
+            for (let i = 0; i < maxDays; i++) {
+              weekdays.push((start.weekday + i) % 7)
+            }
+          }
+
           break
         case 'category':
           const days = this.parsedCategoryDays
