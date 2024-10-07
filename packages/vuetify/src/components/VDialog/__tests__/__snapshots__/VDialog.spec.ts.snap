@@ -45,6 +45,11 @@ exports[`VDialog.ts should render component and match snapshot 1`] = `
 </div>
 `;
 
+exports[`VDialog.ts should render component with custom attributes and match snapshot 1`] = `
+<div class="v-dialog__container">
+</div>
+`;
+
 exports[`VDialog.ts should render component with custom origin and match snapshot 1`] = `
 <div class="v-dialog__container">
 </div>
