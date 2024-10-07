@@ -118,7 +118,7 @@ jobs:
       - run: yarn global add vercel
 
       - name: Download eo-UY
-        uses: crowdin/github-action@1.1.2
+        uses: crowdin/github-action@v2.2.0
         with:
           config: crowdin.yml
           upload_sources: false
@@ -130,7 +130,7 @@ jobs:
           debug_mode: true
 
       - name: Download ja
-        uses: crowdin/github-action@1.1.2
+        uses: crowdin/github-action@v2.2.0
         with:
           config: crowdin.yml
           upload_sources: false
@@ -142,7 +142,7 @@ jobs:
           debug_mode: true
 
       - name: Download zh-CN
-        uses: crowdin/github-action@1.1.2
+        uses: crowdin/github-action@v2.2.0
         with:
           config: crowdin.yml
           upload_sources: false
