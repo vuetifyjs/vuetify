@@ -337,11 +337,15 @@ export default Vue.extend({
       this.updateOptions({ sortBy, sortDesc })
     },
     updateOptions (options: any) {
+      const newPageCount = options.itemsPerPage <= 0
+        ? 1
+        : Math.ceil(this.itemsLength / options.itemsPerPage)
+
       this.internalOptions = {
         ...this.internalOptions,
         ...options,
         page: this.serverItemsLength < 0
-          ? Math.max(1, Math.min(options.page || this.internalOptions.page, this.pageCount))
+          ? Math.max(1, Math.min(options.page || this.internalOptions.page, newPageCount || this.pageCount))
           : options.page || this.internalOptions.page,
       }
     },

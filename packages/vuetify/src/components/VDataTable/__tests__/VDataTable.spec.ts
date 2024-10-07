@@ -1132,4 +1132,28 @@ describe('VDataTable.ts', () => {
 
     expect(input).toHaveBeenCalledWith([items[4], items[5]])
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/14414
+  it('should go to the correct page when using page and itemsPerPage, pointing to a page previously unavailable', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        options: {
+          itemsPerPage: 5,
+          page: 1,
+        },
+      },
+    })
+
+    wrapper.setProps({
+      options: {
+        page: 5,
+        itemsPerPage: 2,
+      },
+    })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
