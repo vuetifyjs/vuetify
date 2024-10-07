@@ -1,0 +1,20 @@
+{
+  "props": {
+    "absolute": "Applies position: absolute to the component.",
+    "bottom": "Aligne le composant vers le bas.",
+    "collapse": "Puts the toolbar into a collapsed state reducing its maximum width.",
+    "dense": "Reduces the height of the toolbar content to 48px (96px when using the **prominent** prop).",
+    "extended": "Utilisez cette prop pour augmenter la hauteur de la barre d'outils _without_ en utilisant l'emplacement `extension` pour ajouter du contenu. Peut être utilisé en conjonction avec la prop **extension-height** et n'importe quelles autres props qui affectent la hauteur de la barre d'outils, par exemple**prominent**, **dense**, etc.**WITH THE EXCEPTION** de **height**.",
+    "extensionHeight": "Specify an explicit height for the `extension` slot. ",
+    "flat": "Supprime l'ombre de la barre d'outils.",
+    "floating": "Applies **display: inline-flex** to the component.",
+    "height": "Designates a specific height for the toolbar. Overrides the heights imposed by other props, e.g. **prominent**, **dense**, **extended**, etc.",
+    "prominent": "Increases the height of the toolbar content to 128px.",
+    "short": "Reduce the height of the toolbar content to 56px (112px when using the **prominent** prop).",
+    "src": "Spécifie un [v-img](/components/images) comme arrière-plan du composant."
+  },
+  "slots": {
+    "extension": "Slot placé directement sous le contenu principal de la barre d'outils. La hauteur du slot peut être définie explicitement avec la prop **extension-height**. Si ce slot n'a pas de contenu, la prop **extended** peut être utilisée à la place.",
+    "img": "Nécessite le composant [v-img](/components/images). Les **props** avec portée doivent être appliqués avec `v-bind=\"props\"`."
+  }
+}

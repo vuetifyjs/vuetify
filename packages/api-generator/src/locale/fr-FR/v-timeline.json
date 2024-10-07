@@ -1,0 +1,7 @@
+{
+  "props": {
+    "alignTop": "Aligner le curseur et le point des éléments de la frise chronologique en haut",
+    "dense": "Masquer le contenu de l'emplacement opposé et positionner tous les éléments à un côté de la chronologie",
+    "reverse": "Inverser la direction des éléments timeline"
+  }
+}

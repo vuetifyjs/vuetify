@@ -1,0 +1,7 @@
+{
+  "props": {
+    "activeClass": "配置在链接激活时应用的 CSS 类。你能够在 vue-router 文档浏览更多 [**active-class** prop](https://router.vuejs.org/api/#active-class)。",
+    "disabled": "移除组件的单击或 target 功能。",
+    "value": "在组中选择组件时使用的值。如果没有提供，则使用 index。"
+  }
+}

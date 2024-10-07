@@ -1,0 +1,50 @@
+{
+  "props": {
+    "activatable": "Permet à l'utilisateur de marquer un noeud comme actif en cliquant dessus",
+    "active": "Prop Synchronisable qui permet de contrôler les nœuds actifs. Le tableau est composé de la `item-key` de chaque élément actif.",
+    "activeClass": "La classe appliquée au noeud quand active",
+    "color": "Définit la couleur du nœud actif",
+    "dense": "Diminue la hauteur des objets",
+    "disabled": "Désactive la sélection pour tous les nœuds",
+    "disablePerNode": "Empêche la désactivation des noeuds enfants",
+    "expandIcon": "Icône utilisée pour indiquer qu'un noeud peut être étendu",
+    "hoverable": "Applique une classe de survol lors de la moussement des nœuds",
+    "filter": "Fonction de filtrage d'élément personnalisé. Par défaut, elle utilisera la recherche insensible à la casse dans l'étiquette de l'article.",
+    "indeterminateIcon": "Icône utilisée lorsque le noeud est dans un état indéterminé. Seulement visible lorsque `selectable` est `true`.",
+    "itemChildren": "Propriété sur `items` fourni qui contient ses enfants",
+    "itemDisabled": "Propriété sur `items` fourni qui contient l'état désactivé de l'élément",
+    "itemKey": "Propriété sur `items` fourni utilisée pour garder la trace de l'état du noeud. La valeur de cette propriété doit être unique parmi tous les éléments.",
+    "items": "Un tableau d'éléments utilisés pour construire l'arborescence",
+    "itemText": "Propriété sur `items` fourni qui contient son libellé",
+    "loadChildren": "Une fonction utilisée lors du chargement dynamique des enfants. Si ce prop est défini, la fonction fournie sera exécutée si l'extension d'un élément qui a une propriété `item-children` qui est un tableau vide. Supporte de retourner une promesse.",
+    "loadingIcon": "Icône utilisée lorsque le noeud est dans un état de chargement",
+    "multipleActive": "Quand `true`, permet à l'utilisateur d'avoir plusieurs nœuds actifs en même temps",
+    "offIcon": "Icône utilisée lorsque le noeud n'est pas sélectionné. Seulement visible lorsque `selectable` est `true`.",
+    "onIcon": "Icône utilisée lorsque le noeud feuille est sélectionné ou lorsqu'un noeud de branche est complètement sélectionné. Seulement visible lorsque `selectable` est `true`.",
+    "open": "Prop synchronisable qui permet de contrôler les nœuds ouverts. Le tableau est composé de la `item-key` de chaque élément ouvert.",
+    "openAll": "Quand `true` ouvrira tous les noeuds de branche quand le composant est monté",
+    "openOnClick": "Quand `true` va ouvrir des nœuds en cliquant n'importe où, au lieu d'ouvrir uniquement en cliquant sur l'icône d'extension. Lorsque vous utilisez ce prop avec `activatable` vous ne pourrez pas marquer les noeuds avec des enfants aussi actifs.",
+    "returnObject": "Quand `true` fera `v-model`, `active.sync` et `open.sync` retourne l'objet complet au lieu de la seule clé",
+    "rounded": "Fournit un style actif alternatif pour le noeud `v-treeview`. Seulement visible lorsque `activatable` est `true` et ne doit pas être utilisé en conjonction avec le prop `shaped`.",
+    "search": "Le modèle de recherche pour les résultats de filtrage",
+    "selectable": "Renforcera une case à côté de chaque noeud permettant de les sélectionner",
+    "selectedColor": "La couleur de la case à cocher de sélection",
+    "selectionType": "Contrôle la sélection des nœuds de treeview. Il y a deux modes disponibles : 'leaf' et 'independent'",
+    "shaped": "Fournit un style actif alternatif pour le noeud `v-treeview`. Seulement visible lorsque `activatable` est `true` et ne doit pas être utilisé en conjonction avec le prop `rounded`.",
+    "transition": "Applique une transition lorsque les nœuds sont ouverts et fermés",
+    "value": "Permet à un contrôle des noeuds sélectionnés. Le tableau est composé de la `item-key` de chaque élément sélectionné. Il est utilisé avec l'événement `@input` pour permettre la liaison `v-model`."
+  },
+  "slots": {
+    "append": "Ajoute le contenu après étiquette",
+    "label": "Contenu du label",
+    "prepend": "Prépend le contenu avant l'étiquette"
+  },
+  "events": {
+    "input": "Émet le tableau des éléments sélectionnés lorsque cette valeur change",
+    "update:active": "Émet le tableau des éléments actifs lorsque cette valeur change",
+    "update:open": "Émet le tableau des éléments ouverts lorsque cette valeur change"
+  },
+  "functions": {
+    "updateAll": "Ouvre ou ferme tous les nœuds"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "props": {
+    "activeClass": "**active-class** 在子组件（children ）被激活时应用。",
+    "alignWithTitle": "让`v-tabs`与工具栏标题对齐",
+    "backgroundColor": "更改组件的背景颜色。",
+    "centered": "将选项卡居中",
+    "centerActive": "强制所选标签以居中",
+    "cycle": "如果在索引末尾向左或向右滑动，将重置为第一个或最后一个选项卡",
+    "dark": "将暗色主题变量应用到组件。你可以在 [dark themes](https://material.io/design/color/dark-theme.html) 的 Material Design 文档中找到更多有关信息。",
+    "fixedTabs": "`v-tabs-item` min-width 160px, max-width 360px",
+    "grow": "强制 `v-tab` 占用所有可用空间",
+    "height": "设置标签栏高度",
+    "hideSlider": "隐藏生成的 `v-tabs-slider`",
+    "iconsAndText": "将堆叠图标和文字垂直",
+    "light": "为组件设置浅色主题。",
+    "mobileBreakpoint": "为组件设置和指定移动设备的屏幕尺寸断点",
+    "optional": "不需要活动项目。 在将 `v-tab` 用作 `router-link` 时有用",
+    "prevIcon": "右分页图标",
+    "nextIcon": "左分页图标",
+    "reverseTransition": "组件反转项时使用的转换。可以是一个 [built in transitions](/styles/transitions) 或是你自己创建的过渡。",
+    "right": "将选项向右侧对齐",
+    "showArrows": "如果选项卡项目超出其容器，则显示分页箭头。 对于移动设备，仅在使用此属性时才会显示箭头。",
+    "sliderColor": "更改自动生成的 `v-tabs-slider` 的背景颜色",
+    "sliderSize": "更改滑块的大小，水平 **height**，垂直 **width**。",
+    "touchless": "禁用移动触摸功能",
+    "transition": "设置组件转换。可以是一个 [built in transitions](/styles/transitions) 或者是自己自定义的。",
+    "vertical": "垂直堆叠选项卡。"
+  },
+  "events": {
+    "change": "Emitted when tab is changed by user interaction. Returns a string if **href** attribute is set and number if it is not."
+  }
+}

@@ -13,7 +13,6 @@ module.exports = {
     disableHostCheck: true,
     historyApiFallback: {
       rewrites: [
-        { from: /eo-UY\/.*/, to: '/_crowdin.html' },
         { from: /.*/, to: '/_fallback.html' },
       ],
     },
@@ -49,7 +48,6 @@ module.exports = {
       // swSrc is required in InjectManifest mode.
       swSrc: './src/service-worker.js',
       additionalManifestEntries: [
-        { url: '/_crowdin.html', revision: Date.now().toString(16) },
         { url: '/_fallback.html', revision: Date.now().toString(16) },
       ],
       exclude: [/\.map$/],

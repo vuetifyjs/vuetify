@@ -1,0 +1,10 @@
+{
+  "argument": "La fonction à invoquer lorsque l'élément cible est mis à jour.",
+  "modifiers": {
+    "once": "N'invoquera qu'une fois le rappel de l'utilisateur fourni, alors la directive sera non modifiée.",
+    "attr": "Définit la valeur de [attributes](https://developer.mozilla.org/fr-US/docs/Web/API/MutationObserverInit/attributes) à true.",
+    "child": "Définit la valeur de [childList](https://developer.mozilla.org/fr-US/docs/Web/API/MutationObserverInit/childList) pour true.",
+    "char": "Définit la valeur de [characterData](https://developer.mozilla.org/fr-US/docs/Web/API/MutationObserverInit/characterData) pour true.",
+    "sub": "Définit la valeur de [subtree](https://developer.mozilla.org/fr-US/docs/Web/API/MutationObserver/observe#Parameters) à true."
+  }
+}

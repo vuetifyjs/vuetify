@@ -1,0 +1,8 @@
+{
+  "props": {
+    "editable": "編集可能なボタンを作成します",
+    "overflow": "オーバーフローボタンを作成します",
+    "segmented": "区切り線つきのセグメント化されたボタンを作成します",
+    "persistentPlaceholder": "Forces label to always be visible"
+  }
+}

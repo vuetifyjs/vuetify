@@ -1,0 +1,20 @@
+{
+  "props": {
+    "closeOnClick": "指定菜应该在外部激活器被点击时关闭。",
+    "closeOnContentClick": "指定点击内容时菜单是否应该关闭。",
+    "closeDelay": "关闭组件之前等待的毫秒数. 只在使用 **open-on-hover** prop 时有效.",
+    "disabled": "禁用菜单",
+    "disableKeys": "移除所有键盘交互功能",
+    "internalActivator": "与文档相反，分离组件内部的菜单内容。",
+    "maxHeight": "设置菜单内容的最大高度",
+    "offsetX": "在x轴上偏移菜单，与左/右方向一起工作",
+    "offsetY": "在y轴上偏移菜单，与上/下方向一起工作",
+    "openDelay": "开启组件之前等待的毫秒数. 只在使用 **open-on-hover** prop 时有效.",
+    "openOnClick": "指定是否在激活器点击时打开菜单",
+    "openOnHover": "指定是否在激活器悬停时打开菜单",
+    "origin": "设置元素上的动画原点。您可以在 MDN 文档上浏览更多 [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin)",
+    "returnValue": "关闭菜单时更新的值 - 必须为原始值。 支持点表示法",
+    "transition": "设置组件转换。可以是一个 [built in transitions](/styles/transitions) 或者是自己自定义的。",
+    "contentProps": "Applies props/attributes to the detached menu. This is useful because the content is moved to the beginning of the `v-app` component (unless the attach prop is provided) and is not targetable by classes passed directly on the component. You could use this for example for applying a `data-cy` for cypress testing purposes."
+  }
+}

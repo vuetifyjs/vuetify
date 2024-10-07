@@ -1,0 +1,23 @@
+{
+  "props": {
+    "active": "确定纸片是否可见。",
+    "close": "添加删除按钮",
+    "closeIcon": "更改用于 **close** 纸片的默认图标",
+    "closeLabel": "在 **关闭** 碎片中用于关闭按钮的 *aria-label* 的文字。也可以在 [国际化](/customization/international) 中进行全局定制化。",
+    "disabled": "禁用纸片，使其不可选择",
+    "draggable": "使纸片可拖动",
+    "filter": "选中时显示选择图标",
+    "filterIcon": "更改用于 **filter** 纸片的默认图标",
+    "inputValue": "控制项的 **active** 状态。这通常用于高亮显示组件。",
+    "label": "移除圆形边缘",
+    "link": "明确地将纸片定义为链接",
+    "outlined": "删除背景并应用边框和文本颜色",
+    "pill": "移除 `v-avatar` 的边距",
+    "value": "[v-chip-group](/components/chip-groups) 的子组时使用的值。"
+  },
+  "events": {
+    "click": "单击组件时发出，切换芯片（如果包含在芯片组中） - 除非使用 `.native` 修饰符，否则单击时将触发组件产生涟漪",
+    "click:close": "单击关闭图标时发出",
+    "update:active": "单击关闭图标时发出，将 active 设置为 `false`"
+  }
+}

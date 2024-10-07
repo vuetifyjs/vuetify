@@ -1,0 +1,22 @@
+{
+  "props": {
+    "column": "Affiche les boutons radio dans la colonne",
+    "dark": "Applique la variante du thème sombre au composant. Cela appliquera par défaut la couleur _white_ aux composants, à moins que vous ayez configuré votre [thème d'application](/customization/theme) à **dark** ou si vous utilisez la prop **color** sur le composant. Plus d'informations dans la documentation Material Design pour les [thèmes sombres](https://material.io/design/color/dark-theme.html).",
+    "flat": "Afficher le composant sans élévation. L'élévation par défaut pour le pouce est de 4dp, `flat` le réinitialise",
+    "indeterminate": "Définit un état indéterminé pour la case à cocher",
+    "indeterminateIcon": "L'icône utilisée dans un état indéterminé",
+    "inputValue": "La valeur limite du **v-model**",
+    "inset": "Agrandir la piste `v-switch` pour englober le pouce",
+    "mandatory": "Force une sélection sur un enfant `v-radio`",
+    "multiple": "Modifie le modèle attendu en un tableau",
+    "name": "Définit l'attribut nom du composant",
+    "offIcon": "L'icône utilisée si inactif",
+    "onIcon": "L'icône utilisée si actif",
+    "row": "Affiche les boutons radio à la ligne"
+  },
+  "events": {
+    "update:indeterminate": "L'événement `indeterminate.sync`.",
+    "change": "Émis lorsque l'entrée est modifiée par l'interaction utilisateur",
+    "click": "Émis lors du clique sur l'entrée. **Note:** l'événement **changement** doit être utilisé à la place de **clic** lors du suivi du changement d'état"
+  }
+}

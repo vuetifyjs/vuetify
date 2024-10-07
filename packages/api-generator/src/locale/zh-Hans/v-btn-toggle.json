@@ -1,0 +1,14 @@
+{
+  "props": {
+    "backgroundColor": "更改组件的背景颜色。",
+    "borderless": "移除按钮组的边框。",
+    "dense": "减少按钮大小和间距。",
+    "group": "通常用于 [v-toolbar](/components/toolbars) 和 [v-app-bar](/components/app-bars)。删除背景颜色、边框并增加按钮的间距",
+    "rounded": "在边缘上的圆角按钮",
+    "shaped": "在卡片的左上角和右下角应用较大的边框半径。",
+    "tile": "删除组件的 border-radius。"
+  },
+  "events": {
+    "change": "当用户交互更改输入时发出"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "props": {
+    "continuous": "Détermine si le carrousel est continu",
+    "cycle": "Détermine si le carrousel doit parcourir les images.",
+    "delimiterIcon": "Définit l'icône pour le délimiteur du carrousel",
+    "hideControls": "Cache les commandes de navigation (gauche et droite).",
+    "hideDelimiters": "Cache les délimiteurs inférieur du carrousel.",
+    "hideDelimiterBackground": "Cache le délimiteur inférieur de fond.",
+    "interval": "La durée entre les cycles d'image. Nécessite le prop **cycle** .",
+    "nextIcon": "L'icône affichée pour forcer la pagination à l'élément suivant.",
+    "prevIcon": "L'icône affichée pour forcer la pagination à l'élément précédent.",
+    "progress": "Affiche une barre de progression du carrousel. Nécessite la prop **cycle** et **intervalle**.",
+    "progressColor": "Applique la couleur spécifiée à la barre de progression.",
+    "showArrows": "Affiche les flèches pour la navigation suivante/précédente.",
+    "showArrowsOnHover": "Affiche les flèches de navigation seulement lorsque le carrousel est survolé.",
+    "verticalDelimiters": "Affiche verticalement les délimiteurs du carrousel."
+  },
+  "events": {
+    "change": "Émis lorsque la valeur du composent est modifiée par l'interaction utilisateur"
+  }
+}

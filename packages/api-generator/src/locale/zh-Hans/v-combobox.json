@@ -1,0 +1,5 @@
+{
+  "props": {
+    "delimiters": "接受将在键入时触发新标记的字符串数组。不替换正常的 Tab 和 Enter keys。"
+  }
+}

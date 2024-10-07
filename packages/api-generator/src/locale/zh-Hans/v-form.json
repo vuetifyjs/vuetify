@@ -1,0 +1,16 @@
+{
+  "props": {
+    "disabled": "将所有的子表单组件设置为禁用状态.",
+    "lazyValidation": "如果启用，**value**将永远是 _true_ ，除非有可见的验证错误。您仍然可以调用`validate()`来手动触发验证。",
+    "readonly": "将所有的子表单组件设置为只读状态.",
+    "value": "表示表单有效性的布尔值。"
+  },
+  "events": {
+    "submit": "提交表单时发出"
+  },
+  "functions": {
+    "reset": "将所有已注册输入（在表单内）的状态重置为数组的 **{}** 和所有其他值的 **null**。 使用 **lazy-validation** 属性时，重置错误包。",
+    "resetValidation": "重置所有已注册输入的验证，但不修改其状态",
+    "validate": "验证所有注册的输入。 如果成功返回 **true**，否则返回 **false**"
+  }
+}

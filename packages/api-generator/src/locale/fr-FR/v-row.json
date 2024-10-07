@@ -1,0 +1,21 @@
+{
+  "props": {
+    "align": "Applique la propriété CSS [align-items](https://developer.mozilla.org/fr-US/docs/Web/CSS/align-items). Les options disponibles sont **start**, **center**, **end**, **auto**, **baseline** et **stretch**.",
+    "alignSm": "Modifie la propriété **align-items** sur les petits et grands points d'arrêt.",
+    "alignMd": "Modifie le nombre de colonnes sur les petits points d'arrêt ainsi que les plus grands.",
+    "alignLg": "Modifie la propriété **align-items** sur les points d'arrêt grands et plus grands.",
+    "alignXl": "Modifie la propriété **align-items** sur des points d'arrêt très grands et plus grands.",
+    "alignContent": "Applique la propriété CSS [align-items](https://developer.mozilla.org/fr-US/docs/Web/CSS/align-items). Les options disponibles sont **start**, **center**, **end**, **auto**, **baseline** et **stretch**.",
+    "alignContentSm": "Modifie la propriété **align-items** sur des points d'arrêt très grands et plus grands.",
+    "alignContentMd": "Modifie le nombre de colonnes sur les petits points d'arrêt ainsi que les plus grands.",
+    "alignContentLg": "Modifie la propriété **align-items** sur des points d'arrêt très grands et supérieurs.",
+    "alignContentXl": "Modifie la propriété **align-content** sur des points d'arrêt très grands et supérieurs.",
+    "dense": "Réduit la gouttière entre `v-col`s.",
+    "justify": "Applique la propriété CSS [align-items](https://developer.mozilla.org/fr-US/docs/Web/CSS/align-items). Les options disponibles sont **start**, **center**, **end**, **auto**, **baseline** et **stretch**.",
+    "justifySm": "Modifie la propriété **justify-content** sur des points d'arrêt petits et supérieurs.",
+    "justifyMd": "Modifie la propriété **justify-content** sur des points d'arrêt moyen et supérieurs.",
+    "justifyLg": "Modifie la propriété **justify-content** sur des points d'arrêt large et supérieurs.",
+    "justifyXl": "Modifie la propriété **justify-content** sur des points d'arrêt large et supérieurs.",
+    "noGutters": "Retires la gouttière entre `v-col`s."
+  }
+}

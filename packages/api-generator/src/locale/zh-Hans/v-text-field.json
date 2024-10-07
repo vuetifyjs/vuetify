@@ -1,0 +1,45 @@
+{
+  "props": {
+    "appendOuterIcon": "在组件的外部添加一个图标，使用与 `v-icon` 相同的语法",
+    "autoGrow": "自动增长输入，需要使用 **v-model**",
+    "autofocus": "启用自动聚焦",
+    "filled": "应用替代填充输入样式",
+    "clearIcon": "当使用 **clearable** 且有输入值时应用",
+    "counter": "为输入长度创建一个计数器，如果未指定数字，则默认为25，不会应用任何验证。",
+    "dark": "将深色主题变量应用于组件。 除非您已将 [application theme](/customization/theme) 配置为 **dark** 或在组件上使用 **color** 属性，否则组件的颜色默认为 _white_。 您可以在材料设计文档中找到更多信息 [dark themes](https://material.io/design/color/dark-theme.html)。",
+    "flat": "当使用**solo**或者**solo-inverted**属性时，移除添加到元素的标高（阴影）",
+    "fullWidth": "指定输入类型为全宽度",
+    "multiLine": "转为多行文本框",
+    "noResize": "删除调整大小句柄，只适用于 **multi-line** 和 **textarea** 属性",
+    "outlined": "将轮廓样式应用于输入",
+    "persistentPlaceholder": "强制提示总是可见的",
+    "placeholder": "设置输入的占位符文本",
+    "prefix": "显示前缀",
+    "prependInnerIcon": "在组件的输入中添加一个图标，使用与 `v-icon` 相同的语法",
+    "reverse": "反转输入方向",
+    "rounded": "向输入添加边框半径",
+    "rows": "Textarea 的行数",
+    "rowHeight": "指定自定义 _row-height_。 在使用 **multi-line** 或 **textarea** 属性时用于确定输入高度",
+    "singleLine": "标签在 focus/dirty 上不移动",
+    "solo": "改变输入框的样式",
+    "soloInverted": "减少元素的不透明度，直到获得焦点",
+    "suffix": "显示后缀",
+    "textarea": "Textarea 使用备用样式",
+    "toggleKeys": "切换输入键值的数组（如果支持切换的话）",
+    "type": "设置输入类型",
+    "shaped": "如果 `outlined` 则为圆形，如果 `filled` 则增加 `border-radius`。必须与 `outlined` 或 `filled` 一起使用"
+  },
+  "slots": {
+    "append-outer": "在输入框外部，文字之后添加一个内容",
+    "prepend-inner": "在输入框内部，前面添加一个内容"
+  },
+  "events": {
+    "blur": "当失去焦点时发出",
+    "change": "当用户交互更改输入时发出",
+    "click:append-outer": "单击附加的外部图标时发出",
+    "click:clear": "单击可清除图标时发出",
+    "click:prepend-inner": "单击前置的内部图标时发出",
+    "focus": "组件聚焦时发出",
+    "keydown": "按下 **任何** 键时发送"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "props": {
+    "autoSelectFirst": "Lors de la recherche, la première option sera toujours mise en évidence",
+    "dark": "Applique la variante du thème foncé au composant. Cela va par défaut la couleur des composants à _white_ à moins que vous ayez configuré votre [thème d'application](/customization/thème) à **dark** ou si vous utilisez le prop **couleur** sur le composant. Vous pouvez trouver plus d'informations sur la documentation de Design de matériaux pour [thèmes foncés](https://material.io/design/color/dark-theme.html).",
+    "filter": "L'algorithme de filtrage utilisé lors de la recherche. [example](https://github.com/vuetifyjs/vuetify/blob/v2-stable/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L40)",
+    "hideNoData": "Masque le menu lorsqu'il n'y a pas d'options à afficher. Utile pour empêcher le menu de s'ouvrir avant que les résultats ne soient récupérés de manière asynchrone. Il a également l'effet d'ouvrir le menu lorsque le tableau `items` change, s'il n'est pas déjà ouvert.",
+    "noFilter": "Ne pas appliquer le filtrage lors de la recherche. Utile lorsque les données sont filtrées côté serveur",
+    "searchInput": "Valeur de la recherche. Peut être utilisé avec le modificateur `.sync`."
+  }
+}

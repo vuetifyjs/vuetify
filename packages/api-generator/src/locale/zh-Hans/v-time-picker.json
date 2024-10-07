@@ -1,0 +1,30 @@
+{
+  "props": {
+    "format": "定义在选择器中显示的时间格式。可用的选项是 `ampm` 和 `24hr`。",
+    "activePicker": "Determines which picker is being displayed. Allowed values: `'HOUR'`, `'MINUTE'`, `'SECOND'`",
+    "allowedHours": "限制可以选择的小时",
+    "allowedMinutes": "限制可以选择的分钟",
+    "allowedSeconds": "限制可以选择的秒数",
+    "disabled": "禁用选择器",
+    "flat": "移除提升",
+    "scrollable": "允许通过鼠标滚动更改 小时/分钟",
+    "min": "允许的最小时间",
+    "max": "允许的最大时间",
+    "readonly": "将选择器置于只读状态",
+    "useSeconds": "切换选择器中秒的使用",
+    "value": "时间选择器型号（ISO 8601 格式，24hr hh:mm）",
+    "width": "选择器宽度",
+    "ampmInTitle": "将 AM/PM 开关放置在标题中，不在时钟附近。"
+  },
+  "slots": {
+    "default": "显示在时钟下方，可用于添加动作按钮（`OK` 和 `Cancel`）。"
+  },
+  "events": {
+    "click:hour": "当用户选择小时时发出",
+    "click:minute": "当用户选择分钟时发出",
+    "click:second": "当用户选择秒时发出",
+    "change": "当时间选择完成时发出通知（当用户更改 HH:MM 选择器的分钟数时, HH:MM:SS 选择器的秒数",
+    "update:period": "当用户点击 AM/PM 按钮时发出。",
+    "update:active-picker": "`active-picker` 属性的`.sync` 事件"
+  }
+}

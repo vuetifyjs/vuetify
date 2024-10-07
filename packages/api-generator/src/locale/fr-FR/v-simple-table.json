@@ -1,0 +1,6 @@
+{
+  "props": {
+    "dense": "Diminue les rajouts pour rendre un tableau dense",
+    "fixedHeader": "Définit l'en-tête du tableau en mode fixe"
+  }
+}

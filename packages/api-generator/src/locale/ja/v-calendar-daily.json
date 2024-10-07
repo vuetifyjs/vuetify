@@ -1,0 +1,24 @@
+{
+  "props": {
+    "dayFormat": "日付の月の表記を指定されたロケールでフォーマットします。",
+    "end": "`YYYY-MM-DD` の形式を含むカレンダーの終了日を指定します。これはカレンダーの `type` に依存して無視されることがあります。",
+    "firstInterval": "`day`ビューに表示する最初の間隔。 `intervalMinutes`が60に設定されていて、これが9に設定されている場合、ビューの最初の時間は午前9時になります。",
+    "firstTime": "`day`ビューで最初に表示する時間。指定された場合、指定値で上書きされます。 これは真夜中から分数、`H:mm`の形式での文字列、または時と分数のプロパティを持つオブジェクトです。\nday` ビューに最初に表示する時間。指定された場合は、`firstInterval` の値を上書きします。これは深夜0時からの分minutes、`HH:mm` 形式の文字列、あるいは時と分のプロパティを持つオブジェクトを指定することができます。",
+    "hideHeader": "`day` ビューの上部にあるヘッダーを表示するかどうかを設定します。",
+    "intervalCount": "`day`ビューに表示する期間の数。",
+    "intervalFormat": "Formats time of day string that appears in the interval gutter of the `day` and `week` view to specified locale",
+    "intervalHeight": "The height of an interval in pixels in the `day` view.",
+    "intervalWidth": "`day`ビューの左側にある間隔の幅。",
+    "intervalMinutes": "The number of minutes the intervals are in the `day` view. A common interval is 60 minutes so the intervals are an hour.",
+    "intervalStyle": "間隔に適用する CSS スタイルを返します。",
+    "locale": "カレンダーのロケール",
+    "maxDays": "`end` 日が設定されていない場合にカスタムカレンダーに表示する最大日数。",
+    "now": "Override the day & time which is considered now. This is in the format of `YYYY-MM-DD hh:mm:ss`. The calendar is styled according to now.",
+    "shortIntervals": "true の場合、`day` ビューの間隔は 9 AM ではなく 09:00 AM になります。",
+    "shortWeekdays": "曜日名をショートバージョンにする (Mon vs Monday)。",
+    "showIntervalLabel": "Checks if a given day and time should be displayed in the interval gutter of the `day` view.",
+    "start": "カレンダーの終了日 (YYYY-MM-DDを含む) を指定します。\nカレンダーの`type`の値に応じて無視することができます。",
+    "weekdayFormat": "ヘッダーに表示される曜日文字列を指定されたロケールにフォーマットします",
+    "weekdays": "週のどの日を表示するかを指定します。月曜日から金曜日までのみ表示するには、値を `[1, 2, 3, 4, 5]` で指定します。 月曜日はじまりで1週間を表示するには、値を`[1, 2, 3, 4, 5, 6, 0]` と指定します。"
+  }
+}

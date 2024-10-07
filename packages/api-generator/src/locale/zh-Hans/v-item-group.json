@@ -1,0 +1,19 @@
+{
+  "props": {
+    "activeClass": "配置在链接激活时应用的 CSS 类。你能够在 vue-router 文档浏览更多 [**active-class** prop](https://router.vuejs.org/api/#active-class)。",
+    "appendIcon": "在组件上附加一个图标，使用与 `v-icon` 相同的语法",
+    "disabled": "禁用所有子级的 `v-list-item` 组件",
+    "group": "分配路由名称空间。 接受字符串或正则表达式以确定活动状态",
+    "noAction": "从组项目中删除分配给操作图标的左边距",
+    "prependIcon": "在组件前添加一个图标，使用与 `v-icon` 相同的语法",
+    "ripple": "应用 [v-ripple](/directives/ripples) 指令。",
+    "subGroup": "将组件指定为嵌套列表组"
+  },
+  "slots": {
+    "appendIcon": "在组件上附加一个图标，使用与 `v-icon` 相同的语法",
+    "prependIcon": "在组件前添加一个图标，使用与 `v-icon` 相同的语法"
+  },
+  "events": {
+    "change": "当组件值被用户交互改变时发出。"
+  }
+}

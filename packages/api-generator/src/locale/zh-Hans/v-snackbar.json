@@ -1,0 +1,15 @@
+{
+  "props": {
+    "app": "尊重其它`app`组件的边界，也不会与它们重叠，例如`v-app-bar`、`v-navigation-drawer`和`v-footer`。",
+    "centered": "将snackbar在屏幕居中显示（x或y轴）",
+    "contentClass": "应用自定义类到 snackbar 内容",
+    "multiLine": "使消息条具有更大的最低高度。",
+    "text": "将定义的 **color** 应用于文本和同样的低透明度背景。",
+    "timeout": "等待snackbar 自动隐藏的时间 (毫秒) 。使用 \"-1\" 保持无限期打开 (版本 < 2 的 `0` )。 建议这个数字在 `4000` 和 `10000` 之间。此属性的更改将重置超时。",
+    "transition": "设置组件转换。可以是一个 [built in transitions](/styles/transitions) 或者是自己自定义的。",
+    "vertical": "将消息条内容堆叠在操作（按钮）之上。"
+  },
+  "slots": {
+    "action": "用于将样式绑定到 [v-btn](/components/butons) 以匹配MD2 规格。"
+  }
+}

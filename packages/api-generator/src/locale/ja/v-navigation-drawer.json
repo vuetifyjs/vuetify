@@ -1,0 +1,30 @@
+{
+  "props": {
+    "bottom": "モバイルデバイスでは、下から開くようになります。",
+    "clipped": "A clipped drawer rests under the application toolbar. **Note:** requires the **clipped-left** or **clipped-right** prop on `v-app-bar` to work as intended",
+    "disableResizeWatcher": "モバイルやデスクトップに応じてサイズを変更したとき、ドロワーを自動的に開いたり閉じたりします。",
+    "disableRouteWatcher": "ルート変更時にナビゲーションドロワーが開くのを無効にします",
+    "expandOnHover": "ドロワーをマウスでホバリングするまで**mini-variant**に折りたたみます。",
+    "floating": "A floating drawer has no visible container (no border-right)",
+    "height": "ナビゲーション ドロワーの高さを設定します。",
+    "mobileBreakpoint": "コンポーネントに指定されたモバイルブレークポイントを設定します。 これにより、`temporary` プロパティなどのモバイルデバイスに別のスタイルを適用するか、ブレークポイント値が満たされた場合に `bottom` プロパティを有効にします。 値を `0` に設定すると、この機能は無効になります。",
+    "miniVariantWidth": "`mini` prop がオンのときに割り当てられる幅を指定します。",
+    "miniVariant": "ナビゲーションドロワーの幅を縮小し、**.sync**修飾子も受け入れます。これにより、ドロワーはクリックすると再び開きます",
+    "permanent": "ドロワーは画面サイズに関係なく表示されたままになります",
+    "right": "ナビゲーションドロワーを右側に配置します。",
+    "src": "コンポーネントの背景として [v-img](/components/images) を指定します。",
+    "stateless": "すべての自動状態機能（resize, mobile, route）を削除し、ドロワーの状態を手動で制御します",
+    "temporary": "temporary は、ドロワーをアプリケーション画面の上に重なるように表示し、幕（overlay）を表示して背景を暗くします。",
+    "touchless": "モバイルのタッチ機能を無効にする",
+    "value": "コンポーネントを表示するか非表示にするかを制御します。"
+  },
+  "slots": {
+    "append": "ドロワーの下部にあるスロット",
+    "img": "**src** プロパティを指定した時、 `v-img` のプロパティを設定するために使用します。",
+    "prepend": "ドロワーの上部にあるスロット"
+  },
+  "events": {
+    "transitionend": "トランジションが完了したときにイベントオブジェクトを発生させます。",
+    "update:mini-variant": "`mini-variant.sync` イベント"
+  }
+}

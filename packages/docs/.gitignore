@@ -2,8 +2,6 @@
 node_modules
 /dist
 /src/api
-/src/pages/*
-!/src/pages/en
 
 # local env files
 .env.local

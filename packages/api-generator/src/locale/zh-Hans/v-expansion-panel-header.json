@@ -1,0 +1,14 @@
+{
+  "props": {
+    "disableIconRotate": "展开面板时删除图标旋转动画",
+    "expandIcon": "设置图标展开动作",
+    "hideActions": "隐藏内容标题中的展开图标",
+    "ripple": "应用 [v-ripple](/directives/ripples) 指令。"
+  },
+  "slots": {
+    "actions": "扩展标题动作"
+  },
+  "events": {
+    "click": "鼠标点击事件"
+  }
+}

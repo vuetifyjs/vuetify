@@ -1,0 +1,14 @@
+{
+  "props": {
+    "divider": "Spécifie le caractère de division entre les éléments.",
+    "icons": "Spécifie que les séparateurs entre les éléments sont [v-icon](/components/icons).",
+    "items": "Un tableau d'objets pour chaque fil d'fil d'fil d'attente.",
+    "justifyCenter": "Alignez le centre des breadcrumbs(chapelure).",
+    "justifyEnd": "Alignez les breadcrumbs à la fin.",
+    "large": "Augmentez la taille de la police du texte de l'élément de fil d'entier à 16px (14px par défaut)."
+  },
+  "slots": {
+    "divider": "L'emplacement utilisé pour les séparateurs.",
+    "item": "L'emplacement utilisé pour remplacer le comportement par défaut `v-breadcrumbs-item` lors de l'utilisation du prop **items** ."
+  }
+}

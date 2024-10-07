@@ -1,0 +1,14 @@
+{
+  "props": {
+    "complete": "标记为已完成",
+    "completeIcon": "步骤标记为已完成时显示的图标",
+    "editable": "标记为可编辑",
+    "editIcon": "步骤可编辑时显示的图标",
+    "errorIcon": "步骤错误时显示的图标",
+    "rules": "接受“function”、“boolean”和“string”类型的混合数组。函数将输入值作为参数传递，并且必须返回“true”/“false”或包含错误消息的“string”。如果函数返回（或数组中包含的任何值）`false`或是`string，则输入字段将进入错误状态`",
+    "step": "步骤圈内显示的内容"
+  },
+  "events": {
+    "click": "单击组件时发出"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "props": {
+    "autoDraw": "首次渲染时跟踪线的长度",
+    "autoDrawDuration": "运行跟踪动画的时间（以毫秒为单位）",
+    "autoDrawEasing": "用于跟踪动画的缓动功能",
+    "autoLineWidth": "自动展开栏以有效利用空间",
+    "data": "数据点数组",
+    "fill": "使用 **fill** 属性可以让您更好地自定义您的迷你图表的外观。",
+    "gradient": "用作线性渐变的颜色数组",
+    "gradientDirection": "渐变应运行的方向",
+    "height": "SVG 趋势线或条的高度",
+    "labels": "与数据对应的索引对应的字符串标签数组",
+    "labelSize": "标签字体大小",
+    "lineWidth": "线的粗细，以 px 为单位",
+    "padding": "较低的 `smooth` 值或较高的 `line-width` 值可能会导致裁切，请增加填充以补偿",
+    "showLabels": "在每个数据点下方显示标签",
+    "smooth": "用作角半径的 px 数。 `true` 为默认值 8，`false` 为 0",
+    "type": "在趋势线和条线之间选择",
+    "value": "数字数组。",
+    "width": "SVG 趋势线或条的宽度"
+  }
+}

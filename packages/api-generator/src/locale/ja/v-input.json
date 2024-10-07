@@ -1,0 +1,29 @@
+{
+  "props": {
+    "appendIcon": "`v-icon`と同じ構文を使用し、コンポーネントにアイコンを追加します",
+    "backgroundColor": "inputの背景色を変更します",
+    "dark": "コンポーネントにdarkテーマのバリエーションを適用します。[アプリケーションのテーマ](/customization/theme) を **dark** に設定している場合や、コンポーネントに **color** propを使用している場合を除き、コンポーネントの色はデフォルトで _white_ になります。Material Design documentationの[ダークテーマ](https://material.io/design/color/dark-theme.html) に詳しい情報があります。",
+    "hideDetails": "ヒントやバリデーションエラーを非表示にします。 `auto` が設定されている場合、表示するメッセージ（ヒント、エラーメッセージ、カウンター値など）がある場合のみ表示します",
+    "hideSpinButtons": "型が `number` に設定されている場合、入力のスピンボタンを非表示にします。",
+    "dense": "inputの高さを低くします",
+    "height": "高さを設定します",
+    "hint": "ヒントを設定します。",
+    "label": "ラベルを設定します。",
+    "loading": "線形プログレス バーを表示します。 進行状況バー (任意のマテリアルカラーまたはテーマカラー - **primary**, **secondary**, **success**, **info**, **warning**, **error**) に適用する色を指定する文字列、あるいはコンポーネント **color** (color propで設定 - コンポーネントでサポートされている場合) またはprimary色を使用する真偽値を指定できます。",
+    "persistentHint": "ヒントを常に表示します",
+    "placeholder": "プレースホルダーを設定します",
+    "prependIcon": "コンポーネントの先頭にアイコンが追加されます。`v-icon` と同じ構文を使用します。",
+    "required": "入力を必要に応じて指定します; ラベルの最後にアスタリスクを追加します; バリデーションを実行しません。",
+    "tabindex": "Inputのタブインデックス",
+    "toggleKeys": "入力を切り替えるキーコードの配列 (トグルをサポートしている場合)",
+    "value": "入力の値"
+  },
+  "events": {
+    "change": "ユーザーの操作によって値が変更されたときに発生します。",
+    "click": "inputをクリックしたときに発生します",
+    "click:append": "アペンドアイコンがクリックされたときに発生します",
+    "click:prepend": "プリペンドアイコンがクリックされたときに発生します",
+    "mousedown": "クリック時、押された（pressed）ときに発生します",
+    "mouseup": "クリック後、放された（released）ときに発生します"
+  }
+}

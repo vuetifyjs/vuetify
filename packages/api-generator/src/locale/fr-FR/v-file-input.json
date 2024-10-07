@@ -1,0 +1,17 @@
+{
+  "props": {
+    "accept": "Un ou plusieurs [spécificateurs de type de fichier unique](https://developer.mozilla.org/fr-US/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers) décrivant les types de fichiers à autoriser.",
+    "chips": "Changes display of selections to chips",
+    "counterSizeString": "Le texte affiché lors de l'utilisation des props **counter** et **show-size** peut également être personnalisé dans le monde entier sur la [page d'internationalisation](/customization/internationalisation).",
+    "counterString": "Le texte affiché lors de l'utilisation de la prop **counter** peut également être personnalisé globalement sur la [page d'internationalisation](/customization/internationalisation).",
+    "hideInput": "Display the icon only without the input (file names)",
+    "multiple": "Ajoute l'attribut **multiple** à l'entrée, permettant de choisir plusieurs fichiers.",
+    "showSize": "Définit la taille affichée des fichiers sélectionnés. Lorsque l'utilisation de **true** sera par défaut de _1000_ afficher (**kB, MB, GB**) tandis que _1024_ s'affichera (**KiB, MiB, GiB**).",
+    "smallChips": "Changes display of selections to chips with the **small** property",
+    "truncateLength": "La longueur d'un nom de fichier avant qu'il soit tronqué avec des ellipsis",
+    "value": "Un seul ou un tableau de [objets de fichier](https://developer.mozilla.org/fr-US/docs/Web/API/File)."
+  },
+  "slots": {
+    "selection": "Champ pour définir une apparence personnalisée pour les éléments sélectionnés. Fournit l'actuel **index**, **text** (tronqué) et [file](https://developer.mozilla.org/fr-US/docs/Web/API/File)."
+  }
+}

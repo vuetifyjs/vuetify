@@ -1,0 +1,5 @@
+{
+  "props": {
+    "delimiters": "Accepte un tableau de chaînes qui déclenchera un nouveau tag lors de la saisie. Ne remplace pas l'onglet normal et les clés Entrées."
+  }
+}

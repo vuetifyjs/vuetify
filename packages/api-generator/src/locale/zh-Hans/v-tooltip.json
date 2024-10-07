@@ -1,0 +1,13 @@
+{
+  "props": {
+    "closeDelay": "当（open-on-hover）属性设置为true时，会在菜单关闭之后延时（以毫秒为单位）",
+    "debounce": "悬停时显示和隐藏工具提示之前的持续时间",
+    "disabled": "禁用提示",
+    "internalActivator": "指定是否使用内部激活器",
+    "openDelay": "打开工具提示后的延迟时间（以毫秒为单位）（`open-on-hover` 属性设置为 **true** 时）",
+    "openOnClick": "指定是否应在激活器单击时打开工具提示",
+    "openOnHover": "指定是否在激活器悬停时打开工具提示",
+    "tag": "指定激活程序包装的自定义标签",
+    "transition": "设置组件转换。可以是一个 [built in transitions](/styles/transitions) 或者是自己自定义的。"
+  }
+}

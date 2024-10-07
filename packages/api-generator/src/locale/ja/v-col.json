@@ -1,0 +1,20 @@
+{
+  "props": {
+    "alignSelf": "[align-items](https://developer.mozilla.org/ja/docs/Web/CSS/align-items) cssプロパティを適用します。使用可能なオプションは、 **start** 、 **center** 、 **end** 、 **auto** 、 **baseline** および **stretch** です。",
+    "cols": "コンポーネントが拡張するカラムのデフォルト数を設定します。利用可能なオプションは **1 -> 12** および **auto** です。",
+    "sm": "画面が、smallサイズとgreaterサイズのbreakpointで表示する列の数を変更します。",
+    "md": "画面がmediumとgreaterサイズのときのbreakpointで表示する列の数を変更します。",
+    "lg": "画面が、largeサイズとgreaterサイズのときのbreakpointで表示する列の数を変更します。",
+    "xl": "画面が、extra largeサイズとgreaterサイズのときのbreakpointで表示する列の数を変更します。",
+    "offset": "カラムの既定のオフセットを設定します。",
+    "offsetSm": "画面が、smallサイズとgreaterサイズのときのbreakpointでのコンポーネントのオフセット値を変更します。",
+    "offsetMd": "画面が、mediumサイズとgreaterサイズのときのbreakpointでのコンポーネントのオフセット値を変更します。",
+    "offsetLg": "画面が、largeサイズとgreaterサイズのときのbreakpointでのコンポーネントのオフセット値を変更します。",
+    "offsetXl": "画面が、extra largeサイズとgreaterサイズのときのbreakpointでのコンポーネントのオフセット値を変更します。",
+    "order": "カラムのデフォルト [order](https://developer.mozilla.org/ja/docs/Web/CSS/order) を設定します。",
+    "orderSm": "画面が、smallサイズとgreaterサイズのときのbreakpointでのコンポーネントの表示順を変更します。",
+    "orderMd": "画面が、mediumサイズとgreaterサイズのときのbreakpointでのコンポーネントの表示順を変更します。",
+    "orderLg": "画面が、largeサイズとgreaterサイズのときのbreakpointでのコンポーネントの表示順を変更します。",
+    "orderXl": "画面が、extra largeサイズとgreaterサイズのときのbreakpointでのコンポーネントの表示順を変更します。"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "props": {
+    "contain": "背景画像に **background-size: contain** を適用します(**img** propを使用する場合)。",
+    "flat": "カードのElevationを削除します。",
+    "hover": "ホバー時に 4dp のElevationを適用します (デフォルト 2dp)。詳細は [elevationのページ](/styles/elevation) をご覧ください。",
+    "img": "カードの背景画像を指定します。より高度な実装を行う場合は、 [v-img](/components/images) コンポーネントを使用することをお勧めします。 [v-imgの例はこちら](/components/cards/#media-with-text) 。",
+    "raised": "より高いデフォルトElevation (8dp) を指定します。詳細については、[elevationページ](/styles/elevation) をご覧ください。"
+  },
+  "events": {
+    "click": "コンポーネントがクリックされたときに発生 - `.native`修飾子を使用しない限り、クリックするとコンポーネントにリップル効果が適用されます。"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "props": {
+    "centerActive": "選択したコンポーネントを強制的に中央に配置します",
+    "mobileBreakpoint": "コンポーネントに指定されたモバイルのbreakpointを指定します。",
+    "nextIcon": "矢印が表示されているとき後ろに追加されるスロット",
+    "prevIcon": "矢印が表示されているときの先頭のスロット",
+    "showArrows": "Change when the overflow arrow indicators are shown. By **default**, arrows *always* display on Desktop when the container is overflowing. When the container overflows on mobile, arrows are not shown by default. A **show-arrows** value of `true` allows these arrows to show on Mobile if the container overflowing. A value of `desktop` *always* displays arrows on Desktop while a value of `mobile` always displays arrows on Mobile. A value of `always` always displays arrows on Desktop *and* Mobile. A value of `never` always hides the arrows. Find more information on how to customize breakpoint thresholds on the [breakpoints page](/customizing/breakpoints)."
+  },
+  "slots": {
+    "next": "次のslot",
+    "prev": "前のslot"
+  },
+  "events": {
+    "change": "コンポーネントの値がユーザー操作によって変更されたときに発生します。",
+    "click:prev": "prevがクリックされたときに発生します。",
+    "click:next": "nextがクリックされたときに発生します。"
+  }
+}

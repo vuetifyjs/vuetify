@@ -1,0 +1,17 @@
+{
+  "props": {
+    "app": "`v-main`の中で使用すると、アプリケーションの `v-toolbar` と `v-system-bar` の位置に基づいてトップからの位置を計算します。",
+    "icon": "アイコンを指定します。",
+    "iconColor": "アイコンの色を指定します。",
+    "mobileBreakpoint": "コンポーネントに指定されたモバイルのbreakpointを指定します。",
+    "singleLine": "バナーを1行に強制します。",
+    "sticky": "**position: sticky** をコンポーネントに適用します（**Evergreenブラウザのみ**）。 [スティッキーポジションのMDNドキュメント](https://developer.mozilla.org/ja/docs/Web/CSS/position) で詳細を確認できます。"
+  },
+  "slots": {
+    "actions": "[v-btn](/components/buttons) のようなアクションのコンテンツに使用されるスロットです。このスロットスコープ内の **dismiss** 関数が呼び出されると、バナーを閉じます。",
+    "icon": "アイコンのコンテンツに使用されるスロット。"
+  },
+  "functions": {
+    "toggle": "コンポーネントを表示するか非表示にするかを制御します。"
+  }
+}

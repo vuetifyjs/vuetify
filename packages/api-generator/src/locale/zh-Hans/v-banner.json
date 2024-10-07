@@ -1,0 +1,17 @@
+{
+  "props": {
+    "app": "当在 `v-main` 中使用时，将参考和依据 `v-toolbar` 和 `v-system-bar`的高度来计算距离顶部位置。",
+    "icon": "指定特定的图标。",
+    "iconColor": "指定特定的图标颜色。",
+    "mobileBreakpoint": "为组件设置和指定移动设备的屏幕尺寸断点",
+    "singleLine": "强制横幅变为一行。",
+    "sticky": "组件应用 **position: sticky**（**常绿浏览器**）。你能够在 [MDN documentation for sticky position](https://developer.mozilla.org/en-US/docs/Web/CSS/position) 浏览更多信息。"
+  },
+  "slots": {
+    "actions": "动作内容使用的插槽，例如 [v-btn](/components/buttons)。调用时，插槽内的 **dismiss** 方法将会使横幅关闭。",
+    "icon": "用于图标内容的插槽。"
+  },
+  "functions": {
+    "toggle": "控制组件可见还是隐藏。"
+  }
+}

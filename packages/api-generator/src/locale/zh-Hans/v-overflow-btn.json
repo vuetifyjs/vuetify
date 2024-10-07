@@ -1,0 +1,8 @@
+{
+  "props": {
+    "editable": "创建一个可编辑按钮",
+    "overflow": "创建溢出按钮",
+    "segmented": "创建一个分段按钮",
+    "persistentPlaceholder": "Forces label to always be visible"
+  }
+}

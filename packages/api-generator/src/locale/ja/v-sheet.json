@@ -1,0 +1,6 @@
+{
+  "props": {
+    "outlined": "Elevationの影(box-shadow) を削除し、*細い* 枠線を追加します。",
+    "shaped": "カードの左上と右下の角を丸くします。"
+  }
+}

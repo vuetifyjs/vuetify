@@ -1,0 +1,14 @@
+{
+  "props": {
+    "length": "The OTP field's length",
+    "type": "Supported types: `text`, `password`, `number`",
+    "dark": "将深色主题变量应用于组件。 除非您已将 [application theme](/customization/theme) 配置为 **dark** 或在组件上使用 **color** 属性，否则组件的颜色默认为 _white_。 您可以在材料设计文档中找到更多信息 [dark themes](https://material.io/design/color/dark-theme.html)。",
+    "plain": "Outlined style applied by default to the input, set to `true` to apply plain style"
+  },
+  "events": {
+    "finish": "Emitted when the input is filled completely and cursor is blurred",
+    "change": "当用户交互更改输入时发出",
+    "focus": "组件聚焦时发出",
+    "keydown": "按下 **任何** 键时发送"
+  }
+}

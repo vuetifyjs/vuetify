@@ -1,0 +1,8 @@
+{
+  "events": {
+    "tabValue": "Value of the tab. Exposed through v-model on v-tabs. To be used to coordinate current tab with v-tabs-items",
+    "change": "Emitted when tab becomes active",
+    "click": "Emitted when the component is clicked",
+    "keydown": "Emitted when **enter** key is pressed"
+  }
+}

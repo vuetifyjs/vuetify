@@ -1,0 +1,13 @@
+{
+  "props": {
+    "flat": "Afficher le composant sans élévation. L'élévation par défaut pour le pouce est de 4dp, `flat` le réinitialise",
+    "inputValue": "La valeur limite du **v-model**",
+    "inset": "Agrandir la piste `v-switch` pour englober le pouce",
+    "loading": "Displays circular progress bar. Can either be a String which specifies which color is applied to the progress bar (any material color or theme color - primary, secondary, success, info, warning, error) or a Boolean which uses the component color (set by color prop - if it's supported by the component) or the primary color",
+    "multiple": "Modifie le modèle attendu en un tableau"
+  },
+  "events": {
+    "change": "Émis lorsque l'entrée est modifiée par l'interaction utilisateur",
+    "click": "Émis lors du clique sur l'entrée. **Note:** l'événement **changement** doit être utilisé à la place de **clic** lors du suivi du changement d'état"
+  }
+}

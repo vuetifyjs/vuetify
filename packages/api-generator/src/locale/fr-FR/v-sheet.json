@@ -1,0 +1,6 @@
+{
+  "props": {
+    "outlined": "Removes elevation (box-shadow) and adds a *thin* border.",
+    "shaped": "Applique un grand rayon de bordure en haut à gauche et en bas à droite de la carte."
+  }
+}

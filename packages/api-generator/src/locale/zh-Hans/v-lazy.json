@@ -1,0 +1,6 @@
+{
+  "props": {
+    "options": "传递给 [Intersection observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) 构造函数的选项。",
+    "transition": "设置组件转换。可以是一个 [built in transitions](/styles/transitions) 或者是自己自定义的。"
+  }
+}

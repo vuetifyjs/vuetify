@@ -1,0 +1,20 @@
+{
+  "props": {
+    "alignSelf": "应用 [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) css 属性。可用的选项是**start**, **center**, **end**, **auto**, **baseline** 和 **stretch**。",
+    "cols": "设置组件扩展的默认列数。可用的选项是 **1 -> 12** 和 **auto** 。",
+    "sm": "在较小和较大的断点上更改列数。",
+    "md": "更改中等和较大断点上的列数。",
+    "lg": "在更大和更大的断点上更改列数。",
+    "xl": "在更大和更大的断点上更改列数。",
+    "offset": "设置列的默认偏移量。",
+    "offsetSm": "在较小和较大的断点处更改组件的偏移量。",
+    "offsetMd": "在中等和更高的断点上更改组件的偏移量。",
+    "offsetLg": "在更大和更大的断点上更改组件的偏移量。",
+    "offsetXl": "在更大和更大的断点处更改组件的偏移量。",
+    "order": "设置列的默认 [order](https://developer.mozilla.org/en-US/docs/Web/CSS/order)",
+    "orderSm": "在较小和较大的断点上更改组件的顺序。",
+    "orderMd": "在中等和更高的断点上更改组件的顺序。",
+    "orderLg": "在更大和更大的断点上更改组件的顺序。",
+    "orderXl": "在更大和更大的断点上更改组件的顺序。"
+  }
+}

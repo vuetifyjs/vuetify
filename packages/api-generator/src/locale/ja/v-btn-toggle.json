@@ -1,0 +1,14 @@
+{
+  "props": {
+    "backgroundColor": "コンポーネントの背景色を変更します。",
+    "borderless": "グループの枠線を削除します。",
+    "dense": "ボタンのサイズとパディングを縮小します。",
+    "group": "一般的に [v-toolbar](/components/toolbars) および [v-app-bar](/components/app-bars) で使用されます。背景色、境界線を削除し、ボタン間のスペースを増やします",
+    "rounded": "両端が丸いボタンにする",
+    "shaped": "カードの左上と右下の角を丸くします。",
+    "tile": "コンポーネントの角丸を除去します。"
+  },
+  "events": {
+    "change": "ユーザーの操作によって値が変更されたときに発生します。"
+  }
+}

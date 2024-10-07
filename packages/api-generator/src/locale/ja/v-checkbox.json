@@ -1,0 +1,22 @@
+{
+  "props": {
+    "column": "ラジオ ボタンを列表示します。",
+    "dark": "darkテーマのバリエーションをコンポーネントに適用します。[アプリケーションのテーマ](/customization/theme) を **dark** に設定している場合や、コンポーネントに **color** propを使用している場合を除き、コンポーネントの色はデフォルトで_white_ になります。Material Design documentationの[ダークテーマ](https://material.io/design/color/dark-theme.html) に詳しい情報があります。",
+    "flat": "Elevationのないコンポーネントを表示します。デフォルトのElevationは 4dp で、`flat` はリセットします。",
+    "indeterminate": "チェックボックスを不確定な状態を設定します",
+    "indeterminateIcon": "不確定な状態で使用されるアイコン",
+    "inputValue": "**v-model** のバインド値",
+    "inset": "Enlarge the `v-switch` track to encompass the thumb",
+    "mandatory": "`v-radio` の子要素を強制的に選択させる",
+    "multiple": "モデルを配列に変更します",
+    "name": "コンポーネントのname属性を設定します",
+    "offIcon": "非アクティブ時に使用されるアイコン",
+    "onIcon": "アクティブなときに使用されるアイコン",
+    "row": "ラジオ ボタンを行表示します。"
+  },
+  "events": {
+    "update:indeterminate": "**indeterminate.sync** イベント。",
+    "change": "ユーザーの操作によって値が変更されたときに発生します。",
+    "click": "クリックされたときに発生します。**注意:** 状態変化を監視する場合は **click** の代わりに **change** イベントを使用してください。"
+  }
+}

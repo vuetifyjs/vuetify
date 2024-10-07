@@ -1,0 +1,8 @@
+{
+  "events": {
+    "tabValue": "Value of the tab. Exposed through v-model on v-tabs. To be used to coordinate current tab with v-tabs-items",
+    "change": "タブがアクティブになったときに発生します",
+    "click": "コンポーネントがクリックされたときに発生します",
+    "keydown": "**enter**キーが押されたときに発生する"
+  }
+}

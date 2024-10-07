@@ -1,0 +1,15 @@
+{
+  "props": {
+    "circle": "将分页元素的形状改变圆形",
+    "disabled": "禁用组件",
+    "length": "分页组件的长度",
+    "nextIcon": "指定用于下一个图标的图标",
+    "prevIcon": "指定用于上一个图标的图标",
+    "totalVisible": "指定最大可见分页数",
+    "value": "当前选定页面"
+  },
+  "events": {
+    "previous": "转到上一个项目时发出",
+    "next": "转到下一个项目时发出"
+  }
+}

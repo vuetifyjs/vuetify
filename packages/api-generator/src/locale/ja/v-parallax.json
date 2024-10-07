@@ -1,0 +1,7 @@
+{
+  "props": {
+    "alt": "パララックス画像にalt属性を設定します。",
+    "src": "parallaxの画像",
+    "srcset": "デバイスのサイズに基づいて使用する代替画像のセット。 [続きを読む...](https://developer.mozilla.org/ja/docs/Web/HTML/Element/img#attr-srcset)"
+  }
+}

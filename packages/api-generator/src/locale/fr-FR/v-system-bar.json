@@ -1,0 +1,7 @@
+{
+  "props": {
+    "height": "Définit la hauteur du composant.",
+    "lightsOut": "Réduit l'opacité de la barre système.",
+    "window": "Augmente la hauteur de la barre système à 32px (24px par défaut)."
+  }
+}

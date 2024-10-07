@@ -1,0 +1,17 @@
+{
+  "props": {
+    "disabled": "Désactive le champ",
+    "error": "Place le champ dans un état d'erreur manuel",
+    "errorCount": "Le nombre total d'erreurs devant s'afficher en même temps",
+    "errorMessages": "Insère l'entrée dans un état d'erreur et passe par des messages d'erreur personnalisés. Il sera combiné avec toutes les validations qui se produisent à partir du prop **rules** Ce champ ne déclenchera pas la validation",
+    "messages": "Affiche une liste de messages ou un message si vous utilisez une chaîne de caractères",
+    "readonly": "Met le champ en état de lecture seule",
+    "rules": "Accepte un tableau mixte de types `function`, `boolean` et `string`. Les fonctions passent une valeur en entrée en tant qu'argument et doivent retourner soit `true` / `false` soit une `string` contenant un message d'erreur. Le champ d'entrée entrera un état d'erreur si une fonction retourne (ou n'importe quelle valeur dans le tableau contient) `false` ou est une `string`",
+    "success": "Met le champ dans un état de succès manuel",
+    "successMessages": "Met le champ en état de succès et transmet les messages de succès personnalisés.",
+    "validateOnBlur": "Retarde la validation jusqu'à l'événement de perte de focus (blur)"
+  },
+  "events": {
+    "update:error": "L'événement `error.sync`"
+  }
+}

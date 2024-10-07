@@ -1,0 +1,46 @@
+{
+  "props": {
+    "attach": "このコンポーネントが切り離すべき DOM 要素を指定します。String には任意の有効な querySelector、Object には任意の有効な Node を指定します。デフォルトではルートの `v-app` コンポーネントにアタッチされます。",
+    "autocomplete": "ユーザー入力に基づいてリスト内のアイテムをフィルタリングします",
+    "cacheItems": "Keeps a local _unique_ copy of all items that have been passed through the **items** prop.",
+    "chips": "選択項目の表示をチップに変更",
+    "combobox": "The single select variant of **tags**",
+    "dark": "コンポーネントにdarkテーマのバリエーションを適用します。[アプリケーションのテーマ](/customization/theme) を **dark** に設定している場合や、コンポーネントに **color** propを使用している場合を除き、コンポーネントの色はデフォルトで _white_ になります。Material Design documentationの[ダークテーマ](https://material.io/design/color/dark-theme.html) に詳しい情報があります。",
+    "debounceSearch": "Debounces the search input value being emitted",
+    "deletableChips": "選択中のチップに削除アイコンを追加します（chipsオプションと併用）",
+    "disabled": "入力を無効にする",
+    "disableLookup": "キーボードの検索を無効にします",
+    "eager": "コンポーネントのコンテンツを mounted 時に render することを強制します。この機能は、SEO のために crawl させたい DOM の中に render されないコンテンツを持っているときに役に立ちます。",
+    "editable": " 編集可能なボタンを作成します - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
+    "filter": "項目をフィルタリングするために使用される関数",
+    "hideSelected": "Do not display in the select menu items that are already selected. Also removes checkboxes from the list when multiple",
+    "itemColor": "選択した項目の色を設定します",
+    "itemDisabled": "Set property of **items**'s disabled value",
+    "items": "Can be an array of objects or array of strings. When using objects, will look for a text, value and disabled keys. This can be changed using the **item-text**, **item-value** and **item-disabled** props.  Objects that have a **header** or **divider** property are considered special cases and generate a list header or divider; these items are not selectable.",
+    "itemText": "**items** のテキスト値のプロパティを設定します",
+    "itemValue": "Set property of **items**'s value - **must be primitive**. Dot notation is supported. **Note:** This is currently not supported with `v-combobox` [GitHub Issue](https://github.com/vuetifyjs/vuetify/issues/5479)",
+    "menuProps": "Pass props through to the `v-menu` component. Accepts either a string for boolean props `menu-props=\"auto, overflowY\"`, or an object `:menu-props=\"{ auto: true, overflowY: true }\"`",
+    "minWidth": "選択した `v-menu` コンテンツの最小幅を設定します。",
+    "multiple": "selectを複数選択に変更します。値には配列を受け付けます。",
+    "multiLine": "Causes label to float when the select component is focused or dirty",
+    "noDataText": "データが存在しない場合に表示するテキストです。",
+    "openOnClear": "**clearable** propを使用する場合、クリアすると、選択メニューは現在の状態に応じて開くか、開いたままになります",
+    "overflow": "オーバーフローボタンを作成します - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
+    "returnObject": "**item-value** で指定された値ではなく、オブジェクトを直接返すように選択動作を変更します。",
+    "searchInput": "**.sync** 修飾子を使用して、検索入力からのユーザー入力をキャッチします。",
+    "segmented": "セグメント化されたボタンを作成します - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
+    "smallChips": "選択範囲の表示を **small** プロパティでchipに変更します",
+    "tags": "タグ付け機能により、ユーザーは** items **プロパティからは利用できなかった新しい値を作成できます",
+    "valueComparator": "The comparison algorithm used for values. [More info](https://github.com/vuetifyjs/vuetify/blob/v2-stable/packages/vuetify/src/util/helpers.ts)"
+  },
+  "slots": {
+    "append-item": "メニューコンテンツの後に項目を追加します。",
+    "item": "カスタムアイテムの外観を定義します",
+    "prepend-item": "メニューコンテンツの前に項目を追加します。",
+    "selection": "Define a custom selection appearance"
+  },
+  "events": {
+    "update:list-index": "キーボードの矢印を使用してメニュー項目を選択するときに発生します",
+    "update:search-input": "`search-input.sync` イベント"
+  }
+}

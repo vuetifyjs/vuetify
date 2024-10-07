@@ -1,0 +1,17 @@
+{
+  "props": {
+    "accept": "一个或多个 [unique file type specifiers](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers) 描述允许的文件类型。",
+    "chips": "改变一个已选择项为小纸片（chips）的显示方式",
+    "counterSizeString": "使用 **counter** 和 **show-size** 属性时显示的文本。也可以在 [internationalization page](/customization/internationalization) 上进行全局定制。",
+    "counterString": "使用 **counter** 属性时显示的文字。 也可以在 [internationalization page](/customization/internationalization) 上进行全局自定义。",
+    "hideInput": "只显示图标(不显示输入框和文件名)",
+    "multiple": "将 **multiple** 属性添加到输入中，允许选择多个文件。",
+    "showSize": "设置所选文件的显示大小。当使用 **true** 默认值为 _1000_ 显示（**kB，MB，GB**） 时，_1024_ 将显示（**KiB，MiB，GiB**）。",
+    "smallChips": "使用 **small** 属性将选择的显示更改为纸片",
+    "truncateLength": "在用省略号截断之前的文件名的长度",
+    "value": "一个或一组 [File objects](https://developer.mozilla.org/en-US/docs/Web/API/File)。"
+  },
+  "slots": {
+    "selection": "为选定的项目定义自定义外观的插槽。提供当前 **索引**、**文本**（已截断）和 [file](https://developer.mozilla.org/en-US/docs/Web/API/File)。"
+  }
+}

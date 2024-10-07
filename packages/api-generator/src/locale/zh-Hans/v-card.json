@@ -1,0 +1,12 @@
+{
+  "props": {
+    "contain": "应用 **background-size: contain** 到背景图像（当使用 **img** 属性时）。",
+    "flat": "移除卡片的海拔。",
+    "hover": "悬停时将应用 4dp 的海拔（默认值为 2dp）。您可以在 [elevation page](/styles/elevation) 找到更多信息。",
+    "img": "指定卡片的背景图。对于更高级的实现，建议您使用 [v-img](/components/images) 组件。您可以在此处找到 [v-img example here](#media-with-text)。",
+    "raised": "指定较高的默认海拔（8dp）。您可以在 [elevation page](/styles/elevation) 找到更多信息。"
+  },
+  "events": {
+    "click": "单击组件时发出 - 不使用 `.native` 修饰符，否则单击时将触发组件产生涟漪"
+  }
+}

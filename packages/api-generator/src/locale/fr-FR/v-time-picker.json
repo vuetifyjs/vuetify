@@ -1,0 +1,30 @@
+{
+  "props": {
+    "format": "Définit le format d'une heure affichée dans le sélecteur. Les options disponibles sont `ampm` et `24hr`.",
+    "activePicker": "Détermine quel sélecteur est affiché. Valeurs autorisées : `'HOUR'`, `'MINUTE'`, `'SECOND'`",
+    "allowedHours": "Limite le choix des heures",
+    "allowedMinutes": "Limite le choix des minutes",
+    "allowedSeconds": "Limite le choix des secondes",
+    "disabled": "désactive le sélecteur",
+    "flat": "Supprime l'élévation",
+    "scrollable": "Permet de changer l'heure/minute avec le scroll de la souris",
+    "min": "Temps minimum autorisé",
+    "max": "Temps maximum autorisé",
+    "readonly": "Mettre le sélecteur en état de lecture seule",
+    "useSeconds": "Active l'utilisation des secondes dans le sélecteur",
+    "value": "Modèle de chronométrage (format ISO 8601, 24 hh:mm)",
+    "width": "Largeur du sélecteur",
+    "ampmInTitle": "Placez le bouton AM/PM dans le titre, pas près de l'horloge."
+  },
+  "slots": {
+    "default": "Affiché sous l'horloge, peut être utilisé par exemple pour ajouter un bouton d'action (`OK` et `Annuler`)"
+  },
+  "events": {
+    "click:hour": "Émis lorsque l'utilisateur sélectionne l'heure",
+    "click:minute": "Émis lorsque l'utilisateur sélectionne la minute",
+    "click:second": "Émis lorsque l'utilisateur sélectionne la seconde",
+    "change": "Émis lorsque la sélection de temps est effectuée (lorsque l'utilisateur change la minute pour le sélecteur HH:MM et le second pour le sélecteur HH:MM:SS",
+    "update:period": "Émis lorsque l'utilisateur clique sur le bouton AM/PM",
+    "update:active-picker": "L'événement `.sync` pour la propriété `active-picker`"
+  }
+}

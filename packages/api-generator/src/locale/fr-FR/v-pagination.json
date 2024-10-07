@@ -1,0 +1,15 @@
+{
+  "props": {
+    "circle": "Définit la forme des boutons en rond plutôt que rectangle",
+    "disabled": "Désactive le composant",
+    "length": "La longueur du composant de pagination",
+    "nextIcon": "Icône pour passer à la page suivante",
+    "prevIcon": "Icône pour passer à la page précédente",
+    "totalVisible": "Définit le nombre maximum de numéros de pages affiché",
+    "value": "Page courante"
+  },
+  "events": {
+    "previous": "Émis lorsque vous allez à l'élément précédent",
+    "next": "Émis lors du passage à l'élément suivant"
+  }
+}

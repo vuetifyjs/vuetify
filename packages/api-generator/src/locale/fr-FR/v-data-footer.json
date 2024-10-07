@@ -1,0 +1,24 @@
+{
+  "props": {
+    "disableItemsPerPage": "Désactive le menu déroulant du nombre d'éléments par page",
+    "disablePagination": "Désactive les boutons de pagination",
+    "firstIcon": "Première icône",
+    "itemsPerPageAllText": "Texte pour l'option 'Tout' dans la liste déroulante des éléments par page",
+    "itemsPerPageOptions": "Tableau d'options à afficher dans le menu déroulant des éléments par page",
+    "itemsPerPageText": "Texte pour les éléments par page de la liste déroulante",
+    "lastIcon": "Dernière icône",
+    "nextIcon": "Icône suivante",
+    "options": "Options des données",
+    "pagination": "Pagination de données",
+    "prevIcon": "Icône précédente",
+    "showCurrentPage": "Afficher le numéro de page actuel entre les icônes précédentes/suivantes",
+    "showFirstLastPage": "Afficher les premières/dernières icônes"
+  },
+  "slots": {
+    "prepend": "Ajoute du contenu à l'espace vide dans le pied de page",
+    "page-text": "Définit le contenu pour le texte des éléments par page"
+  },
+  "events": {
+    "update:options": "L'événement `.sync` pour la prop `options`"
+  }
+}

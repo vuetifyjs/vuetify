@@ -1,0 +1,6 @@
+{
+  "props": {
+    "direction": "Direction dans laquelle le contenu du cadran rapide s'affichera. Les valeurs possibles sont `top`, `bottom`, `left`, `right`.",
+    "openOnHover": "Ouvre speed-dial au survol"
+  }
+}

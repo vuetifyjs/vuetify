@@ -1,0 +1,28 @@
+{
+  "props": {
+    "auto": "在所选择的元素上居中列表",
+    "clearable": "添加清除已输入内容功能，默认图标是Material Design Icons **mdi-clear**",
+    "height": "设置组件高度",
+    "falseValue": "设置假值",
+    "fullWidth": "强制 100% 宽度",
+    "id": "设置组件上的 DOM id",
+    "persistent": "点击外部或按下 **esc** 键将不会关闭对话框",
+    "size": "设置组件的高度和宽度.",
+    "tag": "指定在根元素上使用的自定义标签。",
+    "textColor": "将指定的颜色应用于控件文本",
+    "trueValue": "设置真值",
+    "width": "设定组件的宽度。"
+  },
+  "slots": {
+    "activator": "使用时，将在点击后激活组件（或悬停特定组件），它手动阻止事件传播。如果通过模型打开组件而没有此插槽，则需要手动阻止事件传播。",
+    "append": "在输入框内部，文字之后添加一个内容",
+    "default": "默认Vue 插槽。",
+    "label": "替换默认标签",
+    "prepend": "在输入框外部，前面添加一个内容",
+    "progress": "自定义进度线的插槽（**loading**属性不等于布尔值False时显示)"
+  },
+  "events": {
+    "click": "单击组件时发出的事件",
+    "input": "被绑定模型的更新"
+  }
+}

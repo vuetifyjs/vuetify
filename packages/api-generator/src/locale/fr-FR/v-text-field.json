@@ -1,0 +1,45 @@
+{
+  "props": {
+    "appendOuterIcon": "Ajoute une icône à l'entrée du composant, utilise la même syntaxe que `v-icon`",
+    "autoGrow": "Auto-grows the input. This option requires the use of **v-model**",
+    "autofocus": "Active autofocus",
+    "filled": "Applique le style d'entrée remplie a la place",
+    "clearIcon": "Appliqué lors de l'utilisation de **clearable** et l'entrée est sale",
+    "counter": "Crée le compteur pour la longueur de l'entrée; si aucun numéro n'est spécifié, il est par défaut à 25. Ne s'applique à aucune validation.",
+    "dark": "Applique la variante du thème foncé au composant. Cela va par défaut la couleur des composants à _white_ à moins que vous ayez configuré votre [thème d'application](/customization/thème) à **dark** ou si vous utilisez le prop **couleur** sur le composant. Vous pouvez trouver plus d'informations sur la documentation de Design de matériaux pour [thèmes foncés](https://material.io/design/color/dark-theme.html).",
+    "flat": "Supprime l'élévation (ombre) ajoutée à l'élément lors de l'utilisation des propriétés **solo** ou **solo-inverted**",
+    "fullWidth": "Indique le type d'entrée comme prenant la largeur complète",
+    "multiLine": "Transforme en zone de texte",
+    "noResize": "Removes the resize handle, only applies to **multi-line** and **textarea** props",
+    "outlined": "Applique le style décrit à l'entrée",
+    "persistentPlaceholder": "Forces placeholder to always be visible",
+    "placeholder": "Définit le texte du marqueur de l'entrée",
+    "prefix": "Affiche le texte du préfixe",
+    "prependInnerIcon": "Ajoute une icône dans l'entrée du composant, utilise la même syntaxe que `v-icon`",
+    "reverse": "Inverse l'orientation de l'entrée",
+    "rounded": "Ajoute un rayon de bordure à l'entrée",
+    "rows": "Controls the number of rows in a textarea",
+    "rowHeight": "Designate a custom _row-height_. Used for determining input height when using **multi-line** or **textarea** props",
+    "singleLine": "Le label ne se déplace pas dans l'état focus / sale",
+    "solo": "Modifie le style du champ d'entrée",
+    "soloInverted": "Réduit l'opacité de l'élément jusqu'à son focus",
+    "suffix": "Displays suffix text",
+    "textarea": "Textarea text field with alternate style",
+    "toggleKeys": "Tableau de codes clés qui basculera l'entrée (si elle supporte le basculement)",
+    "type": "Définit le type d'entrée",
+    "shaped": "Round if `outlined` and increase `border-radius` if `filled`. Must be used with either `outlined` or `filled`"
+  },
+  "slots": {
+    "append-outer": "Adds an item outside the input and after input content",
+    "prepend-inner": "Adds an item inside the input and before input content"
+  },
+  "events": {
+    "blur": "Émis lorsque l'entrée est floue",
+    "change": "Émis lorsque l'entrée est modifiée par l'interaction utilisateur",
+    "click:append-outer": "Emitted when appended outer icon is clicked",
+    "click:clear": "Emitted when clearable icon clicked",
+    "click:prepend-inner": "Emitted when prepended inner icon is clicked",
+    "focus": "Emitted when component is focused",
+    "keydown": "Emitted when **any** key is pressed"
+  }
+}

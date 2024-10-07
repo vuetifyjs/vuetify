@@ -1,0 +1,6 @@
+{
+  "props": {
+    "left": "指定头像在组件左侧。它被诸如 [v-chip](/components/chips) 和 [v-btn](/components/butons) 等组件绑在一起。",
+    "right": "指定头像在组件的右侧。它被诸如 [v-chip](/components/chips) 和 [v-btn](/components/butons) 等组件绑在一起。"
+  }
+}

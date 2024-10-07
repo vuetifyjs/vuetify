@@ -1,0 +1,6 @@
+{
+  "props": {
+    "options": "[Intersection observer](https://developer.mozilla.org/ja/docs/Web/API/Intersection_Observer_API) コンストラクターに渡されるオプション。",
+    "transition": "コンポーネントのトランジションを設定します。 [組み込みトランジション](/styles/transitions) のいずれか、または独自のものを使用できます。"
+  }
+}

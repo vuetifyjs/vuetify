@@ -1,0 +1,6 @@
+{
+  "props": {
+    "inset": "Positionne la barre d'outils à partir d'une application `v-navigation-drawer`",
+    "padless": "Supprimer tous les espacements du pied de page"
+  }
+}

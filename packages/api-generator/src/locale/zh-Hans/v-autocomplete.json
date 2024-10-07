@@ -1,0 +1,10 @@
+{
+  "props": {
+    "autoSelectFirst": "搜索时，总是选中第一个选项",
+    "dark": "将深色主题变量应用于组件。 除非您已将 [application theme](/customization/theme) 配置为 **dark** 或在组件上使用 **color** 属性，否则组件的颜色默认为 _white_。 您可以在材料设计文档中找到更多信息 [dark themes](https://material.io/design/color/dark-theme.html)。",
+    "filter": "搜索时使用的过滤算法。 [example](https://github.com/vuetifyjs/vuetify/blob/v2-stable/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L40)",
+    "hideNoData": "当没有要显示的选项时，隐藏菜单。用于防止在异步获取结果之前打开菜单。也有打开菜单的效果，当“ `items` 数组改变，如果还没有打开。",
+    "noFilter": "搜索时不要应用过滤。在过滤服务器端数据时非常有用",
+    "searchInput": "搜索值。可与 `.sync` 修改器一起使用。"
+  }
+}

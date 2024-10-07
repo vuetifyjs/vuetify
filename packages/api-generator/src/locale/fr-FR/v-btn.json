@@ -1,0 +1,21 @@
+{
+  "props": {
+    "block": "Élargi le bouton à 100% de l'espace disponible.",
+    "depressed": "Supprime l'ombre autour du bouton.",
+    "fab": "Désigne le bouton comme floating-action-button. Le bouton deviendra _rond_.",
+    "icon": "Indique le bouton comme icône. Le bouton deviendra _rond_ et appliquera la propriété **text**.",
+    "inputValue": "Contrôle l'état actif du bouton.",
+    "left": "Aligne le composant vers la gauche. Cela doit être utilisé avec les **éléments absolus** ou **fixes**.",
+    "loading": "Ajoute un chargement d'animation de l’icône.",
+    "outlined": "Rends le fond transparent et applique une bordure mince.",
+    "plain": "Supprime le changement d'arrière-plan par défaut appliqué lors du survol du bouton.",
+    "right": "Aligne le composant vers la droite. Cela doit être utilisé avec les props **absolute** ou **fixed** .",
+    "rounded": "Applique un large rayon de bordure sur le bouton.",
+    "text": "Rend l'arrière-plan transparent. Lorsque vous utilisez la propriété **color**, la couleur sera appliquée au texte du bouton au lieu de l'arrière-plan.",
+    "type": "Définir l'attribut **type** du bouton.",
+    "retainFocusOnClick": "Ne pas flouter en cliquant."
+  },
+  "slots": {
+    "loader": "Chargement personnalisé."
+  }
+}

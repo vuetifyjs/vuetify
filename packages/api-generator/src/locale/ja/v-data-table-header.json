@@ -1,0 +1,14 @@
+{
+  "props": {
+    "disableSort": "並べ替えボタンの表示を切り替えます",
+    "everyItem": "Indicates if all items in table are selected",
+    "headers": "表示するヘッダアイテムの配列",
+    "mobile": "ヘッダーのmobileビューをレンダリングします",
+    "options": "Options オブジェクト。`v-data-table`のものと同じ。",
+    "showGroupBy": "ボタンでグループを表示",
+    "singleSelect": "全選択チェックボックスのレンダリングを切り替えます。",
+    "someItems": "Indicates if one or more items in table are selected",
+    "sortByText": "`v-data-table` がモバイルビューでレンダリングされる時の、デフォルトの sort-by セレクタが使用するラベルテキストを設定します。",
+    "sortIcon": "ソートボタンに使用するアイコン"
+  }
+}

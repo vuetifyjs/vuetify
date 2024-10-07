@@ -1,0 +1,17 @@
+{
+  "props": {
+    "activeClass": "Configurez la classe CSS active appliquée lorsque le lien est actif. Vous pouvez trouver plus d'informations sur le prop [**active-class** ](https://router.vuejs.org/api/#active-class) sur la documentation du routeur de vue.",
+    "appendIcon": "Ajoute une icône au composant, utilise la même syntaxe que `v-icon`",
+    "disabled": "Désactive tous les composants `v-list-item`",
+    "group": "Assigner un espace de nom de route. Accepte une chaîne ou une régression pour déterminer l'état actif",
+    "noAction": "Supprime le padding de gauche assigné pour les icônes d'action des éléments du groupe",
+    "prependIcon": "Ajoute une icône au composant, utilise la même syntaxe que `v-icon`",
+    "ripple": "Applique la directive [v-ripple](/directives/ripple).",
+    "subGroup": "Indiquez le composant comme groupe de liste imbriqué",
+    "value": "Développer / Réduire le groupe de listes"
+  },
+  "slots": {
+    "appendIcon": "Ajoute une icône au composant, utilise la même syntaxe que `v-icon`",
+    "prependIcon": "Ajoute une icône au composant, utilise la même syntaxe que `v-icon`"
+  }
+}

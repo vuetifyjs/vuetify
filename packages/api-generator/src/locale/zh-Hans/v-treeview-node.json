@@ -1,0 +1,27 @@
+{
+  "props": {
+    "activatable": "允许用户通过单击节点将其标记为活动节点",
+    "activeClass": "活动时应用于节点的类",
+    "expandIcon": "用于指示可以扩展节点的图标",
+    "indeterminateIcon": "节点处于不确定状态时使用的图标。 仅在 `selectable` 为 `true` 时可见。",
+    "item": "用于构建节点的 **item** 对象",
+    "itemChildren": "提供的包含其子项的 `items` 上的属性",
+    "itemDisabled": "提供的 `items` 上的属性，其中包含该项目的禁用状态",
+    "itemKey": "提供的 `items` 上的属性用于跟踪节点状态。 此属性的值在所有项目中必须唯一。",
+    "itemText": "提供的包含标签文本的 `items` 上的属性",
+    "level": "指定节点距离树视图根 (节点) 的深度的属性",
+    "loadChildren": "动态加载子代时使用的功能。 如果设置了此道具，则在扩展具有 `item-children` 属性（为空数组）的项时，将运行提供的功能。 支持回调。",
+    "loadingIcon": "节点处于加载状态时使用的图标",
+    "offIcon": "未选择节点时使用的图标。 仅在 `selectable` 为 `true` 时可见。",
+    "onIcon": "选择叶节点或完全选择分支节点时使用的图标。 仅在 `selectable` 为 `true` 时可见。",
+    "openOnClick": "如果为 `true` ，将导致通过单击节点上的任意位置来打开节点，而不是仅通过单击展开图标来打开节点。 将此属性与 `activatable` 一起使用时，您将无法将带有子节点标记为活动状态。",
+    "parentIsDisabled": "",
+    "returnObject": "当 `true` 时，`v-model`、`active.sync` 和 `open.sync` 将返回完整的对象而不是只是键",
+    "rounded": "为 `v-treeview` 节点提供替代的活动样式。 仅在 `activatable` 为 `true` 时可见，并且不应与 `shaped`属性一起使用。",
+    "selectable": "将在每个节点旁边渲染一个复选框，以允许选择它们",
+    "selectedColor": "选择框的颜色",
+    "selectionType": "控制树形视图如何选择节点。 有两种模式可用：'leaf' 和 'independent'",
+    "shaped": "为 `v-treeview` 节点提供替代的活动样式。 仅在 `activatable` 为 `true` 时可见，并且不应与 `rounded` 属性结合使用。",
+    "transition": "在打开和关闭节点时应用过渡"
+  }
+}

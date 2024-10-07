@@ -1,0 +1,17 @@
+{
+  "props": {
+    "color": "指定控件颜色，颜色值可以是 Material 颜色（例如 `success` 或者 `purple` ），也可以是 Css 颜色 （例如 `#033` 或者 `rgba(255, 0, 0, 0.5)`）。在 [colors page](/zh-Hans/styles/colors#material-colors) 中可以找到内置颜色类列表。",
+    "dark": "将暗色主题变量应用到组件。你可以在 [dark themes](https://material.io/design/color/dark-theme.html) 的 Material Design 文档中找到更多有关信息。",
+    "disabled": "禁用简单复选框。",
+    "indeterminate": "为简单复选框设置一个不确定的状态。",
+    "indeterminateIcon": "处于不确定状态时使用的图标。",
+    "light": "为组件设置浅色主题。",
+    "offIcon": "处于不活动状态时使用的图标。",
+    "onIcon": "处于激活状态时使用的图标.",
+    "ripple": "应用 [v-ripple](/directives/ripples) 指令。",
+    "value": "一个 boolean，表示简单的复选框是否被选中。"
+  },
+  "events": {
+    "click": "单击组件时发出的事件"
+  }
+}

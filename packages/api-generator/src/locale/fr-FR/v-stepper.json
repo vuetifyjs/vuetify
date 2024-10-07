@@ -1,0 +1,11 @@
+{
+  "props": {
+    "altLabels": "Place les étiquettes sous l'étape",
+    "flat": "Supprime l'élévation du stepper.",
+    "nonLinear": "Permettre à l'utilisateur de passer à n'importe quelle étape",
+    "vertical": "Afficher les étapes verticalement"
+  },
+  "events": {
+    "change": "Émis lorsque l'étape est changée par l'interaction utilisateur"
+  }
+}

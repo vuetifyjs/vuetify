@@ -1,0 +1,9 @@
+{
+  "props": {
+    "current": "Langue actuelle",
+    "locales": "Langues disponibles"
+  },
+  "functions": {
+    "t": "Fonction de traduction utilisée en interne"
+  }
+}

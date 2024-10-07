@@ -1,0 +1,7 @@
+{
+  "props": {
+    "activeClass": "リンクがアクティブなときに適用されるアクティブなCSSクラスを構成します。vue-routerのドキュメントで [**active-class** prop](https://router.vuejs.org/ja/api/#active-class) の詳細をご覧ください。",
+    "disabled": "コンポーネントをクリックまたはターゲットにできなくします。",
+    "value": "コンポーネントがグループ内で選択されたときに使われる値です。もし指定しなかった場合、index が使用されます。"
+  }
+}

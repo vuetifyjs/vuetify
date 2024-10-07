@@ -1,0 +1,15 @@
+{
+  "props": {
+    "app": "Respects boundaries of—and will not overlap with—other `app` components like `v-app-bar`, `v-navigation-drawer`, and `v-footer`.",
+    "centered": "Positions the snackbar in the center of the screen, (x and y axis).",
+    "contentClass": "スナックバーのコンテンツにカスタムクラスを適用します",
+    "multiLine": "スナックバーのminimum heightを大きくします。",
+    "text": "定義された**color**をテキストに適用し、同じ色の低い不透明度の背景を適用します。",
+    "timeout": "スナックバーが自動的に非表示になるまで待つ時間（ミリ秒単位）。無期限に開いたままにするには `-1` を使用してください (バージョン < 2 では `0` )。 ). この数字は `4000` と `10000` の間であることをお勧めします. このプロパティを変更するとタイムアウトがリセットされます.",
+    "transition": "コンポーネントのトランジションを設定します。 [組み込みトランジション](/styles/transitions) のいずれか、または独自のものを使用できます。",
+    "vertical": "スナックバーのコンテンツは、アクション（ボタン）の上にStackされます。"
+  },
+  "slots": {
+    "action": "MD2 specificationに合わせてスタイルを [v-btn](/components/buttons) にバインドするために使用します。"
+  }
+}

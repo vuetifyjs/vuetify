@@ -1,0 +1,19 @@
+{
+  "props": {
+    "activeClass": "该类在激活时会被应用到一个 [v-btn](/components/buttons)。",
+    "backgroundColor": "更改组件的背景颜色。",
+    "dark": "将暗色主题变量应用到组件。你可以在 [dark themes](https://material.io/design/color/dark-theme.html) 的 Material Design 文档中找到更多有关信息。",
+    "grow": "强制 [v-btn](/components/buttons) 占用所有可用空间。",
+    "hideOnScroll": "向上滚动时过渡到屏幕外。",
+    "horizontal": "使用 [v-btn](/components/buttons) 的替代横向样式。",
+    "inputValue": "控制组件是否可见。支持 **.sync** 修饰符。",
+    "light": "为组件设置浅色主题。",
+    "mandatory": "强制始终选择一个值（如果可用）。",
+    "shift": "当 [v-btn](/components/buttons) 未激活时隐藏它们的文本。",
+    "value": "保存当前激活了的 [v-btn](/components/buttons) 的值。若按钮没有值，则使用其索引号。"
+  },
+  "events": {
+    "change": "当前被选定按钮的值。若未分配值，则为按钮的当前索引号。",
+    "update:input-value": "用于 `input-value.sync` 的事件。"
+  }
+}

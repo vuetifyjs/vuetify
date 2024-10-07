@@ -1,0 +1,14 @@
+{
+  "props": {
+    "complete": "Marquer l'étape comme terminée",
+    "completeIcon": "Icône à afficher lorsque l'étape est marquée comme terminée",
+    "editable": "Marque l'étape comme modifiable",
+    "editIcon": "Icône à afficher lorsque l'étape est modifiable",
+    "errorIcon": "Icône à afficher lorsque l'étape a une erreur",
+    "rules": "Accepte un tableau mixte de types `function`, `boolean` et `string`. Les fonctions passent une valeur en entrée en tant qu'argument et doivent retourner soit `true` / `false` soit une `string` contenant un message d'erreur. Le champ d'entrée entrera un état d'erreur si une fonction retourne (ou n'importe quelle valeur dans le tableau contient) `false` ou est une `string`",
+    "step": "Contenu à afficher dans le cercle d'étape"
+  },
+  "events": {
+    "click": "Émis lorsque le composant est cliqué"
+  }
+}

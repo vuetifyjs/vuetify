@@ -1,0 +1,10 @@
+{
+  "props": {
+    "dense": "Rend l'icône petite **(20px)",
+    "disabled": "Désactive le champ",
+    "left": "Applies appropriate margins to the icon inside of a button when placed to the **left** of another element or text",
+    "right": "Applies appropriate margins to the icon inside of a button when placed to the **right** of another element or text",
+    "size": "Specifies a custom font size for the icon",
+    "tag": "Spécifie un tag personnalisé à utiliser"
+  }
+}

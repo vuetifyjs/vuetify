@@ -1,0 +1,27 @@
+{
+  "props": {
+    "activatable": "Permet à l'utilisateur de marquer un noeud comme actif en cliquant dessus",
+    "activeClass": "La classe appliquée au noeud quand active",
+    "expandIcon": "Icône utilisée pour indiquer qu'un noeud peut être étendu",
+    "indeterminateIcon": "Icône utilisée lorsque le noeud est dans un état indéterminé. Seulement visible lorsque `selectable` est `true`.",
+    "item": "Objet d'élément utilisé pour construire le noeud",
+    "itemChildren": "Propriété sur `items` fourni qui contient ses enfants",
+    "itemDisabled": "Propriété sur `items` fourni qui contient l'état désactivé de l'élément",
+    "itemKey": "Propriété sur `items` fourni utilisée pour garder la trace de l'état du noeud. La valeur de cette propriété doit être unique parmi tous les éléments.",
+    "itemText": "Propriété sur `items` fourni qui contient son libellé",
+    "level": "Property designating how deep the node is from the root of the treeview",
+    "loadChildren": "Une fonction utilisée lors du chargement dynamique des enfants. Si ce prop est défini, la fonction fournie sera exécutée si l'extension d'un élément qui a une propriété `item-children` qui est un tableau vide. Supporte de retourner une promesse.",
+    "loadingIcon": "Icône utilisée lorsque le noeud est dans un état de chargement",
+    "offIcon": "Icône utilisée lorsque le noeud n'est pas sélectionné. Seulement visible lorsque `selectable` est `true`.",
+    "onIcon": "Icône utilisée lorsque le noeud feuille est sélectionné ou lorsqu'un noeud de branche est complètement sélectionné. Seulement visible lorsque `selectable` est `true`.",
+    "openOnClick": "Quand `true` va ouvrir des nœuds en cliquant n'importe où, au lieu d'ouvrir uniquement en cliquant sur l'icône d'extension. Lorsque vous utilisez ce prop avec `activatable` vous ne pourrez pas marquer les noeuds avec des enfants aussi actifs.",
+    "parentIsDisabled": "",
+    "returnObject": "Quand `true` fera `v-model`, `active.sync` et `open.sync` retourne l'objet complet au lieu de la seule clé",
+    "rounded": "Fournit un style actif alternatif pour le noeud `v-treeview`. Seulement visible lorsque `activatable` est `true` et ne doit pas être utilisé en conjonction avec le prop `shaped`.",
+    "selectable": "Renforcera une case à côté de chaque noeud permettant de les sélectionner",
+    "selectedColor": "La couleur de la case à cocher de sélection",
+    "selectionType": "Contrôle la sélection des nœuds de treeview. Il y a deux modes disponibles : 'leaf' et 'independent'",
+    "shaped": "Fournit un style actif alternatif pour le noeud `v-treeview`. Seulement visible lorsque `activatable` est `true` et ne doit pas être utilisé en conjonction avec le prop `rounded`.",
+    "transition": "Applique une transition lorsque les nœuds sont ouverts et fermés"
+  }
+}

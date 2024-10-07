@@ -1,0 +1,7 @@
+{
+  "props": {
+    "alt": "将 alt 属性附加到视差图像上",
+    "src": "受视差影响的图像",
+    "srcset": "根据设备大小使用的一组备用图像。[Read more...](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset)"
+  }
+}

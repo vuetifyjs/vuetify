@@ -1,0 +1,22 @@
+{
+  "props": {
+    "backgroundColor": "The color used for empty icons",
+    "clearable": "コンポーネントをクリアすることができます。現在の値を含むアイコンがクリックされたときにトリガーします。",
+    "dense": "アイコンのサイズを小さくします",
+    "emptyIcon": "評価が点けられてないときのアイコン",
+    "fullIcon": "1つ分の評価が点けられたときのアイコン",
+    "halfIcon": "半分評価がうまったときのアイコン（**half-increments** propが必要です）",
+    "halfIncrements": "半分の評価加点を選択可能にする",
+    "hover": "アイコンの上にカーソルを合わせたときに視覚的なフィードバックを提供します",
+    "iconLabel": "アイコンに使用される **aria-label**",
+    "length": "表示するレーティングの数",
+    "readonly": "すべてのホバーエフェクトとポインタイベントを削除します",
+    "value": "レーティング値"
+  },
+  "slots": {
+    "item": "レンダリングされたアイテムのスロット"
+  },
+  "events": {
+    "input": "Emits the rating number when this value changes"
+  }
+}

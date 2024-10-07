@@ -1,0 +1,21 @@
+{
+  "props": {
+    "continuous": "如果为 `true`，则窗口将从最后一项到第一项，以及从第一项到最后 \"wrap around\"",
+    "nextIcon": "如果 `show-arrows` 为 `true`，则显示 \"next\" 按钮的图标",
+    "prevIcon": "如果 `show-arrows` 为 `true`，则显示 \"prev\" 按钮的图标",
+    "reverse": "反转正常的过渡方向。",
+    "reverseTransition": "组件反转项时使用的转换。可以是一个 [built in transitions](/styles/transitions) 或是你自己创建的过渡。",
+    "showArrows": "显示 \"next\" 和 \"prev\" 按钮",
+    "showArrowsOnHover": "悬停时显示 \"next\" 和 \"prev\" 按钮。必须设置 `show-arrows` 。",
+    "touch": "左右滑动时提供自定义的 **left** 和 **right** 函数。",
+    "touchless": "禁用触摸支持.",
+    "vertical": "改变窗口时使用垂直转换."
+  },
+  "events": {
+    "change": "当组件值被用户交互改变时发出。"
+  },
+  "slots": {
+    "next": "显示箭头切换到下一件物品的槽位",
+    "prev": "显示箭头切换到下一件物品的槽位"
+  }
+}

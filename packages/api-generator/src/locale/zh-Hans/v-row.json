@@ -1,0 +1,21 @@
+{
+  "props": {
+    "align": "应用 [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) css 属性。可用的选项是 **start**, **center**, **end**, **baseline** 和 **stretch**。",
+    "alignSm": "在较小和较大的断点处更改 **align-items** 属性。",
+    "alignMd": "在中等和更高的断点上更改 **align-items** 属性。",
+    "alignLg": "在更大和更大的断点上更改 **align-items** 属性。",
+    "alignXl": "在更大和更大的断点上更改 **align-items** 属性。",
+    "alignContent": "应用 [align-content](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content) 属性。可用的选项是： **start**, **center**, **end**, **space-between**, **space-around** 和 **stretch**。",
+    "alignContentSm": "在较小和较大的断点处更改 **align-content** 属性。",
+    "alignContentMd": "在中等和较大的断点上更改 **align-content** 属性。",
+    "alignContentLg": "在更大和更大的断点上更改 **align-content** 属性。",
+    "alignContentXl": "在更大和更大的断点上更改 **align-content** 属性。",
+    "dense": "减少 `v-col` 之间的距离。",
+    "justify": "应用 [justify-content](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content) css 属性。可用选项是 **start**, **center**, **end**, **space-between** 和 **space-around**。",
+    "justifySm": "在较小和较大的断点上更改 **justify-content** 属性。",
+    "justifyMd": "在中等和更高的断点上更改 **justify-content** 属性。",
+    "justifyLg": "在更大和更大的断点上更改 **justify-content** 属性。",
+    "justifyXl": "在更大和更大的断点上更改 **justify-content** 属性。",
+    "noGutters": "移除 `v-col` 之间的距离。"
+  }
+}

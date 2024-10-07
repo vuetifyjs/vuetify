@@ -1,0 +1,14 @@
+{
+  "props": {
+    "disableSort": "切换排序按钮的渲染方式。",
+    "everyItem": "表示是否选择了表格中的所有项目。",
+    "headers": "要显示的表头数组。",
+    "mobile": "渲染表头的移动视图。",
+    "options": "选项对象。与 `v-data-table` 上的相同。",
+    "showGroupBy": "显示分组按钮。",
+    "singleSelect": "切换全选框的渲染方式。",
+    "someItems": "表示是否选择了表格中的一个或多个数据项。",
+    "sortByText": "设置当 `v-data-table` 渲染移动视图时，默认的排序选择器使用的标签文本。",
+    "sortIcon": "排序按钮的图标。"
+  }
+}

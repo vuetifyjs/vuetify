@@ -1,0 +1,16 @@
+{
+  "props": {
+    "disabled": "Puts all children inputs into a disabled state.",
+    "lazyValidation": "Si activé, **value** sera toujours _true_ à moins qu'il y ait des erreurs de validation visibles. Vous pouvez toujours appeler `validate()` pour déclencher manuellement la validation",
+    "readonly": "Puts all children inputs into a readonly state.",
+    "value": "Une valeur booléenne représentant la validité du formulaire."
+  },
+  "events": {
+    "submit": "Émis lorsque le formulaire est soumis"
+  },
+  "functions": {
+    "reset": "Réinitialise l'état de toutes les entrées enregistrées (à l'intérieur du formulaire) à **{}** pour les tableaux et **null** pour toutes les autres valeurs. Réinitialise le sac d'erreurs lors de l'utilisation de la prop **lazy-validation** .",
+    "resetValidation": "Réinitialise la validation de toutes les entrées enregistrées sans modifier leur état",
+    "validate": "Valide toutes les entrées enregistrées. Retourne **true** si succès et **false** si non"
+  }
+}

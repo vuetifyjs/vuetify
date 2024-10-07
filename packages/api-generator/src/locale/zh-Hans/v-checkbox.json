@@ -1,0 +1,22 @@
+{
+  "props": {
+    "column": "单选框列显示",
+    "dark": "将深色主题变量应用于组件。 除非您已将 [application theme](/customization/theme) 配置为 **dark** 或在组件上使用 **color** 属性，否则组件的颜色默认为 _white_。 您可以在材料设计文档中找到更多信息 [dark themes](https://material.io/design/color/dark-theme.html)。",
+    "flat": "显示没有海拔的组件。 拇指的默认海拔为 4dp，`flat` 重置它",
+    "indeterminate": "为复选框设置不确定状态",
+    "indeterminateIcon": "处于不确定状态时使用的图标",
+    "inputValue": "**v-model** 的绑定值",
+    "inset": "扩展 `v-switch` 轨迹以包含缩略图",
+    "mandatory": "强制选择复选框组的一个子复选框 `v-radio`",
+    "multiple": "将预期模型更改为数组",
+    "name": "设置组件的 name 属性",
+    "offIcon": "不活动时使用的图标",
+    "onIcon": "激活时使用的图标",
+    "row": "单选框行显示"
+  },
+  "events": {
+    "update:indeterminate": "**indeterminate.sync** 事件。",
+    "change": "当用户交互更改输入时发出",
+    "click": "单击输入时触发。**注意：** 监视状态变化时，应使用 **change** 事件，而不是 **click** 事件。"
+  }
+}

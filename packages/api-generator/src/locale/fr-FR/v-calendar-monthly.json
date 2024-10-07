@@ -1,0 +1,19 @@
+{
+  "props": {
+    "dayFormat": "Formate le jour de la chaîne de caractères du mois qui apparaît dans un jour à une locale spécifiée",
+    "end": "La date de fin du calendrier (inclusivement) au format de `YYYY-MM-DD`. Cela peut être ignoré en fonction du `type` du calendrier.",
+    "hideHeader": "Si l'en-tête en haut de la vue `day` doit être visible.",
+    "locale": "La locale du calendrier.",
+    "localeFirstDayOfYear": "Définit le jour qui détermine la première semaine de l'année, à partir de 0 pour **Dimanche**. Pour ISO 8601, ce devrait être 4.",
+    "minWeeks": "Le nombre minimum de semaines à afficher dans la vue `month` ou `week`.",
+    "monthFormat": "Formate la chaîne de mois qui apparaît dans un jour à une locale spécifiée",
+    "now": "Outrepasser le jour et l'heure qui est considéré maintenant. Ceci est au format de `YYYY-MM-DD hh:mm:ss`. Le calendrier est stylisé en fonction de maintenant.",
+    "shortMonths": "Si les versions courtes d'un mois doivent être utilisées (Jan vs Janvier).",
+    "shortWeekdays": "Si les versions courtes d'une semaine doivent être utilisées (Lun contre Lundi).",
+    "showMonthOnFirst": "Si le nom du mois doit être affiché le premier jour du mois.",
+    "showWeek": "Si les numéros de semaine doivent être affichés lors de l'utilisation de la vue `month`.",
+    "start": "La date de début du calendrier (inclusivement) au format de `YYYY-MM-DD`. Cela peut être ignoré en fonction du `type` du calendrier.",
+    "weekdayFormat": "Formate le jour de la chaîne de semaine qui apparaît dans l'en-tête à la locale spécifiée",
+    "weekdays": "Spécifie quels jours de la semaine à afficher. Pour afficher le lundi au vendredi seulement, une valeur de `[1, 2, 3, 4, 5]` peut être utilisée. Pour afficher une semaine à partir du lundi une valeur de `[1, 2, 3, 4, 5, 6, 0]` peut être utilisée."
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "props": {
+    "left": "Signifie que l'avatar est sur la gauche d'un composant. Ceci est branché par des composants tels que [v-chip](/components/chips) et [v-btn](/components/boutons).",
+    "right": "Signifie que l'avatar est sur le côté droit d'un composant. Il est branché par des composants tels que [v-chip](/components/chips) et [v-btn](/components/boutons)."
+  }
+}

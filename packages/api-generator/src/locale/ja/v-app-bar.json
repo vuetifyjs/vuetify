@@ -1,0 +1,18 @@
+{
+  "props": {
+    "clippedLeft": "v-navigation-drawerをapp-barの下の左側に配置します。",
+    "clippedRight": "v-navigation-drawerをapp-barの下の右側に配置します。",
+    "collapseOnScroll": "スクロール時に app-bar を折りたたんだ状態にします。",
+    "elevateOnScroll": "スクロール時に app-bar を持ち上げます。",
+    "fadeImgOnScroll": "**src** prop や `img` slot を使用すると、スクロール時に画像がフェードします。",
+    "hideOnScroll": "スクロール時にこのapp-barを隠しますが、`extension`slot は表示したままにします。",
+    "invertedScroll": "下へスクロールすると app-bar を隠し、上へスクロールすると app-bar を表示します。",
+    "scrollOffScreen": "スクロール時に app-bar を隠します。`extension` slotも表示しません。",
+    "shrinkOnScroll": "スクロール時に **prominent** ツールバーを **dense** または **short** (デフォルト) に圧縮します。",
+    "src": "画像のソースです。詳しくは `v-img` を参照してください。"
+  },
+  "slots": {
+    "extension": "スロットはツールバーのメインコンテンツの下に配置されます。高さは**extension-height**プロパティで明示的に設定できます。 このスロットにコンテンツがない場合、**extended** プロパティが代わりに使用されます。",
+    "img": "[v-img](/components/images) コンポーネントが必要です。スコープ付きの **props** は `v-bind=\"props\"` で適用する必要があります。"
+  }
+}

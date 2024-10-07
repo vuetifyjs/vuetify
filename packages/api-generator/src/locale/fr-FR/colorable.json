@@ -1,0 +1,5 @@
+{
+  "props": {
+    "color": "Applique la couleur spécifiée au contrôle - il peut s'agir du nom de la couleur material (par exemple `success` ou `purple`) ou de la couleur css (`#033` ou `rgba(255, 0, 0, 0. 0. 0. )`). Vous pouvez trouver une liste des classes intégrées sur la [page des couleurs](/styles/colors#material-colors)."
+  }
+}

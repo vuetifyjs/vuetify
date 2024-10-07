@@ -1,0 +1,13 @@
+{
+  "props": {
+    "closeDelay": "open-on-hover prop が true の場合に、メニューが閉じられるまでの遅延時間。(ミリ秒単位)",
+    "debounce": "Tooltipがホバーされた際に表示されてから消えるまでの時間。",
+    "disabled": "ツールチップを無効にする",
+    "internalActivator": "内部アクティベーターを使用するか指定します",
+    "openDelay": "Open-on-hover prop が true の場合に、メニューが開くまでの遅延時間。(ミリ秒単位**)",
+    "openOnClick": "アクティベーターのクリック時にツールチップを開くかどうかを指定します",
+    "openOnHover": "アクティベーターのクリック時にツールチップを開くかどうかを指定します",
+    "tag": "activator のラッパーにカスタムタグを指定します",
+    "transition": "コンポーネントのトランジションを設定します。 [組み込みトランジション](/styles/transitions) のいずれか、または独自のものを使用できます。"
+  }
+}

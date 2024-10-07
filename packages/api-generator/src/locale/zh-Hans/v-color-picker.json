@@ -1,0 +1,23 @@
+{
+  "props": {
+    "canvasHeight": "画布高度",
+    "disabled": "禁用选择器",
+    "dotSize": "更改画布上选择点的大小",
+    "flat": "移除海拔",
+    "hideCanvas": "隐藏画布",
+    "hideSliders": "隐藏滑块",
+    "hideInputs": "隐藏输入",
+    "hideModeSwitch": "隐藏模式开关",
+    "mode": "设置输入模式。可用的模式有 'rgba', 'hsla', 和 'hexa'。可以与 `.sync` 的修饰符同步使用。",
+    "showSwatches": "显示色板",
+    "swatches": "设置可供选择的颜色样本 - 此属性仅接受 rgba hex 字符串",
+    "swatchesMaxHeight": "设置色板部分的最大高度",
+    "value": "当前的颜色。可以是表示十六进制颜色的字符串，也可以是表示 RGBA、HSLA 或 HSVA 值的对象",
+    "width": "设置取色器的宽度"
+  },
+  "events": {
+    "input": "选定的颜色。 根据您传递给 `value` 属性的内容，它可以是字符串或对象",
+    "update:color": "选定的颜色。 这是颜色的内部表示，包含所有值。",
+    "update:mode": "选择模式"
+  }
+}

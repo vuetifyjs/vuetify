@@ -1,0 +1,15 @@
+{
+  "props": {
+    "appendIcon": "附加插槽中使用的图标（如果显示）",
+    "centerActive": "强制选择的纸片居中",
+    "column": "删除水平分页并根据需要包装项目",
+    "mobileBreakpoint": "为组件设置和指定移动设备的屏幕尺寸断点",
+    "nextIcon": "指定用于下一个图标的图标",
+    "prependIcon": "前置插槽中使用的此图标（如果显示）",
+    "prevIcon": "指定用于上一个图标的图标",
+    "showArrows": "强制显示分页箭头"
+  },
+  "events": {
+    "change": "当组件值被用户交互改变时发出。"
+  }
+}

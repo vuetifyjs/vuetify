@@ -1,0 +1,5 @@
+{
+  "props": {
+    "color": "指定控件颜色，颜色值可以是 Material 颜色（例如 <code>success</code>或者 <code>purple</code> ）也可以是 Css 颜色 （例如 <code>#033</code> 或者 <code>rgba(255, 0, 0, 0.5)</code>）。在 [colors page](/zh-Hans/styles/colors#material-colors)中可以找到内置颜色类列表。"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "props": {
+    "activeClass": "La classe appliquée à un [v-btn](/components/button) quand activé.",
+    "backgroundColor": "Modifie la couleur de fond du composant.",
+    "dark": "Applique la variante du thème foncé au composant. Vous pouvez trouver plus d'informations sur la documentation Material Design pour [thèmes sombres](https://material.io/design/color/dark-theme.html).",
+    "grow": "Forcer [v-btn](/components/boutons)s à prendre tout l'espace disponible.",
+    "hideOnScroll": "Passera la navigation hors écran lors du défilement vers le haut.",
+    "horizontal": "Utilise un style horizontal alternatif pour [v-btn](/components/boutons).",
+    "inputValue": "Contrôle si le composant est visible ou caché. Supporte le modificateur **.sync** .",
+    "light": "Applique la variante claire du thème au composant.",
+    "mandatory": "Force une valeur à toujours être sélectionnée (si disponible).",
+    "shift": "Masque le texte de [v-btn](/components/boutons)s lorsqu'ils ne sont pas actifs.",
+    "value": "Maintent la valeur de l'actif actuel [v-btn](/components/boutons). Si le bouton n'a pas de valeur fournie, son index sera utilisé à la place.."
+  },
+  "events": {
+    "change": "La valeur du bouton actuellement sélectionné. Si aucune valeur n'est assignée, sera l'index actuel du bouton.",
+    "update:input-value": "L'événement utilisé pour `input-value.sync`."
+  }
+}

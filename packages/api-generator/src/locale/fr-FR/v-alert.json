@@ -1,0 +1,38 @@
+{
+  "props": {
+    "border": "Place une bordure sur l'alerte. Accepte **top** \\| **right** \\| **bottom** \\| **left**.",
+    "closeIcon": "Change l'icône par défaut utilisée pour les alertes **fermable**.",
+    "closeLabel": "Texte utilisé pour *aria-label* sur les alertes **dismissible** . Peut également être personnalisé globalement dans [Internationalization](/customization/internationalisation).",
+    "color": "Applique la couleur spécifiée a l'alerte - cela peut être le nom d'une couleur Material (par exemple `success` ou `purple`) ou la couleur css (`#033` ou `rgba(255, 0, 0, 0.5)`). Vous pouvez trouver la liste des classes sur la page [couleurs](/styles/colors#material-colors).",
+    "coloredBorder": "Applique la **color** définie à la bordure de l'alerte.",
+    "dark": "Applique la variante du thème foncé au composant. Vous pouvez trouver plus d'informations sur la documentation Material Design pour [thèmes sombres](https://material.io/design/color/dark-theme.html).",
+    "dense": "Diminue la hauteur du composant.",
+    "dismissible": "Ajoute une icône fermer qui peut cacher l'alerte.",
+    "elevation": "Il désigne une altitude appliquée à la composante entre 0 et 24. Vous pouvez trouver plus d'informations sur la [page d'altitude](/styles/altitude).",
+    "height": "Définit la hauteur du composant.",
+    "icon": "Désigne une icône spécifique.",
+    "light": "Applique la variante claire du thème au composant.",
+    "maxHeight": "Définit la hauteur maximale du composant.",
+    "maxWidth": "Définit la largeur maximale du composant.",
+    "minHeight": "Définit la hauteur minimale du composant.",
+    "minWidth": "Définit la largeur minimale du composant.",
+    "mode": "Définit le mode de transition (ne s'applique pas au groupe de transition). Vous pouvez trouver plus d'informations sur la documentation Vue [pour les modes de transition](https://vuejs.org/v2/api/#transition).",
+    "origin": "Définit l'origine de la transition sur l'élément. Vous pouvez trouver plus d'informations sur la documentation MDN [pour l'origine de la transition](https://developer.mozilla.org/fr-US/docs/Web/CSS/transform-origin).",
+    "outlined": "Rends le fond transparent et applique une bordure mince.",
+    "prominent": "Affiche une large icône centrée verticalement pour attirer plus l'attention.",
+    "text": "Applique la **color** définie au texte et à l'arrière-plan avec une faible opacité sur la couleur.",
+    "tile": "Supprime le rayon de la frontière du composant.",
+    "transition": "Définit la transition du composant. Peut être l'une des [construites en transitions](/styles/transitions) ou l'autre de vos propres.",
+    "type": "Spécifie si une alerte est de type **success**, **info**, **warning** ou **error**. Utilise la couleur contextuelle et l'icône prédéfinie.",
+    "value": "Contrôle si le composant est visible ou caché.",
+    "width": "Définit la largeur du composant."
+  },
+  "slots": {
+    "append": "Emplacement pour l'icône à la fin de l'alerte.",
+    "close": "Emplacement pour l'icône utilisée dans la prop **dismissible**.",
+    "prepend": "Emplacement pour l'icône au début de l'alerte."
+  },
+  "functions": {
+    "toggle": "Bascule l'état actif de l'alerte. Disponible dans la fenêtre de fermeture et utilisé comme une action clic dans **dismissible**."
+  }
+}

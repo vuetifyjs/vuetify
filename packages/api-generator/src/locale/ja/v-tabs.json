@@ -1,0 +1,32 @@
+{
+  "props": {
+    "activeClass": "子要素が有効な場合、子要素に **active-class** が適用されます。",
+    "alignWithTitle": "`v-tabs`をツールバーのタイトルと揃えます",
+    "backgroundColor": "コンポーネントの背景色を変更します。",
+    "centered": "タブを中央寄せにします。",
+    "centerActive": "選択したタブを強制的に中央に配置します",
+    "cycle": "インデックスの末尾にある場合、左または右にスワイプするときに最初または最後のタブにリセットされます",
+    "dark": "コンポーネントにダークテーマを適応します。詳しく知りたい場合は、Material Design documentationの[dark themes](https://material.io/design/color/dark-theme.html)を参照してください。",
+    "fixedTabs": "`v-tabs-item` min-width 160px, max-width 360px",
+    "grow": "`v-tab`を強制的に利用可能なすべてのスペースに占有させます",
+    "height": "タブバーの高さを指定します",
+    "hideSlider": "生成された `v-tabs-slider` を隠す",
+    "iconsAndText": "アイコンとテキストを垂直（縦）に重ねる",
+    "light": "コンポーネントにlightテーマを適用します。",
+    "mobileBreakpoint": "コンポーネントに指定されたモバイルのbreakpointを指定します。",
+    "optional": "アクティブなアイテムは必要ありません。`v-tab`を`router-link`として使用する場合に便利です。",
+    "prevIcon": "左ページネーションのアイコンを設定します。",
+    "nextIcon": "右ページネーションのアイコンを設定します。",
+    "reverseTransition": "コンポーネントがアイテムを反転するときに使用されるトランジション。 [組み込みトランジション](/styles/transitions) のいずれか、または独自のものを使用できます。",
+    "right": "タブを右揃えにします。",
+    "showArrows": "タブ項目がコンテナをオーバーフローした場合は、ページ番号の矢印を表示します。モバイル デバイスの場合、矢印は、このpropを使用する場合にのみ表示されます。",
+    "sliderColor": "自動生成された`v-tabs-slider`の背景色を変更します。",
+    "sliderSize": "スライダーのサイズを変更します。**height**は水平用、**width**は垂直用です。",
+    "touchless": "モバイルのタッチ機能を無効にする",
+    "transition": "コンポーネントのトランジションを設定します。 [組み込みトランジション](/styles/transitions) のいずれか、または独自のものを使用できます。",
+    "vertical": "タブを垂直方向（縦）に並べます。"
+  },
+  "events": {
+    "change": "ユーザの操作によってタブが変更されたときに発生します。**href** 属性が設定されている場合は文字列を返し、そうでない場合は数値を返します。"
+  }
+}

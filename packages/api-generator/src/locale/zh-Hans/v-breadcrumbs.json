@@ -1,0 +1,14 @@
+{
+  "props": {
+    "divider": "指定项之间的分隔字符。",
+    "icons": "指定项目之间的分隔线是 [v-icon](/components/icons)。",
+    "items": "每个面包屑对象的数组。",
+    "justifyCenter": "对齐面包屑中心.",
+    "justifyEnd": "尾部对齐面包屑.",
+    "large": "将面包屑项文本的字体大小增加到 16px（默认为 14px）。"
+  },
+  "slots": {
+    "divider": "用于分隔器的插槽。",
+    "item": "使用 **items** 属性时，用于覆盖默认 `v-breadcrumbs-item` 行为的插槽。"
+  }
+}

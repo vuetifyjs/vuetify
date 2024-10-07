@@ -1,0 +1,7 @@
+{
+  "props": {
+    "absolute": "Applique **position: absolute** au composant.",
+    "opacity": "Définit l'opacité de la superposition",
+    "zIndex": "Le z-index utilisé pour le composant"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "props": {
+    "disableSort": "Active/désactive l'affichage du bouton de tri",
+    "everyItem": "Indique si tous les éléments du tableau sont sélectionnés",
+    "headers": "Tableau des éléments d'en-tête à afficher",
+    "mobile": "Affiche la vue mobile des en-têtes",
+    "options": "L'objet options est identique à celui du `v-data-table`",
+    "showGroupBy": "Montre le groupe par bouton",
+    "singleSelect": "Afficher/Masquer la case \"Tout sélectionner\"",
+    "someItems": "Indique si un ou plusieurs éléments du tableau sont sélectionnés",
+    "sortByText": "Définit le texte de l'étiquette utilisé par le sélecteur de tri par défaut lorsque `v-data-table` est en vue mobile",
+    "sortIcon": "Icône utilisée pour le bouton de tri"
+  }
+}

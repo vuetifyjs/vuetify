@@ -1,0 +1,21 @@
+{
+  "props": {
+    "dark": "将深色主题变量应用于组件。 除非您已将 [application theme](/customization/theme) 配置为 **dark** 或在组件上使用 **color** 属性，否则组件的颜色默认为 _white_。 您可以在材料设计文档中找到更多信息 [dark themes](https://material.io/design/color/dark-theme.html)。",
+    "fullWidth": "强制对话框扩展 100% 的可用宽度。",
+    "fullscreen": "改变全屏显示的布局。",
+    "internalActivator": "与文档相反，分离组件内部的菜单内容。",
+    "light": "为组件设置浅色主题。",
+    "maxWidth": "设定组件的最大宽度。",
+    "noClickAnimation": "使用 **persistent** 属性，在 `v-dialog` 的内容之外点击时，禁用弹跳效果。",
+    "openOnHover": "指定组件在其激活器悬停时是否应激活。",
+    "origin": "设置元素上的动画原点。您可以在 MDN 文档上浏览更多 [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin)",
+    "persistent": "点击元素外面或按下 **esc** 键将不会关闭它。",
+    "retainFocus": "默认情况下，制表符焦点将返回到对话框的第一个子级。在使用需要焦点的外部工具（如 TinyMCE 或 vue-clipboard）时禁用此选项。",
+    "scrollable": "当设置为 true 时，期望有一个 `v-card` 和一个 `v-card-text` 组件，并有指定的高度。更多信息，请查看 [可滚动示例](/components/dialogs#scrollable)。",
+    "transition": "设置组件转换。可以是一个 [built in transitions](/styles/transitions) 或者是自己自定义的。"
+  },
+  "events": {
+    "click:outside": "在活动对话框外部单击时激发的事件。",
+    "keydown": "按下 key 时激发的事件。如果对话处于激活状态且未使用 **persistent** 属性，则 **esc** 键会将其停用。"
+  }
+}

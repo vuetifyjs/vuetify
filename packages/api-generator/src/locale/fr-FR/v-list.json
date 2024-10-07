@@ -1,0 +1,20 @@
+{
+  "props": {
+    "avatar": "Utilisé pour définir la hauteur minimale des tuiles sur un élément de liste en ligne",
+    "dense": "Hauteur max des tuiles de liste inférieure",
+    "disabled": "Désactive tous les composants `v-list-item`",
+    "expand": "Ne disparaîtra qu'après fermeture explicite",
+    "flat": "Supprimer le fond en surbrillance sur les éléments 'v-list's actifs",
+    "group": "Assigner un espace de nom de route. Accepte une chaîne ou une régression pour déterminer l'état actif",
+    "inactive": "Si défini, la tuile de liste ne sera pas rendue comme un lien même si elle a/href prop ou @click handler",
+    "link": "Applique les styles de survol `v-list-item`. Utile lorsque vous utilisez l'élément comme un _activator_.",
+    "nav": "Un style alternatif qui réduit la largeur `v-list-item` et arrondit les coins. Utilisé en général avec **[v-navigation-drawer](/components/navigation-drawers)**",
+    "noAction": "Supprime le padding de gauche assigné pour les icônes d'action des éléments du groupe",
+    "rounded": "Arrondi les bords `v-list-item`",
+    "shaped": "Fournit un style actif alternatif pour `v-list-item`.",
+    "subGroup": "Indiquez le composant comme groupe de liste imbriqué",
+    "subheader": "Supprime le padding supérieur. Utilisé lorsque le clignotement précédent est un en-tête",
+    "threeLine": "Augmente la hauteur des éléments de liste pour trois lignes. Ce prop utilise [line-clamp](https://developer.mozilla.org/fr-US/docs/Web/CSS/-webkit-line-clamp) et n'est pas pris en charge dans tous les navigateurs.",
+    "twoLine": "Augmente la hauteur des éléments de liste pour deux lignes. Ce prop utilise [line-clamp](https://developer.mozilla.org/fr-US/docs/Web/CSS/-webkit-line-clamp) et n'est pas pris en charge dans tous les navigateurs."
+  }
+}

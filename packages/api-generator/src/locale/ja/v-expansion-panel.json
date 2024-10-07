@@ -1,0 +1,11 @@
+{
+  "props": {
+    "disabled": "expansion-panelのコンテンツを無効にします。",
+    "readonly": "expansion-panel のコンテンツを読み取り専用にします。",
+    "value": "コンテンツの開閉状態を制御します"
+  },
+  "events": {
+    "change": "Toggles the value of the selected panel",
+    "click": "マウスクリック時のイベント"
+  }
+}

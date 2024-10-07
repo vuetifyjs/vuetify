@@ -1,0 +1,16 @@
+{
+  "props": {
+    "fillDot": "ドットコンテナからパディングを削除します",
+    "hideDot": "タイムラインドットの非表示にする",
+    "icon": "ドットコンテナのアイコンを指定します",
+    "iconColor": "Applies specified color to the control - it can be the name of material color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). You can find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
+    "large": "大きなドット",
+    "left": "項目を左向きに明示的に設定します",
+    "right": "項目を右向きに明示的に設定します",
+    "small": "小さなドット"
+  },
+  "slots": {
+    "icon": "タイムラインアイテムのドット内のアイコンをカスタマイズするために使用します。",
+    "opposite": "タイムラインのアイテムの反対側をカスタマイズするために使用します。"
+  }
+}

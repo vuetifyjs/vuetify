@@ -6,9 +6,6 @@ concurrency:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
-  CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-  CROWDIN_BRANCH: v2
 
 jobs:
   close:
@@ -116,42 +113,6 @@ jobs:
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn global add vercel
-
-      - name: Download eo-UY
-        uses: crowdin/github-action@v2.2.0
-        with:
-          config: crowdin.yml
-          upload_sources: false
-          download_translations: true
-          push_translations: false
-          export_only_approved: false
-          download_language: eo
-          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
-          debug_mode: true
-
-      - name: Download ja
-        uses: crowdin/github-action@v2.2.0
-        with:
-          config: crowdin.yml
-          upload_sources: false
-          download_translations: true
-          push_translations: false
-          export_only_approved: false
-          download_language: ja
-          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
-          debug_mode: true
-
-      - name: Download zh-CN
-        uses: crowdin/github-action@v2.2.0
-        with:
-          config: crowdin.yml
-          upload_sources: false
-          download_translations: true
-          push_translations: false
-          export_only_approved: false
-          download_language: zh-CN
-          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
-          debug_mode: true
 
       - run: yarn run build:modified
         working-directory: ./packages/docs

@@ -1,0 +1,24 @@
+{
+  "props": {
+    "disableItemsPerPage": "items-per-page ドロップダウンを無効にします。",
+    "disablePagination": "ページネーションボタンを無効にします",
+    "firstIcon": "最初のアイコン",
+    "itemsPerPageAllText": "items-per-page ドロップダウンメニューの 'All' オプションのテキスト",
+    "itemsPerPageOptions": "items-per-pageドロップダウンに表示するオプションの配列",
+    "itemsPerPageText": "items-per-pageドロップダウンのテキスト",
+    "lastIcon": "最後のアイコン",
+    "nextIcon": "次のアイコン",
+    "options": "DataOptions",
+    "pagination": "DataPagination",
+    "prevIcon": "前のアイコン",
+    "showCurrentPage": "現在のページ番号を前後のアイコンの間に表示します",
+    "showFirstLastPage": "最初/最後のアイコンを表示する"
+  },
+  "slots": {
+    "prepend": "フッターの空きスペースにコンテンツを追加します",
+    "page-text": "items-per-pageテキストのコンテンツを定義します。"
+  },
+  "events": {
+    "update:options": "`options`プロパティの`.sync`イベント"
+  }
+}

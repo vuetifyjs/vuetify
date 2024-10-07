@@ -1,0 +1,38 @@
+{
+  "props": {
+    "border": "在Alert组件内设置边框，可用的值有**top** \\| **right** \\| **bottom** \\| **left**",
+    "closeIcon": "改变用于**dismissible**属性（是否可关闭alert组件）的默认图标",
+    "closeLabel": "在 **dismissible** 提示框上的 *aria-label* 使用文本。也可以全局自定义 [Internationalization](/customization/internationalization)。",
+    "color": "指定控件颜色，颜色值可以是 Material 颜色（例如 `success` 或者 `purple` ），也可以是 Css 颜色 （例如 `#033` 或者 `rgba(255, 0, 0, 0.5)`）。在 [colors page](/zh-Hans/styles/colors#material-colors) 中可以找到内置颜色类列表。",
+    "coloredBorder": "将自定义的 **color** 应用于提示框的边框",
+    "dark": "将暗色主题变量应用到组件。你可以在 [dark themes](https://material.io/design/color/dark-theme.html) 的 Material Design 文档中找到更多有关信息。",
+    "dense": "降低组件的高度。",
+    "dismissible": "添加一个可以关闭警报的图标。",
+    "elevation": "组件的海拔可接受 0 到 24 之间的值。你可以在 [elevation page](/styles/elevation) 浏览更多信息。",
+    "height": "设定组件的高度。",
+    "icon": "指定特定的图标。",
+    "light": "为组件设置浅色主题。",
+    "maxHeight": "设定组件的最大高度。",
+    "maxWidth": "设定组件的最大宽度。",
+    "minHeight": "设定组件的最小高度。",
+    "minWidth": "设定组件的最小宽度。",
+    "mode": "设置转换模式（不应用于转换组）。你可以在 Vue 文档浏览更多 [for transition modes](https://vuejs.org/v2/api/#transition)。",
+    "origin": "设置元素上的动画原点。您可以在 MDN 文档上浏览更多 [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin)",
+    "outlined": "使背景透明并使用薄边框。",
+    "prominent": "显示较大的垂直居中图标，以引起更多注意。",
+    "text": "将定义的 **color** 应用于文本和同样的低透明度背景。",
+    "tile": "删除组件的 border-radius。",
+    "transition": "设置组件转换。可以是一个 [built in transitions](/styles/transitions) 或者是自己自定义的。",
+    "type": "指定一个 **success**, **info**, **warning** 或 **error** 提示。使用上下文颜色并具有预定义的图标。",
+    "value": "控制组件可见还是隐藏。",
+    "width": "设定组件的宽度。"
+  },
+  "slots": {
+    "append": "提示框末尾的图标插槽。",
+    "close": "**dismissible** 属性中的图标插槽",
+    "prepend": "提示框开始的图标插槽。"
+  },
+  "functions": {
+    "toggle": "切换提示框的活动状态。可在关闭插槽中使用，并在 **dismissible** 中用作单击操作。"
+  }
+}

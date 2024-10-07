@@ -1,0 +1,16 @@
+{
+  "props": {
+    "fillDot": "从点容器中删除padding",
+    "hideDot": "隐藏时间线上的圆点",
+    "icon": "为点容器指定图标",
+    "iconColor": "指定控件颜色，颜色值可以是 Material 颜色（例如 `success` 或者 `purple` ），也可以是 Css 颜色 （例如 `#033` 或者 `rgba(255, 0, 0, 0.5)`）。在 [colors page](/zh-Hans/styles/colors#material-colors) 中可以找到内置颜色类列表。",
+    "large": "大尺寸的圆点",
+    "left": "显式地将项目设置为左方向",
+    "right": "显式地将项目设置为右方向",
+    "small": "小尺寸的圆点"
+  },
+  "slots": {
+    "icon": "用于自定义时间线项的点内的图标",
+    "opposite": "用于自定义时间轴项目的另一面"
+  }
+}

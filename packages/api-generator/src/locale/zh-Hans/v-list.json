@@ -1,0 +1,20 @@
+{
+  "props": {
+    "avatar": "用来设置单行列表项的最小高度（即使用该属性后将有一个头像大小的最小高度）",
+    "dense": "减小列表块的最大宽度",
+    "disabled": "禁用所有子级的 `v-list-item` 组件",
+    "expand": "将只有在明确关闭后才会折叠起来",
+    "flat": "删除活动的 `v-list-item` 上突出显示的背景",
+    "group": "分配路由名称空间。 接受字符串或正则表达式以确定活动状态",
+    "inactive": "如果设置了该属性，即使有to/href或者@click，列表块也不会响应链接。",
+    "link": "应用 `v-list-item` 悬停样式。 将项目用作 _activator_ 时很有用。",
+    "nav": "另一种样式可以减小 `v-list-item` 的宽度并圆角化。 通常与 **[v-navigation-drawer](/components/navigation-drawers)** 一起使用",
+    "noAction": "从组项目中删除分配给操作图标的左边距",
+    "rounded": "圆角 `v-list-item` 边",
+    "shaped": "为 `v-list-item` 提供一个可选的活动样式。",
+    "subGroup": "将组件指定为嵌套列表组",
+    "subheader": "会移除上边距（top padding），当前面只有一个列表组标题的时候使用",
+    "threeLine": "增加三行的列表项高度。 该属性使用 [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) ，并非所有浏览器都支持。",
+    "twoLine": "增加两行的列表项高度。 该属性使用 [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) ，并非所有浏览器都支持。"
+  }
+}

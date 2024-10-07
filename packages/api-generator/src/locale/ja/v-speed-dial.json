@@ -1,0 +1,6 @@
+{
+  "props": {
+    "direction": "スピード ダイヤルのコンテンツが表示される方向。指定できる値は、`top`, `bottom`, `left`, `right` です。",
+    "openOnHover": "ホバー時にスピードダイヤルを開く"
+  }
+}

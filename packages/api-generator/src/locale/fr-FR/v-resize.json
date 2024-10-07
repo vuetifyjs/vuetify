@@ -1,0 +1,6 @@
+{
+  "argument": "La fonction à appeler lors du redimensionnement de la fenêtre",
+  "modifiers": {
+    "quiet": "N'invoquera **pas** automatiquement le callback fourni sur la liaison."
+  }
+}

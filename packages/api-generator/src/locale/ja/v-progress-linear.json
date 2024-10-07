@@ -1,0 +1,20 @@
+{
+  "props": {
+    "active": "高さを0に縮小して、コンポーネントを非表示にします。",
+    "backgroundColor": "背景色。nullの場合はコンポーネントの色に設定されます。",
+    "backgroundOpacity": "背景の不透明度。背景色が指定されていない場合はデフォルトで0.3、そうでない場合は1になります。",
+    "bufferValue": "バッファのパーセンテージ値",
+    "indeterminate": "常にアニメーションします。読み込みの進行状況が不明な場合に使用します。",
+    "query": "**indeterminate** prop のようなアニメーションを作成しますが、逆になります。",
+    "reverse": "進行状況を逆に表示します（右から左へ、RTLでは左から右へ）",
+    "rounded": "コンポーネントにborder-radiusを追加します。",
+    "stream": "**buffer-value** と連携して動作するローディングを描写するための代替スタイル",
+    "striped": "コンポーネントのバーにストライプの背景を追加します。"
+  },
+  "slots": {
+    "default": "Provides the current value of the component"
+  },
+  "events": {
+    "change": "コンポーネントの値がユーザー操作によって変更されたときに発生します。"
+  }
+}

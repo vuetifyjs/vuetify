@@ -1,0 +1,14 @@
+{
+  "props": {
+    "disableIconRotate": "パネルを展開するときのアイコンの回転アニメーションを削除します",
+    "expandIcon": "展開アクション アイコンを設定する",
+    "hideActions": "コンテンツ ヘッダーの展開アイコンを非表示にする",
+    "ripple": "[v-ripple](/directives/ripple) ディレクティブを適用します。"
+  },
+  "slots": {
+    "actions": "Expansion header actions"
+  },
+  "events": {
+    "click": "マウスクリック時のイベント"
+  }
+}

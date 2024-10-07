@@ -1,0 +1,21 @@
+{
+  "props": {
+    "continuous": "If `true`, window will \"wrap around\" from the last item to the first, and from the first item to the last",
+    "nextIcon": "`show-arrows` が `true` の場合、\"next\" ボタンに使用されるアイコン",
+    "prevIcon": "`show-arrows` が `true` の場合、\"prev\" ボタンに使用されるアイコン",
+    "reverse": "トランジションの方向を逆にします。",
+    "reverseTransition": "コンポーネントがアイテムを反転するときに使用されるトランジション。 [組み込みトランジション](/styles/transitions) のいずれか、または独自のものを使用できます。",
+    "showArrows": "\"prev\" ボタンと \"next\" ボタンを表示する",
+    "showArrowsOnHover": "ホバー時に \"next\" ボタンと \"prev\" ボタンを表示します。`show-arrows` も設定する **必要が** あります。",
+    "touch": "左または右にスワイプされたときの、カスタムの**left**および**right**関数を提供します。",
+    "touchless": "タッチ サポートを無効にします。",
+    "vertical": "Uses a vertical transition when changing windows."
+  },
+  "events": {
+    "change": "コンポーネントの値がユーザー操作によって変更されたときに発生します。"
+  },
+  "slots": {
+    "next": "Slot displaying the arrow switching to the next item",
+    "prev": "Slot displaying the arrow switching to the previous item"
+  }
+}

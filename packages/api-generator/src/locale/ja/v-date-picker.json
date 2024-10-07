@@ -1,0 +1,48 @@
+{
+  "props": {
+    "activePicker": "Determines which picker in the date or month picker is being displayed. Allowed values: `'DATE'`, `'MONTH'`, `'YEAR'`",
+    "allowedDates": "選択できる日付を制限します",
+    "disabled": "Disables interaction with the picker",
+    "dayFormat": "日付テーブルに表示される曜日文字列の形式をカスタマイズできます。date (ISO 8601 **date** string) 引数で呼び出されます。",
+    "eventColor": "イベントのドットの色を設定します。文字列(すべてのイベントは同じ色になります)あるいは `object` で、属性はイベントの日付, 値は指定された日付の色の真偽値/色/配列、`function` は日付をパラメータとして、その日付の色の真偽値/色/配列を返します。",
+    "events": "日付またはイベントまたは色を定義するオブジェクトの配列、または色の 真偽値/色/配列 を返す関数",
+    "firstDayOfWeek": "週の最初の日を設定します。日曜日の0から始まります。",
+    "flat": "Elevationを削除します。",
+    "headerDateFormat": "カレンダーのヘッダーに表示される月の文字列の書式をカスタマイズできます。 日付引数(ISO 8601 **date** 文字列) で呼び出されます。",
+    "locale": "ロケールを設定します。 BCP 47言語タグを含む文字列を受け入れます。",
+    "localeFirstDayOfYear": "年の最初の週を決定する日を設定します。**日曜日** の 0 から始まります。ISO 8601 の場合は、4 にする必要があります。",
+    "max": "Maximum allowed date/month (ISO 8601 format)",
+    "min": "Minimum allowed date/month (ISO 8601 format)",
+    "monthFormat": "Formatting function used for displaying months in the months table. Called with date (ISO 8601 **date** string) arguments.",
+    "multiple": "複数の日付の選択を許可します",
+    "nextIcon": "翌月/年ボタンのアイコンを設定します。",
+    "pickerDate": "表示される年/月",
+    "prevIcon": "前月/年ボタンのアイコンを設定します。",
+    "range": "日付範囲の選択を許可します",
+    "reactive": "Updates the picker model when changing months/years automatically",
+    "readonly": "ピッカーの読み取り専用を設定します (新しい日付を選択することはできません)",
+    "scrollable": "マウススクロールで月表示を変更する",
+    "selectedItemsText": "*multiple* prop を使用している場合に、選択した日付の数を翻訳するために使用されるテキスト。 [Internationalization](/customization/internationalization) でグローバルにカスタマイズすることもできます。",
+    "showCurrent": "Toggles visibility of the current date/month outline or shows the provided date/month as a current",
+    "showAdjacentMonths": "Toggles visibility of days from previous and next months",
+    "showWeek": "カレンダー本体の週番号の表示を切り替えます",
+    "titleDateFormat": "日付ピッカーのタイトルに表示される日付文字列の書式をカスタマイズできます。 日付引数(ISO 8601 **date** 文字列) で呼び出されます。",
+    "type": "Determines the type of the picker - `date` for date picker, `month` for month picker",
+    "value": "日付ピッカーモデル (ISO 8601形式, YYYY-mm-dd または YYYY-mm)",
+    "weekdayFormat": "カレンダーボディに表示される平日の文字列の書式をカスタマイズできます。 日付引数(ISO 8601 **date** 文字列) で呼び出されます。",
+    "width": "ピッカーの幅",
+    "yearFormat": "カレンダーのヘッダーに表示される年の文字列の書式をカスタマイズできます。 日付引数(ISO 8601 **date** 文字列) で呼び出されます。",
+    "yearIcon": "年選択ボタンにアイコンを設定します"
+  },
+  "slots": {
+    "default": "カレンダーの下に表示されます。アクションボタン (`OK` と `キャンセル`) などに使用できます。"
+  },
+  "events": {
+    "update:active-picker": "`active-picker` プロパティ の `.sync` イベント",
+    "update:picker-date": "`picker-date`プロパティの`.sync`イベント",
+    "<domevent>:date": "日付ボタンで指定した DOM イベントが発生したときに発生します。",
+    "<domevent>:month": "Emitted when the specified DOM event occurs on the month button",
+    "<domevent>:year": "Emitted when the specified DOM event occurs on the year button",
+    "change": "Reactive date picker emits `input` even when any part of the date (year/month/day) changes, but `change` event is emitted only when the day (for date pickers) or month (for month pickers) changes. If `range` prop is set, date picker emits `change` when both [from, to] are selected."
+  }
+}

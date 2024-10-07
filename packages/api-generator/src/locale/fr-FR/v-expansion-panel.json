@@ -1,0 +1,11 @@
+{
+  "props": {
+    "disabled": "Désactive le contenu du panneau d'extension",
+    "readonly": "Rend le contenu du panneau d'extension en lecture seule.",
+    "value": "Contrôle l'état de contenu ouvert/fermé"
+  },
+  "events": {
+    "change": "Active la valeur du panneau sélectionné",
+    "click": "Événement de clic de souris"
+  }
+}

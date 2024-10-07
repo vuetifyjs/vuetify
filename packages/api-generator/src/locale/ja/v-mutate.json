@@ -1,0 +1,10 @@
+{
+  "argument": "ターゲット要素が更新されたときに呼び出す関数。",
+  "modifiers": {
+    "once": "指定されたユーザーコールバックを1回だけ呼び出すと、ディレクティブはバインドされなくなります。",
+    "attr": "[attributes](https://developer.mozilla.org/ja/docs/Web/API/MutationObserverInit/attributes)の値をtrueに設定します。",
+    "child": "[childList](https://developer.mozilla.org/ja/docs/Web/API/MutationObserverInit/childList) の値をtrueに設定します。",
+    "char": "[characterData](https://developer.mozilla.org/ja/docs/Web/API/MutationObserverInit/characterData)の値をtrueに設定します。",
+    "sub": "[subtree](https://developer.mozilla.org/ja/docs/Web/API/MutationObserver/observe#Parameters) の値をtrueに設定します。"
+  }
+}

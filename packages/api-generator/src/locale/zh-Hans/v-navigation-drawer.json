@@ -1,0 +1,30 @@
+{
+  "props": {
+    "bottom": "在移动设备上从屏幕底部展开",
+    "clipped": "A clipped drawer rests under the application toolbar. **Note:** requires the **clipped-left** or **clipped-right** prop on `v-app-bar` to work as intended",
+    "disableResizeWatcher": "调整大小时将自动打开/关闭抽屉，具体取决于手机还是桌面",
+    "disableRouteWatcher": "当路由改变时禁止打开抽屉导航",
+    "expandOnHover": "将抽屉折叠成 **mini-variant**，直到用鼠标悬停",
+    "floating": "浮动抽屉没有可见的容器（没有右边框）",
+    "height": "设置导航抽屉高度",
+    "mobileBreakpoint": "为组件设置指定的移动断点。这将为移动设备应用替代样式，如 `temporary` prop，或在满足断点值时激活 `bottom` prop。将值设置为 `0` 将禁用此功能。",
+    "miniVariantWidth": "指定`mini`属性开期时指定的宽度",
+    "miniVariant": "凝结导航抽屉宽度，也接受**.sync**修饰符。这样，抽屉在点击时会重新打开",
+    "permanent": "不管屏幕尺寸如何，抽屉都可以看到",
+    "right": "将抽屉放置在右侧",
+    "src": "指定 [v-img](/components/images) 作为组件背景。",
+    "stateless": "删除所有自动状态功能（调整大小、移动、路由）并手动控制抽屉状态。",
+    "temporary": "临时抽屉位于其应用之上，并使用稀松布（叠加）来使背景变暗",
+    "touchless": "禁用移动触摸功能",
+    "value": "控制组件可见还是隐藏。"
+  },
+  "slots": {
+    "append": "抽屉底部的插槽",
+    "img": "用于修改 `v-img` 属性时使用 **src** 属性",
+    "prepend": "抽屉顶部的插槽"
+  },
+  "events": {
+    "transitionend": "过渡完成后，发出事件对象。",
+    "update:mini-variant": "`mini-variant.sync` 事件"
+  }
+}

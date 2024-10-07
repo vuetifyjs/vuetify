@@ -1,0 +1,14 @@
+{
+  "props": {
+    "disableIconRotate": "Supprime l'animation de rotation des icônes lors de l'agrandissement d'un panneau",
+    "expandIcon": "Définir l'icône d'action d'extension",
+    "hideActions": "Masquer l'icône d'extension dans l'en-tête de contenu",
+    "ripple": "Applique la directive [v-ripple](/directives/ripple)."
+  },
+  "slots": {
+    "actions": "Actions d'expansion de l'en-tête"
+  },
+  "events": {
+    "click": "Événement de clic de souris"
+  }
+}

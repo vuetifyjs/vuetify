@@ -1,0 +1,14 @@
+{
+  "props": {
+    "length": "OTPフィールドの長さ",
+    "type": "サポートされている型: `text`, `password`, `number`",
+    "dark": "コンポーネントにdarkテーマのバリエーションを適用します。[アプリケーションのテーマ](/customization/theme) を **dark** に設定している場合や、コンポーネントに **color** propを使用している場合を除き、コンポーネントの色はデフォルトで _white_ になります。Material Design documentationの[ダークテーマ](https://material.io/design/color/dark-theme.html) に詳しい情報があります。",
+    "plain": "Outlined style applied by default to the input, set to `true` to apply plain style"
+  },
+  "events": {
+    "finish": "入力欄が完全に埋められ、かつフォーカスが外れたときに発行されます。",
+    "change": "ユーザーの操作によって値が変更されたときに発生します。",
+    "focus": "コンポーネントがフォーカスされている場合に発生します。",
+    "keydown": "**any** キーが押されたときに発生します。"
+  }
+}

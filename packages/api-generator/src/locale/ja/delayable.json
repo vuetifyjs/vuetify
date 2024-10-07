@@ -1,0 +1,6 @@
+{
+  "props": {
+    "openDelay": "コンポーネントを開くまでのミリ秒を指定。hoverとfocusイベントのみに反映します。",
+    "closeDelay": "Milliseconds to wait before closing component. Only applies to hover and focus events."
+  }
+}

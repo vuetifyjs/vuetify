@@ -1,0 +1,20 @@
+{
+  "props": {
+    "closeOnClick": "外側アクティベータークリック時にメニューを閉じるかどうかを指定します。",
+    "closeOnContentClick": "コンテンツがクリックされたときにメニューを閉じるかどうかを指定します。",
+    "closeDelay": "コンポーネントが閉じられるまでのミリ秒を指定します。**open-on-hover** propがあるときのみ動作します。",
+    "disabled": "メニューを無効にします。",
+    "disableKeys": "すべてのキーボード操作を取り除きます",
+    "internalActivator": "ドキュメントではなく、コンポーネント内のメニューコンテンツを切り離します。",
+    "maxHeight": "メニューコンテンツの最大高さを設定します。",
+    "offsetX": "X軸のメニューのオフセット。left/right方向と連動します。",
+    "offsetY": "Y軸のメニューのオフセット。top/bottom方向と連動します。",
+    "openDelay": "コンポーネントが開かれるまでのミリ秒を指定します。**open-on-hover** propがあるときのみ動作します。",
+    "openOnClick": "アクティベーターのクリック時にメニューを開くかどうかを指定します。",
+    "openOnHover": "アクティベーターのホバー時にメニューを開くかどうかを指定します",
+    "origin": "要素にトランジションの起点を設定します。 MDNドキュメントで [for transition origin](https://developer.mozilla.org/ja/docs/Web/CSS/transform-origin) の詳細を参照できます。",
+    "returnValue": "メニューが閉じられたときに更新される値は、プリミティブでなければなりません。ドット表記がサポートされています",
+    "transition": "コンポーネントのトランジションを設定します。 [組み込みトランジション](/styles/transitions) のいずれか、または独自のものを使用できます。",
+    "contentProps": "Applies props/attributes to the detached menu. This is useful because the content is moved to the beginning of the `v-app` component (unless the attach prop is provided) and is not targetable by classes passed directly on the component. You could use this for example for applying a `data-cy` for cypress testing purposes."
+  }
+}

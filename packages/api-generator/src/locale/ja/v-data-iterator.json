@@ -1,0 +1,50 @@
+{
+  "props": {
+    "customFilter": "Itemをfilterするための関数",
+    "customGroup": "Itemsをgroup化するために使われる関数",
+    "customSort": "Itemsをsortするために使われる関数",
+    "disableFiltering": "Filterを完全に無効化します。",
+    "disablePagination": "Paginationを完全に無効化します。",
+    "disableSort": "Sortingを完全に無効化します。",
+    "expanded": "拡張されたitemsのarrayです。 `.sync` 修飾子と一緒に使うことができます。",
+    "footerProps": "詳細は [`v-data-footer`](/api/v-data-footer) API を参照してください。",
+    "groupBy": "アイテムのグループ化に使用するアイテムプロパティを変更します。現在は、`group` または `['group']` 形式でのみサポートされています。 配列を使用する場合、最初の要素のみが考慮されます。`.sync`修飾子と一緒に使用できます。",
+    "groupDesc": "グループ化する方向を変更します。`.sync` 修飾子と一緒に使用できます。",
+    "hideDefaultFooter": "デフォルトのfooterを隠します。",
+    "itemKey": "各itemでユニークキーとして使われるプロパティ。",
+    "items": "表示されるitemsのarray。",
+    "itemsPerPage": "ページごとに何個のアイテムを表示するかを変更します。`.sync` 修飾子と一緒に使うことができます。このプロパティを `-1` に設定すると、ページ上のすべてのアイテムを表示します。",
+    "loading": "もし`true`にして、itemsが設定されなかった場合、ここに設定したローディングテキストが表示されます。",
+    "loadingText": "`loading`がtrueで、itemsが何も設定されなかった場合に表示されるテキスト。",
+    "locale": "ソートに使用されるロケールを設定します。これはデフォルトの `customSort` 関数の [`Intl.Collator()`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator) に渡されます。",
+    "mobileBreakpoint": "通常のテーブルとモバイル環境でのビューを切り替えるタイミングを設定するために使用",
+    "multiSort": "`true` の場合、複数のプロパティでソートすることができます。",
+    "mustSort": "`true` の場合、ソートを無効にすることはできず、常に昇順と降順を切り替えます。",
+    "noDataText": "コンポーネントにアイテムが提供されていない場合に表示されるテキスト。",
+    "noResultsText": "`search` propが使われ、結果が得られなかった場合に表示されるテキスト。",
+    "search": "Itemsをフィルタリングするために使用されるテキスト入力",
+    "selectableKey": "選択可能かどうかを判断するために使用される各項目のプロパティ。",
+    "serverItemsLength": "データがサーバから提供される場合にのみ使用されます。 ページネーションが正しく動作するように、サーバで利用可能なアイテムの合計数に設定する必要があります",
+    "singleExpand": "展開モードをシングル展開に変更します",
+    "singleSelect": "選択モードを単一選択に変更します",
+    "sortBy": "どの項目プロパティ（またはプロパティ群）をソート順に使用するかを変更します。`.sync` 修飾子と一緒に使うことができます。",
+    "sortDesc": "ソートする方向を変更します。`.sync` 修飾子と一緒に使うことができます。",
+    "value": "選択された行を制御するために使用します。"
+  },
+  "slots": {
+    "default": "デフォルトのスロット。これを使用してアイテムをレンダリングします。",
+    "footer.page-text": "このスロットはデフォルトのフッターに転送されます。詳細は[`v-data-footer`](/api/v-data-footer) API を参照してください。",
+    "footer": "アイテムの下にフッターを定義します",
+    "heading": "アイテムの上にあるヘッダーを定義します",
+    "item": "各アイテムのスロット",
+    "loading": "`loading` が true で、itemsが提供されない場合のコンテンツを定義します。",
+    "no-data": "itemsが提供されない場合のコンテンツを定義します",
+    "no-results": "`search` が提供されているが、結果が見つからない場合のコンテンツを定義します。"
+  },
+  "events": {
+    "input": "選択した項目の配列",
+    "item-expanded": "項目が展開または閉じられたときに発生するイベント",
+    "item-selected": "アイテムが選択または選択解除されたときに発生するイベント",
+    "update:expanded": "`expanded`プロパティの`.sync`イベント"
+  }
+}

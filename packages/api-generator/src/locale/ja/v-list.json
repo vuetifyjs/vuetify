@@ -1,0 +1,20 @@
+{
+  "props": {
+    "avatar": "単一行リスト項目に最小タイルの高さを設定するために使用します。",
+    "dense": "リストタイルの最大高さを下げます。",
+    "disabled": "全ての子要素`v-list-item`コンポーネントを無効にします",
+    "expand": "明示的に閉じたときにのみ折りたたまれます",
+    "flat": "アクティブな `v-list-item` の背景を削除します",
+    "group": "route名の名前空間を割り当てます。アクティブ状態とする条件に、文字列と正規表現が使えます。",
+    "inactive": "このプロパティが設定されている場合、list tile に to/href プロパティや @click ハンドラが指定されていても、リンクは無効になりレンダリングされません。",
+    "link": "`v-list-item` ホバースタイルを適用します。_activator_ としてアイテムを使用するときに便利です。",
+    "nav": "`v-list-item`の幅を小さくし、角を丸くする代替スタイリングです。一般的には **[v-navigation-drawer](/components/navigation-drawers)** で使用されます。",
+    "noAction": "グループアイテムからアクションアイコンに割り当てられた左のパディングを削除します。",
+    "rounded": "`v-list-item`エッジを丸めます。",
+    "shaped": "`v-list-item` の代替アクティブスタイルを提供します。",
+    "subGroup": "コンポーネントをネストしたリストグループとして指定します",
+    "subheader": "トップパディングを削除します。以前の兄弟がヘッダーである場合に使用されます",
+    "threeLine": "3行用にリスト項目の高さを増やします。このpropは [line-clamp](https://developer.mozilla.org/ja/docs/Web/CSS/-webkit-line-clamp) を使用しており、すべてのブラウザでサポートされているわけではありません。",
+    "twoLine": "2行用にリスト項目の高さを増やします。このpropは [line-clamp](https://developer.mozilla.org/ja/docs/Web/CSS/-webkit-line-clamp) を使用しており、すべてのブラウザでサポートされているわけではありません。"
+  }
+}

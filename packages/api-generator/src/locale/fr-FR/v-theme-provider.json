@@ -1,0 +1,8 @@
+{
+  "props": {
+    "root": "Utilisez la valeur actuelle de `$vuetify.theme.dark` contrairement à la valeur indiquée."
+  },
+  "slots": {
+    "default": "All child components will have their theme overridden. Must have exactly one root element."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "props": {
+    "dark": "Applique la variante du thème foncé au composant. Cela va par défaut la couleur des composants à _white_ à moins que vous ayez configuré votre [thème d'application](/customization/thème) à **dark** ou si vous utilisez le prop **couleur** sur le composant. Vous pouvez trouver plus d'informations sur la documentation de Design de matériaux pour [thèmes foncés](https://material.io/design/color/dark-theme.html).",
+    "fullWidth": "Force la boîte de dialogue à augmenter 100% de la largeur disponible.",
+    "fullscreen": "Modification de la mise en page pour l'affichage plein écran.",
+    "internalActivator": "Détache le contenu du menu à l'intérieur du composant par opposition au document.",
+    "light": "Applique la variante claire du thème au composant.",
+    "maxWidth": "Définit la largeur maximale du composant.",
+    "noClickAnimation": "Désactive l'effet de rebond lorsque vous cliquez à l'extérieur du contenu d'un dialogue `v`, lorsque vous utilisez le prop **persistant**.",
+    "openOnHover": "Indique si le composant doit activer quand son activateur est survolé.",
+    "origin": "Définit l'origine de la transition sur l'élément. Vous pouvez trouver plus d'informations sur la documentation MDN [pour l'origine de la transition](https://developer.mozilla.org/fr-US/docs/Web/CSS/transform-origin).",
+    "persistent": "Clicking outside of the element or pressing **esc** key will not deactivate it.",
+    "retainFocus": "Le focus d'onglets retournera au premier enfant de la boîte de dialogue par défaut. Désactivez ceci lorsque vous utilisez des outils externes qui nécessitent une focus comme TinyMCE ou le presse-papiers de vue.",
+    "scrollable": "When set to true, expects a `v-card` and a `v-card-text` component with a designated height. For more information, check out the [scrollable example](/components/dialogs#scrollable).",
+    "transition": "Définit la transition du composant. Peut être l'une des [construites en transitions](/styles/transitions) ou l'autre de vos propres."
+  },
+  "events": {
+    "click:outside": "Événement qui s'allume en cliquant en dehors d'une boîte de dialogue active.",
+    "keydown": "Événement qui s'allume lorsque la touche est enfoncée. Si la boîte de dialogue est active et n'utilise pas le prop **persistant** la touche **esc** la désactivera."
+  }
+}

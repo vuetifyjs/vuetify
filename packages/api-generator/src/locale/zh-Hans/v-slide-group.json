@@ -1,0 +1,18 @@
+{
+  "props": {
+    "centerActive": "强制将选中的组件居中",
+    "mobileBreakpoint": "为组件设置和指定移动设备的屏幕尺寸断点",
+    "nextIcon": "当箭头显示时附加的插槽",
+    "prevIcon": "当箭头显示时，预定的插槽",
+    "showArrows": "Change when the overflow arrow indicators are shown. By **default**, arrows *always* display on Desktop when the container is overflowing. When the container overflows on mobile, arrows are not shown by default. A **show-arrows** value of `true` allows these arrows to show on Mobile if the container overflowing. A value of `desktop` *always* displays arrows on Desktop while a value of `mobile` always displays arrows on Mobile. A value of `always` always displays arrows on Desktop *and* Mobile. A value of `never` always hides the arrows. Find more information on how to customize breakpoint thresholds on the [breakpoints page](/customizing/breakpoints)."
+  },
+  "slots": {
+    "next": "下一个插槽",
+    "prev": "前一个插槽"
+  },
+  "events": {
+    "change": "当组件值被用户交互改变时发出。",
+    "click:prev": "Emitted when the prev is clicked",
+    "click:next": "Emitted when the next is clicked"
+  }
+}

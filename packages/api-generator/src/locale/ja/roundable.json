@@ -1,0 +1,6 @@
+{
+  "props": {
+    "rounded": "コンポーネントに適用された **border-radius** を指定します。[Border Radius ページ](/styles/border-radius) で詳細を確認できます。",
+    "tile": "コンポーネントの **border-radius** を削除します。"
+  }
+}

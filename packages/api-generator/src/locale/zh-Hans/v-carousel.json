@@ -1,0 +1,21 @@
+{
+  "props": {
+    "continuous": "确定轮播是否连续",
+    "cycle": "确定轮播是否应该循环显示图像。",
+    "delimiterIcon": "设置轮播分隔符的图标",
+    "hideControls": "隐藏导航控件（左和右）。",
+    "hideDelimiters": "隐藏轮播的底部分隔符。",
+    "hideDelimiterBackground": "隐藏底部分隔符的背景。",
+    "interval": "轮播图像周期之间的持续时间。需要 **cycle** 属性。",
+    "nextIcon": "强制对下一项分页而显示的图标。",
+    "prevIcon": "强制对前一项分页而显示的图标。",
+    "progress": "显示轮播进度条。需要 **cycle** 和 **interval** 属性。",
+    "progressColor": "将指定的颜色应用于进度条。",
+    "showArrows": "显示 下一个/前一个 导航的箭头。",
+    "showArrowsOnHover": "仅当鼠标悬停到轮播其上时才显示导航箭头。",
+    "verticalDelimiters": "垂直显示轮播的分隔符。"
+  },
+  "events": {
+    "change": "当组件值被用户交互改变时发出。"
+  }
+}

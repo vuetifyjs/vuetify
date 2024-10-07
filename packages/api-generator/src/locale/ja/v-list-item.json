@@ -1,0 +1,13 @@
+{
+  "props": {
+    "color": "**active** 状態か、**input-value** が **true** である時の色を設定します。色の指定には、定義されている色の名前（例えば`success`や`purple`）や、CSSの色指定（`#033`や`rgba(255, 0, 0, 0.5)`）を利用できます。",
+    "dense": "リストタイルの最大高さを下げます。",
+    "disabled": "コンポーネントを無効にします。",
+    "inactive": "このプロパティが設定されている場合、list tile に to/href プロパティや @click ハンドラが指定されていても、リンクは無効になりレンダリングされません。",
+    "inputValue": "アイテムの **active** 状態を制御します。これは通常、コンポーネントをハイライトするために使用されます。",
+    "selectable": "`v-list-item`内でテキストを選択できるようにします。このpropは[user-select](https://developer.mozilla.org/ja/docs/Web/CSS/user-select) を使用します。",
+    "threeLine": "3行用にリスト項目の高さを増やします。このpropは [line-clamp](https://developer.mozilla.org/ja/docs/Web/CSS/-webkit-line-clamp) を使用しており、すべてのブラウザでサポートされているわけではありません。",
+    "twoLine": "2行用にリスト項目の高さを増やします。このpropは [line-clamp](https://developer.mozilla.org/ja/docs/Web/CSS/-webkit-line-clamp) を使用しており、すべてのブラウザでサポートされているわけではありません。",
+    "value": "[v-list-item-group](/components/list-item-groups) の子の場合に使用される値。"
+  }
+}

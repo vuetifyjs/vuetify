@@ -1,0 +1,10 @@
+{
+  "props": {
+    "name": "Définit l'attribut nom du composant",
+    "column": "Affiche les boutons radio dans la colonne",
+    "row": "Affiche les boutons radio à la ligne"
+  },
+  "events": {
+    "change": "Émis lorsque l'entrée est modifiée par l'interaction utilisateur"
+  }
+}

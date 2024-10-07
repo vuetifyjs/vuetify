@@ -1,0 +1,5 @@
+{
+  "props": {
+    "app": "Désigne le composant comme faisant partie de la mise en page de l'application. Utilisé pour ajuster dynamiquement la taille du contenu. Les composants utilisant cette propriété doivent résider **en dehors** du composant `v-main` pour fonctionner correctement. Vous pouvez trouver plus d'informations sur les mises en page sur la page [application](/components/application). **Remarque : ce composant applique automatiquement **position: fixed** à l'élément de mise en page. Vous pouvez écraser cette fonctionnalité en utilisant la propriété `absolute`"
+  }
+}

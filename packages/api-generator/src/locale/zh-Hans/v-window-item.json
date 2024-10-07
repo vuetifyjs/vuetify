@@ -1,0 +1,7 @@
+{
+  "props": {
+    "disabled": "当使用 \"next\" 和 \"prev\" 按钮或 `toggle` 方法时，防止该项目变为活动状态",
+    "reverseTransition": "设置反转过渡",
+    "transition": "组件在逐项浏览时使用的过渡。 可以是 [built in transitions](/styles/transitions) 之一，或是你自己创建的过渡。"
+  }
+}

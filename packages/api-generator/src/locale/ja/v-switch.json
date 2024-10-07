@@ -1,0 +1,13 @@
+{
+  "props": {
+    "flat": "Elevationのないコンポーネントを表示します。デフォルトのElevationは 4dp で、`flat` はリセットします。",
+    "inputValue": "**v-model** のバインド値",
+    "inset": "Enlarge the `v-switch` track to encompass the thumb",
+    "loading": "円形のプログレスバーを表示します。プログレスバーの色には、任意のマテリアルカラーとテーマカラー（primary、secondary、success、info、warning、error）か、Booleanのコンポーネントのprimary色（親コンポーネントがサポートしている場合）が指定できます。",
+    "multiple": "モデルを配列に変更します"
+  },
+  "events": {
+    "change": "ユーザーの操作によって値が変更されたときに発生します。",
+    "click": "クリックされたときに発生します。**注意:** 状態変化を監視する場合は **click** の代わりに **change** イベントを使用してください。"
+  }
+}

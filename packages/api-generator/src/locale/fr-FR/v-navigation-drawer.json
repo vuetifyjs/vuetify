@@ -1,0 +1,30 @@
+{
+  "props": {
+    "bottom": "S'étend à partir du bas de l'écran sur les appareils mobiles",
+    "clipped": "Un tiroir découpé se repose sous la barre d'outils de l'application. **Note:** nécessite la prop **clipped-left** ou **clipped-right** sur `v-app-bar` pour fonctionner comme prévu",
+    "disableResizeWatcher": "Ouvrir/Fermer automatiquement le tiroir quand il est redimensionné selon le mobile ou le bureau.",
+    "disableRouteWatcher": "Désactive l'ouverture du panneau de navigation lorsque l'itinéraire change",
+    "expandOnHover": "Réduit le tiroir à une **mini-variante** jusqu'à ce que la souris passe",
+    "floating": "Un tiroir flottant n'a pas de conteneur visible (pas de bordure à droite)",
+    "height": "Définit la hauteur du panneau de navigation",
+    "mobileBreakpoint": "Définit le point d'arrêt mobile désigné pour le composant. Cela appliquera des styles alternatifs pour les appareils mobiles tels que la prop `temporary`, ou activera la prop `bottom` quand la valeur de point d'arrêt est atteinte. Définir la valeur à `0` désactivera cette fonctionnalité.",
+    "miniVariantWidth": "Indique la largeur assignée lorsque la prop `mini` est activée",
+    "miniVariant": "Condense la largeur du tiroir de navigation, accepte également le modificateur **.sync**. Avec cela, le tiroir se rouvrira lorsque vous cliquez dessus",
+    "permanent": "Le tiroir reste visible quelle que soit la taille de l'écran",
+    "right": "Place le panneau de navigation à droite",
+    "src": "Spécifie un [v-img](/components/images) comme arrière-plan du composant.",
+    "stateless": "Supprimez toutes les fonctionnalités d'état automatisé (redimensionnement, mobile, route) et contrôlez manuellement l'état du tiroir",
+    "temporary": "Un tiroir temporaire est installé au-dessus de son application et utilise un scrim (superposition) pour assombrir l'arrière-plan",
+    "touchless": "Désactiver la fonctionnalité tactile mobile",
+    "value": "Contrôle si le composant est visible ou caché."
+  },
+  "slots": {
+    "append": "L'emplacement en bas du tiroir",
+    "img": "Utilisé pour modifier les propriétés de `v-img` quand elle utilise la propriété **src**",
+    "prepend": "L'emplacement en haut du Drawer"
+  },
+  "events": {
+    "transitionend": "Émet un objet événement lorsque la transition est terminée.",
+    "update:mini-variant": "L'événement `mini-variant.sync`"
+  }
+}

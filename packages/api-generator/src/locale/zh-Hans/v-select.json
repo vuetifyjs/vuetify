@@ -1,0 +1,46 @@
+{
+  "props": {
+    "attach": "使组件脱离当前节点并且指向一个新的DOM元素。可以是任何document. querySelector 有效的字符串或者任何有效的节点。将默认指定并附加到根节点`v-app`下。",
+    "autocomplete": "根据用户输入进行筛选",
+    "cacheItems": "保留已经通过 **items** 属性的项在本地的唯一副本",
+    "chips": "改变一个已选择项为小纸片（chips）的显示方式",
+    "combobox": "在单选中 **tags** 的一个变种",
+    "dark": "将深色主题变量应用于组件。 除非您已将 [application theme](/customization/theme) 配置为 **dark** 或在组件上使用 **color** 属性，否则组件的颜色默认为 _white_。 您可以在材料设计文档中找到更多信息 [dark themes](https://material.io/design/color/dark-theme.html)。",
+    "debounceSearch": "去除搜索框正在 emitted 的值",
+    "deletableChips": "添加一个去除图标的到选定的小纸片（chips）",
+    "disabled": "禁用输入",
+    "disableLookup": "禁用键盘查询",
+    "eager": "将强制组件内容在加载时呈现。如果存在内容的话，则不会在 DOM 中渲染，如果你想优化 SEO，这是非常有用的。",
+    "editable": " 创建一个可编辑按钮 - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
+    "filter": "用于过滤条目的功能",
+    "hideSelected": "Do not display in the select menu items that are already selected. Also removes checkboxes from the list when multiple",
+    "itemColor": "设置选中项目的颜色",
+    "itemDisabled": "禁用 **items** 的属性值",
+    "items": "可以是对象数组或字符串数组。当使用对象时，将寻找文本和值字段。 这可以使用 **item-text** 和 **item-value** 属性来更改。 具有 **header** 或 **divider** 属性的对象被视为特殊情况并生成列表头或分隔符；这些是不可选择的。",
+    "itemText": "设置**items**'属性的文本值",
+    "itemValue": "设置 **items** 的值的属性 - **必须是 primitive**。支持点符号。**注意：** 目前不支持 `v-combobox` [GitHub问题](https://github.com/vuetifyjs/vuetify/issues/5479)。",
+    "menuProps": "将属性传递到 `v-menu` 组件。接受布尔属性 `menu-props=\"auto, overflowY\"` ，或一个对象 `:menu-props=\"{ auto: true, overflowY: true }\"`",
+    "minWidth": "Mixins.Menuable.props.minWidth",
+    "multiple": "多选，接受数组作为值",
+    "multiLine": "当选择器组件被聚焦或使用时，使标签浮动",
+    "noDataText": "当没有数据时显示的文本",
+    "openOnClear": "当使用 **clearable** 属性, 一旦清除，选择菜单将打开或保持打开，这个取决于当前状态",
+    "overflow": "创建一个溢出按钮 - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
+    "returnObject": "将选择器的行为更改为直接返回对象，而不是 item-value 指定的值",
+    "searchInput": "使用自动补全（autocomplete）属性，使用 .sync 修饰符从自动补全搜索框中捕获用户的输入",
+    "segmented": "创建一个分段按钮 - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
+    "smallChips": "使用 **small** 属性将选择的显示更改为纸片",
+    "tags": "标记功能允许用户创建一个 **items** 属性中不存在的新值",
+    "valueComparator": "The comparison algorithm used for values. [More info](https://github.com/vuetifyjs/vuetify/blob/v2-stable/packages/vuetify/src/util/helpers.ts)"
+  },
+  "slots": {
+    "append-item": "在菜单内容后添加项目",
+    "item": "定义自定义项外观",
+    "prepend-item": "在菜单内容之前添加项目",
+    "selection": "定义自定义选择器外观"
+  },
+  "events": {
+    "update:list-index": "使用键盘箭头选择菜单项时发出",
+    "update:search-input": "`search-input.sync` 事件"
+  }
+}

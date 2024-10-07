@@ -1,0 +1,38 @@
+{
+  "props": {
+    "border": "アラートのボーダーを指定します。**top** | **right** | **bottom** | **left** のいずれかの値が使用可能です。",
+    "closeIcon": "**dismissible**アラートのデフォルトのアイコンを変更します。",
+    "closeLabel": "**dismissible**アラートの *aria-label* に使用されるテキストです。 [Internationalization](/customization/internationalization) でグローバルにカスタマイズすることもできます。",
+    "color": "指定された色をコントロールに適用します。利用できるのはマテリアルカラーの名前 (たとえば、`success` または ` purple`) または css 表記の色 (`#033`または` rgba(255, 0, 0, 0.5) `) です。[colors のページ](/styles/colors#material-colors) で、組み込みクラスのリストが確認できます。",
+    "coloredBorder": "定義された **color** をAlertの境界線に適用します。",
+    "dark": "コンポーネントにダークテーマを適応します。詳しく知りたい場合は、Material Design documentationの[dark themes](https://material.io/design/color/dark-theme.html)を参照してください。",
+    "dense": "コンポーネントの高さを下げます。",
+    "dismissible": "アラートを非表示にする、閉じるアイコンを表示します。",
+    "elevation": "コンポーネントに適用される高さを0〜24の範囲で指定します。詳細は、[elevation のページ](/styles/elevation)で確認できます。",
+    "height": "コンポーネントに高さを設定します。",
+    "icon": "アイコンを指定します。",
+    "light": "コンポーネントにlightテーマを適用します。",
+    "maxHeight": "コンテンツの高さの最大値を設定します。",
+    "maxWidth": "コンテンツの横幅の最大値を設定します。",
+    "minHeight": "コンテンツの高さの最小値を設定します。",
+    "minWidth": "コンテンツの横幅の最小値を設定します。",
+    "mode": "トランジション モードを設定します(transition-groupには適用されません)。詳細については、Vue のドキュメント [トランジションモード](https://jp.vuejs.org/v2/api/#transition) を参照してください。",
+    "origin": "要素にトランジションの起点を設定します。 MDNドキュメントで [for transition origin](https://developer.mozilla.org/ja/docs/Web/CSS/transform-origin) の詳細を参照できます。",
+    "outlined": "背景を透明にし、細い境界線を適用します。",
+    "prominent": "縦方向中央に大きなアイコンを表示して、より注目を集めます。",
+    "text": "定義された**color**をテキストに適用し、同じ色の低い不透明度の背景を適用します。",
+    "tile": "コンポーネントの角丸を除去します。",
+    "transition": "コンポーネントのトランジションを設定します。 [組み込みトランジション](/styles/transitions) のいずれか、または独自のものを使用できます。",
+    "type": "**success**、**info**、**warning** もしくは **error** のアラートであることを設定します。コンテキストカラーと事前定義されたアイコンが使用されます。",
+    "value": "コンポーネントを表示するか非表示にするかを制御します。",
+    "width": "コンポーネントに横幅を設定します。"
+  },
+  "slots": {
+    "append": "アラート終了時のアイコン用スロット。",
+    "close": "**dismissible** prop で使用されるアイコンのスロットです。",
+    "prepend": "アラート開始時のアイコン用スロット。"
+  },
+  "functions": {
+    "toggle": "アラートのアクティブ状態を切り替えます。閉じたスロットで使用可能で、**disissible**’（無効）のクリックアクションとして使用されます。"
+  }
+}

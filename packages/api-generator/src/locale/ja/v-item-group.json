@@ -1,0 +1,19 @@
+{
+  "props": {
+    "activeClass": "リンクがアクティブなときに適用されるアクティブなCSSクラスを構成します。vue-routerのドキュメントで [**active-class** prop](https://router.vuejs.org/ja/api/#active-class) の詳細をご覧ください。",
+    "appendIcon": "`v-icon`と同じ構文を使用し、コンポーネントにアイコンを追加します",
+    "disabled": "全ての子要素`v-list-item`コンポーネントを無効にします",
+    "group": "route名の名前空間を割り当てます。アクティブ状態とする条件に、文字列と正規表現が使えます。",
+    "noAction": "グループアイテムからアクションアイコンに割り当てられた左のパディングを削除します。",
+    "prependIcon": "コンポーネントの先頭にアイコンが追加されます。`v-icon` と同じ構文を使用します。",
+    "ripple": "[v-ripple](/directives/ripple) ディレクティブを適用します。",
+    "subGroup": "コンポーネントをネストしたリストグループとして指定します"
+  },
+  "slots": {
+    "appendIcon": "`v-icon`と同じ構文を使用し、コンポーネントにアイコンを追加します",
+    "prependIcon": "コンポーネントの先頭にアイコンが追加されます。`v-icon` と同じ構文を使用します。"
+  },
+  "events": {
+    "change": "コンポーネントの値がユーザー操作によって変更されたときに発生します。"
+  }
+}

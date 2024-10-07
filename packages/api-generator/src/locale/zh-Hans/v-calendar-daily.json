@@ -1,0 +1,24 @@
+{
+  "props": {
+    "dayFormat": "将某日中出现的月字符串的日期格式化为指定区域设置",
+    "end": "日历上以`YYYY-MM-DD`格式化的结束日期(包含)。这可能会被忽略，取决于日历的`type'设置。",
+    "firstInterval": "在 `day` 视图中显示的第一个间隔。如果 `intervalMinutes` 设置为 60，而这个设置为 9，则视图中的第一次是上午9点。",
+    "firstTime": "在`天`视图中显示的第一个(开始)时间。如果指定，它将覆盖任何指定的`firstInterval`值。这可以是从午夜开始的分钟数，格式为`HH:mm`的字符串，或一个具有数字hour和minute属性的对象",
+    "hideHeader": "`day` 视图顶部的头部是否应该可见。",
+    "intervalCount": "在 `day` 视图中显示的间隔数。",
+    "intervalFormat": "将出现在 `day` 和 `week` 视图的间隔栏中的一天中的时间字符串格式化为指定的区域设置",
+    "intervalHeight": "`day` 视图中间隔的高度（以像素为单位）。",
+    "intervalWidth": "`day` 视图中左侧的间隔宽度。",
+    "intervalMinutes": "间隔在 `day` 视图中的分钟数。普通间隔为 60 分钟，因此间隔为 1 小时。",
+    "intervalStyle": "返回要应用于间隔的 CSS 样式。",
+    "locale": "日历的区域设置。",
+    "maxDays": "如果未设置 `end` 天，则在自定义日历中显示最大天数。",
+    "now": "覆盖现在考虑的日期和时间。格式为 `YYYY-MM-DD hh:mm:ss`。日历是根据现在的情况设计的。",
+    "shortIntervals": "如果为 true，则 `day` 视图中的间隔将为上午 9：00，而不是上午 09：00",
+    "shortWeekdays": "是否应使用工作日的简短版本 (Mon vs Monday)。",
+    "showIntervalLabel": "检查给定的日期和时间是否应显示在 `day` 视图的间隔栏中。",
+    "start": "日历上的开始日期（包括），格式为 `YYYY-MM-DD`。 根据日历的 `type`，可以将其忽略。",
+    "weekdayFormat": "将标题中显示的星期几字符串格式设置为指定的区域设置",
+    "weekdays": "指定一周中要显示的日期。如果只显示周一到周五，可以使用 `[1, 2, 3, 4, 5]` \n 的值。要显示周一开始的一周，可以使用值 `[1, 2, 3, 4, 5, 6, 0]`。"
+  }
+}

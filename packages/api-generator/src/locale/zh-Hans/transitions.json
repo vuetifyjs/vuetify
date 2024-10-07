@@ -1,0 +1,9 @@
+{
+  "props": {
+    "mode": "设置转换模式（不应用于转换组）。你可以在 Vue 文档浏览更多 [for transition modes](https://vuejs.org/v2/api/#transition)。",
+    "origin": "设置元素上的动画原点。您可以在 MDN 文档上浏览更多 [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin)",
+    "group": "创建 `transition-group` 组件 [vue docs](https://vuejs.org/v2/api/#transition-group)。",
+    "hideOnLeave": "隐藏离开元素 （无退出动画）",
+    "leaveAbsolute": "离开元素的绝对位置 (useful for [FLIP](https://aerotwist.com/blog/flip-your-animations/))"
+  }
+}

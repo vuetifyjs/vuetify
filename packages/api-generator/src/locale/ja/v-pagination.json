@@ -1,0 +1,15 @@
+{
+  "props": {
+    "circle": "Pagination要素を円形で描画します",
+    "disabled": "コンポーネントを無効にします。",
+    "length": "paginationコンポーネントの長さ",
+    "nextIcon": "「次」アイコンを指定します。",
+    "prevIcon": "「前」アイコンを指定します。",
+    "totalVisible": "表示可能なpaginationの最大数を指定します",
+    "value": "現在選択しているページ"
+  },
+  "events": {
+    "previous": "以前の項目に移動したときに発生します。",
+    "next": "次の項目に移動するときに発生します。"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "props": {
+    "align": "[align-items](https://developer.mozilla.org/ja/docs/Web/CSS/align-items) cssプロパティを適用します。使用可能なオプションは、**start**、**center**、**end**、**baseline**および**stretch**です。",
+    "alignSm": "Small以上のブレークポイントの **align-items** プロパティを変更します。",
+    "alignMd": "Changes the **align-items** property on medium and greater breakpoints.",
+    "alignLg": "Changes the **align-items** property on large and greater breakpoints.",
+    "alignXl": "Changes the **align-items** property on extra large and greater breakpoints.",
+    "alignContent": "[align-content](https://developer.mozilla.org/ja/docs/Web/CSS/align-content) cssプロパティを適用します。利用可能なオプションは **start** 、 **center** 、 **end** 、 **space-between** 、 **space-around** および **stretch** です。",
+    "alignContentSm": "Small以上のブレークポイントの **align-content** プロパティを変更します。",
+    "alignContentMd": "Medium以上のブレークポイントの **align-content** プロパティを変更します。",
+    "alignContentLg": "Large以上のブレークポイントの **align-content** プロパティを変更します。",
+    "alignContentXl": "Extra large以上のブレークポイントの **align-content** プロパティを変更します。",
+    "dense": "`v-col`の間の gutter を減らします。",
+    "justify": "[justify-content](https://developer.mozilla.org/ja/docs/Web/CSS/justify-content) cssプロパティを適用します。使用可能なオプションは、 **start** 、 **center** 、 **end** 、 **space-between** および **space-around** です。",
+    "justifySm": "Small以上のブレークポイントの **justify-content** プロパティを変更します。",
+    "justifyMd": "Medium以上のブレークポイントの **justify-content** プロパティを変更します。",
+    "justifyLg": "Large以上のブレークポイントの **justify-content** プロパティを変更します。",
+    "justifyXl": "Extra large以上のブレークポイントの **justify-content** プロパティを変更します。",
+    "noGutters": "`v-col`間のガターを削除します。"
+  }
+}

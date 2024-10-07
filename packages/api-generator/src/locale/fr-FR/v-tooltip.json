@@ -1,0 +1,13 @@
+{
+  "props": {
+    "closeDelay": "Délai (en ms) après lequel le menu se ferme (quand le prop ouvert-on-hover est activé)",
+    "debounce": "Durée avant que l'infobulle d'outils soit affiché et caché lorsque vous survolez",
+    "disabled": "Désactive l'aide",
+    "internalActivator": "Indique si vous souhaitez utiliser un activateur interne",
+    "openDelay": "Délai (en ms) après lequel l'infobulle d'outils s'ouvre (quand le prop `open-on-hover` est défini à **true**)",
+    "openOnClick": "Indique si l'aide doit s'ouvrir sur le clic activateur",
+    "openOnHover": "Indique si l'aide doit s'ouvrir sur le survol d'activateur",
+    "tag": "Spécifie une étiquette personnalisée pour le gestionnaire d'activation",
+    "transition": "Définit la transition du composant. Peut être l'une des [construites en transitions](/styles/transitions) ou l'autre de vos propres."
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "props": {
+    "value": "Définit l'élément de liste actif dans le groupe de listes"
+  },
+  "events": {
+    "click": "Émis lorsque le composant est cliqué - déclenchera le composant à ripper lorsque le bouton clique à moins que le modificateur `.native` soit utilisé",
+    "change": "Émis lorsque la valeur du composent est modifiée par l'interaction utilisateur"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "props": {
+    "accordion": "Supprime la marge autour des panneaux ouverts",
+    "disabled": "Désactive l'ensemble du panneau d'extension",
+    "expand": "Laisse le panneau d'extension ouvert tout en sélectionnant un autre",
+    "focusable": "Rend les en-têtes du panneau d'expansion plus concentrés",
+    "flat": "Supprime l'élévation et les bordures du panneau d'extension",
+    "hover": "Applique un changement de couleur d'arrière-plan au survol sur les entêtes du panneau d'extension",
+    "inset": "Rend le panneau d'extension ouvert avec un style incrusté",
+    "popout": "Rend le panneau d'extension ouvert avec un style popout",
+    "readonly": "Rend le panneau d'extension complet en lecture seule.",
+    "tile": "Supprime les bordures arrondies",
+    "value": "Contrôle l'état de contenu ouvert/fermé dans le panneau d'extension. Correspond à un index zéro du contenu actuellement ouvert. Si la prop `multiple` précédemment `expand` dans 1.5.x) est utilisé alors il s'agit d'un tableau de nombres où chaque entrée correspond à l'index du contenu ouvert. L'ordre d'index n'est pas pertinent."
+  }
+}

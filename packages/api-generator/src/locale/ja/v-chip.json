@@ -1,0 +1,23 @@
+{
+  "props": {
+    "active": "チップが見えるかどうかを決定します。",
+    "close": "閉じるボタンを追加します。",
+    "closeIcon": "**close** チップに使用されるデフォルトのアイコンを変更する",
+    "closeLabel": "**close** チップのクローズボタンの *aria-label* に使用されるテキスト。 [Internationalization](/customization/internationalization) でグローバルにカスタマイズすることもできます。",
+    "disabled": "Chip を無効化し、選択できないようにします。",
+    "draggable": "チップをドラッグ可能にする",
+    "filter": "選択すると選択アイコンを表示します。",
+    "filterIcon": "**filter** チップに使用されるデフォルトのアイコンを変更する",
+    "inputValue": "アイテムの **active** 状態を制御します。これは通常、コンポーネントをハイライトするために使用されます。",
+    "label": "丸みを削除します。",
+    "link": "明示的にリンクとしてチップを定義します",
+    "outlined": "背景を削除しテキストカラーとボーダーカラーを適用します。",
+    "pill": "`v-avatar` パディングを削除",
+    "value": "[v-chip-group](/components/chip-groups) の子（child）の場合に使用される値。"
+  },
+  "events": {
+    "click": "コンポーネントがクリックされたときに発生し、チップグループに含まれる場合はチップを切り替えます - `.native`修飾子を使用しない限り、クリックするとコンポーネントにリップル効果が適用されます。",
+    "click:close": "Closeアイコンがクリックされたときに発生します",
+    "update:active": "閉じるアイコンがクリックされたときに発生し、activeを `false` に設定します。"
+  }
+}

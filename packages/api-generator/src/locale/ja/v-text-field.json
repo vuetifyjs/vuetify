@@ -1,0 +1,45 @@
+{
+  "props": {
+    "appendOuterIcon": "`v-icon`と同じ構文を使用して、入力コンポーネント外側の後方にアイコンを追加します",
+    "autoGrow": "inputを自動的に拡大します。このオプションは **v-model** を使用する必要があります。",
+    "autofocus": "オートフォーカスを有効にします。",
+    "filled": "代替のfilled入力スタイルを適用します",
+    "clearIcon": "Applied when using **clearable** and the input is dirty",
+    "counter": "入力長のカウンタを作成します。数値が指定されていない場合、デフォルトは 25 になります。バリデーションは適用しません。",
+    "dark": "コンポーネントにdarkテーマのバリエーションを適用します。[アプリケーションのテーマ](/customization/theme) を **dark** に設定している場合や、コンポーネントに **color** propを使用している場合を除き、コンポーネントの色はデフォルトで _white_ になります。Material Design documentationの[ダークテーマ](https://material.io/design/color/dark-theme.html) に詳しい情報があります。",
+    "flat": "**solo**または**solo-inverted** propを使用するときに要素に追加されたエレベーション（影）を削除します。",
+    "fullWidth": "Designates input type as full-width",
+    "multiLine": "テキストエリアに変換します",
+    "noResize": "サイズ変更ハンドルを削除する（**multi-line**と**textarea** propsにのみ適用）",
+    "outlined": "アウトラインスタイルを適用します。",
+    "persistentPlaceholder": "Forces placeholder to always be visible",
+    "placeholder": "プレースホルダーを設定します",
+    "prefix": "前につけるプレフィックステキストを表示します",
+    "prependInnerIcon": "`v-icon`と同じ構文を使用して、入力コンポーネント内の先頭にアイコンを追加します",
+    "reverse": "入力方向を反転します。",
+    "rounded": "Adds a border radius to the input",
+    "rows": "テキストエリア内の行数を制御します。",
+    "rowHeight": "カスタム_row-height_を指定します。**multi-line** または **textarea** プロパティを使用するときの入力高さの決定に使用します。",
+    "singleLine": "Label does not move on focus/dirty",
+    "solo": "入力のスタイルを変更",
+    "soloInverted": "フォーカスされるまで要素の不透明度を減らす",
+    "suffix": "後につけるサフィックステキストを表示します",
+    "textarea": "代替スタイルのテキストエリアテキストフィールド",
+    "toggleKeys": "入力を切り替えるキーコードの配列 (トグルをサポートしている場合)",
+    "type": "type属性を設定します。",
+    "shaped": "Round if `outlined` and increase `border-radius` if `filled`. Must be used with either `outlined` or `filled`"
+  },
+  "slots": {
+    "append-outer": "Adds an item outside the input and after input content",
+    "prepend-inner": "Adds an item inside the input and before input content"
+  },
+  "events": {
+    "blur": "入力を抜けたときに発生します",
+    "change": "ユーザーの操作によって値が変更されたときに発生します。",
+    "click:append-outer": "Emitted when appended outer icon is clicked",
+    "click:clear": "クリアアイコンをクリックしたときに発生します。",
+    "click:prepend-inner": "Emitted when prepended inner icon is clicked",
+    "focus": "コンポーネントがフォーカスされている場合に発生します。",
+    "keydown": "**any** キーが押されたときに発生します。"
+  }
+}

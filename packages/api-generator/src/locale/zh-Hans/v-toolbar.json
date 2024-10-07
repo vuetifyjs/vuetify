@@ -1,0 +1,20 @@
+{
+  "props": {
+    "absolute": "应用 **position: absolute** 样式到组件.",
+    "bottom": "将组件向底部对齐。",
+    "collapse": "将工具栏置于折叠状态，以减小其最大宽度。",
+    "dense": "将工具栏内容的高度降低到 48px（使用 **prominent** 属性时为 96px）。",
+    "extended": "使用此道具可以增加工具栏的高度，而 _不需要_ 使用 `extension` 插槽来添加内容。可以与 **extension-height** 属性，以及其他会影响工具栏高度的其他属性，例如 **prominent**, **dense** 等配合使用，**height** **除外**。",
+    "extensionHeight": "为 `extension` 插槽指定一个明确的高度。 ",
+    "flat": "删除工具栏的框阴影。",
+    "floating": "将 **display: inline-flex** 应用于组件。",
+    "height": "指定工具栏的特定高度。覆盖其他 props 所施加的高度，例如 **prominent**, **dense**, **extended**。",
+    "prominent": "将工具栏内容的高度增加到 128px。",
+    "short": "将工具栏内容的高度降低到 56px（使用 **prominent** 属性时为 112px）。",
+    "src": "指定 [v-img](/components/images) 作为组件背景。"
+  },
+  "slots": {
+    "extension": "槽位直接位于工具栏的主要内容下。可以使用 **extension-height** 属性显式设置高度。如果该插槽没有内容，可以使用 **extended** 属性代替。",
+    "img": "需要 [v-img](/components/images) 组件。范围内的 **props** 应该与 `v-bind=\"props\"` 一起使用。"
+  }
+}

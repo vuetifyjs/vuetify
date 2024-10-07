@@ -1,0 +1,13 @@
+{
+  "props": {
+    "color": "当处于 **active** 状态或 **input-value** 为 **true** 时，将指定的颜色应用于控件 - 它可以是材质颜色的名称（例如，`success` 或 `purple`）或 css 颜色（`#033` or `rgba(255, 0, 0, 0.5)`）",
+    "dense": "减小列表块的最大宽度",
+    "disabled": "禁用组件",
+    "inactive": "如果设置了该属性，即使有to/href或者@click，列表块也不会响应链接。",
+    "inputValue": "控制项目的 **active** 状态。 通常用于突出显示组件",
+    "selectable": "允许在 `v-list-item` 中选择文本。 该属性使用 [user-select](https://developer.mozilla.org/en-US/docs/Web/CSS/user-select)",
+    "threeLine": "增加三行的列表项高度。 该属性使用 [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) ，并非所有浏览器都支持。",
+    "twoLine": "增加两行的列表项高度。 该属性使用 [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) ，并非所有浏览器都支持。",
+    "value": "当 [v-list-item-group](/components/list-item-groups) 的子元素时使用的值。"
+  }
+}

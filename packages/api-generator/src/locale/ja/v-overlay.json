@@ -1,0 +1,7 @@
+{
+  "props": {
+    "absolute": "コンポーネントに **position: absolute** を適用します。",
+    "opacity": "オーバーレイの不透明度を設定します。",
+    "zIndex": "コンポーネントに使用されるz-index"
+  }
+}

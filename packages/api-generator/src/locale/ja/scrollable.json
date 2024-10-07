@@ -1,0 +1,6 @@
+{
+  "props": {
+    "scrollTarget": "スクロール イベントの対象となる要素を指定します。デフォルトでは `window` を使用します。",
+    "scrollThreshold": "**hide-on-scroll** がアクティブになる前のスクロール距離"
+  }
+}

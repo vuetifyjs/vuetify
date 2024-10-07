@@ -1,0 +1,10 @@
+{
+  "props": {
+    "boilerplate": "Retire l'animation de chargement du squelette",
+    "loading": "Applique une animation de chargement avec un curseur de chargement survolé. Une valeur de **false** ne fonctionnera que s'il y a du contenu dans l'emplacement `default`.",
+    "transition": "Définit la transition du composant. Peut être l'une des [construites en transitions](/styles/transitions) ou l'autre de vos propres.",
+    "tile": "Supprime le rayon de la frontière du composant",
+    "type": "Une liste délimitée par une chaîne de caractères de composants squelette à créer comme `type=\"text@3\"` ou `type=\"card, list-item\"`. Il gènerera récursivement un squelette correspondant à partir de la chaîne de caractères fournie. Supporte également les abbreviations pour plusieurs éléments tels que **article@3** et **paragraphe@2** qui génèreront 3 squelettes _article_ et 2 squelettes _paragraphe_. Veuillez consulter ci-dessous la liste des options prédéfinies disponibles.",
+    "types": "Un objet de types personnalisés qui sera combiné avec les options prédéfinies. Pour une liste d'options prédéfinies disponibles, voir la prop **type**."
+  }
+}

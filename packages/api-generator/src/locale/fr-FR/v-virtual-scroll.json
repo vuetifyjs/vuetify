@@ -1,0 +1,11 @@
+{
+  "props": {
+    "bench": "Le nombre d'éléments **outside** de la vue utilisateur qui sont rendus (même s'ils ne sont **not** visibles ); pour éviter un espace vide lorsque le défilement est *fast*.",
+    "height": "Hauteur du composant en tant que valeur css",
+    "itemHeight": "Hauteur en pixels des éléments à afficher",
+    "items": "Le tableau d'éléments à afficher"
+  },
+  "slots": {
+    "default": "Emplacement par défaut pour personnaliser l'apparence des objets"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "props": {
+    "activeClass": "アクティブ化すると [v-btn](/components/buttons) に適用されるクラス。",
+    "backgroundColor": "コンポーネントの背景色を変更します。",
+    "dark": "コンポーネントにダークテーマを適応します。詳しく知りたい場合は、Material Design documentationの[dark themes](https://material.io/design/color/dark-theme.html)を参照してください。",
+    "grow": "[v-btn](/components/buttons) は強制的に利用可能なすべてのスペースを占有します。",
+    "hideOnScroll": "上にスクロールすると、ナビゲーションが画面外に遷移します。",
+    "horizontal": "[v-btn](/components/buttons) に別の水平スタイルを使用します。",
+    "inputValue": "コンポーネントを表示するか非表示にするかを制御します。**.sync** 修飾子をサポートします。",
+    "light": "コンポーネントにlightテーマを適用します。",
+    "mandatory": "値が常に選択状態であることを強制します (可能な場合)。",
+    "shift": "[v-btn](/components/buttons) がアクティブでない場合は、テキストを非表示にします。",
+    "value": "現在アクティブな [v-btn](/components/buttons) の値を保持します。ボタンに値が与えられていない場合、そのインデックスが代わりに使用されます。"
+  },
+  "events": {
+    "change": "現在選択されているボタンの値。値が割り当てられていない場合は、ボタンの現在のインデックスになります。",
+    "update:input-value": "`input-value.sync` 用のイベント"
+  }
+}

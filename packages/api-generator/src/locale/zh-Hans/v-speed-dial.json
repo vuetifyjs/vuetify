@@ -1,0 +1,6 @@
+{
+  "props": {
+    "direction": "Speed-dial 显示的方向。可设置的值有 `top`, `bottom`, `left`, `right`。",
+    "openOnHover": "鼠标悬浮时开启 speed-dial"
+  }
+}

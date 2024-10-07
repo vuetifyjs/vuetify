@@ -1,0 +1,10 @@
+{
+  "props": {
+    "autoSelectFirst": "検索時には、常に最初のオプションを強調表示します",
+    "dark": "darkテーマのバリエーションをコンポーネントに適用します。[アプリケーションのテーマ](/customization/theme) を **dark** に設定している場合や、コンポーネントに **color** propを使用している場合を除き、コンポーネントの色はデフォルトで_white_ になります。Material Design documentationの[ダークテーマ](https://material.io/design/color/dark-theme.html) に詳しい情報があります。",
+    "filter": "The filtering algorithm used when searching. [example](https://github.com/vuetifyjs/vuetify/blob/v2-stable/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L40)",
+    "hideNoData": "表示するオプションがない場合、メニューを非表示にします。結果が非同期でフェッチされる前にメニューが開かないようにするのに役立ちます。 `items`配列がまだ開いていない場合は、変化したときにメニューを開く効果もあります。",
+    "noFilter": "検索時にフィルタリングを適用しません。データをサーバ側でフィルタリングしている場合に便利です。",
+    "searchInput": "検索値。`.sync` 修飾子と共に使用できます。"
+  }
+}

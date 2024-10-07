@@ -1,0 +1,25 @@
+{
+  "props": {
+    "alwaysDirty": "**thumb-label** prop を使用すると、thumb ラベルが常に表示されるようになります。",
+    "inverseLabel": "ラベルのポジションを逆にします。**rtl** の (右から左に書く) 言語で利用できます。",
+    "max": "入力の最大値を設定します",
+    "min": "入力の最小値を設定します",
+    "step": "0 より大きな数値を指定すると、tick に対して step のインターバルを設定します",
+    "thumbColor": "thumb と thumb ラベルの色を設定します",
+    "thumbLabel": "thumb ラベルを表示します。`true` の場合、スライダの使用中にのみラベルを表示します。`'always'` の場合、常にラベルを表示します。",
+    "thumbSize": "thumb ラベルのサイズを調整します",
+    "ticks": "track tick を表示します。`true` の場合、スライダの使用中にのみ tick を表示します。`'always'` の場合、常に tick を表示します。",
+    "tickLabels": "Array<string> が与えられた場合、各ステップに対して index の順にラベルをマッピングするように試みます。",
+    "tickSize": "**tick** のサイズをコントロールします",
+    "trackColor": "track の色を設定します",
+    "trackFillColor": "track の塗りつぶしの色を設定します",
+    "vertical": "スライダーの方向を縦に変更します"
+  },
+  "slots": {
+    "thumb-label": "thumb ラベルの内側のコンテンツを置き換える"
+  },
+  "events": {
+    "end": "スライダーの移動の最後に発生するスライダー値",
+    "start": "スライダーの移動の最初に発生するスライダー値"
+  }
+}

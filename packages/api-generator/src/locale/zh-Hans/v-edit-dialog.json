@@ -1,0 +1,18 @@
+{
+  "props": {
+    "cancelText": "为取消按钮设置默认文本，当使用了 `large` 属性时（即有提交和取消按钮的对话框）。",
+    "eager": "将强制组件内容在加载时呈现。如果存在内容的话，则不会在 DOM 中渲染，如果你想优化 SEO，这是非常有用的。",
+    "large": "将提交和取消按钮附加到对话框",
+    "saveText": "为保存按钮设置默认文本，当使用了 `large` 属性时。",
+    "transition": "设置组件转换。可以是一个 [built in transitions](/styles/transitions) 或者是自己自定义的。"
+  },
+  "slots": {
+    "input": "用于表示 v-edit-dialog 输入组件的插槽"
+  },
+  "events": {
+    "cancel": "在编辑被取消时发出",
+    "close": "按下编辑对话框关闭按钮时发出",
+    "open": "在打开编辑时发出",
+    "save": "按下编辑对话框保存按钮时退出"
+  }
+}

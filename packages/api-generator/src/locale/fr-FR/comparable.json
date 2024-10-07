@@ -1,0 +1,5 @@
+{
+  "props": {
+    "valueComparator": "Applique une fonction de comparaison de valeur personnalisée"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "props": {
+    "continuous": "Si `true`, la fenêtre \"enveloppe\" du dernier élément au le premier, et du premier élément au dernier",
+    "nextIcon": "Icône utilisée pour le bouton \"suivant\" si `show-arrows` est `true`",
+    "prevIcon": "Icône utilisée pour le bouton \"prev\" si `show-arrows` est `true`",
+    "reverse": "Inverser la direction normale de la transition.",
+    "reverseTransition": "La transition utilisée lorsque le composant inverse les éléments. Peut être l'un des [construits en transitions](/styles/transitions) ou l'un de vos propres.",
+    "showArrows": "Afficher les boutons \"suivant\" et \"prev\"",
+    "showArrowsOnHover": "Afficher les boutons \"next\" et \"prev\" sur le survol. `show-arrows` DOIT AUSSI être défini.",
+    "touch": "Fournir une fonction **left** et **right** en cas de glisser à gauche ou à droite.",
+    "touchless": "Désactiver le support tactile.",
+    "vertical": "Utilise une transition verticale lors du changement de fenêtres."
+  },
+  "events": {
+    "change": "Émis lorsque la valeur du composent est modifiée par l'interaction utilisateur"
+  },
+  "slots": {
+    "next": "Emplacement affichant la flèche basculant vers l'élément suivant",
+    "prev": "Emplacement affichant la flèche basculant sur l'élément précédent"
+  }
+}

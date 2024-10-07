@@ -1,0 +1,7 @@
+{
+  "props": {
+    "disabled": "Empêche l'élément de devenir actif lorsque vous utilisez les boutons \"next\" et \"prev\" ou la méthode \"toggle\"",
+    "reverseTransition": "Définit la transition inverse",
+    "transition": "La transition utilisée lorsque le composant progresse à travers les éléments. Peut être l'un des [built in transitions](/styles/transitions) ou l'un de vos propres component."
+  }
+}

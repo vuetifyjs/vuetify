@@ -1,0 +1,3 @@
+{
+  "argument": "Un objet contenant les options pour l'effet d'ondulation. `class` applique une classe personnalisée à l'ondulation, et peut être utilisé pour changer de couleur. `center` force l'ondulation à provenir du centre de la cible"
+}

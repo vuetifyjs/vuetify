@@ -1,0 +1,23 @@
+{
+  "props": {
+    "active": "Détermine si la puce est visible ou non.",
+    "close": "Ajouter le bouton de suppression",
+    "closeIcon": "Changer l'icône par défaut utilisée pour **close** les puces",
+    "closeLabel": "Texte utilisé pour *aria-label* sur les alertes **dismissible** . Peut également être personnalisé globalement dans [Internationalization](/customization/internationalisation).",
+    "disabled": "Désactive la puce, ce qui la rend non sélectionnable",
+    "draggable": "Rendre le déplaçable de la puce",
+    "filter": "Affiche une icône de sélection lors de la sélection",
+    "filterIcon": "Changer l'icône par défaut utilisée pour **filter** les puces",
+    "inputValue": "Contrôle l'état **actif** de l'élément. Ceci est généralement utilisé pour mettre en évidence le composant.",
+    "label": "Supprime les bords du cercle",
+    "link": "Définit explicitement la puce comme un lien",
+    "outlined": "Supprime l'arrière-plan et applique la couleur de la bordure et du texte",
+    "pill": "Enlever l'espacement(padding) de `v-avatar`",
+    "value": "La valeur utilisée lorsqu'un enfant d'un [v-chip-group](/components/chip-groups)."
+  },
+  "events": {
+    "click": "Émis lorsque le composant est cliqué, bascule la puce si elle est contenue dans un groupe de puces - déclenchera le composant à ripper lorsque le bouton est cliqué à moins que le modificateur `.native` n'est utilisé",
+    "click:close": "Émis lorsque l'icône de fermeture est cliqué",
+    "update:active": "Émis lorsque l'icône de fermeture est cliqué, définit active sur `false`"
+  }
+}

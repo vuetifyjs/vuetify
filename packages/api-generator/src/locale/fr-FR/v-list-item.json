@@ -1,0 +1,13 @@
+{
+  "props": {
+    "color": "Applique la couleur spécifiée au contrôle lorsque dans un état **actif** ou **input-value** est **vrai** - il peut être le nom de la couleur matérielle (par exemple `success` ou `purple`) ou css color (`#033` ou `rgba(255, 0, 0, 0.5)`)",
+    "dense": "Hauteur max des tuiles de liste inférieure",
+    "disabled": "Désactive le composant",
+    "inactive": "Si défini, la tuile de liste ne sera pas rendue comme un lien même si elle a/href prop ou @click handler",
+    "inputValue": "Contrôle l'état **actif** de l'élément. Ceci est généralement utilisé pour mettre en évidence le composant",
+    "selectable": "Autoriser la sélection de texte dans `v-list-item`. Ce prop utilise [user-select](https://developer.mozilla.org/fr-US/docs/Web/CSS/user-select)",
+    "threeLine": "Augmente la hauteur des éléments de liste pour trois lignes. Ce prop utilise [line-clamp](https://developer.mozilla.org/fr-US/docs/Web/CSS/-webkit-line-clamp) et n'est pas pris en charge dans tous les navigateurs.",
+    "twoLine": "Augmente la hauteur des éléments de liste pour deux lignes. Ce prop utilise [line-clamp](https://developer.mozilla.org/fr-US/docs/Web/CSS/-webkit-line-clamp) et n'est pas pris en charge dans tous les navigateurs.",
+    "value": "La valeur utilisée lorsqu'un enfant d'un [v-list-item-group](/components/list-item-groups)."
+  }
+}

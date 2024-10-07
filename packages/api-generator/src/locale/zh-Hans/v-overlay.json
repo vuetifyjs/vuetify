@@ -1,0 +1,7 @@
+{
+  "props": {
+    "absolute": "给组件应用 **position: absolute**",
+    "opacity": "设置遮罩层的透明度",
+    "zIndex": "用于组件的 z-index"
+  }
+}

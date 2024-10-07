@@ -1,0 +1,22 @@
+{
+  "props": {
+    "backgroundColor": "La couleur utilisée pour les icônes vides",
+    "clearable": "Permet au composant d'être vider. Il est Déclenché lorsque l'icône contenant la valeur actuelle est cliquée.",
+    "dense": "Les icônes ont une taille plus petite",
+    "emptyIcon": "L'icône affichée quand le composant est vide",
+    "fullIcon": "L'icône affichée quand le composant est rempli",
+    "halfIcon": "L'icône affichée quand la moitié est remplie (nécessite la propriété **demi-incréments** )",
+    "halfIncrements": "Permet la sélection de demi-incréments",
+    "hover": "Fournit un retour visuel lors du survol des icônes",
+    "iconLabel": "Le **aria-label** utilisé pour les icônes",
+    "length": "La quantité d'évaluation à afficher",
+    "readonly": "Supprime tous les effets de survol et les événements du pointeur",
+    "value": "La valeur de la note"
+  },
+  "slots": {
+    "item": "L'emplacement pour les objets rendus"
+  },
+  "events": {
+    "input": "Émet le numéro de notation lorsque cette valeur change"
+  }
+}

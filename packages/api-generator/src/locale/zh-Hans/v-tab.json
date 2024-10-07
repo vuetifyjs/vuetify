@@ -1,0 +1,8 @@
+{
+  "events": {
+    "tabValue": "Value of the tab. Exposed through v-model on v-tabs. To be used to coordinate current tab with v-tabs-items",
+    "change": "当选项卡将变为活动状态时发出",
+    "click": "单击组件时发出",
+    "keydown": "按下 **enter** 键时发出"
+  }
+}

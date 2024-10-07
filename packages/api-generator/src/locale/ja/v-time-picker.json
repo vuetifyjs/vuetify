@@ -1,0 +1,30 @@
+{
+  "props": {
+    "format": "ピッカーに表示される時間の形式を定義します。利用可能なオプションは `ampm` と `24hr` です。",
+    "activePicker": "Determines which picker is being displayed. Allowed values: `'HOUR'`, `'MINUTE'`, `'SECOND'`",
+    "allowedHours": "選択できる時間を制限します",
+    "allowedMinutes": "選択できる分数を制限します",
+    "allowedSeconds": "選択できる秒数を制限します",
+    "disabled": "ピッカーを無効にします",
+    "flat": "Elevationを削除します。",
+    "scrollable": "マウスのスクロールで時間/分を変更できます",
+    "min": "最小時間",
+    "max": "最大時間",
+    "readonly": "読み取り専用状態に設定します。",
+    "useSeconds": "ピッカーでの秒数の使用を切り替えます",
+    "value": "Time picker model (ISO 8601 format, 24hr hh:mm)",
+    "width": "ピッカーの幅",
+    "ampmInTitle": "時計の近くではなく、タイトルにAM/PMスイッチを入れます。"
+  },
+  "slots": {
+    "default": "時計の下に表示されます。アクションボタン (`OK` と `キャンセル`) などに使用できます。"
+  },
+  "events": {
+    "click:hour": "ユーザーが「時」を選択したときに発生します。",
+    "click:minute": "ユーザーが「分」を選択したときに発生します。",
+    "click:second": "ユーザーが「秒」を選択したときに発生します。",
+    "change": "時間の選択が完了したときに発生します (HH:MM ピッカーの場合は「分」を、HH:MM:SS ピッカーの場合は 「秒」を変更したとき)。",
+    "update:period": "ユーザーが AM/PM ボタンをクリックすると発生します。",
+    "update:active-picker": "`active-picker` プロパティ の `.sync` イベント"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "props": {
+    "customFilter": "Fonction pour filtrer les éléments",
+    "customGroup": "Fonction utilisée pour trier les éléments",
+    "customSort": "Fonction utilisée pour trier les éléments",
+    "disableFiltering": "Désactiver complètement le filtrage",
+    "disablePagination": "Désactiver complètement la pagination",
+    "disableSort": "Désactiver le tri complètement",
+    "expanded": "Tableau d'éléments développés. Peut être utilisé avec le modificateur `.sync`",
+    "footerProps": "Voir l'API [`v-data-footer`](/api/v-data-footer) pour plus d'informations",
+    "groupBy": "Modifie quelle propriété d'élément doit être utilisée pour regrouper les éléments. Actuellement, ne prend en charge qu'un seul regroupement au format : `group` ou `['group']`. Lors de l'utilisation d'un tableau, seul le premier élément est considéré. Peut être utilisé avec le modificateur `.sync`",
+    "groupDesc": "Modifications du groupement de direction. Peut être utilisé avec le modificateur `.sync`",
+    "hideDefaultFooter": "Cache le pied de page par défaut",
+    "itemKey": "La propriété sur chaque élément qui est utilisé comme clé unique",
+    "items": "Le tableau d'éléments à afficher",
+    "itemsPerPage": "Modifie le nombre d'éléments par page devant être visibles. Peut être utilisé avec le modificateur `. sync` . Mettre cette propriété à `-1` affichera tous les éléments de la page",
+    "loading": "Si `true` et aucun élément n'est fourni, alors un texte de chargement sera affiché",
+    "loadingText": "Le texte affiché lorsque le `loading` est vrai et qu'aucun élément n'est fourni",
+    "locale": "Définit la locale utilisée pour le tri. Elle est passée dans [`Intl.Collator()`](https://developer.mozilla.org/fr-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator) dans la fonction par défaut `customSort`",
+    "mobileBreakpoint": "Utilisé pour définir quand basculer entre la vue normale et la vue mobile",
+    "multiSort": "Si `true` alors on peut trier sur plusieurs propriétés",
+    "mustSort": "Si `true` alors on ne peut pas désactiver le tri, il basculera toujours entre ascendant et descendant",
+    "noDataText": "Le texte affiché quand aucun élément n'est fourni au composant",
+    "noResultsText": "Texte affiché lorsque la prop `search` est utilisée et il n'y a aucun résultat",
+    "search": "Saisie de texte utilisée pour filtrer les éléments",
+    "selectableKey": "La propriété sur chaque élément qui est utilisé pour déterminer s'il est sélectionnable ou non",
+    "serverItemsLength": "Utilisé uniquement lorsque les données sont fournies par un serveur. Doit être réglé au total des éléments disponibles sur le serveur afin que la pagination fonctionne correctement",
+    "singleExpand": "Change le mode d'extension en mode simple expansion",
+    "singleSelect": "Changer le mode de sélection pour une seule sélection",
+    "sortBy": "Modifications de la propriété de l'élément (ou des propriétés) doivent être utilisées pour l'ordre de tri. Peut être utilisé avec le modificateur `.sync`",
+    "sortDesc": "Modification de direction du tri. Peut être utilisé avec le modificateur `.sync`",
+    "value": "Utilisé pour contrôler les lignes sélectionnées"
+  },
+  "slots": {
+    "default": "L'emplacement par défaut. Utilisez ceci pour rendre vos éléments",
+    "footer.page-text": "Cet emplacement est transféré au pied de page par défaut. Voir [`v-data-footer`](/api/v-data-footer) pour plus d'informations",
+    "footer": "Définit un pied de page sous les éléments",
+    "heading": "Définit un pied de page sous les éléments",
+    "item": "Emplacement pour chaque objet",
+    "loading": "Le contenu affiché lorsque la propriété `loading` est vrai et qu'aucun élément n'est fourni",
+    "no-data": "Définit le contenu pour quand aucun élément n'est fourni",
+    "no-results": "Définit le contenu si la propriété `search` est fournie, mais qu'aucun résultat n'est trouvé"
+  },
+  "events": {
+    "input": "Tableau des éléments sélectionnés",
+    "item-expanded": "Événement émis lorsqu'un élément est étendu ou fermé",
+    "item-selected": "Événement émis lorsqu'un élément est sélectionné ou désélectionné",
+    "update:expanded": "L'événement `.sync` pour la propriété `expanded`"
+  }
+}

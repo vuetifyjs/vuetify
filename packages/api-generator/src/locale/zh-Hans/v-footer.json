@@ -1,0 +1,6 @@
+{
+  "props": {
+    "inset": "定位工具栏偏离应用程序的`v-navigation-drawer`的位置",
+    "padless": "删除页脚中的所有边距"
+  }
+}

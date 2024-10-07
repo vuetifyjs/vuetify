@@ -1,0 +1,17 @@
+{
+  "props": {
+    "app": "Si utilisé à l'intérieur du `v-main`, déterminera l'emplacement supérieur (top) basé sur les `v-toolbar` et `v-system-bar` de l'application.",
+    "icon": "Désigne une icône spécifique.",
+    "iconColor": "Indique une couleur d'icône spécifique.",
+    "mobileBreakpoint": "Définit le point d'arrêt mobile désigné pour le composant.",
+    "singleLine": "Force la bannière à tenir sur une seule ligne.",
+    "sticky": "Applique **position: sticky** au composant (**Evergreen browsers only**). Vous pouvez trouver plus d'informations sur la [documentation MDN pour la position autocollante](https://developer.mozilla.org/fr-US/docs/Web/CSS/position)."
+  },
+  "slots": {
+    "actions": "L'emplacement utilisé pour le contenu de l'action comme un [v-btn](/components/button). La fonction **dismiss** dans cette zone de créneaux, lorsqu'elle est appelée, fermera la bannière.",
+    "icon": "L'emplacement utilisé pour le contenu de l'icône."
+  },
+  "functions": {
+    "toggle": "Contrôle si le composant est visible ou caché."
+  }
+}

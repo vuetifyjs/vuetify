@@ -1,0 +1,12 @@
+{
+  "props": {
+    "contain": "Applique **background-size: contain** à l'image de fond (en utilisant la prop **img** ).",
+    "flat": "Supprime l'élévation de la carte.",
+    "hover": "Applique une élévation de 4dp lorsque vous survolez (2dp par défaut). Vous pouvez trouver plus d'informations sur la [page d'altitude](/styles/altitude).",
+    "img": "Spécifie un fond d'image pour la carte. Pour les implémentations plus avancées, il est recommandé d'utiliser le composant [v-img](/components/images). Vous pouvez trouver un exemple [v-img ici](#media-with-text).",
+    "raised": "Spécifie une élévation plus élevée (8dp). Vous pouvez trouver plus d'informations sur la [page d'altitude](/styles/altitude)."
+  },
+  "events": {
+    "click": "Émis lorsque le composant est cliqué - déclenchera le composant à ripper lorsque le bouton clique à moins que le modificateur `.native` soit utilisé"
+  }
+}

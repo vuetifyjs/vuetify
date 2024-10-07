@@ -1,0 +1,18 @@
+{
+  "props": {
+    "clippedLeft": "Indique que le `v-navigation-drawer` de l'application qui est positionné à gauche est en dessous du app-bar.",
+    "clippedRight": "Indique que le `v-navigation-drawer` de l'application qui est positionné à droite est en dessous de app-bar.",
+    "collapseOnScroll": "Mettre la barre d'application dans un état plié lors du défilement.",
+    "elevateOnScroll": "Remonte la barre d'application lors du défilement.",
+    "fadeImgOnScroll": "Lorsque vous utilisez le prop **src** ou le slot `img`, l'image sera effacée lors du défilement.",
+    "hideOnScroll": "Masque la barre d'application lors du défilement. Affichera toujours l'emplacement `extension`.",
+    "invertedScroll": "Cache la barre d'application lors du défilement vers le bas et l'affiche lors du défilement vers le haut.",
+    "scrollOffScreen": "Cache la barre d'application lors du défilement. La barre d'application n'affichera **PAS** l'emplacement `extension`.",
+    "shrinkOnScroll": "Relie une barre d'outils **prominent** à une **dense** ou **short** (par défaut) lorsqu'elle défile.",
+    "src": "Source de l'image. Voir `v-img` pour plus de détails"
+  },
+  "slots": {
+    "extension": "Slot placé directement sous le contenu principal de la barre d'outils. La hauteur du slot peut être définie explicitement avec la prop **extension-height**. Si ce slot n'a pas de contenu, la prop **extended** peut être utilisée à la place.",
+    "img": "Nécessite le composant [v-img](/components/images). Les **props** avec portée doivent être appliqués avec `v-bind=\"props\"`."
+  }
+}

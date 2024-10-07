@@ -1,0 +1,17 @@
+{
+  "props": {
+    "color": "Applique la couleur spécifiée au contrôle - il peut s'agir du nom de la couleur material (par exemple `success` ou `purple`) ou de la couleur css (`#033` ou `rgba(255, 0, 0, 0. 0. 0. )`). Vous pouvez trouver une liste des classes intégrées sur la [page des couleurs](/styles/colors#material-colors).",
+    "dark": "Applique la variante du thème foncé au composant. Vous pouvez trouver plus d'informations sur la documentation Material Design pour [thèmes sombres](https://material.io/design/color/dark-theme.html).",
+    "disabled": "Disables simple checkbox.",
+    "indeterminate": "Sets an indeterminate state for the simple checkbox.",
+    "indeterminateIcon": "L'icône utilisée dans un état indéterminé.",
+    "light": "Applique la variante claire du thème au composant.",
+    "offIcon": "L'icône utilisée si inactif.",
+    "onIcon": "L'icône utilisée si actif.",
+    "ripple": "Applique la directive [v-ripple](/directives/ripple).",
+    "value": "A boolean value that represents whether the simple checkbox is checked."
+  },
+  "events": {
+    "click": "Événement qui est émis lorsque le composant est cliqué"
+  }
+}

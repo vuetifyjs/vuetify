@@ -1,0 +1,22 @@
+{
+  "props": {
+    "autoDraw": "Trace the length of the line when first rendered",
+    "autoDrawDuration": "トレースアニメーションの実行時間 (ミリ秒)",
+    "autoDrawEasing": "トレースアニメーションに使用するイージング関数",
+    "autoLineWidth": "Automatically expand bars to use space efficiently",
+    "data": "データ ポイントの配列",
+    "fill": "**fill** プロパティを使用することで、スパークラインの外観をより良くカスタマイズすることができます。",
+    "gradient": "線形グラデーション（linear-gradient）として使用する色の配列。",
+    "gradientDirection": "グラデーションを実行する方向",
+    "height": "SVGトレンドラインまたはバーの高さ",
+    "labels": "データと同じインデックスに対応する文字列ラベルの配列",
+    "labelSize": "ラベルフォントサイズ",
+    "lineWidth": "線の太さ（px）",
+    "padding": "Low `smooth` or high `line-width` values may result in cropping, increase padding to compensate",
+    "showLabels": "各データ ポイントの下にラベルを表示する",
+    "smooth": "Number of px to use as a corner radius. `true` defaults to 8, `false` is 0",
+    "type": "トレンドラインとバーのどちらかを選択",
+    "value": "数値の配列",
+    "width": "SVGトレンドラインまたはバーの幅"
+  }
+}

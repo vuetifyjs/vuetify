@@ -1,0 +1,8 @@
+{
+  "props": {
+    "activeClass": "La **active-class** (classe active) est appliquée aux éléments enfants lorsqu'ils sont activés.",
+    "mandatory": "Force une valeur à toujours être sélectionnée (si disponible).",
+    "max": "Définit un nombre maximum de sélections qui peuvent être faites.",
+    "multiple": "Autoriser plusieurs sélections. La propriété **value** doit être un _array_."
+  }
+}

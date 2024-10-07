@@ -1,0 +1,8 @@
+{
+  "props": {
+    "editable": "Crée un bouton modifiable",
+    "overflow": "Crée un bouton de débordement",
+    "segmented": "Crée un bouton segmenté",
+    "persistentPlaceholder": "Force le label à toujours être visible"
+  }
+}

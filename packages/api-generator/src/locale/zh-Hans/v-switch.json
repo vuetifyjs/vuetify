@@ -1,0 +1,13 @@
+{
+  "props": {
+    "flat": "显示没有海拔的组件。 拇指的默认海拔为 4dp，`flat` 重置它",
+    "inputValue": "**v-model** 的绑定值",
+    "inset": "扩展 `v-switch` 轨迹以包含缩略图",
+    "loading": "显示循环进度条。 可以是指定将哪种颜色应用于进度栏的字符串（任何 material color 或主题颜色――primary, secondary, success, info, warning, error），也可以是使用组件颜色的布尔值 （由颜色属性设置 - 如果是由组件支持） 或主色",
+    "multiple": "将预期模型更改为数组"
+  },
+  "events": {
+    "change": "当用户交互更改输入时发出",
+    "click": "单击输入时触发。**注意：** 监视状态变化时，应使用 **change** 事件，而不是 **click** 事件。"
+  }
+}

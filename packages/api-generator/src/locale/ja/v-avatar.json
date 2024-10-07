@@ -1,0 +1,6 @@
+{
+  "props": {
+    "left": "アバターがコンポーネントの左側にあることを指定します。これは [v-chip](/components/chips) や [v-btn](/components/buttons) などのコンポーネントによってフックされます。",
+    "right": "アバターがコンポーネントの右側にあることを指定します。これは [v-chip](/components/chips) や [v-btn](/components/buttons) などのコンポーネントによってフックされます。"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "props": {
+    "backgroundColor": "Modifie la couleur de fond du composant.",
+    "borderless": "Supprime la frontière du groupe.",
+    "dense": "Réduit la taille et le pliage des boutons.",
+    "group": "Généralement utilisé dans [v-toolbar](/components/toolbars) et [v-app-bar](/components/app-bars). Supprime la couleur d'arrière-plan, la bordure et augmente l'espace entre les boutons",
+    "rounded": "Boutons de bord rond",
+    "shaped": "Applique un grand rayon de bordure en haut à gauche et en bas à droite de la carte.",
+    "tile": "Supprime le rayon de la frontière du composant."
+  },
+  "events": {
+    "change": "Émis lorsque l'entrée est modifiée par l'interaction utilisateur"
+  }
+}

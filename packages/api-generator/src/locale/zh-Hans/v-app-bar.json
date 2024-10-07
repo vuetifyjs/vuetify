@@ -1,0 +1,18 @@
+{
+  "props": {
+    "clippedLeft": "指定位于左侧的应用程序的 `v-navigation-drawer` 在应用程序栏下方。",
+    "clippedRight": "指定位于右侧的应用程序的 `v-navigation-drawer` 在应用程序栏下方。",
+    "collapseOnScroll": "滚动时将应用栏置于折叠状态。",
+    "elevateOnScroll": "滚动时应用栏显示海拔。",
+    "fadeImgOnScroll": "当使用 **src** 属性或 `img` 插槽时，滚动时会淡化图像。",
+    "hideOnScroll": "滚动时隐藏应用程序栏。 仍会显示 `extension` 插槽。",
+    "invertedScroll": "向下滚动时隐藏应用程序栏，向上滚动时显示它。",
+    "scrollOffScreen": "滚动时隐藏应用程序栏。将 **不** 显示 `extension` 插槽。",
+    "shrinkOnScroll": "滚动时，将 **prominent** 工具栏缩小为 **dense** 或 **short** （默认）。",
+    "src": "图像源。详情请参阅 `v-img`"
+  },
+  "slots": {
+    "extension": "槽位直接位于工具栏的主要内容下。可以使用 **extension-height** 属性显式设置高度。如果该插槽没有内容，可以使用 **extended** 属性代替。",
+    "img": "需要 [v-img](/components/images) 组件。范围内的 **props** 应该与 `v-bind=\"props\"` 一起使用。"
+  }
+}

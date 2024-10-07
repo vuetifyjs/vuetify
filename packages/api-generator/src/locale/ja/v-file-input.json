@@ -1,0 +1,17 @@
+{
+  "props": {
+    "accept": "許可するファイルの種類を記述する 1 つ以上の [固有ファイル型指定子](https://developer.mozilla.org/ja/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers) を説明します。",
+    "chips": "選択項目の表示をチップに変更",
+    "counterSizeString": "**counter**および **show-size** propを使用するときに表示されるテキスト。 [国際化](/customization/internationalization) 設定でグローバルにカスタマイズすることもできます。",
+    "counterString": "**counter** propを使用するときに表示されるテキスト。 [国際化](/customization/internationalization) 設定でグローバルにカスタマイズすることもできます。",
+    "hideInput": "input (ファイル名) なしでアイコンのみを表示する",
+    "multiple": "**multiple** 属性を追加し、複数のファイルを選択できるようにします。",
+    "showSize": "選択したファイルの表示サイズを設定します。**true**を使用している場合、デフォルトでは _1000_ には (**kB、MB、GB**) が表示され、 _1024_ には (**KiB、MiB、GiB**) が表示されます。",
+    "smallChips": "選択表示を **small** プロパティを持つチップに変更します",
+    "truncateLength": "省略記号で切り捨てられる前のファイル名の長さ",
+    "value": "[File objects](https://developer.mozilla.org/ja/docs/Web/API/File)単体あるいは配列"
+  },
+  "slots": {
+    "selection": "選択したアイテムのカスタム外観を定義するスロット。現在の **index**, **text** (truncated) および [file](https://developer.mozilla.org/ja/docs/Web/API/File) を提供します。"
+  }
+}

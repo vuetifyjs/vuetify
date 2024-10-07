@@ -1,0 +1,7 @@
+{
+  "props": {
+    "alt": "Attache une propriété alternative à l'image du parallaxe",
+    "src": "L'image sur laquelle appliquer la parallaxe",
+    "srcset": "Un ensemble d'images alternatives à utiliser en fonction de la taille de l'appareil. [Lire plus...](https://developer.mozilla.org/fr-US/docs/Web/HTML/Element/img#attr-srcset)"
+  }
+}

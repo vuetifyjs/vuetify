@@ -1,0 +1,9 @@
+{
+  "props": {
+    "mode": "トランジション モードを設定します(transition-groupには適用されません)。詳細については、Vue のドキュメント [トランジションモード](https://jp.vuejs.org/v2/api/#transition) を参照してください。",
+    "origin": "要素にトランジションの起点を設定します。 MDNドキュメントで [for transition origin](https://developer.mozilla.org/ja/docs/Web/CSS/transform-origin) の詳細を参照できます。",
+    "group": "`transition-group` コンポーネントを作成します。 [vue docs](https://jp.vuejs.org/v2/api/index.html#transition-group)",
+    "hideOnLeave": "leave時の要素を非表示にします(終了アニメーションなし)",
+    "leaveAbsolute": "leaving要素を絶対的に配置する（[FLIP](https://aerotwist.com/blog/flip-your-animations/) の時に便利です。）"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "props": {
+    "name": "Définit l'attribut nom du composant",
+    "offIcon": "L'icône utilisée si inactif",
+    "onIcon": "L'icône utilisée si actif"
+  },
+  "events": {
+    "change": "Émis lorsque l'entrée est modifiée par l'interaction utilisateur",
+    "click": "Émis lors du clique sur l'entrée. **Note:** l'événement **changement** doit être utilisé à la place de **clic** lors du suivi du changement d'état"
+  }
+}

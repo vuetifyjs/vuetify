@@ -1,0 +1,18 @@
+{
+  "props": {
+    "avatar": "Supprime le padding du badge pour l'utilisation du `v-avatar` dans le slot **badge**.",
+    "bordered": "Applique au badge une bordure de **2px** par défaut, et de **1.5px** si la propriété **dot** est utilisée.",
+    "content": "Tout contenu à injecter en tant que texte dans le badge.",
+    "dot": "Réduit la taille du badge et masque son contenu",
+    "icon": "Défini une icône spécifique utilisée dans le badge.",
+    "inline": "Aligne le badge avec l'élément qu'il décore. Supporte l'utilisation de la prop **left**.",
+    "label": "Le **aria-label** utilisé pour le badge",
+    "offsetX": "Décale le badge sur l'axe x.",
+    "offsetY": "Décale le badge sur l'axe z.",
+    "overlap": "Remplace le contenu en place en haut du composant.",
+    "tile": "Supprime le rayon de la frontière du composant."
+  },
+  "slots": {
+    "badge": "L'emplacement utilisé pour le contenu du badge."
+  }
+}

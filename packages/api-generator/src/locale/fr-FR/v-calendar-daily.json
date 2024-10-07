@@ -1,0 +1,24 @@
+{
+  "props": {
+    "dayFormat": "Formate le jour du mois qui apparaît dans un jour à une locale spécifiée",
+    "end": "La date de fin du calendrier (inclusivement) au format de `YYYY-MM-DD`. Cela peut être ignoré en fonction du `type` du calendrier.",
+    "firstInterval": "Le premier intervalle à afficher dans la vue `day`. Si `intervalMinutes` est définit à 60 et ceci est fixé à 9 la première fois dans la vue est de 9h.",
+    "firstTime": "La première fois à afficher dans la vue `day`. Si spécifié, cela remplace toute valeur `firstInterval` spécifiée. Cela peut être le nombre de minutes depuis minuit, une chaîne de caractères au format `HH:mm`, ou un objet avec le nombre de propriétés heure et minute.",
+    "hideHeader": "Si l'en-tête en haut de la vue `day` doit être visible.",
+    "intervalCount": "Le nombre d'intervalles à afficher dans la vue `day`.",
+    "intervalFormat": "Formate l'heure de la chaîne de caractères qui apparaît dans l'intervalle de la vue `day` et `week` à la locale spécifiée",
+    "intervalHeight": "La hauteur d'un intervalle en pixels dans la vue `day`.",
+    "intervalWidth": "La largeur de la gouttière d'intervalle sur le côté gauche dans la vue `jour`.",
+    "intervalMinutes": "Le nombre de minutes que les intervalles sont dans la vue `day`. Un intervalle commun est de 60 minutes pour que les intervalles soient une heure.",
+    "intervalStyle": "Retourne le style CSS à appliquer à l'intervalle.",
+    "locale": "La locale du calendrier.",
+    "maxDays": "Le nombre maximum de jours à afficher dans le calendrier personnalisé si une journée `end` n'est pas définie.",
+    "now": "Remplacer le jour et l'heure qui est considéré maintenant. Ceci est au format de `YYYY-MM-DD hh:mm:ss`. Le calendrier est stylisé en fonction de maintenant.",
+    "shortIntervals": "Si 'true', les intervalles dans la vue `day` seront de 9 heures par rapport à 09:00 AM",
+    "shortWeekdays": "Si les versions courtes d'une semaine doivent être utilisées (Lun contre Lundi).",
+    "showIntervalLabel": "Vérifie si un jour et une heure donnés doivent être affichés dans l'intervalle de la vue `day`.",
+    "start": "La date de début du calendrier (inclusivement) au format de `YYYY-MM-DD`. Cela peut être ignoré en fonction du `type` du calendrier.",
+    "weekdayFormat": "Formate le jour de la chaîne de semaine qui apparaît dans l'en-tête à la locale spécifiée",
+    "weekdays": "Spécifie quels jours de la semaine à afficher. Pour afficher le lundi au vendredi seulement, une valeur de `[1, 2, 3, 4, 5]` peut être utilisée. Pour afficher une semaine à partir du lundi une valeur de `[1, 2, 3, 4, 5, 6, 0]` peut être utilisée."
+  }
+}

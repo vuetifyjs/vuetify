@@ -1,0 +1,10 @@
+{
+  "argument": "当目标元素更新时要调用的函数。",
+  "modifiers": {
+    "once": "将只调用提供的用户回调一次，然后指令将被解除绑定。",
+    "attr": "设置 [attributes](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/attributes) 为 true。",
+    "child": "设置 [childList](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/childList) 为 true。",
+    "char": "设置 [characterData](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/characterData) 为 true。",
+    "sub": "设置 [subtree](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observeve#Paramets) 为true。"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "props": {
+    "auto": "Centre la liste sur l'élément sélectionné",
+    "clearable": "Ajouter la fonctionnalité d'effacement des entrées, l'icône par défaut est Material Design Icons **mdi-clear**",
+    "height": "Définit la hauteur du composant",
+    "falseValue": "Définit la valeur pour l’état évalué à faux",
+    "fullWidth": "Force la largeur à 100%",
+    "id": "Définit l'identifiant DOM sur le composant",
+    "persistent": "Clicking outside or pressing **esc** key will not dismiss the dialog",
+    "size": "Définit la hauteur et la largeur du composant.",
+    "tag": "Spécifiez un tag personnalisé utilisé sur l'élément racine.",
+    "textColor": "Applique une couleur spécifiée au texte du contrôle",
+    "trueValue": "Définit la valeur pour l’état évalué à vrai",
+    "width": "Définit la largeur du composant."
+  },
+  "slots": {
+    "activator": "Lorsqu'il est utilisé, activera le composant lorsque vous cliquez dessus (ou passez la souris sur certains composants). Cela arrête manuellement la propagation de l'événement. Sans ce slot, si vous ouvrez le composant via son modèle, vous devrez arrêter manuellement la propagation de l'événement",
+    "append": "Ajoute un élément à l'intérieur du champ de saisie, après son contenu",
+    "default": "L'emplacement par défaut de vue.",
+    "label": "Remplace le label par défaut",
+    "prepend": "Ajoute un élément en dehors du champ de saisie, avant son contenu",
+    "progress": "Slot pour la progression linéaire personnalisée (affiché lorsque la propriété **loading** n'est pas égale au booléen faux)"
+  },
+  "events": {
+    "click": "Événement qui est émis lorsque le composant est cliqué",
+    "input": "Le modèle lié mis à jour"
+  }
+}

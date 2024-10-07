@@ -1,0 +1,15 @@
+{
+  "props": {
+    "app": "Respecte les limites de — et ne chevauchera pas — d'autres composants `app` comme `v-app-bar`, `v-navigation-drawer`, et `v-footer`.",
+    "centered": "Positionne la snackbar au centre de l'écran, (axe x et y ).",
+    "contentClass": "Appliquer une classe personnalisée au contenu de la snackbar",
+    "multiLine": "Donne au snack-bar une hauteur minimale plus grande.",
+    "text": "Applique la **color** définie au texte et à l'arrière-plan avec une faible opacité sur la couleur.",
+    "timeout": "Temps (en millisecondes) d'attente jusqu'à ce que la snackbar soit automatiquement cachée. Utilisez `-1` pour la garder indéfiniment ouvert (`0` dans la version < 2.3 ). Il est recommandé que ce nombre soit compris entre `4000` et `10000`. Les modifications apportées à cette propriété réinitialiseront le délai.",
+    "transition": "Définit la transition du composant. Peut être l'une des [construites en transitions](/styles/transitions) ou l'autre de vos propres.",
+    "vertical": "Empile le contenu de la snackbar en haut des actions (bouton)."
+  },
+  "slots": {
+    "action": "Utilisé pour lier les styles à [v-btn](/components/buttons) pour correspondre à la spécification MD2."
+  }
+}

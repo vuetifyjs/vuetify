@@ -1,0 +1,15 @@
+{
+  "props": {
+    "appendIcon": "The icon used in the append slot (if shown)",
+    "centerActive": "Forces the selected chip to be centered",
+    "column": "Remove horizontal pagination and wrap items as needed",
+    "mobileBreakpoint": "Définit le point d'arrêt mobile désigné pour le composant.",
+    "nextIcon": "Icône pour passer à la page suivante",
+    "prependIcon": "This icon used in the prepend slot (if shown)",
+    "prevIcon": "Icône pour passer à la page précédente",
+    "showArrows": "Force the display of the pagination arrows"
+  },
+  "events": {
+    "change": "Émis lorsque la valeur du composent est modifiée par l'interaction utilisateur"
+  }
+}

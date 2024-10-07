@@ -1,0 +1,18 @@
+{
+  "props": {
+    "cancelText": "Sets the default text for the cancel button when using the **large** prop",
+    "eager": "Force le contenu des composants à effectuer le rendu sur les composants montés. Ceci est utile si vous avez du contenu qui ne sera pas rendu dans le DOM que vous voulez explorer pour le référencement.",
+    "large": "Attaches a submit and cancel button to the dialog",
+    "saveText": "Sets the default text for the save button when using the **large** prop",
+    "transition": "Définit la transition du composant. Peut être l'une des [construites en transitions](/styles/transitions) ou l'autre de vos propres."
+  },
+  "slots": {
+    "input": "Slot used to denote input component for v-edit-dialog"
+  },
+  "events": {
+    "cancel": "Emits when editing is canceled",
+    "close": "Emits when edit-dialog close button is pressed",
+    "open": "Emits when editing is opened",
+    "save": "Emits when edit-dialog save button is pressed"
+  }
+}

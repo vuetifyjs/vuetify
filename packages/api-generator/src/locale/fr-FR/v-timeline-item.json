@@ -1,0 +1,16 @@
+{
+  "props": {
+    "fillDot": "Supprimer le remplissage du conteneur de point",
+    "hideDot": "Masquer l'affichage du point de chronologie",
+    "icon": "Spécifier l'icône pour le conteneur de points",
+    "iconColor": "Applique la couleur spécifiée au contrôle - il peut s'agir du nom de la couleur material (par exemple `success` ou `purple`) ou de la couleur css (`#033` ou `rgba(255, 0, 0, 0. 0. 0. )`). Vous pouvez trouver une liste des classes intégrées sur la [page des couleurs](/styles/colors#material-colors).",
+    "large": "Points de grande taille",
+    "left": "Définissez l'élément à une orientation gauche",
+    "right": "Définissez l'élément à une orientation droite",
+    "small": "Points de petite taille"
+  },
+  "slots": {
+    "icon": "Utilisé pour personnaliser l'icône dans le point de l'article chronologique",
+    "opposite": "Utilisé pour personnaliser le côté opposé des éléments timeline"
+  }
+}

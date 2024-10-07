@@ -1,0 +1,8 @@
+{
+  "props": {
+    "root": "使用当前的值 `$vuetify.theme.dark` ，而不是提供的值。"
+  },
+  "slots": {
+    "default": "All child components will have their theme overridden. Must have exactly one root element."
+  }
+}

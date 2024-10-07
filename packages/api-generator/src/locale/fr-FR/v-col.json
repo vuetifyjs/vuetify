@@ -1,0 +1,20 @@
+{
+  "props": {
+    "alignSelf": "Applique la propriété CSS [align-items](https://developer.mozilla.org/fr-US/docs/Web/CSS/align-items). Les options disponibles sont **start**, **center**, **end**, **auto**, **baseline** et **stretch**.",
+    "cols": "Définit le nombre de colonnes par défaut que le composant intègre. Les options disponibles sont **1 ⇾ 12** et **auto**.",
+    "sm": "Modifie le nombre de colonnes sur les petits et grands points d'arrêt.",
+    "md": "Modifie le nombre de colonnes sur les petits points d'arrêt ainsi que les plus grands.",
+    "lg": "Modifie le nombre de colonnes sur les points d'arrêt large ainsi que les plus grands.",
+    "xl": "Modifie le nombre de colonnes sur les points d'arrêt large ainsi que les plus grands.",
+    "offset": "Définit le décalage par défaut pour la colonne.",
+    "offsetSm": "Modifie le décalage du composant sur les petits et grands points d'arrêt.",
+    "offsetMd": "Modifie le décalage du composant sur les point d'arrêts et plus grands.",
+    "offsetLg": "Modifie le décalage du composant sur les points d'arrêts large et plus grand.",
+    "offsetXl": "Modifie le décalage du composant sur les points d'arrêts extra large et plus grand.",
+    "order": "Définit la valeur par défaut [order](https://developer.mozilla.org/fr-US/docs/Web/CSS/order) pour la colonne.",
+    "orderSm": "Modifie l'ordre du composant sur les petits et points d'arrêts plus grand.",
+    "orderMd": "Modifie l'ordre du composant sur les points d'arrêt moyens et supérieurs.",
+    "orderLg": "Modifie l'ordre du composant sur les points d'arrêts large et supérieurs.",
+    "orderXl": "Modifie l'ordre du composant sur les points d'arrêt extra large et supérieurs."
+  }
+}

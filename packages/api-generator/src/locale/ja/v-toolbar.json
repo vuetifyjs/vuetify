@@ -1,0 +1,20 @@
+{
+  "props": {
+    "absolute": "コンポーネントに position: absolute を適用します。",
+    "bottom": "コンポーネントを下部に配置します。",
+    "collapse": "ツールバーを折りたたんだ状態に配置し、最大幅を減らします。",
+    "dense": "ツールバーのコンテンツの高さを48px（** prominent ** propを使用する場合は96px）に減らします。",
+    "extended": "このプロパティを使用すると、コンテンツを追加するための`extension`スロットを _使用せずに_ ツールバーの高さを増加させます。 **extension-height** プロップや、ツールバーの高さに影響する他のプロップ(**prominent**、**dense** など)と組み合わせて使用​​できますが、**height** と組み合わせると **例外が発生** します。",
+    "extensionHeight": "`extension`slotの高さ。 ",
+    "flat": "このツールバーの影を取り除きます。",
+    "floating": "**display: inline-flex**を適用します。",
+    "height": "ツールバーの高さを指定します。他のprop（**prominent**、**dense**、**extended**など）によって課される高さを上書きします。",
+    "prominent": "ツールバーの高さを128pxにまで増やします。",
+    "short": "ツールバーのコンテンツの高さを56px(** prominent ** propを使用する場合は112px) に減らします。",
+    "src": "コンポーネントの背景として [v-img](/components/images) を指定します。"
+  },
+  "slots": {
+    "extension": "スロットはツールバーのメインコンテンツの下に配置されます。高さは**extension-height**プロパティで明示的に設定できます。 このスロットにコンテンツがない場合、**extended** プロパティが代わりに使用されます。",
+    "img": "[v-img](/components/images) コンポーネントが必要です。スコープ付きの **props** は `v-bind=\"props\"` で適用する必要があります。"
+  }
+}

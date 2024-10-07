@@ -1,0 +1,24 @@
+{
+  "props": {
+    "alt": "屏幕阅读器的备用文本。 留空以装饰图像",
+    "aspectRatio": "计算为`width/height`，因此对于 1920x1080px 的图片，其值为 `1.7778`。 如果省略，将自动计算",
+    "contain": "防止图像不合适时被裁剪",
+    "eager": "将强制组件内容在加载时呈现。如果存在内容的话，则不会在 DOM 中渲染，如果你想优化 SEO，这是非常有用的。",
+    "gradient": "将渐变叠加到图像上。 仅支持 [linear-gradient](https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient) 语法，其他任何操作都应使用类完成（请参见示例）",
+    "lazySrc": "在等待主映像加载时显示的内容，通常是一个小型的base64编码的缩略图。有一个轻微的模糊滤镜应用。\n\n使用 [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) 来自动生成",
+    "options": "传递给 [Intersection observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) 构造函数的选项。",
+    "position": "覆盖默认设置，以更改被裁剪的部分。 使用与以下相同的语法 [`background-position`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-position)",
+    "sizes": "使用 `srcset`，请参见 [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-sizes)",
+    "src": "图像的 URL。这个属性是强制性的",
+    "srcset": "根据设备大小使用的一组备用图像。[Read more...](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset)",
+    "transition": "从 `lazy-src` 切换到 `src` 时要使用的过渡"
+  },
+  "slots": {
+    "placeholder": "图像占位符的插槽"
+  },
+  "events": {
+    "error": "当出现错误时发出",
+    "load": "在加载图像时发出",
+    "loadstart": "当图像开始加载时触发"
+  }
+}

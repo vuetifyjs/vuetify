@@ -1,0 +1,20 @@
+{
+  "props": {
+    "active": "Réduire la hauteur à 0, masque le composant",
+    "backgroundColor": "Couleur d'arrière-plan, défini sur la couleur du composant si NULL",
+    "backgroundOpacity": "Opacité de l'arrière-plan, si *null* la valeur par défaut est 0.3 si la couleur d'arrière-plan n'est pas spécifiée, 1 sinon",
+    "bufferValue": "La valeur en pourcentage du tampon",
+    "indeterminate": "Animation continue, à utiliser lorsque la progression du chargement est inconnue.",
+    "query": "Anime comme la propriété **indeterminate** mais inversé",
+    "reverse": "Affiche la progression inversée (de droite à gauche en mode LTR et de gauche à droite en RTL)",
+    "rounded": "Ajoute un rayon de frontière au composant de progression",
+    "stream": "Un style alternatif pour le chargement qui fonctionne en tandem avec **buffer-value**",
+    "striped": "Ajoute un arrière-plan rayé à la partie remplie de la barre de progression"
+  },
+  "slots": {
+    "default": "Fournit la valeur actuelle du composant"
+  },
+  "events": {
+    "change": "Émis lorsque la valeur du composent est modifiée par l'interaction utilisateur"
+  }
+}

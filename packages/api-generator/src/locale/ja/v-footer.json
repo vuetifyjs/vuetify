@@ -1,0 +1,6 @@
+{
+  "props": {
+    "inset": "アプリケーションからのツールバーの位置を `v-navigation-drawer`で指定します。",
+    "padless": "フッターからすべてのpaddingを削除する"
+  }
+}

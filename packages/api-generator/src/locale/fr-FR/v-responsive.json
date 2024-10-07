@@ -1,0 +1,6 @@
+{
+  "props": {
+    "aspectRatio": "Définit un ratio d'aspect de base, calculé comme largeur/hauteur. Cela ne fixe qu'une hauteur **minimum** et le composant peut toujours croître si il a beaucoup de contenu.",
+    "contentClass": "Appliquer une classe personnalisée à la div de contenu responsive."
+  }
+}

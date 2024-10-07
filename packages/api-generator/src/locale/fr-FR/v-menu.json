@@ -1,0 +1,20 @@
+{
+  "props": {
+    "closeOnClick": "Designates if menu should close on outside-activator click",
+    "closeOnContentClick": "Designates if menu should close when its content is clicked",
+    "closeDelay": "Milliseconds to wait before closing component. Only works with the **open-on-hover** prop",
+    "disabled": "Désactive le menu",
+    "disableKeys": "Supprime toute interaction avec le clavier",
+    "internalActivator": "Détache le contenu du menu à l'intérieur du composant par opposition au document.",
+    "maxHeight": "Sets the max height of the menu content",
+    "offsetX": "Offset the menu on the x-axis. Works in conjunction with direction left/right",
+    "offsetY": "Offset the menu on the y-axis. Works in conjunction with direction top/bottom",
+    "openDelay": "Milliseconds to wait before opening component. Only works with the **open-on-hover** prop",
+    "openOnClick": "Designates whether menu should open on activator click",
+    "openOnHover": "Designates whether menu should open on activator hover",
+    "origin": "Définit l'origine de la transition sur l'élément. Vous pouvez trouver plus d'informations sur la documentation MDN [pour l'origine de la transition](https://developer.mozilla.org/fr-US/docs/Web/CSS/transform-origin).",
+    "returnValue": "The value that is updated when the menu is closed - must be primitive. Dot notation is supported",
+    "transition": "Définit la transition du composant. Peut être l'une des [construites en transitions](/styles/transitions) ou l'autre de vos propres.",
+    "contentProps": "Applies props/attributes to the detached menu. This is useful because the content is moved to the beginning of the `v-app` component (unless the attach prop is provided) and is not targetable by classes passed directly on the component. You could use this for example for applying a `data-cy` for cypress testing purposes."
+  }
+}

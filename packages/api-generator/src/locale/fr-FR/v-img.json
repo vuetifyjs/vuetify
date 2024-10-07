@@ -1,0 +1,24 @@
+{
+  "props": {
+    "alt": "Texte alternatif pour les lecteurs d'écran. Laisser vide pour les images décoratives",
+    "aspectRatio": "Calculé comme `width/height`, donc pour une image 1920x1080px, cela sera `1.7778`. Sera automatiquement calculé si omis",
+    "contain": "Empêche l'image d'être rognée si elle ne rentre pas",
+    "eager": "Force le contenu des composants à effectuer le rendu sur les composants montés. Ceci est utile si vous avez du contenu qui ne sera pas rendu dans le DOM que vous voulez explorer pour le référencement.",
+    "gradient": "Affiche un dégradé sur l'image. Ne supporte que [linear-gradient](https://developer.mozilla.org/fr-US/docs/Web/CSS/linear-gradient), tout autre chose devra être faite par classes (voir exemples)",
+    "lazySrc": "Quelque chose à afficher en attendant que l'image principale soit chargée, typiquement une petite vignette encodée en base64. A un léger filtre flou appliqué.\n\nUtilisez [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) pour générer automatiquement",
+    "options": "Options qui sont passées au constructeur [Intersection observateur](https://developer.mozilla.org/fr-US/docs/Web/API/Intersection_Observer_API).",
+    "position": "Remplace la valeur par défaut pour changer les parties à rogner. Utilise la même syntaxe que [`background-position`](https://developer.mozilla.org/fr-US/docs/Web/CSS/background-position)",
+    "sizes": "Pour une utilisation avec « srcset », voir [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-sizes)",
+    "src": "L’URL de l’image. Cette propriété est obligatoire",
+    "srcset": "Un ensemble d'images alternatives à utiliser en fonction de la taille de l'appareil. [Lire plus...](https://developer.mozilla.org/fr-US/docs/Web/HTML/Element/img#attr-srcset)",
+    "transition": "La transition à utiliser lors du passage de `lazy-src` à `src`"
+  },
+  "slots": {
+    "placeholder": "Slot pour le placeholder d'image"
+  },
+  "events": {
+    "error": "Émis lorsqu'il y a une erreur",
+    "load": "Émis lorsque l'image est chargée",
+    "loadstart": "Emitted when the image starts to load"
+  }
+}

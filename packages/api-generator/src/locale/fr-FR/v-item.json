@@ -1,0 +1,7 @@
+{
+  "props": {
+    "activeClass": "Configurez la classe CSS active appliquée lorsque le lien est actif. Vous pouvez trouver plus d'informations sur le prop [**active-class** ](https://router.vuejs.org/api/#active-class) sur la documentation du routeur de vue.",
+    "disabled": "Supprime la capacité de cliquer ou de cibler un composant.",
+    "value": "La valeur utilisée lorsque le composant est sélectionné dans un groupe. Si non fourni, l'index sera utilisé."
+  }
+}
