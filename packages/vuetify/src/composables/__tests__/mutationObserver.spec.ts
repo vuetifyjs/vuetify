@@ -3,7 +3,6 @@ import { useMutationObserver } from '../mutationObserver'
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { expect } from 'vitest'
 import { h } from 'vue'
 
 describe('mutationObserver', () => {

@@ -67,7 +67,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/pnpm-install
-      - run: pnpm run test
+      - run: pnpm run test --project unit
         working-directory: ./packages/vuetify
 
   test-e2e:
@@ -78,20 +78,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/pnpm-install
-      - run: pnpm cy:run --record --parallel --ci-build-id $GITHUB_RUN_ID
-        if: ${{ !startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs' }}
+      - run: pnpm run test --project browser
         working-directory: ./packages/vuetify
-        env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-      - run: pnpm cy:run
-        if: ${{ !startswith(github.ref, 'refs/tags/v') && github.repository_owner != 'vuetifyjs' }}
-        working-directory: ./packages/vuetify
-      - uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: ./packages/vuetify/cypress/screenshots/
-          if-no-files-found: ignore
 
   deploy:
     needs: [lint, test-unit, test-e2e, build-vuetify]
@@ -151,7 +139,7 @@ jobs:
           name: docs-dist
           path: packages/docs/dist
 
-  publish-docs:
+  publish-docs-vercel:
     needs: [lint, test-unit, build-docs]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
@@ -165,3 +153,34 @@ jobs:
       - run: node scripts/deploy-and-alias.js ${{ github.ref }}
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
+
+  publish-docs-coolify:
+    needs: [lint, test-unit, build-docs]
+    runs-on: ubuntu-latest
+    environment: Production
+    if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/download-artifact
+        with:
+          name: docs-dist
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN  }}
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/vuetifyjs/docs
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+      - name: Deploy to Coolify
+        run: |
+          curl --request GET '${{ secrets.COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'

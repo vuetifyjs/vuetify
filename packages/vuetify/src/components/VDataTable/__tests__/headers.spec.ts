@@ -1,5 +1,4 @@
 // Utilities
-import { expect, it } from 'vitest'
 import { createHeaders } from '../composables/headers'
 
 describe('VDataTable headers', () => {

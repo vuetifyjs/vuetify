@@ -2,7 +2,6 @@
 import Resize from '../'
 
 // Utilities
-import { expect, it } from 'vitest'
 
 // Types
 import type { Mock } from 'vitest'
