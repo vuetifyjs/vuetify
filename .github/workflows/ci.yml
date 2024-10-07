@@ -4,9 +4,6 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 jobs:
   close:
     runs-on: ubuntu-22.04
@@ -99,23 +96,36 @@ jobs:
 
   publish-docs:
     needs: [lint, test]
+    if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && github.ref == 'refs/heads/v2-stable'
     runs-on: ubuntu-22.04
-    if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/v2-stable' || github.ref == 'refs/heads/v2-dev')
+    environment: v2-stable
     steps:
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            **/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
-      - run: yarn global add vercel
-
+          cache: 'yarn'
+          node-version-file: '.nvmrc'
+      - run: yarn install --frozen-lockfile
       - run: yarn run build:modified
         working-directory: ./packages/docs
-      - run: node scripts/deploy-and-alias.js ${{ github.ref }}
-        env:
-          NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
+      - run: yarn build
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN  }}
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/vuetifyjs/docs
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+      - name: Deploy to Coolify
+        run: |
+          curl --request GET '${{ secrets.COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'
