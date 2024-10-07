@@ -44,5 +44,6 @@
     "typestrict": "^1.0.2",
     "vue": "^2.6.6",
     "vue-template-compiler": "^2.6.6"
-  }
+  },
+  "packageManager": "yarn@1.22.5"
 }
