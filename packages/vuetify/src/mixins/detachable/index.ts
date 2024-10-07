@@ -5,6 +5,7 @@ import Bootable from '../bootable'
 import { getObjectValueByPath } from '../../util/helpers'
 import mixins, { ExtractVue } from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
+import { attachedRoot } from '../../util/dom'
 
 // Types
 import { PropOptions } from 'vue'
@@ -143,13 +144,20 @@ export default mixins<options &
         this.attach === 'attach' // If bound as boolean prop in pug (v-menu(attach))
       ) return
 
+      const root = this.$el ? attachedRoot(this.$el) : null
       let target
       if (this.attach === false) {
         // Default, detach to app
-        target = document.querySelector('[data-app]')
+        target =
+          (root)
+            ? root.querySelector('[data-app]')
+            : document.querySelector('[data-app]')
       } else if (typeof this.attach === 'string') {
         // CSS selector
-        target = document.querySelector(this.attach)
+        target =
+          (root)
+            ? root.querySelector(this.attach)
+            : document.querySelector(this.attach)
       } else {
         // DOM Element
         target = this.attach

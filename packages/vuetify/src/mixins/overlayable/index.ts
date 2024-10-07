@@ -9,6 +9,7 @@ import {
   getZIndex,
   composedPath,
 } from '../../util/helpers'
+import { attachedRoot } from '../../util/dom'
 
 // Types
 import Vue from 'vue'
@@ -71,10 +72,10 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       })
 
       overlay.$mount()
-
+      const root = this.$el ? attachedRoot(this.$el) : null
       const parent = this.absolute
         ? this.$el.parentNode
-        : document.querySelector('[data-app]')
+        : (root ? root.querySelector('[data-app]') : document.querySelector('[data-app]'))
 
       parent && parent.insertBefore(overlay.$el, parent.firstChild)
 
