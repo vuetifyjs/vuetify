@@ -66,3 +66,5 @@ declare module 'virtual:examples' {
 }
 
 declare module 'vue-instantsearch/vue3/es/src/instantsearch.js'
+
+declare module 'async-es/eachLimit'

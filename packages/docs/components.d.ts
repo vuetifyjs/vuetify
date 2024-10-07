@@ -76,6 +76,7 @@ declare module 'vue' {
     AppSettingsOptionsBannerOption: typeof import('./src/components/app/settings/options/BannerOption.vue')['default']
     AppSettingsOptionsCodeOption: typeof import('./src/components/app/settings/options/CodeOption.vue')['default']
     AppSettingsOptionsNotificationsOption: typeof import('./src/components/app/settings/options/NotificationsOption.vue')['default']
+    AppSettingsOptionsOfflineOption: typeof import('./src/components/app/settings/options/OfflineOption.vue')['default']
     AppSettingsOptionsPinOption: typeof import('./src/components/app/settings/options/PinOption.vue')['default']
     AppSettingsOptionsQuickbarOption: typeof import('./src/components/app/settings/options/QuickbarOption.vue')['default']
     AppSettingsOptionsRailDrawerOption: typeof import('./src/components/app/settings/options/RailDrawerOption.vue')['default']

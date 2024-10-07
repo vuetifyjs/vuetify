@@ -2,18 +2,13 @@
 import type { Router } from 'vue-router'
 
 export async function installPwa (router: Router) {
-  await router.isReady()
+  const store = usePwaStore()
 
-  let pendingUpdate = false
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.addEventListener('controllerchange', async () => {
-      pendingUpdate = true
-    })
-  }
+  await router.isReady()
 
   router.beforeEach(async (to, from) => {
     if (to.path !== from.path) {
-      if (pendingUpdate) {
+      if (store.pendingUpdate) {
         console.log('Reloading page to update service worker')
         window.location.pathname = to.fullPath
       }
@@ -23,4 +18,17 @@ export async function installPwa (router: Router) {
       })
     }
   })
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.addEventListener('controllerchange', async () => {
+      console.log('controllerchange')
+      store.pendingUpdate = true
+    })
+
+    if (store.availableOffline) {
+      store.registerWorker()
+    } else if (localStorage.getItem('vuetify:availableOffline') == null) {
+      store.removeWorker()
+    }
+  }
 }
