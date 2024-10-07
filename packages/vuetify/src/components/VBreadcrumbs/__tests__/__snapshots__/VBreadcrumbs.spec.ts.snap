@@ -8,7 +8,9 @@ exports[`VBreadcrumbs.ts should have breadcrumbs classes 1`] = `
 exports[`VBreadcrumbs.ts should render items without slot 1`] = `
 <ul class="v-breadcrumbs theme--light">
   <li>
-    <div class="v-breadcrumbs__item">
+    <div tabindex="0"
+         class="v-breadcrumbs__item"
+    >
       a
     </div>
   </li>
@@ -16,7 +18,9 @@ exports[`VBreadcrumbs.ts should render items without slot 1`] = `
     /
   </li>
   <li>
-    <div class="v-breadcrumbs__item">
+    <div tabindex="0"
+         class="v-breadcrumbs__item"
+    >
       b
     </div>
   </li>
@@ -24,7 +28,9 @@ exports[`VBreadcrumbs.ts should render items without slot 1`] = `
     /
   </li>
   <li>
-    <div class="v-breadcrumbs__item">
+    <div tabindex="0"
+         class="v-breadcrumbs__item"
+    >
       c
     </div>
   </li>
@@ -32,7 +38,9 @@ exports[`VBreadcrumbs.ts should render items without slot 1`] = `
     /
   </li>
   <li>
-    <div class="v-breadcrumbs__item">
+    <div tabindex="0"
+         class="v-breadcrumbs__item"
+    >
       d
     </div>
   </li>
@@ -42,7 +50,9 @@ exports[`VBreadcrumbs.ts should render items without slot 1`] = `
 exports[`VBreadcrumbs.ts should use a custom divider slot 1`] = `
 <ul class="v-breadcrumbs theme--light">
   <li>
-    <div class="v-breadcrumbs__item">
+    <div tabindex="0"
+         class="v-breadcrumbs__item"
+    >
       a
     </div>
   </li>
@@ -50,7 +60,9 @@ exports[`VBreadcrumbs.ts should use a custom divider slot 1`] = `
     /divider/
   </li>
   <li>
-    <div class="v-breadcrumbs__item">
+    <div tabindex="0"
+         class="v-breadcrumbs__item"
+    >
       b
     </div>
   </li>
@@ -58,7 +70,9 @@ exports[`VBreadcrumbs.ts should use a custom divider slot 1`] = `
     /divider/
   </li>
   <li>
-    <div class="v-breadcrumbs__item">
+    <div tabindex="0"
+         class="v-breadcrumbs__item"
+    >
       c
     </div>
   </li>
@@ -66,7 +80,9 @@ exports[`VBreadcrumbs.ts should use a custom divider slot 1`] = `
     /divider/
   </li>
   <li>
-    <div class="v-breadcrumbs__item">
+    <div tabindex="0"
+         class="v-breadcrumbs__item"
+    >
       d
     </div>
   </li>
@@ -76,7 +92,9 @@ exports[`VBreadcrumbs.ts should use a custom divider slot 1`] = `
 exports[`VBreadcrumbs.ts should use slot to render items if present 1`] = `
 <ul class="v-breadcrumbs theme--light">
   <li>
-    <div class="v-breadcrumbs__item">
+    <div tabindex="0"
+         class="v-breadcrumbs__item"
+    >
       A
     </div>
   </li>
@@ -84,7 +102,9 @@ exports[`VBreadcrumbs.ts should use slot to render items if present 1`] = `
     /
   </li>
   <li>
-    <div class="v-breadcrumbs__item">
+    <div tabindex="0"
+         class="v-breadcrumbs__item"
+    >
       B
     </div>
   </li>
@@ -92,7 +112,9 @@ exports[`VBreadcrumbs.ts should use slot to render items if present 1`] = `
     /
   </li>
   <li>
-    <div class="v-breadcrumbs__item">
+    <div tabindex="0"
+         class="v-breadcrumbs__item"
+    >
       C
     </div>
   </li>
@@ -100,7 +122,9 @@ exports[`VBreadcrumbs.ts should use slot to render items if present 1`] = `
     /
   </li>
   <li>
-    <div class="v-breadcrumbs__item">
+    <div tabindex="0"
+         class="v-breadcrumbs__item"
+    >
       D
     </div>
   </li>
