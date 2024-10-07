@@ -46,7 +46,7 @@ export default VSelect.extend({
     },
     noFilter: Boolean,
     searchInput: {
-      type: String as PropType<string | null>,
+      type: String as PropType<String | null>,
     },
   },
 
@@ -91,7 +91,7 @@ export default VSelect.extend({
       })
     },
     internalSearch: {
-      get (): string | null {
+      get (): String | null {
         return this.lazySearch
       },
       set (val: any) { // TODO: this should be `string | null` but it breaks lots of other types
@@ -200,6 +200,9 @@ export default VSelect.extend({
   },
 
   created () {
+    if (this.searchInput) {
+      this.selectItem(this.searchInput)
+    }
     this.setSearch()
   },
 
