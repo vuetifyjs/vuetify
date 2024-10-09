@@ -233,7 +233,13 @@ async function cacheManifestEntries (manifest) {
   }
   const cache = await openCache('precache')
   await eachLimit(urlsToCacheKeys, 10, async ([url, cacheKey]) => {
-    const response = ensureCacheableResponse(await fetch(url))
+    let response
+    try {
+      response = ensureCacheableResponse(await fetch(url))
+    } catch (err) {
+      console.warn(`[SW] Failed to cache ${url}`, err.message)
+      return
+    }
     if (response.status === 200) {
       await cache.put(cacheKey, response)
     } else {
