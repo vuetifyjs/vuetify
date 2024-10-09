@@ -237,7 +237,7 @@ export function useDisplay (
       return display.width.value < props.mobileBreakpoint
     } else if (props.mobileBreakpoint) {
       return display.width.value < display.thresholds.value[props.mobileBreakpoint]
-    } else if (props.mobile == null) {
+    } else if (props.mobile === null) {
       return display.mobile.value
     } else {
       return false
