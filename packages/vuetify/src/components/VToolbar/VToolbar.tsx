@@ -13,6 +13,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { forwardRefs } from '@/composables/forwardRefs.ts'
 import { useRtl } from '@/composables/locale'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
@@ -226,10 +227,11 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
       )
     })
 
-    return {
+    return forwardRefs({
       contentHeight,
       extensionHeight,
-    }
+      calculateHeight,
+    })
   },
 })
 
