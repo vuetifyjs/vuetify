@@ -40,6 +40,10 @@ export const makeVDatePickerMonthProps = propsFactory({
     type: String,
     default: 'picker-reverse-transition',
   },
+  allowOneDayRange: {
+    type: Boolean,
+    default: false,
+  },
 
   ...makeCalendarProps(),
 }, 'VDatePickerMonth')
@@ -102,9 +106,15 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
         model.value = [rangeStart.value]
       } else if (!rangeStop.value) {
         if (adapter.isSameDay(_value, rangeStart.value)) {
-          rangeStart.value = undefined
-          model.value = []
-          return
+          if (props.allowOneDayRange) {
+            rangeStop.value = adapter.endOfDay(_value)
+            model.value = [rangeStart.value]
+            return
+          } else {
+            rangeStart.value = undefined
+            model.value = []
+            return
+          }
         } else if (adapter.isBefore(_value, rangeStart.value)) {
           rangeStop.value = adapter.endOfDay(rangeStart.value)
           rangeStart.value = _value
