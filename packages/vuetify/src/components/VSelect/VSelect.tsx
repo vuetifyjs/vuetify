@@ -2,13 +2,14 @@
 import './VSelect.sass'
 
 // Components
+import { VDivider } from '../VDivider'
 import { VDialogTransition } from '@/components/transitions'
 import { VAvatar } from '@/components/VAvatar'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
-import { VList, VListItem } from '@/components/VList'
+import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
@@ -18,7 +19,7 @@ import { useScrolling } from './useScrolling'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
-import { makeItemsProps, useItems } from '@/composables/list-items'
+import { flatten, makeItemsProps, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
@@ -88,7 +89,7 @@ export const makeSelectProps = propsFactory({
   openOnClear: Boolean,
   itemColor: String,
 
-  ...makeItemsProps({ itemChildren: false }),
+  ...makeItemsProps(),
 }, 'Select')
 
 export const makeVSelectProps = propsFactory({
@@ -123,6 +124,7 @@ export const VSelect = genericComponent<new <
     item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     chip: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     selection: { item: ListItem<Item>, index: number }
+    subheader: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     'prepend-item': never
     'append-item': never
     'no-data': never
@@ -162,6 +164,7 @@ export const VSelect = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
+
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function' ? props.counterValue(model.value)
         : typeof props.counterValue === 'number' ? props.counterValue
@@ -177,9 +180,9 @@ export const VSelect = genericComponent<new <
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
-        return items.value.filter(item => !model.value.some(s => props.valueComparator(s, item)))
+        return flatten(items.value.filter(item => !model.value.some(s => props.valueComparator(s, item))))
       }
-      return items.value
+      return flatten(items.value)
     })
 
     const menuDisabled = computed(() => (
@@ -250,7 +253,7 @@ export const VSelect = genericComponent<new <
       const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
       if (item !== undefined) {
         model.value = [item]
-        const index = displayItems.value.indexOf(item)
+        const index = displayItems.value.findIndex(flatItem => flatItem.type === 'item' && flatItem.item === item)
         IN_BROWSER && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
@@ -314,7 +317,7 @@ export const VSelect = genericComponent<new <
     watch(menu, () => {
       if (!props.hideSelected && menu.value && model.value.length) {
         const index = displayItems.value.findIndex(
-          item => model.value.some(s => props.valueComparator(s.value, item.value))
+          item => model.value.some(s => item.type === 'item' && props.valueComparator(s.value, item?.item.value))
         )
         IN_BROWSER && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
@@ -418,7 +421,18 @@ export const VSelect = genericComponent<new <
                       ))}
 
                       <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value }>
-                        { ({ item, index, itemRef }) => {
+                        { ({ item: virtualItem, index, itemRef }) => {
+                          if (virtualItem.type === 'divider') {
+                            return <VDivider ref={ itemRef } key={ index } />
+                          }
+
+                          const item = virtualItem.item
+
+                          if (virtualItem.type === 'subheader') {
+                            return slots.subheader?.({ item, index, props: item.props }) ??
+                              <VListSubheader ref={ itemRef } key={ index }>{ item.title }</VListSubheader>
+                          }
+
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: index,

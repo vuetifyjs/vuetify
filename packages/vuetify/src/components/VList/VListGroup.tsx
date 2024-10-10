@@ -47,6 +47,7 @@ export const makeVListGroupProps = propsFactory({
   appendIcon: IconValue,
   fluid: Boolean,
   subgroup: Boolean,
+  divider: Boolean,
   title: String,
   value: null,
 

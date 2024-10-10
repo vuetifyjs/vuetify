@@ -12,8 +12,8 @@ import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { InternalListItem } from '@/components/VList/VList'
 import type { VListItemSlots } from '@/components/VList/VListItem'
+import type { ListItem } from '@/composables/list-items'
 import type { SelectStrategyProp } from '@/composables/nested/nested'
 import type { GenericProps } from '@/util'
 
@@ -21,7 +21,7 @@ export type VTreeviewChildrenSlots<T> = {
   [K in keyof Omit<VListItemSlots, 'default'>]: VListItemSlots[K] & { item: T }
 } & {
   default: never
-  item: { props: InternalListItem['props'] }
+  item: { item: ListItem, props: ListItem['props'], index: number }
 }
 
 export const makeVTreeviewChildrenProps = propsFactory({
@@ -30,7 +30,7 @@ export const makeVTreeviewChildrenProps = propsFactory({
     type: String,
     default: '$loading',
   },
-  items: Array as PropType<readonly InternalListItem[]>,
+  items: Array as PropType<readonly ListItem[]>,
   openOnClick: {
     type: Boolean,
     default: undefined,
@@ -47,7 +47,7 @@ export const makeVTreeviewChildrenProps = propsFactory({
   selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
 }, 'VTreeviewChildren')
 
-export const VTreeviewChildren = genericComponent<new <T extends InternalListItem>(
+export const VTreeviewChildren = genericComponent<new <T extends ListItem>(
   props: {
     items?: readonly T[]
   },
@@ -85,7 +85,9 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       }
     }
 
-    return () => slots.default?.() ?? props.items?.map(({ children, props: itemProps, raw: item }) => {
+    return () => slots.default?.() ?? props.items?.map((internalItem, index) => {
+      const { children, props: itemProps, raw: item } = internalItem
+
       const loading = isLoading.value === item.value
       const slotsWithItem = {
         prepend: slotProps => (
@@ -156,7 +158,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
           }}
         </VTreeviewGroup>
       ) : (
-        slots.item?.({ props: itemProps }) ?? (
+        slots.item?.({ item: internalItem, props: itemProps, index }) ?? (
           <VTreeviewItem
             { ...itemProps }
             value={ props.returnObject ? toRaw(item) : itemProps.value }

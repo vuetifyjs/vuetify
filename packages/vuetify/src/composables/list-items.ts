@@ -17,8 +17,8 @@ export interface ListItem<T = any> extends InternalItem<T> {
   children?: ListItem<T>[]
 }
 
-export interface ItemProps {
-  items: any[]
+export interface ItemProps<T = any> {
+  items: T[]
   itemTitle: SelectItemKey
   itemValue: SelectItemKey
   itemChildren: SelectItemKey
@@ -30,7 +30,7 @@ export interface ItemProps {
 // Composables
 export const makeItemsProps = propsFactory({
   items: {
-    type: Array as PropType<ItemProps['items']>,
+    type: Array as PropType<ItemProps<any>['items']>,
     default: () => ([]),
   },
   itemTitle: {
@@ -93,7 +93,7 @@ export function transformItems (props: Omit<ItemProps, 'items'>, items: ItemProp
   return array
 }
 
-export function useItems (props: ItemProps) {
+export function useItems <T> (props: ItemProps<T>) {
   const items = computed(() => transformItems(props, props.items))
   const hasNullItem = computed(() => items.value.some(item => item.value === null))
 
@@ -121,4 +121,25 @@ export function useItems (props: ItemProps) {
   }
 
   return { items, transformIn, transformOut }
+}
+
+type FlatListItem = { type: 'divider' } | { type: 'item', item: ListItem } | { type: 'subheader', item: ListItem }
+
+export function flatten (items: ListItem[]): FlatListItem[] {
+  const arr = []
+
+  for (const item of items) {
+    if (item.children?.length) {
+      arr.push({ type: 'subheader' as const, item })
+      arr.push(...flatten(item.children))
+    } else {
+      arr.push({ type: 'item' as const, item })
+    }
+
+    if (item.props.divider) {
+      arr.push({ type: 'divider' as const })
+    }
+  }
+
+  return arr
 }

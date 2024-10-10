@@ -2,12 +2,13 @@
 import './VAutocomplete.sass'
 
 // Components
+import { VDivider } from '../VDivider'
 import { VAvatar } from '@/components/VAvatar'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
-import { VList, VListItem } from '@/components/VList'
+import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
@@ -16,10 +17,11 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 // Composables
 import { useScrolling } from '../VSelect/useScrolling'
 import { useTextColor } from '@/composables/color'
-import { makeFilterProps, useFilter } from '@/composables/filter'
+import { highlightResult, makeFilterProps } from '@/composables/filter'
+import { useFilterNested } from '@/composables/filterNested'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
-import { useItems } from '@/composables/list-items'
+import { flatten, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
@@ -43,25 +45,8 @@ import {
 import type { PropType } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
-import type { FilterMatch } from '@/composables/filter'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps, SelectItemKey } from '@/util'
-
-function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {
-  if (matches == null) return text
-
-  if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
-
-  return typeof matches === 'number' && ~matches
-    ? (
-      <>
-        <span class="v-autocomplete__unmask">{ text.substr(0, matches) }</span>
-        <span class="v-autocomplete__mask">{ text.substr(matches, length) }</span>
-        <span class="v-autocomplete__unmask">{ text.substr(matches + length) }</span>
-      </>
-    )
-    : text
-}
 
 type Primitive = string | number | boolean | symbol
 
@@ -113,6 +98,7 @@ export const VAutocomplete = genericComponent<new <
     item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     chip: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     selection: { item: ListItem<Item>, index: number }
+    subheader: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     'prepend-item': never
     'append-item': never
     'no-data': never
@@ -167,7 +153,7 @@ export const VAutocomplete = genericComponent<new <
         : model.value.length
     })
     const form = useForm()
-    const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
+    const { filteredItems, getMatches } = useFilterNested(props, items, computed(() => isPristine.value ? undefined : search.value))
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
@@ -180,6 +166,7 @@ export const VAutocomplete = genericComponent<new <
     const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
 
     const selectedValues = computed(() => model.value.map(selection => selection.props.value))
+    const flatItems = computed(() => flatten(displayItems.value))
 
     const highlightFirst = computed(() => {
       const selectFirst = props.autoSelectFirst === true ||
@@ -496,8 +483,19 @@ export const VAutocomplete = genericComponent<new <
                         <VListItem title={ t(props.noDataText) } />
                       ))}
 
-                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value }>
-                        { ({ item, index, itemRef }) => {
+                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ flatItems.value }>
+                        { ({ item: virtualItem, index, itemRef }) => {
+                          if (virtualItem.type === 'divider') {
+                            return <VDivider ref={ itemRef } key={ index } />
+                          }
+
+                          const item = virtualItem.item
+
+                          if (virtualItem.type === 'subheader') {
+                            return slots.subheader?.({ item, index, props: item.props }) ??
+                              <VListSubheader ref={ itemRef } key={ index }>{ item.title }</VListSubheader>
+                          }
+
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: index,
@@ -535,7 +533,7 @@ export const VAutocomplete = genericComponent<new <
                               title: () => {
                                 return isPristine.value
                                   ? item.title
-                                  : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
+                                  : highlightResult('v-autocomplete', item.title, getMatches(item)?.title, search.value?.length ?? 0)
                               },
                             }}
                           </VListItem>

@@ -1,10 +1,11 @@
 // Components
 import { makeVTreeviewChildrenProps, VTreeviewChildren } from './VTreeviewChildren'
-import { makeVListProps, useListItems, VList } from '@/components/VList/VList'
+import { makeVListProps, VList } from '@/components/VList/VList'
 
 // Composables
 import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
+import { useItems } from '@/composables/list-items'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -13,7 +14,6 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
-import type { InternalListItem } from '@/components/VList/VList'
 import type { VListChildrenSlots } from '@/components/VList/VListChildren'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps } from '@/util'
@@ -36,7 +36,7 @@ export const makeVTreeviewProps = propsFactory({
     collapseIcon: '$treeviewCollapse',
     expandIcon: '$treeviewExpand',
     slim: true,
-  }), ['itemType', 'nav', 'openStrategy']),
+  }), ['nav', 'openStrategy']),
   modelValue: {
     type: Array,
     default: () => ([]),
@@ -47,7 +47,7 @@ export const VTreeview = genericComponent<new <T>(
   props: {
     items?: T[]
   },
-  slots: VListChildrenSlots<T>
+  slots: VListChildrenSlots<ListItem<T>>
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VTreeview',
 
@@ -63,7 +63,7 @@ export const VTreeview = genericComponent<new <T>(
   },
 
   setup (props, { slots }) {
-    const { items } = useListItems(props)
+    const { items } = useItems(props)
     const activeColor = toRef(props, 'activeColor')
     const baseColor = toRef(props, 'baseColor')
     const color = toRef(props, 'color')
@@ -110,7 +110,7 @@ export const VTreeview = genericComponent<new <T>(
       return arr
     }
 
-    function openAll (items: InternalListItem<any>[]) {
+    function openAll (items: ListItem<any>[]) {
       let ids: any[] = []
 
       for (const i of items) {
