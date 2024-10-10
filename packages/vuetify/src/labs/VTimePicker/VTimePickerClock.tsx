@@ -197,9 +197,13 @@ export const VTimePickerClock = genericComponent()({
     }
 
     function onMouseDown (e: MouseEvent | TouchEvent) {
+<<<<<<< fix/v3-time-picker-stop-prop -- Incoming Change
+      e.stopPropagation()
+=======
       if (props.disabled) return
 
       e.preventDefault()
+>>>>>>> master -- Current Change
 
       window.addEventListener('mousemove', onDragMove)
       window.addEventListener('touchmove', onDragMove)
@@ -234,6 +238,7 @@ export const VTimePickerClock = genericComponent()({
               'v-time-picker-clock--readonly': props.readonly,
             },
           ]}
+          onClick={ (e: Event) => e.stopPropagation() }
           onMousedown={ onMouseDown }
           onTouchstart={ onMouseDown }
           onWheel={ wheel }
