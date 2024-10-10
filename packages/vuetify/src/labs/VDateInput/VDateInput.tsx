@@ -15,6 +15,8 @@ import { computed, shallowRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
+import type { DateIOFormats } from '@date-io/core/IUtils'
+
 export interface VDateInputSlots {
   default: never
 }
@@ -32,6 +34,10 @@ export const makeVDateInputProps = propsFactory({
     weeksInMonth: 'dynamic' as const,
     hideHeader: true,
   }), ['active']),
+  format: {
+    type: String as () => keyof DateIOFormats,
+    default: 'keyboardDate',
+  },
 }, 'VDateInput')
 
 export const VDateInput = genericComponent()({
@@ -64,11 +70,11 @@ export const VDateInput = genericComponent()({
         const end = value[value.length - 1]
 
         return adapter.isValid(start) && adapter.isValid(end)
-          ? `${adapter.format(start, 'keyboardDate')} - ${adapter.format(end, 'keyboardDate')}`
+          ? `${adapter.format(start, props.format)} - ${adapter.format(end, props.format)}`
           : ''
       }
 
-      return adapter.isValid(model.value) ? adapter.format(model.value, 'keyboardDate') : ''
+      return adapter.isValid(model.value) ? adapter.format(model.value, props.format) : ''
     })
 
     const isInteractive = computed(() => !props.disabled && !props.readonly)
