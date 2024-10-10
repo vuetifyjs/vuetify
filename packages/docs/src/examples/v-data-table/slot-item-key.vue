@@ -3,7 +3,7 @@
     :headers="headers"
     :items="vegetables"
   >
-    <template v-slot:item.calories="{ value }">
+    <template v-slot:[`item.calories`]="{ value }">
       <v-chip :color="getColor(value)">
         {{ value }}
       </v-chip>
