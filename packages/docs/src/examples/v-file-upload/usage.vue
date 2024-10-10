@@ -10,9 +10,11 @@
     </div>
 
     <template v-slot:configuration>
-      <v-checkbox v-model="clear" label="Clearable"></v-checkbox>
+      <v-text-field v-model="title" label="Title"></v-text-field>
 
       <v-checkbox v-model="disabled" label="Disabled"></v-checkbox>
+
+      <v-checkbox v-model="clear" label="Clearable"></v-checkbox>
     </template>
   </ExamplesUsageExample>
 </template>
@@ -20,16 +22,18 @@
 <script setup>
   const name = 'v-file-upload'
   const model = ref('default')
-  const options = []
+  const options = ['comfortable', 'compact']
   const clear = ref(false)
   const counter = ref(false)
   const disabled = ref(false)
+  const title = ref()
   const props = computed(() => {
     return {
       clearable: clear.value || undefined,
       counter: counter.value || undefined,
       disabled: disabled.value || undefined,
-      label: 'File upload',
+      density: model.value,
+      title: title.value || undefined,
       variant: model.value === 'default' ? undefined : model.value,
     }
   })

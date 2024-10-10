@@ -16,13 +16,11 @@ features:
 
 # File upload
 
-
-
 <PageFeatures />
 
 ::: warning
 
-This feature requires [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
+This feature requires [v3.7.3](/getting-started/release-notes/?version=v3.7.3)
 
 :::
 
@@ -42,6 +40,8 @@ export default createVuetify({
 
 ## Usage
 
+The `v-file-upload` component is a drag and drop area for uploading files. It can be customized with slots and has support for density and multiple styles.
+
 <ExamplesUsage name="v-file-upload" />
 
 <PromotedEntry />
@@ -51,10 +51,49 @@ export default createVuetify({
 | Component | Description |
 | - | - |
 | [v-file-upload](/api/v-file-upload/) | Primary Component |
+| [v-file-upload-item](/api/v-file-upload-item/) | Item Component |
 | [v-file-input](/api/v-file-input/) | File input component |
 
 <ApiInline hide-links />
 
 ## Guide
 
-TODO
+The v-file-upload component is a more visual counterpart to the [v-file-input](/components/file-inputs/) component. It provides a drag and drop area for files, and can be customized with slots.
+
+### Props
+
+Utilize various properties to customize the look and feel of the `v-file-upload` component.
+
+#### Density
+
+The **density** prop is used to control the vertical space the upload takes up.
+
+<ExamplesExample file="v-file-upload/prop-density" />
+
+#### Content
+
+Use the **browse-text**, **divider-text**, **icon**, **title**, or **subtitle** props to customize the text displayed in the component.
+
+<ExamplesExample file="v-file-upload/prop-content" />
+
+#### Disabled
+
+The **disabled** property reduces the opacity of the component and prevents interaction.
+
+<ExamplesExample file="v-file-upload/prop-disabled" />
+
+#### Scrim
+
+The **scrim** property allows you to set a colored scrim when hovering over the component with files.
+
+<ExamplesExample file="v-file-upload/prop-scrim" />
+
+### Slots
+
+The `v-file-upload` component has several slots that can be used to customize the component.
+
+#### Item
+
+The **item** slot is used to customize the appearance of the file item.
+
+<ExamplesExample file="v-file-upload/slot-item" />
