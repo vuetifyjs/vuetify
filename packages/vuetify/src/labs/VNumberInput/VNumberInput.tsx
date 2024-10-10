@@ -29,7 +29,7 @@ type VNumberInputSlots = Omit<VTextFieldSlots, 'default'> & {
   decrement: ControlSlot
 }
 
-type ControlVariant = 'default' | 'stacked' | 'split'
+type ControlVariant = 'default' | 'stacked' | 'split' | 'hidden'
 
 const makeVNumberInputProps = propsFactory({
   controlVariant: {
@@ -292,7 +292,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
               { incrementControlNode() }
             </div>
-          ) : (!props.reverse
+          ) : (!props.reverse && controlVariant.value !== 'hidden'
             ? <>{ dividerNode() }{ controlNode() }</>
             : undefined)
 
@@ -306,7 +306,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
               <VDivider vertical />
             </div>
-          ) : (props.reverse
+          ) : (props.reverse && controlVariant.value !== 'hidden'
             ? <>{ controlNode() }{ dividerNode() }</>
             : undefined)
 
