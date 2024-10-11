@@ -1,6 +1,6 @@
 // Utilities
 import { h, mergeProps, render, resolveComponent } from 'vue'
-import { isObject } from '@/util'
+import { consoleError, isObject } from '@/util'
 
 // Types
 import type {
@@ -118,7 +118,8 @@ function findComponentParent (vnode: VNode, root: ComponentInternalInstance): Co
     return false
   }
   if (!walk([root.subTree])) {
-    throw new Error('Could not find original vnode')
+    consoleError('Could not find original vnode, component will not inherit provides')
+    return root
   }
 
   // Return the first component parent
