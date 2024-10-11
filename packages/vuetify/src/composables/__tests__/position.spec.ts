@@ -2,7 +2,6 @@
 import { usePosition } from '../position'
 
 // Utilities
-import { expect, it } from 'vitest'
 
 // Types
 import type { PositionProps } from '../position'

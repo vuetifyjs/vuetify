@@ -27,7 +27,13 @@ export async function cacheManifestEntries (
   let count = 0
   const total = urlsToCacheKeys.size
   await eachLimit(urlsToCacheKeys, 4, async ([url, cacheKey]: [string, string]) => {
-    const response = ensureCacheableResponse(await fetch(url))
+    let response
+    try {
+      response = ensureCacheableResponse(await fetch(url))
+    } catch (err: any) {
+      console.warn(`[SW] Failed to cache ${url}`, err.message)
+      return
+    }
     if (response.status === 200) {
       await cache.put(cacheKey, response)
     } else {

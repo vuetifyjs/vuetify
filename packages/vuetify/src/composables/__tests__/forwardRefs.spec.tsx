@@ -3,7 +3,6 @@ import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { expect, it } from 'vitest'
 import { defineComponent, ref } from 'vue'
 import { useRender } from '@/util'
 

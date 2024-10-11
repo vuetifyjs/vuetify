@@ -2,7 +2,6 @@
 import { useSize } from '../size'
 
 // Utilities
-import { expect, it } from 'vitest'
 
 // Utilities
 

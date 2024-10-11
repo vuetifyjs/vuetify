@@ -3,7 +3,6 @@ import { makeRoundedProps, useRounded } from '../rounded'
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { expect, it } from 'vitest'
 
 // Types
 import type { RoundedProps } from '../rounded'
