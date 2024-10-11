@@ -96,7 +96,7 @@ function findComponentParent (vnode: VNode, root: ComponentInternalInstance): Co
     for (const child of children) {
       if (!child) continue
 
-      if (child === vnode) {
+      if (child === vnode || (child.el && vnode.el && child.el === vnode.el)) {
         return true
       }
 
