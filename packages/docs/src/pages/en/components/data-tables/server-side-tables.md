@@ -16,6 +16,14 @@ Server-side Data tables are used for showing data coming from an API.
 
 <PromotedEntry />
 
+## API
+
+| Component | Description |
+| - | - |
+| [v-data-table-server](/api/v-data-table-server/) | Primary Component |
+
+<ApiInline hide-links />
+
 ## Examples
 
 ### Server-side paginate and sort

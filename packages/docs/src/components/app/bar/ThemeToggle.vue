@@ -3,6 +3,8 @@
     v-if="!hasToggle"
     :icon="icon"
     color="medium-emphasis"
+    data-umami-event="app-bar"
+    data-umami-event-type="theme-toggle"
     path="theme"
     @click="onClick"
   />
