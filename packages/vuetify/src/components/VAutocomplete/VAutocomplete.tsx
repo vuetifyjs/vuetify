@@ -19,6 +19,7 @@ import { useTextColor } from '@/composables/color'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
+import { useIsMousedown } from '@/composables/isMousedown'
 import { useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -150,6 +151,7 @@ export const VAutocomplete = genericComponent<new <
     const label = computed(() => menu.value ? props.closeText : props.openText)
     const { items, transformIn, transformOut } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(color)
+    const { isMousedown } = useIsMousedown()
     const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
       props,
@@ -373,6 +375,12 @@ export const VAutocomplete = genericComponent<new <
       }
     }
 
+    function onBlur (e: FocusEvent) {
+      if (!isMousedown.value) {
+        menu.value = false
+      }
+    }
+
     watch(isFocused, (val, oldVal) => {
       if (val === oldVal) return
 
@@ -384,7 +392,6 @@ export const VAutocomplete = genericComponent<new <
         nextTick(() => isSelecting.value = false)
       } else {
         if (!props.multiple && search.value == null) model.value = []
-        menu.value = false
         if (!model.value.some(({ title }) => title === search.value)) search.value = ''
         selectionIndex.value = -1
       }
@@ -453,6 +460,7 @@ export const VAutocomplete = genericComponent<new <
           readonly={ props.readonly }
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
+          onBlur={ onBlur }
           onMousedown:control={ onMousedownControl }
           onKeydown={ onKeydown }
         >
