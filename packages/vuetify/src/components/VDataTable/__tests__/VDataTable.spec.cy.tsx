@@ -238,6 +238,23 @@ describe('VDataTable', () => {
       .get('thead .v-selection-control').should('exist')
   })
 
+  it('should fixed header while scrolling when the height is not fixed', () => {
+    cy.mount(() => (
+      <Application>
+        <VDataTable
+        fixedHeader
+        items={[...DESSERT_ITEMS, ...DESSERT_ITEMS]}
+        headers={ DESSERT_HEADERS }
+        itemsPerPage={ 100 }
+        />
+      </Application>
+    ))
+    cy.scrollTo('bottom')
+      .get('thead').then(header => {
+        expect(header[0].getBoundingClientRect().top).to.be.eq(0)
+      })
+  })
+
   describe('slots', () => {
     it('should have top slot', () => {
       cy.mount(() => (
