@@ -75,7 +75,14 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const model = computed({
       get: () => _model.value,
       set (val) {
-        if (typeof val !== 'string') _model.value = val
+        if (val === null) {
+          _model.value = null
+          return
+        }
+
+        if (!isNaN(+val) && +val <= props.max && +val >= props.min) {
+          _model.value = +val
+        }
       },
     })
 

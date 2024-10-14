@@ -1,4 +1,5 @@
-import type { AllowedComponentProps, ComponentPublicInstance, FunctionalComponent, RenderFunction, VNodeChild, VNodeProps } from 'vue'
+import type { AllowedComponentProps, ComponentOptionsBase, VNodeChild, VNodeProps, UnwrapRef } from 'vue'
+import type { UnionToIntersection } from '@/util'
 import type { __component__ } from '@/__name__'
 
 type StripProps = keyof VNodeProps | keyof AllowedComponentProps | 'v-slots' | '$children' | `v-slot:${string}`
@@ -26,17 +27,6 @@ type Events<T> = T extends { $props: infer P extends object }
 export type ComponentProps = Props<__component__>
 export type ComponentEvents = Events<__component__>
 
-type RemoveIndex<T> = {
-  [K in keyof T as string extends K
-    ? never
-    : number extends K
-      ? never
-      : symbol extends K
-        ? never
-        : K
-  ]: T[K]
-}
-
 type Slot<T extends any[] = any[]> = (...args: T) => VNodeChild
 type Slots<
   T extends { $props: any },
@@ -50,18 +40,13 @@ type ExcludeEmpty<T> = T extends AtLeastOne<T> ? T : never
 
 export type ComponentSlots = Slots<__component__>
 
-type ExtractExposed<T> = T extends (...args: any[]) => infer R
-  ? R extends Promise<any>
-    ? never
-    : R extends RenderFunction
-      ? never
-      : R extends void
-        ? never
-        : R extends HTMLElement
-          ? never
-          : R extends object
-            ? RemoveIndex<R>
-            : never
+type ExtractExposed<T> = T extends ComponentOptionsBase<any, infer B, any, any, any, any, any, any>
+  ? B extends void ? never
+  : B extends { _allExposed: infer E } ? E
+  : B extends object ? B
+  : never
   : never
 
-export type ComponentExposed = ExtractExposed<__component__['$options']['setup']>
+type Pretty<T> = { [K in keyof T]: UnwrapRef<T[K]> }
+
+export type ComponentExposed = Pretty<UnionToIntersection<ExtractExposed<__component__['$options']>>>
