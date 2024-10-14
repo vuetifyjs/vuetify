@@ -17,6 +17,5 @@
 </template>
 
 <script setup>
-  const { t } = useI18n()
   const user = useUserStore()
 </script>
