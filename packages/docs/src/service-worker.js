@@ -1,8 +1,4 @@
-import {
-  ensureCacheableResponse,
-  getCacheKeyForUrl,
-  openCache,
-} from '@/utils/pwa'
+import { ensureCacheableResponse, openCache } from '@/utils/pwa'
 
 const MANIFEST = self.__WB_MANIFEST
 
@@ -25,38 +21,31 @@ self.addEventListener('install', () => {
   self.skipWaiting()
 })
 
-let hasModernCache = false
 self.addEventListener('activate', event => {
   console.log('[SW] Activated')
   event.waitUntil((async () => {
-    hasModernCache = await caches.has(`precache-${location.origin}`)
-    if (hasModernCache) {
-      await removeWorkboxCaches()
-      await self.clients.claim()
-    }
+    await removeWorkboxCaches()
+    await self.clients.claim()
   })())
 })
 
 self.addEventListener('fetch', event => {
-  const url = new URL(event.request.url, location.href)
+  console.log(event.request.url)
+  const url = new URL(event.request.url)
 
   if (!['http:', 'https:'].includes(url.protocol)) return
 
   if (event.request.method !== 'GET') return
 
-  if (
-    event.request.mode === 'navigate' &&
-    event.request.destination === 'document' &&
-    url.origin === self.location.origin
-  ) {
-    return event.respondWith(getFallbackDocument())
-  }
-
   if (['https://tag.researchnow.com', 'https://srv.carbonads.net', 'https://pixel.adsafeprotected.com', 'https://cdn4.buysellads.net', 'https://ad.doubleclick.net'].includes(url.origin)) {
     return
   }
 
-  if (getCacheKeyForUrl(url.href)) {
+  if (url.origin === self.location.origin) {
+    if (event.request.mode === 'navigate' &&
+      event.request.destination === 'document') {
+      return event.respondWith(matchPrecache('/_fallback.html'))
+    }
     return event.respondWith(matchPrecache(event.request))
   }
 
@@ -67,20 +56,17 @@ self.addEventListener('fetch', event => {
 
 async function matchPrecache (request) {
   const precache = await openCache('precache')
-  const matched = await precache.match(getCacheKeyForUrl(request.url))
+  const matched = await precache.match(request)
   if (matched) return matched
   const response = fetch(request)
-  const cacheKey = getCacheKeyForUrl(request.url)
-  if (cacheKey) {
-    response.then(response => {
-      response = ensureCacheableResponse(response)
-      if (response.status === 200) {
-        precache.put(cacheKey, response.clone())
-      } else {
-        console.error(`[SW] Failed to fetch missing precached asset ${request.url}`)
-      }
-    })
-  }
+  response.then(response => {
+    response = ensureCacheableResponse(response)
+    if (response.status === 200) {
+      precache.put(response.url, response.clone())
+    } else {
+      console.error(`[SW] Failed to fetch missing precached asset ${request.url}`)
+    }
+  })
   return response
 }
 
@@ -111,23 +97,6 @@ async function networkFirst (request) {
     const cached = await caches.match(request)
     return cached || Response.error()
   }
-}
-
-async function getFallbackDocument () {
-  const precache = await openCache('precache')
-
-  const response = await fetch('/_fallback.html')
-    .then(ensureCacheableResponse)
-    .catch(() => {
-      console.warn('[SW] Failed to fetch fallback document')
-    })
-
-  if (response?.status === 200) {
-    await precache.put('/_fallback.html', response.clone())
-    return response
-  }
-
-  return precache.match('/_fallback.html')
 }
 
 function removeWorkboxCaches () {

@@ -1,4 +1,4 @@
-g<template>
+<template>
   <v-navigation-drawer
     id="settings-drawer"
     v-model="app.settings"

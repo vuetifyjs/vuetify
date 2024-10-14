@@ -180,7 +180,6 @@ declare module 'vue' {
     readonly copyElementContent: UnwrapRef<typeof import('./src/utils/helpers')['copyElementContent']>
     readonly createAdProps: UnwrapRef<typeof import('./src/composables/ad')['createAdProps']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
-    readonly createCacheKey: UnwrapRef<typeof import('./src/utils/pwa')['createCacheKey']>
     readonly createOne: UnwrapRef<typeof import('@vuetify/one')['createOne']>
     readonly createPinia: UnwrapRef<typeof import('pinia')['createPinia']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
@@ -196,7 +195,6 @@ declare module 'vue' {
     readonly generatedRoutes: UnwrapRef<typeof import('./src/utils/routes')['generatedRoutes']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getBranch: UnwrapRef<typeof import('./src/utils/helpers')['getBranch']>
-    readonly getCacheKeyForUrl: UnwrapRef<typeof import('./src/utils/pwa')['getCacheKeyForUrl']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getDistance: UnwrapRef<typeof import('./src/utils/helpers')['getDistance']>
@@ -328,7 +326,6 @@ declare module '@vue/runtime-core' {
     readonly copyElementContent: UnwrapRef<typeof import('./src/utils/helpers')['copyElementContent']>
     readonly createAdProps: UnwrapRef<typeof import('./src/composables/ad')['createAdProps']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
-    readonly createCacheKey: UnwrapRef<typeof import('./src/utils/pwa')['createCacheKey']>
     readonly createOne: UnwrapRef<typeof import('@vuetify/one')['createOne']>
     readonly createPinia: UnwrapRef<typeof import('pinia')['createPinia']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
@@ -344,7 +341,6 @@ declare module '@vue/runtime-core' {
     readonly generatedRoutes: UnwrapRef<typeof import('./src/utils/routes')['generatedRoutes']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getBranch: UnwrapRef<typeof import('./src/utils/helpers')['getBranch']>
-    readonly getCacheKeyForUrl: UnwrapRef<typeof import('./src/utils/pwa')['getCacheKeyForUrl']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getDistance: UnwrapRef<typeof import('./src/utils/helpers')['getDistance']>

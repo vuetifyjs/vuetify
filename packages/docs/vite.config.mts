@@ -215,7 +215,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
           additionalManifestEntries: [
             { url: '/_fallback.html', revision: Date.now().toString(16) },
           ],
-          dontCacheBustURLsMatching: /^\/assets\//,
+          dontCacheBustURLsMatching: /^\/?assets\//,
           maximumFileSizeToCacheInBytes: 24 * 1024 ** 2,
         },
         manifest: {

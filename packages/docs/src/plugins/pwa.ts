@@ -8,7 +8,7 @@ export async function installPwa (router: Router) {
 
   router.beforeEach(async (to, from) => {
     if (to.path !== from.path) {
-      if (store.pendingUpdate) {
+      if (store.pendingUpdate && !store.isUpdating) {
         console.log('Reloading page to update service worker')
         window.location.pathname = to.fullPath
       }

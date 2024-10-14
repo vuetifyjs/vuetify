@@ -3,13 +3,6 @@ import eachLimit from 'async-es/eachLimit'
 type ManifestEntry = { url: string, revision?: string }
 type Manifest = ManifestEntry[]
 
-const urlsToCacheKeys = new Map<string, string>()
-export function getCacheKeyForUrl (url: string) {
-  url = createCacheKey(url).url
-
-  return urlsToCacheKeys.get(url)
-}
-
 export async function openCache (name: string) {
   return caches.open(`${name}-${location.origin}`)
 }
@@ -19,23 +12,21 @@ export async function cacheManifestEntries (
   previousManifest: Manifest,
   progress?: (value: number, total: number) => void
 ) {
-  for (const entry of manifest) {
-    const cacheKey = createCacheKey(entry)
-    urlsToCacheKeys.set(cacheKey.url, cacheKey.cacheKey)
-  }
   const cache = await openCache('precache')
   let count = 0
-  const total = urlsToCacheKeys.size
-  await eachLimit(urlsToCacheKeys, 4, async ([url, cacheKey]: [string, string]) => {
+  const total = manifest.length
+  await eachLimit(manifest, 8, async ({ url, revision }: ManifestEntry) => {
     let response
     try {
-      response = ensureCacheableResponse(await fetch(url))
+      response = ensureCacheableResponse(await fetch(url, {
+        cache: revision ? 'no-cache' : 'default',
+      }))
     } catch (err: any) {
       console.warn(`[SW] Failed to cache ${url}`, err.message)
       return
     }
     if (response.status === 200) {
-      await cache.put(cacheKey, response)
+      await cache.put(url, response)
     } else {
       console.warn(`[SW] Failed to cache ${url}`, response.status, response.statusText)
     }
@@ -44,15 +35,6 @@ export async function cacheManifestEntries (
   console.log('[SW] Precached', total, 'files')
   if (previousManifest) {
     await cleanCache(previousManifest)
-    let count = 0
-    for (const entry of previousManifest) {
-      const cacheKey = createCacheKey(entry)
-      if (!urlsToCacheKeys.has(cacheKey.url)) {
-        count++
-        urlsToCacheKeys.set(cacheKey.url, cacheKey.cacheKey)
-      }
-    }
-    console.log('[SW] Reused', count, 'of', previousManifest.length, 'files')
   }
 }
 
@@ -62,7 +44,7 @@ async function cleanCache (previousManifest: Manifest) {
   const precache = await openCache('precache')
 
   const responses = await Promise.all(
-    previousManifest.map(entry => precache.match(createCacheKey(entry).cacheKey))
+    previousManifest.map(entry => precache.match(entry.url))
   )
 
   // Date of earliest entry in the old manifest
@@ -104,21 +86,4 @@ export function ensureCacheableResponse (response: Response) {
     status: cloned.status,
     statusText: cloned.statusText,
   })
-}
-
-export function createCacheKey (entry: string | ManifestEntry) {
-  const { revision = null, url } = typeof entry === 'string'
-    ? { url: entry }
-    : entry
-
-  const cacheKeyUrl = new URL(url, location.origin)
-
-  if (revision) {
-    cacheKeyUrl.searchParams.set('__WB_REVISION__', revision)
-  }
-
-  return {
-    cacheKey: cacheKeyUrl.href,
-    url: new URL(url, location.origin).href,
-  }
 }
