@@ -213,7 +213,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         injectManifest: {
           globIgnores: ['**/*.html', '**/*.map'],
           additionalManifestEntries: [
-            { url: '/_fallback.html', revision: Date.now().toString(16) },
+            { url: '_fallback.html', revision: Date.now().toString(16) },
           ],
           dontCacheBustURLsMatching: /^\/?assets\//,
           maximumFileSizeToCacheInBytes: 24 * 1024 ** 2,

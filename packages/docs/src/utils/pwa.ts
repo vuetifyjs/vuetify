@@ -9,7 +9,6 @@ export async function openCache (name: string) {
 
 export async function cacheManifestEntries (
   manifest: Manifest,
-  previousManifest: Manifest,
   progress?: (value: number, total: number) => void
 ) {
   const cache = await openCache('precache')
@@ -18,9 +17,11 @@ export async function cacheManifestEntries (
   await eachLimit(manifest, 8, async ({ url, revision }: ManifestEntry) => {
     let response
     try {
-      response = ensureCacheableResponse(await fetch(url, {
-        cache: revision ? 'no-cache' : 'default',
-      }))
+      const _url = new URL(url, location.origin)
+      if (revision) {
+        _url.searchParams.set('WB_REVISION', revision)
+      }
+      response = ensureCacheableResponse(await fetch(_url))
     } catch (err: any) {
       console.warn(`[SW] Failed to cache ${url}`, err.message)
       return
@@ -33,12 +34,9 @@ export async function cacheManifestEntries (
     progress?.(++count, total)
   })
   console.log('[SW] Precached', total, 'files')
-  if (previousManifest) {
-    await cleanCache(previousManifest)
-  }
 }
 
-async function cleanCache (previousManifest: Manifest) {
+export async function cleanCache (previousManifest: Manifest) {
   if (!previousManifest) return
 
   const precache = await openCache('precache')
@@ -85,5 +83,15 @@ export function ensureCacheableResponse (response: Response) {
     headers: new Headers(cloned.headers),
     status: cloned.status,
     statusText: cloned.statusText,
+  })
+}
+
+export function messageSW (sw: ServiceWorker, data: {}): Promise<any> {
+  return new Promise(resolve => {
+    const messageChannel = new MessageChannel()
+    messageChannel.port1.onmessage = (event: MessageEvent) => {
+      resolve(event.data)
+    }
+    sw.postMessage(data, [messageChannel.port2])
   })
 }

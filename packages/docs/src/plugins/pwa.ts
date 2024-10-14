@@ -22,6 +22,7 @@ export async function installPwa (router: Router) {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.addEventListener('controllerchange', async () => {
       console.log('controllerchange')
+      store.isUpdating = false
       store.pendingUpdate = true
     })
 

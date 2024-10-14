@@ -1,6 +1,8 @@
-import { ensureCacheableResponse, openCache } from '@/utils/pwa'
+import { cacheManifestEntries, cleanCache, ensureCacheableResponse, messageSW, openCache } from '@/utils/pwa'
 
 const MANIFEST = self.__WB_MANIFEST
+const manifestUrls = new Set(MANIFEST.map(e => '/' + e.url))
+let PREVIOUS_MANIFEST
 
 self.addEventListener('message', async event => {
   if (event.data === 'sw:update' || event.data?.type === 'SKIP_WAITING') {
@@ -16,21 +18,38 @@ self.addEventListener('message', async event => {
   event.ports[0].postMessage({ type: 'DONE' })
 })
 
-self.addEventListener('install', () => {
+self.addEventListener('install', event => {
   console.log('[SW] Installed')
-  self.skipWaiting()
+  event.waitUntil((async () => {
+    const active = self.registration.active
+    if (active) {
+      PREVIOUS_MANIFEST = await messageSW(active, { type: 'GET_MANIFEST' })
+    }
+    await removeWorkboxCaches()
+    const clients = await self.clients.matchAll({
+      includeUncontrolled: true,
+    })
+    await cacheManifestEntries(MANIFEST, (value, total) => {
+      clients.forEach(client => {
+        client.postMessage({ type: 'PROGRESS', value, total })
+      })
+    })
+    self.skipWaiting()
+  })())
 })
 
 self.addEventListener('activate', event => {
   console.log('[SW] Activated')
   event.waitUntil((async () => {
-    await removeWorkboxCaches()
     await self.clients.claim()
+    if (PREVIOUS_MANIFEST) {
+      await cleanCache(PREVIOUS_MANIFEST)
+    }
+    console.log('[SW] Ready')
   })())
 })
 
 self.addEventListener('fetch', event => {
-  console.log(event.request.url)
   const url = new URL(event.request.url)
 
   if (!['http:', 'https:'].includes(url.protocol)) return
@@ -45,8 +64,9 @@ self.addEventListener('fetch', event => {
     if (event.request.mode === 'navigate' &&
       event.request.destination === 'document') {
       return event.respondWith(matchPrecache('/_fallback.html'))
+    } else if (manifestUrls.has(url.pathname)) {
+      return event.respondWith(matchPrecache(event.request))
     }
-    return event.respondWith(matchPrecache(event.request))
   }
 
   if (event.request.destination !== 'document') {

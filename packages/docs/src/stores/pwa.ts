@@ -1,5 +1,3 @@
-import { cacheManifestEntries } from '@/utils/pwa'
-
 export const usePwaStore = defineStore('pwa', () => {
   const isOffline = ref(!navigator.onLine)
   const isUpdating = ref(false)
@@ -26,44 +24,26 @@ export const usePwaStore = defineStore('pwa', () => {
     },
   })
 
-  async function registerWorker () {
-    const registration = await navigator.serviceWorker.register('/service-worker.js', {
-      scope: '/',
-    })
-    registration.addEventListener('updatefound', async () => {
-      const next = registration.installing
-      nextManifest.value = next && await messageSW(next, { type: 'GET_MANIFEST' })
-      console.log({ nextManifest: nextManifest.value })
-      if (availableOffline.value) {
-        updateCache()
+  function registerWorker () {
+    navigator.serviceWorker.addEventListener('message', e => {
+      if (e.data?.type === 'PROGRESS') {
+        isUpdating.value = true
+        progress.value = e.data.value
+        progressTotal.value = e.data.total
       }
     })
-    const prev = registration.active
-    prevManifest.value = prev && await messageSW(prev, { type: 'GET_MANIFEST' })
-    console.log({ prevManifest: prevManifest.value })
-    if (localStorage.getItem('vuetify:cacheReady') !== 'true') {
-      await updateCache()
-    }
+    navigator.serviceWorker.register('/service-worker.js', {
+      scope: '/',
+    })
   }
 
   async function removeWorker () {
     const registration = await navigator.serviceWorker.getRegistration()
+    await window.caches.delete(`precache-${location.origin}`)
+    await window.caches.delete(`runtime-${location.origin}`)
     if (await registration?.unregister()) {
       window.location.reload()
     }
-  }
-
-  async function updateCache () {
-    localStorage.setItem('vuetify:cacheReady', 'false')
-    isUpdating.value = true
-    const next = nextManifest.value ?? prevManifest.value
-    const prev = nextManifest.value ? prevManifest.value : undefined
-    await cacheManifestEntries(next, prev, (value, total) => {
-      progress.value = value
-      progressTotal.value = total
-    })
-    isUpdating.value = false
-    localStorage.setItem('vuetify:cacheReady', 'true')
   }
 
   return {
@@ -79,13 +59,3 @@ export const usePwaStore = defineStore('pwa', () => {
     removeWorker,
   }
 })
-
-function messageSW (sw: ServiceWorker, data: {}): Promise<any> {
-  return new Promise(resolve => {
-    const messageChannel = new MessageChannel()
-    messageChannel.port1.onmessage = (event: MessageEvent) => {
-      resolve(event.data)
-    }
-    sw.postMessage(data, [messageChannel.port2])
-  })
-}

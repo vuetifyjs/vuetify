@@ -17,6 +17,7 @@ declare global {
   const cacheManifestEntries: typeof import('./src/utils/pwa')['cacheManifestEntries']
   const camelCase: typeof import('lodash-es')['camelCase']
   const camelize: typeof import('vue')['camelize']
+  const cleanCache: typeof import('./src/utils/pwa')['cleanCache']
   const computed: typeof import('vue')['computed']
   const configureMarkdown: typeof import('./src/utils/markdown-it')['configureMarkdown']
   const copyElementContent: typeof import('./src/utils/helpers')['copyElementContent']
@@ -64,6 +65,7 @@ declare global {
   const markdownItRules: typeof import('./src/utils/markdown-it-rules')['default']
   const matchPrecache: typeof import('./src/utils/pwa')['matchPrecache']
   const mergeProps: typeof import('vue')['mergeProps']
+  const messageSW: typeof import('./src/utils/pwa')['messageSW']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']
   const onBeforeMount: typeof import('vue')['onBeforeMount']
@@ -175,6 +177,7 @@ declare module 'vue' {
     readonly cacheManifestEntries: UnwrapRef<typeof import('./src/utils/pwa')['cacheManifestEntries']>
     readonly camelCase: UnwrapRef<typeof import('lodash-es')['camelCase']>
     readonly camelize: UnwrapRef<typeof import('vue')['camelize']>
+    readonly cleanCache: UnwrapRef<typeof import('./src/utils/pwa')['cleanCache']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly configureMarkdown: UnwrapRef<typeof import('./src/utils/markdown-it')['configureMarkdown']>
     readonly copyElementContent: UnwrapRef<typeof import('./src/utils/helpers')['copyElementContent']>
@@ -219,6 +222,7 @@ declare module 'vue' {
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly markdownItRules: UnwrapRef<typeof import('./src/utils/markdown-it-rules')['default']>
     readonly mergeProps: UnwrapRef<typeof import('vue')['mergeProps']>
+    readonly messageSW: UnwrapRef<typeof import('./src/utils/pwa')['messageSW']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>
@@ -321,6 +325,7 @@ declare module '@vue/runtime-core' {
     readonly cacheManifestEntries: UnwrapRef<typeof import('./src/utils/pwa')['cacheManifestEntries']>
     readonly camelCase: UnwrapRef<typeof import('lodash-es')['camelCase']>
     readonly camelize: UnwrapRef<typeof import('vue')['camelize']>
+    readonly cleanCache: UnwrapRef<typeof import('./src/utils/pwa')['cleanCache']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly configureMarkdown: UnwrapRef<typeof import('./src/utils/markdown-it')['configureMarkdown']>
     readonly copyElementContent: UnwrapRef<typeof import('./src/utils/helpers')['copyElementContent']>
@@ -365,6 +370,7 @@ declare module '@vue/runtime-core' {
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly markdownItRules: UnwrapRef<typeof import('./src/utils/markdown-it-rules')['default']>
     readonly mergeProps: UnwrapRef<typeof import('vue')['mergeProps']>
+    readonly messageSW: UnwrapRef<typeof import('./src/utils/pwa')['messageSW']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>
