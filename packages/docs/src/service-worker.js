@@ -1,8 +1,8 @@
 import { cacheManifestEntries, cleanCache, ensureCacheableResponse, messageSW, openCache } from '@/utils/pwa'
 
+let PREVIOUS_MANIFEST
 const MANIFEST = self.__WB_MANIFEST
 const manifestUrls = new Set(MANIFEST.map(e => '/' + e.url))
-let PREVIOUS_MANIFEST
 
 self.addEventListener('message', async event => {
   if (event.data === 'sw:update' || event.data?.type === 'SKIP_WAITING') {
@@ -21,9 +21,15 @@ self.addEventListener('message', async event => {
 self.addEventListener('install', event => {
   console.log('[SW] Installed')
   event.waitUntil((async () => {
-    const active = self.registration.active
-    if (active) {
-      PREVIOUS_MANIFEST = await messageSW(active, { type: 'GET_MANIFEST' })
+    if (self.registration.active) {
+      await Promise.race([
+        new Promise(resolve => setTimeout(resolve, 500)),
+        messageSW(self.registration.active, { type: 'GET_MANIFEST' })
+          .then(manifest => {
+            PREVIOUS_MANIFEST = manifest
+            console.log('[SW] Recieved manifest')
+          }),
+      ])
     }
     await removeWorkboxCaches()
     const clients = await self.clients.matchAll({
