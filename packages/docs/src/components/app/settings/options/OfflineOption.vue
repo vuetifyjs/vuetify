@@ -8,10 +8,16 @@
         : 'settings.offline.message'"
     title="settings.offline.header"
   >
-    <SettingsSwitch
-      v-model="store.availableOffline"
-      class="flex-0-0-auto ms-auto"
-    />
+    <v-defaults-provider
+      :defaults="{
+        VIcon: { color: store.availableOffline ? 'primary' : 'disabled' }
+      }"
+    >
+      <SettingsSwitch
+        v-model="store.availableOffline"
+        class="flex-0-0-auto ms-auto"
+      />
+    </v-defaults-provider>
   </AppSettingsSettingsHeader>
 
   <v-progress-linear
