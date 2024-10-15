@@ -8,7 +8,7 @@
     "rowHeight": "Height value for each row. Requires the use of the **auto-grow** prop.",
     "rows": "Default row count.",
     "suffix": "Displays suffix text.",
-    "maxRows": "Specifies the maximum number of row count"
+    "maxRows": "Specifies the maximum number of row count. Only apply to the **auto-grow** prop."
   },
   "events": {
     "keydown": "Emitted when **any** key is pressed, textarea must be focused.",
