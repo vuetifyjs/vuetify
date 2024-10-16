@@ -17,7 +17,7 @@
         variant="filled"
         autofocus
         @focus="$event.target.select()"
-        @keydown.down="$refs?.list?.$el.focus()"
+        @keydown.down="list?.$el.focus()"
       >
         <template #append-inner>
           <AppBtn size="small" border>
