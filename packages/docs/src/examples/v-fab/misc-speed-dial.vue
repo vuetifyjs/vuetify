@@ -1,223 +1,176 @@
 <template>
-  <v-card id="create">
-    <v-container fluid>
-      <v-row class="child-flex">
-        <v-col
-          cols="12"
-          md="4"
-          sm="6"
-        >
-          <div class="text-subheader-2 pa-2">Options</div>
-          <v-checkbox
-            v-model="hover"
-            label="Open on hover"
-            hide-details
-          ></v-checkbox>
-        </v-col>
-        <v-col
-          cols="12"
-          md="4"
-          sm="6"
-        >
-          <div class="text-subheader-2 pa-2">FAB location</div>
-          <v-checkbox
-            v-model="top"
-            label="Top"
-            hide-details
-          ></v-checkbox>
-          <v-checkbox
-            v-model="right"
-            label="Right"
-            hide-details
-          ></v-checkbox>
-          <v-checkbox
-            v-model="bottom"
-            label="Bottom"
-            hide-details
-          ></v-checkbox>
-          <v-checkbox
-            v-model="left"
-            label="Left"
-            hide-details
-          ></v-checkbox>
-        </v-col>
-        <v-col
-          cols="12"
-          md="4"
-          sm="6"
-        >
-          <div class="text-subheader-2 pa-2">Speed dial direction</div>
-          <v-radio-group
-            v-model="direction"
-            hide-details
-          >
-            <v-radio
-              label="Top"
-              value="top"
-            ></v-radio>
-            <v-radio
-              label="Right"
-              value="right"
-            ></v-radio>
-            <v-radio
-              label="Bottom"
-              value="bottom"
-            ></v-radio>
-            <v-radio
-              label="Left"
-              value="left"
-            ></v-radio>
+  <v-app>
+    <v-card class="pa-6 mb-6" variant="flat">
+      <v-row dense>
+        <v-col cols="12" sm="3">
+          <h5>FAB position</h5>
+          <v-radio-group v-model="fabPosition" density="compact" hide-details>
+            <v-radio label="App (fixed)" value="fixed"></v-radio>
+            <v-radio label="Absolute" value="absolute"></v-radio>
+            <v-radio label="None" value=""></v-radio>
           </v-radio-group>
         </v-col>
-        <v-col
-          cols="12"
-          md="4"
-          sm="6"
-        >
-          <div class="text-subheader-2 pa-2">Transition</div>
-          <v-radio-group
-            v-model="transition"
-            hide-details
-          >
-            <v-radio
-              label="Slide y"
-              value="slide-y-transition"
-            ></v-radio>
-            <v-radio
-              label="Slide y reverse"
-              value="slide-y-reverse-transition"
-            ></v-radio>
-            <v-radio
-              label="Slide x"
-              value="slide-x-transition"
-            ></v-radio>
-            <v-radio
-              label="Slide x reverse"
-              value="slide-x-reverse-transition"
-            ></v-radio>
-            <v-radio
-              label="Scale"
-              value="scale-transition"
-            ></v-radio>
+        <v-col cols="12" sm="3">
+          <h5>FAB location</h5>
+          <v-radio-group v-model="fabLocation" :disabled="!fabPosition" density="compact" hide-details>
+            <div class="d-flex">
+              <v-radio value="top left"></v-radio>
+              <v-radio value="top center"></v-radio>
+              <v-radio value="top right"></v-radio>
+            </div>
+            <div class="d-flex">
+              <v-radio value="left center"></v-radio>
+              <v-radio :disabled="fabPosition !== 'absolute'" value="center center"></v-radio>
+              <v-radio value="right center"></v-radio>
+            </div>
+            <div class="d-flex">
+              <v-radio value="left bottom"></v-radio>
+              <v-radio value="bottom center"></v-radio>
+              <v-radio value="right bottom"></v-radio>
+            </div>
+          </v-radio-group>
+          <code>({{ fabLocation }})</code>
+        </v-col>
+        <v-col cols="12" sm="3">
+          <h5>Menu location</h5>
+          <v-radio-group v-model="menuLocation" density="compact" hide-details>
+            <div class="d-flex">
+              <v-radio disabled></v-radio>
+              <v-radio value="top left"></v-radio>
+              <v-radio value="top center"></v-radio>
+              <v-radio value="top right"></v-radio>
+              <v-radio disabled></v-radio>
+            </div>
+            <div class="d-flex">
+              <v-radio value="left top"></v-radio>
+              <v-radio disabled></v-radio>
+              <v-radio disabled></v-radio>
+              <v-radio disabled></v-radio>
+              <v-radio value="right top"></v-radio>
+            </div>
+            <div class="d-flex">
+              <v-radio value="left center"></v-radio>
+              <v-radio disabled></v-radio>
+              <v-radio value="center"></v-radio>
+              <v-radio disabled></v-radio>
+              <v-radio value="right center"></v-radio>
+            </div>
+            <div class="d-flex">
+              <v-radio value="left bottom"></v-radio>
+              <v-radio disabled></v-radio>
+              <v-radio disabled></v-radio>
+              <v-radio disabled></v-radio>
+              <v-radio value="right bottom"></v-radio>
+            </div>
+            <div class="d-flex">
+              <v-radio disabled></v-radio>
+              <v-radio value="bottom left"></v-radio>
+              <v-radio value="bottom center"></v-radio>
+              <v-radio value="bottom right"></v-radio>
+              <v-radio disabled></v-radio>
+            </div>
+          </v-radio-group>
+          <code>({{ menuLocation }})</code>
+        </v-col>
+        <v-col cols="12" sm="3">
+          <h5>Transition</h5>
+          <v-radio-group v-model="transition" density="compact" hide-details>
+            <v-radio label="Fade" value="fade-transition"></v-radio>
+            <v-radio label="Slide y" value="slide-y-transition"></v-radio>
+            <v-radio label="Slide y reverse" value="slide-y-reverse-transition"></v-radio>
+            <v-radio label="Slide x" value="slide-x-transition"></v-radio>
+            <v-radio label="Slide x reverse" value="slide-x-reverse-transition"></v-radio>
+            <v-radio label="Scale" value="scale-transition"></v-radio>
           </v-radio-group>
         </v-col>
       </v-row>
-    </v-container>
-    <v-speed-dial
-      v-model="fab"
-      :bottom="bottom"
-      :direction="direction"
-      :left="left"
-      :open-on-hover="hover"
-      :right="right"
-      :top="top"
-      :transition="transition"
-    >
-      <template v-slot:activator>
-        <v-btn
-          v-model="fab"
-          color="blue-darken-2"
-          dark
-          fab
-        >
-          <v-icon v-if="fab">
-            mdi-close
-          </v-icon>
-          <v-icon v-else>
-            mdi-account-circle
-          </v-icon>
-        </v-btn>
-      </template>
-      <v-btn
-        color="green"
-        size="small"
-        dark
-        fab
+    </v-card>
+
+    <v-card :class="fabPosition === 'absolute' ? 'demo-panel-relative' : 'demo-panel-static'" variant="outlined">
+      <v-fab
+        :key="fabPosition"
+        :absolute="fabPosition === 'absolute'"
+        :app="fabPosition === 'fixed'"
+        :color="open ? '' : 'primary'"
+        :location="fabLocation"
+        size="large"
+        icon
       >
-        <v-icon>mdi-pencil</v-icon>
-      </v-btn>
-      <v-btn
-        color="indigo"
-        size="small"
-        dark
-        fab
-      >
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-      <v-btn
-        color="red"
-        size="small"
-        dark
-        fab
-      >
-        <v-icon>mdi-delete</v-icon>
-      </v-btn>
-    </v-speed-dial>
-  </v-card>
+        <v-icon>{{ open ? 'mdi-close' : 'mdi-crown' }}</v-icon>
+        <v-speed-dial v-model="open" :location="menuLocation" :transition="transition" activator="parent">
+          <v-btn key="1" color="success" icon>
+            <v-icon size="24">$success</v-icon></v-btn>
+          <v-btn key="2" color="info" icon>
+            <v-icon size="24">$info</v-icon></v-btn>
+          <v-btn key="3" color="warning" icon>
+            <v-icon size="24">$warning</v-icon></v-btn>
+          <v-btn key="4" color="error" icon>
+            <v-icon size="24">$error</v-icon></v-btn>
+        </v-speed-dial>
+      </v-fab>
+    </v-card>
+  </v-app>
 </template>
 
 <script setup>
   import { ref, watch } from 'vue'
 
-  const direction = ref('top')
-  const fab = ref(false)
-  const hover = ref(false)
-  const top = ref(false)
-  const right = ref(true)
-  const bottom = ref(true)
-  const left = ref(false)
+  const open = ref(false)
+  const fabPosition = ref('absolute')
+  const menuLocation = ref('left center')
+  const fabLocation = ref('right bottom')
   const transition = ref('slide-y-reverse-transition')
-  watch(top, val => {
-    bottom.value = !val
-  })
-  watch(right, val => {
-    left.value = !val
-  })
-  watch(bottom, val => {
-    top.value = !val
-  })
-  watch(left, val => {
-    right.value = !val
-  })
-</script>
 
-<script>
-  export default {
-    data: () => ({
-      direction: 'top',
-      fab: false,
-      hover: false,
-      top: false,
-      right: true,
-      bottom: true,
-      left: false,
-      transition: 'slide-y-reverse-transition',
-    }),
+  watch(menuLocation, reopen)
+  watch(transition, reopen)
+  watch(fabLocation, () => open.value = false)
+  watch(fabPosition, () => open.value = false)
 
-    watch: {
-      top (val) {
-        this.bottom = !val
-      },
-      right (val) {
-        this.left = !val
-      },
-      bottom (val) {
-        this.top = !val
-      },
-      left (val) {
-        this.right = !val
-      },
-    },
+  function reopen () {
+    open.value = false
+    setTimeout(() => open.value = true, 400)
   }
 </script>
 
-<style>
-  /* This is for documentation purposes and will not be needed in your application */
-  #create .v-speed-dial {
-    position: absolute;
-  }
+<style scoped>
+/* This is for documentation purposes and will not be needed in your application */
+::v-deep(.v-application__wrap) {
+  min-height: 0 !important;
+}
 
-  #create .v-btn--floating {
-    position: relative;
-  }
+.demo-panel-static,
+.demo-panel-relative {
+  margin: 0 80px 50px;
+  padding: 24px;
+  min-height: 300px;
+}
+.demo-panel-static {
+  position: static;
+}
+.demo-panel-relative {
+  position: relative;
+}
+
+.v-selection-control--disabled,
+.v-input--disabled .v-selection-control {
+  opacity: .1;
+}
+
+.v-radio {
+  flex-grow: 0 !important;
+}
+
+h5 {
+  margin-bottom: 12px;
+}
+
+code {
+  display: block;
+  font-size: .8rem;
+  margin-top: 12px;
+}
+
+::v-deep(.v-label) {
+  margin-left: 8px;
+}
 </style>
