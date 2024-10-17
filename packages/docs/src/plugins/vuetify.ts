@@ -76,6 +76,7 @@ export function installVuetify (app: App) {
         inset: true,
         trueIcon: 'mdi-check',
         falseIcon: '$close',
+        hideDetails: 'auto',
       },
       BorderChip: {
         border: true,

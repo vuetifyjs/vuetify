@@ -5,10 +5,9 @@
     "noResize": "Remove resize handle.",
     "persistentPlaceholder": "Forces placeholder to always be visible.",
     "prefix": "Displays prefix text.",
-    "rowHeight": "Height value for each row. Requires the use of the **auto-grow** prop.",
     "rows": "Default row count.",
     "suffix": "Displays suffix text.",
-    "maxRows": "Specifies the maximum number of row count"
+    "maxRows": "Specifies the maximum number of rows for **auto-grow**."
   },
   "events": {
     "keydown": "Emitted when **any** key is pressed, textarea must be focused.",

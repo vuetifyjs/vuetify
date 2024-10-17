@@ -165,8 +165,6 @@
   "framework-services": "Framework services",
   "functional": "Functional",
   "funding": "Funding",
-  "general": "General",
-  "general-message": "Enable composition API for examples, show component API inline, and more.",
   "getting-started": "Getting started",
   "get-help": "Get help",
   "github": "GitHub",
@@ -293,7 +291,17 @@
   "see-more-themes-from": "See More Themes From {vendor}",
   "selection": "Selection",
   "services": "Services",
-  "settings": "Documentation settings",
+  "settings": {
+    "header": "Documentation settings",
+    "offline": {
+      "header": "Available offline",
+      "message": "Install a service worker to cache the entire site locally.",
+      "active-message": "Disable this option to remove the service worker and clear the cache.",
+      "offline-message": "You are currently offline, the site is served from cache.",
+      "pending": "There is a pending update, reload the page to activate.",
+      "reload": "Reload"
+    }
+  },
   "slash-search": "Use / for Search hotkey",
   "slash-search-message": "This option sets the bound search key to '/' from Cmd/Ctrl+K.",
   "small": "Small",

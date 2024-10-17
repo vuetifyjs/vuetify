@@ -90,10 +90,10 @@ app.use(vuetify)
 
 ### SASS variables
 
-- `$headings` was merged with `$typography`: Access font-size of subtitle-2 with `map-get($typography, 'subtitle-2', 'size')`
+- `$headings` was merged with `$typography`: Access font-size of subtitle-2 with `map.get($typography, 'subtitle-2', 'size')`
 - If you imported variables from `~vuetify/src/styles/settings/_variables` in v2, you have to replace it with `vuetify/settings`
 - Component variables that previously lived in e.g. `~/vuetify/src/components/VIcon/VIcon.sass` can now be imported from `vuetify/settings` directly too.
-- `$display-breakpoints` no longer includes `{breakpoint}-only` variables (e.g. xs-only), use `@media #{map-get(v.$display-breakpoints, 'xs')}` instead.
+- `$display-breakpoints` no longer includes `{breakpoint}-only` variables (e.g. xs-only), use `@media #{map.get(v.$display-breakpoints, 'xs')}` instead.
 - The `$transition` map has been removed, replaced with individual `$standard-easing`, `$decelerated-easing`, `$accelerated-easing` variables.
 - `$container-padding-x` is now 16px instead of 12px as in v2. You can replace it with `$spacer * 3` to get to the previous look.
 - Too many component variables to list have been renamed or removed. There is no automated way to update these as the element structure has changed significantly, you will need to manually update these along with any custom styles.
