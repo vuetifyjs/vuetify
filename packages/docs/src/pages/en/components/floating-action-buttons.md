@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Floating Action Buttons
   title: FAB component

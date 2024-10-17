@@ -18,7 +18,7 @@ export function useTeleport (target: () => (boolean | string | ParentNode)) {
       return undefined
     }
 
-    let container = targetElement.querySelector(':scope > .v-overlay-container')
+    let container = [...targetElement.children].find(el => el.matches('.v-overlay-container'))
 
     if (!container) {
       container = document.createElement('div')

@@ -244,6 +244,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   }, { deep: true })
 
   return {
+    calculateVisibleItems,
     containerRef,
     markerRef,
     computedItems,

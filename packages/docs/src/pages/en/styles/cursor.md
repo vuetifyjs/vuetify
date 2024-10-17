@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Cursor
   description: Assign a custom cursor to any element.

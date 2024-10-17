@@ -9,6 +9,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { useForm } from '@/composables/form'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -74,7 +75,14 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const model = computed({
       get: () => _model.value,
       set (val) {
-        if (typeof val !== 'string') _model.value = val
+        if (val === null) {
+          _model.value = null
+          return
+        }
+
+        if (!isNaN(+val) && +val <= props.max && +val >= props.min) {
+          _model.value = +val
+        }
       },
     })
 
@@ -345,6 +353,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         </VTextField>
       )
     })
+
+    return forwardRefs({}, vTextFieldRef)
   },
 })
 

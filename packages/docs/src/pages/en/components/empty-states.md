@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Empty states
   description: The empty state component is used to indicate that a list is empty or that no search results were found.

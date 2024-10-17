@@ -2,8 +2,8 @@
 import './VTimePickerControls.sass'
 
 // Components
+import { pad } from './util'
 import { VBtn } from '@/components/VBtn'
-import { pad } from '@/components/VDatePicker/util'
 
 // Composables
 import { useLocale } from '@/composables/locale'
