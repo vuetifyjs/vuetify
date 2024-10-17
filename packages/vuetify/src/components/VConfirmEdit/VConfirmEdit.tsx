@@ -34,6 +34,10 @@ export const makeVConfirmEditProps = propsFactory({
     type: String,
     default: '$vuetify.confirmEdit.ok',
   },
+  enableActions: {
+    type: Boolean,
+    default: false,
+  },
 }, 'VConfirmEdit')
 
 export const VConfirmEdit = genericComponent<new <T> (
@@ -52,6 +56,7 @@ export const VConfirmEdit = genericComponent<new <T> (
     cancel: () => true,
     save: (value: any) => true,
     'update:modelValue': (value: any) => true,
+    closeMenu: () => true,
   },
 
   setup (props, { emit, slots }) {
@@ -73,7 +78,12 @@ export const VConfirmEdit = genericComponent<new <T> (
     }
 
     function cancel () {
+      const checkPristine = structuredClone(toRaw(isPristine.value))
       internalModel.value = structuredClone(toRaw(model.value))
+      if (props.enableActions && checkPristine) {
+        emit('closeMenu')
+        return
+      }
       emit('cancel')
     }
 
@@ -81,8 +91,9 @@ export const VConfirmEdit = genericComponent<new <T> (
     useRender(() => {
       const actions = (
         <>
+          { /* {!!props.enableActions} */ }
           <VBtn
-            disabled={ isPristine.value }
+            disabled={ props.enableActions ? false : isPristine.value }
             variant="text"
             color={ props.color }
             onClick={ cancel }
@@ -90,7 +101,7 @@ export const VConfirmEdit = genericComponent<new <T> (
           />
 
           <VBtn
-            disabled={ isPristine.value }
+            disabled={ props.enableActions ? false : isPristine.value }
             variant="text"
             color={ props.color }
             onClick={ save }
