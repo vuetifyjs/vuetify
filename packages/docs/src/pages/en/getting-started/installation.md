@@ -318,6 +318,20 @@ export default {
 }
 ```
 
+And in your `.vitepress/config.mts`
+
+```ts
+export default defineConfig({
+    // rest of the config
+
+    vite: {
+        ssr: {
+            noExternal: [/^vuetify/],
+        },
+    },
+));
+```
+
 ## Existing projects
 
 Follow these steps if for example you are adding Vuetify to an existing project, or simply do not want to use a scaffolding tool.
