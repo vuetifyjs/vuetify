@@ -47,7 +47,6 @@
     "@vue/runtime-dom": "^3.4.27",
     "@vueuse/head": "^1.3.1",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^28.1.3",
     "conventional-changelog-cli": "^3.0.0",
     "conventional-changelog-vuetify": "^1.2.1",
     "conventional-github-releaser": "^3.1.5",
@@ -66,10 +65,6 @@
     "glob": "^11.0.0",
     "husky": "^3.1.0",
     "inquirer": "^6.5.2",
-    "jest": "^28.1.3",
-    "jest-cli": "^28.1.3",
-    "jest-environment-jsdom": "^28.1.3",
-    "jest-serializer-html": "^7.1.0",
     "lerna": "^8.1.7",
     "magic-string": "^0.30.9",
     "mkdirp": "^3.0.1",
@@ -90,10 +85,16 @@
     "vue-tsc": "^2.0.29",
     "yargs": "^17.7.2"
   },
-  "packageManager": "pnpm@9.6.0",
+  "packageManager": "pnpm@9.10.0",
   "pnpm": {
     "patchedDependencies": {
-      "@mdi/js@7.4.47": "patches/@mdi__js@7.4.47.patch"
+      "@mdi/js@7.4.47": "patches/@mdi__js@7.4.47.patch",
+      "@testing-library/vue": "patches/@testing-library__vue.patch"
+    },
+    "overrides": {
+      "@testing-library/dom": "npm:@vuetify/testing-library-dom@1.0.2",
+      "@types/node": "22.5.4",
+      "tough-cookie": "5.0.0-rc.4"
     }
   }
 }

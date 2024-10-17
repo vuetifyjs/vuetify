@@ -6,6 +6,7 @@
     "incremental": false,
     "lib": [
       "dom",
+      "dom.iterable",
       "esnext"
     ],
     "module": "esnext",

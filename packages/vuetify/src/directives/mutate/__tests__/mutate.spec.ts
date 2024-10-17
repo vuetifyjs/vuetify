@@ -2,12 +2,13 @@
 import Mutate from '..'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
+
+// Utilities
 
 (global as any).MutationObserver = class { // Mock MutationObserver
   _callback: Function
 
-  _observe = jest.fn()
+  _observe = vi.fn()
 
   constructor (callback: () => {}) {
     this._callback = callback
@@ -30,7 +31,7 @@ const instance = {
 
 describe('v-mutate', () => {
   it('should bind event on mounted', () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
     const el = document.createElement('div')
     document.body.appendChild(el)
 
@@ -51,7 +52,7 @@ describe('v-mutate', () => {
   })
 
   it('should invoke callback once and then unmount', async () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
     const el = document.createElement('div')
     document.body.appendChild(el)
 
@@ -71,7 +72,7 @@ describe('v-mutate', () => {
   })
 
   it('should invoke callback on mount, on mutation and then unmount', async () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
     const el = document.createElement('div')
     document.body.appendChild(el)
 

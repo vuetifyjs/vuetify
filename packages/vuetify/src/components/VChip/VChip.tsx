@@ -204,11 +204,11 @@ export const VChip = genericComponent<VChipSlots>()({
           ]}
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }
-          href={ link.href.value }
           tabindex={ isClickable.value ? 0 : undefined }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={[isClickable.value && props.ripple, null]}
+          { ...link.linkProps }
         >
           { genOverlays(isClickable.value, 'v-chip') }
 
@@ -333,6 +333,7 @@ export const VChip = genericComponent<VChipSlots>()({
               key="close"
               class="v-chip__close"
               type="button"
+              data-testid="close-chip"
               { ...closeProps.value }
             >
               { !slots.close ? (

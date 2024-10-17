@@ -12,7 +12,7 @@ related:
 
 # Data and Display
 
-Data table filtering is key feature that allows users to quickly find the data they are looking for.
+Data table filtering is a key feature that allows users to quickly find the data they are looking for.
 
 <PromotedEntry />
 

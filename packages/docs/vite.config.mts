@@ -209,12 +209,13 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         filename: 'service-worker.js',
         strategies: 'injectManifest',
         includeAssets: ['favicon.ico'],
+        injectRegister: false,
         injectManifest: {
-          globIgnores: ['**/*.html'],
+          globIgnores: ['**/*.html', '**/*.map'],
           additionalManifestEntries: [
-            { url: '/_fallback.html', revision: Date.now().toString(16) },
+            { url: '_fallback.html', revision: Date.now().toString(16) },
           ],
-          dontCacheBustURLsMatching: /assets\/.+[A-Za-z0-9]{8}\.(js|css)$/,
+          dontCacheBustURLsMatching: /^\/?assets\//,
           maximumFileSizeToCacheInBytes: 24 * 1024 ** 2,
         },
         manifest: {
@@ -346,6 +347,23 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
           }
 
           return routes.find(r => r.path === '/en/')?.content
+        },
+      },
+
+      {
+        name: 'inject-umami',
+        transformIndexHtml (html, ctx) {
+          if (mode !== 'production') return
+
+          return [{
+            tag: 'script',
+            attrs: {
+              defer: true,
+              src: 'https://umami.vuetifyjs.com/script.js',
+              'data-website-id': 'c635330a-f1a7-49cf-8894-3ff2cfa0331e',
+            },
+            injectTo: 'head',
+          }]
         },
       },
 
