@@ -238,7 +238,7 @@ export const VSelect = genericComponent<new <
       // html select hotkeys
       const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
 
-      if (props.multiple || !checkPrintable(e)) return
+      if (!checkPrintable(e)) return
 
       const now = performance.now()
       if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
