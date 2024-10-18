@@ -30,6 +30,15 @@
         min-height: 0 !important
         pointer-events: none
 
+
+    .v-field:not(.v-field--center-affix)
+      .v-field__append-inner,
+      .v-field__clearable,
+      .v-field__prepend-inner
+        display: flex
+        align-items: flex-start
+        padding-top: var(--v-input-padding-top, $field-control-padding-top)
+
     &--no-resize
       .v-field__input
         resize: none
@@ -38,6 +47,14 @@
     .v-field--active
       textarea
         opacity: 1
+
+
+    &:not(.v-input--center-affix)
+      .v-input__prepend,
+      .v-input__append
+        display: flex
+        align-items: flex-start
+        padding-top: var(--v-input-padding-top)
 
     textarea
       opacity: 0

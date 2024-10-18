@@ -77,12 +77,8 @@
   .v-input__prepend,
   .v-input__append
     display: flex
-    align-items: flex-start
-    padding-top: var(--v-input-padding-top)
-
-    .v-input--center-affix &
-      align-items: center
-      padding-top: 0
+    align-items: center
+    padding-top: 0
 
   .v-input__prepend
     grid-area: prepend
@@ -103,7 +99,7 @@
       input[type=number]
         -moz-appearance: textfield
 
-    &--plain-underlined
+    &--plain-underlined:not(&--center-affix)
 
       .v-input__prepend,
       .v-input__append
