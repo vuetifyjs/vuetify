@@ -351,3 +351,71 @@ export const vuetify = createVuetify({
 ## Implementation
 
 Vuetify generates theme styles at runtime according to the given configuration. The generated styles are injected into the `<head>` section of the DOM in a `<style>` tag with an **id** of `vuetify-theme-stylesheet`.
+
+## Utility functions
+
+### `get`
+
+The `get` method allows you to retrieve a theme by its name. If no name is provided, the current global theme will be returned.
+
+```js { resource="src/App.vue" }
+import { useTheme } from 'vuetify'
+
+const theme = useTheme()
+
+// Get the currently active theme
+const currentTheme = theme.get()
+
+// Get a specific theme by name
+const customTheme = theme.get('myCustomLightTheme')
+```
+
+### `update`
+
+The `update` method is used to update the color of a specific theme.
+
+```js { resource="src/App.vue" }
+import { useTheme } from 'vuetify'
+
+const theme = useTheme()
+
+// Update the 'primary' color of the active theme
+theme.update('primary', '#FF0000')
+
+// Update the 'background' color in a specific theme
+theme.update('background', '#000000', 'myCustomLightTheme')
+```
+
+### `register`
+
+The `register` method registers a new theme with custom properties. You can define the colors and other properties for the new theme. Any missing properties will be filled in with the default of the **light** or **dark** theme, depending on the **dark** property.
+
+```js { resource="src/App.vue" }
+import { useTheme } from 'vuetify'
+
+const theme = useTheme()
+
+const myNewTheme = {
+  dark: false,
+  colors: {
+    background: '#FAFAFA',
+    primary: '#FF5722',
+  }
+}
+
+// Register the new theme
+theme.register('myNewTheme', myNewTheme)
+```
+
+### `set`
+
+The `set` method allows you to switch the global theme to a different one.
+
+```ts { resource="src/App.vue" }
+import { useTheme } from 'vuetify'
+
+const theme = useTheme()
+
+// Set the global theme to 'myCustomLightTheme'
+theme.set('myCustomLightTheme')
+```
