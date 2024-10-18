@@ -230,9 +230,9 @@ export const VSelect = genericComponent<new <
       }
 
       if (e.key === 'Home') {
-        listRef.value?.focus('first')
+        vVirtualScrollRef.value?.focus(0)
       } else if (e.key === 'End') {
-        listRef.value?.focus('last')
+        vVirtualScrollRef.value?.focus(items.value.length - 1)
       }
 
       // html select hotkeys
@@ -251,9 +251,7 @@ export const VSelect = genericComponent<new <
       if (item !== undefined) {
         model.value = [item]
         const index = displayItems.value.indexOf(item)
-        IN_BROWSER && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
-        })
+        IN_BROWSER && index >= 0 && vVirtualScrollRef.value?.focus(index)
       }
     }
 
@@ -316,9 +314,7 @@ export const VSelect = genericComponent<new <
         const index = displayItems.value.findIndex(
           item => model.value.some(s => props.valueComparator(s.value, item.value))
         )
-        IN_BROWSER && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
-        })
+        IN_BROWSER && index >= 0 && vVirtualScrollRef.value?.focus(index)
       }
     })
 
@@ -393,6 +389,7 @@ export const VSelect = genericComponent<new <
                   openOnClick={ false }
                   closeOnContentClick={ false }
                   transition={ props.transition }
+                  virtualScroll={ vVirtualScrollRef.value }
                   onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...computedMenuProps.value }
@@ -408,6 +405,7 @@ export const VSelect = genericComponent<new <
                       tabindex="-1"
                       aria-live="polite"
                       color={ props.itemColor ?? props.color }
+                      virtualScroll={ vVirtualScrollRef.value }
                       { ...listEvents }
                       { ...props.listProps }
                     >
@@ -430,7 +428,7 @@ export const VSelect = genericComponent<new <
                             index,
                             props: itemProps,
                           }) ?? (
-                            <VListItem { ...itemProps } role="option">
+                            <VListItem { ...itemProps } role="option" data-item-index={ index }>
                               {{
                                 prepend: ({ isSelected }) => (
                                   <>
