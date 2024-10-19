@@ -6,6 +6,7 @@ import { VDialogTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
+import { VVirtualScroll } from '@/components/VVirtualScroll/VVirtualScroll'
 
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -48,6 +49,7 @@ export const makeVMenuProps = propsFactory({
   // disableKeys: Boolean,
   id: String,
   submenu: Boolean,
+  virtualScroll: VVirtualScroll,
 
   ...omit(makeVOverlayProps({
     closeDelay: 250,
@@ -175,17 +177,20 @@ export const VMenu = genericComponent<OverlaySlots>()({
         if (e.key === 'ArrowDown') {
           e.preventDefault()
           e.stopImmediatePropagation()
-          focusChild(el, 'next')
+          if (props.virtualScroll) props.virtualScroll.focus('next')
+          else focusChild(el, 'next')
         } else if (e.key === 'ArrowUp') {
           e.preventDefault()
           e.stopImmediatePropagation()
-          focusChild(el, 'prev')
+          if (props.virtualScroll) props.virtualScroll.focus('prev')
+          else focusChild(el, 'prev')
         } else if (props.submenu) {
           if (e.key === (isRtl.value ? 'ArrowRight' : 'ArrowLeft')) {
             isActive.value = false
           } else if (e.key === (isRtl.value ? 'ArrowLeft' : 'ArrowRight')) {
             e.preventDefault()
-            focusChild(el, 'first')
+            if (props.virtualScroll) props.virtualScroll.focus('first')
+            else focusChild(el, 'first')
           }
         }
       } else if (
