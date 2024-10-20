@@ -67,8 +67,9 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(
 
       return children ? (
         <VListGroup
-          value={ itemProps?.value }
           { ...listGroupProps }
+          value={ props.returnObject ? item : itemProps?.value }
+          id={ itemProps?.value }
         >
           {{
             activator: ({ props: activatorProps }) => {
