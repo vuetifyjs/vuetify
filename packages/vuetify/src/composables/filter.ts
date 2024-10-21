@@ -2,7 +2,7 @@
 /* eslint-disable no-labels */
 
 // Utilities
-import { computed, ref, unref, watchEffect } from 'vue'
+import { computed, nextTick, ref, unref, watchEffect } from 'vue'
 import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -137,6 +137,7 @@ export function useFilter <T extends InternalItem> (
   options?: {
     transform?: (item: T) => {}
     customKeyFilter?: MaybeRef<FilterKeyFunctions | undefined>
+    forRegisteredNodes?: boolean
   }
 ) {
   const filteredItems: Ref<T[]> = ref([])
@@ -178,8 +179,19 @@ export function useFilter <T extends InternalItem> (
       _filteredItems.push(item)
       _filteredMatches.set(item.value, matches)
     })
-    filteredItems.value = _filteredItems
-    filteredMatches.value = _filteredMatches
+
+    if (options?.forRegisteredNodes) {
+      // list items must be unmounted to reliably unregister
+      filteredItems.value = []
+      filteredMatches.value = new Map()
+      nextTick(() => {
+        filteredItems.value = _filteredItems
+        filteredMatches.value = _filteredMatches
+      })
+    } else {
+      filteredItems.value = _filteredItems
+      filteredMatches.value = _filteredMatches
+    }
   })
 
   function getMatches (item: T) {
