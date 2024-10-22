@@ -540,7 +540,12 @@ export const VCombobox = genericComponent<new <
                         <VListItem title={ t(props.noDataText) } />
                       ))}
 
-                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value }>
+                      <VVirtualScroll
+                        ref={ vVirtualScrollRef }
+                        renderless
+                        items={ displayItems.value }
+                        itemHeight={ props.itemHeight }
+                      >
                         { ({ item, index, itemRef }) => {
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,

@@ -87,6 +87,10 @@ export const makeSelectProps = propsFactory({
   },
   openOnClear: Boolean,
   itemColor: String,
+  itemHeight: {
+    type: [Number, String],
+    default: null,
+  },
 
   ...makeItemsProps({ itemChildren: false }),
 }, 'Select')
@@ -417,7 +421,12 @@ export const VSelect = genericComponent<new <
                         <VListItem title={ t(props.noDataText) } />
                       ))}
 
-                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value }>
+                      <VVirtualScroll
+                        ref={ vVirtualScrollRef }
+                        renderless
+                        items={ displayItems.value }
+                        itemHeight={ props.itemHeight }
+                      >
                         { ({ item, index, itemRef }) => {
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
