@@ -7,7 +7,7 @@ import { VBtn } from '@/components/VBtn'
 
 // Utilities
 import { render, screen } from '@test'
-import { userEvent } from '@vitest/browser/context'
+import { commands, userEvent } from '@vitest/browser/context'
 import { ref } from 'vue'
 // Types
 import type { Ref } from 'vue'
@@ -45,42 +45,38 @@ describe('VListGroup', () => {
     expect(screen.getAllByCSS('.v-list-item-title')[0]).toHaveTextContent('Group')
   })
 
-  // it.only('should not remove opened when unmounted', () => {
-  //   const visible = ref(true)
-  //   const opened = ref(['Users'])
-  //   render(() => (
-  //       <VList opened={ opened.value }>
-  //         {
-  //           visible.value && (
-  //             <VListGroup value="Users">
-  //               {{
-  //                 default: () => (
-  //                   <>
-  //                     <VListItem title="Foo" />
-  //                     <VListItem title="Bar" />
-  //                   </>
-  //                 ),
-  //               }}
-  //             </VListGroup>
-  //           )
-  //         }
-  //       </VList>
-  //   ))
+  it('should not remove opened when unmounted', async () => {
+    const visible = ref(true)
+    const opened = ref(['Users'])
+    render(() => (
+        <VList opened={ opened.value }>
+          {
+            visible.value && (
+              <VListGroup value="Users">
+                {{
+                  default: () => (
+                    <>
+                      <VListItem title="Foo" />
+                      <VListItem title="Bar" />
+                    </>
+                  ),
+                }}
+              </VListGroup>
+            )
+          }
+        </VList>
+    ))
 
-  //   expect(screen.getByCSS('.v-list')).toContainElement(screen.getByCSS('.v-list-group'))
-  //   expect(screen.getByCSS('.v-list-group__items')).toBeVisible()
-  //   // wrapper.get('.v-list .v-list-group').should('exist')
-  //   //   .get('.v-list-group__items').should('be.visible')
-  //   //   .then(() => {
-  //   //     visible.value = false
-  //   //   })
-  //   //   .get('.v-list.v-list-group').should('not.exist')
-  //   //   .then(() => {
-  //   //     visible.value = true
-  //   //   })
-  //   //   .get('.v-list-group').should('exist')
-  //   //   .get('.v-list-group__items').should('be.visible')
-  // })
+    expect(screen.queryByRole('group')).not.toBeNull()
+    expect(screen.getByCSS('.v-list-group__items')).toBeVisible()
+    visible.value = false
+    await commands.waitStable('.v-list')
+    expect(screen.queryByRole('group')).toBeNull()
+    visible.value = true
+    await commands.waitStable('.v-list')
+    expect(screen.queryByRole('group')).not.toBeNull()
+    expect(screen.getByCSS('.v-list-group__items')).toBeVisible()
+  })
 
   // https://github.com/vuetifyjs/vuetify/issues/20354
   it('should support programmatically expand group via open model', async () => {
