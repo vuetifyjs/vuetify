@@ -2,7 +2,7 @@
   "props": {
     "control-variant": "The color of the control. It defaults to the value of `variant` prop.",
     "hide-input": "Hide the input field.",
-    "inset": "Likely refers to adjusting the padding or positioning of the input field, potentially to align it flush with other elements or add spacing within the layout.",
+    "inset": "Applies an indentation to the dividers used in the stepper buttons.",
     "max": "Specifies the maximum allowable value for the input.",
     "min": "Specifies the minimum allowable value for the input.",
     "step": "Defines the interval between allowed values when the user increments or decrements the input"

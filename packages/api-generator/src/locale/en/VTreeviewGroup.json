@@ -1,5 +1,5 @@
 {
   "props": {
-    "fluid": "Likely refers to allowing the VTreeviewGroup to take up the full width of its container or adjust its width dynamically."
+    "fluid": "Removes viewport maximum-width size breakpoints."
   }
 }
