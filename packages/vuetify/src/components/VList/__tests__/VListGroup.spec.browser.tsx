@@ -105,4 +105,52 @@ describe('VListGroup', () => {
     expect(opened.value).toStrictEqual(['Users'])
     expect(screen.getByCSS('.v-list-group__items')).toBeVisible()
   })
+
+  it('should correctly set v-model:opened when return-object is applied', async () => {
+    const opened: Ref = ref([])
+    const items: Ref = ref([
+      {
+        title: 'Item #1',
+        newValue: 1,
+        children: [
+          {
+            title: 'Child 1',
+            newValue: 100,
+          },
+        ],
+      },
+      {
+        title: 'Item #2',
+        newValue: 2,
+      },
+      {
+        title: 'Item #3',
+        newValue: 3,
+      },
+    ])
+    render(() => (
+      <VList
+        v-model:opened={ opened.value }
+        itemValue="newValue"
+        items={ items.value }
+        returnObject
+      >
+      </VList>
+    ))
+
+    expect(opened.value).toStrictEqual([])
+
+    await userEvent.click(screen.getByCSS('.v-list-group__header'))
+
+    expect(opened.value).toStrictEqual([{
+      title: 'Item #1',
+      newValue: 1,
+      children: [
+        {
+          title: 'Child 1',
+          newValue: 100,
+        },
+      ],
+    }])
+  })
 })

@@ -43,7 +43,7 @@ export const makeVListGroupProps = propsFactory({
     type: IconValue,
     default: '$expand',
   },
-  id: String,
+  id: [String, Number],
   prependIcon: IconValue,
   appendIcon: IconValue,
   fluid: Boolean,
