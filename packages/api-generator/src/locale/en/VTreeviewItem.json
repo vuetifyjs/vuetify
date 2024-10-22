@@ -1,0 +1,12 @@
+{
+  "props": {
+    "lines": "The line declaration specifies the minimum height of the item and can also be controlled from v-list with the same prop.",
+    "loading": "Likely indicates a loading state for the treeview item.",
+    "nav": "Reduces the width v-list-item takes up as well as adding a border radius.",
+    "slim": "Probably reduces the vertical padding or height of the treeview item, making it more compact.",
+    "toggle-icon": "Allows customization of the icon used to toggle the expansion and collapse of treeview branches."
+  },
+  "events": {
+    "clickOnce": "This event might trigger a specific action when the treeview item is clicked once, as opposed to multiple clicks."
+  }
+}

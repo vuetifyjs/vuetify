@@ -1,11 +1,17 @@
 {
   "props": {
-    "itemsLength": "Number of all items."
+    "itemsLength": "Number of all items.",
+    "header-props": "Pass props to the default header. See [`v-data-table-server` API](/api/v-data-table-server) for more information."
   },
   "slots": {
+    "[`header.${string}`]": "Slot for a specific header. See [`v-data-table-server` API](/api/v-data-table-server) for more information.",
     "[`column.${string}`]": "Slot for custom rendering of a column.",
     "[`item.${string}`]": "Slot for custom rendering of a row cell.",
     "body": "Slot to replace the default rendering of the `<tbody>` element.",
+    "body.append": "Adds content to the empty space in the body.",
+    "body.prepend": "Adds content to the empty space in the body.",
+    "header.data-table-expand": "Slot for the expand button in the header.",
+    "header.data-table-select": "Slot for the select-all checkbox in the header.",
     "bottom": "Slot to add content below the table.",
     "colgroup": "Slot to replace the default rendering of the `<colgroup>` element.",
     "column.data-table-expand": "Slot to replace the default `v-icon` used when expanding rows.",

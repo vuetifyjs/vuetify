@@ -3,6 +3,11 @@
     "collapseIcon": "Icon used when the expansion panel is in a collapsable state.",
     "expandIcon": "Icon used when the expansion panel is in a expandable state.",
     "hideActions": "Hide the expand icon in the content title.",
-    "static": "Remove title size expansion when selected."
+    "static": "Remove title size expansion when selected.",
+    "focusable": "Makes the expansion-panel headers focusable.",
+    "readonly": "Makes the expansion-panel content read only."
+  },
+  "slots": {
+    "actions": "Slot for the actions."
   }
 }

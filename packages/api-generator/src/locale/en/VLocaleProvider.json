@@ -1,1 +1,7 @@
-{}
+{
+  "props": {
+    "fallback-locale": "Specify a fallback locale to use when a locale is not found.",
+    "locale": "Specify a locale to use.",
+    "rtl": "Specify a RTL mode."
+  }
+}

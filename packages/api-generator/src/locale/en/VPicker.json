@@ -2,5 +2,9 @@
   "props": {
     "landscape": "Puts the picker into landscape mode.",
     "hideHeader": "Hide the picker header."
+  },
+  "slots": {
+    "actions": "Slot for customizing the content in the actions area",
+    "never": "Specialized slot for handling custom scenarios."
   }
 }

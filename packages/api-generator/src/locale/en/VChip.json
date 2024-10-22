@@ -15,7 +15,8 @@
     "value": "The value used when a child of a [v-chip-group](/components/chip-groups)."
   },
   "events": {
-    "click": "Emitted when component is clicked, toggles chip if contained in a chip group - Will trigger component to ripple when clicked unless the `.native` modifier is used."
+    "click": "Emitted when component is clicked, toggles chip if contained in a chip group - Will trigger component to ripple when clicked unless the `.native` modifier is used.",
+    "clickOnce": "Emitted when component is clicked once, toggles chip if contained in a chip group - Will trigger component to ripple when clicked unless the `.native` modifier is used."
   },
   "slots": {
     "close": "Slot for icon used in **close** prop.",

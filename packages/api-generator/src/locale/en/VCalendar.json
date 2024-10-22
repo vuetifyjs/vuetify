@@ -14,7 +14,8 @@
     "year": "Specifies the year for the calendar view."
   },
   "slots": {
-    "header": "Slot for custom header content."
+    "header": "Slot for custom header content.",
+    "event": "Slot for custom event content."
   },
   "events": {
     "next": "Emitted when moving to the next time period.",

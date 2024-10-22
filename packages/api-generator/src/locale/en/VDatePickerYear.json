@@ -7,6 +7,7 @@
     "month": "Sets the month.",
     "weekdays": "Sets the weekdays of the month.",
     "year": "Sets the year.",
+    "day": "The current day of the selected date.",
     "multiple": "Sets the multiple of the month.",
     "show-adjacent-months": "Show adjacent months.",
     "show-week": "Show the week number.",
@@ -14,8 +15,7 @@
     "reverseTransition": "The transition used when changing months into the past"
   },
   "event": {
-    "update:month": "Fired when the month changes.",
-    "update:year": "Fired when the year changes.",
-    "day": "Fired when a day is clicked."
+    "update:month": "Event emitted when the month changes.",
+    "update:year": "Event emitted when the year changes."
   }
 }

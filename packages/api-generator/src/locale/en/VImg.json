@@ -24,5 +24,12 @@
     "error": "Emitted if the image fails to load.",
     "load": "Emitted when the image is loaded.",
     "loadstart": "Emitted when the image starts to load."
+  },
+  "Exposed": {
+    "currentSrc": "The current source of the image. This is the image that is currently being displayed. This is useful for determining if the image is loading or not.",
+    "image": "The image element.",
+    "naturalHeight": "The natural height of the image.",
+    "naturalWidth": "The natural width of the image.",
+    "state": "The current state of the image. This is useful for determining if the image is loading or not."
   }
 }
