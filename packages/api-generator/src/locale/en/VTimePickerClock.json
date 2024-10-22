@@ -2,13 +2,13 @@
   "props": {
     "allowedValues": "Restricts which hours can be selected.",
     "ampm": "Displays time in a 12-hour format.",
-    "display-value": "Used to display a custom value on the clock, likely reflecting the selected time.",
+    "display-value": "Used to display a custom value on the clock.",
     "double": "If set, this probably indicates a double rotation or a mode where more than one set of values (like hours and minutes) is displayed on the clock at the same time.",
     "format": "Specifies the format of the displayed time, either 12-hour or 24-hour, depending on the component's setup.",
     "max": "Defines the maximum time value that can be selected.",
     "min": "Defines the minimum time value that can be selected.",
     "readonly": "When true, the picker is in a read-only state, and users cannot modify the selected time.",
-    "rotate": "Controls rotation, possibly specifying the direction or degree of rotation for the clock hands.",
+    "rotate": "Controls rotation, specifying the degree of rotation for the clock hands.",
     "scrollable": "Allows the time selection to be scrollable, enhancing user experience for devices with scroll inputs.",
     "step": "Defines the increments between selectable times, such as a step of 1 for every minute or a larger step for every 5 or 15 minutes."
   },
