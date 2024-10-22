@@ -16,6 +16,6 @@
     "[`header.${string}`]": "Slot for a specific header. See [`v-data-table-headers` API](/api/v-data-table-headers) for more information.",
     "header.data-table-expand": "Slot for the expand button in the header.",
     "header.data-table-select": "Slot for the select-all checkbox in the header.",
-    "headers":"Array of header items to display."
+    "headers": "Array of header items to display."
   }
 }
