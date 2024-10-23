@@ -3,6 +3,7 @@ import './VList.sass'
 
 // Components
 import { VListChildren } from './VListChildren'
+import { VVirtualScroll } from '@/components/VVirtualScroll/VVirtualScroll'
 
 // Composables
 import { createList } from './list'
@@ -94,6 +95,7 @@ export const makeVListProps = propsFactory({
   },
   slim: Boolean,
   nav: Boolean,
+  virtualScroll: VVirtualScroll,
 
   'onClick:open': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
   'onClick:select': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
@@ -233,10 +235,10 @@ export const VList = genericComponent<new <
       isFocused.value = true
     }
 
-    function focus (location?: 'next' | 'prev' | 'first' | 'last') {
-      if (contentRef.value) {
-        return focusChild(contentRef.value, location)
-      }
+    function focus (location: 'next' | 'prev' | 'first' | 'last' = 'first') {
+      if (!contentRef.value) return
+      if (props.virtualScroll) props.virtualScroll.focus(location)
+      else focusChild(contentRef.value, location)
     }
 
     useRender(() => {
