@@ -4,6 +4,7 @@
     "src",
     "dev",
   ],
+  "exclude": ["**/*.spec.cy.ts", "**/*.spec.cy.tsx"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
