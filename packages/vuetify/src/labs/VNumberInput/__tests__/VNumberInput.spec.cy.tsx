@@ -33,10 +33,10 @@ describe('VNumberInput', () => {
           <VNumberInput
             clearable
             v-model={ model.value }
-            readonly
           />
         </>
     ))
+      .get('.v-field').click()
       .get('.v-field__clearable .v-icon--clickable').click()
       .then(() => {
         expect(model.value).equal(null)
