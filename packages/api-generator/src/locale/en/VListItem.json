@@ -9,9 +9,6 @@
     "nav": "Reduces the width v-list-item takes up as well as adding a border radius.",
     "slim": "Reduces horizontal spacing for badges, icons, tooltips, and avatars to create a more compact visual representation."
   },
-  "events": {
-    "clickOnce": "Emitted when the item is clicked."
-  },
   "slots": {
     "isGroupActivator": "Slot for the isGroupActivator.",
     "isSelected": "Slot for the isSelected.",
