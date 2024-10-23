@@ -13,7 +13,7 @@
     "transition": "The transition used when changing months into the future",
     "reverseTransition": "The transition used when changing months into the past"
   },
-  "event": {
+  "events": {
     "update:month": "Fired when the month changes.",
     "update:year": "Fired when the year changes.",
     "day": "Fired when a day is clicked."
