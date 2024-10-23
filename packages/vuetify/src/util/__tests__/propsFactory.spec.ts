@@ -1,5 +1,4 @@
 // Utilities
-import { expect, it } from 'vitest'
 import { propsFactory } from '../propsFactory'
 
 describe('propsFactory', () => {

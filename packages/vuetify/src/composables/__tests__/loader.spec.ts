@@ -1,5 +1,4 @@
 // Utilities
-import { expect, it } from 'vitest'
 import { useLoader } from '../loader'
 
 describe('size', () => {

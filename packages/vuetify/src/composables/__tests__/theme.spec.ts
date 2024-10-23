@@ -1,10 +1,9 @@
-/* eslint-disable jest/no-commented-out-tests */
+/* eslint-disable vitest/no-commented-out-tests */
 
 // Composables
 import { createTheme } from '../theme'
 
 // Utilities
-import { expect, it } from 'vitest'
 import { createApp } from 'vue'
 
 // Types

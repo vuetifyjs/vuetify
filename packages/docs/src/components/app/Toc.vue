@@ -106,7 +106,10 @@
             cols="12"
           >
             <a
+              :data-umami-event-value="spot.spot.sponsor"
               :href="spot.spot.href"
+              data-umami-event="toc"
+              data-umami-event-type="promotion"
               rel="noopener noreferrer sponsored"
               target="_blank"
               @click="gtagClick('toc', 'promotion', spot.spot.sponsor)"

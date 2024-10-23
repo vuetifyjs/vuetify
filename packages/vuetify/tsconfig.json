@@ -2,21 +2,19 @@
   "extends": "../../tsconfig.json",
   "include": [
     "src",
-    "dev"
+    "dev",
   ],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "types": [
-        "jest",
-        "node",
-        "vue-router"
-      ]
+      "@/*": ["src/*"],
+      "@test": ["test/index.ts"]
     },
+    "types": [
+      "node",
+      "vue-router"
+    ],
     "stripInternal": true,
-    "skipLibCheck": false,
+    "skipLibCheck": false
   }
 }

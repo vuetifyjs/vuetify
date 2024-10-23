@@ -2,7 +2,6 @@
 import { useItems } from '../list-items'
 
 // Utilities
-import { expect, it } from 'vitest'
 import { deepEqual } from '@/util'
 
 describe('items', () => {

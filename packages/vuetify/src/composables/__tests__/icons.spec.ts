@@ -3,7 +3,6 @@ import { useIcon } from '../icons'
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { expect, it } from 'vitest'
 import { defineComponent, toRef } from 'vue'
 import { createVuetify } from '@/framework'
 

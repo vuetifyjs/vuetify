@@ -3,7 +3,6 @@ import { useLocation } from '../location'
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { expect, it } from 'vitest'
 
 // Types
 import { createVuetify } from '@/framework'

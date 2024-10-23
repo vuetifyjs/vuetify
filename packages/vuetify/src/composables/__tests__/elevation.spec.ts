@@ -2,7 +2,6 @@
 import { makeElevationProps, useElevation } from '../elevation'
 
 // Utilities
-import { expect, it } from 'vitest'
 
 // Utilities
 

@@ -2,7 +2,6 @@
 import { allowedVariants, makeVariantProps, useVariant } from '../variant'
 
 // Utilities
-import { expect, it } from 'vitest'
 
 // Utilities
 

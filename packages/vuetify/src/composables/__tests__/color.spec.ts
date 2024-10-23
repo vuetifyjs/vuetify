@@ -2,7 +2,6 @@
 import { useBackgroundColor, useColor, useTextColor } from '../color'
 
 // Utilities
-import { expect, it } from 'vitest'
 import { reactive, toRef } from 'vue'
 
 describe('color.ts', () => {

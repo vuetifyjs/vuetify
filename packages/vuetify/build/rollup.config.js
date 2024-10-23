@@ -68,6 +68,7 @@ export default [
       sass({
         options: {
           charset: false,
+          silenceDeprecations: ['legacy-js-api'],
         },
         output (styles, styleNodes) {
           // Complete CSS bundle
@@ -203,6 +204,7 @@ export default [
       sass({
         options: {
           charset: false,
+          silenceDeprecations: ['legacy-js-api'],
         },
         output (styles, styleNodes) {
           mkdirp(path.resolve(root, 'dist')).then(() => {
