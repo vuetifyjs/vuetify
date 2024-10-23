@@ -142,8 +142,9 @@
     "@vitest/browser": "^2.1.1",
     "@vitest/coverage-v8": "^2.1.1",
     "@vitest/ui": "^2.1.1",
-    "@vue/babel-plugin-jsx": "^1.2.2",
-    "@vue/shared": "^3.4.27",
+    "@vue/babel-plugin-jsx": "^1.2.5",
+    "@vue/reactivity": "^3.5.12",
+    "@vue/shared": "^3.5.12",
     "@vue/test-utils": "2.4.6",
     "acorn-walk": "^8.3.2",
     "autoprefixer": "^10.4.19",
@@ -185,7 +186,7 @@
   "peerDependencies": {
     "typescript": ">=4.7",
     "vite-plugin-vuetify": ">=1.0.0",
-    "vue": "^3.3.0",
+    "vue": "^3.5.0",
     "webpack-plugin-vuetify": ">=2.0.0"
   },
   "peerDependenciesMeta": {
