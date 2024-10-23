@@ -73,6 +73,10 @@ export const VDateInput = genericComponent()({
 
     const isInteractive = computed(() => !props.disabled && !props.readonly)
 
+    function onClear (e: MouseEvent) {
+      model.value = props.multiple ? [] : null
+    }
+
     function onKeydown (e: KeyboardEvent) {
       if (e.key !== 'Enter') return
 
@@ -98,6 +102,10 @@ export const VDateInput = genericComponent()({
       menu.value = false
     }
 
+    function closeMenu () {
+      menu.value = false
+    }
+
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const datePickerProps = VDatePicker.filterProps(omit(props, ['active']))
@@ -115,6 +123,7 @@ export const VDateInput = genericComponent()({
           onBlur={ blur }
           onClick:control={ isInteractive.value ? onClick : undefined }
           onClick:prepend={ isInteractive.value ? onClick : undefined }
+          onClick:clear={ onClear }
         >
           <VMenu
             v-model={ menu.value }
@@ -127,6 +136,8 @@ export const VDateInput = genericComponent()({
               { ...confirmEditProps }
               v-model={ model.value }
               onSave={ onSave }
+              onCloseMenu={ closeMenu }
+              enableActions
             >
               {{
                 default: ({ actions, model: proxyModel }) => {
