@@ -90,7 +90,7 @@ pnpm dev
 
 ### Manual setup
 
-Nuxt is powered by Vite, so the steps to get Vuetify working in Nuxt 3 are quite similar to [the manual steps described below](#existing-projects).
+Nuxt is powered by Nitro and can be used with Vite or Webpack 5 bundlers, so the steps to get Vuetify working in Nuxt 3 are quite similar to [the manual steps described below](#existing-projects).
 
 Start off creating a nuxt app by executing the following commands:
 
