@@ -241,7 +241,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     offsets = Array.from({ length: items.value.length })
     updateOffsets.immediate()
     calculateVisibleItems()
-  }, { deep: true })
+  }, { deep: !props.itemHeight })
 
   return {
     calculateVisibleItems,
