@@ -281,6 +281,8 @@ export const useSlider = ({
   }
 
   function onSliderMousedown (e: MouseEvent) {
+    if (e.button !== 0) return
+
     e.preventDefault()
 
     handleStart(e)
