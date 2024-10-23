@@ -15,7 +15,7 @@
       "node",
       "vue-router"
     ],
-    "noEmit": true,
+    "emitDeclarationOnly": true,
     "stripInternal": true,
     "skipLibCheck": false
   }
