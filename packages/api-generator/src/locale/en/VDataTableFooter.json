@@ -14,6 +14,6 @@
     "showCurrentPage": "Show current page number between prev/next icons."
   },
   "slots": {
-    "[string]": "Slot for each item in the items-per-page dropdown."
+    "prepend": "Extra content placed before the default pagination."
   }
 }
