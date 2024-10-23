@@ -30,7 +30,7 @@
         </v-card-text>
       </v-col>
 
-      <v-divider vertical></v-divider>
+      <v-divider :vertical="$vuetify.display.mdAndUp" class="my-md-3"></v-divider>
 
       <v-col
         cols="12"
