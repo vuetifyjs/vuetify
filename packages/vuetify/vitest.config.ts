@@ -1,5 +1,5 @@
 import { defineConfig, mergeConfig } from 'vitest/config'
-import viteConfig from './vite.config.mjs'
+import viteConfig from './vite.config'
 import AutoImport from 'unplugin-auto-import/vite'
 import { fileURLToPath } from 'url'
 

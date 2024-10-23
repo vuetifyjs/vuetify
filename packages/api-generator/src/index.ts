@@ -61,7 +61,7 @@ const run = async () => {
     // await fs.writeFile(`./templates/tmp/${component}.d.ts`, template.replaceAll('__component__', component))
     await fs.writeFile(`./templates/tmp/${component}.d.ts`,
       template.replaceAll('__component__', component)
-        .replaceAll('__name__', componentsInfo[component].from.replace('.mjs', '.js'))
+        .replaceAll('__name__', componentsInfo[component].from)
     )
   }
 
