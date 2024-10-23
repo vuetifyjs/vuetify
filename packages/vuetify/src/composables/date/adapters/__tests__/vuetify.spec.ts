@@ -17,7 +17,23 @@ describe('vuetify date adapter', () => {
   })
 
   it('formats dates', () => {
-    let instance = new VuetifyDateAdapter({ locale: 'en-us' })
+    let instance = new VuetifyDateAdapter({ locale: 'en-gb' })
+    expect(instance.format(new Date(2000, 0, 1, 13), 'fullTime')).toBe('13:00')
+
+    instance = new VuetifyDateAdapter({ locale: 'en-us' })
+    expect(instance.format(new Date(2000, 0, 1, 13), 'fullTime')).toBe('1:00 PM')
+    expect(instance.format(new Date(2000, 0, 1, 13), 'fullTime12h')).toBe('1:00 PM')
+    expect(instance.format(new Date(2000, 0, 1, 13), 'fullTime24h')).toBe('13:00')
+
+    // These don't match the date-io spec
+    expect(instance.format(new Date(2000, 0, 1, 13), 'fullDateTime')).toBe('Jan 1, 2000, 1:00 PM')
+    expect(instance.format(new Date(2000, 0, 1, 13), 'fullDateTime12h')).toBe('Jan 1, 2000, 1:00 PM')
+    expect(instance.format(new Date(2000, 0, 1, 13), 'fullDateTime24h')).toBe('Jan 1, 2000, 13:00')
+
+    const keyboardDateTime12hFormat = '01/01/2000 1:00 PM'
+    expect(instance.format(new Date(2000, 0, 1, 13), 'keyboardDateTime')).toBe(keyboardDateTime12hFormat)
+    expect(instance.format(new Date(2000, 0, 1, 13), 'keyboardDateTime12h')).toBe(keyboardDateTime12hFormat)
+    expect(instance.format(new Date(2000, 0, 1, 13), 'keyboardDateTime24h')).toBe('01/01/2000 13:00')
 
     expect(instance.format(new Date(2000, 0, 1), 'fullDateWithWeekday')).toBe('Saturday, January 1, 2000')
 
