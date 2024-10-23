@@ -253,6 +253,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                 { ...fieldProps }
                 id={ id.value }
                 active={ isActive.value || isDirty.value }
+                labelId={ `${id.value}-label` }
                 centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
@@ -287,6 +288,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                         name={ props.name }
                         onFocus={ onFocus }
                         onBlur={ blur }
+                        aria-labelledby={ `${id.value}-label` }
                         { ...slotProps }
                         { ...inputAttrs }
                       />
