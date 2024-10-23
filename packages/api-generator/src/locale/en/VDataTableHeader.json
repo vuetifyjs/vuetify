@@ -2,9 +2,9 @@
   "props": {
     "everyItem": "Indicates if all items in table are selected.",
     "headers": "Array of header items to display.",
-    "header-props": "Pass props to the default header.",
+    "headerProps": "Pass props to the default header.",
     "mobile": "Renders mobile view of headers.",
-    "muti-sort": "Toggles rendering of sort buttons.",
+    "mutiSort": "Toggles rendering of sort buttons.",
     "options": "Options object. Identical to the one on `v-data-table`.",
     "showGroupBy": "Shows group by button.",
     "singleSelect": "Toggles rendering of select-all checkbox.",

@@ -1,6 +1,6 @@
 {
   "props": {
-    "header-props": "Pass props to the default header."
+    "headerProps": "Pass props to the default header."
   },
   "slots": {
     "[`header.${string}`]": "Slot for a specific header. See [`v-data-table-virtual` API](/api/v-data-table-virtual) for more information.",

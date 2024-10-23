@@ -4,6 +4,6 @@
     "loading": "Places the v-treeview-item into a loading state.",
     "nav": "Reduces the width of v-list-item takes and adds a border radius.",
     "slim": "Reduces the vertical padding or height of the v-treeview-item, making it more compact.",
-    "toggle-icon": "Allows customization of the icon used to toggle the expansion and collapse of treeview branches."
+    "toggleIcon": "Allows customization of the icon used to toggle the expansion and collapse of treeview branches."
   }
 }

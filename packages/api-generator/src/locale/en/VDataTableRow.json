@@ -1,6 +1,6 @@
 {
   "props": {
-    "cell-props": "Props to be applied to the cell.",
+    "cellProps": "Props to be applied to the cell.",
     "index": "Row index.",
     "item": "Data (key, index and column values) of the displayed item."
   },

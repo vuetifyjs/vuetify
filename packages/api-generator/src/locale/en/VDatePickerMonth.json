@@ -1,6 +1,6 @@
 {
   "props": {
-    "allowed-dates": "Sets the allowed dates of the month.",
+    "allowedDates": "Sets the allowed dates of the month.",
     "hideWeekdays": "Hide the days of the week letters.",
     "max": "Sets the maximum date of the month.",
     "min": "Sets the minimum date of the month.",
@@ -8,8 +8,8 @@
     "weekdays": "Sets the weekdays of the month.",
     "year": "Sets the year.",
     "multiple": "Sets the multiple of the month.",
-    "show-adjacent-months": "Show adjacent months.",
-    "show-week": "Show the week number.",
+    "showAdjacentMonths": "Show adjacent months.",
+    "showWeek": "Show the week number.",
     "transition": "The transition used when changing months into the future",
     "reverseTransition": "The transition used when changing months into the past"
   },

@@ -19,7 +19,7 @@
     "value": "An array of numbers.",
     "width": "Width of the SVG trendline or bars.",
     "id": "The id of the component.",
-    "item-value": "The value of the item.",
+    "itemValue": "The value of the item.",
     "max": "The maximum value of the sparkline.",
     "min": "The minimum value of the sparkline."
   }

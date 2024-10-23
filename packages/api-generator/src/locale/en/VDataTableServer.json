@@ -1,7 +1,7 @@
 {
   "props": {
     "itemsLength": "Number of all items.",
-    "header-props": "Pass props to the default header. See [`v-data-table-server` API](/api/v-data-table-server) for more information."
+    "headerProps": "Pass props to the default header. See [`v-data-table-server` API](/api/v-data-table-server) for more information."
   },
   "slots": {
     "[`header.${string}`]": "Slot for a specific header. See [`v-data-table-server` API](/api/v-data-table-server) for more information.",

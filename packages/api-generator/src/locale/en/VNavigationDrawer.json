@@ -20,8 +20,7 @@
     "touchless": "Disable mobile touch functionality.",
     "value": "Controls whether the component is visible or hidden.",
     "location": "Controls the edge of the screen the drawer is attached to.",
-    "sticky": "When true, the drawer will remain visible when scrolling past the top of the page.",
-    "isStuck": "Used to determine if the drawer is stuck to the top of the page."
+    "sticky": "When true, the drawer will remain visible when scrolling past the top of the page."
   },
   "slots": {
     "append": "A slot at the bottom of the drawer.",
@@ -31,5 +30,8 @@
   "events": {
     "transitionend": "Emits event object when transition is complete.",
     "update:rail": "Event that is emitted when the rail model changes."
+  },
+  "exposed": {
+    "isStuck": "Used to determine if the drawer is stuck to the top of the page."
   }
 }
