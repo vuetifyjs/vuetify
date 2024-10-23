@@ -4,7 +4,6 @@
     "calendarIcon": "The icon shown in the header when in 'input' **input-mode**.",
     "dayFormat": "Allows you to customize the format of the day string that appears in the date table. Called with date (ISO 8601 **date** string) arguments.",
     "displayDate": "The date displayed in the picker header.",
-    "displayValue": "The date displayed in the picker header.",
     "eventColor": "Sets the color for event dot. It can be string (all events will have the same color) or `object` where attribute is the event date and value is boolean/color/array of colors for specified date or `function` taking date as a parameter and returning boolean/color/array of colors for that date.",
     "events": "Array of dates or object defining events or colors or function returning boolean/color/array of colors.",
     "expandIcon": "Icon used for **view-mode** toggle.",

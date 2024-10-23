@@ -1,7 +1,6 @@
 {
   "props": {
     "allowedDates": "Determines which dates are selectable.",
-    "displayValue": "Value to display for the component, possibly a formatted date.",
     "hideHeader": "Determines whether the header is hidden in the calendar view.",
     "hideWeekNumber": "Toggles the display of week numbers in a calendar view.",
     "intervals": "Total number of intervals in a day view.",

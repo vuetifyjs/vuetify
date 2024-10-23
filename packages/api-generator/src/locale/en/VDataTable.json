@@ -80,7 +80,7 @@
     "pageCount": "Emits when the **pageCount** property of the **pagination** prop is updated.",
     "pagination": "Emits when something changed to the `pagination` which can be provided via the `pagination` prop.",
     "toggleSelectAll": "Emits when the `select-all` checkbox in table header is clicked. This checkbox is enabled by the **show-select** prop.",
-    "update:currentItems": "Emits when the **items** property of the **pagination** prop is updated.",
+    "update:currentItems": "Emits with the items currently being displayed.",
     "update:expanded": "Emits when the **expanded** property of the **options** prop is updated.",
     "update:groupBy": "Emits when the **group-by** property of the **options** property is updated.",
     "update:groupDesc": "Emits when the **group-desc** property of the **options** prop is updated.",
