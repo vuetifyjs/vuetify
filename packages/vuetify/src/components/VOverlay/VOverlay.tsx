@@ -37,6 +37,7 @@ import {
 import {
   animate,
   convertToUnit,
+  debounce,
   genericComponent,
   getCurrentInstance,
   getScrollParent,
@@ -170,9 +171,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     const isMounted = useHydration()
     const { scopeId } = useScopeId()
 
-    watch(() => props.disabled, v => {
-      if (v) isActive.value = false
-    })
+    watch(() => props.disabled, debounce((v: boolean) => v && (isActive.value = false), 100))
 
     const { contentStyles, updateLocation } = useLocationStrategies(props, {
       isRtl,
