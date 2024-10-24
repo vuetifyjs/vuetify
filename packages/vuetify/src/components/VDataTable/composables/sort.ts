@@ -19,6 +19,7 @@ export const makeDataTableSortProps = propsFactory({
   customKeySort: Object as PropType<Record<string, DataTableCompareFunction>>,
   multiSort: Boolean,
   mustSort: Boolean,
+  sortDescendingFirst: Boolean,
 }, 'DataTable-sort')
 
 const VDataTableSortSymbol: InjectionKey<{
@@ -34,23 +35,28 @@ type SortProps = {
   'onUpdate:sortBy': ((value: any) => void) | undefined
   mustSort: boolean
   multiSort: boolean
+  sortDescendingFirst: boolean
 }
 
 export function createSort (props: SortProps) {
   const sortBy = useProxiedModel(props, 'sortBy')
   const mustSort = toRef(props, 'mustSort')
   const multiSort = toRef(props, 'multiSort')
+  const sortDescendingFirst = toRef(props, 'sortDescendingFirst')
 
-  return { sortBy, mustSort, multiSort }
+  return { sortBy, mustSort, multiSort, sortDescendingFirst }
 }
 
 export function provideSort (options: {
   sortBy: Ref<readonly SortItem[]>
   mustSort: Ref<boolean>
   multiSort: Ref<boolean>
+  sortDescendingFirst: Ref<boolean>
   page?: Ref<number>
 }) {
-  const { sortBy, mustSort, multiSort, page } = options
+  const { sortBy, mustSort, multiSort, sortDescendingFirst, page } = options
+  const firstOrder = sortDescendingFirst.value ? 'desc' : 'asc'
+  const secondOrder = sortDescendingFirst.value ? 'asc' : 'desc'
 
   const toggleSort = (column: InternalDataTableHeader) => {
     if (column.key == null) return
@@ -59,16 +65,16 @@ export function provideSort (options: {
     const item = newSortBy.find(x => x.key === column.key)
 
     if (!item) {
-      if (multiSort.value) newSortBy = [...newSortBy, { key: column.key, order: 'asc' }]
-      else newSortBy = [{ key: column.key, order: 'asc' }]
-    } else if (item.order === 'desc') {
+      if (multiSort.value) newSortBy = [...newSortBy, { key: column.key, order: firstOrder }]
+      else newSortBy = [{ key: column.key, order: firstOrder }]
+    } else if (item.order === secondOrder) {
       if (mustSort.value) {
-        item.order = 'asc'
+        item.order = firstOrder
       } else {
         newSortBy = newSortBy.filter(x => x.key !== column.key)
       }
     } else {
-      item.order = 'desc'
+      item.order = secondOrder
     }
 
     sortBy.value = newSortBy

@@ -67,7 +67,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
   setup (props, { attrs, slots }) {
     const { groupBy } = createGroupBy(props)
-    const { sortBy, multiSort, mustSort } = createSort(props)
+    const { sortBy, multiSort, mustSort, sortDescendingFirst } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
     const { disableSort } = toRefs(props)
     const itemsLength = computed(() => parseInt(props.itemsLength, 10))
@@ -80,7 +80,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     const { items } = useDataTableItems(props, columns)
 
-    const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
+    const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, sortDescendingFirst, page })
 
     const { opened, isGroupOpen, toggleGroup, extractRows } = provideGroupBy({ groupBy, sortBy, disableSort })
 
