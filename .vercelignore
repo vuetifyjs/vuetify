@@ -1,6 +1,0 @@
-node_modules
-/scripts
-/packages/vuetify
-/packages/api-generator
-/packages/docs/src
-!/packages/docs/dist
