@@ -108,7 +108,7 @@
   function copy () {
     isCopying.value = true
 
-    navigator.clipboard.writeText(`${randomPackage} create vuetify`);
+    navigator.clipboard.writeText(`${randomPackage} create vuetify`)
 
     setTimeout(() => {
       isCopying.value = false
