@@ -7,6 +7,8 @@ related:
   - /directives/resize/
   - /styles/display/
   - /styles/text-and-typography/
+features:
+  report: true
 ---
 
 # Display & Platform
@@ -218,7 +220,7 @@ Use the **useDisplay** composable alongside Vue 3's `setup` function to harness 
 
 ### Breakpoint conditionals
 
-Breakpoint and conditional values return a `boolean` that is derived from the current viewport size. Additionally, the **breakpoint** composable follows the [Vuetify Grid](/components/grids) naming conventions and has access to properties such as **xlOnly**, **xsOnly**, **mdAndDown**, and many others. In the following example we use the `setup` function to pass the _xs_ and _mdAndUp_ values to our template:
+Breakpoint and conditional values return a `boolean` that is derived from the current viewport size. Additionally, the **breakpoint** composable follows the [Vuetify Grid](/components/grids) naming conventions and has access to properties such as **xs**, **smAndUp**, **mdAndDown**, and many others. In the following example we use the `setup` function to pass the _xs_ and _mdAndUp_ values to our template:
 
 ```html { resource="Component.vue" }
 <template>

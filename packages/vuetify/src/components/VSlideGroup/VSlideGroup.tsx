@@ -78,7 +78,7 @@ export const makeVSlideGroupProps = propsFactory({
   },
 
   ...makeComponentProps(),
-  ...makeDisplayProps(),
+  ...makeDisplayProps({ mobile: null }),
   ...makeTagProps(),
   ...makeGroupProps({
     selectedClass: 'v-slide-group-item--active',
@@ -116,7 +116,7 @@ export const VSlideGroup = genericComponent<new <T>(
     const goTo = useGoTo()
     const goToOptions = computed<Partial<GoToOptions>>(() => {
       return {
-        container: containerRef.value,
+        container: containerRef.el,
         duration: 200,
         easing: 'easeOutQuart',
       }
@@ -148,9 +148,9 @@ export const VSlideGroup = genericComponent<new <T>(
             isOverflowing.value = containerSize.value + 1 < contentSize.value
           }
 
-          if (firstSelectedIndex.value >= 0 && contentRef.value) {
+          if (firstSelectedIndex.value >= 0 && contentRef.el) {
             // TODO: Is this too naive? Should we store element references in group composable?
-            const selectedElement = contentRef.value.children[lastSelectedIndex.value] as HTMLElement
+            const selectedElement = contentRef.el.children[lastSelectedIndex.value] as HTMLElement
 
             scrollToChildren(selectedElement, props.centerActive)
           }
@@ -165,13 +165,13 @@ export const VSlideGroup = genericComponent<new <T>(
 
       if (center) {
         target = calculateCenteredTarget({
-          containerElement: containerRef.value!,
+          containerElement: containerRef.el!,
           isHorizontal: isHorizontal.value,
           selectedElement: children,
         })
       } else {
         target = calculateUpdatedTarget({
-          containerElement: containerRef.value!,
+          containerElement: containerRef.el!,
           isHorizontal: isHorizontal.value,
           isRtl: isRtl.value,
           selectedElement: children,
@@ -182,11 +182,11 @@ export const VSlideGroup = genericComponent<new <T>(
     }
 
     function scrollToPosition (newPosition: number) {
-      if (!IN_BROWSER || !containerRef.value) return
+      if (!IN_BROWSER || !containerRef.el) return
 
-      const offsetSize = getOffsetSize(isHorizontal.value, containerRef.value)
-      const scrollPosition = getScrollPosition(isHorizontal.value, isRtl.value, containerRef.value)
-      const scrollSize = getScrollSize(isHorizontal.value, containerRef.value)
+      const offsetSize = getOffsetSize(isHorizontal.value, containerRef.el)
+      const scrollPosition = getScrollPosition(isHorizontal.value, isRtl.value, containerRef.el)
+      const scrollSize = getScrollSize(isHorizontal.value, containerRef.el)
 
       if (
         scrollSize <= offsetSize ||
@@ -194,8 +194,8 @@ export const VSlideGroup = genericComponent<new <T>(
         Math.abs(newPosition - scrollPosition) < 16
       ) return
 
-      if (isHorizontal.value && isRtl.value && containerRef.value) {
-        const { scrollWidth, offsetWidth: containerWidth } = containerRef.value!
+      if (isHorizontal.value && isRtl.value && containerRef.el) {
+        const { scrollWidth, offsetWidth: containerWidth } = containerRef.el!
 
         newPosition = (scrollWidth - containerWidth) - newPosition
       }
@@ -207,7 +207,7 @@ export const VSlideGroup = genericComponent<new <T>(
       }
     }
 
-    function onScroll (e: UIEvent) {
+    function onScroll (e: Event) {
       const { scrollTop, scrollLeft } = e.target as HTMLElement
 
       scrollOffset.value = isHorizontal.value ? scrollLeft : scrollTop
@@ -216,12 +216,12 @@ export const VSlideGroup = genericComponent<new <T>(
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
 
-      if (!isOverflowing.value || !contentRef.value) return
+      if (!isOverflowing.value || !contentRef.el) return
 
       // Focused element is likely to be the root of an item, so a
       // breadth-first search will probably find it in the first iteration
       for (const el of e.composedPath()) {
-        for (const item of contentRef.value.children) {
+        for (const item of contentRef.el.children) {
           if (item === el) {
             scrollToChildren(item as HTMLElement)
             return
@@ -240,7 +240,7 @@ export const VSlideGroup = genericComponent<new <T>(
       if (
         !ignoreFocusEvent &&
         !isFocused.value &&
-        !(e.relatedTarget && contentRef.value?.contains(e.relatedTarget as Node))
+        !(e.relatedTarget && contentRef.el?.contains(e.relatedTarget as Node))
       ) focus()
 
       ignoreFocusEvent = false
@@ -251,7 +251,7 @@ export const VSlideGroup = genericComponent<new <T>(
     }
 
     function onKeydown (e: KeyboardEvent) {
-      if (!contentRef.value) return
+      if (!contentRef.el) return
 
       function toFocus (location: Parameters<typeof focus>[0]) {
         e.preventDefault()
@@ -280,25 +280,25 @@ export const VSlideGroup = genericComponent<new <T>(
     }
 
     function focus (location?: 'next' | 'prev' | 'first' | 'last') {
-      if (!contentRef.value) return
+      if (!contentRef.el) return
 
       let el: HTMLElement | undefined
 
       if (!location) {
-        const focusable = focusableChildren(contentRef.value)
+        const focusable = focusableChildren(contentRef.el)
         el = focusable[0]
       } else if (location === 'next') {
-        el = contentRef.value.querySelector(':focus')?.nextElementSibling as HTMLElement | undefined
+        el = contentRef.el.querySelector(':focus')?.nextElementSibling as HTMLElement | undefined
 
         if (!el) return focus('first')
       } else if (location === 'prev') {
-        el = contentRef.value.querySelector(':focus')?.previousElementSibling as HTMLElement | undefined
+        el = contentRef.el.querySelector(':focus')?.previousElementSibling as HTMLElement | undefined
 
         if (!el) return focus('last')
       } else if (location === 'first') {
-        el = (contentRef.value.firstElementChild as HTMLElement)
+        el = (contentRef.el.firstElementChild as HTMLElement)
       } else if (location === 'last') {
-        el = (contentRef.value.lastElementChild as HTMLElement)
+        el = (contentRef.el.lastElementChild as HTMLElement)
       }
 
       if (el) {
@@ -314,8 +314,8 @@ export const VSlideGroup = genericComponent<new <T>(
       let newPosition = scrollOffset.value + offsetStep
 
       // TODO: improve it
-      if (isHorizontal.value && isRtl.value && containerRef.value) {
-        const { scrollWidth, offsetWidth: containerWidth } = containerRef.value!
+      if (isHorizontal.value && isRtl.value && containerRef.el) {
+        const { scrollWidth, offsetWidth: containerWidth } = containerRef.el!
 
         newPosition += scrollWidth - containerWidth
       }
@@ -366,8 +366,8 @@ export const VSlideGroup = genericComponent<new <T>(
     const hasNext = computed(() => {
       if (!containerRef.value) return false
 
-      const scrollSize = getScrollSize(isHorizontal.value, containerRef.value)
-      const clientSize = getClientSize(isHorizontal.value, containerRef.value)
+      const scrollSize = getScrollSize(isHorizontal.value, containerRef.el)
+      const clientSize = getClientSize(isHorizontal.value, containerRef.el)
 
       const scrollSizeMax = scrollSize - clientSize
 
@@ -451,6 +451,8 @@ export const VSlideGroup = genericComponent<new <T>(
       scrollTo,
       scrollOffset,
       focus,
+      hasPrev,
+      hasNext,
     }
   },
 })

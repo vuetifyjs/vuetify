@@ -12,7 +12,7 @@ related:
 
 # Data and Display
 
-Data table filtering is key feature that allows users to quickly find the data they are looking for.
+Data table filtering is a key feature that allows users to quickly find the data they are looking for.
 
 <PromotedEntry />
 
@@ -79,6 +79,12 @@ The current selection of the data-table can be accessed through the **v-model** 
 Use the **item-selectable** prop to designate a property on your items that controls if the item should be selectable or not.
 
 <ExamplesExample file="v-data-table/prop-item-selectable" />
+
+### Custom select column
+
+Use the **item.data-table-select** slot alongside `v-checkbox-btn` to customize the checkbox used for row selection. You can also use the **header.data-table-select** slot to customize the select-all checkbox in the header of the column.
+
+<ExamplesExample file="v-data-table/slot-item-data-table-select" />
 
 ### Select strategies
 

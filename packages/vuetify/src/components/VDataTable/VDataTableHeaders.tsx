@@ -62,6 +62,7 @@ export type VDataTableHeadersSlots = {
 export const makeVDataTableHeadersProps = propsFactory({
   color: String,
   sticky: Boolean,
+  disableSort: Boolean,
   multiSort: Boolean,
   sortAscIcon: {
     type: IconValue,
@@ -156,7 +157,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           align={ column.align }
           class={[
             {
-              'v-data-table__th--sortable': column.sortable,
+              'v-data-table__th--sortable': column.sortable && !props.disableSort,
               'v-data-table__th--sorted': isSorted(column),
               'v-data-table__th--fixed': column.fixed,
             },
@@ -194,7 +195,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               if (slots[columnSlotName]) return slots[columnSlotName]!(columnSlotProps)
 
               if (column.key === 'data-table-select') {
-                return slots['header.data-table-select']?.(columnSlotProps) ?? (showSelectAll && (
+                return slots['header.data-table-select']?.(columnSlotProps) ?? (showSelectAll.value && (
                   <VCheckboxBtn
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
@@ -206,7 +207,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               return (
                 <div class="v-data-table-header__content">
                   <span>{ column.title }</span>
-                  { column.sortable && (
+                  { column.sortable && !props.disableSort && (
                     <VIcon
                       key="icon"
                       class="v-data-table-header__sort-icon"
@@ -236,6 +237,10 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const VDataTableMobileHeaderCell = () => {
       const headerProps = mergeProps(props.headerProps ?? {} ?? {})
       const selectColumn = columns.value.find(column => column.key === 'data-table-select') as InternalDataTableHeader
+
+      const displayItems = computed<ItemProps['items']>(() => {
+        return columns.value.filter(column => column?.sortable && !props.disableSort)
+      })
 
       const appendIcon = computed(() => {
         if (!hasSelectAll) return

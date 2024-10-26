@@ -61,16 +61,21 @@ type AppendDefault<T extends ComponentObjectPropsOptions, D extends PartialKeys<
     ? T[P]
     : T[P] extends Record<string, unknown>
       ? Omit<T[P], 'type' | 'default'> & {
-        type: PropType<MergeDefault<T[P], D[P]>>
+        type: PropType<MergeTypeDefault<T[P], D[P]>>
         default: MergeDefault<T[P], D[P]>
       }
       : {
-        type: PropType<MergeDefault<T[P], D[P]>>
+        type: PropType<MergeTypeDefault<T[P], D[P]>>
         default: MergeDefault<T[P], D[P]>
       }
 }
 
-type MergeDefault<T, D> = unknown extends D ? InferPropType<T> : (NonNullable<InferPropType<T>> | D)
+type MergeTypeDefault<T, D, P = InferPropType<T>> = unknown extends D
+  ? P
+  : (P | D)
+type MergeDefault<T, D, P = InferPropType<T>> = unknown extends D
+  ? P
+  : (NonNullable<P> | D)
 
 /**
  * Like `Partial<T>` but doesn't care what the value is

@@ -7,6 +7,8 @@ related:
   - /styles/text-and-typography/
   - /components/sheets/
   - /components/buttons/
+features:
+  report: true
 ---
 
 # Border Radius

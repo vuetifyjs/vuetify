@@ -184,7 +184,7 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
                 defaults={{
                   VBtn: {
                     class: 'v-empty-state__action-btn',
-                    color: props.color,
+                    color: props.color ?? 'surface-variant',
                     text: props.actionText,
                   },
                 }}

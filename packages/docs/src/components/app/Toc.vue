@@ -9,11 +9,9 @@
     floating
     sticky
   >
-    <template
-      v-if="routeToc?.length"
-      #prepend
-    >
+    <template #prepend>
       <AppHeadline
+        v-if="frontmatter?.toc?.length"
         class="mt-4 mb-2 ms-4"
         path="contents"
       />
@@ -21,7 +19,7 @@
 
     <ul class="ms-5">
       <router-link
-        v-for="{ to, level, text } in routeToc"
+        v-for="{ to, level, text } in frontmatter?.toc"
         :key="text"
         v-slot="{ href }"
         :to="to"
@@ -104,11 +102,14 @@
           </v-col>
 
           <v-col
-            v-if="!user.disableAds && spot.spot"
+            v-if="(!user.disableAds || (user.showHouseAds && spot.spot.sponsor === 'Vuetify')) && spot.spot"
             cols="12"
           >
             <a
+              :data-umami-event-value="spot.spot.sponsor"
               :href="spot.spot.href"
+              data-umami-event="toc"
+              data-umami-event-type="promotion"
               rel="noopener noreferrer sponsored"
               target="_blank"
               @click="gtagClick('toc', 'promotion', spot.spot.sponsor)"
@@ -123,12 +124,6 @@
 </template>
 
 <script setup lang="ts">
-  type TocItem = {
-    to: string;
-    text: string;
-    level: number;
-  }
-
   const { toc: tocDrawer, scrolling } = storeToRefs(useAppStore())
 
   const route = useRoute()
@@ -136,8 +131,7 @@
   const spot = useSpotStore()
   const theme = useTheme()
   const user = useUserStore()
-
-  const routeToc = computed(() => route.meta.toc as TocItem[] | undefined)
+  const frontmatter = useFrontmatter()
 
   const activeStack = [] as string[]
   const activeItem = ref('')
@@ -149,7 +143,7 @@
         activeStack.splice(activeStack.indexOf(entry.target.id), 1)
       }
     })
-    activeItem.value = activeStack.at(-1) || activeItem.value || routeToc.value?.[0]?.to.slice(1) || ''
+    activeItem.value = activeStack.at(-1) || activeItem.value || frontmatter.value?.toc?.[0]?.to.slice(1) || ''
   }, { rootMargin: '-10% 0px -75%' })
 
   async function observeToc () {
@@ -158,13 +152,13 @@
     activeItem.value = ''
     observer.disconnect()
     await nextTick()
-    routeToc.value?.forEach(v => {
+    frontmatter.value?.toc?.forEach(v => {
       const el = document.querySelector(v.to)
       el && observer.observe(el)
     })
   }
 
-  watch(routeToc, observeToc)
+  watch(() => frontmatter.value?.toc, observeToc)
   onMounted(() => {
     observeToc()
   })
@@ -180,10 +174,10 @@
     scrolling.value = true
     const query = route.query
 
-    if (val === routeToc.value?.[0]?.to.slice(1) && route.hash) {
+    if (val === frontmatter.value?.toc?.[0]?.to.slice(1) && route.hash) {
       router.replace({ path: route.path, query })
     } else {
-      const toc = routeToc.value?.find(v => v.to.slice(1) === val)
+      const toc = frontmatter.value?.toc?.find(v => v.to.slice(1) === val)
       if (toc) {
         await router.replace({ path: route.path, hash: toc.to, query })
       }
@@ -205,8 +199,6 @@
   }
 
   const sponsorStore = useSponsorsStore()
-
-  // const toc = computed(() => route.meta.toc as TocItem[])
 
   const sponsors = computed(() => (
     sponsorStore.sponsors

@@ -64,9 +64,9 @@ jobs:
               echo "Last commit was more than 24 hours ago, skipping tests"
               exit 1
           fi
-      - uses: ./.github/actions/yarn-install
+      - uses: vuetifyjs/setup-action@master
       - run: echo "COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
-      - run: yarn cy:run
+      - run: pnpm cy:run
         working-directory: ./packages/vuetify
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}

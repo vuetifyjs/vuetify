@@ -91,6 +91,12 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     function onRangeClick (value: unknown) {
       const _value = adapter.startOfDay(value)
 
+      if (model.value.length === 0) {
+        rangeStart.value = undefined
+      } else if (model.value.length === 1) {
+        rangeStart.value = model.value[0]
+        rangeStop.value = undefined
+      }
       if (!rangeStart.value) {
         rangeStart.value = _value
         model.value = [rangeStart.value]
@@ -170,7 +176,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
             key={ daysInMonth.value[0].date?.toString() }
             class="v-date-picker-month__days"
           >
-            { !props.hideWeekdays && adapter.getWeekdays().map(weekDay => (
+            { !props.hideWeekdays && adapter.getWeekdays(props.firstDayOfWeek).map(weekDay => (
               <div
                 class={[
                   'v-date-picker-month__day',

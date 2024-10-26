@@ -84,6 +84,28 @@ describe('VAppBar', () => {
         .get('.v-app-bar').should('not.be.visible')
     })
 
+    it('should hide correctly when scroll to the bottom', () => {
+      cy.mount(({ scrollBehavior }: any) => (
+        <VLayout>
+          <VAppBar scrollBehavior={ scrollBehavior } />
+
+          <VMain style="min-height: 300px">
+            {
+              Array.from({ length: 7 }, () => (
+                <div class="pa-16 ma-2 w-50 bg-green text-center">
+                  box
+                </div>
+              ))
+            }
+          </VMain>
+        </VLayout>
+      ))
+        .setProps({ scrollBehavior: 'hide' })
+        .get('.v-app-bar').should('be.visible')
+        .window().scrollTo('bottom')
+        .get('.v-app-bar').should('not.be.visible')
+    })
+
     it('collapses', () => {
       cy.mount(({ scrollBehavior }: any) => (
         <VLayout>

@@ -72,12 +72,12 @@
     transition: $chip-filter-transition
 
   .v-chip__overlay
-    @include tools.absolute()
     background-color: currentColor
     border-radius: inherit
     pointer-events: none
     opacity: 0
     transition: opacity .2s ease-in-out
+    @include tools.absolute()
 
   .v-chip--disabled
     opacity: $chip-disabled-opacity

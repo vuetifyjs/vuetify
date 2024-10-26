@@ -6,9 +6,9 @@
     .v-slider-track__background
       background-color: transparent !important
 
-      +tools.ltr()
+      @include tools.ltr()
         background-image: linear-gradient(to right, transparent, var(--v-color-picker-color-hsv))
-      +tools.rtl()
+      @include tools.rtl()
         background-image: linear-gradient(to left, transparent, var(--v-color-picker-color-hsv))
 
       &::after
@@ -44,10 +44,10 @@
   .v-color-picker-preview__hue
     &:not(.v-input--is-disabled)
       .v-slider-track__background
-        +tools.ltr()
+        @include tools.ltr()
           background: linear-gradient(to right, #F00 0%, #FF0 16.66%, #0F0 33.33%, #0FF 50%, #00F 66.66%, #F0F 83.33%, #F00 100%)
 
-        +tools.rtl()
+        @include tools.rtl()
           background: linear-gradient(to left, #F00 0%, #FF0 16.66%, #0F0 33.33%, #0FF 50%, #00F 66.66%, #F0F 83.33%, #F00 100%)
 
   .v-color-picker-preview__track

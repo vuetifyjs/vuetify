@@ -6,7 +6,11 @@ import { computed, inject, unref } from 'vue'
 import { consoleWarn, defineComponent, genericComponent, mergeDeep, propsFactory } from '@/util'
 
 // Types
-import type { InjectionKey, JSXComponent, PropType, Ref } from 'vue'
+import type { ComponentPublicInstance, FunctionalComponent, InjectionKey, PropType, Ref } from 'vue'
+
+export type JSXComponent<Props = any> =
+  | { new (): ComponentPublicInstance<Props> }
+  | FunctionalComponent<Props>
 
 export type IconValue =
   | string
@@ -65,18 +69,20 @@ export interface IconSet {
   component: IconComponent
 }
 
-export type IconOptions = {
-  defaultSet?: string
-  aliases?: Partial<IconAliases>
-  sets?: Record<string, IconSet>
+export type InternalIconOptions = {
+  defaultSet: string
+  aliases: Partial<IconAliases>
+  sets: Record<string, IconSet>
 }
+
+export type IconOptions = Partial<InternalIconOptions>
 
 type IconInstance = {
   component: IconComponent
   icon?: IconValue
 }
 
-export const IconSymbol: InjectionKey<Required<IconOptions>> = Symbol.for('vuetify:icons')
+export const IconSymbol: InjectionKey<InternalIconOptions> = Symbol.for('vuetify:icons')
 
 export const makeIconProps = propsFactory({
   icon: {
@@ -204,7 +210,7 @@ export function createIcons (options?: IconOptions) {
       ],
       /* eslint-enable max-len */
     },
-  }, options)
+  }, options) as InternalIconOptions
 }
 
 export const useIcon = (props: Ref<IconValue | undefined>) => {

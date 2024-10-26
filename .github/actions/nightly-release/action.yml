@@ -35,7 +35,7 @@ runs:
         repository: ${{ inputs.checkout-repo }}
         ref: ${{ inputs.checkout-ref }}
         fetch-depth: 0
-    - uses: ./.github/actions/yarn-install
+    - uses: vuetifyjs/setup-action@master
     - run: >-
         node -e "
           const json = require('./lerna.json');
@@ -45,9 +45,9 @@ runs:
     - id: get-version
       run: echo "full-version=$(node -e "console.log(require('./lerna.json').version)")-${{ inputs.release-id }}" >> $GITHUB_OUTPUT
       shell: bash
-    - run: yarn lerna version ${{ steps.get-version.outputs.full-version }} --no-push --no-commit-hooks --force-publish --yes
+    - run: pnpm lerna version ${{ steps.get-version.outputs.full-version }} --no-push --no-commit-hooks --force-publish --yes
       shell: bash
-    - run: yarn conventional-changelog -p angular --outfile ./packages/vuetify/CHANGELOG.md -r 2
+    - run: pnpm conventional-changelog -p angular --outfile ./packages/vuetify/CHANGELOG.md -r 2
       shell: bash
     - run: >-
         node -e "fs.writeFileSync(
@@ -56,9 +56,9 @@ runs:
         )"
       shell: bash
       working-directory: ./packages/vuetify
-    - run: yarn lerna run build --scope @vuetify/nightly
+    - run: pnpm lerna run build --scope @vuetify/nightly
       shell: bash
-    - run: yarn lerna run build --scope @vuetify/api-generator
+    - run: pnpm lerna run build --scope @vuetify/api-generator
       shell: bash
     - name: NPM Release
       run: |

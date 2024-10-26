@@ -49,6 +49,7 @@ export const makeVBtnProps = propsFactory({
     type: Boolean,
     default: undefined,
   },
+  activeColor: String,
   baseColor: String,
   symbol: {
     type: null,
@@ -123,13 +124,14 @@ export const VBtn = genericComponent<VBtnSlots>()({
       return group?.isSelected.value
     })
 
+    const color = computed(() => isActive.value ? props.activeColor ?? props.color : props.color)
     const variantProps = computed(() => {
       const showColor = (
         (group?.isSelected.value && (!link.isLink.value || link.isActive?.value)) ||
         (!group || link.isActive?.value)
       )
       return ({
-        color: showColor ? props.color ?? props.baseColor : props.baseColor,
+        color: showColor ? color.value ?? props.baseColor : props.baseColor,
         variant: props.variant,
       })
     })
@@ -210,10 +212,10 @@ export const VBtn = genericComponent<VBtnSlots>()({
           ]}
           aria-busy={ props.loading ? true : undefined }
           disabled={ isDisabled.value || undefined }
-          href={ link.href.value }
           tabindex={ props.loading || props.readonly ? -1 : undefined }
           onClick={ onClick }
           value={ valueAttr.value }
+          { ...link.linkProps }
         >
           { genOverlays(true, 'v-btn') }
 
@@ -296,7 +298,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
         </Tag>,
         [[
           Ripple,
-          !isDisabled.value && !!props.ripple,
+          !isDisabled.value && props.ripple,
           '',
           { center: !!props.icon },
         ]]
