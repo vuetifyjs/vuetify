@@ -121,6 +121,13 @@ export const VDatePicker = genericComponent<new <
 
     const isReversing = shallowRef(false)
     const header = computed(() => {
+      if (props.multiple === 'range' && model.value.length === 2) {
+        const [startDate, endDate] = model.value
+        const daysBetween = adapter.getDiff(endDate, startDate, 'days') + 1
+
+        return t('$vuetify.datePicker.itemsSelected', daysBetween)
+      }
+
       if (props.multiple && model.value.length > 1) {
         return t('$vuetify.datePicker.itemsSelected', model.value.length)
       }

@@ -97,6 +97,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
         rangeStart.value = model.value[0]
         rangeStop.value = undefined
       }
+
       if (!rangeStart.value) {
         rangeStart.value = _value
         model.value = [rangeStart.value]
@@ -112,17 +113,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
           rangeStop.value = adapter.endOfDay(_value)
         }
 
-        const diff = adapter.getDiff(rangeStop.value, rangeStart.value, 'days')
-        const datesInRange = [rangeStart.value]
-
-        for (let i = 1; i < diff; i++) {
-          const nextDate = adapter.addDays(rangeStart.value, i)
-          datesInRange.push(nextDate)
-        }
-
-        datesInRange.push(rangeStop.value)
-
-        model.value = datesInRange
+        model.value = [rangeStart.value, rangeStop.value]
       } else {
         rangeStart.value = value
         rangeStop.value = undefined
@@ -194,7 +185,11 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                 i,
               } as const
 
-              if (atMax.value && !item.isSelected) {
+              const isSelected = props.multiple === 'range' && model.value.length === 2
+                ? adapter.isWithinRange(item.date, model.value as [Date, Date])
+                : model.value.some(selectedDate => adapter.isSameDay(selectedDate, item.date))
+
+              if (atMax.value && !isSelected) {
                 item.isDisabled = true
               }
 
@@ -205,7 +200,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                     {
                       'v-date-picker-month__day--adjacent': item.isAdjacent,
                       'v-date-picker-month__day--hide-adjacent': item.isHidden,
-                      'v-date-picker-month__day--selected': item.isSelected,
+                      'v-date-picker-month__day--selected': isSelected,
                       'v-date-picker-month__day--week-end': item.isWeekEnd,
                       'v-date-picker-month__day--week-start': item.isWeekStart,
                     },
@@ -218,7 +213,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                       defaults={{
                         VBtn: {
                           class: 'v-date-picker-month__day-btn',
-                          color: (item.isSelected || item.isToday) && !item.isDisabled
+                          color: (isSelected || item.isToday) && !item.isDisabled
                             ? props.color
                             : undefined,
                           disabled: item.isDisabled,
@@ -227,7 +222,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                           text: item.localized,
                           variant: item.isDisabled
                             ? item.isToday ? 'outlined' : 'text'
-                            : item.isToday && !item.isSelected ? 'outlined' : 'flat',
+                            : item.isToday && !isSelected ? 'outlined' : 'flat',
                           onClick: () => onClick(item.date),
                         },
                       }}
