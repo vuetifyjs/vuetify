@@ -167,13 +167,13 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
               <>
                 { slots.colgroup?.(slotProps.value) }
                 { !props.hideDefaultHeader && (
-                  <thead key="thead" class="v-data-table__thead" role="rowgroup">
-                    <VDataTableHeaders
-                      { ...dataTableHeadersProps }
-                      sticky={ props.fixedHeader }
-                      v-slots={ slots }
-                    />
-                  </thead>
+                  <VDataTableHeaders
+                    { ...dataTableHeadersProps }
+                    class="v-data-table__thead"
+                    role="rowgroup"
+                    sticky={ props.fixedHeader }
+                    v-slots={ slots }
+                  />
                 )}
                 { slots.thead?.(slotProps.value) }
                 { !props.hideDefaultBody && (

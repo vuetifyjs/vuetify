@@ -35,8 +35,8 @@ export type HeadersSlotProps = {
   allSelected: UnwrapRef<ReturnType<typeof provideSelection>['allSelected']>
   toggleSort: ReturnType<typeof provideSort>['toggleSort']
   selectAll: ReturnType<typeof provideSelection>['selectAll']
-  getSortIcon: (column: InternalDataTableHeader) => IconValue
-  isSorted: ReturnType<typeof provideSort>['isSorted']
+  getSortIcon?: (column: InternalDataTableHeader) => IconValue
+  isSorted?: ReturnType<typeof provideSort>['isSorted']
 }
 
 export type VDataTableHeaderCellColumnSlotProps = {

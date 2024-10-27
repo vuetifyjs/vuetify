@@ -244,12 +244,10 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
               <>
                 { slots.colgroup?.(slotProps.value) }
                 { !props.hideDefaultHeader && (
-                  <thead key="thead">
-                    <VDataTableHeaders
-                      { ...dataTableHeadersProps }
-                      v-slots={ slots }
-                    />
-                  </thead>
+                  <VDataTableHeaders
+                    { ...dataTableHeadersProps }
+                    v-slots={ slots }
+                  />
                 )}
                 { slots.thead?.(slotProps.value) }
                 { !props.hideDefaultBody && (
