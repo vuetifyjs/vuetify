@@ -105,7 +105,7 @@ export const VColorInput = genericComponent<new <T>(
       const textFieldProps = VTextField.filterProps(omit(props, ['prependInnerIcon']))
       const hasPrepend = !!slots['prepend-inner']
 
-      const prependInnerIcon = props.prependInnerIcon ?? '$pip'
+      const prependInnerIcon = props.prependInnerIcon || '$pip'
 
       return (
         <VTextField
@@ -124,7 +124,7 @@ export const VColorInput = genericComponent<new <T>(
             model.value = val
           }}
         >
-          { !hasPrepend ? (
+          { !hasPrepend && props.prependInnerIcon !== null ? (
             <div key="prepend" class="v-field__prepend_inner_icon">
               <VIcon
                 key="prepend-icon"
@@ -135,7 +135,6 @@ export const VColorInput = genericComponent<new <T>(
             </div>
           ) : null
         }
-
           <VMenu
             v-model={ menu.value }
             activator="parent"
