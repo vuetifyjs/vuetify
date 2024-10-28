@@ -251,5 +251,18 @@
     "name": "Elvina Garcia",
     "team": "legends",
     "joined": "Feb 2023"
+  },
+  "shinjisakai": {
+    "discord": "housexpot",
+    "focus": [
+      "[vuetifyjs/*](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "Nagoya, Japan",
+    "name": "Shinji Sakai",
+    "team": "core",
+    "joined": "Oct 2024"
   }
 }
