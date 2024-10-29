@@ -43,6 +43,8 @@
 </template>
 
 <script setup>
+  import { ref } from 'vue'
+
   const userControls = [
     { title: 'Content filtering', subtitle: 'Set the content filtering level to restrict appts that can be downloaded' },
     { title: 'Password', subtitle: 'Require password for purchase or use password to restrict purchase' },
@@ -55,4 +57,23 @@
   ]
 
   const settingsSelection = ref([])
+</script>
+
+<script>
+  export default {
+    data: () => ({
+      userControls: [
+        { title: 'Content filtering', subtitle: 'Set the content filtering level to restrict appts that can be downloaded' },
+        { title: 'Password', subtitle: 'Require password for purchase or use password to restrict purchase' },
+      ],
+
+      settingsItems: [
+        { value: 'notifications', title: 'Notifications', subtitle: 'Notify me about updates to apps or games that I downloaded' },
+        { value: 'sound', title: 'Sound', subtitle: 'Auto-update apps at any time. Data charges may apply' },
+        { value: 'widgets', title: 'Auto-add widgets', subtitle: 'Automatically add home screen widgets when downloads complete' },
+      ],
+
+      settingsSelection: [],
+    }),
+  }
 </script>
