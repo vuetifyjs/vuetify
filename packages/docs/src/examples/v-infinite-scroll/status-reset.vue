@@ -14,55 +14,56 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-const infiniteScrollRef = ref(null)
+  import { ref } from 'vue'
 
-const items = ref([])
+  const infiniteScrollRef = ref(null)
 
-function reset() {
-  items.value = []
-  infiniteScrollRef.value.reset()
-}
+  const items = ref([])
 
-function load({ side, done }) {
-  setTimeout(() => {
-    if (items.value.length >= 40) {
-      done('empty')
-      return
-    }
+  function reset () {
+    items.value = []
+    infiniteScrollRef.value.reset()
+  }
 
-    const arr = Array.from({ length: 10 }, (k, v) => (items.value.at(-1) ?? 0) + 1 + v)
-    items.value = [...items.value, ...arr]
+  function load ({ side, done }) {
+    setTimeout(() => {
+      if (items.value.length >= 40) {
+        done('empty')
+        return
+      }
 
-    done('ok')
-  }, 1000)
-}
+      const arr = Array.from({ length: 10 }, (k, v) => (items.value.at(-1) ?? 0) + 1 + v)
+      items.value = [...items.value, ...arr]
+
+      done('ok')
+    }, 1000)
+  }
 </script>
 
 <script>
-export default {
-  data: () => ({
-    items: []
-  }),
+  export default {
+    data: () => ({
+      items: [],
+    }),
 
-  methods: {
-    load({ done }) {
-      setTimeout(() => {
-        if (this.items.length >= 40) {
-          done('empty')
-          return
-        }
+    methods: {
+      load ({ done }) {
+        setTimeout(() => {
+          if (this.items.length >= 40) {
+            done('empty')
+            return
+          }
 
-        const arr = Array.from({ length: 10 }, (k, v) => (this.items.at(-1) ?? 0) + 1 + v)
-        this.items = [...this.items, ...arr]
+          const arr = Array.from({ length: 10 }, (k, v) => (this.items.at(-1) ?? 0) + 1 + v)
+          this.items = [...this.items, ...arr]
 
-        done('ok')
-      }, 1000)
+          done('ok')
+        }, 1000)
+      },
+      reset () {
+        this.items = []
+        this.$refs.infiniteScrollRef.reset()
+      },
     },
-    reset() {
-      this.items = []
-      this.$refs.infiniteScrollRef.reset()
-    }
   }
-}
 </script>
