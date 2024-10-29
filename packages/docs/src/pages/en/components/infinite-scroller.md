@@ -141,6 +141,14 @@ The **error** slot is shown if the status `'error'` is returned from the `done` 
 
 <ExamplesExample file="v-infinite-scroll/slot-error" />
 
+### Misc
+
+#### Exposed properties
+
+The `v-infinite-scroll` component exposes the `reset()` method, allowing to programatically reset the status to the default after reaching the `empty` state. This makes it possible for load to be called again.
+
+<ExamplesExample file="v-infinite-scroll/status-reset" />
+
 ### Examples
 
 The following is a collection of examples that demonstrate more advanced and real-world use of the `v-infinite-scroll` component.

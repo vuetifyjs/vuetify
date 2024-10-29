@@ -15,5 +15,8 @@
   },
   "events": {
     "load": "Emitted when reaching the start / end threshold, or if triggered when using manual mode."
+  },
+  "exposed": {
+    "reset": "Resets the scroller to its initial state and triggers the load event. Useful when the component is in the 'empty' state and additional loads are needed."
   }
 }

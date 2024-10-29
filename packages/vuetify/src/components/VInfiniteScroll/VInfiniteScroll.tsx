@@ -292,6 +292,29 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
         </Tag>
       )
     })
+
+    function reset () {
+      setStatus(props.side, 'ok')
+
+      nextTick(() => {
+        setScrollAmount(
+          getScrollSize() - previousScrollSize + getScrollAmount(),
+        )
+        if (props.mode !== 'manual') {
+          nextTick(() => {
+            window.requestAnimationFrame(() => {
+              window.requestAnimationFrame(() => {
+                window.requestAnimationFrame(() => {
+                  intersecting(props.side);
+                })
+              })
+            })
+          })
+        }
+      })
+    }
+
+    return { reset }
   },
 })
 
