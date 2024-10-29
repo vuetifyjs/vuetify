@@ -133,3 +133,9 @@ Lists can contain subheaders, dividers, and can contain 1 or more lines. The sub
 A **three-line** list with actions. Utilizing **selection-strategy**, easily connect actions to your tiles.
 
 <ExamplesExample file="v-list/misc-actions" />
+
+#### Action with text
+
+A list can contain additional meta information within an action.
+
+<ExamplesExample file="v-list/misc-action-stack" />
