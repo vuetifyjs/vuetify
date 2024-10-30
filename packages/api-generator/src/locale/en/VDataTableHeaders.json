@@ -10,6 +10,6 @@
     "[`header.${string}`]": "Slot for custom rendering of a header cell.",
     "header.data-table-expand": "Slot for the expand button in the header.",
     "header.data-table-select": "Slot for the select-all checkbox in the header.",
-    "headers": "Slot to replace the default rendering of the `<thead>` element.",
+    "headers": "Slot to replace the default rendering of the `<thead>` element."
   }
 }
