@@ -44,14 +44,12 @@ function addImageRules (md: MarkdownIt) {
     const height = token.attrGet('height') ?? ''
 
     return `
-<div>
-  <AppFigure
-    ${alt ? `alt="${alt}"` : ''}
-    ${src ? `src="${src}"` : ''}
-    ${title ? `title="${title}"` : ''}
-    ${height ? `height="${height}"` : ''}
-  />
-</div>
+<AppFigure
+  ${alt ? `alt="${alt}"` : ''}
+  ${src ? `src="${src}"` : ''}
+  ${title ? `title="${title}"` : ''}
+  ${height ? `height="${height}"` : ''}
+/>
 `
   }
 }
