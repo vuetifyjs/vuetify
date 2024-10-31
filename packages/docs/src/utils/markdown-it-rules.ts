@@ -19,10 +19,10 @@ function addCodeRules (md: MarkdownIt) {
       (token.attrs || []).reduce((acc, [key, value]) => {
         acc[key] = acc[key] ? acc[key] + ' ' + value : value
         return acc
-      }, { class: 'v-code' } as Record<string, string>)
+      }, {} as Record<string, string>)
     ).map(([key, value]) => `${key}="${value}"`).join(' ')
 
-    return `<code ${attrs}>${md.utils.escapeHtml(token.content)}</code>`
+    return `<v-code ${attrs}>${md.utils.escapeHtml(token.content)}</v-code>`
   }
 
   createContainer(md, 'error')
