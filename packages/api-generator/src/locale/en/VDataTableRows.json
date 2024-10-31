@@ -13,7 +13,7 @@
     "[`header.${string}`]": "Slot for custom rendering of a header cell.",
     "header.data-table-expand": "Slot to replace the default `v-icon` used when expanding header.",
     "header.data-table-select": "Slot to replace the default `v-checkbox-btn` in header.",
-    "[`item.${string}]`": "Slot for custom rendering of a column.",
+    "[`item.${string}`]": "Slot for custom rendering of a column.",
     "data-table-group": "Slot for custom rendering of a group.",
     "data-table-select": "Slot for custom rendering of a header cell with the select checkbox.",
     "expanded-row": "Slot for custom rendering of an expanded row.",
