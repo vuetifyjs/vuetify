@@ -506,11 +506,6 @@ $utilities: () !default;
           text-transform
         ),
         class: text,
-        unimportant: (
-          font-family,
-          font-weight,
-          line-height
-        ),
         values: variables.$flat-typography
       ),
       "text-transform": (

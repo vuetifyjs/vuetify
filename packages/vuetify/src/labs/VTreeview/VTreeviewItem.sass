@@ -15,4 +15,5 @@
       --prepend-width: #{$treeview-group-list-prepend-width}
 
     .v-list-group__items .v-list-item
-      padding-inline-start: calc(#{$treeview-item-padding-inline-start} + var(--indent-padding)) !important
+      @include tools.layer('overrides')
+        padding-inline-start: calc(#{$treeview-item-padding-inline-start} + var(--indent-padding))

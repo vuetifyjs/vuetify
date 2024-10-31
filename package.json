@@ -94,7 +94,8 @@
     "overrides": {
       "@testing-library/dom": "npm:@vuetify/testing-library-dom@1.0.2",
       "@types/node": "22.5.4",
-      "tough-cookie": "5.0.0-rc.4"
+      "tough-cookie": "5.0.0-rc.4",
+      "rrweb-cssom": "0.8.0"
     }
   }
 }

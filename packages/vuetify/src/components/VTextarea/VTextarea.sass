@@ -26,9 +26,11 @@
         position: absolute
         top: 0
         left: 0
-        height: 0 !important
-        min-height: 0 !important
         pointer-events: none
+
+        @include tools.layer('overrides')
+          height: 0
+          min-height: 0
 
     &--no-resize
       .v-field__input

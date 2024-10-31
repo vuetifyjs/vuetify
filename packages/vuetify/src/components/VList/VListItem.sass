@@ -317,7 +317,8 @@
     --indent-padding: calc(var(--parent-padding) + var(--list-indent-size))
 
   .v-list-group__items .v-list-item
-    padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
+    @include tools.layer('overrides')
+      padding-inline-start: calc(#{$base-padding} + var(--indent-padding))
 
   .v-list-group__header:not(.v-treeview-item--activatable-group-activator).v-list-item--active
     &:not(:focus-visible)

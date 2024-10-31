@@ -45,10 +45,11 @@
       align-items: flex-start
 
     &--extended
-      .v-btn
-        // min-height: 56px
-        // min-width: 80px
-        border-radius: 9999px !important
+      @include tools.layer('overrides')
+        .v-btn
+          // min-height: 56px
+          // min-width: 80px
+          border-radius: 9999px
 
   .v-fab__container
     align-self: center

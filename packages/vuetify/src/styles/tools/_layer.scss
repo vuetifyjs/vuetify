@@ -2,8 +2,10 @@
 
 @mixin layer ($name) {
   @if (settings.$layers) {
-    @layer vuetify.#{$name} {
-      @content;
+    @at-root (without: layer) {
+      @layer vuetify.#{$name} {
+        @content;
+      }
     }
   } @else {
     @content;

@@ -12,19 +12,6 @@
     top: 0
     display: contents
 
-  .v-overlay-scroll-blocked
-    padding-inline-end: var(--v-scrollbar-offset)
-
-    &:not(html)
-      overflow-y: hidden !important
-
-    @at-root #{selector.append(html, &)}
-      position: fixed
-      top: var(--v-body-scroll-y)
-      left: var(--v-body-scroll-x)
-      width: 100%
-      height: 100%
-
   .v-overlay
     border-radius: inherit
     display: flex
@@ -62,3 +49,17 @@
 
   .v-overlay--scroll-blocked
     padding-inline-end: var(--v-scrollbar-offset)
+
+@include tools.layer('trumps')
+  .v-overlay-scroll-blocked
+    padding-inline-end: var(--v-scrollbar-offset)
+
+    &:not(html)
+      overflow-y: hidden
+
+    @at-root #{selector.append(html, &)}
+      position: fixed
+      top: var(--v-body-scroll-y)
+      left: var(--v-body-scroll-x)
+      width: 100%
+      height: 100%

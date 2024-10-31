@@ -8,6 +8,7 @@ overrides:
   '@testing-library/dom': npm:@vuetify/testing-library-dom@1.0.2
   '@types/node': 22.5.4
   tough-cookie: 5.0.0-rc.4
+  rrweb-cssom: 0.8.0
 
 pnpmfileChecksum: hdycaw5dzspbcs5sui7ue3czcu
 
@@ -7654,11 +7655,8 @@ packages:
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
     hasBin: true
 
-  rrweb-cssom@0.6.0:
-    resolution: {integrity: sha512-APM0Gt1KoXBz0iIkkdB/kfvGOwC4UuJFeG/c+yV7wSc7q96cG/kJ0HiYCnzivD9SB53cLV1MlHFNfOuPaadYSw==}
-
-  rrweb-cssom@0.7.1:
-    resolution: {integrity: sha512-TrEMa7JGdVm0UThDJSx7ddw5nVm3UJS9o9CCIZ72B1vSyEZoziDqBYP3XIoi/12lKrJR8rE3jeFHMok2F/Mnsg==}
+  rrweb-cssom@0.8.0:
+    resolution: {integrity: sha512-guoltQEx+9aMf2gDZ0s62EcV8lsXR+0w8915TC3ITdn2YueuNjdAYh/levpU9nFaoChh9RUS5ZdQMrKfVEN9tw==}
 
   run-applescript@7.0.0:
     resolution: {integrity: sha512-9by4Ij99JUr/MCFBUkDKLWK3G9HVXmabKz9U5MlIAIuvuzkiOicRYs8XJLxX+xahD+mLiiCYDqF9dKAgtzKP1A==}
@@ -13744,7 +13742,7 @@ snapshots:
 
   cssstyle@4.0.1:
     dependencies:
-      rrweb-cssom: 0.6.0
+      rrweb-cssom: 0.8.0
 
   csstype@3.1.3: {}
 
@@ -15963,7 +15961,7 @@ snapshots:
       is-potential-custom-element-name: 1.0.1
       nwsapi: 2.2.12
       parse5: 7.1.2
-      rrweb-cssom: 0.7.1
+      rrweb-cssom: 0.8.0
       saxes: 6.0.0
       symbol-tree: 3.2.4
       tough-cookie: 5.0.0-rc.4
@@ -17909,9 +17907,7 @@ snapshots:
       '@rollup/rollup-win32-x64-msvc': 4.21.2
       fsevents: 2.3.3
 
-  rrweb-cssom@0.6.0: {}
-
-  rrweb-cssom@0.7.1: {}
+  rrweb-cssom@0.8.0: {}
 
   run-applescript@7.0.0: {}
 

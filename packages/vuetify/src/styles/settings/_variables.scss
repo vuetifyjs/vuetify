@@ -5,7 +5,7 @@
 
 $color-pack: true !default;
 $reset: true !default;
-$layers: false !default;
+$layers: true !default;
 
 $body-font-family: 'Roboto', sans-serif !default;
 $font-size-root: 1rem !default;
@@ -341,7 +341,6 @@ $decelerated-easing: cubic-bezier(0.0, 0, 0.2, 1) !default; // Entering
 $accelerated-easing: cubic-bezier(0.4, 0, 1, 1) !default; // Leaving
 
 // Elements
-$bootable-transition: 0.2s $decelerated-easing !default;
 $blockquote-font-size: 18px !default;
 $blockquote-font-weight: 300 !default;
 

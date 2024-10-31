@@ -77,9 +77,15 @@
   .v-data-table-column--fixed,
   .v-data-table__th--sticky
     background: $table-background
-    position: sticky !important
     left: 0
     z-index: 1
+
+    @include tools.layer('overrides')
+      // Beat out relative on table > tbody > tr > td
+      // TODO: Use :where() for all those child combinators
+      // @scope would probably be even better but
+      // doesn't seem to be getting here any time soon
+      position: sticky
 
   .v-data-table-column--last-fixed
     border-right: 1px solid rgba(var(--v-border-color), var(--v-border-opacity))
@@ -99,8 +105,10 @@
     .v-data-table__td
       opacity: $data-table-loading-opacity
 
-  .v-data-table-group-header-row__column
-    padding-left: calc(var(--v-data-table-group-header-row-depth) * 16px) !important
+  @include tools.layer('overrides')
+    // Again, needs to beat all the child combinators
+    .v-data-table-group-header-row__column
+      padding-left: calc(var(--v-data-table-group-header-row-depth) * 16px)
 
   .v-data-table-header__content
     display: flex
@@ -119,11 +127,12 @@
     width: $data-table-header-sort-badge-size
     height: $data-table-header-sort-badge-size
 
-  .v-data-table-progress
-    > th
-      border: none !important
-      height: auto !important
-      padding: 0 !important
+  @include tools.layer('overrides')
+    .v-data-table-progress
+      > th
+        border: none
+        height: auto
+        padding: 0
 
   .v-data-table-progress__loader
     position: relative
@@ -148,8 +157,9 @@
       grid-template-columns: repeat(2, 1fr)
       min-height: var(--v-table-row-height)
 
-      &:not(:last-child)
-        border-bottom: 0 !important
+      @include tools.layer('overrides')
+        &:not(:last-child)
+          border-bottom: 0
 
   .v-data-table__td-title
     font-weight: VTable.$table-header-font-weight

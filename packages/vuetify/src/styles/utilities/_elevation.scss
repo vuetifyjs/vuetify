@@ -7,7 +7,7 @@
     $z: 24;
     @while $z >= 0 {
       .elevation-#{$z} {
-        @include tools.elevation($z, $important: true);
+        @include tools.elevation($z);
       }
 
       $z: $z - 1;

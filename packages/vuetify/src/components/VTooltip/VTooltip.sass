@@ -19,10 +19,12 @@
       transition-property: opacity, transform
       overflow-wrap: $tooltip-overflow-wrap
 
-      &[class*="enter-active"]
-        transition-timing-function: settings.$decelerated-easing
-        transition-duration: $tooltip-transition-enter-duration
+@include tools.layer('overrides')
+  .v-tooltip > .v-overlay__content
+    &[class*="enter-active"]
+      transition-timing-function: settings.$decelerated-easing
+      transition-duration: $tooltip-transition-enter-duration
 
-      &[class*="leave-active"]
-        transition-timing-function: settings.$accelerated-easing
-        transition-duration: $tooltip-transition-leave-duration
+    &[class*="leave-active"]
+      transition-timing-function: settings.$accelerated-easing
+      transition-duration: $tooltip-transition-leave-duration

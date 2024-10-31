@@ -88,9 +88,8 @@
           opacity: $button-disabled-opacity
       @else
         opacity: 1
-        &.v-btn
-          // specificity has to be higher to override theme !important
-          color: rgba(var(--v-theme-on-surface), $button-disabled-opacity) !important
+        @include tools.layer('trumps')
+          color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
 
       &.v-btn--variant-elevated,
       &.v-btn--variant-flat
@@ -101,7 +100,8 @@
           color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
           background: rgb(var(--v-theme-surface))
         @else
-          background: rgb(var(--v-theme-surface)) !important
+          @include tools.layer('trumps')
+            background: rgb(var(--v-theme-surface))
 
         .v-btn__overlay
           // __overlay uses currentColor, so we need to divide
