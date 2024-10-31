@@ -16,7 +16,11 @@ export const VCalendarEvent = genericComponent()({
 
   props: makeVCalendarEventProps(),
 
-  setup (props, { attrs }) {
+  emits: {
+    'click:event': null,
+  },
+
+  setup (props, { attrs, emit, slots }) {
     useRender(() => (
       <VChip
         color={ props.allDay ? 'primary' : undefined }
@@ -28,7 +32,7 @@ export const VCalendarEvent = genericComponent()({
           day: props.day,
           event: props.event,
         }))}
-      >
+        onClick={ () => emit('click:event', props.event) } >
         <VBadge
           inline
           dot
