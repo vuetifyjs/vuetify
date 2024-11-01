@@ -33,6 +33,7 @@
     "prism-theme-vars": "^0.2.4",
     "prismjs": "^1.29.0",
     "roboto-fontface": "^0.10.0",
+    "swetrix": "^3.5.0",
     "vee-validate": "^4.12.6",
     "vue": "^3.4.27",
     "vue-gtag-next": "^1.14.0",
