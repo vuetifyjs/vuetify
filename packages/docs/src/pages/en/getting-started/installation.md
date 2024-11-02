@@ -273,6 +273,39 @@ const app = createApp()
 app.use(vuetify).mount('#app')
 ```
 
+## Using ES Modules
+Use the same links as above but put them in an import map
+
+```js
+<script type="importmap">
+  {
+    "imports": {
+      "vue": "https://unpkg.com/vuelatest/dist/vue.esm-browser.js",
+      "vuetify": "https://unpkg.com/vuetify@3.7.3/dist/vuetify.esm.js"
+    }
+  }
+</script>
+```
+
+and than import from `vuetify` (and `vue`) with
+
+```js
+<script type="module">
+  const apiUrl = 'http://zeugnis-admin.localhost/'
+  import { createApp } from 'vue'
+  import { createVuetify } from 'vuetify'
+
+  const vuetify = createVuetify()
+  createApp().use(vuetify).mount('#app')
+</script>
+```
+
+and make sure to link the css
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@3.7.3/dist/vuetify.min.css">
+```
+
 ## Using Vitepress
 
 You can use Vuetify's components in your Vitepress static site.
