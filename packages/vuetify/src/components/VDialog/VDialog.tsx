@@ -13,7 +13,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { mergeProps, nextTick, ref, watch } from 'vue'
+import { mergeProps, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
@@ -80,6 +80,10 @@ export const VDialog = genericComponent<OverlaySlots>()({
         }
       }
     }
+
+    onBeforeUnmount(() => {
+      document.removeEventListener('focusin', onFocusin)
+    })
 
     if (IN_BROWSER) {
       watch(() => isActive.value && props.retainFocus, val => {
