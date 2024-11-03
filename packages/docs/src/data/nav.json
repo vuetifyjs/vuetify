@@ -234,6 +234,10 @@
         "subfolder": "components"
       },
       {
+        "title": "color-inputs",
+        "subfolder": "components"
+      },
+      {
         "title": "date-inputs",
         "subfolder": "components"
       },
