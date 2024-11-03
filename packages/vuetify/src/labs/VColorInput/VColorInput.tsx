@@ -14,24 +14,17 @@ import { computed, shallowRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
-import type { GenericProps } from '@/util'
-
-export interface DefaultInputSlot {
-  isActive: Ref<boolean>
-  isFocused: Ref<boolean>
-  controlRef: Ref<HTMLElement | undefined>
-  focus: () => void
-  blur: () => void
-}
 
 export type VColorInputSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
   default: never
+  prependInner: never
+  prependInnerIcon: never
 }
 
 export const makeVColorInputProps = propsFactory({
+  colorPip: String,
   hideActions: Boolean,
 
   ...makeFocusProps(),
@@ -40,16 +33,10 @@ export const makeVColorInputProps = propsFactory({
     placeholder: '',
   }),
   ...omit(makeVColorPickerProps({
-  }), []), // ! VDatePicker had this, not sure about use here
+  }), ['width']), // TODO: Might need more added here, tbd
 }, 'VColorInput')
 
-export const VColorInput = genericComponent<new <T>(
-  props: {
-    modelValue?: T
-    'onUpdate:modelValue'?: (value: T) => void
-  },
-  slots: VColorInputSlots
-) => GenericProps<typeof props, typeof slots>>()({
+export const VColorInput = genericComponent<VColorInputSlots>()({
   name: 'VColorInput',
 
   props: makeVColorInputProps(),
@@ -63,6 +50,9 @@ export const VColorInput = genericComponent<new <T>(
     const model = useProxiedModel(props, 'modelValue')
     const pickerModel = useProxiedModel(props, 'modelValue')
     const menu = shallowRef(false)
+
+    // TODO: Need to set true as the default value
+    const colorPip = computed(() => props.colorPip == null)
 
     const display = computed(() => {
       const value = model.value
@@ -103,7 +93,7 @@ export const VColorInput = genericComponent<new <T>(
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const colorPickerProps = VColorPicker.filterProps(omit(props, ['active', 'color']))
       const textFieldProps = VTextField.filterProps(omit(props, ['prependInnerIcon']))
-      const hasPrepend = !!slots['prepend-inner']
+      const hasPrependInner = !!slots['prepend-inner']
 
       const prependInnerIcon = props.prependInnerIcon || '$pip'
 
@@ -124,52 +114,59 @@ export const VColorInput = genericComponent<new <T>(
             model.value = val
           }}
         >
-          { !hasPrepend && props.prependInnerIcon !== null ? (
-            <div key="prepend" class="v-field__prepend_inner_icon">
-              <VIcon
-                key="prepend-icon"
-                density={ props.density }
-                icon={ prependInnerIcon }
-                color={ model.value as string ?? 'on-surface' }
-              />
-            </div>
-          ) : null
-        }
-          <VMenu
-            v-model={ menu.value }
-            activator="parent"
-            min-width="0"
-            closeOnContentClick={ false }
-            openOnClick={ false }
-          >
-            <VConfirmEdit
-              { ...confirmEditProps }
-              v-model={ model.value }
-              onSave={ onSave }
-            >
-              {{
-                default: ({ actions, model: proxyModel }) => {
-                  return (
-                    <VColorPicker
-                      { ...colorPickerProps }
-                      modelValue={ proxyModel.value }
-                      onUpdate:modelValue={ val => {
-                        proxyModel.value = val
-                        model.value = val
-                      }}
-                      onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                    >
-                      {{
-                        actions: !props.hideActions ? () => actions : undefined,
-                      }}
-                    </VColorPicker>
-                  )
-                },
-              }}
-            </VConfirmEdit>
-          </VMenu>
-
-          { slots.default?.() }
+          {{
+            ...slots,
+            [`prepend-inner`]: slotProps => {
+              return !hasPrependInner ? (
+                <div key="prepend-inner-icon" class="v-field__prepend_inner_icon">
+                  <VIcon
+                    key="prepend-inner-icon"
+                    density={ props.density }
+                    icon={ props.prependInnerIcon ?? prependInnerIcon }
+                    color={ colorPip.value ? model.value as string ?? 'on-surface' : undefined }
+                  />
+                </div>
+              )
+                : slots['prepend-inner']?.(slotProps)
+            },
+            default: () => {
+              return (
+                <VMenu
+                  v-model={ menu.value }
+                  activator="parent"
+                  min-width="0"
+                  closeOnContentClick={ false }
+                  openOnClick={ false }
+                >
+                  <VConfirmEdit
+                    { ...confirmEditProps }
+                    v-model={ model.value }
+                    onSave={ onSave }
+                  >
+                    {{
+                      default: ({ actions, model: proxyModel }) => {
+                        return (
+                          <VColorPicker
+                            { ...colorPickerProps }
+                            modelValue={ proxyModel.value }
+                            onUpdate:modelValue={ val => {
+                              proxyModel.value = val
+                              model.value = val
+                            }}
+                            onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                          >
+                            {{
+                              actions: !props.hideActions ? () => actions : undefined,
+                            }}
+                          </VColorPicker>
+                        )
+                      },
+                    }}
+                  </VConfirmEdit>
+                </VMenu>
+              )
+            },
+          }}
         </VTextField>
       )
     })
