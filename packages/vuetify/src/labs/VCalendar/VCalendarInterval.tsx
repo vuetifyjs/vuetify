@@ -71,6 +71,10 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
     ...makeVCalendarIntervalProps(),
   },
 
+  emits: {
+    'contextmenu:date': null,
+  },
+
   setup (props, { attrs, emit, slots }) {
     const adapter = useDate()
     const interval = computed(() => {
@@ -103,6 +107,11 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
       }
     })
 
+    const contextmenu = (date: any, event: any) => {
+      // Pass the event up the chain
+      emit('contextmenu:date', date, event)
+    }
+
     useRender(() => {
       return (
         props.dayIndex === 0 ? (
@@ -123,7 +132,7 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
             <div class={['v-calendar-day__row-content', interval.value.events.some(e => !e.last)
               ? 'v-calendar-day__row-content-through'
               : '']}
-            >
+              onContextmenu={ (event) => contextmenu(interval.value.start, event) }>
               {
                 slots.intervalBody?.({ interval: interval.value }) ?? (
                   <div
@@ -159,8 +168,9 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
             </div>
           </div>
         ) : (
-          <div class="v-calendar-day__row-without-label" style={ `height: ${convertToUnit(props.intervalHeight)}` }>
-            <div class={['v-calendar-day__row-content', interval.value.events.some(e => !e.last)
+          <div class="v-calendar-day__row-without-label" style={ `height: ${convertToUnit(props.intervalHeight)}` }
+            onContextmenu={ (event) => contextmenu(interval.value.start, event) }>
+          <div class={['v-calendar-day__row-content', interval.value.events.some(e => !e.last)
               ? 'v-calendar-day__row-content-through'
               : '']}
             >

@@ -36,12 +36,17 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
 
   emits: {
     'click:event': null,
+    'contextmenu:date': null,
   },
 
   setup (props, { emit, attrs, slots }) {
     const clickEvent = (event: any) => {
       // Pass the event up the chain
       emit('click:event', event)
+    }
+    const contextmenu = (date: any, event: any) => {
+      // Pass the event up the chain
+      emit('contextmenu:date', date, event)
     }
 
     useRender(() => {
@@ -50,6 +55,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
           class={[
             'v-calendar-month__day',
           ]}
+          onContextmenu={ (event) => contextmenu(props.day.date, event) }
         >
           { !props.day?.isHidden ? (
             <div key="title" class="v-calendar-weekly__day-label">
@@ -70,7 +76,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
           ) : undefined }
 
           { !props.day?.isHidden ? (
-            <div key="content" class="v-calendar-weekly__day-content">
+            <div key="content" class="v-calendar-weekly__day-content" >
               { slots.dayBody?.({ day: props.day, events: props.events }) ?? (
                 <div
                   { ...getPrefixedEventHandlers(attrs, ':day', () => ({
