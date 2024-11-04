@@ -1,3 +1,6 @@
+// Styles
+import './VColorInput.sass'
+
 // Components
 import { makeVColorPickerProps, VColorPicker } from '@/components/VColorPicker/VColorPicker'
 import { makeVConfirmEditProps, VConfirmEdit } from '@/components/VConfirmEdit/VConfirmEdit'
@@ -14,23 +17,30 @@ import { computed, shallowRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { VFieldSlots } from '@/components/VField/VField'
-import type { VInputSlots } from '@/components/VInput/VInput'
+import type { DefaultInputSlot, VFieldSlots } from '@/components/VField/VField'
+import type { VInputSlot, VInputSlots } from '@/components/VInput/VInput'
 
 export type VColorInputSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
   default: never
-  prependInner: never
-  prependInnerIcon: never
+  prepend: VInputSlot
+  prependInner: DefaultInputSlot
+  append: VInputSlot
+  appendInner: DefaultInputSlot
 }
 
 export const makeVColorInputProps = propsFactory({
-  colorPip: String,
+  colorPip: {
+    type: Boolean,
+    default: true,
+  },
   hideActions: Boolean,
+  readonlyInput: Boolean,
 
   ...makeFocusProps(),
   ...makeVConfirmEditProps(),
   ...makeVTextFieldProps({
     placeholder: '',
+    prependInnerIcon: '$pip',
   }),
   ...omit(makeVColorPickerProps({
   }), ['width']), // TODO: Might need more added here, tbd
@@ -51,8 +61,8 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
     const pickerModel = useProxiedModel(props, 'modelValue')
     const menu = shallowRef(false)
 
-    // TODO: Need to set true as the default value
-    const colorPip = computed(() => props.colorPip == null)
+    const colorPip = computed(() => !!props.colorPip)
+    const isInteractive = computed(() => !props.disabled && !props.readonly)
 
     const display = computed(() => {
       const value = model.value
@@ -61,8 +71,6 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
 
       return value
     })
-
-    const isInteractive = computed(() => !props.disabled && !props.readonly)
 
     function onKeydown (e: KeyboardEvent) {
       if (e.key !== 'Enter') return
@@ -93,14 +101,36 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const colorPickerProps = VColorPicker.filterProps(omit(props, ['active', 'color']))
       const textFieldProps = VTextField.filterProps(omit(props, ['prependInnerIcon']))
-      const hasPrependInner = !!slots['prepend-inner']
+      const hasPrepend = !!(slots.prepend)
+      const hasPrependInner = !!(slots.prependInner)
+      const hasAppendInner = !!(slots.appendInner)
+      const hasAppend = !!(slots.append)
 
-      const prependInnerIcon = props.prependInnerIcon || '$pip'
+      const isReadOnlyInput = computed(() => props.readonlyInput || props.readonly)
+
+      const pipColor = computed(() => {
+        return colorPip.value ? model.value as string ?? 'on-surface' : undefined
+      })
+
+      const getPipIcon = (key: string) => {
+        const icon = key.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase()) as string
+
+        return (
+          <VIcon
+            key={ key }
+            icon={ props[icon as keyof typeof props] }
+            color={ pipColor.value }
+          />
+        )
+      }
 
       return (
         <VTextField
           { ...textFieldProps }
-          class={ props.class }
+          class={[
+            'v-color-input',
+            props.class,
+          ]}
           style={ props.style }
           modelValue={ display.value }
           onKeydown={ isInteractive.value ? onKeydown : undefined }
@@ -108,26 +138,27 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
           onFocus={ focus }
           onBlur={ blur }
           onClick:control={ isInteractive.value ? onClick : undefined }
-          onClick:prepend={ isInteractive.value ? onClick : undefined }
+          onClick:prependInner={ isInteractive.value ? onClick : undefined }
+          onClick:appendInner={ isInteractive.value ? onClick : undefined }
           onUpdate:modelValue={ val => {
             pickerModel.value = val
             model.value = val
           }}
+          readonly={ isReadOnlyInput.value }
+          prependIcon={ undefined }
+          prependInnerIcon={ undefined }
+          appendInnerIcon={ undefined }
+          appendIcon={ undefined }
         >
           {{
             ...slots,
+            prepend: ({ ...slotProps }) => {
+              return !hasPrepend && props.prependIcon ? getPipIcon('prepend-icon')
+                : slots.prepend?.(slotProps)
+            },
             [`prepend-inner`]: slotProps => {
-              return !hasPrependInner ? (
-                <div key="prepend-inner-icon" class="v-field__prepend_inner_icon">
-                  <VIcon
-                    key="prepend-inner-icon"
-                    density={ props.density }
-                    icon={ props.prependInnerIcon ?? prependInnerIcon }
-                    color={ colorPip.value ? model.value as string ?? 'on-surface' : undefined }
-                  />
-                </div>
-              )
-                : slots['prepend-inner']?.(slotProps)
+              return !hasPrependInner && props.prependInnerIcon ? getPipIcon('prepend-inner-icon')
+                : slots.prependInner?.(slotProps)
             },
             default: () => {
               return (
@@ -165,6 +196,14 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
                   </VConfirmEdit>
                 </VMenu>
               )
+            },
+            [`append-inner`]: slotProps => {
+              return !hasAppendInner && props.appendInnerIcon ? getPipIcon('append-inner-icon')
+                : slots.appendInner?.(slotProps)
+            },
+            append: slotProps => {
+              return !hasAppend && props.appendIcon ? getPipIcon('append-icon')
+                : slots.append?.(slotProps)
             },
           }}
         </VTextField>
