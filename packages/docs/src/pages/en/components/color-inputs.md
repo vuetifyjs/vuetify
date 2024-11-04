@@ -66,18 +66,14 @@ The `v-color-input` component provides a clean interface for selecting colors.
 
 The `v-color-input` component extends the [v-text-field](/components/text-fields/) and [v-color-picker](/components/color-pickers/) component; and supports all of their props.
 
-#### Model
-
-The default model value is a string, but is displayed as formatted text in the input.
-
-<ExamplesExample file="v-color-input/prop-model" />
-
 #### Pip icon
 
 You can move the pip icon within the input or entirely by utilizing the **prepend-icon** and **prepend-inner-icon** properties.
 
 <ExamplesExample file="v-color-input/prop-prepend-icon" />
 
-<!-- ## Examples
+#### Color Pip
 
-The following are a collection of examples that demonstrate more advanced and real world use of the `v-color-input` component. -->
+The `color-pip` is a boolean that determines whether the pip icon color matches the selected color.
+
+<ExamplesExample file="v-color-input/prop-color-pip" />
