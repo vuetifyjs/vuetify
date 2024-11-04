@@ -55,7 +55,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
           class={[
             'v-calendar-month__day',
           ]}
-          onContextmenu={ (event) => contextmenu(props.day.date, event) }
+          onContextmenu={ (event) => contextmenu(props.day?.date, event) }
         >
           { !props.day?.isHidden ? (
             <div key="title" class="v-calendar-weekly__day-label">
