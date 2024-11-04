@@ -273,6 +273,29 @@ const app = createApp()
 app.use(vuetify).mount('#app')
 ```
 
+## Using as ES Module with CDN
+
+To import Vuetify (and Vue) using an import map you can use the same CDN but contain it in a ES module without tooling
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@3.7.3/dist/vuetify.min.css">
+<script type="importmap">
+  {
+    "imports": {
+      "vue": "https://unpkg.com/vue@3.2.47/dist/vue.esm-browser.js",
+      "vuetify": "https://unpkg.com/vuetify@3.1.10/dist/vuetify.esm.js"
+    }
+  }
+</script>
+<script type="module">
+  const apiUrl = 'http://zeugnis-admin.localhost/'
+  import { createApp } from 'vue'
+  import { createVuetify } from 'vuetify'
+  const vuetify = createVuetify()
+  createApp().use(vuetify).mount('#app')
+```
+
+
 ## Using Vitepress
 
 You can use Vuetify's components in your Vitepress static site.
