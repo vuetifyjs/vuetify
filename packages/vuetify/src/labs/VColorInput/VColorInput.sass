@@ -1,0 +1,16 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  /* region INPUT */
+  .v-color-input
+
+    /* region AFFIXES */
+    .v-input__prepend,
+    .v-field__prepend-inner,
+    .v-field__append-inner,
+    .v-input__append
+      > .v-icon
+        color: $color-input-pip-default-color
+        opacity: 1
+    /* endregion */
