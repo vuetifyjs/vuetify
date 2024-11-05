@@ -11,14 +11,12 @@ import { makeCalendarProps, useCalendar } from '@/composables/calendar'
 import { useDate } from '@/composables/date/date'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, nextTick } from 'vue'
 import { chunkArray, genericComponent, getPrefixedEventHandlers, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VCalendarDaySlots } from './VCalendarDay'
 import type { CalendarDay } from '@/composables/calendar'
-
-import { nextTick } from 'vue'
 
 export const makeVCalendarProps = propsFactory({
   hideHeader: Boolean,

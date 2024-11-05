@@ -129,10 +129,12 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
             }
             </div>
             <div class="v-calendar-day__row-hairline"></div>
-            <div class={['v-calendar-day__row-content', interval.value.events.some(e => !e.last)
-              ? 'v-calendar-day__row-content-through'
-              : '']}
-              onContextmenu={ (event) => contextmenu(interval.value.start, event) }>
+            <div
+              class={['v-calendar-day__row-content', interval.value.events.some(e => !e.last)
+                ? 'v-calendar-day__row-content-through'
+                : '']}
+              onContextmenu={ event => contextmenu(interval.value.start, event) }
+            >
               {
                 slots.intervalBody?.({ interval: interval.value }) ?? (
                   <div
@@ -168,12 +170,14 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
             </div>
           </div>
         ) : (
-          <div class="v-calendar-day__row-without-label" style={ `height: ${convertToUnit(props.intervalHeight)}` }
-            onContextmenu={ (event) => contextmenu(interval.value.start, event) }>
+          <div
+            class="v-calendar-day__row-without-label"
+            style={ `height: ${convertToUnit(props.intervalHeight)}` }
+            onContextmenu={ event => contextmenu(interval.value.start, event) }
+          >
           <div class={['v-calendar-day__row-content', interval.value.events.some(e => !e.last)
-              ? 'v-calendar-day__row-content-through'
-              : '']}
-            >
+            ? 'v-calendar-day__row-content-through' : '']}
+          >
               {
                 slots.intervalBody?.({ interval: interval.value }) ?? (
                   interval.value.events?.map(event => (

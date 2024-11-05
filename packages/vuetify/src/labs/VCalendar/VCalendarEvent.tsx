@@ -32,7 +32,8 @@ export const VCalendarEvent = genericComponent()({
           day: props.day,
           event: props.event,
         }))}
-        onClick={ () => emit('click:event', props.event) } >
+        onClick={ () => emit('click:event', props.event) }
+      >
         <VBadge
           inline
           dot
