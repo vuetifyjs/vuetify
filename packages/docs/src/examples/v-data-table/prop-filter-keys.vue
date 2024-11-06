@@ -19,7 +19,11 @@
     </v-card-title>
 
     <v-divider></v-divider>
-    <v-data-table v-model:search="search" :items="items">
+    <v-data-table
+      v-model:search="search"
+      :filter-keys="['name']"
+      :items="items"
+    >
       <template v-slot:header.stock>
         <div class="text-end">Stock</div>
       </template>

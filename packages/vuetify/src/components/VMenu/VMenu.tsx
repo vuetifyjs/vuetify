@@ -33,6 +33,7 @@ import {
   genericComponent,
   getNextElement,
   getUid,
+  IN_BROWSER,
   isClickInsideElement,
   omit,
   propsFactory,
@@ -102,7 +103,10 @@ export const VMenu = genericComponent<OverlaySlots>()({
       },
     })
 
-    onBeforeUnmount(() => parent?.unregister())
+    onBeforeUnmount(() => {
+      parent?.unregister()
+      document.removeEventListener('focusin', onFocusIn)
+    })
     onDeactivated(() => isActive.value = false)
 
     async function onFocusIn (e: FocusEvent) {
@@ -130,12 +134,16 @@ export const VMenu = genericComponent<OverlaySlots>()({
     watch(isActive, val => {
       if (val) {
         parent?.register()
-        document.addEventListener('focusin', onFocusIn, { once: true })
+        if (IN_BROWSER) {
+          document.addEventListener('focusin', onFocusIn, { once: true })
+        }
       } else {
         parent?.unregister()
-        document.removeEventListener('focusin', onFocusIn)
+        if (IN_BROWSER) {
+          document.removeEventListener('focusin', onFocusIn)
+        }
       }
-    })
+    }, { immediate: true })
 
     function onClickOutside (e: MouseEvent) {
       parent?.closeParents(e)
