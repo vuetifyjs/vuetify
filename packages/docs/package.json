@@ -3,7 +3,7 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john@vuetifyjs.com>",
-  "version": "3.7.3",
+  "version": "3.7.4",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuetifyjs/vuetify.git",
@@ -33,6 +33,7 @@
     "prism-theme-vars": "^0.2.4",
     "prismjs": "^1.29.0",
     "roboto-fontface": "^0.10.0",
+    "swetrix": "^3.5.0",
     "vee-validate": "^4.12.6",
     "vue": "^3.5.12",
     "vue-gtag-next": "^1.14.0",
