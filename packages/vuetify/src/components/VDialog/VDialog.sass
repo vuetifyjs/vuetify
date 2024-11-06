@@ -13,10 +13,6 @@
       max-width: calc(100% - #{$dialog-margin * 2})
       margin: $dialog-margin
 
-      > form
-        height: 100%
-        width: 100%
-
       &,
       > form
         display: flex
@@ -76,8 +72,7 @@
   .v-dialog--scrollable > .v-overlay__content
     &,
     > form
-      display: flex
-
+      &,
       > .v-card
         display: flex
         flex: 1 1 100%
@@ -85,6 +80,6 @@
         max-height: 100%
         max-width: 100%
 
-        > .v-card-text
-          backface-visibility: hidden
-          overflow-y: auto
+      > .v-card > .v-card-text
+        backface-visibility: hidden
+        overflow-y: auto
