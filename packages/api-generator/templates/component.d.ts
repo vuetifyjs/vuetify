@@ -2,7 +2,13 @@ import type { AllowedComponentProps, ComponentOptionsBase, VNodeChild, VNodeProp
 import type { UnionToIntersection } from '@/util'
 import type { __component__ } from '@/__name__'
 
-type StripProps = keyof VNodeProps | keyof AllowedComponentProps | 'v-slots' | '$children' | `v-slot:${string}`
+type StripProps =
+  | keyof VNodeProps
+  | keyof AllowedComponentProps
+  | 'v-slots'
+  | '$children'
+  | `v-slot:${string}`
+  | `on${Capitalize<string>}Once`
 type Event = `on${string}`
 
 type Props<T> = T extends { $props: infer P extends object }
