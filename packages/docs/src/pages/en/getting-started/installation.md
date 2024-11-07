@@ -285,12 +285,8 @@ To import Vuetify (and Vue) using an [import map](https://developer.mozilla.org/
   <script type="importmap">
   {
     "imports": {
-      "vue": "https://cdn.jsdelivr.net/npm/vue@{{ version }}/dist/vue.esm-browser.js",
+      "vue": "https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.esm-browser.js",
       "vuetify": "https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.esm.js"
-    },
-    "integrity": { // optional
-      "https://cdn.jsdelivr.net/npm/vue@{{ version }}/dist/vue.esm-browser.js": "sha384-...",
-      "https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.esm.js": "sha384-..."
     }
   }
   </script>
