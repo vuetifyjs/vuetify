@@ -275,26 +275,35 @@ app.use(vuetify).mount('#app')
 
 ## Using as ES Module with CDN
 
-To import Vuetify (and Vue) using an import map you can use the same CDN but contain it in a ES module without tooling
+To import Vuetify (and Vue) using an [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) you can use the same CDN but contain it in a ES module without tooling
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@3.7.3/dist/vuetify.min.css">
-<script type="importmap">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" />
+  <link rel="stylesheet" href="https://fonts.bunny.net/css?family=roboto:400,500,700" />
+  <script type="importmap">
   {
     "imports": {
-      "vue": "https://unpkg.com/vue@3.2.47/dist/vue.esm-browser.js",
-      "vuetify": "https://unpkg.com/vuetify@3.1.10/dist/vuetify.esm.js"
+      "vue": "https://cdn.jsdelivr.net/npm/vue@{{ version }}/dist/vue.esm-browser.js",
+      "vuetify": "https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.esm.js"
+    },
+    "integrity": { // optional
+      "https://cdn.jsdelivr.net/npm/vue@{{ version }}/dist/vue.esm-browser.js": "sha384-...",
+      "https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.esm.js": "sha384-..."
     }
   }
-</script>
-<script type="module">
-  const apiUrl = 'http://zeugnis-admin.localhost/'
-  import { createApp } from 'vue'
-  import { createVuetify } from 'vuetify'
-  const vuetify = createVuetify()
-  createApp().use(vuetify).mount('#app')
+  </script>
+</head>
 ```
 
+```html
+<script type="module">
+  import { createApp, ref, computed } from "vue"
+  import { createVuetify } from "vuetify"
+  //... setup as usual
+</script>
+```
 
 ## Using Vitepress
 
