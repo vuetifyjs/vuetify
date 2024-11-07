@@ -65,9 +65,10 @@ export const VCalendarDay = genericComponent<VCalendarDaySlots>()({
               <div>
                 <VBtn
                   { ...getPrefixedEventHandlers(attrs, ':intervalDate', () => props.day) }
+                  class={ props.day?.isToday ? 'v-calendar-day-label__today' : undefined }
                   icon
                   text={ adapter.format(props.day.date, 'dayOfMonth') }
-                  variant="text"
+                  variant={ props.day?.isToday ? undefined : 'text' }
                 />
               </div>
             </div>
