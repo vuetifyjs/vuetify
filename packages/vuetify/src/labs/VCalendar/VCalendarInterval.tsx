@@ -124,7 +124,7 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
                       ? adapter.format(interval.value.start, 'hours12h')
                       : props.intervalFormat(interval.value)
                     : interval.value.label
-                  : ''
+                  : '12 AM'
               )
             }
             </div>
