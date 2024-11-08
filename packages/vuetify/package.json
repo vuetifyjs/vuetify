@@ -80,8 +80,18 @@
   },
   "typesVersions": {
     "*": {
-      "util/colorUtils": [
-        "src/util/colorUtils.d.ts"
+      "lib/framework.mjs": [
+        "lib/index.d.mts"
+      ],
+      "framework": [
+        "lib/index.d.mts"
+      ],
+      "*": [
+        "*",
+        "dist/*",
+        "lib/*",
+        "lib/*.d.mts",
+        "lib/*/index.d.mts"
       ]
     }
   },
@@ -96,7 +106,7 @@
     "dev:typecheck": "vue-tsc --noEmit --skipLibCheck --project ./tsconfig.dev.json",
     "build": "rimraf lib dist && concurrently \"pnpm run build:dist\" \"pnpm run build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && pnpm run build:types",
     "build:dist": "rollup --config build/rollup.config.mjs",
-    "build:lib": "NODE_ENV=lib babel src --out-dir lib --source-maps --extensions \".ts\",\".tsx\" --copy-files --no-copy-ignored --out-file-extension .mjs",
+    "build:lib": "NODE_ENV=lib babel src --out-dir lib --source-maps --extensions \".ts\",\".tsx\",\".snap\" --copy-files --no-copy-ignored --out-file-extension .mjs",
     "build:types": "rimraf types-temp && tsc --pretty --emitDeclarationOnly -p tsconfig.dist.json && rollup --config build/rollup.types.config.mjs && rimraf types-temp",
     "tsc": "tsc",
     "test": "vitest",
@@ -105,7 +115,7 @@
     "test:open": "TEST_BAIL=1 vitest --project browser -w",
     "test:coverage": "pnpm run test --coverage",
     "test:percy": "percy exec -- vitest --project browser",
-    "test:all": "concurrently -gr \'vitest --project unit\' \'vitest --project browser --shard=1/5\' \'vitest --project browser --shard=2/5\' \'vitest --project browser --shard=3/5\' \'vitest --project browser --shard=4/5\' \'vitest --project browser --shard=5/5\'",
+    "test:all": "concurrently -gr 'vitest --project unit' 'vitest --project browser --shard=1/5' 'vitest --project browser --shard=2/5' 'vitest --project browser --shard=3/5' 'vitest --project browser --shard=4/5' 'vitest --project browser --shard=5/5'",
     "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\""
   },
