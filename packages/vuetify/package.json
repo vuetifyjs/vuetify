@@ -1,4 +1,4 @@
-{
+++ packages/vuetify/package.json
   "name": "vuetify",
   "description": "Vue Material Component Framework",
   "version": "3.7.4",
@@ -79,8 +79,8 @@
   },
   "typesVersions": {
     "*": {
-      "lib/framework.mjs": [
         "lib/index.d.mts"
+    "./util/colorUtils": "./lib/util/colorUtils.mjs"
       ],
       "framework": [
         "lib/index.d.mts"
