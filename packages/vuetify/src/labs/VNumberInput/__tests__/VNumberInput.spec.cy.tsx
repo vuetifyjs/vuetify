@@ -17,6 +17,8 @@ describe('VNumberInput', () => {
       { typing: '1...0', expected: '1.0' }, // "." is only allowed once
       { typing: '123.45.67', expected: '123.4567' }, // "." is only allowed once
       { typing: 'ab-c8+.iop9', expected: '-8.9' }, // Only numbers, "-", "." are allowed to type in
+      { typing: '1.1e7', expected: '1.1e7' }, // Scientific notation is allowed
+      { typing: '1.1ee7', expected: '1.1e7' }, // "e" is only allowed once
     ]
     scenarios.forEach(({ typing, expected }) => {
       cy.mount(() => <VNumberInput />)

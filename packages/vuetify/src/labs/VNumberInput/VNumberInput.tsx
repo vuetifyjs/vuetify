@@ -161,7 +161,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       // Only numbers, "-", "." are allowed
       // AND "-", "." are allowed only once
       // AND "-" is only allowed at the start
-      if (!/^-?(\d+(\.\d*)?|(\.\d+)|\d*|\.)$/.test(potentialNewInputVal)) {
+      // AND "e" is allowed once for scientific notation
+      if (!/^-?(\d+(\.\d*)?|\.\d*)?([eE][-+]?\d*)?$/.test(potentialNewInputVal)) {
         e.preventDefault()
       }
     }
