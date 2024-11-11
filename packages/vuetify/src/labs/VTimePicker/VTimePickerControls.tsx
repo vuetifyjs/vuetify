@@ -45,6 +45,24 @@ export const VTimePickerControls = genericComponent()({
     const { t } = useLocale()
 
     useRender(() => {
+    // Helper methods to programmatically select hour, minute and second
+    const selectHour = () => {
+      emit('update:selecting', SelectingTimes.Hour)
+    }
+
+    const selectMinute = () => {
+      emit('update:selecting', SelectingTimes.Minute)
+    }
+
+    const selectSecond = () => {
+      if (props.useSeconds) {
+        emit('update:selecting', SelectingTimes.Second)
+      }
+    }
+
+    // Expose methods for programmatic control
+    expose({ selectHour, selectMinute, selectSecond })
+
       let hour = props.hour
       if (props.ampm) {
         hour = hour ? ((hour - 1) % 12 + 1) : 12
