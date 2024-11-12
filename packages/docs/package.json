@@ -28,6 +28,7 @@
     "core-js": "^3.6.4",
     "node-fetch": "^2.6.0",
     "register-service-worker": "^1.7.1",
+    "swetrix": "^3.5.2",
     "vue-i18n": "^8.17.7",
     "vue-instantsearch": "^3.4.3",
     "vuetify": "^2.7.2",

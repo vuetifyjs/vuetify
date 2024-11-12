@@ -4,6 +4,7 @@
  * Automatically included in `./src/main.js`
  */
 
+import './analytics'
 import { loadFonts } from './webfontloader'
 import { registerComponents } from './app'
 import { useMeta } from './vue-meta'
