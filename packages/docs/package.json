@@ -37,6 +37,7 @@
     "route-cache": "^0.4.4",
     "serialize-javascript": "^1.5.0",
     "serve-favicon": "^2.5.0",
+    "swetrix": "3.5.0",
     "vee-validate": "^2.1.7",
     "vue-analytics": "^5.16.2",
     "vue-i18n": "^7.8.1",
