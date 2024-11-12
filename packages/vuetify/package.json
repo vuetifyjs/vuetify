@@ -1,4 +1,8 @@
 {
+declare module 'vuetify/lib/util/colorUtils' {
+  export function someFunction(param: string): number;
+  // Add other function types as needed
+}
   "name": "vuetify",
   "description": "Vue Material Component Framework",
   "version": "3.7.4",
@@ -18,6 +22,7 @@
     "ui framework",
     "component framework",
     "ui library",
+   "./util/colorUtils": "./lib/util/colorUtils.mjs",
     "component library",
     "material components",
     "vue framework"
