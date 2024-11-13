@@ -20,7 +20,9 @@ export const md3: Blueprint = {
     },
     VBtn: {
       color: 'primary',
+      height: 40,
       rounded: 'xl',
+      style: 'text-transform: none;',
     },
     VBtnGroup: {
       rounded: 'xl',
