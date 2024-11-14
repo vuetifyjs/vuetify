@@ -1,3 +1,4 @@
+@use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -42,6 +43,10 @@
         &.v-alert--border-bottom
           padding-bottom: $alert-padding + $alert-border-thin-width + $modifier
 
+    &:not(:has(.v-alert-title))
+      .v-alert__content
+        padding-top: calc(($alert-title-line-height - settings.$line-height-root * 1rem) / 2)
+
   .v-alert__border
     border-radius: inherit
     bottom: 0
@@ -70,6 +75,7 @@
   .v-alert__close
     flex: 0 1 auto
     grid-area: close
+    margin-block: -2px
 
   .v-alert__content
     align-self: center
@@ -78,7 +84,6 @@
 
   .v-alert__append,
   .v-alert__close
-    align-self: flex-start
     margin-inline-start: $alert-append-margin-inline-start
 
   .v-alert__append
@@ -94,6 +99,7 @@
     align-items: center
     grid-area: prepend
     margin-inline-end: $alert-prepend-margin-inline-end
+    min-height: $alert-title-line-height
 
     .v-alert--prominent &
       align-self: center
