@@ -209,7 +209,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             flat
             key="increment-btn"
             height={ controlNodeDefaultHeight.value }
-            name="increment-btn"
+            data-testid="increment"
+            aria-hidden="true"
             icon={ incrementIcon.value }
             onClick={ onClickUp }
             onMousedown={ onControlMousedown }
@@ -241,7 +242,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             flat
             key="decrement-btn"
             height={ controlNodeDefaultHeight.value }
-            name="decrement-btn"
+            data-testid="decrement"
+            aria-hidden="true"
             icon={ decrementIcon.value }
             size={ controlNodeSize.value }
             tabindex="-1"
