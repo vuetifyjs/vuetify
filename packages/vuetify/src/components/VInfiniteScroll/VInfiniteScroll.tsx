@@ -296,8 +296,8 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
       )
     })
 
-    function reset () {
-      setStatus(props.side, 'ok')
+    function reset (side?: InfiniteScrollSide) {
+      setStatus(side ?? props.side, 'ok')
 
       nextTick(() => {
         setScrollAmount(
