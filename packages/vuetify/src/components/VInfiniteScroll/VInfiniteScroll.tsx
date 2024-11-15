@@ -160,6 +160,9 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
         startStatus.value = status
       } else if (side === 'end') {
         endStatus.value = status
+      } else if (side === 'both') {
+        startStatus.value = status
+        endStatus.value = status
       }
     }
 
