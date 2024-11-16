@@ -297,7 +297,8 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
     })
 
     function reset (side?: InfiniteScrollSide) {
-      setStatus(side ?? props.side, 'ok')
+      const effectiveSide = side ?? props.side
+      setStatus(effectiveSide, 'ok')
 
       nextTick(() => {
         setScrollAmount(
@@ -308,7 +309,12 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
             window.requestAnimationFrame(() => {
               window.requestAnimationFrame(() => {
                 window.requestAnimationFrame(() => {
-                  intersecting(props.side)
+                  if (effectiveSide === 'both') {
+                    intersecting('start')
+                    intersecting('end')
+                  } else {
+                    intersecting(props.side)
+                  }
                 })
               })
             })
