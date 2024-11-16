@@ -244,7 +244,6 @@ export const VListItem = genericComponent<VListItemSlots>()({
             props.style,
           ]}
           tabindex={ isClickable.value ? (list ? -2 : 0) : undefined }
-          aria-selected={ root.activatable.value ? isActivated.value : isSelected.value }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && props.ripple }
