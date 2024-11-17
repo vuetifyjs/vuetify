@@ -57,7 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} de plus',
-    today: 'Today',
+    today: 'Aujour\'hui',
   },
   input: {
     clear: 'Vider {0}',
