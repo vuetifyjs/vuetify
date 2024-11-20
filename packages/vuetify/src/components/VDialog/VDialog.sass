@@ -24,6 +24,7 @@
           --v-scrollbar-offset: 0px
           border-radius: $dialog-border-radius
           overflow-y: auto
+          flex: 1 1 100%
 
           @include tools.elevation($dialog-elevation)
 
@@ -72,8 +73,7 @@
   .v-dialog--scrollable > .v-overlay__content
     &,
     > form
-      display: flex
-
+      &,
       > .v-card
         display: flex
         flex: 1 1 100%
@@ -81,6 +81,6 @@
         max-height: 100%
         max-width: 100%
 
-        > .v-card-text
-          backface-visibility: hidden
-          overflow-y: auto
+      > .v-card > .v-card-text
+        backface-visibility: hidden
+        overflow-y: auto

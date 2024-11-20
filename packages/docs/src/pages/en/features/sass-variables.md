@@ -55,7 +55,7 @@ For additional details about css-pre-processors, please refer to the official vi
 
 ## Basic usage
 
-Create a **main.scss** file in your **src/styles** directory and update the style import within your **vuetify.js** file:
+There are many SASS variables such as **font size**, **font family**, and **line height** that can be configured globally. An extensive list of configurable global SASS variables can be found [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_variables.scss). To start, create a **main.scss** file in your **src/styles** directory and update the style import within your **vuetify.js** file:
 
 ```scss { resource="src/styles/main.scss" }
 @use 'vuetify' with (
@@ -69,6 +69,18 @@ Create a **main.scss** file in your **src/styles** directory and update the styl
 ```
 
 Within your style file, import the Vuetify styles and specify the variables you want to override, that's it.
+
+::: info
+
+`'vuetify'` should be used for [global SASS variable](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_variables.scss).
+
+:::
+
+::: info
+
+`'vuetify/settings'` should be used for vuetify [component SASS Variables](features/sass-variables/#variable-api).
+
+:::
 
 ::: warning
 

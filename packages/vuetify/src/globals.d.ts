@@ -169,13 +169,3 @@ declare module 'vue' {
 
   export interface CSSProperties extends CustomProperties {}
 }
-
-declare module 'expect' {
-  interface Matchers<R> {
-    /** console.warn */
-    toHaveBeenTipped(): R
-
-    /** console.error */
-    toHaveBeenWarned(): R
-  }
-}

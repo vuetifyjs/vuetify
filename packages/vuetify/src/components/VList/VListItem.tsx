@@ -127,6 +127,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       root,
       parent,
       openOnSelect,
+      id: uid,
     } = useNestedItem(id, false)
     const list = useList()
     const isActive = computed(() =>
@@ -242,11 +243,12 @@ export const VListItem = genericComponent<VListItemSlots>()({
             dimensionStyles.value,
             props.style,
           ]}
-          href={ link.href.value }
           tabindex={ isClickable.value ? (list ? -2 : 0) : undefined }
+          aria-selected={ root.activatable.value ? isActivated.value : isSelected.value }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && props.ripple }
+          { ...link.linkProps }
         >
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }
 
@@ -368,6 +370,8 @@ export const VListItem = genericComponent<VListItemSlots>()({
       isSelected,
       list,
       select,
+      root,
+      id: uid,
     }
   },
 })

@@ -1,6 +1,6 @@
 <template>
   <v-lazy min-height="128">
-    <div class="d-flex">
+    <div class="d-flex team-member">
       <v-avatar color="grey-lighten-2" size="72">
         <v-img v-if="member.avatar" :src="member.avatar" />
         <v-icon v-else color="grey" size="35"> mdi-image</v-icon>
@@ -214,8 +214,9 @@
   }
 </script>
 
-<style>
-  .cursor-pointer {
-    cursor: pointer;
-  }
+<style lang="sass">
+  .team-member
+    .v-markdown
+      > p
+        margin: 0
 </style>
