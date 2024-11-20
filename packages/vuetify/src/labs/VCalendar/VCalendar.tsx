@@ -11,7 +11,7 @@ import { makeCalendarProps, useCalendar } from '@/composables/calendar'
 import { useDate } from '@/composables/date/date'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, nextTick } from 'vue'
 import { chunkArray, genericComponent, getPrefixedEventHandlers, pick, propsFactory, useRender } from '@/util'
 
 // Types
@@ -44,11 +44,12 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
   props: makeVCalendarProps(),
 
   emits: {
-    'click:intervalDate': null,
     next: null,
     prev: null,
     today: null,
     'update:modelValue': null,
+    'click:event': null,
+    'contextmenu:date': null,
   },
 
   setup (props, { attrs, emit, slots }) {
@@ -61,32 +62,43 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
     function onClickNext () {
       if (props.viewMode === 'month') {
         model.value = [adapter.addMonths(displayValue.value, 1)]
-      }
-      if (props.viewMode === 'week') {
+      } else if (props.viewMode === 'week') {
         model.value = [adapter.addDays(displayValue.value, 7)]
-      }
-      if (props.viewMode === 'day') {
+      } else if (props.viewMode === 'day') {
         model.value = [adapter.addDays(displayValue.value, 1)]
       }
-      emit('next', model.value[0])
+      nextTick(() => {
+        emit('next', model.value[0])
+      })
     }
 
     function onClickPrev () {
       if (props.viewMode === 'month') {
         model.value = [adapter.addMonths(displayValue.value, -1)]
-      }
-      if (props.viewMode === 'week') {
+      } else if (props.viewMode === 'week') {
         model.value = [adapter.addDays(displayValue.value, -7)]
-      }
-      if (props.viewMode === 'day') {
+      } else if (props.viewMode === 'day') {
         model.value = [adapter.addDays(displayValue.value, -1)]
       }
-      emit('prev', model.value[0])
+      nextTick(() => {
+        emit('prev', model.value[0])
+      })
     }
 
     function onClickToday () {
-      model.value = [adapter.date()]
-      emit('today', model.value[0])
+      const date = adapter.date()
+      model.value = [date]
+      nextTick(() => {
+        emit('today', model.value[0])
+      })
+    }
+
+    function clickEvent (event: any) {
+      emit('click:event', event)
+    }
+
+    function contextmenu (date: any, event: any) {
+      emit('contextmenu:date', date, event)
     }
 
     const title = computed(() => {
@@ -175,6 +187,8 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                             day={ day }
                             title={ adapter.format(day.date, 'dayOfMonth') }
                             events={ props.events?.filter(e => adapter.isSameDay(day.date, e.start) || adapter.isSameDay(day.date, e.end)) }
+                            onClick:event={ clickEvent }
+                            onContextmenu:date={ contextmenu }
                           >
                             {{
                               ...pick(slots, ['dayBody', 'dayEvent', 'dayTitle']),
@@ -186,7 +200,6 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                 }
               </div>
             )}
-
             { props.viewMode === 'week' && (
               daysInWeek.value.map((day, i) =>
                 slots.intervalDay ? slots.intervalDay?.({
@@ -200,6 +213,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                     day={ day }
                     dayIndex={ i }
                     events={ props.events?.filter(e => adapter.isSameDay(e.start, day.date) || adapter.isSameDay(e.end, day.date)) }
+                    onContextmenu:date={ contextmenu }
                   >
                     {{ ...pick(slots, ['interval', 'intervalBody', 'intervalEvent', 'intervalTitle']) }}
                   </VCalendarDay>
@@ -219,12 +233,14 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                 <VCalendarDay
                   { ...calendarDayProps }
                   day={ genDays([model.value[0] as Date], adapter.date() as Date)[0] }
+                  dayIndex={ 0 }
                   events={
                     props.events?.filter(e =>
                       adapter.isSameDay(e.start, genDays([model.value[0] as Date], adapter.date() as Date)[0].date) ||
                       adapter.isSameDay(e.end, genDays([model.value[0] as Date], adapter.date() as Date)[0].date)
                     )
                   }
+                  onContextmenu:date={ contextmenu }
                 ></VCalendarDay>
               )
             )}
