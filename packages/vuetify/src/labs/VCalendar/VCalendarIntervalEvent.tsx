@@ -9,6 +9,7 @@ import { useDate } from '@/composables/date'
 
 // Utilities
 import { convertToUnit, genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
+import { withModifiers } from 'vue'
 
 export type VCalendarIntervalEventSlots = {
   intervalEvent: { height: string, margin: string, eventClass: string, event: any, interval: any }
@@ -37,7 +38,11 @@ export const VCalendarIntervalEvent = genericComponent<VCalendarIntervalEventSlo
 
   props: makeVCalendarIntervalEventProps(),
 
-  setup (props, { attrs, slots }) {
+  emits: {
+    'contextmenu:event': null
+  },
+
+  setup (props, { attrs, emit, slots }) {
     const adapter = useDate()
     const calcHeight = () => {
       if ((!props.event?.first && !props.event?.last) || adapter.isEqual(props.event?.end, props.interval?.end)) {
@@ -57,6 +62,10 @@ export const VCalendarIntervalEvent = genericComponent<VCalendarIntervalEventSlo
           }, { height: '', margin: '' })
         return { height, margin }
       }
+    }
+
+    const contextmenuEvent = (mouseEvent: any, date: any, event: any) => {
+      emit('contextmenu:event', mouseEvent, date, event)
     }
 
     useRender(() => {
@@ -82,6 +91,7 @@ export const VCalendarIntervalEvent = genericComponent<VCalendarIntervalEventSlo
                   : props.event?.last ? 'b'
                   : false
                 }
+                onContextmenu={ withModifiers((event: any) => contextmenuEvent(event, props.interval?.start, props.event), ['stop'])  }
                 { ...getPrefixedEventHandlers(attrs, ':intervalEvent', () => props) }
               >
                 { props.event?.first ? props.event?.title : '' }

@@ -36,6 +36,7 @@ export const VCalendarDay = genericComponent<VCalendarDaySlots>()({
 
   emits: {
     'contextmenu:date': null,
+    'contextmenu:event': null,
   },
 
   setup (props, { attrs, emit, slots }) {
@@ -45,9 +46,13 @@ export const VCalendarDay = genericComponent<VCalendarDaySlots>()({
         .filter((_, index) => (props.intervalDuration * (index + props.intervalStart)) < 1440),
     ])
 
-    const contextmenu = (date: any, event: any) => {
-      // Pass the event up the chain
-      emit('contextmenu:date', date, event)
+    const contextmenuDate = (mouseEvent: any, date: any) => {
+      // Pass the date up the chain
+      emit('contextmenu:date', mouseEvent, date)
+    }
+
+    const contextmenuEvent = (mouseEvent: any, date: any, event: null) => {
+      emit('contextmenu:event', mouseEvent, date, event)
     }
 
     useRender(() => {
@@ -77,7 +82,8 @@ export const VCalendarDay = genericComponent<VCalendarDaySlots>()({
             slots.interval?.(calendarIntervalProps) ?? (
               <VCalendarInterval
                 index={ index }
-                onContextmenu:date={ contextmenu }
+                onContextmenu:date={ contextmenuDate }
+                onContextmenu:event={ contextmenuEvent }
                 { ...calendarIntervalProps }
                 { ...getPrefixedEventHandlers(attrs, ':interval', () => calendarIntervalProps) }
               >

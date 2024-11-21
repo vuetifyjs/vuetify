@@ -183,14 +183,14 @@ export function useCalendar (props: CalendarProps) {
 
     const today = adapter.date() as Date
 
-    return genDays(week, today)
+    return genDays(week as Date[], today as Date)
   })
 
   const daysInMonth = computed(() => {
     const days = weeksInMonth.value.flat() as Date[]
     const today = adapter.date() as Date
 
-    return genDays(days, today)
+    return genDays(days as Date[], today)
   })
 
   const weekNumbers = computed(() => {
