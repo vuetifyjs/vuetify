@@ -41,9 +41,8 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
   },
 
   setup (props, { emit, attrs, slots }) {
-    const clickEvent = (event: any) => {
-      // Pass the event up the chain
-      emit('click:event', event)
+    const clickEvent = (mouseEvent: any, event: any) => {
+      emit('click:event', mouseEvent, event)
     }
     const contextmenuDate = (mouseEvent: any, date: any) => {
       emit('contextmenu:date', mouseEvent, date)

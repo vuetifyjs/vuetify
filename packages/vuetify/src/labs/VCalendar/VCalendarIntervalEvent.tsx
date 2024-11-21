@@ -39,6 +39,7 @@ export const VCalendarIntervalEvent = genericComponent<VCalendarIntervalEventSlo
   props: makeVCalendarIntervalEventProps(),
 
   emits: {
+    'click:event': null,
     'contextmenu:event': null
   },
 
@@ -62,6 +63,9 @@ export const VCalendarIntervalEvent = genericComponent<VCalendarIntervalEventSlo
           }, { height: '', margin: '' })
         return { height, margin }
       }
+    }
+    const clickEvent = (mouseEvent: any, event: any) => {
+      emit('click:event', mouseEvent, event)
     }
 
     const contextmenuEvent = (mouseEvent: any, date: any, event: any) => {
@@ -91,6 +95,7 @@ export const VCalendarIntervalEvent = genericComponent<VCalendarIntervalEventSlo
                   : props.event?.last ? 'b'
                   : false
                 }
+                onClick={ withModifiers((event: any) => clickEvent(event, props.event), ['stop']) }
                 onContextmenu={ withModifiers((event: any) => contextmenuEvent(event, props.interval?.start, props.event), ['stop'])  }
                 { ...getPrefixedEventHandlers(attrs, ':intervalEvent', () => props) }
               >

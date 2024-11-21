@@ -72,6 +72,7 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
   },
 
   emits: {
+    'click:event': null,
     'contextmenu:date': null,
     'contextmenu:event': null
   },
@@ -107,6 +108,10 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
           : [],
       }
     })
+
+    const clickEvent = (mouseEvent: any, event: any) => {
+      emit('click:event', mouseEvent, event)
+    }
 
     const contextmenuDate = (mouseEvent: any, date: any) => {
       emit('contextmenu:date', mouseEvent, date)
@@ -157,6 +162,7 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
                           intervalDivisions={ props.intervalDivisions }
                           intervalDuration={ props.intervalDuration }
                           intervalHeight={ props.intervalHeight }
+                          onClick:event={ clickEvent }
                           onContextmemu:event={ contextmenuEvent }
                         >
                           {{
