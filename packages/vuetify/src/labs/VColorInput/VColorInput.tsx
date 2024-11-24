@@ -23,9 +23,9 @@ import type { VInputSlot, VInputSlots } from '@/components/VInput/VInput'
 export type VColorInputSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
   default: never
   prepend: VInputSlot
-  prependInner: DefaultInputSlot
+  'prepend-inner': DefaultInputSlot
   append: VInputSlot
-  appendInner: DefaultInputSlot
+  'append-inner': DefaultInputSlot
 }
 
 export const makeVColorInputProps = propsFactory({
@@ -43,7 +43,7 @@ export const makeVColorInputProps = propsFactory({
     prependInnerIcon: '$pip',
   }),
   ...omit(makeVColorPickerProps({
-  }), ['width']), // TODO: Might need more added here, tbd
+  }), ['width']),
 }, 'VColorInput')
 
 export const VColorInput = genericComponent<VColorInputSlots>()({
@@ -102,8 +102,8 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
       const colorPickerProps = VColorPicker.filterProps(omit(props, ['active', 'color']))
       const textFieldProps = VTextField.filterProps(omit(props, ['prependInnerIcon']))
       const hasPrepend = !!(slots.prepend)
-      const hasPrependInner = !!(slots.prependInner)
-      const hasAppendInner = !!(slots.appendInner)
+      const hasPrependInner = !!(slots['prepend-inner'])
+      const hasAppendInner = !!(slots['append-inner'])
       const hasAppend = !!(slots.append)
 
       const isReadOnlyInput = computed(() => props.readonlyInput || props.readonly)
@@ -158,7 +158,7 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
             },
             [`prepend-inner`]: slotProps => {
               return !hasPrependInner && props.prependInnerIcon ? getPipIcon('prepend-inner-icon')
-                : slots.prependInner?.(slotProps)
+                : slots['prepend-inner']?.(slotProps)
             },
             default: () => {
               return (
@@ -199,7 +199,7 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
             },
             [`append-inner`]: slotProps => {
               return !hasAppendInner && props.appendInnerIcon ? getPipIcon('append-inner-icon')
-                : slots.appendInner?.(slotProps)
+                : slots['append-inner']?.(slotProps)
             },
             append: slotProps => {
               return !hasAppend && props.appendIcon ? getPipIcon('append-icon')
