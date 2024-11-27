@@ -165,7 +165,7 @@ export const VCombobox = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
-    const form = useForm()
+    const form = useForm(props)
 
     const hasChips = computed(() => !!(props.chips || slots.chip))
     const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
@@ -243,7 +243,7 @@ export const VCombobox = genericComponent<new <
 
     const menuDisabled = computed(() => (
       (props.hideNoData && !displayItems.value.length) ||
-      props.readonly || form?.isReadonly.value
+      form.isReadonly.value || form.isDisabled.value
     ))
 
     const listRef = ref<VList>()
@@ -276,7 +276,7 @@ export const VCombobox = genericComponent<new <
     }
     // eslint-disable-next-line complexity
     function onKeydown (e: KeyboardEvent) {
-      if (isComposingIgnoreKey(e) || props.readonly || form?.isReadonly.value) return
+      if (isComposingIgnoreKey(e) || form.isReadonly.value) return
 
       const selectionStart = vTextFieldRef.value.selectionStart
       const length = model.value.length
@@ -494,7 +494,7 @@ export const VCombobox = genericComponent<new <
             props.class,
           ]}
           style={ props.style }
-          readonly={ props.readonly }
+          readonly={ form.isReadonly.value }
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
