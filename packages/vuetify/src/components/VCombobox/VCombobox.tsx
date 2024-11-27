@@ -469,7 +469,7 @@ export const VCombobox = genericComponent<new <
         slots['append-item'] ||
         slots['no-data']
       )
-      const isDirty = model.value.length > 0
+      const isDirty = model.value.length > 0 && !(model.value[0].value === '' && model.value.length === 1)
       const textFieldProps = VTextField.filterProps(props)
 
       return (
