@@ -92,9 +92,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const stepDecimals = computed(() => getDecimals(props.step))
     const modelDecimals = computed(() => typeof model.value === 'number' ? getDecimals(model.value) : 0)
 
-    const form = useForm()
+    const form = useForm(props)
     const controlsDisabled = computed(() => (
-      props.disabled || props.readonly || form?.isReadonly.value
+      form.isDisabled.value || form.isReadonly.value
     ))
 
     const canIncrease = computed(() => {
@@ -120,7 +120,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const decrementSlotProps = computed(() => ({ click: onClickDown }))
 
     onMounted(() => {
-      if (!props.readonly && !props.disabled) {
+      if (!controlsDisabled.value) {
         clampModel()
       }
     })

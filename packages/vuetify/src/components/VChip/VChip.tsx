@@ -68,7 +68,7 @@ export const makeVChipProps = propsFactory({
   draggable: Boolean,
   filter: Boolean,
   filterIcon: {
-    type: String,
+    type: IconValue,
     default: '$complete',
   },
   label: Boolean,
