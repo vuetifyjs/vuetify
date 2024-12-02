@@ -74,7 +74,7 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
   emits: {
     'click:event': null,
     'contextmenu:date': null,
-    'contextmenu:event': null
+    'contextmenu:event': null,
   },
 
   setup (props, { attrs, emit, slots }) {

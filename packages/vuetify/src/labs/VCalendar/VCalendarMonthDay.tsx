@@ -37,7 +37,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
   emits: {
     'click:event': null,
     'contextmenu:date': null,
-    'contextmenu:event': null
+    'contextmenu:event': null,
   },
 
   setup (props, { emit, attrs, slots }) {
@@ -91,7 +91,13 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
                     { props.events?.filter(event => event.allDay).map(event => slots.dayEvent
                       ? slots.dayEvent({ day: props.day, allDay: true, event })
                       : (
-                        <VCalendarEvent day={ props.day } event={ event } onClick:event={ clickEvent } onContextmenu:event={ contextmenuEvent } allDay />
+                        <VCalendarEvent
+                          day={ props.day }
+                          event={ event } 
+                          onClick:event={ clickEvent }
+                          onContextmenu:event={ contextmenuEvent }
+                          allDay
+                        />
                       ))}
                   </div>
 
@@ -99,7 +105,12 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
                     { props.events?.filter(event => !event.allDay).map(event => slots.dayEvent
                       ? slots.dayEvent({ day: props.day, event, allDay: false })
                       : (
-                        <VCalendarEvent day={ props.day } event={ event } onClick:event={ clickEvent } onContextmenu:event={ contextmenuEvent } />
+                        <VCalendarEvent
+                          day={ props.day }
+                          event={ event }
+                          onClick:event={ clickEvent }
+                          onContextmenu:event={ contextmenuEvent }
+                        />
                       ))}
                   </div>
                 </div>

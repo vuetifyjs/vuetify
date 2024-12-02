@@ -87,7 +87,7 @@ export const VCalendarIntervalEvent = genericComponent<VCalendarIntervalEventSlo
                   : props.event?.first ? 't'
                   : props.event?.last ? 'b'
                   : false
-                }        
+                }
                 onClick={ withModifiers((event: any) => emit('click:event', event, props.event), ['stop']) }
                 onContextmenu={ withModifiers((event: any) => emit('contextmenu:event', event, props.event), ['stop']) }
                 { ...getPrefixedEventHandlers(attrs, ':intervalEvent', () => props) }
