@@ -93,7 +93,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
                       : (
                         <VCalendarEvent
                           day={ props.day }
-                          event={ event } 
+                          event={ event }
                           onClick:event={ clickEvent }
                           onContextmenu:event={ contextmenuEvent }
                           allDay
