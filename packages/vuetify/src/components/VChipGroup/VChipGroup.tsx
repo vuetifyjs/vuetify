@@ -23,6 +23,7 @@ import type { GenericProps } from '@/util'
 export const VChipGroupSymbol = Symbol.for('vuetify:v-chip-group')
 
 export const makeVChipGroupProps = propsFactory({
+  baseColor: String,
   column: Boolean,
   filter: Boolean,
   valueComparator: {
@@ -69,6 +70,7 @@ export const VChipGroup = genericComponent<new <T>(
 
     provideDefaults({
       VChip: {
+        baseColor: toRef(props, 'baseColor'),
         color: toRef(props, 'color'),
         disabled: toRef(props, 'disabled'),
         filter: toRef(props, 'filter'),
