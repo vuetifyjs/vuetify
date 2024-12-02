@@ -142,7 +142,7 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
               class={['v-calendar-day__row-content', interval.value.events.some(e => !e.last)
                 ? 'v-calendar-day__row-content-through'
                 : '']}
-              onContextmenu={ (event) => contextmenuDate(event, interval.value?.start) }
+              onContextmenu={ (event: any) => contextmenuDate(event, interval.value?.start) }
             >
               {
                 slots.intervalBody?.({ interval: interval.value }) ?? (
@@ -184,7 +184,7 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
           <div
             class="v-calendar-day__row-without-label"
             style={ `height: ${convertToUnit(props.intervalHeight)}` }
-            onContextmenu={ (event) => contextmenuDate(event, interval.value?.start) }
+            onContextmenu={ (event: any) => contextmenuDate(event, interval.value?.start) }
           >
           <div class={['v-calendar-day__row-content', interval.value.events.some(e => !e.last)
             ? 'v-calendar-day__row-content-through' : '']}
@@ -205,6 +205,7 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
                         intervalDivisions={ props.intervalDivisions }
                         intervalDuration={ props.intervalDuration }
                         intervalHeight={ props.intervalHeight }
+                        onClick:event={ clickEvent }
                         onContextmenu:event={ contextmenuEvent }
                       >
                         {{

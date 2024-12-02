@@ -59,7 +59,6 @@ export const VCalendarDay = genericComponent<VCalendarDaySlots>()({
       emit('contextmenu:event', mouseEvent, date, event)
     }
 
-
     useRender(() => {
       const calendarIntervalProps = VCalendarInterval.filterProps(props)
 

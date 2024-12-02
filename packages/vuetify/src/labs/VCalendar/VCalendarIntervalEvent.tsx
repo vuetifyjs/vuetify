@@ -8,8 +8,8 @@ import { VSheet } from '@/components/VSheet'
 import { useDate } from '@/composables/date'
 
 // Utilities
-import { convertToUnit, genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
 import { withModifiers } from 'vue'
+import { convertToUnit, genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
 
 export type VCalendarIntervalEventSlots = {
   intervalEvent: { height: string, margin: string, eventClass: string, event: any, interval: any }
@@ -40,7 +40,7 @@ export const VCalendarIntervalEvent = genericComponent<VCalendarIntervalEventSlo
 
   emits: {
     'click:event': null,
-    'contextmenu:event': null
+    'contextmenu:event': null,
   },
 
   setup (props, { attrs, emit, slots }) {
@@ -63,13 +63,6 @@ export const VCalendarIntervalEvent = genericComponent<VCalendarIntervalEventSlo
           }, { height: '', margin: '' })
         return { height, margin }
       }
-    }
-    const clickEvent = (mouseEvent: any, event: any) => {
-      emit('click:event', mouseEvent, event)
-    }
-
-    const contextmenuEvent = (mouseEvent: any, date: any, event: any) => {
-      emit('contextmenu:event', mouseEvent, date, event)
     }
 
     useRender(() => {
@@ -94,9 +87,9 @@ export const VCalendarIntervalEvent = genericComponent<VCalendarIntervalEventSlo
                   : props.event?.first ? 't'
                   : props.event?.last ? 'b'
                   : false
-                }
-                onClick={ withModifiers((event: any) => clickEvent(event, props.event), ['stop']) }
-                onContextmenu={ withModifiers((event: any) => contextmenuEvent(event, props.interval?.start, props.event), ['stop'])  }
+                }        
+                onClick={ withModifiers((event: any) => emit('click:event', event, props.event), ['stop']) }
+                onContextmenu={ withModifiers((event: any) => emit('contextmenu:event', event, props.day, props.event), ['stop']) }
                 { ...getPrefixedEventHandlers(attrs, ':intervalEvent', () => props) }
               >
                 { props.event?.first ? props.event?.title : '' }
