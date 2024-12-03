@@ -1,4 +1,11 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["dev", "**/*.spec.*", "test"]
+  "exclude": ["dev", "**/*.spec.*", "test"],
+  "compilerOptions": {
+    "outDir": "./lib",
+    "plugins": [
+      { "transform": "typescript-transform-paths", "afterDeclarations": true },
+      { "transform":  "./build/remove-dts-styles.cts", "afterDeclarations": true },
+    ],
+  },
 }

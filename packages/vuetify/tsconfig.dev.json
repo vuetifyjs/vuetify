@@ -5,13 +5,14 @@
     "dev",
     "test",
     "cypress",
-    "cypress.config.ts",
-    "vite.config.mts",
-    "vitest.config.mts",
-    "vitest.workspace.mts"
+    "./cypress.config.ts",
+    "./vite.config.ts",
+    "./vitest.config.ts",
+    "./vitest.workspace.ts"
   ],
   "compilerOptions": {
     "allowJs": true,
+    "allowImportingTsExtensions": true,
     "types": [
       "@vitest/browser/providers/webdriverio"
     ]
