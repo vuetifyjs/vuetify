@@ -75,13 +75,14 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const model = computed({
       get: () => _model.value,
       set (val) {
-        if (val === null) {
-          _model.value = null
+        if (val === null || (typeof val === 'string' && !val)) {
+          _model.value = val
           return
         }
 
-        if (!isNaN(+val) && +val <= props.max && +val >= props.min) {
-          _model.value = +val
+        const value = Number(val)
+        if (!isNaN(value) && value <= props.max && value >= props.min) {
+          _model.value = value
         }
       },
     })
@@ -294,9 +295,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
               { incrementControlNode() }
             </div>
-          ) : (!props.reverse
-            ? <>{ dividerNode() }{ controlNode() }</>
-            : undefined)
+          ) : (props.reverse
+            ? undefined
+            : <>{ dividerNode() }{ controlNode() }</>)
 
       const hasAppendInner = slots['append-inner'] || appendInnerControl
 
