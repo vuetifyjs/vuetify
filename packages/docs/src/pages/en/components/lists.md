@@ -46,6 +46,33 @@ Lists come in three main variations. **single-line** (default), **two-line** and
 
 <ApiInline hide-links />
 
+## Caveats
+
+::: warning
+  To ensure proper indentation when using **v-list-group** with a **prepend-icon**, the **prepend-icon** must be applied directly to the **v-list-group** instead of its activator **v-list-item**.
+
+For instance, the following example works:
+```html
+<template>
+  <v-list-group prepend-icon="mdi-home" >
+    <template v-slot:activator="{ props }">
+      <v-list-item v-bind="props"></v-list-item>
+    </template>
+  </v-list-group>
+</template>
+```
+However, this one does not:
+```html
+<template>
+  <v-list-group>
+    <template v-slot:activator="{ props }">
+      <v-list-item v-bind="props" prepend-icon="mdi-home"></v-list-item>
+    </template>
+  </v-list-group>
+</template>
+```
+:::
+
 ## Examples
 
 ### Props
