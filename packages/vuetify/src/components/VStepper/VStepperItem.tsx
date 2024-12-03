@@ -7,6 +7,7 @@ import { VIcon } from '@/components/VIcon/VIcon'
 
 // Composables
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
+import { IconValue } from '@/composables/icons'
 import { genOverlays } from '@/composables/variant'
 
 // Directives
@@ -47,20 +48,20 @@ export const makeStepperItemProps = propsFactory({
   subtitle: String,
   complete: Boolean,
   completeIcon: {
-    type: String,
+    type: IconValue,
     default: '$complete',
   },
   editable: Boolean,
   editIcon: {
-    type: String,
+    type: IconValue,
     default: '$edit',
   },
   error: Boolean,
   errorIcon: {
-    type: String,
+    type: IconValue,
     default: '$error',
   },
-  icon: String,
+  icon: IconValue,
   ripple: {
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
