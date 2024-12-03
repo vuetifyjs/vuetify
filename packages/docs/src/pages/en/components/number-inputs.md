@@ -108,3 +108,9 @@ The `min` and `max` props specify the minimum and maximum values accepted by v-n
 The `step` prop behaves the same as the `step` attribute in the `<input type="number">`, it defines the incremental steps for adjusting the numeric value.
 
 <ExamplesExample file="v-number-input/prop-step" />
+
+#### Clear zero's
+
+The `clear-zero` prop automatically clears input value upon focus, so users don't need to use remove it themselves.
+
+<ExamplesExample file="v-number-input/prop-clear-zero" />
