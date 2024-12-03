@@ -56,6 +56,7 @@ export const makeVChipProps = propsFactory({
   activeClass: String,
   appendAvatar: String,
   appendIcon: IconValue,
+  baseColor: String,
   closable: Boolean,
   closeIcon: {
     type: IconValue,
@@ -122,7 +123,6 @@ export const VChip = genericComponent<VChipSlots>()({
   setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
     const { borderClasses } = useBorder(props)
-    const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
@@ -150,6 +150,15 @@ export const VChip = genericComponent<VChipSlots>()({
       },
     }))
 
+    const variantProps = computed(() => {
+      const showColor = !group || group.isSelected.value
+      return ({
+        color: showColor ? props.color ?? props.baseColor : props.baseColor,
+        variant: props.variant,
+      })
+    })
+    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
+
     function onClick (e: MouseEvent) {
       emit('click', e)
 
@@ -174,7 +183,6 @@ export const VChip = genericComponent<VChipSlots>()({
       const hasFilter = !!(slots.filter || props.filter) && group
       const hasPrependMedia = !!(props.prependIcon || props.prependAvatar)
       const hasPrepend = !!(hasPrependMedia || slots.prepend)
-      const hasColor = !group || group.isSelected.value
 
       return isActive.value && (
         <Tag
@@ -189,7 +197,7 @@ export const VChip = genericComponent<VChipSlots>()({
             },
             themeClasses.value,
             borderClasses.value,
-            hasColor ? colorClasses.value : undefined,
+            colorClasses.value,
             densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,
@@ -199,7 +207,7 @@ export const VChip = genericComponent<VChipSlots>()({
             props.class,
           ]}
           style={[
-            hasColor ? colorStyles.value : undefined,
+            colorStyles.value,
             props.style,
           ]}
           disabled={ props.disabled || undefined }
