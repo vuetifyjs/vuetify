@@ -64,8 +64,6 @@ export const VMessages = genericComponent<VMessagesSlots>()({
           textColorStyles.value,
           props.style,
         ]}
-        role="alert"
-        aria-live="polite"
       >
         { props.active && (
           messages.value.map((message, i) => (
