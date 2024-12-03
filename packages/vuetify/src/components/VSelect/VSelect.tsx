@@ -151,12 +151,12 @@ export const VSelect = genericComponent<new <
         _menu.value = v
       },
     })
-    const { items, transformIn, transformOut } = useItems(props)
+    const { items, transformIn, transformOut, emptyValues } = useItems(props)
     const model = useProxiedModel(
       props,
       'modelValue',
       [],
-      v => transformIn(v === null ? [null] : wrapInArray(v)),
+      v => transformIn(v === null ? [null] : wrapInArray(v, emptyValues.value)),
       v => {
         const transformed = transformOut(v)
         return props.multiple ? transformed : (transformed[0] ?? null)
