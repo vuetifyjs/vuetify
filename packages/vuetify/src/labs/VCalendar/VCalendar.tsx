@@ -94,8 +94,8 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
       })
     }
 
-    function clickEvent (event: any) {
-      emit('click:event', event)
+    function clickEvent (mouseEvent: any, event: any) {
+      emit('click:event', mouseEvent, event)
     }
 
     function contextmenuDate (mouseEvent: any, date: any) {
@@ -219,6 +219,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                     day={ day }
                     dayIndex={ i }
                     events={ props.events?.filter(e => adapter.isSameDay(e.start, day.date) || adapter.isSameDay(e.end, day.date)) }
+                    onClick:event={ clickEvent }
                     onContextmenu:date={ contextmenuDate }
                     onContextmenu:event={ contextmenuEvent }
                   >
@@ -247,6 +248,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                       adapter.isSameDay(e.end, genDays([model.value[0] as Date], adapter.date() as Date)[0].date)
                     )
                   }
+                  onClick:event={ clickEvent }
                   onContextmenu:date={ contextmenuDate }
                   onContextmenu:event={ contextmenuEvent }
                 ></VCalendarDay>
