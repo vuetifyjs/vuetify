@@ -4,7 +4,7 @@ import { deepEqual, getCurrentInstance } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
-import type { SortItem } from './sort'
+import type { SortItem } from '../types'
 
 export function useOptions ({
   page,
