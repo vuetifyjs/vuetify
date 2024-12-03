@@ -2,112 +2,162 @@
   <v-container fluid>
     <v-combobox
       v-model="model"
-      v-model:search-input="search"
+      v-model:search="search"
       :custom-filter="filter"
-      :hide-no-data="!search"
       :items="items"
       label="Search for an option"
       variant="solo"
       hide-selected
       multiple
-      small-chips
+      return-object
     >
-      <template v-slot:no-data>
-        <v-list-item>
-          <span class="subheading">Create</span>
+      <template v-slot:selection="{ item, index }">
+        <v-chip
+          v-if="item === Object(item)"
+          :color="`${item.raw.color}-lighten-3`"
+          :text="item.title"
+          size="small"
+          variant="flat"
+          closable
+          label
+          @click:close="removeSelection(index)"
+        ></v-chip>
+      </template>
+      <template v-slot:item="{ props, item }">
+        <v-list-item v-if="item.raw.header && search">
+          <span class="mr-3">Create</span>
           <v-chip
-            :color="`${colors[nonce - 1]} lighten-3`"
+            :color="`${colors[nonce - 1]}-lighten-3`"
+            size="small"
+            variant="flat"
             label
-            small
           >
             {{ search }}
           </v-chip>
         </v-list-item>
-      </template>
-      <template v-slot:selection="{ attrs, item, parent, selected }">
-        <v-chip
-          v-if="item === Object(item)"
-          v-bind="attrs"
-          :color="`${item.color} lighten-3`"
-          :model-value="selected"
-          label
-          small
-        >
-          <span class="pe-2">
-            {{ item.text }}
-          </span>
-          <v-icon
-            size="small"
-            @click="parent.selectItem(item)"
-          >
-            $delete
-          </v-icon>
-        </v-chip>
-      </template>
-      <template v-slot:item="{ index, item }">
-        <v-text-field
-          v-if="editing === item"
-          v-model="editing.text"
-          bg-color="transparent"
-          variant="solo"
-          autofocus
-          flat
-          hide-details
-          @keyup.enter="edit(index, item)"
-        ></v-text-field>
-        <v-chip
-          v-else
-          :color="`${item.color} lighten-3`"
-          dark
-          label
-          small
-        >
-          {{ item.text }}
-        </v-chip>
-        <v-spacer></v-spacer>
-        <v-list-item-action @click.stop>
-          <v-btn
-            icon
-            @click.stop.prevent="edit(index, item)"
-          >
-            <v-icon>{{ editing !== item ? 'mdi-pencil' : 'mdi-check' }}</v-icon>
-          </v-btn>
-        </v-list-item-action>
+        <v-list-subheader v-else-if="item.raw.header" :title="item.title"></v-list-subheader>
+        <v-list-item v-else @click="props.onClick">
+          <v-text-field
+            v-if="editingItem === item.raw"
+            v-model="editingItem.title"
+            bg-color="transparent"
+            class="mr-3"
+            density="compact"
+            variant="outlined"
+            autofocus
+            flat
+            hide-details
+            @click.stop
+            @keydown.stop
+            @keyup.enter="edit(item.raw)"
+          ></v-text-field>
+          <v-chip
+            v-else
+            :color="`${item.raw.color}-lighten-3`"
+            :text="item.raw.title"
+            variant="flat"
+            label
+          ></v-chip>
+          <template v-slot:append>
+            <v-btn
+              :color="editingItem !== item.raw ? 'primary' : 'success'"
+              :icon="editingItem !== item.raw ? 'mdi-pencil' : 'mdi-check'"
+              size="small"
+              @click.stop.prevent="edit(item.raw)"
+            ></v-btn>
+          </template>
+        </v-list-item>
       </template>
     </v-combobox>
   </v-container>
 </template>
 
+<script setup>
+  import { onMounted, ref, watch } from 'vue'
+
+  const colors = ['green', 'purple', 'indigo', 'cyan', 'teal', 'orange']
+  const editingItem = ref(null)
+  const items = ref([
+    { header: true, title: 'Select an option or create one' },
+    { title: 'Foo', color: 'blue' },
+    { title: 'Bar', color: 'red' },
+  ])
+  const nonce = ref(1)
+  const model = ref([])
+  const search = ref(null)
+
+  onMounted(() => {
+    model.value.push(items.value[1])
+  })
+
+  watch(model, (val, prev) => {
+    if (val.length === prev.length) return
+
+    model.value = val.map(v => {
+      if (typeof v === 'string') {
+        v = {
+          title: v,
+          color: colors[nonce.value - 1],
+        }
+
+        items.value.push(v)
+
+        nonce.value++
+      }
+
+      return v
+    })
+  })
+
+  function edit (item) {
+    if (!editingItem.value) {
+      editingItem.value = item
+    } else {
+      editingItem.value = null
+    }
+  }
+
+  function filter (value, queryText, item) {
+    const toLowerCaseString = val =>
+      String(val != null ? val : '').toLowerCase()
+
+    const query = toLowerCaseString(queryText)
+
+    const availableOptions = items.value.filter(x => !model.value.includes(x))
+    const hasAnyMatch = availableOptions.some(
+      x => !x.header && toLowerCaseString(x.title).includes(query)
+    )
+    if (item.raw.header) return !hasAnyMatch
+
+    const text = toLowerCaseString(item.raw.title)
+
+    return text.includes(query)
+  }
+
+  function removeSelection (index) {
+    model.value.splice(index, 1)
+  }
+</script>
+
 <script>
   export default {
     data: () => ({
-      activator: null,
-      attach: null,
       colors: ['green', 'purple', 'indigo', 'cyan', 'teal', 'orange'],
-      editing: null,
-      editingIndex: -1,
+      editingItem: null,
       items: [
-        { header: 'Select an option or create one' },
+        { header: true, title: 'Select an option or create one' },
         {
-          text: 'Foo',
+          title: 'Foo',
           color: 'blue',
         },
         {
-          text: 'Bar',
+          title: 'Bar',
           color: 'red',
         },
       ],
       nonce: 1,
-      menu: false,
-      model: [
-        {
-          text: 'Foo',
-          color: 'blue',
-        },
-      ],
-      x: 0,
+      model: [],
       search: null,
-      y: 0,
     }),
 
     watch: {
@@ -117,7 +167,7 @@
         this.model = val.map(v => {
           if (typeof v === 'string') {
             v = {
-              text: v,
+              title: v,
               color: this.colors[this.nonce - 1],
             }
 
@@ -131,27 +181,36 @@
       },
     },
 
+    mounted () {
+      this.model = [this.items[1]]
+    },
+
     methods: {
-      edit (index, item) {
-        if (!this.editing) {
-          this.editing = item
-          this.editingIndex = index
+      edit (item) {
+        if (!this.editingItem) {
+          this.editingItem = item
         } else {
-          this.editing = null
-          this.editingIndex = -1
+          this.editingItem = null
         }
       },
-      filter (item, queryText, itemText) {
-        if (item.header) return false
+      filter (value, queryText, item) {
+        const toLowerCaseString = val =>
+          String(val != null ? val : '').toLowerCase()
 
-        const hasValue = val => val != null ? val : ''
+        const query = toLowerCaseString(queryText)
 
-        const text = hasValue(itemText)
-        const query = hasValue(queryText)
+        const availableOptions = this.items.filter(x => !this.model.includes(x))
+        const hasAnyMatch = availableOptions.some(
+          x => !x.header && toLowerCaseString(x.title).includes(query)
+        )
+        if (item.raw.header) return !hasAnyMatch
 
-        return text.toString()
-          .toLowerCase()
-          .indexOf(query.toString().toLowerCase()) > -1
+        const text = toLowerCaseString(item.raw.title)
+
+        return text.includes(query)
+      },
+      removeSelection (index) {
+        this.model.splice(index, 1)
       },
     },
   }
