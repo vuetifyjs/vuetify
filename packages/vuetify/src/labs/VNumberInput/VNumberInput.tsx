@@ -30,6 +30,7 @@ type VNumberInputSlots = Omit<VTextFieldSlots, 'default'> & {
 }
 
 type ControlVariant = 'default' | 'stacked' | 'split'
+type ControlClickEvent = { type: 'increase' | 'decrease' }
 
 const makeVNumberInputProps = propsFactory({
   controlVariant: {
@@ -67,9 +68,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
   emits: {
     'update:modelValue': (val: number) => true,
+    'click:control': (evt: ControlClickEvent) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const _model = useProxiedModel(props, 'modelValue')
 
     const model = computed({
@@ -142,11 +144,13 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     function onClickUp (e: MouseEvent) {
       e.stopPropagation()
       toggleUpDown()
+      emit('click:control', { type: 'increase' })
     }
 
     function onClickDown (e: MouseEvent) {
       e.stopPropagation()
       toggleUpDown(false)
+      emit('click:control', { type: 'decrease' })
     }
 
     function onBeforeinput (e: InputEvent) {
