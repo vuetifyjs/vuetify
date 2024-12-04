@@ -350,23 +350,6 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         },
       },
 
-      {
-        name: 'inject-umami',
-        transformIndexHtml (html, ctx) {
-          if (mode !== 'production') return
-
-          return [{
-            tag: 'script',
-            attrs: {
-              defer: true,
-              src: 'https://umami.vuetifyjs.com/script.js',
-              'data-website-id': 'c635330a-f1a7-49cf-8894-3ff2cfa0331e',
-            },
-            injectTo: 'head',
-          }]
-        },
-      },
-
       Inspect(),
 
       process.env.HTTPS === 'true' ? basicSsl() : undefined,

@@ -167,7 +167,7 @@ export const VSelect = genericComponent<new <
         : typeof props.counterValue === 'number' ? props.counterValue
         : model.value.length
     })
-    const form = useForm()
+    const form = useForm(props)
     const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
     const label = computed(() => menu.value ? props.closeText : props.openText)
@@ -184,7 +184,7 @@ export const VSelect = genericComponent<new <
 
     const menuDisabled = computed(() => (
       (props.hideNoData && !displayItems.value.length) ||
-      props.readonly || form?.isReadonly.value
+      form.isReadonly.value || form.isDisabled.value
     ))
 
     const computedMenuProps = computed(() => {
@@ -215,7 +215,7 @@ export const VSelect = genericComponent<new <
       }
     }
     function onKeydown (e: KeyboardEvent) {
-      if (!e.key || props.readonly || form?.isReadonly.value) return
+      if (!e.key || form.isReadonly.value) return
 
       if (['Enter', ' ', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) {
         e.preventDefault()

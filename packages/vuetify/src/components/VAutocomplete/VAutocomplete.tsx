@@ -166,7 +166,7 @@ export const VAutocomplete = genericComponent<new <
         : typeof props.counterValue === 'number' ? props.counterValue
         : model.value.length
     })
-    const form = useForm()
+    const form = useForm(props)
     const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
 
     const displayItems = computed(() => {
@@ -192,7 +192,7 @@ export const VAutocomplete = genericComponent<new <
 
     const menuDisabled = computed(() => (
       (props.hideNoData && !displayItems.value.length) ||
-      props.readonly || form?.isReadonly.value
+      form.isReadonly.value || form.isDisabled.value
     ))
 
     const listRef = ref<VList>()
@@ -224,7 +224,7 @@ export const VAutocomplete = genericComponent<new <
       }
     }
     function onKeydown (e: KeyboardEvent) {
-      if (props.readonly || form?.isReadonly.value) return
+      if (form.isReadonly.value) return
 
       const selectionStart = vTextFieldRef.value.selectionStart
       const length = model.value.length
@@ -450,7 +450,7 @@ export const VAutocomplete = genericComponent<new <
             props.class,
           ]}
           style={ props.style }
-          readonly={ props.readonly }
+          readonly={ form.isReadonly.value }
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }

@@ -69,7 +69,7 @@ export const makeVChipProps = propsFactory({
   draggable: Boolean,
   filter: Boolean,
   filterIcon: {
-    type: String,
+    type: IconValue,
     default: '$complete',
   },
   label: Boolean,
@@ -194,6 +194,7 @@ export const VChip = genericComponent<VChipSlots>()({
               'v-chip--link': isClickable.value,
               'v-chip--filter': hasFilter,
               'v-chip--pill': props.pill,
+              [`${props.activeClass}`]: props.activeClass && link.isActive?.value,
             },
             themeClasses.value,
             borderClasses.value,
