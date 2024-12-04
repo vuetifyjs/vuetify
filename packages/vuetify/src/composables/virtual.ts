@@ -136,6 +136,8 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   let lastScrollTop = 0
   let scrollVelocity = 0
   let lastScrollTime = 0
+  let lastItemsChange = 0
+  let forcedScrollendTimeout = 0 as any
 
   watch(viewportHeight, (val, oldVal) => {
     if (oldVal) {
@@ -168,6 +170,13 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
 
     lastScrollTop = scrollTop
     lastScrollTime = scrollTime
+
+    // while scroll event is triggered upon items change
+    // the scrollend event does not trigger automatically
+    clearTimeout(forcedScrollendTimeout)
+    if (scrollTime - lastItemsChange < 300) {
+      forcedScrollendTimeout = setTimeout(handleScrollend, 100)
+    }
 
     calculateVisibleItems()
   }
@@ -237,6 +246,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   })
 
   watch(items, () => {
+    lastItemsChange = performance.now()
     sizes = Array.from({ length: items.value.length })
     offsets = Array.from({ length: items.value.length })
     updateOffsets.immediate()
