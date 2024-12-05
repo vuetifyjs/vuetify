@@ -53,6 +53,7 @@ export interface NestedProps {
   selected: any
   opened: any
   mandatory: boolean
+  returnObject: boolean
   'onUpdate:activated': EventProp<[any]> | undefined
   'onUpdate:selected': EventProp<[any]> | undefined
   'onUpdate:opened': EventProp<[any]> | undefined
