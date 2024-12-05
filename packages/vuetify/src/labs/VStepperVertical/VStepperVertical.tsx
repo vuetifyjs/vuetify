@@ -63,10 +63,18 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
     const items = computed(() => props.items.map((item, index) => {
       const title = getPropertyFromItem(item, props.itemTitle, item)
       const value = getPropertyFromItem(item, props.itemValue, index + 1)
+      const itemProps = props.itemProps ? item : getPropertyFromItem(item, props.itemProps)
 
-      return {
+      const _props = {
         title,
         value,
+        ...itemProps,
+      }
+
+      return {
+        title: _props.title,
+        value: _props.value,
+        props: _props,
         raw: item,
       }
     }))
@@ -115,7 +123,7 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
               return (
                 <>
                   { items.value.map(({ raw, ...item }) => (
-                    <VStepperVerticalItem { ...item }>
+                    <VStepperVerticalItem { ...item.props }>
                       {{
                         ...slots,
                         default: slots[`item.${item.value}`],

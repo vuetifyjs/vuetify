@@ -56,10 +56,10 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
     const step = computed(() => !isNaN(parseInt(props.value)) ? Number(props.value) : props.value)
     const groupItem = computed(() => vExpansionPanelRef.value?.groupItem)
     const isSelected = computed(() => groupItem.value?.isSelected.value ?? false)
-    const isValid = computed(() => isSelected.value ? props.rules.every(handler => handler() === true) : null)
+    const isValid = computed(() => props.rules.every(handler => handler() === true))
     const canEdit = computed(() => !props.disabled && props.editable)
-    const hasError = computed(() => props.error || (isSelected.value && !isValid.value))
-    const hasCompleted = computed(() => props.complete || (props.rules.length > 0 && isValid.value === true))
+    const hasError = computed(() => props.error || !isValid.value)
+    const hasCompleted = computed(() => props.complete || (props.rules.length > 0 && isValid.value))
 
     const disabled = computed(() => {
       if (props.disabled) return props.disabled
@@ -107,8 +107,10 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
 
     useRender(() => {
       const hasColor = (
+        !groupItem.value ||
+        groupItem.value?.isSelected.value ||
         hasCompleted.value ||
-        groupItem.value?.isSelected.value
+        canEdit.value
       ) && (
         !hasError.value &&
         !props.disabled
