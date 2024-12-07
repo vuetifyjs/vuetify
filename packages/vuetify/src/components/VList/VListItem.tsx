@@ -135,10 +135,11 @@ export const VListItem = genericComponent<VListItemSlots>()({
       (props.active || link.isActive?.value || (root.activatable.value ? isActivated.value : isSelected.value))
     )
     const isLink = computed(() => props.link !== false && link.isLink.value)
+    const isSelectable = computed(() => (!!list && (root.selectable.value || root.activatable.value || props.value != null)))
     const isClickable = computed(() =>
       !props.disabled &&
       props.link !== false &&
-      (props.link || link.isClickable.value || (!!list && (root.selectable.value || root.activatable.value || props.value != null)))
+      (props.link || link.isClickable.value || isSelectable.value)
     )
 
     const roundedProps = computed(() => props.rounded || props.nav)
@@ -244,7 +245,13 @@ export const VListItem = genericComponent<VListItemSlots>()({
             props.style,
           ]}
           tabindex={ isClickable.value ? (list ? -2 : 0) : undefined }
-          aria-selected={ root.activatable.value ? isActivated.value : isSelected.value }
+          aria-selected={
+            isSelectable.value ? (
+              root.activatable.value ? isActivated.value
+              : root.selectable.value ? isSelected.value
+              : isActive.value
+            ) : undefined
+          }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && props.ripple }

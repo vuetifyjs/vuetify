@@ -303,9 +303,11 @@ export const VField = genericComponent<new <T>(
               </VFieldLabel>
             )}
 
-            <VFieldLabel ref={ labelRef } for={ id.value }>
-              { label() }
-            </VFieldLabel>
+            { hasLabel.value && (
+              <VFieldLabel key="label" ref={ labelRef } for={ id.value }>
+                { label() }
+              </VFieldLabel>
+            )}
 
             { slots.default?.({
               ...slotProps.value,

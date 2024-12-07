@@ -192,6 +192,11 @@ export function createForm (props: FormProps) {
   }
 }
 
-export function useForm () {
-  return inject(FormKey, null)
+export function useForm (props?: { readonly: boolean | null, disabled: boolean | null }) {
+  const form = inject(FormKey, null)
+  return {
+    ...form,
+    isReadonly: computed(() => !!(props?.readonly ?? form?.isReadonly.value)),
+    isDisabled: computed(() => !!(props?.disabled ?? form?.isDisabled.value)),
+  }
 }

@@ -156,6 +156,27 @@ describe.each([
       await userEvent.click(screen.getByText(/Nekosaur/))
       expect(activated.value).toStrictEqual([203])
     })
+
+    // https://github.com/vuetifyjs/vuetify/issues/20665
+    it('should emit only once', async () => {
+      const onActivated = vi.fn()
+      render(() => (
+        <VTreeview
+          open-all
+          items={ items }
+          item-value="id"
+          activatable
+          active-strategy="independent"
+          onUpdate:activated={ onActivated }
+        />
+      ))
+
+      await userEvent.click(screen.getByText(/John/))
+      expect(onActivated).toHaveBeenCalledOnce()
+
+      await userEvent.click(screen.getByText(/Human Resources/))
+      expect(onActivated).toHaveBeenCalledTimes(2)
+    })
   })
 
   describe('select', () => {

@@ -47,13 +47,8 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       (props.link || link.isClickable.value || (props.value != null && !!vListItemRef.value?.list) || isActivatableGroupActivator.value)
     )
 
-    function activateItem (e: MouseEvent | KeyboardEvent) {
-      if (
-        !isClickable.value ||
-        (!isActivatableGroupActivator.value && vListItemRef.value?.isGroupActivator)
-      ) return
-
-      if (vListItemRef.value?.root.activatable.value) {
+    function activateGroupActivator (e: MouseEvent | KeyboardEvent) {
+      if (isClickable.value && isActivatableGroupActivator.value) {
         vListItemRef.value?.activate(!vListItemRef.value?.isActivated, e)
       }
     }
@@ -78,7 +73,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             props.class,
           ]}
           ripple={ false }
-          onClick={ props.onClick ?? activateItem }
+          onClick={ props.onClick ?? activateGroupActivator }
         >
           {{
             ...slots,

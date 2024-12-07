@@ -146,7 +146,7 @@ export const VDateInput = genericComponent()({
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                     >
                       {{
-                        actions: !props.hideActions ? () => actions : undefined,
+                        actions: !props.hideActions ? actions : undefined,
                       }}
                     </VDatePicker>
                   )

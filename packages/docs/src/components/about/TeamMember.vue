@@ -174,7 +174,7 @@
         color: '#212121',
         href: `https://x.com/${props.member.twitter}`,
         icon: '$x',
-        tooltip: 'X',
+        tooltip: 'Xitter',
       })
     }
 
