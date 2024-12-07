@@ -1,5 +1,4 @@
 export * from './VCalendar'
-export * from './VColorInput'
 export * from './VDateInput'
 export * from './VNumberInput'
 export * from './VPicker'
