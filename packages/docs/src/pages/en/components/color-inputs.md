@@ -3,7 +3,7 @@ meta:
   nav: Color inputs
   title: Color input component
   description: The color input is a specialized input that provides a clean interface for selecting colors.
-  keywords: color input, color picker, color field
+  keywords: color input, color input component, vuetify color input component, vue color input component, color picker, color field
 related:
   - /components/color-pickers/
   - /components/text-fields/

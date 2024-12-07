@@ -120,6 +120,7 @@
       { "subheader": "form-inputs-and-controls" },
       "autocompletes",
       "checkboxes",
+      "color-inputs",
       "combobox",
       "file-inputs",
       "forms",
@@ -231,10 +232,6 @@
       "introduction",
       {
         "title": "calendars",
-        "subfolder": "components"
-      },
-      {
-        "title": "color-inputs",
         "subfolder": "components"
       },
       {
