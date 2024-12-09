@@ -9,15 +9,17 @@ import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
 import { useLocale } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, onMounted, ref, watch } from 'vue'
 import { SelectingTimes } from './SelectingTimes'
-import { createRange, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { clamp, createRange, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { VPickerSlots } from '@/labs/VPicker/VPicker'
+
 type Period = 'am' | 'pm'
 type AllowFunction = (val: number) => boolean
 
@@ -43,6 +45,10 @@ export const makeVTimePickerProps = propsFactory({
   },
   max: String,
   min: String,
+  selecting: {
+    type: Number,
+    default: 1,
+  },
   modelValue: null as any as PropType<any>,
   readonly: Boolean,
   scrollable: Boolean,
@@ -61,6 +67,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     'update:period': (val: Period) => true,
     'update:second': (val: number) => true,
     'update:modelValue': (val: string) => true,
+    'update:selecting': (val: 1 | 2 | 3) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -72,7 +79,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     const lazyInputMinute = ref(null as number | null)
     const lazyInputSecond = ref(null as number | null)
     const period = ref('am' as Period)
-    const selecting = ref(SelectingTimes.Hour)
+    const selecting = useProxiedModel(props, 'selecting', SelectingTimes.Hour)
     const controlsRef = ref<VTimePickerControls | null>(null)
     const clockRef = ref<VTimePickerClock | null>(null)
 
@@ -250,7 +257,8 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     }
 
     function onChange (value: number) {
-      switch (selectingNames[selecting.value]) {
+      const modeIndex = clamp(selecting.value || 1, 1, 3) as 1 | 2 | 3
+      switch (selectingNames[modeIndex]) {
         case 'hour':
           emit('update:hour', value)
           break
