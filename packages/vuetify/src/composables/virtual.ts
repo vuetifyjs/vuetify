@@ -149,6 +149,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     }
   })
 
+  let scrollTimeout = -1
   function handleScroll () {
     if (!containerRef.value || !markerRef.value) return
 
@@ -169,6 +170,9 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     lastScrollTop = scrollTop
     lastScrollTime = scrollTime
 
+    clearTimeout(scrollTimeout)
+    scrollTimeout = setTimeout(handleScrollend, 500)
+
     calculateVisibleItems()
   }
   function handleScrollend () {
@@ -177,6 +181,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     scrollVelocity = 0
     lastScrollTime = 0
 
+    clearTimeout(scrollTimeout)
     calculateVisibleItems()
   }
 
