@@ -47,13 +47,11 @@ Use the **location** prop to specify on which side of the element the tooltip sh
 
 <ExamplesExample file="v-tooltip/prop-location" />
 
-<!-- TODO: not supported
 #### Color
 
 Tooltip color can be set with the `color` prop.
 
 <ExamplesExample file="v-tooltip/prop-color" />
--->
 
 #### Visibility
 
