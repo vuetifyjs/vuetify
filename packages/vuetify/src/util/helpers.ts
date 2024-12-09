@@ -389,11 +389,12 @@ export function arrayDiff (a: any[], b: any[]): any[] {
 
 type IfAny<T, Y, N> = 0 extends (1 & T) ? Y : N;
 export function wrapInArray<T> (
-  v: T | null | undefined
+  v: T | null | undefined,
+  emptyValues: any[] = []
 ): T extends readonly any[]
     ? IfAny<T, T[], T>
     : NonNullable<T>[] {
-  return v == null
+  return v == null || emptyValues.includes(v)
     ? []
     : Array.isArray(v)
       ? v as any : [v]
