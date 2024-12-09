@@ -167,7 +167,7 @@ export const VAutocomplete = genericComponent<new <
         : model.value.length
     })
     const form = useForm(props)
-    const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
+    const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value, { forRegisteredNodes: true })
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
@@ -493,14 +493,14 @@ export const VAutocomplete = genericComponent<new <
                       { slots['prepend-item']?.() }
 
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
-                        <VListItem title={ t(props.noDataText) } />
+                        <VListItem key="no-data" title={ t(props.noDataText) } />
                       ))}
 
                       <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value }>
                         { ({ item, index, itemRef }) => {
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
-                            key: index,
+                            key: item.value,
                             active: (highlightFirst.value && index === 0) ? true : undefined,
                             onClick: () => select(item, null),
                           })
