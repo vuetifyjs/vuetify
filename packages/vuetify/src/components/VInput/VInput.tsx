@@ -209,9 +209,13 @@ export const VInput = genericComponent<new <T>(
           )}
 
           { hasDetails && (
-            <div class="v-input__details">
+            <div
+              id={ messagesId.value }
+              class="v-input__details"
+              role="alert"
+              aria-live="polite"
+            >
               <VMessages
-                id={ messagesId.value }
                 active={ hasMessages }
                 messages={ messages.value }
                 v-slots={{ message: slots.message }}
