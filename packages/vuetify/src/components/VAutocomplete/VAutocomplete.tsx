@@ -148,14 +148,14 @@ export const VAutocomplete = genericComponent<new <
     const selectionIndex = shallowRef(-1)
     const color = computed(() => vTextFieldRef.value?.color)
     const label = computed(() => menu.value ? props.closeText : props.openText)
-    const { items, transformIn, transformOut } = useItems(props)
+    const { items, transformIn, transformOut, emptyValues } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(color)
     const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
       props,
       'modelValue',
       [],
-      v => transformIn(v === null ? [null] : wrapInArray(v)),
+      v => transformIn(v === null ? [null] : wrapInArray(v, emptyValues.value)),
       v => {
         const transformed = transformOut(v)
         return props.multiple ? transformed : (transformed[0] ?? null)
@@ -385,7 +385,7 @@ export const VAutocomplete = genericComponent<new <
       } else {
         if (!props.multiple && search.value == null) model.value = []
         menu.value = false
-        if (!model.value.some(({ title }) => title === search.value)) search.value = ''
+        search.value = ''
         selectionIndex.value = -1
       }
     })
