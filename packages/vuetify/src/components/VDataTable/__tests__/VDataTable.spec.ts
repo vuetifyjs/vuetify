@@ -217,7 +217,7 @@ describe.skip('VDataTable.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         headers: testHeaders,
-        itemKey: 'name',
+        itemId: 'name',
         items: testItems,
         itemsPerPage: 5,
         showExpand: true,
@@ -638,7 +638,7 @@ describe.skip('VDataTable.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         headers: testHeaders,
-        itemKey: 'name',
+        itemId: 'name',
         items: testItems.slice(0, 2),
         value: [testItems[0]],
         showSelect: true,
@@ -749,7 +749,7 @@ describe.skip('VDataTable.ts', () => {
       propsData: {
         headers,
         items,
-        itemKey: 'id',
+        itemId: 'id',
         groupBy: 'name',
       },
     })
@@ -767,7 +767,7 @@ describe.skip('VDataTable.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         headers: testHeaders,
-        itemKey: 'name',
+        itemId: 'name',
         items: testItems.slice(0, 2),
         groupBy: 'name',
       },
@@ -811,7 +811,7 @@ describe.skip('VDataTable.ts', () => {
       propsData: {
         headers,
         items,
-        itemKey: 'id',
+        itemId: 'id',
       },
       listeners: {
         pagination,
@@ -872,7 +872,7 @@ describe.skip('VDataTable.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         headers,
-        itemKey: 'id',
+        itemId: 'id',
         serverItemsLength: 0,
       },
     })
@@ -888,7 +888,7 @@ describe.skip('VDataTable.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         headers: testHeaders,
-        itemKey: 'name',
+        itemId: 'name',
         items: testItems.slice(0, 5),
         sortBy: 'calories',
       },
@@ -1081,7 +1081,7 @@ describe.skip('VDataTable.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         items,
-        itemKey: 'name',
+        itemId: 'name',
         itemsPerPage: 5,
         showSelect: true,
         headers: testHeaders,
