@@ -9,7 +9,6 @@
       variant="solo"
       hide-selected
       multiple
-      return-object
     >
       <template v-slot:selection="{ item, index }">
         <v-chip
@@ -43,9 +42,8 @@
             bg-color="transparent"
             class="mr-3"
             density="compact"
-            variant="outlined"
+            variant="plain"
             autofocus
-            flat
             hide-details
             @click.stop
             @keydown.stop
@@ -63,6 +61,7 @@
               :color="editingItem !== item.raw ? 'primary' : 'success'"
               :icon="editingItem !== item.raw ? 'mdi-pencil' : 'mdi-check'"
               size="small"
+              variant="text"
               @click.stop.prevent="edit(item.raw)"
             ></v-btn>
           </template>
