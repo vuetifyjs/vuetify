@@ -69,6 +69,11 @@ export default {
     counter: '{0} fayl',
     counterSize: '{0} fayl (cəmi {1})',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
