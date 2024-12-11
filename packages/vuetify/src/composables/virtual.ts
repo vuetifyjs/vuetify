@@ -170,8 +170,8 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     lastScrollTop = scrollTop
     lastScrollTime = scrollTime
 
-    clearTimeout(scrollTimeout)
-    scrollTimeout = setTimeout(handleScrollend, 500)
+    window.clearTimeout(scrollTimeout)
+    scrollTimeout = window.setTimeout(handleScrollend, 500)
 
     calculateVisibleItems()
   }
@@ -181,7 +181,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     scrollVelocity = 0
     lastScrollTime = 0
 
-    clearTimeout(scrollTimeout)
+    window.clearTimeout(scrollTimeout)
     calculateVisibleItems()
   }
 
