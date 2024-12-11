@@ -86,7 +86,7 @@ jobs:
       - run: pnpm cy:run
         if: ${{ !startswith(github.ref, 'refs/tags/v') && github.repository_owner != 'vuetifyjs' }}
         working-directory: ./packages/vuetify
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: cypress-screenshots

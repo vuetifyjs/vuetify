@@ -73,7 +73,7 @@ jobs:
           PERCY_BRANCH: master
           PERCY_TARGET_BRANCH: master
           PERCY_COMMIT: ${{ env.COMMIT }}
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: cypress-screenshots
