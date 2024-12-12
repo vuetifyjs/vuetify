@@ -74,9 +74,11 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const model = computed({
       get: () => _model.value,
-      set (val) {
-        if (val === null || (typeof val === 'string' && !val)) {
-          _model.value = val
+      // model.value could be empty string from VTextField
+      // but _model.value should be eventually kept in type Number | null
+      set (val: Number | null | string) {
+        if (val === null || val === '') {
+          _model.value = null
           return
         }
 
