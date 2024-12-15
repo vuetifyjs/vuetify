@@ -20,7 +20,7 @@ features:
 
 ::: warning
 
-This feature requires [v3.7.3](/getting-started/release-notes/?version=v3.7.3)
+This feature requires [v3.7.6](/getting-started/release-notes/?version=v3.7.6)
 
 :::
 
