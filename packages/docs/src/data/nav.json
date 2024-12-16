@@ -120,6 +120,7 @@
       { "subheader": "form-inputs-and-controls" },
       "autocompletes",
       "checkboxes",
+      "color-inputs",
       "combobox",
       "file-inputs",
       "forms",
