@@ -66,16 +66,10 @@ jobs:
           fi
       - uses: vuetifyjs/setup-action@master
       - run: echo "COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
-      - run: pnpm cy:run
+      - run: pnpm test:percy
         working-directory: ./packages/vuetify
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_BRANCH: master
           PERCY_TARGET_BRANCH: master
           PERCY_COMMIT: ${{ env.COMMIT }}
-      - uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: ./packages/vuetify/cypress/screenshots/
-          if-no-files-found: ignore
