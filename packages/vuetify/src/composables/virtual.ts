@@ -4,7 +4,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, nextTick, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
-import { clamp, debounce, IN_BROWSER, propsFactory } from '@/util'
+import { clamp, debounce, IN_BROWSER, isObject, propsFactory } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -238,6 +238,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     return items.value.slice(first.value, last.value).map((item, index) => ({
       raw: item,
       index: index + first.value,
+      key: (isObject(item) && 'value' in item) ? item.value : index + first.value,
     }))
   })
 
