@@ -9,7 +9,7 @@ import { createTheme, ThemeSymbol } from '@/composables/theme'
 
 // Utilities
 import { nextTick, reactive } from 'vue'
-import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
+import { defineComponent, IN_BROWSER, mergeDeep } from '@/util'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
@@ -100,8 +100,6 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
         }
       }
     }
-
-    getUid.reset()
 
     if (typeof __VUE_OPTIONS_API__ !== 'boolean' || __VUE_OPTIONS_API__) {
       app.mixin({

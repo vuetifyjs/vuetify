@@ -41,11 +41,11 @@ export const makeVChipGroupProps = propsFactory({
 
 type VChipGroupSlots = {
   default: {
-    isSelected: (id: number) => boolean
-    select: (id: number, value: boolean) => void
+    isSelected: (id: string) => boolean
+    select: (id: string, value: boolean) => void
     next: () => void
     prev: () => void
-    selected: readonly number[]
+    selected: readonly string[]
   }
 }
 

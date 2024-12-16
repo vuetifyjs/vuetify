@@ -17,7 +17,7 @@ import {
   leafSelectStrategy,
   leafSingleSelectStrategy,
 } from './selectStrategies'
-import { consoleError, getCurrentInstance, getUid, propsFactory } from '@/util'
+import { consoleError, getCurrentInstance, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -315,7 +315,7 @@ export const useNested = (props: NestedProps) => {
 export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
   const parent = inject(VNestedSymbol, emptyNested)
 
-  const uidSymbol = Symbol(getUid())
+  const uidSymbol = Symbol('nested item')
   const computedId = computed(() => id.value !== undefined ? id.value : uidSymbol)
 
   const item = {

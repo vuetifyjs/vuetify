@@ -24,6 +24,7 @@ import {
   provide,
   ref,
   shallowRef,
+  useId,
   watch,
 } from 'vue'
 import { VMenuSymbol } from './shared'
@@ -32,7 +33,6 @@ import {
   focusChild,
   genericComponent,
   getNextElement,
-  getUid,
   IN_BROWSER,
   isClickInsideElement,
   omit,
@@ -76,13 +76,13 @@ export const VMenu = genericComponent<OverlaySlots>()({
     const { scopeId } = useScopeId()
     const { isRtl } = useRtl()
 
-    const uid = getUid()
+    const uid = useId()
     const id = computed(() => props.id || `v-menu-${uid}`)
 
     const overlay = ref<VOverlay>()
 
     const parent = inject(VMenuSymbol, null)
-    const openChildren = shallowRef(new Set<number>())
+    const openChildren = shallowRef(new Set<string>())
     provide(VMenuSymbol, {
       register () {
         openChildren.value.add(uid)

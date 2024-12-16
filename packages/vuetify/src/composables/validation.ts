@@ -5,8 +5,8 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref, shallowRef, unref, watch } from 'vue'
-import { getCurrentInstance, getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/util'
+import { computed, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref, shallowRef, unref, useId, watch } from 'vue'
+import { getCurrentInstance, getCurrentInstanceName, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -79,7 +79,7 @@ export const makeValidationProps = propsFactory({
 export function useValidation (
   props: ValidationProps,
   name = getCurrentInstanceName(),
-  id: MaybeRef<string | number> = getUid(),
+  id: MaybeRef<string | number> = useId(),
 ) {
   const model = useProxiedModel(props, 'modelValue')
   const validationModel = computed(() => props.validationValue === undefined ? model.value : props.validationValue)

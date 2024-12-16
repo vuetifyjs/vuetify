@@ -18,13 +18,12 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, ref, toRef, watch } from 'vue'
+import { computed, ref, toRef, useId, watch } from 'vue'
 import {
   animate,
   convertToUnit,
   EventProp,
   genericComponent,
-  getUid,
   isOn,
   nullifyTransforms,
   pick,
@@ -139,7 +138,7 @@ export const VField = genericComponent<new <T>(
     const isActive = computed(() => props.dirty || props.active)
     const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
 
-    const uid = getUid()
+    const uid = useId()
     const id = computed(() => props.id || `input-${uid}`)
     const messagesId = computed(() => `${id.value}-messages`)
 
