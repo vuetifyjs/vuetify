@@ -7,8 +7,7 @@ import { clamp, getCurrentInstance, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
-import type { Group } from './group'
-import type { EventProp } from '@/util'
+import type { Group, PaginationProps } from '../types'
 
 export const makeDataTablePaginateProps = propsFactory({
   page: {
@@ -33,14 +32,6 @@ const VDataTablePaginationSymbol: InjectionKey<{
   setPage: (value: number) => void
   setItemsPerPage: (value: number) => void
 }> = Symbol.for('vuetify:data-table-pagination')
-
-type PaginationProps = {
-  page: number | string
-  'onUpdate:page': EventProp | undefined
-  itemsPerPage: number | string
-  'onUpdate:itemsPerPage': EventProp | undefined
-  itemsLength?: number | string
-}
 
 export function createPagination (props: PaginationProps) {
   const page = useProxiedModel(props, 'page', undefined, value => +(value ?? 1))
