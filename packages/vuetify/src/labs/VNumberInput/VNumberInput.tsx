@@ -71,9 +71,14 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
   setup (props, { slots }) {
     const _model = useProxiedModel(props, 'modelValue')
-
-    const min = computed(() => Math.max(Number.isFinite(parseFloat(props.min)) ? parseFloat(props.min) : Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER))
-    const max = computed(() => Math.min(Number.isFinite(parseFloat(props.max)) ? parseFloat(props.max) : Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER))
+    const min = computed(() => Math.max(
+      Number.isFinite(
+        parseFloat(props.min)) ? parseFloat(props.min) : Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER)
+    )
+    const max = computed(
+      () => Math.min(Number.isFinite(
+        parseFloat(props.max)) ? parseFloat(props.max) : Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER)
+    )
 
     const model = computed({
       get: () => _model.value,
