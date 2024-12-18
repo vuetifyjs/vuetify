@@ -126,7 +126,12 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
 
   function calculateOffset (index: number) {
     index = clamp(index, 0, items.value.length - 1)
-    return offsets[index] || 0
+    const whole = Math.floor(index)
+    const fraction = index % 1
+    const next = whole + 1
+    const wholeOffset = offsets[whole] || 0
+    const nextOffset = offsets[next] ?? wholeOffset
+    return wholeOffset + (nextOffset - wholeOffset) * fraction
   }
 
   function calculateIndex (scrollTop: number) {
@@ -225,12 +230,19 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     paddingBottom.value = calculateOffset(items.value.length) - calculateOffset(last.value)
   }
 
-  function scrollToIndex (index: number) {
+  function scrollToIndex (index: number, options?: ScrollToOptions) {
     const offset = calculateOffset(index)
     if (!containerRef.value || (index && !offset)) {
       targetScrollIndex = index
     } else {
-      containerRef.value.scrollTop = offset
+      if (options) {
+        containerRef.value.scrollTo({
+          top: offset,
+          ...options,
+        })
+      } else {
+        containerRef.value.scrollTop = offset
+      }
     }
   }
 
