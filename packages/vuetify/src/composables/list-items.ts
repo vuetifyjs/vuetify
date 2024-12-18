@@ -95,7 +95,8 @@ export function transformItems (props: Omit<ItemProps, 'items'>, items: ItemProp
 
 export function useItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
-  const hasNullItem = computed(() => items.value.some(item => item.value === null))
+  const allValues = computed(() => items.value.map(item => item.value))
+  const hasNullItem = computed(() => allValues.value.includes(null))
 
   function transformIn (value: any[]): ListItem[] {
     if (!hasNullItem.value) {
@@ -120,5 +121,7 @@ export function useItems (props: ItemProps) {
       : value.map(({ value }) => value)
   }
 
-  return { items, transformIn, transformOut }
+  const emptyValues = computed(() => ['', null, undefined].filter(v => !allValues.value.includes(v)))
+
+  return { items, transformIn, transformOut, emptyValues }
 }
