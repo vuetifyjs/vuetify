@@ -43,11 +43,11 @@ const makeVNumberInputProps = propsFactory({
     default: null,
   },
   min: {
-    type: Number,
+    type: [Number, String],
     default: Number.MIN_SAFE_INTEGER,
   },
   max: {
-    type: Number,
+    type: [Number, String],
     default: Number.MAX_SAFE_INTEGER,
   },
   step: {
@@ -72,6 +72,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   setup (props, { slots }) {
     const _model = useProxiedModel(props, 'modelValue')
 
+    const min = computed(() => Math.max(Number.isFinite(parseFloat(props.min)) ? parseFloat(props.min) : Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER))
+    const max = computed(() => Math.min(Number.isFinite(parseFloat(props.max)) ? parseFloat(props.max) : Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER))
+
     const model = computed({
       get: () => _model.value,
       // model.value could be empty string from VTextField
@@ -83,7 +86,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         }
 
         const value = Number(val)
-        if (!isNaN(value) && value <= props.max && value >= props.min) {
+        if (!isNaN(value) && value <= max.value && value >= min.value) {
           _model.value = value
         }
       },
@@ -101,11 +104,11 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const canIncrease = computed(() => {
       if (controlsDisabled.value) return false
-      return (model.value ?? 0) as number + props.step <= props.max
+      return (model.value ?? 0) as number + props.step <= max.value
     })
     const canDecrease = computed(() => {
       if (controlsDisabled.value) return false
-      return (model.value ?? 0) as number - props.step >= props.min
+      return (model.value ?? 0) as number - props.step >= min.value
     })
 
     const controlVariant = computed(() => {
@@ -130,7 +133,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     function toggleUpDown (increment = true) {
       if (controlsDisabled.value) return
       if (model.value == null) {
-        model.value = clamp(0, props.min, props.max)
+        model.value = clamp(0, min.value, max.value)
         return
       }
 
@@ -196,7 +199,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (!vTextFieldRef.value) return
       const inputText = vTextFieldRef.value.value
       if (inputText && !isNaN(+inputText)) {
-        model.value = clamp(+(inputText), props.min, props.max)
+        model.value = clamp(+(inputText), min.value, max.value)
       } else {
         model.value = null
       }
