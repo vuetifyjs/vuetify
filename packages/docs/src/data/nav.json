@@ -238,6 +238,10 @@
         "subfolder": "components"
       },
       {
+        "title": "file-upload",
+        "subfolder": "components"
+      },
+      {
         "title": "number-inputs",
         "subfolder": "components"
       },
