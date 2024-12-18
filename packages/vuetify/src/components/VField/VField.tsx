@@ -224,7 +224,7 @@ export const VField = genericComponent<new <T>(
       const isOutlined = props.variant === 'outlined'
       const hasPrepend = !!(slots['prepend-inner'] || props.prependInnerIcon)
       const hasClear = !!(props.clearable || slots.clear)
-      const hasAppend = !!(slots['append-inner'] || props.appendInnerIcon || hasClear)
+      const hasAppend = !!(slots['append-inner'] || props.appendInnerIcon)
       const label = () => (
         slots.label
           ? slots.label({
@@ -241,7 +241,7 @@ export const VField = genericComponent<new <T>(
             'v-field',
             {
               'v-field--active': isActive.value,
-              'v-field--appended': hasAppend,
+              'v-field--appended': hasAppend || hasClear,
               'v-field--center-affix': props.centerAffix ?? !isPlainOrUnderlined.value,
               'v-field--disabled': props.disabled,
               'v-field--dirty': props.dirty,
@@ -321,16 +321,15 @@ export const VField = genericComponent<new <T>(
             } as VFieldSlot)}
           </div>
 
-          { hasClear && (
-            <VExpandXTransition key="clear">
-              <div
-                class="v-field__clearable"
-                v-show={ props.dirty }
-                onMousedown={ (e: MouseEvent) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                }}
-              >
+          <VExpandXTransition key="clear">
+            <div
+              class={['v-field__clearable', { 'v-field__last-inner-suffix': hasClear && !hasAppend }]}
+              v-show={ props.dirty && hasClear }
+              onMousedown={ (e: MouseEvent) => {
+                e.preventDefault()
+                e.stopPropagation()
+              }}
+            >
               <VDefaultsProvider
                 defaults={{
                   VIcon: {
@@ -356,13 +355,15 @@ export const VField = genericComponent<new <T>(
                       onBlur={ blur }
                     />
                   )}
-                </VDefaultsProvider>
-              </div>
-            </VExpandXTransition>
-          )}
+              </VDefaultsProvider>
+            </div>
+          </VExpandXTransition>
 
           { hasAppend && (
-            <div key="append" class="v-field__append-inner">
+            <div
+              key="append"
+              class={['v-field__append-inner', { 'v-field__last-inner-suffix': hasAppend }]}
+            >
               { slots['append-inner']?.(slotProps.value) }
 
               { props.appendInnerIcon && (
