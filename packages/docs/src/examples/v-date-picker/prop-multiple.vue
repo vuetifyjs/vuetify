@@ -30,7 +30,6 @@
             chips
             multiple
             readonly
-            small-chips
             v-bind="attrs"
             v-on="on"
           ></v-combobox>
