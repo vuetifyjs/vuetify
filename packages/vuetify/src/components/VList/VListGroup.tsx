@@ -3,7 +3,6 @@ import { VExpandTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
-import { useList } from './list'
 import { makeComponentProps } from '@/composables/component'
 import { IconValue } from '@/composables/icons'
 import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
@@ -62,7 +61,6 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
   setup (props, { slots }) {
     const { isOpen, open, id: _id } = useNestedItem(toRef(props, 'value'), true)
     const id = computed(() => `v-list-group--id-${String(_id.value)}`)
-    const list = useList()
     const { isBooted } = useSsrBoot()
 
     function onClick (e: Event) {
@@ -95,8 +93,8 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
         class={[
           'v-list-group',
           {
-            'v-list-group--prepend': list?.hasPrepend.value,
             'v-list-group--fluid': props.fluid,
+            'v-list-group--has-prepend-icon': props.prependIcon,
             'v-list-group--subgroup': props.subgroup,
             'v-list-group--open': isOpen.value,
           },
