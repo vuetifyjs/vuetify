@@ -1,5 +1,5 @@
 // Composables
-import { getWeek, useDate } from '@/composables/date/date'
+import { useDate } from '@/composables/date/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -176,7 +176,7 @@ export function useCalendar (props: CalendarProps) {
 
   const weekNumbers = computed(() => {
     return weeksInMonth.value.map(week => {
-      return week.length ? getWeek(adapter, week[0]) : null
+      return week.length ? adapter.getWeek(week[0]) : null
     })
   })
 

@@ -137,4 +137,19 @@ describe('vuetify date adapter', () => {
     expect(date?.getDate()).toBe(14)
     expect(date?.getDay()).toBe(0)
   })
+
+  it('returns correct week', () => {
+    let instance = new VuetifyDateAdapter({ locale: 'en-US' })
+
+    let week = instance.getWeek(new Date(2024, 12, 30))
+
+    expect(week).toBe(53)
+
+    instance = new VuetifyDateAdapter({ locale: 'sv-SE' })
+
+    week = instance.getWeek(new Date(2024, 12, 30))
+    // TODO: Currently fails due to vuetify DateAdapter.getWeek() implementation
+    // Will work with any @date-io adapter
+    expect(week).toBe(1)
+  })
 })

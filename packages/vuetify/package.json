@@ -119,9 +119,9 @@
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\""
   },
   "devDependencies": {
-    "@date-io/core": "3.0.0",
-    "@date-io/date-fns": "3.0.0",
-    "@date-io/dayjs": "^3.0.0",
+    "@date-io/core": "3.2.0",
+    "@date-io/date-fns": "3.2.0",
+    "@date-io/dayjs": "^3.2.0",
     "@formatjs/intl": "^2.10.1",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
