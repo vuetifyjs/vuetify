@@ -151,7 +151,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     function genPath (fill: boolean) {
       return _genPath(
         genPoints(items.value, boundary.value),
-        props.smooth ? 8 : Number(props.smooth),
+        typeof props.smooth === 'number' ? props.smooth : props.smooth ? 8 : 0,
         fill,
         parseInt(props.height, 10)
       )
