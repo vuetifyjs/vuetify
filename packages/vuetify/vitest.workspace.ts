@@ -3,7 +3,7 @@ import { commands } from './test/setup/browser-commands.ts'
 
 export default defineWorkspace([
   {
-    extends: './vitest.config.mts',
+    extends: './vitest.config.ts',
     test: {
       name: 'unit',
       include: ['**/*.spec.{ts,tsx}'],
@@ -12,7 +12,7 @@ export default defineWorkspace([
     },
   },
   {
-    extends: './vitest.config.mts',
+    extends: './vitest.config.ts',
     test: {
       name: 'browser',
       include: ['**/*.spec.browser.{ts,tsx}'],
@@ -32,7 +32,7 @@ export default defineWorkspace([
         providerOptions: {
           capabilities: {
             'goog:chromeOptions': {
-              // @ts-ignore
+              // @ts-expect-error
               args: ['--start-maximized', process.env.TEST_BAIL && '--auto-open-devtools-for-tabs'].filter(v => !!v),
             },
           },

@@ -1,5 +1,4 @@
-'use strict'
-const spawn = require('child_process').spawn
+import { spawn } from 'child_process'
 
 const args = process.argv.slice(2)
 
