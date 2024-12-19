@@ -4,7 +4,7 @@ import { propsFactory } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-export type SparklineItem = number | { value: number }
+export type SparklineItem = string | number | { value: number }
 
 export const makeLineProps = propsFactory({
   autoDraw: Boolean,
