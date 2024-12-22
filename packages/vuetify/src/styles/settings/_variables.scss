@@ -17,6 +17,9 @@ $border-width-root: thin !default;
 $transition-duration-root: 0.3s !default;
 $transition-move-duration-root: 0.5s !default;
 
+$anchor-color: rgb(var(--v-anchor)) !default;
+$anchor-hover-color: rgb(var(--v-anchor-hover)) !default;
+
 $borders: () !default;
 $borders: map-deep-merge(
   (
