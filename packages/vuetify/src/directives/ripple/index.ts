@@ -130,9 +130,9 @@ const ripples = {
     const ripples = el.getElementsByClassName('v-ripple__animation')
 
     if (ripples.length === 0) return
-    const animation = ripples[ripples.length - 1]
+    const animation = Array.from(ripples).findLast(ripple => !ripple.dataset.isHiding)
 
-    if (animation.dataset.isHiding) return
+    if (!animation) return
     else animation.dataset.isHiding = 'true'
 
     const diff = performance.now() - Number(animation.dataset.activated)
