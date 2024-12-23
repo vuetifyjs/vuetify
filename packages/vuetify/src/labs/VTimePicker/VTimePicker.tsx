@@ -2,9 +2,9 @@
 import './VTimePicker.sass'
 
 // Components
+import { pad } from './util'
 import { VTimePickerClock } from './VTimePickerClock'
 import { VTimePickerControls } from './VTimePickerControls'
-import { pad } from '@/components/VDatePicker/util'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables

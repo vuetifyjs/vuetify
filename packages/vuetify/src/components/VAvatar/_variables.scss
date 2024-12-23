@@ -1,10 +1,16 @@
 @use "sass:map";
+@use '../../styles/settings';
 @use "../../styles/settings/variables";
 @use "../../styles/tools/functions";
 
 // Defaults
 $avatar-background: var(--v-theme-surface) !default;
 $avatar-border-radius: map.get(variables.$rounded, 'circle') !default;
+$avatar-border-color: settings.$border-color-root !default;
+$avatar-border-radius: map.get(settings.$rounded, 0) !default;
+$avatar-border-style: settings.$border-style-root !default;
+$avatar-border-thin-width: thin !default;
+$avatar-border-width: 0 !default;
 $avatar-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $avatar-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 $avatar-elevation: 1 !default;
@@ -25,6 +31,13 @@ $avatar-sizes: functions.map-deep-merge(
   ),
   $avatar-sizes
 );
+
+$avatar-border: (
+  $avatar-border-color,
+  $avatar-border-style,
+  $avatar-border-width,
+  $avatar-border-thin-width
+) !default;
 
 $avatar-variants: (
   $avatar-background,

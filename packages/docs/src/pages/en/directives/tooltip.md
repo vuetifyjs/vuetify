@@ -35,22 +35,22 @@ The `v-tooltip` directive makes it easy to add a tooltip to any element in your 
 
 ## Guide
 
-The `v-tooltip` directive is a simple way to add a tooltip to any element in your application. It is a wrapper around the `v-tooltip`.
+The `v-tooltip` directive is a simple way to add a tooltip to any element in your application. It is a wrapper around the `v-tooltip` component.
 
-### Args
+### Location
 
-The `v-tooltip` directive has a number of args that can be used to customize the behavior of the tooltip.
+Location is set as a directive argument with the same syntax as the component's `location` prop separated by a hyphen instead of a space.
 
 <ExamplesExample file="v-tooltip-directive/args" />
 
-### Modifiers
+### Tooltip text
 
-Modifiers are values that are passed to the `v-tooltip` component. This is an easy way to make small modifications to boolean [v-tooltip](/api/v-tooltip/) props.
+By default the tooltip will use the target element's [`textContent`](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent#differences_from_innertext), or you can pass another string as a directive value. Remember directive values are expressions so static strings must be quoted.
 
-<ExamplesExample file="v-tooltip-directive/modifiers" />
+<ExamplesExample file="v-tooltip-directive/text" />
 
-### Object literals
+### Other props
 
-The `v-tooltip` directive can also accept an object literal as a value. This is useful when you need to pass multiple props to the `v-tooltip` component.
+The `v-tooltip` directive can also accept an object of [VTooltip props](/api/v-tooltip/#props) as a value (use camelCase keys).
 
 <ExamplesExample file="v-tooltip-directive/object-literals" />

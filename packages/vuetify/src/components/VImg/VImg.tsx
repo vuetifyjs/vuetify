@@ -54,6 +54,7 @@ export type VImgSlots = {
 }
 
 export const makeVImgProps = propsFactory({
+  absolute: Boolean,
   alt: String,
   cover: Boolean,
   color: String,
@@ -351,7 +352,10 @@ export const VImg = genericComponent<VImgSlots>()({
         <VResponsive
           class={[
             'v-img',
-            { 'v-img--booting': !isBooted.value },
+            {
+              'v-img--absolute': props.absolute,
+              'v-img--booting': !isBooted.value,
+            },
             backgroundColorClasses.value,
             roundedClasses.value,
             props.class,

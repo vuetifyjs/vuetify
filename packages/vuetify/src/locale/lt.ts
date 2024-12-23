@@ -69,6 +69,11 @@ export default {
     counter: '{0} failų',
     counterSize: '{0} failų ({1} iš viso)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

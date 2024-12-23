@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Snackbar Queue
   title: Snackbar Queue component

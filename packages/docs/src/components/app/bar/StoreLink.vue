@@ -2,7 +2,7 @@
   <AppBtn
     color="medium-emphasis"
     href="https://store.vuetifyjs.com/?utm_source=vuetifyjs.com&utm_medium=toolbar"
-    icon="mdi-cart-outline"
+    icon="mdi-storefront-outline"
     rel="noopener"
     target="_blank"
     @click="onClick"

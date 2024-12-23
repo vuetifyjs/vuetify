@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Date inputs
   title: Date input component

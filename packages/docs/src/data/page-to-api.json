@@ -69,6 +69,12 @@
     "VDataTableServer",
     "VDataTableVirtual"
   ],
+  "components/data-tables/server-side-tables": [
+    "VDataTableServer"
+  ],
+  "components/data-tables/virtual-tables": [
+    "VDataTableVirtual"
+  ],
   "components/date-inputs": ["VDateInput", "VDatePicker"],
   "components/date-pickers-month": ["VDatePicker"],
   "components/date-pickers": ["VDatePicker", "VDateInput"],

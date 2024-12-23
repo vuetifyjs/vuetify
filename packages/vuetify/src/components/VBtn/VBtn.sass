@@ -231,23 +231,16 @@
     pointer-events: none
     @include tools.absolute()
 
-  // VCard
-  .v-btn
-    ~ .v-btn:not(.v-btn-toggle .v-btn)
-      .v-card-actions &
-        margin-inline-start: $button-card-actions-margin
-
   // VPagination
-  .v-btn
-    .v-pagination &
+  .v-pagination
+    .v-btn
       @include tools.rounded($button-pagination-border-radius)
 
-    &--rounded
-      .v-pagination &
+      &--rounded
         @include tools.rounded($button-pagination-rounded-border-radius)
 
-    &__overlay
-      transition: none
+      &__overlay
+        transition: none
 
-      .v-pagination__item--is-active &
-        opacity: $button-pagination-active-overlay-opacity
+    .v-pagination__item--is-active .v-btn__overlay
+      opacity: $button-pagination-active-overlay-opacity

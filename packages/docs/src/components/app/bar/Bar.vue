@@ -20,6 +20,8 @@
 
     <template #append>
       <template v-if="mdAndUp">
+        <AppBarBlogLink />
+
         <AppBarLearnMenu />
 
         <AppBarSupportMenu />

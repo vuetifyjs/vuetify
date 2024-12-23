@@ -1,0 +1,8 @@
+services:
+  docs:
+    image: nginx:alpine
+    ports:
+      - ${PORT:-8095}:80
+    volumes:
+      - ./packages/docs/dist:/usr/share/nginx/html
+      - ./packages/docs/build/nginx.conf:/etc/nginx/nginx.conf

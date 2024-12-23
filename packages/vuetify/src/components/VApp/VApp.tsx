@@ -8,7 +8,6 @@ import { useRtl } from '@/composables/locale'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { Suspense } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVAppProps = propsFactory({
@@ -42,11 +41,7 @@ export const VApp = genericComponent()({
         ]}
       >
         <div class="v-application__wrap">
-          <Suspense>
-            <>
-              { slots.default?.() }
-            </>
-          </Suspense>
+          { slots.default?.() }
         </div>
       </div>
     ))

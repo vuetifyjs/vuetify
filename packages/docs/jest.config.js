@@ -1,6 +1,6 @@
 const os = require('os')
 
-const maxWorkers = Math.max(1, Math.floor(Math.min(os.cpus().length / 2, os.freemem() / 1024 / 1024 / 1024 / 2.5)))
+const maxWorkers = Math.max(1, Math.floor(Math.min(os.cpus().length / 2, os.freemem() / 1024 ** 3 / 3.1)))
 
 module.exports = {
   maxWorkers,

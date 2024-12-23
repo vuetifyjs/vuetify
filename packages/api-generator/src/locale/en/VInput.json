@@ -27,6 +27,8 @@
     "mouseup": "Emitted when click is released."
   },
   "exposed": {
+    "errorMessages": "An array of error messages that were set by the `setErrors` method.",
+    "isValid": "Boolean indicating if the input is valid.",
     "reset": "Resets the input value.",
     "resetValidation": "Resets validation of the input without modifying its value.",
     "validate": "Validates the input's value."

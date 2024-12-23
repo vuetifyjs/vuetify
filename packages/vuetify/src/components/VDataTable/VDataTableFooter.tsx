@@ -147,3 +147,5 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
     return {}
   },
 })
+
+export type VDataTableFooter = InstanceType<typeof VDataTableFooter>

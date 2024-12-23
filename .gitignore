@@ -21,5 +21,8 @@ coverage/
 cypress/screenshots
 cypress/videos
 
+# vitest
+__screenshots__/
+
 .vercel
 .now

@@ -14,6 +14,10 @@ module.exports = {
       if (['@rollup/pluginutils', 'rollup-plugin-terser', '@rollup/plugin-replace'].includes(pkg.name)) {
         pkg.peerDependencies.rollup = '*'
       }
+      if (pkg.name === 'brilliant-errors') {
+        delete pkg.dependencies.bumpp
+        delete pkg.dependencies.vitest
+      }
       return pkg
     }
   }

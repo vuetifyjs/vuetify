@@ -7,7 +7,6 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { createLayout, makeLayoutProps } from '@/composables/layout'
 
 // Utilities
-import { Suspense } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVLayoutProps = propsFactory({
@@ -38,11 +37,7 @@ export const VLayout = genericComponent()({
           props.style,
         ]}
       >
-        <Suspense>
-          <>
-            { slots.default?.() }
-          </>
-        </Suspense>
+        { slots.default?.() }
       </div>
     ))
 

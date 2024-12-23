@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Borders
   description: Use border utilities to quickly style the border of any element.

@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Number inputs
   description: The Number input component is used for ...

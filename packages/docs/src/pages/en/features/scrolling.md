@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Programmatic scrolling
   description: Handle scrolling within your application by using the goTo function

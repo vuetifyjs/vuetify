@@ -16,7 +16,7 @@
     "width": "Width of the picker."
   },
   "slots": {
-    "default": "Displayed below the clock, can be used for example for adding action button (`OK` and `Cancel`)/"
+    "default": "Displayed below the clock, can be used for example for adding action button (`OK` and `Cancel`)"
   },
   "events": {
     "change": "Emitted when the time selection is done (when user changes the minute for HH:MM picker and the second for HH:MM:SS picker.",

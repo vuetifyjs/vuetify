@@ -33,6 +33,15 @@
       :messages="t('dark-code-message')"
     />
   </v-defaults-provider>
+
+  <AppBtn
+    append-icon="mdi-page-next"
+    color="surface-variant"
+    text="Vuetify One Themes"
+    to="?one=settings"
+    variant="flat"
+    block
+  />
 </template>
 
 <script setup lang="ts">
@@ -50,21 +59,6 @@
       text: t('dark'),
       icon: 'mdi-weather-night',
       value: 'dark',
-    },
-    {
-      text: 'Blackguard',
-      icon: 'mdi-space-invaders',
-      value: 'blackguard',
-    },
-    {
-      text: 'Polaris',
-      icon: 'mdi-image-filter-hdr',
-      value: 'polaris',
-    },
-    {
-      text: 'Nebula',
-      icon: 'mdi-rocket-launch-outline',
-      value: 'nebula',
     },
     {
       text: t('system'),

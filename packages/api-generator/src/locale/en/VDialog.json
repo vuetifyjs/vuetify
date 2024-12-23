@@ -20,6 +20,7 @@
     "activatorEl": "Ref to the current activator element.",
     "animateClick": "Function invoked when user clicks outside the component and the **persistent** prop is used.",
     "contentEl": "Ref to the current content element.",
+    "scrimEl": "Ref to the current scrim element.",
     "globalTop": "Used by activator to determine a components position in the global stack order.",
     "localTop": "Used by activator to determine a components position in the local stack order.",
     "updateLocation": "Function used for locationStrategy positioning."

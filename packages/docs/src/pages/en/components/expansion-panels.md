@@ -80,7 +80,7 @@ Expansion panels can be controlled externally by using the **v-model**. You will
 
 #### Advanced
 
-The expansion panel component provides a rich playground to build truly advanced implementations. Here we take advantage of slots in the `v-expansion-panel-header` component to react to the state of being open or closed by fading content in and out.
+The expansion panel component provides a rich playground to build truly advanced implementations. Here we take advantage of slots in the `v-expansion-panel-title` component to react to the state of being open or closed by fading content in and out.
 
 <ExamplesExample file="v-expansion-panels/misc-advanced" />
 

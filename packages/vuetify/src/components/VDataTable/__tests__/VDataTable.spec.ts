@@ -12,7 +12,7 @@ import {
 // import Vue from 'vue'
 // import { Lang } from '../../../services/lang'
 // import { preset } from '../../../presets/default'
-// import { resizeWindow } from '../../../../test'
+// import { resizeWindow } from '@/../test'
 
 // Vue.prototype.$vuetify = {
 //   icons: {},

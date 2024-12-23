@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Calendars
   title: Calendar component

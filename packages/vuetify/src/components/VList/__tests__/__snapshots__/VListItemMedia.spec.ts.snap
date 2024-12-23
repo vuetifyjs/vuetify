@@ -1,6 +1,3 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`VListItemMedia should match a snapshot 1`] = `
-<div class="v-list-item-media">
-</div>
-`;
+exports[`VListItemMedia > should match a snapshot 1`] = `"<div class="v-list-item-media"></div>"`;

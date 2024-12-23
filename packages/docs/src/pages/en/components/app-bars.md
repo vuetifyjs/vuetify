@@ -116,6 +116,6 @@ You can make **app-bar** dense. A dense app bar has lower height than regular on
 
 #### Prominent
 
-An `v-app-bar` with the `density="prominent"` prop can opt to have its height shrunk as the user scrolls down. This provides a smooth transition to taking up less visual space when the user is scrolling through content. Shrink height has 2 possible options, **compact** (48px) and **comfortable** (56px) sizes.
+An `v-app-bar` with the `density="prominent"` prop can be used for longer titles, to house imagery, or to provide a stronger presence to the top app bar.
 
 <ExamplesExample file="v-app-bar/prop-prominent" />

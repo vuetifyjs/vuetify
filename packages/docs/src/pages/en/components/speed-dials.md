@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Speed Dials
   title: Speed Dial component

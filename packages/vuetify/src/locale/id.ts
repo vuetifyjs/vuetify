@@ -69,6 +69,11 @@ export default {
     counter: '{0} berkas',
     counterSize: '{0} berkas (dari total {1})',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

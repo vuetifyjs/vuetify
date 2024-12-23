@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Text and typography
   description: View the various typography styles. From headings to captions, with various weights, sizes and italics.

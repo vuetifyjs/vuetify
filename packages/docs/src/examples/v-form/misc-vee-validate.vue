@@ -60,9 +60,9 @@
         return 'Name needs to be at least 2 characters.'
       },
       phone (value) {
-        if (value?.length > 9 && /[0-9-]+/.test(value)) return true
+        if (/^[0-9-]{7,}$/.test(value)) return true
 
-        return 'Phone number needs to be at least 9 digits.'
+        return 'Phone number needs to be at least 7 digits.'
       },
       email (value) {
         if (/^[a-z.-]+@[a-z.-]+\.[a-z]+$/i.test(value)) return true

@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Avatars
   title: Avatar component

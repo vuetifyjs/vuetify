@@ -35,7 +35,7 @@ runs:
         repository: ${{ inputs.checkout-repo }}
         ref: ${{ inputs.checkout-ref }}
         fetch-depth: 0
-    - uses: ./.github/actions/pnpm-install
+    - uses: vuetifyjs/setup-action@master
     - run: >-
         node -e "
           const json = require('./lerna.json');

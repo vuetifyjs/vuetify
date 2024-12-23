@@ -28,7 +28,7 @@
         </v-card-title>
 
         <v-overlay
-          :model-value="isHovering"
+          :model-value="!!isHovering"
           class="align-center justify-center"
           scrim="#036358"
           contained

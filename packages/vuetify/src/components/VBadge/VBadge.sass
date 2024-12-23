@@ -10,6 +10,7 @@
     align-items: center
     display: inline-flex
     border-radius: $badge-border-radius
+    font-family: $badge-font-family
     font-size: $badge-font-size
     font-weight: $badge-font-weight
     height: $badge-height
@@ -24,6 +25,9 @@
     white-space: nowrap
 
     @include tools.theme($badge-theme...)
+
+    &:has(.v-icon)
+      padding: $badge-icon-padding
 
     .v-badge--bordered &
       &::after

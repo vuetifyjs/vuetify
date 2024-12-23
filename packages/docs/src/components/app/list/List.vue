@@ -58,8 +58,9 @@
 
 <script setup lang="ts">
   // Types
-  import type { RouteLocationRaw, RouteRecordRaw } from 'vue-router'
+  import type { RouteLocationRaw } from 'vue-router'
   import type { Prop } from 'vue'
+  import apiList from 'virtual:api-list'
 
   export type Item = {
     title?: string
@@ -81,15 +82,13 @@
   }
 
   function generateApiItems (locale: string) {
-    return (generatedRoutes as RouteRecordRaw[])
-      .filter(route => route.path.includes(`${locale}/api/`))
-      .map(route => {
-        return {
-          title: (route.meta!.title as string).slice(0, -4),
-          to: route.path,
-        }
-      })
-      .sort((a, b) => a.title.localeCompare(b.title))
+    return apiList.map(name => {
+      const path = kebabCase(name.startsWith('v-') ? name + '-directive' : name)
+      return {
+        title: name,
+        to: `/${locale}/api/${path}`,
+      }
+    })
   }
 
   function generateListItem (item: string | Item, path = '', locale = 'en', t = (key: string) => key): any {
@@ -170,7 +169,9 @@
       onClick: item?.onClick,
       rel: item.href ? 'noopener noreferrer' : undefined,
       target: item.href ? '_blank' : undefined,
-      children: item.title === 'api' ? generateApiItems(locale.value) : generateListItems(item, item.title!, locale.value, t),
+      children: item.title === 'api'
+        ? generateApiItems(locale.value)
+        : generateListItems(item, item.title!, locale.value, t),
       prependIcon: opened.value.includes(title ?? '') ? item.activeIcon : item.inactiveIcon,
       value: title,
       appendIcon: item.appendIcon,

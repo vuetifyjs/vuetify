@@ -1,7 +1,7 @@
 // @ts-nocheck
 /* eslint-disable */
 
-// import { touch } from '../../../../test'
+// import { touch } from '@/../test'
 import {
   mount,
   MountOptions,
