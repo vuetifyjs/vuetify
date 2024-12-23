@@ -111,6 +111,60 @@ export default createVuetify({
 
 :::
 
+### Material Symbols
+
+New set of icons provided by Google. Provided as fonts with different weights or SVG. Comes with 3 distinct variants: 'Outlined', 'Rounded' and 'Sharp'.
+
+#### Material Symbols - CSS/Font
+
+```html
+<link href="https://cdn.jsdelivr.net/npm/@material-symbols/font-400@0.27.2/outlined.css" rel="stylesheet">
+```
+
+Or as a local dependency:
+
+::: tabs
+
+```bash [pnpm]
+pnpm add @material-symbols/font-400 -D
+```
+
+```bash [yarn]
+yarn add @material-symbols/font-400 -D
+```
+
+``` bash [npm]
+npm install @material-symbols/font-400 -D
+```
+
+```bash [bun]
+bun add @material-symbols/font-400 -D
+```
+
+:::
+
+```js { resource="src/plugins/vuetify.js" }
+import '@material-symbols/font-400/outlined.css' // Ensure you are using css-loader
+import { createVuetify } from 'vuetify'
+import { aliases, mat } from 'vuetify/iconsets/mat'
+
+export default createVuetify({
+  icons: {
+    defaultSet: 'mat',
+    aliases,
+    sets: {
+      mat: mat('outlined'),
+    },
+  },
+})
+```
+
+::: error
+
+This icon set is relatively new and does guarantee full overlap of symbols between variants. You may need to verify that symbols you need look correct or add custom icons to supplement the set you intend to use.
+
+:::
+
 #### MDI - JS SVG
 
 This is the recommended installation when optimizing your application for production, as only icons used for Vuetify components internally will be imported into your application bundle. You will need to provide your own icons for the rest of the app.
