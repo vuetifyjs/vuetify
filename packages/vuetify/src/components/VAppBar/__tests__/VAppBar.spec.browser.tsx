@@ -2,154 +2,97 @@
 import { VAppBar } from '..'
 import { VLayout } from '@/components/VLayout'
 import { VMain } from '@/components/VMain'
-import { createVuetify } from '@/framework'
 
 // Utilities
-import { render } from '@testing-library/vue'
-import { nextTick } from 'vue'
-
-const vuetify = createVuetify()
+import { render, screen, scroll } from '@test'
+import { ref } from 'vue'
 
 describe('VAppBar', () => {
   it('allows custom height', async () => {
-    const { container, rerender } = render(
-      ({ height }: { height: number }) => (
-        <VLayout>
-          <VAppBar height={ height } />
-        </VLayout>
-      ), {
-        global: {
-          plugins: [vuetify],
-        },
-        props: { height: 64 },
-      }
-    )
+    const height = ref(64)
+    render(() => (
+      <VLayout>
+        <VAppBar height={ height.value } />
+      </VLayout>
+    ))
 
-    await nextTick()
-    expect(container.querySelector('.v-app-bar')).toHaveStyle({ height: '64px' })
+    expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '64px' })
 
-    await rerender({
-      height: 128,
-    })
-    await nextTick()
-
-    expect(container.querySelector('.v-app-bar')).toHaveStyle({ height: '128px' })
+    height.value = 128
+    expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '128px' })
   })
 
   it('supports density', async () => {
-    const { container, rerender } = render(
-      ({ density }: { density: any }) => (
-        <VLayout>
-          <VAppBar density={ density } />
-        </VLayout>
-      ), {
-        global: {
-          plugins: [vuetify],
-        },
-        props: { density: 'default' },
-      }
-    )
+    const density = ref<any>('default')
+    render(() => (
+      <VLayout>
+        <VAppBar density={ density.value } />
+      </VLayout>
+    ))
 
-    await nextTick()
+    expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '64px' })
 
-    expect(container.querySelector('.v-app-bar')).toHaveStyle({ height: '64px' })
+    density.value = 'prominent'
+    expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '128px' })
 
-    await rerender({ density: 'prominent' })
-    await nextTick()
+    density.value = 'comfortable'
+    expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '56px' })
 
-    expect(container.querySelector('.v-app-bar')).toHaveStyle({ height: '128px' })
-
-    await rerender({ density: 'comfortable' })
-    await nextTick()
-
-    expect(container.querySelector('.v-app-bar')).toHaveStyle({ height: '56px' })
-
-    await rerender({ density: 'compact' })
-    await nextTick()
-
-    expect(container.querySelector('.v-app-bar')).toHaveStyle({ height: '48px' })
+    density.value = 'compact'
+    expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '48px' })
   })
 
   describe('scroll behavior', () => {
     it('hides on scroll', async () => {
-      const { container } = render(
-        ({ scrollBehavior }: any) => (
-          <VLayout>
-            <VAppBar scrollBehavior={ scrollBehavior } />
-            <VMain style="min-height: 200vh;" />
-          </VLayout>
-        ), {
-          global: {
-            plugins: [vuetify],
-          },
-        }
-      )
+      const scrollBehavior = ref()
+      render(() => (
+        <VLayout>
+          <VAppBar scrollBehavior={ scrollBehavior.value } />
+          <VMain style="min-height: 200vh;" />
+        </VLayout>
+      ))
 
-      await nextTick()
+      expect.element(screen.getByCSS('.v-app-bar')).toBeVisible()
 
-      expect(container.querySelector('.v-app-bar')).toBeVisible()
+      await scroll({ top: 500 })
+      await scroll({ top: 250 })
+      expect.element(screen.getByCSS('.v-app-bar')).toBeVisible()
 
-      window.scrollTo(0, 500)
-      await nextTick()
-
-      window.scrollTo(0, 250)
-      await nextTick()
-
-      expect(container.querySelector('.v-app-bar')).toBeVisible()
-
-      window.scrollTo(0, 0)
-      await nextTick()
-
-      expect(container.querySelector('.v-app-bar')).toBeVisible()
+      await scroll({ top: 0 })
+      expect.element(screen.getByCSS('.v-app-bar')).toBeVisible()
     })
 
     it('should hide correctly when scroll to the bottom', async () => {
-      const { container } = render(
-        ({ scrollBehavior }: any) => (
-          <VLayout>
-            <VAppBar scrollBehavior={ scrollBehavior } />
-            <VMain style="min-height: 300px">
-              { Array.from({ length: 7 }, () => (
-                <div class="pa-16 ma-2 w-50 bg-green text-center">box</div>
-              ))}
-            </VMain>
-          </VLayout>
-        ), {
-          global: {
-            plugins: [vuetify],
-          },
-        }
-      )
-      await nextTick()
-      expect(container.querySelector('.v-app-bar')).toBeVisible()
+      render(() => (
+        <VLayout>
+          <VAppBar scrollBehavior="hide" />
+          <VMain style="min-height: 300px">
+            { Array.from({ length: 7 }, () => (
+              <div class="pa-16 ma-2 w-50 bg-green text-center">box</div>
+            ))}
+          </VMain>
+        </VLayout>
+      ))
+
+      expect.element(screen.getByCSS('.v-app-bar')).toBeVisible()
+
+      await scroll({ top: 1000 })
+      expect.element(screen.getByCSS('.v-app-bar')).not.toBeVisible()
     })
 
     it('collapses', async () => {
-      const { container } = render(
-        ({ scrollBehavior }: any) => (
-          <VLayout>
-            <VAppBar scrollBehavior={ scrollBehavior } />
-            <VMain style="min-height: 200vh;" />
-          </VLayout>
-        ),
-        {
-          global: {
-            plugins: [vuetify],
-          },
-          props: { scrollBehavior: 'scroll' },
-        }
-      )
+      render(() => (
+        <VLayout>
+          <VAppBar scrollBehavior="scroll" />
+          <VMain style="min-height: 200vh;" />
+        </VLayout>
+      ))
 
-      await nextTick()
+      expect.element(screen.getByCSS('.v-app-bar')).toBeVisible()
 
-      expect(container.querySelector('.v-app-bar')).toBeVisible()
-
-      window.scrollTo(0, 500)
-      await nextTick()
-
-      window.scrollTo(0, 0)
-      await nextTick()
-      expect(container.querySelector('.v-app-bar')?.classList.contains('v-toolbar--collapse')).toBe(false)
+      await scroll({ top: 500 })
+      await scroll({ top: 0 })
+      expect.element(screen.getByCSS('.v-app-bar')).not.toHaveClass('v-toolbar--collapse')
     })
   })
 })
