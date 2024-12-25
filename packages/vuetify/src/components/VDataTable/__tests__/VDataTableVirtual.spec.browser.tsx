@@ -1,5 +1,5 @@
 // Utilities
-import { render } from '@testing-library/vue'
+import { render, screen } from '@testing-library/vue'
 import { VDataTableVirtual } from '..'
 import { createVuetify } from '@/framework'
 
@@ -24,6 +24,7 @@ const DESSERT_ITEMS = [
   { name: 'Donut', calories: 452, fat: 25.0, carbs: 51, protein: 4.9, iron: '22%' },
   { name: 'KitKat', calories: 518, fat: 26.0, carbs: 65, protein: 7, iron: '6%' },
 ]
+
 const vuetify = createVuetify()
 
 describe('VDataTable', () => {
@@ -33,16 +34,18 @@ describe('VDataTable', () => {
       return curr
     }, [])
 
-    const { container } = render(() => (
-        <VDataTableVirtual items={ items } headers={ DESSERT_HEADERS } height={ 500 } />
+    render(() => (
+      <VDataTableVirtual items={ items } headers={ DESSERT_HEADERS } height={ 500 } />
     ), {
       global: {
         plugins: [vuetify],
       },
     })
-    const rows = container.querySelectorAll('tbody tr')
+
+    const rows = screen.getAllByRole('row')
     expect(rows.length).toBeLessThan(items.length)
-    const firstRow = rows[1]
+
+    const firstRow = rows[0]
     const lastRow = rows[rows.length - 1]
 
     const firstRowHeight = window.getComputedStyle(firstRow).height

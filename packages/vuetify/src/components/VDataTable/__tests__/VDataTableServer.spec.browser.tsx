@@ -1,5 +1,5 @@
 // Utilities
-import { fireEvent, render, screen, waitFor } from '@testing-library/vue'
+import { fireEvent, render, screen } from '@testing-library/vue'
 import { ref } from 'vue'
 import { VDataTableServer } from '../VDataTableServer'
 import { createVuetify } from '@/framework'
@@ -82,9 +82,7 @@ describe('VDataTableServer', () => {
     })
     load({ page: options.value.page, itemsPerPage: options.value.itemsPerPage })
 
-    await waitFor(() => {
-      expect(items.value).toHaveLength(2)
-    })
+    await expect.poll(() => items.value.length).toBe(2) // Ensure the table updates correctly
   })
 
   it('should trigger update event once when search changes', async () => {
@@ -128,8 +126,6 @@ describe('VDataTableServer', () => {
     const searchInput = screen.getByRole('textbox')
     await fireEvent.update(searchInput, 'Frozen')
 
-    await waitFor(() => {
-      expect(items.value.length).toBeGreaterThan(0) // Check if search filtered the items
-    })
+    await expect.poll(() => items.value.length).toBeGreaterThan(0) // Ensure items are filtered correctly by search
   })
 })
