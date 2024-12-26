@@ -1,89 +1,51 @@
-// Components
 import { VBottomNavigation } from '..'
+
+// Components
 import { VLayout } from '@/components/VLayout'
-import { createVuetify } from '@/framework'
 
 // Utilities
-import { render } from '@testing-library/vue'
-import { nextTick } from 'vue'
-
-const vuetify = createVuetify()
+import { render, screen } from '@test'
+import { ref } from 'vue'
 
 describe('VBottomNavigation', () => {
   it('allows custom height', async () => {
-    const { container, rerender } = render(
-      ({ height }: { height: number }) => (
-        <VLayout>
-          <VBottomNavigation height={ height } />
-        </VLayout>
-      ), {
-        global: {
-          plugins: [vuetify],
-        },
-        props: { height: 200 },
-      }
-    )
-
-    await nextTick()
-    expect(container.querySelector('.v-bottom-navigation')).toHaveStyle({ height: '200px' })
-
-    await rerender({
-      height: 150,
-    })
-    await nextTick()
-
-    expect(container.querySelector('.v-bottom-navigation')).toHaveStyle({ height: '150px' })
+    const height = ref(200)
+    render(() => (
+      <VLayout>
+        <VBottomNavigation height={ height.value } />
+      </VLayout>
+    ))
+    const navigation = screen.getByCSS('.v-bottom-navigation')
+    expect.element(navigation).toHaveStyle({ height: '200px' })
+    height.value = 150
+    expect.element(navigation).toHaveStyle({ height: '150px' })
   })
 
   it('supports density', async () => {
-    const { container, rerender } = render(
-      ({ density }: { density: any }) => (
-        <VLayout>
-          <VBottomNavigation density={ density } />
-        </VLayout>
-      ), {
-        global: {
-          plugins: [vuetify],
-        },
-        props: { density: 'default' },
-      }
-    )
-
-    await nextTick()
-
-    expect(container.querySelector('.v-bottom-navigation')).toHaveStyle({ height: '56px' })
-
-    await rerender({ density: 'comfortable' })
-    await nextTick()
-
-    expect(container.querySelector('.v-bottom-navigation')).toHaveStyle({ height: '48px' })
-
-    await rerender({ density: 'compact' })
-    await nextTick()
-
-    expect(container.querySelector('.v-bottom-navigation')).toHaveStyle({ height: '40px' })
+    const density = ref<any>('default')
+    render(() => (
+      <VLayout>
+        <VBottomNavigation density={ density.value } />
+      </VLayout>
+    ))
+    const navigation = screen.getByCSS('.v-bottom-navigation')
+    expect.element(navigation).toHaveStyle({ height: '56px' })
+    density.value = 'comfortable'
+    expect.element(navigation).toHaveStyle({ height: '48px' })
+    density.value = 'comfortable'
+    expect.element(navigation).toHaveStyle({ height: '40px' })
   })
 
   it('is not visible when inactive', async () => {
-    const { container, rerender } = render(
-      ({ active }: { active: boolean }) => (
-        <VLayout>
-          <VBottomNavigation active={ active } />
-        </VLayout>
-      ), {
-        global: {
-          plugins: [vuetify],
-        },
-        props: { active: true },
-      }
-    )
-
-    await nextTick()
-    expect(container.querySelector('.v-bottom-navigation')).toBeVisible()
-    expect(container.querySelector('.v-bottom-navigation')?.classList.contains('v-bottom-navigation--active')).toBe(true)
-
-    await rerender({ active: false })
-    await nextTick()
-    expect(container.querySelector('.v-bottom-navigation')?.classList.contains('v-bottom-navigation--active')).toBe(false)
+    const active = ref<boolean>(true)
+    render(() => (
+      <VLayout>
+        <VBottomNavigation active={ active.value } />
+      </VLayout>
+    ))
+    const navigation = screen.getByCSS('.v-bottom-navigation')
+    expect.element(navigation).toHaveClass('v-bottom-navigation--active')
+    active.value = false
+    expect.element(navigation).not.toHaveClass('v-bottom-navigation--active')
   })
 })

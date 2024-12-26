@@ -1,7 +1,6 @@
 // Utilities
-import { flushPromises, mount } from '@vue/test-utils'
+import { render, screen } from '@test'
 import { VDataIterator } from '../VDataIterator'
-import { createVuetify } from '@/framework'
 
 const DESSERT_ITEMS = [
   { name: 'Frozen Yogurt', calories: 159 },
@@ -16,39 +15,28 @@ const DESSERT_ITEMS = [
   { name: 'KitKat', calories: 518 },
 ]
 
-const vuetify = createVuetify()
-
 describe('VDataIterator', () => {
   it('should render items in the default slot', async () => {
-    const wrapper = mount(VDataIterator, {
-      props: {
-        items: DESSERT_ITEMS,
-        itemsPerPage: 5,
-      },
-      slots: {
-        default: ({ groupedItems }) => {
+    render(() => (
+      <VDataIterator items={ DESSERT_ITEMS } itemsPerPage={ 5 }>
+        { ({ groupedItems }) => {
           return groupedItems.map(item => {
-            const dataItem = item as { raw: { name: string, calories: number } }
+            const dataItem = item as {
+              raw: { name: string, calories: number }
+            }
             return (
-              <li>{ dataItem.raw.name } - { dataItem.raw.calories } calories</li>
+              <li>
+                { dataItem.raw.name } - { dataItem.raw.calories } calories
+              </li>
             )
           })
-        },
-        header: () => null,
-        footer: () => null,
-        loader: () => null,
-        'no-data': () => null,
-      },
-      global: {
-        plugins: [vuetify],
-      },
-    })
+        }}
+      </VDataIterator>
+    ))
 
-    await flushPromises()
-
-    const listItems = wrapper.findAll('li')
+    const listItems = screen.getAllByRole('listitem')
     expect(listItems).toHaveLength(5)
-    expect(listItems[0].text()).toBe('Frozen Yogurt - 159 calories')
-    expect(listItems[4].text()).toBe('Gingerbread - 356 calories')
+    expect.element(listItems[0]).toContain('Frozen Yogurt - 159 calories')
+    expect.element(listItems[4]).toContain('Gingerbread - 356 calories')
   })
 })
