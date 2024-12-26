@@ -1,7 +1,6 @@
 // Utilities
-import { render, screen } from '@testing-library/vue'
+import { render, screen } from '@test'
 import { VDataTableVirtual } from '..'
-import { createVuetify } from '@/framework'
 
 const DESSERT_HEADERS = [
   { title: 'Dessert (100g serving)', key: 'name' },
@@ -25,8 +24,6 @@ const DESSERT_ITEMS = [
   { name: 'KitKat', calories: 518, fat: 26.0, carbs: 65, protein: 7, iron: '6%' },
 ]
 
-const vuetify = createVuetify()
-
 describe('VDataTable', () => {
   it('should render only visible items', async () => {
     const items = [...new Array(10)].reduce(curr => {
@@ -36,21 +33,11 @@ describe('VDataTable', () => {
 
     render(() => (
       <VDataTableVirtual items={ items } headers={ DESSERT_HEADERS } height={ 500 } />
-    ), {
-      global: {
-        plugins: [vuetify],
-      },
-    })
+    ))
 
     const rows = screen.getAllByRole('row')
     expect(rows.length).toBeLessThan(items.length)
-
-    const firstRow = rows[0]
-    const lastRow = rows[rows.length - 1]
-
-    const firstRowHeight = window.getComputedStyle(firstRow).height
-    const lastRowHeight = window.getComputedStyle(lastRow).height
-    expect(firstRowHeight).not.toBe('0px')
-    expect(lastRowHeight).toBe('0px')
+    expect.element(rows[0]).not.toHaveStyle({ height: '0px' })
+    expect.element(rows[rows.length - 1]).toHaveStyle({ height: '0px' })
   })
 })
