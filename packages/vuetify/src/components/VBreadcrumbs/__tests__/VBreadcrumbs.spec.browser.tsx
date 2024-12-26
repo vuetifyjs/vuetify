@@ -30,7 +30,7 @@ describe('VBreadcrumbs', () => {
       </VBreadcrumbs>
     ))
 
-    expect(screen.getByText('-')).toBeTruthy()
+    expect(screen.getByText('-')).toBeVisible()
   })
 
   it('should use bg-color', () => {
@@ -71,9 +71,7 @@ describe('VBreadcrumbs', () => {
     </VBreadcrumbs>
     ))
     // Initial check for the active color class
-    expect(
-      screen.getByCSS('.v-breadcrumbs-item.text-primary'),
-    ).toBeTruthy()
+    expect(screen.getByCSS('.v-breadcrumbs-item.text-primary')).toBeInTheDocument()
 
     const items = screen.getAllByCSS('.v-breadcrumbs-item')
     expect.element(items[0]).toHaveClass('text-primary')
@@ -81,8 +79,8 @@ describe('VBreadcrumbs', () => {
   it('should disable last item by default if using items prop', () => {
     render(() => (
       <VBreadcrumbs items={['foo', 'bar']}></VBreadcrumbs>
-
     ))
+
     const lastItem = screen.getByCSS('.v-breadcrumbs-item:last-child')
     expect.element(lastItem).toHaveClass('v-breadcrumbs-item--disabled')
   })
@@ -93,6 +91,7 @@ describe('VBreadcrumbs', () => {
         items={['foo', { title: 'bar', disabled: false }]}
       ></VBreadcrumbs>
     ))
+
     const lastItem = screen.getByCSS('.v-breadcrumbs-item:last-child')
     expect.element(lastItem).not.toHaveClass('v-breadcrumbs-item--disabled')
   })
@@ -107,7 +106,8 @@ describe('VBreadcrumbs', () => {
         <VBreadcrumbsItem title="fizz"></VBreadcrumbsItem>
       </VBreadcrumbs>
     ))
-    expect(screen.getByText('/')).toBeTruthy()
-    expect(screen.getByText('-')).toBeTruthy()
+
+    expect(screen.getByText('/')).toBeInTheDocument()
+    expect(screen.getByText('-')).toBeInTheDocument()
   })
 })

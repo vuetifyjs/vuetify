@@ -24,7 +24,7 @@ const DESSERT_ITEMS = [
   { name: 'KitKat', calories: 518, fat: 26.0, carbs: 65, protein: 7, iron: '6%' },
 ]
 
-describe('VDataTable', () => {
+describe('VDataTableVirtual', () => {
   it('should render only visible items', async () => {
     const items = [...new Array(10)].reduce(curr => {
       curr.push(...DESSERT_ITEMS)

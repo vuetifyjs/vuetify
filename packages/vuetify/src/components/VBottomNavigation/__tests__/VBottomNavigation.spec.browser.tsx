@@ -1,6 +1,5 @@
-import { VBottomNavigation } from '..'
-
 // Components
+import { VBottomNavigation } from '../VBottomNavigation'
 import { VLayout } from '@/components/VLayout'
 
 // Utilities
