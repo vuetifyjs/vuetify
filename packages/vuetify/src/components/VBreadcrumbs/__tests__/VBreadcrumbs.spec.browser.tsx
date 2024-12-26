@@ -2,172 +2,112 @@
 import { VBreadcrumbs } from '../VBreadcrumbs'
 import { VBreadcrumbsDivider } from '../VBreadcrumbsDivider'
 import { VBreadcrumbsItem } from '../VBreadcrumbsItem'
-import { createVuetify } from '@/framework'
 
 // Utilities
-import { render } from '@testing-library/vue'
-
-const vuetify = createVuetify()
+import { render, screen } from '@test'
 
 describe('VBreadcrumbs', () => {
   it('should use item slot', () => {
-    const { getAllByText } = render(
+    render(() => (
       <VBreadcrumbs items={['hello', 'world']}>
         {{
           title: ({ item }: any) => `${item.title}!`,
         }}
-      </VBreadcrumbs>,
-      {
-        global: {
-          plugins: [vuetify],
-        },
-      },
-    )
+      </VBreadcrumbs>
+    ))
 
-    const items = getAllByText(/hello!|world!/i)
+    const items = screen.getAllByText(/hello!|world!/i)
     expect(items).toHaveLength(2)
-    expect(items[0]).toHaveTextContent('hello!')
+    expect.element(items[0]).toHaveTextContent('hello!')
   })
 
   it('should use divider slot', () => {
-    const { getByText } = render(
+    render(() => (
       <VBreadcrumbs items={['hello', 'world']}>
         {{
           divider: () => '-',
         }}
-      </VBreadcrumbs>,
-      {
-        global: {
-          plugins: [vuetify],
-        },
-      },
-    )
+      </VBreadcrumbs>
+    ))
 
-    expect(getByText('-')).toBeTruthy()
+    expect(screen.getByText('-')).toBeTruthy()
   })
 
   it('should use bg-color', () => {
-    const { container } = render(
-      <VBreadcrumbs
-        items={['hello', 'world']}
-        bgColor="primary"
-      ></VBreadcrumbs>,
-
-      {
-        global: {
-          plugins: [vuetify],
-        },
-      },
-    )
-    expect(container.querySelector('.v-breadcrumbs')).toHaveClass('bg-primary')
+    render(() => (
+      <VBreadcrumbs items={['hello', 'world']} bgColor="primary"></VBreadcrumbs>
+    ))
+    expect(screen.getByCSS('.v-breadcrumbs')).toHaveClass('bg-primary')
   })
 
   it('should use color', () => {
-    const { container } = render(
-      <VBreadcrumbs items={['hello', 'world']} color="primary"></VBreadcrumbs>,
+    render(() => (
+      <VBreadcrumbs items={['hello', 'world']} color="primary"></VBreadcrumbs>
+    ))
 
-      {
-        global: {
-          plugins: [vuetify],
-        },
-      },
-    )
-    const items = container.querySelectorAll('.v-breadcrumbs-item')
+    const items = screen.getAllByCSS('.v-breadcrumbs-item')
     items.forEach(item => expect(item).toHaveClass('text-primary'))
   })
 
   it('should render link if href is set', () => {
-    const { container } = render(
+    render(() => (
       <VBreadcrumbs
         items={[
           { title: 'hello', href: '/hello' },
           { title: 'world', href: '/world' },
         ]}
-      ></VBreadcrumbs>,
+      ></VBreadcrumbs>
+    ))
 
-      {
-        global: {
-          plugins: [vuetify],
-        },
-      },
-    )
-    const links = container.querySelectorAll('a.v-breadcrumbs-item--link')
+    const links = screen.getAllByCSS('a.v-breadcrumbs-item--link')
     links.forEach(link => expect(link).toHaveAttribute('href'))
   })
 
   it('should apply active color', async () => {
-    const { container } = render(
-      {
-        components: {
-          VBreadcrumbs,
-          VBreadcrumbsItem,
-        },
-        template: `
-          <VBreadcrumbs active-color="primary">
-            <VBreadcrumbsItem active text="hello"></VBreadcrumbsItem>
-            <VBreadcrumbsItem text="world" to="/world"></VBreadcrumbsItem>
-          </VBreadcrumbs>
-        `,
-      },
-      {
-        global: { plugins: [vuetify] },
-      },
-    )
-
+    render(() => (
+      <VBreadcrumbs active-color="primary">
+      <VBreadcrumbsItem active text="hello"></VBreadcrumbsItem>
+      <VBreadcrumbsItem text="world" to="/world"></VBreadcrumbsItem>
+    </VBreadcrumbs>
+    ))
     // Initial check for the active color class
     expect(
-      container.querySelector('.v-breadcrumbs-item.text-primary'),
+      screen.getByCSS('.v-breadcrumbs-item.text-primary'),
     ).toBeTruthy()
 
-    const items = container.querySelectorAll('.v-breadcrumbs-item')
-    expect(items[0]).toHaveClass('text-primary')
+    const items = screen.getAllByCSS('.v-breadcrumbs-item')
+    expect.element(items[0]).toHaveClass('text-primary')
   })
   it('should disable last item by default if using items prop', () => {
-    const { container } = render(
-      <VBreadcrumbs items={['foo', 'bar']}></VBreadcrumbs>,
+    render(() => (
+      <VBreadcrumbs items={['foo', 'bar']}></VBreadcrumbs>
 
-      {
-        global: {
-          plugins: [vuetify],
-        },
-      },
-    )
-    const lastItem = container.querySelector('.v-breadcrumbs-item:last-child')
-    expect(lastItem).toHaveClass('v-breadcrumbs-item--disabled')
+    ))
+    const lastItem = screen.getByCSS('.v-breadcrumbs-item:last-child')
+    expect.element(lastItem).toHaveClass('v-breadcrumbs-item--disabled')
   })
 
   it('should override last item disabled by default', () => {
-    const { container } = render(
+    render(() => (
       <VBreadcrumbs
         items={['foo', { title: 'bar', disabled: false }]}
-      ></VBreadcrumbs>,
-
-      {
-        global: {
-          plugins: [vuetify],
-        },
-      },
-    )
-    const lastItem = container.querySelector('.v-breadcrumbs-item:last-child')
-    expect(lastItem).not.toHaveClass('v-breadcrumbs-item--disabled')
+      ></VBreadcrumbs>
+    ))
+    const lastItem = screen.getByCSS('.v-breadcrumbs-item:last-child')
+    expect.element(lastItem).not.toHaveClass('v-breadcrumbs-item--disabled')
   })
 
   it('should provide default divider', () => {
-    const { getByText } = render(
+    render(() => (
       <VBreadcrumbs>
         <VBreadcrumbsItem title="foo"></VBreadcrumbsItem>
         <VBreadcrumbsDivider></VBreadcrumbsDivider>
         <VBreadcrumbsItem title="bar"></VBreadcrumbsItem>
         <VBreadcrumbsDivider divider="-"></VBreadcrumbsDivider>
         <VBreadcrumbsItem title="fizz"></VBreadcrumbsItem>
-      </VBreadcrumbs>,
-      {
-        global: {
-          plugins: [vuetify],
-        },
-      },
-    )
-    expect(getByText('/')).toBeTruthy()
-    expect(getByText('-')).toBeTruthy()
+      </VBreadcrumbs>
+    ))
+    expect(screen.getByText('/')).toBeTruthy()
+    expect(screen.getByText('-')).toBeTruthy()
   })
 })

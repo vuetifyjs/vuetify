@@ -1,75 +1,52 @@
 // Components
 import { VBottomSheet } from '..'
-import { createVuetify } from '@/framework'
 
 // Utilities
-import { render } from '@testing-library/vue'
-import { nextTick } from 'vue'
-
-const vuetify = createVuetify()
+import { render, screen } from '@test'
+import { ref } from 'vue'
 
 describe('VBottomSheet', () => {
   it('renders properly with default props', async () => {
-    render(
-          <VBottomSheet model-value>
-            <div>Content inside bottom sheet</div>
-          </VBottomSheet>,
-          {
-            global: {
-              plugins: [vuetify],
-            },
-          }
-    )
+    render(() => (
+      <VBottomSheet model-value>
+        <div>Content inside bottom sheet</div>
+      </VBottomSheet>
+    ))
 
-    await nextTick()
-
-    const bottomSheet = document.body.querySelector('.v-bottom-sheet')
-
-    expect(bottomSheet).toBeTruthy()
-    expect(bottomSheet).not.toHaveClass('v-bottom-sheet--inset')
-
-    expect(bottomSheet).toHaveTextContent('Content inside bottom sheet')
+    const bottomSheet = screen.getByCSS('.v-bottom-sheet')
+    expect.element(bottomSheet).toBeTruthy()
+    expect.element(bottomSheet).not.toHaveClass('v-bottom-sheet--inset')
+    expect
+      .element(bottomSheet)
+      .toHaveTextContent('Content inside bottom sheet')
   })
 
   it('applies inset class when inset prop is true', async () => {
-    const { rerender } = render(
-      <VBottomSheet model-value inset={ false }>
+    const inset = ref<boolean>(false)
+
+    render(() => (
+      <VBottomSheet model-value inset={ inset.value }>
         <div>Content inside bottom sheet</div>
-      </VBottomSheet>,
-      {
-        global: {
-          plugins: [vuetify],
-        },
-        props: { inset: false },
-      }
-    )
+      </VBottomSheet>
+    ))
 
-    await nextTick()
-    const bottomSheet = document.body.querySelector('.v-bottom-sheet')
+    const bottomSheet = screen.getByCSS('.v-bottom-sheet')
 
-    expect(bottomSheet).not.toHaveClass('v-bottom-sheet--inset')
+    expect.element(bottomSheet).not.toHaveClass('v-bottom-sheet--inset')
 
-    await rerender({ inset: true })
-    await nextTick()
+    inset.value = true
 
-    expect(bottomSheet).toHaveClass('v-bottom-sheet--inset')
+    expect.element(bottomSheet).toHaveClass('v-bottom-sheet--inset')
   })
 
   it('applies custom styles and classes', async () => {
-    render(
+    render(() => (
       <VBottomSheet model-value class="custom-class" style="color: red;">
         <div>Custom styles</div>
-      </VBottomSheet>,
-      {
-        global: {
-          plugins: [vuetify],
-        },
-      }
-    )
-
-    await nextTick()
-    const bottomSheet = document.body.querySelector('.v-bottom-sheet')
-    expect(bottomSheet).toHaveClass('custom-class')
-    expect(bottomSheet).toHaveStyle({ color: 'rgb(255, 0, 0)' })
+      </VBottomSheet>
+    ))
+    const bottomSheet = screen.getByCSS('.v-bottom-sheet')
+    expect.element(bottomSheet).toHaveClass('custom-class')
+    expect.element(bottomSheet).toHaveStyle({ color: 'rgb(255, 0, 0)' })
   })
 })
