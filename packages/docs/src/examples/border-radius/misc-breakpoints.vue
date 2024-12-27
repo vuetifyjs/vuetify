@@ -5,7 +5,7 @@
       width="300px"
     >
       <v-card-text>
-        Adjust screen size to see border radius changes 
+        Adjust screen size to see border radius changes
       </v-card-text>
     </v-card>
   </div>
