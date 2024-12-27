@@ -366,46 +366,55 @@ $utilities: () !default;
 
       // Border radius
       "rounded": (
+        responsive: true,
         property: border-radius,
         class: rounded,
         values: variables.$rounded
       ),
       "rounded-top": (
+        responsive: true,
         property: border-top-left-radius border-top-right-radius,
         class: rounded-t,
         values: variables.$rounded
       ),
       "rounded-end": (
+        responsive: true,
         property: (ltr: border-top-right-radius border-bottom-right-radius, rtl: border-top-left-radius border-bottom-left-radius),
         class: rounded-e,
         values: variables.$rounded
       ),
       "rounded-bottom": (
+        responsive: true,
         property: border-bottom-left-radius border-bottom-right-radius,
         class: rounded-b,
         values: variables.$rounded
       ),
       "rounded-start": (
+        responsive: true,
         property: (ltr: border-top-left-radius border-bottom-left-radius, rtl: border-top-right-radius border-bottom-right-radius),
         class: rounded-s,
         values: variables.$rounded
       ),
       "rounded-top-start": (
+        responsive: true,
         property: (ltr: border-top-left-radius, rtl: border-top-right-radius),
         class: rounded-ts,
         values: variables.$rounded
       ),
       "rounded-top-end": (
+        responsive: true,
         property: (ltr: border-top-right-radius, rtl: border-top-left-radius),
         class: rounded-te,
         values: variables.$rounded
       ),
       "rounded-bottom-end": (
+        responsive: true,
         property: (ltr: border-bottom-right-radius, rtl: border-bottom-left-radius),
         class: rounded-be,
         values: variables.$rounded
       ),
       "rounded-bottom-start": (
+        responsive: true,
         property: (ltr: border-bottom-left-radius, rtl: border-bottom-right-radius),
         class: rounded-bs,
         values: variables.$rounded

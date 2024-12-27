@@ -140,6 +140,12 @@ Setting the **rounded** property applies a component specific border-radius clas
 
 <ExamplesExample file="border-radius/misc-components" />
 
+### Breakpoints
+
+The `border-radius` utilities supports responsive breakpoints as seen in the other parts of the framework. The base class `.rounded-{value}` corresponds to the `xs` breakpoint, while the classes `.rounded-{breakpoint}-{value}` can be used for the rest of the breakpoints (`sm`, `md`, `lg`, `xl`).
+
+<ExamplesExample file="border-radius/misc-breakpoints" />
+
 ## SASS variables
 
 You can also use the following SASS variables to customize the border color and width:
@@ -163,3 +169,4 @@ Disable border-radius class generation by setting the $rounded variable to **fal
   $rounded: false
 );
 ```
+
