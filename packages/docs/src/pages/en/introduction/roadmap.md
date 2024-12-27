@@ -31,6 +31,7 @@ The following is a list of all planned components for the year 2024.
 | [v-treeview](/components/treeview/)                                     | *              |                                     |
 | [v-stepper-vertical](/components/vertical-steppers/)                    | *              |                                     |
 | [v4.0 (Revisionist)](https://github.com/vuetifyjs/vuetify/milestone/62) |                | TBA { .bg-surface-light } |
+| [v-color-input](/components/color-inputs/)                              |                |                                     |
 | [v-date-input](/components/date-inputs/)                                | *              |                                     |
 | [v-calendar](/components/calendars/)                                    | *              |                                     |
 | [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709)         | September 2024 |                                     |

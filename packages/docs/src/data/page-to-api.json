@@ -75,6 +75,7 @@
   "components/data-tables/virtual-tables": [
     "VDataTableVirtual"
   ],
+  "components/color-inputs": ["VColorInput", "VColorPicker"],
   "components/date-inputs": ["VDateInput", "VDatePicker"],
   "components/date-pickers-month": ["VDatePicker"],
   "components/date-pickers": ["VDatePicker", "VDateInput"],
