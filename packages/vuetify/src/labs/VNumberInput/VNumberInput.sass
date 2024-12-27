@@ -14,9 +14,13 @@
       &::-webkit-inner-spin-button
         -webkit-appearance: none
 
-    .v-field
-      padding-inline-end: 0
-      padding-inline-start: 0
+    &:not(&--append-inner-slot)
+      .v-field
+        padding-inline-end: 0
+
+    &:not(&--prepend-inner-slot)
+      .v-field
+        padding-inline-start: 0
 
     &--inset
       .v-divider
