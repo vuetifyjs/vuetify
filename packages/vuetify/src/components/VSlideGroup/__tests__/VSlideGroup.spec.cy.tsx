@@ -8,6 +8,7 @@ import { VCard } from '@/components/VCard'
 
 // Utilities
 import { createRange } from '@/util'
+import { VBtn } from '../../VBtn'
 
 describe('VSlideGroup', () => {
   it('should support default scoped slot with selection', () => {
@@ -251,5 +252,25 @@ describe('VSlideGroup', () => {
     cy.get('.v-slide-group__next').click().click()
 
     cy.get('.item-7').should('exist').should('be.visible')
+  })
+
+  it('Skip disabled elements when moving focus', () => {
+    cy.mount(() => (
+      <Application>
+        <VSlideGroup selectedClass="bg-primary">
+          { createRange(5).map(i => (
+            <VSlideGroupItem key={ i }>
+              { () => <VBtn class={[`btn${i}`]} disabled={ i === 2 || i === 3 }>{ i }</VBtn> }
+            </VSlideGroupItem>
+          ))}
+        </VSlideGroup>
+      </Application>
+    ))
+
+    cy.get('.btn0').focus().type('{rightArrow}{rightArrow}')
+    cy.focused().should('have.class', 'btn4')
+
+    cy.focused().type('{leftArrow}')
+    cy.focused().should('have.class', 'btn1')
   })
 })

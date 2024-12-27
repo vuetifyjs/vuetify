@@ -279,6 +279,16 @@ export const VSlideGroup = genericComponent<new <T>(
       }
     }
 
+    function getSiblingElement (el: HTMLElement | null, location: 'next' | 'prev') {
+      if (!el) return undefined
+      const find = (el: HTMLElement) => {
+        return el[location === 'next' ? 'nextElementSibling' : 'previousElementSibling'] as HTMLElement | undefined
+      }
+      let sibling = find(el)
+      while (sibling?.hasAttribute('disabled')) sibling = find(sibling)
+      return sibling
+    }
+
     function focus (location?: 'next' | 'prev' | 'first' | 'last') {
       if (!contentRef.el) return
 
@@ -288,11 +298,11 @@ export const VSlideGroup = genericComponent<new <T>(
         const focusable = focusableChildren(contentRef.el)
         el = focusable[0]
       } else if (location === 'next') {
-        el = contentRef.el.querySelector(':focus')?.nextElementSibling as HTMLElement | undefined
+        el = getSiblingElement(contentRef.el.querySelector(':focus'), location)
 
         if (!el) return focus('first')
       } else if (location === 'prev') {
-        el = contentRef.el.querySelector(':focus')?.previousElementSibling as HTMLElement | undefined
+        el = getSiblingElement(contentRef.el.querySelector(':focus'), location)
 
         if (!el) return focus('last')
       } else if (location === 'first') {
