@@ -265,10 +265,8 @@ export const VAutocomplete = genericComponent<new <
         ) return select(model.value[0], false)
 
         if (~selectionIndex.value) {
-          const originalSelectionIndex = selectionIndex.value
           select(model.value[selectionIndex.value], false)
-
-          selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
+          selectionIndex.value = -1
         } else if (e.key === 'Backspace' && !search.value) {
           selectionIndex.value = length - 1
         }
