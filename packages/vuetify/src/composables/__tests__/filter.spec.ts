@@ -3,7 +3,6 @@ import { defaultFilter, filterItems, useFilter } from '../filter'
 import { transformItem, transformItems } from '../list-items'
 
 // Utilities
-import { expect, it } from 'vitest'
 import { nextTick, ref } from 'vue'
 import { deepEqual } from '@/util'
 

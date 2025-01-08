@@ -1,5 +1,4 @@
 // Utilities
-import { describe, expect, it, vi } from 'vitest'
 import { isProxy, isRef, ref } from 'vue'
 import {
   arrayDiff,

@@ -130,6 +130,6 @@ Lists can contain subheaders, dividers, and can contain 1 or more lines. The sub
 
 #### Action and item groups
 
-A **three-line** list with actions. Utilizing **v-list-group**, easily connect actions to your tiles.
+A **three-line** list with actions. Utilizing **select-strategy**, easily connect actions to your tiles.
 
-<ExamplesExample file="v-list/misc-action-and-item-groups" />
+<ExamplesExample file="v-list/misc-actions" />

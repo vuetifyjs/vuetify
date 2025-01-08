@@ -24,13 +24,13 @@ The following is a list of all planned components for the year 2024.
 
 | Component                                                               | Entering Labs  | Production Release                  |
 |-------------------------------------------------------------------------|----------------|-------------------------------------|
-| [v3.8 (Andromeda)](https://github.com/vuetifyjs/vuetify/milestone/74)   |                | October 2024 { .bg-surface-light }  |
+| [v3.8 (Andromeda)](https://github.com/vuetifyjs/vuetify/milestone/74)   |                | Q4 2024 { .bg-surface-light }  |
 | [v-number-input](/components/number-inputs/)                            | *              |                                     |
 | [v-snackbar-queue](/components/snackbar-queue/)                         | *              |                                     |
 | [v-time-picker](/components/time-pickers/)                              | *              |                                     |
 | [v-treeview](/components/treeview/)                                     | *              |                                     |
 | [v-stepper-vertical](/components/vertical-steppers/)                    | *              |                                     |
-| [v4.0 (Revisionist)](https://github.com/vuetifyjs/vuetify/milestone/62) |                | December 2024 { .bg-surface-light } |
+| [v4.0 (Revisionist)](https://github.com/vuetifyjs/vuetify/milestone/62) |                | TBA { .bg-surface-light } |
 | [v-date-input](/components/date-inputs/)                                | *              |                                     |
 | [v-calendar](/components/calendars/)                                    | *              |                                     |
 | [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709)         | September 2024 |                                     |

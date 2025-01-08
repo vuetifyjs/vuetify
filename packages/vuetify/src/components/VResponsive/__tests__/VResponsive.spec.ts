@@ -3,7 +3,6 @@ import { VResponsive } from '..'
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { expect, it } from 'vitest'
 import { h } from 'vue'
 import { createVuetify } from '@/framework'
 

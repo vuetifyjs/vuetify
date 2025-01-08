@@ -12,18 +12,32 @@ module.exports = {
           node.source.value === 'vitest'
         ))
 
-        if (!vitestGlobalsImport) {
+        if (!vitestGlobalsImport) return
+
+        const badNodes = vitestGlobalsImport.specifiers.filter(node => (
+          ['afterAll', 'afterEach', 'assert', 'beforeAll', 'beforeEach', 'describe', 'expect', 'it', 'vi']
+            .includes(node.imported.name)
+        ))
+
+        if (badNodes.length === vitestGlobalsImport.specifiers.length) {
           context.report({
-            loc: {
-              start: { line: 0, column: 0 },
-              end: { line: 0, column: 0 },
-            },
-            message: 'Missing vitest import',
+            node: vitestGlobalsImport,
+            message: 'Extraneous vitest imports',
             fix (fixer) {
-              const firstImport = node.body.find(node => node.type === 'ImportDeclaration')
-              return fixer.insertTextBefore(firstImport || node, `import { expect, it } from 'vitest'\n`)
+              const range = vitestGlobalsImport.range
+              return fixer.removeRange([range[0], range[1] + 1])
             },
           })
+        } else {
+          for (const node of badNodes) {
+            context.report({
+              node,
+              message: 'Extraneous vitest import',
+              fix (fixer) {
+                return fixer.remove(node)
+              },
+            })
+          }
         }
       },
     }

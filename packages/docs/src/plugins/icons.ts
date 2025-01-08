@@ -349,6 +349,7 @@ export {
   mdiStarCircleOutline,
   mdiStarHalfFull,
   mdiStarOutline,
+  mdiStorefrontOutline,
   mdiStoreOutline,
   mdiSvg,
   mdiTable,

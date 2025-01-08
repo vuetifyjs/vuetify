@@ -14,7 +14,7 @@ import { useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeMount, ref, watch } from 'vue'
 import { extractColor, modes, nullColor } from './util'
 import { consoleWarn, defineComponent, HSVtoCSS, omit, parseColor, propsFactory, RGBtoHSV, useRender } from '@/util'
 
@@ -125,7 +125,7 @@ export const VColorPicker = defineComponent({
       model.value = hsva
     }
 
-    onMounted(() => {
+    onBeforeMount(() => {
       if (!props.modes.includes(mode.value)) mode.value = props.modes[0]
     })
 

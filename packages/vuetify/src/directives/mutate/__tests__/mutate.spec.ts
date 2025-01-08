@@ -2,7 +2,6 @@
 import Mutate from '..'
 
 // Utilities
-import { expect, it } from 'vitest'
 
 // Utilities
 

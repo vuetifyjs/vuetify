@@ -5,7 +5,6 @@ import { sortItems as _sortItems } from '../composables/sort'
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { expect, it } from 'vitest'
 
 // Types
 import type { SortItem } from '../composables/sort'

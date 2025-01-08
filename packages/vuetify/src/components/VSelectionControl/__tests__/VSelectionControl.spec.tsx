@@ -3,7 +3,6 @@ import { makeVSelectionControlProps, useSelectionControl } from '../VSelectionCo
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { describe, expect, it, vi } from 'vitest'
 import { defineComponent, nextTick } from 'vue'
 import { createVuetify } from '@/framework'
 

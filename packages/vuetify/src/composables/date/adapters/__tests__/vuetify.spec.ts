@@ -1,6 +1,5 @@
 // Utilities
 import timezoneMock from 'timezone-mock'
-import { expect, it } from 'vitest'
 import { VuetifyDateAdapter } from '../vuetify'
 
 // Types

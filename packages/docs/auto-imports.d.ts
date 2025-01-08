@@ -14,13 +14,16 @@ declare global {
   const PropType: typeof import('vue')['PropType']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const anyLanguagePattern: typeof import('./src/utils/routes')['anyLanguagePattern']
+  const cacheManifestEntries: typeof import('./src/utils/pwa')['cacheManifestEntries']
   const camelCase: typeof import('lodash-es')['camelCase']
   const camelize: typeof import('vue')['camelize']
+  const cleanCache: typeof import('./src/utils/pwa')['cleanCache']
   const computed: typeof import('vue')['computed']
   const configureMarkdown: typeof import('./src/utils/markdown-it')['configureMarkdown']
   const copyElementContent: typeof import('./src/utils/helpers')['copyElementContent']
   const createAdProps: typeof import('./src/composables/ad')['createAdProps']
   const createApp: typeof import('vue')['createApp']
+  const createCacheKey: typeof import('./src/utils/pwa')['createCacheKey']
   const createOne: typeof import('@vuetify/one')['createOne']
   const createPinia: typeof import('pinia')['createPinia']
   const customRef: typeof import('vue')['customRef']
@@ -29,12 +32,14 @@ declare global {
   const defineStore: typeof import('pinia')['defineStore']
   const disabledLanguagePattern: typeof import('./src/utils/routes')['disabledLanguagePattern']
   const effectScope: typeof import('vue')['effectScope']
+  const ensureCacheableResponse: typeof import('./src/utils/pwa')['ensureCacheableResponse']
   const eventName: typeof import('./src/utils/helpers')['eventName']
   const genAppMetaInfo: typeof import('./src/utils/metadata')['genAppMetaInfo']
   const genMetaInfo: typeof import('./src/utils/metadata')['genMetaInfo']
   const generatedRoutes: typeof import('./src/utils/routes')['generatedRoutes']
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getBranch: typeof import('./src/utils/helpers')['getBranch']
+  const getCacheKeyForUrl: typeof import('./src/utils/pwa')['getCacheKeyForUrl']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const getDistance: typeof import('./src/utils/helpers')['getDistance']
@@ -58,7 +63,9 @@ declare global {
   const mapWritableState: typeof import('pinia')['mapWritableState']
   const markRaw: typeof import('vue')['markRaw']
   const markdownItRules: typeof import('./src/utils/markdown-it-rules')['default']
+  const matchPrecache: typeof import('./src/utils/pwa')['matchPrecache']
   const mergeProps: typeof import('vue')['mergeProps']
+  const messageSW: typeof import('./src/utils/pwa')['messageSW']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']
   const onBeforeMount: typeof import('vue')['onBeforeMount']
@@ -76,9 +83,11 @@ declare global {
   const onServerPrefetch: typeof import('vue')['onServerPrefetch']
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
+  const openCache: typeof import('./src/utils/pwa')['openCache']
   const preferredLocale: typeof import('./src/utils/routes')['preferredLocale']
   const propsToString: typeof import('./src/utils/helpers')['propsToString']
   const provide: typeof import('vue')['provide']
+  const pwaStore: typeof import('./src/stores/pwa')['pwaStore']
   const reactive: typeof import('vue')['reactive']
   const readonly: typeof import('vue')['readonly']
   const redirectRoutes: typeof import('./src/utils/routes')['redirectRoutes']
@@ -125,6 +134,7 @@ declare global {
   const usePlayground: typeof import('./src/composables/playground')['usePlayground']
   const useProductsStore: typeof import('@vuetify/one')['useProductsStore']
   const usePromotionsStore: typeof import('./src/stores/promotions')['usePromotionsStore']
+  const usePwaStore: typeof import('./src/stores/pwa')['usePwaStore']
   const useQueueStore: typeof import('@vuetify/one')['useQueueStore']
   const useReleasesStore: typeof import('./src/stores/releases')['useReleasesStore']
   const useRoute: typeof import('vue-router')['useRoute']
@@ -164,8 +174,10 @@ declare module 'vue' {
     readonly IS_SERVER: UnwrapRef<typeof import('./src/utils/globals')['IS_SERVER']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly anyLanguagePattern: UnwrapRef<typeof import('./src/utils/routes')['anyLanguagePattern']>
+    readonly cacheManifestEntries: UnwrapRef<typeof import('./src/utils/pwa')['cacheManifestEntries']>
     readonly camelCase: UnwrapRef<typeof import('lodash-es')['camelCase']>
     readonly camelize: UnwrapRef<typeof import('vue')['camelize']>
+    readonly cleanCache: UnwrapRef<typeof import('./src/utils/pwa')['cleanCache']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly configureMarkdown: UnwrapRef<typeof import('./src/utils/markdown-it')['configureMarkdown']>
     readonly copyElementContent: UnwrapRef<typeof import('./src/utils/helpers')['copyElementContent']>
@@ -179,6 +191,7 @@ declare module 'vue' {
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
     readonly disabledLanguagePattern: UnwrapRef<typeof import('./src/utils/routes')['disabledLanguagePattern']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly ensureCacheableResponse: UnwrapRef<typeof import('./src/utils/pwa')['ensureCacheableResponse']>
     readonly eventName: UnwrapRef<typeof import('./src/utils/helpers')['eventName']>
     readonly genAppMetaInfo: UnwrapRef<typeof import('./src/utils/metadata')['genAppMetaInfo']>
     readonly genMetaInfo: UnwrapRef<typeof import('./src/utils/metadata')['genMetaInfo']>
@@ -209,6 +222,7 @@ declare module 'vue' {
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly markdownItRules: UnwrapRef<typeof import('./src/utils/markdown-it-rules')['default']>
     readonly mergeProps: UnwrapRef<typeof import('vue')['mergeProps']>
+    readonly messageSW: UnwrapRef<typeof import('./src/utils/pwa')['messageSW']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>
@@ -225,6 +239,7 @@ declare module 'vue' {
     readonly onServerPrefetch: UnwrapRef<typeof import('vue')['onServerPrefetch']>
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
+    readonly openCache: UnwrapRef<typeof import('./src/utils/pwa')['openCache']>
     readonly preferredLocale: UnwrapRef<typeof import('./src/utils/routes')['preferredLocale']>
     readonly propsToString: UnwrapRef<typeof import('./src/utils/helpers')['propsToString']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
@@ -274,6 +289,7 @@ declare module 'vue' {
     readonly usePlayground: UnwrapRef<typeof import('./src/composables/playground')['usePlayground']>
     readonly useProductsStore: UnwrapRef<typeof import('@vuetify/one')['useProductsStore']>
     readonly usePromotionsStore: UnwrapRef<typeof import('./src/stores/promotions')['usePromotionsStore']>
+    readonly usePwaStore: UnwrapRef<typeof import('./src/stores/pwa')['usePwaStore']>
     readonly useQueueStore: UnwrapRef<typeof import('@vuetify/one')['useQueueStore']>
     readonly useReleasesStore: UnwrapRef<typeof import('./src/stores/releases')['useReleasesStore']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
@@ -306,8 +322,10 @@ declare module '@vue/runtime-core' {
     readonly IS_SERVER: UnwrapRef<typeof import('./src/utils/globals')['IS_SERVER']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly anyLanguagePattern: UnwrapRef<typeof import('./src/utils/routes')['anyLanguagePattern']>
+    readonly cacheManifestEntries: UnwrapRef<typeof import('./src/utils/pwa')['cacheManifestEntries']>
     readonly camelCase: UnwrapRef<typeof import('lodash-es')['camelCase']>
     readonly camelize: UnwrapRef<typeof import('vue')['camelize']>
+    readonly cleanCache: UnwrapRef<typeof import('./src/utils/pwa')['cleanCache']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly configureMarkdown: UnwrapRef<typeof import('./src/utils/markdown-it')['configureMarkdown']>
     readonly copyElementContent: UnwrapRef<typeof import('./src/utils/helpers')['copyElementContent']>
@@ -321,6 +339,7 @@ declare module '@vue/runtime-core' {
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
     readonly disabledLanguagePattern: UnwrapRef<typeof import('./src/utils/routes')['disabledLanguagePattern']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly ensureCacheableResponse: UnwrapRef<typeof import('./src/utils/pwa')['ensureCacheableResponse']>
     readonly eventName: UnwrapRef<typeof import('./src/utils/helpers')['eventName']>
     readonly genAppMetaInfo: UnwrapRef<typeof import('./src/utils/metadata')['genAppMetaInfo']>
     readonly genMetaInfo: UnwrapRef<typeof import('./src/utils/metadata')['genMetaInfo']>
@@ -351,6 +370,7 @@ declare module '@vue/runtime-core' {
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly markdownItRules: UnwrapRef<typeof import('./src/utils/markdown-it-rules')['default']>
     readonly mergeProps: UnwrapRef<typeof import('vue')['mergeProps']>
+    readonly messageSW: UnwrapRef<typeof import('./src/utils/pwa')['messageSW']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>
@@ -367,6 +387,7 @@ declare module '@vue/runtime-core' {
     readonly onServerPrefetch: UnwrapRef<typeof import('vue')['onServerPrefetch']>
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
+    readonly openCache: UnwrapRef<typeof import('./src/utils/pwa')['openCache']>
     readonly preferredLocale: UnwrapRef<typeof import('./src/utils/routes')['preferredLocale']>
     readonly propsToString: UnwrapRef<typeof import('./src/utils/helpers')['propsToString']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
@@ -416,6 +437,7 @@ declare module '@vue/runtime-core' {
     readonly usePlayground: UnwrapRef<typeof import('./src/composables/playground')['usePlayground']>
     readonly useProductsStore: UnwrapRef<typeof import('@vuetify/one')['useProductsStore']>
     readonly usePromotionsStore: UnwrapRef<typeof import('./src/stores/promotions')['usePromotionsStore']>
+    readonly usePwaStore: UnwrapRef<typeof import('./src/stores/pwa')['usePwaStore']>
     readonly useQueueStore: UnwrapRef<typeof import('@vuetify/one')['useQueueStore']>
     readonly useReleasesStore: UnwrapRef<typeof import('./src/stores/releases')['useReleasesStore']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
