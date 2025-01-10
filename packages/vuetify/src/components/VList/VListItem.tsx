@@ -27,7 +27,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, watch } from 'vue'
+import { computed, onBeforeMount, watch } from 'vue'
 import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -149,15 +149,21 @@ export const VListItem = genericComponent<VListItemSlots>()({
       variant: props.variant,
     }))
 
+    // useNestedItem doesn't call register until beforeMount,
+    // so this can't be an immediate watcher as we don't know parent yet
     watch(() => link.isActive?.value, val => {
-      if (val && parent.value != null) {
+      if (!val) return
+      handleActiveLink()
+    })
+    onBeforeMount(() => {
+      if (link.isActive?.value) handleActiveLink()
+    })
+    function handleActiveLink () {
+      if (parent.value != null) {
         root.open(parent.value, true)
       }
-
-      if (val) {
-        openOnSelect(val)
-      }
-    }, { immediate: true })
+      openOnSelect(true)
+    }
 
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)

@@ -2,7 +2,17 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, provide, ref, shallowRef, toRaw, toRef } from 'vue'
+import {
+  computed,
+  inject,
+  onBeforeMount,
+  onBeforeUnmount,
+  provide,
+  ref,
+  shallowRef,
+  toRaw,
+  toRef,
+} from 'vue'
 import {
   independentActiveStrategy,
   independentSingleActiveStrategy,
@@ -334,7 +344,9 @@ export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
     isGroupActivator: parent.isGroupActivator,
   }
 
-  !parent.isGroupActivator && parent.root.register(computedId.value, parent.id.value, isGroup)
+  onBeforeMount(() => {
+    !parent.isGroupActivator && parent.root.register(computedId.value, parent.id.value, isGroup)
+  })
 
   onBeforeUnmount(() => {
     !parent.isGroupActivator && parent.root.unregister(computedId.value)

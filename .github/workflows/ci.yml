@@ -12,7 +12,7 @@ env:
 
 jobs:
   pre_job:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
@@ -28,7 +28,7 @@ jobs:
     name: Build vuetify
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: vuetifyjs/setup-action@master
@@ -44,7 +44,7 @@ jobs:
     name: Lint
     needs: [pre_job, build-vuetify]
     if: needs.pre_job.outputs.should_skip != 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -64,7 +64,7 @@ jobs:
     name: Test (Unit)
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: vuetifyjs/setup-action@master
@@ -75,7 +75,7 @@ jobs:
     name: Test (e2e)
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: vuetifyjs/setup-action@master
@@ -84,7 +84,7 @@ jobs:
 
   deploy:
     needs: [lint, test-unit, test-e2e, build-vuetify]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
     steps:
       - uses: actions/checkout@v4
@@ -113,7 +113,7 @@ jobs:
     name: Build docs
     needs: [pre_job, build-vuetify]
     if: needs.pre_job.outputs.should_skip != 'true' && github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
@@ -144,7 +144,7 @@ jobs:
 
   publish-docs:
     needs: [lint, test-unit, build-docs]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment: Production
     if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && github.ref == 'refs/heads/master'
     steps:
