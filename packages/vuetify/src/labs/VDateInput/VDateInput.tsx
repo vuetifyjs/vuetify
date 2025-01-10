@@ -15,13 +15,20 @@ import { computed, shallowRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
+import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
+
+// Types
 export interface VDateInputSlots {
   default: never
 }
 
 export const makeVDateInputProps = propsFactory({
   hideActions: Boolean,
-
+  location: {
+    type: String as PropType<StrategyProps['location']>,
+    default: 'bottom left',
+  },
   ...makeFocusProps(),
   ...makeVConfirmEditProps(),
   ...makeVTextFieldProps({
@@ -31,7 +38,7 @@ export const makeVDateInputProps = propsFactory({
   ...omit(makeVDatePickerProps({
     weeksInMonth: 'dynamic' as const,
     hideHeader: true,
-  }), ['active']),
+  }), ['active', 'location']),
 }, 'VDateInput')
 
 export const VDateInput = genericComponent()({
@@ -100,7 +107,7 @@ export const VDateInput = genericComponent()({
 
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
-      const datePickerProps = VDatePicker.filterProps(omit(props, ['active']))
+      const datePickerProps = VDatePicker.filterProps(omit(props, ['active', 'location']))
       const textFieldProps = VTextField.filterProps(props)
 
       return (
@@ -120,6 +127,7 @@ export const VDateInput = genericComponent()({
             v-model={ menu.value }
             activator="parent"
             min-width="0"
+            location={ props.location }
             closeOnContentClick={ false }
             openOnClick={ false }
           >
