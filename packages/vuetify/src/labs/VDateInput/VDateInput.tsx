@@ -15,8 +15,9 @@ import { computed, shallowRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
-export interface VDateInputSlots {
+export type VDateInputSlots = {
   default: never
+  actions: never
 }
 
 export const makeVDateInputProps = propsFactory({
@@ -34,7 +35,7 @@ export const makeVDateInputProps = propsFactory({
   }), ['active']),
 }, 'VDateInput')
 
-export const VDateInput = genericComponent()({
+export const VDateInput = genericComponent<VDateInputSlots>()({
   name: 'VDateInput',
 
   props: makeVDateInputProps(),
@@ -146,7 +147,12 @@ export const VDateInput = genericComponent()({
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                     >
                       {{
-                        actions: !props.hideActions ? actions : undefined,
+                        actions: () => {
+                          if (slots.actions) {
+                            return slots.actions()
+                          }
+                          return !props.hideActions ? actions() : undefined
+                        },
                       }}
                     </VDatePicker>
                   )
