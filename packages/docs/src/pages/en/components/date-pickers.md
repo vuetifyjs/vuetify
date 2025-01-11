@@ -94,6 +94,12 @@ Specify allowed dates using objects or functions. When using objects, accepts a 
 
 <ExamplesExample file="v-date-picker/prop-allowed-dates" />
 
+### Week selection
+
+You can capture date selection event to select entire week.
+
+<ExamplesExample file="v-date-picker/misc-week-selection" />
+
 ### Internationalization
 
 Vuetify components can localize date formats by utilizing the [i18n](/features/internationalization) feature. This determines the appropriate locale for date display. When the default date adapter is in use, localization is managed automatically.
