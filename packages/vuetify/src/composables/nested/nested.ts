@@ -2,7 +2,17 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, provide, ref, shallowRef, toRaw, toRef } from 'vue'
+import {
+  computed,
+  inject,
+  onBeforeMount,
+  onBeforeUnmount,
+  provide,
+  ref,
+  shallowRef,
+  toRaw,
+  toRef,
+} from 'vue'
 import {
   independentActiveStrategy,
   independentSingleActiveStrategy,
@@ -17,7 +27,7 @@ import {
   leafSelectStrategy,
   leafSingleSelectStrategy,
 } from './selectStrategies'
-import { consoleError, getCurrentInstance, getUid, propsFactory } from '@/util'
+import { consoleError, getCurrentInstance, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -315,7 +325,7 @@ export const useNested = (props: NestedProps) => {
 export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
   const parent = inject(VNestedSymbol, emptyNested)
 
-  const uidSymbol = Symbol(getUid())
+  const uidSymbol = Symbol('nested item')
   const computedId = computed(() => id.value !== undefined ? id.value : uidSymbol)
 
   const item = {
@@ -334,7 +344,9 @@ export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
     isGroupActivator: parent.isGroupActivator,
   }
 
-  !parent.isGroupActivator && parent.root.register(computedId.value, parent.id.value, isGroup)
+  onBeforeMount(() => {
+    !parent.isGroupActivator && parent.root.register(computedId.value, parent.id.value, isGroup)
+  })
 
   onBeforeUnmount(() => {
     !parent.isGroupActivator && parent.root.unregister(computedId.value)

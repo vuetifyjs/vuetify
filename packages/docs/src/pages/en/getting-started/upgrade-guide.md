@@ -201,6 +201,14 @@ app.use(vuetify)
 - `v-subheader`  has been renamed to `v-list-subheader`.
 - `v-list-item`'s `active` scoped slot prop has been renamed to `isActive`
 
+### v-menu/v-tooltip
+
+- `rounded` prop has been removed. Apply a rounded css class to the menu content element instead. e.g. `.rounded-te`
+- `internal-activator` prop has been removed, use `activator` with a ref or unique selector instead.
+- `absolute`, `offset-y` and `offset-x` props have been removed. Manual positioning is now done by passing a `[x, y]` array to the `target` prop.
+- `nudge-*` props have been removed. There is no direct replacement but `offset` can be used to achieve similar results.
+- Content is now destroyed after closing, use `eager` to keep it.
+
 ### v-navigation-drawer
 
 - `stateless` prop has been removed, manually control state using `model-value` or `v-model` instead.
@@ -269,13 +277,6 @@ app.use(vuetify)
 ### v-img
 
 - `contain` has been removed and is now the default behaviour. Use `cover` to fill the entire container.
-
-### v-menu
-
-- `rounded` prop has been removed. Apply a rounded css class to the menu content element instead. e.g. `.rounded-te`
-- `internal-activator` prop has been removed, use a ref or unique selector instead.
-- `absolute`, `offset-y` and `offset-x` props have been removed. Manual positioning is now done by passing a `[x, y]` array to the `target` prop.
-- `nudge-*` props have been removed. There is no direct replacement but `offset` can be used to achieve similar results.
 
 ### v-snackbar
 

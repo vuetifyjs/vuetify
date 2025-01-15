@@ -79,7 +79,7 @@ describe('VConfirmEdit', () => {
     it('render actions', () => {
       render(() => (
         <VConfirmEdit>
-          { ({ actions }) => actions }
+          { ({ actions }) => actions() }
         </VConfirmEdit>
       ))
       expect(screen.getAllByCSS('button')).toHaveLength(2)

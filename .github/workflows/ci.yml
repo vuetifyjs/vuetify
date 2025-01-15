@@ -12,7 +12,7 @@ env:
 
 jobs:
   pre_job:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
@@ -28,15 +28,15 @@ jobs:
     name: Build vuetify
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/pnpm-install
+      - uses: vuetifyjs/setup-action@master
       - run: pnpm build vuetify
-      - uses: ./.github/actions/upload-artifact
+      - uses: actions/upload-artifact@v4
         with:
           name: vuetify-dist
-          path: >
+          path: |
             packages/vuetify/dist
             packages/vuetify/lib
 
@@ -44,17 +44,18 @@ jobs:
     name: Lint
     needs: [pre_job, build-vuetify]
     if: needs.pre_job.outputs.should_skip != 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
         scopes: ['--scope vuetify --scope @vuetify/api-generator', '--scope vuetifyjs.com']
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/download-artifact
+      - uses: actions/download-artifact@v4
         with:
           name: vuetify-dist
-      - uses: ./.github/actions/pnpm-install
+          path: packages/vuetify
+      - uses: vuetifyjs/setup-action@master
       - run: pnpm lerna run lint $SCOPES
         env:
           SCOPES: ${{ matrix.scopes }}
@@ -63,10 +64,10 @@ jobs:
     name: Test (Unit)
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/pnpm-install
+      - uses: vuetifyjs/setup-action@master
       - run: pnpm run test --project unit
         working-directory: ./packages/vuetify
 
@@ -74,25 +75,26 @@ jobs:
     name: Test (e2e)
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/pnpm-install
+      - uses: vuetifyjs/setup-action@master
       - run: pnpm run test --project browser
         working-directory: ./packages/vuetify
 
   deploy:
     needs: [lint, test-unit, test-e2e, build-vuetify]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: ./.github/actions/download-artifact
+      - uses: actions/download-artifact@v4
         with:
           name: vuetify-dist
-      - uses: ./.github/actions/pnpm-install
+          path: packages/vuetify
+      - uses: vuetifyjs/setup-action@master
       - run: pnpm build api
       - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
       - name: NPM Release
@@ -111,13 +113,14 @@ jobs:
     name: Build docs
     needs: [pre_job, build-vuetify]
     if: needs.pre_job.outputs.should_skip != 'true' && github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/download-artifact
+      - uses: actions/download-artifact@v4
         with:
           name: vuetify-dist
-      - uses: ./.github/actions/pnpm-install
+          path: packages/vuetify
+      - uses: vuetifyjs/setup-action@master
       - uses: ./.github/actions/download-locales
       - run: pnpm build api
       - run: pnpm build docs
@@ -134,53 +137,25 @@ jobs:
           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
           VITE_API_SERVER_URL: ${{ secrets.API_SERVER_URL }}
           VITE_GITHUB_SHA: ${{ github.sha }}
-      - uses: ./.github/actions/upload-artifact
+      - uses: actions/upload-artifact@v4
         with:
           name: docs-dist
           path: packages/docs/dist
 
-  publish-docs-vercel:
+  publish-docs:
     needs: [lint, test-unit, build-docs]
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/download-artifact
-        with:
-          name: docs-dist
-      - uses: ./.github/actions/pnpm-install
-      - run: pnpm add vercel --global
-      - run: node scripts/deploy-and-alias.js ${{ github.ref }}
-        env:
-          NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
-
-  publish-docs-coolify:
-    needs: [lint, test-unit, build-docs]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment: Production
     if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/download-artifact
+      - uses: actions/download-artifact@v4
         with:
           name: docs-dist
-      - uses: docker/login-action@v3
+          path: packages/docs/dist
+      - uses: vuetifyjs/coolify-action@master
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN  }}
-      - id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ghcr.io/vuetifyjs/docs
-      - uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: Dockerfile
-          platforms: linux/amd64
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-      - name: Deploy to Coolify
-        run: |
-          curl --request GET '${{ secrets.COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'
+          token: ${{ secrets.GITHUB_TOKEN  }}
+          imageName: docs
+          coolifyWebhook: ${{ secrets.COOLIFY_WEBHOOK }}
+          coolifySecret: ${{ secrets.COOLIFY_TOKEN }}

@@ -2,7 +2,7 @@
   <v-badge color="success" offset-x="8" offset-y="8" dot>
     <AppBtn
       :to="rpath('/blog/')"
-      class="ms-1"
+      class="me-1"
       color="medium-emphasis"
       text="blog"
       variant="text"
