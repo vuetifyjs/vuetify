@@ -142,6 +142,7 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
             group?.selectedClass.value,
           ]}
           disabled={ !props.editable }
+          type="button"
           v-ripple={[
             props.ripple && props.editable,
             null,
