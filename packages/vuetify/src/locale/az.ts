@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'Tarixi daxil edin',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'Heç bir məlumat yoxdur.',
   carousel: {

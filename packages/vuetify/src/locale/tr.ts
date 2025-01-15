@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'Tarih girin',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'Bu görünümde veri yok.',
   carousel: {

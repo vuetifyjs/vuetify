@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'Introduceți data',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'Nu există date disponibile',
   carousel: {
