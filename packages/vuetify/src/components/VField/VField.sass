@@ -25,6 +25,7 @@
     --v-field-padding-end: #{$field-control-padding-end}
     --v-field-padding-top: #{$field-control-padding-top}
     --v-field-padding-bottom: #{$field-control-padding-bottom}
+    --v-field-padding-inline-end: #{$field-control-affixed-padding}
     --v-field-input-padding-top: #{$field-input-padding-top}
     --v-field-input-padding-bottom: #{$field-input-padding-bottom}
 
@@ -40,9 +41,6 @@
   .v-field
     &--prepended
       padding-inline-start: $field-control-affixed-padding
-
-    &--appended
-      padding-inline-end: $field-control-affixed-padding
 
     &--variant-solo,
     &--variant-solo-filled
@@ -96,6 +94,7 @@
       &.v-field
         --v-field-padding-start: 0px
         --v-field-padding-end: 0px
+        --v-field-padding-inline-end: 0px
 
       @at-root
         @include tools.density('v-input', $input-density) using ($modifier)
@@ -180,6 +179,9 @@
   .v-field__append-inner
     grid-area: append-inner
     padding-inline-start: var(--v-field-padding-after)
+    
+  .v-field__last-inner-suffix
+    padding-inline-end: var(--v-field-padding-inline-end)
 
   .v-field__append-inner,
   .v-field__clearable,

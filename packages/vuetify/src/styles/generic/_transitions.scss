@@ -132,7 +132,7 @@
 
     &-enter-active,
     &-leave-active {
-      transition-property: width !important;
+      transition-property: width, padding-inline !important;
     }
   }
 

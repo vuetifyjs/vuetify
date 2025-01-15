@@ -8,7 +8,9 @@ interface HTMLExpandElement extends HTMLElement {
     overflow: string
     height?: string | null
     width?: string | null
+    paddingInline: string
   }
+  _computedPadding?: string
 }
 
 export default function (expandedParentClass = '', x = false) {
@@ -22,7 +24,9 @@ export default function (expandedParentClass = '', x = false) {
         transition: el.style.transition,
         overflow: el.style.overflow,
         [sizeProperty]: el.style[sizeProperty],
+        paddingInline: el.style.paddingInline,
       }
+      el._computedPadding = getComputedStyle(el).paddingInline
     },
 
     onEnter (el: HTMLExpandElement) {
@@ -34,6 +38,7 @@ export default function (expandedParentClass = '', x = false) {
       const offset = `${el[offsetProperty]}px`
 
       el.style[sizeProperty] = '0'
+      el.style.paddingInline = '0'
 
       void el.offsetHeight // force reflow
 
@@ -45,6 +50,9 @@ export default function (expandedParentClass = '', x = false) {
 
       requestAnimationFrame(() => {
         el.style[sizeProperty] = offset
+        if (el._computedPadding) {
+          el.style.paddingInline = el._computedPadding
+        }
       })
     },
 
@@ -56,6 +64,7 @@ export default function (expandedParentClass = '', x = false) {
         transition: '',
         overflow: el.style.overflow,
         [sizeProperty]: el.style[sizeProperty],
+        paddingInline: el.style.paddingInline,
       }
 
       el.style.overflow = 'hidden'
@@ -79,6 +88,7 @@ export default function (expandedParentClass = '', x = false) {
   function resetStyles (el: HTMLExpandElement) {
     const size = el._initialStyle![sizeProperty]
     el.style.overflow = el._initialStyle!.overflow
+    el.style.paddingInline = el._initialStyle!.paddingInline
     if (size != null) el.style[sizeProperty] = size
     delete el._initialStyle
   }
