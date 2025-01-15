@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: '日付を入力',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'データはありません。',
   carousel: {

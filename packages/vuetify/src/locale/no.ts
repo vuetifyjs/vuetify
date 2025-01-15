@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'Fyll inn dato',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'Ingen data er tilgjengelig',
   carousel: {

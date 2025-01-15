@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'Adja meg a dátumot',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'Nincs elérhető adat',
   carousel: {

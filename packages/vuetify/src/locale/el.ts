@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'Εισαγάγετε ημερομηνία',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'Χωρίς δεδομένα',
   carousel: {

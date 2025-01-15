@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'הזן תאריך',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'אין נתונים זמינים',
   carousel: {

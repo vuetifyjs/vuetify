@@ -6,7 +6,8 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { makeCalendarProps, useCalendar } from '@/composables/calendar'
-import { createDateRange, useDate } from '@/composables/date/date'
+import { useBackgroundColor } from '@/composables/color'
+import { createDateRange, createWeekRange, useDate } from '@/composables/date/date'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
@@ -29,7 +30,7 @@ export type VDatePickerMonthSlots = {
 export const makeVDatePickerMonthProps = propsFactory({
   color: String,
   hideWeekdays: Boolean,
-  multiple: [Boolean, Number, String] as PropType<boolean | 'range' | number | (string & {})>,
+  multiple: [Boolean, Number, String] as PropType<boolean | 'range' | 'week' | number | (string & {})>,
   showWeek: Boolean,
   transition: {
     type: String,
@@ -81,6 +82,8 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       return model.value.length >= max
     })
 
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
+
     watch(daysInMonth, (val, oldVal) => {
       if (!oldVal) return
 
@@ -119,6 +122,10 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       }
     }
 
+    function onWeekClick (value: unknown) {
+      model.value = createWeekRange(adapter, value, props.weekdays.at(0), props.weekdays.length)
+    }
+
     function onMultipleClick (value: unknown) {
       const index = model.value.findIndex(selection => adapter.isSameDay(selection, value))
 
@@ -134,6 +141,8 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     function onClick (value: unknown) {
       if (props.multiple === 'range') {
         onRangeClick(value)
+      } else if (props.multiple === 'week') {
+        onWeekClick(value)
       } else if (props.multiple) {
         onMultipleClick(value)
       } else {
@@ -143,7 +152,12 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
 
     useRender(() => (
       <div
-        class="v-date-picker-month"
+        class={[
+          'v-date-picker-month',
+          {
+            'v-date-picker-month--hover-week': props.multiple === 'week',
+          },
+        ]}
         style={{ '--v-date-picker-days-in-week': props.weekdays.length }}
       >
         { props.showWeek && (
@@ -211,6 +225,16 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                   ]}
                   data-v-date={ !item.isDisabled ? item.isoDate : undefined }
                 >
+                  { item.isWeekStart && props.multiple === 'week' && (
+                    <div
+                      key="week-background"
+                      class={[
+                        'v-date-picker-month__week-background',
+                        backgroundColorClasses.value,
+                      ]}
+                      style={ backgroundColorStyles.value }
+                    ></div>
+                  )}
                   { (props.showAdjacentMonths || !item.isAdjacent) && (
                     slots.day?.(slotProps) ?? (<VBtn { ...slotProps.props } />)
                   )}

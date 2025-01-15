@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: '输入日期',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: '没有数据',
   carousel: {

@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'Ievadiet datumu',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'Nav pieejamu datu',
   carousel: {

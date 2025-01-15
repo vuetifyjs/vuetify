@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: '請輸入日期',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: '沒有資料',
   carousel: {

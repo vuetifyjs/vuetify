@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'Nhập ngày',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'Không có dữ liệu',
   carousel: {

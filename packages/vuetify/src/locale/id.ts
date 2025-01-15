@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'Masukkan tanggal',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'Tidak ada data tersedia',
   carousel: {

@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'ป้อนวันที่',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'ไม่มีข้อมูล',
   carousel: {

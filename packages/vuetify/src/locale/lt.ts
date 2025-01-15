@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'Įveskite datą',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'Nėra duomenų',
   carousel: {
