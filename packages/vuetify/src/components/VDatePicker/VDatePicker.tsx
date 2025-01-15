@@ -72,7 +72,7 @@ export const makeVDatePickerProps = propsFactory({
 
 export const VDatePicker = genericComponent<new <
   T,
-  Multiple extends boolean | 'range' | number | (string & {}) = false,
+  Multiple extends boolean | 'range' | 'week' | number | (string & {}) = false,
   TModel = Multiple extends true | number | string
     ? T[]
     : T,
