@@ -1,0 +1,15 @@
+{
+  "props": {
+    "modeIcon": "Icon used for the mode button.",
+    "nextIcon": "Icon used for the next button.",
+    "prevIcon": "Icon used for the previous button.",
+    "viewMode": "Sets the view mode of the date picker."
+  },
+  "events": {
+    "click:month": "Event fired when clicking on the month.",
+    "click:next": "Event fired when clicking the next button.",
+    "click:prev": "Event fired when clicking the previous button.",
+    "click:year": "Event fired when clicking the date text.",
+    "click:text": "Event fired when clicking the year."
+  }
+}

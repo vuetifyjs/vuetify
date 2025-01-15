@@ -57,7 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} de plus',
-    today: 'Today',
+    today: 'Aujourd\'hui',
   },
   input: {
     clear: 'Vider {0}',
@@ -68,6 +68,11 @@ export default {
   fileInput: {
     counter: '{0} fichier(s)',
     counterSize: '{0} fichier(s) ({1} au total)',
+  },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
   },
   timePicker: {
     am: 'AM',

@@ -15,5 +15,6 @@
   },
   "include": [
     "./src/locale/**/*.json",
+    "./templates/tmp/*"
   ],
 }

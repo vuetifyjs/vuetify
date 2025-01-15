@@ -9,7 +9,6 @@ import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
 import { IconValue } from '@/composables/icons'
-import { useNestedItem } from '@/composables/nested/nested'
 import { useLink } from '@/composables/router'
 
 // Utilities
@@ -35,20 +34,11 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
 
   setup (props, { attrs, slots, emit }) {
     const link = useLink(props, attrs)
-    const rawId = computed(() => props.value === undefined ? link.href.value : props.value)
     const vListItemRef = ref<VListItem>()
 
-    const {
-      activate,
-      isActivated,
-      isGroupActivator,
-      root,
-      id,
-    } = useNestedItem(rawId, false)
-
     const isActivatableGroupActivator = computed(() =>
-      (root.activatable.value) &&
-      isGroupActivator
+      (vListItemRef.value?.root.activatable.value) &&
+      vListItemRef.value?.isGroupActivator
     )
 
     const isClickable = computed(() =>
@@ -57,18 +47,9 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       (props.link || link.isClickable.value || (props.value != null && !!vListItemRef.value?.list) || isActivatableGroupActivator.value)
     )
 
-    function activateItem (e: MouseEvent | KeyboardEvent) {
-      if (
-        !isClickable.value ||
-        (!isActivatableGroupActivator.value && isGroupActivator)
-      ) return
-
-      if (root.activatable.value) {
-        if (isActivatableGroupActivator.value) {
-          activate(!isActivated.value, e)
-        } else {
-          vListItemRef.value?.activate(!vListItemRef.value?.isActivated, e)
-        }
+    function activateGroupActivator (e: MouseEvent | KeyboardEvent) {
+      if (isClickable.value && isActivatableGroupActivator.value) {
+        vListItemRef.value?.activate(!vListItemRef.value?.isActivated, e)
       }
     }
 
@@ -80,18 +61,19 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
 
       return (
         <VListItem
+          ref={ vListItemRef }
           { ...listItemProps }
-          active={ isActivated.value }
+          active={ vListItemRef.value?.isActivated }
           class={[
             'v-treeview-item',
             {
               'v-treeview-item--activatable-group-activator': isActivatableGroupActivator.value,
-              'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(id.value),
+              'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(vListItemRef.value?.id),
             },
             props.class,
           ]}
           ripple={ false }
-          onClick={ props.onClick ?? activateItem }
+          onClick={ props.onClick ?? activateGroupActivator }
         >
           {{
             ...slots,

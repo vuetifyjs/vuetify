@@ -1,6 +1,3 @@
-// Utilities
-import { toRaw } from 'vue'
-
 export type OpenStrategyFn = (data: {
   id: unknown
   value: boolean
@@ -50,12 +47,12 @@ export const singleOpenStrategy: OpenStrategy = {
 export const multipleOpenStrategy: OpenStrategy = {
   open: ({ id, value, opened, parents }) => {
     if (value) {
-      let parent = toRaw(parents.get(id))
+      let parent = parents.get(id)
       opened.add(id)
 
       while (parent != null && parent !== id) {
         opened.add(parent)
-        parent = toRaw(parents.get(parent))
+        parent = parents.get(parent)
       }
 
       return opened

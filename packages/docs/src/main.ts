@@ -1,7 +1,8 @@
 // Styles
 import 'prism-theme-vars/base.css'
 
-// Plugins
+// Pluginse
+import * as Swetrix from 'swetrix'
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { createHead } from '@unhead/vue'
@@ -50,6 +51,11 @@ if (IN_BROWSER) {
   userStore.$subscribe(() => {
     userStore.save()
   })
+  Swetrix.init('ycvR7fW63FFz', {
+    apiURL: 'https://swetrix-api.vuetifyjs.com/log',
+  })
+  Swetrix.trackViews()
+  Swetrix.trackErrors()
 }
 
 const app = createApp(App)
@@ -115,6 +121,13 @@ app.use(router)
 
 app.config.errorHandler = (err, vm, info) => {
   console.error(err, vm, info)
+  Swetrix.trackError({
+    name: (err as any).name,
+    message: (err as any).message,
+    lineno: null,
+    colno: null,
+    filename: null,
+  })
 }
 app.config.warnHandler = (err, vm, info) => {
   console.warn(err, vm, info)
@@ -139,9 +152,23 @@ router.onError((err, to) => {
       location.assign(to.fullPath)
     } else {
       console.error('Dynamic import error, reloading page did not fix it', err)
+      Swetrix.trackError({
+        name: err.name,
+        message: err.message,
+        lineno: null,
+        colno: null,
+        filename: null,
+      })
     }
   } else {
     console.error(err)
+    Swetrix.trackError({
+      name: err?.name,
+      message: err?.message,
+      lineno: null,
+      colno: null,
+      filename: null,
+    })
   }
 })
 

@@ -1,6 +1,6 @@
-import { aliases } from 'vuetify/src/iconsets/mdi-svg'
-import { mdi } from 'vuetify/src/iconsets/mdi'
-import { fa } from 'vuetify/src/iconsets/fa-svg'
+import { aliases } from '@/iconsets/mdi-svg'
+import { mdi } from '@/iconsets/mdi'
+import { fa } from '@/iconsets/fa-svg'
 
 export default {
   defaultSet: 'mdi',

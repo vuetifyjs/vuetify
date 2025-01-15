@@ -31,7 +31,8 @@
     "selectionType": "Controls how the treeview selects nodes. There are two modes available: 'leaf' and 'independent'.",
     "shaped": "Provides an alternative active style for `v-treeview` node. Only visible when `activatable` is `true` and should not be used in conjunction with the `rounded` prop.",
     "transition": "Applies a transition when nodes are opened and closed.",
-    "value": "Allows one to control which nodes are selected. The array consists of the `item-key` of each selected item. Is used with `@input` event to allow for `v-model` binding."
+    "value": "Allows one to control which nodes are selected. The array consists of the `item-key` of each selected item. Is used with `@input` event to allow for `v-model` binding.",
+    "collapseIcon": "Icon to display when the list item is expanded."
   },
   "slots": {
     "append": "Appends content after label.",

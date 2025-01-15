@@ -86,23 +86,17 @@ export const VTreeview = genericComponent<new <T>(
     const search = toRef(props, 'search')
     const { filteredItems } = useFilter(props, flatItems, search)
     const visibleIds = computed(() => {
-      if (!search.value) {
-        return null
-      }
+      if (!search.value) return null
+      const getPath = vListRef.value?.getPath
+      if (!getPath) return null
       return new Set(filteredItems.value.flatMap(item => {
-        return [...getPath(item.props.value), ...getChildren(item.props.value)]
+        const itemVal = props.returnObject ? item.raw : item.props.value
+        return [
+          ...getPath(itemVal),
+          ...getChildren(itemVal),
+        ].map(toRaw)
       }))
     })
-
-    function getPath (id: unknown) {
-      const path: unknown[] = []
-      let parent: unknown = id
-      while (parent != null) {
-        path.unshift(parent)
-        parent = vListRef.value?.parents.get(parent)
-      }
-      return path
-    }
 
     function getChildren (id: unknown) {
       const arr: unknown[] = []
