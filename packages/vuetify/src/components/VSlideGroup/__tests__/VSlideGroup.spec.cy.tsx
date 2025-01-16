@@ -260,7 +260,7 @@ describe('VSlideGroup', () => {
         <VSlideGroup selectedClass="bg-primary">
           { createRange(5).map(i => (
             <VSlideGroupItem key={ i }>
-              { () => <VBtn class={[`btn${i}`]} disabled={ i === 2 || i === 3 }>{ i }</VBtn> }
+              <VBtn class={[`btn${i}`]} disabled={ i === 2 || i === 3 }>{ i }</VBtn>
             </VSlideGroupItem>
           ))}
         </VSlideGroup>
