@@ -229,10 +229,7 @@ export const VAutocomplete = genericComponent<new <
       const selectionStart = vTextFieldRef.value.selectionStart
       const length = model.value.length
 
-      if (
-        selectionIndex.value > -1 ||
-        ['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)
-      ) {
+      if (['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
         e.preventDefault()
       }
 
@@ -265,6 +262,7 @@ export const VAutocomplete = genericComponent<new <
         ) return select(model.value[0], false)
 
         if (~selectionIndex.value) {
+          e.preventDefault()
           const originalSelectionIndex = selectionIndex.value
           select(model.value[selectionIndex.value], false)
 
@@ -272,6 +270,8 @@ export const VAutocomplete = genericComponent<new <
         } else if (e.key === 'Backspace' && !search.value) {
           selectionIndex.value = length - 1
         }
+
+        return
       }
 
       if (!props.multiple) return
@@ -289,9 +289,7 @@ export const VAutocomplete = genericComponent<new <
           selectionIndex.value = -1
           vTextFieldRef.value.setSelectionRange(search.value?.length, search.value?.length)
         }
-      }
-
-      if (e.key === 'ArrowRight') {
+      } else if (e.key === 'ArrowRight') {
         if (selectionIndex.value < 0) return
 
         const next = selectionIndex.value + 1
@@ -302,6 +300,8 @@ export const VAutocomplete = genericComponent<new <
           selectionIndex.value = -1
           vTextFieldRef.value.setSelectionRange(0, 0)
         }
+      } else if (~selectionIndex.value && checkPrintable(e)) {
+        selectionIndex.value = -1
       }
     }
 
