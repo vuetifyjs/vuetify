@@ -281,18 +281,17 @@ export const VSlideGroup = genericComponent<new <T>(
 
     function getSiblingElement (el: HTMLElement | null, location: 'next' | 'prev') {
       if (!el) return undefined
-      const find = (el: HTMLElement) => {
-        return el[location === 'next' ? 'nextElementSibling' : 'previousElementSibling'] as HTMLElement | undefined
-      }
-      let sibling = find(el)
-      while (sibling?.hasAttribute('disabled')) sibling = find(sibling)
+      let sibling: HTMLElement | null = el
+      do {
+        sibling = sibling?.[location === 'next' ? 'nextElementSibling' : 'previousElementSibling'] as HTMLElement | null
+      } while (sibling?.hasAttribute('disabled'))
       return sibling
     }
 
     function focus (location?: 'next' | 'prev' | 'first' | 'last') {
       if (!contentRef.el) return
 
-      let el: HTMLElement | undefined
+      let el: HTMLElement | null | undefined
 
       if (!location) {
         const focusable = focusableChildren(contentRef.el)
