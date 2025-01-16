@@ -23,7 +23,9 @@
       grid-column-gap: $timeline-item-padding
       width: 100%
 
-      .v-timeline-item:nth-child(2n)
+      .v-timeline--side-end > .v-timeline-item,
+      &:not(.v-timeline--side-start) > .v-timeline-item--side-end,
+      &:not(.v-timeline--side-start) > .v-timeline-item:nth-child(2n+1):not(.v-timeline-item--side-start)
         .v-timeline-item__body
           grid-row: 3
           padding-block-start: $timeline-item-padding
@@ -33,7 +35,9 @@
           padding-block-end: $timeline-item-padding
           align-self: flex-end
 
-      .v-timeline-item:nth-child(2n+1)
+      .v-timeline--side-start > .v-timeline-item,
+      &:not(.v-timeline--side-end) > .v-timeline-item--side-start,
+      &:not(.v-timeline--side-end) > .v-timeline-item:nth-child(2n):not(.v-timeline-item--side-end)
         .v-timeline-item__body
           grid-row: 1
           padding-block-end: $timeline-item-padding
@@ -53,7 +57,9 @@
       @include timeline-last-item()
         padding-block-end: $timeline-item-padding
 
-      .v-timeline-item:nth-child(2n)
+      .v-timeline--side-start > .v-timeline-item,
+      &:not(.v-timeline--side-end) > .v-timeline-item--side-start,
+      &:not(.v-timeline--side-end) > .v-timeline-item:nth-child(2n):not(.v-timeline-item--side-end)
         .v-timeline-item__body
           grid-column: 1
           padding-inline-end: $timeline-item-padding
@@ -62,7 +68,9 @@
           grid-column: 3
           padding-inline-start: $timeline-item-padding
 
-      .v-timeline-item:nth-child(2n+1)
+      .v-timeline--side-end > .v-timeline-item,
+      &:not(.v-timeline--side-start) > .v-timeline-item--side-end,
+      &:not(.v-timeline--side-start) > .v-timeline-item:nth-child(2n+1):not(.v-timeline-item--side-start)
         .v-timeline-item__body
           grid-column: 3
           padding-inline-start: $timeline-item-padding
