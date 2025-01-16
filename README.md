@@ -61,8 +61,8 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
   <tbody>
     <tr>
       <td>
-        <a href="https://www.teamwork.com/" target="_blank">
-          <img height="35px" src="https://cdn.cosmicjs.com/ca146a20-bc5d-11ee-9be1-85f53db06a1d-teamwork-logo-2023.svg">
+        <a href="https://www.deepcloud.swiss/" target="_blank">
+          <img height="65px" src="https://cdn.cosmicjs.com/20504e40-6cbc-11ef-b5ae-a594bb4a8e67-deepcloud-light.svg">
         </a>
       </td>
     </tr>
@@ -75,8 +75,18 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
   <tbody>
     <tr>
       <td>
-        <a href="https://github.com/sponsors/johnleider" target="_blank">
-          Your Logo Here
+        <a href="https://route4me.com/">
+          <img height="40px" src="https://cdn.cosmicjs.com/3b7a95b0-5360-11ef-b1ea-f56c65dfade9-route-4-me-light.png">
+        </a>
+      </td>
+      <td>
+        <a href="https://www.abacus.ch/">
+          <img height="40px" src="https://cdn.cosmicjs.com/0b978be0-6cbb-11ef-b5ae-a594bb4a8e67-abacus-light.svg">
+        </a>
+      </td>
+      <td>
+        <a href="https://www.hoop.swiss/">
+          <img height="40px" src="https://cdn.cosmicjs.com/94012850-6cbc-11ef-b5ae-a594bb4a8e67-hoop-light.svg">
         </a>
       </td>
     </tr>
@@ -89,13 +99,18 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
   <tbody>
     <tr>
       <td>
-        <a href="https://careers.lmax.com/?utm_source=vuetify&utm_medium=github-link&utm_campaign=lmax-careers">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/lmax-exchange.png">
+        <a href="http://crossword-solver.io/">
+          <img height="35px" src="https://cdn.cosmicjs.com/098aa4e0-9749-11eb-bf6a-1ffd0f06b0f7-crossword-solver-logo-light.svg">
+        </a>
+      </td>
+      <td style="text-align: center;">
+        <a href="https://www.muenchen.de/">
+          <img height="30px" src="https://imgix.cosmicjs.com/af2ce530-eaa2-11ed-ba82-019c4666da06-itm-logo.png">
         </a>
       </td>
       <td>
-        <a href="http://intygrate.com/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/intygrate.png">
+        <a href="https://careers.lmax.com/?utm_source=vuetify&utm_medium=github-link&utm_campaign=lmax-careers">
+          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/lmax-exchange.png">
         </a>
       </td>
       <td>
@@ -103,43 +118,42 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
           <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
         </a>
       </td>
-      <td>
-        <a href="http://crossword-solver.io/">
-          <img height="35px" src="https://cdn.cosmicjs.com/098aa4e0-9749-11eb-bf6a-1ffd0f06b0f7-crossword-solver-logo-light.svg">
-        </a>
-      </td>
     </tr>
     <tr></tr>
     <tr>
       <td>
-        <a href="https://www.slim.ai/">
-          <img height="30px" src="https://cdn.cosmicjs.com/e7d53ff0-4ca5-11ec-9940-53a088b36636-slim-ai.svg">
+        <a href="https://views4you.com/buy-instagram-followers/">
+          <img height="30px" src="https://cdn.cosmicjs.com/861b0ce0-50e4-11ef-b1ea-f56c65dfade9-views-4-you-light.png">
         </a>
       </td>
       <td>
-        <a href="https://crosswordanswers911.net/">
-          <img height="30px" src="https://cdn.cosmicjs.com/ef6ea2a0-7ee1-11ed-8730-d9eebcd39d9f-crossword-answers-911.jpg">
+        <a href="https://uk.nongamstopcasinos.net/">
+          <img height="30px" src="https://cdn.cosmicjs.com/dddf2570-6925-11ef-a492-5bdc7520fe60-logo_dark-bg.png.webp">
         </a>
       </td>
       <td style="text-align: center;">
-        <a href="https://www.muenchen.de/">
-          <img height="40px" src="https://imgix.cosmicjs.com/af2ce530-eaa2-11ed-ba82-019c4666da06-itm-logo.png">
+        <a href="https://poprey.com/buy-instagram-followers">
+          <img height="30px" src="https://cdn.cosmicjs.com/69ea08d0-7b20-11ef-915f-61acd7484848-256-1.png">
         </a>
       </td>
       <td>
-        <a href="https://justanotherpanel.com/">
-          <img height="30px" src="https://cdn.cosmicjs.com/8d038320-6382-11ee-b975-cb0cfadd93ad-jap.png">
+        <a href="https://www.mediamister.com/">
+          <img height="30px" src="https://cdn.cosmicjs.com/750cbe80-8d34-11ef-b5a0-93db72e2be98-logo-1.svg">
         </a>
       </td>
     </tr>
     <tr></tr>
     <tr>
-      <td>
-        <a href="https://stormlikes.net/">
-          <img height="40px" src="https://cdn.cosmicjs.com/64e6f630-a980-11ee-b417-db331415685f-stormlikes.png">
+      <td style="text-align: center;">
+        <a href="https://www.slotozilla.com/">
+          <img height="30px" src="https://cdn.cosmicjs.com/21525470-ab03-11ef-bee4-3bb1d3c55332-256-2.png">
         </a>
       </td>
-      <td></td>
+      <td>
+        <a href="https://word.tips/">
+          <img height="30px" src="https://cdn.cosmicjs.com/5b16bd20-afab-11ef-bee4-3bb1d3c55332-wordtips-light.svg">
+        </a>
+      </td>
       <td></td>
       <td></td>
     </tr>
