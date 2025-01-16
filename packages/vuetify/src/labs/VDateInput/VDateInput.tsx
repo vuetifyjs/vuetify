@@ -15,7 +15,14 @@ import { computed, shallowRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
-export interface VDateInputSlots {
+export type VDateInputActionsSlot = {
+  save: () => void
+  cancel: () => void
+  isPristine: boolean
+}
+
+export type VDateInputSlots = {
+  actions: VDateInputActionsSlot
   default: never
 }
 
@@ -34,7 +41,7 @@ export const makeVDateInputProps = propsFactory({
   }), ['active']),
 }, 'VDateInput')
 
-export const VDateInput = genericComponent()({
+export const VDateInput = genericComponent<VDateInputSlots>()({
   name: 'VDateInput',
 
   props: makeVDateInputProps(),
@@ -127,9 +134,10 @@ export const VDateInput = genericComponent()({
               { ...confirmEditProps }
               v-model={ model.value }
               onSave={ onSave }
+              onCancel={ () => menu.value = false }
             >
               {{
-                default: ({ actions, model: proxyModel }) => {
+                default: ({ actions, model: proxyModel, save, cancel, isPristine }) => {
                   return (
                     <VDatePicker
                       { ...datePickerProps }
@@ -146,7 +154,7 @@ export const VDateInput = genericComponent()({
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                     >
                       {{
-                        actions: !props.hideActions ? () => actions : undefined,
+                        actions: !props.hideActions ? () => slots.actions?.({ save, cancel, isPristine }) ?? actions() : undefined,
                       }}
                     </VDatePicker>
                   )

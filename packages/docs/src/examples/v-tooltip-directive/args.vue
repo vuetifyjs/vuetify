@@ -15,5 +15,9 @@
     <v-btn v-tooltip:bottom="'Tooltip at the bottom'">
       Bottom
     </v-btn>
+
+    <v-btn v-tooltip:bottom-end="'Tooltip at the bottom end'">
+      Bottom end
+    </v-btn>
   </div>
 </template>

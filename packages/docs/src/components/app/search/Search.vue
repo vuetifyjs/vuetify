@@ -73,6 +73,7 @@
     if (!model.value && isSearchKey) {
       e.preventDefault()
 
+      shouldLoad.value = true
       model.value = true
     } else if (model.value && ['ArrowDown', 'ArrowUp'].includes(e.key)) {
       e.preventDefault()

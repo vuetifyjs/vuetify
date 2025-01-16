@@ -2,7 +2,17 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, provide, ref, shallowRef, toRaw, toRef } from 'vue'
+import {
+  computed,
+  inject,
+  onBeforeMount,
+  onBeforeUnmount,
+  provide,
+  ref,
+  shallowRef,
+  toRaw,
+  toRef,
+} from 'vue'
 import {
   independentActiveStrategy,
   independentSingleActiveStrategy,
@@ -17,7 +27,7 @@ import {
   leafSelectStrategy,
   leafSingleSelectStrategy,
 } from './selectStrategies'
-import { getCurrentInstance, getUid, propsFactory } from '@/util'
+import { consoleError, getCurrentInstance, getUid, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -76,6 +86,7 @@ type NestedProvide = {
     activate: (id: unknown, value: boolean, event?: Event) => void
     select: (id: unknown, value: boolean, event?: Event) => void
     openOnSelect: (id: unknown, value: boolean, event?: Event) => void
+    getPath: (id: unknown) => unknown[]
   }
 }
 
@@ -98,6 +109,7 @@ export const emptyNested: NestedProvide = {
     activated: ref(new Set()),
     selected: ref(new Map()),
     selectedValues: ref([]),
+    getPath: () => [],
   },
 }
 
@@ -118,7 +130,7 @@ export const useNested = (props: NestedProps) => {
   const children = ref(new Map<unknown, unknown[]>())
   const parents = ref(new Map<unknown, unknown>())
 
-  const opened = useProxiedModel(props, 'opened', props.opened, v => new Set(toRaw(v)), v => [...v.values()])
+  const opened = useProxiedModel(props, 'opened', props.opened, v => new Set(v), v => [...v.values()])
 
   const activeStrategy = computed(() => {
     if (typeof props.activeStrategy === 'object') return props.activeStrategy
@@ -191,6 +203,8 @@ export const useNested = (props: NestedProps) => {
 
   const vm = getCurrentInstance('nested')
 
+  const nodeIds = new Set<unknown>()
+
   const nested: NestedProvide = {
     id: shallowRef(),
     root: {
@@ -209,6 +223,15 @@ export const useNested = (props: NestedProps) => {
         return arr
       }),
       register: (id, parentId, isGroup) => {
+        if (nodeIds.has(id)) {
+          const path = getPath(id).map(String).join(' -> ')
+          const newPath = getPath(parentId).concat(id).map(String).join(' -> ')
+          consoleError(`Multiple nodes with the same ID\n\t${path}\n\t${newPath}`)
+          return
+        } else {
+          nodeIds.add(id)
+        }
+
         parentId && id !== parentId && parents.value.set(id, parentId)
 
         isGroup && children.value.set(id, [])
@@ -220,6 +243,7 @@ export const useNested = (props: NestedProps) => {
       unregister: id => {
         if (isUnmounted) return
 
+        nodeIds.delete(id)
         children.value.delete(id)
         const parent = parents.value.get(id)
         if (parent) {
@@ -289,6 +313,7 @@ export const useNested = (props: NestedProps) => {
       },
       children,
       parents,
+      getPath,
     },
   }
 
@@ -306,9 +331,9 @@ export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
   const item = {
     ...parent,
     id: computedId,
-    open: (open: boolean, e: Event) => parent.root.open(toRaw(computedId.value), open, e),
+    open: (open: boolean, e: Event) => parent.root.open(computedId.value, open, e),
     openOnSelect: (open: boolean, e?: Event) => parent.root.openOnSelect(computedId.value, open, e),
-    isOpen: computed(() => parent.root.opened.value.has(toRaw(computedId.value))),
+    isOpen: computed(() => parent.root.opened.value.has(computedId.value)),
     parent: computed(() => parent.root.parents.value.get(computedId.value)),
     activate: (activated: boolean, e?: Event) => parent.root.activate(computedId.value, activated, e),
     isActivated: computed(() => parent.root.activated.value.has(toRaw(computedId.value))),
@@ -319,7 +344,9 @@ export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
     isGroupActivator: parent.isGroupActivator,
   }
 
-  !parent.isGroupActivator && parent.root.register(computedId.value, parent.id.value, isGroup)
+  onBeforeMount(() => {
+    !parent.isGroupActivator && parent.root.register(computedId.value, parent.id.value, isGroup)
+  })
 
   onBeforeUnmount(() => {
     !parent.isGroupActivator && parent.root.unregister(computedId.value)

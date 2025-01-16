@@ -13,6 +13,7 @@ import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { IconValue } from '@/composables/icons'
 import { makeItemsProps } from '@/composables/list-items'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -86,8 +87,8 @@ export const makeVListProps = propsFactory({
   activeClass: String,
   bgColor: String,
   disabled: Boolean,
-  expandIcon: String,
-  collapseIcon: String,
+  expandIcon: IconValue,
+  collapseIcon: IconValue,
   lines: {
     type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
     default: 'one',
@@ -162,7 +163,7 @@ export const VList = genericComponent<new <
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const { children, open, parents, select } = useNested(props)
+    const { children, open, parents, select, getPath } = useNested(props)
     const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
     const activeColor = toRef(props, 'activeColor')
     const baseColor = toRef(props, 'baseColor')
@@ -288,6 +289,7 @@ export const VList = genericComponent<new <
       focus,
       children,
       parents,
+      getPath,
     }
   },
 })

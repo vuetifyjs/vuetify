@@ -223,7 +223,7 @@ export const VField = genericComponent<new <T>(
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
       const hasPrepend = !!(slots['prepend-inner'] || props.prependInnerIcon)
-      const hasClear = !!(props.clearable || slots.clear)
+      const hasClear = !!(props.clearable || slots.clear) && !props.disabled
       const hasAppend = !!(slots['append-inner'] || props.appendInnerIcon || hasClear)
       const label = () => (
         slots.label
@@ -303,9 +303,11 @@ export const VField = genericComponent<new <T>(
               </VFieldLabel>
             )}
 
-            <VFieldLabel ref={ labelRef } for={ id.value }>
-              { label() }
-            </VFieldLabel>
+            { hasLabel.value && (
+              <VFieldLabel key="label" ref={ labelRef } for={ id.value }>
+                { label() }
+              </VFieldLabel>
+            )}
 
             { slots.default?.({
               ...slotProps.value,
