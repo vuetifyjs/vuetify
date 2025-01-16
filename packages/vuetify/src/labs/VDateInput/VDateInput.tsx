@@ -27,7 +27,7 @@ export const makeVDateInputProps = propsFactory({
   hideActions: Boolean,
   location: {
     type: String as PropType<StrategyProps['location']>,
-    default: 'bottom left',
+    default: 'bottom start',
   },
   ...makeFocusProps(),
   ...makeVConfirmEditProps(),
