@@ -306,8 +306,12 @@ export const VSlideGroup = genericComponent<new <T>(
         if (!el) return focus('last')
       } else if (location === 'first') {
         el = (contentRef.el.firstElementChild as HTMLElement)
+
+        if (el?.hasAttribute('disabled')) el = getSiblingElement(el, 'next')
       } else if (location === 'last') {
         el = (contentRef.el.lastElementChild as HTMLElement)
+
+        if (el?.hasAttribute('disabled')) el = getSiblingElement(el, 'prev')
       }
 
       if (el) {
