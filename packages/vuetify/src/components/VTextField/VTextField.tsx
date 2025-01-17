@@ -40,6 +40,10 @@ export const makeVTextFieldProps = propsFactory({
     type: String,
     default: 'text',
   },
+  stopBubblingEvents: {
+    type: Array as PropType<Array<'onKeydown'>>, // Add more events to the union type here
+    default: null,
+  },
   modelModifiers: Object as PropType<Record<string, boolean>>,
 
   ...makeVInputProps(),
@@ -138,6 +142,11 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
         callEvent(props['onClick:clear'], e)
       })
     }
+    function onKeydown (e: KeyboardEvent) {
+      if (props.stopBubblingEvents?.includes('onKeydown')) {
+        e.stopPropagation()
+      }
+    }
     function onInput (e: Event) {
       const el = e.target as HTMLInputElement
       model.value = el.value
@@ -214,6 +223,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                         ref={ inputRef }
                         value={ model.value }
                         onInput={ onInput }
+                        onKeydown={ onKeydown }
                         v-intersect={[{
                           handler: onIntersect,
                         }, null, ['once']]}
