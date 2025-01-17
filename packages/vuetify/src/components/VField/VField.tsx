@@ -30,6 +30,7 @@ import {
   pick,
   propsFactory,
   standardEasing,
+  triggerAsClick,
   useRender,
 } from '@/util'
 
@@ -212,12 +213,15 @@ export const VField = genericComponent<new <T>(
     }
 
     function onKeydownClear (e: KeyboardEvent) {
-      if (e.key !== 'Enter' && e.key !== ' ') return
+      triggerAsClick(e, props['onClick:clear'])
+    }
 
-      e.preventDefault()
-      e.stopPropagation()
+    function onKeydownAppendInner (e: KeyboardEvent) {
+      triggerAsClick(e, props['onClick:appendInner'])
+    }
 
-      props['onClick:clear']?.(new MouseEvent('click'))
+    function onKeydownPrependInner (e: KeyboardEvent) {
+      triggerAsClick(e, props['onClick:prependInner'])
     }
 
     useRender(() => {
@@ -282,7 +286,11 @@ export const VField = genericComponent<new <T>(
           { hasPrepend && (
             <div key="prepend" class="v-field__prepend-inner">
               { props.prependInnerIcon && (
-                <InputIcon key="prepend-icon" name="prependInner" />
+                <InputIcon
+                  key="prepend-icon"
+                  name="prependInner"
+                  onKeydown={ onKeydownPrependInner }
+                />
               )}
 
               { slots['prepend-inner']?.(slotProps.value) }
@@ -366,7 +374,11 @@ export const VField = genericComponent<new <T>(
               { slots['append-inner']?.(slotProps.value) }
 
               { props.appendInnerIcon && (
-                <InputIcon key="append-icon" name="appendInner" />
+                <InputIcon
+                  key="append-icon"
+                  name="appendInner"
+                  onKeydown={ onKeydownAppendInner }
+                />
               )}
             </div>
           )}
