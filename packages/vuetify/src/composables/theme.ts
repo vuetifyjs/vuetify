@@ -131,6 +131,8 @@ function genDefaults () {
           info: '#2196F3',
           success: '#4CAF50',
           warning: '#FB8C00',
+          scrim: '#000000',
+          shadow: '#000000',
         },
         variables: {
           'border-color': '#000000',
@@ -168,6 +170,8 @@ function genDefaults () {
           info: '#2196F3',
           success: '#4CAF50',
           warning: '#FB8C00',
+          scrim: '#000000',
+          shadow: '#000000',
         },
         variables: {
           'border-color': '#FFFFFF',
