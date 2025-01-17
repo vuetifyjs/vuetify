@@ -106,6 +106,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
               'v-slider--focused': isFocused.value,
               'v-slider--pressed': mousePressed.value,
               'v-slider--disabled': props.disabled,
+              'v-slider--track-disabled': props.trackDisabled,
             },
             rtlClasses.value,
             props.class,
