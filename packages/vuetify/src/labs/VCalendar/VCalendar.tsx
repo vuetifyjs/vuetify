@@ -25,7 +25,7 @@ export const makeVCalendarProps = propsFactory({
   ...makeCalendarProps(),
   ...makeVCalendarDayProps(),
   ...makeVCalendarHeaderProps(),
-}, 'VCalender')
+}, 'VCalendar')
 
 export type VCalendarSlots = VCalendarDaySlots & {
   allDayContent: { day?: CalendarDay, events?: Array<any> }
@@ -34,7 +34,7 @@ export type VCalendarSlots = VCalendarDaySlots & {
   dayTitle: { title?: number | string }
   dayEvent: { day?: CalendarDay, allDay: Boolean, event?: Record<string, unknown> }
   header: { title: string, clickNext: Function, clickPrev: Function, clickToday: Function }
-  intervalDay: { day?: CalendarDay, dayIndex: Number, events?: Array<any> }
+  weekDayCalendarCell: { day?: CalendarDay, dayIndex: Number, events?: Array<any> }
   title: { title?: string }
 }
 
@@ -208,7 +208,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
             )}
             { props.viewMode === 'week' && (
               daysInWeek.value.map((day, i) =>
-                slots.intervalDay ? slots.intervalDay?.({
+                slots.weekDayCalendarCell ? slots.weekDayCalendarCell?.({
                   ...calendarDayProps,
                   day,
                   dayIndex: i,
@@ -230,7 +230,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
             }
 
             { props.viewMode === 'day' && (
-              slots.intervalDay ? slots.intervalDay({
+              slots.weekDayCalendarCell ? slots.weekDayCalendarCell({
                 day: genDays([displayValue.value as Date], adapter.date() as Date)[0],
                 dayIndex: 0,
                 events: props.events?.filter(e =>
