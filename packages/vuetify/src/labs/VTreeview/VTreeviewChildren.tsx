@@ -128,7 +128,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       return children ? (
         <VTreeviewGroup
           { ...treeviewGroupProps }
-          value={ props.returnObject ? item.raw : treeviewGroupProps?.value }
+          value={ props.returnObject ? toRaw(item.raw) : treeviewGroupProps?.value }
         >
           {{
             activator: ({ props: activatorProps }) => {
