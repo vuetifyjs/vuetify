@@ -12,7 +12,7 @@ import { IconValue } from '@/composables/icons'
 import { useLink } from '@/composables/router'
 
 // Utilities
-import { computed, inject, ref } from 'vue'
+import { computed, inject, ref, toRaw } from 'vue'
 import { EventProp, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -68,7 +68,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             'v-treeview-item',
             {
               'v-treeview-item--activatable-group-activator': isActivatableGroupActivator.value,
-              'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(vListItemRef.value?.id),
+              'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(toRaw(vListItemRef.value?.id)),
             },
             props.class,
           ]}
