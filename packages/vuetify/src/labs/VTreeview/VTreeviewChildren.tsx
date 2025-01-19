@@ -143,7 +143,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               return (
                 <VTreeviewItem
                   { ...listItemProps }
-                  value={ props.returnObject ? toRaw(item.raw) : itemProps.value }
+                  value={ props.returnObject ? item.raw : itemProps.value }
                   loading={ loading }
                   v-slots={ slotsWithItem }
                 />
