@@ -16,7 +16,7 @@ import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
 import { computed } from 'vue'
-import { EventProp, genericComponent, getUid, only, propsFactory, triggerAsClick, useRender } from '@/util'
+import { EventProp, genericComponent, getUid, only, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
@@ -147,14 +147,6 @@ export const VInput = genericComponent<new <T>(
       }
     })
 
-    function onKeydownAppend (e: KeyboardEvent) {
-      triggerAsClick(e, props['onClick:append'])
-    }
-
-    function onKeydownPrepend (e: KeyboardEvent) {
-      triggerAsClick(e, props['onClick:prepend'])
-    }
-
     useRender(() => {
       const hasPrepend = !!(slots.prepend || props.prependIcon)
       const hasAppend = !!(slots.append || props.appendIcon)
@@ -192,7 +184,6 @@ export const VInput = genericComponent<new <T>(
                 <InputIcon
                   key="prepend-icon"
                   name="prepend"
-                  onKeydown={ onKeydownPrepend }
                 />
               )}
             </div>
@@ -210,7 +201,6 @@ export const VInput = genericComponent<new <T>(
                 <InputIcon
                   key="append-icon"
                   name="append"
-                  onKeydown={ onKeydownAppend }
                 />
               )}
 

@@ -16,11 +16,10 @@ export function getPrefixedEventHandlers<T extends `:${string}`> (
     }, {} as Record<`${string}${T}`, EventHandler>)
 }
 
-export function triggerAsClick (e: KeyboardEvent, handler?: (evt: MouseEvent) => void) {
+export function triggerAsClick (e: KeyboardEvent) {
   if (e.key !== 'Enter' && e.key !== ' ') return
 
   e.preventDefault()
   e.stopPropagation()
-
-  handler?.(new MouseEvent('click'))
+  ;(e.currentTarget as HTMLElement).click()
 }

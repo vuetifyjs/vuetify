@@ -30,7 +30,6 @@ import {
   pick,
   propsFactory,
   standardEasing,
-  triggerAsClick,
   useRender,
 } from '@/util'
 
@@ -212,18 +211,6 @@ export const VField = genericComponent<new <T>(
       }
     }
 
-    function onKeydownClear (e: KeyboardEvent) {
-      triggerAsClick(e, props['onClick:clear'])
-    }
-
-    function onKeydownAppendInner (e: KeyboardEvent) {
-      triggerAsClick(e, props['onClick:appendInner'])
-    }
-
-    function onKeydownPrependInner (e: KeyboardEvent) {
-      triggerAsClick(e, props['onClick:prependInner'])
-    }
-
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
       const hasPrepend = !!(slots['prepend-inner'] || props.prependInnerIcon)
@@ -289,7 +276,6 @@ export const VField = genericComponent<new <T>(
                 <InputIcon
                   key="prepend-icon"
                   name="prependInner"
-                  onKeydown={ onKeydownPrependInner }
                 />
               )}
 
@@ -350,7 +336,6 @@ export const VField = genericComponent<new <T>(
                   ? slots.clear({
                     ...slotProps.value,
                     props: {
-                      onKeydown: onKeydownClear,
                       onFocus: focus,
                       onBlur: blur,
                       onClick: props['onClick:clear'],
@@ -359,7 +344,6 @@ export const VField = genericComponent<new <T>(
                   : (
                     <InputIcon
                       name="clear"
-                      onKeydown={ onKeydownClear }
                       onFocus={ focus }
                       onBlur={ blur }
                     />
@@ -377,7 +361,6 @@ export const VField = genericComponent<new <T>(
                 <InputIcon
                   key="append-icon"
                   name="appendInner"
-                  onKeydown={ onKeydownAppendInner }
                 />
               )}
             </div>
