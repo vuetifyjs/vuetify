@@ -32,6 +32,7 @@ export type VTreeviewChildrenSlots<T> = {
 }
 
 export const makeVTreeviewChildrenProps = propsFactory({
+  disabled: Boolean,
   loadChildren: Function as PropType<(item: unknown) => Promise<void>>,
   loadingIcon: {
     type: String,
@@ -67,7 +68,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
   setup (props, { slots }) {
     const isLoading = reactive(new Set<unknown>())
 
-    const isClickOnOpen = computed(() => props.openOnClick != null ? props.openOnClick : props.selectable)
+    const isClickOnOpen = computed(() => !props.disabled && (props.openOnClick != null ? props.openOnClick : props.selectable))
 
     async function checkChildren (item: InternalListItem) {
       try {
@@ -99,6 +100,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 <VCheckboxBtn
                   key={ item.value }
                   modelValue={ slotProps.isSelected }
+                  disabled={ props.disabled }
                   loading={ loading }
                   color={ props.selectedColor }
                   indeterminate={ slotProps.isIndeterminate }
@@ -143,7 +145,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               return (
                 <VTreeviewItem
                   { ...listItemProps }
-                  value={ props.returnObject ? toRaw(item.raw) : itemProps.value }
+                  value={ props.returnObject ? item.raw : itemProps.value }
                   loading={ loading }
                   v-slots={ slotsWithItem }
                 />
