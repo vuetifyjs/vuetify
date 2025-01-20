@@ -30,9 +30,15 @@ jobs:
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-24.04
     steps:
+      - uses: earthly/setup-ucacher@b99687d79dd75262bfc326b9e5ad3a520385a18b
       - uses: actions/checkout@v4
       - uses: vuetifyjs/setup-action@master
-      - run: pnpm build vuetify
+      - run: pnpm build:lib
+        working-directory: ./packages/vuetify
+      - run: ucacher pnpm build:dist
+        working-directory: ./packages/vuetify
+      - run: ucacher pnpm build:types
+        working-directory: ./packages/vuetify
       - uses: actions/upload-artifact@v4
         with:
           name: vuetify-dist
@@ -50,13 +56,14 @@ jobs:
       matrix:
         scopes: ['--scope vuetify --scope @vuetify/api-generator', '--scope vuetifyjs.com']
     steps:
+      - uses: earthly/setup-ucacher@b99687d79dd75262bfc326b9e5ad3a520385a18b
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: vuetify-dist
           path: packages/vuetify
       - uses: vuetifyjs/setup-action@master
-      - run: pnpm lerna run lint $SCOPES
+      - run: ucacher pnpm lerna run lint $SCOPES
         env:
           SCOPES: ${{ matrix.scopes }}
 
@@ -87,6 +94,7 @@ jobs:
     runs-on: ubuntu-24.04
     if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
     steps:
+      - uses: earthly/setup-ucacher@b99687d79dd75262bfc326b9e5ad3a520385a18b
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -95,7 +103,7 @@ jobs:
           name: vuetify-dist
           path: packages/vuetify
       - uses: vuetifyjs/setup-action@master
-      - run: pnpm build api
+      - run: ucacher pnpm build api
       - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
       - name: NPM Release
         run: bash scripts/deploy.sh
@@ -115,6 +123,7 @@ jobs:
     if: needs.pre_job.outputs.should_skip != 'true' && github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
     runs-on: ubuntu-24.04
     steps:
+      - uses: earthly/setup-ucacher@b99687d79dd75262bfc326b9e5ad3a520385a18b
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
@@ -122,8 +131,8 @@ jobs:
           path: packages/vuetify
       - uses: vuetifyjs/setup-action@master
       - uses: ./.github/actions/download-locales
-      - run: pnpm build api
-      - run: pnpm build docs
+      - run: ucacher pnpm build api
+      - run: ucacher pnpm build docs
         env:
           NODE_OPTIONS: --max-old-space-size=4096
           VITE_COSMIC_2_BUCKET_SLUG: ${{ secrets.COSMIC_2_BUCKET_SLUG }}
