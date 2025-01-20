@@ -15,11 +15,3 @@ export function getPrefixedEventHandlers<T extends `:${string}`> (
       return acc
     }, {} as Record<`${string}${T}`, EventHandler>)
 }
-
-export function triggerAsClick (e: KeyboardEvent) {
-  if (e.key !== 'Enter' && e.key !== ' ') return
-
-  e.preventDefault()
-  e.stopPropagation()
-  ;(e.currentTarget as HTMLElement).click()
-}
