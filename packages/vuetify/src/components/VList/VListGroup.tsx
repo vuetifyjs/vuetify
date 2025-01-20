@@ -67,6 +67,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
 
     function onClick (e: Event) {
       e.stopPropagation()
+      if (['INPUT', 'TEXTAREA'].includes((e.target as Element)?.tagName)) return
       open(!isOpen.value, e)
     }
 
