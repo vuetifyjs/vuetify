@@ -1,3 +1,7 @@
+// Types
+export * from './types'
+
+// Components
 export { VDataTable } from './VDataTable'
 export { VDataTableHeaders } from './VDataTableHeaders'
 export { VDataTableFooter } from './VDataTableFooter'
