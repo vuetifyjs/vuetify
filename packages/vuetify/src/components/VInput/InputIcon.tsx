@@ -32,6 +32,15 @@ export function useInputIcon<T extends {}, K extends names = Listeners<T>> (prop
       clear: 'clear',
     }[name]
     const listener = props[`onClick:${name}`]
+
+    function onKeydown (e: KeyboardEvent) {
+      if (e.key !== 'Enter' && e.key !== ' ') return
+
+      e.preventDefault()
+      e.stopPropagation()
+      ;(listener as Function)?.(new MouseEvent('click'))
+    }
+
     const label = listener && localeKey
       ? t(`$vuetify.input.${localeKey}`, props.label ?? '')
       : undefined
@@ -41,6 +50,7 @@ export function useInputIcon<T extends {}, K extends names = Listeners<T>> (prop
         icon={ props[`${name}Icon`] }
         aria-label={ label }
         onClick={ listener }
+        onKeydown={ onKeydown }
       />
     )
   }

@@ -211,15 +211,6 @@ export const VField = genericComponent<new <T>(
       }
     }
 
-    function onKeydownClear (e: KeyboardEvent) {
-      if (e.key !== 'Enter' && e.key !== ' ') return
-
-      e.preventDefault()
-      e.stopPropagation()
-
-      props['onClick:clear']?.(new MouseEvent('click'))
-    }
-
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
       const hasPrepend = !!(slots['prepend-inner'] || props.prependInnerIcon)
@@ -282,7 +273,10 @@ export const VField = genericComponent<new <T>(
           { hasPrepend && (
             <div key="prepend" class="v-field__prepend-inner">
               { props.prependInnerIcon && (
-                <InputIcon key="prepend-icon" name="prependInner" />
+                <InputIcon
+                  key="prepend-icon"
+                  name="prependInner"
+                />
               )}
 
               { slots['prepend-inner']?.(slotProps.value) }
@@ -342,7 +336,6 @@ export const VField = genericComponent<new <T>(
                   ? slots.clear({
                     ...slotProps.value,
                     props: {
-                      onKeydown: onKeydownClear,
                       onFocus: focus,
                       onBlur: blur,
                       onClick: props['onClick:clear'],
@@ -351,7 +344,6 @@ export const VField = genericComponent<new <T>(
                   : (
                     <InputIcon
                       name="clear"
-                      onKeydown={ onKeydownClear }
                       onFocus={ focus }
                       onBlur={ blur }
                     />
@@ -366,7 +358,10 @@ export const VField = genericComponent<new <T>(
               { slots['append-inner']?.(slotProps.value) }
 
               { props.appendInnerIcon && (
-                <InputIcon key="append-icon" name="appendInner" />
+                <InputIcon
+                  key="append-icon"
+                  name="appendInner"
+                />
               )}
             </div>
           )}
