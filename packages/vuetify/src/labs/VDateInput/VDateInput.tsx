@@ -15,13 +15,27 @@ import { computed, shallowRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
-export interface VDateInputSlots {
+import type { PropType } from 'vue'
+import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
+
+// Types
+export type VDateInputActionsSlot = {
+  save: () => void
+  cancel: () => void
+  isPristine: boolean
+}
+
+export type VDateInputSlots = {
+  actions: VDateInputActionsSlot
   default: never
 }
 
 export const makeVDateInputProps = propsFactory({
   hideActions: Boolean,
-
+  location: {
+    type: String as PropType<StrategyProps['location']>,
+    default: 'bottom start',
+  },
   ...makeFocusProps(),
   ...makeVConfirmEditProps(),
   ...makeVTextFieldProps({
@@ -31,10 +45,10 @@ export const makeVDateInputProps = propsFactory({
   ...omit(makeVDatePickerProps({
     weeksInMonth: 'dynamic' as const,
     hideHeader: true,
-  }), ['active']),
+  }), ['active', 'location']),
 }, 'VDateInput')
 
-export const VDateInput = genericComponent()({
+export const VDateInput = genericComponent<VDateInputSlots>()({
   name: 'VDateInput',
 
   props: makeVDateInputProps(),
@@ -100,7 +114,7 @@ export const VDateInput = genericComponent()({
 
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
-      const datePickerProps = VDatePicker.filterProps(omit(props, ['active']))
+      const datePickerProps = VDatePicker.filterProps(omit(props, ['active', 'location']))
       const textFieldProps = VTextField.filterProps(props)
 
       return (
@@ -120,6 +134,7 @@ export const VDateInput = genericComponent()({
             v-model={ menu.value }
             activator="parent"
             min-width="0"
+            location={ props.location }
             closeOnContentClick={ false }
             openOnClick={ false }
           >
@@ -127,9 +142,10 @@ export const VDateInput = genericComponent()({
               { ...confirmEditProps }
               v-model={ model.value }
               onSave={ onSave }
+              onCancel={ () => menu.value = false }
             >
               {{
-                default: ({ actions, model: proxyModel }) => {
+                default: ({ actions, model: proxyModel, save, cancel, isPristine }) => {
                   return (
                     <VDatePicker
                       { ...datePickerProps }
@@ -146,7 +162,7 @@ export const VDateInput = genericComponent()({
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                     >
                       {{
-                        actions: !props.hideActions ? actions : undefined,
+                        actions: !props.hideActions ? () => slots.actions?.({ save, cancel, isPristine }) ?? actions() : undefined,
                       }}
                     </VDatePicker>
                   )
