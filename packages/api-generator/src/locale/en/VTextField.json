@@ -12,6 +12,7 @@
     "reverse": "Reverses the input orientation.",
     "role": "The role attribute applied to the input.",
     "rounded": "Adds a border radius to the input.",
+    "stopBubblingEvents": "Allow users to pass a list of events that should not bubble up.", 
     "suffix": "Displays suffix text.",
     "toggleKeys": "Array of key codes that will toggle the input (if it supports toggling).",
     "type": "Sets input type."
