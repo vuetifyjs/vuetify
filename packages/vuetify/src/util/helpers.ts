@@ -616,6 +616,7 @@ export function eventName (propName: string) {
   return propName[2].toLowerCase() + propName.slice(3)
 }
 
+// TODO: this should be an array but vue's types don't accept arrays: vuejs/core#8025
 export type EventProp<T extends any[] = any[], F = (...args: T) => void> = F
 export const EventProp = <T extends any[] = any[]>() => [Function, Array] as PropType<EventProp<T>>
 
@@ -624,7 +625,7 @@ export function hasEvent (props: Record<string, any>, name: string) {
   return !!(props[name] || props[`${name}Once`] || props[`${name}Capture`] || props[`${name}OnceCapture`] || props[`${name}CaptureOnce`])
 }
 
-export function callEvent<T extends any[]> (handler: EventProp<T> | undefined, ...args: T) {
+export function callEvent<T extends any[]> (handler: EventProp<T> | EventProp<T>[] | undefined, ...args: T) {
   if (Array.isArray(handler)) {
     for (const h of handler) {
       h(...args)
